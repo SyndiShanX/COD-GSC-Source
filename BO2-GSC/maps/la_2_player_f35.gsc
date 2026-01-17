@@ -46,7 +46,7 @@ material_test() {
   self endon("death");
 
   while(true) {
-    a_trace = bullettrace(level.player get_eye(), level.player getplayerangles() * 9000, 0, self);
+    a_trace = bulletTrace(level.player get_eye(), level.player getplayerangles() * 9000, 0, self);
     str_surface_type = "NONE";
 
     if(isDefined(a_trace["surfacetype"]))
@@ -58,7 +58,7 @@ material_test() {
 }
 
 f35_health_regen() {
-  self.health_regen = spawnstruct();
+  self.health_regen = spawnStruct();
 
   switch (getdifficulty()) {
     case "easy":
@@ -171,7 +171,7 @@ f35_hud_damage() {
 
   if(!isDefined(level.f35_hud_damage_ent)) {
     level.f35_hud_damage_ent = spawn("script_model", level.player.origin);
-    level.f35_hud_damage_ent setmodel("tag_origin");
+    level.f35_hud_damage_ent setModel("tag_origin");
   }
 
   level.n_last_damage_time = gettime();
@@ -276,8 +276,8 @@ f35_lock_to_mesh() {
 }
 
 get_player_aim_pos(n_range, e_to_ignore) {
-  v_start_pos = self geteye();
-  v_dir = anglestoforward(self getplayerangles());
+  v_start_pos = self getEye();
+  v_dir = anglesToForward(self getplayerangles());
   v_end_pos = v_start_pos + v_dir * n_range;
   v_hit_pos = v_end_pos;
   return v_hit_pos;
@@ -453,8 +453,8 @@ update_ember_fx(str_fx_name) {
     self.e_temp_fx = spawn("script_model", self.origin);
     self.e_temp_fx.angles = self.angles;
     self.e_temp_fx linkto(self);
-    self.e_temp_fx setmodel("tag_origin");
-    playfxontag(level._effect[str_fx_name], self.e_temp_fx, "tag_origin");
+    self.e_temp_fx setModel("tag_origin");
+    playFXOnTag(level._effect[str_fx_name], self.e_temp_fx, "tag_origin");
   }
 }
 
@@ -523,7 +523,7 @@ missile_impact_watcher() {
     self notify("f35_destroy_panels");
     earthquake(n_earthquake_scale_catastrophic, n_earthquake_duration_catastrophic, level.player.origin, 2000, level.player);
     level.player thread rumble_loop(n_rumble_count_catastrophic, n_rumble_delay_catastrophic, str_rumble_catastrophic);
-    level.player playsound("prj_missile_impact_f35");
+    level.player playSound("prj_missile_impact_f35");
   }
 }
 
@@ -545,7 +545,7 @@ missile_incoming_watcher() {
     else
       e_harper thread say_dialog("missiles_on_your_013");
 
-    level.player playsound("wpn_sam_warning");
+    level.player playSound("wpn_sam_warning");
     flag_waitopen("missile_event_started");
   }
 }
@@ -557,7 +557,7 @@ setup_approach_points() {
   n_distance_behind = -20000;
   v_origin = self.origin;
   v_angles = self.angles;
-  v_forward = anglestoforward(v_angles);
+  v_forward = anglesToForward(v_angles);
   v_right = anglestoright(v_angles);
   v_up = anglestoup(v_angles);
   v_back = v_forward * -1;
@@ -718,16 +718,15 @@ f35_collision_detection() {
   while(isalive(self)) {
     b_is_vtol = self.is_vtol;
     b_collision_imminent = 0;
-    v_forward_normalized = anglestoforward(level.player getplayerangles());
+    v_forward_normalized = anglesToForward(level.player getplayerangles());
     v_forward_scaled = v_forward_normalized * n_scale_forward;
     v_end_pos = self.origin + v_forward_scaled;
-    a_trace = bullettrace(level.player.origin, v_end_pos, 0, self);
+    a_trace = bulletTrace(level.player.origin, v_end_pos, 0, self);
 
     if(a_trace["surfacetype"] != "none" && !isDefined(a_trace["entity"]))
       b_collision_imminent = 1;
 
-    if(b_collision_imminent) {
-    }
+    if(b_collision_imminent) {}
 
     self.is_collision_imminent = b_collision_imminent;
     wait(n_update_time);
@@ -863,7 +862,7 @@ f35_hit_object_switch_to_vtol() {
   n_speed_current = self getspeedmph();
   n_speed_clamped = clamp(n_speed_current, level.f35.max_speed_vtol, level.f35.speed_plane_max);
   self.plane_mode_speed = n_speed_clamped;
-  level.player playsound("evt_dogfight_blast");
+  level.player playSound("evt_dogfight_blast");
   self _f35_set_conventional_flight_mode();
   self setspeed(self.plane_mode_speed, 150, 150);
   f35_scale_speed_to_max();
@@ -957,7 +956,7 @@ death_blossom_think() {
 }
 
 death_blossom_cooldown_notification() {
-  level.player playsound("wpn_skybuster_notify");
+  level.player playSound("wpn_skybuster_notify");
 }
 
 f35_death_blossom_watcher() {
@@ -1021,7 +1020,7 @@ f35_damage_callback(einflictor, eattacker, idamage, idflags, type, sweapon, vpoi
       idamage = 1;
 
       if(issubstr(sweapon, "rpg")) {
-        level.player playsound("prj_missile_impact_f35");
+        level.player playSound("prj_missile_impact_f35");
         idamage = 150;
       }
     }
@@ -1037,9 +1036,7 @@ f35_damage_callback(einflictor, eattacker, idamage, idflags, type, sweapon, vpoi
         idamage = 2500;
         level.f35 notify("missile_hit_player");
       }
-    } else if(eattacker.vehicletype == "drone_pegasus_fast_la2" || eattacker.vehicletype == "drone_pegasus_fast_la2_2x") {
-    } else if(eattacker.vehicletype == "drone_avenger_fast_la2" || eattacker.vehicletype == "drone_avenger_fast_la2_2x" || eattacker.vehicletype == "drone_avenger") {
-    } else if(eattacker.vehicletype == "civ_pickup_red_wturret_la2")
+    } else if(eattacker.vehicletype == "drone_pegasus_fast_la2" || eattacker.vehicletype == "drone_pegasus_fast_la2_2x") {} else if(eattacker.vehicletype == "drone_avenger_fast_la2" || eattacker.vehicletype == "drone_avenger_fast_la2_2x" || eattacker.vehicletype == "drone_avenger") {} else if(eattacker.vehicletype == "civ_pickup_red_wturret_la2")
       idamage = 10;
     else {
       println("unhandled vehicle type on F35" + self.vehicletype);
@@ -1088,9 +1085,9 @@ f35_damage_callback(einflictor, eattacker, idamage, idflags, type, sweapon, vpoi
   }
 
   if(type == "MOD_UNKNOWN")
-    level.player playsound("evt_collision_alarm");
+    level.player playSound("evt_collision_alarm");
   else if(idamage > 0 && !issubstr(sweapon, "rpg") && sweapon != "pegasus_missile_turret_doublesize")
-    level.player playsound("prj_bullet_impact_f35");
+    level.player playSound("prj_bullet_impact_f35");
 
   if(self.health_regen.health - idamage <= 0 || self.health - idamage <= 0) {
     if(!flag("eject_sequence_started")) {
@@ -1100,7 +1097,7 @@ f35_damage_callback(einflictor, eattacker, idamage, idflags, type, sweapon, vpoi
       }
 
       if(!maps\la_utility::is_greenlight_build()) {
-        playfxontag(level._effect["fa38_exp_interior"], level.f35, "tag_origin");
+        playFXOnTag(level._effect["fa38_exp_interior"], level.f35, "tag_origin");
         missionfailed();
       }
     } else
@@ -1220,7 +1217,7 @@ f35_switch_modes() {
   flag_wait("dogfights_story_done");
 
   if(!flag("dogfight_done")) {
-    level.player playsound("evt_dogfight_blast");
+    level.player playSound("evt_dogfight_blast");
     self thread _f35_set_vtol_mode_v2();
     level.player thread f35_tutorial(0, 0, 0, 0, 1, 1);
   }
@@ -1263,7 +1260,7 @@ _f35_set_vtol_fast_mode() {
   self setheliheightlock(0);
   level.player setclientdvar("vehHelicopterMaxHeightLockOffset", n_height_mesh_max_dist);
   level.player setclientdvar("vehHelicopterMinHeightLockOffset", n_height_mesh_min_dist);
-  self playsound("veh_vtol_disengage_c");
+  self playSound("veh_vtol_disengage_c");
   self.is_vtol = 0;
   level.player update_ember_fx("embers_on_player_in_f35_plane");
 }
@@ -1348,7 +1345,7 @@ _f35_set_conventional_flight_mode() {
   self setheliheightlock(1);
   level.player setclientdvar("vehHelicopterMaxHeightLockOffset", n_height_mesh_max_dist);
   level.player setclientdvar("vehHelicopterMinHeightLockOffset", n_height_mesh_min_dist);
-  self playsound("veh_vtol_disengage_c");
+  self playSound("veh_vtol_disengage_c");
   self.is_vtol = 0;
   level.player update_ember_fx("embers_on_player_in_f35_plane");
 }
@@ -1406,7 +1403,7 @@ f35_try_to_play_damage_bink() {
 }
 
 f35_damage_bink() {
-  level.player playsound("prj_bullet_impact_f35_static");
+  level.player playSound("prj_bullet_impact_f35_static");
   f35_show_console("tag_display_damage");
   wait 0.4;
   f35_show_console();
@@ -1442,7 +1439,7 @@ _f35_conventional_flight_mode_throttle() {
     wait 0.05;
   }
 
-  self playsound("veh_vtol_disengage_c");
+  self playSound("veh_vtol_disengage_c");
   self setvehicletype("plane_f35_player");
 }
 
@@ -1486,7 +1483,7 @@ _f35_set_vtol_mode(b_is_first_time, b_use_force_protection_vo) {
       self thread say_dialog("vtol_flight_mode_e_033");
   }
 
-  self playsound("veh_vtol_engage_c");
+  self playSound("veh_vtol_engage_c");
   self setvehicletype("plane_f35_player_vtol");
 
   if(b_set_speed) {
@@ -1501,8 +1498,7 @@ _f35_set_vtol_mode(b_is_first_time, b_use_force_protection_vo) {
   setheliheightpatchenabled("ground_section_height_mesh", 1);
   self setheliheightlock(1);
 
-  if(flag("convoy_at_dogfight") && !flag("dogfight_done")) {
-  }
+  if(flag("convoy_at_dogfight") && !flag("dogfight_done")) {}
 
   level.player setclientdvar("vehHelicopterMaxHeightLockOffset", n_height_mesh_max_dist);
   level.player setclientdvar("vehHelicopterMinHeightLockOffset", n_height_mesh_min_dist);
@@ -1532,7 +1528,7 @@ _f35_should_be_flying() {
   if(length(self.velocity) == 0)
     return false;
 
-  plane_speed = vectordot(self.velocity, anglestoforward(self.angles)) / 17.6;
+  plane_speed = vectordot(self.velocity, anglesToForward(self.angles)) / 17.6;
   plane_dot = plane_speed / length(self.velocity) * 17.6;
 
   if(plane_speed > 150 && plane_dot > 0.6)
@@ -1577,7 +1573,7 @@ _can_bullet_hit_target(v_start_pos, e_target) {
   n_distance_to_target = distancesquared(v_start_pos, e_target.origin);
 
   while(!b_trace_done) {
-    a_trace = bullettrace(v_start_current, v_end_pos, 0, self);
+    a_trace = bulletTrace(v_start_current, v_end_pos, 0, self);
     b_hit_surface = a_trace["surfacetype"] != "none";
     b_hit_ent = isDefined(a_trace["entity"]);
 
@@ -1621,19 +1617,18 @@ f35_tutorial(b_show_move_prompt, b_show_hover_prompt, b_show_weapon_prompt, b_sh
     stick_layout = getlocalprofileint("gpad_sticksConfig");
 
     if(stick_layout == 2 || stick_layout == 3)
-      self f35_tutorial_func(&"LA_2_FLIGHT_CONTROL_MOVE_LEGACY", & "LA_2_FLIGHT_CONTROL_LOOK_LEGACY", ::f35_control_check_movement);
+      self f35_tutorial_func(&"LA_2_FLIGHT_CONTROL_MOVE_LEGACY", &"LA_2_FLIGHT_CONTROL_LOOK_LEGACY", ::f35_control_check_movement);
     else
-      self f35_tutorial_func(&"LA_2_FLIGHT_CONTROL_MOVE", & "LA_2_FLIGHT_CONTROL_LOOK", ::f35_control_check_movement);
+      self f35_tutorial_func(&"LA_2_FLIGHT_CONTROL_MOVE", &"LA_2_FLIGHT_CONTROL_LOOK", ::f35_control_check_movement);
   }
 
   if(b_show_hover_prompt)
-    self f35_tutorial_func(&"LA_2_FLIGHT_CONTROL_HOVER_UP", & "LA_2_FLIGHT_CONTROL_HOVER_DOWN", ::f35_control_check_hover);
+    self f35_tutorial_func(&"LA_2_FLIGHT_CONTROL_HOVER_UP", &"LA_2_FLIGHT_CONTROL_HOVER_DOWN", ::f35_control_check_hover);
 
   if(b_show_weapon_prompt)
-    self f35_tutorial_func(&"LA_2_FLIGHT_CONTROL_GUN", & "LA_2_FLIGHT_CONTROL_MISSILE", ::f35_control_check_weapons);
+    self f35_tutorial_func(&"LA_2_FLIGHT_CONTROL_GUN", &"LA_2_FLIGHT_CONTROL_MISSILE", ::f35_control_check_weapons);
 
-  if(b_show_ads_prompt) {
-  }
+  if(b_show_ads_prompt) {}
 
   if(b_show_speed_boost_prompt) {
     wait 2;
@@ -1751,7 +1746,7 @@ _watch_for_boost() {
 
   while(true) {
     speed = self getspeedmph();
-    forward = anglestoforward(self.angles);
+    forward = anglesToForward(self.angles);
     bcansprint = bmeterempty == 0 && speed > self.min_sprint_speed;
     bpressingsprint = level.player sprintbuttonpressed();
 
@@ -1890,6 +1885,6 @@ plane_damage_states() {
 
   for(damage_state = 1; 1; damage_state++) {
     self waittill("update_plane_damage_state");
-    playfxontag(level._effect["f38_console_dmg_" + damage_state], self, "tag_origin");
+    playFXOnTag(level._effect["f38_console_dmg_" + damage_state], self, "tag_origin");
   }
 }

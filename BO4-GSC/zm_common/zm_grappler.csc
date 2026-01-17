@@ -12,7 +12,6 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace zm_grappler;
 
 autoexec __init__system__() {
@@ -65,7 +64,7 @@ grappler_beam(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, 
 }
 
 function_34e3f163(player, tag, pivot, delay) {
-  player endon(#"grappler_done", #"death");
+  player endon(#"grappler_done", # "death");
   pivot endon(#"death");
   wait delay;
   thread grapple_beam(player, tag, pivot);
@@ -76,7 +75,7 @@ function_f4b9c325(notifyhash) {
 }
 
 grapple_beam(player, tag, pivot) {
-  self endoncallback(&function_f4b9c325, #"death");
+  self endoncallback(&function_f4b9c325, # "death");
   self.player = player;
   self.tag = tag;
   self.pivot = pivot;

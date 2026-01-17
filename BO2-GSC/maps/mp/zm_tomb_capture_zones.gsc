@@ -78,10 +78,10 @@ precache_everything() {
 }
 
 declare_objectives() {
-  objective_add(0, "invisible", (0, 0, 0), & "ZM_TOMB_OBJ_CAPTURE_1");
-  objective_add(1, "invisible", (0, 0, 0), & "ZM_TOMB_OBJ_RECAPTURE_2");
-  objective_add(2, "invisible", (0, 0, 0), & "ZM_TOMB_OBJ_CAPTURE_2");
-  objective_add(3, "invisible", (0, 0, 0), & "ZM_TOMB_OBJ_RECAPTURE_ZOMBIE");
+  objective_add(0, "invisible", (0, 0, 0), &"ZM_TOMB_OBJ_CAPTURE_1");
+  objective_add(1, "invisible", (0, 0, 0), &"ZM_TOMB_OBJ_RECAPTURE_2");
+  objective_add(2, "invisible", (0, 0, 0), &"ZM_TOMB_OBJ_CAPTURE_2");
+  objective_add(3, "invisible", (0, 0, 0), &"ZM_TOMB_OBJ_RECAPTURE_ZOMBIE");
 }
 
 init_pap_animtree() {
@@ -251,11 +251,10 @@ track_max_player_zombie_points() {
   }
 }
 
-pack_a_punch_dummy_init() {
-}
+pack_a_punch_dummy_init() {}
 
 pack_a_punch_init() {
-  vending_weapon_upgrade_trigger = getentarray("specialty_weapupgrade", "script_noteworthy");
+  vending_weapon_upgrade_trigger = getEntArray("specialty_weapupgrade", "script_noteworthy");
   level.pap_triggers = vending_weapon_upgrade_trigger;
   t_pap = getent("specialty_weapupgrade", "script_noteworthy");
   t_pap.machine ghost();
@@ -331,7 +330,7 @@ register_random_perk_machine_for_zone(str_zone_name, str_identifier) {
   if(!isDefined(level.zone_capture.zones[str_zone_name].perk_machines_random))
     level.zone_capture.zones[str_zone_name].perk_machines_random = [];
 
-  a_random_perk_machines = getentarray("random_perk_machine", "targetname");
+  a_random_perk_machines = getEntArray("random_perk_machine", "targetname");
 
   foreach(random_perk_machine in a_random_perk_machines) {
     if(isDefined(random_perk_machine.script_string) && random_perk_machine.script_string == str_identifier)
@@ -451,7 +450,7 @@ init_capture_zone() {
   assert(isDefined(self.script_noteworthy), "capture zone struct is missing script_noteworthy KVP! This is required for init_capture_zone()");
 
   if(!isDefined(level.zone_capture))
-    level.zone_capture = spawnstruct();
+    level.zone_capture = spawnStruct();
 
   if(!isDefined(level.zone_capture.zones))
     level.zone_capture.zones = [];
@@ -476,7 +475,7 @@ init_capture_zone() {
 }
 
 setup_generator_unitrigger() {
-  s_unitrigger_stub = spawnstruct();
+  s_unitrigger_stub = spawnStruct();
   s_unitrigger_stub.origin = self.origin;
   s_unitrigger_stub.angles = self.angles;
   s_unitrigger_stub.radius = 32;
@@ -484,7 +483,7 @@ setup_generator_unitrigger() {
   s_unitrigger_stub.script_width = 128;
   s_unitrigger_stub.script_height = 128;
   s_unitrigger_stub.cursor_hint = "HINT_NOICON";
-  s_unitrigger_stub.hint_string = & "ZM_TOMB_CAP";
+  s_unitrigger_stub.hint_string = &"ZM_TOMB_CAP";
   s_unitrigger_stub.hint_parm1 = [[::get_generator_capture_start_cost]]();
   s_unitrigger_stub.script_unitrigger_type = "unitrigger_box_use";
   s_unitrigger_stub.require_look_at = 1;
@@ -541,7 +540,7 @@ setup_zombie_attack_points() {
 }
 
 add_attack_points_from_anchor_origin(v_origin, n_start_index, n_scale) {
-  v_forward = anglestoforward(self.angles);
+  v_forward = anglesToForward(self.angles);
   v_right = anglestoright(self.angles);
   self.zombie_attack_points[n_start_index] = init_attack_point(v_origin + v_forward * n_scale, v_origin);
   self.zombie_attack_points[n_start_index + 1] = init_attack_point(v_origin + v_right * n_scale, v_origin);
@@ -550,7 +549,7 @@ add_attack_points_from_anchor_origin(v_origin, n_start_index, n_scale) {
 }
 
 init_attack_point(v_origin, v_center_pillar) {
-  s_temp = spawnstruct();
+  s_temp = spawnStruct();
   s_temp.is_claimed = 0;
   s_temp.claimed_by = undefined;
   s_temp.origin = v_origin;
@@ -634,7 +633,7 @@ get_zombie_to_delete() {
 
 delete_zombie_for_capture_event() {
   if(isDefined(self)) {
-    playfx(level._effect["tesla_elec_kill"], self.origin);
+    playFX(level._effect["tesla_elec_kill"], self.origin);
     self ghost();
   }
 
@@ -856,7 +855,7 @@ get_unused_emergence_hole_spawn_point() {
 emergence_hole_spawn() {
   m_emergence_hole = spawn("script_model", self.origin);
   m_emergence_hole.angles = self.angles;
-  m_emergence_hole setmodel("p6_zm_tm_zone_capture_hole");
+  m_emergence_hole setModel("p6_zm_tm_zone_capture_hole");
   wait_network_frame();
   m_emergence_hole setclientfield("zone_capture_emergence_hole", 1);
   return m_emergence_hole;
@@ -866,7 +865,7 @@ init_zone_capture_zombie_common(s_spawn_point) {
   self setphysparams(15, 0, 72);
   self.ignore_enemy_count = 1;
   self dug_zombie_rise(s_spawn_point);
-  self playsound("zmb_vocals_capzomb_spawn");
+  self playSound("zmb_vocals_capzomb_spawn");
   self setclientfield("zone_capture_zombie", 1);
   self init_anim_rate();
 }
@@ -952,7 +951,7 @@ init_recapture_zombie(zone_struct, s_spawn_point) {
 }
 
 capture_zombie_rise_fx(ai_zombie) {
-  playfx(level._effect["zone_capture_zombie_spawn"], self.origin, anglestoforward(self.angles), anglestoup(self.angles));
+  playFX(level._effect["zone_capture_zombie_spawn"], self.origin, anglesToForward(self.angles), anglestoup(self.angles));
 }
 
 get_unclaimed_attack_point(s_zone) {
@@ -1154,7 +1153,7 @@ kill_all_capture_zombies() {
   while(isDefined(self.capture_zombies) && self.capture_zombies.size > 0) {
     foreach(zombie in self.capture_zombies) {
       if(isDefined(zombie) && isalive(zombie)) {
-        playfx(level._effect["tesla_elec_kill"], zombie.origin);
+        playFX(level._effect["tesla_elec_kill"], zombie.origin);
         zombie dodamage(zombie.health + 100, zombie.origin);
       }
 
@@ -1171,7 +1170,7 @@ kill_all_recapture_zombies() {
   while(isDefined(level.zone_capture.recapture_zombies) && level.zone_capture.recapture_zombies.size > 0) {
     foreach(zombie in level.zone_capture.recapture_zombies) {
       if(isDefined(zombie) && isalive(zombie)) {
-        playfx(level._effect["tesla_elec_kill"], zombie.origin);
+        playFX(level._effect["tesla_elec_kill"], zombie.origin);
         zombie dodamage(zombie.health + 100, zombie.origin);
       }
 
@@ -1243,9 +1242,7 @@ set_player_controlled_zone() {
   level setclientfield("zone_capture_hud_generator_" + self.script_int, 1);
   level setclientfield("zone_capture_monolith_crystal_" + self.script_int, 0);
 
-  if(!isDefined(self.perk_fx_func) || [
-      [self.perk_fx_func]
-    ]())
+  if(!isDefined(self.perk_fx_func) || [[self.perk_fx_func]]())
     level setclientfield("zone_capture_perk_machine_smoke_fx_" + self.script_int, 1);
 
   self ent_flag_set("player_controlled");
@@ -1399,7 +1396,7 @@ zone_capture_sound_state_think() {
       self.is_playing_audio = 0;
     }
   } else if(!self.is_playing_audio && flag("generator_under_attack")) {
-    self.sndent playloopsound("zmb_capturezone_generator_alarm", 0.25);
+    self.sndent playLoopSound("zmb_capturezone_generator_alarm", 0.25);
     self.is_playing_audio = 1;
   }
 }
@@ -1425,8 +1422,7 @@ handle_generator_capture() {
 
     self set_zombie_controlled_area();
 
-    if(flag("recapture_event_in_progress") && get_captured_zone_count() > 0) {
-    } else
+    if(flag("recapture_event_in_progress") && get_captured_zone_count() > 0) {} else
       self kill_all_capture_zombies();
   }
 
@@ -1559,7 +1555,7 @@ recapture_zombie_group_icon_hide() {
 }
 
 players_capture_zone() {
-  self.sndent playsound("zmb_capturezone_success");
+  self.sndent playSound("zmb_capturezone_success");
   self.sndent stoploopsound(0.25);
   wait_network_frame();
 
@@ -1569,7 +1565,7 @@ players_capture_zone() {
   reward_players_in_capture_zone();
   self set_player_controlled_area();
   wait_network_frame();
-  playfx(level._effect["capture_complete"], self.origin);
+  playFX(level._effect["capture_complete"], self.origin);
   level thread sndplaygeneratormusicstinger();
 }
 
@@ -1847,9 +1843,9 @@ magic_box_stub_update_prompt(player) {
   self.stub.hint_parm1 = undefined;
 
   if(isDefined(self.stub.trigger_target.grab_weapon_hint) && self.stub.trigger_target.grab_weapon_hint)
-    self.stub.hint_string = & "ZOMBIE_TRADE_WEAPONS";
+    self.stub.hint_string = &"ZOMBIE_TRADE_WEAPONS";
   else if(!level.zone_capture.zones[self.stub.zone] ent_flag("player_controlled")) {
-    self.stub.hint_string = & "ZM_TOMB_ZC";
+    self.stub.hint_string = &"ZM_TOMB_ZC";
     return false;
   } else {
     self.stub.hint_parm1 = self.stub.trigger_target.zombie_cost;
@@ -2031,7 +2027,7 @@ sndrecaptureroundloop() {
   level endon("sndEndRoundLoop");
   wait 5;
   ent = spawn("script_origin", (0, 0, 0));
-  ent playloopsound("mus_recapture_round_loop", 5);
+  ent playLoopSound("mus_recapture_round_loop", 5);
   ent thread sndrecaptureroundloop_stop();
 }
 
@@ -2094,7 +2090,7 @@ generator_under_attack_warnings() {
 
   if(!flag("recapture_zombies_cleared")) {
     e_alarm_sound = spawn("script_origin", self.origin);
-    e_alarm_sound playloopsound("zmb_capturezone_losing");
+    e_alarm_sound playLoopSound("zmb_capturezone_losing");
     e_alarm_sound thread play_flare_effect();
     wait 0.5;
     flag_waitopen("generator_under_attack");
@@ -2109,7 +2105,7 @@ play_flare_effect() {
   n_end_time = gettime() + 5000;
 
   while(flag("generator_under_attack")) {
-    playfx(level._effect["lght_marker_flare"], self.origin);
+    playFX(level._effect["lght_marker_flare"], self.origin);
     wait 4;
   }
 }
@@ -2126,11 +2122,9 @@ recapture_round_audio_ends() {
   level notify("sndEndRoundLoop");
 }
 
-custom_vending_power_on() {
-}
+custom_vending_power_on() {}
 
-custom_vending_power_off() {
-}
+custom_vending_power_off() {}
 
 generator_initiated_vo() {
   e_vo_origin = spawn("script_origin", self.origin);

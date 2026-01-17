@@ -30,19 +30,17 @@ function sessionadvertisementcheck() {
     return;
   }
   runrules = getgametyperules();
-  if(!isdefined(runrules)) {
+  if(!isDefined(runrules)) {
     return;
   }
   level endon("game_end");
   level waittill("prematch_over");
   currentadvertisedstatus = undefined;
-  while (true) {
+  while(true) {
     sessionadvertcheckwait = getdvarint("sessionAdvertCheckwait", 1);
     wait(sessionadvertcheckwait);
-    advertise = [
-      [runrules]
-    ]();
-    if(!isdefined(currentadvertisedstatus) || (isdefined(advertise) && currentadvertisedstatus != advertise)) {
+    advertise = [[runrules]]();
+    if(!isDefined(currentadvertisedstatus) || (isDefined(advertise) && currentadvertisedstatus != advertise)) {
       setadvertisedstatus(advertise);
     }
     currentadvertisedstatus = advertise;
@@ -53,10 +51,10 @@ function getgametyperules() {
   gametype = level.gametype;
   switch (gametype) {
     case "gun": {
-      return & gun_rules;
+      return &gun_rules;
     }
     default: {
-      return & default_rules;
+      return &default_rules;
     }
   }
 }
@@ -111,7 +109,7 @@ function default_rules() {
     } else if(level.scorelimit) {
       highestscore = 0;
       players = getplayers();
-      for (i = 0; i < players.size; i++) {
+      for(i = 0; i < players.size; i++) {
         if(players[i].pointstowin > highestscore) {
           highestscore = players[i].pointstowin;
         }
@@ -159,10 +157,10 @@ function gun_rules() {
   updatedebughud(1, "", ruleweaponsleft);
   minweaponsleft = level.gunprogression.size;
   foreach(player in level.activeplayers) {
-    if(!isdefined(player)) {
+    if(!isDefined(player)) {
       continue;
     }
-    if(!isdefined(player.gunprogress)) {
+    if(!isDefined(player.gunprogress)) {
       continue;
     }
     weaponsleft = level.gunprogression.size - player.gunprogress;
@@ -242,16 +240,16 @@ function sessionadvertismentupdatedebughud() {
   level.sessionadverthud_3b_text = "";
   level.sessionadverthud_4a_text = "";
   level.sessionadverthud_4b_text = "";
-  while (true) {
+  while(true) {
     wait(1);
     showdebughud = getdvarint("", 0);
     level.sessionadverthud_0_text = "";
     if(level.sessionadvertstatus == 0) {
       level.sessionadverthud_0_text = "";
     }
-    if(!isdefined(sessionadverthud_0) && showdebughud != 0) {
+    if(!isDefined(sessionadverthud_0) && showdebughud != 0) {
       host = util::gethostplayer();
-      if(!isdefined(host)) {
+      if(!isDefined(host)) {
         continue;
       }
       sessionadverthud_0 = host sessionadvertismentcreatedebughud(0, 0);
@@ -268,7 +266,7 @@ function sessionadvertismentupdatedebughud() {
       sessionadverthud_2a.color = vectorscale((0, 1, 0), 0.5);
       sessionadverthud_2b.color = vectorscale((0, 1, 0), 0.5);
     }
-    if(isdefined(sessionadverthud_0)) {
+    if(isDefined(sessionadverthud_0)) {
       if(showdebughud == 0) {
         sessionadverthud_0 destroy();
         sessionadverthud_1a destroy();

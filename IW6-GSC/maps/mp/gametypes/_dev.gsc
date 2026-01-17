@@ -999,7 +999,7 @@ testLowerMessage() {
   self setLowerMessage("spawn_info", game["strings"]["waiting_to_spawn"], 10);
   wait(3.0);
 
-  self setLowerMessage("last_stand", & "PLATFORM_COWARDS_WAY_OUT", undefined, 50);
+  self setLowerMessage("last_stand", &"PLATFORM_COWARDS_WAY_OUT", undefined, 50);
   wait(3.0);
 
   self clearLowerMessage("last_stand");

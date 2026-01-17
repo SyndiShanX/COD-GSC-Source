@@ -23,15 +23,15 @@ init_level_lighting_flags() {}
 setup_dof_presets() {}
 
 setup_lighting_triggers() {
-  var_0 = getentarray("script_lightset_change", "targetname");
+  var_0 = getEntArray("script_lightset_change", "targetname");
   common_scripts\utility::array_thread(var_0, ::lighting_trigger_think);
 }
 
 lighting_trigger_think() {
-  if(!isdefined(self.script_noteworthy)) {
+  if(!isDefined(self.script_noteworthy)) {
     return;
   }
-  for (;;) {
+  for(;;) {
     self waittill("trigger");
 
     if(self.script_noteworthy != level.current_light_set)
@@ -40,12 +40,12 @@ lighting_trigger_think() {
 }
 
 apply_lighting_pass_armada(var_0, var_1) {
-  if(!isdefined(var_0)) {
+  if(!isDefined(var_0)) {
     return;
   }
   switch (var_0) {
     case "armada_exterior":
-      if(!isdefined(var_1))
+      if(!isDefined(var_1))
         var_1 = 1.0;
 
       maps\_utility::set_vision_set("armada", var_1);
@@ -54,7 +54,7 @@ apply_lighting_pass_armada(var_0, var_1) {
       level.player setclutforplayer("clut_armada", var_1);
       break;
     case "armada_ride":
-      if(!isdefined(var_1))
+      if(!isDefined(var_1))
         var_1 = 1.0;
 
       maps\_utility::set_vision_set("armada_ride", var_1);
@@ -63,7 +63,7 @@ apply_lighting_pass_armada(var_0, var_1) {
       level.player setclutforplayer("clut_armada", var_1);
       break;
     case "armada_interior_HQ":
-      if(!isdefined(var_1))
+      if(!isDefined(var_1))
         var_1 = 1.0;
 
       maps\_utility::set_vision_set("armada_hq", var_1);
@@ -72,7 +72,7 @@ apply_lighting_pass_armada(var_0, var_1) {
       level.player setclutforplayer("clut_armada", var_1);
       break;
     case "armada_interior_TVStation":
-      if(!isdefined(var_1))
+      if(!isDefined(var_1))
         var_1 = 1.0;
 
       maps\_utility::set_vision_set("armada_tvs", var_1);
@@ -81,7 +81,7 @@ apply_lighting_pass_armada(var_0, var_1) {
       level.player setclutforplayer("clut_armada", var_1);
       break;
     case "armada_TVStation_Hall":
-      if(!isdefined(var_1))
+      if(!isDefined(var_1))
         var_1 = 1.0;
 
       maps\_utility::set_vision_set("armada_tvs", var_1);
@@ -90,7 +90,7 @@ apply_lighting_pass_armada(var_0, var_1) {
       level.player setclutforplayer("clut_armada", var_1);
       break;
     case "armada_TVStation_Kitchen":
-      if(!isdefined(var_1))
+      if(!isDefined(var_1))
         var_1 = 1.0;
 
       maps\_utility::set_vision_set("armada_tvs", var_1);
@@ -99,7 +99,7 @@ apply_lighting_pass_armada(var_0, var_1) {
       level.player setclutforplayer("clut_armada", var_1);
       break;
     case "armada_TVStation_Roof01":
-      if(!isdefined(var_1))
+      if(!isDefined(var_1))
         var_1 = 1.0;
 
       maps\_utility::set_vision_set("armada_tvs", var_1);
@@ -108,7 +108,7 @@ apply_lighting_pass_armada(var_0, var_1) {
       level.player setclutforplayer("clut_armada", var_1);
       break;
     case "armada_TVStation_Stairwell":
-      if(!isdefined(var_1))
+      if(!isDefined(var_1))
         var_1 = 1.0;
 
       maps\_utility::set_vision_set("armada_tvs", var_1);
@@ -117,7 +117,7 @@ apply_lighting_pass_armada(var_0, var_1) {
       level.player setclutforplayer("clut_armada", var_1);
       break;
     case "armada_TVStation_Roof02":
-      if(!isdefined(var_1))
+      if(!isDefined(var_1))
         var_1 = 1.0;
 
       maps\_utility::set_vision_set("armada", var_1);
@@ -126,7 +126,7 @@ apply_lighting_pass_armada(var_0, var_1) {
       level.player setclutforplayer("clut_armada", var_1);
       break;
     case "armada_TVStation_End":
-      if(!isdefined(var_1))
+      if(!isDefined(var_1))
         var_1 = 1.0;
 
       maps\_utility::set_vision_set("armada_tvs", var_1);
@@ -135,7 +135,7 @@ apply_lighting_pass_armada(var_0, var_1) {
       level.player setclutforplayer("clut_armada", var_1);
       break;
     default:
-      if(!isdefined(var_1))
+      if(!isDefined(var_1))
         var_1 = 1.0;
 
       maps\_utility::set_vision_set("armada", var_1);
@@ -150,13 +150,13 @@ apply_lighting_pass_armada(var_0, var_1) {
 
 turn_off_primary_lights() {
   wait 1;
-  var_0 = getentarray("tv_primary_light", "targetname");
-  var_1 = getentarray("hq_primary_light", "targetname");
+  var_0 = getEntArray("tv_primary_light", "targetname");
+  var_1 = getEntArray("hq_primary_light", "targetname");
 
-  for (var_2 = 0; var_2 < var_0.size; var_2++)
+  for(var_2 = 0; var_2 < var_0.size; var_2++)
     var_0[var_2] setlightintensity(0);
 
-  for (var_2 = 0; var_2 < var_1.size; var_2++)
+  for(var_2 = 0; var_2 < var_1.size; var_2++)
     var_1[var_2] setlightintensity(0);
 }
 
@@ -172,21 +172,20 @@ play_flickering_light() {
   var_2["off"] = "emt_light_flicker_off";
   var_2["loop"] = "emt_light_flicker_lp";
   var_2["vol_env"] = [[var_0, 0.2],
-    [var_1, 1.0]
-  ];
+    [var_1, 1.0]];
   thread maps\_lighting::model_flicker_preset("flicker_1", 0, var_0, var_1, undefined, undefined, 0.5, 1, 0.005, 0.05, undefined, var_2, 100);
   thread maps\_lighting::model_flicker_preset("flicker_2", 0, var_0, var_1, undefined, undefined, 0.01, 5, 0.005, 0.05, undefined, var_2, 100);
 }
 
 office_light_force_on() {
-  var_0 = getentarray("office_light_trigger_on", "targetname");
-  var_1 = getentarray("office_light_trigger_off", "targetname");
+  var_0 = getEntArray("office_light_trigger_on", "targetname");
+  var_1 = getEntArray("office_light_trigger_off", "targetname");
   common_scripts\utility::array_thread(var_0, ::office_light_trigger, self, "force_on");
   common_scripts\utility::array_thread(var_1, ::office_light_trigger, self, "force_off");
 }
 
 office_light_trigger(var_0, var_1) {
-  for (;;) {
+  for(;;) {
     self waittill("trigger");
     var_0 setlightshadowstate(var_1);
   }

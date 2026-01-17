@@ -92,7 +92,7 @@ init() {
   level.grenade_array = [];
   level.inventory_array = [];
   max_weapon_num = 149;
-  for (i = 0; i < max_weapon_num; i++) {
+  for(i = 0; i < max_weapon_num; i++) {
     if(!isDefined(level.tbl_weaponIDs[i]) || level.tbl_weaponIDs[i]["group"] == "")
       continue;
     if(!isDefined(level.tbl_weaponIDs[i]) || level.tbl_weaponIDs[i]["reference"] == "") {
@@ -108,7 +108,7 @@ init() {
         if(attachment_tokens.size == 0)
           weapon_class_register(weapon + "_" + attachment + "_mp", weapon_type);
         else {
-          for (k = 0; k < attachment_tokens.size; k++)
+          for(k = 0; k < attachment_tokens.size; k++)
             weapon_class_register(weapon + "_" + attachment_tokens[k] + "_mp", weapon_type);
         }
       }
@@ -214,14 +214,14 @@ cac_init() {
   level.cac_cunlock = 10;
   level.cac_cint2 = 11;
   level.tbl_CamoSkin = [];
-  for (i = 0; i < 8; i++) {
+  for(i = 0; i < 8; i++) {
     level.tbl_CamoSkin[i]["bitmask"] = int(tableLookup("mp/attachmentTable.csv", 11, i, 10));
   }
-  for (i = 0; i < 13; i++) {
+  for(i = 0; i < 13; i++) {
     level.tbl_WeaponAttachment[i]["reference"] = tableLookup("mp/attachmentTable.csv", 9, i, 4);
   }
   level.tbl_weaponIDs = [];
-  for (i = 0; i < 150; i++) {
+  for(i = 0; i < 150; i++) {
     reference_s = tableLookup("mp/statsTable.csv", 0, i, 4);
     if(reference_s != "") {
       level.tbl_weaponIDs[i]["reference"] = reference_s;
@@ -235,7 +235,7 @@ cac_init() {
   level.perkNames = [];
   level.perkIcons = [];
   level.PerkData = [];
-  for (i = 150; i < 194; i++) {
+  for(i = 150; i < 194; i++) {
     reference_s = tableLookup("mp/statsTable.csv", 0, i, 4);
     if(reference_s != "") {
       level.tbl_PerkData[i]["reference"] = reference_s;
@@ -323,7 +323,7 @@ cac_getdata(prestige) {
 
 getCacDataGroup(statRange, cacRange, numClasses) {
   statMultiplier = 0;
-  for (i = cacRange; i < numClasses; i++) {
+  for(i = cacRange; i < numClasses; i++) {
     primary_grenade = self getstat(statRange + (statMultiplier * 10) + 0);
     primary_num = self getstat(statRange + (statMultiplier * 10) + 1);
     primary_attachment_flag = self getstat(statRange + (statMultiplier * 10) + 2);
@@ -446,7 +446,7 @@ getCacDataGroup(statRange, cacRange, numClasses) {
 }
 
 validatePerk(perkIndex, perkSlotIndex) {
-  for (i = 0; i < level.allowedPerks[perkSlotIndex].size; i++) {
+  for(i = 0; i < level.allowedPerks[perkSlotIndex].size; i++) {
     if(perkIndex == level.allowedPerks[perkSlotIndex][i])
       return perkIndex;
   }
@@ -458,7 +458,7 @@ logClassChoice(class, primaryWeapon, specialType, perks) {
     return;
   }
   self logstring("choseclass: " + class + " weapon: " + primaryWeapon + " special: " + specialType);
-  for (i = 0; i < perks.size; i++)
+  for(i = 0; i < perks.size; i++)
     self logstring("perk" + i + ": " + perks[i]);
   self.lastClass = class;
 }
@@ -596,7 +596,7 @@ giveLoadout(team, class) {
     assertex(isDefined(self.pers["class"]), "Player during spawn and loadout got no class!");
     selected_class = self.pers["class"];
     specialty_size = level.default_perk[selected_class].size;
-    for (i = 0; i < specialty_size; i++) {
+    for(i = 0; i < specialty_size; i++) {
       if(isDefined(level.default_perk[selected_class][i]) && level.default_perk[selected_class][i] != "")
         self.specialty[self.specialty.size] = level.default_perk[selected_class][i];
     }
@@ -695,7 +695,7 @@ replenishLoadout() {
   team = self.pers["team"];
   class = self.pers["class"];
   weaponsList = self GetWeaponsList();
-  for (idx = 0; idx < weaponsList.size; idx++) {
+  for(idx = 0; idx < weaponsList.size; idx++) {
     weapon = weaponsList[idx];
     self giveMaxAmmo(weapon);
     self SetWeaponAmmoClip(weapon, 9999);
@@ -709,7 +709,7 @@ replenishLoadout() {
 }
 
 onPlayerConnecting() {
-  for (;;) {
+  for(;;) {
     level waittill("connecting", player);
     if(!level.oldschool) {
       if(!isDefined(player.pers["class"])) {
@@ -748,7 +748,7 @@ initPerkDvars() {
 cac_selector() {
   perks = self.specialty;
   self.detectExplosives = false;
-  for (i = 0; i < perks.size; i++) {
+  for(i = 0; i < perks.size; i++) {
     perk = perks[i];
     if(perk == "specialty_detectexplosive")
       self.detectExplosives = true;
@@ -772,7 +772,7 @@ cac_selector() {
 register_perks() {
   perks = self.specialty;
   self clearPerks();
-  for (i = 0; i < perks.size; i++) {
+  for(i = 0; i < perks.size; i++) {
     perk = perks[i];
     if(perk == "specialty_null" || isSubStr(perk, "specialty_weapon_")) {
       continue;

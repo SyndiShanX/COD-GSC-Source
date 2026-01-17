@@ -8,7 +8,6 @@
 #include scripts\zm_common\callbacks;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
-
 #namespace zm_trial_use_magicbox;
 
 autoexec __init__system__() {
@@ -23,7 +22,7 @@ __init__() {
   zm_trial::register_challenge(#"use_magicbox", &on_begin, &on_end);
 }
 
-private on_begin(var_519131bc = 1) {
+on_begin(var_519131bc = 1) {
   callback::function_b3c9adb7(&function_b3c9adb7);
 
   if(ishash(var_519131bc)) {
@@ -37,7 +36,7 @@ private on_begin(var_519131bc = 1) {
   }
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   foreach(player in getplayers()) {
     player zm_trial_util::function_f3aacffb();
   }
@@ -64,7 +63,7 @@ private on_end(round_reset) {
   callback::function_342b2f6(&function_b3c9adb7);
 }
 
-private function_1685cc9b() {
+function_1685cc9b() {
   self endon(#"disconnect");
   level endon(#"hash_7646638df88a3656");
   var_fa5d7ea0 = 0;
@@ -87,7 +86,7 @@ private function_1685cc9b() {
   }
 }
 
-private function_b3c9adb7(weapon) {
+function_b3c9adb7(weapon) {
   self.var_8f30dd57++;
   self notify(#"hash_b0cc77b1ab98c08", {
     #weapon: weapon

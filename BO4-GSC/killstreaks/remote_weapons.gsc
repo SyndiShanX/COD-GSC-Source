@@ -9,14 +9,13 @@
 #include scripts\core_common\util_shared;
 #include scripts\core_common\values_shared;
 #include scripts\killstreaks\killstreaks_shared;
-
 #namespace remote_weapons;
 
 init_shared() {
   if(!isDefined(level.var_4249c222)) {
     level.var_4249c222 = {};
     level.remoteweapons = [];
-    level.remoteexithint = #"mp/remote_exit";
+    level.remoteexithint = # "mp/remote_exit";
     callback::on_spawned(&on_player_spawned);
   }
 }
@@ -95,7 +94,7 @@ on_game_ended() {
 watchremoveremotecontrolledweapon() {
   weapon = self;
   weapon endon(#"remote_weapon_end");
-  waitresult = weapon waittill(#"death", #"remote_weapon_shutdown");
+  waitresult = weapon waittill(#"death", # "remote_weapon_shutdown");
 
   if(weapon.watch_remote_weapon_death === 1 && isDefined(waitresult._notify) && waitresult._notify == "remote_weapon_shutdown") {
     weapon notify(#"hash_59b25025ce93a142");
@@ -142,7 +141,7 @@ createremoteweapontrigger() {
 watchweapondeath() {
   weapon = self;
   weapon.usetrigger endon(#"death");
-  weapon waittill(#"death", #"remote_weapon_end");
+  weapon waittill(#"death", # "remote_weapon_end");
 
   if(isDefined(weapon.remoteowner)) {
     weapon.remoteowner removeandassignnewremotecontroltrigger(weapon.usetrigger);
@@ -153,13 +152,13 @@ watchweapondeath() {
 
 watchownerdisconnect() {
   weapon = self;
-  weapon endon(#"remote_weapon_end", #"remote_weapon_shutdown");
+  weapon endon(#"remote_weapon_end", # "remote_weapon_shutdown");
 
   if(isDefined(weapon.usetrigger)) {
     weapon.usetrigger endon(#"death");
   }
 
-  weapon.remoteowner waittill(#"joined_team", #"disconnect", #"joined_spectators");
+  weapon.remoteowner waittill(#"joined_team", # "disconnect", # "joined_spectators");
   endremotecontrolweaponuse(0);
 
   if(isDefined(weapon) && isDefined(weapon.usetrigger)) {
@@ -169,7 +168,7 @@ watchownerdisconnect() {
 
 watchremotetriggerdisable() {
   weapon = self;
-  weapon endon(#"remote_weapon_end", #"remote_weapon_shutdown");
+  weapon endon(#"remote_weapon_end", # "remote_weapon_shutdown");
   weapon.usetrigger endon(#"death");
   weapon.remoteowner endon(#"disconnect");
 
@@ -191,14 +190,14 @@ allowremotestart(var_59d2c24b) {
 
 watchremotetriggeruse() {
   weapon = self;
-  weapon endon(#"death", #"remote_weapon_end");
+  weapon endon(#"death", # "remote_weapon_end");
 
   if(isbot(weapon.remoteowner)) {
     return;
   }
 
   while(true) {
-    res = weapon.usetrigger waittill(#"trigger", #"death");
+    res = weapon.usetrigger waittill(#"trigger", # "death");
 
     if(res._notify == "death") {
       return;
@@ -232,7 +231,7 @@ useremotecontrolweapon(allowmanualdeactivation = 1, always_allow_ride = 0) {
   assert(isDefined(weapon.remoteowner));
   weapon.control_initiated = 1;
   weapon.endremotecontrolweapon = 0;
-  weapon.remoteowner endon(#"disconnect", #"joined_team");
+  weapon.remoteowner endon(#"disconnect", # "joined_team");
   weapon.remoteowner disableoffhandweapons();
   weapon.remoteowner disableweaponcycling();
   weapon.remoteowner.dofutz = 0;
@@ -243,7 +242,7 @@ useremotecontrolweapon(allowmanualdeactivation = 1, always_allow_ride = 0) {
     weapon.remoteowner switchtoweapon(remoteweapon);
 
     if(always_allow_ride) {
-      weapon.remoteowner waittill(#"weapon_change", #"death");
+      weapon.remoteowner waittill(#"weapon_change", # "death");
     } else {
       waitresult = weapon.remoteowner waittill(#"weapon_change");
       newweapon = waitresult.weapon;
@@ -290,7 +289,7 @@ useremotecontrolweapon(allowmanualdeactivation = 1, always_allow_ride = 0) {
 }
 
 resetcontrols(weapon) {
-  weapon waittill(#"death", #"reset_controls");
+  weapon waittill(#"death", # "reset_controls");
 
   if(isDefined(self)) {
     self val::reset(#"useremotecontrolweapon", "freezecontrols");
@@ -307,7 +306,7 @@ watchremotecontroldeactivate() {
   self notify(#"watchremotecontroldeactivate_remoteweapons");
   self endon(#"watchremotecontroldeactivate_remoteweapons");
   weapon = self;
-  weapon endon(#"remote_weapon_end", #"death");
+  weapon endon(#"remote_weapon_end", # "death");
   weapon.remoteowner endon(#"disconnect");
 
   while(weapon.remoteowner usebuttonpressed()) {

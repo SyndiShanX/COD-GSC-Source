@@ -15,7 +15,7 @@ init() {
 
 onPlayerConnect() {
   level endon("game_ended");
-  for (;;) {
+  for(;;) {
     level waittill("connecting", player);
     player thread onPlayerSpawned();
     player thread onDisconnect();
@@ -41,7 +41,7 @@ doSquadInitialNotification() {
 onPlayerSpawned() {
   self endon("disconnect");
   level endon("game_ended");
-  for (;;) {
+  for(;;) {
     self waittill_any("spawned_player", "give_map");
     self setSquadFeatures();
   }
@@ -56,7 +56,7 @@ squadCommandWaiter() {
   self endon("death_or_disconnect");
   self thread destroyOnDeath();
   self.lastWeapon = self getCurrentWeapon();
-  for (;;) {
+  for(;;) {
     self waittill("weapon_change");
     self.squadId = getplayersquad(self);
     currentWeapon = self getCurrentWeapon();
@@ -167,7 +167,7 @@ playVOForSquadCommand() {
   playerSquadID = getplayersquadid(self);
   if(isDefined(playerSquadID)) {
     team = self.pers["team"];
-    for (i = 0; i < level.squads[team][playerSquadID].size; i++) {
+    for(i = 0; i < level.squads[team][playerSquadID].size; i++) {
       level.squads[team][playerSquadID][i] maps\mp\gametypes\_globallogic::leaderDialogOnPlayer("squad_move");
     }
   }

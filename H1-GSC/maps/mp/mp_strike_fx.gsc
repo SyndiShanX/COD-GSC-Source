@@ -34,16 +34,16 @@ main() {
 }
 
 misc_rotate_ceilingfans() {
-  common_scripts\utility::array_thread(getentarray("me_fanceil_spin", "targetname"), ::ceilingfan_rotate_custom);
-  common_scripts\utility::array_thread(getentarray("me_fanceil_spin_slow", "targetname"), ::ceilingfan_rotate_slow_custom);
-  common_scripts\utility::array_thread(getentarray("me_fanceil_spin_med", "targetname"), ::ceilingfan_rotate_med_custom);
+  common_scripts\utility::array_thread(getEntArray("me_fanceil_spin", "targetname"), ::ceilingfan_rotate_custom);
+  common_scripts\utility::array_thread(getEntArray("me_fanceil_spin_slow", "targetname"), ::ceilingfan_rotate_slow_custom);
+  common_scripts\utility::array_thread(getEntArray("me_fanceil_spin_med", "targetname"), ::ceilingfan_rotate_med_custom);
 }
 
 ceilingfan_rotate_custom() {
   var_0 = 600;
   var_1 = 20000;
 
-  for (;;) {
+  for(;;) {
     self rotatevelocity((0, var_0, 0), var_1);
     wait(var_1);
   }
@@ -53,7 +53,7 @@ ceilingfan_rotate_slow_custom() {
   var_0 = 50;
   var_1 = 20000;
 
-  for (;;) {
+  for(;;) {
     self rotatevelocity((0, var_0, 0), var_1);
     wait(var_1);
   }
@@ -63,7 +63,7 @@ ceilingfan_rotate_med_custom() {
   var_0 = 150;
   var_1 = 20000;
 
-  for (;;) {
+  for(;;) {
     self rotatevelocity((0, var_0, 0), var_1);
     wait(var_1);
   }

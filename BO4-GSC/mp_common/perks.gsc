@@ -7,7 +7,6 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace perks;
 
 autoexec __init__system__() {
@@ -26,7 +25,7 @@ on_player_spawned(local_client_num) {
 }
 
 monitorflight() {
-  self endon(#"death", #"disconnect");
+  self endon(#"death", # "disconnect");
   self.flying = 0;
 
   while(isDefined(self)) {
@@ -44,14 +43,14 @@ monitorflight() {
 monitorgpsjammer() {
   self notify("3670b910d841657e");
   self endon("3670b910d841657e");
-  self endon(#"death", #"disconnect");
+  self endon(#"death", # "disconnect");
   require_perk = 1;
 
   require_perk = 0;
 
-    if(require_perk && self hasperk(#"specialty_gpsjammer") == 0) {
-      return;
-    }
+  if(require_perk && self hasperk(#"specialty_gpsjammer") == 0) {
+    return;
+  }
 
   self clientfield::set("gps_jammer_active", self hasperk(#"specialty_gpsjammer") ? 1 : 0);
   graceperiods = self function_ee4a9054(#"grace_periods");
@@ -82,7 +81,6 @@ monitorgpsjammer() {
   gpsjammerprotection = 0;
 
   while(true) {
-
     graceperiods = self function_ee4a9054(#"grace_periods");
     minspeed = self function_ee4a9054(#"min_speed");
     mindistance = self function_ee4a9054(#"min_distance");
@@ -91,7 +89,7 @@ monitorgpsjammer() {
     minspeedsq = minspeed * minspeed;
     mindistancesq = mindistance * mindistance;
 
-      gpsjammerprotection = 0;
+    gpsjammerprotection = 0;
 
     if(util::isusingremote() || isDefined(self.isplanting) && self.isplanting || isDefined(self.isdefusing) && self.isdefusing) {
       gpsjammerprotection = 1;
@@ -117,12 +115,11 @@ monitorgpsjammer() {
     }
 
     if(gpsjammerprotection == 1 && self hasperk(#"specialty_gpsjammer")) {
-
       if(getdvarint(#"scr_debug_perk_gpsjammer", 0) != 0) {
         sphere(self.origin + (0, 0, 70), 12, (0, 0, 1), 1, 1, 16, 3);
       }
 
-        currentfailcount = 0;
+      currentfailcount = 0;
 
       if(hasperk == 0) {
         statechange = 0;
@@ -149,14 +146,14 @@ monitorgpsjammer() {
 }
 
 monitorsengrenjammer() {
-  self endon(#"death", #"disconnect");
+  self endon(#"death", # "disconnect");
   require_perk = 1;
 
   require_perk = 0;
 
-    if(require_perk && self hasperk(#"specialty_sengrenjammer") == 0) {
-      return;
-    }
+  if(require_perk && self hasperk(#"specialty_sengrenjammer") == 0) {
+    return;
+  }
 
   self clientfield::set("sg_jammer_active", self hasperk(#"specialty_sengrenjammer") ? 1 : 0);
   graceperiods = getdvarint(#"perk_sgjammer_graceperiods", 4);
@@ -187,7 +184,6 @@ monitorsengrenjammer() {
   sgjammerprotection = 0;
 
   while(true) {
-
     graceperiods = getdvarint(#"perk_sgjammer_graceperiods", graceperiods);
     minspeed = getdvarint(#"perk_sgjammer_min_speed", minspeed);
     mindistance = getdvarint(#"perk_sgjammer_min_distance", mindistance);
@@ -196,7 +192,7 @@ monitorsengrenjammer() {
     minspeedsq = minspeed * minspeed;
     mindistancesq = mindistance * mindistance;
 
-      sgjammerprotection = 0;
+    sgjammerprotection = 0;
 
     if(util::isusingremote() || isDefined(self.isplanting) && self.isplanting || isDefined(self.isdefusing) && self.isdefusing) {
       sgjammerprotection = 1;
@@ -222,12 +218,11 @@ monitorsengrenjammer() {
     }
 
     if(sgjammerprotection == 1 && self hasperk(#"specialty_sengrenjammer")) {
-
       if(getdvarint(#"scr_debug_perk_sengrenjammer", 0) != 0) {
         sphere(self.origin + (0, 0, 65), 12, (0, 1, 0), 1, 1, 16, 3);
       }
 
-        currentfailcount = 0;
+      currentfailcount = 0;
 
       if(hasperk == 0) {
         statechange = 0;

@@ -46,7 +46,7 @@ slowgun_dial_sounds(localclientnum) {
     digit1 = int(heat) % 10;
 
     if(self.slowgun_digit1 != digit1)
-      self playsound(localclientnum, "wpn_paralyzer_counter_tick");
+      self playSound(localclientnum, "wpn_paralyzer_counter_tick");
 
     self.slowgun_digit1 = digit1;
     wait 0.05;
@@ -58,7 +58,7 @@ sndparalyzerloop(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
     if(!isDefined(self.sndparalyzerloopent))
       self.sndparalyzerloopent = spawn(0, self.origin, "script_origin");
 
-    self.sndparalyzerloopent playloopsound("fly_paralyzer_loop", 1);
+    self.sndparalyzerloopent playLoopSound("fly_paralyzer_loop", 1);
     self thread slowgun_dial_sounds(localclientnum);
   } else {
     if(isDefined(self.sndparalyzerloopent)) {
@@ -109,7 +109,7 @@ slowgun_actor_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
       tag4 = "tag_origin";
     }
 
-    self playsound(localclientnum, "wpn_paralyzer_dsintegrate");
+    self playSound(localclientnum, "wpn_paralyzer_dsintegrate");
     effect = "zombie_slowgun_explosion";
 
     if(upgraded)
@@ -117,21 +117,21 @@ slowgun_actor_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
 
     if(isDefined(level._effect[effect])) {
       angles = self.angles;
-      forward = anglestoforward(angles);
-      right = anglestoforward(angles);
+      forward = anglesToForward(angles);
+      right = anglesToForward(angles);
       which = randomint(3);
-      playfx(localclientnum, level._effect[effect], self gettagorigin(tag2), -1 * forward);
+      playFX(localclientnum, level._effect[effect], self gettagorigin(tag2), -1 * forward);
 
       switch (which) {
         case 0:
-          playfx(localclientnum, level._effect[effect], self gettagorigin(tag1), forward);
+          playFX(localclientnum, level._effect[effect], self gettagorigin(tag1), forward);
           break;
         case 1:
           back_and_to_the_left = -0.5 * (forward + right);
-          playfx(localclientnum, level._effect[effect], self gettagorigin(tag3), back_and_to_the_left);
+          playFX(localclientnum, level._effect[effect], self gettagorigin(tag3), back_and_to_the_left);
           break;
         default:
-          playfx(localclientnum, level._effect[effect], self gettagorigin(tag4), right);
+          playFX(localclientnum, level._effect[effect], self gettagorigin(tag4), right);
           break;
       }
     }
@@ -177,7 +177,7 @@ play_sizzle(localclientnum, upgraded) {
       self pick_slowgun_sizzle_bone();
 
     if(isDefined(level._effect[sizzle]))
-      playfxontag(localclientnum, level._effect[sizzle], self, self.slowgun_sizzle_bone);
+      playFXOnTag(localclientnum, level._effect[sizzle], self, self.slowgun_sizzle_bone);
 
     wait 0.1;
   }
@@ -197,7 +197,7 @@ show_anim_rates() {
   while(true) {
     if(getdvarint(#"_id_61A711C2") == 3) {
       lp = getlocalplayers()[0];
-      ents = getentarray(0);
+      ents = getEntArray(0);
 
       foreach(ent in ents) {
         if(isDefined(ent) && (ent isplayer() || isDefined(ent._eyearray) && isDefined(ent._eyearray[0])) && ent isalive())

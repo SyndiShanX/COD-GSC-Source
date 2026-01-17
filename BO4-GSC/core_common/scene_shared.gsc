@@ -22,7 +22,6 @@
 #include scripts\core_common\trigger_shared;
 #include scripts\core_common\util_shared;
 #include scripts\core_common\values_shared;
-
 #namespace scene;
 
 autoexec __init__system__() {
@@ -770,12 +769,12 @@ run_instances() {
       continue;
     }
 
-    if(isDefined(s_instance.spawnflags) && (s_instance.spawnflags&2) == 2) {
+    if(isDefined(s_instance.spawnflags) && (s_instance.spawnflags & 2) == 2) {
       s_instance thread play();
       continue;
     }
 
-    if(isDefined(s_instance.spawnflags) && (s_instance.spawnflags&1) == 1) {
+    if(isDefined(s_instance.spawnflags) && (s_instance.spawnflags & 1) == 1) {
       s_instance thread init();
     }
   }
@@ -902,7 +901,7 @@ remove_scene_func(str_scenedef, func, var_e21c4c4c = "play") {
   }
 }
 
-private function_c776e5bd(str_scenedef, str_state) {
+function_c776e5bd(str_scenedef, str_state) {
   str_shot = str_state;
 
   if(str_state == "init") {
@@ -1028,19 +1027,19 @@ init_streamer(str_scenedef, var_1b38cf1d, var_b6213032 = 0, b_invulnerable = 1) 
     }
 
     foreach(player in a_players) {
-      if(player.team === #"allies") {
+      if(player.team === # "allies") {
         player thread function_1f9e783e(s_scenedef.var_a6da2039, str_scenedef);
         continue;
       }
 
-      if(player.team === #"axis") {
+      if(player.team === # "axis") {
         player thread function_1f9e783e(s_scenedef.var_991a84ba, str_scenedef);
       }
     }
-  } else if(var_1b38cf1d == #"allies" && isDefined(s_scenedef.var_a6da2039)) {
+  } else if(var_1b38cf1d == # "allies" && isDefined(s_scenedef.var_a6da2039)) {
     a_players = util::get_players(#"allies");
     array::thread_all(a_players, &function_1f9e783e, s_scenedef.var_a6da2039, str_scenedef);
-  } else if(var_1b38cf1d == #"axis" && isDefined(s_scenedef.var_991a84ba)) {
+  } else if(var_1b38cf1d == # "axis" && isDefined(s_scenedef.var_991a84ba)) {
     a_players = util::get_players(#"axis");
     array::thread_all(a_players, &function_1f9e783e, s_scenedef.var_991a84ba, str_scenedef);
   } else {
@@ -1074,7 +1073,7 @@ init_streamer(str_scenedef, var_1b38cf1d, var_b6213032 = 0, b_invulnerable = 1) 
   }
 }
 
-private function_1f9e783e(var_5c8c4fbc, str_scenedef) {
+function_1f9e783e(var_5c8c4fbc, str_scenedef) {
   self endon(#"disconnect");
   self flagsys::set(#"player_streamer_loading");
 
@@ -1322,7 +1321,7 @@ play(arg1, arg2, arg3, b_test_run = 0, str_mode = "", n_time, var_f7d56e76) {
   }
 
   if(s_tracker.n_scene_count > 0) {
-    s_tracker waittill(#"scenes_done", #"death");
+    s_tracker waittill(#"scenes_done", # "death");
   }
 }
 
@@ -1389,7 +1388,7 @@ breach_slow_time(var_3667c53d) {
     util::waittill_any_ents(self, "breach_cleared", level, var_3667c53d);
   } else {
     var_a1288aec = var_3667c53d * 0.3;
-    self waittilltimeout(var_a1288aec, #"breach_cleared");
+    self waittilltimeout(var_a1288aec, # "breach_cleared");
   }
 
   setslowmotion(0.3, 1, 0.3);
@@ -1419,17 +1418,17 @@ play_pair(var_a33156af, var_6a5164f0, var_b6213032 = 0, var_d8b95786 = 0) {
     var_487b41e7 = getscriptbundle(var_a33156af);
 
     if(var_487b41e7.team === "wun") {
-      function_d8a83a50(var_a33156af, &function_cae579da, "done", #"allies");
+      function_d8a83a50(var_a33156af, &function_cae579da, "done", # "allies");
     } else if(var_487b41e7.team === "fpa") {
-      function_d8a83a50(var_a33156af, &function_cae579da, "done", #"axis");
+      function_d8a83a50(var_a33156af, &function_cae579da, "done", # "axis");
     }
 
     var_64d57a9b = getscriptbundle(var_6a5164f0);
 
     if(var_64d57a9b.team === "wun") {
-      function_d8a83a50(var_6a5164f0, &function_cae579da, "done", #"allies");
+      function_d8a83a50(var_6a5164f0, &function_cae579da, "done", # "allies");
     } else if(var_64d57a9b.team === "fpa") {
-      function_d8a83a50(var_6a5164f0, &function_cae579da, "done", #"axis");
+      function_d8a83a50(var_6a5164f0, &function_cae579da, "done", # "axis");
     }
 
     var_487b41e7 = undefined;
@@ -1581,7 +1580,7 @@ _play_instance(s_tracker, str_scenedef = self.scriptbundlename, a_ents, b_test_r
       thread[[o_scene]] - > play(str_shot, a_ents, b_test_run, str_mode);
 
       if(isDefined(o_scene._a_objects) && o_scene._a_objects.size) {
-        o_scene waittill(str_shot, #"hash_27297a73bc597607");
+        o_scene waittill(str_shot, # "hash_27297a73bc597607");
       }
     }
 
@@ -1607,7 +1606,7 @@ _play_instance(s_tracker, str_scenedef = self.scriptbundlename, a_ents, b_test_r
       }
     } else if(!function_b260bdcc(str_scenedef, str_shot)) {
       if(isDefined(o_scene) && !(isDefined(o_scene.scene_stopping) && o_scene.scene_stopping)) {
-        o_scene waittill(#"scene_done", #"scene_stop", #"scene_skip_completed");
+        o_scene waittill(#"scene_done", # "scene_stop", # "scene_skip_completed");
       }
     }
   }
@@ -2089,7 +2088,7 @@ scene_enable_player_stuff(s_scenedef, s_objectdef, e_scene_root) {
     printtoprightln("<dev string:x535>");
   }
 
-  self endon(#"scene_disable_player_stuff", #"disconnect");
+  self endon(#"scene_disable_player_stuff", # "disconnect");
   waitframe(0);
 
   if(isDefined(s_scenedef) && !isDefined(s_scenedef.nextscenebundle)) {
@@ -2175,7 +2174,7 @@ set_igc_active(b_in_igc, str_scene_name) {
 is_igc_active() {
   n_players_in_igc = level clientfield::get("in_igc");
   n_entnum = self getentitynumber();
-  return n_players_in_igc&1 << n_entnum;
+  return n_players_in_igc & 1 << n_entnum;
 }
 
 function_871087b6() {
@@ -2264,9 +2263,9 @@ function_a4ad0308(o_scene) {
   }
 
   self notify(#"hash_f7c1e0e8fb935d5");
-  self endoncallback(&function_63033fc3, #"hash_f7c1e0e8fb935d5", #"disconnect");
-  o_scene endoncallback(&function_63033fc3, #"scene_done", #"scene_stop", #"scene_skip_completed", #"hash_63783193d9ac5bfc");
-  level endoncallback(&function_63033fc3, #"hash_7a8cd7f6a20dde3e");
+  self endoncallback(&function_63033fc3, # "hash_f7c1e0e8fb935d5", # "disconnect");
+  o_scene endoncallback(&function_63033fc3, # "scene_done", # "scene_stop", # "scene_skip_completed", # "hash_63783193d9ac5bfc");
+  level endoncallback(&function_63033fc3, # "hash_7a8cd7f6a20dde3e");
   b_skip_scene = 0;
   self clear_scene_skipping_ui();
   waitframe(1);
@@ -2665,7 +2664,7 @@ error_on_screen(str_msg) {
 _destroy_error_on_screen() {
   level notify(#"_destroy_error_on_screen");
   level endon(#"_destroy_error_on_screen");
-  self waittilltimeout(5, #"scene_stop", #"scene_done");
+  self waittilltimeout(5, # "scene_stop", # "scene_done");
   level.scene_error_hud destroy();
   level.scene_error_hud = undefined;
 }
@@ -2692,7 +2691,7 @@ warning_on_screen(str_msg) {
 _destroy_warning_on_screen() {
   level notify(#"_destroy_warning_on_screen");
   level endon(#"_destroy_warning_on_screen");
-  self waittilltimeout(5, #"scene_stop", #"scene_done");
+  self waittilltimeout(5, # "scene_stop", # "scene_done");
   level.scene_warning_hud destroy();
   level.scene_warning_hud = undefined;
 }
@@ -2709,11 +2708,11 @@ wait_server_time(n_time, n_start_time = 0) {
   waitframe(int(n_len));
 }
 
-check_team(str_team1 = #"any", str_team2 = #"any") {
+check_team(str_team1 = # "any", str_team2 = # "any") {
   str_team1 = util::get_team_mapping(str_team1);
   str_team2 = util::get_team_mapping(str_team2);
 
-  if(str_team1 == #"any" || str_team2 == #"any") {
+  if(str_team1 == # "any" || str_team2 == # "any") {
     return true;
   }
 

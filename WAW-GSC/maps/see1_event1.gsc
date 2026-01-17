@@ -130,8 +130,8 @@ ev1_disable_left_side_triggers() {
     trigger = getent("ev1_right_end", "targetname");
     trigger waittill("trigger");
     level thread dialog_right_path_top();
-    left_triggers = getentarray("ev2_left_side_triggers", "script_noteworthy");
-    for (i = 0; i < left_triggers.size; i++) {
+    left_triggers = getEntArray("ev2_left_side_triggers", "script_noteworthy");
+    for(i = 0; i < left_triggers.size; i++) {
       left_triggers[i] trigger_off();
     }
   }
@@ -164,8 +164,8 @@ ev1_disable_right_side_triggers() {
   if(players.size == 1) {
     trigger = getent("ev1_left_end", "targetname");
     trigger waittill("trigger");
-    right_triggers = getentarray("ev2_right_side_triggers", "script_noteworthy");
-    for (i = 0; i < right_triggers.size; i++) {
+    right_triggers = getEntArray("ev2_right_side_triggers", "script_noteworthy");
+    for(i = 0; i < right_triggers.size; i++) {
       right_triggers[i] trigger_off();
     }
   }
@@ -251,9 +251,9 @@ ev1_trench_think() {
 goal_react_to_player() {
   self endon("death");
   self endon("goal");
-  while (1) {
+  while(1) {
     players = get_players();
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       if(distance(players[i].origin, self.origin) < 200) {
         self resume_fire();
         return;
@@ -337,14 +337,14 @@ ev1_right_side_tank_battle() {
   tank1 waittill("turret_on_target");
   tank1 FireWeapon();
   level notify("target_1_destroyed");
-  playfx(level._effect["smoke_column1"], tank1_target.origin);
+  playFX(level._effect["smoke_column1"], tank1_target.origin);
   wait(4);
   tank2_target = getent("ev1_tank_2_target", "targetname");
   tank2 SetTurretTargetEnt(tank2_target);
   tank2 waittill("turret_on_target");
   tank2 FireWeapon();
   level notify("target_2_destroyed");
-  playfx(level._effect["smoke_column1"], tank2_target.origin);
+  playFX(level._effect["smoke_column1"], tank2_target.origin);
   tank3 startpath();
   tank4 startpath();
   fire_node = getvehiclenode("ev1_tank_3_peak", "script_noteworthy");
@@ -353,35 +353,35 @@ ev1_right_side_tank_battle() {
   tank3 SetTurretTargetEnt(tank2);
   tank3 waittill("turret_on_target");
   tank3 FireWeapon();
-  playfx(level._effect["tank_blow_up"], tank2.origin);
-  playfx(level._effect["tank_smoke_column"], tank2.origin);
+  playFX(level._effect["tank_blow_up"], tank2.origin);
+  playFX(level._effect["tank_smoke_column"], tank2.origin);
   tank2 doDamage(tank2.health + 25, (0, 180, 48));
   tank2 notify("death");
   wait(2);
   tank1 SetTurretTargetEnt(tank3);
   tank1 waittill("turret_on_target");
   tank1 FireWeapon();
-  playfx(level._effect["tank_blow_up"], tank3.origin);
-  playfx(level._effect["tank_smoke_column"], tank3.origin);
+  playFX(level._effect["tank_blow_up"], tank3.origin);
+  playFX(level._effect["tank_smoke_column"], tank3.origin);
   tank3 doDamage(tank3.health + 25, (0, 180, 48));
   tank3 notify("death");
   wait(3);
   tank4 SetTurretTargetEnt(tank1);
   tank4 waittill("turret_on_target");
   tank4 FireWeapon();
-  playfx(level._effect["tree_brush_fire_small"], tank1.origin + (0, 0, 80));
+  playFX(level._effect["tree_brush_fire_small"], tank1.origin + (0, 0, 80));
   wait(3);
   tank1 SetTurretTargetEnt(tank4);
   tank1 waittill("turret_on_target");
   tank1 FireWeapon();
-  playfx(level._effect["tank_blow_up"], tank4.origin);
-  playfx(level._effect["tank_smoke_column"], tank4.origin);
+  playFX(level._effect["tank_blow_up"], tank4.origin);
+  playFX(level._effect["tank_smoke_column"], tank4.origin);
   tank4 doDamage(tank4.health + 25, (0, 180, 48));
   tank4 notify("death");
   wait(2);
   level thread ev1_burning_tank_commander(tank1);
   wait(2);
-  playfx(level._effect["tree_brush_fire"], tank1.origin + (0, 0, 80));
+  playFX(level._effect["tree_brush_fire"], tank1.origin + (0, 0, 80));
   tank1 doDamage(tank1.health + 25, (0, 180, 48));
   tank1 notify("death");
 }
@@ -399,7 +399,7 @@ ev1_trench_right_blow_up_guy_think() {
   self endon("death");
   self.animname = "generic";
   self waittill("goal");
-  playfx(level._effect["dirt_blow_up"], (4467, -194.5, -726.2));
+  playFX(level._effect["dirt_blow_up"], (4467, -194.5, -726.2));
   wait(0.1);
   node = getnode("ev1_trench_right_blow_up_node", "script_noteworthy");
   node thread anim_single_solo(self, "death_explosion_far");
@@ -430,7 +430,7 @@ ev1_drone_trigers_manager() {
 
 temp_skip_to_event_2() {
   enemies = getAIArray("axis");
-  for (i = 0; i < enemies.size; i++) {
+  for(i = 0; i < enemies.size; i++) {
     if(isalive(enemies[i])) {
       if(!isDefined(enemies[i].script_noteworthy) || enemies[i].script_noteworthy != "forest_end_guys") {
         enemies[i] enemies_delayed_kill(5);
@@ -506,7 +506,7 @@ ev1_plane_bomb_m() {
   level.hero1 thread scripted_molotov_throw("molotov_toss_point_1", "event_2_ends");
   wait(4);
   bomb_struct_1 = getstruct("ev1_plane_bomb_m_1", "targetname");
-  playfx(level._effect["napalm"], bomb_struct_1.origin);
+  playFX(level._effect["napalm"], bomb_struct_1.origin);
   playsoundatposition("bomb1L", bomb_struct_1.origin);
 }
 
@@ -516,7 +516,7 @@ ev1_plane_bomb_l() {
   spawn_trigger waittill("trigger");
   wait(3);
   bomb_struct_1 = getstruct("ev1_plane_bomb_l_1", "targetname");
-  playfx(level._effect["napalm"], bomb_struct_1.origin);
+  playFX(level._effect["napalm"], bomb_struct_1.origin);
   playsoundatposition("bomb1L", bomb_struct_1.origin);
 }
 
@@ -526,7 +526,7 @@ ev1_plane_bomb_r() {
   spawn_trigger waittill("trigger");
   wait(3);
   bomb_struct_1 = getstruct("ev1_plane_bomb_r_1", "targetname");
-  playfx(level._effect["napalm"], bomb_struct_1.origin);
+  playFX(level._effect["napalm"], bomb_struct_1.origin);
   playsoundatposition("bomb1L", bomb_struct_1.origin);
 }
 
@@ -540,14 +540,14 @@ ev1_bombing_plane(node_name) {
   plane attachPath(start_node);
   plane startpath();
   plane.script_numbombs = 3;
-  plane playsound("fly_by3");
+  plane playSound("fly_by3");
   plane waittill("reached_end_node");
   plane delete();
 }
 
 ev1_bombing_planes(node_name) {
   start_node_array = getvehiclenodearray(node_name, "targetname");
-  for (i = 0; i < start_node_array.size; i++) {
+  for(i = 0; i < start_node_array.size; i++) {
     plane = spawnvehicle("vehicle_rus_airplane_il2",
       "plane",
       "stuka",
@@ -556,7 +556,7 @@ ev1_bombing_planes(node_name) {
     plane attachPath(start_node_array[i]);
     plane startpath();
     plane.script_numbombs = 3;
-    plane playsound("fly_by3");
+    plane playSound("fly_by3");
     plane thread delete_at_end_node();
     wait(randomfloat(3) + 0.5);
   }
@@ -574,7 +574,7 @@ ev2_tank_mantle() {
   tiger = getent("ev2_tiger0", "targetname");
   t34.health = 99999;
   tiger.health = 99999;
-  tiger setmodel("vehicle_ger_tracked_king_tiger_d_inter");
+  tiger setModel("vehicle_ger_tracked_king_tiger_d_inter");
   tiger.tankmantle_tossbacks_remaining = 0;
   level thread dialog_mantle_intro();
   t34 FireWeapon();
@@ -583,7 +583,7 @@ ev2_tank_mantle() {
   tiger SetTurretTargetVec(t34.origin);
   tiger waittill("turret_on_target");
   tiger FireWeapon();
-  playfx(level._effect["tank_blow_up"], t34.origin);
+  playFX(level._effect["tank_blow_up"], t34.origin);
   t34 notify("death");
   wait(1);
   tiger SetTurretTargetVec((2031.5, 5150.5, -275.6));
@@ -605,15 +605,15 @@ kill_player_early() {
 dialog_mantle_single_tank() {
   level endon("ev2_tank_mantled");
   trigger = getent("tank_mantle_in_position", "targetname");
-  while (1) {
+  while(1) {
     if(level.hero1 istouching(trigger) && level.hero2 istouching(trigger)) {
       break;
     }
     wait(0.1);
   }
-  while (1) {
+  while(1) {
     players = get_players();
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       if(distance(players[i].origin, level.hero1.origin) < 400) {
         level.hero1 say_dialogue("reznov", "tank_straight");
         level.hero2 say_dialogue("chernov", "how_armor");
@@ -654,19 +654,19 @@ ev1_floating_body(anim_name, anim_loop_name) {
   start_node = getstruct("anim_ev1_river_bodies", "targetname");
   german = spawn_fake_guy_to_anim("anim_ev1_river_bodies", "axis", "generic", "guy");
   start_node anim_single_solo(german, anim_name, undefined, german);
-  while (1) {
+  while(1) {
     start_node anim_single_solo(german, anim_loop_name, undefined, german);
   }
 }
 
 cough_run_manager() {
   level endon("event_2_ends");
-  trigger1s = getentarray("molotov_path_right_2", "script_noteworthy");
-  trigger2s = getentarray("forest_cough_trigger", "script_noteworthy");
-  for (i = 0; i < trigger1s.size; i++) {
+  trigger1s = getEntArray("molotov_path_right_2", "script_noteworthy");
+  trigger2s = getEntArray("forest_cough_trigger", "script_noteworthy");
+  for(i = 0; i < trigger1s.size; i++) {
     level thread detect_trigger_and_cough(trigger1s[i]);
   }
-  for (i = 0; i < trigger2s.size; i++) {
+  for(i = 0; i < trigger2s.size; i++) {
     level thread detect_trigger_and_cough(trigger2s[i]);
   }
 }
@@ -680,7 +680,7 @@ detect_trigger_and_cough(trigger) {
   second_closest = 0;
   closest_dist = 88888;
   second_closest_dist = 99999;
-  for (i = 0; i < allies_ai.size; i++) {
+  for(i = 0; i < allies_ai.size; i++) {
     distance_from_player = distance(players[0].origin, allies_ai[i].origin);
     if(distance_from_player < closest_dist) {
       second_closest = closest;
@@ -729,7 +729,7 @@ mg_guide() {
   temp_target.script_team = "allies";
   temp_target.health = 999999;
   gunner = mg_t getturretowner();
-  while (!isDefined(gunner)) {
+  while(!isDefined(gunner)) {
     wait(0.5);
     gunner = mg_t getturretowner();
   }
@@ -757,7 +757,7 @@ detect_player_behind_mg(mg_t, gunner) {
 detect_player_hitting_gunner(gunner, mg_t) {
   level endon("player_behind_mg");
   level endon("mg_not_used");
-  while (1) {
+  while(1) {
     gunner waittill("damage", amount, attacker, direction_vec, point, type);
     if(isplayer(attacker)) {
       gunner.health = 50;
@@ -775,7 +775,7 @@ detect_player_hitting_gunner(gunner, mg_t) {
 check_for_gunner_leaving_mg(gunner, mg_t) {
   level endon("player_behind_mg");
   level endon("mg_gunner_shot");
-  while (1) {
+  while(1) {
     if(isturretactive(mg_t) == false) {
       gunner.health = 50;
       mg_t setturretignoregoals(false);

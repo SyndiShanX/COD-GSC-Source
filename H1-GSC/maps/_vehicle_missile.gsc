@@ -22,7 +22,7 @@ detachall_on_death() {
 turret_think() {
   self endon("death");
 
-  if(!isdefined(self.script_turret)) {
+  if(!isDefined(self.script_turret)) {
     return;
   }
   if(self.script_turret == 0) {
@@ -30,10 +30,10 @@ turret_think() {
   }
   self.attackradius = 30000;
 
-  if(isdefined(self.radius))
+  if(isDefined(self.radius))
     self.attackradius = self.radius;
 
-  while (!isdefined(level.cobrapilot_difficulty))
+  while(!isDefined(level.cobrapilot_difficulty))
     wait 0.05;
 
   var_0 = 1.0;
@@ -52,17 +52,17 @@ turret_think() {
   if(getdvar("cobrapilot_debug") == "1")
     iprintln("surface-to-air missile range difficultyScaler = " + var_0);
 
-  for (;;) {
+  for(;;) {
     wait(2 + randomfloat(1));
     var_1 = undefined;
     var_1 = maps\_helicopter_globals::getenemytarget(self.attackradius, undefined, 0, 1);
 
-    if(!isdefined(var_1)) {
+    if(!isDefined(var_1)) {
       continue;
     }
     var_2 = var_1.origin;
 
-    if(isdefined(var_1.script_targetoffset_z))
+    if(isDefined(var_1.script_targetoffset_z))
       var_2 = var_2 + (0, 0, var_1.script_targetoffset_z);
 
     self setturrettargetvec(var_2);
@@ -83,7 +83,7 @@ turret_think() {
       self notify("shoot_target", var_1);
       self waittill("missile_fired", var_4);
 
-      if(isdefined(var_4)) {
+      if(isDefined(var_4)) {
         if(level.cobrapilot_difficulty == "hard") {
           wait(1 + randomfloat(2));
           continue;
@@ -123,11 +123,11 @@ within_attack_range(var_0) {
 firemissile() {
   self endon("death");
 
-  for (;;) {
+  for(;;) {
     self waittill("shoot_target", var_0);
     var_1 = undefined;
 
-    if(!isdefined(var_0.script_targetoffset_z))
+    if(!isDefined(var_0.script_targetoffset_z))
       var_0.script_targetoffset_z = 0;
 
     var_2 = (0, 0, var_0.script_targetoffset_z);
@@ -137,7 +137,7 @@ firemissile() {
     if(getdvar("cobrapilot_debug") == "1")
       level thread draw_missile_target_line(var_1, var_0, var_2);
 
-    if(!isdefined(var_0.incomming_missiles))
+    if(!isDefined(var_0.incomming_missiles))
       var_0.incomming_missiles = [];
 
     var_0.incomming_missiles = common_scripts\utility::array_add(var_0.incomming_missiles, var_1);
@@ -158,21 +158,21 @@ firemissile() {
 draw_missile_target_line(var_0, var_1, var_2) {
   var_0 endon("death");
 
-  for (;;)
+  for(;;)
     wait 0.05;
 }
 
 tryreload() {
-  if(!isdefined(self.missileammo))
+  if(!isDefined(self.missileammo))
     self.missileammo = 0;
 
-  if(!isdefined(self.missilelaunchnexttag))
+  if(!isDefined(self.missilelaunchnexttag))
     self.missilelaunchnexttag = 0;
 
   if(self.missileammo > 0) {
     return;
   }
-  for (var_0 = 0; var_0 < self.missiletags.size; var_0++) {
+  for(var_0 = 0; var_0 < self.missiletags.size; var_0++) {
     if(maps\_utility::hastag(self.missilemodel, self.missiletags[var_0]))
       self attach(self.missilemodel, self.missiletags[var_0]);
   }

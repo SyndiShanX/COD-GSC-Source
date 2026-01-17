@@ -54,9 +54,9 @@ init() {
   precacheitem("lightning_hands_zm");
   precachemodel("p6_zm_al_shock_box_on");
   precacheshader("waypoint_revive_afterlife");
-  a_afterlife_interact = getentarray("afterlife_interact", "targetname");
+  a_afterlife_interact = getEntArray("afterlife_interact", "targetname");
   array_thread(a_afterlife_interact, ::afterlife_interact_object_think);
-  level.zombie_spawners = getentarray("zombie_spawner", "script_noteworthy");
+  level.zombie_spawners = getEntArray("zombie_spawner", "script_noteworthy");
   array_thread(level.zombie_spawners, ::add_spawn_function, ::afterlife_zombie_damage);
   a_afterlife_triggers = getstructarray("afterlife_trigger", "targetname");
 
@@ -336,7 +336,7 @@ afterlife_enter() {
   self enableafterlife();
   self.str_living_model = self.model;
   self.str_living_view = self getviewmodel();
-  self setmodel("c_zom_hero_ghost_fb");
+  self setModel("c_zom_hero_ghost_fb");
   self setviewmodel("c_zom_ghost_viewhands");
   self thread afterlife_doors_open();
   self setclientfieldtoplayer("player_in_afterlife", 1);
@@ -388,7 +388,7 @@ afterlife_leave(b_revived) {
   self allowstand(1);
   self allowcrouch(1);
   self allowprone(1);
-  self setmodel(self.str_living_model);
+  self setModel(self.str_living_model);
   self setviewmodel(self.str_living_view);
 
   if(self.e_afterlife_corpse.revivetrigger.origin != self.e_afterlife_corpse.origin)
@@ -497,7 +497,7 @@ afterlife_laststand(b_electric_chair) {
   playsoundatposition("zmb_afterlife_spawn_leave", self.e_afterlife_corpse.origin);
   self afterlife_leave();
   self thread afterlife_revive_invincible();
-  self playsound("zmb_afterlife_revived_gasp");
+  self playSound("zmb_afterlife_revived_gasp");
 }
 
 afterlife_clean_up_on_disconnect() {
@@ -585,8 +585,8 @@ afterlife_mana_watch(corpse) {
 
 afterlife_doors_open() {
   n_network_sent = 0;
-  a_show = getentarray("afterlife_show", "targetname");
-  a_show = arraycombine(a_show, getentarray("afterlife_prop", "script_noteworthy"), 0, 0);
+  a_show = getEntArray("afterlife_show", "targetname");
+  a_show = arraycombine(a_show, getEntArray("afterlife_prop", "script_noteworthy"), 0, 0);
 
   foreach(ent in a_show) {
     n_network_sent++;
@@ -600,11 +600,11 @@ afterlife_doors_open() {
       ent setvisibletoplayer(self);
   }
 
-  a_hide = getentarray("afterlife_door", "targetname");
-  a_hide = arraycombine(a_hide, getentarray("zombie_door", "targetname"), 0, 0);
-  a_hide = arraycombine(a_hide, getentarray("quest_trigger", "script_noteworthy"), 0, 0);
-  a_hide = arraycombine(a_hide, getentarray("trap_trigger", "script_noteworthy"), 0, 0);
-  a_hide = arraycombine(a_hide, getentarray("travel_trigger", "script_noteworthy"), 0, 0);
+  a_hide = getEntArray("afterlife_door", "targetname");
+  a_hide = arraycombine(a_hide, getEntArray("zombie_door", "targetname"), 0, 0);
+  a_hide = arraycombine(a_hide, getEntArray("quest_trigger", "script_noteworthy"), 0, 0);
+  a_hide = arraycombine(a_hide, getEntArray("trap_trigger", "script_noteworthy"), 0, 0);
+  a_hide = arraycombine(a_hide, getEntArray("travel_trigger", "script_noteworthy"), 0, 0);
 
   foreach(ent in a_hide) {
     n_network_sent++;
@@ -628,8 +628,8 @@ afterlife_doors_open() {
 
 afterlife_doors_close() {
   n_network_sent = 0;
-  a_hide = getentarray("afterlife_show", "targetname");
-  a_hide = arraycombine(a_hide, getentarray("afterlife_prop", "script_noteworthy"), 0, 0);
+  a_hide = getEntArray("afterlife_show", "targetname");
+  a_hide = arraycombine(a_hide, getEntArray("afterlife_prop", "script_noteworthy"), 0, 0);
 
   foreach(ent in a_hide) {
     n_network_sent++;
@@ -643,11 +643,11 @@ afterlife_doors_close() {
       ent setinvisibletoplayer(self);
   }
 
-  a_show = getentarray("afterlife_door", "targetname");
-  a_show = arraycombine(a_show, getentarray("zombie_door", "targetname"), 0, 0);
-  a_show = arraycombine(a_show, getentarray("quest_trigger", "script_noteworthy"), 0, 0);
-  a_show = arraycombine(a_show, getentarray("trap_trigger", "script_noteworthy"), 0, 0);
-  a_show = arraycombine(a_show, getentarray("travel_trigger", "script_noteworthy"), 0, 0);
+  a_show = getEntArray("afterlife_door", "targetname");
+  a_show = arraycombine(a_show, getEntArray("zombie_door", "targetname"), 0, 0);
+  a_show = arraycombine(a_show, getEntArray("quest_trigger", "script_noteworthy"), 0, 0);
+  a_show = arraycombine(a_show, getEntArray("trap_trigger", "script_noteworthy"), 0, 0);
+  a_show = arraycombine(a_show, getEntArray("travel_trigger", "script_noteworthy"), 0, 0);
 
   foreach(ent in a_show) {
     n_network_sent++;
@@ -905,9 +905,7 @@ afterlife_can_revive(revivee) {
   ignore_touch_checks = 0;
 
   if(isDefined(level.revive_trigger_should_ignore_sight_checks)) {
-    ignore_sight_checks = [
-      [level.revive_trigger_should_ignore_sight_checks]
-    ](self);
+    ignore_sight_checks = [[level.revive_trigger_should_ignore_sight_checks]](self);
 
     if(ignore_sight_checks && isDefined(revivee.revivetrigger.beingrevived) && revivee.revivetrigger.beingrevived == 1)
       ignore_touch_checks = 1;
@@ -986,12 +984,12 @@ afterlife_revive_do_revive(playerbeingrevived, revivergun) {
   self.revivetexthud settext(&"GAME_REVIVING");
   self thread check_for_failed_revive(playerbeingrevived);
   e_fx = spawn("script_model", playerbeingrevived.revivetrigger.origin);
-  e_fx setmodel("tag_origin");
+  e_fx setModel("tag_origin");
   e_fx thread revive_fx_clean_up_on_disconnect(playerbeingrevived);
-  playfxontag(level._effect["afterlife_leave"], e_fx, "tag_origin");
+  playFXOnTag(level._effect["afterlife_leave"], e_fx, "tag_origin");
 
   if(isDefined(playloop) && playloop)
-    e_fx playloopsound("zmb_afterlife_reviving", 0.05);
+    e_fx playLoopSound("zmb_afterlife_reviving", 0.05);
 
   while(self is_reviving_afterlife(playerbeingrevived)) {
     wait 0.05;
@@ -1019,8 +1017,7 @@ afterlife_revive_do_revive(playerbeingrevived, revivergun) {
   if(isDefined(self.revivetexthud))
     self.revivetexthud destroy();
 
-  if(isDefined(playerbeingrevived.revivetrigger.auto_revive) && playerbeingrevived.revivetrigger.auto_revive == 1) {
-  } else if(!revived) {
+  if(isDefined(playerbeingrevived.revivetrigger.auto_revive) && playerbeingrevived.revivetrigger.auto_revive == 1) {} else if(!revived) {
     if(isplayer(playerbeingrevived))
       playerbeingrevived stoprevive(self);
   }
@@ -1060,7 +1057,7 @@ is_reviving_afterlife(revivee) {
 afterlife_save_loadout() {
   primaries = self getweaponslistprimaries();
   currentweapon = self getcurrentweapon();
-  self.loadout = spawnstruct();
+  self.loadout = spawnStruct();
   self.loadout.player = self;
   self.loadout.weapons = [];
   self.loadout.score = self.score;
@@ -1238,7 +1235,7 @@ afterlife_fake_death() {
       wait 0.05;
   }
 
-  playfx(level._effect["afterlife_enter"], self.origin);
+  playFX(level._effect["afterlife_enter"], self.origin);
   self.ignoreme = 1;
   self enableinvulnerability();
   self freezecontrols(1);
@@ -1250,9 +1247,7 @@ afterlife_fake_revive() {
   playsoundatposition("zmb_afterlife_spawn_leave", self.origin);
 
   if(flag("afterlife_start_over")) {
-    spawnpoint = [
-      [level.afterlife_get_spawnpoint]
-    ]();
+    spawnpoint = [[level.afterlife_get_spawnpoint]]();
     trace_start = spawnpoint.origin;
     trace_end = spawnpoint.origin + vectorscale((0, 0, -1), 200.0);
     respawn_trace = playerphysicstrace(trace_start, trace_end);
@@ -1442,12 +1437,12 @@ afterlife_jump_watch(corpse) {
 }
 
 afterlife_trigger_create(s_origin) {
-  s_origin.unitrigger_stub = spawnstruct();
+  s_origin.unitrigger_stub = spawnStruct();
   s_origin.unitrigger_stub.origin = s_origin.origin;
   s_origin.unitrigger_stub.radius = 36;
   s_origin.unitrigger_stub.height = 256;
   s_origin.unitrigger_stub.script_unitrigger_type = "unitrigger_radius_use";
-  s_origin.unitrigger_stub.hint_string = & "ZM_PRISON_AFTERLIFE_KILL";
+  s_origin.unitrigger_stub.hint_string = &"ZM_PRISON_AFTERLIFE_KILL";
   s_origin.unitrigger_stub.cursor_hint = "HINT_NOICON";
   s_origin.unitrigger_stub.require_look_at = 1;
   s_origin.unitrigger_stub.prompt_and_visibility_func = ::afterlife_trigger_visibility;
@@ -1492,7 +1487,7 @@ afterlife_trigger_think() {
     self waittill("trigger", player);
 
     if(player.lives <= 0) {
-      self playsound("zmb_no_cha_ching");
+      self playSound("zmb_no_cha_ching");
       continue;
     }
 
@@ -1503,7 +1498,7 @@ afterlife_trigger_think() {
 
     if(isDefined(player.afterlife) && !player.afterlife) {
       self setinvisibletoplayer(player, 1);
-      self playsound("zmb_afterlife_trigger_activate");
+      self playSound("zmb_afterlife_trigger_activate");
       player playsoundtoplayer("zmb_afterlife_trigger_electrocute", player);
       player thread afterlife_trigger_used_vo();
       self sethintstring("");
@@ -1512,9 +1507,9 @@ afterlife_trigger_think() {
       player.afterlife = 1;
       player thread afterlife_laststand();
       e_fx = spawn("script_model", self.origin);
-      e_fx setmodel("tag_origin");
+      e_fx setModel("tag_origin");
       e_fx.angles = vectorscale((1, 0, 0), 90.0);
-      playfxontag(level._effect["afterlife_kill_point_fx"], e_fx, "tag_origin");
+      playFXOnTag(level._effect["afterlife_kill_point_fx"], e_fx, "tag_origin");
       wait 2;
       e_fx delete();
       self sethintstring(&"ZM_PRISON_AFTERLIFE_KILL");
@@ -1534,9 +1529,9 @@ afterlife_interact_object_think() {
 
   n_count = 0;
   self.health = 5000;
-  self setcandamage(1);
+  self setCanDamage(1);
   self useanimtree(#animtree);
-  self playloopsound("zmb_afterlife_shockbox_off", 1);
+  self playLoopSound("zmb_afterlife_shockbox_off", 1);
 
   if(!isDefined(level.shockbox_anim)) {
     level.shockbox_anim["on"] = % fxanim_zom_al_shock_box_on_anim;
@@ -1551,10 +1546,10 @@ afterlife_interact_object_think() {
     else {
       if(issubstr(self.model, "p6_zm_al_shock_box")) {
         trig_spawn_offset = (0, 11, 46);
-        str_hint = & "ZM_PRISON_AFTERLIFE_INTERACT";
+        str_hint = &"ZM_PRISON_AFTERLIFE_INTERACT";
       } else if(issubstr(self.model, "p6_zm_al_power_station_panels")) {
         trig_spawn_offset = (32, 35, 58);
-        str_hint = & "ZM_PRISON_AFTERLIFE_OVERLOAD";
+        str_hint = &"ZM_PRISON_AFTERLIFE_OVERLOAD";
       }
 
       afterlife_interact_hint_trigger_create(self, trig_spawn_offset, str_hint);
@@ -1583,17 +1578,17 @@ afterlife_interact_object_think() {
             } else if(isDefined(self.t_bump))
               self.t_bump sethintstring("");
 
-            self playloopsound("zmb_afterlife_shockbox_on", 1);
+            self playLoopSound("zmb_afterlife_shockbox_on", 1);
 
             if(self.model == "p6_zm_al_shock_box_off") {
               if(!isDefined(self.playing_fx)) {
-                playfxontag(level._effect["box_activated"], self, "tag_origin");
+                playFXOnTag(level._effect["box_activated"], self, "tag_origin");
                 self.playing_fx = 1;
                 self thread afterlife_interact_object_fx_cooldown();
-                self playsound("zmb_powerpanel_activate");
+                self playSound("zmb_powerpanel_activate");
               }
 
-              self setmodel("p6_zm_al_shock_box_on");
+              self setModel("p6_zm_al_shock_box_on");
               self setanim(level.shockbox_anim["on"]);
             }
 
@@ -1601,10 +1596,10 @@ afterlife_interact_object_think() {
 
             if(n_total_interact_count <= 0 || n_count < n_total_interact_count) {
               self waittill("afterlife_interact_reset");
-              self playloopsound("zmb_afterlife_shockbox_off", 1);
+              self playLoopSound("zmb_afterlife_shockbox_off", 1);
 
               if(self.model == "p6_zm_al_shock_box_on") {
-                self setmodel("p6_zm_al_shock_box_off");
+                self setModel("p6_zm_al_shock_box_off");
                 self setanim(level.shockbox_anim["off"]);
               }
 
@@ -1626,8 +1621,8 @@ afterlife_interact_object_think() {
 }
 
 afterlife_interact_hint_trigger_create(m_interact, v_trig_offset, str_hint) {
-  m_interact.unitrigger_stub = spawnstruct();
-  m_interact.unitrigger_stub.origin = m_interact.origin + anglestoforward(m_interact.angles) * v_trig_offset[0] + anglestoright(m_interact.angles) * v_trig_offset[1] + anglestoup(m_interact.angles) * v_trig_offset[2];
+  m_interact.unitrigger_stub = spawnStruct();
+  m_interact.unitrigger_stub.origin = m_interact.origin + anglesToForward(m_interact.angles) * v_trig_offset[0] + anglestoright(m_interact.angles) * v_trig_offset[1] + anglestoup(m_interact.angles) * v_trig_offset[2];
   m_interact.unitrigger_stub.radius = 40;
   m_interact.unitrigger_stub.height = 64;
   m_interact.unitrigger_stub.script_unitrigger_type = "unitrigger_radius_use";
@@ -1730,24 +1725,24 @@ afterlife_zapped() {
 
     if(isDefined(nd_target)) {
       v_fx_offset = vectorscale((0, 0, 1), 40.0);
-      playfx(level._effect["afterlife_teleport"], self.origin);
+      playFX(level._effect["afterlife_teleport"], self.origin);
       playsoundatposition("zmb_afterlife_zombie_warp_out", self.origin);
       self hide();
       linker = spawn("script_model", self.origin + v_fx_offset);
-      linker setmodel("tag_origin");
-      playfxontag(level._effect["teleport_ball"], linker, "tag_origin");
+      linker setModel("tag_origin");
+      playFXOnTag(level._effect["teleport_ball"], linker, "tag_origin");
       linker thread linker_delete_watch(self);
       self linkto(linker);
       linker moveto(nd_target.origin + v_fx_offset, 1);
       linker waittill("movedone");
       linker delete();
-      playfx(level._effect["afterlife_teleport"], self.origin);
+      playFX(level._effect["afterlife_teleport"], self.origin);
       playsoundatposition("zmb_afterlife_zombie_warp_in", self.origin);
       self show();
     } else {
       iprintln("Could not teleport");
 
-      playfx(level._effect["afterlife_teleport"], self.origin);
+      playFX(level._effect["afterlife_teleport"], self.origin);
       playsoundatposition("zmb_afterlife_zombie_warp_out", self.origin);
       level.zombie_total++;
       self delete();
@@ -1793,8 +1788,8 @@ linker_delete_watch(ai_zombie) {
 
 afterlife_zapped_fx() {
   self endon("death");
-  playfxontag(level._effect["elec_torso"], self, "J_SpineLower");
-  self playsound("zmb_elec_jib_zombie");
+  playFXOnTag(level._effect["elec_torso"], self, "J_SpineLower");
+  self playSound("zmb_elec_jib_zombie");
   wait 1;
   tagarray = [];
   tagarray[0] = "J_Elbow_LE";
@@ -1802,10 +1797,10 @@ afterlife_zapped_fx() {
   tagarray[2] = "J_Knee_RI";
   tagarray[3] = "J_Knee_LE";
   tagarray = array_randomize(tagarray);
-  playfxontag(level._effect["elec_md"], self, tagarray[0]);
-  self playsound("zmb_elec_jib_zombie");
+  playFXOnTag(level._effect["elec_md"], self, tagarray[0]);
+  self playSound("zmb_elec_jib_zombie");
   wait 1;
-  self playsound("zmb_elec_jib_zombie");
+  self playSound("zmb_elec_jib_zombie");
   tagarray[0] = "J_Wrist_RI";
   tagarray[1] = "J_Wrist_LE";
 
@@ -1815,8 +1810,8 @@ afterlife_zapped_fx() {
   }
 
   tagarray = array_randomize(tagarray);
-  playfxontag(level._effect["elec_sm"], self, tagarray[0]);
-  playfxontag(level._effect["elec_sm"], self, tagarray[1]);
+  playFXOnTag(level._effect["elec_sm"], self, tagarray[0]);
+  playFXOnTag(level._effect["elec_sm"], self, tagarray[1]);
 }
 
 enable_afterlife_prop() {
@@ -1891,5 +1886,5 @@ conscience_vo_ended_early(str_alias) {
 afterlife_trigger_used_vo() {
   a_vo = level.exert_sounds[self.characterindex + 1]["hitlrg"];
   n_index = randomint(a_vo.size);
-  self playsound(a_vo[n_index]);
+  self playSound(a_vo[n_index]);
 }

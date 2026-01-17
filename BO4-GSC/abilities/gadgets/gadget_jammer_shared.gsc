@@ -15,7 +15,6 @@
 #include scripts\core_common\values_shared;
 #include scripts\killstreaks\killstreaks_shared;
 #include scripts\weapons\weaponobjects;
-
 #namespace jammer;
 
 init_shared() {
@@ -47,7 +46,7 @@ setupcallbacks() {
   callback::on_finalize_initialization(&function_1c601b99);
 }
 
-private registerclientfields() {
+registerclientfields() {
   clientfield::register("scriptmover", "isJammed", 9000, 1, "int");
   clientfield::register("missile", "isJammed", 9000, 1, "int");
   clientfield::register("vehicle", "isJammed", 9000, 1, "int");
@@ -56,7 +55,7 @@ private registerclientfields() {
   clientfield::register("toplayer", "jammedvehpostfx", 9000, 1, "int");
 }
 
-private function_1a50ce7b(watcher) {
+function_1a50ce7b(watcher) {
   watcher.ownergetsassist = 1;
   watcher.ignoredirection = 1;
   watcher.deleteonplayerspawn = 0;
@@ -130,7 +129,7 @@ onplayerspawned() {
   self.isjammed = 0;
 }
 
-private function_7d81a4ff(watcher, player) {
+function_7d81a4ff(watcher, player) {
   if(!isDefined(self.var_88d76fba)) {
     self.var_88d76fba = [];
   }
@@ -148,16 +147,16 @@ private function_7d81a4ff(watcher, player) {
     return;
   }
 
-  if(waitresult._notify == #"explode" && isDefined(waitresult.position)) {
+  if(waitresult._notify == # "explode" && isDefined(waitresult.position)) {
     self thread function_87c540c0(self, waitresult.position, player);
   }
 }
 
-private function_2572e9cc(attackingplayer, var_fb5e3b16) {
+function_2572e9cc(attackingplayer, var_fb5e3b16) {
   scoreevents::processscoreevent(var_fb5e3b16, attackingplayer, undefined, level.var_578f7c6d.weapon);
 }
 
-private function_87c540c0(jammer, origin, attackingplayer) {
+function_87c540c0(jammer, origin, attackingplayer) {
   entities = getentitiesinradius(origin, level.var_578f7c6d.weapon.explosionradius);
   var_545dd758 = 0;
   var_480b4b92 = 0;
@@ -189,7 +188,7 @@ private function_87c540c0(jammer, origin, attackingplayer) {
   }
 }
 
-private function_e27c41b4(jammer, entity, attackingplayer) {
+function_e27c41b4(jammer, entity, attackingplayer) {
   entity endon(#"death");
 
   if(!isDefined(entity)) {
@@ -207,7 +206,7 @@ private function_e27c41b4(jammer, entity, attackingplayer) {
     function_1c430dad(entity, 1);
     function_58f8bf08(jammer, attackingplayer, undefined);
     entity callback::callback(#"hash_7140c3848cbefaa1", {
-      #attackingplayer: attackingplayer, 
+      #attackingplayer: attackingplayer,
       #jammer: jammer
     });
     return true;
@@ -231,9 +230,9 @@ private function_e27c41b4(jammer, entity, attackingplayer) {
   return true;
 }
 
-private function_b8c5ab9c(jammer, player, attackingplayer) {
+function_b8c5ab9c(jammer, player, attackingplayer) {
   player notify(#"hash_4f2e183cc0ec68bd");
-  player endon(#"death", #"hash_4f2e183cc0ec68bd");
+  player endon(#"death", # "hash_4f2e183cc0ec68bd");
   player clientfield::set_to_player("isJammed", 1);
   player.isjammed = 1;
   player.var_fe1ebada = attackingplayer;
@@ -249,7 +248,7 @@ private function_b8c5ab9c(jammer, player, attackingplayer) {
   function_d88f3e48(player);
 }
 
-private function_ca8a005e(jammer, gadget, attackingplayer) {
+function_ca8a005e(jammer, gadget, attackingplayer) {
   gadget endon(#"death");
 
   if(!isDefined(gadget.weapon)) {
@@ -288,7 +287,7 @@ function_4a82368f(entity, owner) {
     owner clientfield::set_to_player("jammedvehpostfx", 1);
   }
 
-  entity waittill(#"death", #"remote_weapon_end", #"hash_2476803a0d5fa572");
+  entity waittill(#"death", # "remote_weapon_end", # "hash_2476803a0d5fa572");
 
   if(!isDefined(owner)) {
     return;
@@ -308,7 +307,7 @@ function_1c430dad(entity, isjammed) {
   entity.emped = isjammed;
 }
 
-private function_d88f3e48(entity) {
+function_d88f3e48(entity) {
   if(!isDefined(entity)) {
     return;
   }
@@ -348,12 +347,12 @@ function_b2e496fa(watcher) {
   self delete();
 }
 
-private function_b16c8865(entity, attackingplayer) {
+function_b16c8865(entity, attackingplayer) {
   if(self == entity) {
     return false;
   }
 
-  if(!isplayer(entity) && (!isDefined(entity.model) || entity.model == #"")) {
+  if(!isplayer(entity) && (!isDefined(entity.model) || entity.model == # "")) {
     return false;
   }
 
@@ -376,13 +375,13 @@ private function_b16c8865(entity, attackingplayer) {
   return true;
 }
 
-private function_7b151daa(player) {
+function_7b151daa(player) {
   return isDefined(player.isjammed) && player.isjammed;
 }
 
 function_5f86757d() {
   level endon(#"game_ended");
-  waitresult = self waittill(#"explode", #"death");
+  waitresult = self waittill(#"explode", # "death");
 
   if(!isDefined(self)) {
     return waitresult;
@@ -392,9 +391,9 @@ function_5f86757d() {
   return waitresult;
 }
 
-private function_3a3a2ea9(jammer) {
+function_3a3a2ea9(jammer) {
   jammer endon(#"death");
-  waitresult = jammer waittilltimeout(2, #"hash_754a0aedf9f00e8d");
+  waitresult = jammer waittilltimeout(2, # "hash_754a0aedf9f00e8d");
 
   if(!isDefined(jammer)) {
     return;
@@ -404,7 +403,7 @@ private function_3a3a2ea9(jammer) {
   playFXOnTag(#"hash_5a695126234cbb41", jammer, "tag_origin");
 }
 
-private function_58f8bf08(jammer, attackingplayer, victim) {
+function_58f8bf08(jammer, attackingplayer, victim) {
   if(damagefeedback::dodamagefeedback(level.var_578f7c6d.weapon, attackingplayer)) {
     attackingplayer thread damagefeedback::update("MOD_UNKNOWN", jammer, undefined, level.var_578f7c6d.weapon, victim, 0, undefined, 0, 0, 1);
   }
@@ -419,19 +418,19 @@ function_2e6238c0(weapon, owner) {
   leaderdialog = undefined;
 
   switch (weapon.name) {
-    case #"tank_robot":
-    case #"inventory_tank_robot":
-    case #"ai_tank_marker":
+    case # "tank_robot":
+    case # "inventory_tank_robot":
+    case # "ai_tank_marker":
       taacomdialog = "aiTankJammedStart";
       leaderdialog = "aiTankJammedStart";
       break;
-    case #"ultimate_turret":
-    case #"inventory_ultimate_turret":
+    case # "ultimate_turret":
+    case # "inventory_ultimate_turret":
       taacomdialog = "ultTurretJammedStart";
       leaderdialog = "ultTurretJammedStart";
       break;
-    case #"ability_smart_cover":
-    case #"gadget_smart_cover":
+    case # "ability_smart_cover":
+    case # "gadget_smart_cover":
       taacomdialog = "smartCoverJammedStart";
       break;
   }
@@ -458,19 +457,19 @@ function_2eb0a933(weapon, owner) {
   leaderdialog = undefined;
 
   switch (weapon.name) {
-    case #"tank_robot":
-    case #"inventory_tank_robot":
-    case #"ai_tank_marker":
+    case # "tank_robot":
+    case # "inventory_tank_robot":
+    case # "ai_tank_marker":
       taacomdialog = "aiTankJammedEnd";
       leaderdialog = "aiTankJammedEnd";
       break;
-    case #"ultimate_turret":
-    case #"inventory_ultimate_turret":
+    case # "ultimate_turret":
+    case # "inventory_ultimate_turret":
       taacomdialog = "ultTurretJammedEnd";
       leaderdialog = "ultTurretJammedEnd";
       break;
-    case #"ability_smart_cover":
-    case #"gadget_smart_cover":
+    case # "ability_smart_cover":
+    case # "gadget_smart_cover":
       taacomdialog = "smartCoverJammedEnd";
       break;
   }

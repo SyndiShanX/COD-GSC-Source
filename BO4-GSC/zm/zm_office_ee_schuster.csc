@@ -7,7 +7,6 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace zm_office_ee_schuster;
 
 autoexec __init__system__() {
@@ -16,7 +15,7 @@ autoexec __init__system__() {
 
 __init__() {
   clientfield::register("toplayer", "audio_log_ball_fx", 1, 3, "int", &function_50865dc7, 0, 0);
-  level._effect[#"audio_ball"] = #"hash_445f04139d92c61b";
+  level._effect[# "audio_ball"] = # "hash_445f04139d92c61b";
 }
 
 function_50865dc7(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -29,5 +28,5 @@ function_50865dc7(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     }
   }
 
-  util::playFXOnTag(localclientnum, level._effect[#"audio_ball"], var_a1cf77d2, "tag_origin");
+  util::playFXOnTag(localclientnum, level._effect[# "audio_ball"], var_a1cf77d2, "tag_origin");
 }

@@ -790,5 +790,4 @@ main() {
   ent.v["angles"] = (270, 0, 0);
   ent.v["fxid"] = "firelp_small_pm_a";
   ent.v["delay"] = -15;
-
 }

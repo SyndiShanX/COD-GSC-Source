@@ -18,11 +18,11 @@ main() {
   maps\mp\mp_gridlock_amb::main();
   maps\mp\gametypes\_teamset_urbanspecops::level_init();
   setdvar("compassmaxrange", "2100");
-  game["strings"]["war_callsign_a"] = & "MPUI_CALLSIGN_MAPNAME_A";
-  game["strings"]["war_callsign_b"] = & "MPUI_CALLSIGN_MAPNAME_B";
-  game["strings"]["war_callsign_c"] = & "MPUI_CALLSIGN_MAPNAME_C";
-  game["strings"]["war_callsign_d"] = & "MPUI_CALLSIGN_MAPNAME_D";
-  game["strings"]["war_callsign_e"] = & "MPUI_CALLSIGN_MAPNAME_E";
+  game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_MAPNAME_A";
+  game["strings"]["war_callsign_b"] = &"MPUI_CALLSIGN_MAPNAME_B";
+  game["strings"]["war_callsign_c"] = &"MPUI_CALLSIGN_MAPNAME_C";
+  game["strings"]["war_callsign_d"] = &"MPUI_CALLSIGN_MAPNAME_D";
+  game["strings"]["war_callsign_e"] = &"MPUI_CALLSIGN_MAPNAME_E";
   game["strings_menu"]["war_callsign_a"] = "@MPUI_CALLSIGN_MAPNAME_A";
   game["strings_menu"]["war_callsign_b"] = "@MPUI_CALLSIGN_MAPNAME_B";
   game["strings_menu"]["war_callsign_c"] = "@MPUI_CALLSIGN_MAPNAME_C";
@@ -32,10 +32,10 @@ main() {
   spawncollision("collision_geo_32x32x32", "collider", (-234, 310, -108), (0, 0, 0));
   spawncollision("collision_geo_64x64x64", "collider", (809, 131, 134), (0, 0, 0));
   maps\mp\gametypes\_spawning::level_use_unified_spawning(true);
-  signbase1 = Spawn("script_model", (37, 528.5, 24));
+  signbase1 = spawn("script_model", (37, 528.5, 24));
   if(isDefined(signbase1)) {
     signbase1.angles = (0, 180, 0);
-    signbase1 SetModel("p_con_hwy_sign_base");
+    signbase1 setModel("p_con_hwy_sign_base");
   }
   maps\mp\_clientflags::init();
   thread air_pump_trigger_init();
@@ -55,7 +55,7 @@ node_manager() {
   }
 }
 air_pump_trigger_init() {
-  air_pump_trigs = GetEntArray("air_pump_trigger", "targetname");
+  air_pump_trigs = getEntArray("air_pump_trigger", "targetname");
   if(air_pump_trigs.size > 0) {
     array_thread(air_pump_trigs, ::air_pump_think);
   }
@@ -64,7 +64,7 @@ air_pump_think() {
   self.sound_spot = getstruct(self.target, "targetname");
   AssertEx(isDefined(self.sound_spot), "An air pump trigger is missing a script_struct to target. Ent at " + self.origin);
   self.ents_on_me = 0;
-  while (1) {
+  while(1) {
     self waittill("trigger", player);
     self thread trigger_thread(player, ::air_pump_trig_on, ::air_pump_trig_off);
     wait .5;
@@ -87,7 +87,7 @@ air_pump_watcher(player) {
   self.ents_on_me--;
 }
 police_car_light_init() {
-  police_cars = GetEntArray("police_car", "script_noteworthy");
+  police_cars = getEntArray("police_car", "script_noteworthy");
   array_thread(police_cars, ::police_car_think);
 }
 police_car_think() {
@@ -136,7 +136,7 @@ trigger_thread(ent, on_enter_payload, on_exit_payload) {
   if(isDefined(on_enter_payload)) {
     self thread[[on_enter_payload]](ent, endon_condition);
   }
-  while (isDefined(ent) && ent IsTouching(self)) {
+  while(isDefined(ent) && ent IsTouching(self)) {
     wait(0.01);
   }
   ent notify(endon_condition);

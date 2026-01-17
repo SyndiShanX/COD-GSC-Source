@@ -14,7 +14,7 @@
 #namespace replay_gun;
 
 function autoexec __init__sytem__() {
-  system::register("replay_gun", & __init__, undefined, undefined);
+  system::register("replay_gun", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -31,13 +31,13 @@ function player_init() {
 }
 
 function watch_lockon(localclientnum) {
-  while (true) {
+  while(true) {
     self waittill("lockon_changed", state, target);
-    if(isdefined(self.replay_lock) && (!isdefined(target) || self.replay_lock != target)) {
+    if(isDefined(self.replay_lock) && (!isDefined(target) || self.replay_lock != target)) {
       self.replay_lock duplicate_render::change_dr_flags(localclientnum, undefined, "replay_locked");
       self.replay_lock = undefined;
     }
-    if(isdefined(target) && (target isplayer() || target isai()) && isalive(target)) {
+    if(isDefined(target) && (target isplayer() || target isai()) && isalive(target)) {
       switch (state) {
         case 0:
         case 1:

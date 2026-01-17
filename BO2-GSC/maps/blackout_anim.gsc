@@ -171,7 +171,7 @@ scene_intro_nag() {
 }
 
 mason_shadow_rig(m_player_body) {
-  m_player_body setmodel("c_usa_cia_masonjr_armlaunch_viewbody_s");
+  m_player_body setModel("c_usa_cia_masonjr_armlaunch_viewbody_s");
   mason_shadow_head_show(m_player_body);
 }
 
@@ -309,7 +309,7 @@ scene_mason_taser_knuckles() {
 }
 
 notetrack_taser_knuckle_spark(m_knuckles) {
-  playfxontag(level._effect["taser_knuckles_start"], m_knuckles, "TAG_FX");
+  playFXOnTag(level._effect["taser_knuckles_start"], m_knuckles, "TAG_FX");
 }
 
 #using_animtree("generic_human");

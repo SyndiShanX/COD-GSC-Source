@@ -291,23 +291,23 @@ scene_drone_models() {
   model_list = [];
   base = spawn("script_model", base_pos);
   base.angles = base_start_angles;
-  base setmodel("p6_hologram_dr_base_map");
+  base setModel("p6_hologram_dr_base_map");
   model_list[model_list.size] = base;
   dish = spawn("script_model", base gettagorigin("j_dish"));
   dish.angles = base gettagangles("j_dish");
-  dish setmodel("p6_hologram_dr_dish");
+  dish setModel("p6_hologram_dr_dish");
   model_list[model_list.size] = dish;
   tank = spawn("script_model", base gettagorigin("j_tank"));
   tank.angles = base gettagangles("j_tank");
-  tank setmodel("p6_hologram_dr_tank");
+  tank setModel("p6_hologram_dr_tank");
   model_list[model_list.size] = tank;
   transformer = spawn("script_model", base gettagorigin("j_transformer"));
   transformer.angles = base gettagangles("j_transformer");
-  transformer setmodel("p6_hologram_dr_transformer");
+  transformer setModel("p6_hologram_dr_transformer");
   model_list[model_list.size] = transformer;
   computer = spawn("script_model", base gettagorigin("j_computer"));
   computer.angles = base gettagangles("j_computer");
-  computer setmodel("p6_hologram_dr_computer");
+  computer setModel("p6_hologram_dr_computer");
   model_list[model_list.size] = computer;
 
   for(i = 0; i < model_list.size; i++) {
@@ -368,7 +368,7 @@ hologram_start() {
 scene_dockside_models() {
   show_holotable_fuzz(0);
   dockside_base = getent("dockside_base", "targetname");
-  dockside_props = getentarray("dockside_prop", "script_noteworthy");
+  dockside_props = getEntArray("dockside_prop", "script_noteworthy");
   e_surface = getent("holo_table_surface", "targetname");
   e_angled = getent("holo_table_surface", "targetname");
 

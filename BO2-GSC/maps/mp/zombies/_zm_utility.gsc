@@ -18,8 +18,7 @@
 #include maps\mp\zombies\_zm_stats;
 #include maps\mp\zombies\_zm_audio;
 
-init_utility() {
-}
+init_utility() {}
 
 is_classic() {
   var = getdvar(#"ui_zm_gamemodegroup");
@@ -59,7 +58,7 @@ lerp(chunk) {
 }
 
 clear_mature_blood() {
-  blood_patch = getentarray("mature_blood", "targetname");
+  blood_patch = getEntArray("mature_blood", "targetname");
 
   if(is_mature()) {
     return;
@@ -70,8 +69,7 @@ clear_mature_blood() {
   }
 }
 
-recalc_zombie_array() {
-}
+recalc_zombie_array() {}
 
 clear_all_corpses() {
   corpse_array = getcorpsearray();
@@ -371,7 +369,7 @@ all_chunks_destroyed(barrier, barrier_chunks) {
 }
 
 check_point_in_playable_area(origin) {
-  playable_area = getentarray("player_volume", "script_noteworthy");
+  playable_area = getEntArray("player_volume", "script_noteworthy");
   check_model = spawn("script_model", origin + vectorscale((0, 0, 1), 40.0));
   valid_point = 0;
 
@@ -386,7 +384,7 @@ check_point_in_playable_area(origin) {
 
 check_point_in_enabled_zone(origin, zone_is_active, player_zones) {
   if(!isDefined(player_zones))
-    player_zones = getentarray("player_volume", "script_noteworthy");
+    player_zones = getEntArray("player_volume", "script_noteworthy");
 
   if(!isDefined(level.zones) || !isDefined(player_zones))
     return 1;
@@ -638,7 +636,7 @@ get_zombie_point_of_interest(origin, poi_array) {
   if(isDefined(poi_array))
     ent_array = poi_array;
   else
-    ent_array = getentarray("zombie_poi", "script_noteworthy");
+    ent_array = getEntArray("zombie_poi", "script_noteworthy");
 
   best_poi = undefined;
   position = undefined;
@@ -1100,9 +1098,7 @@ is_player_valid(player, checkignoremeflag, ignore_laststand_players) {
     return 0;
 
   if(isDefined(level.is_player_valid_override))
-    return [
-      [level.is_player_valid_override]
-    ](player);
+    return [[level.is_player_valid_override]](player);
 
   return 1;
 }
@@ -1530,7 +1526,7 @@ enable_trigger() {
 }
 
 in_playable_area() {
-  playable_area = getentarray("player_volume", "script_noteworthy");
+  playable_area = getEntArray("player_volume", "script_noteworthy");
 
   if(!isDefined(playable_area)) {
     println("No playable area playable_area found! Assume EVERYWHERE is PLAYABLE");
@@ -2022,7 +2018,7 @@ play_sound_at_pos(ref, pos, ent) {
 
 play_sound_on_ent(ref) {
   if(isDefined(self.script_soundalias)) {
-    self playsound(self.script_soundalias);
+    self playSound(self.script_soundalias);
     return;
   }
 
@@ -2038,7 +2034,7 @@ play_sound_on_ent(ref) {
     return;
   }
 
-  self playsound(level.zombie_sounds[ref]);
+  self playSound(level.zombie_sounds[ref]);
 }
 
 play_loopsound_on_ent(ref) {
@@ -2054,7 +2050,7 @@ play_loopsound_on_ent(ref) {
     return;
   }
 
-  self playsound(level.zombie_sounds[ref]);
+  self playSound(level.zombie_sounds[ref]);
 }
 
 string_to_float(string) {
@@ -2346,7 +2342,7 @@ magic_bullet_shield() {
       level thread debug_magic_bullet_shield_death(self);
 
       if(!isDefined(self._mbs))
-        self._mbs = spawnstruct();
+        self._mbs = spawnStruct();
 
       if(isai(self)) {
         assert(isalive(self), "Tried to do magic_bullet_shield on a dead or undefined guy.");
@@ -2574,7 +2570,7 @@ clear_fog_threads() {
 }
 
 display_message(titletext, notifytext, duration) {
-  notifydata = spawnstruct();
+  notifydata = spawnStruct();
   notifydata.titletext = notifytext;
   notifydata.notifytext = titletext;
   notifydata.sound = "mus_level_up";
@@ -2989,9 +2985,7 @@ init_player_equipment() {
 
 register_offhand_weapons_for_level_defaults() {
   if(isDefined(level.register_offhand_weapons_for_level_defaults_override)) {
-    [
-      [level.register_offhand_weapons_for_level_defaults_override]
-    ]();
+    [[level.register_offhand_weapons_for_level_defaults_override]]();
     return;
   }
 
@@ -3072,11 +3066,11 @@ array_removedead(array) {
 }
 
 groundpos(origin) {
-  return bullettrace(origin, origin + vectorscale((0, 0, -1), 100000.0), 0, self)["position"];
+  return bulletTrace(origin, origin + vectorscale((0, 0, -1), 100000.0), 0, self)["position"];
 }
 
 groundpos_ignore_water(origin) {
-  return bullettrace(origin, origin + vectorscale((0, 0, -1), 100000.0), 0, self, 1)["position"];
+  return bulletTrace(origin, origin + vectorscale((0, 0, -1), 100000.0), 0, self, 1)["position"];
 }
 
 groundpos_ignore_water_new(origin) {
@@ -3630,7 +3624,7 @@ get_eye() {
     }
   }
 
-  pos = self geteye();
+  pos = self getEye();
   return pos;
 }
 
@@ -3644,8 +3638,8 @@ is_player_looking_at(origin, dot, do_trace, ignore_ent) {
     do_trace = 1;
 
   eye = self get_eye();
-  delta_vec = anglestoforward(vectortoangles(origin - eye));
-  view_vec = anglestoforward(self getplayerangles());
+  delta_vec = anglesToForward(vectortoangles(origin - eye));
+  view_vec = anglesToForward(self getplayerangles());
   new_dot = vectordot(delta_vec, view_vec);
 
   if(new_dot >= dot) {
@@ -3658,11 +3652,9 @@ is_player_looking_at(origin, dot, do_trace, ignore_ent) {
   return 0;
 }
 
-add_gametype(gt, dummy1, name, dummy2) {
-}
+add_gametype(gt, dummy1, name, dummy2) {}
 
-add_gameloc(gl, dummy1, name, dummy2) {
-}
+add_gameloc(gl, dummy1, name, dummy2) {}
 
 get_closest_index(org, array, dist) {
   if(!isDefined(dist))
@@ -3774,7 +3766,7 @@ get_gamemode_var(var) {
 
 waittill_subset(min_num, string1, string2, string3, string4, string5) {
   self endon("death");
-  ent = spawnstruct();
+  ent = spawnStruct();
   ent.threads = 0;
   returned_threads = 0;
 
@@ -3913,7 +3905,7 @@ add_vox_response_chance(event, chance) {
 }
 
 set_demo_intermission_point() {
-  spawnpoints = getentarray("mp_global_intermission", "classname");
+  spawnpoints = getEntArray("mp_global_intermission", "classname");
 
   if(!spawnpoints.size) {
     return;
@@ -3962,7 +3954,7 @@ does_player_have_correct_navcard(player) {
 
 place_navcard(str_model, str_stat, org, angles) {
   navcard = spawn("script_model", org);
-  navcard setmodel(str_model);
+  navcard setModel(str_model);
   navcard.angles = angles;
   wait 1;
   navcard_pickup_trig = spawn("trigger_radius_use", org, 0, 84, 72);
@@ -3985,7 +3977,7 @@ place_navcard(str_model, str_stat, org, angles) {
         }
       }
 
-      who playsound("zmb_buildable_piece_add");
+      who playSound("zmb_buildable_piece_add");
       who maps\mp\zombies\_zm_stats::set_global_stat(str_stat, 1);
       who.navcard_grabbed = str_stat;
       wait_network_frame();
@@ -4097,7 +4089,7 @@ link_nodes(a, b, bdontunlinkonmigrate) {
   b_index_string = "" + b.origin;
 
   if(!isDefined(level._link_node_list[a_index_string])) {
-    level._link_node_list[a_index_string] = spawnstruct();
+    level._link_node_list[a_index_string] = spawnStruct();
     level._link_node_list[a_index_string].node = a;
     level._link_node_list[a_index_string].links = [];
     level._link_node_list[a_index_string].ignore_on_migrate = [];
@@ -4130,7 +4122,7 @@ unlink_nodes(a, b, bdontlinkonmigrate) {
   b_index_string = "" + b.origin;
 
   if(!isDefined(level._unlink_node_list[a_index_string])) {
-    level._unlink_node_list[a_index_string] = spawnstruct();
+    level._unlink_node_list[a_index_string] = spawnStruct();
     level._unlink_node_list[a_index_string].node = a;
     level._unlink_node_list[a_index_string].links = [];
     level._unlink_node_list[a_index_string].ignore_on_migrate = [];
@@ -4155,7 +4147,7 @@ spawn_path_node(origin, angles, k1, v1, k2, v2) {
   if(!isDefined(level._spawned_path_nodes))
     level._spawned_path_nodes = [];
 
-  node = spawnstruct();
+  node = spawnStruct();
   node.origin = origin;
   node.angles = angles;
   node.k1 = k1;
@@ -4178,8 +4170,7 @@ spawn_path_node_internal(origin, angles, k1, v1, k2, v2) {
   return undefined;
 }
 
-delete_spawned_path_nodes() {
-}
+delete_spawned_path_nodes() {}
 
 respawn_path_nodes() {
   if(!isDefined(level._spawned_path_nodes)) {
@@ -4211,9 +4202,7 @@ link_changes_internal_internal(list, func) {
 
         println("Node at " + keys[i] + " to node at " + node_keys[j]);
 
-        [
-          [func]
-        ](node, list[keys[i]].links[node_keys[j]]);
+        [[func]](node, list[keys[i]].links[node_keys[j]]);
       }
     }
   }
@@ -4341,9 +4330,7 @@ register_custom_spawner_entry(spot_noteworthy, func) {
 
 get_player_weapon_limit(player) {
   if(isDefined(level.get_player_weapon_limit))
-    return [
-      [level.get_player_weapon_limit]
-    ](player);
+    return [[level.get_player_weapon_limit]](player);
 
   weapon_limit = 2;
 

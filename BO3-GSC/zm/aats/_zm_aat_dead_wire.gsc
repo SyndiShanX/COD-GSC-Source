@@ -18,14 +18,14 @@
 #namespace zm_aat_dead_wire;
 
 function autoexec __init__sytem__() {
-  system::register("zm_aat_dead_wire", & __init__, undefined, "aat");
+  system::register("zm_aat_dead_wire", &__init__, undefined, "aat");
 }
 
 function __init__() {
-  if(!(isdefined(level.aat_in_use) && level.aat_in_use)) {
+  if(!(isDefined(level.aat_in_use) && level.aat_in_use)) {
     return;
   }
-  aat::register("zm_aat_dead_wire", 0.2, 0, 5, 2, 1, & result, "t7_hud_zm_aat_deadwire", "wpn_aat_dead_wire_plr");
+  aat::register("zm_aat_dead_wire", 0.2, 0, 5, 2, 1, &result, "t7_hud_zm_aat_deadwire", "wpn_aat_dead_wire_plr");
   clientfield::register("actor", "zm_aat_dead_wire" + "_zap", 1, 1, "int");
   clientfield::register("vehicle", "zm_aat_dead_wire" + "_zap_vehicle", 1, 1, "int");
   level.zm_aat_dead_wire_lightning_chain_params = lightning_chain::create_lightning_chain_params(8, 9, 120);
@@ -35,7 +35,7 @@ function __init__() {
 }
 
 function result(death, attacker, mod, weapon) {
-  if(!isdefined(level.zombie_vars["tesla_head_gib_chance"])) {
+  if(!isDefined(level.zombie_vars["tesla_head_gib_chance"])) {
     zombie_utility::set_zombie_var("tesla_head_gib_chance", 50);
   }
   attacker.tesla_enemies = undefined;

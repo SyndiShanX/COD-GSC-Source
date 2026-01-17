@@ -13,11 +13,10 @@
 #include scripts\zm_common\zm_stats;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
-
 #namespace zm_aat_frostbite;
 
 autoexec __init__system__() {
-  system::register("zm_aat_frostbite", &__init__, undefined, #"aat");
+  system::register("zm_aat_frostbite", &__init__, undefined, # "aat");
 }
 
 __init__() {
@@ -53,13 +52,13 @@ result(death, attacker, mod, weapon) {
   self thread function_158a3a18(attacker, mod, weapon);
 }
 
-private function_a2e05e6(e_attacker) {
+function_a2e05e6(e_attacker) {
   n_current_time = float(gettime()) / 1000;
 
   if(isplayer(e_attacker)) {
-    if(!isDefined(e_attacker.aat_cooldown_start[#"zm_aat_frostbite_explosion"])) {
+    if(!isDefined(e_attacker.aat_cooldown_start[# "zm_aat_frostbite_explosion"])) {
       return true;
-    } else if(isDefined(e_attacker.aat_cooldown_start[#"zm_aat_frostbite_explosion"]) && n_current_time >= e_attacker.aat_cooldown_start[#"zm_aat_frostbite_explosion"] + 30) {
+    } else if(isDefined(e_attacker.aat_cooldown_start[# "zm_aat_frostbite_explosion"]) && n_current_time >= e_attacker.aat_cooldown_start[# "zm_aat_frostbite_explosion"] + 30) {
       return true;
     }
   }
@@ -100,7 +99,7 @@ function_158a3a18(attacker, mod, weapon, var_e1ec1eee = 0) {
 
 function_dab102b8(e_attacker, weapon) {
   self notify(#"hash_6f92e6943e40092b");
-  self endon(#"hash_6f92e6943e40092b", #"death");
+  self endon(#"hash_6f92e6943e40092b", # "death");
 
   for(i = 0; i < 8; i++) {
     wait 0.375;
@@ -120,7 +119,7 @@ function_dab102b8(e_attacker, weapon) {
 
 function_35d3ac3b(attacker, mod, weapon) {
   self notify(#"hash_b04750a529cb350");
-  self endon(#"hash_b04750a529cb350", #"hash_652c15c8a7e2949");
+  self endon(#"hash_b04750a529cb350", # "hash_652c15c8a7e2949");
   self waittill(#"death");
 
   if(isDefined(self)) {
@@ -141,18 +140,18 @@ frostbite_explosion(var_4589e270, var_23255fc5, attacker, mod, weapon) {
   var_4589e270 clientfield::increment("zm_aat_frostbite_explosion_clientfield");
 
   if(isplayer(attacker)) {
-    attacker.aat_cooldown_start[#"zm_aat_frostbite_explosion"] = float(gettime()) / 1000;
+    attacker.aat_cooldown_start[# "zm_aat_frostbite_explosion"] = float(gettime()) / 1000;
     attacker zm_stats::increment_challenge_stat(#"zombie_hunter_frostbite");
   }
 
-  a_potential_targets = array::get_all_closest(var_23255fc5, level.ai[#"axis"], undefined, undefined, 128);
+  a_potential_targets = array::get_all_closest(var_23255fc5, level.ai[# "axis"], undefined, undefined, 128);
 
   foreach(e_target in a_potential_targets) {
     if(!isalive(e_target)) {
       continue;
     }
 
-    if(isDefined(level.aat[#"zm_aat_frostbite"].immune_result_indirect[e_target.archetype]) && level.aat[#"zm_aat_frostbite"].immune_result_indirect[e_target.archetype]) {
+    if(isDefined(level.aat[# "zm_aat_frostbite"].immune_result_indirect[e_target.archetype]) && level.aat[# "zm_aat_frostbite"].immune_result_indirect[e_target.archetype]) {
       return;
     }
 

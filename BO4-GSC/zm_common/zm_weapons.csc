@@ -16,7 +16,6 @@
 #include scripts\zm_common\zm_loadout;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_wallbuy;
-
 #namespace zm_weapons;
 
 autoexec __init__system__() {
@@ -42,7 +41,7 @@ __main__() {
   init_weapons();
 }
 
-private on_player_connect(localclientnum) {
+on_player_connect(localclientnum) {
   if(getmigrationstatus(localclientnum)) {
     return;
   }
@@ -142,10 +141,9 @@ include_weapon(weapon_name, display_in_box, cost, ammo_cost, upgraded = 0, is_wo
   }
 
   if(!isDefined(weapon.worldmodel)) {
-
     thread util::error("<dev string:x38>" + function_9e72a96(weapon_name) + "<dev string:x59>");
 
-      return;
+    return;
   }
 
   addzombieboxweapon(weapon, weapon.worldmodel, weapon.isdualwield);
@@ -195,13 +193,13 @@ init_weapons() {
 
   switch (var_8e01336) {
     case 1:
-      var_4ef031c9 = #"hash_5694d3fa5334f8fe";
+      var_4ef031c9 = # "hash_5694d3fa5334f8fe";
       break;
     case 2:
-      var_4ef031c9 = #"hash_3f8d28bb3d9e9bec";
+      var_4ef031c9 = # "hash_3f8d28bb3d9e9bec";
       break;
     default:
-      var_4ef031c9 = #"hash_7bda40310359350e";
+      var_4ef031c9 = # "hash_7bda40310359350e";
       break;
   }
 

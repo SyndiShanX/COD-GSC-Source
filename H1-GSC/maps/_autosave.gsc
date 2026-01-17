@@ -13,21 +13,21 @@ main() {
   common_scripts\utility::flag_set("can_save");
   common_scripts\utility::flag_init("disable_autosaves");
 
-  if(!isdefined(level._extra_autosave_checks))
+  if(!isDefined(level._extra_autosave_checks))
     level._extra_autosave_checks = [];
 
   level.autosave_proximity_threat_func = ::autosave_proximity_threat_func;
 }
 
 getdescription() {
-  return & "AUTOSAVE_AUTOSAVE";
+  return &"AUTOSAVE_AUTOSAVE";
 }
 
 getnames(var_0) {
   if(var_0 == 0)
-    var_1 = & "AUTOSAVE_GAME";
+    var_1 = &"AUTOSAVE_GAME";
   else
-    var_1 = & "AUTOSAVE_NOGAME";
+    var_1 = &"AUTOSAVE_NOGAME";
 
   return var_1;
 }
@@ -35,7 +35,7 @@ getnames(var_0) {
 beginningoflevelsave() {
   common_scripts\utility::flag_wait("introscreen_complete");
 
-  if(isdefined(level.introscreen_complete_delay))
+  if(isDefined(level.introscreen_complete_delay))
     wait(level.introscreen_complete_delay);
 
   if(level.missionfailed) {
@@ -49,7 +49,7 @@ beginningoflevelsave() {
   }
   common_scripts\utility::flag_set("game_saving");
   var_0 = "levelshots / autosave / autosave_" + level.script + "start";
-  savegame("levelstart", & "AUTOSAVE_LEVELSTART", var_0, 1);
+  savegame("levelstart", &"AUTOSAVE_LEVELSTART", var_0, 1);
   setdvar("ui_grenade_death", "0");
   common_scripts\utility::flag_clear("game_saving");
 }
@@ -65,7 +65,7 @@ trigger_autosave_tactical(var_0) {
 }
 
 trigger_autosave(var_0) {
-  if(!isdefined(var_0.script_autosave))
+  if(!isDefined(var_0.script_autosave))
     var_0.script_autosave = 0;
 
   autosaves_think(var_0);
@@ -74,7 +74,7 @@ trigger_autosave(var_0) {
 autosaves_think(var_0) {
   var_1 = getnames(var_0.script_autosave);
 
-  if(!isdefined(var_1)) {
+  if(!isDefined(var_1)) {
     return;
   }
   var_0 waittill("trigger");
@@ -82,7 +82,7 @@ autosaves_think(var_0) {
   var_3 = "levelshots / autosave / autosave_" + level.script + var_2;
   tryautosave(var_2, var_1, var_3);
 
-  if(isdefined(var_0))
+  if(isDefined(var_0))
     var_0 delete();
 }
 
@@ -92,13 +92,13 @@ autosavenamethink(var_0) {
   }
   var_0 waittill("trigger");
 
-  if(!isdefined(var_0)) {
+  if(!isDefined(var_0)) {
     return;
   }
   var_1 = var_0.script_autosavename;
   var_0 delete();
 
-  if(isdefined(level.customautosavecheck)) {
+  if(isDefined(level.customautosavecheck)) {
     if(![
         [level.customautosavecheck]
       ]())
@@ -113,7 +113,7 @@ trigger_autosave_immediate(var_0) {
 }
 
 autosaveprint(var_0, var_1) {
-  if(isdefined(var_1)) {
+  if(isDefined(var_1)) {
     return;
   }
   return;
@@ -129,7 +129,7 @@ autosave_timeout(var_0) {
 
 _autosave_game_now_nochecks() {
   var_0 = "levelshots / autosave / autosave_" + level.script + "start";
-  savegame("levelstart", & "AUTOSAVE_LEVELSTART", var_0, 1);
+  savegame("levelstart", &"AUTOSAVE_LEVELSTART", var_0, 1);
   autosave_recon(0);
 }
 
@@ -137,13 +137,13 @@ _autosave_game_now_notrestart() {
   var_0 = "levelshots / autosave / autosave_" + level.script + "start";
 
   if(getdvarint("g_reloading") == 0) {
-    savegame("levelstart", & "AUTOSAVE_LEVELSTART", var_0, 1);
+    savegame("levelstart", &"AUTOSAVE_LEVELSTART", var_0, 1);
     autosave_recon(0);
   }
 }
 
 _autosave_game_now(var_0) {
-  if(isdefined(level.missionfailed) && level.missionfailed) {
+  if(isDefined(level.missionfailed) && level.missionfailed) {
     return;
   }
   if(common_scripts\utility::flag("game_saving"))
@@ -152,7 +152,7 @@ _autosave_game_now(var_0) {
   if(maps\_arcademode::arcademode_complete())
     return 0;
 
-  for (var_1 = 0; var_1 < level.players.size; var_1++) {
+  for(var_1 = 0; var_1 < level.players.size; var_1++) {
     var_2 = level.players[var_1];
 
     if(!isalive(var_2))
@@ -162,7 +162,7 @@ _autosave_game_now(var_0) {
   var_3 = "save_now";
   var_4 = getdescription();
 
-  if(isdefined(var_0))
+  if(isDefined(var_0))
     var_5 = savegamenocommit(var_3, var_4, "$default", 1);
   else
     var_5 = savegamenocommit(var_3, var_4);
@@ -191,7 +191,7 @@ _autosave_game_now(var_0) {
   if(try_to_autosave_now()) {
     autosave_recon(var_5);
 
-    if(!isdefined(var_0))
+    if(!isDefined(var_0))
       thread maps\_arcademode::arcademode_checkpoint_print();
 
     commitsave(var_5);
@@ -211,7 +211,7 @@ try_to_autosave_now() {
   if(!issavesuccessful())
     return 0;
 
-  for (var_0 = 0; var_0 < level.players.size; var_0++) {
+  for(var_0 = 0; var_0 < level.players.size; var_0++) {
     var_1 = level.players[var_0];
 
     if(!var_1 autosavehealthcheck())
@@ -239,28 +239,28 @@ tryautosave(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(common_scripts\utility::flag("game_saving"))
     return 0;
 
-  if(isdefined(level.nextmission))
+  if(isDefined(level.nextmission))
     return 0;
 
   var_7 = 1.25;
   var_8 = 1.25;
 
-  if(isdefined(var_3) && var_3 < var_7 + var_8) {}
+  if(isDefined(var_3) && var_3 < var_7 + var_8) {}
 
-  if(!isdefined(var_5))
+  if(!isDefined(var_5))
     var_5 = 0;
 
-  if(!isdefined(var_2))
+  if(!isDefined(var_2))
     var_2 = "$default";
 
-  if(!isdefined(var_4))
+  if(!isDefined(var_4))
     var_4 = 0;
 
   common_scripts\utility::flag_set("game_saving");
   var_9 = getdescription();
   var_10 = gettime();
 
-  for (;;) {
+  for(;;) {
     if(autosavecheck(undefined, var_4)) {
       var_11 = savegamenocommit(var_0, var_9, var_2, var_5);
 
@@ -286,7 +286,7 @@ tryautosave(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       if(!autosavecheck_not_picky()) {
         continue;
       }
-      if(isdefined(var_3)) {
+      if(isDefined(var_3)) {
         if(gettime() > var_10 + var_3 * 1000) {
           break;
         }
@@ -305,7 +305,7 @@ tryautosave(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
         return 0;
       }
 
-      if(level.script == "scoutsniper" && isdefined(var_6) && var_6 == "cargo2") {
+      if(level.script == "scoutsniper" && isDefined(var_6) && var_6 == "cargo2") {
         if(common_scripts\utility::flag("_stealth_spotted"))
           continue;
       }
@@ -345,14 +345,10 @@ autosavecheck_not_picky() {
 }
 
 autosavecheck(var_0, var_1) {
-  if(isdefined(level.autosave_check_override))
-    return [
-      [level.autosave_check_override]
-    ]();
+  if(isDefined(level.autosave_check_override))
+    return [[level.autosave_check_override]]();
 
-  if(isdefined(level.special_autosavecondition) && ![
-      [level.special_autosavecondition]
-    ]())
+  if(isDefined(level.special_autosavecondition) && ![[level.special_autosavecondition]]())
     return 0;
 
   if(level.missionfailed)
@@ -361,10 +357,10 @@ autosavecheck(var_0, var_1) {
   if(maps\_arcademode::arcademode_complete())
     return 0;
 
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     var_0 = level.dopickyautosavechecks;
 
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     var_1 = 0;
 
   if(var_1) {
@@ -374,7 +370,7 @@ autosavecheck(var_0, var_1) {
       return 0;
   }
 
-  for (var_2 = 0; var_2 < level.players.size; var_2++) {
+  for(var_2 = 0; var_2 < level.players.size; var_2++) {
     var_3 = level.players[var_2];
 
     if(!var_3 autosavehealthcheck())
@@ -389,14 +385,14 @@ autosavecheck(var_0, var_1) {
       return 0;
   }
 
-  for (var_2 = 0; var_2 < level.players.size; var_2++) {
+  for(var_2 = 0; var_2 < level.players.size; var_2++) {
     var_3 = level.players[var_2];
 
     if(!var_3 autosaveplayercheck(var_0))
       return 0;
   }
 
-  if(isdefined(level.cansave) && !level.cansave)
+  if(isDefined(level.cansave) && !level.cansave)
     return 0;
 
   if(extra_autosave_checks_failed())
@@ -414,7 +410,7 @@ autosaveplayercheck(var_0) {
   if(level.script == "ac130")
     return 1;
 
-  if(isdefined(level.ac130gunner) && level.ac130gunner == self)
+  if(isDefined(level.ac130gunner) && level.ac130gunner == self)
     return 1;
 
   if(self ismeleeing() && var_0) {
@@ -432,7 +428,7 @@ autosaveplayercheck(var_0) {
     return 0;
   }
 
-  if(isdefined(self.shellshocked) && self.shellshocked) {
+  if(isDefined(self.shellshocked) && self.shellshocked) {
     autosaveprint("autosave failed:player is in shellshock");
     return 0;
   }
@@ -446,18 +442,18 @@ autosaveplayercheck(var_0) {
 }
 
 autosaveammocheck() {
-  if(isdefined(level.noautosaveammocheck) && level.noautosaveammocheck)
+  if(isDefined(level.noautosaveammocheck) && level.noautosaveammocheck)
     return 1;
 
   if(level.script == "ac130")
     return 1;
 
-  if(isdefined(level.ac130gunner) && level.ac130gunner == self)
+  if(isDefined(level.ac130gunner) && level.ac130gunner == self)
     return 1;
 
   var_0 = self getweaponslistprimaries();
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++) {
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_2 = self getfractionmaxammo(var_0[var_1]);
 
     if(var_2 > 0.1)
@@ -472,7 +468,7 @@ autosavehealthcheck() {
   if(level.script == "ac130")
     return 1;
 
-  if(isdefined(level.ac130gunner) && level.ac130gunner == self)
+  if(isDefined(level.ac130gunner) && level.ac130gunner == self)
     return 1;
 
   if(maps\_utility::ent_flag_exist("laststand_downed") && maps\_utility::ent_flag("laststand_downed"))
@@ -496,13 +492,13 @@ autosavethreatcheck(var_0) {
   if(level.script == "ac130")
     return 1;
 
-  if(isdefined(level.ac130gunner) && level.ac130gunner == self)
+  if(isDefined(level.ac130gunner) && level.ac130gunner == self)
     return 1;
 
   var_1 = getaispeciesarray("bad_guys", "all");
 
   foreach(var_3 in var_1) {
-    if(!isdefined(var_3.enemy)) {
+    if(!isDefined(var_3.enemy)) {
       continue;
     }
     if(!isplayer(var_3.enemy)) {
@@ -517,12 +513,10 @@ autosavethreatcheck(var_0) {
       continue;
     }
 
-    if(isdefined(var_3.melee) && isdefined(var_3.melee.target) && isplayer(var_3.melee.target))
+    if(isDefined(var_3.melee) && isDefined(var_3.melee.target) && isplayer(var_3.melee.target))
       return 0;
 
-    var_7 = [
-      [level.autosave_proximity_threat_func]
-    ](var_3);
+    var_7 = [[level.autosave_proximity_threat_func]](var_3);
 
     if(var_7 == "return_even_if_low_accuracy")
       return 0;
@@ -541,17 +535,17 @@ autosavethreatcheck(var_0) {
         return 0;
     }
 
-    if(isdefined(var_3.a.aimidlethread) && var_3 animscripts\utility::canseeenemy(0) && var_3 canshootenemy(0))
+    if(isDefined(var_3.a.aimidlethread) && var_3 animscripts\utility::canseeenemy(0) && var_3 canshootenemy(0))
       return 0;
   }
 
   if(maps\_utility::player_is_near_live_grenade())
     return 0;
 
-  var_9 = getentarray("destructible", "classname");
+  var_9 = getEntArray("destructible", "classname");
 
   foreach(var_11 in var_9) {
-    if(!isdefined(var_11.healthdrain)) {
+    if(!isDefined(var_11.healthdrain)) {
       continue;
     }
     foreach(var_5 in level.players) {
@@ -597,7 +591,7 @@ autosave_recon(var_0) {
   var_1 = maps\_utility_code::get_leveltime();
   var_2 = var_1;
 
-  if(isdefined(level.recon_checkpoint_lasttime))
+  if(isDefined(level.recon_checkpoint_lasttime))
     var_2 = var_1 - level.recon_checkpoint_lasttime;
 
   level.recon_checkpoint_lasttime = var_1;

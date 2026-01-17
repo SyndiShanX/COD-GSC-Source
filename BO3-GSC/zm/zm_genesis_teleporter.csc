@@ -14,13 +14,13 @@
 #namespace zm_genesis_teleporter;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_teleporter", & __init__, undefined, undefined);
+  system::register("zm_genesis_teleporter", &__init__, undefined, undefined);
 }
 
 function __init__() {
   visionset_mgr::register_overlay_info_style_transported("zm_genesis", 15000, 15, 2);
   visionset_mgr::register_overlay_info_style_postfx_bundle("zm_factory_teleport", 15000, 1, "pstfx_zm_wormhole");
-  clientfield::register("toplayer", "player_shadowman_teleport_hijack_fx", 15000, 1, "int", & player_shadowman_teleport_hijack_fx, 0, 0);
+  clientfield::register("toplayer", "player_shadowman_teleport_hijack_fx", 15000, 1, "int", &player_shadowman_teleport_hijack_fx, 0, 0);
   level thread setup_teleport_aftereffects();
   level thread wait_for_black_box();
   level thread wait_for_teleport_aftereffect();
@@ -30,25 +30,25 @@ function setup_teleport_aftereffects() {
   util::waitforclient(0);
   level.teleport_ae_funcs = [];
   if(getlocalplayers().size == 1) {
-    level.teleport_ae_funcs[level.teleport_ae_funcs.size] = & teleport_aftereffect_fov;
+    level.teleport_ae_funcs[level.teleport_ae_funcs.size] = &teleport_aftereffect_fov;
   }
-  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = & teleport_aftereffect_shellshock;
-  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = & teleport_aftereffect_shellshock_electric;
-  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = & teleport_aftereffect_bw_vision;
-  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = & teleport_aftereffect_red_vision;
-  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = & teleport_aftereffect_flashy_vision;
-  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = & teleport_aftereffect_flare_vision;
+  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = &teleport_aftereffect_shellshock;
+  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = &teleport_aftereffect_shellshock_electric;
+  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = &teleport_aftereffect_bw_vision;
+  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = &teleport_aftereffect_red_vision;
+  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = &teleport_aftereffect_flashy_vision;
+  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = &teleport_aftereffect_flare_vision;
 }
 
 function wait_for_black_box() {
   secondclientnum = -1;
-  while (true) {
+  while(true) {
     level waittill("black_box_start", localclientnum);
-    assert(isdefined(localclientnum));
+    assert(isDefined(localclientnum));
     savedvis = getvisionsetnaked(localclientnum);
-    playsound(0, "evt_teleport_2d_fnt", (0, 0, 0));
+    playSound(0, "evt_teleport_2d_fnt", (0, 0, 0));
     visionsetnaked(localclientnum, "default", 0);
-    while (secondclientnum != localclientnum) {
+    while(secondclientnum != localclientnum) {
       level waittill("black_box_end", secondclientnum);
     }
     visionsetnaked(localclientnum, savedvis, 0);
@@ -56,7 +56,7 @@ function wait_for_black_box() {
 }
 
 function wait_for_teleport_aftereffect() {
-  while (true) {
+  while(true) {
     level waittill("tae", localclientnum);
     if(getdvarstring("genesisAftereffectOverride") == ("-1")) {
       self thread[[level.teleport_ae_funcs[randomint(level.teleport_ae_funcs.size)]]](localclientnum);
@@ -80,7 +80,7 @@ function teleport_aftereffect_fov(localclientnum) {
   var_b27ddf7 = getdvarfloat("cg_fov_default");
   n_duration = 0.5;
   i = 0;
-  while (i < n_duration) {
+  while(i < n_duration) {
     n_fov = var_bd22d384 + (var_b27ddf7 - var_bd22d384) * (i / n_duration);
     waitrealtime(0.017);
     i = i + 0.017;

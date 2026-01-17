@@ -5,7 +5,6 @@
 
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\lui_shared;
-
 #namespace zm_game_timer;
 
 class czm_game_timer: cluielem {

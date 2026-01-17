@@ -14,10 +14,10 @@ init() {
 }
 
 init_stage() {
-  a_signs = getentarray("sq_tunnel_sign", "targetname");
+  a_signs = getEntArray("sq_tunnel_sign", "targetname");
 
   foreach(m_sign in a_signs) {
-    m_sign setcandamage(1);
+    m_sign setCanDamage(1);
     m_sign thread ts_sign_damage_watch();
   }
 
@@ -33,8 +33,7 @@ stage_logic() {
   stage_completed("sq", level._cur_stage_name);
 }
 
-exit_stage(success) {
-}
+exit_stage(success) {}
 
 ts_sign_damage_watch() {
   level endon("sq_sign_damaged");
@@ -64,16 +63,16 @@ ts_sign_activate() {
   self.ts_sign_activated = 1;
 
   if(!isDefined(self.fx_ent)) {
-    v_forward = anglestoforward(self.angles);
+    v_forward = anglesToForward(self.angles);
     v_offset = vectornormalize(v_forward) * 2;
     self.fx_ent = spawn("script_model", self.origin - vectorscale((0, 0, 1), 20.0) + v_offset);
-    self.fx_ent.angles = anglestoforward(self.angles);
-    self.fx_ent setmodel("tag_origin");
-    self.fx_ent playsound("zmb_sq_wisp_spawn");
-    self.fx_ent playloopsound("zmb_sq_wisp_wall_loop");
+    self.fx_ent.angles = anglesToForward(self.angles);
+    self.fx_ent setModel("tag_origin");
+    self.fx_ent playSound("zmb_sq_wisp_spawn");
+    self.fx_ent playLoopSound("zmb_sq_wisp_wall_loop");
 
     while(isDefined(self.fx_ent)) {
-      playfxontag(level._effect["sq_ether_amp_trail"], self.fx_ent, "tag_origin");
+      playFXOnTag(level._effect["sq_ether_amp_trail"], self.fx_ent, "tag_origin");
       wait 0.3;
     }
   }
@@ -89,7 +88,7 @@ ts_sign_deactivate() {
 }
 
 ts_sign_check_all_activated(e_attacker, m_last_touched) {
-  a_signs = getentarray("sq_tunnel_sign", "targetname");
+  a_signs = getEntArray("sq_tunnel_sign", "targetname");
   a_signs_active = [];
   is_max_complete = 1;
   is_ric_complete = 1;

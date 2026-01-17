@@ -11,7 +11,7 @@
 #include maps\mp\gametypes\_damagefeedback;
 
 callback_vehicledamage(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime, damagefromunderneath, modelindex, partname) {
-  if(!(level.idflags_radius & idflags))
+  if(!(level.idflags_radius &idflags))
     idamage = maps\mp\gametypes\_class::cac_modified_vehicle_damage(self, eattacker, idamage, smeansofdeath, sweapon, einflictor);
 
   self.idflags = idflags;
@@ -41,12 +41,11 @@ callback_vehicledamage(einflictor, eattacker, idamage, idflags, smeansofdeath, s
       sweapon = "destructible_car_mp";
   }
 
-  if(!(idflags & level.idflags_no_protection)) {
+  if(!(idflags &level.idflags_no_protection)) {
     if(self isvehicleimmunetodamage(idflags, smeansofdeath, sweapon)) {
       return;
     }
-    if(smeansofdeath == "MOD_PISTOL_BULLET" || smeansofdeath == "MOD_RIFLE_BULLET") {
-    } else if(smeansofdeath == "MOD_PROJECTILE" || smeansofdeath == "MOD_GRENADE") {
+    if(smeansofdeath == "MOD_PISTOL_BULLET" || smeansofdeath == "MOD_RIFLE_BULLET") {} else if(smeansofdeath == "MOD_PROJECTILE" || smeansofdeath == "MOD_GRENADE") {
       idamage = idamage * getvehicleprojectilescalar(sweapon);
       idamage = int(idamage);
 
@@ -112,8 +111,7 @@ callback_vehicledamage(einflictor, eattacker, idamage, idflags, smeansofdeath, s
     } else if(!level.hardcoremode && isDefined(self.owner) && isDefined(eattacker.owner) && self.owner == eattacker.owner)
       return;
     else {
-      if(!level.teambased && isDefined(self.targetname) && self.targetname == "rcbomb") {
-      } else if(isDefined(self.owner) && isDefined(eattacker) && self.owner == eattacker) {
+      if(!level.teambased && isDefined(self.targetname) && self.targetname == "rcbomb") {} else if(isDefined(self.owner) && isDefined(eattacker) && self.owner == eattacker) {
         return;
       }
       if(idamage < 1)
@@ -186,7 +184,7 @@ callback_vehicleradiusdamage(einflictor, eattacker, idamage, finnerdamage, foute
   }
   friendly = 0;
 
-  if(!(idflags & level.idflags_no_protection)) {
+  if(!(idflags &level.idflags_no_protection)) {
     if(self isvehicleimmunetodamage(idflags, smeansofdeath, sweapon)) {
       return;
     }
@@ -256,9 +254,9 @@ vehiclecrush() {
   self endon("disconnect");
 
   if(isDefined(level._effect) && isDefined(level._effect["tanksquish"]))
-    playfx(level._effect["tanksquish"], self.origin + vectorscale((0, 0, 1), 30.0));
+    playFX(level._effect["tanksquish"], self.origin + vectorscale((0, 0, 1), 30.0));
 
-  self playsound("chr_crunch");
+  self playSound("chr_crunch");
 }
 
 getvehicleprojectilescalar(sweapon) {
@@ -314,9 +312,7 @@ getvehiclebulletdamage(sweapon) {
 
 allowfriendlyfiredamage(einflictor, eattacker, smeansofdeath, sweapon) {
   if(isDefined(self.allowfriendlyfiredamageoverride))
-    return [
-      [self.allowfriendlyfiredamageoverride]
-    ](einflictor, eattacker, smeansofdeath, sweapon);
+    return [[self.allowfriendlyfiredamageoverride]](einflictor, eattacker, smeansofdeath, sweapon);
 
   vehicle = eattacker getvehicleoccupied();
   return 0;

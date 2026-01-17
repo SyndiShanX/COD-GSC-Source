@@ -17,18 +17,17 @@
 #include scripts\zm_common\zm_loadout;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
-
 #namespace zm_weap_cymbal_monkey;
 
 autoexec __init__system__() {
-  system::register(#"zm_weap_cymbal_monkey", &__init__, &__main__, #"zm_weapons");
+  system::register(#"zm_weap_cymbal_monkey", &__init__, &__main__, # "zm_weapons");
 }
 
 __init__() {
   level.weaponzmcymbalmonkey = getweapon(#"cymbal_monkey");
   zm_weapons::register_zombie_weapon_callback(level.weaponzmcymbalmonkey, &player_give_cymbal_monkey);
   zm_loadout::register_lethal_grenade_for_level(#"cymbal_monkey");
-  clientfield::register("scriptmover", "" + #"hash_60a7e5b79e8064a5", 1, 1, "int");
+  clientfield::register("scriptmover", "" + # "hash_60a7e5b79e8064a5", 1, 1, "int");
   zm::function_84d343d(#"cymbal_monkey", &function_3681e2bc);
 }
 
@@ -39,15 +38,14 @@ __main__() {
 
   level.zombiemode_devgui_cymbal_monkey_give = &player_give_cymbal_monkey;
 
-    if(isDefined(level.legacy_cymbal_monkey) && level.legacy_cymbal_monkey) {
-      level.cymbal_monkey_model = "weapon_zombie_monkey_bomb";
-    }
-  else {
+  if(isDefined(level.legacy_cymbal_monkey) && level.legacy_cymbal_monkey) {
+    level.cymbal_monkey_model = "weapon_zombie_monkey_bomb";
+  } else {
     level.cymbal_monkey_model = "wpn_t7_zmb_monkey_bomb_world";
   }
 
-  level._effect[#"monkey_glow"] = #"zm_weapons/fx8_cymbal_monkey_light";
-  level._effect[#"grenade_samantha_steal"] = #"hash_7965ec9e0938553f";
+  level._effect[# "monkey_glow"] = # "zm_weapons/fx8_cymbal_monkey_light";
+  level._effect[# "grenade_samantha_steal"] = # "hash_7965ec9e0938553f";
   level.cymbal_monkeys = [];
   level.var_2f2478f2 = 1;
 
@@ -94,7 +92,7 @@ player_give_cymbal_monkey() {
 
 player_handle_cymbal_monkey() {
   self notify(#"starting_monkey_watch");
-  self endon(#"starting_monkey_watch", #"disconnect");
+  self endon(#"starting_monkey_watch", # "disconnect");
   attract_dist_diff = level.monkey_attract_dist_diff;
 
   if(!isDefined(attract_dist_diff)) {
@@ -221,8 +219,8 @@ show_briefly(showtime) {
 }
 
 show_owner_on_attack(owner) {
-  owner endon(#"hide_owner", #"show_owner");
-  self endon(#"explode", #"death", #"grenade_dud");
+  owner endon(#"hide_owner", # "show_owner");
+  self endon(#"explode", # "death", # "grenade_dud");
   owner.show_for_time = undefined;
 
   for(;;) {
@@ -240,18 +238,18 @@ hide_owner(owner) {
   owner setvisibletoallexceptteam(level.zombie_team);
   owner.hide_owner = 1;
 
-  if(isDefined(level._effect[#"human_disappears"])) {
-    playFX(level._effect[#"human_disappears"], owner.origin);
+  if(isDefined(level._effect[# "human_disappears"])) {
+    playFX(level._effect[# "human_disappears"], owner.origin);
   }
 
   self thread show_owner_on_attack(owner);
-  evt = self waittill(#"explode", #"death", #"grenade_dud");
+  evt = self waittill(#"explode", # "death", # "grenade_dud");
   println("<dev string:x38>" + evt._notify);
   owner notify(#"show_owner");
   owner unsetperk("specialty_immunemms");
 
-  if(isDefined(level._effect[#"human_disappears"])) {
-    playFX(level._effect[#"human_disappears"], owner.origin);
+  if(isDefined(level._effect[# "human_disappears"])) {
+    playFX(level._effect[# "human_disappears"], owner.origin);
   }
 
   owner.no_burning_sfx = undefined;
@@ -306,7 +304,7 @@ proximity_detonate(owner) {
 }
 
 player_throw_cymbal_monkey(e_grenade, num_attractors, max_attract_dist, attract_dist_diff) {
-  self endon(#"starting_monkey_watch", #"disconnect");
+  self endon(#"starting_monkey_watch", # "disconnect");
 
   if(isDefined(e_grenade)) {
     e_grenade endon(#"death");
@@ -359,7 +357,7 @@ player_throw_cymbal_monkey(e_grenade, num_attractors, max_attract_dist, attract_
       }
 
       e_grenade resetmissiledetonationtime();
-      playFXOnTag(level._effect[#"monkey_glow"], e_grenade.mdl_monkey, "tag_weapon");
+      playFXOnTag(level._effect[# "monkey_glow"], e_grenade.mdl_monkey, "tag_weapon");
       valid_poi = e_grenade is_on_navmesh(self);
 
       if(valid_poi && isDefined(e_grenade.var_45eaa114) && e_grenade.var_45eaa114) {
@@ -389,11 +387,11 @@ player_throw_cymbal_monkey(e_grenade, num_attractors, max_attract_dist, attract_
   }
 }
 
-private function_ab9a9770() {
+function_ab9a9770() {
   s_trace = groundtrace(self.origin + (0, 0, 70), self.origin + (0, 0, -100), 0, self);
 
-  if(isDefined(s_trace[#"entity"])) {
-    entity = s_trace[#"entity"];
+  if(isDefined(s_trace[# "entity"])) {
+    entity = s_trace[# "entity"];
 
     if(entity ismovingplatform()) {
       return true;
@@ -447,7 +445,7 @@ grenade_stolen_by_sam(e_grenade, e_actor) {
     }
   }
 
-  playFXOnTag(level._effect[#"grenade_samantha_steal"], e_grenade.mdl_monkey, "tag_origin");
+  playFXOnTag(level._effect[# "grenade_samantha_steal"], e_grenade.mdl_monkey, "tag_origin");
   e_grenade.mdl_monkey unlink();
   e_grenade.mdl_monkey movez(60, 1, 0.25, 0.25);
   e_grenade.mdl_monkey vibrate(direction, 1.5, 2.5, 1);
@@ -556,7 +554,7 @@ play_delayed_explode_vox() {
 }
 
 get_thrown_monkey() {
-  self endon(#"starting_monkey_watch", #"disconnect");
+  self endon(#"starting_monkey_watch", # "disconnect");
 
   while(true) {
     waitresult = self waittill(#"grenade_fire");
@@ -609,7 +607,7 @@ monitor_zombie_groans(info) {
 }
 
 play_zombie_groans() {
-  self endon(#"monkey_blown_up", #"death");
+  self endon(#"monkey_blown_up", # "death");
 
   while(true) {
     if(isDefined(self)) {
@@ -666,7 +664,7 @@ is_on_navmesh(e_player) {
 
     if(isDefined(self.mdl_monkey)) {
       self.mdl_monkey.origin = self.origin;
-      self.mdl_monkey clientfield::set("" + #"hash_60a7e5b79e8064a5", 1);
+      self.mdl_monkey clientfield::set("" + # "hash_60a7e5b79e8064a5", 1);
     }
 
     self.var_45eaa114 = 1;

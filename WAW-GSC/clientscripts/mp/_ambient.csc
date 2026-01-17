@@ -38,9 +38,9 @@ ambient_flak_think(point) {
   point.is_firing = false;
   level thread ambient_flak_rotate(point);
   level thread ambient_flak_flash(point, min_burst_time, max_burst_time);
-  for (;;) {
+  for(;;) {
     timer = randomFloatRange(min_burst_time, max_burst_time);
-    while (timer > 0) {
+    while(timer > 0) {
       point.is_firing = true;
       playFX(0, level._effect[point.fx_id], point.origin, point.forward, point.up);
       thread play_sound_in_space(0, "wpn_triple25_fire", point.origin);
@@ -60,7 +60,7 @@ ambient_flak_rotate(point) {
   } else {
     pointangles = (0, 0, 0);
   }
-  for (;;) {
+  for(;;) {
     time = randomFloatRange(0.5, 2);
     steps = time * 10;
     random_angle = (randomIntRange(min_pitch, max_pitch) * -1, randomInt(360), 0);
@@ -68,7 +68,7 @@ ambient_flak_rotate(point) {
     up = anglesToUp(random_angle);
     diff_forward = (forward - point.forward) / steps;
     diff_up = (up - point.up) / steps;
-    for (i = 0; i < steps; i++) {
+    for(i = 0; i < steps; i++) {
       point.forward += diff_forward;
       point.up += diff_up;
       wait(0.1);
@@ -90,7 +90,7 @@ ambient_flak_flash(point, min_burst_time, max_burst_time) {
   min_burst_time = 0.25;
   max_burst_time = 1;
   fxpos = undefined;
-  while (1) {
+  while(1) {
     if(!point.is_firing) {
       wait(0.25);
       continue;
@@ -241,9 +241,9 @@ ambient_fakefire_think(point) {
     default:
       ASSERTMSG("Ambient Fakefire: Weapon Info '" + point.weaponinfo + "' is not recognized.");
   }
-  while (1) {
+  while(1) {
     burst = randomIntRange(burstMin, burstMax);
-    for (i = 0; i < burst; i++) {
+    for(i = 0; i < burst; i++) {
       traceDist = 10000;
       target = point.origin + vector_multiply(anglesToForward(point.angles + (-3 + randomInt(6), -5 + randomInt(10), 0)), traceDist);
       bulletTracer(point.origin, target, false);

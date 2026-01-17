@@ -114,7 +114,7 @@ train_fx_think(id, id_end) {
     }
     origin = level.createfxexploders[id][0].v["origin"];
     dir = vectornormalize(origin - self.origin);
-    forward = anglestoforward(self.angles);
+    forward = anglesToForward(self.angles);
     dot = vectordot(forward, dir);
 
     if(dot <= 0) {

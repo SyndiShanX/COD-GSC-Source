@@ -17,7 +17,7 @@ usingSemiAutoWeapon() {
 
 autoShootAnimRate() {
   if(usingAutomaticWeapon()) {
-    // The auto fire animation fires 10 shots a second, so we divide the weapon's fire rate by 
+    // The auto fire animation fires 10 shots a second, so we divide the weapon's fire rate by
     // 10 to get the correct anim playback rate.
     //		return weaponFireTime( self.weapon ) * 10;
     return 0.1 / weaponFireTime(self.weapon);
@@ -41,8 +41,8 @@ waitAfterShot() {
 }
 
 shootAnimTime(semiAutoFire) {
-  if(!usingAutomaticWeapon() || (isdefined(semiAutofire) && (semiAutofire == true))) {
-    // We randomize the result a little from the real time, just to make things more 
+  if(!usingAutomaticWeapon() || (isDefined(semiAutofire) && (semiAutofire == true))) {
+    // We randomize the result a little from the real time, just to make things more
     // interesting.In reality, the 20Hz server is going to make this much less variable.
     rand = 0.5 + randomfloat(1); // 0.8 + 0.4
     return weaponFireTime(self.weapon) * rand;
@@ -85,13 +85,13 @@ RefillClip() {
 }
 
 add_weapon(name, type, time, clipsize, anims) {
-  assert(isdefined(name));
-  assert(isdefined(type));
-  if(!isdefined(time))
+  assert(isDefined(name));
+  assert(isDefined(type));
+  if(!isDefined(time))
     time = 3.0;
-  if(!isdefined(clipsize))
+  if(!isDefined(clipsize))
     time = 1;
-  if(!isdefined(anims))
+  if(!isDefined(anims))
     anims = "rifle";
 
   name = tolower(name);

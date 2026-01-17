@@ -23,7 +23,6 @@
 #include scripts\mp_common\player\player_utils;
 #include scripts\mp_common\util;
 #include scripts\weapons\weapon_utils;
-
 #namespace gun;
 
 event_handler[gametype_init] main(eventstruct) {
@@ -167,7 +166,7 @@ onstartgametype() {
 }
 
 inactivitykick() {
-  self endon(#"disconnect", #"death");
+  self endon(#"disconnect", # "death");
 
   if(sessionmodeisprivate()) {
     return;
@@ -177,16 +176,16 @@ inactivitykick() {
     return;
   }
 
-  while(level.inactivitykick > self.timeplayed[#"total"]) {
+  while(level.inactivitykick > self.timeplayed[# "total"]) {
     wait 1;
   }
 
-  if(self.pers[#"participation"] == 0 && self.pers[#"time_played_moving"] < 1) {
+  if(self.pers[# "participation"] == 0 && self.pers[# "time_played_moving"] < 1) {
     globallogic::gamehistoryplayerkicked();
     kick(self getentitynumber(), "GAME/DROPPEDFORINACTIVITY");
   }
 
-  if(self.pers[#"participation"] == 0 && self.timeplayed[#"total"] > 60) {
+  if(self.pers[# "participation"] == 0 && self.timeplayed[# "total"] > 60) {
     globallogic::gamehistoryplayerkicked();
     kick(self getentitynumber(), "GAME/DROPPEDFORINACTIVITY");
   }
@@ -281,7 +280,7 @@ addguntoprogression(weaponname, attachment1, attachment2, attachment3, attachmen
 }
 
 takeoldweapon(oldweapon) {
-  self endon(#"death", #"disconnect");
+  self endon(#"death", # "disconnect");
   wait 1;
   self takeweapon(oldweapon);
 }
@@ -345,7 +344,7 @@ givecustomloadout(takeoldweapon = 0) {
 }
 
 promoteplayer(weaponused) {
-  self endon(#"disconnect", #"cancel_promotion");
+  self endon(#"disconnect", # "cancel_promotion");
   level endon(#"game_ended");
   waitframe(1);
 
@@ -358,7 +357,7 @@ promoteplayer(weaponused) {
       }
     }
 
-    pointstowin = self.pers[#"pointstowin"];
+    pointstowin = self.pers[# "pointstowin"];
 
     if(pointstowin < level.scorelimit) {
       scoreevents::processscoreevent(#"kill_gun", self, undefined, weaponused);
@@ -394,15 +393,15 @@ demoteplayer(attacker) {
   }
 
   self stats::function_bb7eedf0(#"humiliate_victim", 1);
-  self.pers[#"humiliated"]++;
-  self.humiliated = self.pers[#"humiliated"];
+  self.pers[# "humiliated"]++;
+  self.humiliated = self.pers[# "humiliated"];
   self recordgameevent("return");
   self playlocalsound(#"mpl_wager_humiliate");
   self globallogic_audio::leader_dialog_on_player("humiliated");
 }
 
 infiniteammo() {
-  self endon(#"death", #"disconnect");
+  self endon(#"death", # "disconnect");
 
   while(true) {
     wait 0.1;
@@ -414,7 +413,7 @@ infiniteammo() {
 function_486a8395() {
   ruleweaponsleft = 3;
 
-    minweaponsleft = level.gunprogression.size;
+  minweaponsleft = level.gunprogression.size;
 
   foreach(player in level.activeplayers) {
     if(!isDefined(player)) {
@@ -432,10 +431,9 @@ function_486a8395() {
     }
 
     if(ruleweaponsleft >= minweaponsleft) {
-
-        return false;
+      return false;
     }
   }
 
-    return true;
+  return true;
 }

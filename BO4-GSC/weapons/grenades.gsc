@@ -5,7 +5,6 @@
 
 #include scripts\core_common\clientfield_shared;
 #include scripts\weapons\weaponobjects;
-
 #namespace grenades;
 
 init_shared() {
@@ -25,7 +24,7 @@ function_aa95d684(watcher, player) {
 
 function_5f86757d() {
   level endon(#"game_ended");
-  self waittill(#"explode", #"death");
+  self waittill(#"explode", # "death");
 
   if(!isDefined(self)) {
     return;

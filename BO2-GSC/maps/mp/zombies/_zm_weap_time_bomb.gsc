@@ -30,7 +30,7 @@ register_time_bomb_enemy(str_type, func_conditions_for_round, func_save_enemy_da
   assert(isDefined(func_respawn_enemies), "func_respawn is a required parameter for register_time_bomb_enemy! This will run a function to respawn the new creature type.");
 
   if(!isDefined(level._time_bomb.enemy_type[str_type]))
-    level._time_bomb.enemy_type[str_type] = spawnstruct();
+    level._time_bomb.enemy_type[str_type] = spawnStruct();
 
   level._time_bomb.enemy_type[str_type].conditions_for_round = func_conditions_for_round;
   level._time_bomb.enemy_type[str_type].enemy_data_save_func = func_save_enemy_data;
@@ -103,7 +103,7 @@ init_time_bomb() {
   level._effect["time_bomb_ammo_fx"] = loadfx("misc/fx_zombie_powerup_on");
   level._effect["time_bomb_respawns_enemy"] = loadfx("maps/zombie_buried/fx_buried_time_bomb_spawn");
   level._effect["time_bomb_kills_enemy"] = loadfx("maps/zombie_buried/fx_buried_time_bomb_death");
-  level._time_bomb = spawnstruct();
+  level._time_bomb = spawnStruct();
   level._time_bomb.enemy_type = [];
   register_time_bomb_enemy("zombie", ::is_zombie_round, ::time_bomb_saves_zombie_data, ::time_bomb_respawns_zombies);
   register_time_bomb_enemy_default("zombie");
@@ -127,7 +127,7 @@ time_bomb_post_init() {
 }
 
 add_time_bomb_to_mystery_box() {
-  maps\mp\zombies\_zm_weapons::add_zombie_weapon("time_bomb_zm", undefined, & "ZOMBIE_WEAPON_TIME_BOMB", 50, "pickup_bomb", "", undefined, 1);
+  maps\mp\zombies\_zm_weapons::add_zombie_weapon("time_bomb_zm", undefined, &"ZOMBIE_WEAPON_TIME_BOMB", 50, "pickup_bomb", "", undefined, 1);
 }
 
 player_give_time_bomb() {
@@ -193,7 +193,7 @@ time_bomb_thrown_vo() {
 time_bomb_model_init() {
   delete_existing_time_bomb_model();
   level.time_bomb_save_data.time_bomb_model = self;
-  level.time_bomb_save_data.time_bomb_model playloopsound("zmb_timebomb_3d_timer", 1);
+  level.time_bomb_save_data.time_bomb_model playLoopSound("zmb_timebomb_3d_timer", 1);
   level notify("new_time_bomb_set");
   playsoundatposition("zmb_timebomb_plant_2d", (0, 0, 0));
 }
@@ -204,7 +204,7 @@ delete_existing_time_bomb_model() {
 }
 
 setup_time_bomb_detonation_model() {
-  playfxontag(level._effect["time_bomb_ammo_fx"], self, "tag_origin");
+  playFXOnTag(level._effect["time_bomb_ammo_fx"], self, "tag_origin");
 }
 
 detonate_time_bomb() {
@@ -219,7 +219,7 @@ detonate_time_bomb() {
 
 delete_time_bomb_model() {
   if(isDefined(self) && isDefined(self.origin)) {
-    playfx(level._effect["time_bomb_set"], self.origin);
+    playFX(level._effect["time_bomb_set"], self.origin);
     self delete();
   }
 }
@@ -266,7 +266,7 @@ _time_bomb_saves_data(b_show_icon, save_struct) {
   debug_time_bomb_print("TIME BOMB SET! Saving...");
 
   if(!isDefined(save_struct) && !time_bomb_save_exists())
-    level.time_bomb_save_data = spawnstruct();
+    level.time_bomb_save_data = spawnStruct();
 
   time_bomb_saves_global_data(save_struct);
   time_bomb_saves_player_data(save_struct);
@@ -295,7 +295,7 @@ time_bomb_saves_global_data(save_struct) {
   if(flag("time_bomb_stores_door_state"))
     _time_bomb_saves_door_states(s_temp);
 
-  s_temp.custom_data = spawnstruct();
+  s_temp.custom_data = spawnStruct();
 
   if(isDefined(level._time_bomb.custom_funcs_save)) {
     for(i = 0; i < level._time_bomb.custom_funcs_save.size; i++)
@@ -307,7 +307,7 @@ time_bomb_saves_global_data(save_struct) {
 }
 
 _time_bomb_saves_door_states(s_temp) {
-  a_doors = getentarray("zombie_door", "targetname");
+  a_doors = getEntArray("zombie_door", "targetname");
   s_temp.door_states = [];
 
   foreach(door in a_doors)
@@ -315,7 +315,7 @@ _time_bomb_saves_door_states(s_temp) {
 }
 
 store_door_state(s_temp) {
-  s_door_struct = spawnstruct();
+  s_door_struct = spawnStruct();
   s_door_struct.doors = [];
 
   if(isDefined(self._door_open) && self._door_open || isDefined(self.has_been_opened) && self.has_been_opened) {
@@ -323,7 +323,7 @@ store_door_state(s_temp) {
       self waittill_either("movedone", "rotatedone");
 
     foreach(door in self.doors) {
-      s = spawnstruct();
+      s = spawnStruct();
       s.saved_angles = door.angles;
       s.saved_origin = door.origin;
       s_door_struct.doors[s_door_struct.doors.size] = s;
@@ -332,7 +332,7 @@ store_door_state(s_temp) {
     s_door_struct.state = 1;
   } else {
     foreach(door in self.doors) {
-      s = spawnstruct();
+      s = spawnStruct();
       s.saved_angles = door.og_angles;
       s.saved_origin = door.origin;
       s_door_struct.doors[s_door_struct.doors.size] = s;
@@ -351,7 +351,7 @@ _time_bomb_restores_door_states(s_temp) {
     return;
   }
 
-  a_doors = getentarray("zombie_door", "targetname");
+  a_doors = getEntArray("zombie_door", "targetname");
 
   foreach(door in a_doors)
   door thread restore_door_state(s_temp);
@@ -411,7 +411,7 @@ _time_bomb_saves_enemy_info(s_temp) {
   assert(isDefined(level._time_bomb.enemy_type[s_temp.round_type].enemy_data_save_func), "enemy save data func is missing for AI type " + s_temp.round_type);
 
   for(i = 0; i < a_enemies.size; i++) {
-    s_data = spawnstruct();
+    s_data = spawnStruct();
 
     if(!isDefined(level._time_bomb.enemy_type[s_temp.round_type].enemy_data_save_filter_func) || a_enemies[i][
         [level._time_bomb.enemy_type[s_temp.round_type].enemy_data_save_filter_func]
@@ -436,7 +436,7 @@ time_bomb_saves_player_data(save_struct) {
     player_save_struct = undefined;
 
     if(isDefined(save_struct)) {
-      save_struct.player_saves[player getentitynumber()] = spawnstruct();
+      save_struct.player_saves[player getentitynumber()] = spawnStruct();
       player_save_struct = save_struct;
     }
 
@@ -446,14 +446,14 @@ time_bomb_saves_player_data(save_struct) {
 
 _time_bomb_save_internal(save_struct) {
   if(!isDefined(save_struct) && !isDefined(self.time_bomb_save_data))
-    self.time_bomb_save_data = spawnstruct();
+    self.time_bomb_save_data = spawnStruct();
 
   if(!self ent_flag_exist("time_bomb_restore_thread_done"))
     self ent_flag_init("time_bomb_restore_thread_done");
 
   self ent_flag_clear("time_bomb_restore_thread_done");
-  s_temp = spawnstruct();
-  s_temp.weapons = spawnstruct();
+  s_temp = spawnStruct();
+  s_temp.weapons = spawnStruct();
 
   if(isDefined(save_struct))
     s_temp.n_time_id = save_struct.n_time_id;
@@ -825,7 +825,7 @@ _time_bomb_restores_player_data_internal(save_struct) {
     debug_time_bomb_print("TIMEBOMB >> restoring player " + self.name);
 
     if(!isDefined(self.time_bomb_save_data) && !isDefined(save_struct))
-      self.time_bomb_save_data = spawnstruct();
+      self.time_bomb_save_data = spawnStruct();
 
     if(!isDefined(save_struct))
       s_temp = self.time_bomb_save_data;
@@ -1103,7 +1103,7 @@ _time_bomb_kill_all_active_enemies() {
 _kill_time_bomb_enemy() {
   self dodamage(self.health + 100, self.origin, self, self, self.origin);
   self ghost();
-  playfx(level._effect["time_bomb_kills_enemy"], self.origin);
+  playFX(level._effect["time_bomb_kills_enemy"], self.origin);
 
   if(isDefined(self) && isDefined(self.anchor))
     self.anchor delete();
@@ -1120,9 +1120,7 @@ _kill_time_bomb_enemy() {
 
 time_bomb_get_enemy_array() {
   if(isDefined(level._time_bomb.custom_funcs_get_enemies))
-    a_enemies = [
-      [level._time_bomb.custom_funcs_get_enemies]
-    ]();
+    a_enemies = [[level._time_bomb.custom_funcs_get_enemies]]();
   else
     a_enemies = get_round_enemy_array();
 
@@ -1265,8 +1263,7 @@ _restore_zombie_data(s_info) {
 
   self.completed_emerging_into_playable_area = s_info.completed_emerging_into_playable_area;
 
-  if(isDefined(self.completed_emerging_into_playable_area) && self.completed_emerging_into_playable_area) {
-  }
+  if(isDefined(self.completed_emerging_into_playable_area) && self.completed_emerging_into_playable_area) {}
 
   if(isDefined(s_info.has_legs)) {
     self.has_legs = s_info.has_legs;
@@ -1340,7 +1337,7 @@ _zombies_go_back_into_ai_when_time_bomb_is_done() {
   self endon("death");
 
   if(isDefined(self)) {
-    playfxontag(level._effect["time_bomb_respawns_enemy"], self, "J_SpineLower");
+    playFXOnTag(level._effect["time_bomb_respawns_enemy"], self, "J_SpineLower");
     self setgoalpos(self.origin);
     self.angles = self.time_bomb_restored_data.angles;
     flag_waitopen("time_bomb_restore_active");
@@ -1854,7 +1851,7 @@ _test_mode_loop() {
 }
 
 print_ent_count() {
-  a_ents_origins = getentarray("script_origin", "classname");
-  a_ents_models = getentarray("script_model", "classname");
+  a_ents_origins = getEntArray("script_origin", "classname");
+  a_ents_models = getEntArray("script_model", "classname");
   iprintln("ENT COUNT - script_origins: " + a_ents_origins.size + ". script_models: " + a_ents_models.size);
 }

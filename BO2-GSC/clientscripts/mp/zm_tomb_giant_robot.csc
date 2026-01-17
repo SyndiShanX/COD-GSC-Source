@@ -59,13 +59,13 @@ play_foot_stomp_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldn
   ai_robot thread play_warning_lights_in_footprints_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump);
 
   if(newval == 1) {
-    playfxontag(localclientnum, level._effect["robot_foot_stomp"], ai_robot, "tag_hatch_fx_ri");
+    playFXOnTag(localclientnum, level._effect["robot_foot_stomp"], ai_robot, "tag_hatch_fx_ri");
     origin = ai_robot gettagorigin("tag_hatch_fx_ri");
-    playsound(0, "zmb_robot_foot_impact", origin);
+    playSound(0, "zmb_robot_foot_impact", origin);
   } else if(newval == 2) {
-    playfxontag(localclientnum, level._effect["robot_foot_stomp"], ai_robot, "tag_hatch_fx_le");
+    playFXOnTag(localclientnum, level._effect["robot_foot_stomp"], ai_robot, "tag_hatch_fx_le");
     origin = ai_robot gettagorigin("tag_hatch_fx_le");
-    playsound(0, "zmb_robot_foot_impact", origin);
+    playSound(0, "zmb_robot_foot_impact", origin);
   }
 }
 
@@ -81,18 +81,18 @@ play_foot_open_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     v_fx_pos = ai_robot gettagorigin("tag_hatch_fx_ri");
     v_fx_pos = v_fx_pos - v_fx_offset;
     ai_robot.e_damage_fx = spawn(localclientnum, v_fx_pos, "script_model");
-    ai_robot.e_damage_fx setmodel("tag_origin");
+    ai_robot.e_damage_fx setModel("tag_origin");
     ai_robot.e_damage_fx linkto(ai_robot, "tag_hatch_fx_ri");
-    ai_robot.e_damage_fx playsound(0, "zmb_zombieblood_3rd_plane_explode");
-    playfxontag(localclientnum, level._effect["mechz_death"], ai_robot.e_damage_fx, "tag_origin");
+    ai_robot.e_damage_fx playSound(0, "zmb_zombieblood_3rd_plane_explode");
+    playFXOnTag(localclientnum, level._effect["mechz_death"], ai_robot.e_damage_fx, "tag_origin");
   } else if(newval == 2) {
     v_fx_pos = ai_robot gettagorigin("tag_hatch_fx_le");
     v_fx_pos = v_fx_pos - v_fx_offset;
     ai_robot.e_damage_fx = spawn(localclientnum, v_fx_pos, "script_model");
-    ai_robot.e_damage_fx setmodel("tag_origin");
+    ai_robot.e_damage_fx setModel("tag_origin");
     ai_robot.e_damage_fx linkto(ai_robot, "tag_hatch_fx_le");
-    ai_robot.e_damage_fx playsound(0, "zmb_zombieblood_3rd_plane_explode");
-    playfxontag(localclientnum, level._effect["mechz_death"], ai_robot.e_damage_fx, "tag_origin");
+    ai_robot.e_damage_fx playSound(0, "zmb_zombieblood_3rd_plane_explode");
+    playFXOnTag(localclientnum, level._effect["mechz_death"], ai_robot.e_damage_fx, "tag_origin");
   } else if(isDefined(ai_robot.e_damage_fx))
     ai_robot.e_damage_fx delete();
 }
@@ -102,8 +102,8 @@ play_eject_warning_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fie
     s_origin = getstruct(fieldname, "targetname");
     v_fx_pos = s_origin.origin;
     level.fieldname[localclientnum] = spawn(localclientnum, v_fx_pos, "script_model");
-    level.fieldname[localclientnum] setmodel("tag_origin");
-    playfxontag(localclientnum, level._effect["eject_warning"], level.fieldname[localclientnum], "tag_origin");
+    level.fieldname[localclientnum] setModel("tag_origin");
+    playFXOnTag(localclientnum, level._effect["eject_warning"], level.fieldname[localclientnum], "tag_origin");
   } else if(isDefined(level.fieldname[localclientnum]))
     level.fieldname[localclientnum] delete();
 }
@@ -127,7 +127,7 @@ loop_eject_steam_fx(localclientnum) {
   self thread sndplaysteamfx("stop_eject_steam_fx", s_tube.origin);
 
   while(true) {
-    self.fieldname = playfx(localclientnum, level._effect["eject_steam"], s_tube.origin, anglestoforward(s_tube.angles), anglestoup(s_tube.angles));
+    self.fieldname = playFX(localclientnum, level._effect["eject_steam"], s_tube.origin, anglesToForward(s_tube.angles), anglestoup(s_tube.angles));
     wait 0.1;
   }
 }
@@ -159,7 +159,7 @@ loop_all_tube_steam(localclientnum) {
   self thread sndplaysteamfx("stop_all_tubes_eject_steam", self.origin);
 
   while(true) {
-    playfx(localclientnum, level._effect["eject_steam"], self.origin, anglestoforward(self.angles), anglestoup(self.angles));
+    playFX(localclientnum, level._effect["eject_steam"], self.origin, anglesToForward(self.angles), anglestoup(self.angles));
     wait 0.1;
   }
 }
@@ -172,7 +172,7 @@ sndplaysteamfx(the_notify, origin) {
 
 gr_eject_player_impact_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval == 1)
-    self.fieldname = playfx(localclientnum, level._effect["beacon_shell_explosion"], self.origin);
+    self.fieldname = playFX(localclientnum, level._effect["beacon_shell_explosion"], self.origin);
   else if(isDefined(self.fieldname))
     stopfx(localclientnum, self.fieldname);
 }
@@ -206,16 +206,16 @@ get_clientside_giant_robot_ai(localclientnum, fieldname) {
 toggle_robot_warning_lights(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(!isDefined(level.robot_light_positions)) {
     level.robot_light_positions = [];
-    level.robot_light_positions[0] = spawnstruct();
+    level.robot_light_positions[0] = spawnStruct();
     level.robot_light_positions[0].struct_name = "nml_warn_light_fp_ref";
     level.robot_light_positions[0].warning_lights = getstructarray("nml_foot_warn_light", "targetname");
     assert(level.robot_light_positions[0].warning_lights.size > 0, "DID NOT FIND THE STRUCTS FOR THE FOOTPRINT LIGHTS - NML");
-    level.robot_light_positions[1] = spawnstruct();
+    level.robot_light_positions[1] = spawnStruct();
     level.robot_light_positions[1].struct_name = "trench_warn_light_fp_ref";
     level.robot_light_positions[1].warning_lights = [];
     level.robot_light_positions[1].warning_lights = getstructarray("trench_foot_warn_light", "targetname");
     assert(level.robot_light_positions[1].warning_lights.size > 0, "DID NOT FIND THE STRUCTS FOR THE FOOTPRINT LIGHTS - TRENCHES");
-    level.robot_light_positions[2] = spawnstruct();
+    level.robot_light_positions[2] = spawnStruct();
     level.robot_light_positions[2].struct_name = "church_warn_light_fp_ref";
     level.robot_light_positions[2].warning_lights = [];
     level.robot_light_positions[2].warning_lights = getstructarray("church_foot_warn_light", "targetname");
@@ -247,7 +247,7 @@ turn_on_warning_lights(localclientnum, struct_footprint) {
       if(!isDefined(light.angles))
         light.angles = (0, 0, 0);
 
-      light.fx_is_on_and_id = playfx(localclientnum, level._effect["giant_robot_footstep_warning_light"], light.origin, anglestoforward(light.angles), anglestoup(light.angles));
+      light.fx_is_on_and_id = playFX(localclientnum, level._effect["giant_robot_footstep_warning_light"], light.origin, anglesToForward(light.angles), anglestoup(light.angles));
     }
   }
 }

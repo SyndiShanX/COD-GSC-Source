@@ -4,8 +4,8 @@
 *****************************************************/
 
 main() {
-  maps\_utility::add_hint_string("nvg", & "SCRIPT_NIGHTVISION_USE", maps\_nightvision::shouldbreaknvghintprint);
-  maps\_utility::add_hint_string("disable_nvg", & "SCRIPT_NIGHTVISION_STOP_USE", maps\_nightvision::should_break_disable_nvg_print);
+  maps\_utility::add_hint_string("nvg", &"SCRIPT_NIGHTVISION_USE", maps\_nightvision::shouldbreaknvghintprint);
+  maps\_utility::add_hint_string("disable_nvg", &"SCRIPT_NIGHTVISION_STOP_USE", maps\_nightvision::should_break_disable_nvg_print);
   maps\_utility::template_level("clockwork");
   maps\createart\clockwork_art::main();
   maps\clockwork_fx::main();

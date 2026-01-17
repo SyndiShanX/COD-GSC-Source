@@ -26,10 +26,10 @@ diary_reading() {
   } else if(alignment == level.diary_outcome_evil) {
     soundAlias = "diary_merciless";
   }
-  level.diaryID = PlaySound(0, soundAlias, player.origin);
-  level.pagesID = PlaySound(0, "pages", player.origin);
+  level.diaryID = playSound(0, soundAlias, player.origin);
+  level.pagesID = playSound(0, "pages", player.origin);
   thread diary_reading_skip();
-  while (SoundPlaying(level.diaryID) && level.readingDiary) {
+  while(SoundPlaying(level.diaryID) && level.readingDiary) {
     wait(0.1);
   }
   if(SoundPlaying(level.diaryID)) {
@@ -52,7 +52,7 @@ fadeOutAndStopSound(id, time) {
   }
   SetSoundVolumeRate(id, rate);
   SetSoundVolume(id, 0.0);
-  while (GetSoundVolume(id) > .0001) {
+  while(GetSoundVolume(id) > .0001) {
     wait(0.1);
   }
   StopSound(id);

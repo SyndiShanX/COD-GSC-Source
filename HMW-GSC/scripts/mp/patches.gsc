@@ -91,10 +91,10 @@ init_stub() {
   game["dialog"]["last_alive"] = "lastalive";
   game["dialog"]["boost"] = "boost";
 
-  if(!isdefined(game["dialog"]["offense_obj"]))
+  if(!isDefined(game["dialog"]["offense_obj"]))
     game["dialog"]["offense_obj"] = "boost";
 
-  if(!isdefined(game["dialog"]["defense_obj"]))
+  if(!isDefined(game["dialog"]["defense_obj"]))
     game["dialog"]["defense_obj"] = "boost";
 
   game["dialog"]["hardcore"] = "hardcore";
@@ -227,7 +227,7 @@ music_onplayerspawned_stub() {
   wait 0.05;
 
   if(getdvar("virtuallobbyactive") == "0") {
-    if(!level.splitscreen || level.splitscreen && !isdefined(level.playedstartingmusic)) {
+    if(!level.splitscreen || level.splitscreen && !isDefined(level.playedstartingmusic)) {
       if(!maps\mp\_utility::issecondarysplitscreenplayer())
         self playlocalsound(game["music"]["spawn_" + self.team]);
 
@@ -235,10 +235,10 @@ music_onplayerspawned_stub() {
         level.playedstartingmusic = 1;
     }
 
-    if(isdefined(game["dialog"]["gametype"]) && (!level.splitscreen || self == level.players[0])) {
-      if(isdefined(game["dialog"]["allies_gametype"]) && self.team == "allies")
+    if(isDefined(game["dialog"]["gametype"]) && (!level.splitscreen || self == level.players[0])) {
+      if(isDefined(game["dialog"]["allies_gametype"]) && self.team == "allies")
         maps\mp\_utility::leaderdialogonplayer("allies_gametype");
-      else if(isdefined(game["dialog"]["axis_gametype"]) && self.team == "axis")
+      else if(isDefined(game["dialog"]["axis_gametype"]) && self.team == "axis")
         maps\mp\_utility::leaderdialogonplayer("axis_gametype");
       else if(!maps\mp\_utility::issecondarysplitscreenplayer())
         maps\mp\_utility::leaderdialogonplayer("gametype");
@@ -350,7 +350,7 @@ onplayerspawned_stub() {
   self endon("disconnect");
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     self waittill("spawned_player");
 
     if(maps\mp\_utility::is_true(level.virtuallobbyactive)) {
@@ -358,7 +358,7 @@ onplayerspawned_stub() {
     }
     self.bcinfo = [];
     var_0 = getteamvoiceprefix(self.team);
-    if(!isdefined(self.pers["voiceIndex"])) {
+    if(!isDefined(self.pers["voiceIndex"])) {
       var_1 = 4;
       var_2 = 4;
       var_3 = "m";
@@ -386,7 +386,7 @@ onplayerspawned_stub() {
 }
 
 updatedamagefeedback_stub(var_0, var_1) {
-  if(!isplayer(self) || !isdefined(var_0)) {
+  if(!isplayer(self) || !isDefined(var_0)) {
     return;
   }
   switch (var_0) {
@@ -412,9 +412,9 @@ updatedamagefeedback_stub(var_0, var_1) {
       self playlocalsound("mp_hit_default");
       break;
     case "laser":
-      if(isdefined(level.sentrygun)) {
-        if(!isdefined(self.shouldloopdamagefeedback)) {
-          if(isdefined(level.mapkillstreakdamagefeedbacksound))
+      if(isDefined(level.sentrygun)) {
+        if(!isDefined(self.shouldloopdamagefeedback)) {
+          if(isDefined(level.mapkillstreakdamagefeedbacksound))
             self thread[[level.mapkillstreakdamagefeedbacksound]](level.sentrygun);
         }
       }
@@ -446,7 +446,7 @@ updatedamagefeedback_stub(var_0, var_1) {
 }
 
 set_hud_feedback(icon) {
-  if(!isdefined(self.hud_damagefeedback)) {
+  if(!isDefined(self.hud_damagefeedback)) {
     self.hud_damagefeedback = newclienthudelem(self);
     self.hud_damagefeedback.horzAlign = "center";
     self.hud_damagefeedback.vertAlign = "middle";
@@ -492,7 +492,7 @@ set_hud_feedback(icon) {
   if(self.hud_damagefeedback.y != y)
     self.hud_damagefeedback.y = y;
 
-  if(isdefined(icon)) {
+  if(isDefined(icon)) {
     self.hud_damagefeedbackText setShader(icon, icon_weight, icon_height);
     self.hud_damagefeedbackText.alpha = 1;
     self.hud_damagefeedbackText fadeOverTime(fadeoutTime);
@@ -520,8 +520,8 @@ xppointspopup_stub(event, amount) {
 
   if(getdvarint("scr_lua_score") == 1) {
     if(event_id >= 0) {
-      self luinotifyevent( & "score_event", 2, event_id, amount);
-      self _meth_8579( & "score_event", 2, event_id, amount);
+      self luinotifyevent(&"score_event", 2, event_id, amount);
+      self _meth_8579(&"score_event", 2, event_id, amount);
     }
 
     return;
@@ -529,7 +529,7 @@ xppointspopup_stub(event, amount) {
 
   self.xpupdatetotal += amount;
   self setclientomnvar("ui_points_popup", self.xpupdatetotal);
-  if(isdefined(event_id) && event_id != -1)
+  if(isDefined(event_id) && event_id != -1)
     self setclientomnvar("ui_points_popup_event", event_id);
 
   wait 1.1; // update stack timer to match iw4
@@ -544,7 +544,7 @@ updaterecentkills_stub(killId, weapon) {
   self notify("updateRecentKills");
   self endon("updateRecentKills");
 
-  if(!isdefined(weapon))
+  if(!isDefined(weapon))
     weapon = "";
 
   self.recentkillcount++;
@@ -564,7 +564,7 @@ killcam_stub(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_
   self endon("spawned");
   level endon("game_ended");
 
-  if(var_1 < 0 || !isdefined(var_13)) {
+  if(var_1 < 0 || !isDefined(var_13)) {
     return;
   }
   level.numplayerswaitingtoenterkillcam++;
@@ -588,7 +588,7 @@ killcam_stub(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_
 
   var_22 = var_20 + var_21;
 
-  if(isdefined(var_12) && var_22 > var_12) {
+  if(isDefined(var_12) && var_22 > var_12) {
     if(var_12 < 2) {
       return;
     }
@@ -604,7 +604,7 @@ killcam_stub(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_
 
   self setclientomnvar("ui_killcam_end_milliseconds", 0);
 
-  if(isagent(var_13) && !isdefined(var_13.isactive)) {
+  if(isagent(var_13) && !isDefined(var_13.isactive)) {
     return;
   }
   if(isplayer(var_14))
@@ -627,7 +627,7 @@ killcam_stub(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_
     var_24 = [];
     var_25 = getweaponbasename(var_4);
 
-    if(isdefined(var_25)) {
+    if(isDefined(var_25)) {
       if(maps\mp\_utility::ismeleemod(var_15) && !maps\mp\gametypes\_weapons::isriotshield(var_4))
         var_25 = "iw5_combatknife";
       else {
@@ -685,7 +685,7 @@ killcam_stub(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_
   var_27 = gettime();
   self notify("begin_killcam", var_27);
 
-  if(!isagent(var_13) && isdefined(var_13) && isplayer(var_14))
+  if(!isagent(var_13) && isDefined(var_13) && isplayer(var_14))
     var_13 visionsyncwithplayer(var_14);
 
   maps\mp\_utility::updatesessionstate("spectator");
@@ -726,7 +726,7 @@ killcam_stub(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_
   thread maps\mp\gametypes\_killcam::endedkillcamcleanup();
   wait 0.05;
 
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   var_20 = self.archivetime - 0.05 - var_8;
@@ -807,7 +807,7 @@ callback_playerconnect_stub() {
   self.totallifetime = 0;
   var_1 = 0;
 
-  if(!isdefined(self.pers["clientid"])) {
+  if(!isDefined(self.pers["clientid"])) {
     if(game["clientid"] >= 30)
       self.pers["clientid"] = getlowestavailableclientid();
     else
@@ -874,10 +874,10 @@ callback_playerconnect_stub() {
       setmatchdata("players", self.clientid, "team", self.sessionteam);
 
     if(maps\mp\_utility::isaiteamparticipant(self)) {
-      if(!isdefined(level.matchdata))
+      if(!isDefined(level.matchdata))
         level.matchdata = [];
 
-      if(!isdefined(level.matchdata["botJoinCount"]))
+      if(!isDefined(level.matchdata["botJoinCount"]))
         level.matchdata["botJoinCount"] = 1;
       else
         level.matchdata["botJoinCount"]++;
@@ -893,16 +893,16 @@ callback_playerconnect_stub() {
   self.leaderdialoggroups = [];
   self.leaderdialoggroup = "";
 
-  if(!isdefined(self.pers["cur_kill_streak"])) {
+  if(!isDefined(self.pers["cur_kill_streak"])) {
     self.pers["cur_kill_streak"] = 0;
     self.killstreakcount = 0;
     self setclientomnvar("ks_count1", 0);
   }
 
-  if(!isdefined(self.pers["cur_death_streak"]))
+  if(!isDefined(self.pers["cur_death_streak"]))
     self.pers["cur_death_streak"] = 0;
 
-  if(!isdefined(self.pers["cur_kill_streak_for_nuke"]))
+  if(!isDefined(self.pers["cur_kill_streak_for_nuke"]))
     self.pers["cur_kill_streak_for_nuke"] = 0;
 
   if(maps\mp\_utility::rankingenabled())
@@ -932,33 +932,33 @@ callback_playerconnect_stub() {
   if(level.teambased)
     self updatescores();
 
-  if(!isdefined(self.pers["absoluteJoinTime"]))
+  if(!isDefined(self.pers["absoluteJoinTime"]))
     self.pers["absoluteJoinTime"] = getsystemtime();
 
   if(game["state"] == "postgame") {
     self.connectedpostgame = 1;
     spawnintermission();
   } else {
-    if(isai(self) && isdefined(level.bot_funcs) && isdefined(level.bot_funcs["think"]))
+    if(isai(self) && isDefined(level.bot_funcs) && isDefined(level.bot_funcs["think"]))
       self thread[[level.bot_funcs["think"]]]();
 
     level endon("game_ended");
 
-    if(isdefined(level.hostmigrationtimer)) {
-      if(!isdefined(self.hostmigrationcontrolsfrozen) || self.hostmigrationcontrolsfrozen == 0) {
+    if(isDefined(level.hostmigrationtimer)) {
+      if(!isDefined(self.hostmigrationcontrolsfrozen) || self.hostmigrationcontrolsfrozen == 0) {
         self.hostmigrationcontrolsfrozen = 0;
         thread maps\mp\gametypes\_hostmigration::hostmigrationtimerthink();
       }
     }
 
-    if(isdefined(level.onplayerconnectaudioinit))
+    if(isDefined(level.onplayerconnectaudioinit))
       [[level.onplayerconnectaudioinit]]();
 
-    if(!isdefined(self.pers["team"])) {
+    if(!isDefined(self.pers["team"])) {
       if(maps\mp\_utility::matchmakinggame() && self.sessionteam != "none") {
         thread spawnspectator();
 
-        if(isdefined(level.waitingforplayers) && level.waitingforplayers)
+        if(isDefined(level.waitingforplayers) && level.waitingforplayers)
           maps\mp\_utility::freezecontrolswrapper(1);
 
         thread maps\mp\gametypes\_menus::setteam(self.sessionteam);
@@ -1013,7 +1013,7 @@ callback_playerconnect_stub() {
 }
 
 callback_playerdisconnect_stub(var_0) {
-  if(!isdefined(self.connected)) {
+  if(!isDefined(self.connected)) {
     return;
   }
   maps\mp\gametypes\_damage::handlelaststanddisconnect();
@@ -1023,10 +1023,10 @@ callback_playerdisconnect_stub(var_0) {
   if(maps\mp\_utility::rankingenabled())
     maps\mp\_matchdata::logfinalstats();
 
-  if(isdefined(self.pers["confirmed"]))
+  if(isDefined(self.pers["confirmed"]))
     maps\mp\_matchdata::logkillsconfirmed();
 
-  if(isdefined(self.pers["denied"]))
+  if(isDefined(self.pers["denied"]))
     maps\mp\_matchdata::logkillsdenied();
 
   logplayerstats();
@@ -1035,7 +1035,7 @@ callback_playerdisconnect_stub(var_0) {
     var_1 = game["roundsPlayed"] + 1;
     setmatchdata("players", self.clientid, "playerQuitRoundNumber", var_1);
 
-    if(isdefined(self.team) && (self.team == "allies" || self.team == "axis")) {
+    if(isDefined(self.team) && (self.team == "allies" || self.team == "axis")) {
       if(self.team == "allies") {
         setmatchdata("players", self.clientid, "playerQuitTeamScore", game["roundsWon"]["allies"]);
         setmatchdata("players", self.clientid, "playerQuitOpposingTeamScore", game["roundsWon"]["axis"]);
@@ -1044,7 +1044,7 @@ callback_playerdisconnect_stub(var_0) {
         setmatchdata("players", self.clientid, "playerQuitOpposingTeamScore", game["roundsWon"]["allies"]);
       }
     }
-  } else if(isdefined(self.team) && (self.team == "allies" || self.team == "axis") && level.teambased) {
+  } else if(isDefined(self.team) && (self.team == "allies" || self.team == "axis") && level.teambased) {
     if(self.team == "allies") {
       setmatchdata("players", self.clientid, "playerQuitTeamScore", game["teamScores"]["allies"]);
       setmatchdata("players", self.clientid, "playerQuitOpposingTeamScore", game["teamScores"]["axis"]);
@@ -1083,10 +1083,10 @@ callback_playerdisconnect_stub(var_0) {
   if(level.gameended)
     maps\mp\gametypes\_gamescore::removedisconnectedplayerfromplacement();
 
-  if(isdefined(self.team))
+  if(isDefined(self.team))
     removefromteamcount();
 
-  if(self.sessionstate == "playing" && !(isdefined(self.fauxdead) && self.fauxdead))
+  if(self.sessionstate == "playing" && !(isDefined(self.fauxdead) && self.fauxdead))
     removefromalivecount(1);
   else if(self.sessionstate == "spectator" || self.sessionstate == "dead")
     level thread maps\mp\gametypes\_gamelogic::updategameevents();

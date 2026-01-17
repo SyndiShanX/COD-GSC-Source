@@ -16,7 +16,7 @@ precache() {
 }
 
 set_player_model() {
-  self setmodel("c_chn_mp_pla_lmg_w_fb");
+  self setModel("c_chn_mp_pla_lmg_w_fb");
   self setviewmodel("c_chn_mp_pla_armorsleeve_w_viewhands");
   heads = [];
 }

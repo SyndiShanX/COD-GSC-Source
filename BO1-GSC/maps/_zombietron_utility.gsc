@@ -440,9 +440,9 @@ plot_circle_fortime(radius, time, color) {
   timer = gettime() + (time * 1000);
   while(gettime() < timer) {
     players = get_players();
-    angletoplayer = vectortoangles(self.origin - players[0] geteye());
+    angletoplayer = vectortoangles(self.origin - players[0] getEye());
     for(i = 0; i < circleres; i++) {
-      plotpoints[plotpoints.size] = self.origin + vector_scale(anglestoforward((angletoplayer + (rad, 90, 0))), radius);
+      plotpoints[plotpoints.size] = self.origin + vector_scale(anglesToForward((angletoplayer + (rad, 90, 0))), radius);
       rad += circleinc;
     }
     plot_points(plotpoints, color[0], color[1], color[2], hangtime);
@@ -454,7 +454,7 @@ plot_circle_fortime(radius, time, color) {
 get_closest_to(origin, entArray) {
   bestEnt = entArray[0];
   bestSQ = 2048 * 2048;
-  if(isDefineD(entArray)) {
+  if(isDefined(entArray)) {
     for(i = 0; i < entArray.size; i++) {
       if(!isDefined(entArray[i])) {
         continue;
@@ -493,7 +493,7 @@ network_entity_valid(entity) {
 
 _network_safe_play_fx_on_tag(fx, entity, tag) {
   if(network_entity_valid(entity)) {
-    PlayFxOnTag(fx, entity, tag);
+    playFXOnTag(fx, entity, tag);
   }
 }
 
@@ -520,19 +520,13 @@ network_choke_action(id, choke_action, arg1, arg2, arg3) {
   }
   level.zombie_network_choke_ids_count[id]++;
   if(!isDefined(arg1)) {
-    return ([
-      [choke_action]
-    ]());
+    return ([[choke_action]]());
   }
   if(!isDefined(arg2)) {
-    return ([
-      [choke_action]
-    ](arg1));
+    return ([[choke_action]](arg1));
   }
   if(!isDefined(arg3)) {
-    return ([
-      [choke_action]
-    ](arg1, arg2));
+    return ([[choke_action]](arg1, arg2));
   }
   return ([[choke_action]](arg1, arg2, arg3));
 }

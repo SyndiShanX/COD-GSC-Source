@@ -57,7 +57,7 @@ snd_fx_create() {
 
 pa_think(notifyname, alias) {
   level waittill(notifyname);
-  speakers = getentarray(0, "loudspeaker", "targetname");
+  speakers = getEntArray(0, "loudspeaker", "targetname");
 
   for(i = 0; i < speakers.size; i++)
     speakers[i] thread pa_play(alias);
@@ -65,10 +65,10 @@ pa_think(notifyname, alias) {
 
 pa_play(alias) {
   wait(self.script_wait_min);
-  self playsound(0, alias);
+  self playSound(0, alias);
 }
 
 bomb_sound_go() {
   level waittill("notify_nuke");
-  playsound(0, "amb_end_nuke", (0, 0, 0));
+  playSound(0, "amb_end_nuke", (0, 0, 0));
 }

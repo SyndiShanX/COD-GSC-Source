@@ -5,7 +5,7 @@
 ************************************************************/
 
 main() {
-  self setmodel("body_sp_arab_regular_asad");
+  self setModel("body_sp_arab_regular_asad");
   self attach("head_sp_arab_regular_ski_mask", "", 1);
   self.headmodel = "head_sp_arab_regular_ski_mask";
   self.voice = "arab";

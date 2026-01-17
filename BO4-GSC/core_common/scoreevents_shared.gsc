@@ -8,7 +8,6 @@
 #include scripts\core_common\contracts_shared;
 #include scripts\core_common\rank_shared;
 #include scripts\core_common\util_shared;
-
 #namespace scoreevents;
 
 function_6f51d1e9(event, players, victim, weapon) {
@@ -28,7 +27,7 @@ function_6f51d1e9(event, players, victim, weapon) {
 processscoreevent(event, player, victim, weapon, playersaffected) {
   scoregiven = 0;
 
-  if(isDefined(level.scoreinfo[event]) && isDefined(level.scoreinfo[event][#"is_deprecated"]) && level.scoreinfo[event][#"is_deprecated"]) {
+  if(isDefined(level.scoreinfo[event]) && isDefined(level.scoreinfo[event][# "is_deprecated"]) && level.scoreinfo[event][# "is_deprecated"]) {
     return scoregiven;
   }
 
@@ -102,7 +101,7 @@ processscoreevent(event, player, victim, weapon, playersaffected) {
     player addrankxp(event, weapon, player.class_num, pickedup, isscoreevent, xp_difficulty_multiplier);
 
     if(isDefined(event) && isDefined(weapon) && isDefined(level.scoreinfo[event])) {
-      var_6d1793bb = level.scoreinfo[event][#"medalnamehash"];
+      var_6d1793bb = level.scoreinfo[event][# "medalnamehash"];
 
       if(isDefined(var_6d1793bb)) {
         specialistindex = player getspecialistindex();
@@ -127,7 +126,7 @@ processscoreevent(event, player, victim, weapon, playersaffected) {
 
   if(sessionmodeiscampaigngame() && isDefined(xp_difficulty_multiplier)) {
     if(isDefined(victim) && isDefined(victim.team)) {
-      if(victim.team == #"axis" || victim.team == #"team3") {
+      if(victim.team == # "axis" || victim.team == # "team3") {
         scoregiven *= xp_difficulty_multiplier;
       }
     }
@@ -161,7 +160,7 @@ shouldaddrankxp(player) {
     return true;
   }
 
-  if(player.pers[#"plevel"] > 0 || player.pers[#"rank"] > level.rankcap) {
+  if(player.pers[# "plevel"] > 0 || player.pers[# "rank"] > level.rankcap) {
     return false;
   }
 
@@ -202,225 +201,225 @@ decrementlastobituaryplayercountafterfade() {
 }
 
 function_2b96d7dc() {
-  if(!isDefined(level.var_d1455682)) {
-    return undefined;
-  }
+    if(!isDefined(level.var_d1455682)) {
+      return undefined;
+    }
 
-  table_name = function_6a9e36d6();
+    table_name = function_6a9e36d6();
 
-  if(!isDefined(table_name)) {
-    return undefined;
-  }
+    if(!isDefined(table_name)) {
+      return undefined;
+    }
 
-  args = strtok(table_name, "\" );
+    args = strtok(table_name, "\" );
 
-    if(args.size) {
-      table_name = "";
+      if(args.size) {
+        table_name = "";
 
-      foreach(index, arg in args) {
-        table_name += arg;
+        foreach(index, arg in args) {
+          table_name += arg;
 
-        if(index < args.size - 1) {
-          table_name += "/";
+          if(index < args.size - 1) {
+            table_name += "/";
+          }
         }
       }
+
+      return hash(table_name);
     }
 
-    return hash(table_name);
-  }
+    function getscoreeventtablename(gametype) {
+      table_name = function_2b96d7dc();
 
-  function getscoreeventtablename(gametype) {
-    table_name = function_2b96d7dc();
+      if(isDefined(table_name) && isDefined(isassetloaded("stringtable", table_name)) && isassetloaded("stringtable", table_name)) {
+        return table_name;
+      }
 
-    if(isDefined(table_name) && isDefined(isassetloaded("stringtable", table_name)) && isassetloaded("stringtable", table_name)) {
-      return table_name;
-    }
+      if(!isDefined(gametype)) {
+        gametype = "base";
+      }
 
-    if(!isDefined(gametype)) {
-      gametype = "base";
-    }
+      prefix = # "gamedata/tables/mp/scoreinfo/mp_scoreinfo";
 
-    prefix = #"gamedata/tables/mp/scoreinfo/mp_scoreinfo";
+      if(sessionmodeiscampaigngame()) {
+        prefix = # "gamedata/tables/cp/scoreinfo/cp_scoreinfo";
+      } else if(sessionmodeiszombiesgame()) {
+        prefix = # "gamedata/tables/zm/scoreinfo/zm_scoreinfo";
+      } else if(sessionmodeiswarzonegame()) {
+        prefix = # "gamedata/tables/wz/scoreinfo/wz_scoreinfo";
+      }
 
-    if(sessionmodeiscampaigngame()) {
-      prefix = #"gamedata/tables/cp/scoreinfo/cp_scoreinfo";
-    } else if(sessionmodeiszombiesgame()) {
-      prefix = #"gamedata/tables/zm/scoreinfo/zm_scoreinfo";
-    } else if(sessionmodeiswarzonegame()) {
-      prefix = #"gamedata/tables/wz/scoreinfo/wz_scoreinfo";
-    }
+      gametype = strreplace(gametype, "_hc", "");
+      gametype = strreplace(gametype, "_cwl", "");
+      gametype = strreplace(gametype, "_bb", "");
+      tablename = prefix + "_" + gametype + ".csv";
 
-    gametype = strreplace(gametype, "_hc", "");
-    gametype = strreplace(gametype, "_cwl", "");
-    gametype = strreplace(gametype, "_bb", "");
-    tablename = prefix + "_" + gametype + ".csv";
+      if(!(isDefined(isassetloaded("stringtable", tablename)) && isassetloaded("stringtable", tablename))) {
+        tablename = prefix + "_base.csv";
+      }
 
-    if(!(isDefined(isassetloaded("stringtable", tablename)) && isassetloaded("stringtable", tablename))) {
-      tablename = prefix + "_base.csv";
-    }
+      if(isDefined(isassetloaded("stringtable", tablename)) && isassetloaded("stringtable", tablename)) {
+        return tablename;
+      }
 
-    if(isDefined(isassetloaded("stringtable", tablename)) && isassetloaded("stringtable", tablename)) {
       return tablename;
     }
 
-    return tablename;
-  }
+    function getscoreeventtableid(gametype) {
+      scoreinfotableloaded = 0;
+      tablename = getscoreeventtablename(gametype);
+      scoreinfotableid = tablelookupfindcoreasset(tablename);
 
-  function getscoreeventtableid(gametype) {
-    scoreinfotableloaded = 0;
-    tablename = getscoreeventtablename(gametype);
-    scoreinfotableid = tablelookupfindcoreasset(tablename);
+      if(!isDefined(scoreinfotableid)) {
+        tablelookupfindcoreasset(getscoreeventtablename("base"));
+      }
 
-    if(!isDefined(scoreinfotableid)) {
-      tablelookupfindcoreasset(getscoreeventtablename("base"));
+      if(isDefined(scoreinfotableid)) {
+        scoreinfotableloaded = 1;
+      }
+
+      assert(scoreinfotableloaded, "<dev string:x70>" + function_9e72a96(getscoreeventtablename()));
+      return scoreinfotableid;
     }
 
-    if(isDefined(scoreinfotableid)) {
-      scoreinfotableloaded = 1;
-    }
+    function givecratecapturemedal(crate, capturer) {
+      if(isDefined(crate.owner) && isplayer(crate.owner)) {
+        if(level.teambased) {
+          if(capturer.team != crate.owner.team) {
+            crate.owner playlocalsound(#"mpl_crate_enemy_steals");
 
-    assert(scoreinfotableloaded, "<dev string:x70>" + function_9e72a96(getscoreeventtablename()));
-    return scoreinfotableid;
-  }
+            if(!isDefined(crate.hacker)) {
+              processscoreevent(#"capture_enemy_crate", capturer, undefined, undefined);
+            }
+          } else if(isDefined(crate.owner) && capturer != crate.owner) {
+            crate.owner playlocalsound(#"mpl_crate_friendly_steals");
 
-  function givecratecapturemedal(crate, capturer) {
-    if(isDefined(crate.owner) && isplayer(crate.owner)) {
-      if(level.teambased) {
-        if(capturer.team != crate.owner.team) {
+            if(!isDefined(crate.hacker)) {
+              level.globalsharepackages++;
+              processscoreevent(#"share_care_package", crate.owner, undefined, undefined);
+            }
+          }
+
+          return;
+        }
+
+        if(capturer != crate.owner) {
           crate.owner playlocalsound(#"mpl_crate_enemy_steals");
 
           if(!isDefined(crate.hacker)) {
             processscoreevent(#"capture_enemy_crate", capturer, undefined, undefined);
           }
-        } else if(isDefined(crate.owner) && capturer != crate.owner) {
-          crate.owner playlocalsound(#"mpl_crate_friendly_steals");
-
-          if(!isDefined(crate.hacker)) {
-            level.globalsharepackages++;
-            processscoreevent(#"share_care_package", crate.owner, undefined, undefined);
-          }
-        }
-
-        return;
-      }
-
-      if(capturer != crate.owner) {
-        crate.owner playlocalsound(#"mpl_crate_enemy_steals");
-
-        if(!isDefined(crate.hacker)) {
-          processscoreevent(#"capture_enemy_crate", capturer, undefined, undefined);
         }
       }
     }
-  }
 
-  function register_hero_ability_kill_event(event_func) {
-    if(!isDefined(level.hero_ability_kill_events)) {
-      level.hero_ability_kill_events = [];
-    }
-
-    level.hero_ability_kill_events[level.hero_ability_kill_events.size] = event_func;
-  }
-
-  function register_hero_ability_multikill_event(event_func) {
-    if(!isDefined(level.hero_ability_multikill_events)) {
-      level.hero_ability_multikill_events = [];
-    }
-
-    level.hero_ability_multikill_events[level.hero_ability_multikill_events.size] = event_func;
-  }
-
-  function register_hero_weapon_multikill_event(event_func) {
-    if(!isDefined(level.hero_weapon_multikill_events)) {
-      level.hero_weapon_multikill_events = [];
-    }
-
-    level.hero_weapon_multikill_events[level.hero_weapon_multikill_events.size] = event_func;
-  }
-
-  function register_thief_shutdown_enemy_event(event_func) {
-    if(!isDefined(level.thief_shutdown_enemy_events)) {
-      level.thief_shutdown_enemy_events = [];
-    }
-
-    level.thief_shutdown_enemy_events[level.thief_shutdown_enemy_events.size] = event_func;
-  }
-
-  function hero_ability_kill_event(ability, victim_ability) {
-    if(!isDefined(level.hero_ability_kill_events)) {
-      return;
-    }
-
-    foreach(event_func in level.hero_ability_kill_events) {
-      if(isDefined(event_func)) {
-        self[[event_func]](ability, victim_ability);
+    function register_hero_ability_kill_event(event_func) {
+      if(!isDefined(level.hero_ability_kill_events)) {
+        level.hero_ability_kill_events = [];
       }
-    }
-  }
 
-  function hero_ability_multikill_event(killcount, ability) {
-    if(!isDefined(level.hero_ability_multikill_events)) {
-      return;
+      level.hero_ability_kill_events[level.hero_ability_kill_events.size] = event_func;
     }
 
-    foreach(event_func in level.hero_ability_multikill_events) {
-      if(isDefined(event_func)) {
-        self[[event_func]](killcount, ability);
+    function register_hero_ability_multikill_event(event_func) {
+      if(!isDefined(level.hero_ability_multikill_events)) {
+        level.hero_ability_multikill_events = [];
       }
-    }
-  }
 
-  function hero_weapon_multikill_event(killcount, weapon) {
-    if(!isDefined(level.hero_weapon_multikill_events)) {
-      return;
+      level.hero_ability_multikill_events[level.hero_ability_multikill_events.size] = event_func;
     }
 
-    foreach(event_func in level.hero_weapon_multikill_events) {
-      if(isDefined(event_func)) {
-        self[[event_func]](killcount, weapon);
+    function register_hero_weapon_multikill_event(event_func) {
+      if(!isDefined(level.hero_weapon_multikill_events)) {
+        level.hero_weapon_multikill_events = [];
       }
-    }
-  }
 
-  function thief_shutdown_enemy_event() {
-    if(!isDefined(level.thief_shutdown_enemy_event)) {
-      return;
+      level.hero_weapon_multikill_events[level.hero_weapon_multikill_events.size] = event_func;
     }
 
-    foreach(event_func in level.thief_shutdown_enemy_event) {
-      if(isDefined(event_func)) {
-        self[[event_func]]();
+    function register_thief_shutdown_enemy_event(event_func) {
+      if(!isDefined(level.thief_shutdown_enemy_events)) {
+        level.thief_shutdown_enemy_events = [];
       }
-    }
-  }
 
-  function function_dcdf1105() {
-    self callback::add_callback(#"fully_healed", &player_fully_healed);
-  }
-
-  function player_fully_healed() {
-    self.var_ae639436 = undefined;
-  }
-
-  function player_spawned() {
-    profilestart();
-    self.var_ae639436 = undefined;
-    profilestop();
-  }
-
-  function function_f40d64cc(attacker, vehicle, weapon) {
-    if(!isDefined(weapon)) {
-      return;
+      level.thief_shutdown_enemy_events[level.thief_shutdown_enemy_events.size] = event_func;
     }
 
-    switch (weapon.statname) {
-      case #"ultimate_turret":
-        event = "automated_turret_vehicle_destruction";
-        break;
-      default:
+    function hero_ability_kill_event(ability, victim_ability) {
+      if(!isDefined(level.hero_ability_kill_events)) {
         return;
+      }
+
+      foreach(event_func in level.hero_ability_kill_events) {
+        if(isDefined(event_func)) {
+          self[[event_func]](ability, victim_ability);
+        }
+      }
     }
 
-    victim = isDefined(vehicle) ? vehicle.owner : undefined;
-    processscoreevent(event, attacker, victim, weapon);
-  }
+    function hero_ability_multikill_event(killcount, ability) {
+      if(!isDefined(level.hero_ability_multikill_events)) {
+        return;
+      }
+
+      foreach(event_func in level.hero_ability_multikill_events) {
+        if(isDefined(event_func)) {
+          self[[event_func]](killcount, ability);
+        }
+      }
+    }
+
+    function hero_weapon_multikill_event(killcount, weapon) {
+      if(!isDefined(level.hero_weapon_multikill_events)) {
+        return;
+      }
+
+      foreach(event_func in level.hero_weapon_multikill_events) {
+        if(isDefined(event_func)) {
+          self[[event_func]](killcount, weapon);
+        }
+      }
+    }
+
+    function thief_shutdown_enemy_event() {
+      if(!isDefined(level.thief_shutdown_enemy_event)) {
+        return;
+      }
+
+      foreach(event_func in level.thief_shutdown_enemy_event) {
+        if(isDefined(event_func)) {
+          self[[event_func]]();
+        }
+      }
+    }
+
+    function function_dcdf1105() {
+      self callback::add_callback(#"fully_healed", &player_fully_healed);
+    }
+
+    function player_fully_healed() {
+      self.var_ae639436 = undefined;
+    }
+
+    function player_spawned() {
+      profilestart();
+      self.var_ae639436 = undefined;
+      profilestop();
+    }
+
+    function function_f40d64cc(attacker, vehicle, weapon) {
+      if(!isDefined(weapon)) {
+        return;
+      }
+
+      switch (weapon.statname) {
+        case # "ultimate_turret":
+          event = "automated_turret_vehicle_destruction";
+          break;
+        default:
+          return;
+      }
+
+      victim = isDefined(vehicle) ? vehicle.owner : undefined;
+      processscoreevent(event, attacker, victim, weapon);
+    }

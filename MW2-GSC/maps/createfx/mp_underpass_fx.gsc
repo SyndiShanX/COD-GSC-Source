@@ -1301,5 +1301,4 @@ main() {
   ent.v["angles"] = (280, 90, -90);
   ent.v["fxid"] = "rain_splash_lite_64x64";
   ent.v["delay"] = -15;
-
 }

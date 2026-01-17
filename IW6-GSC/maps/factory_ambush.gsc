@@ -58,10 +58,10 @@ section_flag_init() {
 }
 
 section_hint_string_init() {
-  maps\_utility::add_hint_string("HINT_THERMAL", & "FACTORY_HINT_THERMAL", ::hint_thermal_timeout);
-  maps\_utility::add_hint_string("HINT_THERMAL_OFF", & "FACTORY_HINT_THERMAL_OFF", ::hint_thermal_off_timeout);
-  maps\_utility::add_hint_string("HINT_THERMAL_SHORT", & "FACTORY_HINT_THERMAL_SHORT", ::hint_thermal_timeout);
-  maps\_utility::add_hint_string("HINT_THERMAL_OFF_SHORT", & "FACTORY_HINT_THERMAL_OFF_SHORT", ::hint_thermal_off_timeout);
+  maps\_utility::add_hint_string("HINT_THERMAL", &"FACTORY_HINT_THERMAL", ::hint_thermal_timeout);
+  maps\_utility::add_hint_string("HINT_THERMAL_OFF", &"FACTORY_HINT_THERMAL_OFF", ::hint_thermal_off_timeout);
+  maps\_utility::add_hint_string("HINT_THERMAL_SHORT", &"FACTORY_HINT_THERMAL_SHORT", ::hint_thermal_timeout);
+  maps\_utility::add_hint_string("HINT_THERMAL_OFF_SHORT", &"FACTORY_HINT_THERMAL_OFF_SHORT", ::hint_thermal_off_timeout);
 }
 
 main() {

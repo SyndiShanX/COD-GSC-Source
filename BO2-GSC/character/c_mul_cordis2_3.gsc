@@ -7,7 +7,7 @@
 #include xmodelalias\c_mul_cordis_head_als;
 
 main() {
-  self setmodel("c_mul_cordis_body2_3");
+  self setModel("c_mul_cordis_body2_3");
   self.headmodel = codescripts\character::randomelement(xmodelalias\c_mul_cordis_head_als::main());
   self attach(self.headmodel, "", 1);
   self.gearmodel = "c_mul_cordis_body2_gear1";

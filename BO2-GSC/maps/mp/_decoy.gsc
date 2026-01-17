@@ -68,7 +68,7 @@ movedecoy(owner, count, fire_time, main_dir, max_offset_angle) {
 
   for(i = 0; i < 1; i++) {
     angles = (0, randomintrange(current_main_dir - max_offset_angle, current_main_dir + max_offset_angle), 0);
-    dir = anglestoforward(angles);
+    dir = anglesToForward(angles);
     dir = vectorscale(dir, randomfloatrange(min_speed, max_speed));
     deltatime = (gettime() - start_time) * 0.001;
     up = (0, 0, intial_up - 800 * deltatime);
@@ -253,9 +253,9 @@ finishwhileloop(weapon, reloadtime, burst_spacing_min, burst_spacing_max) {
 playreloadsounds(weapon, reloadtime) {
   divy_it_up = (reloadtime - 0.1) / 2;
   wait 0.1;
-  self playsound("fly_assault_reload_npc_mag_out");
+  self playSound("fly_assault_reload_npc_mag_out");
   wait(divy_it_up);
-  self playsound("fly_assault_reload_npc_mag_in");
+  self playSound("fly_assault_reload_npc_mag_in");
   wait(divy_it_up);
 }
 

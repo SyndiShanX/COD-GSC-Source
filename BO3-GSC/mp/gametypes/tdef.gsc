@@ -33,13 +33,13 @@ function main() {
   level.matchrules_vampirism = 0;
   setspecialloadouts();
   level.teambased = 1;
-  level.initgametypeawards = & initgametypeawards;
-  level.onprecachegametype = & onprecachegametype;
-  level.onstartgametype = & onstartgametype;
-  level.onplayerkilled = & onplayerkilled;
-  level.onspawnplayer = & onspawnplayer;
-  level.onroundendgame = & onroundendgame;
-  level.onroundswitch = & onroundswitch;
+  level.initgametypeawards = &initgametypeawards;
+  level.onprecachegametype = &onprecachegametype;
+  level.onstartgametype = &onstartgametype;
+  level.onplayerkilled = &onplayerkilled;
+  level.onspawnplayer = &onspawnplayer;
+  level.onroundendgame = &onroundendgame;
+  level.onroundswitch = &onroundswitch;
   gameobjects::register_allowed_gameobject(level.gametype);
   gameobjects::register_allowed_gameobject("tdm");
   game["dialog"]["gametype"] = "team_def";
@@ -50,14 +50,14 @@ function main() {
   game["dialog"]["enemy_got_flag"] = "ctf_theytake";
   game["dialog"]["dropped_flag"] = "ctf_wedrop";
   game["dialog"]["enemy_dropped_flag"] = "ctf_theydrop";
-  game["strings"]["overtime_hint"] = & "MP_FIRST_BLOOD";
+  game["strings"]["overtime_hint"] = &"MP_FIRST_BLOOD";
 }
 
 function onprecachegametype() {}
 
 function onstartgametype() {
   setclientnamemode("auto_change");
-  if(!isdefined(game["switchedsides"])) {
+  if(!isDefined(game["switchedsides"])) {
     game["switchedsides"] = 0;
   }
   if(game["switchedsides"]) {
@@ -66,17 +66,17 @@ function onstartgametype() {
     game["attackers"] = olddefenders;
     game["defenders"] = oldattackers;
   }
-  util::setobjectivetext("allies", & "OBJECTIVES_TDEF");
-  util::setobjectivetext("axis", & "OBJECTIVES_TDEF");
+  util::setobjectivetext("allies", &"OBJECTIVES_TDEF");
+  util::setobjectivetext("axis", &"OBJECTIVES_TDEF");
   if(level.splitscreen) {
-    util::setobjectivescoretext("allies", & "OBJECTIVES_TDEF");
-    util::setobjectivescoretext("axis", & "OBJECTIVES_TDEF");
+    util::setobjectivescoretext("allies", &"OBJECTIVES_TDEF");
+    util::setobjectivescoretext("axis", &"OBJECTIVES_TDEF");
   } else {
-    util::setobjectivescoretext("allies", & "OBJECTIVES_TDEF_SCORE");
-    util::setobjectivescoretext("axis", & "OBJECTIVES_TDEF_SCORE");
+    util::setobjectivescoretext("allies", &"OBJECTIVES_TDEF_SCORE");
+    util::setobjectivescoretext("axis", &"OBJECTIVES_TDEF_SCORE");
   }
-  util::setobjectivehinttext("allies", & "OBJECTIVES_TDEF_ATTACKER_HINT");
-  util::setobjectivehinttext("axis", & "OBJECTIVES_TDEF_ATTACKER_HINT");
+  util::setobjectivehinttext("allies", &"OBJECTIVES_TDEF_ATTACKER_HINT");
+  util::setobjectivehinttext("axis", &"OBJECTIVES_TDEF_ATTACKER_HINT");
   level.spawnmins = (0, 0, 0);
   level.spawnmaxs = (0, 0, 0);
   spawnlogic::place_spawn_points("mp_tdm_spawn_allies_start");
@@ -110,17 +110,17 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
   }
   victim = self;
   score = rank::getscoreinfovalue("kill");
-  assert(isdefined(score));
-  if(isdefined(level.gameflag) && level.gameflag gameobjects::get_owner_team() == attacker.team) {
-    if(isdefined(attacker.carryflag)) {
+  assert(isDefined(score));
+  if(isDefined(level.gameflag) && level.gameflag gameobjects::get_owner_team() == attacker.team) {
+    if(isDefined(attacker.carryflag)) {
       attacker addplayerstat("KILLSASFLAGCARRIER", 1);
     }
     score = score * 2;
   } else {
-    if(!isdefined(level.gameflag) && cancreateflagatvictimorigin(victim)) {
+    if(!isDefined(level.gameflag) && cancreateflagatvictimorigin(victim)) {
       level.gameflag = createflag(victim);
       score = score + rank::getscoreinfovalue("MEDAL_FIRST_BLOOD");
-    } else if(isdefined(victim.carryflag)) {
+    } else if(isDefined(victim.carryflag)) {
       killcarrierbonus = rank::getscoreinfovalue("kill_carrier");
       level thread popups::displayteammessagetoall(&"MP_KILLED_FLAG_CARRIER", attacker);
       scoreevents::processscoreevent("kill_flag_carrier", attacker);
@@ -130,7 +130,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
       score = score + killcarrierbonus;
     }
   }
-  if(!isdefined(killstreaks::get_killstreak_for_weapon(weapon)) || (isdefined(level.killstreaksgivegamescore) && level.killstreaksgivegamescore)) {
+  if(!isDefined(killstreaks::get_killstreak_for_weapon(weapon)) || (isDefined(level.killstreaksgivegamescore) && level.killstreaksgivegamescore)) {
     attacker globallogic_score::giveteamscoreforobjective(attacker.team, score);
   }
   otherteam = util::getotherteam(attacker.team);
@@ -140,7 +140,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
 }
 
 function ondrop(player) {
-  if(isdefined(player) && isdefined(player.tdef_flagtime)) {
+  if(isDefined(player) && isDefined(player.tdef_flagtime)) {
     flagtime = int(gettime() - player.tdef_flagtime);
     player addplayerstat("HOLDINGTEAMDEFENDERFLAG", flagtime);
     if(((flagtime / 100) / 60) < 1) {
@@ -162,11 +162,11 @@ function ondrop(player) {
   self gameobjects::set_3d_icon("friendly", level.iconcaptureflag3d);
   self gameobjects::set_2d_icon("enemy", level.iconcaptureflag2d);
   self gameobjects::set_3d_icon("enemy", level.iconcaptureflag3d);
-  if(isdefined(player)) {
-    if(isdefined(player.carryflag)) {
+  if(isDefined(player)) {
+    if(isDefined(player.carryflag)) {
       player detachflag();
     }
-    util::printandsoundoneveryone(team, undefined, & "MP_NEUTRAL_FLAG_DROPPED_BY", & "MP_NEUTRAL_FLAG_DROPPED_BY", "mp_war_objective_lost", "mp_war_objective_lost", player);
+    util::printandsoundoneveryone(team, undefined, &"MP_NEUTRAL_FLAG_DROPPED_BY", &"MP_NEUTRAL_FLAG_DROPPED_BY", "mp_war_objective_lost", "mp_war_objective_lost", player);
   } else {
     sound::play_on_players("mp_war_objective_lost", team);
     sound::play_on_players("mp_war_objective_lost", otherteam);
@@ -180,10 +180,10 @@ function onpickup(player) {
   player.tdef_flagtime = gettime();
   player thread watchforendgame();
   score = rank::getscoreinfovalue("capture");
-  assert(isdefined(score));
+  assert(isDefined(score));
   team = player.team;
   otherteam = util::getotherteam(team);
-  if(isdefined(level.tdef_loadouts) && isdefined(level.tdef_loadouts[team])) {
+  if(isDefined(level.tdef_loadouts) && isDefined(level.tdef_loadouts[team])) {
     player thread applyflagcarrierclass();
   } else {
     player attachflag();
@@ -203,7 +203,7 @@ function onpickup(player) {
   player recordgameevent("pickup");
   player addplayerstatwithgametype("CAPTURES", 1);
   player notify("objective", "captured");
-  util::printandsoundoneveryone(team, undefined, & "MP_NEUTRAL_FLAG_CAPTURED_BY", & "MP_NEUTRAL_FLAG_CAPTURED_BY", "mp_obj_captured", "mp_enemy_obj_captured", player);
+  util::printandsoundoneveryone(team, undefined, &"MP_NEUTRAL_FLAG_CAPTURED_BY", &"MP_NEUTRAL_FLAG_CAPTURED_BY", "mp_obj_captured", "mp_enemy_obj_captured", player);
   if(self.currentteam == otherteam) {
     player globallogic_score::giveteamscoreforobjective(team, score);
   }
@@ -217,7 +217,7 @@ function applyflagcarrierclass() {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
-  if(isdefined(self.iscarrying) && self.iscarrying == 1) {
+  if(isDefined(self.iscarrying) && self.iscarrying == 1) {
     self notify("force_cancel_placement");
     wait(0.05);
   }
@@ -247,8 +247,8 @@ function watchforendgame() {
   self endon("dropped_flag");
   self endon("disconnect");
   level waittill("game_ended");
-  if(isdefined(self)) {
-    if(isdefined(self.tdef_flagtime)) {
+  if(isDefined(self)) {
+    if(isDefined(self.tdef_flagtime)) {
       flagtime = int(gettime() - self.tdef_flagtime);
       self addplayerstat("HOLDINGTEAMDEFENDERFLAG", flagtime);
       if(((flagtime / 100) / 60) < 1) {
@@ -262,20 +262,20 @@ function watchforendgame() {
 }
 
 function cancreateflagatvictimorigin(victim) {
-  minetriggers = getentarray("minefield", "targetname");
-  hurttriggers = getentarray("trigger_hurt", "classname");
-  radtriggers = getentarray("radiation", "targetname");
-  for (index = 0; index < radtriggers.size; index++) {
+  minetriggers = getEntArray("minefield", "targetname");
+  hurttriggers = getEntArray("trigger_hurt", "classname");
+  radtriggers = getEntArray("radiation", "targetname");
+  for(index = 0; index < radtriggers.size; index++) {
     if(victim istouching(radtriggers[index])) {
       return false;
     }
   }
-  for (index = 0; index < minetriggers.size; index++) {
+  for(index = 0; index < minetriggers.size; index++) {
     if(victim istouching(minetriggers[index])) {
       return false;
     }
   }
-  for (index = 0; index < hurttriggers.size; index++) {
+  for(index = 0; index < hurttriggers.size; index++) {
     if(victim istouching(hurttriggers[index])) {
       return false;
     }
@@ -285,7 +285,7 @@ function cancreateflagatvictimorigin(victim) {
 
 function createflag(victim) {
   visuals[0] = spawn("script_model", victim.origin);
-  visuals[0] setmodel(level.carryflag["neutral"]);
+  visuals[0] setModel(level.carryflag["neutral"]);
   trigger = spawn("trigger_radius", victim.origin, 0, 96, 72);
   gameflag = gameobjects::create_carry_object("neutral", trigger, visuals, vectorscale((0, 0, 1), 85));
   gameflag gameobjects::allow_carry("any");
@@ -296,9 +296,9 @@ function createflag(victim) {
   gameflag gameobjects::set_3d_icon("friendly", level.iconcaptureflag3d);
   gameflag gameobjects::set_carry_icon(level.icon2d["axis"]);
   gameflag.allowweapons = 1;
-  gameflag.onpickup = & onpickup;
-  gameflag.onpickupfailed = & onpickup;
-  gameflag.ondrop = & ondrop;
+  gameflag.onpickup = &onpickup;
+  gameflag.onpickupfailed = &onpickup;
+  gameflag.ondrop = &ondrop;
   gameflag.oldradius = 96;
   gameflag.currentteam = "none";
   gameflag.requireslos = 1;
@@ -310,8 +310,8 @@ function createflag(victim) {
 
 function updatebaseposition() {
   level endon("game_ended");
-  while (true) {
-    if(isdefined(self.safeorigin)) {
+  while(true) {
+    if(isDefined(self.safeorigin)) {
       self.baseorigin = self.safeorigin;
       self.trigger.baseorigin = self.safeorigin;
       self.visuals[0].baseorigin = self.safeorigin;
@@ -340,7 +340,7 @@ function flagattachradar(team) {
 function getflagradarowner(team) {
   level endon("game_ended");
   self endon("dropped");
-  while (true) {
+  while(true) {
     foreach(player in level.players) {
       if(isalive(player) && player.team == team) {
         return player;
@@ -354,7 +354,7 @@ function flagradarmover() {
   level endon("game_ended");
   self endon("dropped");
   self.portable_radar endon("death");
-  for (;;) {
+  for(;;) {
     self.portable_radar moveto(self.currentcarrier.origin, 0.05);
     wait(0.05);
   }

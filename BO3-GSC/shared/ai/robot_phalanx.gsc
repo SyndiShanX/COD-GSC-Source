@@ -20,7 +20,6 @@ class robotphalanx {
   var breakingpoint_;
   var currentrobotcount_;
 
-
   constructor() {
     tier1robots_ = [];
     tier2robots_ = [];
@@ -31,9 +30,7 @@ class robotphalanx {
     scattered_ = 0;
   }
 
-
   destructor() {}
-
 
   function scatterphalanx() {
     if(!scattered_) {
@@ -51,13 +48,11 @@ class robotphalanx {
     }
   }
 
-
   function resumefire() {
     _resumefirerobots(tier1robots_);
     _resumefirerobots(tier2robots_);
     _resumefirerobots(tier3robots_);
   }
-
 
   function resumeadvance() {
     if(!scattered_) {
@@ -70,7 +65,6 @@ class robotphalanx {
       _assignphalanxstance(tier1robots_, "crouch");
     }
   }
-
 
   function initialize(phalanxtype, origin, destination, breakingpoint, maxtiersize = 10, tieronespawner = undefined, tiertwospawner = undefined, tierthreespawner = undefined) {
     assert(isstring(phalanxtype));
@@ -94,7 +88,6 @@ class robotphalanx {
     self thread _updatephalanxthread(self);
   }
 
-
   function haltadvance() {
     if(!scattered_) {
       _haltadvance(tier1robots_);
@@ -103,13 +96,11 @@ class robotphalanx {
     }
   }
 
-
   function haltfire() {
     _haltfire(tier1robots_);
     _haltfire(tier2robots_);
     _haltfire(tier3robots_);
   }
-
 
   function private _updatephalanx() {
     if(scattered_) {
@@ -126,20 +117,17 @@ class robotphalanx {
     return true;
   }
 
-
   function private _updatephalanxthread(phalanx) {
-    while ([
+    while([
         [phalanx]
       ] - > _updatephalanx()) {
       wait(1);
     }
   }
 
-
   function private _rotatevec(vector, angle) {
     return ((vector[0] * cos(angle)) - (vector[1] * sin(angle)), (vector[0] * sin(angle)) + (vector[1] * cos(angle)), vector[2]);
   }
-
 
   function private _resumefirerobots(robots) {
     assert(isarray(robots));
@@ -148,13 +136,11 @@ class robotphalanx {
     }
   }
 
-
   function private _resumefire(robot) {
-    if(isdefined(robot) && isalive(robot)) {
+    if(isDefined(robot) && isalive(robot)) {
       robot.ignoreall = 0;
     }
   }
-
 
   function private _releaserobots(robots) {
     foreach(robot in robots) {
@@ -164,9 +150,8 @@ class robotphalanx {
     }
   }
 
-
   function private _releaserobot(robot) {
-    if(isdefined(robot) && isalive(robot)) {
+    if(isDefined(robot) && isalive(robot)) {
       robot clearuseposition();
       robot pathmode("move delayed", 1, randomfloatrange(0.5, 1));
       robot ai::set_behavior_attribute("phalanx", 0);
@@ -174,28 +159,26 @@ class robotphalanx {
       robot ai::set_behavior_attribute("move_mode", "normal");
       robot ai::set_behavior_attribute("force_cover", 0);
       robot setavoidancemask("avoid all");
-      aiutility::removeaioverridedamagecallback(robot, & _dampenexplosivedamage);
+      aiutility::removeaioverridedamagecallback(robot, &_dampenexplosivedamage);
     }
   }
-
 
   function private _prunedead(robots) {
     liverobots = [];
     foreach(index, robot in robots) {
-      if(isdefined(robot) && isalive(robot)) {
+      if(isDefined(robot) && isalive(robot)) {
         liverobots[index] = robot;
       }
     }
     return liverobots;
   }
 
-
   function private _movephalanxtier(robots, phalanxtype, tier, destination, forward) {
     positions = _getphalanxpositions(phalanxtype, tier);
     angles = vectortoangles(forward);
     assert(robots.size <= positions.size, "");
     foreach(index, robot in robots) {
-      if(isdefined(robot) && isalive(robot)) {
+      if(isDefined(robot) && isalive(robot)) {
         assert(isvec(positions[index]), (((("" + index) + "") + tier) + "") + phalanxtype);
         orientedpos = _rotatevec(positions[index], angles[1] - 90);
         navmeshposition = getclosestpointonnavmesh(destination + orientedpos, 200);
@@ -204,31 +187,28 @@ class robotphalanx {
     }
   }
 
-
   function private _initializerobot(robot) {
     assert(isactor(robot));
     robot ai::set_behavior_attribute("phalanx", 1);
     robot ai::set_behavior_attribute("move_mode", "marching");
     robot ai::set_behavior_attribute("force_cover", 1);
     robot setavoidancemask("avoid none");
-    aiutility::addaioverridedamagecallback(robot, & _dampenexplosivedamage, 1);
+    aiutility::addaioverridedamagecallback(robot, &_dampenexplosivedamage, 1);
   }
-
 
   function private _haltfire(robots) {
     assert(isarray(robots));
     foreach(robot in robots) {
-      if(isdefined(robot) && isalive(robot)) {
+      if(isDefined(robot) && isalive(robot)) {
         robot.ignoreall = 1;
       }
     }
   }
 
-
   function private _haltadvance(robots) {
     assert(isarray(robots));
     foreach(robot in robots) {
-      if(isdefined(robot) && isalive(robot) && robot haspath()) {
+      if(isDefined(robot) && isalive(robot) && robot haspath()) {
         navmeshposition = getclosestpointonnavmesh(robot.origin, 200);
         robot useposition(navmeshposition);
         robot clearpath();
@@ -236,14 +216,12 @@ class robotphalanx {
     }
   }
 
-
   function private _getphalanxspawner(tier) {
     spawner = getspawnerarray(tier, "targetname");
     assert(spawner.size >= 0, ("" + "") + "");
     assert(spawner.size == 1, ("" + "") + "");
     return spawner[0];
   }
-
 
   function private _getphalanxpositions(phalanxtype, tier) {
     switch (phalanxtype) {
@@ -343,11 +321,10 @@ class robotphalanx {
     assert(("" + tier) + "");
   }
 
-
   function private _dampenexplosivedamage(inflictor, attacker, damage, flags, meansofdamage, weapon, point, dir, hitloc, offsettime, boneindex, modelindex) {
     entity = self;
     isexplosive = isinarray(array("MOD_GRENADE", "MOD_GRENADE_SPLASH", "MOD_PROJECTILE", "MOD_PROJECTILE_SPLASH", "MOD_EXPLOSIVE"), meansofdamage);
-    if(isexplosive && isdefined(inflictor) && isdefined(inflictor.weapon)) {
+    if(isexplosive && isDefined(inflictor) && isDefined(inflictor.weapon)) {
       weapon = inflictor.weapon;
       distancetoentity = distance(entity.origin, inflictor.origin);
       fractiondistance = 1;
@@ -358,7 +335,6 @@ class robotphalanx {
     }
     return damage;
   }
-
 
   function private _createphalanxtier(phalanxtype, tier, phalanxposition, forward, maxtiersize, spawner = undefined) {
     robots = [];
@@ -386,11 +362,10 @@ class robotphalanx {
     return robots;
   }
 
-
   function private _assignphalanxstance(robots, stance) {
     assert(isarray(robots));
     foreach(robot in robots) {
-      if(isdefined(robot) && isalive(robot)) {
+      if(isDefined(robot) && isalive(robot)) {
         robot ai::set_behavior_attribute("phalanx_force_stance", stance);
       }
     }

@@ -115,7 +115,7 @@ wake(localClientNum, tagname) {
           self.wake_fxHandle = undefined;
         }
       } else if(!isDefined(self.wake_fxHandle)) {
-        self.wake_fxHandle = PlayFXOnTag(localClientNum, treadfx, self, tagname);
+        self.wake_fxHandle = playFXOnTag(localClientNum, treadfx, self, tagname);
       }
     } else {
       newState = 0;
@@ -137,7 +137,7 @@ wake(localClientNum, tagname) {
         }
         wakeState = newState;
         fx = self.wakefx[wakeState];
-        self.wake_fxHandle = PlayFXOnTag(localClientNum, fx, self, tagname);
+        self.wake_fxHandle = playFXOnTag(localClientNum, fx, self, tagname);
       }
     }
     throttle = self getthrottle();
@@ -146,7 +146,7 @@ wake(localClientNum, tagname) {
       if(isDefined(throttleEffect)) {
         effectOrigin = self getTagOrigin(tagname);
         fwd = self gettagforwardvector(tagname);
-        playfx(localClientNum, throttleEffect, effectOrigin, fwd);
+        playFX(localClientNum, throttleEffect, effectOrigin, fwd);
       }
     }
     wait 0.1;
@@ -163,10 +163,10 @@ splash(localClientNum) {
   }
   wasinwater = true;
   offset = (0, 0, -10);
-  last_water_check_pos = self.origin + anglestoforward(self.angles) * 100 + offset;
+  last_water_check_pos = self.origin + anglesToForward(self.angles) * 100 + offset;
   for(;;) {
     wait(0.5);
-    water_check_pos = self.origin + anglestoforward(self.angles) * 100 + offset;
+    water_check_pos = self.origin + anglesToForward(self.angles) * 100 + offset;
     water_height = getwaterheight(water_check_pos);
     isinwater = water_check_pos[2] < water_height;
     vertical_speed = water_check_pos[2] - last_water_check_pos[2];
@@ -176,8 +176,8 @@ splash(localClientNum) {
         splashOrigin = self getTagOrigin("snd_bow_center");
         effectOrigin = self getTagOrigin("tag_wake");
         fwd = self gettagforwardvector("tag_wake");
-        playfx(localClientNum, self.splashfx, effectOrigin, fwd);
-        id = playsound(0, "veh_boat_splash", splashOrigin);
+        playFX(localClientNum, self.splashfx, effectOrigin, fwd);
+        id = playSound(0, "veh_boat_splash", splashOrigin);
       }
     }
     wasinwater = isinwater;
@@ -193,9 +193,9 @@ splash_small() {
   offset = (0, 0, -10);
   wait(randomfloat(0.5));
   for(;;) {
-    water_check_pos = self.origin + anglestoforward(self.angles) * 100 + offset;
+    water_check_pos = self.origin + anglesToForward(self.angles) * 100 + offset;
     wait(0.5);
-    water_check_pos_2 = self.origin + anglestoforward(self.angles) * 100 + offset;
+    water_check_pos_2 = self.origin + anglesToForward(self.angles) * 100 + offset;
     water_height = getwaterheight(water_check_pos);
     isinwater = water_check_pos[2] < water_height;
     vertical_speed = water_check_pos[2] - water_check_pos_2[2];
@@ -207,7 +207,7 @@ splash_small() {
           splashOrigin = self getTagOrigin("tag_origin");
           println("***SOUND: Can't find snd_bow_center***");
         }
-        id = playsound(0, "veh_boat_splash_small", splashOrigin);
+        id = playSound(0, "veh_boat_splash_small", splashOrigin);
         wait(1.6);
       }
     }
@@ -243,7 +243,7 @@ tread(localClientNum, tagname, side, relativeOffset) {
       forwardVec = self gettagforwardvector(tagname);
       effectOrigin = self getTagOrigin(tagname);
       forwardVec = vector_scale(forwardVec, waitTime);
-      playfx(localClientNum, treadfx, effectOrigin, (0, 0, 0) - forwardVec);
+      playFX(localClientNum, treadfx, effectOrigin, (0, 0, 0) - forwardVec);
     }
   }
 }
@@ -279,9 +279,9 @@ playTankExhaust(localClientNum) {
     return;
   }
   if(isDefined(self) && (self isalive()) && isDefined(self.exhaust_fx)) {
-    PlayFXOnTag(localClientNum, self.exhaust_fx, self, "tag_engine_left");
+    playFXOnTag(localClientNum, self.exhaust_fx, self, "tag_engine_left");
     if(!self.oneexhaust)
-      PlayFXOnTag(localClientNum, self.exhaust_fx, self, "tag_engine_right");
+      playFXOnTag(localClientNum, self.exhaust_fx, self, "tag_engine_right");
   }
 }
 
@@ -290,9 +290,9 @@ play_exhaust(localClientNum) {
     return;
   }
   if(isDefined(self) && (self isalive()) && isDefined(self.exhaust_fx)) {
-    PlayFXOnTag(localClientNum, self.exhaust_fx, self, "tag_engine_left");
+    playFXOnTag(localClientNum, self.exhaust_fx, self, "tag_engine_left");
     if(!self.oneexhaust)
-      PlayFXOnTag(localClientNum, self.exhaust_fx, self, "tag_engine_right");
+      playFXOnTag(localClientNum, self.exhaust_fx, self, "tag_engine_right");
   }
 }
 
@@ -386,7 +386,7 @@ aircraft_dustkick() {
         trace["surfacetype"] = "dirt";
       }
       if(isDefined(self.treadfx[trace["surfacetype"]])) {
-        playfx(0, self.treadfx[trace["surfacetype"]], trace["position"]);
+        playFX(0, self.treadfx[trace["surfacetype"]], trace["position"]);
       } else {
         println("SCRIPT PRINT: Unknown surface type " + trace["surfacetype"] + " for vehicle type " + self.vehicletype);
         return;
@@ -448,7 +448,7 @@ play_rotor_fx(localClientNum) {
     if(isDefined(self.rotorMainStartFxName) && self.rotorMainStartFxName != "") {
       self.rotorMainStartFx = LoadFX(self.rotorMainStartFxName);
       if(isDefined(self.rotorMainStartFx)) {
-        self.rotorMainFxHandle = PlayFXOnTag(localClientNum, self.rotorMainStartFx, self, "main_rotor_jnt");
+        self.rotorMainFxHandle = playFXOnTag(localClientNum, self.rotorMainStartFx, self, "main_rotor_jnt");
         self.rotorMainfxHandle_saved = self.rotorMainfxHandle;
       } else {
         println("Client: _vehicles.csc - play_rotor_fx() - main rotor fx for starting is not loaded");
@@ -457,7 +457,7 @@ play_rotor_fx(localClientNum) {
     if(isDefined(self.rotorTailStartFxName) && self.rotorTailStartFxName != "") {
       self.rotorTailStartFx = LoadFX(self.rotorTailStartFxName);
       if(isDefined(self.rotorTailStartFx)) {
-        self.rotorTailfxHandle = PlayFXOnTag(localClientNum, self.rotorTailStartFx, self, "tail_rotor_jnt");
+        self.rotorTailfxHandle = playFXOnTag(localClientNum, self.rotorTailStartFx, self, "tail_rotor_jnt");
         self.rotorTailfxHandle_saved = self.rotorTailfxHandle;
       } else {
         println("Client: _vehicles.csc - play_rotor_fx_stationary() - tail rotor fx aren't loaded for starting the rotor");
@@ -492,7 +492,7 @@ play_rotor_fx(localClientNum) {
       self.useAlternateRotor = false;
     }
     if(isDefined(self.rotorMainRunningFx)) {
-      self.rotorMainfxHandle = PlayFXOnTag(localClientNum, self.rotorMainRunningFx, self, "main_rotor_jnt");
+      self.rotorMainfxHandle = playFXOnTag(localClientNum, self.rotorMainRunningFx, self, "main_rotor_jnt");
       self.rotorMainfxHandle_saved = self.rotorMainfxHandle;
     } else {
       println("Client: _vehicles.csc - play_rotor_fx() - main rotor fx aren't loaded");
@@ -501,7 +501,7 @@ play_rotor_fx(localClientNum) {
   if(isDefined(self.rotorTailRunningFxName) && self.rotorTailRunningFxName != "") {
     self.rotorTailRunningFx = LoadFX(self.rotorTailRunningFxName);
     if(isDefined(self.rotorTailRunningFx)) {
-      self.rotorTailfxHandle = PlayFXOnTag(localClientNum, self.rotorTailRunningFx, self, "tail_rotor_jnt");
+      self.rotorTailfxHandle = playFXOnTag(localClientNum, self.rotorTailRunningFx, self, "tail_rotor_jnt");
       self.rotorTailfxHandle_saved = self.rotorTailfxHandle;
     } else {
       println("Client: _vehicles.csc - play_rotor_fx() - tail rotor fx aren't loaded");
@@ -527,7 +527,7 @@ play_rotor_fx_stationary(localClientNum) {
     if(isDefined(self.rotorMainStopFxName) && self.rotorMainStopFxName != "") {
       self.rotorMainStopFx = LoadFX(self.rotorMainStopFxName);
       if(isDefined(self.rotorMainStopFx)) {
-        self.rotorMainFxHandle = PlayFXOnTag(localClientNum, self.rotorMainStopFx, self, "main_rotor_jnt");
+        self.rotorMainFxHandle = playFXOnTag(localClientNum, self.rotorMainStopFx, self, "main_rotor_jnt");
         self.rotorMainfxHandle_saved = self.rotorMainfxHandle;
       } else {
         println("Client: _vehicles.csc - play_rotor_fx_stationary() - main rotor fx for stopping is not loaded");
@@ -536,7 +536,7 @@ play_rotor_fx_stationary(localClientNum) {
     if(isDefined(self.rotorTailStopFxName) && self.rotorTailStopFxName != "") {
       self.rotorTailStopFx = LoadFX(self.rotorTailStopFxName);
       if(isDefined(self.rotorTailStopFx)) {
-        self.rotorTailfxHandle = PlayFXOnTag(localClientNum, self.rotorTailStopFx, self, "tail_rotor_jnt");
+        self.rotorTailfxHandle = playFXOnTag(localClientNum, self.rotorTailStopFx, self, "tail_rotor_jnt");
         self.rotorTailfxHandle_saved = self.rotorTailfxHandle;
       } else {
         println("Client: _vehicles.csc - play_rotor_fx_stationary() - tail rotor fx aren't loaded for stopping the rotor");
@@ -556,7 +556,7 @@ play_rotor_fx_stationary(localClientNum) {
   if(isDefined(self.rotorMainIdleFxName) && self.rotorMainIdleFxName != "") {
     self.rotorMainIdleFx = LoadFX(self.rotorMainIdleFxName);
     if(isDefined(self.rotorMainIdleFx)) {
-      self.rotorMainfxHandle = PlayFXOnTag(localClientNum, self.rotorMainIdleFx, self, "main_rotor_jnt");
+      self.rotorMainfxHandle = playFXOnTag(localClientNum, self.rotorMainIdleFx, self, "main_rotor_jnt");
       self.rotorMainfxHandle_saved = self.rotorMainfxHandle;
     } else {
       println("Client: _vehicles.csc - play_rotor_fx_stationary() - main rotor fx aren't loaded");
@@ -565,7 +565,7 @@ play_rotor_fx_stationary(localClientNum) {
   if(isDefined(self.rotorTailIdleFxName) && self.rotorTailIdleFxName != "") {
     self.rotorTailIdleFx = LoadFX(self.rotorTailIdleFxName);
     if(isDefined(self.rotorTailIdleFx)) {
-      self.rotorTailfxHandle = PlayFXOnTag(localClientNum, self.rotorTailIdleFx, self, "tail_rotor_jnt");
+      self.rotorTailfxHandle = playFXOnTag(localClientNum, self.rotorTailIdleFx, self, "tail_rotor_jnt");
       self.rotorTailfxHandle_saved = self.rotorTailfxHandle;
     } else {
       println("Client: _vehicles.csc - play_rotor_fx_stationary() - tail rotor fx aren't loaded");
@@ -587,7 +587,7 @@ loop_rotor_fx(localClientNum, effect, attachTag) {
     if(!isDefined(self)) {
       break;
     }
-    fxHandle = PlayFXOnTag(localClientNum, effect, self, attachTag);
+    fxHandle = playFXOnTag(localClientNum, effect, self, attachTag);
     realwait(0.01);
     while(IsFXPlaying(localClientNum, fxHandle)) {
       realwait(0.01);
@@ -612,7 +612,7 @@ headlights_on(localClientNum) {
     self.headlightFX = LoadFX("vehicle/light/fx_cuba_police_headlight");
     self.frontDLightFX = LoadFX("maps/cuba/fx_cuba_veh_front_end_lights");
     if(!isDefined(self.frontDLightFXHandle)) {
-      self.frontDLightFXHandle = PlayFXOnTag(localClientNum, self.frontDLightFX, self, "tag_origin_animate_jnt");
+      self.frontDLightFXHandle = playFXOnTag(localClientNum, self.frontDLightFX, self, "tag_origin_animate_jnt");
     }
   } else if(self.vehicletype == "cuba_player") {
     return;
@@ -620,10 +620,10 @@ headlights_on(localClientNum) {
     self.headlightFX = LoadFX("vehicle/light/fx_jeep_uaz_headlight");
   }
   if(!isDefined(self.headlightLeftFXHandle)) {
-    self.headlightLeftFXHandle = PlayFXOnTag(localClientNum, self.headlightFX, self, "tag_headlight_left");
+    self.headlightLeftFXHandle = playFXOnTag(localClientNum, self.headlightFX, self, "tag_headlight_left");
   }
   if(!isDefined(self.headlightRightFXHandle)) {
-    self.headlightRightFXHandle = PlayFXOnTag(localClientNum, self.headlightFX, self, "tag_headlight_right");
+    self.headlightRightFXHandle = playFXOnTag(localClientNum, self.headlightFX, self, "tag_headlight_right");
   }
 }
 
@@ -658,10 +658,10 @@ taillights_on(localClientNum) {
     self.taillightRightTag = "tag_tail_light_right";
   }
   if(!isDefined(self.taillightLeftFXHandle)) {
-    self.taillightLeftFXHandle = PlayFXOnTag(localClientNum, self.taillightLeftFX, self, self.taillightLeftTag);
+    self.taillightLeftFXHandle = playFXOnTag(localClientNum, self.taillightLeftFX, self, self.taillightLeftTag);
   }
   if(!isDefined(self.taillightRightFXHandle) && isDefined(self.taillightRightFX)) {
-    self.taillightRightFXHandle = PlayFXOnTag(localClientNum, self.taillightRightFX, self, self.taillightRightTag);
+    self.taillightRightFXHandle = playFXOnTag(localClientNum, self.taillightRightFX, self, self.taillightRightTag);
   }
 }
 
@@ -681,7 +681,7 @@ interior_lights_on(localClientNum) {
     self.interiorLightFX = LoadFX("maps/cuba/fx_cuba_veh_interior_lights");
     self.interiorLightTag = "tag_origin_animate_jnt";
     if(!isDefined(self.interiorLightFXHandle)) {
-      self.interiorLightFXHandle = PlayFXOnTag(localClientNum, self.interiorLightFX, self, self.interiorLightTag);
+      self.interiorLightFXHandle = playFXOnTag(localClientNum, self.interiorLightFX, self, self.interiorLightTag);
     }
   }
 }
@@ -696,7 +696,7 @@ interior_lights_off(localClientNum) {
 sirenlights_on(localClientNum) {
   if(!isDefined(self.sirenlightFXHandle)) {
     self.sirenlightFX = LoadFX("maps/cuba/fx_cuba_siren_light");
-    self.sirenlightFXHandle = PlayFXOnTag(localClientNum, self.sirenlightFX, self, "tag_origin_animate_jnt");
+    self.sirenlightFXHandle = playFXOnTag(localClientNum, self.sirenlightFX, self, "tag_origin_animate_jnt");
   }
 }
 
@@ -766,13 +766,13 @@ vehicle_flag_switch_rotor_fx(localClientNum, set, newEnt) {
       self.rotorOldRunningFx = self.rotorMainRunningFX;
       self.rotorMainRunningFx = level.rotorAlternateRunningFX;
       DeleteFX(localClientNum, self.rotorMainfxHandle);
-      self.rotorMainfxHandle = PlayFXOnTag(localClientNum, self.rotorMainRunningFx, self, "main_rotor_jnt");
+      self.rotorMainfxHandle = playFXOnTag(localClientNum, self.rotorMainRunningFx, self, "main_rotor_jnt");
     }
   } else {
     if(isDefined(self.rotorOldRunningFX)) {
       self.rotorMainRunningFx = self.rotorOldRunningFX;
       DeleteFX(localClientNum, self.rotorMainfxHandle);
-      self.rotorMainfxHandle = PlayFXOnTag(localClientNum, self.rotorMainRunningFx, self, "main_rotor_jnt");
+      self.rotorMainfxHandle = playFXOnTag(localClientNum, self.rotorMainRunningFx, self, "main_rotor_jnt");
     }
   }
 }

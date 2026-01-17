@@ -107,7 +107,7 @@ main(bScriptgened, bCSVgened, bsgenabled) {
     script_gen_dump_addline("maps\\createfx\\" + level.script + "_fx::main(); ", level.script + "_fx");
   }
   if(isDefined(level.script_gen_dump_preload)) {
-    for (i = 0; i < level.script_gen_dump_preload.size; i++) {
+    for(i = 0; i < level.script_gen_dump_preload.size; i++) {
       script_gen_dump_addline(level.script_gen_dump_preload[i].string, level.script_gen_dump_preload[i].signature);
     }
   }
@@ -216,13 +216,13 @@ main(bScriptgened, bCSVgened, bsgenabled) {
   thread maps\_shutter::main();
   thread maps\_endmission::main();
   maps\_friendlyfire::main();
-  array_levelthread(GetEntArray("badplace", "targetname"), ::badplace_think);
-  array_levelthread(GetEntArray("delete_on_load", "targetname"), ::deleteEnt);
+  array_levelthread(getEntArray("badplace", "targetname"), ::badplace_think);
+  array_levelthread(getEntArray("delete_on_load", "targetname"), ::deleteEnt);
   array_thread(GetNodeArray("traverse", "targetname"), ::traverseThink);
   array_thread(GetNodeArray("deprecated_traverse", "targetname"), ::deprecatedTraverseThink);
-  array_thread(GetEntArray("piano_key", "targetname"), ::pianoThink);
-  array_thread(GetEntArray("piano_damage", "targetname"), ::pianoDamageThink);
-  array_thread(GetEntArray("water", "targetname"), ::waterThink);
+  array_thread(getEntArray("piano_key", "targetname"), ::pianoThink);
+  array_thread(getEntArray("piano_damage", "targetname"), ::pianoDamageThink);
+  array_thread(getEntArray("water", "targetname"), ::waterThink);
   thread maps\_interactive_objects::main();
   println("_LOAD COLLECTIBLE TIME = " + GetTime());
   thread maps\_collectibles::main();
@@ -238,9 +238,9 @@ main(bScriptgened, bCSVgened, bsgenabled) {
   thread maps\_spawner::goalVolumes();
   thread maps\_spawner::friendlyChains();
   thread maps\_spawner::friendlychain_onDeath();
-  array_thread(GetEntArray("friendly_spawn", "targetname"), maps\_spawner::friendlySpawnWave);
-  array_thread(GetEntArray("flood_and_secure", "targetname"), maps\_spawner::flood_and_secure);
-  array_thread(GetEntArray("ambient_volume", "targetname"), maps\_ambient::ambientVolume);
+  array_thread(getEntArray("friendly_spawn", "targetname"), maps\_spawner::friendlySpawnWave);
+  array_thread(getEntArray("flood_and_secure", "targetname"), maps\_spawner::flood_and_secure);
+  array_thread(getEntArray("ambient_volume", "targetname"), maps\_ambient::ambientVolume);
   level.trigger_hint_string = [];
   level.trigger_hint_func = [];
   level.fog_trigger_current = undefined;
@@ -284,15 +284,15 @@ main(bScriptgened, bCSVgened, bsgenabled) {
   trigger_funcs["trigger_coop_warp"] = maps\_utility::trigger_coop_warp;
   trigger_funcs["no_crouch_or_prone"] = ::no_crouch_or_prone_think;
   trigger_funcs["no_prone"] = ::no_prone_think;
-  trigger_multiple = GetEntArray("trigger_multiple", "classname");
-  trigger_radius = GetEntArray("trigger_radius", "classname");
+  trigger_multiple = getEntArray("trigger_multiple", "classname");
+  trigger_radius = getEntArray("trigger_radius", "classname");
   triggers = array_merge(trigger_multiple, trigger_radius);
-  for (i = 0; i < triggers.size; i++) {
+  for(i = 0; i < triggers.size; i++) {
     if(triggers[i].spawnflags & 32) {
       thread maps\_spawner::trigger_spawner(triggers[i]);
     }
   }
-  for (p = 0; p < 6; p++) {
+  for(p = 0; p < 6; p++) {
     switch (p) {
       case 0:
         triggertype = "trigger_multiple";
@@ -314,10 +314,10 @@ main(bScriptgened, bCSVgened, bsgenabled) {
         triggertype = "trigger_damage";
         break;
     }
-    triggers = GetEntArray(triggertype, "classname");
-    for (i = 0; i < triggers.size; i++) {
+    triggers = getEntArray(triggertype, "classname");
+    for(i = 0; i < triggers.size; i++) {
       if(isDefined(triggers[i].target)) {
-        level thread maps\_spawner::trigger_Spawn(triggers[i]);
+        level thread maps\_spawner::trigger_spawn(triggers[i]);
       }
       if(isDefined(triggers[i].script_flag_true)) {
         level thread script_flag_true_trigger(triggers[i]);
@@ -398,16 +398,16 @@ main(bScriptgened, bCSVgened, bsgenabled) {
 
 onFirstPlayerReady() {
   level waittill("first_player_ready", player);
-  array_thread(GetEntArray("ambient_volume", "targetname"), maps\_ambient::ambientVolume);
-  array_thread(GetEntArray("ambient_package", "targetname"), maps\_ambientpackage::ambientPackageTrigger);
+  array_thread(getEntArray("ambient_volume", "targetname"), maps\_ambient::ambientVolume);
+  array_thread(getEntArray("ambient_package", "targetname"), maps\_ambientpackage::ambientPackageTrigger);
   println("*********************First player connected to game.");
 }
 
 onPlayerConnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connecting", player);
     if(!isDefined(player.a)) {
-      player.a = SpawnStruct();
+      player.a = spawnStruct();
     }
     player thread animscripts\init::onPlayerConnect();
     player thread onPlayerSpawned();
@@ -430,7 +430,7 @@ onPlayerSpawned() {
     println("File: _load.gsc. Function: onPlayerSpawned()\n");
   }
   self endon("disconnect");
-  for (;;) {
+  for(;;) {
     if(GetDebugDvar("replay_debug") == "1") {
       println("File: _load.gsc. Function: onPlayerSpawned() - INNER LOOP START\n");
       println("File: _load.gsc. Function: onPlayerSpawned() - INNER LOOP START WAIT\n");
@@ -500,10 +500,10 @@ set_early_level() {
 }
 
 setup_simple_primary_lights() {
-  flickering_lights = GetEntArray("generic_flickering", "targetname");
-  pulsing_lights = GetEntArray("generic_pulsing", "targetname");
-  double_strobe = GetEntArray("generic_double_strobe", "targetname");
-  fire_flickers = GetEntArray("fire_flicker", "targetname");
+  flickering_lights = getEntArray("generic_flickering", "targetname");
+  pulsing_lights = getEntArray("generic_pulsing", "targetname");
+  double_strobe = getEntArray("generic_double_strobe", "targetname");
+  fire_flickers = getEntArray("fire_flicker", "targetname");
   array_thread(flickering_lights, maps\_lights::generic_flickering);
   array_thread(pulsing_lights, maps\_lights::generic_pulsing);
   array_thread(double_strobe, maps\_lights::generic_double_strobe);
@@ -511,8 +511,8 @@ setup_simple_primary_lights() {
 }
 
 weapon_ammo() {
-  ents = GetEntArray();
-  for (i = 0; i < ents.size; i++) {
+  ents = getEntArray();
+  for(i = 0; i < ents.size; i++) {
     if((isDefined(ents[i].classname)) && (GetSubStr(ents[i].classname, 0, 7) == "weapon_")) {
       weap = ents[i];
       change_ammo = false;
@@ -579,12 +579,12 @@ badplace_think(badplace) {
 
 setupExploders() {
   level.exploders = [];
-  ents = GetEntArray("script_brushmodel", "classname");
-  smodels = GetEntArray("script_model", "classname");
-  for (i = 0; i < smodels.size; i++) {
+  ents = getEntArray("script_brushmodel", "classname");
+  smodels = getEntArray("script_model", "classname");
+  for(i = 0; i < smodels.size; i++) {
     ents[ents.size] = smodels[i];
   }
-  for (i = 0; i < ents.size; i++) {
+  for(i = 0; i < ents.size; i++) {
     if(isDefined(ents[i].script_prefab_exploder)) {
       ents[i].script_exploder = ents[i].script_prefab_exploder;
     }
@@ -609,8 +609,8 @@ setupExploders() {
     }
   }
   script_exploders = [];
-  potentialExploders = GetEntArray("script_brushmodel", "classname");
-  for (i = 0; i < potentialExploders.size; i++) {
+  potentialExploders = getEntArray("script_brushmodel", "classname");
+  for(i = 0; i < potentialExploders.size; i++) {
     if(isDefined(potentialExploders[i].script_prefab_exploder)) {
       potentialExploders[i].script_exploder = potentialExploders[i].script_prefab_exploder;
     }
@@ -619,8 +619,8 @@ setupExploders() {
     }
   }
   println("Server : Potential exploders from brushmodels " + potentialExploders.size);
-  potentialExploders = GetEntArray("script_model", "classname");
-  for (i = 0; i < potentialExploders.size; i++) {
+  potentialExploders = getEntArray("script_model", "classname");
+  for(i = 0; i < potentialExploders.size; i++) {
     if(isDefined(potentialExploders[i].script_prefab_exploder)) {
       potentialExploders[i].script_exploder = potentialExploders[i].script_prefab_exploder;
     }
@@ -629,8 +629,8 @@ setupExploders() {
     }
   }
   println("Server : Potential exploders from script_model " + potentialExploders.size);
-  potentialExploders = GetEntArray("item_health", "classname");
-  for (i = 0; i < potentialExploders.size; i++) {
+  potentialExploders = getEntArray("item_health", "classname");
+  for(i = 0; i < potentialExploders.size; i++) {
     if(isDefined(potentialExploders[i].script_prefab_exploder)) {
       potentialExploders[i].script_exploder = potentialExploders[i].script_prefab_exploder;
     }
@@ -647,7 +647,7 @@ setupExploders() {
   acceptableTargetnames["exploderchunk"] = true;
   acceptableTargetnames["exploder"] = true;
   exploderId = 1;
-  for (i = 0; i < script_exploders.size; i++) {
+  for(i = 0; i < script_exploders.size; i++) {
     exploder = script_exploders[i];
     ent = createExploder(exploder.script_fxid);
     ent.v = [];
@@ -724,7 +724,7 @@ setupExploders() {
     }
     ent maps\_createfx::post_entity_creation_function();
   }
-  for (i = 0; i < level.createFXent.size; i++) {
+  for(i = 0; i < level.createFXent.size; i++) {
     ent = level.createFXent[i];
     if(ent.v["type"] != "exploder") {
       continue;
@@ -751,7 +751,7 @@ nearAIRushesPlayer() {
 }
 
 playerDamageRumble() {
-  while (true) {
+  while(true) {
     self waittill("damage", amount);
     if(isDefined(self.specialDamage)) {
       continue;
@@ -774,12 +774,12 @@ player_throwgrenade_timer() {
   self endon("death");
   self endon("disconnect");
   self.lastgrenadetime = 0;
-  while (1) {
-    while (!self IsThroWingGrenade()) {
+  while(1) {
+    while(!self IsThroWingGrenade()) {
       wait(.05);
     }
     self.lastgrenadetime = GetTime();
-    while (self IsThroWingGrenade()) {
+    while(self IsThroWingGrenade()) {
       wait(.05);
     }
   }
@@ -807,7 +807,7 @@ player_special_death_hint() {
       return;
     }
     level notify("new_quote_string");
-    self thread grenade_death_text_hudelement(&"SCRIPT_GRENADE_SUICIDE_LINE1", & "SCRIPT_GRENADE_SUICIDE_LINE2");
+    self thread grenade_death_text_hudelement(&"SCRIPT_GRENADE_SUICIDE_LINE1", &"SCRIPT_GRENADE_SUICIDE_LINE2");
     return;
   }
   if(cause == "MOD_PROJECTILE" || cause == "MOD_PROJECTILE_SPLASH") {
@@ -961,7 +961,7 @@ triggered_playerseek(trig) {
   groupNum = trig.script_triggered_playerseek;
   trig waittill("trigger");
   ai = GetAiArray();
-  for (i = 0; i < ai.size; i++) {
+  for(i = 0; i < ai.size; i++) {
     if(!IsAlive(ai[i])) {
       continue;
     }
@@ -992,7 +992,7 @@ deprecatedTraverseThink() {
   wait(.05);
   println("^1Warning: deprecated traverse used in this map somewhere around " + self.origin);
   if(GetDvarInt("scr_traverse_debug")) {
-    while (1) {
+    while(1) {
       print3d(self.origin, "deprecated traverse!");
       wait(.05);
     }
@@ -1003,7 +1003,7 @@ pianoDamageThink() {
   org = self GetOrigin();
   note[0] = "large";
   note[1] = "small";
-  for (;;) {
+  for(;;) {
     self waittill("trigger");
     thread play_sound_in_space("bullet_" + random(note) + "_piano", org);
   }
@@ -1012,7 +1012,7 @@ pianoThink() {
   org = self GetOrigin();
   note = "piano_" + self.script_noteworthy;
   self SetHintString(&"SCRIPT_PLATFORM_PIANO");
-  for (;;) {
+  for(;;) {
     self waittill("trigger");
     thread play_sound_in_space(note, org);
   }
@@ -1021,7 +1021,7 @@ pianoThink() {
 bcTrigger(trigger) {
   realTrigger = undefined;
   if(isDefined(trigger.target)) {
-    targetEnts = GetEntArray(trigger.target, "targetname");
+    targetEnts = getEntArray(trigger.target, "targetname");
     if(IsSubStr(targetEnts[0].classname, "trigger")) {
       realTrigger = targetEnts[0];
     }
@@ -1041,7 +1041,7 @@ bcTrigger(trigger) {
       }
     } else if(other.team == "allies") {
       soldiers = GetAiArray("axis");
-      for (index = 0; index < soldiers.size; index++) {
+      for(index = 0; index < soldiers.size; index++) {
         if(soldiers[index] IsTouching(trigger)) {
           soldier = soldiers[index];
         }
@@ -1070,10 +1070,10 @@ waterThink() {
   level.depth_allow_prone = 8;
   level.depth_allow_crouch = 33;
   level.depth_allow_stand = 50;
-  for (;;) {
+  for(;;) {
     wait(0.05);
     players = get_players();
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       if(players[i].inWater) {
         players[i] AllowProne(true);
         players[i] AllowCrouch(true);
@@ -1085,10 +1085,10 @@ waterThink() {
     if(!IsPlayer(other)) {
       continue;
     }
-    while (1) {
+    while(1) {
       players = get_players();
       players_in_water_count = 0;
-      for (i = 0; i < players.size; i++) {
+      for(i = 0; i < players.size; i++) {
         if(players[i] IsTouching(self)) {
           players_in_water_count++;
           players[i].inWater = true;
@@ -1146,9 +1146,9 @@ trigger_unlock(trigger) {
   if(isDefined(trigger.script_noteworthy)) {
     noteworthy = trigger.script_noteworthy;
   }
-  target_triggers = GetEntArray(trigger.target, "targetname");
+  target_triggers = getEntArray(trigger.target, "targetname");
   trigger thread trigger_unlock_death(trigger.target);
-  for (;;) {
+  for(;;) {
     array_thread(target_triggers, ::trigger_off);
     trigger waittill("trigger");
     array_thread(target_triggers, ::trigger_on);
@@ -1159,14 +1159,14 @@ trigger_unlock(trigger) {
 
 trigger_unlock_death(target) {
   self waittill("death");
-  target_triggers = GetEntArray(target, "targetname");
+  target_triggers = getEntArray(target, "targetname");
   array_thread(target_triggers, ::trigger_off);
 }
 
 wait_for_an_unlocked_trigger(triggers, noteworthy) {
   level endon("unlocked_trigger_hit" + noteworthy);
-  ent = SpawnStruct();
-  for (i = 0; i < triggers.size; i++) {
+  ent = spawnStruct();
+  for(i = 0; i < triggers.size; i++) {
     triggers[i] thread report_trigger(ent, noteworthy);
   }
   ent waittill("trigger");
@@ -1184,9 +1184,9 @@ get_trigger_targs() {
   triggers = [];
   target_origin = undefined;
   if(isDefined(self.target)) {
-    targets = GetEntArray(self.target, "targetname");
+    targets = getEntArray(self.target, "targetname");
     orgs = [];
-    for (i = 0; i < targets.size; i++) {
+    for(i = 0; i < targets.size; i++) {
       if(targets[i].classname == "script_origin") {
         orgs[orgs.size] = targets[i];
       }
@@ -1239,7 +1239,7 @@ trigger_lookat_think(trigger, endOnFlag) {
     level endon(flagName);
   }
   trigger endon("death");
-  for (;;) {
+  for(;;) {
     if(has_flag) {
       flag_clear(flagName);
     }
@@ -1248,8 +1248,8 @@ trigger_lookat_think(trigger, endOnFlag) {
     if(!IsPlayer(other)) {
       continue;
     }
-    while (other IsTouching(trigger)) {
-      if(!SightTracePassed(other GetEye(), target_origin, false, undefined)) {
+    while(other IsTouching(trigger)) {
+      if(!SightTracePassed(other getEye(), target_origin, false, undefined)) {
         if(has_flag) {
           flag_clear(flagName);
         }
@@ -1258,7 +1258,7 @@ trigger_lookat_think(trigger, endOnFlag) {
       }
       normal = VectorNormalize(target_origin - other.origin);
       player_angles = other GetPlayerAngles();
-      player_forward = AnglesToForward(player_angles);
+      player_forward = anglesToForward(player_angles);
       dot = VectorDot(player_forward, normal);
       if(dot >= 0.78) {
         if(has_flag) {
@@ -1306,13 +1306,13 @@ trigger_CanSee(trigger) {
   offsets[offsets.size] = (0, range, 0);
   offsets[offsets.size] = (0, range * -1, 0);
   offsets[offsets.size] = (0, 0, range);
-  for (;;) {
+  for(;;) {
     if(has_flag) {
       flag_clear(flagName);
     }
     trigger waittill("trigger", other);
     assertex(IsPlayer(other), "trigger_cansee currently only supports looking from the player");
-    while (other IsTouching(trigger)) {
+    while(other IsTouching(trigger)) {
       if(!(other cantraceto(target_origin, offsets))) {
         if(has_flag) {
           flag_clear(flagName);
@@ -1330,8 +1330,8 @@ trigger_CanSee(trigger) {
 }
 
 cantraceto(target_origin, offsets) {
-  for (i = 0; i < offsets.size; i++) {
-    if(SightTracePassed(self GetEye(), target_origin + offsets[i], true, self)) {
+  for(i = 0; i < offsets.size; i++) {
+    if(SightTracePassed(self getEye(), target_origin + offsets[i], true, self)) {
       return true;
     }
   }
@@ -1373,7 +1373,7 @@ handle_starts() {
   assertex(GetDvar("jumpto") == "", "Use the START dvar instead of JUMPTO");
   start = Tolower(GetDvar("start"));
   dvars = GetArrayKeys(level.start_functions);
-  for (i = 0; i < dvars.size; i++) {
+  for(i = 0; i < dvars.size; i++) {
     if(start == dvars[i]) {
       level.start_point = start;
       break;
@@ -1409,7 +1409,7 @@ get_string_for_starts(dvars) {
   string = " ** No starts have been set up for this map with maps\_utility::add_start().";
   if(dvars.size) {
     string = " ** ";
-    for (i = dvars.size - 1; i >= 0; i--) {
+    for(i = dvars.size - 1; i >= 0; i--) {
       string = string + dvars[i] + " ";
     }
   }
@@ -1418,8 +1418,8 @@ get_string_for_starts(dvars) {
 }
 
 devhelp_hudElements(hudarray, alpha) {
-  for (i = 0; i < hudarray.size; i++) {
-    for (p = 0; p < 2; p++) {
+  for(i = 0; i < hudarray.size; i++) {
+    for(p = 0; p < 2; p++) {
       hudarray[i][p].alpha = alpha;
     }
   }
@@ -1440,9 +1440,9 @@ create_start(start, index) {
 }
 
 start_menu() {
-  level.start_loc_string["default"] = & "STARTS_DEFAULT";
-  level.start_loc_string["cancel"] = & "STARTS_CANCEL";
-  for (;;) {
+  level.start_loc_string["default"] = &"STARTS_DEFAULT";
+  level.start_loc_string["cancel"] = &"STARTS_CANCEL";
+  for(;;) {
     if(GetDvarInt("debug_start")) {
       SetDvar("debug_start", 0);
       SetSavedDvar("hud_drawhud", 1);
@@ -1465,23 +1465,23 @@ display_starts() {
   title = create_start(&"STARTS_AVAILABLE_STARTS", -1);
   title.color = (1, 1, 1);
   elems = [];
-  level.start_loc_string = array_remove(level.start_loc_string, & "MISSING_LOC_STRING", true);
+  level.start_loc_string = array_remove(level.start_loc_string, &"MISSING_LOC_STRING", true);
   dvars = GetArrayKeys(level.start_loc_string);
-  for (i = 0; i < dvars.size; i++) {
+  for(i = 0; i < dvars.size; i++) {
     elems[elems.size] = create_start(level.start_loc_string[dvars[i]], dvars.size - i);
   }
   selected = dvars.size - 1;
   up_pressed = false;
   down_pressed = false;
   players = get_players();
-  for (;;) {
+  for(;;) {
     if(GetDebugDvar("replay_debug") == "1") {
       println("File: _load.gsc. Function: display_starts() - INNER LOOP START\n");
     }
     if(!(players[0] ButtonPressed("F10"))) {
       level.display_starts_Pressed = false;
     }
-    for (i = 0; i < dvars.size; i++) {
+    for(i = 0; i < dvars.size; i++) {
       elems[i].color = (0.7, 0.7, 0.7);
     }
     elems[selected].color = (1, 1, 0);
@@ -1514,7 +1514,7 @@ display_starts() {
     if(players[0] ButtonPressed("kp_enter") || players[0] ButtonPressed("BUTTON_A") || players[0] ButtonPressed("enter")) {
       if(dvars[selected] == "cancel") {
         title Destroy();
-        for (i = 0; i < elems.size; i++) {
+        for(i = 0; i < elems.size; i++) {
           elems[i] Destroy();
         }
         break;
@@ -1567,9 +1567,9 @@ devhelp() {
   strOffsetX[4] = -2;
   strOffsetY[4] = -1;
   hudarray = [];
-  for (i = 0; i < helptext.size; i++) {
+  for(i = 0; i < helptext.size; i++) {
     newStrArray = [];
-    for (p = 0; p < 2; p++) {
+    for(p = 0; p < 2; p++) {
       newStr = NewDebugHudElem();
       newStr.alignX = "left";
       newStr.location = 0;
@@ -1588,7 +1588,7 @@ devhelp() {
     hudarray[hudarray.size] = newStrArray;
   }
   devhelp_hudElements(hudarray, 0);
-  while (1) {
+  while(1) {
     if(GetDebugDvar("replay_debug") == "1") {
       println("File: _load.gsc. Function: devhelp() - INNER LOOP START\n");
     }
@@ -1596,7 +1596,7 @@ devhelp() {
     players = get_players();
     if(players.size > 0 && players[0] ButtonPressed("F1")) {
       devhelp_hudElements(hudarray, 1);
-      while (players[0] ButtonPressed("F1")) {
+      while(players[0] ButtonPressed("F1")) {
         wait(0.05);
       }
     }
@@ -1613,7 +1613,7 @@ flag_set_player_trigger(trigger) {
   if(!isDefined(level.flag[flag])) {
     flag_init(flag);
   }
-  for (;;) {
+  for(;;) {
     trigger waittill("trigger", other);
     if(!IsPlayer(other)) {
       continue;
@@ -1629,7 +1629,7 @@ flag_set_trigger(trigger) {
   if(!isDefined(level.flag[flag])) {
     flag_init(flag);
   }
-  for (;;) {
+  for(;;) {
     trigger waittill("trigger");
     self script_delay();
     flag_set(flag);
@@ -1641,7 +1641,7 @@ flag_unset_trigger(trigger) {
   if(!isDefined(level.flag[flag])) {
     flag_init(flag);
   }
-  for (;;) {
+  for(;;) {
     trigger waittill("trigger");
     self script_delay();
     flag_clear(flag);
@@ -1652,19 +1652,19 @@ eq_trigger(trigger) {
   level.set_eq_func[true] = ::set_eq_on;
   level.set_eq_func[false] = ::set_eq_off;
   targ = GetEnt(trigger.target, "targetname");
-  for (;;) {
+  for(;;) {
     trigger waittill("trigger");
     ai = GetAiArray("allies");
-    for (i = 0; i < ai.size; i++) {
+    for(i = 0; i < ai.size; i++) {
       ai[i][
         [level.set_eq_func[ai[i] IsTouching(targ)]]
       ]();
     }
-    while (any_player_IsTouching(trigger)) {
+    while(any_player_IsTouching(trigger)) {
       wait(0.05);
     }
     ai = GetAiArray("allies");
-    for (i = 0; i < ai.size; i++) {
+    for(i = 0; i < ai.size; i++) {
       ai[i][
         [level.set_eq_func[false]]
       ]();
@@ -1682,7 +1682,7 @@ player_ignores_triggers() {
 get_trigger_eq_nums(num) {
   nums = [];
   nums[0] = num;
-  for (i = 0; i < level.eq_trigger_table[num].size; i++) {
+  for(i = 0; i < level.eq_trigger_table[num].size; i++) {
     nums[nums.size] = level.eq_trigger_table[num][i];
   }
   return nums;
@@ -1691,33 +1691,33 @@ get_trigger_eq_nums(num) {
 player_touched_eq_trigger(num, trigger) {
   self endon("death");
   nums = get_trigger_eq_nums(num);
-  for (r = 0; r < nums.size; r++) {
+  for(r = 0; r < nums.size; r++) {
     self.eq_table[nums[r]] = true;
     self.eq_touching[nums[r]] = true;
   }
   thread player_ignores_triggers();
   ai = GetAiArray();
-  for (i = 0; i < ai.size; i++) {
+  for(i = 0; i < ai.size; i++) {
     guy = ai[i];
-    for (r = 0; r < nums.size; r++) {
+    for(r = 0; r < nums.size; r++) {
       if(guy.eq_table[nums[r]]) {
         guy EqOff();
         break;
       }
     }
   }
-  while (self IsTouching(trigger)) {
+  while(self IsTouching(trigger)) {
     wait(0.05);
   }
-  for (r = 0; r < nums.size; r++) {
+  for(r = 0; r < nums.size; r++) {
     self.eq_table[nums[r]] = false;
     self.eq_touching[nums[r]] = undefined;
   }
   ai = GetAiArray();
-  for (i = 0; i < ai.size; i++) {
+  for(i = 0; i < ai.size; i++) {
     guy = ai[i];
     was_in_our_trigger = false;
-    for (r = 0; r < nums.size; r++) {
+    for(r = 0; r < nums.size; r++) {
       if(guy.eq_table[nums[r]]) {
         was_in_our_trigger = true;
       }
@@ -1727,7 +1727,7 @@ player_touched_eq_trigger(num, trigger) {
     }
     touching = GetArrayKeys(self.eq_touching);
     shares_trigger = false;
-    for (p = 0; p < touching.size; p++) {
+    for(p = 0; p < touching.size; p++) {
       if(!guy.eq_table[touching[p]]) {
         continue;
       }
@@ -1743,14 +1743,14 @@ player_touched_eq_trigger(num, trigger) {
 ai_touched_eq_trigger(num, trigger) {
   self endon("death");
   nums = get_trigger_eq_nums(num);
-  for (r = 0; r < nums.size; r++) {
+  for(r = 0; r < nums.size; r++) {
     self.eq_table[nums[r]] = true;
     self.eq_touching[nums[r]] = true;
   }
   break_out = false;
-  for (r = 0; r < nums.size; r++) {
+  for(r = 0; r < nums.size; r++) {
     players = get_players();
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       if(players[i].eq_table[nums[r]]) {
         self EqOff();
         break_out = true;
@@ -1763,19 +1763,19 @@ ai_touched_eq_trigger(num, trigger) {
   self.ignoretriggers = true;
   wait(1);
   self.ignoretriggers = false;
-  while (self IsTouching(trigger)) {
+  while(self IsTouching(trigger)) {
     wait(0.5);
   }
   nums = get_trigger_eq_nums(num);
-  for (r = 0; r < nums.size; r++) {
+  for(r = 0; r < nums.size; r++) {
     self.eq_table[nums[r]] = false;
     self.eq_touching[nums[r]] = undefined;
   }
   touching = GetArrayKeys(self.eq_touching);
-  for (i = 0; i < touching.size; i++) {
+  for(i = 0; i < touching.size; i++) {
     player_eq_count = 0;
     players = get_players();
-    for (q = 0; q < players.size; q++) {
+    for(q = 0; q < players.size; q++) {
       if(players[q].eq_table[touching[i]]) {
         continue;
       }
@@ -1791,8 +1791,8 @@ ai_eq() {
   level.set_eq_func[false] = ::set_eq_on;
   level.set_eq_func[true] = ::set_eq_off;
   index = 0;
-  for (;;) {
-    while (!level.ai_array.size) {
+  for(;;) {
+    while(!level.ai_array.size) {
       wait(0.05);
     }
     waittillframeend;
@@ -1804,8 +1804,8 @@ ai_eq() {
     }
     guy = level.ai_array[keys[index]];
     players = get_players();
-    for (i = 0; i < players.size; i++) {
-      guy[[level.set_eq_func[SightTracePassed(players[i] GetEye(), guy GetEye(), false, undefined)]]]();
+    for(i = 0; i < players.size; i++) {
+      guy[[level.set_eq_func[SightTracePassed(players[i] getEye(), guy getEye(), false, undefined)]]]();
     }
     wait(0.05);
   }
@@ -1820,7 +1820,7 @@ set_eq_off() {
 }
 
 add_tokens_to_trigger_flags(tokens) {
-  for (i = 0; i < tokens.size; i++) {
+  for(i = 0; i < tokens.size; i++) {
     flag = tokens[i];
     if(!isDefined(level.trigger_flags[flag])) {
       level.trigger_flags[flag] = [];
@@ -1842,20 +1842,20 @@ script_flag_true_trigger(trigger) {
 }
 
 wait_for_flag(tokens) {
-  for (i = 0; i < tokens.size; i++) {
+  for(i = 0; i < tokens.size; i++) {
     level endon(tokens[i]);
   }
   level waittill("foreverrr");
 }
 
 friendly_respawn_trigger(trigger) {
-  spawners = GetEntArray(trigger.target, "targetname");
+  spawners = getEntArray(trigger.target, "targetname");
   assertex(spawners.size == 1, "friendly_respawn_trigger targets multiple spawner with targetname " + trigger.target + ". Should target just 1 spawner.");
   spawner = spawners[0];
   assertex(!isDefined(spawner.script_forcecolor), "targeted spawner at " + spawner.origin + " should not have script_forcecolor set!");
   spawners = undefined;
   spawner endon("death");
-  for (;;) {
+  for(;;) {
     trigger waittill("trigger");
     if(isDefined(trigger.script_forcecolor)) {
       level.respawn_spawners_specific[trigger.script_forcecolor] = spawner;
@@ -1868,7 +1868,7 @@ friendly_respawn_trigger(trigger) {
 }
 
 friendly_respawn_clear(trigger) {
-  for (;;) {
+  for(;;) {
     trigger waittill("trigger");
     flag_clear("respawn_friendlies");
     wait(0.5);
@@ -1884,7 +1884,7 @@ trigger_pacifist(trigger) {
 }
 
 trigger_runs_function_on_touch(trigger, set_func, get_func) {
-  for (;;) {
+  for(;;) {
     trigger waittill("trigger", other);
     if(!IsAlive(other)) {
       continue;
@@ -1903,7 +1903,7 @@ touched_trigger_runs_func(trigger, set_func) {
   self.ignoretriggers = true;
   wait(1);
   self.ignoretriggers = false;
-  while (self IsTouching(trigger)) {
+  while(self IsTouching(trigger)) {
     wait(1);
   }
   [[set_func]](false);
@@ -1916,14 +1916,14 @@ trigger_turns_off(trigger) {
     return;
   }
   tokens = Strtok(trigger.script_linkto, " ");
-  for (i = 0; i < tokens.size; i++) {
-    array_thread(GetEntArray(tokens[i], "script_linkname"), ::trigger_off);
+  for(i = 0; i < tokens.size; i++) {
+    array_thread(getEntArray(tokens[i], "script_linkname"), ::trigger_off);
   }
 }
 
 script_gen_dump_checksaved() {
   signatures = GetArrayKeys(level.script_gen_dump);
-  for (i = 0; i < signatures.size; i++) {
+  for(i = 0; i < signatures.size; i++) {
     if(!isDefined(level.script_gen_dump2[signatures[i]])) {
       level.script_gen_dump[signatures[i]] = undefined;
       level.script_gen_dump_reasons[level.script_gen_dump_reasons.size] = "Signature unmatched( removed feature ): " + signatures[i];
@@ -1945,7 +1945,7 @@ script_gen_dump() {
       println("^2----------------------------------------");
       println("^3Dumping scriptgen dump for these reasons");
       println("^2----------------------------------------");
-      for (i = 0; i < level.script_gen_dump_reasons.size; i++) {
+      for(i = 0; i < level.script_gen_dump_reasons.size; i++) {
         if(IsSubStr(level.script_gen_dump_reasons[i], "nowrite")) {
           substr = GetSubStr(level.script_gen_dump_reasons[i], 15);
           println(i + ". ) " + substr);
@@ -1987,12 +1987,12 @@ script_gen_dump() {
     assertex(file != -1, "File not writeable( check it and and restart the map ): " + filename);
     script_gen_dumpprintln(file, "
       script_gen_dumpprintln(file, "main()"); script_gen_dumpprintln(file, "{"); script_gen_dumpprintln(file, ""); script_gen_dumpprintln(file, "\tlevel.script_gen_dump = []; "); script_gen_dumpprintln(file, ""); signatures = GetArrayKeys(level.script_gen_dump);
-      for (i = 0; i < signatures.size; i++) {
+      for(i = 0; i < signatures.size; i++) {
         if(!IsSubStr(level.script_gen_dump[signatures[i]], "nowrite")) {
           script_gen_dumpprintln(file, "\t" + level.script_gen_dump[signatures[i]]);
         }
       }
-      for (i = 0; i < signatures.size; i++) {
+      for(i = 0; i < signatures.size; i++) {
         if(!IsSubStr(level.script_gen_dump[signatures[i]], "nowrite")) {
           script_gen_dumpprintln(file, "\tlevel.script_gen_dump[" + "\"" + signatures[i] + "\"" + "] = " + "\"" + signatures[i] + "\"" + "; ");
         } else {
@@ -2004,7 +2004,7 @@ script_gen_dump() {
         keys1 = GetArrayKeys(level.sg_precacheanims);
       }
       if(isDefined(keys1)) {
-        for (i = 0; i < keys1.size; i++) {
+        for(i = 0; i < keys1.size; i++) {
           script_gen_dumpprintln(file, "\tanim_precach_" + keys1[i] + "(); ");
         }
       }
@@ -2013,7 +2013,7 @@ script_gen_dump() {
         keys1 = GetArrayKeys(level.sg_precacheanims);
       }
       if(isDefined(keys1)) {
-        for (i = 0; i < keys1.size; i++) {
+        for(i = 0; i < keys1.size; i++) {
           script_gen_dumpprintln(file, "#using_animtree( \"" + keys1[i] + "\" ); ");
 
           script_gen_dumpprintln(file, "anim_precach_" + keys1[i] + "()");
@@ -2021,7 +2021,7 @@ script_gen_dump() {
           script_gen_dumpprintln(file, "\tlevel.sg_animtree[\"" + keys1[i] + "\"] = #animtree; ");
           keys2 = GetArrayKeys(level.sg_precacheanims[keys1[i]]);
           if(isDefined(keys2)) {
-            for (j = 0; j < keys2.size; j++) {
+            for(j = 0; j < keys2.size; j++) {
               script_gen_dumpprintln(file, "\tlevel.sg_anim[\"" + keys2[j] + "\"] = %" + keys2[j] + "; ");
             }
           }
@@ -2040,7 +2040,7 @@ script_gen_dump() {
         csvfile = 0;
       }
       assertex(csvfile != -1, "File not writeable( check it and and restart the map ): " + csvfilename); signatures = GetArrayKeys(level.script_gen_dump);
-      for (i = 0; i < signatures.size; i++) {
+      for(i = 0; i < signatures.size; i++) {
         script_gen_csvdumpprintln(csvfile, signatures[i]);
       }
       if(level.bCSVgened) {
@@ -2151,7 +2151,7 @@ script_gen_dump() {
         SetDvar("stuntime", "1");
       }
       level.player.allowads = true;
-      for (;;) {
+      for(;;) {
         self waittill("damage");
         if(GetDvarInt("stuntime") == 0) {
           continue;
@@ -2164,7 +2164,7 @@ script_gen_dump() {
       self endon("stun_player");
       if(ADS_fraction > .3) {
         if(self.allowads == true) {
-          self PlaySound("player_hit_while_ads");
+          self playSound("player_hit_while_ads");
         }
         self.allowads = false;
         self AllowAds(false);
@@ -2185,7 +2185,7 @@ script_gen_dump() {
       if(!isDefined(level.flag[flag])) {
         flag_init(flag);
       }
-      for (;;) {
+      for(;;) {
         trigger waittill("trigger");
         wait(1);
         if(trigger found_toucher()) {
@@ -2197,7 +2197,7 @@ script_gen_dump() {
     }
     found_toucher() {
       ai = GetAiArray("axis");
-      for (i = 0; i < ai.size; i++) {
+      for(i = 0; i < ai.size; i++) {
         guy = ai[i];
         if(!IsAlive(guy)) {
           continue;
@@ -2208,7 +2208,7 @@ script_gen_dump() {
         wait(0.1);
       }
       ai = GetAiArray("axis");
-      for (i = 0; i < ai.size; i++) {
+      for(i = 0; i < ai.size; i++) {
         guy = ai[i];
         if(guy IsTouching(self)) {
           return true;
@@ -2217,7 +2217,7 @@ script_gen_dump() {
       return false;
     }
     trigger_delete_on_touch(trigger) {
-      for (;;) {
+      for(;;) {
         trigger waittill("trigger", other);
         if(isDefined(other)) {
           other Delete();
@@ -2229,17 +2229,17 @@ script_gen_dump() {
       if(!isDefined(level.flag[flag])) {
         flag_init(flag);
       }
-      for (;;) {
+      for(;;) {
         trigger waittill("trigger", other);
         flag_set(flag);
-        while (IsAlive(other) && other IsTouching(trigger) && isDefined(trigger)) {
+        while(IsAlive(other) && other IsTouching(trigger) && isDefined(trigger)) {
           wait(0.25);
         }
         flag_clear(flag);
       }
     }
     add_nodes_mins_maxs(nodes) {
-      for (index = 0; index < nodes.size; index++) {
+      for(index = 0; index < nodes.size; index++) {
         origin = nodes[index].origin;
         level.nodesMins = expandMins(level.nodesMins, origin);
         level.nodesMaxs = expandMaxs(level.nodesMaxs, origin);
@@ -2287,8 +2287,8 @@ script_gen_dump() {
         validWeapons[0] = "claymore";
       }
       assert(validWeapons.size > 0);
-      trig = Spawn("trigger_radius", self.origin, 0, 25, 32);
-      for (;;) {
+      trig = spawn("trigger_radius", self.origin, 0, 25, 32);
+      for(;;) {
         trig waittill("trigger", triggerer);
         if(!isDefined(triggerer)) {
           continue;
@@ -2298,8 +2298,8 @@ script_gen_dump() {
         }
         weaponToGetAmmo = undefined;
         weapons = triggerer GetWeaponsList();
-        for (i = 0; i < weapons.size; i++) {
-          for (j = 0; j < validWeapons.size; j++) {
+        for(i = 0; i < weapons.size; i++) {
+          for(j = 0; j < validWeapons.size; j++) {
             if(weapons[i] == validWeapons[j]) {
               weaponToGetAmmo = weapons[i];
             }
@@ -2324,7 +2324,7 @@ script_gen_dump() {
         return targets;
       }
       tokens = Strtok(self.script_linkto, " ");
-      for (i = 0; i < tokens.size; i++) {
+      for(i = 0; i < tokens.size; i++) {
         token = tokens[i];
         target = GetEnt(token, "script_linkname");
         if(isDefined(target)) {
@@ -2383,12 +2383,12 @@ script_gen_dump() {
           sunsamplesize_time = trigger.script_sunsample_time;
         }
       }
-      for (;;) {
+      for(;;) {
         trigger waittill("trigger", other);
         assertex(IsPlayer(other), "Non-player entity touched a trigger_fog.");
         wait(0.05);
         players = get_players();
-        for (i = 0; i < players.size; i++) {
+        for(i = 0; i < players.size; i++) {
           player = players[i];
           if(player istouching(trigger)) {
             if(!IsSplitscreen()) {
@@ -2421,7 +2421,7 @@ script_gen_dump() {
       steps = time * 20;
       curr_value = GetDvarFloat(dvar);
       diff = (curr_value - value) / steps;
-      for (i = 0; i < steps; i++) {
+      for(i = 0; i < steps; i++) {
         curr_value = curr_value - diff;
         SetSavedDvar(dvar, curr_value);
         wait(0.05);
@@ -2441,12 +2441,12 @@ script_gen_dump() {
       level.first_frame = undefined;
     }
     no_crouch_or_prone_think(trigger) {
-      for (;;) {
+      for(;;) {
         trigger waittill("trigger", other);
         if(!IsPlayer(other)) {
           continue;
         }
-        while (other IsTouching(trigger)) {
+        while(other IsTouching(trigger)) {
           other AllowProne(false);
           other AllowCrouch(false);
           wait(0.05);
@@ -2456,12 +2456,12 @@ script_gen_dump() {
       }
     }
     no_prone_think(trigger) {
-      for (;;) {
+      for(;;) {
         trigger waittill("trigger", other);
         if(!IsPlayer(other)) {
           continue;
         }
-        while (other IsTouching(trigger)) {
+        while(other IsTouching(trigger)) {
           other AllowProne(false);
           wait(0.05);
         }
@@ -2492,7 +2492,7 @@ script_gen_dump() {
       spawners = GetSpawnerTeamArray("allies");
       total_spawners = spawners.size;
       index_spawners = 0;
-      while (1) {
+      while(1) {
         if(((total_ai <= 0) && (total_spawners <= 0)) || (game_characters <= 0)) {
           return;
         }
@@ -2541,7 +2541,7 @@ script_gen_dump() {
         return;
       }
       models = GetArrayKeys(level.scr_model);
-      for (i = 0; i < models.size; i++) {
+      for(i = 0; i < models.size; i++) {
         PrecacheModel(level.scr_model[models[i]]);
       }
     }
@@ -2553,15 +2553,15 @@ script_gen_dump() {
         return;
       }
       effect = LoadFx("misc/grain_test");
-      looper = Spawn("script_model", level.player GetEye());
-      looper SetModel("tag_origin");
+      looper = spawn("script_model", level.player getEye());
+      looper setModel("tag_origin");
       looper Hide();
-      PlayFxonTag(effect, looper, "tag_origin");
+      playFXOnTag(effect, looper, "tag_origin");
       settimescale(1.7);
-      while (1) {
+      while(1) {
         wait(.05);
         VisionSetNaked("sepia");
-        looper.origin = level.player GetEye() + (vector_multiply(AnglesToForward(level.player GetPlayerAngles()), 50));
+        looper.origin = level.player getEye() + (vector_multiply(anglesToForward(level.player GetPlayerAngles()), 50));
       }
       if(GetDebugDvar("replay_debug") == "1") {
         println("File: _load.gsc. Function: filmy() - COMPLETE\n");
@@ -2602,7 +2602,7 @@ script_gen_dump() {
       SetDvar("player_died_recently", recently_skill[level.gameskill]);
     }
     player_died_recently_degrades() {
-      for (;;) {
+      for(;;) {
         recent_death_time = GetDvarInt("player_died_recently");
         if(recent_death_time > 0) {
           recent_death_time -= 5;
@@ -2612,7 +2612,7 @@ script_gen_dump() {
       }
     }
     all_players_connected() {
-      while (1) {
+      while(1) {
         num_con = getnumconnectedplayers();
         num_exp = getnumexpectedplayers();
         if(num_con == num_exp && (num_exp != 0)) {
@@ -2626,10 +2626,10 @@ script_gen_dump() {
     all_players_spawned() {
       flag_wait("all_players_connected");
       waittillframeend;
-      while (1) {
+      while(1) {
         players = get_players();
         count = 0;
-        for (i = 0; i < players.size; i++) {
+        for(i = 0; i < players.size; i++) {
           if(players[i].sessionstate == "playing") {
             count++;
           }
@@ -2642,11 +2642,11 @@ script_gen_dump() {
       flag_set("all_players_spawned");
     }
     adjust_placed_weapons() {
-      weapons = GetEntArray("placed_weapon", "targetname");
+      weapons = getEntArray("placed_weapon", "targetname");
       flag_wait("all_players_connected");
       players = get_players();
       player_count = players.size;
-      for (i = 0; i < weapons.size; i++) {
+      for(i = 0; i < weapons.size; i++) {
         if(isDefined(weapons[i].script_player_min) && player_count < weapons[i].script_player_min) {
           weapons[i] Delete();
         }

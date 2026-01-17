@@ -36,7 +36,7 @@ collectibleHandler(clientNum, state, oldState) {
 
 has_collectible(collectible_value) {
   found_collectibles = GetDvarInt("cheat_items_set1");
-  return ((found_collectibles & (1 << collectible_value)) != 0);
+  return ((found_collectibles &(1 << collectible_value)) != 0);
 }
 
 give_collectible(client_num, collectible_value) {
@@ -58,7 +58,7 @@ collectible_vampire_think() {
   health_normal = Int(max_health * (1 / 1.5));
   ent = SpawnFakeEnt(0);
   level thread collectible_vampire_end(ent);
-  for (;;) {
+  for(;;) {
     wait(0.05);
     health = GetLocalClientHealth(0);
     if(health > last_health) {
@@ -67,7 +67,7 @@ collectible_vampire_think() {
     }
     if(health <= health_low) {
       VisionSetNaked(0, "vampire_low");
-      PlayLoopSound(0, ent, "vampire_loop", 1);
+      playLoopSound(0, ent, "vampire_loop", 1);
     } else if(health >= health_high) {
       VisionSetNaked(0, "vampire_high", 1.5);
       StopLoopSound(0, ent, 1);
@@ -77,7 +77,7 @@ collectible_vampire_think() {
       if(32 < playTime) {
         playTime = 32;
       }
-      PlayLoopSound(0, ent, "vampire_loop", playTime);
+      playLoopSound(0, ent, "vampire_loop", playTime);
     }
     last_health = health;
   }

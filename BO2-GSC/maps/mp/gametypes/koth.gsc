@@ -85,7 +85,7 @@ main() {
 
   maps\mp\gametypes\_globallogic_audio::registerdialoggroup("gamemode_objective", 0);
 
-  trigs = getentarray("radiotrigger", "targetname");
+  trigs = getEntArray("radiotrigger", "targetname");
 
   foreach(trig in trigs)
   trig delete();
@@ -125,7 +125,7 @@ getrespawndelay() {
       return undefined;
 
     if(level.playerobjectiveheldrespawndelay >= level.zoneautomovetime)
-      self.lowermessageoverride = & "MP_WAITING_FOR_HQ";
+      self.lowermessageoverride = &"MP_WAITING_FOR_HQ";
 
     if(level.delayplayer)
       return min(level.spawndelay, timeremaining);
@@ -148,19 +148,19 @@ onstartgametype() {
   maps\mp\gametypes\_globallogic_score::resetteamscores();
 
   foreach(team in level.teams) {
-    setobjectivetext(team, & "OBJECTIVES_KOTH");
+    setobjectivetext(team, &"OBJECTIVES_KOTH");
 
     if(level.splitscreen) {
-      setobjectivescoretext(team, & "OBJECTIVES_KOTH");
+      setobjectivescoretext(team, &"OBJECTIVES_KOTH");
       continue;
     }
 
-    setobjectivescoretext(team, & "OBJECTIVES_KOTH_SCORE");
+    setobjectivescoretext(team, &"OBJECTIVES_KOTH_SCORE");
   }
 
-  level.objectivehintpreparezone = & "MP_CONTROL_KOTH";
-  level.objectivehintcapturezone = & "MP_CAPTURE_KOTH";
-  level.objectivehintdefendhq = & "MP_DEFEND_KOTH";
+  level.objectivehintpreparezone = &"MP_CONTROL_KOTH";
+  level.objectivehintcapturezone = &"MP_CAPTURE_KOTH";
+  level.objectivehintdefendhq = &"MP_DEFEND_KOTH";
   precachestring(level.objectivehintpreparezone);
   precachestring(level.objectivehintcapturezone);
   precachestring(level.objectivehintdefendhq);
@@ -310,14 +310,14 @@ kothcaptureloop() {
 kothmainloop() {
   level endon("game_ended");
   level.zonerevealtime = -100000;
-  zonespawninginstr = & "MP_KOTH_AVAILABLE_IN";
+  zonespawninginstr = &"MP_KOTH_AVAILABLE_IN";
 
   if(level.kothmode) {
-    zonedestroyedinfriendlystr = & "MP_HQ_DESPAWN_IN";
-    zonedestroyedinenemystr = & "MP_KOTH_MOVING_IN";
+    zonedestroyedinfriendlystr = &"MP_HQ_DESPAWN_IN";
+    zonedestroyedinenemystr = &"MP_KOTH_MOVING_IN";
   } else {
-    zonedestroyedinfriendlystr = & "MP_HQ_REINFORCEMENTS_IN";
-    zonedestroyedinenemystr = & "MP_HQ_DESPAWN_IN";
+    zonedestroyedinfriendlystr = &"MP_HQ_REINFORCEMENTS_IN";
+    zonedestroyedinenemystr = &"MP_HQ_DESPAWN_IN";
   }
 
   precachestring(zonespawninginstr);
@@ -465,7 +465,7 @@ onzonecapture(player) {
   capture_team = player.pers["team"];
   capturetime = gettime();
   player logstring("zone captured");
-  string = & "MP_KOTH_CAPTURED_BY";
+  string = &"MP_KOTH_CAPTURED_BY";
   level.zone.gameobject.iscontested = 0;
   level.usestartspawns = 0;
 
@@ -580,12 +580,12 @@ onzonedestroy(player) {
     player.destructions = player.pers["destructions"];
   }
 
-  destroyteammessage = & "MP_HQ_DESTROYED_BY";
-  otherteammessage = & "MP_HQ_DESTROYED_BY_ENEMY";
+  destroyteammessage = &"MP_HQ_DESTROYED_BY";
+  otherteammessage = &"MP_HQ_DESTROYED_BY_ENEMY";
 
   if(level.kothmode) {
-    destroyteammessage = & "MP_KOTH_CAPTURED_BY";
-    otherteammessage = & "MP_KOTH_CAPTURED_BY_ENEMY";
+    destroyteammessage = &"MP_KOTH_CAPTURED_BY";
+    otherteammessage = &"MP_KOTH_CAPTURED_BY_ENEMY";
   }
 
   level thread maps\mp\_popups::displayteammessagetoall(destroyteammessage, player);
@@ -739,7 +739,7 @@ comparezoneindexes(zone_a, zone_b) {
 }
 
 getzonearray() {
-  zones = getentarray("koth_zone_center", "targetname");
+  zones = getEntArray("koth_zone_center", "targetname");
 
   if(!isDefined(zones))
     return undefined;
@@ -765,7 +765,7 @@ getzonearray() {
 setupzones() {
   maperrors = [];
   zones = getzonearray();
-  trigs = getentarray("koth_zone_trigger", "targetname");
+  trigs = getEntArray("koth_zone_trigger", "targetname");
 
   for(i = 0; i < zones.size; i++) {
     errored = 0;
@@ -798,7 +798,7 @@ setupzones() {
     visuals[0] = zone;
 
     if(isDefined(zone.target)) {
-      othervisuals = getentarray(zone.target, "targetname");
+      othervisuals = getEntArray(zone.target, "targetname");
 
       for(j = 0; j < othervisuals.size; j++)
         visuals[visuals.size] = othervisuals[j];
@@ -1011,8 +1011,7 @@ pickzonetospawn() {
   }
 
   if(getcountofteamswithplayers(num) <= 1) {
-    for(zone = level.zones[randomint(level.zones.size)]; isDefined(level.prevzone) && zone == level.prevzone; zone = level.zones[randomint(level.zones.size)]) {
-    }
+    for(zone = level.zones[randomint(level.zones.size)]; isDefined(level.prevzone) && zone == level.prevzone; zone = level.zones[randomint(level.zones.size)]) {}
 
     level.prevzone2 = level.prevzone;
     level.prevzone = zone;

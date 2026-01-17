@@ -5,7 +5,6 @@
 
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\util_shared;
-
 #namespace dev_shared;
 
 autoexec init() {
@@ -51,4 +50,3 @@ function_b49b1b6b(localclientnum) {
     waitframe(1);
   }
 }
-

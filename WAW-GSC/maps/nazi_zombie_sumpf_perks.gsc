@@ -9,7 +9,7 @@
 
 randomize_vending_machines() {
   vending_machines = [];
-  vending_machines = getentarray("zombie_vending", "targetname");
+  vending_machines = getEntArray("zombie_vending", "targetname");
   start_locations = [];
   start_locations[0] = getent("random_vending_start_location_0", "script_noteworthy");
   start_locations[1] = getent("random_vending_start_location_1", "script_noteworthy");
@@ -21,7 +21,7 @@ randomize_vending_machines() {
   level.start_locations[level.start_locations.size] = start_locations[2].origin;
   level.start_locations[level.start_locations.size] = start_locations[3].origin;
   start_locations = array_randomize(start_locations);
-  for (i = 0; i < vending_machines.size; i++) {
+  for(i = 0; i < vending_machines.size; i++) {
     origin = start_locations[i].origin;
     angles = start_locations[i].angles;
     machine = vending_machines[i] get_vending_machine(start_locations[i]);
@@ -70,8 +70,8 @@ play_vending_vo(machine, origin) {
   players = get_players();
   players = get_array_of_closest(origin, players, undefined, undefined, 512);
   player = undefined;
-  for (i = 0; i < players.size; i++) {
-    if(SightTracePassed(players[i] GetEye(), origin, false, undefined)) {
+  for(i = 0; i < players.size; i++) {
+    if(SightTracePassed(players[i] getEye(), origin, false, undefined)) {
       player = players[i];
     }
   }
@@ -100,7 +100,7 @@ play_jugga_shout() {
   if(!isDefined(self.vox_gen_perk_jugga)) {
     num_variants = maps\_zombiemode_spawner::get_number_variants(player_index + "vox_gen_perk_jugga");
     self.vox_gen_perk_jugga = [];
-    for (i = 0; i < num_variants; i++) {
+    for(i = 0; i < num_variants; i++) {
       self.vox_gen_perk_jugga[self.vox_gen_perk_jugga.size] = "vox_gen_perk_jugga_" + i;
     }
     self.vox_gen_perk_jugga_available = self.vox_gen_perk_jugga;
@@ -120,7 +120,7 @@ play_dbltap_shout() {
   if(!isDefined(self.vox_gen_perk_dbltap)) {
     num_variants = maps\_zombiemode_spawner::get_number_variants(player_index + "vox_gen_perk_dbltap");
     self.vox_gen_perk_dbltap = [];
-    for (i = 0; i < num_variants; i++) {
+    for(i = 0; i < num_variants; i++) {
       self.vox_gen_perk_dbltap[self.vox_gen_perk_dbltap.size] = "vox_gen_perk_dbltap_" + i;
     }
     self.vox_gen_perk_dbltap_available = self.vox_gen_perk_dbltap;
@@ -140,7 +140,7 @@ play_revive_shout() {
   if(!isDefined(self.vox_gen_perk_revive)) {
     num_variants = maps\_zombiemode_spawner::get_number_variants(player_index + "vox_gen_perk_revive");
     self.vox_gen_perk_revive = [];
-    for (i = 0; i < num_variants; i++) {
+    for(i = 0; i < num_variants; i++) {
       self.vox_gen_perk_revive[self.vox_gen_perk_revive.size] = "vox_gen_perk_revive_" + i;
     }
     self.vox_gen_perk_revive_available = self.vox_gen_perk_revive;
@@ -160,7 +160,7 @@ play_speed_shout() {
   if(!isDefined(self.vox_gen_perk_speed)) {
     num_variants = maps\_zombiemode_spawner::get_number_variants(player_index + "vox_gen_perk_speed");
     self.vox_gen_perk_speed = [];
-    for (i = 0; i < num_variants; i++) {
+    for(i = 0; i < num_variants; i++) {
       self.vox_gen_perk_speed[self.vox_gen_perk_speed.size] = "vox_gen_perk_speed_" + i;
     }
     self.vox_gen_perk_speed_available = self.vox_gen_perk_speed;
@@ -180,7 +180,7 @@ play_rando_perk_dialog() {
   if(!isDefined(self.vox_perk_lottery)) {
     num_variants = maps\_zombiemode_spawner::get_number_variants(player_index + "vox_perk_lottery");
     self.vox_perk_lottery = [];
-    for (i = 0; i < num_variants; i++) {
+    for(i = 0; i < num_variants; i++) {
       self.vox_perk_lottery[self.vox_perk_lottery.size] = "vox_perk_lottery_" + i;
     }
     self.vox_perk_lottery_available = self.vox_perk_lottery;
@@ -194,12 +194,12 @@ play_rando_perk_dialog() {
 }
 
 vending_randomization_effect(index) {
-  vending_triggers = getentarray("zombie_vending", "targetname");
+  vending_triggers = getEntArray("zombie_vending", "targetname");
   machines = [];
-  for (j = 0; j < vending_triggers.size; j++) {
+  for(j = 0; j < vending_triggers.size; j++) {
     machines[j] = getent(vending_triggers[j].target, "targetname");
   }
-  for (j = 0; j < machines.size; j++) {
+  for(j = 0; j < machines.size; j++) {
     if(machines[j].origin == level.start_locations[index]) {
       break;
     }
@@ -207,7 +207,7 @@ vending_randomization_effect(index) {
   if(isDefined(level.first_time_opening_perk_hut)) {
     if(level.first_time_opening_perk_hut) {
       if(machines[j].model != "zombie_vending_jugg_on_price" || machines[j].model != "zombie_vending_sleight_on_price") {
-        for (i = 0; i < machines.size; i++) {
+        for(i = 0; i < machines.size; i++) {
           if(i != j && (machines[i].model == "zombie_vending_jugg_on_price" || machines[i].model == "zombie_vending_sleight_on_price")) {
             break;
           }
@@ -219,7 +219,7 @@ vending_randomization_effect(index) {
         start_locations[3] = getent("random_vending_start_location_3", "script_noteworthy");
         target_index = undefined;
         switch_index = undefined;
-        for (x = 0; x < start_locations.size; x++) {
+        for(x = 0; x < start_locations.size; x++) {
           if(start_locations[x].origin == level.start_locations[index]) {
             target_index = x;
           }
@@ -245,35 +245,35 @@ vending_randomization_effect(index) {
   playsoundatposition("rando_start", machines[j].origin);
   origin = machines[j].origin;
   if(level.vending_model_info.size > 1) {
-    PlayFxOnTag(level._effect["zombie_perk_start"], machines[j], "tag_origin");
+    playFXOnTag(level._effect["zombie_perk_start"], machines[j], "tag_origin");
     playsoundatposition("rando_perk", machines[j].origin);
   } else {
-    PlayFxOnTag(level._effect["zombie_perk_4th"], machines[j], "tag_origin");
+    playFXOnTag(level._effect["zombie_perk_4th"], machines[j], "tag_origin");
     playsoundatposition("rando_perk", machines[j].origin);
   }
   true_model = machines[j].model;
-  machines[j] setmodel(true_model);
+  machines[j] setModel(true_model);
   machines[j] show();
   floatHeight = 40;
   level thread play_sound_2D("perk_lottery");
   machines[j] moveto(origin + (0, 0, floatHeight), 5, 3, 0.5);
-  tag_fx = Spawn("script_model", machines[j].origin + (0, 0, 40));
-  tag_fx SetModel("tag_origin");
+  tag_fx = spawn("script_model", machines[j].origin + (0, 0, 40));
+  tag_fx setModel("tag_origin");
   tag_fx LinkTo(machines[j]);
   modelindex = 0;
   machines[j] Vibrate(machines[j].angles, 2, 1, 4);
-  for (i = 0; i < 30; i++) {
+  for(i = 0; i < 30; i++) {
     wait(0.15);
     if(level.vending_model_info.size > 1) {
-      while (!isDefined(level.vending_model_info[modelindex])) {
+      while(!isDefined(level.vending_model_info[modelindex])) {
         modelindex++;
         if(modelindex == 4) {
           modelindex = 0;
         }
       }
       modelname = level.vending_model_info[modelindex];
-      machines[j] setmodel(modelname);
-      PlayFxOnTag(level._effect["zombie_perk_flash"], tag_fx, "tag_origin");
+      machines[j] setModel(modelname);
+      playFXOnTag(level._effect["zombie_perk_flash"], tag_fx, "tag_origin");
       modelindex++;
       if(modelindex == 4) {
         modelindex = 0;
@@ -281,12 +281,12 @@ vending_randomization_effect(index) {
     }
   }
   modelname = true_model;
-  machines[j] setmodel(modelname);
+  machines[j] setModel(modelname);
   machines[j] moveto(origin, 0.3, 0.3, 0);
-  PlayFxOnTag(level._effect["zombie_perk_end"], machines[j], "tag_origin");
+  playFXOnTag(level._effect["zombie_perk_end"], machines[j], "tag_origin");
   playsoundatposition("perks_rattle", machines[j].origin);
   maps\nazi_zombie_sumpf_perks::activate_vending_machine(true_model, origin);
-  for (i = 0; i < machines.size; i++) {
+  for(i = 0; i < machines.size; i++) {
     if(isDefined(level.vending_model_info[i])) {
       if(level.vending_model_info[i] == true_model) {
         level.vending_model_info[i] = undefined;
@@ -298,16 +298,16 @@ vending_randomization_effect(index) {
 
 randomize_weapons(list) {
   vending_machines_with_weights = strTok(list, ";");
-  vending_machine_list = getentarray("zombie_vending", "targetname");
+  vending_machine_list = getEntArray("zombie_vending", "targetname");
   start_locations = [];
   start_locations[0] = getent("random_vending_start_location_0", "script_noteworthy");
   start_locations[1] = getent("random_vending_start_location_1", "script_noteworthy");
   start_locations[2] = getent("random_vending_start_location_2", "script_noteworthy");
   start_locations[3] = getent("random_vending_start_location_3", "script_noteworthy");
-  for (i = 0; i < vending_machines_with_weights.size; i++) {
+  for(i = 0; i < vending_machines_with_weights.size; i++) {
     vending_machine = strTok(vending_machines_with_weights[i], ":");
     index = 0;
-    for (; index < vending_machine_list.size; index++) {
+    for(; index < vending_machine_list.size; index++) {
       if(vending_machine_list[index].target == vending_machine[0]) {
         break;
       }
@@ -315,7 +315,7 @@ randomize_weapons(list) {
     weaponList = strTok(vending_machine[1], ",");
     vending_location = getent(vending_machine_list[index].target, "targetname");
     location = 0;
-    for (; location < start_locations.size; location++) {
+    for(; location < start_locations.size; location++) {
       if(start_locations[location].origin == vending_location.origin) {
         break;
       }
@@ -341,7 +341,7 @@ randomize_weapons_for_building(spawnpoint_name, weaponList) {
   start_locations = [];
   start_locations = getEntArray(spawnpoint_name, "script_noteworthy");
   weaponList = array_randomize(weaponList);
-  for (j = 0; j < start_locations.size; j++) {
+  for(j = 0; j < start_locations.size; j++) {
     origin = start_locations[j].origin;
     angles = start_locations[j].angles;
     trigger = start_locations[j];
@@ -351,7 +351,7 @@ randomize_weapons_for_building(spawnpoint_name, weaponList) {
     trigger.target = weaponList[j] + rand;
     model_name = GetWeaponModel(weaponList[j]);
     weapon = spawn("script_model", origin);
-    weapon setmodel(model_name);
+    weapon setModel(model_name);
     weapon.targetname = trigger.target;
     weapon.angles = angles;
     trigger trigger_on();

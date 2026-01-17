@@ -15,16 +15,16 @@
 #namespace zm_grappler;
 
 function autoexec __init__sytem__() {
-  system::register("zm_grappler", & __init__, undefined, undefined);
+  system::register("zm_grappler", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("scriptmover", "grappler_beam_source", 15000, 1, "int", & function_79d05fa8, 0, 0);
-  clientfield::register("scriptmover", "grappler_beam_target", 15000, 1, "int", & function_7bbbd82e, 0, 0);
+  clientfield::register("scriptmover", "grappler_beam_source", 15000, 1, "int", &function_79d05fa8, 0, 0);
+  clientfield::register("scriptmover", "grappler_beam_target", 15000, 1, "int", &function_7bbbd82e, 0, 0);
 }
 
 function function_79d05fa8(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(!isdefined(level.var_3d35ab43)) {
+  if(!isDefined(level.var_3d35ab43)) {
     level.var_3d35ab43 = [];
   }
   if(newval) {
@@ -33,10 +33,10 @@ function function_79d05fa8(localclientnum, oldval, newval, bnewent, binitialsnap
 }
 
 function function_7bbbd82e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(!isdefined(level.var_3d35ab43)) {
+  if(!isDefined(level.var_3d35ab43)) {
     level.var_3d35ab43 = [];
   }
-  assert(isdefined(level.var_3d35ab43[localclientnum]));
+  assert(isDefined(level.var_3d35ab43[localclientnum]));
   pivot = level.var_3d35ab43[localclientnum];
   if(newval) {
     thread function_55af4b5b(self, "tag_origin", pivot, 0.05);

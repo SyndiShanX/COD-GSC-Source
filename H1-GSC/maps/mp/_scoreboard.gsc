@@ -41,7 +41,7 @@ processlobbyscoreboards() {
       foreach(var_1 in level.players) {
         var_9 = var_1.pers["team"];
 
-        if(!isdefined(var_9)) {
+        if(!isDefined(var_9)) {
           continue;
         }
         if(var_9 == "spectator") {
@@ -92,10 +92,10 @@ processlobbyscoreboards() {
       var_20 = var_1.pers["nemesis_guid"];
       var_17 = getplayerxuidfromguid(var_20);
 
-      if(isdefined(var_1.pers["killed_players"][var_20]))
+      if(isDefined(var_1.pers["killed_players"][var_20]))
         var_18 = maps\mp\_utility::clamptoshort(var_1.pers["killed_players"][var_20]);
 
-      if(isdefined(var_1.pers["killed_by"][var_20]))
+      if(isDefined(var_1.pers["killed_by"][var_20]))
         var_19 = maps\mp\_utility::clamptoshort(var_1.pers["killed_by"][var_20]);
     }
 
@@ -109,7 +109,7 @@ processlobbyscoreboards() {
       var_23 = var_1.pers["prey_guid"];
       var_21 = getplayerxuidfromguid(var_23);
 
-      if(isdefined(var_1.pers["killed_players"][var_23]))
+      if(isDefined(var_1.pers["killed_players"][var_23]))
         var_22 = maps\mp\_utility::clamptoshort(var_1.pers["killed_players"][var_23]);
     }
 
@@ -155,7 +155,7 @@ setplayerscoreboardinfo() {
     setclientmatchdata("players", self.clientmatchdataid, "extrascore1", var_8);
     var_9 = 0;
 
-    if(isdefined(self.pers["division"]) && isdefined(self.pers["division"]["index"]))
+    if(isDefined(self.pers["division"]) && isDefined(self.pers["division"]["index"]))
       var_9 = self.pers["division"]["index"];
 
     setclientmatchdata("players", self.clientmatchdataid, "division", var_9);

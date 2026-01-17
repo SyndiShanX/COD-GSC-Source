@@ -21,9 +21,7 @@ main() {
 
   if(isUsingMatchRulesData()) {
     level.initializeMatchRules = ::initializeMatchRules;
-    [
-      [level.initializeMatchRules]
-    ]();
+    [[level.initializeMatchRules]]();
     level thread reInitializeMatchRulesOnMigration();
   } else {
     registerRoundSwitchDvar(level.gameType, 0, 0, 9);
@@ -91,18 +89,18 @@ onStartGameType() {
     game["defenders"] = oldAttackers;
   }
 
-  setObjectiveText("allies", & "OBJECTIVES_CONF");
-  setObjectiveText("axis", & "OBJECTIVES_CONF");
+  setObjectiveText("allies", &"OBJECTIVES_CONF");
+  setObjectiveText("axis", &"OBJECTIVES_CONF");
 
   if(level.splitscreen) {
-    setObjectiveScoreText("allies", & "OBJECTIVES_CONF");
-    setObjectiveScoreText("axis", & "OBJECTIVES_CONF");
+    setObjectiveScoreText("allies", &"OBJECTIVES_CONF");
+    setObjectiveScoreText("axis", &"OBJECTIVES_CONF");
   } else {
-    setObjectiveScoreText("allies", & "OBJECTIVES_CONF_SCORE");
-    setObjectiveScoreText("axis", & "OBJECTIVES_CONF_SCORE");
+    setObjectiveScoreText("allies", &"OBJECTIVES_CONF_SCORE");
+    setObjectiveScoreText("axis", &"OBJECTIVES_CONF_SCORE");
   }
-  setObjectiveHintText("allies", & "OBJECTIVES_CONF_HINT");
-  setObjectiveHintText("axis", & "OBJECTIVES_CONF_HINT");
+  setObjectiveHintText("allies", &"OBJECTIVES_CONF_HINT");
+  setObjectiveHintText("axis", &"OBJECTIVES_CONF_HINT");
 
   initSpawns();
 

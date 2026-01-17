@@ -54,7 +54,7 @@ riverbed_intro() {
 
   level thread animate_grass(1);
   level thread hide_victory_grass();
-  a_veh_buffels = getentarray("convoy", "script_noteworthy");
+  a_veh_buffels = getEntArray("convoy", "script_noteworthy");
   array_thread(a_veh_buffels, ::init_convoy_vehicle);
 
   if(!is_mature()) {
@@ -96,31 +96,31 @@ scripted_intro_fx() {
   else
     player_body = get_model_or_models_from_scene("level_intro_player", "player_body");
 
-  playfxontag(level._effect["fx_ango_intro_truck_fade_fire"], player_body, "tag_camera");
-  playfxontag(level._effect["fx_ango_intro_truck_fade"], level.fire_fx_ent, "origin_animate_jnt");
+  playFXOnTag(level._effect["fx_ango_intro_truck_fade_fire"], player_body, "tag_camera");
+  playFXOnTag(level._effect["fx_ango_intro_truck_fade"], level.fire_fx_ent, "origin_animate_jnt");
 
   if(is_mature()) {
     wait 6.0;
     burned_body = get_model_or_models_from_scene("level_intro_player", "burning_man");
-    playfxontag(level._effect["fx_ango_intro_arm_fire"], burned_body, "J_Wrist_LE");
-    playfxontag(level._effect["fx_ango_intro_arm_fire"], burned_body, "J_Elbow_LE");
-    playfxontag(level._effect["fx_ango_intro_shoulder_fire"], burned_body, "J_SpineLower");
+    playFXOnTag(level._effect["fx_ango_intro_arm_fire"], burned_body, "J_Wrist_LE");
+    playFXOnTag(level._effect["fx_ango_intro_arm_fire"], burned_body, "J_Elbow_LE");
+    playFXOnTag(level._effect["fx_ango_intro_shoulder_fire"], burned_body, "J_SpineLower");
     wait 0.1;
-    playfxontag(level._effect["fx_ango_intro_arm_fire"], burned_body, "J_Wrist_RI");
-    playfxontag(level._effect["fx_ango_intro_arm_fire"], burned_body, "J_Elbow_RI");
-    playfxontag(level._effect["fx_ango_intro_shoulder_fire"], burned_body, "J_Clavicle_LE");
+    playFXOnTag(level._effect["fx_ango_intro_arm_fire"], burned_body, "J_Wrist_RI");
+    playFXOnTag(level._effect["fx_ango_intro_arm_fire"], burned_body, "J_Elbow_RI");
+    playFXOnTag(level._effect["fx_ango_intro_shoulder_fire"], burned_body, "J_Clavicle_LE");
     wait 0.1;
-    playfxontag(level._effect["fx_ango_intro_head_fire"], burned_body, "J_head");
-    playfxontag(level._effect["fx_ango_intro_shoulder_fire"], burned_body, "J_Shoulder_RI");
-    playfxontag(level._effect["fx_ango_intro_shoulder_fire"], burned_body, "J_Shoulder_LE");
+    playFXOnTag(level._effect["fx_ango_intro_head_fire"], burned_body, "J_head");
+    playFXOnTag(level._effect["fx_ango_intro_shoulder_fire"], burned_body, "J_Shoulder_RI");
+    playFXOnTag(level._effect["fx_ango_intro_shoulder_fire"], burned_body, "J_Shoulder_LE");
     wait 0.1;
-    playfxontag(level._effect["fx_ango_intro_arm_fire"], burned_body, "J_Spine4");
-    playfxontag(level._effect["fx_ango_intro_arm_fire"], burned_body, "J_Clavicle_RI");
-    playfxontag(level._effect["fx_ango_intro_arm_fire"], burned_body, "J_Hip_RI");
+    playFXOnTag(level._effect["fx_ango_intro_arm_fire"], burned_body, "J_Spine4");
+    playFXOnTag(level._effect["fx_ango_intro_arm_fire"], burned_body, "J_Clavicle_RI");
+    playFXOnTag(level._effect["fx_ango_intro_arm_fire"], burned_body, "J_Hip_RI");
     wait 0.1;
-    playfxontag(level._effect["fx_ango_intro_arm_fire"], burned_body, "J_Hip_LE");
-    playfxontag(level._effect["fx_ango_intro_head_fire"], burned_body, "J_neck");
-    playfxontag(level._effect["fx_ango_intro_shoulder_fire"], burned_body, "J_SpineUpper");
+    playFXOnTag(level._effect["fx_ango_intro_arm_fire"], burned_body, "J_Hip_LE");
+    playFXOnTag(level._effect["fx_ango_intro_head_fire"], burned_body, "J_neck");
+    playFXOnTag(level._effect["fx_ango_intro_shoulder_fire"], burned_body, "J_SpineUpper");
   }
 }
 
@@ -233,7 +233,7 @@ riverbed_intro_buffel(m_pristine_window, a_buffel_cracked_windshields) {
   wait 16;
   stop_exploder(1002);
   a_buffel_cracked_windshields[4] delete();
-  hack_windows = getentarray("buffel_windshields", "targetname");
+  hack_windows = getEntArray("buffel_windshields", "targetname");
 
   foreach(window in hack_windows)
   window delete();
@@ -401,8 +401,7 @@ riverbed_ambient_scenes() {
 
     if(i == 3 || i == 8)
       m_actor attach("t6_wpn_machete_prop", "tag_weapon_left");
-    else if(i == 4) {
-    } else if(i == 1 || i == 2)
+    else if(i == 4) {} else if(i == 1 || i == 2)
       level thread fake_weapon(m_actor);
 
     level thread run_scene("riverbed_ambience_" + i);
@@ -453,15 +452,14 @@ riverbed_ambient_scenes() {
   flag_wait_all("clash_runners_ready", "savimbi_reached_savannah");
 
   for(i = 1; i < 8; i++) {
-    a_soldiers = getentarray("intro_soldier_" + i + "_ai", "targetname");
+    a_soldiers = getEntArray("intro_soldier_" + i + "_ai", "targetname");
 
     foreach(soldier in a_soldiers)
     soldier delete();
   }
 }
 
-riverbed_soldiers_move_up() {
-}
+riverbed_soldiers_move_up() {}
 
 riverbed_convoy() {
   a_nd_starts_intro = getvehiclenodearray("start_convoy_intro_path", "script_noteworthy");
@@ -573,7 +571,7 @@ vo_riverbed_savimbi_nag() {
 
 mortar_react() {
   mortar_struct = getstruct("mortar_react", "targetname");
-  playfx(getfx("mortar_savannah"), mortar_struct.origin);
+  playFX(getfx("mortar_savannah"), mortar_struct.origin);
   playsoundatposition("exp_mortar", mortar_struct.origin);
   run_scene("riverbed_mortar_react");
   run_scene("riverbed_mortar_react_end");
@@ -586,7 +584,7 @@ mortar_helper_message(delay) {
     wait(delay);
 
   if(flag("strafe_hint_active")) {
-    screen_message_create(&"ANGOLA_STRAFE_HINT", & "ANGOLA_MORTAR_TUTORIAL");
+    screen_message_create(&"ANGOLA_STRAFE_HINT", &"ANGOLA_MORTAR_TUTORIAL");
     wait 5;
     screen_message_create(&"ANGOLA_STRAFE_HINT");
   } else {

@@ -132,7 +132,7 @@ impactCustomCrateFunc() {
   if(!allowLevelKillstreaks() || game["player_holding_level_killstrek"]) {
     return;
   }
-  maps\mp\killstreaks\_airdrop::addCrateType("airdrop_assault", "ca_a10_strafe", IMPACT_KILLSTREAK_WEIGHT, maps\mp\killstreaks\_airdrop::killstreakCrateThink, maps\mp\killstreaks\_airdrop::get_friendly_crate_model(), maps\mp\killstreaks\_airdrop::get_enemy_crate_model(), & "MP_CA_KILLSTREAKS_A10_STRAFE_PICKUP");
+  maps\mp\killstreaks\_airdrop::addCrateType("airdrop_assault", "ca_a10_strafe", IMPACT_KILLSTREAK_WEIGHT, maps\mp\killstreaks\_airdrop::killstreakCrateThink, maps\mp\killstreaks\_airdrop::get_friendly_crate_model(), maps\mp\killstreaks\_airdrop::get_enemy_crate_model(), &"MP_CA_KILLSTREAKS_A10_STRAFE_PICKUP");
   maps\mp\killstreaks\_airdrop::generateMaxWeightedCrateValue();
   level thread watch_for_impact_crate();
 }

@@ -423,9 +423,7 @@ drone_move() {
   var_4 = var_2.anim_relative;
 
   if(isDefined(self.drone_move_callback)) {
-    var_2 = [
-      [self.drone_move_callback]
-    ]();
+    var_2 = [[self.drone_move_callback]]();
 
     if(isDefined(var_2)) {
       var_1 = var_2.runanim;
@@ -627,9 +625,7 @@ getpatharray(var_0, var_1) {
 
   for(;;) {
     var_10 = var_3.size;
-    var_11 = [
-      [var_5[var_6]]
-    ](var_4);
+    var_11 = [[var_5[var_6]]](var_4);
     var_12 = common_scripts\utility::random(var_11);
     var_13 = var_12.origin;
 

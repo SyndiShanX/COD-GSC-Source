@@ -37,7 +37,7 @@ keep_track_of_guys_hitting_me() {
   self.hit_by_player_array[2] = false;
   self.hit_by_player_array[3] = false;
   player_hit_me = undefined;
-  while (1) {
+  while(1) {
     self waittill("damage", amount, attacker);
     self.last_thing_to_hit_me = attacker;
     if(IsPlayer(attacker)) {
@@ -50,7 +50,7 @@ keep_track_of_guys_hitting_me() {
     }
     if(isDefined(player_hit_me)) {
       players = maps\_utility::get_players();
-      for (i = 0; i < players.size; i++) {
+      for(i = 0; i < players.size; i++) {
         if(players[i] == player_hit_me) {
           self.hit_by_player_array[i] = true;
         }
@@ -63,7 +63,7 @@ keep_track_of_guys_hitting_me() {
 reward_assist_points() {
   self waittill("death");
   players = maps\_utility::get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(self.hit_by_player_array[i] && self.last_thing_to_hit_me != players[i]) {
       maps\_utility::arcademode_assignpoints("arcademode_score_bombplant", players[i]);
     }
@@ -80,8 +80,8 @@ set_vehicle_anims(positions) {
 
 setanims() {
   positions = [];
-  for (i = 0; i < 10; i++)
-    positions[i] = spawnstruct();
+  for(i = 0; i < 10; i++)
+    positions[i] = spawnStruct();
   positions[0].sittag = "tag_guy1";
   positions[1].sittag = "tag_guy2";
   positions[2].sittag = "tag_guy3";

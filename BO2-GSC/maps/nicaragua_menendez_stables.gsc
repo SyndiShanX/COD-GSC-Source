@@ -153,7 +153,7 @@ stables_brutality_front_vo() {
 
 shoot_lock_trigger() {
   trigger_wait("trig_barn_door");
-  level.player playsound("evt_stable_doors");
+  level.player playSound("evt_stable_doors");
   level notify("hrsx");
   m_barn_door_clip = getent("clip_barn_door", "targetname");
   m_barn_door_clip connectpaths();
@@ -250,9 +250,9 @@ player_grab_pitchfork() {
 
 stables_attacker_stabbed_with_pitchfork(ai_attacker) {
   wait 1.6;
-  playfxontag(level._effect["pitchfork_blood"], ai_attacker, "j_spinelower");
+  playFXOnTag(level._effect["pitchfork_blood"], ai_attacker, "j_spinelower");
   wait 1.0;
-  playfxontag(level._effect["pitchfork_blood"], ai_attacker, "j_spinelower");
+  playFXOnTag(level._effect["pitchfork_blood"], ai_attacker, "j_spinelower");
 }
 
 _stables_attack_woman_idle() {
@@ -364,7 +364,7 @@ trapped_horse_update() {
   while(!flag("nicaragua_stables_complete")) {
     wait(randomfloat(1.1));
     self horse_rearback();
-    self playsound("chr_horse_whinny_loud_npc");
+    self playSound("chr_horse_whinny_loud_npc");
   }
 
   self.delete_on_death = 1;

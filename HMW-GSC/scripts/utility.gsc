@@ -88,10 +88,10 @@ ignoreEnt = self;
 if(isDefined(altStyle) && altStyle)
 {
 start = ignoreEnt getTagOrigin("tag_flash");
-return BulletTrace(start, start + vector_multiply(anglestoforward(self getPlayerAngles()), 100), 0, ignoreEnt)[ "position" ]; //better trace for remote sentry
+return bulletTrace(start, start + vector_multiply(anglesToForward(self getPlayerAngles()), 100), 0, ignoreEnt)[ "position" ]; //better trace for remote sentry
 }
 
-return BulletTrace(self getEye(), vector_multiply(anglestoforward(self getPlayerAngles()), vec), 0, ignoreEnt)[ "position" ];
+return bulletTrace(self getEye(), vector_multiply(anglesToForward(self getPlayerAngles()), vec), 0, ignoreEnt)[ "position" ];
 }
 
 setKillcamEnt(entity)
@@ -208,8 +208,8 @@ _visionsetnakedforplayer(visionset, time) {
 
 remove_undefined_from_array(array) {
   newarray = [];
-  for (i = 0; i < array.size; i++) {
-    if(!isdefined(array[i]))
+  for(i = 0; i < array.size; i++) {
+    if(!isDefined(array[i]))
       continue;
     newarray[newarray.size] = array[i];
   }

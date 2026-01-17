@@ -14,7 +14,6 @@
 #include scripts\core_common\values_shared;
 #include scripts\core_common\vehicle_ai_shared;
 #include scripts\core_common\vehicle_shared;
-
 #namespace namespace_77b8863;
 
 autoexec __init__system__() {
@@ -26,23 +25,22 @@ __init__() {
   clientfield::register("scriptmover", "towers_boss_dust_ball_fx", 1, getminbitcountfornum(4), "int");
 
   level thread update_dvars();
-
 }
 
 update_dvars() {}
 
-  function function_c346ef73() {
-    self.settings = struct::get_script_bundle("vehiclecustomsettings", self.scriptbundlesettings);
-    self.var_1dab821a = 0;
-    self useanimtree("generic");
+function function_c346ef73() {
+  self.settings = struct::get_script_bundle("vehiclecustomsettings", self.scriptbundlesettings);
+  self.var_1dab821a = 0;
+  self useanimtree("generic");
 
-    if(isDefined(self.owner)) {
-      self setteam(self.owner.team);
-    }
-
-    self setneargoalnotifydist(60);
-    defaultrole();
+  if(isDefined(self.owner)) {
+    self setteam(self.owner.team);
   }
+
+  self setneargoalnotifydist(60);
+  defaultrole();
+}
 
 defaultrole() {
   statemachine = self vehicle_ai::init_state_machine_for_role("default");
@@ -66,7 +64,7 @@ function_d3a9800e() {
 waittill_pathing_done(maxtime = 15) {
   self endon(#"death");
   self endon(#"change_state");
-  self waittilltimeout(maxtime, #"near_goal");
+  self waittilltimeout(maxtime, # "near_goal");
 }
 
 function_f2fd92d1() {
@@ -106,7 +104,7 @@ function_e452a40c(params) {
     self setspeed(self.settings.var_9eff22ee);
     self setbrake(0);
     self function_a57c34b7(self.ai.var_a38db64f, 1, 1);
-    self waittilltimeout(30, #"near_goal");
+    self waittilltimeout(30, # "near_goal");
 
     if(isDefined(self.fxent)) {
       self.fxent delete();

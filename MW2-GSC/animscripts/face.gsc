@@ -7,11 +7,10 @@
 // Supposed to handle all facial and dialogue animations from regular scripts.
 //#using_animtree ("generic_human"); - This file doesn't call animations directly.
 
-
 InitCharacterFace() {
-  if(!anim.useFacialAnims)
+  if(!anim.useFacialAnims) {
     return;
-
+  }
   // Does any per-character initialization which is required by this facial animation script.
   // InitLevelFace must be called before this function.
   if(!isDefined(self.a.currentDialogImportance)) {
@@ -22,10 +21,10 @@ InitCharacterFace() {
   }
 }
 
-// Makes a character say the specified line in his voice, if he's not already saying something more 
+// Makes a character say the specified line in his voice, if he's not already saying something more
 // important.
 SayGenericDialogue(typeString) {
-  // First pick a random voice number for our character.We have to do this every time because it's 
+  // First pick a random voice number for our character.We have to do this every time because it's
   // possible for the character to be changed after the level loads (generally right before it starts).
   // Use (entity number) modulus (number of voices) to get a consistent result.
 
@@ -78,18 +77,17 @@ SayGenericDialogue(typeString) {
       break;
   }
 
-  ASSERT(IsDefined(numVoices));
+  ASSERT(isDefined(numVoices));
 
   voicenum = 1 + (self GetEntityNumber() % numVoices);
 
-  ASSERT(IsDefined(voicenum));
+  ASSERT(isDefined(voicenum));
 
   voiceString = voiceString + "_" + voicenum;
 
   faceAnim = undefined;
 
   switch (typeString) {
-
     case "meleecharge":
     case "meleeattack":
       //		faceAnim = animscripts\face::ChooseAnimFromSet(anim.meleeFace);
@@ -125,31 +123,31 @@ SetIdleFaceDelayed(facialAnimationArray) {
 }
 
 // Sets the facial expression to return to when not saying dialogue.
-// The array is animation1, weight1, animation2, weight2, etc.The animations will play in turn - each time 
+// The array is animation1, weight1, animation2, weight2, etc.The animations will play in turn - each time
 // one finishes a new one will be chosen randomly based on weight.
 SetIdleFace(facialAnimationArray) {
-  if(!anim.useFacialAnims)
+  if(!anim.useFacialAnims) {
     return;
-
+  }
   self animscripts\battleChatter::playBattleChatter();
 
   self.a.idleFace = facialAnimationArray;
   self PlayIdleFace();
 }
 
-// Makes the character play the specified sound and animation.The anim and the sound are optional - you 
+// Makes the character play the specified sound and animation.The anim and the sound are optional - you
 // can just defined one if you don't have both.
 // Generally, importance should be in the range of 0.6-0.8 for scripted dialogue.
 // Importance is a float, from 0 to 1.
 // 0.0 - Idle expressions
 // 0.1-0.5 - most generic dialogue
-// 0.6-0.8 - most scripted dialogue 
+// 0.6-0.8 - most scripted dialogue
 // 0.9 - pain
 // 1.0 - death
-// Importance can also be one of these strings: "any", "pain" or "death", which specfies what sounds can 
+// Importance can also be one of these strings: "any", "pain" or "death", which specfies what sounds can
 // interrupt this one.
 SaySpecificDialogue(facialanim, soundAlias, importance, notifyString, waitOrNot, timeToWait) {
-  ///("SaySpecificDialog, facial: ",facialanim,", sound: ",soundAlias,", importance: "+importance+", notify: ",notifyString, ", WaitOrNot: ", waitOrNot, ", timeToWait: ", timeToWait);#/
+  ///("SaySpecificDialog, facial: ",facialanim,", sound: ",soundAlias,", importance: "+importance+", notify: ",notifyString, ", WaitOrNot: ", waitOrNot, ", timeToWait: ", timeToWait);
   self thread PlayFaceThread(facialanim, soundAlias, importance, notifyString, waitOrNot, timeToWait);
 }
 
@@ -162,11 +160,11 @@ ChooseAnimFromSet(animSet) {
   	// First, normalize the weights.
   	totalWeight = 0;
   	numAnims = animSet["anim"].size;
-  	for ( i=0 ; i<numAnims ; i++ )
+  	for( i=0 ; i<numAnims ; i++ )
   	{
   		totalWeight += animSet["weight"][i];
   	}
-  	for ( i=0 ; i<numAnims ; i++ )
+  	for( i=0 ; i<numAnims ; i++ )
   	{
   		animSet["weight"][i] = animSet["weight"][i] / totalWeight;
   	}
@@ -175,7 +173,7 @@ ChooseAnimFromSet(animSet) {
   	rand = randomfloat(1);
   	runningTotal = 0;
   	chosenAnim = undefined;
-  	for ( i=0 ; i<numAnims ; i++ )
+  	for( i=0 ; i<numAnims ; i++ )
   	{
   		runningTotal += animSet["weight"][i];
   		if(runningTotal >= rand)
@@ -189,18 +187,17 @@ ChooseAnimFromSet(animSet) {
   */
 }
 
-
 //-----------------------------------------------------
 // Housekeeping functions - these are for internal use
 //-----------------------------------------------------
 
-// PlayIdleFace doesn't force an idle animation to play - it will interrupt a current idle animation, but it 
+// PlayIdleFace doesn't force an idle animation to play - it will interrupt a current idle animation, but it
 // won't play over a more important animation, like dialogue.
 PlayIdleFace() {
   return; // Idle facial animations are now in the full - body animations.
 }
 
-// PlayFaceThread is the workhorse of the system - it checks the importance, and if it's high enough, it 
+// PlayFaceThread is the workhorse of the system - it checks the importance, and if it's high enough, it
 // plays the animation and/or sound specified.
 // The waitOrNot parameter specifies what to do if another animation/sound is already playing.
 // Options: "wait" or undefined.TimeToWait is an optional timeout time for waiting.
@@ -209,18 +206,18 @@ PlayFaceThread(facialanim, soundAlias, importance, notifyString, waitOrNot, time
   self.a.facialAnimDone = true;
   self.a.facialSoundDone = true;
 
-  if(isdefined(notifyString)) {
+  if(isDefined(notifyString)) {
     if(isDefined(soundAlias)) {
-      self playsound(soundAlias, "animscript facesound" + notifyString, true);
+      self playSound(soundAlias, "animscript facesound" + notifyString, true);
       // so placefacethread doesnt block
       self thread WaitForFaceSound(notifyString);
     }
   } else
-    self playsound(soundAlias);
+    self playSound(soundAlias);
 
-  if(!anim.useFacialAnims)
+  if(!anim.useFacialAnims) {
     return;
-
+  }
   InitCharacterFace();
 
   if(!isDefined(facialanim) && !isDefined(soundAlias)) {
@@ -253,7 +250,7 @@ PlayFaceThread(facialanim, soundAlias, importance, notifyString, waitOrNot, time
   }
 
   if((importance <= self.a.currentDialogImportance) && (isDefined(waitOrNot) && (waitOrNot == "wait"))) {
-    //("Face: Waiting to play sound: ",soundAlias,", anim: ",facialanim,", ", notifyString,(", importance "+importance+", old one "+self.a.currentDialogImportance));#/
+    //("Face: Waiting to play sound: ",soundAlias,", anim: ",facialanim,", ", notifyString,(", importance "+importance+", old one "+self.a.currentDialogImportance));
     // Put this face at the end of the queue
     thisEntryNum = self.faceWaiting.size;
     thisNotifyNum = self.faceLastNotifyNum + 1;
@@ -265,8 +262,8 @@ PlayFaceThread(facialanim, soundAlias, importance, notifyString, waitOrNot, time
     self.faceWaiting[thisEntryNum]["timeToWait"] = timeToWait;
     self.faceWaiting[thisEntryNum]["notifyNum"] = thisNotifyNum; // Unique identifier.
 
-    // What we do now is, wait for both the notify and the time.If the time expires first, we give 
-    // up and remove this entry from the queue.If the notify happens first, we stop waiting for the 
+    // What we do now is, wait for both the notify and the time.If the time expires first, we give
+    // up and remove this entry from the queue.If the notify happens first, we stop waiting for the
     // time and we play the face.
     self thread PlayFace_WaitForNotify(("animscript face stop waiting " + self.faceWaiting[thisEntryNum]["notifyNum"]), "Face done waiting", "Face done waiting");
     if(isDefined(timeToWait))
@@ -275,7 +272,7 @@ PlayFaceThread(facialanim, soundAlias, importance, notifyString, waitOrNot, time
 
     // First, find the entry, since it may have been moved.
     thisEntryNum = undefined;
-    for (i = 0; i < self.faceWaiting.size; i++) {
+    for(i = 0; i < self.faceWaiting.size; i++) {
       if(self.faceWaiting[i]["notifyNum"] == thisNotifyNum) {
         thisEntryNum = i;
         break;
@@ -298,9 +295,9 @@ PlayFaceThread(facialanim, soundAlias, importance, notifyString, waitOrNot, time
       }
     }
 
-    // Remove this entry from the queue.If any entries have been added after this one, move them 
+    // Remove this entry from the queue.If any entries have been added after this one, move them
     // forward.
-    for (i = thisEntryNum + 1; i < self.faceWaiting.size; i++) {
+    for(i = thisEntryNum + 1; i < self.faceWaiting.size; i++) {
       self.faceWaiting[i - 1]["facialanim"] = self.faceWaiting[i]["facialanim"];
       self.faceWaiting[i - 1]["soundAlias"] = self.faceWaiting[i]["soundAlias"];
       self.faceWaiting[i - 1]["importance"] = self.faceWaiting[i]["importance"];
@@ -315,10 +312,10 @@ PlayFaceThread(facialanim, soundAlias, importance, notifyString, waitOrNot, time
     // End any threads that are waiting on current facial animations or sounds.
     self notify("end current face");
     self endon("end current face");
-    //("Face: Playing facial sound/animation: ", facialanim, ", ",soundAlias,", ",notifyString, ", ",importance);#/
+    //("Face: Playing facial sound/animation: ", facialanim, ", ",soundAlias,", ",notifyString, ", ",importance);
     //if(self.a.currentDialogImportance > 0)
     //{	
-    //("Face: Interrupted facial sound/animation: ",self.a.currentDialogSound,", ",self.a.currentDialogNotifyString, ", ",self.a.currentDialogImportance);#/
+    //("Face: Interrupted facial sound/animation: ",self.a.currentDialogSound,", ",self.a.currentDialogNotifyString, ", ",self.a.currentDialogImportance);
     //}
     if(isDefined(notifyString)) {
       if(isDefined(self.a.currentDialogNotifyString)) {
@@ -340,27 +337,27 @@ PlayFaceThread(facialanim, soundAlias, importance, notifyString, waitOrNot, time
       self setflaggedanimknobrestart("animscript faceanim", facialanim, 1, .1, 1);
       self.a.facialAnimDone = false;
       self thread WaitForFacialAnim();
-      //("Face: Waiting for facial animation ", facialanim);#/
+      //("Face: Waiting for facial animation ", facialanim);
     }
     //else TODO play a generic, looping facial animation.
     if(isDefined(soundAlias)) {
-      // TEMP These lines break sound for most lines because of a bug in facial animation (code bug?).When that 
+      // TEMP These lines break sound for most lines because of a bug in facial animation (code bug?).When that
       // bug is fixed, put these lines back in.
       //			if( isDefined(facialanim) && animhasnotetrack(facialanim, "dialogue"))
       //			{
       //				self waittillmatch ("animscript faceanim", "dialogue");
       //			}
-      self playsound(soundAlias, "animscript facesound", true);
+      self playSound(soundAlias, "animscript facesound", true);
       self.a.facialSoundDone = false;
       self thread WaitForFaceSound();
-      //("Face: Waiting for sound ",soundAlias);#/
+      //("Face: Waiting for sound ",soundAlias);
     }
     // Now wait until both animation and sound are finished
-    while ((!self.a.facialAnimDone) || (!self.a.facialSoundDone)) {
+    while((!self.a.facialAnimDone) || (!self.a.facialSoundDone)) {
       self waittill("animscript facedone");
     }
     // Set importance to 0 so that other facial anims (like the idle) can play.
-    //("Face: Finished facial sound: ",soundAlias,", animation: ",facialanim," notify: ",notifyString,", importance ",importance);#/
+    //("Face: Finished facial sound: ",soundAlias,", animation: ",facialanim," notify: ",notifyString,", importance ",importance);
     self.a.currentDialogImportance = 0;
     self.a.currentDialogSound = undefined;
     self.a.currentDialogNotifyString = undefined;
@@ -369,25 +366,25 @@ PlayFaceThread(facialanim, soundAlias, importance, notifyString, waitOrNot, time
       self notify(notifyString);
     }
     if(isDefined(self.faceWaiting) && (self.faceWaiting.size > 0)) {
-      // Find out which face we want to play next.Look through the queue for the highest priority 
+      // Find out which face we want to play next.Look through the queue for the highest priority
       // face.If we find more than one with the same importance, choose the one that was added first.
       maxImportance = 0;
       nextFaceNum = 1;
-      //("Choosing next face.List is:");#/
-      for (i = 0; i < self.faceWaiting.size; i++) {
+      //("Choosing next face.List is:");
+      for(i = 0; i < self.faceWaiting.size; i++) {
         /*
         println]](" ",i," ",	(self.faceWaiting[i]["facialanim"]),", ",
         							(self.faceWaiting[i]["soundAlias"]),", ",
         							(self.faceWaiting[i]["importance"]),", ",
         							(self.faceWaiting[i]["notifyString"])
-        							);#/
+        							);
         */
         if(self.faceWaiting[i]["importance"] > maxImportance) {
           maxImportance = self.faceWaiting[i]["importance"];
           nextFaceNum = i;
         }
       }
-      //("Chose ", nextFaceNum);#/
+      //("Chose ", nextFaceNum);
       // Notify the entry in the queue, to play.
       self notify("animscript face stop waiting " + self.faceWaiting[nextFaceNum]["notifyNum"]);
     } else {
@@ -402,7 +399,7 @@ PlayFaceThread(facialanim, soundAlias, importance, notifyString, waitOrNot, time
       self.faceResult = "failed";
       self notify(notifyString);
     }
-    //("Face: Didn't play facial sound: ",soundAlias,", animation: ",facialanim," notify: ",notifyString,", importance ",importance,", old one ",self.a.currentDialogImportance);#/
+    //("Face: Didn't play facial sound: ",soundAlias,", animation: ",facialanim," notify: ",notifyString,", importance ",importance,", old one ",self.a.currentDialogImportance);
   }
 }
 
@@ -442,9 +439,9 @@ PlayFace_WaitForTime(time, notifyString, killmeString) {
 InitLevelFace() {
   // Does per-level initialization of facial stuff.
 
-  // These numbers indicate how many different sound aliases there are in dialog_generic.csv for each 
-  // nationality.This script will assign each guy a random voice number from 1 to the number indicated 
-  // for his voice nationality below.If we add a new voice type to sound_generic.csv, we need to update 
+  // These numbers indicate how many different sound aliases there are in dialog_generic.csv for each
+  // nationality.This script will assign each guy a random voice number from 1 to the number indicated
+  // for his voice nationality below.If we add a new voice type to sound_generic.csv, we need to update
   // these numbers accordingly.
   anim.numAmericanVoices = 8;
   anim.numNavySealVoices = 8;

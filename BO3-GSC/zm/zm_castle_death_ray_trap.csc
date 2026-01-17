@@ -17,25 +17,25 @@ function main() {
   level._effect["console_red_light"] = "dlc1/castle/fx_glow_panel_red_castle";
   level._effect["tesla_zombie_shock"] = "dlc1/castle/fx_tesla_trap_body_shock";
   level._effect["tesla_zombie_explode"] = "dlc1/castle/fx_tesla_trap_body_exp";
-  clientfield::register("actor", "death_ray_shock_fx", 5000, 1, "int", & death_ray_shock_fx, 0, 0);
-  clientfield::register("actor", "death_ray_shock_eye_fx", 5000, 1, "int", & death_ray_shock_eye_fx, 0, 0);
-  clientfield::register("actor", "death_ray_explode_fx", 5000, 1, "counter", & death_ray_explode_fx, 0, 0);
-  clientfield::register("scriptmover", "death_ray_status_light", 5000, 2, "int", & death_ray_status_light, 0, 0);
-  clientfield::register("actor", "tesla_beam_fx", 5000, 1, "counter", & function_200eea36, 0, 0);
-  clientfield::register("toplayer", "tesla_beam_fx", 5000, 1, "counter", & function_200eea36, 0, 0);
-  clientfield::register("actor", "tesla_beam_mechz", 5000, 1, "int", & tesla_beam_mechz, 0, 0);
+  clientfield::register("actor", "death_ray_shock_fx", 5000, 1, "int", &death_ray_shock_fx, 0, 0);
+  clientfield::register("actor", "death_ray_shock_eye_fx", 5000, 1, "int", &death_ray_shock_eye_fx, 0, 0);
+  clientfield::register("actor", "death_ray_explode_fx", 5000, 1, "counter", &death_ray_explode_fx, 0, 0);
+  clientfield::register("scriptmover", "death_ray_status_light", 5000, 2, "int", &death_ray_status_light, 0, 0);
+  clientfield::register("actor", "tesla_beam_fx", 5000, 1, "counter", &function_200eea36, 0, 0);
+  clientfield::register("toplayer", "tesla_beam_fx", 5000, 1, "counter", &function_200eea36, 0, 0);
+  clientfield::register("actor", "tesla_beam_mechz", 5000, 1, "int", &tesla_beam_mechz, 0, 0);
 }
 
 function death_ray_shock_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self function_51adc559(localclientnum);
   if(newval) {
-    if(!isdefined(self.tesla_shock_fx)) {
+    if(!isDefined(self.tesla_shock_fx)) {
       tag = "J_SpineUpper";
       if(!self isai()) {
         tag = "tag_origin";
       }
-      self.tesla_shock_fx = playfxontag(localclientnum, level._effect["tesla_zombie_shock"], self, tag);
-      self playsound(0, "zmb_electrocute_zombie");
+      self.tesla_shock_fx = playFXOnTag(localclientnum, level._effect["tesla_zombie_shock"], self, tag);
+      self playSound(0, "zmb_electrocute_zombie");
     }
     if(isdemoplaying()) {
       self thread function_7772592b(localclientnum);
@@ -51,7 +51,7 @@ function function_7772592b(localclientnum) {
 }
 
 function function_51adc559(localclientnum) {
-  if(isdefined(self.tesla_shock_fx)) {
+  if(isDefined(self.tesla_shock_fx)) {
     deletefx(localclientnum, self.tesla_shock_fx, 1);
     self.tesla_shock_fx = undefined;
   }
@@ -60,8 +60,8 @@ function function_51adc559(localclientnum) {
 
 function death_ray_shock_eye_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
-    if(!isdefined(self.var_5f35d5e4)) {
-      self.var_5f35d5e4 = playfxontag(localclientnum, level._effect["death_ray_shock_eyes"], self, "J_Eyeball_LE");
+    if(!isDefined(self.var_5f35d5e4)) {
+      self.var_5f35d5e4 = playFXOnTag(localclientnum, level._effect["death_ray_shock_eyes"], self, "J_Eyeball_LE");
     }
   } else {
     deletefx(localclientnum, self.var_5f35d5e4, 1);
@@ -70,14 +70,14 @@ function death_ray_shock_eye_fx(localclientnum, oldval, newval, bnewent, binitia
 }
 
 function death_ray_explode_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  playfxontag(localclientnum, level._effect["tesla_zombie_explode"], self, "j_spine4");
+  playFXOnTag(localclientnum, level._effect["tesla_zombie_explode"], self, "j_spine4");
 }
 
 function death_ray_status_light(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   v_forward = anglestoright(self.angles);
   v_forward = v_forward * -1;
   v_up = anglestoup(self.angles);
-  if(isdefined(self.status_fx)) {
+  if(isDefined(self.status_fx)) {
     deletefx(localclientnum, self.status_fx, 1);
     self.status_fx = undefined;
   }
@@ -96,7 +96,7 @@ function death_ray_status_light(localclientnum, oldval, newval, bnewent, binitia
       break;
     }
   }
-  self.status_fx = playfxontag(localclientnum, level._effect[str_fx_name], self, tag);
+  self.status_fx = playFXOnTag(localclientnum, level._effect[str_fx_name], self, tag);
 }
 
 function function_200eea36(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -149,7 +149,7 @@ function function_3c5fc735(localclientnum) {
 }
 
 function function_1139a457(localclientnum) {
-  if(isdefined(self.var_e43465f2) && isdefined(self.var_53106e7c)) {
+  if(isDefined(self.var_e43465f2) && isDefined(self.var_53106e7c)) {
     level beam::kill(self.var_e43465f2, "tag_origin", self, "j_spinelower", self.var_53106e7c);
     self.var_e43465f2 delete();
     self.var_53106e7c = undefined;

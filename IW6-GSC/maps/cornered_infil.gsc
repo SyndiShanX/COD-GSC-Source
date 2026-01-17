@@ -109,12 +109,12 @@ cornered_infil_pre_load() {
   precachestring(&"CORNERED_RAPPEL_HINT_GAMEPAD_L");
   precachestring(&"CORNERED_RAPPEL_HINT_GAMEPAD_L_NO_GLYPH");
   precachestring(&"CORNERED_RAPPEL_JUMP");
-  maps\_utility::add_hint_string("rappel_movement_pc", & "CORNERED_RAPPEL_HINT_PC", ::should_break_rappel_movement_hint);
-  maps\_utility::add_hint_string("rappel_movement_gamepad", & "CORNERED_RAPPEL_HINT_GAMEPAD", ::should_break_rappel_movement_hint);
-  maps\_utility::add_hint_string("rappel_movement_gamepad_no_glyph", & "CORNERED_RAPPEL_HINT_GAMEPAD_NO_GLYPH", ::should_break_rappel_movement_hint);
-  maps\_utility::add_hint_string("rappel_movement_gamepad_l", & "CORNERED_RAPPEL_HINT_GAMEPAD_L", ::should_break_rappel_movement_hint);
-  maps\_utility::add_hint_string("rappel_movement_gamepad_l_no_glyph", & "CORNERED_RAPPEL_HINT_GAMEPAD_L_NO_GLYPH", ::should_break_rappel_movement_hint);
-  maps\_utility::add_hint_string("jump", & "CORNERED_RAPPEL_JUMP");
+  maps\_utility::add_hint_string("rappel_movement_pc", &"CORNERED_RAPPEL_HINT_PC", ::should_break_rappel_movement_hint);
+  maps\_utility::add_hint_string("rappel_movement_gamepad", &"CORNERED_RAPPEL_HINT_GAMEPAD", ::should_break_rappel_movement_hint);
+  maps\_utility::add_hint_string("rappel_movement_gamepad_no_glyph", &"CORNERED_RAPPEL_HINT_GAMEPAD_NO_GLYPH", ::should_break_rappel_movement_hint);
+  maps\_utility::add_hint_string("rappel_movement_gamepad_l", &"CORNERED_RAPPEL_HINT_GAMEPAD_L", ::should_break_rappel_movement_hint);
+  maps\_utility::add_hint_string("rappel_movement_gamepad_l_no_glyph", &"CORNERED_RAPPEL_HINT_GAMEPAD_L_NO_GLYPH", ::should_break_rappel_movement_hint);
+  maps\_utility::add_hint_string("jump", &"CORNERED_RAPPEL_JUMP");
   var_0 = getent("player_rappel_rope_stealth", "targetname");
   var_0 hide();
   level.first_floor_shift_right_trigger = getent("first_floor_shift_right_trigger", "targetname");

@@ -66,7 +66,7 @@ main() {
   level._effect["helicopter_explosion"] = loadfx("explosions/helicopter_explosion_dcemp");
   level._effect["small_vehicle_explosion"] = loadfx("explosions/small_vehicle_explosion");
 
-  //CRASH SCENE FX 
+  //CRASH SCENE FX
   level._effect["window_fire_large"] = loadfx("fire/window_fire_large");
   level._effect["firelp_large_pm"] = loadfx("fire/firelp_large_pm");
   level._effect["firelp_med_pm"] = loadfx("fire/firelp_med_pm");

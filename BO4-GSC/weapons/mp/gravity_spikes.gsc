@@ -7,7 +7,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\mp_common\gametypes\battlechatter;
 #include scripts\weapons\gravity_spikes;
-
 #namespace gravity_spikes;
 
 autoexec __init__system__() {

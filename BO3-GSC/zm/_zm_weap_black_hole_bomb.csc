@@ -15,7 +15,7 @@
 #namespace zm_weap_black_hole_bomb;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_black_hole_bomb", & __init__, undefined, undefined);
+  system::register("zm_weap_black_hole_bomb", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -29,9 +29,9 @@ function __init__() {
   level._visionset_black_hole_bomb_transition_time_out = 1;
   level._visionset_black_hole_bomb_priority = 10;
   visionset_mgr::register_visionset_info("zombie_cosmodrome_blackhole", 21000, 30, undefined, "zombie_cosmodrome_blackhole");
-  clientfield::register("toplayer", "bhb_viewlights", 21000, 2, "int", & bhb_viewlights, 0, 0);
-  clientfield::register("scriptmover", "toggle_black_hole_deployed", 21000, 1, "int", & black_hole_deployed, 0, 0);
-  clientfield::register("actor", "toggle_black_hole_being_pulled", 21000, 1, "int", & black_hole_zombie_being_pulled, 0, 1);
+  clientfield::register("toplayer", "bhb_viewlights", 21000, 2, "int", &bhb_viewlights, 0, 0);
+  clientfield::register("scriptmover", "toggle_black_hole_deployed", 21000, 1, "int", &black_hole_deployed, 0, 0);
+  clientfield::register("actor", "toggle_black_hole_being_pulled", 21000, 1, "int", &black_hole_zombie_being_pulled, 0, 1);
 }
 
 function bhb_viewlights(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -47,32 +47,32 @@ function black_hole_deployed(localclientnum, oldval, newval, bnewent, binitialsn
     return;
   }
   players = getlocalplayers();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     level thread black_hole_fx_start(i, self);
   }
 }
 
 function black_hole_fx_start(local_client_num, ent_bomb) {
   bomb_fx_spot = spawn(local_client_num, ent_bomb.origin, "script_model");
-  bomb_fx_spot setmodel("tag_origin");
-  playsound(0, "wpn_bhbomb_portal_start", bomb_fx_spot.origin);
-  bomb_fx_spot.sndlooper = bomb_fx_spot playloopsound("wpn_bhbomb_portal_loop");
-  playfxontag(local_client_num, level._effect["black_hole_bomb_portal"], bomb_fx_spot, "tag_origin");
-  playfxontag(local_client_num, level._effect["black_hole_bomb_marker_flare"], bomb_fx_spot, "tag_origin");
+  bomb_fx_spot setModel("tag_origin");
+  playSound(0, "wpn_bhbomb_portal_start", bomb_fx_spot.origin);
+  bomb_fx_spot.sndlooper = bomb_fx_spot playLoopSound("wpn_bhbomb_portal_loop");
+  playFXOnTag(local_client_num, level._effect["black_hole_bomb_portal"], bomb_fx_spot, "tag_origin");
+  playFXOnTag(local_client_num, level._effect["black_hole_bomb_marker_flare"], bomb_fx_spot, "tag_origin");
   ent_bomb waittill("entityshutdown");
-  if(isdefined(bomb_fx_spot.sndlooper)) {
+  if(isDefined(bomb_fx_spot.sndlooper)) {
     bomb_fx_spot stoploopsound(bomb_fx_spot.sndlooper);
   }
   event_horizon_spot = spawn(local_client_num, bomb_fx_spot.origin, "script_model");
-  event_horizon_spot setmodel("tag_origin");
+  event_horizon_spot setModel("tag_origin");
   bomb_fx_spot delete();
-  playfxontag(local_client_num, level._effect["black_hole_bomb_event_horizon"], event_horizon_spot, "tag_origin");
+  playFXOnTag(local_client_num, level._effect["black_hole_bomb_event_horizon"], event_horizon_spot, "tag_origin");
   wait(0.2);
   event_horizon_spot delete();
 }
 
 function black_hole_activated(ent_model, int_local_client_num) {
-  new_black_hole_struct = spawnstruct();
+  new_black_hole_struct = spawnStruct();
   new_black_hole_struct.origin = ent_model.origin;
   new_black_hole_struct._black_hole_active = 1;
   array::add(level._current_black_hole_bombs, new_black_hole_struct);
@@ -91,13 +91,13 @@ function black_hole_zombie_being_pulled(localclientnum, oldval, newval, bnewent,
     self._bhb_pulled_in_fx = spawn(localclientnum, self.origin, "script_model");
     self._bhb_pulled_in_fx.angles = self.angles;
     self._bhb_pulled_in_fx linkto(self, "tag_origin");
-    self._bhb_pulled_in_fx setmodel("tag_origin");
+    self._bhb_pulled_in_fx setModel("tag_origin");
     level thread black_hole_bomb_pulled_in_fx_clean(self, self._bhb_pulled_in_fx);
     players = getlocalplayers();
-    for (i = 0; i < players.size; i++) {
-      playfxontag(i, level._effect["black_hole_bomb_zombie_pull"], self._bhb_pulled_in_fx, "tag_origin");
+    for(i = 0; i < players.size; i++) {
+      playFXOnTag(i, level._effect["black_hole_bomb_zombie_pull"], self._bhb_pulled_in_fx, "tag_origin");
     }
-  } else if(isdefined(self._bhb_pulled_in_fx)) {
+  } else if(isDefined(self._bhb_pulled_in_fx)) {
     self._bhb_pulled_in_fx notify("no_clean_up_needed");
     self._bhb_pulled_in_fx unlink();
     self._bhb_pulled_in_fx delete();
@@ -106,11 +106,11 @@ function black_hole_zombie_being_pulled(localclientnum, oldval, newval, bnewent,
 
 function black_hole_bomb_pulled_in_fx_clean(ent_zombie, ent_fx_origin) {
   ent_fx_origin endon("no_clean_up_needed");
-  if(!isdefined(ent_zombie)) {
+  if(!isDefined(ent_zombie)) {
     return;
   }
   ent_zombie waittill("entityshutdown");
-  if(isdefined(ent_fx_origin)) {
+  if(isDefined(ent_fx_origin)) {
     ent_fx_origin delete();
   }
 }

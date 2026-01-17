@@ -79,7 +79,7 @@ dog_death() {
   self waittill("death");
   if(!isDefined(self))
     return;
-  self PlaySound("zmb_hellhound_vox_death");
+  self playSound("zmb_hellhound_vox_death");
   if(isDefined(self.attacker) && isai(self.attacker)) {
     self.attacker notify("killed", self);
   }
@@ -99,8 +99,8 @@ dog_explode_fx(origin) {
   }
   fx = spawn("script_model", origin);
   fx setModel("tag_origin");
-  PlayFxOnTag(level._effect["dog_gib"], fx, "tag_origin");
-  fx playsound("zmb_hellhound_explode");
+  playFXOnTag(level._effect["dog_gib"], fx, "tag_origin");
+  fx playSound("zmb_hellhound_explode");
   wait(5);
   fx delete();
 }
@@ -126,14 +126,14 @@ dog_move_audio() {
         level.doggy_attack_vox++;
         self.playing_attack_vox = true;
         self thread vox_timer("attack");
-        self PlaySound("zmb_hellhound_vox_attack");
+        self playSound("zmb_hellhound_vox_attack");
       }
     }
     if(!self.playing_movement_vox && !self.playing_attack_vox && (level.doggy_movement_vox <= 8)) {
       level.doggy_movement_vox++;
       self.playing_movement_vox = true;
       self thread vox_timer("movement");
-      self PlaySound("zmb_hellhound_vox_move");
+      self playSound("zmb_hellhound_vox_move");
     }
     wait(.1);
   }

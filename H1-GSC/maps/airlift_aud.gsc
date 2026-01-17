@@ -193,7 +193,7 @@ aud_seaknight_sound_node_spawner() {
 }
 
 aud_seaknight_event_handler(var_0, var_1, var_2, var_3, var_4) {
-  if(isdefined(var_3) && isdefined(var_4)) {
+  if(isDefined(var_3) && isDefined(var_4)) {
     soundscripts\_audio_mix_manager::mm_clear_submix(var_3, 0.5);
     soundscripts\_audio_mix_manager::mm_add_submix(var_4, 0.5);
   }
@@ -217,10 +217,10 @@ aud_seaknight_leaves_smoketown() {
 
 aud_convoy_passby_manager(var_0, var_1, var_2, var_3) {
   wait(var_3);
-  var_4 = getentarray(var_0, var_1);
+  var_4 = getEntArray(var_0, var_1);
 
   foreach(var_6 in var_4)
-  var_6 playsound(var_2);
+  var_6 playSound(var_2);
 }
 
 aud_cobra_passby_manager(var_0, var_1, var_2) {
@@ -233,7 +233,7 @@ aud_cobra_passby_manager(var_0, var_1, var_2) {
 aud_abrams_passby_manager(var_0) {
   var_1 = 0;
 
-  for (;;) {
+  for(;;) {
     self waittill("trigger", var_2);
     wait 0.1;
     var_1 = var_1 + 1;

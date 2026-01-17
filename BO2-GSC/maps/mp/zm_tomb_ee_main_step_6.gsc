@@ -32,8 +32,7 @@ stage_logic() {
   stage_completed("little_girl_lost", level._cur_stage_name);
 }
 
-exit_stage(success) {
-}
+exit_stage(success) {}
 
 ruins_fist_glow_monitor() {
   if(flag("ee_all_players_upgraded_punch")) {
@@ -67,15 +66,15 @@ ruins_fist_glow_monitor() {
 
 spawn_punch_upgrade_tablet(v_origin, e_player) {
   m_tablet = spawn("script_model", v_origin + vectorscale((0, 0, 1), 50.0));
-  m_tablet setmodel("p6_zm_tm_tablet");
+  m_tablet setModel("p6_zm_tm_tablet");
   m_fx = spawn("script_model", m_tablet.origin);
-  m_fx setmodel("tag_origin");
+  m_fx setModel("tag_origin");
   m_fx setinvisibletoall();
   m_fx setvisibletoplayer(e_player);
   m_tablet linkto(m_fx);
-  playfxontag(level._effect["special_glow"], m_fx, "tag_origin");
+  playFXOnTag(level._effect["special_glow"], m_fx, "tag_origin");
   m_fx thread rotate_punch_upgrade_tablet();
-  m_tablet playloopsound("zmb_squest_punchtime_tablet_loop", 0.5);
+  m_tablet playLoopSound("zmb_squest_punchtime_tablet_loop", 0.5);
   m_tablet setinvisibletoall();
   m_tablet setvisibletoplayer(e_player);
 
@@ -84,7 +83,7 @@ spawn_punch_upgrade_tablet(v_origin, e_player) {
 
   m_tablet delete();
   m_fx delete();
-  e_player playsound("zmb_squest_punchtime_tablet_pickup");
+  e_player playSound("zmb_squest_punchtime_tablet_pickup");
 
   if(isDefined(e_player)) {
     e_player thread fadetoblackforxsec(0, 0.3, 0.5, 0.5, "white");

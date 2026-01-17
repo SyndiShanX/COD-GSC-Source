@@ -19,11 +19,11 @@ main() {
   maps\mp\mp_silo_amb::main();
   maps\mp\gametypes\_teamset_urbanspecops::level_init();
   setdvar("compassmaxrange", "2100");
-  game["strings"]["war_callsign_a"] = & "MPUI_CALLSIGN_MAPNAME_A";
-  game["strings"]["war_callsign_b"] = & "MPUI_CALLSIGN_MAPNAME_B";
-  game["strings"]["war_callsign_c"] = & "MPUI_CALLSIGN_MAPNAME_C";
-  game["strings"]["war_callsign_d"] = & "MPUI_CALLSIGN_MAPNAME_D";
-  game["strings"]["war_callsign_e"] = & "MPUI_CALLSIGN_MAPNAME_E";
+  game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_MAPNAME_A";
+  game["strings"]["war_callsign_b"] = &"MPUI_CALLSIGN_MAPNAME_B";
+  game["strings"]["war_callsign_c"] = &"MPUI_CALLSIGN_MAPNAME_C";
+  game["strings"]["war_callsign_d"] = &"MPUI_CALLSIGN_MAPNAME_D";
+  game["strings"]["war_callsign_e"] = &"MPUI_CALLSIGN_MAPNAME_E";
   game["strings_menu"]["war_callsign_a"] = "@MPUI_CALLSIGN_MAPNAME_A";
   game["strings_menu"]["war_callsign_b"] = "@MPUI_CALLSIGN_MAPNAME_B";
   game["strings_menu"]["war_callsign_c"] = "@MPUI_CALLSIGN_MAPNAME_C";
@@ -47,7 +47,7 @@ rotate_crane_container() {
   rotate_angle = 30;
   self RotateYaw(rotate_angle / 2, rotate_time / 2);
   self waittill("rotatedone");
-  while (true) {
+  while(true) {
     rotate_angle = rotate_angle * -1;
     self RotateYaw(rotate_angle, rotate_time, rotate_time / 2, rotate_time / 2);
     self waittill("rotatedone");

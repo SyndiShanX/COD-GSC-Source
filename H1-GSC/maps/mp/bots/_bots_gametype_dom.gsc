@@ -26,7 +26,7 @@ setup_callbacks() {
 }
 
 crate_can_use(var_0) {
-  if(isagent(self) && !isdefined(var_0.boxtype))
+  if(isagent(self) && !isDefined(var_0.boxtype))
     return 0;
 
   if(!maps\mp\_utility::isteamparticipant(self))
@@ -41,14 +41,14 @@ monitor_flag_control() {
   self endon("death");
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     wait 1;
     var_0 = maps\mp\gametypes\dom::getflagteam();
 
     if(var_0 != "neutral") {
       var_1 = getzonenearest(self.origin);
 
-      if(isdefined(var_1))
+      if(isDefined(var_1))
         botzonesetteam(var_1, var_0);
     }
   }
@@ -61,7 +61,7 @@ monitor_flag_ownership() {
   level endon("game_ended");
   var_0 = maps\mp\gametypes\dom::getflagteam();
 
-  for (;;) {
+  for(;;) {
     var_1 = maps\mp\gametypes\dom::getflagteam();
 
     if(var_1 != var_0)
@@ -77,13 +77,13 @@ setup_bot_dom() {
   var_0 = bot_get_all_possible_flags();
 
   if(var_0.size > 3) {
-    while (!isdefined(level.teleport_dom_finished_initializing))
+    while(!isDefined(level.teleport_dom_finished_initializing))
       wait 0.05;
 
     var_1 = [];
 
     foreach(var_3 in var_0) {
-      if(!isdefined(var_1[var_3.teleport_zone]))
+      if(!isDefined(var_1[var_3.teleport_zone]))
         var_1[var_3.teleport_zone] = [];
 
       var_1[var_3.teleport_zone] = common_scripts\utility::array_add(var_1[var_3.teleport_zone], var_3);
@@ -104,9 +104,7 @@ setup_bot_dom() {
     var_3 thread monitor_flag_control();
     var_3 thread monitor_flag_ownership();
 
-    if(var_3.script_label != "_a" && var_3.script_label != "_b" && var_3.script_label != "_c") {
-
-    }
+    if(var_3.script_label != "_a" && var_3.script_label != "_b" && var_3.script_label != "_c") {}
 
     var_3.nodes = maps\mp\bots\_bots_gametype_common::bot_get_valid_nodes_in_trigger(var_3);
     var_3.last_time_secured["allies"] = 0;
@@ -135,18 +133,18 @@ bot_wait_for_event_flag_swap(var_0) {
 }
 
 bot_get_all_possible_flags() {
-  if(isdefined(level.all_dom_flags))
+  if(isDefined(level.all_dom_flags))
     return level.all_dom_flags;
   else
     return level.flags;
 }
 
 bot_cache_flag_distances(var_0) {
-  if(!isdefined(level.flag_distances))
+  if(!isDefined(level.flag_distances))
     level.flag_distances = [];
 
-  for (var_1 = 0; var_1 < var_0.size - 1; var_1++) {
-    for (var_2 = var_1 + 1; var_2 < var_0.size; var_2++) {
+  for(var_1 = 0; var_1 < var_0.size - 1; var_1++) {
+    for(var_2 = var_1 + 1; var_2 < var_0.size; var_2++) {
       var_3 = distance(var_0[var_1].origin, var_0[var_2].origin);
       var_4 = get_flag_label(var_0[var_1]);
       var_5 = get_flag_label(var_0[var_2]);
@@ -192,7 +190,7 @@ bot_dom_think() {
   self endon("disconnect");
   level endon("game_ended");
 
-  while (!isdefined(level.bot_gametype_precaching_done))
+  while(!isDefined(level.bot_gametype_precaching_done))
     wait 0.05;
 
   self.force_new_goal = 0;
@@ -202,7 +200,7 @@ bot_dom_think() {
   self botsetflag("grenade_objectives", 1);
   self botsetflag("use_obj_path_style", 1);
 
-  for (;;) {
+  for(;;) {
     maps\mp\bots\_bots_util::bot_update_camp_assassin();
     var_0 = gettime();
 
@@ -278,15 +276,13 @@ bot_choose_flag() {
   else
     var_5 = level.flags;
 
-  for (var_6 = 0; var_6 < var_5.size; var_6++) {
+  for(var_6 = 0; var_6 < var_5.size; var_6++) {
     var_7 = var_5[var_6] maps\mp\gametypes\dom::getflagteam();
 
     if(var_3) {
       if(flag_has_been_captured_before(var_5[var_6]))
         var_3 = 0;
-      else {
-
-      }
+      else {}
     }
 
     if(var_7 != self.team) {
@@ -386,7 +382,7 @@ bot_choose_flag() {
       var_17 = [];
       var_18 = [];
 
-      for (var_6 = 0; var_6 < var_9.size; var_6++) {
+      for(var_6 = 0; var_6 < var_9.size; var_6++) {
         var_19 = distance(var_9[var_6].origin, self.origin);
         var_18[var_6] = var_19;
         var_17[var_6] = var_19;
@@ -395,7 +391,7 @@ bot_choose_flag() {
       if(var_2.size == 1) {
         var_20 = 1.5;
 
-        for (var_6 = 0; var_6 < var_17.size; var_6++)
+        for(var_6 = 0; var_6 < var_17.size; var_6++)
           var_17[var_6] = var_17[var_6] + level.flag_distances[get_flag_label(var_9[var_6])][get_flag_label(var_2[0])] * var_20;
       }
 
@@ -412,7 +408,7 @@ bot_choose_flag() {
         var_21[0] = 50;
         var_21[1] = 50;
 
-        for (var_6 = 0; var_6 < var_9.size; var_6++) {
+        for(var_6 = 0; var_6 < var_9.size; var_6++) {
           if(var_17[var_6] < var_17[1 - var_6]) {
             var_21[var_6] = var_21[var_6] + 20;
             var_21[1 - var_6] = var_21[1 - var_6] - 20;
@@ -440,7 +436,7 @@ bot_choose_flag() {
         var_21[1] = 33;
         var_21[2] = 33;
 
-        for (var_6 = 0; var_6 < var_9.size; var_6++) {
+        for(var_6 = 0; var_6 < var_9.size; var_6++) {
           var_22 = (var_6 + 1) % 3;
           var_23 = (var_6 + 2) % 3;
 
@@ -486,7 +482,7 @@ bot_choose_flag() {
       }
     }
 
-    if(!isdefined(var_0)) {
+    if(!isDefined(var_0)) {
       if(self.strategy_level == 0)
         var_0 = var_2[0];
       else if(var_24.size == 2) {
@@ -556,7 +552,7 @@ capture_flag(var_0, var_1, var_2) {
     maps\mp\bots\_bots_strategy::bot_capture_zone(var_0.origin, var_0.nodes, var_0, var_3);
   }
 
-  if(!isdefined(var_2) || !var_2)
+  if(!isDefined(var_2) || !var_2)
     thread monitor_flag_status(var_0);
 }
 
@@ -576,14 +572,14 @@ defend_flag(var_0) {
 }
 
 get_flag_capture_radius() {
-  if(!isdefined(level.capture_radius))
+  if(!isDefined(level.capture_radius))
     level.capture_radius = 158;
 
   return level.capture_radius;
 }
 
 get_flag_protect_radius() {
-  if(!isdefined(level.protect_radius)) {
+  if(!isDefined(level.protect_radius)) {
     var_0 = self botgetworldsize();
     var_1 = (var_0[0] + var_0[1]) / 2;
     level.protect_radius = min(1000, var_1 / 3.5);
@@ -600,7 +596,7 @@ bot_dom_leader_dialog(var_0, var_1) {
     if(bot_allow_to_capture_flag(var_3)) {
       self botmemoryevent("known_enemy", undefined, var_3.origin);
 
-      if(!isdefined(self.last_losing_flag_react) || gettime() - self.last_losing_flag_react > 10000) {
+      if(!isDefined(self.last_losing_flag_react) || gettime() - self.last_losing_flag_react > 10000) {
         if(maps\mp\bots\_bots_util::bot_is_protecting()) {
           var_4 = distancesquared(self.origin, var_3.origin) < 490000;
           var_5 = bot_is_protecting_flag(var_3);
@@ -644,7 +640,7 @@ monitor_flag_status(var_0) {
   var_3 = get_flag_capture_radius() * 3 * (get_flag_capture_radius() * 3);
   var_4 = 1;
 
-  while (var_4) {
+  while(var_4) {
     var_5 = 0;
     var_6 = var_0 maps\mp\gametypes\dom::getflagteam();
     var_7 = get_num_ally_flags(self.team);
@@ -676,7 +672,7 @@ monitor_flag_status(var_0) {
           if(distancesquared(self.origin, var_12) < squared(var_13)) {
             var_14 = self getnearestnode();
 
-            if(isdefined(var_14)) {
+            if(isDefined(var_14)) {
               var_15 = undefined;
 
               foreach(var_17 in var_0.nodes) {
@@ -686,7 +682,7 @@ monitor_flag_status(var_0) {
                 }
               }
 
-              if(isdefined(var_15)) {
+              if(isDefined(var_15)) {
                 self.defense_investigate_specific_point = var_15;
                 self notify("defend_force_node_recalculation");
               }
@@ -715,7 +711,7 @@ monitor_flag_status(var_0) {
 
     var_19 = level common_scripts\utility::waittill_notify_or_timeout_return("flag_changed_ownership", 1 + randomfloatrange(0, 2));
 
-    if(!(isdefined(var_19) && var_19 == "timeout")) {
+    if(!(isDefined(var_19) && var_19 == "timeout")) {
       var_20 = max((3 - self.strategy_level) * 1.0 + randomfloatrange(-0.5, 0.5), 0);
       wait(var_20);
     }
@@ -726,7 +722,7 @@ bot_dom_get_node_chance(var_0) {
   if(var_0 == self.node_closest_to_defend_center)
     return 1.0;
 
-  if(!isdefined(self.current_flag))
+  if(!isDefined(self.current_flag))
     return 1.0;
 
   var_1 = 0;
@@ -758,7 +754,7 @@ bot_dom_get_node_chance(var_0) {
 get_flag_label(var_0) {
   var_1 = "";
 
-  if(isdefined(var_0.teleport_zone))
+  if(isDefined(var_0.teleport_zone))
     var_1 = var_1 + (var_0.teleport_zone + "_");
 
   var_1 = var_1 + ("flag" + var_0.script_label);
@@ -766,7 +762,7 @@ get_flag_label(var_0) {
 }
 
 get_other_flag(var_0, var_1) {
-  for (var_2 = 0; var_2 < level.flags.size; var_2++) {
+  for(var_2 = 0; var_2 < level.flags.size; var_2++) {
     if(level.flags[var_2] != var_0 && level.flags[var_2] != var_1)
       return level.flags[var_2];
   }
@@ -778,7 +774,7 @@ get_specific_flag_by_letter(var_0) {
 }
 
 get_specific_flag_by_label(var_0) {
-  for (var_1 = 0; var_1 < level.flags.size; var_1++) {
+  for(var_1 = 0; var_1 < level.flags.size; var_1++) {
     if(level.flags[var_1].script_label == var_0)
       return level.flags[var_1];
   }
@@ -791,7 +787,7 @@ get_closest_flag(var_0) {
   foreach(var_4 in level.flags) {
     var_5 = distancesquared(var_4.origin, var_0);
 
-    if(!isdefined(var_2) || var_5 < var_2) {
+    if(!isDefined(var_2) || var_5 < var_2) {
       var_1 = var_4;
       var_2 = var_5;
     }
@@ -805,7 +801,7 @@ get_num_allies_capturing_flag(var_0, var_1) {
   var_3 = get_flag_capture_radius();
 
   foreach(var_5 in level.participants) {
-    if(!isdefined(var_5.team)) {
+    if(!isDefined(var_5.team)) {
       continue;
     }
     if(var_5.team == self.team && var_5 != self && maps\mp\_utility::isteamparticipant(var_5)) {
@@ -816,7 +812,7 @@ get_num_allies_capturing_flag(var_0, var_1) {
         continue;
       }
 
-      if(!isdefined(var_1) || !var_1) {
+      if(!isDefined(var_1) || !var_1) {
         if(var_5 istouching(var_0))
           var_2++;
       }
@@ -847,7 +843,7 @@ bot_target_is_flag(var_0) {
 get_num_ally_flags(var_0) {
   var_1 = 0;
 
-  for (var_2 = 0; var_2 < level.flags.size; var_2++) {
+  for(var_2 = 0; var_2 < level.flags.size; var_2++) {
     var_3 = level.flags[var_2] maps\mp\gametypes\dom::getflagteam();
 
     if(var_3 == var_0)
@@ -860,7 +856,7 @@ get_num_ally_flags(var_0) {
 get_enemy_flags(var_0) {
   var_1 = [];
 
-  for (var_2 = 0; var_2 < level.flags.size; var_2++) {
+  for(var_2 = 0; var_2 < level.flags.size; var_2++) {
     var_3 = level.flags[var_2] maps\mp\gametypes\dom::getflagteam();
 
     if(var_3 == common_scripts\utility::get_enemy_team(var_0))
@@ -873,7 +869,7 @@ get_enemy_flags(var_0) {
 get_ally_flags(var_0) {
   var_1 = [];
 
-  for (var_2 = 0; var_2 < level.flags.size; var_2++) {
+  for(var_2 = 0; var_2 < level.flags.size; var_2++) {
     var_3 = level.flags[var_2] maps\mp\gametypes\dom::getflagteam();
 
     if(var_3 == var_0)
@@ -903,7 +899,7 @@ get_players_defending_flag(var_0) {
   var_2 = [];
 
   foreach(var_4 in level.participants) {
-    if(!isdefined(var_4.team)) {
+    if(!isDefined(var_4.team)) {
       continue;
     }
     if(var_4.team == self.team && var_4 != self && maps\mp\_utility::isteamparticipant(var_4)) {

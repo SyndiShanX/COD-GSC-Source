@@ -36,7 +36,7 @@ custom_joker_movement() {
   v_origin = self.weapon_model.origin - vectorscale((0, 0, 1), 5.0);
   self.weapon_model delete();
   m_lock = spawn("script_model", v_origin);
-  m_lock setmodel(level.chest_joker_model);
+  m_lock setModel(level.chest_joker_model);
   m_lock.angles = self.angles + vectorscale((0, 1, 0), 180.0);
   wait 0.5;
   level notify("weapon_fly_away_start");
@@ -132,7 +132,7 @@ magic_box_leaves() {
   self setclientfield("magicbox_leaving_fx", 1);
   self setclientfield("magicbox_open_fx", 0);
   self setzbarrierpiecestate(1, "closing");
-  self playsound("zmb_hellbox_rise");
+  self playSound("zmb_hellbox_rise");
 
   while(self getzbarrierpiecestate(1) == "closing")
     wait 0.1;
@@ -144,7 +144,7 @@ magic_box_leaves() {
 magic_box_opens() {
   self setclientfield("magicbox_open_fx", 1);
   self setzbarrierpiecestate(2, "opening");
-  self playsound("zmb_hellbox_open");
+  self playSound("zmb_hellbox_open");
 
   while(self getzbarrierpiecestate(2) == "opening")
     wait 0.1;
@@ -154,7 +154,7 @@ magic_box_opens() {
 
 magic_box_closes() {
   self setzbarrierpiecestate(2, "closing");
-  self playsound("zmb_hellbox_close");
+  self playSound("zmb_hellbox_close");
 
   while(self getzbarrierpiecestate(2) == "closing")
     wait 0.1;

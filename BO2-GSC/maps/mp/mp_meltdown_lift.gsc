@@ -78,7 +78,7 @@ lift_auto_lower_think() {
 }
 
 destroy_equipment() {
-  grenades = getentarray("grenade", "classname");
+  grenades = getEntArray("grenade", "classname");
 
   for(i = 0; i < grenades.size; i++) {
     item = grenades[i];
@@ -119,13 +119,13 @@ destroy_tactical_insertions() {
 }
 
 destroy_supply_crates() {
-  crates = getentarray("care_package", "script_noteworthy");
+  crates = getEntArray("care_package", "script_noteworthy");
 
   for(i = 0; i < crates.size; i++) {
     crate = crates[i];
 
     if(crate istouching(self)) {
-      playfx(level._supply_drop_explosion_fx, crate.origin);
+      playFX(level._supply_drop_explosion_fx, crate.origin);
       playsoundatposition("wpn_grenade_explode", crate.origin);
       wait 0.1;
       crate maps\mp\killstreaks\_supplydrop::cratedelete();
@@ -143,7 +143,7 @@ destroy_corpses() {
 }
 
 destroy_stuck_weapons() {
-  weapons = getentarray("sticky_weapon", "targetname");
+  weapons = getEntArray("sticky_weapon", "targetname");
   origin = self getpointinbounds(0.0, 0.0, -0.6);
   z_cutoff = origin[2];
 

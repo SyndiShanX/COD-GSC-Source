@@ -34,9 +34,9 @@ playflarefx(localclientnum) {
   level endon("player_switch");
 
   if(friendnotfoe(localclientnum))
-    fx_handle = playfxontag(localclientnum, level._effect["fx_trophy_friendly_light"], self, "tag_light_fx");
+    fx_handle = playFXOnTag(localclientnum, level._effect["fx_trophy_friendly_light"], self, "tag_light_fx");
   else
-    fx_handle = playfxontag(localclientnum, level._effect["fx_trophy_enemy_light"], self, "tag_light_fx");
+    fx_handle = playFXOnTag(localclientnum, level._effect["fx_trophy_enemy_light"], self, "tag_light_fx");
 
   self thread watchtrophyshutdown(localclientnum, fx_handle);
   return fx_handle;
@@ -103,7 +103,7 @@ trophy_deploy_anim(localclientnum, playfx) {
   self setanim( % o_trophy_deploy, 1.0, 0.0, 1.0);
 
   if(playfx)
-    playfxontag(localclientnum, level._effect["fx_trophy_deploy_impact"], self, "tag_origin");
+    playFXOnTag(localclientnum, level._effect["fx_trophy_deploy_impact"], self, "tag_origin");
 
   wait 0.3;
   self useanimtree(#animtree);

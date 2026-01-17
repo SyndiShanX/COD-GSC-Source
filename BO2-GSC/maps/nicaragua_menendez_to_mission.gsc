@@ -70,8 +70,7 @@ haycart_anim() {
   run_scene("hay_cart_scene");
 }
 
-init_flags() {
-}
+init_flags() {}
 
 init_spawn_functions() {
   add_spawn_function_veh("cartel_courtyard_truck", ::courtyard_truck_spawn_func);
@@ -134,8 +133,7 @@ stables_exit_anim_setup() {
   ai_cartel stop_magic_bullet_shield();
 }
 
-stables_exit_anim() {
-}
+stables_exit_anim() {}
 
 func_spawn_stables_exit_door_blocker() {
   self.deathfunction = ::stables_exit_delete_clip;

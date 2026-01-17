@@ -19,25 +19,25 @@
 #namespace bot_ball;
 
 function init() {
-  level.botidle = & bot_idle;
-  level.botcombat = & bot_combat;
-  level.botprecombat = & bot_pre_combat;
+  level.botidle = &bot_idle;
+  level.botcombat = &bot_combat;
+  level.botprecombat = &bot_pre_combat;
 }
 
 function release_control_on_landing() {
   self endon("death");
   level endon("game_ended");
-  while (self isonground()) {
+  while(self isonground()) {
     wait(0.05);
   }
-  while (!self isonground()) {
+  while(!self isonground()) {
     wait(0.05);
   }
   self botreleasemanualcontrol();
 }
 
 function bot_pre_combat() {
-  if(isdefined(self.carryobject)) {
+  if(isDefined(self.carryobject)) {
     if(self isonground() && self botgoalset()) {
       goal = level.ball_goals[util::getotherteam(self.team)];
       radius = 300;
@@ -60,14 +60,14 @@ function bot_pre_combat() {
 }
 
 function bot_combat() {
-  if(isdefined(self.carryobject)) {
+  if(isDefined(self.carryobject)) {
     if(self bot_combat::has_threat()) {
       self bot_combat::clear_threat();
     }
     meleethreat = bot_combat::get_greatest_threat(level.botsettings.meleerange);
-    if(isdefined(meleethreat)) {
+    if(isDefined(meleethreat)) {
       angles = self getplayerangles();
-      fwd = anglestoforward(angles);
+      fwd = anglesToForward(angles);
       threatdir = meleethreat.origin - self.origin;
       threatdir = vectornormalize(threatdir);
       dot = vectordot(fwd, threatdir);
@@ -81,7 +81,7 @@ function bot_combat() {
 }
 
 function bot_idle() {
-  if(isdefined(self.carryobject)) {
+  if(isDefined(self.carryobject)) {
     if(!self botgoalset()) {
       goal = level.ball_goals[util::getotherteam(self.team)];
       goalpoint = goal.origin - vectorscale((0, 0, 1), 125);
@@ -93,11 +93,11 @@ function bot_idle() {
   triggers = [];
   balls = array::randomize(level.balls);
   foreach(ball in balls) {
-    if(!isdefined(ball.carrier) && !ball.in_goal) {
+    if(!isDefined(ball.carrier) && !ball.in_goal) {
       triggers[triggers.size] = ball.trigger;
       continue;
     }
-    if(isdefined(ball.carrier) && ball.carrier.team != self.team) {
+    if(isDefined(ball.carrier) && ball.carrier.team != self.team) {
       self bot::approach_point(ball.carrier.origin, 250, 1000, 128);
       self bot::sprint_to_goal();
       return;

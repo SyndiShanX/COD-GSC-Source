@@ -92,7 +92,7 @@ gameRepPlayerConnected() {
   name = self.name;
   if(!isDefined(game["gameRep"]["players"][name])) {
     game["gameRep"]["players"][name] = [];
-    for (j = 0; j < game["gameRep"]["params"].size; j++) {
+    for(j = 0; j < game["gameRep"]["params"].size; j++) {
       paramName = game["gameRep"]["params"][j];
       game["gameRep"]["players"][name][paramName] = 0;
     }
@@ -181,7 +181,7 @@ gameRepUpdateInformationForRound() {
   if(!isGameRepEnabled())
     return;
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     player = players[i];
     player gameRepUpdateNonPersistentPlayerInformation();
   }
@@ -190,14 +190,14 @@ gameRepAnalyzeAndReport() {
   if(!isGameRepEnabled())
     return;
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     player = players[i];
     player gameRepUpdatePersistentPlayerInformation();
   }
   splitscreenPlayerCount = 0;
-  for (i = 0; i < game["gameRep"]["playerNames"].size; i++) {
+  for(i = 0; i < game["gameRep"]["playerNames"].size; i++) {
     playerName = game["gameRep"]["playerNames"][i];
-    for (j = 0; j < game["gameRep"]["params"].size; j++) {
+    for(j = 0; j < game["gameRep"]["params"].size; j++) {
       paramName = game["gameRep"]["params"][j];
       if(isGameRepParamValid(paramName))
         setMaximumParamValueForCurrentGame(paramName, getParamValueForPlayer(playerName, paramName));
@@ -206,7 +206,7 @@ gameRepAnalyzeAndReport() {
     splitscreenPlayerCount += getParamValueForPlayer(playerName, paramName);
     setMaximumParamValueForCurrentGame(paramName, splitscreenPlayerCount);
   }
-  for (j = 0; j < game["gameRep"]["params"].size; j++) {
+  for(j = 0; j < game["gameRep"]["params"].size; j++) {
     paramName = game["gameRep"]["params"][j];
     if(isGameRepParamValid(paramName) && game["gameRep"]["max"][paramName] >= getGameRepParamLimit(paramName)) {
       gameRepPrepareAndReportFilm();
@@ -221,7 +221,7 @@ gameRepAnalyzeAndReport() {
 }
 gameRepPrepareAndReportFilm(name) {
   columnIndex = 1;
-  for (j = 0; j < game["gameRep"]["params"].size; j++) {
+  for(j = 0; j < game["gameRep"]["params"].size; j++) {
     paramName = game["gameRep"]["params"][j];
     if(isGameRepParamIgnoredForReporting(paramName))
       continue;

@@ -78,7 +78,7 @@ zombie_director_light_update(local_client_num, set, newEnt) {
       DeleteFx(i, player._zombie_director_light_fx);
       player._zombie_director_light_fx = undefined;
     }
-    player._zombie_director_light_fx = PlayFXOnTag(i, level._effect[self.health_fx], self, "tag_light");
+    player._zombie_director_light_fx = playFXOnTag(i, level._effect[self.health_fx], self, "tag_light");
   }
 }
 
@@ -100,8 +100,8 @@ zombie_director_death(local_client_num, set, newEnt) {
         DeleteFx(i, player._zombie_director_death_torso_fx);
         player._zombie_director_death_torso_fx = undefined;
       }
-      player.zombie_director_impact_humangun = PlayFXOnTag(i, level._effect["director_death_head"], self, "j_neck");
-      player._zombie_director_death_torso_fx = PlayFXOnTag(i, level._effect["director_death_torso"], self, "J_SpineLower");
+      player.zombie_director_impact_humangun = playFXOnTag(i, level._effect["director_death_head"], self, "j_neck");
+      player._zombie_director_death_torso_fx = playFXOnTag(i, level._effect["director_death_torso"], self, "J_SpineLower");
     }
   } else {
     for(i = 0; i < players.size; i++) {
@@ -135,6 +135,6 @@ humangun_director_hit_response(local_client_num, set, newEnt, upgraded) {
     if(upgraded) {
       impact_fx = level._effect["director_impact_humangun_upgraded"];
     }
-    player._zombie_director_impact_humangun_fx = PlayFXOnTag(i, impact_fx, self, "J_SpineLower");
+    player._zombie_director_impact_humangun_fx = playFXOnTag(i, impact_fx, self, "J_SpineLower");
   }
 }

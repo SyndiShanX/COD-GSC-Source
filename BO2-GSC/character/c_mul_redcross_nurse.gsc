@@ -4,7 +4,7 @@
 **********************************************/
 
 main() {
-  self setmodel("c_mul_redcross_nurse_body");
+  self setModel("c_mul_redcross_nurse_body");
   self.headmodel = "c_mul_redcross_nurse_head1";
   self attach(self.headmodel, "", 1);
   self.voice = "american";

@@ -100,7 +100,7 @@ set_animarray_standing_left() {
   self.hideyawoffset = 90;
   self.a.array = animscripts\utility::lookupanimarray("cover_left_stand");
 
-  if(isdefined(anim.ramboanims)) {
+  if(isDefined(anim.ramboanims)) {
     self.a.array["rambo90"] = anim.ramboanims.coverleft90;
     self.a.array["rambo45"] = anim.ramboanims.coverleft45;
     self.a.array["grenade_rambo"] = anim.ramboanims.coverleftgrenade;

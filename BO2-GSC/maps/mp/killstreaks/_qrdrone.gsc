@@ -79,7 +79,7 @@ init() {
   level.qrdrone_dialog["assist"][2] = "ac130_fco_directhit";
   level.qrdrone_dialog["assist"][3] = "ac130_fco_rightontarget";
   level.qrdrone_lastdialogtime = 0;
-  level.qrdrone_nodeployzones = getentarray("no_vehicles", "targetname");
+  level.qrdrone_nodeployzones = getEntArray("no_vehicles", "targetname");
   level._effect["qrdrone_prop"] = loadfx("weapon/qr_drone/fx_qr_wash_3p");
   maps\mp\_treadfx::preloadtreadfx(level.qrdrone_vehicle);
 
@@ -88,7 +88,7 @@ init() {
   shouldtimeout = setdvar("scr_qrdrone_no_timeout", 0);
   maps\mp\killstreaks\_killstreaks::registerkillstreak("qrdrone_mp", "killstreak_qrdrone_mp", "killstreak_qrdrone", "qrdrone_used", ::tryuseqrdrone);
   maps\mp\killstreaks\_killstreaks::registerkillstreakaltweapon("qrdrone_mp", "qrdrone_turret_mp");
-  maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("qrdrone_mp", & "KILLSTREAK_EARNED_QRDRONE", & "KILLSTREAK_QRDRONE_NOT_AVAILABLE", & "KILLSTREAK_QRDRONE_INBOUND");
+  maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("qrdrone_mp", &"KILLSTREAK_EARNED_QRDRONE", &"KILLSTREAK_QRDRONE_NOT_AVAILABLE", &"KILLSTREAK_QRDRONE_INBOUND");
   maps\mp\killstreaks\_killstreaks::registerkillstreakdialog("qrdrone_mp", "mpl_killstreak_qrdrone", "kls_recondrone_used", "", "kls_recondrone_enemy", "", "kls_recondrone_ready");
   maps\mp\killstreaks\_killstreaks::registerkillstreakdevdvar("qrdrone_mp", "scr_giveqrdrone");
   maps\mp\killstreaks\_killstreaks::overrideentitycameraindemo("qrdrone_mp", 1);
@@ -127,7 +127,7 @@ givecarryqrdrone(lifeid, streakname) {
 }
 
 createcarryqrdrone(streakname, owner) {
-  pos = owner.origin + anglestoforward(owner.angles) * 4 + anglestoup(owner.angles) * 50;
+  pos = owner.origin + anglesToForward(owner.angles) * 4 + anglestoup(owner.angles) * 50;
   carryqrdrone = spawnturret("misc_turret", pos, "auto_gun_turret_mp");
   carryqrdrone.turrettype = "sentry";
   carryqrdrone setturrettype(carryqrdrone.turrettype);
@@ -152,7 +152,7 @@ createcarryqrdrone(streakname, owner) {
   carryqrdrone.soundent.angles = carryqrdrone.angles;
   carryqrdrone.soundent.origin = carryqrdrone.origin;
   carryqrdrone.soundent linkto(carryqrdrone);
-  carryqrdrone.soundent playloopsound("recondrone_idle_high");
+  carryqrdrone.soundent playLoopSound("recondrone_idle_high");
   return carryqrdrone;
 }
 
@@ -188,12 +188,12 @@ setcarryingqrdrone(carryqrdrone) {
 
   self.iscarrying = 0;
   carryqrdrone.carriedby = undefined;
-  carryqrdrone playsound("sentry_gun_plant");
+  carryqrdrone playSound("sentry_gun_plant");
   carryqrdrone notify("placed");
 }
 
 carryqrdrone_setcarried(carrier) {
-  self setcandamage(0);
+  self setCanDamage(0);
   self setcontents(0);
   self.carriedby = carrier;
   carrier.iscarrying = 1;
@@ -245,8 +245,7 @@ updatecarryqrdroneplacement(carryqrdrone) {
       if(carryqrdrone.canbeplaced) {
         if(self attackbuttonpressed())
           self notify("place_carryQRDrone");
-      } else {
-      }
+      } else {}
     }
 
     lastcanplacecarryqrdrone = carryqrdrone.canbeplaced;
@@ -342,7 +341,7 @@ createqrdrone(lifeid, owner, streakname, origin, angles, killstreak_id) {
   qrdrone.maxhealth = 250;
   qrdrone.damagetaken = 0;
   qrdrone.destroyed = 0;
-  qrdrone setcandamage(1);
+  qrdrone setCanDamage(1);
   qrdrone enableaimassist();
   qrdrone.smoking = 0;
   qrdrone.inheliproximity = 0;
@@ -366,8 +365,8 @@ createqrdrone(lifeid, owner, streakname, origin, angles, killstreak_id) {
   qrdrone thread maps\mp\_heatseekingmissile::missiletarget_lockonmonitor(self, "end_remote");
   qrdrone thread maps\mp\_heatseekingmissile::missiletarget_proximitydetonateincomingmissile("crashing");
   qrdrone.emp_fx = spawn("script_model", self.origin);
-  qrdrone.emp_fx setmodel("tag_origin");
-  qrdrone.emp_fx linkto(self, "tag_origin", vectorscale((0, 0, -1), 20.0) + anglestoforward(self.angles) * 6);
+  qrdrone.emp_fx setModel("tag_origin");
+  qrdrone.emp_fx linkto(self, "tag_origin", vectorscale((0, 0, -1), 20.0) + anglesToForward(self.angles) * 6);
   qrdrone maps\mp\gametypes\_spawning::create_qrdrone_influencers(qrdrone.team);
   return qrdrone;
 }
@@ -527,14 +526,14 @@ deleteonkillbrush(player) {
   player endon("disconnect");
   self endon("death");
   killbrushes = [];
-  hurt = getentarray("trigger_hurt", "classname");
+  hurt = getEntArray("trigger_hurt", "classname");
 
   foreach(trig in hurt) {
     if(trig.origin[2] <= player.origin[2] && (!isDefined(trig.script_parameters) || trig.script_parameters != "qrdrone_safe"))
       killbrushes[killbrushes.size] = trig;
   }
 
-  crate_triggers = getentarray("crate_kill_trigger", "targetname");
+  crate_triggers = getEntArray("crate_kill_trigger", "targetname");
 
   while(true) {
     for(i = 0; i < killbrushes.size; i++) {
@@ -595,7 +594,7 @@ qrdrone_play_single_fx_on_tag(effect, tag) {
     self.damage_fx_ent delete();
   }
 
-  playfxontag(effect, self, "tag_origin");
+  playFXOnTag(effect, self, "tag_origin");
 }
 
 qrdrone_update_damage_fx(health_percent) {
@@ -686,14 +685,13 @@ qrdrone_death(attacker, weapon, dir, damagetype) {
       attacker addweaponstat(weapon, "destroyed_qrdrone", 1);
       attacker maps\mp\_challenges::addflyswatterstat(weapon, self);
       attacker addweaponstat(weapon, "destroyed_controlled_killstreak", 1);
-    } else {
-    }
+    } else {}
   }
 
   self thread qrdrone_crash_movement(attacker, dir);
 
   if(weapon == "emp_grenade_mp")
-    playfxontag(level.ai_tank_stun_fx, self.emp_fx, "tag_origin");
+    playFXOnTag(level.ai_tank_stun_fx, self.emp_fx, "tag_origin");
 
   self waittill("crash_done");
 
@@ -706,8 +704,8 @@ qrdrone_death(attacker, weapon, dir, damagetype) {
 }
 
 death_fx() {
-  playfxontag(self.deathfx, self, self.deathfxtag);
-  self playsound("veh_qrdrone_sparks");
+  playFXOnTag(self.deathfx, self, self.deathfxtag);
+  self playSound("veh_qrdrone_sparks");
 }
 
 qrdrone_crash_movement(attacker, hitdir) {
@@ -732,7 +730,7 @@ qrdrone_crash_movement(attacker, hitdir) {
   self.crash_accel = randomfloatrange(75, 110);
   self thread qrdrone_crash_accel();
   self thread qrdrone_collision();
-  self playsound("veh_qrdrone_dmg_hit");
+  self playSound("veh_qrdrone_dmg_hit");
   self thread qrdrone_dmg_snd();
   wait 0.1;
 
@@ -746,7 +744,7 @@ qrdrone_crash_movement(attacker, hitdir) {
 qrdrone_dmg_snd() {
   dmg_ent = spawn("script_origin", self.origin);
   dmg_ent linkto(self);
-  dmg_ent playloopsound("veh_qrdrone_dmg_loop");
+  dmg_ent playLoopSound("veh_qrdrone_dmg_loop");
   self waittill_any("crash_done", "death");
   dmg_ent stoploopsound(0.2);
   wait 2;
@@ -809,10 +807,10 @@ qrdrone_collision() {
 
     if(normal[2] < 0.7) {
       self setvehvelocity(velocity + normal * 70);
-      self playsound("veh_qrdrone_wall");
-      playfx(level._effect["quadrotor_nudge"], self.origin);
+      self playSound("veh_qrdrone_wall");
+      playFX(level._effect["quadrotor_nudge"], self.origin);
     } else {
-      self playsound("veh_qrdrone_explo");
+      self playSound("veh_qrdrone_explo");
       self notify("crash_done");
     }
   }
@@ -1038,9 +1036,9 @@ qrdrone_cleanup() {
 }
 
 qrdrone_light_fx() {
-  playfxontag(level.chopper_fx["light"]["belly"], self, "tag_light_nose");
+  playFXOnTag(level.chopper_fx["light"]["belly"], self, "tag_light_nose");
   wait 0.05;
-  playfxontag(level.chopper_fx["light"]["tail"], self, "tag_light_tail1");
+  playFXOnTag(level.chopper_fx["light"]["tail"], self, "tag_light_tail1");
 }
 
 qrdrone_dialog(dialoggroup) {
@@ -1134,7 +1132,7 @@ qrdrone_blowup(attacker, weaponname) {
   physicsexplosionsphere(origin, radius, radius, 1, max_damage, min_damage);
   maps\mp\gametypes\_shellshock::rcbomb_earthquake(origin);
   playsoundatposition("veh_qrdrone_explo", self.origin);
-  playfx(level.qrdrone_fx["explode"], explosionorigin, (0, 0, 1));
+  playFX(level.qrdrone_fx["explode"], explosionorigin, (0, 0, 1));
   self hide();
 
   if(isDefined(self.owner)) {

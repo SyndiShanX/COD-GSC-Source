@@ -7,7 +7,7 @@
 // Decompiled by https://github.com/xensik/gsc-tool
 
 main() {
-  self setmodel("mp_body_henchmen_lmg_b");
+  self setModel("mp_body_henchmen_lmg_b");
   codescripts\character::attachhead("alias_henchmen_heads_mp", xmodelalias\alias_henchmen_heads_mp::main());
   self setviewmodel("viewhands_henchmen");
   self.voice = "russian";

@@ -5,16 +5,16 @@
 ********************************/
 
 init_cao() {
-  level.cao_loc = spawnstruct();
+  level.cao_loc = spawnStruct();
   level.cao_loc.origin = (4065, -950, -69);
   level.cao_loc.angles = (0, 267, 0);
-  level.cao_head = spawnstruct();
+  level.cao_head = spawnStruct();
   level.cao_head.origin = (4065, -970, -75);
   level.cao_head.angles = (0, 267, 0);
-  level.cao_loc_collection = spawnstruct();
+  level.cao_loc_collection = spawnStruct();
   level.cao_loc_collection.origin = (4050, -950, -68);
   level.cao_loc_collection.angles = (0, 267, 0);
-  level.cao_head_collection = spawnstruct();
+  level.cao_head_collection = spawnStruct();
   level.cao_head_collection.origin = (4050, -970, -75);
   level.cao_head_collection.angles = (0, 267, 0);
   level.collections = 0;
@@ -59,7 +59,7 @@ handlecaomodechange(var_0) {
     self notify("handleRotateAvatar");
     var_1 = level.vlavatars[level.vl_focus];
 
-    if(isdefined(var_1)) {
+    if(isDefined(var_1)) {
       var_2 = maps\mp\_vl_cac::getfactionteam();
       var_3 = maps\mp\_vl_cac::getfactionenvironment();
       maps\mp\_vl_avatar::vl_avatar_costume(self, var_1, var_1.savedcostume, var_1.primaryweapon, var_2, var_3);
@@ -92,14 +92,14 @@ handlecaomodechange(var_0) {
   } else if(maps\mp\_utility::is_true(level.cao)) {
     var_1 = level.vlavatars[level.vl_focus];
 
-    if(isdefined(var_1)) {
-      if(isdefined(var_1.savedcostume)) {
+    if(isDefined(var_1)) {
+      if(isDefined(var_1.savedcostume)) {
         var_2 = maps\mp\_vl_cac::getfactionteam();
         var_3 = maps\mp\_vl_cac::getfactionenvironment();
         maps\mp\_vl_avatar::vl_avatar_costume(self, var_1, var_1.savedcostume, var_1.primaryweapon, var_2, var_3);
       }
 
-      if(isdefined(var_1.savedcharactercamoindex)) {
+      if(isDefined(var_1.savedcharactercamoindex)) {
         var_1 _meth_857C(var_1.savedcharactercamoindex);
         var_1._id_A7ED = var_1.savedcharactercamoindex;
       }
@@ -154,7 +154,7 @@ handlecostumepreview(var_0) {
   var_5 = level.vlavatars[var_4];
   maps\mp\_vl_avatar::showavataronly(var_5, 0);
 
-  if(isdefined(var_5)) {
+  if(isDefined(var_5)) {
     var_5 buildpreviewcostume(var_3);
     var_6 = maps\mp\_vl_cac::getfactionteam();
     var_7 = maps\mp\_vl_cac::getfactionenvironment();
@@ -186,7 +186,7 @@ handlecamopreview(var_0) {
   var_5 = level.vlavatars[var_4];
   maps\mp\_vl_avatar::showavataronly(var_5, 0);
 
-  if(isdefined(var_5)) {
+  if(isDefined(var_5)) {
     var_5._id_A7ED = var_3;
     var_5 _meth_857C(var_5._id_A7ED);
   }
@@ -246,7 +246,7 @@ handlecollectionsmodechange(var_0, var_1) {
     playerresetavatarcollectionscamo();
     var_2 = level.vlavatars[level.vl_focus];
 
-    if(isdefined(var_2)) {
+    if(isDefined(var_2)) {
       var_2.savedcollectionscostume = undefined;
       var_2.savedcollectionscharactercamoindex = undefined;
 
@@ -263,7 +263,7 @@ handlecollectionsmodechange(var_0, var_1) {
 playerresetavatarcollectionscostume() {
   var_0 = level.vlavatars[level.vl_focus];
 
-  if(isdefined(var_0) && isdefined(var_0.savedcollectionscostume)) {
+  if(isDefined(var_0) && isDefined(var_0.savedcollectionscostume)) {
     var_1 = maps\mp\_vl_cac::getfactionteam();
     var_2 = maps\mp\_vl_cac::getfactionenvironment();
     maps\mp\_vl_avatar::vl_avatar_costume(self, var_0, var_0.savedcollectionscostume, var_0.primaryweapon, var_1, var_2);
@@ -273,7 +273,7 @@ playerresetavatarcollectionscostume() {
 playerresetavatarcollectionscamo() {
   var_0 = level.vlavatars[level.vl_focus];
 
-  if(isdefined(var_0) && isdefined(var_0.savedcollectionscharactercamoindex)) {
+  if(isDefined(var_0) && isDefined(var_0.savedcollectionscharactercamoindex)) {
     self _meth_857C(var_0.savedcollectionscharactercamoindex);
     var_0 _meth_857C(var_0.savedcollectionscharactercamoindex);
     var_0._id_A7ED = var_0.savedcollectionscharactercamoindex;
@@ -346,10 +346,10 @@ handlearmorymodechange(var_0) {
     maps\mp\_vl_base::playerpopcameramode();
     var_1 = level.vlavatars[level.vl_focus];
 
-    if(isdefined(var_1)) {
+    if(isDefined(var_1)) {
       maps\mp\_vl_avatar::playerteleportavatartocac(var_1);
 
-      if(isdefined(var_1.savedarmorycharactercamoindex)) {
+      if(isDefined(var_1.savedarmorycharactercamoindex)) {
         var_3 = maps\mp\_vl_cac::getfactionteam();
         var_4 = maps\mp\_vl_cac::getfactionenvironment();
         maps\mp\_vl_avatar::vl_avatar_costume(self, var_1, var_1.savedarmorycostume, var_1.primaryweapon, var_3, var_4);
@@ -491,7 +491,7 @@ handledepotcostumeapply(var_0) {
   var_4 = maps\mp\_vl_base::getfocusfromcontroller(var_2);
   var_5 = level.vlavatars[var_4];
 
-  if(isdefined(var_5)) {
+  if(isDefined(var_5)) {
     var_5 buildpreviewcostume(var_3);
     var_6 = maps\mp\_vl_cac::getfactionteam();
     var_7 = maps\mp\_vl_cac::getfactionenvironment();
@@ -506,7 +506,7 @@ handledepotcamoapply(var_0) {
   var_4 = maps\mp\_vl_base::getfocusfromcontroller(var_2);
   var_5 = level.vlavatars[var_4];
 
-  if(isdefined(var_5)) {
+  if(isDefined(var_5)) {
     var_5._id_A7ED = var_3;
     var_5 _meth_857C(var_5._id_A7ED);
     self _meth_857C(var_5._id_A7ED);

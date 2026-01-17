@@ -67,7 +67,7 @@ hunkerdown() {
 
     self orientmode("face angle", self.angles[1]);
     self animmode("zonly_physics", 0);
-    playfx(anim._effect["bigdog_dust_cloud"], self.origin);
+    playFX(anim._effect["bigdog_dust_cloud"], self.origin);
     animname = "hunker_down" + animsuffix();
     hunkeranim = animarray(animname, "stop");
     self setflaggedanimknoballrestart("hunker", hunkeranim, % root, 1, 0.2, 1);

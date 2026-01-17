@@ -17,21 +17,21 @@
 #namespace speedburst;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_speed_burst", & __init__, undefined, undefined);
+  system::register("gadget_speed_burst", &__init__, undefined, undefined);
 }
 
 function __init__() {
   clientfield::register("toplayer", "speed_burst", 1, 1, "int");
-  ability_player::register_gadget_activation_callbacks(13, & gadget_speed_burst_on, & gadget_speed_burst_off);
-  ability_player::register_gadget_possession_callbacks(13, & gadget_speed_burst_on_give, & gadget_speed_burst_on_take);
-  ability_player::register_gadget_flicker_callbacks(13, & gadget_speed_burst_on_flicker);
-  ability_player::register_gadget_is_inuse_callbacks(13, & gadget_speed_burst_is_inuse);
-  ability_player::register_gadget_is_flickering_callbacks(13, & gadget_speed_burst_is_flickering);
-  if(!isdefined(level.vsmgr_prio_visionset_speedburst)) {
+  ability_player::register_gadget_activation_callbacks(13, &gadget_speed_burst_on, &gadget_speed_burst_off);
+  ability_player::register_gadget_possession_callbacks(13, &gadget_speed_burst_on_give, &gadget_speed_burst_on_take);
+  ability_player::register_gadget_flicker_callbacks(13, &gadget_speed_burst_on_flicker);
+  ability_player::register_gadget_is_inuse_callbacks(13, &gadget_speed_burst_is_inuse);
+  ability_player::register_gadget_is_flickering_callbacks(13, &gadget_speed_burst_is_flickering);
+  if(!isDefined(level.vsmgr_prio_visionset_speedburst)) {
     level.vsmgr_prio_visionset_speedburst = 60;
   }
-  visionset_mgr::register_info("visionset", "speed_burst", 1, level.vsmgr_prio_visionset_speedburst, 9, 1, & visionset_mgr::ramp_in_out_thread_per_player_death_shutdown, 0);
-  callback::on_connect( & gadget_speed_burst_on_connect);
+  visionset_mgr::register_info("visionset", "speed_burst", 1, level.vsmgr_prio_visionset_speedburst, 9, 1, &visionset_mgr::ramp_in_out_thread_per_player_death_shutdown, 0);
+  callback::on_connect(&gadget_speed_burst_on_connect);
 }
 
 function gadget_speed_burst_is_inuse(slot) {
@@ -74,7 +74,7 @@ function gadget_speed_burst_off(slot, weapon) {
   self clientfield::set_to_player("speed_burst", 0);
   self.speedburstlastontime = gettime();
   self.speedburston = 0;
-  if(isalive(self) && (isdefined(self.speedburstkill) && self.speedburstkill) && isdefined(level.playgadgetsuccess)) {
+  if(isalive(self) && (isDefined(self.speedburstkill) && self.speedburstkill) && isDefined(level.playgadgetsuccess)) {
     self[[level.playgadgetsuccess]](weapon);
   }
   self.speedburstkill = 0;
@@ -87,7 +87,7 @@ function gadget_speed_burst_flicker(slot, weapon) {
   }
   eventtime = self._gadgets_player[slot].gadget_flickertime;
   self set_gadget_status("Flickering", eventtime);
-  while (true) {
+  while(true) {
     if(!self gadgetflickering(slot)) {
       self set_gadget_status("Normal");
       return;
@@ -98,7 +98,7 @@ function gadget_speed_burst_flicker(slot, weapon) {
 
 function set_gadget_status(status, time) {
   timestr = "";
-  if(isdefined(time)) {
+  if(isDefined(time)) {
     timestr = (("^3") + ", time: ") + time;
   }
   if(getdvarint("scr_cpower_debug_prints") > 0) {

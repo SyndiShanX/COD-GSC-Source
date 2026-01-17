@@ -32,7 +32,7 @@ trigger_spawn_manager_setup() {
   trigger_types[trigger_types.size] = "trigger_radius";
   trigger_types[trigger_types.size] = "trigger_lookat";
   for(i = 0; i < trigger_types.size; i++) {
-    triggers = getentarray(trigger_types[i], "classname");
+    triggers = getEntArray(trigger_types[i], "classname");
     for(j = 0; j < triggers.size; j++) {
       trigger = triggers[j];
       if(trigger has_spawnflag(level.SPAWNFLAG_TRIGGER_SPAWN_MANAGER)) {
@@ -58,7 +58,7 @@ spawn_manager_create_spawn_manager_struct(from_ent) {
   if(!isDefined(from_ent)) {
     from_ent = self;
   }
-  spawn_manager_ent = SpawnStruct();
+  spawn_manager_ent = spawnStruct();
   spawn_manager_ent.script_noteworthy = "spawn_manager";
   IsTrigger = IsSubStr(tolower(from_ent.classname), "trigger");
   if(!isDefined(from_ent.targetname)) {

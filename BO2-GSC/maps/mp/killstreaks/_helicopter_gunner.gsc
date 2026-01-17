@@ -17,7 +17,7 @@
 
 init() {
   registerkillstreak("helicopter_player_gunner_mp", "helicopter_player_gunner_mp", "killstreak_helicopter_player_gunner", "helicopter_used", ::heli_gunner_killstreak, 1);
-  registerkillstreakstrings("helicopter_player_gunner_mp", & "KILLSTREAK_EARNED_HELICOPTER_GUNNER", & "KILLSTREAK_HELICOPTER_GUNNER_NOT_AVAILABLE", & "KILLSTREAK_HELICOPTER_GUNNER_INBOUND");
+  registerkillstreakstrings("helicopter_player_gunner_mp", &"KILLSTREAK_EARNED_HELICOPTER_GUNNER", &"KILLSTREAK_HELICOPTER_GUNNER_NOT_AVAILABLE", &"KILLSTREAK_HELICOPTER_GUNNER_INBOUND");
   registerkillstreakdialog("helicopter_player_gunner_mp", "mpl_killstreak_osprey_strt", "kls_playerheli_used", "", "kls_playerheli_enemy", "", "kls_playerheli_ready");
   registerkillstreakdevdvar("helicopter_player_gunner_mp", "scr_givehelicopter_player_gunner");
   registerkillstreakaltweapon("helicopter_player_gunner_mp", "cobra_minigun_mp");
@@ -130,7 +130,7 @@ heli_gunner_spawn(hardpointtype) {
   self.heli.zoffset = vectorscale((0, 0, 1), 120.0);
   self.heli.playermovedrecently = 0;
   self.heli.soundmod = "default_loud";
-  attack_nodes = getentarray("heli_attack_area", "targetname");
+  attack_nodes = getEntArray("heli_attack_area", "targetname");
 
   if(attack_nodes.size) {
     self.heli thread heli_fly_well(level.heli_primary_path[0], attack_nodes);
@@ -409,7 +409,7 @@ getoriginoffsets(goalnode) {
   maxtraces = 40;
   traceoffset = vectorscale((0, 0, -1), 196.0);
 
-  for(traceorigin = bullettrace(startorigin + traceoffset, endorigin + traceoffset, 0, self); distancesquared(traceorigin["position"], endorigin + traceoffset) > 10 && numtraces < maxtraces; traceorigin = bullettrace(startorigin + traceoffset, endorigin + traceoffset, 0, self)) {
+  for(traceorigin = bulletTrace(startorigin + traceoffset, endorigin + traceoffset, 0, self); distancesquared(traceorigin["position"], endorigin + traceoffset) > 10 && numtraces < maxtraces; traceorigin = bulletTrace(startorigin + traceoffset, endorigin + traceoffset, 0, self)) {
     println("trace failed: " + distancesquared(traceorigin["position"], endorigin + traceoffset));
 
     if(startorigin[2] < endorigin[2])
@@ -512,7 +512,7 @@ spawnplayerhelicopter(owner, type, origin, angles, hardpointtype) {
   heli setenemymodel(level.chopper_models[type]["enemy"]);
   heli.chaff_offset = level.chaff_offset[type];
   heli.death_model = level.chopper_death_models[type][owner.team];
-  heli playloopsound(level.chopper_sounds[type][owner.team]);
+  heli playLoopSound(level.chopper_sounds[type][owner.team]);
   heli.defaultweapon = "cobra_20mm_mp";
   heli.owner = owner;
   heli.team = owner.team;
@@ -525,7 +525,7 @@ spawnplayerhelicopter(owner, type, origin, angles, hardpointtype) {
 
   if(isDefined(level.chopper_interior_models) && isDefined(level.chopper_interior_models[type]) && isDefined(level.chopper_interior_models[type][owner.team])) {
     heli.interior_model = spawn("script_model", heli.origin);
-    heli.interior_model setmodel(level.chopper_interior_models[type][owner.team]);
+    heli.interior_model setModel(level.chopper_interior_models[type][owner.team]);
     heli.interior_model linkto(heli, "tag_origin", (0, 0, 0), (0, 0, 0));
   }
 
@@ -599,7 +599,7 @@ inithelicopter(isdriver, hardpointtype) {
   self.heli.maxlifetime = 55000;
   self.heli.donotstop = 1;
   self.heli.targetent = spawn("script_model", (0, 0, 0));
-  self.heli.targetent setmodel("tag_origin");
+  self.heli.targetent setModel("tag_origin");
   self.heli.health = 99999999;
   self.heli setturningability(1);
   self.heli.starttime = gettime();
@@ -734,10 +734,10 @@ hind_watch_rocket_fire(player) {
   while(isDefined(self) && self.health > 0 && isDefined(self.targetent)) {
     player waittill("missile_fire", missile);
     missile.killcament = player;
-    origin = player geteye();
-    forward = anglestoforward(player getplayerangles());
+    origin = player getEye();
+    forward = anglesToForward(player getplayerangles());
     endpoint = origin + forward * 15000;
-    trace = bullettrace(origin, endpoint, 0, self);
+    trace = bulletTrace(origin, endpoint, 0, self);
     missile missile_settarget(self.targetent, trace["position"]);
   }
 
@@ -789,7 +789,7 @@ hind_out_of_rockets(player) {
     player.alt_ammo_hud.alpha = 0.0;
 
   wait(max(0, level.heli_missile_reload_time - 0.5));
-  self.snd_ent playsound(level.chopper_sounds["missile_reload"]);
+  self.snd_ent playSound(level.chopper_sounds["missile_reload"]);
   wait 0.5;
 
   if(isDefined(player.alt_title))
@@ -807,15 +807,15 @@ hind_out_of_rockets(player) {
 fire_rocket(tagname, player) {
   start_origin = self gettagorigin(tagname);
   trace_angles = self gettagangles("tag_flash");
-  forward = anglestoforward(trace_angles);
+  forward = anglesToForward(trace_angles);
   trace_origin = self gettagorigin("tag_flash");
   trace_direction = self gettagangles("tag_barrel");
-  trace_direction = anglestoforward(trace_direction) * 5000;
-  trace = bullettrace(trace_origin, trace_origin + trace_direction, 0, self);
+  trace_direction = anglesToForward(trace_direction) * 5000;
+  trace = bulletTrace(trace_origin, trace_origin + trace_direction, 0, self);
   end_origin = trace["position"];
   magicbullet("heli_gunner_rockets_mp", start_origin, end_origin, self);
   player playlocalsound("wpn_gunner_rocket_fire_plr");
-  self playsound("wpn_rpg_fire_npc");
+  self playSound("wpn_rpg_fire_npc");
   player playrumbleonentity("damage_heavy");
   earthquake(0.35, 0.5, start_origin, 1000, self);
 }
@@ -1169,7 +1169,7 @@ hud_minigun_think() {
 
     while(player attackbuttonpressed()) {
       wait 0.05;
-      player playloopsound("wpn_hind_minigun_fire_plr_loop");
+      player playLoopSound("wpn_hind_minigun_fire_plr_loop");
       self.minigun_hud["gun"] setshader("hud_hind_cannon0" + swap_counter, 64, 64);
 
       if(swap_counter == 5)
@@ -1225,7 +1225,7 @@ hud_rocket_create() {
   self.rocket_hud["loading_bar"].shader = "hud_hind_rocket_loading_fill";
   self.rocket_hud["loading_bar"] setshader("hud_hind_rocket_loading_fill", 20, 5);
   self.rocket_hud["loading_bar"].hidewheninmenu = 1;
-  self.rocket_hud["loading_bar_bg"] = spawnstruct();
+  self.rocket_hud["loading_bar_bg"] = spawnStruct();
   self.rocket_hud["loading_bar_bg"].elemtype = "bar";
   self.rocket_hud["loading_bar_bg"].bar = self.rocket_hud["loading_bar"];
   self.rocket_hud["loading_bar_bg"].width = 20;

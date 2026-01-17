@@ -18,7 +18,7 @@
 #namespace callback;
 
 function autoexec __init__sytem__() {
-  system::register("callback", & __init__, undefined, undefined);
+  system::register("callback", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -26,28 +26,26 @@ function __init__() {
 }
 
 function set_default_callbacks() {
-  level.callbackplayerspawned = & playerspawned;
-  level.callbacklocalclientconnect = & localclientconnect;
-  level.callbackentityspawned = & entityspawned;
-  level.callbackhostmigration = & host_migration;
-  level.callbackplayaifootstep = & footsteps::playaifootstep;
-  level.callbackplaylightloopexploder = & exploder::playlightloopexploder;
-  level._custom_weapon_cb_func = & spawned_weapon_type;
+  level.callbackplayerspawned = &playerspawned;
+  level.callbacklocalclientconnect = &localclientconnect;
+  level.callbackentityspawned = &entityspawned;
+  level.callbackhostmigration = &host_migration;
+  level.callbackplayaifootstep = &footsteps::playaifootstep;
+  level.callbackplaylightloopexploder = &exploder::playlightloopexploder;
+  level._custom_weapon_cb_func = &spawned_weapon_type;
 }
 
 function localclientconnect(localclientnum) {
   println("" + localclientnum);
   callback("hash_da8d7d74", localclientnum);
-  if(isdefined(level.charactercustomizationsetup)) {
-    [
-      [level.charactercustomizationsetup]
-    ](localclientnum);
+  if(isDefined(level.charactercustomizationsetup)) {
+    [[level.charactercustomizationsetup]](localclientnum);
   }
 }
 
 function playerspawned(localclientnum) {
   self endon("entityshutdown");
-  if(isdefined(level._playerspawned_override)) {
+  if(isDefined(level._playerspawned_override)) {
     self thread[[level._playerspawned_override]](localclientnum);
     return;
   }
@@ -62,20 +60,20 @@ function playerspawned(localclientnum) {
 function entityspawned(localclientnum) {
   self endon("entityshutdown");
   if(self isplayer()) {
-    if(isdefined(level._clientfaceanimonplayerspawned)) {
+    if(isDefined(level._clientfaceanimonplayerspawned)) {
       self thread[[level._clientfaceanimonplayerspawned]](localclientnum);
     }
   }
-  if(isdefined(level._entityspawned_override)) {
+  if(isDefined(level._entityspawned_override)) {
     self thread[[level._entityspawned_override]](localclientnum);
     return;
   }
-  if(!isdefined(self.type)) {
+  if(!isDefined(self.type)) {
     println("");
     return;
   }
   if(self.type == "missile") {
-    if(isdefined(level._custom_weapon_cb_func)) {
+    if(isDefined(level._custom_weapon_cb_func)) {
       self thread[[level._custom_weapon_cb_func]](localclientnum);
     }
     switch (self.weapon.name) {
@@ -86,7 +84,7 @@ function entityspawned(localclientnum) {
     }
   } else {
     if(self.type == "vehicle" || self.type == "helicopter" || self.type == "plane") {
-      if(isdefined(level._customvehiclecbfunc)) {
+      if(isDefined(level._customvehiclecbfunc)) {
         self thread[[level._customvehiclecbfunc]](localclientnum);
       }
       self thread vehicle::field_toggle_exhaustfx_handler(localclientnum, undefined, 0, 1);
@@ -97,7 +95,7 @@ function entityspawned(localclientnum) {
         self thread driving_fx::play_driving_fx(localclientnum);
       }
     } else if(self.type == "actor") {
-      if(isdefined(level._customactorcbfunc)) {
+      if(isDefined(level._customactorcbfunc)) {
         self thread[[level._customactorcbfunc]](localclientnum);
       }
     }

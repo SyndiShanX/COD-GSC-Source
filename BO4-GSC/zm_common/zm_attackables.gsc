@@ -17,7 +17,6 @@
 #include scripts\zm_common\zm_stats;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
-
 #namespace zm_attackables;
 
 autoexec __init__system__() {
@@ -86,7 +85,7 @@ get_attackable_slot(entity) {
   return false;
 }
 
-private clear_slots() {
+clear_slots() {
   foreach(slot in self.slot) {
     if(!isalive(slot.entity)) {
       slot.entity = undefined;

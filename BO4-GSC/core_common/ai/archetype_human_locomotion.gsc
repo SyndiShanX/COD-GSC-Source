@@ -7,7 +7,6 @@
 #include scripts\core_common\ai\systems\behavior_state_machine;
 #include scripts\core_common\ai\systems\behavior_tree_utility;
 #include scripts\core_common\ai_shared;
-
 #namespace archetype_human_locomotion;
 
 autoexec registerbehaviorscriptfunctions() {
@@ -69,12 +68,12 @@ autoexec registerbehaviorscriptfunctions() {
   behaviorstatemachine::registerbsmscriptapiinternal(#"bsmlocomotionhasvalidpaininterrupt", &bsmlocomotionhasvalidpaininterrupt);
 }
 
-private tacticalwalkscanterminate(entity) {
+tacticalwalkscanterminate(entity) {
   entity.lasttacticalscantime = gettime();
   return true;
 }
 
-private shouldtacticalwalkscan(entity) {
+shouldtacticalwalkscan(entity) {
   if(isDefined(entity.lasttacticalscantime) && entity.lasttacticalscantime + 2000 > gettime()) {
     return false;
   }
@@ -103,7 +102,7 @@ private shouldtacticalwalkscan(entity) {
   return false;
 }
 
-private continuetacticalwalkscan(entity) {
+continuetacticalwalkscan(entity) {
   if(!entity haspath()) {
     return false;
   }
@@ -130,7 +129,7 @@ private continuetacticalwalkscan(entity) {
   return false;
 }
 
-private shouldtacticalwalkpain(entity) {
+shouldtacticalwalkpain(entity) {
   if((!isDefined(entity.startpaintime) || entity.startpaintime + 3000 < gettime()) && randomfloat(1) > 0.25) {
     return bsmlocomotionhasvalidpaininterrupt(entity);
   }
@@ -138,20 +137,20 @@ private shouldtacticalwalkpain(entity) {
   return 0;
 }
 
-private begintacticalwalkpain(entity) {
+begintacticalwalkpain(entity) {
   entity.startpaintime = gettime();
   return true;
 }
 
-private shouldcontinuetacticalwalkpain(entity) {
+shouldcontinuetacticalwalkpain(entity) {
   return entity.startpaintime + 100 >= gettime();
 }
 
-private bsmlocomotionhasvalidpaininterrupt(entity) {
+bsmlocomotionhasvalidpaininterrupt(entity) {
   return entity hasvalidinterrupt("pain");
 }
 
-private shouldarriveexposed(behaviortreeentity) {
+shouldarriveexposed(behaviortreeentity) {
   if(behaviortreeentity ai::get_behavior_attribute("disablearrivals")) {
     return false;
   }
@@ -165,17 +164,17 @@ private shouldarriveexposed(behaviortreeentity) {
   return true;
 }
 
-private preparetostopnearenemy(behaviortreeentity) {
+preparetostopnearenemy(behaviortreeentity) {
   behaviortreeentity clearpath();
   behaviortreeentity.keepclaimednode = 1;
 }
 
-private preparetomoveawayfromnearbyenemy(behaviortreeentity) {
+preparetomoveawayfromnearbyenemy(behaviortreeentity) {
   behaviortreeentity clearpath();
   behaviortreeentity.keepclaimednode = 1;
 }
 
-private shouldplanarrivalintocover(behaviortreeentity) {
+shouldplanarrivalintocover(behaviortreeentity) {
   goingtocovernode = isDefined(behaviortreeentity.node) && iscovernode(behaviortreeentity.node);
 
   if(!goingtocovernode) {
@@ -202,7 +201,7 @@ private shouldplanarrivalintocover(behaviortreeentity) {
   return false;
 }
 
-private shouldswitchtotacticalwalkfromrun(behaviortreeentity) {
+shouldswitchtotacticalwalkfromrun(behaviortreeentity) {
   if(!behaviortreeentity haspath()) {
     return false;
   }
@@ -234,7 +233,7 @@ private shouldswitchtotacticalwalkfromrun(behaviortreeentity) {
   return false;
 }
 
-private humannoncombatlocomotioncondition(behaviortreeentity) {
+humannoncombatlocomotioncondition(behaviortreeentity) {
   if(!behaviortreeentity haspath()) {
     return false;
   }
@@ -254,7 +253,7 @@ private humannoncombatlocomotioncondition(behaviortreeentity) {
   return true;
 }
 
-private humancombatlocomotioncondition(behaviortreeentity) {
+humancombatlocomotioncondition(behaviortreeentity) {
   if(!behaviortreeentity haspath()) {
     return false;
   }
@@ -274,7 +273,7 @@ private humancombatlocomotioncondition(behaviortreeentity) {
   return false;
 }
 
-private combatlocomotionstart(behaviortreeentity) {
+combatlocomotionstart(behaviortreeentity) {
   behaviortreeentity setblackboardattribute("_desired_stance", "stand");
   randomchance = randomint(100);
 
@@ -292,7 +291,7 @@ private combatlocomotionstart(behaviortreeentity) {
   return true;
 }
 
-private noncombatlocomotionupdate(behaviortreeentity) {
+noncombatlocomotionupdate(behaviortreeentity) {
   if(!behaviortreeentity haspath()) {
     return false;
   }
@@ -314,7 +313,7 @@ private noncombatlocomotionupdate(behaviortreeentity) {
   return true;
 }
 
-private combatlocomotionupdate(behaviortreeentity) {
+combatlocomotionupdate(behaviortreeentity) {
   if(!behaviortreeentity haspath()) {
     return false;
   }
@@ -340,12 +339,12 @@ private combatlocomotionupdate(behaviortreeentity) {
   return false;
 }
 
-private prepareformovement(behaviortreeentity) {
+prepareformovement(behaviortreeentity) {
   behaviortreeentity setblackboardattribute("_stance", "stand");
   return true;
 }
 
-private isarrivingfour(arrivalangle) {
+isarrivingfour(arrivalangle) {
   if(arrivalangle >= 45 && arrivalangle <= 120) {
     return true;
   }
@@ -353,7 +352,7 @@ private isarrivingfour(arrivalangle) {
   return false;
 }
 
-private isarrivingone(arrivalangle) {
+isarrivingone(arrivalangle) {
   if(arrivalangle >= 120 && arrivalangle <= 165) {
     return true;
   }
@@ -361,7 +360,7 @@ private isarrivingone(arrivalangle) {
   return false;
 }
 
-private isarrivingtwo(arrivalangle) {
+isarrivingtwo(arrivalangle) {
   if(arrivalangle >= 165 && arrivalangle <= 195) {
     return true;
   }
@@ -369,7 +368,7 @@ private isarrivingtwo(arrivalangle) {
   return false;
 }
 
-private isarrivingthree(arrivalangle) {
+isarrivingthree(arrivalangle) {
   if(arrivalangle >= 195 && arrivalangle <= 240) {
     return true;
   }
@@ -377,7 +376,7 @@ private isarrivingthree(arrivalangle) {
   return false;
 }
 
-private isarrivingsix(arrivalangle) {
+isarrivingsix(arrivalangle) {
   if(arrivalangle >= 240 && arrivalangle <= 315) {
     return true;
   }
@@ -385,7 +384,7 @@ private isarrivingsix(arrivalangle) {
   return false;
 }
 
-private isfacingfour(facingangle) {
+isfacingfour(facingangle) {
   if(facingangle >= 45 && facingangle <= 135) {
     return true;
   }
@@ -393,7 +392,7 @@ private isfacingfour(facingangle) {
   return false;
 }
 
-private isfacingeight(facingangle) {
+isfacingeight(facingangle) {
   if(facingangle >= -45 && facingangle <= 45) {
     return true;
   }
@@ -401,7 +400,7 @@ private isfacingeight(facingangle) {
   return false;
 }
 
-private isfacingseven(facingangle) {
+isfacingseven(facingangle) {
   if(facingangle >= 0 && facingangle <= 90) {
     return true;
   }
@@ -409,7 +408,7 @@ private isfacingseven(facingangle) {
   return false;
 }
 
-private isfacingsix(facingangle) {
+isfacingsix(facingangle) {
   if(facingangle >= -135 && facingangle <= -45) {
     return true;
   }
@@ -417,7 +416,7 @@ private isfacingsix(facingangle) {
   return false;
 }
 
-private isfacingnine(facingangle) {
+isfacingnine(facingangle) {
   if(facingangle >= -90 && facingangle <= 0) {
     return true;
   }
@@ -425,7 +424,7 @@ private isfacingnine(facingangle) {
   return false;
 }
 
-private shouldtacticalarrivecondition(behaviortreeentity) {
+shouldtacticalarrivecondition(behaviortreeentity) {
   if(getdvarint(#"enabletacticalarrival", 0) != 1) {
     return false;
   }
@@ -434,7 +433,7 @@ private shouldtacticalarrivecondition(behaviortreeentity) {
     return false;
   }
 
-  if(!(behaviortreeentity.node.type == #"cover left")) {
+  if(!(behaviortreeentity.node.type == # "cover left")) {
     return false;
   }
 
@@ -494,12 +493,12 @@ private shouldtacticalarrivecondition(behaviortreeentity) {
   return true;
 }
 
-private humanshouldsprint() {
+humanshouldsprint() {
   currentlocomovementtype = self getblackboardattribute("_human_locomotion_movement_type");
   return currentlocomovementtype == "human_locomotion_movement_sprint";
 }
 
-private planhumanarrivalatcover(behaviortreeentity, arrivalanim) {
+planhumanarrivalatcover(behaviortreeentity, arrivalanim) {
   if(behaviortreeentity ai::get_behavior_attribute("disablearrivals")) {
     return false;
   }
@@ -522,7 +521,7 @@ private planhumanarrivalatcover(behaviortreeentity, arrivalanim) {
     }
 
     if(isDefined(arrivalanim)) {
-      isright = behaviortreeentity.node.type == #"cover right";
+      isright = behaviortreeentity.node.type == # "cover right";
       splittime = getarrivalsplittime(arrivalanim, isright);
       issplitarrival = splittime < 1;
       nodeapproachyaw = behaviortreeentity getnodeoffsetangles(behaviortreeentity.node)[1];
@@ -582,7 +581,7 @@ private planhumanarrivalatcover(behaviortreeentity, arrivalanim) {
   return false;
 }
 
-private checkcoverarrivalconditions(coverenterpos, coverpos) {
+checkcoverarrivalconditions(coverenterpos, coverpos) {
   distsqtonode = distancesquared(self.origin, coverpos);
   distsqfromnodetoenterpos = distancesquared(coverpos, coverenterpos);
   awayfromenterpos = distsqtonode >= distsqfromnodetoenterpos + 150;
@@ -593,14 +592,14 @@ private checkcoverarrivalconditions(coverenterpos, coverpos) {
 
   trace = groundtrace(coverenterpos + (0, 0, 72), coverenterpos + (0, 0, -72), 0, 0, 0);
 
-  if(isDefined(trace[#"position"]) && abs(trace[#"position"][2] - coverpos[2]) > 30) {
+  if(isDefined(trace[# "position"]) && abs(trace[# "position"][2] - coverpos[2]) > 30) {
     if(getdvarint(#"ai_debugarrivals", 0)) {
       recordcircle(coverenterpos, 1, (1, 0, 0), "<dev string:x38>");
       record3dtext("<dev string:x4e>", coverenterpos, (1, 0, 0), "<dev string:x38>", undefined, 0.4);
-      recordcircle(trace[#"position"], 1, (1, 0, 0), "<dev string:x38>");
-      record3dtext("<dev string:x67>" + int(abs(trace[#"position"][2] - coverpos[2])), trace[#"position"] + (0, 0, 5), (1, 0, 0), "<dev string:x38>", undefined, 0.4);
-      record3dtext("<dev string:x7e>" + 30, trace[#"position"], (1, 0, 0), "<dev string:x38>", undefined, 0.4);
-      recordline(coverenterpos, trace[#"position"], (1, 0, 0), "<dev string:x38>");
+      recordcircle(trace[# "position"], 1, (1, 0, 0), "<dev string:x38>");
+      record3dtext("<dev string:x67>" + int(abs(trace[# "position"][2] - coverpos[2])), trace[# "position"] + (0, 0, 5), (1, 0, 0), "<dev string:x38>", undefined, 0.4);
+      record3dtext("<dev string:x7e>" + 30, trace[# "position"], (1, 0, 0), "<dev string:x38>", undefined, 0.4);
+      recordline(coverenterpos, trace[# "position"], (1, 0, 0), "<dev string:x38>");
     }
 
     return false;
@@ -609,7 +608,7 @@ private checkcoverarrivalconditions(coverenterpos, coverpos) {
   return true;
 }
 
-private getarrivalsplittime(arrivalanim, isright) {
+getarrivalsplittime(arrivalanim, isright) {
   if(!isDefined(level.animarrivalsplittimes)) {
     level.animarrivalsplittimes = [];
   }
@@ -632,7 +631,7 @@ private getarrivalsplittime(arrivalanim, isright) {
   return bestsplit;
 }
 
-private deltarotate(delta, yaw) {
+deltarotate(delta, yaw) {
   cosine = cos(yaw);
   sine = sin(yaw);
   return (delta[0] * cosine - delta[1] * sine, delta[1] * cosine + delta[0] * sine, 0);

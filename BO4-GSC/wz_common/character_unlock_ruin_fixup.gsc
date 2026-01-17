@@ -5,15 +5,14 @@
 
 #include scripts\core_common\system_shared;
 #include scripts\wz_common\character_unlock_fixup;
-
 #namespace character_unlock_ruin_fixup;
 
 autoexec __init__system__() {
-  system::register(#"character_unlock_ruin_fixup", &__init__, undefined, #"character_unlock_fixup");
+  system::register(#"character_unlock_ruin_fixup", &__init__, undefined, # "character_unlock_fixup");
 }
 
 __init__() {
-  character_unlock_fixup::register_character_unlock(#"ruin_unlock", #"hash_63b894fa4d634238", #"cu08_item", &function_d95e620c, #"hash_4e9ba934add76371");
+  character_unlock_fixup::register_character_unlock(#"ruin_unlock", # "hash_63b894fa4d634238", # "cu08_item", &function_d95e620c, # "hash_4e9ba934add76371");
 }
 
 function_d95e620c() {

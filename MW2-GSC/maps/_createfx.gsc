@@ -24,7 +24,7 @@ createfx() {
 
   // SP only stuff
   ai = getaiarray();
-  for (i = 0; i < ai.size; i++)
+  for(i = 0; i < ai.size; i++)
     ai[i] delete();
 
   thread createFxLogic();

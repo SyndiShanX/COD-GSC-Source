@@ -188,7 +188,7 @@ kill_lockon_screen_message(n_time) {
 }
 
 locksighttest(target) {
-  eyepos = self geteye();
+  eyepos = self getEye();
 
   if(!isDefined(target))
     return false;
@@ -298,7 +298,7 @@ setnoclearance() {
     debug = 1;
 
   playerangles = self getplayerangles();
-  forward = anglestoforward(playerangles);
+  forward = anglesToForward(playerangles);
   right = anglestoright(playerangles);
   up = anglestoup(playerangles);
   origin = self.origin + (0, 0, 60) + right * 10;
@@ -306,7 +306,7 @@ setnoclearance() {
 
   for(idx = 0; idx < checks.size; idx++) {
     endpoint = origin + forward * 400 + up * checks[idx][2] + right * checks[idx][0];
-    trace = bullettrace(origin, endpoint, 0, undefined);
+    trace = bulletTrace(origin, endpoint, 0, undefined);
 
     if(trace["fraction"] < 1) {
       obstructed = 1;
@@ -359,7 +359,7 @@ looplocallocksound(alias, interval) {
   }
   self.stingerlocksound = 1;
   player = get_players()[0];
-  player playloopsound(alias, 0.05);
+  player playLoopSound(alias, 0.05);
   self waittill_any("stop_locked_sound", "disconnect", "death");
   player stoploopsound(0.05);
   self.stingerlocksound = undefined;

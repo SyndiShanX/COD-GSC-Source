@@ -67,12 +67,11 @@ main() {
   maps\mp\gametypes\_globallogic_audio::registerdialoggroup("gamemode_changing_c", 0);
 }
 
-onprecachegametype() {
-}
+onprecachegametype() {}
 
 onstartgametype() {
-  setobjectivetext("allies", & "OBJECTIVES_DOM");
-  setobjectivetext("axis", & "OBJECTIVES_DOM");
+  setobjectivetext("allies", &"OBJECTIVES_DOM");
+  setobjectivetext("axis", &"OBJECTIVES_DOM");
 
   if(!isDefined(game["switchedsides"]))
     game["switchedsides"] = 0;
@@ -85,15 +84,15 @@ onstartgametype() {
   }
 
   if(level.splitscreen) {
-    setobjectivescoretext("allies", & "OBJECTIVES_DOM");
-    setobjectivescoretext("axis", & "OBJECTIVES_DOM");
+    setobjectivescoretext("allies", &"OBJECTIVES_DOM");
+    setobjectivescoretext("axis", &"OBJECTIVES_DOM");
   } else {
-    setobjectivescoretext("allies", & "OBJECTIVES_DOM_SCORE");
-    setobjectivescoretext("axis", & "OBJECTIVES_DOM_SCORE");
+    setobjectivescoretext("allies", &"OBJECTIVES_DOM_SCORE");
+    setobjectivescoretext("axis", &"OBJECTIVES_DOM_SCORE");
   }
 
-  setobjectivehinttext("allies", & "OBJECTIVES_DOM_HINT");
-  setobjectivehinttext("axis", & "OBJECTIVES_DOM_HINT");
+  setobjectivehinttext("allies", &"OBJECTIVES_DOM_HINT");
+  setobjectivehinttext("axis", &"OBJECTIVES_DOM_HINT");
   level.flagbasefxid = [];
   level.flagbasefxid["allies"] = loadfx("misc/fx_ui_flagbase_" + game["allies"]);
   level.flagbasefxid["axis"] = loadfx("misc/fx_ui_flagbase_" + game["axis"]);
@@ -244,8 +243,8 @@ domflags() {
   precachestring(&"MP_DOM_FLAG_C_CAPTURED_BY");
   precachestring(&"MP_DOM_FLAG_D_CAPTURED_BY");
   precachestring(&"MP_DOM_FLAG_E_CAPTURED_BY");
-  primaryflags = getentarray("flag_primary", "targetname");
-  secondaryflags = getentarray("flag_secondary", "targetname");
+  primaryflags = getEntArray("flag_primary", "targetname");
+  secondaryflags = getEntArray("flag_secondary", "targetname");
 
   if(primaryflags.size + secondaryflags.size < 2) {
     println("^1Not enough domination flags found in level!");
@@ -274,7 +273,7 @@ domflags() {
       visuals[0].angles = trigger.angles;
     }
 
-    visuals[0] setmodel(level.flagmodel["neutral"]);
+    visuals[0] setModel(level.flagmodel["neutral"]);
     name = istring(trigger.script_label);
     precachestring(name);
     domflag = maps\mp\gametypes\_gameobjects::createuseobject("neutral", trigger, visuals, (0, 0, 0), name);
@@ -292,9 +291,9 @@ domflags() {
     domflag.onupdateuserate = ::onupdateuserate;
     tracestart = visuals[0].origin + vectorscale((0, 0, 1), 32.0);
     traceend = visuals[0].origin + vectorscale((0, 0, -1), 32.0);
-    trace = bullettrace(tracestart, traceend, 0, undefined);
+    trace = bulletTrace(tracestart, traceend, 0, undefined);
     upangles = vectortoangles(trace["normal"]);
-    domflag.baseeffectforward = anglestoforward(upangles);
+    domflag.baseeffectforward = anglesToForward(upangles);
     domflag.baseeffectright = anglestoright(upangles);
     domflag.baseeffectpos = trace["position"];
     level.flags[index].useobj = domflag;
@@ -443,36 +442,36 @@ onuse(player) {
   label = self maps\mp\gametypes\_gameobjects::getlabel();
   player logstring("flag captured: " + self.label);
   self maps\mp\gametypes\_gameobjects::setownerteam(team);
-  self.visuals[0] setmodel(level.flagmodel[team]);
+  self.visuals[0] setModel(level.flagmodel[team]);
   setdvar("scr_obj" + self maps\mp\gametypes\_gameobjects::getlabel(), team);
   self resetflagbaseeffect();
   level.usestartspawns = 0;
   assert(team != "neutral");
   isbflag = 0;
-  string = & "";
+  string = &"";
 
   switch (label) {
     case "_a":
-      string = & "MP_DOM_FLAG_A_CAPTURED_BY";
+      string = &"MP_DOM_FLAG_A_CAPTURED_BY";
       break;
     case "_b":
-      string = & "MP_DOM_FLAG_B_CAPTURED_BY";
+      string = &"MP_DOM_FLAG_B_CAPTURED_BY";
       isbflag = 1;
       break;
     case "_c":
-      string = & "MP_DOM_FLAG_C_CAPTURED_BY";
+      string = &"MP_DOM_FLAG_C_CAPTURED_BY";
       break;
     case "_d":
-      string = & "MP_DOM_FLAG_D_CAPTURED_BY";
+      string = &"MP_DOM_FLAG_D_CAPTURED_BY";
       break;
     case "_e":
-      string = & "MP_DOM_FLAG_E_CAPTURED_BY";
+      string = &"MP_DOM_FLAG_E_CAPTURED_BY";
       break;
     default:
       break;
   }
 
-  assert(string != & "");
+  assert(string != &"");
   touchlist = [];
   touchkeys = getarraykeys(self.touchlist[team]);
 
@@ -485,7 +484,7 @@ onuse(player) {
   if(oldteam == "neutral") {
     self.singleowner = 1;
     otherteam = getotherteam(team);
-    thread printandsoundoneveryone(team, undefined, & "", undefined, "mp_war_objective_taken");
+    thread printandsoundoneveryone(team, undefined, &"", undefined, "mp_war_objective_taken");
     thread playsoundonplayers("mus_dom_captured" + "_" + level.teampostfix[team]);
 
     if(getteamflagcount(team) == level.flags.size) {
@@ -500,7 +499,7 @@ onuse(player) {
     }
   } else {
     self.singleowner = 0;
-    thread printandsoundoneveryone(team, oldteam, & "", & "", "mp_war_objective_taken", "mp_war_objective_lost", "");
+    thread printandsoundoneveryone(team, oldteam, &"", &"", "mp_war_objective_taken", "mp_war_objective_lost", "");
 
     if(getteamflagcount(team) == level.flags.size) {
       statusdialog("secure_all", team, "gamemode_objective");
@@ -683,12 +682,8 @@ onroundswitch() {
   game["switchedsides"] = !game["switchedsides"];
 
   if(level.roundscorecarry == 0) {
-    [
-      [level._setteamscore]
-    ]("allies", game["roundswon"]["allies"]);
-    [
-      [level._setteamscore]
-    ]("axis", game["roundswon"]["axis"]);
+    [[level._setteamscore]]("allies", game["roundswon"]["allies"]);
+    [[level._setteamscore]]("axis", game["roundswon"]["axis"]);
   }
 }
 
@@ -959,7 +954,7 @@ getownedflagspawns(team) {
 flagsetup() {
   maperrors = [];
   descriptorsbylinkname = [];
-  descriptors = getentarray("flag_descriptor", "targetname");
+  descriptors = getEntArray("flag_descriptor", "targetname");
   flags = level.flags;
 
   for(i = 0; i < level.domflags.size; i++) {

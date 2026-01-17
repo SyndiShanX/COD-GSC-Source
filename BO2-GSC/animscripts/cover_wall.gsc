@@ -85,7 +85,7 @@ cover_wall_think(covertype) {
   else
     self.a.special = "cover_crouch";
 
-  behaviorcallbacks = spawnstruct();
+  behaviorcallbacks = spawnStruct();
   behaviorcallbacks.reload = ::coverreload;
   behaviorcallbacks.leavecoverandshoot = ::leavecoverandshoot;
   behaviorcallbacks.look = ::look;
@@ -105,7 +105,7 @@ initcovercrouchnode() {
     return;
   }
   crouchheightoffset = vectorscale((0, 0, 1), 42.0);
-  forward = anglestoforward(self.angles);
+  forward = anglesToForward(self.angles);
   self.covernode.crouchingisok = sighttracepassed(self.origin + crouchheightoffset, self.origin + crouchheightoffset + vectorscale(forward, 64), 0, undefined);
 }
 
@@ -242,7 +242,7 @@ flinch() {
     return false;
   }
 
-  forward = anglestoforward(self.angles);
+  forward = anglesToForward(self.angles);
   stepto = self.origin + vectorscale(forward, -16);
 
   if(!self maymovetopoint(stepto)) {
@@ -484,7 +484,7 @@ createturret(posent, weaponinfo, weaponmodel) {
   turret = spawnturret("misc_turret", posent.origin, weaponinfo);
   turret.angles = posent.angles;
   turret.aiowner = self;
-  turret setmodel(weaponmodel);
+  turret setModel(weaponmodel);
   turret maketurretusable();
   turret setdefaultdroppitch(0);
 
@@ -564,7 +564,7 @@ needtochangecovermode() {
   if(self.covertype != "crouch")
     return false;
 
-  pitch = getshootpospitch(self geteye());
+  pitch = getshootpospitch(self getEye());
 
   if(self.a.covermode == "lean")
     return pitch < 10;
@@ -654,7 +654,7 @@ rambostepout() {
   if(pitch > 15)
     return false;
 
-  forward = anglestoforward(self.angles);
+  forward = anglesToForward(self.angles);
   rambooutpos = self.origin + forward * -16;
 
   self thread debugrambooutposition(rambooutpos);

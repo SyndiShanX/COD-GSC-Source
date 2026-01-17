@@ -314,7 +314,7 @@ UpdateRunWeights(notifyString, frontAnim, backAnim, leftAnim, rightAnim) {
     UpdateRunWeightsOnce(frontAnim, backAnim, leftAnim, rightAnim);
     wait .05;
   }
-  for (;;) {
+  for(;;) {
     UpdateRunWeightsOnce(frontAnim, backAnim, leftAnim, rightAnim);
     wait .2;
   }
@@ -331,7 +331,7 @@ UpdateRunWeightsOnce(frontAnim, backAnim, leftAnim, rightAnim) {
 UpdateRunWeightsBiasForward(notifyString, frontAnim, backAnim, leftAnim, rightAnim) {
   self endon("killanimscript");
   self endon(notifyString);
-  for (;;) {
+  for(;;) {
     animWeights = animscripts\utility::QuadrantAnimWeights(self getMotionAngle());
     if(animWeights["front"] < .2)
       animWeights["front"] = .2;
@@ -346,11 +346,11 @@ UpdateRunWeightsBiasForward(notifyString, frontAnim, backAnim, leftAnim, rightAn
 MakeRunSounds(notifyString) {
   self endon("killanimscript");
   self endon(notifyString);
-  for (;;) {
+  for(;;) {
     wait .5;
-    self playsound("misc_step1");
+    self playSound("misc_step1");
     wait .5;
-    self playsound("misc_step2");
+    self playSound("misc_step2");
   }
 }
 

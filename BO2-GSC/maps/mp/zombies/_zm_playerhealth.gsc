@@ -19,10 +19,10 @@ init() {
   level.difficultytype[1] = "normal";
   level.difficultytype[2] = "hardened";
   level.difficultytype[3] = "veteran";
-  level.difficultystring["easy"] = & "GAMESKILL_EASY";
-  level.difficultystring["normal"] = & "GAMESKILL_NORMAL";
-  level.difficultystring["hardened"] = & "GAMESKILL_HARDENED";
-  level.difficultystring["veteran"] = & "GAMESKILL_VETERAN";
+  level.difficultystring["easy"] = &"GAMESKILL_EASY";
+  level.difficultystring["normal"] = &"GAMESKILL_NORMAL";
+  level.difficultystring["hardened"] = &"GAMESKILL_HARDENED";
+  level.difficultystring["veteran"] = &"GAMESKILL_VETERAN";
 
   thread playerhealthdebug();
 
@@ -367,17 +367,13 @@ healthoverlay_remove(overlay) {
   overlay.alpha = 0;
 }
 
-empty_kill_func(type, loc, point, attacker, amount) {
-}
+empty_kill_func(type, loc, point, attacker, amount) {}
 
-loghit(newhealth, invultime) {
-}
+loghit(newhealth, invultime) {}
 
-logregen(newhealth) {
-}
+logregen(newhealth) {}
 
-showhitlog() {
-}
+showhitlog() {}
 
 playerhealthdebug() {
   if(getdvar(#"scr_health_debug") == "")

@@ -33,7 +33,7 @@ player_dof_attenuation() {
   var_0 maps\_cinematography::cinseq_key("begin_blur") maps\_cinematography::cinseq_key_time(0) maps\_cinematography::cinseq_key_dyndof_values("constant_fallout", 1.2, 140, 1.4, 0.6);
   var_0 maps\_cinematography::cinseq_key("end_blur") maps\_cinematography::cinseq_key_time(2) maps\_cinematography::cinseq_key_dyndof_values("constant_fallout", 1.7, 180, 1.4, 0.6);
 
-  for (;;) {
+  for(;;) {
     if(!common_scripts\utility::flag("collapse")) {
       var_0 maps\_cinematography::cinseq_key("end_blur") maps\_cinematography::cinseq_key_time(randomfloatrange(2, 4));
       var_0 maps\_cinematography::cinseq_start_sequence();
@@ -60,7 +60,7 @@ player_random_blur() {
   var_0 maps\_cinematography::cinseq_key("finalize_fov") maps\_cinematography::cinseq_key_time(4) maps\_cinematography::cinseq_key_lerp_fov_default(2.5) maps\_cinematography::cinseq_key_gauss_blur(0.25, 2);
   wait(randomfloatrange(0.25, 0.75));
 
-  while (!common_scripts\utility::flag("building_collapse_back") && !common_scripts\utility::flag("building_collapse_side")) {
+  while(!common_scripts\utility::flag("building_collapse_back") && !common_scripts\utility::flag("building_collapse_side")) {
     common_scripts\utility::flag_set("player_blur");
     var_2 = randomfloatrange(0.5, 1.5);
     var_0 maps\_cinematography::cinseq_key("end_blur") maps\_cinematography::cinseq_key_time(2.5 + var_2);
@@ -88,14 +88,14 @@ handle_building_collapses() {
   var_0.frequency_roll = 12;
   var_1 = [];
 
-  for (var_2 = 1; var_2 <= 5; var_2++) {
+  for(var_2 = 1; var_2 <= 5; var_2++) {
     var_1[var_2] = maps\_cinematography::cinematic_sequence("building_collapse_" + var_2);
     var_3 = var_1[var_2] maps\_cinematography::cinseq_key("set_dof") maps\_cinematography::cinseq_key_time(0) maps\_cinematography::cinseq_key_dyndof_priority("building_view", 10);
     var_4 = var_1[var_2] maps\_cinematography::cinseq_key("camera_shake") maps\_cinematography::cinseq_key_time(0.4) maps\_cinematography::cinseq_key_screen_shake(var_0);
     var_3 = var_1[var_2] maps\_cinematography::cinseq_key("remove_dof") maps\_cinematography::cinseq_key_time(2) maps\_cinematography::cinseq_key_dyndof_priority("building_view", -2);
   }
 
-  for (;;) {
+  for(;;) {
     var_5 = 0;
     level waittill("building_collapse", var_5);
 
@@ -121,7 +121,7 @@ set_level_lighting_values() {
 }
 
 set_level_lighting_default() {
-  for (;;) {
+  for(;;) {
     level waittill("aftermath_lighting_default", var_0);
     level.player maps\_utility::set_light_set_player("aftermath");
     level.player setclutforplayer("clut_h1_aftermath", var_0);
@@ -129,7 +129,7 @@ set_level_lighting_default() {
 }
 
 set_level_lighting_pain() {
-  for (;;) {
+  for(;;) {
     level waittill("aftermath_lighting_pain", var_0);
     level.player maps\_utility::set_light_set_player("aftermath");
     level.player setclutforplayer("clut_h1_aftermath_pain", var_0);
@@ -154,7 +154,7 @@ set_level_lighting_pain() {
 }
 
 set_level_lighting_glow() {
-  for (;;) {
+  for(;;) {
     level waittill("aftermath_lighting_glow", var_0);
     level.player maps\_utility::set_light_set_player("aftermath_glow");
     level.player setclutforplayer("clut_h1_aftermath_glow", var_0);

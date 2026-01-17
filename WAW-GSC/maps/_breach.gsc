@@ -37,7 +37,7 @@ breach_think(aBreachers, sBreachType, sHintString, bSpawnHostiles, bPlayDefaultF
   self.hostilesSpawned = false;
   assertEx((aBreachers.size <= 2), "You cannot send more than 2 AI to perform a breach");
   assertEx((isDefined(self.targetname)), "Room volume must have a targetname to use the breach fuctions");
-  aVolumes = getentarray(self.targetname, "targetname");
+  aVolumes = getEntArray(self.targetname, "targetname");
   assertEx((aVolumes.size == 1), "There are multiple room volumes with the same targetname: " + self.targetname);
   sRoomName = self.targetname;
   self.sBadplaceName = "badplace_" + sRoomName;
@@ -89,7 +89,7 @@ breach_think(aBreachers, sBreachType, sHintString, bSpawnHostiles, bPlayDefaultF
       self.animEnt = getent(self.eDoor.target, "targetname");
       assertEx((isDefined(self.animEnt)), "Room volume " + self.targetname + " needs it's script_brushmodel door door to target a script_origin in the lower right hand corner of the door frame. Make this script_origin point in towards the room being breached.");
       assertEx((self.animEnt.classname == "script_origin"), "Room volume " + self.targetname + " needs it's script_brushmodel door door to target a script_origin in the lower right hand corner of the door frame. Make this script_origin point in towards the room being breached.");
-      self.eDoor.vector = anglestoforward(self.animEnt.angles);
+      self.eDoor.vector = anglesToForward(self.animEnt.angles);
     }
     self.eExploderOrigin = getent(self.eDoor.script_linkto, "script_linkname");
     assertex(isDefined(self.eExploderOrigin), "A script_brushmodel/script_model door needs to script_linkTo an exploder (script_origin) to play particles when opened. Targetname:" + self.targetname);
@@ -110,7 +110,7 @@ breach_think(aBreachers, sBreachType, sHintString, bSpawnHostiles, bPlayDefaultF
   self thread breach_cleanup(aBreachers);
   self thread breach_play_fx(sBreachType, bPlayDefaultFx);
   iFirstBreachers = 0;
-  for (i = 0; i < aBreachers.size; i++) {
+  for(i = 0; i < aBreachers.size; i++) {
     if(isDefined(aBreachers[i].firstBreacher)) {
       iFirstBreachers++;
       self.closestAI = aBreachers[i];
@@ -122,9 +122,9 @@ breach_think(aBreachers, sBreachType, sHintString, bSpawnHostiles, bPlayDefaultF
     self.closestAI = getClosest(self.animEnt.origin, aBreachers);
   if(aBreachers.size == 1)
     self.singleBreacher = true;
-  for (i = 0; i < aBreachers.size; i++)
+  for(i = 0; i < aBreachers.size; i++)
     aBreachers[i] thread breacher_think(self, sBreachType, bShoot);
-  while (self.breachers < aBreachers.size)
+  while(self.breachers < aBreachers.size)
     wait(0.05);
   self notify("ready_to_breach");
   self.readyToBreach = true;
@@ -137,7 +137,7 @@ breach_think(aBreachers, sBreachType, sHintString, bSpawnHostiles, bPlayDefaultF
   flag_set("begin_the_breach");
   self.aboutToBeBreached = true;
   if(isDefined(bSpawnHostiles) && (bSpawnHostiles == true)) {
-    spawners = getentarray("hostiles_" + sRoomName, "targetname");
+    spawners = getEntArray("hostiles_" + sRoomName, "targetname");
     assertEx((isDefined(spawners)), "Could not find spawners with targetname of hostiles_" + sRoomName + " for room volume " + self.targetname);
     self waittill("spawn_hostiles");
     spawnBreachHostiles(spawners);
@@ -147,21 +147,21 @@ breach_think(aBreachers, sBreachType, sHintString, bSpawnHostiles, bPlayDefaultF
     badplace_cylinder(self.sBadplaceName, -1, self.badplace.origin, self.badplace.radius, 200, "axis");
   ai = getaiarray("axis");
   aHostiles = [];
-  for (i = 0; i < ai.size; i++) {
+  for(i = 0; i < ai.size; i++) {
     if(ai[i] isTouching(self))
       aHostiles[aHostiles.size] = ai[i];
   }
   if(aHostiles.size > 0)
     array_thread(aHostiles, ::breach_enemies_stunned, self);
-  while (!self.AIareInTheRoom)
+  while(!self.AIareInTheRoom)
     wait(0.05);
   self notify("breach_complete");
   if(!aHostiles.size) {
     return;
   }
-  while (!self.cleared) {
+  while(!self.cleared) {
     wait(0.05);
-    for (i = 0; i < aHostiles.size; i++) {
+    for(i = 0; i < aHostiles.size; i++) {
       if(!isalive(aHostiles[i]))
         aHostiles = array_remove(aHostiles, aHostiles[i]);
       if(aHostiles.size == 0)
@@ -171,7 +171,7 @@ breach_think(aBreachers, sBreachType, sHintString, bSpawnHostiles, bPlayDefaultF
 }
 
 breach_dont_fire() {
-  while (self.breaching == true) {
+  while(self.breaching == true) {
     self waittillmatch("single anim", "fire");
     self.a.lastShootTime = gettime();
   }
@@ -292,7 +292,7 @@ breacher_think(eVolume, sBreachType, bShoot) {
   eVolume.AIareInTheRoom = true;
   self pushplayer(false);
   self breach_reset_animname();
-  while (!eVolume.cleared)
+  while(!eVolume.cleared)
     wait(0.05);
   self.breaching = false;
 }
@@ -313,7 +313,7 @@ detcord_logic(eVolume) {
   angles_hand = self gettagangles(sHandTag);
   self detach("weapon_detcord", sHandTag);
   model_detcord = spawn("script_model", org_hand);
-  model_detcord setmodel("weapon_detcord");
+  model_detcord setModel("weapon_detcord");
   model_detcord.angles = angles_hand;
   eVolume waittill("detpack_detonated");
   radiusdamage(model_detcord.origin, 64, 50, 25);
@@ -350,7 +350,7 @@ breach_trigger_think(eRoomVolume) {
     if(isDefined(eRoomVolume.eDoor)) {
       eRoomVolume.eBreachmodel = spawn("script_model", eRoomVolume.eDoor.origin);
       eRoomVolume.eBreachmodel.angles = eRoomVolume.eDoor.angles;
-      eRoomVolume.eBreachmodel setmodel(level.door_objmodel);
+      eRoomVolume.eBreachmodel setModel(level.door_objmodel);
     }
   }
   self waittill("trigger");
@@ -372,11 +372,11 @@ breach_abort(aBreachers) {
 }
 
 breach_cleanup(aBreachers) {
-  while (!self.cleared)
+  while(!self.cleared)
     wait(0.05);
   if(isDefined(self.badplace))
     badplace_delete(self.sBadplaceName);
-  while (!self.cleared)
+  while(!self.cleared)
     wait(0.05);
   array_thread(aBreachers, ::breach_AI_reset, self);
 }
@@ -399,13 +399,13 @@ breach_play_fx(sBreachType, bPlayDefaultFx) {
       exploder(self.iExploderNum);
       thread play_sound_in_space(level.scr_sound["breach_wooden_door"], self.eExploderOrigin.origin);
       if(bPlayDefaultFx)
-        playfx(level._effect["_breach_doorbreach_detpack"], self.eExploderOrigin.origin, anglestoforward(self.eExploderOrigin.angles));
+        playFX(level._effect["_breach_doorbreach_detpack"], self.eExploderOrigin.origin, anglesToForward(self.eExploderOrigin.angles));
       break;
     case "shotgunhinges_breach_left":
       self waittill("play_breach_fx");
       exploder(self.iExploderNum);
       if(bPlayDefaultFx)
-        playfx(level._effect["_breach_doorbreach_kick"], self.eExploderOrigin.origin, anglestoforward(self.eExploderOrigin.angles));
+        playFX(level._effect["_breach_doorbreach_kick"], self.eExploderOrigin.origin, anglesToForward(self.eExploderOrigin.angles));
       break;
     case "flash_breach_no_door_right":
       break;
@@ -425,7 +425,7 @@ spawnHostile(eEntToSpawn) {
 spawnBreachHostiles(arrayToSpawn) {
   assertEx((arrayToSpawn.size > 0), "The array passed to spawnBreachHostiles function is empty");
   spawnedGuys = [];
-  for (i = 0; i < arrayToSpawn.size; i++) {
+  for(i = 0; i < arrayToSpawn.size; i++) {
     guy = spawnHostile(arrayToSpawn[i]);
     spawnedGuys[spawnedGuys.size] = guy;
   }
@@ -436,7 +436,7 @@ spawnBreachHostiles(arrayToSpawn) {
 give_infinite_ammo() {
   self endon("death");
   self endon("stop_infinite_ammo");
-  while (true) {
+  while(true) {
     self.bulletsInClip = weaponClipSize(self.weapon);
     wait(.5);
   }
@@ -446,19 +446,19 @@ door_open(sType, eVolume, bPlaySound) {
   if(!isDefined(bPlaySound))
     bPlaySound = true;
   if(bPlaysound == true)
-    self playsound(level.scr_sound["breach_wood_door_kick"]);
+    self playSound(level.scr_sound["breach_wood_door_kick"]);
   switch (sType) {
     case "explosive":
       self thread door_fall_over(eVolume.animEnt);
       self door_connectpaths();
-      self playsound(level.scr_sound["breach_wooden_door"]);
+      self playSound(level.scr_sound["breach_wooden_door"]);
       earthquake(0.4, 1, self.origin, 1000);
       radiusdamage(self.origin, 56, level.maxDetpackDamage, level.minDetpackDamage);
       break;
     case "shotgun":
       self thread door_fall_over(eVolume.animEnt);
       self door_connectpaths();
-      self playsound(level.scr_sound["breach_wooden_door"]);
+      self playSound(level.scr_sound["breach_wooden_door"]);
       break;
   }
 }
@@ -479,7 +479,7 @@ door_fall_over(animEnt) {
   assert(isDefined(animEnt));
   vector = undefined;
   if(self.classname == "script_model")
-    vector = anglestoforward(self.angles);
+    vector = anglesToForward(self.angles);
   else if(self.classname == "script_brushmodel")
     vector = self.vector;
   else

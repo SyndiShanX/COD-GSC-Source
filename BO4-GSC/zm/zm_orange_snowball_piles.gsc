@@ -13,7 +13,6 @@
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
-
 #namespace zm_orange_snowball_piles;
 
 init() {
@@ -35,7 +34,7 @@ init() {
   }
 }
 
-private function_dd028fcb(e_player) {
+function_dd028fcb(e_player) {
   var_d49d10b0 = e_player zm_loadout::get_player_lethal_grenade();
 
   if(var_d49d10b0 === level.weaponnone) {
@@ -51,7 +50,7 @@ private function_dd028fcb(e_player) {
   return 1;
 }
 
-private function_608b90b4() {
+function_608b90b4() {
   self endon(#"end_game");
 
   while(true) {
@@ -179,7 +178,7 @@ function_75a76099() {
 
 function_e1b7c710() {
   self endon(#"death");
-  level flag::wait_till_any(array("round_reset", #"trial_failed"));
+  level flag::wait_till_any(array("round_reset", # "trial_failed"));
 
   if(isDefined(self.var_3b55baa1) && isDefined(self.var_e01bb56) && self function_75a76099()) {
     self zm_loadout::set_player_lethal_grenade(self.var_3b55baa1);

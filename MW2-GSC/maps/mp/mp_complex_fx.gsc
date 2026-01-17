@@ -4,7 +4,6 @@
 ********************************************************/
 
 main() {
-
   level._effect["battlefield_smokebank_S_warm"] = loadfx("smoke/battlefield_smokebank_S_warm");
   level._effect["battlefield_smokebank_S_warm_thick"] = loadfx("smoke/battlefield_smokebank_S_warm_thick");
 
@@ -28,9 +27,7 @@ main() {
 
   level._effect["trash_spiral_runner"] = loadfx("misc/trash_spiral_runner");
 
-  /#
   if(getdvar("clientSideEffects") != "1")
     maps\createfx\mp_complex_fx::main();
-  # /
 
 }

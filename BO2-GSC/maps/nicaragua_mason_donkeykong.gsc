@@ -208,7 +208,7 @@ mason_donkeykong_player_uses_turret(vh_truck) {
   spawn_manager_enable("donkeykong_turret_targets_sm");
   self waittill("exit_vehicle");
   spawn_manager_disable("donkeykong_turret_targets_sm");
-  a_s_spawner = getentarray("donkeykong_turret_targets", "targetname");
+  a_s_spawner = getEntArray("donkeykong_turret_targets", "targetname");
 
   foreach(spawner in a_s_spawner) {
     if(isDefined(spawner))

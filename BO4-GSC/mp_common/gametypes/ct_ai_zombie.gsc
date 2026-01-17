@@ -17,29 +17,28 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\values_shared;
 #include scripts\mp_common\armor;
-
 #namespace mp_ai_zombie;
 
 autoexec __init__system__() {
   system::register(#"mp_ai_zombie", &__init__, undefined, undefined);
 }
 
-private __init__() {
+__init__() {
   clientfield::register("actor", "zombie_riser_fx", 1, 1, "int");
   clientfield::register("actor", "zombie_has_eyes", 1, 1, "int");
   level.var_9ee73630 = [];
-  level.var_9ee73630[#"walk"] = [];
-  level.var_9ee73630[#"run"] = [];
-  level.var_9ee73630[#"sprint"] = [];
-  level.var_9ee73630[#"super_sprint"] = [];
-  level.var_9ee73630[#"walk"][#"down"] = 14;
-  level.var_9ee73630[#"walk"][#"up"] = 16;
-  level.var_9ee73630[#"run"][#"down"] = 13;
-  level.var_9ee73630[#"run"][#"up"] = 12;
-  level.var_9ee73630[#"sprint"][#"down"] = 9;
-  level.var_9ee73630[#"sprint"][#"up"] = 8;
-  level.var_9ee73630[#"super_sprint"][#"down"] = 1;
-  level.var_9ee73630[#"super_sprint"][#"up"] = 1;
+  level.var_9ee73630[# "walk"] = [];
+  level.var_9ee73630[# "run"] = [];
+  level.var_9ee73630[# "sprint"] = [];
+  level.var_9ee73630[# "super_sprint"] = [];
+  level.var_9ee73630[# "walk"][# "down"] = 14;
+  level.var_9ee73630[# "walk"][# "up"] = 16;
+  level.var_9ee73630[# "run"][# "down"] = 13;
+  level.var_9ee73630[# "run"][# "up"] = 12;
+  level.var_9ee73630[# "sprint"][# "down"] = 9;
+  level.var_9ee73630[# "sprint"][# "up"] = 8;
+  level.var_9ee73630[# "super_sprint"][# "down"] = 1;
+  level.var_9ee73630[# "super_sprint"][# "up"] = 1;
   spawner::add_archetype_spawn_function(#"zombie", &function_cf051788);
   initzombiebehaviors();
   val::register("allowoffnavmesh", 1);
@@ -151,7 +150,7 @@ function_9758722(speed) {
   }
 }
 
-private function_cf051788() {
+function_cf051788() {
   self callback::function_d8abfc3d(#"on_ai_damage", &function_3d9b8ab3);
   self callback::function_d8abfc3d(#"on_ai_killed", &zombie_death_event);
   aiutility::addaioverridedamagecallback(self, &function_c75fae30);
@@ -181,7 +180,7 @@ isheadshot(shitloc) {
   return false;
 }
 
-private function_c75fae30(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, damagefromunderneath, modelindex, partname) {
+function_c75fae30(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, damagefromunderneath, modelindex, partname) {
   if(isheadshot(shitloc)) {
     idamage *= 2;
   }
@@ -189,15 +188,15 @@ private function_c75fae30(einflictor, eattacker, idamage, idflags, smeansofdeath
   return idamage;
 }
 
-private function_3d9b8ab3(params) {
+function_3d9b8ab3(params) {
   if(!isDefined(self.enemy_override) && isDefined(self.favoriteenemy) && isDefined(params.eattacker) && isplayer(params.eattacker)) {
     self.favoriteenemy = params.eattacker;
   }
 }
 
-private function_9c573bc6() {
+function_9c573bc6() {
   self notify("403817714a013a66");
-  self endon("6c94e145f7d12787", #"death");
+  self endon("6c94e145f7d12787", # "death");
 
   if(isDefined(self.allowoffnavmesh) && self.allowoffnavmesh && isDefined(level.var_5e8121a) && level.var_5e8121a) {
     self.var_ef59b90 = 5;
@@ -209,11 +208,11 @@ private function_9c573bc6() {
   self collidewithactors(1);
 }
 
-private function_e91d8371(entity) {
+function_e91d8371(entity) {
   level.var_8de0b84e = entity getentitynumber();
 }
 
-private zombieshouldmelee(entity) {
+zombieshouldmelee(entity) {
   if(isDefined(entity.enemy_override)) {
     return false;
   }
@@ -268,31 +267,31 @@ private zombieshouldmelee(entity) {
   return true;
 }
 
-private function_e8f3596d(entity) {
+function_e8f3596d(entity) {
   return isDefined(entity.var_8a96267d) && entity.var_8a96267d;
 }
 
-private function_cc184b8b(entity) {
+function_cc184b8b(entity) {
   return isDefined(entity.var_8ba6ede3) && entity.var_8ba6ede3;
 }
 
-private function_562c0e1d(entity) {
+function_562c0e1d(entity) {
   return entity haspath() || isDefined(entity.is_digging) && entity.is_digging;
 }
 
-private function_a58eaeea(entity) {
+function_a58eaeea(entity) {
   return !(isDefined(entity.missinglegs) && entity.missinglegs) && isDefined(entity.shouldreact) && entity.shouldreact;
 }
 
-private zombieshouldmove(entity) {
+zombieshouldmove(entity) {
   return entity.allowoffnavmesh || entity haspath();
 }
 
-private function_37abea6f(entity) {
+function_37abea6f(entity) {
   return isDefined(entity.var_4c4ad20a) && entity.var_4c4ad20a;
 }
 
-private function_c9153928(entity) {
+function_c9153928(entity) {
   origin = undefined;
 
   if(isDefined(self.enemy_override)) {
@@ -328,14 +327,14 @@ private function_c9153928(entity) {
   entity setblackboardattribute("_zombie_react_direction", "right");
 }
 
-private function_4402c40a(entity) {
+function_4402c40a(entity) {
   entity.var_8a96267d = undefined;
   entity.is_digging = 1;
   entity pathmode("dont move", 1);
   return true;
 }
 
-private function_6a3bcddc(entity) {
+function_6a3bcddc(entity) {
   entity ghost();
   entity notsolid();
   entity clientfield::set("zombie_riser_fx", 0);
@@ -343,31 +342,31 @@ private function_6a3bcddc(entity) {
   return true;
 }
 
-private function_55b7ea22(entity) {
+function_55b7ea22(entity) {
   entity solid();
   entity clientfield::set("zombie_riser_fx", 1);
   entity.var_8ba6ede3 = undefined;
 }
 
-private function_98b102d8(entity) {
+function_98b102d8(entity) {
   entity clientfield::set("zombie_riser_fx", 0);
   entity.is_digging = 0;
   entity pathmode("move allowed");
   entity notify(#"not_underground");
 }
 
-private function_6ec0bcc1(entity) {
+function_6ec0bcc1(entity) {
   entity.shouldreact = undefined;
   return true;
 }
 
-private zombiemoveactionstart(entity) {
+zombiemoveactionstart(entity) {
   entity.movetime = gettime();
   entity.moveorigin = entity.origin;
   return true;
 }
 
-private zombiemoveactionupdate(entity) {
+zombiemoveactionupdate(entity) {
   if(!(isDefined(entity.missinglegs) && entity.missinglegs) && gettime() - entity.movetime > 1000) {
     distsq = distance2dsquared(entity.origin, entity.moveorigin);
 
@@ -384,13 +383,13 @@ private zombiemoveactionupdate(entity) {
   return true;
 }
 
-private function_f8250d5e(entity) {
+function_f8250d5e(entity) {
   entity.idletime = gettime();
   entity.moveorigin = entity.origin;
   return true;
 }
 
-private function_860d5d8(entity) {
+function_860d5d8(entity) {
   if(!(isDefined(entity.missinglegs) && entity.missinglegs) && gettime() - entity.idletime > 1000) {
     distsq = distance2dsquared(entity.origin, entity.moveorigin);
 
@@ -407,20 +406,20 @@ private function_860d5d8(entity) {
   return true;
 }
 
-private function_a0acf641(entity) {
+function_a0acf641(entity) {
   entity.var_4c4ad20a = undefined;
   return true;
 }
 
-private function_79c3a487(entity) {
+function_79c3a487(entity) {
   entity clientfield::set("zombie_riser_fx", 1);
 }
 
-private showzombie(entity) {
+showzombie(entity) {
   entity show();
 }
 
-private function_7c7e7339() {
+function_7c7e7339() {
   switch (self.aistate) {
     case 3:
       self.goalradius = 64;
@@ -431,7 +430,7 @@ private function_7c7e7339() {
   }
 }
 
-private function_d1e55248(id, value) {
+function_d1e55248(id, value) {
   if(isDefined(value) && value) {
     self val::set(id, "allowoffnavmesh", 1);
     return;
@@ -500,8 +499,8 @@ function_e261b81d() {
   }
 }
 
-private update_goal() {
-  if(isDefined(self.var_80780af2) && (level.var_8de0b84e === self getentitynumber() || self.archetype == #"blight_father")) {
+update_goal() {
+  if(isDefined(self.var_80780af2) && (level.var_8de0b84e === self getentitynumber() || self.archetype == # "blight_father")) {
     if(!self.allowoffnavmesh && self.isonnavmesh) {
       adjustedgoal = getclosestpointonnavmesh(self.var_80780af2, 100, self getpathfindingradius());
 
@@ -586,7 +585,7 @@ ai_can_see() {
   return undefined;
 }
 
-private function_bf21ead1() {
+function_bf21ead1() {
   var_f5acb8b9 = self.favoriteenemy;
   self.enemy_override = function_b67c088d();
 
@@ -614,7 +613,7 @@ private function_bf21ead1() {
   }
 }
 
-private function_827edb6() {
+function_827edb6() {
   var_f5acb8b9 = self.favoriteenemy;
   self.enemy_override = function_b67c088d();
 
@@ -639,11 +638,11 @@ private function_827edb6() {
   }
 }
 
-private function_b67c088d() {
+function_b67c088d() {
   return undefined;
 }
 
-private function_cc9c6a13(state) {
+function_cc9c6a13(state) {
   switch (state) {
     case 1:
       self.var_9a79d89d = undefined;
@@ -668,7 +667,7 @@ private function_cc9c6a13(state) {
   }
 }
 
-private function_b8eff92a(state) {
+function_b8eff92a(state) {
   switch (state) {
     case 1:
       self function_9758722("walk");
@@ -693,7 +692,7 @@ private function_b8eff92a(state) {
   self function_7c7e7339();
 }
 
-private function_36151fe3() {
+function_36151fe3() {
   self pathmode("move allowed");
   self function_d4c687c9();
 
@@ -742,17 +741,17 @@ private function_36151fe3() {
   self.var_ef59b90 = 1;
 }
 
-private function_34eacecd() {
+function_34eacecd() {
   if(isDefined(self.enemy_override) || isDefined(self.favoriteenemy)) {
     self.var_ef59b90 = 3;
   }
 }
 
-private function_b793bca2() {
+function_b793bca2() {
   self.var_ef59b90 = 1;
 }
 
-private function_101763c9() {
+function_101763c9() {
   self endon(#"death");
   spawn_point = self.ai_zone.spawn_points[randomint(self.ai_zone.spawn_points.size)];
 
@@ -872,35 +871,35 @@ zombie_gib(amount, attacker, direction_vec, point, type, tagname, modelname, par
     }
 
     switch (self.damagelocation) {
-      case #"torso_upper":
-      case #"torso_lower":
+      case # "torso_upper":
+      case # "torso_lower":
         if(!gibserverutils::isgibbed(self, 32)) {
           gibserverutils::gibrightarm(self);
         }
 
         break;
-      case #"right_arm_lower":
-      case #"right_arm_upper":
-      case #"right_hand":
+      case # "right_arm_lower":
+      case # "right_arm_upper":
+      case # "right_hand":
         if(!gibserverutils::isgibbed(self, 32)) {
           gibserverutils::gibrightarm(self);
         }
 
         break;
-      case #"left_arm_lower":
-      case #"left_arm_upper":
-      case #"left_hand":
+      case # "left_arm_lower":
+      case # "left_arm_upper":
+      case # "left_hand":
         if(!gibserverutils::isgibbed(self, 16)) {
           gibserverutils::gibleftarm(self);
         }
 
         break;
-      case #"right_leg_upper":
-      case #"left_leg_lower":
-      case #"right_leg_lower":
-      case #"left_foot":
-      case #"right_foot":
-      case #"left_leg_upper":
+      case # "right_leg_upper":
+      case # "left_leg_lower":
+      case # "right_leg_lower":
+      case # "left_foot":
+      case # "right_foot":
+      case # "left_leg_upper":
         break;
       default:
         if(self.damagelocation == "none") {
@@ -915,8 +914,8 @@ zombie_gib(amount, attacker, direction_vec, point, type, tagname, modelname, par
 
     if(isDefined(self.missinglegs) && self.missinglegs && self.health > 0) {
       level notify(#"crawler_created", {
-        #zombie: self, 
-        #player: attacker, 
+        #zombie: self,
+        #player: attacker,
         #weapon: weapon
       });
       self allowedstances("crouch");
@@ -1051,14 +1050,14 @@ zombie_should_gib(amount, attacker, type) {
   }
 
   switch (type) {
-    case #"mod_telefrag":
-    case #"mod_unknown":
-    case #"mod_burned":
-    case #"mod_trigger_hurt":
-    case #"mod_suicide":
-    case #"mod_falling":
+    case # "mod_telefrag":
+    case # "mod_unknown":
+    case # "mod_burned":
+    case # "mod_trigger_hurt":
+    case # "mod_suicide":
+    case # "mod_falling":
       return false;
-    case #"mod_melee":
+    case # "mod_melee":
       return false;
   }
 
@@ -1149,7 +1148,7 @@ zombie_head_gib(attacker, means_of_death) {
 }
 
 damage_over_time(dmg, delay, attacker, means_of_death) {
-  self endon(#"death", #"exploding");
+  self endon(#"death", # "exploding");
 
   if(!isalive(self)) {
     return;
@@ -1183,29 +1182,29 @@ event_handler[bhtn_action_start] function_320145f7(eventstruct) {
   notify_string = eventstruct.action;
 
   switch (notify_string) {
-    case #"death":
+    case # "death":
       level thread zmbaivox_playvox(self, notify_string, 1, 4);
       break;
-    case #"pain":
+    case # "pain":
       level thread zmbaivox_playvox(self, notify_string, 1, 3);
       break;
-    case #"behind":
+    case # "behind":
       level thread zmbaivox_playvox(self, notify_string, 1, 3);
       break;
-    case #"attack_melee_notetrack":
+    case # "attack_melee_notetrack":
       level thread zmbaivox_playvox(self, "attack_melee", 1, 2, 1);
       break;
-    case #"chase_state_start":
+    case # "chase_state_start":
       level thread zmbaivox_playvox(self, "sprint", 1, 2);
       break;
-    case #"sprint":
-    case #"ambient":
-    case #"crawler":
-    case #"teardown":
-    case #"taunt":
+    case # "sprint":
+    case # "ambient":
+    case # "crawler":
+    case # "teardown":
+    case # "taunt":
       level thread zmbaivox_playvox(self, notify_string, 0, 1);
       break;
-    case #"attack_melee":
+    case # "attack_melee":
       break;
     default:
       level thread zmbaivox_playvox(self, notify_string, 0, 2);
@@ -1292,7 +1291,7 @@ zmbaivox_playvox(zombie, type, override, priority, delayambientvox = 0) {
 
 zmbaivox_ambientdelay() {
   self notify(#"sndambientdelay");
-  self endon(#"sndambientdelay", #"death", #"disconnect");
+  self endon(#"sndambientdelay", # "death", # "disconnect");
   wait 2;
   self.delayambientvox = 0;
 }
@@ -1369,7 +1368,7 @@ zmbaivox_playdeath() {
 }
 
 function_b8c2c5cc() {
-  self endon(#"death", #"disconnect");
+  self endon(#"death", # "disconnect");
 
   while(true) {
     self waittill(#"reset_pathing");

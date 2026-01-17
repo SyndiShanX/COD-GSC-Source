@@ -4,7 +4,6 @@
 ***********************************************/
 
 #include scripts\core_common\system_shared;
-
 #namespace zm_red_ffotd;
 
 autoexec __init__system__() {

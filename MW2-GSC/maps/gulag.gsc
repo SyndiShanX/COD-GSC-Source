@@ -16,7 +16,7 @@ main() {
   SetSavedDvar("com_cinematicEndInWhite", 1);
 
   //	breakpoint;
-  gulag_destructible_volumes = GetEntArray("gulag_destructible_volume", "targetname");
+  gulag_destructible_volumes = getEntArray("gulag_destructible_volume", "targetname");
   mask_destructibles_in_volumes(gulag_destructible_volumes);
   mask_interactives_in_volumes(gulag_destructible_volumes);
 
@@ -69,13 +69,13 @@ main() {
   add_start( "evac", ::start_evac, "evac", ::gulag_evac );
   */
 
-  falling_rib_chunks = GetEntArray("falling_rib_chunk", "targetname");
+  falling_rib_chunks = getEntArray("falling_rib_chunk", "targetname");
   array_thread(falling_rib_chunks, ::self_delete);
-  top_hall_exploders = GetEntArray("top_hall_exploder", "targetname");
+  top_hall_exploders = getEntArray("top_hall_exploder", "targetname");
   array_thread(top_hall_exploders, ::self_delete);
-  top_hall_chunks = GetEntArray("top_hall_chunk", "targetname");
+  top_hall_chunks = getEntArray("top_hall_chunk", "targetname");
   array_thread(top_hall_chunks, ::self_delete);
-  top_hall_chunks = GetEntArray("top_hall_chunk", "targetname");
+  top_hall_chunks = getEntArray("top_hall_chunk", "targetname");
   array_thread(top_hall_chunks, ::self_delete);
 
   level.disable_interactive_tv_use_triggers = true;
@@ -84,7 +84,7 @@ main() {
   start = create_start( "intro" );
   start.main = ::gulag_flyin;
   start.text = "Intro";
-	
+  	
   start = create_start( "approach" );
   start.main = ::gulag_approach;
   start.text = "Approach";
@@ -118,16 +118,16 @@ main() {
   run_thread_on_targetname("helper_model", ::self_delete);
 
   // Press^3 [{+actionslot 3}] ^7to use the M203 Grenade Launcher.
-  add_hint_string("grenade_launcher", & "SCRIPT_LEARN_GRENADE_LAUNCHER", ::should_break_m203_hint);
+  add_hint_string("grenade_launcher", &"SCRIPT_LEARN_GRENADE_LAUNCHER", ::should_break_m203_hint);
 
   // Press^3 [{+actionslot 1}] ^7to use Night Vision Goggles.
-  add_hint_string("nvg", & "SCRIPT_NIGHTVISION_USE", maps\_nightvision::ShouldBreakNVGHintPrint);
+  add_hint_string("nvg", &"SCRIPT_NIGHTVISION_USE", maps\_nightvision::ShouldBreakNVGHintPrint);
 
   // Press^3 [{+actionslot 1}] ^7to disable Night Vision Goggles.
-  add_hint_string("disable_nvg", & "SCRIPT_NIGHTVISION_STOP_USE", maps\_nightvision::should_break_disable_nvg_print);
+  add_hint_string("disable_nvg", &"SCRIPT_NIGHTVISION_STOP_USE", maps\_nightvision::should_break_disable_nvg_print);
 
   // "Press ^3[{+melee}]^7 to bash."
-  add_hint_string("riot_bash", & "GULAG_HINT_MELEE", ::stop_bash_hint);
+  add_hint_string("riot_bash", &"GULAG_HINT_MELEE", ::stop_bash_hint);
 
   level.rioter_threat = 1000;
   level._pipe_fx_time = 2.5;
@@ -242,7 +242,6 @@ main() {
   PreCacheModel("dt_mirror_des");
   PreCacheModel("tag_laser");
 
-
   LoadFX("explosions/tv_flatscreen_explosion");
   LoadFX("misc/light_fluorescent_single_blowout_runner");
   LoadFX("misc/light_fluorescent_blowout_runner");
@@ -274,7 +273,7 @@ main() {
   thread modify_sm_samplesize_on_flyin();
 
   level.tarp_guys = [];
-  tarp_pull_orgs = GetEntArray("tarp_pull_org", "targetname");
+  tarp_pull_orgs = getEntArray("tarp_pull_org", "targetname");
   array_thread(tarp_pull_orgs, ::tarp_pull_org_think);
 
   player_start = getstruct("start_approach", "script_noteworthy");
@@ -282,7 +281,6 @@ main() {
   friendly_starts["p"] = player_start;
 
   thread blow_up_first_tower_soon();
-
 
   thread remove_rpgs();
 
@@ -314,19 +312,19 @@ main() {
 
   run_thread_on_targetname("challenge_only", ::self_delete);
 
-  ally_gets_missed_triggers = GetEntArray("ally_gets_missed_trigger", "targetname");
+  ally_gets_missed_triggers = getEntArray("ally_gets_missed_trigger", "targetname");
   array_thread(ally_gets_missed_triggers, ::ally_gets_missed_trigger_think);
 
-  ally_can_get_hit_triggers = GetEntArray("ally_can_get_hit_trigger", "targetname");
+  ally_can_get_hit_triggers = getEntArray("ally_can_get_hit_trigger", "targetname");
   array_thread(ally_can_get_hit_triggers, ::ally_can_get_hit_trigger_think);
 
-  ally_in_armorys = GetEntArray("ally_in_armory", "targetname");
+  ally_in_armorys = getEntArray("ally_in_armory", "targetname");
   array_thread(ally_in_armorys, ::ally_in_armory_think);
 
-  damage_targ_triggers = GetEntArray("damage_targ_trigger", "targetname");
+  damage_targ_triggers = getEntArray("damage_targ_trigger", "targetname");
   array_thread(damage_targ_triggers, ::damage_targ_trigger_think);
 
-  friendlies_ditch_riot_shields_triggers = GetEntArray("friendlies_ditch_riot_shields_trigger", "targetname");
+  friendlies_ditch_riot_shields_triggers = getEntArray("friendlies_ditch_riot_shields_trigger", "targetname");
   array_thread(friendlies_ditch_riot_shields_triggers, ::friendlies_ditch_riot_shields_trigger_think);
 
   add_wait(::flag_wait, "player_moves_into_gulag");
@@ -355,7 +353,7 @@ main() {
   ai_field_blocker ConnectPaths();
   ai_field_blocker NotSolid();
 
-  deprecated_traverses = GetEntArray("deprecated_traverse", "targetname");
+  deprecated_traverses = getEntArray("deprecated_traverse", "targetname");
   array_thread(deprecated_traverses, ::self_delete);
 
   /*
@@ -368,7 +366,7 @@ main() {
   ent = getstruct( "hallway_cavein_damage", "targetname" );
   time = 3;
   frames = time * 20;
-  for ( i = 0; i < frames; i++ )
+  for( i = 0; i < frames; i++ )
   {
   	RadiusDamage( ent.origin, ent.radius, 10, 5 );
   	wait( 0.05 );
@@ -377,12 +375,11 @@ main() {
 
   //thread gulag_hallway_explodes();
 
-
   //	thread gulag_boats();
   //	player_view_controller = SpawnTurret( "misc_turret", (0,0,0), "heli_spotlight" );	
 
   /*
-  	for ( ;; )
+  	for( ;; )
   	{
   		foreach ( start in friendly_starts )
   		{
@@ -410,14 +407,14 @@ gulag_introscreen() {
   wait(0.5);
 
   lines = [];
-  // 
-  lines[lines.size] = & "GULAG_INTROSCREEN_LINE_4"; // "SEAL Team Six, U.S.N."
-  // 
-  lines[lines.size] = & "GULAG_INTROSCREEN_LINE_3"; // "P03 'Roach' Silvers"
-  // 
-  lines["date"] = & "GULAG_INTROSCREEN_LINE_2"; // "Northern Russia - 09:20:[{FAKE_INTRO_SECONDS:02}] hrs"
-  // 
-  lines[lines.size] = & "GULAG_INTROSCREEN_LINE_1"; // "The Gulag"
+  //
+  lines[lines.size] = &"GULAG_INTROSCREEN_LINE_4"; // "SEAL Team Six, U.S.N."
+  //
+  lines[lines.size] = &"GULAG_INTROSCREEN_LINE_3"; // "P03 'Roach' Silvers"
+  //
+  lines["date"] = &"GULAG_INTROSCREEN_LINE_2"; // "Northern Russia - 09:20:[{FAKE_INTRO_SECONDS:02}] hrs"
+  //
+  lines[lines.size] = &"GULAG_INTROSCREEN_LINE_1"; // "The Gulag"
   level thread maps\_introscreen::introscreen_feed_lines(lines);
 
   wait(2);
@@ -432,7 +429,6 @@ gulag_introscreen() {
   wait(3);
   introblack Destroy();
 }
-
 
 // sets McCord up with stuff he needs to test the map
 gulag_no_game_start_setupFunc() {
@@ -466,7 +462,7 @@ gulag_flyin() {
   thread control_room_destructibles_turn_on();
 
   // helis that hit this will create smoke as they fly through it
-  heli_smoke_triggers = GetEntArray("heli_smoke_trigger", "targetname");
+  heli_smoke_triggers = getEntArray("heli_smoke_trigger", "targetname");
   array_thread(heli_smoke_triggers, ::heli_smoke_trigger_think);
 
   thread gulag_top_drones();
@@ -480,13 +476,12 @@ gulag_flyin() {
 
   thread spawn_player_heli();
 
-  spawners = GetEntArray("intro_heli_1", "targetname");
+  spawners = getEntArray("intro_heli_1", "targetname");
   thread spawn_friendly_helis(spawners);
 
   //level thread gulag_introscreen();
 
   player_heli = level.player_heli;
-
 
   wait(1.2);
 
@@ -532,7 +527,6 @@ gulag_approach() {
   gulag_player_loadout();
   level.player DisableWeapons();
 
-  /#
   if(level.start_point == "approach") {
     // teleport the helis to closer in positions
     heli_intro_player = GetEnt("heli_intro_player", "targetname");
@@ -542,7 +536,7 @@ gulag_approach() {
     heli_intro_player.target = player_start.targetname;
 
     friendly_starts = getstructarray("start_approach_friendly", "script_noteworthy");
-    friendly_heli_spawners = GetEntArray("intro_heli_1", "targetname");
+    friendly_heli_spawners = getEntArray("intro_heli_1", "targetname");
     foreach(index, spawner in friendly_heli_spawners) {
       remap_targets(spawner.target, friendly_starts[index].targetname);
       spawner.origin = friendly_starts[index].origin;
@@ -553,7 +547,7 @@ gulag_approach() {
     going_in_hot add_spawn_function(::going_in_hot);
     thread spawn_player_heli();
 
-    spawners = GetEntArray("intro_heli_1", "targetname");
+    spawners = getEntArray("intro_heli_1", "targetname");
     thread spawn_friendly_helis(spawners);
 
     level.player SetPlayerAngles((0, -163, 0));
@@ -570,7 +564,7 @@ gulag_approach() {
     friendly_starts = getstructarray("start_approach_friendly", "script_noteworthy");
     new_start = getstruct("test_unload_node", "script_noteworthy");
     friendly_starts[2] = new_start;
-    friendly_heli_spawners = GetEntArray("intro_heli_1", "targetname");
+    friendly_heli_spawners = getEntArray("intro_heli_1", "targetname");
     foreach(index, spawner in friendly_heli_spawners) {
       remap_targets(spawner.target, friendly_starts[index].targetname);
       spawner.origin = friendly_starts[index].origin;
@@ -581,7 +575,7 @@ gulag_approach() {
     going_in_hot add_spawn_function(::going_in_hot);
     thread spawn_player_heli();
 
-    spawners = GetEntArray("intro_heli_1", "targetname");
+    spawners = getEntArray("intro_heli_1", "targetname");
     thread spawn_friendly_helis(spawners);
 
     level.player SetPlayerAngles((0, -163, 0));
@@ -592,33 +586,30 @@ gulag_approach() {
     level.player SetOrigin(gulag_center.origin);
   }
 
-  # /
+  // guys that ignore you at first then run over to fight	
+  //array_spawn_function_noteworthy( "exploding_ignore_spawner", ::exploding_ignore_spawner_think );
 
-    // guys that ignore you at first then run over to fight	
-    //array_spawn_function_noteworthy( "exploding_ignore_spawner", ::exploding_ignore_spawner_think );
-
-    flag_wait("display_introscreen_text");
+  flag_wait("display_introscreen_text");
 
   wait(2.2);
   // string not found for AUTOSAVE_AUTOSAVE
-  SaveGame("approach", & "AUTOSAVE_AUTOSAVE", " ", true);
+  SaveGame("approach", &"AUTOSAVE_AUTOSAVE", " ", true);
 
   lines = [];
   // The Gulag""
-  lines[lines.size] = & "GULAG_INTROSCREEN_1";
+  lines[lines.size] = &"GULAG_INTROSCREEN_1";
   // Day 5 - 07:42:[{FAKE_INTRO_SECONDS:17}]
   // Day 5 - 07:42:[{FAKE_INTRO_SECONDS:17}]
-  lines[lines.size] = & "GULAG_INTROSCREEN_2";
+  lines[lines.size] = &"GULAG_INTROSCREEN_2";
   // Sgt. Gary 'Roach' Sanderson
-  lines[lines.size] = & "GULAG_INTROSCREEN_3";
+  lines[lines.size] = &"GULAG_INTROSCREEN_3";
   // Task Force 141
-  lines[lines.size] = & "GULAG_INTROSCREEN_4";
+  lines[lines.size] = &"GULAG_INTROSCREEN_4";
   // 40 miles east of Petropavlovsk, Russia
-  lines[lines.size] = & "GULAG_INTROSCREEN_5";
+  lines[lines.size] = &"GULAG_INTROSCREEN_5";
   thread maps\_introscreen::introscreen_feed_lines(lines);
 
   flag_wait("approach_dialogue");
-
 
   wait(1);
 
@@ -672,7 +663,6 @@ gulag_approach() {
   //	level.player_heli_tag RotateTo( ( 0, 90, 0 ), 2, 1, 1 );
   //	level.player PlayerLinkToBlend( level.player_heli_tag, "tag_origin", time, accel time, decel time);
 
-
   // Peeling.	
   //radio_dialogue( "gulag_lbp2_peeling" );
 
@@ -706,7 +696,7 @@ gulag_approach() {
   flag_wait("stabilize");
 
   /*
-	
+  	
   // On target.	
   radio_dialogue( "gulag_tco_ontarget" );
   */
@@ -757,13 +747,12 @@ gulag_approach() {
   car_blows_up = GetEnt("car_blows_up", "script_noteworthy");
   RadiusDamage(car_blows_up.origin, 1200, 5000, 5000);
 
-  tarp_puller_spawners = GetEntArray("tarp_puller_spawner", "targetname");
+  tarp_puller_spawners = getEntArray("tarp_puller_spawner", "targetname");
   array_thread(tarp_puller_spawners, ::spawn_ai);
-
 
   /*
   // the tarp ents are in a prefab so just find the nearest
-  tarp_ents = GetEntArray( "tarp_pull_org", "targetname" );
+  tarp_ents = getEntArray( "tarp_pull_org", "targetname" );
   slamraam_center = GetEnt( "slamraam_center", "script_noteworthy" );
   tarp = getClosest( slamraam_center.origin, tarp_ents );
   tarp waittill( "tarp_activate" );
@@ -781,8 +770,6 @@ gulag_approach() {
   //wait_for_buffer_time_to_pass( old_time, 6 );
 
   wait(0.5);
-
-
 
   //	thread debug_heli_times();
 
@@ -861,7 +848,7 @@ start_unload()
 	heli_intro_player.target = player_start.targetname;
 
 	friendly_starts = getstructarray( "start_unload_friendly", "script_noteworthy" );
-	friendly_heli_spawners = GetEntArray( "intro_heli_1", "targetname" );
+	friendly_heli_spawners = getEntArray( "intro_heli_1", "targetname" );
 	foreach ( index, spawner in friendly_heli_spawners )
 	{
 		remap_targets( spawner.target, friendly_starts[ index ].targetname );
@@ -871,7 +858,7 @@ start_unload()
 
 	thread spawn_player_heli();
 
-	spawners = GetEntArray( "intro_heli_1", "targetname" );
+	spawners = getEntArray( "intro_heli_1", "targetname" );
 	thread spawn_friendly_helis( spawners );
 
 	level.player SetPlayerAngles( ( 0, -163, 0 ) );
@@ -916,10 +903,10 @@ gulag_perimeter() {
 
   /*
   flag_wait( "slamraam_killed_2" );
-	
-  exploding_tower_spawners = GetEntArray( "exploding_tower_spawner", "targetname" );
+  	
+  exploding_tower_spawners = getEntArray( "exploding_tower_spawner", "targetname" );
   //delaythread( 2.5, ::array_spawn, exploding_tower_spawners );
-	
+  	
   wait( 3 );
   flag_set( "move_to_boom_tower" );
 
@@ -927,7 +914,7 @@ gulag_perimeter() {
   level.player_heli SetNearGoalNotifyDist( 8 );
   level.player_heli waittill_any( "near_goal", "goal" );
 
-	
+  	
   flag_wait( "player_heli_backs_up" );
   */
 
@@ -942,57 +929,56 @@ gulag_perimeter() {
   thread radio_dialogue("gulag_rpt_tooclose");
 
   /*
-	level.friendlyFireDisabled = 0;
-	//level.stabilize_offset = 5; // how much the player heli rotates relative to the gulag center
-	flag_wait( "stabilize" );
+  	level.friendlyFireDisabled = 0;
+  	//level.stabilize_offset = 5; // how much the player heli rotates relative to the gulag center
+  	flag_wait( "stabilize" );
 
-	// Stabilize.	
-	thread radio_dialogue( "gulag_rpt_stabilize3" );
+  	// Stabilize.	
+  	thread radio_dialogue( "gulag_rpt_stabilize3" );
 
-	// Ready.	
-	thread radio_dialogue( "gulag_lbp1_ready2" );
+  	// Ready.	
+  	thread radio_dialogue( "gulag_lbp1_ready2" );
 
-	// On target.	
-	//radio_dialogue( "gulag_wrm_ontarget2" );
+  	// On target.	
+  	//radio_dialogue( "gulag_wrm_ontarget2" );
 
-	// On target.	
-	thread radio_dialogue( "gulag_tco_ontarget2" );
+  	// On target.	
+  	thread radio_dialogue( "gulag_tco_ontarget2" );
 
-	// Take 'em out.	
-	thread radio_dialogue( "gulag_rpt_takeemout" );
+  	// Take 'em out.	
+  	thread radio_dialogue( "gulag_rpt_takeemout" );
 
-//	delayThread( 8, ::kill_deathflag, "stab3_clear" );
-	wait( 6.15 );
-	thread radio_dialogue( "gulag_rpt_shiftright" );
-	wait( 1.5 );
-	//flag_set( "stab3_clear" );
+  //	delayThread( 8, ::kill_deathflag, "stab3_clear" );
+  	wait( 6.15 );
+  	thread radio_dialogue( "gulag_rpt_shiftright" );
+  	wait( 1.5 );
+  	//flag_set( "stab3_clear" );
 
-	flag_clear( "stabilize" );
+  	flag_clear( "stabilize" );
 
-	flag_wait( "stabilize" );
-	thread radio_dialogue( "gulag_rpt_stabilize" );
-	// First wave going in.	
-	thread radio_dialogue( "gulag_lbp2_firstwave" );
+  	flag_wait( "stabilize" );
+  	thread radio_dialogue( "gulag_rpt_stabilize" );
+  	// First wave going in.	
+  	thread radio_dialogue( "gulag_lbp2_firstwave" );
 
-	wait( 4 );
-	exploder( 40 );
-	delayThread( 0.25, ::exploder, 93 );
-	wait( 0.5 );
-	flag_set( "stab4_clear" );
+  	wait( 4 );
+  	exploder( 40 );
+  	delayThread( 0.25, ::exploder, 93 );
+  	wait( 0.5 );
+  	flag_set( "stab4_clear" );
 
+  	tower_4_radius_damage = GetEnt( "tower_4_radius_damage", "targetname" );
+  	RadiusDamage( tower_4_radius_damage.origin, tower_4_radius_damage.radius, 2000, 2000 );
 
-	tower_4_radius_damage = GetEnt( "tower_4_radius_damage", "targetname" );
-	RadiusDamage( tower_4_radius_damage.origin, tower_4_radius_damage.radius, 2000, 2000 );
+  	//wait( 0.8 );
+  	level notify( "stop_gulag_drones" );
+  	// Hang on!	
+  	thread radio_dialogue( "gulag_lbp1_hangon" );
 
-	//wait( 0.8 );
-	level notify( "stop_gulag_drones" );
-	// Hang on!	
-	thread radio_dialogue( "gulag_lbp1_hangon" );
+  	// Command, we need those Russian naval vessels to cease fire immediately! That was too close!	
+  	thread radio_dialogue( "gulag_rpt_tooclose" );
 
-	// Command, we need those Russian naval vessels to cease fire immediately! That was too close!	
-	thread radio_dialogue( "gulag_rpt_tooclose" );
-
-	*/
+  	*/
 
   thread bhd_heli_attack_setup();
 
@@ -1017,7 +1003,7 @@ gulag_perimeter() {
   /*	
   // Three-One, troops are on the deck.	
   thread radio_dialogue( "gulag_lbp2_ondeck";
-	
+  	
   // This is Three-One, troops are on the deck, going into holding pattern.	
   thread radio_dialogue( "gulag_lbp2_holdingpatt";
   */
@@ -1087,7 +1073,7 @@ gulag_perimeter() {
   // point the player off the heli at the right angle then unlink
   angles = level.player_view_controller GetTagAngles("tag_aim");
   angles = (0, angles[1], 0);
-  forward = AnglesToForward(angles);
+  forward = anglesToForward(angles);
   forward *= 32;
 
   /*
@@ -1122,8 +1108,6 @@ gulag_perimeter() {
   level.soap forceUseWeapon("m4m203_reflex_arctic", "primary");
   flag_set("access_control_room");
 
-
-
   //activate_trigger_with_targetname( "friendly_gulag_top" );
 
   /*
@@ -1143,7 +1127,7 @@ start_control_room() {
   ghost_spawner.origin = struct.origin;
   ghost_spawner.angles = struct.angles;
 
-  spawners = GetEntArray("start_controlroom_spawner", "targetname");
+  spawners = getEntArray("start_controlroom_spawner", "targetname");
   spawners = update_soap_spawner(spawners);
   spawners[spawners.size] = ghost_spawner;
   array_thread(spawners, ::spawn_ai);
@@ -1183,7 +1167,7 @@ gulag_cellblocks() {
 
   ai = GetAIArray("allies");
   foreach(guy in ai) {
-    if(IsDefined(guy.old_pathrandompercent))
+    if(isDefined(guy.old_pathrandompercent))
       guy pathrandompercent_reset();
   }
 
@@ -1217,7 +1201,6 @@ gulag_cellblocks() {
   friendly_respawn_trigger = GetEnt("friendly_reinforcement_trigger", "targetname");
   friendly_respawn_trigger thread reinforcement_friendlies();
 
-
   // In this section of script, the 2 guys standing in the volume get to be purple guys and stand in a certain spot.
   // If we cant find two non heroes in the volume then other guys become purple. The rest of the non heroes become
   // orange.
@@ -1235,10 +1218,10 @@ gulag_cellblocks() {
   }
 
   ai = remove_dead_from_array(ai);
-  for (i = purple_guys; i < 2; i++) {
-    if(!isalive(ai[i]))
+  for(i = purple_guys; i < 2; i++) {
+    if(!isalive(ai[i])) {
       continue;
-
+    }
     ai[i] set_force_color("p");
     ai[i] = undefined;
   }
@@ -1290,16 +1273,16 @@ gulag_cellblocks() {
 
   extra_friendlies = 2;
   // the 2 closest guys stay on the friendly chain
-  for (i = 0; i < extra_friendlies; i++) {
+  for(i = 0; i < extra_friendlies; i++) {
     guy = ai[i];
-    if(!isalive(guy))
+    if(!isalive(guy)) {
       continue;
-
+    }
     guy set_force_color("g");
     guy allies_have_low_attacker_accuracy();
   }
 
-  for (i = extra_friendlies; i < ai.size; i++) {
+  for(i = extra_friendlies; i < ai.size; i++) {
     ai[i] disable_ai_color();
   }
 
@@ -1436,7 +1419,7 @@ start_armory() {
 
   activate_trigger_with_noteworthy("pre_armory");
 
-  spawners = GetEntArray("start_armory_spawner", "targetname");
+  spawners = getEntArray("start_armory_spawner", "targetname");
   spawners = update_soap_spawner(spawners);
   array_thread(spawners, ::spawn_ai);
 
@@ -1466,7 +1449,6 @@ gulag_armory() {
   cellblock_spawning_door notsolid();
   cellblock_spawning_door hide();
 
-
   // See anything you like?	
   level.soap thread dialogue_queue("gulag_cmt_seeanything");
   wait(1.5);
@@ -1490,7 +1472,6 @@ gulag_armory() {
   level.soap thread dialogue_queue("gulag_cmt_hearcoming");
   delaythread(0.9, ::activate_trigger_with_targetname, "stand_at_armory_door");
   //delaythread( 0.9, ::activate_trigger_with_targetname, "escape_armory" );
-
 
   start_time = gettime();
   wait(3.0);
@@ -1578,7 +1559,6 @@ gulag_armory() {
 
   thread player_riotshield_nag();
   wait(5);
-
 
   wait(1.5);
   // friendlies run to the door
@@ -1695,15 +1675,14 @@ rappel_time_dialogue() {
 
   // Copy that! Roach, follow me!	
   level.soap dialogue_queue("gulag_cmt_roachfollow");
-
 }
 
 start_rappel() {
   spawn_rappel_rope();
 
-  spawners = GetEntArray("start_rappel_spawner", "targetname");
+  spawners = getEntArray("start_rappel_spawner", "targetname");
   spawners = update_soap_spawner(spawners);
-  for (i = 1; i < spawners.size; i++) {
+  for(i = 1; i < spawners.size; i++) {
     spawners[i] add_spawn_function(::replace_on_death);
   }
 
@@ -1758,17 +1737,17 @@ gulag_rappel() {
   // delete the extraneous friendlies
   ai = GetAIArray("allies");
   foreach(guy in ai) {
-    if(guy is_hero())
+    if(guy is_hero()) {
       continue;
-
-    if(IsDefined(guy.magic_bullet_shield))
+    }
+    if(isDefined(guy.magic_bullet_shield))
       guy stop_magic_bullet_shield();
 
     guy Delete();
   }
 
   // spawn some reinforcements
-  friendly_cellhall_spawners = GetEntArray("friendly_cellhall_spawner", "targetname");
+  friendly_cellhall_spawners = getEntArray("friendly_cellhall_spawner", "targetname");
   array_spawn_function(friendly_cellhall_spawners, ::replace_on_death);
   array_thread(friendly_cellhall_spawners, ::spawn_ai);
 
@@ -1781,7 +1760,7 @@ gulag_rappel() {
 
   flag_wait("nvg_zone");
 
-  spawners = GetEntArray("hallway_runner_spawner", "script_noteworthy");
+  spawners = getEntArray("hallway_runner_spawner", "script_noteworthy");
   nodes = GetNodeArray("nvg_ambush_node", "targetname");
   nodes = array_randomize(nodes);
   array_thread(nodes, ::nodes_are_periodically_bad);
@@ -1836,9 +1815,9 @@ gulag_rappel() {
   flag_wait("nvg_disable_night_vision");
 
   //	flag_wait( "nvg_fight_spawner" );
-  //spawners = GetEntArray( "nvg_fight_spawner", "targetname" );
+  //spawners = getEntArray( "nvg_fight_spawner", "targetname" );
   //array_thread( spawners, ::spawn_ai );
-  //spawners = GetEntArray( "post_nvg_fight_spawner", "targetname" );
+  //spawners = getEntArray( "post_nvg_fight_spawner", "targetname" );
   //array_thread( spawners, ::spawn_ai );
 
   //	flag_wait( "nvg_advance_onward" );
@@ -1846,9 +1825,9 @@ gulag_rappel() {
 }
 
 start_tunnel() {
-  spawners = GetEntArray("friendly_tunnel_spawner", "targetname");
+  spawners = getEntArray("friendly_tunnel_spawner", "targetname");
   spawners = update_soap_spawner(spawners);
-  for (i = 1; i < spawners.size; i++) {
+  for(i = 1; i < spawners.size; i++) {
     spawners[i] add_spawn_function(::replace_on_death);
   }
 
@@ -1923,11 +1902,11 @@ gulag_tunnel() {
 
 start_bathroom() {
   // mbs on the one guy
-  spawners = GetEntArray("friendly_bathroom_spawner", "targetname");
+  spawners = getEntArray("friendly_bathroom_spawner", "targetname");
   spawners = update_soap_spawner(spawners);
 
   if(level.start_point == "bathroom") {
-    for (i = 1; i < spawners.size; i++) {
+    for(i = 1; i < spawners.size; i++) {
       spawners[i] add_spawn_function(::replace_on_death);
     }
   }
@@ -1940,7 +1919,6 @@ start_bathroom() {
 
   activate_trigger_with_targetname("breach_bathroom_postup");
 }
-
 
 enable_bathroom_complete_trigger() {
   trigger_ent = GetEnt("player_rappels_from_bathroom", "script_noteworthy");
@@ -1967,7 +1945,7 @@ gulag_bathroom() {
 
   axis = getaiarray("axis");
   foreach(guy in axis) {
-    if(!isdefined(guy.spawn_time) || guy.spawn_time != gettime())
+    if(!isDefined(guy.spawn_time) || guy.spawn_time != gettime())
       guy thread die_soon();
   }
 
@@ -2027,7 +2005,7 @@ gulag_bathroom() {
   flag_wait("leaving_bathroom_vol2");
 
   /*
-  shower_friendly_triggers = GetEntArray( "shower_friendly_trigger", "script_noteworthy" );
+  shower_friendly_triggers = getEntArray( "shower_friendly_trigger", "script_noteworthy" );
   array_thread( shower_friendly_triggers, ::self_delete );
   */
 
@@ -2040,8 +2018,6 @@ gulag_bathroom() {
 
   // Go go go! 	
   level.soap delayThread(2.5, ::dialogue_queue, "gulag_cmt_gogogo1");
-
-
 
   ai = GetAIArray("allies");
   foreach(guy in ai) {
@@ -2111,9 +2087,9 @@ gulag_cistern_dialogue() {
 
 start_rescue() {
   // mbs on the one guy
-  spawners = GetEntArray("start_rescue_spawner", "targetname");
+  spawners = getEntArray("start_rescue_spawner", "targetname");
   spawners = update_soap_spawner(spawners);
-  for (i = 1; i < spawners.size; i++) {
+  for(i = 1; i < spawners.size; i++) {
     spawners[i] add_spawn_function(::magic_bullet_shield);
   }
 
@@ -2164,17 +2140,18 @@ gulag_rescue() {
 
   ai = GetAIArray("allies");
 
-  for (;;) {
+  for(;;) {
     // make sure the breach started
     trigger_from waittill("trigger");
-    if(!level.player maps\_slowmo_breach::breach_failed_to_start())
+    if(!level.player maps\_slowmo_breach::breach_failed_to_start()) {
       break;
+    }
   }
 
   SetSavedDvar("g_friendlynamedist", 0);
 
   level.doPickyAutosaveChecks = false; // ammo doesn't matter anymore
-  ending_room_spawners = GetEntArray("ending_room_spawner", "targetname");
+  ending_room_spawners = getEntArray("ending_room_spawner", "targetname");
   /*
   foreach ( spawner in ending_room_spawners )
   {
@@ -2245,14 +2222,14 @@ gulag_rescue() {
 
   struct = getstruct("ending_breach_org", "targetname");
   level.price_breach_struct = struct;
-  //ent = Spawn( "script_origin", (0,0,0) );
+  //ent = spawn( "script_origin", (0,0,0) );
   ent = spawn_tag_origin();
   //ent thread maps\_debug::drawTagForever( "tag_origin" );
   ent.origin = struct.origin;
   ent.angles = struct.angles;
 
   // tweak the position of the scene model from script for iteration
-  localtrans = SpawnStruct();
+  localtrans = spawnStruct();
   localtrans.entity = ent;
   localtrans.forward = -38;
   localtrans.right = -24;
@@ -2283,14 +2260,14 @@ gulag_rescue() {
   thread price_breach_dof();
 
   level.price thread play_sound_on_entity("scn_gulag_price_rescue_foley");
-  delayThread(3.95, ::play_sound_in_space, "scn_gulag_price_rescue_punch", level.player GetEye());
-  delayThread(4.35, ::play_sound_in_space, "scn_gulag_price_rescue_bodyfall", level.player GetEye());
+  delayThread(3.95, ::play_sound_in_space, "scn_gulag_price_rescue_punch", level.player getEye());
+  delayThread(4.35, ::play_sound_in_space, "scn_gulag_price_rescue_bodyfall", level.player getEye());
 
   // launch his chair
   chair = GetEnt("price_chair", "targetname");
   targ = getstruct(chair.target, "targetname");
   angles = VectorToAngles(targ.origin - chair.origin);
-  forward = AnglesToForward(angles);
+  forward = anglesToForward(angles);
 
   chair delayCall(0.5, ::PhysicsLaunchClient, chair.origin + (0, 0, 20), forward * 2000);
   ent anim_single(guys, "price_breach");
@@ -2309,7 +2286,7 @@ gulag_rescue() {
   spawner.count = 1;
   spawner spawn_ai();
 
-  spawner = GetEntArray("endlog_redshirt_spawner", "targetname")[0];
+  spawner = getEntArray("endlog_redshirt_spawner", "targetname")[0];
   spawner.count = 1;
   spawner spawn_ai();
 
@@ -2339,7 +2316,6 @@ gulag_rescue() {
   guys["gun"] = price_1911;
 
   level.price Unlink();
-
 
   //	// Drop it!	
   //	level.soap delayThread( 0.8, ::generic_dialogue_queue, "gulag_cmt_heswithus" );
@@ -2382,20 +2358,20 @@ gulag_finish_rescue_thread(trigger_to, ai) {
 
   friendlies = GetAIArray("allies");
   foreach(guy in friendlies) {
-    if(guy is_hero())
+    if(guy is_hero()) {
       continue;
-
-    if(IsDefined(guy.magic_bullet_shield))
+    }
+    if(isDefined(guy.magic_bullet_shield))
       guy stop_magic_bullet_shield();
 
     guy Delete();
   }
 
   foreach(guy in ai) {
-    if(!isalive(guy))
+    if(!isalive(guy)) {
       continue;
-
-    if(IsDefined(guy.magic_bullet_shield))
+    }
+    if(isDefined(guy.magic_bullet_shield))
       guy stop_magic_bullet_shield();
 
     guy Delete();
@@ -2411,9 +2387,9 @@ finish_rescue_sequence(offset) {
   weapons = level.player GetWeaponsListPrimaries();
 
   foreach(weapon in weapons) {
-    if(IsSubStr(weapon, "riot"))
+    if(IsSubStr(weapon, "riot")) {
       continue;
-
+    }
     level.player SwitchToWeapon(weapon);
     break;
   }
@@ -2431,7 +2407,7 @@ finish_rescue_sequence(offset) {
   time = 1.7;
   dif = time / 20;
 
-  for (i = 0; i <= 1; i += dif) {
+  for(i = 0; i <= 1; i += dif) {
     level.player SetMoveSpeedScale(i);
     wait(0.05);
   }
@@ -2448,7 +2424,7 @@ gulag_objectives() {
   }
 
   // Rescue Prisoner #627.
-  Objective_Add(1, "current", & "GULAG_FIND_POW", pow_org());
+  Objective_Add(1, "current", &"GULAG_FIND_POW", pow_org());
   Objective_OnEntity(1, level.soap);
   Objective_Current(1);
 
@@ -2462,7 +2438,7 @@ gulag_objectives() {
       flag_wait("player_lands");
       setsaveddvar("ui_hidemap", 0);
       // Follow Captain MacTavish into the Gulag.
-      Objective_Add(2, "current", & "GULAG_FOLLOW_SOAP", (0, 0, 0));
+      Objective_Add(2, "current", &"GULAG_FOLLOW_SOAP", (0, 0, 0));
       Objective_Current(2);
       Objective_OnEntity(2, level.soap);
       flag_wait("postup_outside_gulag");
@@ -2488,7 +2464,7 @@ gulag_objectives() {
 
     case "armory":
       // Sweep the cells for the Prisoner.
-      Objective_Add(3, "current", & "GULAG_CELL_DUTY", cellblock_sweep_org());
+      Objective_Add(3, "current", &"GULAG_CELL_DUTY", cellblock_sweep_org());
       Objective_OnEntity(3, level.soap);
       Objective_Current(3);
       flag_wait("leaving_cellblock");
@@ -2512,7 +2488,7 @@ gulag_objectives() {
       wait(4);
       level notify("stop_objective_updating");
       // Plant the breaching charge.
-      Objective_Add(4, "current", & "GULAG_BREACH_THE_BATHROOM", breach_org());
+      Objective_Add(4, "current", &"GULAG_BREACH_THE_BATHROOM", breach_org());
       Objective_Current(4);
       SetSavedDvar("compass", "1");
       maps\_slowmo_breach::objective_breach(4, 2);
@@ -2553,7 +2529,7 @@ gulag_objectives() {
     case "cafe":
     case "evac":
       // Escape the gulag.
-      Objective_Add(6, "current", & "GULAG_ESCAPE", evac_obj_org());
+      Objective_Add(6, "current", &"GULAG_ESCAPE", evac_obj_org());
       Objective_Current(6);
 
       flag_wait("exit_collapses");
@@ -2573,22 +2549,22 @@ gulag_startpoint_catchup_thread() {
   waittillframeend; // let the actual start functions run before this one
   start = level.start_point;
 
-  if(is_default_start())
+  if(is_default_start()) {
     return;
-
+  }
   thread control_room_destructibles_turn_on();
 
-  if(start == "intro")
+  if(start == "intro") {
     return;
-
+  }
   SetSavedDvar("compass", "0");
   SetSavedDvar("ammoCounterHide", 1);
   SetSavedDvar("hud_showStance", 0);
   SetSavedDvar("hud_drawhud", 1);
 
-  if(start == "approach")
+  if(start == "approach") {
     return;
-
+  }
   flag_set("player_heli_uses_modified_yaw");
 
   gulag_player_loadout(); // Moved to before the wait so prechaching can happen in give_default_loadout in coop
@@ -2605,9 +2581,9 @@ gulag_startpoint_catchup_thread() {
 
   if(start == "unload")
     return;
-  if(start == "f15")
+  if(start == "f15") {
     return;
-
+  }
   thread armory_roach_is_down();
 
   SetSavedDvar("g_friendlyNameDist", 15000);
@@ -2622,14 +2598,14 @@ gulag_startpoint_catchup_thread() {
   wait(0.05);
   vision_set_fog_changes("gulag", 1);
 
-  if(start == "bhd")
+  if(start == "bhd") {
     return;
-
+  }
   flag_set("access_control_room");
   flag_set("player_progresses_passed_ext_area");
-  if(start == "control_room")
+  if(start == "control_room") {
     return;
-
+  }
   remove_global_spawn_function("allies", ::no_grenades);
 
   maps\_compass::setupMiniMap("compass_map_gulag_2");
@@ -2644,23 +2620,23 @@ gulag_startpoint_catchup_thread() {
 
   flag_set("spotlight_turns_on");
   flag_set("start_armory_music");
-  if(start == "armory")
+  if(start == "armory") {
     return;
-
+  }
   thread player_riotshield_bash_hint();
 
   flag_set("access_control_room");
   flag_set("run_from_armory");
 
-  if(start == "rappel")
+  if(start == "rappel") {
     return;
-
+  }
   fog_set_changes("gulag_hallways");
   flag_set("cell_duty");
   flag_set("go_to_pipearea_postup");
-  if(start == "tunnel")
+  if(start == "tunnel") {
     return;
-
+  }
   flag_set("nearing_bathroom_breach");
   flag_set("leaving_pipe_area");
   flag_set("advance_through_pipearea");
@@ -2668,12 +2644,12 @@ gulag_startpoint_catchup_thread() {
   flag_set("control_room");
   flag_set("leaving_pipe_area");
 
-  if(start == "bathroom")
+  if(start == "bathroom") {
     return;
-
-  if(start == "so_showers")
+  }
+  if(start == "so_showers") {
     return;
-
+  }
   fog_set_changes("gulag");
   flag_set("player_enters_bathroom");
 

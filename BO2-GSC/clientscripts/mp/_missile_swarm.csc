@@ -63,11 +63,11 @@ projectile_spawn(localclientnum) {
   upvector = (0, 0, randomintrange(1000, 1300));
   yaw = randomintrange(0, 360);
   angles = (0, yaw, 0);
-  forward = anglestoforward(angles);
+  forward = anglesToForward(angles);
   origin = self.origin + upvector + forward * dist * -1;
   end = self.origin + upvector + forward * dist;
   rocket = spawn(localclientnum, origin, "script_model");
-  rocket setmodel("veh_t6_drone_hunterkiller_viewmodel");
+  rocket setModel("veh_t6_drone_hunterkiller_viewmodel");
   rocket useanimtree(#animtree);
   rocket setanim( % o_drone_hunter_launch, 1.0, 0.0, 1.0);
   rocket thread projectile_move_think(localclientnum, self, origin, end);
@@ -77,7 +77,7 @@ projectile_spawn(localclientnum) {
 projectile_move_think(localclientnum, player, start, end) {
   level endon("missile_emp_death");
   wait(randomfloatrange(0.5, 1));
-  playfxontag(localclientnum, level._effect["swarm_tail"], self, "tag_origin");
+  playFXOnTag(localclientnum, level._effect["swarm_tail"], self, "tag_origin");
   direction = end - self.origin;
   self rotateto(vectortoangles(direction), 0.05);
   self waittill("rotatedone");
@@ -95,7 +95,7 @@ swarm_sound(localclientnum, origin) {
   entity = spawn(localclientnum, origin, "script_model");
   entity thread deleteonmissileswarmstop();
   wait 2;
-  entity playloopsound("veh_harpy_drone_swarm_close__lp", 1);
+  entity playLoopSound("veh_harpy_drone_swarm_close__lp", 1);
 }
 
 deleteonmissileswarmstop() {

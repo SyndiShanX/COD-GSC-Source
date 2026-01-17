@@ -401,7 +401,7 @@ handle_jet_taxi() {
   wait 5;
 
   if(isalive(var_1[0])) {
-    var_1[0] setlookattext("", & "");
+    var_1[0] setlookattext("", &"");
     var_1[0].name = "";
   }
 
@@ -726,7 +726,7 @@ kill_trigger(var_0) {
 
         if(level.player istouching(self)) {
           wait 2;
-          setdvar("ui_deadquote", & "CARRIER_FAIL_FAR_AWAY");
+          setdvar("ui_deadquote", &"CARRIER_FAIL_FAR_AWAY");
           maps\_utility::missionfailedwrapper();
         }
       }

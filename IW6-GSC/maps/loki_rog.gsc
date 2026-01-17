@@ -60,9 +60,9 @@ section_main() {
   level.static_lines[0] = "ac130_overlay_pip_static_a";
   level.static_lines[1] = "ac130_overlay_pip_static_b";
   level.static_lines[2] = "ac130_overlay_pip_static_c";
-  maps\_utility::add_hint_string("activate_console_hint", & "LOKI_ACTIVATE_CONSOLE", ::console_hint_button_press);
-  maps\_utility::add_hint_string("activate_console_hint_pc", & "LOKI_ACTIVATE_CONSOLE_PC", ::console_hint_button_press_pc);
-  maps\_utility::add_hint_string("press_to_fire", & "LOKI_PRESS_TO_FIRE", ::fire_hint_button_press);
+  maps\_utility::add_hint_string("activate_console_hint", &"LOKI_ACTIVATE_CONSOLE", ::console_hint_button_press);
+  maps\_utility::add_hint_string("activate_console_hint_pc", &"LOKI_ACTIVATE_CONSOLE_PC", ::console_hint_button_press_pc);
+  maps\_utility::add_hint_string("press_to_fire", &"LOKI_PRESS_TO_FIRE", ::fire_hint_button_press);
 }
 
 section_precache() {
@@ -1056,7 +1056,7 @@ start_rog_fail_timer(var_0) {
   wait(var_0);
 
   if(!common_scripts\utility::flag("rog_intro_player_flipped_switch")) {
-    setdvar("ui_deadquote", & "LOKI_ENDING_FAIL");
+    setdvar("ui_deadquote", &"LOKI_ENDING_FAIL");
     level thread maps\_utility::missionfailedwrapper();
   }
 }
@@ -1886,7 +1886,7 @@ rog_impact_danger_close_check(var_0) {
       }
 
       if(!common_scripts\utility::flag("ROG_no_fail")) {
-        setdvar("ui_deadquote", & "LOKI_ROG_FAIL_FF");
+        setdvar("ui_deadquote", &"LOKI_ROG_FAIL_FF");
         level thread maps\_utility::missionfailedwrapper();
         return;
       }
@@ -3617,11 +3617,11 @@ rog_check_pass_fail(var_0) {
 rog_fail_wrapper() {
   if(!common_scripts\utility::flag("ROG_no_fail")) {
     if(level.rog_ff_fail)
-      setdvar("ui_deadquote", & "LOKI_ROG_FAIL_FF");
+      setdvar("ui_deadquote", &"LOKI_ROG_FAIL_FF");
     else if(level.rog_track_fail)
-      setdvar("ui_deadquote", & "LOKI_ROG_FAIL_TRAINTRACK");
+      setdvar("ui_deadquote", &"LOKI_ROG_FAIL_TRAINTRACK");
     else
-      setdvar("ui_deadquote", & "LOKI_ROG_FAIL");
+      setdvar("ui_deadquote", &"LOKI_ROG_FAIL");
 
     level thread maps\_utility::missionfailedwrapper();
   }

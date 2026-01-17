@@ -5,8 +5,8 @@
 ***************************************/
 
 main() {
-  if(!isdefined(self.cover))
-    self.cover = spawnstruct();
+  if(!isDefined(self.cover))
+    self.cover = spawnStruct();
 
   self.cover.state = "none";
   self.cover.laststatechangetime = 0;
@@ -27,12 +27,12 @@ end_script() {
 }
 
 covermulti_think() {
-  if(!isdefined(self.covernode)) {
+  if(!isDefined(self.covernode)) {
     return;
   }
   var_0 = self.covernode getvalidcoverpeekouts();
 
-  if(isdefined(self.cover.arrivalnodetype)) {
+  if(isDefined(self.cover.arrivalnodetype)) {
     if(covermulti_isvaliddir(self.cover.arrivalnodetype, var_0)) {
       var_1 = covermulti_setdir(self.cover.arrivalnodetype);
       self.cover.arrivalnodetype = undefined;
@@ -40,7 +40,7 @@ covermulti_think() {
     }
   }
 
-  if(!isdefined(self.enemy)) {
+  if(!isDefined(self.enemy)) {
     covermulti_setdir(covermulti_getrandomvaliddir(var_0));
     return;
   }
@@ -57,13 +57,11 @@ covermulti_think() {
   else if(var_6 < -12)
     var_8 = ["right", "over", "left"];
   else if(var_6 > 5) {
-    var_8 = [
-      ["left", "over"], "right"
+    var_8 = [["left", "over"], "right"
     ];
     var_7 = 15000;
   } else if(var_6 < -5) {
-    var_8 = [
-      ["right", "over"], "left"
+    var_8 = [["right", "over"], "left"
     ];
     var_7 = 15000;
   } else {
@@ -76,10 +74,10 @@ covermulti_think() {
 }
 
 covermulti_isvaliddir(var_0, var_1) {
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     var_1 = self.node getvalidcoverpeekouts();
 
-  for (var_2 = 0; var_2 < var_1.size; var_2++) {
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
     if(var_1[var_2] == var_0)
       return 1;
   }
@@ -88,12 +86,12 @@ covermulti_isvaliddir(var_0, var_1) {
 }
 
 covermulti_getbestvaliddir(var_0, var_1) {
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     var_1 = self.node getvalidcoverpeekouts();
 
   var_2 = [];
 
-  for (var_3 = 0; var_3 < var_0.size; var_3++) {
+  for(var_3 = 0; var_3 < var_0.size; var_3++) {
     var_4 = var_0[var_3];
 
     if(!isarray(var_4)) {
@@ -103,18 +101,18 @@ covermulti_getbestvaliddir(var_0, var_1) {
 
     var_4 = common_scripts\utility::array_randomize(var_4);
 
-    for (var_5 = 0; var_5 < var_4.size; var_5++)
+    for(var_5 = 0; var_5 < var_4.size; var_5++)
       var_2[var_2.size] = var_4[var_5];
   }
 
-  for (var_3 = 0; var_3 < var_2.size; var_3++) {
+  for(var_3 = 0; var_3 < var_2.size; var_3++) {
     if(covermulti_isvaliddir(var_2[var_3], var_1))
       return var_2[var_3];
   }
 }
 
 covermulti_getrandomvaliddir(var_0) {
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     var_0 = self.node getvalidcoverpeekouts();
 
   var_1 = randomint(var_0.size);
@@ -122,7 +120,7 @@ covermulti_getrandomvaliddir(var_0) {
 }
 
 covermulti_getnonrandomvaliddir(var_0) {
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     var_0 = self getvalidcoverpeekouts();
 
   if(var_0[0] == "over") {
@@ -150,9 +148,7 @@ covermulti_setdir(var_0, var_1) {
         covermulti_setstate("crouch", var_1);
 
       return 1;
-    } else {
-
-    }
+    } else {}
   } else {
     covermulti_setstate(var_0, var_1);
     return 1;
@@ -165,7 +161,7 @@ covermulti_setstate(var_0, var_1) {
   if(self.cover.state == var_0)
     return 0;
 
-  if(!isdefined(var_1) || var_1 < 0)
+  if(!isDefined(var_1) || var_1 < 0)
     var_1 = 8000;
 
   var_2 = gettime();
@@ -226,7 +222,7 @@ covermulti_dotransition(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
   var_6 = covermulti_getanimtransition(var_0, var_1, var_2, var_3, var_4, var_5);
 
-  if(!isdefined(var_6)) {
+  if(!isDefined(var_6)) {
     return;
   }
   self setflaggedanimknoball("cover_multi_trans", var_6, % body, 1, 0.2, 1);
@@ -234,7 +230,7 @@ covermulti_dotransition(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 covermulti_choosehidestate() {
-  if(!isdefined(self.a.array) || !isdefined(self.a.array["alert_idle_back"]))
+  if(!isDefined(self.a.array) || !isDefined(self.a.array["alert_idle_back"]))
     return "forward";
 
   if(common_scripts\utility::cointoss())
@@ -272,7 +268,7 @@ covermulti_getanimtransition(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   var_7 = self.animarchetype;
 
-  if(!isdefined(var_7) || !isdefined(anim.archetypes[var_7]["cover_multi"]))
+  if(!isDefined(var_7) || !isDefined(anim.archetypes[var_7]["cover_multi"]))
     var_7 = "soldier";
 
   return anim.archetypes[var_7]["cover_multi"][var_6];

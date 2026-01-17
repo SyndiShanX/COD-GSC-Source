@@ -32,12 +32,12 @@ init() {
   level.oldschoolpickupsound = "oldschool_pickup";
   level.oldschoolrespawnsound = "oldschool_return";
   level.perkpickuphints = [];
-  level.perkpickuphints["specialty_bulletdamage"] = & "PLATFORM_PICK_UP_STOPPING_POWER";
-  level.perkpickuphints["specialty_armorvest"] = & "PLATFORM_PICK_UP_JUGGERNAUT";
-  level.perkpickuphints["specialty_rof"] = & "PLATFORM_PICK_UP_DOUBLE_TAP";
-  level.perkpickuphints["specialty_pistoldeath"] = & "PLATFORM_PICK_UP_LAST_STAND";
-  level.perkpickuphints["specialty_grenadepulldeath"] = & "PLATFORM_PICK_UP_MARTYRDOM";
-  level.perkpickuphints["specialty_fastreload"] = & "PLATFORM_PICK_UP_SLEIGHT_OF_HAND";
+  level.perkpickuphints["specialty_bulletdamage"] = &"PLATFORM_PICK_UP_STOPPING_POWER";
+  level.perkpickuphints["specialty_armorvest"] = &"PLATFORM_PICK_UP_JUGGERNAUT";
+  level.perkpickuphints["specialty_rof"] = &"PLATFORM_PICK_UP_DOUBLE_TAP";
+  level.perkpickuphints["specialty_pistoldeath"] = &"PLATFORM_PICK_UP_LAST_STAND";
+  level.perkpickuphints["specialty_grenadepulldeath"] = &"PLATFORM_PICK_UP_MARTYRDOM";
+  level.perkpickuphints["specialty_fastreload"] = &"PLATFORM_PICK_UP_SLEIGHT_OF_HAND";
 }
 
 bypassclasschoicefunc() {
@@ -56,7 +56,7 @@ streamprimariesfunc() {
   var_3 = [];
 
   foreach(var_5 in var_0) {
-    var_6 = spawnstruct();
+    var_6 = spawnStruct();
     var_6.team = var_5;
     var_6.weapon = var_1;
     var_3[var_3.size] = var_6;
@@ -74,10 +74,10 @@ oldschoolloadout() {
 }
 
 deletepickups() {
-  var_0 = getentarray("oldschool_pickup", "targetname");
+  var_0 = getEntArray("oldschool_pickup", "targetname");
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++) {
-    if(isdefined(var_0[var_1].target))
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+    if(isDefined(var_0[var_1].target))
       getent(var_0[var_1].target, "targetname") delete();
 
     var_0[var_1] delete();
@@ -106,7 +106,7 @@ converttoh1weaponclassname(var_0, var_1) {
   if(var_2[1] == "h1") {
     var_3 = var_2[2];
 
-    if(isdefined(var_1))
+    if(isDefined(var_1))
       var_4 = var_1;
   } else {
     var_3 = var_2[1];
@@ -123,9 +123,7 @@ converttoh1weaponclassname(var_0, var_1) {
         }
       }
 
-      if(var_4 == "none") {
-
-      }
+      if(var_4 == "none") {}
     }
   }
 
@@ -152,7 +150,7 @@ converttoh1pickup(var_0) {
 
 isweaponpickup(var_0) {
   var_1 = var_0.classname;
-  return isdefined(var_1) && issubstr(var_1, "weapon_");
+  return isDefined(var_1) && issubstr(var_1, "weapon_");
 }
 
 usenormalfx() {
@@ -171,7 +169,7 @@ useunlitfx() {
 }
 
 initpickups() {
-  if(!isdefined(level.oldschoolfxtype))
+  if(!isDefined(level.oldschoolfxtype))
     level.oldschoolfxtype = "normal";
 
   switch (level.oldschoolfxtype) {
@@ -186,17 +184,17 @@ initpickups() {
       break;
   }
 
-  var_0 = getentarray("oldschool_pickup", "targetname");
+  var_0 = getEntArray("oldschool_pickup", "targetname");
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++) {
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     if(isweaponpickup(var_0[var_1]))
       converttoh1pickup(var_0[var_1]);
   }
 
   wait 0.5;
-  var_0 = getentarray("oldschool_pickup", "targetname");
+  var_0 = getEntArray("oldschool_pickup", "targetname");
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++)
     thread trackpickup(var_0[var_1], var_1);
 
   level.allpickupstracked = 1;
@@ -211,22 +209,22 @@ spawnpickupfx(var_0, var_1) {
 playeffectshortly(var_0) {
   self endon("death");
   wait 0.05;
-  playfxontag(var_0, self, "tag_origin");
+  playFXOnTag(var_0, self, "tag_origin");
 }
 
 getpickupgroundpoint(var_0) {
   var_1 = 44.0;
-  var_2 = bullettrace(var_0.origin, var_0.origin + (0, 0, -128), 0, var_0);
+  var_2 = bulletTrace(var_0.origin, var_0.origin + (0, 0, -128), 0, var_0);
   var_3 = var_2["position"];
   var_4 = var_3[2];
 
-  for (var_5 = 1; var_5 <= 3; var_5++) {
+  for(var_5 = 1; var_5 <= 3; var_5++) {
     var_6 = var_5 / 3.0 * var_1;
 
-    for (var_7 = 0; var_7 < 10; var_7++) {
+    for(var_7 = 0; var_7 < 10; var_7++) {
       var_8 = var_7 / 10.0 * 360.0;
       var_9 = var_0.origin + (cos(var_8), sin(var_8), 0) * var_6;
-      var_2 = bullettrace(var_9, var_9 + (0, 0, -128), 0, var_0);
+      var_2 = bulletTrace(var_9, var_9 + (0, 0, -128), 0, var_0);
       var_10 = var_2["position"];
 
       if(var_10[2] > var_4 && var_10[2] < var_3[2] + 15)
@@ -263,7 +261,7 @@ trackpickup(var_0, var_1) {
     var_12 = 1;
     var_14 = var_0.script_noteworthy;
 
-    if(!isdefined(level.perkpickuphints[var_14])) {
+    if(!isDefined(level.perkpickuphints[var_14])) {
       common_scripts\utility::error("oldschool_pickup with classname script_model does not have script_noteworthy set to a valid perk");
       return;
     }
@@ -278,34 +276,34 @@ trackpickup(var_0, var_1) {
       return;
     }
 
-    if(isdefined(level.perkpickuphints[var_14]))
+    if(isDefined(level.perkpickuphints[var_14]))
       var_15 sethintstring(level.perkpickuphints[var_14]);
   } else {
     common_scripts\utility::error("oldschool_pickup with classname " + var_4 + " is not supported (at location " + var_0.origin + ")");
     return;
   }
 
-  if(isdefined(var_0.script_delay))
+  if(isDefined(var_0.script_delay))
     var_16 = var_0.script_delay;
 
   var_0.respawntime = var_16;
 
-  for (;;) {
+  for(;;) {
     var_17 = undefined;
 
     if(var_11) {
       var_0 thread changesecondarygrenadetype(var_13);
       var_0 setpickupstartammo(var_13);
 
-      for (;;) {
+      for(;;) {
         var_0 waittill("trigger", var_17, var_18);
 
-        if(!isdefined(var_0)) {
+        if(!isDefined(var_0)) {
           break;
         }
       }
 
-      if(isdefined(var_18)) {
+      if(isDefined(var_18)) {
         var_19 = 5;
 
         if(var_19 > var_16)
@@ -320,7 +318,7 @@ trackpickup(var_0, var_1) {
     }
 
     if(var_11) {
-      if(weaponinventorytype(var_13) == "item" && (!isdefined(var_17.inventoryweapon) || var_13 != var_17.inventoryweapon)) {
+      if(weaponinventorytype(var_13) == "item" && (!isDefined(var_17.inventoryweapon) || var_13 != var_17.inventoryweapon)) {
         var_17 removeinventoryweapon();
         var_17.inventoryweapon = var_13;
         var_17 setactionslot(3, "weapon", var_13);
@@ -342,11 +340,11 @@ trackpickup(var_0, var_1) {
     var_0.respawntime = var_16;
 
     if(var_12) {
-      var_0 setmodel(var_8);
+      var_0 setModel(var_8);
       var_15 common_scripts\utility::trigger_on();
     }
 
-    var_0 playsound(level.oldschoolrespawnsound);
+    var_0 playSound(level.oldschoolrespawnsound);
     var_3 delete();
     var_3 = spawnpickupfx(var_2, level.pickupavailableeffect);
   }
@@ -355,7 +353,7 @@ trackpickup(var_0, var_1) {
 setpickupstartammo(var_0) {
   var_1 = var_0;
 
-  for (var_2 = 0; var_2 == 0 || var_1 != var_0 && var_1 != "none"; var_2++) {
+  for(var_2 = 0; var_2 == 0 || var_1 != var_0 && var_1 != "none"; var_2++) {
     var_3 = weaponstartammo(var_1);
     var_4 = weaponclipsize(var_1);
     var_5 = 0;
@@ -382,7 +380,7 @@ changesecondarygrenadetype(var_0) {
   var_4 = spawn("trigger_radius", self.origin - (0, 0, 20), 0, 128, 64);
   thread deletetriggerwhenpickedup(var_4);
 
-  for (;;) {
+  for(;;) {
     var_4 waittill("trigger", var_5);
 
     if(var_5 getweaponammototal(var_1) == 0 && var_5 getweaponammototal(var_2) == 0 && var_5 getweaponammototal(var_3) == 0)
@@ -399,7 +397,7 @@ resetactionslottoaltmode(var_0) {
   self notify("resetting_action_slot_to_alt_mode");
   self endon("resetting_action_slot_to_alt_mode");
 
-  for (;;) {
+  for(;;) {
     if(getweaponammototal(var_0) == 0) {
       var_1 = self getcurrentweapon();
 
@@ -420,7 +418,7 @@ getweaponammototal(var_0) {
 }
 
 removeinventoryweapon() {
-  if(isdefined(self.inventoryweapon))
+  if(isDefined(self.inventoryweapon))
     self takeweapon(self.inventoryweapon);
 
   self.inventoryweapon = undefined;
@@ -430,7 +428,7 @@ delayeddeletion(var_0) {
   thread delayeddeletiononswappedweapons(var_0);
   wait(var_0);
 
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     self notify("death");
     self delete();
   }
@@ -439,10 +437,10 @@ delayeddeletion(var_0) {
 delayeddeletiononswappedweapons(var_0) {
   self endon("death");
 
-  for (;;) {
+  for(;;) {
     self waittill("trigger", var_1, var_2);
 
-    if(isdefined(var_2)) {
+    if(isDefined(var_2)) {
       break;
     }
   }
@@ -451,7 +449,7 @@ delayeddeletiononswappedweapons(var_0) {
 }
 
 onplayerconnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connecting", var_0);
     var_0 thread onplayerspawned();
   }
@@ -460,7 +458,7 @@ onplayerconnect() {
 onplayerspawned() {
   self endon("disconnect");
 
-  for (;;) {
+  for(;;) {
     self waittill("spawned_player");
     self.inventoryweapon = undefined;
     self clearperks();
@@ -482,7 +480,7 @@ watchweaponslist() {
   waittillframeend;
   self.weapons = self getweaponslistall();
 
-  for (;;) {
+  for(;;) {
     self waittill("weapon_change", var_0);
     thread updateweaponslist(0.05);
   }
@@ -496,7 +494,7 @@ updateweaponslist(var_0) {
 }
 
 hadweaponbeforepickingup(var_0) {
-  for (var_1 = 0; var_1 < self.weapons.size; var_1++) {
+  for(var_1 = 0; var_1 < self.weapons.size; var_1++) {
     if(self.weapons[var_1] == var_0)
       return 1;
   }

@@ -48,10 +48,10 @@ watchforexplosion() {
     localplayer = getlocalplayer(localclientnum);
 
     if(!localplayer isplayerviewlinkedtoentity(localclientnum)) {
-      trace = bullettrace(getlocalclienteyepos(localclientnum), position, 0, localplayer);
+      trace = bulletTrace(getlocalclienteyepos(localclientnum), position, 0, localplayer);
 
       if(trace["fraction"] >= 1) {
-        forwardvec = vectornormalize(anglestoforward(localplayer.angles));
+        forwardvec = vectornormalize(anglesToForward(localplayer.angles));
         rightvec = vectornormalize(anglestoright(localplayer.angles));
         explosionvec = vectornormalize(position - localplayer.origin);
         fdot = vectordot(explosionvec, forwardvec);

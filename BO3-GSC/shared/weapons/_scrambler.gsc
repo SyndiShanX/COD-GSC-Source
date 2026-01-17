@@ -24,12 +24,12 @@ function init_shared() {
 
 function createscramblerwatcher() {
   watcher = self weaponobjects::createuseweaponobjectwatcher("scrambler", self.team);
-  watcher.onspawn = & onspawnscrambler;
-  watcher.ondetonatecallback = & scramblerdetonate;
-  watcher.onstun = & weaponobjects::weaponstun;
+  watcher.onspawn = &onspawnscrambler;
+  watcher.ondetonatecallback = &scramblerdetonate;
+  watcher.onstun = &weaponobjects::weaponstun;
   watcher.stuntime = 5;
   watcher.hackable = 1;
-  watcher.ondamage = & watchscramblerdamage;
+  watcher.ondamage = &watchscramblerdamage;
 }
 
 function onspawnscrambler(watcher, player) {
@@ -49,8 +49,8 @@ function onspawnscrambler(watcher, player) {
 }
 
 function scramblerdetonate(attacker, weapon, target) {
-  if(!isdefined(weapon) || !weapon.isemp) {
-    playfx(level._equipment_explode_fx, self.origin);
+  if(!isDefined(weapon) || !weapon.isemp) {
+    playFX(level._equipment_explode_fx, self.origin);
   }
   if(self.owner util::isenemyplayer(attacker)) {
     attacker challenges::destroyedequipment(weapon);
@@ -62,7 +62,7 @@ function scramblerdetonate(attacker, weapon, target) {
 function watchshutdown(player) {
   self util::waittill_any("death", "hacked");
   level notify("scrambler_death");
-  if(isdefined(player)) {
+  if(isDefined(player)) {
     player.scrambler = undefined;
   }
 }
@@ -74,16 +74,16 @@ function destroyent() {
 function watchscramblerdamage(watcher) {
   self endon("death");
   self endon("hacked");
-  self setcandamage(1);
+  self setCanDamage(1);
   damagemax = 100;
   if(!self util::ishacked()) {
     self.damagetaken = 0;
   }
-  while (true) {
+  while(true) {
     self.maxhealth = 100000;
     self.health = self.maxhealth;
     self waittill("damage", damage, attacker, direction, point, type, tagname, modelname, partname, weapon, idflags);
-    if(!isdefined(attacker) || !isplayer(attacker)) {
+    if(!isDefined(attacker) || !isplayer(attacker)) {
       continue;
     }
     if(level.teambased && attacker.team == self.owner.team && attacker != self.owner) {
@@ -103,7 +103,7 @@ function watchscramblerdamage(watcher) {
         }
       }
     }
-    if(isplayer(attacker) && level.teambased && isdefined(attacker.team) && self.owner.team == attacker.team && attacker != self.owner) {
+    if(isplayer(attacker) && level.teambased && isDefined(attacker.team) && self.owner.team == attacker.team && attacker != self.owner) {
       continue;
     }
     if(type == "MOD_MELEE" || weapon.isemp) {
@@ -121,26 +121,26 @@ function ownersameteam(owner1, owner2) {
   if(!level.teambased) {
     return 0;
   }
-  if(!isdefined(owner1) || !isdefined(owner2)) {
+  if(!isDefined(owner1) || !isDefined(owner2)) {
     return 0;
   }
-  if(!isdefined(owner1.team) || !isdefined(owner2.team)) {
+  if(!isDefined(owner1.team) || !isDefined(owner2.team)) {
     return 0;
   }
   return owner1.team == owner2.team;
 }
 
 function checkscramblerstun() {
-  scramblers = getentarray("grenade", "classname");
-  if(isdefined(self.name) && self.name == "scrambler") {
+  scramblers = getEntArray("grenade", "classname");
+  if(isDefined(self.name) && self.name == "scrambler") {
     return false;
   }
-  for (i = 0; i < scramblers.size; i++) {
+  for(i = 0; i < scramblers.size; i++) {
     scrambler = scramblers[i];
     if(!isalive(scrambler)) {
       continue;
     }
-    if(!isdefined(scrambler.name)) {
+    if(!isDefined(scrambler.name)) {
       continue;
     }
     if(scrambler.name != "scrambler") {

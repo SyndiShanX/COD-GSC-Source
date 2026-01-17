@@ -151,7 +151,7 @@ setup_eagle_anims() {
 
 parliament_eagle_anim(animName, animeName, msg) {
   if(isDefined(self.isDoingAnim)) {
-    while (self.isDoingAnim) {
+    while(self.isDoingAnim) {
       wait(0.05);
     }
   }
@@ -210,8 +210,8 @@ roof_flag_init() {
   anime = level.scr_anim["roof_flag"]["fall"];
   spawnOrigin = GetStartOrigin(animSpot.origin, animSpot.angles, anime);
   spawnAngles = GetStartAngles(animSpot.origin, animSpot.angles, anime);
-  flag = Spawn("script_model", spawnOrigin);
-  flag SetModel("anim_nazi_flag_burnt_rope");
+  flag = spawn("script_model", spawnOrigin);
+  flag setModel("anim_nazi_flag_burnt_rope");
   level waittill("pole_sparks");
   flag UseAnimTree(#animtree);
   flag SetFlaggedAnimKnob("flag_anim", anime, 1.0, 0.2, 1.0);
@@ -237,7 +237,7 @@ reichstag_dooranim(animName, animeName, msg, doConnectPaths) {
     doConnectPaths = true;
   }
   if(isDefined(self.isDoingAnim)) {
-    while (self.isDoingAnim) {
+    while(self.isDoingAnim) {
       wait(0.05);
     }
   }
@@ -245,8 +245,8 @@ reichstag_dooranim(animName, animeName, msg, doConnectPaths) {
     self ConnectPaths();
   }
   anime = level.scr_anim[animName][animeName];
-  org = Spawn("script_model", self.origin);
-  org SetModel("tag_origin_animate");
+  org = spawn("script_model", self.origin);
+  org setModel("tag_origin_animate");
   self.isDoingAnim = true;
   self LinkTo(org, "origin_animate_jnt");
   org UseAnimTree(#animtree);
@@ -269,7 +269,7 @@ preview_anim_single(triggerTN, animname, anime, isAxis) {
   ASSERTEX(isDefined(animSpot), "anim spot (targetname " + trig.target + ") can't be found.");
   trig waittill("trigger");
   trig Delete();
-  guy = Spawn("script_model", animSpot.origin);
+  guy = spawn("script_model", animSpot.origin);
   guy.angles = animSpot.angles;
   if(!isDefined(isAxis)) {
     isAxis = false;

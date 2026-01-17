@@ -5,7 +5,6 @@
 
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\lui_shared;
-
 #namespace full_screen_movie;
 
 class cfull_screen_movie: cluielem {

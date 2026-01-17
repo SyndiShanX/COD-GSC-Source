@@ -6,7 +6,6 @@
 #include scripts\core_common\ai\archetype_utility;
 #include scripts\core_common\ai\systems\init;
 #include scripts\core_common\throttle_shared;
-
 #namespace shared;
 
 autoexec main() {
@@ -16,7 +15,7 @@ autoexec main() {
   }
 }
 
-private _throwstowedweapon(entity, weapon, weaponmodel) {
+_throwstowedweapon(entity, weapon, weaponmodel) {
   entity waittill(#"death");
 
   if(isDefined(entity)) {
@@ -94,7 +93,7 @@ placeweaponon(weapon, position) {
   }
 
   self updateattachedweaponmodels();
-  assert(self.a.weaponpos[#"left"] == level.weaponnone || self.a.weaponpos[#"right"] == level.weaponnone);
+  assert(self.a.weaponpos[# "left"] == level.weaponnone || self.a.weaponpos[# "right"] == level.weaponnone);
 }
 
 detachweapon(weapon) {
@@ -145,15 +144,15 @@ updateattachedweaponmodels() {
 
 gettagforpos(position) {
   switch (position) {
-    case #"chest":
+    case # "chest":
       return "tag_weapon_chest";
-    case #"back":
+    case # "back":
       return "tag_stowed_back";
-    case #"left":
+    case # "left":
       return "tag_weapon_left";
-    case #"right":
+    case # "right":
       return "tag_weapon_right";
-    case #"hand":
+    case # "hand":
       return "tag_inhand";
     default:
       assertmsg("<dev string:x57>" + position);
@@ -182,7 +181,7 @@ throwweapon(weapon, positiontag, scavenger, deleteweaponafterdropping) {
     throwweapon = self dropweapon(weapon, positiontag, linearvelocity, angularvelocity, scavenger);
 
     if(isDefined(throwweapon)) {
-      throwweapon setcontents(throwweapon setcontents(0)&~(32768 | 67108864 | 8388608 | 33554432));
+      throwweapon setcontents(throwweapon setcontents(0) &~(32768 | 67108864 | 8388608 | 33554432));
     }
 
     if(deleteweaponafterdropping) {

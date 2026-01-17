@@ -10,7 +10,7 @@ main() {
   self endon("killanimscript");
   animscripts\utility::initialize("grenadecower");
 
-  if(isdefined(self.grenadeCowerFunction)) {
+  if(isDefined(self.grenadeCowerFunction)) {
     self[[self.grenadeCowerFunction]]();
     return;
   }
@@ -27,15 +27,15 @@ main() {
 
   grenadeAngle = 0;
 
-  if(isdefined(self.grenade)) // failsafe
+  if(isDefined(self.grenade)) // failsafe
     grenadeAngle = AngleClamp180(vectorToAngles(self.grenade.origin - self.origin)[1] - self.angles[1]);
   else
     grenadeAngle = self.angles[1];
 
   if(self.a.pose == "stand") {
-    if(isdefined(self.grenade) && TryDive(grenadeAngle))
+    if(isDefined(self.grenade) && TryDive(grenadeAngle)) {
       return;
-
+    }
     self setFlaggedAnimKnobAllRestart("cowerstart", % exposed_squat_down_grenade_F, % body, 1, 0.2);
     self animscripts\shared::DoNoteTracks("cowerstart");
   }

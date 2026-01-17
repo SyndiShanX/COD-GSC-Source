@@ -5,7 +5,6 @@
 
 #include scripts\core_common\gestures;
 #include scripts\core_common\util_shared;
-
 #namespace dev;
 
 debug_sphere(origin, radius, color, alpha, time) {
@@ -384,28 +383,28 @@ body_customization_populate(mode, var_ef4940a5) {
         var_a818c4e = body_customization_devgui_base + body_name + "<dev string:x258>" + var_1bf829f2;
         util::add_debug_command(var_a818c4e + "<dev string:x24d>" + "<dev string:x1aa>" + "<dev string:x1b4>" + "<dev string:x1a6>" + "<dev string:x1c2>" + playerbodytype + "<dev string:x10e>" + "<dev string:x1ce>" + outfitindex + "<dev string:x1d8>");
         types = [{
-          #path: "<dev string:x25c>", 
+          #path: "<dev string:x25c>",
           #field: "<dev string:x267>"
         }, {
-          #path: "<dev string:x26e>", 
+          #path: "<dev string:x26e>",
           #field: "<dev string:x27d>"
         }, {
-          #path: "<dev string:x285>", 
+          #path: "<dev string:x285>",
           #field: "<dev string:x292>"
         }, {
-          #path: "<dev string:x299>", 
+          #path: "<dev string:x299>",
           #field: "<dev string:x2ab>"
         }, {
-          #path: "<dev string:x2b6>", 
+          #path: "<dev string:x2b6>",
           #field: "<dev string:x2c1>"
         }, {
-          #path: "<dev string:x2c8>", 
+          #path: "<dev string:x2c8>",
           #field: "<dev string:x2db>"
         }, {
-          #path: "<dev string:x2e5>", 
+          #path: "<dev string:x2e5>",
           #field: "<dev string:x2f4>"
         }, {
-          #path: "<dev string:x2fc>", 
+          #path: "<dev string:x2fc>",
           #field: "<dev string:xd8>"
         }];
 
@@ -544,7 +543,7 @@ get_lookat_origin(player) {
   dir = vectorscale(forward, 8000);
   eye = player getEye();
   trace = bulletTrace(eye, eye + dir, 0, undefined);
-  return trace[#"position"];
+  return trace[# "position"];
 }
 
 draw_pathnode(node, color) {
@@ -585,7 +584,7 @@ node_get(player) {
       return undefined;
     }
 
-    if(node.type == #"path") {
+    if(node.type == # "path") {
       draw_pathnode(node, (1, 0, 1));
       continue;
     }
@@ -686,4 +685,3 @@ dev_get_point_pair() {
   points[1] = end;
   return points;
 }
-

@@ -21,12 +21,10 @@ init() {
   level.killstreakFuncs["emp"] = ::EMP_Use;
 
   level thread onPlayerConnect();
-
 }
 
-
 onPlayerConnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connected", player);
     player thread onPlayerSpawned();
   }
@@ -35,7 +33,7 @@ onPlayerConnect() {
 onPlayerSpawned() {
   self endon("disconnect");
 
-  for (;;) {
+  for(;;) {
     self waittill("spawned_player");
 
     if((level.teamBased && level.teamEMPed[self.team]) || (!level.teamBased && isDefined(level.empPlayer) && level.empPlayer != self))
@@ -78,9 +76,9 @@ EMP_JamTeam(teamName, duration, delay) {
   foreach(player in level.players) {
     player playLocalSound("emp_activate");
 
-    if(player.team != teamName)
+    if(player.team != teamName) {
       continue;
-
+    }
     if(player _hasPerk("specialty_localjammer"))
       player RadarJamOff();
   }
@@ -106,9 +104,9 @@ EMP_JamTeam(teamName, duration, delay) {
   level.teamEMPed[teamName] = false;
 
   foreach(player in level.players) {
-    if(player.team != teamName)
+    if(player.team != teamName) {
       continue;
-
+    }
     if(player _hasPerk("specialty_localjammer"))
       player RadarJamOn();
   }
@@ -127,9 +125,9 @@ EMP_JamPlayers(owner, duration, delay) {
   foreach(player in level.players) {
     player playLocalSound("emp_activate");
 
-    if(player == owner)
+    if(player == owner) {
       continue;
-
+    }
     if(player _hasPerk("specialty_localjammer"))
       player RadarJamOff();
   }
@@ -156,9 +154,9 @@ EMP_JamPlayers(owner, duration, delay) {
   maps\mp\gametypes\_hostmigration::waitLongDurationWithHostMigrationPause(duration);
 
   foreach(player in level.players) {
-    if(player == owner)
+    if(player == owner) {
       continue;
-
+    }
     if(player _hasPerk("specialty_localjammer"))
       player RadarJamOn();
   }
@@ -178,13 +176,13 @@ empPlayerFFADisconnect() {
 
 empEffects() {
   foreach(player in level.players) {
-    playerForward = anglestoforward(player.angles);
+    playerForward = anglesToForward(player.angles);
     playerForward = (playerForward[0], playerForward[1], 0);
     playerForward = VectorNormalize(playerForward);
 
     empDistance = 20000;
 
-    empEnt = Spawn("script_model", player.origin + (0, 0, 8000) + Vector_Multiply(playerForward, empDistance));
+    empEnt = spawn("script_model", player.origin + (0, 0, 8000) + Vector_Multiply(playerForward, empDistance));
     empEnt setModel("tag_origin");
     empEnt.angles = empEnt.angles + (270, 0, 0);
     empEnt thread empEffect(player);
@@ -201,13 +199,13 @@ empEffect(player) {
 EMP_TeamTracker() {
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     level waittill_either("joined_team", "emp_update");
 
     foreach(player in level.players) {
-      if(player.team == "spectator")
+      if(player.team == "spectator") {
         continue;
-
+      }
       player setEMPJammed(level.teamEMPed[player.team]);
     }
   }
@@ -216,13 +214,13 @@ EMP_TeamTracker() {
 EMP_PlayerTracker() {
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     level waittill_either("joined_team", "emp_update");
 
     foreach(player in level.players) {
-      if(player.team == "spectator")
+      if(player.team == "spectator") {
         continue;
-
+      }
       if(isDefined(level.empPlayer) && level.empPlayer != player)
         player setEMPJammed(true);
       else

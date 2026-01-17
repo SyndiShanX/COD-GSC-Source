@@ -47,7 +47,7 @@ rocket_init() {
   level.claw_arm_r = getEnt("claw_r_arm", "targetname");
   claw_attach(level.claw_arm_r, "claw_r");
   level.rocket = getEnt("zombie_rocket", "targetname");
-  rocket_pieces = getentarray(level.rocket.target, "targetname");
+  rocket_pieces = getEntArray(level.rocket.target, "targetname");
   for(i = 0; i < rocket_pieces.size; i++) {
     rocket_pieces[i] setforcenocull();
     rocket_pieces[i] linkto(level.rocket);
@@ -84,7 +84,7 @@ rocket_move_ready() {
   link_rocket_pieces();
   level.rocket_lifter_arm linkto(level.rocket_lifter);
   level.rocket_lifter moveTo(dock_spot.origin, 10, 3, 3);
-  level.rocket_lifter playsound("evt_rocket_roll");
+  level.rocket_lifter playSound("evt_rocket_roll");
   level.rocket_lifter waittill("movedone");
   level.rocket_lifter_arm unlink();
   rocket_move_vertical();
@@ -106,7 +106,7 @@ rocket_move_vertical() {
   wait(16.0);
   level.rocket unlink();
   level.rocket MoveZ(-20, 3);
-  level.claw_arm_r playsound("evt_rocket_claw_arm");
+  level.claw_arm_r playSound("evt_rocket_claw_arm");
   level.claw_arm_r moveTo(level.claw_extend_r_pos, 3.0);
   level.claw_arm_l moveTo(level.claw_extend_l_pos, 3.0);
   level thread maps\zombie_cosmodrome_amb::play_cosmo_announcer_vox("vox_ann_rocket_anim");
@@ -148,7 +148,7 @@ centrifuge_init() {
   wait(4);
   centrifuge_trap RotateYaw(720, 10.0, 0.0, 4.5);
   centrifuge_trap waittill("rotatedone");
-  centrifuge_trap playsound("zmb_cent_end");
+  centrifuge_trap playSound("zmb_cent_end");
   centrifuge_trap ClearClientFlag(level._SCRIPTMOVER_COSMODROME_CLIENT_FLAG_CENTRIFUGE_LIGHTS);
   level thread centrifuge_random();
 }
@@ -187,7 +187,7 @@ centrifuge_activate() {
     wait(time);
   }
   self stopLoopSound(2);
-  self playsound("zmb_cent_end");
+  self playSound("zmb_cent_end");
   for(i = 0; i < self._trap_movers.size; i++) {
     self._trap_movers[i] RotateYaw(360, 5.0, 0.0, 4.0);
   }
@@ -197,7 +197,7 @@ centrifuge_activate() {
     self._trap_movers[i] RotateTo((0, end_angle % 360, 0), 1.0, 0.0, 0.9);
   }
   wait(1.0);
-  self PlaySound("zmb_cent_lockdown");
+  self playSound("zmb_cent_lockdown");
   self notify("kill_counter_end");
 }
 
@@ -226,11 +226,11 @@ centrifuge_random() {
       slow_down_moment = Abs(slow_down_moment);
     }
     centrifuge_model stopLoopSound(4);
-    centrifuge_model playsound("zmb_cent_end");
+    centrifuge_model playSound("zmb_cent_end");
     wait(slow_down_moment);
     centrifuge_model waittill("rotatedone");
     centrifuge_damage_trigger notify("trap_done");
-    centrifuge_model PlaySound("zmb_cent_lockdown");
+    centrifuge_model playSound("zmb_cent_lockdown");
     centrifuge_model ClearClientFlag(level._SCRIPTMOVER_COSMODROME_CLIENT_FLAG_CENTRIFUGE_LIGHTS);
     centrifuge_model ClearClientFlag(level._SCRIPTMOVER_COSMODROME_CLIENT_FLAG_CENTRIFUGE_RUMBLE);
   }
@@ -238,10 +238,10 @@ centrifuge_random() {
 
 centrifuge_spin_warning(ent_centrifuge_model) {
   ent_centrifuge_model SetClientFlag(level._SCRIPTMOVER_COSMODROME_CLIENT_FLAG_CENTRIFUGE_LIGHTS);
-  ent_centrifuge_model playsound("zmb_cent_alarm");
-  ent_centrifuge_model PlaySound("vox_ann_centrifuge_spins_1");
+  ent_centrifuge_model playSound("zmb_cent_alarm");
+  ent_centrifuge_model playSound("vox_ann_centrifuge_spins_1");
   wait(1.0);
-  ent_centrifuge_model playsound("zmb_cent_start");
+  ent_centrifuge_model playSound("zmb_cent_start");
   wait(2.0);
   ent_centrifuge_model playLoopSound("zmb_cent_mach_loop", .6);
   wait(1.0);
@@ -267,7 +267,7 @@ centrifuge_damage() {
       if(!isDefined(ent.marked_for_death)) {
         ent.marked_for_death = true;
         ent thread maps\_zombiemode_traps::zombie_trap_death(self, randomInt(100));
-        ent PlaySound("zmb_cent_zombie_gib");
+        ent playSound("zmb_cent_zombie_gib");
       }
     }
   }
@@ -367,16 +367,16 @@ kill_counter_update() {
 
 spinner_add_award(start_angle, end_angle, prize) {
   index = level.spinner_awards.size;
-  level.spinner_awards[index] = SpawnStruct();
+  level.spinner_awards[index] = spawnStruct();
   level.spinner_awards[index].name = prize;
   level.spinner_awards[index].start_angle = start_angle;
   level.spinner_awards[index].end_angle = end_angle;
 }
 
 rocket_arm_sounds() {
-  level.rocket_lifter playsound("evt_rocket_set_main");
+  level.rocket_lifter playSound("evt_rocket_set_main");
   wait(13.8);
-  level.rocket_lifter playsound("evt_rocket_set_impact");
+  level.rocket_lifter playSound("evt_rocket_set_impact");
 }
 
 door_firetrap_init() {
@@ -400,7 +400,7 @@ door_firetrap_init() {
 unlink_rocket_pieces() {
   claw_detach(level.claw_arm_l, "claw_l");
   claw_detach(level.claw_arm_r, "claw_r");
-  rocket_pieces = getentarray(level.rocket.target, "targetname");
+  rocket_pieces = getEntArray(level.rocket.target, "targetname");
   for(i = 0; i < rocket_pieces.size; i++) {
     rocket_pieces[i] unlink();
   }
@@ -418,7 +418,7 @@ link_rocket_pieces() {
   claw_attach(level.claw_arm_l, "claw_l");
   level.claw_arm_r = getEnt("claw_r_arm", "targetname");
   claw_attach(level.claw_arm_r, "claw_r");
-  rocket_pieces = getentarray(level.rocket.target, "targetname");
+  rocket_pieces = getEntArray(level.rocket.target, "targetname");
   for(i = 0; i < rocket_pieces.size; i++) {
     rocket_pieces[i] linkto(level.rocket);
   }

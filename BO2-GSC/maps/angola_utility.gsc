@@ -108,8 +108,8 @@ init_fight(str_node, str_friend, str_enemy) {
   foreach(node in level.a_nd_engage)
   node.open = 1;
 
-  level.a_sp_friend = getentarray(str_friend, "targetname");
-  level.a_sp_enemy = getentarray(str_enemy, "targetname");
+  level.a_sp_friend = getEntArray(str_friend, "targetname");
+  level.a_sp_enemy = getEntArray(str_enemy, "targetname");
 }
 
 create_fight(e_friend, e_enemy, b_start_spawn, str_noteworthy) {
@@ -122,7 +122,7 @@ create_fight(e_friend, e_enemy, b_start_spawn, str_noteworthy) {
     else
       n_allowed_fights = 6;
 
-    current_enemy_fighters = getentarray(level.a_sp_enemy[0].targetname + "_ai", "targetname");
+    current_enemy_fighters = getEntArray(level.a_sp_enemy[0].targetname + "_ai", "targetname");
 
     if(current_enemy_fighters.size <= n_allowed_fights) {
       sp_enemy = level.a_sp_enemy[randomint(level.a_sp_enemy.size)];
@@ -203,7 +203,7 @@ cleanup_fight(str_name, str_key, n_delay) {
   if(isDefined(n_delay))
     wait(n_delay);
 
-  a_fighter_name = getentarray(str_name, str_key);
+  a_fighter_name = getEntArray(str_name, str_key);
 
   foreach(fighter in a_fighter_name) {
     if(isDefined(fighter)) {
@@ -403,7 +403,7 @@ equip_machete() {
   self animscripts\shared::placeweaponon(self.weapon, "none");
   self.melee_weapon = spawn("script_model", self gettagorigin("tag_weapon_right"));
   self.melee_weapon.angles = self gettagangles("tag_weapon_right");
-  self.melee_weapon setmodel("t6_wpn_machete_prop");
+  self.melee_weapon setModel("t6_wpn_machete_prop");
   self.melee_weapon linkto(self, "tag_weapon_right");
 }
 
@@ -415,7 +415,7 @@ unequip_machete() {
 equip_savimbi_machete() {
   self.melee_weapon = spawn("script_model", self gettagorigin("tag_weapon_left"));
   self.melee_weapon.angles = self gettagangles("tag_weapon_left");
-  self.melee_weapon setmodel("t6_wpn_machete_prop");
+  self.melee_weapon setModel("t6_wpn_machete_prop");
   self.melee_weapon linkto(self, "tag_weapon_left");
 }
 
@@ -529,7 +529,7 @@ unload_gaz66() {
 
 destroy_buffel() {
   self.fire_turret = 0;
-  playfxontag(getfx("buffel_explode"), self, "tag_body");
+  playFXOnTag(getfx("buffel_explode"), self, "tag_body");
   self notify("stop_fire");
   self unload_buffel();
 }
@@ -619,8 +619,7 @@ player_convoy_watch(str_flag) {
           wait(randomfloatrange(0.1, 0.2));
         }
       } else if(n_player_x > n_buffel_x + distx_death || n_player_x < n_buffel_x - distx_death || n_player_y > n_buffel_y + disty_death || n_player_y < n_buffel_y - disty_death) {
-        if(n_player_x < n_buffel_x - distx_death) {
-        } else if(n_player_x > n_buffel_x + distx_death) {
+        if(n_player_x < n_buffel_x - distx_death) {} else if(n_player_x > n_buffel_x + distx_death) {
           level.player dodamage(90, vh_lead_buffel.origin + vectorscale((1, 0, 0), 3000.0));
           wait(randomfloatrange(0.1, 0.2));
         } else
@@ -786,10 +785,10 @@ create_after_strafe_fights(n_heli_runs) {
   a_scenes[3] = "_04";
   a_scenes[4] = "_05";
   v_angles = level.player getplayerangles();
-  v_check = level.player.origin + anglestoforward(v_angles) * 500;
+  v_check = level.player.origin + anglesToForward(v_angles) * 500;
   scene = array_randomize(a_scenes);
   align = get_array_of_closest(v_check, a_spots, undefined, 3);
-  a_old_align = getentarray("fight_align", "script_noteworthy");
+  a_old_align = getEntArray("fight_align", "script_noteworthy");
 
   for(i = 0; i < a_old_align.size; i++)
     a_old_align[i] delete();
@@ -883,8 +882,8 @@ attach_weapon() {
 #using_animtree("fxanim_props");
 
 animate_grass(is_default) {
-  grass_array = getentarray("fxanim_heli_grass_flyover", "targetname");
-  far_grass_array = getentarray("fxanim_heli_grass_flyover_2", "targetname");
+  grass_array = getEntArray("fxanim_heli_grass_flyover", "targetname");
+  far_grass_array = getEntArray("fxanim_heli_grass_flyover_2", "targetname");
 
   foreach(grass in grass_array) {
     grass useanimtree(#animtree);
@@ -918,19 +917,19 @@ animate_grass_single() {
 }
 
 stop_savannah_grass() {
-  grass_array = getentarray("fxanim_heli_grass_flyover", "targetname");
+  grass_array = getEntArray("fxanim_heli_grass_flyover", "targetname");
 
   foreach(grass in grass_array)
   grass notify("stop_loop");
 
-  grass_array = getentarray("fxanim_heli_grass_flyover_2", "targetname");
+  grass_array = getEntArray("fxanim_heli_grass_flyover_2", "targetname");
 
   foreach(grass in grass_array)
   grass notify("stop_loop");
 }
 
 animate_heli_grass(is_default) {
-  grass_array = getentarray("fxanim_heli_grass_land", "targetname");
+  grass_array = getEntArray("fxanim_heli_grass_land", "targetname");
 
   foreach(grass in grass_array) {
     grass useanimtree(#animtree);
@@ -946,33 +945,33 @@ animate_heli_grass(is_default) {
 }
 
 victory_grass() {
-  static_grass = getentarray("static_heli_grass_land", "targetname");
+  static_grass = getEntArray("static_heli_grass_land", "targetname");
 
   foreach(grass in static_grass)
   grass delete();
 
-  cloth_grass = getentarray("fxanim_heli_grass_land", "targetname");
+  cloth_grass = getEntArray("fxanim_heli_grass_land", "targetname");
 
   foreach(grass in cloth_grass)
   grass show();
 }
 
 hide_victory_grass() {
-  cloth_grass = getentarray("fxanim_heli_grass_land", "targetname");
+  cloth_grass = getEntArray("fxanim_heli_grass_land", "targetname");
 
   foreach(grass in cloth_grass)
   grass hide();
 }
 
 turn_on_convoy_headlights() {
-  a_vh = getentarray("convoy", "script_noteworthy");
+  a_vh = getEntArray("convoy", "script_noteworthy");
 
   foreach(vehicle in a_vh)
   vehicle setclientflag(10);
 }
 
 delete_array(value, key) {
-  stuff = getentarray(value, key);
+  stuff = getEntArray(value, key);
 
   for(i = 0; i < stuff.size; i++)
     stuff[i] delete();
@@ -1095,8 +1094,8 @@ remove_buffel_riders() {
 }
 
 riverbed_fail_watch() {
-  array_thread(getentarray("riverbed_warning", "targetname"), ::riverbed_fail_warning);
-  array_thread(getentarray("riverbed_fail", "targetname"), ::riverbed_fail_kill);
+  array_thread(getEntArray("riverbed_warning", "targetname"), ::riverbed_fail_warning);
+  array_thread(getEntArray("riverbed_fail", "targetname"), ::riverbed_fail_kill);
 }
 
 riverbed_fail_warning() {
@@ -1114,7 +1113,7 @@ riverbed_fail_warning() {
 
 riverbed_fail_kill() {
   self waittill("trigger");
-  setdvar("ui_deadquote", & "ANGOLA_CONVOY_FAIL");
+  setdvar("ui_deadquote", &"ANGOLA_CONVOY_FAIL");
   level.player maps\_mortar::explosion_boom("mortar_savannah");
   wait 0.45;
   level.player dodamage(level.player.health + 1000, (0, 0, 0));
@@ -1123,7 +1122,7 @@ riverbed_fail_kill() {
 mpla_scripted_attach_machete(ai_guy) {
   ai_guy.scripted_melee_weapon = spawn("script_model", ai_guy gettagorigin("tag_weapon_left"));
   ai_guy.scripted_melee_weapon.angles = ai_guy gettagangles("tag_weapon_left");
-  ai_guy.scripted_melee_weapon setmodel("t6_wpn_machete_prop");
+  ai_guy.scripted_melee_weapon setModel("t6_wpn_machete_prop");
   ai_guy.scripted_melee_weapon linkto(ai_guy, "tag_weapon_left", (0, 0, 0), (0, 0, 0));
 }
 
@@ -1163,7 +1162,7 @@ toggle_player_radio(b_toggle) {
 }
 
 riverbed_lockbreaker_perk() {
-  mortar_array = getentarray("pickup_mortar", "targetname");
+  mortar_array = getEntArray("pickup_mortar", "targetname");
 
   foreach(mortar in mortar_array)
   mortar delete();
@@ -1173,7 +1172,7 @@ riverbed_lockbreaker_perk() {
   t_open sethintstring(&"SCRIPT_HINT_BRUTE_FORCE");
   t_open setcursorhint("HINT_NOICON");
   t_open trigger_off();
-  a_weapons = getentarray("lockbreaker_weapon", "script_noteworthy");
+  a_weapons = getEntArray("lockbreaker_weapon", "script_noteworthy");
 
   foreach(weapon in a_weapons)
   weapon trigger_off();
@@ -1184,7 +1183,7 @@ riverbed_lockbreaker_perk() {
   t_open waittill("trigger");
   set_objective(level.obj_lockbreaker, t_open, "remove");
   t_open delete();
-  a_weapons = getentarray("lockbreaker_weapon", "script_noteworthy");
+  a_weapons = getEntArray("lockbreaker_weapon", "script_noteworthy");
 
   foreach(weapon in a_weapons)
   weapon trigger_on();
@@ -1221,11 +1220,11 @@ monitor_mortar_ammo() {
 fake_fire(m_model) {
   fire_origin = m_model gettagorigin("tag_flash");
   fire_angles = m_model gettagangles("tag_flash");
-  forward = anglestoforward(fire_angles);
+  forward = anglesToForward(fire_angles);
   forward = vectorscale(forward, 750);
-  playfxontag(level._effect["scene_weapon_flash"], m_model, "tag_flash");
+  playFXOnTag(level._effect["scene_weapon_flash"], m_model, "tag_flash");
   m_model playsoundontag("wpn_ak47_fire_npc", "tag_flash");
-  magicbullet("ak47_sp", fire_origin, m_model.origin + anglestoforward(fire_angles) * 500);
+  magicbullet("ak47_sp", fire_origin, m_model.origin + anglesToForward(fire_angles) * 500);
 }
 
 fake_weapon(m_model) {
@@ -1241,7 +1240,7 @@ warn_to_kill_player(n_time_to_fail) {
   savimbi_buffel = getent("savimbi_buffel", "targetname");
 
   for(x = 1; x < n_time_to_fail + 1; x++) {
-    area_forward = anglestoforward(savimbi_buffel.angles) * 500 * (n_time_to_fail + 1 - x);
+    area_forward = anglesToForward(savimbi_buffel.angles) * 500 * (n_time_to_fail + 1 - x);
     fake_mortar.origin = savimbi_buffel.origin + area_forward + (randomintrange(-500, 500), 0, 0);
     fake_mortar thread maps\_mortar::mortar_boom(fake_mortar.origin, 0.05, 0.25, 50, getfx("mortar_savannah"), 0, 0);
     wait 1;

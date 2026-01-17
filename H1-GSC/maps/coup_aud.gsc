@@ -206,7 +206,7 @@ handle_heli_scripted_sfx() {
 heli_scripted_sfx(var_0, var_1) {
   self waittill("trigger", var_2);
 
-  if(isdefined(var_1))
+  if(isDefined(var_1))
     var_2 waittill(var_1);
 
   var_2 play_helicopter_scripted_sfx(var_0);
@@ -220,7 +220,7 @@ three_heli_passby_trig(var_0) {
   var_4 = 1;
 
   foreach(var_6 in var_3) {
-    if(var_6.classname == "script_vehicle_mi24p_hind_desert" && isdefined(var_6.script_vehiclespawngroup) && var_6.script_vehiclespawngroup == var_1) {
+    if(var_6.classname == "script_vehicle_mi24p_hind_desert" && isDefined(var_6.script_vehiclespawngroup) && var_6.script_vehiclespawngroup == var_1) {
       var_6 play_helicopter_scripted_sfx(var_0 + var_4);
       var_4++;
     }
@@ -247,7 +247,7 @@ aud_car_sound_node_spawner() {
 }
 
 aud_car_event_handler(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(isdefined(var_5))
+  if(isDefined(var_5))
     soundscripts\_audio_mix_manager::mm_add_submix(var_5);
 
   thread aud_car_engine_idle_handler(var_0, var_1, var_2, var_3, var_4);
@@ -256,14 +256,14 @@ aud_car_event_handler(var_0, var_1, var_2, var_3, var_4, var_5) {
   self scalepitch(var_3, var_4);
   wait(var_4);
 
-  if(isdefined(var_5))
+  if(isDefined(var_5))
     soundscripts\_audio_mix_manager::mm_clear_submix(var_5);
 }
 
 aud_car_engine_idle_handler(var_0, var_1, var_2, var_3, var_4) {
   level.car_idle_engine_sound_node scalevolume(0, 0);
   waitframe();
-  level.car_idle_engine_sound_node playloopsound("scn_coup_car_idle_engine");
+  level.car_idle_engine_sound_node playLoopSound("scn_coup_car_idle_engine");
   level.car_idle_engine_sound_node scalevolume(0.71, var_1);
   level.car_idle_engine_sound_node scalepitch(var_0, var_1);
   wait(var_2 + var_1);
@@ -274,7 +274,7 @@ aud_car_engine_idle_handler(var_0, var_1, var_2, var_3, var_4) {
 }
 
 aud_play_engine(var_0, var_1) {
-  self playsound("scn_coup_car_move_engine_" + var_1);
+  self playSound("scn_coup_car_move_engine_" + var_1);
 }
 
 aud_stop_engine(var_0, var_1) {
@@ -287,7 +287,7 @@ aud_stop_engine(var_0, var_1) {
 aud_shutoff_engine() {
   wait 1.0;
   soundscripts\_audio_mix_manager::mm_add_submix("engine_shutoff_mix");
-  level.car_move_engine_sound_node playsound("scn_coup_engine_shutoff");
+  level.car_move_engine_sound_node playSound("scn_coup_engine_shutoff");
   level.car_move_engine_sound_node thread aud_stop_engine("02", 1);
 }
 

@@ -6,15 +6,15 @@
 #include common_scripts\utility;
 #include maps\_utility;
 
-// This script automaticly plays a users specified oneshot effect on all prefabs that have the 
-// specified "script_struct" and "targetname" It also excepts angles from the "script_struct" 
+// This script automaticly plays a users specified oneshot effect on all prefabs that have the
+// specified "script_struct" and "targetname" It also excepts angles from the "script_struct"
 // but will set a default angle of ( 0, 0, 0 ) if none is defined.
 //
-// example of the syntax: 
+// example of the syntax:
 // global_FX( "targetname", "fxIDname", "fxFile", "delay"
 
 main() {
-  if(!isdefined(level.global_fx))
+  if(!isDefined(level.global_fx))
     level.global_fx = [];
 
   level._global_fx_ents = [];
@@ -112,7 +112,6 @@ main() {
 
   // prefabs/misc_models/com_restaurantceilinglamp_on.map
   global_FX("light_glow_white_lamp_FX_origin", "light_glow_white_lamp_FX", "misc/light_glow_white_lamp", randomStartDelay);
-
 }
 
 // I've wired this into "Repackage Zone" checkbox in the compile tab on IW_Launcher. If you want to change this you'll have to get the repackager updated too. - Nate
@@ -121,19 +120,19 @@ global_FX(targetname, fxName, fxFile, delay, soundalias, randomrange) {
 
   // script_structs
   ents = getstructarray(targetname, "targetname");
-  if(!isdefined(ents))
+  if(!isDefined(ents))
     return;
-  if(ents.size <= 0)
+  if(ents.size <= 0) {
     return;
-
-  for (i = 0; i < ents.size; i++) {
+  }
+  for(i = 0; i < ents.size; i++) {
     ent = ents[i] global_FX_create(fxName, fxFile, delay, soundalias, randomrange);
 
-    if(!isdefined(ents[i].script_noteworthy))
+    if(!isDefined(ents[i].script_noteworthy)) {
       continue;
-
+    }
     note = ents[i].script_noteworthy;
-    if(!isdefined(level._global_fx_ents[note])) {
+    if(!isDefined(level._global_fx_ents[note])) {
       level._global_fx_ents[note] = [];
     }
 
@@ -142,17 +141,17 @@ global_FX(targetname, fxName, fxFile, delay, soundalias, randomrange) {
 }
 
 global_FX_create(fxName, fxFile, delay, soundalias, randomrange) {
-  if(!isdefined(level._effect))
+  if(!isDefined(level._effect))
     level._effect = [];
-  if(!isdefined(level._effect[fxName]))
+  if(!isDefined(level._effect[fxName]))
     level._effect[fxName] = loadfx(fxFile);
 
-  if(isdefined(randomrange)) {
+  if(isDefined(randomrange)) {
     delay += RandomFloat(randomrange);
   }
 
   // default effect angles if they dont exist
-  if(!isdefined(self.angles))
+  if(!isDefined(self.angles))
     self.angles = (0, 0, 0);
 
   ent = createOneshotEffect(fxName);
@@ -160,7 +159,7 @@ global_FX_create(fxName, fxFile, delay, soundalias, randomrange) {
   ent.v["angles"] = (self.angles);
   ent.v["fxid"] = fxName;
   ent.v["delay"] = delay;
-  if(isdefined(soundalias)) {
+  if(isDefined(soundalias)) {
     ent.v["soundalias"] = soundalias;
   }
 

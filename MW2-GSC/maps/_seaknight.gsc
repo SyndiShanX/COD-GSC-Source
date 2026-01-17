@@ -35,7 +35,6 @@ main(model, type) {
   build_light(model, "wingtip_red1", "tag_light_R_wing1", "misc/aircraft_light_wingtip_red", "running", randomStartDelay);
   build_light(model, "wingtip_red2", "tag_light_R_wing2", "misc/aircraft_light_wingtip_red", "running", randomStartDelay);
   build_compassicon("helicopter", false);
-
 }
 
 init_local() {
@@ -64,8 +63,8 @@ set_vehicle_anims(positions) {
 
 setanims() {
   positions = [];
-  for (i = 0; i < 6; i++)
-    positions[i] = spawnstruct();
+  for(i = 0; i < 6; i++)
+    positions[i] = spawnStruct();
 
   positions[0].idle[0] = % SeaKnight_Pilot_idle;
   positions[0].idle[1] = % SeaKnight_Pilot_switches;
@@ -107,14 +106,12 @@ setanims() {
   positions[3].getout = % ch46_unload_3;
   positions[4].getout = % ch46_unload_4;
 
-
   positions[1].getin = % ch46_load_1;
   positions[2].getin = % ch46_load_2;
   positions[3].getin = % ch46_load_3;
   positions[4].getin = % ch46_load_4;
 
   return positions;
-
 }
 
 unload_groups() {
@@ -128,9 +125,7 @@ unload_groups() {
   return unload_groups;
 }
 
-set_attached_models() {
-
-}
+set_attached_models() {}
 
 /*QUAKED script_vehicle_ch46e (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 

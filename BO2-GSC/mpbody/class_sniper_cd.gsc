@@ -16,7 +16,7 @@ precache() {
 }
 
 set_player_model() {
-  self setmodel("c_mul_mp_cordis_sniper_fb");
+  self setModel("c_mul_mp_cordis_sniper_fb");
   self setviewmodel("c_mul_mp_cordis_sniper_viewhands");
   heads = [];
 }

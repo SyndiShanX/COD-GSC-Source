@@ -5,7 +5,6 @@
 
 #include scripts\core_common\player\player_stats;
 #include scripts\mp_common\item_world;
-
 #namespace wz_jukebox;
 
 autoexec __init() {

@@ -15,7 +15,6 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_trial_disable_buys;
 
 autoexec __init__system__() {
@@ -36,7 +35,7 @@ __init__() {
   zm_trial::register_challenge(#"disable_buys", &on_begin, &on_end);
 }
 
-private on_begin(var_a29299fb) {
+on_begin(var_a29299fb) {
   if(!(isDefined(level.buys_disabled) && level.buys_disabled)) {
     level.buys_disabled = 1;
     level notify(#"disable_buys");
@@ -55,7 +54,7 @@ private on_begin(var_a29299fb) {
   }
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   assert(isDefined(level.buys_disabled) && level.buys_disabled);
 
   if(!round_reset) {
@@ -114,7 +113,7 @@ function_8327d26e() {
   });
 }
 
-private function_6fd56055() {
+function_6fd56055() {
   assert(isDefined(level._spawned_wallbuys));
 
   foreach(wallbuy in level._spawned_wallbuys) {
@@ -150,7 +149,7 @@ private function_6fd56055() {
   }
 }
 
-private function_fa70c8c4() {
+function_fa70c8c4() {
   assert(isDefined(level._spawned_wallbuys));
 
   foreach(wallbuy in level._spawned_wallbuys) {
@@ -186,7 +185,7 @@ private function_fa70c8c4() {
   }
 }
 
-private _open_arcs(blocker) {
+_open_arcs(blocker) {
   if(isDefined(blocker.script_noteworthy) && (blocker.script_noteworthy == "electric_door" || blocker.script_noteworthy == "local_electric_door")) {
     return false;
   }
@@ -194,7 +193,7 @@ private _open_arcs(blocker) {
   return true;
 }
 
-private function_fcf197fa(targetname, show) {
+function_fcf197fa(targetname, show) {
   blockers = getEntArray(targetname, "targetname");
 
   if(isDefined(blockers)) {
@@ -206,12 +205,12 @@ private function_fcf197fa(targetname, show) {
           foreach(var_1d6a70e8 in var_c819ac8) {
             if(isDefined(var_1d6a70e8.objectid) && !var_1d6a70e8 zm_utility::function_1a4d2910()) {
               switch (var_1d6a70e8.objectid) {
-                case #"symbol_back_debris":
-                case #"symbol_front_power":
-                case #"symbol_back":
-                case #"symbol_front":
-                case #"symbol_front_debris":
-                case #"symbol_back_power":
+                case # "symbol_back_debris":
+                case # "symbol_front_power":
+                case # "symbol_back":
+                case # "symbol_front":
+                case # "symbol_front_debris":
+                case # "symbol_back_power":
                   if(show) {
                     var_1d6a70e8 show();
                   } else {
@@ -230,17 +229,17 @@ private function_fcf197fa(targetname, show) {
   }
 }
 
-private function_a4284cb4() {
+function_a4284cb4() {
   function_fcf197fa("zombie_door", 0);
   function_fcf197fa("zombie_debris", 0);
 }
 
-private function_c606ef4b() {
+function_c606ef4b() {
   function_fcf197fa("zombie_door", 1);
   function_fcf197fa("zombie_debris", 1);
 }
 
-private function_4516d298() {
+function_4516d298() {
   level endon(#"end_game");
 
   while(level flag::get("moving_chest_now")) {
@@ -248,7 +247,7 @@ private function_4516d298() {
   }
 }
 
-private function_610df6d() {
+function_610df6d() {
   level endon(#"end_game");
 
   while(isDefined(self._box_open) && self._box_open) {
@@ -256,7 +255,7 @@ private function_610df6d() {
   }
 }
 
-private hide_magicbox() {
+hide_magicbox() {
   function_4516d298();
 
   if(level.chest_index != -1) {
@@ -266,7 +265,7 @@ private hide_magicbox() {
   }
 }
 
-private show_magicbox() {
+show_magicbox() {
   function_4516d298();
 
   if(level.chest_index != -1) {
@@ -275,7 +274,7 @@ private show_magicbox() {
   }
 }
 
-private function_d5e17413() {
+function_d5e17413() {
   if(!isDefined(level.var_5bfd847e) || !level flag::exists(level.var_5bfd847e)) {
     return;
   }
@@ -283,7 +282,7 @@ private function_d5e17413() {
   level clientfield::set("fasttravel_exploder", 0);
 }
 
-private function_c348adcc() {
+function_c348adcc() {
   if(!isDefined(level.var_5bfd847e) || !level flag::exists(level.var_5bfd847e)) {
     return;
   }
@@ -293,9 +292,9 @@ private function_c348adcc() {
   }
 }
 
-private hide_traps() {
+hide_traps() {
   a_t_traps = getEntArray("zombie_trap", "targetname");
-  str_text = #"hash_55d25caf8f7bbb2f";
+  str_text = # "hash_55d25caf8f7bbb2f";
 
   foreach(t_trap in a_t_traps) {
     t_trap zm_traps::trap_set_string(str_text);
@@ -304,9 +303,9 @@ private hide_traps() {
   level notify(#"traps_cooldown");
 }
 
-private show_traps() {
+show_traps() {
   a_t_traps = getEntArray("zombie_trap", "targetname");
-  str_text = zm_utility::function_d6046228(#"hash_23c1c09e94181fdb", #"hash_6e8ef1b690e98e51");
+  str_text = zm_utility::function_d6046228(#"hash_23c1c09e94181fdb", # "hash_6e8ef1b690e98e51");
 
   foreach(t_trap in a_t_traps) {
     t_trap zm_traps::trap_set_string(str_text, t_trap.zombie_cost);

@@ -25,8 +25,7 @@ init_flags() {
   flag_init("morals_scene_complete");
 }
 
-init_spawn_funcs() {
-}
+init_spawn_funcs() {}
 
 switch_head() {
   level.ai_harper = self;
@@ -39,7 +38,7 @@ switch_head() {
 
 switch_head_terrorist_4() {
   level.ai_terrorist_4 = self;
-  self setmodel("c_mul_cordis_body2_3");
+  self setModel("c_mul_cordis_body2_3");
 
   if(isDefined(self.headmodel)) {
     model = self.headmodel;
@@ -51,7 +50,7 @@ switch_head_terrorist_4() {
 
 switch_head_terrorist_5() {
   level.ai_terrorist_5 = self;
-  self setmodel("c_mul_cordis_body1_4");
+  self setModel("c_mul_cordis_body1_4");
 
   if(isDefined(self.headmodel)) {
     model = self.headmodel;
@@ -149,7 +148,7 @@ morals_setup() {
 
 morals_intro_ambient() {
   vh_vtol = getent("morals_vtol_1", "targetname");
-  a_sp_terrorists = getentarray("pre_morals_terrorist", "targetname");
+  a_sp_terrorists = getEntArray("pre_morals_terrorist", "targetname");
   moral_terrorist_group = [];
 
   foreach(spawner in a_sp_terrorists) {
@@ -222,8 +221,7 @@ morals_vtol_setup() {
   vh_vtol veh_magic_bullet_shield(1);
 }
 
-morals_ambient_qrotor_delete() {
-}
+morals_ambient_qrotor_delete() {}
 
 shoot_down_vtol() {
   level.player enableinvulnerability();
@@ -278,7 +276,7 @@ morals_arm_light_fx() {
   player_model = get_model_or_models_from_scene("morals_shoot_vtol_player", "player_body");
   ent_origin = spawn_model("tag_origin", player_model gettagorigin("J_Wrist_RI"), player_model gettagangles("J_Wrist_RI"));
   ent_origin linkto(player_model, "J_Wrist_RI");
-  playfxontag(getfx("morals_arm_light"), ent_origin, "tag_origin");
+  playFXOnTag(getfx("morals_arm_light"), ent_origin, "tag_origin");
   wait 14;
   ent_origin delete();
 }
@@ -288,7 +286,7 @@ morals_shoot_vtol_fire_rocket(ai_guy) {
   m_fhj = getent("fhj_morals", "targetname");
   vh_vtol = getent("morals_vtol_1", "targetname");
   m_rocket = spawn_model("projectile_at4", m_fhj.origin, m_fhj.angles);
-  playfxontag(getfx("morals_fhj_rocket_trail"), m_rocket, "tag_fx");
+  playFXOnTag(getfx("morals_fhj_rocket_trail"), m_rocket, "tag_fx");
   m_rocket moveto(vh_vtol.origin - vectorscale((0, 0, 1), 112.0), 0.5);
   m_rocket waittill("movedone");
   m_rocket delete();
@@ -298,9 +296,9 @@ morals_shoot_vtol_fire_rocket(ai_guy) {
   turn_off_vehicle_exhaust(vh_vtol);
   turn_off_vehicle_tread_fx(vh_vtol);
   vh_vtol vehicle_toggle_sounds(0);
-  playfxontag(level._effect["moral_vtol_explosion"], vh_vtol, "tag_origin");
-  playfxontag(level._effect["fx_vtol_engine_burn1"], vh_vtol, "tag_fx_engine_right1");
-  playfxontag(level._effect["fx_yemen_vtol_smoke"], vh_vtol, "tag_origin");
+  playFXOnTag(level._effect["moral_vtol_explosion"], vh_vtol, "tag_origin");
+  playFXOnTag(level._effect["fx_vtol_engine_burn1"], vh_vtol, "tag_fx_engine_right1");
+  playFXOnTag(level._effect["fx_yemen_vtol_smoke"], vh_vtol, "tag_origin");
 }
 
 morals_shoot_vtol_camera_in(unused_param) {
@@ -323,11 +321,11 @@ moral_vtol_crash_anim(guy) {
   stop_exploder(1027);
   exploder(1026);
   level thread run_scene_first_frame("morals_vtol_dead");
-  vh_vtol setmodel("veh_t6_air_v78_vtol_burned");
+  vh_vtol setModel("veh_t6_air_v78_vtol_burned");
   level end_scene("morals_shoot_vtol");
   level delete_scene("morals_shoot_vtol");
   level thread load_gump_in_two();
-  running_terrorist = getentarray("yemen_terrorist_running_moral", "targetname");
+  running_terrorist = getEntArray("yemen_terrorist_running_moral", "targetname");
 
   for(i = 0; i < running_terrorist.size; i++)
     running_terrorist[i] delete();
@@ -412,7 +410,7 @@ setup_capture_drones() {
     }
     m_drone = spawn("script_model", (0, 0, 0));
     m_drone.angles = (0, 0, 0);
-    m_drone setmodel(random(crowd_models_close));
+    m_drone setModel(random(crowd_models_close));
     m_drone attach(random(crowd_models_close_head), "");
     m_drone attach("t6_wpn_ar_an94_world", "tag_weapon_right");
     m_drone.animname = "terrorist_" + (i + 1) + "_moral";
@@ -421,7 +419,7 @@ setup_capture_drones() {
   for(i = 0; i < 3; i++) {
     m_drone = spawn("script_model", (0, 0, 0));
     m_drone.angles = (0, 0, 0);
-    m_drone setmodel(random(crowd_models_close));
+    m_drone setModel(random(crowd_models_close));
     m_drone attach(random(crowd_models_close_head), "");
     m_drone attach("t6_wpn_ar_an94_world", "tag_weapon_right");
     m_drone.animname = "terrorist_" + (i + 1) + "_capture";
@@ -435,7 +433,7 @@ vtol_approach_ambient_guys() {
   array_delete(a_ai_morals_runners);
   a_sp_morals_shooters = get_ent_array("pre_morals_terrorist", "targetname");
   array_delete(a_sp_morals_shooters);
-  a_qrotors = getentarray("morals_qrotor", "targetname");
+  a_qrotors = getEntArray("morals_qrotor", "targetname");
   array_thread(a_qrotors, ::qrotor_delete);
 }
 
@@ -448,13 +446,13 @@ qrotor_delete() {
 }
 
 morals_capture_punch(harper) {
-  playfxontag(level._effect["morals_punch"], harper, "j_head");
+  playFXOnTag(level._effect["morals_punch"], harper, "j_head");
 }
 
 morals_capture_start_choice(player) {
   level endon("menendez_shot");
   level endon("harper_shot");
-  screen_message_create(&"YEMEN_SHOOT_HARPER", & "YEMEN_SHOOT_MENENDEZ", undefined, -80);
+  screen_message_create(&"YEMEN_SHOOT_HARPER", &"YEMEN_SHOOT_MENENDEZ", undefined, -80);
   wait 0.5;
   level.player thread watch_shoot_harper();
   level.player thread watch_shoot_menendez();
@@ -534,8 +532,8 @@ morals_choice_outcome() {
     level thread run_scene_and_delete("morals_shoot_harper");
     wait 1.2;
     gun = get_model_or_models_from_scene("morals_shoot_harper", "morals_fn57");
-    playfxontag(level._effect["muzzle_flash"], gun, "tag_fx");
-    playfxontag(level._effect["harper_blood"], level.ai_harper, "j_head");
+    playFXOnTag(level._effect["muzzle_flash"], gun, "tag_fx");
+    playFXOnTag(level._effect["harper_blood"], level.ai_harper, "j_head");
     wait 0.1;
 
     if(is_mature()) {
@@ -587,7 +585,7 @@ play_muzzle_flash_shoot_menendez() {
   wait 0.05;
   level waittill("morals_shoot_menendez_fire");
   menendez = get_ais_from_scene("morals_shoot_menendez", "menendez_morals");
-  playfxontag(getfx("muzzle_flash_menendez"), menendez, "tag_flash");
+  playFXOnTag(getfx("muzzle_flash_menendez"), menendez, "tag_flash");
 }
 
 play_blood_screen_fx() {
@@ -748,8 +746,8 @@ player_switch_out(player) {
 fake_combat_sounds() {
   canned_combat_1 = spawn("script_origin", (-4915, -4479, 455));
   canned_combat_2 = spawn("script_origin", (-4995, -5589, 572));
-  canned_combat_1 playloopsound("amb_canned_battle_l");
-  canned_combat_2 playloopsound("amb_canned_battle_r");
+  canned_combat_1 playLoopSound("amb_canned_battle_l");
+  canned_combat_2 playLoopSound("amb_canned_battle_r");
 }
 
 vo_morals_shoot_vtol() {

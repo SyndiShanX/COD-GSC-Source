@@ -492,8 +492,8 @@ driver_turnspecial(var_0) {
 }
 
 playerdeath(var_0) {
-  playfxontag(common_scripts\utility::getfx("execution_muzzleflash"), var_0, "tag_flash");
-  playfxontag(common_scripts\utility::getfx("execution_shell_eject"), var_0, "tag_brass");
+  playFXOnTag(common_scripts\utility::getfx("execution_muzzleflash"), var_0, "tag_flash");
+  playFXOnTag(common_scripts\utility::getfx("execution_shell_eject"), var_0, "tag_brass");
   level.player playrumbleonentity("grenade_rumble");
   level.player thread maps\_utility::play_sound_on_entity("assassination_shot");
   wait 0.1;
@@ -560,7 +560,7 @@ playerhitdamage(var_0) {
 playerbreathingsound(var_0, var_1) {
   wait 2;
 
-  for (;;) {
+  for(;;) {
     wait 0.2;
 
     if(var_1 <= 0) {
@@ -577,8 +577,8 @@ playerbreathingsound(var_0, var_1) {
 }
 
 melee_kill(var_0) {
-  var_0 playsound("melee_swing_large");
-  var_0.favoriteenemy playsound("melee_hit");
+  var_0 playSound("melee_swing_large");
+  var_0.favoriteenemy playSound("melee_hit");
   var_0.favoriteenemy.allowdeath = 0;
   var_0.favoriteenemy notify("anim_death");
   thread kill_self(var_0.favoriteenemy);
@@ -600,24 +600,24 @@ killed_by_player(var_0) {
   self notify("killed_by_player_func");
   self endon("killed_by_player_func");
 
-  for (;;) {
+  for(;;) {
     self waittill("death", var_1);
 
-    if(isdefined(var_1) && isplayer(var_1)) {
+    if(isDefined(var_1) && isplayer(var_1)) {
       break;
     }
   }
 
   self notify("killed_by_player");
 
-  if(isdefined(var_0)) {
+  if(isDefined(var_0)) {
     animscripts\shared::dropallaiweapons();
     self startragdoll();
   }
 }
 
 playdriveranim(var_0, var_1) {
-  if(isdefined(var_1))
+  if(isDefined(var_1))
     printturnanim(" ---" + var_1 + ", " + var_0);
   else
     printturnanim(" ---, " + var_0);
@@ -631,7 +631,7 @@ playdriveranim(var_0, var_1) {
 }
 
 loopdriveranim(var_0, var_1, var_2) {
-  if(isdefined(var_1))
+  if(isDefined(var_1))
     printturnanim(" --- (loop) " + var_1 + ", " + var_0);
   else
     printturnanim(" --- (loop) , " + var_0);
@@ -645,7 +645,7 @@ loopdriveranim(var_0, var_1, var_2) {
 
   thread maps\_anim::anim_loop_solo(self.driver, "cardriver_" + var_0, "tag_driver", "stop_driver_loop");
 
-  if(isdefined(var_2)) {
+  if(isDefined(var_2)) {
     self waittillmatch("single anim", var_2);
     printturnanim(" --- MATCHED" + var_1 + ", " + var_0 + ", " + var_2);
   }
@@ -659,17 +659,17 @@ looppassengeranim(var_0, var_1) {
   self notify("stop_passenger_loop");
   thread maps\_anim::anim_loop_solo(self.passenger, var_0, "tag_passenger", "stop_passenger_loop");
 
-  if(isdefined(var_1))
+  if(isDefined(var_1))
     self waittillmatch("single anim", var_1);
 }
 
 printturnanim(var_0) {
-  if(isdefined(level.debug_turnanims) && level.debug_turnanims)
+  if(isDefined(level.debug_turnanims) && level.debug_turnanims)
     return;
 }
 
 printpassengeranim(var_0) {
-  if(isdefined(level.debug_passengeranims) && level.debug_passengeranims)
+  if(isDefined(level.debug_passengeranims) && level.debug_passengeranims)
     return;
 }
 
@@ -690,11 +690,11 @@ passengerlookback(var_0) {
 
 crowdfireweapon(var_0) {
   var_0 thread maps\_utility::play_sound_on_tag("weap_ak47_fire_npc", "tag_flash");
-  playfxontag(common_scripts\utility::getfx("ak47_muzzleflash"), var_0, "tag_flash");
+  playFXOnTag(common_scripts\utility::getfx("ak47_muzzleflash"), var_0, "tag_flash");
 }
 
 shootciviliantrashstumble(var_0) {
-  magicbullet(var_0.weapon, var_0 gettagorigin("tag_flash"), level.runner geteye());
+  magicbullet(var_0.weapon, var_0 gettagorigin("tag_flash"), level.runner getEye());
 }
 
 shootcivilianinterrogation1(var_0) {
@@ -704,18 +704,18 @@ shootcivilianinterrogation1(var_0) {
 shootcivilianexecution(var_0) {
   var_1 = common_scripts\utility::get_noteworthy_ent("target_" + var_0.target);
 
-  for (var_2 = 0; var_2 < 6; var_2++) {
+  for(var_2 = 0; var_2 < 6; var_2++) {
     magicbullet(var_0.weapon, var_0 gettagorigin("tag_flash"), var_1.origin);
     wait(randomfloatrange(0.1, 0.3));
   }
 }
 
 fx_paint_spray_coup(var_0) {
-  playfxontag(common_scripts\utility::getfx("paint_spray_coup"), var_0, "tag_spraycan_fx");
+  playFXOnTag(common_scripts\utility::getfx("paint_spray_coup"), var_0, "tag_spraycan_fx");
 }
 
 fx_stop_paint_spray_coup(var_0) {
-  stopfxontag(common_scripts\utility::getfx("paint_spray_coup"), var_0, "tag_spraycan_fx");
+  stopFXOnTag(common_scripts\utility::getfx("paint_spray_coup"), var_0, "tag_spraycan_fx");
 }
 
 detach_paint_spray_coup(var_0) {

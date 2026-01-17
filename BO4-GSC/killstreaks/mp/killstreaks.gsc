@@ -11,11 +11,10 @@
 #include scripts\killstreaks\mp\killstreakrules;
 #include scripts\mp_common\gametypes\globallogic_audio;
 #include scripts\mp_common\gametypes\globallogic_score;
-
 #namespace killstreaks;
 
 autoexec __init__system__() {
-  system::register(#"killstreaks", &__init__, undefined, #"weapons");
+  system::register(#"killstreaks", &__init__, undefined, # "weapons");
 }
 
 __init__() {
@@ -28,11 +27,10 @@ __init__() {
 }
 
 init() {
-
   level.killstreak_init_start_time = getmillisecondsraw();
   thread debug_ricochet_protection();
 
-    function_447e6858();
+  function_447e6858();
   level.var_b0dc03c7 = &function_395f82d0;
   level.play_killstreak_firewall_being_hacked_dialog = &function_427f6a2e;
   level.play_killstreak_firewall_hacked_dialog = &function_6fa91236;
@@ -53,14 +51,13 @@ init() {
   elapsed_time = level.killstreak_init_end_time - level.killstreak_init_start_time;
   println("<dev string:x38>" + elapsed_time + "<dev string:x58>");
   level thread killstreak_debug_think();
-
 }
 
-private function_395f82d0(killstreaktype) {
+function_395f82d0(killstreaktype) {
   globallogic_score::_setplayermomentum(self, self.momentum - self function_dceb5542(level.killstreaks[killstreaktype].itemindex));
 }
 
-private function_427f6a2e(killstreaktype, killstreakid) {
+function_427f6a2e(killstreaktype, killstreakid) {
   if(self killstreak_dialog_queued("firewallBeingHacked", killstreaktype, killstreakid)) {
     return;
   }
@@ -68,7 +65,7 @@ private function_427f6a2e(killstreaktype, killstreakid) {
   self globallogic_audio::play_taacom_dialog("firewallBeingHacked", killstreaktype, killstreakid);
 }
 
-private function_6fa91236(killstreaktype, killstreakid) {
+function_6fa91236(killstreaktype, killstreakid) {
   if(self killstreak_dialog_queued("firewallHacked", killstreaktype, killstreakid)) {
     return;
   }
@@ -76,7 +73,7 @@ private function_6fa91236(killstreaktype, killstreakid) {
   self globallogic_audio::play_taacom_dialog("firewallHacked", killstreaktype, killstreakid);
 }
 
-private function_1cd175ba(killstreaktype, killstreakid) {
+function_1cd175ba(killstreaktype, killstreakid) {
   if(self killstreak_dialog_queued("beingHacked", killstreaktype, killstreakid)) {
     return;
   }
@@ -84,7 +81,7 @@ private function_1cd175ba(killstreaktype, killstreakid) {
   self globallogic_audio::play_taacom_dialog("beingHacked", killstreaktype, killstreakid);
 }
 
-private function_520a5752(killstreaktype, killstreakid, hacker) {
+function_520a5752(killstreaktype, killstreakid, hacker) {
   self globallogic_audio::flush_killstreak_dialog_on_player(killstreakid);
   self globallogic_audio::play_taacom_dialog("hacked", killstreaktype);
   excludeself = [];
@@ -100,7 +97,7 @@ private function_520a5752(killstreaktype, killstreakid, hacker) {
   hacker globallogic_audio::leader_dialog_on_player(level.killstreaks[killstreaktype].hackedstartdialogkey);
 }
 
-private function_7bed52a(killstreaktype, team, killstreakid) {
+function_7bed52a(killstreaktype, team, killstreakid) {
   if(!isDefined(killstreaktype) || !isDefined(killstreakid)) {
     return;
   }
@@ -136,7 +133,7 @@ private function_7bed52a(killstreaktype, team, killstreakid) {
   globallogic_audio::leader_dialog(level.killstreaks[killstreaktype].enemystartdialogkey, undefined, excludeself, undefined, killstreakid);
 }
 
-private function_6a5cc212(killstreaktype, killstreakid) {
+function_6a5cc212(killstreaktype, killstreakid) {
   if(!isDefined(self.owner) || !isDefined(self.team) || self.team != self.owner.team) {
     return;
   }
@@ -145,7 +142,7 @@ private function_6a5cc212(killstreaktype, killstreakid) {
   self.owner globallogic_audio::play_taacom_dialog("destroyed", killstreaktype);
 }
 
-private function_9716fce9(dialogkey, killstreaktype, killstreakid) {
+function_9716fce9(dialogkey, killstreaktype, killstreakid) {
   if(!isDefined(self.owner) || !isDefined(self.owner.team) || !isDefined(self.team) || self.team != self.owner.team) {
     return;
   }
@@ -153,7 +150,7 @@ private function_9716fce9(dialogkey, killstreaktype, killstreakid) {
   self.owner play_pilot_dialog(dialogkey, killstreaktype, killstreakid, self.pilotindex);
 }
 
-private function_f6370f75(dialogkey, killstreaktype, killstreakid, pilotindex) {
+function_f6370f75(dialogkey, killstreaktype, killstreakid, pilotindex) {
   if(!isDefined(killstreaktype) || !isDefined(pilotindex)) {
     return;
   }
@@ -161,11 +158,11 @@ private function_f6370f75(dialogkey, killstreaktype, killstreakid, pilotindex) {
   self globallogic_audio::killstreak_dialog_on_player(dialogkey, killstreaktype, killstreakid, pilotindex);
 }
 
-private function_3d6e0cd9(dialogkey, killstreaktype, killstreakid, soundevent, var_8a6b001a, weapon, priority) {
+function_3d6e0cd9(dialogkey, killstreaktype, killstreakid, soundevent, var_8a6b001a, weapon, priority) {
   self globallogic_audio::play_taacom_dialog(dialogkey, killstreaktype, killstreakid, soundevent, var_8a6b001a, weapon, priority);
 }
 
-private function_3cf68327(dialogkey, killstreaktype, killstreakid) {
+function_3cf68327(dialogkey, killstreaktype, killstreakid) {
   assert(isDefined(dialogkey));
   assert(isDefined(killstreaktype));
 
@@ -176,14 +173,14 @@ private function_3cf68327(dialogkey, killstreaktype, killstreakid) {
   self.owner play_taacom_dialog_response(dialogkey, killstreaktype, killstreakid, self.pilotindex);
 }
 
-private function_ed335136(dialogkey, skipteam, objectivekey, killstreakid, dialogbufferkey) {
+function_ed335136(dialogkey, skipteam, objectivekey, killstreakid, dialogbufferkey) {
   globallogic_audio::leader_dialog_for_other_teams(dialogkey, skipteam, objectivekey, killstreakid, dialogbufferkey);
 }
 
-private function_b11487a4(dialogkey, team, excludelist, objectivekey, killstreakid, dialogbufferkey) {
+function_b11487a4(dialogkey, team, excludelist, objectivekey, killstreakid, dialogbufferkey) {
   globallogic_audio::leader_dialog(dialogkey, team, excludelist, objectivekey, killstreakid, dialogbufferkey);
 }
 
-private function_daabc818(event, player, victim, weapon) {
+function_daabc818(event, player, victim, weapon) {
   scoreevents::processscoreevent(event, player, victim, weapon);
 }

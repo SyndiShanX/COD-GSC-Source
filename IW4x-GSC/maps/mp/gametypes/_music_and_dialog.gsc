@@ -8,7 +8,6 @@
 #include maps\mp\gametypes\_hud_util;
 
 init() {
-
   game["music"]["spawn_allies"] = maps\mp\gametypes\_teams::getTeamVoicePrefix("allies") + "spawn_music";
   game["music"]["defeat_allies"] = maps\mp\gametypes\_teams::getTeamVoicePrefix("allies") + "defeat_music";
   game["music"]["victory_allies"] = maps\mp\gametypes\_teams::getTeamVoicePrefix("allies") + "victory_music";
@@ -163,7 +162,7 @@ init() {
 }
 
 onPlayerConnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connected", player);
 
     player thread onPlayerSpawned();
@@ -418,7 +417,7 @@ suspenseMusic() {
   level endon("match_ending_soon");
 
   numTracks = game["music"]["suspense"].size;
-  for (;;) {
+  for(;;) {
     wait(randomFloatRange(60, 120));
 
     playSoundOnPlayers(game["music"]["suspense"][randomInt(numTracks)]);

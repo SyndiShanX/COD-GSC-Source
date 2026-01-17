@@ -110,9 +110,9 @@ automatonsetup() {
 }
 
 automatondamagecallback() {
-  self setcandamage(1);
+  self setCanDamage(1);
   self.health = 100000;
-  triggers = getentarray("bus_door_trigger", "targetname");
+  triggers = getEntArray("bus_door_trigger", "targetname");
 
   while(true) {
     self waittill("damage", amount, attacker, directionvec, point, type);
@@ -134,7 +134,7 @@ automatondamagecallback() {
 
       if(!isDefined(self.dmgfxorigin)) {
         self.dmgfxorigin = spawn("script_model", point);
-        self.dmgfxorigin setmodel("tag_origin");
+        self.dmgfxorigin setModel("tag_origin");
 
         if(isDefined(type) && type == "MOD_GRENADE_SPLASH")
           self.dmgfxorigin.origin = self gettagorigin("tag_origin") + vectorscale((0, 0, 1), 40.0);
@@ -143,7 +143,7 @@ automatondamagecallback() {
       }
 
       wait 0.5;
-      playfxontag(level._effect["switch_sparks"], self.dmgfxorigin, "tag_origin");
+      playFXOnTag(level._effect["switch_sparks"], self.dmgfxorigin, "tag_origin");
 
       foreach(trigger in triggers)
       trigger setinvisibletoall();
@@ -159,17 +159,17 @@ automatondamagecallback() {
         level thread automatonspeak("inform", "player_pissed", undefined, 1);
 
       if(level.the_bus.doorsclosed) {
-        triggers[0] playsound("zmb_bus_door_open");
+        triggers[0] playSound("zmb_bus_door_open");
         level.the_bus maps\mp\zm_transit_bus::busdoorsopen();
         wait 1.25;
         shove_players_off_bus();
         wait 1.25;
-        triggers[0] playsound("zmb_bus_door_close");
+        triggers[0] playSound("zmb_bus_door_close");
         level.the_bus maps\mp\zm_transit_bus::busdoorsclose();
       } else {
         shove_players_off_bus();
         wait 1.25;
-        triggers[0] playsound("zmb_bus_door_close");
+        triggers[0] playSound("zmb_bus_door_close");
         level.the_bus maps\mp\zm_transit_bus::busdoorsclose();
       }
 
@@ -407,9 +407,9 @@ bus_upgrade_vox() {
 }
 
 shove_players_off_bus() {
-  playfxontag(level._effect["turbine_on"], level.automaton, "J_neck");
+  playFXOnTag(level._effect["turbine_on"], level.automaton, "J_neck");
   wait 0.25;
-  level.automaton playsound("zmb_powerup_grabbed");
+  level.automaton playSound("zmb_powerup_grabbed");
   players = get_players();
 
   foreach(player in players) {
@@ -427,53 +427,53 @@ sndspeakinganimaudio(num) {
   switch (num) {
     case 0:
       wait 0.4;
-      self playsound("evt_zmb_robot_jerk");
+      self playSound("evt_zmb_robot_jerk");
       wait 2.4;
-      self playsound("evt_zmb_robot_jerk");
+      self playSound("evt_zmb_robot_jerk");
       wait 2.25;
-      self playsound("evt_zmb_robot_jerk");
+      self playSound("evt_zmb_robot_jerk");
       wait 1.1;
-      self playsound("evt_zmb_robot_jerk");
+      self playSound("evt_zmb_robot_jerk");
       break;
     case 1:
       wait 0.31;
-      self playsound("evt_zmb_robot_jerk");
+      self playSound("evt_zmb_robot_jerk");
       wait 3.55;
-      self playsound("evt_zmb_robot_jerk");
+      self playSound("evt_zmb_robot_jerk");
       break;
     case 2:
       wait 0.18;
-      self playsound("evt_zmb_robot_jerk");
+      self playSound("evt_zmb_robot_jerk");
       wait 4.83;
-      self playsound("evt_zmb_robot_jerk");
+      self playSound("evt_zmb_robot_jerk");
       break;
     case 3:
       wait 0.23;
-      self playsound("evt_zmb_robot_jerk");
+      self playSound("evt_zmb_robot_jerk");
       wait 0.77;
-      self playsound("evt_zmb_robot_jerk");
+      self playSound("evt_zmb_robot_jerk");
       wait 1.4;
-      self playsound("evt_zmb_robot_jerk");
+      self playSound("evt_zmb_robot_jerk");
       wait 0.15;
-      self playsound("evt_zmb_robot_spin");
+      self playSound("evt_zmb_robot_spin");
       wait 0.53;
-      self playsound("evt_zmb_robot_hat");
+      self playSound("evt_zmb_robot_hat");
       break;
     case 4:
       wait 0.3;
-      self playsound("evt_zmb_robot_jerk");
+      self playSound("evt_zmb_robot_jerk");
       wait 3.64;
-      self playsound("evt_zmb_robot_jerk");
+      self playSound("evt_zmb_robot_jerk");
       break;
     case 5:
       wait 0.38;
-      self playsound("evt_zmb_robot_jerk");
+      self playSound("evt_zmb_robot_jerk");
       wait 3.4;
-      self playsound("evt_zmb_robot_jerk");
+      self playSound("evt_zmb_robot_jerk");
       break;
     case 6:
       wait 0.3;
-      self playsound("evt_zmb_robot_jerk");
+      self playSound("evt_zmb_robot_jerk");
       break;
     case 7:
       break;
@@ -483,53 +483,53 @@ sndspeakinganimaudio(num) {
 sndplaydriveranimsnd(the_anim) {
   if(the_anim == % ai_zombie_bus_driver_idle_twitch_a) {
     wait 0.55;
-    self playsound("evt_zmb_robot_jerk");
+    self playSound("evt_zmb_robot_jerk");
     wait 1.2;
-    self playsound("evt_zmb_robot_hat");
+    self playSound("evt_zmb_robot_hat");
     wait 0.79;
-    self playsound("evt_zmb_robot_spin");
+    self playSound("evt_zmb_robot_spin");
     wait 1.1;
-    self playsound("evt_zmb_robot_hat");
-    self playsound("evt_zmb_robot_spin");
+    self playSound("evt_zmb_robot_hat");
+    self playSound("evt_zmb_robot_spin");
   } else if(the_anim == % ai_zombie_bus_driver_idle_twitch_focused) {
     wait 0.25;
-    self playsound("evt_zmb_robot_jerk");
+    self playSound("evt_zmb_robot_jerk");
     wait 4.8;
-    self playsound("evt_zmb_robot_jerk");
+    self playSound("evt_zmb_robot_jerk");
   } else if(the_anim == % ai_zombie_bus_driver_idle_twitch_panicked) {
     wait 0.31;
-    self playsound("evt_zmb_robot_jerk");
+    self playSound("evt_zmb_robot_jerk");
     wait 0.79;
-    self playsound("evt_zmb_robot_jerk");
+    self playSound("evt_zmb_robot_jerk");
     wait 1.3;
-    self playsound("evt_zmb_robot_jerk");
+    self playSound("evt_zmb_robot_jerk");
     wait 0.18;
-    self playsound("evt_zmb_robot_spin");
+    self playSound("evt_zmb_robot_spin");
     wait 0.52;
-    self playsound("evt_zmb_robot_hat");
+    self playSound("evt_zmb_robot_hat");
   } else if(the_anim == % ai_zombie_bus_driver_idle_twitch_b) {
     wait 0.22;
-    self playsound("evt_zmb_robot_hat");
+    self playSound("evt_zmb_robot_hat");
     wait 1.06;
-    self playsound("evt_zmb_robot_spin");
+    self playSound("evt_zmb_robot_spin");
     wait 1.05;
-    self playsound("evt_zmb_robot_hat");
+    self playSound("evt_zmb_robot_hat");
     wait 1.07;
-    self playsound("evt_zmb_robot_spin");
+    self playSound("evt_zmb_robot_spin");
     wait 0.59;
-    self playsound("evt_zmb_robot_hat");
+    self playSound("evt_zmb_robot_hat");
   } else if(the_anim == % ai_zombie_bus_driver_idle_d) {
     wait 0.24;
-    self playsound("evt_zmb_robot_spin");
+    self playSound("evt_zmb_robot_spin");
     wait 1.04;
-    self playsound("evt_zmb_robot_hat");
+    self playSound("evt_zmb_robot_hat");
   } else if(the_anim == % ai_zombie_bus_driver_emp_powerdown) {
     wait 0.1;
-    self playsound("evt_zmb_robot_jerk");
+    self playSound("evt_zmb_robot_jerk");
     wait 0.9;
-    self playsound("evt_zmb_robot_jerk");
+    self playSound("evt_zmb_robot_jerk");
   } else if(the_anim == % ai_zombie_bus_driver_emp_powerup) {
     wait 0.63;
-    self playsound("evt_zmb_robot_jerk");
+    self playSound("evt_zmb_robot_jerk");
   }
 }

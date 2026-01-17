@@ -40,7 +40,7 @@ blindfire()
 	blindfires from cover
 
 example:
-behaviorCallbacks = spawnstruct();
+behaviorCallbacks = spawnStruct();
 behaviorCallbacks.reload = ::reload;
 ...
 animscripts\cover_behavior::main( behaviorCallbacks );
@@ -56,7 +56,7 @@ main(behaviorCallbacks) {
   self.couldntSeeEnemyPos = self.origin; // ( set couldntSeeEnemyPos to a place the enemy can't be while we're in corner behavior )
 
   behaviorStartTime = gettime();
-  coverTimers = spawnstruct();
+  coverTimers = spawnStruct();
   coverTimers.nextAllowedLookTime = behaviorStartTime - 1;
   coverTimers.nextAllowedSuppressTime = behaviorStartTime - 1;
 
@@ -73,18 +73,16 @@ main(behaviorCallbacks) {
   // if we break out of cover mode after this time, we will get a grace period during which we can melee charge the player
   self.meleeCoverChargeMinTime = behaviorStartTime + MELEE_GRACE_PERIOD_REQUIRED_TIME;
 
-  /#
   if(getdvar("scr_coveridle") == "1")
     self.coverNode.script_onlyidle = true;
-  # /
 
-    self thread watchSuppression();
+  self thread watchSuppression();
 
   desynched = (gettime() > 2500);
 
   correctAngles = getCorrectCoverAngles();
 
-  for (;;) {
+  for(;;) {
     if(shouldHelpAdvancingTeammate()) {
       if(tryRunningToEnemy(true)) {
         wait 0.05;
@@ -92,7 +90,7 @@ main(behaviorCallbacks) {
       }
     }
 
-    if(isdefined(behaviorCallbacks.mainLoopStart)) {
+    if(isDefined(behaviorCallbacks.mainLoopStart)) {
       startTime = gettime();
       self thread endIdleAtFrameEnd();
 
@@ -104,10 +102,8 @@ main(behaviorCallbacks) {
         self notify("dont_end_idle");
     }
 
-    if(isdefined(behaviorCallbacks.moveToNearByCover)) {
-      if([
-          [behaviorCallbacks.moveToNearByCover]
-        ]())
+    if(isDefined(behaviorCallbacks.moveToNearByCover)) {
+      if([[behaviorCallbacks.moveToNearByCover]]())
         continue;
     }
 
@@ -119,17 +115,17 @@ main(behaviorCallbacks) {
       continue;
     }
 
-    if(doNonAttackCoverBehavior(behaviorCallbacks))
+    if(doNonAttackCoverBehavior(behaviorCallbacks)) {
       continue;
-
-    if(isdefined(anim.throwGrenadeAtPlayerASAP) && isAlive(level.player)) {
+    }
+    if(isDefined(anim.throwGrenadeAtPlayerASAP) && isAlive(level.player)) {
       if(tryThrowingGrenade(behaviorCallbacks, level.player))
         continue;
     }
 
-    if(respondToDeadTeammate())
+    if(respondToDeadTeammate()) {
       return;
-
+    }
     // determine visibility and suppressability of enemy.
     visibleEnemy = false;
     suppressableEnemy = false;
@@ -147,7 +143,7 @@ main(behaviorCallbacks) {
 
       attackVisibleEnemy(behaviorCallbacks);
     } else {
-      if(isdefined(self.aggressiveMode) || enemyIsHiding()) {
+      if(isDefined(self.aggressiveMode) || enemyIsHiding()) {
         if(advanceOnHidingEnemy())
           return;
       }
@@ -192,21 +188,19 @@ respondToDeadTeammate() {
 }
 
 doNonAttackCoverBehavior(behaviorCallbacks) {
-  /#
   if(isDefined(self.coverNode.script_onlyidle)) {
     assert(self.coverNode.script_onlyidle); // true or undefined
     idle(behaviorCallbacks);
     return true;
   }
-  # /
 
-    // if we're suppressed, we do other things.
-    if(suppressedBehavior(behaviorCallbacks)) {
-      if(isEnemyVisibleFromExposed())
-        resetSeekOutEnemyTime();
-      self.a.lastEncounterTime = gettime();
-      return true;
-    }
+  // if we're suppressed, we do other things.
+  if(suppressedBehavior(behaviorCallbacks)) {
+    if(isEnemyVisibleFromExposed())
+      resetSeekOutEnemyTime();
+    self.a.lastEncounterTime = gettime();
+    return true;
+  }
 
   // reload if we need to; everything in this loop involves shooting.
   if(coverReload(behaviorCallbacks, 0))
@@ -249,9 +243,9 @@ attackSuppressableEnemy(behaviorCallbacks, coverTimers) {
     }
   }
 
-  if(tryThrowingGrenade(behaviorCallbacks, self.enemy))
+  if(tryThrowingGrenade(behaviorCallbacks, self.enemy)) {
     return;
-
+  }
   idle(behaviorCallbacks);
 }
 
@@ -259,7 +253,7 @@ attackNothingToDo(behaviorCallbacks, coverTimers) {
   if(coverReload(behaviorCallbacks, 0.1))
     return false;
 
-  if(isdefined(self.enemy)) {
+  if(isDefined(self.enemy)) {
     if(tryThrowingGrenade(behaviorCallbacks, self.enemy))
       return false;
   }
@@ -279,7 +273,7 @@ attackNothingToDo(behaviorCallbacks, coverTimers) {
       return true;
   }
 
-  if(self.doingAmbush || (gettime() >= coverTimers.nextAllowedSuppressTime && isdefined(self.enemy))) {
+  if(self.doingAmbush || (gettime() >= coverTimers.nextAllowedSuppressTime && isDefined(self.enemy))) {
     // be ready to ambush them if they happen to show up
     if(leaveCoverAndShoot(behaviorCallbacks, "ambush")) {
       if(isEnemyVisibleFromExposed())
@@ -295,7 +289,7 @@ attackNothingToDo(behaviorCallbacks, coverTimers) {
 }
 
 isEnemyVisibleFromExposed() {
-  if(!isdefined(self.enemy))
+  if(!isDefined(self.enemy))
     return false;
 
   // if we couldn't see our enemy last time we stepped out, and they haven't moved, assume we still can't see them.
@@ -315,7 +309,7 @@ suppressedBehavior(behaviorCallbacks) {
 
   //prof_begin( "suppressedBehavior" );
 
-  while (isSuppressedWrapper()) {
+  while(isSuppressedWrapper()) {
     justlooked = false;
 
     self safeTeleport(self.coverNode.origin);
@@ -323,7 +317,7 @@ suppressedBehavior(behaviorCallbacks) {
     tryMovingNodes = true;
 
     // guys that favor blindfire should try to blindfire instead of move a lot more
-    if(isdefined(self.favor_blindfire))
+    if(isDefined(self.favor_blindfire))
       tryMovingNodes = coinToss();
 
     if(tryMovingNodes) {
@@ -341,18 +335,18 @@ suppressedBehavior(behaviorCallbacks) {
     }
 
     if(isEnemyVisibleFromExposed() || canSuppressEnemyFromExposed()) {
-      if(isdefined(anim.throwGrenadeAtPlayerASAP) && isAlive(level.player)) {
+      if(isDefined(anim.throwGrenadeAtPlayerASAP) && isAlive(level.player)) {
         if(tryThrowingGrenade(behaviorCallbacks, level.player))
           continue;
       }
 
-      if(coverReload(behaviorCallbacks, 0))
+      if(coverReload(behaviorCallbacks, 0)) {
         continue;
-
+      }
       if(self.team != "allies" && gettime() >= nextAllowedBlindfireTime) {
         if(blindfire(behaviorCallbacks)) {
           nextAllowedBlindfireTime = gettime();
-          if(!isdefined(self.favor_blindfire))
+          if(!isDefined(self.favor_blindfire))
             nextAllowedBlindfireTime += randomintrange(3000, 12000);
 
           continue;
@@ -365,9 +359,9 @@ suppressedBehavior(behaviorCallbacks) {
       }
     }
 
-    if(coverReload(behaviorCallbacks, 0.1))
+    if(coverReload(behaviorCallbacks, 0.1)) {
       continue;
-
+    }
     //prof_end( "suppressedBehavior" );
     idle(behaviorCallbacks);
   }
@@ -389,9 +383,9 @@ getPermutation(n) {
     permutation[0] = randomint(2);
     permutation[1] = 1 - permutation[0];
   } else {
-    for (i = 0; i < n; i++)
+    for(i = 0; i < n; i++)
       permutation[i] = i;
-    for (i = 0; i < n; i++) {
+    for(i = 0; i < n; i++) {
       switchIndex = i + randomint(n - i);
       temp = permutation[switchIndex];
       permutation[SwitchIndex] = permutation[i];
@@ -402,7 +396,7 @@ getPermutation(n) {
 }
 
 callOptionalBehaviorCallback(callback, arg, arg2, arg3) {
-  if(!isdefined(callback))
+  if(!isDefined(callback))
     return false;
 
   //prof_begin( "callOptionalBehaviorCallback" );
@@ -411,26 +405,17 @@ callOptionalBehaviorCallback(callback, arg, arg2, arg3) {
   starttime = gettime();
 
   val = undefined;
-  if(isdefined(arg3))
-    val = [
-      [callback]
-    ](arg, arg2, arg3);
-  else if(isdefined(arg2))
-    val = [
-      [callback]
-    ](arg, arg2);
-  else if(isdefined(arg))
-    val = [
-      [callback]
-    ](arg);
+  if(isDefined(arg3))
+    val = [[callback]](arg, arg2, arg3);
+  else if(isDefined(arg2))
+    val = [[callback]](arg, arg2);
+  else if(isDefined(arg))
+    val = [[callback]](arg);
   else
-    val = [
-      [callback]
-    ]();
+    val = [[callback]]();
 
-  /#
   // if this assert fails, a behaviorCallback callback didn't return true or false.
-  assert(isdefined(val) && (val == true || val == false));
+  assert(isDefined(val) && (val == true || val == false));
 
   // behaviorCallbacks must return true if and only if they let time pass.
   // (it is also important that they only let time pass if they did what they were supposed to do,
@@ -439,10 +424,9 @@ callOptionalBehaviorCallback(callback, arg, arg2, arg3) {
     assert(gettime() != starttime);
   else
     assert(gettime() == starttime);
-  # /
 
-    if(!val)
-      self notify("dont_end_idle");
+  if(!val)
+    self notify("dont_end_idle");
 
   //prof_end( "callOptionalBehaviorCallback" );
 
@@ -458,7 +442,7 @@ watchSuppression() {
   self.lastSuppressionTime = gettime() - 100000;
   self.suppressionStart = self.lastSuppressionTime;
 
-  while (1) {
+  while(1) {
     self waittill("suppression");
 
     time = gettime();
@@ -521,12 +505,10 @@ lookfast(behaviorCallbacks) {
 idle(behaviorCallbacks, howLong) {
   self.flinching = false;
 
-  if(isdefined(behaviorCallbacks.flinch)) {
+  if(isDefined(behaviorCallbacks.flinch)) {
     // flinch if we just started getting shot at very recently
     if(!self.a.idlingAtCover && gettime() - self.suppressionStart < 600) {
-      if([
-          [behaviorCallbacks.flinch]
-        ]())
+      if([[behaviorCallbacks.flinch]]())
         return true;
     } else {
       // if bullets aren't already whizzing by, idle for now but flinch if we get incoming fire
@@ -535,12 +517,12 @@ idle(behaviorCallbacks, howLong) {
   }
 
   if(!self.a.idlingAtCover) {
-    assert(isdefined(behaviorCallbacks.idle)); // idle must be available!
+    assert(isDefined(behaviorCallbacks.idle)); // idle must be available!
     self thread idleThread(behaviorCallbacks.idle); // this thread doesn't stop until "end_idle", which must be notified before we start anything else! use endIdleAtFrameEnd() to do this.
     self.a.idlingAtCover = true;
   }
 
-  if(isdefined(howLong))
+  if(isDefined(howLong))
     self idleWait(howLong);
   else
     self idleWaitABit();
@@ -573,13 +555,14 @@ flinchWhenSuppressed(behaviorCallbacks) {
 
   lastSuppressionTime = self.lastSuppressionTime;
 
-  while (1) {
+  while(1) {
     self waittill("suppression");
 
     time = gettime();
 
-    if(lastSuppressionTime < time - 2000)
+    if(lastSuppressionTime < time - 2000) {
       break;
+    }
 
     lastSuppressionTime = time;
   }
@@ -588,7 +571,7 @@ flinchWhenSuppressed(behaviorCallbacks) {
 
   self thread endIdleAtFrameEnd();
 
-  assert(isdefined(behaviorCallbacks.flinch));
+  assert(isDefined(behaviorCallbacks.flinch));
   val = [[behaviorCallbacks.flinch]]();
 
   if(!val)
@@ -603,15 +586,15 @@ endIdleAtFrameEnd() {
   self endon("dont_end_idle");
   waittillframeend;
 
-  if(!isdefined(self))
+  if(!isDefined(self)) {
     return;
-
+  }
   self notify("end_idle");
   self.a.idlingAtCover = false;
 }
 
 tryThrowingGrenade(behaviorCallbacks, throwAt) {
-  assert(isdefined(throwAt));
+  assert(isDefined(throwAt));
 
   // don't throw backwards
   forward = anglesToForward(self.angles);
@@ -641,15 +624,15 @@ breakOutOfShootingIfWantToMoveUp() {
   self endon("killanimscript");
   self endon("stop_deciding_how_to_shoot");
 
-  while (1) {
-    if(self.fixedNode || self.doingAmbush)
+  while(1) {
+    if(self.fixedNode || self.doingAmbush) {
       return;
-
+    }
     wait 0.5 + randomfloat(0.75);
 
-    if(!isdefined(self.enemy))
+    if(!isDefined(self.enemy)) {
       continue;
-
+    }
     if(enemyIsHiding()) {
       if(advanceOnHidingEnemy())
         return;
@@ -668,21 +651,21 @@ enemyIsHiding() {
   // if this function is called, we already know that our enemy is not visible from exposed.
   // check to see if they're doing anything hiding-like.
 
-  if(!isdefined(self.enemy))
+  if(!isDefined(self.enemy))
     return false;
 
   if(self.enemy isFlashed())
     return true;
 
   if(isplayer(self.enemy)) {
-    if(isdefined(self.enemy.health) && self.enemy.health < self.enemy.maxhealth)
+    if(isDefined(self.enemy.health) && self.enemy.health < self.enemy.maxhealth)
       return true;
   } else {
     if(isAI(self.enemy) && self.enemy isSuppressedWrapper())
       return true;
   }
 
-  if(isdefined(self.enemy.isreloading) && self.enemy.isreloading)
+  if(isDefined(self.enemy.isreloading) && self.enemy.isreloading)
     return true;
 
   return false;
@@ -696,9 +679,9 @@ resetLookForBetterCoverTime() {
   currentTime = gettime();
 
   // treat group of shuffle nodes as one node, don't increase getBoredOfThisNodeTime by too much
-  if(isdefined(self.didShuffleMove) && currentTime > self.a.getBoredOfThisNodeTime) {
+  if(isDefined(self.didShuffleMove) && currentTime > self.a.getBoredOfThisNodeTime) {
     self.a.getBoredOfThisNodeTime = currentTime + randomintrange(2000, 5000);
-  } else if(isdefined(self.enemy)) {
+  } else if(isDefined(self.enemy)) {
     dist = distance2D(self.origin, self.enemy.origin);
     if(dist < self.engageMinDist)
       self.a.getBoredOfThisNodeTime = currentTime + randomintrange(5000, 10000);
@@ -714,7 +697,7 @@ resetLookForBetterCoverTime() {
 resetSeekOutEnemyTime() {
   // we'll be willing to actually run right up to our enemy in order to find them if we haven't seen them by this time.
   // however, we'll try to find better cover before seeking them out
-  if(isdefined(self.aggressiveMode))
+  if(isDefined(self.aggressiveMode))
     self.seekOutEnemyTime = gettime() + randomintrange(500, 1000);
   else
     self.seekOutEnemyTime = gettime() + randomintrange(3000, 5000);
@@ -732,15 +715,15 @@ advanceOnHidingEnemy() {
   if(self.fixedNode || self.doingAmbush)
     return false;
 
-  if(isdefined(self.aggressiveMode) && gettime() >= self.seekOutEnemyTime) {
+  if(isDefined(self.aggressiveMode) && gettime() >= self.seekOutEnemyTime) {
     return tryRunningToEnemy(false);
   }
 
   foundBetterCover = false;
-  if(!isdefined(self.enemy) || !self.enemy isFlashed())
+  if(!isDefined(self.enemy) || !self.enemy isFlashed())
     foundBetterCover = lookForBetterCover();
 
-  if(!foundBetterCover && isdefined(self.enemy) && !self canSeeEnemyFromExposed()) {
+  if(!foundBetterCover && isDefined(self.enemy) && !self canSeeEnemyFromExposed()) {
     if(gettime() >= self.seekOutEnemyTime) {
       return tryRunningToEnemy(false);
     }
@@ -753,7 +736,7 @@ advanceOnHidingEnemy() {
 }
 
 tryToGetOutOfDangerousSituation(behaviorCallbacks) {
-  if(isdefined(behaviorCallbacks.moveToNearByCover)) {
+  if(isDefined(behaviorCallbacks.moveToNearByCover)) {
     if([
         [behaviorCallbacks.moveToNearByCover]
       ]())
@@ -787,7 +770,7 @@ set_crouching_turns() {
 }
 
 turnToMatchNodeDirection(nodeAngleOffset) {
-  if(isdefined(self.node)) {
+  if(isDefined(self.node)) {
     node = self.node;
 
     absRelYaw = abs(AngleClamp180(self.angles[1] - (node.angles[1] + nodeAngleOffset)));
@@ -827,15 +810,15 @@ turnToMatchNodeDirection(nodeAngleOffset) {
 }
 
 moveToNearbyCover() {
-  if(!isdefined(self.enemy))
+  if(!isDefined(self.enemy))
     return false;
 
-  if(isdefined(self.didShuffleMove)) {
+  if(isDefined(self.didShuffleMove)) {
     self.didShuffleMove = undefined;
     return false;
   }
 
-  if(!isdefined(self.node))
+  if(!isDefined(self.node))
     return false;
 
   if(randomint(3) == 0)
@@ -849,7 +832,7 @@ moveToNearbyCover() {
 
   node = self findshufflecovernode();
 
-  if(isdefined(node) && (node != self.node) && self useCoverNode(node)) {
+  if(isDefined(node) && (node != self.node) && self useCoverNode(node)) {
     self.shuffleMove = true;
     self.shuffleNode = node;
     self.didShuffleMove = true;

@@ -23,35 +23,34 @@ attack_heli_fx() {
     level._effect["_attack_heli_spotlight"] = LoadFX("misc/hunted_spotlight_model");
   else
     level._effect["_attack_heli_spotlight"] = LoadFX("misc/spotlight_large");
-
 }
 
 init() {
   // already ran elsewhere
-  if(IsDefined(level.attackHeliAIburstSize))
+  if(isDefined(level.attackHeliAIburstSize)) {
     return;
-
-  while (!isdefined(level.gameskill))
+  }
+  while(!isDefined(level.gameskill))
     wait(0.05);
   /*-----------------------
   ATTACK HELI PARAMETERS
   -------------------------*/
-  if(!isdefined(level.cosine))
+  if(!isDefined(level.cosine))
     level.cosine = [];
 
-  if(!isdefined(level.cosine["25"]))
+  if(!isDefined(level.cosine["25"]))
     level.cosine["25"] = Cos(25);
 
-  if(!isdefined(level.cosine["35"]))
+  if(!isDefined(level.cosine["35"]))
     level.cosine["35"] = Cos(35);
 
-  if(!isdefined(level.attackheliRange)) // Heli shoots at target within this distance
+  if(!isDefined(level.attackheliRange)) // Heli shoots at target within this distance
     level.attackheliRange = 3500;
 
-  if(!isdefined(level.attackHeliKillsAI)) // Heli shoots at AI, but misses
+  if(!isDefined(level.attackHeliKillsAI)) // Heli shoots at AI, but misses
     level.attackHeliKillsAI = false;
 
-  if(!isdefined(level.attackHeliFOV)) // FOV where the heli can detect targets
+  if(!isDefined(level.attackHeliFOV)) // FOV where the heli can detect targets
     level.attackHeliFOV = Cos(30);
 
   level.attackHeliAIburstSize = 1; // how long to fire miniguns at AI
@@ -91,7 +90,7 @@ init() {
 =============
 */
 start_attack_heli(sTargetname) {
-  if(!isdefined(sTargetname))
+  if(!isDefined(sTargetname))
     sTargetname = "kill_heli";
   eHeli = maps\_vehicle::spawn_vehicle_from_targetname_and_drive(sTargetname);
   eHeli = begin_attack_heli_behavior(eHeli);
@@ -119,7 +118,7 @@ begin_attack_heli_behavior(eHeli, heli_points) {
 
   if((level.gameskill == 0) || (level.gameskill == 1)) {
     //create an attractor if this is easy or normal
-    org = Spawn("script_origin", eHeli.origin + (0, 0, -20));
+    org = spawn("script_origin", eHeli.origin + (0, 0, -20));
     org LinkTo(eHeli);
     eHeli thread delete_on_death(org);
     strength = undefined;
@@ -128,7 +127,7 @@ begin_attack_heli_behavior(eHeli, heli_points) {
     else
       strength = 2200;
 
-    if(!isdefined(eHeli.no_attractor)) {
+    if(!isDefined(eHeli.no_attractor)) {
       eHeli.attractor = Missile_CreateAttractorEnt(org, strength, 10000, level.player);
 
       if(is_coop()) {
@@ -138,9 +137,9 @@ begin_attack_heli_behavior(eHeli, heli_points) {
     //thread debug_message( "attractor", undefined, 9999, org );
   }
   eHeli EnableAimAssist();
-  eHeli.startingOrigin = Spawn("script_origin", eHeli.origin);
+  eHeli.startingOrigin = spawn("script_origin", eHeli.origin);
   eHeli thread delete_on_death(eHeli.startingOrigin);
-  if(!isdefined(eHeli.circling))
+  if(!isDefined(eHeli.circling))
     eHeli.circling = false;
   eHeli.allowShoot = true;
   eHeli.firingMissiles = false;
@@ -181,7 +180,7 @@ begin_attack_heli_behavior(eHeli, heli_points) {
   SPOTLIGHT, AIMING, ETC.
   -------------------------*/
   eHeli.eTarget = eHeli.targetdefault;
-  if((IsDefined(eHeli.script_spotlight)) && (eHeli.script_spotlight == 1) && (!isdefined(eHeli.spotlight)))
+  if((isDefined(eHeli.script_spotlight)) && (eHeli.script_spotlight == 1) && (!isDefined(eHeli.spotlight)))
     eHeli thread heli_spotlight_on(undefined, true);
 
   eHeli thread attack_heli_cleanup();
@@ -216,11 +215,11 @@ heli_default_target_setup() {
       AssertMsg("Need to set up this heli type in the _attack_heli.gsc script: " + self.vehicletype);
       break;
   }
-  self.targetdefault = Spawn("script_origin", self.origin);
+  self.targetdefault = spawn("script_origin", self.origin);
   self.targetdefault.angles = self.angles;
   self.targetdefault.origin = self.origin;
 
-  ent = SpawnStruct();
+  ent = spawnStruct();
   ent.entity = self.targetdefault;
   ent.forward = forward_offset;
   ent.up = up_offset;
@@ -230,7 +229,7 @@ heli_default_target_setup() {
 }
 
 get_turrets() {
-  if(IsDefined(self.turrets))
+  if(isDefined(self.turrets))
     return self.turrets;
 
   setup_miniguns();
@@ -238,12 +237,12 @@ get_turrets() {
 }
 
 setup_miniguns() {
-  AssertEx(!isdefined(self.turrets), ".turrets are already defined");
+  AssertEx(!isDefined(self.turrets), ".turrets are already defined");
 
   self.turrettype = "miniguns";
   self.minigunsspinning = false;
   self.firingguns = false;
-  if(!isdefined(self.mgturret)) //in case the heli is taken out before has a chance to setup turrets
+  if(!isDefined(self.mgturret)) //in case the heli is taken out before has a chance to setup turrets
     return;
 
   self.turrets = self.mgturret;
@@ -252,15 +251,15 @@ setup_miniguns() {
 
 heli_default_target_cleanup(eHeli) {
   eHeli waittill_either("death", "crash_done");
-  if(IsDefined(self))
+  if(isDefined(self))
     self Delete();
 }
 
 start_circling_heli(heli_targetname, heli_points) {
-  if(!isdefined(heli_targetname))
+  if(!isDefined(heli_targetname))
     heli_targetname = "kill_heli";
   heli = maps\_vehicle::spawn_vehicle_from_targetname_and_drive(heli_targetname);
-  heli.startingOrigin = Spawn("script_origin", heli.origin);
+  heli.startingOrigin = spawn("script_origin", heli.origin);
   heli thread delete_on_death(heli.startingOrigin);
   heli.circling = true;
   heli.allowShoot = true;
@@ -272,9 +271,9 @@ start_circling_heli(heli_targetname, heli_points) {
 }
 
 kill_heli_logic(heli, heli_points) {
-  if(!isdefined(heli)) {
+  if(!isDefined(heli)) {
     heli = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("kill_heli");
-    Assert(IsDefined(heli));
+    Assert(isDefined(heli));
     heli.allowShoot = true;
     heli.firingMissiles = false;
     heli thread notify_disable();
@@ -282,31 +281,31 @@ kill_heli_logic(heli, heli_points) {
   }
 
   baseSpeed = undefined;
-  if(!isdefined(heli.script_airspeed))
+  if(!isDefined(heli.script_airspeed))
     baseSpeed = 40;
   else
     baseSpeed = heli.script_airspeed;
 
-  if(!isdefined(level.enemy_heli_killed))
+  if(!isDefined(level.enemy_heli_killed))
     level.enemy_heli_killed = false;
 
-  if(!isdefined(level.commander_speaking))
+  if(!isDefined(level.commander_speaking))
     level.commander_speaking = false;
 
-  if(!isdefined(level.enemy_heli_attacking))
+  if(!isDefined(level.enemy_heli_attacking))
     level.enemy_heli_attacking = false;
 
   //players who have not hit the heli in the last 5 seconds
   //are invisible to the attack heli while in this volume
   level.attack_heli_safe_volumes = undefined;
-  volumes = GetEntArray("attack_heli_safe_volume", "script_noteworthy");
+  volumes = getEntArray("attack_heli_safe_volume", "script_noteworthy");
   if(volumes.size > 0)
     level.attack_heli_safe_volumes = volumes;
 
   if(!level.enemy_heli_killed)
     thread dialog_nags_heli(heli);
 
-  if(!isdefined(heli.helicopter_predator_target_shader)) {
+  if(!isDefined(heli.helicopter_predator_target_shader)) {
     switch (heli.vehicletype) {
       case "mi28":
         Target_Set(heli, (0, 0, -80));
@@ -332,11 +331,11 @@ kill_heli_logic(heli, heli_points) {
   heli endon("returning_home");
   heli SetVehWeapon("turret_attackheli");
 
-  if(!isdefined(heli.circling))
+  if(!isDefined(heli.circling))
     heli.circling = false;
   if(!heli.circling) {
     heli SetNearGoalNotifyDist(100);
-    if(!isdefined(heli.dontWaitForPathEnd))
+    if(!isDefined(heli.dontWaitForPathEnd))
       heli waittill("reached_dynamic_path_end");
   } else {
     heli SetNearGoalNotifyDist(500);
@@ -355,14 +354,14 @@ heli_circling_think(heli_points, baseSpeed) {
   //each one targets 2 other origins
   //the heli randomly moves between the 2 points targeted by the closest node
 
-  if(!isdefined(heli_points))
+  if(!isDefined(heli_points))
     heli_points = "attack_heli_circle_node";
 
-  points = GetEntArray(heli_points, "targetname");
-  if(!isdefined(points) || (points.size < 1))
+  points = getEntArray(heli_points, "targetname");
+  if(!isDefined(points) || (points.size < 1))
     points = getstructarray(heli_points, "targetname");
 
-  Assert(IsDefined(points));
+  Assert(isDefined(points));
 
   heli = self;
 
@@ -371,7 +370,7 @@ heli_circling_think(heli_points, baseSpeed) {
   heli endon("returning_home");
   heli endon("heli_players_dead");
 
-  for (;;) {
+  for(;;) {
     heli Vehicle_SetSpeed(baseSpeed, baseSpeed / 4, baseSpeed / 4);
     heli SetNearGoalNotifyDist(100);
     player = get_closest_player_healthy(heli.origin);
@@ -379,15 +378,15 @@ heli_circling_think(heli_points, baseSpeed) {
     heli SetLookAtEnt(player);
 
     player_location = getClosest(playerOrigin, points);
-    heli_locations = GetEntArray(player_location.target, "targetname");
-    if(!isdefined(heli_locations) || (heli_locations.size < 1))
+    heli_locations = getEntArray(player_location.target, "targetname");
+    if(!isDefined(heli_locations) || (heli_locations.size < 1))
       heli_locations = getstructarray(player_location.target, "targetname");
-    Assert(IsDefined(heli_locations));
+    Assert(isDefined(heli_locations));
     goal = heli_locations[RandomInt(heli_locations.size)];
     heli SetVehGoalPos(goal.origin, 1);
     heli waittill("near_goal");
 
-    if(!isdefined(player.is_controlling_UAV)) {
+    if(!isDefined(player.is_controlling_UAV)) {
       wait 1;
       wait(RandomFloatRange(0.8, 1.3));
     }
@@ -396,18 +395,18 @@ heli_circling_think(heli_points, baseSpeed) {
 
 heli_goal_think(baseSpeed) {
   self endon("death");
-  points = GetEntArray("kill_heli_spot", "targetname");
-  Assert(IsDefined(points));
+  points = getEntArray("kill_heli_spot", "targetname");
+  Assert(isDefined(points));
 
   heli = self;
   goal = getClosest(heli.origin, points);
   current_node = goal;
-  Assert(IsDefined(goal));
+  Assert(isDefined(goal));
   heli endon("death");
   heli endon("returning_home");
   heli endon("heli_players_dead");
   eLookAtEnt = undefined;
-  for (;;) {
+  for(;;) {
     wait(0.05);
     /*-----------------------
     MOVE HELI TO CURRENT GOAL
@@ -435,9 +434,9 @@ heli_goal_think(baseSpeed) {
 
     player = get_closest_player_healthy(heli.origin);
 
-    if((IsDefined(self.eTarget)) && (IsDefined(self.eTarget.classname)) && (self.eTarget.classname == "script_origin"))
+    if((isDefined(self.eTarget)) && (isDefined(self.eTarget.classname)) && (self.eTarget.classname == "script_origin"))
       eLookAtEnt = player;
-    else if(isdefined(self.eTarget))
+    else if(isDefined(self.eTarget))
       eLookAtEnt = self.eTarget;
     else
       eLookAtEnt = self.targetdefault;
@@ -455,7 +454,7 @@ heli_goal_think(baseSpeed) {
     -------------------------*/
     if(!is_coop()) {
       if((level.gameSkill == 0) || (level.gameSkill == 1)) {
-        while (player_is_aiming_with_rocket(heli))
+        while(player_is_aiming_with_rocket(heli))
           wait(.5);
         wait(3);
       }
@@ -526,7 +525,7 @@ player_is_aiming_with_rocket(eHeli) {
     return false;
   if(!level.player AdsButtonPressed())
     return false;
-  playerEye = level.player GetEye();
+  playerEye = level.player getEye();
   if(SightTracePassed(playerEye, eHeli.origin, false, level.player)) {
     //thread debug_message( "AIMING", undefined, 1, eHeli );
     return true;
@@ -544,8 +543,7 @@ heli_shoot_think() {
   attackRangeSquared = level.attackheliRange * level.attackheliRange;
   level.attackHeliGracePeriod = false;
 
-  while (IsDefined(self)) {
-
+  while(isDefined(self)) {
     wait(RandomFloatRange(0.8, 1.3));
 
     /*-----------------------
@@ -589,7 +587,7 @@ heli_shoot_think() {
     /*-----------------------
     IF THE LAST GUY THAT ATTACKED IS A PLAYER, TARGET HIM NO MATTER WHERE HE IS
     -------------------------*/
-    if((IsDefined(self.heli_lastattacker)) && (IsPlayer(self.heli_lastattacker)))
+    if((isDefined(self.heli_lastattacker)) && (IsPlayer(self.heli_lastattacker)))
       self.eTarget = self.heli_lastattacker;
 
     /*-----------------------
@@ -603,21 +601,21 @@ heli_shoot_think() {
     /*-----------------------
     DON'T SHOOT IF IT'S NOT A VALID TARGET
     -------------------------*/
-    if(!heli_has_target())
+    if(!heli_has_target()) {
       continue;
-
+    }
     /*-----------------------
     DON'T TRY TO SHOOT IF TARGET IN SAFE VOLUME
     -------------------------*/
-    if(self.eTarget is_hidden_from_heli(self))
+    if(self.eTarget is_hidden_from_heli(self)) {
       continue;
-
+    }
     /*-----------------------
     DON'T TRY TO SHOOT IF TARGET OUT OF RANGE
     -------------------------*/
-    if((heli_has_target()) && (DistanceSquared(self.eTarget.origin, self.origin) > attackRangeSquared))
+    if((heli_has_target()) && (DistanceSquared(self.eTarget.origin, self.origin) > attackRangeSquared)) {
       continue;
-
+    }
     /*-----------------------
     MISS PLAYER INTENTIONALLY AT FIRST IF USING REGULAR TURRETS
     -------------------------*/
@@ -629,7 +627,7 @@ heli_shoot_think() {
       miss_player(self.eTarget);
       wait(RandomFloatRange(0.8, 1.3));
 
-      while (can_see_player(self.eTarget) && (!self.eTarget is_hidden_from_heli(self))) {
+      while(can_see_player(self.eTarget) && (!self.eTarget is_hidden_from_heli(self))) {
         fire_guns();
         wait(RandomFloatRange(2.0, 4.0));
       }
@@ -665,11 +663,11 @@ player_grace_period(eHeli) {
 }
 
 heli_can_see_target() {
-  if(!isdefined(self.eTarget))
+  if(!isDefined(self.eTarget))
     return false;
   org = self.eTarget.origin + (0, 0, 32);
   if(IsPlayer(self.eTarget))
-    org = self.eTarget GetEye();
+    org = self.eTarget getEye();
 
   tag_flash_loc = self GetTagOrigin("tag_flash");
 
@@ -683,7 +681,7 @@ heli_can_see_target() {
 }
 
 heli_has_player_target() {
-  if(!isdefined(self.eTarget))
+  if(!isDefined(self.eTarget))
     return false;
   if(IsPlayer(self.eTarget))
     return true;
@@ -692,7 +690,7 @@ heli_has_player_target() {
 }
 
 heli_has_target() {
-  if(!isdefined(self.eTarget))
+  if(!isDefined(self.eTarget))
     return false;
   if(!isalive(self.eTarget))
     return false;
@@ -703,13 +701,12 @@ heli_has_target() {
 }
 
 heli_get_target() {
-
   //getEnemyTarget( fRadius, iFOVcos, getAITargets, doSightTrace, getVehicleTargets, randomizeTargetArray, aExcluders )
   eTarget = maps\_helicopter_globals::getEnemyTarget(level.attackheliRange, level.attackHeliFOV, true, true, false, true, level.attackHeliExcluders);
 
-  if((IsDefined(eTarget)) && (IsPlayer(eTarget)))
+  if((isDefined(eTarget)) && (IsPlayer(eTarget)))
     eTarget = self.targetdefault;
-  if(!isdefined(eTarget))
+  if(!isDefined(eTarget))
     eTarget = self.targetdefault;
 
   return eTarget;
@@ -720,29 +717,27 @@ heli_get_target_player_only() {
   //getEnemyTarget( fRadius, 			iFOVcos, 				getAITargets, doSightTrace, getVehicleTargets, randomizeTargetArray, aExcluders )
   eTarget = maps\_helicopter_globals::getEnemyTarget(level.attackheliRange, level.attackHeliFOV, true, false, false, false, aExcluders);
 
-  if(!isdefined(eTarget))
+  if(!isDefined(eTarget))
     eTarget = self.targetdefault;
 
   return eTarget;
 }
 
 heli_get_target_ai_only() {
-
   //getEnemyTarget( fRadius, iFOVcos, getAITargets, doSightTrace, getVehicleTargets, randomizeTargetArray, aExcluders )
   eTarget = maps\_helicopter_globals::getEnemyTarget(level.attackheliRange, level.attackHeliFOV, true, true, false, true, level.players);
 
-  if(!isdefined(eTarget))
+  if(!isDefined(eTarget))
     eTarget = self.targetdefault;
 
   return eTarget;
 }
 
-
 //heli_turret_think_old()
 //{
 //	self endon( "stop_shooting" );
 //	self endon( "death" );
-//	while ( true )
+//	while( true )
 //	{
 //		//choose our target based on distance and visibility
 //		player = get_closest_player( self.origin );
@@ -763,7 +758,7 @@ heli_get_target_ai_only() {
 //			continue;
 //
 //		//wait for player to be visible
-//		while ( !can_see_player( player ) )
+//		while( !can_see_player( player ) )
 //			wait( RandomFloatRange( 0.8, 1.3 ) );
 //
 //		/*-----------------------
@@ -782,7 +777,7 @@ heli_get_target_ai_only() {
 //		/*-----------------------
 //		HIT PLAYER IF STILL EXPOSED
 //		-------------------------*/	
-//		while ( can_see_player( player ) && !player usingAntiAirWeapon() && !player is_hidden_from_heli( self ) )
+//		while( can_see_player( player ) && !player usingAntiAirWeapon() && !player is_hidden_from_heli( self ) )
 //		{
 //			fire_at_player( player );
 //			wait( RandomFloatRange( 1.0, 2.0 ) );
@@ -799,9 +794,9 @@ heli_get_target_ai_only() {
 //}
 
 heli_missiles_think() {
-  if(!isdefined(self.script_missiles))
+  if(!isDefined(self.script_missiles)) {
     return;
-
+  }
   self endon("death");
   self endon("heli_players_dead");
   self endon("stop_shooting");
@@ -840,16 +835,16 @@ heli_missiles_think() {
   }
   nextMissileTag = -1;
 
-  while (true) {
+  while(true) {
     wait(0.05);
     self waittill("fire_missiles", other);
-    if(!isplayer(other))
+    if(!isplayer(other)) {
       continue;
-
+    }
     player = other;
     if(!player_is_good_missile_target(player))
       continue;
-    for (i = 0; i < iShots; i++) {
+    for(i = 0; i < iShots; i++) {
       nextMissileTag++;
       if(nextMissileTag >= tags.size)
         nextMissileTag = 0;
@@ -880,7 +875,7 @@ missile_earthquake() {
   if(DistanceSquared(self.origin, level.player.origin) > 9000000)
     return;
   org = self.origin;
-  while (IsDefined(self)) {
+  while(isDefined(self)) {
     org = self.origin;
     wait(0.1);
   }
@@ -891,12 +886,12 @@ missileLoseTarget(fDelay) {
   self endon("death");
   self endon("heli_players_dead");
   wait fDelay;
-  if(IsDefined(self))
+  if(isDefined(self))
     self Missile_ClearTarget();
 }
 
 get_different_player(player) {
-  for (i = 0; i < level.players.size; i++) {
+  for(i = 0; i < level.players.size; i++) {
     if(player != level.players[i])
       return level.players[i];
   }
@@ -908,7 +903,7 @@ notify_disable() {
   self endon("notify_disable_thread");
   self endon("death");
   self endon("heli_players_dead");
-  for (;;) {
+  for(;;) {
     self waittill("disable_turret");
     self.allowShoot = false;
   }
@@ -919,14 +914,13 @@ notify_enable() {
   self endon("notify_enable_thread");
   self endon("death");
   self endon("heli_players_dead");
-  for (;;) {
+  for(;;) {
     self waittill("enable_turret");
     self.allowShoot = true;
   }
 }
 
 fire_guns() {
-
   /*-----------------------
   FIRE MAIN TURRET OR MINIGUNS
   -------------------------*/
@@ -981,7 +975,7 @@ turret_default_fire(eTarget, burstsize, fireTime) {
   /*-----------------------
   DEFAULT MAIN TURRET OF MOST CHOPPERS
   -------------------------*/
-  for (i = 0; i < burstsize; i++) {
+  for(i = 0; i < burstsize; i++) {
     self SetTurretTargetEnt(eTarget, randomvector(50) + (0, 0, 32));
     //self SetTurretTargetEnt( eTarget, ( 0, 0, 32 ) );
     if((self.allowShoot) && (!self.firingMissiles))
@@ -1025,7 +1019,7 @@ turret_minigun_fire(eTarget, burstsize, max_warmup_time) {
 
   self.minigunsspinning = true;
 
-  if(!isdefined(max_warmup_time))
+  if(!isDefined(max_warmup_time))
     max_warmup_time = 3;
 
   min_warmup_time = 0.5;
@@ -1069,16 +1063,16 @@ minigun_fire(eTarget, burstsize) {
   wait(burstsize);
 }
 
-
 target_track(eTarget) {
   self endon("death");
   self endon("heli_players_dead");
   self endon("stopping_firing");
   self notify("tracking_player");
   self endon("tracking_player");
-  while (true) {
-    if(!can_see_player(eTarget))
+  while(true) {
+    if(!can_see_player(eTarget)) {
       break;
+    }
     wait(.5);
   }
   wait level.attackHeliTimeout;
@@ -1094,12 +1088,12 @@ turret_minigun_target_track(eTarget, eHeli) {
 
   //If it's an AI, shoot 100 units above his origin unless scripted wants otherwise
   if((!isPlayer(eTarget)) && (IsAI(eTarget)) && (level.attackHeliKillsAI == false)) {
-    eFake_AI_Target = Spawn("script_origin", eTarget.origin + (0, 0, 100));
+    eFake_AI_Target = spawn("script_origin", eTarget.origin + (0, 0, 100));
     eFake_AI_Target LinkTo(eTarget);
     self thread minigun_AI_target_cleanup(eFake_AI_Target);
     eTarget = eFake_AI_Target;
   }
-  while (true) {
+  while(true) {
     wait(.5);
     self SetTargetEntity(eTarget);
   }
@@ -1146,13 +1140,13 @@ miss_player(player) {
   //miss_vec = forward + ( 0, 0, -128 ) + randomvector( 50 );
 
   //point in front of player
-  forward = AnglesToForward(level.player.angles);
+  forward = anglesToForward(level.player.angles);
   forwardfar = vector_multiply(forward, 400);
   miss_vec = forwardfar + randomvector(50);
 
   burstsize = RandomIntRange(10, 20);
   fireTime = WeaponFireTime("turret_attackheli");
-  for (i = 0; i < burstsize; i++) {
+  for(i = 0; i < burstsize; i++) {
     //debug_org = ( player.origin + miss_vec );
     //thread draw_line_for_time( debug_org, debug_org + ( 0, 0, 10 ), 1, 0, 0, 5.0 );
 
@@ -1170,7 +1164,7 @@ can_see_player(player) {
   self endon("heli_players_dead");
   tag_flash_loc = self GetTagOrigin("tag_flash");
   //BulletTracePassed( <start>, <end>, <hit characters>, <ignore entity> );
-  if(SightTracePassed(tag_flash_loc, player GetEye(), false, undefined))
+  if(SightTracePassed(tag_flash_loc, player getEye(), false, undefined))
     return true;
   else {
     PrintLn("_attack_heli.gsc---trace failed");
@@ -1184,8 +1178,8 @@ get_linked_points(heli, goal, points, player, playerOrigin) {
   -------------------------*/
   linked = [];
   tokens = StrTok(goal.script_linkto, " ");
-  for (i = 0; i < points.size; i++) {
-    for (j = 0; j < tokens.size; j++) {
+  for(i = 0; i < points.size; i++) {
+    for(j = 0; j < tokens.size; j++) {
       if(points[i].script_linkName == tokens[j])
         linked[linked.size] = points[i];
     }
@@ -1220,13 +1214,13 @@ heli_damage_monitor() {
   self.damagetaken = 0;
   self.seen_attacker = undefined;
 
-  for (;;) {
+  for(;;) {
     // this damage is done to self.health which isnt used to determine the helicopter's health, damageTaken is.
     self waittill("damage", damage, attacker, direction_vec, P, type);
 
-    if(!isdefined(attacker) || !isplayer(attacker))
+    if(!isDefined(attacker) || !isplayer(attacker)) {
       continue;
-
+    }
     self notify("damage_by_player");
     self thread heli_damage_update();
     self thread can_see_attacker_for_a_bit(attacker);
@@ -1261,10 +1255,10 @@ can_see_attacker_for_a_bit(attacker) {
 }
 
 is_hidden_from_heli(heli) {
-  if(IsDefined(heli.seen_attacker))
+  if(isDefined(heli.seen_attacker))
     if(heli.seen_attacker == self)
       return false;
-  if(IsDefined(level.attack_heli_safe_volumes)) {
+  if(isDefined(level.attack_heli_safe_volumes)) {
     foreach(volume in level.attack_heli_safe_volumes)
     if(self IsTouching(volume))
       return true;
@@ -1273,9 +1267,9 @@ is_hidden_from_heli(heli) {
 }
 
 updateDamageFeedback() {
-  if(!isPlayer(self))
+  if(!isPlayer(self)) {
     return;
-
+  }
   self.hud_damagefeedback SetShader("damage_feedback", 24, 48);
   self PlayLocalSound("player_feedback_hit_alert");
 
@@ -1285,7 +1279,7 @@ updateDamageFeedback() {
 }
 
 damage_feedback_setup() {
-  for (i = 0; i < level.players.size; i++) {
+  for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
     player.hud_damagefeedback = NewClientHudElem(player);
     player.hud_damagefeedback.horzAlign = "center";
@@ -1311,32 +1305,32 @@ dialog_nags_heli(heli) {
   heli endon("heli_players_dead");
   wait 30;
 
-  if(!level.enemy_heli_attacking)
+  if(!level.enemy_heli_attacking) {
     return;
-
+  }
   commander_dialog("co_cf_cmd_heli_small_fire");
-  //"That heli is vulnerable to small arms fire." 
+  //"That heli is vulnerable to small arms fire."
 
-  if(!level.enemy_heli_attacking)
+  if(!level.enemy_heli_attacking) {
     return;
-
+  }
   commander_dialog("co_cf_cmd_rpg_stinger");
-  //"Otherwise look for an RPG or Stinger." 
+  //"Otherwise look for an RPG or Stinger."
 
   wait 30;
 
   if(!level.enemy_heli_attacking)
     return;
   commander_dialog("co_cf_cmd_heli_wonders");
-  //"Charlie Four, an RPG or Stinger would do wonders against that heli." 
+  //"Charlie Four, an RPG or Stinger would do wonders against that heli."
 }
 
 commander_dialog(dialog_line) {
-  while (level.commander_speaking)
+  while(level.commander_speaking)
     wait 1;
 
   level.commander_speaking = true;
-  level.player PlaySound(dialog_line, "sounddone");
+  level.player playSound(dialog_line, "sounddone");
   level.player waittill("sounddone");
   wait .5;
   level.commander_speaking = false;
@@ -1345,7 +1339,7 @@ commander_dialog(dialog_line) {
 usingAntiAirWeapon() {
   weapon = self GetCurrentWeapon();
 
-  if(!isdefined(weapon))
+  if(!isDefined(weapon))
     return false;
 
   if(IsSubStr(ToLower(weapon), "rpg"))
@@ -1363,8 +1357,8 @@ usingAntiAirWeapon() {
 heli_spotlight_cleanup(sTag) {
   self waittill_any("death", "crash_done", "turn_off_spotlight");
   self.spotlight = undefined;
-  if(IsDefined(self))
-    StopFXOnTag(getfx("_attack_heli_spotlight"), self, sTag);
+  if(isDefined(self))
+    stopFXOnTag(getfx("_attack_heli_spotlight"), self, sTag);
 }
 
 heli_spotlight_aim() {
@@ -1378,7 +1372,7 @@ heli_spotlight_aim() {
     return;
   self thread heli_spotlight_think();
   eSpotlightTarget = undefined;
-  while (true) {
+  while(true) {
     wait(.05);
     switch (self.vehicletype) {
       case "littlebird": // littlebird doesn't use its turret to shoot...only to point spotlight
@@ -1388,7 +1382,7 @@ heli_spotlight_aim() {
         eSpotlightTarget = self.eTarget;
         break;
     }
-    if(IsDefined(eSpotlightTarget))
+    if(isDefined(eSpotlightTarget))
       self SetTurretTargetEnt(eSpotlightTarget, (0, 0, 0));
   }
 }
@@ -1399,23 +1393,23 @@ heli_spotlight_think() {
   original_ent = self.targetdefault;
   original_ent.targetname = "original_ent";
 
-  self.left_ent = Spawn("script_origin", original_ent.origin);
+  self.left_ent = spawn("script_origin", original_ent.origin);
   self.left_ent.origin = original_ent.origin;
   self.left_ent.angles = original_ent.angles;
   self.left_ent.targetname = "left_ent";
 
-  self.right_ent = Spawn("script_origin", original_ent.origin);
+  self.right_ent = spawn("script_origin", original_ent.origin);
   self.right_ent.origin = original_ent.origin;
   self.right_ent.angles = original_ent.angles;
   self.right_ent.targetname = "right_ent";
 
-  ent = SpawnStruct();
+  ent = spawnStruct();
   ent.entity = self.left_ent;
   ent.right = 250;
   ent translate_local();
   self.left_ent LinkTo(self);
 
-  ent2 = SpawnStruct();
+  ent2 = spawnStruct();
   ent2.entity = self.right_ent;
   ent2.right = -250;
   ent2 translate_local();
@@ -1433,7 +1427,7 @@ heli_spotlight_think() {
 
   array_thread(aim_ents, ::heli_spotlight_aim_ents_cleanup, self);
 
-  while (true) {
+  while(true) {
     wait(RandomFloatRange(1, 3));
 
     //shine on the player if the heli is currently targeting the player and player is not looking at the heli
@@ -1453,18 +1447,18 @@ heli_spotlight_think() {
 within_player_fov() {
   self endon("death");
   self endon("heli_players_dead");
-  if(!isdefined(self.eTarget))
+  if(!isDefined(self.eTarget))
     return false;
   if(!isPlayer(self.eTarget))
     return false;
   player = self.eTarget;
-  bInFOV = within_fov(player GetEye(), player GetPlayerAngles(), self.origin, level.cosine["35"]);
+  bInFOV = within_fov(player getEye(), player GetPlayerAngles(), self.origin, level.cosine["35"]);
   return bInFOV;
 }
 
 heli_spotlight_aim_ents_cleanup(eHeli) {
   eHeli waittill_either("death", "crash_done");
-  if(IsDefined(self))
+  if(isDefined(self))
     self Delete();
 }
 
@@ -1472,24 +1466,23 @@ littlebird_turrets_think(eHeli) {
   //"self ==> each of the attached minigun turrets
   eTurret = self;
   eTurret turret_set_default_on_mode("manual");
-  if(IsDefined(eHeli.targetdefault))
+  if(isDefined(eHeli.targetdefault))
     eTurret SetTargetEntity(eHeli.targetdefault);
 
   eTurret SetMode("manual");
 
   //clean up minigun sound in case it was firing while getting killed
   eHeli waittill("death");
-  if((IsDefined(eHeli.firingguns)) && (eHeli.firingguns == true))
+  if((isDefined(eHeli.firingguns)) && (eHeli.firingguns == true))
     self thread minigun_spindown_sound();
-
 }
 
 attack_heli_cleanup() {
   self waittill_either("death", "crash_done");
-  if(IsDefined(self.attractor))
+  if(isDefined(self.attractor))
     Missile_DeleteAttractor(self.attractor);
 
-  if(IsDefined(self.attractor2))
+  if(isDefined(self.attractor2))
     Missile_DeleteAttractor(self.attractor2);
 }
 
@@ -1510,7 +1503,7 @@ heli_default_missiles_on(customMissiles) {
   self endon("heli_players_dead");
   self endon("stop_default_heli_missiles");
   self.preferredTarget = undefined;
-  while (IsDefined(self)) {
+  while(isDefined(self)) {
     wait(0.05);
     eTarget = undefined;
     iShots = undefined;
@@ -1521,16 +1514,16 @@ heli_default_missiles_on(customMissiles) {
     /*-----------------------
     SEE IF THERE IS A NEXT NODE IN CHAIN
     -------------------------*/
-    if((IsDefined(self.currentnode)) && (IsDefined(self.currentnode.target)))
+    if((isDefined(self.currentnode)) && (isDefined(self.currentnode.target)))
       eNextNode = getent_or_struct(self.currentnode.target, "targetname");
 
     /*-----------------------
     CHECK IF NEXT NODE HAS ANY PREFERRED TARGETS
     -------------------------*/
-    if((IsDefined(eNextNode)) && (IsDefined(eNextNode.script_linkTo)))
+    if((isDefined(eNextNode)) && (isDefined(eNextNode.script_linkTo)))
       self.preferredTarget = getent_or_struct(eNextNode.script_linkTo, "script_linkname");
 
-    if(IsDefined(self.preferredTarget)) {
+    if(isDefined(self.preferredTarget)) {
       eTarget = self.preferredTarget;
       iShots = eTarget.script_shotcount;
       delay = eTarget.script_delay;
@@ -1541,7 +1534,7 @@ heli_default_missiles_on(customMissiles) {
     /*-----------------------
     FIRE MISSILES IF I HAVE A GOOD TARGET
     -------------------------*/
-    if(IsDefined(eTarget)) {
+    if(isDefined(eTarget)) {
       self thread heli_fire_missiles(eTarget, iShots, delay, customMissiles);
     }
 
@@ -1563,7 +1556,6 @@ heli_default_missiles_off() {
   self notify("stop_default_heli_missiles");
 }
 
-
 /*
 =============
 ///ScriptDocBegin
@@ -1578,12 +1570,12 @@ heli_default_missiles_off() {
 =============
 */
 heli_spotlight_on(sTag, bUseAttackHeliBehavior) {
-  if(!isdefined(sTag))
+  if(!isDefined(sTag))
     sTag = "tag_barrel";
-  if(!isdefined(bUseAttackHeliBehavior))
+  if(!isDefined(bUseAttackHeliBehavior))
     bUseAttackHeliBehavior = false;
 
-  PlayFXOnTag(getfx("_attack_heli_spotlight"), self, sTag);
+  playFXOnTag(getfx("_attack_heli_spotlight"), self, sTag);
   self.spotlight = 1;
   self thread heli_spotlight_cleanup(sTag);
 
@@ -1593,7 +1585,7 @@ heli_spotlight_on(sTag, bUseAttackHeliBehavior) {
     self endon("heli_players_dead");
     spawn_origin = self GetTagOrigin("tag_origin");
 
-    if(!isdefined(self.targetdefault))
+    if(!isDefined(self.targetdefault))
       self heli_default_target_setup();
     self SetTurretTargetEnt(self.targetdefault);
     self thread heli_spotlight_aim();
@@ -1631,14 +1623,14 @@ heli_spotlight_random_targets_on() {
   self endon("heli_players_dead");
   self endon("stop_spotlight_random_targets");
   //setup default targets
-  if(!isdefined(self.targetdefault))
+  if(!isDefined(self.targetdefault))
     self thread heli_default_target_setup(); // gives the heli an "self.targetdefault" right in front of its nose
 
-  if(!isdefined(self.left_ent))
+  if(!isDefined(self.left_ent))
     self thread heli_spotlight_think(); // spawns 2 more attached script_origins on the left and right and
   //and randomly makes one of the three the heli's "self.targetdefault"
 
-  while (IsDefined(self)) {
+  while(isDefined(self)) {
     wait(.05);
     self SetTurretTargetEnt(self.targetdefault, (0, 0, 0));
   }
@@ -1677,25 +1669,25 @@ heli_spotlight_random_targets_off() {
 heli_fire_missiles(eTarget, iShots, delay, customMissiles) {
   self endon("death");
   self endon("heli_players_dead");
-  if(IsDefined(self.defaultWeapon))
+  if(isDefined(self.defaultWeapon))
     defaultWeapon = self.defaultWeapon;
   else
     defaultWeapon = "turret_attackheli";
   weaponName = "missile_attackheli";
-  if(isdefined(customMissiles))
+  if(isDefined(customMissiles))
     weaponName = customMissiles;
   loseTargetDelay = undefined;
   tags = [];
   self SetVehWeapon(defaultWeapon);
-  if(!isdefined(iShots))
+  if(!isDefined(iShots))
     iShots = 1;
-  if(!isdefined(delay))
+  if(!isDefined(delay))
     delay = 1;
 
   //if the target is a struct, need to spawn a dummy ent to fire at
-  if(!isdefined(eTarget.classname)) {
-    if(!isdefined(self.dummyTarget)) {
-      self.dummyTarget = Spawn("script_origin", eTarget.origin);
+  if(!isDefined(eTarget.classname)) {
+    if(!isDefined(self.dummyTarget)) {
+      self.dummyTarget = spawn("script_origin", eTarget.origin);
       self thread delete_on_death(self.dummyTarget);
     }
     self.dummyTarget.origin = eTarget.origin;
@@ -1725,7 +1717,7 @@ heli_fire_missiles(eTarget, iShots, delay, customMissiles) {
   }
   nextMissileTag = -1;
 
-  for (i = 0; i < iShots; i++) {
+  for(i = 0; i < iShots; i++) {
     nextMissileTag++;
     if(nextMissileTag >= tags.size)
       nextMissileTag = 0;
@@ -1740,7 +1732,6 @@ heli_fire_missiles(eTarget, iShots, delay, customMissiles) {
   }
   self.firingMissiles = false;
   self SetVehWeapon(defaultWeapon);
-
 }
 
 boneyard_style_heli_missile_attack() {
@@ -1778,10 +1769,10 @@ boneyard_fire_at_targets(vehicle, struct_arr) {
 
   ents = [];
 
-  for (i = 0; i < struct_arr.size; i++) {
-    AssertEx(IsDefined(struct_arr[i]), "boneyard_style_heli_missile_attack requires script_index key/value to start at 0 and not have any gaps.");
+  for(i = 0; i < struct_arr.size; i++) {
+    AssertEx(isDefined(struct_arr[i]), "boneyard_style_heli_missile_attack requires script_index key/value to start at 0 and not have any gaps.");
 
-    ents[i] = Spawn("script_origin", struct_arr[i].origin);
+    ents[i] = spawn("script_origin", struct_arr[i].origin);
 
     vehicle SetVehWeapon("littlebird_FFAR");
     vehicle SetTurretTargetEnt(ents[i]);

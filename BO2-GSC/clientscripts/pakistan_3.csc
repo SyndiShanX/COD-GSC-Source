@@ -60,7 +60,7 @@ set_drone_damage_low(localclientnum, set, newent) {
     if(isDefined(self.drone_damage_fx_low))
       stopfx(localclientnum, self.drone_damage_fx_low);
 
-    self.drone_damage_fx_low = playfxontag(localclientnum, level._effect["fx_drone_damage_low"], self, "origin_animate_jnt");
+    self.drone_damage_fx_low = playFXOnTag(localclientnum, level._effect["fx_drone_damage_low"], self, "origin_animate_jnt");
   } else {
     if(isDefined(self.drone_damage_fx_low))
       stopfx(localclientnum, self.drone_damage_fx_low);
@@ -76,8 +76,8 @@ set_drone_damage_med(localclientnum, set, newent) {
       stopfx(localclientnum, self.drone_damage_fx_med_2);
     }
 
-    self.drone_damage_fx_med_1 = playfxontag(localclientnum, level._effect["fx_drone_damage_med_1"], self, "origin_animate_jnt");
-    self.drone_damage_fx_med_2 = playfxontag(localclientnum, level._effect["fx_drone_damage_med_2"], self, "origin_animate_jnt");
+    self.drone_damage_fx_med_1 = playFXOnTag(localclientnum, level._effect["fx_drone_damage_med_1"], self, "origin_animate_jnt");
+    self.drone_damage_fx_med_2 = playFXOnTag(localclientnum, level._effect["fx_drone_damage_med_2"], self, "origin_animate_jnt");
   } else {
     if(isDefined(self.drone_damage_fx_med_1)) {
       stopfx(localclientnum, self.drone_damage_fx_med_1);
@@ -95,8 +95,8 @@ set_drone_damage_hi(localclientnum, set, newent) {
       stopfx(localclientnum, self.drone_damage_fx_hi_2);
     }
 
-    self.drone_damage_fx_hi_1 = playfxontag(localclientnum, level._effect["fx_drone_damage_hi_1"], self, "origin_animate_jnt");
-    self.drone_damage_fx_hi_2 = playfxontag(localclientnum, level._effect["fx_drone_damage_hi_2"], self, "origin_animate_jnt");
+    self.drone_damage_fx_hi_1 = playFXOnTag(localclientnum, level._effect["fx_drone_damage_hi_1"], self, "origin_animate_jnt");
+    self.drone_damage_fx_hi_2 = playFXOnTag(localclientnum, level._effect["fx_drone_damage_hi_2"], self, "origin_animate_jnt");
   } else {
     if(isDefined(self.drone_damage_fx_hi_1)) {
       stopfx(localclientnum, self.drone_damage_fx_hi_1);
@@ -115,9 +115,9 @@ set_soct_damage_low(localclientnum, set, newent) {
       stopfx(localclientnum, self.soct_damage_fx_low_3);
     }
 
-    self.soct_damage_fx_low_1 = playfxontag(localclientnum, level._effect["fx_soct_damage_low_1"], self, "tag_console_fx");
-    self.soct_damage_fx_low_2 = playfxontag(localclientnum, level._effect["fx_soct_damage_low_2"], self, "tag_hood_vent_left_fx");
-    self.soct_damage_fx_low_3 = playfxontag(localclientnum, level._effect["fx_soct_damage_low_2"], self, "tag_hood_vent_right_fx");
+    self.soct_damage_fx_low_1 = playFXOnTag(localclientnum, level._effect["fx_soct_damage_low_1"], self, "tag_console_fx");
+    self.soct_damage_fx_low_2 = playFXOnTag(localclientnum, level._effect["fx_soct_damage_low_2"], self, "tag_hood_vent_left_fx");
+    self.soct_damage_fx_low_3 = playFXOnTag(localclientnum, level._effect["fx_soct_damage_low_2"], self, "tag_hood_vent_right_fx");
   } else {
     if(isDefined(self.soct_damage_fx_low_1)) {
       stopfx(localclientnum, self.soct_damage_fx_low_1);
@@ -137,9 +137,9 @@ set_soct_damage_med(localclientnum, set, newent) {
       stopfx(localclientnum, self.soct_damage_fx_med_3);
     }
 
-    self.soct_damage_fx_med_1 = playfxontag(localclientnum, level._effect["fx_soct_damage_med_1"], self, "tag_console_fx");
-    self.soct_damage_fx_med_2 = playfxontag(localclientnum, level._effect["fx_soct_damage_med_2"], self, "tag_hood_vent_left_fx");
-    self.soct_damage_fx_med_3 = playfxontag(localclientnum, level._effect["fx_soct_damage_med_2"], self, "tag_hood_vent_right_fx");
+    self.soct_damage_fx_med_1 = playFXOnTag(localclientnum, level._effect["fx_soct_damage_med_1"], self, "tag_console_fx");
+    self.soct_damage_fx_med_2 = playFXOnTag(localclientnum, level._effect["fx_soct_damage_med_2"], self, "tag_hood_vent_left_fx");
+    self.soct_damage_fx_med_3 = playFXOnTag(localclientnum, level._effect["fx_soct_damage_med_2"], self, "tag_hood_vent_right_fx");
   } else {
     if(isDefined(self.soct_damage_fx_med_1)) {
       stopfx(localclientnum, self.soct_damage_fx_med_1);
@@ -158,9 +158,9 @@ set_soct_damage_hi(localclientnum, set, newent) {
       stopfx(localclientnum, self.soct_damage_fx_hi_2);
     }
 
-    self.soct_damage_fx_hi_1 = playfxontag(localclientnum, level._effect["fx_soct_damage_hi_1"], self, "tag_console_fx");
-    self.soct_damage_fx_hi_2 = playfxontag(localclientnum, level._effect["fx_soct_damage_hi_2"], self, "tag_hood_vent_left_fx");
-    self.soct_damage_fx_hi_3 = playfxontag(localclientnum, level._effect["fx_soct_damage_hi_2"], self, "tag_hood_vent_right_fx");
+    self.soct_damage_fx_hi_1 = playFXOnTag(localclientnum, level._effect["fx_soct_damage_hi_1"], self, "tag_console_fx");
+    self.soct_damage_fx_hi_2 = playFXOnTag(localclientnum, level._effect["fx_soct_damage_hi_2"], self, "tag_hood_vent_left_fx");
+    self.soct_damage_fx_hi_3 = playFXOnTag(localclientnum, level._effect["fx_soct_damage_hi_2"], self, "tag_hood_vent_right_fx");
   } else {
     if(isDefined(self.soct_damage_fx_hi_1)) {
       stopfx(localclientnum, self.soct_damage_fx_hi_1);

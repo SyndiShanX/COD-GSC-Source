@@ -82,10 +82,9 @@ init() {
   level thread UAVTracker();
 }
 
-
 onPlayerConnect() {
   level endon("game_ended");
-  for (;;) {
+  for(;;) {
     level waittill("connected", player);
 
     level.activeUAVs[player.guid] = 0;
@@ -97,12 +96,11 @@ onPlayerConnect() {
 
 rotateUAVRig() {
   level endon("game_ended");
-  for (;;) {
+  for(;;) {
     self rotateyaw(-360, 60);
     wait(60);
   }
 }
-
 
 launchUAV(owner, team, duration, isCounter) {
   UAVModel = spawn("script_model", level.UAVRig getTagOrigin("tag_origin"));
@@ -143,15 +141,15 @@ launchUAV(owner, team, duration, isCounter) {
 
   if(isDefined(UAVModel.alreadyDead)) {
     forward = vector_multiply(anglesToRight(UAVModel.angles), 200);
-    playFx(level.uav_fx["explode"], UAVModel.origin, forward);
+    playFX(level.uav_fx["explode"], UAVModel.origin, forward);
   } else {
     UAVModel unlink();
 
-    destPoint = UAVModel.origin + vector_multiply(anglestoforward(UAVModel.angles), 20000);
+    destPoint = UAVModel.origin + vector_multiply(anglesToForward(UAVModel.angles), 20000);
     UAVModel moveTo(destPoint, 60);
 
     // this fails for some reason, undefined isn't int??
-    //PlayFXOnTag( level._effect[ "ac130_engineeffect" ] , UAVModel, "tag_origin", 0 );
+    //playFXOnTag( level._effect[ "ac130_engineeffect" ] , UAVModel, "tag_origin", 0 );
 
     UAVModel waittill_notify_or_timeout_hostmigration_pause("death", 3);
 
@@ -171,19 +169,17 @@ launchUAV(owner, team, duration, isCounter) {
   level notify("uav_update");
 }
 
-
 waittill_notify_or_timeout_hostmigration_pause(msg, timer) {
   self endon(msg);
 
   maps\mp\gametypes\_hostmigration::waitLongDurationWithHostMigrationPause(timer);
 }
 
-
 updateUAVModelVisibility() {
   self endon("death");
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     level waittill_either("joined_team", "uav_update");
 
     self hide();
@@ -192,15 +188,14 @@ updateUAVModelVisibility() {
         if(player.team != self.team)
           self showToPlayer(player);
       } else {
-        if(isDefined(self.owner) && player == self.owner)
+        if(isDefined(self.owner) && player == self.owner) {
           continue;
-
+        }
         self showToPlayer(player);
       }
     }
   }
 }
-
 
 damageTracker(isCounterUAV) {
   level endon("game_ended");
@@ -211,12 +206,12 @@ damageTracker(isCounterUAV) {
   self.damageTaken = 0; // how much damage has it taken
   self setCanDamage(true);
 
-  for (;;) {
+  for(;;) {
     self waittill("damage", damage, attacker, direction_vec, point, sMeansOfDeath);
 
-    if(!isPlayer(attacker))
+    if(!isPlayer(attacker)) {
       continue;
-
+    }
     self.damageTaken += damage;
 
     attacker maps\mp\gametypes\_damagefeedback::updateDamageFeedback("");
@@ -245,21 +240,17 @@ damageTracker(isCounterUAV) {
   }
 }
 
-
 tryUseUAV(lifeId) {
   return useUAV("uav");
 }
-
 
 tryUseDoubleUAV(lifeId) {
   return useUAV("double_uav");
 }
 
-
 tryUseCounterUAV(lifeId) {
   return useUAV("counter_uav");
 }
-
 
 useUAV(uavType) {
   self maps\mp\_matchdata::logKillstreakEvent((uavType == "counter_uav" ? "counter_radar_mp" : "radar_mp"), self.origin);
@@ -277,11 +268,10 @@ useUAV(uavType) {
   return true;
 }
 
-
 UAVTracker() {
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     level waittill("uav_update");
 
     if(level.teamBased) {
@@ -292,7 +282,6 @@ UAVTracker() {
     }
   }
 }
-
 
 updateTeamUAVStatus(team) {
   activeUAVs = level.activeUAVs[team];
@@ -316,7 +305,6 @@ updateTeamUAVStatus(team) {
   updateTeamUAVType();
   setTeamRadarWrapper(team, 1);
 }
-
 
 updatePlayersUAVStatus() {
   totalActiveCounterUAVs = 0;
@@ -358,7 +346,6 @@ updatePlayersUAVStatus() {
   }
 }
 
-
 blockPlayerUAV() {
   self endon("disconnect");
 
@@ -371,20 +358,17 @@ blockPlayerUAV() {
 
   self h2_jamPlayerRadar(false);
 
-  //self iPrintLn( &"MP_WAR_COUNTER_RADAR_EXPIRED" );
+  //self iPrintLn(&"MP_WAR_COUNTER_RADAR_EXPIRED" );
 }
-
 
 updateTeamUAVType() {
   foreach(player in level.players) {
-    if(player.team == "spectator")
+    if(player.team == "spectator") {
       continue;
-
+    }
     player.radarMode = level.radarMode[player.team];
   }
 }
-
-
 
 usePlayerUAV(doubleUAV, useTime) {
   level endon("game_ended");
@@ -404,31 +388,27 @@ usePlayerUAV(doubleUAV, useTime) {
 
   self.hasRadar = false;
 
-  //self iPrintLn( &"MP_WAR_RADAR_EXPIRED" );
+  //self iPrintLn(&"MP_WAR_RADAR_EXPIRED" );
 }
-
 
 setTeamRadarWrapper(team, value) {
   setTeamRadar(team, value);
   level notify("radar_status_change", team);
 }
 
-
-
 handleIncomingStinger() {
   level endon("game_ended");
   self endon("death");
 
-  for (;;) {
+  for(;;) {
     level waittill("stinger_fired", player, missile, lockTarget);
 
-    if(!IsDefined(lockTarget) || (lockTarget != self))
+    if(!isDefined(lockTarget) || (lockTarget != self)) {
       continue;
-
+    }
     missile thread stingerProximityDetonate(lockTarget, player);
   }
 }
-
 
 stingerProximityDetonate(targetEnt, player) {
   self endon("death");
@@ -437,7 +417,7 @@ stingerProximityDetonate(targetEnt, player) {
   minDist = distance(self.origin, targetEnt GetPointInBounds(0, 0, 0));
   lastCenter = targetEnt GetPointInBounds(0, 0, 0);
 
-  for (;;) {
+  for(;;) {
     // UAV already destroyed
     if(!isDefined(targetEnt))
       center = lastCenter;
@@ -452,11 +432,11 @@ stingerProximityDetonate(targetEnt, player) {
       minDist = curDist;
 
     if(curDist > minDist) {
-      if(curDist > 1536)
+      if(curDist > 1536) {
         return;
-
+      }
       radiusDamage(self.origin, 1536, 600, 600, player);
-      playFx(level.stingerFXid, self.origin);
+      playFX(level.stingerFXid, self.origin);
 
       //self playSound( "remotemissile_explode" );
       self hide();
@@ -471,14 +451,12 @@ stingerProximityDetonate(targetEnt, player) {
   }
 }
 
-
 addUAVModel(UAVModel) {
   if(level.teamBased)
     level.UAVModels[UAVModel.team][level.UAVModels[UAVModel.team].size] = UAVModel;
   else
     level.UAVModels[UAVModel.owner.guid + "_" + getTime()] = UAVModel;
 }
-
 
 removeUAVModel(UAVModel) {
   UAVModels = [];
@@ -487,25 +465,24 @@ removeUAVModel(UAVModel) {
     team = UAVModel.team;
 
     foreach(uavModel in level.UAVModels[team]) {
-      if(!isDefined(uavModel))
+      if(!isDefined(uavModel)) {
         continue;
-
+      }
       UAVModels[UAVModels.size] = uavModel;
     }
 
     level.UAVModels[team] = UAVModels;
   } else {
     foreach(uavModel in level.UAVModels) {
-      if(!isDefined(uavModel))
+      if(!isDefined(uavModel)) {
         continue;
-
+      }
       UAVModels[UAVModels.size] = uavModel;
     }
 
     level.UAVModels = UAVModels;
   }
 }
-
 
 addActiveUAV() {
   if(level.teamBased)
@@ -518,9 +495,9 @@ addActiveUAV() {
   foreach ( player in level.players )
   {
   if( player.team == self.team )
-  player iPrintLn( &"MP_WAR_RADAR_ACQUIRED", self.owner, level.radarViewTime );
+  player iPrintLn(&"MP_WAR_RADAR_ACQUIRED", self.owner, level.radarViewTime );
   else if( player.team == level.otherTeam[self.team] )
-  player iPrintLn( &"MP_WAR_RADAR_ACQUIRED_ENEMY", level.radarViewTime);
+  player iPrintLn(&"MP_WAR_RADAR_ACQUIRED_ENEMY", level.radarViewTime);
   }
   }	
   else
@@ -528,14 +505,13 @@ addActiveUAV() {
   foreach ( player in level.players )
   {
   if( player == self.owner )
-  player iPrintLn( &"MP_WAR_RADAR_ACQUIRED", self.owner, level.radarViewTime );
+  player iPrintLn(&"MP_WAR_RADAR_ACQUIRED", self.owner, level.radarViewTime );
   else
-  player iPrintLn( &"MP_WAR_RADAR_ACQUIRED_ENEMY", level.radarViewTime );
+  player iPrintLn(&"MP_WAR_RADAR_ACQUIRED_ENEMY", level.radarViewTime );
   }
   }
   */
 }
-
 
 addActiveCounterUAV() {
   if(level.teamBased)
@@ -548,9 +524,9 @@ addActiveCounterUAV() {
   foreach ( player in level.players )
   {
   if( player.team == self.team )
-  player iPrintLn( &"MP_WAR_COUNTER_RADAR_ACQUIRED", self.owner, level.uavBlockTime );
+  player iPrintLn(&"MP_WAR_COUNTER_RADAR_ACQUIRED", self.owner, level.uavBlockTime );
   else if( player.team == level.otherTeam[self.team] )
-  player iPrintLn( &"MP_WAR_COUNTER_RADAR_ACQUIRED_ENEMY", level.uavBlockTime );
+  player iPrintLn(&"MP_WAR_COUNTER_RADAR_ACQUIRED_ENEMY", level.uavBlockTime );
   }
   }	
   else
@@ -558,36 +534,34 @@ addActiveCounterUAV() {
   foreach ( player in level.players )
   {
   if( player == self.owner )
-  player iPrintLn( &"MP_WAR_COUNTER_RADAR_ACQUIRED", self.owner, level.uavBlockTime );
+  player iPrintLn(&"MP_WAR_COUNTER_RADAR_ACQUIRED", self.owner, level.uavBlockTime );
   else
-  player iPrintLn( &"MP_WAR_COUNTER_RADAR_ACQUIRED_ENEMY", level.uavBlockTime );
+  player iPrintLn(&"MP_WAR_COUNTER_RADAR_ACQUIRED_ENEMY", level.uavBlockTime );
   }
   }
   */
 }
-
 
 removeActiveUAV() {
   if(level.teamBased) {
     level.activeUAVs[self.team]--;
 
     if(!level.activeUAVs[self.team]) {
-      //printOnTeam( &"MP_WAR_RADAR_EXPIRED", self.team );
-      //printOnTeam( &"MP_WAR_RADAR_EXPIRED_ENEMY", level.otherTeam[self.team] );
+      //printOnTeam(&"MP_WAR_RADAR_EXPIRED", self.team );
+      //printOnTeam(&"MP_WAR_RADAR_EXPIRED_ENEMY", level.otherTeam[self.team] );
     }
   } else if(isDefined(self.owner)) {
     level.activeUAVs[self.owner.guid]--;
   }
 }
 
-
 removeActiveCounterUAV() {
   if(level.teamBased) {
     level.activeCounterUAVs[self.team]--;
 
     if(!level.activeCounterUAVs[self.team]) {
-      //printOnTeam( &"MP_WAR_COUNTER_RADAR_EXPIRED", self.team );
-      //printOnTeam( &"MP_WAR_COUNTER_RADAR_EXPIRED_ENEMY", level.otherTeam[self.team] );
+      //printOnTeam(&"MP_WAR_COUNTER_RADAR_EXPIRED", self.team );
+      //printOnTeam(&"MP_WAR_COUNTER_RADAR_EXPIRED_ENEMY", level.otherTeam[self.team] );
     }
   } else if(isDefined(self.owner)) {
     level.activeCounterUAVs[self.owner.guid]--;

@@ -18,7 +18,7 @@ play_sam_ambience() {
   level.player waittill("missileTurret_on");
   clientnotify("mTon");
   temp_ent = spawn("script_origin", level.player.origin);
-  temp_ent playloopsound("wpn_sam_interface_loop", 1);
+  temp_ent playLoopSound("wpn_sam_interface_loop", 1);
   level.player thread end_looping_sound(temp_ent);
   level.player thread play_sam_radio();
   level.player thread play_sam_creaking_sounds();
@@ -37,7 +37,7 @@ play_sam_radio() {
   level.player endon("missileTurret_off");
 
   while(true) {
-    level.player playsound("amb_sam_radio_chatter");
+    level.player playSound("amb_sam_radio_chatter");
     wait(randomintrange(5, 10));
   }
 }
@@ -53,7 +53,7 @@ play_sam_creaking_sounds() {
     else
       wait_max = get_wait_max();
 
-    level.player playsound("evt_cougar_creak");
+    level.player playSound("evt_cougar_creak");
     wait(randomintrange(2, wait_max));
   }
 }

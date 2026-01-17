@@ -46,7 +46,7 @@ playerexert(exert) {
 
   self.isexerting = 1;
   self thread exert_timer();
-  self playsound(id);
+  self playSound(id);
 }
 
 exert_timer() {
@@ -366,7 +366,7 @@ do_zombies_playvocals(alias_type, zombie_type) {
     if(isDefined(level._custom_zombie_audio_func))
       self[[level._custom_zombie_audio_func]](alias, alias_type);
     else
-      self playsound(alias);
+      self playSound(alias);
   } else if(!self.talking) {
     self.talking = 1;
 
@@ -961,7 +961,7 @@ init_music_states() {
 
 setupmusicstate(state, alias, is_alias, override, round_override, musicstate) {
   if(!isDefined(level.zmb_music_states[state]))
-    level.zmb_music_states[state] = spawnstruct();
+    level.zmb_music_states[state] = spawnStruct();
 
   level.zmb_music_states[state].music = alias;
   level.zmb_music_states[state].is_alias = is_alias;
@@ -1034,7 +1034,7 @@ weapon_toggle_vox(alias, weapon) {
     self waittill("sounddone");
   }
 
-  self playsound(sound_to_play + "_0");
+  self playSound(sound_to_play + "_0");
 }
 
 get_weapon_num(weapon) {
@@ -1086,8 +1086,7 @@ arenearbyspeakersactive() {
       }
       if(person maps\mp\zombies\_zm_laststand::player_is_in_laststand())
         continue;
-    } else {
-    }
+    } else {}
 
     if(isDefined(person.isspeaking) && person.isspeaking && !(isDefined(person.ignorenearbyspkrs) && person.ignorenearbyspkrs)) {
       if(distancesquared(self.origin, person.origin) < radius * radius)
@@ -1099,7 +1098,7 @@ arenearbyspeakersactive() {
 }
 
 zmbvoxcreate() {
-  vox = spawnstruct();
+  vox = spawnStruct();
   vox.speaker = [];
   return vox;
 }
@@ -1108,7 +1107,7 @@ zmbvoxinitspeaker(speaker, prefix, ent) {
   ent.zmbvoxid = speaker;
 
   if(!isDefined(self.speaker[speaker])) {
-    self.speaker[speaker] = spawnstruct();
+    self.speaker[speaker] = spawnStruct();
     self.speaker[speaker].alias = [];
   }
 
@@ -1123,7 +1122,7 @@ zmbvoxadd(speaker, category, type, alias, response) {
   assert(isDefined(alias));
 
   if(!isDefined(self.speaker[speaker])) {
-    self.speaker[speaker] = spawnstruct();
+    self.speaker[speaker] = spawnStruct();
     self.speaker[speaker].alias = [];
   }
 

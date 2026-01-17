@@ -7,13 +7,13 @@
 #namespace _teamset;
 
 function init() {
-  if(!isdefined(game["flagmodels"])) {
+  if(!isDefined(game["flagmodels"])) {
     game["flagmodels"] = [];
   }
-  if(!isdefined(game["carry_flagmodels"])) {
+  if(!isDefined(game["carry_flagmodels"])) {
     game["carry_flagmodels"] = [];
   }
-  if(!isdefined(game["carry_icon"])) {
+  if(!isDefined(game["carry_icon"])) {
     game["carry_icon"] = [];
   }
   game["flagmodels"]["neutral"] = "p7_mp_flag_neutral";

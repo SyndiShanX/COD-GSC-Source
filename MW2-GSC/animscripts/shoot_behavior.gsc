@@ -31,7 +31,7 @@ decideWhatAndHowToShoot(objective) {
   self endon("stop_deciding_how_to_shoot");
   self endon("death");
 
-  assert(isdefined(objective)); // just use "normal" if you don't know what to use
+  assert(isDefined(objective)); // just use "normal" if you don't know what to use
 
   maps\_gameskill::resetMissTime();
   self.shootObjective = objective;
@@ -43,7 +43,7 @@ decideWhatAndHowToShoot(objective) {
   self.fastBurst = false;
   self.shouldReturnToCover = undefined;
 
-  if(!isdefined(self.changingCoverPos))
+  if(!isDefined(self.changingCoverPos))
     self.changingCoverPos = false;
 
   atCover = isDefined(self.coverNode) && self.coverNode.type != "Cover Prone" && self.coverNode.type != "Conceal Prone";
@@ -60,7 +60,7 @@ decideWhatAndHowToShoot(objective) {
   prevShootPos = self.shootPos;
   prevShootStyle = self.shootStyle;
 
-  if(!isdefined(self.has_no_ir)) {
+  if(!isDefined(self.has_no_ir)) {
     self.a.laserOn = true;
     self animscripts\shared::updateLaserStatus();
   }
@@ -77,9 +77,9 @@ decideWhatAndHowToShoot(objective) {
 
   prof_begin("decideWhatAndHowToShoot");
 
-  while (1) {
-    if(isdefined(self.shootPosOverride)) {
-      if(!isdefined(self.enemy)) {
+  while(1) {
+    if(isDefined(self.shootPosOverride)) {
+      if(!isDefined(self.enemy)) {
         self.shootPos = self.shootPosOverride;
         self.shootPosOverride = undefined;
         WaitABit();
@@ -89,7 +89,7 @@ decideWhatAndHowToShoot(objective) {
     }
 
     assert(self.shootObjective == "normal" || self.shootObjective == "suppress" || self.shootObjective == "ambush");
-    assert(!isdefined(self.shootEnt) || isdefined(self.shootPos)); // shootPos must be shootEnt's shootAtPos if shootEnt is defined, for convenience elsewhere
+    assert(!isDefined(self.shootEnt) || isDefined(self.shootPos)); // shootPos must be shootEnt's shootAtPos if shootEnt is defined, for convenience elsewhere
 
     result = undefined;
     if(self.weapon == "none")
@@ -104,14 +104,14 @@ decideWhatAndHowToShoot(objective) {
     if(isDefined(self.a.specialShootBehavior))
       [[self.a.specialShootBehavior]]();
 
-    if(checkChanged(prevShootEnt, self.shootEnt) || (!isdefined(self.shootEnt) && checkChanged(prevShootPos, self.shootPos)) || checkChanged(prevShootStyle, self.shootStyle))
+    if(checkChanged(prevShootEnt, self.shootEnt) || (!isDefined(self.shootEnt) && checkChanged(prevShootPos, self.shootPos)) || checkChanged(prevShootStyle, self.shootStyle))
       self notify("shoot_behavior_change");
     prevShootEnt = self.shootEnt;
     prevShootPos = self.shootPos;
     prevShootStyle = self.shootStyle;
 
     // (trying to prevent many AI from doing lots of work on the same frame)
-    if(!isdefined(result))
+    if(!isDefined(result))
       WaitABit();
   }
 
@@ -124,14 +124,14 @@ WaitABit() {
   self endon("weapon_position_change");
   self endon("enemy_visible");
 
-  if(isdefined(self.shootEnt)) {
+  if(isDefined(self.shootEnt)) {
     self.shootEnt endon("death");
 
     self endon("do_slow_things");
 
     // (want to keep self.shootPos up to date)
     wait .05;
-    while (isdefined(self.shootEnt)) {
+    while(isDefined(self.shootEnt)) {
       self.shootPos = self.shootEnt getShootAtPos();
       wait .05;
     }
@@ -141,10 +141,9 @@ WaitABit() {
 }
 
 noGunShoot() {
-  /#
   println("^1Warning: AI at " + self.origin + ", entnum " + self getEntNum() + ", export " + self.export+" trying to shoot but has no gun");
-  # /
-    self.shootEnt = undefined;
+
+  self.shootEnt = undefined;
   self.shootPos = undefined;
   self.shootStyle = "none";
   self.shootObjective = "normal";
@@ -178,7 +177,7 @@ rifleShootObjectiveNormal() {
       return "retry";
     }
 
-    if(!isdefined(self.enemy)) {
+    if(!isDefined(self.enemy)) {
       haveNothingToShoot();
     } else {
       markEnemyPosInvisible();
@@ -239,31 +238,31 @@ rifleShootObjectiveAmbush(enemySuppressable) {
 }
 
 getAmbushShootPos() {
-  if(isdefined(self.enemy) && self cansee(self.enemy)) {
+  if(isDefined(self.enemy) && self cansee(self.enemy)) {
     setShootEntToEnemy();
     return;
   }
 
   likelyEnemyDir = self getAnglesToLikelyEnemyPath();
 
-  if(!isdefined(likelyEnemyDir)) {
+  if(!isDefined(likelyEnemyDir)) {
     if(isDefined(self.coverNode))
       likelyEnemyDir = self.coverNode.angles;
-    else if(isdefined(self.ambushNode))
+    else if(isDefined(self.ambushNode))
       likelyEnemyDir = self.ambushNode.angles;
-    else if(isdefined(self.enemy))
+    else if(isDefined(self.enemy))
       likelyEnemyDir = vectorToAngles(self lastKnownPos(self.enemy) - self.origin);
     else
       likelyEnemyDir = self.angles;
   }
 
   dist = 1024;
-  if(isdefined(self.enemy))
+  if(isDefined(self.enemy))
     dist = distance(self.origin, self.enemy.origin);
 
   newShootPos = self getEye() + anglesToForward(likelyEnemyDir) * dist;
 
-  if(!isdefined(self.shootPos) || distanceSquared(newShootPos, self.shootPos) > 5 * 5) // avoid frequent "shoot_behavior_change" notifies
+  if(!isDefined(self.shootPos) || distanceSquared(newShootPos, self.shootPos) > 5 * 5) // avoid frequent "shoot_behavior_change" notifies
     self.shootPos = newShootPos;
 }
 
@@ -285,7 +284,7 @@ rifleShoot() {
 
     enemySuppressable = canSuppressEnemy();
 
-    if(self.shootObjective == "suppress" || (self.team == "allies" && !isdefined(self.enemy) && !enemySuppressable))
+    if(self.shootObjective == "suppress" || (self.team == "allies" && !isDefined(self.enemy) && !enemySuppressable))
       rifleShootObjectiveSuppress(enemySuppressable);
     else
       rifleShootObjectiveAmbush(enemySuppressable);
@@ -293,7 +292,7 @@ rifleShoot() {
 }
 
 shouldStopAmbushing() {
-  if(!isdefined(self.ambushEndTime)) {
+  if(!isDefined(self.ambushEndTime)) {
     if(self isBadGuy())
       self.ambushEndTime = gettime() + randomintrange(10000, 60000);
     else
@@ -326,7 +325,7 @@ pistolShoot() {
   if(self.shootObjective == "normal") {
     if(!shouldShootEnemyEnt()) {
       // enemy disappeared!
-      if(!isdefined(self.enemy)) {
+      if(!isDefined(self.enemy)) {
         haveNothingToShoot();
         return;
       } else {
@@ -354,7 +353,7 @@ pistolShoot() {
     self.shootPos = getEnemySightPos();
 
     // stop ambushing after a while
-    if(!isdefined(self.ambushEndTime))
+    if(!isDefined(self.ambushEndTime))
       self.ambushEndTime = gettime() + randomintrange(4000, 8000);
 
     if(self.ambushEndTime < gettime()) {
@@ -366,10 +365,10 @@ pistolShoot() {
 }
 
 markEnemyPosInvisible() {
-  if(isdefined(self.enemy) && !self.changingCoverPos && self.script != "combat") {
+  if(isDefined(self.enemy) && !self.changingCoverPos && self.script != "combat") {
     // make sure they're not just hiding
-    if(isAI(self.enemy) && isdefined(self.enemy.script) && (self.enemy.script == "cover_stand" || self.enemy.script == "cover_crouch")) {
-      if(isdefined(self.enemy.a.coverMode) && self.enemy.a.coverMode == "hide")
+    if(isAI(self.enemy) && isDefined(self.enemy.script) && (self.enemy.script == "cover_stand" || self.enemy.script == "cover_crouch")) {
+      if(isDefined(self.enemy.a.coverMode) && self.enemy.a.coverMode == "hide")
         return;
     }
 
@@ -381,7 +380,7 @@ watchForIncomingFire() {
   self endon("killanimscript");
   self endon("stop_deciding_how_to_shoot");
 
-  while (1) {
+  while(1) {
     self waittill("suppression");
 
     if(self.suppressionMeter > self.suppressionThreshold) {
@@ -397,9 +396,9 @@ readyToReturnToCover() {
   if(self.changingCoverPos)
     return false;
 
-  assert(isdefined(self.coverPosEstablishedTime));
+  assert(isDefined(self.coverPosEstablishedTime));
 
-  if(!isdefined(self.enemy) || !self canSee(self.enemy))
+  if(!isDefined(self.enemy) || !self canSee(self.enemy))
     return true;
 
   if(gettime() < self.coverPosEstablishedTime + 800) {
@@ -427,10 +426,10 @@ runOnShootBehaviorEnd() {
 }
 
 checkChanged(prevval, newval) {
-  if(isdefined(prevval) != isdefined(newval))
+  if(isDefined(prevval) != isDefined(newval))
     return true;
-  if(!isdefined(newval)) {
-    assert(!isdefined(prevval));
+  if(!isDefined(newval)) {
+    assert(!isDefined(prevval));
     return false;
   }
   return prevval != newval;
@@ -464,10 +463,10 @@ burstRangeSq = 900 * 900;
 singleShotRangeSq = 1600 * 1600;
 
 setShootStyleForVisibleEnemy() {
-  assert(isdefined(self.shootPos));
-  assert(isdefined(self.shootEnt));
+  assert(isDefined(self.shootPos));
+  assert(isDefined(self.shootEnt));
 
-  if(isdefined(self.shootEnt.enemy) && isdefined(self.shootEnt.enemy.syncedMeleeTarget))
+  if(isDefined(self.shootEnt.enemy) && isDefined(self.shootEnt.enemy.syncedMeleeTarget))
     return setShootStyle("single", false);
 
   if(self isSniper())
@@ -491,7 +490,7 @@ setShootStyleForVisibleEnemy() {
     return setShootStyle("full", false);
 
   if(distanceSq < fullAutoRangeSq) {
-    if(isdefined(self.shootEnt) && isdefined(self.shootEnt.magic_bullet_shield))
+    if(isDefined(self.shootEnt) && isDefined(self.shootEnt.magic_bullet_shield))
       return setShootStyle("single", false);
     else
       return setShootStyle("full", false);
@@ -511,7 +510,7 @@ setShootStyleForVisibleEnemy() {
 }
 
 setShootStyleForSuppression() {
-  assert(isdefined(self.shootPos));
+  assert(isDefined(self.shootPos));
 
   distanceSq = distanceSquared(self getShootAtPos(), self.shootPos);
 
@@ -573,14 +572,14 @@ sniper_glint_behavior() {
   self endon("new_glint_thread");
 
   assertex(self isSniper(), "Not a sniper!");
-  if(!isdefined(level._effect["sniper_glint"])) {
+  if(!isDefined(level._effect["sniper_glint"])) {
     println("^3Warning, sniper glint is not setup for sniper with classname " + self.classname);
     return;
   }
 
-  if(!isAlive(self.enemy))
+  if(!isAlive(self.enemy)) {
     return;
-
+  }
   //if( !isPlayer( self.enemy ) )
   //	return;
 
@@ -588,10 +587,10 @@ sniper_glint_behavior() {
 
   wait 0.2;
 
-  for (;;) {
+  for(;;) {
     if(self.weapon == self.primaryweapon && player_sees_my_scope()) {
       if(distanceSquared(self.origin, self.enemy.origin) > 256 * 256)
-        PlayFXOnTag(fx, self, "tag_flash");
+        playFXOnTag(fx, self, "tag_flash");
 
       timer = randomfloatrange(3, 5);
       wait(timer);

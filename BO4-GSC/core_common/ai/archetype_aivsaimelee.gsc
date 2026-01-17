@@ -9,7 +9,6 @@
 #include scripts\core_common\array_shared;
 #include scripts\core_common\struct;
 #include scripts\core_common\util_shared;
-
 #namespace archetype_aivsaimelee;
 
 autoexec main() {
@@ -90,7 +89,7 @@ iscloseenoughforaivsaimelee(behaviortreeentity) {
   return true;
 }
 
-private shouldaquiremutexonenemyforaivsaimelee(behaviortreeentity) {
+shouldaquiremutexonenemyforaivsaimelee(behaviortreeentity) {
   if(isplayer(behaviortreeentity.enemy)) {
     return false;
   }
@@ -110,7 +109,7 @@ private shouldaquiremutexonenemyforaivsaimelee(behaviortreeentity) {
   return true;
 }
 
-private hasaivsaienemy(behaviortreeentity) {
+hasaivsaienemy(behaviortreeentity) {
   enemy = behaviortreeentity.enemy;
 
   if(getdvarint(#"disable_aivsai_melee", 0)) {
@@ -138,7 +137,7 @@ private hasaivsaienemy(behaviortreeentity) {
   }
 
   if(isDefined(enemy.archetype)) {
-    if(enemy.archetype != #"human" && enemy.archetype != #"human_riotshield" && enemy.archetype != #"robot") {
+    if(enemy.archetype != # "human" && enemy.archetype != # "human_riotshield" && enemy.archetype != # "robot") {
       record3dtext("<dev string:xfa>", behaviortreeentity.origin, (1, 0.5, 0), "<dev string:x63>", behaviortreeentity, 0.4);
 
       return false;
@@ -257,7 +256,7 @@ private hasaivsaienemy(behaviortreeentity) {
   return true;
 }
 
-private decideinitiator(behaviortreeentity) {
+decideinitiator(behaviortreeentity) {
   if(!isDefined(behaviortreeentity._ai_melee_initiator)) {
     if(!isDefined(behaviortreeentity.enemy._ai_melee_initiator)) {
       behaviortreeentity._ai_melee_initiator = 1;
@@ -268,7 +267,7 @@ private decideinitiator(behaviortreeentity) {
   return false;
 }
 
-private isinitiator(behaviortreeentity) {
+isinitiator(behaviortreeentity) {
   if(!(isDefined(behaviortreeentity._ai_melee_initiator) && behaviortreeentity._ai_melee_initiator)) {
     return false;
   }
@@ -276,7 +275,7 @@ private isinitiator(behaviortreeentity) {
   return true;
 }
 
-private hascloseaivsaienemy(behaviortreeentity) {
+hascloseaivsaienemy(behaviortreeentity) {
   if(!(isDefined(behaviortreeentity._ai_melee_animname) && isDefined(behaviortreeentity.enemy._ai_melee_animname))) {
     record3dtext("<dev string:x441>", behaviortreeentity.origin, (1, 0.5, 0), "<dev string:x63>", behaviortreeentity, 0.4);
 
@@ -310,7 +309,7 @@ private hascloseaivsaienemy(behaviortreeentity) {
   return false;
 }
 
-private chooseaivsaimeleeanimations(behaviortreeentity) {
+chooseaivsaimeleeanimations(behaviortreeentity) {
   anglestoenemy = vectortoangles(behaviortreeentity.enemy.origin - behaviortreeentity.origin);
   yawtoenemy = angleclamp180(behaviortreeentity.enemy.angles[1] - anglestoenemy[1]);
 
@@ -371,8 +370,8 @@ private chooseaivsaimeleeanimations(behaviortreeentity) {
   return false;
 }
 
-private choosearchetypevariant(entity) {
-  if(entity.archetype == #"robot") {
+choosearchetypevariant(entity) {
+  if(entity.archetype == # "robot") {
     robot_state = entity ai::get_behavior_attribute("rogue_control");
 
     if(isinarray(array("forced_level_1", "level_1", "level_0"), robot_state)) {
@@ -387,7 +386,7 @@ private choosearchetypevariant(entity) {
   return "regular";
 }
 
-private aivsaimeleebundleexists(behaviortreeentity, attacker_variant, defender_variant) {
+aivsaimeleebundleexists(behaviortreeentity, attacker_variant, defender_variant) {
   if(!isDefined(level._aivsai_meleebundles[behaviortreeentity.archetype])) {
     return false;
   } else if(!isDefined(level._aivsai_meleebundles[behaviortreeentity.archetype][behaviortreeentity.enemy.archetype])) {
@@ -464,7 +463,7 @@ playscriptedmeleeanimations() {
   opponent thread processinterrupteddeath();
   self waittillmatch({
     #notetrack: "end"
-  }, #"aivsaimeleewinner");
+  }, # "aivsaimeleewinner");
   self.fixedlinkyawonly = 0;
   aiutility::cleanupchargemeleeattack(self);
 
@@ -479,7 +478,7 @@ playscriptedmeleeanimations() {
   self pathmode("move delayed", 1, 3);
 }
 
-private chooseaivsaimeleefrontflipanimations(behaviortreeentity, animbundle) {
+chooseaivsaimeleefrontflipanimations(behaviortreeentity, animbundle) {
   record3dtext("<dev string:x5fb>", behaviortreeentity.origin, (1, 0.5, 0), "<dev string:x63>", behaviortreeentity, 0.4);
 
   assert(isDefined(animbundle));
@@ -496,7 +495,7 @@ private chooseaivsaimeleefrontflipanimations(behaviortreeentity, animbundle) {
   behaviortreeentity.enemy._ai_melee_animtype = 1;
 }
 
-private chooseaivsaimeleefrontwrestleanimations(behaviortreeentity, animbundle) {
+chooseaivsaimeleefrontwrestleanimations(behaviortreeentity, animbundle) {
   record3dtext("<dev string:x5fb>", behaviortreeentity.origin, (1, 0.5, 0), "<dev string:x63>", behaviortreeentity, 0.4);
 
   assert(isDefined(animbundle));
@@ -513,7 +512,7 @@ private chooseaivsaimeleefrontwrestleanimations(behaviortreeentity, animbundle) 
   behaviortreeentity.enemy._ai_melee_animtype = 0;
 }
 
-private chooseaivsaimeleebackanimations(behaviortreeentity, animbundle) {
+chooseaivsaimeleebackanimations(behaviortreeentity, animbundle) {
   record3dtext("<dev string:x620>", behaviortreeentity.origin, (1, 0.5, 0), "<dev string:x63>", behaviortreeentity, 0.4);
 
   assert(isDefined(animbundle));
@@ -530,7 +529,7 @@ private chooseaivsaimeleebackanimations(behaviortreeentity, animbundle) {
   behaviortreeentity.enemy._ai_melee_animtype = 2;
 }
 
-private chooseaivsaimeleerightanimations(behaviortreeentity, animbundle) {
+chooseaivsaimeleerightanimations(behaviortreeentity, animbundle) {
   record3dtext("<dev string:x644>", behaviortreeentity.origin, (1, 0.5, 0), "<dev string:x63>", behaviortreeentity, 0.4);
 
   assert(isDefined(animbundle));
@@ -547,7 +546,7 @@ private chooseaivsaimeleerightanimations(behaviortreeentity, animbundle) {
   behaviortreeentity.enemy._ai_melee_animtype = 3;
 }
 
-private chooseaivsaimeleeleftanimations(behaviortreeentity, animbundle) {
+chooseaivsaimeleeleftanimations(behaviortreeentity, animbundle) {
   record3dtext("<dev string:x669>", behaviortreeentity.origin, (1, 0.5, 0), "<dev string:x63>", behaviortreeentity, 0.4);
 
   assert(isDefined(animbundle));
@@ -564,7 +563,7 @@ private chooseaivsaimeleeleftanimations(behaviortreeentity, animbundle) {
   behaviortreeentity.enemy._ai_melee_animtype = 4;
 }
 
-private debug_chosenmeleeanimations(behaviortreeentity) {
+debug_chosenmeleeanimations(behaviortreeentity) {
   if(isDefined(behaviortreeentity._ai_melee_animname) && isDefined(behaviortreeentity.enemy._ai_melee_animname)) {
     record3dtext("<dev string:x68d>" + behaviortreeentity._ai_melee_animname, behaviortreeentity.origin, (1, 0.5, 0), "<dev string:x63>", behaviortreeentity, 0.4);
     record3dtext("<dev string:x6a7>" + behaviortreeentity.enemy._ai_melee_animname, behaviortreeentity.origin, (1, 0.5, 0), "<dev string:x63>", behaviortreeentity, 0.4);
@@ -573,7 +572,7 @@ private debug_chosenmeleeanimations(behaviortreeentity) {
 }
 
 handledeath(animationname, attacker) {
-  self endon(#"death", #"interrupteddeath");
+  self endon(#"death", # "interrupteddeath");
   self.skipdeath = 1;
   self.diedinscriptedanim = 1;
   totaltime = getanimlength(animationname);

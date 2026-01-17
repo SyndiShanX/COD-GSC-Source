@@ -104,17 +104,17 @@ setupapproachnode(firsttime) {
 
       if(approachtype == "stand_saw") {
         approachpoint = (self.node.turretinfo.origin[0], self.node.turretinfo.origin[1], self.node.origin[2]);
-        forward = anglestoforward((0, self.node.turretinfo.angles[1], 0));
+        forward = anglesToForward((0, self.node.turretinfo.angles[1], 0));
         right = anglestoright((0, self.node.turretinfo.angles[1], 0));
         approachpoint = approachpoint + vectorscale(forward, -32.545) - vectorscale(right, 6.899);
       } else if(approachtype == "crouch_saw") {
         approachpoint = (self.node.turretinfo.origin[0], self.node.turretinfo.origin[1], self.node.origin[2]);
-        forward = anglestoforward((0, self.node.turretinfo.angles[1], 0));
+        forward = anglesToForward((0, self.node.turretinfo.angles[1], 0));
         right = anglestoright((0, self.node.turretinfo.angles[1], 0));
         approachpoint = approachpoint + vectorscale(forward, -32.545) - vectorscale(right, 6.899);
       } else if(approachtype == "prone_saw") {
         approachpoint = (self.node.turretinfo.origin[0], self.node.turretinfo.origin[1], self.node.origin[2]);
-        forward = anglestoforward((0, self.node.turretinfo.angles[1], 0));
+        forward = anglesToForward((0, self.node.turretinfo.angles[1], 0));
         right = anglestoright((0, self.node.turretinfo.angles[1], 0));
         approachpoint = approachpoint + vectorscale(forward, -37.36) - vectorscale(right, 13.279);
       } else
@@ -155,7 +155,7 @@ startcornerapproachconditions(approachpoint, approachtype, approachnumber, appro
     return false;
   }
 
-  if(abs(self getmotionangle()) > 45 && isDefined(self.enemy) && vectordot(anglestoforward(self.angles), vectornormalize(self.enemy.origin - self.origin)) > 0.6) {
+  if(abs(self getmotionangle()) > 45 && isDefined(self.enemy) && vectordot(anglesToForward(self.angles), vectornormalize(self.enemy.origin - self.origin)) > 0.6) {
     if(distancesquared(self.origin, self.enemy.origin) < 262144) {
       debug_arrival("approach aborted at last minute: facing enemy instead of current motion angle");
 
@@ -173,7 +173,7 @@ startcornerapproachconditions(approachpoint, approachtype, approachnumber, appro
 
   if(absangleclamp180(requiredyaw - self.angles[1]) > 30) {
     if(isvalidenemy(self.enemy) && self cansee(self.enemy)) {
-      if(vectordot(anglestoforward(self.angles), self.enemy.origin - self.origin) > 0) {
+      if(vectordot(anglesToForward(self.angles), self.enemy.origin - self.origin) > 0) {
         debug_arrival("aborting approach at last minute: don't want to turn back to nearby enemy");
 
         return false;
@@ -233,8 +233,8 @@ startcornerapproach(approachtype, approachpoint, approachnodeyaw, approachfinaly
   excludedir = result.excludedir;
   approachnumber = -1;
   node = getapproachent();
-  arrivalfromfront = vectordot(approach_dir, anglestoforward(node.angles)) >= 0;
-  arrivalfromfront = arrivalfromfront && vectordot(vectornormalize(self.origin - node.origin), anglestoforward(node.angles)) <= 0;
+  arrivalfromfront = vectordot(approach_dir, anglesToForward(node.angles)) >= 0;
+  arrivalfromfront = arrivalfromfront && vectordot(vectornormalize(self.origin - node.origin), anglesToForward(node.angles)) <= 0;
   doingcqbapproach = shoulddocqbtransition(self.node, approachtype, 1, forcecqb);
 
   if(doingcqbapproach)
@@ -336,10 +336,10 @@ watchgoalchangedwhileapproaching() {
 }
 
 checkarrivalenterpositions(approachpoint, approachyaw, approachtype, approach_dir, maxdirections, excludedir, arrivalfromfront) {
-  angledataobj = spawnstruct();
+  angledataobj = spawnStruct();
   calculatenodetransitionangles(angledataobj, approachtype, 1, approachyaw, approach_dir, maxdirections, excludedir);
   sortnodetransitionangles(angledataobj, maxdirections);
-  resultobj = spawnstruct();
+  resultobj = spawnStruct();
 
   resultobj.data = [];
 
@@ -409,7 +409,7 @@ checkcoverenterpos(arrivalpoint, arrivalyaw, approachtype, approachnumber, arriv
     debug_arrival("checkCoverEnterPos() checking for arrive_" + approachtype + "_" + approachnumber);
 
   angle = (0, arrivalyaw - angledeltaarray("arrive_" + approachtype)[approachnumber], 0);
-  forwarddir = anglestoforward(angle);
+  forwarddir = anglesToForward(angle);
   rightdir = anglestoright(angle);
   movedeltaarray = movedeltaarray("arrive_" + approachtype);
   forward = vectorscale(forwarddir, movedeltaarray[approachnumber][0]);
@@ -617,7 +617,7 @@ dolastminuteexposedapproach() {
     }
   }
 
-  angledataobj = spawnstruct();
+  angledataobj = spawnStruct();
   calculatenodetransitionangles(angledataobj, approachtype, 1, desiredfacingyaw, approachdir, 9, -1);
   best = 1;
 
@@ -839,7 +839,7 @@ startmovetransitionmidconditions(exitnode, exittype) {
 startmovetransitionfinalconditions(exittype, approachnumber) {
   if(exittype == "exposed" && approachnumber < 4) {
     if(isvalidenemy(self.enemy)) {
-      if(vectordot(anglestoforward(self.angles), self.enemy.origin - self.origin) > 0.707) {
+      if(vectordot(anglesToForward(self.angles), self.enemy.origin - self.origin) > 0.707) {
         if(self canseeenemyfromexposed() && distancesquared(self.origin, self.enemy.origin) < 40000) {
           debug_arrival("aborting exit in dir" + approachnumber + ": don't want to turn back to nearby enemy");
 
@@ -902,7 +902,7 @@ startmovetransition() {
   if(shoulddocqbtransition(exitnode, exittype))
     exittype = exittype + "_cqb";
 
-  angledataobj = spawnstruct();
+  angledataobj = spawnStruct();
   calculatenodetransitionangles(angledataobj, exittype, 0, exityaw, leavedir, maxdirections, excludedir);
   sortnodetransitionangles(angledataobj, maxdirections);
   approachnumber = -1;
@@ -950,7 +950,7 @@ startmovetransition() {
 
 checkcoverexitpos(exitpoint, exityaw, exittype, approachnumber, checkwithpath) {
   angle = (0, exityaw, 0);
-  forwarddir = anglestoforward(angle);
+  forwarddir = anglesToForward(angle);
   rightdir = anglestoright(angle);
   movedeltaarray = movedeltaarray("exit_" + exittype);
   forward = vectorscale(forwarddir, movedeltaarray[approachnumber][0]);
@@ -1026,7 +1026,7 @@ docoverexitanimation(exittype, approachnumber) {
     remainingmovedelta = getmovedelta(leaveanim, curfrac, 1);
     remainingangledelta = getangledelta(leaveanim, curfrac, 1);
     faceyaw = lookaheadangles[1] - remainingangledelta;
-    forward = anglestoforward((0, faceyaw, 0));
+    forward = anglesToForward((0, faceyaw, 0));
     right = anglestoright((0, faceyaw, 0));
     endpoint = self.origin + vectorscale(forward, remainingmovedelta[0]) - vectorscale(right, remainingmovedelta[1]);
 
@@ -1229,7 +1229,7 @@ determinenodeexittype(node) {
 }
 
 getmaxdirectionsandexcludedirfromapproachtype(approachtype) {
-  returnobj = spawnstruct();
+  returnobj = spawnStruct();
 
   if(approachtype == "left" || approachtype == "left_crouch") {
     returnobj.maxdirections = 9;
@@ -1280,7 +1280,7 @@ calculatenodetransitionangles(angledataobj, approachtype, isarrival, arrivalyaw,
     }
 
     angles = (0, arrivalyaw + sign * anglearray[i] + offset, 0);
-    dir = vectornormalize(anglestoforward(angles));
+    dir = vectornormalize(anglesToForward(angles));
     angledataobj.transitions[i] = vectordot(approach_dir, dir);
   }
 }
@@ -1799,7 +1799,7 @@ coverarrivaldebugtool() {
           if(tool == 2)
             angle = (0, approachfinalyaw, 0);
 
-          forwarddir = anglestoforward(angle);
+          forwarddir = anglesToForward(angle);
           rightdir = anglestoright(angle);
 
           if(!isDefined(node.movedeltaarray))
@@ -1878,7 +1878,7 @@ coverarrivaldebugtool() {
       if(rendernode) {
         print3d(node.origin, node.type + " (" + transtype + ")", nodecolor, 1, 0.35, frameinterval);
         box(node.origin, vectorscale((-1, -1, 0), 16.0), vectorscale((1, 1, 1), 16.0), node.angles[1], nodecolor, 1, 1, frameinterval);
-        nodeforward = anglestoforward(node.angles);
+        nodeforward = anglesToForward(node.angles);
         nodeforward = vectorscale(nodeforward, 8);
         line(node.origin, node.origin + nodeforward, nodecolor, 1, 1, frameinterval);
         renderedthisframe++;

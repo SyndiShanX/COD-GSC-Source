@@ -5,7 +5,6 @@
 
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_trial;
-
 #namespace zm_trial_survive;
 
 autoexec __init__system__() {
@@ -20,6 +19,6 @@ __init__() {
   zm_trial::register_challenge(#"survive", &on_begin, &on_end);
 }
 
-private on_begin() {}
+on_begin() {}
 
-private on_end(round_reset) {}
+on_end(round_reset) {}

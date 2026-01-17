@@ -9,7 +9,7 @@
 #namespace art;
 
 function autoexec __init__sytem__() {
-  system::register("art", & __init__, undefined, undefined);
+  system::register("art", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -25,7 +25,7 @@ function __init__() {
   if(getdvarstring("") == "") {
     setdvar("", level.script);
   }
-  if(!isdefined(level.dofdefault)) {
+  if(!isDefined(level.dofdefault)) {
     level.dofdefault["nearStart"] = 0;
     level.dofdefault["nearEnd"] = 1;
     level.dofdefault["farStart"] = 8000;
@@ -35,7 +35,7 @@ function __init__() {
   }
   level.curdof = (level.dofdefault["farStart"] - level.dofdefault["nearEnd"]) / 2;
   thread tweakart();
-  if(!isdefined(level.script)) {
+  if(!isDefined(level.script)) {
     level.script = tolower(getdvarstring("mapname"));
   }
 }
@@ -50,7 +50,7 @@ function artfxprintln(file, string) {
 function strtok_loc(string, par1) {
   stringlist = [];
   indexstring = "";
-  for (i = 0; i < string.size; i++) {
+  for(i = 0; i < string.size; i++) {
     if(string[i] == " ") {
       stringlist[stringlist.size] = indexstring;
       indexstring = "";
@@ -71,7 +71,7 @@ function setfogsliders() {
   blue = fogall[2];
   halfplane = getdvarstring("g_fogHalfDistReadOnly");
   nearplane = getdvarstring("g_fogStartDistReadOnly");
-  if(!isdefined(red) || !isdefined(green) || !isdefined(blue) || !isdefined(halfplane)) {
+  if(!isDefined(red) || !isDefined(green) || !isDefined(blue) || !isDefined(halfplane)) {
     red = 1;
     green = 1;
     blue = 1;
@@ -84,7 +84,7 @@ function setfogsliders() {
 }
 
 function tweakart() {
-  if(!isdefined(level.tweakfile)) {
+  if(!isDefined(level.tweakfile)) {
     level.tweakfile = 0;
   }
   if(getdvarstring("") == "") {
@@ -105,8 +105,8 @@ function tweakart() {
   file = undefined;
   filename = undefined;
   tweak_toggle = 1;
-  for (;;) {
-    while (getdvarint("") == 0) {
+  for(;;) {
+    while(getdvarint("") == 0) {
       tweak_toggle = 1;
       wait(0.05);
     }
@@ -148,7 +148,7 @@ function tweakart() {
       setdvar("", "");
       println("");
       players = getplayers();
-      dir = vectornormalize(anglestoforward(players[0] getplayerangles()));
+      dir = vectornormalize(anglesToForward(players[0] getplayerangles()));
       level.fogsundir = [];
       level.fogsundir[0] = dir[0];
       level.fogsundir[1] = dir[1];
@@ -157,7 +157,7 @@ function tweakart() {
     fovslidercheck();
     dumpsettings();
     if(!getdvarint("")) {
-      if(!isdefined(level.fogsundir)) {
+      if(!isDefined(level.fogsundir)) {
         level.fogsundir = [];
         level.fogsundir[0] = 1;
         level.fogsundir[1] = 0;

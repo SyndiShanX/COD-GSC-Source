@@ -7,7 +7,7 @@ initstingerusage() {
 }
 
 resetstingerlocking() {
-  if(!isdefined(self.stingeruseentered)) {
+  if(!isDefined(self.stingeruseentered)) {
     return;
   }
   self.stingeruseentered = undefined;
@@ -23,20 +23,20 @@ resetstingerlockingondeath() {
   self endon("ResetStingerLockingOnDeath");
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     self waittill("death");
     resetstingerlocking();
   }
 }
 
 stillvalidstingerlock(var_0) {
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     return 0;
 
   if(!self worldpointinreticle_circle(var_0.origin, 65, 85))
     return 0;
 
-  if(isdefined(level.ac130) && self.stingertarget == level.ac130.planemodel && !isdefined(level.ac130player))
+  if(isDefined(level.ac130) && self.stingertarget == level.ac130.planemodel && !isDefined(level.ac130player))
     return 0;
 
   return 1;
@@ -47,11 +47,11 @@ loopstingerlockingfeedback() {
   self endon("stop_javelin_locking_feedback");
   level endon("game_ended");
 
-  for (;;) {
-    if(isdefined(level.chopper) && isdefined(level.chopper.gunner) && isdefined(self.stingertarget) && self.stingertarget == level.chopper.gunner)
+  for(;;) {
+    if(isDefined(level.chopper) && isDefined(level.chopper.gunner) && isDefined(self.stingertarget) && self.stingertarget == level.chopper.gunner)
       level.chopper.gunner playlocalsound("missile_locking");
 
-    if(isdefined(level.ac130player) && isdefined(self.stingertarget) && self.stingertarget == level.ac130.planemodel)
+    if(isDefined(level.ac130player) && isDefined(self.stingertarget) && self.stingertarget == level.ac130.planemodel)
       level.ac130player playlocalsound("missile_locking");
 
     self playlocalsound("h2_stinger_locking");
@@ -65,11 +65,11 @@ loopstingerlockedfeedback() {
   self endon("stop_javelin_locked_feedback");
   level endon("game_ended");
 
-  for (;;) {
-    if(isdefined(level.chopper) && isdefined(level.chopper.gunner) && isdefined(self.stingertarget) && self.stingertarget == level.chopper.gunner)
+  for(;;) {
+    if(isDefined(level.chopper) && isDefined(level.chopper.gunner) && isDefined(self.stingertarget) && self.stingertarget == level.chopper.gunner)
       level.chopper.gunner playlocalsound("missile_locking");
 
-    if(isdefined(level.ac130player) && isdefined(self.stingertarget) && self.stingertarget == level.ac130.planemodel)
+    if(isDefined(level.ac130player) && isDefined(self.stingertarget) && self.stingertarget == level.ac130.planemodel)
       level.ac130player playlocalsound("missile_locking");
 
     self playlocalsound("h2_stinger_locked");
@@ -79,9 +79,9 @@ loopstingerlockedfeedback() {
 }
 
 locksighttest(var_0) {
-  var_1 = self geteye();
+  var_1 = self getEye();
 
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     return 0;
 
   var_2 = sighttracepassed(var_1, var_0.origin, 0, var_0);
@@ -104,9 +104,7 @@ locksighttest(var_0) {
   return 0;
 }
 
-stingerdebugdraw(var_0) {
-
-}
+stingerdebugdraw(var_0) {}
 
 softsighttest() {
   var_0 = 500;
@@ -136,7 +134,7 @@ GetTargetList() {
     return targets;
 
   if(level.teamBased) {
-    if(IsDefined(level.chopper) && (level.chopper.team != self.team || level.chopper.owner == self))
+    if(isDefined(level.chopper) && (level.chopper.team != self.team || level.chopper.owner == self))
       targets[targets.size] = level.chopper;
 
     if(isDefined(level.ac130player) && level.ac130player.team != self.team)
@@ -165,7 +163,7 @@ GetTargetList() {
     }
 
   } else {
-    if(IsDefined(level.chopper) && (level.chopper.owner != self)) ///check for teams
+    if(isDefined(level.chopper) && (level.chopper.owner != self)) ///check for teams
       targets[targets.size] = level.chopper;
 
     if(isDefined(level.ac130player))
@@ -203,7 +201,7 @@ stingerusageloop() {
   var_0 = 1000;
   initstingerusage();
 
-  for (;;) {
+  for(;;) {
     wait 0.05;
 
     if(self playerads() < 0.95) {
@@ -223,7 +221,7 @@ stingerusageloop() {
 
     self.stingeruseentered = 1;
 
-    if(!isdefined(self.stingerstage))
+    if(!isDefined(self.stingerstage))
       self.stingerstage = 0;
 
     stingerdebugdraw(self.stingertarget);
@@ -237,7 +235,7 @@ stingerusageloop() {
       var_3 = [];
 
       foreach(var_5 in var_2) {
-        if(!isdefined(var_5)) {
+        if(!isDefined(var_5)) {
           continue;
         }
         var_6 = self worldpointinreticle_circle(var_5.origin, 65, 75);

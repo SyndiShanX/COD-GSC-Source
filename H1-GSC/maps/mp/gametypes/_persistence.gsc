@@ -52,7 +52,7 @@ statadd(var_0, var_1, var_2) {
   if(!maps\mp\_utility::rankingenabled()) {
     return;
   }
-  if(isdefined(var_2)) {
+  if(isDefined(var_2)) {
     var_3 = self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), var_0, var_2);
     self setplayerdata(common_scripts\utility::getstatsgroup_ranked(), var_0, var_2, var_1 + var_3);
   } else {
@@ -171,14 +171,14 @@ updatebufferedstats() {
   wait 0.15;
   var_0 = 0;
 
-  while (!level.gameended) {
+  while(!level.gameended) {
     maps\mp\gametypes\_hostmigration::waittillhostmigrationdone();
     var_0++;
 
     if(var_0 >= level.players.size)
       var_0 = 0;
 
-    if(isdefined(level.players[var_0])) {
+    if(isDefined(level.players[var_0])) {
       level.players[var_0] writebufferedstats();
       level.players[var_0] updateweaponbufferedstats();
     }
@@ -217,7 +217,7 @@ incrementweaponstat(var_0, var_1, var_2) {
   if(maps\mp\_utility::iskillstreakweapon(var_0)) {
     return;
   }
-  if(isdefined(level.disableweaponstats) && level.disableweaponstats) {
+  if(isDefined(level.disableweaponstats) && level.disableweaponstats) {
     return;
   }
   if(maps\mp\_utility::rankingenabled()) {
@@ -235,7 +235,7 @@ incrementattachmentstat(var_0, var_1, var_2) {
 
 incrementmeleestat(var_0) {
   if(maps\mp\_utility::rankingenabled()) {
-    if(!isdefined(var_0))
+    if(!isDefined(var_0))
       var_0 = 1;
 
     var_1 = self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "meleeKills");
@@ -245,7 +245,7 @@ incrementmeleestat(var_0) {
 
 incrementdestructiblestat(var_0) {
   if(maps\mp\_utility::rankingenabled()) {
-    if(!isdefined(var_0))
+    if(!isDefined(var_0))
       var_0 = 1;
 
     var_1 = self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "destructibleKills");
@@ -263,7 +263,7 @@ doesattachkitincludebaseattachment(var_0, var_1) {
   if(var_6 < 0)
     return 0;
 
-  for (var_7 = var_4; var_7 <= var_5; var_7++) {
+  for(var_7 = var_4; var_7 <= var_5; var_7++) {
     var_8 = tablelookupbyrow(var_2, var_6, var_7);
 
     if(var_8 == var_1)
@@ -277,7 +277,7 @@ doesattachkitincludebaseattachment(var_0, var_1) {
 }
 
 updateweaponbufferedstats() {
-  if(!isdefined(self.trackingweaponname)) {
+  if(!isDefined(self.trackingweaponname)) {
     return;
   }
   if(self.trackingweaponname == "" || self.trackingweaponname == "none") {

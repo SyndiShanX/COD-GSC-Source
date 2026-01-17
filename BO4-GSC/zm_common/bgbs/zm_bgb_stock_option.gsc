@@ -7,11 +7,10 @@
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_bgb;
 #include scripts\zm_common\zm_weapons;
-
 #namespace zm_bgb_stock_option;
 
 autoexec __init__system__() {
-  system::register(#"zm_bgb_stock_option", &__init__, undefined, #"bgb");
+  system::register(#"zm_bgb_stock_option", &__init__, undefined, # "bgb");
 }
 
 __init__() {
@@ -69,7 +68,7 @@ validation() {
 }
 
 function_1ff1beff() {
-  self endon(#"disconnect", #"player_downed", #"hash_120ea24fd48cb17a");
+  self endon(#"disconnect", # "player_downed", # "hash_120ea24fd48cb17a");
   w_current = self getcurrentweapon();
 
   if(!(isDefined(w_current.isheroweapon) && w_current.isheroweapon) && !zm_weapons::is_wonder_weapon(w_current)) {

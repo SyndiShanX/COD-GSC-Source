@@ -14,7 +14,6 @@
 #include scripts\zm_common\zm_magicbox;
 #include scripts\zm_common\zm_score;
 #include scripts\zm_common\zm_trial_util;
-
 #namespace zm_zodt8_devgui;
 
 function_5d346946() {
@@ -40,52 +39,52 @@ function_5d346946() {
 
 function_78c32556(cmd) {
   switch (cmd) {
-    case #"hash_50d92ca3c6c7c2a8":
+    case # "hash_50d92ca3c6c7c2a8":
       level thread function_4110a06f();
       return 1;
-    case #"gear_up":
+    case # "gear_up":
       level thread zodt8_sentinel::gear_up();
       return 1;
-    case #"hash_672373a99384fb53":
+    case # "hash_672373a99384fb53":
       level thread function_853d8116();
       return 1;
-    case #"hash_5634a634a8ffec47":
+    case # "hash_5634a634a8ffec47":
       level thread function_1d9dddd0();
       return 1;
-    case #"move_pap":
+    case # "move_pap":
       level thread function_10dafedb();
       return 1;
-    case #"hash_74823c0e0a29545b":
+    case # "hash_74823c0e0a29545b":
       give_flare("<dev string:x567>");
       return 1;
-    case #"hash_130280144168a5e7":
+    case # "hash_130280144168a5e7":
       give_flare("<dev string:x56d>");
       return 1;
-    case #"hash_2972e55f40fe8050":
+    case # "hash_2972e55f40fe8050":
       give_flare("<dev string:x575>");
       return 1;
-    case #"hash_59b568ce3fe548b6":
+    case # "hash_59b568ce3fe548b6":
       level thread function_649d5f75();
       return 1;
-    case #"hash_be17a68845640e4":
+    case # "hash_be17a68845640e4":
       level thread function_a368f5ed("<dev string:x57c>");
       return 1;
-    case #"hash_5c17aed53086a4e8":
+    case # "hash_5c17aed53086a4e8":
       level thread function_a368f5ed("<dev string:x584>");
       return 1;
-    case #"hash_2474089e18afbc3":
+    case # "hash_2474089e18afbc3":
       level thread function_a368f5ed("<dev string:x58d>");
       return 1;
-    case #"hash_515fa2d180024bd3":
+    case # "hash_515fa2d180024bd3":
       level thread function_a368f5ed("<dev string:x596>");
       return 1;
-    case #"hash_687e53bfcb79ec3b":
+    case # "hash_687e53bfcb79ec3b":
       if(isDefined(level.chests) && isDefined(level.chest_index) && isDefined(level.chests[level.chest_index].zbarrier)) {
         level.chests[level.chest_index].zbarrier thread namespace_b45e3f05::function_8baed388();
       }
 
       break;
-    case #"hide_chests":
+    case # "hide_chests":
       function_7edbb38();
 
       if(level.chest_index != -1) {
@@ -94,7 +93,7 @@ function_78c32556(cmd) {
       }
 
       break;
-    case #"show_chests":
+    case # "show_chests":
       function_7edbb38();
 
       if(level.chest_index != -1) {
@@ -178,16 +177,16 @@ function_a368f5ed(var_99416cd7) {
 
   foreach(e_player in a_e_players) {
     switch (var_99416cd7) {
-      case #"decay":
+      case # "decay":
         namespace_4a807bff::function_ca37502d(e_player);
         break;
-      case #"plasma":
+      case # "plasma":
         namespace_4a807bff::function_1b182e8c(e_player);
         break;
-      case #"purity":
+      case # "purity":
         namespace_4a807bff::function_b9b7b8c(e_player);
         break;
-      case #"radiance":
+      case # "radiance":
         namespace_4a807bff::function_b3695700(e_player);
         break;
     }
@@ -199,20 +198,20 @@ give_flare(str_color) {
 
   foreach(e_player in a_e_players) {
     switch (str_color) {
-      case #"red":
+      case # "red":
         namespace_b45e3f05::give_flare("<dev string:x567>");
         break;
-      case #"green":
+      case # "green":
         namespace_b45e3f05::give_flare("<dev string:x56d>");
         break;
-      case #"blue":
+      case # "blue":
         namespace_b45e3f05::give_flare("<dev string:x575>");
         break;
     }
   }
 }
 
-private function_51855e65(round_number) {
+function_51855e65(round_number) {
   var_efac84b3 = array(0, 500, 1000, 1000, 1400, 4000, 5000, 5500, 5500, 5500, 8000, 8000, 8000, 8000, 9000, 9000, 9000, 9500, 9500, 9500, 9500, 11000, 11000, 11000, 11000, 13000, 13000, 13000, 13000, 14000);
   round_index = round_number - 1;
   assert(round_index >= 0 && round_index < 30);
@@ -227,9 +226,9 @@ private function_51855e65(round_number) {
   }
 
   if(round_number >= 8) {
-    assert(isDefined(level.var_4fe2f84d[#"zblueprint_shield_dual_wield"]));
+    assert(isDefined(level.var_4fe2f84d[# "zblueprint_shield_dual_wield"]));
 
-    foreach(trigger in level.var_4fe2f84d[#"zblueprint_shield_dual_wield"]) {
+    foreach(trigger in level.var_4fe2f84d[# "zblueprint_shield_dual_wield"]) {
       trigger.crafted = 1;
       trigger.blueprint = trigger.craftfoundry;
 
@@ -257,4 +256,3 @@ private function_51855e65(round_number) {
     zm_trial_util::function_9c71b46f();
   }
 }
-

@@ -28,7 +28,7 @@ sndtrackers() {
 
 sndstingersetup() {
   level.sndmusicstingerevent = ::sndplaystinger;
-  level.sndstinger = spawnstruct();
+  level.sndstinger = spawnStruct();
   level.sndstinger.ent = spawn("script_origin", (0, 0, 0));
   level.sndstinger.queue = 0;
   level.sndstinger.isplaying = 0;
@@ -77,7 +77,7 @@ createstingerstate(state, alias, prewait, interrupt) {
   s = level.sndstinger;
 
   if(!isDefined(s.states[state])) {
-    s.states[state] = spawnstruct();
+    s.states[state] = spawnStruct();
     s.states[state].alias = alias;
     s.states[state].prewait = prewait;
     s.states[state].interrupt = interrupt;
@@ -289,7 +289,7 @@ playstinger(state, player, ignore) {
     if(isDefined(player))
       player playsoundtoplayer(s.states[state].alias, player);
     else {
-      s.ent playsound(s.states[state].alias);
+      s.ent playSound(s.states[state].alias);
       s.ent thread playstingerstop();
     }
   } else if(isDefined(player)) {
@@ -463,11 +463,11 @@ sndmusicegg() {
 
 sndmusicegg_wait(bottle_origin) {
   temp_ent = spawn("script_origin", bottle_origin);
-  temp_ent playloopsound("zmb_meteor_loop");
+  temp_ent playLoopSound("zmb_meteor_loop");
   temp_ent thread maps\mp\zombies\_zm_sidequests::fake_use("main_music_egg_hit", ::sndmusicegg_override);
   temp_ent waittill("main_music_egg_hit", player);
   temp_ent stoploopsound(1);
-  player playsound("zmb_meteor_activate");
+  player playSound("zmb_meteor_activate");
   level.meteor_counter = level.meteor_counter + 1;
 
   if(level.meteor_counter == 3) {
@@ -489,7 +489,7 @@ sndmusicegg_override() {
 sndmuseggplay(ent, alias, time) {
   level.music_override = 1;
   wait 1;
-  ent playsound(alias);
+  ent playSound(alias);
   level setclientfield("mus_zmb_egg_snapshot_loop", 1);
   level thread sndeggmusicwait(time);
   level waittill_either("end_game", "sndSongDone");
@@ -513,7 +513,7 @@ sndmusicquestendgame(alias, length) {
   level.music_override = 1;
   level setclientfield("mus_zmb_egg_snapshot_loop", 1);
   ent = spawn("script_origin", (0, 0, 0));
-  ent playsound(alias);
+  ent playSound(alias);
   wait(length);
   level setclientfield("mus_zmb_egg_snapshot_loop", 0);
   level.music_override = 0;
@@ -532,13 +532,13 @@ sndendgamemusicredux(alias, length) {
   m_endgame_machine = getstruct("sq_endgame_machine", "targetname");
   temp_ent = spawn("script_origin", m_endgame_machine.origin);
   temp_ent thread maps\mp\zombies\_zm_sidequests::fake_use("main_music_egg_hit", ::sndmusicegg_override);
-  temp_ent playloopsound("zmb_meteor_loop");
+  temp_ent playLoopSound("zmb_meteor_loop");
   temp_ent waittill("main_music_egg_hit", player);
   temp_ent stoploopsound(1);
   level.music_override = 1;
-  temp_ent playsound("zmb_endgame_mach_button");
+  temp_ent playSound("zmb_endgame_mach_button");
   level setclientfield("mus_zmb_egg_snapshot_loop", 1);
-  temp_ent playsound(alias);
+  temp_ent playSound(alias);
   wait(length);
   level setclientfield("mus_zmb_egg_snapshot_loop", 0);
   level.music_override = 0;

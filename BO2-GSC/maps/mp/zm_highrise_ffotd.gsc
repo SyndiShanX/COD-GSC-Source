@@ -25,47 +25,47 @@ spawned_collision_ffotd() {
 
   if(!is_true(level.optimise_for_splitscreen)) {
     collision1 = spawn("script_model", (2044, 499, 2893));
-    collision1 setmodel("collision_wall_32x32x10_standard");
+    collision1 setModel("collision_wall_32x32x10_standard");
     collision1.angles = vectorscale((0, 1, 0), 330.0);
     collision1 ghost();
     collision2 = spawn("script_model", (2044, 499, 2925));
-    collision2 setmodel("collision_wall_32x32x10_standard");
+    collision2 setModel("collision_wall_32x32x10_standard");
     collision2.angles = vectorscale((0, 1, 0), 330.0);
     collision2 ghost();
     collision3 = spawn("script_model", (1768, 1507, 3075));
-    collision3 setmodel("collision_wall_256x256x10_standard");
+    collision3 setModel("collision_wall_256x256x10_standard");
     collision3.angles = (0, 0, 0);
     collision3 ghost();
     collision3b = spawn("script_model", (1740, 1497, 3075));
-    collision3b setmodel("collision_wall_256x256x10_standard");
+    collision3b setModel("collision_wall_256x256x10_standard");
     collision3b.angles = (0, 0, 0);
     collision3b ghost();
     collision3 = spawn("script_model", (2054, 1455, 3440));
-    collision3 setmodel("collision_wall_128x128x10_standard");
+    collision3 setModel("collision_wall_128x128x10_standard");
     collision3.angles = (0, 0, 0);
     collision3 ghost();
     collision4 = spawn("script_model", (2257, 2374, 3101));
-    collision4 setmodel("collision_wall_256x256x10_standard");
+    collision4 setModel("collision_wall_256x256x10_standard");
     collision4.angles = vectorscale((0, 1, 0), 270.0);
     collision4 ghost();
     collision5 = spawn("script_model", (3076, 1598, 2791));
-    collision5 setmodel("collision_wall_256x256x10_standard");
+    collision5 setModel("collision_wall_256x256x10_standard");
     collision5.angles = vectorscale((1, 0, 0), 347.6);
     collision5 ghost();
     collision6b = spawn("script_model", (3693, 1840, 1897));
-    collision6b setmodel("collision_wall_256x256x10_standard");
+    collision6b setModel("collision_wall_256x256x10_standard");
     collision6b.angles = (0, 270, 12);
     collision6b ghost();
     collision6c = spawn("script_model", (3666, 1840, 2023));
-    collision6c setmodel("collision_wall_256x256x10_standard");
+    collision6c setModel("collision_wall_256x256x10_standard");
     collision6c.angles = (0, 270, 12);
     collision6c ghost();
     collision7 = spawn("script_model", (2157, 839, 3129));
-    collision7 setmodel("collision_wall_128x128x10_standard");
+    collision7 setModel("collision_wall_128x128x10_standard");
     collision7.angles = (0, 9.79996, -90);
     collision7 ghost();
     collision7 = spawn("script_model", (3594, 1708, 2247));
-    collision7 setmodel("collision_wall_128x128x10_standard");
+    collision7 setModel("collision_wall_128x128x10_standard");
     collision7.angles = (0, 270, 12);
     collision7 ghost();
   }
@@ -87,7 +87,7 @@ eject_player_trigger_init() {
 }
 
 eject_player_trigger() {
-  trigs = getentarray("eject_player_pos", "targetname");
+  trigs = getEntArray("eject_player_pos", "targetname");
   array_thread(trigs, ::player_eject_watcher);
 }
 

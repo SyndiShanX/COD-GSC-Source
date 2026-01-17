@@ -19,7 +19,6 @@
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm_devgui;
 #include scripts\zm_common\zm_utility;
-
 #namespace tigerbehavior;
 
 class class_c40841ac {
@@ -100,7 +99,7 @@ function_8747b993() {
   self.var_86152978 = gettime() + 15000;
 }
 
-private function_e235da7d(entity) {
+function_e235da7d(entity) {
   entity.__blackboard = undefined;
   entity function_1637910a();
 }
@@ -196,7 +195,7 @@ need_to_run() {
   return true;
 }
 
-private is_target_valid(tiger, target) {
+is_target_valid(tiger, target) {
   if(!isDefined(target)) {
     return 0;
   }
@@ -205,7 +204,7 @@ private is_target_valid(tiger, target) {
     return 0;
   }
 
-  if(!(tiger.team == #"allies")) {
+  if(!(tiger.team == # "allies")) {
     if(!isplayer(target) && sessionmodeiszombiesgame()) {
       return 0;
     }
@@ -246,11 +245,11 @@ private is_target_valid(tiger, target) {
   return 1;
 }
 
-private get_favorite_enemy(tiger) {
+get_favorite_enemy(tiger) {
   var_7c746996 = [];
 
   if(sessionmodeiszombiesgame()) {
-    if(self.team == #"allies") {
+    if(self.team == # "allies") {
       var_7c746996 = getaiteamarray(level.zombie_team);
     } else {
       var_7c746996 = getplayers();
@@ -355,7 +354,7 @@ tigertargetservice(behaviortreeentity) {
     return;
   }
 
-  if((!sessionmodeiszombiesgame() || behaviortreeentity.team == #"allies") && !is_target_valid(behaviortreeentity, behaviortreeentity.favoriteenemy)) {
+  if((!sessionmodeiszombiesgame() || behaviortreeentity.team == # "allies") && !is_target_valid(behaviortreeentity, behaviortreeentity.favoriteenemy)) {
     behaviortreeentity.favoriteenemy = get_favorite_enemy(behaviortreeentity);
   }
 
@@ -551,14 +550,14 @@ function_4c2b7bad(behaviortreeentity, asmstatename) {
   return 4;
 }
 
-private function_d65e3f15(entity, asmstatename) {
+function_d65e3f15(entity, asmstatename) {
   animationstatenetworkutility::requeststate(entity, asmstatename);
   function_40b8200d(entity);
   entity.hit_ent = 0;
   return 5;
 }
 
-private p8_usa_farm_tools_hoe_lod2_s1_geo_rigid_bs_7cqeqf2k2nw2binsrm67nqzdzf(entity, asmstatename) {
+p8_usa_farm_tools_hoe_lod2_s1_geo_rigid_bs_7cqeqf2k2nw2binsrm67nqzdzf(entity, asmstatename) {
   if(entity asmgetstatus() == "asm_status_complete") {
     return 4;
   }
@@ -583,8 +582,8 @@ private p8_usa_farm_tools_hoe_lod2_s1_geo_rigid_bs_7cqeqf2k2nw2binsrm67nqzdzf(en
 
   trace = physicstrace(eye_pos, enemy_eye_pos, (-15, -15, -15), (15, 15, 15), self);
 
-  if(trace[#"fraction"] < 1) {
-    hit_ent = trace[#"entity"];
+  if(trace[# "fraction"] < 1) {
+    hit_ent = trace[# "entity"];
   }
 
   entity.hit_ent = isDefined(hit_ent);
@@ -605,7 +604,7 @@ private p8_usa_farm_tools_hoe_lod2_s1_geo_rigid_bs_7cqeqf2k2nw2binsrm67nqzdzf(en
   return 5;
 }
 
-private function_4fc73b37(entity, asmstatename) {
+function_4fc73b37(entity, asmstatename) {
   function_1055f5e7(entity);
   entity.hit_ent = undefined;
   entity.var_cc94acec = 0;
@@ -616,7 +615,7 @@ private function_4fc73b37(entity, asmstatename) {
   return 4;
 }
 
-private function_39fd9a43() {
+function_39fd9a43() {
   self notify("55a4d4707a42299b");
   self endon("55a4d4707a42299b");
   self endon(#"death");
@@ -935,8 +934,8 @@ function_5ee65256(entity) {
   enemy_eye_pos = entity util::get_eye();
   trace = physicstrace(eye_pos, enemy_eye_pos, (-15, -15, -15), (15, 15, 15), self);
 
-  if(trace[#"fraction"] < 1) {
-    hit_ent = trace[#"entity"];
+  if(trace[# "fraction"] < 1) {
+    hit_ent = trace[# "entity"];
   }
 
   hit = isDefined(hit_ent);
@@ -972,7 +971,7 @@ function_b708cfe7() {
   return undefined;
 }
 
-private function_21c73eb5() {
+function_21c73eb5() {
   enemies = getaiarchetypearray(#"tiger");
 
   foreach(enemy in enemies) {
@@ -982,7 +981,7 @@ private function_21c73eb5() {
   }
 }
 
-private function_88b22921() {
+function_88b22921() {
   enemies = getaiarchetypearray(#"tiger");
 
   foreach(enemy in enemies) {
@@ -992,7 +991,7 @@ private function_88b22921() {
   }
 }
 
-private function_1e4eb5f0() {
+function_1e4eb5f0() {
   adddebugcommand("<dev string:xb8>");
   adddebugcommand("<dev string:xf9>");
   adddebugcommand("<dev string:x13c>");
@@ -1004,13 +1003,13 @@ private function_1e4eb5f0() {
 
     if(cmd.size > 0) {
       switch (cmd[0]) {
-        case #"spawn":
+        case # "spawn":
           zm_devgui::spawn_archetype("<dev string:x189>");
           break;
-        case #"kill":
+        case # "kill":
           function_21c73eb5();
           break;
-        case #"pounce":
+        case # "pounce":
           function_88b22921();
           break;
         default:
@@ -1027,4 +1026,3 @@ private function_1e4eb5f0() {
     setdvar(#"hash_3b467d1615c469f8", "<dev string:x60>");
   }
 }
-

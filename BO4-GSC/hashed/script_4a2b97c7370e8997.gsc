@@ -7,7 +7,6 @@
 #include scripts\zm\zm_office_elevators;
 #include scripts\zm\zm_office_teleporters;
 #include scripts\zm_common\zm_trial;
-
 #namespace zm_trial_office_disable_teleporters_elevators;
 
 autoexec __init__system__() {
@@ -22,24 +21,24 @@ __init__() {
   zm_trial::register_challenge(#"disable_teleporters_elevators", &on_begin, &on_end);
 }
 
-private on_begin() {
+on_begin() {
   self function_3b7e62cf();
   self function_28dce407();
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   self function_72c09628();
   self function_8209b7a5();
 }
 
-private function_3b7e62cf() {
+function_3b7e62cf() {
   elevator1 = getent("elevator1", "targetname");
   elevator2 = getent("elevator2", "targetname");
   elevator1 thread function_98c1b6be();
   elevator2 thread function_98c1b6be();
 }
 
-private function_98c1b6be() {
+function_98c1b6be() {
   if(self.active === 1) {
     self waittill(#"hash_26d932820f7f5373");
   }
@@ -48,11 +47,11 @@ private function_98c1b6be() {
   self zm_office_elevators::disable_elevator_buys();
 }
 
-private function_28dce407() {
+function_28dce407() {
   zm_office_teleporters::function_a6bb56f6();
 }
 
-private function_72c09628() {
+function_72c09628() {
   elevator1 = getent("elevator1", "targetname");
   elevator2 = getent("elevator2", "targetname");
   elevator1 zm_office_elevators::enable_callboxes();
@@ -61,6 +60,6 @@ private function_72c09628() {
   elevator2 zm_office_elevators::enable_elevator_buys();
 }
 
-private function_8209b7a5() {
+function_8209b7a5() {
   zm_office_teleporters::function_cc9b97b0();
 }

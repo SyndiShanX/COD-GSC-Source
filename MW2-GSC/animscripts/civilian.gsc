@@ -20,19 +20,19 @@ cover() {
     situation = "idle_noncombat";
 
   idle_array = undefined;
-  if(isdefined(self.animname) && isdefined(level.scr_anim[self.animname]))
+  if(isDefined(self.animname) && isDefined(level.scr_anim[self.animname]))
     idle_array = level.scr_anim[self.animname][situation];
 
-  if(!isdefined(idle_array)) {
-    if(!isdefined(level.scr_anim["default_civilian"]))
+  if(!isDefined(idle_array)) {
+    if(!isDefined(level.scr_anim["default_civilian"])) {
       return;
-
+    }
     idle_array = level.scr_anim["default_civilian"][situation];
   }
 
   thread move_check();
 
-  for (;;) {
+  for(;;) {
     self setflaggedanimknoball("idle", random(idle_array), % root, 1, 0.2, 1);
     self waittillmatch("idle", "end");
   }
@@ -41,7 +41,7 @@ cover() {
 move_check() {
   self endon("killanimscript");
 
-  while (!isdefined(self.champion)) {
+  while(!isDefined(self.champion)) {
     wait(1);
   }
 }

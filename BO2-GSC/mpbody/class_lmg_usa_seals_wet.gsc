@@ -16,7 +16,7 @@ precache() {
 }
 
 set_player_model() {
-  self setmodel("c_usa_mp_seal6_lmg_w_fb");
+  self setModel("c_usa_mp_seal6_lmg_w_fb");
   self setviewmodel("c_usa_mp_seal6_longsleeve_w_viewhands");
   heads = [];
 }

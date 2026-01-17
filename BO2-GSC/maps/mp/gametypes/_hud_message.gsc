@@ -21,25 +21,25 @@ init() {
   precachestring(&"MP_WAGER_SIDEBET_WINNINGS_ARE");
   precachestring(&"MP_WAGER_IN_THE_MONEY");
   precachestring(&"faction_popup");
-  game["strings"]["draw"] = & "MP_DRAW_CAPS";
-  game["strings"]["round_draw"] = & "MP_ROUND_DRAW_CAPS";
-  game["strings"]["round_win"] = & "MP_ROUND_WIN_CAPS";
-  game["strings"]["round_loss"] = & "MP_ROUND_LOSS_CAPS";
-  game["strings"]["victory"] = & "MP_VICTORY_CAPS";
-  game["strings"]["defeat"] = & "MP_DEFEAT_CAPS";
-  game["strings"]["game_over"] = & "MP_GAME_OVER_CAPS";
-  game["strings"]["halftime"] = & "MP_HALFTIME_CAPS";
-  game["strings"]["overtime"] = & "MP_OVERTIME_CAPS";
-  game["strings"]["roundend"] = & "MP_ROUNDEND_CAPS";
-  game["strings"]["intermission"] = & "MP_INTERMISSION_CAPS";
-  game["strings"]["side_switch"] = & "MP_SWITCHING_SIDES_CAPS";
-  game["strings"]["match_bonus"] = & "MP_MATCH_BONUS_IS";
-  game["strings"]["codpoints_match_bonus"] = & "MP_CODPOINTS_MATCH_BONUS_IS";
-  game["strings"]["wager_winnings"] = & "MP_WAGER_WINNINGS_ARE";
-  game["strings"]["wager_sidebet_winnings"] = & "MP_WAGER_SIDEBET_WINNINGS_ARE";
-  game["strings"]["wager_inthemoney"] = & "MP_WAGER_IN_THE_MONEY_CAPS";
-  game["strings"]["wager_loss"] = & "MP_WAGER_LOSS_CAPS";
-  game["strings"]["wager_topwinners"] = & "MP_WAGER_TOPWINNERS";
+  game["strings"]["draw"] = &"MP_DRAW_CAPS";
+  game["strings"]["round_draw"] = &"MP_ROUND_DRAW_CAPS";
+  game["strings"]["round_win"] = &"MP_ROUND_WIN_CAPS";
+  game["strings"]["round_loss"] = &"MP_ROUND_LOSS_CAPS";
+  game["strings"]["victory"] = &"MP_VICTORY_CAPS";
+  game["strings"]["defeat"] = &"MP_DEFEAT_CAPS";
+  game["strings"]["game_over"] = &"MP_GAME_OVER_CAPS";
+  game["strings"]["halftime"] = &"MP_HALFTIME_CAPS";
+  game["strings"]["overtime"] = &"MP_OVERTIME_CAPS";
+  game["strings"]["roundend"] = &"MP_ROUNDEND_CAPS";
+  game["strings"]["intermission"] = &"MP_INTERMISSION_CAPS";
+  game["strings"]["side_switch"] = &"MP_SWITCHING_SIDES_CAPS";
+  game["strings"]["match_bonus"] = &"MP_MATCH_BONUS_IS";
+  game["strings"]["codpoints_match_bonus"] = &"MP_CODPOINTS_MATCH_BONUS_IS";
+  game["strings"]["wager_winnings"] = &"MP_WAGER_WINNINGS_ARE";
+  game["strings"]["wager_sidebet_winnings"] = &"MP_WAGER_SIDEBET_WINNINGS_ARE";
+  game["strings"]["wager_inthemoney"] = &"MP_WAGER_IN_THE_MONEY_CAPS";
+  game["strings"]["wager_loss"] = &"MP_WAGER_LOSS_CAPS";
+  game["strings"]["wager_topwinners"] = &"MP_WAGER_TOPWINNERS";
   game["menu_endgameupdate"] = "endgameupdate";
   precachemenu(game["menu_endgameupdate"]);
   level thread onplayerconnect();
@@ -77,14 +77,14 @@ initcustomgametypeheader() {
 }
 
 hintmessage(hinttext, duration) {
-  notifydata = spawnstruct();
+  notifydata = spawnStruct();
   notifydata.notifytext = hinttext;
   notifydata.duration = duration;
   notifymessage(notifydata);
 }
 
 hintmessageplayers(players, hinttext, duration) {
-  notifydata = spawnstruct();
+  notifydata = spawnStruct();
   notifydata.notifytext = hinttext;
   notifydata.duration = duration;
 
@@ -172,7 +172,7 @@ oldnotifymessage(titletext, notifytext, iconname, glowcolor, sound, duration) {
   if(level.wagermatch && !level.teambased) {
     return;
   }
-  notifydata = spawnstruct();
+  notifydata = spawnStruct();
   notifydata.titletext = titletext;
   notifydata.notifytext = notifytext;
   notifydata.iconname = iconname;
@@ -191,7 +191,7 @@ notifymessage(notifydata) {
 
 playnotifyloop(duration) {
   playnotifyloop = spawn("script_origin", (0, 0, 0));
-  playnotifyloop playloopsound("uin_notify_data_loop");
+  playnotifyloop playLoopSound("uin_notify_data_loop");
   duration = duration - 4;
 
   if(duration < 1)
@@ -233,7 +233,7 @@ shownotifymessage(notifydata, duration) {
     if(isDefined(notifydata.titlelabel))
       self.notifytitle.label = notifydata.titlelabel;
     else
-      self.notifytitle.label = & "";
+      self.notifytitle.label = &"";
 
     if(isDefined(notifydata.titlelabel) && !isDefined(notifydata.titleisstring))
       self.notifytitle setvalue(notifydata.titletext);
@@ -250,7 +250,7 @@ shownotifymessage(notifydata, duration) {
     if(isDefined(notifydata.textlabel))
       self.notifytext.label = notifydata.textlabel;
     else
-      self.notifytext.label = & "";
+      self.notifytext.label = &"";
 
     if(isDefined(notifydata.textlabel) && !isDefined(notifydata.textisstring))
       self.notifytext setvalue(notifydata.notifytext);
@@ -276,7 +276,7 @@ shownotifymessage(notifydata, duration) {
       if(isDefined(notifydata.text2label))
         self.notifytext2.label = notifydata.text2label;
       else
-        self.notifytext2.label = & "";
+        self.notifytext2.label = &"";
 
       self.notifytext2 settext(notifydata.notifytext2);
       self.notifytext2 setpulsefx(100, int(duration * 1000), 1000);
@@ -541,9 +541,7 @@ teamoutcomenotify(winner, isround, endreasontext) {
   if(isround)
     teamscores[team] setvalue(getteamscore(team));
   else
-    teamscores[team][
-      [level.setmatchscorehudelemforteam]
-    ](team);
+    teamscores[team][[level.setmatchscorehudelemforteam]](team);
 
   teamscores[team].hidewheninmenu = 0;
   teamscores[team].archived = 0;
@@ -717,7 +715,7 @@ outcomenotify(winner, isroundend, endreasontext) {
   firsttitle.immunetodemofreecamera = 1;
 
   if(isDefined(players[0])) {
-    firsttitle.label = & "MP_FIRSTPLACE_NAME";
+    firsttitle.label = &"MP_FIRSTPLACE_NAME";
     firsttitle setplayernamestring(players[0]);
     firsttitle setcod7decodefx(175, duration, 600);
   }
@@ -732,7 +730,7 @@ outcomenotify(winner, isroundend, endreasontext) {
   secondtitle.immunetodemofreecamera = 1;
 
   if(isDefined(players[1])) {
-    secondtitle.label = & "MP_SECONDPLACE_NAME";
+    secondtitle.label = &"MP_SECONDPLACE_NAME";
     secondtitle setplayernamestring(players[1]);
     secondtitle setcod7decodefx(175, duration, 600);
   }
@@ -748,7 +746,7 @@ outcomenotify(winner, isroundend, endreasontext) {
   thirdtitle.immunetodemofreecamera = 1;
 
   if(isDefined(players[2])) {
-    thirdtitle.label = & "MP_THIRDPLACE_NAME";
+    thirdtitle.label = &"MP_THIRDPLACE_NAME";
     thirdtitle setplayernamestring(players[2]);
     thirdtitle setcod7decodefx(175, duration, 600);
   }
@@ -862,7 +860,7 @@ wageroutcomenotify(winner, endreasontext) {
       secondtitle.archived = 0;
       secondtitle.immunetodemogamehudsettings = 1;
       secondtitle.immunetodemofreecamera = 1;
-      secondtitle.label = & "MP_WAGER_PLACE_NAME";
+      secondtitle.label = &"MP_WAGER_PLACE_NAME";
       secondtitle.playernum = i;
       secondtitle setplayernamestring(players[i]);
       playernamehudelems[playernamehudelems.size] = secondtitle;
@@ -874,7 +872,7 @@ wageroutcomenotify(winner, endreasontext) {
       secondcp.archived = 0;
       secondcp.immunetodemogamehudsettings = 1;
       secondcp.immunetodemofreecamera = 1;
-      secondcp.label = & "MENU_POINTS";
+      secondcp.label = &"MENU_POINTS";
       secondcp.currentvalue = 0;
 
       if(isDefined(players[i].wagerwinnings))

@@ -127,7 +127,7 @@ yemeni_teamswitch_spawnfunc() {
 yemeni_bft_highlight() {
   m_fx_origin = spawn_model("tag_origin", self gettagorigin("J_SpineLower"), (0, 0, 0));
   m_fx_origin linkto(self, "J_SpineLower");
-  playfxontag(getfx("friendly_marker"), m_fx_origin, "tag_origin");
+  playFXOnTag(getfx("friendly_marker"), m_fx_origin, "tag_origin");
   self waittill("death");
   m_fx_origin delete();
 }
@@ -371,7 +371,7 @@ cleanup(str_value, str_key) {
   if(!isDefined(str_key))
     str_key = "targetname";
 
-  array = getentarray(str_value, str_key);
+  array = getEntArray(str_value, str_key);
 
   foreach(ent in array) {
     if(isDefined(ent.classname) && ent.classname == "script_vehicle") {
@@ -442,7 +442,7 @@ notetrack_drone_shoot(drone_model) {
   if(isDefined(drone_model)) {
     pos = drone_model gettagorigin("tag_flash");
     orient = drone_model gettagangles("tag_flash");
-    fwd = anglestoforward(orient);
+    fwd = anglesToForward(orient);
     magicbullet("an94_sp", pos, pos + fwd * 100);
     drone_model play_fx("drone_weapon_flash", pos, orient, undefined, 1, "tag_flash");
   }
@@ -504,18 +504,18 @@ ai_delete_when_offscreen() {
   self endon("delete");
   angle = getdvarint(#"cg_fov");
   cos_angle = cos(angle);
-  forward = anglestoforward(level.player.angles);
+  forward = anglesToForward(level.player.angles);
 
   for(ai_to_player = vectornormalize(self.origin - level.player.origin); vectordot(forward, ai_to_player) >= cos_angle; ai_to_player = vectornormalize(self.origin - level.player.origin)) {
     wait 0.1;
-    forward = anglestoforward(level.player.angles);
+    forward = anglesToForward(level.player.angles);
   }
 
   self delete();
 }
 
 get_alive_from_noteworthy(noteworthy) {
-  ai_array = getentarray(noteworthy, "script_noteworthy");
+  ai_array = getEntArray(noteworthy, "script_noteworthy");
   new_array = [];
 
   foreach(ent in ai_array) {

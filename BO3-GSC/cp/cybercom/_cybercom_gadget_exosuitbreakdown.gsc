@@ -26,15 +26,15 @@ function init() {}
 
 function main() {
   cybercom_gadget::registerability(0, 4);
-  level.cybercom.exo_breakdown = spawnstruct();
-  level.cybercom.exo_breakdown._is_flickering = & _is_flickering;
-  level.cybercom.exo_breakdown._on_flicker = & _on_flicker;
-  level.cybercom.exo_breakdown._on_give = & _on_give;
-  level.cybercom.exo_breakdown._on_take = & _on_take;
-  level.cybercom.exo_breakdown._on_connect = & _on_connect;
-  level.cybercom.exo_breakdown._on = & _on;
-  level.cybercom.exo_breakdown._off = & _off;
-  level.cybercom.exo_breakdown._is_primed = & _is_primed;
+  level.cybercom.exo_breakdown = spawnStruct();
+  level.cybercom.exo_breakdown._is_flickering = &_is_flickering;
+  level.cybercom.exo_breakdown._on_flicker = &_on_flicker;
+  level.cybercom.exo_breakdown._on_give = &_on_give;
+  level.cybercom.exo_breakdown._on_take = &_on_take;
+  level.cybercom.exo_breakdown._on_connect = &_on_connect;
+  level.cybercom.exo_breakdown._on = &_on;
+  level.cybercom.exo_breakdown._off = &_off;
+  level.cybercom.exo_breakdown._is_primed = &_is_primed;
 }
 
 function _is_flickering(slot) {}
@@ -47,8 +47,8 @@ function _on_give(slot, weapon) {
   if(self hascybercomability("cybercom_exosuitbreakdown") == 2) {
     self.cybercom.var_110c156a = getdvarint("scr_exo_breakdown_upgraded_count", 2);
   }
-  self.cybercom.targetlockcb = & _get_valid_targets;
-  self.cybercom.targetlockrequirementcb = & _lock_requirement;
+  self.cybercom.targetlockcb = &_get_valid_targets;
+  self.cybercom.targetlockrequirementcb = &_lock_requirement;
   self thread cybercom::function_b5f4e597(weapon);
   self cybercom::function_8257bcb3("base_rifle_stn", 8);
   self cybercom::function_8257bcb3("base_rifle_crc", 2);
@@ -76,7 +76,7 @@ function _off(slot, weapon) {
 }
 
 function _is_primed(slot, weapon) {
-  if(!(isdefined(self.cybercom.is_primed) && self.cybercom.is_primed)) {
+  if(!(isDefined(self.cybercom.is_primed) && self.cybercom.is_primed)) {
     assert(self.cybercom.activecybercomweapon == weapon);
     self thread cybercom::weaponlockwatcher(slot, weapon, self.cybercom.var_110c156a);
     self.cybercom.is_primed = 1;
@@ -88,7 +88,7 @@ function private _lock_requirement(target) {
     self cybercom::function_29bf9dee(target, 2);
     return false;
   }
-  if(isdefined(target.is_disabled) && target.is_disabled) {
+  if(isDefined(target.is_disabled) && target.is_disabled) {
     self cybercom::function_29bf9dee(target, 6);
     return false;
   }
@@ -99,7 +99,7 @@ function private _lock_requirement(target) {
     self cybercom::function_29bf9dee(target, 2);
     return false;
   }
-  if(!isdefined(target.archetype) || (target.archetype != "human" && target.archetype != "human_riotshield" && target.archetype != "warlord")) {
+  if(!isDefined(target.archetype) || (target.archetype != "human" && target.archetype != "human_riotshield" && target.archetype != "warlord")) {
     self cybercom::function_29bf9dee(target, 2);
     return false;
   }
@@ -117,7 +117,7 @@ function _activate_exo_breakdown(slot, weapon) {
   aborted = 0;
   fired = 0;
   foreach(item in self.cybercom.lock_targets) {
-    if(isdefined(item.target) && (isdefined(item.inrange) && item.inrange)) {
+    if(isDefined(item.target) && (isDefined(item.inrange) && item.inrange)) {
       if(item.inrange == 1) {
         if(!cybercom::targetisvalid(item.target, weapon)) {
           continue;
@@ -139,7 +139,7 @@ function _activate_exo_breakdown(slot, weapon) {
   cybercom::function_adc40f11(weapon, fired);
   if(fired && isplayer(self)) {
     itemindex = getitemindexfromref("cybercom_exosuitbreakdown");
-    if(isdefined(itemindex)) {
+    if(isDefined(itemindex)) {
       self adddstat("ItemStats", itemindex, "stats", "assists", "statValue", fired);
       self adddstat("ItemStats", itemindex, "stats", "used", "statValue", 1);
     }
@@ -147,7 +147,7 @@ function _activate_exo_breakdown(slot, weapon) {
 }
 
 function ai_activateexosuitbreakdown(target, var_9bc2efcb = 1) {
-  if(!isdefined(target)) {
+  if(!isDefined(target)) {
     return;
   }
   if(self.archetype != "human") {
@@ -167,7 +167,7 @@ function ai_activateexosuitbreakdown(target, var_9bc2efcb = 1) {
     }
     validtargets[validtargets.size] = target;
   }
-  if(isdefined(var_9bc2efcb) && var_9bc2efcb) {
+  if(isDefined(var_9bc2efcb) && var_9bc2efcb) {
     type = self cybercom::function_5e3d3aa();
     self orientmode("face default");
     self animscripted("ai_cybercom_anim", self.origin, self.angles, ("ai_base_rifle_" + type) + "_exposed_cybercom_activate");
@@ -188,9 +188,9 @@ function private function_69246d49(attacker, loops, weapon) {
   self.is_disabled = 1;
   self.ignoreall = 1;
   self.special_weapon = weapon;
-  while (loops) {
+  while(loops) {
     self.allowpain = 1;
-    self dodamage(5, self.origin, (isdefined(attacker) ? attacker : undefined), undefined, "none", "MOD_UNKNOWN", 0, weapon, -1, 1);
+    self dodamage(5, self.origin, (isDefined(attacker) ? attacker : undefined), undefined, "none", "MOD_UNKNOWN", 0, weapon, -1, 1);
     self.allowpain = 0;
     wait(0.05);
     self waittillmatch("bhtn_action_terminate");
@@ -206,7 +206,7 @@ function private _exo_breakdown(attacker) {
   self endon("death");
   weapon = getweapon("gadget_exo_breakdown");
   self notify("hash_f8c5dd60", weapon, attacker);
-  if(isdefined(attacker.cybercom) && isdefined(attacker.cybercom.exo_breakdown_lifetime)) {
+  if(isDefined(attacker.cybercom) && isDefined(attacker.cybercom.exo_breakdown_lifetime)) {
     loops = self.cybercom.var_1360b9f1;
   } else {
     loops = 1;
@@ -216,7 +216,7 @@ function private _exo_breakdown(attacker) {
     return;
   }
   if(self cybercom::function_421746e0()) {
-    self kill(self.origin, (isdefined(attacker) ? attacker : undefined));
+    self kill(self.origin, (isDefined(attacker) ? attacker : undefined));
     return;
   }
   self notify("bhtn_action_notify", "reactExosuit");
@@ -227,14 +227,14 @@ function private _exo_breakdown(attacker) {
   self.is_disabled = 1;
   self.ignoreall = 1;
   if(isplayer(attacker) && attacker hascybercomability("cybercom_exosuitbreakdown") == 2) {
-    if(isdefined(self.voiceprefix) && isdefined(self.bcvoicenumber)) {
+    if(isDefined(self.voiceprefix) && isDefined(self.bcvoicenumber)) {
       self thread battlechatter::do_sound((self.voiceprefix + self.bcvoicenumber) + "_exert_breakdown_pain", 1);
     }
-    self dodamage(self.health + 666, self.origin, (isdefined(attacker) ? attacker : undefined), undefined, "none", "MOD_UNKNOWN", 0, weapon, -1, 1);
+    self dodamage(self.health + 666, self.origin, (isDefined(attacker) ? attacker : undefined), undefined, "none", "MOD_UNKNOWN", 0, weapon, -1, 1);
     return;
   }
   base = "base_rifle";
-  if(isdefined(self.voiceprefix) && getsubstr(self.voiceprefix, 7) == "f") {
+  if(isDefined(self.voiceprefix) && getsubstr(self.voiceprefix, 7) == "f") {
     base = "fem_rifle";
   }
   if(self.archetype == "human_riotshield") {
@@ -259,7 +259,7 @@ function private _exo_breakdown(attacker) {
 function function_58831b5a(loops, attacker, weapon, variant, base, type) {
   self endon("hash_614ee876");
   self thread function_53cfe88a();
-  while (loops) {
+  while(loops) {
     self function_e01b8059(attacker, weapon, variant, base, type);
     loops--;
   }

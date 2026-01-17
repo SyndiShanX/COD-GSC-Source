@@ -7,7 +7,6 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\math_shared;
 #include scripts\core_common\util_shared;
-
 #namespace archetype_damage_effects;
 
 class class_d5e9830e {
@@ -32,66 +31,66 @@ registerclientfields() {
 }
 
 loadeffects() {
-  level._effect[#"fire_robot_j_elbow_le_rot_loop"] = #"fire/fx_fire_ai_robot_arm_left_loop";
-  level._effect[#"fire_robot_j_elbow_ri_rot_loop"] = #"fire/fx_fire_ai_robot_arm_right_loop";
-  level._effect[#"fire_robot_j_shoulder_le_rot_loop"] = #"fire/fx_fire_ai_robot_arm_left_loop";
-  level._effect[#"fire_robot_j_shoulder_ri_rot_loop"] = #"fire/fx_fire_ai_robot_arm_right_loop";
-  level._effect[#"fire_robot_j_spine4_loop"] = #"fire/fx_fire_ai_robot_torso_loop";
-  level._effect[#"fire_robot_j_knee_le_loop"] = #"fire/fx_fire_ai_robot_leg_left_loop";
-  level._effect[#"fire_robot_j_knee_ri_loop"] = #"fire/fx_fire_ai_robot_leg_right_loop";
-  level._effect[#"fire_robot_j_head_loop"] = #"fire/fx_fire_ai_robot_head_loop";
-  level._effect[#"fire_robot_j_elbow_le_rot_os"] = #"fire/fx_fire_ai_robot_arm_left_os";
-  level._effect[#"fire_robot_j_elbow_ri_rot_os"] = #"fire/fx_fire_ai_robot_arm_right_os";
-  level._effect[#"fire_robot_j_shoulder_le_rot_os"] = #"fire/fx_fire_ai_robot_arm_left_os";
-  level._effect[#"fire_robot_j_shoulder_ri_rot_os"] = #"fire/fx_fire_ai_robot_arm_right_os";
-  level._effect[#"fire_robot_j_spine4_os"] = #"fire/fx_fire_ai_robot_torso_os";
-  level._effect[#"fire_robot_j_knee_le_os"] = #"fire/fx_fire_ai_robot_leg_left_os";
-  level._effect[#"fire_robot_j_knee_ri_os"] = #"fire/fx_fire_ai_robot_leg_right_os";
-  level._effect[#"fire_robot_j_head_os"] = #"fire/fx_fire_ai_robot_head_os";
+  level._effect[# "fire_robot_j_elbow_le_rot_loop"] = # "fire/fx_fire_ai_robot_arm_left_loop";
+  level._effect[# "fire_robot_j_elbow_ri_rot_loop"] = # "fire/fx_fire_ai_robot_arm_right_loop";
+  level._effect[# "fire_robot_j_shoulder_le_rot_loop"] = # "fire/fx_fire_ai_robot_arm_left_loop";
+  level._effect[# "fire_robot_j_shoulder_ri_rot_loop"] = # "fire/fx_fire_ai_robot_arm_right_loop";
+  level._effect[# "fire_robot_j_spine4_loop"] = # "fire/fx_fire_ai_robot_torso_loop";
+  level._effect[# "fire_robot_j_knee_le_loop"] = # "fire/fx_fire_ai_robot_leg_left_loop";
+  level._effect[# "fire_robot_j_knee_ri_loop"] = # "fire/fx_fire_ai_robot_leg_right_loop";
+  level._effect[# "fire_robot_j_head_loop"] = # "fire/fx_fire_ai_robot_head_loop";
+  level._effect[# "fire_robot_j_elbow_le_rot_os"] = # "fire/fx_fire_ai_robot_arm_left_os";
+  level._effect[# "fire_robot_j_elbow_ri_rot_os"] = # "fire/fx_fire_ai_robot_arm_right_os";
+  level._effect[# "fire_robot_j_shoulder_le_rot_os"] = # "fire/fx_fire_ai_robot_arm_left_os";
+  level._effect[# "fire_robot_j_shoulder_ri_rot_os"] = # "fire/fx_fire_ai_robot_arm_right_os";
+  level._effect[# "fire_robot_j_spine4_os"] = # "fire/fx_fire_ai_robot_torso_os";
+  level._effect[# "fire_robot_j_knee_le_os"] = # "fire/fx_fire_ai_robot_leg_left_os";
+  level._effect[# "fire_robot_j_knee_ri_os"] = # "fire/fx_fire_ai_robot_leg_right_os";
+  level._effect[# "fire_robot_j_head_os"] = # "fire/fx_fire_ai_robot_head_os";
   level.var_60a09d68 = [];
-  level.var_60a09d68[#"mp_dog"] = [];
-  level.var_60a09d68[#"mp_dog"][#"hash_3cf96a0aa8ac919"] = #"fire/fx_fire_ai_human_arm_left_loop";
-  level.var_60a09d68[#"mp_dog"][#"hash_66d60e2138e4f152"] = #"fire/fx_fire_ai_human_arm_left_loop";
-  level.var_60a09d68[#"mp_dog"][#"hash_213857ac6d630ed3"] = #"fire/fx_fire_ai_human_arm_left_loop";
-  level.var_60a09d68[#"mp_dog"][#"hash_6f9163ebf3baeee4"] = #"fire/fx_fire_ai_human_arm_left_loop";
-  level.var_60a09d68[#"mp_dog"][#"hash_67bbf1ab610115b4"] = #"fire/fx_fire_ai_human_arm_left_loop";
-  level.var_60a09d68[#"mp_dog"][#"hash_64c72f1dfecd290c"] = #"fire/fx_fire_ai_human_arm_left_loop";
-  level.var_60a09d68[#"mp_dog"][#"hash_2a4e6916c0772dca"] = #"fire/fx_fire_ai_human_arm_left_loop";
-  level.var_60a09d68[#"mp_dog"][#"hash_64c1f4459de5c8a2"] = #"fire/fx_fire_ai_human_arm_left_loop";
-  level.var_60a09d68[#"human"] = [];
-  level.var_60a09d68[#"human"][#"fire_j_elbow_le_loop"] = #"fire/fx_fire_ai_human_arm_left_loop";
-  level.var_60a09d68[#"human"][#"fire_j_elbow_ri_loop"] = #"fire/fx_fire_ai_human_arm_right_loop";
-  level.var_60a09d68[#"human"][#"fire_j_shoulder_le_loop"] = #"fire/fx_fire_ai_human_arm_left_loop";
-  level.var_60a09d68[#"human"][#"fire_j_shoulder_ri_loop"] = #"fire/fx_fire_ai_human_arm_right_loop";
-  level.var_60a09d68[#"human"][#"fire_j_spine4_loop"] = #"fire/fx_fire_ai_human_torso_loop";
-  level.var_60a09d68[#"human"][#"fire_j_hip_le_loop"] = #"fire/fx_fire_ai_human_hip_left_loop";
-  level.var_60a09d68[#"human"][#"fire_j_hip_ri_loop"] = #"fire/fx_fire_ai_human_hip_right_loop";
-  level.var_60a09d68[#"human"][#"fire_j_head_loop"] = #"fire/fx_fire_ai_human_head_loop";
-  level.var_60a09d68[#"human"][#"fire_j_knee_le_os"] = #"fire/fx_fire_ai_human_leg_left_os";
-  level.var_60a09d68[#"human"][#"fire_j_knee_ri_os"] = #"fire/fx_fire_ai_human_leg_right_os";
-  level.var_60a09d68[#"human"][#"fire_j_elbow_le_os"] = #"fire/fx_fire_ai_human_arm_left_os";
-  level.var_60a09d68[#"human"][#"fire_j_elbow_ri_os"] = #"fire/fx_fire_ai_human_arm_right_os";
-  level.var_60a09d68[#"human"][#"fire_j_shoulder_le_os"] = #"fire/fx_fire_ai_human_arm_left_os";
-  level.var_60a09d68[#"human"][#"fire_j_shoulder_ri_os"] = #"fire/fx_fire_ai_human_arm_right_os";
-  level.var_60a09d68[#"human"][#"fire_j_spine4_os"] = #"fire/fx_fire_ai_human_torso_os";
-  level.var_60a09d68[#"human"][#"fire_j_hip_le_os"] = #"fire/fx_fire_ai_human_hip_left_os";
-  level.var_60a09d68[#"human"][#"fire_j_hip_ri_os"] = #"fire/fx_fire_ai_human_hip_right_os";
-  level.var_60a09d68[#"human"][#"fire_j_head_os"] = #"fire/fx_fire_ai_human_head_os";
-  level.var_60a09d68[#"human"][#"fire_j_knee_le_os"] = #"fire/fx_fire_ai_human_leg_left_os";
-  level.var_60a09d68[#"human"][#"fire_j_knee_ri_os"] = #"fire/fx_fire_ai_human_leg_right_os";
-  level.var_60a09d68[#"human"][#"hash_38690ef2c303b981"] = #"smoke/fx_smk_ai_human_arm_left_os";
-  level.var_60a09d68[#"human"][#"hash_1b8ec036e64264e3"] = #"smoke/fx_smk_ai_human_arm_right_os";
-  level.var_60a09d68[#"human"][#"hash_93987513d9fcf74"] = #"smoke/fx_smk_ai_human_arm_left_os";
-  level.var_60a09d68[#"human"][#"hash_4120bed5ccbd9ada"] = #"hash_508a2d8945b9a938";
-  level.var_60a09d68[#"human"][#"hash_2956a5ac1199cb6f"] = #"smoke/fx_smk_ai_human_torso_os";
-  level.var_60a09d68[#"human"][#"hash_5156e6a4093a5ef7"] = #"smoke/fx_smk_ai_human_hip_left_os";
-  level.var_60a09d68[#"human"][#"hash_577af0103b54f9d5"] = #"smoke/fx_smk_ai_human_hip_right_os";
-  level.var_60a09d68[#"human"][#"hash_90fd448cc5848d6"] = #"smoke/fx_smk_ai_human_head_os";
-  level.var_60a09d68[#"human"][#"hash_1c2f6725995eb16b"] = #"smoke/fx_smk_ai_human_leg_left_os";
-  level.var_60a09d68[#"human"][#"hash_101185c328f39789"] = #"smoke/fx_smk_ai_human_leg_right_os";
+  level.var_60a09d68[# "mp_dog"] = [];
+  level.var_60a09d68[# "mp_dog"][# "hash_3cf96a0aa8ac919"] = # "fire/fx_fire_ai_human_arm_left_loop";
+  level.var_60a09d68[# "mp_dog"][# "hash_66d60e2138e4f152"] = # "fire/fx_fire_ai_human_arm_left_loop";
+  level.var_60a09d68[# "mp_dog"][# "hash_213857ac6d630ed3"] = # "fire/fx_fire_ai_human_arm_left_loop";
+  level.var_60a09d68[# "mp_dog"][# "hash_6f9163ebf3baeee4"] = # "fire/fx_fire_ai_human_arm_left_loop";
+  level.var_60a09d68[# "mp_dog"][# "hash_67bbf1ab610115b4"] = # "fire/fx_fire_ai_human_arm_left_loop";
+  level.var_60a09d68[# "mp_dog"][# "hash_64c72f1dfecd290c"] = # "fire/fx_fire_ai_human_arm_left_loop";
+  level.var_60a09d68[# "mp_dog"][# "hash_2a4e6916c0772dca"] = # "fire/fx_fire_ai_human_arm_left_loop";
+  level.var_60a09d68[# "mp_dog"][# "hash_64c1f4459de5c8a2"] = # "fire/fx_fire_ai_human_arm_left_loop";
+  level.var_60a09d68[# "human"] = [];
+  level.var_60a09d68[# "human"][# "fire_j_elbow_le_loop"] = # "fire/fx_fire_ai_human_arm_left_loop";
+  level.var_60a09d68[# "human"][# "fire_j_elbow_ri_loop"] = # "fire/fx_fire_ai_human_arm_right_loop";
+  level.var_60a09d68[# "human"][# "fire_j_shoulder_le_loop"] = # "fire/fx_fire_ai_human_arm_left_loop";
+  level.var_60a09d68[# "human"][# "fire_j_shoulder_ri_loop"] = # "fire/fx_fire_ai_human_arm_right_loop";
+  level.var_60a09d68[# "human"][# "fire_j_spine4_loop"] = # "fire/fx_fire_ai_human_torso_loop";
+  level.var_60a09d68[# "human"][# "fire_j_hip_le_loop"] = # "fire/fx_fire_ai_human_hip_left_loop";
+  level.var_60a09d68[# "human"][# "fire_j_hip_ri_loop"] = # "fire/fx_fire_ai_human_hip_right_loop";
+  level.var_60a09d68[# "human"][# "fire_j_head_loop"] = # "fire/fx_fire_ai_human_head_loop";
+  level.var_60a09d68[# "human"][# "fire_j_knee_le_os"] = # "fire/fx_fire_ai_human_leg_left_os";
+  level.var_60a09d68[# "human"][# "fire_j_knee_ri_os"] = # "fire/fx_fire_ai_human_leg_right_os";
+  level.var_60a09d68[# "human"][# "fire_j_elbow_le_os"] = # "fire/fx_fire_ai_human_arm_left_os";
+  level.var_60a09d68[# "human"][# "fire_j_elbow_ri_os"] = # "fire/fx_fire_ai_human_arm_right_os";
+  level.var_60a09d68[# "human"][# "fire_j_shoulder_le_os"] = # "fire/fx_fire_ai_human_arm_left_os";
+  level.var_60a09d68[# "human"][# "fire_j_shoulder_ri_os"] = # "fire/fx_fire_ai_human_arm_right_os";
+  level.var_60a09d68[# "human"][# "fire_j_spine4_os"] = # "fire/fx_fire_ai_human_torso_os";
+  level.var_60a09d68[# "human"][# "fire_j_hip_le_os"] = # "fire/fx_fire_ai_human_hip_left_os";
+  level.var_60a09d68[# "human"][# "fire_j_hip_ri_os"] = # "fire/fx_fire_ai_human_hip_right_os";
+  level.var_60a09d68[# "human"][# "fire_j_head_os"] = # "fire/fx_fire_ai_human_head_os";
+  level.var_60a09d68[# "human"][# "fire_j_knee_le_os"] = # "fire/fx_fire_ai_human_leg_left_os";
+  level.var_60a09d68[# "human"][# "fire_j_knee_ri_os"] = # "fire/fx_fire_ai_human_leg_right_os";
+  level.var_60a09d68[# "human"][# "hash_38690ef2c303b981"] = # "smoke/fx_smk_ai_human_arm_left_os";
+  level.var_60a09d68[# "human"][# "hash_1b8ec036e64264e3"] = # "smoke/fx_smk_ai_human_arm_right_os";
+  level.var_60a09d68[# "human"][# "hash_93987513d9fcf74"] = # "smoke/fx_smk_ai_human_arm_left_os";
+  level.var_60a09d68[# "human"][# "hash_4120bed5ccbd9ada"] = # "hash_508a2d8945b9a938";
+  level.var_60a09d68[# "human"][# "hash_2956a5ac1199cb6f"] = # "smoke/fx_smk_ai_human_torso_os";
+  level.var_60a09d68[# "human"][# "hash_5156e6a4093a5ef7"] = # "smoke/fx_smk_ai_human_hip_left_os";
+  level.var_60a09d68[# "human"][# "hash_577af0103b54f9d5"] = # "smoke/fx_smk_ai_human_hip_right_os";
+  level.var_60a09d68[# "human"][# "hash_90fd448cc5848d6"] = # "smoke/fx_smk_ai_human_head_os";
+  level.var_60a09d68[# "human"][# "hash_1c2f6725995eb16b"] = # "smoke/fx_smk_ai_human_leg_left_os";
+  level.var_60a09d68[# "human"][# "hash_101185c328f39789"] = # "smoke/fx_smk_ai_human_leg_right_os";
 }
 
-private _burntag(localclientnum, tag, postfix, prefix) {
+_burntag(localclientnum, tag, postfix, prefix) {
   if(isDefined(self) && self hasdobj(localclientnum)) {
     fx_to_play = undefined;
 
@@ -106,7 +105,7 @@ private _burntag(localclientnum, tag, postfix, prefix) {
   }
 }
 
-private _burnstage(localclientnum, tagarray, shouldwait, prefix) {
+_burnstage(localclientnum, tagarray, shouldwait, prefix) {
   if(!isDefined(self)) {
     return;
   }
@@ -140,7 +139,7 @@ private _burnstage(localclientnum, tagarray, shouldwait, prefix) {
   }
 }
 
-private _burnbody(localclientnum, prefix) {
+_burnbody(localclientnum, prefix) {
   self endon(#"death");
   timer = 10;
   bonemodifier = "";
@@ -199,7 +198,7 @@ private _burnbody(localclientnum, prefix) {
 }
 
 sndstopburnloop(timer) {
-  self waittilltimeout(timer, #"death", #"stopburningsounds");
+  self waittilltimeout(timer, # "death", # "stopburningsounds");
 
   if(isDefined(self)) {
     if(isDefined(self.burn_loop_sound_handle)) {
@@ -208,7 +207,7 @@ sndstopburnloop(timer) {
   }
 }
 
-private _burncorpse(localclientnum) {
+_burncorpse(localclientnum) {
   self endon(#"death");
   timer = 10;
   bonemodifier = "";

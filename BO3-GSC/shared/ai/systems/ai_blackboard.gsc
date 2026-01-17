@@ -17,7 +17,7 @@ function private _initializeblackboard() {
 function private _updateevents() {
   waittime = 0.05;
   updatemillis = waittime * 1000;
-  while (true) {
+  while(true) {
     foreach(eventname, events in level.__ai_blackboard) {
       liveevents = [];
       foreach(event in events) {
@@ -33,16 +33,16 @@ function private _updateevents() {
 }
 
 function addblackboardevent(eventname, data, timetoliveinmillis) {
-  /# /
+  /
   #
   assert(isstring(eventname), "");
-  assert(isdefined(data), "");
+  assert(isDefined(data), "");
   assert(isint(timetoliveinmillis) && timetoliveinmillis > 0, "");
-  event = spawnstruct();
+  event = spawnStruct();
   event.data = data;
   event.timestamp = gettime();
   event.ttl = timetoliveinmillis;
-  if(!isdefined(level.__ai_blackboard[eventname])) {
+  if(!isDefined(level.__ai_blackboard[eventname])) {
     level.__ai_blackboard[eventname] = [];
   } else if(!isarray(level.__ai_blackboard[eventname])) {
     level.__ai_blackboard[eventname] = array(level.__ai_blackboard[eventname]);
@@ -51,14 +51,14 @@ function addblackboardevent(eventname, data, timetoliveinmillis) {
 }
 
 function getblackboardevents(eventname) {
-  if(isdefined(level.__ai_blackboard[eventname])) {
+  if(isDefined(level.__ai_blackboard[eventname])) {
     return level.__ai_blackboard[eventname];
   }
   return [];
 }
 
 function removeblackboardevents(eventname) {
-  if(isdefined(level.__ai_blackboard[eventname])) {
+  if(isDefined(level.__ai_blackboard[eventname])) {
     level.__ai_blackboard[eventname] = undefined;
   }
 }

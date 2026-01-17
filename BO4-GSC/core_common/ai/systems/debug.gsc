@@ -4,7 +4,6 @@
 ***********************************************/
 
 #include scripts\core_common\system_shared;
-
 #namespace as_debug;
 
 autoexec __init__system__() {
@@ -313,4 +312,3 @@ delete_all_ai_corpses() {
     }
   }
 }
-

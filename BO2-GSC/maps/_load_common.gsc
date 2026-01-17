@@ -70,10 +70,10 @@ set_early_level() {
 }
 
 setup_simple_primary_lights() {
-  flickering_lights = getentarray("generic_flickering", "targetname");
-  pulsing_lights = getentarray("generic_pulsing", "targetname");
-  double_strobe = getentarray("generic_double_strobe", "targetname");
-  fire_flickers = getentarray("fire_flicker", "targetname");
+  flickering_lights = getEntArray("generic_flickering", "targetname");
+  pulsing_lights = getEntArray("generic_pulsing", "targetname");
+  double_strobe = getEntArray("generic_double_strobe", "targetname");
+  fire_flickers = getEntArray("fire_flicker", "targetname");
   array_thread(flickering_lights, maps\_lights::generic_flickering);
   array_thread(pulsing_lights, maps\_lights::generic_pulsing);
   array_thread(double_strobe, maps\_lights::generic_double_strobe);
@@ -81,7 +81,7 @@ setup_simple_primary_lights() {
 }
 
 weapon_ammo() {
-  ents = getentarray();
+  ents = getEntArray();
 
   for(i = 0; i < ents.size; i++) {
     if(isDefined(ents[i].classname) && getsubstr(ents[i].classname, 0, 7) == "weapon_") {
@@ -171,8 +171,8 @@ badplace_think(badplace) {
 
 setupexploders() {
   level.exploders = [];
-  ents = getentarray("script_brushmodel", "classname");
-  smodels = getentarray("script_model", "classname");
+  ents = getEntArray("script_brushmodel", "classname");
+  smodels = getEntArray("script_model", "classname");
 
   for(i = 0; i < smodels.size; i++)
     ents[ents.size] = smodels[i];
@@ -211,7 +211,7 @@ setupexploders() {
   }
 
   script_exploders = [];
-  potentialexploders = getentarray("script_brushmodel", "classname");
+  potentialexploders = getEntArray("script_brushmodel", "classname");
 
   for(i = 0; i < potentialexploders.size; i++) {
     if(isDefined(potentialexploders[i].script_prefab_exploder))
@@ -223,7 +223,7 @@ setupexploders() {
 
   println("Server : Potential exploders from brushmodels " + potentialexploders.size);
 
-  potentialexploders = getentarray("script_model", "classname");
+  potentialexploders = getEntArray("script_model", "classname");
 
   for(i = 0; i < potentialexploders.size; i++) {
     if(isDefined(potentialexploders[i].script_prefab_exploder))
@@ -235,7 +235,7 @@ setupexploders() {
 
   println("Server : Potential exploders from script_model " + potentialexploders.size);
 
-  potentialexploders = getentarray("item_health", "classname");
+  potentialexploders = getEntArray("item_health", "classname");
 
   for(i = 0; i < potentialexploders.size; i++) {
     if(isDefined(potentialexploders[i].script_prefab_exploder))
@@ -386,7 +386,7 @@ player_special_death_hint() {
   }
 
   if(level.script == "panama_2" && isDefined(weaponname) && weaponname == "ac130_vulcan_minigun") {
-    setdvar("ui_deadquote", & "PANAMA_AC130_FAILQUOTE");
+    setdvar("ui_deadquote", &"PANAMA_AC130_FAILQUOTE");
     return;
   }
 
@@ -760,7 +760,7 @@ trigger_unlock(trigger) {
   if(isDefined(trigger.script_noteworthy))
     noteworthy = trigger.script_noteworthy;
 
-  target_triggers = getentarray(trigger.target, "targetname");
+  target_triggers = getEntArray(trigger.target, "targetname");
   trigger thread trigger_unlock_death(trigger.target);
 
   for(;;) {
@@ -774,13 +774,13 @@ trigger_unlock(trigger) {
 
 trigger_unlock_death(target) {
   self waittill("death");
-  target_triggers = getentarray(target, "targetname");
+  target_triggers = getEntArray(target, "targetname");
   array_thread(target_triggers, ::trigger_off);
 }
 
 wait_for_an_unlocked_trigger(triggers, noteworthy) {
   level endon("unlocked_trigger_hit" + noteworthy);
-  ent = spawnstruct();
+  ent = spawnStruct();
 
   for(i = 0; i < triggers.size; i++)
     triggers[i] thread report_trigger(ent, noteworthy);
@@ -798,7 +798,7 @@ report_trigger(ent, noteworthy) {
 
 get_trigger_look_target() {
   if(isDefined(self.target)) {
-    a_potential_targets = getentarray(self.target, "targetname");
+    a_potential_targets = getEntArray(self.target, "targetname");
     a_targets = [];
 
     foreach(target in a_potential_targets) {
@@ -958,7 +958,7 @@ wait_for_flag(tokens) {
 }
 
 friendly_respawn_trigger(trigger) {
-  spawners = getentarray(trigger.target, "targetname");
+  spawners = getEntArray(trigger.target, "targetname");
   assert(spawners.size == 1, "friendly_respawn_trigger targets multiple spawner with targetname " + trigger.target + ". Should target just 1 spawner.");
   spawner = spawners[0];
   assert(!isDefined(spawner.script_forcecolor), "targeted spawner at " + spawner.origin + " should not have script_forcecolor set!");
@@ -1032,7 +1032,7 @@ trigger_turns_off(trigger) {
   tokens = strtok(trigger.script_linkto, " ");
 
   for(i = 0; i < tokens.size; i++)
-    array_thread(getentarray(tokens[i], "script_linkname"), ::trigger_off);
+    array_thread(getEntArray(tokens[i], "script_linkname"), ::trigger_off);
 }
 
 script_gen_dump_checksaved() {
@@ -1700,7 +1700,7 @@ all_players_spawned() {
 }
 
 adjust_placed_weapons() {
-  weapons = getentarray("placed_weapon", "targetname");
+  weapons = getEntArray("placed_weapon", "targetname");
   flag_wait("all_players_connected");
   players = get_players();
   player_count = players.size;

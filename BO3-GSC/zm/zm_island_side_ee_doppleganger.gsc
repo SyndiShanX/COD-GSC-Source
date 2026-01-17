@@ -32,13 +32,13 @@
 #namespace zm_island_side_ee_doppleganger;
 
 function autoexec __init__sytem__() {
-  system::register("zm_island_side_ee_doppleganger", & __init__, undefined, undefined);
+  system::register("zm_island_side_ee_doppleganger", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_connect( & on_player_connected);
-  callback::on_spawned( & on_player_spawned);
-  callback::on_disconnect( & on_player_disconnected);
+  callback::on_connect(&on_player_connected);
+  callback::on_spawned(&on_player_spawned);
+  callback::on_disconnect(&on_player_disconnected);
   level.var_5f4ff545 = -1;
 }
 
@@ -56,7 +56,7 @@ function on_player_spawned() {
 }
 
 function on_player_disconnected() {
-  if(isdefined(self.ai_doppleganger)) {
+  if(isDefined(self.ai_doppleganger)) {
     self.ai_doppleganger function_38165cb6();
   }
 }
@@ -64,7 +64,7 @@ function on_player_disconnected() {
 function function_46051422(n_time = 60) {
   level thread function_b1aa7056();
   level waittill("hash_8d6c8d6d");
-  while (true) {
+  while(true) {
     if(level.activeplayers.size > 1) {
       var_f72c48e9 = randomint(10);
       if(var_f72c48e9 == 7) {
@@ -72,7 +72,7 @@ function function_46051422(n_time = 60) {
         var_2bb7b39d = function_8c3f76f3();
         if(zm_utility::is_player_valid(var_2bb7b39d)) {
           var_2bb7b39d thread function_5ee3951f();
-          while (isalive(var_2bb7b39d.ai_doppleganger)) {
+          while(isalive(var_2bb7b39d.ai_doppleganger)) {
             wait(1);
           }
         }
@@ -84,8 +84,8 @@ function function_46051422(n_time = 60) {
 
 function function_b1aa7056() {
   t_lookat_doppleganger_enable = getent("t_lookat_doppleganger_enable", "targetname");
-  if(isdefined(t_lookat_doppleganger_enable)) {
-    while (true) {
+  if(isDefined(t_lookat_doppleganger_enable)) {
+    while(true) {
       t_lookat_doppleganger_enable waittill("trigger", e_who);
       if(zm_utility::is_player_valid(e_who) && e_who util::ads_button_held() && !e_who flag::get("doppleganger_enabled")) {
         e_weapon = e_who getcurrentweapon();
@@ -120,7 +120,7 @@ function function_8c3f76f3() {
   if(var_506c0a63.size) {
     foreach(player in var_506c0a63) {
       n_index = player zm_zonemgr::get_player_zone();
-      if(!isdefined(var_9876cb30[n_index])) {
+      if(!isDefined(var_9876cb30[n_index])) {
         var_9876cb30[n_index] = 0;
       }
       var_9876cb30[n_index]++;
@@ -149,23 +149,23 @@ function function_5ee3951f() {
   var_697ad100 = array(0, 1, 2, 3);
   a_players = arraycopy(level.activeplayers);
   arrayremovevalue(a_players, self);
-  if(isdefined(self.ai_doppleganger)) {
+  if(isDefined(self.ai_doppleganger)) {
     self.ai_doppleganger delete();
   }
-  var_91a9d91c = anglestoforward(self.angles);
+  var_91a9d91c = anglesToForward(self.angles);
   v_new_pos = self.origin - (var_91a9d91c * 220);
   self.var_d73c077d = getclosestpointonnavmesh(v_new_pos, 64);
-  if(!isdefined(self.var_d73c077d)) {
+  if(!isDefined(self.var_d73c077d)) {
     var_6e3e5458 = anglestoright(self.angles);
     v_new_pos = self.origin - (var_6e3e5458 * 220);
     self.var_d73c077d = getclosestpointonnavmesh(v_new_pos, 64);
   }
-  if(!isdefined(self.var_d73c077d)) {
+  if(!isDefined(self.var_d73c077d)) {
     var_379fad75 = anglestoright(self.angles) * -1;
     v_new_pos = self.origin - (var_379fad75 * 220);
     self.var_d73c077d = getclosestpointonnavmesh(v_new_pos, 64);
   }
-  if(isdefined(self.var_d73c077d)) {
+  if(isDefined(self.var_d73c077d)) {
     var_411ea70c = self.var_d73c077d - self.origin;
     var_4e08bd7 = vectortoangles(var_411ea70c);
     self.ai_doppleganger = spawnactor("spawner_zm_island_clone", self.var_d73c077d, var_4e08bd7, "ai_doppleganger", 1);
@@ -175,7 +175,7 @@ function function_5ee3951f() {
         e_clone = array::random(a_players);
         arrayremovevalue(a_players, e_clone);
       }
-      while (!zm_utility::is_player_valid(e_clone) && a_players.size > 0);
+      while(!zm_utility::is_player_valid(e_clone) && a_players.size > 0);
     }
     if(!zm_utility::is_player_valid(e_clone)) {
       e_clone = self;
@@ -208,7 +208,7 @@ function function_c948de86() {
       }
     }
   }
-  while (zm_utility::is_player_valid(self) && isdefined(self.ai_doppleganger) && var_87c6d702 == "");
+  while(zm_utility::is_player_valid(self) && isDefined(self.ai_doppleganger) && var_87c6d702 == "");
   switch (var_87c6d702) {
     case "scare": {
       self thread function_69f74476();
@@ -222,7 +222,7 @@ function function_c948de86() {
 }
 
 function function_69f74476() {
-  if(isalive(self) && isdefined(self.ai_doppleganger)) {
+  if(isalive(self) && isDefined(self.ai_doppleganger)) {
     self util::player_lock_control();
     self disableweapons(1);
     self enableinvulnerability();
@@ -231,7 +231,7 @@ function function_69f74476() {
     ai linkto(var_1f377995);
     self setplayerangles(vectortoangles(ai.origin - self.origin));
     self thread function_89b0bd32();
-    v_dest = self.origin + (vectornormalize(anglestoforward(self.angles)) * 30);
+    v_dest = self.origin + (vectornormalize(anglesToForward(self.angles)) * 30);
     ai util::stop_magic_bullet_shield();
     ai thread scene::play("zm_dlc2_side_ee_doppleganger_scare_180l");
     wait(0.05);
@@ -245,7 +245,7 @@ function function_69f74476() {
     self enableweapons();
     self disableinvulnerability();
     var_1f377995 delete();
-  } else if(isdefined(self.ai_doppleganger)) {
+  } else if(isDefined(self.ai_doppleganger)) {
     self function_38165cb6();
   }
 }
@@ -253,7 +253,7 @@ function function_69f74476() {
 function function_89b0bd32() {
   self endon("hash_916d8c9f");
   self endon("disconnect");
-  while (true) {
+  while(true) {
     self playrumbleonentity("tank_damage_heavy_mp");
     earthquake(0.35, 0.5, self.origin, 325);
     wait(0.15);
@@ -261,14 +261,14 @@ function function_89b0bd32() {
 }
 
 function function_38165cb6() {
-  if(isdefined(self.ai_doppleganger)) {
+  if(isDefined(self.ai_doppleganger)) {
     util::stop_magic_bullet_shield(self.ai_doppleganger);
     self.ai_doppleganger delete();
   }
 }
 
 function function_bece461b() {
-  zm_devgui::add_custom_devgui_callback( & function_8924dbff);
+  zm_devgui::add_custom_devgui_callback(&function_8924dbff);
   adddebugcommand("");
   adddebugcommand("");
   adddebugcommand("");

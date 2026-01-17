@@ -4,13 +4,13 @@
 *****************************************************/
 
 init() {
-  level.spectateOverride["allies"] = spawnstruct();
-  level.spectateOverride["axis"] = spawnstruct();
+  level.spectateOverride["allies"] = spawnStruct();
+  level.spectateOverride["axis"] = spawnStruct();
   level thread onPlayerConnect();
 }
 
 onPlayerConnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connecting", player);
     player thread onJoinedTeam();
     player thread onJoinedSpectators();
@@ -20,7 +20,7 @@ onPlayerConnect() {
 
 onPlayerSpawned() {
   self endon("disconnect");
-  for (;;) {
+  for(;;) {
     self waittill("spawned_player");
     self setSpectatePermissions();
   }
@@ -28,7 +28,7 @@ onPlayerSpawned() {
 
 onJoinedTeam() {
   self endon("disconnect");
-  for (;;) {
+  for(;;) {
     self waittill("joined_team");
     self setSpectatePermissions();
   }
@@ -36,7 +36,7 @@ onJoinedTeam() {
 
 onJoinedSpectators() {
   self endon("disconnect");
-  for (;;) {
+  for(;;) {
     self waittill("joined_spectators");
     self setSpectatePermissions();
   }
@@ -44,7 +44,7 @@ onJoinedSpectators() {
 
 updateSpectateSettings() {
   level endon("game_ended");
-  for (index = 0; index < level.players.size; index++)
+  for(index = 0; index < level.players.size; index++)
     level.players[index] setSpectatePermissions();
 }
 

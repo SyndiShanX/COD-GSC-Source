@@ -34,11 +34,10 @@ stage_logic() {
   stage_completed("sq", level._cur_stage_name);
 }
 
-exit_stage_1(success) {
-}
+exit_stage_1(success) {}
 
 sq_atd_dragon_icon_setup() {
-  a_dragon_icons = getentarray("elevator_dragon_icon", "targetname");
+  a_dragon_icons = getEntArray("elevator_dragon_icon", "targetname");
 
   foreach(m_icon in a_dragon_icons) {
     m_icon notsolid();
@@ -56,8 +55,8 @@ sq_atd_dragon_icon_setup() {
     }
   }
 
-  a_atd2_icons = getentarray("atd2_marker_unlit", "script_noteworthy");
-  a_atd2_lit_icons = getentarray("atd2_marker_lit", "targetname");
+  a_atd2_icons = getEntArray("atd2_marker_unlit", "script_noteworthy");
+  a_atd2_lit_icons = getEntArray("atd2_marker_lit", "targetname");
 
   for(i = 0; i < a_atd2_icons.size; i++) {
     a_atd2_lit_icons[i].origin = a_atd2_icons[i].origin - vectorscale((0, 0, 1), 5.0);
@@ -82,7 +81,7 @@ sq_atd_elevators() {
 
   iprintlnbold("Standing on Elevators Complete");
 
-  a_dragon_icons = getentarray("elevator_dragon_icon", "targetname");
+  a_dragon_icons = getEntArray("elevator_dragon_icon", "targetname");
 
   foreach(m_icon in a_dragon_icons) {
     v_off_pos = m_icon.m_lit_icon.origin;
@@ -92,7 +91,7 @@ sq_atd_elevators() {
     m_icon.origin = v_off_pos;
     m_icon.m_lit_icon linkto(m_icon.m_elevator);
     m_icon linkto(m_icon.m_elevator);
-    m_icon playsound("zmb_sq_symbol_light");
+    m_icon playSound("zmb_sq_symbol_light");
   }
 
   flag_set("sq_atd_elevator_activated");
@@ -122,7 +121,7 @@ sq_atd_watch_elevator(str_flag) {
 
 sq_atd_drg_puzzle() {
   level.sq_atd_cur_drg = 0;
-  a_puzzle_trigs = getentarray("trig_atd_drg_puzzle", "targetname");
+  a_puzzle_trigs = getEntArray("trig_atd_drg_puzzle", "targetname");
   a_puzzle_trigs = array_randomize(a_puzzle_trigs);
 
   for(i = 0; i < a_puzzle_trigs.size; i++)
@@ -157,7 +156,7 @@ drg_puzzle_trig_think(n_order_id) {
     if(level.sq_atd_cur_drg == n_order_id) {
       m_lit.origin = v_top;
       m_unlit.origin = v_hidden;
-      m_lit playsound("zmb_sq_symbol_light");
+      m_lit playSound("zmb_sq_symbol_light");
       self.drg_active = 1;
       level thread vo_richtofen_atd_order(level.sq_atd_cur_drg);
       level.sq_atd_cur_drg++;
@@ -187,7 +186,7 @@ drg_puzzle_trig_watch_fade(m_lit, m_unlit, v_top, v_hidden) {
   level waittill("drg_puzzle_reset");
   m_unlit.origin = v_top;
   m_lit.origin = v_hidden;
-  m_unlit playsound("zmb_sq_symbol_fade");
+  m_unlit playSound("zmb_sq_symbol_fade");
   self.drg_active = 0;
 }
 

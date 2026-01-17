@@ -4,11 +4,9 @@
 ***********************************************************/
 
 #include scripts\core_common\lui_shared;
-
 #namespace zm_towers_pap_hud;
 
 class czm_towers_pap_hud: cluielem {
-
   function set_odin_acquired(localclientnum, value) {
     set_data(localclientnum, "odin_acquired", value);
   }
@@ -26,7 +24,7 @@ class czm_towers_pap_hud: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, #"zm_towers_pap_hud");
+    cluielem::open(localclientnum, # "zm_towers_pap_hud");
   }
 
   function function_fa582112(localclientnum) {

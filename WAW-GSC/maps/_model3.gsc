@@ -42,11 +42,11 @@ arty_crew_init(vehicle) {
   if(!isDefined(self) || !isDefined(self.target)) {
     return;
   }
-  arty_targets = getentarray(self.target, "targetname");
+  arty_targets = getEntArray(self.target, "targetname");
   arty_spawners = [];
   vehicle.arty_crew = [];
   arty_dismount_trig = undefined;
-  for (i = 0; i < arty_targets.size; i++) {
+  for(i = 0; i < arty_targets.size; i++) {
     arty_target = arty_targets[i];
     if(issubstr(arty_target.classname, "actor")) {
       arty_spawners[arty_spawners.size] = arty_target;
@@ -54,7 +54,7 @@ arty_crew_init(vehicle) {
       arty_dismount_trig = arty_target;
     }
   }
-  for (i = 0; i < arty_spawners.size; i++) {
+  for(i = 0; i < arty_spawners.size; i++) {
     vehicle.arty_crew[self.arty_crew.size] = arty_spawners[i] spawn_crewmember();
     vehicle.arty_crew[i].position = i;
     vehicle.arty_crew[i] animscripts\shared::placeWeaponOn(vehicle.arty_crew[i].primaryweapon, "none");
@@ -78,7 +78,7 @@ arty_gun_init(vehicle) {
 
 dismount_vehicle() {
   self waittill("dismount crew");
-  for (i = 0; i < self.arty_crew.size; i++) {
+  for(i = 0; i < self.arty_crew.size; i++) {
     if(isalive(self.arty_crew[i])) {
       self.arty_crew[i] unlink();
       self.arty_crew[i] animscripts\shared::placeWeaponOn(self.arty_crew[i].primaryweapon, "right");
@@ -101,7 +101,7 @@ crew_watcher(vehicle) {
 artycrew_animation_think(vehicle, tag, crew_num) {
   vehicle endon("crew dismounted");
   self endon("death");
-  for (;;) {
+  for(;;) {
     self notify("playing_crew_prefire");
     self arty_crew_play_anim(vehicle, "arty_prefire", tag);
     self arty_crew_play_anim(vehicle, "arty_fire", tag);
@@ -110,7 +110,7 @@ artycrew_animation_think(vehicle, tag, crew_num) {
 
 artygun_animation_think(vehicle, animation) {
   vehicle endon("crew dismounted");
-  for (;;) {
+  for(;;) {
     if(isDefined(vehicle.arty_crew[2])) {
       vehicle.arty_crew[2] waittill("playing_crew_prefire");
       vehicle SetFlaggedAnimKnobRestart("gunanim", animation);

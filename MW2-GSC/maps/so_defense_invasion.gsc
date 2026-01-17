@@ -110,7 +110,7 @@ so_defense_init() {
   level.hunter_dialog_throttle = 20000;
 
   // Remove unwanted sentries
-  sentries = getentarray("misc_turret", "classname");
+  sentries = getEntArray("misc_turret", "classname");
   foreach(sentry in sentries)
   sentry Delete();
   common_scripts\_sentry::main();
@@ -187,15 +187,15 @@ so_defense_init() {
 }
 
 so_defense_setup_regular() {
-  level.challenge_objective = & "SO_DEFENSE_INVASION_OBJ_REGULAR";
+  level.challenge_objective = &"SO_DEFENSE_INVASION_OBJ_REGULAR";
 }
 
 so_defense_setup_hardened() {
-  level.challenge_objective = & "SO_DEFENSE_INVASION_OBJ_HARDENED";
+  level.challenge_objective = &"SO_DEFENSE_INVASION_OBJ_HARDENED";
 }
 
 so_defense_setup_veteran() {
-  level.challenge_objective = & "SO_DEFENSE_INVASION_OBJ_VETERAN";
+  level.challenge_objective = &"SO_DEFENSE_INVASION_OBJ_VETERAN";
 }
 
 so_defense_setup_radio_dialog() {
@@ -221,9 +221,9 @@ so_defense_challenge_prep() {
 }
 
 so_defense_wave_1(force_wave) {
-  if(!so_defense_can_do_wave(1, force_wave))
+  if(!so_defense_can_do_wave(1, force_wave)) {
     return;
-
+  }
   so_defense_announce_wave_start("SO_DEFENSE_INVASION_WAVE_1", 10, true);
   thread hud_display_wavecount(1);
 
@@ -237,9 +237,9 @@ so_defense_wave_1(force_wave) {
 }
 
 so_defense_wave_2(force_wave) {
-  if(!so_defense_can_do_wave(1, force_wave))
+  if(!so_defense_can_do_wave(1, force_wave)) {
     return;
-
+  }
   so_defense_announce_wave_start("SO_DEFENSE_INVASION_WAVE_2", 10);
   thread hud_display_wavecount(2);
 
@@ -254,9 +254,9 @@ so_defense_wave_2(force_wave) {
 }
 
 so_defense_wave_3(force_wave) {
-  if(!so_defense_can_do_wave(1, force_wave))
+  if(!so_defense_can_do_wave(1, force_wave)) {
     return;
-
+  }
   so_defense_announce_wave_start("SO_DEFENSE_INVASION_WAVE_3", 10);
   thread hud_display_wavecount(3);
 
@@ -273,9 +273,9 @@ so_defense_wave_3(force_wave) {
 }
 
 so_defense_wave_4(force_wave) {
-  if(!so_defense_can_do_wave(2, force_wave))
+  if(!so_defense_can_do_wave(2, force_wave)) {
     return;
-
+  }
   so_defense_announce_wave_start("SO_DEFENSE_INVASION_WAVE_4", 10);
   thread hud_display_wavecount(4);
 
@@ -292,9 +292,9 @@ so_defense_wave_4(force_wave) {
 }
 
 so_defense_wave_5(force_wave) {
-  if(!so_defense_can_do_wave(3, force_wave))
+  if(!so_defense_can_do_wave(3, force_wave)) {
     return;
-
+  }
   so_defense_announce_wave_start("SO_DEFENSE_INVASION_WAVE_5", 10);
   thread hud_display_wavecount(5);
 
@@ -327,7 +327,7 @@ so_defense_announce_wave_start(wave, timer, set_start_time) {
   level.so_progress_goal_status = "none";
 
   // Reset the hunter dialog throttle so that it will happen on the first wave again.
-  if(isdefined(level.hunter_dialog_throttle))
+  if(isDefined(level.hunter_dialog_throttle))
     level.hunter_dialog_time = gettime() - level.hunter_dialog_throttle - 1;
 
   // Reset the stinger missile dialog throttle so that it will wait a while before activating.
@@ -348,7 +348,7 @@ so_defense_announce_wave_complete() {
   hud_display_wavecount_remove();
 
   pause_hellfire_attack();
-  level.player PlaySound("arcademode_kill_streak_won");
+  level.player playSound("arcademode_kill_streak_won");
   music_stop(2);
 
   // Give all other notifies a chance to catch up.
@@ -363,7 +363,7 @@ so_defense_challenge_complete() {
 }
 
 so_defense_can_do_wave(skill, force_wave) {
-  if(isdefined(force_wave) && force_wave)
+  if(isDefined(force_wave) && force_wave)
     return true;
 
   return level.gameSkill >= skill;

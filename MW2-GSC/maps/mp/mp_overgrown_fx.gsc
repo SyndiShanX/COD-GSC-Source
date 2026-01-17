@@ -28,5 +28,4 @@ main() {
   /#		
   if(getdvar("clientSideEffects") != "1")
     maps\createfx\mp_overgrown_fx::main();
-  # /
 }

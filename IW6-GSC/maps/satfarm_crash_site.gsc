@@ -34,9 +34,9 @@ crash_site_begin() {
   thread maps\satfarm_base_array::base_array_ambient_dogfight_1();
   thread maps\satfarm_base_array::base_array_ambient_dogfight_2();
   thread maps\satfarm_base_array::base_array_ambient_dogfight_3();
-  objective_add(maps\_utility::obj("rendesvouz"), "current", & "SATFARM_OBJ_RENDESVOUZ", level.herotanks[1].origin);
+  objective_add(maps\_utility::obj("rendesvouz"), "current", &"SATFARM_OBJ_RENDESVOUZ", level.herotanks[1].origin);
   objective_onentity(maps\_utility::obj("rendesvouz"), level.herotanks[1], (0, 0, 60));
-  objective_setpointertextoverride(maps\_utility::obj("rendesvouz"), & "SATFARM_FOLLOW");
+  objective_setpointertextoverride(maps\_utility::obj("rendesvouz"), &"SATFARM_FOLLOW");
   thread maps\satfarm_m880::setup_ambient_missile_launches("ambient_missile_launch_spot", "base_array_end");
   thread maps\satfarm_code::follow_icon_manager();
   maps\_vehicle::spawn_vehicles_from_targetname_and_drive("crash_site_background_c17");

@@ -45,7 +45,7 @@ onForfeit(team) {
   forfeit_delay = 20.0;
   matchForfeitTimer(forfeit_delay);
 
-  endReason = & "";
+  endReason = &"";
   if(!isDefined(team)) {
     level.finalKillCam_winner = "none";
     endReason = game["end_reason"]["players_forfeited"];
@@ -366,9 +366,7 @@ updateGameEvents() {
       return_val = undefined;
       if(one_ally_left && !isDefined(level.oneLeftTime["allies"])) {
         level.oneLeftTime["allies"] = getTime();
-        ally_return_val = [
-          [level.onOneLeftEvent]
-        ]("allies");
+        ally_return_val = [[level.onOneLeftEvent]]("allies");
         if(isDefined(ally_return_val)) {
           if(!isDefined(return_val))
             return_val = ally_return_val;
@@ -378,9 +376,7 @@ updateGameEvents() {
 
       if(one_axis_left && !isDefined(level.oneLeftTime["axis"])) {
         level.oneLeftTime["axis"] = getTime();
-        axis_return_val = [
-          [level.onOneLeftEvent]
-        ]("axis");
+        axis_return_val = [[level.onOneLeftEvent]]("axis");
         if(isDefined(axis_return_val)) {
           if(!isDefined(return_val))
             return_val = axis_return_val;
@@ -1247,19 +1243,19 @@ Callback_StartGameType() {
     game["allies"] = "ghosts";
     game["axis"] = "federation";
 
-    game["strings"]["press_to_spawn"] = & "PLATFORM_PRESS_TO_SPAWN";
-    game["strings"]["spawn_next_round"] = & "MP_SPAWN_NEXT_ROUND";
-    game["strings"]["spawn_flag_wait"] = & "MP_SPAWN_FLAG_WAIT";
-    game["strings"]["spawn_tag_wait"] = & "MP_SPAWN_TAG_WAIT";
-    game["strings"]["waiting_to_spawn"] = & "MP_WAITING_TO_SPAWN";
-    game["strings"]["waiting_to_safespawn"] = & "MP_WAITING_TO_SAFESPAWN";
-    game["strings"]["match_starting"] = & "MP_MATCH_STARTING";
-    game["strings"]["change_class"] = & "MP_CHANGE_CLASS_NEXT_SPAWN";
-    game["strings"]["last_stand"] = & "MPUI_LAST_STAND";
-    game["strings"]["final_stand"] = & "MPUI_FINAL_STAND";
-    game["strings"]["c4_death"] = & "MPUI_C4_DEATH";
+    game["strings"]["press_to_spawn"] = &"PLATFORM_PRESS_TO_SPAWN";
+    game["strings"]["spawn_next_round"] = &"MP_SPAWN_NEXT_ROUND";
+    game["strings"]["spawn_flag_wait"] = &"MP_SPAWN_FLAG_WAIT";
+    game["strings"]["spawn_tag_wait"] = &"MP_SPAWN_TAG_WAIT";
+    game["strings"]["waiting_to_spawn"] = &"MP_WAITING_TO_SPAWN";
+    game["strings"]["waiting_to_safespawn"] = &"MP_WAITING_TO_SAFESPAWN";
+    game["strings"]["match_starting"] = &"MP_MATCH_STARTING";
+    game["strings"]["change_class"] = &"MP_CHANGE_CLASS_NEXT_SPAWN";
+    game["strings"]["last_stand"] = &"MPUI_LAST_STAND";
+    game["strings"]["final_stand"] = &"MPUI_FINAL_STAND";
+    game["strings"]["c4_death"] = &"MPUI_C4_DEATH";
 
-    game["strings"]["cowards_way"] = & "PLATFORM_COWARDS_WAY_OUT";
+    game["strings"]["cowards_way"] = &"PLATFORM_COWARDS_WAY_OUT";
 
     game["colors"]["black"] = (0.0, 0.0, 0.0);
     game["colors"]["white"] = (1.0, 1.0, 1.0);
@@ -1285,9 +1281,7 @@ Callback_StartGameType() {
     if(game["colors"]["axis"] == game["colors"]["black"])
       game["colors"]["axis"] = game["colors"]["grey"];
 
-    [
-      [level.onPrecacheGameType]
-    ]();
+    [[level.onPrecacheGameType]]();
 
     SetDvarIfUninitialized("min_wait_for_players", 5);
 

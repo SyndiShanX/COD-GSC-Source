@@ -17,7 +17,6 @@
 #include scripts\mp_common\util;
 #include scripts\weapons\sensor_dart;
 #include scripts\weapons\trophy_system;
-
 #namespace wz_dynents;
 
 autoexec __init__system__() {
@@ -184,7 +183,7 @@ is_equipment(entity) {
   if(isDefined(entity.weapon)) {
     weapon = entity.weapon;
 
-    if(weapon.name === #"ability_smart_cover" || weapon.name === #"eq_tripwire" || weapon.name === #"trophy_system" || weapon.name === #"eq_concertina_wire" || weapon.name === #"eq_sensor" || weapon.name === #"cymbal_monkey" || weapon.name === #"homunculus") {
+    if(weapon.name === # "ability_smart_cover" || weapon.name === # "eq_tripwire" || weapon.name === # "trophy_system" || weapon.name === # "eq_concertina_wire" || weapon.name === # "eq_sensor" || weapon.name === # "cymbal_monkey" || weapon.name === # "homunculus") {
       return true;
     }
   }
@@ -205,27 +204,27 @@ function_777e012d(t_damage) {
   foreach(device in equipment) {
     if(isDefined(device) && device istouching(t_damage)) {
       if(is_equipment(device)) {
-        if(device.weapon.name === #"eq_tripwire") {
+        if(device.weapon.name === # "eq_tripwire") {
           device gadget_tripwire::function_9e546fb3();
           continue;
         }
 
-        if(device.weapon.name === #"trophy_system") {
+        if(device.weapon.name === # "trophy_system") {
           device trophy_system::trophysystemdetonate();
           continue;
         }
 
-        if(device.weapon.name === #"cymbal_monkey") {
+        if(device.weapon.name === # "cymbal_monkey") {
           device gadget_cymbal_monkey::function_4f90c4c2();
           continue;
         }
 
-        if(device.weapon.name === #"homunculus") {
+        if(device.weapon.name === # "homunculus") {
           device gadget_homunculus::function_7bfc867f();
           continue;
         }
 
-        if(device.weapon.name === #"eq_sensor") {
+        if(device.weapon.name === # "eq_sensor") {
           device sensor_dart::function_4db10465();
           continue;
         }
@@ -299,7 +298,7 @@ function_26ab1b5e(t_damage) {
       var_8fa58819 = var_38ae32ff[2];
       var_8fa58819 *= var_8fa58819;
 
-      if(var_8fa58819 < 32 || e_vehicle.scriptvehicletype === #"helicopter_light") {
+      if(var_8fa58819 < 32 || e_vehicle.scriptvehicletype === # "helicopter_light") {
         a_players = e_vehicle getvehoccupants();
         e_vehicle.takedamage = 1;
         e_vehicle.allowdeath = 1;
@@ -447,7 +446,7 @@ function_d7b6ee00(activator, laststate, state) {
 
     line(start, end, (1, 1, 1), 1, 1, 300);
 
-      results = bullettracepassed(start, end, 0, activator);
+    results = bullettracepassed(start, end, 0, activator);
 
     if(!results) {
       if(state == 1) {
@@ -503,7 +502,7 @@ function_51a020(activator, laststate, state) {
   return true;
 }
 
-private function_724a2fa5(eventstruct) {
+function_724a2fa5(eventstruct) {
   dynent = eventstruct.ent;
 
   if(isDefined(eventstruct)) {
@@ -522,7 +521,7 @@ private function_724a2fa5(eventstruct) {
   dynent.var_a548ec11 = gettime() + var_a852a7dd * 1000;
 }
 
-private function_5d409a7b(eventstruct) {
+function_5d409a7b(eventstruct) {
   dynent = eventstruct.ent;
   state = function_ffdbe8c2(dynent);
 

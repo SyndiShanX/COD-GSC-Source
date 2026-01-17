@@ -233,9 +233,7 @@ play_death_anim_and_ragdoll(eInflictor, iDamage, sMeansOfDeath, sWeapon, vDir, s
 
 should_do_immediate_ragdoll(deathAnimState) {
   if(isDefined(level.dlc_alien_should_immediate_ragdoll_on_death_override_func)) {
-    should_immediate_ragdoll = [
-      [level.dlc_alien_should_immediate_ragdoll_on_death_override_func]
-    ](deathAnimState);
+    should_immediate_ragdoll = [[level.dlc_alien_should_immediate_ragdoll_on_death_override_func]](deathAnimState);
     if(isDefined(should_immediate_ragdoll))
       return should_immediate_ragdoll;
   }

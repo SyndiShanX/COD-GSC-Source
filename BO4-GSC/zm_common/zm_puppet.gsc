@@ -5,7 +5,6 @@
 
 #include scripts\zm_common\zm_spawner;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_puppet;
 
 wait_for_puppet_pickup() {
@@ -44,4 +43,3 @@ wait_for_puppet_pickup() {
     waitframe(1);
   }
 }
-

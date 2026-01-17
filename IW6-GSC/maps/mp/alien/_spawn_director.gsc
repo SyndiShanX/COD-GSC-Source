@@ -2196,9 +2196,7 @@ can_spawn_at_any_node(type_name) {
 
 passes_spawn_node_filter(spawn_node, spawn_type, filter_func, filter_optional_param) {
   if(isDefined(filter_optional_param))
-    return [
-      [filter_func]
-    ](spawn_node, spawn_type, filter_optional_param);
+    return [[filter_func]](spawn_node, spawn_type, filter_optional_param);
 
   return [[filter_func]](spawn_node, spawn_type);
 }

@@ -22,9 +22,9 @@
 =============
 */
 enable_casual_killer() {
-  if(isdefined(self.casual_killer))
+  if(isDefined(self.casual_killer)) {
     return;
-
+  }
   self disable_turnAnims();
   self disable_surprise();
 
@@ -66,9 +66,9 @@ enable_casual_killer() {
 =============
 */
 disable_casual_killer() {
-  if(!isdefined(self.casual_killer))
+  if(!isDefined(self.casual_killer)) {
     return;
-
+  }
   self enable_turnAnims();
 
   self.casual_killer = undefined;
@@ -194,14 +194,14 @@ init_casual_killer_animsets() {
   casual_killerTransTypes[0] = "casual_killer";
   casual_killerTransTypes[1] = "casual_killer_sprint";
 
-  for (j = 0; j < casual_killerTransTypes.size; j++) {
+  for(j = 0; j < casual_killerTransTypes.size; j++) {
     trans = casual_killerTransTypes[j];
 
-    for (i = 1; i <= 9; i++) {
-      if(i == 5)
+    for(i = 1; i <= 9; i++) {
+      if(i == 5) {
         continue;
-
-      if(isdefined(anim.coverTrans[trans][i])) {
+      }
+      if(isDefined(anim.coverTrans[trans][i])) {
         anim.coverTransDist[trans][i] = getMoveDelta(anim.coverTrans[trans][i], 0, 1);
       }
     }
@@ -241,9 +241,9 @@ casual_killer_approach_type() {
 }
 
 casual_killer_startMoveTransition() {
-  if(isdefined(self.disableExits))
+  if(isDefined(self.disableExits)) {
     return;
-
+  }
   self orientmode("face angle", self.angles[1]);
   self animmode("zonly_physics", false);
 
@@ -265,7 +265,7 @@ casual_killer_startMoveTransition() {
 }
 
 casual_killer_is_jogging() {
-  if(!isdefined(self.run_overrideanim))
+  if(!isDefined(self.run_overrideanim))
     return false;
 
   if(isarray(self.run_overrideanim)) {
@@ -286,7 +286,7 @@ set_casual_killer_run_n_gun(type) {
   self.runNGunTransitionPoint = 1;
   self.runNGunIncrement = 0.2;
 
-  if(!isdefined(type))
+  if(!isDefined(type))
     type = "straight";
 
   self clearanim( % run_n_gun, 0.2);

@@ -291,7 +291,7 @@ player_intermission_ee() {
   points = getstructarray("ee_cam", "targetname");
 
   if(!isDefined(points) || points.size == 0) {
-    points = getentarray("info_intermission", "classname");
+    points = getEntArray("info_intermission", "classname");
 
     if(points.size < 1) {
       println("NO info_intermission POINTS IN MAP");
@@ -320,7 +320,7 @@ player_intermission_ee() {
       if(isDefined(points[i].target)) {
         if(!isDefined(org)) {
           org = spawn("script_model", self.origin + vectorscale((0, 0, -1), 60.0));
-          org setmodel("tag_origin");
+          org setModel("tag_origin");
         }
 
         org.origin = points[i].origin;

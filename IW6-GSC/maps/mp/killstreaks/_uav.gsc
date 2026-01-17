@@ -305,7 +305,7 @@ damageTracker() {
       continue;
     }
 
-    if(isDefined(iDFlags) && (iDFlags & level.iDFLAGS_PENETRATION))
+    if(isDefined(iDFlags) && (iDFlags &level.iDFLAGS_PENETRATION))
       self.wasDamagedFromBulletPenetration = true;
 
     self.wasDamaged = true;

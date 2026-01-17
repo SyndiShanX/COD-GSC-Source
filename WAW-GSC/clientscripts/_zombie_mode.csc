@@ -12,11 +12,11 @@ createZombieEyes(localClientNum) {
       linkTag = "J_Eyeball_LE";
       fxModel = "tag_origin";
       fxTag = "tag_origin";
-      fx_eye_glow = Spawn(localClientNum, self GetTagOrigin(linkTag), "script_model");
+      fx_eye_glow = spawn(localClientNum, self GetTagOrigin(linkTag), "script_model");
       fx_eye_glow.angles = self GetTagAngles(linkTag);
-      fx_eye_glow SetModel(fxModel);
+      fx_eye_glow setModel(fxModel);
       fx_eye_glow LinkTo(self, linkTag);
-      PlayFxOnTag(localClientNum, level._effect["eye_glow"], fx_eye_glow, fxTag);
+      playFXOnTag(localClientNum, level._effect["eye_glow"], fx_eye_glow, fxTag);
       self._eyeArray[localClientNum] = fx_eye_glow;
     }
   }
@@ -34,7 +34,7 @@ deleteZombieEyes(localClientNum) {
 zombieEyeMonitor() {
   self waittill("entityshutdown");
   if(isDefined(self._eyeArray)) {
-    for (i = 0; i < self._eyeArray.size; i++) {
+    for(i = 0; i < self._eyeArray.size; i++) {
       self deleteZombieEyes(i);
     }
   }
@@ -74,8 +74,8 @@ perk_start_up() {
   timer = 0;
   duration = 0.1;
   machines = GetStructArray("perksacola", "targetname");
-  while (true) {
-    for (i = 0; i < machines.size; i++) {
+  while(true) {
+    for(i = 0; i < machines.size; i++) {
       switch (machines[i].script_sound) {
         case "mx_jugger_jingle":
           machines[i] thread vending_machine_flicker_light("jugger_light", duration);
@@ -105,15 +105,15 @@ perk_start_up() {
 
 vending_machine_flicker_light(fx_light, duration) {
   players = getlocalplayers();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     self thread play_perk_fx_on_client(i, fx_light, duration);
   }
 }
 
 play_perk_fx_on_client(client_num, fx_light, duration) {
   fxObj = spawn(client_num, self.origin + (0, 0, -50), "script_model");
-  fxobj setmodel("tag_origin");
-  playfxontag(client_num, level._effect[fx_light], fxObj, "tag_origin");
+  fxobj setModel("tag_origin");
+  playFXOnTag(client_num, level._effect[fx_light], fxObj, "tag_origin");
   realwait(duration);
   fxobj delete();
 }

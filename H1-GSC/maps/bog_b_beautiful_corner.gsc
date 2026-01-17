@@ -92,9 +92,9 @@ beautiful_corner_settings() {
 }
 
 remove_all_weapons() {
-  var_0 = getentarray("weapon_dragunov", "classname");
-  var_0 = common_scripts\utility::array_combine(var_0, getentarray("weapon_rpg_player", "classname"));
-  var_0 = common_scripts\utility::array_combine(var_0, getentarray("weapon_saw", "classname"));
+  var_0 = getEntArray("weapon_dragunov", "classname");
+  var_0 = common_scripts\utility::array_combine(var_0, getEntArray("weapon_rpg_player", "classname"));
+  var_0 = common_scripts\utility::array_combine(var_0, getEntArray("weapon_saw", "classname"));
 
   foreach(var_2 in var_0)
   var_2 delete();

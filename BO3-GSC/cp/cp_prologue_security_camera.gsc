@@ -38,7 +38,7 @@
 function security_camera_start(str_objective) {
   security_camera_precache();
   level notify("hash_84f95272");
-  array::run_all(level.players, & util::set_low_ready, 1);
+  array::run_all(level.players, &util::set_low_ready, 1);
   level util::clientnotify("sndStopFiretruck");
   level thread security_camera_main();
 }
@@ -60,7 +60,7 @@ function security_camera_main() {
   level.ai_hendricks thread hendricks_security_camera();
   level thread setup_security_cameras();
   level waittill("hash_81d6c615");
-  while (true) {
+  while(true) {
     var_d62d9e75 = function_e1a52cb4();
     if(!var_d62d9e75) {
       break;
@@ -92,7 +92,7 @@ function function_6475a61e() {
 function function_e1a52cb4() {
   var_d62d9e75 = 0;
   foreach(e_player in level.activeplayers) {
-    if(isdefined(e_player.var_1f4942ae) && e_player.var_1f4942ae) {
+    if(isDefined(e_player.var_1f4942ae) && e_player.var_1f4942ae) {
       var_d62d9e75++;
     }
   }
@@ -119,7 +119,7 @@ function setup_security_cameras() {
 }
 
 function function_9f9f8c2a() {
-  if(!isdefined(level.var_690ce961)) {
+  if(!isDefined(level.var_690ce961)) {
     level.var_690ce961 = level.security_cams["torture_minister"].n_index;
   } else {
     var_1d7e2b7c = function_6840a15e(level.var_690ce961);
@@ -151,7 +151,7 @@ function turn_off_security_cameras() {
     e_player clientfield::set_to_player("turn_on_multicam", 0);
   }
   foreach(s_camera in level.security_cams) {
-    if(isdefined(s_camera.str_scene) && level scene::is_playing(s_camera.str_scene)) {
+    if(isDefined(s_camera.str_scene) && level scene::is_playing(s_camera.str_scene)) {
       level scene::stop(s_camera.str_scene);
     }
   }
@@ -167,7 +167,7 @@ function activate_player_video_screens(var_3675dd99, str_player_use_struct, extr
   level.var_ab82ba6d = 0;
   level flag::wait_till("everyone_in_camera_room");
   t_interact triggerenable(1);
-  e_object = util::init_interactive_gameobject(t_interact, & "cp_prompt_dni_prologue_security_camera", & "CP_MI_ETH_PROLOGUE_USE_SECURITY_CAMERA", & function_b85fc83f);
+  e_object = util::init_interactive_gameobject(t_interact, &"cp_prompt_dni_prologue_security_camera", &"CP_MI_ETH_PROLOGUE_USE_SECURITY_CAMERA", &function_b85fc83f);
   e_object.s_player_use = s_player_use;
   e_object.extra_cam_index = extra_cam_index;
   e_object thread check_for_video_cam_disable();
@@ -196,7 +196,7 @@ function player_uses_the_security_camera_station(s_player_use, extra_cam_index) 
   self endon("disconnect");
   self.var_1f4942ae = 1;
   snd_key = spawn("script_origin", s_player_use.origin);
-  snd_key playsound("evt_typing");
+  snd_key playSound("evt_typing");
   str_anim_comfirm = "p_security_cam_interface_point";
   str_anim_outro = "p_security_cam_interface_exit";
   str_anim_idle = "p_security_cam_interface_idle";
@@ -210,7 +210,7 @@ function player_uses_the_security_camera_station(s_player_use, extra_cam_index) 
   }
   s_align_struct thread scene::play(str_anim_idle, self);
   wait(2);
-  while (!level.minister_located) {
+  while(!level.minister_located) {
     self util::screen_message_create_client(&"CP_MI_ETH_PROLOGUE_CAMERA_CHANGE", undefined, undefined, 170);
     if(self actionbuttonpressed()) {
       self util::screen_message_delete_client();
@@ -249,7 +249,7 @@ function function_d77b3165(extra_cam_index) {
 }
 
 function function_d8d1298e(str_name, str_scene, var_b5991f0e = 0) {
-  var_1ca98eed = spawnstruct();
+  var_1ca98eed = spawnStruct();
   var_1ca98eed.str_name = str_name;
   var_1ca98eed.n_index = level.security_cams.size;
   var_1ca98eed.b_vo_played = 0;
@@ -257,8 +257,8 @@ function function_d8d1298e(str_name, str_scene, var_b5991f0e = 0) {
   var_1ca98eed.str_scene = str_scene;
   var_1ca98eed.var_2cc1a0a1 = 1;
   var_1ca98eed.var_a1a1b35e = scene::get_actor_count(str_scene);
-  level scene::add_scene_func(str_scene, & function_c41806ee, "init", var_1ca98eed.n_index);
-  level scene::add_scene_func(str_scene, & function_48f438fd, "init");
+  level scene::add_scene_func(str_scene, &function_c41806ee, "init", var_1ca98eed.n_index);
+  level scene::add_scene_func(str_scene, &function_48f438fd, "init");
   level scene::init(str_scene);
   if(var_b5991f0e) {
     var_1ca98eed.var_2cc1a0a1 = 0;
@@ -268,16 +268,16 @@ function function_d8d1298e(str_name, str_scene, var_b5991f0e = 0) {
 }
 
 function function_c41806ee(a_ents, n_index) {
-  if(!isdefined(a_ents["prisoner"])) {
+  if(!isDefined(a_ents["prisoner"])) {
     return;
   }
   var_a668bada = n_index - 1;
-  while (!isdefined(level.var_d658503a) || level.var_d658503a < var_a668bada) {
+  while(!isDefined(level.var_d658503a) || level.var_d658503a < var_a668bada) {
     wait(0.05);
   }
   a_ents["prisoner"] sethighdetail(1);
   a_ents["prisoner"].e_streamer = createstreamerhint(a_ents["prisoner"].origin, 1);
-  while (level.var_d658503a <= n_index) {
+  while(level.var_d658503a <= n_index) {
     wait(0.05);
   }
   a_ents["prisoner"] sethighdetail(0);
@@ -328,11 +328,11 @@ function scan_handler(str_anim_idle, str_anim_comfirm, s_align_struct) {
   var_1ca98eed = function_6840a15e(level.var_d658503a);
   if(level.var_d658503a > 0) {
     var_5b1f7665 = function_6840a15e(level.var_d658503a - 1);
-    if(isdefined(var_5b1f7665.str_scene) && !var_5b1f7665.var_b5991f0e) {
+    if(isDefined(var_5b1f7665.str_scene) && !var_5b1f7665.var_b5991f0e) {
       scene::stop(var_5b1f7665.str_scene, 1);
     }
   }
-  if(isdefined(var_1ca98eed.str_scene) && !var_1ca98eed.var_b5991f0e) {
+  if(isDefined(var_1ca98eed.str_scene) && !var_1ca98eed.var_b5991f0e) {
     level thread scene::play(var_1ca98eed.str_scene);
   }
   level thread function_2e16b263(var_1ca98eed.str_scene);
@@ -347,48 +347,48 @@ function scan_handler(str_anim_idle, str_anim_comfirm, s_align_struct) {
 function function_2e16b263(scenename) {
   level notify("hash_1b4c750");
   level endon("hash_1b4c750");
-  if(!isdefined(level.var_cc008929)) {
+  if(!isDefined(level.var_cc008929)) {
     level.var_cc008929 = spawn("script_origin", (0, 0, 0));
     level.isfirsttime = 1;
   }
   switch (scenename) {
     case "cin_pro_05_02_securitycam_pip_solitary": {
-      level.var_cc008929 playloopsound("evt_securitycam_solitary", 0.1);
+      level.var_cc008929 playLoopSound("evt_securitycam_solitary", 0.1);
       break;
     }
     case "cin_pro_05_02_securitycam_pip_pipe": {
-      level.var_cc008929 playloopsound("evt_securitycam_pipe", 0.1);
+      level.var_cc008929 playLoopSound("evt_securitycam_pipe", 0.1);
       break;
     }
     case "cin_pro_05_02_securitycam_pip_funnel": {
-      level.var_cc008929 playloopsound("evt_securitycam_funnel", 0.1);
+      level.var_cc008929 playLoopSound("evt_securitycam_funnel", 0.1);
       break;
     }
     case "cin_pro_05_02_securitycam_pip_branding": {
-      level.var_cc008929 playloopsound("evt_securitycam_branding", 0.1);
+      level.var_cc008929 playLoopSound("evt_securitycam_branding", 0.1);
       break;
     }
     case "cin_pro_05_02_securitycam_pip_pressure": {
-      level.var_cc008929 playloopsound("evt_securitycam_pressure", 0.1);
+      level.var_cc008929 playLoopSound("evt_securitycam_pressure", 0.1);
       break;
     }
     case "cin_pro_05_02_securitycam_pip_waterboard": {
       level.var_cc008929 stoploopsound(0.1);
-      level.var_cc008929 playsound("evt_securitycam_minister_water");
+      level.var_cc008929 playSound("evt_securitycam_minister_water");
       break;
     }
     case "cin_pro_05_02_securitycam_pip_ministerdrag": {
       level.var_cc008929 stoploopsound(0.1);
-      level.var_cc008929 playsound("evt_securitycam_minister_walk");
+      level.var_cc008929 playSound("evt_securitycam_minister_walk");
       break;
     }
     case "cin_pro_05_02_securitycam_pip_ministerdrag_interrogationroom": {
-      if(isdefined(level.isfirsttime) && level.isfirsttime) {
+      if(isDefined(level.isfirsttime) && level.isfirsttime) {
         level.var_cc008929 stoploopsound(0.1);
         level.isfirsttime = 0;
       } else {
         level.var_cc008929 stoploopsound(0.1);
-        level.var_cc008929 playsound("evt_securitycam_minister_sit");
+        level.var_cc008929 playSound("evt_securitycam_minister_sit");
       }
       break;
     }
@@ -417,7 +417,7 @@ function start_face_scanner(extra_cam_index) {
 }
 
 function function_a4090f73(n_cam_index) {
-  if(!isdefined(level.var_965f8f82)) {
+  if(!isDefined(level.var_965f8f82)) {
     level.var_965f8f82 = 1;
   }
   switch (n_cam_index) {
@@ -496,11 +496,11 @@ function hendricks_security_camera() {
   level thread namespace_21b2c1f2::function_973b77f9();
   level notify("hash_fa5c41eb");
   exploder::exploder("light_exploder_cameraroom");
-  level thread scene::add_scene_func("cin_pro_05_01_securitycam_1st_stealth_kill", & function_2b60c70b);
+  level thread scene::add_scene_func("cin_pro_05_01_securitycam_1st_stealth_kill", &function_2b60c70b);
   level thread namespace_21b2c1f2::function_fd00a4f2();
   level scene::play("cin_pro_05_01_securitycam_1st_stealth_kill");
   level notify("hash_af8926a2");
-  if(isdefined(level.bzm_prologuedialogue3callback)) {
+  if(isDefined(level.bzm_prologuedialogue3callback)) {
     level thread[[level.bzm_prologuedialogue3callback]]();
   }
   level flag::set("everyone_in_camera_room");
@@ -513,9 +513,9 @@ function hendricks_security_camera() {
   level scene::play("cin_pro_05_01_securitycam_1st_stealth_kill_notice");
   level waittill("hash_fd656b57");
   level thread function_2e16b263("none");
-  level scene::add_scene_func("cin_pro_05_01_securitycam_1st_stealth_kill_movetodoor", & function_8f6060f7, "play");
+  level scene::add_scene_func("cin_pro_05_01_securitycam_1st_stealth_kill_movetodoor", &function_8f6060f7, "play");
   level scene::play("cin_pro_05_01_securitycam_1st_stealth_kill_movetodoor");
-  array::run_all(level.players, & util::set_low_ready, 0);
+  array::run_all(level.players, &util::set_low_ready, 0);
   level flag::wait_till("player_past_security_room");
   level notify("hash_81d6c615");
   level scene::play("cin_pro_05_01_securitycam_1st_stealth_kill_exit");

@@ -21,34 +21,34 @@ clocks_init(clientNum) {
   }
   minutes = curr_time[1];
   seconds = curr_time[2];
-  hour_hand = GetEntArray(clientNum, "hour_hand", "targetname");
+  hour_hand = getEntArray(clientNum, "hour_hand", "targetname");
   hour_values = [];
   hour_values["hand_time"] = hours;
   hour_values["rotate"] = 30;
   hour_values["rotate_bit"] = 30 / 3600;
   hour_values["first_rotate"] = ((minutes * 60) + seconds) * hour_values["rotate_bit"];
-  minute_hand = GetEntArray(clientNum, "minute_hand", "targetname");
+  minute_hand = getEntArray(clientNum, "minute_hand", "targetname");
   minute_values = [];
   minute_values["hand_time"] = minutes;
   minute_values["rotate"] = 6;
   minute_values["rotate_bit"] = 6 / 60;
   minute_values["first_rotate"] = seconds * minute_values["rotate_bit"];
-  second_hand = GetEntArray(clientNum, "second_hand", "targetname");
+  second_hand = getEntArray(clientNum, "second_hand", "targetname");
   second_values = [];
   second_values["hand_time"] = seconds;
   second_values["rotate"] = 6;
   second_values["rotate_bit"] = 6;
-  hour_hand_array = GetEntArray(clientNum, "hour_hand", "targetname");
+  hour_hand_array = getEntArray(clientNum, "hour_hand", "targetname");
   if(isDefined(hour_hand_array)) {
     println("**********hour_hand_array is defined, size: " + hour_hand_array.size);
     array_thread(hour_hand_array, ::clock_run, hour_values);
   }
-  minute_hand_array = GetEntArray(clientNum, "minute_hand", "targetname");
+  minute_hand_array = getEntArray(clientNum, "minute_hand", "targetname");
   if(isDefined(minute_hand_array)) {
     println("**********minute_hand_array is defined, size: " + minute_hand_array.size);
     array_thread(minute_hand_array, ::clock_run, minute_values);
   }
-  second_hand_array = GetEntArray(clientNum, "second_hand", "targetname");
+  second_hand_array = getEntArray(clientNum, "second_hand", "targetname");
   if(isDefined(second_hand_array)) {
     println("**********second_hand_array is defined, size: " + second_hand_array.size);
     array_thread(second_hand_array, ::clock_run, second_values);

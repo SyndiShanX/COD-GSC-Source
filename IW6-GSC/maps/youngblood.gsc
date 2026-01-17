@@ -62,7 +62,7 @@ yb_precache() {
   precacheshellshock("ygb_crash");
   precacheshellshock("ygb_end");
   precacheshellshock("ygb_end_lite");
-  maps\_utility::add_hint_string("hint_sprint", & "YOUNGBLOOD_HINT_SPRINT", ::sprint_hint_check);
+  maps\_utility::add_hint_string("hint_sprint", &"YOUNGBLOOD_HINT_SPRINT", ::sprint_hint_check);
 }
 
 custom_intro_screen_func() {
@@ -181,7 +181,7 @@ yb_setup() {
   soundsettimescalefactor("physics", 0.2);
   soundsettimescalefactor("ambient", 0.5);
   soundsettimescalefactor("auto", 0.5);
-  maps\_utility::intro_screen_create(&"YOUNGBLOOD_INTROSCREEN_LINE_1", & "YOUNGBLOOD_INTROSCREEN_LINE_5", "");
+  maps\_utility::intro_screen_create(&"YOUNGBLOOD_INTROSCREEN_LINE_1", &"YOUNGBLOOD_INTROSCREEN_LINE_5", "");
   maps\_utility::intro_screen_custom_func(::custom_intro_screen_func);
   maps\_utility::array_spawn_function_noteworthy("videotaper", maps\youngblood_util::videotaper_think);
   maps\_utility::array_spawn_function_noteworthy("n_watchers", maps\youngblood_code::n_watchers_think);

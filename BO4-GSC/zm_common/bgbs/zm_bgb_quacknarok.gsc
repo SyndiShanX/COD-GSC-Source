@@ -12,11 +12,10 @@
 #include scripts\zm_common\zm_bgb;
 #include scripts\zm_common\zm_spawner;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_bgb_quacknarok;
 
 autoexec __init__system__() {
-  system::register(#"zm_bgb_quacknarok", &__init__, undefined, #"bgb");
+  system::register(#"zm_bgb_quacknarok", &__init__, undefined, # "bgb");
 }
 
 __init__() {
@@ -37,7 +36,7 @@ activation() {
 deactivation() {}
 
 on_ai_spawned() {
-  if(self.archetype === #"zombie") {
+  if(self.archetype === # "zombie") {
     var_85574d7a = 0;
 
     foreach(player in getplayers()) {

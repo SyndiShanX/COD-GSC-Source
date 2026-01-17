@@ -16,9 +16,7 @@ main() {
   level._effect["dust_wind_fast"] = loadfx("dust/dust_wind_fast_light");
   level._effect["trash_spiral_runner"] = loadfx("misc/trash_spiral_runner");
 
-  /#
   if(getdvar("clientSideEffects") != "1")
     maps\createfx\mp_checkpoint_fx::main();
-  # /
 
 }

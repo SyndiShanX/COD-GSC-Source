@@ -8,9 +8,9 @@
 #include common_scripts\utility;
 
 setParent(element) {
-  if(isDefined(self.parent) && self.parent == element)
+  if(isDefined(self.parent) && self.parent == element) {
     return;
-
+  }
   if(isDefined(self.parent))
     self.parent removeChild(self);
 
@@ -321,16 +321,16 @@ createIcon_Hudelem(iconElem, shader, width, height) {
 }
 
 createBar(shader, bgshader, width, height, flashFrac) {
-  if(!isdefined(shader))
+  if(!isDefined(shader))
     shader = "white";
 
-  if(!isdefined(bgshader))
+  if(!isDefined(bgshader))
     bgshader = "black";
 
-  if(!isdefined(width))
+  if(!isDefined(width))
     width = 100;
 
-  if(!isdefined(height))
+  if(!isDefined(height))
     height = 9;
 
   barElem = newHudElem();
@@ -365,10 +365,10 @@ createBar(shader, bgshader, width, height, flashFrac) {
 }
 
 createClientProgressBar(player, offset) {
-  if(!isdefined(player))
+  if(!isDefined(player))
     player = level.player;
 
-  if(!isdefined(offset))
+  if(!isDefined(offset))
     offset = 90;
 
   bar = player createClientBar("white", "black", 100, 9);
@@ -437,7 +437,7 @@ flashThread() {
   self endon("death");
 
   self.alpha = 1;
-  while (1) {
+  while(1) {
     if(self.frac >= self.flashFrac) {
       self fadeOverTime(0.3);
       self.alpha = .2;
@@ -455,10 +455,10 @@ flashThread() {
 destroyElem() {
   tempChildren = [];
 
-  for (index = 0; index < self.children.size; index++)
+  for(index = 0; index < self.children.size; index++)
     tempChildren[index] = self.children[index];
 
-  for (index = 0; index < tempChildren.size; index++)
+  for(index = 0; index < tempChildren.size; index++)
     tempChildren[index] setParent(self getParent());
 
   if(self.elemType == "bar")
@@ -485,7 +485,7 @@ setSize(width, height) {
 }
 
 updateChildren() {
-  for (index = 0; index < self.children.size; index++) {
+  for(index = 0; index < self.children.size; index++) {
     child = self.children[index];
     child setPoint(child.point, child.relativePoint, child.xOffset, child.yOffset);
   }
@@ -493,11 +493,11 @@ updateChildren() {
 
 /*
 	thread stance_carry_icon_enable( bool );
-	Diasables all stance icons and replaces with an icon of 
+	Diasables all stance icons and replaces with an icon of
 	a person carrying another person on his back. True/false
 */
 stance_carry_icon_enable(bool) {
-  if(isdefined(bool) && bool == false) {
+  if(isDefined(bool) && bool == false) {
     stance_carry_icon_disable();
     return;
   }
@@ -575,12 +575,12 @@ create_mantle() {
 }
 
 get_countdown_hud(x, y, player, forceXPos) {
-  if(!isdefined(forceXPos))
+  if(!isDefined(forceXPos))
     forceXPos = false;
   xPos = undefined;
   if(!level.Console)
     xPos = -250; //override x-position if this is PC or the timer will get cut off
-  else if(!isdefined(x))
+  else if(!isDefined(x))
     xPos = -225;
   else
     xPos = x;
@@ -588,12 +588,12 @@ get_countdown_hud(x, y, player, forceXPos) {
   if(forceXPos)
     xPos = x;
 
-  if(!isdefined(y))
+  if(!isDefined(y))
     yPos = 100;
   else
     yPos = y;
 
-  if(isdefined(player))
+  if(isDefined(player))
     hudelem = newClientHudElem(player);
   else
     hudelem = newHudElem();
@@ -616,13 +616,13 @@ get_countdown_hud(x, y, player, forceXPos) {
 }
 
 get_download_state_hud(x, y, player, forceXPos) {
-  if(!isdefined(forceXPos))
+  if(!isDefined(forceXPos))
     forceXPos = false;
 
   xPos = undefined;
   if(!level.Console)
     xPos = -250; //override x-position if this is PC or the timer will get cut off
-  else if(!isdefined(x))
+  else if(!isDefined(x))
     xPos = -170;
   else
     xPos = x;
@@ -630,12 +630,12 @@ get_download_state_hud(x, y, player, forceXPos) {
   if(forceXPos)
     xPos = x;
 
-  if(!isdefined(y))
+  if(!isDefined(y))
     yPos = 100;
   else
     yPos = y;
 
-  if(isdefined(player))
+  if(isDefined(player))
     hudelem = newClientHudElem(player);
   else
     hudelem = newHudElem();
@@ -672,7 +672,7 @@ get_download_state_hud(x, y, player, forceXPos) {
 =============
 */
 create_client_overlay(shader_name, start_alpha, player) {
-  if(isdefined(player))
+  if(isDefined(player))
     overlay = newClientHudElem(player);
   else
     overlay = newHudElem();

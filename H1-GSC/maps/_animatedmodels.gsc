@@ -13,16 +13,16 @@ main() {
   level.init_animatedmodels_dump = [];
   level.anim_prop_models_animtree = #animtree;
 
-  if(!isdefined(level.anim_prop_models))
+  if(!isDefined(level.anim_prop_models))
     level.anim_prop_models = [];
 
-  if(!isdefined(level.anim_prop_init_threads))
+  if(!isDefined(level.anim_prop_init_threads))
     level.anim_prop_init_threads = [];
 
-  var_0 = getentarray("animated_model", "targetname");
+  var_0 = getEntArray("animated_model", "targetname");
   common_scripts\utility::array_thread(var_0, ::model_init);
 
-  if(isdefined(level.init_animatedmodels_dump) && level.init_animatedmodels_dump.size) {
+  if(isDefined(level.init_animatedmodels_dump) && level.init_animatedmodels_dump.size) {
     var_1 = " ";
 
     foreach(var_3 in level.init_animatedmodels_dump)
@@ -30,7 +30,7 @@ main() {
   }
 
   foreach(var_6 in var_0) {
-    if(isdefined(level.anim_prop_init_threads[var_6.model])) {
+    if(isDefined(level.anim_prop_init_threads[var_6.model])) {
       var_6 thread[[level.anim_prop_init_threads[var_6.model]]]();
       continue;
     }
@@ -53,17 +53,17 @@ main() {
 }
 
 init_wind_if_uninitialized() {
-  if(isdefined(level.wind)) {
+  if(isDefined(level.wind)) {
     return;
   }
-  level.wind = spawnstruct();
+  level.wind = spawnStruct();
   level.wind.rate = 0.4;
   level.wind.weight = 1;
   level.wind.variance = 0.2;
 }
 
 model_init() {
-  if(!isdefined(level.anim_prop_models[self.model])) {
+  if(!isDefined(level.anim_prop_models[self.model])) {
     if(!already_dumpped(level.init_animatedmodels_dump, self.model))
       level.init_animatedmodels_dump[level.init_animatedmodels_dump.size] = self.model;
   }
@@ -95,7 +95,7 @@ animatetreewind() {
   self useanimtree(#animtree);
   var_0 = "strong";
 
-  for (;;) {
+  for(;;) {
     thread blendtreeanims(var_0);
     level waittill("windchange", var_0);
   }
@@ -142,10 +142,10 @@ heliwind_get_closest_heli() {
   var_0 = 100000000.0;
   var_1 = 0;
 
-  for (var_2 = 0; var_2 < level.anim_models_helis.size; var_2++) {
+  for(var_2 = 0; var_2 < level.anim_models_helis.size; var_2++) {
     var_3 = level.anim_models_helis[var_2];
 
-    if(!isdefined(var_3)) {
+    if(!isDefined(var_3)) {
       continue;
     }
     var_4 = distancesquared(var_3.origin, self.origin);
@@ -168,10 +168,10 @@ heliwind_fadeoff() {
 }
 
 heliwind_track() {
-  for (;;) {
+  for(;;) {
     var_0 = heliwind_get_closest_heli();
 
-    if(isdefined(var_0)) {
+    if(isDefined(var_0)) {
       var_1 = heliwind_get_closest_fraction(var_0);
 
       if(var_1 > 0) {
@@ -194,7 +194,7 @@ heliwind_animate_tree() {
   var_0 = 0.15;
   var_1 = 0.0;
 
-  for (;;) {
+  for(;;) {
     var_2 = self getanimweight(level.anim_prop_models[self.model]["heli"]);
     var_3 = self.heliwind_weight - var_2;
     var_4 = clamp(var_3, -1 * self.heliwind_max_delta, self.heliwind_max_delta);
@@ -215,10 +215,10 @@ heliwind_animate_tree() {
 
 heliwind_init_spawn_tracker() {
   level.anim_models_helis = [];
-  var_0 = getentarray();
+  var_0 = getEntArray();
 
   foreach(var_2 in var_0) {
-    if(isdefined(var_2.vehicletype)) {
+    if(isDefined(var_2.vehicletype)) {
       if(var_2 maps\_vehicle::ishelicopter())
         var_2 thread heliwind_track_heli_alive();
     }
@@ -234,10 +234,10 @@ heliwind_track_heli_alive() {
   level.anim_models_helis[level.anim_models_helis.size] = var_0;
   var_0 waittill("death", var_1);
 
-  if(isdefined(var_1)) {
+  if(isDefined(var_1)) {
     waittillframeend;
 
-    if(isdefined(var_0.crashing) && var_0.crashing)
+    if(isDefined(var_0.crashing) && var_0.crashing)
       var_0 waittill("crash_done");
   }
 

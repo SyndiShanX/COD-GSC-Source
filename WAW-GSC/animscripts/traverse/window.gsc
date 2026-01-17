@@ -20,7 +20,7 @@ main() {
   self animscripts\shared::DoNoteTracks("diveanim");
   self.a.movement = "run";
   self.a.alertness = "casual";
-  while (self getGroundEntType() == "none")
+  while(self getGroundEntType() == "none")
     wait 0.05;
   self setAnimKnobAllRestart(animscripts\run::GetCrouchRunAnim(), % body, 1, 0.1, 1);
   thread animscripts\run::MakeRunSounds("killSoundThread");

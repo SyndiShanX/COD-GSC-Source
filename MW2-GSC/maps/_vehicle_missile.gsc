@@ -23,18 +23,18 @@ detachall_on_death() {
 turret_think() {
   self endon("death");
 
-  if(!isdefined(self.script_turret))
+  if(!isDefined(self.script_turret))
     return;
   if(self.script_turret == 0)
     return;
-  assert(isdefined(self.script_team));
+  assert(isDefined(self.script_team));
 
   // if the turret has a radius then use that radius instead of a default value
   self.attackRadius = 30000;
-  if(isdefined(self.radius))
+  if(isDefined(self.radius))
     self.attackRadius = self.radius;
 
-  while (!isdefined(level.cobrapilot_difficulty))
+  while(!isDefined(level.cobrapilot_difficulty))
     wait 0.05;
 
   difficultyScaler = 1.0;
@@ -55,19 +55,19 @@ turret_think() {
   if(getdvar("cobrapilot_debug") == "1")
     iprintln("surface-to-air missile range difficultyScaler = " + difficultyScaler);
 
-  for (;;) {
+  for(;;) {
     wait(2 + randomfloat(1));
 
     // get a target
     eTarget = undefined;
     eTarget = maps\_helicopter_globals::getEnemyTarget(self.attackRadius, undefined, false, true);
 
-    if(!isdefined(eTarget))
+    if(!isDefined(eTarget)) {
       continue;
-
+    }
     // offset where the missile should aim
     aimOrigin = eTarget.origin;
-    if(isdefined(eTarget.script_targetoffset_z))
+    if(isDefined(eTarget.script_targetoffset_z))
       aimOrigin += (0, 0, eTarget.script_targetoffset_z);
 
     // aim the turret at the target
@@ -77,20 +77,20 @@ turret_think() {
     self clearTurretTarget();
 
     // once the turret it aimed make sure the target is still within attacking range
-    if(distance(self.origin, eTarget.origin) > self.attackRadius)
+    if(distance(self.origin, eTarget.origin) > self.attackRadius) {
       continue;
-
+    }
     // make sure a sight trace can still pass so the missile doens't launch into a wall or something
     sightTracePassed = false;
     sightTracePassed = sighttracepassed(self.origin, eTarget.origin + (0, 0, 150), false, self);
-    if(!sightTracePassed)
+    if(!sightTracePassed) {
       continue;
-
+    }
     // fire the missile and wait a while
     if(getdvar("cobrapilot_surface_to_air_missiles_enabled") == "1") {
       self notify("shoot_target", eTarget);
       self waittill("missile_fired", eMissile);
-      if(isdefined(eMissile)) {
+      if(isDefined(eMissile)) {
         if(level.cobrapilot_difficulty == "hard") {
           wait(1 + randomfloat(2));
           continue;
@@ -125,26 +125,26 @@ within_attack_range(targetEnt) {
 fireMissile() {
   self endon("death");
 
-  for (;;) {
+  for(;;) {
     self waittill("shoot_target", targetEnt);
 
-    assert(isdefined(targetEnt));
-    assert(isdefined(self.missileTags[self.missileLaunchNextTag]));
+    assert(isDefined(targetEnt));
+    assert(isDefined(self.missileTags[self.missileLaunchNextTag]));
 
     // fire the missile
     eMissile = undefined;
 
-    if(!isdefined(targetEnt.script_targetoffset_z))
+    if(!isDefined(targetEnt.script_targetoffset_z))
       targetEnt.script_targetoffset_z = 0;
     offset = (0, 0, targetEnt.script_targetoffset_z);
 
     eMissile = self fireWeapon(self.missileTags[self.missileLaunchNextTag], targetEnt, offset);
-    assert(isdefined(eMissile));
+    assert(isDefined(eMissile));
 
     if(getdvar("cobrapilot_debug") == "1")
       level thread draw_missile_target_line(eMissile, targetEnt, offset);
 
-    if(!isdefined(targetEnt.incomming_Missiles))
+    if(!isDefined(targetEnt.incomming_Missiles))
       targetEnt.incomming_Missiles = [];
     targetEnt.incomming_Missiles = array_add(targetEnt.incomming_Missiles, eMissile);
     thread maps\_helicopter_globals::missile_deathWait(eMissile, targetEnt);
@@ -171,22 +171,22 @@ fireMissile() {
 draw_missile_target_line(eMissile, targetEnt, offset) {
   eMissile endon("death");
 
-  for (;;) {
+  for(;;) {
     line(eMissile.origin, targetEnt.origin + offset);
     wait 0.05;
   }
 }
 
 tryReload() {
-  if(!isdefined(self.missileAmmo))
+  if(!isDefined(self.missileAmmo))
     self.missileAmmo = 0;
-  if(!isdefined(self.missileLaunchNextTag))
+  if(!isDefined(self.missileLaunchNextTag))
     self.missileLaunchNextTag = 0;
 
-  if(self.missileAmmo > 0)
+  if(self.missileAmmo > 0) {
     return;
-
-  for (i = 0; i < self.missileTags.size; i++)
+  }
+  for(i = 0; i < self.missileTags.size; i++)
     self attach(self.missileModel, self.missileTags[i]);
 
   self.missileAmmo = self.missileTags.size;

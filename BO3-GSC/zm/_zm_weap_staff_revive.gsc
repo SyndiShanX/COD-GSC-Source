@@ -18,11 +18,11 @@
 #namespace zm_weap_staff_revive;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_staff_revive", & __init__, undefined, undefined);
+  system::register("zm_weap_staff_revive", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_spawned( & onplayerspawned);
+  callback::on_spawned(&onplayerspawned);
 }
 
 function onplayerspawned() {
@@ -32,7 +32,7 @@ function onplayerspawned() {
 
 function watch_staff_revive_fired() {
   self endon("disconnect");
-  while (true) {
+  while(true) {
     self waittill("missile_fire", e_projectile, str_weapon);
     if(!str_weapon.name == "staff_revive") {
       continue;
@@ -57,7 +57,7 @@ function staff_revive_impact(v_explode_point) {
       e_closest_player = e_player;
     }
   }
-  if(isdefined(e_closest_player)) {
+  if(isDefined(e_closest_player)) {
     e_closest_player notify("remote_revive", self);
     e_closest_player playsoundtoplayer("wpn_revivestaff_revive_plr", e_player);
     self notify("revived_player_with_upgraded_staff");

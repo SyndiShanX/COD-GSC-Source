@@ -15,7 +15,6 @@ main_anim() {
   script_model_animations();
   script_vehicle_animations();
   player_body();
-
 }
 
 player_body() {
@@ -321,8 +320,6 @@ af_chase_anims_and_vo() {
   level.scr_sound["generic"]["afchase_shp_extrastep"] = "afchase_shp_extrastep";
   // …to do what was absolutely necessary.		
   level.scr_sound["generic"]["afchase_shp_necessary"] = "afchase_shp_necessary";
-
-
 }
 
 shepherd_death_fx(guy) {
@@ -331,12 +328,12 @@ shepherd_death_fx(guy) {
   tag_origin LinkTo(level.shepherd, tag, (0, 0, 0), (0, 90, 0)); // pitch yaw roll
   //tag_origin thread maps\_debug::drawtagforever( "tag_origin" );
 
-  PlayFXOnTag(getfx("blood_sheperd_eye_geotrail"), tag_origin, "tag_origin");
+  playFXOnTag(getfx("blood_sheperd_eye_geotrail"), tag_origin, "tag_origin");
 
   spurts = 3;
 
-  for (i = 0; i < spurts; i++) {
-    PlayFXOnTag(getfx("blood_sheperd_eye"), tag_origin, "tag_origin");
+  for(i = 0; i < spurts; i++) {
+    playFXOnTag(getfx("blood_sheperd_eye"), tag_origin, "tag_origin");
     wait randomfloatrange(0.1, 0.15);
   }
 }
@@ -366,7 +363,7 @@ shepherd_slowmo_ends(guy) {
 }
 
 blend_to_ending_dof_fov(blend_out_time) {
-  if(!isdefined(blend_out_time))
+  if(!isDefined(blend_out_time))
     blend_out_time = 14;
 
   maps\af_chase_knife_fight_code::blend_to_ending_dof(blend_out_time);
@@ -374,7 +371,7 @@ blend_to_ending_dof_fov(blend_out_time) {
 }
 
 delete_glock(guy) {
-  if(IsDefined(level.glock))
+  if(isDefined(level.glock))
     level.glock Delete();
 
   origin = guy GetTagOrigin("tag_weapon_right");
@@ -401,11 +398,11 @@ impaled_aims_at_player() {
 
   self SetAnim(controller, 1, 0.2, 1);
 
-  for (;;) {
+  for(;;) {
     right = AnglesToRight(self.angles);
     othervec = VectorNormalize(level.player.origin - self.origin);
 
-    forward = AnglesToForward(self.angles);
+    forward = anglesToForward(self.angles);
     right = AnglesToRight(self.angles);
 
     forward_dot = VectorDot(forward, othervec);
@@ -437,7 +434,7 @@ impaled_aims_at_player() {
       self SetAnim(left_anim, 1 - weight, 0.2, 1);
     }
 
-    //forward = AnglesToForward( self.angles );
+    //forward = anglesToForward( self.angles );
     //Line( self.origin, self.origin + forward * 150, (1,0,0) );
     //Line( self.origin, level.player.origin, (1,1,1) );
     //Print3d( self.origin, degrees, (1,1,0), 1, 1 );
@@ -458,11 +455,11 @@ price_aims_at_end_heli() {
 
   self SetAnim(controller, 1, 0.2, 1);
 
-  for (;;) {
+  for(;;) {
     right = AnglesToRight(self.angles);
     othervec = VectorNormalize(level.player.origin - self.origin);
 
-    forward = AnglesToForward(self.angles);
+    forward = anglesToForward(self.angles);
     right = AnglesToRight(self.angles);
 
     forward_dot = VectorDot(forward, othervec);
@@ -494,7 +491,7 @@ price_aims_at_end_heli() {
       self SetAnim(left_anim, 1 - weight, 0.2, 1);
     }
 
-    //forward = AnglesToForward( self.angles );
+    //forward = anglesToForward( self.angles );
     //Line( self.origin, self.origin + forward * 150, (1,0,0) );
     //Line( self.origin, level.player.origin, (1,1,1) );
     //Print3d( self.origin, degrees, (1,1,0), 1, 1 );
@@ -673,7 +670,6 @@ script_model_animations() {
   level.scr_anim["rotation"]["z_down"] = % rotate_Z_L;
 
   level.scr_anim["knife"]["prethrow"] = % afchase_ending_knife_throw_soon;
-
 }
 
 rumble_bash(guy) {
@@ -686,7 +682,6 @@ fade_out(guy) {
 
 #using_animtree("vehicles");
 script_vehicle_animations() {
-
   level.scr_anim["littlebird"]["walk_off"] = % afchase_chopper_landing;
   level.scr_anim["zodiac_player"]["zodiac_waterfall_right"] = % AFchase_waterfall_zodiac_R;
   level.scr_anim["zodiac_player"]["zodiac_waterfall_left"] = % AFchase_waterfall_zodiac_L;
@@ -709,58 +704,56 @@ script_vehicle_animations() {
   // 	addNotetrack_flag( "zodiac_player" , "steady_3" , "price_steady3" , "sniper_waterfall" );
 
   addNotetrack_flag("zodiac_player", "shoot", "price_steady_shoot", "sniper_waterfall");
-
 }
 
 bullets_notify(guy) {
-
   level notify("bullets");
 }
 
 playerstabbed_fx(knife) {
   maps\af_chase_knife_fight_code::swap_knife();
   //IPrintLnBold( "Suirt Squirt" );
-  PlayFXOnTag(getfx("player_stabbed"), knife, "TAG_FX");
+  playFXOnTag(getfx("player_stabbed"), knife, "TAG_FX");
 }
 
 shelleject_fx(gun) {
   //IPrintLnBold( "Bullets" );
-  PlayFXOnTag(getfx("revolver_bullets"), gun, "J_Cylinder_Spin");
+  playFXOnTag(getfx("revolver_bullets"), gun, "J_Cylinder_Spin");
 }
 
 right_footstep_fx(guy) {
   //iprintlnbold( "right" );
-  PlayFXOnTag(getfx("footstep_dust_sandstorm_runner"), guy, "J_Ball_RI");
+  playFXOnTag(getfx("footstep_dust_sandstorm_runner"), guy, "J_Ball_RI");
 }
 
 left_footstep_fx(guy) {
   //iprintlnbold( "left" );
-  PlayFXOnTag(getfx("footstep_dust_sandstorm_runner"), guy, "J_Ball_LE");
+  playFXOnTag(getfx("footstep_dust_sandstorm_runner"), guy, "J_Ball_LE");
 }
 
 right_footstep_small_fx(guy) {
   //iprintlnbold( "right" );
-  PlayFXOnTag(getfx("footstep_dust_sandstorm_small_runner"), guy, "J_Ball_RI");
+  playFXOnTag(getfx("footstep_dust_sandstorm_small_runner"), guy, "J_Ball_RI");
 }
 
 left_footstep_small_fx(guy) {
   //iprintlnbold( "left" );
-  PlayFXOnTag(getfx("footstep_dust_sandstorm_small_runner"), guy, "J_Ball_LE");
+  playFXOnTag(getfx("footstep_dust_sandstorm_small_runner"), guy, "J_Ball_LE");
 }
 
 right_hand_impact_fx(guy) {
   //iprintlnbold( "right" );
-  PlayFXOnTag(getfx("crawl_dust_sandstorm_runner"), guy, "J_Mid_RI_2");
+  playFXOnTag(getfx("crawl_dust_sandstorm_runner"), guy, "J_Mid_RI_2");
 }
 
 left_hand_impact_fx(guy) {
   //iprintlnbold( "left" );
-  PlayFXOnTag(getfx("crawl_dust_sandstorm_runner"), guy, "J_Mid_LE_2");
+  playFXOnTag(getfx("crawl_dust_sandstorm_runner"), guy, "J_Mid_LE_2");
 }
 
 bodyfall_fx(guy) {
   //iprintlnbold( "body" );
-  PlayFXOnTag(getfx("bodyfall_dust_sandstorm_large_runner"), guy, "J_SpineUpper");
+  playFXOnTag(getfx("bodyfall_dust_sandstorm_large_runner"), guy, "J_SpineUpper");
 }
 
 gun_fire(guy) {

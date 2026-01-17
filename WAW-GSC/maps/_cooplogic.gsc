@@ -29,7 +29,7 @@ forceEnd() {
   if(level.splitscreen)
     endString = "";
   else
-    endString = & "GAME_HOST_ENDED_GAME";
+    endString = &"GAME_HOST_ENDED_GAME";
   makeDvarServerInfo("ui_text_endreason", endString);
   setDvar("ui_text_endreason", endString);
   thread endGame(endString);
@@ -46,7 +46,7 @@ endGame(endReasonText) {
   level.inGracePeriod = false;
   level notify("game_ended");
   players = get_players();
-  for (index = 0; index < players.size; index++) {
+  for(index = 0; index < players.size; index++) {
     player = players[index];
     player freezePlayerForRoundEnd();
     player thread roundEndDoF(4.0);
@@ -59,7 +59,7 @@ endGame(endReasonText) {
     roundEndWait(level.postRoundTime, true);
   level.intermission = true;
   players = get_players();
-  for (index = 0; index < players.size; index++) {
+  for(index = 0; index < players.size; index++) {
     player = players[index];
     player closeMenu();
     player Closeingamemenu();
@@ -70,10 +70,10 @@ endGame(endReasonText) {
 
 roundEndWait(defaultDelay, matchBonus) {
   notifiesDone = false;
-  while (!notifiesDone) {
+  while(!notifiesDone) {
     players = get_players();
     notifiesDone = true;
-    for (index = 0; index < players.size; index++) {
+    for(index = 0; index < players.size; index++) {
       if(!isDefined(players[index].doingNotify) || !players[index].doingNotify) {
         continue;
       }
@@ -87,10 +87,10 @@ roundEndWait(defaultDelay, matchBonus) {
   }
   wait(defaultDelay);
   notifiesDone = false;
-  while (!notifiesDone) {
+  while(!notifiesDone) {
     players = get_players();
     notifiesDone = true;
-    for (index = 0; index < players.size; index++) {
+    for(index = 0; index < players.size; index++) {
       if(!isDefined(players[index].doingNotify) || !players[index].doingNotify) {
         continue;
       }

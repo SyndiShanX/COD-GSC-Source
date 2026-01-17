@@ -16,5 +16,4 @@ main() {
 
   if(!getdvarint("clientSideEffects"))
     maps\createfx\mp_rust_long_fx::main();
-
 }

@@ -51,7 +51,7 @@ generic_double_strobe() {
   linked_lights = false;
   linked_light_ents = [];
   if(isDefined(self.script_noteworthy)) {
-    linked_things = getentarray(self.script_noteworthy, "targetname");
+    linked_things = getEntArray(self.script_noteworthy, "targetname");
     for(i = 0; i < linked_things.size; i++) {
       if(linked_things[i].classname == "light") {
         linked_lights = true;
@@ -93,7 +93,7 @@ generic_double_strobe() {
 }
 
 getclosests_flickering_model(origin) {
-  array = getentarray("light_flicker_model", "targetname");
+  array = getEntArray("light_flicker_model", "targetname");
   return_array = [];
   model = getclosest(origin, array);
   if(isDefined(model))

@@ -5,7 +5,7 @@
 ********************************/
 
 init_anim_sets() {
-  if(isdefined(anim.archetypes)) {
+  if(isDefined(anim.archetypes)) {
     return;
   }
   anim.archetypes = [];
@@ -24,7 +24,7 @@ init_anim_sets() {
   animscripts\flashed::init_animset_flashed();
   animscripts\stop::init_animset_idle();
   animscripts\melee::init_animset_melee();
-  anim.animsets = spawnstruct();
+  anim.animsets = spawnStruct();
   anim.animsets.move = [];
   init_animset_default_stand();
   init_animset_cqb_stand();
@@ -86,15 +86,15 @@ registerarchetype(var_0, var_1, var_2) {
   init_anim_sets();
   anim.archetypes[var_0] = var_1;
 
-  if(isdefined(var_1["flashed"]))
+  if(isDefined(var_1["flashed"]))
     anim.flashanimindex[var_0] = 0;
 
-  if(isdefined(var_2) && var_2)
+  if(isDefined(var_2) && var_2)
     animscripts\init_move_transitions::getsplittimes(var_0);
 }
 
 archetypeexists(var_0) {
-  return isdefined(anim.archetypes[var_0]);
+  return isDefined(anim.archetypes[var_0]);
 }
 
 #using_animtree("generic_human");
@@ -624,19 +624,19 @@ init_animset_complete_custom_stand(var_0) {
 init_animset_custom_stand(var_0, var_1, var_2, var_3) {
   anim.initanimset = animscripts\utility::lookupanimarray("default_stand");
 
-  if(isdefined(var_1))
+  if(isDefined(var_1))
     anim.initanimset["straight_level"] = var_1;
 
-  if(isdefined(var_0)) {
+  if(isDefined(var_0)) {
     anim.initanimset["fire"] = var_0;
     anim.initanimset["single"] = animscripts\utility::array(var_0);
     set_animarray_custom_burst_and_semi_fire_stand(var_0);
   }
 
-  if(isdefined(var_2))
+  if(isDefined(var_2))
     anim.initanimset["exposed_idle"] = animscripts\utility::array(var_2);
 
-  if(isdefined(var_3)) {
+  if(isDefined(var_3)) {
     anim.initanimset["reload"] = animscripts\utility::array(var_3);
     anim.initanimset["reload_crouchhide"] = animscripts\utility::array(var_3);
   }
@@ -647,16 +647,16 @@ init_animset_custom_stand(var_0, var_1, var_2, var_3) {
 init_animset_custom_crouch(var_0, var_1, var_2) {
   anim.initanimset = animscripts\utility::lookupanimarray("default_crouch");
 
-  if(isdefined(var_0)) {
+  if(isDefined(var_0)) {
     anim.initanimset["fire"] = var_0;
     anim.initanimset["single"] = animscripts\utility::array(var_0);
     set_animarray_custom_burst_and_semi_fire_crouch(var_0);
   }
 
-  if(isdefined(var_1))
+  if(isDefined(var_1))
     anim.initanimset["exposed_idle"] = animscripts\utility::array(var_1);
 
-  if(isdefined(var_2))
+  if(isDefined(var_2))
     anim.initanimset["reload"] = animscripts\utility::array(var_2);
 
   self.combatcrouchanims = anim.initanimset;
@@ -813,17 +813,17 @@ set_animarray_add_turn_aims_crouch() {
 }
 
 set_animarray_standing() {
-  if(animscripts\utility::usingsidearm() || isdefined(self.alwaysusepistol))
+  if(animscripts\utility::usingsidearm() || isDefined(self.alwaysusepistol))
     self.a.array = animscripts\utility::lookupanimarray("pistol_stand");
-  else if(isdefined(self.combatstandanims))
+  else if(isDefined(self.combatstandanims))
     self.a.array = self.combatstandanims;
-  else if(isdefined(self.heat))
+  else if(isDefined(self.heat))
     self.a.array = animscripts\utility::lookupanimarray("heat_stand");
   else if(animscripts\utility::usingrocketlauncher())
     self.a.array = animscripts\utility::lookupanimarray("rpg_stand");
   else if(animscripts\utility::usingsmg())
     self.a.array = animscripts\utility::lookupanimarray("smg_stand");
-  else if(isdefined(self.weapon) && animscripts\utility::weapon_pump_action_shotgun())
+  else if(isDefined(self.weapon) && animscripts\utility::weapon_pump_action_shotgun())
     self.a.array = animscripts\utility::lookupanimarray("shotgun_stand");
   else if(animscripts\utility::iscqbwalking())
     self.a.array = animscripts\utility::lookupanimarray("cqb_stand");
@@ -837,13 +837,13 @@ set_animarray_crouching() {
   if(animscripts\utility::usingsidearm())
     animscripts\shared::placeweaponon(self.primaryweapon, "right");
 
-  if(isdefined(self.combatcrouchanims))
+  if(isDefined(self.combatcrouchanims))
     self.a.array = self.combatcrouchanims;
   else if(animscripts\utility::usingrocketlauncher())
     self.a.array = animscripts\utility::lookupanimarray("rpg_crouch");
   else if(animscripts\utility::usingsmg())
     self.a.array = animscripts\utility::lookupanimarray("smg_crouch");
-  else if(isdefined(self.weapon) && animscripts\utility::weapon_pump_action_shotgun())
+  else if(isDefined(self.weapon) && animscripts\utility::weapon_pump_action_shotgun())
     self.a.array = animscripts\utility::lookupanimarray("shotgun_crouch");
   else
     self.a.array = animscripts\utility::lookupanimarray("default_crouch");
@@ -1178,7 +1178,7 @@ heat_reload_anim() {
   if(self.weapon != self.primaryweapon)
     return animscripts\utility::animarraypickrandom("reload");
 
-  if(isdefined(self.node)) {
+  if(isDefined(self.node)) {
     if(self nearclaimnodeandangle()) {
       var_0 = undefined;
 
@@ -1187,7 +1187,7 @@ heat_reload_anim() {
       else if(self.node.type == "Cover Right")
         var_0 = animscripts\utility::lookupanim("heat_reload", "reload_cover_right");
 
-      if(isdefined(var_0))
+      if(isDefined(var_0))
         return var_0;
     }
   }

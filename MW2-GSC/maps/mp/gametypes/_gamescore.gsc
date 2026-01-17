@@ -7,7 +7,6 @@
 #include maps\mp\gametypes\_hud_util;
 #include common_scripts\utility;
 
-
 getHighestScoringPlayer() {
   updatePlacement();
 
@@ -24,9 +23,9 @@ getLosingPlayers() {
   losingPlayers = [];
 
   foreach(player in players) {
-    if(player == level.placement["all"][0])
+    if(player == level.placement["all"][0]) {
       continue;
-
+    }
     losingPlayers[losingPlayers.size] = player;
   }
 
@@ -34,15 +33,15 @@ getLosingPlayers() {
 }
 
 givePlayerScore(event, player, victim) {
-  if(isDefined(level.nukeIncoming))
+  if(isDefined(level.nukeIncoming)) {
     return;
-
+  }
   score = player.pers["score"];
   onPlayerScore(event, player, victim);
 
-  if(score == player.pers["score"])
+  if(score == player.pers["score"]) {
     return;
-
+  }
   if(!player rankingEnabled() && !level.hardcoreMode)
     player thread maps\mp\gametypes\_rank::scorePopup((player.pers["score"] - score), false, (0.85, 0.85, 0.85), 0);
 
@@ -71,9 +70,9 @@ onPlayerScore(event, player, victim) {
 
 // Seems to only be used for reducing a player's score due to suicide
 _setPlayerScore(player, score) {
-  if(score == player.pers["score"])
+  if(score == player.pers["score"]) {
     return;
-
+  }
   player.pers["score"] = score;
   player.score = player.pers["score"];
 
@@ -85,9 +84,9 @@ _getPlayerScore(player) {
 }
 
 giveTeamScoreForObjective(team, score) {
-  if(isDefined(level.nukeIncoming))
+  if(isDefined(level.nukeIncoming)) {
     return;
-
+  }
   score *= level.objectivePointsMod;
 
   teamScore = game["teamScores"][team];
@@ -128,12 +127,12 @@ getWinningTeam() {
 }
 
 _setTeamScore(team, teamScore) {
-  if(teamScore == game["teamScores"][team])
+  if(teamScore == game["teamScores"][team]) {
     return;
-
-  if(isDefined(level.nukeIncoming))
+  }
+  if(isDefined(level.nukeIncoming)) {
     return;
-
+  }
   game["teamScores"][team] = teamScore;
 
   updateTeamScore(team);
@@ -182,7 +181,7 @@ sendUpdatedDMScores() {
 
   WaitTillSlowProcessAllowed();
 
-  for (i = 0; i < level.players.size; i++) {
+  for(i = 0; i < level.players.size; i++) {
     level.players[i] updateDMScores();
     level.players[i].updatedDMScores = true;
   }
@@ -192,16 +191,16 @@ removeDisconnectedPlayerFromPlacement() {
   offset = 0;
   numPlayers = level.placement["all"].size;
   found = false;
-  for (i = 0; i < numPlayers; i++) {
+  for(i = 0; i < numPlayers; i++) {
     if(level.placement["all"][i] == self)
       found = true;
 
     if(found)
       level.placement["all"][i] = level.placement["all"][i + 1];
   }
-  if(!found)
+  if(!found) {
     return;
-
+  }
   level.placement["all"][numPlayers - 1] = undefined;
   assert(level.placement["all"].size == numPlayers - 1);
 
@@ -211,7 +210,7 @@ removeDisconnectedPlayerFromPlacement() {
   }
 
   numPlayers = level.placement["all"].size;
-  for (i = 0; i < numPlayers; i++) {
+  for(i = 0; i < numPlayers; i++) {
     player = level.placement["all"][i];
     player notify("update_outcome");
   }
@@ -223,17 +222,17 @@ updatePlacement() {
 
   placementAll = [];
   foreach(player in level.players) {
-    if(isDefined(player.connectedPostGame) || (player.pers["team"] != "allies" && player.pers["team"] != "axis"))
+    if(isDefined(player.connectedPostGame) || (player.pers["team"] != "allies" && player.pers["team"] != "axis")) {
       continue;
-
+    }
     placementAll[placementAll.size] = player;
   }
 
-  for (i = 1; i < placementAll.size; i++) {
+  for(i = 1; i < placementAll.size; i++) {
     player = placementAll[i];
     playerScore = player.score;
-    //		for ( j = i - 1; j >= 0 && (player.score > placementAll[j].score || (player.score == placementAll[j].score && player.deaths < placementAll[j].deaths)); j-- )
-    for (j = i - 1; j >= 0 && getBetterPlayer(player, placementAll[j]) == player; j--)
+    //		for( j = i - 1; j >= 0 && (player.score > placementAll[j].score || (player.score == placementAll[j].score && player.deaths < placementAll[j].deaths)); j-- )
+    for(j = i - 1; j >= 0 && getBetterPlayer(player, placementAll[j]) == player; j--)
       placementAll[j + 1] = placementAll[j];
     placementAll[j + 1] = player;
   }
@@ -277,7 +276,7 @@ updateTeamPlacement() {
   placementAll = level.placement["all"];
   placementAllSize = placementAll.size;
 
-  for (i = 0; i < placementAllSize; i++) {
+  for(i = 0; i < placementAllSize; i++) {
     player = placementAll[i];
     team = player.pers["team"];
 
@@ -295,19 +294,19 @@ initialDMScoreUpdate() {
   // the first time someone kills someone else.
   wait .2;
   numSent = 0;
-  while (1) {
+  while(1) {
     didAny = false;
 
     players = level.players;
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       player = players[i];
 
-      if(!isdefined(player))
+      if(!isDefined(player)) {
         continue;
-
-      if(isdefined(player.updatedDMScores))
+      }
+      if(isDefined(player.updatedDMScores)) {
         continue;
-
+      }
       player.updatedDMScores = true;
       player updateDMScores();
 
@@ -327,12 +326,12 @@ processAssist(killedplayer) {
   wait .05; // don't ever run on the same frame as the playerkilled callback.
   WaitTillSlowProcessAllowed();
 
-  if(self.pers["team"] != "axis" && self.pers["team"] != "allies")
+  if(self.pers["team"] != "axis" && self.pers["team"] != "allies") {
     return;
-
-  if(self.pers["team"] == killedplayer.pers["team"])
+  }
+  if(self.pers["team"] == killedplayer.pers["team"]) {
     return;
-
+  }
   self thread[[level.onXPEvent]]("assist");
   self incPersStat("assists", 1);
   self.assists = self getPersStat("assists");
@@ -351,12 +350,12 @@ processShieldAssist(killedPlayer) {
   wait .05; // don't ever run on the same frame as the playerkilled callback.
   WaitTillSlowProcessAllowed();
 
-  if(self.pers["team"] != "axis" && self.pers["team"] != "allies")
+  if(self.pers["team"] != "axis" && self.pers["team"] != "allies") {
     return;
-
-  if(self.pers["team"] == killedplayer.pers["team"])
+  }
+  if(self.pers["team"] == killedplayer.pers["team"]) {
     return;
-
+  }
   self thread[[level.onXPEvent]]("assist");
   self thread[[level.onXPEvent]]("assist");
   self incPersStat("assists", 1);

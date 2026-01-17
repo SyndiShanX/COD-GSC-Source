@@ -121,7 +121,7 @@ shootUntilShootBehaviorChange() {
     if(self weaponAnims() == "rocketlauncher" && isSentient(self.enemy))
       wait(randomFloat(2.0));
   }
-  while (1) {
+  while(1) {
     burstDelay();
     if(self.shootStyle == "full") {
       self FireUntilOutOfAmmo(animArray("fire"), false, animscripts\shared::decideNumShotsForFull());
@@ -154,7 +154,7 @@ getUniqueFlagNameIndex() {
 FireUntilOutOfAmmo(fireAnim, stopOnAnimationEnd, maxshots) {
   animName = "fireAnim_" + getUniqueFlagNameIndex();
   maps\_gameskill::resetMissTime();
-  while (!aimedAtShootEntOrPos())
+  while(!aimedAtShootEntOrPos())
     wait .05;
   self setAnim( % add_fire, 1, .1, 1);
   rate = randomfloatrange(0.3, 2.0);
@@ -191,7 +191,7 @@ FireUntilOutOfAmmoInternal(animName, fireAnim, stopOnAnimationEnd, maxshots) {
   numshots = 0;
   hasFireNotetrack = animHasNoteTrack(fireAnim, "fire");
   usingRocketLauncher = (weaponClass(self.weapon) == "rocketlauncher");
-  while (1) {
+  while(1) {
     if(hasFireNotetrack) {
       if(self usingBoltActionWeapon() && numshots > 0) {
         break;
@@ -479,7 +479,7 @@ ThrowGrenadeAtPlayerASAP_combat_utility() {
   if(enemies.size == 0)
     return;
   numwithgrenades = 0;
-  for (i = 0; i < enemies.size; i++) {
+  for(i = 0; i < enemies.size; i++) {
     if(enemies[i].grenadeammo > 0)
       return;
   }
@@ -498,7 +498,7 @@ setActiveGrenadeTimer(throwingAt) {
 considerChangingTarget(throwingAt) {
   if(!isPlayer(throwingAt) && self.team == "axis") {
     players = GetPlayers();
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       player = players[i];
       if(gettime() < anim.grenadeTimers[self.activeGrenadeTimer]) {
         if(player.ignoreme) {
@@ -588,7 +588,7 @@ isGrenadePosSafe(throwingAt, destination) {
   closestdist = 100000000;
   secondclosest = undefined;
   secondclosestdist = 100000000;
-  for (i = 0; i < self.squad.members.size; i++) {
+  for(i = 0; i < self.squad.members.size; i++) {
     if(!isalive(self.squad.members[i]))
       continue;
     dist = distanceSquared(self.squad.members[i].origin, destination);
@@ -620,7 +620,7 @@ printGrenadeTimers() {
   y = 40;
   level.grenadeTimerHudElem = [];
   keys = getArrayKeys(anim.grenadeTimers);
-  for (i = 0; i < keys.size; i++) {
+  for(i = 0; i < keys.size; i++) {
     textelem = newHudElem();
     textelem.x = x;
     textelem.y = y;
@@ -642,9 +642,9 @@ printGrenadeTimers() {
     y += 10;
     level.grenadeTimerHudElem[keys[i]] = textelem;
   }
-  while (1) {
+  while(1) {
     wait .05;
-    for (i = 0; i < keys.size; i++) {
+    for(i = 0; i < keys.size; i++) {
       timeleft = (anim.grenadeTimers[keys[i]] - gettime()) / 1000;
       width = max(timeleft * 4, 1);
       width = int(width);
@@ -658,7 +658,7 @@ destroyGrenadeTimers() {
   if(!isDefined(level.grenadeTimerHudElem))
     return;
   keys = getArrayKeys(anim.grenadeTimers);
-  for (i = 0; i < keys.size; i++) {
+  for(i = 0; i < keys.size; i++) {
     level.grenadeTimerHudElem[keys[i]].bar destroy();
     level.grenadeTimerHudElem[keys[i]] destroy();
   }
@@ -667,15 +667,15 @@ destroyGrenadeTimers() {
 grenadeTimerDebug() {
   if(getdvar("scr_grenade_debug") == "")
     setdvar("scr_grenade_debug", "0");
-  while (1) {
-    while (1) {
+  while(1) {
+    while(1) {
       if(getdebugdvar("scr_grenade_debug") != "0") {
         break;
       }
       wait .5;
     }
     thread printGrenadeTimers();
-    while (1) {
+    while(1) {
       if(getdebugdvar("scr_grenade_debug") == "0") {
         break;
       }
@@ -695,7 +695,7 @@ grenadeDebug(state, duration, showMissReason) {
   self endon("killanimscript");
   self endon("death");
   endtime = gettime() + 1000 * duration;
-  while (gettime() < endtime) {
+  while(gettime() < endtime) {
     print3d(self getShootAtPos() + (0, 0, 10), state);
     if(isDefined(showMissReason) && isDefined(self.grenadeMissReason))
       print3d(self getShootAtPos() + (0, 0, 0), "Failed: " + self.grenadeMissReason);
@@ -849,7 +849,7 @@ DoGrenadeThrow(throw_anim, nextGrenadeTimeToUse, secondGrenadeOfDouble) {
   self thread animscripts\shared::DoNoteTracksForever("throwanim", "killanimscript");
   model = getGrenadeModel();
   attachside = "none";
-  for (;;) {
+  for(;;) {
     self waittill("throwanim", notetrack);
     if(notetrack == "grenade_left" || notetrack == "grenade_right") {
       attachside = attachGrenadeModel(model, "TAG_INHAND");
@@ -869,7 +869,7 @@ DoGrenadeThrow(throw_anim, nextGrenadeTimeToUse, secondGrenadeOfDouble) {
     tags = [];
     numTags = self getAttachSize();
     emptySlot = [];
-    for (i = 0; i < numTags; i++) {
+    for(i = 0; i < numTags; i++) {
       name = self getAttachModelName(i);
       if(issubstr(name, "weapon")) {
         tagName = self getAttachTagname(i);
@@ -877,7 +877,7 @@ DoGrenadeThrow(throw_anim, nextGrenadeTimeToUse, secondGrenadeOfDouble) {
         tags[tags.size] = tagName;
       }
     }
-    for (i = 0; i < tags.size; i++) {
+    for(i = 0; i < tags.size; i++) {
       emptySlot[tags[i]]++;
       if(emptySlot[tags[i]] < 2)
         continue;
@@ -924,7 +924,7 @@ watchGrenadeTowardsPlayer(nextGrenadeTimeToUse) {
 
 watchGrenadeTowardsPlayerInternal(nextGrenadeTimeToUse) {
   activeGrenadeTimer = self.activeGrenadeTimer;
-  timeoutObj = spawnstruct();
+  timeoutObj = spawnStruct();
   timeoutObj thread watchGrenadeTowardsPlayerTimeout(5);
   timeoutObj endon("watchGrenadeTowardsPlayerTimeout");
   type = self.grenadeWeapon;
@@ -942,7 +942,7 @@ watchGrenadeTowardsPlayerInternal(nextGrenadeTimeToUse) {
   }
   players = GetPlayers();
   prevorigin = grenade.origin;
-  while (1) {
+  while(1) {
     wait .1;
     if(!isDefined(grenade)) {
       break;
@@ -1004,7 +1004,7 @@ detachGrenadeOnScriptChange(model, tag) {
 }
 
 offsetToOrigin(start) {
-  forward = anglestoforward(self.angles);
+  forward = anglesToForward(self.angles);
   right = anglestoright(self.angles);
   up = anglestoup(self.angles);
   forward = vectorScale(forward, start[0]);
@@ -1017,7 +1017,7 @@ grenadeLine(start, end) {
   level notify("armoffset");
   level endon("armoffset");
   start = self.origin + offsetToOrigin(start);
-  for (;;) {
+  for(;;) {
     line(start, end, (1, 0, 1));
     print3d(start, start, (0.2, 0.5, 1.0), 1, 1);
     print3d(end, end, (0.2, 0.5, 1.0), 1, 1);
@@ -1047,7 +1047,7 @@ EyesAtEnemy() {
   self notify("stop EyesAtEnemy internal");
   self endon("death");
   self endon("stop EyesAtEnemy internal");
-  for (;;) {
+  for(;;) {
     if(isDefined(self.enemy))
       self animscripts\shared::LookAtEntity(self.enemy, 2, "alert", "eyes only", "don't interrupt");
     wait 2;
@@ -1124,7 +1124,7 @@ DebugFailedCoverUsage(node) {
     setdvar("scr_debugfailedcover", "0");
   if(getdebugdvarint("scr_debugfailedcover") == 1) {
     self endon("death");
-    for (i = 0; i < 20; i++) {
+    for(i = 0; i < 20; i++) {
       line(self.origin, node.origin);
       print3d(node.origin, "failed");
       wait .05;
@@ -1159,7 +1159,7 @@ delayedBadplace(org) {
   anim.badPlaces[anim.badPlaces.size] = string;
   if(anim.badPlaces.size >= 10) {
     newArray = [];
-    for (i = 1; i < anim.badPlaces.size; i++)
+    for(i = 1; i < anim.badPlaces.size; i++)
       newArray[newArray.size] = anim.badPlaces[i];
     badplace_delete(anim.badPlaces[0]);
     anim.badPlaces = newArray;
@@ -1219,7 +1219,7 @@ anim_set_next_move_to_new_cover() {
 
 watchReloading() {
   self.isreloading = false;
-  while (1) {
+  while(1) {
     self waittill("reload_start");
     self.isreloading = true;
     self waittillreloadfinished();
@@ -1230,7 +1230,7 @@ watchReloading() {
 waittillReloadFinished() {
   self thread timedNotify(4, "reloadtimeout");
   self endon("reloadtimeout");
-  while (1) {
+  while(1) {
     self waittill("reload");
     weap = self getCurrentWeapon();
     if(weap == "none") {
@@ -1251,7 +1251,7 @@ timedNotify(time, msg) {
 
 attackEnemyWhenFlashed() {
   self endon("killanimscript");
-  while (1) {
+  while(1) {
     if(!isDefined(self.enemy) || !isalive(self.enemy) || !isSentient(self.enemy)) {
       self waittill("enemy");
       continue;
@@ -1265,7 +1265,7 @@ attackSpecificEnemyWhenFlashed() {
   self.enemy endon("death");
   if(isDefined(self.enemy.flashendtime) && gettime() < self.enemy.flashendtime)
     tryToAttackFlashedEnemy();
-  while (1) {
+  while(1) {
     self.enemy waittill("flashed");
     tryToAttackFlashedEnemy();
   }
@@ -1278,7 +1278,7 @@ tryToAttackFlashedEnemy() {
   if(distanceSquared(self.origin, self.enemy.origin) > 1024 * 1024) {
     return;
   }
-  while (gettime() < self.enemy.flashendtime - 500) {
+  while(gettime() < self.enemy.flashendtime - 500) {
     if(!self cansee(self.enemy) && distanceSquared(self.origin, self.enemy.origin) < 800 * 800)
       tryRunningToEnemy(true);
     wait .05;
@@ -1304,7 +1304,7 @@ startFlashBanged() {
 monitorFlash() {
   self endon("death");
   self endon("stop_monitoring_flash");
-  while (1) {
+  while(1) {
     self waittill("flashbang", amount_distance, amount_angle, attacker, attackerteam);
     if(self.flashbangImmunity) {
       continue;

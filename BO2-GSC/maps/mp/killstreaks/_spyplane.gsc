@@ -44,7 +44,7 @@ init() {
   level.satelliteflydistance = 10000;
   level.fx_u2_damage_trail = loadfx("trail/fx_trail_u2_plane_damage_mp");
   level.fx_u2_explode = loadfx("vehicle/vexplosion/fx_vexplode_u2_exp_mp");
-  minimaporigins = getentarray("minimap_corner", "targetname");
+  minimaporigins = getEntArray("minimap_corner", "targetname");
 
   if(minimaporigins.size)
     uavorigin = maps\mp\gametypes\_spawnlogic::findboxcenter(minimaporigins[0].origin, minimaporigins[1].origin);
@@ -67,13 +67,13 @@ init() {
   }
 
   level.uavrig = spawn("script_model", uavorigin + vectorscale((0, 0, 1), 1100.0));
-  level.uavrig setmodel("tag_origin");
+  level.uavrig setModel("tag_origin");
   level.uavrig.angles = vectorscale((0, 1, 0), 115.0);
   level.uavrig hide();
   level.uavrig thread rotateuavrig(1);
   level.uavrig thread swayuavrig();
   level.counteruavrig = spawn("script_model", uavorigin + vectorscale((0, 0, 1), 1500.0));
-  level.counteruavrig setmodel("tag_origin");
+  level.counteruavrig setModel("tag_origin");
   level.counteruavrig.angles = vectorscale((0, 1, 0), 115.0);
   level.counteruavrig hide();
   level.counteruavrig thread rotateuavrig(0);
@@ -156,7 +156,7 @@ callcounteruav(type, displaymessage, killstreak_id) {
   counteruavplane thread plane_health();
   counteruavplane.killstreak_id = killstreak_id;
   counteruavplane.iscounter = 1;
-  counteruavplane playloopsound("veh_uav_engine_loop", 1);
+  counteruavplane playLoopSound("veh_uav_engine_loop", 1);
   return true;
 }
 
@@ -179,14 +179,14 @@ callspyplane(type, displaymessage, killstreak_id) {
   spyplane thread plane_health();
   spyplane.killstreak_id = killstreak_id;
   spyplane.iscounter = 0;
-  spyplane playloopsound("veh_uav_engine_loop", 1);
+  spyplane playLoopSound("veh_uav_engine_loop", 1);
   return true;
 }
 
 callsatellite(type, displaymessage, killstreak_id) {
   timeinair = self maps\mp\killstreaks\_radar::useradaritem(type, self.team, displaymessage);
   satellite = spawn("script_model", level.mapcenter + (0 - level.satelliteflydistance, 0, level.satelliteheight));
-  satellite setmodel("tag_origin");
+  satellite setModel("tag_origin");
   satellite moveto(level.mapcenter + (level.satelliteflydistance, 0, level.satelliteheight), timeinair);
   satellite.owner = self;
   satellite.team = self.team;
@@ -397,26 +397,26 @@ removeactivesatellite() {
 
 playspyplanefx() {
   wait 0.1;
-  playfxontag(level.fx_spyplane_burner, self, "tag_origin");
+  playFXOnTag(level.fx_spyplane_burner, self, "tag_origin");
 }
 
 playspyplaneafterburnerfx() {
   self endon("death");
   wait 0.1;
-  playfxontag(level.fx_spyplane_afterburner, self, "tag_origin");
+  playFXOnTag(level.fx_spyplane_afterburner, self, "tag_origin");
 }
 
 playcounterspyplanefx() {
   wait 0.1;
 
   if(isDefined(self))
-    playfxontag(level.fx_cuav_burner, self, "tag_origin");
+    playFXOnTag(level.fx_cuav_burner, self, "tag_origin");
 }
 
 playcounterspyplaneafterburnerfx() {
   self endon("death");
   wait 0.1;
-  playfxontag(level.fx_cuav_afterburner, self, "tag_origin");
+  playFXOnTag(level.fx_cuav_afterburner, self, "tag_origin");
 }
 
 playuavpilotdialog(dialog, owner, delaytime) {
@@ -454,10 +454,10 @@ generateplane(owner, timeinair, iscounter) {
   plane = spawn("script_model", uavrig gettagorigin("tag_origin"));
 
   if(iscounter) {
-    plane setmodel(level.counteruavmodel);
+    plane setModel(level.counteruavmodel);
     plane.targetname = "counteruav";
   } else {
-    plane setmodel(level.spyplanemodel);
+    plane setModel(level.spyplanemodel);
     plane.targetname = "uav";
   }
 
@@ -502,9 +502,9 @@ play_light_fx(iscounter) {
   wait 0.1;
 
   if(iscounter)
-    playfxontag(level.counteruavlight, self, "tag_origin");
+    playFXOnTag(level.counteruavlight, self, "tag_origin");
   else
-    playfxontag(level.uavlight, self, "tag_origin");
+    playFXOnTag(level.uavlight, self, "tag_origin");
 }
 
 updatevisibility() {
@@ -534,7 +534,7 @@ plane_damage_monitor(isspyplane) {
   self endon("death");
   self endon("crashing");
   self endon("delete");
-  self setcandamage(1);
+  self setCanDamage(1);
   self.damagetaken = 0;
 
   for(;;) {
@@ -614,8 +614,7 @@ plane_damage_monitor(isspyplane) {
         if(!isDefined(self.owner) || self.owner isenemyplayer(attacker)) {
           thread maps\mp\_scoreevents::processscoreevent("destroyed_uav", attacker, self.owner, weapon);
           attacker maps\mp\_challenges::addflyswatterstat(weapon, self);
-        } else {
-        }
+        } else {}
 
         spyplane_death();
       } else {
@@ -627,8 +626,7 @@ plane_damage_monitor(isspyplane) {
         if(!isDefined(self.owner) || self.owner isenemyplayer(attacker)) {
           thread maps\mp\_scoreevents::processscoreevent("destroyed_counter_uav", attacker, self.owner, weapon);
           attacker maps\mp\_challenges::addflyswatterstat(weapon, self);
-        } else {
-        }
+        } else {}
 
         counteruavplane_death();
       }
@@ -662,14 +660,14 @@ plane_health() {
 playdamagefx() {
   self endon("death");
   self endon("crashing");
-  playfxontag(level.fx_u2_damage_trail, self, "tag_body");
+  playFXOnTag(level.fx_u2_damage_trail, self, "tag_body");
 }
 
 u2_crash() {
   self notify("crashing");
-  playfxontag(level.fx_u2_explode, self, "tag_origin");
+  playFXOnTag(level.fx_u2_explode, self, "tag_origin");
   wait 0.1;
-  self setmodel("tag_origin");
+  self setModel("tag_origin");
   wait 0.2;
   self notify("delete");
   self delete();
@@ -691,14 +689,14 @@ spyplane_death_waiter() {
 
 counteruavplane_death() {
   self clearclientflag(11);
-  self playsound("evt_helicopter_midair_exp");
+  self playSound("evt_helicopter_midair_exp");
   self removeactivecounteruav();
   target_remove(self);
   self thread u2_crash();
 }
 
 spyplane_death() {
-  self playsound("evt_helicopter_midair_exp");
+  self playSound("evt_helicopter_midair_exp");
 
   if(!self.leaving)
     self removeactiveuav();
@@ -790,12 +788,12 @@ plane_leave() {
 
   if(isDefined(self.iscounter) && self.iscounter) {
     self thread playcounterspyplaneafterburnerfx();
-    self playsound("veh_kls_uav_afterburner");
+    self playSound("veh_kls_uav_afterburner");
     self thread play_light_fx(1);
     self thread planestoploop(1);
   } else {
     self thread playspyplaneafterburnerfx();
-    self playsound("veh_kls_spy_afterburner");
+    self playSound("veh_kls_spy_afterburner");
     self thread play_light_fx(0);
     self thread planestoploop(1);
   }
@@ -803,14 +801,14 @@ plane_leave() {
   self.currentstate = "leaving";
 
   if(self.laststate == "damaged")
-    playfxontag(level.fx_u2_damage_trail, self, "tag_body");
+    playFXOnTag(level.fx_u2_damage_trail, self, "tag_body");
 
   mult = getdvarintdefault("scr_spymult", 20000);
   tries = 10;
   yaw = 0;
 
   while(tries > 0) {
-    exitvector = anglestoforward(self.angles + (0, yaw, 0)) * 20000;
+    exitvector = anglesToForward(self.angles + (0, yaw, 0)) * 20000;
 
     if(isDefined(self.iscounter) && self.iscounter) {
       self thread playcounterspyplanefx();

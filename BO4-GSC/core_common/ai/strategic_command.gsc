@@ -14,7 +14,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\throttle_shared;
 #include scripts\core_common\util_shared;
-
 #namespace strategic_command;
 
 autoexec __init__system__() {
@@ -23,7 +22,7 @@ autoexec __init__system__() {
 
 #namespace strategiccommandutility;
 
-private __init__() {
+__init__() {
   level thread _debuggameobjects();
   level thread function_f0be958();
   level thread function_1e535a11();
@@ -36,7 +35,7 @@ private __init__() {
   }
 }
 
-private function_ee3d20f5(entity, points) {
+function_ee3d20f5(entity, points) {
   path = undefined;
   shortestpath = undefined;
   start = entity getclosestpointonnavvolume(entity.origin, 200);
@@ -65,7 +64,7 @@ private function_ee3d20f5(entity, points) {
   return path;
 }
 
-private _calculatepathtopoints(entity, points) {
+_calculatepathtopoints(entity, points) {
   path = undefined;
   shortestpath = undefined;
   entradius = entity getpathfindingradius();
@@ -100,7 +99,7 @@ private _calculatepathtopoints(entity, points) {
   return path;
 }
 
-private function_45857dbe(members) {
+function_45857dbe(members) {
   var_48fb9acf = 0;
   working = array();
 
@@ -124,7 +123,7 @@ private function_45857dbe(members) {
   return sorted;
 }
 
-private function_65b80a10(commander, member, vehicle = undefined) {
+function_65b80a10(commander, member, vehicle = undefined) {
   if(isDefined(vehicle)) {
     occupant = vehicle getseatoccupant(0);
 
@@ -170,44 +169,44 @@ private function_65b80a10(commander, member, vehicle = undefined) {
   return "<dev string:x8e>";
 }
 
-private function_41c81572(var_78caba27) {
+function_41c81572(var_78caba27) {
   switch (var_78caba27) {
-    case #"bot chain":
-    case #"spline":
+    case # "bot chain":
+    case # "spline":
       return (0, 1, 0);
-    case #"scripted":
+    case # "scripted":
       return (1, 0, 0);
-    case #"commander":
-    case #"player":
-    case #"vehicle":
+    case # "commander":
+    case # "player":
+    case # "vehicle":
       return (1, 0.5, 0);
   }
 
   return (1, 0, 0);
 }
 
-private function_741d9796(member, vehicle, commander, var_78caba27) {
+function_741d9796(member, vehicle, commander, var_78caba27) {
   switch (var_78caba27) {
-    case #"bot chain":
+    case # "bot chain":
       if(isDefined(member.bot.var_53ffa4c4.startstruct)) {
         return ("<dev string:x98>" + member.bot.var_53ffa4c4.startstruct.targetname + "<dev string:xa2>");
       }
-    case #"commander":
+    case # "commander":
       foreach(squad in commander.squads) {
         bots = plannersquadutility::getblackboardattribute(squad, "<dev string:xa6>");
 
-        if(bots.size > 0 && bots[0][#"entnum"] == member getentitynumber()) {
+        if(bots.size > 0 && bots[0][# "entnum"] == member getentitynumber()) {
           target = plannersquadutility::getblackboardattribute(squad, "<dev string:xb3>");
 
           if(isDefined(target)) {
-            bundle = target[#"__unsafe__"][#"bundle"];
-            missioncomponent = target[#"__unsafe__"][#"mission_component"];
+            bundle = target[# "__unsafe__"][# "bundle"];
+            missioncomponent = target[# "__unsafe__"][# "mission_component"];
 
             if(isDefined(missioncomponent)) {
               return missioncomponent.scriptbundlename;
             }
 
-            object = target[#"__unsafe__"][#"object"];
+            object = target[# "__unsafe__"][# "object"];
 
             if(isDefined(object) && isDefined(object.e_object) && isDefined(object.e_object.scriptbundlename)) {
               return object.e_object.scriptbundlename;
@@ -224,7 +223,7 @@ private function_741d9796(member, vehicle, commander, var_78caba27) {
 
   if(isDefined(vehicle)) {
     switch (var_78caba27) {
-      case #"spline":
+      case # "spline":
         return vehicle.attachedpath.targetname;
     }
 
@@ -232,7 +231,7 @@ private function_741d9796(member, vehicle, commander, var_78caba27) {
   }
 
   switch (var_78caba27) {
-    case #"vehicle":
+    case # "vehicle":
       vehicle = member getvehicleoccupied();
 
       if(isDefined(vehicle)) {
@@ -243,7 +242,7 @@ private function_741d9796(member, vehicle, commander, var_78caba27) {
   }
 }
 
-private function_7c3d768e(var_1b2a0645, var_d695a79f, commander) {
+function_7c3d768e(var_1b2a0645, var_d695a79f, commander) {
   if(!isDefined(commander)) {
     return var_d695a79f;
   }
@@ -255,7 +254,7 @@ private function_7c3d768e(var_1b2a0645, var_d695a79f, commander) {
   backgroundcolor = (0, 0, 0);
   backgroundalpha = 0.8;
   textsize = 1.25;
-  team = blackboard::getstructblackboardattribute(commander, #"team");
+  team = blackboard::getstructblackboardattribute(commander, # "team");
   paused = isDefined(commander.pause) && commander.pause;
   squadcount = commander.squads.size;
   debug2dtext((var_1b2a0645, var_d695a79f, 0), "<dev string:xc4>" + function_9e72a96(team) + "<dev string:xa2>", textcolor, textalpha, backgroundcolor, backgroundalpha, textsize);
@@ -272,7 +271,7 @@ private function_7c3d768e(var_1b2a0645, var_d695a79f, commander) {
   return var_d695a79f;
 }
 
-private function_df74a8f3(var_1b2a0645, var_d695a79f, members, commander) {
+function_df74a8f3(var_1b2a0645, var_d695a79f, members, commander) {
   var_6e868cb7 = 0;
   yspacing = 27;
   textcolor = (1, 1, 1);
@@ -364,7 +363,7 @@ private function_df74a8f3(var_1b2a0645, var_d695a79f, members, commander) {
   return var_d695a79f;
 }
 
-private function_75df771f() {
+function_75df771f() {
   xoffset = 150;
   yoffset = 100;
   var_2f7868e6 = 850;
@@ -418,7 +417,7 @@ private function_75df771f() {
   }
 }
 
-private _debuggameobjects() {
+_debuggameobjects() {
   while(true) {
     waitframe(1);
 
@@ -433,7 +432,7 @@ private _debuggameobjects() {
   }
 }
 
-private function_f0be958() {
+function_f0be958() {
   while(true) {
     waitframe(1);
 
@@ -447,7 +446,7 @@ private function_f0be958() {
   }
 }
 
-private function_1e535a11() {
+function_1e535a11() {
   while(true) {
     waitframe(1);
 
@@ -461,7 +460,7 @@ private function_1e535a11() {
   }
 }
 
-private function_31badd5d(missioncomponent, index) {
+function_31badd5d(missioncomponent, index) {
   if(!isDefined(index)) {
     index = "<dev string:x191>";
   }
@@ -524,7 +523,7 @@ private function_31badd5d(missioncomponent, index) {
   recordsphere(origin, 20, statuscolor);
 }
 
-private function_3ed19fa3(gameobject, position) {
+function_3ed19fa3(gameobject, position) {
   entnum = gameobject getentitynumber();
   origin = gameobject.origin;
   identifiertext = (isDefined(gameobject gameobjects::get_identifier()) ? gameobject gameobjects::get_identifier() : "<dev string:x298>") + "<dev string:x2a5>" + entnum + "<dev string:xa2>";
@@ -603,7 +602,7 @@ private function_3ed19fa3(gameobject, position) {
   recordsphere(origin, 17, statuscolor, "<dev string:x21e>");
 }
 
-private function_adb62fbb(breadcrumb, index) {
+function_adb62fbb(breadcrumb, index) {
   if(!isDefined(index)) {
     index = "<dev string:x191>";
   }
@@ -634,7 +633,7 @@ private function_adb62fbb(breadcrumb, index) {
   function_15462dcd(origin, textcolor, "<dev string:x21e>", identifiertext, origintext, var_4fea471b, tacpointtext, errortext);
 }
 
-private function_15462dcd(pos, color, channel, ...) {
+function_15462dcd(pos, color, channel, ...) {
   recordstr = "<dev string:x1df>";
 
   foreach(str in vararg) {
@@ -648,7 +647,7 @@ private function_15462dcd(pos, color, channel, ...) {
   record3dtext(recordstr, pos, color, channel);
 }
 
-private function_20610c3(volume, color, channel) {
+function_20610c3(volume, color, channel) {
   maxs = volume getmaxs();
   mins = volume getmins();
 
@@ -665,7 +664,7 @@ private function_20610c3(volume, color, channel) {
   recordbox(volume.origin, mins, maxs, volume.angles[0], color, channel);
 }
 
-private function_35fd8254() {
+function_35fd8254() {
   while(true) {
     if(getdvarint(#"hash_53bff1e7234da64b", 0)) {
       offset = 30;
@@ -689,10 +688,10 @@ private function_35fd8254() {
 
       for(index = 0; index < var_69548289; index++) {
         commander = level.var_b3d6ba87[index];
-        assaultobjects += blackboard::getstructblackboardattribute(commander, #"gameobjects_assault").size;
-        defendobjects += blackboard::getstructblackboardattribute(commander, #"gameobjects_defend").size;
-        botcount += blackboard::getstructblackboardattribute(commander, #"doppelbots").size;
-        objectivecount += blackboard::getstructblackboardattribute(commander, #"objectives").size;
+        assaultobjects += blackboard::getstructblackboardattribute(commander, # "gameobjects_assault").size;
+        defendobjects += blackboard::getstructblackboardattribute(commander, # "gameobjects_defend").size;
+        botcount += blackboard::getstructblackboardattribute(commander, # "doppelbots").size;
+        objectivecount += blackboard::getstructblackboardattribute(commander, # "objectives").size;
         targetcount += commander.var_6365d720;
       }
 
@@ -723,7 +722,7 @@ private function_35fd8254() {
   }
 }
 
-private function_7712a8e4(strategy, var_a5bd84a3, var_48ce643a, doppelbots = 1, companions = 1) {
+function_7712a8e4(strategy, var_a5bd84a3, var_48ce643a, doppelbots = 1, companions = 1) {
   assert(isDefined(strategy));
   var_c4c7d0bc = strategy.(var_a5bd84a3) === 1;
   var_3b9048 = var_c4c7d0bc;
@@ -815,10 +814,10 @@ function_704d5fbd(bot, component) {
   }
 
   switch (component.m_str_type) {
-    case #"goto":
+    case # "goto":
       break;
-    case #"destroy":
-    case #"defend":
+    case # "destroy":
+    case # "defend":
       if(function_778568e2(bot)) {
         return calculatepathtotrigger(bot, component.var_6bc907c4);
       } else {
@@ -826,7 +825,7 @@ function_704d5fbd(bot, component) {
       }
 
       break;
-    case #"capturearea":
+    case # "capturearea":
       return calculatepathtotrigger(bot, component.var_cc67d976);
   }
 }
@@ -1069,7 +1068,7 @@ function_1e3c1b91(var_b7f15515, var_5e513205) {
   assert(var_6da809dc.size == var_e3e0ebe5.size);
 
   foreach(kvp in var_6da809dc) {
-    if(!isDefined(var_5e513205.(kvp)) || var_5e513205.(kvp) === #"hash_13275474a58f1175") {
+    if(!isDefined(var_5e513205.(kvp)) || var_5e513205.(kvp) === # "hash_13275474a58f1175") {
       if(!isDefined(var_b7f15515.(kvp))) {
         var_389ef689.(kvp) = 0;
       } else {
@@ -1188,9 +1187,9 @@ function_4b0c469d(vehicle) {
   assert(isDefined(vehicle) && isvehicle(vehicle));
 
   switch (vehicle.vehicleclass) {
-    case #"helicopter":
+    case # "helicopter":
       return "air";
-    case #"4 wheel":
+    case # "4 wheel":
       return "ground";
   }
 
@@ -1198,11 +1197,11 @@ function_4b0c469d(vehicle) {
 }
 
 canattackgameobject(team, gameobject) {
-  return gameobject.team == team && gameobject.interactteam == #"friendly" || gameobject.team != team && gameobject.interactteam == #"enemy" || gameobject.absolute_visible_and_interact_team === team;
+  return gameobject.team == team && gameobject.interactteam == # "friendly" || gameobject.team != team && gameobject.interactteam == # "enemy" || gameobject.absolute_visible_and_interact_team === team;
 }
 
 candefendgameobject(team, gameobject) {
-  return gameobject.team == team && gameobject.interactteam == #"enemy" || gameobject.team != team && gameobject.interactteam == #"friendly";
+  return gameobject.team == team && gameobject.interactteam == # "enemy" || gameobject.team != team && gameobject.interactteam == # "friendly";
 }
 
 function_a1edb007(team) {
@@ -1220,14 +1219,14 @@ function_5c2c9542(entity, component) {
   assert(isDefined(component));
 
   switch (component.m_str_type) {
-    case #"destroy":
-    case #"defend":
+    case # "destroy":
+    case # "defend":
       if(function_778568e2(entity)) {
         return component.var_6bc907c4;
       }
 
       return component.var_2956bff4;
-    case #"capturearea":
+    case # "capturearea":
       return component.var_cc67d976;
   }
 }
@@ -1324,7 +1323,7 @@ function_208c970d(gpbundle, var_832340f2) {
   type = gpbundle.classname;
 
   switch (type) {
-    case #"hash_1c67b29f3576b10d":
+    case # "hash_1c67b29f3576b10d":
       if(!isDefined(bundle.var_27726d51)) {
         return false;
       }
@@ -1347,7 +1346,7 @@ isvalidplayer(client) {
 
 function_f867cce0(missioncomponent, commanderteam) {
   component = missioncomponent.var_36f0c06d;
-  assert(commanderteam == #"any" || commanderteam == #"allies" || commanderteam == #"axis", "<dev string:x43c>" + commanderteam + "<dev string:x44f>");
+  assert(commanderteam == # "any" || commanderteam == # "allies" || commanderteam == # "axis", "<dev string:x43c>" + commanderteam + "<dev string:x44f>");
 
   if(!isDefined(component)) {
     return false;
@@ -1361,7 +1360,7 @@ function_f867cce0(missioncomponent, commanderteam) {
     return false;
   }
 
-  if(component.m_str_team !== commanderteam && component.m_str_team != #"any") {
+  if(component.m_str_team !== commanderteam && component.m_str_team != # "any") {
     if(!isDefined(missioncomponent.var_3093fd62) || missioncomponent.var_3093fd62 == 0) {
       return false;
     }
@@ -1370,11 +1369,11 @@ function_f867cce0(missioncomponent, commanderteam) {
   type = missioncomponent.scriptbundlename;
 
   switch (type) {
-    case #"hash_6e9081699001bcd9":
+    case # "hash_6e9081699001bcd9":
       break;
-    case #"hash_3bf68fbcb5c53b6c":
+    case # "hash_3bf68fbcb5c53b6c":
       break;
-    case #"hash_4984fd4b0ba666a2":
+    case # "hash_4984fd4b0ba666a2":
       break;
     default:
       return false;
@@ -1456,7 +1455,7 @@ querypointsinsideposition(bot, position, radius, halfheight) {
   return points;
 }
 
-private function_1891d0d2(points, obb) {
+function_1891d0d2(points, obb) {
   var_2586092e = 50;
   var_c2a08848 = 0;
 
@@ -1570,36 +1569,36 @@ function_f4921cb3(var_6d1ae0e2) {
   focuses = array();
 
   switch (var_6d1ae0e2) {
-    case #"hash_617966a33a6bad2b":
-      focuses[focuses.size] = #"hash_617966a33a6bad2b";
+    case # "hash_617966a33a6bad2b":
+      focuses[focuses.size] = # "hash_617966a33a6bad2b";
       break;
-    case #"follow player":
-      focuses[focuses.size] = #"follow player";
+    case # "follow player":
+      focuses[focuses.size] = # "follow player";
       break;
-    case #"hash_a465dbf9320e821":
-      focuses[focuses.size] = #"hash_617966a33a6bad2b";
-      focuses[focuses.size] = #"follow player";
+    case # "hash_a465dbf9320e821":
+      focuses[focuses.size] = # "hash_617966a33a6bad2b";
+      focuses[focuses.size] = # "follow player";
       break;
-    case #"hash_964e75ec7937916":
-      focuses[focuses.size] = #"hash_964e75ec7937916";
+    case # "hash_964e75ec7937916":
+      focuses[focuses.size] = # "hash_964e75ec7937916";
       break;
-    case #"hash_64a01d6e814c8dc":
-      focuses[focuses.size] = #"hash_64a01d6e814c8dc";
+    case # "hash_64a01d6e814c8dc":
+      focuses[focuses.size] = # "hash_64a01d6e814c8dc";
       break;
-    case #"hash_584bf5a5b6fe57ca":
-      focuses[focuses.size] = #"hash_964e75ec7937916";
-      focuses[focuses.size] = #"hash_64a01d6e814c8dc";
+    case # "hash_584bf5a5b6fe57ca":
+      focuses[focuses.size] = # "hash_964e75ec7937916";
+      focuses[focuses.size] = # "hash_64a01d6e814c8dc";
       break;
-    case #"hash_833af17ffa224fe":
-      focuses[focuses.size] = #"hash_617966a33a6bad2b";
-      focuses[focuses.size] = #"hash_964e75ec7937916";
+    case # "hash_833af17ffa224fe":
+      focuses[focuses.size] = # "hash_617966a33a6bad2b";
+      focuses[focuses.size] = # "hash_964e75ec7937916";
       break;
-    case #"hash_692e498c8008c994":
-      focuses[focuses.size] = #"follow player";
-      focuses[focuses.size] = #"hash_64a01d6e814c8dc";
+    case # "hash_692e498c8008c994":
+      focuses[focuses.size] = # "follow player";
+      focuses[focuses.size] = # "hash_64a01d6e814c8dc";
       break;
-    case #"objective":
-      focuses[focuses.size] = #"objective";
+    case # "objective":
+      focuses[focuses.size] = # "objective";
       break;
   }
 

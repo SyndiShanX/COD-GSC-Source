@@ -466,9 +466,9 @@ zombie_fall_fx(zombie) {
 zombie_fall_burst_fx() {
   self endon("stop_zombie_fall_fx");
   self endon("fall_anim_finished");
-  playfx(level._effect["rise_burst"], self.origin + (0, 0, randomintrange(5, 10)));
+  playFX(level._effect["rise_burst"], self.origin + (0, 0, randomintrange(5, 10)));
   wait(.25);
-  playfx(level._effect["rise_billow"], self.origin + (randomintrange(-10, 10), randomintrange(-10, 10), randomintrange(5, 10)));
+  playFX(level._effect["rise_billow"], self.origin + (randomintrange(-10, 10), randomintrange(-10, 10), randomintrange(5, 10)));
 }
 
 zombie_fall_dust_fx(zombie) {
@@ -478,7 +478,7 @@ zombie_fall_dust_fx(zombie) {
   dust_time = 7.5;
   dust_interval = .1;
   for(t = 0; t < dust_time; t += dust_interval) {
-    PlayfxOnTag(level._effect["rise_dust"], zombie, dust_tag);
+    playFXOnTag(level._effect["rise_dust"], zombie, dust_tag);
     wait dust_interval;
   }
 }
@@ -516,7 +516,7 @@ hide_pop() {
 
 in_player_fov(player) {
   playerAngles = player getplayerangles();
-  playerForwardVec = AnglesToForward(playerAngles);
+  playerForwardVec = anglesToForward(playerAngles);
   playerUnitForwardVec = VectorNormalize(playerForwardVec);
   banzaiPos = self.origin;
   playerPos = player GetOrigin();

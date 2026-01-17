@@ -11,7 +11,7 @@
 #namespace zm_perk_quick_revive;
 
 function autoexec __init__sytem__() {
-  system::register("zm_perk_quick_revive", & __init__, undefined, undefined);
+  system::register("zm_perk_quick_revive", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -19,13 +19,13 @@ function __init__() {
 }
 
 function enable_quick_revive_perk_for_level() {
-  zm_perks::register_perk_clientfields("specialty_quickrevive", & quick_revive_client_field_func, & quick_revive_callback_func);
+  zm_perks::register_perk_clientfields("specialty_quickrevive", &quick_revive_client_field_func, &quick_revive_callback_func);
   zm_perks::register_perk_effects("specialty_quickrevive", "revive_light");
-  zm_perks::register_perk_init_thread("specialty_quickrevive", & init_quick_revive);
+  zm_perks::register_perk_init_thread("specialty_quickrevive", &init_quick_revive);
 }
 
 function init_quick_revive() {
-  if(isdefined(level.enable_magic) && level.enable_magic) {
+  if(isDefined(level.enable_magic) && level.enable_magic) {
     level._effect["revive_light"] = "zombie/fx_perk_quick_revive_zmb";
   }
 }

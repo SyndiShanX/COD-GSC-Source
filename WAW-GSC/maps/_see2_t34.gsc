@@ -22,7 +22,7 @@ main(model, type) {
   build_compassicon();
   build_vehiclewalk(6);
   build_aianims(::setanims, ::set_vehicle_anims);
-  level.vehicletypefancy["see2_t34"] = & "VEHICLENAME_T34_TANK";
+  level.vehicletypefancy["see2_t34"] = &"VEHICLENAME_T34_TANK";
 }
 
 init_local() {
@@ -31,7 +31,7 @@ init_local() {
 
 report_damage_if_player() {
   self endon("death");
-  while (1) {
+  while(1) {
     self waittill("damage", amount, attacker);
     if(isPlayer(attacker)) {
       level notify("friendly attacked by player", attacker);
@@ -49,8 +49,8 @@ set_vehicle_anims(positions) {
 
 setanims() {
   positions = [];
-  for (i = 0; i < 9; i++)
-    positions[i] = spawnstruct();
+  for(i = 0; i < 9; i++)
+    positions[i] = spawnStruct();
   positions[0].sittag = "tag_driver";
   positions[1].sittag = "tag_passenger4";
   positions[2].sittag = "tag_passenger5";

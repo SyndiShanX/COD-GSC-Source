@@ -337,8 +337,8 @@ setClientTweakable(category, name) {
 }
 
 updateUITweakables() {
-  for (;;) {
-    for (index = 0; index < level.clientTweakables.size; index++) {
+  for(;;) {
+    for(index = 0; index < level.clientTweakables.size; index++) {
       clientTweakable = level.clientTweakables[index];
       curValue = getTweakableDVarValue("hud", clientTweakable);
       lastValue = getTweakableLastValue("hud", clientTweakable);

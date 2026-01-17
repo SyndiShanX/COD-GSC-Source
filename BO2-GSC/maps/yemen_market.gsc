@@ -298,7 +298,7 @@ speech_courtyard_ai() {
   spawn_quadrotors_at_structs("court_drone_spot", "court_drone");
   trigger_use("spawn_court_drones");
   flag_wait_or_timeout("player_leaves_stage", 10);
-  ai_courtyard = getentarray("court_terrorists_ai", "targetname");
+  ai_courtyard = getEntArray("court_terrorists_ai", "targetname");
 
   foreach(ai in ai_courtyard)
   ai.overrideactordamage = undefined;
@@ -351,7 +351,7 @@ autoexec market_gump_cleanup() {
   if(isDefined(level.a_scenes["mvtol_pilot"]))
     delete_scene("mvtol_pilot");
 
-  a_fans = getentarray("market_fan", "script_noteworthy");
+  a_fans = getEntArray("market_fan", "script_noteworthy");
 
   foreach(fan in a_fans)
   fan delete();
@@ -363,8 +363,7 @@ market_rolling_door() {
   run_scene_and_delete("rolling_door");
 }
 
-market_friendly_handler() {
-}
+market_friendly_handler() {}
 
 market_heroes_shot() {
   level endon("stage_quads_exit");
@@ -386,7 +385,7 @@ market_battle_flow() {
   spawn_manager_enable("market_spawn_manager_01");
   spawn_quadrotors_at_structs("market_qr_01", "market_drones");
   flag_wait("market_friendly_respawn_hit");
-  a_terrorist_spawners = getentarray("market_friendly_terrorist", "targetname");
+  a_terrorist_spawners = getEntArray("market_friendly_terrorist", "targetname");
 
   foreach(sp_terrorist in a_terrorist_spawners)
   sp_terrorist maps\yemen_metal_storms::streets_spawn_full_count(1);
@@ -527,12 +526,11 @@ drone_crash_into_car() {
       vh_drone delete();
 
     radiusdamage(v_damage, 200, 2800, 2650);
-    playfx(level._effect["quadrotor_crash"], v_damage, (1, 0, 0), (0, 0, 1));
+    playFX(level._effect["quadrotor_crash"], v_damage, (1, 0, 0), (0, 0, 1));
   }
 }
 
-setup_scenes() {
-}
+setup_scenes() {}
 
 melee_01_terrorist(ai) {
   self endon("death");
@@ -656,7 +654,7 @@ kill_behind_player() {
     n_kill = clamp(n_ai - max_market_ai, 0, level.market_ai.size);
 
     if(n_kill > 0) {
-      v_eye = level.player geteye();
+      v_eye = level.player getEye();
       i = 0;
 
       while(n_kill > 0 && i < level.market_ai.size) {

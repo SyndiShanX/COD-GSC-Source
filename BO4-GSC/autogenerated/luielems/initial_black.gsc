@@ -5,11 +5,9 @@
 
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\lui_shared;
-
 #namespace initial_black;
 
 class cinitial_black: cluielem {
-
   function close(player) {
     cluielem::close_luielem(player);
   }

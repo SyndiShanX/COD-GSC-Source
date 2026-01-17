@@ -18,7 +18,6 @@
 #include scripts\mp_common\gametypes\ct_core;
 #include scripts\mp_common\gametypes\ct_utils;
 #include scripts\mp_common\player\player_utils;
-
 #namespace ct_bots;
 
 autoexec __init__system__() {
@@ -87,42 +86,42 @@ function_fa0d912f(var_7b4ae7d1) {
 
   thread debug_bots(var_7b4ae7d1);
 
-    for(i = 0; i < var_7b4ae7d1; i++) {
-      bot = bot::add_bot(#"spectator");
+  for(i = 0; i < var_7b4ae7d1; i++) {
+    bot = bot::add_bot(#"spectator");
 
-      if(!isDefined(bot)) {
-        break;
-      }
-
-      if(isDefined(level.var_7cab580)) {
-        bot.var_29b433bd = level.var_7cab580;
-      } else {
-        var_5ec2386a = getplayerroletemplatecount(currentsessionmode());
-        count = 0;
-
-        do {
-          role_index = randomintrange(1, var_5ec2386a);
-          fields = getcharacterfields(role_index, currentsessionmode());
-          count += 1;
-
-          if(isDefined(fields) && isDefined(fields.var_49a55967) && fields.var_49a55967) {
-            break;
-          }
-        }
-        while(count < var_5ec2386a);
-
-        if(!isDefined(fields) || !(isDefined(fields.var_49a55967) && fields.var_49a55967)) {
-          role_index = 1;
-        }
-
-        bot.var_29b433bd = role_index;
-      }
-
-      bot.pers[#"class"] = level.defaultclass;
-      bot.curclass = level.defaultclass;
-      bot.var_71a70093 = level.var_eea9be19;
-      waitframe(1);
+    if(!isDefined(bot)) {
+      break;
     }
+
+    if(isDefined(level.var_7cab580)) {
+      bot.var_29b433bd = level.var_7cab580;
+    } else {
+      var_5ec2386a = getplayerroletemplatecount(currentsessionmode());
+      count = 0;
+
+      do {
+        role_index = randomintrange(1, var_5ec2386a);
+        fields = getcharacterfields(role_index, currentsessionmode());
+        count += 1;
+
+        if(isDefined(fields) && isDefined(fields.var_49a55967) && fields.var_49a55967) {
+          break;
+        }
+      }
+      while(count < var_5ec2386a);
+
+      if(!isDefined(fields) || !(isDefined(fields.var_49a55967) && fields.var_49a55967)) {
+        role_index = 1;
+      }
+
+      bot.var_29b433bd = role_index;
+    }
+
+    bot.pers[# "class"] = level.defaultclass;
+    bot.curclass = level.defaultclass;
+    bot.var_71a70093 = level.var_eea9be19;
+    waitframe(1);
+  }
 
   level flag::set("bot_init_complete");
 }
@@ -321,7 +320,7 @@ function_e31c5d7a() {
   self endon(#"death");
 
   if(isDefined(level.var_d6d98fbe) && level.var_d6d98fbe) {
-    if(self.team == #"axis") {
+    if(self.team == # "axis") {
       self thread ct_utils::function_8963dae3();
     }
   }
@@ -330,7 +329,7 @@ function_e31c5d7a() {
 }
 
 function_7d86a450() {
-  self endon(#"disconnect", #"death");
+  self endon(#"disconnect", # "death");
 
   for(;;) {
     wait 1;
@@ -502,50 +501,50 @@ debug_bots(var_841324bd) {
   }
 }
 
-  function function_3895c193(team = "axis", str_targetname) {
-    self.team = team;
-    self.pers[#"team"] = team;
-    self.sessionteam = team;
-    self.disablespawning = 0;
-    self.isinuse = 1;
-    self.bot.var_b2b8f0b6 = level.var_b0436df5;
-    self.bot.var_e8c941d6 = level.var_30675389;
-    self.targetname = str_targetname;
-    self setmovespeedscale(1);
+function function_3895c193(team = "axis", str_targetname) {
+  self.team = team;
+  self.pers[# "team"] = team;
+  self.sessionteam = team;
+  self.disablespawning = 0;
+  self.isinuse = 1;
+  self.bot.var_b2b8f0b6 = level.var_b0436df5;
+  self.bot.var_e8c941d6 = level.var_30675389;
+  self.targetname = str_targetname;
+  self setmovespeedscale(1);
 
-    if(isarray(self.values)) {
-      if(isarray(self.values[#"ignoreall"])) {
-        while(isDefined(self.values[#"ignoreall"]) && self.values[#"ignoreall"].size > 0) {
-          for(i = 0; i < self.values[#"ignoreall"].size; i++) {
-            v = self.values[#"ignoreall"][i];
-            self val::reset(v.str_id, "ignoreall");
-            break;
-          }
+  if(isarray(self.values)) {
+    if(isarray(self.values[# "ignoreall"])) {
+      while(isDefined(self.values[# "ignoreall"]) && self.values[# "ignoreall"].size > 0) {
+        for(i = 0; i < self.values[# "ignoreall"].size; i++) {
+          v = self.values[# "ignoreall"][i];
+          self val::reset(v.str_id, "ignoreall");
+          break;
         }
       }
     }
-
-    if(isarray(self.values)) {
-      if(isarray(self.values[#"ignoreme"])) {
-        while(isDefined(self.values[#"ignoreme"]) && self.values[#"ignoreme"].size > 0) {
-          for(i = 0; i < self.values[#"ignoreme"].size; i++) {
-            v = self.values[#"ignoreme"][i];
-            self val::reset(v.str_id, "ignoreme");
-            break;
-          }
-        }
-      }
-    }
-
-    self callback::on_death(&on_death);
-
-    if(isDefined(level.prespawnplayer)) {
-      self[[level.prespawnplayer]]();
-    }
-
-    self[[level.spawnplayer]]();
-    self.var_911100f4 = 1;
   }
+
+  if(isarray(self.values)) {
+    if(isarray(self.values[# "ignoreme"])) {
+      while(isDefined(self.values[# "ignoreme"]) && self.values[# "ignoreme"].size > 0) {
+        for(i = 0; i < self.values[# "ignoreme"].size; i++) {
+          v = self.values[# "ignoreme"][i];
+          self val::reset(v.str_id, "ignoreme");
+          break;
+        }
+      }
+    }
+  }
+
+  self callback::on_death(&on_death);
+
+  if(isDefined(level.prespawnplayer)) {
+    self[[level.prespawnplayer]]();
+  }
+
+  self[[level.spawnplayer]]();
+  self.var_911100f4 = 1;
+}
 
 on_death(params) {
   self.isinuse = 0;
@@ -711,7 +710,7 @@ function_fe3c676a(enemy) {
 }
 
 function_956b904a() {
-  self endon(#"death", #"disconnect", #"joined_team", #"joined_spectators");
+  self endon(#"death", # "disconnect", # "joined_team", # "joined_spectators");
 
   if(!isDefined(self.var_ef59b90)) {
     self.var_ef59b90 = 1;
@@ -829,7 +828,7 @@ function_b8eff92a(desired_state) {
 }
 
 checkfortimeout(waittime) {
-  self endon(#"death", #"disconnect", #"joined_team", #"joined_spectators", #"reset_pathing");
+  self endon(#"death", # "disconnect", # "joined_team", # "joined_spectators", # "reset_pathing");
 
   if(isDefined(waittime)) {
     wait waittime;
@@ -841,7 +840,7 @@ checkfortimeout(waittime) {
 }
 
 registerspecialty_earnmoremomentumspawnstart() {
-  self endon(#"death", #"disconnect", #"joined_team", #"joined_spectators", #"bot_goal_reached", #"reset_pathing");
+  self endon(#"death", # "disconnect", # "joined_team", # "joined_spectators", # "bot_goal_reached", # "reset_pathing");
 
   if(isDefined(self.var_fc5b0b7f)) {
     wait self.var_fc5b0b7f;
@@ -855,22 +854,22 @@ registerspecialty_earnmoremomentumspawnstart() {
 }
 
 function_eff20434() {
-  self endon(#"death", #"disconnect", #"joined_team", #"joined_spectators", #"hash_1213d70444c626d4", #"reset_pathing");
+  self endon(#"death", # "disconnect", # "joined_team", # "joined_spectators", # "hash_1213d70444c626d4", # "reset_pathing");
   self thread registerspecialty_earnmoremomentumspawnstart();
-  self waittill(#"bot_goal_reached", #"stop_wander", #"stop_chase");
+  self waittill(#"bot_goal_reached", # "stop_wander", # "stop_chase");
   self.navmeshpoint = undefined;
   self.var_86ba7e6d = 0;
 }
 
 function_6390598e() {
-  self endon(#"death", #"disconnect", #"joined_team", #"joined_spectators", #"hash_1213d70444c626d4", #"reset_pathing");
-  self waittill(#"bot_goal_reached", #"stop_wander", #"stop_chase");
+  self endon(#"death", # "disconnect", # "joined_team", # "joined_spectators", # "hash_1213d70444c626d4", # "reset_pathing");
+  self waittill(#"bot_goal_reached", # "stop_wander", # "stop_chase");
   self val::set(#"revived_bot", "ignoreme", 1);
   self val::set(#"revived_bot", "ignoreall", 1);
 }
 
 function_f83f2862() {
-  self endon(#"death", #"disconnect", #"joined_team", #"joined_spectators", #"hash_1213d70444c626d4", #"reset_pathing");
+  self endon(#"death", # "disconnect", # "joined_team", # "joined_spectators", # "hash_1213d70444c626d4", # "reset_pathing");
   self waittill(#"hash_69dbfbd660f8c53e");
 
   if(!(isDefined(self.var_9f73d035) && self.var_9f73d035)) {
@@ -884,7 +883,7 @@ function_f83f2862() {
 }
 
 function_6c89913a(var_daa4b90a = 1) {
-  self endon(#"death", #"disconnect", #"joined_team", #"joined_spectators", #"reset_pathing");
+  self endon(#"death", # "disconnect", # "joined_team", # "joined_spectators", # "reset_pathing");
   self.var_2925fedc = self.origin + (10, 0, 0);
   wait var_daa4b90a;
   self.var_2925fedc = self.origin + (-10, 0, 0);
@@ -898,7 +897,7 @@ function_fad5456d() {
 }
 
 function_eca43db6() {
-  self endon(#"death", #"disconnect", #"joined_team", #"joined_spectators", #"stop_lookaround", #"reset_pathing", #"hash_658257c9e391c92c");
+  self endon(#"death", # "disconnect", # "joined_team", # "joined_spectators", # "stop_lookaround", # "reset_pathing", # "hash_658257c9e391c92c");
   self notify(#"hash_12a5c1fba387d037");
 
   if(!isDefined(self.navmeshpoint)) {
@@ -939,7 +938,7 @@ function_911f9e8f(var_dfb36d05, n_threat = 0.5) {
 }
 
 function_3abfdc6b() {
-  self endon(#"death", #"disconnect", #"joined_team", #"joined_spectators", #"stop_lookaround", #"reset_pathing", #"hash_658257c9e391c92c");
+  self endon(#"death", # "disconnect", # "joined_team", # "joined_spectators", # "stop_lookaround", # "reset_pathing", # "hash_658257c9e391c92c");
   self notify(#"hash_42a76c06b057248e");
 
   if(!isDefined(self.navmeshpoint) && isDefined(self.var_9a79d89d)) {
@@ -983,7 +982,7 @@ function_3abfdc6b() {
 }
 
 function_4b111722() {
-  self endon(#"death", #"disconnect", #"joined_team", #"joined_spectators", #"stop_wander", #"reset_pathing", #"hash_658257c9e391c92c");
+  self endon(#"death", # "disconnect", # "joined_team", # "joined_spectators", # "stop_wander", # "reset_pathing", # "hash_658257c9e391c92c");
   self notify(#"hash_37ed6c252b08c1a4");
 
   if(!isDefined(self.navmeshpoint)) {
@@ -1029,7 +1028,7 @@ function_4b111722() {
 }
 
 bot_chase_state() {
-  self endon(#"death", #"disconnect", #"joined_team", #"joined_spectators", #"stop_chase", #"reset_pathing", #"hash_658257c9e391c92c");
+  self endon(#"death", # "disconnect", # "joined_team", # "joined_spectators", # "stop_chase", # "reset_pathing", # "hash_658257c9e391c92c");
   self notify(#"bot_chase_state");
   a_players = util::get_players(#"allies");
   e_enemy = self get_enemy();
@@ -1087,7 +1086,7 @@ bot_chase_state() {
 }
 
 function_9125af5f() {
-  self endon(#"death", #"disconnect", #"joined_team", #"joined_spectators", #"stop_lookaround", #"reset_pathing", #"hash_658257c9e391c92c");
+  self endon(#"death", # "disconnect", # "joined_team", # "joined_spectators", # "stop_lookaround", # "reset_pathing", # "hash_658257c9e391c92c");
 
   switch (self.var_3c5a5d29) {
     case 1:
@@ -1377,7 +1376,7 @@ function_59458966(nd_spawn, n_state) {
   self endon(#"death");
   self setorigin(nd_spawn.origin);
   self setplayerangles(nd_spawn.angles);
-  self.waypoint = self ct_utils::create_waypoint(#"hash_4b08047cf5e74f2e", self.origin, self.angles, #"any", undefined, 0, undefined);
+  self.waypoint = self ct_utils::create_waypoint(#"hash_4b08047cf5e74f2e", self.origin, self.angles, # "any", undefined, 0, undefined);
 
   while(isDefined(nd_spawn.target)) {
     a_nd_targets = getnodearray(nd_spawn.target, "targetname");
@@ -1409,7 +1408,7 @@ function_59458966(nd_spawn, n_state) {
 }
 
 function_abe81a6b() {
-  self endon(#"death", #"stop_end");
+  self endon(#"death", # "stop_end");
 
   while(true) {
     self setgoal(self.origin, 1, 1);

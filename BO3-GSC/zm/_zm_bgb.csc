@@ -13,43 +13,43 @@
 #namespace bgb;
 
 function autoexec __init__sytem__() {
-  system::register("bgb", & __init__, & __main__, undefined);
+  system::register("bgb", &__init__, &__main__, undefined);
 }
 
 function __init__() {
-  if(!(isdefined(level.bgb_in_use) && level.bgb_in_use)) {
+  if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
   level.weaponbgbgrab = getweapon("zombie_bgb_grab");
-  callback::on_localclient_connect( & on_player_connect);
+  callback::on_localclient_connect(&on_player_connect);
   level.bgb = [];
   level.bgb_pack = [];
-  clientfield::register("clientuimodel", "bgb_current", 1, 8, "int", & function_cec2dbda, 0, 0);
+  clientfield::register("clientuimodel", "bgb_current", 1, 8, "int", &function_cec2dbda, 0, 0);
   clientfield::register("clientuimodel", "bgb_display", 1, 1, "int", undefined, 0, 0);
   clientfield::register("clientuimodel", "bgb_timer", 1, 8, "float", undefined, 0, 0);
   clientfield::register("clientuimodel", "bgb_activations_remaining", 1, 3, "int", undefined, 0, 0);
   clientfield::register("clientuimodel", "bgb_invalid_use", 1, 1, "counter", undefined, 0, 0);
   clientfield::register("clientuimodel", "bgb_one_shot_use", 1, 1, "counter", undefined, 0, 0);
-  clientfield::register("toplayer", "bgb_blow_bubble", 1, 1, "counter", & bgb_blow_bubble, 0, 0);
+  clientfield::register("toplayer", "bgb_blow_bubble", 1, 1, "counter", &bgb_blow_bubble, 0, 0);
   level._effect["bgb_blow_bubble"] = "zombie/fx_bgb_bubble_blow_zmb";
 }
 
 function private __main__() {
-  if(!(isdefined(level.bgb_in_use) && level.bgb_in_use)) {
+  if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
   bgb_finalize();
 }
 
 function private on_player_connect(localclientnum) {
-  if(!(isdefined(level.bgb_in_use) && level.bgb_in_use)) {
+  if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
   self thread bgb_player_init(localclientnum);
 }
 
 function private bgb_player_init(localclientnum) {
-  if(isdefined(level.bgb_pack[localclientnum])) {
+  if(isDefined(level.bgb_pack[localclientnum])) {
     return;
   }
   level.bgb_pack[localclientnum] = getbubblegumpack(localclientnum);
@@ -65,7 +65,7 @@ function private bgb_finalize() {
   statstablename = util::getstatstablename();
   level.bgb_item_index_to_name = [];
   keys = getarraykeys(level.bgb);
-  for (i = 0; i < keys.size; i++) {
+  for(i = 0; i < keys.size; i++) {
     level.bgb[keys[i]].item_index = getitemindexfromref(keys[i]);
     level.bgb[keys[i]].rarity = int(tablelookup(statstablename, 0, level.bgb[keys[i]].item_index, 16));
     if(0 == level.bgb[keys[i]].rarity || 4 == level.bgb[keys[i]].rarity) {
@@ -81,11 +81,11 @@ function private bgb_finalize() {
 }
 
 function register(name, limit_type) {
-  assert(isdefined(name), "");
+  assert(isDefined(name), "");
   assert("" != name, ("" + "") + "");
-  assert(!isdefined(level.bgb[name]), ("" + name) + "");
-  assert(isdefined(limit_type), ("" + name) + "");
-  level.bgb[name] = spawnstruct();
+  assert(!isDefined(level.bgb[name]), ("" + name) + "");
+  assert(isDefined(limit_type), ("" + name) + "");
+  level.bgb[name] = spawnStruct();
   level.bgb[name].name = name;
   level.bgb[name].limit_type = limit_type;
 }
@@ -96,7 +96,7 @@ function private function_78c4bfa(localclientnum, time) {
   if(isdemoplaying()) {
     return;
   }
-  if(!isdefined(self.bgb) || !isdefined(level.bgb[self.bgb])) {
+  if(!isDefined(self.bgb) || !isDefined(level.bgb[self.bgb])) {
     return;
   }
   switch (level.bgb[self.bgb].limit_type) {
@@ -122,7 +122,7 @@ function private function_78c4bfa(localclientnum, time) {
   }
   self setcontrollerlightbarcolor(localclientnum, color);
   wait(time);
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     self setcontrollerlightbarcolor(localclientnum);
   }
 }
@@ -133,12 +133,12 @@ function private function_cec2dbda(localclientnum, oldval, newval, bnewent, bini
 }
 
 function private function_c8a1c86(localclientnum, fx) {
-  if(isdefined(self.var_d7197e33)) {
+  if(isDefined(self.var_d7197e33)) {
     deletefx(localclientnum, self.var_d7197e33, 1);
   }
-  if(isdefined(fx)) {
+  if(isDefined(fx)) {
     self.var_d7197e33 = playfxoncamera(localclientnum, fx);
-    self playsound(0, "zmb_bgb_blow_bubble_plr");
+    self playSound(0, "zmb_bgb_blow_bubble_plr");
   }
 }
 

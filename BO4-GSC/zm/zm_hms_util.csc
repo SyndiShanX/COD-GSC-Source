@@ -5,7 +5,6 @@
 
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\system_shared;
-
 #namespace zm_hms_util;
 
 autoexec __init__system__() {
@@ -13,7 +12,6 @@ autoexec __init__system__() {
 }
 
 __init__() {
-
   if(getdvarint(#"hash_79f58c97fc43e423", 0)) {
     callback::on_localplayer_spawned(&function_774b42ac);
   }
@@ -33,4 +31,3 @@ function_774b42ac() {
     waitframe(30);
   }
 }
-

@@ -92,12 +92,12 @@ hydroplayerconnected(localclientnum) {
   }
 
   level thread water_killstreak_fx(localclientnum);
-  water_sheeting_triggers = getentarray(0, "prone_water_fx", "targetname");
+  water_sheeting_triggers = getEntArray(0, "prone_water_fx", "targetname");
 
   foreach(trigger in water_sheeting_triggers)
   trigger thread water_prone_fx(localclientnum);
 
-  security_camera_balls = getentarray(localclientnum, "security_camera_ball", "targetname");
+  security_camera_balls = getEntArray(localclientnum, "security_camera_ball", "targetname");
 
   foreach(cameraball in security_camera_balls)
   cameraball thread cameratrackplayer(localclientnum);
@@ -127,9 +127,9 @@ water_killstreak_fx(localclientnum) {
         continue;
       }
       foreach(ent in ents) {
-        if(player.eflags2 & airborne) {
+        if(player.eflags2 &airborne) {
           if(!isDefined(ent.loopfx[localclientnum]))
-            ent.loopfx[localclientnum] = playfx(localclientnum, level._effect[ent.v["fxid"]], ent.v["origin"], ent.v["forward"], ent.v["up"]);
+            ent.loopfx[localclientnum] = playFX(localclientnum, level._effect[ent.v["fxid"]], ent.v["origin"], ent.v["forward"], ent.v["up"]);
 
           continue;
         }

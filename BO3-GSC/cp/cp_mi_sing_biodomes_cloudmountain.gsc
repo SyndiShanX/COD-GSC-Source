@@ -50,14 +50,14 @@
 function precache() {}
 
 function main() {
-  spawner::add_spawn_function_group("rambo", "script_noteworthy", & rambo_robots);
-  spawner::add_spawn_function_group("rusher", "script_noteworthy", & rusher_robots);
-  spawner::add_spawn_function_group("hunter_flybys", "script_noteworthy", & hunter_flyby_cloud_mountain);
-  spawner::add_spawn_function_group("cloud_mountain_reinforcements", "script_noteworthy", & cloud_mountain_reinforcements_spawn);
-  spawner::add_spawn_function_group("cloud_mountain_retreaters", "script_noteworthy", & cloud_mountain_retreaters_spawn);
-  spawner::add_spawn_function_group("level_3_surprised_enemies", "script_noteworthy", & cloud_mountain_level_3_surprised);
-  spawner::add_spawn_function_group("pod_spawners", "script_noteworthy", & robot_pod_spawn);
-  spawner::add_spawn_function_group("sp_cloudmountain_level_2_warlord", "targetname", & function_a288e474);
+  spawner::add_spawn_function_group("rambo", "script_noteworthy", &rambo_robots);
+  spawner::add_spawn_function_group("rusher", "script_noteworthy", &rusher_robots);
+  spawner::add_spawn_function_group("hunter_flybys", "script_noteworthy", &hunter_flyby_cloud_mountain);
+  spawner::add_spawn_function_group("cloud_mountain_reinforcements", "script_noteworthy", &cloud_mountain_reinforcements_spawn);
+  spawner::add_spawn_function_group("cloud_mountain_retreaters", "script_noteworthy", &cloud_mountain_retreaters_spawn);
+  spawner::add_spawn_function_group("level_3_surprised_enemies", "script_noteworthy", &cloud_mountain_level_3_surprised);
+  spawner::add_spawn_function_group("pod_spawners", "script_noteworthy", &robot_pod_spawn);
+  spawner::add_spawn_function_group("sp_cloudmountain_level_2_warlord", "targetname", &function_a288e474);
   level thread catwalk_goal_control();
 }
 
@@ -108,7 +108,7 @@ function cloudmountain_main() {
   level thread cloudmountain_elevators();
   level thread catwalk_supertree_spawns();
   level thread function_d532cc21();
-  spawner::add_spawn_function_ai_group("cloud_mountain_entrance_bridge", & function_4df7264d);
+  spawner::add_spawn_function_ai_group("cloud_mountain_entrance_bridge", &function_4df7264d);
   spawn_manager::enable("manager_phalanx_humans_bridge");
   level thread function_a234f527();
   level thread function_efae47c8();
@@ -278,7 +278,7 @@ function function_e2e19ed7(str_ai_group, str_endon_flag) {
   level endon(str_endon_flag);
   self endon("death");
   var_4d8945 = 0;
-  while (!var_4d8945) {
+  while(!var_4d8945) {
     self waittill("damage", n_damage, e_attacker);
     a_ai_snipers = spawner::get_ai_group_ai(str_ai_group);
     if(a_ai_snipers.size) {
@@ -348,7 +348,7 @@ function function_8ce887a2(str_objective, b_starting, b_direct, player) {
     e_player_clip = getent("back_door_player_clip", "targetname");
     e_player_clip delete();
     var_31861e2e = getent("trig_level_2_robot_spawns", "targetname");
-    if(isdefined(var_31861e2e)) {
+    if(isDefined(var_31861e2e)) {
       var_31861e2e delete();
     }
     function_8232942d();
@@ -381,7 +381,7 @@ function function_8232942d() {
 }
 
 function function_56019233() {
-  var_b6a97ee5 = getentarray("cloudmountain_level_1_glass_triggers", "script_noteworthy");
+  var_b6a97ee5 = getEntArray("cloudmountain_level_1_glass_triggers", "script_noteworthy");
   foreach(t_glass in var_b6a97ee5) {
     glassradiusdamage(t_glass.origin, 100, 500, 500);
     t_glass delete();
@@ -391,7 +391,7 @@ function function_56019233() {
 function exhibit_audio(str_ident) {
   level endon("turret_hallway_clear");
   t_exhibit = getent("trig_exhibit_" + str_ident, "targetname");
-  while (true) {
+  while(true) {
     t_exhibit trigger::wait_till();
     switch (str_ident) {
       case "A": {
@@ -453,7 +453,7 @@ function hunter_flyby_cloud_mountain() {
   self ai::set_ignoreall(1);
   self.nocybercom = 1;
   nd_start = getvehiclenode(self.target, "targetname");
-  if(isdefined(nd_start)) {
+  if(isDefined(nd_start)) {
     self vehicle_ai::start_scripted();
     self vehicle::get_on_and_go_path(nd_start);
     self delete();
@@ -469,7 +469,7 @@ function cloud_mountain_retreaters_spawn() {
   self endon("death");
   self ai::set_ignoreme(1);
   nd_goal = getnode(self.target, "targetname");
-  if(isdefined(nd_goal)) {
+  if(isDefined(nd_goal)) {
     self setgoal(nd_goal, 1);
     self waittill("goal");
   }
@@ -484,7 +484,7 @@ function cloud_mountain_level_3_surprised() {
   wait(randomfloatrange(0.1, 0.5));
   self scene::play("cin_gen_vign_confusion_02", self);
   t_goal = getent("trig_level_3_catwalks_goal", "targetname");
-  if(isdefined(t_goal)) {
+  if(isDefined(t_goal)) {
     self setgoal(t_goal);
     self waittill("goal");
   }
@@ -501,7 +501,7 @@ function robot_pod_spawn() {
   str_scene = "cin_bio_07_03_climb_aie_charging_station";
   s_align = struct::get(e_pod.target, "targetname");
   s_align thread scene::init(str_scene, self);
-  while (true) {
+  while(true) {
     b_player_sees_me = 0;
     foreach(player in level.players) {
       n_distance_sq = distance2dsquared(self.origin, player.origin);
@@ -520,7 +520,7 @@ function robot_pod_spawn() {
   e_pod thread scene::play("p7_fxanim_cp_sgen_charging_station_open_01_bundle", e_pod);
   self ai::set_ignoreme(0);
   nd_best = self findbestcovernode();
-  if(isdefined(nd_best)) {
+  if(isDefined(nd_best)) {
     self setgoal(nd_best);
   }
 }
@@ -534,13 +534,13 @@ function cleanup_pod_robots() {
 function cloudmountain_elevators() {
   function_6f311542();
   trigger::wait_till("trig_cloudmountain_elevators");
-  spawner::simple_spawn("cloudmountain_elevator_enemy", & elevator_spawning, "cloudmountain");
+  spawner::simple_spawn("cloudmountain_elevator_enemy", &elevator_spawning, "cloudmountain");
 }
 
 function catwalk_goal_control() {
   a_catwalk_spawners = getspawnerarray("catwalk", "script_noteworthy");
-  for (i = 0; i < a_catwalk_spawners.size; i++) {
-    a_catwalk_spawners[i] spawner::add_spawn_function( & catwalk_goal_radius);
+  for(i = 0; i < a_catwalk_spawners.size; i++) {
+    a_catwalk_spawners[i] spawner::add_spawn_function(&catwalk_goal_radius);
   }
 }
 
@@ -549,7 +549,7 @@ function catwalk_goal_radius() {
 }
 
 function disable_cloudmountain_triggers() {
-  a_spawn_triggers = getentarray("cloudmountain_spawn_trigger", "script_noteworthy");
+  a_spawn_triggers = getEntArray("cloudmountain_spawn_trigger", "script_noteworthy");
   foreach(trigger in a_spawn_triggers) {
     trigger delete();
   }
@@ -558,7 +558,7 @@ function disable_cloudmountain_triggers() {
 
 function cloud_mountain_reinforcements() {
   trigger::wait_till("trig_cloud_mountain_reinforcements");
-  spawner::add_spawn_function_group("sp_cloud_mountain_reinforcements_wasps", "targetname", & function_947a1ae8);
+  spawner::add_spawn_function_group("sp_cloud_mountain_reinforcements_wasps", "targetname", &function_947a1ae8);
   spawn_manager::enable("sm_cloud_mountain_reinforcements");
   spawn_manager::enable("sm_cloud_mountain_reinforcements_wasps");
   spawn_manager::enable("sm_cloud_mountain_retreaters");
@@ -613,10 +613,10 @@ function function_3679c70a() {
     var_653d9a07 = 0;
     var_85ee3d97 = 0;
     foreach(player in level.activeplayers) {
-      if(isdefined(player.grenadetypesecondary.isemp) && player.grenadetypesecondary.isemp && player.grenadetypesecondarycount > 0) {
+      if(isDefined(player.grenadetypesecondary.isemp) && player.grenadetypesecondary.isemp && player.grenadetypesecondarycount > 0) {
         var_653d9a07 = 1;
       }
-      if(isdefined(player.grenadetypeprimary) && player.grenadetypeprimarycount > 0) {
+      if(isDefined(player.grenadetypeprimary) && player.grenadetypeprimarycount > 0) {
         var_85ee3d97 = 1;
       }
     }
@@ -639,7 +639,7 @@ function turret_hallway_phalanx() {
   }
   phalanx = new robotphalanx();
   [[phalanx]] - > initialize("phalanx_diagonal_left", v_start, v_end, 1, n_phalanx);
-  while (((phalanx.tier1robots_.size + phalanx.tier2robots_.size) + phalanx.tier3robots_.size) > 0) {
+  while(((phalanx.tier1robots_.size + phalanx.tier2robots_.size) + phalanx.tier3robots_.size) > 0) {
     wait(0.25);
   }
   level flag::set("turret_hallway_phalanx_dead");
@@ -683,7 +683,7 @@ function function_c80e1213(str_turret) {
   a_turrets = getaiarray(str_turret, "script_label");
   if(isalive(a_turrets[0])) {
     level.ai_hendricks settargetentity(a_turrets[0]);
-    while (isalive(a_turrets[0])) {
+    while(isalive(a_turrets[0])) {
       wait(0.05);
     }
   }
@@ -703,7 +703,7 @@ function function_ee13f890() {
 
 function function_58b4a5d6() {
   var_a4854031 = 1;
-  while (var_a4854031) {
+  while(var_a4854031) {
     wait(1);
     var_a4854031 = function_50c932d0();
   }
@@ -740,9 +740,9 @@ function objective_xiulan_vignette_init(str_objective, b_starting) {
     disable_cloudmountain_triggers();
     level scene::init("server_room_access_start", "targetname");
     level thread cp_mi_sing_biodomes_util::function_753a859(str_objective);
-    var_777355da = getentarray("hallway_turret", "script_noteworthy");
+    var_777355da = getEntArray("hallway_turret", "script_noteworthy");
     a_turrets = spawner::simple_spawn(var_777355da);
-    array::run_all(a_turrets, & kill);
+    array::run_all(a_turrets, &kill);
     level thread cp_mi_sing_biodomes_util::function_cc20e187("cloudmountain");
     load::function_a2995f22();
   }
@@ -787,22 +787,22 @@ function setup_server_room_door_use_object() {
   v_offset = (0, 0, 0);
   t_door_use_object = getent("trig_server_room_door_use_object", "targetname");
   t_door_use_object show();
-  e_door_use_object = util::init_interactive_gameobject(t_door_use_object, & "cp_level_biodomes_server_door", & "CP_MI_SING_BIODOMES_CLOUDMOUNTAIN_ACCESS_TERMINAL", & function_9a82e132);
+  e_door_use_object = util::init_interactive_gameobject(t_door_use_object, &"cp_level_biodomes_server_door", &"CP_MI_SING_BIODOMES_CLOUDMOUNTAIN_ACCESS_TERMINAL", &function_9a82e132);
   level waittill("hash_69d6458d");
   a_enemies = getaiteamarray("axis");
-  array::run_all(a_enemies, & delete);
+  array::run_all(a_enemies, &delete);
   level clientfield::set("set_exposure_bank", 1);
   level thread function_d28364c1();
   level thread dialog::player_say("plyr_we_have_to_take_her_0", 1);
   level thread namespace_f1b4cbbc::function_3919d226();
-  level scene::add_scene_func("cin_bio_09_accessdrives_3rd_sh010", & function_2db7566e, "play");
-  level scene::add_scene_func("cin_bio_09_accessdrives_3rd_sh020", & function_3de47a8b, "play");
-  level scene::add_scene_func("cin_bio_09_accessdrives_3rd_sh090", & function_cbdd0b50, "play");
-  level scene::add_scene_func("cin_bio_09_accessdrives_3rd_sh170", & function_7dedb1f0, "play");
-  level scene::add_scene_func("cin_bio_09_accessdrives_3rd_sh190", & function_f1df85b9, "play");
-  level scene::add_scene_func("cin_bio_09_accessdrives_3rd_sh260", & function_d065fdd0, "done");
+  level scene::add_scene_func("cin_bio_09_accessdrives_3rd_sh010", &function_2db7566e, "play");
+  level scene::add_scene_func("cin_bio_09_accessdrives_3rd_sh020", &function_3de47a8b, "play");
+  level scene::add_scene_func("cin_bio_09_accessdrives_3rd_sh090", &function_cbdd0b50, "play");
+  level scene::add_scene_func("cin_bio_09_accessdrives_3rd_sh170", &function_7dedb1f0, "play");
+  level scene::add_scene_func("cin_bio_09_accessdrives_3rd_sh190", &function_f1df85b9, "play");
+  level scene::add_scene_func("cin_bio_09_accessdrives_3rd_sh260", &function_d065fdd0, "done");
   level.ai_hendricks.ignoreall = 1;
-  if(isdefined(level.bzm_biodialogue3callback)) {
+  if(isDefined(level.bzm_biodialogue3callback)) {
     level thread[[level.bzm_biodialogue3callback]]();
   }
   level scene::play("server_room_access_start", "targetname", level.var_f2be4c1f);
@@ -846,7 +846,7 @@ function function_d065fdd0(a_ents) {
 }
 
 function server_room_door_open(team, player, success) {
-  if(isdefined(success) && success) {
+  if(isDefined(success) && success) {
     self gameobjects::disable_object();
     e_server_room_door = getent("server_room_door", "targetname");
     e_server_room_door movez(100, 2);
@@ -885,12 +885,12 @@ function objective_xiulan_vignette_done(str_objective, b_starting, b_direct, pla
   cp_mi_sing_biodomes_util::objective_message("xiulan_vignette_done");
   objectives::complete("cp_level_biodomes_mainobj_capture_data_drives");
   e_server_room_door = getent("server_room_door", "targetname");
-  if(isdefined(e_server_room_door)) {
+  if(isDefined(e_server_room_door)) {
     e_server_room_door connectpaths();
     e_server_room_door delete();
   }
   e_server_room_door_clip = getent("server_room_door_clip", "targetname");
-  if(isdefined(e_server_room_door_clip)) {
+  if(isDefined(e_server_room_door_clip)) {
     e_server_room_door_clip connectpaths();
     e_server_room_door_clip delete();
   }
@@ -936,9 +936,9 @@ function objective_server_room_defend_init(str_objective, b_starting) {
     level hendricks_server_control_room_door_open(0);
     level thread scene::init("p7_fxanim_cp_biodomes_server_room_window_break_01_bundle");
     cp_mi_sing_biodomes_util::enable_traversals(0, "server_room_window_mantle", "script_noteworthy");
-    var_777355da = getentarray("hallway_turret", "script_noteworthy");
+    var_777355da = getEntArray("hallway_turret", "script_noteworthy");
     a_turrets = spawner::simple_spawn(var_777355da);
-    array::run_all(a_turrets, & kill);
+    array::run_all(a_turrets, &kill);
     e_clip = getent("turret_hallway_door_ai_clip", "targetname");
     e_clip delete();
     level thread cp_mi_sing_biodomes_util::function_753a859(str_objective);
@@ -985,10 +985,10 @@ function server_room_spawning() {
   foreach(node in a_nodes) {
     setenablenode(node, 0);
   }
-  spawner::add_spawn_function_group("server_room_enemy_window", "targetname", & function_229a8bc9);
-  spawner::add_spawn_function_group("server_room_enemy_elevator1", "targetname", & elevator_spawning, "server_room");
-  spawner::add_spawn_function_group("server_room_enemy_elevator2", "targetname", & elevator_backup, "server_room");
-  spawner::add_spawn_function_group("server_room_enemy_swat1", "targetname", & swat_team_ai);
+  spawner::add_spawn_function_group("server_room_enemy_window", "targetname", &function_229a8bc9);
+  spawner::add_spawn_function_group("server_room_enemy_elevator1", "targetname", &elevator_spawning, "server_room");
+  spawner::add_spawn_function_group("server_room_enemy_elevator2", "targetname", &elevator_backup, "server_room");
+  spawner::add_spawn_function_group("server_room_enemy_swat1", "targetname", &swat_team_ai);
   level waittill("hash_d065fdd0");
   level thread dialog::remote("kane_he_s_fine_0");
   savegame::checkpoint_save();
@@ -998,7 +998,7 @@ function server_room_spawning() {
   level notify("hash_f3c45157");
   wait(2);
   spawner::simple_spawn("server_room_enemy_window");
-  spawner::add_spawn_function_ai_group("top_floor", & top_floor_door);
+  spawner::add_spawn_function_ai_group("top_floor", &top_floor_door);
   spawn_manager::enable("server_room_wave_2_1");
   level util::waittill_notify_or_timeout("top_floor_breached", 10);
   spawn_manager::enable("server_room_wave_2_2");
@@ -1013,7 +1013,7 @@ function server_room_spawning() {
   savegame::checkpoint_save();
   level thread dialog::remote("kane_download_at_twenty_p_0");
   playsoundatposition("evt_server_def_walla_3rd", (900, 12750, 1140));
-  spawner::add_spawn_function_group("sp_server_room_background", "targetname", & cp_mi_sing_biodomes_fighttothedome::function_76c56ee1);
+  spawner::add_spawn_function_group("sp_server_room_background", "targetname", &cp_mi_sing_biodomes_fighttothedome::function_76c56ee1);
   spawn_manager::enable("sm_server_room_background");
   level thread function_963807b1();
   level waittill("zipline_spawning_done");
@@ -1042,14 +1042,14 @@ function server_room_spawning() {
   if(level.players.size > 2) {
     spawner::simple_spawn("server_room_enemy_elevator2");
     wait(2);
-    spawn_manager::enable("server_room_topfloor_fodder_manager", & set_goal_server_room);
+    spawn_manager::enable("server_room_topfloor_fodder_manager", &set_goal_server_room);
   }
   level dialog::player_say("plyr_more_hostiles_from_t_0");
   level thread dialog::remote("kane_download_at_sixty_pe_0", 1);
   playsoundatposition("evt_server_def_walla_bots_b", (1117, 13871, 1116));
   wave_wait(2, 5, "hallway");
   if(level.players.size > 1) {
-    spawn_manager::enable("server_room_fodder_manager_stairs", & set_goal_server_room);
+    spawn_manager::enable("server_room_fodder_manager_stairs", &set_goal_server_room);
   }
   spawn_manager::kill("server_room_topfloor_fodder_manager");
   wave_wait(0, 25, "top_floor", "hallway", "window");
@@ -1060,16 +1060,16 @@ function server_room_spawning() {
   wait(3);
   function_560d15cf();
   wait(3);
-  spawn_manager::enable("server_room_final_wave_manager", & set_goal_server_room);
+  spawn_manager::enable("server_room_final_wave_manager", &set_goal_server_room);
   wave_wait(2, 2, "final_wave");
-  spawn_manager::enable("server_room_fodder_manager_stairs", & set_goal_server_room);
+  spawn_manager::enable("server_room_fodder_manager_stairs", &set_goal_server_room);
   if(level.players.size > 2) {
     wait(0.25);
     spawner::simple_spawn("server_room_enemy_hallway_final");
-    a_hallway_guys = getentarray("server_room_enemy_hallway_final_ai", "targetname");
+    a_hallway_guys = getEntArray("server_room_enemy_hallway_final_ai", "targetname");
     level thread toss_smoke_grenade(a_hallway_guys, "smoke_grenade_final_hallway1_start");
     wait(2);
-    a_hallway_guys = getentarray("server_room_enemy_hallway_final_ai", "targetname");
+    a_hallway_guys = getEntArray("server_room_enemy_hallway_final_ai", "targetname");
   }
   wave_wait(3, 30, "hallway", "top_floor", "final_wave");
   spawn_manager::kill("server_room_fodder_manager_stairs");
@@ -1077,10 +1077,8 @@ function server_room_spawning() {
     level.ai_warlord waittill("death");
     level.ai_warlord warlordinterface::clearallpreferedpoints();
   }
-  if(isdefined(level.bzmutil_waitforallzombiestodie)) {
-    [
-      [level.bzmutil_waitforallzombiestodie]
-    ]();
+  if(isDefined(level.bzmutil_waitforallzombiestodie)) {
+    [[level.bzmutil_waitforallzombiestodie]]();
   }
   wait(2);
   savegame::checkpoint_save();
@@ -1100,7 +1098,7 @@ function server_room_spawning() {
     }
     wait(0.05);
   }
-  while (var_70369b18);
+  while(var_70369b18);
   level notify("server_defend_done");
 }
 
@@ -1165,7 +1163,7 @@ function wait_for_position(ai_shooter) {
   ai_shooter endon("death");
   ai_shooter.ignoreall = 1;
   e_window_volume = getent("server_room_window_goal_volume", "targetname");
-  while (ai_shooter istouching(e_window_volume) == 0) {
+  while(ai_shooter istouching(e_window_volume) == 0) {
     wait(0.1);
     if(self getvelocity() == 0) {
       ai_shooter setgoal(getnode("server_window_node", "targetname"));
@@ -1183,7 +1181,7 @@ function shoot_at_window() {
     self setgoal(e_server_room);
     return;
   }
-  while (level flag::get("window_broken") == 0) {
+  while(level flag::get("window_broken") == 0) {
     e_window_target = arraygetclosest(self.origin, level.a_window_targets);
     self ai::shoot_at_target("normal", e_window_target, undefined, 1);
     wait(1);
@@ -1217,13 +1215,13 @@ function objective_server_room_defend_done(str_objective, b_starting, b_direct, 
   objectives::complete("cp_level_biodomes_defend_server_room", level.ai_hendricks);
   objectives::complete("cp_level_biodomes_mainobj_upload_data");
   e_window = getent("server_window", "targetname");
-  if(isdefined(e_window)) {
+  if(isDefined(e_window)) {
     e_window delete();
   }
   if(level scene::is_active("cin_bio_09_02_accessdrives_1st_sever_end_loop")) {
     level scene::stop("cin_bio_09_02_accessdrives_1st_sever_end_loop");
   }
-  if(isdefined(level.ai_hendricks)) {
+  if(isDefined(level.ai_hendricks)) {
     level.ai_hendricks clearforcedgoal();
     level.ai_hendricks.goalradius = 1024;
   }
@@ -1278,7 +1276,7 @@ function elevator_backup() {
 }
 
 function function_88e395d2() {
-  var_5a7d265d = getentarray("turret_elevator_doors", "script_noteworthy");
+  var_5a7d265d = getEntArray("turret_elevator_doors", "script_noteworthy");
   foreach(e_elevator_door in var_5a7d265d) {
     e_elevator_door connectpaths();
   }
@@ -1306,7 +1304,7 @@ function swat_team_control() {
   }
   e_staging_area = getent("staging_area", "targetname");
   b_gotime = 0;
-  while (b_gotime == 0) {
+  while(b_gotime == 0) {
     wait(1);
     n_ready_attackers = 0;
     a_swat_team = getaiarray("server_room_enemy_swat1_ai", "targetname");
@@ -1356,7 +1354,7 @@ function top_floor_door() {
       level thread scene::play("p7_fxanim_gp_door_broken_open_01_bundle");
     }
     e_door = getent("top_floor_door_clip", "targetname");
-    if(isdefined(e_door)) {
+    if(isDefined(e_door)) {
       playrumbleonposition("cp_biodomes_server_room_top_floor_door_rumble", e_door.origin);
       e_door delete();
     }
@@ -1383,7 +1381,7 @@ function function_963807b1() {
   }
   level waittill("hash_578006af");
   level flag::set("window_broken");
-  if(isdefined(e_window)) {
+  if(isDefined(e_window)) {
     earthquake(1, 1, e_window.origin, 1000);
     playrumbleonposition("cp_biodomes_server_room_window_rumble", e_window.origin);
     e_window delete();
@@ -1398,28 +1396,28 @@ function function_963807b1() {
 function zipline_spawning() {
   level endon("server_room_fail");
   level.var_1a0f3432 = 0;
-  spawner::simple_spawn("server_room_enemy_rope2_guy1", & rope_guy_init);
+  spawner::simple_spawn("server_room_enemy_rope2_guy1", &rope_guy_init);
   wait(randomfloat(0.5));
-  spawner::simple_spawn("server_room_enemy_rope1_guy1", & rope_guy_init);
+  spawner::simple_spawn("server_room_enemy_rope1_guy1", &rope_guy_init);
   wait(randomfloatrange(1, 4));
-  spawner::simple_spawn("server_room_enemy_rope2_guy2", & rope_guy_init);
+  spawner::simple_spawn("server_room_enemy_rope2_guy2", &rope_guy_init);
   wait(randomfloat(0.5));
-  spawner::simple_spawn("server_room_enemy_rope1_guy2", & rope_guy_init);
+  spawner::simple_spawn("server_room_enemy_rope1_guy2", &rope_guy_init);
   wait(randomfloatrange(1, 4));
-  spawner::simple_spawn("server_room_enemy_rope2_guy3", & rope_guy_init);
+  spawner::simple_spawn("server_room_enemy_rope2_guy3", &rope_guy_init);
   wait(randomfloat(0.5));
-  spawner::simple_spawn("server_room_enemy_rope1_guy3", & rope_guy_init);
+  spawner::simple_spawn("server_room_enemy_rope1_guy3", &rope_guy_init);
   if(level.players.size > 2) {
     wait(randomfloatrange(1, 3));
-    spawner::simple_spawn("server_room_enemy_rope2_guy1", & rope_guy_init);
+    spawner::simple_spawn("server_room_enemy_rope2_guy1", &rope_guy_init);
     wait(randomfloat(0.5));
-    spawner::simple_spawn("server_room_enemy_rope1_guy1", & rope_guy_init);
+    spawner::simple_spawn("server_room_enemy_rope1_guy1", &rope_guy_init);
     wait(randomfloatrange(1, 3));
-    spawner::simple_spawn("server_room_enemy_rope2_guy2", & rope_guy_init);
+    spawner::simple_spawn("server_room_enemy_rope2_guy2", &rope_guy_init);
     wait(randomfloat(0.5));
-    spawner::simple_spawn("server_room_enemy_rope1_guy2", & rope_guy_init);
+    spawner::simple_spawn("server_room_enemy_rope1_guy2", &rope_guy_init);
   }
-  spawner::add_spawn_function_ai_group("top_floor", & set_goal_server_room);
+  spawner::add_spawn_function_ai_group("top_floor", &set_goal_server_room);
   spawn_manager::enable("server_room_topfloor_fodder_manager");
   level notify("zipline_spawning_done");
   wait(10);
@@ -1439,13 +1437,13 @@ function rope_guy_init() {
   n_dist = distance(s_vtol.origin, s_landing.origin);
   n_time = n_dist / 500;
   var_c312dab9 moveto(s_landing.origin, n_time);
-  var_c312dab9 playloopsound("evt_vtol_npc_move");
+  var_c312dab9 playLoopSound("evt_vtol_npc_move");
   self thread rope_guy_stop_snd(var_c312dab9);
   var_c312dab9 waittill("movedone");
   var_c312dab9 stoploopsound(0.5);
-  var_c312dab9 playsound("evt_vtol_npc_detach");
+  var_c312dab9 playSound("evt_vtol_npc_detach");
   v_on_navmesh = getclosestpointonnavmesh(var_c312dab9.origin, 100, 48);
-  if(isdefined(v_on_navmesh)) {
+  if(isDefined(v_on_navmesh)) {
     var_c312dab9 moveto(v_on_navmesh, 0.25);
   }
   var_c312dab9 scene::play("cin_gen_traversal_zipline_enemy02_dismount", self);
@@ -1501,7 +1499,7 @@ function elevator_close(ai_spawn, e_my_elevator_l, e_my_elevator_r) {
 function elevator_wait(ai_spawn) {
   ai_spawn endon("death");
   t_elevator = getent(ai_spawn.script_noteworthy + "_elevator_trigger", "targetname");
-  while (ai_spawn istouching(t_elevator) || util::any_player_is_touching(t_elevator, "allies")) {
+  while(ai_spawn istouching(t_elevator) || util::any_player_is_touching(t_elevator, "allies")) {
     wait(0.5);
   }
 }
@@ -1515,25 +1513,25 @@ function function_6f311542() {
 
 function wave_wait(n_new_wave_threshold, n_timer, str_ai_group1, str_ai_group2, str_ai_group3, var_f0bb9dad) {
   wait(1);
-  if(isdefined(var_f0bb9dad)) {
-    while (n_timer > 0 && (spawner::get_ai_group_sentient_count(str_ai_group1) + spawner::get_ai_group_sentient_count(str_ai_group2)) + spawner::get_ai_group_sentient_count(str_ai_group3) + spawner::get_ai_group_sentient_count(var_f0bb9dad) > n_new_wave_threshold) {
+  if(isDefined(var_f0bb9dad)) {
+    while(n_timer > 0 && (spawner::get_ai_group_sentient_count(str_ai_group1) + spawner::get_ai_group_sentient_count(str_ai_group2)) + spawner::get_ai_group_sentient_count(str_ai_group3) + spawner::get_ai_group_sentient_count(var_f0bb9dad) > n_new_wave_threshold) {
       wait(1);
       n_timer = n_timer - 1;
     }
   } else {
-    if(isdefined(str_ai_group3)) {
-      while (n_timer > 0 && (spawner::get_ai_group_sentient_count(str_ai_group1) + spawner::get_ai_group_sentient_count(str_ai_group2)) + spawner::get_ai_group_sentient_count(str_ai_group3) > n_new_wave_threshold) {
+    if(isDefined(str_ai_group3)) {
+      while(n_timer > 0 && (spawner::get_ai_group_sentient_count(str_ai_group1) + spawner::get_ai_group_sentient_count(str_ai_group2)) + spawner::get_ai_group_sentient_count(str_ai_group3) > n_new_wave_threshold) {
         wait(1);
         n_timer = n_timer - 1;
       }
     } else {
-      if(isdefined(str_ai_group2)) {
-        while (n_timer > 0 && (spawner::get_ai_group_sentient_count(str_ai_group1) + spawner::get_ai_group_sentient_count(str_ai_group2)) > n_new_wave_threshold) {
+      if(isDefined(str_ai_group2)) {
+        while(n_timer > 0 && (spawner::get_ai_group_sentient_count(str_ai_group1) + spawner::get_ai_group_sentient_count(str_ai_group2)) > n_new_wave_threshold) {
           wait(1);
           n_timer = n_timer - 1;
         }
       } else {
-        while (n_timer > 0 && spawner::get_ai_group_sentient_count(str_ai_group1) > n_new_wave_threshold) {
+        while(n_timer > 0 && spawner::get_ai_group_sentient_count(str_ai_group1) > n_new_wave_threshold) {
           wait(1);
           n_timer = n_timer - 1;
         }

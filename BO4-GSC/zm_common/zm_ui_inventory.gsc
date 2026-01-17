@@ -7,7 +7,6 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_inventory;
-
 #namespace zm_ui_inventory;
 
 autoexec __init__system__() {
@@ -34,11 +33,11 @@ __init__() {
   }
 }
 
-private onconnect() {
+onconnect() {
   self thread function_13ad9a60();
 }
 
-private function_13ad9a60() {
+function_13ad9a60() {
   self endon(#"disconnect");
 
   while(true) {

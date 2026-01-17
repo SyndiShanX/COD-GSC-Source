@@ -58,12 +58,12 @@ spawnminemover() {
   self waittillnotmoving();
   minemover = spawn("script_model", self.origin);
   minemover.angles = self.angles;
-  minemover setmodel("tag_origin");
+  minemover setModel("tag_origin");
   minemover.owner = self.owner;
   minemover.killcamoffset = (0, 0, getdvarfloatdefault("scr_bouncing_betty_killcam_offset", 8.0));
   killcament = spawn("script_model", minemover.origin + minemover.killcamoffset);
   killcament.angles = (0, 0, 0);
-  killcament setmodel("tag_origin");
+  killcament setModel("tag_origin");
   killcament setweapon("bouncingbetty_mp");
   minemover.killcament = killcament;
   self.minemover = minemover;
@@ -96,7 +96,7 @@ bouncingbettydetonate(attacker, weaponname) {
 
     self bouncingbettydestroyed();
   } else if(isDefined(self.minemover)) {
-    self.minemover setmodel(self.model);
+    self.minemover setModel(self.model);
     self.minemover thread bouncingbettyjumpandexplode();
     self delete();
   } else
@@ -104,7 +104,7 @@ bouncingbettydetonate(attacker, weaponname) {
 }
 
 bouncingbettydestroyed() {
-  playfx(level.bettydestroyedfx, self.origin);
+  playFX(level.bettydestroyedfx, self.origin);
   playsoundatposition("dst_equipment_destroy", self.origin);
 
   if(isDefined(self.trigger))
@@ -125,9 +125,9 @@ bouncingbettyjumpandexplode() {
   explodepos = self.origin + (0, 0, level.bettyjumpheight);
   self moveto(explodepos, level.bettyjumptime, level.bettyjumptime, 0);
   self.killcament moveto(explodepos + self.killcamoffset, level.bettyjumptime, 0, level.bettyjumptime);
-  playfx(level.bettylaunchfx, self.origin);
+  playFX(level.bettylaunchfx, self.origin);
   self rotatevelocity(level.bettyrotatevelocity, level.bettyjumptime, 0, level.bettyjumptime);
-  self playsound("fly_betty_jump");
+  self playSound("fly_betty_jump");
   wait(level.bettyjumptime);
   self thread mineexplode();
 }
@@ -136,7 +136,7 @@ mineexplode() {
   if(!isDefined(self) || !isDefined(self.owner)) {
     return;
   }
-  self playsound("fly_betty_explo");
+  self playSound("fly_betty_explo");
   wait 0.05;
 
   if(!isDefined(self) || !isDefined(self.owner)) {
@@ -144,7 +144,7 @@ mineexplode() {
   }
   self hide();
   self radiusdamage(self.origin, level.bettydamageradius, level.bettydamagemax, level.bettydamagemin, self.owner, "MOD_EXPLOSIVE", "bouncingbetty_mp");
-  playfx(level.bettyexplosionfx, self.origin);
+  playFX(level.bettyexplosionfx, self.origin);
   wait 0.2;
 
   if(!isDefined(self) || !isDefined(self.owner)) {

@@ -109,7 +109,7 @@ metal_storms_cleanup() {
   cleanup("street_yemeni", "script_noteworthy");
   cleanup("street_drone", "script_noteworthy");
   cleanup("street_metalstorm", "script_noteworthy");
-  a_fans = getentarray("morals_fan", "script_noteworthy");
+  a_fans = getEntArray("morals_fan", "script_noteworthy");
 
   foreach(fan in a_fans)
   fan delete();
@@ -178,7 +178,7 @@ courtyard_fire_fake_rocket() {
   level.player rumble_loop(3, 1, "crash_heli_rumble");
   level run_scene("courtyard_balcony_deaths");
   a_scene_ai = get_ais_from_scene("courtyard_balcony_deaths");
-  a_balcony_ai = getentarray("courtyard_floor2_guys_ai", "targetname");
+  a_balcony_ai = getEntArray("courtyard_floor2_guys_ai", "targetname");
   a_scene_and_balcony_ai = arraycombine(a_scene_ai, a_balcony_ai, 1, 0);
 
   foreach(ai_guy in a_scene_and_balcony_ai) {
@@ -195,11 +195,11 @@ courtyard_explosion_fx() {
   s_explosion_point = getstruct("courtyard_building_fx", "targetname");
   s_drama_struct = getstruct("courtyard_fx_at_player", "targetname");
   exploder(410);
-  v_eye_pos = level.player geteye();
+  v_eye_pos = level.player getEye();
   v_player_eye = level.player getplayerangles();
-  v_player_eye = vectornormalize(anglestoforward(v_player_eye));
+  v_player_eye = vectornormalize(anglesToForward(v_player_eye));
   v_trace_to_point = v_eye_pos + v_player_eye * 256;
-  a_trace = bullettrace(v_eye_pos, v_trace_to_point, 0, level.player);
+  a_trace = bulletTrace(v_eye_pos, v_trace_to_point, 0, level.player);
   v_drama_fx = vectornormalize(a_trace["position"] - s_drama_struct.origin);
   v_drama_fx = vectortoangles(v_drama_fx);
   m_drama_spot = spawn_model("tag_origin", s_drama_struct.origin, v_drama_fx);
@@ -237,7 +237,7 @@ street_balcony_damage_listener() {
 
 street_balcony_take_position() {
   level waittill("balcony_runner_alerted");
-  a_balcony_runners = getentarray("street_balcony_runner_ai", "targetname");
+  a_balcony_runners = getEntArray("street_balcony_runner_ai", "targetname");
   a_balcony_nodes = array_randomize(getnodearray("street_balcony_covernode", "targetname"));
 
   for(i = 0; i < a_balcony_runners.size; i++) {
@@ -302,7 +302,7 @@ street_end() {
       guy.health = 10;
   }
 
-  drones = getentarray("street_drone", "script_noteworthy");
+  drones = getEntArray("street_drone", "script_noteworthy");
 
   foreach(drone in drones) {
     if(isDefined(drone))
@@ -430,7 +430,7 @@ intruder_turret_move_qrdrones() {
   flag_wait("street_player_on_balcony");
   autosave_by_name("yemen_balcony");
   queue_dialog_ally("cd3_fire_on_the_drones_0");
-  a_qrs = getentarray("street_drone", "script_noteworthy");
+  a_qrs = getEntArray("street_drone", "script_noteworthy");
   s_goal = getstruct("streets_qr_moveto", "targetname");
   s_goalfar = getstruct("streets_qr_moveto_far", "targetname");
 
@@ -443,7 +443,7 @@ intruder_turret_move_qrdrones() {
   s_spots = getstructarray("streets_qr_spawn_far", "targetname");
 
   while(extra_qrs < 8) {
-    a_qrs = getentarray("street_drone", "script_noteworthy");
+    a_qrs = getEntArray("street_drone", "script_noteworthy");
 
     if(a_qrs.size > 3)
       wait 1;

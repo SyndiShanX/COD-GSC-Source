@@ -131,7 +131,7 @@ watchproximitygrenadehitplayer(owner) {
 }
 
 performhudeffects(position, distancetogrenade) {
-  forwardvec = vectornormalize(anglestoforward(self.angles));
+  forwardvec = vectornormalize(anglesToForward(self.angles));
   rightvec = vectornormalize(anglestoright(self.angles));
   explosionvec = vectornormalize(position - self.origin);
   fdot = vectordot(explosionvec, forwardvec);
@@ -158,7 +158,7 @@ damageplayerinradius(position, owner, einflictor) {
   }
 
   damage = level.proximitygrenadedotdamageamount;
-  playfxontag(level._effect["prox_grenade_player_shock"], self, "J_SpineUpper");
+  playFXOnTag(level._effect["prox_grenade_player_shock"], self, "J_SpineUpper");
 
   if(level.hardcoremode)
     damage = level.proximitygrenadedotdamageamounthardcore;
@@ -170,7 +170,7 @@ damageplayerinradius(position, owner, einflictor) {
   }
 
   self playrumbleonentity("proximity_grenade");
-  self playsound("wpn_taser_mine_zap");
+  self playSound("wpn_taser_mine_zap");
   self setclientuivisibilityflag("hud_visible", 0);
 
   for(i = 0; i < level.proximitygrenadedotdamageinstances; i++) {

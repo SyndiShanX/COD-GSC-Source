@@ -63,9 +63,9 @@ fire_effect() {
   if(isDefined(firefxSound))
     level thread clientscripts\_utility::loop_fx_sound(firefxSound, origin, ender, timeout);
   players = getlocalplayers();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     println("fire fx " + level._effect[firefx]);
-    playfx(i, level._effect[firefx], self.v["origin"], forward, up);
+    playFX(i, level._effect[firefx], self.v["origin"], forward, up);
   }
 }
 trail_effect() {
@@ -93,7 +93,7 @@ trail_effect() {
   if(!isDefined(self.model)) {
     println("*** Client : Trail effect has no model.");
     keys = getarraykeys(self.v);
-    for (i = 0; i < keys.size; i++) {
+    for(i = 0; i < keys.size; i++) {
       println(keys[i] + " " + self.v[keys[i]]);
     }
     return;
@@ -109,11 +109,11 @@ exploder_playSound() {
 }
 cannon_effect() {
   if(isDefined(self.v["repeat"])) {
-    for (i = 0; i < self.v["repeat"]; i++) {
+    for(i = 0; i < self.v["repeat"]; i++) {
       players = getlocalplayers();
-      for (player = 0; player < players.size; player++) {
+      for(player = 0; player < players.size; player++) {
         println("cannon fx " + level._effect[self.v["fxid"]]);
-        playfx(player, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
+        playFX(player, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
       }
       self exploder_delay();
     }
@@ -122,7 +122,7 @@ cannon_effect() {
   self exploder_delay();
   players = getlocalplayers();
   if(isDefined(self.loopFX)) {
-    for (i = 0; i < self.loopFX.size; i++) {
+    for(i = 0; i < self.loopFX.size; i++) {
       self.loopFX[i] delete();
     }
     self.loopFX = [];
@@ -134,7 +134,7 @@ cannon_effect() {
     assertmsg("*** Client : Effect " + self.v["fxid"] + " not precached in level_fx.csc.");
     return;
   }
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(isDefined(self.v["fxid"])) {
       self.loopFX[i] = spawnFx(i, level._effect[self.v["fxid"]], self.v["origin"], self.v["delay"], self.v["forward"], self.v["up"]);
       triggerfx(self.loopFX[i]);
@@ -174,7 +174,7 @@ activate_individual_exploder() {
 deactivate_exploder(num) {
   println("*** Client : Delete exploder " + num);
   num = int(num);
-  for (i = 0; i < level.createFXent.size; i++) {
+  for(i = 0; i < level.createFXent.size; i++) {
     ent = level.createFXent[i];
     if(!isDefined(ent))
       continue;
@@ -189,7 +189,7 @@ deactivate_exploder(num) {
       ent.soundEnt = undefined;
     }
     if(isDefined(ent.loopFX)) {
-      for (j = 0; j < ent.loopFX.size; j++) {
+      for(j = 0; j < ent.loopFX.size; j++) {
         if(isDefined(ent.loopFX[j])) {
           ent.loopFX[j] delete();
         }
@@ -205,7 +205,7 @@ lightning(normalFunc, flashFunc) {
 }
 exploder_is_lightning_exploder(num) {
   if(isDefined(level.lightningExploder)) {
-    for (i = 0; i < level.lightningExploder.size; i++) {
+    for(i = 0; i < level.lightningExploder.size; i++) {
       if(level.lightningExploder[i] == num) {
         return true;
       }
@@ -215,7 +215,7 @@ exploder_is_lightning_exploder(num) {
 }
 glass_exploder_watcher(num, dist, alias) {
   ents = [];
-  for (i = 0; i < level.createFXent.size; i++) {
+  for(i = 0; i < level.createFXent.size; i++) {
     ent = level.createFXent[i];
     if(!isDefined(ent))
       continue;
@@ -232,15 +232,15 @@ glass_exploder_watcher(num, dist, alias) {
     return;
   }
   dist_squared = dist * dist;
-  while (1) {
+  while(1) {
     level waittill("glass_smash", pos, vec);
-    for (i = 0; i < ents.size; i++) {
+    for(i = 0; i < ents.size; i++) {
       ds = DistanceSquared(pos, ents[i].v["origin"]);
       if(ds <= dist_squared) {
         exploder(num);
         if(isDefined(alias)) {
           sound_ent = spawn(0, pos, "script_origin");
-          sound_ent PlayLoopSound(alias, .25);
+          sound_ent playLoopSound(alias, .25);
           sound_ent thread delete_window_sound_ent();
         }
         return;
@@ -263,7 +263,7 @@ delete_window_sound_ent() {
 activate_exploder(num) {
   num = int(num);
   prof_begin("client activate_exploder");
-  for (i = 0; i < level.createFXent.size; i++) {
+  for(i = 0; i < level.createFXent.size; i++) {
     ent = level.createFXent[i];
     if(!isDefined(ent))
       continue;
@@ -303,10 +303,10 @@ createExploder(fxid) {
 }
 set_forward_and_up_vectors() {
   self.v["up"] = anglestoup(self.v["angles"]);
-  self.v["forward"] = anglestoforward(self.v["angles"]);
+  self.v["forward"] = anglesToForward(self.v["angles"]);
 }
 create_triggerfx(clientNum) {
-  self.looperFX = playFx(clientNum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"], self.v["delay"]);
+  self.looperFX = playFX(clientNum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"], self.v["delay"]);
   create_loopsound(clientNum);
 }
 create_looper(clientNum) {
@@ -314,13 +314,13 @@ create_looper(clientNum) {
   create_loopsound(clientNum);
 }
 loopfx(clientNum) {
-  self.looperFX = playFx(clientNum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"], self.v["delay"]);
-  while (1) {
+  self.looperFX = playFX(clientNum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"], self.v["delay"]);
+  while(1) {
     if(isDefined(self.v["delay"]))
       realWait(self.v["delay"]);
-    while (isfxplaying(clientNum, self.looperFX))
+    while(isfxplaying(clientNum, self.looperFX))
       wait 0.1;
-    self.looperFX = playFx(clientNum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
+    self.looperFX = playFX(clientNum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
   }
 }
 loopfxStop(clientNum, timeout) {
@@ -334,7 +334,7 @@ loopfxStop(clientNum, timeout) {
 loopfxthread(clientNum) {
   if(isDefined(self.fxStart))
     level waittill("start fx" + self.fxStart);
-  while (1) {
+  while(1) {
     create_looper(clientNum);
     if(isDefined(self.timeout))
       thread loopfxStop(clientNum, self.timeout);
@@ -380,7 +380,7 @@ fx_init(clientNum) {
     clientscripts\_utility::init_exploders();
   }
   println("*** Setting forward + up");
-  for (i = 0; i < level.createFXent.size; i++) {
+  for(i = 0; i < level.createFXent.size; i++) {
     ent = level.createFXent[i];
     if(!isDefined(level._createfxforwardandupset)) {
       if(!isDefined(level.needs_fixup)) {

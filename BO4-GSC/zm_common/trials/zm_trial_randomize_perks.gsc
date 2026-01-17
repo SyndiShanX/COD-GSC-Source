@@ -10,7 +10,6 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_weapons;
-
 #namespace zm_trial_randomize_perks;
 
 autoexec __init__system__() {
@@ -25,7 +24,7 @@ __init__() {
   zm_trial::register_challenge(#"randomize_perks", &on_begin, &on_end);
 }
 
-private on_begin() {
+on_begin() {
   zm_trial_util::function_8036c103();
 
   foreach(player in getplayers()) {
@@ -33,7 +32,7 @@ private on_begin() {
   }
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   foreach(player in getplayers()) {
     player thread function_50b92441();
   }
@@ -41,7 +40,7 @@ private on_end(round_reset) {
   level util::delay(1, "end_game", &zm_trial_util::function_302c6014);
 }
 
-private function_83fa47e8() {
+function_83fa47e8() {
   self endon(#"disconnect");
   level endon(#"hash_7646638df88a3656");
   self bgb_pack::function_59004002(#"zm_bgb_perk_up", 1);
@@ -90,7 +89,7 @@ private function_83fa47e8() {
   self function_3a95c571();
 }
 
-private function_50b92441() {
+function_50b92441() {
   self endon(#"disconnect");
 
   for(n_slot = 0; n_slot <= 4; n_slot++) {
@@ -131,13 +130,13 @@ is_active() {
   return isDefined(s_challenge);
 }
 
-private function_3a95c571() {
-  if(isinarray(self.var_67ba1237, #"specialty_additionalprimaryweapon") && isDefined(self.var_cdc2b986) && !self hasweapon(self.var_5046ea5e.additional_primary_weapon)) {
+function_3a95c571() {
+  if(isinarray(self.var_67ba1237, # "specialty_additionalprimaryweapon") && isDefined(self.var_cdc2b986) && !self hasweapon(self.var_5046ea5e.additional_primary_weapon)) {
     self zm_weapons::weapondata_give(self.var_cdc2b986);
     return;
   }
 
-  if(isinarray(self.var_466b927f, #"specialty_additionalprimaryweapon") && isDefined(self.var_cdc2b986) && !self hasweapon(self.var_5046ea5e.additional_primary_weapon)) {
+  if(isinarray(self.var_466b927f, # "specialty_additionalprimaryweapon") && isDefined(self.var_cdc2b986) && !self hasweapon(self.var_5046ea5e.additional_primary_weapon)) {
     self zm_weapons::weapondata_give(self.var_cdc2b986);
   }
 }

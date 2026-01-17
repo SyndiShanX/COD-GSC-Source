@@ -28,7 +28,7 @@ skipto_jungle_stealth_house() {
   level.ai_woods = init_hero("woods");
   level.ai_hudson = init_hero("hudson");
   level.ai_hudson.non_wet_model = level.ai_hudson.model;
-  level.ai_hudson setmodel("c_usa_angola_hudson_wet_fb");
+  level.ai_hudson setModel("c_usa_angola_hudson_wet_fb");
   level.ai_hudson detach("c_usa_angola_hudson_glasses");
   level.ai_hudson detach("c_usa_angola_hudson_hat");
   level.ai_hudson set_force_color("r");
@@ -149,7 +149,7 @@ tall_grass_stealth() {
 }
 
 fail_player_if_he_backtracks() {
-  triggers = getentarray("trig_fail_backtrack_after_house", "targetname");
+  triggers = getEntArray("trig_fail_backtrack_after_house", "targetname");
 
   foreach(trigger in triggers)
   trigger thread trig_fail_player_if_backtracks();
@@ -159,7 +159,7 @@ trig_fail_player_if_backtracks() {
   level.player endon("death");
   level endon("tall_grass_stealth_done");
   self trigger_wait();
-  spawners = getentarray("fail_player_outside_house_spawners", "targetname");
+  spawners = getEntArray("fail_player_outside_house_spawners", "targetname");
   array_thread(spawners, ::add_spawn_function, ::chase_after_target, level.player);
   trigger = getent("sm_fail_not_in_house", "targetname");
   trigger activate_trigger();
@@ -223,14 +223,14 @@ stop_tall_grass_stealth() {
   level thread clean_up_animated_grass();
 
   for(i = 0; i <= 6; i++) {
-    a_enemies = getentarray("patroller_extra_" + i + "_ai", "targetname");
+    a_enemies = getEntArray("patroller_extra_" + i + "_ai", "targetname");
 
     foreach(ai_enemy in a_enemies)
     ai_enemy.ignoreall = 1;
   }
 
   for(i = 0; i <= 3; i++) {
-    a_enemies = getentarray("perimeter_patroller_" + i + "_ai", "targetname");
+    a_enemies = getEntArray("perimeter_patroller_" + i + "_ai", "targetname");
 
     foreach(ai_enemy in a_enemies)
     ai_enemy delete();
@@ -249,7 +249,7 @@ setup_fxanim_grass_triggers() {
 }
 
 clean_up_animated_grass() {
-  a_fxanim_grass = getentarray("fxanim_cattails", "targetname");
+  a_fxanim_grass = getEntArray("fxanim_cattails", "targetname");
 
   foreach(grass in a_fxanim_grass) {
     grass notify("stop_grass_idle");
@@ -262,11 +262,11 @@ grass_delete_when_offscreen() {
   level.player endon("death");
   angle = 45;
   cos_angle = cos(angle);
-  forward = anglestoforward(level.player.angles);
+  forward = anglesToForward(level.player.angles);
   grass_to_player = vectornormalize(self.origin - level.player.origin);
 
   while(vectordot(forward, grass_to_player) >= cos_angle) {
-    forward = anglestoforward(level.player.angles);
+    forward = anglesToForward(level.player.angles);
     grass_to_player = vectornormalize(self.origin - level.player.origin);
     wait 0.1;
   }
@@ -338,7 +338,7 @@ perimeter_patroller_logic(str_trigger, str_waittill, str_spawner, n_wait) {
 }
 
 set_up_right_path_blockers() {
-  spawners = getentarray("stealth_right_path_blockers", "targetname");
+  spawners = getEntArray("stealth_right_path_blockers", "targetname");
   array_thread(spawners, ::add_spawn_function, ::right_path_blocker_stealth_logic);
   array_thread(spawners, ::add_spawn_function, ::cleanup_path_blockers);
   simple_spawn(spawners);
@@ -470,7 +470,7 @@ tall_grass_stealth_vo() {
 }
 
 turn_on_mission_fail_volumes() {
-  volumes = getentarray("vol_fail_post_grass_moment", "targetname");
+  volumes = getEntArray("vol_fail_post_grass_moment", "targetname");
 
   foreach(volume in volumes)
   volume thread monitor_player_failure_after_stealth();
@@ -539,7 +539,7 @@ patrol_b_logic() {
   wait 0.05;
   ai_patroller_b.ignoreall = 0;
   s_bird_fx_org = getstruct("birds_fx_patrol_b", "targetname");
-  playfx(level._effect["startled_birds"], s_bird_fx_org.origin);
+  playFX(level._effect["startled_birds"], s_bird_fx_org.origin);
   nd_patrol_b_special = getnode("patrol_b_special_anim", "targetname");
   nd_patrol_b_special waittill_notify_or_timeout("trigger", 9);
   ai_patroller_b1 = simple_spawn_single("patrol_b_1");
@@ -564,7 +564,7 @@ check_safe_to_move(str_enemy, str_volume) {
   is_safe = 0;
 
   while(!is_safe) {
-    a_enemies = getentarray(str_enemy, "targetname");
+    a_enemies = getEntArray(str_enemy, "targetname");
     is_touching = 0;
 
     foreach(ai_enemy in a_enemies) {
@@ -588,7 +588,7 @@ check_safe_to_move(str_enemy, str_volume) {
 }
 
 clean_up_enemies_in_safe_zone(str_enemy, str_volume, use_cqb_walk) {
-  a_enemies = getentarray(str_enemy, "targetname");
+  a_enemies = getEntArray(str_enemy, "targetname");
 
   if(a_enemies.size > 0) {
     ai_enemy_closest = a_enemies[0];
@@ -712,7 +712,7 @@ tall_grass_nag() {
 }
 
 stealth_search_for_player(delay, str_spawnername, view_dot, vis_dist, a_nodes, fail_delay_time) {
-  if(isDefined(delay) & delay > 0)
+  if(isDefined(delay) &delay > 0)
     wait(delay);
 
   e_spawner = getent(str_spawnername, "targetname");
@@ -748,12 +748,12 @@ fail_mission_if_player_visible(view_dot, vis_dist, fail_delay_time) {
 
   while(true) {
     dist = distance(self.origin, level.player.origin);
-    v_forward = anglestoforward(self.angles);
+    v_forward = anglesToForward(self.angles);
     v_dir = vectornormalize(level.player.origin - self.origin);
     dot = vectordot(v_forward, v_dir);
 
     if(dist < vis_dist && dot > view_dot) {
-      v_forward = anglestoforward(level.player.angles);
+      v_forward = anglesToForward(level.player.angles);
       v_dir = vectornormalize(self.origin - level.player.origin);
       dot = vectordot(v_forward, v_dir);
 
@@ -763,8 +763,7 @@ fail_mission_if_player_visible(view_dot, vis_dist, fail_delay_time) {
         self thread shoot_at_target(level.player, undefined, 0.2, fail_delay_time + 1);
         wait(fail_delay_time);
         missionfailedwrapper(&"ANGOLA_2_PLAYER_COVER_BROKEN_SPOTTED");
-      } else {
-      }
+      } else {}
     }
 
     wait 0.01;
@@ -805,7 +804,7 @@ vo_hudson_woods_putdown() {
 }
 
 turn_off_jungle_escape_spawn_triggers() {
-  triggers = getentarray("player_escaping_village_trigger", "targetname");
+  triggers = getEntArray("player_escaping_village_trigger", "targetname");
 
   foreach(trigger in triggers)
   trigger trigger_off();

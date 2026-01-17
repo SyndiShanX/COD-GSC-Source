@@ -87,11 +87,11 @@ scriptcalls() {
   maps\_ac130::init();
   maps\ac130_trees::main();
   thread exploderanimhide_setup();
-  common_scripts\utility::array_thread(getentarray("destructible_building", "targetname"), ::destructible_building);
-  common_scripts\utility::array_thread(getentarray("sim_destruction", "targetname"), ::sim_destruction);
-  common_scripts\utility::array_thread(getentarray("invulnerable", "script_noteworthy"), maps\_utility::add_spawn_function, maps\_utility::magic_bullet_shield);
-  common_scripts\utility::array_thread(getentarray("damage_church", "targetname"), ::damage_church);
-  common_scripts\utility::array_thread(getentarray("level_scripted_unloadnode", "script_noteworthy"), ::level_scripted_unloadnode);
+  common_scripts\utility::array_thread(getEntArray("destructible_building", "targetname"), ::destructible_building);
+  common_scripts\utility::array_thread(getEntArray("sim_destruction", "targetname"), ::sim_destruction);
+  common_scripts\utility::array_thread(getEntArray("invulnerable", "script_noteworthy"), maps\_utility::add_spawn_function, maps\_utility::magic_bullet_shield);
+  common_scripts\utility::array_thread(getEntArray("damage_church", "targetname"), ::damage_church);
+  common_scripts\utility::array_thread(getEntArray("level_scripted_unloadnode", "script_noteworthy"), ::level_scripted_unloadnode);
   thread helictoper_friendly_fire("blackhawk1");
   thread helictoper_friendly_fire("blackhawk2");
   thread helicopter_driver_beacons("blackhawk1");
@@ -99,7 +99,7 @@ scriptcalls() {
 }
 
 missionend(var_0) {
-  if(isdefined(var_0) && var_0) {
+  if(isDefined(var_0) && var_0) {
     wait 6;
     maps\_utility::nextmission();
   }
@@ -122,10 +122,10 @@ stop_enemies(var_0) {
 }
 
 spawn_friendlies(var_0) {
-  var_1 = getentarray(var_0, "targetname");
+  var_1 = getEntArray(var_0, "targetname");
   level.friendlies = [];
 
-  for (var_2 = 0; var_2 < var_1.size; var_2++) {
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
     var_3 = var_1[var_2] stalingradspawn();
 
     if(!maps\_utility::spawn_failed(var_3))
@@ -156,7 +156,7 @@ damage_church() {
   if(getdvar("ac130_gameplay_enabled") == "0") {
     return;
   }
-  for (;;) {
+  for(;;) {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4);
 
     if(!isplayer(var_1)) {
@@ -194,7 +194,7 @@ mission_fail_vehicle_death() {
   if(common_scripts\utility::flag("mission_failed")) {
     return;
   }
-  if(isdefined(var_0) && isplayer(var_0)) {
+  if(isDefined(var_0) && isplayer(var_0)) {
     common_scripts\utility::flag_set("mission_failed");
     setdvar("ui_deadquote", "@AC130_FRIENDLY_FIRE");
     maps\_utility::missionfailedwrapper();
@@ -216,7 +216,7 @@ getenemiesinzone(var_0) {
   var_2 = getaiarray("axis");
   var_3 = [];
 
-  for (var_4 = 0; var_4 < var_2.size; var_4++) {
+  for(var_4 = 0; var_4 < var_2.size; var_4++) {
     if(!var_2[var_4] istouching(var_1)) {
       continue;
     }
@@ -234,18 +234,18 @@ level_scripted_unloadnode() {
   var_0 vehicle_setspeed(20, 20);
   var_0 maps\_utility::vehicle_land();
 
-  if(!isdefined(level.friendlies_told_to_load_choppers)) {
+  if(!isDefined(level.friendlies_told_to_load_choppers)) {
     level.friendlies_told_to_load_choppers = 1;
     thread friendlies_into_choppers();
   }
 
   var_1 = [];
 
-  for (var_2 = 0; var_2 < var_0.riders.size; var_2++) {
-    if(!isdefined(var_0.riders[var_2])) {
+  for(var_2 = 0; var_2 < var_0.riders.size; var_2++) {
+    if(!isDefined(var_0.riders[var_2])) {
       continue;
     }
-    if(!isdefined(var_0.riders[var_2].vehicle_position)) {
+    if(!isDefined(var_0.riders[var_2].vehicle_position)) {
       continue;
     }
     if(var_0.riders[var_2].vehicle_position >= 1 && var_0.riders[var_2].vehicle_position <= 4)
@@ -272,7 +272,7 @@ level_scripted_unloadnode() {
 attack_fleeing_helicopter(var_0) {
   self endon("death");
 
-  for (;;) {
+  for(;;) {
     wait(randomfloatrange(0.5, 2.5));
     animscripts\shoot_behavior::setshootstyle("burst", 0);
     self shoot(randomfloatrange(0.2, 1.0), var_0.origin);
@@ -280,7 +280,7 @@ attack_fleeing_helicopter(var_0) {
 }
 
 seaknight_doors() {
-  if(!isdefined(level.seaknight_doors_close_anim))
+  if(!isDefined(level.seaknight_doors_close_anim))
     level.seaknight_doors_close_anim = level.vehicle_aianims["script_vehicle_ch46e_opened_door"][1].vehicle_getinanim;
 
   level.vehicle_aianims["script_vehicle_ch46e_opened_door"][1].vehicle_getinanim = undefined;
@@ -301,8 +301,8 @@ friendlies_into_choppers() {
   var_1 = 1;
   level.friendlies_not_in_chopper = 0;
 
-  for (var_2 = 0; var_2 < level.friendlies.size; var_2++) {
-    if(!isdefined(level.friendlies[var_2])) {
+  for(var_2 = 0; var_2 < level.friendlies.size; var_2++) {
+    if(!isDefined(level.friendlies[var_2])) {
       continue;
     }
     if(!isalive(level.friendlies[var_2])) {
@@ -318,7 +318,7 @@ friendlies_into_choppers() {
 
   common_scripts\utility::flag_set("friendlies_moving_to_choppers");
 
-  while (level.friendlies_not_in_chopper > 0)
+  while(level.friendlies_not_in_chopper > 0)
     wait 0.05;
 
   common_scripts\utility::flag_set("friendlies_in_choppers");
@@ -334,12 +334,12 @@ friendly_run_into_chopper(var_0) {
   self.maxsightdistsqrd = 0;
   self.ignoresuppression = 1;
   thread maps\_utility::ignoreallenemies(1);
-  self setcandamage(0);
+  self setCanDamage(0);
   self.goalradius = 32;
   self setgoalnode(var_0);
   self waittill("goal");
 
-  if(isdefined(self.magic_bullet_shield))
+  if(isDefined(self.magic_bullet_shield))
     maps\_utility::stop_magic_bullet_shield();
 
   self notify("boarded_chopper");
@@ -357,10 +357,10 @@ friendly_run_into_chopper_death_handler() {
 friendly_fire_vehicle_thread() {
   level endon("getaway_vehicles_unloaded");
 
-  for (;;) {
+  for(;;) {
     self waittill("damage", var_0, var_1);
 
-    if(!isdefined(var_1)) {
+    if(!isDefined(var_1)) {
       continue;
     }
     if(!isplayer(var_1)) {
@@ -383,7 +383,7 @@ friendly_fire_vehicle_thread() {
 helicopter_driver_beacons(var_0) {
   var_1 = maps\_vehicle::waittill_vehiclespawn(var_0);
 
-  for (var_2 = 0; var_2 < var_1.riders.size; var_2++) {
+  for(var_2 = 0; var_2 < var_1.riders.size; var_2++) {
     if(var_1.riders[var_2].vehicle_position == 0 || var_1.riders[var_2].vehicle_position == 5)
       var_1.riders[var_2] thread maps\_ac130::add_beacon_effect(undefined, 1);
   }
@@ -392,10 +392,10 @@ helicopter_driver_beacons(var_0) {
 helictoper_friendly_fire(var_0) {
   var_1 = maps\_vehicle::waittill_vehiclespawn(var_0);
 
-  for (;;) {
+  for(;;) {
     var_1 waittill("damage", var_2, var_3);
 
-    if(!isdefined(var_3)) {
+    if(!isDefined(var_3)) {
       continue;
     }
     if(!isplayer(var_3)) {
@@ -415,12 +415,12 @@ resetplayerkillcount() {
 }
 
 waitforplayerkillcount(var_0) {
-  while (level.enemieskilledbyplayer < var_0)
+  while(level.enemieskilledbyplayer < var_0)
     wait 1;
 }
 
 civilian_car_riders_spawn_and_idle() {
-  var_0 = getentarray("civilian_car_rider", "targetname");
+  var_0 = getEntArray("civilian_car_rider", "targetname");
   thread civilian_car_riders_spawn_and_idle_start(level.getaway_vehicle_1, var_0[0], "civiliandriver_car1");
   thread civilian_car_riders_spawn_and_idle_start(level.getaway_vehicle_2, var_0[1], "civiliandriver_car2");
 }
@@ -451,10 +451,10 @@ civilian_car_riders_spawn_and_idle_start(var_0, var_1, var_2) {
 civilian_car_riders_mission_fail() {
   self endon("goal");
 
-  while (isdefined(self) && isalive(self)) {
+  while(isDefined(self) && isalive(self)) {
     self waittill("damage", var_0, var_1);
 
-    if(!isdefined(var_1)) {
+    if(!isDefined(var_1)) {
       continue;
     }
     if(!isplayer(var_1)) {
@@ -487,7 +487,7 @@ do_hijack(var_0, var_1, var_2, var_3) {
   var_4 = [];
   var_5 = [];
 
-  for (var_6 = 0; var_6 < var_1.size; var_6++) {
+  for(var_6 = 0; var_6 < var_1.size; var_6++) {
     if(var_6 == 0) {
       var_4[var_4.size] = var_1[var_6];
       continue;
@@ -540,15 +540,15 @@ do_car_idle_after_hijack(var_0) {
 }
 
 sim_destruction() {
-  if(!isdefined(self.script_noteworthy)) {
+  if(!isDefined(self.script_noteworthy)) {
     return;
   }
   thread trigger_40mm_hit_timeframe();
 
-  for (;;) {
+  for(;;) {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4);
 
-    if(!isdefined(level.credits_active)) {
+    if(!isDefined(level.credits_active)) {
       if(!isplayer(var_1))
         continue;
     }
@@ -571,21 +571,21 @@ sim_destruction() {
 }
 
 destructible_building() {
-  var_0 = getentarray(self.target, "targetname");
+  var_0 = getEntArray(self.target, "targetname");
   var_1 = [];
   var_2 = [];
   var_3 = undefined;
 
-  for (var_4 = 0; var_4 < var_0.size; var_4++) {
+  for(var_4 = 0; var_4 < var_0.size; var_4++) {
     if(var_0[var_4].classname == "script_origin") {
       var_3 = var_0[var_4];
       continue;
     }
 
-    var_5 = getentarray(var_0[var_4].target, "targetname");
+    var_5 = getEntArray(var_0[var_4].target, "targetname");
 
-    for (var_6 = 0; var_6 < var_5.size; var_6++) {
-      if(isdefined(var_5[var_6].script_noteworthy) && var_5[var_6].script_noteworthy == "exploderchunk") {
+    for(var_6 = 0; var_6 < var_5.size; var_6++) {
+      if(isDefined(var_5[var_6].script_noteworthy) && var_5[var_6].script_noteworthy == "exploderchunk") {
         var_2[var_2.size] = var_5[var_6];
         continue;
       }
@@ -594,18 +594,18 @@ destructible_building() {
     }
   }
 
-  for (var_4 = 0; var_4 < var_0.size; var_4++)
+  for(var_4 = 0; var_4 < var_0.size; var_4++)
     var_0[var_4] hide();
 
-  for (var_4 = 0; var_4 < var_2.size; var_4++)
+  for(var_4 = 0; var_4 < var_2.size; var_4++)
     var_2[var_4] hide();
 
   thread trigger_40mm_hit_timeframe();
 
-  for (;;) {
+  for(;;) {
     self waittill("damage", var_7, var_8, var_9, var_10, var_11);
 
-    if(!isdefined(level.credits_active)) {
+    if(!isDefined(level.credits_active)) {
       if(!isplayer(var_8))
         continue;
     }
@@ -626,11 +626,11 @@ destructible_building() {
 
   thread maps\_utility::arcademode_kill(self.origin, "explosive", 1000);
 
-  for (var_4 = 0; var_4 < var_0.size; var_4++)
+  for(var_4 = 0; var_4 < var_0.size; var_4++)
     var_0[var_4] show();
 
   if(var_7 == 1000) {
-    for (var_4 = 0; var_4 < var_2.size; var_4++) {
+    for(var_4 = 0; var_4 < var_2.size; var_4++) {
       var_2[var_4] show();
       var_12 = var_2[var_4].origin;
       var_13 = var_2[var_4].angles;
@@ -645,7 +645,7 @@ destructible_building() {
     }
   }
 
-  for (var_4 = 0; var_4 < var_1.size; var_4++) {
+  for(var_4 = 0; var_4 < var_1.size; var_4++) {
     var_19 = -20 + randomfloat(40);
     var_20 = -5 + randomfloat(10);
     var_21 = -20 + randomfloat(40);
@@ -665,7 +665,7 @@ trigger_40mm_hit_timeframe() {
   var_0 = 4.0;
   var_1 = 2;
 
-  for (;;) {
+  for(;;) {
     self waittill("40mm_damage");
     thread trigger_40mm_hit_timeframe_wait(var_0, var_1);
   }
@@ -676,7 +676,7 @@ trigger_40mm_hit_timeframe_wait(var_0, var_1) {
   var_2 = gettime();
   var_1--;
 
-  for (var_3 = 0; var_3 < var_1; var_3++)
+  for(var_3 = 0; var_3 < var_1; var_3++)
     self waittill("40mm_damage");
 
   var_4 = gettime();
@@ -692,7 +692,7 @@ get_exploder_anim_name() {
   var_0 = undefined;
   var_1 = strtok(self.targetname, ":;, ");
 
-  if(var_1.size > 1 && isdefined(var_1[1]))
+  if(var_1.size > 1 && isDefined(var_1[1]))
     var_0 = var_1[1];
   else
     var_0 = self.model + "_anim";
@@ -704,7 +704,7 @@ get_exploderanimhides_in_array(var_0) {
   var_1 = [];
 
   foreach(var_3 in level.exploders[var_0]) {
-    if(isdefined(var_3.targetname) && issubstr(var_3.targetname, "exploderanimhide"))
+    if(isDefined(var_3.targetname) && issubstr(var_3.targetname, "exploderanimhide"))
       var_1[var_1.size] = var_3;
   }
 
@@ -720,7 +720,7 @@ exploderanimhide_setup() {
   foreach(var_4 in getarraykeys(level.exploders)) {
     var_5 = get_exploderanimhides_in_array(var_4);
 
-    if(isdefined(var_5) && var_5.size > 0)
+    if(isDefined(var_5) && var_5.size > 0)
       thread exploderanimhide_think(var_5);
   }
 }
@@ -731,7 +731,7 @@ exploderanimhide_think(var_0) {
   wait 0.1;
   var_2 = var_1 get_exploder_anim_name();
 
-  if(isdefined(var_2) && common_scripts\utility::array_contains(getarraykeys(level.scr_anim["exploder_script_model"]), var_2)) {
+  if(isDefined(var_2) && common_scripts\utility::array_contains(getarraykeys(level.scr_anim["exploder_script_model"]), var_2)) {
     var_3 = level.scr_anim["exploder_script_model"][var_2];
     var_4 = getanimlength(var_3);
     wait(var_4);
@@ -740,14 +740,12 @@ exploderanimhide_think(var_0) {
     if(common_scripts\utility::array_contains(level.ac130_exploder_finalstates, var_5)) {
       var_6 = spawn("script_model", var_1.origin);
       var_6 hide();
-      var_6 setmodel(var_5);
+      var_6 setModel(var_5);
       var_6.angles = var_1.angles;
       var_6 show();
 
       foreach(var_8 in var_0)
       var_8 delete();
-    } else {
-
-    }
+    } else {}
   }
 }

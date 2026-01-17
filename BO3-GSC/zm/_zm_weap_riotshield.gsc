@@ -26,11 +26,11 @@
 #namespace riotshield;
 
 function autoexec __init__sytem__() {
-  system::register("zm_equip_riotshield", & __init__, & __main__, undefined);
+  system::register("zm_equip_riotshield", &__init__, &__main__, undefined);
 }
 
 function __init__() {
-  if(!isdefined(level.weaponriotshield)) {
+  if(!isDefined(level.weaponriotshield)) {
     level.weaponriotshield = getweapon("riotshield");
   }
   clientfield::register("clientuimodel", "zmInventory.shield_health", 11000, 4, "float");
@@ -51,28 +51,28 @@ function __init__() {
   level.riotshield_gib_refs[level.riotshield_gib_refs.size] = "guts";
   level.riotshield_gib_refs[level.riotshield_gib_refs.size] = "right_arm";
   level.riotshield_gib_refs[level.riotshield_gib_refs.size] = "left_arm";
-  zm::register_player_damage_callback( & player_damage_override_callback);
-  if(!isdefined(level.riotshield_melee)) {
-    level.riotshield_melee = & riotshield_melee;
+  zm::register_player_damage_callback(&player_damage_override_callback);
+  if(!isDefined(level.riotshield_melee)) {
+    level.riotshield_melee = &riotshield_melee;
   }
-  if(!isdefined(level.riotshield_melee_power)) {
-    level.riotshield_melee_power = & riotshield_melee;
+  if(!isDefined(level.riotshield_melee_power)) {
+    level.riotshield_melee_power = &riotshield_melee;
   }
-  if(!isdefined(level.riotshield_damage_callback)) {
-    level.riotshield_damage_callback = & player_damage_shield;
+  if(!isDefined(level.riotshield_damage_callback)) {
+    level.riotshield_damage_callback = &player_damage_shield;
   }
-  if(!isdefined(level.should_shield_absorb_damage)) {
-    level.should_shield_absorb_damage = & should_shield_absorb_damage;
+  if(!isDefined(level.should_shield_absorb_damage)) {
+    level.should_shield_absorb_damage = &should_shield_absorb_damage;
   }
-  callback::on_connect( & on_player_connect);
+  callback::on_connect(&on_player_connect);
 }
 
 function __main__() {}
 
 function on_player_connect() {
-  self.player_shield_reset_health = & player_init_shield_health;
-  if(!isdefined(self.player_shield_apply_damage)) {
-    self.player_shield_apply_damage = & player_damage_shield;
+  self.player_shield_reset_health = &player_init_shield_health;
+  if(!isDefined(self.player_shield_apply_damage)) {
+    self.player_shield_apply_damage = &player_damage_shield;
   }
   self thread player_watch_weapon_change();
   self thread player_watch_shield_melee();
@@ -94,7 +94,7 @@ function player_shield_absorb_damage(eattacker, idamage, shitloc, smeansofdeath)
 
 function player_shield_facing_attacker(vdir, limit) {
   orientation = self getplayerangles();
-  forwardvec = anglestoforward(orientation);
+  forwardvec = anglesToForward(orientation);
   forwardvec2d = (forwardvec[0], forwardvec[1], 0);
   unitforwardvec2d = vectornormalize(forwardvec2d);
   tofaceevec = vdir * -1;
@@ -105,19 +105,19 @@ function player_shield_facing_attacker(vdir, limit) {
 }
 
 function should_shield_absorb_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime) {
-  if(isdefined(self.hasriotshield) && self.hasriotshield && isdefined(vdir)) {
-    if(isdefined(eattacker) && (isdefined(eattacker.is_zombie) && eattacker.is_zombie || isplayer(eattacker))) {
-      if(isdefined(self.hasriotshieldequipped) && self.hasriotshieldequipped) {
+  if(isDefined(self.hasriotshield) && self.hasriotshield && isDefined(vdir)) {
+    if(isDefined(eattacker) && (isDefined(eattacker.is_zombie) && eattacker.is_zombie || isplayer(eattacker))) {
+      if(isDefined(self.hasriotshieldequipped) && self.hasriotshieldequipped) {
         if(self player_shield_facing_attacker(vdir, 0.2)) {
           return 1;
         }
       } else {
-        if(!isdefined(self.riotshieldentity)) {
+        if(!isDefined(self.riotshieldentity)) {
           if(!self player_shield_facing_attacker(vdir, -0.2)) {
             return level.zombie_vars["riotshield_stowed_block_fraction"];
           }
         } else {
-          assert(!isdefined(self.riotshieldentity), "");
+          assert(!isDefined(self.riotshieldentity), "");
         }
       }
     }
@@ -126,15 +126,15 @@ function should_shield_absorb_damage(einflictor, eattacker, idamage, idflags, sm
 }
 
 function player_damage_override_callback(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime) {
-  friendly_fire = isdefined(eattacker) && eattacker.team === self.team;
-  if(isdefined(self.hasriotshield) && self.hasriotshield && !friendly_fire) {
+  friendly_fire = isDefined(eattacker) && eattacker.team === self.team;
+  if(isDefined(self.hasriotshield) && self.hasriotshield && !friendly_fire) {
     fblockfraction = self[[level.should_shield_absorb_damage]](einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime);
-    if(fblockfraction > 0 && isdefined(self.player_shield_apply_damage)) {
+    if(fblockfraction > 0 && isDefined(self.player_shield_apply_damage)) {
       iblocked = int(fblockfraction * idamage);
       iunblocked = idamage - iblocked;
-      if(isdefined(self.player_shield_apply_damage)) {
+      if(isDefined(self.player_shield_apply_damage)) {
         self[[self.player_shield_apply_damage]](iblocked, 0, shitloc == "riotshield", smeansofdeath);
-        if(isdefined(self.riotshield_damage_absorb_callback)) {
+        if(isDefined(self.riotshield_damage_absorb_callback)) {
           self[[self.riotshield_damage_absorb_callback]](eattacker, iblocked, shitloc, smeansofdeath);
         }
       }
@@ -146,7 +146,7 @@ function player_damage_override_callback(einflictor, eattacker, idamage, idflags
 
 function player_damage_shield(idamage, bheld, fromcode = 0, smod = "MOD_UNKNOWN") {
   damagemax = level.weaponriotshield.weaponstarthitpoints;
-  if(isdefined(self.weaponriotshield)) {
+  if(isDefined(self.weaponriotshield)) {
     damagemax = self.weaponriotshield.weaponstarthitpoints;
   }
   shieldhealth = damagemax;
@@ -167,21 +167,21 @@ function player_damage_shield(idamage, bheld, fromcode = 0, smod = "MOD_UNKNOWN"
       self playrumbleonentity("damage_light");
       earthquake(0.5, 0.5, self.origin, 100);
     }
-    self playsound("fly_riotshield_zm_impact_zombies");
+    self playSound("fly_riotshield_zm_impact_zombies");
   }
   self updateriotshieldmodel();
   self clientfield::set_player_uimodel("zmInventory.shield_health", shieldhealth / damagemax);
 }
 
 function player_watch_weapon_change() {
-  for (;;) {
+  for(;;) {
     self waittill("weapon_change", weapon);
     self updateriotshieldmodel();
   }
 }
 
 function player_watch_shield_melee() {
-  for (;;) {
+  for(;;) {
     self waittill("weapon_melee", weapon);
     if(weapon.isriotshield) {
       self[[level.riotshield_melee]](weapon);
@@ -190,7 +190,7 @@ function player_watch_shield_melee() {
 }
 
 function player_watch_shield_melee_power() {
-  for (;;) {
+  for(;;) {
     self waittill("weapon_melee_power", weapon);
     if(weapon.isriotshield) {
       self[[level.riotshield_melee_power]](weapon);
@@ -199,13 +199,13 @@ function player_watch_shield_melee_power() {
 }
 
 function riotshield_fling_zombie(player, fling_vec, index) {
-  if(!isdefined(self) || !isalive(self)) {
+  if(!isDefined(self) || !isalive(self)) {
     return;
   }
-  if(isdefined(self.ignore_riotshield) && self.ignore_riotshield) {
+  if(isDefined(self.ignore_riotshield) && self.ignore_riotshield) {
     return;
   }
-  if(isdefined(self.riotshield_fling_func)) {
+  if(isDefined(self.riotshield_fling_func)) {
     self[[self.riotshield_fling_func]](player);
     return;
   }
@@ -220,7 +220,7 @@ function riotshield_fling_zombie(player, fling_vec, index) {
 
 function zombie_knockdown(player, gib) {
   damage = level.zombie_vars["riotshield_knockdown_damage"];
-  if(isdefined(level.override_riotshield_damage_func)) {
+  if(isDefined(level.override_riotshield_damage_func)) {
     self[[level.override_riotshield_damage_func]](player, gib);
   } else {
     if(gib) {
@@ -235,22 +235,22 @@ function riotshield_knockdown_zombie(player, gib) {
   self endon("death");
   playsoundatposition("vox_riotshield_forcehit", self.origin);
   playsoundatposition("wpn_riotshield_proj_impact", self.origin);
-  if(!isdefined(self) || !isalive(self)) {
+  if(!isDefined(self) || !isalive(self)) {
     return;
   }
-  if(isdefined(self.riotshield_knockdown_func)) {
+  if(isDefined(self.riotshield_knockdown_func)) {
     self[[self.riotshield_knockdown_func]](player, gib);
   } else {
     self zombie_knockdown(player, gib);
   }
   self dodamage(level.zombie_vars["riotshield_knockdown_damage"], player.origin, player);
-  self playsound("fly_riotshield_forcehit");
+  self playSound("fly_riotshield_forcehit");
 }
 
 function riotshield_get_enemies_in_range() {
-  view_pos = self geteye();
+  view_pos = self getEye();
   zombies = array::get_all_closest(view_pos, getaiteamarray(level.zombie_team), undefined, undefined, 2 * level.zombie_vars["riotshield_knockdown_range"]);
-  if(!isdefined(zombies)) {
+  if(!isDefined(zombies)) {
     return;
   }
   knockdown_range_squared = level.zombie_vars["riotshield_knockdown_range"] * level.zombie_vars["riotshield_knockdown_range"];
@@ -267,8 +267,8 @@ function riotshield_get_enemies_in_range() {
     line(near_circle_pos, end_pos, (0, 0, 1), 1, 0, 100);
     circle(end_pos, level.zombie_vars[""], (1, 0, 0), 0, 0, 100);
   }
-  for (i = 0; i < zombies.size; i++) {
-    if(!isdefined(zombies[i]) || !isalive(zombies[i])) {
+  for(i = 0; i < zombies.size; i++) {
+    if(!isDefined(zombies[i]) || !isalive(zombies[i])) {
       continue;
     }
     if(zombies[i].archetype == "margwa") {
@@ -318,7 +318,7 @@ function riotshield_network_choke() {
 }
 
 function riotshield_melee(weapon) {
-  if(!isdefined(level.riotshield_knockdown_enemies)) {
+  if(!isDefined(level.riotshield_knockdown_enemies)) {
     level.riotshield_knockdown_enemies = [];
     level.riotshield_knockdown_gib = [];
     level.riotshield_fling_enemies = [];
@@ -327,14 +327,14 @@ function riotshield_melee(weapon) {
   self riotshield_get_enemies_in_range();
   shield_damage = 0;
   level.riotshield_network_choke_count = 0;
-  for (i = 0; i < level.riotshield_fling_enemies.size; i++) {
+  for(i = 0; i < level.riotshield_fling_enemies.size; i++) {
     riotshield_network_choke();
-    if(isdefined(level.riotshield_fling_enemies[i])) {
+    if(isDefined(level.riotshield_fling_enemies[i])) {
       level.riotshield_fling_enemies[i] thread riotshield_fling_zombie(self, level.riotshield_fling_vecs[i], i);
       shield_damage = shield_damage + level.zombie_vars["riotshield_fling_damage_shield"];
     }
   }
-  for (i = 0; i < level.riotshield_knockdown_enemies.size; i++) {
+  for(i = 0; i < level.riotshield_knockdown_enemies.size; i++) {
     riotshield_network_choke();
     level.riotshield_knockdown_enemies[i] thread riotshield_knockdown_zombie(self, level.riotshield_knockdown_gib[i]);
     shield_damage = shield_damage + level.zombie_vars["riotshield_knockdown_damage_shield"];
@@ -381,7 +381,7 @@ function player_take_riotshield() {
     if(!self laststand::player_is_in_laststand()) {
       new_primary = level.weaponnone;
       primaryweapons = self getweaponslistprimaries();
-      for (i = 0; i < primaryweapons.size; i++) {
+      for(i = 0; i < primaryweapons.size; i++) {
         if(!primaryweapons[i].isriotshield) {
           new_primary = primaryweapons[i];
           break;
@@ -390,16 +390,16 @@ function player_take_riotshield() {
       if(new_primary == level.weaponnone) {
         self zm_weapons::give_fallback_weapon();
         self switchtoweaponimmediate();
-        self playsound("wpn_riotshield_zm_destroy");
+        self playSound("wpn_riotshield_zm_destroy");
       } else {
         self switchtoweaponimmediate();
-        self playsound("wpn_riotshield_zm_destroy");
+        self playSound("wpn_riotshield_zm_destroy");
         self waittill("weapon_change");
       }
     }
   }
-  self playsound("zmb_rocketshield_break");
-  if(isdefined(self.weaponriotshield)) {
+  self playSound("zmb_rocketshield_break");
+  if(isDefined(self.weaponriotshield)) {
     self zm_equipment::take(self.weaponriotshield);
   } else {
     self zm_equipment::take(level.weaponriotshield);

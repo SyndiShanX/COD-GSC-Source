@@ -65,22 +65,22 @@ init_pack_door() {
   wait(1.0);
   flag_wait("all_players_connected");
   door movez(50, 1.5, 0);
-  door playsound("packa_door_1");
+  door playSound("packa_door_1");
   wait(2);
   collision Delete();
   flag_wait("teleporter_pad_link_1");
   door movez(-35, 1.5, 1);
-  door playsound("packa_door_2");
+  door playSound("packa_door_2");
   door thread packa_door_reminder();
   wait(2);
   flag_wait("teleporter_pad_link_2");
   door movez(-25, 1.5, 1);
-  door playsound("packa_door_2");
+  door playSound("packa_door_2");
   wait(2);
   flag_wait("teleporter_pad_link_3");
   door movez(-60, 1.5, 1);
-  door playsound("packa_door_2");
-  clip = getentarray("pack_door_clip", "targetname");
+  door playSound("packa_door_2");
+  clip = getEntArray("pack_door_clip", "targetname");
   for(i = 0; i < clip.size; i++) {
     clip[i] connectpaths();
     clip[i] delete();
@@ -620,7 +620,7 @@ teleport_aftereffect_flare_vision(localClientNum) {
 packa_door_reminder() {
   while(!flag("teleporter_pad_link_3")) {
     rand = randomintrange(4, 16);
-    self playsound("packa_door_hitch");
+    self playSound("packa_door_hitch");
     wait(rand);
   }
 }

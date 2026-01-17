@@ -12,16 +12,16 @@
 #namespace mirg2000;
 
 function autoexec __init__sytem__() {
-  system::register("mirg2000", & __init__, undefined, undefined);
+  system::register("mirg2000", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("scriptmover", "plant_killer", 9000, getminbitcountfornum(4), "int", & function_23a70949, 0, 0);
-  clientfield::register("vehicle", "mirg2000_spider_death_fx", 9000, 2, "int", & function_1d3d9723, 0, 0);
-  clientfield::register("actor", "mirg2000_enemy_impact_fx", 9000, 2, "int", & function_15ad909d, 0, 0);
-  clientfield::register("vehicle", "mirg2000_enemy_impact_fx", 9000, 2, "int", & function_15ad909d, 0, 0);
-  clientfield::register("allplayers", "mirg2000_fire_button_held_sound", 9000, 1, "int", & mirg2000_fire_button_held_sound, 0, 0);
-  clientfield::register("toplayer", "mirg2000_charge_glow", 9000, 2, "int", & mirg2000_charge_glow, 0, 0);
+  clientfield::register("scriptmover", "plant_killer", 9000, getminbitcountfornum(4), "int", &function_23a70949, 0, 0);
+  clientfield::register("vehicle", "mirg2000_spider_death_fx", 9000, 2, "int", &function_1d3d9723, 0, 0);
+  clientfield::register("actor", "mirg2000_enemy_impact_fx", 9000, 2, "int", &function_15ad909d, 0, 0);
+  clientfield::register("vehicle", "mirg2000_enemy_impact_fx", 9000, 2, "int", &function_15ad909d, 0, 0);
+  clientfield::register("allplayers", "mirg2000_fire_button_held_sound", 9000, 1, "int", &mirg2000_fire_button_held_sound, 0, 0);
+  clientfield::register("toplayer", "mirg2000_charge_glow", 9000, 2, "int", &mirg2000_charge_glow, 0, 0);
   level._effect["mirg2000_charged_shot_1"] = "dlc2/zmb_weapon/fx_mirg_impact_aoe_chrg2";
   level._effect["mirg2000_charged_shot_2"] = "dlc2/zmb_weapon/fx_mirg_impact_aoe_chrg3";
   level._effect["mirg2000_charged_shot_1_up"] = "dlc2/zmb_weapon/fx_mirg_impact_aoe_chrg2_ug";
@@ -37,29 +37,29 @@ function __init__() {
 function function_23a70949(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   switch (newval) {
     case 0: {
-      if(isdefined(self.var_b5dfc765)) {
+      if(isDefined(self.var_b5dfc765)) {
         stopfx(localclientnum, self.var_b5dfc765);
       }
       break;
     }
     case 1: {
-      self.var_b5dfc765 = playfxontag(localclientnum, level._effect["mirg2000_charged_shot_1"], self, "tag_origin");
+      self.var_b5dfc765 = playFXOnTag(localclientnum, level._effect["mirg2000_charged_shot_1"], self, "tag_origin");
       break;
     }
     case 2: {
-      self.var_b5dfc765 = playfxontag(localclientnum, level._effect["mirg2000_charged_shot_2"], self, "tag_origin");
+      self.var_b5dfc765 = playFXOnTag(localclientnum, level._effect["mirg2000_charged_shot_2"], self, "tag_origin");
       break;
     }
     case 3: {
-      self.var_b5dfc765 = playfxontag(localclientnum, level._effect["mirg2000_charged_shot_1_up"], self, "tag_origin");
+      self.var_b5dfc765 = playFXOnTag(localclientnum, level._effect["mirg2000_charged_shot_1_up"], self, "tag_origin");
       break;
     }
     case 4: {
-      self.var_b5dfc765 = playfxontag(localclientnum, level._effect["mirg2000_charged_shot_2_up"], self, "tag_origin");
+      self.var_b5dfc765 = playFXOnTag(localclientnum, level._effect["mirg2000_charged_shot_2_up"], self, "tag_origin");
       break;
     }
     default: {
-      if(isdefined(self.var_b5dfc765)) {
+      if(isDefined(self.var_b5dfc765)) {
         stopfx(localclientnum, self.var_b5dfc765);
       }
       break;
@@ -69,27 +69,27 @@ function function_23a70949(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_15ad909d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 2) {
-    playfxontag(localclientnum, level._effect["mirg2000_enemy_impact_up"], self, "J_SpineUpper");
+    playFXOnTag(localclientnum, level._effect["mirg2000_enemy_impact_up"], self, "J_SpineUpper");
   } else if(newval == 1) {
-    playfxontag(localclientnum, level._effect["mirg2000_enemy_impact"], self, "J_SpineUpper");
+    playFXOnTag(localclientnum, level._effect["mirg2000_enemy_impact"], self, "J_SpineUpper");
   }
 }
 
 function function_1d3d9723(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 2) {
-    playfxontag(localclientnum, level._effect["mirg2000_spider_death_fx_up"], self, "tag_origin");
+    playFXOnTag(localclientnum, level._effect["mirg2000_spider_death_fx_up"], self, "tag_origin");
   } else if(newval == 1) {
-    playfxontag(localclientnum, level._effect["mirg2000_spider_death_fx"], self, "tag_origin");
+    playFXOnTag(localclientnum, level._effect["mirg2000_spider_death_fx"], self, "tag_origin");
   }
 }
 
 function mirg2000_fire_button_held_sound(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
-    if(!isdefined(self.var_c56da363)) {
-      self.var_c56da363 = self playloopsound("wpn_mirg2k_hold_lp", 1.25);
+    if(!isDefined(self.var_c56da363)) {
+      self.var_c56da363 = self playLoopSound("wpn_mirg2k_hold_lp", 1.25);
     }
   } else if(newval == 0) {
-    if(isdefined(self.var_c56da363)) {
+    if(isDefined(self.var_c56da363)) {
       self stoploopsound(self.var_c56da363, 0.1);
       self.var_c56da363 = undefined;
     }
@@ -102,13 +102,13 @@ function mirg2000_charge_glow(localclientnum, oldval, newval, bnewent, binitials
   self mapshaderconstant(localclientnum, 0, "scriptVector2", 0, 1, newval, 0);
   if(newval != 3 && (str_weapon_name == "hero_mirg2000_upgraded" || str_weapon_name == "hero_mirg2000")) {
     if(str_weapon_name == "hero_mirg2000_upgraded") {
-      if(!isdefined(self.var_cdc68d78)) {
+      if(!isDefined(self.var_cdc68d78)) {
         self.var_cdc68d78 = playviewmodelfx(localclientnum, level._effect["mirg2000_glow_up"], "tag_liquid");
       }
-    } else if(!isdefined(self.var_cdc68d78)) {
+    } else if(!isDefined(self.var_cdc68d78)) {
       self.var_cdc68d78 = playviewmodelfx(localclientnum, level._effect["mirg2000_glow"], "tag_liquid");
     }
-  } else if(isdefined(self.var_cdc68d78)) {
+  } else if(isDefined(self.var_cdc68d78)) {
     stopfx(localclientnum, self.var_cdc68d78);
     self.var_cdc68d78 = undefined;
   }

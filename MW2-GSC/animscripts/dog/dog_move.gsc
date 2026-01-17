@@ -15,7 +15,7 @@ main() {
   self clearanim( % root, 0.2);
   self clearanim( % german_shepherd_run_stop, 0);
 
-  if(!isdefined(self.traverseComplete) && !isdefined(self.skipStartMove) && self.a.movement == "run" && (!isdefined(self.disableExits) || self.disableExits == false))
+  if(!isDefined(self.traverseComplete) && !isDefined(self.skipStartMove) && self.a.movement == "run" && (!isDefined(self.disableExits) || self.disableExits == false))
     self startMove();
 
   self thread randomSoundDuringRunLoop();
@@ -39,7 +39,7 @@ main() {
   //self thread animscripts\dog\dog_stop::lookAtTarget( "normal" );
   self thread pathChangeCheck();
 
-  while (1) {
+  while(1) {
     self moveLoop();
 
     if(self.a.movement == "run") {
@@ -59,7 +59,7 @@ moveLoop() {
 
   self.moveLoopCleanupFunc = undefined;
 
-  while (1) {
+  while(1) {
     if(self.disableArrivals)
       self.stopAnimDistSq = 0;
     else
@@ -70,7 +70,7 @@ moveLoop() {
       self.moveLoopCleanupFunc = undefined;
     }
 
-    if(isdefined(self.moveLoopOverrideFunc))
+    if(isDefined(self.moveLoopOverrideFunc))
       self[[self.moveLoopOverrideFunc]]();
     else
       self moveLoopStep();
@@ -105,22 +105,22 @@ pathChangeCheck() {
 
   self.ignorePathChange = undefined; // this will be turned on / off in other threads at appropriate times
 
-  while (1) {
+  while(1) {
     // no other thread should end on "path_changed"
     self waittill("path_changed", doingReacquire, newDir);
 
     // no need to check for doingReacquire since faceMotion should be a good check
-    if(isdefined(self.ignorePathChange) || isdefined(self.noTurnAnims))
+    if(isDefined(self.ignorePathChange) || isDefined(self.noTurnAnims)) {
       continue;
-
-    if(self.a.movement != "run")
+    }
+    if(self.a.movement != "run") {
       continue;
-
+    }
     angleDiff = AngleClamp180(self.angles[1] - vectortoyaw(newDir));
 
     turnAnim = pathChange_getDogTurnAnim(angleDiff);
 
-    if(isdefined(turnAnim)) {
+    if(isDefined(turnAnim)) {
       self.turnAnim = turnAnim;
       self.turnTime = getTime();
       self.moveLoopOverrideFunc = ::pathChange_doDogTurnAnim;
@@ -184,7 +184,7 @@ pathChange_cleanupDogTurnAnim() {
 
 startMoveTrackLookAhead() {
   self endon("killanimscript");
-  for (i = 0; i < 2; i++) {
+  for(i = 0; i < 2; i++) {
     lookaheadAngle = vectortoangles(self.lookaheaddir);
     self OrientMode("face angle", lookaheadAngle);
   }
@@ -239,10 +239,10 @@ playMoveStartAnim() {
 }
 
 startMove() {
-  if(isdefined(self.pathgoalpos)) {
+  if(isDefined(self.pathgoalpos)) {
     wait 0.05; // wait for lookaheaddir to settle
 
-    if(isdefined(self.pathgoalpos)) {
+    if(isDefined(self.pathgoalpos)) {
       self playMoveStartAnim();
       return;
     }
@@ -280,28 +280,27 @@ randomSoundDuringRunLoop() {
 
   wait 0.2; // incase move script gets killed right away
 
-  while (1) {
-    /#
+  while(1) {
     if(getdebugdvar("debug_dog_sound") != "")
       iprintln("dog " + (self getentnum()) + " bark start " + getTime());
-    # /
-      sound = undefined;
-    if(isdefined(self.script_growl))
+
+    sound = undefined;
+    if(isDefined(self.script_growl))
       sound = "anml_dog_growl";
-    else if(!isdefined(self.script_nobark))
+    else if(!isDefined(self.script_nobark))
       sound = "anml_dog_bark";
 
-    if(!isdefined(sound))
+    if(!isDefined(sound)) {
       break;
+    }
 
     self thread dogPlaySoundAndNotify(sound, "randomRunSound");
     self waittill("randomRunSound");
-    /#
+
     if(getdebugdvar("debug_dog_sound") != "")
       iprintln("dog " + (self getentnum()) + " bark end " + getTime());
-    # /
 
-      wait(randomfloatrange(0.1, 0.3));
+    wait(randomfloatrange(0.1, 0.3));
   }
 }
 

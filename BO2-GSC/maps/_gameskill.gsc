@@ -310,9 +310,7 @@ apply_threat_bias_to_all_players(difficulty_func) {
   players = get_players();
 
   for(i = 0; i < players.size; i++)
-    players[i].threatbias = int([
-      [difficulty_func]
-    ]("threatbias"));
+    players[i].threatbias = int([[difficulty_func]]("threatbias"));
 }
 
 coop_damage_and_accuracy_scaling(difficulty_func) {
@@ -631,7 +629,7 @@ playerhurtcheck() {
 
     if(isDefined(mod) && mod == "MOD_BURNED") {
       self setburn(0.5);
-      self playsound("chr_burn");
+      self playSound("chr_burn");
     }
   }
 }
@@ -864,7 +862,7 @@ playerheartbeatloop(healthcap) {
     }
 
     ent = spawn("script_origin", self.origin);
-    ent playloopsound("", 0.5);
+    ent playLoopSound("", 0.5);
   }
 }
 
@@ -1222,8 +1220,7 @@ increment_take_cover_warnings_on_death() {
   debugtakecoverwarnings();
 }
 
-empty_kill_func(type, loc, point, attacker, amount) {
-}
+empty_kill_func(type, loc, point, attacker, amount) {}
 
 update_skill_on_change() {
   level endon("stop_update_skill_on_change");

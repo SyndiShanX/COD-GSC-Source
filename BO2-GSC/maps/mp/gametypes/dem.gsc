@@ -203,44 +203,44 @@ onstartgametype() {
   }
 
   setclientnamemode("manual_change");
-  game["strings"]["target_destroyed"] = & "MP_TARGET_DESTROYED";
-  game["strings"]["bomb_defused"] = & "MP_BOMB_DEFUSED";
+  game["strings"]["target_destroyed"] = &"MP_TARGET_DESTROYED";
+  game["strings"]["bomb_defused"] = &"MP_BOMB_DEFUSED";
   precachestring(game["strings"]["target_destroyed"]);
   precachestring(game["strings"]["bomb_defused"]);
   level._effect["bombexplosion"] = loadfx("maps/mp_maps/fx_mp_exp_bomb");
 
   if(isDefined(game["overtime_round"])) {
-    setobjectivetext(game["attackers"], & "OBJECTIVES_DEM_ATTACKER");
-    setobjectivetext(game["defenders"], & "OBJECTIVES_DEM_ATTACKER");
+    setobjectivetext(game["attackers"], &"OBJECTIVES_DEM_ATTACKER");
+    setobjectivetext(game["defenders"], &"OBJECTIVES_DEM_ATTACKER");
 
     if(level.splitscreen) {
-      setobjectivescoretext(game["attackers"], & "OBJECTIVES_DEM_ATTACKER");
-      setobjectivescoretext(game["defenders"], & "OBJECTIVES_DEM_ATTACKER");
+      setobjectivescoretext(game["attackers"], &"OBJECTIVES_DEM_ATTACKER");
+      setobjectivescoretext(game["defenders"], &"OBJECTIVES_DEM_ATTACKER");
     } else {
-      setobjectivescoretext(game["attackers"], & "OBJECTIVES_DEM_ATTACKER_SCORE");
-      setobjectivescoretext(game["defenders"], & "OBJECTIVES_DEM_ATTACKER_SCORE");
+      setobjectivescoretext(game["attackers"], &"OBJECTIVES_DEM_ATTACKER_SCORE");
+      setobjectivescoretext(game["defenders"], &"OBJECTIVES_DEM_ATTACKER_SCORE");
     }
 
-    setobjectivehinttext(game["attackers"], & "OBJECTIVES_DEM_ATTACKER_HINT");
-    setobjectivehinttext(game["defenders"], & "OBJECTIVES_DEM_ATTACKER_HINT");
+    setobjectivehinttext(game["attackers"], &"OBJECTIVES_DEM_ATTACKER_HINT");
+    setobjectivehinttext(game["defenders"], &"OBJECTIVES_DEM_ATTACKER_HINT");
   } else {
-    setobjectivetext(game["attackers"], & "OBJECTIVES_DEM_ATTACKER");
-    setobjectivetext(game["defenders"], & "OBJECTIVES_SD_DEFENDER");
+    setobjectivetext(game["attackers"], &"OBJECTIVES_DEM_ATTACKER");
+    setobjectivetext(game["defenders"], &"OBJECTIVES_SD_DEFENDER");
 
     if(level.splitscreen) {
-      setobjectivescoretext(game["attackers"], & "OBJECTIVES_DEM_ATTACKER");
-      setobjectivescoretext(game["defenders"], & "OBJECTIVES_SD_DEFENDER");
+      setobjectivescoretext(game["attackers"], &"OBJECTIVES_DEM_ATTACKER");
+      setobjectivescoretext(game["defenders"], &"OBJECTIVES_SD_DEFENDER");
     } else {
-      setobjectivescoretext(game["attackers"], & "OBJECTIVES_DEM_ATTACKER_SCORE");
-      setobjectivescoretext(game["defenders"], & "OBJECTIVES_SD_DEFENDER_SCORE");
+      setobjectivescoretext(game["attackers"], &"OBJECTIVES_DEM_ATTACKER_SCORE");
+      setobjectivescoretext(game["defenders"], &"OBJECTIVES_SD_DEFENDER_SCORE");
     }
 
-    setobjectivehinttext(game["attackers"], & "OBJECTIVES_DEM_ATTACKER_HINT");
-    setobjectivehinttext(game["defenders"], & "OBJECTIVES_SD_DEFENDER_HINT");
+    setobjectivehinttext(game["attackers"], &"OBJECTIVES_DEM_ATTACKER_HINT");
+    setobjectivehinttext(game["defenders"], &"OBJECTIVES_SD_DEFENDER_HINT");
   }
 
   level.dembombzonename = "bombzone_dem";
-  bombzones = getentarray(level.dembombzonename, "targetname");
+  bombzones = getEntArray(level.dembombzonename, "targetname");
 
   if(bombzones.size == 0)
     level.dembombzonename = "bombzone";
@@ -584,13 +584,13 @@ bombs() {
 
   precachemodel("t5_weapon_briefcase_bomb_world");
   level.bombzones = [];
-  bombzones = getentarray(level.dembombzonename, "targetname");
+  bombzones = getEntArray(level.dembombzonename, "targetname");
 
   for(index = 0; index < bombzones.size; index++) {
     trigger = bombzones[index];
     scriptlabel = trigger.script_label;
-    visuals = getentarray(bombzones[index].target, "targetname");
-    clipbrushes = getentarray("bombzone_clip" + scriptlabel, "targetname");
+    visuals = getEntArray(bombzones[index].target, "targetname");
+    clipbrushes = getEntArray("bombzone_clip" + scriptlabel, "targetname");
     defusetrig = getent(visuals[0].target, "targetname");
     bombsiteteamowner = game["defenders"];
     bombsiteallowuse = "enemy";
@@ -683,7 +683,7 @@ onbeginuse(player) {
   }
 
   if(self maps\mp\gametypes\_gameobjects::isfriendlyteam(player.pers["team"])) {
-    player playsound("mpl_sd_bomb_defuse");
+    player playSound("mpl_sd_bomb_defuse");
     player.isdefusing = 1;
     player thread maps\mp\gametypes\_battlechatter_mp::gametypespecificbattlechatter("sd_enemyplant", player.pers["team"]);
     bestdistance = 9000000;
@@ -715,7 +715,7 @@ onbeginuse(player) {
     player thread maps\mp\gametypes\_battlechatter_mp::gametypespecificbattlechatter("sd_friendlyplant", player.pers["team"]);
   }
 
-  player playsound("fly_bomb_raise_plr");
+  player playSound("fly_bomb_raise_plr");
 }
 
 onenduse(team, player, result) {
@@ -829,8 +829,7 @@ onpickup(player) {
   maps\mp\_utility::playsoundonplayers(game["bomb_recovered_sound"], game["attackers"]);
 }
 
-onreset() {
-}
+onreset() {}
 
 bombreset(label, reason) {
   if(label == "_a") {
@@ -850,7 +849,7 @@ bombreset(label, reason) {
 }
 
 dropbombmodel(player, site) {
-  trace = bullettrace(player.origin + vectorscale((0, 0, 1), 20.0), player.origin - vectorscale((0, 0, 1), 2000.0), 0, player);
+  trace = bulletTrace(player.origin + vectorscale((0, 0, 1), 20.0), player.origin - vectorscale((0, 0, 1), 2000.0), 0, player);
   tempangle = randomfloat(360);
   forward = (cos(tempangle), sin(tempangle), 0);
   forward = vectornormalize(forward - vectorscale(trace["normal"], vectordot(forward, trace["normal"])));
@@ -865,7 +864,7 @@ dropbombmodel(player, site) {
 
   level.ddbombmodel[site] = spawn("script_model", trace["position"]);
   level.ddbombmodel[site].angles = dropangles;
-  level.ddbombmodel[site] setmodel("prop_suitcase_bomb");
+  level.ddbombmodel[site] setModel("prop_suitcase_bomb");
 }
 
 bombplanted(destroyedobj, player) {
@@ -881,7 +880,7 @@ bombplanted(destroyedobj, player) {
   detonatetime = int(gettime() + level.bombtimer * 1000);
   updatebombtimers(label, detonatetime);
   destroyedobj.detonatetime = detonatetime;
-  trace = bullettrace(player.origin + vectorscale((0, 0, 1), 20.0), player.origin - vectorscale((0, 0, 1), 2000.0), 0, player);
+  trace = bulletTrace(player.origin + vectorscale((0, 0, 1), 20.0), player.origin - vectorscale((0, 0, 1), 2000.0), 0, player);
   tempangle = randomfloat(360);
   forward = (cos(tempangle), sin(tempangle), 0);
   forward = vectornormalize(forward - vectorscale(trace["normal"], vectordot(forward, trace["normal"])));

@@ -110,7 +110,7 @@ PlayFaceThread(facialanim, soundAlias, importance, notifyString, waitOrNot, time
         return;
       }
       println("WARNING: delaying alias " + self.a.facialSoundAlias + " to play " + soundAlias);
-      while (isDefined(self) && self.isTalking)
+      while(isDefined(self) && self.isTalking)
         self waittill("done speaking");
       if(!isDefined(self))
         return;
@@ -118,7 +118,7 @@ PlayFaceThread(facialanim, soundAlias, importance, notifyString, waitOrNot, time
       println("WARNING: interrupting alias " + self.a.facialSoundAlias + " to play " + soundAlias);
       self stopSound(self.a.facialSoundAlias);
       self notify("cancel speaking");
-      while (isDefined(self) && self.isTalking)
+      while(isDefined(self) && self.isTalking)
         self waittill("done speaking");
       if(!isDefined(self))
         return;
@@ -145,7 +145,7 @@ PlayFaceThread(facialanim, soundAlias, importance, notifyString, waitOrNot, time
   level.TalkNotifySeed += 1;
   if(!SoundExists(soundAlias))
     println("Warning: " + soundAlias + " does not exist");
-  self playsound(soundAlias, uniqueNotify, true);
+  self playSound(soundAlias, uniqueNotify, true);
   self waittill_any("death", "cancel speaking", uniqueNotify);
   if(importance == 1.0) {
     level.NumberOfImportantPeopleTalking -= 1;
@@ -172,7 +172,7 @@ temp_dialogue_print(soundAlias) {
     } else {
       name = "NO-NAMER: ";
     }
-    for (i = 6; i < soundAlias.size; i++) {
+    for(i = 6; i < soundAlias.size; i++) {
       new_string = new_string + soundAlias[i];
     }
     iprintln(name + new_string);
@@ -185,7 +185,7 @@ temp_dialogue_print(soundAlias) {
   if(size > 25) {
     time = GetTime() + (size * 0.1 * 1000);
   }
-  while (GetTime() < time) {
+  while(GetTime() < time) {
     print3d(self.origin + (0, 0, 72), new_string);
     wait(0.05);
   }

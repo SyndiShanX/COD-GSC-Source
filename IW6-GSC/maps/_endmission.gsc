@@ -27,9 +27,7 @@ main() {
   var_0 addlevel("skyway", 0, "LEVEL_18", 1, "EXTRA2", undefined);
 
   if(isDefined(level.endmission_main_func)) {
-    [
-      [level.endmission_main_func]
-    ]();
+    [[level.endmission_main_func]]();
     level.endmission_main_func = undefined;
   }
 

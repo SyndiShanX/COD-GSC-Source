@@ -62,7 +62,7 @@ hide_start_createfx() {}
 
 objective() {
   var_0 = maps\_utility::obj("find_rorke");
-  objective_add(var_0, "active", & "OILROCKS_FIND_RORKE");
+  objective_add(var_0, "active", &"OILROCKS_FIND_RORKE");
   objective_current(var_0);
 }
 

@@ -5,7 +5,6 @@
 
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_perks;
-
 #namespace zm_perk_mod_slider;
 
 autoexec __init__system__() {

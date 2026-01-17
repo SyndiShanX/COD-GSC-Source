@@ -18,7 +18,7 @@
 #namespace zm_island_cleanup;
 
 function autoexec __init__sytem__() {
-  system::register("zm_island_cleanup", & __init__, & __main__, undefined);
+  system::register("zm_island_cleanup", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -31,13 +31,13 @@ function __main__() {
 
 function private cleanup_main() {
   n_next_eval = 0;
-  while (true) {
+  while(true) {
     util::wait_network_frame();
     n_time = gettime();
     if(n_time < n_next_eval) {
       continue;
     }
-    if(isdefined(level.n_cleanup_manager_restart_time)) {
+    if(isDefined(level.n_cleanup_manager_restart_time)) {
       n_current_time = gettime() / 1000;
       n_delta_time = n_current_time - level.n_cleanup_manager_restart_time;
       if(n_delta_time < 0) {
@@ -55,7 +55,7 @@ function private cleanup_main() {
         continue;
       }
     }
-    if(isdefined(level.bzm_worldpaused) && level.bzm_worldpaused) {
+    if(isDefined(level.bzm_worldpaused) && level.bzm_worldpaused) {
       continue;
     }
     n_override_cleanup_dist_sq = undefined;
@@ -98,7 +98,7 @@ function do_cleanup_check(n_override_cleanup_dist) {
   }
   b_in_active_zone = self zm_zonemgr::entity_in_active_zone();
   level.n_cleanups_processed_this_frame++;
-  if(isdefined(self.var_b1b7c1b7) && self.var_b1b7c1b7) {
+  if(isDefined(self.var_b1b7c1b7) && self.var_b1b7c1b7) {
     self thread function_cc0c7e36();
   }
   if(!b_in_active_zone) {
@@ -111,10 +111,10 @@ function do_cleanup_check(n_override_cleanup_dist) {
         e_closest_player = player;
       }
     }
-    if(isdefined(n_override_cleanup_dist)) {
+    if(isDefined(n_override_cleanup_dist)) {
       n_cleanup_dist_sq = n_override_cleanup_dist;
     } else {
-      if(isdefined(e_closest_player) && player_ahead_of_me(e_closest_player)) {
+      if(isDefined(e_closest_player) && player_ahead_of_me(e_closest_player)) {
         n_cleanup_dist_sq = 189225;
       } else {
         n_cleanup_dist_sq = 250000;
@@ -127,7 +127,7 @@ function do_cleanup_check(n_override_cleanup_dist) {
 }
 
 function private delete_zombie_noone_looking() {
-  if(isdefined(self.in_the_ground) && self.in_the_ground) {
+  if(isDefined(self.in_the_ground) && self.in_the_ground) {
     return;
   }
   foreach(player in level.players) {
@@ -147,14 +147,14 @@ function private function_cc0c7e36() {
 }
 
 function private function_e89cc6dd() {
-  if(!(isdefined(self.exclude_cleanup_adding_to_total) && self.exclude_cleanup_adding_to_total)) {
+  if(!(isDefined(self.exclude_cleanup_adding_to_total) && self.exclude_cleanup_adding_to_total)) {
     level.zombie_total++;
     level.zombie_respawns++;
     if(self.health < self.maxhealth) {
-      if(!isdefined(level.a_zombie_respawn_health[self.archetype])) {
+      if(!isDefined(level.a_zombie_respawn_health[self.archetype])) {
         level.a_zombie_respawn_health[self.archetype] = [];
       }
-      if(!isdefined(level.a_zombie_respawn_health[self.archetype])) {
+      if(!isDefined(level.a_zombie_respawn_health[self.archetype])) {
         level.a_zombie_respawn_health[self.archetype] = [];
       } else if(!isarray(level.a_zombie_respawn_health[self.archetype])) {
         level.a_zombie_respawn_health[self.archetype] = array(level.a_zombie_respawn_health[self.archetype]);
@@ -175,7 +175,7 @@ function private function_e89cc6dd() {
 
 function private player_can_see_me(player) {
   v_player_angles = player getplayerangles();
-  v_player_forward = anglestoforward(v_player_angles);
+  v_player_forward = anglesToForward(v_player_angles);
   v_player_to_self = self.origin - player getorigin();
   v_player_to_self = vectornormalize(v_player_to_self);
   n_dot = vectordot(v_player_forward, v_player_to_self);
@@ -187,7 +187,7 @@ function private player_can_see_me(player) {
 
 function private player_ahead_of_me(player) {
   v_player_angles = player getplayerangles();
-  v_player_forward = anglestoforward(v_player_angles);
+  v_player_forward = anglesToForward(v_player_angles);
   v_dir = player getorigin() - self.origin;
   n_dot = vectordot(v_player_forward, v_dir);
   if(n_dot < 0) {
@@ -199,10 +199,10 @@ function private player_ahead_of_me(player) {
 function get_escape_position() {
   self endon("death");
   str_zone = zm_zonemgr::get_zone_from_position(self.origin, 1);
-  if(!isdefined(str_zone)) {
+  if(!isDefined(str_zone)) {
     str_zone = self.zone_name;
   }
-  if(isdefined(str_zone)) {
+  if(isDefined(str_zone)) {
     a_zones = get_adjacencies_to_zone(str_zone);
     a_wait_locations = get_wait_locations_in_zones(a_zones);
     s_farthest = self get_farthest_wait_location(a_wait_locations);
@@ -214,9 +214,9 @@ function get_adjacencies_to_zone(str_zone) {
   a_adjacencies = [];
   a_adjacencies[0] = str_zone;
   a_adjacent_zones = getarraykeys(level.zones[str_zone].adjacent_zones);
-  for (i = 0; i < a_adjacent_zones.size; i++) {
+  for(i = 0; i < a_adjacent_zones.size; i++) {
     if(level.zones[str_zone].adjacent_zones[a_adjacent_zones[i]].is_connected) {
-      if(!isdefined(a_adjacencies)) {
+      if(!isDefined(a_adjacencies)) {
         a_adjacencies = [];
       } else if(!isarray(a_adjacencies)) {
         a_adjacencies = array(a_adjacencies);
@@ -236,12 +236,12 @@ function private get_wait_locations_in_zones(a_zones) {
 }
 
 function private get_farthest_wait_location(a_wait_locations) {
-  if(!isdefined(a_wait_locations) || a_wait_locations.size == 0) {
+  if(!isDefined(a_wait_locations) || a_wait_locations.size == 0) {
     return undefined;
   }
   n_farthest_index = 0;
   n_distance_farthest = 0;
-  for (i = 0; i < a_wait_locations.size; i++) {
+  for(i = 0; i < a_wait_locations.size; i++) {
     n_distance_sq = distancesquared(self.origin, a_wait_locations[i].origin);
     if(n_distance_sq > n_distance_farthest) {
       n_distance_farthest = n_distance_sq;
@@ -252,7 +252,7 @@ function private get_farthest_wait_location(a_wait_locations) {
 }
 
 function private get_wait_locations_in_zone(zone) {
-  if(isdefined(level.zones[zone].a_loc_types["wait_location"])) {
+  if(isDefined(level.zones[zone].a_loc_types["wait_location"])) {
     a_wait_locations = [];
     a_wait_locations = arraycombine(a_wait_locations, level.zones[zone].a_loc_types["wait_location"], 0, 0);
     return a_wait_locations;
@@ -263,12 +263,12 @@ function private get_wait_locations_in_zone(zone) {
 function get_escape_position_in_current_zone() {
   self endon("death");
   str_zone = zm_zonemgr::get_zone_from_position(self.origin, 1);
-  if(!isdefined(str_zone)) {
+  if(!isDefined(str_zone)) {
     str_zone = self.zone_name;
   }
-  if(isdefined(str_zone)) {
+  if(isDefined(str_zone)) {
     a_wait_locations = get_wait_locations_in_zone(str_zone);
-    if(isdefined(a_wait_locations)) {
+    if(isDefined(a_wait_locations)) {
       s_farthest = self get_farthest_wait_location(a_wait_locations);
     }
   }

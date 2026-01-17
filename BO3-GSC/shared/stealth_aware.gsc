@@ -17,7 +17,7 @@
 #namespace stealth_aware;
 
 function init() {
-  assert(isdefined(self.stealth));
+  assert(isDefined(self.stealth));
   self.stealth.aware_combat = [];
   self.stealth.aware_alerted = [];
   self.stealth.aware_sighted = [];
@@ -27,16 +27,16 @@ function init() {
 }
 
 function enabled() {
-  return isdefined(self.stealth) && isdefined(self.stealth.aware_combat);
+  return isDefined(self.stealth) && isDefined(self.stealth.aware_combat);
 }
 
 function set_awareness(str_awareness) {
   assert(self enabled());
   prevawareness = self.awarenesslevelcurrent;
-  if(!isdefined(prevawareness)) {
+  if(!isDefined(prevawareness)) {
     prevawareness = "unaware";
   }
-  if(isdefined(self.awarenesslevelcurrent) && self.awarenesslevelcurrent != str_awareness) {
+  if(isDefined(self.awarenesslevelcurrent) && self.awarenesslevelcurrent != str_awareness) {
     self.awarenesslevelprevious = self.awarenesslevelcurrent;
   }
   self.awarenesslevelcurrent = str_awareness;
@@ -48,9 +48,9 @@ function set_awareness(str_awareness) {
   self.maxsightdistsqrd = self.maxsightdist * self.maxsightdist;
   self.quiet_death = bstealthmode;
   self setstealthsightawareness(self.awarenesslevelcurrent, bstealthmode);
-  if(isdefined(self.patroller) && self.patroller) {
+  if(isDefined(self.patroller) && self.patroller) {
     self.stealth.was_patrolling = 1;
-  } else if(!(isdefined(self.stealth.was_patrolling) && self.stealth.was_patrolling) && !isdefined(self.stealth.var_b463484b) && self.awarenesslevelcurrent != "unaware") {
+  } else if(!(isDefined(self.stealth.was_patrolling) && self.stealth.was_patrolling) && !isDefined(self.stealth.var_b463484b) && self.awarenesslevelcurrent != "unaware") {
     self.stealth.var_b463484b = self.origin;
   }
   switch (self.awarenesslevelcurrent) {
@@ -70,9 +70,9 @@ function set_awareness(str_awareness) {
       self clearenemy();
     }
     self.awarenesslevelprevious = "unaware";
-    if(isdefined(self.stealth.was_patrolling) && self.stealth.was_patrolling && isdefined(self.currentgoal)) {
+    if(isDefined(self.stealth.was_patrolling) && self.stealth.was_patrolling && isDefined(self.currentgoal)) {
       self thread ai::patrol(self.currentgoal);
-    } else if(isdefined(self.stealth.var_b463484b)) {
+    } else if(isDefined(self.stealth.var_b463484b)) {
       if(isactor(self)) {
         self thread stealth_behavior::function_edba2e78(self.stealth.var_b463484b);
       }
@@ -101,7 +101,7 @@ function get_awareness() {
 }
 
 function was_alerted(entity) {
-  return isdefined(self.stealth.aware_alerted[entity getentitynumber()]);
+  return isDefined(self.stealth.aware_alerted[entity getentitynumber()]);
 }
 
 function change_awareness(delta) {
@@ -109,7 +109,7 @@ function change_awareness(delta) {
   prevaware = self.awarenesslevelcurrent;
   abs_offset = abs(delta);
   if(abs_offset > 1) {
-    for (i = 0; i < abs_offset; i++) {
+    for(i = 0; i < abs_offset; i++) {
       if(delta > 0) {
         change_awareness(1);
         continue;
@@ -149,7 +149,7 @@ function change_awareness(delta) {
 function set_ignore_sentient_all(ignore) {
   assert(self enabled());
   foreach(enemy in level.stealth.enemies[self.team]) {
-    if(!isdefined(enemy)) {
+    if(!isDefined(enemy)) {
       continue;
     }
     self set_ignore_sentient(enemy, ignore);
@@ -180,7 +180,7 @@ function function_ca6a0809(eventpackage) {
 
 function on_sighted(eventpackage) {
   e_originator = eventpackage.parms[0];
-  if(!isdefined(e_originator)) {
+  if(!isDefined(e_originator)) {
     return;
   }
   debugreason = "";
@@ -198,14 +198,14 @@ function on_sighted(eventpackage) {
   if(stealth::awareness_delta(curawareness, maxsightawareness) < 0) {
     var_edfa68f2 = self change_awareness(1);
   }
-  if(var_edfa68f2 || !isdefined(self.stealth.aware_alerted[var_f51f605d]) || !isdefined(self.stealth.aware_sighted[var_f51f605d])) {
+  if(var_edfa68f2 || !isDefined(self.stealth.aware_alerted[var_f51f605d]) || !isDefined(self.stealth.aware_sighted[var_f51f605d])) {
     curawareness = self get_awareness();
     self notify("alert", curawareness, e_originator.origin + vectorscale((0, 0, 1), 20), e_originator, debugreason);
     if(var_edfa68f2 && curawareness != "combat" && issentient(e_originator)) {
       self setstealthsightvalue(e_originator, 0);
     }
   }
-  if(isdefined(e_originator) && self stealth::is_enemy(e_originator)) {
+  if(isDefined(e_originator) && self stealth::is_enemy(e_originator)) {
     self.stealth.aware_alerted[var_f51f605d] = e_originator;
     self.stealth.aware_sighted[var_f51f605d] = e_originator;
   }
@@ -219,18 +219,18 @@ function on_sight_end(eventpackage) {
   }
   e_originator = eventpackage.parms[0];
   sightname = "on_sight_end";
-  if(isdefined(e_originator)) {
+  if(isDefined(e_originator)) {
     sightname = (sightname + "_") + e_originator getentitynumber();
   }
   self notify(sightname);
   self endon(sightname);
   var_5400af02 = stealth::awareness_delta(self get_awareness(), "unaware");
-  if(isdefined(self.stealth.investigating) && (self.stealth.investigating != "infinite" || var_5400af02 == 1)) {
+  if(isDefined(self.stealth.investigating) && (self.stealth.investigating != "infinite" || var_5400af02 == 1)) {
     self waittill("investigate_stop");
   }
   maxsightvalue = 0;
   foreach(enemy in self.stealth.aware_alerted) {
-    if(!isdefined(enemy)) {
+    if(!isDefined(enemy)) {
       continue;
     }
     if(!issentient(enemy)) {
@@ -240,7 +240,7 @@ function on_sight_end(eventpackage) {
   }
   if(maxsightvalue <= 0 && self change_awareness(-1)) {
     if(self get_awareness() != "unaware") {
-      if(isdefined(e_originator)) {
+      if(isDefined(e_originator)) {
         if(issentient(e_originator)) {
           self setstealthsightvalue(e_originator, 1);
         }
@@ -258,27 +258,27 @@ function on_alert_changed(eventpackage) {
   i_id = self getcurrenteventid();
   str_typename = self getcurrenteventtypename();
   str_newalert = eventpackage.parms[0];
-  if(isdefined(str_typename) && str_typename == "grenade_ping") {
+  if(isDefined(str_typename) && str_typename == "grenade_ping") {
     str_newalert = "combat";
   }
   if(str_newalert == "low_alert") {
     str_newalert = "high_alert";
   }
-  if(isdefined(eventpackage.parms[1])) {
+  if(isDefined(eventpackage.parms[1])) {
     v_origin = eventpackage.parms[1];
   }
-  if(isdefined(eventpackage.parms[2])) {
+  if(isDefined(eventpackage.parms[2])) {
     e_originator = eventpackage.parms[2];
   }
   if(stealth::awareness_delta(str_newalert, self get_awareness()) >= 0) {
-    if(isdefined(v_origin)) {
-      if(!isdefined(eventinterestpos) || distancesquared(v_origin, eventinterestpos) > 0.1) {
+    if(isDefined(v_origin)) {
+      if(!isDefined(eventinterestpos) || distancesquared(v_origin, eventinterestpos) > 0.1) {
         deltaorigin = v_origin - self.origin;
         deltaangles = vectortoangles(deltaorigin);
         self.react_yaw = absangleclamp360(self.angles[1] - deltaangles[1]);
       }
       if(isactor(self)) {
-        if(str_newalert == "combat" && isdefined(e_originator)) {
+        if(str_newalert == "combat" && isDefined(e_originator)) {
           self thread react_head_look(e_originator, 0.5);
         } else {
           self thread react_head_look(v_origin, 0.5);
@@ -286,21 +286,21 @@ function on_alert_changed(eventpackage) {
       }
     }
     debugreason = self getcurrenteventtypename() + self getcurrenteventname();
-    if(!isdefined(debugreason) || debugreason == "") {
+    if(!isDefined(debugreason) || debugreason == "") {
       debugreason = "";
     }
-    if(isdefined(e_originator) && iscorpse(e_originator)) {
+    if(isDefined(e_originator) && iscorpse(e_originator)) {
       debugreason = "";
     }
     if(eventpackage.parms.size > 1) {
       debugreason = eventpackage.parms[eventpackage.parms.size - 1];
     }
-    if(isdefined(debugreason) && isstring(debugreason)) {
+    if(isDefined(debugreason) && isstring(debugreason)) {
       self.stealth.debug_reason = debugreason;
     }
     if(str_typename == "explosion") {
       self notify("stealth_vo", "explosion");
-    } else if(isdefined(e_originator) && iscorpse(e_originator)) {
+    } else if(isDefined(e_originator) && iscorpse(e_originator)) {
       self notify("stealth_vo", "corpse");
     }
     self set_awareness(str_newalert);
@@ -311,11 +311,11 @@ function on_alert_changed(eventpackage) {
         break;
       }
     }
-    if(isdefined(i_id) && isdefined(e_originator) && iscorpse(e_originator)) {
+    if(isDefined(i_id) && isDefined(e_originator) && iscorpse(e_originator)) {
       self thread delayed_service_event(8, i_id);
     }
     if(isplayer(e_originator) && str_newalert == "combat" && level.stealth.var_e7ad9c1f == 0) {
-      if(isdefined(self.blindaim) && self.blindaim) {
+      if(isDefined(self.blindaim) && self.blindaim) {
         e_originator stealth_vo::function_e3ae87b3("spotted_sniper", self, 2);
       } else {
         if(isvehicle(self)) {
@@ -326,7 +326,7 @@ function on_alert_changed(eventpackage) {
       }
     }
   }
-  if(isdefined(e_originator) && self stealth::is_enemy(e_originator)) {
+  if(isDefined(e_originator) && self stealth::is_enemy(e_originator)) {
     self.stealth.aware_alerted[e_originator getentitynumber()] = e_originator;
     if(str_newalert == "combat") {
       self enter_combat_with(e_originator);
@@ -357,7 +357,7 @@ function function_933965f6(eventpackage) {
     return;
   }
   if(stealth::awareness_delta(self.awarenesslevelcurrent, self.awarenesslevelprevious) > 0) {
-    if(isdefined(self.stealth.var_c9b747e1) && (gettime() - self.stealth.var_c9b747e1) < 30000) {
+    if(isDefined(self.stealth.var_c9b747e1) && (gettime() - self.stealth.var_c9b747e1) < 30000) {
       return;
     }
     goalpos = var_62bc230d getfinalpathpos();
@@ -399,30 +399,30 @@ function react_head_look(lookat, delay) {
   self endon("react_head_look");
   ent = lookat;
   if(!isentity(lookat)) {
-    if(!isdefined(self.stealth_head_look_ent)) {
+    if(!isDefined(self.stealth_head_look_ent)) {
       self.stealth_head_look_ent = spawn("script_model", lookat);
     }
     ent = self.stealth_head_look_ent;
-  } else if(isdefined(self.stealth_head_look_ent)) {
+  } else if(isDefined(self.stealth_head_look_ent)) {
     self.stealth_head_look_ent delete();
     self.stealth_head_look_ent = undefined;
   }
   starttime = gettime();
   delayms = delay * 1000;
   wait(0.2);
-  while (isalive(self) && (isdefined(self.stealth_reacting) && self.stealth_reacting)) {
+  while(isalive(self) && (isDefined(self.stealth_reacting) && self.stealth_reacting)) {
     if((gettime() - starttime) >= delayms) {
       self lookatentity(ent);
       if(stealth_debug::enabled()) {
-        line(self geteye(), ent.origin + vectorscale((0, 0, 1), 20), (0, 0, 1), 1, 1, 1);
+        line(self getEye(), ent.origin + vectorscale((0, 0, 1), 20), (0, 0, 1), 1, 1, 1);
         debugstar(ent.origin + vectorscale((0, 0, 1), 20), 1, (0, 0, 1));
       }
     }
     wait(0.05);
   }
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     self lookatentity();
-    if(isdefined(self.stealth_head_look_ent)) {
+    if(isDefined(self.stealth_head_look_ent)) {
       self.stealth_head_look_ent delete();
       self.stealth_head_look_ent = undefined;
     }
@@ -439,7 +439,7 @@ function on_witness_combat(eventpackage) {
   self endon("death");
   e_attacker = eventpackage.parms[0];
   debugreason = eventpackage.parms[1];
-  if(isdefined(e_attacker)) {
+  if(isDefined(e_attacker)) {
     if(stealth::awareness_delta(self get_awareness(), "high_alert") < 0) {
       self notify("alert", "high_alert", e_attacker.origin, e_attacker, debugreason);
     }
@@ -448,7 +448,7 @@ function on_witness_combat(eventpackage) {
 
 function combat_alert_event(e_attacker) {
   self endon("death");
-  if(isdefined(e_attacker) && self enabled()) {
+  if(isDefined(e_attacker) && self enabled()) {
     wait(randomfloatrange(0.25, 0.75));
     self enter_combat_with(e_attacker);
   }
@@ -458,7 +458,7 @@ function enter_combat_with(enemy) {
   if(!self enabled()) {
     return;
   }
-  if(!isdefined(enemy) || !self stealth::is_enemy(enemy)) {
+  if(!isDefined(enemy) || !self stealth::is_enemy(enemy)) {
     return;
   }
   self stealth_behavior::investigate_stop();
@@ -466,7 +466,7 @@ function enter_combat_with(enemy) {
   enemyentnum = enemy getentitynumber();
   self set_awareness("combat");
   self set_ignore_sentient(enemy, 0);
-  if(!isdefined(self.stealth.aware_combat[enemyentnum])) {
+  if(!isDefined(self.stealth.aware_combat[enemyentnum])) {
     self.stealth.aware_combat[enemyentnum] = enemy;
     self.stealth.aware_alerted[enemyentnum] = enemy;
     self thread combat_spread_thread(enemy);
@@ -482,7 +482,7 @@ function enter_combat_with(enemy) {
         continue;
       }
       playerentnum = player getentitynumber();
-      if(!isdefined(self.stealth.aware_combat[playerentnum])) {
+      if(!isDefined(self.stealth.aware_combat[playerentnum])) {
         enter_combat_with(player);
       }
     }
@@ -494,14 +494,14 @@ function combat_spread_thread(enemy) {
   self endon("combat_spread_thread_" + enemy getentitynumber());
   self endon("death");
   idletime = 0;
-  while (true) {
+  while(true) {
     wait(0.5);
-    if(!isdefined(enemy) || enemy.health <= 0 || self get_awareness() != "combat" || (isdefined(self.silenced) && self.silenced)) {
+    if(!isDefined(enemy) || enemy.health <= 0 || self get_awareness() != "combat" || (isDefined(self.silenced) && self.silenced)) {
       break;
     }
     self stealth_event::broadcast_to_team(self.team, self.origin, 200, 100, 0, "combat_spread", "combat", enemy, self);
     self stealth_event::broadcast_to_team(self.team, self.origin, 400, 300, 1, "combat_interest", enemy, self);
-    if(!isdefined(self.enemy) || !self stealth::can_see(self.enemy)) {
+    if(!isDefined(self.enemy) || !self stealth::can_see(self.enemy)) {
       self setstealthsightawareness(self.awarenesslevelcurrent, 1);
     } else {
       self setstealthsightawareness(self.awarenesslevelcurrent, 0);
@@ -512,10 +512,10 @@ function combat_spread_thread(enemy) {
 
 function function_a85b6c52() {
   self endon("death");
-  while (true) {
+  while(true) {
     self waittill("enemy");
-    while (isdefined(self.enemy) && isalive(self.enemy)) {
-      if(isdefined(self.enemy.civilian) && self.enemy.civilian || (isdefined(self.enemy.lase_override) && (isdefined(self.enemy.lase_override.civilian) && self.enemy.lase_override.civilian))) {
+    while(isDefined(self.enemy) && isalive(self.enemy)) {
+      if(isDefined(self.enemy.civilian) && self.enemy.civilian || (isDefined(self.enemy.lase_override) && (isDefined(self.enemy.lase_override.civilian) && self.enemy.lase_override.civilian))) {
         self.avoid_cover = 1;
         self.silentshot = 1;
       } else {

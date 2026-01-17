@@ -53,13 +53,13 @@ aud_player_falls() {
   soundscripts\_audio_zone_manager::azm_set_filter_bypass(1);
   soundscripts\_snd_filters::snd_fade_in_filter("blur_event_filter", 0.5);
 
-  if(!isdefined(level.heartbeat_ent)) {
+  if(!isDefined(level.heartbeat_ent)) {
     level.heartbeat_ent = spawn("script_origin", level.player.origin);
     level.heartbeat_ent linkto(level.player);
   }
 
   level.heartbeat_ent stoploopsound();
-  level.player playsound("h1_heartbeat_fall");
+  level.player playSound("h1_heartbeat_fall");
   level.player thread maps\_utility::play_sound_on_entity("scn_player_fall_impact");
 }
 

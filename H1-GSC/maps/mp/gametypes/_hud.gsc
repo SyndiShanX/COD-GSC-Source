@@ -5,7 +5,7 @@
 ********************************/
 
 init() {
-  level.uiparent = spawnstruct();
+  level.uiparent = spawnStruct();
   level.uiparent.horzalign = "left";
   level.uiparent.vertalign = "top";
   level.uiparent.alignx = "left";
@@ -16,8 +16,8 @@ init() {
   level.uiparent.height = 0;
   level.uiparent.children = [];
   level.fontheight = 12;
-  level.hud["allies"] = spawnstruct();
-  level.hud["axis"] = spawnstruct();
+  level.hud["allies"] = spawnStruct();
+  level.hud["axis"] = spawnStruct();
   level.primaryprogressbary = -61;
   level.primaryprogressbarx = 0;
   level.primaryprogressbarheight = 9;
@@ -38,7 +38,7 @@ init() {
 fontpulseinit(var_0) {
   self.basefontscale = self.fontscale;
 
-  if(isdefined(var_0))
+  if(isDefined(var_0))
     self.maxfontscale = min(var_0, 6.3);
   else
     self.maxfontscale = min(self.fontscale * 2, 6.3);

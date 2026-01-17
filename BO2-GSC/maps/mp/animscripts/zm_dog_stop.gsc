@@ -36,9 +36,9 @@ dogidlenotetracks(note) {
     if(isDefined(level._effect["dog_breath"])) {
       self.breath_fx = spawn("script_model", self gettagorigin("TAG_MOUTH_FX"));
       self.breath_fx.angles = self gettagangles("TAG_MOUTH_FX");
-      self.breath_fx setmodel("tag_origin");
+      self.breath_fx setModel("tag_origin");
       self.breath_fx linkto(self, "TAG_MOUTH_FX");
-      playfxontag(level._effect["dog_breath"], self.breath_fx, "tag_origin");
+      playFXOnTag(level._effect["dog_breath"], self.breath_fx, "tag_origin");
     }
   }
 }
@@ -51,7 +51,7 @@ isfacingenemy(tolerancecosangle) {
   if(disttoenemy < 1)
     return true;
 
-  forward = anglestoforward(self.angles);
+  forward = anglesToForward(self.angles);
   val1 = forward[0] * vectoenemy[0] + forward[1] * vectoenemy[1];
   val2 = (forward[0] * vectoenemy[0] + forward[1] * vectoenemy[1]) / disttoenemy;
   return (forward[0] * vectoenemy[0] + forward[1] * vectoenemy[1]) / disttoenemy > tolerancecosangle;

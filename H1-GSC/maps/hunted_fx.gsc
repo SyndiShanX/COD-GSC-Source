@@ -382,10 +382,10 @@ fuel_explosion() {
 }
 
 ac130_gas_station() {
-  var_0 = getentarray("gas_station", "targetname");
-  var_1 = getentarray("gas_station_d", "targetname");
-  var_2 = getentarray("big_explosion", "targetname");
-  var_3 = getentarray("small_explosion", "targetname");
+  var_0 = getEntArray("gas_station", "targetname");
+  var_1 = getEntArray("gas_station_d", "targetname");
+  var_2 = getEntArray("big_explosion", "targetname");
+  var_3 = getEntArray("small_explosion", "targetname");
   common_scripts\utility::array_thread(var_0, ::hide_ent);
   common_scripts\utility::array_thread(var_1, ::swap_ent, (7680, 0, 0));
 }

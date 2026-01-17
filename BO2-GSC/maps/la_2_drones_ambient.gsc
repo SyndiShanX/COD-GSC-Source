@@ -70,10 +70,10 @@ crash_landing_fx() {
   b_hit_building_wrap = self _did_drone_hit_building_wrap();
 
   if(b_is_in_playable_space) {
-    v_forward = anglestoforward(self.angles);
+    v_forward = anglesToForward(self.angles);
     n_scale = 1000;
     v_trace_pos = self.origin + v_forward * n_scale;
-    a_trace = bullettrace(self.origin, v_trace_pos, 0, self);
+    a_trace = bulletTrace(self.origin, v_trace_pos, 0, self);
     str_surface = a_trace["surfacetype"];
     v_normal = a_trace["normal"] * -1;
     b_hit_glass = issubstr(str_surface, "ice");
@@ -92,11 +92,11 @@ crash_landing_fx() {
       level.persistent_fires = [];
 
     e_temp = spawn("script_model", self.origin);
-    e_temp setmodel("tag_origin");
+    e_temp setModel("tag_origin");
     n_time = gettime();
     e_temp.fx_start_time = n_time;
-    playfxontag(n_fx_id, e_temp, "tag_origin");
-    playfx(n_fx_id_papers, e_temp.origin, v_forward);
+    playFXOnTag(n_fx_id, e_temp, "tag_origin");
+    playFX(n_fx_id_papers, e_temp.origin, v_forward);
 
     if(level.persistent_fires.size > level.persistent_fires_max) {
       e_fire = _get_random_element_player_cant_see(level.persistent_fires);
@@ -112,7 +112,7 @@ crash_landing_fx() {
 
   } else {
     n_fx_id = level._effect["plane_crash_smoke_distant"];
-    playfx(n_fx_id, self.origin);
+    playFX(n_fx_id, self.origin);
   }
 }
 
@@ -132,7 +132,7 @@ _did_drone_hit_building_wrap() {
 
 _init_aerial_vehicles() {
   if(!isDefined(level.aerial_vehicles))
-    level.aerial_vehicles = spawnstruct();
+    level.aerial_vehicles = spawnStruct();
 
   if(!isDefined(level.aerial_vehicles.count))
     level.aerial_vehicles.count = 0;
@@ -159,7 +159,7 @@ _init_aerial_vehicles() {
     level.aerial_vehicles.circling_max_count = 30;
 
   if(!isDefined(level.aerial_vehicles.dogfights))
-    level.aerial_vehicles.dogfights = spawnstruct();
+    level.aerial_vehicles.dogfights = spawnStruct();
 
   if(!isDefined(level.aerial_vehicles.dogfights.waves)) {
     n_avengers = 5;
@@ -355,7 +355,7 @@ zone_trigger_watch(zone_name) {
     trigger waittill("trigger");
     trig_origin = (trigger.origin[0], trigger.origin[1], 0);
     player_origin = (level.player.origin[0], level.player.origin[1], 0);
-    player_forward = isDefined(level.player.viewlockedentity) ? anglestoforward(level.player.viewlockedentity.angles) : anglestoforward(level.player.angles);
+    player_forward = isDefined(level.player.viewlockedentity) ? anglesToForward(level.player.viewlockedentity.angles) : anglesToForward(level.player.angles);
     dir = trig_origin - player_origin;
     dot = vectordot(dir, player_forward);
     trigger.triggered = 1;
@@ -420,7 +420,7 @@ cleanup_ambient_drones(desired_delete_count, delete_dist, min_dot) {
     min_dot = 0.5;
 
   potential_deletes = [];
-  player_forward = isDefined(level.player.viewlockedentity) ? anglestoforward(level.player.viewlockedentity.angles) : anglestoforward(level.player.angles);
+  player_forward = isDefined(level.player.viewlockedentity) ? anglesToForward(level.player.viewlockedentity.angles) : anglesToForward(level.player.angles);
 
   for(i = 0; i < level.aerial_vehicles.axis.size; i++) {
     if(isDefined(level.aerial_vehicles.axis[i]) && !isDefined(level.aerial_vehicles.axis[i].is_convoy_plane)) {
@@ -471,7 +471,7 @@ cleanup_ambient_drones(desired_delete_count, delete_dist, min_dot) {
 }
 
 get_best_spline_node(node_start) {
-  player_forward = isDefined(level.player.viewlockedentity) ? anglestoforward(level.player.viewlockedentity.angles) : anglestoforward(level.player.angles);
+  player_forward = isDefined(level.player.viewlockedentity) ? anglesToForward(level.player.viewlockedentity.angles) : anglesToForward(level.player.angles);
   current_node = getvehiclenode(node_start, "targetname");
   next_node = getvehiclenode(current_node.target, "targetname");
   closest_node = undefined;

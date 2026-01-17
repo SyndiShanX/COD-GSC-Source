@@ -8,10 +8,10 @@
 
 pickRandomPath() {
   calcDists();
-  while (1) {
+  while(1) {
     startNode = level.waypointHeading[randomint(level.waypointHeading.size)];
     endNode = startNode;
-    while (endNode == startNode)
+    while(endNode == startNode)
       endNode = level.waypointHeading[randomint(level.waypointHeading.size)];
     randomPath = generatePath(startNode, endNode);
     level thread drawPath(randomPath, 10);
@@ -31,8 +31,8 @@ generatePath(destNode, startNode, blockedNodes) {
   startNode.f = startNode.g + startNode.h;
   addToClosedList(startNode);
   curNode = startNode;
-  while (1) {
-    for (i = 0; i < curNode.link.size; i++) {
+  while(1) {
+    for(i = 0; i < curNode.link.size; i++) {
       checkNode = curNode.link[i];
       if(is_in_array(blockedNodes, checkNode)) {
         continue;
@@ -62,7 +62,7 @@ generatePath(destNode, startNode, blockedNodes) {
     }
     addToClosedList(curNode);
     bestNode = level.openList[0];
-    for (i = 1; i < level.openList.size; i++) {
+    for(i = 1; i < level.openList.size; i++) {
       if(level.openList[i].f > bestNode.f) {
         continue;
       }
@@ -75,7 +75,7 @@ generatePath(destNode, startNode, blockedNodes) {
   }
   assert(isDefined(destNode.parentNode));
   curNode = destNode;
-  while (curNode != startNode) {
+  while(curNode != startNode) {
     pathNodes[pathNodes.size] = curNode;
     curNode = curNode.parentNode;
   }
@@ -119,7 +119,7 @@ drawPath(pathNodes, duration, id) {
     id = "msg";
   {
     level notify("draw new path" + id);
-    for (i = 1; i < pathNodes.size; i++)
+    for(i = 1; i < pathNodes.size; i++)
       level thread drawLink(pathNodes[i].origin, pathNodes[i - 1].origin, duration, id);
   }
 }
@@ -127,8 +127,8 @@ drawPath(pathNodes, duration, id) {
 drawPathOffshoots(pathNodes, duration) {
   level endon("newpath");
   duration = 10;
-  for (i = 0; i < pathNodes.size - 1; i++) {
-    for (p = 0; p < pathNodes[i].link.size; p++) {
+  for(i = 0; i < pathNodes.size - 1; i++) {
+    for(p = 0; p < pathNodes[i].link.size; p++) {
       if(i > 0 && pathNodes[i].link[p] == pathNodes[i - 1]) {
         continue;
       }
@@ -139,7 +139,7 @@ drawPathOffshoots(pathNodes, duration) {
     }
   }
   lastLink = pathNodes[pathNodes.size - 1];
-  for (p = 0; p < lastLink.link.size; p++) {
+  for(p = 0; p < lastLink.link.size; p++) {
     if(lastLink.link[p] == pathNodes[pathNodes.size - 2])
       continue;
     level thread drawLinkFull(lastLink, lastLink.link[p], (0, 0, 1), true, duration);
@@ -148,7 +148,7 @@ drawPathOffshoots(pathNodes, duration) {
 
 drawLink(start, end, duration, id) {
   level endon("draw new path" + id);
-  for (i = 0; i < duration * 20; i++) {
+  for(i = 0; i < duration * 20; i++) {
     line(start, end, (1, 0, 0), true);
     wait 0.05;
   }
@@ -159,7 +159,7 @@ drawLinkFull(start, end, color, limit, duration) {
   pts = [];
   angles = vectortoangles(start.origin - end.origin);
   right = anglestoright(angles);
-  forward = anglestoforward(angles);
+  forward = anglesToForward(angles);
   pts[pts.size] = end.origin + vectorScale(right, end.radius);
   pts[pts.size] = start.origin + vectorScale(right, start.radius);
   pts[pts.size] = start.origin + vectorScale(right, start.radius * -1);
@@ -168,15 +168,15 @@ drawLinkFull(start, end, color, limit, duration) {
   arrow = [];
   stages = 10;
   range = 0.15;
-  for (i = 0; i < stages; i++) {
+  for(i = 0; i < stages; i++) {
     stage = i + 1;
     arrow[i][0] = start.origin;
     arrow[i][1] = start.origin + vectorscale(right, dist * (range * (i / stages))) + vectorscale(forward, dist * -0.2);
     arrow[i][2] = end.origin;
     arrow[i][3] = start.origin + vectorscale(right, dist * (-1 * range * (i / stages))) + vectorscale(forward, dist * -0.2);
   }
-  for (p = 0; p < duration * 20; p++) {
-    for (i = 0; i < pts.size; i++) {
+  for(p = 0; p < duration * 20; p++) {
+    for(i = 0; i < pts.size; i++) {
       nextpoint = i + 1;
       if(nextpoint >= pts.size) {
         if(limit) {
@@ -186,8 +186,8 @@ drawLinkFull(start, end, color, limit, duration) {
       }
       line(pts[i], pts[nextpoint], color, 1.0);
     }
-    for (i = 0; i < stages; i++) {
-      for (p = 0; p < 4; p++) {
+    for(i = 0; i < stages; i++) {
+      for(p = 0; p < 4; p++) {
         nextpoint = p + 1;
         if(nextpoint >= 4)
           nextpoint = 0;
@@ -210,15 +210,15 @@ getPathBetweenPoints(start, end) {
 getPathBetweenArrayOfPoints(start, orgArray) {
   paths = [];
   array = [];
-  for (i = 0; i < orgArray.size; i++)
+  for(i = 0; i < orgArray.size; i++)
     array[i] = getClosest(orgArray[i], level.waypointHeading);
   startNode = getClosest(start, level.waypointHeading);
   paths[paths.size] = generatePath(startNode, array[0]);
-  for (i = 0; i < array.size - 1; i++)
+  for(i = 0; i < array.size - 1; i++)
     paths[paths.size] = generatePath(array[i], array[i + 1]);
   newpath = [];
-  for (i = 0; i < paths.size; i++) {
-    for (p = 0; p < paths[i].size - 1; p++)
+  for(i = 0; i < paths.size; i++) {
+    for(p = 0; p < paths[i].size - 1; p++)
       newpath[newpath.size] = paths[i][p];
   }
   newpath[newpath.size] = paths[paths.size - 1][paths[paths.size - 1].size - 1];
@@ -228,7 +228,7 @@ getPathBetweenArrayOfPoints(start, orgArray) {
     return newpath;
   curpath = path[0];
   newpath[newpath.size] = curpath;
-  for (i = 1; i < path.size; i++) {
+  for(i = 1; i < path.size; i++) {
     if(path[i] == curpath)
       continue;
     newpath[newpath.size] = path[i];

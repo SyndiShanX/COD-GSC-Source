@@ -22,7 +22,6 @@
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
-
 #namespace zm_equipment;
 
 autoexec __init__system__() {
@@ -34,7 +33,7 @@ __init__() {
 
   level.abilities_devgui_add_gadgets_custom = &abilities_devgui_add_gadgets_custom;
 
-    level.placeable_equipment_destroy_fn = [];
+  level.placeable_equipment_destroy_fn = [];
 
   if(!(isDefined(level._no_equipment_activated_clientfield) && level._no_equipment_activated_clientfield)) {
     clientfield::register("scriptmover", "equipment_activated", 1, 4, "int");
@@ -117,20 +116,20 @@ abilities_devgui_add_gadgets_custom(root, pname, pid, menu_index) {
   return menu_index;
 }
 
-  function signal_activated(val = 1) {
-    if(isDefined(level._no_equipment_activated_clientfield) && level._no_equipment_activated_clientfield) {
-      return;
-    }
-
-    self endon(#"death");
-    self clientfield::set("equipment_activated", val);
-
-    for(i = 0; i < 2; i++) {
-      util::wait_network_frame();
-    }
-
-    self clientfield::set("equipment_activated", 0);
+function signal_activated(val = 1) {
+  if(isDefined(level._no_equipment_activated_clientfield) && level._no_equipment_activated_clientfield) {
+    return;
   }
+
+  self endon(#"death");
+  self clientfield::set("equipment_activated", val);
+
+  for(i = 0; i < 2; i++) {
+    util::wait_network_frame();
+  }
+
+  self clientfield::set("equipment_activated", 0);
+}
 
 register(equipment_name, hint, howto_hint, hint_icon, equipmentvo) {
   equipment = getweapon(equipment_name);
@@ -155,7 +154,6 @@ register(equipment_name, hint, howto_hint, hint_icon, equipmentvo) {
   level.zombie_equipment[equipment] = struct;
 
   level thread function_1d34b98d(equipment);
-
 }
 
 register_slot_watcher_override(str_equipment, func_slot_watcher_override) {
@@ -394,7 +392,7 @@ buy(equipment) {
 
 slot_watcher(equipment) {
   self notify(#"kill_equipment_slot_watcher");
-  self endon(#"kill_equipment_slot_watcher", #"disconnect");
+  self endon(#"kill_equipment_slot_watcher", # "disconnect");
   notify_strings = get_notify_strings(equipment);
 
   while(true) {
@@ -544,18 +542,18 @@ setup_client_hintelem(ypos, font_scale) {
   self.hintelem init_hint_hudelem(320, ypos, "<dev string:x14a>", "<dev string:x15c>", font_scale, 1);
 }
 
-  function show_hint(equipment) {
-    self notify(#"kill_previous_show_equipment_hint_thread");
-    self endon(#"kill_previous_show_equipment_hint_thread", #"death");
+function show_hint(equipment) {
+  self notify(#"kill_previous_show_equipment_hint_thread");
+  self endon(#"kill_previous_show_equipment_hint_thread", # "death");
 
-    if(isDefined(self.do_not_display_equipment_pickup_hint) && self.do_not_display_equipment_pickup_hint) {
-      return;
-    }
-
-    wait 0.5;
-    text = get_howto_hint(equipment);
-    self show_hint_text(text);
+  if(isDefined(self.do_not_display_equipment_pickup_hint) && self.do_not_display_equipment_pickup_hint) {
+    return;
   }
+
+  wait 0.5;
+  text = get_howto_hint(equipment);
+  self show_hint_text(text);
+}
 
 show_hint_text(text, show_for_time = 3.2, font_scale = 1.25, ypos = 220) {
   if(!isDefined(self) || !isplayer(self)) {
@@ -565,19 +563,19 @@ show_hint_text(text, show_for_time = 3.2, font_scale = 1.25, ypos = 220) {
   self notify("1caf49f0db5051c");
   self endon("1caf49f0db5051c");
   self endon(#"disconnect");
-  level endoncallback(&function_57fbff5c, #"end_game");
+  level endoncallback(&function_57fbff5c, # "end_game");
 
   if(!level.zm_hint_text zm_hint_text::is_open(self)) {
     level.zm_hint_text zm_hint_text::open(self);
   }
 
   level.zm_hint_text zm_hint_text::set_text(self, text);
-  level.zm_hint_text zm_hint_text::set_state(self, #"visible");
-  time = self waittilltimeout(show_for_time, #"hide_equipment_hint_text", #"death", #"disconnect");
+  level.zm_hint_text zm_hint_text::set_state(self, # "visible");
+  time = self waittilltimeout(show_for_time, # "hide_equipment_hint_text", # "death", # "disconnect");
 
   if(isDefined(time) && isDefined(self) && level.zm_hint_text zm_hint_text::is_open(self)) {
-    level.zm_hint_text zm_hint_text::set_state(self, #"defaultstate");
-    self waittilltimeout(1, #"hide_equipment_hint_text");
+    level.zm_hint_text zm_hint_text::set_state(self, # "defaultstate");
+    self waittilltimeout(1, # "hide_equipment_hint_text");
   }
 
   if(isDefined(self) && level.zm_hint_text zm_hint_text::is_open(self)) {
@@ -728,11 +726,11 @@ function_7d948481(n_boss = 0.1, n_miniboss = 0.25, n_heavy = 0.5, n_basic = 1) {
   }
 
   switch (self.zm_ai_category) {
-    case #"boss":
+    case # "boss":
       return n_boss;
-    case #"miniboss":
+    case # "miniboss":
       return n_miniboss;
-    case #"heavy":
+    case # "heavy":
       return n_heavy;
     default:
       return n_basic;
@@ -786,4 +784,3 @@ function_1d34b98d(equipment) {
     adddebugcommand(str_cmd);
   }
 }
-

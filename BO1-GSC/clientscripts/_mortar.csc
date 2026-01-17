@@ -121,7 +121,7 @@ set_mortar_chance(mortar_name, chance, set_default) {
 player_view_chance(view_chance, explosion_point) {
   chance = RandomFloat(1);
   if(chance <= view_chance) {
-    if(within_fov(self GetEye(), self GetPlayerAngles(), explosion_point, cos(30))) {
+    if(within_fov(self getEye(), self GetPlayerAngles(), explosion_point, cos(30))) {
       return true;
     }
   }
@@ -140,15 +140,15 @@ explosion_incoming(mortar_name, pos, soundnum) {
   if(level._effectType[mortar_name] == "mortar") {
     switch (soundnum) {
       case 1:
-        PlaySound(0, "mortar_incoming1", pos);
+        playSound(0, "mortar_incoming1", pos);
         wait(1.07 - 0.25);
         break;
       case 2:
-        PlaySound(0, "mortar_incoming2", pos);
+        playSound(0, "mortar_incoming2", pos);
         wait(0.67 - 0.25);
         break;
       case 3:
-        PlaySound(0, "mortar_incoming3", pos);
+        playSound(0, "mortar_incoming3", pos);
         wait(1.55 - 0.25);
         break;
       default:
@@ -158,15 +158,15 @@ explosion_incoming(mortar_name, pos, soundnum) {
   } else if(level._effectType[mortar_name] == "artillery") {
     switch (soundnum) {
       case 1:
-        PlaySound(0, "mortar_incoming4", pos);
+        playSound(0, "mortar_incoming4", pos);
         wait(1.07 - 0.25);
         break;
       case 2:
-        PlaySound(0, "mortar_incoming4_new", pos);
+        playSound(0, "mortar_incoming4_new", pos);
         wait(0.67 - 0.25);
         break;
       case 3:
-        PlaySound(0, "mortar_incoming1_new", pos);
+        playSound(0, "mortar_incoming1_new", pos);
         wait(1.55 - 0.25);
         break;
       default:
@@ -176,15 +176,15 @@ explosion_incoming(mortar_name, pos, soundnum) {
   } else if(level._effectType[mortar_name] == "bomb") {
     switch (soundnum) {
       case 1:
-        PlaySound(0, "mortar_incoming2_new", pos);
+        playSound(0, "mortar_incoming2_new", pos);
         wait(1.75);
         break;
       case 2:
-        PlaySound(0, "mortar_incoming3_new", pos);
+        playSound(0, "mortar_incoming3_new", pos);
         wait(1.75);
         break;
       case 3:
-        PlaySound(0, "mortar_incoming4_new", pos);
+        playSound(0, "mortar_incoming4_new", pos);
         wait(1.75);
         break;
       default:
@@ -205,7 +205,7 @@ explosion_boom(mortar_name, explosion_origin, power, time, radius) {
     radius = 850;
   }
   explosion_sound(mortar_name, explosion_origin);
-  PlayFx(0, level._effect[mortar_name], explosion_origin);
+  playFX(0, level._effect[mortar_name], explosion_origin);
   localPlayers = getLocalPlayers();
   for(i = 0; i < localPlayers.size; i++) {
     localPlayers[i] Earthquake(power, time, explosion_origin, radius);
@@ -224,50 +224,50 @@ explosion_sound(mortar_name, pos) {
   if(level._effectType[mortar_name] == "mortar") {
     switch (soundnum) {
       case 1:
-        PlaySound(0, "mortar_dirt", pos);
+        playSound(0, "mortar_dirt", pos);
         break;
       case 2:
-        PlaySound(0, "mortar_dirt", pos);
+        playSound(0, "mortar_dirt", pos);
         break;
       case 3:
-        PlaySound(0, "mortar_dirt", pos);
+        playSound(0, "mortar_dirt", pos);
         break;
     }
   }
   if(level._effectType[mortar_name] == "mortar_water") {
     switch (soundnum) {
       case 1:
-        PlaySound(0, "mortar_water", pos);
+        playSound(0, "mortar_water", pos);
         break;
       case 2:
-        PlaySound(0, "mortar_water", pos);
+        playSound(0, "mortar_water", pos);
         break;
       case 3:
-        PlaySound(0, "mortar_water", pos);
+        playSound(0, "mortar_water", pos);
         break;
     }
   } else if(level._effectType[mortar_name] == "artillery") {
     switch (soundnum) {
       case 1:
-        PlaySound(0, "mortar_explosion4", pos);
+        playSound(0, "mortar_explosion4", pos);
         break;
       case 2:
-        PlaySound(0, "mortar_explosion5", pos);
+        playSound(0, "mortar_explosion5", pos);
         break;
       case 3:
-        PlaySound(0, "mortar_explosion1", pos);
+        playSound(0, "mortar_explosion1", pos);
         break;
     }
   } else if(level._effectType[mortar_name] == "bomb") {
     switch (soundnum) {
       case 1:
-        PlaySound(0, "mortar_explosion1", pos);
+        playSound(0, "mortar_explosion1", pos);
         break;
       case 2:
-        PlaySound(0, "mortar_explosion4", pos);
+        playSound(0, "mortar_explosion4", pos);
         break;
       case 3:
-        PlaySound(0, "mortar_explosion5", pos);
+        playSound(0, "mortar_explosion5", pos);
         break;
     }
   }
@@ -298,9 +298,9 @@ explosion_activate(mortar_name, blast_radius, min_damage, max_damage, quake_powe
     for(i = 0; i < dust_points.size; i++) {
       if(DistanceSquared(dust_points[i].origin, self.origin) < max_range * max_range) {
         if(isDefined(dust_points[i].script_fxid)) {
-          PlayFx(0, level._effect[dust_points[i].script_fxid], dust_points[i].origin);
+          playFX(0, level._effect[dust_points[i].script_fxid], dust_points[i].origin);
         } else {
-          PlayFx(0, level._effect[level._explosion_dust_name[mortar_name]], dust_points[i].origin);
+          playFX(0, level._effect[level._explosion_dust_name[mortar_name]], dust_points[i].origin);
         }
       }
     }
@@ -331,7 +331,7 @@ mortar_loop(mortar_name, barrage_amount, no_terrain) {
   explosion_points_structs = [];
   num_points = 0;
   while(num_points == 0) {
-    explosion_points = GetEntArray(0, mortar_name, "targetname");
+    explosion_points = getEntArray(0, mortar_name, "targetname");
     explosion_points_structs = getstructarray(mortar_name, "targetname");
     num_points = explosion_points.size + explosion_points_structs.size;
     wait(0.5);
@@ -344,7 +344,7 @@ mortar_loop(mortar_name, barrage_amount, no_terrain) {
   dust_points = [];
   if(isDefined(level._explosion_dust_name[mortar_name])) {
     dust_name = level._explosion_dust_name[mortar_name];
-    dust_points = GetEntArray(0, dust_name, "targetname");
+    dust_points = getEntArray(0, dust_name, "targetname");
     dust_points_structs = [];
     dust_points_structs = getstructarray(dust_name, "targetname");
     for(i = 0; i < dust_points_structs.size; i++) {

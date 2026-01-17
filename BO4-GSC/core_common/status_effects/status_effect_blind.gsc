@@ -6,7 +6,6 @@
 #include scripts\core_common\status_effects\status_effect_util;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace status_effect_blind;
 
 autoexec __init__system__() {
@@ -62,7 +61,7 @@ blind_apply(var_756fda07, weapon, applicant) {
   }
 }
 
-private function_8a261309() {
+function_8a261309() {
   if(isDefined(self.owner) && isDefined(self.owner.lastflashedby) && isDefined(self.owner.lastflashedby.var_a467e27f)) {
     self.owner.lastflashedby.var_a467e27f = 0;
   }

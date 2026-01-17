@@ -4,7 +4,7 @@
 ************************************************/
 
 main() {
-  self setmodel("c_usa_lapd_streetcop_body_blk");
+  self setModel("c_usa_lapd_streetcop_body_blk");
   self.headmodel = "c_usa_lapd_streetcop_head3";
   self attach(self.headmodel, "", 1);
   self.hatmodel = "c_usa_lapd_streetcop_head3_gear";

@@ -13,7 +13,6 @@
 CONST_min_stick_move = 0.5;
 
 climb_init() {
-
   if(level.script == "climb")
     level.friendly_init_cliffhanger = ::empty;
   player_jumpdown_block = GetEnt("player_jumpdown_block", "targetname");
@@ -55,7 +54,6 @@ climb_init() {
   tracefx.fx = LoadFX("misc/ice_pick_large");
   tracefx.sound = "icepick_pullout_ice_npc";
 
-
   //Player slide fx
   tracefx = add_trace_fx("slide_fx");
   tracefx.surface = "ice";
@@ -63,7 +61,7 @@ climb_init() {
   //tracefx.sound = "icepick_impact_ice";
 
   thread player_slides_off_cliff();
-  /* 
+  /*
   	//Price Climb Foot FX - Tried hooking up but didn't work very good since the feet are in the ground, so I just played fxontag
   	tracefx = add_trace_fx( "footstep_ice_climbing" );
   	tracefx.surface = "ice";
@@ -110,14 +108,14 @@ climb_init() {
   friendly_climb_anims();
 
   // Hold ^3[{+speed_throw}]^7 to swing your left icepick.
-  add_hint_string("left_icepick", & "CLIFFHANGER_LEFT_ICEPICK", ::should_stop_hanging_left_icepick_hint);
+  add_hint_string("left_icepick", &"CLIFFHANGER_LEFT_ICEPICK", ::should_stop_hanging_left_icepick_hint);
   // Hold ^3[{+attack}]^7 to swing your right icepick.
-  add_hint_string("right_icepick", & "CLIFFHANGER_RIGHT_ICEPICK", ::should_stop_hanging_right_icepick_hint);
+  add_hint_string("right_icepick", &"CLIFFHANGER_RIGHT_ICEPICK", ::should_stop_hanging_right_icepick_hint);
   // Approach the ice and hold ^3[{+attack}]^7 to climb.
-  add_hint_string("how_to_climb", & "CLIFFHANGER_HOW_TO_CLIMB", ::should_stop_how_to_climb_hint);
+  add_hint_string("how_to_climb", &"CLIFFHANGER_HOW_TO_CLIMB", ::should_stop_how_to_climb_hint);
 
   //trigger = GetEnt( "climb_trigger", "script_noteworthy" );
-  //trigger SetHintString( "Hold &&1 to climb" );
+  //trigger SetHintString( "Hold && 1 to climb" );
   //level.climb_use_trigger = trigger;
 
   flag_init("we_care_about_right_icepick");
@@ -148,7 +146,7 @@ climb_init() {
   thread give_player_icepicker_ammo();
   thread blend_in_climbing_dof(3);
 
-  climb_tests = GetEntArray("climb_test", "targetname");
+  climb_tests = getEntArray("climb_test", "targetname");
   climb_catch = GetEnt("climb_catch", "targetname");
   climb_catch Hide();
   array_call(climb_tests, ::Hide);
@@ -174,7 +172,7 @@ toggle_jump_ramp() {
 ramp_toggles_until_jump_over() {
   level endon("reached_top");
   player_ramp_block = GetEnt("player_ramp_block", "targetname");
-  for (;;) {
+  for(;;) {
     flag_wait("ramp_block_notsolid");
 
     add_wait(::player_stops_moving);
@@ -188,7 +186,7 @@ ramp_toggles_until_jump_over() {
 }
 
 player_stops_moving() {
-  for (;;) {
+  for(;;) {
     vel = level.player GetVelocity();
     velocity = Distance((vel[0], vel[1], 0), (0, 0, 0));
     if(velocity < 75)
@@ -197,15 +195,13 @@ player_stops_moving() {
   }
 }
 
-empty() {
-
-}
+empty() {}
 
 death_trigger() {
   flag_clear("fade_to_death");
   flag_wait("fade_to_death");
 
-  level.player PlaySound("cliff_plyr_fall_scream");
+  level.player playSound("cliff_plyr_fall_scream");
   SetSavedDvar("compass", "0");
   SetSavedDvar("ammoCounterHide", 1);
   SetSavedDvar("actionSlotsHide", 1);
@@ -221,11 +217,11 @@ death_trigger() {
     if(!flag("reached_top")) {
       if(GetDvarInt("hold_on_tight")) {
         // Hold on for dear life.
-        SetDvar("ui_deadquote", & "CLIFFHANGER_HOLD_ON_TIGHT");
+        SetDvar("ui_deadquote", &"CLIFFHANGER_HOLD_ON_TIGHT");
       } else {
         SetDvar("hold_on_tight", 1);
         // Nobody makes the first jump...
-        SetDvar("ui_deadquote", & "CLIFFHANGER_MAKES_FIRST_JUMP");
+        SetDvar("ui_deadquote", &"CLIFFHANGER_MAKES_FIRST_JUMP");
       }
       maps\_utility::missionFailedWrapper();
     }
@@ -245,7 +241,7 @@ give_player_icepicker_ammo() {
     return;
   level endon("reached_top");
 
-  for (;;) {
+  for(;;) {
     if(player_has_weapon(level.ice_pick_viewweapon)) {
       level.player GiveMaxAmmo(level.ice_pick_viewweapon);
       level.player SetWeaponAmmoClip(level.ice_pick_viewweapon, 90);
@@ -256,13 +252,14 @@ give_player_icepicker_ammo() {
 
 kill_on_slip() {
   level endon("reached_top");
-  if(flag("reached_top"))
+  if(flag("reached_top")) {
     return;
-
-  for (;;) {
+  }
+  for(;;) {
     flag_waitopen("flying_in");
-    if(level.player.origin[2] < -1000)
+    if(level.player.origin[2] < -1000) {
       break;
+    }
     wait(0.05);
   }
   level.player Kill();
@@ -273,7 +270,7 @@ player_rig_test() {
   org = (0, 0, 0);
   model = spawn_anim_model("player_rig");
 
-  for (;;) {
+  for(;;) {
     //model.origin = org + randomvector( 30 );
     model.angles = (RandomIntRange(0, 360), RandomIntRange(0, 360), RandomIntRange(0, 360));
     //model.origin += (0,0,1 );
@@ -286,7 +283,7 @@ tag_flies_in_on_vehicle(vehicle) {
   dest = GetEnt("player_climb_start", "targetname");
 
   timer = 0.2;
-  for (;;) {
+  for(;;) {
     self MoveTo(vehicle.origin, timer, 0, 0);
     angles = VectorToAngles(dest.origin - self.origin);
     self.angles = angles;
@@ -366,9 +363,10 @@ keep_price_in_focus(original_dof) {
   mid_dof["farBlur"] = 4;
 
   climb_cam = GetEnt("player_climb_start", "targetname");
-  for (;;) {
-    if(flag("nearing_top_of_slam_zoom"))
+  for(;;) {
+    if(flag("nearing_top_of_slam_zoom")) {
       break;
+    }
     //		if( Distance( climb_cam.origin, level.player.origin ) < 400 )
     //			break;
 
@@ -380,14 +378,13 @@ keep_price_in_focus(original_dof) {
   blend_dof(level.dofDefault, mid_dof, 0.5);
   wait(3);
   blend_dof(level.dofDefault, original_dof, 2);
-
 }
 
 blizzard_lead_fx() {
   self endon("death");
-  while (1) {
+  while(1) {
     if(self.veh_speed > 50) {
-      PlayFX(level._effect["blizzard_level_1"], self.origin);
+      playFX(level._effect["blizzard_level_1"], self.origin);
       //			wait( .3 );
     }
 
@@ -397,7 +394,7 @@ blizzard_lead_fx() {
 
 faux_player_on_mountain() {
   spawner = GetEnt("faux_player_spawner", "targetname");
-  guy = spawner StalingradSpawn();
+  guy = spawner Stalingradspawn();
   guy.team = "allies";
   ent = GetEnt("faux_player_ent", "targetname");
 
@@ -426,7 +423,6 @@ fly_up_the_mountain() {
 
   //	thread maps\_blizzard::blizzard_level_transition_snowmobile( 0.05 );
   maps\_blizzard::blizzard_overlay_clear();
-
 
   climb_cam = GetEnt("player_climb_start", "targetname");
   climb_cam.angles = (16.5, climb_cam.angles[1], 0);
@@ -492,7 +488,7 @@ fly_up_the_mountain() {
   timer = 4.5;
   model MoveTo( climb_cam.origin, timer, 0, timer );
   model RotateTo( climb_cam.angles, timer * 2, 0, timer );
-	
+  	
   wait( 1.4 );
   timer = 0.5;
   model MoveTo( climb_cam.origin, timer, 0, timer );
@@ -502,7 +498,7 @@ fly_up_the_mountain() {
   timer = 0.5;
   model MoveTo( climb_cam.origin, timer, 0, timer );
   model RotateTo( climb_cam.angles, timer * 2, 0, timer );
-	
+  	
   wait( timer + 0.5 );
   model Delete();
   level.player Unlink();
@@ -530,11 +526,10 @@ teleport_to_cave() {
   level.player SetStance("crouch");
   level.player TakeAllWeapons();
   level.player GiveWeapon(level.ice_pick_viewweapon, 0, 1);
-
 }
 
 player_mantles_top() {
-  for (;;) {
+  for(;;) {
     if(level.player CanMantle()) {
       level.player Unlink();
       level.player ForceMantle();
@@ -565,7 +560,7 @@ climb_wall(start_org, start_ang) {
   starting_climb_brush = GetEnt("starting_climb_brush", "targetname");
   player_jump_blocker = GetEnt("player_jump_blocker", "targetname");
 
-  for (;;) {
+  for(;;) {
     player_jump_blocker Solid();
     starting_climb_brush NotSolid();
 
@@ -600,7 +595,7 @@ get_forward_from_ent(ent) {
   ent_targ = GetEnt(ent.target, "targetname");
   angles = VectorToAngles(ent_targ.origin - ent.origin);
   angles = (0, angles[1], 0);
-  return AnglesToForward(angles);
+  return anglesToForward(angles);
 }
 
 wait_until_player_climbs() {
@@ -612,7 +607,7 @@ wait_until_player_climbs() {
   hint_time = GetTime() + 3000;
   displayed_hint = false;
 
-  for (;;) {
+  for(;;) {
     if(!displayed_hint && GetTime() > hint_time) {
       displayed_hint = true;
       display_hint("how_to_climb");
@@ -636,7 +631,7 @@ wait_until_player_climbs() {
     }
 
     player_angles = (0, player_angles[1], 0);
-    player_forward = AnglesToForward(player_angles);
+    player_forward = anglesToForward(player_angles);
     dot = VectorDot(player_forward, climb_forward);
     if(dot < 0.6) {
       level.player AllowFire(true);
@@ -651,12 +646,12 @@ wait_until_player_climbs() {
       thread autosave_now_silent();
     autosaved = true;
 
-    if(level.player rightSwingPressed())
+    if(level.player rightSwingPressed()) {
       return;
-
-    if(level.player leftSwingPressed())
+    }
+    if(level.player leftSwingPressed()) {
       return;
-
+    }
     wait(0.05);
   }
 }
@@ -673,7 +668,7 @@ set_normal_fov() {
   SetSavedDvar("cg_fov", 65);
   /*
   fov = GetDvarInt( "cg_fov" );
-  for ( i = fov; i >= 65; i-- )
+  for( i = fov; i >= 65; i-- )
   {
   	SetSavedDvar( "cg_fov", i );
   	wait( 0.05 );
@@ -685,7 +680,7 @@ set_zoomed_fov() {
   SetSavedDvar("cg_fov", 78);
   /*
   fov = GetDvarInt( "cg_fov" );
-  for ( i = fov; i <= 78; i++ )
+  for( i = fov; i <= 78; i++ )
   {
   	SetSavedDvar( "cg_fov", i );
   	wait( 0.05 );
@@ -694,8 +689,7 @@ set_zoomed_fov() {
 }
 
 modellines(start_org, start_ang, model) {
-
-  for (;;) {
+  for(;;) {
     Line(start_org, model GetTagOrigin("tag_player"), (1, 0, 0));
     wait(0.05);
   }
@@ -718,12 +712,11 @@ player_finishes_climbing(start_org, start_ang, no_relink, skipRelink) {
   //	anim_spawn_model( "viewmodel_ice_picker", "pick", anime, tag )
   model anim_spawn_tag_model("viewmodel_ice_picker", "tag_weapon_right");
   model anim_spawn_tag_model("viewmodel_ice_picker_03", "tag_weapon_left");
-  /#
-  model thread draw_ent_num();
-  # /
 
-    tag_origin = Spawn("script_model", (0, 0, 0));
-  tag_origin SetModel("tag_origin");
+  model thread draw_ent_num();
+
+  tag_origin = spawn("script_model", (0, 0, 0));
+  tag_origin setModel("tag_origin");
   tag_origin Hide();
   tag_origin LinkTo(model, "tag_player");
   // self PlayerSetGroundReferenceEnt( tag_origin );
@@ -732,7 +725,6 @@ player_finishes_climbing(start_org, start_ang, no_relink, skipRelink) {
 
   thread set_zoomed_fov();
 
-
   ////////////////////////////////////////////////////////////////////
   //		PLAYER LINKING
   ////////////////////////////////////////////////////////////////////
@@ -740,7 +732,6 @@ player_finishes_climbing(start_org, start_ang, no_relink, skipRelink) {
   //	model thread lerp_player_view_to_tag_oldstyle( self, "tag_player", 0.2, 1, fov, fov, fov * 0.2, fov * ( 2 / 3 ) );
   //	model thread maps\_debug::dragTagUntilDeath( "tag_player", (1,1,0) );
   //	model thread maps\_debug::dragTagUntilDeath( "tag_origin", (1,0,0) );
-
 
   arms = [];
   arms[arms.size] = "left";
@@ -756,12 +747,12 @@ player_finishes_climbing(start_org, start_ang, no_relink, skipRelink) {
   keys["right"] = "k";
 
   angles = model.angles;
-  forward = AnglesToForward(angles);
+  forward = anglesToForward(angles);
   up = AnglesToUp(angles);
   right = AnglesToRight(angles);
 
   // global arm vars that are not arm specific
-  arm_globals = SpawnStruct();
+  arm_globals = spawnStruct();
   arm_globals.arm_weight = 0.01;
 
   arm_globals.fake_models = [];
@@ -786,12 +777,12 @@ player_finishes_climbing(start_org, start_ang, no_relink, skipRelink) {
     relink_time = 10000;
 
   foreach(arm in arms) {
-    struct = Spawn("script_origin", (0, 0, 0));
+    struct = spawn("script_origin", (0, 0, 0));
 
     key = keys[arm];
     struct.key = key;
     struct.arm = arm;
-    if(IsDefined(no_relink)) // && arm == "right" )
+    if(isDefined(no_relink)) // && arm == "right" )
       struct.last_button_press = GetTime() + relink_time;
     else
       struct.last_button_press = 0;
@@ -842,7 +833,7 @@ player_finishes_climbing(start_org, start_ang, no_relink, skipRelink) {
 
   ent.player.jumped = false;
 
-  if(!isdefined(no_relink)) {
+  if(!isDefined(no_relink)) {
     flag_set("we_care_about_right_icepick");
     // used for the initial getting on the wall
     player_relinks_to_tag(ent);
@@ -868,7 +859,7 @@ player_finishes_climbing(start_org, start_ang, no_relink, skipRelink) {
   e3_start = is_e3_start();
   e3_skipout_time = 0;
 
-  for (;;) {
+  for(;;) {
     if(flag("finished_climbing")) {
       stop_climbing = true;
       break;
@@ -901,7 +892,7 @@ player_finishes_climbing(start_org, start_ang, no_relink, skipRelink) {
       }
     }
 
-    //		if( IsDefined( level.player.mantled ) )
+    //		if( isDefined( level.player.mantled ) )
     //			break;
     ent = arm_globals.arm_ents[arm_globals.current_arm];
     other_arm = get_other_arm(arm_globals.current_arm);
@@ -936,14 +927,14 @@ player_finishes_climbing(start_org, start_ang, no_relink, skipRelink) {
       flag_waitopen("climb_pullup");
       ent = arm_ents[arm_globals.current_arm];
       player_gets_back_on_wall(ent);
-      // while ( movement_stick_pressed( arm_ent ) )
-      while (icepick_button_pressed(ent))
+      // while( movement_stick_pressed( arm_ent ) )
+      while(icepick_button_pressed(ent))
         wait(0.05);
     }
   }
 
   tag_origin Delete();
-  if(IsDefined(model))
+  if(isDefined(model))
     model Delete();
 
   if(stop_climbing) {
@@ -985,7 +976,7 @@ player_falls_to_death(ent) {
     movent Delete();
     cleanup_player_arms(ent);
     angles = (-15, -100, 0);
-    forward = AnglesToForward(angles);
+    forward = anglesToForward(angles);
     level.player SetVelocity(forward * 50);
     level.player BeginSliding();
 
@@ -1059,7 +1050,7 @@ should_fall(stabbed, fall_time, ent) {
 }
 
 player_jump_check(ent) {
-  for (;;) {
+  for(;;) {
     ent.player.jumped = false;
     ent.player waittill("jump");
     ent.player.jumped = true;
@@ -1090,7 +1081,7 @@ finished_stabbing( ent )
 		
 	if( movement_stick_pressed( ent ) )
 		return false;
-		 
+		
 	// check to see if we're pressing the other arm
 	other_arm = get_other_arm( ent.arm );
 	other_arm_ent = ent.globals.arm_ents[ other_arm ];
@@ -1102,7 +1093,7 @@ assign_random_waits(ent) {
   ent.globals.random_wait_index = 0;
   ent.globals.random_waits = [];
   steps = 10;
-  for (i = 0; i < steps; i++) {
+  for(i = 0; i < steps; i++) {
     random_wait = i / steps;
     random_wait *= 0.25;
     ent.globals.random_waits[i] = random_wait;
@@ -1174,13 +1165,13 @@ right_add_test(ent) {
 
   extra_boost = level.additive_arm_boost;
 
-  for (;;) {
+  for(;;) {
     add = add_types[add];
     left SetAnimKnob(left_anims[add], 1, 0, 1);
     //right SetAnimKnob( right_anims[ "correct_down" ], 1, 0, 1 );
     right SetAnimKnob(right_anims[add], 1, 0, 1);
 
-    for (i = 0; i < steps; i++) {
+    for(i = 0; i < steps; i++) {
       index = i;
       weight = index / steps;
       if(add == "additive_in")
@@ -1234,7 +1225,7 @@ wrist_test(ent) {
   past_tag = spawn_icepick_fx_tag(fake_model, fx_tag_name);
   past_tag Unlink();
   past_tag move_forward(level.trace_depth);
-  forward = AnglesToForward(past_tag.angles);
+  forward = anglesToForward(past_tag.angles);
   //past_tag thread maps\_debug::dragTagUntilDeath( "tag_origin", (0,1,0) );
 
   current_tag = spawn_icepick_fx_tag(fake_model, fx_tag_name);
@@ -1246,7 +1237,7 @@ wrist_test(ent) {
 
   fake_model thread fix_org(current_tag, past_tag);
 
-  for (;;) {
+  for(;;) {
     start = RandomFloatRange(0, 1);
     start = 1;
     /*
@@ -1285,30 +1276,30 @@ wrist_test(ent) {
     wait(1.2);
 
     /*
-		steps = 30;
-		for ( i = 0; i < steps; i++ )
-		{
-			dif = ( i / steps );
-			dif = 1 - dif;
-			
-			//weight = 1 - dif;
-			weight = 1 - dif;
-//			fake_model SetAnimLimited( anims[ "wrist" ], 0, 0, 1 );
-//			fake_model SetAnimLimited( anims[ "additive" ], 0, 0, 1 );
-			fake_model SetAnimLimited( anims[ "wrist" ], weight * climb_float, 0, 1 );
-			fake_model SetAnimLimited( anims[ "additive" ], level.additive_arm_boost * dif, 0, 1 );
-			wait( 0.05 );
-			org_dif = past_tag.origin - current_tag.origin;
-			fake_model.origin += org_dif;
-				
-			wait( 0.1 );
-		}
-		*/
+    		steps = 30;
+    		for( i = 0; i < steps; i++ )
+    		{
+    			dif = ( i / steps );
+    			dif = 1 - dif;
+    			
+    			//weight = 1 - dif;
+    			weight = 1 - dif;
+    //			fake_model SetAnimLimited( anims[ "wrist" ], 0, 0, 1 );
+    //			fake_model SetAnimLimited( anims[ "additive" ], 0, 0, 1 );
+    			fake_model SetAnimLimited( anims[ "wrist" ], weight * climb_float, 0, 1 );
+    			fake_model SetAnimLimited( anims[ "additive" ], level.additive_arm_boost * dif, 0, 1 );
+    			wait( 0.05 );
+    			org_dif = past_tag.origin - current_tag.origin;
+    			fake_model.origin += org_dif;
+    				
+    			wait( 0.1 );
+    		}
+    		*/
   }
 }
 
 fix_org(current_tag, past_tag) {
-  for (;;) {
+  for(;;) {
     wait(0.05);
     org_dif = past_tag.origin - current_tag.origin;
     self.origin += org_dif;
@@ -1342,7 +1333,7 @@ blend_out_additive_and_in_wrist(ent, fake_model, lerp_time) {
   ent.corrector_type = undefined;
 
   fake_model ClearAnim(anims["additive"], lerp_time);
-  if(IsDefined(anims["vertical_corrector"])) {
+  if(isDefined(anims["vertical_corrector"])) {
     fake_model ClearAnim(anims["vertical_corrector"], lerp_time);
   }
 
@@ -1353,7 +1344,7 @@ blend_out_additive_and_in_wrist(ent, fake_model, lerp_time) {
   wait(0.05);
 
   ent.viewModel ClearAnim(anims["additive"], lerp_time);
-  if(IsDefined(anims["vertical_corrector"]))
+  if(isDefined(anims["vertical_corrector"]))
     ent.viewModel ClearAnim(anims["vertical_corrector"], lerp_time);
 
   ent.viewModel SetAnimKnob(anims[wrist_additive], 1, 0, 1);
@@ -1368,11 +1359,10 @@ blend_out_additive_and_in_wrist(ent, fake_model, lerp_time) {
   wait( lerp_time );
   */
   fake_model notify("stop_fixing_origin");
-
 }
 
 move_forward(dist) {
-  forward = AnglesToForward(self.angles);
+  forward = anglesToForward(self.angles);
   self.origin += forward * dist;
 }
 
@@ -1466,7 +1456,7 @@ player_relinks_to_tag(ent) {
   anims = ent.anims;
   ent.player endon("stop_climbing");
   /*
-  if( !isdefined( level.climb_first_link ) )
+  if( !isDefined( level.climb_first_link ) )
   {
   	 // is it the main arms or debug arms?
   	climb_normal_start_org = GetEnt( "climb_normal_start_org", "targetname" );
@@ -1558,9 +1548,10 @@ player_relinks_to_tag(ent) {
     delayThread(1.2, ::flag_set, "player_begins_to_climb");
     SetSavedDvar("sm_sunsamplesizenear", 0.0625);
 
-    for (;;) {
-      if(ent.viewModel GetAnimTime(anims[start_climb]) > 0.97)
+    for(;;) {
+      if(ent.viewModel GetAnimTime(anims[start_climb]) > 0.97) {
         break;
+      }
       wait(0.05);
     }
     //ent.viewModel waittillmatch( "start_climb", "end" );
@@ -1573,8 +1564,8 @@ player_relinks_to_tag(ent) {
   thread player_relinks_to_tag_threaded(ent);
   tag_angles = ent.viewModel GetTagAngles("tag_view");
   player_angles = ent.player GetPlayerAngles();
-  tag_forward = AnglesToForward(tag_angles);
-  player_forward = AnglesToForward(player_angles);
+  tag_forward = anglesToForward(tag_angles);
+  player_forward = anglesToForward(player_angles);
   dot = VectorDot(tag_forward, player_forward);
   level.dot = dot;
   if(dot < 0.85)
@@ -1595,9 +1586,9 @@ start_climb_sfx(ent) {
   ent.viewModel waittillmatch("start_climb", "stab");
   ent.fx_tag traceFX_on_tag("player_ice_pick", "tag_origin", 10);
 
-  ent.fx_tag PlaySound("icepick_inactive_cracking");
+  ent.fx_tag playSound("icepick_inactive_cracking");
   ent.viewModel waittill("stop_crack");
-  ent.fx_tag PlaySound("icepick_inactive_cracking_stop");
+  ent.fx_tag playSound("icepick_inactive_cracking_stop");
   //	thread play_sound_in_space( "icepick_inactive_cracking", ent.fx_tag.origin );
 }
 
@@ -1613,7 +1604,7 @@ player_relinks_to_tag_threaded(ent) {
 }
 
 arm_stabs(ent, skipRelink) {
-  if(!isdefined(skipRelink))
+  if(!isDefined(skipRelink))
     player_relinks_to_tag(ent);
   // limit the player's fov while stabbing
   directions = [];
@@ -1623,7 +1614,7 @@ arm_stabs(ent, skipRelink) {
 
   /*
   climb_dir = directions[ ent.globals.player_right ];
-	
+  	
   movement = ent.player GetStick( ent );
   if( movement[ 0 ] > CONST_min_stick_move )
   {
@@ -1644,7 +1635,7 @@ arm_stabs(ent, skipRelink) {
   	if( ent.globals.player_up )
   		climb_dir = "up";
   }
-	
+  	
   */
   climb_dir = "up"; // forcing up now
 
@@ -1657,14 +1648,14 @@ arm_stabs(ent, skipRelink) {
   ent.globals.org_offset = undefined;
   thread calc_org_offset(ent);
   stab_length = GetAnimLength(anims["stab"]);
-  level.player PlaySound("player_climb_effort");
+  level.player playSound("player_climb_effort");
   wait(stab_length);
   stab_success = penetrable_surface(ent);
 
   surface = ent.surface_type;
   fx = "icepick_impact_" + surface;
   if(fxExists(fx)) {
-    PlayFX(getfx(fx), ent.hit_pos, ent.normal);
+    playFX(getfx(fx), ent.hit_pos, ent.normal);
   }
   ent.viewModel thread climbing_cracks_think(ent, ent.hit_pos, ent.normal);
 
@@ -1747,7 +1738,7 @@ modify_viewmodel_based_on_fakemodel(ent, fake_model) {
   past_tag = spawn_icepick_fx_tag(fake_model, fx_tag_name);
   past_tag Unlink();
   past_tag move_forward(level.trace_depth);
-  forward = AnglesToForward(past_tag.angles);
+  forward = anglesToForward(past_tag.angles);
   // past_tag thread maps\_debug::dragTagUntilDeath( "tag_origin", (0,1,0) );
 
   current_tag = spawn_icepick_fx_tag(fake_model, fx_tag_name);
@@ -1781,7 +1772,7 @@ player_gets_back_on_wall(ent) {
 }
 
 player_got_off_cliff(ent) {
-  //	if( IsDefined( ent.player.mantled ) )
+  //	if( isDefined( ent.player.mantled ) )
   //		return true;
 
   //	if( ent.player CanMantle() )
@@ -1809,8 +1800,8 @@ detach_pick_2(player_arms) {
   /*
   org = player_arms GetTagOrigin( "tag_weapon_right" );
   ang = player_arms GetTagAngles( "tag_weapon_right" );
-  pick = Spawn( "script_model", org );
-  pick SetModel( "weapon_ice_picker" );
+  pick = spawn( "script_model", org );
+  pick setModel( "weapon_ice_picker" );
   pick.angles = ang;
   pick PhysicsLaunchClient( pick.origin, ( 0, 0, -1 ) );
   */
@@ -1820,8 +1811,8 @@ detach_pick(player_arms) {
   player_arms Detach("viewmodel_ice_picker", "tag_weapon_right");
   org = player_arms GetTagOrigin("tag_weapon_right");
   ang = player_arms GetTagAngles("tag_weapon_right");
-  pick = Spawn("script_model", org);
-  pick SetModel("viewmodel_ice_picker");
+  pick = spawn("script_model", org);
+  pick setModel("viewmodel_ice_picker");
   pick.angles = ang;
   pick PhysicsLaunchClient(pick.origin, (0, 0, -1));
 }
@@ -1936,7 +1927,7 @@ reached_drop_down_spot(ent) {
   ent.player PlayerSetGroundReferenceEnt(undefined);
   ent.player SetMoveSpeedScale(0.35);
 
-  //	if( IsDefined( ent.player.mantled ) )
+  //	if( isDefined( ent.player.mantled ) )
   //		return true;
   /*
   if( ent.player CanMantle() )
@@ -1975,7 +1966,7 @@ fix_origins_until_death(ent, fake_model, past_tag, current_tag) {
   //fake_model endon( "death" );
   fake_model endon("stop_fixing_origin");
 
-  for (;;) {
+  for(;;) {
     wait(0.05);
     //org_dif = model1_tag.origin - viewModel_tag.origin;
     //viewModel_org_tag.origin += org_dif;
@@ -2024,7 +2015,7 @@ calc_org_offset(ent) {
 }
 
 pop_origin(ent) {
-  AssertEx(IsDefined(ent.globals.org_offset), "no org offset to pop");
+  AssertEx(isDefined(ent.globals.org_offset), "no org offset to pop");
   ent.viewModel DontInterpolate();
   ent.viewModel.origin += ent.globals.org_offset;
 }
@@ -2098,7 +2089,7 @@ calculate_additive(ent) {
   old_org = ent.viewModel.origin;
 
   // make fake arms that trial the various degrees of additive to find out which one will strike the surface
-  hits = SpawnStruct();
+  hits = spawnStruct();
   hits.calcs = [];
   hits.surface_types = [];
   hits.normals = [];
@@ -2112,7 +2103,7 @@ calculate_additive(ent) {
   additive_type = "additive_in";
   //steps = ent.additive_models[ additive_type ].size;
   steps = 40;
-  for (i = 0; i < steps; i++) {
+  for(i = 0; i < steps; i++) {
     additive_weight = i / steps * extra_boost * anims[additive_type + "_strength"]; // "additive_in_strength / additive_out_strength"
     weights[i] = additive_weight;
     weight_type[i] = additive_type;
@@ -2121,7 +2112,7 @@ calculate_additive(ent) {
   }
 
   additive_type = "additive_out";
-  for (i = 0; i < steps; i++) {
+  for(i = 0; i < steps; i++) {
     additive_weight = i / steps * extra_boost * anims[additive_type + "_strength"]; // "additive_in_strength / additive_out_strength"
     index = i + steps;
     weights[index] = additive_weight;
@@ -2150,14 +2141,14 @@ calculate_additive(ent) {
     */
 
     penetrable = penetrable_surface(ent, hits.surface_types[index]);
-    if(!penetrable)
+    if(!penetrable) {
       continue;
-
+    }
     abs_difference_between_hit_depth_and_desired_hit_depth = abs(hit_depth - desired_hit_depth);
 
-    if(abs_difference_between_hit_depth_and_desired_hit_depth > hit_depth_difference)
+    if(abs_difference_between_hit_depth_and_desired_hit_depth > hit_depth_difference) {
       continue;
-
+    }
     hit_depth_difference = abs_difference_between_hit_depth_and_desired_hit_depth;
 
     /*
@@ -2174,7 +2165,7 @@ calculate_additive(ent) {
     additive_type = weight_type[index];
   }
 
-  if(!isdefined(hits.hit_index)) {
+  if(!isDefined(hits.hit_index)) {
     // didnt hit anything so jam it all the way in.
     additive_weight = 1 * extra_boost;
     additive_type = "additive_in";
@@ -2199,10 +2190,10 @@ calculate_additive(ent) {
 try_to_do_vertical_correction(ent) {
   if(ent.climb_dir == "up")
     return;
-  if(ent.arm != ent.climb_dir)
+  if(ent.arm != ent.climb_dir) {
     return;
-
-  hits = SpawnStruct();
+  }
+  hits = spawnStruct();
   hits.calcs = [];
   hits.surface_types = [];
   hits.normals = [];
@@ -2219,14 +2210,13 @@ try_to_do_vertical_correction(ent) {
   inward_steps = 6;
   half_step = inward_steps * 0.5;
 
-
   waittillframeend; // for old models to get deleted
 
   additive_type = undefined;
-  for (p = 0; p < inward_steps; p++) {
+  for(p = 0; p < inward_steps; p++) {
     additive_mod = (p - half_step) / inward_steps;
     additive_type = "correct_up";
-    for (i = 0; i < steps; i++) {
+    for(i = 0; i < steps; i++) {
       additive_weight = i / steps * extra_boost * additive_strength;
       index = i + p * steps;
       weights[index] = additive_weight;
@@ -2236,7 +2226,7 @@ try_to_do_vertical_correction(ent) {
       hits thread calculate_add_vertical_correction(ent, index, additive_weight, additive_type, additive_mod);
     }
     additive_type = "correct_down";
-    for (i = 0; i < steps; i++) {
+    for(i = 0; i < steps; i++) {
       additive_weight = i / steps * extra_boost * additive_strength;
       index = inward_steps * steps + i + p * steps;
       weights[index] = additive_weight;
@@ -2255,12 +2245,12 @@ try_to_do_vertical_correction(ent) {
   additive_mod = 0;
 
   foreach(index, hit_depth in hits.calcs) {
-    if(!penetrable_surface(ent, hits.surface_types[index]))
+    if(!penetrable_surface(ent, hits.surface_types[index])) {
       continue;
-
-    if(!legal_hit_depth(hit_depth))
+    }
+    if(!legal_hit_depth(hit_depth)) {
       continue;
-
+    }
     //if( index > hits.hit_index )
     if(hit_depth < highest_hit_depth) {
       highest_hit_depth = hit_depth;
@@ -2271,7 +2261,7 @@ try_to_do_vertical_correction(ent) {
     }
   }
 
-  if(!isdefined(hits.hit_index)) {
+  if(!isDefined(hits.hit_index)) {
     return;
   } else {
     ent.surface_type = hits.surface_types[hits.hit_index];
@@ -2317,7 +2307,7 @@ get_fake_model(ent, anim_type, override_ent, optional_model) {
     if(arm == ent.arm) {
       additive_type[arm] = ent.globals.arm_ents[arm].additive_type;
       additive_weight[arm] = ent.globals.arm_ents[arm].additive_weight;
-      if(IsDefined(ent.globals.arm_ents[arm].corrector_type)) {
+      if(isDefined(ent.globals.arm_ents[arm].corrector_type)) {
         corrector_type[arm] = ent.globals.arm_ents[arm].corrector_type;
         corrector_weight[arm] = ent.globals.arm_ents[arm].corrector_weight;
       }
@@ -2328,14 +2318,14 @@ get_fake_model(ent, anim_type, override_ent, optional_model) {
   }
 
   // override values to make new arm positions
-  if(IsDefined(override_ent)) {
-    if(IsDefined(override_ent.additive_weight)) {
+  if(isDefined(override_ent)) {
+    if(isDefined(override_ent.additive_weight)) {
       foreach(arm, add_weight in override_ent.additive_weight) {
         additive_weight[arm] = add_weight;
       }
     }
 
-    if(IsDefined(override_ent.additive_type)) {
+    if(isDefined(override_ent.additive_type)) {
       foreach(arm, add_type in override_ent.additive_type) {
         additive_type[arm] = add_type;
       }
@@ -2343,7 +2333,7 @@ get_fake_model(ent, anim_type, override_ent, optional_model) {
   }
 
   fake_model = optional_model;
-  if(!isdefined(optional_model))
+  if(!isDefined(optional_model))
     fake_model = spawn_anim_model("player_rig");
 
   fake_model Hide();
@@ -2363,7 +2353,7 @@ get_fake_model(ent, anim_type, override_ent, optional_model) {
     fake_model SetAnimLimited(anims["additive"], add_weight, 0, 1);
     fake_model SetAnimLimited(anims[add_type], add_weight, 0, 1);
 
-    if(IsDefined(cor_type)) {
+    if(isDefined(cor_type)) {
       fake_model SetAnimLimited(anims["vertical_corrector"], cor_weight, 0, 1);
       fake_model SetAnimLimited(anims[cor_type], cor_weight, 0, 1);
     }
@@ -2373,9 +2363,9 @@ get_fake_model(ent, anim_type, override_ent, optional_model) {
 }
 
 trace_test() {
-  for (;;) {
+  for(;;) {
     targ = GetEnt(self.target, "targetname");
-    trace = BulletTrace(self.origin, targ.origin, false, undefined);
+    trace = bulletTrace(self.origin, targ.origin, false, undefined);
     //line( self.origin, trace[ "position" ], ( 0.4, 0.4, 0.5 ), 1, 1, 5000 );
     //		Line( trace[ "position" ], trace[ "position" ] + trace[ "normal" ] * 15, ( 0.3, 0.85, 0.53 ), 1, 1, 5000 );
     Line(trace["position"], trace["position"] + trace["normal"] * 15, (0.9, 0.3, 0.2), 1, 1, 5000);
@@ -2388,9 +2378,9 @@ trace_test() {
 }
 
 get_time_for_notetrack(ent, anim_type, notetrack) {
-  if(!isdefined(ent.notetrack_times[anim_type]))
+  if(!isDefined(ent.notetrack_times[anim_type]))
     return 1;
-  if(!isdefined(ent.notetrack_times[anim_type][notetrack]))
+  if(!isDefined(ent.notetrack_times[anim_type][notetrack]))
     return 1;
   return ent.notetrack_times[anim_type][notetrack];
 }
@@ -2406,31 +2396,30 @@ calculate_add_penetration(ent, index, additive_weight, additive_type) {
   model = ent.viewModel;
 
   arm = ent.arm;
-  overrides = SpawnStruct();
+  overrides = spawnStruct();
   overrides.additive_weight[arm] = additive_weight;
   overrides.additive_type[arm] = additive_type;
   fake_model = get_fake_model(ent, "stab", overrides);
   //fake_model set_time_to_notetrack( ent, "stab", "stab" );
   fake_model SetAnimTime(anims["stab"], 1.0);
-  /#
+
   fake_model add_icepicks();
-  # /
 
-    //fake_model.org.origin = ent.viewModel.origin;
-    //fake_model.org.angles = ent.viewModel.angles;
-    //fake_model SetAnimLimited( anims[ "additive" ], additive_weight, 0, 1 );
-    //fake_model SetAnimLimited( anims[ additive_type ], additive_weight, 0, 1 );
+  //fake_model.org.origin = ent.viewModel.origin;
+  //fake_model.org.angles = ent.viewModel.angles;
+  //fake_model SetAnimLimited( anims[ "additive" ], additive_weight, 0, 1 );
+  //fake_model SetAnimLimited( anims[ additive_type ], additive_weight, 0, 1 );
 
-    fx_tag_name = get_icepick_tag_name(ent.arm);
+  fx_tag_name = get_icepick_tag_name(ent.arm);
   fx_tag = spawn_icepick_fx_tag(fake_model, fx_tag_name);
 
   wait(0.05);
 
-  forward = AnglesToForward(fx_tag.angles);
+  forward = anglesToForward(fx_tag.angles);
   trace_depth = level.trace_depth;
   start = fx_tag.origin + forward * (trace_depth * -5);
   end = fx_tag.origin + forward * trace_depth;
-  trace = BulletTrace(start, end, false, undefined);
+  trace = bulletTrace(start, end, false, undefined);
   /*
   if( trace[ "fraction" ] < 1 )
   {
@@ -2446,14 +2435,13 @@ calculate_add_penetration(ent, index, additive_weight, additive_type) {
   self.normals[index] = trace["normal"];
   self.hit_pos[index] = trace["position"];
 
-  /#
   wait(0.05);
   if(GetDvarInt("climb_add")) // && legal_hit_depth( trace[ "fraction" ] ) )
   {
     fake_model Show();
     line_time = 50;
     depthTest = false;
-    if(!isdefined(self.hit_index)) {
+    if(!isDefined(self.hit_index)) {
       //line( start, trace[ "position" ], (1,0,0), 1, depthTest, line_time );
     } else {
       if(self.hit_index == index) {
@@ -2471,9 +2459,8 @@ calculate_add_penetration(ent, index, additive_weight, additive_type) {
     }
   }
   //wait( 3 );
-  # /
 
-    fake_model Delete();
+  fake_model Delete();
   fx_tag Delete();
   /*
   if( trace[ "fraction" ] < 1 )
@@ -2485,9 +2472,9 @@ calculate_add_penetration(ent, index, additive_weight, additive_type) {
 
 apply_additive_mod(arm, overrides, additive_mod) {
   overrides.additive_weight[arm] += additive_mod;
-  if(overrides.additive_weight[arm] >= 0)
+  if(overrides.additive_weight[arm] >= 0) {
     return;
-
+  }
   overrides.additive_weight[arm] *= -1;
   if(overrides.additive_type[arm] == "additive_in")
     overrides.additive_type[arm] = "additive_out";
@@ -2497,9 +2484,9 @@ apply_additive_mod(arm, overrides, additive_mod) {
 
 apply_additive_mod_to_ent(ent, additive_mod) {
   ent.additive_weight += additive_mod;
-  if(ent.additive_weight >= 0)
+  if(ent.additive_weight >= 0) {
     return;
-
+  }
   ent.additive_weight *= -1;
   if(ent.additive_type == "additive_in")
     ent.additive_type = "additive_out";
@@ -2512,7 +2499,7 @@ calculate_add_vertical_correction(ent, index, additive_weight, additive_type, ad
   model = ent.viewModel;
 
   arm = ent.arm;
-  overrides = SpawnStruct();
+  overrides = spawnStruct();
   overrides.additive_weight[arm] = ent.additive_weight;
   overrides.additive_type[arm] = ent.additive_type;
 
@@ -2520,11 +2507,10 @@ calculate_add_vertical_correction(ent, index, additive_weight, additive_type, ad
 
   fake_model = get_fake_model(ent, "stab", overrides);
   fake_model SetAnimTime(anims["stab"], 1.0);
-  /#
-  fake_model add_icepicks();
-  # /
 
-    fake_model SetAnimLimited(anims["vertical_corrector"], additive_weight, 0, 1);
+  fake_model add_icepicks();
+
+  fake_model SetAnimLimited(anims["vertical_corrector"], additive_weight, 0, 1);
   fake_model SetAnimKnob(anims[additive_type], additive_weight, 0, 1);
 
   fx_tag_name = get_icepick_tag_name(ent.arm);
@@ -2532,11 +2518,11 @@ calculate_add_vertical_correction(ent, index, additive_weight, additive_type, ad
 
   wait(0.05);
 
-  forward = AnglesToForward(fx_tag.angles);
+  forward = anglesToForward(fx_tag.angles);
   trace_depth = level.trace_depth;
   start = fx_tag.origin + forward * (trace_depth * -5);
   end = fx_tag.origin + forward * trace_depth;
-  trace = BulletTrace(start, end, false, undefined);
+  trace = bulletTrace(start, end, false, undefined);
 
   self.calcs[index] = trace["fraction"];
   self.surface_types[index] = trace["surfacetype"];
@@ -2545,14 +2531,13 @@ calculate_add_vertical_correction(ent, index, additive_weight, additive_type, ad
 
   wait(0.05);
 
-  /#
   if(GetDvarInt("climb_add"))
   //if( trace[ "surfacetype" ] != "none" )
   {
     fake_model Show();
     line_time = 50;
     depthTest = false;
-    if(!isdefined(self.hit_index)) {
+    if(!isDefined(self.hit_index)) {
       Line(start, trace["position"], (1, 0, 0), 1, depthTest, line_time);
     } else {
       if(self.hit_index == index) {
@@ -2569,9 +2554,8 @@ calculate_add_vertical_correction(ent, index, additive_weight, additive_type, ad
     }
     wait(0.8);
   }
-  # /
 
-    fake_model Delete();
+  fake_model Delete();
   fx_tag Delete();
   /*
   if( trace[ "fraction" ] < 1 )
@@ -2614,11 +2598,11 @@ button_detection(ent) {
     held_at_start = true;
   }
 
-  for (;;) {
+  for(;;) {
     if(icepick_button_pressed_instant(ent) || held_at_start) {
       ent.button_press_num++;
       ent.button_pressed = true;
-      while (icepick_button_pressed_instant(ent)) {
+      while(icepick_button_pressed_instant(ent)) {
         wait(0.05);
       }
     }
@@ -2631,7 +2615,7 @@ button_detection(ent) {
 track_trigger_pulls(globals) {
   ent = globals.arm_ents["left"];
   ent.viewModel endon("death");
-  for (;;) {
+  for(;;) {
     ent = globals.arm_ents["left"];
     if(ent.player[[ent.buttonCheck]]()) {
       ent.last_button_press = GetTime();
@@ -2667,7 +2651,7 @@ link_model(model) {
   SetDvar("b1", "0");
   SetDvar("b2", "90");
   SetDvar("b3", "40");
-  for (;;) {
+  for(;;) {
     b1 = GetDvarInt("b1");
     b2 = GetDvarInt("b2");
     b3 = GetDvarInt("b3");
@@ -2685,12 +2669,11 @@ link_model(model) {
 track_model(model) {
   //	self.angles = (0,-90,0);
   z = model.origin[2] - 1000;
-  for (;;) {
-
+  for(;;) {
     org1 = model GetTagOrigin("j_wrist_le");
     org2 = model GetTagOrigin("j_wrist_ri");
     org = org1 * 0.5 + org2 * 0.5;
-    forward = AnglesToForward(model.angles);
+    forward = anglesToForward(model.angles);
     move_vec = forward * -145;
     move_vec = (move_vec[0], move_vec[1], 0);
     org += move_vec;
@@ -2709,7 +2692,7 @@ track_model(model) {
 }
 
 test_player_angle(global) {
-  for (;;) {
+  for(;;) {
     player_angles = global.player GetPlayerAngles();
     tag_angles = self GetTagAngles("tag_player");
 
@@ -2718,8 +2701,8 @@ test_player_angle(global) {
 
     //player_angles = ( tag_angles[ 0 ], player_angles[ 1 ], player_angles[ 2 ] );
 
-    player_forward = AnglesToForward(player_angles);
-    tag_forward = AnglesToForward(tag_angles);
+    player_forward = anglesToForward(player_angles);
+    tag_forward = anglesToForward(tag_angles);
 
     player_right = AnglesToRight(player_angles);
     player_up = AnglesToUp(player_angles);
@@ -2731,8 +2714,8 @@ test_player_angle(global) {
 
     /*
     angles = VectorToAngles( second_point - first_point );
-    forward = AnglesToForward( angles );
-	
+    forward = anglesToForward( angles );
+    	
     end = first_point;
     difference = VectorNormalize( end - start );
     dot = VectorDot( forward, difference );
@@ -2743,7 +2726,7 @@ test_player_angle(global) {
 
 penetrable_surface(ent, override_surface) {
   surface = ent.surface_type;
-  if(IsDefined(override_surface))
+  if(isDefined(override_surface))
     surface = override_surface;
 
   if((ent.climb_dir == "right" || ent.climb_dir == "left") && ent.climb_dir != ent.arm) {
@@ -2758,28 +2741,28 @@ penetrable_surface(ent, override_surface) {
   penetrable_surfaces["rock"] = true;
   penetrable_surfaces["snow"] = true;
 
-  return IsDefined(penetrable_surfaces[surface]);
+  return isDefined(penetrable_surfaces[surface]);
 }
 
 test_line() {
-  for (;;) {
-    forward = AnglesToForward(self.angles);
-    trace = BulletTrace(self.origin, self.origin + forward * 6.25, false, undefined);
+  for(;;) {
+    forward = anglesToForward(self.angles);
+    trace = bulletTrace(self.origin, self.origin + forward * 6.25, false, undefined);
     Line(self.origin, trace["position"]);
     wait(0.05);
   }
 }
 
 spawn_icepick_fx_tag(model, fx_tag_name) {
-  fx_tag = Spawn("script_model", (0, 0, 0));
-  fx_tag SetModel("tag_origin");
+  fx_tag = spawn("script_model", (0, 0, 0));
+  fx_tag setModel("tag_origin");
   fx_tag Hide();
 
   fx_tag.origin = model GetTagOrigin(fx_tag_name);
   fx_tag.angles = model GetTagAngles(fx_tag_name);
 
   // translate the posts into the proper positions for the animations
-  ent = SpawnStruct();
+  ent = spawnStruct();
   ent.entity = fx_tag;
   ent.forward = 2;
   ent.up = 15.35;
@@ -2793,15 +2776,15 @@ spawn_icepick_fx_tag(model, fx_tag_name) {
 }
 
 spawn_player_icepick_fx_tag(model, fx_tag_name) {
-  fx_tag = Spawn("script_model", (25, 25, -25));
-  fx_tag SetModel("tag_origin");
+  fx_tag = spawn("script_model", (25, 25, -25));
+  fx_tag setModel("tag_origin");
   fx_tag Hide();
 
   fx_tag.origin = model GetTagOrigin(fx_tag_name);
   fx_tag.angles = model GetTagAngles(fx_tag_name);
 
   // translate the posts into the proper positions for the animations
-  ent = SpawnStruct();
+  ent = spawnStruct();
   ent.entity = fx_tag;
   ent.forward = 2;
   ent.up = 8.35;
@@ -2819,36 +2802,36 @@ icepick_impact_fx(fx_tag, model) {
   impacted = false;
   trace_depth = level.trace_depth;
 
-  for (;;) {
+  for(;;) {
     wait(0.05);
 
-    forward = AnglesToForward(fx_tag.angles);
-    trace = BulletTrace(fx_tag.origin, fx_tag.origin + forward * trace_depth, false, undefined);
+    forward = anglesToForward(fx_tag.angles);
+    trace = bulletTrace(fx_tag.origin, fx_tag.origin + forward * trace_depth, false, undefined);
     //Line( fx_tag.origin, fx_tag.origin + forward * trace_depth, ( 0, 1, 0 ), 1, 0 );
 
-    if(self.stabbed)
+    if(self.stabbed) {
       continue;
-
+    }
     if(impacted) {
       // check to see if we're still impacted
-      if(trace["fraction"] < 1)
+      if(trace["fraction"] < 1) {
         continue;
-
+      }
       // we're free!
       impacted = false;
       wait(0.8); // debounce off a pull out
     }
 
     // didn't hit anything
-    if(trace["fraction"] >= 1)
+    if(trace["fraction"] >= 1) {
       continue;
-
+    }
     impacted = true;
     surface = trace["surfacetype"];
     fx = "icepick_impact_" + surface;
     if(fxExists(fx)) {
-      PlayFX(getfx(fx), trace["position"], trace["normal"]);
-      fx_tag PlaySound("icepick_impact_ice");
+      playFX(getfx(fx), trace["position"], trace["normal"]);
+      fx_tag playSound("icepick_impact_ice");
       level.player PlayRumbleOnEntity("icepick_climb");
     }
   }
@@ -2867,7 +2850,7 @@ spawn_additive_models(ent) {
 spawn_additive_models_of_type(ent, additive_type) {
   ent.additive_models[additive_type] = [];
   steps = 20;
-  for (i = 0; i < steps; i++) {
+  for(i = 0; i < steps; i++) {
     level.additive_count++;
     thread spawn_additive_models_of_type_and_depth(ent, additive_type);
   }
@@ -2889,7 +2872,7 @@ spawn_additive_models_of_type_and_depth(ent, additive_type) {
   model SetAnim(animation, 1.0, 0, 0);
 
   // need an anchor so we get the right delta offset for the model's origin
-  org = Spawn("script_origin", (0, 0, 0));
+  org = spawn("script_origin", (0, 0, 0));
   model LinkTo(org);
   model.org = org;
 
@@ -2919,28 +2902,28 @@ generate_notetrack_times_for_anim(ent, anim_type) {
   start_time = GetTime();
   total_time = GetAnimLength(anims[anim_type]);
 
-  for (;;) {
+  for(;;) {
     model waittill("anim", notetrack);
     current_time = GetTime() - start_time;
     ent.notetrack_times[anim_type][notetrack] = current_time / total_time * 0.001;
-    if(notetrack == "end")
+    if(notetrack == "end") {
       break;
+    }
     AssertEx(ent.notetrack_times[anim_type][notetrack] <= 1.0, "Notetrack time exceeded 1");
   }
 }
 
 draw_ent_num(offset) {
-  /#
-  if(!isdefined(offset))
+  if(!isDefined(offset))
     offset = -30;
   self endon("death");
   self notify("draw_ent_num");
   self endon("draw_ent_num");
-  for (;;) {
+  for(;;) {
     Print3d(self.origin + (0, 0, offset), self GetEntNum(), (0.3, 0.9, 0.5), 1, 0.25);
     wait(0.05);
   }
-  # /
+
 }
 
 play_crack_fx_on_arm(arm) {
@@ -2949,7 +2932,7 @@ play_crack_fx_on_arm(arm) {
 
   wait(0.05);
   sound = false;
-  org = Spawn("script_origin", (self.origin));
+  org = spawn("script_origin", (self.origin));
   fx = [];
   fx[0] = 1;
   fx[1] = 2;
@@ -2967,16 +2950,16 @@ play_crack_fx_on_arm(arm) {
   fx[13] = 1;
   fx[14] = 3;
 
-  for (count = 1; count < fx.size; count++) {
-    forward = AnglesToForward(fx_tag.angles);
+  for(count = 1; count < fx.size; count++) {
+    forward = anglesToForward(fx_tag.angles);
     trace_depth = level.trace_depth;
     start = fx_tag.origin + forward * (trace_depth * -2);
     end = fx_tag.origin + forward * trace_depth * 2;
-    trace = BulletTrace(start, end, false, undefined);
+    trace = bulletTrace(start, end, false, undefined);
 
     hit_pos = trace["position"];
     normal = trace["normal"];
-    PlayFX(getfx("climbing_cracks_" + fx[count]), hit_pos, normal);
+    playFX(getfx("climbing_cracks_" + fx[count]), hit_pos, normal);
 
     if(!sound) {
       org.origin = hit_pos;
@@ -2990,7 +2973,7 @@ play_crack_fx_on_arm(arm) {
 }
 
 climbing_cracks_think(ent, hit_pos, normal) {
-  org = Spawn("script_origin", hit_pos);
+  org = spawn("script_origin", hit_pos);
   org thread climbing_cracks_fx(ent, hit_pos, normal);
   rumble = get_rumble_ent("icepick_hang");
   rumble.intensity = 0;
@@ -2998,7 +2981,7 @@ climbing_cracks_think(ent, hit_pos, normal) {
 
   ent.viewModel waittill("stop_crack");
   rumble Delete();
-  org PlaySound("icepick_inactive_cracking_stop");
+  org playSound("icepick_inactive_cracking_stop");
   wait(0.05);
   org Delete();
 }
@@ -3007,24 +2990,24 @@ climbing_cracks_fx(ent, hit_pos, normal) {
   self endon("death");
   ent.viewModel endon("stop_crack");
 
-  for (count = 1; count <= 3; count++) {
-    PlayFX(getfx("climbing_cracks_" + count), hit_pos, normal);
-    self PlaySound("icepick_inactive_cracking");
+  for(count = 1; count <= 3; count++) {
+    playFX(getfx("climbing_cracks_" + count), hit_pos, normal);
+    self playSound("icepick_inactive_cracking");
     wait(RandomFloatRange(1, 2));
 
     // more cracks come later
-    if(!flag("player_climbs_past_safe_point"))
+    if(!flag("player_climbs_past_safe_point")) {
       return;
-
+    }
   }
 }
 
 safe_price_delete(price) {
   if(!isalive(price))
     return;
-  if(IsDefined(price.magic_bullet_shield))
+  if(isDefined(price.magic_bullet_shield))
     price stop_magic_bullet_shield();
-  if(IsDefined(price.fakegun))
+  if(isDefined(price.fakegun))
     price.fakegun Delete();
   price Delete();
 }
@@ -3034,7 +3017,7 @@ get_me_captain_price() {
 
   spawner = level.price_spawner;
   spawner.count = 1;
-  price = spawner StalingradSpawn();
+  price = spawner Stalingradspawn();
   spawn_failed(price);
   price.animname = "price";
   level.price = price;
@@ -3047,8 +3030,8 @@ get_me_captain_price() {
   //price anim_spawn_tag_model( "weapon_m14_cloth_wrap_silencer", "TAG_WEAPON_CHEST" );
   //price anim_spawn_tag_model( "weapon_m21SD_wht", "TAG_WEAPON_CHEST" );
 
-  fakegun = Spawn("script_model", price.origin);
-  fakegun SetModel("weapon_m14ebr_arctic");
+  fakegun = spawn("script_model", price.origin);
+  fakegun setModel("weapon_m14ebr_arctic");
   fakegun HidePart("TAG_THERMAL_SCOPE");
   fakegun HidePart("TAG_FOREGRIP");
   fakegun HidePart("TAG_ACOG_2");
@@ -3060,7 +3043,7 @@ get_me_captain_price() {
 
   return price;
   /*
-	
+  	
   if( !isalive( level.price ) )
   {
   	price_spawner = GetEnt( "climbing_price", "targetname" );
@@ -3075,7 +3058,7 @@ get_me_captain_price() {
 
 cliff_scene_with_price() {
   do_flyin = false;
-  /#
+
   if(level.start_point == "cave")
     do_flyin = false;
   if(level.start_point == "climb") {
@@ -3088,9 +3071,8 @@ cliff_scene_with_price() {
     flag_set("player_gets_on_wall");
     flag_set("player_in_position_to_climb");
   }
-  # /
 
-    thread maps\_blizzard::blizzard_level_transition_climbing(.05);
+  thread maps\_blizzard::blizzard_level_transition_climbing(.05);
 
   if(do_flyin) {
     thread fly_up_the_mountain();
@@ -3111,9 +3093,8 @@ cliff_scene_with_price() {
   	teleport_to_cave();
   */
 
-
   //maps\_blizzard::blizzard_overlay_full( 1 );
-  /#
+
   if(level.start_point == "climb") {
     flag_wait("reached_top");
 
@@ -3123,18 +3104,17 @@ cliff_scene_with_price() {
     battlechatter_on("axis");
     return;
   }
-  # /
 
-    //	wait( 0.05 );
-    price = get_me_captain_price();
-  price PlayLoopSound("gear_jacket_flapping_loop");
+  //	wait( 0.05 );
+  price = get_me_captain_price();
+  price playLoopSound("gear_jacket_flapping_loop");
 
   animation = price getanim("price_climb_intro");
   animLength = GetAnimLength(animation);
   //price delayThread( animLength * 0.42, ::dialogue_queue, "breaksover" );
 
   price anim_spawn_tag_model("prop_price_cigar", "tag_inhand");
-  PlayFXOnTag(level._effect["cigar_glow"], price, "tag_cigarglow");
+  playFXOnTag(level._effect["cigar_glow"], price, "tag_cigarglow");
 
   node = GetEnt("cliffhanger_cliff", "targetname");
   /*
@@ -3163,7 +3143,7 @@ cliff_scene_with_price() {
   /*
   wait( 0.05 );
   price SetAnimTime( price getanim( "price_climb_intro" ), 0.08 );
-  for ( ;; )
+  for( ;; )
   {
   	if( price GetAnimTime( price getanim( "price_climb_intro" ) ) > 0.98 )
   		break;
@@ -3217,9 +3197,10 @@ cliff_scene_with_price() {
 
 delete_player_climb_blocker_and_set_time() {
   animation = self getanim("price_climb_start");
-  for (;;) {
-    if(self GetAnimTime(animation) > 0.5)
+  for(;;) {
+    if(self GetAnimTime(animation) > 0.5) {
       break;
+    }
     wait(0.05);
   }
   flag_set("player_gets_on_wall");
@@ -3241,7 +3222,6 @@ delete_player_climb_blocker_and_set_time() {
 }
 
 gaz_catches_player(player) {
-
   //gaz_spawner = GetEnt( "climbing_gaz", "targetname" );
   [[level.friendly_init_cliffhanger]]();
   gaz = level.price;
@@ -3254,8 +3234,8 @@ gaz_catches_player(player) {
     safe_price_delete(level.jumping_price);
     gaz gun_remove();
 
-    fakegun = Spawn("script_model", gaz.origin);
-    fakegun SetModel("weapon_m14ebr_arctic");
+    fakegun = spawn("script_model", gaz.origin);
+    fakegun setModel("weapon_m14ebr_arctic");
     fakegun HidePart("TAG_THERMAL_SCOPE");
     fakegun HidePart("TAG_FOREGRIP");
     fakegun HidePart("TAG_ACOG_2");
@@ -3278,9 +3258,9 @@ gaz_catches_player(player) {
 
   self anim_single_solo(level.climbing_gaz, "climb_catch");
 
-  if(!isalive(gaz))
+  if(!isalive(gaz)) {
     return;
-
+  }
   //gaz Detach( "weapon_m21SD_wht", "TAG_WEAPON_CHEST" );
   gaz.fakegun Delete();
   gaz detach_picks();
@@ -3297,14 +3277,13 @@ gaz_catches_player(player) {
 }
 
 slowmo_gaz() {
-
   //exploder( 4 ); // price slomo dives to catch you, effects fall off him as he skids on the ice
 
   wait(0.5);
-  if(!flag("player_hangs_on"))
+  if(!flag("player_hangs_on")) {
     return;
-
-  level.player PlaySound("scn_cliffhanger_bigjump_slowdown");
+  }
+  level.player playSound("scn_cliffhanger_bigjump_slowdown");
   slowmo_start();
   slowmo_setspeed_slow(0.25);
   slowmo_setlerptime_in(0.05);
@@ -3313,7 +3292,7 @@ slowmo_gaz() {
   //wait( animation_length * 0.005 );
   wait(0.2);
   slowmo_setlerptime_out(0.01);
-  level.player PlaySound("scn_cliffhanger_bigjump_speedup");
+  level.player playSound("scn_cliffhanger_bigjump_speedup");
   slowmo_lerp_out();
   slowmo_end();
   flag_set("price_caught_player");
@@ -3371,7 +3350,6 @@ set_anim_time(character, anime, time_percent) {
 set_anim_rate(character, anime, rate) {
   animation = character getanim(anime);
   character SetFlaggedAnim("single anim", animation, 1, 0, rate);
-
 }
 
 player_leaps(jump_forward) {
@@ -3390,7 +3368,7 @@ player_leaps(jump_forward) {
   // gotta jump straight
   player_angles = level.player GetPlayerAngles();
   player_angles = (0, player_angles[1], 0);
-  player_forward = AnglesToForward(player_angles);
+  player_forward = anglesToForward(player_angles);
   dot = VectorDot(player_forward, jump_forward);
   if(dot < 0.94) {
     flag_clear("climb_big_jump");
@@ -3426,9 +3404,9 @@ player_slides_off_cliff() {
 }
 
 player_big_jump() {
-  if(flag("player_preps_for_jump"))
+  if(flag("player_preps_for_jump")) {
     return;
-
+  }
   player_jumpdown_block = GetEnt("player_jumpdown_block", "targetname");
   player_jumpdown_block Solid();
 
@@ -3470,18 +3448,19 @@ player_big_jump() {
   big_jump_yaw_targ = GetEnt(big_jump_yaw.target, "targetname");
   jump_angles = VectorToAngles(big_jump_yaw_targ.origin - big_jump_yaw.origin);
   jump_angles = (0, jump_angles[1], 0);
-  jump_forward = AnglesToForward(jump_angles);
+  jump_forward = anglesToForward(jump_angles);
 
   level notify("stop_force_sliding_the_player");
 
-  for (;;) {
-    if(player_leaps(jump_forward))
+  for(;;) {
+    if(player_leaps(jump_forward)) {
       break;
+    }
     wait(0.05);
   }
 
   // player grunts as he jumps
-  level.player PlaySound("scn_cliffhanger_player_make_bigjump");
+  level.player playSound("scn_cliffhanger_player_make_bigjump");
 
   SetDvar("hold_on_tight", 1);
   // if the player is going too fast, he may clip through the slope, so slow him down
@@ -3506,9 +3485,9 @@ player_big_jump() {
 
   /*
   flag_wait( "climb_icepick_slide" );
-	
+  	
   level.arm_ent_globals
-	
+  	
   //if( !flag( "price_jumped" ) )
 
   */
@@ -3518,7 +3497,6 @@ player_big_jump() {
   	return;
   }
   */
-
 
   wait(0.4);
   //	level.player TakeAllWeapons();
@@ -3587,14 +3565,15 @@ player_big_jump() {
   wait(0.05);
 
   //player_arms waittillmatch( "slide", "end" );
-  for (;;) {
-    if(player_arms GetAnimTime(anim_both_in) >= 0.99)
+  for(;;) {
+    if(player_arms GetAnimTime(anim_both_in) >= 0.99) {
       break;
+    }
     wait(0.05);
   }
 
   // player hangs sound
-  level.player PlaySound("scn_cliffhanger_snow_breakaway");
+  level.player playSound("scn_cliffhanger_snow_breakaway");
 
   setsaveddvar("compass", 0);
   flag_set("player_hangs_on");
@@ -3624,9 +3603,10 @@ player_big_jump() {
   //	if( e3_start )
   //		anim_end_time = 0.62;
 
-  for (;;) {
-    if(player_arms GetAnimTime(animation) > anim_end_time)
+  for(;;) {
+    if(player_arms GetAnimTime(animation) > anim_end_time) {
       break;
+    }
     //		if( flag( "price_caught_player" ) )
     //			break;
     if(level.gameSkill > 1) {
@@ -3643,7 +3623,7 @@ player_big_jump() {
     wait(0.05);
   }
 
-  if(IsDefined(level.rumble_ent))
+  if(isDefined(level.rumble_ent))
     level.rumble_ent Delete();
 
   //	thread play_sound_in_space( "scn_cliffhanger_player_bigjump", player_arms.origin );
@@ -3663,18 +3643,19 @@ player_big_jump() {
   player_arms delayThread(0.5, ::self_delete);
   PrintLn("Origin " + level.player.origin);
 
-  for (;;) {
+  for(;;) {
     if(level.player player_finishes_climbing(start_org, start_ang, true, true)) {
       break;
     }
 
-    if(flag("finished_climbing"))
+    if(flag("finished_climbing")) {
       break;
+    }
   }
 
-  if(!flag("can_save"))
+  if(!flag("can_save")) {
     return;
-
+  }
   if(e3_start) {
     fade_time = 1.5;
 
@@ -3721,7 +3702,7 @@ player_big_jump() {
 
 stop_complaining_about_goal() {
   self endon("death");
-  for (;;) {
+  for(;;) {
     self SetGoalPos(self.origin);
     wait(0.05);
   }
@@ -3729,12 +3710,14 @@ stop_complaining_about_goal() {
 
 wait_and_then_transition_to_next_part() {
   level notify("player_in_base");
-  for (;;) {
-    if(flag("one_c4_planted"))
+  for(;;) {
+    if(flag("one_c4_planted")) {
       break;
+    }
 
-    if(level.player.health < 50)
+    if(level.player.health < 50) {
       break;
+    }
     wait(0.05);
   }
 
@@ -3764,7 +3747,7 @@ wait_and_then_transition_to_next_part() {
   level.price thread stop_complaining_about_goal();
 
   if(IsAlive(level.price)) {
-    if(IsDefined(level.price.magic_bullet_shield))
+    if(isDefined(level.price.magic_bullet_shield))
       level.price stop_magic_bullet_shield();
     level.price Delete();
   }
@@ -3788,7 +3771,7 @@ wait_and_then_transition_to_next_part() {
 
 spam_max_health() {
   level endon("stop_spamming_max_health");
-  for (;;) {
+  for(;;) {
     level.player SetNormalHealth(100);
     wait(0.05);
   }
@@ -3805,7 +3788,6 @@ player_gets_back_into_climbing(ent) {
   SetSavedDvar("sm_sunsamplesizenear", 0.0625);
   ent.globals.ground_ref_ent_set = true;
   //	ent.viewModel Show();
-
 }
 
 price_shouts() {
@@ -3818,7 +3800,7 @@ price_shouts() {
 track_player_button_presses_for_holding_on() {
   level endon("reached_top");
   level.player.last_button_pressed_time = 0;
-  for (;;) {
+  for(;;) {
     left_pressed = level.player leftSwingPressed();
     right_pressed = level.player rightSwingPressed();
 
@@ -3832,7 +3814,7 @@ sleeve_flap(model) {
   model endon("death");
   anims = get_anims_for_climbing_direction([], "up", "right");
 
-  for (;;) {
+  for(;;) {
     rate = RandomFloatRange(1.0, 1.8);
     model SetAnim(anims["sleeve_flap"], 1, 0, rate);
     wait(RandomFloatRange(0.2, 5));
@@ -3877,7 +3859,7 @@ arms_animated_relative_to_input() {
   pressed_rates[2] = level.slip_rate;
 
   current_rate = 1;
-  ent = SpawnStruct();
+  ent = spawnStruct();
   ent.pressed["left"] = false;
   ent.pressed["right"] = false;
   thread sliding_fx(ent);
@@ -3885,7 +3867,7 @@ arms_animated_relative_to_input() {
   self.left_looping = false;
   self.right_looping = false;
 
-  for (;;) {
+  for(;;) {
     pressed = 0;
     right_pressed = level.player rightSwingPressed();
     left_pressed = level.player leftSwingPressed();
@@ -3894,10 +3876,9 @@ arms_animated_relative_to_input() {
     ent.pressed["right"] = right_pressed;
 
     if(level.player.impacted) {
-
       if(left_pressed) {
         if(!self.left_looping)
-          self PlayLoopSound("scn_cliffhanger_icepick_scrape_left");
+          self playLoopSound("scn_cliffhanger_icepick_scrape_left");
         self.left_looping = true;
       } else {
         if(self.left_looping)
@@ -3907,7 +3888,7 @@ arms_animated_relative_to_input() {
 
       if(right_pressed) {
         if(!self.right_looping)
-          self PlayLoopSound("scn_cliffhanger_icepick_scrape_right");
+          self playLoopSound("scn_cliffhanger_icepick_scrape_right");
         self.right_looping = true;
       } else {
         if(self.right_looping)
@@ -3954,7 +3935,7 @@ arms_animated_relative_to_input() {
 sliding_fx(ent) {
   self endon("stop_fx");
 
-  for (;;) {
+  for(;;) {
     foreach(arm, pressed in ent.pressed) {
       if(pressed) {
         fx_tag_name = get_icepick_tag_name(arm);
@@ -4026,7 +4007,7 @@ blend_in_climbing_dof(time) {
   end["farEnd"] = level.dofDefault["farEnd"];
   end["farBlur"] = level.dofDefault["farBlur"];
 
-  for (;;) {
+  for(;;) {
     flag_wait("climbing_dof");
     delay_then_blend_dof(start, end, time);
 
@@ -4044,7 +4025,7 @@ delay_then_blend_dof(start, end, time) {
 }
 
 set_far_dof_dist_to_price() {
-  for (;;) {
+  for(;;) {
     if(!flag("climbing_dof"))
       return;
     if(!isalive(level.price))

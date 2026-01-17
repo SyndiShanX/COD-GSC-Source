@@ -20,28 +20,27 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\core_common\values_shared;
-
 #namespace archetype_skeleton;
 
 autoexec init() {
   registerbehaviorscriptfunctions();
   spawner::add_archetype_spawn_function(#"skeleton", &function_f31535d8);
   spawner::add_archetype_spawn_function(#"skeleton", &function_a1acece9);
-  level.var_cc1828c = [#"walk": 4];
+  level.var_cc1828c = [# "walk": 4];
 }
 
-private function_f31535d8() {
+function_f31535d8() {
   blackboard::createblackboardforentity(self);
   ai::createinterfaceforentity(self);
   self.___archetypeonanimscriptedcallback = &archetypeskeletononanimscriptedcallback;
 }
 
-private archetypeskeletononanimscriptedcallback(entity) {
+archetypeskeletononanimscriptedcallback(entity) {
   self.__blackboard = undefined;
   self function_f31535d8();
 }
 
-private registerbehaviorscriptfunctions() {
+registerbehaviorscriptfunctions() {
   assert(isscriptfunctionptr(&function_7ef4937e));
   behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_2dafca553cbc289b", &function_7ef4937e, 1);
   assert(isscriptfunctionptr(&function_233f80e1));
@@ -53,7 +52,7 @@ private registerbehaviorscriptfunctions() {
   animationstatenetwork::registeranimationmocomp("mocomp_skeleton_run_melee", &function_7d1989aa, &function_5ff8994e, &function_9873c40e);
 }
 
-private function_a1acece9() {
+function_a1acece9() {
   self.ignorepathenemyfightdist = 1;
   self.cant_move_cb = &zombiebehavior::function_79fe956f;
   self.var_2f68be48 = 1;
@@ -62,17 +61,17 @@ private function_a1acece9() {
   self setup_variant_type();
   self callback::function_d8abfc3d(#"hash_dfbeaa068b23e7c", &setup_variant_type);
 
-  if(self.subarchetype == #"hash_fd7b9665529dd42") {
+  if(self.subarchetype == # "hash_fd7b9665529dd42") {
     self attach(#"c_t8_zmb_dlc2_skeleton_helmet", "j_head");
     self attach(#"c_t8_zmb_dlc2_skeleton_sword", "tag_weapon_right");
     self attach(#"c_t8_zmb_dlc2_skeleton_shield", "tag_weapon_left");
-  } else if(self.subarchetype == #"hash_1520c8987a671df0") {
+  } else if(self.subarchetype == # "hash_1520c8987a671df0") {
     self attach(#"c_t8_zmb_dlc2_skeleton_helmet", "j_head");
     self attach(#"c_t8_zmb_dlc2_skeleton_spear", "tag_weapon_right");
-  } else if(self.subarchetype == #"hash_342763a42d8fbca") {
+  } else if(self.subarchetype == # "hash_342763a42d8fbca") {
     self attach(#"c_t8_zmb_dlc2_skeleton_sword", "tag_weapon_right");
     self attach(#"c_t8_zmb_dlc2_skeleton_shield", "tag_weapon_left");
-  } else if(self.subarchetype == #"skeleton_spear") {
+  } else if(self.subarchetype == # "skeleton_spear") {
     self attach(#"c_t8_zmb_dlc2_skeleton_spear", "tag_weapon_right");
   }
 
@@ -80,7 +79,7 @@ private function_a1acece9() {
   self callback::on_ai_killed(&function_4ac532fd);
 }
 
-private setup_variant_type(params) {
+setup_variant_type(params) {
   if(isDefined(level.var_cc1828c) && isDefined(level.var_cc1828c[self.zombie_move_speed])) {
     self.variant_type = randomintrange(0, level.var_cc1828c[self.zombie_move_speed]);
     return;
@@ -89,7 +88,7 @@ private setup_variant_type(params) {
   self.variant_type = 0;
 }
 
-private function_abab78a7(inflictor, attacker, damage, idflags, meansofdeath, weapon, point, dir, hitloc, offsettime, boneindex, modelindex) {
+function_abab78a7(inflictor, attacker, damage, idflags, meansofdeath, weapon, point, dir, hitloc, offsettime, boneindex, modelindex) {
   if(isDefined(boneindex)) {
     bonename = getpartname(self, boneindex);
 
@@ -105,18 +104,18 @@ private function_abab78a7(inflictor, attacker, damage, idflags, meansofdeath, we
   return damage;
 }
 
-private function_4ac532fd(s_params) {
+function_4ac532fd(s_params) {
   if(!(isDefined(self.fake_death) && self.fake_death)) {
     destructserverutils::togglespawngibs(self, 1);
     destructserverutils::function_629a8d54(self, "tag_animate");
   }
 }
 
-private skeletondeathaction(entity) {
+skeletondeathaction(entity) {
   entity ghost();
 }
 
-private function_233f80e1(entity) {
+function_233f80e1(entity) {
   if(entity asmistransitionrunning() || entity asmistransdecrunning()) {
     return false;
   }
@@ -156,7 +155,7 @@ private function_233f80e1(entity) {
   return false;
 }
 
-private function_dd3f5fa7(entity) {
+function_dd3f5fa7(entity) {
   if(getdvarint(#"hash_3e2ac8f3fd8af68a", 0)) {
     return true;
   }
@@ -178,7 +177,7 @@ private function_dd3f5fa7(entity) {
   return true;
 }
 
-private function_9eb31dff(entity) {
+function_9eb31dff(entity) {
   var_5d4c61c9 = {
     #enemy: entity.enemy
   };
@@ -198,7 +197,7 @@ function_bcb3a1a1() {
   return undefined;
 }
 
-private function_7a007bbf(skeleton, entity) {
+function_7a007bbf(skeleton, entity) {
   forward = anglesToForward(skeleton.angles);
   to_enemy = vectornormalize(entity.origin - skeleton.origin);
   return vectordot(forward, to_enemy) >= 0.966;
@@ -260,7 +259,7 @@ function_9f7eb359(entity) {
   }
 }
 
-private function_7ef4937e(entity) {
+function_7ef4937e(entity) {
   if(!isDefined(self.enemy)) {
     return false;
   }

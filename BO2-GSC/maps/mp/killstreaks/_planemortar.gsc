@@ -19,7 +19,7 @@ init() {
   level.planemortarexhaustfx = loadfx("vehicle/exhaust/fx_exhaust_f35_afterburner");
   registerclientfield("scriptmover", "planemortar_contrail", 1, 1, "int");
   maps\mp\killstreaks\_killstreaks::registerkillstreak("planemortar_mp", "planemortar_mp", "killstreak_planemortar", "planemortar_used", ::usekillstreakplanemortar, 1);
-  maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("planemortar_mp", & "MP_EARNED_PLANEMORTAR", & "KILLSTREAK_PLANEMORTAR_NOT_AVAILABLE", & "MP_WAR_PLANEMORTAR_INBOUND", & "MP_WAR_PLANEMORTAR_INBOUND_NEAR_YOUR_POSITION");
+  maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("planemortar_mp", &"MP_EARNED_PLANEMORTAR", &"KILLSTREAK_PLANEMORTAR_NOT_AVAILABLE", &"MP_WAR_PLANEMORTAR_INBOUND", &"MP_WAR_PLANEMORTAR_INBOUND_NEAR_YOUR_POSITION");
   maps\mp\killstreaks\_killstreaks::registerkillstreakdialog("planemortar_mp", "mpl_killstreak_planemortar", "kls_planemortar_used", "", "kls_planemortar_enemy", "", "kls_planemortar_ready");
   maps\mp\killstreaks\_killstreaks::registerkillstreakdevdvar("planemortar_mp", "scr_giveplanemortar");
   maps\mp\killstreaks\_killstreaks::setkillstreakteamkillpenaltyscale("planemortar_mp", level.teamkillreducedpenalty);
@@ -217,7 +217,7 @@ dobombrun(position, yaw, team) {
   self endon("emp_jammed");
   player = self;
   angles = (0, yaw, 0);
-  direction = anglestoforward(angles);
+  direction = anglesToForward(angles);
   height = maps\mp\killstreaks\_airsupport::getminimumflyheight() + 2000;
   position = (position[0], position[1], height);
   startpoint = position + vectorscale(direction, -12000);
@@ -234,10 +234,10 @@ dobombrun(position, yaw, team) {
   plane endon("death");
   plane thread planewatchforemp(self);
   plane.angles = angles;
-  plane setmodel("veh_t6_air_fa38_killstreak");
+  plane setModel("veh_t6_air_fa38_killstreak");
   plane setenemymodel("veh_t6_air_fa38_killstreak_alt");
   plane setclientfield("planemortar_contrail", 1);
-  plane playsound("mpl_lightning_flyover_boom");
+  plane playSound("mpl_lightning_flyover_boom");
   plane setdrawinfrared(1);
   plane.killcament = spawn("script_model", plane.origin + vectorscale((0, 0, 1), 700.0) + vectorscale(direction, -1500));
   plane.killcament deleteaftertime(2.0 * 3);
@@ -245,7 +245,7 @@ dobombrun(position, yaw, team) {
   plane.killcament.starttime = gettime();
   plane.killcament linkto(plane);
   start = (position[0], position[1], plane.origin[2]);
-  impact = bullettrace(start, start + vectorscale((0, 0, -1), 100000.0), 1, plane);
+  impact = bulletTrace(start, start + vectorscale((0, 0, -1), 100000.0), 1, plane);
   plane moveto(endpoint, 2.0 * 5 / 4, 0, 0);
   plane.killcament thread followbomb(plane, position, direction, impact, player);
   wait(2.0 / 2);
@@ -310,7 +310,7 @@ dropbomb(plane, bombposition) {
 
   bombposition = (bombposition[0], bombposition[1], plane.origin[2]);
   bomb = self launchbomb("planemortar_mp", bombposition, vectorscale((0, 0, -1), 5000.0));
-  bomb playsound("mpl_lightning_bomb_incoming");
+  bomb playSound("mpl_lightning_bomb_incoming");
   bomb.killcament = plane.killcament;
   plane.killcament thread lookatexplosion(bomb);
 }

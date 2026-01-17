@@ -10,7 +10,6 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_trial_special_enemy;
 
 autoexec __init__system__() {
@@ -25,7 +24,7 @@ __init__() {
   zm_trial::register_challenge(#"special_enemy", &on_begin, &on_end);
 }
 
-private on_begin(enemy_type, var_6b96eb7b, var_46cce0c5, var_6ad4e7c6, var_44445188) {
+on_begin(enemy_type, var_6b96eb7b, var_46cce0c5, var_6ad4e7c6, var_44445188) {
   if(getplayers().size > 1) {
     self.enemy_count = zm_trial::function_5769f26a(var_46cce0c5);
   } else {
@@ -52,7 +51,7 @@ private on_begin(enemy_type, var_6b96eb7b, var_46cce0c5, var_6ad4e7c6, var_44445
   }
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   level.var_9a0fbcb9 = undefined;
   level.var_44445188 = undefined;
   level.var_d0be33a6 = undefined;
@@ -63,7 +62,7 @@ private on_end(round_reset) {
   callback::remove_on_ai_killed(&on_ai_killed);
 }
 
-private on_ai_killed(params) {
+on_ai_killed(params) {
   challenge = zm_trial::function_a36e8c38(#"special_enemy");
   assert(isDefined(challenge), "<dev string:x38>");
 
@@ -75,7 +74,7 @@ private on_ai_killed(params) {
     return;
   }
 
-  if(level.var_44445188 === #"no_headshots" && isplayer(params.eattacker) && zm_utility::is_headshot(params.weapon, params.shitloc, params.smeansofdeath)) {
+  if(level.var_44445188 === # "no_headshots" && isplayer(params.eattacker) && zm_utility::is_headshot(params.weapon, params.shitloc, params.smeansofdeath)) {
     zm_trial::fail(#"hash_11e532a4f9c3e482", array(params.eattacker));
     return;
   }
@@ -87,11 +86,11 @@ private on_ai_killed(params) {
   }
 }
 
-private get_zombie_count_for_round(round_number, player_count) {
+get_zombie_count_for_round(round_number, player_count) {
   return level.zombie_total;
 }
 
-private spawn_enemy() {
+spawn_enemy() {
   var_f63f3454 = zm_trial::function_a36e8c38(#"defend_area");
 
   if(isDefined(var_f63f3454)) {
@@ -115,7 +114,7 @@ private spawn_enemy() {
   assert(isDefined(level.var_1cc18005));
   assert(isDefined(level.var_1cc18005[challenge.enemy_type]), "<dev string:x5a>" + function_9e72a96(challenge.enemy_type));
 
-    spawn_callback = level.var_1cc18005[challenge.enemy_type];
+  spawn_callback = level.var_1cc18005[challenge.enemy_type];
   spawn_success = [[spawn_callback]]();
 
   if(isDefined(spawn_success) && spawn_success) {

@@ -32,76 +32,76 @@
 
 function autoexec init() {
   initzombiebehaviorsandasm();
-  spawner::add_archetype_spawn_function("zombie", & archetypezombieblackboardinit);
-  spawner::add_archetype_spawn_function("zombie", & archetypezombiedeathoverrideinit);
-  spawner::add_archetype_spawn_function("zombie", & archetypezombiespecialeffectsinit);
-  spawner::add_archetype_spawn_function("zombie", & zombie_utility::zombiespawnsetup);
+  spawner::add_archetype_spawn_function("zombie", &archetypezombieblackboardinit);
+  spawner::add_archetype_spawn_function("zombie", &archetypezombiedeathoverrideinit);
+  spawner::add_archetype_spawn_function("zombie", &archetypezombiespecialeffectsinit);
+  spawner::add_archetype_spawn_function("zombie", &zombie_utility::zombiespawnsetup);
   clientfield::register("actor", "zombie", 1, 1, "int");
   clientfield::register("actor", "zombie_special_day", 6001, 1, "counter");
   zombieinterface::registerzombieinterfaceattributes();
 }
 
 function private initzombiebehaviorsandasm() {
-  behaviortreenetworkutility::registerbehaviortreeaction("zombieMoveAction", & zombiemoveaction, & zombiemoveactionupdate, undefined);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieTargetService", & zombietargetservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieCrawlerCollisionService", & zombiecrawlercollision);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieTraversalService", & zombietraversalservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieIsAtAttackObject", & zombieisatattackobject);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieShouldAttackObject", & zombieshouldattackobject);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieShouldMelee", & zombieshouldmeleecondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieShouldJumpMelee", & zombieshouldjumpmeleecondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieShouldJumpUnderwaterMelee", & zombieshouldjumpunderwatermelee);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieGibLegsCondition", & zombiegiblegscondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieShouldDisplayPain", & zombieshoulddisplaypain);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("isZombieWalking", & iszombiewalking);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieShouldMeleeSuicide", & zombieshouldmeleesuicide);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieMeleeSuicideStart", & zombiemeleesuicidestart);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieMeleeSuicideUpdate", & zombiemeleesuicideupdate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieMeleeSuicideTerminate", & zombiemeleesuicideterminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieShouldJuke", & zombieshouldjukecondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieJukeActionStart", & zombiejukeactionstart);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieJukeActionTerminate", & zombiejukeactionterminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieDeathAction", & zombiedeathaction);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieJukeService", & zombiejuke);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieStumbleService", & zombiestumble);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieStumbleCondition", & zombieshouldstumblecondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieStumbleActionStart", & zombiestumbleactionstart);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieAttackObjectStart", & zombieattackobjectstart);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieAttackObjectTerminate", & zombieattackobjectterminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("wasKilledByInterdimensionalGun", & waskilledbyinterdimensionalguncondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("wasCrushedByInterdimensionalGunBlackhole", & wascrushedbyinterdimensionalgunblackholecondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieIDGunDeathUpdate", & zombieidgundeathupdate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieVortexPullUpdate", & zombieidgundeathupdate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieHasLegs", & zombiehaslegs);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieShouldProceduralTraverse", & zombieshouldproceduraltraverse);
-  animationstatenetwork::registernotetrackhandlerfunction("zombie_melee", & zombienotetrackmeleefire);
-  animationstatenetwork::registernotetrackhandlerfunction("crushed", & zombienotetrackcrushfire);
-  animationstatenetwork::registeranimationmocomp("mocomp_death_idgun@zombie", & zombieidgundeathmocompstart, undefined, undefined);
-  animationstatenetwork::registeranimationmocomp("mocomp_vortex_pull@zombie", & zombieidgundeathmocompstart, undefined, undefined);
-  animationstatenetwork::registeranimationmocomp("mocomp_death_idgun_hole@zombie", & zombieidgunholedeathmocompstart, undefined, & zombieidgunholedeathmocompterminate);
-  animationstatenetwork::registeranimationmocomp("mocomp_turn@zombie", & zombieturnmocompstart, & zombieturnmocompupdate, & zombieturnmocompterminate);
-  animationstatenetwork::registeranimationmocomp("mocomp_melee_jump@zombie", & zombiemeleejumpmocompstart, & zombiemeleejumpmocompupdate, & zombiemeleejumpmocompterminate);
-  animationstatenetwork::registeranimationmocomp("mocomp_zombie_idle@zombie", & zombiezombieidlemocompstart, undefined, undefined);
-  animationstatenetwork::registeranimationmocomp("mocomp_attack_object@zombie", & zombieattackobjectmocompstart, & zombieattackobjectmocompupdate, undefined);
+  behaviortreenetworkutility::registerbehaviortreeaction("zombieMoveAction", &zombiemoveaction, &zombiemoveactionupdate, undefined);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieTargetService", &zombietargetservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieCrawlerCollisionService", &zombiecrawlercollision);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieTraversalService", &zombietraversalservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieIsAtAttackObject", &zombieisatattackobject);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieShouldAttackObject", &zombieshouldattackobject);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieShouldMelee", &zombieshouldmeleecondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieShouldJumpMelee", &zombieshouldjumpmeleecondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieShouldJumpUnderwaterMelee", &zombieshouldjumpunderwatermelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieGibLegsCondition", &zombiegiblegscondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieShouldDisplayPain", &zombieshoulddisplaypain);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("isZombieWalking", &iszombiewalking);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieShouldMeleeSuicide", &zombieshouldmeleesuicide);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieMeleeSuicideStart", &zombiemeleesuicidestart);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieMeleeSuicideUpdate", &zombiemeleesuicideupdate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieMeleeSuicideTerminate", &zombiemeleesuicideterminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieShouldJuke", &zombieshouldjukecondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieJukeActionStart", &zombiejukeactionstart);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieJukeActionTerminate", &zombiejukeactionterminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieDeathAction", &zombiedeathaction);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieJukeService", &zombiejuke);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieStumbleService", &zombiestumble);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieStumbleCondition", &zombieshouldstumblecondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieStumbleActionStart", &zombiestumbleactionstart);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieAttackObjectStart", &zombieattackobjectstart);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieAttackObjectTerminate", &zombieattackobjectterminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("wasKilledByInterdimensionalGun", &waskilledbyinterdimensionalguncondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("wasCrushedByInterdimensionalGunBlackhole", &wascrushedbyinterdimensionalgunblackholecondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieIDGunDeathUpdate", &zombieidgundeathupdate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieVortexPullUpdate", &zombieidgundeathupdate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieHasLegs", &zombiehaslegs);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieShouldProceduralTraverse", &zombieshouldproceduraltraverse);
+  animationstatenetwork::registernotetrackhandlerfunction("zombie_melee", &zombienotetrackmeleefire);
+  animationstatenetwork::registernotetrackhandlerfunction("crushed", &zombienotetrackcrushfire);
+  animationstatenetwork::registeranimationmocomp("mocomp_death_idgun@zombie", &zombieidgundeathmocompstart, undefined, undefined);
+  animationstatenetwork::registeranimationmocomp("mocomp_vortex_pull@zombie", &zombieidgundeathmocompstart, undefined, undefined);
+  animationstatenetwork::registeranimationmocomp("mocomp_death_idgun_hole@zombie", &zombieidgunholedeathmocompstart, undefined, &zombieidgunholedeathmocompterminate);
+  animationstatenetwork::registeranimationmocomp("mocomp_turn@zombie", &zombieturnmocompstart, &zombieturnmocompupdate, &zombieturnmocompterminate);
+  animationstatenetwork::registeranimationmocomp("mocomp_melee_jump@zombie", &zombiemeleejumpmocompstart, &zombiemeleejumpmocompupdate, &zombiemeleejumpmocompterminate);
+  animationstatenetwork::registeranimationmocomp("mocomp_zombie_idle@zombie", &zombiezombieidlemocompstart, undefined, undefined);
+  animationstatenetwork::registeranimationmocomp("mocomp_attack_object@zombie", &zombieattackobjectmocompstart, &zombieattackobjectmocompupdate, undefined);
 }
 
 function archetypezombieblackboardinit() {
   blackboard::createblackboardforentity(self);
   self aiutility::registerutilityblackboardattributes();
   ai::createinterfaceforentity(self);
-  blackboard::registerblackboardattribute(self, "_arms_position", "arms_up", & bb_getarmsposition);
+  blackboard::registerblackboardattribute(self, "_arms_position", "arms_up", &bb_getarmsposition);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_locomotion_speed", "locomotion_speed_walk", & bb_getlocomotionspeedtype);
+  blackboard::registerblackboardattribute(self, "_locomotion_speed", "locomotion_speed_walk", &bb_getlocomotionspeedtype);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_has_legs", "has_legs_yes", & bb_gethaslegsstatus);
+  blackboard::registerblackboardattribute(self, "_has_legs", "has_legs_yes", &bb_gethaslegsstatus);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_variant_type", 0, & bb_getvarianttype);
+  blackboard::registerblackboardattribute(self, "_variant_type", 0, &bb_getvarianttype);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
@@ -117,15 +117,15 @@ function archetypezombieblackboardinit() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_locomotion_should_turn", "should_not_turn", & bb_getshouldturn);
+  blackboard::registerblackboardattribute(self, "_locomotion_should_turn", "should_not_turn", &bb_getshouldturn);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_idgun_damage_direction", "back", & bb_idgungetdamagedirection);
+  blackboard::registerblackboardattribute(self, "_idgun_damage_direction", "back", &bb_idgungetdamagedirection);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_low_gravity_variant", 0, & bb_getlowgravityvariant);
+  blackboard::registerblackboardattribute(self, "_low_gravity_variant", 0, &bb_getlowgravityvariant);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
@@ -145,7 +145,7 @@ function archetypezombieblackboardinit() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  self.___archetypeonanimscriptedcallback = & archetypezombieonanimscriptedcallback;
+  self.___archetypeonanimscriptedcallback = &archetypezombieonanimscriptedcallback;
   self finalizetrackedblackboardattributes();
 }
 
@@ -155,13 +155,13 @@ function private archetypezombieonanimscriptedcallback(entity) {
 }
 
 function archetypezombiespecialeffectsinit() {
-  aiutility::addaioverridedamagecallback(self, & archetypezombiespecialeffectscallback);
+  aiutility::addaioverridedamagecallback(self, &archetypezombiespecialeffectscallback);
 }
 
 function private archetypezombiespecialeffectscallback(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, damagefromunderneath, modelindex, partname) {
   specialdayeffectchance = getdvarint("tu6_ffotd_zombieSpecialDayEffectsChance", 0);
   if(specialdayeffectchance && randomint(100) < specialdayeffectchance) {
-    if(isdefined(eattacker) && isplayer(eattacker)) {
+    if(isDefined(eattacker) && isplayer(eattacker)) {
       self clientfield::increment("zombie_special_day");
     }
   }
@@ -169,7 +169,7 @@ function private archetypezombiespecialeffectscallback(einflictor, eattacker, id
 }
 
 function bb_getarmsposition() {
-  if(isdefined(self.zombie_arms_position)) {
+  if(isDefined(self.zombie_arms_position)) {
     if(self.zombie_arms_position == "up") {
       return "arms_up";
     }
@@ -179,7 +179,7 @@ function bb_getarmsposition() {
 }
 
 function bb_getlocomotionspeedtype() {
-  if(isdefined(self.zombie_move_speed)) {
+  if(isDefined(self.zombie_move_speed)) {
     if(self.zombie_move_speed == "walk") {
       return "locomotion_speed_walk";
     }
@@ -206,7 +206,7 @@ function bb_getlocomotionspeedtype() {
 }
 
 function bb_getvarianttype() {
-  if(isdefined(self.variant_type)) {
+  if(isDefined(self.variant_type)) {
     return self.variant_type;
   }
   return 0;
@@ -220,46 +220,46 @@ function bb_gethaslegsstatus() {
 }
 
 function bb_getshouldturn() {
-  if(isdefined(self.should_turn) && self.should_turn) {
+  if(isDefined(self.should_turn) && self.should_turn) {
     return "should_turn";
   }
   return "should_not_turn";
 }
 
 function bb_idgungetdamagedirection() {
-  if(isdefined(self.damage_direction)) {
+  if(isDefined(self.damage_direction)) {
     return self.damage_direction;
   }
   return self aiutility::bb_getdamagedirection();
 }
 
 function bb_getlowgravityvariant() {
-  if(isdefined(self.low_gravity_variant)) {
+  if(isDefined(self.low_gravity_variant)) {
     return self.low_gravity_variant;
   }
   return 0;
 }
 
 function iszombiewalking(behaviortreeentity) {
-  return !(isdefined(behaviortreeentity.missinglegs) && behaviortreeentity.missinglegs);
+  return !(isDefined(behaviortreeentity.missinglegs) && behaviortreeentity.missinglegs);
 }
 
 function zombieshoulddisplaypain(behaviortreeentity) {
-  if(isdefined(behaviortreeentity.suicidaldeath) && behaviortreeentity.suicidaldeath) {
+  if(isDefined(behaviortreeentity.suicidaldeath) && behaviortreeentity.suicidaldeath) {
     return 0;
   }
-  return !(isdefined(behaviortreeentity.missinglegs) && behaviortreeentity.missinglegs);
+  return !(isDefined(behaviortreeentity.missinglegs) && behaviortreeentity.missinglegs);
 }
 
 function zombieshouldjukecondition(behaviortreeentity) {
-  if(isdefined(behaviortreeentity.juke) && (behaviortreeentity.juke == "left" || behaviortreeentity.juke == "right")) {
+  if(isDefined(behaviortreeentity.juke) && (behaviortreeentity.juke == "left" || behaviortreeentity.juke == "right")) {
     return true;
   }
   return false;
 }
 
 function zombieshouldstumblecondition(behaviortreeentity) {
-  if(isdefined(behaviortreeentity.stumble)) {
+  if(isDefined(behaviortreeentity.stumble)) {
     return true;
   }
   return false;
@@ -267,7 +267,7 @@ function zombieshouldstumblecondition(behaviortreeentity) {
 
 function private zombiejukeactionstart(behaviortreeentity) {
   blackboard::setblackboardattribute(behaviortreeentity, "_juke_direction", behaviortreeentity.juke);
-  if(isdefined(behaviortreeentity.jukedistance)) {
+  if(isDefined(behaviortreeentity.jukedistance)) {
     blackboard::setblackboardattribute(behaviortreeentity, "_juke_distance", behaviortreeentity.jukedistance);
   } else {
     blackboard::setblackboardattribute(behaviortreeentity, "_juke_distance", "short");
@@ -297,27 +297,27 @@ function zombiegiblegscondition(behaviortreeentity) {
 }
 
 function zombienotetrackmeleefire(entity) {
-  if(isdefined(entity.aat_turned) && entity.aat_turned) {
-    if(isdefined(entity.enemy) && !isplayer(entity.enemy)) {
-      if(entity.enemy.archetype == "zombie" && (isdefined(entity.enemy.allowdeath) && entity.enemy.allowdeath)) {
+  if(isDefined(entity.aat_turned) && entity.aat_turned) {
+    if(isDefined(entity.enemy) && !isplayer(entity.enemy)) {
+      if(entity.enemy.archetype == "zombie" && (isDefined(entity.enemy.allowdeath) && entity.enemy.allowdeath)) {
         gibserverutils::gibhead(entity.enemy);
         entity.enemy zombie_utility::gib_random_parts();
         entity.enemy kill();
         entity.n_aat_turned_zombie_kills++;
       } else {
-        if(entity.enemy.archetype == "zombie_quad" || entity.enemy.archetype == "spider" && (isdefined(entity.enemy.allowdeath) && entity.enemy.allowdeath)) {
+        if(entity.enemy.archetype == "zombie_quad" || entity.enemy.archetype == "spider" && (isDefined(entity.enemy.allowdeath) && entity.enemy.allowdeath)) {
           entity.enemy kill();
           entity.n_aat_turned_zombie_kills++;
-        } else if(isdefined(entity.enemy.canbetargetedbyturnedzombies) && entity.enemy.canbetargetedbyturnedzombies) {
+        } else if(isDefined(entity.enemy.canbetargetedbyturnedzombies) && entity.enemy.canbetargetedbyturnedzombies) {
           entity melee();
         }
       }
     }
   } else {
-    if(isdefined(entity.enemy) && (isdefined(entity.enemy.bgb_in_plain_sight_active) && entity.enemy.bgb_in_plain_sight_active || (isdefined(entity.enemy.bgb_idle_eyes_active) && entity.enemy.bgb_idle_eyes_active))) {
+    if(isDefined(entity.enemy) && (isDefined(entity.enemy.bgb_in_plain_sight_active) && entity.enemy.bgb_in_plain_sight_active || (isDefined(entity.enemy.bgb_idle_eyes_active) && entity.enemy.bgb_idle_eyes_active))) {
       return;
     }
-    if(isdefined(entity.enemy) && (isdefined(entity.enemy.allow_zombie_to_target_ai) && entity.enemy.allow_zombie_to_target_ai)) {
+    if(isDefined(entity.enemy) && (isDefined(entity.enemy.allow_zombie_to_target_ai) && entity.enemy.allow_zombie_to_target_ai)) {
       if(entity.enemy.health > 0) {
         entity.enemy dodamage(entity.meleeweapon.meleedamage, entity.origin, entity, entity, "none", "MOD_MELEE");
       }
@@ -326,7 +326,7 @@ function zombienotetrackmeleefire(entity) {
     entity melee();
     record3dtext("", self.origin, (1, 0, 0), "", entity);
     if(zombieshouldattackobject(entity)) {
-      if(isdefined(level.attackablecallback)) {
+      if(isDefined(level.attackablecallback)) {
         entity.attackable[[level.attackablecallback]](entity);
       }
     }
@@ -338,38 +338,36 @@ function zombienotetrackcrushfire(behaviortreeentity) {
 }
 
 function zombietargetservice(behaviortreeentity) {
-  if(isdefined(behaviortreeentity.enablepushtime)) {
+  if(isDefined(behaviortreeentity.enablepushtime)) {
     if(gettime() >= behaviortreeentity.enablepushtime) {
       behaviortreeentity pushactors(1);
       behaviortreeentity.enablepushtime = undefined;
     }
   }
-  if(isdefined(behaviortreeentity.disabletargetservice) && behaviortreeentity.disabletargetservice) {
+  if(isDefined(behaviortreeentity.disabletargetservice) && behaviortreeentity.disabletargetservice) {
     return false;
   }
-  if(isdefined(behaviortreeentity.ignoreall) && behaviortreeentity.ignoreall) {
+  if(isDefined(behaviortreeentity.ignoreall) && behaviortreeentity.ignoreall) {
     return false;
   }
   specifictarget = undefined;
-  if(isdefined(level.zombielevelspecifictargetcallback)) {
-    specifictarget = [
-      [level.zombielevelspecifictargetcallback]
-    ]();
+  if(isDefined(level.zombielevelspecifictargetcallback)) {
+    specifictarget = [[level.zombielevelspecifictargetcallback]]();
   }
-  if(isdefined(specifictarget)) {
+  if(isDefined(specifictarget)) {
     behaviortreeentity setgoal(specifictarget.origin);
   } else {
-    if(isdefined(behaviortreeentity.v_zombie_custom_goal_pos)) {
+    if(isDefined(behaviortreeentity.v_zombie_custom_goal_pos)) {
       goalpos = behaviortreeentity.v_zombie_custom_goal_pos;
-      if(isdefined(behaviortreeentity.n_zombie_custom_goal_radius)) {
+      if(isDefined(behaviortreeentity.n_zombie_custom_goal_radius)) {
         behaviortreeentity.goalradius = behaviortreeentity.n_zombie_custom_goal_radius;
       }
       behaviortreeentity setgoal(goalpos);
     } else {
       player = zombie_utility::get_closest_valid_player(self.origin, self.ignore_player);
-      if(!isdefined(player)) {
-        if(isdefined(self.ignore_player)) {
-          if(isdefined(level._should_skip_ignore_player_logic) && [
+      if(!isDefined(player)) {
+        if(isDefined(self.ignore_player)) {
+          if(isDefined(level._should_skip_ignore_player_logic) && [
               [level._should_skip_ignore_player_logic]
             ]()) {
             return false;
@@ -379,9 +377,9 @@ function zombietargetservice(behaviortreeentity) {
         self setgoal(self.origin);
         return false;
       }
-      if(isdefined(player.last_valid_position)) {
-        if(!(isdefined(self.zombie_do_not_update_goal) && self.zombie_do_not_update_goal)) {
-          if(isdefined(level.zombie_use_zigzag_path) && level.zombie_use_zigzag_path) {
+      if(isDefined(player.last_valid_position)) {
+        if(!(isDefined(self.zombie_do_not_update_goal) && self.zombie_do_not_update_goal)) {
+          if(isDefined(level.zombie_use_zigzag_path) && level.zombie_use_zigzag_path) {
             behaviortreeentity zombieupdatezigzaggoal();
           } else {
             behaviortreeentity setgoal(player.last_valid_position);
@@ -389,7 +387,7 @@ function zombietargetservice(behaviortreeentity) {
         }
         return true;
       }
-      if(!(isdefined(self.zombie_do_not_update_goal) && self.zombie_do_not_update_goal)) {
+      if(!(isDefined(self.zombie_do_not_update_goal) && self.zombie_do_not_update_goal)) {
         behaviortreeentity setgoal(behaviortreeentity.origin);
       }
       return false;
@@ -400,26 +398,26 @@ function zombietargetservice(behaviortreeentity) {
 function zombieupdatezigzaggoal() {
   aiprofile_beginentry("zombieUpdateZigZagGoal");
   shouldrepath = 0;
-  if(!shouldrepath && isdefined(self.favoriteenemy)) {
-    if(!isdefined(self.nextgoalupdate) || self.nextgoalupdate <= gettime()) {
+  if(!shouldrepath && isDefined(self.favoriteenemy)) {
+    if(!isDefined(self.nextgoalupdate) || self.nextgoalupdate <= gettime()) {
       shouldrepath = 1;
     } else {
       if(distancesquared(self.origin, self.favoriteenemy.origin) <= (250 * 250)) {
         shouldrepath = 1;
-      } else if(isdefined(self.pathgoalpos)) {
+      } else if(isDefined(self.pathgoalpos)) {
         distancetogoalsqr = distancesquared(self.origin, self.pathgoalpos);
         shouldrepath = distancetogoalsqr < (72 * 72);
       }
     }
   }
-  if(isdefined(self.keep_moving) && self.keep_moving) {
+  if(isDefined(self.keep_moving) && self.keep_moving) {
     if(gettime() > self.keep_moving_time) {
       self.keep_moving = 0;
     }
   }
   if(shouldrepath) {
     goalpos = self.favoriteenemy.origin;
-    if(isdefined(self.favoriteenemy.last_valid_position)) {
+    if(isDefined(self.favoriteenemy.last_valid_position)) {
       goalpos = self.favoriteenemy.last_valid_position;
     }
     self setgoal(goalpos);
@@ -428,11 +426,11 @@ function zombieupdatezigzaggoal() {
       self.keep_moving_time = gettime() + 250;
       path = self calcapproximatepathtoposition(goalpos, 0);
       if(getdvarint("")) {
-        for (index = 1; index < path.size; index++) {
+        for(index = 1; index < path.size; index++) {
           recordline(path[index - 1], path[index], (1, 0.5, 0), "", self);
         }
       }
-      if(isdefined(level._zombiezigzagdistancemin) && isdefined(level._zombiezigzagdistancemax)) {
+      if(isDefined(level._zombiezigzagdistancemin) && isDefined(level._zombiezigzagdistancemax)) {
         min = level._zombiezigzagdistancemin;
         max = level._zombiezigzagdistancemax;
       } else {
@@ -441,7 +439,7 @@ function zombieupdatezigzaggoal() {
       }
       deviationdistance = randomintrange(min, max);
       segmentlength = 0;
-      for (index = 1; index < path.size; index++) {
+      for(index = 1; index < path.size; index++) {
         currentseglength = distance(path[index - 1], path[index]);
         if((segmentlength + currentseglength) > deviationdistance) {
           remaininglength = deviationdistance - segmentlength;
@@ -460,7 +458,7 @@ function zombieupdatezigzaggoal() {
         segmentlength = segmentlength + currentseglength;
       }
     }
-    if(isdefined(level._zombiezigzagtimemin) && isdefined(level._zombiezigzagtimemax)) {
+    if(isDefined(level._zombiezigzagtimemin) && isDefined(level._zombiezigzagtimemax)) {
       mintime = level._zombiezigzagtimemin;
       maxtime = level._zombiezigzagtimemax;
     } else {
@@ -473,10 +471,10 @@ function zombieupdatezigzaggoal() {
 }
 
 function zombiecrawlercollision(behaviortreeentity) {
-  if(!(isdefined(behaviortreeentity.missinglegs) && behaviortreeentity.missinglegs) && (!(isdefined(behaviortreeentity.knockdown) && behaviortreeentity.knockdown))) {
+  if(!(isDefined(behaviortreeentity.missinglegs) && behaviortreeentity.missinglegs) && (!(isDefined(behaviortreeentity.knockdown) && behaviortreeentity.knockdown))) {
     return false;
   }
-  if(isdefined(behaviortreeentity.dontpushtime)) {
+  if(isDefined(behaviortreeentity.dontpushtime)) {
     if(gettime() < behaviortreeentity.dontpushtime) {
       return true;
     }
@@ -486,7 +484,7 @@ function zombiecrawlercollision(behaviortreeentity) {
     if(zombie == behaviortreeentity) {
       continue;
     }
-    if(isdefined(zombie.missinglegs) && zombie.missinglegs || (isdefined(zombie.knockdown) && zombie.knockdown)) {
+    if(isDefined(zombie.missinglegs) && zombie.missinglegs || (isDefined(zombie.knockdown) && zombie.knockdown)) {
       continue;
     }
     dist_sq = distancesquared(behaviortreeentity.origin, zombie.origin);
@@ -501,7 +499,7 @@ function zombiecrawlercollision(behaviortreeentity) {
 }
 
 function zombietraversalservice(entity) {
-  if(isdefined(entity.traversestartnode)) {
+  if(isDefined(entity.traversestartnode)) {
     entity pushactors(0);
     return true;
   }
@@ -509,20 +507,20 @@ function zombietraversalservice(entity) {
 }
 
 function zombieisatattackobject(entity) {
-  if(isdefined(entity.missinglegs) && entity.missinglegs) {
+  if(isDefined(entity.missinglegs) && entity.missinglegs) {
     return false;
   }
-  if(isdefined(entity.enemyoverride) && isdefined(entity.enemyoverride[1])) {
+  if(isDefined(entity.enemyoverride) && isDefined(entity.enemyoverride[1])) {
     return false;
   }
-  if(isdefined(entity.favoriteenemy) && (isdefined(entity.favoriteenemy.b_is_designated_target) && entity.favoriteenemy.b_is_designated_target)) {
+  if(isDefined(entity.favoriteenemy) && (isDefined(entity.favoriteenemy.b_is_designated_target) && entity.favoriteenemy.b_is_designated_target)) {
     return false;
   }
-  if(isdefined(entity.aat_turned) && entity.aat_turned) {
+  if(isDefined(entity.aat_turned) && entity.aat_turned) {
     return false;
   }
-  if(isdefined(entity.attackable) && (isdefined(entity.attackable.is_active) && entity.attackable.is_active)) {
-    if(!isdefined(entity.attackable_slot)) {
+  if(isDefined(entity.attackable) && (isDefined(entity.attackable.is_active) && entity.attackable.is_active)) {
+    if(!isDefined(entity.attackable_slot)) {
       return false;
     }
     dist = distance2dsquared(entity.origin, entity.attackable_slot.origin);
@@ -538,20 +536,20 @@ function zombieisatattackobject(entity) {
 }
 
 function zombieshouldattackobject(entity) {
-  if(isdefined(entity.missinglegs) && entity.missinglegs) {
+  if(isDefined(entity.missinglegs) && entity.missinglegs) {
     return false;
   }
-  if(isdefined(entity.enemyoverride) && isdefined(entity.enemyoverride[1])) {
+  if(isDefined(entity.enemyoverride) && isDefined(entity.enemyoverride[1])) {
     return false;
   }
-  if(isdefined(entity.favoriteenemy) && (isdefined(entity.favoriteenemy.b_is_designated_target) && entity.favoriteenemy.b_is_designated_target)) {
+  if(isDefined(entity.favoriteenemy) && (isDefined(entity.favoriteenemy.b_is_designated_target) && entity.favoriteenemy.b_is_designated_target)) {
     return false;
   }
-  if(isdefined(entity.aat_turned) && entity.aat_turned) {
+  if(isDefined(entity.aat_turned) && entity.aat_turned) {
     return false;
   }
-  if(isdefined(entity.attackable) && (isdefined(entity.attackable.is_active) && entity.attackable.is_active)) {
-    if(isdefined(entity.is_at_attackable) && entity.is_at_attackable) {
+  if(isDefined(entity.attackable) && (isDefined(entity.attackable.is_active) && entity.attackable.is_active)) {
+    if(isDefined(entity.is_at_attackable) && entity.is_at_attackable) {
       return true;
     }
   }
@@ -559,16 +557,16 @@ function zombieshouldattackobject(entity) {
 }
 
 function zombieshouldmeleecondition(behaviortreeentity) {
-  if(isdefined(behaviortreeentity.enemyoverride) && isdefined(behaviortreeentity.enemyoverride[1])) {
+  if(isDefined(behaviortreeentity.enemyoverride) && isDefined(behaviortreeentity.enemyoverride[1])) {
     return false;
   }
-  if(!isdefined(behaviortreeentity.enemy)) {
+  if(!isDefined(behaviortreeentity.enemy)) {
     return false;
   }
-  if(isdefined(behaviortreeentity.marked_for_death)) {
+  if(isDefined(behaviortreeentity.marked_for_death)) {
     return false;
   }
-  if(isdefined(behaviortreeentity.ignoremelee) && behaviortreeentity.ignoremelee) {
+  if(isDefined(behaviortreeentity.ignoremelee) && behaviortreeentity.ignoremelee) {
     return false;
   }
   if(distancesquared(behaviortreeentity.origin, behaviortreeentity.enemy.origin) > 4096) {
@@ -582,19 +580,19 @@ function zombieshouldmeleecondition(behaviortreeentity) {
 }
 
 function zombieshouldjumpmeleecondition(behaviortreeentity) {
-  if(!(isdefined(behaviortreeentity.low_gravity) && behaviortreeentity.low_gravity)) {
+  if(!(isDefined(behaviortreeentity.low_gravity) && behaviortreeentity.low_gravity)) {
     return false;
   }
-  if(isdefined(behaviortreeentity.enemyoverride) && isdefined(behaviortreeentity.enemyoverride[1])) {
+  if(isDefined(behaviortreeentity.enemyoverride) && isDefined(behaviortreeentity.enemyoverride[1])) {
     return false;
   }
-  if(!isdefined(behaviortreeentity.enemy)) {
+  if(!isDefined(behaviortreeentity.enemy)) {
     return false;
   }
-  if(isdefined(behaviortreeentity.marked_for_death)) {
+  if(isDefined(behaviortreeentity.marked_for_death)) {
     return false;
   }
-  if(isdefined(behaviortreeentity.ignoremelee) && behaviortreeentity.ignoremelee) {
+  if(isDefined(behaviortreeentity.ignoremelee) && behaviortreeentity.ignoremelee) {
     return false;
   }
   if(behaviortreeentity.enemy isonground()) {
@@ -621,16 +619,16 @@ function zombieshouldjumpmeleecondition(behaviortreeentity) {
 }
 
 function zombieshouldjumpunderwatermelee(behaviortreeentity) {
-  if(isdefined(behaviortreeentity.enemyoverride) && isdefined(behaviortreeentity.enemyoverride[1])) {
+  if(isDefined(behaviortreeentity.enemyoverride) && isDefined(behaviortreeentity.enemyoverride[1])) {
     return false;
   }
-  if(!isdefined(behaviortreeentity.enemy)) {
+  if(!isDefined(behaviortreeentity.enemy)) {
     return false;
   }
-  if(isdefined(behaviortreeentity.marked_for_death)) {
+  if(isDefined(behaviortreeentity.marked_for_death)) {
     return false;
   }
-  if(isdefined(behaviortreeentity.ignoremelee) && behaviortreeentity.ignoremelee) {
+  if(isDefined(behaviortreeentity.ignoremelee) && behaviortreeentity.ignoremelee) {
     return false;
   }
   if(behaviortreeentity.enemy isonground()) {
@@ -655,26 +653,26 @@ function zombieshouldjumpunderwatermelee(behaviortreeentity) {
 }
 
 function zombiestumble(behaviortreeentity) {
-  if(isdefined(behaviortreeentity.missinglegs) && behaviortreeentity.missinglegs) {
+  if(isDefined(behaviortreeentity.missinglegs) && behaviortreeentity.missinglegs) {
     return false;
   }
-  if(!(isdefined(behaviortreeentity.canstumble) && behaviortreeentity.canstumble)) {
+  if(!(isDefined(behaviortreeentity.canstumble) && behaviortreeentity.canstumble)) {
     return false;
   }
-  if(!isdefined(behaviortreeentity.zombie_move_speed) || behaviortreeentity.zombie_move_speed != "sprint") {
+  if(!isDefined(behaviortreeentity.zombie_move_speed) || behaviortreeentity.zombie_move_speed != "sprint") {
     return false;
   }
-  if(isdefined(behaviortreeentity.stumble)) {
+  if(isDefined(behaviortreeentity.stumble)) {
     return false;
   }
-  if(!isdefined(behaviortreeentity.next_stumble_time)) {
+  if(!isDefined(behaviortreeentity.next_stumble_time)) {
     behaviortreeentity.next_stumble_time = gettime() + randomintrange(9000, 12000);
   }
   if(gettime() > behaviortreeentity.next_stumble_time) {
     if(randomint(100) < 5) {
       closestplayer = arraygetclosest(behaviortreeentity.origin, level.players);
       if(distancesquared(closestplayer.origin, behaviortreeentity.origin) > 50000) {
-        if(isdefined(behaviortreeentity.next_juke_time)) {
+        if(isDefined(behaviortreeentity.next_juke_time)) {
           behaviortreeentity.next_juke_time = undefined;
         }
         behaviortreeentity.next_stumble_time = undefined;
@@ -693,7 +691,7 @@ function zombiejuke(behaviortreeentity) {
   if(!behaviortreeentity ai::get_behavior_attribute("can_juke")) {
     return false;
   }
-  if(isdefined(behaviortreeentity.missinglegs) && behaviortreeentity.missinglegs) {
+  if(isDefined(behaviortreeentity.missinglegs) && behaviortreeentity.missinglegs) {
     return false;
   }
   if(behaviortreeentity bb_getlocomotionspeedtype() != "locomotion_speed_walk") {
@@ -701,16 +699,16 @@ function zombiejuke(behaviortreeentity) {
       return false;
     }
   }
-  if(isdefined(behaviortreeentity.juke)) {
+  if(isDefined(behaviortreeentity.juke)) {
     return false;
   }
-  if(!isdefined(behaviortreeentity.next_juke_time)) {
+  if(!isDefined(behaviortreeentity.next_juke_time)) {
     behaviortreeentity.next_juke_time = gettime() + randomintrange(7500, 9500);
   }
   if(gettime() > behaviortreeentity.next_juke_time) {
     behaviortreeentity.next_juke_time = undefined;
     if(randomint(100) < 25 || (behaviortreeentity ai::has_behavior_attribute("spark_behavior") && behaviortreeentity ai::get_behavior_attribute("spark_behavior"))) {
-      if(isdefined(behaviortreeentity.next_stumble_time)) {
+      if(isDefined(behaviortreeentity.next_stumble_time)) {
         behaviortreeentity.next_stumble_time = undefined;
       }
       forwardoffset = 15;
@@ -731,7 +729,7 @@ function zombiejuke(behaviortreeentity) {
         }
         behaviortreeentity.juke = aiutility::calculatejukedirection(behaviortreeentity, forwardoffset, jukedistance);
       }
-      if(!isdefined(behaviortreeentity.juke) || behaviortreeentity.juke == "forward") {
+      if(!isDefined(behaviortreeentity.juke) || behaviortreeentity.juke == "forward") {
         jukedistance = 69;
         behaviortreeentity.jukedistance = "short";
         switch (behaviortreeentity bb_getlocomotionspeedtype()) {
@@ -759,14 +757,14 @@ function zombiejuke(behaviortreeentity) {
 function zombiedeathaction(behaviortreeentity) {}
 
 function waskilledbyinterdimensionalguncondition(behaviortreeentity) {
-  if(isdefined(behaviortreeentity.interdimensional_gun_kill) && !isdefined(behaviortreeentity.killby_interdimensional_gun_hole) && isalive(behaviortreeentity)) {
+  if(isDefined(behaviortreeentity.interdimensional_gun_kill) && !isDefined(behaviortreeentity.killby_interdimensional_gun_hole) && isalive(behaviortreeentity)) {
     return true;
   }
   return false;
 }
 
 function wascrushedbyinterdimensionalgunblackholecondition(behaviortreeentity) {
-  if(isdefined(behaviortreeentity.killby_interdimensional_gun_hole)) {
+  if(isDefined(behaviortreeentity.killby_interdimensional_gun_hole)) {
     return true;
   }
   return false;
@@ -797,7 +795,7 @@ function zombiemeleejumpmocompupdate(entity, mocompanim, mocompanimblendouttime,
     entity orientmode("face angle", entity.angles[1]);
   }
   speed = 5;
-  if(isdefined(entity.zombie_move_speed)) {
+  if(isDefined(entity.zombie_move_speed)) {
     switch (entity.zombie_move_speed) {
       case "walk": {
         speed = 5;
@@ -813,16 +811,16 @@ function zombiemeleejumpmocompupdate(entity, mocompanim, mocompanimblendouttime,
       }
     }
   }
-  newposition = entity.origin + (anglestoforward(entity.angles) * speed);
+  newposition = entity.origin + (anglesToForward(entity.angles) * speed);
   newtestposition = (newposition[0], newposition[1], entity.jumpstartposition[2]);
   newvalidposition = getclosestpointonnavmesh(newtestposition, 12, 20);
-  if(isdefined(newvalidposition)) {
+  if(isDefined(newvalidposition)) {
     newvalidposition = (newvalidposition[0], newvalidposition[1], entity.origin[2]);
   } else {
     newvalidposition = entity.origin;
   }
   groundpoint = getclosestpointonnavmesh(newvalidposition, 12, 20);
-  if(isdefined(groundpoint) && groundpoint[2] > newvalidposition[2]) {
+  if(isDefined(groundpoint) && groundpoint[2] > newvalidposition[2]) {
     newvalidposition = (newvalidposition[0], newvalidposition[1], groundpoint[2]);
   }
   entity forceteleport(newvalidposition);
@@ -834,14 +832,14 @@ function zombiemeleejumpmocompterminate(entity, mocompanim, mocompanimblendoutti
   entity.clamptonavmesh = 1;
   entity pushactors(1);
   groundpoint = getclosestpointonnavmesh(entity.origin, 12);
-  if(isdefined(groundpoint)) {
+  if(isDefined(groundpoint)) {
     entity forceteleport(groundpoint);
   }
 }
 
 function zombieidgundeathupdate(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
-  if(!isdefined(entity.killby_interdimensional_gun_hole)) {
-    entity_eye = entity geteye();
+  if(!isDefined(entity.killby_interdimensional_gun_hole)) {
+    entity_eye = entity getEye();
     if(entity ispaused()) {
       entity setignorepauseworld(1);
       entity setentitypaused(0);
@@ -849,7 +847,7 @@ function zombieidgundeathupdate(entity, mocompanim, mocompanimblendouttime, moco
     if(entity.b_vortex_repositioned !== 1) {
       entity.b_vortex_repositioned = 1;
       v_nearest_navmesh_point = getclosestpointonnavmesh(entity.damageorigin, 36, 15);
-      if(isdefined(v_nearest_navmesh_point)) {
+      if(isDefined(v_nearest_navmesh_point)) {
         f_distance = distance(entity.damageorigin, v_nearest_navmesh_point);
         if(f_distance < 41) {
           entity.damageorigin = entity.damageorigin + vectorscale((0, 0, 1), 36);
@@ -866,7 +864,7 @@ function zombieidgundeathupdate(entity, mocompanim, mocompanimblendouttime, moco
       entity.aioverridedamage = undefined;
       entity.magic_bullet_shield = 0;
       level notify("interdimensional_kill", entity);
-      if(isdefined(entity.interdimensional_gun_weapon) && isdefined(entity.interdimensional_gun_attacker)) {
+      if(isDefined(entity.interdimensional_gun_weapon) && isDefined(entity.interdimensional_gun_attacker)) {
         entity kill(entity.origin, entity.interdimensional_gun_attacker, entity.interdimensional_gun_attacker, entity.interdimensional_gun_weapon);
       } else {
         entity kill(entity.origin);
@@ -891,7 +889,7 @@ function zombieidgunholedeathmocompstart(entity, mocompanim, mocompanimblendoutt
 }
 
 function zombieidgunholedeathmocompterminate(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
-  if(!(isdefined(entity.interdimensional_gun_kill_vortex_explosion) && entity.interdimensional_gun_kill_vortex_explosion)) {
+  if(!(isDefined(entity.interdimensional_gun_kill_vortex_explosion) && entity.interdimensional_gun_kill_vortex_explosion)) {
     entity hide();
   }
 }
@@ -922,20 +920,20 @@ function zombiehaslegs(behaviortreeentity) {
 }
 
 function zombieshouldproceduraltraverse(entity) {
-  return isdefined(entity.traversestartnode) && isdefined(entity.traverseendnode) && entity.traversestartnode.spawnflags & 1024 && entity.traverseendnode.spawnflags & 1024;
+  return isDefined(entity.traversestartnode) && isDefined(entity.traverseendnode) && entity.traversestartnode.spawnflags & 1024 && entity.traverseendnode.spawnflags & 1024;
 }
 
 function zombieshouldmeleesuicide(behaviortreeentity) {
   if(!behaviortreeentity ai::get_behavior_attribute("suicidal_behavior")) {
     return false;
   }
-  if(isdefined(behaviortreeentity.magic_bullet_shield) && behaviortreeentity.magic_bullet_shield) {
+  if(isDefined(behaviortreeentity.magic_bullet_shield) && behaviortreeentity.magic_bullet_shield) {
     return false;
   }
-  if(!isdefined(behaviortreeentity.enemy)) {
+  if(!isDefined(behaviortreeentity.enemy)) {
     return false;
   }
-  if(isdefined(behaviortreeentity.marked_for_death)) {
+  if(isDefined(behaviortreeentity.marked_for_death)) {
     return false;
   }
   if(distancesquared(behaviortreeentity.origin, behaviortreeentity.enemy.origin) > 40000) {
@@ -946,7 +944,7 @@ function zombieshouldmeleesuicide(behaviortreeentity) {
 
 function zombiemeleesuicidestart(behaviortreeentity) {
   behaviortreeentity.blockingpain = 1;
-  if(isdefined(level.zombiemeleesuicidecallback)) {
+  if(isDefined(level.zombiemeleesuicidecallback)) {
     behaviortreeentity thread[[level.zombiemeleesuicidecallback]](behaviortreeentity);
   }
 }
@@ -957,7 +955,7 @@ function zombiemeleesuicideterminate(behaviortreeentity) {
   if(isalive(behaviortreeentity) && zombieshouldmeleesuicide(behaviortreeentity)) {
     behaviortreeentity.takedamage = 1;
     behaviortreeentity.allowdeath = 1;
-    if(isdefined(level.zombiemeleesuicidedonecallback)) {
+    if(isDefined(level.zombiemeleesuicidedonecallback)) {
       behaviortreeentity thread[[level.zombiemeleesuicidedonecallback]](behaviortreeentity);
     }
   }
@@ -967,28 +965,28 @@ function zombiemoveaction(behaviortreeentity, asmstatename) {
   behaviortreeentity.movetime = gettime();
   behaviortreeentity.moveorigin = behaviortreeentity.origin;
   animationstatenetworkutility::requeststate(behaviortreeentity, asmstatename);
-  if(isdefined(behaviortreeentity.stumble) && !isdefined(behaviortreeentity.move_anim_end_time)) {
+  if(isDefined(behaviortreeentity.stumble) && !isDefined(behaviortreeentity.move_anim_end_time)) {
     stumbleactionresult = behaviortreeentity astsearch(istring(asmstatename));
     stumbleactionanimation = animationstatenetworkutility::searchanimationmap(behaviortreeentity, stumbleactionresult["animation"]);
     behaviortreeentity.move_anim_end_time = behaviortreeentity.movetime + getanimlength(stumbleactionanimation);
   }
-  if(isdefined(behaviortreeentity.zombiemoveactioncallback)) {
+  if(isDefined(behaviortreeentity.zombiemoveactioncallback)) {
     behaviortreeentity[[behaviortreeentity.zombiemoveactioncallback]](behaviortreeentity);
   }
   return 5;
 }
 
 function zombiemoveactionupdate(behaviortreeentity, asmstatename) {
-  if(isdefined(behaviortreeentity.move_anim_end_time) && gettime() >= behaviortreeentity.move_anim_end_time) {
+  if(isDefined(behaviortreeentity.move_anim_end_time) && gettime() >= behaviortreeentity.move_anim_end_time) {
     behaviortreeentity.move_anim_end_time = undefined;
     return 4;
   }
-  if(!(isdefined(behaviortreeentity.missinglegs) && behaviortreeentity.missinglegs) && (gettime() - behaviortreeentity.movetime) > 1000) {
+  if(!(isDefined(behaviortreeentity.missinglegs) && behaviortreeentity.missinglegs) && (gettime() - behaviortreeentity.movetime) > 1000) {
     distsq = distance2dsquared(behaviortreeentity.origin, behaviortreeentity.moveorigin);
     if(distsq < 144) {
       behaviortreeentity setavoidancemask("avoid all");
       behaviortreeentity.cant_move = 1;
-      if(isdefined(behaviortreeentity.cant_move_cb)) {
+      if(isDefined(behaviortreeentity.cant_move_cb)) {
         behaviortreeentity[[behaviortreeentity.cant_move_cb]]();
       }
     } else {
@@ -1009,37 +1007,37 @@ function zombiemoveactionupdate(behaviortreeentity, asmstatename) {
 }
 
 function zombiemoveactionterminate(behaviortreeentity, asmstatename) {
-  if(!(isdefined(behaviortreeentity.missinglegs) && behaviortreeentity.missinglegs)) {
+  if(!(isDefined(behaviortreeentity.missinglegs) && behaviortreeentity.missinglegs)) {
     behaviortreeentity setavoidancemask("avoid none");
   }
   return 4;
 }
 
 function archetypezombiedeathoverrideinit() {
-  aiutility::addaioverridekilledcallback(self, & zombiegibkilledanhilateoverride);
+  aiutility::addaioverridekilledcallback(self, &zombiegibkilledanhilateoverride);
 }
 
 function private zombiegibkilledanhilateoverride(inflictor, attacker, damage, meansofdeath, weapon, dir, hitloc, offsettime) {
-  if(!(isdefined(level.zombieanhilationenabled) && level.zombieanhilationenabled)) {
+  if(!(isDefined(level.zombieanhilationenabled) && level.zombieanhilationenabled)) {
     return damage;
   }
-  if(isdefined(self.forceanhilateondeath) && self.forceanhilateondeath) {
+  if(isDefined(self.forceanhilateondeath) && self.forceanhilateondeath) {
     self zombie_utility::gib_random_parts();
     gibserverutils::annihilate(self);
     return damage;
   }
-  if(isdefined(attacker) && isplayer(attacker) && (isdefined(attacker.forceanhilateondeath) && attacker.forceanhilateondeath || (isdefined(level.forceanhilateondeath) && level.forceanhilateondeath))) {
+  if(isDefined(attacker) && isplayer(attacker) && (isDefined(attacker.forceanhilateondeath) && attacker.forceanhilateondeath || (isDefined(level.forceanhilateondeath) && level.forceanhilateondeath))) {
     self zombie_utility::gib_random_parts();
     gibserverutils::annihilate(self);
     return damage;
   }
   attackerdistance = 0;
-  if(isdefined(attacker)) {
+  if(isDefined(attacker)) {
     attackerdistance = distancesquared(attacker.origin, self.origin);
   }
   isexplosive = isinarray(array("MOD_CRUSH", "MOD_GRENADE", "MOD_GRENADE_SPLASH", "MOD_PROJECTILE", "MOD_PROJECTILE_SPLASH", "MOD_EXPLOSIVE"), meansofdeath);
-  if(isdefined(weapon.weapclass) && weapon.weapclass == "turret") {
-    if(isdefined(inflictor)) {
+  if(isDefined(weapon.weapclass) && weapon.weapclass == "turret") {
+    if(isDefined(inflictor)) {
       isdirectexplosive = isinarray(array("MOD_GRENADE", "MOD_GRENADE_SPLASH", "MOD_PROJECTILE", "MOD_PROJECTILE_SPLASH", "MOD_EXPLOSIVE"), meansofdeath);
       iscloseexplosive = distancesquared(inflictor.origin, self.origin) <= (60 * 60);
       if(isdirectexplosive && iscloseexplosive) {
@@ -1052,7 +1050,7 @@ function private zombiegibkilledanhilateoverride(inflictor, attacker, damage, me
 }
 
 function private zombiezombieidlemocompstart(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
-  if(isdefined(entity.enemyoverride) && isdefined(entity.enemyoverride[1]) && entity != entity.enemyoverride[1]) {
+  if(isDefined(entity.enemyoverride) && isDefined(entity.enemyoverride[1]) && entity != entity.enemyoverride[1]) {
     entity orientmode("face direction", entity.enemyoverride[1].origin - entity.origin);
     entity animmode("zonly_physics", 0);
   } else {
@@ -1062,7 +1060,7 @@ function private zombiezombieidlemocompstart(entity, mocompanim, mocompanimblend
 }
 
 function private zombieattackobjectmocompstart(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
-  if(isdefined(entity.attackable_slot)) {
+  if(isDefined(entity.attackable_slot)) {
     entity orientmode("face angle", entity.attackable_slot.angles[1]);
     entity animmode("zonly_physics", 0);
   } else {
@@ -1072,7 +1070,7 @@ function private zombieattackobjectmocompstart(entity, mocompanim, mocompanimble
 }
 
 function private zombieattackobjectmocompupdate(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
-  if(isdefined(entity.attackable_slot)) {
+  if(isDefined(entity.attackable_slot)) {
     entity forceteleport(entity.attackable_slot.origin);
   }
 }

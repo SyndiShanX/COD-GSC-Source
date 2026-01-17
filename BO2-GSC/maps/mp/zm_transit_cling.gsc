@@ -18,10 +18,10 @@ setupclingtrigger() {
   enablecling();
   triggers = [];
   level.cling_triggers = [];
-  triggers = getentarray("cling_trigger", "script_noteworthy");
+  triggers = getEntArray("cling_trigger", "script_noteworthy");
 
   for(i = 0; i < triggers.size; i++) {
-    level.cling_triggers[i] = spawnstruct();
+    level.cling_triggers[i] = spawnStruct();
     level.cling_triggers[i].trigger = triggers[i];
     trigger = level.cling_triggers[i].trigger;
     trigger sethintstring("Hold [{+activate}] To Cling To The Bus.");

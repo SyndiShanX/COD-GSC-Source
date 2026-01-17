@@ -1427,9 +1427,7 @@ get_portable_mg_spot(var_0) {
   var_1 = common_scripts\utility::array_randomize(var_1);
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
-    var_3 = [
-      [var_1[var_2]]
-    ](var_0);
+    var_3 = [[var_1[var_2]]](var_0);
 
     if(!isDefined(var_3["spots"])) {
       continue;
@@ -1527,7 +1525,7 @@ portable_mg_spot() {
   if(isDefined(self.isvehicleattached)) {
     return;
   }
-  if(self.spawnflags & var_0) {
+  if(self.spawnflags &var_0) {
     return;
   }
   hide_turret();

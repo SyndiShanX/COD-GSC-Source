@@ -20,7 +20,7 @@ trackWithHead(spot) {
   if(!isDefined(self.enemy) && !isDefined(spot)) {
     return;
   }
-  for (;;) {
+  for(;;) {
     if(isDefined(spot)) {
       yawDelta = getYawToSpot(spot);
       pitchDelta = getPitchToSpot(spot);
@@ -74,7 +74,7 @@ glance(spot, duration, ignoreLOS) {
 
 cleanHeadOnKill() {
   self endon("death");
-  for (;;) {
+  for(;;) {
     self waittill("killanimscript");
     self setanim( % head_horizontal, 0, .1);
     self setanim( % head_vertical, 0, .1);

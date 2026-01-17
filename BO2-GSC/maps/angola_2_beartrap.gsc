@@ -197,7 +197,7 @@ primed_beartrap_explode(guy) {
   level.player endon("death");
   wait 4;
   level.num_beartrap_catches = level.num_beartrap_catches + 1;
-  playfx(level._effect["def_explosion"], self.origin);
+  playFX(level._effect["def_explosion"], self.origin);
   playsoundatposition("exp_mortar", self.origin);
 
   if(isDefined(self.mortar_ref))
@@ -231,7 +231,7 @@ beartrap_search_for_ai_victim(ai_enemy, in_range_distance, vis_dot) {
   dist_to_trap = distance(ai_enemy.origin, self.origin);
 
   if(dist_to_trap < in_range_distance) {
-    v_ai_forward = anglestoforward(ai_enemy.angles);
+    v_ai_forward = anglesToForward(ai_enemy.angles);
     v_dir_to_trap = vectornormalize(self.origin - ai_enemy.origin);
     dot = vectordot(v_ai_forward, v_dir_to_trap);
 
@@ -264,8 +264,7 @@ second_wave_investigate_beartrap(e_trap) {
   level notify("player_position_located");
 }
 
-animate_the_bear_trap() {
-}
+animate_the_bear_trap() {}
 
 beartrap_mortar_plant_think() {
   level.player endon("death");
@@ -328,7 +327,7 @@ beartrap_explosive_think() {
     dist = distance(self.origin, level.player.origin);
 
     if(dist < 64) {
-      forward = anglestoforward(level.player.angles);
+      forward = anglesToForward(level.player.angles);
       dir = vectornormalize(self.origin - level.player.origin);
       dot = vectordot(forward, dir);
 

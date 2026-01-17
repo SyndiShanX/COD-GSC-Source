@@ -225,7 +225,7 @@ event1_mitch_slash(guy) {
   struct = getstruct("event1_blood_spray_target", "targetname");
   origin = guy GetTagOrigin("j_neck");
   angles = VectorToAngles(struct.origin - origin);
-  PlayFx(level._effect["blood_spray"], origin, AnglesToForward(angles), AnglesToUp(angles));
+  playFX(level._effect["blood_spray"], origin, anglesToForward(angles), AnglesToUp(angles));
   guy codescripts\character::new();
   guy character\char_usa_marine_h_pow_cut::main();
 }
@@ -235,7 +235,7 @@ event1_mitch_blood_pool(guy) {
     z = 49;
     origin = guy GetTagOrigin("J_NECK");
     origin = (origin[0], origin[1], z);
-    PlayFx(level._effect["blood_pool"], origin);
+    playFX(level._effect["blood_pool"], origin);
   }
   level notify("intro_rejoin_player_to_hands");
 }
@@ -264,7 +264,7 @@ event1_intro_sullivan_start(guy) {
   level.sullivan waittill("anim_early_out");
   flag_set("intro_done");
   wait(3);
-  for (i = 0; i < redshirts.size; i++) {
+  for(i = 0; i < redshirts.size; i++) {
     redshirts[i] thread maps\mak::disable_arrivals(false, false, undefined, 1);
   }
 }
@@ -276,21 +276,21 @@ event1_redshirts_move_up() {
   redshirts[0].animname = "intro_redshirt1";
   redshirts[1] = GetEnt("scout2", "script_noteworthy");
   redshirts[1].animname = "intro_redshirt2";
-  for (i = 0; i < redshirts.size; i++) {
+  for(i = 0; i < redshirts.size; i++) {
     redshirts[i] maps\mak::disable_arrivals(true, true);
   }
   level anim_reach(redshirts, "intro", undefined, node);
   level thread anim_single_earlyout(redshirts, "intro", undefined, node, undefined, undefined, 0.5);
-  for (i = 0; i < redshirts.size; i++) {
+  for(i = 0; i < redshirts.size; i++) {
     redshirts[i] enable_ai_color();
   }
 }
 
 event1_rescuers(no_waittill) {
-  rescuers = GetEntArray("event1_rescuers", "targetname");
+  rescuers = getEntArray("event1_rescuers", "targetname");
   nodes = GetNodeArray("rescuer_path", "targetname");
-  for (i = 0; i < rescuers.size; i++) {
-    rescuers[i] SetCanDamage(false);
+  for(i = 0; i < rescuers.size; i++) {
+    rescuers[i] setCanDamage(false);
     rescuers[i] maps\mak::disable_arrivals(true, true);
     rescuers[i].goalradius = 128;
     rescuers[i] thread follow_path(nodes[i]);
@@ -305,16 +305,16 @@ event1_rescuers(no_waittill) {
   boat = GetEnt("event1_rescue_raft", "targetname");
   v_node = GetVehicleNode("event1_rescuer_boatpath", "targetname");
   boat AttachPath(v_node);
-  counter = SpawnStruct();
+  counter = spawnStruct();
   counter.count = 0;
-  for (i = 0; i < pows.size; i++) {
+  for(i = 0; i < pows.size; i++) {
     rescuers[i] gun_remove();
     rescuers[i] thread event1_rescue_pow(pows[i], i, counter);
   }
   counter waittill("guys_on_boat");
   boat StartPath();
   boat waittill("reached_end_node");
-  for (i = 0; i < pows.size; i++) {
+  for(i = 0; i < pows.size; i++) {
     rescuers[i] Delete();
     pows[i] Delete();
   }
@@ -340,7 +340,7 @@ event1_rescue_pow(pow, num, counter) {
   wait(.05);
   pow LinkTo(boat, "tag_origin");
   wait(6);
-  for (i = 0; i < guys.size; i++) {
+  for(i = 0; i < guys.size; i++) {
     guys[i] LinkTo(boat, "tag_origin", (0, 0, 0), (0, 0, 0));
   }
   counter.count++;
@@ -352,7 +352,7 @@ event1_rescue_pow(pow, num, counter) {
 
 pow_loop(animation, rescuer) {
   self endon("stop_pow_loop");
-  while (1) {
+  while(1) {
     rescuer anim_single_solo(self, "run", "tag_sync");
   }
 }
@@ -439,13 +439,13 @@ event2_snare_trap(guy) {
     guy.a.gib_ref = "right_arm";
   dist = Distance(node.origin, branch.origin);
   DeleteRope(level.snare_rope_id);
-  guy PlaySound("trap_spring");
+  guy playSound("trap_spring");
   ropeId = CreateRope(branch.origin, (0, 0, 0), dist * 0.55, guy, "j_ankle_le", 2);
-  guy playsound("trap_vx");
+  guy playSound("trap_vx");
   guy StartRagDoll();
   level thread event2_snare_death_break_rope(ropeId);
   wait(0.5);
-  guy SetCanDamage(true);
+  guy setCanDamage(true);
   guy.NoFriendlyfire = true;
   guy.health = 10;
   level thread event2_snare_dialog();
@@ -584,10 +584,10 @@ event5() {
 event5_leave_satchel(guy) {
   origin = guy GetTagOrigin("tag_inhand");
   angles = guy GetTagAngles("tag_inhand");
-  satchel = Spawn("script_model", origin);
+  satchel = spawn("script_model", origin);
   satchel.angles = angles;
-  satchel SetModel("weapon_satchel_charge");
-  satchel PlayLoopSound("bomb_tick_loop");
+  satchel setModel("weapon_satchel_charge");
+  satchel playLoopSound("bomb_tick_loop");
 }
 
 event6() {
@@ -713,11 +713,11 @@ mitch_beatstick_hit(guy) {
   struct = getstruct("event1_beatstick_target", "targetname");
   origin = guy GetTagOrigin("TAG_EYE");
   angles = VectorToAngles(struct.origin - origin);
-  PlayFx(level._effect["beatstick_hit"], origin, AnglesToForward(angles), AnglesToUp(angles));
+  playFX(level._effect["beatstick_hit"], origin, anglesToForward(angles), AnglesToUp(angles));
 }
 
 follow_path(node) {
-  while (1) {
+  while(1) {
     if(isDefined(node.radius)) {
       self.goalradius = node.radius;
     }
@@ -747,11 +747,11 @@ event1_set_objective(guy) {
 
 event1_flashlight(guy) {
   guy endon("flashlight_off");
-  for (i = 0; i < 2; i++) {
-    light_ent = Spawn("script_model", (0, 0, 0));
-    light_ent SetModel("tag_origin");
+  for(i = 0; i < 2; i++) {
+    light_ent = spawn("script_model", (0, 0, 0));
+    light_ent setModel("tag_origin");
     light_ent LinkTo(guy, "tag_fx", (0, 0, 0), (0, 0, 0));
-    Playfxontag(level._effect["flash_light"], light_ent, "tag_origin");
+    playFXOnTag(level._effect["flash_light"], light_ent, "tag_origin");
     wait(0.4);
     light_ent Delete();
     wait(0.2);
@@ -767,11 +767,11 @@ event1_give_nambo(guy) {
   if(players.size == 1) {
     return;
   }
-  spawners = GetEntArray("client_intro_guys", "targetname");
+  spawners = getEntArray("client_intro_guys", "targetname");
   j = 0;
-  counter = SpawnStruct();
+  counter = spawnStruct();
   counter.count = 0;
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(players[i] GetEntityNumber() == 0) {
       player_0 = players[i];
       continue;
@@ -784,12 +784,12 @@ event1_give_nambo(guy) {
   }
   share_screen(get_host(), false);
   show_all_player_models();
-  while (counter.count > 0) {
+  while(counter.count > 0) {
     counter waittill("count_up");
     counter.count--;
   }
-  for (j = 0; j < 4; j++) {
-    for (i = 0; i < players.size; i++) {
+  for(j = 0; j < 4; j++) {
+    for(i = 0; i < players.size; i++) {
       level._player_breadcrumbs[j][i].pos = players[i].origin;
       level._player_breadcrumbs[j][i].ang = players[i].angles;
     }
@@ -809,7 +809,7 @@ player_into_character_counter(player) {
 
 event1_delete_helmet(guy) {
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i].viewhands Show();
   }
   helmet = GetEnt("event1_helmet", "targetname");
@@ -845,7 +845,7 @@ death_after_anim(notify_str, anime, notetrack, delay) {
   if(isDefined(delay)) {
     wait(delay);
   }
-  self SetCanDamage(true);
+  self setCanDamage(true);
   self.allowdeath = true;
   self DoDamage(self.health + 50, (0, 0, 0));
 }
@@ -867,7 +867,7 @@ kill_delay(delay, notify_str, anime, notetrack) {
   if(isDefined(delay)) {
     wait(delay);
   }
-  self SetCanDamage(true);
+  self setCanDamage(true);
   self.allowdeath = true;
   self DoDamage(self.health + 50, (0, 0, 0));
 }
@@ -929,7 +929,7 @@ spawn_and_play(spawners, anime, node, anim_reach, death_anim) {
     level anim_reach(guys, anime, undefined, node);
   }
   if(isDefined(death_anim)) {
-    for (i = 0; i < guys.size; i++) {
+    for(i = 0; i < guys.size; i++) {
       guys[i] thread death_after_anim(undefined, death_anim);
     }
   }
@@ -938,9 +938,9 @@ spawn_and_play(spawners, anime, node, anim_reach, death_anim) {
 
 anim_under_hut_collapse(guy) {
   exploder(110);
-  ents = GetEntArray("hut4_collapse_debris", "targetname");
+  ents = getEntArray("hut4_collapse_debris", "targetname");
   parent = get_parent_by_tagname(ents, "plank1");
-  for (i = 0; i < ents.size; i++) {
+  for(i = 0; i < ents.size; i++) {
     ents[i] NotSolid();
   }
   level thread anim_ents(ents, "collapse", undefined, undefined, parent, "under_hut_debris");
@@ -950,18 +950,18 @@ anim_intro_shed_light(guy) {}
 
 anim_guy_to_shed(guy) {
   exploder(109);
-  pieces = GetEntArray("event1_shed_boards", "targetname");
+  pieces = getEntArray("event1_shed_boards", "targetname");
   parent = get_parent_by_tagname(pieces, "joint1");
   level thread anim_ents(pieces, "collapse", undefined, undefined, parent, "guy_2_shed_geo");
 }
 
 anim_hut4_pieces() {
-  pieces = GetEntArray("hut4_face_pieces", "targetname");
+  pieces = getEntArray("hut4_face_pieces", "targetname");
   parent = get_parent_by_tagname(pieces, "chunk1");
   pieces = array_randomize(pieces);
   level thread fx_on_pieces(pieces, "hut4_smoke_trail", undefined, 5);
-  non_solid_pieces = GetEntArray("hut4_piece_notsolid", "script_noteworthy");
-  for (i = 0; i < non_solid_pieces.size; i++) {
+  non_solid_pieces = getEntArray("hut4_piece_notsolid", "script_noteworthy");
+  for(i = 0; i < non_solid_pieces.size; i++) {
     non_solid_pieces[i] NotSolid();
   }
   level thread anim_ents(pieces, "explode", undefined, undefined, parent, "hut4_pieces");
@@ -975,14 +975,14 @@ hut1_splash(ent) {
   parent = GetEnt("hut1_parent", "targetname");
   if(!isDefined(parent.play_fx)) {
     parent.played_fx = true;
-    PlayFx(level._effect["hut1_splash"], parent.origin);
+    playFX(level._effect["hut1_splash"], parent.origin);
     playsoundatposition("", parent.origin);
     WaterPlop(parent.origin, 2, 4);
   }
-  pieces = GetEntArray("hut1_pieces", "script_noteworthy");
-  for (i = 0; i < pieces.size; i++) {
+  pieces = getEntArray("hut1_pieces", "script_noteworthy");
+  for(i = 0; i < pieces.size; i++) {
     if(isDefined(pieces[i].fx_models)) {
-      for (q = 0; q < pieces[i].fx_models.size; q++) {
+      for(q = 0; q < pieces[i].fx_models.size; q++) {
         if(!isDefined(pieces[i].fx_models[q])) {
           continue;
         }
@@ -1005,13 +1005,13 @@ hut1_splash(ent) {
   tag_names[tag_names.size] = "hutchunk3_jnt";
   tag_names[tag_names.size] = "hutchunk4_jnt";
   tag_names[tag_names.size] = "hutchunk5_jnt";
-  for (i = 0; i < tag_names.size; i++) {
+  for(i = 0; i < tag_names.size; i++) {
     ent thread maps\mak::draw_tag_name(tag_names[i]);
   }
   ent waittillmatch("ent_anim", "end");
-  for (i = 0; i < pieces.size; i++) {
+  for(i = 0; i < pieces.size; i++) {
     if(isDefined(pieces[i].fx_models)) {
-      for (q = 0; q < pieces[i].fx_models.size; q++) {
+      for(q = 0; q < pieces[i].fx_models.size; q++) {
         if(!isDefined(pieces[i].fx_models[q])) {
           continue;
         }
@@ -1032,13 +1032,13 @@ fx_on_pieces(pieces, effect, max, timeout) {
     timeout = 10;
   }
   pieces = array_randomize(pieces);
-  for (i = 0; i < pieces.size; i++) {
-    fx_model = Spawn("script_model", pieces[i].origin);
-    fx_model SetModel("tag_origin");
+  for(i = 0; i < pieces.size; i++) {
+    fx_model = spawn("script_model", pieces[i].origin);
+    fx_model setModel("tag_origin");
     fx_model.angles = (-90, 0, 0);
     fx_model LinkTo(pieces[i]);
     playsoundatposition("wood_pre_crack", fx_model.origin);
-    Playfxontag(level._effect[effect], fx_model, "tag_origin");
+    playFXOnTag(level._effect[effect], fx_model, "tag_origin");
     fx_model thread fx_on_piece_timeout(pieces[i], timeout);
   }
 }
@@ -1051,7 +1051,7 @@ fx_on_piece_timeout(parent, timeout) {
 
 get_parent_by_tagname(pieces, tagname) {
   parent = undefined;
-  for (i = 0; i < pieces.size; i++) {
+  for(i = 0; i < pieces.size; i++) {
     if(pieces[i].script_linkto == tagname) {
       parent = pieces[i];
       break;
@@ -1068,7 +1068,7 @@ showdown_fire(guy) {
   enemy = GetEnt("axis_showdown", "targetname");
   if(guy.fire_count == 5) {
     enemy notify("stop_showdown_damage");
-    enemy SetCanDamage(false);
+    enemy setCanDamage(false);
   }
   if(!isDefined(enemy.showdown_tag_num)) {
     enemy.showdown_tag_num = 0;
@@ -1081,7 +1081,7 @@ showdown_fire(guy) {
   tags[3] = "j_hip_ri";
   tags[4] = "j_spine4";
   tags[5] = "j_spine4";
-  PlayFxOnTag(level._effect["head_shot"], enemy, tags[enemy.showdown_tag_num]);
+  playFXOnTag(level._effect["head_shot"], enemy, tags[enemy.showdown_tag_num]);
 }
 
 showdown_hut_door(guy) {
@@ -1094,7 +1094,7 @@ showdown_water_splash(guy) {
   origin = guy GetTagOrigin("j_spine4");
   angles = (-90, 0, 0);
   wait(0.65);
-  PlayFx(level._effect["showdown_splash"], (origin[0] - 24, origin[1] - 24, 10), AnglesToForward(angles), AnglesToUp(angles));
+  playFX(level._effect["showdown_splash"], (origin[0] - 24, origin[1] - 24, 10), anglesToForward(angles), AnglesToUp(angles));
 }
 
 beatdown_hut_door(guy) {
@@ -1103,7 +1103,7 @@ beatdown_hut_door(guy) {
   door2 = GetEnt("makin_door2", "targetname");
   door2 RotateTo((0, -105, 0), 0.5, 0.1, 0);
   wait(0.5);
-  boards = GetEntArray("event1_door_collapse", "targetname");
+  boards = getEntArray("event1_door_collapse", "targetname");
   parent = GetEnt("event1_door_collapse_parent", "script_noteworthy");
   level anim_ents(boards, "collapse", undefined, undefined, parent, "event1_door_collapse");
 }
@@ -1128,7 +1128,7 @@ beatdown_break_apart(guy) {
   guy StopAnimScripted();
   level thread anim_single_solo(guy, "vignette2", undefined, node);
   tag = "J_Elbow_RI";
-  Playfxontag(level._effect["beatdown_arm_smoke"], guy, tag);
+  playFXOnTag(level._effect["beatdown_arm_smoke"], guy, tag);
   wait(1);
   if(isDefined(attacker) && IsPlayer(attacker)) {
     attacker giveachievement_wrapper("MAK_ACHIEVEMENT_RYAN");
@@ -1139,21 +1139,21 @@ event3_leave_sword(guy) {
   guy Detach("weapon_jap_katana_long", "tag_weapon_right");
   origin = guy GetTagOrigin("tag_weapon_right");
   angles = guy GetTagAngles("tag_weapon_right");
-  sword = Spawn("script_model", origin);
+  sword = spawn("script_model", origin);
   sword.angles = angles;
-  sword SetModel("weapon_jap_katana_long");
+  sword setModel("weapon_jap_katana_long");
 }
 
 event3_flare(guy) {
   level notify("stop_feign_interrupt");
   level thread maps\mak::event3_flare();
   node = GetNode("event3_feign_death_node", "targetname");
-  axis = GetEntArray("feign_enemy", "targetname");
+  axis = getEntArray("feign_enemy", "targetname");
   axis = get_array_of_closest(node.origin, axis);
   axis = array_removeundefined(axis);
   axis = array_removeDead(axis);
   feign_enemy = [];
-  for (i = 0; i < axis.size; i++) {
+  for(i = 0; i < axis.size; i++) {
     if((isDefined(axis[i])) && (axis[i].dontgetup == false)) {
       feign_enemy[feign_enemy.size] = axis[i];
       axis[i] thread event3_feign_getup(node);
@@ -1162,14 +1162,14 @@ event3_flare(guy) {
   }
   feign_enemy = array_removeDead(feign_enemy);
   waittill_dead(feign_enemy, feign_enemy.size - 5);
-  spawners = GetEntArray("event3_backup_spawners", "targetname");
+  spawners = getEntArray("event3_backup_spawners", "targetname");
   maps\_spawner::flood_spawner_scripted(spawners);
   level thread event3_charge();
 }
 
 event3_charge() {
   trigger = GetEnt("event3_charge_trigger", "targetname");
-  while (1) {
+  while(1) {
     trigger waittill("trigger", other);
     if(isDefined(other.script_noteworthy) && other.script_noteworthy == "event3_backup_guys") {
       break;
@@ -1199,9 +1199,9 @@ event4_tower_impact(ent) {
 held_guy_blood_Fx(guy) {
   ally = GetEnt("ally_held_down", "targetname");;
   origin = ally GetTagOrigin("j_neck");
-  PlayFX(level._effect["flesh_hit"], origin);
-  axis = GetEntArray("axis_held_down", "targetname");
-  for (i = 0; i < axis.size; i++) {
+  playFX(level._effect["flesh_hit"], origin);
+  axis = getEntArray("axis_held_down", "targetname");
+  for(i = 0; i < axis.size; i++) {
     axis[i] disable_long_death();
     axis[i].skipDeathAnim = true;
     axis[i].allowdeath = true;
@@ -1215,7 +1215,7 @@ event6_outtro_strike(guy) {
   if(players.size < 2) {
     level thread maps\mak::timescale_duration(0.2, 0.5, 0.75, 1, 1.0);
   }
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     player = players[i];
     player EnableInvulnerability();
     player thread keep_the_red_flash();
@@ -1223,7 +1223,7 @@ event6_outtro_strike(guy) {
 }
 
 keep_the_red_flash() {
-  while (!flag("sullivan_at_boat")) {
+  while(!flag("sullivan_at_boat")) {
     self player_flag_waitopen("player_has_red_flashing_overlay");
     self player_flag_set("player_has_red_flashing_overlay");
   }
@@ -1238,7 +1238,7 @@ event6_sullivan_outtro(guy) {
   node = GetNode("event6_ambush_node", "targetname");
   level anim_single_solo(level.sullivan, "outtro_start", undefined, node);
   level notify("link_player_to_sullivan");
-  level.sullivan SetCanDamage(false);
+  level.sullivan setCanDamage(false);
   level.sullivan set_run_anim("outtro_loop", true);
   level.sullivan thread anim_single_solo(level.sullivan, "i_got_you");
   node = GetNode("boat1_enter", "targetname");
@@ -1353,7 +1353,7 @@ vehicle_anims() {
 
 play_vehicle_anim(anime) {
   self SetFlaggedAnimKnobRestart("blend_anim" + anime, level.scr_anim[self.animname][anime], 1, 0.2, 1);
-  for (;;) {
+  for(;;) {
     self waittill("blend_anim" + anime, notetrack);
     if(notetrack == "end") {
       return;
@@ -1365,7 +1365,7 @@ play_vehicle_anim(anime) {
 
 play_vehicle_animloop(anime, end_on) {
   self endon(end_on);
-  while (1) {
+  while(1) {
     self SetFlaggedAnimKnobRestart("blend_animloop" + anime, level.scr_anim[self.animname][anime], 1, 0.2, 1);
     self waittillmatch("blend_animloop" + anime, "end");
   }
@@ -1389,7 +1389,7 @@ player_anims() {
 
 all_players_play_viewhands(anime, node, lerp, lerp_time, fraction, right_arc, left_arc, top_arc, bottom_arc, hit_geo, targetname) {
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i] thread play_viewhands(anime, node, lerp, lerp_time, fraction, right_arc, left_arc, top_arc, bottom_arc, hit_geo, targetname);
   }
 }
@@ -1466,7 +1466,7 @@ non_mature_intro(viewhands, fraction, right_arc, left_arc, top_arc, bottom_arc) 
 
 fov_thread(value, duration, time) {
   time = 0;
-  while (time < duration) {
+  while(time < duration) {
     self SetClientDvar("cg_fov", value);
     wait 0.3;
     time += 0.3;
@@ -1477,7 +1477,7 @@ lerp_fov(new_fov, time, wait_time) {
   curr_fov = GetDvarInt("cg_fov");
   steps = time * 20;
   div = (curr_fov - new_fov) / steps;
-  for (i = 0; i < steps; i++) {
+  for(i = 0; i < steps; i++) {
     curr_fov -= div;
     if(curr_fov < 5) {
       curr_fov = 5;
@@ -1493,7 +1493,7 @@ lerp_fov(new_fov, time, wait_time) {
 }
 
 lerp_player_view_at_ent(ent, time, tag, offset) {
-  eye_pos = self GetEye();
+  eye_pos = self getEye();
   if(isDefined(tag)) {
     new_angles = VectorToAngles(ent GetTagOrigin(tag) - eye_pos);
   } else {
@@ -1511,7 +1511,7 @@ lerp_player_view_to_angles(new_angles, time, offset) {
   steps = time * 20;
   diff = maps\mak::angles_normalize_180(curr_angles - new_angles);
   div = (diff) / steps;
-  for (i = 0; i < steps; i++) {
+  for(i = 0; i < steps; i++) {
     curr_angles -= div;
     self SetPlayerAngles(curr_angles);
     wait(0.05);
@@ -1538,15 +1538,15 @@ player_into_character(spawner) {
   time = 4;
   view_height = self GetPlayerViewHeight();
   guy.dontavoidplayer = true;
-  forward = AnglesToForward(guy.angles + angle);
+  forward = anglesToForward(guy.angles + angle);
   start_pos = guy GetTagOrigin(tag) + vector_multiply(forward, dist);
   start_pos = start_pos + offset - (0, 0, view_height);
-  org = Spawn("script_origin", start_pos);
+  org = spawn("script_origin", start_pos);
   org.angles = VectorToAngles((guy GetTagOrigin(tag) - (0, 0, view_height)) - org.origin);
   self PlayerLinkTo(org, "", 1, 5, 5, 5, 5);
   org MoveTo(guy GetTagOrigin(tag) - (0, 0, view_height), time, 0, time * 0.5);
   org RotateTo(guy.angles, time, 0, time * 0.5);
-  while (DistanceSquared(org.origin, guy GetTagOrigin(tag) - (0, 0, view_height)) > 12 * 12) {
+  while(DistanceSquared(org.origin, guy GetTagOrigin(tag) - (0, 0, view_height)) > 12 * 12) {
     wait(0.05);
   }
   guy Delete();
@@ -1573,7 +1573,7 @@ anim_loop_blend(guy, anime, tag, ender, entity, blend_time) {
   base_animname = guy.animname;
   idleanim = 0;
   lastIdleanim = 0;
-  while (1) {
+  while(1) {
     pos = get_anim_position(tag, entity);
     org = pos["origin"];
     angles = pos["angles"];
@@ -1605,7 +1605,7 @@ anim_loop_blend(guy, anime, tag, ender, entity, blend_time) {
       dialogue = level.scr_sound[animname][anime + "_pg"][idleanim];
     }
     if(isDefined(level.scr_animSound[animname]) && isDefined(level.scr_animSound[animname][idleanim + anime])) {
-      guy playsound(level.scr_animSound[animname][idleanim + anime]);
+      guy playSound(level.scr_animSound[animname][idleanim + anime]);
     }
     if(isDefined(level.scr_anim[animname]) && isDefined(level.scr_anim[animname][anime])) {
       doAnimation = true;

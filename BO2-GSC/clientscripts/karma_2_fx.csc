@@ -7,8 +7,7 @@
 #include clientscripts\createfx\karma_2_fx;
 #include clientscripts\_fx;
 
-precache_util_fx() {
-}
+precache_util_fx() {}
 
 precache_scripted_fx() {
   level._effect["blood_cloud_water"] = loadfx("maps/karma/fx_kar_blood_cloud_water");

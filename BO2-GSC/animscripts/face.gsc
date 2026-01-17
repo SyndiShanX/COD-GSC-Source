@@ -71,8 +71,7 @@ sayspecificdialogue(facialanim, soundalias, importance, notifystring, waitornot,
   self thread playfacethread(facialanim, soundalias, importance, notifystring, waitornot, timetowait);
 }
 
-playidleface() {
-}
+playidleface() {}
 
 playfacethread(facialanim, soundalias, importance, notifystring, waitornot, timetowait) {
   if(!isDefined(soundalias)) {
@@ -91,7 +90,7 @@ playfacethread(facialanim, soundalias, importance, notifystring, waitornot, time
     notifystring = "PlayFaceThread " + soundalias;
 
   if(!isDefined(self.a))
-    self.a = spawnstruct();
+    self.a = spawnStruct();
 
   if(!isDefined(self.a.facialsounddone))
     self.a.facialsounddone = 1;
@@ -161,7 +160,7 @@ playfacethread(facialanim, soundalias, importance, notifystring, waitornot, time
     if(isDefined(self.type) && self.type == "human")
       self playsoundontag(soundalias, "J_Head", uniquenotify);
     else
-      self playsound(soundalias, uniquenotify);
+      self playSound(soundalias, uniquenotify);
   }
 
   self waittill_any("death", "cancel speaking", uniquenotify);

@@ -81,8 +81,8 @@ onprecachegametype() {
 init_default_zcleansed_powerups() {
   maps\mp\zombies\_zm_powerups::include_zombie_powerup("the_cure");
   maps\mp\zombies\_zm_powerups::include_zombie_powerup("blue_monkey");
-  maps\mp\zombies\_zm_powerups::add_zombie_powerup("the_cure", "zombie_pickup_perk_bottle", & "ZOMBIE_POWERUP_MAX_AMMO", maps\mp\zombies\_zm_powerups::func_should_never_drop, 0, 0, 1);
-  maps\mp\zombies\_zm_powerups::add_zombie_powerup("blue_monkey", level.cymbal_monkey_model, & "ZOMBIE_POWERUP_MAX_AMMO", maps\mp\zombies\_zm_powerups::func_should_never_drop, 1, 0, 0);
+  maps\mp\zombies\_zm_powerups::add_zombie_powerup("the_cure", "zombie_pickup_perk_bottle", &"ZOMBIE_POWERUP_MAX_AMMO", maps\mp\zombies\_zm_powerups::func_should_never_drop, 0, 0, 1);
+  maps\mp\zombies\_zm_powerups::add_zombie_powerup("blue_monkey", level.cymbal_monkey_model, &"ZOMBIE_POWERUP_MAX_AMMO", maps\mp\zombies\_zm_powerups::func_should_never_drop, 1, 0, 0);
 }
 
 init_cleansed_powerup_fx() {
@@ -284,8 +284,8 @@ custom_end_screen() {
       players[i].survived_hud.y = players[i].survived_hud.y + 40;
     }
 
-    winner_text = & "ZOMBIE_CLEANSED_WIN";
-    loser_text = & "ZOMBIE_CLEANSED_LOSE";
+    winner_text = &"ZOMBIE_CLEANSED_WIN";
+    loser_text = &"ZOMBIE_CLEANSED_LOSE";
 
     if(isDefined(level.host_ended_game) && level.host_ended_game)
       players[i].survived_hud settext(&"MP_HOST_ENDED_GAME");
@@ -500,7 +500,7 @@ zcleansed_logic() {
   level.zombie_include_powerups["carpenter"] = 0;
   level.noroundnumber = 1;
   level._supress_survived_screen = 1;
-  doors = getentarray("zombie_door", "targetname");
+  doors = getEntArray("zombie_door", "targetname");
 
   foreach(door in doors)
   door setinvisibletoall();
@@ -577,8 +577,7 @@ cleansedontimelimit() {
   level notify("normal_game_end");
 }
 
-cleansedonendgame(winningteam) {
-}
+cleansedonendgame(winningteam) {}
 
 create_match_start_message(text, duration) {
   level endon("end_game");
@@ -691,11 +690,9 @@ zombie_ramp_up() {
   self.health = self.maxhealth;
 }
 
-precache_trophy() {
-}
+precache_trophy() {}
 
-create_trophy() {
-}
+create_trophy() {}
 
 give_trophy() {
   if(!self.has_trophy) {
@@ -810,9 +807,9 @@ disappear_in_flash(washuman) {
   playsoundatposition("zmb_bolt", self.origin);
 
   if(washuman)
-    playfx(level._effect["human_disappears"], self.origin);
+    playFX(level._effect["human_disappears"], self.origin);
   else
-    playfx(level._effect["zombie_disappears"], self.origin);
+    playFX(level._effect["zombie_disappears"], self.origin);
 
   self ghost();
 }
@@ -845,8 +842,7 @@ onzombifyplayer() {
   level.in_zombify_call = 1;
   self freezecontrolswrapper(1);
 
-  if(isDefined(self.last_player_attacker) && isplayer(self.last_player_attacker) && (isDefined(self.last_player_attacker.is_zombie) && self.last_player_attacker.is_zombie)) {
-  }
+  if(isDefined(self.last_player_attacker) && isplayer(self.last_player_attacker) && (isDefined(self.last_player_attacker.is_zombie) && self.last_player_attacker.is_zombie)) {}
 
   if(isDefined(self.is_zombie) && self.is_zombie) {
     self check_for_drops(0);
@@ -865,8 +861,7 @@ onzombifyplayer() {
 
   self setclientfield("player_has_eyes", 0);
 
-  if(isDefined(self.is_zombie) && self.is_zombie) {
-  }
+  if(isDefined(self.is_zombie) && self.is_zombie) {}
 
   self notify("zombified");
   self disappear_in_flash(0);
@@ -943,8 +938,7 @@ playerfakedeath(vdir) {
   }
 }
 
-onspawnzombie() {
-}
+onspawnzombie() {}
 
 makefindfleshstructs() {
   structs = getstructarray("spawn_location", "script_noteworthy");
@@ -1088,8 +1082,7 @@ shotgunloadout() {
 
   self setweaponammoclip(self get_player_lethal_grenade(), 2);
 
-  if(!(isDefined(self.random_human) && self.random_human)) {
-  }
+  if(!(isDefined(self.random_human) && self.random_human)) {}
 }
 
 gunprogressionthink() {
@@ -1109,8 +1102,7 @@ gunprogressionthink() {
 
   self setweaponammoclip(self get_player_lethal_grenade(), 2);
 
-  if(!(isDefined(self.random_human) && self.random_human)) {
-  }
+  if(!(isDefined(self.random_human) && self.random_human)) {}
 
   self disableweaponcycling();
 
@@ -1250,8 +1242,7 @@ get_player_rank() {
   players = get_players();
 
   foreach(player in players) {
-    for(index = 0; index < level.player_score_sort.size && player.score < level.player_score_sort[index].score; index++) {
-    }
+    for(index = 0; index < level.player_score_sort.size && player.score < level.player_score_sort[index].score; index++) {}
 
     arrayinsert(level.player_score_sort, player, index);
   }
@@ -1502,7 +1493,7 @@ add_cleansed_powerup(name, powerupmodel, text, team, zombie_death_frequency, hum
     level.statless_powerups[name] = 1;
   }
 
-  powerup = spawnstruct();
+  powerup = spawnStruct();
   powerup.name = name;
   powerup.model = powerupmodel;
   powerup.team = team;
@@ -1514,16 +1505,16 @@ add_cleansed_powerup(name, powerupmodel, text, team, zombie_death_frequency, hum
 
 init_cleansed_powerups() {
   level._effect["powerup_on_solo"] = loadfx("misc/fx_zombie_powerup_on_blue");
-  add_cleansed_powerup("green_nuke", "zombie_bomb", & "ZOMBIE_THIS_IS_A_BUG", 0, 0.4, 0, ::turned_powerup_green_nuke);
-  add_cleansed_powerup("green_double", "zombie_x2_icon", & "ZOMBIE_THIS_IS_A_BUG", 0, 1, 0, ::turned_powerup_green_double);
-  add_cleansed_powerup("green_insta", "zombie_skull", & "ZOMBIE_THIS_IS_A_BUG", 0, 0.1, 0, ::turned_powerup_green_insta);
-  add_cleansed_powerup("green_ammo", "zombie_ammocan", & "ZOMBIE_POWERUP_MAX_AMMO", 0, 1, 0, ::turned_powerup_green_ammo);
-  add_cleansed_powerup("green_monkey", level.cymbal_monkey_model, & "ZOMBIE_THIS_IS_A_BUG", 0, 0.4, 0, ::turned_powerup_green_monkey);
-  add_cleansed_powerup("red_nuke", "zombie_bomb", & "ZOMBIE_THIS_IS_A_BUG", 1, 0, 0.4, ::turned_powerup_red_nuke);
-  add_cleansed_powerup("red_ammo", "zombie_ammocan", & "ZOMBIE_THIS_IS_A_BUG", 1, 0, 1, ::turned_powerup_red_ammo);
-  add_cleansed_powerup("red_double", "zombie_x2_icon", & "ZOMBIE_THIS_IS_A_BUG", 1, 0, 1, ::turned_powerup_red_double);
-  add_cleansed_powerup("yellow_double", "zombie_x2_icon", & "ZOMBIE_THIS_IS_A_BUG", 2, 0.1, 0.1, ::turned_powerup_yellow_double);
-  add_cleansed_powerup("yellow_nuke", "zombie_bomb", & "ZOMBIE_THIS_IS_A_BUG", 2, 0.01, 0.01, ::turned_powerup_yellow_nuke);
+  add_cleansed_powerup("green_nuke", "zombie_bomb", &"ZOMBIE_THIS_IS_A_BUG", 0, 0.4, 0, ::turned_powerup_green_nuke);
+  add_cleansed_powerup("green_double", "zombie_x2_icon", &"ZOMBIE_THIS_IS_A_BUG", 0, 1, 0, ::turned_powerup_green_double);
+  add_cleansed_powerup("green_insta", "zombie_skull", &"ZOMBIE_THIS_IS_A_BUG", 0, 0.1, 0, ::turned_powerup_green_insta);
+  add_cleansed_powerup("green_ammo", "zombie_ammocan", &"ZOMBIE_POWERUP_MAX_AMMO", 0, 1, 0, ::turned_powerup_green_ammo);
+  add_cleansed_powerup("green_monkey", level.cymbal_monkey_model, &"ZOMBIE_THIS_IS_A_BUG", 0, 0.4, 0, ::turned_powerup_green_monkey);
+  add_cleansed_powerup("red_nuke", "zombie_bomb", &"ZOMBIE_THIS_IS_A_BUG", 1, 0, 0.4, ::turned_powerup_red_nuke);
+  add_cleansed_powerup("red_ammo", "zombie_ammocan", &"ZOMBIE_THIS_IS_A_BUG", 1, 0, 1, ::turned_powerup_red_ammo);
+  add_cleansed_powerup("red_double", "zombie_x2_icon", &"ZOMBIE_THIS_IS_A_BUG", 1, 0, 1, ::turned_powerup_red_double);
+  add_cleansed_powerup("yellow_double", "zombie_x2_icon", &"ZOMBIE_THIS_IS_A_BUG", 2, 0.1, 0.1, ::turned_powerup_yellow_double);
+  add_cleansed_powerup("yellow_nuke", "zombie_bomb", &"ZOMBIE_THIS_IS_A_BUG", 2, 0.01, 0.01, ::turned_powerup_yellow_nuke);
   level.cleansed_powerup_history_depth = [];
   level.cleansed_powerup_history_depth[0] = 2;
   level.cleansed_powerup_history_depth[1] = 1;
@@ -1628,7 +1619,7 @@ player_nuke_fx() {
 
   if(isDefined(level._effect) && isDefined(level._effect["character_fire_death_torso"])) {
     if(!self.isdog)
-      playfxontag(level._effect["character_fire_death_torso"], self, "J_SpineLower");
+      playFXOnTag(level._effect["character_fire_death_torso"], self, "J_SpineLower");
   }
 
   if(isDefined(level._effect) && isDefined(level._effect["character_fire_death_sm"])) {
@@ -1639,7 +1630,7 @@ player_nuke_fx() {
     tagarray[2] = "J_Knee_RI";
     tagarray[3] = "J_Knee_LE";
     tagarray = array_randomize(tagarray);
-    playfxontag(level._effect["character_fire_death_sm"], self, tagarray[0]);
+    playFXOnTag(level._effect["character_fire_death_sm"], self, tagarray[0]);
     wait 1;
     tagarray[0] = "J_Wrist_RI";
     tagarray[1] = "J_Wrist_LE";
@@ -1650,8 +1641,8 @@ player_nuke_fx() {
     }
 
     tagarray = array_randomize(tagarray);
-    playfxontag(level._effect["character_fire_death_sm"], self, tagarray[0]);
-    playfxontag(level._effect["character_fire_death_sm"], self, tagarray[1]);
+    playFXOnTag(level._effect["character_fire_death_sm"], self, tagarray[0]);
+    playFXOnTag(level._effect["character_fire_death_sm"], self, tagarray[1]);
   }
 }
 
@@ -1677,7 +1668,7 @@ player_nuke(player) {
 
 turned_powerup_green_nuke(player) {
   location = self.origin;
-  playfx(level.zombie_powerups["nuke"].fx, location);
+  playFX(level.zombie_powerups["nuke"].fx, location);
   level thread maps\mp\zombies\_zm_powerups::nuke_flash();
   players = get_players();
 
@@ -1714,7 +1705,7 @@ turned_powerup_green_monkey(player) {
 
 turned_powerup_red_nuke(player) {
   location = self.origin;
-  playfx(level.zombie_powerups["nuke"].fx, location);
+  playFX(level.zombie_powerups["nuke"].fx, location);
   level thread maps\mp\zombies\_zm_powerups::nuke_flash();
   players = get_players();
 
@@ -1743,7 +1734,7 @@ turned_powerup_yellow_double(player) {
 
 turned_powerup_yellow_nuke(player) {
   location = self.origin;
-  playfx(level.zombie_powerups["nuke"].fx, location);
+  playFX(level.zombie_powerups["nuke"].fx, location);
   level thread maps\mp\zombies\_zm_powerups::nuke_flash();
   players = get_players();
 
@@ -1761,7 +1752,7 @@ playturnedmusic() {
   ent thread stopturnedmusic();
   playsoundatposition("mus_zmb_gamemode_start", (0, 0, 0));
   wait 5;
-  ent playloopsound("mus_zmb_gamemode_loop", 5);
+  ent playLoopSound("mus_zmb_gamemode_loop", 5);
 }
 
 stopturnedmusic() {

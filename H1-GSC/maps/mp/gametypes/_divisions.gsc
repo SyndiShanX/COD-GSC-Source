@@ -8,16 +8,16 @@ checkforseason1start() {
   if(!isvalidplayer()) {
     return;
   }
-  if(isdefined(level.iszombiegame) && level.iszombiegame) {
+  if(isDefined(level.iszombiegame) && level.iszombiegame) {
     return;
   }
-  if(isdefined(level.ishorde) && level.ishorde) {
+  if(isDefined(level.ishorde) && level.ishorde) {
     return;
   }
   if(!maps\mp\_utility::rankingenabled()) {
     return;
   }
-  if(isdefined(self.pers["division"]) && isdefined(self.pers["division"]["seasonStart"])) {
+  if(isDefined(self.pers["division"]) && isDefined(self.pers["division"]["seasonStart"])) {
     return;
   }
   var_0 = self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "currentSeason");
@@ -63,7 +63,7 @@ onnonrankedmatchstart() {
     var_1.pers["division"]["index"] = 0;
   }
 
-  for (;;) {
+  for(;;) {
     level waittill("connected", var_1);
     var_1 checkforseason1start();
     var_1 clearmatchprediction();
@@ -78,7 +78,7 @@ onrankedmatchstart() {
   foreach(var_1 in level.players)
   var_1 thread onplayerconnect();
 
-  for (;;) {
+  for(;;) {
     level waittill("connected", var_1);
     var_1 thread onplayerconnect();
   }
@@ -98,10 +98,10 @@ onplayerconnect() {
 onmatchend() {
   level endon("exitLevel_called");
 
-  for (;;) {
+  for(;;) {
     level waittill("game_win", var_0);
 
-    if(!isdefined(var_0) || var_0 != "axis" && var_0 != "allies" && var_0 != "tie") {
+    if(!isDefined(var_0) || var_0 != "axis" && var_0 != "allies" && var_0 != "tie") {
       continue;
     }
     calculateteammmrs();
@@ -133,7 +133,7 @@ onmatchend() {
 ondivisionwin(var_0) {
   getdivisionpointrange(var_0);
 
-  if(!isdefined(self.pers["division"]["minDP"])) {
+  if(!isDefined(self.pers["division"]["minDP"])) {
     return;
   }
   var_1 = getdivisionpointsdelta(self.pers["division"]["matchPrediction"], "win");
@@ -145,7 +145,7 @@ ondivisionwin(var_0) {
   if(self.pers["division"]["minDP"] == var_0)
     self setplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionRelegationCounter", self.pers["division"]["init"]["relegation"]);
 
-  if(isdefined(self.pers["division"]["maxDP"])) {
+  if(isDefined(self.pers["division"]["maxDP"])) {
     if(self.pers["division"]["maxDP"] == var_0) {
       if(self.pers["division"]["init"]["winBits"] > 0) {
         self setplayerdata(common_scripts\utility::getstatsgroup_ranked(), "division", var_0 + 1);
@@ -163,7 +163,7 @@ ondivisionwin(var_0) {
 ondivisionloss(var_0) {
   getdivisionpointrange(var_0);
 
-  if(!isdefined(self.pers["division"]["minDP"])) {
+  if(!isDefined(self.pers["division"]["minDP"])) {
     return;
   }
   var_1 = getdivisionpointsdelta(self.pers["division"]["matchPrediction"], "loss");
@@ -176,7 +176,7 @@ ondivisionloss(var_0) {
   }
   setplayermmr(var_1);
 
-  if(isdefined(self.pers["division"]["maxDP"]) && self.pers["division"]["maxDP"] == var_0)
+  if(isDefined(self.pers["division"]["maxDP"]) && self.pers["division"]["maxDP"] == var_0)
     return;
   else if(self.pers["division"]["minDP"] == var_0)
     return;
@@ -187,7 +187,7 @@ ondivisionloss(var_0) {
 ondivisiontie(var_0) {
   getdivisionpointrange(var_0);
 
-  if(!isdefined(self.pers["division"]["minDP"])) {
+  if(!isDefined(self.pers["division"]["minDP"])) {
     return;
   }
   var_1 = getdivisionpointsdelta(self.pers["division"]["matchPrediction"], "tie");
@@ -203,7 +203,7 @@ ondivisiontie(var_0) {
   if(self.pers["division"]["minDP"] == var_0)
     self setplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionRelegationCounter", self.pers["division"]["init"]["relegation"]);
 
-  if(isdefined(self.pers["division"]["maxDP"])) {
+  if(isDefined(self.pers["division"]["maxDP"])) {
     if(self.pers["division"]["maxDP"] == var_0) {
       self setplayerdata(common_scripts\utility::getstatsgroup_ranked(), "division", var_0);
       self setplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionChallengePlayed", self.pers["division"]["init"]["playBits"]);
@@ -219,7 +219,7 @@ ondivisiontie(var_0) {
 }
 
 initloss() {
-  if(isdefined(self.pers["division"]) && isdefined(self.pers["division"]["init"])) {
+  if(isDefined(self.pers["division"]) && isDefined(self.pers["division"]["init"])) {
     return;
   }
   clearmatchprediction();
@@ -244,19 +244,17 @@ initloss() {
   self.pers["division"]["dp"] = var_0;
   getdivisionpointrange(var_0);
 
-  if(!isdefined(self.pers["division"]["minDP"])) {
+  if(!isDefined(self.pers["division"]["minDP"])) {
     return;
   }
   setplayermmr(var_1);
 
-  if(isdefined(self.pers["division"]["maxDP"]) && self.pers["division"]["maxDP"] == var_0) {
+  if(isDefined(self.pers["division"]["maxDP"]) && self.pers["division"]["maxDP"] == var_0) {
     self.pers["division"]["losses"]++;
 
     if(self.pers["division"]["losses"] >= 2)
       self setplayerdata(common_scripts\utility::getstatsgroup_ranked(), "division", self.pers["division"]["minDP"] + getdivisionresetoffset());
-    else {
-
-    }
+    else {}
 
     updatedivisionchallengestatus(0);
   } else if(self.pers["division"]["minDP"] == var_0) {
@@ -266,9 +264,7 @@ initloss() {
       if(var_2 >= 3) {
         getdivisionpointrange(var_0 - 1);
         self setplayerdata(common_scripts\utility::getstatsgroup_ranked(), "division", self.pers["division"]["minDP"] + getdivisionresetoffset());
-      } else {
-
-      }
+      } else {}
 
       self setplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionRelegationCounter", var_2);
     }
@@ -281,7 +277,7 @@ updatelockouttime() {
   level endon("game_win");
   self endon("disconnect");
 
-  for (;;) {
+  for(;;) {
     if(isremovedentity(self)) {
       break;
     }
@@ -295,10 +291,10 @@ getdivisionpointrange(var_0) {
   var_1 = tablegetrowcount("mp\divisiontable.csv");
   var_2 = tablelookuprownum("mp\divisiontable.csv", 0, "bronze");
 
-  for (var_3 = var_2; var_3 < var_1; var_3++) {
+  for(var_3 = var_2; var_3 < var_1; var_3++) {
     var_4 = tablelookupbyrow("mp\divisiontable.csv", var_3, 2);
 
-    if(!isdefined(var_4) || var_4 == "") {
+    if(!isDefined(var_4) || var_4 == "") {
       self.pers["division"]["minDP"] = int(tablelookupbyrow("mp\divisiontable.csv", var_3, 1));
       self.pers["division"]["maxDP"] = undefined;
       self.pers["division"]["index"] = var_3 - var_2;
@@ -325,7 +321,7 @@ getdivisionchallengestatus() {
   var_2 = 0;
   var_3 = 0;
 
-  for (var_4 = 0; var_4 < 3; var_4++) {
+  for(var_4 = 0; var_4 < 3; var_4++) {
     if(var_0 >> var_4 & 1) {
       if(var_1 >> var_4 & 1)
         var_2++;
@@ -407,10 +403,10 @@ calculateteammmrs() {
     if(!var_2 isvalidplayer()) {
       continue;
     }
-    if(!isdefined(var_2.team) || var_2.team != "allies" && var_2.team != "axis") {
+    if(!isDefined(var_2.team) || var_2.team != "allies" && var_2.team != "axis") {
       continue;
     }
-    if(!isdefined(var_2.pers["division"]["init"]["MMR"])) {
+    if(!isDefined(var_2.pers["division"]["init"]["MMR"])) {
       continue;
     }
     var_0[var_2.team]++;
@@ -425,14 +421,14 @@ calculateteammmrs() {
 }
 
 calculatematchprediction() {
-  if(!isdefined(self.pers["division"]["init"]["MMR"])) {
+  if(!isDefined(self.pers["division"]["init"]["MMR"])) {
     return;
   }
   var_0 = self.pers["division"]["init"]["MMR"];
   var_1 = var_0;
   self.pers["division"]["matchPrediction"] = "tie";
 
-  if(!isdefined(self.team))
+  if(!isDefined(self.team))
     return;
   else if(self.team == "axis")
     var_1 = level.teammmr["allies"];
@@ -465,7 +461,7 @@ getdivisionresetoffset() {
 }
 
 setplayermmr(var_0) {
-  if(!isdefined(self.pers["division"]["init"]["MMR"])) {
+  if(!isDefined(self.pers["division"]["init"]["MMR"])) {
     return;
   }
   var_1 = self.pers["division"]["init"]["MMR"];
@@ -486,12 +482,12 @@ checkforfeit() {
   var_0["axis"] = 0;
 
   foreach(var_2 in level.players) {
-    if(isdefined(var_2.team) && isdefined(var_0[var_2.team]))
+    if(isDefined(var_2.team) && isDefined(var_0[var_2.team]))
       var_0[var_2.team]++;
   }
 
   foreach(var_2 in level.players) {
-    if(isdefined(var_2.team)) {
+    if(isDefined(var_2.team)) {
       if(var_2.team == "allies" && var_0["axis"] == 0) {
         var_2.pers["division"]["wonByForfeit"] = 1;
         continue;

@@ -221,7 +221,7 @@ set_knocked_out(suffix, snapshot) {
 bridge_walla_on_off() {
   wait 2;
   ent = spawn(0, (323, 984, 500), "script_origin");
-  ent playloopsound("amb_walla_fighting_loud", 1);
+  ent playLoopSound("amb_walla_fighting_loud", 1);
   level waittill("stop_Bwalla");
   wait 3;
   ent stoploopsound(5);
@@ -250,10 +250,10 @@ walla_vignettes() {
     level thread play_walla_vignettes(location[i], undefined);
 
   oneshot = [];
-  oneshot[0] = spawnstruct();
+  oneshot[0] = spawnStruct();
   oneshot[0].location = (2343, 915, -250);
   oneshot[0].alias = "amb_walla_execution";
-  oneshot[1] = spawnstruct();
+  oneshot[1] = spawnStruct();
   oneshot[1].location = (1744, 2602, -475);
   oneshot[1].alias = "amb_walla_crying";
 
@@ -268,7 +268,7 @@ play_walla_vignettes(array_value, oneshot) {
     while(distance(player.origin, array_value.location) > 200)
       wait 0.5;
 
-    playsound(0, array_value.alias, array_value.location);
+    playSound(0, array_value.alias, array_value.location);
     return;
   }
 
@@ -328,7 +328,7 @@ interrogation_lightflicker() {
 
 play_flicker(light, power) {
   level endon("INT_out");
-  light_id = light playloopsound("amb_interrogation_light", 2);
+  light_id = light playLoopSound("amb_interrogation_light", 2);
   setsoundvolume(light_id, 0.8);
   setsoundpitch(light_id, 1);
 
@@ -342,7 +342,7 @@ play_flicker(light, power) {
 
 play_off(light, power) {
   level waittill("INT_out");
-  playsound(0, "amb_interrogation_power_down", power.origin);
+  playSound(0, "amb_interrogation_power_down", power.origin);
   light delete();
   power delete();
 }
@@ -357,19 +357,19 @@ make_flicker_change(id, volume, pitch, rate, waittime) {
 
 play_generator(ent) {
   level endon("INT_out");
-  ent_id = ent playloopsound("amb_interrogation_power", 2);
+  ent_id = ent playLoopSound("amb_interrogation_power", 2);
   setsoundvolume(ent_id, 1);
   setsoundpitch(ent_id, 1);
 
   while(true) {
     level waittill("INT_flick");
-    playsound(0, "amb_interrogation_power_down", ent.origin);
+    playSound(0, "amb_interrogation_power_down", ent.origin);
     setsoundvolumerate(ent_id, 0.2);
     setsoundpitchrate(ent_id, 0.2);
     setsoundvolume(ent_id, 0);
     setsoundpitch(ent_id, 0.5);
     wait 2.5;
-    playsound(0, "amb_interrogation_power_up", ent.origin);
+    playSound(0, "amb_interrogation_power_up", ent.origin);
     setsoundvolumerate(ent_id, 0.8);
     setsoundpitchrate(ent_id, 0.8);
     setsoundvolume(ent_id, 1);
@@ -385,14 +385,14 @@ play_ceiling_water_splash() {
 
 snd_commotion_start() {
   sound_ent_commotion = spawn(0, (317, 318, 344), "script_origin");
-  sound_ent_commotion playloopsound("amb_commotion_chat", 2);
+  sound_ent_commotion playLoopSound("amb_commotion_chat", 2);
   level waittill("snd_argument");
   wait 41;
   sound_ent_commotion stoploopsound(8);
-  playsound(0, "amb_commotion_argument", sound_ent_commotion.origin);
+  playSound(0, "amb_commotion_argument", sound_ent_commotion.origin);
   snd_set_snapshot("default");
   level waittill("argument_done");
-  sound_ent_commotion playloopsound("amb_ship_alarm", 0.1);
+  sound_ent_commotion playLoopSound("amb_ship_alarm", 0.1);
 }
 
 sndmaskoff() {

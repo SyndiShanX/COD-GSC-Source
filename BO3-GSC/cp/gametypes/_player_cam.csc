@@ -14,9 +14,9 @@
 #namespace namespace_5f11fb0b;
 
 function autoexec main() {
-  clientfield::register("toplayer", "player_cam_blur", 1, 1, "int", & player_cam_blur, 0, 1);
-  clientfield::register("toplayer", "player_cam_bubbles", 1, 1, "int", & player_cam_bubbles, 0, 1);
-  clientfield::register("toplayer", "player_cam_fire", 1, 1, "int", & player_cam_fire, 0, 1);
+  clientfield::register("toplayer", "player_cam_blur", 1, 1, "int", &player_cam_blur, 0, 1);
+  clientfield::register("toplayer", "player_cam_bubbles", 1, 1, "int", &player_cam_bubbles, 0, 1);
+  clientfield::register("toplayer", "player_cam_fire", 1, 1, "int", &player_cam_fire, 0, 1);
 }
 
 function player_cam_blur(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -33,7 +33,7 @@ function function_db5afebe(localclientnum) {
   self endon("disconnect");
   self endon("hash_64e72e9d");
   blur_level = 0.5;
-  while (blur_level <= 1) {
+  while(blur_level <= 1) {
     blur_level = blur_level + 0.04;
     blurandtint_fx(localclientnum, 1, blur_level);
     wait(0.05);
@@ -42,12 +42,12 @@ function function_db5afebe(localclientnum) {
 
 function player_cam_bubbles(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1 && !getinkillcam(localclientnum)) {
-    if(isdefined(self.n_fx_id)) {
+    if(isDefined(self.n_fx_id)) {
       deletefx(localclientnum, self.n_fx_id, 1);
     }
     self.n_fx_id = playfxoncamera(localclientnum, "player/fx_plyr_swim_bubbles_body", (0, 0, 0), (1, 0, 0), (0, 0, 1));
     self playrumbleonentity(localclientnum, "damage_heavy");
-  } else if(isdefined(self.n_fx_id)) {
+  } else if(isDefined(self.n_fx_id)) {
     deletefx(localclientnum, self.n_fx_id, 1);
   }
 }

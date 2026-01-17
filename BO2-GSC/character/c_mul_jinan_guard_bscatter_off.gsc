@@ -4,7 +4,7 @@
 ***********************************************************/
 
 main() {
-  self setmodel("c_mul_jinan_guard_bscatter_off_fb");
+  self setModel("c_mul_jinan_guard_bscatter_off_fb");
   self.voice = "terrorist";
   self.skeleton = "base";
 }

@@ -165,10 +165,10 @@ so_hidden_init() {
   thread objective_set_chopper();
 
   // Give player a chance to not be seen through windows.	
-  array_thread(getentarray("clip_nosight", "targetname"), ::clip_nosight_wait_for_activate);
+  array_thread(getEntArray("clip_nosight", "targetname"), ::clip_nosight_wait_for_activate);
 
   // Open up the church doorway.
-  church_doors = getentarray("church_door_front", "targetname");
+  church_doors = getEntArray("church_door_front", "targetname");
   foreach(door in church_doors) {
     door ConnectPaths();
     door Delete();
@@ -241,7 +241,7 @@ start_so_hidden_gogogo(start_id) {
 
 so_hidden_setup_regular() {
   obj = getstruct("so_hidden_obj_church", "script_noteworthy");
-  objective_add(1, "current", & "SO_HIDDEN_SO_GHILLIES_OBJ_REGULAR", obj.origin);
+  objective_add(1, "current", &"SO_HIDDEN_SO_GHILLIES_OBJ_REGULAR", obj.origin);
 
   level.coop_difficulty_scalar = 0.75;
 
@@ -264,7 +264,7 @@ so_hidden_setup_regular() {
 
 so_hidden_setup_hardened() {
   obj = getstruct("so_hidden_obj_church", "script_noteworthy");
-  objective_add(1, "current", & "SO_HIDDEN_SO_GHILLIES_OBJ_HARDENED", obj.origin);
+  objective_add(1, "current", &"SO_HIDDEN_SO_GHILLIES_OBJ_HARDENED", obj.origin);
 
   level.coop_difficulty_scalar = 0.33;
 
@@ -287,7 +287,7 @@ so_hidden_setup_hardened() {
 
 so_hidden_setup_veteran() {
   obj = getstruct("so_hidden_obj_church", "script_noteworthy");
-  objective_add(1, "current", & "SO_HIDDEN_SO_GHILLIES_OBJ_VETERAN", obj.origin);
+  objective_add(1, "current", &"SO_HIDDEN_SO_GHILLIES_OBJ_VETERAN", obj.origin);
 
   level.coop_difficulty_scalar = 0.25;
 
@@ -379,9 +379,9 @@ custom_eog_summary() {
 stealth_achievement() {
   flag_wait("so_hidden_complete");
 
-  if(!stealth_achieved())
+  if(!stealth_achieved()) {
     return;
-
+  }
   foreach(player in level.players) {
     // No achievement for individual players unless they made at least one perfect kill.
     if(player.kills_stealth > 0)

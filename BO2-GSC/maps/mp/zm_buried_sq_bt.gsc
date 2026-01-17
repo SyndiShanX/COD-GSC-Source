@@ -106,7 +106,7 @@ stage_vo_nag() {
   level endon("end_game_reward_starts_richtofen");
   s_struct = getstruct("sq_gallows", "targetname");
   m_maxis_vo_spot = spawn("script_model", s_struct.origin);
-  m_maxis_vo_spot setmodel("tag_origin");
+  m_maxis_vo_spot setModel("tag_origin");
 
   for(i = 0; i < 5; i++) {
     level waittill("end_of_round");
@@ -144,7 +144,7 @@ stage_vo_watch_gallows() {
   trigger waittill("trigger");
   trigger delete();
   m_maxis_vo_spot = spawn("script_model", s_struct.origin);
-  m_maxis_vo_spot setmodel("tag_origin");
+  m_maxis_vo_spot setModel("tag_origin");
 
   if(flag("sq_intro_vo_done"))
     maxissay("vox_maxi_sidequest_gallows_0", m_maxis_vo_spot);
@@ -193,5 +193,4 @@ wait_for_richtofen_tower() {
   flag_set("sq_is_ric_tower_built");
 }
 
-exit_stage(success) {
-}
+exit_stage(success) {}

@@ -6,7 +6,6 @@
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\util_shared;
-
 #namespace namespace_1e38a8f6;
 
 init() {
@@ -44,7 +43,7 @@ function_9e94a567() {
     }
 
     foreach(team, _ in level.teams) {
-      team_score = game.stat[#"teamscores"][team];
+      team_score = game.stat[# "teamscores"][team];
 
       if(team_score > score) {
         score = team_score;

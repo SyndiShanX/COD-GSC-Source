@@ -71,7 +71,7 @@ function main() {
   setdvar("vengeance_save", "1");
   level thread vengeance_temple::function_38bcd0();
   level thread vengeance_market::function_bd50a158();
-  spawners = getentarray();
+  spawners = getEntArray();
   foreach(spawner in spawners) {
     if(isspawner(spawner)) {
       spawner notify("aigroup_spawner_death");
@@ -80,14 +80,14 @@ function main() {
   var_6a07eb6c = [];
   var_6a07eb6c[0] = "hanging_body_loop_civ";
   var_6a07eb6c[1] = "hanging_body_loop_civ_rope";
-  scene::add_scene_func("cin_ven_hanging_body_loop_vign_civ02", & vengeance_util::function_65a61b78, "play", var_6a07eb6c);
-  scene::add_scene_func("cin_ven_hanging_body_loop_vign_civ03", & vengeance_util::function_65a61b78, "play", var_6a07eb6c);
-  scene::add_scene_func("cin_ven_hanging_body_loop_vign_civ05", & vengeance_util::function_65a61b78, "play", var_6a07eb6c);
-  scene::add_scene_func("cin_ven_hanging_body_loop_vign_civ06", & vengeance_util::function_65a61b78, "play", var_6a07eb6c);
-  scene::add_scene_func("cin_ven_hanging_body_loop_vign_civ07", & vengeance_util::function_65a61b78, "play", var_6a07eb6c);
-  scene::add_scene_func("cin_ven_hanging_body_loop_vign_civ07ropeshort", & vengeance_util::function_65a61b78, "play", var_6a07eb6c);
-  scene::add_scene_func("cin_ven_hanging_body_loop_vign_civ08", & vengeance_util::function_65a61b78, "play", var_6a07eb6c);
-  scene::add_scene_func("cin_ven_hanging_body_loop_vign_civ09", & vengeance_util::function_65a61b78, "play", var_6a07eb6c);
+  scene::add_scene_func("cin_ven_hanging_body_loop_vign_civ02", &vengeance_util::function_65a61b78, "play", var_6a07eb6c);
+  scene::add_scene_func("cin_ven_hanging_body_loop_vign_civ03", &vengeance_util::function_65a61b78, "play", var_6a07eb6c);
+  scene::add_scene_func("cin_ven_hanging_body_loop_vign_civ05", &vengeance_util::function_65a61b78, "play", var_6a07eb6c);
+  scene::add_scene_func("cin_ven_hanging_body_loop_vign_civ06", &vengeance_util::function_65a61b78, "play", var_6a07eb6c);
+  scene::add_scene_func("cin_ven_hanging_body_loop_vign_civ07", &vengeance_util::function_65a61b78, "play", var_6a07eb6c);
+  scene::add_scene_func("cin_ven_hanging_body_loop_vign_civ07ropeshort", &vengeance_util::function_65a61b78, "play", var_6a07eb6c);
+  scene::add_scene_func("cin_ven_hanging_body_loop_vign_civ08", &vengeance_util::function_65a61b78, "play", var_6a07eb6c);
+  scene::add_scene_func("cin_ven_hanging_body_loop_vign_civ09", &vengeance_util::function_65a61b78, "play", var_6a07eb6c);
   collectibles::function_93523442("p7_nc_sin_ven_01", 60, vectorscale((0, 0, 1), 15));
   collectibles::function_93523442("p7_nc_sin_ven_02", 90, vectorscale((1, 0, 1), 15));
   collectibles::function_93523442("p7_nc_sin_ven_03", 90, (-15, -15, 35));
@@ -219,28 +219,28 @@ function init_flags() {
 }
 
 function setup_skiptos() {
-  skipto::add("intro", & vengeance_intro::skipto_intro_init, "Intro", & vengeance_intro::skipto_intro_done);
-  skipto::add_dev("dev_apartment", & vengeance_intro::function_5cb54255, "Apartment", & vengeance_intro::function_4762cf8f);
-  skipto::function_d68e678e("takedown", & vengeance_intro::skipto_takedown_init, "Takedown", & vengeance_intro::skipto_takedown_done);
-  skipto::function_d68e678e("killing_streets", & vengeance_killing_streets::skipto_killing_streets_init, "Killing Streets", & vengeance_killing_streets::skipto_killing_streets_done);
-  skipto::function_d68e678e("dogleg_1", & vengeance_dogleg_1::skipto_dogleg_1_init, "Dogleg 1", & vengeance_dogleg_1::skipto_dogleg_1_done);
-  skipto::function_d68e678e("quadtank_alley", & vengeance_quadtank_alley::skipto_quadtank_alley_init, "Quadtank Alley", & vengeance_quadtank_alley::skipto_quadtank_alley_done);
-  skipto::function_d68e678e("temple", & vengeance_temple::skipto_temple_init, "Temple Arena", & vengeance_temple::skipto_temple_done);
-  skipto::function_d68e678e("dogleg_2", & vengeance_dogleg_2::skipto_dogleg_2_init, "Dogleg 2", & vengeance_dogleg_2::skipto_dogleg_2_done);
-  skipto::function_d68e678e("garage_igc", & vengeance_garage::function_b17357cc, "Parking Garage IGC", & vengeance_garage::function_608352d2);
-  skipto::add_dev("dev_garage", & vengeance_garage::function_63a4033a, "Parking Garage Arena", & vengeance_garage::function_a55eff44);
-  skipto::function_d68e678e("quad_battle", & vengeance_market::skipto_quad_init, "Quad Tank Battle", & vengeance_market::skipto_quad_done);
-  skipto::function_d68e678e("safehouse_plaza", & vengeance_market::skipto_plaza_init, "Plaza Combat", & vengeance_market::skipto_plaza_done);
-  skipto::function_d68e678e("safehouse_explodes", & vengeance_safehouse::function_26524bc8, "Safehouse Explodes", & vengeance_safehouse::function_683ab16e);
-  skipto::add_dev("dev_safehouse_interior", & vengeance_safehouse::function_29dad6e8, "Safehouse Interior", & vengeance_safehouse::function_6bc33c8e);
-  skipto::function_d68e678e("panic_room", & vengeance_safehouse::skipto_panic_init, "Panic Room Scene", & vengeance_safehouse::skipto_panic_done);
-  skipto::add_dev("", & vengeance_intro::function_616e9ab6, "");
-  skipto::add_dev("", & vengeance_intro::function_8771151f, "");
-  skipto::add_dev("", & vengeance_intro::function_7d5fbc40, "");
+  skipto::add("intro", &vengeance_intro::skipto_intro_init, "Intro", &vengeance_intro::skipto_intro_done);
+  skipto::add_dev("dev_apartment", &vengeance_intro::function_5cb54255, "Apartment", &vengeance_intro::function_4762cf8f);
+  skipto::function_d68e678e("takedown", &vengeance_intro::skipto_takedown_init, "Takedown", &vengeance_intro::skipto_takedown_done);
+  skipto::function_d68e678e("killing_streets", &vengeance_killing_streets::skipto_killing_streets_init, "Killing Streets", &vengeance_killing_streets::skipto_killing_streets_done);
+  skipto::function_d68e678e("dogleg_1", &vengeance_dogleg_1::skipto_dogleg_1_init, "Dogleg 1", &vengeance_dogleg_1::skipto_dogleg_1_done);
+  skipto::function_d68e678e("quadtank_alley", &vengeance_quadtank_alley::skipto_quadtank_alley_init, "Quadtank Alley", &vengeance_quadtank_alley::skipto_quadtank_alley_done);
+  skipto::function_d68e678e("temple", &vengeance_temple::skipto_temple_init, "Temple Arena", &vengeance_temple::skipto_temple_done);
+  skipto::function_d68e678e("dogleg_2", &vengeance_dogleg_2::skipto_dogleg_2_init, "Dogleg 2", &vengeance_dogleg_2::skipto_dogleg_2_done);
+  skipto::function_d68e678e("garage_igc", &vengeance_garage::function_b17357cc, "Parking Garage IGC", &vengeance_garage::function_608352d2);
+  skipto::add_dev("dev_garage", &vengeance_garage::function_63a4033a, "Parking Garage Arena", &vengeance_garage::function_a55eff44);
+  skipto::function_d68e678e("quad_battle", &vengeance_market::skipto_quad_init, "Quad Tank Battle", &vengeance_market::skipto_quad_done);
+  skipto::function_d68e678e("safehouse_plaza", &vengeance_market::skipto_plaza_init, "Plaza Combat", &vengeance_market::skipto_plaza_done);
+  skipto::function_d68e678e("safehouse_explodes", &vengeance_safehouse::function_26524bc8, "Safehouse Explodes", &vengeance_safehouse::function_683ab16e);
+  skipto::add_dev("dev_safehouse_interior", &vengeance_safehouse::function_29dad6e8, "Safehouse Interior", &vengeance_safehouse::function_6bc33c8e);
+  skipto::function_d68e678e("panic_room", &vengeance_safehouse::skipto_panic_init, "Panic Room Scene", &vengeance_safehouse::skipto_panic_done);
+  skipto::add_dev("", &vengeance_intro::function_616e9ab6, "");
+  skipto::add_dev("", &vengeance_intro::function_8771151f, "");
+  skipto::add_dev("", &vengeance_intro::function_7d5fbc40, "");
   level.skipto_triggers = [];
-  a_trigs = getentarray("objective", "targetname");
+  a_trigs = getEntArray("objective", "targetname");
   foreach(trig in a_trigs) {
-    if(isdefined(trig.script_objective)) {
+    if(isDefined(trig.script_objective)) {
       level.skipto_triggers[trig.script_objective] = trig;
     }
   }

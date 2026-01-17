@@ -13,7 +13,7 @@ planeSounds(localClientNum, spawnSound, flybySound, flybySoundLoop) {
   fake_ent_plane = spawnfakeent(0);
   if(!isDefined(fake_ent_plane))
     return;
-  playsound(0, spawnSound, (0, 0, 0));
+  playSound(0, spawnSound, (0, 0, 0));
   thread plane_position_updater(localClientNum, fake_ent_plane, self, flybySound, flybySoundLoop);
 }
 plane_position_updater(localClientNum, fake_ent, plane, flybySound, flybySoundLoop) {
@@ -22,7 +22,7 @@ plane_position_updater(localClientNum, fake_ent, plane, flybySound, flybySoundLo
   lastTime = undefined;
   lastPos = undefined;
   startTime = 0;
-  while (isDefined(plane)) {
+  while(isDefined(plane)) {
     setfakeentorg(0, fake_ent, plane.origin);
     if((soundid < 0) && isDefined(lastPos)) {
       dx = plane.origin - lastPos;
@@ -39,9 +39,9 @@ plane_position_updater(localClientNum, fake_ent, plane, flybySound, flybySoundLo
         time = dist / length(velocity);
         assert(isDefined(time));
         if(isDefined(flybysoundloop) && isDefined(fake_ent))
-          soundid = playloopsound(0, fake_ent, flybySoundLoop, 0);
+          soundid = playLoopSound(0, fake_ent, flybySoundLoop, 0);
         if(isDefined(flybySound))
-          plane playsound(0, flybySound);
+          plane playSound(0, flybySound);
         startTime = getRealTime();
       }
     }
@@ -105,7 +105,7 @@ planeTurn(localClientNum, plane, yaw, halfLife, startTime, isTurningRight) {
   looptime = 0.1;
   waitAmount = 0.1;
   waitForMoveDone = false;
-  while (loopTime <= halflife) {
+  while(loopTime <= halflife) {
     if(plane.angles[1] == 360)
       plane.angles = (plane.angles[0], 0, plane.angles[2]);
     if(minRoll != -1 && plane.angles[2] >= minRoll * turnDirection)
@@ -139,7 +139,7 @@ planeTurn(localClientNum, plane, yaw, halfLife, startTime, isTurningRight) {
   z = getDvarFloatDefault(#"scr_planez2", -1.5);
   maxy = getDvarFloatDefault(#"scr_max_planey2", 90);
   accumTurn = 0;
-  while (loopTime < halflife + halflife) {
+  while(loopTime < halflife + halflife) {
     if(plane.angles[1] == 360)
       plane.angles = (plane.angles[0], 0, plane.angles[2]);
     if(minRoll != -1 && plane.angles[2] >= 0)
@@ -183,7 +183,7 @@ doABarrelRoll(localClientNum, plane, endPoint, flytime, startTime) {
   waitForMoveDone = false;
   angles = plane.angles;
   originalRoll = plane.angles[2];
-  while (timeElapsed < flytime) {
+  while(timeElapsed < flytime) {
     timeElapsed += waitAmount;
     if((timeElapsed > loopWaitTime) && (degreesRolled < degreesToRoll)) {
       pitch = degreesRolled / 8;

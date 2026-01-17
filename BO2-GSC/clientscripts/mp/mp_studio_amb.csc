@@ -50,8 +50,7 @@ main() {
   thread snd_start_autofx_audio();
 }
 
-snd_play_loopers() {
-}
+snd_play_loopers() {}
 
 snd_start_autofx_audio() {
   snd_play_auto_fx("fx_mp_studio_fire_md", "amb_fire_med", 0, 0, 0, 0);

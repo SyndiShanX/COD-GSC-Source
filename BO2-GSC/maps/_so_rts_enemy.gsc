@@ -235,7 +235,7 @@ delay_trigger_think() {
 }
 
 enemy_unit_delayzones() {
-  delayzones = getentarray("rts_unit_delay", "targetname");
+  delayzones = getEntArray("rts_unit_delay", "targetname");
 
   foreach(zone in delayzones)
   zone thread delay_trigger_think();
@@ -331,7 +331,7 @@ createunit(ai_array, center) {
   if(!isDefined(ai_array) || ai_array.size == 0)
     return undefined;
 
-  unit = spawnstruct();
+  unit = spawnStruct();
   unit.members = ai_array;
   unit.unitid = level.rts.enemy_units_nextid;
   unit.poi = undefined;
@@ -422,9 +422,7 @@ chase_downsquads(unit, targetid) {
   level endon("chase_DownSquads" + unit.unitid);
 
   if(isDefined(level.rts.chase_logic_override)) {
-    [
-      [level.rts.chase_logic_override]
-    ](unit);
+    [[level.rts.chase_logic_override]](unit);
     return;
   }
 
@@ -721,9 +719,7 @@ unitthink(unit, poi) {
   level endon("rts_terminated");
 
   if(isDefined(level.rts.enemy_unitthinkcb)) {
-    [
-      [level.rts.enemy_unitthinkcb]
-    ](unit, poi);
+    [[level.rts.enemy_unitthinkcb]](unit, poi);
     return;
   }
 
@@ -840,7 +836,7 @@ order_new_squad(squadid) {
 
 get_best_poi_target(unit) {
   foreach(poi in level.rts.poi) {
-    poi.score = spawnstruct();
+    poi.score = spawnStruct();
     poi.score.defenders = 0;
     poi.score.totalscore = 0;
   }

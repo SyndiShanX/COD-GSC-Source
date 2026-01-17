@@ -2262,9 +2262,7 @@ build_aianims_override(var_0, var_1, var_2) {
   level.vehicle_aianims[var_0] = [[var_1]]();
 
   if(isDefined(var_2))
-    level.vehicle_aianims[var_0] = [
-      [var_2]
-    ](level.vehicle_aianims[var_0]);
+    level.vehicle_aianims[var_0] = [[var_2]](level.vehicle_aianims[var_0]);
 }
 
 enemy_radio_battle_loop() {
@@ -3704,11 +3702,11 @@ objectives() {
     case "kitchen":
     case "bar":
     case "floor":
-      objective_add(1, "current", & "LAS_VEGAS_OBJECTIVE_ESCAPE");
+      objective_add(1, "current", &"LAS_VEGAS_OBJECTIVE_ESCAPE");
     case "exfil":
     case "entrance_combat":
       common_scripts\utility::flag_wait("dog_pickup_ready");
-      objective_add(1, "current", & "LAS_VEGAS_OBJECTIVE_CARRY_RILEY");
+      objective_add(1, "current", &"LAS_VEGAS_OBJECTIVE_CARRY_RILEY");
       objective_onentity(1, level.dog, (0, 0, 20));
       common_scripts\utility::flag_wait("exfil_reached");
       wait 2;

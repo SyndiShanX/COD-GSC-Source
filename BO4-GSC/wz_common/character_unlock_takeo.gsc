@@ -13,11 +13,10 @@
 #include scripts\mp_common\teams\teams;
 #include scripts\wz_common\character_unlock;
 #include scripts\wz_common\character_unlock_fixup;
-
 #namespace character_unlock_takeo;
 
 autoexec __init__system__() {
-  system::register(#"character_unlock_takeo", &__init__, undefined, #"character_unlock_takeo_fixup");
+  system::register(#"character_unlock_takeo", &__init__, undefined, # "character_unlock_takeo_fixup");
 }
 
 __init__() {
@@ -89,15 +88,15 @@ function_d5cd583a(activator, laststate, state) {
 function_1c4b5097(item) {
   itementry = item.itementry;
 
-  if(itementry.name === #"cu18_item") {
+  if(itementry.name === # "cu18_item") {
     if(self character_unlock::function_f0406288(#"takeo_unlock")) {
       self function_895b40e4();
-      self character_unlock::function_c8beca5e(#"takeo_unlock", #"hash_56b5eb94fb75cbed", 1);
+      self character_unlock::function_c8beca5e(#"takeo_unlock", # "hash_56b5eb94fb75cbed", 1);
       self.var_b5d833a4 = 1;
       var_c503939b = globallogic::function_e9e52d05();
 
       if(var_c503939b <= function_c816ea5b()) {
-        self character_unlock::function_c8beca5e(#"takeo_unlock", #"hash_56b5e894fb75c6d4", 1);
+        self character_unlock::function_c8beca5e(#"takeo_unlock", # "hash_56b5e894fb75c6d4", 1);
       }
     }
   }
@@ -114,9 +113,9 @@ on_item_use(params) {
 
   item = params.item;
 
-  if(isDefined(item.itementry) && item.itementry.itemtype === #"equipment") {
+  if(isDefined(item.itementry) && item.itementry.itemtype === # "equipment") {
     if(self character_unlock::function_c70bcc7a(#"takeo_unlock")) {
-      self character_unlock::function_c8beca5e(#"takeo_unlock", #"hash_56b5eb94fb75cbed", 2);
+      self character_unlock::function_c8beca5e(#"takeo_unlock", # "hash_56b5eb94fb75cbed", 2);
       self.var_979273e3 = 1;
     }
   }
@@ -136,7 +135,7 @@ function_4ac25840(dead_team) {
 
         foreach(player in players) {
           if(player character_unlock::function_f0406288(#"takeo_unlock")) {
-            player character_unlock::function_c8beca5e(#"takeo_unlock", #"hash_56b5e894fb75c6d4", 1);
+            player character_unlock::function_c8beca5e(#"takeo_unlock", # "hash_56b5e894fb75c6d4", 1);
           }
         }
       }
@@ -146,7 +145,7 @@ function_4ac25840(dead_team) {
   }
 }
 
-private function_c816ea5b() {
+function_c816ea5b() {
   maxteamplayers = isDefined(getgametypesetting(#"maxteamplayers")) ? getgametypesetting(#"maxteamplayers") : 1;
 
   switch (maxteamplayers) {
@@ -162,6 +161,6 @@ private function_c816ea5b() {
   }
 }
 
-private function_895b40e4() {
+function_895b40e4() {
   self playsoundtoplayer(#"hash_1c5c27cafefddb2f", self);
 }

@@ -52,7 +52,7 @@ crawler_action() {
       continue;
     }
 
-    vec_forward = vectornormalize(anglestoforward(self.crawler.angles));
+    vec_forward = vectornormalize(anglesToForward(self.crawler.angles));
     start_pos = self.crawler.origin - vec_forward * sloth_offset;
     raised_start_pos = (start_pos[0], start_pos[1], start_pos[2] + sloth_offset);
     ground_pos = groundpos(raised_start_pos);
@@ -179,7 +179,7 @@ crawler_action() {
 
   if(isDefined(self.crawler)) {
     self.crawler dodamage(self.crawler.health * 10, self.crawler.origin);
-    self.crawler playsound("zmb_ai_sloth_attack_impact");
+    self.crawler playSound("zmb_ai_sloth_attack_impact");
   }
 
   self.sloth_damage_func = undefined;

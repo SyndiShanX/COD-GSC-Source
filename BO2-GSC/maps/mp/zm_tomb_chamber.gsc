@@ -16,7 +16,7 @@ main() {
 }
 
 inits() {
-  a_walls = getentarray("chamber_wall", "script_noteworthy");
+  a_walls = getEntArray("chamber_wall", "script_noteworthy");
 
   foreach(e_wall in a_walls) {
     e_wall.down_origin = e_wall.origin;
@@ -68,7 +68,7 @@ cap_value(val, min, max) {
 
 chamber_wall_dust() {
   for(i = 1; i <= 9; i++) {
-    playfxontag(level._effect["crypt_wall_drop"], self, "tag_fx_dust_0" + i);
+    playFXOnTag(level._effect["crypt_wall_drop"], self, "tag_fx_dust_0" + i);
     wait_network_frame();
   }
 }
@@ -80,7 +80,7 @@ chamber_change_walls(n_element) {
   e_current_wall = undefined;
   e_new_wall = undefined;
   playsoundatposition("zmb_chamber_wallchange", (10342, -7921, -272));
-  a_walls = getentarray("chamber_wall", "script_noteworthy");
+  a_walls = getEntArray("chamber_wall", "script_noteworthy");
 
   foreach(e_wall in a_walls) {
     if(e_wall.script_int == n_element) {

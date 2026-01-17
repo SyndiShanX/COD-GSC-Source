@@ -35,9 +35,9 @@ generic_pulsing(clientNum) {
   transition_off = .6;
   increment_on = (on - off) / (transition_on / .05);
   increment_off = (on - off) / (transition_off / .05);
-  for (;;) {
+  for(;;) {
     time = 0;
-    while ((time < transition_off)) {
+    while((time < transition_off)) {
       curr -= increment_off;
       self.lights[clientNum] setLightIntensity(curr);
       time += .05;
@@ -45,7 +45,7 @@ generic_pulsing(clientNum) {
     }
     wait(1);
     time = 0;
-    while (time < transition_on) {
+    while(time < transition_on) {
       curr += increment_on;
       self.lights[clientNum] setLightIntensity(curr);
       time += .05;
@@ -63,10 +63,10 @@ ber3b_firelight(clientNum) {
   assertex(isDefined(self.lights) && isDefined(self.lights[clientNum]), "Light not setup before script thread run on it.");
   full = self.lights[clientNum] GetLightIntensity();
   old_intensity = full;
-  while (1) {
+  while(1) {
     intensity = RandomFloatRange(full * 0.63, full * 1.2);
     timer = RandomFloatRange(2, 5);
-    for (i = 0; i < timer; i++) {
+    for(i = 0; i < timer; i++) {
       new_intensity = intensity * (i / timer) + old_intensity * ((timer - i) / timer);
       self.lights[clientNum] SetLightIntensity(new_intensity);
       wait(0.05);
@@ -98,12 +98,12 @@ fire_flicker(clientNum) {
   }
   intensity = self.lights[clientNum] GetLightIntensity();
   curr_intensity = intensity;
-  for (;;) {
+  for(;;) {
     temp_intensity = intensity * RandomFloatRange(min_intensity, max_intensity);
     time = RandomFloatRange(min_delay, max_delay);
     steps = time * 20;
     div = (curr_intensity - temp_intensity) / steps;
-    for (i = 0; i < steps; i++) {
+    for(i = 0; i < steps; i++) {
       curr_intensity -= div;
       if(curr_intensity < 0) {
         curr_intensity = 0;

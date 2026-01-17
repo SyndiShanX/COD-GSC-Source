@@ -61,7 +61,7 @@ lightning(var_0, var_1) {
   [[var_0]]();
   waittillframeend;
 
-  for (;;)
+  for(;;)
     lightningthink(var_0, var_1);
 }
 
@@ -73,7 +73,7 @@ raineffectchange(var_0, var_1) {
     var_2 = level.rainlevel - var_0;
     var_1 = var_1 / var_2;
 
-    for (var_3 = 0; var_3 < var_2; var_3++) {
+    for(var_3 = 0; var_3 < var_2; var_3++) {
       wait(var_1);
       level.rainlevel--;
       level._effect["rain_drops"] = level._effect["rain_" + level.rainlevel];
@@ -84,7 +84,7 @@ raineffectchange(var_0, var_1) {
     var_2 = var_0 - level.rainlevel;
     var_1 = var_1 / var_2;
 
-    for (var_3 = 0; var_3 < var_2; var_3++) {
+    for(var_3 = 0; var_3 < var_2; var_3++) {
       wait(var_1);
       level.rainlevel++;
       level._effect["rain_drops"] = level._effect["rain_" + level.rainlevel];
@@ -93,7 +93,7 @@ raineffectchange(var_0, var_1) {
 }
 
 addlightningexploder(var_0) {
-  if(!isdefined(level.lightningexploder)) {
+  if(!isDefined(level.lightningexploder)) {
     level.lightningexploder = [];
     level.lightningexploderindex = 0;
   }
@@ -102,15 +102,15 @@ addlightningexploder(var_0) {
 }
 
 playerweather() {
-  var_0 = getentarray("player", "classname")[0];
+  var_0 = getEntArray("player", "classname")[0];
   var_1 = common_scripts\utility::spawn_tag_origin();
 
-  for (;;) {
-    while (common_scripts\utility::flag("player_weather_enabled")) {
+  for(;;) {
+    while(common_scripts\utility::flag("player_weather_enabled")) {
       var_2 = var_0.angles;
       var_1 moveto(var_0.origin + (0, 0, 650), 0.1);
       var_1 rotateto((-90, var_2[1], 180), 0.1);
-      playfxontag(level._effect["rain_drops"], var_1, "tag_origin");
+      playFXOnTag(level._effect["rain_drops"], var_1, "tag_origin");
       wait 0.3;
     }
 
@@ -175,7 +175,7 @@ lightningthink(var_0, var_1) {
   if(var_2 < level.nextlightning)
     level.nextlightning = var_2;
 
-  for (;;) {
+  for(;;) {
     common_scripts\utility::flag_wait("_weather_lightning_enabled");
     var_3 = (level.nextlightning - gettime()) * 0.001;
 
@@ -191,7 +191,7 @@ lightningthink(var_0, var_1) {
 }
 
 fogflash(var_0) {
-  if(isdefined(level.lightningexploderindex))
+  if(isDefined(level.lightningexploderindex))
     common_scripts\_exploder::exploder(level.lightningexploder[level.lightningexploderindex]);
 
   [[var_0]]();
@@ -203,13 +203,13 @@ lightningflash(var_0, var_1, var_2) {
   var_3[2] = "triple";
   thread thunder();
 
-  if(!isdefined(var_2))
+  if(!isDefined(var_2))
     var_2 = randomint(var_3.size);
 
   var_4 = 0;
 
-  if(isdefined(level.lightningexploderindex)) {
-    while (var_4 == level.lightningexploderindex)
+  if(isDefined(level.lightningexploderindex)) {
+    while(var_4 == level.lightningexploderindex)
       var_4 = randomint(level.lightningexploder.size);
 
     level.lightningexploderindex = var_4;
@@ -263,9 +263,9 @@ thunder() {
   var_0 linkto(level.player);
 
   if(level.rainlevel <= 8)
-    var_0 playsound("elm_thunder_distant", "sounddone");
+    var_0 playSound("elm_thunder_distant", "sounddone");
   else {
-    var_0 playsound("elm_thunder_distant", "sounddone");
+    var_0 playSound("elm_thunder_distant", "sounddone");
     var_0 thread maps\_utility::play_sound_on_entity("elm_thunder_strike");
   }
 

@@ -17,21 +17,21 @@
 #namespace _zm_weap_elemental_bow_wolf_howl;
 
 function autoexec __init__sytem__() {
-  system::register("_zm_weap_elemental_bow_wolf_howl", & __init__, undefined, undefined);
+  system::register("_zm_weap_elemental_bow_wolf_howl", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("toplayer", "elemental_bow_wolf_howl" + "_ambient_bow_fx", 5000, 1, "int", & function_cb5344d7, 0, 0);
-  clientfield::register("missile", "elemental_bow_wolf_howl" + "_arrow_impact_fx", 5000, 1, "int", & function_6974030a, 0, 0);
-  clientfield::register("scriptmover", "elemental_bow_wolf_howl4" + "_arrow_impact_fx", 5000, 1, "int", & function_644da66f, 0, 0);
-  clientfield::register("toplayer", "wolf_howl_muzzle_flash", 5000, 1, "int", & wolf_howl_muzzle_flash, 0, 0);
-  clientfield::register("scriptmover", "wolf_howl_arrow_charged_trail", 5000, 1, "int", & function_76bb77a6, 0, 0);
-  clientfield::register("scriptmover", "wolf_howl_arrow_charged_spiral", 5000, 1, "int", & function_714aa0e1, 0, 0);
-  clientfield::register("actor", "wolf_howl_slow_snow_fx", 5000, 1, "int", & wolf_howl_slow_snow_fx, 0, 0);
-  clientfield::register("actor", "zombie_hit_by_wolf_howl_charge", 5000, 1, "int", & zombie_hit_by_wolf_howl_charge, 0, 0);
-  clientfield::register("actor", "zombie_explode_fx", 5000, 1, "counter", & wolf_howl_zombie_explode_fx, 0, 0);
-  clientfield::register("actor", "zombie_explode_fx", -8000, 1, "counter", & wolf_howl_zombie_explode_fx, 0, 0);
-  clientfield::register("actor", "wolf_howl_zombie_explode_fx", 8000, 1, "counter", & wolf_howl_zombie_explode_fx, 0, 0);
+  clientfield::register("toplayer", "elemental_bow_wolf_howl" + "_ambient_bow_fx", 5000, 1, "int", &function_cb5344d7, 0, 0);
+  clientfield::register("missile", "elemental_bow_wolf_howl" + "_arrow_impact_fx", 5000, 1, "int", &function_6974030a, 0, 0);
+  clientfield::register("scriptmover", "elemental_bow_wolf_howl4" + "_arrow_impact_fx", 5000, 1, "int", &function_644da66f, 0, 0);
+  clientfield::register("toplayer", "wolf_howl_muzzle_flash", 5000, 1, "int", &wolf_howl_muzzle_flash, 0, 0);
+  clientfield::register("scriptmover", "wolf_howl_arrow_charged_trail", 5000, 1, "int", &function_76bb77a6, 0, 0);
+  clientfield::register("scriptmover", "wolf_howl_arrow_charged_spiral", 5000, 1, "int", &function_714aa0e1, 0, 0);
+  clientfield::register("actor", "wolf_howl_slow_snow_fx", 5000, 1, "int", &wolf_howl_slow_snow_fx, 0, 0);
+  clientfield::register("actor", "zombie_hit_by_wolf_howl_charge", 5000, 1, "int", &zombie_hit_by_wolf_howl_charge, 0, 0);
+  clientfield::register("actor", "zombie_explode_fx", 5000, 1, "counter", &wolf_howl_zombie_explode_fx, 0, 0);
+  clientfield::register("actor", "zombie_explode_fx", -8000, 1, "counter", &wolf_howl_zombie_explode_fx, 0, 0);
+  clientfield::register("actor", "wolf_howl_zombie_explode_fx", 8000, 1, "counter", &wolf_howl_zombie_explode_fx, 0, 0);
   level._effect["wolf_howl_ambient_bow"] = "dlc1/zmb_weapon/fx_bow_wolf_ambient_1p_zmb";
   level._effect["wolf_howl_arrow_impact"] = "dlc1/zmb_weapon/fx_bow_wolf_impact_zmb";
   level._effect["wolf_howl_arrow_charged_impact"] = "dlc1/zmb_weapon/fx_bow_wolf_impact_ug_zmb";
@@ -51,13 +51,13 @@ function function_cb5344d7(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_6974030a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    playfx(localclientnum, level._effect["wolf_howl_arrow_impact"], self.origin);
+    playFX(localclientnum, level._effect["wolf_howl_arrow_impact"], self.origin);
   }
 }
 
 function function_644da66f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    playfx(localclientnum, level._effect["wolf_howl_arrow_charged_impact"], self.origin);
+    playFX(localclientnum, level._effect["wolf_howl_arrow_charged_impact"], self.origin);
   }
 }
 
@@ -69,7 +69,7 @@ function wolf_howl_muzzle_flash(localclientnum, oldval, newval, bnewent, binitia
 
 function function_76bb77a6(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self.var_e73f2a59 = playfxontag(localclientnum, level._effect["wolf_howl_charge_trail"], self, "tag_origin");
+    self.var_e73f2a59 = playFXOnTag(localclientnum, level._effect["wolf_howl_charge_trail"], self, "tag_origin");
   } else {
     deletefx(localclientnum, self.var_e73f2a59, 0);
   }
@@ -77,7 +77,7 @@ function function_76bb77a6(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_714aa0e1(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self.var_36615b6 = playfxontag(localclientnum, level._effect["wolf_howl_charge_spiral"], self, "tag_origin");
+    self.var_36615b6 = playFXOnTag(localclientnum, level._effect["wolf_howl_charge_spiral"], self, "tag_origin");
   } else {
     deletefx(localclientnum, self.var_36615b6, 0);
   }
@@ -85,10 +85,10 @@ function function_714aa0e1(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function wolf_howl_slow_snow_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    if(!isdefined(self.var_3e50c3b4)) {
-      self.var_3e50c3b4 = playfxontag(localclientnum, level._effect["wolf_howl_slow_torso"], self, "j_spineupper");
+    if(!isDefined(self.var_3e50c3b4)) {
+      self.var_3e50c3b4 = playFXOnTag(localclientnum, level._effect["wolf_howl_slow_torso"], self, "j_spineupper");
     }
-  } else if(isdefined(self.var_3e50c3b4)) {
+  } else if(isDefined(self.var_3e50c3b4)) {
     deletefx(localclientnum, self.var_3e50c3b4, 0);
     self.var_3e50c3b4 = undefined;
   }
@@ -97,7 +97,7 @@ function wolf_howl_slow_snow_fx(localclientnum, oldval, newval, bnewent, binitia
 function zombie_hit_by_wolf_howl_charge(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self endon("entityshutdown");
   if(newval) {
-    playfxontag(localclientnum, level._effect["zombie_trail_wolf_howl_hit"], self, "j_spine4");
+    playFXOnTag(localclientnum, level._effect["zombie_trail_wolf_howl_hit"], self, "j_spine4");
     self duplicate_render::set_dr_flag("ghostly_on", newval);
     self duplicate_render::update_dr_filters(localclientnum);
   }
@@ -106,5 +106,5 @@ function zombie_hit_by_wolf_howl_charge(localclientnum, oldval, newval, bnewent,
 function wolf_howl_zombie_explode_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self endon("entityshutdown");
   self util::waittill_dobj(localclientnum);
-  playfxontag(localclientnum, level._effect["zombie_wolf_howl_hit_explode"], self, "j_spine4");
+  playFXOnTag(localclientnum, level._effect["zombie_wolf_howl_hit_explode"], self, "j_spine4");
 }

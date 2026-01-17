@@ -69,13 +69,13 @@ toggle_player_zombie_blood_fx(localclientnum, oldval, newval, bnewent, binitials
     if(self islocalplayer() && self getlocalclientnumber() == localclientnum) {
       if(!isDefined(self.zombie_blood_fx)) {
         self.zombie_blood_fx = playviewmodelfx(localclientnum, level._effect["zombie_blood_1st"], "tag_camera");
-        playsound(localclientnum, "zmb_zombieblood_start", (0, 0, 0));
+        playSound(localclientnum, "zmb_zombieblood_start", (0, 0, 0));
         playloopat("zmb_zombieblood_loop", (0, 0, 0));
       }
     }
   } else if(isDefined(self.zombie_blood_fx)) {
     stopfx(localclientnum, self.zombie_blood_fx);
-    playsound(localclientnum, "zmb_zombieblood_stop", (0, 0, 0));
+    playSound(localclientnum, "zmb_zombieblood_stop", (0, 0, 0));
     stoploopat("zmb_zombieblood_loop", (0, 0, 0));
     self.zombie_blood_fx = undefined;
   }

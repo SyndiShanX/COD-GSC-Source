@@ -7,11 +7,9 @@
 #include clientscripts\createfx\la_2_fx;
 #include clientscripts\_fx;
 
-precache_util_fx() {
-}
+precache_util_fx() {}
 
-precache_scripted_fx() {
-}
+precache_scripted_fx() {}
 
 precache_createfx_fx() {
   level._effect["fx_la2_exp_building_hero"] = loadfx("maps/la2/fx_la2_exp_building_hero");

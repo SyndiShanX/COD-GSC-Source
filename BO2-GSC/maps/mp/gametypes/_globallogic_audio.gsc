@@ -162,7 +162,7 @@ registerdialoggroup(group, skipifcurrentlyplayinggroup) {
     return;
   }
 
-  level.dialoggroup[group] = spawnstruct();
+  level.dialoggroup[group] = spawnStruct();
   level.dialoggroup[group].group = group;
   level.dialoggroup[group].skipifcurrentlyplayinggroup = skipifcurrentlyplayinggroup;
   level.dialoggroup[group].currentcount = 0;

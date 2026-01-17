@@ -12,7 +12,6 @@
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm_perks;
 #include scripts\zm_common\zm_unitrigger;
-
 #namespace zm_white_lighting;
 
 autoexec __init__system__() {
@@ -31,7 +30,7 @@ function_2bdf9f35() {
 }
 
 function_3d4e24ea() {
-  level._effect[#"hash_5ee980374efab771"] = #"hash_964810cc067cb78";
+  level._effect[# "hash_5ee980374efab771"] = # "hash_964810cc067cb78";
 }
 
 function_c51c8e3(var_edf4d25) {

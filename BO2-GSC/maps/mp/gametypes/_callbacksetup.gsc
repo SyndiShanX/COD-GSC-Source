@@ -13,9 +13,7 @@
 
 codecallback_startgametype() {
   if(!isDefined(level.gametypestarted) || !level.gametypestarted) {
-    [
-      [level.callbackstartgametype]
-    ]();
+    [[level.callbackstartgametype]]();
     level.gametypestarted = 1;
   }
 }
@@ -105,7 +103,7 @@ codecallback_menuresponse(action, arg) {
   }
 
   index = level.menuresponsequeue.size;
-  level.menuresponsequeue[index] = spawnstruct();
+  level.menuresponsequeue[index] = spawnStruct();
   level.menuresponsequeue[index].action = action;
   level.menuresponsequeue[index].arg = arg;
   level.menuresponsequeue[index].ent = self;
@@ -178,5 +176,4 @@ codecallback_glasssmash(pos, dir) {
   level notify("glass_smash", pos, dir);
 }
 
-callbackvoid() {
-}
+callbackvoid() {}

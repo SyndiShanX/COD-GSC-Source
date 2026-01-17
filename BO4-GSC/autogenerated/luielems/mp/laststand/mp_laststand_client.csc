@@ -4,11 +4,9 @@
 ***********************************************************************/
 
 #include scripts\core_common\lui_shared;
-
 #namespace mp_laststand_client;
 
 class cmp_laststand_client: cluielem {
-
   function set_revive_progress(localclientnum, value) {
     set_data(localclientnum, "revive_progress", value);
   }
@@ -18,7 +16,7 @@ class cmp_laststand_client: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, #"mp_laststand_client");
+    cluielem::open(localclientnum, # "mp_laststand_client");
   }
 
   function function_fa582112(localclientnum) {

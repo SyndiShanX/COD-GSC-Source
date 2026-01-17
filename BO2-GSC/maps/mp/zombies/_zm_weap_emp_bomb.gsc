@@ -187,7 +187,7 @@ getwatcherforweapon(weapname) {
 }
 
 destroyequipment(origin, radius) {
-  grenades = getentarray("grenade", "classname");
+  grenades = getEntArray("grenade", "classname");
   rsquared = radius * radius;
 
   for(i = 0; i < grenades.size; i++) {
@@ -244,7 +244,7 @@ waitanddetonate(object, delay, attacker, weaponname) {
     object.stun_fx = 1;
 
     if(isDefined(level._equipment_emp_destroy_fx))
-      playfx(level._equipment_emp_destroy_fx, object.origin + vectorscale((0, 0, 1), 5.0), (0, randomfloat(360), 0));
+      playFX(level._equipment_emp_destroy_fx, object.origin + vectorscale((0, 0, 1), 5.0), (0, randomfloat(360), 0));
 
     delay = 1.1;
   }
@@ -276,7 +276,7 @@ waitanddamage(object, damage) {
   object.stun_fx = 1;
 
   if(isDefined(level._equipment_emp_destroy_fx))
-    playfx(level._equipment_emp_destroy_fx, object.origin + vectorscale((0, 0, 1), 5.0), (0, randomfloat(360), 0));
+    playFX(level._equipment_emp_destroy_fx, object.origin + vectorscale((0, 0, 1), 5.0), (0, randomfloat(360), 0));
 
   delay = 1.1;
 

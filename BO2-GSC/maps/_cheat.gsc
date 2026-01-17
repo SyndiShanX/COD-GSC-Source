@@ -247,7 +247,7 @@ applyvisionsets() {
 
 slowmo_system_init() {
   if(!isDefined(level.slowmo)) {
-    level.slowmo = spawnstruct();
+    level.slowmo = spawnStruct();
     slowmo_system_defaults();
     level.slowmo.speed_current = level.slowmo.speed_norm;
     level.slowmo.lerp_interval = 0.05;

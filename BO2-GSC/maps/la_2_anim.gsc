@@ -151,7 +151,7 @@ player_puts_on_helmet(e_player_body) {
   level.player visionsetnaked("helmet_f35_low", 0.5);
   level thread f35_hide_outer_model_parts(1, 0.25);
   screen_fade_out(0.25);
-  luinotifyevent(&"hud_update_vehicle_custom", 2, 1, & "plane_f35_player_vtol");
+  luinotifyevent(&"hud_update_vehicle_custom", 2, 1, &"plane_f35_player_vtol");
   stop_exploder(102);
   exploder(103);
   screen_fade_in(0.25);
@@ -383,8 +383,7 @@ level_end(guy) {
   nextmission();
 }
 
-midair_collision_notetrack(guy) {
-}
+midair_collision_notetrack(guy) {}
 
 f35_eject_notify_start(e_player_body) {
   clientnotify("stop_f35_snap");
@@ -394,7 +393,7 @@ f35_eject_notetrack_eject(e_player_body) {
   level thread f35_hide_outer_model_parts(0, undefined);
   maps\la_2_player_f35::f35_remove_visor();
   vh_drone = get_ent("eject_sequence_drone", "targetname", 1);
-  vh_drone setmodel("veh_t6_drone_avenger");
+  vh_drone setModel("veh_t6_drone_avenger");
   flag_set("ejection_start");
   level thread f35_start_flybys();
   n_earthquake_magnitude = 0.3;
@@ -438,7 +437,7 @@ f35_eject_notetrack_explosion(e_player_body) {
   n_loop_time = 0.25;
   vh_drone = get_ent("eject_sequence_drone", "targetname", 1);
   level.f35 notify("midair_collision");
-  playfx(level._effect["midair_collision_explosion"], level.f35.origin, anglestoforward(level.f35.angles));
+  playFX(level._effect["midair_collision_explosion"], level.f35.origin, anglesToForward(level.f35.angles));
   earthquake(n_earthquake_magnitude, n_earthquake_duration, level.player.origin, 512, level.player);
   level.player thread rumble_loop(n_rumble_count, n_loop_time, str_rumble);
   wait 0.1;
@@ -460,7 +459,7 @@ f35_eject_notetrack_hit_ground(e_player_body) {
   n_rumble_count = 5;
   n_loop_time = 0.2;
   level.player thread rumble_loop(n_rumble_count, n_loop_time, str_rumble);
-  playfxontag(level._effect["eject_hit_ground"], e_player_body, "J_SpineLower");
+  playFXOnTag(level._effect["eject_hit_ground"], e_player_body, "J_SpineLower");
   wait 1;
   level thread maps\la_2_fly::spawn_convoy_f35_allies("start_eject_landed_flyby", 4, 1, 1, 0);
 }
@@ -478,15 +477,14 @@ f35_eject_notetrack_chute_opens(e_player_body) {
 }
 
 f35_eject_notetrack_hit_building(e_player_body) {
-  playfxontag(level._effect["eject_building_hit"], e_player_body, "tag_origin");
+  playFXOnTag(level._effect["eject_building_hit"], e_player_body, "tag_origin");
   str_rumble = "damage_heavy";
   n_rumble_count = 5;
   n_loop_time = 0.2;
   level.player thread rumble_loop(n_rumble_count, n_loop_time, str_rumble);
 }
 
-f35_eject_notetrack_body_impact(e_player_body) {
-}
+f35_eject_notetrack_body_impact(e_player_body) {}
 
 init_vo() {
   add_dialog("convoy_death", "We lost a vehicle! What are you doing, Mason?!");
@@ -722,9 +720,7 @@ vo_f35_startup() {
     level.player say_dialog("authorization_acce_017");
   }
 
-  if(flag("F35_pilot_saved")) {
-  } else {
-  }
+  if(flag("F35_pilot_saved")) {} else {}
 }
 
 delete_harper() {
@@ -833,8 +829,7 @@ vo_hotel() {
     level.f35 thread say_dialog("death_blossom_offl_035", 2);
 }
 
-vo_to_implement() {
-}
+vo_to_implement() {}
 
 vo_f38_target_lock_on_and_off() {
   level endon("dogfight_done");

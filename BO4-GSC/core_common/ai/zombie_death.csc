@@ -4,7 +4,6 @@
 ***********************************************/
 
 #include scripts\core_common\util_shared;
-
 #namespace zombie_death;
 
 autoexec init_fire_fx() {
@@ -14,8 +13,8 @@ autoexec init_fire_fx() {
     level._effect = [];
   }
 
-  level._effect[#"character_fire_death_sm"] = #"hash_c9cf0acc938a7f6";
-  level._effect[#"character_fire_death_torso"] = #"hash_5686def5b4c85661";
+  level._effect[# "character_fire_death_sm"] = # "hash_c9cf0acc938a7f6";
+  level._effect[# "character_fire_death_torso"] = # "hash_5686def5b4c85661";
 }
 
 on_fire_timeout(localclientnum) {
@@ -46,7 +45,7 @@ flame_death_fx(localclientnum) {
   self.is_on_fire = 1;
   self thread on_fire_timeout();
 
-  if(isDefined(level._effect) && isDefined(level._effect[#"character_fire_death_torso"])) {
+  if(isDefined(level._effect) && isDefined(level._effect[# "character_fire_death_torso"])) {
     fire_tag = "j_spinelower";
 
     if(!isDefined(self gettagorigin(fire_tag))) {
@@ -54,13 +53,13 @@ flame_death_fx(localclientnum) {
     }
 
     if(!isDefined(self.isdog) || !self.isdog) {
-      util::playFXOnTag(localclientnum, level._effect[#"character_fire_death_torso"], self, fire_tag);
+      util::playFXOnTag(localclientnum, level._effect[# "character_fire_death_torso"], self, fire_tag);
     }
   } else {
     println("<dev string:x38>");
   }
 
-  if(isDefined(level._effect) && isDefined(level._effect[#"character_fire_death_sm"])) {
+  if(isDefined(level._effect) && isDefined(level._effect[# "character_fire_death_sm"])) {
     if(self.archetype !== "parasite" && self.archetype !== "raps") {
       wait 1;
       tagarray = [];
@@ -69,7 +68,7 @@ flame_death_fx(localclientnum) {
       tagarray[2] = "J_Knee_RI";
       tagarray[3] = "J_Knee_LE";
       tagarray = randomize_array(tagarray);
-      util::playFXOnTag(localclientnum, level._effect[#"character_fire_death_sm"], self, tagarray[0]);
+      util::playFXOnTag(localclientnum, level._effect[# "character_fire_death_sm"], self, tagarray[0]);
       wait 1;
       tagarray[0] = "J_Wrist_RI";
       tagarray[1] = "J_Wrist_LE";
@@ -80,8 +79,8 @@ flame_death_fx(localclientnum) {
       }
 
       tagarray = randomize_array(tagarray);
-      util::playFXOnTag(localclientnum, level._effect[#"character_fire_death_sm"], self, tagarray[0]);
-      util::playFXOnTag(localclientnum, level._effect[#"character_fire_death_sm"], self, tagarray[1]);
+      util::playFXOnTag(localclientnum, level._effect[# "character_fire_death_sm"], self, tagarray[0]);
+      util::playFXOnTag(localclientnum, level._effect[# "character_fire_death_sm"], self, tagarray[1]);
     }
 
     return;

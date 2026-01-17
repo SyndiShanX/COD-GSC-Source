@@ -262,8 +262,7 @@ objectives_drone_control() {
   set_objective(level.obj_drone_control_bridge, s_obj_bridge, "breadcrumb");
 }
 
-objectives_hijacked() {
-}
+objectives_hijacked() {}
 
 objectives_capture() {
   flag_wait("obj_capture_sitrep");
@@ -355,8 +354,7 @@ kill_drones_challenge_spawnfunc(str_notify) {
     level.player notify(str_notify);
 }
 
-pickingsides_challenge(str_notify) {
-}
+pickingsides_challenge(str_notify) {}
 
 explodingvehicles_challenge(str_notify) {
   level.callbackactorkilled = ::track_ai_explodingvehicles_death;

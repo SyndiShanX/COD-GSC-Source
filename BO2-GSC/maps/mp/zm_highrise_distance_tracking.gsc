@@ -21,7 +21,7 @@ zombie_tracking_init() {
   if(!isDefined(level.zombie_tracking_wait))
     level.zombie_tracking_wait = 10;
 
-  building_trigs = getentarray("zombie_fell_off", "targetname");
+  building_trigs = getEntArray("zombie_fell_off", "targetname");
 
   if(isDefined(building_trigs))
     array_thread(building_trigs, ::zombies_off_building);
@@ -113,7 +113,7 @@ delete_zombie_noone_looking(how_close, how_high) {
 
 player_can_see_me(player) {
   playerangles = player getplayerangles();
-  playerforwardvec = anglestoforward(playerangles);
+  playerforwardvec = anglesToForward(playerangles);
   playerunitforwardvec = vectornormalize(playerforwardvec);
   banzaipos = self.origin;
   playerpos = player getorigin();

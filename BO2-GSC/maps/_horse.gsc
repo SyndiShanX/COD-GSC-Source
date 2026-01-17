@@ -32,13 +32,13 @@ main() {
   level._effect["horse_hits_ground"] = loadfx("env/dirt/fx_afgh_sand_horse_impact");
 
   if(isDefined(self.script_string))
-    self setmodel(self.script_string);
+    self setModel(self.script_string);
   else if(issubstr(self.vehicletype, "low")) {
     idx = randomint(level.horse_model_variants["low"].size);
-    self setmodel(level.horse_model_variants["low"][idx]);
+    self setModel(level.horse_model_variants["low"][idx]);
   } else {
     idx = randomint(level.horse_model_variants["high"].size);
-    self setmodel(level.horse_model_variants["high"][idx]);
+    self setModel(level.horse_model_variants["high"][idx]);
   }
 
   self choose_sprint_anim();
@@ -96,7 +96,7 @@ debug_horse() {
 
     if(!isDefined(self.bone_fxaxis)) {
       self.bone_fxaxis = spawn("script_model", org);
-      self.bone_fxaxis setmodel("fx_axis_createfx");
+      self.bone_fxaxis setModel("fx_axis_createfx");
       recordent(self.bone_fxaxis);
     }
 
@@ -229,7 +229,7 @@ build_horse_anims() {
   level.horse_ai_anims = [];
   level.horse_player_anims = [];
   level.horse_idles = [];
-  level.horse_idles[0] = spawnstruct();
+  level.horse_idles[0] = spawnStruct();
   level.horse_idles[0].animations = [];
   level.horse_idles[0].ai_animations = [];
   level.horse_idles[0].player_animations = [];
@@ -265,7 +265,7 @@ build_horse_anims() {
   level.horse_idles[0].ai_animnames[4] = "ai_horse_rider_stand_idle_to_wide_idle";
   level.horse_idles[0].ai_animnames[5] = "ai_horse_rider_stand_idle_to_eat_idle";
 
-  level.horse_idles[1] = spawnstruct();
+  level.horse_idles[1] = spawnStruct();
   level.horse_idles[1].animations = [];
   level.horse_idles[1].ai_animations = [];
   level.horse_idles[1].player_animations = [];
@@ -287,7 +287,7 @@ build_horse_anims() {
   level.horse_idles[1].ai_animnames[1] = "ai_horse_rider_right_idle_to_stand_idle";
   level.horse_idles[1].ai_animnames[2] = "ai_horse_rider_right_idle_to_forward_idle";
 
-  level.horse_idles[2] = spawnstruct();
+  level.horse_idles[2] = spawnStruct();
   level.horse_idles[2].animations = [];
   level.horse_idles[2].ai_animations = [];
   level.horse_idles[2].player_animations = [];
@@ -314,7 +314,7 @@ build_horse_anims() {
   level.horse_idles[2].ai_animnames[2] = "ai_horse_rider_forward_idle_to_stand_idle";
   level.horse_idles[2].ai_animnames[3] = "ai_horse_rider_forward_idle_to_eat_idle";
 
-  level.horse_idles[3] = spawnstruct();
+  level.horse_idles[3] = spawnStruct();
   level.horse_idles[3].animations = [];
   level.horse_idles[3].ai_animations = [];
   level.horse_idles[3].player_animations = [];
@@ -345,7 +345,7 @@ build_horse_anims() {
   level.horse_idles[3].ai_animnames[3] = "ai_horse_rider_wide_idle_to_frisky_idle";
   level.horse_idles[3].ai_animnames[4] = "ai_horse_rider_wide_idle_to_right_idle";
 
-  level.horse_idles[4] = spawnstruct();
+  level.horse_idles[4] = spawnStruct();
   level.horse_idles[4].animations = [];
   level.horse_idles[4].ai_animations = [];
   level.horse_idles[4].player_animations = [];
@@ -374,7 +374,7 @@ build_horse_anims() {
   level.horse_idles[4].ai_animnames[3] = "ai_horse_rider_frisky_idle_twitch_c";
   level.horse_idles[4].ai_animnames[4] = "ai_horse_rider_frisky_idle_to_wide_idle";
 
-  level.horse_idles[5] = spawnstruct();
+  level.horse_idles[5] = spawnStruct();
   level.horse_idles[5].animations = [];
   level.horse_idles[5].ai_animations = [];
   level.horse_idles[5].player_animations = [];
@@ -409,7 +409,7 @@ build_horse_anims() {
   level.horse_idles[5].ai_animnames[4] = "ai_horse_rider_eat_idle_to_stand_idle";
   level.horse_idles[5].ai_animnames[5] = "ai_horse_rider_eat_idle_to_wide_idle";
 
-  level.horse_idles[6] = spawnstruct();
+  level.horse_idles[6] = spawnStruct();
   level.horse_idles[6].animations = [];
   level.horse_idles[6].ai_animations = [];
   level.horse_idles[6].player_animations = [];
@@ -646,39 +646,39 @@ build_horse_anims() {
   level.horse_player_anims[level.rearback] = % int_horse_player_rearback_nofall;
   level.horse_player_anims[level.turn_180] = % int_horse_player_turn180_r;
   level.horse_deaths = [];
-  level.horse_deaths[0] = spawnstruct();
+  level.horse_deaths[0] = spawnStruct();
   level.horse_deaths[0].animation = % a_horse_death_galloping;
   level.horse_deaths[0].ai_animation = % ai_horse_rider_death_galloping;
   level.horse_deaths[0].player_animation = % int_horse_player_death_galloping;
-  level.horse_deaths[1] = spawnstruct();
+  level.horse_deaths[1] = spawnStruct();
   level.horse_deaths[1].animation = % a_horse_death_galloping_faceplant;
   level.horse_deaths[1].ai_animation = % ai_horse_rider_death_galloping_faceplant;
   level.horse_deaths[1].player_animation = % int_horse_player_death_galloping_faceplant;
-  level.horse_deaths[2] = spawnstruct();
+  level.horse_deaths[2] = spawnStruct();
   level.horse_deaths[2].animation = % a_horse_death_standing_slow;
   level.horse_deaths[2].ai_animation = % ai_horse_rider_death_standing_slow;
   level.horse_deaths[2].player_animation = % int_horse_player_death_standing_slow;
-  level.horse_deaths[3] = spawnstruct();
+  level.horse_deaths[3] = spawnStruct();
   level.horse_deaths[3].animation = % a_horse_death_standing_fast;
   level.horse_deaths[3].ai_animation = % ai_horse_rider_death_standing_fast;
   level.horse_deaths[3].player_animation = % int_horse_player_death_standing_fast;
   level.horse_deaths_explosive = [];
-  level.horse_deaths_explosive[0] = spawnstruct();
+  level.horse_deaths_explosive[0] = spawnStruct();
   level.horse_deaths_explosive[0].animation = % a_horse_sprint_explosive_death_fly_forward_a;
   level.horse_deaths_explosive[0].ai_animation = % ai_horse_rider_sprint_explosive_death_fly_forward_a;
-  level.horse_deaths_explosive[1] = spawnstruct();
+  level.horse_deaths_explosive[1] = spawnStruct();
   level.horse_deaths_explosive[1].animation = % a_horse_sprint_explosive_death_fly_forward_b;
   level.horse_deaths_explosive[1].ai_animation = % ai_horse_rider_sprint_explosive_death_fly_forward_b;
-  level.horse_deaths_explosive[2] = spawnstruct();
+  level.horse_deaths_explosive[2] = spawnStruct();
   level.horse_deaths_explosive[2].animation = % a_horse_sprint_explosive_death_fly_forward_c;
   level.horse_deaths_explosive[2].ai_animation = % ai_horse_rider_sprint_explosive_death_fly_forward_c;
-  level.horse_deaths_explosive[3] = spawnstruct();
+  level.horse_deaths_explosive[3] = spawnStruct();
   level.horse_deaths_explosive[3].animation = % a_horse_sprint_explosive_death_fly_forward_d;
   level.horse_deaths_explosive[3].ai_animation = % ai_horse_rider_sprint_explosive_death_fly_forward_d;
-  level.horse_deaths_explosive[4] = spawnstruct();
+  level.horse_deaths_explosive[4] = spawnStruct();
   level.horse_deaths_explosive[4].animation = % a_horse_sprint_explosive_death_fly_forward_e;
   level.horse_deaths_explosive[4].ai_animation = % ai_horse_rider_sprint_explosive_death_fly_forward_e;
-  level.horse_deaths_explosive[5] = spawnstruct();
+  level.horse_deaths_explosive[5] = spawnStruct();
   level.horse_deaths_explosive[5].animation = % a_horse_sprint_explosive_death_fly_forward_f;
   level.horse_deaths_explosive[5].ai_animation = % ai_horse_rider_sprint_explosive_death_fly_forward_f;
   level.horse_model_variants = [];
@@ -799,35 +799,35 @@ gallop_driving() {
     else if(abs(self getspeed()) >= 0.1) {
       if(self getspeedmph() < 22) {
         if(!self.isjumping)
-          self playsound("fly_horse_hoofhit_t_plr_01");
+          self playSound("fly_horse_hoofhit_t_plr_01");
 
         wait(self get_wait() * 1.3);
 
         if(!self.isjumping)
-          self playsound("fly_horse_hoofhit_t_plr_02");
+          self playSound("fly_horse_hoofhit_t_plr_02");
 
         wait(self get_wait() * 1.3);
 
         if(!self.isjumping)
-          self playsound("fly_horse_hoofhit_t_plr_03");
+          self playSound("fly_horse_hoofhit_t_plr_03");
 
         wait(self get_wait() * 1.3);
       } else if(self getspeedmph() >= 22) {
         if(!self.isjumping)
-          self playsound("fly_horse_hoofhit_g_plr_01");
+          self playSound("fly_horse_hoofhit_g_plr_01");
 
         wait(self get_wait());
 
         if(!self.isjumping)
-          self playsound("fly_horse_hoofhit_g_plr_02");
+          self playSound("fly_horse_hoofhit_g_plr_02");
 
         wait(self get_wait());
 
         if(!self.isjumping)
-          self playsound("fly_gear_run_plr");
+          self playSound("fly_gear_run_plr");
 
         if(!self.isjumping)
-          self playsound("fly_horse_hoofhit_g_plr_03");
+          self playSound("fly_horse_hoofhit_g_plr_03");
 
         wait(self get_wait() * 2);
       }
@@ -842,7 +842,7 @@ wind_driving() {
 
   while(true) {
     while(self getspeedmph() >= self.speed_run) {
-      playfx(level._effect["player_wind"], self.driver.origin + player_offset);
+      playFX(level._effect["player_wind"], self.driver.origin + player_offset);
       wait 0.3;
     }
 
@@ -864,9 +864,9 @@ horse_breathing() {
     self veh_toggle_exhaust_fx(1);
 
     if(wait_time >= 1.5)
-      self.soundsnout playsound("chr_horse_breath_i_mono");
+      self.soundsnout playSound("chr_horse_breath_i_mono");
     else if(wait_time < 1.5)
-      self.soundsnout playsound("chr_horse_breath_t_mono");
+      self.soundsnout playSound("chr_horse_breath_t_mono");
 
     wait 1;
     self veh_toggle_exhaust_fx(0);
@@ -998,8 +998,7 @@ horse_animating() {
         self.current_time = 0;
     }
 
-    if(self.ent_flag["mounting_horse"] || self.ent_flag["dismounting_horse"] || self.ent_flag["playing_scripted_anim"] || self.ent_flag["pause_animation"]) {
-    } else if(speed < -0.05) {
+    if(self.ent_flag["mounting_horse"] || self.ent_flag["dismounting_horse"] || self.ent_flag["playing_scripted_anim"] || self.ent_flag["pause_animation"]) {} else if(speed < -0.05) {
       self.current_anim_speed = level.reverse;
       anim_rate = speed / level.horse_speeds[self.current_anim_speed];
       anim_rate = clamp(anim_rate, 0.5, 1.5);
@@ -1093,8 +1092,8 @@ horse_fx(fx_name) {
     self.current_fx = spawn("script_model", self.origin);
     self.current_fx.angles = self.angles;
     self.current_fx linkto(self);
-    self.current_fx setmodel("tag_origin");
-    playfxontag(level._effect[fx_name], self.current_fx, "tag_origin");
+    self.current_fx setModel("tag_origin");
+    playFXOnTag(level._effect[fx_name], self.current_fx, "tag_origin");
   }
 }
 
@@ -1153,7 +1152,7 @@ horse_death() {
 
 handle_horse_death_fx(str_notetrack) {
   if(str_notetrack == "hitground")
-    playfx(level._effect["horse_hits_ground"], self.origin);
+    playFX(level._effect["horse_hits_ground"], self.origin);
 }
 
 weapon_needs_left_hand_on_horse(weapon) {
@@ -1280,7 +1279,7 @@ watch_for_sprint(driver) {
 
   while(true) {
     speed = self getspeedmph();
-    forward = anglestoforward(self.angles);
+    forward = anglesToForward(self.angles);
     stick = driver getnormalizedmovement();
     bcanstartsprint = bmeterempty == 0 && speed > self.min_sprint_start_speed && stick[0] > 0.85;
     bpressingsprint = self.driver sprintbuttonpressed();
@@ -1527,8 +1526,7 @@ watch_mounting() {
     self.driver.body notify("stop_player_ride");
     self.driver disableweapons();
 
-    if(is_true(self.disable_mount_anim)) {
-    } else if(!self.driver isthrowinggrenade())
+    if(is_true(self.disable_mount_anim)) {} else if(!self.driver isthrowinggrenade())
       self.driver waittill("weapon_change");
 
     self useby(self.driver);
@@ -1600,9 +1598,9 @@ ready_horse() {
 horse_update_reigns(hide) {
   if(is_true(hide)) {
     self.old_model = self.model;
-    self setmodel(level.horse_viewmodel_variants[self.model]);
+    self setModel(level.horse_viewmodel_variants[self.model]);
   } else
-    self setmodel(self.old_model);
+    self setModel(self.old_model);
 
   wait 0.1;
 }
@@ -1757,8 +1755,7 @@ is_on_horseback() {
 
 watch_for_horse_melee(horse) {
   while(true) {
-    if(level.player meleebuttonpressed()) {
-    }
+    if(level.player meleebuttonpressed()) {}
 
     wait 0.05;
   }
@@ -1798,7 +1795,7 @@ setanims() {
   positions = [];
 
   for(i = 0; i < 1; i++)
-    positions[i] = spawnstruct();
+    positions[i] = spawnStruct();
 
   positions[0].sittag = "tag_driver";
   positions[0].getin = % ai_horse_rider_get_on_leftside;
@@ -1864,7 +1861,7 @@ horse_actor_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, sweap
       player playrumbleonentity("damage_heavy");
 
       if(isplayer(eattacker)) {
-        eattacker playsound("evt_horse_trample_ai");
+        eattacker playSound("evt_horse_trample_ai");
 
         if(self.team == "axis" && !isDefined(self.killed_by_horse)) {
           self.killed_by_horse = 1;

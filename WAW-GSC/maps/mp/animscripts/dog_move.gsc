@@ -7,8 +7,8 @@
 #include maps\mp\animscripts\shared;
 
 setup_sound_variables() {
-  level.dog_sounds["far"] = spawnstruct();
-  level.dog_sounds["close"] = spawnstruct();
+  level.dog_sounds["far"] = spawnStruct();
+  level.dog_sounds["close"] = spawnStruct();
   level.dog_sounds["close"].minRange = 0;
   level.dog_sounds["close"].maxRange = 500;
   level.dog_sounds["close"].sound = "anml_dog_bark_close";
@@ -53,7 +53,7 @@ main() {
     self setanimstate("move_walk");
   }
   self thread maps\mp\animscripts\dog_stop::lookAtTarget("normal");
-  while (1) {
+  while(1) {
     self moveLoop();
     if(self.a.movement == "run") {
       if(self.disableArrivals == false)
@@ -66,7 +66,7 @@ main() {
 moveLoop() {
   self endon("killanimscript");
   self endon("stop_soon");
-  while (1) {
+  while(1) {
     if(self.disableArrivals)
       self.stopAnimDistSq = 0;
     else
@@ -92,7 +92,7 @@ moveLoop() {
 
 startMoveTrackLookAhead() {
   self endon("killanimscript");
-  for (i = 0; i < 2; i++) {
+  for(i = 0; i < 2; i++) {
     lookaheadAngle = vectortoangles(self.lookaheaddir);
     self set_orient_mode("face angle", lookaheadAngle);
   }
@@ -129,7 +129,7 @@ getEnemyDistanceSqr() {
 
 getSoundKey(distanceSqr) {
   keys = getarraykeys(level.dog_sounds);
-  for (i = 0; i < keys.size; i++) {
+  for(i = 0; i < keys.size; i++) {
     sound_set = level.dog_sounds[keys[i]];
     if(sound_set.minRangeSqr > distanceSqr) {
       continue;

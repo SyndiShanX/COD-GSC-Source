@@ -41,7 +41,7 @@ main(behaviorCallbacks) {
   if(getdvar("scr_coveridle") == "1") {
     self.coverNode.script_onlyidle = true;
   }
-  for (;;) {
+  for(;;) {
     if(isDefined(behaviorCallbacks.mainLoopStart)) {
       startTime = gettime();
       self thread endIdleAtFrameEnd();
@@ -79,7 +79,7 @@ main(behaviorCallbacks) {
     }
     if(isDefined(anim.throwGrenadeAtPlayerASAP) && self.team == "axis") {
       players = GetPlayers();
-      for (i = 0; i < players.size; i++) {
+      for(i = 0; i < players.size; i++) {
         if(isAlive(players[i])) {
           if(tryThrowingGrenade(players[i], 200)) {
             continue;
@@ -108,7 +108,7 @@ main(behaviorCallbacks) {
       if(suppressableEnemy) {
         permutation = getPermutation(2);
         done = false;
-        for (i = 0; i < permutation.size && !done; i++) {
+        for(i = 0; i < permutation.size && !done; i++) {
           switch (i) {
             case 0:
               if(self.provideCoveringFire || gettime() >= nextAllowedSuppressTime) {
@@ -193,7 +193,7 @@ suppressedBehavior(behaviorCallbacks) {
     return false;
   nextAllowedBlindfireTime = gettime();
   justlooked = true;
-  while (isSuppressedWrapper()) {
+  while(isSuppressedWrapper()) {
     justlooked = false;
     self teleport(self.coverNode.origin);
     if(tryToGetOutOfDangerousSituation()) {
@@ -206,7 +206,7 @@ suppressedBehavior(behaviorCallbacks) {
     }
     if(canThrowGrenade && isDefined(anim.throwGrenadeAtPlayerASAP) && self.team == "axis") {
       players = GetPlayers();
-      for (i = 0; i < players.size; i++) {
+      for(i = 0; i < players.size; i++) {
         if(isAlive(players[i])) {
           if(tryThrowingGrenade(players[i], 200)) {
             continue;
@@ -219,7 +219,7 @@ suppressedBehavior(behaviorCallbacks) {
     }
     permutation = getPermutation(2);
     done = false;
-    for (i = 0; i < permutation.size && !done; i++) {
+    for(i = 0; i < permutation.size && !done; i++) {
       switch (i) {
         case 0:
           if(self.team != "allies" && gettime() >= nextAllowedBlindfireTime) {
@@ -259,9 +259,9 @@ getPermutation(n) {
     permutation[0] = randomint(2);
     permutation[1] = 1 - permutation[0];
   } else {
-    for (i = 0; i < n; i++)
+    for(i = 0; i < n; i++)
       permutation[i] = i;
-    for (i = 0; i < n; i++) {
+    for(i = 0; i < n; i++) {
       switchIndex = i + randomint(n - i);
       temp = permutation[switchIndex];
       permutation[SwitchIndex] = permutation[i];
@@ -278,21 +278,13 @@ callOptionalBehaviorCallback(callback, arg, arg2, arg3) {
   starttime = gettime();
   val = undefined;
   if(isDefined(arg3))
-    val = [
-      [callback]
-    ](arg, arg2, arg3);
+    val = [[callback]](arg, arg2, arg3);
   else if(isDefined(arg2))
-    val = [
-      [callback]
-    ](arg, arg2);
+    val = [[callback]](arg, arg2);
   else if(isDefined(arg))
-    val = [
-      [callback]
-    ](arg);
+    val = [[callback]](arg);
   else
-    val = [
-      [callback]
-    ]();
+    val = [[callback]]();
   assert(isDefined(val) && (val == true || val == false));
   if(val)
     assert(gettime() != starttime);
@@ -307,7 +299,7 @@ watchSuppression() {
   self endon("killanimscript");
   self.lastSuppressionTime = gettime() - 100000;
   self.suppressionStart = self.lastSuppressionTime;
-  while (1) {
+  while(1) {
     self waittill("suppression");
     time = gettime();
     if(self.lastSuppressionTime < time - 700)
@@ -362,9 +354,7 @@ idle(behaviorCallbacks, howLong) {
   self.flinching = false;
   if(isDefined(behaviorCallbacks.flinch)) {
     if(!self.a.idlingAtCover && gettime() - self.suppressionStart < 600) {
-      if([
-          [behaviorCallbacks.flinch]
-        ]())
+      if([[behaviorCallbacks.flinch]]())
         return true;
     } else {
       self thread flinchWhenSuppressed(behaviorCallbacks);
@@ -404,7 +394,7 @@ flinchWhenSuppressed(behaviorCallbacks) {
   self endon("killanimscript");
   self endon("stop_waiting_to_flinch");
   lastSuppressionTime = self.lastSuppressionTime;
-  while (1) {
+  while(1) {
     self waittill("suppression");
     time = gettime();
     if(lastSuppressionTime < time - 2000) {
@@ -447,7 +437,7 @@ blindfire(behaviorCallbacks) {
 breakOutOfShootingIfWantToMoveUp() {
   self endon("killanimscript");
   self endon("stop_deciding_how_to_shoot");
-  while (1) {
+  while(1) {
     if(self.fixedNode) {
       return;
     }

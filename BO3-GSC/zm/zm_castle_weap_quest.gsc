@@ -28,7 +28,7 @@
 #namespace zm_castle_weap_quest;
 
 function autoexec __init__sytem__() {
-  system::register("zm_castle_weap_quest", & __init__, & __main__, undefined);
+  system::register("zm_castle_weap_quest", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -36,17 +36,17 @@ function __init__() {
   flag::init("soul_catchers_charged");
   level.soul_catchers = [];
   level.soul_catchers_vol = [];
-  level.var_aa775655 = & function_1fba78c8;
+  level.var_aa775655 = &function_1fba78c8;
   level thread create_anim_references_on_server();
   clientfield::register("actor", "make_client_clone", 5000, 4, "int");
   clientfield::register("toplayer", "bow_pickup_fx", 5000, 1, "int");
   level.var_f302359b = struct::get_array("dragon_position", "targetname");
-  for (i = 0; i < level.var_f302359b.size; i++) {
+  for(i = 0; i < level.var_f302359b.size; i++) {
     clientfield::register("world", level.var_f302359b[i].script_parameters, 5000, 3, "int");
     level.soul_catchers[i] = level.var_f302359b[i];
     level.soul_catchers_vol[i] = getent(level.var_f302359b[i].target, "targetname");
   }
-  for (i = 0; i < level.soul_catchers.size; i++) {
+  for(i = 0; i < level.soul_catchers.size; i++) {
     level.soul_catchers[i].var_98730ffa = 0;
     level.soul_catchers[i].is_eating = 0;
     level.soul_catchers[i] thread soul_catcher_check();
@@ -58,7 +58,7 @@ function __init__() {
 }
 
 function __main__() {
-  array::thread_all(level.zombie_spawners, & spawner::add_spawn_function, & zombie_spawn_func);
+  array::thread_all(level.zombie_spawners, &spawner::add_spawn_function, &zombie_spawn_func);
 }
 
 function create_anim_references_on_server() {
@@ -94,7 +94,7 @@ function soul_catcher_state_manager() {
   anim_length = getanimlength( % zm_castle::rtrg_o_zm_dlc1_dragonhead_intro);
   e_player thread zm_castle_vo::function_ad27f488(anim_length);
   wait(anim_length);
-  while (!self.is_charged) {
+  while(!self.is_charged) {
     level clientfield::set(self.script_parameters, 2);
     self util::waittill_either("fully_charged", "finished_eating");
   }
@@ -102,7 +102,7 @@ function soul_catcher_state_manager() {
 }
 
 function zombie_spawn_func() {
-  self.actor_killed_override = & zombie_killed_override;
+  self.actor_killed_override = &zombie_killed_override;
 }
 
 function zombie_killed_override(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime) {
@@ -110,11 +110,11 @@ function zombie_killed_override(einflictor, attacker, idamage, smeansofdeath, sw
     return;
   }
   if(isplayer(attacker)) {
-    for (i = 0; i < level.soul_catchers.size; i++) {
+    for(i = 0; i < level.soul_catchers.size; i++) {
       if(self istouching(level.soul_catchers_vol[i])) {
         if(!level.soul_catchers[i].is_charged) {
           self.var_56269cbf = level.soul_catchers[i];
-          self.deathfunction = & zombie_soul_catcher_death;
+          self.deathfunction = &zombie_soul_catcher_death;
         }
       }
     }
@@ -130,7 +130,7 @@ function function_1fba78c8() {
   if(self.archetype != "zombie") {
     return false;
   }
-  for (i = 0; i < level.soul_catchers.size; i++) {
+  for(i = 0; i < level.soul_catchers.size; i++) {
     if(self istouching(level.soul_catchers_vol[i])) {
       if(!level.soul_catchers[i].is_charged && !level.soul_catchers[i].is_eating) {
         return true;
@@ -184,7 +184,7 @@ function zombie_soul_catcher_death(einflictor, attacker, idamage, smeansofdeath,
   wait(0.5);
   var_56269cbf notify("finished_eating");
   var_56269cbf.is_eating = 0;
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     self delete();
   }
   return true;
@@ -192,7 +192,7 @@ function zombie_soul_catcher_death(einflictor, attacker, idamage, smeansofdeath,
 
 function get_correct_model_array() {
   mod = 0;
-  if(self.model == "c_zom_guard_body" && isdefined(self.hatmodel) && self.hatmodel == "c_zom_der_zombie_helmet1") {
+  if(self.model == "c_zom_guard_body" && isDefined(self.hatmodel) && self.hatmodel == "c_zom_der_zombie_helmet1") {
     mod = 4;
   }
   if(self.head == "c_zom_zombie_barbwire_head") {
@@ -219,7 +219,7 @@ function function_edf4b761() {
 
 function which_eating_anim() {
   soul_catcher = self.var_56269cbf;
-  forward_dot = vectordot(anglestoforward(soul_catcher.angles), vectornormalize(self.origin - soul_catcher.origin));
+  forward_dot = vectordot(anglesToForward(soul_catcher.angles), vectornormalize(self.origin - soul_catcher.origin));
   if(forward_dot > 0.7) {
     return 3;
   }
@@ -232,7 +232,7 @@ function which_eating_anim() {
 
 function soul_catcher_check() {
   self.is_charged = 0;
-  while (true) {
+  while(true) {
     if(self.var_98730ffa >= 8) {
       level.n_soul_catchers_charged++;
       self.is_charged = 1;
@@ -278,8 +278,8 @@ function function_a01a53de() {
   wait(0.25);
   level.var_15acc392 = getent("base_bow_pickup", "targetname");
   var_14ea0734 function_bb60c970();
-  array::thread_all(level.players, & function_9376cff9);
-  callback::on_connect( & function_c9cdf051);
+  array::thread_all(level.players, &function_9376cff9);
+  callback::on_connect(&function_c9cdf051);
   var_65a03676 = array("rune_prison_spawned", "demon_gate_spawned", "elemental_storm_spawned", "wolf_howl_spawned", "ee_start_done");
   flag::wait_till_all(var_65a03676);
   level notify("hash_1deaef05");
@@ -287,7 +287,7 @@ function function_a01a53de() {
     e_player clientfield::set_to_player("bow_pickup_fx", 0);
   }
   level scene::stop("p7_fxanim_zm_castle_quest_base_bow_idle_bundle");
-  callback::remove_on_connect( & function_c9cdf051);
+  callback::remove_on_connect(&function_c9cdf051);
   zm_unitrigger::unregister_unitrigger(var_14ea0734.var_67b5dd94);
   wait(5);
   level thread struct::delete_script_bundle("scene", "p7_fxanim_zm_castle_quest_base_bow_idle_bundle");
@@ -298,15 +298,15 @@ function function_9376cff9() {
   level endon("hash_1deaef05");
   self clientfield::set_to_player("bow_pickup_fx", 1);
   var_14ea0734 = struct::get("base_bow_pickup_struct", "targetname");
-  while (true) {
+  while(true) {
     self util::waittill_either("weapon_change", "show_base_bow");
     if(!self function_e464049a()) {
-      if(isdefined(level.var_15acc392)) {
+      if(isDefined(level.var_15acc392)) {
         level.var_15acc392 setvisibletoplayer(self);
       }
       self clientfield::set_to_player("bow_pickup_fx", 1);
     } else {
-      if(isdefined(level.var_15acc392)) {
+      if(isDefined(level.var_15acc392)) {
         level.var_15acc392 setinvisibletoplayer(self);
       }
       self clientfield::set_to_player("bow_pickup_fx", 0);
@@ -328,7 +328,7 @@ function function_fb853e2c() {
   self endon("hash_99ff6d52");
   level endon("hash_1deaef05");
   var_890bca07 = getweapon("elemental_bow");
-  while (true) {
+  while(true) {
     self util::waittill_either("projectile_impact", "zmb_max_ammo");
     if(self hasweapon(var_890bca07)) {
       self.var_e8e28d9e = self getweaponammostock(var_890bca07);
@@ -344,7 +344,7 @@ function function_71d4f620() {
   level endon("hash_1deaef05");
   var_890bca07 = getweapon("elemental_bow");
   var_d95a0cf3 = -1;
-  while (var_d95a0cf3 != self.characterindex) {
+  while(var_d95a0cf3 != self.characterindex) {
     level waittill("bleed_out", var_d95a0cf3);
   }
   self.var_e8e28d9e = var_890bca07.maxammo;
@@ -356,7 +356,7 @@ function function_c9cdf051() {
 }
 
 function function_bb60c970() {
-  s_unitrigger = spawnstruct();
+  s_unitrigger = spawnStruct();
   s_unitrigger.origin = self.origin;
   s_unitrigger.angles = self.angles;
   s_unitrigger.script_unitrigger_type = "unitrigger_radius_use";
@@ -364,9 +364,9 @@ function function_bb60c970() {
   s_unitrigger.cursor_hint = "HINT_NOICON";
   s_unitrigger.require_look_at = 1;
   zm_unitrigger::unitrigger_force_per_player_triggers(s_unitrigger, 1);
-  s_unitrigger.prompt_and_visibility_func = & function_65fb1c47;
+  s_unitrigger.prompt_and_visibility_func = &function_65fb1c47;
   self.var_67b5dd94 = s_unitrigger;
-  zm_unitrigger::register_static_unitrigger(s_unitrigger, & function_26e22a99);
+  zm_unitrigger::register_static_unitrigger(s_unitrigger, &function_26e22a99);
 }
 
 function function_65fb1c47(e_player) {
@@ -382,7 +382,7 @@ function function_26e22a99() {
   self endon("kill_trigger");
   level endon("hash_1deaef05");
   self.stub thread zm_unitrigger::run_visibility_function_for_all_triggers();
-  while (true) {
+  while(true) {
     self waittill("trigger", e_who);
     if(e_who function_e464049a() || e_who function_9dfa159b()) {
       continue;
@@ -396,10 +396,10 @@ function function_26e22a99() {
     var_e1041201 = getweapon("elemental_bow");
     e_who zm_weapons::weapon_give(var_e1041201, 0, 0, 1);
     e_who thread zm_castle_vo::base_bow_picked_up();
-    if(isdefined(e_who.var_e8e28d9e)) {
+    if(isDefined(e_who.var_e8e28d9e)) {
       e_who setweaponammostock(var_e1041201, e_who.var_e8e28d9e);
     }
-    if(isdefined(e_who.var_8f97fa0b)) {
+    if(isDefined(e_who.var_8f97fa0b)) {
       e_who setweaponammoclip(var_e1041201, e_who.var_8f97fa0b);
     } else {
       e_who setweaponammoclip(var_e1041201, var_e1041201.clipsize);

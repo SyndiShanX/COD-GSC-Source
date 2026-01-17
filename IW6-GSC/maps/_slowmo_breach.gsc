@@ -716,7 +716,7 @@ create_slowmo_breaches_from_entities() {
 }
 
 objective_breach(var_0, var_1, var_2, var_3, var_4) {
-  objective_setpointertextoverride(var_0, & "SCRIPT_WAYPOINT_BREACH");
+  objective_setpointertextoverride(var_0, &"SCRIPT_WAYPOINT_BREACH");
   objective_position(var_0, (0, 0, 0));
   var_5 = [];
 

@@ -19,7 +19,7 @@ function open(localclientnum, a_menu_items) {
 
 function close(localclientnum) {
   level flagsys::clear("menu_open");
-  if(isdefined(level.scriptdebugmenu)) {
+  if(isDefined(level.scriptdebugmenu)) {
     closeluimenu(localclientnum, level.scriptdebugmenu);
     level.scriptdebugmenu = undefined;
   }

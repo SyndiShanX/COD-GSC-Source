@@ -8,7 +8,6 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\util_shared;
 #include scripts\core_common\vehicle_shared;
-
 #namespace teleport;
 
 team(kvp, var_dad37549, var_b095575e = 0) {
@@ -100,7 +99,7 @@ function_ff8a7a3(kvp) {
   }
 }
 
-private function_1d2a3300() {
+function_1d2a3300() {
   if(!isDefined(level.a_s_teleport_players)) {
     if(!isDefined(level.a_s_teleport_players)) {
       level.a_s_teleport_players = struct::get_array("teleport_player", "variantname");
@@ -112,7 +111,7 @@ private function_1d2a3300() {
   }
 }
 
-private function_e6615993(kvp, var_dad37549) {
+function_e6615993(kvp, var_dad37549) {
   if(isDefined(self.script_teleport_location)) {
     str_value = self.script_teleport_location;
     str_key = "script_teleport_location";
@@ -138,13 +137,13 @@ private function_e6615993(kvp, var_dad37549) {
   }
 
   return {
-    #str_value: str_value, 
-    #str_key: str_key, 
+    #str_value: str_value,
+    #str_key: str_key,
     #var_dad37549: var_dad37549
   };
 }
 
-private function_166effac(kvp, var_dad37549) {
+function_166effac(kvp, var_dad37549) {
   var_20212d26 = self function_e6615993(kvp, var_dad37549);
 
   if(!isDefined(var_20212d26)) {
@@ -193,13 +192,13 @@ private function_166effac(kvp, var_dad37549) {
   }
 
   return {
-    #a_s_players: a_s_players, 
-    #a_s_heroes: a_s_heroes, 
+    #a_s_players: a_s_players,
+    #a_s_heroes: a_s_heroes,
     #var_dad37549: var_20212d26.var_dad37549
   };
 }
 
-private function_29305761(s_teleport, var_dad37549, var_b095575e = 0) {
+function_29305761(s_teleport, var_dad37549, var_b095575e = 0) {
   self endon(#"death");
 
   if(distancesquared(s_teleport.origin, self.origin) < var_dad37549 * var_dad37549) {

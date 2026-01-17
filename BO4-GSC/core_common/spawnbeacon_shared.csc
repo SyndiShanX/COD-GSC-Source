@@ -5,7 +5,6 @@
 
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\util_shared;
-
 #namespace spawn_beacon;
 
 init_shared() {
@@ -17,7 +16,7 @@ setupclientfields() {
   clientfield::register("clientuimodel", "hudItems.spawnbeacon.active", 1, 1, "int", undefined, 0, 0);
 }
 
-private spawnbeacon_placed(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+spawnbeacon_placed(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self endon(#"death");
   self util::waittill_dobj(localclientnum);
 

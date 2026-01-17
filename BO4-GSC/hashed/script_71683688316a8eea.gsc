@@ -11,7 +11,6 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_utility;
-
 #namespace namespace_b43e152a;
 
 autoexec __init__system__() {
@@ -26,7 +25,7 @@ __init__() {
   zm_trial::register_challenge(#"hash_10949a7065d076ef", &on_begin, &on_end);
 }
 
-private on_begin(n_max_zombies, var_2ec39966, str_zone1, str_zone2, var_588808b1, var_91e2fb66, var_84245fe9, var_a7a5a6ef) {
+on_begin(n_max_zombies, var_2ec39966, str_zone1, str_zone2, var_588808b1, var_91e2fb66, var_84245fe9, var_a7a5a6ef) {
   level endon(#"hash_7646638df88a3656");
   a_str_zones = array(str_zone1, str_zone2, var_588808b1, var_91e2fb66, var_84245fe9, var_a7a5a6ef);
   arrayremovevalue(a_str_zones, undefined);
@@ -46,7 +45,7 @@ private on_begin(n_max_zombies, var_2ec39966, str_zone1, str_zone2, var_588808b1
   level thread function_65e6d40c(a_str_zones, n_max_zombies);
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   zm_trial_util::function_f3dbeda7();
 
   if(isDefined(self.var_2ec39966)) {
@@ -55,8 +54,8 @@ private on_end(round_reset) {
   }
 }
 
-private function_65e6d40c(a_str_zones, n_max_zombies = 0) {
-  level endon(#"hash_7646638df88a3656", #"end_game");
+function_65e6d40c(a_str_zones, n_max_zombies = 0) {
+  level endon(#"hash_7646638df88a3656", # "end_game");
   level waittill(#"zombie_total_set");
   a_s_locs = zm_utility::function_9f7fd525("zombie_location", a_str_zones, 0);
 

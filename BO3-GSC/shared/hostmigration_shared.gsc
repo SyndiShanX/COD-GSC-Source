@@ -10,12 +10,12 @@
 #namespace hostmigration;
 
 function debug_script_structs() {
-  if(isdefined(level.struct)) {
+  if(isDefined(level.struct)) {
     println("" + level.struct.size);
     println("");
-    for (i = 0; i < level.struct.size; i++) {
+    for(i = 0; i < level.struct.size; i++) {
       struct = level.struct[i];
-      if(isdefined(struct.targetname)) {
+      if(isDefined(struct.targetname)) {
         println((("" + i) + "") + struct.targetname);
         continue;
       }
@@ -27,7 +27,7 @@ function debug_script_structs() {
 }
 
 function updatetimerpausedness() {
-  shouldbestopped = isdefined(level.hostmigrationtimer);
+  shouldbestopped = isDefined(level.hostmigrationtimer);
   if(!level.timerstopped && shouldbestopped) {
     level.timerstopped = 1;
     level.playabletimerstopped = 1;
@@ -50,10 +50,10 @@ function resumetimer() {
 function locktimer() {
   level endon("host_migration_begin");
   level endon("host_migration_end");
-  for (;;) {
+  for(;;) {
     currtime = gettime();
     wait(0.05);
-    if(!level.timerstopped && isdefined(level.discardtime)) {
+    if(!level.timerstopped && isDefined(level.discardtime)) {
       level.discardtime = level.discardtime + (gettime() - currtime);
     }
   }
@@ -62,7 +62,7 @@ function locktimer() {
 function matchstarttimerconsole_internal(counttime, matchstarttimer) {
   waittillframeend();
   level endon("match_start_timer_beginning");
-  while (counttime > 0 && !level.gameended) {
+  while(counttime > 0 && !level.gameended) {
     matchstarttimer thread hud::font_pulse(level);
     wait(matchstarttimer.inframes * 0.05);
     matchstarttimer setvalue(counttime);
@@ -92,13 +92,13 @@ function matchstarttimerconsole(type, duration) {
   matchstarttimer.hidewheninmenu = 1;
   matchstarttimer hud::font_pulse_init();
   counttime = int(duration);
-  if(isdefined(level.host_migration_activate_visionset_func)) {
+  if(isDefined(level.host_migration_activate_visionset_func)) {
     level thread[[level.host_migration_activate_visionset_func]]();
   }
   if(counttime >= 2) {
     matchstarttimerconsole_internal(counttime, matchstarttimer);
   }
-  if(isdefined(level.host_migration_deactivate_visionset_func)) {
+  if(isDefined(level.host_migration_deactivate_visionset_func)) {
     level thread[[level.host_migration_deactivate_visionset_func]]();
   }
   matchstarttimer hud::destroyelem();
@@ -118,7 +118,7 @@ function hostmigrationwait() {
 
 function waittillhostmigrationcountdown() {
   level endon("host_migration_end");
-  if(!isdefined(level.hostmigrationtimer)) {
+  if(!isDefined(level.hostmigrationtimer)) {
     return;
   }
   level waittill("host_migration_countdown_begin");
@@ -133,7 +133,7 @@ function hostmigrationtimerthink_internal() {
   level endon("host_migration_begin");
   level endon("host_migration_end");
   self.hostmigrationcontrolsfrozen = 0;
-  while (!isalive(self)) {
+  while(!isalive(self)) {
     self waittill("spawned");
   }
   self.hostmigrationcontrolsfrozen = 1;
@@ -151,7 +151,7 @@ function hostmigrationtimerthink() {
 }
 
 function waittillhostmigrationdone() {
-  if(!isdefined(level.hostmigrationtimer)) {
+  if(!isDefined(level.hostmigrationtimer)) {
     return 0;
   }
   starttime = gettime();
@@ -160,7 +160,7 @@ function waittillhostmigrationdone() {
 }
 
 function waittillhostmigrationstarts(duration) {
-  if(isdefined(level.hostmigrationtimer)) {
+  if(isDefined(level.hostmigrationtimer)) {
     return;
   }
   level endon("host_migration_begin");
@@ -174,9 +174,9 @@ function waitlongdurationwithhostmigrationpause(duration) {
   assert(duration > 0);
   starttime = gettime();
   endtime = gettime() + (duration * 1000);
-  while (gettime() < endtime) {
+  while(gettime() < endtime) {
     waittillhostmigrationstarts((endtime - gettime()) / 1000);
-    if(isdefined(level.hostmigrationtimer)) {
+    if(isDefined(level.hostmigrationtimer)) {
       timepassed = waittillhostmigrationdone();
       endtime = endtime + timepassed;
     }
@@ -196,11 +196,11 @@ function waitlongdurationwithhostmigrationpauseemp(duration) {
   starttime = gettime();
   empendtime = gettime() + (duration * 1000);
   level.empendtime = empendtime;
-  while (gettime() < empendtime) {
+  while(gettime() < empendtime) {
     waittillhostmigrationstarts((empendtime - gettime()) / 1000);
-    if(isdefined(level.hostmigrationtimer)) {
+    if(isDefined(level.hostmigrationtimer)) {
       timepassed = waittillhostmigrationdone();
-      if(isdefined(empendtime)) {
+      if(isDefined(empendtime)) {
         empendtime = empendtime + timepassed;
       }
     }
@@ -220,9 +220,9 @@ function waitlongdurationwithgameendtimeupdate(duration) {
   assert(duration > 0);
   starttime = gettime();
   endtime = gettime() + (duration * 1000);
-  while (gettime() < endtime) {
+  while(gettime() < endtime) {
     waittillhostmigrationstarts((endtime - gettime()) / 1000);
-    while (isdefined(level.hostmigrationtimer)) {
+    while(isDefined(level.hostmigrationtimer)) {
       endtime = endtime + 1000;
       setgameendtime(int(endtime));
       wait(1);
@@ -231,7 +231,7 @@ function waitlongdurationwithgameendtimeupdate(duration) {
   if(gettime() != endtime) {
     println((("" + gettime()) + "") + endtime);
   }
-  while (isdefined(level.hostmigrationtimer)) {
+  while(isDefined(level.hostmigrationtimer)) {
     endtime = endtime + 1000;
     setgameendtime(int(endtime));
     wait(1);
@@ -243,9 +243,9 @@ function migrationawarewait(durationms) {
   waittillhostmigrationdone();
   endtime = gettime() + durationms;
   timeremaining = durationms;
-  while (true) {
+  while(true) {
     event = level util::waittill_level_any_timeout(timeremaining / 1000, self, "game_ended", "host_migration_begin");
-    if(!isdefined(event)) {
+    if(!isDefined(event)) {
       return;
     }
     if(event != "host_migration_begin") {

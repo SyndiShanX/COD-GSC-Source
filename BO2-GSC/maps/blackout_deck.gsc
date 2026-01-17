@@ -232,15 +232,13 @@ deck_danger_zone() {
   e_kill_zone = getent("deck_kill_zone", "targetname");
 
   while(isalive(self)) {
-    if(self istouching(e_danger_zone)) {
-    } else if(self istouching(e_kill_zone)) {
+    if(self istouching(e_danger_zone)) {} else if(self istouching(e_kill_zone)) {
       level.player.overrideplayerdamage = undefined;
       screen_message_delete();
       magicbullet("avenger_missile_turret_blackout", self.origin + vectorscale((0, 0, 1), 1000.0), self.origin);
       wait 0.3;
       self dodamage(1000, self.origin);
-    } else {
-    }
+    } else {}
 
     wait 0.25;
   }
@@ -374,7 +372,7 @@ deck_event_menendez_takeoff_vo() {
 deck_event_menendez_takeoff_sound() {
   sound_ent = spawn("script_origin", self.origin);
   sound_ent linkto(self, "tag_canopy");
-  sound_ent playloopsound("evt_menendez_takeoff");
+  sound_ent playLoopSound("evt_menendez_takeoff");
   wait 27;
   sound_ent delete();
 }
@@ -483,14 +481,14 @@ run_mason_deck_final() {
   veh_player_vtol thread board_vtol_audio();
   level thread run_scene_and_delete("exit_vtol_crosby_wait");
   m_vtol_elevator movez(576, 15, 3, 3);
-  m_vtol_elevator playsound("evt_elev_start_3d");
-  m_vtol_elevator playloopsound("evt_elev_loop_3d", 3);
+  m_vtol_elevator playSound("evt_elev_start_3d");
+  m_vtol_elevator playLoopSound("evt_elev_loop_3d", 3);
   m_vtol_elevator waittill("movedone");
   flag_set("vtol_ready_for_liftoff");
   level thread fail_condition_all_enemies_dead();
   earthquake(0.3, 0.5, m_vtol_elevator.origin, 1000, level.player);
   m_vtol_elevator stoploopsound(2);
-  m_vtol_elevator playsound("evt_elev_stop_3d");
+  m_vtol_elevator playSound("evt_elev_stop_3d");
   veh_player_vtol unlink();
   run_scene_first_frame("exit_vtol");
   flag_wait("player_boarded_vtol");
@@ -532,8 +530,7 @@ outro_launchers_fire() {
   array_thread(a_launchers, ::outro_launcher_logic);
 }
 
-outro_launcher_logic() {
-}
+outro_launcher_logic() {}
 
 run_mason_deck_final_deck_attackers() {
   s_goalpos = get_struct("outro_pmc_goal", "targetname");
@@ -567,12 +564,12 @@ run_mason_deck_final_deck_attackers() {
 get_outro_ai_target() {
   vh_vtol = get_ent("player_vtol");
   v_origin = vh_vtol gettagorigin("tag_barrel");
-  v_angles = anglestoforward(vh_vtol gettagangles("tag_barrel")) * 450;
+  v_angles = anglesToForward(vh_vtol gettagangles("tag_barrel")) * 450;
   v_offset = (0, 0, 0);
   v_fire = v_origin + v_angles + v_offset;
   e_target = spawn("script_origin", v_fire);
   e_target.health = 99999;
-  e_target setcandamage(1);
+  e_target setCanDamage(1);
   e_target linkto(vh_vtol);
   return e_target;
 }
@@ -609,9 +606,9 @@ run_mason_deck_final_player() {
 run_mason_deck_final_fire(player_body) {
   v_start = player_body gettagorigin("tag_fx");
   v_angles = player_body gettagangles("tag_fx");
-  v_end = v_start + anglestoforward(v_angles) * 200;
+  v_end = v_start + anglesToForward(v_angles) * 200;
   magicbullet("fiveseven_sp", v_start, v_end);
-  playfxontag(level._effect["crosby_shot_muzzleflash"], player_body, "tag_fx");
+  playFXOnTag(level._effect["crosby_shot_muzzleflash"], player_body, "tag_fx");
   ai_enemy = get_ent("exit_enemy_ai", "targetname");
   ai_enemy stop_magic_bullet_shield();
 }
@@ -646,8 +643,8 @@ board_vtol_audio() {
   sound_ent_2 = spawn("script_origin", self.origin);
   sound_ent_1 linkto(self, "tag_origin", (-75, 300, 0));
   sound_ent_2 linkto(self, "tag_origin", (75, -300, 0));
-  sound_ent_1 playloopsound("veh_side_engine");
-  sound_ent_2 playloopsound("veh_side_engine");
+  sound_ent_1 playLoopSound("veh_side_engine");
+  sound_ent_2 playLoopSound("veh_side_engine");
 }
 
 vtol_player_override(e_inflictor, e_attacker, n_damage, n_flags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, n_model_index, psoffsettime) {
@@ -705,7 +702,7 @@ drone_fire_squibs(index) {
   self endon("death");
 
   while(true) {
-    fire_at_target = anglestoforward(self.angles + (randomintrange(-45, 45), randomintrange(-45, 45), 0)) * 300 + vectorscale((0, 0, -1), 1000.0);
+    fire_at_target = anglesToForward(self.angles + (randomintrange(-45, 45), randomintrange(-45, 45), 0)) * 300 + vectorscale((0, 0, -1), 1000.0);
     magicbullet("f35_side_minigun", self.origin, self.origin + fire_at_target);
     wait 0.1;
   }
@@ -769,7 +766,7 @@ drone_fake_fire_at_target(s_target) {
   v_start = self gettagorigin("tag_flash");
   v_end = s_target.origin;
   v_to_target = v_end - v_start;
-  playfx(level._effect["drone_swarm_fake_missile"], v_start, v_to_target);
+  playFX(level._effect["drone_swarm_fake_missile"], v_start, v_to_target);
 }
 
 play_drone_swarm_old(b_earthquake) {
@@ -850,7 +847,7 @@ drone_earthquake() {
 drone_swarm_fire_missile(index) {
   level waittill("drone_swarm_start_fire_" + index);
   tag_origin = self gettagorigin("TAG_MISSILE_Right");
-  fire_at_target = anglestoforward(self.angles) * 500;
+  fire_at_target = anglesToForward(self.angles) * 500;
   magicbullet("avenger_missile_turret_blackout", tag_origin + fire_at_target, tag_origin + fire_at_target * 10);
 }
 
@@ -860,7 +857,7 @@ drone_swarm_fire_squibs(index) {
 
   while(true) {
     tag_origin = self gettagorigin("tag_gear_nose");
-    fire_at_target = anglestoforward(self.angles + (randomintrange(-45, 45), randomintrange(-45, 45), 0)) * 300 + vectorscale((0, 0, -1), 1000.0);
+    fire_at_target = anglesToForward(self.angles + (randomintrange(-45, 45), randomintrange(-45, 45), 0)) * 300 + vectorscale((0, 0, -1), 1000.0);
     magicbullet("f35_side_minigun", tag_origin, tag_origin + fire_at_target);
     wait 0.1;
   }
@@ -871,7 +868,7 @@ sky_cowbell() {
   s_sky_cowbell = get_struct("sky_cowbell", "targetname");
 
   if(isDefined(s_sky_cowbell)) {
-    level.sky_cowbell = spawnstruct();
+    level.sky_cowbell = spawnStruct();
     sky_cowbell_set_max_drones(10);
     sky_cowbell_set_ratio();
     level.sky_cowbell.avenger_count = 0;
@@ -882,7 +879,7 @@ sky_cowbell() {
     a_spawn_points = get_struct_array("sky_cowbell_spawn_point", "targetname", 1);
     a_flight_structs = get_struct_array("sky_cowbell_flight_struct", "targetname", 1);
     a_valid_targets = get_ent_array("sky_cowbell_targets", "targetname", 1);
-    a_valid_targets = arraycombine(a_valid_targets, getentarray("sky_cowbell_targets", "script_noteworthy"), 1, 0);
+    a_valid_targets = arraycombine(a_valid_targets, getEntArray("sky_cowbell_targets", "script_noteworthy"), 1, 0);
     add_spawn_function_veh("avenger_ambient", ::sky_cowbell_drone_spawn_func, a_flight_structs);
     add_spawn_function_veh("avenger_ambient", ::sky_cowbell_drone_tracker);
     add_spawn_function_veh("avenger_ambient", ::sky_cowbell_firing_func, a_valid_targets);
@@ -1122,7 +1119,7 @@ drone_barrage() {
 randomly_destroy_drone() {
   while(true) {
     if(randomint(4) == 0) {
-      a_drone_vehicles = getentarray("drone_turret_targets", "script_noteworthy");
+      a_drone_vehicles = getEntArray("drone_turret_targets", "script_noteworthy");
 
       if(a_drone_vehicles.size > 0) {
         index = randomint(a_drone_vehicles.size);
@@ -1157,7 +1154,7 @@ run_missile_firing_drones_around_player() {
 
 fire_missile_from_behind_the_player() {
   n_spawn_yaw = absangleclamp360(level.player.angles[1] + randomintrange(90, 270));
-  v_missile_spawn_org = level.player.origin + anglestoforward((0, n_spawn_yaw, 0)) * 3000;
+  v_missile_spawn_org = level.player.origin + anglesToForward((0, n_spawn_yaw, 0)) * 3000;
   v_missile_spawn_org = (v_missile_spawn_org[0], v_missile_spawn_org[1], randomintrange(2000, 3000));
   s_fire_missile_target = find_missile_fire_at_target_the_player_is_looking_at();
   magicbullet("avenger_missile_turret_blackout", v_missile_spawn_org, s_fire_missile_target.origin);
@@ -1272,10 +1269,10 @@ setup_claw_bigdog() {
 }
 
 claw_fire_direction_func() {
-  v_origin = self geteye();
-  v_angles = anglestoforward(self getplayerangles());
+  v_origin = self getEye();
+  v_angles = anglesToForward(self getplayerangles());
   v_aim_pos = v_origin + v_angles * 8000;
-  a_trace = bullettrace(v_origin, v_aim_pos, 0, self);
+  a_trace = bulletTrace(v_origin, v_aim_pos, 0, self);
   v_shoot_pos = a_trace["position"];
   a_shooters = maps\_fire_direction::get_fire_direction_shooters();
   a_enemies = getaiarray("axis");
@@ -1378,7 +1375,7 @@ _can_hit_target_safely(v_position, v_start_pos) {
   assert(isDefined(v_position), "v_position missing for _get_closest_unit_to_fire");
   a_shooters = maps\_fire_direction::get_fire_direction_shooters();
   assert(isDefined(a_shooters.size > 0), "no valid shooters found to use in _get_closest_unit_to_fire. Add these with add_fire_direction_shooter( <ent_that_can_shoot> ) first.");
-  a_trace = bullettrace(v_start_pos, v_position, 0, self);
+  a_trace = bulletTrace(v_start_pos, v_position, 0, self);
   b_can_hit_target = 1;
   b_will_hit_player = distance(a_trace["position"], level.player.origin) < 256;
   b_will_hit_self = distance(a_trace["position"], v_start_pos) < 256;
@@ -1414,7 +1411,7 @@ claw_pathing() {
   while(isDefined(nd_node.target)) {
     while(true) {
       v_player_dir = vectornormalize(level.player.origin - self.origin);
-      v_forward = anglestoforward(self.angles);
+      v_forward = anglesToForward(self.angles);
       dp = vectordot(v_player_dir, v_forward);
 
       if(dp > 0.1) {
@@ -1447,7 +1444,7 @@ notetrack_enemy_fires_at_crosby(ai_enemy) {
 }
 
 notetrack_crosby_gets_shot(ai_crosby) {
-  playfxontag(level._effect["crosby_shot"], ai_crosby, "J_Shoulder_LE");
+  playFXOnTag(level._effect["crosby_shot"], ai_crosby, "J_Shoulder_LE");
 }
 
 notetrack_outro_spawn_deck_enemies(m_player_body) {
@@ -1459,8 +1456,7 @@ notetrack_outro_lookat_ship_1(m_player_body) {
   _fire_outro_magic_bullet_at_bridge();
 }
 
-notetrack_outro_lookat_ship_2(m_player_body) {
-}
+notetrack_outro_lookat_ship_2(m_player_body) {}
 
 notetrack_outro_lookat_ship_3(m_player_body) {
   wait 4.5;

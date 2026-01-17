@@ -7,25 +7,25 @@
 //=====================
 //
 // Anim variables
-// -------------- 
-// Anim variables keep track of what the character is doing with respect to his 
-// animations.They know if he's standing, crouching, kneeling, walking, running, etc, 
+// --------------
+// Anim variables keep track of what the character is doing with respect to his
+// animations.They know if he's standing, crouching, kneeling, walking, running, etc,
 // so that he can play appropriate transitions to get to the animation he wants.
 // anim_movement - "stop", "walk", "run"
 // anim_pose - "stand", "crouch", "prone", some others for pain poses.
-// I'm putting functions to do the basic animations to change these variables in 
-// SetPoseMovement.gsc, 
+// I'm putting functions to do the basic animations to change these variables in
+// SetPoseMovement.gsc,
 //
 // Error Reporting
 // ---------------
-// To report a script error condition (similar to assert(0)), I assign a non-existent variable to 
-// the variable homemade_errorI use the name of the non-existent variable to try to explain the 
+// To report a script error condition (similar to assert(0)), I assign a non-existent variable to
+// the variable homemade_errorI use the name of the non-existent variable to try to explain the
 // error.For example:
 // 		homemade_error = Unexpected_anim_pose_value + self.a.pose;
 // I also have a kind of assert, called as follows:
 //		[[anim.assertEX(condition, message_string);
-// If condition evaluates to 0, the assert fires, prints message_string and stops the server. Since 
-// I don't have stack traces of any kind, the message string needs to say from where the assert was 
+// If condition evaluates to 0, the assert fires, prints message_string and stops the server. Since
+// I don't have stack traces of any kind, the message string needs to say from where the assert was
 // called.
 
 #include animscripts\Utility;
@@ -35,7 +35,7 @@
 #using_animtree("generic_human");
 
 initWeapon(weapon) {
-  self.weaponInfo[weapon] = spawnstruct();
+  self.weaponInfo[weapon] = spawnStruct();
   self.weaponInfo[weapon].position = "none";
   self.weaponInfo[weapon].hasClip = true;
 
@@ -189,14 +189,14 @@ main() {
   self.a.nextStandingHitDying = false;
 
   // Makes AI able to throw grenades at other AI.
-  if(!isdefined(self.script_forcegrenade))
+  if(!isDefined(self.script_forcegrenade))
     self.script_forcegrenade = 0;
 
-  /# self.a.lastDebugPrint = ""; #/
+  /# self.a.lastDebugPrint = "";
 
   SetupUniqueAnims();
 
-  /# thread animscripts\utility::UpdateDebugInfo(); #/
+  /# thread animscripts\utility::UpdateDebugInfo();
 
   self animscripts\weaponList::RefillClip(); // Start with a full clip.
 
@@ -233,7 +233,7 @@ main() {
   self.exception["corner_normal"] = 1;
 
   keys = getArrayKeys(self.exception);
-  for (i = 0; i < keys.size; i++) {
+  for(i = 0; i < keys.size; i++) {
     clear_exception(keys[i]);
   }
 
@@ -243,12 +243,10 @@ main() {
 
   self.shouldConserveAmmoTime = 0;
 
-  /#
   self thread printEyeOffsetFromNode();
   self thread showLikelyEnemyPathDir();
-  # /
 
-    self thread monitorFlash();
+  self thread monitorFlash();
 
   self thread onDeath();
 
@@ -261,24 +259,23 @@ weapons_with_ir(weapon) {
   weapons[2] = "m4_silencer";
   weapons[3] = "m4m203";
 
-  if(!isdefined(weapon))
+  if(!isDefined(weapon))
     return false;
 
-  for (i = 0; i < weapons.size; i++) {
+  for(i = 0; i < weapons.size; i++) {
     if(issubstr(weapon, weapons[i]))
       return true;
   }
   return false;
 }
 
-/#
 printEyeOffsetFromNode() {
   self endon("death");
-  while (1) {
+  while(1) {
     if(getdvarint("scr_eyeoffset") == self getentnum()) {
-      if(isdefined(self.coverNode)) {
-        offset = self geteye() - self.coverNode.origin;
-        forward = anglestoforward(self.coverNode.angles);
+      if(isDefined(self.coverNode)) {
+        offset = self getEye() - self.coverNode.origin;
+        forward = anglesToForward(self.coverNode.angles);
         right = anglestoright(self.coverNode.angles);
         trueoffset = (vectordot(right, offset), vectordot(forward, offset), offset[2]);
         println(trueoffset);
@@ -292,15 +289,15 @@ printEyeOffsetFromNode() {
 showLikelyEnemyPathDir() {
   self endon("death");
   setDvarIfUninitialized("scr_showlikelyenemypathdir", "-1");
-  while (1) {
+  while(1) {
     if(getdvarint("scr_showlikelyenemypathdir") == self getentnum()) {
       yaw = self.angles[1];
       dir = self getAnglesToLikelyEnemyPath();
-      if(isdefined(dir))
+      if(isDefined(dir))
         yaw = dir[1];
-      printpos = self.origin + (0, 0, 60) + anglestoforward((0, yaw, 0)) * 100;
+      printpos = self.origin + (0, 0, 60) + anglesToForward((0, yaw, 0)) * 100;
       line(self.origin + (0, 0, 60), printpos);
-      if(isdefined(dir))
+      if(isDefined(dir))
         print3d(printpos, "likelyEnemyPathDir: " + yaw, (1, 1, 1), 1, 0.5);
       else
         print3d(printpos, "likelyEnemyPathDir: undefined", (1, 1, 1), 1, 0.5);
@@ -310,23 +307,22 @@ showLikelyEnemyPathDir() {
       wait 2;
   }
 }
-# /
 
-  setNameAndRank_andAddToSquad() {
-    self endon("death");
-    if(!isdefined(level.loadoutComplete))
-      level waittill("loadout complete");
+setNameAndRank_andAddToSquad() {
+  self endon("death");
+  if(!isDefined(level.loadoutComplete))
+    level waittill("loadout complete");
 
-    self maps\_names::get_name();
+  self maps\_names::get_name();
 
-    // needs to run after the name has been set since bcs changes self.voice from "multilingual"
-    //to something more specific
-    self thread animscripts\squadManager::addToSquad(); // slooooow
-  }
+  // needs to run after the name has been set since bcs changes self.voice from "multilingual"
+  //to something more specific
+  self thread animscripts\squadManager::addToSquad(); // slooooow
+}
 
 // Debug thread to see when stances are being allowed
 PollAllowedStancesThread() {
-  for (;;) {
+  for(;;) {
     if(self isStanceAllowed("stand")) {
       line[0] = "stand allowed";
       color[0] = (0, 1, 0);
@@ -351,7 +347,7 @@ PollAllowedStancesThread() {
 
     aboveHead = self getshootatpos() + (0, 0, 30);
     offset = (0, 0, -10);
-    for (i = 0; i < line.size; i++) {
+    for(i = 0; i < line.size; i++) {
       textPos = (aboveHead[0] + (offset[0] * i), aboveHead[1] + (offset[1] * i), aboveHead[2] + (offset[2] * i));
       print3d(textPos, line[i], color[i], 1, 0.75); // origin, text, RGB, alpha, scale
     }
@@ -381,11 +377,11 @@ empty(one, two, three, whatever) {}
 enemyNotify() {
   self endon("death");
   if(1) return;
-  for (;;) {
+  for(;;) {
     self waittill("enemy");
     if(!isalive(self.enemy))
       continue;
-    while (isplayer(self.enemy)) {
+    while(isplayer(self.enemy)) {
       if(hasEnemySightPos())
         level.lastPlayerSighted = gettime();
       wait(2);
@@ -446,15 +442,15 @@ firstInit() {
 
   setEnv("none");
 
-  if(!isdefined(anim.optionalStepEffectFunction)) {
+  if(!isDefined(anim.optionalStepEffectFunction)) {
     anim.optionalStepEffectSmallFunction = animscripts\shared::playFootStepEffectSmall;
     anim.optionalStepEffectFunction = animscripts\shared::playFootStepEffect;
   }
 
-  if(!isdefined(anim.optionalStepEffects))
+  if(!isDefined(anim.optionalStepEffects))
     anim.optionalStepEffects = [];
 
-  if(!isdefined(anim.optionalStepEffectsSmall))
+  if(!isDefined(anim.optionalStepEffectsSmall))
     anim.optionalStepEffectsSmall = [];
 
   anim.shootEnemyWrapper_func = ::shootEnemyWrapper_shootNotify;
@@ -470,12 +466,10 @@ firstInit() {
   // string based array for notetracks
   animscripts\shared::registerNoteTracks();
 
-  /#
   setDvarIfUninitialized("debug_delta", "off");
-  # /
 
-    if(!isdefined(level.flag))
-      common_scripts\utility::init_flags();
+  if(!isDefined(level.flag))
+    common_scripts\utility::init_flags();
 
   maps\_gameskill::setSkill();
   level.painAI = undefined;
@@ -491,7 +485,7 @@ firstInit() {
   anim.badPlaces = []; // queue for animscript badplaces
   anim.badPlaceInt = 0; // assigns unique names to animscript badplaces since we cant save a badplace as an entity
 
-  anim.player = getentarray("player", "classname")[0];
+  anim.player = getEntArray("player", "classname")[0];
 
   initBattlechatter();
 
@@ -515,7 +509,6 @@ firstInit() {
 }
 
 initDeveloperDvars() {
-  /#
   if(getdebugdvar("debug_noanimscripts") == "")
     setdvar("debug_noanimscripts", "off");
   else if(getdebugdvar("debug_noanimscripts") == "on")
@@ -529,7 +522,6 @@ initDeveloperDvars() {
     setdvar("anim_debug", "");
   if(getdebugdvar("debug_misstime") == "")
     setdvar("debug_misstime", "");
-  # /
 }
 
 initBattlechatter() {
@@ -551,7 +543,7 @@ initDeaths() {
 }
 
 initGrenades() {
-  for (i = 0; i < level.players.size; i++) {
+  for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
     player.grenadeTimers["fraggrenade"] = randomIntRange(1000, 20000);
     player.grenadeTimers["flash_grenade"] = randomIntRange(1000, 20000);
@@ -565,11 +557,9 @@ initGrenades() {
   anim.grenadeTimers["AI_flash_grenade"] = randomIntRange(0, 20000);
   anim.grenadeTimers["AI_smoke_grenade_american"] = randomIntRange(0, 20000);
 
-  /#
   thread animscripts\combat_utility::grenadeTimerDebug();
-  # /
 
-    initGrenadeThrowAnims();
+  initGrenadeThrowAnims();
 }
 
 initAdvanceToEnemy() {
@@ -607,15 +597,15 @@ initAdvanceToEnemy() {
 AITurnNotifies() {
   numTurnsThisFrame = 0;
   maxAIPerFrame = 3;
-  while (1) {
+  while(1) {
     ai = getAIArray();
     if(ai.size == 0) {
       wait .05;
       numTurnsThisFrame = 0;
       continue;
     }
-    for (i = 0; i < ai.size; i++) {
-      if(!isdefined(ai[i]))
+    for(i = 0; i < ai.size; i++) {
+      if(!isDefined(ai[i]))
         continue;
       ai[i] notify("do_slow_things");
       numTurnsThisFrame++;
@@ -631,14 +621,14 @@ setNextPlayerGrenadeTime() {
   assert(isPlayer(self));
   waittillframeend;
   // might not be defined if maps\_load::main() wasn't called
-  if(isdefined(self.gs.playerGrenadeRangeTime)) {
+  if(isDefined(self.gs.playerGrenadeRangeTime)) {
     maxTime = int(self.gs.playerGrenadeRangeTime * 0.7);
     if(maxTime < 1)
       maxTime = 1;
     self.grenadeTimers["fraggrenade"] = randomIntRange(0, maxTime);
     self.grenadeTimers["flash_grenade"] = randomIntRange(0, maxTime);
   }
-  if(isdefined(self.gs.playerDoubleGrenadeTime)) {
+  if(isDefined(self.gs.playerDoubleGrenadeTime)) {
     maxTime = int(self.gs.playerDoubleGrenadeTime);
     minTime = int(maxTime / 2);
     if(maxTime <= minTime)
@@ -650,7 +640,7 @@ setNextPlayerGrenadeTime() {
 beginGrenadeTracking() {
   self endon("death");
 
-  for (;;) {
+  for(;;) {
     self waittill("grenade_fire", grenade, weaponName);
     grenade thread grenade_earthQuake();
   }
@@ -663,10 +653,10 @@ setupRandomTable() {
 
   // anim.randomIntTable is a permutation of integers 0 through anim.randomIntTableSize - 1
   anim.randomIntTable = [];
-  for (i = 0; i < anim.randomIntTableSize; i++)
+  for(i = 0; i < anim.randomIntTableSize; i++)
     anim.randomIntTable[i] = i;
 
-  for (i = 0; i < anim.randomIntTableSize; i++) {
+  for(i = 0; i < anim.randomIntTableSize; i++) {
     switchwith = randomint(anim.randomIntTableSize);
     temp = anim.randomIntTable[i];
     anim.randomIntTable[i] = anim.randomIntTable[switchwith];
@@ -676,10 +666,10 @@ setupRandomTable() {
 
 onDeath() {
   self waittill("death");
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     // we were deleted and we're not running the death script.
     // still safe to access our variables as a removed entity though:
-    if(isdefined(self.a.usingTurret))
+    if(isDefined(self.a.usingTurret))
       self.a.usingTurret delete();
   }
 }

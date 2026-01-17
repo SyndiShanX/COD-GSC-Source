@@ -9,7 +9,6 @@
 #include scripts\zm_common\zm_loadout;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
-
 #namespace zm_orange_trial_shoot_from_water;
 
 autoexec __init__system__() {
@@ -24,7 +23,7 @@ __init__() {
   zm_trial::register_challenge(#"shoot_from_water", &on_begin, &on_end);
 }
 
-private on_begin() {
+on_begin() {
   str_targetname = "trials_shoot_from_water";
   callback::function_33f0ddd3(&function_33f0ddd3);
   level zm_trial::function_25ee130(1);
@@ -34,7 +33,7 @@ private on_begin() {
   }
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   callback::function_824d206(&function_33f0ddd3);
   level zm_trial::function_25ee130(0);
 
@@ -46,7 +45,7 @@ private on_end(round_reset) {
   level.var_7f31a12d = undefined;
 }
 
-private function_9e0e99e1() {
+function_9e0e99e1() {
   self endon(#"disconnect");
   level endon(#"hash_7646638df88a3656");
   var_407eb07 = 0;
@@ -97,7 +96,7 @@ private function_9e0e99e1() {
   }
 }
 
-private function_33f0ddd3(s_event) {
+function_33f0ddd3(s_event) {
   if(s_event.event === "give_weapon" || s_event.event === "give_weapon_alt" || s_event.event == "give_weapon_dual") {
     var_f2b6fe6e = 0;
 

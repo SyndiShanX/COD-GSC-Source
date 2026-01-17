@@ -97,7 +97,7 @@ wait_for_initial_conditions() {
   flag_wait("soul_catchers_charged");
   m_poster = getent("poster", "targetname");
   m_poster.health = 5000;
-  m_poster setcandamage(1);
+  m_poster setCanDamage(1);
   b_poster_knocked_down = 0;
 
   while(!b_poster_knocked_down) {
@@ -123,7 +123,7 @@ wait_for_initial_conditions() {
   m_spoon = getent("zap_spoon", "targetname");
   m_spoon ghostindemo();
   m_spoon.health = 50000;
-  m_spoon setcandamage(1);
+  m_spoon setCanDamage(1);
   b_spoon_shocked = 0;
 
   while(!b_spoon_shocked) {
@@ -133,13 +133,13 @@ wait_for_initial_conditions() {
     if(weaponname == "lightning_hands_zm") {
       b_spoon_shocked = 1;
       m_spoon delete();
-      attacker playsound("zmb_easteregg_laugh");
+      attacker playSound("zmb_easteregg_laugh");
     }
   }
 
   m_spoon_pickup show();
   m_spoon_pickup.health = 10000;
-  m_spoon_pickup setcandamage(1);
+  m_spoon_pickup setCanDamage(1);
   level.a_tomahawk_pickup_funcs[level.a_tomahawk_pickup_funcs.size] = ::tomahawk_the_spoon;
 }
 
@@ -153,7 +153,7 @@ tomahawk_the_spoon(grenade, n_grenade_charge_power) {
     m_tomahawk = maps\mp\zombies\_zm_weap_tomahawk::tomahawk_spawn(grenade.origin);
     m_tomahawk.n_grenade_charge_power = n_grenade_charge_power;
     m_player_spoon = spawn("script_model", grenade.origin);
-    m_player_spoon setmodel("t6_wpn_zmb_spoon_world");
+    m_player_spoon setModel("t6_wpn_zmb_spoon_world");
     m_player_spoon linkto(m_tomahawk);
     self maps\mp\zombies\_zm_stats::increment_client_stat("prison_ee_spoon_acquired", 0);
     self thread maps\mp\zombies\_zm_weap_tomahawk::tomahawk_return_player(m_tomahawk);
@@ -223,7 +223,7 @@ dip_the_spoon() {
   level.b_spoon_in_tub = 1;
   flag_wait("charged_spoon");
   wait 1.0;
-  level.t_bathtub playsound("zmb_easteregg_laugh");
+  level.t_bathtub playSound("zmb_easteregg_laugh");
   self thread thrust_the_spork();
 }
 

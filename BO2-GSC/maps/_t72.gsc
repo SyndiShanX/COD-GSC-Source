@@ -13,7 +13,7 @@ setanims() {
   positions = [];
 
   for(i = 0; i < 11; i++)
-    positions[i] = spawnstruct();
+    positions[i] = spawnStruct();
 
   positions[0].getout_delete = 1;
   return positions;

@@ -8,14 +8,14 @@
 #namespace music;
 
 function autoexec __init__sytem__() {
-  system::register("music", & __init__, undefined, undefined);
+  system::register("music", &__init__, undefined, undefined);
 }
 
 function __init__() {
   level.activemusicstate = "";
   level.nextmusicstate = "";
   level.musicstates = [];
-  util::register_system("musicCmd", & musiccmdhandler);
+  util::register_system("musicCmd", &musiccmdhandler);
 }
 
 function musiccmdhandler(clientnum, state, oldstate) {

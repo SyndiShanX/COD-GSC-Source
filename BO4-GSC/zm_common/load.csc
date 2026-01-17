@@ -24,7 +24,6 @@
 #include scripts\zm_common\zm_magicbox;
 #include scripts\zm_common\zm_score;
 #include scripts\zm_common\zm_traps;
-
 #namespace load;
 
 levelnotifyhandler(clientnum, state, oldstate) {

@@ -108,7 +108,7 @@ melee_updateandvalidatestartpos() {
 
   if(isDefined(self.melee.starttotargetcornerangles)) {
     targettostartpos = self.melee.startpos - self.melee.target.origin;
-    cornerdir = anglestoforward(self.melee.starttotargetcornerangles);
+    cornerdir = anglesToForward(self.melee.starttotargetcornerangles);
     cornerdirlen = vectordot(cornerdir, targettostartpos);
     maymovetargetorigin = self.melee.startpos - cornerdir * cornerdirlen;
     cornertotarget = self.melee.target.origin - maymovetargetorigin;
@@ -245,9 +245,7 @@ melee_mainloop() {
 
   while(true) {
     prevfunc = self.melee.func;
-    [
-      [self.melee.func]
-    ]();
+    [[self.melee.func]]();
 
     if(!isDefined(self.melee.func) || prevfunc == self.melee.func) {
       break;
@@ -586,10 +584,10 @@ melee_acquiremutex(target) {
   if(isDefined(target.melee))
     return false;
 
-  self.melee = spawnstruct();
+  self.melee = spawnStruct();
 
   if(!isplayer(target))
-    target.melee = spawnstruct();
+    target.melee = spawnStruct();
 
   return true;
 }
@@ -960,7 +958,7 @@ melee_handlenotetracks_death(interruptanimation) {
 melee_handlenotetracks(note) {
   if(issubstr(note, "ps_")) {
     alias = getsubstr(note, 3);
-    self playsound(alias);
+    self playSound(alias);
     return;
   }
 
@@ -996,15 +994,15 @@ melee_handlenotetracks(note) {
     self.melee.hasknife = undefined;
   } else if(note == "stab") {
     assert(isDefined(self.melee.hasknife) || isDefined(self.hasknifelikeweapon));
-    self playsound("melee_knife_hit_body");
+    self playSound("melee_knife_hit_body");
 
     if(isDefined(self.special_knife_attack_fx_name)) {
       if(isDefined(self.melee_weapon_ent))
-        playfxontag(level._effect[self.special_knife_attack_fx_name], self.melee_weapon_ent, self.special_knife_attack_fx_tag);
+        playFXOnTag(level._effect[self.special_knife_attack_fx_name], self.melee_weapon_ent, self.special_knife_attack_fx_tag);
       else
-        playfxontag(level._effect[self.special_knife_attack_fx_name], self, self.special_knife_attack_fx_tag);
+        playFXOnTag(level._effect[self.special_knife_attack_fx_name], self, self.special_knife_attack_fx_tag);
     } else
-      playfxontag(level._effect["flesh_hit_knife"], self, "tag_origin");
+      playFXOnTag(level._effect["flesh_hit_knife"], self, "tag_origin");
 
     if(isDefined(self.melee.partner) && isDefined(self.melee.partner.melee))
       self.melee.partner melee_handlenotetracks_death(1);
@@ -1159,9 +1157,7 @@ melee_aivsai_exposed_chooseanimationandposition_behind(anglediff) {
 }
 
 melee_aivsai_exposed_chooseanimationandposition_buildexposedlist() {
-  if(isDefined(self.meleesequenceoverride) && [
-      [self.canexecutemeleesequenceoverride]
-    ]())
+  if(isDefined(self.meleesequenceoverride) && [[self.canexecutemeleesequenceoverride]]())
     exposedmelees[0] = self.meleesequenceoverride;
   else if(isDefined(self.meleeforcedexposedflip)) {
     assert(!isDefined(self.meleeforcedexposedwrestle));

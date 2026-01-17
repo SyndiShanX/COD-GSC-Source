@@ -148,7 +148,7 @@ declare_sidequest(name, init_func, logic_func, complete_func, generic_stage_star
     return;
   }
 
-  sq = spawnstruct();
+  sq = spawnStruct();
   sq.name = name;
   sq.stages = [];
   sq.last_completed_stage = -1;
@@ -183,7 +183,7 @@ declare_sidequest_stage(sidequest_name, stage_name, init_func, logic_func, exit_
     return;
   }
 
-  stage = spawnstruct();
+  stage = spawnStruct();
   stage.name = stage_name;
   stage.stage_number = level._zombie_sidequests[sidequest_name].stages.size;
   stage.assets = [];
@@ -240,7 +240,7 @@ declare_stage_asset_from_struct(sidequest_name, stage_name, target_name, thread_
   }
 
   for(i = 0; i < structs.size; i++) {
-    asset = spawnstruct();
+    asset = spawnStruct();
     asset.type = "struct";
     asset.struct = structs[i];
     asset.thread_func = thread_func;
@@ -269,7 +269,7 @@ declare_stage_title(sidequest_name, stage_name, title) {
 }
 
 declare_stage_asset(sidequest_name, stage_name, target_name, thread_func, trigger_thread_func) {
-  ents = getentarray(target_name, "targetname");
+  ents = getEntArray(target_name, "targetname");
 
   if(!isDefined(level._zombie_sidequests)) {
     println("*** ERROR:Attempt to declare a side quest asset " + target_name + " before sidequests declared.");
@@ -292,7 +292,7 @@ declare_stage_asset(sidequest_name, stage_name, target_name, thread_func, trigge
   }
 
   for(i = 0; i < ents.size; i++) {
-    asset = spawnstruct();
+    asset = spawnStruct();
     asset.type = "entity";
     asset.ent = ents[i];
     asset.thread_func = thread_func;
@@ -302,7 +302,7 @@ declare_stage_asset(sidequest_name, stage_name, target_name, thread_func, trigge
 }
 
 declare_sidequest_asset(sidequest_name, target_name, thread_func, trigger_thread_func) {
-  ents = getentarray(target_name, "targetname");
+  ents = getEntArray(target_name, "targetname");
 
   if(!isDefined(level._zombie_sidequests)) {
     println("*** ERROR:Attempt to declare a side quest asset " + target_name + " before sidequests declared.");
@@ -320,7 +320,7 @@ declare_sidequest_asset(sidequest_name, target_name, thread_func, trigger_thread
   }
 
   for(i = 0; i < ents.size; i++) {
-    asset = spawnstruct();
+    asset = spawnStruct();
     asset.type = "entity";
     asset.ent = ents[i];
     asset.thread_func = thread_func;
@@ -350,7 +350,7 @@ declare_sidequest_asset_from_struct(sidequest_name, target_name, thread_func, tr
   }
 
   for(i = 0; i < structs.size; i++) {
-    asset = spawnstruct();
+    asset = spawnStruct();
     asset.type = "struct";
     asset.struct = structs[i];
     asset.thread_func = thread_func;
@@ -363,7 +363,7 @@ build_asset_from_struct(asset, parent_struct) {
   ent = spawn("script_model", asset.origin);
 
   if(isDefined(asset.model))
-    ent setmodel(asset.model);
+    ent setModel(asset.model);
 
   if(isDefined(asset.angles))
     ent.angles = asset.angles;
@@ -647,9 +647,7 @@ time_limited_stage(sidequest) {
   time_limit = undefined;
 
   if(isDefined(self.time_limit_func))
-    time_limit = [
-      [self.time_limit_func]
-    ]() * 0.25;
+    time_limit = [[self.time_limit_func]]() * 0.25;
   else
     time_limit = self.time_limit * 0.25;
 
@@ -892,7 +890,7 @@ sidequest_start_next_stage(sidequest_name) {
 
 is_facing(facee) {
   orientation = self getplayerangles();
-  forwardvec = anglestoforward(orientation);
+  forwardvec = anglesToForward(orientation);
   forwardvec2d = (forwardvec[0], forwardvec[1], 0);
   unitforwardvec2d = vectornormalize(forwardvec2d);
   tofaceevec = facee.origin - self.origin;
@@ -917,9 +915,7 @@ fake_use(notify_string, qualifier_func) {
       qualifier_passed = 1;
 
       if(isDefined(qualifier_func))
-        qualifier_passed = players[i][
-          [qualifier_func]
-        ]();
+        qualifier_passed = players[i][[qualifier_func]]();
 
       if(qualifier_passed && distancesquared(self.origin, players[i].origin) < 4096) {
         if(players[i] is_facing(self)) {

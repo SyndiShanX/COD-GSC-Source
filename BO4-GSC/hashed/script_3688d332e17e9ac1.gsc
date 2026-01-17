@@ -9,7 +9,6 @@
 #include scripts\zm_common\zm_loadout;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
-
 #namespace namespace_ae2d0839;
 
 autoexec __init__system__() {
@@ -24,7 +23,7 @@ __init__() {
   zm_trial::register_challenge(#"hash_4043192ca121b4d4", &on_begin, &on_end);
 }
 
-private on_begin(var_59803fa8) {
+on_begin(var_59803fa8) {
   callback::on_ai_damage(&on_ai_damage);
   level.var_3c453815 = zm_trial::function_5769f26a(var_59803fa8);
 
@@ -55,7 +54,7 @@ private on_begin(var_59803fa8) {
   level zm_trial::function_cd75b690(1);
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   callback::remove_on_ai_damage(&on_ai_damage);
   callback::function_824d206(&function_33f0ddd3);
   level.var_3c453815 = undefined;
@@ -87,13 +86,13 @@ private on_end(round_reset) {
   level zm_trial::function_cd75b690(0);
 }
 
-private on_ai_damage(params) {
+on_ai_damage(params) {
   if(isplayer(params.eattacker) && params.weapon != level.weaponbasemelee && (isDefined(params.weapon.isbulletweapon) && params.weapon.isbulletweapon || isDefined(params.weapon.isprojectileweapon) && params.weapon.isprojectileweapon || isDefined(params.weapon.isburstfire) && params.weapon.isburstfire)) {
     params.eattacker.b_hit = 1;
   }
 }
 
-private on_weapon_fired(params) {
+on_weapon_fired(params) {
   if(!isDefined(params.weapon)) {
     return;
   }
@@ -106,7 +105,7 @@ private on_weapon_fired(params) {
     self notify(#"hash_593afdd4317784a0");
   }
 
-  self endon(#"disconnect", #"hash_593afdd4317784a0");
+  self endon(#"disconnect", # "hash_593afdd4317784a0");
   level endon(#"hash_7646638df88a3656");
 
   if(!isDefined(self.var_9979ffd6)) {
@@ -135,7 +134,7 @@ is_active() {
   return isDefined(challenge);
 }
 
-private function_33f0ddd3(s_event) {
+function_33f0ddd3(s_event) {
   if(s_event.event === "give_weapon") {
     if(!self isweaponlocked(s_event.weapon)) {
       self lockweapon(s_event.weapon, 0, 1);
@@ -149,7 +148,7 @@ private function_33f0ddd3(s_event) {
 
 event_handler[missile_fire] function_f8ea644(eventstruct) {
   if(is_active() && isDefined(eventstruct.projectile)) {
-    s_waitresult = eventstruct.projectile waittilltimeout(2, #"death", #"explode", #"projectile_impact_explode", #"stationary", #"grenade_stuck");
+    s_waitresult = eventstruct.projectile waittilltimeout(2, # "death", # "explode", # "projectile_impact_explode", # "stationary", # "grenade_stuck");
     self function_b33ed7bd();
   }
 }

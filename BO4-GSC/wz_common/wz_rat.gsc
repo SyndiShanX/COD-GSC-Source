@@ -11,7 +11,6 @@
 #include scripts\core_common\util_shared;
 #include scripts\mp_common\item_world;
 #include scripts\mp_common\laststand_warzone;
-
 #namespace rat;
 
 autoexec __init__system__() {
@@ -125,4 +124,3 @@ function_89684f6a(params) {
   player = [[level.rat.common.gethostplayer]]();
   return player.inventory.items[10].networkid != 32767;
 }
-

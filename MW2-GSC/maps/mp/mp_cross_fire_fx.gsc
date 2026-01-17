@@ -18,13 +18,11 @@ main() {
   /#		
   if(getdvar("clientSideEffects") != "1")
     maps\createfx\mp_cross_fire_fx::main();
-  # /
 }
 
 /*
 /#		
 	if( common_scripts\utility::shouldRunServerSideEffects() )
 		maps\createfx\mp_cross_fire_fx::main();
-#/
 }
 */

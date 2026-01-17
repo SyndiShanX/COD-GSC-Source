@@ -7,21 +7,21 @@
 #include common_scripts\utility;
 
 init() {
-  if(getdvar("scr_elevator_disabled") == "1")
+  if(getdvar("scr_elevator_disabled") == "1") {
     return;
-
+  }
   // skip if no elevators in this level
-  elevator_groups = getentarray("elevator_group", "targetname");
-  if(!isdefined(elevator_groups))
+  elevator_groups = getEntArray("elevator_group", "targetname");
+  if(!isDefined(elevator_groups))
     return;
-  if(!elevator_groups.size)
+  if(!elevator_groups.size) {
     return;
-
-  // Press and hold &&1 to call elevator.
+  }
+  // Press and hold && 1 to call elevator.
   precacheString(&"ELEVATOR_CALL_HINT");
-  // Press and hold &&1 to use elevator.
+  // Press and hold && 1 to use elevator.
   precacheString(&"ELEVATOR_USE_HINT");
-  // Press and hold &&1 to select floor.
+  // Press and hold && 1 to select floor.
   precacheString(&"ELEVATOR_FLOOR_SELECT_HINT");
 
   precacheMenu("elevator_floor_selector");
@@ -41,9 +41,9 @@ init() {
   position_elevators();
   elevator_call();
 
-  if(!level.elevators.size)
+  if(!level.elevators.size) {
     return;
-
+  }
   foreach(elevator in level.elevators) {
     elevator thread elevator_think();
     elevator thread elevator_sound_think();
@@ -53,7 +53,7 @@ init() {
 }
 
 elevator_update_global_dvars() {
-  while (1) {
+  while(1) {
     level.elevator_accel = elevator_get_dvar("scr_elevator_accel", "0.2"); // acceleration time in seconds
     level.elevator_decel = elevator_get_dvar("scr_elevator_decel", "0.2"); // deceleration time in seconds
     level.elevator_music = elevator_get_dvar_int("scr_elevator_music", "1"); // elevator music
@@ -65,7 +65,7 @@ elevator_update_global_dvars() {
     level.elevator_aggressive_call = elevator_get_dvar_int("scr_elevator_aggressive_call", "0"); // calls all available elevators to floor
     level.elevator_debug = elevator_get_dvar_int("debug_elevator", "0"); // 2: full 1: simple, 0: debug off
 
-    // mp & sp default differences:
+    // mp &sp default differences:
     if(isSP()) {
       level.elevator_motion_detection = elevator_get_dvar_int("scr_elevator_motion_detection", "0"); // calls elevators via motion detection
     } else {
@@ -96,7 +96,7 @@ floor_override(inside_trig) {
   self.floor_override = 0;
   self.overrider = undefined;
 
-  while (1) {
+  while(1) {
     inside_trig waittill("trigger", player);
     self.floor_override = 1;
     self.overrider = player;
@@ -107,7 +107,7 @@ floor_override(inside_trig) {
 
 elevator_fsm(state) {
   /*				finite state machine
-	
+  	
   state A: 	rest
   state B: 	closing doors - interrupt threaded
   state C: 	opening doors
@@ -132,7 +132,7 @@ elevator_fsm(state) {
   door_trig = self get_housing_door_trigger(); // triggers door interrupt
   inside_trig = self get_housing_inside_trigger(); // presence
 
-  while (1) {
+  while(1) {
     //state A: rest
     if(self.eState == "[A]") {
       // ?1: if not resting at initial floor
@@ -141,7 +141,7 @@ elevator_fsm(state) {
         self thread floor_override(inside_trig);
         self waittill_or_timeout("floor_override", level.elevator_waittime);
 
-        if(self.floor_override && isdefined(self.overrider) && isPlayer(self.overrider))
+        if(self.floor_override && isDefined(self.overrider) && isPlayer(self.overrider))
           self get_floor(self.overrider);
 
         self.eState = "[B]";
@@ -149,7 +149,7 @@ elevator_fsm(state) {
       }
 
       // wait for player use trigger
-      while (1) {
+      while(1) {
         // if elevator already has destination but interrupted, it should continue previous order
         if(self.moveto_floor == self get_curFloor())
           param = inside_trig discrete_waittill("trigger");
@@ -162,18 +162,18 @@ elevator_fsm(state) {
           break;
         }
 
-        if(isdefined(param) && isPlayer(param) && isAlive(param)) {
+        if(isDefined(param) && isPlayer(param) && isAlive(param)) {
           isTouching_trigger = (param istouching(inside_trig));
-          isTouching_motion_trigger = (isdefined(inside_trig.motion_trigger) && param istouching(inside_trig.motion_trigger));
+          isTouching_motion_trigger = (isDefined(inside_trig.motion_trigger) && param istouching(inside_trig.motion_trigger));
           player_isTouching_trigger = (isTouching_trigger || isTouching_motion_trigger);
 
           if(player_isTouching_trigger) {
             player = param;
             self get_floor(player);
 
-            if(self.moveto_floor == self get_curFloor())
+            if(self.moveto_floor == self get_curFloor()) {
               continue;
-
+            }
             self.eState = "[B]";
             break;
           }
@@ -221,7 +221,7 @@ elevator_fsm(state) {
 
     //state D: moving elevator
     if(self.eState == "[D]") {
-      assertex(isdefined(self.moveto_floor), "Missing destination floor number");
+      assertex(isDefined(self.moveto_floor), "Missing destination floor number");
 
       if(self.moveto_floor != self get_curFloor()) {
         self thread elevator_move(self.moveto_floor);
@@ -235,7 +235,7 @@ elevator_fsm(state) {
 }
 
 monitor_callbutton() {
-  while (1) {
+  while(1) {
     // call button used by player
     player = self discrete_waittill("trigger");
 
@@ -246,7 +246,7 @@ monitor_callbutton() {
       call_floor = idx;
       call_elevators = linked_elevators;
     }
-    assert(isdefined(call_floor) && isdefined(call_elevators) && call_elevators.size);
+    assert(isDefined(call_floor) && isDefined(call_elevators) && call_elevators.size);
 
     elevator_called = 0;
 
@@ -273,13 +273,14 @@ monitor_callbutton() {
         elevator_called = 1;
 
         // aggressive call
-        if(!level.elevator_aggressive_call)
+        if(!level.elevator_aggressive_call) {
           break;
+        }
       }
     }
 
     if(elevator_called)
-      self playsound("elev_bell_ding");
+      self playSound("elev_bell_ding");
   }
 }
 
@@ -306,7 +307,7 @@ get_floor(player) {
   player openpopupmenu("elevator_floor_selector");
   player setClientDvar("player_current_floor", self get_curFloor());
 
-  while (1) {
+  while(1) {
     player waittill("menuresponse", menu, response);
 
     if(menu == "elevator_floor_selector") {
@@ -328,12 +329,12 @@ elevator_interrupt(door_trig) {
   wait 0.5; // buffer time to have the door jitter...
   door_trig waittill("trigger", player);
 
-  /*while ( 1 )
+  /*while( 1 )
   {
   	wait 0.5; // buffer time to have the door jitter... realisticaly, im serious!
   	
   	door_trig waittill( "trigger", player );			
-  	if( isdefined( player ) && isPlayer( player ) )
+  	if( isDefined( player ) && isPlayer( player ) )
   		break;
   }*/
 
@@ -367,8 +368,8 @@ elevator_sound_think() {
   // always play musak
   musak_model = self get_housing_musak_model();
 
-  if(level.elevator_music && isdefined(musak_model))
-    musak_model playloopsound("elev_musak_loop");
+  if(level.elevator_music && isDefined(musak_model))
+    musak_model playLoopSound("elev_musak_loop");
 
   self thread listen_for("closing_inner_doors");
   self thread listen_for("opening_inner_doors");
@@ -400,31 +401,31 @@ elevator_sound_think() {
 */
 
 listen_for(msg) {
-  while (1) {
+  while(1) {
     self waittill(msg);
     mainframe = self get_housing_mainframe();
 
     if(issubstr(msg, "closing_"))
-      mainframe playsound("elev_door_close");
+      mainframe playSound("elev_door_close");
 
     if(issubstr(msg, "opening_"))
-      mainframe playsound("elev_door_open");
+      mainframe playSound("elev_door_open");
 
     if(msg == "elevator_moving") {
-      mainframe playsound("elev_run_start");
-      mainframe playloopsound("elev_run_loop");
+      mainframe playSound("elev_run_start");
+      mainframe playLoopSound("elev_run_loop");
     }
 
     if(msg == "interrupted")
-      mainframe playsound("elev_door_interupt");
+      mainframe playSound("elev_door_interupt");
 
     if(msg == "elevator_moved") {
       mainframe stoploopsound("elev_run_loop");
-      mainframe playsound("elev_run_end");
-      mainframe playsound("elev_bell_ding");
+      mainframe playSound("elev_run_end");
+      mainframe playSound("elev_bell_ding");
     }
 
-    //if( isdefined( level.players[0] ) && level.elevator_debug )
+    //if( isDefined( level.players[0] ) && level.elevator_debug )
     //	level.players[0] iprintln( "(e" + self.e[ "id" ] + ") " + msg );
   }
 }
@@ -583,15 +584,15 @@ open_outer_doors(floor_num) {
 // builds elevators into 'level.elevators' struct array containing parts list
 build_elevators() {
   // triggers that enclose elevator, to distinguish between elevators
-  elevator_groups = getentarray("elevator_group", "targetname");
-  assertex(isdefined(elevator_groups) && (elevator_groups.size), "Radiant: Missing elevator bounding origins");
+  elevator_groups = getEntArray("elevator_group", "targetname");
+  assertex(isDefined(elevator_groups) && (elevator_groups.size), "Radiant: Missing elevator bounding origins");
 
-  elevator_housings = getentarray("elevator_housing", "targetname");
-  assertex(isdefined(elevator_housings) && (elevator_housings.size >= elevator_groups.size), "Fail! Missing the whole elevator, script_brushmodel with [targetname = elevator_housing] must be correctly placed");
+  elevator_housings = getEntArray("elevator_housing", "targetname");
+  assertex(isDefined(elevator_housings) && (elevator_housings.size >= elevator_groups.size), "Fail! Missing the whole elevator, script_brushmodel with [targetname = elevator_housing] must be correctly placed");
 
   // sets of elevator outter door prefabs placed
-  elevator_doorsets = getentarray("elevator_doorset", "targetname");
-  assertex(isdefined(elevator_doorsets) && (elevator_doorsets.size >= elevator_groups.size), "Radiant: Missing elevator door(s)");
+  elevator_doorsets = getEntArray("elevator_doorset", "targetname");
+  assertex(isDefined(elevator_doorsets) && (elevator_doorsets.size >= elevator_groups.size), "Radiant: Missing elevator door(s)");
 
   // build found elevators
   foreach(elevator_bound in elevator_groups) {
@@ -603,7 +604,7 @@ build_elevators() {
     min_max_xy[2] = min(elevator_bound.origin[1], elevator_bound_end.origin[1]); // min_y
     min_max_xy[3] = max(elevator_bound.origin[1], elevator_bound_end.origin[1]); // max_y
 
-    parts = spawnstruct();
+    parts = spawnStruct();
     parts.e["id"] = level.elevators.size;
 
     // === build elevator housing ===
@@ -622,12 +623,12 @@ build_elevators() {
       if(elevator_housing isInbound(min_max_xy)) {
         parts.e["housing"]["mainframe"][parts.e["housing"]["mainframe"].size] = elevator_housing;
 
-        if(elevator_housing.classname == "script_model")
+        if(elevator_housing.classname == "script_model") {
           continue;
-
-        if(elevator_housing.code_classname == "light")
+        }
+        if(elevator_housing.code_classname == "light") {
           continue;
-
+        }
         inner_leftdoor = getent(elevator_housing.target, "targetname");
         parts.e["housing"]["left_door"] = inner_leftdoor;
         parts.e["housing"]["left_door_opened_pos"] = inner_leftdoor.origin;
@@ -648,14 +649,14 @@ build_elevators() {
 
         // for motion triggers
         inside_trigger.motion_trigger = spawn("trigger_radius", elevator_housing.origin, 0, 64, 128);
-        assert(isdefined(inside_trigger.motion_trigger));
+        assert(isDefined(inside_trigger.motion_trigger));
       }
     }
-    assert(isdefined(parts.e["housing"]));
+    assert(isDefined(parts.e["housing"]));
 
     // === build elevator outer doorsets ===
     /*
-    	Elevator's outer door sets ( per floor ) are chained together from a script_origin 
+    	Elevator's outer door sets ( per floor ) are chained together from a script_origin
     	targeting to the left door, then left door targets to right door
     	
     	Outer door sets are bodies that only moves to open/close
@@ -663,9 +664,8 @@ build_elevators() {
     parts.e["outer_doorset"] = [];
     foreach(elevator_doorset in elevator_doorsets) {
       if(elevator_doorset isInbound(min_max_xy)) {
-
-        // closed for lighting is for compiling lighting in the closed position rather than the open position. 
-        door_starts_closed = isdefined(elevator_doorset.script_noteworthy) && elevator_doorset.script_noteworthy == "closed_for_lighting";
+        // closed for lighting is for compiling lighting in the closed position rather than the open position.
+        door_starts_closed = isDefined(elevator_doorset.script_noteworthy) && elevator_doorset.script_noteworthy == "closed_for_lighting";
 
         door_set_id = parts.e["outer_doorset"].size;
 
@@ -680,7 +680,7 @@ build_elevators() {
         parts.e["outer_doorset"][door_set_id]["right_door"] = rightdoor;
         parts.e["outer_doorset"][door_set_id]["right_door_opened_pos"] = rightdoor.origin;
 
-        //put them back into the would be positions 
+        //put them back into the would be positions
         if(door_starts_closed) {
           left_door_vec = elevator_doorset.origin - leftdoor.origin;
           elevator_doorset.origin = leftdoor.origin;
@@ -692,11 +692,11 @@ build_elevators() {
         }
       }
     }
-    assert(isdefined(parts.e["outer_doorset"]));
+    assert(isDefined(parts.e["outer_doorset"]));
 
     // bubble sort floors
-    for (i = 0; i < parts.e["outer_doorset"].size - 1; i++) {
-      for (j = 0; j < parts.e["outer_doorset"].size - 1 - i; j++) {
+    for(i = 0; i < parts.e["outer_doorset"].size - 1; i++) {
+      for(j = 0; j < parts.e["outer_doorset"].size - 1 - i; j++) {
         if(parts.e["outer_doorset"][j + 1]["door_closed_pos"][2] < parts.e["outer_doorset"][j]["door_closed_pos"][2]) {
           //swap j-1 with j
           temp_left_door = parts.e["outer_doorset"][j]["left_door"];
@@ -752,7 +752,7 @@ build_elevators() {
   // turn on all primary lights for elevators if they have em
   foreach(elevator in level.elevators) {
     pLights = elevator get_housing_primarylight();
-    if(isdefined(pLights) && pLights.size) {
+    if(isDefined(pLights) && pLights.size) {
       foreach(pLight in pLights)
       pLight setlightintensity(0.75);
     }
@@ -760,8 +760,8 @@ build_elevators() {
 }
 
 build_call_buttons() {
-  level.elevator_callbuttons = getentarray("elevator_call", "targetname");
-  assertex(isdefined(level.elevator_callbuttons) && (level.elevator_callbuttons.size > 1), "Missing or not enough elevator call buttons");
+  level.elevator_callbuttons = getEntArray("elevator_call", "targetname");
+  assertex(isDefined(level.elevator_callbuttons) && (level.elevator_callbuttons.size > 1), "Missing or not enough elevator call buttons");
 
   // per call button
   foreach(callbutton in level.elevator_callbuttons) {
@@ -786,7 +786,7 @@ build_call_buttons() {
       }
     }
     callbutton make_discrete_trigger();
-    assertex(isdefined(callbutton.e) && callbutton.e.size, "Elevator call button at " + callbutton.origin + " failed to grab near by elevators, placed too far?");
+    assertex(isDefined(callbutton.e) && callbutton.e.size, "Elevator call button at " + callbutton.origin + " failed to grab near by elevators, placed too far?");
 
     // build motion detection triggers for motion triggered calls
     callbutton.motion_trigger = spawn("trigger_radius", callbutton.origin + (0, 0, -32), 0, 32, 64);
@@ -802,17 +802,17 @@ setup_hints() {
 
     use_trig SetCursorHint("HINT_NOICON");
     if(num_of_floors > 2)
-      // Press and hold &&1 to select floor.
+      // Press and hold && 1 to select floor.
       use_trig setHintString(&"ELEVATOR_FLOOR_SELECT_HINT");
     else
-      // Press and hold &&1 to use elevator.
+      // Press and hold && 1 to use elevator.
       use_trig setHintString(&"ELEVATOR_USE_HINT");
   }
 
   // elevator call button hint
   foreach(callbutton in level.elevator_callbuttons) {
     callbutton SetCursorHint("HINT_NOICON");
-    // Press and hold &&1 to call elevator.
+    // Press and hold && 1 to call elevator.
     callbutton setHintString(&"ELEVATOR_CALL_HINT");
   }
 }
@@ -829,7 +829,7 @@ make_discrete_trigger() {
 
 // trigger only exist when waittill upon
 discrete_waittill(msg) {
-  assert(isdefined(self.motion_trigger));
+  assert(isDefined(self.motion_trigger));
 
   self enable_trigger(); // this is for disabling trigger immediately after triggering
 
@@ -847,7 +847,7 @@ enable_trigger() {
     self.enabled = 1;
     self.origin += (0, 0, 10000);
 
-    if(isdefined(self.motion_trigger))
+    if(isDefined(self.motion_trigger))
       self.motion_trigger.origin += (0, 0, 10000);
   }
 }
@@ -864,7 +864,7 @@ disable_trigger_helper() {
   wait 1.5;
   self.origin += (0, 0, -10000);
 
-  if(isdefined(self.motion_trigger))
+  if(isDefined(self.motion_trigger))
     self.motion_trigger.origin += (0, 0, -10000);
 }
 
@@ -920,7 +920,7 @@ get_housing_children() {
   children[children.size] = left_door;
   children[children.size] = right_door;
 
-  if(isdefined(motion_trig))
+  if(isDefined(motion_trig))
     children[children.size] = motion_trig;
 
   // append script models as children of elevator moving body
@@ -943,11 +943,11 @@ get_housing_mainframe() {
   housing_model = undefined;
   foreach(part in parts) {
     if(part.classname != "script_model" && part.code_classname != "light") {
-      assertex(!isdefined(housing_model), "Fail! Found more than one elevator housing script_brushmodels per elevator");
+      assertex(!isDefined(housing_model), "Fail! Found more than one elevator housing script_brushmodels per elevator");
       housing_model = part;
     }
   }
-  assertex(isdefined(housing_model), "Epic fail! No elevator housing script_brushmodel found");
+  assertex(isDefined(housing_model), "Epic fail! No elevator housing script_brushmodel found");
   return housing_model;
 }
 
@@ -981,10 +981,10 @@ get_housing_musak_model() {
   musak_model = undefined;
 
   foreach(eModel in models) {
-    if(isdefined(eModel.script_noteworthy) && eModel.script_noteworthy == "play_musak")
+    if(isDefined(eModel.script_noteworthy) && eModel.script_noteworthy == "play_musak")
       musak_model = eModel;
   }
-  //assertex( isdefined( musak_model ), "Fail! Missing script_model to play elevator music on, [script_noteworthy = play_musak]" );
+  //assertex( isDefined( musak_model ), "Fail! Missing script_model to play elevator music on, [script_noteworthy = play_musak]" );
 
   return musak_model;
 }
@@ -1036,17 +1036,18 @@ get_initFloor() {
 }
 
 waittill_finish_moving(ent1, ent1_moveto_pos, ent2, ent2_moveto_pos) {
-  if(!isdefined(ent2) && !isdefined(ent2_moveto_pos)) {
+  if(!isDefined(ent2) && !isDefined(ent2_moveto_pos)) {
     ent2 = ent1;
     ent2_moveto_pos = ent1_moveto_pos;
   }
 
-  while (1) {
+  while(1) {
     ent1_current_pos = ent1.origin;
     etn2_current_pos = ent2.origin;
 
-    if(ent1_current_pos == ent1_moveto_pos && etn2_current_pos == ent2_moveto_pos)
+    if(ent1_current_pos == ent1_moveto_pos && etn2_current_pos == ent2_moveto_pos) {
       break;
+    }
 
     wait 0.05;
   }
@@ -1054,10 +1055,9 @@ waittill_finish_moving(ent1, ent1_moveto_pos, ent2, ent2_moveto_pos) {
 
 // return test of min max bound on xy plane, self = entity being tested - bool
 isInbound(bounding_box) {
+  assertex(isDefined(self) && isDefined(self.origin), "Fail! Can not test bounds with the entity called on");
 
-  assertex(isdefined(self) && isdefined(self.origin), "Fail! Can not test bounds with the entity called on");
-
-  // the box isn't working on the angle that I have so I'm going to do it by a sphere shape.. -Nate 
+  // the box isn't working on the angle that I have so I'm going to do it by a sphere shape.. -Nate
   //special case cause I don't know if a sphere will break other levels.
   if(level.script == "plaza" || level.script == "highrise_test")
     return isInBoundingSpere(bounding_box);
@@ -1106,17 +1106,17 @@ elevator_get_dvar(dvar, def) {
 }
 
 elevator_debug() {
-  if(!level.elevator_debug)
+  if(!level.elevator_debug) {
     return;
-
+  }
   //print3d(<origin>, <text>, <color>, <alpha>, <scale>, <duration> )
 
-  while (1) {
+  while(1) {
     // simple debug info:
 
-    if(level.elevator_debug != 2)
+    if(level.elevator_debug != 2) {
       continue;
-
+    }
     // full debug info:
 
     // print all parts for all elevators

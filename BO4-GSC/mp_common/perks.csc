@@ -7,7 +7,6 @@
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\system_shared;
-
 #namespace perks;
 
 autoexec __init__system__() {
@@ -44,7 +43,6 @@ __init__() {
   level.var_842a5e1f = getscriptbundle(#"awareness_deadsilence");
 
   level thread updatedvars();
-
 }
 
 updatesitrepscan() {
@@ -78,9 +76,9 @@ updatedvars() {
   }
 }
 
-  function flying_callback(local_client_num, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-    self.flying = newval;
-  }
+function flying_callback(local_client_num, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+  self.flying = newval;
+}
 
 on_local_client_connect(local_client_num) {
   registerrewindfx(local_client_num, "player/fx8_plyr_footstep_tracker_l");
@@ -126,10 +124,9 @@ function_92725cf9(local_client_num) {
 }
 
 on_player_spawned(local_client_num) {
-
   self thread watch_perks_change(local_client_num);
 
-    self notify(#"perks_changed");
+  self notify(#"perks_changed");
 
   if(true) {
     self thread killtrackerfx_on_death(local_client_num);
@@ -170,20 +167,20 @@ watch_perks_change(local_client_num) {
   }
 }
 
-  function get_players(local_client_num) {
-    players = [];
-    entities = getEntArray(local_client_num);
+function get_players(local_client_num) {
+  players = [];
+  entities = getEntArray(local_client_num);
 
-    if(isDefined(entities)) {
-      foreach(ent in entities) {
-        if(isplayer(ent)) {
-          players[players.size] = ent;
-        }
+  if(isDefined(entities)) {
+    foreach(ent in entities) {
+      if(isplayer(ent)) {
+        players[players.size] = ent;
       }
     }
-
-    return players;
   }
+
+  return players;
+}
 
 monitor_tracker_existing_players(local_client_num) {
   self endon(#"death");
@@ -219,7 +216,7 @@ monitor_tracker_perk_killcam(local_client_num) {
   }
 
   if(function_1cbf351b(local_client_num)) {
-    if(function_5778f82(local_client_num, #"specialty_tracker")) {
+    if(function_5778f82(local_client_num, # "specialty_tracker")) {
       servertime = getservertime(local_client_num);
 
       for(count = 0; count < level.trackerspecialtyself[local_client_num].size; count++) {
@@ -271,7 +268,7 @@ monitor_tracker_perk(local_client_num) {
       return;
     }
 
-    if(function_5778f82(local_client_num, #"specialty_tracker")) {
+    if(function_5778f82(local_client_num, # "specialty_tracker")) {
       friend = self function_83973173();
       isalive = isalive(self);
 
@@ -355,7 +352,7 @@ gettrackerfxposition(local_client_num) {
     player = self.owner;
   }
 
-  playfastfx = player hasperk(local_client_num, #"specialty_trackerjammer");
+  playfastfx = player hasperk(local_client_num, # "specialty_trackerjammer");
 
   if(isDefined(self.flying) && self.flying) {
     offset = (0, 0, getdvarfloat(#"perk_tracker_fx_fly_height", 0));
@@ -434,19 +431,19 @@ function_3edf2cf8(dist_sq, var_73491815, var_47435b6f) {
 
 function_365c39ef(awareness_action, bundle) {
   switch (awareness_action) {
-    case #"slide_start":
+    case # "slide_start":
       return bundle.var_146483e7;
-    case #"landing":
+    case # "landing":
       return bundle.var_fe0aa1d2;
-    case #"damage_landing":
+    case # "damage_landing":
       return bundle.var_6ae8117c;
-    case #"doublejump_boosted":
+    case # "doublejump_boosted":
       return bundle.var_37bac39d;
-    case #"hash_589eac8b592bcb4d":
+    case # "hash_589eac8b592bcb4d":
       return bundle.var_3b22f5be;
-    case #"weapon_fired":
+    case # "weapon_fired":
       return bundle.var_abea5dd8;
-    case #"silenced_weapon_fired":
+    case # "silenced_weapon_fired":
       return bundle.var_301350af;
   }
 
@@ -473,7 +470,6 @@ monitor_detectnearbyenemies(local_client_num) {
   self.var_7122b2ff = 0;
 
   while(true) {
-
     if(getdvarint(#"hash_340cb17d497f0877", 0) > 0) {
       level.var_6fc25f5c = getscriptbundle(#"awareness");
       var_55336d8d = level.var_6fc25f5c;
@@ -481,7 +477,7 @@ monitor_detectnearbyenemies(local_client_num) {
       var_c394e130 = level.var_842a5e1f;
     }
 
-      localplayer = function_5c10bd79(local_client_num);
+    localplayer = function_5c10bd79(local_client_num);
 
     if(isDefined(localplayer) && isplayer(localplayer) && isalive(localplayer)) {
       var_99edc583 = localplayer function_fd82b127();
@@ -491,7 +487,7 @@ monitor_detectnearbyenemies(local_client_num) {
 
     range = var_99edc583 * 0.5;
 
-    if(!isDefined(localplayer) || !isplayer(localplayer) || function_5778f82(local_client_num, #"specialty_detectnearbyenemies") == 0 || function_1cbf351b(local_client_num) == 1 || isalive(localplayer) == 0) {
+    if(!isDefined(localplayer) || !isplayer(localplayer) || function_5778f82(local_client_num, # "specialty_detectnearbyenemies") == 0 || function_1cbf351b(local_client_num) == 1 || isalive(localplayer) == 0) {
       setuimodelvalue(var_e4ed29e4, 0);
       previousenemydetectedbitfield = 0;
 
@@ -500,7 +496,7 @@ monitor_detectnearbyenemies(local_client_num) {
         continue;
       }
 
-      self waittill(#"death", #"spawned", #"perks_changed");
+      self waittill(#"death", # "spawned", # "perks_changed");
       continue;
     }
 
@@ -556,7 +552,7 @@ monitor_detectnearbyenemies(local_client_num) {
         player = sixthsenseent.owner;
       }
 
-      if(isplayer(player) && player hasperk(local_client_num, #"specialty_sixthsensejammer")) {
+      if(isplayer(player) && player hasperk(local_client_num, # "specialty_sixthsensejammer")) {
         bundle = var_c394e130;
       }
 
@@ -574,8 +570,8 @@ monitor_detectnearbyenemies(local_client_num) {
           }
 
           switch (movement_type) {
-            case #"run":
-            case #"walk":
+            case # "run":
+            case # "walk":
               if(sixthsenseent isplayerads()) {
                 var_d6ff0766 = bundle.var_2b6e9133 * range;
                 var_7aeac1e7 = 1;
@@ -592,7 +588,7 @@ monitor_detectnearbyenemies(local_client_num) {
               }
 
               break;
-            case #"sprint":
+            case # "sprint":
               var_d6ff0766 = bundle.var_a8e88375 * range;
               var_7aeac1e7 = 1;
               break;
@@ -679,22 +675,22 @@ monitor_detectnearbyenemies(local_client_num) {
         bitfields = enemydetectedbitfield;
 
         for(i = 0; i < 6; i++) {
-          self thread function_c90f8547(var_c948d7f9[i], bitfields&(1 << 4) - 1, bundle.var_a3d426e6);
+          self thread function_c90f8547(var_c948d7f9[i], bitfields &(1 << 4) - 1, bundle.var_a3d426e6);
           bitfields >>= 3;
         }
 
         enemynearbytime = 0;
         diff = enemydetectedbitfield ^ previousenemydetectedbitfield;
 
-        if(diff&enemydetectedbitfield) {
+        if(diff &enemydetectedbitfield) {
           shouldplaysound = 0;
 
           if(shouldplaysound) {
-            self playSound(local_client_num, #"uin_sixth_sense_ping_on");
+            self playSound(local_client_num, # "uin_sixth_sense_ping_on");
           }
         }
 
-        if(diff&previousenemydetectedbitfield) {}
+        if(diff &previousenemydetectedbitfield) {}
 
         previousenemydetectedbitfield = enemydetectedbitfield;
       }

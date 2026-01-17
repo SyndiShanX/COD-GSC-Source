@@ -7,8 +7,7 @@
 #include clientscripts\mp\createfx\zm_highrise_fx;
 #include clientscripts\mp\_fx;
 
-precache_util_fx() {
-}
+precache_util_fx() {}
 
 precache_scripted_fx() {
   level._effect["eye_glow"] = loadfx("misc/fx_zombie_eye_single");
@@ -105,7 +104,7 @@ precache_fxanim_props() {
 }
 
 play_fx_prop_anims(localclientnum) {
-  fxanim_props = getentarray(localclientnum, "fxanim", "targetname");
+  fxanim_props = getEntArray(localclientnum, "fxanim", "targetname");
 
   if(level.localplayers.size > 2) {
     foreach(prop in fxanim_props) {

@@ -6,7 +6,6 @@
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
-
 #namespace spectating;
 
 autoexec __init__system__() {

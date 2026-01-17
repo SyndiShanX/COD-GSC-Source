@@ -4,7 +4,7 @@
 ************************************************/
 
 main() {
-  self setmodel("c_pan_pdf_body1");
+  self setModel("c_pan_pdf_body1");
   self.headmodel = "c_pan_pdf_head4";
   self attach(self.headmodel, "", 1);
   self.gearmodel = "c_pan_pdf_gear1";

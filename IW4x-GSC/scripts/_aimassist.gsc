@@ -11,7 +11,7 @@ init() {
 }
 
 disableAimAssistForConnectedPlayers() {
-  for (;;) {
+  for(;;) {
     level waittill("connected", player);
 
     // The dvars are cheat protected and not saved. They will be reset automatically upon joining another server.

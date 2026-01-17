@@ -106,7 +106,7 @@ start_launch_checkpoint(var_0) {
 }
 
 aud_open_fisrt_door() {
-  if(isdefined(level.aud.door_first_house_trigger)) {
+  if(isDefined(level.aud.door_first_house_trigger)) {
     wait 1.5;
     level.aud.door_first_house_trigger common_scripts\utility::trigger_on();
   }
@@ -143,7 +143,7 @@ start_tower_first_choppers_fly_by() {
 
 start_first_truck_audio() {
   self vehicle_turnengineoff();
-  self playsound("scn_icbm_first_jeep_scripted_sequence");
+  self playSound("scn_icbm_first_jeep_scripted_sequence");
   uaz_monitor_death();
 }
 

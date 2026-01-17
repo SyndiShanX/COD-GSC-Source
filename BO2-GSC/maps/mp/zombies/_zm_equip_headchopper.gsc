@@ -231,7 +231,7 @@ startheadchopperdeploy(weapon, armed) {
       weapon.planted_on_ent = traceback["entity"];
 
       if(isDefined(traceback["entity"].targetname)) {
-        parententities = getentarray(traceback["entity"].targetname, "target");
+        parententities = getEntArray(traceback["entity"].targetname, "target");
 
         if(isDefined(parententities) && parententities.size > 0) {
           parententity = parententities[0];
@@ -259,14 +259,13 @@ startheadchopperdeploy(weapon, armed) {
 
     self thread headchopperthink(weapon, electricradius, armed);
 
-    if(!(isDefined(level.equipment_headchopper_needs_power) && level.equipment_headchopper_needs_power)) {
-    }
+    if(!(isDefined(level.equipment_headchopper_needs_power) && level.equipment_headchopper_needs_power)) {}
 
     self thread maps\mp\zombies\_zm_buildables::delete_on_disconnect(weapon);
     weapon waittill("death");
 
     if(isDefined(level.headchopper_sound_ent)) {
-      level.headchopper_sound_ent playsound("wpn_zmb_electrap_stop");
+      level.headchopper_sound_ent playSound("wpn_zmb_electrap_stop");
       level.headchopper_sound_ent delete();
       level.headchopper_sound_ent = undefined;
     }
@@ -366,7 +365,7 @@ headchopper_animate(weapon, armed) {
 
       if(isDefined(zombies_only) && zombies_only) {
         weapon thread watch_notetracks_slicing();
-        weapon playsound("zmb_headchopper_swing");
+        weapon playSound("zmb_headchopper_swing");
         weapon setanim( % o_zmb_chopper_slice_slow);
         wait(s_animlength);
         weapon clearanim( % o_zmb_chopper_slice_slow, 0.2);
@@ -398,7 +397,7 @@ watch_notetracks_slicing_times(time) {
 playheadchopperresetaudio(time) {
   self endon("headchopperAudioCleanup");
   ent = spawn("script_origin", self.origin);
-  ent playloopsound("zmb_highrise_launcher_reset_loop");
+  ent playLoopSound("zmb_highrise_launcher_reset_loop");
   self thread deleteentwhensounddone(time, ent);
   self waittill("death");
   ent delete();
@@ -413,7 +412,7 @@ deleteentwhensounddone(time, ent) {
 
 headchopper_audio() {
   loop_ent = spawn("script_origin", self.origin);
-  loop_ent playloopsound("zmb_highrise_launcher_loop");
+  loop_ent playLoopSound("zmb_highrise_launcher_loop");
   self waittill("death");
   loop_ent delete();
 }
@@ -423,7 +422,7 @@ headchopper_fx(weapon) {
   self endon("equip_headchopper_zm_taken");
 
   while(isDefined(weapon)) {
-    playfxontag(level._effect["headchoppere_on"], weapon, "tag_origin");
+    playFXOnTag(level._effect["headchoppere_on"], weapon, "tag_origin");
     wait 1;
   }
 }
@@ -434,8 +433,8 @@ headchopperthink(weapon, electricradius, armed) {
   self endon("equip_headchopper_zm_taken");
   weapon endon("death");
   radiussquared = electricradius * electricradius;
-  traceposition = weapon getcentroid() + anglestoforward(flat_angle(weapon.angles)) * -15;
-  trace = bullettrace(traceposition, traceposition + vectorscale((0, 0, -1), 48.0), 1, weapon);
+  traceposition = weapon getcentroid() + anglesToForward(flat_angle(weapon.angles)) * -15;
+  trace = bulletTrace(traceposition, traceposition + vectorscale((0, 0, -1), 48.0), 1, weapon);
   trigger_origin = weapon gettagorigin("TAG_SAW");
   trigger = spawn("trigger_box", trigger_origin, 1, 8, 128, 64);
   trigger.origin = trigger.origin + anglestoup(weapon.angles) * 32.0;
@@ -447,7 +446,7 @@ headchopperthink(weapon, electricradius, armed) {
   trigger.extent = (4.0, 64.0, 32.0);
 
   weapon thread headchopperthinkcleanup(trigger);
-  direction_forward = anglestoforward(flat_angle(weapon.angles) + vectorscale((-1, 0, 0), 60.0));
+  direction_forward = anglesToForward(flat_angle(weapon.angles) + vectorscale((-1, 0, 0), 60.0));
   direction_vector = vectorscale(direction_forward, 1024);
   direction_origin = weapon.origin + direction_vector;
   home_angles = weapon.angles;
@@ -502,7 +501,7 @@ headchopperattack(weapon, ent) {
   if(!isDefined(ent) || !isalive(ent)) {
     return;
   }
-  eye_position = ent geteye();
+  eye_position = ent getEye();
   head_position = eye_position[2] + 13;
   foot_position = ent.origin[2];
   length_head_to_toe = abs(head_position - foot_position);
@@ -520,7 +519,7 @@ headchopperattack(weapon, ent) {
     trace_point = ent.origin + (0, 0, length_head_to_toe_25_percent);
 
   fwdangles = anglestoup(weapon.angles);
-  tracefwd = bullettrace(weapon.origin + fwdangles * 5, trace_point, 0, weapon, 1, 1);
+  tracefwd = bulletTrace(weapon.origin + fwdangles * 5, trace_point, 0, weapon, 1, 1);
 
   if(!isDefined(tracefwd) || !isDefined(tracefwd["position"]) || tracefwd["position"] != trace_point) {
     return;
@@ -553,12 +552,12 @@ headchopperattack(weapon, ent) {
 
       ent dodamage(ent.health + 666, weapon.origin);
       ent.headchopper_last_damage_time = gettime();
-      ent playsound("zmb_exp_jib_headchopper_zombie");
+      ent playSound("zmb_exp_jib_headchopper_zombie");
       weapon.headchopper_kills++;
       self thread headchopper_kill_vo(ent);
     } else if(isDefined(is_torsochop) && is_torsochop) {
       if(ent.health <= 20) {
-        ent playsound("zmb_exp_jib_headchopper_zombie");
+        ent playSound("zmb_exp_jib_headchopper_zombie");
         weapon.headchopper_kills++;
         self thread headchopper_kill_vo(ent);
       }
@@ -581,7 +580,7 @@ headchopperattack(weapon, ent) {
       }
 
       if(ent.health <= 10) {
-        ent playsound("zmb_exp_jib_headchopper_zombie");
+        ent playSound("zmb_exp_jib_headchopper_zombie");
         weapon.headchopper_kills++;
         self thread headchopper_kill_vo(ent);
       }
@@ -761,7 +760,7 @@ getheadchoppersnear(source_origin, max_distance) {
 
 check_headchopper_in_bad_area(origin) {
   if(!isDefined(level.headchopper_bad_areas))
-    level.headchopper_bad_areas = getentarray("headchopper_bad_area", "targetname");
+    level.headchopper_bad_areas = getEntArray("headchopper_bad_area", "targetname");
 
   scr_org = spawn("script_origin", origin);
   in_bad_area = 0;

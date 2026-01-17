@@ -37,20 +37,20 @@ function init() {
   clientfield::register("toplayer", "vehicle_hijacked", 1, 1, "int");
   visionset_mgr::register_info("visionset", "hijack_vehicle", 1, 5, 1, 1);
   visionset_mgr::register_info("visionset", "hijack_vehicle_blur", 1, 6, 1, 1);
-  callback::on_spawned( & on_player_spawned);
+  callback::on_spawned(&on_player_spawned);
 }
 
 function main() {
   cybercom_gadget::registerability(0, 32);
-  level.cybercom.security_breach = spawnstruct();
-  level.cybercom.security_breach._is_flickering = & _is_flickering;
-  level.cybercom.security_breach._on_flicker = & _on_flicker;
-  level.cybercom.security_breach._on_give = & _on_give;
-  level.cybercom.security_breach._on_take = & _on_take;
-  level.cybercom.security_breach._on_connect = & _on_connect;
-  level.cybercom.security_breach._on = & _on;
-  level.cybercom.security_breach._off = & _off;
-  level.cybercom.security_breach._is_primed = & _is_primed;
+  level.cybercom.security_breach = spawnStruct();
+  level.cybercom.security_breach._is_flickering = &_is_flickering;
+  level.cybercom.security_breach._on_flicker = &_on_flicker;
+  level.cybercom.security_breach._on_give = &_on_give;
+  level.cybercom.security_breach._on_take = &_on_take;
+  level.cybercom.security_breach._on_connect = &_on_connect;
+  level.cybercom.security_breach._on = &_on;
+  level.cybercom.security_breach._off = &_off;
+  level.cybercom.security_breach._is_primed = &_is_primed;
 }
 
 function on_player_spawned() {
@@ -71,9 +71,9 @@ function _on_give(slot, weapon) {
   if(self hascybercomability("cybercom_securitybreach") == 2) {
     self.cybercom.security_breach_lifetime = getdvarint("scr_security_breach_upgraded_lifetime", 60);
   }
-  self.cybercom.targetlockcb = & _get_valid_targets;
-  self.cybercom.targetlockrequirementcb = & _lock_requirement;
-  self.cybercom.var_73d069a7 = & function_17342509;
+  self.cybercom.targetlockcb = &_get_valid_targets;
+  self.cybercom.targetlockrequirementcb = &_lock_requirement;
+  self.cybercom.var_73d069a7 = &function_17342509;
   self.cybercom.var_46483c8f = 63;
   self thread cybercom::function_b5f4e597(weapon);
 }
@@ -105,7 +105,7 @@ function _off(slot, weapon) {
 }
 
 function _is_primed(slot, weapon) {
-  if(!(isdefined(self.cybercom.is_primed) && self.cybercom.is_primed)) {
+  if(!(isDefined(self.cybercom.is_primed) && self.cybercom.is_primed)) {
     assert(self.cybercom.activecybercomweapon == weapon);
     self notify("hash_50db7e6");
     self thread cybercom::weaponlockwatcher(slot, weapon, self.cybercom.var_110c156a);
@@ -116,26 +116,26 @@ function _is_primed(slot, weapon) {
 
 function private _lock_requirement(target) {
   if(target cybercom::cybercom_aicheckoptout("cybercom_hijack")) {
-    if(isdefined(target.rogue_controlled) && target.rogue_controlled) {
+    if(isDefined(target.rogue_controlled) && target.rogue_controlled) {
       self cybercom::function_29bf9dee(target, 4);
     } else {
       self cybercom::function_29bf9dee(target, 2);
     }
     return false;
   }
-  if(isdefined(target.lockon_owner) && target.lockon_owner != self) {
+  if(isDefined(target.lockon_owner) && target.lockon_owner != self) {
     self cybercom::function_29bf9dee(target, 7);
     return false;
   }
-  if(isdefined(target.hijacked) && target.hijacked) {
+  if(isDefined(target.hijacked) && target.hijacked) {
     self cybercom::function_29bf9dee(target, 4);
     return false;
   }
-  if(isdefined(target.is_disabled) && target.is_disabled) {
+  if(isDefined(target.is_disabled) && target.is_disabled) {
     self cybercom::function_29bf9dee(target, 6);
     return false;
   }
-  if(isdefined(target.var_d3f57f67) && target.var_d3f57f67) {
+  if(isDefined(target.var_d3f57f67) && target.var_d3f57f67) {
     return false;
   }
   if(!isvehicle(target)) {
@@ -155,7 +155,7 @@ function private _activate_security_breach(slot, weapon) {
   aborted = 0;
   fired = 0;
   foreach(item in self.cybercom.lock_targets) {
-    if(isdefined(item.target) && (isdefined(item.inrange) && item.inrange)) {
+    if(isDefined(item.target) && (isDefined(item.inrange) && item.inrange)) {
       if(item.inrange == 1) {
         if(!cybercom::targetisvalid(item.target, weapon)) {
           continue;
@@ -176,12 +176,12 @@ function private _activate_security_breach(slot, weapon) {
   }
   if(!aborted && fired) {
     upgraded = weapon.name == "gadget_remote_hijack_upgraded";
-    self playsound("gdt_cybercore_activate" + (isdefined(upgraded) && (upgraded ? "_upgraded" : "")));
+    self playSound("gdt_cybercore_activate" + (isDefined(upgraded) && (upgraded ? "_upgraded" : "")));
   }
   cybercom::function_adc40f11(weapon, fired);
   if(fired && isplayer(self)) {
     itemindex = getitemindexfromref("cybercom_hijack");
-    if(isdefined(itemindex)) {
+    if(isDefined(itemindex)) {
       self adddstat("ItemStats", itemindex, "stats", "kills", "statValue", fired);
       self adddstat("ItemStats", itemindex, "stats", "used", "statValue", 1);
     }
@@ -200,11 +200,11 @@ function private _security_breach_ramp_visionset(player, setname, delay, directi
 }
 
 function private function_637db461(player, weapon) {
-  if(isdefined(self.hijacked) && self.hijacked) {
+  if(isDefined(self.hijacked) && self.hijacked) {
     player cybercom::function_29bf9dee(self, 4);
     return false;
   }
-  if(isdefined(self.is_disabled) && self.is_disabled) {
+  if(isDefined(self.is_disabled) && self.is_disabled) {
     player cybercom::function_29bf9dee(self, 6);
     return false;
   }
@@ -213,7 +213,7 @@ function private function_637db461(player, weapon) {
 
 function private _security_breach(player, weapon) {
   wait(getdvarfloat("scr_security_breach_activate_delay", 0.5));
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   if(!isvehicle(self)) {
@@ -222,10 +222,10 @@ function private _security_breach(player, weapon) {
   if(player laststand::player_is_in_laststand()) {
     return;
   }
-  if(isdefined(player.cybercom.emergency_reserve) && player.cybercom.emergency_reserve) {
+  if(isDefined(player.cybercom.emergency_reserve) && player.cybercom.emergency_reserve) {
     return;
   }
-  if(isdefined(self.playerdrivenversion)) {
+  if(isDefined(self.playerdrivenversion)) {
     self setvehicletype(self.playerdrivenversion);
   }
   vehentnum = self getentitynumber();
@@ -244,7 +244,7 @@ function private _security_breach(player, weapon) {
   self notsolid();
   var_66ff806d = self.var_66ff806d;
   clone = cloneandremoveentity(self);
-  if(!isdefined(clone)) {
+  if(!isDefined(clone)) {
     return;
   }
   clone solid();
@@ -258,16 +258,16 @@ function private _security_breach(player, weapon) {
   clone.var_66ff806d = var_66ff806d;
   clone setteam(player.team);
   clone.health = clone.healthdefault;
-  clone.var_fb7ce72a = & function_637db461;
-  if(isdefined(self.var_72f54197)) {
+  clone.var_fb7ce72a = &function_637db461;
+  if(isDefined(self.var_72f54197)) {
     clone.var_72f54197 = self.var_72f54197;
   }
-  if(isdefined(self.var_b0ac175a)) {
+  if(isDefined(self.var_b0ac175a)) {
     clone.var_b0ac175a = self.var_b0ac175a;
   }
-  playerstate = spawnstruct();
+  playerstate = spawnStruct();
   player function_dc86efaa(playerstate, "begin");
-  if(!isdefined(clone)) {
+  if(!isDefined(clone)) {
     player disableinvulnerability();
     player cybercom::enablecybercom();
     return;
@@ -275,7 +275,7 @@ function private _security_breach(player, weapon) {
   player.hijacked_vehicle_entity = clone;
   player function_dc86efaa(playerstate, "cloak");
   clone thread _invulnerableforatime(getdvarint("scr_security_breach_no_damage_time", 8), player);
-  if(isdefined(clone.vehicletype) && clone.vehicletype != "turret_sentry") {
+  if(isDefined(clone.vehicletype) && clone.vehicletype != "turret_sentry") {
     clone thread _anchor_to_location(player, player.origin);
   }
   clone.blocktween = 1;
@@ -376,9 +376,9 @@ function _start_transition(direction) {
 
 function setanchorvolume(ent) {
   clearanchorvolume();
-  if(isdefined(ent) && isplayer(self)) {
+  if(isDefined(ent) && isplayer(self)) {
     self.cybercom.secbreachanchorent = ent;
-    if(isdefined(ent.script_parameters)) {
+    if(isDefined(ent.script_parameters)) {
       data = strtok(ent.script_parameters, " ");
       assert(data.size == 2);
       self.cybercom.secbreachanchorminsq = int(data[0]) * int(data[0]);
@@ -402,12 +402,12 @@ function private _anchor_to_location(player, anchor) {
   wait(0.1);
   maxstatic = 0.95;
   lastoutofrangewarningvalue = undefined;
-  while (true) {
+  while(true) {
     distcheck = 1;
     losecontactdistsq = getdvarint("scr_security_breach_lose_contact_distanceSQ", getdvarint("scr_security_breach_lose_contact_distance", 1200) * getdvarint("scr_security_breach_lose_contact_distance", 1200));
     lostcontactdistsq = getdvarint("scr_security_breach_lost_contact_distanceSQ", getdvarint("scr_security_breach_lost_contact_distance", 2400) * getdvarint("scr_security_breach_lost_contact_distance", 2400));
-    if(isdefined(player.cybercom.secbreachanchorent)) {
-      if(isdefined(player.cybercom.secbreachanchorminsq)) {
+    if(isDefined(player.cybercom.secbreachanchorent)) {
+      if(isDefined(player.cybercom.secbreachanchorminsq)) {
         losecontactdistsq = player.cybercom.secbreachanchorminsq;
         lostcontactdistsq = player.cybercom.secbreachanchormaxsq;
       }
@@ -446,7 +446,7 @@ function private _anchor_to_location(player, anchor) {
       self.takedamage = 1;
       self.owner = undefined;
       self.skipfriendlyfirecheck = 1;
-      if(isdefined(player)) {
+      if(isDefined(player)) {
         self kill(self.origin, player);
       } else {
         self kill();
@@ -467,7 +467,7 @@ function private _playerspectate(vehicle) {
   self endon("spawned");
   self util::freeze_player_controls(1);
   self clientfield::set_to_player("hijack_static_ramp_up", 1);
-  if(isdefined(vehicle.archetype) && vehicle.archetype == "wasp" && (!(isdefined(vehicle.var_66ff806d) && vehicle.var_66ff806d))) {
+  if(isDefined(vehicle.archetype) && vehicle.archetype == "wasp" && (!(isDefined(vehicle.var_66ff806d) && vehicle.var_66ff806d))) {
     self thread _playerspectatechase(vehicle);
   } else {
     self clientfield::set_to_player("hijack_spectate", 1);
@@ -482,19 +482,19 @@ function private _playerspectate(vehicle) {
 }
 
 function private _playerspectatechase(vehicle) {
-  forward = anglestoforward(vehicle.angles);
+  forward = anglesToForward(vehicle.angles);
   moveamount = vectorscale(forward, -200);
   moveamount = (moveamount[0], moveamount[1], vehicle.origin[2] + 72);
   cam = spawn("script_model", vehicle.origin + moveamount);
-  cam setmodel("tag_origin");
-  if(!(isdefined(vehicle.crash_style) && vehicle.crash_style)) {
+  cam setModel("tag_origin");
+  if(!(isDefined(vehicle.crash_style) && vehicle.crash_style)) {
     cam linkto(vehicle, "tag_origin");
   }
   self startcameratween(1);
   origin = vehicle.origin;
   wait(0.05);
   self camerasetposition(cam);
-  if(isdefined(vehicle)) {
+  if(isDefined(vehicle)) {
     self camerasetlookat(vehicle);
   } else {
     self camerasetlookat(origin + vectorscale((0, 0, 1), 50));
@@ -520,13 +520,13 @@ function private _wait_for_player_exit(player) {
   self endon("death");
   player endon("return_to_body");
   self util::waittill_any("unlink", "exit_vehicle");
-  if(game["state"] == "postgame" || (isdefined(level.gameended) && level.gameended)) {
+  if(game["state"] == "postgame" || (isDefined(level.gameended) && level.gameended)) {
     return;
   }
   self setteam("axis");
   self.takedamage = 1;
   self.owner = undefined;
-  if(isdefined(player)) {
+  if(isDefined(player)) {
     self kill(self.origin, player, player, getweapon("gadget_remote_hijack"));
   } else {
     self kill();
@@ -545,11 +545,11 @@ function private _wait_for_return(player) {
   player setorigin(original_location);
   player setplayerangles(original_angles);
   wait(0.05);
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     self setteam("axis");
     self.takedamage = 1;
     self.owner = undefined;
-    if(isdefined(player)) {
+    if(isDefined(player)) {
       self kill(self.origin, player);
     } else {
       self kill();
@@ -560,7 +560,7 @@ function private _wait_for_return(player) {
 
 function clearusingremote() {
   self enableoffhandweapons();
-  if(isdefined(self.lastweapon)) {
+  if(isDefined(self.lastweapon)) {
     self switchtoweapon(self.lastweapon);
     wait(1);
   }
@@ -576,7 +576,7 @@ function setusingremote(remotename) {
 }
 
 function function_43b801ea(onoff, entnum) {
-  while (true) {
+  while(true) {
     level waittill("clonedentity", clone, vehentnum);
     if(vehentnum == entnum) {
       clone.var_66ff806d = onoff;

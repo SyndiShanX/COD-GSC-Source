@@ -13,7 +13,7 @@ init() {
   players = get_players();
   if(players.size > 0) {
     for(i = 0; i < players.size; i++) {
-      level.deathcards[i] = SpawnStruct();
+      level.deathcards[i] = spawnStruct();
     }
     level.deathcard_laststand_func = ::deathcard_laststand;
     if(players.size > 1) {
@@ -137,8 +137,8 @@ deathcard_grab() {
       if(players[i] == self.player) {
         dist = distance(players[i].origin, self.origin);
         if(dist < 64) {
-          playfx(level._effect["powerup_grabbed"], self.origin);
-          playfx(level._effect["powerup_grabbed_wave"], self.origin);
+          playFX(level._effect["powerup_grabbed"], self.origin);
+          playFX(level._effect["powerup_grabbed_wave"], self.origin);
           players[i] deathcard_give(i);
           wait(0.1);
           playsoundatposition("zmb_powerup_grabbed_3p", self.origin);
@@ -257,8 +257,8 @@ deathcard_wobble() {
   self endon("deathcard_grabbed");
   self endon("deathcard_timedout");
   if(isDefined(self)) {
-    playfxontag(level._effect["powerup_on"], self, "tag_origin");
-    self playsound("zmb_spawn_powerup");
+    playFXOnTag(level._effect["powerup_on"], self, "tag_origin");
+    self playSound("zmb_spawn_powerup");
     self playLoopSound("evt_death_card_loop");
   }
   while(isDefined(self)) {

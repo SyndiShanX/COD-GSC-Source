@@ -191,7 +191,7 @@ sendUpdatedDMScores() {
 
   WaitTillSlowProcessAllowed();
 
-  for (i = 0; i < level.players.size; i++) {
+  for(i = 0; i < level.players.size; i++) {
     level.players[i] updateDMScores();
     level.players[i].updatedDMScores = true;
   }
@@ -201,7 +201,7 @@ removeDisconnectedPlayerFromPlacement() {
   offset = 0;
   numPlayers = level.placement["all"].size;
   found = false;
-  for (i = 0; i < numPlayers; i++) {
+  for(i = 0; i < numPlayers; i++) {
     if(level.placement["all"][i] == self)
       found = true;
 
@@ -220,7 +220,7 @@ removeDisconnectedPlayerFromPlacement() {
   }
 
   numPlayers = level.placement["all"].size;
-  for (i = 0; i < numPlayers; i++) {
+  for(i = 0; i < numPlayers; i++) {
     player = level.placement["all"][i];
     player notify("update_outcome");
   }
@@ -238,11 +238,11 @@ updatePlacement() {
     placementAll[placementAll.size] = player;
   }
 
-  for (i = 1; i < placementAll.size; i++) {
+  for(i = 1; i < placementAll.size; i++) {
     player = placementAll[i];
     playerScore = player.score;
-    //		for ( j = i - 1; j >= 0 && (player.score > placementAll[j].score || (player.score == placementAll[j].score && player.deaths < placementAll[j].deaths)); j-- )
-    for (j = i - 1; j >= 0 && getBetterPlayer(player, placementAll[j]) == player; j--)
+    //		for( j = i - 1; j >= 0 && (player.score > placementAll[j].score || (player.score == placementAll[j].score && player.deaths < placementAll[j].deaths)); j-- )
+    for(j = i - 1; j >= 0 && getBetterPlayer(player, placementAll[j]) == player; j--)
       placementAll[j + 1] = placementAll[j];
     placementAll[j + 1] = player;
   }
@@ -286,7 +286,7 @@ updateTeamPlacement() {
   placementAll = level.placement["all"];
   placementAllSize = placementAll.size;
 
-  for (i = 0; i < placementAllSize; i++) {
+  for(i = 0; i < placementAllSize; i++) {
     player = placementAll[i];
     team = player.pers["team"];
 
@@ -304,17 +304,17 @@ initialDMScoreUpdate() {
   // the first time someone kills someone else.
   wait .2;
   numSent = 0;
-  while (1) {
+  while(1) {
     didAny = false;
 
     players = level.players;
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       player = players[i];
 
-      if(!isdefined(player)) {
+      if(!isDefined(player)) {
         continue;
       }
-      if(isdefined(player.updatedDMScores)) {
+      if(isDefined(player.updatedDMScores)) {
         continue;
       }
       player.updatedDMScores = true;

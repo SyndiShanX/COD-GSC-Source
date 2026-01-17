@@ -22,7 +22,7 @@ setanims() {
   positions = [];
 
   for(i = 0; i < 1; i++)
-    positions[i] = spawnstruct();
+    positions[i] = spawnStruct();
 
   positions[0].sittag = "tag_driver";
   positions[0].idle = % crew_bike_m72_drive_straight;
@@ -87,7 +87,7 @@ ai_ride_and_shoot() {
       shootfromangles = self animscripts\shared::trackloopgetshootfromangles();
       vectortoshootpos = shootpos - shootfrompos;
       anglestoshootpos = vectortoangles(vectortoshootpos);
-      facingvector = anglestoforward(shootfromangles);
+      facingvector = anglesToForward(shootfromangles);
       yawtoenemy = angleclamp180(shootfromangles[1] - anglestoshootpos[1]);
       pitchtoenemy = angleclamp180(shootfromangles[0] - anglestoshootpos[0]);
       realyawtoenemy = self getyawtoorigin(shootpos);
@@ -419,7 +419,7 @@ ai_ride_and_shoot_damage_override(einflictor, eattacker, idamage, idflags, smean
 ai_ride_and_shoot_ragdoll_death() {
   self.a.doingragdolldeath = 1;
   self animscripts\shared::dropallaiweapons();
-  velocity = anglestoforward(self.angles);
+  velocity = anglesToForward(self.angles);
   assert(isDefined(level.ai_motorcycle_death_launch_vector));
   velocity = (velocity[0] * level.ai_motorcycle_death_launch_vector[0], velocity[1] * level.ai_motorcycle_death_launch_vector[1], level.ai_motorcycle_death_launch_vector[2]);
   self unlink();

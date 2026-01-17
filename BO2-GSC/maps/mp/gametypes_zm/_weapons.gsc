@@ -143,8 +143,7 @@ watchweaponchange() {
   }
 }
 
-watchriotshielduse() {
-}
+watchriotshielduse() {}
 
 updatelastheldweapontimings(newtime) {
   if(isDefined(self.currentweapon) && isDefined(self.currentweaponstarttime)) {
@@ -681,14 +680,14 @@ dropweaponstoground(origin, radius) {
 
   for(i = 0; i < weapons.size; i++) {
     if(distancesquared(origin, weapons[i].origin) < radius * radius) {
-      trace = bullettrace(weapons[i].origin, weapons[i].origin + vectorscale((0, 0, -1), 2000.0), 0, weapons[i]);
+      trace = bulletTrace(weapons[i].origin, weapons[i].origin + vectorscale((0, 0, -1), 2000.0), 0, weapons[i]);
       weapons[i].origin = trace["position"];
     }
   }
 }
 
 dropgrenadestoground(origin, radius) {
-  grenades = getentarray("grenade", "classname");
+  grenades = getEntArray("grenade", "classname");
 
   for(i = 0; i < grenades.size; i++) {
     if(distancesquared(origin, grenades[i].origin) < radius * radius)
@@ -740,8 +739,7 @@ begingrenadetracking() {
   self.throwinggrenade = 0;
 }
 
-beginothergrenadetracking() {
-}
+beginothergrenadetracking() {}
 
 checkstucktoplayer(deleteonteamchange, awardscoreevent, weaponname) {
   self endon("death");
@@ -752,8 +750,7 @@ checkstucktoplayer(deleteonteamchange, awardscoreevent, weaponname) {
       self thread stucktoplayerteamchange(player);
 
     if(awardscoreevent && isDefined(self.originalowner)) {
-      if(self.originalowner isenemyplayer(player)) {
-      }
+      if(self.originalowner isenemyplayer(player)) {}
     }
 
     self.stucktoplayer = player;
@@ -865,7 +862,7 @@ turngrenadeintoadud(weapname, isthrowngrenade, player) {
       if(!timeleft)
         timeleft = 1;
 
-      player iprintlnbold(&"MP_LAUNCHER_UNAVAILABLE_FOR_N", " " + timeleft + " ", & "EXE_SECONDS");
+      player iprintlnbold(&"MP_LAUNCHER_UNAVAILABLE_FOR_N", " " + timeleft + " ", &"EXE_SECONDS");
       self makegrenadedud();
     }
   } else if(level.throwngrenadedudtime >= maps\mp\gametypes_zm\_globallogic_utils::gettimepassed() / 1000 && isthrowngrenade) {
@@ -878,7 +875,7 @@ turngrenadeintoadud(weapname, isthrowngrenade, player) {
       if(!timeleft)
         timeleft = 1;
 
-      player iprintlnbold(&"MP_GRENADE_UNAVAILABLE_FOR_N", " " + timeleft + " ", & "EXE_SECONDS");
+      player iprintlnbold(&"MP_GRENADE_UNAVAILABLE_FOR_N", " " + timeleft + " ", &"EXE_SECONDS");
       self makegrenadedud();
     }
   }
@@ -923,7 +920,7 @@ getdamageableents(pos, radius, dolos, startradius) {
     distsq = distancesquared(pos, playerpos);
 
     if(distsq < radius * radius && (!dolos || weapondamagetracepassed(pos, playerpos, startradius, undefined))) {
-      newent = spawnstruct();
+      newent = spawnStruct();
       newent.isplayer = 1;
       newent.isadestructable = 0;
       newent.isadestructible = 0;
@@ -934,14 +931,14 @@ getdamageableents(pos, radius, dolos, startradius) {
     }
   }
 
-  grenades = getentarray("grenade", "classname");
+  grenades = getEntArray("grenade", "classname");
 
   for(i = 0; i < grenades.size; i++) {
     entpos = grenades[i].origin;
     distsq = distancesquared(pos, entpos);
 
     if(distsq < radius * radius && (!dolos || weapondamagetracepassed(pos, entpos, startradius, grenades[i]))) {
-      newent = spawnstruct();
+      newent = spawnStruct();
       newent.isplayer = 0;
       newent.isadestructable = 0;
       newent.isadestructible = 0;
@@ -952,14 +949,14 @@ getdamageableents(pos, radius, dolos, startradius) {
     }
   }
 
-  destructibles = getentarray("destructible", "targetname");
+  destructibles = getEntArray("destructible", "targetname");
 
   for(i = 0; i < destructibles.size; i++) {
     entpos = destructibles[i].origin;
     distsq = distancesquared(pos, entpos);
 
     if(distsq < radius * radius && (!dolos || weapondamagetracepassed(pos, entpos, startradius, destructibles[i]))) {
-      newent = spawnstruct();
+      newent = spawnStruct();
       newent.isplayer = 0;
       newent.isadestructable = 0;
       newent.isadestructible = 1;
@@ -970,14 +967,14 @@ getdamageableents(pos, radius, dolos, startradius) {
     }
   }
 
-  destructables = getentarray("destructable", "targetname");
+  destructables = getEntArray("destructable", "targetname");
 
   for(i = 0; i < destructables.size; i++) {
     entpos = destructables[i].origin;
     distsq = distancesquared(pos, entpos);
 
     if(distsq < radius * radius && (!dolos || weapondamagetracepassed(pos, entpos, startradius, destructables[i]))) {
-      newent = spawnstruct();
+      newent = spawnStruct();
       newent.isplayer = 0;
       newent.isadestructable = 1;
       newent.isadestructible = 0;
@@ -1005,7 +1002,7 @@ weapondamagetrace(from, to, startradius, ignore) {
 
   dir = vectornormalize(diff);
   midpos = from + (dir[0] * startradius, dir[1] * startradius, dir[2] * startradius);
-  trace = bullettrace(midpos, to, 0, ignore);
+  trace = bulletTrace(midpos, to, 0, ignore);
 
   if(getdvarint(#"_id_0A1C40B1") != 0) {
     if(trace["fraction"] == 1)
@@ -1087,13 +1084,13 @@ playconcussionsound(duration) {
   concussionsound.origin = self.origin;
   concussionsound linkto(self);
   concussionsound thread deleteentonownerdeath(self);
-  concussionsound playsound("");
-  concussionsound playloopsound("");
+  concussionsound playSound("");
+  concussionsound playLoopSound("");
 
   if(duration > 0.5)
     wait(duration - 0.5);
 
-  concussionsound playsound("");
+  concussionsound playSound("");
   concussionsound stoploopsound(0.5);
   wait 0.5;
   concussionsound notify("delete");
@@ -1106,8 +1103,7 @@ deleteentonownerdeath(owner) {
   self delete();
 }
 
-monitor_dog_special_grenades() {
-}
+monitor_dog_special_grenades() {}
 
 isprimaryweapon(weaponname) {
   return isDefined(level.primary_weapon_array[weaponname]);
@@ -1431,7 +1427,7 @@ scavenger_think() {
   primary_weapons = player getweaponslistprimaries();
   offhand_weapons_and_alts = array_exclude(player getweaponslist(1), primary_weapons);
   arrayremovevalue(offhand_weapons_and_alts, "knife_mp");
-  player playsound("fly_equipment_pickup_npc");
+  player playSound("fly_equipment_pickup_npc");
   player playlocalsound("fly_equipment_pickup_plr");
   player.scavenger_icon.alpha = 1;
   player.scavenger_icon fadeovertime(2.5);
@@ -1607,7 +1603,7 @@ dropscavengerfordeath(attacker) {
 }
 
 addlimitedweapon(weapon_name, owner, num_drops) {
-  limited_info = spawnstruct();
+  limited_info = spawnStruct();
   limited_info.weapon = weapon_name;
   limited_info.drops = num_drops;
   owner.limited_info = limited_info;

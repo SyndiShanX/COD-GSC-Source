@@ -14,9 +14,7 @@ main() {
 
   if(isusingmatchrulesdata()) {
     level.initializematchrules = ::initializematchrules;
-    [
-      [level.initializematchrules]
-    ]();
+    [[level.initializematchrules]]();
     level thread maps\mp\_utility::reinitializematchrulesonmigration();
   } else {
     maps\mp\_utility::registerroundswitchdvar(level.gametype, 1, 0, 9);
@@ -81,7 +79,7 @@ initializematchrules() {
 }
 
 onstartgametype() {
-  if(!isdefined(game["switchedsides"]))
+  if(!isDefined(game["switchedsides"]))
     game["switchedsides"] = 0;
 
   if(game["switchedsides"]) {
@@ -93,19 +91,19 @@ onstartgametype() {
 
   setclientnamemode("manual_change");
   maps\mp\gametypes\common_bomb_gameobject::loadbombfx();
-  maps\mp\_utility::setobjectivetext(game["attackers"], & "OBJECTIVES_SD_ATTACKER");
-  maps\mp\_utility::setobjectivetext(game["defenders"], & "OBJECTIVES_SD_DEFENDER");
+  maps\mp\_utility::setobjectivetext(game["attackers"], &"OBJECTIVES_SD_ATTACKER");
+  maps\mp\_utility::setobjectivetext(game["defenders"], &"OBJECTIVES_SD_DEFENDER");
 
   if(level.splitscreen) {
-    maps\mp\_utility::setobjectivescoretext(game["attackers"], & "OBJECTIVES_SD_ATTACKER");
-    maps\mp\_utility::setobjectivescoretext(game["defenders"], & "OBJECTIVES_SD_DEFENDER");
+    maps\mp\_utility::setobjectivescoretext(game["attackers"], &"OBJECTIVES_SD_ATTACKER");
+    maps\mp\_utility::setobjectivescoretext(game["defenders"], &"OBJECTIVES_SD_DEFENDER");
   } else {
-    maps\mp\_utility::setobjectivescoretext(game["attackers"], & "OBJECTIVES_SD_ATTACKER_SCORE");
-    maps\mp\_utility::setobjectivescoretext(game["defenders"], & "OBJECTIVES_SD_DEFENDER_SCORE");
+    maps\mp\_utility::setobjectivescoretext(game["attackers"], &"OBJECTIVES_SD_ATTACKER_SCORE");
+    maps\mp\_utility::setobjectivescoretext(game["defenders"], &"OBJECTIVES_SD_DEFENDER_SCORE");
   }
 
-  maps\mp\_utility::setobjectivehinttext(game["attackers"], & "OBJECTIVES_SD_ATTACKER_HINT");
-  maps\mp\_utility::setobjectivehinttext(game["defenders"], & "OBJECTIVES_SD_DEFENDER_HINT");
+  maps\mp\_utility::setobjectivehinttext(game["attackers"], &"OBJECTIVES_SD_ATTACKER_HINT");
+  maps\mp\_utility::setobjectivehinttext(game["defenders"], &"OBJECTIVES_SD_DEFENDER_HINT");
   initspawns();
   var_2[0] = "sd";
   var_2[1] = "bombzone";
@@ -159,12 +157,12 @@ onspawnplayer() {
 
   maps\mp\_utility::setextrascore0(0);
 
-  if(isdefined(self.pers["plants"]))
+  if(isDefined(self.pers["plants"]))
     maps\mp\_utility::setextrascore0(self.pers["plants"]);
 
   maps\mp\_utility::setextrascore1(0);
 
-  if(isdefined(self.pers["defuses"]))
+  if(isDefined(self.pers["defuses"]))
     maps\mp\_utility::setextrascore1(self.pers["defuses"]);
 
   self.isrespawningwithbombcarrierclass = undefined;

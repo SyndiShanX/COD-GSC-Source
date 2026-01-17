@@ -110,7 +110,7 @@ function dempsey_rocket_twinkle() {
   wait(60);
   var_effa4ac5 = struct::get("dempsey_rocket_twinkle");
   var_bfa03783 = fx::play("dempsey_rocket_twinkle", var_effa4ac5.origin, var_effa4ac5.angles, "delete_fx", 0, undefined, 1);
-  while (!level flag::get("dimension_set")) {
+  while(!level flag::get("dimension_set")) {
     var_bcfda8b9 = struct::get(var_effa4ac5.target, "targetname");
     var_effa4ac5 = var_bcfda8b9;
     var_bfa03783 moveto(var_effa4ac5.origin, 60);
@@ -125,20 +125,20 @@ function time_travel() {
   level waittill("start_zombie_round_logic");
   var_1bdfdb3b = array("demon_gate_upgraded", "elemental_storm_upgraded", "rune_prison_upgraded", "wolf_howl_upgraded");
   level flag::wait_till_any(var_1bdfdb3b);
-  var_be9116cc = getentarray("activate_targets_object", "targetname");
+  var_be9116cc = getEntArray("activate_targets_object", "targetname");
   foreach(var_4e591161 in var_be9116cc) {
-    var_4e591161 setcandamage(1);
+    var_4e591161 setCanDamage(1);
     var_4e591161.health = 999999;
     var_4e591161 thread function_676d98e4();
   }
   level flag::wait_till("ee_start_done");
-  array::run_all(var_be9116cc, & delete);
+  array::run_all(var_be9116cc, &delete);
   zm_zonemgr::enable_zone("zone_past_laboratory");
   level thread function_2634b833();
 }
 
 function function_676d98e4() {
-  while (!(isdefined(self.b_shot) && self.b_shot)) {
+  while(!(isDefined(self.b_shot) && self.b_shot)) {
     self waittill("damage", n_damage, e_attacker, v_direction, v_point, str_means_of_death, str_tag_name, str_model_name, str_part_name, w_weapon);
     if(issubstr(w_weapon.name, "elemental_bow")) {
       if(!issubstr(w_weapon.name, "elemental_bow_demongate") && !issubstr(w_weapon.name, "elemental_bow_rune_prison") && !issubstr(w_weapon.name, "elemental_bow_storm") && !issubstr(w_weapon.name, "elemental_bow_wolf_howl")) {
@@ -152,10 +152,10 @@ function function_676d98e4() {
 }
 
 function function_9dd0cf1() {
-  var_be9116cc = getentarray("activate_targets_object", "targetname");
+  var_be9116cc = getEntArray("activate_targets_object", "targetname");
   var_64c4082d = 0;
   foreach(var_4e591161 in var_be9116cc) {
-    if(isdefined(var_4e591161.b_shot) && var_4e591161.b_shot) {
+    if(isDefined(var_4e591161.b_shot) && var_4e591161.b_shot) {
       var_64c4082d++;
     }
   }
@@ -169,16 +169,16 @@ function function_9dd0cf1() {
 }
 
 function function_2634b833() {
-  a_targets = getentarray("activate_teleporter_object", "targetname");
+  a_targets = getEntArray("activate_teleporter_object", "targetname");
   foreach(e_target in a_targets) {
-    e_target setcandamage(1);
+    e_target setCanDamage(1);
     e_target.health = 999999;
     e_target.var_ebeea021 = 0;
   }
   var_64c4082d = 0;
   level.var_a0ef3c5e = undefined;
   level thread function_98d9769f();
-  while (!level flag::get("stop_time_travel")) {
+  while(!level flag::get("stop_time_travel")) {
     level.var_a0ef3c5e = function_ee0ff0d1(a_targets, level.var_a0ef3c5e);
     level.var_a0ef3c5e.var_ebeea021 = 1;
     level.var_a0ef3c5e thread function_7317cab3();
@@ -237,13 +237,13 @@ function function_61036bd1() {
 
 function function_ee0ff0d1(a_targets, e_target_current) {
   var_4573b5e6 = undefined;
-  if(!isdefined(e_target_current)) {
+  if(!isDefined(e_target_current)) {
     var_4573b5e6 = array::random(a_targets);
   } else {
     var_8717daa1 = [];
     foreach(e_target in a_targets) {
-      if(!(isdefined(e_target.var_25a8b5d5) && e_target.var_25a8b5d5)) {
-        if(!isdefined(var_8717daa1)) {
+      if(!(isDefined(e_target.var_25a8b5d5) && e_target.var_25a8b5d5)) {
+        if(!isDefined(var_8717daa1)) {
           var_8717daa1 = [];
         } else if(!isarray(var_8717daa1)) {
           var_8717daa1 = array(var_8717daa1);
@@ -255,8 +255,8 @@ function function_ee0ff0d1(a_targets, e_target_current) {
       var_8717daa1 = arraysort(var_8717daa1, e_target_current.origin);
       var_fd3f8bfd = [];
       n_targets = level.activeplayers.size + 1;
-      for (i = 0; i < n_targets; i++) {
-        if(!isdefined(var_fd3f8bfd)) {
+      for(i = 0; i < n_targets; i++) {
+        if(!isDefined(var_fd3f8bfd)) {
           var_fd3f8bfd = [];
         } else if(!isarray(var_fd3f8bfd)) {
           var_fd3f8bfd = array(var_fd3f8bfd);
@@ -331,7 +331,7 @@ function channeling_stone_replacement() {
   var_79488a88 = getent("lid_crate_stone", "targetname");
   var_79488a88 rotatepitch(-90, 1);
   var_79488a88.b_rotated = 1;
-  var_79488a88 playsound("zmb_ee_lid_open");
+  var_79488a88 playSound("zmb_ee_lid_open");
   playsoundatposition("zmb_ee_lid_keyinsert", s_key.origin);
   var_f12ee4c0 zm_castle_util::create_unitrigger();
   var_f12ee4c0 waittill("trigger_activated");
@@ -344,26 +344,26 @@ function channeling_stone_replacement() {
 function function_f5156f29() {
   level waittill("hash_a8200e36");
   s_key = struct::get("golden_key_slot_past");
-  if(isdefined(s_key.s_unitrigger)) {
+  if(isDefined(s_key.s_unitrigger)) {
     zm_unitrigger::unregister_unitrigger(s_key.s_unitrigger);
   }
   mdl_key = getent("golden_key_past", "targetname");
-  if(isdefined(mdl_key)) {
+  if(isDefined(mdl_key)) {
     mdl_key delete();
   }
   var_f12ee4c0 = getent("stone_past", "targetname");
-  if(isdefined(var_f12ee4c0) && isdefined(var_f12ee4c0.s_unitrigger)) {
+  if(isDefined(var_f12ee4c0) && isDefined(var_f12ee4c0.s_unitrigger)) {
     zm_unitrigger::unregister_unitrigger(var_f12ee4c0.s_unitrigger);
   }
   var_f12ee4c0 = getent("stone_past", "targetname");
-  if(isdefined(var_f12ee4c0)) {
+  if(isDefined(var_f12ee4c0)) {
     var_f12ee4c0 delete();
   }
   var_79488a88 = getent("lid_crate_stone", "targetname");
-  if(isdefined(var_79488a88.b_rotated) && var_79488a88.b_rotated) {
+  if(isDefined(var_79488a88.b_rotated) && var_79488a88.b_rotated) {
     var_79488a88 rotatepitch(90, 1);
     var_79488a88.b_rotated = undefined;
-    var_79488a88 playsound("zmb_ee_lid_slide");
+    var_79488a88 playSound("zmb_ee_lid_slide");
   }
   if(!level flag::get("channeling_stone_replacement")) {
     level thread channeling_stone_replacement();
@@ -380,7 +380,7 @@ function function_eb855685(var_f63ec558) {
 }
 
 function function_af12b9a4() {
-  for (i = 1; i <= 4; i++) {
+  for(i = 1; i <= 4; i++) {
     var_4a9aea8a = getent("cs_glow_" + i, "targetname");
     var_4a9aea8a hide();
   }
@@ -395,13 +395,13 @@ function function_af12b9a4() {
   var_f12ee4c0 thread function_eb855685(var_f63ec558);
   level flag::wait_till("start_channeling_stone_step");
   level waittill("hash_4619f71b");
-  zm_spawner::register_zombie_death_event_callback( & function_e8de9974);
+  zm_spawner::register_zombie_death_event_callback(&function_e8de9974);
   var_b2b5bc6e = struct::get("keeper_spawn_loc", "targetname");
   var_aae59061 = getent("keeper_archon", "targetname");
   var_747532f4 = zombie_utility::spawn_zombie(var_aae59061, "keeper_archon_ai", var_b2b5bc6e);
   var_747532f4 function_2d0c5aa1(var_b2b5bc6e);
-  var_747532f4 playsound("zmb_ee_resurrect_keeper_spawn");
-  var_747532f4 playloopsound("zmb_ee_resurrect_keeper_lp", 2);
+  var_747532f4 playSound("zmb_ee_resurrect_keeper_spawn");
+  var_747532f4 playLoopSound("zmb_ee_resurrect_keeper_lp", 2);
   var_747532f4 fx::play("ghost_torso", var_747532f4.origin, var_747532f4.angles, "ghost_torso", 1, "j_spineupper", 1);
   var_747532f4 fx::play("ghost_trail", var_747532f4.origin, var_747532f4.angles, "ghost_trail", 1, "j_robe_front_03", 1);
   wait(0.15);
@@ -413,7 +413,7 @@ function function_af12b9a4() {
 
 function vril_generator(var_e8245e5f) {
   var_79b48eac = undefined;
-  if(isdefined(var_e8245e5f) && var_e8245e5f) {
+  if(isDefined(var_e8245e5f) && var_e8245e5f) {
     level waittill("hash_b5927dd");
     var_79b48eac = getent("vril_generator", "targetname");
     var_79b48eac delete();
@@ -423,7 +423,7 @@ function vril_generator(var_e8245e5f) {
   var_79b48eac setscale(1.7);
   var_79b48eac zm_castle_util::create_unitrigger();
   var_79b48eac waittill("trigger_activated");
-  var_79b48eac playsound("zmb_ee_resurrect_vril_pickup");
+  var_79b48eac playSound("zmb_ee_resurrect_vril_pickup");
   zm_unitrigger::unregister_unitrigger(var_79b48eac.s_unitrigger);
   var_79b48eac delete();
   var_ff02be4a = struct::get("vril_generator_family");
@@ -442,7 +442,7 @@ function vril_generator(var_e8245e5f) {
     }
   }
   var_79b48eac notify("delete_fx");
-  var_79b48eac playsound("zmb_ee_resurrect_vril_end");
+  var_79b48eac playSound("zmb_ee_resurrect_vril_end");
   level notify("hash_4619f71b");
 }
 
@@ -458,7 +458,7 @@ function function_2d0c5aa1(s_spawn_point) {
   self.ignoreall = 1;
   self.ignoreme = 1;
   self util::magic_bullet_shield();
-  self setcandamage(0);
+  self setCanDamage(0);
   self setplayercollision(0);
   self setteam("allies");
   self.is_immune_to_knockdown = 1;
@@ -481,7 +481,7 @@ function function_2d0c5aa1(s_spawn_point) {
 function function_d1963bbd() {
   self endon("death");
   self endon("entityshutdown");
-  while (true) {
+  while(true) {
     self.knockdown = 0;
     wait(0.2);
   }
@@ -489,15 +489,15 @@ function function_d1963bbd() {
 
 function function_e8de9974(e_attacker) {
   if(self.archetype === "zombie") {
-    if(zm_utility::is_player_valid(e_attacker) && (isdefined(e_attacker.var_babefc4c) && e_attacker.var_babefc4c) && (isdefined(e_attacker.var_507ad4a9) && e_attacker.var_507ad4a9)) {
+    if(zm_utility::is_player_valid(e_attacker) && (isDefined(e_attacker.var_babefc4c) && e_attacker.var_babefc4c) && (isDefined(e_attacker.var_507ad4a9) && e_attacker.var_507ad4a9)) {
       if(issubstr(self.damageweapon.name, "elemental_bow_" + level.var_1f18338d)) {
         var_f12ee4c0 = getent("cs_stone_" + level.var_f1b0baba, "targetname");
-        if(!isdefined(var_f12ee4c0) || !var_f12ee4c0 flagsys::get("channeling_stone_cracked")) {
+        if(!isDefined(var_f12ee4c0) || !var_f12ee4c0 flagsys::get("channeling_stone_cracked")) {
           e_volume = getent("cs_zone_" + level.var_f1b0baba, "targetname");
           if(self istouching(e_volume)) {
             var_4a9aea8a = getent("cs_glow_" + level.var_f1b0baba, "targetname");
             var_25c1c42e = function_6fc08711();
-            self thread zm_castle_weap_quest_upgrade::function_55c48922(self.origin, var_4a9aea8a.origin, var_25c1c42e, isdefined(self.missinglegs) && self.missinglegs);
+            self thread zm_castle_weap_quest_upgrade::function_55c48922(self.origin, var_4a9aea8a.origin, var_25c1c42e, isDefined(self.missinglegs) && self.missinglegs);
             level.var_8bdb0713++;
             if(level.var_8bdb0713 == 1) {
               level waittill("hash_d8b279ab");
@@ -580,12 +580,12 @@ function function_a760f135() {
 }
 
 function function_afc77531(str_flag, var_61bcec7) {
-  if(!(isdefined(level.var_dfc343e9) && level.var_dfc343e9)) {
+  if(!(isDefined(level.var_dfc343e9) && level.var_dfc343e9)) {
     if(!level flag::get(str_flag)) {
       level flag::wait_till(str_flag);
     }
   }
-  if(!isdefined(level.a_elements)) {
+  if(!isDefined(level.a_elements)) {
     level.a_elements = [];
   } else if(!isarray(level.a_elements)) {
     level.a_elements = array(level.a_elements);
@@ -595,7 +595,7 @@ function function_afc77531(str_flag, var_61bcec7) {
 
 function function_4ce3eea5(var_bda73276) {
   var_61bcec7 = level.a_elements[var_bda73276];
-  if(!isdefined(var_61bcec7)) {
+  if(!isDefined(var_61bcec7)) {
     n_players = level.players.size;
     n_players = n_players + level.var_b5231dfb;
     if(n_players > 4) {
@@ -604,12 +604,12 @@ function function_4ce3eea5(var_bda73276) {
     if(var_bda73276 >= n_players) {
       n_index = var_bda73276 - n_players;
       var_61bcec7 = level.a_elements[n_index];
-      while (!isdefined(var_61bcec7)) {
+      while(!isDefined(var_61bcec7)) {
         n_index = n_index - n_players;
         var_61bcec7 = level.a_elements[n_index];
       }
     } else {
-      while (!isdefined(var_61bcec7)) {
+      while(!isDefined(var_61bcec7)) {
         wait(0.15);
         var_61bcec7 = level.a_elements[var_bda73276];
       }
@@ -623,7 +623,7 @@ function function_3faf6b59(var_747532f4) {
   function_a760f135();
   level.a_elements = array::randomize(level.a_elements);
   a_zones = array::randomize(a_zones);
-  for (i = 0; i < a_zones.size; i++) {
+  for(i = 0; i < a_zones.size; i++) {
     foreach(player in level.players) {
       player thread function_812faaaf();
     }
@@ -633,7 +633,7 @@ function function_3faf6b59(var_747532f4) {
     var_747532f4 setgoal(s_stone.origin);
     var_747532f4 waittill("goal");
     var_747532f4 thread function_37fb253(s_stone);
-    var_747532f4 playsound("zmb_ee_resurrect_start_circle");
+    var_747532f4 playSound("zmb_ee_resurrect_start_circle");
     level.var_1f18338d = function_4ce3eea5(i);
     level thread function_99ac27a();
     if(i > 1) {
@@ -646,18 +646,18 @@ function function_3faf6b59(var_747532f4) {
     level flag::clear("next_channeling_stone");
     var_747532f4 scene::stop("cin_zm_dlc1_corrupted_keeper_charge_stone_loop");
     var_747532f4 scene::play("cin_zm_dlc1_corrupted_keeper_charge_stone_outro", var_747532f4);
-    var_747532f4 playsound("zmb_ee_resurrect_power_complete");
+    var_747532f4 playSound("zmb_ee_resurrect_power_complete");
     wait(0.15);
   }
-  zm_spawner::deregister_zombie_death_event_callback( & function_e8de9974);
+  zm_spawner::deregister_zombie_death_event_callback(&function_e8de9974);
   var_82a4f07b = struct::get("keeper_end_loc");
   var_82a4f07b fx::play("mpd_fx", var_82a4f07b.origin, var_82a4f07b.angles, "delete_fx", 0, undefined, 1);
   level.var_8ef26cd9 = 1;
   foreach(player in level.players) {
     player thread zm_castle_util::function_fa7da172();
   }
-  callback::on_connect( & zm_castle_util::function_fa7da172);
-  var_57615f80 = getentarray("pyramid", "targetname");
+  callback::on_connect(&zm_castle_util::function_fa7da172);
+  var_57615f80 = getEntArray("pyramid", "targetname");
   foreach(var_27fd0c6f in var_57615f80) {
     var_54a70b81 = (var_27fd0c6f.origin[0], var_27fd0c6f.origin[1], var_27fd0c6f.origin[2] - 96);
     var_27fd0c6f notsolid();
@@ -667,8 +667,8 @@ function function_3faf6b59(var_747532f4) {
   var_747532f4 clientfield::set("ghost_actor", 0);
   var_747532f4 notify("ghost_torso");
   var_747532f4 notify("ghost_trail");
-  var_747532f4 playsound("zmb_ee_resurrect_keeper_notghost");
-  var_747532f4 playloopsound("zmb_ee_resurrect_keeper_notghost_lp");
+  var_747532f4 playSound("zmb_ee_resurrect_keeper_notghost");
+  var_747532f4 playLoopSound("zmb_ee_resurrect_keeper_notghost_lp");
   var_747532f4 fx::play("keeper_torso", var_747532f4.origin, var_747532f4.angles, "keeper_torso", 1, "j_spineupper", 1);
   var_747532f4 fx::play("keeper_mouth", var_747532f4.origin, var_747532f4.angles, "keeper_torso", 1, "j_head", 1);
   var_747532f4 fx::play("keeper_trail", var_747532f4.origin, var_747532f4.angles, "keeper_trail", 1, "j_robe_front_03", 1);
@@ -678,7 +678,7 @@ function function_3faf6b59(var_747532f4) {
   s_stone = struct::get("keeper_end_loc");
   var_747532f4 setgoal(s_stone.origin);
   var_747532f4 waittill("goal");
-  var_747532f4 playsound("zmb_ee_resurrect_end_warpaway");
+  var_747532f4 playSound("zmb_ee_resurrect_end_warpaway");
   var_747532f4 fx::play("keeper_beam", var_747532f4.origin, var_747532f4.angles, undefined, 1, "j_mainroot", 1);
   exploder::exploder("fxexp_601");
   exploder::exploder("fxexp_602");
@@ -687,9 +687,9 @@ function function_3faf6b59(var_747532f4) {
   foreach(player in level.players) {
     player thread function_6ff05666();
   }
-  callback::on_connect( & function_6ff05666);
+  callback::on_connect(&function_6ff05666);
   level flag::wait_till("see_keeper");
-  callback::remove_on_connect( & function_6ff05666);
+  callback::remove_on_connect(&function_6ff05666);
   function_1c4bd669(1);
   var_747532f4 scene::play("cin_zm_dlc1_corrupted_keeper_float_emerge", var_747532f4);
   exploder::kill_exploder("fxexp_601");
@@ -698,7 +698,7 @@ function function_3faf6b59(var_747532f4) {
   exploder::kill_exploder("fxexp_604");
   var_747532f4 delete();
   var_82a4f07b notify("delete_fx");
-  callback::remove_on_connect( & zm_castle_util::function_fa7da172);
+  callback::remove_on_connect(&zm_castle_util::function_fa7da172);
   level.var_8ef26cd9 = undefined;
   zm_castle_vo::function_70721c81();
   function_1c4bd669(0);
@@ -709,7 +709,7 @@ function function_6ff05666() {
   self endon("death");
   var_747532f4 = getent("keeper_archon_ai", "targetname");
   str_player_zone = self zm_zonemgr::get_player_zone();
-  while (!zm_utility::is_player_valid(self) || str_player_zone !== "zone_undercroft") {
+  while(!zm_utility::is_player_valid(self) || str_player_zone !== "zone_undercroft") {
     wait(0.15);
     str_player_zone = self zm_zonemgr::get_player_zone();
   }
@@ -730,14 +730,14 @@ function function_37fb253(var_33b10d19) {
 function function_99ac27a() {
   level endon("next_channeling_stone");
   var_f12ee4c0 = getent("cs_stone_" + level.var_f1b0baba, "targetname");
-  if(isdefined(var_f12ee4c0)) {
+  if(isDefined(var_f12ee4c0)) {
     var_f12ee4c0 flagsys::wait_till_clear("channeling_stone_cracked");
   }
   var_4a9aea8a = getent("cs_glow_" + level.var_f1b0baba, "targetname");
   var_4a9aea8a show();
   level thread function_6bfbde41();
   var_dd155127 = function_f507c094();
-  while (true) {
+  while(true) {
     if(function_1f8ca830()) {
       var_747532f4 = getent("keeper_archon_ai", "targetname");
       var_747532f4 notify("keeper_charge");
@@ -790,7 +790,7 @@ function function_f507c094() {
 
 function function_6bfbde41() {
   level endon("next_channeling_stone");
-  while (true) {
+  while(true) {
     level.var_f91118d9 = undefined;
     level waittill("end_of_round");
     level.var_f91118d9 = 1;
@@ -801,7 +801,7 @@ function function_6bfbde41() {
 function function_1f8ca830() {
   var_7ec3e0eb = 0;
   if(level.var_8bdb0713 >= function_4400f882()) {
-    if(isdefined(level.var_f91118d9) && level.var_f91118d9) {
+    if(isDefined(level.var_f91118d9) && level.var_f91118d9) {
       var_7ec3e0eb = 1;
     } else if(level.var_8bdb0713 >= function_f507c094()) {
       var_7ec3e0eb = 1;
@@ -813,9 +813,9 @@ function function_1f8ca830() {
 function function_812faaaf() {
   self endon("death");
   level endon("next_channeling_stone");
-  while (true) {
+  while(true) {
     self waittill("missile_fire", var_3fee16b8, var_e1041201);
-    if(zm_utility::is_player_valid(self) && (isdefined(self.var_507ad4a9) && self.var_507ad4a9)) {
+    if(zm_utility::is_player_valid(self) && (isDefined(self.var_507ad4a9) && self.var_507ad4a9)) {
       if(issubstr(var_e1041201.name, "elemental_bow_" + level.var_1f18338d)) {
         self.var_babefc4c = 1;
       } else {
@@ -834,7 +834,7 @@ function function_4f8445d7(n_zone) {
   var_d8c501d = var_1171297b.var_d8c501d;
   a_circles = var_1171297b.a_circles;
   var_d8702dd1 = [];
-  for (i = 0; i < var_d8c501d.size; i++) {
+  for(i = 0; i < var_d8c501d.size; i++) {
     var_d8702dd1[i] = var_d8c501d[i] * var_d8c501d[i];
   }
   var_560e7570 = var_d8702dd1[0];
@@ -845,7 +845,7 @@ function function_4f8445d7(n_zone) {
   var_fcfee273 = ("lgt_channel_stones_" + n_zone) + a_circles[var_d139aee0];
   exploder::exploder(var_fcfee273);
   var_bffe8a31 = 0;
-  while (!level flag::get("next_channeling_stone")) {
+  while(!level flag::get("next_channeling_stone")) {
     var_470f6bc3 = 0;
     foreach(player in level.players) {
       if(zm_utility::is_player_valid(player) && distance2dsquared(player.origin, var_87367d4f.origin) < var_560e7570) {
@@ -883,11 +883,11 @@ function function_4f8445d7(n_zone) {
 function function_f5a8624() {
   var_d8c501d = array(48, 80, 112, 192, 256);
   a_circles = [];
-  for (i = 0; i < var_d8c501d.size; i++) {
+  for(i = 0; i < var_d8c501d.size; i++) {
     str_size = "" + var_d8c501d[i];
     a_circles[str_size] = "_" + (i + 1);
   }
-  var_1171297b = spawnstruct();
+  var_1171297b = spawnStruct();
   var_1171297b.var_d8c501d = var_d8c501d;
   var_1171297b.a_circles = a_circles;
   return var_1171297b;
@@ -895,7 +895,7 @@ function function_f5a8624() {
 
 function function_c460669e() {
   function_2925fac8();
-  a_models = getentarray("script_model", "classname");
+  a_models = getEntArray("script_model", "classname");
   foreach(var_568ffe7c in a_models) {
     if(var_568ffe7c.model === "veh_t7_dlc1_mil_halftrack_dead_snow") {
       var_568ffe7c setcontents(8192);
@@ -909,7 +909,7 @@ function function_c460669e() {
   var_e7113aa6 = 0;
   level.var_cf5a713 = undefined;
   var_18b93ed0 = struct::get_array("golden_key_slot");
-  while (var_e7113aa6 < 2) {
+  while(var_e7113aa6 < 2) {
     var_18b93ed0[0] thread function_bb8e762c(var_18b93ed0[1]);
     var_18b93ed0[1] thread function_bb8e762c(var_18b93ed0[0]);
     var_b5aa6f14 = function_19abb192(var_e7113aa6);
@@ -932,7 +932,7 @@ function function_c460669e() {
 
 function function_6cd00f33() {
   var_37c17be6 = undefined;
-  while (!isdefined(var_37c17be6)) {
+  while(!isDefined(var_37c17be6)) {
     wait(0.5);
     var_37c17be6 = getent("rocket_bell", "targetname");
   }
@@ -943,13 +943,13 @@ function function_6cd00f33() {
 }
 
 function function_c7c38164(str_endon = undefined) {
-  if(isdefined(str_endon)) {
+  if(isDefined(str_endon)) {
     self endon(str_endon);
   }
-  while (true) {
+  while(true) {
     self waittill("damage", n_amount, e_attacker);
     if(isplayer(e_attacker)) {
-      self playsound("zmb_ee_rocketcrash_bell_imp_1");
+      self playSound("zmb_ee_rocketcrash_bell_imp_1");
       wait(0.1);
     }
   }
@@ -984,8 +984,8 @@ function function_7d8964c9() {
   wait(2.5);
   level thread vril_generator(1);
   level flag::set("start_channeling_stone_step");
-  scene::add_scene_func("p7_fxanim_zm_castle_rocket_tip_bundle", & function_1ca91be4);
-  scene::add_scene_func("p7_fxanim_zm_castle_rocket_tip_bundle", & function_b404c31d);
+  scene::add_scene_func("p7_fxanim_zm_castle_rocket_tip_bundle", &function_1ca91be4);
+  scene::add_scene_func("p7_fxanim_zm_castle_rocket_tip_bundle", &function_b404c31d);
   level thread scene::play("p7_fxanim_zm_castle_rocket_tip_bundle");
   level thread scene::play("p7_fxanim_zm_castle_rocket_bell_tower_bundle");
 }
@@ -996,16 +996,16 @@ function function_1ca91be4(a_ents) {
   e_dempsey = a_ents["dempsey_02"];
   e_dempsey ghost();
   wait(5);
-  array::run_all(level.players, & playrumbleonentity, "zm_castle_rocket_tip");
+  array::run_all(level.players, &playrumbleonentity, "zm_castle_rocket_tip");
   var_3e414a21 waittill("hash_43ba2284");
-  array::run_all(level.players, & playrumbleonentity, "zm_castle_rocket_tip_tower_crash");
+  array::run_all(level.players, &playrumbleonentity, "zm_castle_rocket_tip_tower_crash");
   var_3e414a21 waittill("hash_87acceea");
-  array::run_all(level.players, & playrumbleonentity, "zm_castle_rocket_tip_ground_crash");
+  array::run_all(level.players, &playrumbleonentity, "zm_castle_rocket_tip_ground_crash");
   var_a723142d clientfield::set("pod_monitor_enable", 1);
   e_dempsey show();
   var_ee79aaa6 = getent("uc_capsule_crash_after", "targetname");
   var_ee79aaa6 show();
-  var_7385ffad = getentarray("uc_capsule_crash_before", "targetname");
+  var_7385ffad = getEntArray("uc_capsule_crash_before", "targetname");
   foreach(var_de31b779 in var_7385ffad) {
     var_de31b779 delete();
   }
@@ -1013,7 +1013,7 @@ function function_1ca91be4(a_ents) {
   foreach(e_player in level.players) {
     e_player thread function_35c1d14d();
   }
-  callback::on_connect( & function_d4be5c9f);
+  callback::on_connect(&function_d4be5c9f);
   level thread scene::play("cin_cas_01_outro_3rd_static_poses");
   wait(3);
   var_a723142d delete();
@@ -1035,11 +1035,11 @@ function function_35c1d14d() {
   self endon("death");
   level endon("ee_outro");
   var_6326f93a = getent("cryo_chamber_shock_volume", "targetname");
-  while (true) {
+  while(true) {
     if(self istouching(var_6326f93a)) {
       self setelectrified(1.5);
       self shellshock("electrocution", 1.5);
-      self playsound("wpn_teslatrap_zap");
+      self playSound("wpn_teslatrap_zap");
       self playrumbleonentity("zm_castle_tesla_electrocution");
       wait(1.5);
     } else {
@@ -1072,7 +1072,7 @@ function function_19abb192(var_e7113aa6) {
 
 function function_bb8e762c(var_ff508804) {
   level endon("simon_terminal_activated");
-  if(isdefined(self.b_done) && self.b_done) {
+  if(isDefined(self.b_done) && self.b_done) {
     return;
   }
   self zm_castle_util::create_unitrigger(undefined, 8);
@@ -1092,11 +1092,11 @@ function function_15752140(var_b5aa6f14) {
   }
   var_e131c06 = util::spawn_model("p7_zm_ctl_keycard_ee", level.var_cf5a713.origin, level.var_cf5a713.angles);
   var_4d74106b = getent("symbols_" + level.var_cf5a713.script_noteworthy, "targetname");
-  var_4d74106b playsound("zmb_ee_simonsays_insertcard");
+  var_4d74106b playSound("zmb_ee_simonsays_insertcard");
   var_c5ea7ad8 = array("1", "2", "3", "4");
   var_c5ea7ad8 = array::randomize(var_c5ea7ad8);
   var_a6116854 = [];
-  for (i = 0; i < 4; i++) {
+  for(i = 0; i < 4; i++) {
     var_a6116854[var_c5ea7ad8[i]] = struct::get((("monitor_" + level.var_cf5a713.script_noteworthy) + "_") + (i + 1));
     var_a6116854[var_c5ea7ad8[i]].var_73527aa3 = undefined;
     var_a6116854[var_c5ea7ad8[i]] zm_castle_util::create_unitrigger(undefined, 16);
@@ -1105,14 +1105,14 @@ function function_15752140(var_b5aa6f14) {
   }
   level waittill("hash_706f7f9a");
   level thread function_fb090902(1);
-  var_1a972685 = spawnstruct();
+  var_1a972685 = spawnStruct();
   level.var_521b0bd1 = 0;
-  while (!level flag::get("end_simon")) {
+  while(!level flag::get("end_simon")) {
     var_2fe972c1 = array::random(var_c5ea7ad8);
     var_a6116854[var_2fe972c1].var_73527aa3 = 1;
     var_1a972685.var_94287343 = "tag_scn0_sym" + var_2fe972c1;
     var_4d74106b showpart("tag_scn0_sym" + var_2fe972c1);
-    var_4d74106b playsound("zmb_ee_simonsays_show");
+    var_4d74106b playSound("zmb_ee_simonsays_show");
     exploder::exploder(("lgt_EE_consol" + var_d733da61) + "_monitor_main");
     level thread simon_timed_out(var_4d74106b, var_d733da61);
     a_flags = array("simon_timed_out", "simon_press_check");
@@ -1121,7 +1121,7 @@ function function_15752140(var_b5aa6f14) {
     if(level flag::get("simon_timed_out")) {
       level flag::set("end_simon");
       level flag::clear("simon_timed_out");
-      var_4d74106b playsound("zmb_ee_simonsays_nay");
+      var_4d74106b playSound("zmb_ee_simonsays_nay");
     } else {
       level waittill("hash_b7f06cd9");
       level flag::clear("simon_press_check");
@@ -1133,7 +1133,7 @@ function function_15752140(var_b5aa6f14) {
       level flag::set("end_simon");
       level.var_cf5a713.b_done = 1;
       level.var_e3162591 = 1;
-      var_4d74106b playsound("zmb_ee_simonsays_complete");
+      var_4d74106b playSound("zmb_ee_simonsays_complete");
       if(level.var_cf5a713.script_noteworthy == "lower_tower") {
         exploder::exploder("fxexp_730");
       } else if(level.var_cf5a713.script_noteworthy == "launch_platform") {
@@ -1158,8 +1158,8 @@ function function_2925fac8() {
   var_91d3caa4 = struct::get_array("golden_key_slot");
   foreach(s_slot in var_91d3caa4) {
     var_4d74106b = getent("symbols_" + s_slot.script_noteworthy, "targetname");
-    for (i = 0; i < 5; i++) {
-      for (j = 1; j <= 4; j++) {
+    for(i = 0; i < 5; i++) {
+      for(j = 1; j <= 4; j++) {
         var_4d74106b hidepart((("tag_scn" + i) + "_sym") + j);
       }
     }
@@ -1174,7 +1174,7 @@ function function_b76d0c45(var_9ed14cca, var_2fe972c1, var_8d53d8ef) {
   var_4d74106b = getent("symbols_" + level.var_cf5a713.script_noteworthy, "targetname");
   var_4d74106b hidepart(var_2fe972c1);
   level notify("hash_706f7f9a");
-  while (true) {
+  while(true) {
     var_9ed14cca waittill("trigger_activated");
     if(!level flag::get("simon_press_check")) {
       level flag::set("simon_press_check");
@@ -1184,12 +1184,12 @@ function function_b76d0c45(var_9ed14cca, var_2fe972c1, var_8d53d8ef) {
       wait(3);
       exploder::kill_exploder(var_8d53d8ef);
       var_4d74106b hidepart(var_2fe972c1);
-      if(isdefined(var_9ed14cca.var_73527aa3) && var_9ed14cca.var_73527aa3) {
+      if(isDefined(var_9ed14cca.var_73527aa3) && var_9ed14cca.var_73527aa3) {
         level.var_521b0bd1++;
-        var_4d74106b playsound("zmb_ee_simonsays_yay");
+        var_4d74106b playSound("zmb_ee_simonsays_yay");
       } else {
         level flag::set("end_simon");
-        var_4d74106b playsound("zmb_ee_simonsays_nay");
+        var_4d74106b playSound("zmb_ee_simonsays_nay");
       }
       level notify("hash_b7f06cd9");
     }
@@ -1199,8 +1199,8 @@ function function_b76d0c45(var_9ed14cca, var_2fe972c1, var_8d53d8ef) {
 
 function simon_timed_out(var_4d74106b, var_d733da61) {
   level endon("simon_press_check");
-  for (i = 6; i != -1; i--) {
-    var_4d74106b playsound("zmb_ee_simonsays_timer");
+  for(i = 6; i != -1; i--) {
+    var_4d74106b playSound("zmb_ee_simonsays_timer");
     wait(1);
     if(i % 2) {
       exploder::kill_exploder(("lgt_EE_consol" + var_d733da61) + "_monitor_main");
@@ -1214,7 +1214,7 @@ function simon_timed_out(var_4d74106b, var_d733da61) {
 function function_71152937() {
   level scene::stop("cin_zm_castle_drgroph_easteregg");
   level.sndvoxoverride = 0;
-  var_5fbf9989 = getentarray("safe_uc_clean", "targetname");
+  var_5fbf9989 = getEntArray("safe_uc_clean", "targetname");
   foreach(var_fba414fd in var_5fbf9989) {
     var_fba414fd show();
   }
@@ -1223,17 +1223,17 @@ function function_71152937() {
 }
 
 function function_2c1aa78f() {
-  if(!isdefined(level.var_ab58bca7)) {
+  if(!isDefined(level.var_ab58bca7)) {
     level.var_ab58bca7 = array(0, 0, 0);
   }
   var_b873610a = level flag::get("ee_safe_open");
   if(var_b873610a == 0) {
-    for (i = 0; i < 3; i++) {
+    for(i = 0; i < 3; i++) {
       level.var_ab58bca7[i] = randomint(4);
     }
   }
   if(!level flag::get("dimension_set")) {
-    var_5fbf9989 = getentarray("safe_uc_clean", "targetname");
+    var_5fbf9989 = getEntArray("safe_uc_clean", "targetname");
     foreach(var_fba414fd in var_5fbf9989) {
       var_fba414fd hide();
     }
@@ -1244,7 +1244,7 @@ function function_2c1aa78f() {
     level waittill("hash_59b7ed");
     level thread scene::play("cin_zm_castle_drgroph_easteregg");
     var_4bff825e = getent("safe_code_past", "targetname");
-    for (i = 0; i < 3; i++) {
+    for(i = 0; i < 3; i++) {
       if(!level flag::get("dimension_set")) {
         level waittill("ee_button_" + (i + 1));
       }
@@ -1257,7 +1257,7 @@ function function_1ab64038() {
   level endon("dimension_set");
   var_cf2f0df8 = struct::get("ee_lab_fuse");
   var_7698e9a4 = getent("fuse_box", "targetname");
-  while (true) {
+  while(true) {
     var_7698e9a4 hidepart("j_chip01");
     var_7698e9a4 hidepart("j_chip02");
     level flag::wait_till("time_travel_teleporter_ready");
@@ -1271,14 +1271,14 @@ function function_1ab64038() {
     var_7698e9a4 zm_castle_util::create_unitrigger();
     var_7698e9a4 waittill("trigger_activated");
     zm_unitrigger::unregister_unitrigger(var_7698e9a4.s_unitrigger);
-    var_7698e9a4 playsound("zmb_fuse_place");
+    var_7698e9a4 playSound("zmb_fuse_place");
     var_7698e9a4 showpart("j_chip01");
     var_7698e9a4 showpart("j_chip02");
     exploder::exploder("fxexp_750");
     level flag::set("ee_fuse_placed");
     level flag::clear("ee_fuse_held_by_team");
     level flag::wait_till_clear("ee_fuse_placed");
-    var_7698e9a4 playsound("zmb_fuse_explo");
+    var_7698e9a4 playSound("zmb_fuse_explo");
     exploder::stop_exploder("fxexp_750");
   }
 }
@@ -1291,22 +1291,22 @@ function function_71568f8() {
   var_367b15e7 rotatepitch(-180, 0.25);
   level flag::wait_till("ee_fuse_placed");
   var_367b15e7 zm_castle_util::create_unitrigger(undefined, 32);
-  while (true) {
-    while (!level flag::get("switch_to_death_ray")) {
+  while(true) {
+    while(!level flag::get("switch_to_death_ray")) {
       var_367b15e7 waittill("trigger_activated");
       if(level flag::get("ee_fuse_placed")) {
         var_367b15e7 rotatepitch(-180, 0.25);
         var_abee83e8 rotatepitch(90, 0.25);
-        var_abee83e8 playsound("zmb_deathray_switch");
+        var_abee83e8 playSound("zmb_deathray_switch");
         level flag::set("switch_to_death_ray");
       }
     }
-    while (level flag::get("switch_to_death_ray")) {
+    while(level flag::get("switch_to_death_ray")) {
       var_367b15e7 waittill("trigger_activated");
       if(level flag::get("ee_fuse_placed")) {
         var_367b15e7 rotatepitch(180, 0.25);
         var_abee83e8 rotatepitch(-90, 0.25);
-        var_abee83e8 playsound("zmb_deathray_switch");
+        var_abee83e8 playSound("zmb_deathray_switch");
         level flag::clear("switch_to_death_ray");
       }
     }
@@ -1315,7 +1315,7 @@ function function_71568f8() {
 
 function function_d2c78092() {
   var_c5ea7ad8 = array(1, 2, 3, 4);
-  while (!level flag::get("ee_safe_open")) {
+  while(!level flag::get("ee_safe_open")) {
     level flag::wait_till("ee_fuse_placed");
     level flag::wait_till("death_ray_trap_used");
     level thread function_fb090902(1);
@@ -1329,7 +1329,7 @@ function function_d2c78092() {
         var_d733da61 = 2;
       }
       var_4d74106b = getent("symbols_" + s_slot.script_noteworthy, "targetname");
-      for (i = 1; i <= 4; i++) {
+      for(i = 1; i <= 4; i++) {
         var_4d74106b showpart((("tag_scn" + i) + "_sym") + (var_c5ea7ad8[i - 1]));
         exploder::exploder((("lgt_EE_consol" + var_d733da61) + "_monitor_") + i);
         s_monitor = struct::get((("monitor_" + s_slot.script_noteworthy) + "_") + i);
@@ -1337,7 +1337,7 @@ function function_d2c78092() {
         s_monitor.var_d82c7c68 = var_c5ea7ad8[i - 1];
         s_monitor zm_castle_util::create_unitrigger(undefined, 16);
         level thread function_96ca12f5(s_monitor);
-        if(!isdefined(var_ebbefa14)) {
+        if(!isDefined(var_ebbefa14)) {
           var_ebbefa14 = [];
         } else if(!isarray(var_ebbefa14)) {
           var_ebbefa14 = array(var_ebbefa14);
@@ -1353,7 +1353,7 @@ function function_d2c78092() {
     }
     function_2925fac8();
     var_d9768e8b = 1;
-    for (i = 0; i < level.var_a44ebbe8.size; i++) {
+    for(i = 0; i < level.var_a44ebbe8.size; i++) {
       n_input = level.var_a44ebbe8[i] - 1;
       if(n_input != level.var_ab58bca7[i]) {
         var_d9768e8b = 0;
@@ -1380,8 +1380,8 @@ function function_d2c78092() {
 
 function function_3918d831(var_ff61ccd6) {
   var_4bff825e = getent(var_ff61ccd6, "targetname");
-  for (i = 0; i < 3; i++) {
-    for (j = 1; j <= 4; j++) {
+  for(i = 0; i < 3; i++) {
+    for(j = 1; j <= 4; j++) {
       var_4bff825e hidepart((("tag_scn" + i) + "_sym") + j);
     }
   }
@@ -1391,7 +1391,7 @@ function function_96ca12f5(var_2bfe2eca) {
   level endon("hash_a126360f");
   var_6589e15e = getent("symbols_lower_tower", "targetname");
   var_d665b72a = getent("symbols_launch_platform", "targetname");
-  while (true) {
+  while(true) {
     var_2bfe2eca waittill("trigger_activated");
     playsoundatposition("zmb_ee_simonsays_button", var_2bfe2eca.origin);
     if(!level flag::get("simon_press_check")) {
@@ -1415,7 +1415,7 @@ function function_96ca12f5(var_2bfe2eca) {
       var_d665b72a hidepart("tag_scn0_sym" + var_2bfe2eca.var_d82c7c68);
       exploder::kill_exploder("lgt_EE_consol1_monitor_main");
       exploder::kill_exploder("lgt_EE_consol2_monitor_main");
-      if(!isdefined(level.var_a44ebbe8)) {
+      if(!isDefined(level.var_a44ebbe8)) {
         level.var_a44ebbe8 = [];
       } else if(!isarray(level.var_a44ebbe8)) {
         level.var_a44ebbe8 = array(level.var_a44ebbe8);
@@ -1437,7 +1437,7 @@ function function_c21dcd15() {
   var_726d0daa = struct::get_array("tesla_connector");
   foreach(var_47bafa4c in var_726d0daa) {
     var_bb46ee5a = util::spawn_model("p7_zm_ctl_deathray_base_part", var_47bafa4c.origin, var_47bafa4c.angles);
-    if(!isdefined(var_f3f0fbd)) {
+    if(!isDefined(var_f3f0fbd)) {
       var_f3f0fbd = [];
     } else if(!isarray(var_f3f0fbd)) {
       var_f3f0fbd = array(var_f3f0fbd);
@@ -1450,11 +1450,11 @@ function function_c21dcd15() {
   mdl_key zm_castle_util::create_unitrigger();
   var_8cf273a9 = getent("safe_uc_dmg_door", "targetname");
   var_8cf273a9 rotateyaw(-135, 1);
-  var_8cf273a9 playsound("zmb_safe_open");
+  var_8cf273a9 playSound("zmb_safe_open");
   mdl_key waittill("trigger_activated");
   zm_unitrigger::unregister_unitrigger(mdl_key.s_unitrigger);
   mdl_key ghost();
-  for (i = 0; i < var_f3f0fbd.size; i++) {
+  for(i = 0; i < var_f3f0fbd.size; i++) {
     var_f3f0fbd[i] delete();
   }
   level thread function_8d27746("launch_platform", 21);
@@ -1479,7 +1479,7 @@ function function_82075ffb() {
   var_bcaed8fa = util::spawn_model("p7_zm_ctl_undercroft_pyramid_canister", s_canister.origin, s_canister.angles);
   var_bcaed8fa zm_castle_util::create_unitrigger();
   var_bcaed8fa waittill("trigger_activated");
-  var_bcaed8fa playsound("zmb_ee_mpd_broken_canister_pickup");
+  var_bcaed8fa playSound("zmb_ee_mpd_broken_canister_pickup");
   zm_unitrigger::unregister_unitrigger(var_bcaed8fa.s_unitrigger);
   var_bcaed8fa delete();
   level flag::set("mpd_canister_replacement");
@@ -1532,12 +1532,12 @@ function function_a4b7a410() {
   var_530ae70 delete();
   exploder::stop_exploder("lgt_MPD_exp");
   exploder::stop_exploder("lgt_MPD_broken_exp");
-  var_76c91f56 = getentarray("undercroft_pyramid", "targetname");
+  var_76c91f56 = getEntArray("undercroft_pyramid", "targetname");
   foreach(var_293d02aa in var_76c91f56) {
     var_293d02aa connectpaths();
     var_293d02aa delete();
   }
-  var_57615f80 = getentarray("pyramid", "targetname");
+  var_57615f80 = getEntArray("pyramid", "targetname");
   foreach(var_27fd0c6f in var_57615f80) {
     var_54a70b81 = (var_27fd0c6f.origin[0], var_27fd0c6f.origin[1], var_27fd0c6f.origin[2] + 96);
     var_27fd0c6f moveto(var_54a70b81, 3);
@@ -1562,11 +1562,11 @@ function function_f6678e99() {
   }
   function_1c4bd669(1);
   level thread zm_castle_vo::function_f28fd307();
-  array::run_all(level.players, & playrumbleonentity, "zm_castle_moon_rocket_launch");
+  array::run_all(level.players, &playrumbleonentity, "zm_castle_moon_rocket_launch");
   level thread scene::play("p7_fxanim_zm_castle_moon_rocket_front_bundle");
   level thread zm_audio::sndmusicsystem_playstate("moon_rockets");
   wait(1);
-  scene::add_scene_func("p7_fxanim_zm_castle_moon_rockets_bundle", & function_6a8d41d1);
+  scene::add_scene_func("p7_fxanim_zm_castle_moon_rockets_bundle", &function_6a8d41d1);
   level thread scene::play("p7_fxanim_zm_castle_moon_rockets_bundle");
   wait(5.5);
   level scene::play("p7_fxanim_zm_castle_moon_rockets_bck_bundle");
@@ -1587,7 +1587,7 @@ function function_6a8d41d1(a_ents) {
 
 function function_6d74c298(var_e0e0227e) {
   wait(3.5);
-  array::run_all(level.players, & playrumbleonentity, "zm_castle_moon_explosion_rumble");
+  array::run_all(level.players, &playrumbleonentity, "zm_castle_moon_explosion_rumble");
   setlightingstate(1);
   foreach(e_player in level.players) {
     e_player clientfield::set_to_player("moon_explosion_bank", 1);
@@ -1611,17 +1611,17 @@ function function_821a61ed() {
 function function_ca73b878(var_6ec25e68, str_zone) {
   self endon("death");
   var_77b9bd02 = 0;
-  while (isdefined(level.var_758b41e) && level.var_758b41e) {
+  while(isDefined(level.var_758b41e) && level.var_758b41e) {
     str_player_zone = self zm_zonemgr::get_player_zone();
     if(zm_utility::is_player_valid(self) && str_player_zone === str_zone) {
-      if(!(isdefined(var_77b9bd02) && var_77b9bd02) && distance2dsquared(var_6ec25e68, self.origin) <= 15129) {
+      if(!(isDefined(var_77b9bd02) && var_77b9bd02) && distance2dsquared(var_6ec25e68, self.origin) <= 15129) {
         self clientfield::set_to_player("gravity_trap_rumble", 1);
         var_77b9bd02 = 1;
-      } else if(isdefined(var_77b9bd02) && var_77b9bd02 && distance2dsquared(var_6ec25e68, self.origin) > 15129) {
+      } else if(isDefined(var_77b9bd02) && var_77b9bd02 && distance2dsquared(var_6ec25e68, self.origin) > 15129) {
         self clientfield::set_to_player("gravity_trap_rumble", 0);
         var_77b9bd02 = 0;
       }
-    } else if(isdefined(var_77b9bd02) && var_77b9bd02) {
+    } else if(isDefined(var_77b9bd02) && var_77b9bd02) {
       self clientfield::set_to_player("gravity_trap_rumble", 0);
       var_77b9bd02 = 0;
     }
@@ -1638,9 +1638,9 @@ function ee_outro() {
   level function_1c4bd669(1, 0);
   zm_castle_vo::function_218256bd(1);
   var_d7e14379 = level function_58db5243(0);
-  callback::remove_on_connect( & function_d4be5c9f);
-  scene::add_scene_func("cin_cas_01_outro_3rd_sh010", & function_a029a5f1);
-  scene::add_scene_func("cin_cas_01_outro_3rd_sh195", & function_3c1114e8);
+  callback::remove_on_connect(&function_d4be5c9f);
+  scene::add_scene_func("cin_cas_01_outro_3rd_sh010", &function_a029a5f1);
+  scene::add_scene_func("cin_cas_01_outro_3rd_sh195", &function_3c1114e8);
   level scene::play("cin_cas_01_outro_3rd_sh010");
   level waittill("hash_8478520");
   level thread function_605386ad(0);
@@ -1658,11 +1658,11 @@ function ee_outro() {
     player zm_stats::increment_global_stat("DARKOPS_CASTLE_SUPER_EE");
   }
   level.sndoutro = 0;
-  array::thread_all(level.activeplayers, & zm_utility::give_player_all_perks);
+  array::thread_all(level.activeplayers, &zm_utility::give_player_all_perks);
 }
 
 function function_339377d6() {
-  if(isdefined(level.var_9a9741a5) && level.var_9a9741a5) {
+  if(isDefined(level.var_9a9741a5) && level.var_9a9741a5) {
     return;
   }
   level.var_9a9741a5 = 1;
@@ -1754,13 +1754,13 @@ function function_5db6ba34(var_1a60ad71 = 1) {
   foreach(ai_zombie in a_ai_zombies) {
     ai_zombie.no_powerups = 1;
     ai_zombie.deathpoints_already_given = 1;
-    if(isdefined(ai_zombie.ignore_nuke) && ai_zombie.ignore_nuke) {
+    if(isDefined(ai_zombie.ignore_nuke) && ai_zombie.ignore_nuke) {
       continue;
     }
-    if(isdefined(ai_zombie.marked_for_death) && ai_zombie.marked_for_death) {
+    if(isDefined(ai_zombie.marked_for_death) && ai_zombie.marked_for_death) {
       continue;
     }
-    if(isdefined(ai_zombie.nuke_damage_func)) {
+    if(isDefined(ai_zombie.nuke_damage_func)) {
       ai_zombie thread[[ai_zombie.nuke_damage_func]]();
       continue;
     }
@@ -1773,17 +1773,17 @@ function function_5db6ba34(var_1a60ad71 = 1) {
   }
   foreach(i, var_f92b3d80 in var_6b1085eb) {
     wait(randomfloatrange(0.1, 0.2));
-    if(!isdefined(var_f92b3d80)) {
+    if(!isDefined(var_f92b3d80)) {
       continue;
     }
     if(zm_utility::is_magic_bullet_shield_enabled(var_f92b3d80)) {
       continue;
     }
-    if(i < 5 && (!(isdefined(var_f92b3d80.isdog) && var_f92b3d80.isdog))) {
+    if(i < 5 && (!(isDefined(var_f92b3d80.isdog) && var_f92b3d80.isdog))) {
       var_f92b3d80 thread zombie_death::flame_death_fx();
     }
-    if(!(isdefined(var_f92b3d80.isdog) && var_f92b3d80.isdog)) {
-      if(!(isdefined(var_f92b3d80.no_gib) && var_f92b3d80.no_gib)) {
+    if(!(isDefined(var_f92b3d80.isdog) && var_f92b3d80.isdog)) {
+      if(!(isDefined(var_f92b3d80.no_gib) && var_f92b3d80.no_gib)) {
         var_f92b3d80 zombie_utility::zombie_head_gib();
       }
     }
@@ -1793,13 +1793,13 @@ function function_5db6ba34(var_1a60ad71 = 1) {
     }
   }
   var_6cbdc65 = [];
-  var_c94c86a8 = getentarray("mechz", "targetname");
+  var_c94c86a8 = getEntArray("mechz", "targetname");
   foreach(ai_mechz in var_c94c86a8) {
     var_63b71acf = 0;
-    if(isdefined(ai_mechz.no_damage_points) && ai_mechz.no_damage_points) {
+    if(isDefined(ai_mechz.no_damage_points) && ai_mechz.no_damage_points) {
       var_63b71acf = 1;
     }
-    if(!isdefined(var_6cbdc65)) {
+    if(!isDefined(var_6cbdc65)) {
       var_6cbdc65 = [];
     } else if(!isarray(var_6cbdc65)) {
       var_6cbdc65 = array(var_6cbdc65);
@@ -1813,16 +1813,16 @@ function function_5db6ba34(var_1a60ad71 = 1) {
 
 function function_3fade785(var_6cbdc65) {
   level flag::wait_till("spawn_zombies");
-  for (i = 0; i < var_6cbdc65.size; i++) {
+  for(i = 0; i < var_6cbdc65.size; i++) {
     e_target = array::random(level.players);
-    while (!zm_utility::is_player_valid(e_target)) {
+    while(!zm_utility::is_player_valid(e_target)) {
       wait(0.05);
       e_target = array::random(level.players);
     }
     s_spawn_pos = arraygetclosest(e_target.origin, level.zm_loc_types["mechz_location"]);
-    if(isdefined(s_spawn_pos)) {
+    if(isDefined(s_spawn_pos)) {
       ai_mechz = zm_castle_mechz::function_314d744b(0, s_spawn_pos, 1);
-      if(isdefined(var_6cbdc65[i]) && var_6cbdc65[i]) {
+      if(isDefined(var_6cbdc65[i]) && var_6cbdc65[i]) {
         ai_mechz.no_damage_points = 1;
         ai_mechz.deathpoints_already_given = 1;
         ai_mechz.exclude_cleanup_adding_to_total = 1;
@@ -1832,10 +1832,10 @@ function function_3fade785(var_6cbdc65) {
 }
 
 function function_af71af0e() {
-  if(!isdefined(level.var_1f18338d)) {
+  if(!isDefined(level.var_1f18338d)) {
     return;
   }
-  if(isdefined(self.var_1ceefee5) && self.var_1ceefee5) {
+  if(isDefined(self.var_1ceefee5) && self.var_1ceefee5) {
     return;
   }
   self.var_1ceefee5 = 1;
@@ -1857,7 +1857,7 @@ function function_af71af0e() {
       break;
     }
   }
-  while (isdefined(self.var_507ad4a9) && self.var_507ad4a9) {
+  while(isDefined(self.var_507ad4a9) && self.var_507ad4a9) {
     wait(0.1);
   }
   self clientfield::set_to_player("player_ee_cs_circle", 0);
@@ -1869,7 +1869,7 @@ function function_fb090902(var_f3afc16d) {
   level endon("hash_dbc0b10c");
   level.var_cc2ea6e8 = 1;
   var_fe586166 = 0;
-  while (isdefined(level.var_cc2ea6e8) && level.var_cc2ea6e8) {
+  while(isDefined(level.var_cc2ea6e8) && level.var_cc2ea6e8) {
     if(function_dd1b044(var_f3afc16d)) {
       var_565450eb = zombie_utility::get_current_zombie_count();
       var_fe586166 = function_36c5b9b9();
@@ -1880,9 +1880,9 @@ function function_fb090902(var_f3afc16d) {
       if(var_fe586166 <= var_c33cc7f2 && (var_fe586166 + var_565450eb) < level.zombie_vars["zombie_max_ai"]) {
         var_19764360 = zm_ai_dogs::get_favorite_enemy();
         s_spawn_pos = zm_castle_dogs::function_92e4eaff(level.dog_spawners[0], var_19764360);
-        if(isdefined(s_spawn_pos)) {
+        if(isDefined(s_spawn_pos)) {
           ai_dog = zombie_utility::spawn_zombie(level.dog_spawners[0]);
-          if(isdefined(ai_dog)) {
+          if(isDefined(ai_dog)) {
             ai_dog.favoriteenemy = var_19764360;
             ai_dog.ignore_enemy_count = 1;
             ai_dog.no_damage_points = 1;
@@ -1906,14 +1906,14 @@ function function_fb090902(var_f3afc16d) {
 
 function function_dd1b044(var_f3afc16d) {
   var_d695363e = 1;
-  if(isdefined(var_f3afc16d) && var_f3afc16d && level flag::get("solo_game")) {
+  if(isDefined(var_f3afc16d) && var_f3afc16d && level flag::get("solo_game")) {
     var_d695363e = 0;
   }
   return var_d695363e;
 }
 
 function function_36c5b9b9() {
-  var_1cea043e = getentarray("zombie_dog", "targetname");
+  var_1cea043e = getEntArray("zombie_dog", "targetname");
   return var_1cea043e.size;
 }
 
@@ -1921,7 +1921,7 @@ function function_e5803575() {
   self endon("death");
   v_start_pos = self.origin;
   var_20a609dc = 0;
-  while (true) {
+  while(true) {
     wait(5);
     if(v_start_pos === self.origin) {
       if(var_20a609dc >= 2) {
@@ -1937,7 +1937,7 @@ function function_e5803575() {
 function function_88e260d() {
   level waittill("hash_d8b279ab");
   s_spawn_pos = arraygetclosest(self.origin, level.zm_loc_types["mechz_location"]);
-  if(!isdefined(s_spawn_pos)) {
+  if(!isDefined(s_spawn_pos)) {
     var_79ed5347 = struct::get_array("mechz_location", "script_noteworthy");
     foreach(var_6000fab5 in var_79ed5347) {
       if(var_6000fab5.targetname == "zone_start_spawners") {
@@ -1956,15 +1956,15 @@ function function_d6026710() {
   setdvar("", 0);
   setdvar("", 0);
   setdvar("", 0);
-  level thread zm_castle_util::setup_devgui_func("", "", 1, & function_690690ef);
-  level thread zm_castle_util::setup_devgui_func("", "", 1, & function_b1c42655);
-  level thread zm_castle_util::setup_devgui_func("", "", 1, & function_dc5045eb);
-  level thread zm_castle_util::setup_devgui_func("", "", 1, & function_c197b24a);
-  level thread zm_castle_util::setup_devgui_func("", "", 1, & function_3c8db42b);
-  level thread zm_castle_util::setup_devgui_func("", "", 1, & function_64783c5e);
-  level thread zm_castle_util::setup_devgui_func("", "", 1, & function_a1ac1452);
-  level thread zm_castle_util::setup_devgui_func("", "", 1, & function_bbf6c2d0);
-  level thread zm_castle_util::setup_devgui_func("", "", 1, & function_a9a41cbd);
+  level thread zm_castle_util::setup_devgui_func("", "", 1, &function_690690ef);
+  level thread zm_castle_util::setup_devgui_func("", "", 1, &function_b1c42655);
+  level thread zm_castle_util::setup_devgui_func("", "", 1, &function_dc5045eb);
+  level thread zm_castle_util::setup_devgui_func("", "", 1, &function_c197b24a);
+  level thread zm_castle_util::setup_devgui_func("", "", 1, &function_3c8db42b);
+  level thread zm_castle_util::setup_devgui_func("", "", 1, &function_64783c5e);
+  level thread zm_castle_util::setup_devgui_func("", "", 1, &function_a1ac1452);
+  level thread zm_castle_util::setup_devgui_func("", "", 1, &function_bbf6c2d0);
+  level thread zm_castle_util::setup_devgui_func("", "", 1, &function_a9a41cbd);
   adddebugcommand("");
   adddebugcommand("");
   adddebugcommand("");
@@ -1972,9 +1972,9 @@ function function_d6026710() {
   adddebugcommand("");
   adddebugcommand("");
   adddebugcommand("");
-  level thread setup_devgui_func("", "", 1, & function_71b77de5);
-  level thread setup_devgui_func("", "", 1, & function_d6a136ff);
-  level thread setup_devgui_func("", "", 1, & function_f62f3c89);
+  level thread setup_devgui_func("", "", 1, &function_71b77de5);
+  level thread setup_devgui_func("", "", 1, &function_d6a136ff);
+  level thread setup_devgui_func("", "", 1, &function_f62f3c89);
   adddebugcommand("");
   adddebugcommand("");
   level thread function_ef5eaa6e();
@@ -2030,8 +2030,8 @@ function function_ef5eaa6e() {
   level waittill("start_zombie_round_logic");
   var_1bdfdb3b = array("", "", "", "");
   level flag::wait_till_any(var_1bdfdb3b);
-  while (true) {
-    if(getdvarint("") == 1 && isdefined(level.var_a0ef3c5e) && level.var_a0ef3c5e.var_ebeea021) {
+  while(true) {
+    if(getdvarint("") == 1 && isDefined(level.var_a0ef3c5e) && level.var_a0ef3c5e.var_ebeea021) {
       if(!level flag::get("")) {
         level flag::set("");
       }
@@ -2066,14 +2066,14 @@ function function_f62f3c89(n_val) {
 }
 
 function function_dd0c3214() {
-  while (true) {
+  while(true) {
     level.var_b5231dfb = getdvarint("");
     wait(0.15);
   }
 }
 
 function function_b38b0751() {
-  while (true) {
+  while(true) {
     if(getdvarint("") == 1) {
       setdvar("", 0);
       var_747532f4 = getent("", "");
@@ -2088,7 +2088,7 @@ function function_b38b0751() {
 }
 
 function function_bbf6c2d0(n_val) {
-  if(!(isdefined(level.var_844f510c) && level.var_844f510c)) {
+  if(!(isDefined(level.var_844f510c) && level.var_844f510c)) {
     level function_339377d6();
   }
   if(!level scene::is_playing("")) {
@@ -2097,7 +2097,7 @@ function function_bbf6c2d0(n_val) {
   var_c4556169 = getent("", "");
   var_c4556169 show();
   var_e7d455cc = getent("", "");
-  if(isdefined(var_e7d455cc)) {
+  if(isDefined(var_e7d455cc)) {
     var_e7d455cc delete();
   }
   level scene::init("");
@@ -2106,12 +2106,12 @@ function function_bbf6c2d0(n_val) {
 }
 
 function setup_devgui_func(str_devgui_path, str_dvar, n_value, func, n_base_value) {
-  if(!isdefined(n_base_value)) {
+  if(!isDefined(n_base_value)) {
     n_base_value = -1;
   }
   setdvar(str_dvar, n_base_value);
   adddebugcommand(((((("" + str_devgui_path) + "") + str_dvar) + "") + n_value) + "");
-  while (true) {
+  while(true) {
     n_dvar = getdvarint(str_dvar);
     if(n_dvar > n_base_value) {
       [

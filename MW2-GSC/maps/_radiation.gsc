@@ -8,10 +8,12 @@
 #include common_scripts\utility;
 
 /************************************************************************************************************/
+
 /*												RADIATION EFFECT											*/
 /************************************************************************************************************/
+
 main() {
-  // &&1 mR/hr
+  // && 1 mR/hr
   precacheString(&"SCOUTSNIPER_MRHR");
   // Avoid the radiation zones.\nListen for the clicks of the Geiger counter.
   precacheString(&"SCRIPT_RADIATION_DEATH");
@@ -20,7 +22,7 @@ main() {
   precacheShellShock("radiation_high");
 
   foreach(key, player in level.players) {
-    player.radiation = spawnstruct();
+    player.radiation = spawnStruct();
     player.radiation.super_dose = false;
     player.radiation.inside = false;
     player ent_flag_init("_radiation_poisoning");
@@ -41,7 +43,7 @@ main() {
 updateRadiationTriggers() {
   self.members = 0;
 
-  for (;;) {
+  for(;;) {
     self waittill("trigger", player);
 
     self thread updateRadiationTrigger_perplayer(player);
@@ -49,13 +51,13 @@ updateRadiationTriggers() {
 }
 
 updateRadiationTrigger_perplayer(player) {
-  if(player.radiation.inside)
+  if(player.radiation.inside) {
     return;
-
+  }
   player.radiation.inside = true;
   player.radiation.triggers[player.radiation.triggers.size] = self;
 
-  while (player isTouching(self))
+  while(player isTouching(self))
     wait 0.05;
 
   player.radiation.inside = false;
@@ -81,9 +83,9 @@ updateRadiationDosage() {
 
   range = max_rate - min_rate;
 
-  for (;;) {
+  for(;;) {
     rates = [];
-    for (i = 0; i < self.radiation.triggers.size; i++) {
+    for(i = 0; i < self.radiation.triggers.size; i++) {
       trigger = self.radiation.triggers[i];
 
       dist = (distance(self.origin, trigger.origin) - 15);
@@ -91,7 +93,7 @@ updateRadiationDosage() {
     }
 
     rate = 0;
-    for (i = 0; i < rates.size; i++)
+    for(i = 0; i < rates.size; i++)
       rate = rate + rates[i];
 
     if(rate < min_rate)
@@ -126,7 +128,7 @@ updateRadiationDosage() {
 updateRadiationShock() {
   update_frequency = 1;
 
-  for (;;) {
+  for(;;) {
     if(self.radiation.ratepercent >= 75)
       self shellshock("radiation_high", 5);
     else if(self.radiation.ratepercent >= 50)
@@ -141,7 +143,7 @@ updateRadiationShock() {
 updateRadiationSound() {
   self thread playRadiationSound();
 
-  for (;;) {
+  for(;;) {
     if(self.radiation.ratepercent >= 75)
       self.radiation.sound = "item_geigercouner_level4";
     else if(self.radiation.ratepercent >= 50)
@@ -158,7 +160,7 @@ updateRadiationSound() {
 }
 
 updateRadiationFlag() {
-  for (;;) {
+  for(;;) {
     if(self.radiation.ratepercent > 25)
       self ent_flag_set("_radiation_poisoning");
     else
@@ -178,12 +180,12 @@ playRadiationSound() {
 
   temp = self.radiation.sound;
 
-  for (;;) {
+  for(;;) {
     if(temp != self.radiation.sound) {
       orgin stoploopsound();
 
-      if(isdefined(self.radiation.sound) && self.radiation.sound != "none")
-        orgin playloopsound(self.radiation.sound);
+      if(isDefined(self.radiation.sound) && self.radiation.sound != "none")
+        orgin playLoopSound(self.radiation.sound);
     }
 
     temp = self.radiation.sound;
@@ -204,7 +206,7 @@ updateRadiationRatePercent() {
   //if you wanna put back in - delete this line
   ratepercent.alpha = 0;
 
-  for (;;) {
+  for(;;) {
     ratepercent.label = self.radiation.ratepercent;
 
     wait update_frequency;
@@ -231,12 +233,12 @@ updateRadiationDosimeter() {
   dosimeter.alpha = 0;
 
   dosimeter.alignX = "right";
-  // &&1 mR/hr
-  dosimeter.label = & "SCOUTSNIPER_MRHR";
+  // && 1 mR/hr
+  dosimeter.label = &"SCOUTSNIPER_MRHR";
 
   dosimeter thread updateRadiationDosimeterColor(self);
 
-  for (;;) {
+  for(;;) {
     if(self.radiation.rate <= min_rate) {
       variance = randomfloatrange(-0.001, 0.001);
       dosimeter setValue(min_rate + variance);
@@ -254,11 +256,11 @@ updateRadiationDosimeter() {
 updateRadiationDosimeterColor(player) {
   update_frequency = 0.05;
 
-  for (;;) {
+  for(;;) {
     colorvalue = 1;
     stepamount = 0.13;
 
-    while (player.radiation.rate >= 100) {
+    while(player.radiation.rate >= 100) {
       if(colorvalue <= 0 || colorvalue >= 1)
         stepamount = stepamount * -1;
 
@@ -314,8 +316,8 @@ updateRadiationBlackOut() {
 
   fraction = 0;
 
-  for (;;) {
-    while (self.radiation.totalpercent > 25 && self.radiation.ratepercent > 25) {
+  for(;;) {
+    while(self.radiation.totalpercent > 25 && self.radiation.ratepercent > 25) {
       percent_range = max_percent - min_percent;
       fraction = (self.radiation.totalpercent - min_percent) / percent_range;
 
@@ -336,8 +338,9 @@ updateRadiationBlackOut() {
 
       println("fraction: ", fraction, " length: ", length, " alpha: ", alpha, " blur: ", blur);
 
-      if(fraction == 1)
+      if(fraction == 1) {
         break;
+      }
 
       duration = length / 2;
 
@@ -349,8 +352,9 @@ updateRadiationBlackOut() {
       wait(fraction * 0.5);
     }
 
-    if(fraction == 1)
+    if(fraction == 1) {
       break;
+    }
 
     if(overlay.alpha != 0)
       overlay fadeoutBlackOut(1, 0, 0, self);
@@ -371,7 +375,7 @@ radiation_kill() {
 
   assert(!isAlive(self));
   // Avoid the radiation zones.\nListen for the clicks of the Geiger counter.
-  quote = & "SCRIPT_RADIATION_DEATH";
+  quote = &"SCRIPT_RADIATION_DEATH";
   setdvar("ui_deadquote", quote);
 }
 
@@ -396,7 +400,7 @@ fadeoutBlackOut(duration, alpha, blur, player) {
 first_radiation_dialogue() {
   self endon("death");
 
-  while (1) {
+  while(1) {
     self ent_flag_wait("_radiation_poisoning");
 
     if(level.script == "scoutsniper" || level.script == "co_scoutsniper")

@@ -5,7 +5,6 @@
 
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\lui_shared;
-
 #namespace ct_shared_ingame_objective;
 
 class cct_shared_ingame_objective: cluielem {

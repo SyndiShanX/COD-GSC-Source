@@ -46,7 +46,7 @@ setanims() {
   positions = [];
 
   for(i = 0; i < 8; i++)
-    positions[i] = spawnstruct();
+    positions[i] = spawnStruct();
 
   positions[0].sittag = "tag_guy0";
   positions[1].sittag = "tag_guy1";

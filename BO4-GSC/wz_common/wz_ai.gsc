@@ -7,14 +7,13 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\mp_common\item_drop;
-
 #namespace wz_ai;
 
 autoexec __init__system__() {
   system::register(#"wz_ai", &__init__, undefined, undefined);
 }
 
-private __init__() {
+__init__() {
   clientfield::register("vehicle", "enable_on_radar", 1, 1, "int");
   clientfield::register("actor", "enable_on_radar", 1, 1, "int");
 }
@@ -84,7 +83,7 @@ function_afce0cdb(spawn_loc) {
         patroller.fovcosine = zone.fovcosine;
         patroller.zone = zone;
 
-        if(patroller.archetype === #"amws") {
+        if(patroller.archetype === # "amws") {
           patroller.scan_turret = 1;
           patroller.var_9b4a5686 = 1;
           patroller.var_a8c60b0e = 1;
@@ -151,7 +150,7 @@ function_c5fad73b(type) {
   items = [];
 
   switch (type) {
-    case #"hash_33ccea7be2e5f439":
+    case # "hash_33ccea7be2e5f439":
       break;
     default:
       break;
@@ -275,7 +274,7 @@ function_b25a6169() {
 }
 
 function_af46682(patroller) {
-  level endon(#"game_ended", #"hash_12a8f2c59a67e4fc");
+  level endon(#"game_ended", # "hash_12a8f2c59a67e4fc");
   patroller endon(#"death");
 
   while(!isDefined(level.deathcircle)) {

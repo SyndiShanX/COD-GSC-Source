@@ -15,60 +15,60 @@
 #namespace globallogic_ui;
 
 function autoexec __init__sytem__() {
-  system::register("globallogic_ui", & __init__, undefined, undefined);
+  system::register("globallogic_ui", &__init__, undefined, undefined);
 }
 
 function __init__() {}
 
 function setupcallbacks() {
-  level.autoassign = & menuautoassign;
-  level.spectator = & menuspectator;
-  level.curclass = & menuclass;
-  level.teammenu = & menuteam;
+  level.autoassign = &menuautoassign;
+  level.spectator = &menuspectator;
+  level.curclass = &menuclass;
+  level.teammenu = &menuteam;
 }
 
 function freegameplayhudelems() {
-  if(isdefined(self.perkicon)) {
-    for (numspecialties = 0; numspecialties < level.maxspecialties; numspecialties++) {
-      if(isdefined(self.perkicon[numspecialties])) {
+  if(isDefined(self.perkicon)) {
+    for(numspecialties = 0; numspecialties < level.maxspecialties; numspecialties++) {
+      if(isDefined(self.perkicon[numspecialties])) {
         self.perkicon[numspecialties] hud::destroyelem();
         self.perkname[numspecialties] hud::destroyelem();
       }
     }
   }
-  if(isdefined(self.perkhudelem)) {
+  if(isDefined(self.perkhudelem)) {
     self.perkhudelem hud::destroyelem();
   }
-  if(isdefined(self.killstreakicon)) {
-    if(isdefined(self.killstreakicon[0])) {
+  if(isDefined(self.killstreakicon)) {
+    if(isDefined(self.killstreakicon[0])) {
       self.killstreakicon[0] hud::destroyelem();
     }
-    if(isdefined(self.killstreakicon[1])) {
+    if(isDefined(self.killstreakicon[1])) {
       self.killstreakicon[1] hud::destroyelem();
     }
-    if(isdefined(self.killstreakicon[2])) {
+    if(isDefined(self.killstreakicon[2])) {
       self.killstreakicon[2] hud::destroyelem();
     }
-    if(isdefined(self.killstreakicon[3])) {
+    if(isDefined(self.killstreakicon[3])) {
       self.killstreakicon[3] hud::destroyelem();
     }
-    if(isdefined(self.killstreakicon[4])) {
+    if(isDefined(self.killstreakicon[4])) {
       self.killstreakicon[4] hud::destroyelem();
     }
   }
-  if(isdefined(self.lowermessage)) {
+  if(isDefined(self.lowermessage)) {
     self.lowermessage hud::destroyelem();
   }
-  if(isdefined(self.lowertimer)) {
+  if(isDefined(self.lowertimer)) {
     self.lowertimer hud::destroyelem();
   }
-  if(isdefined(self.proxbar)) {
+  if(isDefined(self.proxbar)) {
     self.proxbar hud::destroyelem();
   }
-  if(isdefined(self.proxbartext)) {
+  if(isDefined(self.proxbartext)) {
     self.proxbartext hud::destroyelem();
   }
-  if(isdefined(self.carryicon)) {
+  if(isDefined(self.carryicon)) {
     self.carryicon hud::destroyelem();
   }
 }
@@ -76,7 +76,7 @@ function freegameplayhudelems() {
 function teamplayercountsequal(playercounts) {
   count = undefined;
   foreach(team in level.teams) {
-    if(!isdefined(count)) {
+    if(!isDefined(count)) {
       count = playercounts[team];
       continue;
     }
@@ -103,7 +103,7 @@ function menuautoassign(comingfrommenu) {
   teamkeys = getarraykeys(level.teams);
   assignment = teamkeys[randomint(teamkeys.size)];
   self closemenus();
-  if(isdefined(level.forceallallies) && level.forceallallies) {
+  if(isDefined(level.forceallallies) && level.forceallallies) {
     assignment = "allies";
   } else {
     if(level.teambased) {
@@ -126,14 +126,14 @@ function menuautoassign(comingfrommenu) {
               break;
             }
             case 4: {
-              if(!isdefined(level.forceautoassign) || !level.forceautoassign) {
+              if(!isDefined(level.forceautoassign) || !level.forceautoassign) {
                 self setclientscriptmainmenu(game["menu_start_menu"]);
                 return;
               }
             }
             default: {
               assignment = "";
-              if(isdefined(level.teams[team])) {
+              if(isDefined(level.teams[team])) {
                 assignment = team;
               } else if(team == "spectator" && !level.forceautoassign) {
                 self setclientscriptmainmenu(game["menu_start_menu"]);
@@ -155,7 +155,7 @@ function menuautoassign(comingfrommenu) {
     } else if(getdvarint("party_autoteams") == 1) {
       if(level.allow_teamchange != "1" || (!self.hasspawned && !comingfrommenu)) {
         team = getassignedteam(self);
-        if(isdefined(level.teams[team])) {
+        if(isDefined(level.teams[team])) {
           assignment = team;
         } else if(team == "spectator" && !level.forceautoassign) {
           self setclientscriptmainmenu(game["menu_start_menu"]);
@@ -192,7 +192,7 @@ function menuautoassign(comingfrommenu) {
 function teamscoresequal() {
   score = undefined;
   foreach(team in level.teams) {
-    if(!isdefined(score)) {
+    if(!isDefined(score)) {
       score = getteamscore(team);
       continue;
     }
@@ -225,8 +225,8 @@ function pickteamfromscores(teams) {
 }
 
 function getsplitscreenteam() {
-  for (index = 0; index < level.players.size; index++) {
-    if(!isdefined(level.players[index])) {
+  for(index = 0; index < level.players.size; index++) {
+    if(!isDefined(level.players[index])) {
       continue;
     }
     if(level.players[index] == self) {
@@ -260,7 +260,7 @@ function closemenus() {
 }
 
 function beginclasschoice(forcenewchoice) {
-  assert(isdefined(level.teams[self.pers[""]]));
+  assert(isDefined(level.teams[self.pers[""]]));
   team = self.pers["team"];
   if(level.disablecac == 1) {
     self.pers["class"] = level.defaultclass;
@@ -276,18 +276,18 @@ function beginclasschoice(forcenewchoice) {
 }
 
 function showmainmenuforteam() {
-  assert(isdefined(level.teams[self.pers[""]]));
+  assert(isDefined(level.teams[self.pers[""]]));
   team = self.pers["team"];
   self openmenu(game["menu_changeclass_" + team]);
 }
 
 function menuteam(team) {
   self closemenus();
-  if(!level.console && level.allow_teamchange == "0" && (isdefined(self.hasdonecombat) && self.hasdonecombat)) {
+  if(!level.console && level.allow_teamchange == "0" && (isDefined(self.hasdonecombat) && self.hasdonecombat)) {
     return;
   }
   if(self.pers["team"] != team) {
-    if(level.ingraceperiod && (!isdefined(self.hasdonecombat) || !self.hasdonecombat)) {
+    if(level.ingraceperiod && (!isDefined(self.hasdonecombat) || !self.hasdonecombat)) {
       self.hasspawned = 0;
     }
     if(self.sessionstate == "playing") {
@@ -330,9 +330,7 @@ function menuspectator() {
     self.pers["savedmodel"] = undefined;
     self updateobjectivetext();
     self.sessionteam = "spectator";
-    [
-      [level.spawnspectator]
-    ]();
+    [[level.spawnspectator]]();
     self thread globallogic_player::spectate_player_watcher();
     self setclientscriptmainmenu(game["menu_start_menu"]);
     self notify("joined_spectators");

@@ -144,41 +144,41 @@ function init() {
 
 function function_6dcb1bbc(name, type) {
   assert(type < 128, "");
-  if(!isdefined(level.doa.var_1142e0a2)) {
+  if(!isDefined(level.doa.var_1142e0a2)) {
     level.doa.var_1142e0a2 = [];
   }
   level.doa.var_1142e0a2[name] = type;
 }
 
 function function_39dbe45b(name) {
-  if(!isdefined(name)) {
+  if(!isDefined(name)) {
     return;
   }
-  assert(isdefined(level.doa.var_1142e0a2[name]), "");
+  assert(isDefined(level.doa.var_1142e0a2[name]), "");
   return level.doa.var_1142e0a2[name];
 }
 
 function function_81e169ac() {
   self endon("death");
-  while (isdefined(self) && gettime() < self.var_b2ce38d9) {
+  while(isDefined(self) && gettime() < self.var_b2ce38d9) {
     wait(0.05);
   }
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     self.var_b2ce38d9 = gettime() + 200;
   }
 }
 
 function function_1f8cb1fa() {
   self endon("death");
-  while (isdefined(self) && gettime() < self.var_78c14ec2) {
+  while(isDefined(self) && gettime() < self.var_78c14ec2) {
     wait(0.05);
   }
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     self.var_78c14ec2 = gettime() + 200;
   }
 }
 
-function function_64bc2503( & queue, flag, waitfunc, var_a6cc22d4 = 0) {
+function function_64bc2503(&queue, flag, waitfunc, var_a6cc22d4 = 0) {
   self endon("death");
   if(!var_a6cc22d4) {
     self notify("fxProcessQueue_" + flag);
@@ -191,21 +191,21 @@ function function_64bc2503( & queue, flag, waitfunc, var_a6cc22d4 = 0) {
     assert(0, "" + queue[15]);
   }
   self[[waitfunc]]();
-  if(queue.size == 0 && isdefined(self)) {
+  if(queue.size == 0 && isDefined(self)) {
     self clientfield::set(flag, 0);
     self notify("hash_6a404ade");
     return;
   }
   var_1b0298c0 = function_39dbe45b(queue[0]);
   arrayremoveindex(queue, 0, 0);
-  if(isdefined(self) && isdefined(var_1b0298c0)) {
+  if(isDefined(self) && isDefined(var_1b0298c0)) {
     self clientfield::set(flag, var_1b0298c0);
     self function_64bc2503(queue, flag, waitfunc, 1);
   }
 }
 
 function turnofffx(name) {
-  if(!isdefined(name) || !isdefined(self)) {
+  if(!isDefined(name) || !isDefined(self)) {
     return;
   }
   self notify("turnofffx");
@@ -213,22 +213,22 @@ function turnofffx(name) {
   self endon("death");
   assert(!(isplayer(self) && name == ""));
   assert(!(isplayer(self) && name == ""));
-  if(!isdefined(self.var_350c7e91)) {
+  if(!isDefined(self.var_350c7e91)) {
     self.var_350c7e91 = [];
     self.var_78c14ec2 = 0;
   }
-  if(isdefined(self.var_3930cdff)) {
+  if(isDefined(self.var_3930cdff)) {
     arrayremovevalue(self.var_3930cdff, name);
   }
   if(!isinarray(self.var_350c7e91, name)) {
     self.var_350c7e91[self.var_350c7e91.size] = name;
   }
-  self function_64bc2503(self.var_350c7e91, "off_fx", & function_1f8cb1fa);
+  self function_64bc2503(self.var_350c7e91, "off_fx", &function_1f8cb1fa);
   level notify("hash_67a1310c");
 }
 
 function function_285a2999(name) {
-  if(!isdefined(name) || !isdefined(self)) {
+  if(!isDefined(name) || !isDefined(self)) {
     return;
   }
   self notify("hash_285a2999");
@@ -236,49 +236,49 @@ function function_285a2999(name) {
   self endon("death");
   assert(!(isplayer(self) && name == ""));
   assert(!(isplayer(self) && name == ""));
-  if(!isdefined(self.var_3930cdff)) {
+  if(!isDefined(self.var_3930cdff)) {
     self.var_3930cdff = [];
     self.var_b2ce38d9 = 0;
   }
   if(isinarray(self.var_3930cdff, name)) {
     return;
   }
-  if(isdefined(self.var_350c7e91)) {
+  if(isDefined(self.var_350c7e91)) {
     arrayremovevalue(self.var_350c7e91, name);
   }
   self.var_3930cdff[self.var_3930cdff.size] = name;
-  self function_64bc2503(self.var_3930cdff, "play_fx", & function_81e169ac);
+  self function_64bc2503(self.var_3930cdff, "play_fx", &function_81e169ac);
 }
 
 function function_2fc7e62f(victim, damage, attacker, dir, smeansofdeath, weapon) {
   if(weapon == level.doa.var_f5fcdb51) {
-    playfx(level._effect["impact_raygun1"], victim.origin + vectorscale((0, 0, 1), 40));
+    playFX(level._effect["impact_raygun1"], victim.origin + vectorscale((0, 0, 1), 40));
   } else {
     if(weapon == level.doa.var_e30c10ec) {
-      playfx(level._effect["impact_raygun2"], victim.origin + vectorscale((0, 0, 1), 40));
-      if(isdefined(attacker)) {
+      playFX(level._effect["impact_raygun2"], victim.origin + vectorscale((0, 0, 1), 40));
+      if(isDefined(attacker)) {
         attacker notify("hash_21f7a743", victim);
       }
     } else {
-      playfx(level._effect["impact_raygun"], victim.origin + vectorscale((0, 0, 1), 40));
+      playFX(level._effect["impact_raygun"], victim.origin + vectorscale((0, 0, 1), 40));
     }
   }
 }
 
 function function_2c0f7946(victim, damage, attacker, dir, smeansofdeath, weapon) {
-  playfx(level._effect["impact_rpg"], victim.origin + vectorscale((0, 0, 1), 40));
+  playFX(level._effect["impact_rpg"], victim.origin + vectorscale((0, 0, 1), 40));
 }
 
 function function_f51d2b7e(victim, damage, attacker, dir, smeansofdeath, weapon) {
-  if(!isdefined(level.doa.var_f6ac2080)) {
+  if(!isDefined(level.doa.var_f6ac2080)) {
     level.doa.var_f6ac2080 = 6;
   }
-  if(!isdefined(level.doa.var_b86d53a5)) {
+  if(!isDefined(level.doa.var_b86d53a5)) {
     level.doa.var_b86d53a5 = 3;
   }
   dir = vectornormalize(dir + (0, 0, level.doa.var_b86d53a5));
   dir = dir * level.doa.var_f6ac2080;
-  if(!(isdefined(victim.boss) && victim.boss)) {
+  if(!(isDefined(victim.boss) && victim.boss)) {
     victim namespace_fba031c8::function_ddf685e8(dir, attacker);
   }
 }
@@ -288,13 +288,13 @@ function function_4f66d2fb(victim, damage, attacker, dir, smeansofdeath, weapon)
 }
 
 function function_2aa1c0b3(victim, damage, attacker, dir, smeansofdeath, weapon) {
-  if(isdefined(victim.boss) && victim.boss) {
+  if(isDefined(victim.boss) && victim.boss) {
     return;
   }
-  if(isdefined(victim.burning) && victim.burning) {
+  if(isDefined(victim.burning) && victim.burning) {
     return;
   }
-  if(isdefined(victim.nofire) && victim.nofire) {
+  if(isDefined(victim.nofire) && victim.nofire) {
     return;
   }
   if(issubstr(weapon.name, "_1")) {
@@ -311,11 +311,11 @@ function function_2aa1c0b3(victim, damage, attacker, dir, smeansofdeath, weapon)
   }
   victim.burning = 1;
   wait(0.05);
-  if(isdefined(victim) && isactor(victim)) {
+  if(isDefined(victim) && isactor(victim)) {
     victim thread function_32bcda58(victim.var_7aac5112, attacker);
     victim clientfield::increment("burnZombie");
     victim thread function_9fc6e261(victim.var_7aac5112);
-    if(!isdefined(victim.var_dd70dacd)) {
+    if(!isDefined(victim.var_dd70dacd)) {
       victim asmsetanimationrate(0.75);
     }
   }
@@ -326,11 +326,11 @@ function function_32bcda58(var_7aac5112, attacker) {
   self endon("hash_e32770a3");
   self endon("death");
   dmg = getdvarint("scr_doa_dot_burn_dmg", 120) * var_7aac5112;
-  if(!isdefined(self.var_a27665f9)) {
+  if(!isDefined(self.var_a27665f9)) {
     self.var_a27665f9 = 0;
   }
   var_1b22f058 = getdvarint("scr_doa_dot_max_inc", 3);
-  while (isalive(self)) {
+  while(isalive(self)) {
     self dodamage(dmg, self.origin, attacker);
     wait(0.3);
     if(var_1b22f058 > 0 && (self.var_a27665f9 % getdvarint("scr_doa_dot_burn_fx_rate", 30)) == 0) {
@@ -344,10 +344,10 @@ function function_32bcda58(var_7aac5112, attacker) {
 function private function_9fc6e261(type) {
   self waittill("actor_corpse", corpse);
   wait(0.05);
-  if(isdefined(corpse)) {
+  if(isDefined(corpse)) {
     corpse clientfield::set("burnType", type);
     wait(0.05);
-    if(isdefined(corpse)) {
+    if(isDefined(corpse)) {
       corpse clientfield::increment("burnCorpse");
       if(randomint(100) < 50) {
         corpse clientfield::set("enemy_ragdoll_explode", 1);

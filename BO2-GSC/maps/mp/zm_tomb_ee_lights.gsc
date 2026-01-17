@@ -17,7 +17,7 @@ main() {
   flag_init("show_morse_code");
   init_morse_code();
   flag_wait("start_zombie_round_logic");
-  chamber_discs = getentarray("crypt_puzzle_disc", "script_noteworthy");
+  chamber_discs = getEntArray("crypt_puzzle_disc", "script_noteworthy");
   lit_discs = [];
 
   foreach(disc in chamber_discs) {

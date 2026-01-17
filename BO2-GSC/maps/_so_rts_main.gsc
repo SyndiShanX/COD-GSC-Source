@@ -69,7 +69,7 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shit
 
 globals_init() {
   if(!isDefined(level.rts))
-    level.rts = spawnstruct();
+    level.rts = spawnStruct();
 
   flag_init("start_rts");
   flag_init("start_rts_enemy");
@@ -92,7 +92,7 @@ globals_init() {
   level.rts.additiontargets["axis"] = [];
   level.rts.additiontargets["allies"] = [];
   level.rts.trace_ents = [];
-  level.rts.trace_blockers = getentarray("rts_trace_blocker", "targetname");
+  level.rts.trace_blockers = getEntArray("rts_trace_blocker", "targetname");
   game["entity_headicon_allies"] = "hud_specops_ui_deltasupport";
   game["entity_headicon_axis"] = "hudicon_spetsnaz_ctf_flag_carry";
   level.teambased = 0;
@@ -132,8 +132,7 @@ anim_init() {
   precache_assets();
 }
 
-checkpoint_save_restored() {
-}
+checkpoint_save_restored() {}
 
 set_uimapname() {
   cur_level = level.player getdstat("PlayerStatsList", "HIGHESTLEVELCOMPLETED", "statValue");
@@ -184,7 +183,7 @@ main() {
 }
 
 node_disconnects() {
-  spots = getentarray("node_disconnect", "targetname");
+  spots = getEntArray("node_disconnect", "targetname");
 
   foreach(spot in spots) {
     nodes = getnodesinradius(spot.origin, spot.radius, 0);
@@ -274,7 +273,7 @@ player_eyeinthesky(fastlink, showui, altshader) {
 
   if(!isDefined(level.rts.playerlinkobj)) {
     level.rts.playerlinkobj = spawn("script_model", level.rts.player.origin);
-    level.rts.playerlinkobj setmodel("tag_origin");
+    level.rts.playerlinkobj setModel("tag_origin");
     level.rts.playerlinkobj.angles = (0, level.rts.player.angles[1], 0);
 
     if(isDefined(fastlink) && fastlink)
@@ -500,7 +499,7 @@ player_in_control(lockswitch, nostatic) {
   flag_clear("rts_mode");
   flag_set("block_input");
   level.rts.player freezecontrols(1);
-  level.rts.player playsound("evt_command_switch_static_shrt");
+  level.rts.player playSound("evt_command_switch_static_shrt");
 
   if(!(isDefined(nostatic) && nostatic)) {
     level.rts.player enableinvulnerability();
@@ -631,7 +630,7 @@ rts_go_rts(restore) {
     level.rts.player.hud_damagefeedback.alpha = 0;
 
   level.rts.player thread staticeffect(0.3, 0.5, 0.5);
-  level.rts.player playsound("evt_command_switch_static");
+  level.rts.player playSound("evt_command_switch_static");
   wait 0.5;
 
   if(restore)
@@ -649,7 +648,7 @@ create_player_corpse(spawner, origin, angles) {
     angles = level.rts.player.angles;
 
   if(!isDefined(origin)) {
-    trace = bullettrace(level.rts.player.origin + vectorscale((0, 0, -1), 72.0), level.rts.player.origin + vectorscale((0, 0, 1), 72.0), 1, level.rts.player);
+    trace = bulletTrace(level.rts.player.origin + vectorscale((0, 0, -1), 72.0), level.rts.player.origin + vectorscale((0, 0, 1), 72.0), 1, level.rts.player);
     origin = trace["position"] + vectorscale((0, 0, 1), 6.0);
   }
 
@@ -749,7 +748,7 @@ player_deathshieldwatch() {
         maps\_so_rts_support::hide_player_hud();
         player_tag_origin = spawn("script_model", self.origin);
         player_tag_origin.angles = self.angles;
-        player_tag_origin setmodel("tag_origin");
+        player_tag_origin setModel("tag_origin");
         player_tag_origin.targetname = "player_tag_origin";
         level thread run_scene("player_death");
         wait_network_frame();
@@ -834,9 +833,7 @@ callback_preventplayerdamage(einflictor, eattacker, idamage, idflags, smeansofde
 
 player_nextavailunit(nextsquad, playerdied) {
   if(isDefined(level.rts.player_nextavailunitcb)) {
-    [
-      [level.rts.player_nextavailunitcb]
-    ](nextsquad, playerdied);
+    [[level.rts.player_nextavailunitcb]](nextsquad, playerdied);
     return;
   }
 

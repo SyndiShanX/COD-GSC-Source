@@ -89,7 +89,7 @@ cover_wall_think(coverType) {
   else
     self.a.special = "cover_crouch";
 
-  behaviorCallbacks = spawnstruct();
+  behaviorCallbacks = spawnStruct();
   if(!self.fixedNode)
     behaviorCallbacks.moveToNearByCover = animscripts\cover_behavior::moveToNearbyCover;
 
@@ -111,9 +111,9 @@ isRPD(weapon) {
 }
 
 initCoverCrouchNode() {
-  if(isdefined(self.crouchingIsOK))
+  if(isDefined(self.crouchingIsOK)) {
     return;
-
+  }
   // it's only ok to crouch at this node if we can see out from a crouched position.
   crouchHeightOffset = (0, 0, 42);
   forward = anglesToForward(self.angles);
@@ -138,7 +138,7 @@ coverReload() {
 popUpAndShoot() {
   self.keepClaimedNodeIfValid = true;
 
-  if(isdefined(self.ramboChance) && randomFloat(1) < self.ramboChance) {
+  if(isDefined(self.ramboChance) && randomFloat(1) < self.ramboChance) {
     if(rambo())
       return true;
   }
@@ -174,40 +174,42 @@ shootAsTold() {
 
   self maps\_gameskill::didSomethingOtherThanShooting();
 
-  while (1) {
-    if(isdefined(self.shouldReturnToCover))
+  while(1) {
+    if(isDefined(self.shouldReturnToCover)) {
       break;
+    }
 
-    if(!isdefined(self.shootPos)) {
-      assert(!isdefined(self.shootEnt));
+    if(!isDefined(self.shootPos)) {
+      assert(!isDefined(self.shootEnt));
       // give shoot_behavior a chance to iterate
       self waittill("do_slow_things");
       waittillframeend;
-      if(isdefined(self.shootPos))
+      if(isDefined(self.shootPos))
         continue;
       break;
     }
 
-    if(!self.bulletsInClip)
+    if(!self.bulletsInClip) {
       break;
+    }
 
     // crouch only
     if(self.coverType == "crouch" && needToChangeCoverMode()) {
       break;
 
-      // TODO: if changing between stances without returning to cover is implemented, 
+      // TODO: if changing between stances without returning to cover is implemented,
       // we can't just endon("return_to_cover") because it will cause problems when it
       // happens while changing stance.
       // see corner's implementation of this idea for a better implementation.
 
       // NYI
       /*changeCoverMode();
-			
+      			
       // if they're moving too fast for us to respond intelligently to them,
       // give up on firing at them for the moment
       if( needToChangeCoverMode() )
       	break;
-			
+      			
       continue;*/
     }
 
@@ -279,7 +281,7 @@ rambo() {
 idle() {
   self endon("end_idle");
 
-  while (1) {
+  while(1) {
     useTwitch = (randomint(2) == 0 && animArrayAnyExist("hide_idle_twitch"));
     if(useTwitch)
       idleanim = animArrayPickRandom("hide_idle_twitch");
@@ -323,7 +325,7 @@ playIdleAnimation(idleAnim, needsRestart) {
 }
 
 look(lookTime) {
-  if(!isdefined(self.a.array["hide_to_look"]))
+  if(!isDefined(self.a.array["hide_to_look"]))
     return false;
 
   if(!peekOut())
@@ -344,7 +346,7 @@ look(lookTime) {
 }
 
 peekOut() {
-  if(isdefined(self.coverNode.script_dontpeek))
+  if(isDefined(self.coverNode.script_dontpeek))
     return false;
 
   // assuming no delta, so no maymovetopoint check
@@ -371,7 +373,7 @@ pop_up_and_hide_speed() {
 }
 
 pop_up() {
-  assert(!isdefined(self.a.coverMode) || self.a.coverMode == "hide");
+  assert(!isDefined(self.a.coverMode) || self.a.coverMode == "hide");
 
   newCoverMode = getBestCoverMode();
 
@@ -510,14 +512,14 @@ tryThrowingGrenadeStayHidden(throwAt) {
 }
 
 tryThrowingGrenade(throwAt, safe) {
-  if(isdefined(self.dontEverShoot) || isdefined(throwAt.dontAttackMe))
+  if(isDefined(self.dontEverShoot) || isDefined(throwAt.dontAttackMe))
     return false;
 
   theanim = undefined;
-  if(isdefined(self.ramboChance) && randomfloat(1.0) < self.ramboChance) {
+  if(isDefined(self.ramboChance) && randomfloat(1.0) < self.ramboChance) {
     theanim = animArrayPickRandom("grenade_rambo");
   } else {
-    if(isdefined(safe) && safe)
+    if(isDefined(safe) && safe)
       theanim = animArrayPickRandom("grenade_safe");
     else
       theanim = animArrayPickRandom("grenade_exposed");
@@ -573,8 +575,8 @@ deleteIfNotUsed(owner) {
 
   wait .1;
 
-  if(isdefined(owner)) {
-    assert(!isdefined(owner.a.usingTurret) || owner.a.usingTurret != self);
+  if(isDefined(owner)) {
+    assert(!isDefined(owner.a.usingTurret) || owner.a.usingTurret != self);
     owner notify("turret_use_failed");
   }
   self delete();
@@ -585,7 +587,7 @@ useSelfPlacedTurret(weaponInfo, weaponModel) {
 
   if(self useTurret(turret)) {
     turret thread deleteIfNotUsed(self);
-    if(isdefined(self.turret_function))
+    if(isDefined(self.turret_function))
       thread[[self.turret_function]](turret);
     //		self setAnimKnob( %cover, 0, 0 );
     self waittill("turret_use_failed"); // generally this won't notify, and we'll just not do any more cover_wall for now
@@ -595,13 +597,13 @@ useSelfPlacedTurret(weaponInfo, weaponModel) {
 }
 
 useStationaryTurret() {
-  assert(isdefined(self.node));
-  assert(isdefined(self.node.turret));
+  assert(isDefined(self.node));
+  assert(isDefined(self.node.turret));
 
   turret = self.node.turret;
-  if(!turret.isSetup)
+  if(!turret.isSetup) {
     return;
-
+  }
   //	turret setmode( "auto_ai" ); // auto, auto_ai, manual, manual_ai
   //	turret startFiring(); // seems to be a bug with the turret being in manual mode to start with
   //	wait( 1 );
@@ -775,7 +777,7 @@ setup_standing_anim_array(exposedAnimSet) {
 }
 
 loopHide(transTime) {
-  if(!isdefined(transTime))
+  if(!isDefined(transTime))
     transTime = .1;
 
   self setanimknoballrestart(animArray("hide_idle"), % body, 1, transTime);
@@ -788,9 +790,10 @@ angleRangeThread() {
   self endon("newAngleRangeCheck");
   self endon("return_to_cover");
 
-  while (1) {
-    if(needToChangeCoverMode())
+  while(1) {
+    if(needToChangeCoverMode()) {
       break;
+    }
     wait(0.1);
   }
 
@@ -812,7 +815,7 @@ needToChangeCoverMode() {
 
 getBestCoverMode() {
   modes = [];
-  assert(isdefined(self.coverNode));
+  assert(isDefined(self.coverNode));
 
   if(self.coverType == "stand") {
     modes = self.coverNode GetValidCoverPeekOuts();

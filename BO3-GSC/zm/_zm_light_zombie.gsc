@@ -28,7 +28,7 @@
 #namespace zm_light_zombie;
 
 function autoexec __init__sytem__() {
-  system::register("zm_light_zombie", & __init__, undefined, undefined);
+  system::register("zm_light_zombie", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -45,8 +45,8 @@ function private register_clientfields() {
 function function_a35db70f() {
   ai_zombie = self;
   var_715d2624 = zm_elemental_zombie::function_4aeed0a5("light");
-  if(!isdefined(level.var_4a762097) || var_715d2624 < level.var_4a762097) {
-    if(!isdefined(ai_zombie.is_elemental_zombie) || ai_zombie.is_elemental_zombie == 0) {
+  if(!isDefined(level.var_4a762097) || var_715d2624 < level.var_4a762097) {
+    if(!isDefined(ai_zombie.is_elemental_zombie) || ai_zombie.is_elemental_zombie == 0) {
       ai_zombie.is_elemental_zombie = 1;
       ai_zombie.var_9a02a614 = "light";
       ai_zombie.health = int(ai_zombie.health * 1);
@@ -66,7 +66,7 @@ function function_cb744db7() {
 function function_68da949() {
   self endon("entityshutdown");
   self endon("death");
-  while (true) {
+  while(true) {
     self waittill("damage");
     if(randomint(100) < 50) {
       self clientfield::increment("light_zombie_clientfield_damaged_fx");
@@ -78,7 +78,7 @@ function function_68da949() {
 function light_zombie_death() {
   ai_zombie = self;
   ai_zombie waittill("death", attacker);
-  if(!isdefined(ai_zombie) || ai_zombie.nuked === 1) {
+  if(!isDefined(ai_zombie) || ai_zombie.nuked === 1) {
     return;
   }
   v_origin = ai_zombie.origin;
@@ -104,7 +104,7 @@ function function_4745b0a9(flash_origin) {
   var_bfff29b1 = 16384;
   var_1536d9e9 = 4096;
   var_b79af7d4 = var_bfff29b1 - var_1536d9e9;
-  if(dist_sq <= var_bfff29b1 && (!(isdefined(player.var_442e1e5b) && player.var_442e1e5b))) {
+  if(dist_sq <= var_bfff29b1 && (!(isDefined(player.var_442e1e5b) && player.var_442e1e5b))) {
     if(dist_sq < var_1536d9e9) {
       flash_time = 1;
     } else {
@@ -112,7 +112,7 @@ function function_4745b0a9(flash_origin) {
       var_6e07e9bc = var_ff8b2f91 * 0.5;
       flash_time = 1 - var_6e07e9bc;
     }
-    if(isdefined(flash_time)) {
+    if(isDefined(flash_time)) {
       flash_time = math::clamp(flash_time, 0.5, 1);
       player thread function_2335214f(flash_time);
     }
@@ -137,7 +137,7 @@ function function_ff8b7145() {
   adddebugcommand(str_cmd);
   str_cmd = "";
   adddebugcommand(str_cmd);
-  while (true) {
+  while(true) {
     string = getdvarstring("");
     if(string == "") {
       a_zombies = zm_elemental_zombie::function_d41418b8();

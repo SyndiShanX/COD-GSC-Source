@@ -9,7 +9,6 @@
 #include scripts\zm_common\zm_spawner;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
-
 #namespace namespace_d6ef1c07;
 
 autoexec __init__system__() {
@@ -24,7 +23,7 @@ __init__() {
   zm_trial::register_challenge(#"hash_2af7adc2570e0a8e", &on_begin, &on_end);
 }
 
-private on_begin(var_2a54eca1, var_b3fc75a6, var_40988d98, var_968ac18f) {
+on_begin(var_2a54eca1, var_b3fc75a6, var_40988d98, var_968ac18f) {
   switch (getplayers().size) {
     case 1:
       level.var_5a9bcbe4 = zm_trial::function_5769f26a(var_2a54eca1);
@@ -50,7 +49,7 @@ private on_begin(var_2a54eca1, var_b3fc75a6, var_40988d98, var_968ac18f) {
   zm_spawner::register_zombie_death_event_callback(&function_138aec8e);
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   foreach(player in getplayers()) {
     player zm_trial_util::function_f3aacffb();
   }
@@ -78,7 +77,7 @@ private on_end(round_reset) {
   zm_spawner::deregister_zombie_death_event_callback(&function_138aec8e);
 }
 
-private function_7f62f098(challenge) {
+function_7f62f098(challenge) {
   self endon(#"disconnect");
   level endon(#"hash_7646638df88a3656");
 
@@ -106,7 +105,7 @@ private function_7f62f098(challenge) {
   }
 }
 
-private function_138aec8e(attacker) {
+function_138aec8e(attacker) {
   if(isDefined(self.var_6e2628f7) && self.var_6e2628f7) {
     if(isDefined(self.nuked) && self.nuked) {
       foreach(player in getplayers()) {

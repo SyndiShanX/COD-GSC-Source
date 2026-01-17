@@ -21,8 +21,7 @@ print_org(fxcommand, fxid, fxpos, waittime) {
 
 }
 
-oneshotfx(fxid, fxpos, waittime, fxpos2) {
-}
+oneshotfx(fxid, fxpos, waittime, fxpos2) {}
 
 oneshotfxthread() {
   wait 0.05;
@@ -72,7 +71,7 @@ exploderfx(num, fxid, fxpos, waittime, fxpos2, firefx, firefxdelay, firefxsound,
   fx.script_delay_min = delay_min;
   fx.script_delay_max = delay_max;
   fx.script_exploder_group = exploder_group;
-  forward = anglestoforward(fx.angles);
+  forward = anglesToForward(fx.angles);
   forward = vectorscale(forward, 150);
   fx.targetpos = fxpos + forward;
 
@@ -181,7 +180,7 @@ loopsound(sound, pos, waittime) {
 loopsoundthread(sound, pos, waittime) {
   org = spawn("script_origin", pos);
   org.origin = pos;
-  org playloopsound(sound);
+  org playLoopSound(sound);
 }
 
 gunfireloopfx(fxid, fxpos, shotsmin, shotsmax, shotdelaymin, shotdelaymax, betweensetsmin, betweensetsmax) {
@@ -348,32 +347,32 @@ script_print_fx() {
     println("mapsmp_fx::LoopSound(\"" + self.script_fxid + "\", " + self.origin + ", " + self.script_delay + ", " + org + ");");
 }
 
-script_playfx(id, pos, pos2) {
+script_playFX(id, pos, pos2) {
   if(!id) {
     return;
   }
   if(isDefined(pos2))
-    playfx(id, pos, pos2);
+    playFX(id, pos, pos2);
   else
-    playfx(id, pos);
+    playFX(id, pos);
 }
 
-script_playfxontag(id, ent, tag) {
+script_playFXOnTag(id, ent, tag) {
   if(!id) {
     return;
   }
-  playfxontag(id, ent, tag);
+  playFXOnTag(id, ent, tag);
 }
 
 grenadeexplosionfx(pos) {
-  playfx(level._effect["mechanical explosion"], pos);
+  playFX(level._effect["mechanical explosion"], pos);
   earthquake(0.15, 0.5, pos, 250);
 }
 
 soundfx(fxid, fxpos, endonnotify) {
   org = spawn("script_origin", (0, 0, 0));
   org.origin = fxpos;
-  org playloopsound(fxid);
+  org playLoopSound(fxid);
 
   if(isDefined(endonnotify))
     org thread soundfxdelete(endonnotify);

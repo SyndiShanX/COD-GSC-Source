@@ -5,10 +5,9 @@
 
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm_maptable;
-
 #namespace zm_inventory;
 
-private function_cb96f01d(mappingname, internalname, numbits, ispersonal) {
+function_cb96f01d(mappingname, internalname, numbits, ispersonal) {
   if(!isDefined(level.var_a16c38d9[mappingname])) {
     level.var_a16c38d9[mappingname] = spawnStruct();
   }

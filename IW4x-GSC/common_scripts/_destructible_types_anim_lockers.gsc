@@ -13,5 +13,4 @@ main() {
   level._destructible_preanims["locker_broken_door1_fast"] = % locker_broken_door1_fast;
   level._destructible_preanims["locker_broken_door2_slow"] = % locker_broken_door2_slow;
   level._destructible_preanims["locker_broken_door2_fast"] = % locker_broken_door2_fast;
-
 }

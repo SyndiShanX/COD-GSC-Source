@@ -11,7 +11,7 @@
 #include maps\mp\animscripts\zm_shared;
 
 main() {
-  self.a = spawnstruct();
+  self.a = spawnStruct();
   self.team = level.zombie_team;
   firstinit();
   self.a.pose = "stand";
@@ -64,16 +64,14 @@ main() {
   self.lastenemysighttime = 0;
   self.combattime = 0;
   self.coveridleselecttime = -696969;
-  self.old = spawnstruct();
+  self.old = spawnStruct();
   self.reacquire_state = 0;
   self.a.allow_shooting = 0;
 }
 
-donothing() {
-}
+donothing() {}
 
-empty(one, two, three, whatever) {
-}
+empty(one, two, three, whatever) {}
 
 clearenemy() {
   self notify("stop waiting for enemy to die");

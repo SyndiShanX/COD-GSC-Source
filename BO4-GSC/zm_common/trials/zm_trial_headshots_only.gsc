@@ -11,7 +11,6 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_trial_headshots_only;
 
 autoexec __init__system__() {
@@ -26,7 +25,7 @@ __init__() {
   zm_trial::register_challenge(#"headshots_only", &on_begin, &on_end);
 }
 
-private on_begin(weapon_name) {
+on_begin(weapon_name) {
   level.var_153e9058 = 1;
   level.var_fe2bb2ac = 1;
   zm_traps::function_6966417b();
@@ -47,7 +46,7 @@ private on_begin(weapon_name) {
   level zm_trial::function_cd75b690(1);
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   level.var_153e9058 = 0;
   level.var_fe2bb2ac = 0;
   zm_traps::function_9d0c9706();
@@ -80,7 +79,7 @@ is_active() {
   return isDefined(challenge);
 }
 
-private function_33f0ddd3(s_event) {
+function_33f0ddd3(s_event) {
   if(s_event.event === "give_weapon") {
     if(zm_loadout::function_59b0ef71("lethal_grenade", s_event.weapon)) {
       self lockweapon(s_event.weapon, 1, 1);

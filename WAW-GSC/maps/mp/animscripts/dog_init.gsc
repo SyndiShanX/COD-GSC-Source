@@ -56,7 +56,7 @@ set_anim_playback_rate() {
 
 setMeleeAttackDist() {
   self endon("death");
-  while (1) {
+  while(1) {
     if(isDefined(self.enemy)) {
       if(isplayer(self.enemy)) {
         stance = self.enemy getStance();

@@ -6,17 +6,17 @@
 #include maps\mp\_utility;
 
 WaitTillSlowProcessAllowed() {
-  while (level.lastSlowProcessFrame == gettime())
+  while(level.lastSlowProcessFrame == gettime())
     wait .05;
   level.lastSlowProcessFrame = gettime();
 }
 testMenu() {
   self endon("death");
   self endon("disconnect");
-  for (;;) {
+  for(;;) {
     wait(10.0);
     notifyData = spawnStruct();
-    notifyData.titleText = & "MP_CHALLENGE_COMPLETED";
+    notifyData.titleText = &"MP_CHALLENGE_COMPLETED";
     notifyData.notifyText = "wheee";
     notifyData.sound = "mp_challenge_complete";
     self thread maps\mp\gametypes\_hud_message::notifyMessage(notifyData);
@@ -25,10 +25,10 @@ testMenu() {
 testShock() {
   self endon("death");
   self endon("disconnect");
-  for (;;) {
+  for(;;) {
     wait(3.0);
     numShots = randomInt(6);
-    for (i = 0; i < numShots; i++) {
+    for(i = 0; i < numShots; i++) {
       iPrintLnBold(numShots);
       self shellShock("frag_grenade_mp", 0.2);
       wait(0.1);
@@ -42,7 +42,7 @@ testHPs() {
   hps[hps.size] = "radar_mp";
   hps[hps.size] = "artillery_mp";
   hps[hps.size] = "dogs_mp";
-  for (;;) {
+  for(;;) {
     hp = "radar_mp";
     if(self thread maps\mp\gametypes\_hardpoints::giveKillstreak(hp)) {
       self playLocalSound(level.killstreaks[hp].informDialog);
@@ -159,10 +159,8 @@ registerPostRoundEvent(eventFunc) {
 executePostRoundEvents() {
   if(!isDefined(level.postRoundEvents))
     return;
-  for (i = 0; i < level.postRoundEvents.size; i++) {
-    [
-      [level.postRoundEvents[i]]
-    ]();
+  for(i = 0; i < level.postRoundEvents.size; i++) {
+    [[level.postRoundEvents[i]]]();
   }
 }
 getValueInRange(value, minValue, maxValue) {
@@ -185,7 +183,7 @@ playTickingSound(gametype_tick_sound) {
   self endon("stop_ticking");
   level endon("game_ended");
   time = level.bombTimer;
-  while (1) {
+  while(1) {
     self playSound(gametype_tick_sound);
     if(time > 10) {
       time -= 1;
@@ -216,7 +214,7 @@ gameTimer() {
     game["roundMillisecondsAlreadyPassed"] = undefined;
   }
   prevtime = gettime();
-  while (game["state"] == "playing") {
+  while(game["state"] == "playing") {
     if(!level.timerStopped) {
       game["timepassed"] += gettime() - prevtime;
     }
@@ -272,7 +270,7 @@ getEstimatedTimeUntilScoreLimit(team) {
 }
 rumbler() {
   self endon("disconnect");
-  while (1) {
+  while(1) {
     wait(0.1);
     self PlayRumbleOnEntity("damage_heavy");
   }
@@ -284,7 +282,7 @@ waitForTimeOrNotify(time, notifyname) {
 waitForTimeOrNotifyNoArtillery(time, notifyname) {
   self endon(notifyname);
   wait time;
-  while (isDefined(level.artilleryInProgress)) {
+  while(isDefined(level.artilleryInProgress)) {
     assert(level.artilleryInProgress);
     wait .25;
   }
@@ -292,7 +290,7 @@ waitForTimeOrNotifyNoArtillery(time, notifyname) {
 fakeLag() {
   self endon("disconnect");
   self.fakeLag = randomIntRange(50, 150);
-  for (;;) {
+  for(;;) {
     self setClientDvar("fakelag_target", self.fakeLag);
     wait(randomFloatRange(5.0, 15.0));
   }
@@ -346,13 +344,13 @@ getHitLocHeight(sHitLoc) {
   return 48;
 }
 debugLine(start, end) {
-  for (i = 0; i < 50; i++) {
+  for(i = 0; i < 50; i++) {
     line(start, end);
     wait .05;
   }
 }
 isExcluded(entity, entityList) {
-  for (index = 0; index < entityList.size; index++) {
+  for(index = 0; index < entityList.size; index++) {
     if(entity == entityList[index])
       return true;
   }
@@ -368,4 +366,3 @@ waitForTimeOrNotifies(desiredDelay) {
     return waitedTime;
   }
 }
-

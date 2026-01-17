@@ -25,29 +25,29 @@
 #namespace zm_genesis_apothican;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_apothican", & __init__, undefined, undefined);
+  system::register("zm_genesis_apothican", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("allplayers", "apothicon_player_keyline", 15000, 1, "int", & apothicon_player_keyline, 0, 0);
-  clientfield::register("toplayer", "apothicon_entry_postfx", 15000, 1, "int", & apothicon_entry_postfx, 0, 0);
-  clientfield::register("world", "gas_fog_bank_switch", 15000, 1, "int", & gas_fog_bank_switch, 0, 0);
-  clientfield::register("scriptmover", "egg_spawn_fx", 15000, 1, "int", & egg_spawn_fx, 0, 0);
-  clientfield::register("scriptmover", "gateworm_mtl", 15000, 1, "int", & gateworm_mtl, 0, 0);
-  clientfield::register("toplayer", "player_apothicon_egg", 15000, 1, "int", & zm_utility::setinventoryuimodels, 0, 0);
+  clientfield::register("allplayers", "apothicon_player_keyline", 15000, 1, "int", &apothicon_player_keyline, 0, 0);
+  clientfield::register("toplayer", "apothicon_entry_postfx", 15000, 1, "int", &apothicon_entry_postfx, 0, 0);
+  clientfield::register("world", "gas_fog_bank_switch", 15000, 1, "int", &gas_fog_bank_switch, 0, 0);
+  clientfield::register("scriptmover", "egg_spawn_fx", 15000, 1, "int", &egg_spawn_fx, 0, 0);
+  clientfield::register("scriptmover", "gateworm_mtl", 15000, 1, "int", &gateworm_mtl, 0, 0);
+  clientfield::register("toplayer", "player_apothicon_egg", 15000, 1, "int", &zm_utility::setinventoryuimodels, 0, 0);
   clientfield::register("clientuimodel", "zmInventory.widget_apothicon_egg", 15000, 1, "int", undefined, 0, 0);
   clientfield::register("clientuimodel", "zmInventory.player_apothicon_egg_bg", 15000, 1, "int", undefined, 0, 0);
-  clientfield::register("toplayer", "player_gate_worm", 15000, 1, "int", & zm_utility::setinventoryuimodels, 0, 0);
+  clientfield::register("toplayer", "player_gate_worm", 15000, 1, "int", &zm_utility::setinventoryuimodels, 0, 0);
   clientfield::register("clientuimodel", "zmInventory.widget_gate_worm", 15000, 1, "int", undefined, 0, 0);
   clientfield::register("clientuimodel", "zmInventory.player_gate_worm_bg", 15000, 1, "int", undefined, 0, 0);
   level.var_e8af7a2f = 0;
 }
 
 function function_b77a78c9(localclientnum, str_fx, v_origin, n_duration, v_angles) {
-  if(isdefined(v_angles)) {
-    fx = playfx(localclientnum, str_fx, v_origin, v_angles);
+  if(isDefined(v_angles)) {
+    fx = playFX(localclientnum, str_fx, v_origin, v_angles);
   } else {
-    fx = playfx(localclientnum, str_fx, v_origin);
+    fx = playFX(localclientnum, str_fx, v_origin);
   }
   wait(n_duration);
   stopfx(localclientnum, fx);
@@ -88,9 +88,9 @@ function apothicon_entry_postfx(localclientnum, oldval, newval, bnewent, binitia
     }
     self thread function_e7a8756e(localclientnum);
     self thread postfx::playpostfxbundle("pstfx_gen_apothicon_swallow");
-    playsound(0, "zmb_apothigod_mouth_start", (0, 0, 0));
+    playSound(0, "zmb_apothigod_mouth_start", (0, 0, 0));
   } else {
-    playsound(0, "zmb_apothigod_mouth_eject", (0, 0, 0));
+    playSound(0, "zmb_apothigod_mouth_eject", (0, 0, 0));
     self notify("apothicon_entry_complete");
   }
 }
@@ -103,7 +103,7 @@ function function_e7a8756e(localclientnum) {
 function gas_fog_bank_switch(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
     level.var_e8af7a2f = 1;
-    for (localclientnum = 0; localclientnum < level.localplayers.size; localclientnum++) {
+    for(localclientnum = 0; localclientnum < level.localplayers.size; localclientnum++) {
       if(level.var_b7572a82) {
         setworldfogactivebank(localclientnum, 8);
         continue;
@@ -111,7 +111,7 @@ function gas_fog_bank_switch(localclientnum, oldval, newval, bnewent, binitialsn
       setworldfogactivebank(localclientnum, 4);
     }
   } else {
-    for (localclientnum = 0; localclientnum < level.localplayers.size; localclientnum++) {
+    for(localclientnum = 0; localclientnum < level.localplayers.size; localclientnum++) {
       if(level.var_b7572a82) {
         setworldfogactivebank(localclientnum, 2);
         continue;
@@ -124,8 +124,8 @@ function gas_fog_bank_switch(localclientnum, oldval, newval, bnewent, binitialsn
 
 function egg_spawn_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self.var_70a0d336 = playfxontag(localclientnum, level._effect["egg_spawn_fx"], self, "tag_origin");
-  } else if(isdefined(self) && isdefined(self.var_70a0d336)) {
+    self.var_70a0d336 = playFXOnTag(localclientnum, level._effect["egg_spawn_fx"], self, "tag_origin");
+  } else if(isDefined(self) && isDefined(self.var_70a0d336)) {
     stopfx(localclientnum, self.var_70a0d336);
     self.var_70a0d336 = undefined;
   }

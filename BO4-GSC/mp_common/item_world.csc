@@ -16,14 +16,13 @@
 #include scripts\mp_common\item_inventory_util;
 #include scripts\mp_common\item_spawn_groups;
 #include scripts\mp_common\item_world_util;
-
 #namespace item_world;
 
 autoexec __init__system__() {
   system::register(#"item_world", &__init__, undefined, undefined);
 }
 
-private __init__() {
+__init__() {
   if(getgametypesetting(#"useitemspawns") == 0) {
     return;
   }
@@ -34,14 +33,14 @@ private __init__() {
   level.var_ce95aace = [];
   level.var_7e2f5883 = [];
   level.var_19cf0be9 = [];
-  level.var_418d51ad = array(#"ammo_type_556_item", #"ammo_type_762_item", #"ammo_type_12ga_item", #"ammo_type_9mm_item", #"ammo_type_45_item", #"ammo_type_338_item", #"ammo_type_50cal_item", #"ammo_type_rocket_item");
-  level.var_69ee9282 = array(#"armor_item_large", #"armor_item_medium", #"armor_item_small");
-  level.var_6cb314b1 = array(#"sniperscope_wz_item", #"acog_plus_wz_item", #"reddot_wz_item", #"acog_wz_item", #"dualoptic_wz_item", #"holo_wz_item", #"reflex_wz_item", #"tritium_wz_item", #"suppressor_wz_item", #"extbarrel_wz_item", #"advmag_wz_item", #"extmag_wz_item", #"fastmag_wz_item", #"foregrip_wz_item", #"laser_sight_wz_item", #"pistol_grip_wz_item", #"stock_wz_item");
-  level.var_3fd5d8f0 = array(#"frag_grenade_wz_item", #"cluster_semtex_wz_item", #"acid_bomb_wz_item", #"molotov_wz_item", #"wraithfire_wz_item", #"hatchet_wz_item", #"tomahawk_t8_wz_item", #"seeker_mine_wz_item", #"dart_wz_item", #"hawk_wz_item", #"ultimate_turret_wz_item", #"swat_grenade_wz_item", #"concussion_wz_item", #"smoke_grenade_wz_item", #"smoke_grenade_wz_item_spring_holiday", #"emp_grenade_wz_item", #"spectre_grenade_wz_item", #"grapple_wz_item", #"unlimited_grapple_wz_item", #"barricade_wz_item", #"spiked_barrier_wz_item", #"trophy_system_wz_item", #"concertina_wire_wz_item", #"sensor_dart_wz_item", #"supply_pod_wz_item", #"trip_wire_wz_item", #"cymbal_monkey_wz_item", #"homunculus_wz_item", #"vision_pulse_wz_item", #"flare_gun_wz_item", #"flare_gun_veh_wz_item", #"wz_snowball", #"wz_waterballoon");
-  level.var_9bc8c1bc = array(#"health_item_small", #"health_item_medium", #"health_item_large", #"health_item_squad");
-  level.var_683c7e30 = array(#"perk_item_stimulant", #"perk_item_awareness", #"perk_item_deadsilence", #"perk_item_lightweight", #"perk_item_drifter", #"perk_item_engineer", #"perk_item_medic", #"perk_item_reinforced", #"perk_item_looter", #"perk_item_outlander", #"perk_item_paranoia", #"perk_item_ironlungs", #"perk_item_squadlink", #"perk_item_consumer", #"perk_item_brawler");
-  level.var_e93e16b = array(#"annihilator_wz_item", #"warmachine_wz_item", #"flamethrower_wz_item", #"sniper_fastrechamber_t8_gold_item", #"sniper_powerbolt_t8_gold_item", #"sniper_powersemi_t8_gold_item", #"sniper_quickscope_t8_gold_item", #"tr_longburst_t8_gold_item", #"tr_midburst_t8_gold_item", #"tr_powersemi_t8_gold_item", #"ar_accurate_t8_gold_item", #"ar_damage_t8_gold_item", #"ar_fastfire_t8_gold_item", #"ar_modular_t8_gold_item", #"ar_stealth_t8_gold_item", #"lmg_heavy_t8_gold_item", #"lmg_spray_t8_gold_item", #"lmg_standard_t8_gold_item", #"smg_accurate_t8_gold_item", #"smg_capacity_t8_gold_item", #"smg_fastfire_t8_gold_item", #"smg_handling_t8_gold_item", #"smg_standard_t8_gold_item", #"shotgun_semiauto_t8_gold_item", #"shotgun_pump_t8_gold_item", #"pistol_burst_t8_gold_item", #"pistol_revolver_t8_gold_item", #"pistol_standard_t8_gold_item");
-  level.var_b9917a92 = array(#"annihilator_wz_item", #"warmachine_wz_item", #"flamethrower_wz_item", #"ray_gun_t8_item", #"launcher_standard_t8_item", #"sniper_fastrechamber_t8_item", #"sniper_powerbolt_t8_item", #"sniper_powersemi_t8_item", #"sniper_quickscope_t8_item", #"tr_leveraction_t8_item", #"tr_longburst_t8_item", #"tr_midburst_t8_item", #"tr_powersemi_t8_item", #"ar_accurate_t8_item", #"ar_damage_t8_item", #"ar_fastfire_t8_item", #"ar_galil_t8_item", #"ar_mg1909_t8_item", #"ar_modular_t8_item", #"ar_stealth_t8_item", #"lmg_double_t8_item", #"lmg_heavy_t8_item", #"lmg_spray_t8_item", #"lmg_standard_t8_item", #"smg_accurate_t8_item", #"smg_capacity_t8_item", #"smg_drum_pistol_t8_item", #"smg_fastfire_t8_item", #"smg_handling_t8_item", #"smg_mp40_t8_item", #"smg_standard_t8_item", #"smg_thompson_t8_item", #"pistol_burst_t8_item", #"pistol_revolver_t8_item", #"pistol_standard_t8_item", #"pistol_topbreak_t8_item", #"shotgun_pump_t8_item", #"shotgun_semiauto_t8_item", #"shotgun_trenchgun_t8_item", #"melee_bowie_t8_item");
+  level.var_418d51ad = array(#"ammo_type_556_item", # "ammo_type_762_item", # "ammo_type_12ga_item", # "ammo_type_9mm_item", # "ammo_type_45_item", # "ammo_type_338_item", # "ammo_type_50cal_item", # "ammo_type_rocket_item");
+  level.var_69ee9282 = array(#"armor_item_large", # "armor_item_medium", # "armor_item_small");
+  level.var_6cb314b1 = array(#"sniperscope_wz_item", # "acog_plus_wz_item", # "reddot_wz_item", # "acog_wz_item", # "dualoptic_wz_item", # "holo_wz_item", # "reflex_wz_item", # "tritium_wz_item", # "suppressor_wz_item", # "extbarrel_wz_item", # "advmag_wz_item", # "extmag_wz_item", # "fastmag_wz_item", # "foregrip_wz_item", # "laser_sight_wz_item", # "pistol_grip_wz_item", # "stock_wz_item");
+  level.var_3fd5d8f0 = array(#"frag_grenade_wz_item", # "cluster_semtex_wz_item", # "acid_bomb_wz_item", # "molotov_wz_item", # "wraithfire_wz_item", # "hatchet_wz_item", # "tomahawk_t8_wz_item", # "seeker_mine_wz_item", # "dart_wz_item", # "hawk_wz_item", # "ultimate_turret_wz_item", # "swat_grenade_wz_item", # "concussion_wz_item", # "smoke_grenade_wz_item", # "smoke_grenade_wz_item_spring_holiday", # "emp_grenade_wz_item", # "spectre_grenade_wz_item", # "grapple_wz_item", # "unlimited_grapple_wz_item", # "barricade_wz_item", # "spiked_barrier_wz_item", # "trophy_system_wz_item", # "concertina_wire_wz_item", # "sensor_dart_wz_item", # "supply_pod_wz_item", # "trip_wire_wz_item", # "cymbal_monkey_wz_item", # "homunculus_wz_item", # "vision_pulse_wz_item", # "flare_gun_wz_item", # "flare_gun_veh_wz_item", # "wz_snowball", # "wz_waterballoon");
+  level.var_9bc8c1bc = array(#"health_item_small", # "health_item_medium", # "health_item_large", # "health_item_squad");
+  level.var_683c7e30 = array(#"perk_item_stimulant", # "perk_item_awareness", # "perk_item_deadsilence", # "perk_item_lightweight", # "perk_item_drifter", # "perk_item_engineer", # "perk_item_medic", # "perk_item_reinforced", # "perk_item_looter", # "perk_item_outlander", # "perk_item_paranoia", # "perk_item_ironlungs", # "perk_item_squadlink", # "perk_item_consumer", # "perk_item_brawler");
+  level.var_e93e16b = array(#"annihilator_wz_item", # "warmachine_wz_item", # "flamethrower_wz_item", # "sniper_fastrechamber_t8_gold_item", # "sniper_powerbolt_t8_gold_item", # "sniper_powersemi_t8_gold_item", # "sniper_quickscope_t8_gold_item", # "tr_longburst_t8_gold_item", # "tr_midburst_t8_gold_item", # "tr_powersemi_t8_gold_item", # "ar_accurate_t8_gold_item", # "ar_damage_t8_gold_item", # "ar_fastfire_t8_gold_item", # "ar_modular_t8_gold_item", # "ar_stealth_t8_gold_item", # "lmg_heavy_t8_gold_item", # "lmg_spray_t8_gold_item", # "lmg_standard_t8_gold_item", # "smg_accurate_t8_gold_item", # "smg_capacity_t8_gold_item", # "smg_fastfire_t8_gold_item", # "smg_handling_t8_gold_item", # "smg_standard_t8_gold_item", # "shotgun_semiauto_t8_gold_item", # "shotgun_pump_t8_gold_item", # "pistol_burst_t8_gold_item", # "pistol_revolver_t8_gold_item", # "pistol_standard_t8_gold_item");
+  level.var_b9917a92 = array(#"annihilator_wz_item", # "warmachine_wz_item", # "flamethrower_wz_item", # "ray_gun_t8_item", # "launcher_standard_t8_item", # "sniper_fastrechamber_t8_item", # "sniper_powerbolt_t8_item", # "sniper_powersemi_t8_item", # "sniper_quickscope_t8_item", # "tr_leveraction_t8_item", # "tr_longburst_t8_item", # "tr_midburst_t8_item", # "tr_powersemi_t8_item", # "ar_accurate_t8_item", # "ar_damage_t8_item", # "ar_fastfire_t8_item", # "ar_galil_t8_item", # "ar_mg1909_t8_item", # "ar_modular_t8_item", # "ar_stealth_t8_item", # "lmg_double_t8_item", # "lmg_heavy_t8_item", # "lmg_spray_t8_item", # "lmg_standard_t8_item", # "smg_accurate_t8_item", # "smg_capacity_t8_item", # "smg_drum_pistol_t8_item", # "smg_fastfire_t8_item", # "smg_handling_t8_item", # "smg_mp40_t8_item", # "smg_standard_t8_item", # "smg_thompson_t8_item", # "pistol_burst_t8_item", # "pistol_revolver_t8_item", # "pistol_standard_t8_item", # "pistol_topbreak_t8_item", # "shotgun_pump_t8_item", # "shotgun_semiauto_t8_item", # "shotgun_trenchgun_t8_item", # "melee_bowie_t8_item");
   level.weaponbasemeleeheld = getweapon(#"bare_hands");
   level.var_c49f422c = 125;
   level.var_927fd418 = 75;
@@ -80,12 +79,12 @@ private __init__() {
   level thread namespace_65181344::init_spawn_system();
 }
 
-private function_3d7c12a6(localclientnum, poolsize) {
+function_3d7c12a6(localclientnum, poolsize) {
   modellist = [];
 
   for(i = 1; i <= poolsize; i++) {
     model = spawn(localclientnum, (0, 0, -10000), "script_model");
-    model function_e082e650(localclientnum, undefined, #"tag_origin", 1);
+    model function_e082e650(localclientnum, undefined, # "tag_origin", 1);
     model hide();
     model notsolid();
     modellist[i * -1] = model;
@@ -94,7 +93,7 @@ private function_3d7c12a6(localclientnum, poolsize) {
   return modellist;
 }
 
-private function_37175e73(var_fee74908) {
+function_37175e73(var_fee74908) {
   level endon(#"game_ended");
 
   if(var_fee74908.size <= 0) {
@@ -111,7 +110,7 @@ private function_37175e73(var_fee74908) {
 
   for(wordindex = 0; wordindex < var_fee74908.size - 1; wordindex++) {
     for(bitindex = 0; bitindex < 32; bitindex++) {
-      if(var_fee74908[wordindex]&1 << bitindex) {
+      if(var_fee74908[wordindex] & 1 << bitindex) {
         itemindex = wordindex * 32 + bitindex;
         hide_item(-1, itemindex);
       }
@@ -119,7 +118,7 @@ private function_37175e73(var_fee74908) {
   }
 }
 
-private function_952d97dc(localclientnum) {
+function_952d97dc(localclientnum) {
   data = spawnStruct();
   data.modellist = function_3d7c12a6(localclientnum, level.var_c49f422c);
   data.var_d58b471d = 0;
@@ -129,9 +128,9 @@ private function_952d97dc(localclientnum) {
   level.var_d342a3fd[localclientnum] = data;
   item_inventory::inventory_init(localclientnum);
   level.var_d9beffb9 = util::getnextobjid(localclientnum);
-  objective_add(localclientnum, level.var_d9beffb9, "invisible", #"weapon_pickup");
+  objective_add(localclientnum, level.var_d9beffb9, "invisible", # "weapon_pickup");
   level.var_383edf80 = util::getnextobjid(localclientnum);
-  objective_add(localclientnum, level.var_383edf80, "invisible", #"multi_item_pickup");
+  objective_add(localclientnum, level.var_383edf80, "invisible", # "multi_item_pickup");
   level.showpickuphintmodel[localclientnum] = createuimodel(getuimodelforcontroller(localclientnum), "hudItems.showPickupHint");
   level.var_89f832ca[localclientnum] = createuimodel(getuimodelforcontroller(localclientnum), "hudItems.pickupHintText");
   level.var_62c91473[localclientnum] = createuimodel(getuimodelforcontroller(localclientnum), "hudItems.pickupHintTextOverride");
@@ -140,7 +139,7 @@ private function_952d97dc(localclientnum) {
   level.var_19cf0be9[localclientnum] = createuimodel(getuimodelforcontroller(localclientnum), "hudItems.pickupHintImage");
 }
 
-private function_cdd9b388() {
+function_cdd9b388() {
   self notify("<dev string:x38>");
   self endon("<dev string:x38>");
   self endon(#"shutdown");
@@ -161,18 +160,18 @@ private function_cdd9b388() {
   }
 }
 
-  function private function_3ee12d25(localclientnum, model) {
-    if(!isDefined(model)) {
-      return;
-    }
-
-    if(isDefined(model.var_2584a90d)) {
-      model function_f6e99a8d(model.var_2584a90d);
-    }
-
-    model.var_2584a90d = undefined;
-    function_2990e5f(localclientnum, model);
+function private function_3ee12d25(localclientnum, model) {
+  if(!isDefined(model)) {
+    return;
   }
+
+  if(isDefined(model.var_2584a90d)) {
+    model function_f6e99a8d(model.var_2584a90d);
+  }
+
+  model.var_2584a90d = undefined;
+  function_2990e5f(localclientnum, model);
+}
 
 function_2990e5f(localclientnum, model) {
   if(!isDefined(model)) {
@@ -185,7 +184,7 @@ function_2990e5f(localclientnum, model) {
   }
 }
 
-private function_48b8fc19(localclientnum) {
+function_48b8fc19(localclientnum) {
   var_7d8899cd = function_d634ed59();
 
   for(index = 0; index < var_7d8899cd; index++) {
@@ -206,7 +205,7 @@ private function_48b8fc19(localclientnum) {
     }
   }
 
-  for(player = function_5c10bd79(localclientnum); !isDefined(player) || !isplayer(player) || !isDefined(player.type) || player.type != #"player" || player ishidden() || player isinfreefall() || player function_9a0edd92(); player = function_5c10bd79(localclientnum)) {
+  for(player = function_5c10bd79(localclientnum); !isDefined(player) || !isplayer(player) || !isDefined(player.type) || player.type != # "player" || player ishidden() || player isinfreefall() || player function_9a0edd92(); player = function_5c10bd79(localclientnum)) {
     waitframe(1);
   }
 
@@ -231,7 +230,7 @@ private function_48b8fc19(localclientnum) {
   }
 }
 
-private function_c17fe536(localclientnum, clientdata, networkid) {
+function_c17fe536(localclientnum, clientdata, networkid) {
   model = function_839d4c20(localclientnum, clientdata, networkid);
 
   if(!isDefined(model) && isDefined(networkid) && item_world_util::function_2c7fc531(networkid)) {
@@ -259,7 +258,7 @@ private function_c17fe536(localclientnum, clientdata, networkid) {
   }
 }
 
-private function_839d4c20(localclientnum, clientdata, networkid) {
+function_839d4c20(localclientnum, clientdata, networkid) {
   if(!isDefined(networkid)) {
     return;
   }
@@ -273,7 +272,7 @@ private function_839d4c20(localclientnum, clientdata, networkid) {
   return model;
 }
 
-private function_61f5d33a(localclientnum, clientdata, networkid) {
+function_61f5d33a(localclientnum, clientdata, networkid) {
   model = function_839d4c20(localclientnum, clientdata, networkid);
 
   if(!isDefined(model) && item_world_util::function_2c7fc531(networkid)) {
@@ -287,60 +286,59 @@ private function_61f5d33a(localclientnum, clientdata, networkid) {
   return model;
 }
 
-private function_237888bb(localclientnum) {
-
+function_237888bb(localclientnum) {
   if(getdvarint(#"scr_looter", 0)) {
     return true;
   }
 
-    if(self hasperk(localclientnum, #"specialty_looter")) {
-      return true;
-    }
+  if(self hasperk(localclientnum, # "specialty_looter")) {
+    return true;
+  }
 
   return false;
 }
 
-private function_78bf134c(localclientnum, clientdata, networkid, model, itementry) {
+function_78bf134c(localclientnum, clientdata, networkid, model, itementry) {
   if(!isDefined(model)) {
     return;
   }
 
   player = function_5c10bd79(localclientnum);
-  renderbundle = #"hash_29dbf9ddda64fc5a";
+  renderbundle = # "hash_29dbf9ddda64fc5a";
 
   if(isDefined(itementry)) {
     switch (itementry.rarity) {
-      case #"none":
-        if(isDefined(itementry.unlockableitemref) && itementry.itemtype != #"weapon") {
-          renderbundle = #"hash_6f1ab68ac78ac2ea";
+      case # "none":
+        if(isDefined(itementry.unlockableitemref) && itementry.itemtype != # "weapon") {
+          renderbundle = # "hash_6f1ab68ac78ac2ea";
           break;
         }
-      case #"common":
-        renderbundle = #"hash_29dbf9ddda64fc5a";
+      case # "common":
+        renderbundle = # "hash_29dbf9ddda64fc5a";
         break;
-      case #"rare":
-        renderbundle = #"hash_6e89d52c60dd7fc3";
+      case # "rare":
+        renderbundle = # "hash_6e89d52c60dd7fc3";
         break;
-      case #"epic":
-        renderbundle = #"hash_4cf701d23a7301d2";
+      case # "epic":
+        renderbundle = # "hash_4cf701d23a7301d2";
         break;
-      case #"legendary":
-        renderbundle = #"hash_4368c406e6a21060";
+      case # "legendary":
+        renderbundle = # "hash_4368c406e6a21060";
         break;
     }
 
-    if(itementry.itemtype == #"resource") {
-      renderbundle = #"hash_2f523d47697a9ce3";
-    } else if(itementry.itemtype == #"cash") {
-      renderbundle = #"hash_5fbd33a25f74ddf0";
+    if(itementry.itemtype == # "resource") {
+      renderbundle = # "hash_2f523d47697a9ce3";
+    } else if(itementry.itemtype == # "cash") {
+      renderbundle = # "hash_5fbd33a25f74ddf0";
     }
 
     if(isDefined(itementry.wallbuyitem) && itementry.wallbuyitem) {
-      renderbundle = #"hash_52f7937d76fafca0";
+      renderbundle = # "hash_52f7937d76fafca0";
     }
   } else {
-    if(model.targetname === #"wz_stash_blackjack") {
-      renderbundle = #"hash_71bb09e5b3013952";
+    if(model.targetname === # "wz_stash_blackjack") {
+      renderbundle = # "hash_71bb09e5b3013952";
     }
 
     if(isDefined(model.var_bad13452)) {
@@ -364,13 +362,13 @@ private function_78bf134c(localclientnum, clientdata, networkid, model, itementr
 
   if(isDefined(networkid) && isDefined(clientdata) && isDefined(clientdata.var_ffc1c0e1)) {
     if(isDefined(clientdata.var_ffc1c0e1[networkid]) && clientdata.var_ffc1c0e1[networkid].servertime > getservertime(localclientnum, 1)) {
-      renderbundle = #"hash_3d6eb4b9bbc74fbd";
+      renderbundle = # "hash_3d6eb4b9bbc74fbd";
 
       if(isDefined(itementry)) {
-        if(itementry.rarity == #"epic") {
-          renderbundle = #"hash_269ac932c6e6b81f";
+        if(itementry.rarity == # "epic") {
+          renderbundle = # "hash_269ac932c6e6b81f";
         } else if(isDefined(itementry.unlockableitemref)) {
-          renderbundle = #"hash_12076df5fcd3d751";
+          renderbundle = # "hash_12076df5fcd3d751";
         }
       }
     }
@@ -403,7 +401,7 @@ private function_78bf134c(localclientnum, clientdata, networkid, model, itementr
   }
 }
 
-private function_3bd99d2f(localclientnum, clientdata, vehicle, clear = 0) {
+function_3bd99d2f(localclientnum, clientdata, vehicle, clear = 0) {
   if(!isDefined(vehicle)) {
     return;
   }
@@ -413,7 +411,7 @@ private function_3bd99d2f(localclientnum, clientdata, vehicle, clear = 0) {
     return;
   }
 
-  renderbundle = #"hash_3d6eb4b9bbc74fbd";
+  renderbundle = # "hash_3d6eb4b9bbc74fbd";
 
   if(!vehicle function_d2503806(renderbundle)) {
     vehicle playrenderoverridebundle(renderbundle);
@@ -422,7 +420,7 @@ private function_3bd99d2f(localclientnum, clientdata, vehicle, clear = 0) {
   vehicle.var_2584a90d = renderbundle;
 }
 
-private _draw(localclientnum, draworigin) {
+_draw(localclientnum, draworigin) {
   self endon(#"shutdown");
   clientdata = function_a7e98a1a(localclientnum);
 
@@ -509,7 +507,7 @@ private _draw(localclientnum, draworigin) {
       model function_e082e650(localclientnum, item, function_78a9fd5f(item), item.itementry.modelscale);
       shouldshow = item_world_util::function_da09de95(item.networkid) && item_world_util::can_pick_up(item, servertime);
       shouldshow |= item.networkid < function_8322cf16() && item_world_util::can_pick_up(function_b1702735(item.networkid), servertime);
-      shouldshow &= !(isDefined(item.type) && item.type === #"missile");
+      shouldshow &= !(isDefined(item.type) && item.type === # "missile");
 
       if(shouldshow) {
         model show();
@@ -636,7 +634,7 @@ private _draw(localclientnum, draworigin) {
 
       model = isDefined(item.networkid) ? clientdata.modellist[item.networkid] : item;
 
-      if(isDefined(item.type) && item.type === #"missile") {
+      if(isDefined(item.type) && item.type === # "missile") {
         model = item;
       }
 
@@ -654,14 +652,14 @@ private _draw(localclientnum, draworigin) {
   clientdata.drawing = undefined;
 }
 
-private function_78a9fd5f(point) {
+function_78a9fd5f(point) {
   if(!isDefined(level.var_8c615e33)) {
     level.var_8c615e33 = [];
   }
 
-  if(!isstruct(point) && isDefined(point.type == #"scriptmover") && isDefined(point.itementry.dropmodel) && point getentitynumber() < 1024) {
-    if(isDefined(point.itementry.weapon) && point.itementry.weapon.name == #"waterballoon") {
-      var_af7d7388 = array(#"hash_7306b72d120049f8", #"hash_27ae7cb403d5365b", #"hash_6add258ae958d31c", #"hash_6eb8f7ceb4627d9f", #"hash_228bf15c70137b61", #"hash_10c0ee53a36783e9");
+  if(!isstruct(point) && isDefined(point.type == # "scriptmover") && isDefined(point.itementry.dropmodel) && point getentitynumber() < 1024) {
+    if(isDefined(point.itementry.weapon) && point.itementry.weapon.name == # "waterballoon") {
+      var_af7d7388 = array(#"hash_7306b72d120049f8", # "hash_27ae7cb403d5365b", # "hash_6add258ae958d31c", # "hash_6eb8f7ceb4627d9f", # "hash_228bf15c70137b61", # "hash_10c0ee53a36783e9");
       return var_af7d7388[randomintrange(0, var_af7d7388.size)];
     }
 
@@ -681,15 +679,15 @@ private function_78a9fd5f(point) {
   return level.var_8c615e33[point.itementry.name];
 }
 
-private function_8cf40a8c(localclientnum) {
+function_8cf40a8c(localclientnum) {
   return getcamposbylocalclientnum(localclientnum);
 }
 
-private function_9e4552fe(var_fee74908) {
+function_9e4552fe(var_fee74908) {
   level thread function_37175e73(var_fee74908);
 }
 
-private function_9160538(localclientnum, eventtype, eventdata, var_c5a66313, var_567004a8) {
+function_9160538(localclientnum, eventtype, eventdata, var_c5a66313, var_567004a8) {
   waitframe(1);
   reset = isDefined(level flagsys::get(#"item_world_reset")) && level flagsys::get(#"item_world_reset");
 
@@ -870,7 +868,7 @@ private function_9160538(localclientnum, eventtype, eventdata, var_c5a66313, var
   }
 }
 
-private function_60386766(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+function_60386766(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   level flagsys::wait_till(#"item_world_initialized");
 
   foreach(supply_stash in level.item_spawn_stashes) {
@@ -878,7 +876,7 @@ private function_60386766(localclientnum, oldval, newval, bnewent, binitialsnap,
   }
 }
 
-private function_4e9220ab(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+function_4e9220ab(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     waitframe(1);
 
@@ -898,7 +896,7 @@ private function_4e9220ab(localclientnum, oldval, newval, bnewent, binitialsnap,
     }
 
     seed = newval >> 1;
-    reset = newval&1;
+    reset = newval & 1;
     level.item_spawn_seed = seed;
 
     if(isdemoplaying() && !reset) {
@@ -957,46 +955,45 @@ private function_4e9220ab(localclientnum, oldval, newval, bnewent, binitialsnap,
   }
 }
 
-private function_e2e7ee77(localclientnum) {
+function_e2e7ee77(localclientnum) {
   self function_198ac8a(localclientnum);
   self function_e1f6ddbf(localclientnum);
 }
 
-private function_198ac8a(localclientnum) {
-  setting = function_ab88dbd2(localclientnum, #"warzoneinstantpickups");
+function_198ac8a(localclientnum) {
+  setting = function_ab88dbd2(localclientnum, # "warzoneinstantpickups");
 
   if(isDefined(setting)) {
     function_97fedb0d(localclientnum, 1, setting);
   }
 }
 
-private function_e1f6ddbf(localclientnum) {
-  setting = function_ab88dbd2(localclientnum, #"warzoneprioritypickups");
+function_e1f6ddbf(localclientnum) {
+  setting = function_ab88dbd2(localclientnum, # "warzoneprioritypickups");
 
   if(isDefined(setting)) {
     function_97fedb0d(localclientnum, 2, setting);
   }
 }
 
-private _on_localclient_connect(localclientnum) {
+_on_localclient_connect(localclientnum) {
   function_952d97dc(localclientnum);
   self function_e2e7ee77(localclientnum);
 }
 
-private _on_localplayer_spawned(localclientnum) {
-
+_on_localplayer_spawned(localclientnum) {
   self thread function_cdd9b388();
 
-    if(self function_21c0fa55()) {
-      self function_e2e7ee77(localclientnum);
-      self thread _update_loop(localclientnum);
-      level callback::function_6231c19(&item_inventory::function_6231c19);
-    }
+  if(self function_21c0fa55()) {
+    self function_e2e7ee77(localclientnum);
+    self thread _update_loop(localclientnum);
+    level callback::function_6231c19(&item_inventory::function_6231c19);
+  }
 }
 
-private function_192b39cd(localclientnum) {
+function_192b39cd(localclientnum) {
   if(self function_da43934d()) {
-    var_db6db8ba = self hasperk(localclientnum, #"specialty_looter");
+    var_db6db8ba = self hasperk(localclientnum, # "specialty_looter");
     var_de744098 = self.var_db6db8ba !== var_db6db8ba;
 
     if(var_de744098) {
@@ -1007,7 +1004,7 @@ private function_192b39cd(localclientnum) {
   }
 }
 
-private _set_weapon(localclientnum, item) {
+_set_weapon(localclientnum, item) {
   if(isDefined(item) && isDefined(item.itementry.weapon) && !isDefined(item.itementry.model) && isDefined(item.itementry.weapon.worldmodel)) {
     weapon = item_inventory_util::function_2b83d3ff(item);
     camoweapon = undefined;
@@ -1043,7 +1040,7 @@ private _set_weapon(localclientnum, item) {
   return 0;
 }
 
-private function_e082e650(localclientnum, item, newmodel, scale) {
+function_e082e650(localclientnum, item, newmodel, scale) {
   if(newmodel === self.model) {
     if(!isDefined(item) && self.weapon == level.weaponnone) {
       return;
@@ -1062,7 +1059,7 @@ private function_e082e650(localclientnum, item, newmodel, scale) {
   }
 }
 
-private function_96fa1c6d(localclientnum) {
+function_96fa1c6d(localclientnum) {
   clientdata = function_a7e98a1a(localclientnum);
 
   if(isDefined(clientdata.drawing) && clientdata.drawing) {
@@ -1097,7 +1094,7 @@ private function_96fa1c6d(localclientnum) {
   return false;
 }
 
-private function_c7e5c26(localclientnum) {
+function_c7e5c26(localclientnum) {
   clientdata = function_a7e98a1a(localclientnum);
 
   if(isDefined(clientdata.var_a4ad122e) && clientdata.var_a4ad122e) {
@@ -1107,7 +1104,7 @@ private function_c7e5c26(localclientnum) {
   return true;
 }
 
-private function_34418003(localclientnum, eyepos, angles) {
+function_34418003(localclientnum, eyepos, angles) {
   clientdata = function_a7e98a1a(localclientnum);
 
   if(isDefined(clientdata.var_ff9e7e43) && clientdata.var_ff9e7e43) {
@@ -1118,7 +1115,7 @@ private function_34418003(localclientnum, eyepos, angles) {
   return false;
 }
 
-private function_5cbe24ea(&dest, &source, &order) {
+function_5cbe24ea(&dest, &source, &order) {
   items = [];
 
   foreach(item in source) {
@@ -1161,7 +1158,7 @@ private function_5cbe24ea(&dest, &source, &order) {
   }
 }
 
-private function_43d3ebe1(&items) {
+function_43d3ebe1(&items) {
   assert(isplayer(self));
 
   if(items.size <= 1) {
@@ -1215,38 +1212,38 @@ private function_43d3ebe1(&items) {
 
   waitframe(1);
 
-  if(isDefined(itemtypes[#"quest"])) {
-    foreach(entry in itemtypes[#"quest"]) {
+  if(isDefined(itemtypes[# "quest"])) {
+    foreach(entry in itemtypes[# "quest"]) {
       sorted[sorted.size] = entry;
     }
   }
 
-  if(isDefined(itemtypes[#"cash"])) {
-    foreach(entry in itemtypes[#"cash"]) {
+  if(isDefined(itemtypes[# "cash"])) {
+    foreach(entry in itemtypes[# "cash"]) {
       sorted[sorted.size] = entry;
     }
   }
 
-  if(isDefined(itemtypes[#"armor"])) {
-    function_5cbe24ea(sorted, itemtypes[#"armor"], level.var_69ee9282);
+  if(isDefined(itemtypes[# "armor"])) {
+    function_5cbe24ea(sorted, itemtypes[# "armor"], level.var_69ee9282);
     waitframe(1);
   }
 
-  if(isDefined(itemtypes[#"armor_shard"])) {
-    foreach(entry in itemtypes[#"armor_shard"]) {
+  if(isDefined(itemtypes[# "armor_shard"])) {
+    foreach(entry in itemtypes[# "armor_shard"]) {
       sorted[sorted.size] = entry;
     }
   }
 
-  if(isDefined(itemtypes[#"weapon"])) {
+  if(isDefined(itemtypes[# "weapon"])) {
     var_610b8743 = [];
 
-    foreach(item in itemtypes[#"weapon"]) {
+    foreach(item in itemtypes[# "weapon"]) {
       if(!isDefined(item)) {
         continue;
       }
 
-      if(item.itementry.rarity == #"epic") {
+      if(item.itementry.rarity == # "epic") {
         var_610b8743[var_610b8743.size] = item;
       }
     }
@@ -1257,15 +1254,15 @@ private function_43d3ebe1(&items) {
     }
   }
 
-  if(isDefined(itemtypes[#"weapon"])) {
+  if(isDefined(itemtypes[# "weapon"])) {
     weapons = [];
 
-    foreach(item in itemtypes[#"weapon"]) {
+    foreach(item in itemtypes[# "weapon"]) {
       if(!isDefined(item)) {
         continue;
       }
 
-      if(item.itementry.rarity != #"epic") {
+      if(item.itementry.rarity != # "epic") {
         weapons[weapons.size] = item;
       }
     }
@@ -1276,45 +1273,45 @@ private function_43d3ebe1(&items) {
     }
   }
 
-  if(isDefined(itemtypes[#"health"])) {
-    function_5cbe24ea(sorted, itemtypes[#"health"], level.var_9bc8c1bc);
+  if(isDefined(itemtypes[# "health"])) {
+    function_5cbe24ea(sorted, itemtypes[# "health"], level.var_9bc8c1bc);
     waitframe(1);
   }
 
-  if(isDefined(itemtypes[#"backpack"])) {
-    foreach(entry in itemtypes[#"backpack"]) {
+  if(isDefined(itemtypes[# "backpack"])) {
+    foreach(entry in itemtypes[# "backpack"]) {
       sorted[sorted.size] = entry;
     }
   }
 
-  if(isDefined(itemtypes[#"attachment"])) {
-    function_5cbe24ea(sorted, itemtypes[#"attachment"], level.var_6cb314b1);
+  if(isDefined(itemtypes[# "attachment"])) {
+    function_5cbe24ea(sorted, itemtypes[# "attachment"], level.var_6cb314b1);
     waitframe(1);
   }
 
-  if(isDefined(itemtypes[#"killstreak"])) {
-    foreach(entry in itemtypes[#"killstreak"]) {
+  if(isDefined(itemtypes[# "killstreak"])) {
+    foreach(entry in itemtypes[# "killstreak"]) {
       sorted[sorted.size] = entry;
     }
   }
 
-  if(isDefined(itemtypes[#"equipment"])) {
-    function_5cbe24ea(sorted, itemtypes[#"equipment"], level.var_3fd5d8f0);
+  if(isDefined(itemtypes[# "equipment"])) {
+    function_5cbe24ea(sorted, itemtypes[# "equipment"], level.var_3fd5d8f0);
     waitframe(1);
   }
 
-  if(isDefined(itemtypes[#"generic"])) {
-    function_5cbe24ea(sorted, itemtypes[#"generic"], level.var_683c7e30);
+  if(isDefined(itemtypes[# "generic"])) {
+    function_5cbe24ea(sorted, itemtypes[# "generic"], level.var_683c7e30);
     waitframe(1);
   }
 
-  if(isDefined(itemtypes[#"ammo"])) {
-    function_5cbe24ea(sorted, itemtypes[#"ammo"], level.var_418d51ad);
+  if(isDefined(itemtypes[# "ammo"])) {
+    function_5cbe24ea(sorted, itemtypes[# "ammo"], level.var_418d51ad);
     waitframe(1);
   }
 
-  if(isDefined(itemtypes[#"resource"])) {
-    foreach(entry in itemtypes[#"resource"]) {
+  if(isDefined(itemtypes[# "resource"])) {
+    foreach(entry in itemtypes[# "resource"]) {
       sorted[sorted.size] = entry;
     }
   }
@@ -1322,7 +1319,7 @@ private function_43d3ebe1(&items) {
   return sorted;
 }
 
-private function_b21002cb(localclientnum, objid, obj, objstate) {
+function_b21002cb(localclientnum, objid, obj, objstate) {
   if(obj.type === "scriptmover" || obj.type === "missile") {
     objective_onentity(localclientnum, objid, obj, 0, 0, 0);
   } else {
@@ -1334,7 +1331,7 @@ private function_b21002cb(localclientnum, objid, obj, objstate) {
   objective_setstate(localclientnum, objid, "active");
 }
 
-private function_c3f5f99b(localclientnum, objid, obj) {
+function_c3f5f99b(localclientnum, objid, obj) {
   objective_setstate(localclientnum, objid, "invisible");
   objective_setgamemodeflags(localclientnum, objid, 0);
 
@@ -1349,7 +1346,7 @@ private function_c3f5f99b(localclientnum, objid, obj) {
   }
 }
 
-private function_b0af857f(localclientnum) {
+function_b0af857f(localclientnum) {
   self endon(#"death");
   clientdata = function_a7e98a1a(localclientnum);
   clientdata.var_a4ad122e = 1;
@@ -1443,7 +1440,7 @@ private function_b0af857f(localclientnum) {
   clientdata.var_a4ad122e = 0;
 }
 
-private function_802915bc(localclientnum) {
+function_802915bc(localclientnum) {
   if(!isDefined(level.var_62c91473) || !isDefined(level.var_62c91473[localclientnum])) {
     return;
   }
@@ -1452,11 +1449,11 @@ private function_802915bc(localclientnum) {
 
   if(isDefined(self.var_9b882d22) && self.var_9b882d22.var_5d97fed1) {
     var_1ba7b9c8 = arraysortclosest(level.var_624588d5, self.var_9b882d22.origin, 1, 0, 12);
-    hinttext = #"wz/supply_stash";
+    hinttext = # "wz/supply_stash";
 
     if(var_1ba7b9c8.size > 0) {
       isdeathstash = var_1ba7b9c8[0].stash_type === 2;
-      hinttext = isdeathstash ? #"wz/death_stash" : #"wz/supply_drop";
+      hinttext = isdeathstash ? # "wz/death_stash" : # "wz/supply_drop";
     } else {
       var_1ba7b9c8 = arraysortclosest(level.item_spawn_stashes, self.var_9b882d22.origin, 1, 0, 12);
 
@@ -1477,10 +1474,10 @@ private function_802915bc(localclientnum) {
     return;
   }
 
-  setuimodelvalue(level.var_62c91473[localclientnum], #"");
+  setuimodelvalue(level.var_62c91473[localclientnum], # "");
 }
 
-private function_eb396946(localclientnum) {
+function_eb396946(localclientnum) {
   if(isDefined(self)) {
     var_f4b807cb = function_2e3efdda(self.origin, undefined, level.var_c102677c, 256, -1, 0);
 
@@ -1499,7 +1496,7 @@ private function_eb396946(localclientnum) {
       }
 
       if(isDefined(item.itementry)) {
-        if(item.itementry.itemtype == #"weapon") {
+        if(item.itementry.itemtype == # "weapon") {
           if(isDefined(item.weapon) && item.weapon != level.weaponnone && item.weapon !== item.itementry.weapon) {
             camoweapon = activecamo::function_385ef18d(item.weapon);
             weaponoptions = self getbuildkitweaponoptions(localclientnum, camoweapon);
@@ -1517,7 +1514,7 @@ private function_eb396946(localclientnum) {
           continue;
         }
 
-        if(item.itementry.itemtype == #"attachment") {
+        if(item.itementry.itemtype == # "attachment") {
           if(isDefined(item.itementry.attachments)) {
             foreach(attachment in item.itementry.attachments) {
               if(isDefined(attachment.attachment_type)) {
@@ -1568,7 +1565,7 @@ private function_eb396946(localclientnum) {
   }
 }
 
-private function_48ec057f(localclientnum) {
+function_48ec057f(localclientnum) {
   clientdata = function_a7e98a1a(localclientnum);
 
   if(!isDefined(clientdata)) {
@@ -1608,7 +1605,7 @@ private function_48ec057f(localclientnum) {
   clientdata.var_baf65690 = var_bf2d48f6;
 }
 
-private _update_loop(localclientnum) {
+_update_loop(localclientnum) {
   self endon(#"shutdown");
   self notify("787a164bb0bf6bcf");
   self endon("787a164bb0bf6bcf");
@@ -1636,7 +1633,7 @@ private _update_loop(localclientnum) {
   }
 }
 
-private function_48ca0bbb(localclientnum) {
+function_48ca0bbb(localclientnum) {
   var_da43934d = self function_da43934d();
 
   if(var_da43934d) {
@@ -1648,25 +1645,25 @@ private function_48ca0bbb(localclientnum) {
       var_77055f15 = 0;
       var_fa3df96 = undefined;
 
-      if(itementry.itemtype == #"ammo" && !item_inventory::can_pickup_ammo(localclientnum, self.var_9b882d22)) {
+      if(itementry.itemtype == # "ammo" && !item_inventory::can_pickup_ammo(localclientnum, self.var_9b882d22)) {
         var_77055f15 = 64;
       } else if(item_inventory::function_a243ddd6(localclientnum, itementry)) {
         var_77055f15 = 1;
 
-        if(itementry.itemtype == #"attachment") {
+        if(itementry.itemtype == # "attachment") {
           var_77055f15 = 1;
 
           if(item_inventory::function_ad4c6116(localclientnum, itementry)) {
             var_77055f15 |= 32;
           }
-        } else if(itementry.itemtype == #"weapon") {
+        } else if(itementry.itemtype == # "weapon") {
           var_a4250c2b = self item_inventory::function_d768ea30(localclientnum);
 
           if(item_inventory_util::function_4bd83c04(self.var_9b882d22) && self item_inventory::has_attachments(localclientnum, var_a4250c2b)) {
             var_77055f15 |= 512;
           }
         }
-      } else if(itementry.itemtype == #"weapon") {
+      } else if(itementry.itemtype == # "weapon") {
         var_77055f15 = 2;
         var_a4250c2b = self item_inventory::function_d768ea30(localclientnum);
 
@@ -1679,7 +1676,7 @@ private function_48ca0bbb(localclientnum) {
         if(isDefined(var_fa3df96)) {
           var_77055f15 = 2;
 
-          if(itementry.itemtype == #"attachment") {
+          if(itementry.itemtype == # "attachment") {
             var_fa3df96 = undefined;
 
             if(item_inventory::function_ad4c6116(localclientnum, itementry)) {
@@ -1687,16 +1684,16 @@ private function_48ca0bbb(localclientnum) {
             }
           }
         } else if(!item_inventory::function_ad4c6116(localclientnum, itementry)) {
-          if(itementry.itemtype == #"resource" && item_world_util::function_41f06d9d(itementry)) {
+          if(itementry.itemtype == # "resource" && item_world_util::function_41f06d9d(itementry)) {
             var_77055f15 = 128;
           } else {
             var_77055f15 = 4;
           }
 
-          if(itementry.itemtype == #"equipment" || itementry.itemtype == #"health") {
+          if(itementry.itemtype == # "equipment" || itementry.itemtype == # "health") {
             var_77055f15 |= 1024;
           }
-        } else if(itementry.itemtype == #"equipment" || itementry.itemtype == #"health") {
+        } else if(itementry.itemtype == # "equipment" || itementry.itemtype == # "health") {
           if(item_inventory::function_ad4c6116(localclientnum, itementry)) {
             var_77055f15 |= 256;
           }
@@ -1717,19 +1714,19 @@ private function_48ca0bbb(localclientnum) {
 
       setuimodelvalue(level.var_7e2f5883[localclientnum], isDefined(var_fa3df96) ? var_fa3df96 : -1);
       setuimodelvalue(level.var_ce95aace[localclientnum], var_77055f15);
-      setuimodelvalue(level.var_19cf0be9[localclientnum], isDefined(pickupicon) ? pickupicon : #"blacktransparent");
+      setuimodelvalue(level.var_19cf0be9[localclientnum], isDefined(pickupicon) ? pickupicon : # "blacktransparent");
 
       if(self.var_9b882d22.var_5d97fed1) {
         function_b21002cb(localclientnum, level.var_383edf80, self.var_9b882d22, objstate);
         function_c3f5f99b(localclientnum, level.var_d9beffb9);
       } else if(self item_world_util::can_pick_up(self.var_9b882d22)) {
         hintstring = self function_2fc74639();
-        var_d1fce876 = #"";
+        var_d1fce876 = # "";
 
         if(isDefined(itementry.weapon)) {
           var_d1fce876 = itementry.weapon.displayname;
         } else {
-          var_d1fce876 = isDefined(itementry.hintstring) ? itementry.hintstring : #"";
+          var_d1fce876 = isDefined(itementry.hintstring) ? itementry.hintstring : # "";
         }
 
         if(var_d1fce876 == hintstring) {
@@ -1746,7 +1743,7 @@ private function_48ca0bbb(localclientnum) {
         }
       }
     } else {
-      setuimodelvalue(level.var_19cf0be9[localclientnum], #"blacktransparent");
+      setuimodelvalue(level.var_19cf0be9[localclientnum], # "blacktransparent");
       function_c3f5f99b(localclientnum, level.var_d9beffb9);
       function_c3f5f99b(localclientnum, level.var_383edf80);
     }
@@ -1757,7 +1754,7 @@ private function_48ca0bbb(localclientnum) {
   }
 }
 
-private function_94db1536(localclientnum, origin, angles, maxdist = undefined) {
+function_94db1536(localclientnum, origin, angles, maxdist = undefined) {
   assert(isplayer(self));
   clientdata = function_a7e98a1a(localclientnum);
   forward = vectornormalize(anglesToForward(angles));
@@ -1767,12 +1764,12 @@ private function_94db1536(localclientnum, origin, angles, maxdist = undefined) {
   }
 
   var_f4b807cb = function_2e3efdda(origin, forward, 128, maxdist, 0);
-  var_4bd72bfe = function_ab88dbd2(localclientnum, #"warzoneprioritypickups");
+  var_4bd72bfe = function_ab88dbd2(localclientnum, # "warzoneprioritypickups");
   var_9b882d22 = item_world_util::function_6061a15(var_f4b807cb, maxdist, origin, angles, forward, var_4bd72bfe, 1);
   return var_9b882d22;
 }
 
-private function_c5b6693a() {
+function_c5b6693a() {
   item = spawnStruct();
   item.amount = 0;
   item.count = 0;
@@ -1783,7 +1780,7 @@ private function_c5b6693a() {
   return item;
 }
 
-private function_7c84312d(localclientnum, origin, angles) {
+function_7c84312d(localclientnum, origin, angles) {
   assert(isplayer(self));
   clientdata = function_a7e98a1a(localclientnum);
 
@@ -1809,7 +1806,7 @@ private function_7c84312d(localclientnum, origin, angles) {
   self item_inventory::function_9116bb0e(localclientnum);
 }
 
-private function_83e328e1(var_78ddf4e2, newitems) {
+function_83e328e1(var_78ddf4e2, newitems) {
   if(!isDefined(var_78ddf4e2)) {
     return newitems;
   }
@@ -1863,7 +1860,7 @@ private function_83e328e1(var_78ddf4e2, newitems) {
   return newitems;
 }
 
-private function_1b42632a(localclientnum, clientdata, var_2ccf7a1c) {
+function_1b42632a(localclientnum, clientdata, var_2ccf7a1c) {
   var_f0a9e97d = undefined;
   var_e7349b30 = undefined;
 
@@ -1910,7 +1907,7 @@ function_347698a5(localclientnum, networkid, var_2ccf7a1c) {
   function_1b42632a(localclientnum, clientdata, var_2ccf7a1c);
   endtime = getservertime(localclientnum, 1) + 60000;
   clientdata.var_ffc1c0e1[networkid] = {
-    #servertime: endtime, 
+    #servertime: endtime,
     #var_2ccf7a1c: var_2ccf7a1c
   };
   model = function_61f5d33a(localclientnum, clientdata, networkid);
@@ -1925,7 +1922,7 @@ function_d2f95c1a(localclientnum, vehicleentnum, var_2ccf7a1c) {
   function_1b42632a(localclientnum, clientdata, var_2ccf7a1c);
   endtime = getservertime(localclientnum, 1) + 60000;
   clientdata.var_baf65690[vehicleentnum] = {
-    #servertime: endtime, 
+    #servertime: endtime,
     #var_2ccf7a1c: var_2ccf7a1c
   };
   vehicle = getentbynum(localclientnum, vehicleentnum);
@@ -2094,12 +2091,12 @@ function_28b42f1c(localclientnum, networkid) {
 
 get_item_name(item) {
   if(isDefined(item.weapon)) {
-    if(item.weapon.displayname != #"") {
+    if(item.weapon.displayname != # "") {
       return item.weapon.displayname;
     }
   }
 
-  return isDefined(item.displayname) ? item.displayname : #"";
+  return isDefined(item.displayname) ? item.displayname : # "";
 }
 
 function_2e3efdda(origin, dir, maxitems, maxdistance, dot, var_653b55e5 = 0) {

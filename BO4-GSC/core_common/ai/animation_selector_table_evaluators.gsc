@@ -4,7 +4,6 @@
 ******************************************************************/
 
 #include scripts\core_common\ai\systems\animation_selector_table;
-
 #namespace animation_selector_table_evaluators;
 
 autoexec registerastscriptfunctions() {
@@ -23,7 +22,7 @@ testfunction(entity, animations) {
   }
 }
 
-private function_aa7530df(entity, animation) {
+function_aa7530df(entity, animation) {
   pixbeginevent(#"evaluator_checkanimationagainstgeo");
   assert(isactor(entity));
   forwarddir = anglesToForward(entity.angles);
@@ -43,13 +42,13 @@ private function_aa7530df(entity, animation) {
   return false;
 }
 
-private evaluatejukeblockedanimations(entity, animations) {
+evaluatejukeblockedanimations(entity, animations) {
   if(animations.size > 0) {
     return evaluator_findfirstvalidanimation(entity, animations, array(&evaluator_checkanimationagainstnavmesh, &function_aa7530df, &evaluator_checkanimationforovershootinggoal));
   }
 }
 
-private evaluator_checkanimationagainstgeo(entity, animation) {
+evaluator_checkanimationagainstgeo(entity, animation) {
   pixbeginevent(#"evaluator_checkanimationagainstgeo");
   assert(isactor(entity));
   localdeltahalfvector = getmovedelta(animation, 0, 0.5, entity);
@@ -75,7 +74,7 @@ private evaluator_checkanimationagainstgeo(entity, animation) {
   return false;
 }
 
-private evaluator_checkanimationendpointagainstgeo(entity, animation) {
+evaluator_checkanimationendpointagainstgeo(entity, animation) {
   pixbeginevent(#"evaluator_checkanimationendpointagainstgeo");
   assert(isactor(entity));
   localdeltavector = getmovedelta(animation, 0, 1, entity);
@@ -91,7 +90,7 @@ private evaluator_checkanimationendpointagainstgeo(entity, animation) {
   return false;
 }
 
-private evaluator_checkanimationforovershootinggoal(entity, animation) {
+evaluator_checkanimationforovershootinggoal(entity, animation) {
   pixbeginevent(#"evaluator_checkanimationforovershootinggoal");
   assert(isactor(entity));
   localdeltavector = getmovedelta(animation, 0, 1, entity);
@@ -116,7 +115,7 @@ private evaluator_checkanimationforovershootinggoal(entity, animation) {
   return false;
 }
 
-private evaluator_checkanimationagainstnavmesh(entity, animation) {
+evaluator_checkanimationagainstnavmesh(entity, animation) {
   assert(isactor(entity));
   localdeltavector = getmovedelta(animation, 0, 1, entity);
   endpoint = entity localtoworldcoords(localdeltavector);
@@ -130,7 +129,7 @@ private evaluator_checkanimationagainstnavmesh(entity, animation) {
   return false;
 }
 
-private evaluator_checkanimationarrivalposition(entity, animation) {
+evaluator_checkanimationarrivalposition(entity, animation) {
   localdeltavector = getmovedelta(animation, 0, 1, entity);
   endpoint = entity localtoworldcoords(localdeltavector);
   animdistsq = lengthsquared(localdeltavector);
@@ -151,7 +150,7 @@ private evaluator_checkanimationarrivalposition(entity, animation) {
   return false;
 }
 
-private evaluator_findfirstvalidanimation(entity, animations, tests) {
+evaluator_findfirstvalidanimation(entity, animations, tests) {
   assert(isarray(animations), "<dev string:x75>");
   assert(isarray(tests), "<dev string:xb5>");
 
@@ -176,7 +175,7 @@ private evaluator_findfirstvalidanimation(entity, animations, tests) {
   }
 }
 
-private evaluateblockedanimations(entity, animations) {
+evaluateblockedanimations(entity, animations) {
   if(animations.size > 0) {
     return evaluator_findfirstvalidanimation(entity, animations, array(&evaluator_checkanimationagainstnavmesh, &evaluator_checkanimationforovershootinggoal));
   }
@@ -184,7 +183,7 @@ private evaluateblockedanimations(entity, animations) {
   return undefined;
 }
 
-private evaluateblockedanimationsrelaxed(entity, animations) {
+evaluateblockedanimationsrelaxed(entity, animations) {
   if(animations.size > 0) {
     return evaluator_findfirstvalidanimation(entity, animations, array(&evaluator_checkanimationforovershootinggoal));
   }
@@ -192,7 +191,7 @@ private evaluateblockedanimationsrelaxed(entity, animations) {
   return undefined;
 }
 
-private evaluateblockedanimationsoffnavmesh(entity, animations) {
+evaluateblockedanimationsoffnavmesh(entity, animations) {
   if(animations.size > 0) {
     return evaluator_findfirstvalidanimation(entity, animations, array(&evaluator_checkanimationagainstgeo));
   }
@@ -200,7 +199,7 @@ private evaluateblockedanimationsoffnavmesh(entity, animations) {
   return undefined;
 }
 
-private evaluatehumanturnanimations(entity, animations) {
+evaluatehumanturnanimations(entity, animations) {
   if(isDefined(level.ai_dontturn) && level.ai_dontturn) {
     return undefined;
   }
@@ -214,7 +213,7 @@ private evaluatehumanturnanimations(entity, animations) {
   return undefined;
 }
 
-private evaluatehumanexposedarrivalanimations(entity, animations) {
+evaluatehumanexposedarrivalanimations(entity, animations) {
   if(!isDefined(entity.pathgoalpos)) {
     return undefined;
   }

@@ -64,10 +64,10 @@ main() {
   spawncollision("collision_clip_32x32x32", "collider", (223.5, 3528, 132), (0, 0, 0));
   rock1 = spawn("script_model", (61.6428, 2656.92, 253.46));
   rock1.angles = (288.55, 212.152, -86.8076);
-  rock1 setmodel("p6_rocks_medium_01_nospec");
+  rock1 setModel("p6_rocks_medium_01_nospec");
   rock2 = spawn("script_model", (30.64, 2652, 277.89));
   rock2.angles = (352.368, 229.531, -57.337);
-  rock2 setmodel("p6_rocks_medium_01_nospec");
+  rock2 setModel("p6_rocks_medium_01_nospec");
   spawncollision("collision_clip_wall_64x64x10", "collider", (42.5, 2573.5, 334), vectorscale((0, 1, 0), 319.3));
   spawncollision("collision_clip_wall_64x64x10", "collider", (91, 2569, 334), vectorscale((0, 1, 0), 3.59998));
   spawncollision("collision_clip_wall_64x64x10", "collider", (60.5, 2610, 368.5), (3.43509, 325.664, -77.5079));

@@ -14,16 +14,16 @@
 #namespace zm_bgb_projectile_vomiting;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_projectile_vomiting", & __init__, undefined, "bgb");
+  system::register("zm_bgb_projectile_vomiting", &__init__, undefined, "bgb");
 }
 
 function __init__() {
-  if(!(isdefined(level.bgb_in_use) && level.bgb_in_use)) {
+  if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
   clientfield::register("actor", "projectile_vomit", 12000, 1, "counter");
-  bgb::register("zm_bgb_projectile_vomiting", "rounds", 5, & enable, & disable, undefined);
-  bgb::register_actor_death_override("zm_bgb_projectile_vomiting", & actor_death_override);
+  bgb::register("zm_bgb_projectile_vomiting", "rounds", 5, &enable, &disable, undefined);
+  bgb::register_actor_death_override("zm_bgb_projectile_vomiting", &actor_death_override);
 }
 
 function enable() {}
@@ -31,7 +31,7 @@ function enable() {}
 function disable() {}
 
 function actor_death_override(attacker) {
-  if(isdefined(self.damagemod)) {
+  if(isDefined(self.damagemod)) {
     switch (self.damagemod) {
       case "MOD_EXPLOSIVE":
       case "MOD_GRENADE":

@@ -129,10 +129,10 @@ tread(localclientnum, tagname, side, relativeoffset) {
 
     if(treadfx != -1) {
       ang = self gettagangles(tagname);
-      forwardvec = anglestoforward(ang);
+      forwardvec = anglesToForward(ang);
       effectorigin = self gettagorigin(tagname);
       forwardvec = vectorscale(forwardvec, waittime);
-      playfx(localclientnum, treadfx, effectorigin, (0, 0, 0) - forwardvec);
+      playFX(localclientnum, treadfx, effectorigin, (0, 0, 0) - forwardvec);
     }
   }
 }
@@ -174,12 +174,12 @@ playtankexhaust(localclientnum) {
     tag_left_angles = self gettagangles("tag_engine_left");
 
     if(self getspeed() > 0) {
-      playfx(localclientnum, level.vehicle_exhaust[self.model].exhaust_fx, tag_left_orig, anglestoforward(tag_left_angles));
+      playFX(localclientnum, level.vehicle_exhaust[self.model].exhaust_fx, tag_left_orig, anglesToForward(tag_left_angles));
 
       if(!level.vehicle_exhaust[self.model].one_exhaust) {
         tag_right_orig = self gettagorigin("tag_engine_right");
         tag_right_angles = self gettagangles("tag_engine_right");
-        playfx(localclientnum, level.vehicle_exhaust[self.model].exhaust_fx, tag_right_orig, anglestoforward(tag_right_angles));
+        playFX(localclientnum, level.vehicle_exhaust[self.model].exhaust_fx, tag_right_orig, anglesToForward(tag_right_angles));
       }
     }
 
@@ -193,7 +193,7 @@ build_exhaust(model, effect, one_exhaust) {
   if(!isDefined(level.vehicle_exhaust))
     level.vehicle_exhaust = [];
 
-  level.vehicle_exhaust[model] = spawnstruct();
+  level.vehicle_exhaust[model] = spawnStruct();
   level.vehicle_exhaust[model].exhaust_fx = loadfx(effect);
 
   if(isDefined(one_exhaust) && one_exhaust)
@@ -215,7 +215,7 @@ build_gear(vehicletype, model, tag) {
 }
 
 build_quake(scale, duration, radius, basetime, randomaditionaltime) {
-  struct = spawnstruct();
+  struct = spawnStruct();
   struct.scale = scale;
   struct.duration = duration;
   struct.radius = radius;
@@ -252,5 +252,4 @@ set_static_amount(staticamount) {
   }
 }
 
-vehicle_variants(localclientnum) {
-}
+vehicle_variants(localclientnum) {}

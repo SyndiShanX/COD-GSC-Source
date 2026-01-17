@@ -67,9 +67,9 @@ turnSwitchPanelGreen() {
 door_switch_func() {
   level._door_switch_trig1 thread door_switch_setup();
   level._door_switch_trig2 thread door_switch_setup();
-  cooldown_switches = GetEntArray("off_trigger", "targetname");
+  cooldown_switches = getEntArray("off_trigger", "targetname");
   AssertEx(cooldown_switches.size > 0, "Missing off_triggers");
-  for (i = 0; i < cooldown_switches.size; i++) {
+  for(i = 0; i < cooldown_switches.size; i++) {
     cooldown_switches[i] UseTriggerRequireLookAt();
     cooldown_switches[i] SetCursorHint("HINT_NOICON");
     cooldown_switches[i] SetHintString(&"MP_HOLD_DOOR_SWITCH_UNAVAILABLE");
@@ -89,19 +89,19 @@ door_switch_func() {
   snd_door_status = 0;
   light_structs = getstructarray("switch_struct", "targetname");
   AssertEx(light_structs.size > 0, "Missing light structs");
-  for (i = 0; i < light_structs.size; i++) {
+  for(i = 0; i < light_structs.size; i++) {
     light_structs[i] thread switch_lights(i);
   }
   tunnel_structs = getstructarray("tunnel_light_spot", "targetname");
   AssertEx(tunnel_structs.size > 0, "Missing light structs");
-  for (i = 0; i < light_structs.size; i++) {
+  for(i = 0; i < light_structs.size; i++) {
     tunnel_structs[i] thread tunnel_lights(i);
   }
-  while (!level.wagermatch) {
+  while(!level.wagermatch) {
     waittill_any_ents(level._door_switch_trig1, "trigger", level._door_switch_trig2, "trigger");
     level._door_switch_trig1 trigger_off();
     level._door_switch_trig2 trigger_off();
-    for (i = 0; i < cooldown_switches.size; i++) {
+    for(i = 0; i < cooldown_switches.size; i++) {
       cooldown_switches[i] trigger_on();
     }
     door_time = set_dvar_int_if_unset("scr_d1_time", "8");
@@ -123,8 +123,8 @@ door_switch_func() {
     level._door2 RotateRoll(d2_new_angle, door_time, d2_accel, d2_decel);
     thread dropEverythingOnDoorsToGround();
     level thread destroyEquipment();
-    level._door1 playloopsound("evt_hydraulic_loop", .5);
-    level._door1 playsound("evt_hydraulic_start");
+    level._door1 playLoopSound("evt_hydraulic_loop", .5);
+    level._door1 playSound("evt_hydraulic_start");
     level._door1 thread door_snd_alarm(5);
     d1_new_angle = d1_new_angle * -1;
     d2_new_angle = d1_new_angle * -1;
@@ -138,11 +138,11 @@ door_switch_func() {
     level._door1 waittill("rotatedone");
     if(snd_door_status == 0) {
       level._door1 stoploopsound(1);
-      center_death_trig playsound("evt_hydraulic_open");
+      center_death_trig playSound("evt_hydraulic_open");
       snd_door_status = 1;
     } else {
       level._door1 stoploopsound(1);
-      center_death_trig playsound("evt_hydraulic_close");
+      center_death_trig playSound("evt_hydraulic_close");
       door_monster_clip ConnectPaths();
       door_monster_clip trigger_off();
       snd_door_status = 0;
@@ -151,7 +151,7 @@ door_switch_func() {
     level notify("edge_check");
     wait(door_cooldown);
     level notify("no_cooldown");
-    for (i = 0; i < cooldown_switches.size; i++) {
+    for(i = 0; i < cooldown_switches.size; i++) {
       cooldown_switches[i] trigger_off();
     }
     level._door_switch_trig1 trigger_on();
@@ -159,7 +159,7 @@ door_switch_func() {
   }
 }
 door_snd_alarm(alarmTimes) {
-  for (i = 0; i < alarmTimes; i++) {
+  for(i = 0; i < alarmTimes; i++) {
     wait(.5);
     playsoundatposition("amb_alarm_buzz", (-664, 110, 436));
     playsoundatposition("amb_alarm_buzz", (-664, -72, 436));
@@ -177,17 +177,17 @@ door_switch_setup() {
     self SetHintString(&"MP_HOLD_TO_OPERATE_DOORS");
     turnSwitchPanelGreen();
   }
-  while (!level.wagerMatch) {
+  while(!level.wagerMatch) {
     self waittill("trigger", who);
     if(isDefined(who)) {
-      who playsound("evt_hydraulic_switch");
+      who playSound("evt_hydraulic_switch");
     }
     wait(1);
   }
 }
 kill_edge_players_func() {
   level endon("edge_check");
-  while (1) {
+  while(1) {
     self waittill("trigger", player);
     if((player IsTouching(level._door1)) || (player IsTouching(level._door2))) {
       player DoDamage(player.health * 2, self.origin, player, player, 0, "MOD_SUICIDE");
@@ -200,30 +200,30 @@ switch_lights(element_number) {
   if(level.PrematchPeriod > 0 && level.inPrematchPeriod == true) {
     level waittill("prematch_over");
   }
-  while (1) {
-    effect_ent = Spawn("script_model", self.origin);
-    effect_ent SetModel("tag_origin");
+  while(1) {
+    effect_ent = spawn("script_model", self.origin);
+    effect_ent setModel("tag_origin");
     wait .1;
     turnSwitchPanelGreen();
     waittill_any_ents(level._door_switch_trig1, "trigger", level._door_switch_trig2, "trigger");
-    for (i = 0; i < element_number; i++) {
+    for(i = 0; i < element_number; i++) {
       wait .1;
     }
     effect_ent Delete();
-    blinky_effect_ent = Spawn("script_model", self.origin);
-    blinky_effect_ent SetModel("tag_origin");
+    blinky_effect_ent = spawn("script_model", self.origin);
+    blinky_effect_ent setModel("tag_origin");
     wait .1;
     turnSwitchPanelRed();
     level waittill("edge_check");
-    for (i = 0; i < element_number; i++) {
+    for(i = 0; i < element_number; i++) {
       wait .1;
     }
     blinky_effect_ent Delete();
-    final_effect_ent = Spawn("script_model", self.origin);
-    final_effect_ent SetModel("tag_origin");
+    final_effect_ent = spawn("script_model", self.origin);
+    final_effect_ent setModel("tag_origin");
     wait .1;
     level waittill("no_cooldown");
-    for (i = 0; i < element_number; i++) {
+    for(i = 0; i < element_number; i++) {
       wait .1;
     }
     final_effect_ent Delete();
@@ -231,27 +231,27 @@ switch_lights(element_number) {
 }
 tunnel_lights(element_number) {
   door_closed = true;
-  while (1) {
+  while(1) {
     effect_ent = undefined;
     if(door_closed) {
-      effect_ent = Spawn("script_model", self.origin);
-      effect_ent SetModel("tag_origin");
+      effect_ent = spawn("script_model", self.origin);
+      effect_ent setModel("tag_origin");
       wait .1;
-      PlayFXOnTag(level._effect["green_light"], effect_ent, "tag_origin");
+      playFXOnTag(level._effect["green_light"], effect_ent, "tag_origin");
     }
     waittill_any_ents(level._door_switch_trig1, "trigger", level._door_switch_trig2, "trigger");
-    for (i = 0; i < element_number; i++) {
+    for(i = 0; i < element_number; i++) {
       wait .1;
     }
-    new_effect_ent = Spawn("script_model", self.origin);
-    new_effect_ent SetModel("tag_origin");
+    new_effect_ent = spawn("script_model", self.origin);
+    new_effect_ent setModel("tag_origin");
     if(isDefined(effect_ent)) {
       effect_ent Delete();
     }
     wait .1;
-    PlayFXOnTag(level._effect["blink_light"], new_effect_ent, "tag_origin");
+    playFXOnTag(level._effect["blink_light"], new_effect_ent, "tag_origin");
     level waittill("edge_check");
-    for (i = 0; i < element_number; i++) {
+    for(i = 0; i < element_number; i++) {
       wait .1;
     }
     new_effect_ent Delete();
@@ -270,7 +270,7 @@ double_doors_open_at_start() {
   level._door_switch_trig1 notify("trigger");
 }
 devgui_radiation(cmd) {
-  while (1) {
+  while(1) {
     wait(0.5);
     devgui_string = GetDvar(#"devgui_notify");
     switch (devgui_string) {
@@ -287,7 +287,7 @@ devgui_radiation(cmd) {
   }
 }
 digger_dig_init() {
-  diggers = GetEntArray("digger_body", "targetname");
+  diggers = getEntArray("digger_body", "targetname");
   AssertEx(diggers.size > 0, "Unable to find entity with targetname 'digger_body'");
   array_thread(diggers, ::digger_dig_think);
 }
@@ -297,27 +297,27 @@ digger_dig_think() {
   AssertEx(isDefined(arm), "Unable to find arm entity for a digger at " + self.origin);
   blade_center = GetEnt(arm.target, "targetname");
   AssertEx(isDefined(blade_center), "Unable to find blade entity for a digger at " + self.origin);
-  blade_pieces = GetEntArray("digger_blade", "targetname");
-  for (i = 0; i < blade_pieces.size; i++) {
+  blade_pieces = getEntArray("digger_blade", "targetname");
+  for(i = 0; i < blade_pieces.size; i++) {
     blade_pieces[i] LinkTo(blade_center);
   }
   blade_center LinkTo(arm);
   arm LinkTo(body);
-  body playloopsound("evt_excavator_idle", .5);
+  body playLoopSound("evt_excavator_idle", .5);
   if(isDefined(self.script_float)) {
     set_dvar_int_if_unset("scr_dig_delay", self.script_float);
   } else {
     set_dvar_int_if_unset("scr_dig_delay", 20);
   }
-  while (1) {
+  while(1) {
     arm_move_speed = set_dvar_int_if_unset("scr_arm_move_speed", 11);
     blade_spin_speed = set_dvar_int_if_unset("scr_blade_spin_speed", 80);
     blade_spin_up_time = set_dvar_int_if_unset("scr_blade_spin_up_time", 3);
     body_turn = RandomIntRange(-15, 15);
     body_turn_speed = (positive_value_func(body_turn)) * .3;
     body RotateYaw(body_turn, body_turn_speed, body_turn_speed / 4, body_turn_speed / 4);
-    arm playloopsound("evt_excavator_move", .5);
-    body playsound("evt_excavator_rev");
+    arm playLoopSound("evt_excavator_move", .5);
+    body playSound("evt_excavator_rev");
     body waittill("rotatedone");
     arm Unlink(body);
     arm RotatePitch(-45, arm_move_speed, arm_move_speed / 4, arm_move_speed / 4);
@@ -326,15 +326,15 @@ digger_dig_think() {
     blade_center RotatePitch(1800, blade_spin_speed, blade_spin_up_time, blade_spin_up_time);
     smokeAngles = (0, arm.angles[1] + 180, arm.angles[2]);
     forward = anglesToForward(smokeAngles);
-    PlayFX(level._digger_fx, (blade_center.origin[0], blade_center.origin[1], blade_center.origin[2] - 560), forward);
+    playFX(level._digger_fx, (blade_center.origin[0], blade_center.origin[1], blade_center.origin[2] - 560), forward);
     arm stoploopsound(1);
-    blade_center playloopsound("evt_excavator_blade", .5);
+    blade_center playLoopSound("evt_excavator_blade", .5);
     blade_center waittill("rotatedone");
     blade_center stoploopsound(.5);
     blade_center LinkTo(arm);
     arm RotatePitch(45, arm_move_speed, arm_move_speed / 4, arm_move_speed / 4);
-    arm playloopsound("evt_excavator_move", .5);
-    body playsound("evt_excavator_rev");
+    arm playLoopSound("evt_excavator_move", .5);
+    body playSound("evt_excavator_rev");
     arm waittill("rotatedone");
     arm LinkTo(body);
     body RotateYaw((body_turn * -1), body_turn_speed, body_turn_speed / 4, body_turn_speed / 4);
@@ -344,12 +344,12 @@ digger_dig_think() {
   }
 }
 moving_diggers_init() {
-  diggers = GetEntArray("moving_digger", "targetname");
+  diggers = getEntArray("moving_digger", "targetname");
   array_thread(diggers, ::moving_diggers_think);
 }
 moving_diggers_think() {
   digger_struct = getstruct_and_assert(self.target);
-  while (1) {
+  while(1) {
     self MoveTo(digger_struct.origin, digger_struct.script_int);
     AssertEx(isDefined(digger_struct.script_int), "Unable to find digger struct's 'script_int' key value pair for moving digger");
     self waittill("movedone");
@@ -367,9 +367,9 @@ conveyer_belt_init() {
   set_dvar_int_if_unset("scr_coveyer_speed", 45);
   conveyer_trigger = getent_and_assert("coveyer_trig");
   trigger_struct = getstruct_and_assert(conveyer_trigger.target);
-  trigger_angles = AnglesToForward(trigger_struct.angles);
+  trigger_angles = anglesToForward(trigger_struct.angles);
   conveyer_trigger._conveyer_vector = vector_scale(trigger_angles, GetDvarInt(#"scr_coveyer_speed"));
-  while (1) {
+  while(1) {
     conveyer_trigger waittill("trigger", player);
     if(IsPlayer(player)) {
       conveyer_trigger thread trigger_thread(player, ::player_on_conveyer);
@@ -381,7 +381,7 @@ player_on_conveyer(player, endon_string) {
   player endon("death");
   player endon("disconnect");
   player endon(endon_string);
-  while (1) {
+  while(1) {
     player_velocity = player GetVelocity();
     if(player IsOnGround()) {
       player SetVelocity(player_velocity + self._conveyer_vector);
@@ -401,17 +401,17 @@ getstruct_and_assert(struct_name) {
 }
 dropEverythingOnDoorsToGround() {
   level endon("edge_check");
-  while (1) {
+  while(1) {
     wait(0.1);
     dropAllToGround((0, 0, 128), 181, 100);
   }
 }
 destroyEquipment() {
   level endon("edge_check");
-  for (;;) {
+  for(;;) {
     wait(2);
-    grenades = GetEntArray("grenade", "classname");
-    for (i = 0; i < grenades.size; i++) {
+    grenades = getEntArray("grenade", "classname");
+    for(i = 0; i < grenades.size; i++) {
       item = grenades[i];
       if(!isDefined(item.name)) {
         continue;
@@ -440,7 +440,7 @@ getWatcherForWeapon(weapname) {
   if(!IsPlayer(self)) {
     return undefined;
   }
-  for (i = 0; i < self.weaponObjectWatcherArray.size; i++) {
+  for(i = 0; i < self.weaponObjectWatcherArray.size; i++) {
     if(self.weaponObjectWatcherArray[i].weapon != weapname) {
       continue;
     }
@@ -449,8 +449,8 @@ getWatcherForWeapon(weapname) {
   return undefined;
 }
 addNoTurretTrigger(position, radius, height) {
-  while (!isDefined(level.noTurretPlacementTriggers))
+  while(!isDefined(level.noTurretPlacementTriggers))
     wait(0.1);
-  trigger = Spawn("trigger_radius", position, 0, radius, height);
+  trigger = spawn("trigger_radius", position, 0, radius, height);
   level.noTurretPlacementTriggers[level.noTurretPlacementTriggers.size] = trigger;
 }

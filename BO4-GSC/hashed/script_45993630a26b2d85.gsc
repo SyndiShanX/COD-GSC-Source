@@ -8,7 +8,6 @@
 #include scripts\zm_common\zm_score;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_weapons;
-
 #namespace namespace_983e5028;
 
 autoexec __init__system__() {
@@ -23,7 +22,7 @@ __init__() {
   zm_trial::register_challenge(#"hash_2fc73bc20035fe8", &on_begin, &on_end);
 }
 
-private on_begin(var_d34d02af) {
+on_begin(var_d34d02af) {
   level.var_d34d02af = zm_trial::function_5769f26a(var_d34d02af);
   callback::on_weapon_fired(&on_weapon_fired);
 
@@ -32,12 +31,12 @@ private on_begin(var_d34d02af) {
   }
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   callback::remove_on_weapon_fired(&on_weapon_fired);
   level.var_d34d02af = undefined;
 }
 
-private on_weapon_fired(params) {
+on_weapon_fired(params) {
   if(zm_weapons::is_explosive_weapon(params.weapon)) {
     self zm_score::player_reduce_points("take_specified", level.var_d34d02af * 2);
     return;
@@ -46,12 +45,12 @@ private on_weapon_fired(params) {
   self zm_score::player_reduce_points("take_specified", level.var_d34d02af);
 }
 
-private function_a5a431f6() {
+function_a5a431f6() {
   self endon(#"disconnect");
   level endon(#"hash_7646638df88a3656");
 
   while(true) {
-    s_waitresult = self waittill(#"ammo_reduction", #"lightning_ball_created");
+    s_waitresult = self waittill(#"ammo_reduction", # "lightning_ball_created");
     self zm_score::player_reduce_points("take_specified", level.var_d34d02af);
   }
 }

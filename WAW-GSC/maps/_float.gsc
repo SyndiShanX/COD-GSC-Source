@@ -6,7 +6,7 @@
 #include common_scripts\utility;
 
 main(range, freq, wavelength, rotation, origin) {
-  floaters = getentarray("script_floater", "targetname");
+  floaters = getEntArray("script_floater", "targetname");
   if(!floaters.size) {
     return;
   }
@@ -25,7 +25,7 @@ main(range, freq, wavelength, rotation, origin) {
     _origin = origin;
   if(isDefined(rotation))
     _rotation = rotation;
-  for (i = 0; i < floaters.size; i++)
+  for(i = 0; i < floaters.size; i++)
     floaters[i] thread floater_think(_range, _freq, _wavelength, _rotation, _origin);
 }
 
@@ -54,7 +54,7 @@ floater_bob(frac, org) {
   self endon("death");
   self endon("stop_float_script");
   wait(abval(self.time * frac));
-  while (1) {
+  while(1) {
     self.rangles = vectorScale(self.rangles, -1);
     org rotateto(self.rangles, self.time, self.acc, self.acc);
     org waittill("rotatedone");
@@ -66,7 +66,7 @@ floater_move(frac, org) {
   self endon("stop_float_script");
   wait(abval(self.time * frac));
   org moveZ(self.range * .5, self.time * .5, self.acc, self.acc);
-  while (1) {
+  while(1) {
     org waittill("movedone");
     self.range = -1 * self.range;
     org moveZ(self.range, self.time, self.acc, self.acc);

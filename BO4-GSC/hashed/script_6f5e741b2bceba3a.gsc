@@ -8,7 +8,6 @@
 #include scripts\zm\zm_white_toast;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
-
 #namespace namespace_d9987f47;
 
 autoexec __init__system__() {
@@ -23,7 +22,7 @@ __init__() {
   zm_trial::register_challenge(#"hash_168c1517a89a7cd", &on_begin, &on_end);
 }
 
-private on_begin(var_b3d469ae, var_5cd0152f) {
+on_begin(var_b3d469ae, var_5cd0152f) {
   level.var_21c2f32a = zm_trial::function_5769f26a(var_b3d469ae);
   n_cost = zm_trial::function_5769f26a(var_5cd0152f);
   level.var_943b6e2b = array();
@@ -41,7 +40,7 @@ private on_begin(var_b3d469ae, var_5cd0152f) {
   level thread wallbuy_watcher();
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   if(!round_reset) {
     var_696c3b4 = array();
 
@@ -82,8 +81,8 @@ is_active() {
   return isDefined(challenge);
 }
 
-private wallbuy_watcher() {
-  level endon(#"hash_31c14df051f6c165", #"game_ended");
+wallbuy_watcher() {
+  level endon(#"hash_31c14df051f6c165", # "game_ended");
 
   while(true) {
     s_notify = level waittill(#"weapon_bought");

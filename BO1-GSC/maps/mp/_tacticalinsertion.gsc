@@ -20,12 +20,12 @@ postLoadout() {
   self.lastTacticalInsertionAngles = self.angles;
   hasTacticalInsertion = self HasWeapon(level.tacticalInsertionWeapon);
   if(hasTacticalInsertion) {
-    while (true) {
+    while(true) {
       latestOrigin = self.origin;
       latestAngles = self.angles;
       if(self isOnGround(true) && TestSpawnPoint(latestOrigin)) {
         if(self DepthOfPlayerInWater() > 0) {
-          trace = BulletTrace(latestOrigin + (0, 0, 60), latestOrigin, false, self);
+          trace = bulletTrace(latestOrigin + (0, 0, 60), latestOrigin, false, self);
           self.lastTacticalInsertionOrigin = trace["position"];
         } else {
           self.lastTacticalInsertionOrigin = latestOrigin;
@@ -37,17 +37,17 @@ postLoadout() {
   }
 }
 isTacSpawnTouchingCrates(origin, angles) {
-  crate_ents = GetEntArray("care_package", "script_noteworthy");
+  crate_ents = getEntArray("care_package", "script_noteworthy");
   mins = (-17, -17, -40);
   maxs = (17, 17, 40);
-  for (i = 0; i < crate_ents.size; i++) {
+  for(i = 0; i < crate_ents.size; i++) {
     if(crate_ents[i] IsTouchingVolume(origin + (0, 0, 40), mins, maxs)) {
       return true;
     }
   }
   return false;
 }
-overrideSpawn() {
+overridespawn() {
   if(!isDefined(self.tacticalInsertion))
     return false;
   origin = self.tacticalInsertion.origin;
@@ -74,7 +74,7 @@ watch(player) {
 }
 watchUseTrigger(trigger, callback, playerSoundOnUse, npcSoundOnUse) {
   self endon("delete");
-  while (true) {
+  while(true) {
     trigger waittill("trigger", player);
     if(!isAlive(player))
       continue;
@@ -122,7 +122,7 @@ fizzle(attacker) {
   if(isDefined(self.fizzle) && self.fizzle)
     return;
   self.fizzle = true;
-  PlayFX(level._effect["tacticalInsertionFizzle"], self.origin);
+  playFX(level._effect["tacticalInsertionFizzle"], self.origin);
   self.owner maps\mp\gametypes\_globallogic_audio::leaderDialogOnPlayer("tact_destroyed", "item_destroyed");
   self destroy_tactical_insertion(attacker);
 }
@@ -172,8 +172,8 @@ spawnTacticalInsertion() {
     self.tacticalInsertionCount++;
   else
     self.tacticalInsertionCount = 1;
-  self.tacticalInsertion SetCanDamage(true);
-  while (true) {
+  self.tacticalInsertion setCanDamage(true);
+  while(true) {
     self.tacticalInsertion waittill("damage", damage, attacker, direction, point, type, tagName, modelName, partname, weaponName, iDFlags);
     if(level.teamBased && (!isDefined(attacker) || !isPlayer(attacker) || attacker.team == self.team) && attacker != self)
       continue;
@@ -217,7 +217,7 @@ cancel_button_press() {
   self endon("disconnect");
   self endon("end_killcam");
   self endon("abort_killcam");
-  while (true) {
+  while(true) {
     wait(.05);
     if(self changeSeatButtonPressed()) {
       break;

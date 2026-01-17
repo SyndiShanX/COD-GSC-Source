@@ -42,14 +42,14 @@ function assign_lowest_unused_character_index() {
   }
   n_characters_defined = 0;
   foreach(player in players) {
-    if(isdefined(player.characterindex)) {
+    if(isDefined(player.characterindex)) {
       arrayremovevalue(charindexarray, player.characterindex, 0);
       n_characters_defined++;
     }
   }
   if(charindexarray.size > 0) {
     if(n_characters_defined == (players.size - 1)) {
-      if(!(isdefined(level.has_richtofen) && level.has_richtofen)) {
+      if(!(isDefined(level.has_richtofen) && level.has_richtofen)) {
         level.has_richtofen = 1;
         return 2;
       }
@@ -65,7 +65,7 @@ function assign_lowest_unused_character_index() {
 
 function givecustomcharacters() {
   self detachall();
-  if(!isdefined(self.characterindex)) {
+  if(!isDefined(self.characterindex)) {
     self.characterindex = assign_lowest_unused_character_index();
   }
   self.favorite_wall_weapons_list = [];

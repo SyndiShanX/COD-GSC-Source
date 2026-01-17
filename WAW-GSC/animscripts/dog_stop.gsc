@@ -11,7 +11,7 @@ main() {
   self clearanim( % german_shepherd_idle, 0.2);
   self clearanim( % german_shepherd_attackidle_knob, 0.2);
   self thread lookAtTarget("attackIdle");
-  while (1) {
+  while(1) {
     if(shouldAttackIdle()) {
       self clearanim( % german_shepherd_idle, 0.2);
       self randomAttackIdle();

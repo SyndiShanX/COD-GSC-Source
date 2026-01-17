@@ -15,7 +15,6 @@ artEndVisionFileExport() {
 
 artStartFogFileExport() {
   fileprint_launcher_start_file();
-
 }
 
 artEndFogFileExport() {
@@ -27,7 +26,6 @@ artCommonfxprintln(string) {
 }
 
 setfogsliders() {
-  /#
   fogcolor = getdvarvector("g_fogColorReadOnly");
   maxOpacity = GetDvar("g_fogMaxOpacityReadOnly");
   halfplane = GetDvar("g_fogHalfDistReadOnly");
@@ -40,16 +38,16 @@ setfogsliders() {
   sunFogEndFadeAngle = GetDvar("g_sunFogEndFadeAngleReadOnly");
   sunFogScale = GetDvar("g_sunFogScaleReadOnly");
 
-  if(!isdefined(fogcolor) ||
-    !isdefined(maxOpacity) ||
-    !isdefined(halfplane) ||
-    !isdefined(nearplane) ||
-    !isdefined(sunFogEnabled) ||
-    !isdefined(sunFogColor) ||
-    !isdefined(sunFogDir) ||
-    !isdefined(sunFogBeginFadeAngle) ||
-    !isdefined(sunFogEndFadeAngle) ||
-    !isdefined(sunFogScale)
+  if(!isDefined(fogcolor) ||
+    !isDefined(maxOpacity) ||
+    !isDefined(halfplane) ||
+    !isDefined(nearplane) ||
+    !isDefined(sunFogEnabled) ||
+    !isDefined(sunFogColor) ||
+    !isDefined(sunFogDir) ||
+    !isDefined(sunFogBeginFadeAngle) ||
+    !isDefined(sunFogEndFadeAngle) ||
+    !isDefined(sunFogScale)
   ) {
     fogcolor = (1, 1, 1);
     halfplane = 10000001;
@@ -75,7 +73,6 @@ setfogsliders() {
   SetDevDvar("scr_sunFogBeginFadeAngle", sunFogBeginFadeAngle);
   SetDevDvar("scr_sunFogEndFadeAngle", sunFogEndFadeAngle);
   SetDevDvar("scr_sunFogScale", sunFogScale);
-  # /
 }
 
 translateFogSlidersToScript() {
@@ -93,21 +90,17 @@ translateFogSlidersToScript() {
 }
 
 updateFogFromScript() {
-  /#
   if(GetDvarInt("scr_cmd_plr_sun")) {
-    SetDevDvar("scr_sunFogDir", AnglesToForward(level.player GetPlayerAngles()));
+    SetDevDvar("scr_sunFogDir", anglesToForward(level.player GetPlayerAngles()));
     SetDevDvar("scr_cmd_plr_sun", 0);
   }
 
-  # /
-
-    if(!GetDvarInt("scr_fog_disable")) {
-      if(level.sunFogEnabled)
-        SetExpFog(level.fognearplane, level.fogexphalfplane, level.fogcolor[0], level.fogcolor[1], level.fogcolor[2], level.fogmaxopacity, 0, level.sunFogColor[0], level.sunFogColor[1], level.sunFogColor[2], level.sunFogDir, level.sunFogBeginFadeAngle, level.sunFogEndFadeAngle, level.sunFogScale);
-      else
-        SetExpFog(level.fognearplane, level.fogexphalfplane, level.fogcolor[0], level.fogcolor[1], level.fogcolor[2], level.fogmaxopacity, 0);
-    }
-  else {
+  if(!GetDvarInt("scr_fog_disable")) {
+    if(level.sunFogEnabled)
+      SetExpFog(level.fognearplane, level.fogexphalfplane, level.fogcolor[0], level.fogcolor[1], level.fogcolor[2], level.fogmaxopacity, 0, level.sunFogColor[0], level.sunFogColor[1], level.sunFogColor[2], level.sunFogDir, level.sunFogBeginFadeAngle, level.sunFogEndFadeAngle, level.sunFogScale);
+    else
+      SetExpFog(level.fognearplane, level.fogexphalfplane, level.fogcolor[0], level.fogcolor[1], level.fogcolor[2], level.fogmaxopacity, 0);
+  } else {
     SetExpFog(100000000000, 100000000001, 0, 0, 0, 0, 0); // couldn't find discreet fog disabling other than to never set it in the first place
   }
 }

@@ -152,7 +152,7 @@ frontend_rts_level_respond() {
 }
 
 hide_holo_table_props() {
-  props = getentarray("holo_table_prop", "script_noteworthy");
+  props = getEntArray("holo_table_prop", "script_noteworthy");
 
   foreach(prop in props)
   prop hide();
@@ -329,8 +329,7 @@ run_glasses_input() {
           if(stop_credits_button()) {
             level notify("credits_skip");
 
-            if(stop_credits_button()) {
-            }
+            if(stop_credits_button()) {}
           }
 
           break;
@@ -1094,7 +1093,7 @@ credits_sequence3_abort() {
 
 build_globe() {
   globe = getent("world_globe", "targetname");
-  countries = getentarray(globe.target, "targetname");
+  countries = getEntArray(globe.target, "targetname");
 
   foreach(country in countries) {
     country linkto(globe);
@@ -1200,7 +1199,7 @@ show_globe(do_show, toggle_countries, ambient_spin) {
   level.m_globe_shown = do_show;
 
   if(toggle_countries || ambient_spin) {
-    countries = getentarray(globe.target, "targetname");
+    countries = getEntArray(globe.target, "targetname");
 
     foreach(country in countries) {
       if(do_show && !ambient_spin) {
@@ -1223,7 +1222,7 @@ globe_show_map(map_name) {
   disputed_territory = level.m_rts_territory[map_name];
   city_marker = level.m_rts_city_tag[map_name];
   wait_network_frame();
-  territories = getentarray(globe.target, "targetname");
+  territories = getEntArray(globe.target, "targetname");
 
   foreach(territory in territories) {
     hide = 1;
@@ -1516,7 +1515,7 @@ frontend_run_osprey() {
   wait_network_frame();
   self setclientflag(11);
   self thread maps\_osprey::close_hatch();
-  fvec = anglestoforward(self.angles);
+  fvec = anglesToForward(self.angles);
   uvec = anglestoup(self.angles);
   self.look_target = spawn("script_origin", self.origin + fvec * 2048);
   self setlookatent(self.look_target);

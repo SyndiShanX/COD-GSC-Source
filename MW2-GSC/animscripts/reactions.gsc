@@ -31,7 +31,7 @@ initReactionAnims() {
 }
 
 ///////////////////////////////////////////////////////////////////////////
-// 
+//
 ///////////////////////////////////////////////////////////////////////////
 reactionsCheckLoop() {
   self thread bulletWhizbyCheckLoop();
@@ -106,7 +106,7 @@ self.deathTeamate = false;
 	
 self AddAIEventListener( "death" );
 
-	for ( ;; )
+	for( ;; )
 	{
 	self waittill( "ai_event", event, originator, position );
 	if( event != "death" )
@@ -141,7 +141,7 @@ self AddAIEventListener( "death" );
 */
 
 canReactAgain() {
-  return (!isdefined(self.lastReactTime) || gettime() - self.lastReactTime > 2000);
+  return (!isDefined(self.lastReactTime) || gettime() - self.lastReactTime > 2000);
 }
 
 ///////////////////////////////////////////////////////////////////////////
@@ -235,24 +235,24 @@ bulletWhizbyReaction() {
 bulletWhizbyCheckLoop() {
   self endon("killanimscript");
 
-  if(isdefined(self.disableBulletWhizbyReaction))
+  if(isDefined(self.disableBulletWhizbyReaction)) {
     return;
-
-  while (1) {
+  }
+  while(1) {
     self waittill("bulletwhizby", shooter);
 
-    if(!isdefined(shooter.team) || self.team == shooter.team)
+    if(!isDefined(shooter.team) || self.team == shooter.team) {
       continue;
-
-    if(isdefined(self.coverNode) || isdefined(self.ambushNode))
+    }
+    if(isDefined(self.coverNode) || isDefined(self.ambushNode)) {
       continue;
-
-    if(self.a.pose != "stand")
+    }
+    if(self.a.pose != "stand") {
       continue;
-
-    if(!canReactAgain())
+    }
+    if(!canReactAgain()) {
       continue;
-
+    }
     self.whizbyEnemy = shooter;
     self animcustom(::bulletWhizbyReaction);
   }
@@ -272,7 +272,7 @@ clearLookAtThread() {
 getNewEnemyReactionAnim() {
   reactAnim = undefined;
 
-  if(self nearClaimNodeAndAngle() && isdefined(anim.coverReactions[self.prevScript])) {
+  if(self nearClaimNodeAndAngle() && isDefined(anim.coverReactions[self.prevScript])) {
     nodeForward = anglesToForward(self.node.angles);
     dirToReactionTarget = vectorNormalize(self.reactionTargetPos - self.origin);
 
@@ -283,12 +283,12 @@ getNewEnemyReactionAnim() {
     }
   }
 
-  if(!isdefined(reactAnim)) {
+  if(!isDefined(reactAnim)) {
     reactAnimArray = [];
     reactAnimArray[0] = % exposed_backpedal;
     reactAnimArray[1] = % exposed_idle_reactB;
 
-    if(isdefined(self.enemy) && distanceSquared(self.enemy.origin, self.reactionTargetPos) < 256 * 256)
+    if(isDefined(self.enemy) && distanceSquared(self.enemy.origin, self.reactionTargetPos) < 256 * 256)
       self orientmode("face enemy");
     else
       self orientmode("face point", self.reactionTargetPos);
@@ -340,7 +340,7 @@ newEnemyReactionAnim() {
   self.lastReactTime = gettime();
   self.a.movement = "stop";
 
-  if(isdefined(self._stealth) && self.alertLevel != "combat") {
+  if(isDefined(self._stealth) && self.alertLevel != "combat") {
     stealthNewEnemyReactAnim();
   } else {
     reactAnim = self getNewEnemyReactionAnim();
@@ -356,17 +356,17 @@ newEnemyReactionAnim() {
 newEnemySurprisedReaction() {
   self endon("death");
 
-  if(isdefined(self.disableReactionAnims))
+  if(isDefined(self.disableReactionAnims)) {
     return;
-
-  if(!canReactAgain())
+  }
+  if(!canReactAgain()) {
     return;
-
-  if(self.a.pose == "prone" || isdefined(self.a.onback))
+  }
+  if(self.a.pose == "prone" || isDefined(self.a.onback)) {
     return;
-
+  }
   self animmode("gravity");
 
-  if(isdefined(self.enemy))
+  if(isDefined(self.enemy))
     newEnemyReactionAnim();
 }

@@ -24,7 +24,7 @@ main(allowed) {
     filter_script_vehicles_from_vehicle_descriptors(allowed);
   }
 
-  entities = getentarray();
+  entities = getEntArray();
 
   for(entity_index = entities.size - 1; entity_index >= 0; entity_index--) {
     entity = entities[entity_index];
@@ -83,8 +83,8 @@ location_is_allowed(entity, location) {
 }
 
 filter_script_vehicles_from_vehicle_descriptors(allowed_game_modes) {
-  vehicle_descriptors = getentarray("vehicle_descriptor", "targetname");
-  script_vehicles = getentarray("script_vehicle", "classname");
+  vehicle_descriptors = getEntArray("vehicle_descriptor", "targetname");
+  script_vehicles = getEntArray("script_vehicle", "classname");
   vehicles_to_remove = [];
 
   for(descriptor_index = 0; descriptor_index < vehicle_descriptors.size; descriptor_index++) {
@@ -168,7 +168,7 @@ ondisconnect() {
 }
 
 createcarryobject(ownerteam, trigger, visuals, offset, objectivename) {
-  carryobject = spawnstruct();
+  carryobject = spawnStruct();
   carryobject.type = "carryObject";
   carryobject.curorigin = trigger.origin;
   carryobject.ownerteam = ownerteam;
@@ -192,7 +192,7 @@ createcarryobject(ownerteam, trigger, visuals, offset, objectivename) {
   if(isDefined(objectivename))
     carryobject.newstyle = 1;
   else
-    objectivename = & "";
+    objectivename = &"";
 
   for(index = 0; index < visuals.size; index++) {
     visuals[index].baseorigin = visuals[index].origin;
@@ -368,7 +368,7 @@ setpickedup(player) {
 hideobject() {
   radius = 32;
   origin = self.origin;
-  grenades = getentarray("grenade", "classname");
+  grenades = getEntArray("grenade", "classname");
   radiussq = radius * radius;
   linkedgrenades = [];
   linkedgrenadesindex = 0;
@@ -584,7 +584,7 @@ setdropped() {
   }
 
   trace = playerphysicstrace(startorigin, endorigin);
-  angletrace = bullettrace(startorigin, endorigin, 0, body);
+  angletrace = bulletTrace(startorigin, endorigin, 0, body);
   droppingplayer = self.carrier;
 
   if(isDefined(trace)) {
@@ -645,9 +645,9 @@ clearcarrier() {
 }
 
 shouldbereset(minz, maxz) {
-  minetriggers = getentarray("minefield", "targetname");
-  hurttriggers = getentarray("trigger_hurt", "classname");
-  elevators = getentarray("script_elevator", "targetname");
+  minetriggers = getEntArray("minefield", "targetname");
+  hurttriggers = getEntArray("trigger_hurt", "classname");
+  elevators = getEntArray("script_elevator", "targetname");
 
   for(index = 0; index < minetriggers.size; index++) {
     if(self.visuals[0] istouchingswept(minetriggers[index], minz, maxz))
@@ -720,7 +720,7 @@ trackcarrier() {
 
   while(isDefined(self.carryobject) && isalive(self)) {
     if(self isonground()) {
-      trace = bullettrace(self.origin + vectorscale((0, 0, 1), 20.0), self.origin - vectorscale((0, 0, 1), 20.0), 0, undefined);
+      trace = bulletTrace(self.origin + vectorscale((0, 0, 1), 20.0), self.origin - vectorscale((0, 0, 1), 20.0), 0, undefined);
 
       if(trace["fraction"] < 1)
         self.carryobject.safeorigin = trace["position"];
@@ -749,7 +749,7 @@ manualdropthink() {
 }
 
 createuseobject(ownerteam, trigger, visuals, offset, objectivename) {
-  useobject = spawnstruct();
+  useobject = spawnStruct();
   useobject.type = "useObject";
   useobject.curorigin = trigger.origin;
   useobject.ownerteam = ownerteam;
@@ -779,7 +779,7 @@ createuseobject(ownerteam, trigger, visuals, offset, objectivename) {
   if(isDefined(objectivename))
     useobject.newstyle = 1;
   else
-    objectivename = & "";
+    objectivename = &"";
 
   useobject.compassicons = [];
   useobject.objid = [];
@@ -1133,7 +1133,7 @@ triggertouchthink(object) {
     object updateuserate();
 
   touchname = "player" + self.clientid;
-  struct = spawnstruct();
+  struct = spawnStruct();
   struct.player = self;
   struct.starttime = gettime();
   object.touchlist[team][touchname] = struct;
@@ -1593,7 +1593,7 @@ updateobjective() {
     objective_visibleteams(self.objectiveid, level.spawnsystem.ispawn_teammask[self.ownerteam]);
   } else if(self.visibleteam == "enemy") {
     objective_state(self.objectiveid, "active");
-    objective_visibleteams(self.objectiveid, level.spawnsystem.ispawn_teammask["all"] & ~level.spawnsystem.ispawn_teammask[self.ownerteam]);
+    objective_visibleteams(self.objectiveid, level.spawnsystem.ispawn_teammask["all"] &~level.spawnsystem.ispawn_teammask[self.ownerteam]);
   } else {
     objective_state(self.objectiveid, "invisible");
     objective_visibleteams(self.objectiveid, 0);
@@ -1623,8 +1623,7 @@ updateworldicons() {
   }
 }
 
-updateworldicon(relativeteam, showicon) {
-}
+updateworldicon(relativeteam, showicon) {}
 
 updatecompassicons() {
   if(self.visibleteam == "any") {

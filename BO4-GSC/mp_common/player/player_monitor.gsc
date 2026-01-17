@@ -10,7 +10,6 @@
 #include scripts\core_common\util_shared;
 #include scripts\mp_common\bb;
 #include scripts\mp_common\gametypes\globallogic_utils;
-
 #namespace player_monitor;
 
 monitor() {
@@ -40,27 +39,27 @@ monitor() {
 
 function_d35f877a(player, weapon, statname, value = 0) {
   if(isDefined(player.var_3dc66299)) {
-    if(statname == #"shots") {
+    if(statname == # "shots") {
       player.var_3dc66299.shots += value;
       return;
     }
 
-    if(statname == #"hits") {
+    if(statname == # "hits") {
       player.var_3dc66299.hits += value;
       return;
     }
 
-    if(statname == #"kills") {
+    if(statname == # "kills") {
       player.var_3dc66299.kills += value;
       return;
     }
 
-    if(statname == #"deathsduringuse") {
+    if(statname == # "deathsduringuse") {
       player.var_3dc66299.deathsduringuse += value;
       return;
     }
 
-    if(statname == #"headshots") {
+    if(statname == # "headshots") {
       player.var_3dc66299.headshots += value;
     }
   }
@@ -73,7 +72,7 @@ function_36185795(params) {
   }
 }
 
-private function_43e771ee(reason) {
+function_43e771ee(reason) {
   if(!isDefined(self)) {
     return;
   }
@@ -94,7 +93,7 @@ private function_43e771ee(reason) {
 
       died = 0;
 
-      if(reason == #"death" || self.var_3dc66299.deathsduringuse > 0) {
+      if(reason == # "death" || self.var_3dc66299.deathsduringuse > 0) {
         died = 1;
       }
 
@@ -124,7 +123,7 @@ private function_43e771ee(reason) {
   }
 }
 
-private function_fa444840() {
+function_fa444840() {
   self endon(#"disconnect");
   level endon(#"game_ended");
   self.var_3dc66299 = {};
@@ -138,9 +137,9 @@ private function_fa444840() {
   level waittill(#"game_playing");
 
   while(true) {
-    result = self waittill(#"weapon_change_complete", #"death");
+    result = self waittill(#"weapon_change_complete", # "death");
 
-    if(result._notify == #"death") {
+    if(result._notify == # "death") {
       self function_43e771ee(result._notify);
       break;
     }
@@ -159,8 +158,8 @@ private function_fa444840() {
   }
 }
 
-private breadcrumbs() {
-  self endon(#"death", #"disconnect");
+breadcrumbs() {
+  self endon(#"death", # "disconnect");
   level endon(#"game_ended");
   waittime = 10;
 
@@ -184,14 +183,14 @@ private breadcrumbs() {
   }
 }
 
-private travel_dist() {
-  self endon(#"death", #"disconnect");
+travel_dist() {
+  self endon(#"death", # "disconnect");
   waittime = 1;
   minimummovedistance = 16;
   wait 4;
 
-  if(!isDefined(self.pers[#"movement_update_count"])) {
-    self.pers[#"movement_update_count"] = 0;
+  if(!isDefined(self.pers[# "movement_update_count"])) {
+    self.pers[# "movement_update_count"] = 0;
   }
 
   prevpos = self.origin;
@@ -208,7 +207,7 @@ private travel_dist() {
     }
 
     distance = distance(self.origin, prevpos);
-    self.pers[#"total_distance_travelled"] += distance;
+    self.pers[# "total_distance_travelled"] += distance;
 
     if(gamestate::is_state("playing") && distance > 0) {
       if(!self isinvehicle()) {
@@ -225,23 +224,23 @@ private travel_dist() {
       }
     }
 
-    self.pers[#"movement_update_count"]++;
+    self.pers[# "movement_update_count"]++;
     prevpos = self.origin;
 
-    if(self.pers[#"movement_update_count"] % 5 == 0) {
+    if(self.pers[# "movement_update_count"] % 5 == 0) {
       distancemoving = distance(self.origin, positionptm);
       positionptm = self.origin;
 
       if(distancemoving > minimummovedistance) {
-        self.pers[#"num_speeds_when_moving_entries"]++;
-        self.pers[#"total_speeds_when_moving"] += distancemoving / waittime;
-        self.pers[#"time_played_moving"] += waittime;
+        self.pers[# "num_speeds_when_moving_entries"]++;
+        self.pers[# "total_speeds_when_moving"] += distancemoving / waittime;
+        self.pers[# "time_played_moving"] += waittime;
       }
     }
   }
 }
 
-private wall_run() {
+wall_run() {
   self endon(#"disconnect");
   self notify(#"stop_player_monitor_wall_run");
   self endon(#"stop_player_monitor_wall_run");
@@ -249,14 +248,14 @@ private wall_run() {
   self.timespentwallrunninginlife = 0;
 
   while(true) {
-    notification = self waittill(#"wallrun_begin", #"death", #"disconnect", #"stop_player_monitor_wall_run");
+    notification = self waittill(#"wallrun_begin", # "death", # "disconnect", # "stop_player_monitor_wall_run");
 
     if(notification._notify == "death") {
       break;
     }
 
     self.lastwallrunstarttime = gettime();
-    notification = self waittill(#"wallrun_end", #"death", #"disconnect", #"stop_player_monitor_wall_run");
+    notification = self waittill(#"wallrun_end", # "death", # "disconnect", # "stop_player_monitor_wall_run");
     self.timespentwallrunninginlife += gettime() - self.lastwallrunstarttime;
 
     if(notification._notify == "death") {
@@ -265,7 +264,7 @@ private wall_run() {
   }
 }
 
-private swimming() {
+swimming() {
   self endon(#"disconnect");
   self notify(#"stop_player_monitor_swimming");
   self endon(#"stop_player_monitor_swimming");
@@ -273,14 +272,14 @@ private swimming() {
   self.timespentswimminginlife = 0;
 
   while(true) {
-    notification = self waittill(#"swimming_begin", #"death", #"disconnect", #"stop_player_monitor_swimming");
+    notification = self waittill(#"swimming_begin", # "death", # "disconnect", # "stop_player_monitor_swimming");
 
     if(notification._notify == "death") {
       break;
     }
 
     self.lastswimmingstarttime = gettime();
-    notification = self waittill(#"swimming_end", #"death", #"disconnect", #"stop_player_monitor_swimming");
+    notification = self waittill(#"swimming_end", # "death", # "disconnect", # "stop_player_monitor_swimming");
     self.timespentswimminginlife += gettime() - self.lastswimmingstarttime;
 
     if(notification._notify == "death") {
@@ -289,7 +288,7 @@ private swimming() {
   }
 }
 
-private slide() {
+slide() {
   self endon(#"disconnect");
   self notify(#"stop_player_monitor_slide");
   self endon(#"stop_player_monitor_slide");
@@ -297,7 +296,7 @@ private slide() {
   self.numberofslidesinlife = 0;
 
   while(true) {
-    notification = self waittill(#"slide_begin", #"death", #"disconnect", #"stop_player_monitor_slide");
+    notification = self waittill(#"slide_begin", # "death", # "disconnect", # "stop_player_monitor_slide");
 
     if(notification._notify == "death") {
       break;
@@ -305,7 +304,7 @@ private slide() {
 
     self.lastslidestarttime = gettime();
     self.numberofslidesinlife++;
-    notification = self waittill(#"slide_end", #"death", #"disconnect", #"stop_player_monitor_slide");
+    notification = self waittill(#"slide_end", # "death", # "disconnect", # "stop_player_monitor_slide");
 
     if(notification._notify == "death") {
       break;
@@ -313,7 +312,7 @@ private slide() {
   }
 }
 
-private doublejump() {
+doublejump() {
   self endon(#"disconnect");
   self notify(#"stop_player_monitor_doublejump");
   self endon(#"stop_player_monitor_doublejump");
@@ -321,7 +320,7 @@ private doublejump() {
   self.numberofdoublejumpsinlife = 0;
 
   while(true) {
-    notification = self waittill(#"doublejump_begin", #"death", #"disconnect", #"stop_player_monitor_doublejump");
+    notification = self waittill(#"doublejump_begin", # "death", # "disconnect", # "stop_player_monitor_doublejump");
 
     if(notification._notify == "death") {
       break;
@@ -329,7 +328,7 @@ private doublejump() {
 
     self.lastdoublejumpstarttime = gettime();
     self.numberofdoublejumpsinlife++;
-    notification = self waittill(#"doublejump_end", #"death", #"disconnect", #"stop_player_monitor_doublejump");
+    notification = self waittill(#"doublejump_end", # "death", # "disconnect", # "stop_player_monitor_doublejump");
 
     if(notification._notify == "death") {
       break;
@@ -337,7 +336,7 @@ private doublejump() {
   }
 }
 
-private inactivity() {
+inactivity() {
   self endon(#"disconnect");
   self notify(#"player_monitor_inactivity");
   self endon(#"player_monitor_inactivity");

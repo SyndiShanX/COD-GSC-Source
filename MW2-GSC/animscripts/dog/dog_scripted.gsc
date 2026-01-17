@@ -16,7 +16,7 @@ main() {
 
   self.codeScripted = undefined;
 
-  if(isdefined(self.deathstring_passed))
+  if(isDefined(self.deathstring_passed))
     self.deathstring = self.deathstring_passed;
 
   self waittill("killanimscript");

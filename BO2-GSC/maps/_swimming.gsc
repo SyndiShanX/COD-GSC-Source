@@ -72,7 +72,7 @@ set_swimming_depth_of_field(toggle, set_values, near_start, near_end, far_start,
 }
 
 settings() {
-  level._swimming = spawnstruct();
+  level._swimming = spawnStruct();
   level._swimming.swim_times[0] = 0;
   level._swimming.swim_times[1] = 15;
   level._swimming.swim_times[2] = 25;
@@ -173,7 +173,7 @@ fx() {
 }
 
 init_player() {
-  self._swimming = spawnstruct();
+  self._swimming = spawnStruct();
   self._swimming.is_swimming = 0;
   self._swimming.is_underwater = 0;
   self._swimming.is_swimming_enabled = 1;

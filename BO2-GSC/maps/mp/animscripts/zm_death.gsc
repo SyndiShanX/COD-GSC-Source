@@ -91,7 +91,7 @@ flame_death_fx() {
 
   if(isDefined(level._effect) && isDefined(level._effect["character_fire_death_torso"])) {
     if(!self.isdog)
-      playfxontag(level._effect["character_fire_death_torso"], self, "J_SpineLower");
+      playFXOnTag(level._effect["character_fire_death_torso"], self, "J_SpineLower");
   } else {
     println("^3ANIMSCRIPT WARNING: You are missing level._effect[\"character_fire_death_torso\"], please set it in your levelname_fx.gsc. Use \"env/fire/fx_fire_player_torso\"");
 
@@ -105,7 +105,7 @@ flame_death_fx() {
     tagarray[2] = "J_Knee_RI";
     tagarray[3] = "J_Knee_LE";
     tagarray = randomize_array(tagarray);
-    playfxontag(level._effect["character_fire_death_sm"], self, tagarray[0]);
+    playFXOnTag(level._effect["character_fire_death_sm"], self, tagarray[0]);
     wait 1;
     tagarray[0] = "J_Wrist_RI";
     tagarray[1] = "J_Wrist_LE";
@@ -116,8 +116,8 @@ flame_death_fx() {
     }
 
     tagarray = randomize_array(tagarray);
-    playfxontag(level._effect["character_fire_death_sm"], self, tagarray[0]);
-    playfxontag(level._effect["character_fire_death_sm"], self, tagarray[1]);
+    playFXOnTag(level._effect["character_fire_death_sm"], self, tagarray[0]);
+    playFXOnTag(level._effect["character_fire_death_sm"], self, tagarray[1]);
   } else {
     println("^3ANIMSCRIPT WARNING: You are missing level._effect[\"character_fire_death_sm\"], please set it in your levelname_fx.gsc. Use \"env/fire/fx_fire_zombie_md\"");
 
@@ -275,7 +275,7 @@ do_gib() {
       }
     }
   } else {
-    self setmodel(limb_data["body_model"]);
+    self setModel(limb_data["body_model"]);
     self attach(limb_data["legs_model"]);
   }
 }

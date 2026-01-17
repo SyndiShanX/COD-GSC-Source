@@ -155,7 +155,7 @@ run_menendez_start() {
   wait 1;
   delay_thread(3.8, ::lock_light_switch);
   level clientnotify("loud_alarm_off");
-  level.player playsound("evt_cctv_transition_out");
+  level.player playSound("evt_cctv_transition_out");
   rpc("clientscripts/blackout_amb", "setSnapDefault");
   wait 0.3;
   screen_fade_in(1.0);
@@ -326,7 +326,7 @@ briggs_wound_callback(einflictor, eattacker, idamage, idflags, smeansofdeath, sw
     self.blood_exploder_active = 0;
 
   if(is_mature()) {
-    playfx(level._effect["briggs_blood"], vpoint, vdir);
+    playFX(level._effect["briggs_blood"], vpoint, vdir);
 
     if(!self.blood_exploder_active) {
       super_kill_exploder_add(770);
@@ -361,8 +361,7 @@ briggs_wound() {
     kill_all_pending_dialog(level.briggs);
   }
 
-  if(!level.briggs.knocked_out && !damagelocationisany("head", "helmet")) {
-  }
+  if(!level.briggs.knocked_out && !damagelocationisany("head", "helmet")) {}
 
   level.player setlowready(1);
 
@@ -499,7 +498,7 @@ menendez_turret_start() {
   s_anim = get_struct("server_anim_node", "targetname");
   v_spawn = getstartorigin(s_anim.origin, s_anim.angles, level.scr_anim["player_body"]["menendez_hack_player"]);
   level.player.e_menendez_turret = spawn("script_model", v_spawn);
-  level.player.e_menendez_turret setmodel("tag_origin_animate");
+  level.player.e_menendez_turret setModel("tag_origin_animate");
   level.player.e_menendez_turret.angles = level.player.angles;
   level.player disableclientlinkto();
   level.player playerlinktodelta(level.player.e_menendez_turret, "tag_origin", 1, 25, 25, 20, 40);
@@ -604,8 +603,7 @@ notetrack_super_kill_duel_achievement(ai_defalco) {
   level.player giveachievement_wrapper("SP_STORY_FARID_DUEL");
 }
 
-init_doors() {
-}
+init_doors() {}
 
 lock_light_run() {
   level waittill("door_light_switch");
@@ -623,7 +621,7 @@ setup_lock_lights() {
 }
 
 notetrack_super_kill_ground_impact(ai_guy) {
-  playfxontag(level._effect["super_kill_ground_hit"], ai_guy, "J_neck");
+  playFXOnTag(level._effect["super_kill_ground_hit"], ai_guy, "J_neck");
 }
 
 notetrack_super_kill_flash_on_camera_cut(m_player_body) {
@@ -642,26 +640,26 @@ super_kill_slow_end(player_body) {
 }
 
 notetrack_super_kill_gun_fx(ai_guy) {
-  playfxontag(level._effect["super_kill_muzzle_flash"], ai_guy, "tag_flash");
+  playFXOnTag(level._effect["super_kill_muzzle_flash"], ai_guy, "tag_flash");
 }
 
 notetrack_super_kill_guard_1_react(ai_guard) {
   if(is_mature()) {
-    playfxontag(level._effect["super_kill_blood_2"], ai_guard, "J_Head");
+    playFXOnTag(level._effect["super_kill_blood_2"], ai_guard, "J_Head");
     super_kill_exploder_add(771);
   }
 }
 
 notetrack_super_kill_guard_2_react(ai_guard) {
   if(is_mature()) {
-    playfxontag(level._effect["super_kill_blood_3"], ai_guard, "J_Neck");
+    playFXOnTag(level._effect["super_kill_blood_3"], ai_guard, "J_Neck");
     super_kill_exploder_add(772);
   }
 }
 
 notetrack_super_kill_alive_a_defalco_react(ai_defalco) {
   if(is_mature()) {
-    playfxontag(level._effect["super_kill_blood_defalco"], ai_defalco, "J_Head");
+    playFXOnTag(level._effect["super_kill_blood_defalco"], ai_defalco, "J_Head");
     super_kill_exploder_add(773);
     ai_defalco defalco_shot_head();
   }
@@ -669,7 +667,7 @@ notetrack_super_kill_alive_a_defalco_react(ai_defalco) {
 
 notetrack_super_kill_alive_a_karma_react(ai_karma) {
   if(is_mature())
-    playfxontag(level._effect["karma_slap"], ai_karma, "J_Head");
+    playFXOnTag(level._effect["karma_slap"], ai_karma, "J_Head");
 
   ai_farid = get_ent("farid_ai", "targetname");
   e_farid_hint = createstreamerhint(ai_farid.origin, 1.0);
@@ -679,26 +677,26 @@ notetrack_super_kill_alive_a_karma_react(ai_karma) {
 
 notetrack_super_kill_alive_a_farid_react(ai_farid) {
   if(is_mature()) {
-    playfxontag(level._effect["super_kill_blood"], ai_farid, "J_Head");
+    playFXOnTag(level._effect["super_kill_blood"], ai_farid, "J_Head");
     super_kill_exploder_add(774);
   }
 }
 
 notetrack_super_kill_alive_b_farid_cough_blood(ai_farid) {
   if(is_mature())
-    playfxontag(level._effect["farid_cough_blood"], ai_farid, "J_Head");
+    playFXOnTag(level._effect["farid_cough_blood"], ai_farid, "J_Head");
 }
 
 notetrack_super_kill_alive_b_defalco_react(ai_defalco) {
   if(is_mature()) {
-    playfxontag(level._effect["super_kill_blood_defalco_2"], ai_defalco, "j_mainroot");
+    playFXOnTag(level._effect["super_kill_blood_defalco_2"], ai_defalco, "j_mainroot");
     super_kill_exploder_add(775);
   }
 }
 
 notetrack_super_kill_alive_b_farid_react(ai_farid) {
   if(is_mature()) {
-    playfxontag(level._effect["super_kill_blood"], ai_farid, "J_Shoulder_LE");
+    playFXOnTag(level._effect["super_kill_blood"], ai_farid, "J_Shoulder_LE");
     super_kill_exploder_add(774);
     ai_farid farid_body_shot();
   }
@@ -708,7 +706,7 @@ notetrack_super_kill_alive_c_karma_react(ai_karma) {
   ai_karma.dropweapon = 0;
 
   if(is_mature()) {
-    playfxontag(level._effect["karma_neck_blood"], ai_karma, "J_Neck");
+    playFXOnTag(level._effect["karma_neck_blood"], ai_karma, "J_Neck");
     super_kill_exploder_add(776);
     ai_karma karma_cut_throat();
     level.defalco defalco_body_bloody();
@@ -726,7 +724,7 @@ notetrack_super_kill_alive_c_defalco_knife(ai_defalco) {
 
 notetrack_super_kill_dead_a_farid_react(ai_farid) {
   if(is_mature()) {
-    playfxontag(level._effect["super_kill_blood_farid"], ai_farid, "J_Head");
+    playFXOnTag(level._effect["super_kill_blood_farid"], ai_farid, "J_Head");
     super_kill_exploder_add(777);
     ai_farid farid_body_shot();
   }
@@ -734,15 +732,14 @@ notetrack_super_kill_dead_a_farid_react(ai_farid) {
 
 notetrack_super_kill_dead_a_farid_cough_blood(ai_farid) {
   if(is_mature())
-    playfxontag(level._effect["farid_cough_blood"], ai_farid, "J_Head");
+    playFXOnTag(level._effect["farid_cough_blood"], ai_farid, "J_Head");
 }
 
-notetrack_super_kill_dead_a_karma_react(ai_karma) {
-}
+notetrack_super_kill_dead_a_karma_react(ai_karma) {}
 
 notetrack_super_kill_dead_b_farid_react(ai_farid) {
   if(is_mature()) {
-    playfxontag(level._effect["super_kill_blood"], ai_farid, "J_Shoulder_LE");
+    playFXOnTag(level._effect["super_kill_blood"], ai_farid, "J_Shoulder_LE");
     super_kill_exploder_add(778);
     ai_farid farid_body_shot();
   }
@@ -750,12 +747,12 @@ notetrack_super_kill_dead_b_farid_react(ai_farid) {
 
 notetrack_super_kill_dead_b_farid_cough_blood(ai_farid) {
   if(is_mature())
-    playfxontag(level._effect["farid_cough_blood"], ai_farid, "J_Head");
+    playFXOnTag(level._effect["farid_cough_blood"], ai_farid, "J_Head");
 }
 
 notetrack_super_kill_dead_c_karma_react(ai_karma) {
   if(is_mature()) {
-    playfxontag(level._effect["super_kill_blood_karma"], ai_karma, "J_Head");
+    playFXOnTag(level._effect["super_kill_blood_karma"], ai_karma, "J_Head");
     super_kill_exploder_add(779);
     ai_karma karma_head_shot();
   }

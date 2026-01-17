@@ -72,12 +72,12 @@ cornered_intro_pre_load() {
   precachestring(&"CORNERED_DEPLOY_ZIPLINE_TURRET_CONSOLE");
   precachestring(&"CORNERED_START_ZIPLINE");
   precachestring(&"CORNERED_START_ZIPLINE_CONSOLE");
-  maps\_utility::add_hint_string("binoc_use", & "CORNERED_BINOCULARS_USE_HINT");
-  maps\_utility::add_hint_string("binoc_zoom", & "CORNERED_BINOCULARS_ZOOM_HINT", ::binoculars_hide_hint);
-  maps\_utility::add_hint_string("binoc_scan", & "CORNERED_BINOCULARS_SCAN_HINT", ::scan_hide_hint);
-  maps\_utility::add_hint_string("binoc_range", & "CORNERED_BINOCULARS_RANGE_HINT");
-  maps\_utility::add_hint_string("binoc_deactivate", & "CORNERED_BINOCULARS_REMOVE_HINT", ::binoculars_hide_deactive_hint);
-  maps\_utility::add_hint_string("fire_zipline", & "CORNERED_ZIPLINE_FIRE");
+  maps\_utility::add_hint_string("binoc_use", &"CORNERED_BINOCULARS_USE_HINT");
+  maps\_utility::add_hint_string("binoc_zoom", &"CORNERED_BINOCULARS_ZOOM_HINT", ::binoculars_hide_hint);
+  maps\_utility::add_hint_string("binoc_scan", &"CORNERED_BINOCULARS_SCAN_HINT", ::scan_hide_hint);
+  maps\_utility::add_hint_string("binoc_range", &"CORNERED_BINOCULARS_RANGE_HINT");
+  maps\_utility::add_hint_string("binoc_deactivate", &"CORNERED_BINOCULARS_REMOVE_HINT", ::binoculars_hide_deactive_hint);
+  maps\_utility::add_hint_string("fire_zipline", &"CORNERED_ZIPLINE_FIRE");
   level.cornered_player_arms = maps\_utility::spawn_anim_model("cornered_player_arms");
   level.cornered_player_arms maps\cornered_code::player_flap_sleeves_setup(1);
   maps\cornered_code::hide_player_arms();
@@ -177,7 +177,7 @@ intro_handle_ps4_ssao() {
 }
 
 introscreen_display() {
-  maps\_utility::intro_screen_create(&"CORNERED_INTROSCREEN_LINE_1", & "CORNERED_INTROSCREEN_LINE_2", & "CORNERED_INTROSCREEN_LINE_5", & "CORNERED_INTROSCREEN_LINE_3");
+  maps\_utility::intro_screen_create(&"CORNERED_INTROSCREEN_LINE_1", &"CORNERED_INTROSCREEN_LINE_2", &"CORNERED_INTROSCREEN_LINE_5", &"CORNERED_INTROSCREEN_LINE_3");
   common_scripts\utility::flag_wait("start_introtext");
   level maps\_introscreen::introscreen(1);
 }
@@ -818,7 +818,7 @@ look_at_roof_nag() {
   level thread look_at_roof_nag_vo();
   level waittill("last_binoc_nag");
   objective_onentity(1, level.vip_heli, (0, 0, -50));
-  objective_setpointertextoverride(1, & "CORNERED_OBJ_DOT_TARGET");
+  objective_setpointertextoverride(1, &"CORNERED_OBJ_DOT_TARGET");
   thread look_at_roof_nag_cleanup();
   var_0 = 1;
 }
@@ -1113,7 +1113,7 @@ intro_target_monitor() {
   level.player endon("hvt_confirmed");
   level endon("player_falling");
   level waittill("scanning_failed");
-  setdvar("ui_deadquote", & "CORNERED_BINOCULARS_FAIL");
+  setdvar("ui_deadquote", &"CORNERED_BINOCULARS_FAIL");
   maps\_utility::missionfailedwrapper();
 }
 

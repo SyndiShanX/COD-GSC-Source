@@ -97,12 +97,12 @@ playsounds_gasmask(on) {
     self.gasmask_audio_ent = spawn(0, (0, 0, 0), "script_origin");
 
   if(on) {
-    self.gasmask_audio_ent playloopsound("evt_gasmask_loop", 0.5);
+    self.gasmask_audio_ent playLoopSound("evt_gasmask_loop", 0.5);
 
     if(isDefined(level._audio_zombie_gasmask_func))
       level thread[[level._audio_zombie_gasmask_func]](on);
   } else {
-    playsound(0, "evt_gasmask_off", (0, 0, 0));
+    playSound(0, "evt_gasmask_off", (0, 0, 0));
     self.gasmask_audio_ent stoploopsound(0.5);
     self.gasmask_audio_ent delete();
     self.gasmask_audio_ent = undefined;

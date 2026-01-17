@@ -540,9 +540,7 @@ playlookanimation(var_0, var_1, var_2) {
 
   for(var_3 = 0; var_3 < var_1 * 10; var_3++) {
     if(isalive(self.enemy)) {
-      if(animscripts\utility::canseeenemy() && [
-          [var_2]
-        ]())
+      if(animscripts\utility::canseeenemy() && [[var_2]]())
         return;
     }
 

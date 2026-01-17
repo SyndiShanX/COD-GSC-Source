@@ -46,7 +46,7 @@ function convertsecondstomilliseconds(seconds) {
 }
 
 function is_player() {
-  return isplayer(self) || (isdefined(self.pers) && (isdefined(self.pers["isBot"]) && self.pers["isBot"]));
+  return isplayer(self) || (isDefined(self.pers) && (isDefined(self.pers["isBot"]) && self.pers["isBot"]));
 }
 
 function lerp(chunk) {
@@ -63,7 +63,7 @@ function lerp(chunk) {
 function recalc_zombie_array() {}
 
 function init_zombie_run_cycle() {
-  if(isdefined(level.speed_change_round)) {
+  if(isDefined(level.speed_change_round)) {
     if(level.round_number >= level.speed_change_round) {
       speed_percent = 0.2 + ((level.round_number - level.speed_change_round) * 0.2);
       speed_percent = min(speed_percent, 1);
@@ -112,35 +112,35 @@ function speed_change_watcher() {
 
 function move_zombie_spawn_location(spot) {
   self endon("death");
-  if(isdefined(self.spawn_pos)) {
+  if(isDefined(self.spawn_pos)) {
     self notify("risen", self.spawn_pos.script_string);
     return;
   }
   self.spawn_pos = spot;
-  if(isdefined(spot.target)) {
+  if(isDefined(spot.target)) {
     self.target = spot.target;
   }
-  if(isdefined(spot.zone_name)) {
+  if(isDefined(spot.zone_name)) {
     self.zone_name = spot.zone_name;
     self.previous_zone_name = spot.zone_name;
   }
-  if(isdefined(spot.script_parameters)) {
+  if(isDefined(spot.script_parameters)) {
     self.script_parameters = spot.script_parameters;
   }
-  if(!isdefined(spot.script_noteworthy)) {
+  if(!isDefined(spot.script_noteworthy)) {
     spot.script_noteworthy = "spawn_location";
   }
   tokens = strtok(spot.script_noteworthy, " ");
   foreach(index, token in tokens) {
-    if(isdefined(self.spawn_point_override)) {
+    if(isDefined(self.spawn_point_override)) {
       spot = self.spawn_point_override;
       token = spot.script_noteworthy;
     }
     if(token == "custom_spawner_entry") {
       next_token = index + 1;
-      if(isdefined(tokens[next_token])) {
+      if(isDefined(tokens[next_token])) {
         str_spawn_entry = tokens[next_token];
-        if(isdefined(level.custom_spawner_entry) && isdefined(level.custom_spawner_entry[str_spawn_entry])) {
+        if(isDefined(level.custom_spawner_entry) && isDefined(level.custom_spawner_entry[str_spawn_entry])) {
           self thread[[level.custom_spawner_entry[str_spawn_entry]]](spot);
           continue;
         }
@@ -155,33 +155,33 @@ function move_zombie_spawn_location(spot) {
       continue;
     }
     if(token == "spawn_location") {
-      if(isdefined(self.anchor)) {
+      if(isDefined(self.anchor)) {
         return;
       }
       self.anchor = spawn("script_origin", self.origin);
       self.anchor.angles = self.angles;
       self linkto(self.anchor);
       self.anchor thread anchor_delete_failsafe(self);
-      if(!isdefined(spot.angles)) {
+      if(!isDefined(spot.angles)) {
         spot.angles = (0, 0, 0);
       }
       self ghost();
       self.anchor moveto(spot.origin, 0.05);
       self.anchor waittill("movedone");
       target_org = zombie_utility::get_desired_origin();
-      if(isdefined(target_org)) {
+      if(isDefined(target_org)) {
         anim_ang = vectortoangles(target_org - self.origin);
         self.anchor rotateto((0, anim_ang[1], 0), 0.05);
         self.anchor waittill("rotatedone");
       }
-      if(isdefined(level.zombie_spawn_fx)) {
-        playfx(level.zombie_spawn_fx, spot.origin);
+      if(isDefined(level.zombie_spawn_fx)) {
+        playFX(level.zombie_spawn_fx, spot.origin);
       }
       self unlink();
-      if(isdefined(self.anchor)) {
+      if(isDefined(self.anchor)) {
         self.anchor delete();
       }
-      if(!(isdefined(self.dontshow) && self.dontshow)) {
+      if(!(isDefined(self.dontshow) && self.dontshow)) {
         self show();
       }
       self notify("risen", spot.script_string);
@@ -192,7 +192,7 @@ function move_zombie_spawn_location(spot) {
 function anchor_delete_failsafe(ai_zombie) {
   ai_zombie endon("risen");
   ai_zombie waittill("death");
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     self delete();
   }
 }
@@ -200,12 +200,12 @@ function anchor_delete_failsafe(ai_zombie) {
 function run_spawn_functions() {
   self endon("death");
   waittillframeend();
-  for (i = 0; i < level.spawn_funcs[self.team].size; i++) {
+  for(i = 0; i < level.spawn_funcs[self.team].size; i++) {
     func = level.spawn_funcs[self.team][i];
     util::single_thread(self, func["function"], func["param1"], func["param2"], func["param3"], func["param4"], func["param5"]);
   }
-  if(isdefined(self.spawn_funcs)) {
-    for (i = 0; i < self.spawn_funcs.size; i++) {
+  if(isDefined(self.spawn_funcs)) {
+    for(i = 0; i < self.spawn_funcs.size; i++) {
       func = self.spawn_funcs[i];
       util::single_thread(self, func["function"], func["param1"], func["param2"], func["param3"], func["param4"]);
     }
@@ -218,11 +218,11 @@ function run_spawn_functions() {
 }
 
 function create_simple_hud(client, team) {
-  if(isdefined(team)) {
+  if(isDefined(team)) {
     hud = newteamhudelem(team);
     hud.team = team;
   } else {
-    if(isdefined(client)) {
+    if(isDefined(client)) {
       hud = newclienthudelem(client);
     } else {
       hud = newhudelem();
@@ -241,13 +241,13 @@ function destroy_hud() {
 }
 
 function all_chunks_intact(barrier, barrier_chunks) {
-  if(isdefined(barrier.zbarrier)) {
+  if(isDefined(barrier.zbarrier)) {
     pieces = barrier.zbarrier getzbarrierpieceindicesinstate("closed");
     if(pieces.size != barrier.zbarrier getnumzbarrierpieces()) {
       return false;
     }
   } else {
-    for (i = 0; i < barrier_chunks.size; i++) {
+    for(i = 0; i < barrier_chunks.size; i++) {
       if(barrier_chunks[i] get_chunk_state() != "repaired") {
         return false;
       }
@@ -257,13 +257,13 @@ function all_chunks_intact(barrier, barrier_chunks) {
 }
 
 function no_valid_repairable_boards(barrier, barrier_chunks) {
-  if(isdefined(barrier.zbarrier)) {
+  if(isDefined(barrier.zbarrier)) {
     pieces = barrier.zbarrier getzbarrierpieceindicesinstate("open");
     if(pieces.size) {
       return false;
     }
   } else {
-    for (i = 0; i < barrier_chunks.size; i++) {
+    for(i = 0; i < barrier_chunks.size; i++) {
       if(barrier_chunks[i] get_chunk_state() == "destroyed") {
         return false;
       }
@@ -281,14 +281,14 @@ function is_encounter() {
 }
 
 function all_chunks_destroyed(barrier, barrier_chunks) {
-  if(isdefined(barrier.zbarrier)) {
+  if(isDefined(barrier.zbarrier)) {
     pieces = arraycombine(barrier.zbarrier getzbarrierpieceindicesinstate("open"), barrier.zbarrier getzbarrierpieceindicesinstate("opening"), 1, 0);
     if(pieces.size != barrier.zbarrier getnumzbarrierpieces()) {
       return false;
     }
-  } else if(isdefined(barrier_chunks)) {
-    assert(isdefined(barrier_chunks), "");
-    for (i = 0; i < barrier_chunks.size; i++) {
+  } else if(isDefined(barrier_chunks)) {
+    assert(isDefined(barrier_chunks), "");
+    for(i = 0; i < barrier_chunks.size; i++) {
       if(barrier_chunks[i] get_chunk_state() != "destroyed") {
         return false;
       }
@@ -298,14 +298,14 @@ function all_chunks_destroyed(barrier, barrier_chunks) {
 }
 
 function check_point_in_playable_area(origin) {
-  playable_area = getentarray("player_volume", "script_noteworthy");
-  if(!isdefined(level.check_model)) {
+  playable_area = getEntArray("player_volume", "script_noteworthy");
+  if(!isDefined(level.check_model)) {
     level.check_model = spawn("script_model", origin + vectorscale((0, 0, 1), 40));
   } else {
     level.check_model.origin = origin + vectorscale((0, 0, 1), 40);
   }
   valid_point = 0;
-  for (i = 0; i < playable_area.size; i++) {
+  for(i = 0; i < playable_area.size; i++) {
     if(level.check_model istouching(playable_area[i])) {
       valid_point = 1;
     }
@@ -313,21 +313,21 @@ function check_point_in_playable_area(origin) {
   return valid_point;
 }
 
-function check_point_in_enabled_zone(origin, zone_is_active, player_zones = getentarray("player_volume", "script_noteworthy")) {
-  if(!isdefined(level.zones) || !isdefined(player_zones)) {
+function check_point_in_enabled_zone(origin, zone_is_active, player_zones = getEntArray("player_volume", "script_noteworthy")) {
+  if(!isDefined(level.zones) || !isDefined(player_zones)) {
     return 1;
   }
-  if(!isdefined(level.e_check_point)) {
+  if(!isDefined(level.e_check_point)) {
     level.e_check_point = spawn("script_origin", origin + vectorscale((0, 0, 1), 40));
   } else {
     level.e_check_point.origin = origin + vectorscale((0, 0, 1), 40);
   }
   one_valid_zone = 0;
-  for (i = 0; i < player_zones.size; i++) {
+  for(i = 0; i < player_zones.size; i++) {
     if(level.e_check_point istouching(player_zones[i])) {
       zone = level.zones[player_zones[i].targetname];
-      if(isdefined(zone) && (isdefined(zone.is_enabled) && zone.is_enabled)) {
-        if(isdefined(zone_is_active) && zone_is_active == 1 && (!(isdefined(zone.is_active) && zone.is_active))) {
+      if(isDefined(zone) && (isDefined(zone.is_enabled) && zone.is_enabled)) {
+        if(isDefined(zone_is_active) && zone_is_active == 1 && (!(isDefined(zone.is_active) && zone.is_active))) {
           continue;
         }
         one_valid_zone = 1;
@@ -363,7 +363,7 @@ function halve_score(n_score) {
 
 function random_tan() {
   rand = randomint(100);
-  if(isdefined(level.char_percent_override)) {
+  if(isDefined(level.char_percent_override)) {
     percentnotcharred = level.char_percent_override;
   } else {
     percentnotcharred = 65;
@@ -373,7 +373,7 @@ function random_tan() {
 function places_before_decimal(num) {
   abs_num = abs(num);
   count = 0;
-  while (true) {
+  while(true) {
     abs_num = abs_num * 0.1;
     count = count + 1;
     if(abs_num < 1) {
@@ -383,20 +383,20 @@ function places_before_decimal(num) {
 }
 
 function create_zombie_point_of_interest(attract_dist, num_attractors, added_poi_value, start_turned_on, initial_attract_func, arrival_attract_func, poi_team) {
-  if(!isdefined(added_poi_value)) {
+  if(!isDefined(added_poi_value)) {
     self.added_poi_value = 0;
   } else {
     self.added_poi_value = added_poi_value;
   }
-  if(!isdefined(start_turned_on)) {
+  if(!isDefined(start_turned_on)) {
     start_turned_on = 1;
   }
-  if(!isdefined(attract_dist)) {
+  if(!isDefined(attract_dist)) {
     attract_dist = 1536;
   }
   self.script_noteworthy = "zombie_poi";
   self.poi_active = start_turned_on;
-  if(isdefined(attract_dist)) {
+  if(isDefined(attract_dist)) {
     self.max_attractor_dist = attract_dist;
     self.poi_radius = attract_dist * attract_dist;
   } else {
@@ -407,16 +407,16 @@ function create_zombie_point_of_interest(attract_dist, num_attractors, added_poi
   self.attractor_array = [];
   self.initial_attract_func = undefined;
   self.arrival_attract_func = undefined;
-  if(isdefined(poi_team)) {
+  if(isDefined(poi_team)) {
     self._team = poi_team;
   }
-  if(isdefined(initial_attract_func)) {
+  if(isDefined(initial_attract_func)) {
     self.initial_attract_func = initial_attract_func;
   }
-  if(isdefined(arrival_attract_func)) {
+  if(isDefined(arrival_attract_func)) {
     self.arrival_attract_func = arrival_attract_func;
   }
-  if(!isdefined(level.zombie_poi_array)) {
+  if(!isDefined(level.zombie_poi_array)) {
     level.zombie_poi_array = [];
   } else if(!isarray(level.zombie_poi_array)) {
     level.zombie_poi_array = array(level.zombie_poi_array);
@@ -434,7 +434,7 @@ function watch_for_poi_death() {
 
 function debug_draw_new_attractor_positions() {
   self endon("death");
-  while (true) {
+  while(true) {
     foreach(attract in self.attractor_positions) {
       passed = bullettracepassed(attract[0] + vectorscale((0, 0, 1), 24), self.origin + vectorscale((0, 0, 1), 24), 0, self);
       if(passed) {
@@ -449,18 +449,18 @@ function debug_draw_new_attractor_positions() {
 
 function create_zombie_point_of_interest_attractor_positions(num_attract_dists, attract_dist) {
   self endon("death");
-  if(!isdefined(self.num_poi_attracts) || (isdefined(self.script_noteworthy) && self.script_noteworthy != "zombie_poi")) {
+  if(!isDefined(self.num_poi_attracts) || (isDefined(self.script_noteworthy) && self.script_noteworthy != "zombie_poi")) {
     return;
   }
-  if(!isdefined(num_attract_dists)) {
+  if(!isDefined(num_attract_dists)) {
     num_attract_dists = 4;
   }
   queryresult = positionquery_source_navigation(self.origin, attract_dist / 2, self.max_attractor_dist, attract_dist / 2, attract_dist / 2, 1, attract_dist / 2);
   if(queryresult.data.size < self.num_poi_attracts) {
     self.num_poi_attracts = queryresult.data.size;
   }
-  for (i = 0; i < self.num_poi_attracts; i++) {
-    if(isdefined(level.validate_poi_attractors) && level.validate_poi_attractors) {
+  for(i = 0; i < self.num_poi_attracts; i++) {
+    if(isDefined(level.validate_poi_attractors) && level.validate_poi_attractors) {
       passed = bullettracepassed(queryresult.data[i].origin + vectorscale((0, 0, 1), 24), self.origin + vectorscale((0, 0, 1), 24), 0, self);
       if(passed) {
         self.attractor_positions[i][0] = queryresult.data[i].origin;
@@ -471,12 +471,12 @@ function create_zombie_point_of_interest_attractor_positions(num_attract_dists, 
     self.attractor_positions[i][0] = queryresult.data[i].origin;
     self.attractor_positions[i][1] = self;
   }
-  if(!isdefined(self.attractor_positions)) {
+  if(!isDefined(self.attractor_positions)) {
     self.attractor_positions = [];
   }
   self.num_attract_dists = num_attract_dists;
   self.last_index = [];
-  for (i = 0; i < num_attract_dists; i++) {
+  for(i = 0; i < num_attract_dists; i++) {
     self.last_index[i] = -1;
   }
   self.last_index[0] = 1;
@@ -492,30 +492,30 @@ function generated_radius_attract_positions(forward, offset, num_positions, attr
   failed = 0;
   degs_per_pos = 360 / num_positions;
   i = offset;
-  while (i < (360 + offset)) {
+  while(i < (360 + offset)) {
     altforward = forward * attract_radius;
     rotated_forward = ((cos(i) * altforward[0]) - (sin(i) * altforward[1]), (sin(i) * altforward[0]) + (cos(i) * altforward[1]), altforward[2]);
-    if(isdefined(level.poi_positioning_func)) {
+    if(isDefined(level.poi_positioning_func)) {
       pos = [
         [level.poi_positioning_func]
       ](self.origin, rotated_forward);
     } else {
-      if(isdefined(level.use_alternate_poi_positioning) && level.use_alternate_poi_positioning) {
+      if(isDefined(level.use_alternate_poi_positioning) && level.use_alternate_poi_positioning) {
         pos = zm_server_throttle::server_safe_ground_trace("poi_trace", 10, (self.origin + rotated_forward) + vectorscale((0, 0, 1), 10));
       } else {
         pos = zm_server_throttle::server_safe_ground_trace("poi_trace", 10, (self.origin + rotated_forward) + vectorscale((0, 0, 1), 100));
       }
     }
-    if(!isdefined(pos)) {
+    if(!isDefined(pos)) {
       failed++;
     } else {
-      if(isdefined(level.use_alternate_poi_positioning) && level.use_alternate_poi_positioning) {
-        if(isdefined(self) && isdefined(self.origin)) {
+      if(isDefined(level.use_alternate_poi_positioning) && level.use_alternate_poi_positioning) {
+        if(isDefined(self) && isDefined(self.origin)) {
           if(self.origin[2] >= (pos[2] - epsilon) && (self.origin[2] - pos[2]) <= 150) {
             pos_array = [];
             pos_array[0] = pos;
             pos_array[1] = self;
-            if(!isdefined(self.attractor_positions)) {
+            if(!isDefined(self.attractor_positions)) {
               self.attractor_positions = [];
             } else if(!isarray(self.attractor_positions)) {
               self.attractor_positions = array(self.attractor_positions);
@@ -530,7 +530,7 @@ function generated_radius_attract_positions(forward, offset, num_positions, attr
           pos_array = [];
           pos_array[0] = pos;
           pos_array[1] = self;
-          if(!isdefined(self.attractor_positions)) {
+          if(!isDefined(self.attractor_positions)) {
             self.attractor_positions = [];
           } else if(!isarray(self.attractor_positions)) {
             self.attractor_positions = array(self.attractor_positions);
@@ -547,32 +547,32 @@ function generated_radius_attract_positions(forward, offset, num_positions, attr
 }
 
 function debug_draw_attractor_positions() {
-  while (true) {
-    while (!isdefined(self.attractor_positions)) {
+  while(true) {
+    while(!isDefined(self.attractor_positions)) {
       wait(0.05);
       continue;
     }
-    for (i = 0; i < self.attractor_positions.size; i++) {
+    for(i = 0; i < self.attractor_positions.size; i++) {
       line(self.origin, self.attractor_positions[i][0], (1, 0, 0), 1, 1);
     }
     wait(0.05);
-    if(!isdefined(self)) {
+    if(!isDefined(self)) {
       return;
     }
   }
 }
 
 function debug_draw_claimed_attractor_positions() {
-  while (true) {
-    while (!isdefined(self.claimed_attractor_positions)) {
+  while(true) {
+    while(!isDefined(self.claimed_attractor_positions)) {
       wait(0.05);
       continue;
     }
-    for (i = 0; i < self.claimed_attractor_positions.size; i++) {
+    for(i = 0; i < self.claimed_attractor_positions.size; i++) {
       line(self.origin, self.claimed_attractor_positions[i][0], (0, 1, 0), 1, 1);
     }
     wait(0.05);
-    if(!isdefined(self)) {
+    if(!isDefined(self)) {
       return;
     }
   }
@@ -580,12 +580,12 @@ function debug_draw_claimed_attractor_positions() {
 
 function get_zombie_point_of_interest(origin, poi_array) {
   aiprofile_beginentry("get_zombie_point_of_interest");
-  if(isdefined(self.ignore_all_poi) && self.ignore_all_poi) {
+  if(isDefined(self.ignore_all_poi) && self.ignore_all_poi) {
     aiprofile_endentry();
     return undefined;
   }
   curr_radius = undefined;
-  if(isdefined(poi_array)) {
+  if(isDefined(poi_array)) {
     ent_array = poi_array;
   } else {
     ent_array = level.zombie_poi_array;
@@ -593,14 +593,14 @@ function get_zombie_point_of_interest(origin, poi_array) {
   best_poi = undefined;
   position = undefined;
   best_dist = 100000000;
-  for (i = 0; i < ent_array.size; i++) {
-    if(!isdefined(ent_array[i]) || !isdefined(ent_array[i].poi_active) || !ent_array[i].poi_active) {
+  for(i = 0; i < ent_array.size; i++) {
+    if(!isDefined(ent_array[i]) || !isDefined(ent_array[i].poi_active) || !ent_array[i].poi_active) {
       continue;
     }
-    if(isdefined(self.ignore_poi_targetname) && self.ignore_poi_targetname.size > 0) {
-      if(isdefined(ent_array[i].targetname)) {
+    if(isDefined(self.ignore_poi_targetname) && self.ignore_poi_targetname.size > 0) {
+      if(isDefined(ent_array[i].targetname)) {
         ignore = 0;
-        for (j = 0; j < self.ignore_poi_targetname.size; j++) {
+        for(j = 0; j < self.ignore_poi_targetname.size; j++) {
           if(ent_array[i].targetname == self.ignore_poi_targetname[j]) {
             ignore = 1;
             break;
@@ -611,9 +611,9 @@ function get_zombie_point_of_interest(origin, poi_array) {
         }
       }
     }
-    if(isdefined(self.ignore_poi) && self.ignore_poi.size > 0) {
+    if(isDefined(self.ignore_poi) && self.ignore_poi.size > 0) {
       ignore = 0;
-      for (j = 0; j < self.ignore_poi.size; j++) {
+      for(j = 0; j < self.ignore_poi.size; j++) {
         if(self.ignore_poi[j] == ent_array[i]) {
           ignore = 1;
           break;
@@ -625,27 +625,27 @@ function get_zombie_point_of_interest(origin, poi_array) {
     }
     dist = distancesquared(origin, ent_array[i].origin);
     dist = dist - ent_array[i].added_poi_value;
-    if(isdefined(ent_array[i].poi_radius)) {
+    if(isDefined(ent_array[i].poi_radius)) {
       curr_radius = ent_array[i].poi_radius;
     }
-    if(!isdefined(curr_radius) || dist < curr_radius && dist < best_dist && ent_array[i] can_attract(self)) {
+    if(!isDefined(curr_radius) || dist < curr_radius && dist < best_dist && ent_array[i] can_attract(self)) {
       best_poi = ent_array[i];
       best_dist = dist;
     }
   }
-  if(isdefined(best_poi)) {
-    if(isdefined(best_poi._team)) {
-      if(isdefined(self._race_team) && self._race_team != best_poi._team) {
+  if(isDefined(best_poi)) {
+    if(isDefined(best_poi._team)) {
+      if(isDefined(self._race_team) && self._race_team != best_poi._team) {
         aiprofile_endentry();
         return undefined;
       }
     }
-    if(isdefined(best_poi._new_ground_trace) && best_poi._new_ground_trace) {
+    if(isDefined(best_poi._new_ground_trace) && best_poi._new_ground_trace) {
       position = [];
       position[0] = groundpos_ignore_water_new(best_poi.origin + vectorscale((0, 0, 1), 100));
       position[1] = self;
     } else {
-      if(isdefined(best_poi.attract_to_origin) && best_poi.attract_to_origin) {
+      if(isDefined(best_poi.attract_to_origin) && best_poi.attract_to_origin) {
         position = [];
         position[0] = groundpos(best_poi.origin + vectorscale((0, 0, 1), 100));
         position[1] = self;
@@ -653,10 +653,10 @@ function get_zombie_point_of_interest(origin, poi_array) {
         position = self add_poi_attractor(best_poi);
       }
     }
-    if(isdefined(best_poi.initial_attract_func)) {
+    if(isDefined(best_poi.initial_attract_func)) {
       self thread[[best_poi.initial_attract_func]](best_poi);
     }
-    if(isdefined(best_poi.arrival_attract_func)) {
+    if(isDefined(best_poi.arrival_attract_func)) {
       self thread[[best_poi.arrival_attract_func]](best_poi);
     }
   }
@@ -676,16 +676,16 @@ function deactivate_zombie_point_of_interest(dont_remove) {
     return;
   }
   self.attractor_array = array::remove_undefined(self.attractor_array);
-  for (i = 0; i < self.attractor_array.size; i++) {
+  for(i = 0; i < self.attractor_array.size; i++) {
     self.attractor_array[i] notify("kill_poi");
   }
   self.attractor_array = [];
   self.claimed_attractor_positions = [];
   self.poi_active = 0;
-  if(isdefined(dont_remove) && dont_remove) {
+  if(isDefined(dont_remove) && dont_remove) {
     return;
   }
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     if(isinarray(level.zombie_poi_array, self)) {
       arrayremovevalue(level.zombie_poi_array, self);
     }
@@ -695,12 +695,12 @@ function deactivate_zombie_point_of_interest(dont_remove) {
 function assign_zombie_point_of_interest(origin, poi) {
   position = undefined;
   doremovalthread = 0;
-  if(isdefined(poi) && poi can_attract(self)) {
-    if(!isdefined(poi.attractor_array) || (isdefined(poi.attractor_array) && !isinarray(poi.attractor_array, self))) {
+  if(isDefined(poi) && poi can_attract(self)) {
+    if(!isDefined(poi.attractor_array) || (isDefined(poi.attractor_array) && !isinarray(poi.attractor_array, self))) {
       doremovalthread = 1;
     }
     position = self add_poi_attractor(poi);
-    if(isdefined(position) && doremovalthread && isinarray(poi.attractor_array, self)) {
+    if(isDefined(position) && doremovalthread && isinarray(poi.attractor_array, self)) {
       self thread update_on_poi_removal(poi);
     }
   }
@@ -708,14 +708,14 @@ function assign_zombie_point_of_interest(origin, poi) {
 }
 
 function remove_poi_attractor(zombie_poi) {
-  if(!isdefined(zombie_poi) || !isdefined(zombie_poi.attractor_array)) {
+  if(!isDefined(zombie_poi) || !isDefined(zombie_poi.attractor_array)) {
     return;
   }
-  for (i = 0; i < zombie_poi.attractor_array.size; i++) {
+  for(i = 0; i < zombie_poi.attractor_array.size; i++) {
     if(zombie_poi.attractor_array[i] == self) {
       arrayremovevalue(zombie_poi.attractor_array, zombie_poi.attractor_array[i]);
       arrayremovevalue(zombie_poi.claimed_attractor_positions, zombie_poi.claimed_attractor_positions[i]);
-      if(isdefined(self)) {
+      if(isDefined(self)) {
         self notify("kill_poi");
       }
     }
@@ -723,7 +723,7 @@ function remove_poi_attractor(zombie_poi) {
 }
 
 function array_check_for_dupes_using_compare(array, single, is_equal_fn) {
-  for (i = 0; i < array.size; i++) {
+  for(i = 0; i < array.size; i++) {
     if([
         [is_equal_fn]
       ](array[i], single)) {
@@ -738,23 +738,23 @@ function poi_locations_equal(loc1, loc2) {
 }
 
 function add_poi_attractor(zombie_poi) {
-  if(!isdefined(zombie_poi)) {
+  if(!isDefined(zombie_poi)) {
     return;
   }
-  if(!isdefined(zombie_poi.attractor_array)) {
+  if(!isDefined(zombie_poi.attractor_array)) {
     zombie_poi.attractor_array = [];
   }
   if(!isinarray(zombie_poi.attractor_array, self)) {
-    if(!isdefined(zombie_poi.claimed_attractor_positions)) {
+    if(!isDefined(zombie_poi.claimed_attractor_positions)) {
       zombie_poi.claimed_attractor_positions = [];
     }
-    if(!isdefined(zombie_poi.attractor_positions) || zombie_poi.attractor_positions.size <= 0) {
+    if(!isDefined(zombie_poi.attractor_positions) || zombie_poi.attractor_positions.size <= 0) {
       return undefined;
     }
     start = -1;
     end = -1;
     last_index = -1;
-    for (i = 0; i < 4; i++) {
+    for(i = 0; i < 4; i++) {
       if(zombie_poi.claimed_attractor_positions.size < zombie_poi.last_index[i]) {
         start = last_index + 1;
         end = zombie_poi.last_index[i];
@@ -770,22 +770,22 @@ function add_poi_attractor(zombie_poi) {
     if(end < 0) {
       return undefined;
     }
-    for (i = int(start); i <= int(end); i++) {
-      if(!isdefined(zombie_poi.attractor_positions[i])) {
+    for(i = int(start); i <= int(end); i++) {
+      if(!isDefined(zombie_poi.attractor_positions[i])) {
         continue;
       }
-      if(array_check_for_dupes_using_compare(zombie_poi.claimed_attractor_positions, zombie_poi.attractor_positions[i], & poi_locations_equal)) {
-        if(isdefined(zombie_poi.attractor_positions[i][0]) && isdefined(self.origin)) {
+      if(array_check_for_dupes_using_compare(zombie_poi.claimed_attractor_positions, zombie_poi.attractor_positions[i], &poi_locations_equal)) {
+        if(isDefined(zombie_poi.attractor_positions[i][0]) && isDefined(self.origin)) {
           dist = distancesquared(zombie_poi.attractor_positions[i][0], zombie_poi.origin);
-          if(dist < best_dist || !isdefined(best_pos)) {
+          if(dist < best_dist || !isDefined(best_pos)) {
             best_dist = dist;
             best_pos = zombie_poi.attractor_positions[i];
           }
         }
       }
     }
-    if(!isdefined(best_pos)) {
-      if(isdefined(level.validate_poi_attractors) && level.validate_poi_attractors) {
+    if(!isDefined(best_pos)) {
+      if(isDefined(level.validate_poi_attractors) && level.validate_poi_attractors) {
         valid_pos = [];
         valid_pos[0] = zombie_poi.origin;
         valid_pos[1] = zombie_poi;
@@ -793,14 +793,14 @@ function add_poi_attractor(zombie_poi) {
       }
       return undefined;
     }
-    if(!isdefined(zombie_poi.attractor_array)) {
+    if(!isDefined(zombie_poi.attractor_array)) {
       zombie_poi.attractor_array = [];
     } else if(!isarray(zombie_poi.attractor_array)) {
       zombie_poi.attractor_array = array(zombie_poi.attractor_array);
     }
     zombie_poi.attractor_array[zombie_poi.attractor_array.size] = self;
     self thread update_poi_on_death(zombie_poi);
-    if(!isdefined(zombie_poi.claimed_attractor_positions)) {
+    if(!isDefined(zombie_poi.claimed_attractor_positions)) {
       zombie_poi.claimed_attractor_positions = [];
     } else if(!isarray(zombie_poi.claimed_attractor_positions)) {
       zombie_poi.claimed_attractor_positions = array(zombie_poi.claimed_attractor_positions);
@@ -808,9 +808,9 @@ function add_poi_attractor(zombie_poi) {
     zombie_poi.claimed_attractor_positions[zombie_poi.claimed_attractor_positions.size] = best_pos;
     return best_pos;
   }
-  for (i = 0; i < zombie_poi.attractor_array.size; i++) {
+  for(i = 0; i < zombie_poi.attractor_array.size; i++) {
     if(zombie_poi.attractor_array[i] == self) {
-      if(isdefined(zombie_poi.claimed_attractor_positions) && isdefined(zombie_poi.claimed_attractor_positions[i])) {
+      if(isDefined(zombie_poi.claimed_attractor_positions) && isDefined(zombie_poi.claimed_attractor_positions[i])) {
         return zombie_poi.claimed_attractor_positions[i];
       }
     }
@@ -819,16 +819,16 @@ function add_poi_attractor(zombie_poi) {
 }
 
 function can_attract(attractor) {
-  if(!isdefined(self.attractor_array)) {
+  if(!isDefined(self.attractor_array)) {
     self.attractor_array = [];
   }
-  if(isdefined(self.attracted_array) && !isinarray(self.attracted_array, attractor)) {
+  if(isDefined(self.attracted_array) && !isinarray(self.attracted_array, attractor)) {
     return false;
   }
   if(isinarray(self.attractor_array, attractor)) {
     return true;
   }
-  if(isdefined(self.num_poi_attracts) && self.attractor_array.size >= self.num_poi_attracts) {
+  if(isDefined(self.num_poi_attracts) && self.attractor_array.size >= self.num_poi_attracts) {
     return false;
   }
   return true;
@@ -842,10 +842,10 @@ function update_poi_on_death(zombie_poi) {
 
 function update_on_poi_removal(zombie_poi) {
   zombie_poi waittill("death");
-  if(!isdefined(zombie_poi.attractor_array)) {
+  if(!isDefined(zombie_poi.attractor_array)) {
     return;
   }
-  for (i = 0; i < zombie_poi.attractor_array.size; i++) {
+  for(i = 0; i < zombie_poi.attractor_array.size; i++) {
     if(zombie_poi.attractor_array[i] == self) {
       arrayremoveindex(zombie_poi.attractor_array, i);
       arrayremoveindex(zombie_poi.claimed_attractor_positions, i);
@@ -854,25 +854,25 @@ function update_on_poi_removal(zombie_poi) {
 }
 
 function invalidate_attractor_pos(attractor_pos, zombie) {
-  if(!isdefined(self) || !isdefined(attractor_pos)) {
+  if(!isDefined(self) || !isDefined(attractor_pos)) {
     wait(0.1);
     return undefined;
   }
-  if(isdefined(self.attractor_positions) && !array_check_for_dupes_using_compare(self.attractor_positions, attractor_pos, & poi_locations_equal)) {
+  if(isDefined(self.attractor_positions) && !array_check_for_dupes_using_compare(self.attractor_positions, attractor_pos, &poi_locations_equal)) {
     index = 0;
-    for (i = 0; i < self.attractor_positions.size; i++) {
+    for(i = 0; i < self.attractor_positions.size; i++) {
       if(poi_locations_equal(self.attractor_positions[i], attractor_pos)) {
         index = i;
       }
     }
-    for (i = 0; i < self.last_index.size; i++) {
+    for(i = 0; i < self.last_index.size; i++) {
       if(index <= self.last_index[i]) {
         self.last_index[i]--;
       }
     }
     arrayremovevalue(self.attractor_array, zombie);
     arrayremovevalue(self.attractor_positions, attractor_pos);
-    for (i = 0; i < self.claimed_attractor_positions.size; i++) {
+    for(i = 0; i < self.claimed_attractor_positions.size; i++) {
       if(self.claimed_attractor_positions[i][0] == attractor_pos[0]) {
         arrayremovevalue(self.claimed_attractor_positions, self.claimed_attractor_positions[i]);
       }
@@ -884,8 +884,8 @@ function invalidate_attractor_pos(attractor_pos, zombie) {
 }
 
 function remove_poi_from_ignore_list(poi) {
-  if(isdefined(self.ignore_poi) && self.ignore_poi.size > 0) {
-    for (i = 0; i < self.ignore_poi.size; i++) {
+  if(isDefined(self.ignore_poi) && self.ignore_poi.size > 0) {
+    for(i = 0; i < self.ignore_poi.size; i++) {
       if(self.ignore_poi[i] == poi) {
         arrayremovevalue(self.ignore_poi, self.ignore_poi[i]);
         return;
@@ -895,12 +895,12 @@ function remove_poi_from_ignore_list(poi) {
 }
 
 function add_poi_to_ignore_list(poi) {
-  if(!isdefined(self.ignore_poi)) {
+  if(!isDefined(self.ignore_poi)) {
     self.ignore_poi = [];
   }
   add_poi = 1;
   if(self.ignore_poi.size > 0) {
-    for (i = 0; i < self.ignore_poi.size; i++) {
+    for(i = 0; i < self.ignore_poi.size; i++) {
       if(self.ignore_poi[i] == poi) {
         add_poi = 0;
         break;
@@ -925,44 +925,40 @@ function get_closest_valid_player(origin, ignore_player) {
   aiprofile_beginentry("get_closest_valid_player");
   valid_player_found = 0;
   players = getplayers();
-  if(isdefined(level.get_closest_valid_player_override)) {
-    players = [
-      [level.get_closest_valid_player_override]
-    ]();
+  if(isDefined(level.get_closest_valid_player_override)) {
+    players = [[level.get_closest_valid_player_override]]();
   }
   b_designated_target_exists = 0;
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     player = players[i];
     if(!player.am_i_valid) {
       continue;
     }
-    if(isdefined(level.evaluate_zone_path_override)) {
-      if(![
-          [level.evaluate_zone_path_override]
-        ](player)) {
+    if(isDefined(level.evaluate_zone_path_override)) {
+      if(![[level.evaluate_zone_path_override]](player)) {
         array::add(ignore_player, player);
       }
     }
-    if(isdefined(player.b_is_designated_target) && player.b_is_designated_target) {
+    if(isDefined(player.b_is_designated_target) && player.b_is_designated_target) {
       b_designated_target_exists = 1;
     }
   }
-  if(isdefined(ignore_player)) {
-    for (i = 0; i < ignore_player.size; i++) {
+  if(isDefined(ignore_player)) {
+    for(i = 0; i < ignore_player.size; i++) {
       arrayremovevalue(players, ignore_player[i]);
     }
   }
   done = 0;
-  while (players.size && !done) {
+  while(players.size && !done) {
     done = 1;
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       player = players[i];
       if(!player.am_i_valid) {
         arrayremovevalue(players, player);
         done = 0;
         break;
       }
-      if(b_designated_target_exists && (!(isdefined(player.b_is_designated_target) && player.b_is_designated_target))) {
+      if(b_designated_target_exists && (!(isDefined(player.b_is_designated_target) && player.b_is_designated_target))) {
         arrayremovevalue(players, player);
         done = 0;
         break;
@@ -974,7 +970,7 @@ function get_closest_valid_player(origin, ignore_player) {
     return undefined;
   }
   if(!valid_player_found) {
-    for (;;) {
+    for(;;) {
       player = [
         [self.closest_player_override]
       ](origin, players);
@@ -990,11 +986,11 @@ function get_closest_valid_player(origin, ignore_player) {
       aiprofile_endentry();
       return undefined;
     }
-    if(isdefined(self.closest_player_override)) {} else {
-      if(isdefined(level.closest_player_override)) {} else {}
+    if(isDefined(self.closest_player_override)) {} else {
+      if(isDefined(level.closest_player_override)) {} else {}
     }
-    if(!isdefined(player) || players.size == 0) {}
-    if(isdefined(level.allow_zombie_to_target_ai) && level.allow_zombie_to_target_ai || (isdefined(player.allow_zombie_to_target_ai) && player.allow_zombie_to_target_ai)) {}
+    if(!isDefined(player) || players.size == 0) {}
+    if(isDefined(level.allow_zombie_to_target_ai) && level.allow_zombie_to_target_ai || (isDefined(player.allow_zombie_to_target_ai) && player.allow_zombie_to_target_ai)) {}
     if(!player.am_i_valid) {
       if(players.size == 0) {}
     }
@@ -1011,38 +1007,36 @@ function update_valid_players(origin, ignore_player) {
     self setignoreent(player, 1);
   }
   b_designated_target_exists = 0;
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     player = players[i];
     if(!player.am_i_valid) {
       continue;
     }
-    if(isdefined(level.evaluate_zone_path_override)) {
-      if(![
-          [level.evaluate_zone_path_override]
-        ](player)) {
+    if(isDefined(level.evaluate_zone_path_override)) {
+      if(![[level.evaluate_zone_path_override]](player)) {
         array::add(ignore_player, player);
       }
     }
-    if(isdefined(player.b_is_designated_target) && player.b_is_designated_target) {
+    if(isDefined(player.b_is_designated_target) && player.b_is_designated_target) {
       b_designated_target_exists = 1;
     }
   }
-  if(isdefined(ignore_player)) {
-    for (i = 0; i < ignore_player.size; i++) {
+  if(isDefined(ignore_player)) {
+    for(i = 0; i < ignore_player.size; i++) {
       arrayremovevalue(players, ignore_player[i]);
     }
   }
   done = 0;
-  while (players.size && !done) {
+  while(players.size && !done) {
     done = 1;
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       player = players[i];
       if(!player.am_i_valid) {
         arrayremovevalue(players, player);
         done = 0;
         break;
       }
-      if(b_designated_target_exists && (!(isdefined(player.b_is_designated_target) && player.b_is_designated_target))) {
+      if(b_designated_target_exists && (!(isDefined(player.b_is_designated_target) && player.b_is_designated_target))) {
         arrayremovevalue(players, player);
         done = 0;
         break;
@@ -1057,7 +1051,7 @@ function update_valid_players(origin, ignore_player) {
 }
 
 function is_player_valid(player, checkignoremeflag, ignore_laststand_players) {
-  if(!isdefined(player)) {
+  if(!isDefined(player)) {
     return 0;
   }
   if(!isalive(player)) {
@@ -1066,7 +1060,7 @@ function is_player_valid(player, checkignoremeflag, ignore_laststand_players) {
   if(!isplayer(player)) {
     return 0;
   }
-  if(isdefined(player.is_zombie) && player.is_zombie == 1) {
+  if(isDefined(player.is_zombie) && player.is_zombie == 1) {
     return 0;
   }
   if(player.sessionstate == "spectator") {
@@ -1075,21 +1069,19 @@ function is_player_valid(player, checkignoremeflag, ignore_laststand_players) {
   if(player.sessionstate == "intermission") {
     return 0;
   }
-  if(isdefined(level.intermission) && level.intermission) {
+  if(isDefined(level.intermission) && level.intermission) {
     return 0;
   }
-  if(!(isdefined(ignore_laststand_players) && ignore_laststand_players)) {
+  if(!(isDefined(ignore_laststand_players) && ignore_laststand_players)) {
     if(player laststand::player_is_in_laststand()) {
       return 0;
     }
   }
-  if(isdefined(checkignoremeflag) && checkignoremeflag && player.ignoreme) {
+  if(isDefined(checkignoremeflag) && checkignoremeflag && player.ignoreme) {
     return 0;
   }
-  if(isdefined(level.is_player_valid_override)) {
-    return [
-      [level.is_player_valid_override]
-    ](player);
+  if(isDefined(level.is_player_valid_override)) {
+    return [[level.is_player_valid_override]](player);
   }
   return 1;
 }
@@ -1097,7 +1089,7 @@ function is_player_valid(player, checkignoremeflag, ignore_laststand_players) {
 function get_number_of_valid_players() {
   players = getplayers();
   num_player_valid = 0;
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(is_player_valid(players[i])) {
       num_player_valid = num_player_valid + 1;
     }
@@ -1106,14 +1098,14 @@ function get_number_of_valid_players() {
 }
 
 function in_revive_trigger() {
-  if(isdefined(self.rt_time) && (self.rt_time + 100) >= gettime()) {
+  if(isDefined(self.rt_time) && (self.rt_time + 100) >= gettime()) {
     return self.in_rt_cached;
   }
   self.rt_time = gettime();
   players = level.players;
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     current_player = players[i];
-    if(isdefined(current_player) && isdefined(current_player.revivetrigger) && isalive(current_player)) {
+    if(isDefined(current_player) && isDefined(current_player.revivetrigger) && isalive(current_player)) {
       if(self istouching(current_player.revivetrigger)) {
         self.in_rt_cached = 1;
         return 1;
@@ -1132,26 +1124,26 @@ function non_destroyed_bar_board_order(origin, chunks) {
   first_bars = [];
   first_bars1 = [];
   first_bars2 = [];
-  for (i = 0; i < chunks.size; i++) {
-    if(isdefined(chunks[i].script_team) && chunks[i].script_team == "classic_boards") {
-      if(isdefined(chunks[i].script_parameters) && chunks[i].script_parameters == "board") {
+  for(i = 0; i < chunks.size; i++) {
+    if(isDefined(chunks[i].script_team) && chunks[i].script_team == "classic_boards") {
+      if(isDefined(chunks[i].script_parameters) && chunks[i].script_parameters == "board") {
         return get_closest_2d(origin, chunks);
       }
-      if(isdefined(chunks[i].script_team) && chunks[i].script_team == "bar_board_variant1" || chunks[i].script_team == "bar_board_variant2" || chunks[i].script_team == "bar_board_variant4" || chunks[i].script_team == "bar_board_variant5") {
+      if(isDefined(chunks[i].script_team) && chunks[i].script_team == "bar_board_variant1" || chunks[i].script_team == "bar_board_variant2" || chunks[i].script_team == "bar_board_variant4" || chunks[i].script_team == "bar_board_variant5") {
         return undefined;
       }
       continue;
     }
-    if(isdefined(chunks[i].script_team) && chunks[i].script_team == "new_barricade") {
-      if(isdefined(chunks[i].script_parameters) && (chunks[i].script_parameters == "repair_board" || chunks[i].script_parameters == "barricade_vents")) {
+    if(isDefined(chunks[i].script_team) && chunks[i].script_team == "new_barricade") {
+      if(isDefined(chunks[i].script_parameters) && (chunks[i].script_parameters == "repair_board" || chunks[i].script_parameters == "barricade_vents")) {
         return get_closest_2d(origin, chunks);
       }
     }
   }
-  for (i = 0; i < chunks.size; i++) {
-    if(isdefined(chunks[i].script_team) && chunks[i].script_team == "6_bars_bent" || chunks[i].script_team == "6_bars_prestine") {
-      if(isdefined(chunks[i].script_parameters) && chunks[i].script_parameters == "bar") {
-        if(isdefined(chunks[i].script_noteworthy)) {
+  for(i = 0; i < chunks.size; i++) {
+    if(isDefined(chunks[i].script_team) && chunks[i].script_team == "6_bars_bent" || chunks[i].script_team == "6_bars_prestine") {
+      if(isDefined(chunks[i].script_parameters) && chunks[i].script_parameters == "bar") {
+        if(isDefined(chunks[i].script_noteworthy)) {
           if(chunks[i].script_noteworthy == "4" || chunks[i].script_noteworthy == "6") {
             first_bars[first_bars.size] = chunks[i];
           }
@@ -1159,18 +1151,18 @@ function non_destroyed_bar_board_order(origin, chunks) {
       }
     }
   }
-  for (i = 0; i < first_bars.size; i++) {
-    if(isdefined(chunks[i].script_team) && chunks[i].script_team == "6_bars_bent" || chunks[i].script_team == "6_bars_prestine") {
-      if(isdefined(chunks[i].script_parameters) && chunks[i].script_parameters == "bar") {
+  for(i = 0; i < first_bars.size; i++) {
+    if(isDefined(chunks[i].script_team) && chunks[i].script_team == "6_bars_bent" || chunks[i].script_team == "6_bars_prestine") {
+      if(isDefined(chunks[i].script_parameters) && chunks[i].script_parameters == "bar") {
         if(!first_bars[i].destroyed) {
           return first_bars[i];
         }
       }
     }
   }
-  for (i = 0; i < chunks.size; i++) {
-    if(isdefined(chunks[i].script_team) && chunks[i].script_team == "6_bars_bent" || chunks[i].script_team == "6_bars_prestine") {
-      if(isdefined(chunks[i].script_parameters) && chunks[i].script_parameters == "bar") {
+  for(i = 0; i < chunks.size; i++) {
+    if(isDefined(chunks[i].script_team) && chunks[i].script_team == "6_bars_bent" || chunks[i].script_team == "6_bars_prestine") {
+      if(isDefined(chunks[i].script_parameters) && chunks[i].script_parameters == "bar") {
         if(!chunks[i].destroyed) {
           return get_closest_2d(origin, chunks);
         }
@@ -1187,32 +1179,32 @@ function non_destroyed_grate_order(origin, chunks_grate) {
   grate_order4 = [];
   grate_order5 = [];
   grate_order6 = [];
-  if(isdefined(chunks_grate)) {
-    for (i = 0; i < chunks_grate.size; i++) {
-      if(isdefined(chunks_grate[i].script_parameters) && chunks_grate[i].script_parameters == "grate") {
-        if(isdefined(chunks_grate[i].script_noteworthy) && chunks_grate[i].script_noteworthy == "1") {
+  if(isDefined(chunks_grate)) {
+    for(i = 0; i < chunks_grate.size; i++) {
+      if(isDefined(chunks_grate[i].script_parameters) && chunks_grate[i].script_parameters == "grate") {
+        if(isDefined(chunks_grate[i].script_noteworthy) && chunks_grate[i].script_noteworthy == "1") {
           grate_order1[grate_order1.size] = chunks_grate[i];
         }
-        if(isdefined(chunks_grate[i].script_noteworthy) && chunks_grate[i].script_noteworthy == "2") {
+        if(isDefined(chunks_grate[i].script_noteworthy) && chunks_grate[i].script_noteworthy == "2") {
           grate_order2[grate_order2.size] = chunks_grate[i];
         }
-        if(isdefined(chunks_grate[i].script_noteworthy) && chunks_grate[i].script_noteworthy == "3") {
+        if(isDefined(chunks_grate[i].script_noteworthy) && chunks_grate[i].script_noteworthy == "3") {
           grate_order3[grate_order3.size] = chunks_grate[i];
         }
-        if(isdefined(chunks_grate[i].script_noteworthy) && chunks_grate[i].script_noteworthy == "4") {
+        if(isDefined(chunks_grate[i].script_noteworthy) && chunks_grate[i].script_noteworthy == "4") {
           grate_order4[grate_order4.size] = chunks_grate[i];
         }
-        if(isdefined(chunks_grate[i].script_noteworthy) && chunks_grate[i].script_noteworthy == "5") {
+        if(isDefined(chunks_grate[i].script_noteworthy) && chunks_grate[i].script_noteworthy == "5") {
           grate_order5[grate_order5.size] = chunks_grate[i];
         }
-        if(isdefined(chunks_grate[i].script_noteworthy) && chunks_grate[i].script_noteworthy == "6") {
+        if(isDefined(chunks_grate[i].script_noteworthy) && chunks_grate[i].script_noteworthy == "6") {
           grate_order6[grate_order6.size] = chunks_grate[i];
         }
       }
     }
-    for (i = 0; i < chunks_grate.size; i++) {
-      if(isdefined(chunks_grate[i].script_parameters) && chunks_grate[i].script_parameters == "grate") {
-        if(isdefined(grate_order1[i])) {
+    for(i = 0; i < chunks_grate.size; i++) {
+      if(isDefined(chunks_grate[i].script_parameters) && chunks_grate[i].script_parameters == "grate") {
+        if(isDefined(grate_order1[i])) {
           if(grate_order1[i].state == "repaired") {
             grate_order2[i] thread show_grate_pull();
             return grate_order1[i];
@@ -1254,10 +1246,10 @@ function non_destroyed_variant1_order(origin, chunks_variant1) {
   variant1_order4 = [];
   variant1_order5 = [];
   variant1_order6 = [];
-  if(isdefined(chunks_variant1)) {
-    for (i = 0; i < chunks_variant1.size; i++) {
-      if(isdefined(chunks_variant1[i].script_team) && chunks_variant1[i].script_team == "bar_board_variant1") {
-        if(isdefined(chunks_variant1[i].script_noteworthy)) {
+  if(isDefined(chunks_variant1)) {
+    for(i = 0; i < chunks_variant1.size; i++) {
+      if(isDefined(chunks_variant1[i].script_team) && chunks_variant1[i].script_team == "bar_board_variant1") {
+        if(isDefined(chunks_variant1[i].script_noteworthy)) {
           if(chunks_variant1[i].script_noteworthy == "1") {
             variant1_order1[variant1_order1.size] = chunks_variant1[i];
           }
@@ -1279,9 +1271,9 @@ function non_destroyed_variant1_order(origin, chunks_variant1) {
         }
       }
     }
-    for (i = 0; i < chunks_variant1.size; i++) {
-      if(isdefined(chunks_variant1[i].script_team) && chunks_variant1[i].script_team == "bar_board_variant1") {
-        if(isdefined(variant1_order2[i])) {
+    for(i = 0; i < chunks_variant1.size; i++) {
+      if(isDefined(chunks_variant1[i].script_team) && chunks_variant1[i].script_team == "bar_board_variant1") {
+        if(isDefined(variant1_order2[i])) {
           if(variant1_order2[i].state == "repaired") {
             return variant1_order2[i];
           }
@@ -1314,32 +1306,32 @@ function non_destroyed_variant2_order(origin, chunks_variant2) {
   variant2_order4 = [];
   variant2_order5 = [];
   variant2_order6 = [];
-  if(isdefined(chunks_variant2)) {
-    for (i = 0; i < chunks_variant2.size; i++) {
-      if(isdefined(chunks_variant2[i].script_team) && chunks_variant2[i].script_team == "bar_board_variant2") {
-        if(isdefined(chunks_variant2[i].script_noteworthy) && chunks_variant2[i].script_noteworthy == "1") {
+  if(isDefined(chunks_variant2)) {
+    for(i = 0; i < chunks_variant2.size; i++) {
+      if(isDefined(chunks_variant2[i].script_team) && chunks_variant2[i].script_team == "bar_board_variant2") {
+        if(isDefined(chunks_variant2[i].script_noteworthy) && chunks_variant2[i].script_noteworthy == "1") {
           variant2_order1[variant2_order1.size] = chunks_variant2[i];
         }
-        if(isdefined(chunks_variant2[i].script_noteworthy) && chunks_variant2[i].script_noteworthy == "2") {
+        if(isDefined(chunks_variant2[i].script_noteworthy) && chunks_variant2[i].script_noteworthy == "2") {
           variant2_order2[variant2_order2.size] = chunks_variant2[i];
         }
-        if(isdefined(chunks_variant2[i].script_noteworthy) && chunks_variant2[i].script_noteworthy == "3") {
+        if(isDefined(chunks_variant2[i].script_noteworthy) && chunks_variant2[i].script_noteworthy == "3") {
           variant2_order3[variant2_order3.size] = chunks_variant2[i];
         }
-        if(isdefined(chunks_variant2[i].script_noteworthy) && chunks_variant2[i].script_noteworthy == "4") {
+        if(isDefined(chunks_variant2[i].script_noteworthy) && chunks_variant2[i].script_noteworthy == "4") {
           variant2_order4[variant2_order4.size] = chunks_variant2[i];
         }
-        if(isdefined(chunks_variant2[i].script_noteworthy) && chunks_variant2[i].script_noteworthy == "5" && isdefined(chunks_variant2[i].script_location) && chunks_variant2[i].script_location == "5") {
+        if(isDefined(chunks_variant2[i].script_noteworthy) && chunks_variant2[i].script_noteworthy == "5" && isDefined(chunks_variant2[i].script_location) && chunks_variant2[i].script_location == "5") {
           variant2_order5[variant2_order5.size] = chunks_variant2[i];
         }
-        if(isdefined(chunks_variant2[i].script_noteworthy) && chunks_variant2[i].script_noteworthy == "5" && isdefined(chunks_variant2[i].script_location) && chunks_variant2[i].script_location == "6") {
+        if(isDefined(chunks_variant2[i].script_noteworthy) && chunks_variant2[i].script_noteworthy == "5" && isDefined(chunks_variant2[i].script_location) && chunks_variant2[i].script_location == "6") {
           variant2_order6[variant2_order6.size] = chunks_variant2[i];
         }
       }
     }
-    for (i = 0; i < chunks_variant2.size; i++) {
-      if(isdefined(chunks_variant2[i].script_team) && chunks_variant2[i].script_team == "bar_board_variant2") {
-        if(isdefined(variant2_order1[i])) {
+    for(i = 0; i < chunks_variant2.size; i++) {
+      if(isDefined(chunks_variant2[i].script_team) && chunks_variant2[i].script_team == "bar_board_variant2") {
+        if(isDefined(variant2_order1[i])) {
           if(variant2_order1[i].state == "repaired") {
             return variant2_order1[i];
           }
@@ -1372,32 +1364,32 @@ function non_destroyed_variant4_order(origin, chunks_variant4) {
   variant4_order4 = [];
   variant4_order5 = [];
   variant4_order6 = [];
-  if(isdefined(chunks_variant4)) {
-    for (i = 0; i < chunks_variant4.size; i++) {
-      if(isdefined(chunks_variant4[i].script_team) && chunks_variant4[i].script_team == "bar_board_variant4") {
-        if(isdefined(chunks_variant4[i].script_noteworthy) && chunks_variant4[i].script_noteworthy == "1" && !isdefined(chunks_variant4[i].script_location)) {
+  if(isDefined(chunks_variant4)) {
+    for(i = 0; i < chunks_variant4.size; i++) {
+      if(isDefined(chunks_variant4[i].script_team) && chunks_variant4[i].script_team == "bar_board_variant4") {
+        if(isDefined(chunks_variant4[i].script_noteworthy) && chunks_variant4[i].script_noteworthy == "1" && !isDefined(chunks_variant4[i].script_location)) {
           variant4_order1[variant4_order1.size] = chunks_variant4[i];
         }
-        if(isdefined(chunks_variant4[i].script_noteworthy) && chunks_variant4[i].script_noteworthy == "2") {
+        if(isDefined(chunks_variant4[i].script_noteworthy) && chunks_variant4[i].script_noteworthy == "2") {
           variant4_order2[variant4_order2.size] = chunks_variant4[i];
         }
-        if(isdefined(chunks_variant4[i].script_noteworthy) && chunks_variant4[i].script_noteworthy == "3") {
+        if(isDefined(chunks_variant4[i].script_noteworthy) && chunks_variant4[i].script_noteworthy == "3") {
           variant4_order3[variant4_order3.size] = chunks_variant4[i];
         }
-        if(isdefined(chunks_variant4[i].script_noteworthy) && chunks_variant4[i].script_noteworthy == "1" && isdefined(chunks_variant4[i].script_location) && chunks_variant4[i].script_location == "3") {
+        if(isDefined(chunks_variant4[i].script_noteworthy) && chunks_variant4[i].script_noteworthy == "1" && isDefined(chunks_variant4[i].script_location) && chunks_variant4[i].script_location == "3") {
           variant4_order4[variant4_order4.size] = chunks_variant4[i];
         }
-        if(isdefined(chunks_variant4[i].script_noteworthy) && chunks_variant4[i].script_noteworthy == "5") {
+        if(isDefined(chunks_variant4[i].script_noteworthy) && chunks_variant4[i].script_noteworthy == "5") {
           variant4_order5[variant4_order5.size] = chunks_variant4[i];
         }
-        if(isdefined(chunks_variant4[i].script_noteworthy) && chunks_variant4[i].script_noteworthy == "6") {
+        if(isDefined(chunks_variant4[i].script_noteworthy) && chunks_variant4[i].script_noteworthy == "6") {
           variant4_order6[variant4_order6.size] = chunks_variant4[i];
         }
       }
     }
-    for (i = 0; i < chunks_variant4.size; i++) {
-      if(isdefined(chunks_variant4[i].script_team) && chunks_variant4[i].script_team == "bar_board_variant4") {
-        if(isdefined(variant4_order1[i])) {
+    for(i = 0; i < chunks_variant4.size; i++) {
+      if(isDefined(chunks_variant4[i].script_team) && chunks_variant4[i].script_team == "bar_board_variant4") {
+        if(isDefined(variant4_order1[i])) {
           if(variant4_order1[i].state == "repaired") {
             return variant4_order1[i];
           }
@@ -1430,17 +1422,17 @@ function non_destroyed_variant5_order(origin, chunks_variant5) {
   variant5_order4 = [];
   variant5_order5 = [];
   variant5_order6 = [];
-  if(isdefined(chunks_variant5)) {
-    for (i = 0; i < chunks_variant5.size; i++) {
-      if(isdefined(chunks_variant5[i].script_team) && chunks_variant5[i].script_team == "bar_board_variant5") {
-        if(isdefined(chunks_variant5[i].script_noteworthy)) {
-          if(chunks_variant5[i].script_noteworthy == "1" && !isdefined(chunks_variant5[i].script_location)) {
+  if(isDefined(chunks_variant5)) {
+    for(i = 0; i < chunks_variant5.size; i++) {
+      if(isDefined(chunks_variant5[i].script_team) && chunks_variant5[i].script_team == "bar_board_variant5") {
+        if(isDefined(chunks_variant5[i].script_noteworthy)) {
+          if(chunks_variant5[i].script_noteworthy == "1" && !isDefined(chunks_variant5[i].script_location)) {
             variant5_order1[variant5_order1.size] = chunks_variant5[i];
           }
           if(chunks_variant5[i].script_noteworthy == "2") {
             variant5_order2[variant5_order2.size] = chunks_variant5[i];
           }
-          if(isdefined(chunks_variant5[i].script_noteworthy) && chunks_variant5[i].script_noteworthy == "1" && isdefined(chunks_variant5[i].script_location) && chunks_variant5[i].script_location == "3") {
+          if(isDefined(chunks_variant5[i].script_noteworthy) && chunks_variant5[i].script_noteworthy == "1" && isDefined(chunks_variant5[i].script_location) && chunks_variant5[i].script_location == "3") {
             variant5_order3[variant5_order3.size] = chunks_variant5[i];
           }
           if(chunks_variant5[i].script_noteworthy == "4") {
@@ -1455,9 +1447,9 @@ function non_destroyed_variant5_order(origin, chunks_variant5) {
         }
       }
     }
-    for (i = 0; i < chunks_variant5.size; i++) {
-      if(isdefined(chunks_variant5[i].script_team) && chunks_variant5[i].script_team == "bar_board_variant5") {
-        if(isdefined(variant5_order1[i])) {
+    for(i = 0; i < chunks_variant5.size; i++) {
+      if(isDefined(chunks_variant5[i].script_team) && chunks_variant5[i].script_team == "bar_board_variant5") {
+        if(isDefined(variant5_order1[i])) {
           if(variant5_order1[i].state == "repaired") {
             return variant5_order1[i];
           }
@@ -1489,16 +1481,16 @@ function show_grate_pull() {
 }
 
 function get_closest_2d(origin, ents) {
-  if(!isdefined(ents)) {
+  if(!isDefined(ents)) {
     return undefined;
   }
   dist = distance2d(origin, ents[0].origin);
   index = 0;
   temp_array = [];
-  for (i = 1; i < ents.size; i++) {
-    if(isdefined(ents[i].unbroken) && ents[i].unbroken == 1) {
+  for(i = 1; i < ents.size; i++) {
+    if(isDefined(ents[i].unbroken) && ents[i].unbroken == 1) {
       ents[i].index = i;
-      if(!isdefined(temp_array)) {
+      if(!isDefined(temp_array)) {
         temp_array = [];
       } else if(!isarray(temp_array)) {
         temp_array = array(temp_array);
@@ -1510,7 +1502,7 @@ function get_closest_2d(origin, ents) {
     index = temp_array[randomintrange(0, temp_array.size)].index;
     return ents[index];
   }
-  for (i = 1; i < ents.size; i++) {
+  for(i = 1; i < ents.size; i++) {
     temp_dist = distance2d(origin, ents[i].origin);
     if(temp_dist < dist) {
       dist = temp_dist;
@@ -1521,12 +1513,12 @@ function get_closest_2d(origin, ents) {
 }
 
 function in_playable_area() {
-  playable_area = getentarray("player_volume", "script_noteworthy");
-  if(!isdefined(playable_area)) {
+  playable_area = getEntArray("player_volume", "script_noteworthy");
+  if(!isDefined(playable_area)) {
     println("");
     return true;
   }
-  for (i = 0; i < playable_area.size; i++) {
+  for(i = 0; i < playable_area.size; i++) {
     if(self istouching(playable_area[i])) {
       return true;
     }
@@ -1539,18 +1531,18 @@ function get_closest_non_destroyed_chunk(origin, barrier, barrier_chunks) {
   chunks_grate = undefined;
   chunks_grate = get_non_destroyed_chunks_grate(barrier, barrier_chunks);
   chunks = get_non_destroyed_chunks(barrier, barrier_chunks);
-  if(isdefined(barrier.zbarrier)) {
-    if(isdefined(chunks)) {
+  if(isDefined(barrier.zbarrier)) {
+    if(isDefined(chunks)) {
       return array::randomize(chunks)[0];
     }
-    if(isdefined(chunks_grate)) {
+    if(isDefined(chunks_grate)) {
       return array::randomize(chunks_grate)[0];
     }
   } else {
-    if(isdefined(chunks)) {
+    if(isDefined(chunks)) {
       return non_destroyed_bar_board_order(origin, chunks);
     }
-    if(isdefined(chunks_grate)) {
+    if(isDefined(chunks_grate)) {
       return non_destroyed_grate_order(origin, chunks_grate);
     }
   }
@@ -1558,7 +1550,7 @@ function get_closest_non_destroyed_chunk(origin, barrier, barrier_chunks) {
 }
 
 function get_random_destroyed_chunk(barrier, barrier_chunks) {
-  if(isdefined(barrier.zbarrier)) {
+  if(isDefined(barrier.zbarrier)) {
     ret = undefined;
     pieces = barrier.zbarrier getzbarrierpieceindicesinstate("open");
     if(pieces.size) {
@@ -1570,10 +1562,10 @@ function get_random_destroyed_chunk(barrier, barrier_chunks) {
   chunks_repair_grate = undefined;
   chunks = get_destroyed_chunks(barrier_chunks);
   chunks_repair_grate = get_destroyed_repair_grates(barrier_chunks);
-  if(isdefined(chunks)) {
+  if(isDefined(chunks)) {
     return chunks[randomint(chunks.size)];
   }
-  if(isdefined(chunks_repair_grate)) {
+  if(isDefined(chunks_repair_grate)) {
     return grate_order_destroyed(chunks_repair_grate);
   }
   return undefined;
@@ -1581,9 +1573,9 @@ function get_random_destroyed_chunk(barrier, barrier_chunks) {
 
 function get_destroyed_repair_grates(barrier_chunks) {
   array = [];
-  for (i = 0; i < barrier_chunks.size; i++) {
-    if(isdefined(barrier_chunks[i])) {
-      if(isdefined(barrier_chunks[i].script_parameters) && barrier_chunks[i].script_parameters == "grate") {
+  for(i = 0; i < barrier_chunks.size; i++) {
+    if(isDefined(barrier_chunks[i])) {
+      if(isDefined(barrier_chunks[i].script_parameters) && barrier_chunks[i].script_parameters == "grate") {
         array[array.size] = barrier_chunks[i];
       }
     }
@@ -1595,13 +1587,13 @@ function get_destroyed_repair_grates(barrier_chunks) {
 }
 
 function get_non_destroyed_chunks(barrier, barrier_chunks) {
-  if(isdefined(barrier.zbarrier)) {
+  if(isDefined(barrier.zbarrier)) {
     return barrier.zbarrier getzbarrierpieceindicesinstate("closed");
   }
   array = [];
-  for (i = 0; i < barrier_chunks.size; i++) {
-    if(isdefined(barrier_chunks[i].script_team) && barrier_chunks[i].script_team == "classic_boards") {
-      if(isdefined(barrier_chunks[i].script_parameters) && barrier_chunks[i].script_parameters == "board") {
+  for(i = 0; i < barrier_chunks.size; i++) {
+    if(isDefined(barrier_chunks[i].script_team) && barrier_chunks[i].script_team == "classic_boards") {
+      if(isDefined(barrier_chunks[i].script_parameters) && barrier_chunks[i].script_parameters == "board") {
         if(barrier_chunks[i] get_chunk_state() == "repaired") {
           if(barrier_chunks[i].origin == barrier_chunks[i].og_origin) {
             array[array.size] = barrier_chunks[i];
@@ -1609,18 +1601,8 @@ function get_non_destroyed_chunks(barrier, barrier_chunks) {
         }
       }
     }
-    if(isdefined(barrier_chunks[i].script_team) && barrier_chunks[i].script_team == "new_barricade") {
-      if(isdefined(barrier_chunks[i].script_parameters) && (barrier_chunks[i].script_parameters == "repair_board" || barrier_chunks[i].script_parameters == "barricade_vents")) {
-        if(barrier_chunks[i] get_chunk_state() == "repaired") {
-          if(barrier_chunks[i].origin == barrier_chunks[i].og_origin) {
-            array[array.size] = barrier_chunks[i];
-          }
-        }
-      }
-      continue;
-    }
-    if(isdefined(barrier_chunks[i].script_team) && barrier_chunks[i].script_team == "6_bars_bent") {
-      if(isdefined(barrier_chunks[i].script_parameters) && barrier_chunks[i].script_parameters == "bar") {
+    if(isDefined(barrier_chunks[i].script_team) && barrier_chunks[i].script_team == "new_barricade") {
+      if(isDefined(barrier_chunks[i].script_parameters) && (barrier_chunks[i].script_parameters == "repair_board" || barrier_chunks[i].script_parameters == "barricade_vents")) {
         if(barrier_chunks[i] get_chunk_state() == "repaired") {
           if(barrier_chunks[i].origin == barrier_chunks[i].og_origin) {
             array[array.size] = barrier_chunks[i];
@@ -1629,8 +1611,18 @@ function get_non_destroyed_chunks(barrier, barrier_chunks) {
       }
       continue;
     }
-    if(isdefined(barrier_chunks[i].script_team) && barrier_chunks[i].script_team == "6_bars_prestine") {
-      if(isdefined(barrier_chunks[i].script_parameters) && barrier_chunks[i].script_parameters == "bar") {
+    if(isDefined(barrier_chunks[i].script_team) && barrier_chunks[i].script_team == "6_bars_bent") {
+      if(isDefined(barrier_chunks[i].script_parameters) && barrier_chunks[i].script_parameters == "bar") {
+        if(barrier_chunks[i] get_chunk_state() == "repaired") {
+          if(barrier_chunks[i].origin == barrier_chunks[i].og_origin) {
+            array[array.size] = barrier_chunks[i];
+          }
+        }
+      }
+      continue;
+    }
+    if(isDefined(barrier_chunks[i].script_team) && barrier_chunks[i].script_team == "6_bars_prestine") {
+      if(isDefined(barrier_chunks[i].script_parameters) && barrier_chunks[i].script_parameters == "bar") {
         if(barrier_chunks[i] get_chunk_state() == "repaired") {
           if(barrier_chunks[i].origin == barrier_chunks[i].og_origin) {
             array[array.size] = barrier_chunks[i];
@@ -1646,13 +1638,13 @@ function get_non_destroyed_chunks(barrier, barrier_chunks) {
 }
 
 function get_non_destroyed_chunks_grate(barrier, barrier_chunks) {
-  if(isdefined(barrier.zbarrier)) {
+  if(isDefined(barrier.zbarrier)) {
     return barrier.zbarrier getzbarrierpieceindicesinstate("closed");
   }
   array = [];
-  for (i = 0; i < barrier_chunks.size; i++) {
-    if(isdefined(barrier_chunks[i].script_parameters) && barrier_chunks[i].script_parameters == "grate") {
-      if(isdefined(barrier_chunks[i])) {
+  for(i = 0; i < barrier_chunks.size; i++) {
+    if(isDefined(barrier_chunks[i].script_parameters) && barrier_chunks[i].script_parameters == "grate") {
+      if(isDefined(barrier_chunks[i])) {
         array[array.size] = barrier_chunks[i];
       }
     }
@@ -1665,9 +1657,9 @@ function get_non_destroyed_chunks_grate(barrier, barrier_chunks) {
 
 function get_non_destroyed_variant1(barrier_chunks) {
   array = [];
-  for (i = 0; i < barrier_chunks.size; i++) {
-    if(isdefined(barrier_chunks[i].script_team) && barrier_chunks[i].script_team == "bar_board_variant1") {
-      if(isdefined(barrier_chunks[i])) {
+  for(i = 0; i < barrier_chunks.size; i++) {
+    if(isDefined(barrier_chunks[i].script_team) && barrier_chunks[i].script_team == "bar_board_variant1") {
+      if(isDefined(barrier_chunks[i])) {
         array[array.size] = barrier_chunks[i];
       }
     }
@@ -1680,9 +1672,9 @@ function get_non_destroyed_variant1(barrier_chunks) {
 
 function get_non_destroyed_variant2(barrier_chunks) {
   array = [];
-  for (i = 0; i < barrier_chunks.size; i++) {
-    if(isdefined(barrier_chunks[i].script_team) && barrier_chunks[i].script_team == "bar_board_variant2") {
-      if(isdefined(barrier_chunks[i])) {
+  for(i = 0; i < barrier_chunks.size; i++) {
+    if(isDefined(barrier_chunks[i].script_team) && barrier_chunks[i].script_team == "bar_board_variant2") {
+      if(isDefined(barrier_chunks[i])) {
         array[array.size] = barrier_chunks[i];
       }
     }
@@ -1695,9 +1687,9 @@ function get_non_destroyed_variant2(barrier_chunks) {
 
 function get_non_destroyed_variant4(barrier_chunks) {
   array = [];
-  for (i = 0; i < barrier_chunks.size; i++) {
-    if(isdefined(barrier_chunks[i].script_team) && barrier_chunks[i].script_team == "bar_board_variant4") {
-      if(isdefined(barrier_chunks[i])) {
+  for(i = 0; i < barrier_chunks.size; i++) {
+    if(isDefined(barrier_chunks[i].script_team) && barrier_chunks[i].script_team == "bar_board_variant4") {
+      if(isDefined(barrier_chunks[i])) {
         array[array.size] = barrier_chunks[i];
       }
     }
@@ -1710,9 +1702,9 @@ function get_non_destroyed_variant4(barrier_chunks) {
 
 function get_non_destroyed_variant5(barrier_chunks) {
   array = [];
-  for (i = 0; i < barrier_chunks.size; i++) {
-    if(isdefined(barrier_chunks[i].script_team) && barrier_chunks[i].script_team == "bar_board_variant5") {
-      if(isdefined(barrier_chunks[i])) {
+  for(i = 0; i < barrier_chunks.size; i++) {
+    if(isDefined(barrier_chunks[i].script_team) && barrier_chunks[i].script_team == "bar_board_variant5") {
+      if(isDefined(barrier_chunks[i])) {
         array[array.size] = barrier_chunks[i];
       }
     }
@@ -1725,21 +1717,21 @@ function get_non_destroyed_variant5(barrier_chunks) {
 
 function get_destroyed_chunks(barrier_chunks) {
   array = [];
-  for (i = 0; i < barrier_chunks.size; i++) {
+  for(i = 0; i < barrier_chunks.size; i++) {
     if(barrier_chunks[i] get_chunk_state() == "destroyed") {
-      if(isdefined(barrier_chunks[i].script_parameters) && barrier_chunks[i].script_parameters == "board") {
+      if(isDefined(barrier_chunks[i].script_parameters) && barrier_chunks[i].script_parameters == "board") {
         array[array.size] = barrier_chunks[i];
         continue;
       }
-      if(isdefined(barrier_chunks[i].script_parameters) && barrier_chunks[i].script_parameters == "repair_board" || barrier_chunks[i].script_parameters == "barricade_vents") {
+      if(isDefined(barrier_chunks[i].script_parameters) && barrier_chunks[i].script_parameters == "repair_board" || barrier_chunks[i].script_parameters == "barricade_vents") {
         array[array.size] = barrier_chunks[i];
         continue;
       }
-      if(isdefined(barrier_chunks[i].script_parameters) && barrier_chunks[i].script_parameters == "bar") {
+      if(isDefined(barrier_chunks[i].script_parameters) && barrier_chunks[i].script_parameters == "bar") {
         array[array.size] = barrier_chunks[i];
         continue;
       }
-      if(isdefined(barrier_chunks[i].script_parameters) && barrier_chunks[i].script_parameters == "grate") {
+      if(isDefined(barrier_chunks[i].script_parameters) && barrier_chunks[i].script_parameters == "grate") {
         return undefined;
       }
     }
@@ -1758,31 +1750,31 @@ function grate_order_destroyed(chunks_repair_grate) {
   grate_repair_order4 = [];
   grate_repair_order5 = [];
   grate_repair_order6 = [];
-  for (i = 0; i < chunks_repair_grate.size; i++) {
-    if(isdefined(chunks_repair_grate[i].script_parameters) && chunks_repair_grate[i].script_parameters == "grate") {
-      if(isdefined(chunks_repair_grate[i].script_noteworthy) && chunks_repair_grate[i].script_noteworthy == "1") {
+  for(i = 0; i < chunks_repair_grate.size; i++) {
+    if(isDefined(chunks_repair_grate[i].script_parameters) && chunks_repair_grate[i].script_parameters == "grate") {
+      if(isDefined(chunks_repair_grate[i].script_noteworthy) && chunks_repair_grate[i].script_noteworthy == "1") {
         grate_repair_order1[grate_repair_order1.size] = chunks_repair_grate[i];
       }
-      if(isdefined(chunks_repair_grate[i].script_noteworthy) && chunks_repair_grate[i].script_noteworthy == "2") {
+      if(isDefined(chunks_repair_grate[i].script_noteworthy) && chunks_repair_grate[i].script_noteworthy == "2") {
         grate_repair_order2[grate_repair_order2.size] = chunks_repair_grate[i];
       }
-      if(isdefined(chunks_repair_grate[i].script_noteworthy) && chunks_repair_grate[i].script_noteworthy == "3") {
+      if(isDefined(chunks_repair_grate[i].script_noteworthy) && chunks_repair_grate[i].script_noteworthy == "3") {
         grate_repair_order3[grate_repair_order3.size] = chunks_repair_grate[i];
       }
-      if(isdefined(chunks_repair_grate[i].script_noteworthy) && chunks_repair_grate[i].script_noteworthy == "4") {
+      if(isDefined(chunks_repair_grate[i].script_noteworthy) && chunks_repair_grate[i].script_noteworthy == "4") {
         grate_repair_order4[grate_repair_order4.size] = chunks_repair_grate[i];
       }
-      if(isdefined(chunks_repair_grate[i].script_noteworthy) && chunks_repair_grate[i].script_noteworthy == "5") {
+      if(isDefined(chunks_repair_grate[i].script_noteworthy) && chunks_repair_grate[i].script_noteworthy == "5") {
         grate_repair_order5[grate_repair_order5.size] = chunks_repair_grate[i];
       }
-      if(isdefined(chunks_repair_grate[i].script_noteworthy) && chunks_repair_grate[i].script_noteworthy == "6") {
+      if(isDefined(chunks_repair_grate[i].script_noteworthy) && chunks_repair_grate[i].script_noteworthy == "6") {
         grate_repair_order6[grate_repair_order6.size] = chunks_repair_grate[i];
       }
     }
   }
-  for (i = 0; i < chunks_repair_grate.size; i++) {
-    if(isdefined(chunks_repair_grate[i].script_parameters) && chunks_repair_grate[i].script_parameters == "grate") {
-      if(isdefined(grate_repair_order1[i])) {
+  for(i = 0; i < chunks_repair_grate.size; i++) {
+    if(isDefined(chunks_repair_grate[i].script_parameters) && chunks_repair_grate[i].script_parameters == "grate") {
+      if(isDefined(grate_repair_order1[i])) {
         if(grate_repair_order6[i].state == "destroyed") {
           iprintlnbold("");
           return grate_repair_order6[i];
@@ -1823,13 +1815,13 @@ function show_grate_repair() {
 }
 
 function get_chunk_state() {
-  assert(isdefined(self.state));
+  assert(isDefined(self.state));
   return self.state;
 }
 
 function array_limiter(array, total) {
   new_array = [];
-  for (i = 0; i < array.size; i++) {
+  for(i = 0; i < array.size; i++) {
     if(i < total) {
       new_array[new_array.size] = array[i];
     }
@@ -1851,14 +1843,14 @@ function fake_physicslaunch(target_pos, power) {
 }
 
 function add_zombie_hint(ref, text) {
-  if(!isdefined(level.zombie_hints)) {
+  if(!isDefined(level.zombie_hints)) {
     level.zombie_hints = [];
   }
   level.zombie_hints[ref] = text;
 }
 
 function get_zombie_hint(ref) {
-  if(isdefined(level.zombie_hints[ref])) {
+  if(isDefined(level.zombie_hints[ref])) {
     return level.zombie_hints[ref];
   }
   println("" + ref);
@@ -1867,15 +1859,15 @@ function get_zombie_hint(ref) {
 
 function set_hint_string(ent, default_ref, cost) {
   ref = default_ref;
-  if(isdefined(ent.script_hint)) {
+  if(isDefined(ent.script_hint)) {
     ref = ent.script_hint;
   }
-  if(isdefined(level.legacy_hint_system) && level.legacy_hint_system) {
+  if(isDefined(level.legacy_hint_system) && level.legacy_hint_system) {
     ref = (ref + "_") + cost;
     self sethintstring(get_zombie_hint(ref));
   } else {
     hint = get_zombie_hint(ref);
-    if(isdefined(cost)) {
+    if(isDefined(cost)) {
       self sethintstring(hint, cost);
     } else {
       self sethintstring(hint);
@@ -1885,10 +1877,10 @@ function set_hint_string(ent, default_ref, cost) {
 
 function get_hint_string(ent, default_ref, cost) {
   ref = default_ref;
-  if(isdefined(ent.script_hint)) {
+  if(isDefined(ent.script_hint)) {
     ref = ent.script_hint;
   }
-  if(isdefined(level.legacy_hint_system) && level.legacy_hint_system && isdefined(cost)) {
+  if(isDefined(level.legacy_hint_system) && level.legacy_hint_system && isDefined(cost)) {
     ref = (ref + "_") + cost;
   }
   return get_zombie_hint(ref);
@@ -1903,16 +1895,16 @@ function unitrigger_set_hint_string(ent, default_ref, cost) {
   }
   foreach(trigger in triggers) {
     ref = default_ref;
-    if(isdefined(ent.script_hint)) {
+    if(isDefined(ent.script_hint)) {
       ref = ent.script_hint;
     }
-    if(isdefined(level.legacy_hint_system) && level.legacy_hint_system) {
+    if(isDefined(level.legacy_hint_system) && level.legacy_hint_system) {
       ref = (ref + "_") + cost;
       trigger sethintstring(get_zombie_hint(ref));
       continue;
     }
     hint = get_zombie_hint(ref);
-    if(isdefined(cost)) {
+    if(isDefined(cost)) {
       trigger sethintstring(hint, cost);
       continue;
     }
@@ -1921,26 +1913,26 @@ function unitrigger_set_hint_string(ent, default_ref, cost) {
 }
 
 function add_sound(ref, alias) {
-  if(!isdefined(level.zombie_sounds)) {
+  if(!isDefined(level.zombie_sounds)) {
     level.zombie_sounds = [];
   }
   level.zombie_sounds[ref] = alias;
 }
 
 function play_sound_at_pos(ref, pos, ent) {
-  if(isdefined(ent)) {
-    if(isdefined(ent.script_soundalias)) {
+  if(isDefined(ent)) {
+    if(isDefined(ent.script_soundalias)) {
       playsoundatposition(ent.script_soundalias, pos);
       return;
     }
-    if(isdefined(self.script_sound)) {
+    if(isDefined(self.script_sound)) {
       ref = self.script_sound;
     }
   }
   if(ref == "none") {
     return;
   }
-  if(!isdefined(level.zombie_sounds[ref])) {
+  if(!isDefined(level.zombie_sounds[ref])) {
     assertmsg(("" + ref) + "");
     return;
   }
@@ -1948,35 +1940,35 @@ function play_sound_at_pos(ref, pos, ent) {
 }
 
 function play_sound_on_ent(ref) {
-  if(isdefined(self.script_soundalias)) {
-    self playsound(self.script_soundalias);
+  if(isDefined(self.script_soundalias)) {
+    self playSound(self.script_soundalias);
     return;
   }
-  if(isdefined(self.script_sound)) {
+  if(isDefined(self.script_sound)) {
     ref = self.script_sound;
   }
   if(ref == "none") {
     return;
   }
-  if(!isdefined(level.zombie_sounds[ref])) {
+  if(!isDefined(level.zombie_sounds[ref])) {
     assertmsg(("" + ref) + "");
     return;
   }
-  self playsound(level.zombie_sounds[ref]);
+  self playSound(level.zombie_sounds[ref]);
 }
 
 function play_loopsound_on_ent(ref) {
-  if(isdefined(self.script_firefxsound)) {
+  if(isDefined(self.script_firefxsound)) {
     ref = self.script_firefxsound;
   }
   if(ref == "none") {
     return;
   }
-  if(!isdefined(level.zombie_sounds[ref])) {
+  if(!isDefined(level.zombie_sounds[ref])) {
     assertmsg(("" + ref) + "");
     return;
   }
-  self playsound(level.zombie_sounds[ref]);
+  self playSound(level.zombie_sounds[ref]);
 }
 
 function string_to_float(string) {
@@ -1986,7 +1978,7 @@ function string_to_float(string) {
   }
   whole = int(floatparts[0]);
   decimal = 0;
-  for (i = floatparts[1].size - 1; i >= 0; i--) {
+  for(i = floatparts[1].size - 1; i >= 0; i--) {
     decimal = (decimal / 10) + (int(floatparts[1][i]) / 10);
   }
   if(whole >= 0) {
@@ -1996,7 +1988,7 @@ function string_to_float(string) {
 }
 
 function set_zombie_var(zvar, value, is_float = 0, column = 1, is_team_based) {
-  if(isdefined(is_team_based) && is_team_based) {
+  if(isDefined(is_team_based) && is_team_based) {
     foreach(team in level.teams) {
       level.zombie_vars[team][zvar] = value;
     }
@@ -2008,7 +2000,7 @@ function set_zombie_var(zvar, value, is_float = 0, column = 1, is_team_based) {
 
 function get_table_var(table = "mp/zombiemode.csv", var_d45c761e, value, is_float = 0, column = 1) {
   table_value = tablelookup(table, 0, var_d45c761e, column);
-  if(isdefined(table_value) && table_value != "") {
+  if(isDefined(table_value) && table_value != "") {
     if(is_float) {
       value = string_to_float(table_value);
     } else {
@@ -2021,7 +2013,7 @@ function get_table_var(table = "mp/zombiemode.csv", var_d45c761e, value, is_floa
 function hudelem_count() {
   max = 0;
   curr_total = 0;
-  while (true) {
+  while(true) {
     if(level.hudelem_count > max) {
       max = level.hudelem_count;
     }
@@ -2031,9 +2023,9 @@ function hudelem_count() {
 }
 
 function debug_round_advancer() {
-  while (true) {
+  while(true) {
     zombs = zombie_utility::get_round_enemy_array();
-    for (i = 0; i < zombs.size; i++) {
+    for(i = 0; i < zombs.size; i++) {
       zombs[i] dodamage(zombs[i].health + 666, (0, 0, 0));
       wait(0.5);
     }
@@ -2042,7 +2034,7 @@ function debug_round_advancer() {
 
 function print_run_speed(speed) {
   self endon("death");
-  while (true) {
+  while(true) {
     print3d(self.origin + vectorscale((0, 0, 1), 64), speed, (1, 1, 1));
     wait(0.05);
   }
@@ -2054,7 +2046,7 @@ function draw_line_ent_to_ent(ent1, ent2) {
   }
   ent1 endon("death");
   ent2 endon("death");
-  while (true) {
+  while(true) {
     line(ent1.origin, ent2.origin);
     wait(0.05);
   }
@@ -2067,10 +2059,10 @@ function draw_line_ent_to_pos(ent, pos, end_on) {
   ent endon("death");
   ent notify("stop_draw_line_ent_to_pos");
   ent endon("stop_draw_line_ent_to_pos");
-  if(isdefined(end_on)) {
+  if(isDefined(end_on)) {
     ent endon(end_on);
   }
-  while (true) {
+  while(true) {
     line(ent.origin, pos);
     wait(0.05);
   }
@@ -2085,7 +2077,7 @@ function debug_print(msg) {
 function debug_blocker(pos, rad, height) {
   self notify("stop_debug_blocker");
   self endon("stop_debug_blocker");
-  for (;;) {
+  for(;;) {
     if(getdvarint("") != 1) {
       return;
     }
@@ -2097,7 +2089,7 @@ function debug_blocker(pos, rad, height) {
 function drawcylinder(pos, rad, height) {
   currad = rad;
   curheight = height;
-  for (r = 0; r < 20; r++) {
+  for(r = 0; r < 20; r++) {
     theta = (r / 20) * 360;
     theta2 = ((r + 1) / 20) * 360;
     line(pos + (cos(theta) * currad, sin(theta) * currad, 0), pos + (cos(theta2) * currad, sin(theta2) * currad, 0));
@@ -2108,14 +2100,14 @@ function drawcylinder(pos, rad, height) {
 
 function print3d_at_pos(msg, pos, thread_endon, offset) {
   self endon("death");
-  if(isdefined(thread_endon)) {
+  if(isDefined(thread_endon)) {
     self notify(thread_endon);
     self endon(thread_endon);
   }
-  if(!isdefined(offset)) {
+  if(!isDefined(offset)) {
     offset = (0, 0, 0);
   }
-  while (true) {
+  while(true) {
     print3d(self.origin + offset, msg);
     wait(0.05);
   }
@@ -2125,12 +2117,12 @@ function debug_breadcrumbs() {
   self endon("disconnect");
   self notify("stop_debug_breadcrumbs");
   self endon("stop_debug_breadcrumbs");
-  while (true) {
+  while(true) {
     if(getdvarint("") != 1) {
       wait(1);
       continue;
     }
-    for (i = 0; i < self.zombie_breadcrumbs.size; i++) {
+    for(i = 0; i < self.zombie_breadcrumbs.size; i++) {
       drawcylinder(self.zombie_breadcrumbs[i], 5, 5);
     }
     wait(0.05);
@@ -2140,14 +2132,14 @@ function debug_breadcrumbs() {
 function debug_attack_spots_taken() {
   self notify("stop_debug_breadcrumbs");
   self endon("stop_debug_breadcrumbs");
-  while (true) {
+  while(true) {
     if(getdvarint("") != 2) {
       wait(1);
       continue;
     }
     wait(0.05);
     count = 0;
-    for (i = 0; i < self.attack_spots_taken.size; i++) {
+    for(i = 0; i < self.attack_spots_taken.size; i++) {
       if(self.attack_spots_taken[i]) {
         count++;
         circle(self.attack_spots[i], 12, (1, 0, 0), 0, 1, 1);
@@ -2164,7 +2156,7 @@ function float_print3d(msg, time) {
   self endon("death");
   time = gettime() + (time * 1000);
   offset = vectorscale((0, 0, 1), 72);
-  while (gettime() < time) {
+  while(gettime() < time) {
     offset = offset + vectorscale((0, 0, 1), 2);
     print3d(self.origin + offset, msg, (1, 1, 1));
     wait(0.05);
@@ -2174,10 +2166,10 @@ function float_print3d(msg, time) {
 function do_player_vo(snd, variation_count) {
   index = get_player_index(self);
   sound = (("zmb_vox_plr_" + index) + "_") + snd;
-  if(isdefined(variation_count)) {
+  if(isDefined(variation_count)) {
     sound = (sound + "_") + randomintrange(0, variation_count);
   }
-  if(!isdefined(level.player_is_speaking)) {
+  if(!isDefined(level.player_is_speaking)) {
     level.player_is_speaking = 0;
   }
   if(level.player_is_speaking == 0) {
@@ -2190,10 +2182,10 @@ function do_player_vo(snd, variation_count) {
 }
 
 function is_magic_bullet_shield_enabled(ent) {
-  if(!isdefined(ent)) {
+  if(!isDefined(ent)) {
     return 0;
   }
-  return !(isdefined(ent.allowdeath) && ent.allowdeath);
+  return !(isDefined(ent.allowdeath) && ent.allowdeath);
 }
 
 function really_play_2d_sound(sound) {
@@ -2210,7 +2202,7 @@ function play_sound_2d(sound) {
 
 function include_weapon(weapon_name, in_box) {
   println("" + weapon_name);
-  if(!isdefined(in_box)) {
+  if(!isDefined(in_box)) {
     in_box = 1;
   }
   zm_weapons::include_zombie_weapon(weapon_name, in_box);
@@ -2218,8 +2210,8 @@ function include_weapon(weapon_name, in_box) {
 
 function trigger_invisible(enable) {
   players = getplayers();
-  for (i = 0; i < players.size; i++) {
-    if(isdefined(players[i])) {
+  for(i = 0; i < players.size; i++) {
+    if(isDefined(players[i])) {
       self setinvisibletoplayer(players[i], enable);
     }
   }
@@ -2227,25 +2219,25 @@ function trigger_invisible(enable) {
 
 function print3d_ent(text, color, scale, offset, end_msg, overwrite) {
   self endon("death");
-  if(isdefined(overwrite) && overwrite && isdefined(self._debug_print3d_msg)) {
+  if(isDefined(overwrite) && overwrite && isDefined(self._debug_print3d_msg)) {
     self notify("end_print3d");
     wait(0.05);
   }
   self endon("end_print3d");
-  if(!isdefined(color)) {
+  if(!isDefined(color)) {
     color = (1, 1, 1);
   }
-  if(!isdefined(scale)) {
+  if(!isDefined(scale)) {
     scale = 1;
   }
-  if(!isdefined(offset)) {
+  if(!isDefined(offset)) {
     offset = (0, 0, 0);
   }
-  if(isdefined(end_msg)) {
+  if(isDefined(end_msg)) {
     self endon(end_msg);
   }
   self._debug_print3d_msg = text;
-  while (!(isdefined(level.disable_print3d_ent) && level.disable_print3d_ent)) {
+  while(!(isDefined(level.disable_print3d_ent) && level.disable_print3d_ent)) {
     print3d(self.origin + offset, self._debug_print3d_msg, color, scale);
     wait(0.05);
   }
@@ -2267,42 +2259,42 @@ function create_counter_hud(x = 0) {
 
 function get_current_zone(return_zone) {
   level flag::wait_till("zones_initialized");
-  if(isdefined(self.cached_zone)) {
+  if(isDefined(self.cached_zone)) {
     zone = self.cached_zone;
     zone_name = self.cached_zone_name;
     vol = self.cached_zone_volume;
     if(self istouching(zone.volumes[vol])) {
-      if(isdefined(return_zone) && return_zone) {
+      if(isDefined(return_zone) && return_zone) {
         return zone;
       }
       return zone_name;
     }
-    for (i = 0; i < zone.volumes.size; i++) {
+    for(i = 0; i < zone.volumes.size; i++) {
       if(i == vol) {
         continue;
       }
       if(self istouching(zone.volumes[i])) {
         self.cached_zone = zone;
         self.cached_zone_volume = i;
-        if(isdefined(return_zone) && return_zone) {
+        if(isDefined(return_zone) && return_zone) {
           return zone;
         }
         return zone_name;
       }
     }
   }
-  for (z = 0; z < level.zone_keys.size; z++) {
+  for(z = 0; z < level.zone_keys.size; z++) {
     zone_name = level.zone_keys[z];
     zone = level.zones[zone_name];
     if(zone === self.cached_zone) {
       continue;
     }
-    for (i = 0; i < zone.volumes.size; i++) {
+    for(i = 0; i < zone.volumes.size; i++) {
       if(self istouching(zone.volumes[i])) {
         self.cached_zone = zone;
         self.cached_zone_name = zone_name;
         self.cached_zone_volume = i;
-        if(isdefined(return_zone) && return_zone) {
+        if(isDefined(return_zone) && return_zone) {
           return zone;
         }
         return zone_name;
@@ -2321,13 +2313,13 @@ function remove_mod_from_methodofdeath(mod) {
 
 function clear_fog_threads() {
   players = getplayers();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i] notify("stop_fog");
   }
 }
 
 function display_message(titletext, notifytext, duration) {
-  notifydata = spawnstruct();
+  notifydata = spawnStruct();
   notifydata.titletext = notifytext;
   notifydata.notifytext = titletext;
   notifydata.sound = "mus_level_up";
@@ -2354,19 +2346,19 @@ function shock_onpain() {
   if(getdvarstring("blurpain") == "") {
     setdvar("blurpain", "on");
   }
-  while (true) {
+  while(true) {
     oldhealth = self.health;
     self waittill("damage", damage, attacker, direction_vec, point, mod);
-    if(isdefined(level.shock_onpain) && !level.shock_onpain) {
+    if(isDefined(level.shock_onpain) && !level.shock_onpain) {
       continue;
     }
-    if(isdefined(self.shock_onpain) && !self.shock_onpain) {
+    if(isDefined(self.shock_onpain) && !self.shock_onpain) {
       continue;
     }
     if(self.health < 1) {
       continue;
     }
-    if(isdefined(attacker) && isdefined(attacker.custom_player_shellshock)) {
+    if(isDefined(attacker) && isDefined(attacker.custom_player_shellshock)) {
       self[[attacker.custom_player_shellshock]](damage, attacker, direction_vec, point, mod);
     } else {
       if(mod == "MOD_PROJECTILE" || mod == "MOD_PROJECTILE_SPLASH") {
@@ -2375,7 +2367,7 @@ function shock_onpain() {
         if(mod == "MOD_GRENADE_SPLASH" || mod == "MOD_GRENADE" || mod == "MOD_EXPLOSIVE") {
           shocktype = undefined;
           shocklight = undefined;
-          if(isdefined(self.is_burning) && self.is_burning) {
+          if(isDefined(self.is_burning) && self.is_burning) {
             shocktype = "lava";
             shocklight = "lava_small";
           }
@@ -2405,17 +2397,17 @@ function shock_onexplosion(damage, shocktype, shocklight) {
     }
   }
   if(time) {
-    if(!isdefined(shocktype)) {
+    if(!isDefined(shocktype)) {
       shocktype = "explosion";
     }
     self shellshock(shocktype, time);
-  } else if(isdefined(shocklight)) {
+  } else if(isDefined(shocklight)) {
     self shellshock(shocklight, time);
   }
 }
 
 function increment_ignoreme() {
-  if(!isdefined(self.ignorme_count)) {
+  if(!isDefined(self.ignorme_count)) {
     self.ignorme_count = 0;
   }
   self.ignorme_count++;
@@ -2423,7 +2415,7 @@ function increment_ignoreme() {
 }
 
 function decrement_ignoreme() {
-  if(!isdefined(self.ignorme_count)) {
+  if(!isDefined(self.ignorme_count)) {
     self.ignorme_count = 0;
   }
   if(self.ignorme_count > 0) {
@@ -2435,11 +2427,11 @@ function decrement_ignoreme() {
 }
 
 function increment_is_drinking() {
-  if(isdefined(level.devgui_dpad_watch) && level.devgui_dpad_watch) {
+  if(isDefined(level.devgui_dpad_watch) && level.devgui_dpad_watch) {
     self.is_drinking++;
     return;
   }
-  if(!isdefined(self.is_drinking)) {
+  if(!isDefined(self.is_drinking)) {
     self.is_drinking = 0;
   }
   if(self.is_drinking == 0) {
@@ -2472,7 +2464,7 @@ function clear_is_drinking() {
 }
 
 function increment_no_end_game_check() {
-  if(!isdefined(level.n_no_end_game_check_count)) {
+  if(!isDefined(level.n_no_end_game_check_count)) {
     level.n_no_end_game_check_count = 0;
   }
   level.n_no_end_game_check_count++;
@@ -2480,7 +2472,7 @@ function increment_no_end_game_check() {
 }
 
 function decrement_no_end_game_check() {
-  if(!isdefined(level.n_no_end_game_check_count)) {
+  if(!isDefined(level.n_no_end_game_check_count)) {
     level.n_no_end_game_check_count = 0;
   }
   if(level.n_no_end_game_check_count > 0) {
@@ -2495,14 +2487,14 @@ function decrement_no_end_game_check() {
 }
 
 function getweaponclasszm(weapon) {
-  assert(isdefined(weapon));
-  if(!isdefined(weapon)) {
+  assert(isDefined(weapon));
+  if(!isDefined(weapon)) {
     return undefined;
   }
-  if(!isdefined(level.weaponclassarray)) {
+  if(!isDefined(level.weaponclassarray)) {
     level.weaponclassarray = [];
   }
-  if(isdefined(level.weaponclassarray[weapon])) {
+  if(isDefined(level.weaponclassarray[weapon])) {
     return level.weaponclassarray[weapon];
   }
   baseweaponindex = getbaseweaponitemindex(weapon);
@@ -2514,10 +2506,10 @@ function getweaponclasszm(weapon) {
 
 function spawn_weapon_model(weapon, model = weapon.worldmodel, origin, angles, options) {
   weapon_model = spawn("script_model", origin);
-  if(isdefined(angles)) {
+  if(isDefined(angles)) {
     weapon_model.angles = angles;
   }
-  if(isdefined(options)) {
+  if(isDefined(options)) {
     weapon_model useweaponmodel(weapon, model, options);
   } else {
     weapon_model useweaponmodel(weapon, model);
@@ -2527,11 +2519,11 @@ function spawn_weapon_model(weapon, model = weapon.worldmodel, origin, angles, o
 
 function spawn_buildkit_weapon_model(player, weapon, camo, origin, angles) {
   weapon_model = spawn("script_model", origin);
-  if(isdefined(angles)) {
+  if(isDefined(angles)) {
     weapon_model.angles = angles;
   }
   upgraded = zm_weapons::is_weapon_upgraded(weapon);
-  if(upgraded && (!isdefined(camo) || 0 > camo)) {
+  if(upgraded && (!isDefined(camo) || 0 > camo)) {
     camo = zm_weapons::get_pack_a_punch_camo_index(undefined);
   }
   weapon_model usebuildkitweaponmodel(player, weapon, camo, upgraded);
@@ -2546,7 +2538,7 @@ function is_player_revive_tool(weapon) {
 }
 
 function is_limited_weapon(weapon) {
-  if(isdefined(level.limited_weapons) && isdefined(level.limited_weapons[weapon])) {
+  if(isDefined(level.limited_weapons) && isDefined(level.limited_weapons[weapon])) {
     return true;
   }
   return false;
@@ -2557,21 +2549,21 @@ function register_lethal_grenade_for_level(weaponname) {
   if(is_lethal_grenade(weapon)) {
     return;
   }
-  if(!isdefined(level.zombie_lethal_grenade_list)) {
+  if(!isDefined(level.zombie_lethal_grenade_list)) {
     level.zombie_lethal_grenade_list = [];
   }
   level.zombie_lethal_grenade_list[weapon] = weapon;
 }
 
 function is_lethal_grenade(weapon) {
-  if(!isdefined(weapon) || !isdefined(level.zombie_lethal_grenade_list)) {
+  if(!isDefined(weapon) || !isDefined(level.zombie_lethal_grenade_list)) {
     return 0;
   }
-  return isdefined(level.zombie_lethal_grenade_list[weapon]);
+  return isDefined(level.zombie_lethal_grenade_list[weapon]);
 }
 
 function is_player_lethal_grenade(weapon) {
-  if(!isdefined(weapon) || !isdefined(self.current_lethal_grenade)) {
+  if(!isDefined(weapon) || !isDefined(self.current_lethal_grenade)) {
     return 0;
   }
   return self.current_lethal_grenade == weapon;
@@ -2579,7 +2571,7 @@ function is_player_lethal_grenade(weapon) {
 
 function get_player_lethal_grenade() {
   grenade = level.weaponnone;
-  if(isdefined(self.current_lethal_grenade)) {
+  if(isDefined(self.current_lethal_grenade)) {
     grenade = self.current_lethal_grenade;
   }
   return grenade;
@@ -2599,21 +2591,21 @@ function register_tactical_grenade_for_level(weaponname) {
   if(is_tactical_grenade(weapon)) {
     return;
   }
-  if(!isdefined(level.zombie_tactical_grenade_list)) {
+  if(!isDefined(level.zombie_tactical_grenade_list)) {
     level.zombie_tactical_grenade_list = [];
   }
   level.zombie_tactical_grenade_list[weapon] = weapon;
 }
 
 function is_tactical_grenade(weapon) {
-  if(!isdefined(weapon) || !isdefined(level.zombie_tactical_grenade_list)) {
+  if(!isDefined(weapon) || !isDefined(level.zombie_tactical_grenade_list)) {
     return 0;
   }
-  return isdefined(level.zombie_tactical_grenade_list[weapon]);
+  return isDefined(level.zombie_tactical_grenade_list[weapon]);
 }
 
 function is_player_tactical_grenade(weapon) {
-  if(!isdefined(weapon) || !isdefined(self.current_tactical_grenade)) {
+  if(!isDefined(weapon) || !isDefined(self.current_tactical_grenade)) {
     return 0;
   }
   return self.current_tactical_grenade == weapon;
@@ -2621,7 +2613,7 @@ function is_player_tactical_grenade(weapon) {
 
 function get_player_tactical_grenade() {
   tactical = level.weaponnone;
-  if(isdefined(self.current_tactical_grenade)) {
+  if(isDefined(self.current_tactical_grenade)) {
     tactical = self.current_tactical_grenade;
   }
   return tactical;
@@ -2637,17 +2629,17 @@ function init_player_tactical_grenade() {
 }
 
 function is_placeable_mine(weapon) {
-  if(!isdefined(level.placeable_mines)) {
+  if(!isDefined(level.placeable_mines)) {
     level.placeable_mines = [];
   }
-  if(!isdefined(weapon) || weapon == level.weaponnone) {
+  if(!isDefined(weapon) || weapon == level.weaponnone) {
     return 0;
   }
-  return isdefined(level.placeable_mines[weapon.name]);
+  return isDefined(level.placeable_mines[weapon.name]);
 }
 
 function is_player_placeable_mine(weapon) {
-  if(!isdefined(weapon) || !isdefined(self.current_placeable_mine)) {
+  if(!isDefined(weapon) || !isDefined(self.current_placeable_mine)) {
     return 0;
   }
   return self.current_placeable_mine == weapon;
@@ -2655,7 +2647,7 @@ function is_player_placeable_mine(weapon) {
 
 function get_player_placeable_mine() {
   placeable_mine = level.weaponnone;
-  if(isdefined(self.current_placeable_mine)) {
+  if(isDefined(self.current_placeable_mine)) {
     placeable_mine = self.current_placeable_mine;
   }
   return placeable_mine;
@@ -2675,21 +2667,21 @@ function register_melee_weapon_for_level(weaponname) {
   if(is_melee_weapon(weapon)) {
     return;
   }
-  if(!isdefined(level.zombie_melee_weapon_list)) {
+  if(!isDefined(level.zombie_melee_weapon_list)) {
     level.zombie_melee_weapon_list = [];
   }
   level.zombie_melee_weapon_list[weapon] = weapon;
 }
 
 function is_melee_weapon(weapon) {
-  if(!isdefined(weapon) || !isdefined(level.zombie_melee_weapon_list) || weapon == getweapon("none")) {
+  if(!isDefined(weapon) || !isDefined(level.zombie_melee_weapon_list) || weapon == getweapon("none")) {
     return 0;
   }
-  return isdefined(level.zombie_melee_weapon_list[weapon]);
+  return isDefined(level.zombie_melee_weapon_list[weapon]);
 }
 
 function is_player_melee_weapon(weapon) {
-  if(!isdefined(weapon) || !isdefined(self.current_melee_weapon)) {
+  if(!isDefined(weapon) || !isDefined(self.current_melee_weapon)) {
     return 0;
   }
   return self.current_melee_weapon == weapon;
@@ -2697,7 +2689,7 @@ function is_player_melee_weapon(weapon) {
 
 function get_player_melee_weapon() {
   melee_weapon = level.weaponnone;
-  if(isdefined(self.current_melee_weapon)) {
+  if(isDefined(self.current_melee_weapon)) {
     melee_weapon = self.current_melee_weapon;
   }
   return melee_weapon;
@@ -2717,21 +2709,21 @@ function register_hero_weapon_for_level(weaponname) {
   if(is_hero_weapon(weapon)) {
     return;
   }
-  if(!isdefined(level.zombie_hero_weapon_list)) {
+  if(!isDefined(level.zombie_hero_weapon_list)) {
     level.zombie_hero_weapon_list = [];
   }
   level.zombie_hero_weapon_list[weapon] = weapon;
 }
 
 function is_hero_weapon(weapon) {
-  if(!isdefined(weapon) || !isdefined(level.zombie_hero_weapon_list)) {
+  if(!isDefined(weapon) || !isDefined(level.zombie_hero_weapon_list)) {
     return 0;
   }
-  return isdefined(level.zombie_hero_weapon_list[weapon]);
+  return isDefined(level.zombie_hero_weapon_list[weapon]);
 }
 
 function is_player_hero_weapon(weapon) {
-  if(!isdefined(weapon) || !isdefined(self.current_hero_weapon)) {
+  if(!isDefined(weapon) || !isDefined(self.current_hero_weapon)) {
     return 0;
   }
   return self.current_hero_weapon == weapon;
@@ -2739,7 +2731,7 @@ function is_player_hero_weapon(weapon) {
 
 function get_player_hero_weapon() {
   hero_weapon = level.weaponnone;
-  if(isdefined(self.current_hero_weapon)) {
+  if(isDefined(self.current_hero_weapon)) {
     hero_weapon = self.current_hero_weapon;
   }
   return hero_weapon;
@@ -2755,18 +2747,16 @@ function init_player_hero_weapon() {
 }
 
 function has_player_hero_weapon() {
-  return isdefined(self.current_hero_weapon) && self.current_hero_weapon != level.weaponnone;
+  return isDefined(self.current_hero_weapon) && self.current_hero_weapon != level.weaponnone;
 }
 
 function should_watch_for_emp() {
-  return isdefined(level.should_watch_for_emp) && level.should_watch_for_emp;
+  return isDefined(level.should_watch_for_emp) && level.should_watch_for_emp;
 }
 
 function register_offhand_weapons_for_level_defaults() {
-  if(isdefined(level.register_offhand_weapons_for_level_defaults_override)) {
-    [
-      [level.register_offhand_weapons_for_level_defaults_override]
-    ]();
+  if(isDefined(level.register_offhand_weapons_for_level_defaults_override)) {
+    [[level.register_offhand_weapons_for_level_defaults_override]]();
     return;
   }
   register_lethal_grenade_for_level("frag_grenade");
@@ -2798,16 +2788,16 @@ function is_player_offhand_weapon(weapon) {
 }
 
 function has_powerup_weapon() {
-  return isdefined(self.has_powerup_weapon) && self.has_powerup_weapon;
+  return isDefined(self.has_powerup_weapon) && self.has_powerup_weapon;
 }
 
 function has_hero_weapon() {
   weapon = self getcurrentweapon();
-  return isdefined(weapon.isheroweapon) && weapon.isheroweapon;
+  return isDefined(weapon.isheroweapon) && weapon.isheroweapon;
 }
 
 function give_start_weapon(b_switch_weapon) {
-  if(!isdefined(self.hascompletedsuperee)) {
+  if(!isDefined(self.hascompletedsuperee)) {
     self.hascompletedsuperee = self zm_stats::get_global_stat("DARKOPS_GENESIS_SUPER_EE") > 0;
   }
   if(self.hascompletedsuperee) {
@@ -2820,13 +2810,13 @@ function give_start_weapon(b_switch_weapon) {
 }
 
 function array_flag_wait_any(flag_array) {
-  if(!isdefined(level._array_flag_wait_any_calls)) {
+  if(!isDefined(level._array_flag_wait_any_calls)) {
     level._n_array_flag_wait_any_calls = 0;
   } else {
     level._n_array_flag_wait_any_calls++;
   }
   str_condition = "array_flag_wait_call_" + level._n_array_flag_wait_any_calls;
-  for (index = 0; index < flag_array.size; index++) {
+  for(index = 0; index < flag_array.size; index++) {
     level thread array_flag_wait_any_thread(flag_array[index], str_condition);
   }
   level waittill(str_condition);
@@ -2839,11 +2829,11 @@ function array_flag_wait_any_thread(flag_name, condition) {
 }
 
 function groundpos(origin) {
-  return bullettrace(origin, origin + (vectorscale((0, 0, -1), 100000)), 0, self)["position"];
+  return bulletTrace(origin, origin + (vectorscale((0, 0, -1), 100000)), 0, self)["position"];
 }
 
 function groundpos_ignore_water(origin) {
-  return bullettrace(origin, origin + (vectorscale((0, 0, -1), 100000)), 0, self, 1)["position"];
+  return bulletTrace(origin, origin + (vectorscale((0, 0, -1), 100000)), 0, self, 1)["position"];
 }
 
 function groundpos_ignore_water_new(origin) {
@@ -2851,7 +2841,7 @@ function groundpos_ignore_water_new(origin) {
 }
 
 function self_delete() {
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     self delete();
   }
 }
@@ -2859,7 +2849,7 @@ function self_delete() {
 function ignore_triggers(timer) {
   self endon("death");
   self.ignoretriggers = 1;
-  if(isdefined(timer)) {
+  if(isDefined(timer)) {
     wait(timer);
   } else {
     wait(0.5);
@@ -2871,21 +2861,21 @@ function giveachievement_wrapper(achievement, all_players) {
   if(achievement == "") {
     return;
   }
-  if(isdefined(level.zm_disable_recording_stats) && level.zm_disable_recording_stats) {
+  if(isDefined(level.zm_disable_recording_stats) && level.zm_disable_recording_stats) {
     return;
   }
   achievement_lower = tolower(achievement);
   global_counter = 0;
-  if(isdefined(all_players) && all_players) {
+  if(isDefined(all_players) && all_players) {
     players = getplayers();
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       players[i] giveachievement(achievement);
       has_achievement = 0;
-      if(!(isdefined(has_achievement) && has_achievement)) {
+      if(!(isDefined(has_achievement) && has_achievement)) {
         global_counter++;
       }
       if(issplitscreen() && i == 0 || !issplitscreen()) {
-        if(isdefined(level.achievement_sound_func)) {
+        if(isDefined(level.achievement_sound_func)) {
           players[i] thread[[level.achievement_sound_func]](achievement_lower);
         }
       }
@@ -2897,10 +2887,10 @@ function giveachievement_wrapper(achievement, all_players) {
     }
     self giveachievement(achievement);
     has_achievement = 0;
-    if(!(isdefined(has_achievement) && has_achievement)) {
+    if(!(isDefined(has_achievement) && has_achievement)) {
       global_counter++;
     }
-    if(isdefined(level.achievement_sound_func)) {
+    if(isDefined(level.achievement_sound_func)) {
       self thread[[level.achievement_sound_func]](achievement_lower);
     }
   }
@@ -2964,7 +2954,7 @@ function waittill_not_moving() {
     self waittill("stationary");
   } else {
     prevorigin = self.origin;
-    while (true) {
+    while(true) {
       wait(0.15);
       if(self.origin == prevorigin) {
         break;
@@ -2984,7 +2974,7 @@ function ent_flag_init_ai_standards() {
   message_array = [];
   message_array[message_array.size] = "goal";
   message_array[message_array.size] = "damage";
-  for (i = 0; i < message_array.size; i++) {
+  for(i = 0; i < message_array.size; i++) {
     self flag::init(message_array[i]);
     self thread ent_flag_wait_ai_standards(message_array[i]);
   }
@@ -3015,18 +3005,18 @@ function track_players_intersection_tracker() {
   self endon("death");
   level endon("end_game");
   wait(5);
-  while (true) {
+  while(true) {
     killed_players = 0;
     players = getplayers();
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       if(players[i] laststand::player_is_in_laststand() || "playing" != players[i].sessionstate) {
         continue;
       }
-      for (j = 0; j < players.size; j++) {
+      for(j = 0; j < players.size; j++) {
         if(i == j || players[j] laststand::player_is_in_laststand() || "playing" != players[j].sessionstate) {
           continue;
         }
-        if(isdefined(level.player_intersection_tracker_override)) {
+        if(isDefined(level.player_intersection_tracker_override)) {
           if(players[i][
               [level.player_intersection_tracker_override]
             ](players[j])) {
@@ -3063,15 +3053,15 @@ function track_players_intersection_tracker() {
 
 function is_player_looking_at(origin, dot, do_trace, ignore_ent) {
   assert(isplayer(self), "");
-  if(!isdefined(dot)) {
+  if(!isDefined(dot)) {
     dot = 0.7;
   }
-  if(!isdefined(do_trace)) {
+  if(!isDefined(do_trace)) {
     do_trace = 1;
   }
   eye = self util::get_eye();
-  delta_vec = anglestoforward(vectortoangles(origin - eye));
-  view_vec = anglestoforward(self getplayerangles());
+  delta_vec = anglesToForward(vectortoangles(origin - eye));
+  view_vec = anglesToForward(self getplayerangles());
   new_dot = vectordot(delta_vec, view_vec);
   if(new_dot >= dot) {
     if(do_trace) {
@@ -3092,7 +3082,7 @@ function get_closest_index(org, array, dist = 9999999) {
     return;
   }
   index = undefined;
-  for (i = 0; i < array.size; i++) {
+  for(i = 0; i < array.size; i++) {
     newdistsq = distancesquared(array[i].origin, org);
     if(newdistsq >= distsq) {
       continue;
@@ -3119,7 +3109,7 @@ function is_valid_zombie_spawn_point(point) {
 
 function get_closest_index_to_entity(entity, array, dist, extra_check) {
   org = entity.origin;
-  if(!isdefined(dist)) {
+  if(!isDefined(dist)) {
     dist = 9999999;
   }
   distsq = dist * dist;
@@ -3127,8 +3117,8 @@ function get_closest_index_to_entity(entity, array, dist, extra_check) {
     return;
   }
   index = undefined;
-  for (i = 0; i < array.size; i++) {
-    if(isdefined(extra_check) && ![
+  for(i = 0; i < array.size; i++) {
+    if(isDefined(extra_check) && ![
         [extra_check]
       ](entity, array[i])) {
       continue;
@@ -3144,17 +3134,17 @@ function get_closest_index_to_entity(entity, array, dist, extra_check) {
 }
 
 function set_gamemode_var(gvar, val) {
-  if(!isdefined(game["gamemode_match"])) {
+  if(!isDefined(game["gamemode_match"])) {
     game["gamemode_match"] = [];
   }
   game["gamemode_match"][gvar] = val;
 }
 
 function set_gamemode_var_once(gvar, val) {
-  if(!isdefined(game["gamemode_match"])) {
+  if(!isDefined(game["gamemode_match"])) {
     game["gamemode_match"] = [];
   }
-  if(!isdefined(game["gamemode_match"][gvar])) {
+  if(!isDefined(game["gamemode_match"][gvar])) {
     game["gamemode_match"][gvar] = val;
   }
 }
@@ -3164,20 +3154,20 @@ function set_game_var(gvar, val) {
 }
 
 function set_game_var_once(gvar, val) {
-  if(!isdefined(game[gvar])) {
+  if(!isDefined(game[gvar])) {
     game[gvar] = val;
   }
 }
 
 function get_game_var(gvar) {
-  if(isdefined(game[gvar])) {
+  if(isDefined(game[gvar])) {
     return game[gvar];
   }
   return undefined;
 }
 
 function get_gamemode_var(gvar) {
-  if(isdefined(game["gamemode_match"]) && isdefined(game["gamemode_match"][gvar])) {
+  if(isDefined(game["gamemode_match"]) && isDefined(game["gamemode_match"][gvar])) {
     return game["gamemode_match"][gvar];
   }
   return undefined;
@@ -3185,30 +3175,30 @@ function get_gamemode_var(gvar) {
 
 function waittill_subset(min_num, string1, string2, string3, string4, string5) {
   self endon("death");
-  ent = spawnstruct();
+  ent = spawnStruct();
   ent.threads = 0;
   returned_threads = 0;
-  if(isdefined(string1)) {
+  if(isDefined(string1)) {
     self thread util::waittill_string(string1, ent);
     ent.threads++;
   }
-  if(isdefined(string2)) {
+  if(isDefined(string2)) {
     self thread util::waittill_string(string2, ent);
     ent.threads++;
   }
-  if(isdefined(string3)) {
+  if(isDefined(string3)) {
     self thread util::waittill_string(string3, ent);
     ent.threads++;
   }
-  if(isdefined(string4)) {
+  if(isDefined(string4)) {
     self thread util::waittill_string(string4, ent);
     ent.threads++;
   }
-  if(isdefined(string5)) {
+  if(isDefined(string5)) {
     self thread util::waittill_string(string5, ent);
     ent.threads++;
   }
-  while (ent.threads) {
+  while(ent.threads) {
     ent waittill("returned");
     ent.threads--;
     returned_threads++;
@@ -3220,7 +3210,7 @@ function waittill_subset(min_num, string1, string2, string3, string4, string5) {
 }
 
 function is_headshot(weapon, shitloc, smeansofdeath) {
-  if(!isdefined(shitloc)) {
+  if(!isDefined(shitloc)) {
     return 0;
   }
   if(shitloc != "head" && shitloc != "helmet") {
@@ -3234,11 +3224,11 @@ function is_headshot(weapon, shitloc, smeansofdeath) {
 
 function is_jumping() {
   ground_ent = self getgroundent();
-  return !isdefined(ground_ent);
+  return !isDefined(ground_ent);
 }
 
 function is_explosive_damage(mod) {
-  if(!isdefined(mod)) {
+  if(!isDefined(mod)) {
     return false;
   }
   if(mod == "MOD_GRENADE" || mod == "MOD_GRENADE_SPLASH" || mod == "MOD_PROJECTILE" || mod == "MOD_PROJECTILE_SPLASH" || mod == "MOD_EXPLOSIVE") {
@@ -3259,11 +3249,11 @@ function sndswitchannouncervox(who) {
 }
 
 function do_player_general_vox(category, type, timer, chance) {
-  if(isdefined(timer) && isdefined(level.votimer[type]) && level.votimer[type] > 0) {
+  if(isDefined(timer) && isDefined(level.votimer[type]) && level.votimer[type] > 0) {
     return;
   }
   self thread zm_audio::create_and_play_dialog(category, type);
-  if(isdefined(timer)) {
+  if(isDefined(timer)) {
     level.votimer[type] = timer;
     level thread general_vox_timer(level.votimer[type], type);
   }
@@ -3272,7 +3262,7 @@ function do_player_general_vox(category, type, timer, chance) {
 function general_vox_timer(timer, type) {
   level endon("end_game");
   println(((("" + type) + "") + timer) + "");
-  while (timer > 0) {
+  while(timer > 0) {
     wait(1);
     timer--;
   }
@@ -3287,7 +3277,7 @@ function create_vox_timer(type) {
 function play_vox_to_player(category, type, force_variant) {}
 
 function is_favorite_weapon(weapon_to_check) {
-  if(!isdefined(self.favorite_wall_weapons_list)) {
+  if(!isDefined(self.favorite_wall_weapons_list)) {
     return false;
   }
   foreach(weapon in self.favorite_wall_weapons_list) {
@@ -3303,19 +3293,19 @@ function add_vox_response_chance(event, chance) {
 }
 
 function set_demo_intermission_point() {
-  spawnpoints = getentarray("mp_global_intermission", "classname");
+  spawnpoints = getEntArray("mp_global_intermission", "classname");
   if(!spawnpoints.size) {
     return;
   }
   spawnpoint = spawnpoints[0];
   match_string = "";
   location = level.scr_zm_map_start_location;
-  if(location == "default" || location == "" && isdefined(level.default_start_location)) {
+  if(location == "default" || location == "" && isDefined(level.default_start_location)) {
     location = level.default_start_location;
   }
   match_string = (level.scr_zm_ui_gametype + "_") + location;
-  for (i = 0; i < spawnpoints.size; i++) {
-    if(isdefined(spawnpoints[i].script_string)) {
+  for(i = 0; i < spawnpoints.size; i++) {
+    if(isDefined(spawnpoints[i].script_string)) {
       tokens = strtok(spawnpoints[i].script_string, " ");
       foreach(token in tokens) {
         if(token == match_string) {
@@ -3339,7 +3329,7 @@ function does_player_have_map_navcard(player) {
 }
 
 function does_player_have_correct_navcard(player) {
-  if(!isdefined(level.navcard_needed)) {
+  if(!isDefined(level.navcard_needed)) {
     return 0;
   }
   return player zm_stats::get_global_stat(level.navcard_needed);
@@ -3347,7 +3337,7 @@ function does_player_have_correct_navcard(player) {
 
 function place_navcard(str_model, str_stat, org, angles) {
   navcard = spawn("script_model", org);
-  navcard setmodel(str_model);
+  navcard setModel(str_model);
   navcard.angles = angles;
   wait(1);
   navcard_pickup_trig = spawn("trigger_radius_use", org, 0, 84, 72);
@@ -3357,7 +3347,7 @@ function place_navcard(str_model, str_stat, org, angles) {
   a_navcard_stats = array("navcard_held_zm_transit", "navcard_held_zm_highrise", "navcard_held_zm_buried");
   is_holding_card = 0;
   str_placing_stat = undefined;
-  while (true) {
+  while(true) {
     navcard_pickup_trig waittill("trigger", who);
     if(is_player_valid(who)) {
       foreach(str_cur_stat in a_navcard_stats) {
@@ -3367,7 +3357,7 @@ function place_navcard(str_model, str_stat, org, angles) {
           who zm_stats::set_global_stat(str_cur_stat, 0);
         }
       }
-      who playsound("zmb_buildable_piece_add");
+      who playSound("zmb_buildable_piece_add");
       who zm_stats::set_global_stat(str_stat, 1);
       who.navcard_grabbed = str_stat;
       util::wait_network_frame();
@@ -3384,7 +3374,7 @@ function place_navcard(str_model, str_stat, org, angles) {
 }
 
 function sq_refresh_player_navcard_hud() {
-  if(!isdefined(level.navcards)) {
+  if(!isDefined(level.navcards)) {
     return;
   }
   players = getplayers();
@@ -3396,9 +3386,9 @@ function sq_refresh_player_navcard_hud() {
 function sq_refresh_player_navcard_hud_internal() {
   self endon("disconnect");
   navcard_bits = 0;
-  for (i = 0; i < level.navcards.size; i++) {
+  for(i = 0; i < level.navcards.size; i++) {
     hasit = self zm_stats::get_global_stat(level.navcards[i]);
-    if(isdefined(self.navcard_grabbed) && self.navcard_grabbed == level.navcards[i]) {
+    if(isDefined(self.navcard_grabbed) && self.navcard_grabbed == level.navcards[i]) {
       hasit = 1;
     }
     if(hasit) {
@@ -3420,7 +3410,7 @@ function disable_player_move_states(forcestancechange) {
   self allowsprint(0);
   self allowprone(0);
   self allowmelee(0);
-  if(isdefined(forcestancechange) && forcestancechange == 1) {
+  if(isDefined(forcestancechange) && forcestancechange == 1) {
     if(self getstance() == "prone") {
       self setstance("crouch");
     }
@@ -3428,28 +3418,28 @@ function disable_player_move_states(forcestancechange) {
 }
 
 function enable_player_move_states() {
-  if(!isdefined(self._allow_lean) || self._allow_lean == 1) {
+  if(!isDefined(self._allow_lean) || self._allow_lean == 1) {
     self allowlean(1);
   }
-  if(!isdefined(self._allow_ads) || self._allow_ads == 1) {
+  if(!isDefined(self._allow_ads) || self._allow_ads == 1) {
     self allowads(1);
   }
-  if(!isdefined(self._allow_sprint) || self._allow_sprint == 1) {
+  if(!isDefined(self._allow_sprint) || self._allow_sprint == 1) {
     self allowsprint(1);
   }
-  if(!isdefined(self._allow_prone) || self._allow_prone == 1) {
+  if(!isDefined(self._allow_prone) || self._allow_prone == 1) {
     self allowprone(1);
   }
-  if(!isdefined(self._allow_melee) || self._allow_melee == 1) {
+  if(!isDefined(self._allow_melee) || self._allow_melee == 1) {
     self allowmelee(1);
   }
 }
 
 function check_and_create_node_lists() {
-  if(!isdefined(level._link_node_list)) {
+  if(!isDefined(level._link_node_list)) {
     level._link_node_list = [];
   }
-  if(!isdefined(level._unlink_node_list)) {
+  if(!isDefined(level._unlink_node_list)) {
     level._unlink_node_list = [];
   }
 }
@@ -3461,18 +3451,18 @@ function link_nodes(a, b, bdontunlinkonmigrate = 0) {
   check_and_create_node_lists();
   a_index_string = "" + a.origin;
   b_index_string = "" + b.origin;
-  if(!isdefined(level._link_node_list[a_index_string])) {
-    level._link_node_list[a_index_string] = spawnstruct();
+  if(!isDefined(level._link_node_list[a_index_string])) {
+    level._link_node_list[a_index_string] = spawnStruct();
     level._link_node_list[a_index_string].node = a;
     level._link_node_list[a_index_string].links = [];
     level._link_node_list[a_index_string].ignore_on_migrate = [];
   }
-  if(!isdefined(level._link_node_list[a_index_string].links[b_index_string])) {
+  if(!isDefined(level._link_node_list[a_index_string].links[b_index_string])) {
     level._link_node_list[a_index_string].links[b_index_string] = b;
     level._link_node_list[a_index_string].ignore_on_migrate[b_index_string] = bdontunlinkonmigrate;
   }
-  if(isdefined(level._unlink_node_list[a_index_string])) {
-    if(isdefined(level._unlink_node_list[a_index_string].links[b_index_string])) {
+  if(isDefined(level._unlink_node_list[a_index_string])) {
+    if(isDefined(level._unlink_node_list[a_index_string].links[b_index_string])) {
       level._unlink_node_list[a_index_string].links[b_index_string] = undefined;
       level._unlink_node_list[a_index_string].ignore_on_migrate[b_index_string] = undefined;
     }
@@ -3487,18 +3477,18 @@ function unlink_nodes(a, b, bdontlinkonmigrate = 0) {
   check_and_create_node_lists();
   a_index_string = "" + a.origin;
   b_index_string = "" + b.origin;
-  if(!isdefined(level._unlink_node_list[a_index_string])) {
-    level._unlink_node_list[a_index_string] = spawnstruct();
+  if(!isDefined(level._unlink_node_list[a_index_string])) {
+    level._unlink_node_list[a_index_string] = spawnStruct();
     level._unlink_node_list[a_index_string].node = a;
     level._unlink_node_list[a_index_string].links = [];
     level._unlink_node_list[a_index_string].ignore_on_migrate = [];
   }
-  if(!isdefined(level._unlink_node_list[a_index_string].links[b_index_string])) {
+  if(!isDefined(level._unlink_node_list[a_index_string].links[b_index_string])) {
     level._unlink_node_list[a_index_string].links[b_index_string] = b;
     level._unlink_node_list[a_index_string].ignore_on_migrate[b_index_string] = bdontlinkonmigrate;
   }
-  if(isdefined(level._link_node_list[a_index_string])) {
-    if(isdefined(level._link_node_list[a_index_string].links[b_index_string])) {
+  if(isDefined(level._link_node_list[a_index_string])) {
+    if(isDefined(level._link_node_list[a_index_string].links[b_index_string])) {
       level._link_node_list[a_index_string].links[b_index_string] = undefined;
       level._link_node_list[a_index_string].ignore_on_migrate[b_index_string] = undefined;
     }
@@ -3507,10 +3497,10 @@ function unlink_nodes(a, b, bdontlinkonmigrate = 0) {
 }
 
 function spawn_path_node(origin, angles, k1, v1, k2, v2) {
-  if(!isdefined(level._spawned_path_nodes)) {
+  if(!isDefined(level._spawned_path_nodes)) {
     level._spawned_path_nodes = [];
   }
-  node = spawnstruct();
+  node = spawnStruct();
   node.origin = origin;
   node.angles = angles;
   node.k1 = k1;
@@ -3523,10 +3513,10 @@ function spawn_path_node(origin, angles, k1, v1, k2, v2) {
 }
 
 function spawn_path_node_internal(origin, angles, k1, v1, k2, v2) {
-  if(isdefined(k2)) {
+  if(isDefined(k2)) {
     return spawnpathnode("node_pathnode", origin, angles, k1, v1, k2, v2);
   }
-  if(isdefined(k1)) {
+  if(isDefined(k1)) {
     return spawnpathnode("node_pathnode", origin, angles, k1, v1);
   }
   return spawnpathnode("node_pathnode", origin, angles);
@@ -3535,10 +3525,10 @@ function spawn_path_node_internal(origin, angles, k1, v1, k2, v2) {
 function delete_spawned_path_nodes() {}
 
 function respawn_path_nodes() {
-  if(!isdefined(level._spawned_path_nodes)) {
+  if(!isDefined(level._spawned_path_nodes)) {
     return;
   }
-  for (i = 0; i < level._spawned_path_nodes.size; i++) {
+  for(i = 0; i < level._spawned_path_nodes.size; i++) {
     node_struct = level._spawned_path_nodes[i];
     println("" + node_struct.origin);
     node_struct.node = spawn_path_node_internal(node_struct.origin, node_struct.angles, node_struct.k1, node_struct.v1, node_struct.k2, node_struct.v2);
@@ -3547,30 +3537,28 @@ function respawn_path_nodes() {
 
 function link_changes_internal_internal(list, func) {
   keys = getarraykeys(list);
-  for (i = 0; i < keys.size; i++) {
+  for(i = 0; i < keys.size; i++) {
     node = list[keys[i]].node;
     node_keys = getarraykeys(list[keys[i]].links);
-    for (j = 0; j < node_keys.size; j++) {
-      if(isdefined(list[keys[i]].links[node_keys[j]])) {
-        if(isdefined(list[keys[i]].ignore_on_migrate[node_keys[j]]) && list[keys[i]].ignore_on_migrate[node_keys[j]]) {
+    for(j = 0; j < node_keys.size; j++) {
+      if(isDefined(list[keys[i]].links[node_keys[j]])) {
+        if(isDefined(list[keys[i]].ignore_on_migrate[node_keys[j]]) && list[keys[i]].ignore_on_migrate[node_keys[j]]) {
           println(((("" + keys[i]) + "") + node_keys[j]) + "");
           continue;
         }
         println((("" + keys[i]) + "") + node_keys[j]);
-        # / [
-          [func]
-        ](node, list[keys[i]].links[node_keys[j]]);
+        # / [[func]](node, list[keys[i]].links[node_keys[j]]);
       }
     }
   }
 }
 
 function link_changes_internal(func_for_link_list, func_for_unlink_list) {
-  if(isdefined(level._link_node_list)) {
+  if(isDefined(level._link_node_list)) {
     println("");
     link_changes_internal_internal(level._link_node_list, func_for_link_list);
   }
-  if(isdefined(level._unlink_node_list)) {
+  if(isDefined(level._unlink_node_list)) {
     println("");
     link_changes_internal_internal(level._unlink_node_list, func_for_unlink_list);
   }
@@ -3592,7 +3580,7 @@ function undo_link_changes() {
   println("");
   println("");
   println("");
-  link_changes_internal( & unlink_nodes_wrapper, & link_nodes_wrapper);
+  link_changes_internal(&unlink_nodes_wrapper, &link_nodes_wrapper);
   delete_spawned_path_nodes();
 }
 
@@ -3601,7 +3589,7 @@ function redo_link_changes() {
   println("");
   println("");
   respawn_path_nodes();
-  link_changes_internal( & link_nodes_wrapper, & unlink_nodes_wrapper);
+  link_changes_internal(&link_nodes_wrapper, &unlink_nodes_wrapper);
 }
 
 function is_gametype_active(a_gametypes) {
@@ -3609,7 +3597,7 @@ function is_gametype_active(a_gametypes) {
   if(!isarray(a_gametypes)) {
     a_gametypes = array(a_gametypes);
   }
-  for (i = 0; i < a_gametypes.size; i++) {
+  for(i = 0; i < a_gametypes.size; i++) {
     if(getdvarstring("g_gametype") == a_gametypes[i]) {
       b_is_gametype_active = 1;
     }
@@ -3618,22 +3606,18 @@ function is_gametype_active(a_gametypes) {
 }
 
 function register_custom_spawner_entry(spot_noteworthy, func) {
-  if(!isdefined(level.custom_spawner_entry)) {
+  if(!isDefined(level.custom_spawner_entry)) {
     level.custom_spawner_entry = [];
   }
   level.custom_spawner_entry[spot_noteworthy] = func;
 }
 
 function get_player_weapon_limit(player) {
-  if(isdefined(self.get_player_weapon_limit)) {
-    return [
-      [self.get_player_weapon_limit]
-    ](player);
+  if(isDefined(self.get_player_weapon_limit)) {
+    return [[self.get_player_weapon_limit]](player);
   }
-  if(isdefined(level.get_player_weapon_limit)) {
-    return [
-      [level.get_player_weapon_limit]
-    ](player);
+  if(isDefined(level.get_player_weapon_limit)) {
+    return [[level.get_player_weapon_limit]](player);
   }
   weapon_limit = 2;
   if(player hasperk("specialty_additionalprimaryweapon")) {
@@ -3644,7 +3628,7 @@ function get_player_weapon_limit(player) {
 
 function get_player_perk_purchase_limit() {
   n_perk_purchase_limit_override = level.perk_purchase_limit;
-  if(isdefined(level.get_player_perk_purchase_limit)) {
+  if(isDefined(level.get_player_perk_purchase_limit)) {
     n_perk_purchase_limit_override = self[[level.get_player_perk_purchase_limit]]();
   }
   return n_perk_purchase_limit_override;
@@ -3668,7 +3652,7 @@ function give_player_all_perks(b_exclude_quick_revive = 0) {
     }
     if(!self hasperk(str_perk)) {
       self zm_perks::give_perk(str_perk, 0);
-      if(isdefined(level.perk_bought_func)) {
+      if(isDefined(level.perk_bought_func)) {
         self[[level.perk_bought_func]](str_perk);
       }
     }
@@ -3682,7 +3666,7 @@ function wait_for_attractor_positions_complete() {
 
 function get_player_index(player) {
   assert(isplayer(player));
-  assert(isdefined(player.characterindex));
+  assert(isDefined(player.characterindex));
   if(player.entity_num == 0 && getdvarstring("") != "") {
     new_vo_index = getdvarint("");
     return new_vo_index;
@@ -3708,8 +3692,8 @@ function zombie_goto_round(n_target_round) {
   zombie_utility::ai_calculate_health(n_target_round);
   zm::set_round_number(n_target_round - 1);
   zombies = zombie_utility::get_round_enemy_array();
-  if(isdefined(zombies)) {
-    array::run_all(zombies, & kill);
+  if(isDefined(zombies)) {
+    array::run_all(zombies, &kill);
   }
   level.sndgotoroundoccurred = 1;
   level waittill("between_round_over");
@@ -3721,7 +3705,7 @@ function is_point_inside_enabled_zone(v_origin, ignore_zone) {
     if(!zone.is_enabled) {
       continue;
     }
-    if(isdefined(ignore_zone) && zone == ignore_zone) {
+    if(isDefined(ignore_zone) && zone == ignore_zone) {
       continue;
     }
     foreach(e_volume in zone.volumes) {
@@ -3736,7 +3720,7 @@ function is_point_inside_enabled_zone(v_origin, ignore_zone) {
 }
 
 function clear_streamer_hint() {
-  if(isdefined(self.streamer_hint)) {
+  if(isDefined(self.streamer_hint)) {
     self.streamer_hint delete();
     self.streamer_hint = undefined;
   }
@@ -3746,7 +3730,7 @@ function clear_streamer_hint() {
 function wait_clear_streamer_hint(lifetime) {
   self endon("wait_clear_streamer_hint");
   wait(lifetime);
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     self clear_streamer_hint();
   }
 }
@@ -3759,7 +3743,7 @@ function create_streamer_hint(origin, angles, value, lifetime) {
   }
   self clear_streamer_hint();
   self.streamer_hint = createstreamerhint(origin, value);
-  if(isdefined(angles)) {
+  if(isDefined(angles)) {
     self.streamer_hint.angles = angles;
   }
   if(self != level) {
@@ -3768,7 +3752,7 @@ function create_streamer_hint(origin, angles, value, lifetime) {
   }
   self.streamer_hint setincludemeshes(1);
   self notify("wait_clear_streamer_hint");
-  if(isdefined(lifetime) && lifetime > 0) {
+  if(isDefined(lifetime) && lifetime > 0) {
     self thread wait_clear_streamer_hint(lifetime);
   }
 }
@@ -3776,31 +3760,31 @@ function create_streamer_hint(origin, angles, value, lifetime) {
 function approximate_path_dist(player) {
   aiprofile_beginentry("approximate_path_dist");
   goal_pos = player.origin;
-  if(isdefined(player.last_valid_position)) {
+  if(isDefined(player.last_valid_position)) {
     goal_pos = player.last_valid_position;
   }
-  if(isdefined(player.b_teleporting) && player.b_teleporting) {
-    if(isdefined(player.teleport_location)) {
+  if(isDefined(player.b_teleporting) && player.b_teleporting) {
+    if(isDefined(player.teleport_location)) {
       goal_pos = player.teleport_location;
       if(!ispointonnavmesh(goal_pos, self)) {
         position = getclosestpointonnavmesh(goal_pos, 100, 15);
-        if(isdefined(position)) {
+        if(isDefined(position)) {
           goal_pos = position;
         }
       }
     }
   }
-  assert(isdefined(level.pathdist_type), "");
+  assert(isDefined(level.pathdist_type), "");
   approx_dist = pathdistance(self.origin, goal_pos, 1, self, level.pathdist_type);
   aiprofile_endentry();
   return approx_dist;
 }
 
 function register_slowdown(str_type, n_rate, n_duration) {
-  if(!isdefined(level.a_n_slowdown_rates)) {
+  if(!isDefined(level.a_n_slowdown_rates)) {
     level.a_n_slowdown_rates = [];
   }
-  level.a_s_slowdowns[str_type] = spawnstruct();
+  level.a_s_slowdowns[str_type] = spawnStruct();
   level.a_s_slowdowns[str_type].n_rate = n_rate;
   level.a_s_slowdowns[str_type].n_duration = n_duration;
 }
@@ -3809,16 +3793,16 @@ function slowdown_ai(str_type) {
   self notify("starting_slowdown_ai");
   self endon("starting_slowdown_ai");
   self endon("death");
-  assert(isdefined(level.a_s_slowdowns[str_type]), ("" + str_type) + "");
-  if(!isdefined(self.a_n_slowdown_timeouts)) {
+  assert(isDefined(level.a_s_slowdowns[str_type]), ("" + str_type) + "");
+  if(!isDefined(self.a_n_slowdown_timeouts)) {
     self.a_n_slowdown_timeouts = [];
   }
   n_time = gettime();
   n_timeout = n_time + level.a_s_slowdowns[str_type].n_duration;
-  if(!isdefined(self.a_n_slowdown_timeouts[str_type]) || self.a_n_slowdown_timeouts[str_type] < n_timeout) {
+  if(!isDefined(self.a_n_slowdown_timeouts[str_type]) || self.a_n_slowdown_timeouts[str_type] < n_timeout) {
     self.a_n_slowdown_timeouts[str_type] = n_timeout;
   }
-  while (self.a_n_slowdown_timeouts.size) {
+  while(self.a_n_slowdown_timeouts.size) {
     str_lowest_type = undefined;
     n_lowest_rate = 10;
     foreach(str_index, n_slowdown_timeout in self.a_n_slowdown_timeouts) {
@@ -3831,7 +3815,7 @@ function slowdown_ai(str_type) {
         n_lowest_rate = level.a_s_slowdowns[str_index].n_rate;
       }
     }
-    if(isdefined(str_lowest_type)) {
+    if(isDefined(str_lowest_type)) {
       self asmsetanimationrate(n_lowest_rate);
       n_duration = self.a_n_slowdown_timeouts[str_lowest_type] - n_time;
       wait(n_duration);
@@ -3850,7 +3834,7 @@ function get_player_closest_to(e_target) {
 
 function is_facing(facee, requireddot = 0.5, b_2d = 1) {
   orientation = self getplayerangles();
-  v_forward = anglestoforward(orientation);
+  v_forward = anglesToForward(orientation);
   v_to_facee = facee.origin - self.origin;
   if(b_2d) {
     v_forward_computed = (v_forward[0], v_forward[1], 0);
@@ -3873,7 +3857,7 @@ function upload_zm_dash_counters(force_upload = 0) {
   if(!sessionmodeisonlinegame()) {
     return;
   }
-  if(isdefined(level.var_e097db22) && level.var_e097db22 || (isdefined(force_upload) && force_upload)) {
+  if(isDefined(level.var_e097db22) && level.var_e097db22 || (isDefined(force_upload) && force_upload)) {
     util::function_ad904acd();
   }
   level.var_e097db22 = undefined;
@@ -3912,7 +3896,7 @@ function function_62f3bbf4(counter_name) {
 }
 
 function private function_8eb96012(ishost, var_95597467, var_88b8e8ec) {
-  path = spawnstruct();
+  path = spawnStruct();
   path.hosted = (ishost ? "HOSTED" : "PLAYED");
   path.var_95597467 = (var_95597467 ? "USED" : "UNUSED");
   path.var_c0cf8114 = (var_88b8e8ec ? "SOLO" : "COOP");

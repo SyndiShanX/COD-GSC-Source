@@ -331,7 +331,7 @@ show_specialweapon_hint() {
   self endon("death");
 
   wait(1);
-  self setLowerMessage("weapon_hint", & "MP_DOME_NS_ALIEN_GUN_HINT", 6);
+  self setLowerMessage("weapon_hint", &"MP_DOME_NS_ALIEN_GUN_HINT", 6);
 }
 
 show_specialweapon_hint_repeat() {

@@ -4,11 +4,9 @@
 ***********************************************************************/
 
 #include scripts\core_common\lui_shared;
-
 #namespace zm_laststand_client;
 
 class czm_laststand_client: cluielem {
-
   function set_num_downs(localclientnum, value) {
     set_data(localclientnum, "num_downs", value);
   }
@@ -22,7 +20,7 @@ class czm_laststand_client: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, #"zm_laststand_client");
+    cluielem::open(localclientnum, # "zm_laststand_client");
   }
 
   function function_fa582112(localclientnum) {

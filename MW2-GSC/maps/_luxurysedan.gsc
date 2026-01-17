@@ -21,9 +21,7 @@ main(model, type) {
   build_compassicon("automobile", false);
 }
 
-init_local() {
-
-}
+init_local() {}
 
 set_vehicle_anims(positions) {
   return positions;
@@ -34,8 +32,8 @@ set_vehicle_anims(positions) {
 setanims() {
   positions = [];
 
-  for (i = 0; i < 1; i++)
-    positions[i] = spawnstruct();
+  for(i = 0; i < 1; i++)
+    positions[i] = spawnStruct();
   positions[0].sittag = "tag_driver";
   positions[0].idle = % coup_driver_idle;
 

@@ -67,7 +67,7 @@ ev2_detect_player() {
 }
 
 ev2_wait_for_player_to_damage(trigger, msg) {
-  while (1) {
+  while(1) {
     trigger waittill("damage", amount, attacker, direction_vec, point, type);
     if(isplayer(attacker)) {
       level notify(msg);
@@ -152,7 +152,7 @@ ev2_objectives() {
 }
 
 ev1_tank_obj(obj_num, sub_num, tank, flag_to_set) {
-  while (isalive(tank)) {
+  while(isalive(tank)) {
     wait(0.5);
   }
   objective_additionalposition(obj_num, sub_num, (0, 0, 0));
@@ -176,7 +176,7 @@ ev1_tank_temp_obj(obj_num, sub_num, pos) {
 }
 
 ev1_tank_5_obj(obj_num, tank, msg) {
-  while (isalive(tank)) {
+  while(isalive(tank)) {
     objective_position(obj_num, tank.origin);
     wait(0.5);
   }
@@ -214,8 +214,8 @@ random_death_at_end_node() {
   self endon("death");
   self waittill("reached_end_node");
   wait(randomint(2));
-  playfx(level._effect["tank_blow_up"], self.origin);
-  playfx(level._effect["tank_smoke_column"], self.origin);
+  playFX(level._effect["tank_blow_up"], self.origin);
+  playFX(level._effect["tank_smoke_column"], self.origin);
   self dodamage(self.health + 25, (0, 180, 48));
   self notify("death");
 }
@@ -226,8 +226,8 @@ ev2_tank_5_barrage() {
   self waittill("reached_wait_node");
   flag_set("ev2_tank_friend_in_position");
   level waittill("tank_killed_by_shreck");
-  playfx(level._effect["tank_blow_up"], self.origin);
-  playfx(level._effect["tank_smoke_column"], self.origin);
+  playFX(level._effect["tank_blow_up"], self.origin);
+  playFX(level._effect["tank_smoke_column"], self.origin);
   self dodamage(self.health + 25, (0, 180, 48));
   self notify("death");
 }
@@ -242,9 +242,9 @@ ev2_ambient_tank_hits() {
 ev2_ambient_tank_hits_friend() {
   level endon("stop_ambient_explosions");
   friendly_targets = getstructarray("ev2_tank_battle_ambient_friend", "targetname");
-  while (1) {
+  while(1) {
     index = randomint(friendly_targets.size);
-    playfx(level._effect["dirt_blow_up"], friendly_targets[index].origin);
+    playFX(level._effect["dirt_blow_up"], friendly_targets[index].origin);
     wait(randomfloat(3));
   }
 }
@@ -252,9 +252,9 @@ ev2_ambient_tank_hits_friend() {
 ev2_ambient_tank_hits_enemy() {
   level endon("stop_ambient_explosions");
   enemy_targets = getstructarray("ev2_tank_battle_ambient_enemy", "targetname");
-  while (1) {
+  while(1) {
     index = randomint(enemy_targets.size);
-    playfx(level._effect["dirt_blow_up"], enemy_targets[index].origin);
+    playFX(level._effect["dirt_blow_up"], enemy_targets[index].origin);
     wait(randomfloat(2));
   }
 }
@@ -264,7 +264,7 @@ ev2_throw_guy_out_window() {
   trigger waittill("trigger");
   level notify("shreck_guy_killed");
   spawner = getent("house_throw_guy", "targetname");
-  spawnedGuy = spawner StalingradSpawn();
+  spawnedGuy = spawner Stalingradspawn();
   spawn_failed(spawnedGuy);
   spawnedGuy.animname = "generic";
   spawnedGuy set_random_gib();
@@ -339,7 +339,7 @@ ev2_regroup_at_the_barn() {
   flood_stop notify("trigger");
   all_friends = getaiarray("allies");
   nodes = getnodearray("ev2_regroup_nodes", "targetname");
-  for (i = 0; i < all_friends.size; i++) {
+  for(i = 0; i < all_friends.size; i++) {
     all_friends[i] disable_ai_color();
     if(i < nodes.size) {
       all_friends[i].goalradius = 32;
@@ -350,13 +350,13 @@ ev2_regroup_at_the_barn() {
   }
   level.hero1 waittill("goal");
   all_friends = getaiarray("allies");
-  for (i = 0; i < all_friends.size; i++) {
+  for(i = 0; i < all_friends.size; i++) {
     all_friends[i] hold_fire();
   }
   level notify("ev2_regroup_time");
   level waittill("ev2_regroup_success");
   enemies = getaiarray("axis");
-  for (i = 0; i < enemies.size; i++) {
+  for(i = 0; i < enemies.size; i++) {
     enemies[i] thread ai_auto_death(5);
   }
   wait(3);
@@ -367,7 +367,7 @@ ev2_regroup_at_the_barn() {
   level waittill("move_tank_5");
   level thread ev2_guys_at_door();
   flag_wait("ev2_tank5_spawned");
-  for (i = 0; i < all_friends.size; i++) {
+  for(i = 0; i < all_friends.size; i++) {
     if(isalive(all_friends[i]) && isDefined(all_friends[i].next_retreat_node2)) {
       new_node = getnode(all_friends[i].next_retreat_node2, "script_noteworthy");
       if(isDefined(new_node)) {
@@ -380,7 +380,7 @@ ev2_regroup_at_the_barn() {
   level thread dialog_tank_surprise();
   level waittill("ev2_tank5_destroyed");
   enemies = getaiarray("axis");
-  for (i = 0; i < enemies.size; i++) {
+  for(i = 0; i < enemies.size; i++) {
     enemies[i] thread ai_auto_death(5);
   }
   wait(3);
@@ -389,7 +389,7 @@ ev2_regroup_at_the_barn() {
   node_chernov = getnode("ev2_barn_chernov1", "targetname");
   nodes = getnodearray("ev2_barn_friends", "targetname");
   node_index = 0;
-  for (i = 0; i < all_friends.size; i++) {
+  for(i = 0; i < all_friends.size; i++) {
     if(all_friends[i] == level.hero1) {
       all_friends[i] setgoalnode(node_zeitzev);
     } else if(all_friends[i] == level.hero2) {
@@ -403,7 +403,7 @@ ev2_regroup_at_the_barn() {
   }
   setmusicstate("SURPRISE_TANK_DEAD");
   level.hero1 waittill("goal");
-  while (distance(level.hero2.origin, node_chernov.origin) > 50) {
+  while(distance(level.hero2.origin, node_chernov.origin) > 50) {
     wait(0.1);
   }
   node_zeitzev2 = getnode("ev2_barn_zeitzev", "targetname");
@@ -412,13 +412,13 @@ ev2_regroup_at_the_barn() {
   level thread dialog_tank_5_success();
   level thread anim_open_barn_door(level.hero1, level.hero2, node_zeitzev2, node_chernov2);
   enemies = getaiarray("axis");
-  for (i = 0; i < enemies.size; i++) {
+  for(i = 0; i < enemies.size; i++) {
     enemies[i] thread ai_auto_death(3);
   }
   level waittill("barn_door_opened");
   colors_barn = getent("ev2_barn_fc", "targetname");
   all_friends = getaiarray("allies");
-  for (i = 0; i < all_friends.size; i++) {
+  for(i = 0; i < all_friends.size; i++) {
     all_friends[i] enable_ai_color();
   }
   colors_barn notify("trigger");
@@ -521,7 +521,7 @@ pacing_tank1_3_wait() {
   players = get_players();
   destination_point = (-5359, 15908, 91.8);
   move_tank = false;
-  while (1) {
+  while(1) {
     if(isDefined(level.tank_spot_1_guy) && isplayer(level.tank_spot_1_guy)) {
       move_tank = true;
     } else if(isDefined(level.tank_spot_2_guy) && isplayer(level.tank_spot_2_guy)) {
@@ -566,13 +566,13 @@ fire_at_target_at_end_tank1(target_name, delay) {
   trigger = getent("start_tank1_fire", "targetname");
   trigger waittill("trigger");
   self.turretrotscale = 0.7;
-  for (i = 0; i < 3; i++) {
+  for(i = 0; i < 3; i++) {
     target_vec = target_point.origin + (randomint(200), randomint(100), 0);
     self SetTurretTargetVec(target_vec);
     self waittill("turret_on_target");
     self FireWeapon();
-    playfx(level._effect["tank_fire_dust"], target_vec);
-    playfx(level._effect["house_blow_up"], target_vec);
+    playFX(level._effect["tank_fire_dust"], target_vec);
+    playFX(level._effect["house_blow_up"], target_vec);
     wait(4 + randomint(2));
   }
 }
@@ -585,8 +585,8 @@ fire_at_target_at_end(target_name, delay) {
   self SetTurretTargetVec(target_point.origin);
   self waittill("turret_on_target");
   self FireWeapon();
-  playfx(level._effect["tank_fire_dust"], self.origin);
-  playfx(level._effect["house_blow_up"], target_point.origin);
+  playFX(level._effect["tank_fire_dust"], self.origin);
+  playFX(level._effect["house_blow_up"], target_point.origin);
   if(target_name == "ev3_tower_target_1") {
     level notify("tower01_force_blow_up");
     flag_set("tank3_in_position_after_ride");
@@ -606,14 +606,14 @@ pacing_planes(plane_id) {
     start_node.angles);
   plane attachPath(start_node);
   plane startpath();
-  plane playsound("fly_by2");
+  plane playSound("fly_by2");
   plane waittill("reached_end_node");
   plane delete();
 }
 
 ev2_guys_at_door() {
   allies_ai = GetAiArray("allies");
-  for (i = 0; i < allies_ai.size; i++) {
+  for(i = 0; i < allies_ai.size; i++) {
     if(allies_ai[i] != level.hero1 && allies_ai[i] != level.hero2) {
       if(!isDefined(level.door_guys_1)) {
         level.door_guys_1 = allies_ai[i];
@@ -627,9 +627,9 @@ ev2_guys_at_door() {
   wait(1);
   ev2_door_trigger = getent("ev2_door_trigger", "targetname");
   if(isDefined(level.door_guys_1) && isDefined(level.door_guys_2)) {
-    while (1) {
+    while(1) {
       if(level.door_guys_1 istouching(ev2_door_trigger) || level.door_guys_2 istouching(ev2_door_trigger)) {
-        for (i = 0; i < 30; i++) {
+        for(i = 0; i < 30; i++) {
           if(level.door_guys_1 istouching(ev2_door_trigger) && level.door_guys_2 istouching(ev2_door_trigger)) {
             wait(1);
             level notify("move_tank_5_for_real");
@@ -643,7 +643,7 @@ ev2_guys_at_door() {
       wait(0.05);
     }
   } else if(isDefined(level.door_guys_1)) {
-    while (1) {
+    while(1) {
       if(level.door_guys_1 istouching(ev2_door_trigger)) {
         wait(1);
         level notify("move_tank_5_for_real");
@@ -710,7 +710,7 @@ death_if_not_moving() {
   self endon("death");
   old_pos = self.origin;
   new_pos = old_pos;
-  while (1) {
+  while(1) {
     wait(2);
     new_pos = self.origin;
     if(distance(new_pos, old_pos) < 16) {
@@ -735,11 +735,11 @@ ev2_loop_ambient_mg_burst() {
 ev2_tank_loop_at_player() {
   self endon("death");
   self waittill("reached_end_node");
-  while (1) {
+  while(1) {
     players = get_players();
     closest_index = 0;
     closest_index_radius = 99999;
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       if(distance(players[i].origin, self.origin) <= closest_index_radius) {
         closest_index = i;
         closest_index_radius = distance(players[i].origin, self.origin);
@@ -749,7 +749,7 @@ ev2_tank_loop_at_player() {
     self SetTurretTargetVec(players[closest_index].origin + (0, 0, 40));
     self waittill("turret_on_target");
     self FireWeapon();
-    playfx(level._effect["tank_fire_dust"], self.origin);
+    playFX(level._effect["tank_fire_dust"], self.origin);
     wait(3 + randomfloat(2));
   }
 }
@@ -760,7 +760,7 @@ ev2_shreck_loop() {
   shreck_points = getstructarray("ev2_shreck_spawn", "targetname");
   shreck_targets = getstructarray("ev2_shreck_target", "targetname");
   fire_point = 0;
-  while (1) {
+  while(1) {
     level thread fire_shreck(shreck_points[fire_point], shreck_targets[randomint(shreck_targets.size)], 1);
     fire_point++;
     fire_point = fire_point % shreck_points.size;
@@ -797,7 +797,7 @@ ev2_shreck_barrage() {
 
 pacing_get_on_tank_1(tank) {
   player = undefined;
-  while (1) {
+  while(1) {
     player = get_player_pressing_use_button();
     if(distance(player.origin, tank GetTagOrigin("tag_passenger9")) < 150) {
       attached_guys = tank.attachedguys;
@@ -813,7 +813,7 @@ pacing_get_on_tank_1(tank) {
 
 pacing_get_on_tank_2(tank) {
   player = undefined;
-  while (1) {
+  while(1) {
     player = get_player_pressing_use_button();
     if(distance(player.origin, tank GetTagOrigin("tag_passenger9")) < 150) {
       attached_guys = tank.attachedguys;
@@ -830,12 +830,12 @@ pacing_get_on_tank_2(tank) {
 pacing_get_on_tank_3(tank) {
   player = undefined;
   button_held = false;
-  while (1) {
+  while(1) {
     tank makevehicleusable();
-    while (level.ev2_tank_3_can_mount == false) {
+    while(level.ev2_tank_3_can_mount == false) {
       wait(0.05);
     }
-    while (1) {
+    while(1) {
       player = get_player_pressing_use_button();
       distance_tag_9 = distance(player.origin, tank GetTagOrigin("tag_passenger9"));
       if(distance_tag_9 < 150) {
@@ -855,10 +855,10 @@ pacing_get_on_tank_3(tank) {
     player allowprone(false);
     player SetStance("crouch");
     wait(2);
-    while (1) {
+    while(1) {
       if(player UseButtonPressed()) {
         button_held = true;
-        for (i = 0; i < 15; i++) {
+        for(i = 0; i < 15; i++) {
           if(player UseButtonPressed() == false) {
             button_held = false;
             break;
@@ -890,14 +890,14 @@ pacing_get_on_tank_3b(tank) {
   level.tank_spot_1_guy = undefined;
   level.tank_spot_2_guy = undefined;
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     level thread ev2_player_get_on_tank(players[i], tank);
   }
   level thread check_for_leaving_players();
   flag_wait("tank3_in_position_after_ride");
   flag_set("tank_ride_over");
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(isDefined(players[i].Warning_hud)) {
       players[i].Warning_hud SetText("");
       players[i].Warning_hud delete();
@@ -913,7 +913,7 @@ force_players_off_tank(tank) {
   tank waittill("reached_wait_node");
   flag_set("tank_ride_over");
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(isDefined(players[i].Warning_hud)) {
       players[i].Warning_hud SetText("");
       players[i].Warning_hud delete();
@@ -936,14 +936,14 @@ ev2_player_get_on_tank(player, tank) {
   player.Warning_hud.sort = 20;
   player.Warning_hud.font = "default";
   player.Warning_hud FadeOverTime(1);
-  while (1) {
+  while(1) {
     if(flag("tank_ride_over")) {
       return;
     }
-    while (level.tank_spot_1_available == false && level.tank_spot_2_available == false) {
+    while(level.tank_spot_1_available == false && level.tank_spot_2_available == false) {
       wait(0.1);
     }
-    while (1) {
+    while(1) {
       distance_tag_8 = distance(player.origin, tank GetTagOrigin("tag_passenger8"));
       distance_tag_9 = distance(player.origin, tank GetTagOrigin("tag_passenger9"));
       if(distance_tag_8 < 150 || distance_tag_9 < 150) {
@@ -1004,12 +1004,12 @@ ev2_player_get_on_tank(player, tank) {
       else
         player.Warning_hud SetText(&"SCRIPT_PLATFORM_OFF_TANK");
     }
-    while (1) {
+    while(1) {
       if(flag("tank_ride_over")) {
         break;
       } else if(player UseButtonPressed()) {
         button_held = true;
-        for (i = 0; i < 10; i++) {
+        for(i = 0; i < 10; i++) {
           if(player UseButtonPressed() == false) {
             button_held = false;
             break;
@@ -1047,11 +1047,11 @@ ev2_player_get_on_tank(player, tank) {
 }
 
 check_for_leaving_players() {
-  while (!flag("tank_ride_over")) {
+  while(!flag("tank_ride_over")) {
     if(level.tank_spot_1_available == false) {
       players = get_players();
       match = false;
-      for (i = 0; i < players.size; i++) {
+      for(i = 0; i < players.size; i++) {
         if(level.tank_spot_1_guy == players[i]) {
           match = true;
         }
@@ -1064,7 +1064,7 @@ check_for_leaving_players() {
     if(level.tank_spot_2_available == false) {
       players = get_players();
       match = false;
-      for (i = 0; i < players.size; i++) {
+      for(i = 0; i < players.size; i++) {
         if(level.tank_spot_2_guy == players[i]) {
           match = true;
         }
@@ -1081,8 +1081,8 @@ check_for_leaving_players() {
 ev2_mount_player_on_tank_1() {}
 get_player_pressing_use_button() {
   players = get_players();
-  while (1) {
-    for (i = 0; i < players.size; i++) {
+  while(1) {
+    for(i = 0; i < players.size; i++) {
       if(players[i] UseButtonPressed()) {
         return (players[i]);
       }
@@ -1096,7 +1096,7 @@ ev2_panzershreck_barrage(start, end) {
   start_struct = getstruct(start, "targetname");
   ends = getstructarray(end, "targetname");
   index = 0;
-  while (1) {
+  while(1) {
     wait(randomfloat(2));
     level thread fire_shreck(start, ends[index], 1);
     index++;
@@ -1155,7 +1155,7 @@ ev2_tank_loop_fire(init_delay, end_msg, init_target) {
   self endon(end_msg);
   self endon("death");
   wait(init_delay);
-  while (1) {
+  while(1) {
     if(isplayer(self.see1_tank_current_target)) {
       if(self.see1_tank_can_see_player) {
         if(self.see1_tank_aggressive) {
@@ -1178,8 +1178,8 @@ ev2_tank_loop_fire(init_delay, end_msg, init_target) {
       wait(1);
       player_hiding = false;
       continue_search = true;
-      wheat_field_triggers = getentarray("ev2_wheat_field", "targetname");
-      while (continue_search) {
+      wheat_field_triggers = getEntArray("ev2_wheat_field", "targetname");
+      while(continue_search) {
         if(self.see1_tank_current_target getstance() != "prone") {
           continue_search = false;
           continue;
@@ -1195,14 +1195,14 @@ ev2_tank_loop_fire(init_delay, end_msg, init_target) {
       }
     }
     self FireWeapon();
-    playfx(level._effect["tank_fire_dust"], self.origin);
+    playFX(level._effect["tank_fire_dust"], self.origin);
     wait(2 + randomfloat(2));
   }
 }
 
 ev2_tank_threat_manager() {
   self endon("death");
-  while (1) {
+  while(1) {
     self waittill("damage", amount, attacker, direction_vec, point, type);
     if(isplayer(attacker)) {
       if(type == "MOD_PROJECTILE_SPLASH" || type == "MOD_PROJECTILE") {
@@ -1216,14 +1216,14 @@ ev2_wait_for_player_to_get_close(final_dist, dist_init) {
   self endon("death");
   players = get_players();
   dist = dist_init;
-  while (1) {
-    for (i = 0; i < players.size; i++) {
+  while(1) {
+    for(i = 0; i < players.size; i++) {
       if(isDefined(players[i]) && distance(players[i].origin, self.origin) < dist) {
         dist = final_dist;
         self notify("player_getting_close");
         self.see1_tank_current_target = players[i];
         wait(1.5);
-        while (self.see1_tank_moving) {
+        while(self.see1_tank_moving) {
           wait(0.05);
         }
         wait(2);
@@ -1235,7 +1235,7 @@ ev2_wait_for_player_to_get_close(final_dist, dist_init) {
 
 ev2_tank_end_node_detection() {
   self endon("death");
-  while (1) {
+  while(1) {
     self waittill("start_moving");
     self.see1_tank_moving = true;
     self.see1_tank_reached_end_node = false;
@@ -1251,7 +1251,7 @@ ev2_tank_movement() {
   if(isDefined(self.see1_tank_no_stop_time)) {
     wait(self.see1_tank_no_stop_time);
   }
-  while (1) {
+  while(1) {
     self waittill_either("hit_damage", "player_getting_close");
     if(self.see1_tank_reached_end_node) {
       self.current_path++;
@@ -1286,7 +1286,7 @@ ev2_wait_for_buddy_tank_death(buddy_tank) {
 
 ev2_check_los() {
   self endon("death");
-  while (1) {
+  while(1) {
     if(isplayer(self.see1_tank_current_target)) {
       if(bullettracepassed(self.origin + (0, 0, 50), self.see1_tank_current_target getEye(), false, self)) {
         wait(1);
@@ -1316,7 +1316,7 @@ ev2_road_ai_side() {
 
 ev2_force_delete_enemies_barn() {
   enemies = getaiarray("axis");
-  for (i = 0; i < enemies.size; i++) {
+  for(i = 0; i < enemies.size; i++) {
     if(distance(enemies[i].origin, (4473, 8738, -105.4)) > 1200) {
       enemies[i] delete();
     }
@@ -1463,8 +1463,8 @@ ev2_panzershreck_single_respawn(rocket_name) {
   respawn_angles = respawn_schrek.angles;
   glowy_model = spawn("script_model", respawn_origin);
   glowy_model.angles = respawn_angles;
-  glowy_model SetModel("weapon_ger_panzerschreck_at_obj");
-  while (1) {
+  glowy_model setModel("weapon_ger_panzerschreck_at_obj");
+  while(1) {
     if(!isDefined(respawn_schrek)) {
       if(isDefined(glowy_model)) {
         glowy_model delete();

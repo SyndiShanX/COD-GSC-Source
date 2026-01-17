@@ -19,7 +19,7 @@
 #namespace zm_perk_deadshot;
 
 function autoexec __init__sytem__() {
-  system::register("zm_perk_deadshot", & __init__, undefined, undefined);
+  system::register("zm_perk_deadshot", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -27,23 +27,21 @@ function __init__() {
 }
 
 function enable_deadshot_perk_for_level() {
-  zm_perks::register_perk_basic_info("specialty_deadshot", "deadshot", 1500, & "ZOMBIE_PERK_DEADSHOT", getweapon("zombie_perk_bottle_deadshot"));
-  zm_perks::register_perk_precache_func("specialty_deadshot", & deadshot_precache);
-  zm_perks::register_perk_clientfields("specialty_deadshot", & deadshot_register_clientfield, & deadshot_set_clientfield);
-  zm_perks::register_perk_machine("specialty_deadshot", & deadshot_perk_machine_setup);
-  zm_perks::register_perk_threads("specialty_deadshot", & give_deadshot_perk, & take_deadshot_perk);
+  zm_perks::register_perk_basic_info("specialty_deadshot", "deadshot", 1500, &"ZOMBIE_PERK_DEADSHOT", getweapon("zombie_perk_bottle_deadshot"));
+  zm_perks::register_perk_precache_func("specialty_deadshot", &deadshot_precache);
+  zm_perks::register_perk_clientfields("specialty_deadshot", &deadshot_register_clientfield, &deadshot_set_clientfield);
+  zm_perks::register_perk_machine("specialty_deadshot", &deadshot_perk_machine_setup);
+  zm_perks::register_perk_threads("specialty_deadshot", &give_deadshot_perk, &take_deadshot_perk);
   zm_perks::register_perk_host_migration_params("specialty_deadshot", "vending_deadshot", "deadshot_light");
 }
 
 function deadshot_precache() {
-  if(isdefined(level.deadshot_precache_override_func)) {
-    [
-      [level.deadshot_precache_override_func]
-    ]();
+  if(isDefined(level.deadshot_precache_override_func)) {
+    [[level.deadshot_precache_override_func]]();
     return;
   }
   level._effect["deadshot_light"] = "_t6/misc/fx_zombie_cola_dtap_on";
-  level.machine_assets["specialty_deadshot"] = spawnstruct();
+  level.machine_assets["specialty_deadshot"] = spawnStruct();
   level.machine_assets["specialty_deadshot"].weapon = getweapon("zombie_perk_bottle_deadshot");
   level.machine_assets["specialty_deadshot"].off_model = "p7_zm_vending_ads";
   level.machine_assets["specialty_deadshot"].on_model = "p7_zm_vending_ads";
@@ -65,7 +63,7 @@ function deadshot_perk_machine_setup(use_trigger, perk_machine, bump_trigger, co
   use_trigger.target = "vending_deadshot";
   perk_machine.script_string = "deadshot_vending";
   perk_machine.targetname = "vending_deadshot";
-  if(isdefined(bump_trigger)) {
+  if(isDefined(bump_trigger)) {
     bump_trigger.script_string = "deadshot_vending";
   }
 }

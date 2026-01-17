@@ -188,9 +188,7 @@ hintprint(string, breakfunc) {
       hint.alpha = 0.4;
       hintprintwait(0.75, breakfunc);
 
-      if([
-          [breakfunc]
-        ]()) {
+      if([[breakfunc]]()) {
         break;
       }
 
@@ -198,9 +196,7 @@ hintprint(string, breakfunc) {
       hint.alpha = 0.95;
       hintprintwait(0.75);
 
-      if([
-          [breakfunc]
-        ]()) {
+      if([[breakfunc]]()) {
         break;
       }
     }
@@ -477,7 +473,7 @@ effect_soundalias() {
 cannon_effect() {
   if(isDefined(self.v["repeat"])) {
     for(i = 0; i < self.v["repeat"]; i++) {
-      playfx(level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"], self.v["primlightfrac"], self.v["lightoriginoffs"]);
+      playFX(level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"], self.v["primlightfrac"], self.v["lightoriginoffs"]);
       self exploder_delay();
     }
 
@@ -491,7 +487,7 @@ cannon_effect() {
 
   self.looper = spawnfx(getfx(self.v["fxid"]), self.v["origin"], self.v["forward"], self.v["up"], self.v["primlightfrac"], self.v["lightoriginoffs"]);
   triggerfx(self.looper);
-  exploder_playsound();
+  exploder_playSound();
 }
 
 exploder_delay() {
@@ -539,7 +535,7 @@ exploder_rumble() {
   }
 }
 
-exploder_playsound() {
+exploder_playSound() {
   if(!isDefined(self.v["soundalias"]) || self.v["soundalias"] == "nil") {
     return;
   }
@@ -568,7 +564,7 @@ fire_effect() {
   if(isDefined(firefxsound))
     level thread loop_fx_sound(firefxsound, origin, ender, timeout);
 
-  playfx(level._effect[firefx], self.v["origin"], forward, up, self.v["primlightfrac"], self.v["lightoriginoffs"]);
+  playFX(level._effect[firefx], self.v["origin"], forward, up, self.v["primlightfrac"], self.v["lightoriginoffs"]);
 }
 
 trail_effect() {
@@ -580,19 +576,19 @@ trail_effect() {
   temp_ent = undefined;
 
   if(self.v["trailfxtag"] == "tag_origin")
-    playfxontag(level._effect[self.v["trailfx"]], self.model, self.v["trailfxtag"]);
+    playFXOnTag(level._effect[self.v["trailfx"]], self.model, self.v["trailfxtag"]);
   else {
     temp_ent = spawn("script_model", self.model.origin);
-    temp_ent setmodel("tag_origin");
+    temp_ent setModel("tag_origin");
     temp_ent linkto(self.model, self.v["trailfxtag"]);
-    playfxontag(level._effect[self.v["trailfx"]], temp_ent, "tag_origin");
+    playFXOnTag(level._effect[self.v["trailfx"]], temp_ent, "tag_origin");
   }
 
   if(isDefined(self.v["trailfxsound"])) {
     if(!isDefined(temp_ent))
-      self.model playloopsound(self.v["trailfxsound"]);
+      self.model playLoopSound(self.v["trailfxsound"]);
     else
-      temp_ent playloopsound(self.v["trailfxsound"]);
+      temp_ent playLoopSound(self.v["trailfxsound"]);
   }
 
   if(isDefined(self.v["ender"]) && isDefined(temp_ent))
@@ -704,11 +700,7 @@ exchange_sort_by_handler(array, compare_func) {
 
   for(i = 0; i < array.size - 1; i++) {
     for(j = i + 1; j < array.size; j++) {
-      if(array[j][
-          [compare_func]
-        ]() < array[i][
-          [compare_func]
-        ]()) {
+      if(array[j][[compare_func]]() < array[i][[compare_func]]()) {
         ref = array[j];
         array[j] = array[i];
         array[i] = ref;

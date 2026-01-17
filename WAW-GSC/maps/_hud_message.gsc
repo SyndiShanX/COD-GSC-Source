@@ -11,7 +11,7 @@ init() {
 }
 
 onPlayerConnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connecting", player);
     player thread initNotifyMessage();
   }
@@ -112,7 +112,7 @@ showNotifyMessage(notifyData) {
       if(isDefined(notifyData.titleLabel))
         self.notifyTitle.label = notifyData.titleLabel;
       else
-        self.notifyTitle.label = & "";
+        self.notifyTitle.label = &"";
       if(isDefined(notifyData.titleLabel) && !isDefined(notifyData.titleIsString))
         self.notifyTitle setValue(notifyData.titleText);
       else
@@ -132,7 +132,7 @@ showNotifyMessage(notifyData) {
       if(isDefined(notifyData.textLabel))
         self.notifyText.label = notifyData.textLabel;
       else
-        self.notifyText.label = & "";
+        self.notifyText.label = &"";
       if(isDefined(notifyData.textLabel) && !isDefined(notifyData.textIsString))
         self.notifyText setValue(notifyData.notifyText);
       else
@@ -154,7 +154,7 @@ showNotifyMessage(notifyData) {
       if(isDefined(notifyData.text2Label))
         self.notifyText2.label = notifyData.text2Label;
       else
-        self.notifyText2.label = & "";
+        self.notifyText2.label = &"";
       if(isDefined(notifyData.text2Label) && !isDefined(notifyData.textIsString))
         self.notifyText2 setValue(notifyData.notifyText2);
       else
@@ -177,7 +177,7 @@ showNotifyMessage(notifyData) {
       if(isDefined(notifyData.text3Label))
         self.notifyText3.label = notifyData.text3Label;
       else
-        self.notifyText3.label = & "";
+        self.notifyText3.label = &"";
       if(isDefined(notifyData.text3Label) && !isDefined(notifyData.textIsString))
         self.notifyText3 setValue(notifyData.notifyText3);
       else
@@ -206,7 +206,7 @@ showNotifyMessage(notifyData) {
   if(self.notifyQueue.size > 0) {
     nextNotifyData = self.notifyQueue[0];
     newQueue = [];
-    for (i = 1; i < self.notifyQueue.size; i++)
+    for(i = 1; i < self.notifyQueue.size; i++)
       self.notifyQueue[i - 1] = self.notifyQueue[i];
     self.notifyQueue[i - 1] = undefined;
     self thread showNotifyMessage(nextNotifyData);
@@ -215,9 +215,9 @@ showNotifyMessage(notifyData) {
 
 waitRequireVisibility(waitTime) {
   interval = .05;
-  while (!self canReadText())
+  while(!self canReadText())
     wait interval;
-  while (waitTime > 0) {
+  while(waitTime > 0) {
     wait interval;
     if(self canReadText())
       waitTime -= interval;
@@ -271,10 +271,10 @@ lowerMessageThink() {
 waitTillNotifiesDone() {
   pendingNotifies = true;
   timeWaited = 0;
-  while (pendingNotifies && timeWaited < 12) {
+  while(pendingNotifies && timeWaited < 12) {
     pendingNotifies = false;
     players = get_players();
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       if(isDefined(players[i].notifyQueue) && players[i].notifyQueue.size > 0) {
         pendingNotifies = true;
       }

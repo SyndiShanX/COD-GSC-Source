@@ -19,10 +19,10 @@ pistolPullOutDistSq = sqr512 * 0.64;
 pistolPutBackDistSq = sqr512;
 
 main() {
-  if(isdefined(self.no_ai))
+  if(isDefined(self.no_ai)) {
     return;
-
-  if(isdefined(self.onSnowMobile)) {
+  }
+  if(isDefined(self.onSnowMobile)) {
     animscripts\snowmobile::main();
     return;
   }
@@ -36,15 +36,13 @@ main() {
   animscripts\utility::initialize("combat");
   self.a.arrivalType = undefined;
 
-  if(isdefined(self.node) && self.node.type == "Ambush" && self nearNode(self.node))
+  if(isDefined(self.node) && self.node.type == "Ambush" && self nearNode(self.node))
     self.ambushNode = self.node;
 
-  /#
   if(getdvar("scr_testgrenadethrows") == "on")
     testGrenadeThrowAnimOffsets();
-  # /
 
-    self transitionToCombat();
+  self transitionToCombat();
 
   self do_friendly_fire_reaction();
 
@@ -64,13 +62,13 @@ end_script() {
 }
 
 do_friendly_fire_reaction() {
-  if(self.team != "allies")
+  if(self.team != "allies") {
     return;
-
-  if(self IsMoveSuppressed() && self.prevScript == "move" && self.a.pose == "stand" && !isdefined(self.disableFriendlyFireReaction)) {
-    if(isdefined(self.enemy) && distanceSquared(self.origin, self.enemy.origin) < squared(128))
+  }
+  if(self IsMoveSuppressed() && self.prevScript == "move" && self.a.pose == "stand" && !isDefined(self.disableFriendlyFireReaction)) {
+    if(isDefined(self.enemy) && distanceSquared(self.origin, self.enemy.origin) < squared(128)) {
       return;
-
+    }
     self animmode("zonly_physics");
     self setFlaggedAnimKnobAllRestart("react", % surprise_stop_v1, % root, 1, 0.2, self.animplaybackrate);
     self animscripts\shared::DoNoteTracks("react");
@@ -78,12 +76,12 @@ do_friendly_fire_reaction() {
 }
 
 transitionToCombat() {
-  if(isdefined(self.specialIdleAnim) || isdefined(self.customIdleAnimSet))
+  if(isDefined(self.specialIdleAnim) || isDefined(self.customIdleAnimSet)) {
     return;
-
-  if(isdefined(self.enemy) && distanceSquared(self.origin, self.enemy.origin) < 512 * 512)
+  }
+  if(isDefined(self.enemy) && distanceSquared(self.origin, self.enemy.origin) < 512 * 512) {
     return;
-
+  }
   if(self.prevScript == "stop" && !self isCQBWalking() && self.a.pose == "stand") {
     self animmode("zonly_physics");
     self setFlaggedAnimKnobAllRestart("transition", % casual_stand_idle_trans_out, % root, 1, 0.2, 1.2 * self.animplaybackrate);
@@ -91,7 +89,6 @@ transitionToCombat() {
   }
 }
 
-/#
 testGrenadeThrowAnimOffsets() {
   model = getGrenadeModel();
 
@@ -99,19 +96,20 @@ testGrenadeThrowAnimOffsets() {
   self OrientMode("face angle", self.angles[1]);
   self.keepClaimedNodeIfValid = true;
   foreach(throwAnim in anim.grenadeThrowAnims) {
-    forward = anglestoforward(self.angles);
+    forward = anglesToForward(self.angles);
     right = anglestoright(self.angles);
     startpos = self.origin;
 
     tag = "TAG_INHAND";
 
     self setFlaggedAnimKnobAllRestart("grenadetest", throwAnim, % root, 1, 0, 1);
-    for (;;) {
+    for(;;) {
       self waittill("grenadetest", notetrack);
       if(notetrack == "grenade_left" || notetrack == "grenade_right")
         self attach(model, tag);
-      if(notetrack == "grenade_throw" || notetrack == "grenade throw")
+      if(notetrack == "grenade_throw" || notetrack == "grenade throw") {
         break;
+      }
       assert(notetrack != "end"); // we shouldn't hit "end" until after we've hit "grenade_throw"!
       if(notetrack == "end") // failsafe
         break;
@@ -134,19 +132,18 @@ testGrenadeThrowAnimOffsets() {
   }
   self.keepClaimedNodeIfValid = false;
 }
-# /
 
-  setup_anim_array() {
-    if(self.a.pose == "stand") {
-      self set_animarray_standing();
-    } else if(self.a.pose == "crouch") {
-      self set_animarray_crouching();
-    } else if(self.a.pose == "prone") {
-      self set_animarray_prone();
-    } else {
-      assertMsg("Unsupported self.a.pose: " + self.a.pose);
-    }
+setup_anim_array() {
+  if(self.a.pose == "stand") {
+    self set_animarray_standing();
+  } else if(self.a.pose == "crouch") {
+    self set_animarray_crouching();
+  } else if(self.a.pose == "prone") {
+    self set_animarray_prone();
+  } else {
+    assertMsg("Unsupported self.a.pose: " + self.a.pose);
   }
+}
 
 // SETUP FUNCTIONS
 setup() {
@@ -199,7 +196,7 @@ setupExposedCombatLoop() {
 
   self resetGiveUpOnEnemyTime();
 
-  if(isdefined(self.a.magicReloadWhenReachEnemy)) {
+  if(isDefined(self.a.magicReloadWhenReachEnemy)) {
     self animscripts\weaponList::RefillClip();
     self.a.magicReloadWhenReachEnemy = undefined;
   }
@@ -244,10 +241,10 @@ exposedCombatCheckStance(distSqToShootPos) {
     self.a.pose != "crouch" &&
     self isStanceAllowed("crouch") &&
     !usingSidearm() &&
-    !isdefined(self.heat) &&
+    !isDefined(self.heat) &&
     gettime() >= self.a.dontCrouchTime &&
     lengthSquared(self.shootEntVelocity) < sqr100) {
-    if(!isdefined(self.shootPos) || sightTracePassed(self.origin + (0, 0, 36), self.shootPos, false, undefined)) {
+    if(!isDefined(self.shootPos) || sightTracePassed(self.origin + (0, 0, 36), self.shootPos, false, undefined)) {
       transitionTo("crouch");
       return true;
     }
@@ -258,7 +255,7 @@ exposedCombatCheckStance(distSqToShootPos) {
 
 exposedCombatCheckReloadOrUsePistol(distSqToShootPos) {
   if(!usingSidearm()) {
-    if(isdefined(self.forceSideArm) && self.a.pose == "stand") {
+    if(isDefined(self.forceSideArm) && self.a.pose == "stand") {
       if(self tryUsingSidearm())
         return true;
     }
@@ -292,14 +289,14 @@ exposedCombatCheckReloadOrUsePistol(distSqToShootPos) {
 }
 
 exposedCombatCheckPutAwayPistol(distSqToShootPos) {
-  if(usingSidearm() && self.a.pose == "stand" && !isdefined(self.forceSideArm))
-    if((distSqToShootPos > pistolPutBackDistSq) || (self.combatMode == "ambush_nodes_only" && (!isdefined(self.enemy) || !self cansee(self.enemy))))
+  if(usingSidearm() && self.a.pose == "stand" && !isDefined(self.forceSideArm))
+    if((distSqToShootPos > pistolPutBackDistSq) || (self.combatMode == "ambush_nodes_only" && (!isDefined(self.enemy) || !self cansee(self.enemy))))
       switchToLastWeapon( % pistol_stand_switch);
 }
 
 exposedCombatPositionAdjust() {
-  if(isdefined(self.heat) && self nearClaimNodeAndAngle()) {
-    assert(isdefined(self.node));
+  if(isDefined(self.heat) && self nearClaimNodeAndAngle()) {
+    assert(isDefined(self.node));
     self safeTeleport(self.nodeoffsetpos, self.node.angles);
   }
 }
@@ -307,7 +304,7 @@ exposedCombatPositionAdjust() {
 exposedCombatNeedToTurn() {
   if(needToTurn()) {
     predictTime = 0.25;
-    if(isdefined(self.shootEnt) && !isSentient(self.shootEnt))
+    if(isDefined(self.shootEnt) && !isSentient(self.shootEnt))
       predictTime = 1.5;
     yawToShootEntOrPos = getPredictedAimYawToShootEntOrPos(predictTime); // yaw to where we think our enemy will be in x seconds
     if(TurnToFaceRelativeYaw(yawToShootEntOrPos))
@@ -326,55 +323,55 @@ exposedCombatMainLoop() {
   self animMode("zonly_physics", false);
   self OrientMode("face angle", self.angles[1]); // 	// just face current immediately and rely on turning.
 
-  for (;;) {
+  for(;;) {
     if(usingRocketLauncher())
       self.deathFunction = undefined;
 
     self IsInCombat(); // reset our in - combat state
 
     // it is important for this to be *after* the set_animarray calls!
-    if(WaitForStanceChange())
+    if(WaitForStanceChange()) {
       continue;
-
+    }
     tryMelee();
 
     exposedCombatPositionAdjust();
 
-    if(!isdefined(self.shootPos)) {
-      assert(!isdefined(self.shootEnt));
+    if(!isDefined(self.shootPos)) {
+      assert(!isDefined(self.shootEnt));
       cantSeeEnemyBehavior();
 
-      if(!isdefined(self.enemy))
+      if(!isDefined(self.enemy))
         justWaited = true;
       continue;
     }
 
     // we can use self.shootPos after this point.
-    assert(isdefined(self.shootPos));
+    assert(isDefined(self.shootPos));
     self resetGiveUpOnEnemyTime();
 
     distSqToShootPos = lengthsquared(self.origin - self.shootPos);
 
-    if(exposedCombatStopUsingRPGCheck(distSqToShootPos))
+    if(exposedCombatStopUsingRPGCheck(distSqToShootPos)) {
       continue;
-
-    if(exposedCombatNeedToTurn())
+    }
+    if(exposedCombatNeedToTurn()) {
       continue;
-
+    }
     if(considerThrowGrenade()) // TODO: make considerThrowGrenade work with shootPos rather than only self.enemy
       continue;
 
-    if(exposedCombatCheckReloadOrUsePistol(distSqToShootPos))
+    if(exposedCombatCheckReloadOrUsePistol(distSqToShootPos)) {
       continue;
-
+    }
     if(usingRocketLauncher() && self.a.pose != "crouch" && randomFloat(1) > 0.65)
       self.deathFunction = ::rpgDeath;
 
     exposedCombatCheckPutAwayPistol(distSqToShootPos);
 
-    if(exposedCombatCheckStance(distSqToShootPos))
+    if(exposedCombatCheckStance(distSqToShootPos)) {
       continue;
-
+    }
     if(aimedAtShootEntOrPos()) {
       self shootUntilNeedToTurn();
       self hideFireShowAimIdle();
@@ -386,7 +383,7 @@ exposedCombatMainLoop() {
 }
 
 exposedWait() {
-  if(!isdefined(self.enemy) || !self cansee(self.enemy)) {
+  if(!isDefined(self.enemy) || !self cansee(self.enemy)) {
     self endon("enemy");
     self endon("shoot_behavior_change");
 
@@ -400,7 +397,7 @@ exposedWait() {
 standIfMakesEnemyVisible() {
   assert(self.a.pose != "stand");
   assert(self isStanceAllowed("stand"));
-  if(isdefined(self.enemy) && (!self cansee(self.enemy) || !self canShootEnemy()) && sightTracePassed(self.origin + (0, 0, 64), self.enemy getShootAtPos(), false, undefined)) {
+  if(isDefined(self.enemy) && (!self cansee(self.enemy) || !self canShootEnemy()) && sightTracePassed(self.origin + (0, 0, 64), self.enemy getShootAtPos(), false, undefined)) {
     self.a.dontCrouchTime = gettime() + 3000;
     transitionTo("stand");
     return true;
@@ -412,19 +409,19 @@ needToTurn() {
   // Old way, slower
   /*
   yawToShootEntOrPos = getAimYawToShootEntOrPos(); // yaw to where we think our enemy will be in x seconds
-	
+  	
   return (abs( yawToShootEntOrPos ) > self.turnThreshold);
   */
 
   // New way
   point = self.shootPos;
-  if(!isdefined(point))
+  if(!isDefined(point))
     return false;
 
   yaw = self.angles[1] - VectorToYaw(point - self.origin);
 
   // need to have fudge factor because the gun's origin is different than our origin,
-  // the closer our distance, the more we need to fudge. 
+  // the closer our distance, the more we need to fudge.
   distsq = distanceSquared(self.origin, point);
   if(distsq < 256 * 256) {
     dist = sqrt(distsq);
@@ -437,12 +434,12 @@ needToTurn() {
 WaitForStanceChange() {
   curstance = self.a.pose;
 
-  if(isdefined(self.a.onback)) {
+  if(isDefined(self.a.onback)) {
     wait 0.1; // something else should correct the stance from "back", or this AI will die on its back, so wait.
     return true;
   }
 
-  if(curstance == "stand" && isdefined(self.heat))
+  if(curstance == "stand" && isDefined(self.heat))
     return false;
 
   if(!self isStanceAllowed(curstance)) {
@@ -473,33 +470,33 @@ cantSeeEnemyBehavior() {
 
   self.a.dontCrouchTime = time + 1500;
 
-  if(isdefined(self.group) && isdefined(self.group.forward)) {
+  if(isDefined(self.group) && isDefined(self.group.forward)) {
     relYaw = AngleClamp180(self.angles[1] - vectorToYaw(self.group.forward));
     if(self TurnToFaceRelativeYaw(relYaw))
       return true;
   }
 
-  if(isdefined(self.node) && isdefined(anim.isCombatScriptNode[self.node.type])) {
+  if(isDefined(self.node) && isDefined(anim.isCombatScriptNode[self.node.type])) {
     relYaw = AngleClamp180(self.angles[1] - self.node.angles[1]);
     if(self TurnToFaceRelativeYaw(relYaw))
       return true;
-  } else if((isdefined(self.enemy) && self seeRecently(self.enemy, 2)) || time > self.a.scriptStartTime + 1200) {
+  } else if((isDefined(self.enemy) && self seeRecently(self.enemy, 2)) || time > self.a.scriptStartTime + 1200) {
     relYaw = undefined;
     likelyEnemyDir = self getAnglesToLikelyEnemyPath();
-    if(isdefined(likelyEnemyDir)) {
+    if(isDefined(likelyEnemyDir)) {
       relYaw = AngleClamp180(self.angles[1] - likelyEnemyDir[1]);
-    } else if(isdefined(self.node)) {
+    } else if(isDefined(self.node)) {
       relYaw = AngleClamp180(self.angles[1] - self.node.angles[1]);
-    } else if(isdefined(self.enemy)) {
+    } else if(isDefined(self.enemy)) {
       likelyEnemyDir = vectorToAngles(self lastKnownPos(self.enemy) - self.origin);
       relYaw = AngleClamp180(self.angles[1] - likelyEnemyDir[1]);
     }
 
-    if(isdefined(relYaw) && self TurnToFaceRelativeYaw(relYaw))
+    if(isDefined(relYaw) && self TurnToFaceRelativeYaw(relYaw))
       return true;
   }
   // the above likely enemy path is more important than node angles
-  else if(isdefined(self.heat) && self nearClaimNode()) {
+  else if(isDefined(self.heat) && self nearClaimNode()) {
     relYaw = AngleClamp180(self.angles[1] - self.node.angles[1]);
     if(self TurnToFaceRelativeYaw(relYaw))
       return true;
@@ -578,13 +575,13 @@ watchShootEntVelocity() {
 
   interval = .15;
 
-  while (1) {
-    if(isdefined(self.shootEnt) && isdefined(prevshootent) && self.shootEnt == prevshootent) {
+  while(1) {
+    if(isDefined(self.shootEnt) && isDefined(prevshootent) && self.shootEnt == prevshootent) {
       curpos = self.shootEnt.origin;
       self.shootEntVelocity = vector_multiply(curpos - prevpos, 1 / interval);
       prevpos = curpos;
     } else {
-      if(isdefined(self.shootEnt))
+      if(isDefined(self.shootEnt))
         prevpos = self.shootEnt.origin;
       else
         prevpos = self.origin;
@@ -603,26 +600,26 @@ shouldSwapShotgun() {
   /*
   if( self.a.pose != "stand" )
   	return false;
-	
+  	
   if( self usingSidearm() )
   	return false;
-	
+  	
   usingShotgun = isShotgun( self.primaryweapon );
-  wantShotgun = isdefined( self.wantShotgun ) && self.wantShotgun );
-	
+  wantShotgun = isDefined( self.wantShotgun ) && self.wantShotgun );
+  	
   if( wantShotgun == usingShotgun )
   	return false;
-	
+  	
   if( !wantShotgun ) // there is no standing shotgun putaway animation
   	return false;
-	
+  	
   return true;*/
 }
 
 /*swapShotgun()
 {
 	assert( self shouldSwapShotgun() );
-	assert( isdefined( self.wantShotgun ) );
+	assert( isDefined( self.wantShotgun ) );
 	
 	if( self.wantShotgun )
 	{
@@ -653,11 +650,12 @@ faceEnemyImmediately() {
 
   maxYawChange = 5; // degrees per frame
 
-  while (1) {
+  while(1) {
     yawChange = 0 - GetYawToEnemy();
 
-    if(abs(yawChange) < 2)
+    if(abs(yawChange) < 2) {
       break;
+    }
 
     if(abs(yawChange) > maxYawChange)
       yawChange = maxYawChange * sign(yawChange);
@@ -687,10 +685,10 @@ isAnimDeltaInGoal(theanim) {
 }
 
 doTurn(direction, amount) {
-  knowWhereToShoot = isdefined(self.shootPos);
+  knowWhereToShoot = isDefined(self.shootPos);
   rate = 1;
   transTime = 0.2;
-  mustFaceEnemy = (isdefined(self.enemy) && !isdefined(self.turnToMatchNode) && self seeRecently(self.enemy, 2) && distanceSquared(self.enemy.origin, self.origin) < sqr512);
+  mustFaceEnemy = (isDefined(self.enemy) && !isDefined(self.turnToMatchNode) && self seeRecently(self.enemy, 2) && distanceSquared(self.enemy.origin, self.origin) < sqr512);
   if(self.a.scriptStartTime + 500 > gettime()) {
     transTime = 0.25; // if it's the first thing we're doing, always blend slowly
     if(mustFaceEnemy)
@@ -721,9 +719,9 @@ doTurn(direction, amount) {
   animname = "turn_" + direction + "_" + angle;
   turnanim = animarray(animname);
 
-  if(isdefined(self.turnToMatchNode))
+  if(isDefined(self.turnToMatchNode))
     self animmode("angle deltas", false);
-  else if(isdefined(self.node) && isdefined(anim.isCombatPathNode[self.node.type]) && distanceSquared(self.origin, self.node.origin) < 16 * 16)
+  else if(isDefined(self.node) && isDefined(anim.isCombatPathNode[self.node.type]) && distanceSquared(self.origin, self.node.origin) < 16 * 16)
     self animmode("angle deltas", false);
   else if(isAnimDeltaInGoal(turnanim))
     self animMode("zonly_physics", false);
@@ -732,30 +730,30 @@ doTurn(direction, amount) {
 
   self setAnimKnobAll( % exposed_aiming, % body, 1, transTime);
 
-  if(!isdefined(self.turnToMatchNode))
+  if(!isDefined(self.turnToMatchNode))
     self TurningAimingOn(transTime);
 
   self setAnimLimited( % turn, 1, transTime);
 
-  if(isdefined(self.heat))
+  if(isDefined(self.heat))
     rate = min(1.0, rate); // TEMP 1.0, adjust animations first
-  else if(isdefined(self.turnToMatchNode))
+  else if(isDefined(self.turnToMatchNode))
     rate = max(1.5, rate);
 
   self setFlaggedAnimKnobLimitedRestart("turn", turnanim, 1, transTime, rate);
   self notify("turning");
 
-  if(knowWhereToShoot && !isdefined(self.turnToMatchNode) && !isdefined(self.heat))
+  if(knowWhereToShoot && !isDefined(self.turnToMatchNode) && !isDefined(self.heat))
     self thread shootWhileTurning();
 
   doTurnNotetracks();
 
   self setanimlimited( % turn, 0, .2);
 
-  if(!isdefined(self.turnToMatchNode))
+  if(!isDefined(self.turnToMatchNode))
     self TurningAimingOff(.2);
 
-  if(!isdefined(self.turnToMatchNode)) {
+  if(!isDefined(self.turnToMatchNode)) {
     self clearanim( % turn, .2);
     self setanimknob( % exposed_aiming, 1, .2, 1);
   } else {
@@ -764,7 +762,7 @@ doTurn(direction, amount) {
 
   // if we didn't actually turn, code prevented us from doing so.
   // give up and turntable.
-  if(isdefined(self.turnLastResort)) {
+  if(isDefined(self.turnLastResort)) {
     self.turnLastResort = undefined;
     self thread faceEnemyImmediately();
   }
@@ -813,9 +811,9 @@ shootWhileTurning() {
   self endon("killanimscript");
   self endon("done turning");
 
-  if(usingRocketLauncher())
+  if(usingRocketLauncher()) {
     return;
-
+  }
   shootUntilShootBehaviorChange();
 
   self clearAnim( % add_fire, .2);
@@ -839,7 +837,7 @@ watchForNeedToTurnOrTimeout() {
 
   endtime = gettime() + 4000 + randomint(2000);
 
-  while (1) {
+  while(1) {
     if(gettime() > endtime || needToTurn()) {
       self notify("need_to_turn");
       break;
@@ -852,12 +850,12 @@ considerThrowGrenade() {
   if(!myGrenadeCoolDownElapsed()) // early out for efficiency
     return false;
 
-  if(isdefined(anim.throwGrenadeAtPlayerASAP) && isAlive(level.player)) {
+  if(isDefined(anim.throwGrenadeAtPlayerASAP) && isAlive(level.player)) {
     if(tryExposedThrowGrenade(level.player, 200))
       return true;
   }
 
-  if(isdefined(self.enemy) && tryExposedThrowGrenade(self.enemy, self.minExposedGrenadeDist))
+  if(isDefined(self.enemy) && tryExposedThrowGrenade(self.enemy, self.minExposedGrenadeDist))
     return true;
 
   self.a.nextGrenadeTryTime = gettime() + 500; // don't try this too often
@@ -868,15 +866,15 @@ considerThrowGrenade() {
 tryExposedThrowGrenade(throwAt, minDist) {
   threw = false;
 
-  if(isdefined(self.dontEverShoot) || isdefined(throwAt.dontAttackMe))
+  if(isDefined(self.dontEverShoot) || isDefined(throwAt.dontAttackMe))
     return false;
 
-  if(!isdefined(self.a.array["exposed_grenade"]))
+  if(!isDefined(self.a.array["exposed_grenade"]))
     return false;
 
   throwSpot = throwAt.origin;
   if(!self canSee(throwAt)) {
-    if(isdefined(self.enemy) && throwAt == self.enemy && isdefined(self.shootPos))
+    if(isDefined(self.enemy) && throwAt == self.enemy && isDefined(self.shootPos))
       throwSpot = self.shootPos;
   }
 
@@ -923,22 +921,22 @@ tryExposedThrowGrenade(throwAt, minDist) {
 }
 
 transitionTo(newPose) {
-  if(newPose == self.a.pose)
+  if(newPose == self.a.pose) {
     return;
-
+  }
   // allow using pistol but it might look bad, put a new animation if so
   // assert( !usingSidearm() );
 
   transAnimName = self.a.pose + "_2_" + newPose;
 
-  if(!isdefined(self.a.array))
+  if(!isDefined(self.a.array)) {
     return;
-
+  }
   transAnim = self.a.array[transAnimName];
 
-  if(!isdefined(transAnim))
+  if(!isDefined(transAnim)) {
     return;
-
+  }
   self clearanim( % root, .3);
 
   self endFireAndAnimIdleThread();
@@ -975,13 +973,13 @@ keepTryingToMelee() {
   self endon("need_to_turn");
   self endon("shoot_behavior_change");
 
-  while (1) {
+  while(1) {
     wait .2 + randomfloat(.3);
 
     // this function is running when we're doing something like shooting or reloading.
     // we only want to melee if we would look really stupid by continuing to do what we're trying to get done.
     // only melee if our enemy is very close.
-    if(isdefined(self.enemy)) {
+    if(isDefined(self.enemy)) {
       if(isPlayer(self.enemy))
         checkDistSq = 200 * 200;
       else
@@ -998,12 +996,12 @@ tryMelee() {
 }
 
 delayStandardMelee() {
-  if(isdefined(self.noMeleeChargeDelay))
+  if(isDefined(self.noMeleeChargeDelay)) {
     return;
-
-  if(isPlayer(self.enemy))
+  }
+  if(isPlayer(self.enemy)) {
     return;
-
+  }
   // give the AI a chance to charge the player if he forced him out of cover
   //if( isPlayer( self.enemy ) && isDefined( self.meleeCoverChargeGraceEndTime ) && (self.meleeCoverChargeGraceEndTime > getTime()) )
   //	return;
@@ -1017,7 +1015,7 @@ exposedReload(threshold) {
     self endFireAndAnimIdleThread();
 
     reloadAnim = undefined;
-    if(isdefined(self.specialReloadAnimFunc)) {
+    if(isDefined(self.specialReloadAnimFunc)) {
       reloadAnim = self[[self.specialReloadAnimFunc]]();
       self.keepClaimedNode = true;
     } else {
@@ -1066,7 +1064,7 @@ doReloadAnim(reloadAnim, stopWhenCanShoot) {
 
   animRate = 1;
 
-  if(!self usingSidearm() && !isShotgun(self.weapon) && isdefined(self.enemy) && self canSee(self.enemy) && distanceSquared(self.enemy.origin, self.origin) < 1024 * 1024)
+  if(!self usingSidearm() && !isShotgun(self.weapon) && isDefined(self.enemy) && self canSee(self.enemy) && distanceSquared(self.enemy.origin, self.origin) < 1024 * 1024)
     animRate = 1.2;
 
   flagName = "reload_" + getUniqueFlagNameIndex();
@@ -1083,9 +1081,10 @@ doReloadAnim(reloadAnim, stopWhenCanShoot) {
 abortReloadWhenCanShoot() {
   self endon("abort_reload");
   self endon("killanimscript");
-  while (1) {
-    if(isdefined(self.shootEnt) && self canSee(self.shootEnt))
+  while(1) {
+    if(isDefined(self.shootEnt) && self canSee(self.shootEnt)) {
       break;
+    }
     wait .05;
   }
   self notify("abort_reload");
@@ -1121,10 +1120,10 @@ exception_exposed_mg42_portable() {
 
 tryUsingSidearm() {
   // temp fix! we run out of bones on a particular friendly model with a shotgun who tries to pull out his pistol.
-  if(isdefined(self.secondaryWeapon) && isShotgun(self.secondaryweapon))
+  if(isDefined(self.secondaryWeapon) && isShotgun(self.secondaryweapon))
     return false;
 
-  if(isdefined(self.no_pistol_switch))
+  if(isDefined(self.no_pistol_switch))
     return false;
 
   // TEMP no pistol crouch pullout yet
@@ -1191,7 +1190,7 @@ switchToLastWeapon(swapAnim, cleanUp) {
   self.swapAnim = swapAnim;
   self setFlaggedAnimKnobAllRestart("weapon swap", swapAnim, % body, 1, .1, 1);
 
-  if(isdefined(cleanUp))
+  if(isDefined(cleanUp))
     self DoNoteTracksPostCallbackWithEndon("weapon swap", ::handleCleanUpPutaway, "end_weapon_swap");
   else
     self DoNoteTracksPostCallbackWithEndon("weapon swap", ::handlePutaway, "end_weapon_swap");
@@ -1241,10 +1240,10 @@ ReacquireWhenNecessary() {
 
   self.a.exposedReloading = false;
 
-  while (1) {
+  while(1) {
     wait .2;
 
-    if(isdefined(self.enemy) && !self seeRecently(self.enemy, 2)) {
+    if(isDefined(self.enemy) && !self seeRecently(self.enemy, 2)) {
       if(self.combatMode == "ambush" || self.combatMode == "ambush_nodes_only")
         continue;
     }
@@ -1256,11 +1255,11 @@ ReacquireWhenNecessary() {
 // this function is meant to be called many times in succession.
 // each time it tries another option, until eventually it finds something it can do.
 TryExposedReacquire() {
-  if(self.fixedNode)
+  if(self.fixedNode) {
     return;
-
+  }
   //prof_begin( "TryExposedReacquire" );
-  if(!isdefined(self.enemy)) {
+  if(!isDefined(self.enemy)) {
     self.reacquire_state = 0;
     return;
   }
@@ -1271,7 +1270,7 @@ TryExposedReacquire() {
     return;
   }
 
-  if(isdefined(self.prevEnemy) && self.prevEnemy != self.enemy) {
+  if(isDefined(self.prevEnemy) && self.prevEnemy != self.enemy) {
     self.reacquire_state = 0;
     self.prevEnemy = undefined;
     return;
@@ -1283,12 +1282,12 @@ TryExposedReacquire() {
     return;
   }
 
-  if(isdefined(self.finishedReload) && !self.finishedReload) {
+  if(isDefined(self.finishedReload) && !self.finishedReload) {
     self.reacquire_state = 0;
     return;
   }
 
-  // don't do reacquire unless facing enemy 
+  // don't do reacquire unless facing enemy
   dirToEnemy = vectornormalize(self.enemy.origin - self.origin);
   forward = anglesToForward(self.angles);
 

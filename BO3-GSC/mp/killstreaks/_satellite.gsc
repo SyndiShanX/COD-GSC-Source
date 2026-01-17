@@ -38,12 +38,12 @@ function init() {
   }
   level.activeplayersatellites = [];
   if(tweakables::gettweakablevalue("killstreak", "allowradardirection")) {
-    killstreaks::register("satellite", "satellite", "killstreak_satellite", "uav_used", & activatesatellite);
-    killstreaks::register_strings("satellite", & "KILLSTREAK_EARNED_SATELLITE", & "KILLSTREAK_SATELLITE_NOT_AVAILABLE", & "KILLSTREAK_SATELLITE_INBOUND", undefined, & "KILLSTREAK_SATELLITE_HACKED");
+    killstreaks::register("satellite", "satellite", "killstreak_satellite", "uav_used", &activatesatellite);
+    killstreaks::register_strings("satellite", &"KILLSTREAK_EARNED_SATELLITE", &"KILLSTREAK_SATELLITE_NOT_AVAILABLE", &"KILLSTREAK_SATELLITE_INBOUND", undefined, &"KILLSTREAK_SATELLITE_HACKED");
     killstreaks::register_dialog("satellite", "mpl_killstreak_satellite", "satelliteDialogBundle", undefined, "friendlySatellite", "enemySatellite", "enemySatelliteMultiple", "friendlySatelliteHacked", "enemySatelliteHacked", "requestSatellite", "threatSatellite");
   }
-  callback::on_connect( & onplayerconnect);
-  callback::on_spawned( & onplayerspawned);
+  callback::on_connect(&onplayerconnect);
+  callback::on_spawned(&onplayerspawned);
   level thread satellitetracker();
 }
 
@@ -71,12 +71,12 @@ function activatesatellite() {
   }
   minflyheight = int(airsupport::getminimumflyheight());
   zoffset = minflyheight + 5500;
-  travelangle = randomfloatrange((isdefined(level.satellite_spawn_from_angle_min) ? level.satellite_spawn_from_angle_min : 90), (isdefined(level.satellite_spawn_from_angle_max) ? level.satellite_spawn_from_angle_max : 180));
+  travelangle = randomfloatrange((isDefined(level.satellite_spawn_from_angle_min) ? level.satellite_spawn_from_angle_min : 90), (isDefined(level.satellite_spawn_from_angle_max) ? level.satellite_spawn_from_angle_max : 180));
   travelradius = airsupport::getmaxmapwidth() * 1.5;
   xoffset = sin(travelangle) * travelradius;
   yoffset = cos(travelangle) * travelradius;
   satellite = spawn("script_model", airsupport::getmapcenter() + (xoffset, yoffset, zoffset));
-  satellite setmodel("veh_t7_drone_srv_blimp");
+  satellite setModel("veh_t7_drone_srv_blimp");
   satellite setscale(1);
   satellite.killstreak_id = killstreak_id;
   satellite.owner = self;
@@ -84,22 +84,22 @@ function activatesatellite() {
   satellite.team = self.team;
   satellite setteam(self.team);
   satellite setowner(self);
-  satellite killstreaks::configure_team("satellite", killstreak_id, self, undefined, undefined, & configureteampost);
-  satellite killstreak_hacking::enable_hacking("satellite", & hackedprefunction, undefined);
+  satellite killstreaks::configure_team("satellite", killstreak_id, self, undefined, undefined, &configureteampost);
+  satellite killstreak_hacking::enable_hacking("satellite", &hackedprefunction, undefined);
   satellite.targetname = "satellite";
   satellite.maxhealth = 700;
   satellite.lowhealth = 700 * 0.5;
   satellite.health = 99999;
   satellite.leaving = 0;
-  satellite setcandamage(1);
-  satellite thread killstreaks::monitordamage("satellite", satellite.maxhealth, & destroysatellite, satellite.lowhealth, & onlowhealth, 0, undefined, 0);
-  satellite thread killstreaks::waittillemp( & destroysatellitebyemp);
-  satellite.killstreakdamagemodifier = & killstreakdamagemodifier;
+  satellite setCanDamage(1);
+  satellite thread killstreaks::monitordamage("satellite", satellite.maxhealth, &destroysatellite, satellite.lowhealth, &onlowhealth, 0, undefined, 0);
+  satellite thread killstreaks::waittillemp(&destroysatellitebyemp);
+  satellite.killstreakdamagemodifier = &killstreakdamagemodifier;
   satellite.rocketdamage = (satellite.maxhealth / 3) + 1;
   satellite moveto(airsupport::getmapcenter() + (xoffset * -1, yoffset * -1, zoffset), 40000 * 0.001);
   target_set(satellite);
   satellite clientfield::set("enemyvehicle", 1);
-  satellite thread killstreaks::waitfortimeout("satellite", 40000, & ontimeout, "death", "crashing");
+  satellite thread killstreaks::waitfortimeout("satellite", 40000, &ontimeout, "death", "crashing");
   satellite thread heatseekingmissile::missiletarget_proximitydetonateincomingmissile("death", undefined, 1);
   satellite thread rotate(10);
   self killstreaks::play_killstreak_start_dialog("satellite", self.team, killstreak_id);
@@ -115,7 +115,7 @@ function hackedprefunction(hacker) {
 
 function configureteampost(owner, ishacked) {
   satellite = self;
-  satellite thread teams::waituntilteamchangesingleton(owner, "Satellite_watch_team_change", & onteamchange, self.entnum, "delete", "death", "leaving");
+  satellite thread teams::waituntilteamchangesingleton(owner, "Satellite_watch_team_change", &onteamchange, self.entnum, "delete", "death", "leaving");
   if(ishacked == 0) {
     satellite teams::hidetosameteam();
   } else {
@@ -126,7 +126,7 @@ function configureteampost(owner, ishacked) {
 
 function rotate(duration) {
   self endon("death");
-  while (true) {
+  while(true) {
     self rotateyaw(-360, duration);
     wait(duration);
   }
@@ -156,21 +156,21 @@ function destroysatellitebyemp(attacker, arg) {
 
 function destroysatellite(attacker = undefined, weapon = undefined) {
   attacker = self[[level.figure_out_attacker]](attacker);
-  if(isdefined(attacker) && (!isdefined(self.owner) || self.owner util::isenemyplayer(attacker))) {
+  if(isDefined(attacker) && (!isDefined(self.owner) || self.owner util::isenemyplayer(attacker))) {
     challenges::destroyedaircraft(attacker, weapon, 0);
     scoreevents::processscoreevent("destroyed_satellite", attacker, self.owner, weapon);
     attacker challenges::addflyswatterstat(weapon, self);
-    luinotifyevent(&"player_callout", 2, & "KILLSTREAK_DESTROYED_SATELLITE", attacker.entnum);
+    luinotifyevent(&"player_callout", 2, &"KILLSTREAK_DESTROYED_SATELLITE", attacker.entnum);
     if(!self.leaving) {
       self killstreaks::play_destroyed_dialog_on_owner("satellite", self.killstreak_id);
     }
   }
   self notify("crashing");
   params = level.killstreakbundle["satellite"];
-  if(isdefined(params.ksexplosionfx)) {
-    playfxontag(params.ksexplosionfx, self, "tag_origin");
+  if(isDefined(params.ksexplosionfx)) {
+    playFXOnTag(params.ksexplosionfx, self, "tag_origin");
   }
-  self setmodel("tag_origin");
+  self setModel("tag_origin");
   if(target_istarget(self)) {
     target_remove(self);
   }
@@ -207,14 +207,14 @@ function resetactivesatellite() {
     if(level.activesatellites[self.team] < 0) {
       level.activesatellites[self.team] = 0;
     }
-  } else if(isdefined(self.ownerentnum)) {
+  } else if(isDefined(self.ownerentnum)) {
     level.activesatellites[self.ownerentnum]--;
     assert(level.activesatellites[self.ownerentnum] >= 0);
     if(level.activesatellites[self.ownerentnum] < 0) {
       level.activesatellites[self.ownerentnum] = 0;
     }
   }
-  assert(isdefined(self.ownerentnum));
+  assert(isDefined(self.ownerentnum));
   level.activeplayersatellites[self.ownerentnum]--;
   assert(level.activeplayersatellites[self.ownerentnum] >= 0);
   level notify("satellite_update");
@@ -222,17 +222,17 @@ function resetactivesatellite() {
 
 function satellitetracker() {
   level endon("game_ended");
-  while (true) {
+  while(true) {
     level waittill("satellite_update");
     if(level.teambased) {
       foreach(team in level.teams) {
         activesatellites = level.activesatellites[team];
-        activesatellitesanduavs = activesatellites + (isdefined(level.activeuavs) ? level.activeuavs[team] : 0);
+        activesatellitesanduavs = activesatellites + (isDefined(level.activeuavs) ? level.activeuavs[team] : 0);
         setteamsatellite(team, activesatellites > 0);
         util::set_team_radar(team, activesatellitesanduavs > 0);
       }
     } else {
-      for (i = 0; i < level.players.size; i++) {
+      for(i = 0; i < level.players.size; i++) {
         updateplayersatellitefordm(level.players[i]);
       }
     }
@@ -240,11 +240,11 @@ function satellitetracker() {
 }
 
 function updateplayersatellitefordm(player) {
-  if(!isdefined(player.entnum)) {
+  if(!isDefined(player.entnum)) {
     player.entnum = player getentitynumber();
   }
   activesatellites = level.activesatellites[player.entnum];
-  activesatellitesanduavs = activesatellites + (isdefined(level.activeuavs) ? level.activeuavs[player.entnum] : 0);
+  activesatellitesanduavs = activesatellites + (isDefined(level.activeuavs) ? level.activeuavs[player.entnum] : 0);
   player setclientuivisibilityflag("radar_client", activesatellitesanduavs > 0);
   player.hassatellite = activesatellites > 0;
 }

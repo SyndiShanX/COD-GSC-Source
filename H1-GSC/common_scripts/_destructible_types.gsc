@@ -251,13 +251,13 @@ maketype(var_0) {
 }
 
 getinfoindex(var_0) {
-  if(!isdefined(level.destructible_type))
+  if(!isDefined(level.destructible_type))
     return -1;
 
   if(level.destructible_type.size == 0)
     return -1;
 
-  for (var_1 = 0; var_1 < level.destructible_type.size; var_1++) {
+  for(var_1 = 0; var_1 < level.destructible_type.size; var_1++) {
     if(var_0 == level.destructible_type[var_1].v["type"])
       return var_1;
   }

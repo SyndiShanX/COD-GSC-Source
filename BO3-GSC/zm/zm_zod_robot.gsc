@@ -29,7 +29,7 @@
 #namespace zm_zod_robot;
 
 function autoexec __init__sytem__() {
-  system::register("zm_zod_robot", & __init__, undefined, undefined);
+  system::register("zm_zod_robot", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -43,13 +43,13 @@ function init() {
   level flag::init("police_box_hide");
   level.ai_robot_remaining_cost = 2000;
   level flag::wait_till("initial_blackscreen_passed");
-  zombie_utility::add_zombie_gib_weapon_callback("ar_standard_companion", & gib_check, & gib_head_check);
-  level.zombie_robot_spawners = getentarray("zombie_robot_spawner", "script_noteworthy");
-  level.var_c1b7d765 = getentarray("zombie_robot_gold_spawner", "script_noteworthy");
-  a_e_triggers = getentarray("robot_activate_trig", "targetname");
+  zombie_utility::add_zombie_gib_weapon_callback("ar_standard_companion", &gib_check, &gib_head_check);
+  level.zombie_robot_spawners = getEntArray("zombie_robot_spawner", "script_noteworthy");
+  level.var_c1b7d765 = getEntArray("zombie_robot_gold_spawner", "script_noteworthy");
+  a_e_triggers = getEntArray("robot_activate_trig", "targetname");
   level.a_robot_areanames = array("junction", "slums", "canal", "theater");
   foreach(str_areaname in level.a_robot_areanames) {
-    create_callbox_unitrigger(str_areaname, & robot_callbox_trigger_visibility, & robot_callbox_trigger_think);
+    create_callbox_unitrigger(str_areaname, &robot_callbox_trigger_visibility, &robot_callbox_trigger_think);
   }
   level thread monitor_robot_power();
   level thread function_63fe1ddd();
@@ -60,13 +60,13 @@ function init() {
 function function_63fe1ddd() {
   level endon("_zombie_game_over");
   level flag::wait_till("police_box_ready");
-  while (true) {
+  while(true) {
     level clientfield::set("robot_lights", 1);
     level waittill("hash_421e5b59");
     level clientfield::set("robot_lights", 2);
     level waittill("hash_10a36fa2");
     level clientfield::set("robot_lights", 3);
-    while (isdefined(level.ai_robot)) {
+    while(isDefined(level.ai_robot)) {
       wait(0.05);
     }
   }
@@ -76,8 +76,8 @@ function monitor_robot_power() {
   level waittill("hash_5b9acfd8");
   level flag::set("police_box_ready");
   var_6f73bd35 = getent("police_box", "targetname");
-  if(isdefined(var_6f73bd35)) {
-    var_6f73bd35 playsound("zmb_bm_interaction_machine_start");
+  if(isDefined(var_6f73bd35)) {
+    var_6f73bd35 playSound("zmb_bm_interaction_machine_start");
   }
   e_player = zm_utility::get_closest_player(var_6f73bd35.origin);
   e_player zm_zod_vo::function_81ba60e2();
@@ -94,7 +94,7 @@ function create_callbox_unitrigger(str_areaname, func_trigger_visibility, func_t
   height = 90;
   length = 110;
   s_callbox = struct::get("robot_callbox_" + str_areaname, "script_noteworthy");
-  s_callbox.unitrigger_stub = spawnstruct();
+  s_callbox.unitrigger_stub = spawnStruct();
   s_callbox.unitrigger_stub.origin = s_callbox.origin;
   s_callbox.unitrigger_stub.angles = s_callbox.angles;
   s_callbox.unitrigger_stub.script_unitrigger_type = "unitrigger_box_use";
@@ -109,27 +109,27 @@ function create_callbox_unitrigger(str_areaname, func_trigger_visibility, func_t
 }
 
 function robot_callbox_trigger_visibility(player) {
-  b_is_invis = isdefined(player.beastmode) && player.beastmode || level flag::get("police_box_hide");
+  b_is_invis = isDefined(player.beastmode) && player.beastmode || level flag::get("police_box_hide");
   self setinvisibletoplayer(player, b_is_invis);
   if(!level flag::get("police_box_ready")) {
     self sethintstring(&"ZM_ZOD_ROBOT_NEEDS_POWER");
   } else {
-    if(isdefined(level.ai_robot)) {
+    if(isDefined(level.ai_robot)) {
       switch (level.ai_robot_area_called) {
         case "junction": {
-          hintstring_areaname = & "ZM_ZOD_AREA_NAME_JUNCTION";
+          hintstring_areaname = &"ZM_ZOD_AREA_NAME_JUNCTION";
           break;
         }
         case "slums": {
-          hintstring_areaname = & "ZM_ZOD_AREA_NAME_SLUMS";
+          hintstring_areaname = &"ZM_ZOD_AREA_NAME_SLUMS";
           break;
         }
         case "canal": {
-          hintstring_areaname = & "ZM_ZOD_AREA_NAME_CANAL";
+          hintstring_areaname = &"ZM_ZOD_AREA_NAME_CANAL";
           break;
         }
         case "theater": {
-          hintstring_areaname = & "ZM_ZOD_AREA_NAME_THEATER";
+          hintstring_areaname = &"ZM_ZOD_AREA_NAME_THEATER";
           break;
         }
       }
@@ -146,7 +146,7 @@ function robot_callbox_trigger_visibility(player) {
 }
 
 function robot_callbox_trigger_think() {
-  while (true) {
+  while(true) {
     self waittill("trigger", player);
     if(player zm_utility::in_revive_trigger()) {
       continue;
@@ -157,7 +157,7 @@ function robot_callbox_trigger_think() {
     if(!zm_utility::is_player_valid(player)) {
       continue;
     }
-    if(isdefined(level.ai_robot)) {
+    if(isDefined(level.ai_robot)) {
       continue;
     }
     if(level flag::get("police_box_ready") !== 1) {
@@ -184,7 +184,7 @@ function robot_callbox_trigger_think() {
       player notify("hash_b7f8e77c");
       level notify("hash_421e5b59");
       level thread function_f9a6039c(self, "activated");
-      self playsound("evt_police_box_siren");
+      self playSound("evt_police_box_siren");
       wait(1.5);
       player zm_audio::create_and_play_dialog("robot", "activate");
     }
@@ -193,13 +193,13 @@ function robot_callbox_trigger_think() {
 
 function spawn_robot(player, trig_stub, n_spawn_delay) {
   a_s_start_pos = struct::get_array("robot_start_pos", "targetname");
-  a_s_start_pos = array::filter(a_s_start_pos, 0, & filter_callbox_name, trig_stub.str_areaname);
+  a_s_start_pos = array::filter(a_s_start_pos, 0, &filter_callbox_name, trig_stub.str_areaname);
   robot_start_pos = a_s_start_pos[0];
-  trace = bullettrace(robot_start_pos.origin, robot_start_pos.origin + (vectorscale((0, 0, -1), 256)), 0, robot_start_pos);
+  trace = bulletTrace(robot_start_pos.origin, robot_start_pos.origin + (vectorscale((0, 0, -1), 256)), 0, robot_start_pos);
   v_ground_position = trace["position"];
   var_36e9b69a = v_ground_position + vectorscale((0, 0, 1), 650);
   level thread function_70541dc1(v_ground_position);
-  if(isdefined(n_spawn_delay)) {
+  if(isDefined(n_spawn_delay)) {
     wait(n_spawn_delay);
   }
   if(level flag::get("ee_complete")) {
@@ -212,16 +212,16 @@ function spawn_robot(player, trig_stub, n_spawn_delay) {
   level.ai_robot.allow_zombie_to_target_ai = 0;
   level.ai_robot.on_train = 0;
   level.ai_robot.can_gib_zombies = 1;
-  level.ai_robot setcandamage(0);
+  level.ai_robot setCanDamage(0);
   level.ai_robot_area_called = trig_stub.str_areaname;
   trig_stub zm_unitrigger::run_visibility_function_for_all_triggers();
   level.ai_robot.time_expired = 0;
-  level.ai_robot playloopsound("fly_civil_protector_loop");
+  level.ai_robot playLoopSound("fly_civil_protector_loop");
   level.var_bfd9ed83 = player;
   foreach(player in level.players) {
     player setperk("specialty_pistoldeath");
   }
-  if(isdefined(level.ai_robot)) {
+  if(isDefined(level.ai_robot)) {
     level.ai_robot forceteleport(var_36e9b69a);
     level.ai_robot thread function_ab4d9ece(v_ground_position, player);
     level.ai_robot scene::play("cin_zod_robot_companion_entrance");
@@ -234,14 +234,14 @@ function spawn_robot(player, trig_stub, n_spawn_delay) {
   level flag::clear("police_box_in_use");
   function_490cbdf5();
   level.ai_robot.time_expired = 1;
-  while (level.ai_robot.reviving_a_player == 1) {
+  while(level.ai_robot.reviving_a_player == 1) {
     wait(0.05);
   }
   foreach(player in level.players) {
     player unsetperk("specialty_pistoldeath");
   }
-  level.ai_robot setcandamage(1);
-  if(isdefined(level.o_zod_train)) {
+  level.ai_robot setCanDamage(1);
+  if(isDefined(level.o_zod_train)) {
     if([
         [level.o_zod_train]
       ] - > is_touching_train_volume(level.ai_robot)) {
@@ -253,7 +253,7 @@ function spawn_robot(player, trig_stub, n_spawn_delay) {
   level.ai_robot scene::play("cin_zod_robot_companion_exit_death");
   level.ai_robot = undefined;
   players = getplayers();
-  if(players.size != 1 || !level flag::get("solo_game") || (!(isdefined(players[0].waiting_to_revive) && players[0].waiting_to_revive))) {
+  if(players.size != 1 || !level flag::get("solo_game") || (!(isDefined(players[0].waiting_to_revive) && players[0].waiting_to_revive))) {
     level zm::checkforalldead();
   }
   level.ai_robot_remaining_cost = 2000;
@@ -270,10 +270,10 @@ function function_ab4d9ece(var_21e230b7, e_player) {
   level.ai_robot thread robot_sky_trail();
   wait(0.5);
   earthquake(0.55, 1.2, var_21e230b7, 1200);
-  playfx(level._effect["robot_landing"], var_21e230b7);
+  playFX(level._effect["robot_landing"], var_21e230b7);
   level thread function_fa1df614(var_21e230b7, undefined, 350);
   var_329d5820 = 5;
-  for (i = 0; i < var_329d5820; i++) {
+  for(i = 0; i < var_329d5820; i++) {
     foreach(player in level.players) {
       player playrumbleonentity("damage_heavy");
     }
@@ -283,8 +283,8 @@ function function_ab4d9ece(var_21e230b7, e_player) {
 
 function robot_sky_trail() {
   var_8d888091 = spawn("script_model", self.origin);
-  var_8d888091 setmodel("tag_origin");
-  playfxontag(level._effect["robot_sky_trail"], var_8d888091, "tag_origin");
+  var_8d888091 setModel("tag_origin");
+  playFXOnTag(level._effect["robot_sky_trail"], var_8d888091, "tag_origin");
   var_8d888091 linkto(self);
   level waittill("hash_10a36fa2");
   var_8d888091 delete();
@@ -292,20 +292,20 @@ function robot_sky_trail() {
 
 function function_70541dc1(v_ground_position) {
   var_b47822ca = spawn("script_model", v_ground_position);
-  var_b47822ca setmodel("tag_origin");
-  playfxontag(level._effect["robot_ground_spawn"], var_b47822ca, "tag_origin");
+  var_b47822ca setModel("tag_origin");
+  playFXOnTag(level._effect["robot_ground_spawn"], var_b47822ca, "tag_origin");
   level waittill("hash_10a36fa2");
   var_b47822ca delete();
 }
 
 function function_fa1df614(v_origin, eattacker, n_radius) {
   team = "axis";
-  if(isdefined(level.zombie_team)) {
+  if(isDefined(level.zombie_team)) {
     team = level.zombie_team;
   }
   a_ai_zombies = array::get_all_closest(v_origin, getaiteamarray(team), undefined, undefined, n_radius);
   foreach(ai_zombie in a_ai_zombies) {
-    if(isdefined(eattacker)) {
+    if(isDefined(eattacker)) {
       ai_zombie dodamage(ai_zombie.health + 10000, ai_zombie.origin, eattacker);
     } else {
       ai_zombie dodamage(ai_zombie.health + 10000, ai_zombie.origin);
@@ -325,14 +325,14 @@ function function_fa1df614(v_origin, eattacker, n_radius) {
 }
 
 function filter_callbox_name(e_entity, str_areaname) {
-  if(!isdefined(e_entity.script_string) || e_entity.script_string != str_areaname) {
+  if(!isDefined(e_entity.script_string) || e_entity.script_string != str_areaname) {
     return false;
   }
   return true;
 }
 
 function update_readouts_for_remaining_robot_cost() {
-  a_e_readouts = getentarray("robot_readout_model", "targetname");
+  a_e_readouts = getEntArray("robot_readout_model", "targetname");
   foreach(e_readout in a_e_readouts) {
     e_readout update_readout_for_remaining_robot_cost();
   }
@@ -340,8 +340,8 @@ function update_readouts_for_remaining_robot_cost() {
 
 function update_readout_for_remaining_robot_cost() {
   a_cost = get_placed_array_from_number(level.ai_robot_remaining_cost);
-  for (i = 0; i < 4; i++) {
-    for (j = 0; j < 10; j++) {
+  for(i = 0; i < 4; i++) {
+    for(j = 0; j < 10; j++) {
       self hidepart((("J_" + i) + "_") + j);
     }
     self showpart((("J_" + i) + "_") + a_cost[i]);
@@ -350,7 +350,7 @@ function update_readout_for_remaining_robot_cost() {
 
 function get_placed_array_from_number(n_number) {
   a_number = [];
-  for (i = 0; i < 4; i++) {
+  for(i = 0; i < 4; i++) {
     n_place = pow(10, 3 - i);
     a_number[i] = floor(n_number / n_place);
     n_number = n_number - (a_number[i] * n_place);
@@ -359,7 +359,7 @@ function get_placed_array_from_number(n_number) {
 }
 
 function private gib_head_check(damage_location) {
-  if(!isdefined(damage_location)) {
+  if(!isDefined(damage_location)) {
     return false;
   }
   switch (damage_location) {
@@ -391,10 +391,10 @@ function function_f9a6039c(entity, suffix, delay) {
     return;
   }
   var_4dc11cc = randomintrange(0, num_variants + 1);
-  if(isdefined(delay)) {
+  if(isDefined(delay)) {
     wait(delay);
   }
-  if(isdefined(entity) && (!(isdefined(entity.is_speaking) && entity.is_speaking))) {
+  if(isDefined(entity) && (!(isDefined(entity.is_speaking) && entity.is_speaking))) {
     entity.is_speaking = 1;
     entity playsoundwithnotify((alias + "_") + var_4dc11cc, "sndDone");
     entity waittill("snddone");
@@ -405,7 +405,7 @@ function function_f9a6039c(entity, suffix, delay) {
 function function_be60a9fd() {
   self endon("death");
   self endon("disconnect");
-  while (true) {
+  while(true) {
     self waittill("killed", who);
     if(randomintrange(0, 101) <= 30) {
       level thread function_f9a6039c(level.ai_robot, "kills");
@@ -416,7 +416,7 @@ function function_be60a9fd() {
 function function_677061ac() {
   self endon("death");
   self endon("disconnect");
-  while (true) {
+  while(true) {
     wait(randomintrange(15, 25));
     level thread function_f9a6039c(level.ai_robot, "active");
   }

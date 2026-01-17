@@ -101,14 +101,14 @@ so_demoman_init() {
       break; // Veteran
   }
 
-  enemy_list = getentarray("player_seek_stages", "script_noteworthy");
-  enemy_list = array_merge(enemy_list, getentarray("upper_level_enemies", "script_noteworthy"));
-  enemy_list = array_merge(enemy_list, getentarray("rappel_bridge_seek", "script_noteworthy"));
-  enemy_list = array_merge(enemy_list, getentarray("rappel_bridge", "script_noteworthy"));
+  enemy_list = getEntArray("player_seek_stages", "script_noteworthy");
+  enemy_list = array_merge(enemy_list, getEntArray("upper_level_enemies", "script_noteworthy"));
+  enemy_list = array_merge(enemy_list, getEntArray("rappel_bridge_seek", "script_noteworthy"));
+  enemy_list = array_merge(enemy_list, getEntArray("rappel_bridge", "script_noteworthy"));
   enemy_list = array_add(enemy_list, getent("kill_heli", "targetname"));
   array_thread(enemy_list, ::add_spawn_function, ::register_bridge_enemy);
 
-  level.vehicle_list = getentarray("vehicle_undestroyed", "script_noteworthy");
+  level.vehicle_list = getEntArray("vehicle_undestroyed", "script_noteworthy");
   level.vehicle_list = array_add(level.vehicle_list, vehicle_get_slide_car("missile_taxi"));
   level.vehicle_list = array_add(level.vehicle_list, vehicle_get_slide_car("slide_car_1"));
   level.vehicle_list = array_add(level.vehicle_list, vehicle_get_slide_car("slide_car_3"));
@@ -143,15 +143,15 @@ so_demoman_init() {
 }
 
 so_demoman_setup_regular() {
-  objective_add(1, "current", & "SO_DEMO_SO_BRIDGE_OBJ_REGULAR");
+  objective_add(1, "current", &"SO_DEMO_SO_BRIDGE_OBJ_REGULAR");
 }
 
 so_demoman_setup_hardened() {
-  objective_add(1, "current", & "SO_DEMO_SO_BRIDGE_OBJ_HARDENED");
+  objective_add(1, "current", &"SO_DEMO_SO_BRIDGE_OBJ_HARDENED");
 }
 
 so_demoman_setup_veteran() {
-  objective_add(1, "current", & "SO_DEMO_SO_BRIDGE_OBJ_VETERAN");
+  objective_add(1, "current", &"SO_DEMO_SO_BRIDGE_OBJ_VETERAN");
 }
 
 // ---------------------------------------------------------------------------------
@@ -172,9 +172,9 @@ custom_eog_summary() {
   foreach(player in level.players)
   player add_custom_eog_summary_line("@SO_DEMO_SO_BRIDGE_INFINITE_AMMO_PERCENT", infinite_percent + "%");
 
-  if(!is_coop())
+  if(!is_coop()) {
     return;
-
+  }
   total_damage = 0;
   foreach(player in level.players)
   total_damage += player.vehicle_damage;
@@ -255,7 +255,7 @@ enable_bridge_collapse() {
   dmg_trigger = GetEnt("so_bridge_damage_trigger", "targetname");
 
   count = 0;
-  while (1) {
+  while(1) {
     dmg_trigger waittill("trigger", other);
 
     if(other.code_classname == "script_vehicle") {

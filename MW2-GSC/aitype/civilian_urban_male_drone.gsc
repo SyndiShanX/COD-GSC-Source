@@ -69,5 +69,4 @@ precache() {
   character\character_civilian_urban_male_ba_drone::precache();
   character\character_civilian_urban_male_bb_drone::precache();
   character\character_civilian_urban_male_bc_drone::precache();
-
 }

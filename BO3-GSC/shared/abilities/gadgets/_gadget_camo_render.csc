@@ -9,7 +9,7 @@
 #namespace _gadget_camo_render;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_camo_render", & __init__, undefined, undefined);
+  system::register("gadget_camo_render", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -37,7 +37,7 @@ function doreveal(local_client_num, direction) {
   self notify("kill_gadget_camo_render_doreveal");
   self endon("kill_gadget_camo_render_doreveal");
   self endon("entityshutdown");
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   delta = 0.04571429;
@@ -46,7 +46,7 @@ function doreveal(local_client_num, direction) {
     self mapshaderconstant(local_client_num, 0, "scriptVector0", 0, 0, 0, 0);
     model_hidden = 0;
     currentvalue = 0;
-    while (currentvalue < 1) {
+    while(currentvalue < 1) {
       self mapshaderconstant(local_client_num, 0, "scriptVector0", currentvalue, 0, 0, 0);
       if(currentvalue >= 0.5 && model_hidden == 0) {
         model_hidden = 1;
@@ -64,7 +64,7 @@ function doreveal(local_client_num, direction) {
     self mapshaderconstant(local_client_num, 0, "scriptVector0", 1, 0, 0, 0);
     model_hidden = 1;
     currentvalue = 1;
-    while (currentvalue > 0) {
+    while(currentvalue > 0) {
       self mapshaderconstant(local_client_num, 0, "scriptVector0", currentvalue, 0, 0, 0);
       if(currentvalue < 0.5 && model_hidden) {
         self duplicate_render::update_dr_flag(local_client_num, "hide_model", 0);

@@ -6,7 +6,6 @@
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\system_shared;
-
 #namespace zm_weap_tesla_gun_t8;
 
 autoexec __init__system__() {
@@ -15,15 +14,15 @@ autoexec __init__system__() {
 
 __init__() {
   level.w_tesla_gun_t8_upgraded = getweapon(#"ww_tesla_gun_t8_upgraded");
-  level._effect[#"tesla_viewmodel_rail"] = #"zombie/fx_tesla_rail_view_zmb";
-  level._effect[#"tesla_viewmodel_tube"] = #"zombie/fx_tesla_tube_view_zmb";
-  level._effect[#"tesla_viewmodel_tube2"] = #"zombie/fx_tesla_tube_view2_zmb";
-  level._effect[#"tesla_viewmodel_tube3"] = #"zombie/fx_tesla_tube_view3_zmb";
-  level._effect[#"tesla_viewmodel_rail_upgraded"] = #"zombie/fx_tesla_rail_view_ug_zmb";
-  level._effect[#"tesla_viewmodel_tube_upgraded"] = #"zombie/fx_tesla_tube_view_ug_zmb";
-  level._effect[#"tesla_viewmodel_tube2_upgraded"] = #"zombie/fx_tesla_tube_view2_ug_zmb";
-  level._effect[#"tesla_viewmodel_tube3_upgraded"] = #"zombie/fx_tesla_tube_view3_ug_zmb";
-  clientfield::register("toplayer", "" + #"hash_611f27e5d51d036f", 28000, 1, "int", &function_4dfaa84c, 0, 0);
+  level._effect[# "tesla_viewmodel_rail"] = # "zombie/fx_tesla_rail_view_zmb";
+  level._effect[# "tesla_viewmodel_tube"] = # "zombie/fx_tesla_tube_view_zmb";
+  level._effect[# "tesla_viewmodel_tube2"] = # "zombie/fx_tesla_tube_view2_zmb";
+  level._effect[# "tesla_viewmodel_tube3"] = # "zombie/fx_tesla_tube_view3_zmb";
+  level._effect[# "tesla_viewmodel_rail_upgraded"] = # "zombie/fx_tesla_rail_view_ug_zmb";
+  level._effect[# "tesla_viewmodel_tube_upgraded"] = # "zombie/fx_tesla_tube_view_ug_zmb";
+  level._effect[# "tesla_viewmodel_tube2_upgraded"] = # "zombie/fx_tesla_tube_view2_ug_zmb";
+  level._effect[# "tesla_viewmodel_tube3_upgraded"] = # "zombie/fx_tesla_tube_view3_ug_zmb";
+  clientfield::register("toplayer", "" + # "hash_611f27e5d51d036f", 28000, 1, "int", &function_4dfaa84c, 0, 0);
 }
 
 function_4dfaa84c(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -38,7 +37,7 @@ function_4dfaa84c(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 tesla_fx_rail(localclientnum) {
-  self endon(#"death", #"hash_319d2bba47dac2c4");
+  self endon(#"death", # "hash_319d2bba47dac2c4");
   w_current = getcurrentweapon(localclientnum);
   wait randomfloatrange(0, 12);
 
@@ -46,20 +45,20 @@ tesla_fx_rail(localclientnum) {
     wait randomfloatrange(8, 12);
 
     if(getweaponammoclip(localclientnum, w_current) > 0 && !ismeleeing(localclientnum)) {
-      str_fx = level._effect[#"tesla_viewmodel_rail"];
+      str_fx = level._effect[# "tesla_viewmodel_rail"];
 
       if(w_current == level.w_tesla_gun_t8_upgraded) {
-        str_fx = level._effect[#"tesla_viewmodel_rail_upgraded"];
+        str_fx = level._effect[# "tesla_viewmodel_rail_upgraded"];
       }
 
       playviewmodelfx(localclientnum, str_fx, "tag_flash");
-      playSound(localclientnum, #"wpn_tesla_effects", (0, 0, 0));
+      playSound(localclientnum, # "wpn_tesla_effects", (0, 0, 0));
     }
   }
 }
 
 tesla_fx_tube(localclientnum) {
-  self endon(#"death", #"hash_319d2bba47dac2c4");
+  self endon(#"death", # "hash_319d2bba47dac2c4");
   w_current = getcurrentweapon(localclientnum);
 
   while(true) {
@@ -71,37 +70,37 @@ tesla_fx_tube(localclientnum) {
       continue;
     }
 
-    str_fx = level._effect[#"tesla_viewmodel_tube"];
+    str_fx = level._effect[# "tesla_viewmodel_tube"];
 
     if(w_current == level.w_tesla_gun_t8_upgraded) {
       switch (n_ammo) {
         case 1:
         case 2:
-          str_fx = level._effect[#"tesla_viewmodel_tube3_upgraded"];
+          str_fx = level._effect[# "tesla_viewmodel_tube3_upgraded"];
           n_tint = 2;
           break;
         case 3:
         case 4:
-          str_fx = level._effect[#"tesla_viewmodel_tube2_upgraded"];
+          str_fx = level._effect[# "tesla_viewmodel_tube2_upgraded"];
           n_tint = 1;
           break;
         default:
-          str_fx = level._effect[#"tesla_viewmodel_tube_upgraded"];
+          str_fx = level._effect[# "tesla_viewmodel_tube_upgraded"];
           n_tint = 0;
           break;
       }
     } else {
       switch (n_ammo) {
         case 1:
-          str_fx = level._effect[#"tesla_viewmodel_tube3"];
+          str_fx = level._effect[# "tesla_viewmodel_tube3"];
           n_tint = 2;
           break;
         case 2:
-          str_fx = level._effect[#"tesla_viewmodel_tube2"];
+          str_fx = level._effect[# "tesla_viewmodel_tube2"];
           n_tint = 1;
           break;
         default:
-          str_fx = level._effect[#"tesla_viewmodel_tube"];
+          str_fx = level._effect[# "tesla_viewmodel_tube"];
           n_tint = 0;
           break;
       }

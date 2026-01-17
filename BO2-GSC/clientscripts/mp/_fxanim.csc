@@ -22,7 +22,7 @@ fxanim_init(localclientnum) {
       return;
   }
 
-  a_fxanims = getentarray(localclientnum, "fxanim", "targetname");
+  a_fxanims = getEntArray(localclientnum, "fxanim", "targetname");
   assert(a_fxanims.size <= level.fxanim_max_anims);
 
   for(i = 0; i < a_fxanims.size; i++) {
@@ -143,27 +143,27 @@ _fxanim_animate(str_scene) {
 _fxanim_play_fx(localclientnum) {
   if(isDefined(self.fxanim_fx_1)) {
     assert(isDefined(self.fxanim_fx_1_tag), "KVP fxanim_fx_1_tag must be set on fxanim at " + self.origin);
-    playfxontag(localclientnum, getfx(self.fxanim_fx_1), self, self.fxanim_fx_1_tag);
+    playFXOnTag(localclientnum, getfx(self.fxanim_fx_1), self, self.fxanim_fx_1_tag);
   }
 
   if(isDefined(self.fxanim_fx_2)) {
     assert(isDefined(self.fxanim_fx_2_tag), "KVP fxanim_fx_2_tag must be set on fxanim at " + self.origin);
-    playfxontag(localclientnum, getfx(self.fxanim_fx_2), self, self.fxanim_fx_2_tag);
+    playFXOnTag(localclientnum, getfx(self.fxanim_fx_2), self, self.fxanim_fx_2_tag);
   }
 
   if(isDefined(self.fxanim_fx_3)) {
     assert(isDefined(self.fxanim_fx_3_tag), "KVP fxanim_fx_3_tag must be set on fxanim at " + self.origin);
-    playfxontag(localclientnum, getfx(self.fxanim_fx_3), self, self.fxanim_fx_3_tag);
+    playFXOnTag(localclientnum, getfx(self.fxanim_fx_3), self, self.fxanim_fx_3_tag);
   }
 
   if(isDefined(self.fxanim_fx_4)) {
     assert(isDefined(self.fxanim_fx_4_tag), "KVP fxanim_fx_4_tag must be set on fxanim at " + self.origin);
-    playfxontag(localclientnum, getfx(self.fxanim_fx_4), self, self.fxanim_fx_4_tag);
+    playFXOnTag(localclientnum, getfx(self.fxanim_fx_4), self, self.fxanim_fx_4_tag);
   }
 
   if(isDefined(self.fxanim_fx_5)) {
     assert(isDefined(self.fxanim_fx_5_tag), "KVP fxanim_fx_5_tag must be set on fxanim at " + self.origin);
-    playfxontag(localclientnum, getfx(self.fxanim_fx_5), self, self.fxanim_fx_5_tag);
+    playFXOnTag(localclientnum, getfx(self.fxanim_fx_5), self, self.fxanim_fx_5_tag);
   }
 }
 

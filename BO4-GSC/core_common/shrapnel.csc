@@ -8,7 +8,6 @@
 #include scripts\core_common\filter_shared;
 #include scripts\core_common\math_shared;
 #include scripts\core_common\system_shared;
-
 #namespace shrapnel;
 
 autoexec __init__system__() {
@@ -32,7 +31,7 @@ __postload_init__() {
   callback::on_localplayer_spawned(&localplayer_spawned);
 }
 
-private localplayer_spawned(localclientnum) {
+localplayer_spawned(localclientnum) {
   if(!self function_21c0fa55()) {
     return;
   }
@@ -47,13 +46,13 @@ private localplayer_spawned(localclientnum) {
   }
 }
 
-private function_8f0cb320(localclientnum) {
+function_8f0cb320(localclientnum) {
   self waittill(#"death");
   self function_816d735d(localclientnum);
   self end_splatter(localclientnum);
 }
 
-private enable_shrapnel(localclientnum) {
+enable_shrapnel(localclientnum) {
   self.shrapnel_enabled = 1;
 
   if(!isDefined(self.var_f08b8b9)) {
@@ -65,7 +64,7 @@ private enable_shrapnel(localclientnum) {
   setfilterpassenabled(localclientnum, 6, 1, 1);
 }
 
-private get_mat_id(localclientnum, filter_name) {
+get_mat_id(localclientnum, filter_name) {
   mat_id = filter::mapped_material_id(filter_name);
 
   if(!isDefined(mat_id)) {
@@ -76,7 +75,7 @@ private get_mat_id(localclientnum, filter_name) {
   return mat_id;
 }
 
-private function_816d735d(localclientnum) {
+function_816d735d(localclientnum) {
   if(isDefined(self)) {
     self.shrapnel_enabled = 0;
   }
@@ -84,7 +83,7 @@ private function_816d735d(localclientnum) {
   setfilterpassenabled(localclientnum, 6, 1, 0);
 }
 
-private function_989d336d(localclientnum) {
+function_989d336d(localclientnum) {
   self endon(#"disconnect");
   self endon(#"death");
   assert(level.new_health_model == 1);
@@ -143,7 +142,7 @@ private function_989d336d(localclientnum) {
   }
 }
 
-private function_a6fe4166() {
+function_a6fe4166() {
   return false;
 }
 
@@ -162,7 +161,7 @@ function_bf9b3d6(playerhealth, basehealth) {
   return getdvarint(#"hash_213e599222859525", 90) / basehealth;
 }
 
-private function_4e9cfc19(localclientnum, playerhealth, priorplayerhealth, basehealth = 100) {
+function_4e9cfc19(localclientnum, playerhealth, priorplayerhealth, basehealth = 100) {
   if(!isDefined(self.var_996ceac2)) {
     self.var_996ceac2 = 0;
   }
@@ -188,7 +187,7 @@ private function_4e9cfc19(localclientnum, playerhealth, priorplayerhealth, baseh
   self.var_996ceac2 = var_387f8be9;
 }
 
-private splatter(localclientnum) {
+splatter(localclientnum) {
   self notify(#"hash_343f00346af5b101");
   self endon(#"hash_343f00346af5b101");
   splatter_opacity = getdvarfloat(#"hash_95576df1970dd46", 1);
@@ -245,18 +244,18 @@ private splatter(localclientnum) {
   end_splatter(localclientnum);
 }
 
-private start_splatter(localclientnum) {
+start_splatter(localclientnum) {
   filter::map_material_helper_by_localclientnum(localclientnum, "generic_explosion_overlay_00");
   setfilterpassmaterial(localclientnum, 6, 0, filter::mapped_material_id("generic_explosion_overlay_00"));
   filter::function_9ff66ea3(localclientnum, 6, 0, getdvarfloat(#"hash_95576df1970dd46", 1));
   setfilterpassenabled(localclientnum, 6, 0, 1);
 }
 
-private end_splatter(localclientnum) {
+end_splatter(localclientnum) {
   setfilterpassenabled(localclientnum, 6, 0, 0);
 }
 
-private wait_game_ended(localclientnum) {
+wait_game_ended(localclientnum) {
   if(!isDefined(level.var_b6a1586d)) {
     level.var_b6a1586d = [];
   }

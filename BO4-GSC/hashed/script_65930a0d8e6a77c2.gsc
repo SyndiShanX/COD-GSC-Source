@@ -13,11 +13,10 @@
 #include scripts\zm_common\zm_traps;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_vo;
-
 #namespace namespace_f2050961;
 
 init() {
-  clientfield::register("toplayer", "" + #"hash_686e5c0d7af86361", 16000, 1, "int");
+  clientfield::register("toplayer", "" + # "hash_686e5c0d7af86361", 16000, 1, "int");
   zm_traps::register_trap_basic_info("venom_spray", &trap_activate, &trap_audio);
   zm_traps::register_trap_damage("venom_spray", &trap_player_damage, &trap_damage);
   t_trap = getent("venom_spray", "script_noteworthy");
@@ -52,7 +51,7 @@ trap_cooldown() {
 trap_audio() {}
 
 trap_player_damage(t_trap) {
-  self endon(#"death", #"disconnect");
+  self endon(#"death", # "disconnect");
 
   if(!(isDefined(self.is_in_acid) && self.is_in_acid) && isplayer(self) && zm_utility::is_player_valid(self, 0, 0, 0) && isDefined(t_trap.var_67dd3af6) && t_trap.var_67dd3af6) {
     self.is_in_acid = 1;
@@ -87,12 +86,12 @@ function_d5ee5b15() {
 
   if(!(isDefined(self.var_31f1bba7) && self.var_31f1bba7)) {
     self.var_31f1bba7 = 1;
-    self clientfield::set_to_player("" + #"hash_686e5c0d7af86361", 1);
+    self clientfield::set_to_player("" + # "hash_686e5c0d7af86361", 1);
   }
 
   wait 5;
   self.var_31f1bba7 = undefined;
-  self clientfield::set_to_player("" + #"hash_686e5c0d7af86361", 0);
+  self clientfield::set_to_player("" + # "hash_686e5c0d7af86361", 0);
 }
 
 trap_damage(t_trap) {
@@ -105,17 +104,17 @@ trap_damage(t_trap) {
   b_stun = 0;
 
   switch (self.archetype) {
-    case #"zombie":
+    case # "zombie":
       n_percent = 50;
       break;
-    case #"catalyst":
+    case # "catalyst":
       n_percent = 50;
       break;
-    case #"gegenees":
+    case # "gegenees":
       b_stun = 1;
       n_percent = 5;
       break;
-    case #"blight_father":
+    case # "blight_father":
       b_stun = 1;
       n_percent = 5;
       break;
@@ -133,11 +132,11 @@ trap_damage(t_trap) {
 
   if(n_damage >= self.health) {
     level notify(#"trap_kill", {
-      #e_victim: self, 
+      #e_victim: self,
       #e_trap: t_trap
     });
 
-    if(self.archetype === #"zombie" && randomint(100) < 80 && !(isDefined(level.var_b8d87306) && level.var_b8d87306)) {
+    if(self.archetype === # "zombie" && randomint(100) < 80 && !(isDefined(level.var_b8d87306) && level.var_b8d87306)) {
       level.var_b8d87306 = 1;
       level thread function_49d1db63();
       self thread scene::play(#"aib_vign_cust_zm_red_zmb_venom_lqfy_abv_dth_01", "Shot 1", self);

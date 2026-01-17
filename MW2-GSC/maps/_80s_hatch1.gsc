@@ -28,12 +28,9 @@ main(model, type) {
   build_team("allies");
   build_aianims(::setanims, ::set_vehicle_anims);
   build_compassicon("automobile", false);
-
 }
 
-init_local() {
-
-}
+init_local() {}
 
 set_vehicle_anims(positions) {
   return positions;
@@ -46,7 +43,7 @@ setanims() {
   return positions; // no anims yet
   /*
   	for(i=0;i<4;i++)
-  		positions[i] = spawnstruct();
+  		positions[i] = spawnStruct();
 
   	positions[0].sittag = "body_animate_jnt";
   	positions[1].sittag = "body_animate_jnt";

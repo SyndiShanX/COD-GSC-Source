@@ -5,14 +5,14 @@
 
 apache_hints_precache() {
   level.oilrocks_apache_hint_timers = [];
-  maps\_utility::add_hint_string("hint_apache_move", & "OILROCKS_HINT_APACHE_MOVE", maps\oilrocks_apache_hints_code::apache_hints_move);
-  maps\_utility::add_hint_string("hint_apache_ads", & "OILROCKS_HINT_APACHE_ADS", maps\oilrocks_apache_hints_code::apache_hints_break_ads);
-  maps\_utility::add_hint_string("hint_apache_ads_hold", & "OILROCKS_HINT_ADS_HOLD", maps\oilrocks_apache_hints_code::apache_hints_break_ads);
-  maps\_utility::add_hint_string("hint_apache_mg", & "OILROCKS_HINT_APACHE_MG", maps\oilrocks_apache_hints_code::apache_hints_break_mg);
-  maps\_utility::add_hint_string("hint_apache_missile_straight", & "OILROCKS_HINT_APACHE_MISSILE_STRAIGHT", maps\oilrocks_apache_hints_code::apache_hints_break_missile_straight);
-  maps\_utility::add_hint_string("hint_apache_flares", & "OILROCKS_HINT_APACHE_FLARES", maps\oilrocks_apache_hints_code::apache_hints_break_flares);
-  maps\_utility::add_hint_string("hint_apache_missile_lockon", & "OILROCKS_HINT_APACHE_MISSILE_LOCKON", maps\oilrocks_apache_hints_code::apache_hints_break_missile_lockon);
-  maps\_utility::add_hint_string("hint_apache_missile_lockon_release", & "OILROCKS_HINT_APACHE_MISSILE_LOCKON_RELEASE", maps\oilrocks_apache_hints_code::apache_hints_released_homing);
+  maps\_utility::add_hint_string("hint_apache_move", &"OILROCKS_HINT_APACHE_MOVE", maps\oilrocks_apache_hints_code::apache_hints_move);
+  maps\_utility::add_hint_string("hint_apache_ads", &"OILROCKS_HINT_APACHE_ADS", maps\oilrocks_apache_hints_code::apache_hints_break_ads);
+  maps\_utility::add_hint_string("hint_apache_ads_hold", &"OILROCKS_HINT_ADS_HOLD", maps\oilrocks_apache_hints_code::apache_hints_break_ads);
+  maps\_utility::add_hint_string("hint_apache_mg", &"OILROCKS_HINT_APACHE_MG", maps\oilrocks_apache_hints_code::apache_hints_break_mg);
+  maps\_utility::add_hint_string("hint_apache_missile_straight", &"OILROCKS_HINT_APACHE_MISSILE_STRAIGHT", maps\oilrocks_apache_hints_code::apache_hints_break_missile_straight);
+  maps\_utility::add_hint_string("hint_apache_flares", &"OILROCKS_HINT_APACHE_FLARES", maps\oilrocks_apache_hints_code::apache_hints_break_flares);
+  maps\_utility::add_hint_string("hint_apache_missile_lockon", &"OILROCKS_HINT_APACHE_MISSILE_LOCKON", maps\oilrocks_apache_hints_code::apache_hints_break_missile_lockon);
+  maps\_utility::add_hint_string("hint_apache_missile_lockon_release", &"OILROCKS_HINT_APACHE_MISSILE_LOCKON_RELEASE", maps\oilrocks_apache_hints_code::apache_hints_released_homing);
 }
 
 apache_hints_display_hint_timeout(var_0, var_1) {

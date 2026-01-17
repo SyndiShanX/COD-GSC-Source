@@ -5,7 +5,7 @@
 
 #namespace path;
 
-private function_a760f3bf(path, var_bc114662, point_color, line_color, var_80bf7c44) {
+function_a760f3bf(path, var_bc114662, point_color, line_color, var_80bf7c44) {
   assert(isDefined(path));
 
   for(i = 0; i < path.size; i++) {
@@ -20,13 +20,13 @@ private function_a760f3bf(path, var_bc114662, point_color, line_color, var_80bf7
   }
 }
 
-private function_d88e0349(path_1, path_2, center, radius, point_color, line_color, var_80bf7c44) {
+function_d88e0349(path_1, path_2, center, radius, point_color, line_color, var_80bf7c44) {
   recordline(path_1, path_2, line_color, "<dev string:x38>");
   recordsphere(path_1, 2, point_color, "<dev string:x38>");
   recordcircle(center, radius, var_80bf7c44, "<dev string:x38>");
 }
 
-private function_bb43c529(path_1, path_2, center, radius, point_color, line_color, var_80bf7c44) {
+function_bb43c529(path_1, path_2, center, radius, point_color, line_color, var_80bf7c44) {
   line(path_1, path_2, point_color, 1, 1);
   sphere(path_1, 5, line_color, 1, 1);
   circle(center, radius, var_80bf7c44, 0, 1, 1);
@@ -63,4 +63,3 @@ function_aa9bfd9d(path_points, point_color, line_color, var_80bf7c44) {
 
   function_a760f3bf(path_points, &function_bb43c529, point_color, line_color, var_80bf7c44);
 }
-

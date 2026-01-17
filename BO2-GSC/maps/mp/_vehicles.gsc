@@ -84,7 +84,7 @@ init() {
   chopper_door_open = % v_huey_door_open;
   chopper_door_open_state = % v_huey_door_open_state;
   chopper_door_closed_state = % v_huey_door_close_state;
-  killbrushes = getentarray("water_killbrush", "targetname");
+  killbrushes = getEntArray("water_killbrush", "targetname");
 
   foreach(brush in killbrushes)
   brush thread water_killbrush_think();
@@ -127,35 +127,35 @@ initialize_vehicle_damage_effects_for_level() {
   vehicle_name = get_default_vehicle_name();
   level.vehicles_damage_states[vehicle_name] = [];
   level.vehicles_damage_treadfx[vehicle_name] = [];
-  level.vehicles_damage_states[vehicle_name][k_mild_damage_index] = spawnstruct();
+  level.vehicles_damage_states[vehicle_name][k_mild_damage_index] = spawnStruct();
   level.vehicles_damage_states[vehicle_name][k_mild_damage_index].health_percentage = k_mild_damage_health_percentage;
   level.vehicles_damage_states[vehicle_name][k_mild_damage_index].effect_array = [];
-  level.vehicles_damage_states[vehicle_name][k_mild_damage_index].effect_array[0] = spawnstruct();
+  level.vehicles_damage_states[vehicle_name][k_mild_damage_index].effect_array[0] = spawnStruct();
   level.vehicles_damage_states[vehicle_name][k_mild_damage_index].effect_array[0].damage_effect = loadfx("vehicle/vfire/fx_tank_sherman_smldr");
   level.vehicles_damage_states[vehicle_name][k_mild_damage_index].effect_array[0].sound_effect = undefined;
   level.vehicles_damage_states[vehicle_name][k_mild_damage_index].effect_array[0].vehicle_tag = "tag_origin";
-  level.vehicles_damage_states[vehicle_name][k_moderate_damage_index] = spawnstruct();
+  level.vehicles_damage_states[vehicle_name][k_moderate_damage_index] = spawnStruct();
   level.vehicles_damage_states[vehicle_name][k_moderate_damage_index].health_percentage = k_moderate_damage_health_percentage;
   level.vehicles_damage_states[vehicle_name][k_moderate_damage_index].effect_array = [];
-  level.vehicles_damage_states[vehicle_name][k_moderate_damage_index].effect_array[0] = spawnstruct();
+  level.vehicles_damage_states[vehicle_name][k_moderate_damage_index].effect_array[0] = spawnStruct();
   level.vehicles_damage_states[vehicle_name][k_moderate_damage_index].effect_array[0].damage_effect = loadfx("vehicle/vfire/fx_vfire_med_12");
   level.vehicles_damage_states[vehicle_name][k_moderate_damage_index].effect_array[0].sound_effect = undefined;
   level.vehicles_damage_states[vehicle_name][k_moderate_damage_index].effect_array[0].vehicle_tag = "tag_origin";
-  level.vehicles_damage_states[vehicle_name][k_severe_damage_index] = spawnstruct();
+  level.vehicles_damage_states[vehicle_name][k_severe_damage_index] = spawnStruct();
   level.vehicles_damage_states[vehicle_name][k_severe_damage_index].health_percentage = k_severe_damage_health_percentage;
   level.vehicles_damage_states[vehicle_name][k_severe_damage_index].effect_array = [];
-  level.vehicles_damage_states[vehicle_name][k_severe_damage_index].effect_array[0] = spawnstruct();
+  level.vehicles_damage_states[vehicle_name][k_severe_damage_index].effect_array[0] = spawnStruct();
   level.vehicles_damage_states[vehicle_name][k_severe_damage_index].effect_array[0].damage_effect = loadfx("vehicle/vfire/fx_vfire_sherman");
   level.vehicles_damage_states[vehicle_name][k_severe_damage_index].effect_array[0].sound_effect = undefined;
   level.vehicles_damage_states[vehicle_name][k_severe_damage_index].effect_array[0].vehicle_tag = "tag_origin";
-  level.vehicles_damage_states[vehicle_name][k_total_damage_index] = spawnstruct();
+  level.vehicles_damage_states[vehicle_name][k_total_damage_index] = spawnStruct();
   level.vehicles_damage_states[vehicle_name][k_total_damage_index].health_percentage = k_total_damage_health_percentage;
   level.vehicles_damage_states[vehicle_name][k_total_damage_index].effect_array = [];
-  level.vehicles_damage_states[vehicle_name][k_total_damage_index].effect_array[0] = spawnstruct();
+  level.vehicles_damage_states[vehicle_name][k_total_damage_index].effect_array[0] = spawnStruct();
   level.vehicles_damage_states[vehicle_name][k_total_damage_index].effect_array[0].damage_effect = loadfx("explosions/fx_large_vehicle_explosion");
   level.vehicles_damage_states[vehicle_name][k_total_damage_index].effect_array[0].sound_effect = "vehicle_explo";
   level.vehicles_damage_states[vehicle_name][k_total_damage_index].effect_array[0].vehicle_tag = "tag_origin";
-  default_husk_effects = spawnstruct();
+  default_husk_effects = spawnStruct();
   default_husk_effects.damage_effect = undefined;
   default_husk_effects.sound_effect = undefined;
   default_husk_effects.vehicle_tag = "tag_origin";
@@ -243,7 +243,7 @@ play_vehicle_effects(effects, isdamagedtread) {
     self endon("damage_state_changed");
 
   if(isDefined(effects.sound_effect))
-    self playsound(effects.sound_effect);
+    self playSound(effects.sound_effect);
 
   waittime = 0;
 
@@ -252,14 +252,14 @@ play_vehicle_effects(effects, isdamagedtread) {
 
   while(waittime > 0) {
     if(isDefined(effects.damage_effect))
-      playfxontag(effects.damage_effect, self, effects.vehicle_tag);
+      playFXOnTag(effects.damage_effect, self, effects.vehicle_tag);
 
     wait(waittime);
   }
 }
 
 init_vehicle_entities() {
-  vehicles = getentarray("script_vehicle", "classname");
+  vehicles = getEntArray("script_vehicle", "classname");
   array_thread(vehicles, ::init_original_vehicle);
 
   if(isDefined(vehicles))
@@ -268,8 +268,7 @@ init_vehicle_entities() {
   return 0;
 }
 
-precache_vehicles() {
-}
+precache_vehicles() {}
 
 register_vehicle() {
   if(!isDefined(level.vehicles_list))
@@ -474,7 +473,7 @@ build_rumble(rumble, scale, duration, radius, basetime, randomaditionaltime) {
 }
 
 build_quake(scale, duration, radius, basetime, randomaditionaltime) {
-  struct = spawnstruct();
+  struct = spawnStruct();
   struct.scale = scale;
   struct.duration = duration;
   struct.radius = radius;
@@ -700,10 +699,9 @@ vehicle_abandoned_by_occupants_t() {
 }
 
 play_start_stop_sound(sound_alias, modulation) {
-  if(isDefined(self.start_stop_sfxid)) {
-  }
+  if(isDefined(self.start_stop_sfxid)) {}
 
-  self.start_stop_sfxid = self playsound(sound_alias);
+  self.start_stop_sfxid = self playSound(sound_alias);
 }
 
 vehicle_ghost_entering_occupants_t() {
@@ -788,7 +786,7 @@ vehicle_is_tank() {
 
 vehicle_record_initial_values() {
   if(!isDefined(self.initial_state))
-    self.initial_state = spawnstruct();
+    self.initial_state = spawnStruct();
 
   if(isDefined(self.origin))
     self.initial_state.origin = self.origin;
@@ -904,7 +902,7 @@ vehicle_transmute(attacker) {
   deathangles = self.angles;
   modelname = self vehgetmodel();
   vehicle_name = get_vehicle_name_key_for_damage_states(self);
-  respawn_parameters = spawnstruct();
+  respawn_parameters = spawnStruct();
   respawn_parameters.origin = self.initial_state.origin;
   respawn_parameters.angles = self.initial_state.angles;
   respawn_parameters.health = self.initial_state.health;
@@ -1027,7 +1025,7 @@ wait_for_unnoticeable_cleanup_opportunity() {
       }
 
       if(distinchessq < maxpreventvisibilityinchessq) {
-        vehiclevisibilityfromplayer = self sightconetrace(player.origin, player, anglestoforward(player.angles));
+        vehiclevisibilityfromplayer = self sightconetrace(player.origin, player, anglesToForward(player.angles));
 
         if(vehiclevisibilityfromplayer > 0) {
           self cleanup_debug_print("(" + (maxsecondstowait - secondswaited) + "s) Player can see");
@@ -1095,7 +1093,7 @@ vehicle_recycle_spawner_t() {
 }
 
 vehicle_play_explosion_sound() {
-  self playsound("car_explo_large");
+  self playSound("car_explo_large");
 }
 
 vehicle_damage_t() {
@@ -1141,9 +1139,9 @@ vehicle_damage_t() {
 _spawn_husk(origin, angles, modelname) {
   husk = spawn("script_model", origin);
   husk.angles = angles;
-  husk setmodel(modelname);
+  husk setModel(modelname);
   husk.health = 1;
-  husk setcandamage(0);
+  husk setCanDamage(0);
   return husk;
 }
 
@@ -1156,7 +1154,7 @@ swap_to_husk_model() {
     husk_model = level.veh_husk_models[self.vehicletype];
 
     if(isDefined(husk_model))
-      self setmodel(husk_model);
+      self setModel(husk_model);
   }
 }
 
@@ -1226,7 +1224,7 @@ _spawn_explosion(origin) {
     forward = (0, 0, 1);
     rot = randomfloat(360);
     up = (cos(rot), sin(rot), 0);
-    playfx(level.vehicle_explosion_effect, origin, forward, up);
+    playFX(level.vehicle_explosion_effect, origin, forward, up);
   }
 
   thread _play_sound_in_space("vehicle_explo", origin);
@@ -1235,7 +1233,7 @@ _spawn_explosion(origin) {
 _play_sound_in_space(soundeffectname, origin) {
   org = spawn("script_origin", origin);
   org.origin = origin;
-  org playsound(soundeffectname);
+  org playSound(soundeffectname);
   wait 10;
   org delete();
 }
@@ -1268,8 +1266,7 @@ vehicledeathwaiter() {
   }
 }
 
-turretdeathwaiter() {
-}
+turretdeathwaiter() {}
 
 vehicle_kill_disconnect_paths_forever() {
   self notify("kill_disconnect_paths_forever");

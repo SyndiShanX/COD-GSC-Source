@@ -7,9 +7,9 @@
 #include common_scripts\utility;
 
 main() {
-  array_thread(GetEntArray("audio_sound_trigger", "targetname"), ::thread_sound_trigger);
-  array_thread(GetEntArray("audio_bump_trigger", "targetname"), ::thread_bump_trigger);
-  array_thread(GetEntArray("audio_step_trigger", "targetname"), ::thread_step_trigger);
+  array_thread(getEntArray("audio_sound_trigger", "targetname"), ::thread_sound_trigger);
+  array_thread(getEntArray("audio_bump_trigger", "targetname"), ::thread_bump_trigger);
+  array_thread(getEntArray("audio_step_trigger", "targetname"), ::thread_step_trigger);
 }
 
 wait_until_first_player() {
@@ -22,9 +22,9 @@ wait_until_first_player() {
 thread_sound_trigger() {
   self waittill("trigger");
   struct_targs = getstructarray(self.target, "targetname");
-  ent_targs = getentarray(self.target, "targetname");
+  ent_targs = getEntArray(self.target, "targetname");
   if(isDefined(struct_targs)) {
-    for (i = 0; i < struct_targs.size; i++) {
+    for(i = 0; i < struct_targs.size; i++) {
       if(!level.clientscripts) {
         if(!isDefined(struct_targs[i].script_sound)) {
           assertmsg("_audio::thread_sound_trigger(): script_sound is UNDEFINED! Aborting..." + struct_targs[i].origin);
@@ -35,7 +35,7 @@ thread_sound_trigger() {
     }
   }
   if(isDefined(ent_targs)) {
-    for (i = 0; i < ent_targs.size; i++) {
+    for(i = 0; i < ent_targs.size; i++) {
       if(!isDefined(ent_targs[i].script_sound)) {
         assertmsg("_audio::thread_sound_trigger(): script_sound is UNDEFINED! Aborting... " + ent_targs[i].origin);
         return;
@@ -86,9 +86,9 @@ spawn_line_sound(sound) {
 line_sound_player() {
   self endon("end line sound");
   if(isDefined(self.script_looping)) {
-    self playloopsound(self.script_sound);
+    self playLoopSound(self.script_sound);
   } else {
-    self playsound(self.script_sound);
+    self playSound(self.script_sound);
   }
 }
 
@@ -96,7 +96,7 @@ move_sound_along_line() {
   self endon("end line sound");
   wait_until_first_player();
   closest_dist = undefined;
-  while (1) {
+  while(1) {
     self closest_point_on_line_to_point(get_players()[0].origin, self.start, self.end);
     if(getdvarint("debug_audio") > 0) {
       line(self.start, self.end, (0, 1, 0));
@@ -136,7 +136,7 @@ closest_point_on_line_to_point(Point, LineStart, LineEnd) {
 
 stop_line_sound(startOfLineEntity) {
   startpoints = getstructarray(startOfLineEntity, "script_noteworthy");
-  for (i = 0; i < startpoints.size; i++) {
+  for(i = 0; i < startpoints.size; i++) {
     if(!isDefined(startpoints[i].soundmover)) {
       println("Line emitter wasn't spawned before delete call... are you sure this isn't messed up?");
       return;
@@ -154,9 +154,9 @@ static_sound_random_play(soundpoint) {
   if(!isDefined(self.script_wait_max)) {
     self.script_wait_max = 3;
   }
-  while (1) {
+  while(1) {
     wait(RandomFloatRange(self.script_wait_min, self.script_wait_max));
-    soundpoint playsound(self.script_sound);
+    soundpoint playSound(self.script_sound);
     if(getdvarint("debug_audio") > 0) {
       print3d(soundpoint.origin, self.script_sound, (1.0, 0.8, 0.5), 1, 3, 5);
     }
@@ -164,9 +164,9 @@ static_sound_random_play(soundpoint) {
 }
 
 static_sound_loop_play(soundpoint) {
-  self playloopsound(self.script_sound);
+  self playLoopSound(self.script_sound);
   if(getdvarint("debug_audio") > 0) {
-    while (1) {
+    while(1) {
       print3d(soundpoint.origin, self.script_sound, (1.0, 0.8, 0.5), 1, 3, 5);
       wait(1);
     }
@@ -178,12 +178,12 @@ thread_bump_trigger() {
   if(!isDefined(self.script_activated)) {
     self.script_activated = 1;
   }
-  while (1) {
+  while(1) {
     self waittill("trigger", who);
     if(isDefined(self.script_sound) && self.script_activated) {
-      self playsound(self.script_sound);
+      self playSound(self.script_sound);
     }
-    while (isDefined(who) && (who) IsTouching(self)) {
+    while(isDefined(who) && (who) IsTouching(self)) {
       wait(0.1);
     }
   }
@@ -197,9 +197,9 @@ stand_think(trig) {
   if(!isDefined(trig.script_wait_min) || !isDefined(trig.script_wait_max)) {
     return;
   }
-  while (1) {
+  while(1) {
     wait(randomfloatrange(trig.script_wait_min, trig.script_wait_max));
-    self playsound(trig.script_label);
+    self playSound(trig.script_label);
   }
 }
 
@@ -208,14 +208,14 @@ thread_enter_exit_sound(trig) {
   self endon("disconnect");
   trig.touchingPlayers[self getentitynumber()] = 1;
   if(isDefined(trig.script_sound) && trig.script_activated) {
-    self playsound(trig.script_sound);
+    self playSound(trig.script_sound);
   }
   self thread stand_think(trig);
-  while (self IsTouching(trig)) {
+  while(self IsTouching(trig)) {
     wait(0.1);
   }
   self notify("kill_stand_think" + trig getentitynumber());
-  self playsound(trig.script_noteworthy);
+  self playSound(trig.script_noteworthy);
   trig.touchingPlayers[self getentitynumber()] = 0;
 }
 
@@ -226,11 +226,11 @@ thread_step_trigger() {
   }
   if(!isDefined(self.touchingPlayers)) {
     self.touchingPlayers = [];
-    for (i = 0; i < 4; i++) {
+    for(i = 0; i < 4; i++) {
       self.touchingPlayers[i] = 0;
     }
   }
-  while (1) {
+  while(1) {
     self waittill("trigger", who);
     if(self.touchingPlayers[who getentitynumber()] == 0) {
       who thread thread_enter_exit_sound(self);
@@ -239,9 +239,9 @@ thread_step_trigger() {
 }
 
 disable_bump_trigger(triggername) {
-  triggers = GetEntArray("audio_bump_trigger", "targetname");
+  triggers = getEntArray("audio_bump_trigger", "targetname");
   if(isDefined(triggers)) {
-    for (i = 0; i < triggers.size; i++) {
+    for(i = 0; i < triggers.size; i++) {
       if(isDefined(triggers[i].script_label) && triggers[i].script_label == triggername) {
         triggers[i].script_activated = 0;
       }
@@ -258,7 +258,7 @@ bump_trigger_listener() {
 
 get_player_index_number(player) {
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(players[i] == player) {
       return i;
     }

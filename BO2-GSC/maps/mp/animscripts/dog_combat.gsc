@@ -78,7 +78,7 @@ meleebiteattackplayer(player) {
 
 handlemeleebiteattacknotetracks(note, player) {
   if(note == "dog_melee")
-    self melee(anglestoforward(self.angles));
+    self melee(anglesToForward(self.angles));
 }
 
 use_low_attack() {

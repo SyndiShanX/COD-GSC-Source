@@ -563,8 +563,8 @@ oki3_outro_2() {
   axis = getaiarray("axis");
   array_thread(axis, maps\oki3_util::bloody_death);
   allies = getaiarray("allies");
-  for (i = 0; i < allies.size; i++) {
-    allies[i] setcandamage(false);
+  for(i = 0; i < allies.size; i++) {
+    allies[i] setCanDamage(false);
   }
   if(isAlive(level.sarge)) {
     allies = array_remove(allies, level.sarge);
@@ -595,7 +595,7 @@ oki3_outro_2() {
   share_screen(get_host(), false);
   setsaveddvar("miniscoreboardhide", "1");
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i] setclientDvar("miniscoreboardhide", "0");
     players[i] setclientDvar("compass", "1");
     players[i] SetClientDvar("hud_showStance", "1");
@@ -606,7 +606,7 @@ oki3_outro_2() {
 }
 
 outro_friendlies_goto_bag(guys) {
-  for (i = 0; i < guys.size; i++) {
+  for(i = 0; i < guys.size; i++) {
     guys[i].animname = "generic";
     guys[i].target = "outro_patrol_" + (i + 1);
     guys[i] set_generic_run_anim("patrol_walk", true);
@@ -616,7 +616,7 @@ outro_friendlies_goto_bag(guys) {
 
 clean_up_fadeout_hud() {
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(isDefined(players[i].warpblack)) {
       players[i].warpblack Destroy();
     }
@@ -630,15 +630,15 @@ clean_up_fadeout_hud() {
 play_outro_on_all_players(anode) {
   hide_all_player_models();
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i] thread play_outro_on_player("outro2", anode);
   }
   level thread outro_smoke(players[0].origin);
 }
 
 outro_smoke(org) {
-  while (1) {
-    playfx(level._effect["outro_smoke"], (7767, -5911, 67));
+  while(1) {
+    playFX(level._effect["outro_smoke"], (7767, -5911, 67));
     wait(.5);
   }
 }
@@ -696,7 +696,7 @@ attach_tunnel_lid(guy) {
   level.sarge do_dialogue("clear_out");
   tunnel = getent("tunnel_entered", "targetname");
   objective_state(2, "done");
-  objective_add(4, "current", & "OKI3_OBJ4_A", tunnel.origin);
+  objective_add(4, "current", &"OKI3_OBJ4_A", tunnel.origin);
 }
 
 detach_tunnel_lid(guy) {
@@ -707,7 +707,7 @@ detach_tunnel_lid(guy) {
 attach_satchel(guy) {
   if(!isDefined(guy.satchel_attached)) {
     guy.satchel = spawn("script_model", guy gettagorigin("tag_weapon_left"));
-    guy.satchel setmodel("weapon_satchel_charge");
+    guy.satchel setModel("weapon_satchel_charge");
     guy.satchel linkto(guy, "tag_weapon_left");
     guy.satchel_attached = true;
   }
@@ -727,13 +727,13 @@ dogtag() {
   self endon("disconnect");
   tag = spawn("script_model", self.viewhands gettagorigin("tag_weapon"));
   tag.angles = self.viewhands gettagangles("tag_weapon");
-  tag setmodel("okinawa_dogtag");
+  tag setModel("okinawa_dogtag");
   self.viewhands attach("okinawa_dogtag", "tag_weapon");
 }
 
 fade_outro(guy) {
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i] thread hud_fade_to_black(.5);
   }
 }
@@ -742,7 +742,7 @@ detach_gun(guy) {
   position = guy.weaponInfo[guy.weapon].position;
   level.polonsky_gun = spawn("script_model", guy gettagorigin("tag_weapon_right"));
   level.polonsky_gun.angles = guy gettagangles("tag_weapon_right");
-  level.polonsky_gun setmodel(getweaponmodel(guy.primaryweapon));
+  level.polonsky_gun setModel(getweaponmodel(guy.primaryweapon));
   guy animscripts\shared::placeWeaponOn(guy.primaryweapon, "none");
 }
 

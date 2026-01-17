@@ -9,7 +9,6 @@
 #include common_scripts\utility;
 
 main() {
-
   maps\mp\gametypes\_globallogic::init();
   maps\mp\gametypes\_callbacksetup::SetupCallbacks();
   maps\mp\gametypes\_globallogic::SetupCallbacks();
@@ -38,7 +37,6 @@ main() {
   level.getSpawnPoint = ::getSpawnPoint;
   level.onPlayerKilled = ::onPlayerKilled;
   level.onTimeLimit = ::onTimeLimit;
-
 }
 
 onprecachegametype() {
@@ -48,14 +46,14 @@ onprecachegametype() {
 onStartGameType() {
   setClientNameMode("auto_change");
 
-  setObjectiveText("allies", & "OBJECTIVES_DM");
-  setObjectiveText("axis", & "OBJECTIVES_DM");
+  setObjectiveText("allies", &"OBJECTIVES_DM");
+  setObjectiveText("axis", &"OBJECTIVES_DM");
 
-  setObjectiveScoreText("allies", & "OBJECTIVES_DM_SCORE");
-  setObjectiveScoreText("axis", & "OBJECTIVES_DM_SCORE");
+  setObjectiveScoreText("allies", &"OBJECTIVES_DM_SCORE");
+  setObjectiveScoreText("axis", &"OBJECTIVES_DM_SCORE");
 
-  setObjectiveHintText("allies", & "OBJECTIVES_DM_HINT");
-  setObjectiveHintText("axis", & "OBJECTIVES_DM_HINT");
+  setObjectiveHintText("allies", &"OBJECTIVES_DM_HINT");
+  setObjectiveHintText("axis", &"OBJECTIVES_DM_HINT");
 
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);
@@ -109,7 +107,7 @@ onStartGameType() {
 }
 
 onPlayerConnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connected", player);
 
     player.gun_firstSpawn = true;
@@ -306,7 +304,7 @@ refillAmmo() {
   level endon("game_ended");
   selfendon("disconnect");
 
-  while (true) {
+  while(true) {
     self waittill("reload");
     self GiveStartAmmo(self.primaryWeapon);
   }
@@ -316,7 +314,7 @@ refillSingleCountAmmo() {
   level endon("game_ended");
   selfendon("disconnect");
 
-  while (true) {
+  while(true) {
     if(isReallyAlive(self) && self.team != "spectator" && isDefined(self.primaryWeapon) && self getAmmoCount(self.primaryWeapon) == 0) {
       //	fake a reload time
       wait(2);
@@ -359,7 +357,7 @@ hideInKillCam() {
   self endon("disconnect");
   var_0 = 1;
 
-  for (;;) {
+  for(;;) {
     if(var_0 && (!isalive(self) || isinkillcam())) {
       self.gun_progressdisplay[0].alpha = 0;
       self.gun_progressdisplay[1].alpha = 0;

@@ -17,7 +17,7 @@ init() {
   if(!maps\mp\zombies\_zm_equipment::is_equipment_included("equip_hacker_zm")) {
     return;
   }
-  maps\mp\zombies\_zm_equipment::register_equipment("equip_hacker_zm", & "ZOMBIE_EQUIP_HACKER_PICKUP_HINT_STRING", & "ZOMBIE_EQUIP_HACKER_HOWTO", undefined, "hacker");
+  maps\mp\zombies\_zm_equipment::register_equipment("equip_hacker_zm", &"ZOMBIE_EQUIP_HACKER_PICKUP_HINT_STRING", &"ZOMBIE_EQUIP_HACKER_HOWTO", undefined, "hacker");
   level._hackable_objects = [];
   level._pooled_hackable_objects = [];
   onplayerconnect_callback(::hacker_on_player_connect);
@@ -350,7 +350,7 @@ hack_trigger_think() {
 
 is_facing(facee) {
   orientation = self getplayerangles();
-  forwardvec = anglestoforward(orientation);
+  forwardvec = anglesToForward(orientation);
   forwardvec2d = (forwardvec[0], forwardvec[1], 0);
   unitforwardvec2d = vectornormalize(forwardvec2d);
   tofaceevec = facee.origin - self.origin;
@@ -485,7 +485,7 @@ hacker_do_hack(hackable) {
   self.hackertexthud.alpha = 1;
   self.hackertexthud.color = (1, 1, 1);
   self.hackertexthud settext(&"ZOMBIE_HACKING");
-  self playloopsound("zmb_progress_bar", 0.5);
+  self playLoopSound("zmb_progress_bar", 0.5);
 
   while(self is_hacking(hackable)) {
     wait 0.05;
@@ -504,9 +504,9 @@ hacker_do_hack(hackable) {
   self stoploopsound(0.5);
 
   if(hacked)
-    self playsound("vox_mcomp_hack_success");
+    self playSound("vox_mcomp_hack_success");
   else
-    self playsound("vox_mcomp_hack_fail");
+    self playSound("vox_mcomp_hack_fail");
 
   if(isDefined(self.hackerprogressbar))
     self.hackerprogressbar maps\mp\gametypes_zm\_hud_util::destroyelem();
@@ -596,8 +596,7 @@ hackable_object_thread() {
         hack_success = hacker hacker_do_hack(self);
         self notify("kill_lowreadywatcher");
 
-        if(isDefined(hacker)) {
-        }
+        if(isDefined(hacker)) {}
 
         if(isDefined(hacker) && hack_success) {
           if(cost) {
@@ -623,7 +622,7 @@ hackable_object_thread() {
 }
 
 hacker_on_player_connect() {
-  struct = spawnstruct();
+  struct = spawnStruct();
   struct.origin = self.origin;
   struct.radius = 48;
   struct.height = 64;

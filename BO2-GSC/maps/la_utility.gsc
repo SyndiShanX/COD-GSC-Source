@@ -444,8 +444,7 @@ load_gumps() {
   screen_fade_in(0);
 }
 
-level_settings() {
-}
+level_settings() {}
 
 setup_challenges() {
   if(level.script == "la_1") {
@@ -651,7 +650,7 @@ stick_player(b_look, n_clamp_right, n_clamp_left, n_clamp_top, n_clamp_bottom) {
 
   self.m_link = spawn("script_model", self.origin);
   self.m_link.angles = self.angles;
-  self.m_link setmodel("tag_origin");
+  self.m_link setModel("tag_origin");
 
   if(b_look)
     self playerlinktodelta(self.m_link, "tag_origin", 1, n_clamp_right, n_clamp_left, n_clamp_top, n_clamp_bottom, 1);
@@ -757,7 +756,7 @@ use_player_cougar() {
 }
 
 cougar_controls_instructions() {
-  screen_message_create(&"LA_SHARED_COUGAR_GAS", & "LA_SHARED_COUGAR_BRAKE");
+  screen_message_create(&"LA_SHARED_COUGAR_GAS", &"LA_SHARED_COUGAR_BRAKE");
   n_timeout = 0;
 
   while(!level.player gasbuttonpressed()) {
@@ -801,7 +800,7 @@ debug_hud_elem_add(func_debug, str_custom_dvar) {
   assert(isDefined(func_debug), "func_debug is a required parameter for debug_hud_elem_add");
 
   if(!isDefined(level.debug_hud))
-    level.debug_hud = spawnstruct();
+    level.debug_hud = spawnStruct();
 
   if(!isDefined(level.debug_hud.elems))
     level.debug_hud.elems = [];
@@ -933,7 +932,7 @@ vehicle_explosion_launch(v_hit_point, n_force) {
   } else {
     v_impact_pos = v_hit_point;
     v_rocket_impact_point = v_hit_point;
-    v_forward = anglestoforward(self.angles);
+    v_forward = anglesToForward(self.angles);
     v_right = anglestoright(self.angles);
     v_up = anglestoright(self.angles);
     n_max_x = 500;
@@ -997,7 +996,7 @@ vehicle_explosion_launch(v_hit_point, n_force) {
 
   e_fx = spawn_model("tag_origin", self.origin, self.angles);
   e_fx linkto(self);
-  playfxontag(getfx("vehicle_launch_trail"), e_fx, "tag_origin");
+  playFXOnTag(getfx("vehicle_launch_trail"), e_fx, "tag_origin");
 
   level thread draw_line_for_time(v_impact_point, v_impact_point + v_world_force, 1, 0, 0, 2);
 
@@ -1019,14 +1018,14 @@ get_launch_params_from_structs() {
       v_start = s_start.origin;
       v_end = s_end.origin;
       v_dir = v_end - v_start;
-      a_trace = bullettrace(v_start, v_end, 0, undefined);
+      a_trace = bulletTrace(v_start, v_end, 0, undefined);
       v_hit_pos = a_trace["position"];
       n_intensity = 200;
 
       if(isDefined(s_start.script_float))
         n_intensity = s_start.script_float;
 
-      s_return = spawnstruct();
+      s_return = spawnStruct();
       s_return.v_impact = v_hit_pos;
       s_return.v_force = vectornormalize(v_dir) * n_intensity;
       return s_return;
@@ -1081,9 +1080,9 @@ fade_with_shellshock_and_visionset() {
 
 veh_brake_unload() {
   self endon("death");
-  self playsound("evt_truck_incoming");
+  self playSound("evt_truck_incoming");
   self waittill("brake");
-  self playsound("evt_truck_stop");
+  self playSound("evt_truck_stop");
 
   while(self getspeedmph() > 2)
     wait 0.1;
@@ -1117,7 +1116,7 @@ get_forward(b_flat, str_tag) {
   if(b_flat)
     v_angles = (v_angles[0], v_angles[1], 0);
 
-  v_forward = anglestoforward(v_angles);
+  v_forward = anglesToForward(v_angles);
   return v_forward;
 }
 
@@ -1127,7 +1126,7 @@ delete_ents(str_name, str_key) {
   if(!isDefined(str_key))
     str_key = "targetname";
 
-  array_func(getentarray(str_name, str_key), ::self_delete);
+  array_func(getEntArray(str_name, str_key), ::self_delete);
 }
 
 delete_vehicle_on_flag(str_flag) {
@@ -1159,7 +1158,7 @@ cleanup_kvp(str_value, str_key) {
   if(!isDefined(str_key))
     str_key = "targetname";
 
-  a_ents = getentarray(str_value, str_key);
+  a_ents = getEntArray(str_value, str_key);
   cleanup_array(a_ents);
 }
 
@@ -1176,7 +1175,7 @@ police_car() {
 
 police_car_audio() {
   sound_ent = spawn("script_origin", self.origin);
-  sound_ent playloopsound("amb_radio_chatter_loop", 0.5);
+  sound_ent playLoopSound("amb_radio_chatter_loop", 0.5);
   self waittill("death");
   sound_ent delete();
 }
@@ -1215,7 +1214,7 @@ waittill_not_god_mode() {
 }
 
 new_timer() {
-  s_timer = spawnstruct();
+  s_timer = spawnStruct();
   s_timer.n_time_created = gettime();
   return s_timer;
 }
@@ -1281,10 +1280,10 @@ spawn_sam_drone_group(str_spawner_name, n_count, angle_offset, override_start_an
   a_spawned_drones = [];
 
   for(i = 0; i < n_count; i++) {
-    v_spawn_org = level.player.origin + anglestoforward((0, n_spawn_yaw, 0)) * 15000;
+    v_spawn_org = level.player.origin + anglesToForward((0, n_spawn_yaw, 0)) * 15000;
     v_spawn_org = (v_spawn_org[0], v_spawn_org[1], 12000 + randomint(2000));
     veh_drone = spawn_vehicle_from_targetname(str_spawner_name);
-    veh_drone setmodel("veh_t6_drone_avenger_x2");
+    veh_drone setModel("veh_t6_drone_avenger_x2");
     veh_drone.origin = v_spawn_org;
     v_spawn_vector = anglestoright((0, n_spawn_yaw, 0)) * v_spawn_vector_dir;
     veh_drone.v_spawn_vector = v_spawn_org + v_spawn_vector * 20000;
@@ -1320,7 +1319,7 @@ sam_drone_death() {
   target_remove(self);
 
   if(isDefined(self) && self.health <= 0) {
-    playfx(level._effect["sam_drone_explode"], self.origin, (0, 0, 1), anglestoforward(self.angles));
+    playFX(level._effect["sam_drone_explode"], self.origin, (0, 0, 1), anglesToForward(self.angles));
     n_dist = distance2d(self.origin, level.player.origin);
     n_quake_scale = clamp(1.0 - n_dist / 25000, 0.25, 1.0);
     n_quake_time = clamp(1.0 - n_dist / 25000, 0.25, 0.5);
@@ -1347,7 +1346,7 @@ sam_drone_death() {
     return;
   }
   if(isDefined(self)) {
-    playfx(level._effect["sam_drone_explode"], self.origin, (0, 0, 1), anglestoforward(self.angles));
+    playFX(level._effect["sam_drone_explode"], self.origin, (0, 0, 1), anglesToForward(self.angles));
     n_dist = distance2d(self.origin, level.player.origin);
     n_quake_scale = clamp(1.0 - n_dist / 25000, 0.25, 1.0);
     n_quake_time = clamp(1.0 - n_dist / 25000, 0.25, 0.5);
@@ -1437,7 +1436,7 @@ strafe_player_plane_fire_guns(b_missles) {
       level notify("drone_wave_" + level.n_drone_wave);
       yaw = angleclamp180(vectortoangles(vectornormalize(self.origin - level.player.origin))[1]);
       yaw = yaw + randomintrange(-3, 3);
-      shoot_point = level.player.origin + anglestoforward((0, yaw, 0)) * randomintrange(50, 100);
+      shoot_point = level.player.origin + anglesToForward((0, yaw, 0)) * randomintrange(50, 100);
       self settargetorigin(shoot_point, 0);
       self firegunnerweapon(0);
     }
@@ -1484,7 +1483,7 @@ sam_visionset() {
 
 sam_hint() {
   level endon("sam_event_done");
-  screen_message_create(&"LA_1_SAM_HINT_ADS", & "LA_1_SAM_HINT_FIRE");
+  screen_message_create(&"LA_1_SAM_HINT_ADS", &"LA_1_SAM_HINT_FIRE");
   level waittill("sam_hint_drone_killed");
   screen_message_delete();
 }
@@ -1644,13 +1643,13 @@ spawn_straffing_drone(s_align, n_height_above_player, e_target, str_delete_flag,
   }
 
   n_spawn_yaw = s_align.angles[1] + angle_offset;
-  v_spawn_org = s_align.origin + anglestoforward((0, n_spawn_yaw, 0)) * 5000;
-  v_spawn_org = v_spawn_org - anglestoforward((0, s_align.angles[1], 0)) * 15000;
+  v_spawn_org = s_align.origin + anglesToForward((0, n_spawn_yaw, 0)) * 5000;
+  v_spawn_org = v_spawn_org - anglesToForward((0, s_align.angles[1], 0)) * 15000;
   v_spawn_org = (v_spawn_org[0], v_spawn_org[1], 3000 + randomint(2000));
   veh_drone = spawn_vehicle_from_targetname(str_spawner);
   veh_drone.origin = v_spawn_org;
-  v_goal_org = s_align.origin + anglestoforward((0, n_spawn_yaw, 0)) * 5000;
-  v_goal_org = v_goal_org + anglestoforward((0, s_align.angles[1], 0)) * 10000;
+  v_goal_org = s_align.origin + anglesToForward((0, n_spawn_yaw, 0)) * 5000;
+  v_goal_org = v_goal_org + anglesToForward((0, s_align.angles[1], 0)) * 10000;
   v_goal_org = (v_goal_org[0], v_goal_org[1], 3000 + randomint(2000));
   veh_drone.v_spawn_vector = v_goal_org;
   v_start_angles = vectortoangles(veh_drone.v_spawn_vector - veh_drone.origin);
@@ -1794,7 +1793,7 @@ play_fake_flyby() {
   sound_ent = spawn("script_origin", self.origin);
   sound_ent linkto(self, "tag_origin");
   wait(randomfloatrange(1, 3));
-  sound_ent playsound("evt_fake_flyby");
+  sound_ent playSound("evt_fake_flyby");
   self waittill("reached_end_node");
   sound_ent delete();
 }
@@ -1821,7 +1820,7 @@ ambient_drone_die() {
     return;
   }
   if(!isDefined(self.delete_on_death) && isDefined(level._effect["fireball_trail_lg"])) {
-    playfxontag(level._effect["fireball_trail_lg"], self, "tag_origin");
+    playFXOnTag(level._effect["fireball_trail_lg"], self, "tag_origin");
     playsoundatposition("evt_pegasus_explo", self.origin);
     wait 5;
 
@@ -1969,7 +1968,7 @@ is_node_group_used(str_node_value, str_node_key, str_team) {
 }
 
 is_player_touching_volume(str_volume_value, str_volume_key) {
-  a_volumes = getentarray(str_volume_value, str_volume_key);
+  a_volumes = getEntArray(str_volume_value, str_volume_key);
 
   foreach(t_volume in a_volumes) {
     if(level.player istouching(t_volume))

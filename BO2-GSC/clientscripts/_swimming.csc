@@ -30,7 +30,7 @@ main() {
 }
 
 settings() {
-  level._swimming = spawnstruct();
+  level._swimming = spawnStruct();
   level._swimming.swim_times[0] = 0;
   level._swimming.swim_times[1] = 15;
   level._swimming.swim_times[2] = 25;
@@ -121,7 +121,7 @@ init_player() {
   if(!isDefined(self._swimming)) {
     println("^4_swimming - client: defining self._swimming.");
 
-    self._swimming = spawnstruct();
+    self._swimming = spawnStruct();
   }
 
   self._swimming.is_arms_enabled = 1;
@@ -405,7 +405,7 @@ swimmingfx() {
 waterleveltag(clientnum) {
   self endon("disconnect");
   self._swimming.water_level_fx_tag = spawn(clientnum, self.origin, "script_model");
-  self._swimming.water_level_fx_tag setmodel("tag_origin");
+  self._swimming.water_level_fx_tag setModel("tag_origin");
 
   while(true) {
     waitforclient(clientnum);
@@ -440,14 +440,14 @@ underwaterfx() {
     self thread exhalefx();
     self thread debrisfx();
     self thread sedimentfx();
-    fx_handle_hand_le = playfxontag(self getlocalclientnumber(), level._effect["hands_bubbles_left"], self._swimming_arms, "J_WristTwist_LE");
-    fx_handle_hand_rt = playfxontag(self getlocalclientnumber(), level._effect["hands_bubbles_right"], self._swimming_arms, "J_WristTwist_RI");
+    fx_handle_hand_le = playFXOnTag(self getlocalclientnumber(), level._effect["hands_bubbles_left"], self._swimming_arms, "J_WristTwist_LE");
+    fx_handle_hand_rt = playFXOnTag(self getlocalclientnumber(), level._effect["hands_bubbles_right"], self._swimming_arms, "J_WristTwist_RI");
 
     if(self._swimming.current_depth > 500) {
       if(isDefined(fx_handle_underwater))
         deletefx(self getlocalclientnumber(), fx_handle_underwater, 1);
 
-      fx_handle_deep = playfxontag(self getlocalclientnumber(), level._effect["deep"], self._swimming_arms, "tag_origin");
+      fx_handle_deep = playFXOnTag(self getlocalclientnumber(), level._effect["deep"], self._swimming_arms, "tag_origin");
 
       println("^4_swimming - client: deep fx");
 
@@ -455,7 +455,7 @@ underwaterfx() {
       if(isDefined(fx_handle_deep))
         deletefx(self getlocalclientnumber(), fx_handle_deep, 0);
 
-      fx_handle_underwater = playfxontag(self getlocalclientnumber(), level._effect["underwater"], self._swimming.water_level_fx_tag, "tag_origin");
+      fx_handle_underwater = playFXOnTag(self getlocalclientnumber(), level._effect["underwater"], self._swimming.water_level_fx_tag, "tag_origin");
 
       println("^4_swimming - client: underwater fx");
 
@@ -491,7 +491,7 @@ exhalefx() {
 
   while(isDefined(self._swimming_arms)) {
     waitforclient(0);
-    playfxontag(self getlocalclientnumber(), level._effect["exhale"], self._swimming_arms, "tag_origin");
+    playFXOnTag(self getlocalclientnumber(), level._effect["exhale"], self._swimming_arms, "tag_origin");
     wait(randomfloatrange(2.5, 3.5));
   }
 }
@@ -499,7 +499,7 @@ exhalefx() {
 swimmingdrownfx(phase) {
   if(phase == 3) {
     if(isDefined(self._swimming_arms))
-      playfxontag(self getlocalclientnumber(), level._effect["drowning"], self._swimming_arms, "tag_origin");
+      playFXOnTag(self getlocalclientnumber(), level._effect["drowning"], self._swimming_arms, "tag_origin");
   }
 }
 
@@ -509,8 +509,8 @@ debrisfx() {
   self endon("swimming_end");
 
   while(isDefined(self._swimming_arms)) {
-    fx_handle_hand_le = playfxontag(self getlocalclientnumber(), level._effect["hands_debris_left"], self._swimming_arms, "J_WristTwist_LE");
-    fx_handle_hand_rt = playfxontag(self getlocalclientnumber(), level._effect["hands_debris_right"], self._swimming_arms, "J_WristTwist_RI");
+    fx_handle_hand_le = playFXOnTag(self getlocalclientnumber(), level._effect["hands_debris_left"], self._swimming_arms, "J_WristTwist_LE");
+    fx_handle_hand_rt = playFXOnTag(self getlocalclientnumber(), level._effect["hands_debris_right"], self._swimming_arms, "J_WristTwist_RI");
     self thread killunderwaterfx(fx_handle_hand_le, 3);
     self thread killunderwaterfx(fx_handle_hand_rt, 3);
     wait 1.5;
@@ -524,9 +524,9 @@ sedimentfx() {
 
   while(true) {
     player_angles = self getplayerangles();
-    player_forward = anglestoforward(player_angles);
+    player_forward = anglesToForward(player_angles);
     fx_pos = self getorigin();
-    fx_handle = playfx(self getlocalclientnumber(), level._effect["sediment"], fx_pos);
+    fx_handle = playFX(self getlocalclientnumber(), level._effect["sediment"], fx_pos);
     self thread killunderwaterfx(fx_handle, 10);
     wait 1;
   }
@@ -579,7 +579,7 @@ onwaterwakefxspawn() {
 
     println("^4_swimming - client: spawning wake");
 
-    self._swimming.fx_handle_wake = playfxontag(self getlocalclientnumber(), level._effect["wake"], self._swimming.water_level_fx_tag, "tag_origin");
+    self._swimming.fx_handle_wake = playFXOnTag(self getlocalclientnumber(), level._effect["wake"], self._swimming.water_level_fx_tag, "tag_origin");
     self thread onwaterwakefxdeletewhendone();
   }
 }
@@ -605,7 +605,7 @@ onwaterripplefxspawn() {
 
     println("^4_swimming - client: spawning ripple");
 
-    self._swimming.fx_handle_ripple = playfxontag(self getlocalclientnumber(), level._effect["ripple"], self._swimming.water_level_fx_tag, "tag_origin");
+    self._swimming.fx_handle_ripple = playFXOnTag(self getlocalclientnumber(), level._effect["ripple"], self._swimming.water_level_fx_tag, "tag_origin");
     self thread onwaterripplefxdeletewhendone();
   }
 }

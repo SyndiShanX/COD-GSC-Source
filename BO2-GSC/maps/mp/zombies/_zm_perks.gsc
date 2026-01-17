@@ -33,7 +33,7 @@ init() {
   initialize_custom_perk_arrays();
   perk_machine_spawn_init();
   vending_weapon_upgrade_trigger = [];
-  vending_triggers = getentarray("zombie_vending", "targetname");
+  vending_triggers = getEntArray("zombie_vending", "targetname");
 
   for(i = 0; i < vending_triggers.size; i++) {
     if(isDefined(vending_triggers[i].script_noteworthy) && vending_triggers[i].script_noteworthy == "specialty_weapupgrade") {
@@ -42,7 +42,7 @@ init() {
     }
   }
 
-  old_packs = getentarray("zombie_vending_upgrade", "targetname");
+  old_packs = getEntArray("zombie_vending_upgrade", "targetname");
 
   for(i = 0; i < old_packs.size; i++)
     vending_weapon_upgrade_trigger[vending_weapon_upgrade_trigger.size] = old_packs[i];
@@ -126,7 +126,7 @@ default_vending_precaching() {
     precachestring(&"ZOMBIE_PERK_PACKAPUNCH");
     precachestring(&"ZOMBIE_PERK_PACKAPUNCH_ATT");
     level._effect["packapunch_fx"] = loadfx("maps/zombie/fx_zombie_packapunch");
-    level.machine_assets["packapunch"] = spawnstruct();
+    level.machine_assets["packapunch"] = spawnStruct();
     level.machine_assets["packapunch"].weapon = "zombie_knuckle_crack";
     level.machine_assets["packapunch"].off_model = "p6_anim_zm_buildable_pap";
     level.machine_assets["packapunch"].on_model = "p6_anim_zm_buildable_pap_on";
@@ -139,7 +139,7 @@ default_vending_precaching() {
     precachemodel("zombie_vending_three_gun_on");
     precachestring(&"ZOMBIE_PERK_ADDITIONALWEAPONPERK");
     level._effect["additionalprimaryweapon_light"] = loadfx("misc/fx_zombie_cola_arsenal_on");
-    level.machine_assets["additionalprimaryweapon"] = spawnstruct();
+    level.machine_assets["additionalprimaryweapon"] = spawnStruct();
     level.machine_assets["additionalprimaryweapon"].weapon = "zombie_perk_bottle_additionalprimaryweapon";
     level.machine_assets["additionalprimaryweapon"].off_model = "zombie_vending_three_gun";
     level.machine_assets["additionalprimaryweapon"].on_model = "zombie_vending_three_gun_on";
@@ -152,7 +152,7 @@ default_vending_precaching() {
     precachemodel("zombie_vending_ads_on");
     precachestring(&"ZOMBIE_PERK_DEADSHOT");
     level._effect["deadshot_light"] = loadfx("misc/fx_zombie_cola_dtap_on");
-    level.machine_assets["deadshot"] = spawnstruct();
+    level.machine_assets["deadshot"] = spawnStruct();
     level.machine_assets["deadshot"].weapon = "zombie_perk_bottle_deadshot";
     level.machine_assets["deadshot"].off_model = "zombie_vending_ads";
     level.machine_assets["deadshot"].on_model = "zombie_vending_ads_on";
@@ -165,7 +165,7 @@ default_vending_precaching() {
     precachemodel("zombie_vending_doubletap2_on");
     precachestring(&"ZOMBIE_PERK_DOUBLETAP");
     level._effect["doubletap_light"] = loadfx("misc/fx_zombie_cola_dtap_on");
-    level.machine_assets["doubletap"] = spawnstruct();
+    level.machine_assets["doubletap"] = spawnStruct();
     level.machine_assets["doubletap"].weapon = "zombie_perk_bottle_doubletap";
     level.machine_assets["doubletap"].off_model = "zombie_vending_doubletap2";
     level.machine_assets["doubletap"].on_model = "zombie_vending_doubletap2_on";
@@ -178,7 +178,7 @@ default_vending_precaching() {
     precachemodel("zombie_vending_jugg_on");
     precachestring(&"ZOMBIE_PERK_JUGGERNAUT");
     level._effect["jugger_light"] = loadfx("misc/fx_zombie_cola_jugg_on");
-    level.machine_assets["juggernog"] = spawnstruct();
+    level.machine_assets["juggernog"] = spawnStruct();
     level.machine_assets["juggernog"].weapon = "zombie_perk_bottle_jugg";
     level.machine_assets["juggernog"].off_model = "zombie_vending_jugg";
     level.machine_assets["juggernog"].on_model = "zombie_vending_jugg_on";
@@ -191,7 +191,7 @@ default_vending_precaching() {
     precachemodel("zombie_vending_marathon_on");
     precachestring(&"ZOMBIE_PERK_MARATHON");
     level._effect["marathon_light"] = loadfx("maps/zombie/fx_zmb_cola_staminup_on");
-    level.machine_assets["marathon"] = spawnstruct();
+    level.machine_assets["marathon"] = spawnStruct();
     level.machine_assets["marathon"].weapon = "zombie_perk_bottle_marathon";
     level.machine_assets["marathon"].off_model = "zombie_vending_marathon";
     level.machine_assets["marathon"].on_model = "zombie_vending_marathon_on";
@@ -205,7 +205,7 @@ default_vending_precaching() {
     precachestring(&"ZOMBIE_PERK_QUICKREVIVE");
     level._effect["revive_light"] = loadfx("misc/fx_zombie_cola_revive_on");
     level._effect["revive_light_flicker"] = loadfx("maps/zombie/fx_zmb_cola_revive_flicker");
-    level.machine_assets["revive"] = spawnstruct();
+    level.machine_assets["revive"] = spawnStruct();
     level.machine_assets["revive"].weapon = "zombie_perk_bottle_revive";
     level.machine_assets["revive"].off_model = "zombie_vending_revive";
     level.machine_assets["revive"].on_model = "zombie_vending_revive_on";
@@ -218,7 +218,7 @@ default_vending_precaching() {
     precachemodel("zombie_vending_sleight_on");
     precachestring(&"ZOMBIE_PERK_FASTRELOAD");
     level._effect["sleight_light"] = loadfx("misc/fx_zombie_cola_on");
-    level.machine_assets["speedcola"] = spawnstruct();
+    level.machine_assets["speedcola"] = spawnStruct();
     level.machine_assets["speedcola"].weapon = "zombie_perk_bottle_sleight";
     level.machine_assets["speedcola"].off_model = "zombie_vending_sleight";
     level.machine_assets["speedcola"].on_model = "zombie_vending_sleight_on";
@@ -232,7 +232,7 @@ default_vending_precaching() {
     precachemodel("ch_tombstone1");
     precachestring(&"ZOMBIE_PERK_TOMBSTONE");
     level._effect["tombstone_light"] = loadfx("misc/fx_zombie_cola_on");
-    level.machine_assets["tombstone"] = spawnstruct();
+    level.machine_assets["tombstone"] = spawnStruct();
     level.machine_assets["tombstone"].weapon = "zombie_perk_bottle_tombstone";
     level.machine_assets["tombstone"].off_model = "zombie_vending_tombstone";
     level.machine_assets["tombstone"].on_model = "zombie_vending_tombstone_on";
@@ -246,7 +246,7 @@ default_vending_precaching() {
     precachemodel("ch_tombstone1");
     precachestring(&"ZOMBIE_PERK_TOMBSTONE");
     level._effect["tombstone_light"] = loadfx("misc/fx_zombie_cola_on");
-    level.machine_assets["whoswho"] = spawnstruct();
+    level.machine_assets["whoswho"] = spawnStruct();
     level.machine_assets["whoswho"].weapon = "zombie_perk_bottle_whoswho";
     level.machine_assets["whoswho"].off_model = "p6_zm_vending_chugabud";
     level.machine_assets["whoswho"].on_model = "p6_zm_vending_chugabud_on";
@@ -328,18 +328,18 @@ third_person_weapon_upgrade(current_weapon, upgrade_weapon, packa_rollers, perk_
   } else
     rel_entity = self;
 
-  forward = anglestoforward(angles_base + angles_offset);
+  forward = anglesToForward(angles_base + angles_offset);
   interact_offset = origin_offset + forward * -25;
 
   if(!isDefined(perk_machine.fx_ent)) {
     perk_machine.fx_ent = spawn("script_model", origin_base + origin_offset + (0, 1, -34));
     perk_machine.fx_ent.angles = angles_base + angles_offset;
-    perk_machine.fx_ent setmodel("tag_origin");
+    perk_machine.fx_ent setModel("tag_origin");
     perk_machine.fx_ent linkto(perk_machine);
   }
 
   if(isDefined(level._effect["packapunch_fx"]))
-    fx = playfxontag(level._effect["packapunch_fx"], perk_machine.fx_ent, "tag_origin");
+    fx = playFXOnTag(level._effect["packapunch_fx"], perk_machine.fx_ent, "tag_origin");
 
   offsetdw = vectorscale((1, 1, 1), 3.0);
   weoptions = self maps\mp\zombies\_zm_weapons::get_pack_a_punch_weapon_options(current_weapon);
@@ -356,7 +356,7 @@ third_person_weapon_upgrade(current_weapon, upgrade_weapon, packa_rollers, perk_
   else
     perk_machine pap_weapon_move_in(trigger, origin_offset, angles_offset);
 
-  self playsound("zmb_perks_packa_upgrade");
+  self playSound("zmb_perks_packa_upgrade");
 
   if(isDefined(perk_machine.wait_flag))
     perk_machine.wait_flag rotateto(perk_machine.wait_flag.angles + vectorscale((1, 0, 0), 179.0), 0.25, 0, 0);
@@ -370,7 +370,7 @@ third_person_weapon_upgrade(current_weapon, upgrade_weapon, packa_rollers, perk_
   wait 3;
 
   if(isDefined(self))
-    self playsound("zmb_perks_packa_ready");
+    self playSound("zmb_perks_packa_ready");
   else
     return;
 
@@ -455,7 +455,7 @@ vending_weapon_upgrade() {
   wait 0.01;
   perk_machine = getent(self.target, "targetname");
   self.perk_machine = perk_machine;
-  perk_machine_sound = getentarray("perksacola", "targetname");
+  perk_machine_sound = getEntArray("perksacola", "targetname");
   packa_rollers = spawn("script_origin", self.origin);
   packa_timer = spawn("script_origin", self.origin);
   packa_rollers linkto(self);
@@ -499,7 +499,7 @@ vending_weapon_upgrade() {
     perk_machine thread[[level.machine_assets["packapunch"].power_on_callback]]();
 
   self thread vending_machine_trigger_think();
-  perk_machine playloopsound("zmb_perks_packa_loop");
+  perk_machine playLoopSound("zmb_perks_packa_loop");
   self thread shutoffpapsounds(perk_machine, packa_rollers, packa_timer);
   self thread vending_weapon_upgrade_cost();
 
@@ -560,7 +560,7 @@ vending_weapon_upgrade() {
       current_cost = player maps\mp\zombies\_zm_pers_upgrades_functions::pers_upgrade_double_points_cost(current_cost);
 
     if(player.score < current_cost) {
-      self playsound("deny");
+      self playSound("deny");
 
       if(isDefined(level.custom_pap_deny_vo_func))
         player[[level.custom_pap_deny_vo_func]]();
@@ -635,7 +635,7 @@ shutoffpapsounds(ent1, ent2, ent3) {
 
 turnonpapsounds(ent) {
   level waittill("Pack_A_Punch_on");
-  ent playloopsound("zmb_perks_packa_loop");
+  ent playLoopSound("zmb_perks_packa_loop");
 }
 
 vending_weapon_upgrade_cost() {
@@ -673,7 +673,7 @@ wait_for_player_to_take(player, weapon, packa_timer, upgrade_as_attachment) {
   level endon("Pack_A_Punch_off");
 
   while(true) {
-    packa_timer playloopsound("zmb_perks_packa_ticktock");
+    packa_timer playLoopSound("zmb_perks_packa_ticktock");
     self waittill("trigger", trigger_player);
 
     if(isDefined(level.pap_grab_by_anyone) && level.pap_grab_by_anyone)
@@ -741,7 +741,7 @@ wait_for_timeout(weapon, packa_timer, player) {
   wait(level.packapunch_timeout);
   self notify("pap_timeout");
   packa_timer stoploopsound(0.05);
-  packa_timer playsound("zmb_perks_packa_deny");
+  packa_timer playSound("zmb_perks_packa_deny");
   maps\mp\zombies\_zm_weapons::unacquire_weapon_toggle(weapon);
 
   if(isDefined(player)) {
@@ -845,14 +845,14 @@ upgrade_knuckle_crack_end(gun) {
 }
 
 turn_packapunch_on() {
-  vending_weapon_upgrade_trigger = getentarray("specialty_weapupgrade", "script_noteworthy");
+  vending_weapon_upgrade_trigger = getEntArray("specialty_weapupgrade", "script_noteworthy");
   level.pap_triggers = vending_weapon_upgrade_trigger;
 
   for(i = 0; i < vending_weapon_upgrade_trigger.size; i++) {
     perk = getent(vending_weapon_upgrade_trigger[i].target, "targetname");
 
     if(isDefined(perk))
-      perk setmodel(level.machine_assets["packapunch"].off_model);
+      perk setModel(level.machine_assets["packapunch"].off_model);
   }
 
   for(;;) {
@@ -877,15 +877,15 @@ turn_packapunch_on() {
 }
 
 activate_packapunch() {
-  self setmodel(level.machine_assets["packapunch"].on_model);
-  self playsound("zmb_perks_power_on");
+  self setModel(level.machine_assets["packapunch"].on_model);
+  self playSound("zmb_perks_power_on");
   self vibrate(vectorscale((0, -1, 0), 100.0), 0.3, 0.4, 3);
   timer = 0;
   duration = 0.05;
 }
 
 deactivate_packapunch() {
-  self setmodel(level.machine_assets["packapunch"].off_model);
+  self setModel(level.machine_assets["packapunch"].off_model);
 }
 
 do_initial_power_off_callback(machine_array, perkname) {
@@ -904,20 +904,20 @@ do_initial_power_off_callback(machine_array, perkname) {
 
 turn_sleight_on() {
   while(true) {
-    machine = getentarray("vending_sleight", "targetname");
-    machine_triggers = getentarray("vending_sleight", "target");
+    machine = getEntArray("vending_sleight", "targetname");
+    machine_triggers = getEntArray("vending_sleight", "target");
 
     for(i = 0; i < machine.size; i++)
-      machine[i] setmodel(level.machine_assets["speedcola"].off_model);
+      machine[i] setModel(level.machine_assets["speedcola"].off_model);
 
     level thread do_initial_power_off_callback(machine, "speedcola");
     array_thread(machine_triggers, ::set_power_on, 0);
     level waittill("sleight_on");
 
     for(i = 0; i < machine.size; i++) {
-      machine[i] setmodel(level.machine_assets["speedcola"].on_model);
+      machine[i] setModel(level.machine_assets["speedcola"].on_model);
       machine[i] vibrate(vectorscale((0, -1, 0), 100.0), 0.3, 0.4, 3);
-      machine[i] playsound("zmb_perks_power_on");
+      machine[i] playSound("zmb_perks_power_on");
       machine[i] thread perk_fx("sleight_light");
       machine[i] thread play_loop_on_machine();
     }
@@ -952,8 +952,8 @@ use_solo_revive() {
 
 turn_revive_on() {
   level endon("stop_quickrevive_logic");
-  machine = getentarray("vending_revive", "targetname");
-  machine_triggers = getentarray("vending_revive", "target");
+  machine = getEntArray("vending_revive", "targetname");
+  machine_triggers = getEntArray("vending_revive", "target");
   machine_model = undefined;
   machine_clip = undefined;
 
@@ -971,14 +971,14 @@ turn_revive_on() {
   start_state = solo_mode;
 
   while(true) {
-    machine = getentarray("vending_revive", "targetname");
-    machine_triggers = getentarray("vending_revive", "target");
+    machine = getEntArray("vending_revive", "targetname");
+    machine_triggers = getEntArray("vending_revive", "target");
 
     for(i = 0; i < machine.size; i++) {
       if(flag_exists("solo_game") && flag_exists("solo_revive") && flag("solo_game") && flag("solo_revive"))
         machine[i] hide();
 
-      machine[i] setmodel(level.machine_assets["revive"].off_model);
+      machine[i] setModel(level.machine_assets["revive"].off_model);
 
       if(isDefined(level.quick_revive_final_pos))
         level.quick_revive_default_origin = level.quick_revive_final_pos;
@@ -1005,8 +1005,8 @@ turn_revive_on() {
           continue;
         }
 
-        machine[i] setmodel(level.machine_assets["revive"].on_model);
-        machine[i] playsound("zmb_perks_power_on");
+        machine[i] setModel(level.machine_assets["revive"].on_model);
+        machine[i] playSound("zmb_perks_power_on");
         machine[i] vibrate(vectorscale((0, -1, 0), 100.0), 0.3, 0.4, 3);
         machine_model = machine[i];
         machine[i] thread perk_fx("revive_light");
@@ -1073,7 +1073,7 @@ revive_solo_fx(machine_clip, blocker_model) {
     level thread[[level.revive_solo_fx_func]]();
 
   wait 2.0;
-  self playsound("zmb_box_move");
+  self playSound("zmb_box_move");
   playsoundatposition("zmb_whoosh", self.origin);
 
   if(isDefined(self._linked_ent))
@@ -1096,7 +1096,7 @@ revive_solo_fx(machine_clip, blocker_model) {
   }
 
   self waittill("movedone");
-  playfx(level._effect["poltergeist"], self.origin);
+  playFX(level._effect["poltergeist"], self.origin);
   playsoundatposition("zmb_box_poof", self.origin);
   level clientnotify("drb");
 
@@ -1118,20 +1118,20 @@ revive_solo_fx(machine_clip, blocker_model) {
 
 turn_jugger_on() {
   while(true) {
-    machine = getentarray("vending_jugg", "targetname");
-    machine_triggers = getentarray("vending_jugg", "target");
+    machine = getEntArray("vending_jugg", "targetname");
+    machine_triggers = getEntArray("vending_jugg", "target");
 
     for(i = 0; i < machine.size; i++)
-      machine[i] setmodel(level.machine_assets["juggernog"].off_model);
+      machine[i] setModel(level.machine_assets["juggernog"].off_model);
 
     level thread do_initial_power_off_callback(machine, "juggernog");
     array_thread(machine_triggers, ::set_power_on, 0);
     level waittill("juggernog_on");
 
     for(i = 0; i < machine.size; i++) {
-      machine[i] setmodel(level.machine_assets["juggernog"].on_model);
+      machine[i] setModel(level.machine_assets["juggernog"].on_model);
       machine[i] vibrate(vectorscale((0, -1, 0), 100.0), 0.3, 0.4, 3);
-      machine[i] playsound("zmb_perks_power_on");
+      machine[i] playSound("zmb_perks_power_on");
       machine[i] thread perk_fx("jugger_light");
       machine[i] thread play_loop_on_machine();
     }
@@ -1153,20 +1153,20 @@ turn_jugger_on() {
 
 turn_doubletap_on() {
   while(true) {
-    machine = getentarray("vending_doubletap", "targetname");
-    machine_triggers = getentarray("vending_doubletap", "target");
+    machine = getEntArray("vending_doubletap", "targetname");
+    machine_triggers = getEntArray("vending_doubletap", "target");
 
     for(i = 0; i < machine.size; i++)
-      machine[i] setmodel(level.machine_assets["doubletap"].off_model);
+      machine[i] setModel(level.machine_assets["doubletap"].off_model);
 
     level thread do_initial_power_off_callback(machine, "doubletap");
     array_thread(machine_triggers, ::set_power_on, 0);
     level waittill("doubletap_on");
 
     for(i = 0; i < machine.size; i++) {
-      machine[i] setmodel(level.machine_assets["doubletap"].on_model);
+      machine[i] setModel(level.machine_assets["doubletap"].on_model);
       machine[i] vibrate(vectorscale((0, -1, 0), 100.0), 0.3, 0.4, 3);
-      machine[i] playsound("zmb_perks_power_on");
+      machine[i] playSound("zmb_perks_power_on");
       machine[i] thread perk_fx("doubletap_light");
       machine[i] thread play_loop_on_machine();
     }
@@ -1188,20 +1188,20 @@ turn_doubletap_on() {
 
 turn_marathon_on() {
   while(true) {
-    machine = getentarray("vending_marathon", "targetname");
-    machine_triggers = getentarray("vending_marathon", "target");
+    machine = getEntArray("vending_marathon", "targetname");
+    machine_triggers = getEntArray("vending_marathon", "target");
 
     for(i = 0; i < machine.size; i++)
-      machine[i] setmodel(level.machine_assets["marathon"].off_model);
+      machine[i] setModel(level.machine_assets["marathon"].off_model);
 
     array_thread(machine_triggers, ::set_power_on, 0);
     level thread do_initial_power_off_callback(machine, "marathon");
     level waittill("marathon_on");
 
     for(i = 0; i < machine.size; i++) {
-      machine[i] setmodel(level.machine_assets["marathon"].on_model);
+      machine[i] setModel(level.machine_assets["marathon"].on_model);
       machine[i] vibrate(vectorscale((0, -1, 0), 100.0), 0.3, 0.4, 3);
-      machine[i] playsound("zmb_perks_power_on");
+      machine[i] playSound("zmb_perks_power_on");
       machine[i] thread perk_fx("marathon_light");
       machine[i] thread play_loop_on_machine();
     }
@@ -1223,20 +1223,20 @@ turn_marathon_on() {
 
 turn_deadshot_on() {
   while(true) {
-    machine = getentarray("vending_deadshot_model", "targetname");
-    machine_triggers = getentarray("vending_deadshot", "target");
+    machine = getEntArray("vending_deadshot_model", "targetname");
+    machine_triggers = getEntArray("vending_deadshot", "target");
 
     for(i = 0; i < machine.size; i++)
-      machine[i] setmodel(level.machine_assets["deadshot"].off_model);
+      machine[i] setModel(level.machine_assets["deadshot"].off_model);
 
     level thread do_initial_power_off_callback(machine, "deadshot");
     array_thread(machine_triggers, ::set_power_on, 0);
     level waittill("deadshot_on");
 
     for(i = 0; i < machine.size; i++) {
-      machine[i] setmodel(level.machine_assets["deadshot"].on_model);
+      machine[i] setModel(level.machine_assets["deadshot"].on_model);
       machine[i] vibrate(vectorscale((0, -1, 0), 100.0), 0.3, 0.4, 3);
-      machine[i] playsound("zmb_perks_power_on");
+      machine[i] playSound("zmb_perks_power_on");
       machine[i] thread perk_fx("deadshot_light");
       machine[i] thread play_loop_on_machine();
     }
@@ -1260,20 +1260,20 @@ turn_tombstone_on() {
   level endon("tombstone_removed");
 
   while(true) {
-    machine = getentarray("vending_tombstone", "targetname");
-    machine_triggers = getentarray("vending_tombstone", "target");
+    machine = getEntArray("vending_tombstone", "targetname");
+    machine_triggers = getEntArray("vending_tombstone", "target");
 
     for(i = 0; i < machine.size; i++)
-      machine[i] setmodel(level.machine_assets["tombstone"].off_model);
+      machine[i] setModel(level.machine_assets["tombstone"].off_model);
 
     level thread do_initial_power_off_callback(machine, "tombstone");
     array_thread(machine_triggers, ::set_power_on, 0);
     level waittill("tombstone_on");
 
     for(i = 0; i < machine.size; i++) {
-      machine[i] setmodel(level.machine_assets["tombstone"].on_model);
+      machine[i] setModel(level.machine_assets["tombstone"].on_model);
       machine[i] vibrate(vectorscale((0, -1, 0), 100.0), 0.3, 0.4, 3);
-      machine[i] playsound("zmb_perks_power_on");
+      machine[i] playSound("zmb_perks_power_on");
       machine[i] thread perk_fx("tombstone_light");
       machine[i] thread play_loop_on_machine();
     }
@@ -1299,20 +1299,20 @@ turn_tombstone_on() {
 
 turn_additionalprimaryweapon_on() {
   while(true) {
-    machine = getentarray("vending_additionalprimaryweapon", "targetname");
-    machine_triggers = getentarray("vending_additionalprimaryweapon", "target");
+    machine = getEntArray("vending_additionalprimaryweapon", "targetname");
+    machine_triggers = getEntArray("vending_additionalprimaryweapon", "target");
 
     for(i = 0; i < machine.size; i++)
-      machine[i] setmodel(level.machine_assets["additionalprimaryweapon"].off_model);
+      machine[i] setModel(level.machine_assets["additionalprimaryweapon"].off_model);
 
     level thread do_initial_power_off_callback(machine, "additionalprimaryweapon");
     array_thread(machine_triggers, ::set_power_on, 0);
     level waittill("additionalprimaryweapon_on");
 
     for(i = 0; i < machine.size; i++) {
-      machine[i] setmodel(level.machine_assets["additionalprimaryweapon"].on_model);
+      machine[i] setModel(level.machine_assets["additionalprimaryweapon"].on_model);
       machine[i] vibrate(vectorscale((0, -1, 0), 100.0), 0.3, 0.4, 3);
-      machine[i] playsound("zmb_perks_power_on");
+      machine[i] playSound("zmb_perks_power_on");
       machine[i] thread perk_fx("additionalprimaryweapon_light");
       machine[i] thread play_loop_on_machine();
     }
@@ -1339,20 +1339,20 @@ turn_chugabud_on() {
     maps\mp\_visionset_mgr::vsmgr_register_info("visionset", "zm_whos_who", 5000, level.vsmgr_prio_visionset_zm_whos_who, 1, 1);
 
   while(true) {
-    machine = getentarray("vending_chugabud", "targetname");
-    machine_triggers = getentarray("vending_chugabud", "target");
+    machine = getEntArray("vending_chugabud", "targetname");
+    machine_triggers = getEntArray("vending_chugabud", "target");
 
     for(i = 0; i < machine.size; i++)
-      machine[i] setmodel(level.machine_assets["whoswho"].off_model);
+      machine[i] setModel(level.machine_assets["whoswho"].off_model);
 
     level thread do_initial_power_off_callback(machine, "whoswho");
     array_thread(machine_triggers, ::set_power_on, 0);
     level waittill("chugabud_on");
 
     for(i = 0; i < machine.size; i++) {
-      machine[i] setmodel(level.machine_assets["whoswho"].on_model);
+      machine[i] setModel(level.machine_assets["whoswho"].on_model);
       machine[i] vibrate(vectorscale((0, -1, 0), 100.0), 0.3, 0.4, 3);
-      machine[i] playsound("zmb_perks_power_on");
+      machine[i] playSound("zmb_perks_power_on");
       machine[i] thread perk_fx("tombstone_light");
       machine[i] thread play_loop_on_machine();
     }
@@ -1399,7 +1399,7 @@ play_loop_on_machine() {
     return;
   }
   sound_ent = spawn("script_origin", self.origin);
-  sound_ent playloopsound("zmb_perks_machine_loop");
+  sound_ent playLoopSound("zmb_perks_machine_loop");
   sound_ent linkto(self);
   self waittill("stop_loopsound");
   sound_ent unlink();
@@ -1413,7 +1413,7 @@ perk_fx(fx, turnofffx) {
     wait 3;
 
     if(isDefined(self) && !is_true(self.perk_fx)) {
-      playfxontag(level._effect[fx], self, "tag_origin");
+      playFXOnTag(level._effect[fx], self, "tag_origin");
       self.perk_fx = 1;
     }
   }
@@ -1701,7 +1701,7 @@ vending_trigger_think() {
         cheat = 1;
 
       if(cheat != 1) {
-        self playsound("deny");
+        self playSound("deny");
         player maps\mp\zombies\_zm_audio::create_and_play_dialog("general", "perk_deny", undefined, 1);
         continue;
       }
@@ -1720,13 +1720,13 @@ vending_trigger_think() {
       current_cost = player maps\mp\zombies\_zm_pers_upgrades_functions::pers_upgrade_double_points_cost(current_cost);
 
     if(player.score < current_cost) {
-      self playsound("evt_perk_deny");
+      self playSound("evt_perk_deny");
       player maps\mp\zombies\_zm_audio::create_and_play_dialog("general", "perk_deny", undefined, 0);
       continue;
     }
 
     if(player.num_perks >= player get_player_perk_purchase_limit()) {
-      self playsound("evt_perk_deny");
+      self playSound("evt_perk_deny");
       player maps\mp\zombies\_zm_audio::create_and_play_dialog("general", "sigh");
       continue;
     }
@@ -1778,7 +1778,7 @@ vending_trigger_post_think(player, perk) {
 
 solo_revive_buy_trigger_move(revive_trigger_noteworthy) {
   self endon("death");
-  revive_perk_triggers = getentarray(revive_trigger_noteworthy, "script_noteworthy");
+  revive_perk_triggers = getEntArray(revive_trigger_noteworthy, "script_noteworthy");
 
   foreach(revive_perk_trigger in revive_perk_triggers)
   self thread solo_revive_buy_trigger_move_trigger(revive_perk_trigger);
@@ -2305,7 +2305,7 @@ perk_abort_drinking(post_delay) {
 
 give_random_perk() {
   random_perk = undefined;
-  vending_triggers = getentarray("zombie_vending", "targetname");
+  vending_triggers = getEntArray("zombie_vending", "targetname");
   perks = [];
 
   for(i = 0; i < vending_triggers.size; i++) {
@@ -2332,7 +2332,7 @@ give_random_perk() {
 }
 
 lose_random_perk() {
-  vending_triggers = getentarray("zombie_vending", "targetname");
+  vending_triggers = getEntArray("zombie_vending", "targetname");
   perks = [];
 
   for(i = 0; i < vending_triggers.size; i++) {
@@ -2366,7 +2366,7 @@ update_perk_hud() {
 }
 
 quantum_bomb_give_nearest_perk_validation(position) {
-  vending_triggers = getentarray("zombie_vending", "targetname");
+  vending_triggers = getEntArray("zombie_vending", "targetname");
   range_squared = 32400;
 
   for(i = 0; i < vending_triggers.size; i++) {
@@ -2379,7 +2379,7 @@ quantum_bomb_give_nearest_perk_validation(position) {
 
 quantum_bomb_give_nearest_perk_result(position) {
   [[level.quantum_bomb_play_mystery_effect_func]](position);
-  vending_triggers = getentarray("zombie_vending", "targetname");
+  vending_triggers = getEntArray("zombie_vending", "targetname");
   nearest = 0;
 
   for(i = 1; i < vending_triggers.size; i++) {
@@ -2470,14 +2470,14 @@ perk_unpause(perk) {
 }
 
 perk_pause_all_perks() {
-  vending_triggers = getentarray("zombie_vending", "targetname");
+  vending_triggers = getEntArray("zombie_vending", "targetname");
 
   foreach(trigger in vending_triggers)
   maps\mp\zombies\_zm_perks::perk_pause(trigger.script_noteworthy);
 }
 
 perk_unpause_all_perks() {
-  vending_triggers = getentarray("zombie_vending", "targetname");
+  vending_triggers = getEntArray("zombie_vending", "targetname");
 
   foreach(trigger in vending_triggers)
   maps\mp\zombies\_zm_perks::perk_unpause(trigger.script_noteworthy);
@@ -2558,7 +2558,7 @@ perk_machine_removal(machine, replacement_model) {
     trig notify("warning_dialog");
 
     if(isDefined(trig.target)) {
-      parts = getentarray(trig.target, "targetname");
+      parts = getEntArray(trig.target, "targetname");
 
       for(i = 0; i < parts.size; i++) {
         if(isDefined(parts[i].classname) && parts[i].classname == "script_model") {
@@ -2576,7 +2576,7 @@ perk_machine_removal(machine, replacement_model) {
     }
 
     if(isDefined(replacement_model) && isDefined(machine_model))
-      machine_model setmodel(replacement_model);
+      machine_model setModel(replacement_model);
     else if(!isDefined(replacement_model) && isDefined(machine_model)) {
       machine_model delete();
 
@@ -2639,7 +2639,7 @@ perk_machine_spawn_init() {
       use_trigger triggerignoreteam();
       perk_machine = spawn("script_model", pos[i].origin);
       perk_machine.angles = pos[i].angles;
-      perk_machine setmodel(pos[i].model);
+      perk_machine setModel(pos[i].model);
 
       if(isDefined(level._no_vending_machine_bump_trigs) && level._no_vending_machine_bump_trigs)
         bump_trigger = undefined;
@@ -2655,7 +2655,7 @@ perk_machine_spawn_init() {
 
       collision = spawn("script_model", pos[i].origin, 1);
       collision.angles = pos[i].angles;
-      collision setmodel("zm_collision_perks1");
+      collision setModel("zm_collision_perks1");
       collision.script_noteworthy = "clip";
       collision disconnectpaths();
       use_trigger.clip = collision;
@@ -2788,7 +2788,7 @@ perk_machine_spawn_init() {
           if(isDefined(flag_pos)) {
             perk_machine_flag = spawn("script_model", flag_pos.origin);
             perk_machine_flag.angles = flag_pos.angles;
-            perk_machine_flag setmodel(flag_pos.model);
+            perk_machine_flag setModel(flag_pos.model);
             perk_machine_flag.targetname = "pack_flag";
             perk_machine.target = "pack_flag";
           }
@@ -2886,7 +2886,7 @@ perks_register_clientfield() {
 thread_bump_trigger() {
   for(;;) {
     self waittill("trigger", trigplayer);
-    trigplayer playsound(self.script_sound);
+    trigplayer playSound(self.script_sound);
 
     while(is_player_valid(trigplayer) && trigplayer istouching(self))
       wait 0.5;
@@ -3017,7 +3017,7 @@ update_quickrevive_power_state(poweron) {
 }
 
 restart_quickrevive() {
-  triggers = getentarray("zombie_vending", "targetname");
+  triggers = getEntArray("zombie_vending", "targetname");
 
   foreach(trigger in triggers) {
     if(!isDefined(trigger.script_noteworthy)) {
@@ -3033,7 +3033,7 @@ restart_quickrevive() {
 
 disable_quickrevive(machine_clip) {
   if(is_true(level.solo_revive_init) && flag("solo_revive") && isDefined(level.quick_revive_machine)) {
-    triggers = getentarray("zombie_vending", "targetname");
+    triggers = getEntArray("zombie_vending", "targetname");
 
     foreach(trigger in triggers) {
       if(!isDefined(trigger.script_noteworthy)) {
@@ -3085,7 +3085,7 @@ disable_quickrevive(machine_clip) {
       level.quick_revive_machine_clip trigger_off();
     }
 
-    playfx(level._effect["poltergeist"], level.quick_revive_machine.origin);
+    playFX(level._effect["poltergeist"], level.quick_revive_machine.origin);
 
     if(isDefined(level.quick_revive_trigger) && isDefined(level.quick_revive_trigger.blocker_model))
       level.quick_revive_trigger.blocker_model show();
@@ -3106,7 +3106,7 @@ unhide_quickrevive() {
   if(isDefined(level.quick_revive_final_pos))
     level.quick_revive_machine.origin = level.quick_revive_final_pos;
 
-  playfx(level._effect["poltergeist"], level.quick_revive_machine.origin);
+  playFX(level._effect["poltergeist"], level.quick_revive_machine.origin);
 
   if(isDefined(level.quick_revive_trigger) && isDefined(level.quick_revive_trigger.blocker_model))
     level.quick_revive_trigger.blocker_model hide();
@@ -3188,15 +3188,15 @@ perk_hostmigration() {
 
   while(true) {
     level waittill("host_migration_end");
-    jug = getentarray("vending_jugg", "targetname");
-    tap = getentarray("vending_doubletap", "targetname");
-    mar = getentarray("vending_marathon", "targetname");
-    deadshot = getentarray("vending_deadshot", "targetname");
-    tomb = getentarray("vending_tombstone", "targetname");
-    extraweap = getentarray("vending_additionalprimaryweapon", "targetname");
-    sleight = getentarray("vending_sleight", "targetname");
-    revive = getentarray("vending_revive", "targetname");
-    chugabud = getentarray("vending_chugabud", "targetname");
+    jug = getEntArray("vending_jugg", "targetname");
+    tap = getEntArray("vending_doubletap", "targetname");
+    mar = getEntArray("vending_marathon", "targetname");
+    deadshot = getEntArray("vending_deadshot", "targetname");
+    tomb = getEntArray("vending_tombstone", "targetname");
+    extraweap = getEntArray("vending_additionalprimaryweapon", "targetname");
+    sleight = getEntArray("vending_sleight", "targetname");
+    revive = getEntArray("vending_revive", "targetname");
+    chugabud = getEntArray("vending_chugabud", "targetname");
 
     foreach(perk in jug) {
       if(isDefined(perk.model) && perk.model == level.machine_assets["juggernog"].on_model) {
@@ -3397,5 +3397,5 @@ _register_undefined_perk(str_perk) {
     level._custom_perks = [];
 
   if(!isDefined(level._custom_perks[str_perk]))
-    level._custom_perks[str_perk] = spawnstruct();
+    level._custom_perks[str_perk] = spawnStruct();
 }

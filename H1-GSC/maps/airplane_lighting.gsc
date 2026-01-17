@@ -74,23 +74,23 @@ override_scriptmodel_lightorigins() {
   common_scripts\utility::run_thread_on_noteworthy("override_light_origin", ::set_new_lighting_origin);
   var_0 = getent("door_light_origin_override", "script_noteworthy");
 
-  if(isdefined(var_0)) {
+  if(isDefined(var_0)) {
     var_1 = getent("right_door_model", "script_noteworthy");
     var_2 = getent("left_door_model", "script_noteworthy");
     var_3 = [var_1, var_2];
 
     foreach(var_5 in var_3) {
-      if(isdefined(var_5))
+      if(isDefined(var_5))
         var_5 overridelightingorigin(var_0.origin);
     }
   }
 }
 
 set_new_lighting_origin() {
-  if(isdefined(self.target) && self.target != "") {
+  if(isDefined(self.target) && self.target != "") {
     var_0 = getent(self.target, "targetname");
 
-    if(isdefined(var_0))
+    if(isDefined(var_0))
       self overridelightingorigin(var_0.origin);
   }
 }

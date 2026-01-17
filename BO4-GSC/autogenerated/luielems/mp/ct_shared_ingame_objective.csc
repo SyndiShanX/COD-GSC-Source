@@ -4,11 +4,9 @@
 ********************************************************************/
 
 #include scripts\core_common\lui_shared;
-
 #namespace ct_shared_ingame_objective;
 
 class cct_shared_ingame_objective: cluielem {
-
   function set_objpoints(localclientnum, value) {
     set_data(localclientnum, "objpoints", value);
   }
@@ -222,13 +220,13 @@ class cct_shared_ingame_objective: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, #"ct_shared_ingame_objective");
+    cluielem::open(localclientnum, # "ct_shared_ingame_objective");
   }
 
   function function_fa582112(localclientnum) {
     cluielem::function_fa582112(localclientnum);
-    set_state(localclientnum, #"defaultstate");
-    set_data(localclientnum, "objectiveText", #"");
+    set_state(localclientnum, # "defaultstate");
+    set_data(localclientnum, "objectiveText", # "");
     set_data(localclientnum, "objpoints", 0);
   }
 

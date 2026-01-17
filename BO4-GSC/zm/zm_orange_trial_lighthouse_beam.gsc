@@ -19,7 +19,6 @@
 #include scripts\zm_common\zm_pack_a_punch;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
-
 #namespace zm_orange_trial_lighthouse_beam;
 
 autoexec __init__system__() {
@@ -34,7 +33,7 @@ __init__() {
   zm_trial::register_challenge(#"lighthouse_beam", &on_begin, &on_end);
 }
 
-private on_begin() {
+on_begin() {
   str_targetname = "trials_lighthouse_beam";
   level setup_lighthouse();
   callback::function_33f0ddd3(&function_33f0ddd3);
@@ -45,7 +44,7 @@ private on_begin() {
   }
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   level notify(#"hash_2b53ed06a97eb26c");
   level.var_ab11c23d function_f223e16f(round_reset);
   callback::function_824d206(&function_33f0ddd3);
@@ -60,7 +59,7 @@ private on_end(round_reset) {
   level zm_orange_lighthouse::function_d85bd834();
 }
 
-private setup_lighthouse() {
+setup_lighthouse() {
   level notify(#"hash_661044fd7c7faa55");
 
   if(level.var_7d8bf93f zm_pack_a_punch::is_on()) {
@@ -102,7 +101,7 @@ private setup_lighthouse() {
 
     if(isDefined(level.var_ab11c23d.vh_target)) {
       level.var_ab11c23d.vh_target.b_moving = 0;
-      level.var_ab11c23d.vh_target clientfield::set("" + #"hash_19bce46b8ab82440", 0);
+      level.var_ab11c23d.vh_target clientfield::set("" + # "hash_19bce46b8ab82440", 0);
       waitframe(1);
       level.var_ab11c23d.vh_target delete();
     }
@@ -119,7 +118,7 @@ private setup_lighthouse() {
 }
 
 function_dbad2f5a() {
-  self endon(#"death", #"hash_2b53ed06a97eb26c");
+  self endon(#"death", # "hash_2b53ed06a97eb26c");
   level.var_ab11c23d notify(#"hash_78fc5bbd712046b0");
 
   for(vh_target = spawner::simple_spawn_single(getent("virgil", "targetname")); !isDefined(vh_target); vh_target = spawner::simple_spawn_single(getent("virgil", "targetname"))) {
@@ -137,15 +136,15 @@ function_dbad2f5a() {
   self.vh_target.e_spotlight linkto(self.vh_target, "tag_origin", (0, 0, 390), (90, 0, 0));
   self waittill(#"rotatedone");
   level.var_ab11c23d clientfield::set("lighthouse_on", 3);
-  self.vh_target.e_spotlight clientfield::set("" + #"trials_lighthouse_beam", 2);
+  self.vh_target.e_spotlight clientfield::set("" + # "trials_lighthouse_beam", 2);
   self.vh_target thread zm_orange_lighthouse::function_18f63949();
   self zm_orange_lighthouse::function_2b2f2a7f();
   wait 1;
   self.vh_target thread function_b502c51(self.var_da138ae4);
 }
 
-private function_b502c51(nd_start) {
-  self endon(#"death", #"hash_2b53ed06a97eb26c");
+function_b502c51(nd_start) {
+  self endon(#"death", # "hash_2b53ed06a97eb26c");
 
   while(true) {
     self thread vehicle::get_on_and_go_path(nd_start);
@@ -159,7 +158,7 @@ function_f223e16f(round_reset) {
   self endon(#"death");
   self.vh_target.b_moving = 0;
   wait 2;
-  self.vh_target clientfield::set("" + #"hash_19bce46b8ab82440", 0);
+  self.vh_target clientfield::set("" + # "hash_19bce46b8ab82440", 0);
   self.vh_target.e_spotlight delete();
   self.vh_target delete();
 
@@ -177,7 +176,7 @@ function_f223e16f(round_reset) {
   }
 }
 
-private function_1e902f3b() {
+function_1e902f3b() {
   self endon(#"disconnect");
   level endon(#"hash_7646638df88a3656");
   var_407eb07 = 0;
@@ -212,7 +211,7 @@ function_91f0d131() {
   return 0;
 }
 
-private function_33f0ddd3(s_event) {
+function_33f0ddd3(s_event) {
   if(s_event.event === "give_weapon") {
     var_f2b6fe6e = 0;
 

@@ -8,8 +8,7 @@
 #include clientscripts\mp\createfx\mp_paintball_fx;
 #include clientscripts\mp\_fx;
 
-precache_scripted_fx() {
-}
+precache_scripted_fx() {}
 
 precache_createfx_fx() {
   level._effect["fx_pntbll_light_ray_sun_wide_wndw"] = loadfx("light/fx_pntbll_light_ray_sun_wide_wndw");

@@ -64,8 +64,8 @@ init_a10() {
   common_scripts\utility::flag_init("FLAG_allow_a10_strafe_crash");
   common_scripts\utility::flag_init("a10_mechanic_off");
   common_scripts\utility::flag_init("a10_achievement_achieved");
-  maps\_utility::add_hint_string("hint_a10", & "HOMECOMING_HINT_USE_A10_MECHANIC", ::a10_hint_func);
-  maps\_utility::add_hint_string("hint_a10_fire", & "HOMECOMING_HINT_A10_FIRE", ::a10_fire_hint_func);
+  maps\_utility::add_hint_string("hint_a10", &"HOMECOMING_HINT_USE_A10_MECHANIC", ::a10_hint_func);
+  maps\_utility::add_hint_string("hint_a10_fire", &"HOMECOMING_HINT_A10_FIRE", ::a10_fire_hint_func);
   common_scripts\utility::flag_set("player_not_doing_strafe");
   common_scripts\utility::array_thread(getEntArray("strafe_fov_trig", "targetname"), ::a10_fov_trig);
   level._effect["contrail"] = loadfx("fx/smoke/jet_contrail");

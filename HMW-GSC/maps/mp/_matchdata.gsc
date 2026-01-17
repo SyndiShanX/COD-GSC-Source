@@ -1,5 +1,5 @@
 init() {
-  if(!isdefined(game["gamestarted"])) {
+  if(!isDefined(game["gamestarted"])) {
     setmatchdatadef("mp/matchdata.ddl");
     setmatchdata("map", level.script);
 
@@ -61,17 +61,17 @@ matchstarted() {
 logbreadcrumbdata() {
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     var_0 = maps\mp\_utility::getgametimepassedseconds();
 
     foreach(var_2 in level.players) {
       if(isbot(var_2) || istestclient(var_2)) {
         continue;
       }
-      if(maps\mp\_utility::isreallyalive(var_2) && isdefined(var_2.lifeid) && canloglife(var_2.lifeid)) {
+      if(maps\mp\_utility::isreallyalive(var_2) && isDefined(var_2.lifeid) && canloglife(var_2.lifeid)) {
         var_3 = 31;
 
-        if(isdefined(var_2.lastshotby))
+        if(isDefined(var_2.lastshotby))
           var_3 = var_2.lastshotby;
 
         recordbreadcrumbdataforplayer(var_2, var_2.lifeid, var_0, var_3);
@@ -79,7 +79,7 @@ logbreadcrumbdata() {
       }
     }
 
-    if(isdefined(level.iszombiegame) && level.iszombiegame) {
+    if(isDefined(level.iszombiegame) && level.iszombiegame) {
       wait 5;
       continue;
     }
@@ -91,12 +91,12 @@ logbreadcrumbdata() {
 accumulateplayerpingdata() {
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     foreach(var_1 in level.players) {
       if(isbot(var_1) || istestclient(var_1)) {
         continue;
       }
-      if(!isdefined(var_1.pers["pingAccumulation"]) || !isdefined(var_1.pers["minPing"]) || !isdefined(var_1.pers["maxPing"]) || !isdefined(var_1.pers["pingSampleCount"])) {
+      if(!isDefined(var_1.pers["pingAccumulation"]) || !isDefined(var_1.pers["minPing"]) || !isDefined(var_1.pers["maxPing"]) || !isDefined(var_1.pers["pingSampleCount"])) {
         continue;
       }
       var_2 = var_1 getcurrentping();
@@ -179,7 +179,7 @@ logplayerlife(var_0) {
   setmatchdata("lives", self.lifeid, "spawnPos", 2, int(self.spawnpos[2]));
   setmatchdata("lives", self.lifeid, "team", self.team);
 
-  if(isdefined(self.spawntimedecisecondsfrommatchstart))
+  if(isDefined(self.spawntimedecisecondsfrommatchstart))
     setmatchdata("lives", self.lifeid, "spawnTimeDeciSecondsFromMatchStart", self.spawntimedecisecondsfrommatchstart);
   else
     setmatchdata("lives", self.lifeid, "spawnTimeDeciSecondsFromMatchStart", -1);
@@ -190,8 +190,8 @@ logplayerlife(var_0) {
   var_4 = maps\mp\_utility::clamptoshort(self.pers["score"] - self.scoreatlifestart);
   setmatchdata("lives", self.lifeid, "scoreEarnedDuringThisLife", var_4);
 
-  if(isdefined(self.pers["summary"]) && isdefined(self.pers["summary"]["xp"])) {
-    if(isdefined(self.xpatlifestart)) {
+  if(isDefined(self.pers["summary"]) && isDefined(self.pers["summary"]["xp"])) {
+    if(isDefined(self.xpatlifestart)) {
       var_5 = maps\mp\_utility::clamptoshort(self.pers["summary"]["xp"] - self.xpatlifestart);
       setmatchdata("lives", self.lifeid, "xpEarnedDuringThisLife", var_5);
     }
@@ -226,7 +226,7 @@ logloadout() {
   var_1 = self.curclass;
   var_2 = 0;
 
-  for (var_2 = 0; var_2 < level.maxloadouts; var_2++) {
+  for(var_2 = 0; var_2 < level.maxloadouts; var_2++) {
     var_3 = getmatchdata("players", self.clientid, "loadouts", var_2, "slotUsed");
 
     if(!var_3) {
@@ -263,7 +263,7 @@ logloadout() {
     var_6 = var_8["loadoutEquipment"];
     var_7 = var_8["loadoutOffhand"];
 
-    for (var_19 = 0; var_19 < 3; var_19++)
+    for(var_19 = 0; var_19 < 3; var_19++)
       var_5[var_19] = var_8["loadoutPerks"][var_19];
 
     var_20 = var_8["loadoutMelee"];
@@ -274,7 +274,7 @@ logloadout() {
     var_11 = maps\mp\gametypes\_class::cac_getweaponfurniturekit(var_21, 0);
     var_12 = maps\mp\gametypes\_class::cac_getweaponcamo(var_21, 0);
 
-    for (var_19 = 0; var_19 < 3; var_19++)
+    for(var_19 = 0; var_19 < 3; var_19++)
       var_5[var_19] = maps\mp\gametypes\_class::cac_getperk(var_21, var_19);
 
     var_14 = maps\mp\gametypes\_class::cac_getweapon(var_21, 1);
@@ -291,7 +291,7 @@ logloadout() {
     var_11 = maps\mp\gametypes\_class::table_getweaponfurniturekit(level.classtablename, var_21, 0);
     var_12 = maps\mp\gametypes\_class::table_getweaponcamo(level.classtablename, var_21, 0);
 
-    for (var_19 = 0; var_19 < 3; var_19++)
+    for(var_19 = 0; var_19 < 3; var_19++)
       var_5[var_19] = maps\mp\gametypes\_class::table_getperk(level.classtablename, var_21, var_19);
 
     var_14 = maps\mp\gametypes\_class::table_getweapon(level.classtablename, var_21, 1);
@@ -305,7 +305,7 @@ logloadout() {
 
   setmatchdata("players", self.clientid, "loadouts", var_2, "primaryWeapon", var_9);
 
-  for (var_19 = 0; var_19 < 3; var_19++)
+  for(var_19 = 0; var_19 < 3; var_19++)
     setmatchdata("players", self.clientid, "loadouts", var_2, "perkSlots", var_19, var_5[var_19]);
 
   setmatchdata("players", self.clientid, "loadouts", var_2, "secondaryWeapon", var_14);
@@ -344,12 +344,12 @@ logplayerandkilleradsandfov(var_0, var_1) {
     if(var_1 playerads() > 0.5)
       setmatchdata("lives", var_0, "killerWasADS", 1);
 
-    var_2 = var_1 geteye();
+    var_2 = var_1 getEye();
 
     if(common_scripts\utility::within_fov(var_2, var_1.angles, self.origin, cos(getdvarfloat("cg_fov"))))
       setmatchdata("lives", var_0, "victimWasInKillersFOV", 1);
 
-    var_3 = self geteye();
+    var_3 = self getEye();
 
     if(common_scripts\utility::within_fov(var_3, self.angles, var_1.origin, cos(getdvarfloat("cg_fov"))))
       setmatchdata("lives", var_0, "killerWasInVictimsFOV", 1);
@@ -386,9 +386,9 @@ determineweaponnameandattachments(var_0, var_1) {
     var_7 = maps\mp\_utility::strip_suffix(var_0, "_mp");
   else if(var_0 == "destructible")
     var_7 = var_0;
-  else if(isdefined(var_2) && (var_2 == "primary" || var_2 == "altmode" || var_2 == "melee") && (var_3 == "pistol" || var_3 == "smg" || var_3 == "rifle" || var_3 == "spread" || var_3 == "mg" || var_3 == "grenade" || var_3 == "rocketlauncher" || var_3 == "sniper" || var_3 == "cone" || var_3 == "beam" || var_3 == "shield")) {
+  else if(isDefined(var_2) && (var_2 == "primary" || var_2 == "altmode" || var_2 == "melee") && (var_3 == "pistol" || var_3 == "smg" || var_3 == "rifle" || var_3 == "spread" || var_3 == "mg" || var_3 == "grenade" || var_3 == "rocketlauncher" || var_3 == "sniper" || var_3 == "cone" || var_3 == "beam" || var_3 == "shield")) {
     if(var_2 == "altmode") {
-      if(isdefined(var_1))
+      if(isDefined(var_1))
         var_0 = var_1;
     }
 
@@ -433,24 +433,24 @@ determineweaponnameandattachments(var_0, var_1) {
       var_19 = var_8[1] + "_" + var_8[2];
       var_7 = var_19;
 
-      if(isdefined(var_8[4]) && maps\mp\_utility::isattachment(var_8[4])) {
+      if(isDefined(var_8[4]) && maps\mp\_utility::isattachment(var_8[4])) {
         var_17 = maps\mp\_utility::attachmentmap_tobase(var_8[4]);
         var_4[0] = var_17;
       }
 
-      if(isdefined(var_8[5]) && maps\mp\_utility::isattachment(var_8[5])) {
+      if(isDefined(var_8[5]) && maps\mp\_utility::isattachment(var_8[5])) {
         var_17 = maps\mp\_utility::attachmentmap_tobase(var_8[5]);
         var_4[1] = var_17;
       }
     } else {
       var_8[var_8.size - 1] = undefined;
 
-      if(isdefined(var_8[1]) && var_2 != "altmode") {
+      if(isDefined(var_8[1]) && var_2 != "altmode") {
         var_17 = maps\mp\_utility::attachmentmap_tobase(var_8[1]);
         var_4[0] = var_17;
       }
 
-      if(isdefined(var_8[2]) && var_2 != "altmode") {
+      if(isDefined(var_8[2]) && var_2 != "altmode") {
         var_17 = maps\mp\_utility::attachmentmap_tobase(var_8[2]);
         var_4[1] = var_17;
       }
@@ -461,7 +461,7 @@ determineweaponnameandattachments(var_0, var_1) {
   } else
     var_7 = var_0;
 
-  var_20 = spawnstruct();
+  var_20 = spawnStruct();
   var_20.weaponname = var_7;
   var_20.attachments = var_4;
   var_20.attachkit = var_5;
@@ -485,13 +485,13 @@ logfirefightshotshits(var_0, var_1) {
   if(self.currentfirefightshots > 0)
     setmatchdata("lives", var_0, "shots", maps\mp\_utility::clamptobyte(self.currentfirefightshots));
 
-  if(isdefined(var_1.enemyhitcounts) && isdefined(var_1.enemyhitcounts[self.guid]) && var_1.enemyhitcounts[self.guid] > 0)
+  if(isDefined(var_1.enemyhitcounts) && isDefined(var_1.enemyhitcounts[self.guid]) && var_1.enemyhitcounts[self.guid] > 0)
     setmatchdata("lives", var_0, "hits", maps\mp\_utility::clamptobyte(var_1.enemyhitcounts[self.guid]));
 
   if(var_1.currentfirefightshots > 0)
     setmatchdata("lives", var_0, "killerShots", maps\mp\_utility::clamptobyte(var_1.currentfirefightshots));
 
-  if(isdefined(self.enemyhitcounts) && isdefined(self.enemyhitcounts[var_1.guid]) && self.enemyhitcounts[var_1.guid] > 0)
+  if(isDefined(self.enemyhitcounts) && isDefined(self.enemyhitcounts[var_1.guid]) && self.enemyhitcounts[var_1.guid] > 0)
     setmatchdata("lives", var_0, "killerHits", maps\mp\_utility::clamptobyte(self.enemyhitcounts[var_1.guid]));
 }
 
@@ -515,7 +515,7 @@ logassists(var_0, var_1) {
     return;
   }
   if(isplayer(self) && canlogclient(self)) {
-    if(isdefined(self.attackerdata)) {
+    if(isDefined(self.attackerdata)) {
       var_2 = 0;
 
       foreach(var_4 in self.attackerdata) {
@@ -533,7 +533,7 @@ logassists(var_0, var_1) {
       }
 
       if(var_2 < 5) {
-        for (var_6 = var_2; var_6 < 5; var_6++)
+        for(var_6 = var_2; var_6 < 5; var_6++)
           setmatchdata("lives", var_0, "assists", var_6, "assistingPlayerIndex", 255);
       }
     }
@@ -553,7 +553,7 @@ logspecialassists(var_0, var_1) {
     return;
   }
   if(var_1 == "assist_uav" || var_1 == "assist_concussion" || var_1 == "assist_flash") {
-    for (var_3 = 0; var_3 < 5; var_3++) {
+    for(var_3 = 0; var_3 < 5; var_3++) {
       var_4 = getmatchdata("lives", var_2, "assists", var_3, "assistingPlayerIndex");
 
       if(var_4 == var_0.clientid || var_4 == 255) {
@@ -566,9 +566,7 @@ logspecialassists(var_0, var_1) {
           setmatchdata("lives", var_2, "assists", var_3, "assistConcussion", 1);
         else if(var_1 == "assist_flash")
           setmatchdata("lives", var_2, "assists", var_3, "assistFlash", 1);
-        else {
-
-        }
+        else {}
 
         break;
       }
@@ -586,7 +584,7 @@ logplayerdeath(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   if(level.iszombiegame) {
     return;
   }
-  if(isdefined(level.ishorde) && level.ishorde) {
+  if(isDefined(level.ishorde) && level.ishorde) {
     return;
   }
   logplayerandkilleradsandfov(var_0, var_1);
@@ -608,7 +606,7 @@ logplayerdeath(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   if(maps\mp\_utility::iskillstreakweapon(var_8.weaponnamefull)) {
     setmatchdata("lives", var_0, "modifiers", "killstreak", 1);
 
-    if(isdefined(var_1.currentkillstreakindex)) {
+    if(isDefined(var_1.currentkillstreakindex)) {
       var_11 = getmatchdata("killstreaks", var_1.currentkillstreakindex, "killsTotal");
       var_11++;
       setmatchdata("killstreaks", var_1.currentkillstreakindex, "killsTotal", maps\mp\_utility::clamptoshort(var_11));
@@ -625,7 +623,7 @@ logplayerdeath(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
   if(var_12.weapontype != "exclusive") {
     if(maps\mp\_utility::iskillstreakweapon(var_12.weaponname)) {
-      if(isdefined(self.primaryweapon)) {
+      if(isDefined(self.primaryweapon)) {
         var_13 = maps\mp\_utility::getbaseweaponname(self.primaryweapon);
         setmatchdata("lives", var_0, "victimCurrentWeaponAtDeath", var_13);
       }
@@ -633,7 +631,7 @@ logplayerdeath(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
       setmatchdata("lives", var_0, "victimCurrentWeaponAtDeath", var_12.weaponname);
   }
 
-  if(isdefined(self.pickedupweaponfrom) && isdefined(self.pickedupweaponfrom[var_12.weaponnamefull]))
+  if(isDefined(self.pickedupweaponfrom) && isDefined(self.pickedupweaponfrom[var_12.weaponnamefull]))
     setmatchdata("lives", var_0, "victimCurrentWeaponPickedUp", 1);
 
   setmatchdata("lives", var_0, "meansOfDeath", var_3);
@@ -648,13 +646,13 @@ logplayerdeath(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     setmatchdata("lives", var_0, "killerAngles", 0, int(var_1.angles[0]));
     setmatchdata("lives", var_0, "killerAngles", 1, int(var_1.angles[1]));
     setmatchdata("lives", var_0, "killerAngles", 2, int(var_1.angles[2]));
-    var_15 = anglestoforward((0, self.angles[1], 0));
+    var_15 = anglesToForward((0, self.angles[1], 0));
     var_16 = self.origin - var_1.origin;
     var_16 = vectornormalize((var_16[0], var_16[1], 0));
     var_14 = vectordot(var_15, var_16);
     setmatchdata("lives", var_0, "dotOfDeath", var_14);
 
-    if(isdefined(var_1.pickedupweaponfrom) && isdefined(var_1.pickedupweaponfrom[var_8.weaponnamefull]))
+    if(isDefined(var_1.pickedupweaponfrom) && isDefined(var_1.pickedupweaponfrom[var_8.weaponnamefull]))
       setmatchdata("lives", var_0, "killerCurrentWeaponPickedUp", 1);
   } else {
     setmatchdata("lives", var_0, "killer", 255);
@@ -700,12 +698,12 @@ logplayerdeath(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
   var_28 = var_1.clientid;
 
-  if(!isdefined(var_28))
+  if(!isDefined(var_28))
     var_28 = -1;
 
   var_29 = var_1.lifeid;
 
-  if(!isdefined(var_29))
+  if(!isDefined(var_29))
     var_29 = -1;
 
   var_30 = 0.1;
@@ -713,7 +711,7 @@ logplayerdeath(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   if(self.damage_info.size > 1)
     var_18 = 0;
 
-  if(isdefined(self.damage_info[var_1 getentitynumber()]))
+  if(isDefined(self.damage_info[var_1 getentitynumber()]))
     var_19 = self.damage_info[var_1 getentitynumber()].num_shots;
 
   var_31 = self.pers["primaryWeapon"] + "_mp";
@@ -722,32 +720,32 @@ logplayerdeath(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   if(issubstr(var_8.weaponname, "loot"))
     var_23 = 1;
 
-  if(isdefined(self.spawninfo) && isdefined(self.spawninfo.spawntime))
+  if(isDefined(self.spawninfo) && isDefined(self.spawninfo.spawntime))
     var_25 = (var_27 - self.spawninfo.spawntime) / 1000.0;
 
-  if(isdefined(var_1.spawninfo) && isdefined(var_1.spawninfo.spawntime) && isplayer(var_1))
+  if(isDefined(var_1.spawninfo) && isDefined(var_1.spawninfo.spawntime) && isplayer(var_1))
     var_26 = (var_27 - var_1.spawninfo.spawntime) / 1000.0;
 
   reconspatialevent(self.origin, "script_mp_playerdeath: player_name %s, life_id %d, angles %v, death_dot %f, is_jugg %b, is_killstreak %b, mod %s, gameTime %d, spawnToDeathTime %f, attackerAliveTime %f, attacker_life_id %d", self.name, self.lifeid, self.angles, var_14, var_1 maps\mp\_utility::isjuggernaut(), maps\mp\_utility::iskillstreakweapon(var_8.weaponnamefull), var_3, var_27, var_25, var_26, var_29);
   reconspatialevent(self.origin, "script_mp_weaponinfo: player_name %s, life_id %d, isbot %b, attacker_name %s, attacker %d, attacker_pos %v, distance %f, ads_fraction %f, is_jugg %b, is_killstreak %b, weapon_type %s, weapon_class %s, weapon_name %s, isLoot %b, attachKit %s, furnitureKit %s, numShots %d, soleAttacker %b, gameTime %d", self.name, self.lifeid, var_20, var_17, var_28, var_1.origin, var_22, var_24, var_1 maps\mp\_utility::isjuggernaut(), maps\mp\_utility::iskillstreakweapon(var_8.weaponnamefull), var_8.weapontype, var_8.weaponclass, var_8.weaponname, var_23, var_8.attachkit, var_8.furniturekit, var_19, var_18, var_27);
   reconspatialevent(self.origin, "script_mp_weaponinfo_ext: player_name %s, life_id %d, gametime %d, version %f, victimWeapon %s, victimWeaponClass %s, killerIsBot %b", self.name, self.lifeid, var_27, var_30, var_31, var_32, var_21);
 
-  if(!isdefined(level.matchdata))
+  if(!isDefined(level.matchdata))
     level.matchdata = [];
 
-  if(!isdefined(level.matchdata["deathCount"]))
+  if(!isDefined(level.matchdata["deathCount"]))
     level.matchdata["deathCount"] = 1;
   else
     level.matchdata["deathCount"]++;
 
   if(var_25 <= 3.0) {
-    if(!isdefined(level.matchdata["badSpawnDiedTooFastCount"]))
+    if(!isDefined(level.matchdata["badSpawnDiedTooFastCount"]))
       level.matchdata["badSpawnDiedTooFastCount"] = 1;
     else
       level.matchdata["badSpawnDiedTooFastCount"]++;
 
     if(self.spawninfo.badspawn == 0) {
-      if(!isdefined(level.matchdata["badSpawnByAnyMeansCount"]))
+      if(!isDefined(level.matchdata["badSpawnByAnyMeansCount"]))
         level.matchdata["badSpawnByAnyMeansCount"] = 1;
       else
         level.matchdata["badSpawnByAnyMeansCount"]++;
@@ -757,13 +755,13 @@ logplayerdeath(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   }
 
   if(isplayer(var_1) && var_26 <= 3.0) {
-    if(!isdefined(level.matchdata["badSpawnKilledTooFastCount"]))
+    if(!isDefined(level.matchdata["badSpawnKilledTooFastCount"]))
       level.matchdata["badSpawnKilledTooFastCount"] = 1;
     else
       level.matchdata["badSpawnKilledTooFastCount"]++;
 
     if(var_1.spawninfo.badspawn == 0) {
-      if(!isdefined(level.matchdata["badSpawnByAnyMeansCount"]))
+      if(!isDefined(level.matchdata["badSpawnByAnyMeansCount"]))
         level.matchdata["badSpawnByAnyMeansCount"] = 1;
       else
         level.matchdata["badSpawnByAnyMeansCount"]++;
@@ -789,7 +787,7 @@ logplayerdata() {
   else
     setmatchdata("players", self.clientid, "longestStreak", maps\mp\_utility::getpersstat("longestStreak"));
 
-  if(isdefined(self) && isdefined(self.pers) && isdefined(self.pers["validationInfractions"])) {
+  if(isDefined(self) && isDefined(self.pers) && isDefined(self.pers["validationInfractions"])) {
     if(maps\mp\_utility::getpersstat("validationInfractions") > 255)
       setmatchdata("players", self.clientid, "validationInfractions", 255);
     else
@@ -798,7 +796,7 @@ logplayerdata() {
 }
 
 combinelbstat(var_0, var_1, var_2, var_3) {
-  if(!isdefined(var_3))
+  if(!isDefined(var_3))
     var_3 = var_1;
 
   var_4 = var_0 getplayerdata(common_scripts\utility::getstatsgroup_common(), "round", var_3);
@@ -810,18 +808,18 @@ endofgamesummarylogger() {
   foreach(var_1 in level.players) {
     wait 0.05;
 
-    if(!isdefined(var_1)) {
+    if(!isDefined(var_1)) {
       continue;
     }
     logplayerping(var_1);
 
-    if(isdefined(var_1.detectedexploit) && var_1.detectedexploit && var_1 maps\mp\_utility::rankingenabled())
+    if(isDefined(var_1.detectedexploit) && var_1.detectedexploit && var_1 maps\mp\_utility::rankingenabled())
       var_1 setplayerdata(common_scripts\utility::getstatsgroup_ranked(), "restXPGoal", var_1.detectedexploit);
 
     var_2 = undefined;
     var_3 = 0;
 
-    if(isdefined(game["challengeStruct"]) && isdefined(game["challengeStruct"]["challengesCompleted"]) && isdefined(game["challengeStruct"]["challengesCompleted"][var_1.guid]))
+    if(isDefined(game["challengeStruct"]) && isDefined(game["challengeStruct"]["challengesCompleted"]) && isDefined(game["challengeStruct"]["challengesCompleted"][var_1.guid]))
       var_3 = 1;
 
     if(var_3) {
@@ -836,8 +834,8 @@ endofgamesummarylogger() {
     } else
       var_1 setplayerdata(common_scripts\utility::getstatsgroup_common(), "round", "challengeNumCompleted", 0);
 
-    for (var_5 = 0; var_5 < 20; var_5++) {
-      if(isdefined(var_2) && isdefined(var_2[var_5]) && var_2[var_5] != 8000) {
+    for(var_5 = 0; var_5 < 20; var_5++) {
+      if(isDefined(var_2) && isDefined(var_2[var_5]) && var_2[var_5] != 8000) {
         var_1 setplayerdata(common_scripts\utility::getstatsgroup_common(), "round", "challengesCompleted", var_5, var_2[var_5]);
         continue;
       }
@@ -909,7 +907,7 @@ endofgamesummarylogger() {
 }
 
 logplayerping(var_0) {
-  if(!isdefined(var_0.pers["maxPing"]) || !isdefined(var_0.pers["minPing"]) || !isdefined(var_0.pers["pingAccumulation"]) || !isdefined(var_0.pers["pingSampleCount"])) {
+  if(!isDefined(var_0.pers["maxPing"]) || !isDefined(var_0.pers["minPing"]) || !isDefined(var_0.pers["pingAccumulation"]) || !isDefined(var_0.pers["pingSampleCount"])) {
     return;
   }
   if(var_0.pers["pingSampleCount"] > 0 && var_0.pers["maxPing"] > 0) {
@@ -948,7 +946,7 @@ canlogclient(var_0) {
 
   var_1 = var_0.code_classname;
 
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     var_1 = "undefined";
 
   return var_0.clientid < level.maxlogclients;
@@ -973,10 +971,10 @@ logweaponstat(var_0, var_1, var_2) {
   if(maps\mp\_utility::iskillstreakweapon(var_0)) {
     return;
   }
-  if(!isdefined(self.pers["mpWeaponStats"][var_0]))
+  if(!isDefined(self.pers["mpWeaponStats"][var_0]))
     self.pers["mpWeaponStats"][var_0] = [];
 
-  if(!isdefined(self.pers["mpWeaponStats"][var_0][var_1]))
+  if(!isDefined(self.pers["mpWeaponStats"][var_0][var_1]))
     self.pers["mpWeaponStats"][var_0][var_1] = 0;
 
   var_3 = self.pers["mpWeaponStats"][var_0][var_1];
@@ -988,7 +986,7 @@ buildbaseweaponlist() {
   var_0 = [];
   var_1 = 149;
 
-  for (var_2 = 0; var_2 <= var_1; var_2++) {
+  for(var_2 = 0; var_2 <= var_1; var_2++) {
     var_3 = tablelookup("mp/statstable.csv", 0, var_2, 4);
 
     if(var_3 == "") {
@@ -1058,7 +1056,7 @@ logfinalstats() {
     var_1 = self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "mmr");
     setmatchdata("players", self.clientid, "endMMR", var_1);
 
-    if(isdefined(self.pers["rank"])) {
+    if(isDefined(self.pers["rank"])) {
       var_3 = maps\mp\_utility::clamptobyte(maps\mp\gametypes\_rank::getrank());
       setmatchdata("players", self.clientid, "rankAtEnd", var_3);
     }
@@ -1067,7 +1065,7 @@ logfinalstats() {
 
 reconlogplayerinfo() {
   level endon("shutdownGame_called");
-  for (;;) {
+  for(;;) {
     if(getdvarint("cl_freemove") == 0) {
       foreach(var_1 in level.players) {
         var_2 = 0;
@@ -1078,27 +1076,27 @@ reconlogplayerinfo() {
         if(istestclient(var_1)) {
           continue;
         }
-        if(!isdefined(var_1.origin)) {
+        if(!isDefined(var_1.origin)) {
           continue;
         }
         var_3 = "disconnected?";
 
-        if(isdefined(var_1.name))
+        if(isDefined(var_1.name))
           var_3 = var_1.name;
 
         var_4 = -1;
 
-        if(isdefined(var_1.clientid))
+        if(isDefined(var_1.clientid))
           var_4 = var_1.clientid;
 
         var_5 = (-999.0, -999.0, -999.0);
 
-        if(isdefined(var_1.angles))
+        if(isDefined(var_1.angles))
           var_5 = var_1.angles;
 
         var_6 = "undefined";
 
-        if(isdefined(var_1.team))
+        if(isDefined(var_1.team))
           var_6 = var_1.team;
 
         var_7 = gettime();

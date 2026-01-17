@@ -11,7 +11,6 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_utility;
-
 #namespace namespace_9b24ce43;
 
 autoexec __init__system__() {
@@ -26,13 +25,13 @@ __init__() {
   zm_trial::register_challenge(#"hash_32cdfeca4a793d78", &on_begin, &on_end);
 }
 
-private on_begin() {
+on_begin() {
   foreach(player in getplayers()) {
     player thread movement_watcher();
   }
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   foreach(player in getplayers()) {
     player notify(#"hash_17c41292130032eb");
   }
@@ -43,8 +42,8 @@ is_active() {
   return isDefined(challenge);
 }
 
-private movement_watcher() {
-  self endon(#"disconnect", #"hash_17c41292130032eb");
+movement_watcher() {
+  self endon(#"disconnect", # "hash_17c41292130032eb");
   wait zm_round_logic::get_delay_between_rounds() - 2;
 
   while(true) {

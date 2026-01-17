@@ -7,7 +7,6 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace death_circle;
 
 autoexec __init__system__() {
@@ -21,14 +20,14 @@ __init__() {
     return;
   }
 
-  level.var_ef215639 = [1: #"hash_1483048e184df991", 2: #"hash_5b96bc3a1c23c571", 3: "evt_death_circle_strong"];
-  level.var_cb450873 = #"hash_313f1d0b4ff27caa";
-  level.var_f6795a59 = [1: #"hash_7c7ea03189fe65d8", 2: #"hash_5c64e89ab323857a", 3: #"hash_3fc5123369b4c59f"];
-  level.var_601fc3c5 = [1: #"wz/fx8_player_outside_circle", 2: #"hash_474c4d87482063e0", 3: #"hash_474c4e8748206593"];
-  level.var_7e948a2d = [1: #"wz/fx8_plyr_pstfx_barrier_lvl_01_wz", 2: #"hash_2ccb19ff6223b693", 3: #"hash_559017f41745034e"];
-  level.var_c465fd31 = [1: #"hash_775e24c0ca5d7b58", 2: #"hash_775e24c0ca5d7b58", 3: #"hash_316ec537e4167d47"];
+  level.var_ef215639 = [1: # "hash_1483048e184df991", 2: # "hash_5b96bc3a1c23c571", 3: "evt_death_circle_strong"];
+  level.var_cb450873 = # "hash_313f1d0b4ff27caa";
+  level.var_f6795a59 = [1: # "hash_7c7ea03189fe65d8", 2: # "hash_5c64e89ab323857a", 3: # "hash_3fc5123369b4c59f"];
+  level.var_601fc3c5 = [1: # "wz/fx8_player_outside_circle", 2: # "hash_474c4d87482063e0", 3: # "hash_474c4e8748206593"];
+  level.var_7e948a2d = [1: # "wz/fx8_plyr_pstfx_barrier_lvl_01_wz", 2: # "hash_2ccb19ff6223b693", 3: # "hash_559017f41745034e"];
+  level.var_c465fd31 = [1: # "hash_775e24c0ca5d7b58", 2: # "hash_775e24c0ca5d7b58", 3: # "hash_316ec537e4167d47"];
   level.var_7d949aad = [1: 0.5, 2: 0, 3: 0];
-  level.var_213a0963 = [1: #"hash_57b39f99758cac07", 2: #"hash_301fd347a3614b8b", 3: #"hash_631d14143bf8b26"];
+  level.var_213a0963 = [1: # "hash_57b39f99758cac07", 2: # "hash_301fd347a3614b8b", 3: # "hash_631d14143bf8b26"];
   clientfield::register("scriptmover", "deathcircleflag", 1, 1, "int", &function_a380fe5, 0, 0);
   clientfield::register("toplayer", "deathcircleeffects", 1, 2, "int", undefined, 0, 1);
   clientfield::register("allplayers", "outsidedeathcircle", 1, 1, "int", undefined, 0, 0);
@@ -41,8 +40,8 @@ function_a380fe5(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
   self notify(#"hash_49f273cd81c6c0f");
 
   if(newval) {
-    var_899562cf = self.team == #"neutral";
-    var_929604bb = self.team != #"neutral";
+    var_899562cf = self.team == # "neutral";
+    var_929604bb = self.team != # "neutral";
     self setcompassicon("minimap_collapse_ring");
     self function_811196d1(0);
     self function_95bc465d(1);
@@ -109,7 +108,7 @@ on_localplayer_spawned(localclientnum) {
   }
 }
 
-private function_382da026(localclientnum) {
+function_382da026(localclientnum) {
   self notify("1368c9cad92ba095");
   self endon("1368c9cad92ba095");
   var_ef2f4cec = spawnStruct();
@@ -146,7 +145,7 @@ private function_382da026(localclientnum) {
   }
 }
 
-private function_7eb327bd(localclientnum) {
+function_7eb327bd(localclientnum) {
   self waittill(#"death");
   var_ef2f4cec = level.var_32e10fc2[localclientnum];
 
@@ -161,7 +160,7 @@ private function_7eb327bd(localclientnum) {
   level function_e1273acb(localclientnum);
 }
 
-private function_43d7470c(localclientnum, intensity = 0) {
+function_43d7470c(localclientnum, intensity = 0) {
   if(isDefined(self.var_ef215639)) {
     function_d48752e(localclientnum, self.var_ef215639);
     self.var_ef215639 = undefined;
@@ -174,7 +173,7 @@ private function_43d7470c(localclientnum, intensity = 0) {
   }
 }
 
-private function_d69170b(localclientnum, intensity = 0) {
+function_d69170b(localclientnum, intensity = 0) {
   if(isDefined(self.var_f6795a59)) {
     function_24cd4cfb(localclientnum, self.var_f6795a59);
     self.var_f6795a59 = undefined;
@@ -192,7 +191,7 @@ private function_d69170b(localclientnum, intensity = 0) {
   }
 }
 
-private function_b8c979ec(localclientnum, intensity = 0) {
+function_b8c979ec(localclientnum, intensity = 0) {
   if(isDefined(self.var_7e948a2d)) {
     deletefx(localclientnum, self.var_7e948a2d, 1);
     self.var_7e948a2d = undefined;
@@ -205,7 +204,7 @@ private function_b8c979ec(localclientnum, intensity = 0) {
   }
 }
 
-private function_7ede78e9(localclientnum, currentplayer = undefined, intensity = 0) {
+function_7ede78e9(localclientnum, currentplayer = undefined, intensity = 0) {
   self notify("7d26c6ac6cb4777b");
   self endon("7d26c6ac6cb4777b");
   self endon(#"hash_b6468b7475f6790");
@@ -233,7 +232,7 @@ private function_7ede78e9(localclientnum, currentplayer = undefined, intensity =
   }
 }
 
-private function_e1273acb(localclientnum, intensity = 0) {
+function_e1273acb(localclientnum, intensity = 0) {
   maxdistsq = 100000000;
   var_4a4e047 = 0;
   origin = getlocalclientpos(localclientnum);
@@ -266,7 +265,7 @@ private function_e1273acb(localclientnum, intensity = 0) {
   }
 }
 
-private function_de4523(localclientnum, rob = undefined, robfade = undefined) {
+function_de4523(localclientnum, rob = undefined, robfade = undefined) {
   if(self.var_eeee3972 === rob && self.var_99d5860e === robfade) {
     return;
   }
@@ -291,7 +290,7 @@ private function_de4523(localclientnum, rob = undefined, robfade = undefined) {
   }
 }
 
-private function_9e8e1f4f(localclientnum, tagfx = undefined) {
+function_9e8e1f4f(localclientnum, tagfx = undefined) {
   if(self.var_213a0963 === tagfx) {
     return;
   }
@@ -311,11 +310,11 @@ private function_9e8e1f4f(localclientnum, tagfx = undefined) {
   }
 }
 
-private function_63d6411e() {
+function_63d6411e() {
   self setcompassicon("");
 }
 
-private function_32f7227c(deathcircle, currentradius, localclientnum) {
+function_32f7227c(deathcircle, currentradius, localclientnum) {
   localplayer = function_5c10bd79(localclientnum);
   startpos = (deathcircle.origin[0], deathcircle.origin[1], 0);
   toplayervec = (0, 0, 0);
@@ -331,8 +330,8 @@ private function_32f7227c(deathcircle, currentradius, localclientnum) {
   return (returnvec[0], returnvec[1], eyepos[2]);
 }
 
-private function_a453467f(localclientnum) {
-  self endon(#"death", #"hash_49f273cd81c6c0f");
+function_a453467f(localclientnum) {
+  self endon(#"death", # "hash_49f273cd81c6c0f");
   self thread function_71f8d788();
 
   while(isDefined(self.scale)) {

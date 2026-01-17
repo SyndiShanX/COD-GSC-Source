@@ -7,7 +7,6 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\vehicle_death_shared;
-
 #namespace vehicle;
 
 autoexec __init__system__() {
@@ -56,13 +55,12 @@ player_is_driver() {
 }
 
 initvehiclemap() {
-
   root = "<dev string:x38>";
   adddebugcommand(root + "<dev string:x53>");
   adddebugcommand(root + "<dev string:x7f>");
   adddebugcommand(root + "<dev string:xb0>");
 
-    thread vehiclemainthread();
+  thread vehiclemainthread();
 }
 
 vehiclemainthread() {
@@ -149,7 +147,7 @@ vehicleteamthread() {
 
 watchplayerexitrequestthread(player) {
   level endon(#"game_ended");
-  player endon(#"death", #"disconnect");
+  player endon(#"death", # "disconnect");
   vehicle = self;
   vehicle endon(#"death");
   wait 1.5;

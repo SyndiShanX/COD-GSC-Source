@@ -21,9 +21,9 @@ watchFlareDetonation(owner) {
   level.flareDistanceScale = flare_get_dvar_int("flare_distance_scale", level.flareDistanceScale);
   flareEffectArea = spawn("trigger_radius", position, 0, level.flareVisionEffectRadius, level.flareVisionEffectRadius * 2);
   loopWaitTime = .5;
-  while (durationOfFlare > 0) {
+  while(durationOfFlare > 0) {
     players = get_players();
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       if(!isDefined(players[i].item)) {
         players[i].item = 0;
       }
@@ -53,7 +53,7 @@ flareVision(player, flareEffectArea, position) {
   sightTraceTime = 0.3;
   count = 0;
   maxdistance = level.flareVisionEffectRadius;
-  while ((isDefined(flareEffectArea)) && (player.sessionstate == "playing" && player.item == 0) && !(player player_is_driver())) {
+  while((isDefined(flareEffectArea)) && (player.sessionstate == "playing" && player.item == 0) && !(player player_is_driver())) {
     wait(loopWaitTime);
     ratio = 1 - ((distance(player.origin, position)) / maxdistance);
     player VisionSetLerpRatio(ratio);

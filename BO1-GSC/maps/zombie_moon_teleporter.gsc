@@ -336,7 +336,7 @@ teleporter_to_nml_gate_move(open_it) {
   accel = time / 6.0;
   ent = level.teleporter_to_nml_gate_ent;
   ent2 = level.teleporter_to_nml_gate2_ent;
-  ent PlaySound("amb_teleporter_gate_start");
+  ent playSound("amb_teleporter_gate_start");
   ent playLoopSound("amb_teleporter_gate_loop", .5);
   pos = (ent.origin[0], ent.origin[1], ent.origin[2] - gate_height);
   ent moveTo(pos, time, accel, accel);
@@ -461,7 +461,7 @@ teleporter_exit_nml_gate_move(open_it) {
   time = level.teleporter_gate_move_time;
   accel = time / 6.0;
   ent = level.teleporter_exit_nml_gate_ent;
-  ent PlaySound("amb_teleporter_gate_start");
+  ent playSound("amb_teleporter_gate_start");
   ent playLoopSound("amb_teleporter_gate_loop", .5);
   ent2 = level.teleporter_exit_nml_gate2_ent;
   pos2 = (ent2.origin[0], ent2.origin[1], ent2.origin[2] - gate2_height);
@@ -480,5 +480,5 @@ teleporter_exit_nml_gate_move(open_it) {
 play_stopmoving_sounds() {
   self waittill("movedone");
   self stopLoopSound(.5);
-  self playsound("amb_teleporter_gate_stop");
+  self playSound("amb_teleporter_gate_stop");
 }

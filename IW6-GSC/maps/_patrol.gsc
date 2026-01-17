@@ -101,9 +101,7 @@ patrol(var_0) {
     self notify("release_node");
     var_7.patrol_claimed = 1;
     self.last_patrol_goal = var_7;
-    [
-      [var_2[var_8]]
-    ](var_7);
+    [[var_2[var_8]]](var_7);
 
     if(isDefined(var_7.radius) && var_7.radius > 0)
       self.goalradius = var_7.radius;

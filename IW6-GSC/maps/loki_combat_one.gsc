@@ -4,8 +4,8 @@
 *****************************************************/
 
 section_main() {
-  maps\_utility::add_hint_string("up_hint", & "LOKI_HINT_UP", ::no_hint);
-  maps\_utility::add_hint_string("down_hint", & "LOKI_HINT_DOWN", ::no_hint_down);
+  maps\_utility::add_hint_string("up_hint", &"LOKI_HINT_UP", ::no_hint);
+  maps\_utility::add_hint_string("down_hint", &"LOKI_HINT_DOWN", ::no_hint_down);
 }
 
 section_precache() {

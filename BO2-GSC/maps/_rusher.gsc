@@ -128,7 +128,7 @@ rusher_yelling() {
   }
   while(true) {
     wait(randomfloatrange(1, 3));
-    self playsound("chr_npc_charge_viet");
+    self playSound("chr_npc_charge_viet");
   }
 }
 

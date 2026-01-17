@@ -4,8 +4,8 @@
 ********************************************************/
 
 main() {
-  assert(isdefined(self));
+  assert(isDefined(self));
   wait 0;
-  if(isdefined(self))
+  if(isDefined(self))
     self delete();
 }

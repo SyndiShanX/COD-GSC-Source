@@ -36,7 +36,7 @@ main() {
 }
 
 leapfrog_masterthread() {
-  while (true) {
+  while(true) {
     if(!level.leap_delay_override)
       wait(randomFloatRange(level.leap_delay_min, level.leap_delay_max));
     else
@@ -50,30 +50,30 @@ leapfrog_masterthread() {
     node_arr = [];
     high_weight = -1000000;
 
-    if(!level.leap_node_array.size)
+    if(!level.leap_node_array.size) {
       continue;
-
-    for (i = 0; i < level.leap_node_array.size; i++) {
+    }
+    for(i = 0; i < level.leap_node_array.size; i++) {
       weight = level.leap_node_array[i].leap_weight;
-      if(!isdefined(node_arr[weight]))
+      if(!isDefined(node_arr[weight]))
         node_arr[weight] = [];
       node_arr[weight][node_arr[weight].size] = level.leap_node_array[i];
       if(weight > high_weight)
         high_weight = weight;
     }
 
-    assertEx(isdefined(node_arr[high_weight]), "high_weight is: " + high_weight);
-    assertEx(isdefined(high_weight >= 0), "high_weight is below zero: " + high_weight);
+    assertEx(isDefined(node_arr[high_weight]), "high_weight is: " + high_weight);
+    assertEx(isDefined(high_weight >= 0), "high_weight is below zero: " + high_weight);
 
     node = node_arr[high_weight][randomint(node_arr[high_weight].size)];
 
-    assert(isdefined(node.target)); // there should always be a new node or it shouldn't be in the array.
+    assert(isDefined(node.target)); // there should always be a new node or it shouldn't be in the array.
 
     node_arr = getnodearray(node.target, "targetname");
     next_node = node_arr[randomint(node_arr.size)];
 
     // reset future ai count
-    if(isdefined(next_node.leapfrog_ai_count))
+    if(isDefined(next_node.leapfrog_ai_count))
       next_node.leapfrog_future_ai_count = next_node.leapfrog_ai_count;
     else
       next_node.leapfrog_future_ai_count = 0;
@@ -83,7 +83,7 @@ leapfrog_masterthread() {
 
     new_weight = int(node.leap_weight * -.25);
 
-    if(isdefined(next_node.leap_weight))
+    if(isDefined(next_node.leap_weight))
       new_weight += next_node.leap_weight;
 
     add_leap_node(next_node, new_weight);
@@ -94,9 +94,9 @@ leapfrog_masterthread() {
 }
 
 increment_leap_weight(node) {
-  if(self == node)
+  if(self == node) {
     return;
-
+  }
   diff_weight = node.leap_weight - self.leap_weight;
 
   self.leap_weight += (int(diff_weight * 0.5) + 1); // old .75;
@@ -111,10 +111,10 @@ leapfrog() {
   node_arr = getnodearray(self.target, "targetname");
   node = node_arr[randomint(node_arr.size)];
 
-  while (true) {
+  while(true) {
     if(node.radius != 0)
       self.goalradius = node.radius;
-    if(isdefined(node.height))
+    if(isDefined(node.height))
       self.goalheight = node.height;
     self setgoalnode(node);
 
@@ -133,28 +133,30 @@ leapfrog() {
 
     self thread leapfrog_on_death(node);
 
-    if(!isdefined(node.target))
+    if(!isDefined(node.target)) {
       break;
+    }
 
-    if(isdefined(node.script_delay)) {
+    if(isDefined(node.script_delay)) {
       node script_delay();
       node_arr = getnodearray(node.target, "targetname");
       next_node = node_arr[level.leapfrog_random_int % node_arr.size];
     } else {
-      if(!add_leap_node(node))
+      if(!add_leap_node(node)) {
         break;
+      }
 
       node waittill("leapfrog", next_node);
 
       next_node.leapfrog_future_ai_count++;
 
       max_node_ai = level.leapfrog_max_node_ai;
-      if(isdefined(node.script_noteworthy))
+      if(isDefined(node.script_noteworthy))
         max_node_ai = int(node.script_noteworthy);
 
       if(next_node.leapfrog_future_ai_count > max_node_ai) {
         level.leap_delay_override = true;
-        if(isdefined(next_node.leap_weight)) {
+        if(isDefined(next_node.leap_weight)) {
           next_node.leap_weight += 1; // make the full node more likely to leap.
         }
         next_node = node; // stay on old node.
@@ -171,7 +173,7 @@ leapfrog() {
 leapfrog_on_death(node) {
   node endon("leapfrog");
 
-  if(!isdefined(node.leapfrog_ai_count))
+  if(!isDefined(node.leapfrog_ai_count))
     node.leapfrog_ai_count = 0;
   node.leapfrog_ai_count++;
 
@@ -179,7 +181,7 @@ leapfrog_on_death(node) {
 
   node.leapfrog_ai_count--;
 
-  if(isdefined(node.leap_weight)) {
+  if(isDefined(node.leap_weight)) {
     new_weight = node.leap_weight - 1;
     if(new_weight < 1)
       new_weight = 1;
@@ -191,7 +193,7 @@ leapfrog_on_death(node) {
 }
 
 add_leap_node(node, weight) {
-  if(!isdefined(node.target) || isdefined(node.script_delay))
+  if(!isDefined(node.target) || isDefined(node.script_delay))
     return false;
 
   if(getdvar("debug") == "1")
@@ -202,7 +204,7 @@ add_leap_node(node, weight) {
     node.leap_weight = 0;
   }
 
-  if(isdefined(weight))
+  if(isDefined(weight))
     node.leap_weight = weight;
   else
     node.leap_weight += 2;
@@ -220,31 +222,31 @@ remove_leap_node(node) {
 /* debug stuff */
 
 debug_leap_node() {
-  if(isdefined(self.debug_leapnode))
+  if(isDefined(self.debug_leapnode))
     return;
   self.debug_leapnode = true;
 
-  while (true) {
-    if(isdefined(self.leap_weight))
+  while(true) {
+    if(isDefined(self.leap_weight))
       self thread print3Dmessage(self.leap_weight, .5);
-    if(isdefined(self.leapfrog_ai_count))
+    if(isDefined(self.leapfrog_ai_count))
       self thread print3Dmessage(self.leapfrog_ai_count, 0.5, (1, 0, 0), (0, 0, 128), 3);
     wait .5;
   }
 }
 
 print3Dmessage(message, show_time, color, offset, scale) {
-  if(!isdefined(color))
+  if(!isDefined(color))
     color = (0.5, 1, 0.5);
 
-  if(!isdefined(offset))
+  if(!isDefined(offset))
     offset = (0, 0, 56);
 
-  if(!isdefined(scale))
+  if(!isDefined(scale))
     scale = 6;
 
   show_time = gettime() + (show_time * 1000);
-  while (gettime() < show_time) {
+  while(gettime() < show_time) {
     print3d(self.origin + offset, message, color, 1, scale);
     wait(0.05);
   }

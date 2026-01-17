@@ -19,9 +19,9 @@ function main() {
 }
 
 function init_clientfields() {
-  clientfield::register("scriptmover", "sm_depth_charge_fx", 1, 1, "int", & set_depth_charge_fx, 0, 0);
-  clientfield::register("scriptmover", "water_disturbance", 1, 1, "int", & function_f354307b, 0, 0);
-  clientfield::register("toplayer", "umbra_tome_singapore", 1, 2, "counter", & function_2b6fcfd1, 0, 0);
+  clientfield::register("scriptmover", "sm_depth_charge_fx", 1, 1, "int", &set_depth_charge_fx, 0, 0);
+  clientfield::register("scriptmover", "water_disturbance", 1, 1, "int", &function_f354307b, 0, 0);
+  clientfield::register("toplayer", "umbra_tome_singapore", 1, 2, "counter", &function_2b6fcfd1, 0, 0);
 }
 
 function skipto_start(str_objective, b_starting) {
@@ -62,20 +62,20 @@ function function_2b6fcfd1(localclientnum, oldval, newval, bnewent, binitialsnap
 }
 
 function function_5f80268d() {
-  scene::add_scene_func("p7_fxanim_cp_zurich_roots_water01_bundle", & zurich_util::function_4dd02a03, "done", "root_singapore_cleanup");
-  scene::add_scene_func("p7_fxanim_cp_zurich_roots_water02_bundle", & zurich_util::function_4dd02a03, "done", "root_singapore_cleanup");
-  scene::add_scene_func("p7_fxanim_gp_shutter_lt_02_red_bundle", & zurich_util::function_4dd02a03, "done", "root_singapore_cleanup");
-  scene::add_scene_func("p7_fxanim_gp_shutter_rt_02_red_bundle", & zurich_util::function_4dd02a03, "done", "root_singapore_cleanup");
-  scene::add_scene_func("p7_fxanim_gp_shutter_lt_10_red_white_bundle", & zurich_util::function_4dd02a03, "done", "root_singapore_cleanup");
-  scene::add_scene_func("p7_fxanim_gp_shutter_rt_10_red_white_bundle", & zurich_util::function_4dd02a03, "done", "root_singapore_cleanup");
-  scene::add_scene_func("cin_zur_16_02_singapore_vign_bodies01", & zurich_util::function_4dd02a03, "play", "root_singapore_cleanup");
-  scene::add_scene_func("cin_zur_16_02_singapore_vign_bodies02", & zurich_util::function_4dd02a03, "play", "root_singapore_cleanup");
-  scene::add_scene_func("cin_zur_16_02_singapore_vign_bodies03", & zurich_util::function_4dd02a03, "play", "root_singapore_cleanup");
-  scene::add_scene_func("cin_zur_16_02_singapore_vign_pulled01", & zurich_util::function_4dd02a03, "play", "root_singapore_cleanup");
-  scene::add_scene_func("cin_zur_16_02_singapore_vign_pulled02", & zurich_util::function_4dd02a03, "play", "root_singapore_cleanup");
-  scene::add_scene_func("cin_zur_16_02_singapore_vign_pulled03", & zurich_util::function_4dd02a03, "play", "root_singapore_cleanup");
-  scene::add_scene_func("cin_zur_16_02_singapore_hanging_shortrope", & zurich_util::function_4dd02a03, "play", "root_singapore_cleanup");
-  scene::add_scene_func("cin_zur_16_02_singapore_hanging_shortrope_2", & zurich_util::function_4dd02a03, "play", "root_singapore_cleanup");
+  scene::add_scene_func("p7_fxanim_cp_zurich_roots_water01_bundle", &zurich_util::function_4dd02a03, "done", "root_singapore_cleanup");
+  scene::add_scene_func("p7_fxanim_cp_zurich_roots_water02_bundle", &zurich_util::function_4dd02a03, "done", "root_singapore_cleanup");
+  scene::add_scene_func("p7_fxanim_gp_shutter_lt_02_red_bundle", &zurich_util::function_4dd02a03, "done", "root_singapore_cleanup");
+  scene::add_scene_func("p7_fxanim_gp_shutter_rt_02_red_bundle", &zurich_util::function_4dd02a03, "done", "root_singapore_cleanup");
+  scene::add_scene_func("p7_fxanim_gp_shutter_lt_10_red_white_bundle", &zurich_util::function_4dd02a03, "done", "root_singapore_cleanup");
+  scene::add_scene_func("p7_fxanim_gp_shutter_rt_10_red_white_bundle", &zurich_util::function_4dd02a03, "done", "root_singapore_cleanup");
+  scene::add_scene_func("cin_zur_16_02_singapore_vign_bodies01", &zurich_util::function_4dd02a03, "play", "root_singapore_cleanup");
+  scene::add_scene_func("cin_zur_16_02_singapore_vign_bodies02", &zurich_util::function_4dd02a03, "play", "root_singapore_cleanup");
+  scene::add_scene_func("cin_zur_16_02_singapore_vign_bodies03", &zurich_util::function_4dd02a03, "play", "root_singapore_cleanup");
+  scene::add_scene_func("cin_zur_16_02_singapore_vign_pulled01", &zurich_util::function_4dd02a03, "play", "root_singapore_cleanup");
+  scene::add_scene_func("cin_zur_16_02_singapore_vign_pulled02", &zurich_util::function_4dd02a03, "play", "root_singapore_cleanup");
+  scene::add_scene_func("cin_zur_16_02_singapore_vign_pulled03", &zurich_util::function_4dd02a03, "play", "root_singapore_cleanup");
+  scene::add_scene_func("cin_zur_16_02_singapore_hanging_shortrope", &zurich_util::function_4dd02a03, "play", "root_singapore_cleanup");
+  scene::add_scene_func("cin_zur_16_02_singapore_hanging_shortrope_2", &zurich_util::function_4dd02a03, "play", "root_singapore_cleanup");
 }
 
 function function_b087f50() {
@@ -108,7 +108,7 @@ function function_a9bc976() {
 }
 
 function function_f354307b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(!isdefined(self.var_2e7c1306)) {
+  if(!isDefined(self.var_2e7c1306)) {
     str_tag = "zur_wave_jnt";
     self.var_2e7c1306 = util::spawn_model(localclientnum, "tag_origin", self gettagorigin(str_tag), self gettagangles(str_tag));
     self.var_2e7c1306 linkto(self, str_tag);
@@ -124,17 +124,17 @@ function function_f354307b(localclientnum, oldval, newval, bnewent, binitialsnap
 }
 
 function set_depth_charge_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(isdefined(self.light_fx)) {
+  if(isDefined(self.light_fx)) {
     stopfx(localclientnum, self.light_fx);
     self.light_fx = undefined;
   }
   switch (newval) {
     case 0: {
-      self.light_fx = playfxontag(localclientnum, level._effect["yellow_light"], self, "tag_origin");
+      self.light_fx = playFXOnTag(localclientnum, level._effect["yellow_light"], self, "tag_origin");
       break;
     }
     case 1: {
-      self.light_fx = playfxontag(localclientnum, level._effect["green_light"], self, "tag_origin");
+      self.light_fx = playFXOnTag(localclientnum, level._effect["green_light"], self, "tag_origin");
       break;
     }
   }

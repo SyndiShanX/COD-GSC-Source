@@ -67,7 +67,7 @@ overlay() {
 }
 
 ac130ShellShock() {
-  for (;;) {
+  for(;;) {
     duration = 60;
     level.ac130Player shellshock("ac130", duration);
     wait duration;
@@ -78,7 +78,7 @@ rotatePlane(toggle) {
   level notify("stop_rotatePlane_thread");
   level endon("stop_rotatePlane_thread");
   if(toggle == "on") {
-    for (;;) {
+    for(;;) {
       level.ac130 rotateyaw(360, level.ac130_rotationSpeed);
       wait level.ac130_rotationSpeed;
     }
@@ -93,13 +93,13 @@ attachPlayer() {
 
 changeWeapons() {
   weapon = [];
-  weapon[0] = spawnstruct();
+  weapon[0] = spawnStruct();
   weapon[0].overlay = "ac130_overlay_40mm";
   weapon[0].fov = "25";
   weapon[0].name = "40mm";
   weapon[0].sound = "ac130_40mm_fire";
   weapon[0].weapon = "ac130_40mm_mp";
-  weapon[1] = spawnstruct();
+  weapon[1] = spawnStruct();
   weapon[1].overlay = "ac130_overlay_25mm";
   weapon[1].fov = "10";
   weapon[1].name = "25mm";
@@ -108,8 +108,8 @@ changeWeapons() {
   currentWeapon = 0;
   level.currentWeapon = weapon[currentWeapon].name;
   thread fire_screenShake();
-  for (;;) {
-    while (!level.ac130Player useButtonPressed())
+  for(;;) {
+    while(!level.ac130Player useButtonPressed())
       wait 0.05;
     currentWeapon++;
     if(currentWeapon >= weapon.size)
@@ -120,14 +120,14 @@ changeWeapons() {
     level.ac130Player takeAllWeapons();
     level.ac130Player giveWeapon(weapon[currentWeapon].weapon);
     level.ac130Player switchToWeapon(weapon[currentWeapon].weapon);
-    while (level.ac130Player useButtonPressed())
+    while(level.ac130Player useButtonPressed())
       wait 0.05;
   }
 }
 
 sounds() {
   level.ac130Player playLoopSound("ac130_ambient");
-  for (;;) {
+  for(;;) {
     wait 2;
     level.ac130Player playLocalSound("ac130_radio_1");
     wait 3;

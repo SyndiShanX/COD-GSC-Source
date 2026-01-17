@@ -101,7 +101,7 @@ monitor_melee_swipe() {
     self setclientfield("oneinchpunch_impact", 1);
     wait_network_frame();
     self setclientfield("oneinchpunch_impact", 0);
-    v_punch_effect_fwd = anglestoforward(self getplayerangles());
+    v_punch_effect_fwd = anglesToForward(self getplayerangles());
     v_punch_yaw = get2dyaw((0, 0, 0), v_punch_effect_fwd);
 
     if(isDefined(self.b_punch_upgraded) && self.b_punch_upgraded && isDefined(self.str_punch_element) && self.str_punch_element == "air")
@@ -218,9 +218,7 @@ zombie_punch_damage(ai_zombie, n_mod) {
 zombie_punch_death(ai_zombie) {
   ai_zombie thread gib_zombies_head(self);
 
-  if(isDefined(level.ragdoll_limit_check) && ![
-      [level.ragdoll_limit_check]
-    ]()) {
+  if(isDefined(level.ragdoll_limit_check) && ![[level.ragdoll_limit_check]]()) {
     return;
   }
   if(isDefined(ai_zombie)) {
@@ -236,7 +234,7 @@ zombie_punch_death(ai_zombie) {
 
 handle_punch_pain_notetracks(note) {
   if(note == "zombie_knockdown_ground_impact")
-    playfx(level._effect["punch_knockdown_ground"], self.origin, anglestoforward(self.angles), anglestoup(self.angles));
+    playFX(level._effect["punch_knockdown_ground"], self.origin, anglesToForward(self.angles), anglestoup(self.angles));
 }
 
 knockdown_zombie_animate() {
@@ -253,7 +251,7 @@ knockdown_zombie_animate() {
   animation_legs = "";
   animation_side = undefined;
   animation_duration = "_default";
-  v_forward = vectordot(anglestoforward(self.angles), vectornormalize(self.v_punched_from - self.origin));
+  v_forward = vectordot(anglesToForward(self.angles), vectornormalize(self.v_punched_from - self.origin));
 
   if(v_forward > 0.6) {
     animation_direction = "back";

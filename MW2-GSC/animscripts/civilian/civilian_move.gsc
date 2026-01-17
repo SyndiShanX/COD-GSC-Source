@@ -11,8 +11,8 @@ main() {
 }
 
 civilian_nonCombatMoveTurn(angleDiff) {
-  assert(isdefined(level.scr_anim[self.animname]["turn_left_90"]));
-  assert(isdefined(level.scr_anim[self.animname]["turn_right_90"]));
+  assert(isDefined(level.scr_anim[self.animname]["turn_left_90"]));
+  assert(isDefined(level.scr_anim[self.animname]["turn_right_90"]));
 
   turnAnim = undefined;
 
@@ -22,7 +22,7 @@ civilian_nonCombatMoveTurn(angleDiff) {
   if(angleDiff > 60 && angleDiff < 120)
     turnAnim = level.scr_anim[self.animname]["turn_right_90"];
 
-  if(isdefined(turnAnim) && animscripts\move::pathChange_canDoTurnAnim(turnAnim))
+  if(isDefined(turnAnim) && animscripts\move::pathChange_canDoTurnAnim(turnAnim))
     return turnAnim;
   else
     return undefined;
@@ -51,7 +51,7 @@ civilian_combatMoveTurn(angleDiff) {
       turnAnim = % civilian_run_upright_turn180;
   }
 
-  if(isdefined(turnAnim) && animscripts\move::pathChange_canDoTurnAnim(turnAnim))
+  if(isDefined(turnAnim) && animscripts\move::pathChange_canDoTurnAnim(turnAnim))
     return turnAnim;
   else
     return undefined;
@@ -83,10 +83,10 @@ civilian_combatHunchedMoveTurn(angleDiff) {
       turnAnim = % civilian_run_upright_turn180;
   }
 
-  if(isdefined(largeTurnAnim) && (randomint(3) < 2) && animscripts\move::pathChange_canDoTurnAnim(largeTurnAnim))
+  if(isDefined(largeTurnAnim) && (randomint(3) < 2) && animscripts\move::pathChange_canDoTurnAnim(largeTurnAnim))
     return largeTurnAnim;
 
-  if(isdefined(turnAnim) && animscripts\move::pathChange_canDoTurnAnim(turnAnim))
+  if(isDefined(turnAnim) && animscripts\move::pathChange_canDoTurnAnim(turnAnim))
     return turnAnim;
   else
     return undefined;

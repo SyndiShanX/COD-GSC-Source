@@ -153,12 +153,12 @@ collision_thread(localclientnum) {
       if(isDefined(player)) {
         if(hit_intensity > 15) {
           volume = get_impact_vol_from_speed();
-          id = playsound(0, "veh_suspension_lg_hd", self.origin, volume);
+          id = playSound(0, "veh_suspension_lg_hd", self.origin, volume);
           player earthquake(0.5, 0.5, player.origin, 200);
           player playrumbleonentity(localclientnum, "damage_heavy");
         } else {
           volume = get_impact_vol_from_speed();
-          id = playsound(0, "veh_suspension_lg_lt", self.origin, volume);
+          id = playSound(0, "veh_suspension_lg_lt", self.origin, volume);
           player earthquake(0.3, 0.3, player.origin, 200);
           player playrumbleonentity(localclientnum, "damage_light");
         }
@@ -178,7 +178,7 @@ jump_landing_thread(localclientnum) {
 
       if(isDefined(player)) {
         volume = get_impact_vol_from_speed();
-        id = playsound(0, "veh_suspension_lg_hd", self.origin, volume);
+        id = playSound(0, "veh_suspension_lg_hd", self.origin, volume);
         player earthquake(0.7, 1.2, player.origin, 200);
         player playrumbleonentity(localclientnum, "damage_heavy");
       }
@@ -197,7 +197,7 @@ suspension_thread(localclientnum) {
 
       if(isDefined(player)) {
         volume = get_impact_vol_from_speed();
-        id = playsound(0, "veh_suspension_lg_lt", self.origin, volume);
+        id = playSound(0, "veh_suspension_lg_lt", self.origin, volume);
         player playrumbleonentity(localclientnum, "damage_light");
       }
     }

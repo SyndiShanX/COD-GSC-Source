@@ -37,7 +37,7 @@ circle_target() {
     yaw = yaw + 180;
 
   while(true) {
-    offset = anglestoforward((0, yaw, 0));
+    offset = anglesToForward((0, yaw, 0));
 
     while(!isDefined(self.cur_target))
       wait 1;
@@ -56,8 +56,7 @@ circle_target() {
   }
 }
 
-setup_defenses() {
-}
+setup_defenses() {}
 
 attack_target() {
   self notify("movementUpdate");
@@ -77,11 +76,11 @@ attack_target() {
       driver = self.cur_target getseatoccupant(0);
 
       if(isDefined(driver)) {
-        vec_to_attacker = vec_to_attacker - anglestoforward(driver getplayerangles());
+        vec_to_attacker = vec_to_attacker - anglesToForward(driver getplayerangles());
         vec_to_attacker = vectornormalize(vec_to_attacker);
       }
     } else if(isplayer(self.cur_target)) {
-      vec_to_attacker = vec_to_attacker - anglestoforward(self.cur_target getplayerangles());
+      vec_to_attacker = vec_to_attacker - anglesToForward(self.cur_target getplayerangles());
       vec_to_attacker = vectornormalize(vec_to_attacker);
     }
 

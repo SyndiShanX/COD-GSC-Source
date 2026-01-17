@@ -48,7 +48,7 @@ registerKillstreak(killstreakType,
   AssertEx(isDefined(killstreakType), "Can not register a killstreak without a valid type name.");
   AssertEx(!isDefined(level.killstreaks[killstreakType]), "Killstreak " + killstreakType + " already registered");
   AssertEx(isDefined(killstreakUseFunction), "No use function defined for killstreak " + killstreakType);
-  level.killstreaks[killstreakType] = SpawnStruct();
+  level.killstreaks[killstreakType] = spawnStruct();
   level.killstreaks[killstreakType].killstreakLevel = int(tablelookup("mp/statstable.csv", level.cac_creference, killstreakMenuName, level.cac_ccount));
   level.killstreaks[killstreakType].usageKey = killstreakUsageKey;
   level.killstreaks[killstreakType].useFunction = killstreakUseFunction;
@@ -139,7 +139,7 @@ getKillStreakMenuName(killstreakType) {
 }
 drawLine(start, end, timeSlice, color) {
   drawTime = int(timeSlice * 20);
-  for (time = 0; time < drawTime; time++) {
+  for(time = 0; time < drawTime; time++) {
     line(start, end, (1, 0, 0), false, 1);
     wait(0.05);
   }
@@ -192,7 +192,7 @@ giveKillstreakForStreak() {
     self.pers["totalKillstreakCount"] = 0;
   }
   given = false;
-  for (i = 0; i < self.killstreak.size && i < 3; i++) {
+  for(i = 0; i < self.killstreak.size && i < 3; i++) {
     given |= giveKillstreakIfStreakCountMatches(i, self.killstreak[i], self.pers["cur_kill_streak"]);
   }
 }
@@ -225,7 +225,7 @@ streakNotify(streakVal) {
   self waittill("playerKilledChallengesProcessed");
   wait .05;
   notifyData = spawnStruct();
-  notifyData.titleLabel = & "MP_KILLSTREAK_N";
+  notifyData.titleLabel = &"MP_KILLSTREAK_N";
   notifyData.titleText = streakVal;
   notifyData.iconHeight = 32;
   self maps\mp\gametypes\_hud_message::notifyMessage(notifyData);
@@ -280,7 +280,7 @@ giveKillstreakInternal(killstreakType, do_not_update_death_count, noXP) {
 }
 addKillstreakToQueue(menuName, streakCount, hardpointType, noNotify) {
   killstreakTableNumber = -1;
-  for (killstreakTableNumber = level.killStreakBaseValue; killstreakTableNumber < (level.killStreakBaseValue + level.totalkillStreaks + 1); killstreakTableNumber++) {
+  for(killstreakTableNumber = level.killStreakBaseValue; killstreakTableNumber < (level.killStreakBaseValue + level.totalkillStreaks + 1); killstreakTableNumber++) {
     if(!isDefined(level.tbl_KillStreakData[killstreakTableNumber]) ||
       !isDefined(level.tbl_KillStreakData[killstreakTableNumber]["reference"])) {
       continue;
@@ -295,7 +295,7 @@ addKillstreakToQueue(menuName, streakCount, hardpointType, noNotify) {
   if(isDefined(noNotify) && noNotify)
     return;
   size = self.killstreakNotifyQueue.size;
-  self.killstreakNotifyQueue[size] = spawnstruct();
+  self.killstreakNotifyQueue[size] = spawnStruct();
   self.killstreakNotifyQueue[size].streakCount = streakCount;
   self.killstreakNotifyQueue[size].killstreakTableNumber = killstreakTableNumber;
   self.killstreakNotifyQueue[size].hardpointType = hardpointType;
@@ -304,7 +304,7 @@ addKillstreakToQueue(menuName, streakCount, hardpointType, noNotify) {
 hasKillstreakEquipped() {
   currentWeapon = self getCurrentWeapon();
   keys = getarraykeys(level.killstreaks);
-  for (i = 0; i < keys.size; i++) {
+  for(i = 0; i < keys.size; i++) {
     if(level.killstreaks[keys[i]].weapon == currentWeapon)
       return true;
   }
@@ -313,7 +313,7 @@ hasKillstreakEquipped() {
 giveKillstreakWeapon(weapon) {
   weaponsList = self GetWeaponsList();
   currentWeapon = self GetCurrentWeapon();
-  for (idx = 0; idx < weaponsList.size; idx++) {
+  for(idx = 0; idx < weaponsList.size; idx++) {
     carriedWeapon = weaponsList[idx];
     if(currentWeapon == carriedWeapon)
       continue;
@@ -416,7 +416,7 @@ useKillstreak() {
 }
 removeUsedKillstreak(killstreak, killstreakId) {
   killstreakIndex = undefined;
-  for (i = self.pers["killstreaks"].size - 1; i >= 0; i--) {
+  for(i = self.pers["killstreaks"].size - 1; i >= 0; i--) {
     if(self.pers["killstreaks"][i] == killstreak) {
       if(isDefined(killstreakId) && self.pers["killstreak_unique_id"][i] != killstreakId)
         continue;
@@ -427,7 +427,7 @@ removeUsedKillstreak(killstreak, killstreakId) {
   if(!isDefined(killstreakIndex))
     return;
   arraySize = self.pers["killstreaks"].size;
-  for (i = killstreakIndex; i < arraySize - 1; i++) {
+  for(i = killstreakIndex; i < arraySize - 1; i++) {
     self.pers["killstreaks"][i] = self.pers["killstreaks"][i + 1];
     self.pers["killstreak_has_been_used"][i] = self.pers["killstreak_has_been_used"][i + 1];
     self.pers["killstreak_unique_id"][i] = self.pers["killstreak_unique_id"][i + 1];
@@ -502,7 +502,7 @@ trackWeaponUsage() {
       self.lastNonKillstreakWeapon = weapons[0];
   }
   Assert(self.lastNonKillstreakWeapon != "none");
-  for (;;) {
+  for(;;) {
     currentWeapon = self GetCurrentWeapon();
     self waittill("weapon_change", weapon);
     if(maps\mp\gametypes\_weapons::isPrimaryWeapon(weapon))
@@ -540,7 +540,7 @@ killstreakWaiter() {
   level endon("game_ended");
   self thread trackWeaponUsage();
   self giveOwnedKillstreak();
-  for (;;) {
+  for(;;) {
     self waittill("weapon_change", weapon);
     if(!isKillstreakWeapon(weapon))
       continue;
@@ -616,10 +616,8 @@ triggerKillstreak(killstreakType) {
     timeLeft = Int(level.killstreakRoundDelay - (maps\mp\gametypes\_globallogic_utils::getTimePassed() / 1000));
     if(!timeLeft)
       timeLeft = 1;
-    self iPrintLnBold(&"MP_UNAVAILABLE_FOR_N", " " + timeLeft + " ", & "EXE_SECONDS");
-  } else if([
-      [level.killstreaks[killstreakType].useFunction]
-    ](killstreakType)) {
+    self iPrintLnBold(&"MP_UNAVAILABLE_FOR_N", " " + timeLeft + " ", &"EXE_SECONDS");
+  } else if([[level.killstreaks[killstreakType].useFunction]](killstreakType)) {
     if(isDefined(level.killstreaks[killstreakType].killstreakLevel)) {
       xpAmount = getXPAmountForKillstreak(killstreakType);
       if(xpAmount > 0 && killstreakType != "rcbomb_mp")
@@ -652,7 +650,7 @@ isWeaponAssociatedWithKillstreak(weapon) {
 getFirstValidKillstreakAltWeapon(killstreakType) {
   AssertEx(isDefined(level.killstreaks[killstreakType]), "Killstreak not registered.");
   if(isDefined(level.killstreaks[killstreakType].altWeapons)) {
-    for (i = 0; i < level.killstreaks[killstreakType].altWeapons.size; i++) {
+    for(i = 0; i < level.killstreaks[killstreakType].altWeapons.size; i++) {
       if(isDefined(level.killstreaks[killstreakType].altWeapons[i]))
         return level.killstreaks[killstreakType].altWeapons[i];
     }
@@ -677,7 +675,7 @@ printKillstreakStartText(killstreakType, owner, team, targetpos, dangerRadius) {
   if(level.teambased) {
     players = level.players;
     if(!level.hardcoreMode && isDefined(level.killstreaks[killstreakType].inboundNearPlayerText)) {
-      for (i = 0; i < players.size; i++) {
+      for(i = 0; i < players.size; i++) {
         if(isalive(players[i]) && (isDefined(players[i].pers["team"])) && (players[i].pers["team"] == team)) {
           if(pointIsInDangerArea(players[i].origin, targetpos, dangerRadius))
             players[i] iprintlnbold(level.killstreaks[killstreakType].inboundNearPlayerText);
@@ -685,7 +683,7 @@ printKillstreakStartText(killstreakType, owner, team, targetpos, dangerRadius) {
       }
     }
     if(isDefined(level.killstreaks[killstreakType])) {
-      for (i = 0; i < level.players.size; i++) {
+      for(i = 0; i < level.players.size; i++) {
         player = level.players[i];
         playerteam = player.pers["team"];
         if(isDefined(playerteam)) {
@@ -757,7 +755,7 @@ getKillstreakUsage(usageKey) {
   return self.pers[usageKey];
 }
 onPlayerConnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connecting", player);
     player thread onPlayerSpawned();
     player thread onJoinedTeam();
@@ -765,7 +763,7 @@ onPlayerConnect() {
 }
 onPlayerSpawned() {
   self endon("disconnect");
-  for (;;) {
+  for(;;) {
     self waittill("spawned_player");
     pixbeginevent("_hardpoints.gsc/onPlayerSpawned");
     giveOwnedKillstreak();
@@ -783,7 +781,7 @@ onPlayerSpawned() {
 }
 onJoinedTeam() {
   self endon("disconnect");
-  for (;;) {
+  for(;;) {
     self waittill("joined_team");
     self.pers["cur_kill_streak"] = 0;
     self.pers["totalKillstreakCount"] = 0;
@@ -792,4 +790,3 @@ onJoinedTeam() {
     self.pers["killstreak_unique_id"] = [];
   }
 }
-

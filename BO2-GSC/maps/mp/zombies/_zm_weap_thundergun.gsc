@@ -82,7 +82,7 @@ wait_for_thundergun_fired() {
       self thread thundergun_fired();
       view_pos = self gettagorigin("tag_flash") - self getplayerviewheight();
       view_angles = self gettagangles("tag_flash");
-      playfx(level._effect["thundergun_smoke_cloud"], view_pos, anglestoforward(view_angles), anglestoup(view_angles));
+      playFX(level._effect["thundergun_smoke_cloud"], view_pos, anglesToForward(view_angles), anglestoup(view_angles));
     }
   }
 }
@@ -279,13 +279,13 @@ thundergun_knockdown_zombie(player, gib) {
 
   self.thundergun_handle_pain_notetracks = ::handle_thundergun_pain_notetracks;
   self dodamage(level.zombie_vars["thundergun_knockdown_damage"], player.origin, player);
-  self playsound("fly_thundergun_forcehit");
+  self playSound("fly_thundergun_forcehit");
 }
 
 handle_thundergun_pain_notetracks(note) {
   if(note == "zombie_knockdown_ground_impact") {
-    playfx(level._effect["thundergun_knockdown_ground"], self.origin, anglestoforward(self.angles), anglestoup(self.angles));
-    self playsound("fly_thundergun_forcehit");
+    playFX(level._effect["thundergun_knockdown_ground"], self.origin, anglesToForward(self.angles), anglestoup(self.angles));
+    self playSound("fly_thundergun_forcehit");
   }
 }
 
@@ -308,7 +308,7 @@ thundergun_sound_thread() {
       continue;
     }
     if((result == "weapon_change" || result == "grenade_fire") && self getcurrentweapon() == "thundergun_zm") {
-      self playloopsound("tesla_idle", 0.25);
+      self playLoopSound("tesla_idle", 0.25);
       continue;
     }
 
@@ -322,8 +322,7 @@ setup_thundergun_vox(player, fling, gib, knockdown) {
     return;
   }
   if(!fling && (gib || knockdown)) {
-    if(25 > randomintrange(1, 100)) {
-    }
+    if(25 > randomintrange(1, 100)) {}
   }
 
   if(fling) {

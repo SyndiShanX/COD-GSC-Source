@@ -10,19 +10,19 @@ main() {
 
   qBarrels = false;
   precacheItem("barrel_mp");
-  barrels = getentarray("explodable_barrel", "targetname");
-  if((isdefined(barrels)) && (barrels.size > 0))
+  barrels = getEntArray("explodable_barrel", "targetname");
+  if((isDefined(barrels)) && (barrels.size > 0))
     qBarrels = true;
-  barrels = getentarray("explodable_barrel", "script_noteworthy");
-  if((isdefined(barrels)) && (barrels.size > 0))
+  barrels = getEntArray("explodable_barrel", "script_noteworthy");
+  if((isDefined(barrels)) && (barrels.size > 0))
     qBarrels = true;
   if(qBarrels) {
     level.breakables_fx["barrel"]["explode"] = loadfx("props/barrelExp");
     level.breakables_fx["barrel"]["burn_start"] = loadfx("props/barrel_ignite");
     level.breakables_fx["barrel"]["burn"] = loadfx("props/barrel_fire_top");
   }
-  oilspill = getentarray("oil_spill", "targetname");
-  if(isdefined(oilspill) && oilspill.size > 0) {
+  oilspill = getEntArray("oil_spill", "targetname");
+  if(isDefined(oilspill) && oilspill.size > 0) {
     level.breakables_fx["oilspill"]["burn"] = loadfx("props/barrel_fire");
     level.breakables_fx["oilspill"]["spark"] = loadfx("impacts/small_metalhit_1");
   }
@@ -46,44 +46,44 @@ main() {
   level.barrelExplodingThisFrame = false;
   level.breakables_clip = [];
 
-  temp = getentarray("breakable clip", "targetname");
-  for (i = 0; i < temp.size; i++)
+  temp = getEntArray("breakable clip", "targetname");
+  for(i = 0; i < temp.size; i++)
     level.breakables_clip[level.breakables_clip.size] = temp[i];
   level._breakable_utility_modelarray = [];
   level._breakable_utility_modelindex = 0;
   level._breakable_utility_maxnum = maxBrokenPieces;
-  common_scripts\utility::array_thread(getentarray("explodable_barrel", "targetname"), ::explodable_barrel_think);
+  common_scripts\utility::array_thread(getEntArray("explodable_barrel", "targetname"), ::explodable_barrel_think);
   //common_scripts\utility::array_thread(getentarray ("explodable_barrel","script_noteworthy"), ::explodable_barrel_think); ASK MO
-  common_scripts\utility::array_thread(getentarray("oil_spill", "targetname"), ::oil_spill_think);
+  common_scripts\utility::array_thread(getEntArray("oil_spill", "targetname"), ::oil_spill_think);
 }
 
 oil_spill_think() {
   self.end = getstruct(self.target, "targetname");
   self.start = getstruct(self.end.target, "targetname");
-  self.barrel = getClosestEnt(self.start.origin, getentarray("explodable_barrel", "targetname"));
+  self.barrel = getClosestEnt(self.start.origin, getEntArray("explodable_barrel", "targetname"));
   self.extra = getent(self.target, "targetname");
-  self setcandamage(true);
+  self setCanDamage(true);
 
-  if(isdefined(self.barrel)) {
+  if(isDefined(self.barrel)) {
     self.barrel.oilspill = true;
     self thread oil_spill_burn_after();
   }
 
-  while (1) {
+  while(1) {
     self waittill("damage", other, damage, direction_vec, P, type);
     if(type == "MOD_MELEE" || type == "MOD_IMPACT") {
       continue;
     }
     self.damageOwner = other;
 
-    playfx(level.breakables_fx["oilspill"]["spark"], P, direction_vec);
+    playFX(level.breakables_fx["oilspill"]["spark"], P, direction_vec);
     //P = pointOnSegmentNearestToPoint(self.start.origin, self.end.origin, P);
     thread oil_spill_burn_section(P);
     self thread oil_spill_burn(P, self.start.origin);
     self thread oil_spill_burn(P, self.end.origin);
     break;
   }
-  if(isdefined(self.barrel))
+  if(isDefined(self.barrel))
     self.barrel waittill("exploding");
 
   self.extra delete();
@@ -101,7 +101,7 @@ getClosestEnt(org, array) {
   //	ent = array[0];
   dist = 256;
   ent = undefined;
-  for (i = 0; i < array.size; i++) {
+  for(i = 0; i < array.size; i++) {
     newdist = distance(array[i] getorigin(), org);
     if(newdist >= dist)
       continue;
@@ -112,7 +112,7 @@ getClosestEnt(org, array) {
 }
 
 oil_spill_burn_after() {
-  while (1) {
+  while(1) {
     self.barrel waittill("damage", amount, attacker, direction_vec, P, type);
     if(type == "MOD_MELEE" || type == "MOD_IMPACT")
       continue;
@@ -121,14 +121,13 @@ oil_spill_burn_after() {
   self.damageOwner = attacker;
 
   // do not pass damage owner if they have disconnected before the barrels explode
-  if(!isdefined(self.damageOwner))
+  if(!isDefined(self.damageOwner))
     self radiusdamage(self.origin, 4, 10, 10);
   else
     self radiusdamage(self.origin, 4, 10, 10, self.damageOwner);
 }
 
 oil_spill_burn(P, dest) {
-
   forward = vectornormalize(dest - P);
   dist = distance(p, dest);
   range = 8;
@@ -136,14 +135,14 @@ oil_spill_burn(P, dest) {
   angle = vectortoangles(forward);
   right = anglestoright(angle);
 
-  barrels = getentarray("explodable_barrel", "targetname");
+  barrels = getEntArray("explodable_barrel", "targetname");
   distsqr = 22 * 22;
 
   test = spawn("script_origin", P);
   test hide();
 
   num = 0;
-  while (1) {
+  while(1) {
     dist -= range;
     if(dist < range * .1) {
       break;
@@ -161,7 +160,7 @@ oil_spill_burn(P, dest) {
 
     remove = [];
     barrels = common_scripts\utility::array_removeUndefined(barrels);
-    for (i = 0; i < barrels.size; i++) {
+    for(i = 0; i < barrels.size; i++) {
       vec = anglestoup(barrels[i].angles);
       start = barrels[i].origin + (common_scripts\utility::vector_multiply(vec, 22));
       pos = physicstrace(start, start + (0, 0, -64));
@@ -170,23 +169,23 @@ oil_spill_burn(P, dest) {
         remove[remove.size] = barrels[i];
         d = (80 + randomfloat(10));
 
-        if(!isdefined(self.damageOwner))
+        if(!isDefined(self.damageOwner))
           self radiusdamage(barrels[i].origin, 4, d, d);
         else
           self radiusdamage(barrels[i].origin, 4, d, d, self.damageOwner);
         //barrels[i] dodamage(, P);
       }
     }
-    for (i = 0; i < remove.size; i++)
+    for(i = 0; i < remove.size; i++)
       barrels = common_scripts\utility::array_remove(barrels, remove[i]);
     wait .1;
   }
 
-  if(!isdefined(self.barrel))
+  if(!isDefined(self.barrel))
     return;
   if(distance(P, self.start.origin) < 32) {
     d = (80 + randomfloat(10));
-    if(!isdefined(self.damageOwner))
+    if(!isDefined(self.damageOwner))
       self radiusdamage(self.barrel.origin, 4, d, d);
     else
       self radiusdamage(self.barrel.origin, 4, d, d, self.damageOwner);
@@ -196,10 +195,10 @@ oil_spill_burn(P, dest) {
 oil_spill_burn_section(P) {
   count = 0;
   time = 0;
-  playfx(level.breakables_fx["oilspill"]["burn"], P);
+  playFX(level.breakables_fx["oilspill"]["burn"], P);
 
-  while (time < 5) {
-    if(!isdefined(self.damageOwner))
+  while(time < 5) {
+    if(!isDefined(self.damageOwner))
       self radiusdamage(P, 32, 5, 1);
     else
       self radiusdamage(P, 32, 5, 1, self.damageOwner);
@@ -213,7 +212,7 @@ explodable_barrel_think() {
     return;
   //	if( (self.model != "com_barrel_benzin") && (self.model != "com_barrel_benzin_snow") )
   //		return;
-  if(!isdefined(level.precachemodeltype["com_barrel_benzin"])) {
+  if(!isDefined(level.precachemodeltype["com_barrel_benzin"])) {
     level.precachemodeltype["com_barrel_benzin"] = true;
     precacheModel("com_barrel_piece");
     precacheModel("com_barrel_piece2");
@@ -222,8 +221,8 @@ explodable_barrel_think() {
 
   self breakable_clip();
   self.damageTaken = 0;
-  self setcandamage(true);
-  for (;;) {
+  self setCanDamage(true);
+  for(;;) {
     self waittill("damage", amount, attacker, direction_vec, P, type);
     if(type == "MOD_MELEE" || type == "MOD_IMPACT") {
       continue;
@@ -257,15 +256,15 @@ explodable_barrel_burn() {
   }
 
   if(self.damagetype != "MOD_GRENADE_SPLASH" && self.damagetype != "MOD_GRENADE") {
-    while (self.damageTaken < level.barrelHealth) {
+    while(self.damageTaken < level.barrelHealth) {
       if(!startedfx) {
-        playfx(level.breakables_fx["barrel"]["burn_start"], self.origin + offset1);
+        playFX(level.breakables_fx["barrel"]["burn_start"], self.origin + offset1);
         startedfx = true;
       }
       if(count > 20)
         count = 0;
 
-      playfx(level.breakables_fx["barrel"]["burn"], self.origin + offset2);
+      playFX(level.breakables_fx["barrel"]["burn"], self.origin + offset2);
 
       if(count == 0) {
         self.damageTaken += (10 + randomfloat(10));
@@ -293,13 +292,13 @@ explodable_barrel_explode() {
   }
   offset += (0, 0, 4);
 
-  self playsound(level.barrelExpSound);
+  self playSound(level.barrelExpSound);
   //level thread play_sound_in_space(level.barrelExpSound, self.origin);
-  playfx(level.breakables_fx["barrel"]["explode"], self.origin + offset);
+  playFX(level.breakables_fx["barrel"]["explode"], self.origin + offset);
 
   level.barrelExplodingThisFrame = true;
 
-  if(isdefined(self.remove)) {
+  if(isDefined(self.remove)) {
     self.remove delete();
   }
 
@@ -307,11 +306,11 @@ explodable_barrel_explode() {
   minDamage = 1;
   maxDamage = 250;
   blastRadius = 250;
-  if(isdefined(self.radius))
+  if(isDefined(self.radius))
     blastRadius = self.radius;
 
   // do not pass damage owner if they have disconnected before the barrels explode
-  if(!isdefined(self.damageOwner))
+  if(!isDefined(self.damageOwner))
     self radiusDamage(self.origin + (0, 0, 30), blastRadius, maxDamage, minDamage, undefined, "MOD_EXPLOSIVE", "barrel_mp");
   else
     self radiusDamage(self.origin + (0, 0, 30), blastRadius, maxDamage, minDamage, self.damageOwner, "MOD_EXPLOSIVE", "barrel_mp");
@@ -339,11 +338,11 @@ explodable_barrel_explode() {
 }
 
 getstruct(name, type) {
-  if(!isdefined(level.struct_class_names))
+  if(!isDefined(level.struct_class_names))
     return undefined;
 
   array = level.struct_class_names[type][name];
-  if(!isdefined(array))
+  if(!isDefined(array))
     return undefined;
   if(array.size > 1) {
     assertMsg("getstruct used for more than one struct of type " + type + " called " + name + ".");
@@ -354,7 +353,7 @@ getstruct(name, type) {
 
 breakable_clip() {
   //targeted brushmodels take priority over proximity based breakables - nate
-  if(isdefined(self.target)) {
+  if(isDefined(self.target)) {
     targ = getent(self.target, "targetname");
     if(targ.classname == "script_brushmodel") {
       self.remove = targ;
@@ -362,8 +361,8 @@ breakable_clip() {
     }
   }
   //setup it's removable clip part
-  if((isdefined(level.breakables_clip)) && (level.breakables_clip.size > 0))
+  if((isDefined(level.breakables_clip)) && (level.breakables_clip.size > 0))
     self.remove = getClosestEnt(self.origin, level.breakables_clip);
-  if(isdefined(self.remove))
+  if(isDefined(self.remove))
     level.breakables_clip = common_scripts\utility::array_remove(level.breakables_clip, self.remove);
 }

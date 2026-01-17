@@ -8,7 +8,6 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
-
 #namespace userspawnselection;
 
 autoexec __init__system__() {
@@ -24,7 +23,7 @@ __init__() {
   setupclientfields();
 }
 
-private getdatamodelprefix(id) {
+getdatamodelprefix(id) {
   return "spawngroupStatus." + id + ".";
 }
 
@@ -52,7 +51,7 @@ setupuimodels() {
   }
 }
 
-private setupstaticmodelfieldsforspawngroup(spawngroup) {
+setupstaticmodelfieldsforspawngroup(spawngroup) {
   basename = getdatamodelprefix(spawngroup.uiindex);
   namemodel = getuimodel(getglobaluimodel(), basename + "regionName");
   spawngroupname = "";

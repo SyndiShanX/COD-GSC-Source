@@ -298,6 +298,3 @@ enable_filter_teargas(player, filterid, amount) {
 disable_filter_teargas(player, filterid) {
   player set_filter_pass_enabled(filterid, 0, false);
 }
-
-
-

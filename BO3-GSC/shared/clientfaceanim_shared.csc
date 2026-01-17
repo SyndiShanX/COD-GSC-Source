@@ -11,17 +11,17 @@
 #namespace clientfaceanim;
 
 function autoexec __init__sytem__() {
-  system::register("clientfaceanim_shared", undefined, & main, undefined);
+  system::register("clientfaceanim_shared", undefined, &main, undefined);
 }
 
 function main() {
-  callback::on_spawned( & on_player_spawned);
-  level._clientfaceanimonplayerspawned = & on_player_spawned;
+  callback::on_spawned(&on_player_spawned);
+  level._clientfaceanimonplayerspawned = &on_player_spawned;
 }
 
 function private on_player_spawned(localclientnum) {
   facialanimationsinit(localclientnum);
-  self callback::on_shutdown( & on_player_shutdown);
+  self callback::on_shutdown(&on_player_shutdown);
   self thread on_player_death(localclientnum);
 }
 
@@ -29,14 +29,14 @@ function private on_player_shutdown(localclientnum) {
   if(self isplayer()) {
     self notify("stopfacialthread");
     corpse = self getplayercorpse();
-    if(!isdefined(corpse)) {
+    if(!isDefined(corpse)) {
       return;
     }
-    if(isdefined(corpse.facialdeathanimstarted) && corpse.facialdeathanimstarted) {
+    if(isDefined(corpse.facialdeathanimstarted) && corpse.facialdeathanimstarted) {
       return;
     }
     corpse util::waittill_dobj(localclientnum);
-    if(isdefined(corpse)) {
+    if(isDefined(corpse)) {
       corpse applydeathanim(localclientnum);
       corpse.facialdeathanimstarted = 1;
     }
@@ -49,11 +49,11 @@ function private on_player_death(localclientnum) {
   if(self isplayer()) {
     self notify("stopfacialthread");
     corpse = self getplayercorpse();
-    if(isdefined(corpse.facialdeathanimstarted) && corpse.facialdeathanimstarted) {
+    if(isDefined(corpse.facialdeathanimstarted) && corpse.facialdeathanimstarted) {
       return;
     }
     corpse util::waittill_dobj(localclientnum);
-    if(isdefined(corpse)) {
+    if(isDefined(corpse)) {
       corpse applydeathanim(localclientnum);
       corpse.facialdeathanimstarted = 1;
     }
@@ -68,7 +68,7 @@ function private facialanimationsinit(localclientnum) {
 }
 
 function buildandvalidatefacialanimationlist(localclientnum) {
-  if(!isdefined(level.__clientfacialanimationslist)) {
+  if(!isDefined(level.__clientfacialanimationslist)) {
     level.__clientfacialanimationslist = [];
     level.__clientfacialanimationslist["combat"] = array("ai_face_male_generic_idle_1", "ai_face_male_generic_idle_2", "ai_face_male_generic_idle_3");
     level.__clientfacialanimationslist["combat_shoot"] = array("ai_face_male_aim_fire_1", "ai_face_male_aim_fire_2", "ai_face_male_aim_fire_3");
@@ -88,7 +88,7 @@ function buildandvalidatefacialanimationlist(localclientnum) {
 }
 
 function private facialanimationthink_getwaittime(localclientnum) {
-  if(!isdefined(localclientnum)) {
+  if(!isDefined(localclientnum)) {
     return 1;
   }
   min_wait = 0.1;
@@ -96,7 +96,7 @@ function private facialanimationthink_getwaittime(localclientnum) {
   min_wait_distance_sq = 2500;
   max_wait_distance_sq = 640000;
   local_player = getlocalplayer(localclientnum);
-  if(!isdefined(local_player)) {
+  if(!isDefined(local_player)) {
     return max_wait;
   }
   if(local_player == self && !isthirdperson(localclientnum)) {
@@ -119,16 +119,16 @@ function private facialanimationthink(localclientnum) {
   self endon("entityshutdown");
   self notify("stopfacialthread");
   self endon("stopfacialthread");
-  if(isdefined(self.__clientfacialanimationsthinkstarted)) {
+  if(isDefined(self.__clientfacialanimationsthinkstarted)) {
     return;
   }
   self.__clientfacialanimationsthinkstarted = 1;
   assert(self isplayer());
   self util::waittill_dobj(localclientnum);
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     updatefacialanimforplayer(localclientnum, self);
     wait_time = self facialanimationthink_getwaittime(localclientnum);
-    if(!isdefined(wait_time)) {
+    if(!isDefined(wait_time)) {
       wait_time = 1;
     }
     wait(wait_time);
@@ -136,13 +136,13 @@ function private facialanimationthink(localclientnum) {
 }
 
 function private updatefacialanimforplayer(localclientnum, player) {
-  if(!isdefined(player)) {
+  if(!isDefined(player)) {
     return;
   }
-  if(!isdefined(localclientnum)) {
+  if(!isDefined(localclientnum)) {
     return;
   }
-  if(!isdefined(player._currentfacestate)) {
+  if(!isDefined(player._currentfacestate)) {
     player._currentfacestate = "inactive";
   }
   currfacestate = player._currentfacestate;
@@ -182,7 +182,7 @@ function private updatefacialanimforplayer(localclientnum, player) {
     }
   }
   if(player._currentfacestate == "inactive" || currfacestate != nextfacestate) {
-    assert(isdefined(level.__clientfacialanimationslist[nextfacestate]));
+    assert(isDefined(level.__clientfacialanimationslist[nextfacestate]));
     applynewfaceanim(localclientnum, array::random(level.__clientfacialanimationslist[nextfacestate]));
     player._currentfacestate = nextfacestate;
   }
@@ -190,24 +190,24 @@ function private updatefacialanimforplayer(localclientnum, player) {
 
 function private applynewfaceanim(localclientnum, animation) {
   clearallfacialanims(localclientnum);
-  if(isdefined(animation)) {
+  if(isDefined(animation)) {
     self._currentfaceanim = animation;
     self setflaggedanimknob("ai_secondary_facial_anim", animation, 1, 0.1, 1);
   }
 }
 
 function private applydeathanim(localclientnum) {
-  if(isdefined(self._currentfacestate) && self._currentfacestate == "death") {
+  if(isDefined(self._currentfacestate) && self._currentfacestate == "death") {
     return;
   }
-  if(isdefined(self) && isdefined(level.__clientfacialanimationslist) && isdefined(level.__clientfacialanimationslist["death"])) {
+  if(isDefined(self) && isDefined(level.__clientfacialanimationslist) && isDefined(level.__clientfacialanimationslist["death"])) {
     self._currentfacestate = "death";
     applynewfaceanim(localclientnum, array::random(level.__clientfacialanimationslist["death"]));
   }
 }
 
 function private clearallfacialanims(localclientnum) {
-  if(isdefined(self._currentfaceanim) && self hasdobj(localclientnum)) {
+  if(isDefined(self._currentfaceanim) && self hasdobj(localclientnum)) {
     self clearanim(self._currentfaceanim, 0.2);
   }
   self._currentfaceanim = undefined;

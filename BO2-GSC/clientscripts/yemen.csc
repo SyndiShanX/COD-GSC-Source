@@ -62,14 +62,14 @@ speech_crowd_spawn() {
   foreach(struct in getstructarray("speech_crowd_center", "targetname")) {
     m_drone = spawn(0, struct.origin, "script_model");
     m_drone.angles = struct.angles;
-    m_drone setmodel(random(level.crowd_models));
+    m_drone setModel(random(level.crowd_models));
     m_drone thread speech_crowd_animate_guy();
   }
 
   foreach(struct in getstructarray("speech_crowd_close", "targetname")) {
     m_drone = spawn(0, struct.origin, "script_model");
     m_drone.angles = struct.angles;
-    m_drone setmodel(random(level.crowd_models_close));
+    m_drone setModel(random(level.crowd_models_close));
 
     if(m_drone.model != "c_mul_cordis_body3_1")
       m_drone attach(random(level.crowd_models_close_head), "");

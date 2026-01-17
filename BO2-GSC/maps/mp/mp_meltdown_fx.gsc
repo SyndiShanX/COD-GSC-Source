@@ -15,8 +15,7 @@ main() {
   maps\mp\createart\mp_meltdown_art::main();
 }
 
-precache_scripted_fx() {
-}
+precache_scripted_fx() {}
 
 precache_createfx_fx() {
   level._effect["fx_mp_fumes_vent_xsm_int"] = loadfx("maps/mp_maps/fx_mp_fumes_vent_xsm_int");
@@ -68,5 +67,4 @@ precache_createfx_fx() {
   level._effect["fx_mp_fire_tower_flareup_amb"] = loadfx("maps/mp_maps/fx_mp_fire_tower_flareup_amb");
 }
 
-precache_fxanim_props() {
-}
+precache_fxanim_props() {}

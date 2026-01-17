@@ -14,7 +14,7 @@ main() {
   level.dogs_enabled = true;
   maps\_destructible_opel_blitz::init();
   precacheshellshock("electrocution");
-  maps\_zombiemode_weapons::add_zombie_weapon("mine_bouncing_betty", & "ZOMBIE_WEAPON_SATCHEL_2000", 2000);
+  maps\_zombiemode_weapons::add_zombie_weapon("mine_bouncing_betty", &"ZOMBIE_WEAPON_SATCHEL_2000", 2000);
   precachemodel("tag_origin");
   precachemodel("zombie_zapper_power_box");
   precachemodel("zombie_zapper_power_box_on");
@@ -52,8 +52,8 @@ main() {
   level thread spawn_point_override();
   level.custom_spawnPlayer = ::spectator_respawn_new;
   init_zombie_asylum();
-  mgs = getentarray("fountain_mg", "targetname");
-  for (i = 0; i < mgs.size; i++) {
+  mgs = getEntArray("fountain_mg", "targetname");
+  for(i = 0; i < mgs.size; i++) {
     mgs[i] hide();
   }
   level thread intro_screen();
@@ -65,7 +65,7 @@ main() {
 player_zombie_awareness() {
   self endon("disconnect");
   self endon("death");
-  while (1) {
+  while(1) {
     wait(1);
     zombie = get_closest_ai(self.origin, "axis");
     if(!isDefined(zombie)) {
@@ -86,7 +86,7 @@ player_zombie_awareness() {
     if(distance2d(zombie.origin, self.origin) < dist) {
       yaw = self animscripts\utility::GetYawToSpot(zombie.origin);
       if(yaw < -95 || yaw > 95) {
-        zombie playsound("behind_vocals");
+        zombie playSound("behind_vocals");
       }
     }
   }
@@ -96,7 +96,7 @@ intro_screen() {
   flag_wait("all_players_connected");
   wait(2);
   level.intro_hud = [];
-  for (i = 0; i < 3; i++) {
+  for(i = 0; i < 3; i++) {
     level.intro_hud[i] = newHudElem();
     level.intro_hud[i].x = 0;
     level.intro_hud[i].y = 0;
@@ -120,18 +120,18 @@ intro_screen() {
   level.intro_hud[0] settext(&"ZOMBIE_INTRO_ASYLUM_LEVEL_BERLIN");
   level.intro_hud[1] settext(&"ZOMBIE_INTRO_ASYLUM_LEVEL_HIMMLER");
   level.intro_hud[2] settext(&"ZOMBIE_INTRO_ASYLUM_LEVEL_SEPTEMBER");
-  for (i = 0; i < 3; i++) {
+  for(i = 0; i < 3; i++) {
     level.intro_hud[i] FadeOverTime(1.5);
     level.intro_hud[i].alpha = 1;
     wait(1.5);
   }
   wait(1.5);
-  for (i = 0; i < 3; i++) {
+  for(i = 0; i < 3; i++) {
     level.intro_hud[i] FadeOverTime(1.5);
     level.intro_hud[i].alpha = 0;
     wait(1.5);
   }
-  for (i = 0; i < 3; i++) {
+  for(i = 0; i < 3; i++) {
     level.intro_hud[i] destroy();
   }
   level thread magic_box_limit_location_init();
@@ -143,19 +143,19 @@ play_pa_system() {
   playsoundatposition("alarm", speakerA.origin);
   level thread play_comp_sounds();
   generator_arc = getent("generator_arc", "targetname");
-  generator_arc playloopsound("gen_arc_loop");
+  generator_arc playLoopSound("gen_arc_loop");
   wait(4.0);
   generator = getent("generator_origin", "targetname");
-  generator playloopsound("generator_loop");
+  generator playLoopSound("generator_loop");
   wait(8.0);
   playsoundatposition("amb_pa_system", speakerA.origin);
 }
 
 play_comp_sounds() {
   computer = getent("comp", "targetname");
-  computer playsound("comp_start");
+  computer playSound("comp_start");
   wait(6);
-  computer playloopsound("comp_loop");
+  computer playLoopSound("comp_loop");
 }
 
 init_zombie_asylum() {
@@ -167,10 +167,10 @@ init_zombie_asylum() {
   level thread init_elec_trap_trigs();
   north_ext_goals = getstructarray("north_init_goal", "script_noteworthy");
   south_ext_goals = getstructarray("south_init_goal", "script_noteworthy");
-  for (i = 0; i < north_ext_goals.size; i++) {
+  for(i = 0; i < north_ext_goals.size; i++) {
     north_ext_goals[i].is_active = 1;
   }
-  for (i = 0; i < south_ext_goals.size; i++) {
+  for(i = 0; i < south_ext_goals.size; i++) {
     south_ext_goals[i].is_active = 1;
   }
   struct1 = getstruct("north_upstairs_volume_goal", "script_noteworthy");
@@ -188,15 +188,15 @@ init_zombie_asylum() {
   getent("north_spawners", "targetname") thread manage_zone();
   level thread give_betties_after_rounds();
   level thread init_lights();
-  water_trigs = getentarray("waterfall", "targetname");
+  water_trigs = getEntArray("waterfall", "targetname");
   array_thread(water_trigs, ::watersheet_on_trigger);
 }
 
 init_lights() {
   tinhats = [];
   arms = [];
-  ents = getentarray("elect_light_model", "targetname");
-  for (i = 0; i < ents.size; i++) {
+  ents = getEntArray("elect_light_model", "targetname");
+  for(i = 0; i < ents.size; i++) {
     if(issubstr(ents[i].model, "tinhat")) {
       tinhats[tinhats.size] = ents[i];
     }
@@ -204,22 +204,22 @@ init_lights() {
       arms[arms.size] = ents[i];
     }
   }
-  for (i = 0; i < tinhats.size; i++) {
+  for(i = 0; i < tinhats.size; i++) {
     wait_network_frame();
-    tinhats[i] setmodel("lights_tinhatlamp_off");
+    tinhats[i] setModel("lights_tinhatlamp_off");
   }
-  for (i = 0; i < arms.size; i++) {
+  for(i = 0; i < arms.size; i++) {
     wait_network_frame();
-    arms[i] setmodel("lights_indlight");
+    arms[i] setModel("lights_indlight");
   }
   flag_wait("electric_switch_used");
-  for (i = 0; i < tinhats.size; i++) {
+  for(i = 0; i < tinhats.size; i++) {
     wait_network_frame();
-    tinhats[i] setmodel("lights_tinhatlamp_on");
+    tinhats[i] setModel("lights_tinhatlamp_on");
   }
-  for (i = 0; i < arms.size; i++) {
+  for(i = 0; i < arms.size; i++) {
     wait_network_frame();
-    arms[i] setmodel("lights_indlight_on");
+    arms[i] setModel("lights_indlight_on");
   }
   open_light = getent("opened_chest_light", "script_noteworthy");
   hallway_light = getent("magic_box_hallway_light", "script_noteworthy");
@@ -227,15 +227,15 @@ init_lights() {
   hallway_light setLightIntensity(0.01);
   open_light_model = getent("opened_chest_model", "script_noteworthy");
   hallway_light_model = getent("magic_box_hallway_model", "script_noteworthy");
-  open_light_model setmodel("lights_tinhatlamp_off");
-  hallway_light_model setmodel("lights_tinhatlamp_off");
+  open_light_model setModel("lights_tinhatlamp_off");
+  hallway_light_model setModel("lights_tinhatlamp_off");
 }
 
 lock_zombie_spawners(door_name) {
-  door = getentarray(door_name, "targetname");
+  door = getEntArray(door_name, "targetname");
   if(door.size > 0 && isDefined(door[0].target)) {
-    spawners = getentarray(door[0].target, "targetname");
-    for (i = 0; i < spawners.size; i++) {
+    spawners = getEntArray(door[0].target, "targetname");
+    for(i = 0; i < spawners.size; i++) {
       spawners[i].locked_spawner = true;
       level.enemy_spawns = array_remove_nokeys(level.enemy_spawns, spawners[i]);
     }
@@ -243,16 +243,16 @@ lock_zombie_spawners(door_name) {
 }
 
 activate_goals_when_door_opened(door, key, type) {
-  trigs = getentarray(door, key);
+  trigs = getEntArray(door, key);
   purchase_trigs = [];
-  for (i = 0; i < trigs.size; i++) {
+  for(i = 0; i < trigs.size; i++) {
     if(isDefined(trigs[i].targetname) && trigs[i].targetname == type) {
       purchase_trigs[purchase_trigs.size] = trigs[i];
     }
   }
   lock_zombie_spawners(purchase_trigs[0].target);
   entry_points = getstructarray(door, key);
-  for (i = 0; i < entry_points.size; i++) {
+  for(i = 0; i < entry_points.size; i++) {
     if(entry_points[i].script_noteworthy == door) {
       entry_points[i].is_active = undefined;
       entry_points[i] trigger_off();
@@ -263,7 +263,7 @@ activate_goals_when_door_opened(door, key, type) {
   }
   flag_wait(purchase_trigs[0].script_flag);
   entry_points = getstructarray(door, key);
-  for (i = 0; i < entry_points.size; i++) {
+  for(i = 0; i < entry_points.size; i++) {
     if(entry_points[i].script_noteworthy == door) {
       entry_points[i].is_active = 1;
       entry_points[i] trigger_on();
@@ -275,8 +275,8 @@ manage_zone() {
   spawners = undefined;
   dog_spawners = [];
   if(isDefined(self.target)) {
-    spawners = getentarray(self.target, "targetname");
-    for (i = 0; i < spawners.size; i++) {
+    spawners = getEntArray(self.target, "targetname");
+    for(i = 0; i < spawners.size; i++) {
       if(issubstr(spawners[i].classname, "dog")) {
         dog_spawners = array_add(dog_spawners, spawners[i]);
         spawners = array_remove(spawners, spawners[i]);
@@ -285,7 +285,7 @@ manage_zone() {
   }
   goals = getstructarray("exterior_goal", "targetname");
   check_ent = undefined;
-  while (getdvarint("noclip") == 0 || getdvarint("notarget") != 0) {
+  while(getdvarint("noclip") == 0 || getdvarint("notarget") != 0) {
     zone_active = false;
     players = get_players();
     if(self.targetname == "south_upstairs_volume" && flag("magic_box_south")) {
@@ -294,7 +294,7 @@ manage_zone() {
     if(self.targetname == "north_upstairs_volume" && flag("magic_box_north")) {
       check_ent = getent("magic_room_north_volume", "targetname");
     }
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       if(isDefined(check_ent)) {
         if(players[i] istouching(self) || players[i] istouching(check_ent)) {
           zone_active = true;
@@ -307,7 +307,7 @@ manage_zone() {
     }
     if(zone_active) {
       if(isDefined(spawners)) {
-        for (x = 0; x < spawners.size; x++) {
+        for(x = 0; x < spawners.size; x++) {
           no_dupes = array_check_for_dupes(level.enemy_spawns, spawners[x]);
           if(no_dupes) {
             if((!isDefined(spawners[x].locked_spawner)) || (isDefined(spawners[x].locked_spawner && !spawners[x].locked_spawner))) {
@@ -316,7 +316,7 @@ manage_zone() {
           }
         }
       }
-      for (x = 0; x < goals.size; x++) {
+      for(x = 0; x < goals.size; x++) {
         if(isDefined(goals[x].is_active)) {
           if(isDefined(goals[x].script_string) && (goals[x].script_string == self.targetname + "_goal")) {
             goals[x] thread trigger_on();
@@ -330,13 +330,13 @@ manage_zone() {
       }
     } else {
       if(isDefined(spawners)) {
-        for (x = 0; x < spawners.size; x++) {
+        for(x = 0; x < spawners.size; x++) {
           if(isDefined(spawners[x].script_string) && spawners[x].script_string == self.targetname) {
             level.enemy_spawns = array_remove_nokeys(level.enemy_spawns, spawners[x]);
           }
         }
       }
-      for (x = 0; x < goals.size; x++) {
+      for(x = 0; x < goals.size; x++) {
         if(isDefined(goals[x].is_active)) {
           if(isDefined(goals[x].script_string) && (goals[x].script_string == self.targetname + "_goal")) {
             goals[x] thread trigger_off();
@@ -404,7 +404,7 @@ include_powerup(powerup_name) {
 }
 
 purchase_bouncing_betties() {
-  trigs = getentarray("betty_purchase", "targetname");
+  trigs = getEntArray("betty_purchase", "targetname");
   array_thread(trigs, ::buy_bouncing_betties);
 }
 
@@ -414,7 +414,7 @@ buy_bouncing_betties() {
   betty_model hide();
   self sethintstring(&"ZOMBIE_BETTY_PURCHASE");
   level thread set_betty_visible();
-  while (1) {
+  while(1) {
     self waittill("trigger", who);
     if(who in_revive_trigger()) {
       continue;
@@ -427,8 +427,8 @@ buy_bouncing_betties() {
           betty_model show();
           who maps\_zombiemode_score::minus_to_player_score(self.zombie_cost);
           who thread bouncing_betty_setup();
-          trigs = getentarray("betty_purchase", "targetname");
-          for (i = 0; i < trigs.size; i++) {
+          trigs = getEntArray("betty_purchase", "targetname");
+          for(i = 0; i < trigs.size; i++) {
             trigs[i] SetInvisibleToPlayer(who);
           }
         }
@@ -439,11 +439,11 @@ buy_bouncing_betties() {
 
 set_betty_visible() {
   players = getplayers();
-  trigs = getentarray("betty_purchase", "targetname");
-  while (1) {
-    for (j = 0; j < players.size; j++) {
+  trigs = getEntArray("betty_purchase", "targetname");
+  while(1) {
+    for(j = 0; j < players.size; j++) {
       if(!isDefined(players[j].has_betties)) {
-        for (i = 0; i < trigs.size; i++) {
+        for(i = 0; i < trigs.size; i++) {
           trigs[i] SetInvisibleToPlayer(players[j], false);
         }
       }
@@ -453,7 +453,7 @@ set_betty_visible() {
 }
 
 bouncing_betty_watch() {
-  while (1) {
+  while(1) {
     self waittill("grenade_fire", betty, weapname);
     if(weapname == "mine_bouncing_betty") {
       betty.owner = self;
@@ -487,22 +487,22 @@ betty_think() {
   trigger = spawn("trigger_radius", self.origin, 9, 80, 64);
   trigger waittill("trigger");
   trigger = trigger;
-  self playsound("betty_activated");
+  self playSound("betty_activated");
   wait(.1);
   fake_model = spawn("script_model", self.origin);
-  fake_model setmodel(self.model);
+  fake_model setModel(self.model);
   self hide();
   tag_origin = spawn("script_model", self.origin);
-  tag_origin setmodel("tag_origin");
+  tag_origin setModel("tag_origin");
   tag_origin linkto(fake_model);
   temp_origin = self.origin;
-  playfxontag(level._effect["betty_trail"], tag_origin, "tag_origin");
+  playFXOnTag(level._effect["betty_trail"], tag_origin, "tag_origin");
   fake_model moveto(self.origin + (0, 0, 32), .2);
   fake_model waittill("movedone");
-  playfx(level._effect["betty_explode"], fake_model.origin);
+  playFX(level._effect["betty_explode"], fake_model.origin);
   earthquake(1, .4, temp_origin, 512);
   zombs = getaiarray("axis");
-  for (i = 0; i < zombs.size; i++) {
+  for(i = 0; i < zombs.size; i++) {
     if(DistanceSquared(zombs[i].origin, temp_origin) < 200 * 200) {
       zombs[i] thread maps\_zombiemode_spawner_asylum::zombie_damage("MOD_EXPLOSIVE", "none", zombs[i].origin, self.owner);
     }
@@ -517,17 +517,17 @@ betty_think() {
 
 betty_smoke_trail() {
   self.tag_origin = spawn("script_model", self.origin);
-  self.tag_origin setmodel("tag_origin");
-  playfxontag(level._effect["betty_trail"], self.tag_origin, "tag_origin");
+  self.tag_origin setModel("tag_origin");
+  playFXOnTag(level._effect["betty_trail"], self.tag_origin, "tag_origin");
   self.tag_origin moveto(self.tag_origin.origin + (0, 0, 100), .15);
 }
 
 give_betties_after_rounds() {
-  while (1) {
+  while(1) {
     level waittill("between_round_over");
     {
       players = get_players();
-      for (i = 0; i < players.size; i++) {
+      for(i = 0; i < players.size; i++) {
         if(isDefined(players[i].has_betties)) {
           players[i] giveweapon("mine_bouncing_betty");
           players[i] setactionslot(4, "weapon", "mine_bouncing_betty");
@@ -539,7 +539,7 @@ give_betties_after_rounds() {
 }
 
 init_elec_trap_trigs() {
-  trap_trigs = getentarray("gas_access", "targetname");
+  trap_trigs = getEntArray("gas_access", "targetname");
   array_thread(trap_trigs, ::electric_trap_think);
   array_thread(trap_trigs, ::electric_trap_dialog);
 }
@@ -553,11 +553,11 @@ toilet_useage() {
   if(!isDefined(level.eggs)) {
     level.eggs = 0;
   }
-  while (1) {
+  while(1) {
     wait(0.5);
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       toilet_trig waittill("trigger", players);
-      toilet_trig playsound("toilet_flush", "sound_done");
+      toilet_trig playSound("toilet_flush", "sound_done");
       toilet_trig waittill("sound_done");
       toilet_counter++;
       if(toilet_counter == 3) {
@@ -578,9 +578,9 @@ chair_useage() {
   chair_trig SetCursorHint("HINT_NOICON");
   chair_trig UseTriggerRequireLookAt();
   players = getplayers();
-  while (1) {
+  while(1) {
     wait(0.05);
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       chair_trig waittill("trigger", players);
       chair_counter++;
       if(chair_counter == 3) {
@@ -595,10 +595,10 @@ electric_trap_dialog() {
   self endon("warning_dialog");
   level endon("switch_flipped");
   timer = 0;
-  while (1) {
+  while(1) {
     wait(0.5);
     players = get_players();
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       dist = distancesquared(players[i].origin, self.origin);
       if(dist > 70 * 70) {
         timer = 0;
@@ -622,8 +622,8 @@ electric_trap_think() {
   self.is_available = undefined;
   self.zombie_cost = 1000;
   self.in_use = 0;
-  while (1) {
-    valve_trigs = getentarray(self.script_noteworthy, "script_noteworthy");
+  while(1) {
+    valve_trigs = getEntArray(self.script_noteworthy, "script_noteworthy");
     self waittill("trigger", who);
     if(who in_revive_trigger()) {
       continue;
@@ -672,7 +672,7 @@ electric_trap_move_switch(parent) {
   if(tswitch.script_linkname == "4") {
     north_zapper_light_red();
     tswitch rotatepitch(-180, .5);
-    tswitch playsound("amb_sparks_l_b");
+    tswitch playSound("amb_sparks_l_b");
     tswitch waittill("rotatedone");
     self notify("switch_activated");
     self waittill("available");
@@ -681,7 +681,7 @@ electric_trap_move_switch(parent) {
   } else {
     south_zapper_light_red();
     tswitch rotatepitch(180, .5);
-    tswitch playsound("amb_sparks_l_b");
+    tswitch playSound("amb_sparks_l_b");
     tswitch waittill("rotatedone");
     self notify("switch_activated");
     self waittill("available");
@@ -693,29 +693,29 @@ electric_trap_move_switch(parent) {
 activate_electric_trap() {
   if(isDefined(self.script_string) && self.script_string == "north") {
     machine = getent("zap_machine_north", "targetname");
-    machine setmodel("zombie_zapper_power_box_on");
+    machine setModel("zombie_zapper_power_box_on");
     clientnotify("north");
   } else {
     machine = getent("zap_machine_south", "targetname");
-    machine setmodel("zombie_zapper_power_box_on");
+    machine setModel("zombie_zapper_power_box_on");
     clientnotify("south");
   }
   clientnotify(self.target);
   fire_points = getstructarray(self.target, "targetname");
-  for (i = 0; i < fire_points.size; i++) {
+  for(i = 0; i < fire_points.size; i++) {
     wait_network_frame();
     fire_points[i] thread electric_trap_fx(self);
   }
   self.zombie_dmg_trig thread elec_barrier_damage();
   level waittill("arc_done");
-  machine setmodel("zombie_zapper_power_box");
+  machine setModel("zombie_zapper_power_box");
 }
 
 electric_trap_fx(notify_ent) {
   self.tag_origin = spawn("script_model", self.origin);
   if(isDefined(self.script_sound)) {
-    self.tag_origin playsound("elec_start");
-    self.tag_origin playloopsound("elec_loop");
+    self.tag_origin playSound("elec_start");
+    self.tag_origin playLoopSound("elec_loop");
     self thread play_electrical_sound();
   }
   wait(25);
@@ -729,14 +729,14 @@ electric_trap_fx(notify_ent) {
 
 play_electrical_sound() {
   level endon("arc_done");
-  while (1) {
+  while(1) {
     wait(randomfloatrange(0.1, 0.5));
     playsoundatposition("elec_arc", self.origin);
   }
 }
 
 elec_barrier_damage() {
-  while (1) {
+  while(1) {
     self waittill("trigger", ent);
     if(isplayer(ent)) {
       ent thread player_elec_damage();
@@ -772,7 +772,7 @@ player_elec_damage() {
     self shellshock("electrocution", shocktime);
     if(level.elec_loop == 0) {
       elec_loop = 1;
-      self playsound("zombie_arc");
+      self playSound("zombie_arc");
     }
     if(!self hasperk("specialty_armorvest") || self.health - 100 < 1) {
       radiusdamage(self.origin, 10, self.health + 100, self.health + 100);
@@ -790,7 +790,7 @@ zombie_elec_death(flame_chance) {
   if(flame_chance > 90 && level.burning_zombies.size < 6) {
     level.burning_zombies[level.burning_zombies.size] = self;
     self thread zombie_flame_watch();
-    self playsound("ignite");
+    self playSound("ignite");
     self thread animscripts\death::flame_death_fx();
     wait(randomfloat(1.25));
   } else {
@@ -808,7 +808,7 @@ zombie_elec_death(flame_chance) {
       self thread play_elec_vocals();
     }
     wait(randomfloat(1.25));
-    self playsound("zombie_arc");
+    self playSound("zombie_arc");
   }
   self dodamage(self.health + 666, self.origin);
 }
@@ -830,7 +830,7 @@ spawn_point_override() {
     side1 = south_structs;
     side2 = north_structs;
   }
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i] thread player_zombie_awareness();
     players[i] thread player_killstreak_timer();
     players[i] thread fix_hax();
@@ -871,9 +871,9 @@ show_betty_hint(string) {
   self endon("death");
   self endon("disconnect");
   if(string == "betty_purchased")
-    text = & "ZOMBIE_BETTY_HOWTO";
+    text = &"ZOMBIE_BETTY_HOWTO";
   else
-    text = & "ZOMBIE_BETTY_ALREADY_PURCHASED";
+    text = &"ZOMBIE_BETTY_ALREADY_PURCHASED";
   self setup_client_hintelem();
   self.hintelem setText(text);
   wait(3.5);
@@ -883,12 +883,12 @@ show_betty_hint(string) {
 Fountain_Mg42_Activate() {
   trig = getent("trig_courtyard_mg", "targetname");
   trig sethintstring(&"ZOMBIE_USE_AUTO_TURRET");
-  mgs = getentarray("fountain_mg", "targetname");
-  fake_mgs = getentarray("fake_mg", "script_noteworthy");
-  for (i = 0; i < mgs.size; i++) {
+  mgs = getEntArray("fountain_mg", "targetname");
+  fake_mgs = getEntArray("fake_mg", "script_noteworthy");
+  for(i = 0; i < mgs.size; i++) {
     mgs[i] hide();
   }
-  while (1) {
+  while(1) {
     trig waittill("trigger", who);
     if(isDefined(trig.is_activated)) {
       continue;
@@ -907,38 +907,38 @@ Fountain_Mg42_Activate() {
         fountain_top moveto(fountain_top.origin + (0, 0, -200), 3);
         fountain_top waittill("movedone");
         trig trigger_on();
-        fountain_mg = getentarray("fountain_turret", "targetname");
-        for (i = 0; i < fountain_mg.size; i++) {
+        fountain_mg = getEntArray("fountain_turret", "targetname");
+        for(i = 0; i < fountain_mg.size; i++) {
           fountain_mg[i] moveto(fountain_mg[i].origin + (0, 0, 200), 3);
         }
         fountain_mg[0] waittill("movedone");
-        for (i = 0; i < fake_mgs.size; i++) {
+        for(i = 0; i < fake_mgs.size; i++) {
           fake_mgs[i] hide();
         }
         array_thread(fake_mgs, ::trigger_off);
-        for (i = 0; i < mgs.size; i++) {
+        for(i = 0; i < mgs.size; i++) {
           mgs[i] show();
         }
-        for (i = 0; i < mgs.size; i++) {
+        for(i = 0; i < mgs.size; i++) {
           mg = mgs[i];
           mg setTurretTeam("allies");
           mg SetMode("auto_nonai");
           mg thread maps\_mgturret::burst_fire_unmanned();
         }
         wait(30);
-        for (i = 0; i < mgs.size; i++) {
+        for(i = 0; i < mgs.size; i++) {
           mg = mgs[i];
           mg notify("stop_burst_fire_unmanned");
           mg SetMode("manual");
         }
         array_thread(fake_mgs, ::trigger_on);
-        for (i = 0; i < fake_mgs.size; i++) {
+        for(i = 0; i < fake_mgs.size; i++) {
           fake_mgs[i] show();
         }
-        for (i = 0; i < mgs.size; i++) {
+        for(i = 0; i < mgs.size; i++) {
           mgs[i] hide();
         }
-        for (i = 0; i < fountain_mg.size; i++) {
+        for(i = 0; i < fountain_mg.size; i++) {
           fountain_mg[i] moveto(fountain_mg[i].origin + (0, 0, -200), 3);
         }
         fountain_mg[0] waittill("movedone");
@@ -957,13 +957,13 @@ master_electric_switch() {
   master_switch = getent("master_switch", "targetname");
   master_switch notsolid();
   trig sethintstring(&"ZOMBIE_ELECTRIC_SWITCH");
-  door_trigs = getentarray("electric_door", "script_noteworthy");
+  door_trigs = getEntArray("electric_door", "script_noteworthy");
   array_thread(door_trigs, ::set_door_unusable);
   array_thread(door_trigs, ::play_door_dialog);
   fx_org = spawn("script_model", (-674.922, -300.473, 284.125));
-  fx_org setmodel("tag_origin");
+  fx_org setModel("tag_origin");
   fx_org.angles = (0, 90, 0);
-  playfxontag(level._effect["electric_power_gen_idle"], fx_org, "tag_origin");
+  playFXOnTag(level._effect["electric_power_gen_idle"], fx_org, "tag_origin");
   cheat = false;
   if(GetDvarInt("zombie_cheat") >= 3) {
     wait(5);
@@ -974,7 +974,7 @@ master_electric_switch() {
   }
   array_thread(door_trigs, ::trigger_off);
   master_switch rotateroll(-90, .3);
-  master_switch playsound("switch_flip");
+  master_switch playSound("switch_flip");
   clientnotify("revive_on");
   clientnotify("middle_door_open");
   clientnotify("fast_reload_on");
@@ -988,35 +988,35 @@ master_electric_switch() {
   left_org_b = getent("audio_swtch_b_left", "targetname");
   right_org_b = getent("audio_swtch_b_right", "targetname");
   if(isDefined(left_org)) {
-    left_org playsound("amb_sparks_l");
+    left_org playSound("amb_sparks_l");
   }
   if(isDefined(left_org_b)) {
-    left_org playsound("amb_sparks_l_b");
+    left_org playSound("amb_sparks_l_b");
   }
   if(isDefined(right_org)) {
-    right_org playsound("amb_sparks_r");
+    right_org playSound("amb_sparks_r");
   }
   if(isDefined(right_org_b)) {
-    right_org playsound("amb_sparks_r_b");
+    right_org playSound("amb_sparks_r_b");
   }
   SetClientSysState("levelNotify", "start_lights");
   level thread play_pa_system();
   flag_set("electric_switch_used");
   trig delete();
-  traps = getentarray("gas_access", "targetname");
-  for (i = 0; i < traps.size; i++) {
+  traps = getEntArray("gas_access", "targetname");
+  for(i = 0; i < traps.size; i++) {
     traps[i] sethintstring(&"ZOMBIE_BUTTON_NORTH_FLAMES");
     traps[i].is_available = true;
   }
   master_switch waittill("rotatedone");
-  playfx(level._effect["switch_sparks"], getstruct("switch_fx", "targetname").origin);
+  playFX(level._effect["switch_sparks"], getstruct("switch_fx", "targetname").origin);
   level notify("master_switch_activated");
   fx_org delete();
   fx_org = spawn("script_model", (-675.021, -300.906, 283.724));
-  fx_org setmodel("tag_origin");
+  fx_org setModel("tag_origin");
   fx_org.angles = (0, 90, 0);
-  playfxontag(level._effect["electric_power_gen_on"], fx_org, "tag_origin");
-  fx_org playloopsound("elec_current_loop");
+  playFXOnTag(level._effect["electric_power_gen_on"], fx_org, "tag_origin");
+  fx_org playLoopSound("elec_current_loop");
   north_zapper_light_green();
   south_zapper_light_green();
   wait(6);
@@ -1026,7 +1026,7 @@ master_electric_switch() {
   level notify("electric_on_middle_door");
   level notify("doubletap_on");
   level notify("juggernog_on");
-  doors = getentarray(door_trigs[0].target, "targetname");
+  doors = getEntArray(door_trigs[0].target, "targetname");
   open_bottom_doors(doors);
   exploder(101);
   wait(8);
@@ -1037,21 +1037,21 @@ master_electric_switch() {
 play_door_dialog() {
   self endon("warning_dialog");
   timer = 0;
-  while (1) {
+  while(1) {
     wait(0.05);
     players = get_players();
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       dist = distancesquared(players[i].origin, self.origin);
       if(dist > 70 * 70) {
         timer = 0;
         continue;
       }
-      while (dist < 70 * 70 && timer < 3) {
+      while(dist < 70 * 70 && timer < 3) {
         wait(0.5);
         timer++;
       }
       if(dist > 70 * 70 && timer >= 3) {
-        self playsound("door_deny");
+        self playSound("door_deny");
         players[i] thread do_player_vo("vox_start", 5);
         wait(3);
         self notify("warning_dialog");
@@ -1067,10 +1067,10 @@ set_door_unusable() {
 
 watch_magic_doors() {
   level thread magic_door_flags();
-  trigs = getentarray("magic_door", "script_noteworthy");
+  trigs = getEntArray("magic_door", "script_noteworthy");
   array_thread(trigs, ::magic_door_monitor);
   used = 0;
-  while (1) {
+  while(1) {
     level waittill("magic_door_used");
     used++;
     if(used > 1) {
@@ -1109,7 +1109,7 @@ waitfor_flag(which) {
 
 open_bottom_doors(doors) {
   time = 1;
-  for (i = 0; i < doors.size; i++) {
+  for(i = 0; i < doors.size; i++) {
     doors[i] NotSolid();
     time = 1;
     if(isDefined(doors[i].script_transition_time)) {
@@ -1118,7 +1118,7 @@ open_bottom_doors(doors) {
     doors[i] connectpaths();
     if(isDefined(doors[i].script_vector)) {
       doors[i] MoveTo(doors[i].origin + doors[i].script_vector, time, time * 0.25, time * 0.25);
-      doors[i] playsound("door_slide_open");
+      doors[i] playSound("door_slide_open");
     }
     wait(randomfloat(.15));
   }
@@ -1126,16 +1126,16 @@ open_bottom_doors(doors) {
 
 electric_trap_wire_sparks(side) {
   self endon("elec_done");
-  while (1) {
+  while(1) {
     sparks = getstruct("trap_wire_sparks_" + side, "targetname");
     self.fx_org = spawn("script_model", sparks.origin);
-    self.fx_org setmodel("tag_origin");
+    self.fx_org setModel("tag_origin");
     self.fx_org.angles = sparks.angles;
-    playfxontag(level._effect["electric_current"], self.fx_org, "tag_origin");
+    playFXOnTag(level._effect["electric_current"], self.fx_org, "tag_origin");
     targ = getstruct(sparks.target, "targetname");
-    while (isDefined(targ)) {
+    while(isDefined(targ)) {
       self.fx_org moveto(targ.origin, .15);
-      self.fx_org playloopsound("elec_current_loop", .1);
+      self.fx_org playLoopSound("elec_current_loop", .1);
       self.fx_org waittill("movedone");
       self.fx_org stoploopsound(.1);
       if(isDefined(targ.target)) {
@@ -1144,7 +1144,7 @@ electric_trap_wire_sparks(side) {
         targ = undefined;
       }
     }
-    playfxontag(level._effect["electric_short_oneshot"], self.fx_org, "tag_origin");
+    playFXOnTag(level._effect["electric_short_oneshot"], self.fx_org, "tag_origin");
     wait(randomintrange(3, 9));
     self.fx_org delete();
   }
@@ -1153,16 +1153,16 @@ electric_trap_wire_sparks(side) {
 electric_current_open_middle_door() {
   sparks = getstruct("electric_middle_door", "targetname");
   fx_org = spawn("script_model", sparks.origin);
-  fx_org setmodel("tag_origin");
+  fx_org setModel("tag_origin");
   fx_org.angles = sparks.angles;
-  playfxontag(level._effect["electric_current"], fx_org, "tag_origin");
+  playFXOnTag(level._effect["electric_current"], fx_org, "tag_origin");
   targ = getstruct(sparks.target, "targetname");
-  while (isDefined(targ)) {
+  while(isDefined(targ)) {
     fx_org moveto(targ.origin, .075);
     if(isDefined(targ.script_noteworthy) && (targ.script_noteworthy == "junction_boxs" || targ.script_noteworthy == "electric_end")) {
-      playfxontag(level._effect["electric_short_oneshot"], fx_org, "tag_origin");
+      playFXOnTag(level._effect["electric_short_oneshot"], fx_org, "tag_origin");
     }
-    fx_org playloopsound("elec_current_loop", .1);
+    fx_org playLoopSound("elec_current_loop", .1);
     fx_org waittill("movedone");
     fx_org stoploopsound(.1);
     if(isDefined(targ.target)) {
@@ -1172,7 +1172,7 @@ electric_current_open_middle_door() {
     }
   }
   level notify("electric_on_middle_door");
-  playfxontag(level._effect["electric_short_oneshot"], fx_org, "tag_origin");
+  playFXOnTag(level._effect["electric_short_oneshot"], fx_org, "tag_origin");
   wait(randomintrange(3, 9));
   fx_org delete();
 }
@@ -1180,17 +1180,17 @@ electric_current_open_middle_door() {
 electric_current_revive_machine() {
   sparks = getstruct("revive_electric_wire", "targetname");
   fx_org = spawn("script_model", sparks.origin);
-  fx_org setmodel("tag_origin");
+  fx_org setModel("tag_origin");
   fx_org.angles = sparks.angles;
-  playfxontag(level._effect["electric_current"], fx_org, "tag_origin");
+  playFXOnTag(level._effect["electric_current"], fx_org, "tag_origin");
   targ = getstruct(sparks.target, "targetname");
   wait(0.2);
-  while (isDefined(targ)) {
+  while(isDefined(targ)) {
     fx_org moveto(targ.origin, .075);
     if(isDefined(targ.script_noteworthy) && targ.script_noteworthy == "junction_revive") {
-      playfxontag(level._effect["electric_short_oneshot"], fx_org, "tag_origin");
+      playFXOnTag(level._effect["electric_short_oneshot"], fx_org, "tag_origin");
     }
-    fx_org playloopsound("elec_current_loop", .1);
+    fx_org playLoopSound("elec_current_loop", .1);
     fx_org waittill("movedone");
     fx_org stoploopsound(.1);
     if(isDefined(targ.target)) {
@@ -1200,7 +1200,7 @@ electric_current_revive_machine() {
     }
   }
   level notify("revive_on");
-  playfxontag(level._effect["electric_short_oneshot"], fx_org, "tag_origin");
+  playFXOnTag(level._effect["electric_short_oneshot"], fx_org, "tag_origin");
   wait(randomintrange(3, 9));
   fx_org delete();
 }
@@ -1208,16 +1208,16 @@ electric_current_revive_machine() {
 electric_current_reload_machine() {
   sparks = getstruct("electric_fast_reload", "targetname");
   fx_org = spawn("script_model", sparks.origin);
-  fx_org setmodel("tag_origin");
+  fx_org setModel("tag_origin");
   fx_org.angles = sparks.angles;
-  playfxontag(level._effect["electric_current"], fx_org, "tag_origin");
+  playFXOnTag(level._effect["electric_current"], fx_org, "tag_origin");
   targ = getstruct(sparks.target, "targetname");
-  while (isDefined(targ)) {
+  while(isDefined(targ)) {
     fx_org moveto(targ.origin, .075);
     if(isDefined(targ.script_noteworthy) && targ.script_noteworthy == "reload_junction") {
-      playfxontag(level._effect["electric_short_oneshot"], fx_org, "tag_origin");
+      playFXOnTag(level._effect["electric_short_oneshot"], fx_org, "tag_origin");
     }
-    fx_org playloopsound("elec_current_loop", .1);
+    fx_org playLoopSound("elec_current_loop", .1);
     fx_org waittill("movedone");
     fx_org stoploopsound(.1);
     if(isDefined(targ.target)) {
@@ -1227,7 +1227,7 @@ electric_current_reload_machine() {
     }
   }
   level notify("sleight_on");
-  playfxontag(level._effect["electric_short_oneshot"], fx_org, "tag_origin");
+  playFXOnTag(level._effect["electric_short_oneshot"], fx_org, "tag_origin");
   wait(randomintrange(3, 9));
   fx_org delete();
 }
@@ -1235,16 +1235,16 @@ electric_current_reload_machine() {
 electric_current_doubletap_machine() {
   sparks = getstruct("electric_double_tap", "targetname");
   fx_org = spawn("script_model", sparks.origin);
-  fx_org setmodel("tag_origin");
+  fx_org setModel("tag_origin");
   fx_org.angles = sparks.angles;
-  playfxontag(level._effect["electric_current"], fx_org, "tag_origin");
+  playFXOnTag(level._effect["electric_current"], fx_org, "tag_origin");
   targ = getstruct(sparks.target, "targetname");
-  while (isDefined(targ)) {
+  while(isDefined(targ)) {
     fx_org moveto(targ.origin, .075);
     if(isDefined(targ.script_noteworthy) && targ.script_noteworthy == "double_tap_junction") {
-      playfxontag(level._effect["electric_short_oneshot"], fx_org, "tag_origin");
+      playFXOnTag(level._effect["electric_short_oneshot"], fx_org, "tag_origin");
     }
-    fx_org playloopsound("elec_current_loop", .1);
+    fx_org playLoopSound("elec_current_loop", .1);
     fx_org waittill("movedone");
     fx_org stoploopsound(.1);
     if(isDefined(targ.target)) {
@@ -1254,7 +1254,7 @@ electric_current_doubletap_machine() {
     }
   }
   level notify("doubletap_on");
-  playfxontag(level._effect["electric_short_oneshot"], fx_org, "tag_origin");
+  playFXOnTag(level._effect["electric_short_oneshot"], fx_org, "tag_origin");
   wait(randomintrange(3, 9));
   fx_org delete();
 }
@@ -1262,13 +1262,13 @@ electric_current_doubletap_machine() {
 electric_current_juggernog_machine() {
   sparks = getstruct("electric_juggernog", "targetname");
   fx_org = spawn("script_model", sparks.origin);
-  fx_org setmodel("tag_origin");
+  fx_org setModel("tag_origin");
   fx_org.angles = sparks.angles;
-  playfxontag(level._effect["electric_current"], fx_org, "tag_origin");
+  playFXOnTag(level._effect["electric_current"], fx_org, "tag_origin");
   targ = getstruct(sparks.target, "targetname");
-  while (isDefined(targ)) {
+  while(isDefined(targ)) {
     fx_org moveto(targ.origin, .075);
-    fx_org playloopsound("elec_current_loop", .1);
+    fx_org playLoopSound("elec_current_loop", .1);
     fx_org waittill("movedone");
     fx_org stoploopsound(.1);
     if(isDefined(targ.target)) {
@@ -1278,65 +1278,65 @@ electric_current_juggernog_machine() {
     }
   }
   level notify("juggernog_on");
-  playfxontag(level._effect["electric_short_oneshot"], fx_org, "tag_origin");
+  playFXOnTag(level._effect["electric_short_oneshot"], fx_org, "tag_origin");
   wait(randomintrange(3, 9));
   fx_org delete();
 }
 
 north_zapper_light_red() {
-  zapper_lights = getentarray("zapper_light_north", "targetname");
-  for (i = 0; i < zapper_lights.size; i++) {
-    zapper_lights[i] setmodel("zombie_zapper_cagelight_red");
+  zapper_lights = getEntArray("zapper_light_north", "targetname");
+  for(i = 0; i < zapper_lights.size; i++) {
+    zapper_lights[i] setModel("zombie_zapper_cagelight_red");
   }
   if(isDefined(level.north_light)) {
     level.north_light delete();
   }
   level.north_light = spawn("script_model", (366, 480, 324));
-  level.north_light setmodel("tag_origin");
+  level.north_light setModel("tag_origin");
   level.north_light.angles = (0, 270, 0);
-  playfxontag(level._effect["zapper_light_notready"], level.north_light, "tag_origin");
+  playFXOnTag(level._effect["zapper_light_notready"], level.north_light, "tag_origin");
 }
 
 north_zapper_light_green() {
-  zapper_lights = getentarray("zapper_light_north", "targetname");
-  for (i = 0; i < zapper_lights.size; i++) {
-    zapper_lights[i] setmodel("zombie_zapper_cagelight_green");
+  zapper_lights = getEntArray("zapper_light_north", "targetname");
+  for(i = 0; i < zapper_lights.size; i++) {
+    zapper_lights[i] setModel("zombie_zapper_cagelight_green");
   }
   if(isDefined(level.north_light)) {
     level.north_light delete();
   }
   level.north_light = spawn("script_model", (366, 480, 324));
-  level.north_light setmodel("tag_origin");
+  level.north_light setModel("tag_origin");
   level.north_light.angles = (0, 270, 0);
-  playfxontag(level._effect["zapper_light_ready"], level.north_light, "tag_origin");
+  playFXOnTag(level._effect["zapper_light_ready"], level.north_light, "tag_origin");
 }
 
 south_zapper_light_red() {
-  zapper_lights = getentarray("zapper_light_south", "targetname");
-  for (i = 0; i < zapper_lights.size; i++) {
-    zapper_lights[i] setmodel("zombie_zapper_cagelight_red");
+  zapper_lights = getEntArray("zapper_light_south", "targetname");
+  for(i = 0; i < zapper_lights.size; i++) {
+    zapper_lights[i] setModel("zombie_zapper_cagelight_red");
   }
   if(isDefined(level.north_light)) {
     level.north_light delete();
   }
   level.north_light = spawn("script_model", (168, -407.5, 324));
-  level.north_light setmodel("tag_origin");
+  level.north_light setModel("tag_origin");
   level.north_light.angles = (0, 90, 0);
-  playfxontag(level._effect["zapper_light_notready"], level.north_light, "tag_origin");
+  playFXOnTag(level._effect["zapper_light_notready"], level.north_light, "tag_origin");
 }
 
 south_zapper_light_green() {
-  zapper_lights = getentarray("zapper_light_south", "targetname");
-  for (i = 0; i < zapper_lights.size; i++) {
-    zapper_lights[i] setmodel("zombie_zapper_cagelight_green");
+  zapper_lights = getEntArray("zapper_light_south", "targetname");
+  for(i = 0; i < zapper_lights.size; i++) {
+    zapper_lights[i] setModel("zombie_zapper_cagelight_green");
   }
   if(isDefined(level.north_light)) {
     level.north_light delete();
   }
   level.north_light = spawn("script_model", (168, -407.5, 324));
-  level.north_light setmodel("tag_origin");
+  level.north_light setModel("tag_origin");
   level.north_light.angles = (0, 270, 0);
-  playfxontag(level._effect["zapper_light_ready"], level.north_light, "tag_origin");
+  playFXOnTag(level._effect["zapper_light_ready"], level.north_light, "tag_origin");
 }
 
 electroctute_death_fx() {
@@ -1351,8 +1351,8 @@ electroctute_death_fx() {
     level.bcOnFireTime = gettime();
     level.bcOnFireOrg = self.origin;
   }
-  PlayFxOnTag(level._effect["elec_torso"], self, "J_SpineLower");
-  self playsound("elec_jib_zombie");
+  playFXOnTag(level._effect["elec_torso"], self, "J_SpineLower");
+  self playSound("elec_jib_zombie");
   wait 1;
   tagArray = [];
   tagArray[0] = "J_Elbow_LE";
@@ -1360,10 +1360,10 @@ electroctute_death_fx() {
   tagArray[2] = "J_Knee_RI";
   tagArray[3] = "J_Knee_LE";
   tagArray = array_randomize(tagArray);
-  PlayFxOnTag(level._effect["elec_md"], self, tagArray[0]);
-  self playsound("elec_jib_zombie");
+  playFXOnTag(level._effect["elec_md"], self, tagArray[0]);
+  self playSound("elec_jib_zombie");
   wait 1;
-  self playsound("elec_jib_zombie");
+  self playSound("elec_jib_zombie");
   tagArray[0] = "J_Wrist_RI";
   tagArray[1] = "J_Wrist_LE";
   if(!isDefined(self.a.gib_ref) || self.a.gib_ref != "no_legs") {
@@ -1371,13 +1371,13 @@ electroctute_death_fx() {
     tagArray[3] = "J_Ankle_LE";
   }
   tagArray = array_randomize(tagArray);
-  PlayFxOnTag(level._effect["elec_sm"], self, tagArray[0]);
-  PlayFxOnTag(level._effect["elec_sm"], self, tagArray[1]);
+  playFXOnTag(level._effect["elec_sm"], self, tagArray[0]);
+  playFXOnTag(level._effect["elec_sm"], self, tagArray[1]);
 }
 
 electrocute_timeout() {
   self endon("death");
-  self playloopsound("fire_manager_0");
+  self playLoopSound("fire_manager_0");
   wait 12;
   self stoploopsound();
   if(isDefined(self) && isalive(self)) {
@@ -1387,7 +1387,7 @@ electrocute_timeout() {
 }
 
 play_the_numbers() {
-  while (1) {
+  while(1) {
     wait(randomintrange(15, 20));
     playsoundatposition("the_numbers", (-608, -336, 304));
     wait(randomintrange(15, 20));
@@ -1442,24 +1442,24 @@ magic_box_light() {
   hallway_light = getent("magic_box_hallway_light", "script_noteworthy");
   open_light_model = getent("opened_chest_model", "script_noteworthy");
   hallway_light_model = getent("magic_box_hallway_model", "script_noteworthy");
-  while (true) {
+  while(true) {
     level waittill("magic_box_light_switch");
     open_light setLightIntensity(0);
     hallway_light setLightIntensity(0);
-    open_light_model setmodel("lights_tinhatlamp_off");
-    hallway_light_model setmodel("lights_tinhatlamp_off");
+    open_light_model setModel("lights_tinhatlamp_off");
+    hallway_light_model setModel("lights_tinhatlamp_off");
     if(level.chests[level.chest_index].script_noteworthy == "opened_chest") {
       open_light setLightIntensity(1);
-      open_light_model setmodel("lights_tinhatlamp_on");
+      open_light_model setModel("lights_tinhatlamp_on");
     } else if(level.chests[level.chest_index].script_noteworthy == "magic_box_hallway") {
       hallway_light setLightIntensity(1);
-      hallway_light_model setmodel("lights_tinhatlamp_on");
+      hallway_light_model setModel("lights_tinhatlamp_on");
     }
   }
 }
 
 watersheet_on_trigger() {
-  while (1) {
+  while(1) {
     self waittill("trigger", who);
     if(isDefined(who) && isplayer(who) && isAlive(who)) {
       if(!who maps\_laststand::player_is_in_laststand()) {
@@ -1472,7 +1472,7 @@ watersheet_on_trigger() {
 
 fix_hax() {
   self endon("disconnect");
-  while (1) {
+  while(1) {
     wait(.5);
     if(distance2d(self.origin, (245, -608, 266)) < 20) {
       self setorigin((234, -628, self.origin[2]));
@@ -1503,11 +1503,11 @@ spectator_respawn_new() {
   origin = self.respawn_point.origin;
   angles = self.respawn_point.angles;
   origin = origin + (0, 0, 10);
-  self Spawn(origin, angles);
+  self spawn(origin, angles);
   if(IsSplitScreen()) {
     last_alive = undefined;
     players = get_players();
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       if(!players[i].is_zombie) {
         last_alive = players[i];
       }

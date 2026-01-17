@@ -6,7 +6,6 @@
 #include scripts\core_common\ai\systems\destructible_character;
 #include scripts\core_common\ai\systems\gib;
 #include scripts\core_common\struct;
-
 #namespace fx_character;
 
 autoexec main() {
@@ -40,11 +39,11 @@ autoexec main() {
 
 #namespace fxclientutils;
 
-private _getfxbundle(name) {
+_getfxbundle(name) {
   return level.fxcharacterdefs[name];
 }
 
-private _configentity(localclientnum, entity) {
+_configentity(localclientnum, entity) {
   if(!isDefined(entity._fxcharacter)) {
     entity._fxcharacter = [];
     handledgibs = array(8, 16, 32, 128, 256);
@@ -59,7 +58,7 @@ private _configentity(localclientnum, entity) {
   }
 }
 
-private _destructhandler(localclientnum, entity, piecenumber) {
+_destructhandler(localclientnum, entity, piecenumber) {
   if(!isDefined(entity._fxcharacter)) {
     return;
   }
@@ -76,7 +75,7 @@ private _destructhandler(localclientnum, entity, piecenumber) {
   }
 }
 
-private _gibhandler(localclientnum, entity, gibflag) {
+_gibhandler(localclientnum, entity, gibflag) {
   if(!isDefined(entity._fxcharacter)) {
     return;
   }
@@ -93,24 +92,24 @@ private _gibhandler(localclientnum, entity, gibflag) {
   }
 }
 
-private _gibpartnametogibflag(gibpartname) {
+_gibpartnametogibflag(gibpartname) {
   if(isDefined(gibpartname)) {
     switch (gibpartname) {
-      case #"head":
+      case # "head":
         return 8;
-      case #"right arm":
+      case # "right arm":
         return 16;
-      case #"left arm":
+      case # "left arm":
         return 32;
-      case #"right leg":
+      case # "right leg":
         return 128;
-      case #"left leg":
+      case # "left leg":
         return 256;
     }
   }
 }
 
-private _isgibbed(localclientnum, entity, stopongibflag) {
+_isgibbed(localclientnum, entity, stopongibflag) {
   if(!isDefined(stopongibflag)) {
     return 0;
   }
@@ -118,7 +117,7 @@ private _isgibbed(localclientnum, entity, stopongibflag) {
   return gibclientutils::isgibbed(localclientnum, entity, stopongibflag);
 }
 
-private _ispiecedestructed(localclientnum, entity, stoponpiecedestroyed) {
+_ispiecedestructed(localclientnum, entity, stoponpiecedestroyed) {
   if(!isDefined(stoponpiecedestroyed)) {
     return 0;
   }
@@ -126,7 +125,7 @@ private _ispiecedestructed(localclientnum, entity, stoponpiecedestroyed) {
   return destructclientutils::ispiecedestructed(localclientnum, entity, stoponpiecedestroyed);
 }
 
-private _shouldplayFX(localclientnum, entity, fxstruct) {
+_shouldplayFX(localclientnum, entity, fxstruct) {
   if(_isgibbed(localclientnum, entity, fxstruct.stopongib)) {
     return false;
   }

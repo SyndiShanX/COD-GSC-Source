@@ -12,7 +12,6 @@
 #include scripts\core_common\trigger_shared;
 #include scripts\core_common\util_shared;
 #include scripts\core_common\voice\voice_events;
-
 #namespace callback;
 
 callback(event, params) {
@@ -40,7 +39,7 @@ function_daed27e8(event, params) {
   }
 }
 
-private mpl_heatwave_fx(ent, event, params) {
+mpl_heatwave_fx(ent, event, params) {
   if(isDefined(ent) && isDefined(ent._callbacks) && isDefined(ent._callbacks[event])) {
     for(i = 0; i < ent._callbacks[event].size; i++) {
       if(!isarray(ent._callbacks[event][i])) {
@@ -87,7 +86,7 @@ function_d8abfc3d(event, func, obj, a_params) {
   function_2b653c00(self, event, func, obj, a_params);
 }
 
-private function_2b653c00(ent, event, func, obj, a_params) {
+function_2b653c00(ent, event, func, obj, a_params) {
   if(!isDefined(ent)) {
     return;
   }
@@ -119,7 +118,7 @@ private function_2b653c00(ent, event, func, obj, a_params) {
   }
 }
 
-private function_862146b3(event, func) {
+function_862146b3(event, func) {
   return string(event) + string(func);
 }
 
@@ -138,7 +137,7 @@ function_52ac9652(event, func, obj, instant) {
   function_3f5f097e(self, event, func, obj, instant);
 }
 
-private function_3f5f097e(ent, event, func, obj, instant) {
+function_3f5f097e(ent, event, func, obj, instant) {
   if(!isDefined(ent._callbacks)) {
     return;
   }
@@ -767,7 +766,7 @@ finishcustomtraversallistener() {
   self endon(#"death");
   self waittillmatch({
     #notetrack: "end"
-  }, #"custom_traversal_anim_finished");
+  }, # "custom_traversal_anim_finished");
   self finishtraversal();
   self unlink();
   self.usegoalanimweight = 0;
@@ -824,7 +823,7 @@ event_handler[ui_menuresponse] codecallback_menuresponse(eventstruct) {
 
   index = level.menuresponsequeue.size;
   level.menuresponsequeue[index] = {
-    #ent: self, 
+    #ent: self,
     #eventstruct: eventstruct
   };
   level notify(#"menuresponse_queue");
@@ -938,7 +937,7 @@ abort_level() {
 
 event_handler[glass_smash] codecallback_glasssmash(eventstruct) {
   level notify(#"glass_smash", {
-    #position: eventstruct.position, 
+    #position: eventstruct.position,
     #direction: eventstruct.direction
   });
 }

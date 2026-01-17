@@ -11,7 +11,7 @@ function function_c667ac79() {
   state = 0;
   image = 0;
   laststate = 0;
-  while (true) {
+  while(true) {
     if(state == 0) {
       exploder::kill_exploder("light_em_tv_01_dim");
       exploder::exploder("light_em_tv_01_dim_fx");

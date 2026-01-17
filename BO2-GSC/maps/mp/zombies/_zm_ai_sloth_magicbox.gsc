@@ -301,7 +301,7 @@ box_notetracks(note, box) {
     return false;
 
   if(note == "pulled") {
-    playfx(level._effect["fx_buried_sloth_box_slam"], box.origin);
+    playFX(level._effect["fx_buried_sloth_box_slam"], box.origin);
     tag_name = "tag_stowed_back";
     twr_origin = self gettagorigin(tag_name);
     twr_angles = self gettagangles(tag_name);
@@ -309,7 +309,7 @@ box_notetracks(note, box) {
     if(!isDefined(self.box_model)) {
       self.box_model = spawn("script_model", twr_origin);
       self.box_model.angles = twr_angles;
-      self.box_model setmodel(level.small_magic_box);
+      self.box_model setModel(level.small_magic_box);
       self.box_model linkto(self, tag_name);
       self.box_model_visible = 1;
     } else {
@@ -319,7 +319,7 @@ box_notetracks(note, box) {
 
     self.box_current maps\mp\zombies\_zm_magicbox::hide_chest();
   } else if(note == "placed") {
-    playfx(level._effect["fx_buried_sloth_box_slam"], box.origin);
+    playFX(level._effect["fx_buried_sloth_box_slam"], box.origin);
     self box_model_hide();
 
     if(isDefined(self.box_move.zbarrier)) {
@@ -329,7 +329,7 @@ box_notetracks(note, box) {
       level.chest_index = self.box_move_index;
     }
   } else if(note == "locked")
-    playfx(level._effect["fx_buried_sloth_box_slam"], box.origin);
+    playFX(level._effect["fx_buried_sloth_box_slam"], box.origin);
 }
 
 box_model_hide() {
@@ -377,7 +377,7 @@ box_spin_action() {
   self endon("stop_action");
   self maps\mp\zombies\_zm_ai_sloth::common_context_action();
   box = level.chests[level.chest_index];
-  hackable = spawnstruct();
+  hackable = spawnStruct();
   hackable.chest = box;
 
   if(!self common_move_to_box(box, 1024, 1, "zm_cycle_magicbox")) {

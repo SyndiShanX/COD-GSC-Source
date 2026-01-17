@@ -21,13 +21,13 @@ init() {
 createteamobjpoint(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = getobjpointbyname(var_0);
 
-  if(isdefined(var_6))
+  if(isDefined(var_6))
     deleteobjpoint(var_6);
 
-  if(!isdefined(var_3))
+  if(!isDefined(var_3))
     var_3 = "objpoint_default";
 
-  if(!isdefined(var_5))
+  if(!isDefined(var_5))
     var_5 = 1.0;
 
   if(var_2 == "all")
@@ -47,7 +47,7 @@ createteamobjpoint(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 setshader(var_3, level.objpointsize, level.objpointsize);
   var_6 setwaypoint(1, 0);
 
-  if(isdefined(var_4))
+  if(isDefined(var_4))
     var_6.alpha = var_4;
   else
     var_6.alpha = level.objpoint_alpha_default;
@@ -78,9 +78,9 @@ deleteobjpoint(var_0) {
 }
 
 deleteallobjpoints() {
-  if(isdefined(level.objpoints) && level.objpoints.size > 0) {
+  if(isDefined(level.objpoints) && level.objpoints.size > 0) {
     foreach(var_1 in level.objpoints) {
-      if(isdefined(var_1))
+      if(isDefined(var_1))
         var_1 destroy();
     }
 
@@ -106,14 +106,14 @@ setoriginbyname(var_0, var_1) {
 }
 
 getobjpointbyname(var_0) {
-  if(isdefined(level.objpoints[var_0]))
+  if(isDefined(level.objpoints[var_0]))
     return level.objpoints[var_0];
   else
     return undefined;
 }
 
 getobjpointbyindex(var_0) {
-  if(isdefined(level.objpointnames[var_0]))
+  if(isDefined(level.objpointnames[var_0]))
     return level.objpoints[level.objpointnames[var_0]];
   else
     return undefined;
@@ -127,7 +127,7 @@ startflashing() {
   }
   self.isflashing = 1;
 
-  while (self.isflashing) {
+  while(self.isflashing) {
     self fadeovertime(0.75);
     self.alpha = 0.35 * self.basealpha;
     wait 0.75;

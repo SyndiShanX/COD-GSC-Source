@@ -10,7 +10,6 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_trial_board_everything;
 
 autoexec __init__system__() {
@@ -25,12 +24,12 @@ __init__() {
   zm_trial::register_challenge(#"board_everything", &on_begin, &on_end);
 }
 
-private on_begin() {
+on_begin() {
   zm_powerups::function_74b8ec6b("carpenter");
   level thread function_4172344e();
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   if(!round_reset && level.var_3de460b1 < level.var_70135c38) {
     zm_trial::fail(#"hash_e0fa688fb248886");
   }
@@ -56,6 +55,6 @@ function_4172344e() {
 
     zm_trial_util::function_2976fa44(level.var_70135c38);
     zm_trial_util::function_dace284(level.var_3de460b1, 1);
-    s_waitresult = level waittill(#"zombie_board_tear", #"board_repaired", #"carpenter_finished");
+    s_waitresult = level waittill(#"zombie_board_tear", # "board_repaired", # "carpenter_finished");
   }
 }

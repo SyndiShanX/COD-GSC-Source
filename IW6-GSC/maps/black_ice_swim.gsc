@@ -73,7 +73,7 @@ section_flag_inits() {
 }
 
 section_precache() {
-  maps\_utility::add_hint_string("detonate_string", & "BLACK_ICE_SWIM_DETONATE", ::detonate_string_func);
+  maps\_utility::add_hint_string("detonate_string", &"BLACK_ICE_SWIM_DETONATE", ::detonate_string_func);
   precacheshader("dogcam_frame_bot");
   precacheshader("dogcam_frame_top");
   precacheshader("dogcam_bracket_l");
@@ -290,7 +290,7 @@ swim_intro_dialogue() {
   wait(var_0);
 
   if(!common_scripts\utility::flag("flag_swim_breach_detonate")) {
-    setdvar("ui_deadquote", & "BLACK_ICE_SWIM_DETONATE_FAIL");
+    setdvar("ui_deadquote", &"BLACK_ICE_SWIM_DETONATE_FAIL");
     common_scripts\utility::flag_set("flag_detonate_fail");
     maps\_utility::missionfailedwrapper();
   }
@@ -559,7 +559,7 @@ player_swim_rubberband() {
       var_5 = var_7 - var_6;
 
       if(var_5 > var_4) {
-        setdvar("ui_deadquote", & "BLACK_ICE_SWIM_FAIL_DISTANCE");
+        setdvar("ui_deadquote", &"BLACK_ICE_SWIM_FAIL_DISTANCE");
         maps\_utility::missionfailedwrapper();
       }
     }
@@ -828,7 +828,7 @@ swim_surface_dialog() {
     thread maps\_utility::smart_radio_dialogue("black_ice_hsh_whereareyoualpha");
 
   wait 6;
-  var_0 = [ & "BLACK_ICE_HESH_KILLED", & "BLACK_ICE_KEEGAN_KILLED"];
+  var_0 = [ &"BLACK_ICE_HESH_KILLED", &"BLACK_ICE_KEEGAN_KILLED"];
 
   if(!common_scripts\utility::flag("flag_swim_player_drop_tank")) {
     setdvar("ui_deadquote", var_0[randomint(var_0.size - 1)]);

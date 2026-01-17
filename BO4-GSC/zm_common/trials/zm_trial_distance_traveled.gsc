@@ -11,7 +11,6 @@
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
-
 #namespace zm_trial_distance_traveled;
 
 autoexec __init__system__() {
@@ -26,7 +25,7 @@ __init__() {
   zm_trial::register_challenge(#"distance_traveled", &on_begin, &on_end);
 }
 
-private on_begin(var_38282db8) {
+on_begin(var_38282db8) {
   var_38282db8 = zm_trial::function_5769f26a(var_38282db8);
 
   foreach(player in getplayers()) {
@@ -36,7 +35,7 @@ private on_begin(var_38282db8) {
   level.var_4220f02a = array(getweapon(#"launcher_standard_t8"), getweapon(#"ww_random_ray_gun1"), getweapon(#"ww_random_ray_gun2"), getweapon(#"ww_random_ray_gun2_charged"), getweapon(#"ww_random_ray_gun3"), getweapon(#"ww_random_ray_gun3_charged"));
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   level.var_4220f02a = undefined;
 }
 
@@ -47,7 +46,7 @@ is_active() {
 
 function_ed4d5d4(var_38282db8) {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656", #"end_game", #"end_distance_traveled");
+  level endon(#"hash_7646638df88a3656", # "end_game", # "end_distance_traveled");
   n_distance_traveled = 0;
   self zm_trial_util::function_2190356a(int(n_distance_traveled), 1);
   self zm_trial_util::function_c2cd0cba(var_38282db8);

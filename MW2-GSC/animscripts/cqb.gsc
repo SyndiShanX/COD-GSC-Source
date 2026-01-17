@@ -51,7 +51,7 @@ MoveCQB() {
 }
 
 DetermineCQBAnim() {
-  if(isdefined(self.customMoveAnimSet) && isdefined(self.customMoveAnimSet["cqb"]))
+  if(isDefined(self.customMoveAnimSet) && isDefined(self.customMoveAnimSet["cqb"]))
     return animscripts\run::GetRunAnim();
 
   if(self.stairsState == "up")
@@ -71,8 +71,8 @@ DetermineCQBAnim() {
 }
 
 CQBTracking() {
-  assert(isdefined(self.aim_while_moving_thread) == isdefined(self.trackLoopThread));
-  assertex(!isdefined(self.trackLoopThread) || (self.trackLoopThreadType == "faceEnemyAimTracking"), self.trackLoopThreadType);
+  assert(isDefined(self.aim_while_moving_thread) == isDefined(self.trackLoopThread));
+  assertex(!isDefined(self.trackLoopThread) || (self.trackLoopThreadType == "faceEnemyAimTracking"), self.trackLoopThreadType);
 
   if(animscripts\move::MayShootWhileMoving())
     animscripts\run::runShootWhileMovingThreads();
@@ -83,22 +83,22 @@ CQBTracking() {
 setupCQBPointsOfInterest() {
   level.cqbPointsOfInterest = [];
   pointents = getEntArray("cqb_point_of_interest", "targetname");
-  for (i = 0; i < pointents.size; i++) {
+  for(i = 0; i < pointents.size; i++) {
     level.cqbPointsOfInterest[i] = pointents[i].origin;
     pointents[i] delete();
   }
 }
 
 findCQBPointsOfInterest() {
-  if(isdefined(anim.findingCQBPointsOfInterest))
+  if(isDefined(anim.findingCQBPointsOfInterest))
     return;
   anim.findingCQBPointsOfInterest = true;
 
   // one AI per frame, find best point of interest.
-  if(!level.cqbPointsOfInterest.size)
+  if(!level.cqbPointsOfInterest.size) {
     return;
-
-  while (1) {
+  }
+  while(1) {
     ai = getaiarray();
     waited = false;
     foreach(guy in ai) {
@@ -117,7 +117,7 @@ findCQBPointsOfInterest() {
 
         best = -1;
         bestdist = 1024 * 1024;
-        for (j = 0; j < level.cqbPointsOfInterest.size; j++) {
+        for(j = 0; j < level.cqbPointsOfInterest.size; j++) {
           point = level.cqbPointsOfInterest[j];
 
           dist = distanceSquared(point, lookAheadPoint);
@@ -133,9 +133,9 @@ findCQBPointsOfInterest() {
                 continue;
             }
 
-            if(!sightTracePassed(lookAheadPoint, point, false, undefined))
+            if(!sightTracePassed(lookAheadPoint, point, false, undefined)) {
               continue;
-
+            }
             bestdist = dist;
             best = j;
           }
@@ -155,7 +155,6 @@ findCQBPointsOfInterest() {
   }
 }
 
-/#
 CQBDebug() {
   self notify("end_cqb_debug");
   self endon("end_cqb_debug");
@@ -165,13 +164,13 @@ CQBDebug() {
 
   level thread CQBDebugGlobal();
 
-  while (1) {
+  while(1) {
     if(getdebugdvar("scr_cqbdebug") == "on" || getdebugdvarint("scr_cqbdebug") == self getentnum()) {
       shootAtPos = (self.origin[0], self.origin[1], self getShootAtPos()[2]);
-      if(isdefined(self.shootPos)) {
+      if(isDefined(self.shootPos)) {
         line(shootAtPos, self.shootPos, (1, 1, 1));
         print3d(self.shootPos, "shootPos", (1, 1, 1), 1, 0.5);
-      } else if(isdefined(self.cqb_target)) {
+      } else if(isDefined(self.cqb_target)) {
         line(shootAtPos, self.cqb_target.origin, (.5, 1, .5));
         print3d(self.cqb_target.origin, "cqb_target", (.5, 1, .5), 1, 0.5);
       } else {
@@ -190,7 +189,7 @@ CQBDebug() {
           line(shootAtPos, rightScanArea, (0.5, 0.5, 0.5), 0.7);
         }
 
-        if(isdefined(self.cqb_point_of_interest)) {
+        if(isDefined(self.cqb_point_of_interest)) {
           line(lookAheadPoint, self.cqb_point_of_interest, (1, .5, .5));
           print3d(self.cqb_point_of_interest, "cqb_point_of_interest", (1, .5, .5), 1, 0.5);
         }
@@ -205,17 +204,17 @@ CQBDebug() {
 }
 
 CQBDebugGlobal() {
-  if(isdefined(level.cqbdebugglobal))
+  if(isDefined(level.cqbdebugglobal))
     return;
   level.cqbdebugglobal = true;
 
-  while (1) {
+  while(1) {
     if(getdebugdvar("scr_cqbdebug") != "on") {
       wait 1;
       continue;
     }
 
-    for (i = 0; i < level.cqbPointsOfInterest.size; i++) {
+    for(i = 0; i < level.cqbPointsOfInterest.size; i++) {
       print3d(level.cqbPointsOfInterest[i], ".", (.7, .7, 1), .7, 3);
     }
 

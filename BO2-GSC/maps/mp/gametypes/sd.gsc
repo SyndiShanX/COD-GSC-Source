@@ -187,24 +187,24 @@ onstartgametype() {
   }
 
   setclientnamemode("manual_change");
-  game["strings"]["target_destroyed"] = & "MP_TARGET_DESTROYED";
-  game["strings"]["bomb_defused"] = & "MP_BOMB_DEFUSED";
+  game["strings"]["target_destroyed"] = &"MP_TARGET_DESTROYED";
+  game["strings"]["bomb_defused"] = &"MP_BOMB_DEFUSED";
   precachestring(game["strings"]["target_destroyed"]);
   precachestring(game["strings"]["bomb_defused"]);
   level._effect["bombexplosion"] = loadfx("maps/mp_maps/fx_mp_exp_bomb");
-  setobjectivetext(game["attackers"], & "OBJECTIVES_SD_ATTACKER");
-  setobjectivetext(game["defenders"], & "OBJECTIVES_SD_DEFENDER");
+  setobjectivetext(game["attackers"], &"OBJECTIVES_SD_ATTACKER");
+  setobjectivetext(game["defenders"], &"OBJECTIVES_SD_DEFENDER");
 
   if(level.splitscreen) {
-    setobjectivescoretext(game["attackers"], & "OBJECTIVES_SD_ATTACKER");
-    setobjectivescoretext(game["defenders"], & "OBJECTIVES_SD_DEFENDER");
+    setobjectivescoretext(game["attackers"], &"OBJECTIVES_SD_ATTACKER");
+    setobjectivescoretext(game["defenders"], &"OBJECTIVES_SD_DEFENDER");
   } else {
-    setobjectivescoretext(game["attackers"], & "OBJECTIVES_SD_ATTACKER_SCORE");
-    setobjectivescoretext(game["defenders"], & "OBJECTIVES_SD_DEFENDER_SCORE");
+    setobjectivescoretext(game["attackers"], &"OBJECTIVES_SD_ATTACKER_SCORE");
+    setobjectivescoretext(game["defenders"], &"OBJECTIVES_SD_DEFENDER_SCORE");
   }
 
-  setobjectivehinttext(game["attackers"], & "OBJECTIVES_SD_ATTACKER_HINT");
-  setobjectivehinttext(game["defenders"], & "OBJECTIVES_SD_DEFENDER_HINT");
+  setobjectivehinttext(game["attackers"], &"OBJECTIVES_SD_ATTACKER_HINT");
+  setobjectivehinttext(game["defenders"], &"OBJECTIVES_SD_DEFENDER_HINT");
   allowed[0] = "sd";
   allowed[1] = "bombzone";
   allowed[2] = "blocker";
@@ -457,7 +457,7 @@ bombs() {
   precachestring(&"bomb");
 
   if(!level.multibomb) {
-    level.sdbomb = maps\mp\gametypes\_gameobjects::createcarryobject(game["attackers"], trigger, visuals, vectorscale((0, 0, 1), 32.0), & "bomb");
+    level.sdbomb = maps\mp\gametypes\_gameobjects::createcarryobject(game["attackers"], trigger, visuals, vectorscale((0, 0, 1), 32.0), &"bomb");
     level.sdbomb maps\mp\gametypes\_gameobjects::allowcarry("friendly");
     level.sdbomb maps\mp\gametypes\_gameobjects::set2dicon("friendly", "compass_waypoint_bomb");
     level.sdbomb maps\mp\gametypes\_gameobjects::set3dicon("friendly", "waypoint_bomb");
@@ -472,11 +472,11 @@ bombs() {
   }
 
   level.bombzones = [];
-  bombzones = getentarray("bombzone", "targetname");
+  bombzones = getEntArray("bombzone", "targetname");
 
   for(index = 0; index < bombzones.size; index++) {
     trigger = bombzones[index];
-    visuals = getentarray(bombzones[index].target, "targetname");
+    visuals = getEntArray(bombzones[index].target, "targetname");
     name = istring(trigger.script_label);
     precachestring(name);
     precachestring(istring("defuse" + trigger.script_label));
@@ -534,7 +534,7 @@ bombs() {
 
 onbeginuse(player) {
   if(self maps\mp\gametypes\_gameobjects::isfriendlyteam(player.pers["team"])) {
-    player playsound("mpl_sd_bomb_defuse");
+    player playSound("mpl_sd_bomb_defuse");
     player.isdefusing = 1;
     player thread maps\mp\gametypes\_battlechatter_mp::gametypespecificbattlechatter("sd_enemyplant", player.pers["team"]);
 
@@ -550,7 +550,7 @@ onbeginuse(player) {
     }
   }
 
-  player playsound("fly_bomb_raise_plr");
+  player playSound("fly_bomb_raise_plr");
 }
 
 onenduse(team, player, result) {
@@ -668,8 +668,7 @@ onpickup(player) {
   }
 }
 
-onreset() {
-}
+onreset() {}
 
 bombplantedmusicdelay() {
   level endon("bomb_defused");
@@ -714,14 +713,14 @@ bombplanted(destroyedobj, player) {
         level.players[index].carryicon destroyelem();
     }
 
-    trace = bullettrace(player.origin + vectorscale((0, 0, 1), 20.0), player.origin - vectorscale((0, 0, 1), 2000.0), 0, player);
+    trace = bulletTrace(player.origin + vectorscale((0, 0, 1), 20.0), player.origin - vectorscale((0, 0, 1), 2000.0), 0, player);
     tempangle = randomfloat(360);
     forward = (cos(tempangle), sin(tempangle), 0);
     forward = vectornormalize(forward - vectorscale(trace["normal"], vectordot(forward, trace["normal"])));
     dropangles = vectortoangles(forward);
     level.sdbombmodel = spawn("script_model", trace["position"]);
     level.sdbombmodel.angles = dropangles;
-    level.sdbombmodel setmodel("prop_suitcase_bomb");
+    level.sdbombmodel setModel("prop_suitcase_bomb");
   }
 
   destroyedobj maps\mp\gametypes\_gameobjects::allowuse("none");

@@ -14,7 +14,6 @@
 #include scripts\core_common\values_shared;
 #include scripts\core_common\visionset_mgr_shared;
 #include scripts\weapons\tacticalinsertion;
-
 #namespace killcam;
 
 autoexec __init__system__() {
@@ -119,17 +118,17 @@ record_settings(spectatorclient, targetentityindex, killcam_entity_info, weapon,
     level.finalkillcamsettings[team].attacker = attacker;
   }
 
-  level.finalkillcamsettings[#"none"].spectatorclient = spectatorclient;
-  level.finalkillcamsettings[#"none"].weapon = weapon;
-  level.finalkillcamsettings[#"none"].meansofdeath = meansofdeath;
-  level.finalkillcamsettings[#"none"].deathtime = deathtime;
-  level.finalkillcamsettings[#"none"].deathtimeoffset = deathtimeoffset;
-  level.finalkillcamsettings[#"none"].offsettime = offsettime;
-  level.finalkillcamsettings[#"none"].killcam_entity_info = killcam_entity_info;
-  level.finalkillcamsettings[#"none"].targetentityindex = targetentityindex;
-  level.finalkillcamsettings[#"none"].perks = perks;
-  level.finalkillcamsettings[#"none"].killstreaks = killstreaks;
-  level.finalkillcamsettings[#"none"].attacker = attacker;
+  level.finalkillcamsettings[# "none"].spectatorclient = spectatorclient;
+  level.finalkillcamsettings[# "none"].weapon = weapon;
+  level.finalkillcamsettings[# "none"].meansofdeath = meansofdeath;
+  level.finalkillcamsettings[# "none"].deathtime = deathtime;
+  level.finalkillcamsettings[# "none"].deathtimeoffset = deathtimeoffset;
+  level.finalkillcamsettings[# "none"].offsettime = offsettime;
+  level.finalkillcamsettings[# "none"].killcam_entity_info = killcam_entity_info;
+  level.finalkillcamsettings[# "none"].targetentityindex = targetentityindex;
+  level.finalkillcamsettings[# "none"].perks = perks;
+  level.finalkillcamsettings[# "none"].killstreaks = killstreaks;
+  level.finalkillcamsettings[# "none"].attacker = attacker;
 }
 
 function_eb3deeec(spectatorclient, targetentityindex, killcam_entity_info, weapon, meansofdeath, deathtime, deathtimeoffset, offsettime, perks, killstreaks, attacker) {
@@ -140,16 +139,16 @@ function_eb3deeec(spectatorclient, targetentityindex, killcam_entity_info, weapo
   }
 
   player.var_e59bd911 = {
-    #spectatorclient: spectatorclient, 
-    #weapon: weapon, 
-    #meansofdeath: meansofdeath, 
-    #deathtime: deathtime, 
-    #deathtimeoffset: deathtimeoffset, 
-    #offsettime: offsettime, 
-    #killcam_entity_info: killcam_entity_info, 
-    #targetentityindex: targetentityindex, 
-    #perks: perks, 
-    #killstreaks: killstreaks, 
+    #spectatorclient: spectatorclient,
+    #weapon: weapon,
+    #meansofdeath: meansofdeath,
+    #deathtime: deathtime,
+    #deathtimeoffset: deathtimeoffset,
+    #offsettime: offsettime,
+    #killcam_entity_info: killcam_entity_info,
+    #targetentityindex: targetentityindex,
+    #perks: perks,
+    #killstreaks: killstreaks,
     #attacker: attacker
   };
 }
@@ -242,11 +241,11 @@ function_a26057ee() {
 
 function_de2b637d(winner) {
   if(!isDefined(winner)) {
-    return #"none";
+    return # "none";
   }
 
   if(isentity(winner)) {
-    return (isDefined(winner.team) ? winner.team : #"none");
+    return (isDefined(winner.team) ? winner.team : # "none");
   }
 
   return winner;
@@ -256,7 +255,7 @@ do_final_killcam() {
   level waittill(#"play_final_killcam");
   setslowmotion(1, 1, 0);
   level.infinalkillcam = 1;
-  winner = #"none";
+  winner = # "none";
 
   if(isDefined(level.finalkillcam_winner)) {
     winner = level.finalkillcam_winner;
@@ -321,13 +320,13 @@ are_any_players_watching() {
 
 watch_for_skip_killcam() {
   self endon(#"begin_killcam");
-  self waittill(#"disconnect", #"spawned");
+  self waittill(#"disconnect", # "spawned");
   waitframe(1);
   level.numplayerswaitingtoenterkillcam--;
 }
 
 killcam(attackernum, targetnum, killcam_entity_info, weapon, meansofdeath, deathtime, deathtimeoffset, offsettime, respawn, maxtime, perks, killstreaks, attacker, keep_deathcam) {
-  self endon(#"disconnect", #"spawned", #"game_ended");
+  self endon(#"disconnect", # "spawned", # "game_ended");
 
   if(attackernum < 0) {
     return;
@@ -382,7 +381,7 @@ killcam(attackernum, targetnum, killcam_entity_info, weapon, meansofdeath, death
     #start_time: gettime()
   });
 
-  if(isDefined(weapon) && weapon.name === #"straferun_rockets") {
+  if(isDefined(weapon) && weapon.name === # "straferun_rockets") {
     self setmodellodbias(8);
   }
 
@@ -448,7 +447,7 @@ killcam(attackernum, targetnum, killcam_entity_info, weapon, meansofdeath, death
 }
 
 set_entity(killcamentityindex, delayms) {
-  self endon(#"disconnect", #"end_killcam", #"spawned");
+  self endon(#"disconnect", # "end_killcam", # "spawned");
 
   if(delayms > 0) {
     wait float(delayms) / 1000;
@@ -469,13 +468,13 @@ set_killcam_entities(entity_info, killcamstarttime) {
 }
 
 wait_killcam_time() {
-  self endon(#"disconnect", #"end_killcam", #"begin_killcam");
+  self endon(#"disconnect", # "end_killcam", # "begin_killcam");
   wait self.killcamlength - 0.05;
   self end_killcam();
 }
 
 wait_final_killcam_slowdown(deathtime, starttime) {
-  self endon(#"disconnect", #"end_killcam");
+  self endon(#"disconnect", # "end_killcam");
   secondsuntildeath = float(deathtime - starttime) / 1000;
   deathtime = gettime() + int(secondsuntildeath * 1000);
   waitbeforedeath = 2;
@@ -499,7 +498,7 @@ function_875fc588() {
 }
 
 wait_skip_killcam_button() {
-  self endon(#"disconnect", #"end_killcam");
+  self endon(#"disconnect", # "end_killcam");
 
   while(self usebuttonpressed()) {
     waitframe(1);
@@ -515,7 +514,7 @@ wait_skip_killcam_button() {
 }
 
 function_fa405b23() {
-  self endon(#"disconnect", #"end_killcam");
+  self endon(#"disconnect", # "end_killcam");
 
   while(self jumpbuttonpressed()) {
     waitframe(1);
@@ -531,14 +530,14 @@ function_fa405b23() {
 }
 
 wait_team_change_end_killcam() {
-  self endon(#"disconnect", #"end_killcam");
-  self waittill(#"changed_class", #"joined_team");
+  self endon(#"disconnect", # "end_killcam");
+  self waittill(#"changed_class", # "joined_team");
   end(0);
   self end_killcam();
 }
 
 wait_skip_killcam_safe_spawn_button() {
-  self endon(#"disconnect", #"end_killcam");
+  self endon(#"disconnect", # "end_killcam");
 
   while(self fragbuttonpressed()) {
     waitframe(1);
@@ -560,7 +559,7 @@ end(final) {
 }
 
 check_for_abrupt_end() {
-  self endon(#"disconnect", #"end_killcam");
+  self endon(#"disconnect", # "end_killcam");
 
   while(true) {
     if(self.archivetime <= 0) {
@@ -574,13 +573,13 @@ check_for_abrupt_end() {
 }
 
 spawned_killcam_cleanup() {
-  self endon(#"end_killcam", #"disconnect");
+  self endon(#"end_killcam", # "disconnect");
   self waittill(#"spawned");
   self end(0);
 }
 
 spectator_killcam_cleanup(attacker) {
-  self endon(#"end_killcam", #"disconnect");
+  self endon(#"end_killcam", # "disconnect");
   attacker endon(#"disconnect");
   waitresult = attacker waittill(#"begin_killcam");
   waittime = max(0, waitresult.start_time - self.deathtime - 50);
@@ -623,7 +622,7 @@ cancel_on_use() {
 }
 
 cancel_on_use_specific_button(pressingbuttonfunc, finishedfunc) {
-  self endon(#"death_delay_finished", #"disconnect", #"game_ended");
+  self endon(#"death_delay_finished", # "disconnect", # "game_ended");
 
   for(;;) {
     if(!self[[pressingbuttonfunc]]()) {
@@ -742,7 +741,7 @@ spawn_end_of_final_killcam() {
 }
 
 is_entity_weapon(weapon) {
-  if(weapon.statname == #"planemortar") {
+  if(weapon.statname == # "planemortar") {
     return true;
   }
 
@@ -862,17 +861,17 @@ get_killcam_entity(attacker, einflictor, weapon) {
     }
   }
 
-  if(weapon.name == #"hero_gravityspikes") {
+  if(weapon.name == # "hero_gravityspikes") {
     return undefined;
   }
 
   if(isDefined(attacker) && isplayer(attacker) && attacker isremotecontrolling() && (einflictor.controlled === 1 || einflictor.occupied === 1)) {
-    if(weapon.name == #"sentinel_turret" || weapon.name == #"amws_gun_turret_mp_player" || weapon.name == #"auto_gun_turret") {
+    if(weapon.name == # "sentinel_turret" || weapon.name == # "amws_gun_turret_mp_player" || weapon.name == # "auto_gun_turret") {
       return undefined;
     }
   }
 
-  if(weapon.name == #"dart") {
+  if(weapon.name == # "dart") {
     return undefined;
   }
 

@@ -217,23 +217,23 @@ setup_puzzle_piece_glint() {
     m_plane_piece = get_craftable_piece_model("plane", a_str_partnames[i]);
 
     if(isDefined(m_plane_piece))
-      playfxontag(level._effect["quest_item_glow"], m_plane_piece, "tag_origin");
+      playFXOnTag(level._effect["quest_item_glow"], m_plane_piece, "tag_origin");
 
     m_fuel_can = get_craftable_piece_model("refuelable_plane", "fuel" + (i + 1));
 
     if(isDefined(m_fuel_can))
-      playfxontag(level._effect["quest_item_glow"], m_fuel_can, "tag_origin");
+      playFXOnTag(level._effect["quest_item_glow"], m_fuel_can, "tag_origin");
   }
 
   m_master_key = get_craftable_piece_model("quest_key1", "p6_zm_al_key");
 
   if(isDefined(m_master_key))
-    playfxontag(level._effect["key_glint"], m_master_key, "tag_origin");
+    playFXOnTag(level._effect["key_glint"], m_master_key, "tag_origin");
 
   m_fake_plane_steering = getent("fake_veh_t6_dlc_zombie_part_control", "targetname");
 
   if(isDefined(m_fake_plane_steering))
-    playfxontag(level._effect["quest_item_glow"], m_fake_plane_steering, "tag_origin");
+    playFXOnTag(level._effect["quest_item_glow"], m_fake_plane_steering, "tag_origin");
 }
 
 setup_devgui() {
@@ -421,11 +421,11 @@ setup_key_doors() {
 
 create_key_door_unitrigger(piece_num, width, height, length) {
   t_key_door = getstruct("key_door_" + piece_num + "_trigger", "targetname");
-  t_key_door.unitrigger_stub = spawnstruct();
+  t_key_door.unitrigger_stub = spawnStruct();
   t_key_door.unitrigger_stub.origin = t_key_door.origin;
   t_key_door.unitrigger_stub.angles = t_key_door.angles;
   t_key_door.unitrigger_stub.script_unitrigger_type = "unitrigger_box_use";
-  t_key_door.unitrigger_stub.hint_string = & "ZM_PRISON_KEY_DOOR_LOCKED";
+  t_key_door.unitrigger_stub.hint_string = &"ZM_PRISON_KEY_DOOR_LOCKED";
   t_key_door.unitrigger_stub.cursor_hint = "HINT_NOICON";
   t_key_door.unitrigger_stub.script_width = width;
   t_key_door.unitrigger_stub.script_height = height;
@@ -461,7 +461,7 @@ master_key_door_trigger_thread() {
       self.stub.master_key_door_opened = 1;
       self.stub maps\mp\zombies\_zm_unitrigger::run_visibility_function_for_all_triggers();
       level thread open_custom_door_master_key(n_door_index, e_triggerer);
-      self playsound("evt_quest_door_open");
+      self playSound("evt_quest_door_open");
       b_door_open = 1;
     } else {
       e_triggerer thread do_player_general_vox("quest", "sidequest_key", undefined, 100);
@@ -476,8 +476,8 @@ master_key_door_trigger_thread() {
 
 open_custom_door_master_key(n_door_index, e_triggerer) {
   m_lock = getent("masterkey_lock_" + n_door_index, "targetname");
-  m_lock playsound("zmb_quest_key_unlock");
-  playfxontag(level._effect["fx_alcatraz_unlock_door"], m_lock, "tag_origin");
+  m_lock playSound("zmb_quest_key_unlock");
+  playFXOnTag(level._effect["fx_alcatraz_unlock_door"], m_lock, "tag_origin");
   wait 0.5;
   m_lock delete();
 
@@ -490,14 +490,14 @@ open_custom_door_master_key(n_door_index, e_triggerer) {
       if(isDefined(e_triggerer))
         e_triggerer door_rumble_on_open();
 
-      shower_key_door playsound("zmb_chainlink_open");
+      shower_key_door playSound("zmb_chainlink_open");
       break;
     case 2:
       admin_powerhouse_puzzle_door_clip = getent("admin_powerhouse_puzzle_door_clip", "targetname");
       admin_powerhouse_puzzle_door_clip delete();
       admin_powerhouse_puzzle_door = getent("admin_powerhouse_puzzle_door", "targetname");
       admin_powerhouse_puzzle_door rotateyaw(90, 0.5);
-      admin_powerhouse_puzzle_door playsound("zmb_chainlink_open");
+      admin_powerhouse_puzzle_door playSound("zmb_chainlink_open");
       break;
     case 3:
       m_nixie_door_left = getent("nixie_door_left", "targetname");
@@ -523,7 +523,7 @@ open_custom_door_master_key(n_door_index, e_triggerer) {
       if(isDefined(e_triggerer))
         e_triggerer door_rumble_on_open();
 
-      m_gate_01 playsound("zmb_chainlink_open");
+      m_gate_01 playSound("zmb_chainlink_open");
       flag_set("docks_inner_gate_unlocked");
       flag_set("docks_inner_gate_open");
       break;
@@ -541,7 +541,7 @@ open_custom_door_master_key(n_door_index, e_triggerer) {
       if(isDefined(e_triggerer))
         e_triggerer door_rumble_on_open();
 
-      m_infirmary_case_door_right playsound("zmb_cabinet_door");
+      m_infirmary_case_door_right playSound("zmb_cabinet_door");
       break;
   }
 }
@@ -579,11 +579,11 @@ setup_master_key() {
   if(level.is_master_key_west) {
     level thread key_pulley("west");
     exploder(101);
-    array_delete(getentarray("wires_pulley_east", "script_noteworthy"));
+    array_delete(getEntArray("wires_pulley_east", "script_noteworthy"));
   } else {
     level thread key_pulley("east");
     exploder(100);
-    array_delete(getentarray("wires_pulley_west", "script_noteworthy"));
+    array_delete(getEntArray("wires_pulley_west", "script_noteworthy"));
   }
 }
 
@@ -597,25 +597,25 @@ key_pulley(str_master_key_location) {
   }
 
   t_other_hurt_trigger delete();
-  t_other_panel setmodel("p6_zm_al_power_station_panels_03");
+  t_other_panel setModel("p6_zm_al_power_station_panels_03");
   t_pulley_hurt_trigger = getent("pulley_hurt_trigger_" + str_master_key_location, "targetname");
   t_pulley_hurt_trigger thread maps\mp\zm_alcatraz_sq_vo::sndhitelectrifiedpulley(str_master_key_location);
   m_master_key_pulley = getent("master_key_pulley_" + str_master_key_location, "targetname");
   m_master_key_pulley play_fx("fx_alcatraz_panel_on_2", m_master_key_pulley.origin, m_master_key_pulley.angles, "power_down", 1, undefined, undefined);
   m_master_key_pulley thread afterlife_interact_object_think();
   level waittill("master_key_pulley_" + str_master_key_location);
-  m_master_key_pulley playsound("zmb_quest_generator_panel_spark");
+  m_master_key_pulley playSound("zmb_quest_generator_panel_spark");
   m_master_key_pulley notify("power_down");
-  m_master_key_pulley setmodel("p6_zm_al_power_station_panels_03");
-  playfxontag(level._effect["fx_alcatraz_panel_ol"], m_master_key_pulley, "tag_origin");
+  m_master_key_pulley setModel("p6_zm_al_power_station_panels_03");
+  playFXOnTag(level._effect["fx_alcatraz_panel_ol"], m_master_key_pulley, "tag_origin");
   m_master_key_pulley play_fx("fx_alcatraz_panel_off_2", m_master_key_pulley.origin, m_master_key_pulley.angles, "power_down", 1, undefined, undefined);
 
   if(level.is_master_key_west) {
     stop_exploder(101);
-    array_delete(getentarray("wires_pulley_west", "script_noteworthy"));
+    array_delete(getEntArray("wires_pulley_west", "script_noteworthy"));
   } else {
     stop_exploder(100);
-    array_delete(getentarray("wires_pulley_east", "script_noteworthy"));
+    array_delete(getEntArray("wires_pulley_east", "script_noteworthy"));
   }
 
   t_hurt_trigger = getent("pulley_hurt_trigger_" + str_master_key_location, "targetname");
@@ -650,7 +650,7 @@ setup_dryer_challenge() {
   iprintlnbold("dryer can now be activated");
 
   t_dryer trigger_on();
-  t_dryer playsound("evt_dryer_rdy_bell");
+  t_dryer playSound("evt_dryer_rdy_bell");
   wait 1;
   players = getplayers();
 
@@ -681,8 +681,8 @@ dryer_trigger_thread() {
 
   exploder(1000);
   sndent thread snddryercountdown(n_dryer_cycle_duration);
-  sndent playsound("evt_dryer_start");
-  sndent playloopsound("evt_dryer_lp");
+  sndent playSound("evt_dryer_start");
+  sndent playLoopSound("evt_dryer_lp");
   level clientnotify("fxanim_dryer_start");
   flag_set("dryer_cycle_active");
   wait 1;
@@ -701,7 +701,7 @@ dryer_trigger_thread() {
   dryer_playerclip = getent("dryer_playerclip", "targetname");
   dryer_playerclip delete();
   sndent stoploopsound();
-  sndent playsound("evt_dryer_stop");
+  sndent playSound("evt_dryer_stop");
 
   if(isDefined(sndset) && sndset)
     level.music_override = 0;
@@ -805,7 +805,7 @@ dryer_teleports_zombie() {
     self.zapped = 1;
     a_nodes = getstructarray("dryer_zombie_teleports", "targetname");
     nd_target = random(a_nodes);
-    playfx(level._effect["afterlife_teleport"], self.origin);
+    playFX(level._effect["afterlife_teleport"], self.origin);
     self hide();
     linker = spawn("script_origin", (0, 0, 0));
     linker thread linker_delete_watch(self);
@@ -814,7 +814,7 @@ dryer_teleports_zombie() {
     self linkto(linker);
     linker moveto(nd_target.origin, 0.05);
     linker waittill("movedone");
-    playfx(level._effect["afterlife_teleport"], self.origin);
+    playFX(level._effect["afterlife_teleport"], self.origin);
     linker delete();
     self show();
     self.zapped = undefined;
@@ -838,9 +838,9 @@ snddryercountdown(num) {
 
   for(i = num; i > 0; i--) {
     if(i <= 10)
-      ent playsound("zmb_quest_nixie_count_final");
+      ent playSound("zmb_quest_nixie_count_final");
     else
-      ent playsound("zmb_quest_nixie_count");
+      ent playSound("zmb_quest_nixie_count");
 
     wait 1;
   }
@@ -876,7 +876,7 @@ generator_challenge_main_thread() {
   t_warden_fence_damage = getent("warden_fence_damage", "targetname");
   t_warden_fence_damage delete();
   level setclientfield("warden_fence_down", 1);
-  array_delete(getentarray("generator_wires", "script_noteworthy"));
+  array_delete(getEntArray("generator_wires", "script_noteworthy"));
   wait 3;
   stop_exploder(2000);
   wait 1;
@@ -896,8 +896,8 @@ generator_panel_trigger_thread(n_panel_index, generator_soundent) {
   iprintlnbold("generator panel " + n_panel_index + " overloaded!");
 
   level.n_generator_panels_active = level.n_generator_panels_active + 1;
-  m_generator_panel setmodel("p6_zm_al_power_station_panels_03");
-  playfxontag(level._effect["fx_alcatraz_panel_ol"], m_generator_panel, "tag_origin");
+  m_generator_panel setModel("p6_zm_al_power_station_panels_03");
+  playFXOnTag(level._effect["fx_alcatraz_panel_ol"], m_generator_panel, "tag_origin");
   m_generator_panel play_fx("fx_alcatraz_panel_off_2", m_generator_panel.origin, m_generator_panel.angles, undefined, 1, undefined, undefined);
   set_generator_vfx_amount(level.n_generator_panels_active, generator_soundent);
   playsoundatposition("zmb_quest_generator_panel_spark", m_generator_panel.origin);
@@ -905,12 +905,12 @@ generator_panel_trigger_thread(n_panel_index, generator_soundent) {
 
 set_generator_vfx_amount(n_vfx_amount, generator_soundent) {
   if(n_vfx_amount == 1)
-    generator_soundent playloopsound("zmb_quest_generator_loop1");
+    generator_soundent playLoopSound("zmb_quest_generator_loop1");
 
   if(n_vfx_amount == 2) {
     generator_soundent stoploopsound();
     wait 0.05;
-    generator_soundent playloopsound("zmb_quest_generator_loop2");
+    generator_soundent playLoopSound("zmb_quest_generator_loop2");
   }
 
   if(n_vfx_amount == 3) {
@@ -919,7 +919,7 @@ set_generator_vfx_amount(n_vfx_amount, generator_soundent) {
     exploder(3300);
     generator_soundent stoploopsound();
     wait 0.05;
-    generator_soundent playloopsound("zmb_quest_generator_loop3");
+    generator_soundent playLoopSound("zmb_quest_generator_loop3");
   }
 }
 
@@ -930,7 +930,7 @@ setup_gate_puzzle() {
   m_gate_02 = getent("cable_puzzle_gate_02", "targetname");
   n_gate_move_duration = 0.5;
   m_docks_shockbox = getent("docks_panel", "targetname");
-  array_set_visible_to_all(getentarray("wires_docks_gate_toggle", "script_noteworthy"), 0);
+  array_set_visible_to_all(getEntArray("wires_docks_gate_toggle", "script_noteworthy"), 0);
   a_players = [];
   a_players = getplayers();
 
@@ -940,7 +940,7 @@ setup_gate_puzzle() {
   while(true) {
     m_docks_shockbox thread afterlife_interact_object_think();
     level waittill("cable_puzzle_gate_afterlife");
-    array_set_visible_to_all(getentarray("wires_docks_gate_toggle", "script_noteworthy"), 1);
+    array_set_visible_to_all(getEntArray("wires_docks_gate_toggle", "script_noteworthy"), 1);
 
     if(is_inner_gate_toggleable && flag("docks_inner_gate_unlocked"))
       level thread toggle_inner_gate(n_gate_move_duration);
@@ -953,14 +953,14 @@ setup_gate_puzzle() {
       gate_2_monsterclip.origin = gate_2_monsterclip.origin + vectorscale((0, 0, 1), 256.0);
       gate_2_monsterclip disconnectpaths();
       gate_2_monsterclip.origin = gate_2_monsterclip.origin - vectorscale((0, 0, 1), 256.0);
-      m_gate_02 playsound("zmb_chainlink_close");
+      m_gate_02 playSound("zmb_chainlink_close");
     } else if(!flag("docks_gates_remain_open")) {
       m_gate_02 moveto(m_gate_02.origin - (-16, 80, 0), n_gate_move_duration);
       wait(n_gate_move_duration + 0.25);
       m_gate_02 disconnectpaths();
       gate_2_monsterclip = getent("docks_gate_2_monsterclip", "targetname");
       gate_2_monsterclip connectpaths();
-      m_gate_02 playsound("zmb_chainlink_open");
+      m_gate_02 playSound("zmb_chainlink_open");
     }
 
     flag_toggle("docks_outer_gate_open");
@@ -972,12 +972,12 @@ setup_gate_puzzle() {
     iprintlnbold("gate ready to be re-toggled");
 
     m_docks_shockbox notify("afterlife_interact_reset");
-    array_set_visible_to_all(getentarray("wires_docks_gate_toggle", "script_noteworthy"), 0);
+    array_set_visible_to_all(getEntArray("wires_docks_gate_toggle", "script_noteworthy"), 0);
   }
 }
 
 toggle_inner_gate(n_gate_move_duration) {
-  a_m_gate_01 = getentarray("cable_puzzle_gate_01", "targetname");
+  a_m_gate_01 = getEntArray("cable_puzzle_gate_01", "targetname");
 
   if(flag("docks_inner_gate_open") && !flag("docks_gates_remain_open")) {
     for(i = 0; i < a_m_gate_01.size; i++)
@@ -990,7 +990,7 @@ toggle_inner_gate(n_gate_move_duration) {
 
     gate_1_monsterclip = getent("docks_gate_1_monsterclip", "targetname");
     gate_1_monsterclip connectpaths();
-    a_m_gate_01[0] playsound("zmb_chainlink_close");
+    a_m_gate_01[0] playSound("zmb_chainlink_close");
   } else {
     for(i = 0; i < a_m_gate_01.size; i++)
       a_m_gate_01[i] moveto(a_m_gate_01[i].origin + (-16, 80, 0), n_gate_move_duration);
@@ -1004,7 +1004,7 @@ toggle_inner_gate(n_gate_move_duration) {
     gate_1_monsterclip.origin = gate_1_monsterclip.origin + vectorscale((0, 0, 1), 256.0);
     gate_1_monsterclip disconnectpaths();
     gate_1_monsterclip.origin = gate_1_monsterclip.origin - vectorscale((0, 0, 1), 256.0);
-    a_m_gate_01[0] playsound("zmb_chainlink_open");
+    a_m_gate_01[0] playSound("zmb_chainlink_open");
   }
 
   flag_toggle("docks_inner_gate_open");
@@ -1254,7 +1254,7 @@ prep_for_new_quest() {
 
   m_plane_craftable = getent("plane_craftable", "targetname");
   m_plane_craftable show();
-  playfxontag(level._effect["fx_alcatraz_plane_apear"], m_plane_craftable, "tag_origin");
+  playFXOnTag(level._effect["fx_alcatraz_plane_apear"], m_plane_craftable, "tag_origin");
   veh_plane_flyable = getent("plane_flyable", "targetname");
   veh_plane_flyable attachpath(getvehiclenode("zombie_plane_underground", "targetname"));
   vo_play_four_part_conversation(level.four_part_convos["alcatraz_return_quest_reset"]);
@@ -1272,12 +1272,12 @@ plane_flight_thread() {
     level clientnotify("sndPB");
 
     if(!(isDefined(level.music_override) && level.music_override))
-      t_plane_fly playloopsound("mus_event_plane_countdown_loop", 0.25);
+      t_plane_fly playLoopSound("mus_event_plane_countdown_loop", 0.25);
 
     for(i = 10; i > 0; i--) {
       iprintlnbold("TAKE-OFF IN " + i + "...");
 
-      veh_plane_flyable playsound("zmb_plane_countdown_tick");
+      veh_plane_flyable playSound("zmb_plane_countdown_tick");
       wait 1;
     }
 
@@ -1290,13 +1290,13 @@ plane_flight_thread() {
     m_plane_craftable ghost();
     veh_plane_flyable setvisibletoall();
     level setclientfield("fog_stage", 1);
-    playfxontag(level._effect["fx_alcatraz_plane_trail"], veh_plane_flyable, "tag_origin");
+    playFXOnTag(level._effect["fx_alcatraz_plane_trail"], veh_plane_flyable, "tag_origin");
     wait 2;
-    playfxontag(level._effect["fx_alcatraz_plane_trail_fast"], veh_plane_flyable, "tag_origin");
+    playFXOnTag(level._effect["fx_alcatraz_plane_trail_fast"], veh_plane_flyable, "tag_origin");
     wait 3;
     exploder(10001);
     wait 4;
-    playfxontag(level._effect["fx_alcatraz_flight_lightning"], veh_plane_flyable, "tag_origin");
+    playFXOnTag(level._effect["fx_alcatraz_flight_lightning"], veh_plane_flyable, "tag_origin");
     level setclientfield("scripted_lightning_flash", 1);
     wait 1;
     flag_set("plane_approach_bridge");
@@ -1305,7 +1305,7 @@ plane_flight_thread() {
     veh_plane_flyable attachpath(getvehiclenode("zombie_plane_bridge_approach", "targetname"));
     veh_plane_flyable startpath();
     wait 6;
-    playfxontag(level._effect["fx_alcatraz_flight_lightning"], veh_plane_flyable, "tag_origin");
+    playFXOnTag(level._effect["fx_alcatraz_flight_lightning"], veh_plane_flyable, "tag_origin");
     level setclientfield("scripted_lightning_flash", 1);
     veh_plane_flyable waittill("reached_end_node");
     flag_set("plane_zapped");
@@ -1351,9 +1351,9 @@ plane_flight_thread() {
 }
 
 sndpc() {
-  self playloopsound("zmb_plane_fire", 4);
+  self playLoopSound("zmb_plane_fire", 4);
   wait 6;
-  self playsound("zmb_plane_fire_whoosh");
+  self playSound("zmb_plane_fire_whoosh");
   wait 1;
   self stoploopsound(3);
 }
@@ -1619,7 +1619,7 @@ manage_electric_chairs() {
 
 snddelayedchairaudio(i) {
   wait(i / 10);
-  self playsound("zmb_quest_electricchair_spawn");
+  self playSound("zmb_quest_electricchair_spawn");
 }
 
 electric_chair_trigger_thread(chair_number) {
@@ -1671,10 +1671,10 @@ electric_chair_trigger_thread(chair_number) {
       m_fx_2 = spawn_model("tag_origin", (-517.024, -3252.66, -7496.2), (0, 0, 0));
       level setclientfield("scripted_lightning_flash", 1);
       wait(n_effects_wait_2);
-      playfxontag(level._effect["fx_alcatraz_lightning_finale"], m_fx_1, "tag_origin");
-      playfxontag(level._effect["fx_alcatraz_lightning_finale"], m_fx_2, "tag_origin");
+      playFXOnTag(level._effect["fx_alcatraz_lightning_finale"], m_fx_1, "tag_origin");
+      playFXOnTag(level._effect["fx_alcatraz_lightning_finale"], m_fx_2, "tag_origin");
       m_fx_3 = spawn_model("tag_origin", (-753.495, -3092.62, -8416.6), vectorscale((1, 0, 0), 270.0));
-      playfxontag(level._effect["fx_alcatraz_lightning_wire"], m_fx_3, "tag_origin");
+      playFXOnTag(level._effect["fx_alcatraz_lightning_wire"], m_fx_3, "tag_origin");
       wait(n_effects_wait_3);
       m_electric_chair play_fx("fx_alcatraz_elec_chair", m_electric_chair.origin, m_electric_chair.angles, "bridge_empty");
 
@@ -1682,7 +1682,7 @@ electric_chair_trigger_thread(chair_number) {
         e_triggerer setclientfieldtoplayer("rumble_electric_chair", 2);
 
       wait(n_effects_wait_4);
-      playfxontag(level._effect["fx_alcatraz_afterlife_zmb_tport"], m_electric_chair, "tag_origin");
+      playFXOnTag(level._effect["fx_alcatraz_afterlife_zmb_tport"], m_electric_chair, "tag_origin");
 
       if(isDefined(e_triggerer))
         e_triggerer playsoundtoplayer("zmb_afterlife_death", e_triggerer);
@@ -1751,7 +1751,7 @@ electric_chair_player_thread(m_linkpoint, chair_number, n_effects_duration) {
   self thread track_player_completed_cycle();
   trace_start = e_corpse_location.origin + vectorscale((0, 0, 1), 100.0);
   trace_end = e_corpse_location.origin + vectorscale((0, 0, -1), 100.0);
-  corpse_trace = bullettrace(trace_start, trace_end, 0, self.e_afterlife_corpse);
+  corpse_trace = bulletTrace(trace_start, trace_end, 0, self.e_afterlife_corpse);
   self.e_afterlife_corpse.origin = corpse_trace["position"];
   self setorigin(e_home_telepoint.origin);
   self enableweapons();
@@ -1781,7 +1781,7 @@ reset_plane_hint_string(player) {
 
 play_fx(str_fx, v_origin, v_angles, time_to_delete_or_notify, b_link_to_self, str_tag, b_no_cull) {
   if((!isDefined(time_to_delete_or_notify) || !isstring(time_to_delete_or_notify) && time_to_delete_or_notify == -1) && (isDefined(b_link_to_self) && b_link_to_self) && isDefined(str_tag)) {
-    playfxontag(getfx(str_fx), self, str_tag);
+    playFXOnTag(getfx(str_fx), self, str_tag);
     return self;
   } else {
     m_fx = spawn_model("tag_origin", v_origin, v_angles);
@@ -1796,7 +1796,7 @@ play_fx(str_fx, v_origin, v_angles, time_to_delete_or_notify, b_link_to_self, st
     if(isDefined(b_no_cull) && b_no_cull)
       m_fx setforcenocull();
 
-    playfxontag(getfx(str_fx), m_fx, "tag_origin");
+    playFXOnTag(getfx(str_fx), m_fx, "tag_origin");
     m_fx thread _play_fx_delete(self, time_to_delete_or_notify);
     return m_fx;
   }
@@ -1810,7 +1810,7 @@ spawn_model(model_name, origin, angles, n_spawnflags) {
     origin = (0, 0, 0);
 
   model = spawn("script_model", origin, n_spawnflags);
-  model setmodel(model_name);
+  model setModel(model_name);
 
   if(isDefined(angles))
     model.angles = angles;

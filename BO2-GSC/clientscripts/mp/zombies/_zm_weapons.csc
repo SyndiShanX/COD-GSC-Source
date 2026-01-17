@@ -89,11 +89,11 @@ weapon_floats_up() {
 
     for(index = 0; index < players.size; index++) {
       if(isDefined(self.weapon_models[index])) {
-        self.weapon_models[index] setmodel(modelname);
+        self.weapon_models[index] setModel(modelname);
         self.weapon_models[index] useweaponhidetags(rand);
 
         if(weapon_is_dual_wield(rand)) {
-          self.weapon_models[index].dw setmodel(modelname);
+          self.weapon_models[index].dw setModel(modelname);
           self.weapon_models[index].dw useweaponhidetags(rand);
           self.weapon_models[index].dw show();
           continue;
@@ -231,7 +231,7 @@ wallbuy_player_connect(localclientnum) {
     else if(isDefined(level._effect[wallbuy.zombie_weapon_upgrade + "_fx"]))
       fx = level._effect[wallbuy.zombie_weapon_upgrade + "_fx"];
 
-    wallbuy.fx[localclientnum] = playfx(localclientnum, fx, wallbuy.origin, anglestoforward(wallbuy.angles), anglestoup(wallbuy.angles), 0.1);
+    wallbuy.fx[localclientnum] = playFX(localclientnum, fx, wallbuy.origin, anglesToForward(wallbuy.angles), anglestoup(wallbuy.angles), 0.1);
     target_struct = getstruct(wallbuy.target, "targetname");
 
     if(wallbuy.targetname == "buildable_wallbuy") {
@@ -276,7 +276,7 @@ wallbuy_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
         wait 0.05;
 
         if(localclientnum == 0)
-          playsound(0, "zmb_weap_wall", struct.origin);
+          playSound(0, "zmb_weap_wall", struct.origin);
 
         vec_offset = (0, 0, 0);
 
@@ -291,9 +291,7 @@ wallbuy_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
       break;
     case 2:
       if(isDefined(level.wallbuy_callback_hack_override))
-        struct.models[localclientnum][
-          [level.wallbuy_callback_hack_override]
-        ]();
+        struct.models[localclientnum][[level.wallbuy_callback_hack_override]]();
 
       break;
   }
@@ -327,7 +325,7 @@ wallbuy_callback_idx(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
             angles = vectortoangles(anglestoright(angles));
             break;
           case 180:
-            angles = vectortoangles(anglestoforward(angles) * -1);
+            angles = vectortoangles(anglesToForward(angles) * -1);
             break;
           case 270:
             angles = vectortoangles(anglestoright(angles) * -1);
@@ -350,7 +348,7 @@ wallbuy_callback_idx(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
       if(isDefined(level._effect[weaponname + "_fx"]))
         fx = level._effect[weaponname + "_fx"];
 
-      struct.fx[localclientnum] = playfx(localclientnum, fx, struct.origin, anglestoforward(struct.angles), anglestoup(struct.angles), 0.1);
+      struct.fx[localclientnum] = playFX(localclientnum, fx, struct.origin, anglesToForward(struct.angles), anglestoup(struct.angles), 0.1);
       level notify("wallbuy_updated");
     }
   }

@@ -6,7 +6,6 @@
 #include scripts\core_common\array_shared;
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_trial;
-
 #namespace zm_trial_force_archetypes;
 
 autoexec __init__system__() {
@@ -21,7 +20,7 @@ __init__() {
   zm_trial::register_challenge(#"force_archetypes", &on_begin, &on_end);
 }
 
-private on_begin(var_34259a50, var_1d00ec07, var_10cad39b, var_f9ab255c) {
+on_begin(var_34259a50, var_1d00ec07, var_10cad39b, var_f9ab255c) {
   archetypes = array::remove_undefined(array(var_34259a50, var_1d00ec07, var_10cad39b, var_f9ab255c), 0);
   self.var_c54c0d81 = [];
 
@@ -30,7 +29,7 @@ private on_begin(var_34259a50, var_1d00ec07, var_10cad39b, var_f9ab255c) {
   }
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   self.var_c54c0d81 = undefined;
 }
 

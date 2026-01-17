@@ -15,13 +15,13 @@ create_see2_threat_group(group) {
     level.see2_threat = [];
   }
   if(!array_check_for_dupes(level.see2_threat_groups, group)) {
-    for (i = 0; i < level.see2_threat_groups; i++) {
+    for(i = 0; i < level.see2_threat_groups; i++) {
       level.see2_threat[i] = array_add(level.see2_threat[i], 0);
     }
     level.see2_threat_groups = array_add(level.see2_threat_groups, group);
     empty_array = [];
     level.see2_threat = array_add(level.see2_threat, empty_array);
-    for (i = 0; i < level.see2_threat_groups; i++) {
+    for(i = 0; i < level.see2_threat_groups; i++) {
       level.see2_threat[level.see2_threat.size - 1] = 0;
     }
   }
@@ -30,7 +30,7 @@ create_see2_threat_group(group) {
 set_see2_threat_bias(againstGroup, group, threatval) {
   group1index = -1;
   group2index = -1;
-  for (i = 0; i < level.see2_threat_groups; i++) {
+  for(i = 0; i < level.see2_threat_groups; i++) {
     if(level.see2_threat_groups[i] == againstGroup) {
       group1index = i;
     }
@@ -67,7 +67,7 @@ get_threat(againstEnt, ent) {
 get_group_threat(againstGroup, group) {
   group1index = -1;
   group2index = -1;
-  for (i = 0; i < level.see2_threat_groups.size; i++) {
+  for(i = 0; i < level.see2_threat_groups.size; i++) {
     if(level.see2_threat_groups[i] == againstGroup) {
       group1index = i;
     }

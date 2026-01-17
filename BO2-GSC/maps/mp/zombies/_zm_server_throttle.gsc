@@ -37,19 +37,13 @@ server_choke_action(id, choke_action, arg1, arg2, arg3) {
   level.zombie_server_choke_ids_count[id]++;
 
   if(!isDefined(arg1))
-    return [
-      [choke_action]
-    ]();
+    return [[choke_action]]();
 
   if(!isDefined(arg2))
-    return [
-      [choke_action]
-    ](arg1);
+    return [[choke_action]](arg1);
 
   if(!isDefined(arg3))
-    return [
-      [choke_action]
-    ](arg1, arg2);
+    return [[choke_action]](arg1, arg2);
 
   return [[choke_action]](arg1, arg2, arg3);
 }

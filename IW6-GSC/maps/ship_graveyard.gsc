@@ -17,7 +17,7 @@ main() {
   level.shark_functions["combat"] = animscripts\shark\shark_combat::main;
   maps\ship_graveyard_util::shark_collision_setup();
   maps\_player_rig::init_player_rig("viewhands_player_us_udt");
-  maps\_utility::intro_screen_create(&"SHIP_GRAVEYARD_INTROSCREEN_LINE_1", & "SHIP_GRAVEYARD_INTROSCREEN_LINE_2", & "SHIP_GRAVEYARD_INTROSCREEN_LINE_5");
+  maps\_utility::intro_screen_create(&"SHIP_GRAVEYARD_INTROSCREEN_LINE_1", &"SHIP_GRAVEYARD_INTROSCREEN_LINE_2", &"SHIP_GRAVEYARD_INTROSCREEN_LINE_5");
   maps\_utility::intro_screen_custom_func(::custom_intro_screen_func);
   level.debris = ["shpg_machinery_baggage_container_dmg"];
 
@@ -120,16 +120,16 @@ main() {
   maps\_swim_ai::init_ai_swim();
   maps\_drone_ai::init();
   maps\_utility::template_level("ship_graveyard");
-  maps\_utility::add_hint_string("hint_down_gamepad", & "SHIP_GRAVEYARD_HINT_DOWN_GAMEPAD", maps\ship_graveyard_util::hintdown_test);
-  maps\_utility::add_hint_string("hint_down_stance", & "SHIP_GRAVEYARD_HINT_DOWN_STANCE", maps\ship_graveyard_util::hintdown_test);
-  maps\_utility::add_hint_string("hint_down_crouch", & "SHIP_GRAVEYARD_HINT_DOWN_CROUCH", maps\ship_graveyard_util::hintdown_test);
-  maps\_utility::add_hint_string("hint_down_hold_crouch", & "SHIP_GRAVEYARD_HINT_DOWN_HOLD_CROUCH", maps\ship_graveyard_util::hintdown_test);
-  maps\_utility::add_hint_string("hint_up_gamepad", & "SHIP_GRAVEYARD_HINT_UP_GAMEPAD", maps\ship_graveyard_util::hintup_test);
-  maps\_utility::add_hint_string("hint_up_stand", & "SHIP_GRAVEYARD_HINT_UP_STAND", maps\ship_graveyard_util::hintup_test);
-  maps\_utility::add_hint_string("hint_sprint", & "SHIP_GRAVEYARD_HINT_SPRINT", maps\ship_graveyard_util::hintsprint_test);
-  maps\_utility::add_hint_string("hint_flashlight", & "SHIP_GRAVEYARD_HINT_FLASHLIGHT", maps\ship_graveyard_util::hintflashlight_test);
-  maps\_utility::add_hint_string("hint_notfound", & "SHIP_GRAVEYARD_HINT_TGT_NOTFOUND");
-  maps\_utility::add_hint_string("hint_blocked", & "SHIP_GRAVEYARD_HINT_TGT_BLOCKED");
+  maps\_utility::add_hint_string("hint_down_gamepad", &"SHIP_GRAVEYARD_HINT_DOWN_GAMEPAD", maps\ship_graveyard_util::hintdown_test);
+  maps\_utility::add_hint_string("hint_down_stance", &"SHIP_GRAVEYARD_HINT_DOWN_STANCE", maps\ship_graveyard_util::hintdown_test);
+  maps\_utility::add_hint_string("hint_down_crouch", &"SHIP_GRAVEYARD_HINT_DOWN_CROUCH", maps\ship_graveyard_util::hintdown_test);
+  maps\_utility::add_hint_string("hint_down_hold_crouch", &"SHIP_GRAVEYARD_HINT_DOWN_HOLD_CROUCH", maps\ship_graveyard_util::hintdown_test);
+  maps\_utility::add_hint_string("hint_up_gamepad", &"SHIP_GRAVEYARD_HINT_UP_GAMEPAD", maps\ship_graveyard_util::hintup_test);
+  maps\_utility::add_hint_string("hint_up_stand", &"SHIP_GRAVEYARD_HINT_UP_STAND", maps\ship_graveyard_util::hintup_test);
+  maps\_utility::add_hint_string("hint_sprint", &"SHIP_GRAVEYARD_HINT_SPRINT", maps\ship_graveyard_util::hintsprint_test);
+  maps\_utility::add_hint_string("hint_flashlight", &"SHIP_GRAVEYARD_HINT_FLASHLIGHT", maps\ship_graveyard_util::hintflashlight_test);
+  maps\_utility::add_hint_string("hint_notfound", &"SHIP_GRAVEYARD_HINT_TGT_NOTFOUND");
+  maps\_utility::add_hint_string("hint_blocked", &"SHIP_GRAVEYARD_HINT_TGT_BLOCKED");
   maps\_utility::add_start("start_tutorial", ::start_tutorial, undefined, ::tutorial_setup);
   maps\_utility::add_start("start_swim", ::start_swim, undefined, ::intro_setup);
   maps\_utility::add_start("start_wreck_approach", ::start_wreck_approach, undefined, ::wreck_approach_setup);
@@ -302,11 +302,11 @@ main() {
 }
 
 objectives() {
-  objective_add(maps\_utility::obj("1"), "current", & "SHIP_GRAVEYARD_OBJ_1");
+  objective_add(maps\_utility::obj("1"), "current", &"SHIP_GRAVEYARD_OBJ_1");
   common_scripts\utility::flag_wait("sonar_boat_explode");
   objective_state(maps\_utility::obj("1"), "done");
   common_scripts\utility::flag_wait("drown_unlink_player");
-  objective_add(maps\_utility::obj("2"), "current", & "SHIP_GRAVEYARD_OBJ_2");
+  objective_add(maps\_utility::obj("2"), "current", &"SHIP_GRAVEYARD_OBJ_2");
   common_scripts\utility::flag_wait("the_end");
   objective_state(maps\_utility::obj("2"), "done");
 }

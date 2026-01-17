@@ -38,8 +38,8 @@
 
 function autoexec main() {
   clientfield::register("allplayers", "being_robot_revived", 1, 1, "int");
-  spawner::add_archetype_spawn_function("zod_companion", & zodcompanionbehavior::archetypezodcompanionblackboardinit);
-  spawner::add_archetype_spawn_function("zod_companion", & zodcompanionserverutils::zodcompanionsoldierspawnsetup);
+  spawner::add_archetype_spawn_function("zod_companion", &zodcompanionbehavior::archetypezodcompanionblackboardinit);
+  spawner::add_archetype_spawn_function("zod_companion", &zodcompanionserverutils::zodcompanionsoldierspawnsetup);
   zodcompanioninterface::registerzodcompanioninterfaceattributes();
   zodcompanionbehavior::registerbehaviorscriptfunctions();
 }
@@ -47,23 +47,23 @@ function autoexec main() {
 #namespace zodcompanionbehavior;
 
 function registerbehaviorscriptfunctions() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionTacticalWalkActionStart", & zodcompaniontacticalwalkactionstart);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionAbleToShoot", & zodcompanionabletoshootcondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionShouldTacticalWalk", & zodcompanionshouldtacticalwalk);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionMovement", & zodcompanionmovement);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionDelayMovement", & zodcompaniondelaymovement);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionSetDesiredStanceToStand", & zodcompanionsetdesiredstancetostand);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionFinishedSprintTransition", & zodcompanionfinishedsprinttransition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionSprintTransitioning", & zodcompanionsprinttransitioning);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionKeepsCurrentMovementMode", & zodcompanionkeepscurrentmovementmode);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionCanJuke", & zodcompanioncanjuke);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionCanPreemptiveJuke", & zodcompanioncanpreemptivejuke);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionJukeInitialize", & zodcompanionjukeinitialize);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionPreemptiveJukeTerminate", & zodcompanionpreemptivejuketerminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionTargetService", & zodcompaniontargetservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionTryReacquireService", & zodcompaniontryreacquireservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("manage_companion_movement", & manage_companion_movement);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionCollisionService", & zodcompanioncollisionservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionTacticalWalkActionStart", &zodcompaniontacticalwalkactionstart);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionAbleToShoot", &zodcompanionabletoshootcondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionShouldTacticalWalk", &zodcompanionshouldtacticalwalk);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionMovement", &zodcompanionmovement);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionDelayMovement", &zodcompaniondelaymovement);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionSetDesiredStanceToStand", &zodcompanionsetdesiredstancetostand);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionFinishedSprintTransition", &zodcompanionfinishedsprinttransition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionSprintTransitioning", &zodcompanionsprinttransitioning);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionKeepsCurrentMovementMode", &zodcompanionkeepscurrentmovementmode);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionCanJuke", &zodcompanioncanjuke);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionCanPreemptiveJuke", &zodcompanioncanpreemptivejuke);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionJukeInitialize", &zodcompanionjukeinitialize);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionPreemptiveJukeTerminate", &zodcompanionpreemptivejuketerminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionTargetService", &zodcompaniontargetservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionTryReacquireService", &zodcompaniontryreacquireservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("manage_companion_movement", &manage_companion_movement);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionCollisionService", &zodcompanioncollisionservice);
 }
 
 function private mocompignorepainfaceenemyinit(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
@@ -90,7 +90,7 @@ function private archetypezodcompanionblackboardinit() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_gibbed_limbs", undefined, & zodcompaniongetgibbedlimbs);
+  blackboard::registerblackboardattribute(self, "_gibbed_limbs", undefined, &zodcompaniongetgibbedlimbs);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
@@ -124,7 +124,7 @@ function private zodcompanionmovement(entity) {
 }
 
 function zodcompanioncanjuke(entity) {
-  if(!(isdefined(entity.steppedoutofcover) && entity.steppedoutofcover) && aiutility::canjuke(entity)) {
+  if(!(isDefined(entity.steppedoutofcover) && entity.steppedoutofcover) && aiutility::canjuke(entity)) {
     jukeevents = blackboard::getblackboardevents("robot_juke");
     tooclosejukedistancesqr = 57600;
     foreach(event in jukeevents) {
@@ -138,7 +138,7 @@ function zodcompanioncanjuke(entity) {
 }
 
 function zodcompanioncanpreemptivejuke(entity) {
-  if(!isdefined(entity.enemy) || !isplayer(entity.enemy)) {
+  if(!isDefined(entity.enemy) || !isplayer(entity.enemy)) {
     return 0;
   }
   if(blackboard::getblackboardattribute(entity, "_stance") == "crouch") {
@@ -147,7 +147,7 @@ function zodcompanioncanpreemptivejuke(entity) {
   if(!entity.shouldpreemptivejuke) {
     return 0;
   }
-  if(isdefined(entity.nextpreemptivejuke) && entity.nextpreemptivejuke > gettime()) {
+  if(isDefined(entity.nextpreemptivejuke) && entity.nextpreemptivejuke > gettime()) {
     return 0;
   }
   if(entity.enemy playerads() < entity.nextpreemptivejukeads) {
@@ -159,7 +159,7 @@ function zodcompanioncanpreemptivejuke(entity) {
     if(angledifference > 135) {
       enemyangles = entity.enemy getgunangles();
       toenemy = entity.enemy.origin - entity.origin;
-      forward = anglestoforward(enemyangles);
+      forward = anglesToForward(enemyangles);
       dotproduct = abs(vectordot(vectornormalize(toenemy), forward));
       record3dtext(acos(dotproduct), entity.origin + vectorscale((0, 0, 1), 10), (0, 1, 0), "");
       if(dotproduct > 0.9848) {
@@ -171,18 +171,18 @@ function zodcompanioncanpreemptivejuke(entity) {
 }
 
 function private _isvalidplayer(player) {
-  if(!isdefined(player) || !isalive(player) || !isplayer(player) || player.sessionstate == "spectator" || player.sessionstate == "intermission" || player laststand::player_is_in_laststand() || player.ignoreme) {
+  if(!isDefined(player) || !isalive(player) || !isplayer(player) || player.sessionstate == "spectator" || player.sessionstate == "intermission" || player laststand::player_is_in_laststand() || player.ignoreme) {
     return false;
   }
   return true;
 }
 
 function private _findclosest(entity, entities) {
-  closest = spawnstruct();
+  closest = spawnStruct();
   if(entities.size > 0) {
     closest.entity = entities[0];
     closest.distancesquared = distancesquared(entity.origin, closest.entity.origin);
-    for (index = 1; index < entities.size; index++) {
+    for(index = 1; index < entities.size; index++) {
       distancesquared = distancesquared(entity.origin, entities[index].origin);
       if(distancesquared < closest.distancesquared) {
         closest.distancesquared = distancesquared;
@@ -197,7 +197,7 @@ function private zodcompaniontargetservice(entity) {
   if(zodcompanionabletoshootcondition(entity)) {
     return false;
   }
-  if(isdefined(entity.ignoreall) && entity.ignoreall) {
+  if(isDefined(entity.ignoreall) && entity.ignoreall) {
     return false;
   }
   aienemies = [];
@@ -205,13 +205,13 @@ function private zodcompaniontargetservice(entity) {
   ai = getaiarray();
   players = getplayers();
   positiononnavmesh = getclosestpointonnavmesh(entity.origin, 200);
-  if(!isdefined(positiononnavmesh)) {
+  if(!isDefined(positiononnavmesh)) {
     return;
   }
   foreach(value in ai) {
-    if(value.team != entity.team && isactor(value) && !isdefined(entity.favoriteenemy)) {
+    if(value.team != entity.team && isactor(value) && !isDefined(entity.favoriteenemy)) {
       enemypositiononnavmesh = getclosestpointonnavmesh(value.origin, 200);
-      if(isdefined(enemypositiononnavmesh) && entity findpath(positiononnavmesh, enemypositiononnavmesh, 1, 0)) {
+      if(isDefined(enemypositiononnavmesh) && entity findpath(positiononnavmesh, enemypositiononnavmesh, 1, 0)) {
         aienemies[aienemies.size] = value;
       }
     }
@@ -219,20 +219,20 @@ function private zodcompaniontargetservice(entity) {
   foreach(value in players) {
     if(_isvalidplayer(value)) {
       enemypositiononnavmesh = getclosestpointonnavmesh(value.origin, 200);
-      if(isdefined(enemypositiononnavmesh) && entity findpath(positiononnavmesh, enemypositiononnavmesh, 1, 0)) {
+      if(isDefined(enemypositiononnavmesh) && entity findpath(positiononnavmesh, enemypositiononnavmesh, 1, 0)) {
         playerenemies[playerenemies.size] = value;
       }
     }
   }
   closestplayer = _findclosest(entity, playerenemies);
   closestai = _findclosest(entity, aienemies);
-  if(!isdefined(closestplayer.entity) && !isdefined(closestai.entity)) {
+  if(!isDefined(closestplayer.entity) && !isDefined(closestai.entity)) {
     return;
   }
-  if(!isdefined(closestai.entity)) {
+  if(!isDefined(closestai.entity)) {
     entity.favoriteenemy = closestplayer.entity;
   } else {
-    if(!isdefined(closestplayer.entity)) {
+    if(!isDefined(closestplayer.entity)) {
       entity.favoriteenemy = closestai.entity;
     } else {
       if(closestai.distancesquared < closestplayer.distancesquared) {
@@ -262,7 +262,7 @@ function private zodcompanionshouldtacticalwalk(entity) {
 function private zodcompanionjukeinitialize(entity) {
   aiutility::choosejukedirection(entity);
   entity clearpath();
-  jukeinfo = spawnstruct();
+  jukeinfo = spawnStruct();
   jukeinfo.origin = entity.origin;
   jukeinfo.entity = entity;
   blackboard::addblackboardevent("robot_juke", jukeinfo, 2000);
@@ -274,10 +274,10 @@ function private zodcompanionpreemptivejuketerminate(entity) {
 }
 
 function private zodcompaniontryreacquireservice(entity) {
-  if(!isdefined(entity.reacquire_state)) {
+  if(!isDefined(entity.reacquire_state)) {
     entity.reacquire_state = 0;
   }
-  if(!isdefined(entity.enemy)) {
+  if(!isDefined(entity.enemy)) {
     entity.reacquire_state = 0;
     return false;
   }
@@ -292,7 +292,7 @@ function private zodcompaniontryreacquireservice(entity) {
     return false;
   }
   dirtoenemy = vectornormalize(entity.enemy.origin - entity.origin);
-  forward = anglestoforward(entity.angles);
+  forward = anglesToForward(entity.angles);
   if(vectordot(dirtoenemy, forward) < 0.5) {
     entity.reacquire_state = 0;
     return false;
@@ -329,10 +329,10 @@ function private zodcompaniontryreacquireservice(entity) {
 
 function private manage_companion_movement(entity) {
   self endon("death");
-  if(isdefined(level.var_bfd9ed83) && level.var_bfd9ed83.eligible_leader) {
+  if(isDefined(level.var_bfd9ed83) && level.var_bfd9ed83.eligible_leader) {
     self.leader = level.var_bfd9ed83;
   }
-  if(!isdefined(entity.var_57e708f6)) {
+  if(!isDefined(entity.var_57e708f6)) {
     entity.var_57e708f6 = 0;
   }
   if(entity.bulletsinclip < entity.weapon.clipsize) {
@@ -367,11 +367,11 @@ function private manage_companion_movement(entity) {
       }
     }
   }
-  if(!isdefined(entity.var_a0c5deb2)) {
+  if(!isDefined(entity.var_a0c5deb2)) {
     entity.var_a0c5deb2 = gettime();
   }
-  if(gettime() >= entity.var_a0c5deb2 && isdefined(level.active_powerups) && level.active_powerups.size > 0) {
-    if(!isdefined(entity.var_34a9f1ad)) {
+  if(gettime() >= entity.var_a0c5deb2 && isDefined(level.active_powerups) && level.active_powerups.size > 0) {
+    if(!isDefined(entity.var_34a9f1ad)) {
       entity.var_34a9f1ad = 0;
     }
     foreach(powerup in level.active_powerups) {
@@ -390,15 +390,15 @@ function private manage_companion_movement(entity) {
     entity.var_a0c5deb2 = gettime() + randomintrange(333, 666);
   }
   follow_radius_squared = 256 * 256;
-  if(isdefined(entity.leader)) {
+  if(isDefined(entity.leader)) {
     entity.companion_anchor_point = entity.leader.origin;
   }
-  if(isdefined(entity.pathgoalpos)) {
+  if(isDefined(entity.pathgoalpos)) {
     dist_check_start_point = entity.pathgoalpos;
   } else {
     dist_check_start_point = entity.origin;
   }
-  if(isdefined(entity.enemy) && entity.enemy.archetype == "parasite") {
+  if(isDefined(entity.enemy) && entity.enemy.archetype == "parasite") {
     height_difference = abs(entity.origin[2] - entity.enemy.origin[2]);
     var_3b804002 = (1.5 * height_difference) * (1.5 * height_difference);
     if(distancesquared(dist_check_start_point, entity.enemy.origin) < var_3b804002) {
@@ -414,7 +414,7 @@ function private manage_companion_movement(entity) {
 }
 
 function private zodcompanioncollisionservice(entity) {
-  if(isdefined(entity.dontpushtime)) {
+  if(isDefined(entity.dontpushtime)) {
     if(gettime() < entity.dontpushtime) {
       return true;
     }
@@ -427,7 +427,7 @@ function private zodcompanioncollisionservice(entity) {
     }
     dist_sq = distancesquared(entity.origin, zombie.origin);
     if(dist_sq < 14400) {
-      if(isdefined(zombie.cant_move) && zombie.cant_move) {
+      if(isDefined(zombie.cant_move) && zombie.cant_move) {
         zombie thread function_d04291cf();
         var_5558b624 = 1;
       }
@@ -457,7 +457,7 @@ function private function_f62bd05c(target_entity, max_distance) {
   }
   path = entity calcapproximatepathtoposition(var_c96da0a0);
   segmentlength = 0;
-  for (index = 1; index < path.size; index++) {
+  for(index = 1; index < path.size; index++) {
     currentseglength = distance(path[index - 1], path[index]);
     if((currentseglength + segmentlength) > max_distance) {
       return false;
@@ -488,8 +488,8 @@ function private function_3463b8c2(var_ee6ad78e) {
 function private pick_new_movement_point() {
   queryresult = positionquery_source_navigation(self.companion_anchor_point, 96, 256, 256, 20, self);
   if(queryresult.data.size) {
-    if(isdefined(self.enemy) && self.enemy.archetype == "parasite") {
-      array::filter(queryresult.data, 0, & function_ab299a53, self.enemy);
+    if(isDefined(self.enemy) && self.enemy.archetype == "parasite") {
+      array::filter(queryresult.data, 0, &function_ab299a53, self.enemy);
     }
   }
   if(queryresult.data.size) {
@@ -523,7 +523,7 @@ function private zodcompanionsetdesiredstancetostand(behaviortreeentity) {
 function zod_companion_revive_player(player) {
   self endon("revive_terminated");
   self endon("end_game");
-  if(!(isdefined(self.reviving_a_player) && self.reviving_a_player)) {
+  if(!(isDefined(self.reviving_a_player) && self.reviving_a_player)) {
     self.reviving_a_player = 1;
   }
   player.being_revived_by_robot = 0;
@@ -559,7 +559,7 @@ function zod_companion_revive_player(player) {
   player thread zm_laststand::revive_success(self, 0);
   level.var_46040f3e = 0;
   players = getplayers();
-  if(players.size == 1 && level flag::get("solo_game") && (isdefined(player.waiting_to_revive) && player.waiting_to_revive)) {
+  if(players.size == 1 && level flag::get("solo_game") && (isDefined(player.waiting_to_revive) && player.waiting_to_revive)) {
     level.solo_game_free_player_quickrevive = 1;
     player thread zm_perks::give_perk("specialty_quickrevive", 0);
   }
@@ -568,11 +568,11 @@ function zod_companion_revive_player(player) {
 
 function zod_companion_monitor_revive_attempt(player) {
   self endon("revive_terminated");
-  while (true) {
-    if(isdefined(player.revivetrigger) && player.revivetrigger.beingrevived === 1 && player.being_revived_by_robot !== 1) {
+  while(true) {
+    if(isDefined(player.revivetrigger) && player.revivetrigger.beingrevived === 1 && player.being_revived_by_robot !== 1) {
       self zod_companion_revive_cleanup(player);
     }
-    if(!(isdefined(player laststand::player_is_in_laststand()) && player laststand::player_is_in_laststand())) {
+    if(!(isDefined(player laststand::player_is_in_laststand()) && player laststand::player_is_in_laststand())) {
       self zod_companion_revive_cleanup(player);
     }
     wait(0.05);
@@ -582,7 +582,7 @@ function zod_companion_monitor_revive_attempt(player) {
 function zod_companion_revive_cleanup(player) {
   self.ignoreall = 0;
   self.reviving_a_player = 0;
-  if(isdefined(player)) {
+  if(isDefined(player)) {
     if(player.being_revived_by_robot == 1) {
       player.being_revived_by_robot = 0;
     }
@@ -711,13 +711,13 @@ function private zodcompaniondestructdeathoverride(inflictor, attacker, damage, 
     destructserverutils::togglespawngibs(entity, 1);
     piececount = destructserverutils::getpiececount(entity);
     possiblepieces = [];
-    for (index = 1; index <= piececount; index++) {
+    for(index = 1; index <= piececount; index++) {
       if(!destructserverutils::isdestructed(entity, index) && randomfloatrange(0, 1) <= 0.2) {
         possiblepieces[possiblepieces.size] = index;
       }
     }
     gibbedpieces = 0;
-    for (index = 0; index < possiblepieces.size && possiblepieces.size > 1 && gibbedpieces < 2; index++) {
+    for(index = 0; index < possiblepieces.size && possiblepieces.size > 1 && gibbedpieces < 2; index++) {
       randompiece = randomintrange(0, possiblepieces.size - 1);
       if(!destructserverutils::isdestructed(entity, possiblepieces[randompiece])) {
         destructserverutils::destructpiece(entity, possiblepieces[randompiece]);
@@ -738,9 +738,9 @@ function private zodcompaniondamageoverride(inflictor, attacker, damage, flags, 
 
 function private findclosestnavmeshpositiontoenemy(enemy) {
   enemypositiononnavmesh = undefined;
-  for (tolerancelevel = 1; tolerancelevel <= 4; tolerancelevel++) {
+  for(tolerancelevel = 1; tolerancelevel <= 4; tolerancelevel++) {
     enemypositiononnavmesh = getclosestpointonnavmesh(enemy.origin, 200 * tolerancelevel);
-    if(isdefined(enemypositiononnavmesh)) {
+    if(isDefined(enemypositiononnavmesh)) {
       break;
     }
   }
@@ -764,9 +764,9 @@ function private zodcompanionsoldierspawnsetup() {
   entity.nextpreemptivejukeads = randomfloatrange(0.5, 0.95);
   entity.shouldpreemptivejuke = math::cointoss();
   entity.reviving_a_player = 0;
-  aiutility::addaioverridedamagecallback(entity, & destructserverutils::handledamage);
-  aiutility::addaioverridedamagecallback(entity, & zodcompaniondamageoverride);
-  aiutility::addaioverridedamagecallback(entity, & zodcompaniongibdamageoverride);
+  aiutility::addaioverridedamagecallback(entity, &destructserverutils::handledamage);
+  aiutility::addaioverridedamagecallback(entity, &zodcompaniondamageoverride);
+  aiutility::addaioverridedamagecallback(entity, &zodcompaniongibdamageoverride);
   entity.companion_anchor_point = entity.origin;
   entity.next_move_time = gettime();
   entity.allow_zombie_to_target_ai = 1;
@@ -779,9 +779,9 @@ function private zodcompanionsoldierspawnsetup() {
 
 function manage_companion() {
   self endon("death");
-  while (true) {
+  while(true) {
     if(!self.reviving_a_player) {
-      if(!isdefined(self.leader) || !self.leader.eligible_leader) {
+      if(!isDefined(self.leader) || !self.leader.eligible_leader) {
         self define_new_leader();
       }
     }
@@ -800,7 +800,7 @@ function function_cbe73e3d() {
 }
 
 function define_new_leader() {
-  if(isdefined(level.var_bfd9ed83) && level.var_bfd9ed83.eligible_leader) {
+  if(isDefined(level.var_bfd9ed83) && level.var_bfd9ed83.eligible_leader) {
     self.leader = level.var_bfd9ed83;
   } else {
     a_potential_leaders = get_potential_leaders(self);
@@ -811,7 +811,7 @@ function define_new_leader() {
     } else {
       foreach(potential_leader in a_potential_leaders) {
         dist = pathdistance(self.origin, potential_leader.origin);
-        if(isdefined(dist) && dist < closest_distance) {
+        if(isDefined(dist) && dist < closest_distance) {
           closest_distance = dist;
           self.leader = potential_leader;
         }
@@ -823,10 +823,10 @@ function define_new_leader() {
 function get_potential_leaders(companion) {
   a_potential_leaders = [];
   foreach(player in level.players) {
-    if(!isdefined(player.eligible_leader)) {
+    if(!isDefined(player.eligible_leader)) {
       player.eligible_leader = 1;
     }
-    if(isdefined(player.eligible_leader) && player.eligible_leader && companion findpath(companion.origin, player.origin)) {
+    if(isDefined(player.eligible_leader) && player.eligible_leader && companion findpath(companion.origin, player.origin)) {
       a_potential_leaders[a_potential_leaders.size] = player;
     }
   }

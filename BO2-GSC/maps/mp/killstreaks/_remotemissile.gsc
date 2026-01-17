@@ -27,7 +27,7 @@ init() {
   registerkillstreak("remote_missile_mp", "remote_missile_mp", "killstreak_remote_missile", "remote_missle_used", ::tryusepredatormissile, 1);
   registerkillstreakaltweapon("remote_missile_mp", "remote_missile_missile_mp");
   registerkillstreakaltweapon("remote_missile_mp", "remote_missile_bomblet_mp");
-  registerkillstreakstrings("remote_missile_mp", & "KILLSTREAK_EARNED_REMOTE_MISSILE", & "KILLSTREAK_REMOTE_MISSILE_NOT_AVAILABLE", & "KILLSTREAK_REMOTE_MISSILE_INBOUND");
+  registerkillstreakstrings("remote_missile_mp", &"KILLSTREAK_EARNED_REMOTE_MISSILE", &"KILLSTREAK_REMOTE_MISSILE_NOT_AVAILABLE", &"KILLSTREAK_REMOTE_MISSILE_INBOUND");
   registerkillstreakdialog("remote_missile_mp", "mpl_killstreak_cruisemissile", "kls_predator_used", "", "", "", "kls_predator_ready");
   registerkillstreakdevdvar("remote_missile_mp", "scr_givemissileremote");
   setkillstreakteamkillpenaltyscale("remote_missile_mp", level.teamkillreducedpenalty);
@@ -143,7 +143,7 @@ drawline(start, end, timeslice, color) {
 }
 
 _fire(lifeid, player, team, killstreak_id) {
-  remotemissilespawnarray = getentarray("remoteMissileSpawn", "targetname");
+  remotemissilespawnarray = getEntArray("remoteMissileSpawn", "targetname");
 
   foreach(spawn in remotemissilespawnarray) {
     if(isDefined(spawn.target))
@@ -164,7 +164,7 @@ _fire(lifeid, player, team, killstreak_id) {
     upvector = (0, 0, level.missileremotelaunchvert);
     backdist = level.missileremotelaunchhorz;
     targetdist = level.missileremotelaunchtargetdist;
-    forward = anglestoforward(player.angles);
+    forward = anglesToForward(player.angles);
     startpos = player.origin + upvector + forward * backdist * -1;
     targetpos = player.origin + forward * targetdist;
   }
@@ -325,7 +325,7 @@ _fire_noplayer(lifeid, player) {
   upvector = (0, 0, level.missileremotelaunchvert);
   backdist = level.missileremotelaunchhorz;
   targetdist = level.missileremotelaunchtargetdist;
-  forward = anglestoforward(player.angles);
+  forward = anglesToForward(player.angles);
   startpos = player.origin + upvector + forward * backdist * -1;
   targetpos = player.origin + forward * targetdist;
   rocket = magicbullet("remotemissile_projectile_mp", startpos, targetpos, player);
@@ -343,7 +343,7 @@ _fire_noplayer(lifeid, player) {
 handledamage() {
   self endon("death");
   self endon("deleted");
-  self setcandamage(1);
+  self setCanDamage(1);
   self.health = 99999;
 
   for(;;) {
@@ -353,8 +353,7 @@ handledamage() {
       if(self.owner isenemyplayer(attacker)) {
         maps\mp\_scoreevents::processscoreevent("destroyed_remote_missile", attacker, self.owner, weapon);
         attacker addweaponstat(weapon, "destroyed_controlled_killstreak", 1);
-      } else {
-      }
+      } else {}
 
       self.owner sendkillstreakdamageevent(int(damage));
     }
@@ -395,18 +394,18 @@ rocket_cleanupondeath() {
 
 missile_sound_play(player) {
   snd_first_person = spawn("script_model", self.origin);
-  snd_first_person setmodel("tag_origin");
+  snd_first_person setModel("tag_origin");
   snd_first_person linkto(self);
   snd_first_person setinvisibletoall();
   snd_first_person setvisibletoplayer(player);
-  snd_first_person playloopsound("wpn_remote_missile_loop_plr", 0.5);
+  snd_first_person playLoopSound("wpn_remote_missile_loop_plr", 0.5);
   self.snd_first = snd_first_person;
   snd_third_person = spawn("script_model", self.origin);
-  snd_third_person setmodel("tag_origin");
+  snd_third_person setModel("tag_origin");
   snd_third_person linkto(self);
   snd_third_person setvisibletoall();
   snd_third_person setinvisibletoplayer(player);
-  snd_third_person playloopsound("wpn_remote_missile_loop_npc", 0.2);
+  snd_third_person playLoopSound("wpn_remote_missile_loop_npc", 0.2);
   self.snd_third = snd_third_person;
 }
 
@@ -416,8 +415,8 @@ missile_sound_boost(rocket) {
   self endon("joined_spectators");
   self endon("disconnect");
   self waittill("missile_boost");
-  rocket.snd_first playloopsound("wpn_remote_missile_boost_plr");
-  rocket.snd_first playsound("wpn_remote_missile_fire_boost");
+  rocket.snd_first playLoopSound("wpn_remote_missile_boost_plr");
+  rocket.snd_first playSound("wpn_remote_missile_fire_boost");
   self playrumbleonentity("sniper_fire");
 
   if(rocket.origin[2] - self.origin[2] > 4000) {
@@ -436,7 +435,7 @@ missile_sound_impact(player, distance) {
 
   for(;;) {
     if(self.origin[2] - player.origin[2] < distance) {
-      self playsound("wpn_remote_missile_inc");
+      self playSound("wpn_remote_missile_inc");
       return;
     }
 
@@ -445,7 +444,7 @@ missile_sound_impact(player, distance) {
 }
 
 missile_sound_deploy_bomblets() {
-  self.snd_first playloopsound("wpn_remote_missile_loop_plr", 0.5);
+  self.snd_first playLoopSound("wpn_remote_missile_loop_plr", 0.5);
 }
 
 missile_sound_stop() {
@@ -456,7 +455,7 @@ missile_sound_stop() {
 getvalidtargets(rocket, trace) {
   pixbeginevent("remotemissile_getVTs_header");
   targets = [];
-  forward = anglestoforward(rocket.angles);
+  forward = anglesToForward(rocket.angles);
   rocketz = rocket.origin[2];
   mapcenterz = level.mapcenter[2];
   diff = mapcenterz - rocketz;
@@ -480,7 +479,7 @@ getvalidtargets(rocket, trace) {
     }
   }
 
-  dogs = getentarray("attack_dog", "targetname");
+  dogs = getEntArray("attack_dog", "targetname");
 
   foreach(dog in dogs) {
     if(dog.aiteam != self.team && distance2dsquared(dog.origin, aimtarget) < 360000) {
@@ -495,7 +494,7 @@ getvalidtargets(rocket, trace) {
     }
   }
 
-  tanks = getentarray("talon", "targetname");
+  tanks = getEntArray("talon", "targetname");
 
   foreach(tank in tanks) {
     if(tank.aiteam != self.team && distance2dsquared(tank.origin, aimtarget) < 360000) {
@@ -510,7 +509,7 @@ getvalidtargets(rocket, trace) {
     }
   }
 
-  turrets = getentarray("auto_turret", "classname");
+  turrets = getEntArray("auto_turret", "classname");
 
   foreach(turret in turrets) {
     if(turret.team != self.team && distance2dsquared(turret.origin, aimtarget) < 360000) {
@@ -812,7 +811,7 @@ missile_deploy_watch(rocket) {
         }
       }
 
-      bomblet = magicbullet("remote_missile_bomblet_mp", rocket.origin, rocket.origin + anglestoforward(rocket.angles) * 1000, self);
+      bomblet = magicbullet("remote_missile_bomblet_mp", rocket.origin, rocket.origin + anglesToForward(rocket.angles) * 1000, self);
       bomblet.team = self.team;
       bomblet setteam(self.team);
 
@@ -830,7 +829,7 @@ missile_deploy_watch(rocket) {
         waitframes++;
       }
 
-      playfx(level.missileremotedeployfx, rocket.origin, anglestoforward(rocket.angles));
+      playFX(level.missileremotedeployfx, rocket.origin, anglesToForward(rocket.angles));
       self playlocalsound("mpl_rc_exp");
       self playrumbleonentity("sniper_fire");
       earthquake(0.2, 0.2, rocket.origin, 200);

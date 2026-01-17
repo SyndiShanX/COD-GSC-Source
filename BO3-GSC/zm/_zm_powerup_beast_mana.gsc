@@ -22,13 +22,13 @@
 #namespace zm_powerup_beast_mana;
 
 function autoexec __init__sytem__() {
-  system::register("zm_powerup_beast_mana", & __init__, undefined, undefined);
+  system::register("zm_powerup_beast_mana", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  zm_powerups::register_powerup("beast_mana", & grab_beast_mana);
+  zm_powerups::register_powerup("beast_mana", &grab_beast_mana);
   if(tolower(getdvarstring("g_gametype")) != "zcleansed") {
-    zm_powerups::add_zombie_powerup("beast_mana", "zombie_z_money_icon", & "ZM_ZOD_POWERUP_BEAST_MANA", & zm_powerups::func_should_never_drop, 1, 0, 0);
+    zm_powerups::add_zombie_powerup("beast_mana", "zombie_z_money_icon", &"ZM_ZOD_POWERUP_BEAST_MANA", &zm_powerups::func_should_never_drop, 1, 0, 0);
   }
 }
 
@@ -39,9 +39,9 @@ function grab_beast_mana(player) {
 
 function beast_mana_powerup(item, player) {
   players = getplayers();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(!players[i] laststand::player_is_in_laststand() && !players[i].sessionstate == "spectator") {
-      if(isdefined(players[i].beastmode) && players[i].beastmode) {
+      if(isDefined(players[i].beastmode) && players[i].beastmode) {
         players[i].beastmana = 1;
         continue;
       }
@@ -59,7 +59,7 @@ function mana_on_hud(drop_item, player_team) {
   hudelem.alpha = 0;
   hudelem fadeovertime(0.5);
   hudelem.alpha = 1;
-  if(isdefined(drop_item)) {
+  if(isDefined(drop_item)) {
     hudelem.label = drop_item.hint;
   }
   hudelem thread full_ammo_move_hud(player_team);

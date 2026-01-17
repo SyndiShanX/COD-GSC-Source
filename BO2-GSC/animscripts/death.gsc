@@ -55,8 +55,7 @@ main() {
     self.coverlookattrigger delete();
   }
 
-  if(isDefined(level.missioncallbacks)) {
-  }
+  if(isDefined(level.missioncallbacks)) {}
 
   if(handledeathfunction()) {
     return;
@@ -117,7 +116,7 @@ main() {
 
 deathglobalsinit() {
   if(!isDefined(anim.deathglobals)) {
-    anim.deathglobals = spawnstruct();
+    anim.deathglobals = spawnStruct();
     anim.deathglobals.explosion_death_gib_chance = 30;
     anim.deathglobals.explosion_death_gib_min_damage = 120;
     anim.deathglobals.extended_death_gib_chance = 30;
@@ -196,9 +195,9 @@ playdeathsound() {
     }
   } else {
     if(self.damagelocation == "helmet" && isDefined(self.hatmodel) && modelhasphyspreset(self.hatmodel) && issubstr(self.hatmodel, "helm"))
-      self playsound("prj_bullet_impact_headshot_helmet");
+      self playSound("prj_bullet_impact_headshot_helmet");
     else
-      self playsound("prj_bullet_impact_headshot");
+      self playSound("prj_bullet_impact_headshot");
 
     if(isDefined(self.team))
       self maps\_dds::dds_notify_mod(self.team != "allies", "headshot");
@@ -615,8 +614,8 @@ flame_death_fx() {
     self setclientflag(level.actor_charring_client_flag);
 
   self starttanning();
-  self playsound("body_burn");
-  playfxontag(anim._effect["character_fire_death_torso"], self, "j_Spine4");
+  self playSound("body_burn");
+  playFXOnTag(anim._effect["character_fire_death_torso"], self, "j_Spine4");
   wait 1;
   tagarray = [];
   tagarray[0] = "J_Shoulder_RI";
@@ -628,16 +627,16 @@ flame_death_fx() {
   for(i = 0; i < 2; i++) {
     switch (tagarray[i]) {
       case "J_Shoulder_RI":
-        playfxontag(anim._effect["character_fire_death_arm_right"], self, "J_Shoulder_RI");
+        playFXOnTag(anim._effect["character_fire_death_arm_right"], self, "J_Shoulder_RI");
         break;
       case "J_Shoulder_LE":
-        playfxontag(anim._effect["character_fire_death_arm_left"], self, "J_Shoulder_LE");
+        playFXOnTag(anim._effect["character_fire_death_arm_left"], self, "J_Shoulder_LE");
         break;
       case "J_Hip_RI":
-        playfxontag(anim._effect["character_fire_death_leg_right"], self, "J_Hip_RI");
+        playFXOnTag(anim._effect["character_fire_death_leg_right"], self, "J_Hip_RI");
         break;
       case "J_Hip_LE":
-        playfxontag(anim._effect["character_fire_death_leg_left"], self, "J_Hip_LE");
+        playFXOnTag(anim._effect["character_fire_death_leg_left"], self, "J_Hip_LE");
         break;
     }
 
@@ -709,8 +708,7 @@ play_bulletgibbed_death_anim() {
   gib_chance = 100;
   isdamagedbyasd = isDefined(self.attacker) && isDefined(self.attacker.vehicletype) && issubstr(self.attacker.vehicletype, "metalstorm");
 
-  if(force_gib) {
-  } else if(weaponclass(self.damageweapon) == "spread" && !isdamagedbyasd) {
+  if(force_gib) {} else if(weaponclass(self.damageweapon) == "spread" && !isdamagedbyasd) {
     maxdist = 330;
 
     if(distsquared < 12100)
@@ -1730,7 +1728,7 @@ play_death_anim(deathanim) {
 
 play_death_anim_fx(deathanim) {
   if(animhasnotetrack(deathanim, "death_neckgrab_spurt") && is_mature())
-    playfxontag(anim._effect["death_neckgrab_spurt"], self, "j_neck");
+    playFXOnTag(anim._effect["death_neckgrab_spurt"], self, "j_neck");
 
   if(!isDefined(self.attacker) || !isDefined(self.damagemod))
     return false;
@@ -1744,7 +1742,7 @@ play_death_anim_fx(deathanim) {
     wait(randomfloatrange(0.2, 1.0));
 
     if(isDefined(self))
-      playfxontag(anim._effect["tazer_knuckles_vomit"], self, "j_neck");
+      playFXOnTag(anim._effect["tazer_knuckles_vomit"], self, "j_neck");
   }
 }
 
@@ -1821,19 +1819,19 @@ do_gib() {
       if(limb_data["spawn_tags"][i] == "") {
         continue;
       }
-      playfxontag(anim._effect[limb_data["fx"]], self, limb_data["spawn_tags"][i]);
+      playFXOnTag(anim._effect[limb_data["fx"]], self, limb_data["spawn_tags"][i]);
     }
   }
 
   if(gib_ref == "head") {
     self detach(self.headmodel);
-    self playsound("chr_gib_decapitate");
+    self playSound("chr_gib_decapitate");
   } else
     playsoundatposition("chr_death_gibs", self.origin);
 
   self thread maps\_dds::dds_notify("gib", self.team != "allies");
   self thread throw_gib(limb_data["spawn_models"], limb_data["spawn_tags"], velocities);
-  self setmodel(limb_data["body_model"]);
+  self setModel(limb_data["body_model"]);
   self attach(limb_data["legs_model"]);
 }
 

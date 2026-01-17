@@ -2579,12 +2579,12 @@ DYNAMICPATH = 1;
 collision_brush_pre_explosion(clip) {
   waittillframeend;
 
-  if(isSP() && clip.spawnflags & DYNAMICPATH)
+  if(isSP() && clip.spawnflags &DYNAMICPATH)
     clip call[[level.disconnectPathsFunction]]();
 
   self waittill("exploded");
 
-  if(isSP() && clip.spawnflags & DYNAMICPATH)
+  if(isSP() && clip.spawnflags &DYNAMICPATH)
     clip call[[level.connectPathsFunction]]();
 
   clip Delete();
@@ -2593,14 +2593,14 @@ collision_brush_pre_explosion(clip) {
 collision_brush_post_explosion(clip) {
   clip NotSolid();
 
-  if(isSP() && clip.spawnflags & DYNAMICPATH)
+  if(isSP() && clip.spawnflags &DYNAMICPATH)
     clip call[[level.connectPathsFunction]]();
 
   self waittill("exploded");
   waittillframeend;
 
   if(isSP()) {
-    if(clip.spawnflags & DYNAMICPATH)
+    if(clip.spawnflags &DYNAMICPATH)
       clip call[[level.disconnectPathsFunction]]();
 
     if(is_so()) {

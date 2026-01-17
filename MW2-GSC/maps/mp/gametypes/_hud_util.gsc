@@ -6,9 +6,9 @@
 #include maps\mp\_utility;
 
 setParent(element) {
-  if(isDefined(self.parent) && self.parent == element)
+  if(isDefined(self.parent) && self.parent == element) {
     return;
-
+  }
   if(isDefined(self.parent))
     self.parent removeChild(self);
 
@@ -409,7 +409,7 @@ createBar(color, width, height, flashFrac) {
 
 getCurrentFraction() {
   frac = self.bar.frac;
-  if(isdefined(self.bar.rateOfChange)) {
+  if(isDefined(self.bar.rateOfChange)) {
     frac += (getTime() - self.bar.lastUpdateTime) * self.bar.rateOfChange;
     if(frac > 1) frac = 1;
     if(frac < 0) frac = 0;
@@ -452,9 +452,9 @@ setFlashFrac(flashFrac) {
 }
 
 hideElem() {
-  if(self.hidden)
+  if(self.hidden) {
     return;
-
+  }
   self.hidden = true;
 
   if(self.alpha != 0)
@@ -468,9 +468,9 @@ hideElem() {
 }
 
 showElem() {
-  if(!self.hidden)
+  if(!self.hidden) {
     return;
-
+  }
   self.hidden = false;
 
   if(self.elemType == "bar" || self.elemType == "bar_shader") {
@@ -493,7 +493,7 @@ flashThread() {
   if(!self.hidden)
     self.alpha = 1;
 
-  while (1) {
+  while(1) {
     if(self.frac >= self.flashFrac) {
       if(!self.hidden) {
         self fadeOverTime(0.3);
@@ -515,12 +515,12 @@ flashThread() {
 destroyElem() {
   tempChildren = [];
 
-  for (index = 0; index < self.children.size; index++) {
+  for(index = 0; index < self.children.size; index++) {
     if(isDefined(self.children[index]))
       tempChildren[tempChildren.size] = self.children[index];
   }
 
-  for (index = 0; index < tempChildren.size; index++)
+  for(index = 0; index < tempChildren.size; index++)
     tempChildren[index] setParent(self getParent());
 
   if(self.elemType == "bar" || self.elemType == "bar_shader") {
@@ -559,19 +559,18 @@ setSize(width, height) {
 }
 
 updateChildren() {
-  for (index = 0; index < self.children.size; index++) {
+  for(index = 0; index < self.children.size; index++) {
     child = self.children[index];
     child setPoint(child.point, child.relativePoint, child.xOffset, child.yOffset);
   }
 }
-
 
 transitionReset() {
   self.x = self.xOffset;
   self.y = self.yOffset;
   if(self.elemType == "font") {
     self.fontScale = self.baseFontScale;
-    self.label = & "";
+    self.label = &"";
   } else if(self.elemType == "icon") {
     //self scaleOverTime( 0.001, self.width, self.height );
     self setShader(self.shader, self.width, self.height);

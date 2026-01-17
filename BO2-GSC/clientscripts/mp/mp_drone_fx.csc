@@ -105,7 +105,7 @@ fxanim_init(localclientnum) {
     if(localclientnum != snapshotlocalclientnum) {
       continue;
     }
-    models = getentarray(localclientnum, "drone_fxanim", "targetname");
+    models = getEntArray(localclientnum, "drone_fxanim", "targetname");
 
     foreach(model in models) {
       if(model.model == "fxanim_mp_drone_factory_link_mod")
@@ -138,7 +138,7 @@ drone_animation(localclientnum) {
 
 drone_link(localclientnum) {
   self waittill_dobj(localclientnum);
-  models = getentarray(localclientnum, "drone_linkto", "targetname");
+  models = getEntArray(localclientnum, "drone_linkto", "targetname");
 
   foreach(model in models) {
     model waittill_dobj(localclientnum);
@@ -180,7 +180,7 @@ drone_animate_fx(localclientnum) {
       case "tack_weld_08":
       case "tack_weld_09":
       case "tack_weld_10":
-        playfxontag(localclientnum, level._effect["fx_mp_drone_robot_sparks"], self, "tag_fx");
+        playFXOnTag(localclientnum, level._effect["fx_mp_drone_robot_sparks"], self, "tag_fx");
         break;
     }
   }

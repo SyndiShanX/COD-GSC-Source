@@ -672,5 +672,4 @@ main() {
   ent.v["angles"] = (270, 0, 0);
   ent.v["fxid"] = "trash_spiral_runner";
   ent.v["delay"] = -15;
-
 }

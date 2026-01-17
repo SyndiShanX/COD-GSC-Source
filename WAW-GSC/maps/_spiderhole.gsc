@@ -26,9 +26,9 @@ spiderhole() {
   spider_lid = undefined;
   target_node = undefined;
   ASSERTex(isDefined(self.target), " Spiderhole Spawner @ " + self.origin + " does NOT target anything!");
-  ents = getentarray(self.target, "targetname");
+  ents = getEntArray(self.target, "targetname");
   anim_org = GetStruct(self.target, "targetname");
-  for (i = 0; i < ents.size; i++) {
+  for(i = 0; i < ents.size; i++) {
     if(isDefined(ents[i].script_noteworthy) && ents[i].script_noteworthy == "spiderhole_lid") {
       assertex(isDefined(level.scr_animtree["spiderhole_lid"]), "Missing spiderhole lid animtree.");
       assertex(isDefined(level.scr_anim["spiderhole_lid"]["jump_out"]), "Missing spiderhole lid jump_out animation.");
@@ -50,7 +50,7 @@ spiderhole() {
   if(isDefined(self.script_delay_min) && isDefined(self.script_delay_max)) {
     wait(RandomFloatRange(self.script_delay_min, self.script_delay_max));
   }
-  while (1) {
+  while(1) {
     closest_player = get_closest_player(self.origin);
     if(distancesquared(closest_player.origin, self.origin) > 96 * 96) {
       break;
@@ -63,7 +63,7 @@ spiderhole() {
   }
   if(isDefined(spider_lid)) {
     if(isDefined(spider_lid.script_fxid)) {
-      playfx(level._effect[spider_lid.script_fxid], spider_lid.origin);
+      playFX(level._effect[spider_lid.script_fxid], spider_lid.origin);
     }
   }
   chance = 0;
@@ -109,13 +109,13 @@ spiderhole_charge_internal() {
     guy = players[randomint(players.size)];
   }
   self thread set_goal_to_guy(guy);
-  self playsound("jpn_charge");
+  self playSound("jpn_charge");
   self thread spiderhole_charge_think();
 }
 
 set_goal_to_guy(guy) {
   self endon("death");
-  while (issentient(guy)) {
+  while(issentient(guy)) {
     self setgoalpos(guy.origin);
     wait(.1);
   }
@@ -199,8 +199,8 @@ spiderhole_anim_internal(anim_ref, anim_org, lid, closest_object) {
     anim_org.angles = (0, angles[1], 0);
   }
   if(isDefined(lid)) {
-    tag_origin = Spawn("script_model", lid.origin);
-    tag_origin SetModel("tag_origin_animate");
+    tag_origin = spawn("script_model", lid.origin);
+    tag_origin setModel("tag_origin_animate");
     tag_origin.angles = anim_org.angles;
     lid LinkTo(tag_origin, "origin_animate_jnt");
     lid.tag_lid = tag_origin;
@@ -235,7 +235,7 @@ spiderhole_duck(anim_ref, anim_org, lid, closest_object) {
     } else {
       wait(.1);
     }
-    while (1) {
+    while(1) {
       closest_player = get_closest_player(self.origin);
       if(DistanceSquared(closest_player.origin, self.origin) > 96 * 96) {
         break;
@@ -260,7 +260,7 @@ spiderhole_gun_spray(guy) {
 line_to_tag(tag_name) {
   self endon("death");
   player = get_players()[0];
-  while (1) {
+  while(1) {
     line(player.origin, self GetTagorigin(tag_name));
     wait(0.05);
   }
@@ -274,7 +274,7 @@ do_print3d(msg, time, offset) {
   if(!isDefined(offset)) {
     offset = (0, 0, 32);
   }
-  while (GetTime() < time) {
+  while(GetTime() < time) {
     offset = offset + (0, 0, 1.5);
     print3d(self.origin + offset, msg);
     wait(0.05);
@@ -282,8 +282,8 @@ do_print3d(msg, time, offset) {
 }
 
 draw_tag_angles(tagname) {
-  while (1) {
-    forward = AnglesToForward(self GetTagAngles(tagname));
+  while(1) {
+    forward = anglesToForward(self GetTagAngles(tagname));
     pos2 = self GetTagOrigin(tagname) + vector_multiply(forward, 48);
     line(self GetTagOrigin(tagname), pos2);
     wait(0.05);

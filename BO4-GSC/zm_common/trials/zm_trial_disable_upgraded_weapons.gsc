@@ -8,7 +8,6 @@
 #include scripts\zm_common\trials\zm_trial_disable_hero_weapons;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
-
 #namespace zm_trial_disable_upgraded_weapons;
 
 autoexec __init__system__() {
@@ -23,7 +22,7 @@ __init__() {
   zm_trial::register_challenge(#"disable_upgraded_weapons", &on_begin, &on_end);
 }
 
-private on_begin() {
+on_begin() {
   assert(isDefined(level.zombie_weapons_upgraded));
   level.var_af806901 = [];
 
@@ -42,7 +41,7 @@ private on_begin() {
   level zm_trial::function_8e2a923(1);
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   foreach(player in getplayers()) {
     player callback::function_824d206(&function_33f0ddd3);
     player callback::remove_on_weapon_change(&zm_trial_util::function_79518194);
@@ -68,11 +67,11 @@ is_active() {
   return isDefined(challenge);
 }
 
-private function_33f0ddd3(eventstruct) {
+function_33f0ddd3(eventstruct) {
   self function_6a8979c9();
 }
 
-private function_6a8979c9() {
+function_6a8979c9() {
   assert(isDefined(level.var_af806901));
 
   foreach(weapon in self getweaponslist(1)) {

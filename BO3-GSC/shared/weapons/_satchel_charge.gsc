@@ -15,7 +15,7 @@
 function init_shared() {
   level._effect["satchel_charge_enemy_light"] = "weapon/fx_c4_light_orng";
   level._effect["satchel_charge_friendly_light"] = "weapon/fx_c4_light_blue";
-  callback::add_weapon_watcher( & createsatchelwatcher);
+  callback::add_weapon_watcher(&createsatchelwatcher);
 }
 
 function createsatchelwatcher() {
@@ -26,9 +26,9 @@ function createsatchelwatcher() {
   watcher.hackertoolradius = level.equipmenthackertoolradius;
   watcher.hackertooltimems = level.equipmenthackertooltimems;
   watcher.headicon = 0;
-  watcher.ondetonatecallback = & satcheldetonate;
-  watcher.onspawn = & satchelspawn;
-  watcher.onstun = & weaponobjects::weaponstun;
+  watcher.ondetonatecallback = &satcheldetonate;
+  watcher.onspawn = &satchelspawn;
+  watcher.onstun = &weaponobjects::weaponstun;
   watcher.stuntime = 1;
   watcher.altweapon = getweapon("satchel_charge_detonator");
   watcher.ownergetsassist = 1;
@@ -40,8 +40,8 @@ function createsatchelwatcher() {
 }
 
 function satcheldetonate(attacker, weapon, target) {
-  if(isdefined(weapon) && weapon.isvalid) {
-    if(isdefined(attacker)) {
+  if(isDefined(weapon) && weapon.isvalid) {
+    if(isDefined(attacker)) {
       if(self.owner util::isenemyplayer(attacker)) {
         attacker challenges::destroyedexplosive(weapon);
         scoreevents::processscoreevent("destroyed_c4", attacker, self.owner, weapon);
@@ -54,11 +54,11 @@ function satcheldetonate(attacker, weapon, target) {
 function satchelspawn(watcher, owner) {
   self endon("death");
   self thread weaponobjects::onspawnuseweaponobject(watcher, owner);
-  if(!(isdefined(self.previouslyhacked) && self.previouslyhacked)) {
-    if(isdefined(owner)) {
+  if(!(isDefined(self.previouslyhacked) && self.previouslyhacked)) {
+    if(isDefined(owner)) {
       owner addweaponstat(self.weapon, "used", 1);
     }
-    self playloopsound("uin_c4_air_alarm_loop");
+    self playLoopSound("uin_c4_air_alarm_loop");
     self util::waittill_notify_or_timeout("stationary", 10);
     delaytimesec = self.weapon.proximityalarmactivationdelay / 1000;
     if(delaytimesec > 0) {

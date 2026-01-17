@@ -10,7 +10,6 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_weapons;
-
 #namespace namespace_5c493a54;
 
 autoexec __init__system__() {
@@ -25,7 +24,7 @@ __init__() {
   zm_trial::register_challenge(#"hash_b7f913776f85df2", &on_begin, &on_end);
 }
 
-private on_begin(var_2e5ed433, var_1532dab3, var_94d24883) {
+on_begin(var_2e5ed433, var_1532dab3, var_94d24883) {
   level.var_2e5ed433 = zm_trial::function_5769f26a(var_2e5ed433) * 1000;
 
   if(isDefined(var_1532dab3)) {
@@ -41,7 +40,7 @@ private on_begin(var_2e5ed433, var_1532dab3, var_94d24883) {
   }
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   level.var_2e5ed433 = undefined;
   level notify(#"hash_2669c6e7b1eb2e4b");
 }
@@ -51,8 +50,8 @@ is_active() {
   return isDefined(challenge);
 }
 
-private point_watcher(var_1532dab3 = 1, var_94d24883 = 0.9) {
-  level endon(#"hash_2669c6e7b1eb2e4b", #"end_game", #"hash_7646638df88a3656");
+point_watcher(var_1532dab3 = 1, var_94d24883 = 0.9) {
+  level endon(#"hash_2669c6e7b1eb2e4b", # "end_game", # "hash_7646638df88a3656");
   self endon(#"disconnect");
   wait 15;
 

@@ -17,13 +17,13 @@ function init_shared() {
   level.decoyweapons["semiauto"] = [];
   level.decoyweapons["fullauto"][level.decoyweapons["fullauto"].size] = getweapon("ar_accurate");
   level.decoyweapons["semiauto"][level.decoyweapons["semiauto"].size] = getweapon("pistol_standard");
-  callback::add_weapon_watcher( & create_watcher);
+  callback::add_weapon_watcher(&create_watcher);
 }
 
 function create_watcher() {
   watcher = self weaponobjects::createuseweaponobjectwatcher("nightingale", self.team);
-  watcher.onspawn = & on_spawn;
-  watcher.ondetonatecallback = & detonate;
+  watcher.onspawn = &on_spawn;
+  watcher.ondetonatecallback = &detonate;
   watcher.deleteondifferentobjectspawn = 0;
   watcher.headicon = 0;
 }
@@ -39,7 +39,7 @@ function on_spawn(watcher, owner) {
   spawn_time = gettime();
   owner addweaponstat(self.weapon, "used", 1);
   self thread simulate_weapon_fire(owner);
-  while (true) {
+  while(true) {
     if(gettime() > (spawn_time + (decoy_time * 1000))) {
       self destroy(watcher, owner);
       return;
@@ -63,9 +63,9 @@ function move(owner, count, fire_time, main_dir, max_offset_angle) {
   intial_up = randomfloatrange(min_up_speed, max_up_speed);
   start_time = gettime();
   gravity = getdvarint("bg_gravity");
-  for (i = 0; i < 1; i++) {
+  for(i = 0; i < 1; i++) {
     angles = (0, randomintrange(current_main_dir - max_offset_angle, current_main_dir + max_offset_angle), 0);
-    dir = anglestoforward(angles);
+    dir = anglesToForward(angles);
     dir = vectorscale(dir, randomfloatrange(min_speed, max_speed));
     deltatime = (gettime() - start_time) * 0.001;
     up = (0, 0, intial_up - (800 * deltatime));
@@ -135,7 +135,7 @@ function simulate_weapon_fire_machine_gun_semi_auto(owner, weapon) {
   reloadtime = weapon.reloadtime;
   burst_spacing_min = 4;
   burst_spacing_max = 10;
-  while (true) {
+  while(true) {
     if(clipsize <= 1) {
       burst_count = 1;
     } else {
@@ -153,7 +153,7 @@ function simulate_weapon_fire_pistol(owner, weapon) {
   reloadtime = weapon.reloadtime;
   burst_spacing_min = 0.5;
   burst_spacing_max = 4;
-  while (true) {
+  while(true) {
     burst_count = randomintrange(1, clipsize);
     self thread move(owner, burst_count, firetime, self.main_dir, self.max_offset_angle);
     self fire_burst(owner, weapon, firetime, burst_count, 0);
@@ -170,7 +170,7 @@ function simulate_weapon_fire_shotgun(owner, weapon) {
   }
   burst_spacing_min = 0.5;
   burst_spacing_max = 4;
-  while (true) {
+  while(true) {
     burst_count = randomintrange(1, clipsize);
     self thread move(owner, burst_count, firetime, self.main_dir, self.max_offset_angle);
     self fire_burst(owner, weapon, firetime, burst_count, 0);
@@ -187,7 +187,7 @@ function simulate_weapon_fire_machine_gun_full_auto(owner, weapon) {
   }
   burst_spacing_min = 2;
   burst_spacing_max = 6;
-  while (true) {
+  while(true) {
     burst_count = randomintrange(int(clipsize * 0.6), clipsize);
     interrupt = 0;
     self thread move(owner, burst_count, firetime, self.main_dir, self.max_offset_angle);
@@ -205,7 +205,7 @@ function simulate_weapon_fire_sniper(owner, weapon) {
   }
   burst_spacing_min = 3;
   burst_spacing_max = 5;
-  while (true) {
+  while(true) {
     burst_count = randomintrange(1, clipsize);
     self thread move(owner, burst_count, firetime, self.main_dir, self.max_offset_angle);
     self fire_burst(owner, weapon, firetime, burst_count, 0);
@@ -237,9 +237,9 @@ function finish_while_loop(weapon, reloadtime, burst_spacing_min, burst_spacing_
 function play_reload_sounds(weapon, reloadtime) {
   divy_it_up = (reloadtime - 0.1) / 2;
   wait(0.1);
-  self playsound("fly_assault_reload_npc_mag_out");
+  self playSound("fly_assault_reload_npc_mag_out");
   wait(divy_it_up);
-  self playsound("fly_assault_reload_npc_mag_in");
+  self playSound("fly_assault_reload_npc_mag_in");
   wait(divy_it_up);
 }
 
@@ -254,7 +254,7 @@ function watch_for_explosion(owner, weapon) {
 function watch_for_death_before_explosion() {
   self waittill("death");
   wait(0.1);
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     self notify("death_before_explode");
   }
 }
@@ -262,7 +262,7 @@ function watch_for_death_before_explosion() {
 function do_explosion(owner, pos, weapon, count) {
   min_offset = 100;
   max_offset = 500;
-  for (i = 0; i < count; i++) {
+  for(i = 0; i < count; i++) {
     wait(randomfloatrange(0.1, 0.5));
     offset = (randomfloatrange(min_offset, max_offset) * ((randomintrange(0, 2) * 2) - 1), randomfloatrange(min_offset, max_offset) * ((randomintrange(0, 2) * 2) - 1), 0);
     owner fakefire(owner, pos + offset, weapon, 1);
@@ -291,7 +291,7 @@ function track_main_direction() {
   self endon("done");
   self.main_dir = int(vectortoangles((self.initial_velocity[0], self.initial_velocity[1], 0))[1]);
   up = (0, 0, 1);
-  while (true) {
+  while(true) {
     self waittill("grenade_bounce", pos, normal);
     dot = vectordot(normal, up);
     if(dot < 0.5 && dot > -0.5) {

@@ -7,7 +7,6 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\footsteps_shared;
 #include scripts\core_common\util_shared;
-
 #namespace archetype_elephant;
 
 autoexec init() {
@@ -23,7 +22,7 @@ autoexec init() {
   clientfield::register("actor", "sndTowersBossArmor", 1, 1, "int", &sndtowersbossarmor, 0, 0);
 }
 
-private function_4c731a08(localclientnum) {
+function_4c731a08(localclientnum) {
   self playrenderoverridebundle("rob_zm_eyes_red");
 }
 

@@ -87,9 +87,7 @@ remote_vehicle_setup() {
 
   level.outside_zones = [];
   if(isDefined(level.teleportGetActivePathnodeZonesFunc)) {
-    all_zones = [
-      [level.teleportGetActivePathnodeZonesFunc]
-    ]();
+    all_zones = [[level.teleportGetActivePathnodeZonesFunc]]();
   } else {
     all_zones = [];
     for(i = 0; i < level.zoneCount; i++)
@@ -953,9 +951,7 @@ vanguard_pick_node(current_node) {
   foreach(node in best_nodes_old) {
     if(node.valid_for_vanguard) {
       if(current_node.origin[2] != current_node.vanguard_origin[2] || node.origin[2] != node.vanguard_origin[2]) {
-        node_origin = [
-          [level.bot_ks_funcs["heli_node_get_origin"]["vanguard"]]
-        ](node);
+        node_origin = [[level.bot_ks_funcs["heli_node_get_origin"]["vanguard"]]](node);
 
         hitPos = PlayerPhysicsTrace(current_node_origin, node_origin);
         if(DistanceSquared(hitPos, node_origin) < 1)
@@ -1692,9 +1688,7 @@ heli_pick_node_furthest_from_center(nodes, type) {
   farthest_node = undefined;
   farthest_node_dist_sq = 0;
   foreach(node in nodes) {
-    dist_to_center_sq = DistanceSquared(level.bot_map_center, [
-      [level.bot_ks_funcs["heli_node_get_origin"][type]]
-    ](node));
+    dist_to_center_sq = DistanceSquared(level.bot_map_center, [[level.bot_ks_funcs["heli_node_get_origin"][type]]](node));
     if(dist_to_center_sq > farthest_node_dist_sq) {
       farthest_node_dist_sq = dist_to_center_sq;
       farthest_node = node;
@@ -1715,9 +1709,7 @@ find_closest_heli_node_2D(origin, type) {
   closest_node_2D = undefined;
   closest_node_2D_dist = 99999999;
   foreach(node in level.bot_heli_nodes) {
-    dist_2D_sq = Distance2DSquared(origin, [
-      [level.bot_ks_funcs["heli_node_get_origin"][type]]
-    ](node));
+    dist_2D_sq = Distance2DSquared(origin, [[level.bot_ks_funcs["heli_node_get_origin"][type]]](node));
     if(dist_2D_sq < closest_node_2D_dist) {
       closest_node_2D = node;
       closest_node_2D_dist = dist_2D_sq;
@@ -1885,9 +1877,7 @@ bot_control_heli_main_move_loop(type, rides_on_mesh) {
       ](current_node);
       current_target = undefined;
       if(isDefined(current_node)) {
-        current_node_origin = [
-          [level.bot_ks_funcs["heli_node_get_origin"][type]]
-        ](current_node);
+        current_node_origin = [[level.bot_ks_funcs["heli_node_get_origin"][type]]](current_node);
 
         if(rides_on_mesh) {
           traceStart = (current_node.origin) + (getHeliPilotMeshOffset() + level.bot_heli_pilot_traceOffset);

@@ -8,7 +8,7 @@
 #include common_scripts\utility;
 #using_animtree("generic_human");
 main(dialogue_array) {
-  if(isdefined(dialogue_array)) {
+  if(isDefined(dialogue_array)) {
     level.dynamic_run_speed_dialogue = dialogue_array;
     foreach(value in dialogue_array) {
       level.scr_radio[value] = value;

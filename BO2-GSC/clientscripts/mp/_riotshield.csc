@@ -39,13 +39,13 @@ riotshield_deploy_anim(localclientnum, instant) {
     self setanimtime( % o_riot_stand_deploy, 1.0);
   } else {
     self setanim( % o_riot_stand_deploy, 1.0, 0.0, 1.0);
-    playfxontag(localclientnum, level._effect["riotshield_dust"], self, "tag_origin");
+    playFXOnTag(localclientnum, level._effect["riotshield_dust"], self, "tag_origin");
   }
 
   if(!instant)
     wait 0.8;
 
-  self.shieldlightfx = playfxontag(localclientnum, level._effect["riotshield_light"], self, "tag_fx");
+  self.shieldlightfx = playFXOnTag(localclientnum, level._effect["riotshield_light"], self, "tag_fx");
 }
 
 watch_riotshield_damage() {
@@ -69,7 +69,7 @@ riotshield_destroy_anim(localclientnum) {
     stopfx(localclientnum, self.shieldlightfx);
 
   wait 0.05;
-  self playsound(localclientnum, "wpn_shield_destroy");
+  self playSound(localclientnum, "wpn_shield_destroy");
   self useanimtree(#animtree);
   self setanim( % o_riot_stand_destroyed, 1.0, 0.0, 1.0);
   wait 1.0;

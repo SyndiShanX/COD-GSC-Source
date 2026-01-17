@@ -23,7 +23,7 @@ initFlashed() {
 }
 
 randomizeFlashAnimArray() {
-  for (i = 0; i < anim.flashAnimArray.size; i++) {
+  for(i = 0; i < anim.flashAnimArray.size; i++) {
     switchwith = randomint(anim.flashAnimArray.size);
     temp = anim.flashAnimArray[i];
     anim.flashAnimArray[i] = anim.flashAnimArray[switchwith];
@@ -53,12 +53,12 @@ main() {
   animscripts\utility::initialize("flashed");
 
   flashDuration = self flashBangGetTimeLeftSec();
-  if(flashDuration <= 0)
+  if(flashDuration <= 0) {
     return;
-
+  }
   self animscripts\face::SayGenericDialogue("flashbang");
 
-  if(isdefined(self.specialFlashedFunc)) {
+  if(isDefined(self.specialFlashedFunc)) {
     self[[self.specialFlashedFunc]]();
     return;
   }

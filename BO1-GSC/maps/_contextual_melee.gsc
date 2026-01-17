@@ -10,7 +10,7 @@
 setup() {
   if(isDefined(level.contextualMeleeFeature) && !level.contextualMeleeFeature)
     return;
-  level._melee = SpawnStruct();
+  level._melee = spawnStruct();
   level._CONTEXTUAL_MELEE_DIST = 70;
   level._CONTEXTUAL_MELEE_DIST_SQ = level._CONTEXTUAL_MELEE_DIST *
     level._CONTEXTUAL_MELEE_DIST;
@@ -29,7 +29,7 @@ main(melee_id, set) {
     return;
   }
   if(!isDefined(self._melee)) {
-    self._melee = SpawnStruct();
+    self._melee = spawnStruct();
   }
   if(!isDefined(set) || set == "any") {
     self._melee.set = array_reverse(GetArrayKeys(level._melee.info));
@@ -120,7 +120,7 @@ player_can_melee(guy) {
       if(isDefined(guy._melee_ignore_angle_override)) {
         return looking_at;
       }
-      facing_same_way = (VectorDot(AnglesToForward(guy.angles), AnglesToForward(self GetPlayerAngles())) > 0.4);
+      facing_same_way = (VectorDot(anglesToForward(guy.angles), anglesToForward(self GetPlayerAngles())) > 0.4);
       return looking_at && facing_same_way;
     }
   }
@@ -344,7 +344,7 @@ end_contextual_melee(victim) {
   if(!is_false(level._contextual_melee_hack)) {
     trace_start = self.origin + (0, 0, 100);
     trace_end = self.origin + (0, 0, -100);
-    player_trace = BulletTrace(trace_start, trace_end, false, victim);
+    player_trace = bulletTrace(trace_start, trace_end, false, victim);
     self SetOrigin(player_trace["position"]);
   }
   self FreezeControls(false);
@@ -478,20 +478,20 @@ do_fx() {
     self waittill("contextual_melee_anim", note);
     switch (note) {
       case "fx_blood":
-        PlayFXOnTag(level._effect["neckstab_stand_blood"], self, "J_Neck");
+        playFXOnTag(level._effect["neckstab_stand_blood"], self, "J_Neck");
         break;
       case "fx_blood_karambit":
         AssertEx(isDefined(level._effect["karambit_stand_blood"]), "No blood effect setup for the karambit contextual melee");
         if(is_mature()) {
-          PlayFXOnTag(level._effect["karambit_stand_blood"], self, "J_Neck");
+          playFXOnTag(level._effect["karambit_stand_blood"], self, "J_Neck");
         }
         level notify("karambit_stand_blood_now");
         break;
       case "fx_blood_arm_hatchet":
-        PlayFXOnTag(level._effect["hatchet_arm_blood"], self, "J_Wrist_LE");
+        playFXOnTag(level._effect["hatchet_arm_blood"], self, "J_Wrist_LE");
         break;
       case "fx_blood_neck_hatchet":
-        PlayFXOnTag(level._effect["neckstab_stand_blood_left"], self, "J_Neck");
+        playFXOnTag(level._effect["neckstab_stand_blood_left"], self, "J_Neck");
         break;
       case "end":
         break;

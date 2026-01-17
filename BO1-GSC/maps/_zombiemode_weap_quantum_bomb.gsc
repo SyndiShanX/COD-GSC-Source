@@ -52,7 +52,7 @@ quantum_bomb_register_result(name, result_func, chance, validation_func) {
     quantum_bomb_debug_print_ln("quantum_bomb_register_result(): '" + name + "' is already registered as a quantum bomb result.\n");
     return;
   }
-  result = SpawnStruct();
+  result = spawnStruct();
   result.name = name;
   result.result_func = result_func;
   if(!isDefined(chance)) {
@@ -80,19 +80,19 @@ quantum_bomb_deregister_result(name) {
 }
 
 quantum_bomb_play_area_effect(position) {
-  PlayFX(level._effect["quantum_bomb_area_effect"], position);
+  playFX(level._effect["quantum_bomb_area_effect"], position);
 }
 
 quantum_bomb_play_player_effect() {
-  PlayFXOnTag(level._effect["quantum_bomb_player_effect"], self, "tag_origin");
+  playFXOnTag(level._effect["quantum_bomb_player_effect"], self, "tag_origin");
 }
 
 quantum_bomb_play_player_effect_at_position(position) {
-  PlayFX(level._effect["quantum_bomb_player_position_effect"], position);
+  playFX(level._effect["quantum_bomb_player_position_effect"], position);
 }
 
 quantum_bomb_play_mystery_effect(position) {
-  PlayFX(level._effect["quantum_bomb_mystery_effect"], position);
+  playFX(level._effect["quantum_bomb_mystery_effect"], position);
 }
 
 quantum_bomb_clear_cached_data() {
@@ -240,7 +240,7 @@ quantum_bomb_random_weapon_starburst_result(position) {
     yaw = start_yaw + (RandomIntRange(-3, 3), i * 10, 0);
     weapon_model.angles = yaw;
     flash_pos = weapon_model GetTagOrigin("tag_flash");
-    target_pos = flash_pos + vector_scale(AnglesToForward(yaw), 40);
+    target_pos = flash_pos + vector_scale(anglesToForward(yaw), 40);
     if(!isDefined(attacker)) {
       attacker = undefined;
     }
@@ -367,9 +367,7 @@ quantum_bomb_teleport_player(player) {
   black_hole_teleport_structs = getstructarray("struct_black_hole_teleport", "targetname");
   chosen_spot = undefined;
   if(isDefined(level._special_blackhole_bomb_structs)) {
-    black_hole_teleport_structs = [
-      [level._special_blackhole_bomb_structs]
-    ]();
+    black_hole_teleport_structs = [[level._special_blackhole_bomb_structs]]();
   }
   player_current_zone = player get_current_zone();
   if(!isDefined(black_hole_teleport_structs) || black_hole_teleport_structs.size == 0 || !isDefined(player_current_zone)) {
@@ -377,9 +375,7 @@ quantum_bomb_teleport_player(player) {
   }
   black_hole_teleport_structs = array_randomize(black_hole_teleport_structs);
   if(isDefined(level._override_blackhole_destination_logic)) {
-    chosen_spot = [
-      [level._override_blackhole_destination_logic]
-    ](black_hole_teleport_structs, player);
+    chosen_spot = [[level._override_blackhole_destination_logic]](black_hole_teleport_structs, player);
   } else {
     for(i = 0; i < black_hole_teleport_structs.size; i++) {
       if(check_point_in_active_zone(black_hole_teleport_structs[i].origin) &&
@@ -467,7 +463,7 @@ quantum_bomb_zombie_speed_buff_result(position) {
 }
 
 quantum_bomb_zombie_fling_result(position) {
-  PlayFX(level._effect["zombie_fling_result"], position);
+  playFX(level._effect["zombie_fling_result"], position);
   self thread maps\_zombiemode_audio::create_and_play_dialog("kill", "quant_good");
   range = 300;
   range_squared = range * range;

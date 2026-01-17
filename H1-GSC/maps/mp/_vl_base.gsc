@@ -45,7 +45,7 @@ playermonitorluinotifies(var_0) {
   self endon("disconnect");
   playerluistart();
 
-  for (;;) {
+  for(;;) {
     self waittill("luinotifyserver", var_1, var_2);
     thread playerprocessluiservernotify(var_1, var_2);
   }
@@ -176,7 +176,7 @@ vlobby_player() {
 getlastclass(var_0) {
   var_1 = maps\mp\gametypes\_class::cac_getlastclassindex(var_0);
 
-  if(!isdefined(var_1) || var_1 == 0)
+  if(!isDefined(var_1) || var_1 == 0)
     var_1 = 1;
 
   return var_1;
@@ -209,7 +209,7 @@ playerpopcameramode() {
   var_0 = level.camparams;
   var_1 = self;
 
-  if(isdefined(var_0.pushmode) && var_0.pushmode.size > 0) {
+  if(isDefined(var_0.pushmode) && var_0.pushmode.size > 0) {
     var_2 = var_0.pushmode.size - 1;
     var_3 = var_0.pushmode[var_2];
     var_0.pushmode[var_2] = undefined;
@@ -221,11 +221,11 @@ playerchangecameramode(var_0, var_1) {
   var_2 = level.camparams;
   var_3 = self;
 
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     var_1 = 1;
 
   if(var_1) {
-    if(isdefined(var_2.mode))
+    if(isDefined(var_2.mode))
       var_2.pushmode[var_2.pushmode.size] = var_2.mode;
     else
       var_2.mode = "";
@@ -243,15 +243,15 @@ playerhandletasksafternextsnapshot(var_0) {
 setuploadoutcommonvl() {
   var_0 = self.vlcontroller;
 
-  if(!isdefined(self.emblemloadout))
-    self.emblemloadout = spawnstruct();
+  if(!isDefined(self.emblemloadout))
+    self.emblemloadout = spawnStruct();
 
   self.emblemloadout.emblemindex = getcacplayerdataforgroup(var_0, common_scripts\utility::getstatsgroup_common(), "emblemPatchIndex");
   self.emblemloadout.shouldapplyemblemtoweapon = getcacplayerdataforgroup(var_0, common_scripts\utility::getstatsgroup_common(), "applyEmblemToWeapon");
   self.emblemloadout.shouldapplyemblemtocharacter = getcacplayerdataforgroup(var_0, common_scripts\utility::getstatsgroup_common(), "applyEmblemToCharacter");
 
-  if(!isdefined(self.charactercamoloadout))
-    self.charactercamoloadout = spawnstruct();
+  if(!isDefined(self.charactercamoloadout))
+    self.charactercamoloadout = spawnStruct();
 
   self.charactercamoloadout.camoindex = getcacplayerdataforgroup(var_0, common_scripts\utility::getstatsgroup_common(), "characterCamoIndex");
 }
@@ -276,7 +276,7 @@ getloadoutvl(var_0, var_1) {
   var_3["equipment"] = maps\mp\gametypes\_class::cac_getequipment(var_1, 0, var_2);
   var_3["offhand"] = maps\mp\gametypes\_class::cac_getequipment(var_1, 1, var_2);
 
-  for (var_4 = 0; var_4 < 3; var_4++)
+  for(var_4 = 0; var_4 < 3; var_4++)
     var_3["perk" + var_4] = maps\mp\gametypes\_class::cac_getperk(var_1, var_4, var_2);
 
   var_3["meleeWeapon"] = maps\mp\gametypes\_class::cac_getmeleeweapon(var_1, var_2);
@@ -305,18 +305,18 @@ playerwaittillloadoutstreamed() {
   if(!self.emblemloadout.shouldapplyemblemtoweapon)
     var_13 = -1;
 
-  if(isdefined(level.vlavatars) && isdefined(level.vl_focus) && isdefined(level.vlavatars[level.vl_focus]))
+  if(isDefined(level.vlavatars) && isDefined(level.vl_focus) && isDefined(level.vlavatars[level.vl_focus]))
     prep_for_controls(level.vlavatars[level.vl_focus], level.vlavatars[level.vl_focus].angles);
 
   var_14 = [];
 
-  if(isdefined(var_3) && var_3 != "specialty_null")
+  if(isDefined(var_3) && var_3 != "specialty_null")
     var_14[var_14.size] = maps\mp\gametypes\_class::buildweaponname(var_3, var_4, var_5, var_6, var_7, var_13);
 
-  if(isdefined(var_8) && var_8 != "specialty_null")
+  if(isDefined(var_8) && var_8 != "specialty_null")
     var_14[var_14.size] = maps\mp\gametypes\_class::buildweaponname(var_8, var_9, var_10, var_11, var_12, var_13);
 
-  while (var_14.size > 0) {
+  while(var_14.size > 0) {
     var_15 = self loadweapons(var_14);
 
     if(var_15 == 1) {
@@ -330,8 +330,8 @@ playerwaittillloadoutstreamed() {
 playermonitorswitchtofiringrange() {
   var_0 = self;
 
-  for (;;) {
-    if(isdefined(level.in_firingrange)) {
+  for(;;) {
+    if(isDefined(level.in_firingrange)) {
       var_1 = getdvarint("virtualLobbyInFiringRange", 0);
 
       if(var_1 == 1 && !level.in_firingrange) {
@@ -349,7 +349,7 @@ playermonitorswitchtofiringrange() {
         var_0 disable_player_controls();
         resetplayeravatar();
 
-        if(isdefined(var_0.primaryweapon))
+        if(isDefined(var_0.primaryweapon))
           var_0 switchtoweapon(var_0.primaryweapon);
 
         var_0 notify("enter_lobby");
@@ -372,7 +372,7 @@ playermonitordisconnect() {
   vlprint("remove all ownerIds due to disconnect\n");
   var_0 = level.vlavatars.size;
 
-  for (var_1 = var_0 - 1; var_1 >= 0; var_1--)
+  for(var_1 = var_0 - 1; var_1 >= 0; var_1--)
     maps\mp\_vl_avatar::removelobbyavatar(level.vlavatars[var_1]);
 }
 
@@ -384,7 +384,7 @@ enter_vlobby(var_0) {
   var_0 stopshellshock();
   var_0 enablephysicaldepthoffieldscripting();
 
-  if(isdefined(level.vlavatars) && isdefined(level.vl_focus) && isdefined(level.vlavatars[level.vl_focus]))
+  if(isDefined(level.vlavatars) && isDefined(level.vl_focus) && isDefined(level.vlavatars[level.vl_focus]))
     var_0 prep_for_controls(level.vlavatars[level.vl_focus], level.vlavatars[level.vl_focus].angles);
 
   level.in_firingrange = 0;
@@ -432,10 +432,10 @@ playerstreamloadout(var_0, var_1) {
 }
 
 waitstreamweapon(var_0, var_1, var_2) {
-  if(!isdefined(var_2))
+  if(!isDefined(var_2))
     var_2 = 1;
 
-  for (;;) {
+  for(;;) {
     if(isweaponloaded(var_0, var_1, var_2)) {
       break;
     }
@@ -536,7 +536,7 @@ player_sticks_in_lefty_config(var_0) {
   if(common_scripts\utility::is_player_gamepad_enabled()) {
     var_1 = self getlocalplayerprofiledata("gpadSticksConfig");
 
-    if(isdefined(var_1)) {
+    if(isDefined(var_1)) {
       if(var_1 == "thumbstick_default")
         return 0;
       else if(var_1 == "thumbstick_southpaw")
@@ -545,9 +545,7 @@ player_sticks_in_lefty_config(var_0) {
         return var_0 == 1;
       else if(var_1 == "thumbstick_legacysouthpaw")
         return var_0 == 0;
-      else {
-
-      }
+      else {}
     }
   }
 
@@ -589,13 +587,13 @@ player_update_right_stick(var_0) {
 resetrotationdata(var_0) {
   var_0.mouserot = 0;
 
-  if(!isdefined(var_0.rotateyawdata)) {
-    var_0.rotateyawdata = spawnstruct();
+  if(!isDefined(var_0.rotateyawdata)) {
+    var_0.rotateyawdata = spawnStruct();
     var_0.rotateyawdata.index = 1;
   }
 
-  if(!isdefined(var_0.rotaterolldata)) {
-    var_0.rotaterolldata = spawnstruct();
+  if(!isDefined(var_0.rotaterolldata)) {
+    var_0.rotaterolldata = spawnStruct();
     var_0.rotaterolldata.index = 0;
   }
 
@@ -620,7 +618,7 @@ prep_for_controls(var_0, var_1) {
   var_0.rotateyawdata.storedstick = player_get_right_stick(var_0.rotateyawdata);
   var_0.rotaterolldata.storedstick = player_get_right_stick(var_0.rotaterolldata);
 
-  if(isdefined(var_1)) {
+  if(isDefined(var_1)) {
     var_1 = (0, var_1[1], 0);
 
     if(isagent(var_0))
@@ -636,14 +634,14 @@ rightstickrotateavatar(var_0, var_1, var_2, var_3) {
   if(isagent(var_0)) {
     var_5 = (0, var_4, 0);
 
-    if(isdefined(var_0.teleportlinker) && var_0 islinked() && var_0 getlinkedparent() == var_0.teleportlinker)
+    if(isDefined(var_0.teleportlinker) && var_0 islinked() && var_0 getlinkedparent() == var_0.teleportlinker)
       var_0.teleportlinker.angles = var_5;
     else
       var_0 setplayerangles(var_5);
   } else {
     var_6 = 0;
 
-    if(isdefined(var_3) && var_3 != "Perk")
+    if(isDefined(var_3) && var_3 != "Perk")
       var_6 = getrollrotationangle(var_0, var_2);
 
     var_5 = (0, var_4, var_6);
@@ -657,7 +655,7 @@ handlerotateplayeravatar() {
   var_0 = level.vlavatars[level.vl_focus];
   prep_for_controls(var_0);
 
-  for (;;) {
+  for(;;) {
     if(maps\mp\_utility::is_true(level.in_firingrange)) {
       waitframe();
       continue;
@@ -678,7 +676,7 @@ handlerotateweaponavatar(var_0) {
   self endon("handleRotateAvatar");
   prep_for_controls(level.weaponavatarparent);
 
-  for (;;) {
+  for(;;) {
     rightstickrotateavatar(level.weaponavatarparent, 1.0, 5.0, var_0);
     rotaterollbackavatar(level.weaponavatarparent);
     waitframe();
@@ -797,7 +795,7 @@ enable_player_controls() {
 
 getfocusfromcontroller(var_0) {
   foreach(var_3, var_2 in level.vlavatars) {
-    if(isdefined(var_2.loadout) && isdefined(var_2.loadout.player_controller) && var_2.loadout.player_controller == var_0 && !maps\mp\_utility::is_true(var_2.fakemember))
+    if(isDefined(var_2.loadout) && isDefined(var_2.loadout.player_controller) && var_2.loadout.player_controller == var_0 && !maps\mp\_utility::is_true(var_2.fakemember))
       return var_3;
   }
 
@@ -818,7 +816,7 @@ setvirtuallobbypresentable() {
   level notify("cancel_vlp");
   level endon("cancel_vlp");
 
-  while (!level.vl_active || level.vlavatars.size == 0 || !isdefined(level.vlavatars[0]) || !isdefined(level.vlavatars[0].primaryweapon) || !isweaponloaded(level.vlplayer, level.vlavatars[0].primaryweapon, 0) || getdvarint("virtualLobbyInFiringRange", 0) != 0 && !maps\mp\_utility::is_true(level.vlplayer.firingrangeready))
+  while(!level.vl_active || level.vlavatars.size == 0 || !isDefined(level.vlavatars[0]) || !isDefined(level.vlavatars[0].primaryweapon) || !isweaponloaded(level.vlplayer, level.vlavatars[0].primaryweapon, 0) || getdvarint("virtualLobbyInFiringRange", 0) != 0 && !maps\mp\_utility::is_true(level.vlplayer.firingrangeready))
     waitframe();
 
   wait 0.5;
@@ -835,7 +833,7 @@ resetvirtuallobbypresentable() {
 isweaponloaded(var_0, var_1, var_2) {
   var_3 = 0;
 
-  if(isdefined(var_0)) {
+  if(isDefined(var_0)) {
     if(var_2)
       var_3 = var_0 loadweapons(var_1);
     else {
@@ -853,7 +851,7 @@ playermemberfocusprocesslui(var_0, var_1) {
   if(var_0 == "member_select") {
     level.vl_focus = getfocusforxuid(var_1);
 
-    if(!isdefined(level.vl_focus)) {
+    if(!isDefined(level.vl_focus)) {
       vlprint("vl_focus undefined, setting to 0\n");
       level.vl_focus = 0;
     }
@@ -875,7 +873,7 @@ playermemberfocusprocesslui(var_0, var_1) {
 
 getfocusforxuid(var_0) {
   foreach(var_3, var_2 in level.vlavatars) {
-    if(isdefined(var_2.loadout) && var_2.loadout.xuid == var_0)
+    if(isDefined(var_2.loadout) && var_2.loadout.xuid == var_0)
       return var_3;
   }
 
@@ -886,15 +884,15 @@ waittilldepotswitchcomplete() {
   if(maps\mp\_utility::is_true(level.depotinitialized) || getdvarint("vlDepotEnabled", 0) == 0) {
     return;
   }
-  while (!maps\mp\_utility::is_true(level.depotinitialized))
+  while(!maps\mp\_utility::is_true(level.depotinitialized))
     waitframe();
 
-  while (maps\mp\_vl_avatar::allcostumesloaded())
+  while(maps\mp\_vl_avatar::allcostumesloaded())
     waitframe();
 }
 
 monitor_member_timeouts() {
-  for (;;) {
+  for(;;) {
     waittilldepotswitchcomplete();
 
     foreach(var_2, var_1 in level.vlavatars) {
@@ -903,7 +901,7 @@ monitor_member_timeouts() {
       }
       if(var_1.membertimeout >= 0) {
         if(var_1.membertimeout < gettime()) {
-          if(var_2 == 0 && !isdefined(var_1.memberhastimedout)) {
+          if(var_2 == 0 && !isDefined(var_1.memberhastimedout)) {
             var_1.membertimeout = gettime() + 2000;
             var_1.memberhastimedout = 1;
             continue;
@@ -922,7 +920,7 @@ monitor_member_timeouts() {
 
 updatelocalavatarloadouts(var_0) {
   foreach(var_2 in level.vlavatars) {
-    if(isdefined(var_2.controller) && isdefined(var_2.loadout)) {
+    if(isDefined(var_2.controller) && isDefined(var_2.loadout)) {
       var_3 = undefined;
 
       foreach(var_5 in var_0) {
@@ -932,7 +930,7 @@ updatelocalavatarloadouts(var_0) {
         }
       }
 
-      if(isdefined(var_3) && var_2.xuid != var_3.xuid) {
+      if(isDefined(var_3) && var_2.xuid != var_3.xuid) {
         var_2.loadout = var_3;
         var_2.xuid = var_3.xuid;
       }
@@ -941,7 +939,7 @@ updatelocalavatarloadouts(var_0) {
 }
 
 memberclasschanges(var_0) {
-  if(!isdefined(level.vlplayer) || !isdefined(level.camparams) || level.vlavatars.size == 0) {
+  if(!isDefined(level.vlplayer) || !isDefined(level.camparams) || level.vlavatars.size == 0) {
     return;
   }
   var_1 = level.vlplayer;
@@ -950,12 +948,12 @@ memberclasschanges(var_0) {
   foreach(var_3 in var_0) {
     var_4 = maps\mp\_vl_avatar::get_avatar_for_xuid(var_3.xuid);
 
-    if(isdefined(var_4)) {
+    if(isDefined(var_4)) {
       if(var_3.player_controller >= 0) {
         var_5 = maps\mp\_vl_avatar::get_ownerid_for_avatar(var_4);
-        var_6 = !level.vl_active || !isdefined(var_4.loadout) && getdvarint("virtualLobbyMode", 0) == 6;
+        var_6 = !level.vl_active || !isDefined(var_4.loadout) && getdvarint("virtualLobbyMode", 0) == 6;
 
-        if(isdefined(var_4)) {
+        if(isDefined(var_4)) {
           var_4.loadout = var_3;
           var_4.xuid = var_3.xuid;
         }
@@ -991,7 +989,7 @@ memberclasschanges(var_0) {
     var_22[level.costumecat2idx["gloves"]] = var_3.gloves;
     var_23 = var_3._id_A7ED;
 
-    if(!isdefined(var_4)) {
+    if(!isDefined(var_4)) {
       var_5 = maps\mp\_vl_avatar::getnewlobbyavatarownerid(var_3.xuid);
       var_24 = maps\mp\gametypes\vlobby::getspawnpoint(getconstlocalplayer());
       var_4 = maps\mp\_vl_avatar::spawn_an_avatar(var_1, var_24, var_20, var_22, var_23, var_3._id_A7E7, var_5, 0);
@@ -1011,7 +1009,7 @@ memberclasschanges(var_0) {
 
     var_5 = maps\mp\_vl_avatar::get_ownerid_for_avatar(var_4);
 
-    if(var_3.player_controller >= 0 && isdefined(var_4.savedcostume))
+    if(var_3.player_controller >= 0 && isDefined(var_4.savedcostume))
       var_22 = var_4.savedcostume;
 
     if(var_3.player_controller >= 0 || loadout_changed(var_4.loadout, var_3) || costume_changed(var_4.costume, var_22)) {
@@ -1067,7 +1065,7 @@ updateavatarloadout(var_0, var_1, var_2) {
   var_1.updatecostume = undefined;
   var_1.weapclasschanged = undefined;
 
-  if(var_6 == "h1_junsho" || isdefined(var_2) && issubstr(var_2, "h1_junsho"))
+  if(var_6 == "h1_junsho" || isDefined(var_2) && issubstr(var_2, "h1_junsho"))
     var_0 maps\mp\_vl_avatar::playerteleportavatartoweaponroom(var_1, level.camparams.camera, 1);
 }
 
@@ -1085,7 +1083,7 @@ setdefaultcostumeifneeded(var_0) {
 }
 
 weaponclass_changed(var_0, var_1) {
-  if(!isdefined(var_0) || !isdefined(var_1))
+  if(!isDefined(var_0) || !isDefined(var_1))
     return 1;
 
   var_2 = weaponclass(var_0);
@@ -1098,7 +1096,7 @@ weaponclass_changed(var_0, var_1) {
 }
 
 loadout_changed(var_0, var_1) {
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     return 1;
 
   if(var_0.primary != var_1.primary)
@@ -1132,8 +1130,8 @@ loadout_changed(var_0, var_1) {
 }
 
 costume_changed(var_0, var_1) {
-  if(!isdefined(var_0)) {
-    if(!isdefined(var_1))
+  if(!isDefined(var_0)) {
+    if(!isDefined(var_1))
       return 0;
 
     return 1;
@@ -1145,7 +1143,7 @@ costume_changed(var_0, var_1) {
   if(!maps\mp\gametypes\_teams::validcostume(var_1))
     return 0;
 
-  for (var_2 = 0; var_2 < var_1.size; var_2++) {
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
     if(var_1[var_2] < 0)
       return 0;
 
@@ -1157,17 +1155,17 @@ costume_changed(var_0, var_1) {
 }
 
 party_members(var_0) {
-  if(!isdefined(level.vlavatars) || level.vlavatars.size == 0) {
+  if(!isDefined(level.vlavatars) || level.vlavatars.size == 0) {
     return;
   }
-  if(!isdefined(level.mccqueue))
+  if(!isDefined(level.mccqueue))
     level.mccqueue = [];
 
   foreach(var_2 in var_0) {
     var_3 = var_2.xuid;
     var_4 = maps\mp\_vl_avatar::get_avatar_for_xuid(var_3);
 
-    if(isdefined(var_4)) {
+    if(isDefined(var_4)) {
       var_4.membertimeout = gettime() + 2000;
       var_4.memberhastimedout = undefined;
     }
@@ -1181,7 +1179,7 @@ party_members(var_0) {
 }
 
 add_party_member_class_change(var_0) {
-  for (var_1 = 0; var_1 < level.mccqueue.size; var_1++) {
+  for(var_1 = 0; var_1 < level.mccqueue.size; var_1++) {
     if(level.mccqueue[var_1].xuid == var_0.xuid) {
       level.mccqueue[var_1] = var_0;
       var_0 = undefined;
@@ -1189,22 +1187,22 @@ add_party_member_class_change(var_0) {
     }
   }
 
-  if(isdefined(var_0))
+  if(isDefined(var_0))
     level.mccqueue[level.mccqueue.size] = var_0;
 }
 
 weaponroomscenelightsoff() {
-  if(!isdefined(level.weapon_room_lights))
+  if(!isDefined(level.weapon_room_lights))
     var_0 = ["weapons_lobby", "weapons_collection", "characters_collection", "characters_personalization", "heads_personalization", "heads_collection"];
   else
     var_0 = [level.weapon_room_lights];
 
   foreach(var_2 in var_0) {
-    var_3 = getentarray(var_2, "targetname");
+    var_3 = getEntArray(var_2, "targetname");
 
     foreach(var_5 in var_3) {
-      if(!isdefined(var_5.baseintensity)) {
-        if(isdefined(var_5.script_multiplier))
+      if(!isDefined(var_5.baseintensity)) {
+        if(isDefined(var_5.script_multiplier))
           var_5.baseintensity = var_5.script_multiplier;
         else
           var_5.baseintensity = var_5 getlightintensity();
@@ -1218,17 +1216,17 @@ weaponroomscenelightsoff() {
 weaponroomscenelightsupdate(var_0) {
   weaponroomdof(var_0);
 
-  if(isdefined(level.weapon_room_lights) && level.weapon_room_lights == var_0) {
+  if(isDefined(level.weapon_room_lights) && level.weapon_room_lights == var_0) {
     return;
   }
   weaponroomscenelightsoff();
-  var_1 = getentarray(var_0, "targetname");
+  var_1 = getEntArray(var_0, "targetname");
 
   if(var_1.size == 0) {
     if(var_0 == "heads_personalization" || var_0 == "heads_collection" || var_0 == "characters_personalization")
       var_0 = "characters_collection";
 
-    var_1 = getentarray(var_0, "targetname");
+    var_1 = getEntArray(var_0, "targetname");
   }
 
   level.weapon_room_lights = var_0;
@@ -1238,7 +1236,7 @@ weaponroomscenelightsupdate(var_0) {
 }
 
 weaponroomdof(var_0) {
-  if(isdefined(level.weapon_room_dof) && level.weapon_room_dof == var_0) {
+  if(isDefined(level.weapon_room_dof) && level.weapon_room_dof == var_0) {
     return;
   }
   level.weapon_room_dof = var_0;

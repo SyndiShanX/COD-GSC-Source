@@ -20,54 +20,54 @@
 function init() {}
 
 function setupcallbacks() {
-  level.autoassign = & menuautoassign;
-  level.spectator = & menuspectator;
-  level.curclass = & menuclass;
-  level.teammenu = & menuteam;
+  level.autoassign = &menuautoassign;
+  level.spectator = &menuspectator;
+  level.curclass = &menuclass;
+  level.teammenu = &menuteam;
 }
 
 function freegameplayhudelems() {
-  if(isdefined(self.perkicon)) {
-    for (numspecialties = 0; numspecialties < level.maxspecialties; numspecialties++) {
-      if(isdefined(self.perkicon[numspecialties])) {
+  if(isDefined(self.perkicon)) {
+    for(numspecialties = 0; numspecialties < level.maxspecialties; numspecialties++) {
+      if(isDefined(self.perkicon[numspecialties])) {
         self.perkicon[numspecialties] hud::destroyelem();
         self.perkname[numspecialties] hud::destroyelem();
       }
     }
   }
-  if(isdefined(self.perkhudelem)) {
+  if(isDefined(self.perkhudelem)) {
     self.perkhudelem hud::destroyelem();
   }
-  if(isdefined(self.killstreakicon)) {
-    if(isdefined(self.killstreakicon[0])) {
+  if(isDefined(self.killstreakicon)) {
+    if(isDefined(self.killstreakicon[0])) {
       self.killstreakicon[0] hud::destroyelem();
     }
-    if(isdefined(self.killstreakicon[1])) {
+    if(isDefined(self.killstreakicon[1])) {
       self.killstreakicon[1] hud::destroyelem();
     }
-    if(isdefined(self.killstreakicon[2])) {
+    if(isDefined(self.killstreakicon[2])) {
       self.killstreakicon[2] hud::destroyelem();
     }
-    if(isdefined(self.killstreakicon[3])) {
+    if(isDefined(self.killstreakicon[3])) {
       self.killstreakicon[3] hud::destroyelem();
     }
-    if(isdefined(self.killstreakicon[4])) {
+    if(isDefined(self.killstreakicon[4])) {
       self.killstreakicon[4] hud::destroyelem();
     }
   }
-  if(isdefined(self.lowermessage)) {
+  if(isDefined(self.lowermessage)) {
     self.lowermessage hud::destroyelem();
   }
-  if(isdefined(self.lowertimer)) {
+  if(isDefined(self.lowertimer)) {
     self.lowertimer hud::destroyelem();
   }
-  if(isdefined(self.proxbar)) {
+  if(isDefined(self.proxbar)) {
     self.proxbar hud::destroyelem();
   }
-  if(isdefined(self.proxbartext)) {
+  if(isDefined(self.proxbartext)) {
     self.proxbartext hud::destroyelem();
   }
-  if(isdefined(self.carryicon)) {
+  if(isDefined(self.carryicon)) {
     self.carryicon hud::destroyelem();
   }
 }
@@ -75,7 +75,7 @@ function freegameplayhudelems() {
 function teamplayercountsequal(playercounts) {
   count = undefined;
   foreach(team in level.teams) {
-    if(!isdefined(count)) {
+    if(!isDefined(count)) {
       count = playercounts[team];
       continue;
     }
@@ -131,8 +131,8 @@ function menuautoassign(comingfrommenu) {
   if(level.teambased) {
     if(bot::is_bot_comp_stomp()) {
       host = util::gethostplayerforbots();
-      assert(isdefined(host));
-      if(!isdefined(host.team) || host.team == "spectator") {
+      assert(isDefined(host));
+      if(!isDefined(host.team) || host.team == "spectator") {
         host.team = array::random(teamkeys);
       }
       if(!self util::is_bot()) {
@@ -141,13 +141,11 @@ function menuautoassign(comingfrommenu) {
         assignment = util::getotherteam(host.team);
       }
     } else {
-      if(isdefined(level.var_485556b)) {
-        assignment = [
-          [level.var_485556b]
-        ](self, comingfrommenu);
+      if(isDefined(level.var_485556b)) {
+        assignment = [[level.var_485556b]](self, comingfrommenu);
       } else {
         teamname = getassignedteamname(self);
-        if(isdefined(teamname) && teamname != "free" && !comingfrommenu) {
+        if(isDefined(teamname) && teamname != "free" && !comingfrommenu) {
           assignment = teamname;
         } else {
           if(shouldbespectatorlatejoin(teamname, comingfrommenu)) {
@@ -231,7 +229,7 @@ function menuautoassign(comingfrommenu) {
 function teamscoresequal() {
   score = undefined;
   foreach(team in level.teams) {
-    if(!isdefined(score)) {
+    if(!isDefined(score)) {
       score = getteamscore(team);
       continue;
     }
@@ -264,8 +262,8 @@ function pickteamfromscores(teams) {
 }
 
 function get_splitscreen_team() {
-  for (index = 0; index < level.players.size; index++) {
-    if(!isdefined(level.players[index])) {
+  for(index = 0; index < level.players.size; index++) {
+    if(!isDefined(level.players[index])) {
       continue;
     }
     if(level.players[index] == self) {
@@ -299,11 +297,11 @@ function closemenus() {
 }
 
 function beginclasschoice() {
-  assert(isdefined(level.teams[self.pers[""]]));
+  assert(isDefined(level.teams[self.pers[""]]));
   team = self.pers["team"];
-  if(level.disableclassselection == 1 || (isdefined(self.disableclassselection) && self.disableclassselection) || getdvarint("migration_soak") == 1) {
+  if(level.disableclassselection == 1 || (isDefined(self.disableclassselection) && self.disableclassselection) || getdvarint("migration_soak") == 1) {
     started_waiting = gettime();
-    while (!self isstreamerready(-1, 1) && (started_waiting + 90000) > gettime()) {
+    while(!self isstreamerready(-1, 1) && (started_waiting + 90000) > gettime()) {
       wait(0.05);
     }
     self.pers["class"] = level.defaultclass;
@@ -320,18 +318,18 @@ function beginclasschoice() {
 }
 
 function showmainmenuforteam() {
-  assert(isdefined(level.teams[self.pers[""]]));
+  assert(isDefined(level.teams[self.pers[""]]));
   team = self.pers["team"];
   self openmenu(game["menu_changeclass_" + team]);
 }
 
 function menuteam(team) {
   self closemenus();
-  if(!level.console && level.allow_teamchange == "0" && (isdefined(self.hasdonecombat) && self.hasdonecombat)) {
+  if(!level.console && level.allow_teamchange == "0" && (isDefined(self.hasdonecombat) && self.hasdonecombat)) {
     return;
   }
   if(self.pers["team"] != team) {
-    if(level.ingraceperiod && (!isdefined(self.hasdonecombat) || !self.hasdonecombat)) {
+    if(level.ingraceperiod && (!isDefined(self.hasdonecombat) || !self.hasdonecombat)) {
       self.hasspawned = 0;
     }
     if(self.sessionstate == "playing") {
@@ -380,9 +378,7 @@ function menuspectator() {
     self.pers["savedmodel"] = undefined;
     self updateobjectivetext();
     self.sessionteam = "spectator";
-    [
-      [level.spawnspectator]
-    ]();
+    [[level.spawnspectator]]();
     self thread globallogic_player::spectate_player_watcher();
     self setclientscriptmainmenu(game["menu_start_menu"]);
     self notify("joined_spectators");
@@ -392,20 +388,20 @@ function menuspectator() {
 
 function menuclass(response, forcedclass) {
   self closemenus();
-  if(!isdefined(self.pers["team"]) || !isdefined(level.teams[self.pers["team"]])) {
+  if(!isDefined(self.pers["team"]) || !isDefined(level.teams[self.pers["team"]])) {
     return;
   }
-  if(!isdefined(forcedclass)) {
+  if(!isDefined(forcedclass)) {
     playerclass = self loadout::getclasschoice(response);
   } else {
     playerclass = forcedclass;
   }
-  if(isdefined(self.pers["class"]) && self.pers["class"] == playerclass) {
+  if(isDefined(self.pers["class"]) && self.pers["class"] == playerclass) {
     return;
   }
   self.pers["changed_class"] = 1;
   self notify("changed_class");
-  if(isdefined(self.curclass) && self.curclass == playerclass) {
+  if(isDefined(self.curclass) && self.curclass == playerclass) {
     self.pers["changed_class"] = 0;
   }
   self.pers["class"] = playerclass;
@@ -415,7 +411,7 @@ function menuclass(response, forcedclass) {
     return;
   }
   if(self.sessionstate == "playing") {
-    supplystationclasschange = isdefined(self.usingsupplystation) && self.usingsupplystation;
+    supplystationclasschange = isDefined(self.usingsupplystation) && self.usingsupplystation;
     self.usingsupplystation = 0;
     if(level.ingraceperiod && !self.hasdonecombat || supplystationclasschange) {
       self loadout::setclass(self.pers["class"]);
@@ -440,7 +436,7 @@ function menuclass(response, forcedclass) {
     }
     if(game["state"] == "playing") {
       timepassed = undefined;
-      if(isdefined(self.respawntimerstarttime)) {
+      if(isDefined(self.respawntimerstarttime)) {
         timepassed = (gettime() - self.respawntimerstarttime) / 1000;
       }
       self thread[[level.spawnclient]](timepassed);

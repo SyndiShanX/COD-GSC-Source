@@ -63,14 +63,14 @@ onPrecacheGameType() {
 onStartGameType() {
   setClientNameMode("auto_change");
 
-  setObjectiveText("allies", & "OBJECTIVES_INFECT");
-  setObjectiveText("axis", & "OBJECTIVES_INFECT");
+  setObjectiveText("allies", &"OBJECTIVES_INFECT");
+  setObjectiveText("axis", &"OBJECTIVES_INFECT");
 
-  setObjectiveScoreText("allies", & "OBJECTIVES_INFECT_SCORE");
-  setObjectiveScoreText("axis", & "OBJECTIVES_INFECT_SCORE");
+  setObjectiveScoreText("allies", &"OBJECTIVES_INFECT_SCORE");
+  setObjectiveScoreText("axis", &"OBJECTIVES_INFECT_SCORE");
 
-  setObjectiveHintText("allies", & "OBJECTIVES_INFECT_HINT");
-  setObjectiveHintText("axis", & "OBJECTIVES_INFECT_HINT");
+  setObjectiveHintText("allies", &"OBJECTIVES_INFECT_HINT");
+  setObjectiveHintText("axis", &"OBJECTIVES_INFECT_HINT");
 
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);
@@ -98,7 +98,7 @@ onStartGameType() {
 
   level.infect_timerDisplay = createServerTimer("objective", 1.4);
   level.infect_timerDisplay setPoint("TOPLEFT", "TOPLEFT", 115, 5);
-  level.infect_timerDisplay.label = & "MP_DRAFT_STARTS_IN";
+  level.infect_timerDisplay.label = &"MP_DRAFT_STARTS_IN";
   level.infect_timerDisplay.alpha = 0;
   level.infect_timerDisplay.archived = false;
   level.infect_timerDisplay.hideWhenInMenu = true;
@@ -116,7 +116,7 @@ onStartGameType() {
 }
 
 onPlayerConnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connected", player);
     player.infect_firstSpawn = true;
 
@@ -260,7 +260,6 @@ onSpawnFinished() {
 }
 
 setInfectedMsg() {
-
   if(isDefined(self.isInitialInfected)) {
     thread maps\mp\gametypes\_rank::xpEventPopup(&"SPLASHES_FIRST_MERCENARY", (1, 0, 0), 0.3);
   } else if(isDefined(self.changingToRegularInfected)) {
@@ -284,7 +283,7 @@ chooseFirstInfected() {
 
   gameFlagWait("prematch_done");
 
-  level.infect_timerDisplay.label = & "MP_DRAFT_STARTS_IN";
+  level.infect_timerDisplay.label = &"MP_DRAFT_STARTS_IN";
   level.infect_timerDisplay settimer(8);
   level.infect_timerDisplay.alpha = 1;
 
@@ -302,7 +301,7 @@ setFirstInfected(wasChosen) {
     self.infect_isBeingChosen = true;
 
   //	wait alive
-  while (!isReallyAlive(self) || isUsingRemote())
+  while(!isReallyAlive(self) || isUsingRemote())
     wait 0.05;
 
   //	remove placement item if carrying
@@ -312,14 +311,14 @@ setFirstInfected(wasChosen) {
   }
 
   //	not while mantling
-  while (self IsMantling())
+  while(self IsMantling())
     wait(0.05);
 
   //	not while in air
-  while (!self isOnGround() && !self IsOnLadder())
+  while(!self isOnGround() && !self IsOnLadder())
     wait(0.05);
 
-  while (!isAlive(self))
+  while(!isAlive(self))
     waitframe();
 
   //	move to other team
@@ -374,25 +373,25 @@ setInitialToNormalInfected(gotKill) {
     self.changingToRegularInfectedByKill = true;
 
   //	wait till we spawn if we died at the same time
-  while (!isReallyAlive(self))
+  while(!isReallyAlive(self))
     wait(0.05);
 
   //	remove placement item if carrying
-  if(IsDefined(self.isCarrying) && self.isCarrying == true) {
+  if(isDefined(self.isCarrying) && self.isCarrying == true) {
     self notify("force_cancel_placement");
     wait(0.05);
   }
 
   //	not while mantling
-  while (self IsMantling())
+  while(self IsMantling())
     wait(0.05);
 
   //	not while in air
-  while (!self isOnGround())
+  while(!self isOnGround())
     wait(0.05);
 
   //	Gotta check again, more time has passed, wait till we spawn if we died at the same time
-  while (!isReallyAlive(self))
+  while(!isReallyAlive(self))
     wait(0.05);
 
   //	set the gamemodeloadout for giveLoadout() to use
@@ -527,7 +526,7 @@ finalSurvivorUAV(finalPlayer) {
       player.radarmode = "normal_radar";
   }
 
-  for (;;) {
+  for(;;) {
     prevPos = finalPlayer.origin;
     wait 4;
 
@@ -550,7 +549,7 @@ endUAVonLateJoiner(finalPlayer) {
   finalPlayer endon("disconnect");
   finalPlayer endon("eliminated");
 
-  for (;;) {
+  for(;;) {
     if(level.infect_teamScores["allies"] > 1) {
       level notify("infect_lateJoiner");
       wait 0.05;
@@ -606,7 +605,7 @@ watchInfectForfeit() {
   level endon("game_ended");
   level.forfeitInProgress = true;
 
-  for (;;) {
+  for(;;) {
     if(!isDefined(level.forfeitInProgress))
       level.forfeitInProgress = true;
 
@@ -615,7 +614,7 @@ watchInfectForfeit() {
 }
 
 onDeadEvent(team) {
-  //	override default to supress the normal game ending process 
+  //	override default to supress the normal game ending process
   return;
 }
 
@@ -633,7 +632,7 @@ onSurvivorsEliminated() {
 getNumInfected() {
   numInfected = 0;
   foreach(player in level.players) {
-    if(isdefined(player.team) && player.team == "axis")
+    if(isDefined(player.team) && player.team == "axis")
       numInfected++;
   }
   return numInfected;
@@ -642,7 +641,7 @@ getNumInfected() {
 getNumSurvivors() {
   numSurvivors = 0;
   foreach(player in level.players) {
-    if(isdefined(player.team) && player.team == "allies")
+    if(isDefined(player.team) && player.team == "allies")
       numSurvivors++;
   }
   return numSurvivors;

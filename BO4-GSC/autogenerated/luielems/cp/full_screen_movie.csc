@@ -4,11 +4,9 @@
 ***********************************************************/
 
 #include scripts\core_common\lui_shared;
-
 #namespace full_screen_movie;
 
 class cfull_screen_movie: cluielem {
-
   function set_moviekey(localclientnum, value) {
     set_data(localclientnum, "movieKey", value);
   }
@@ -38,18 +36,18 @@ class cfull_screen_movie: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, #"full_screen_movie");
+    cluielem::open(localclientnum, # "full_screen_movie");
   }
 
   function function_fa582112(localclientnum) {
     cluielem::function_fa582112(localclientnum);
-    set_data(localclientnum, "movieName", #"");
+    set_data(localclientnum, "movieName", # "");
     set_data(localclientnum, "showBlackScreen", 0);
     set_data(localclientnum, "looping", 0);
     set_data(localclientnum, "additive", 0);
     set_data(localclientnum, "playOutroMovie", 0);
     set_data(localclientnum, "skippable", 0);
-    set_data(localclientnum, "movieKey", #"");
+    set_data(localclientnum, "movieKey", # "");
   }
 
   function register_clientside(uid) {

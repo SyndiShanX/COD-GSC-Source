@@ -10,7 +10,7 @@
 #namespace bb;
 
 function autoexec __init__sytem__() {
-  system::register("bb", & __init__, undefined, undefined);
+  system::register("bb", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -19,10 +19,10 @@ function __init__() {
 
 function private function_edae084d(player) {
   var_24a24c3f = "";
-  if(isdefined(player.var_b3dc8451)) {
-    for (index = 0; index < player.var_b3dc8451.size; index++) {
-      if(isdefined(player.var_b3dc8451[index]) && player.var_b3dc8451[index]) {
-        if(isdefined(var_24a24c3f) && var_24a24c3f != "") {
+  if(isDefined(player.var_b3dc8451)) {
+    for(index = 0; index < player.var_b3dc8451.size; index++) {
+      if(isDefined(player.var_b3dc8451[index]) && player.var_b3dc8451[index]) {
+        if(isDefined(var_24a24c3f) && var_24a24c3f != "") {
           var_24a24c3f = var_24a24c3f + ";";
         }
         var_24a24c3f = var_24a24c3f + index;
@@ -48,19 +48,19 @@ function logmatchsummary(player) {
     return;
   }
   var_4b34a5fc = 1;
-  if(isdefined(player.deaths) && player.deaths > 0) {
+  if(isDefined(player.deaths) && player.deaths > 0) {
     var_4b34a5fc = player.deaths;
   }
   kdratio = player.kills / var_4b34a5fc;
   playertime = 0;
-  if(isdefined(player.connectedtime)) {
+  if(isDefined(player.connectedtime)) {
     playertime = gettime() - player.connectedtime;
   }
   totalshots = 0;
   shotshit = 0;
-  if(isdefined(player._bbdata)) {
-    totalshots = (isdefined(player._bbdata["shots"]) ? player._bbdata["shots"] : 0);
-    shotshit = (isdefined(player._bbdata["hits"]) ? player._bbdata["hits"] : 0);
+  if(isDefined(player._bbdata)) {
+    totalshots = (isDefined(player._bbdata["shots"]) ? player._bbdata["shots"] : 0);
+    shotshit = (isDefined(player._bbdata["hits"]) ? player._bbdata["hits"] : 0);
   }
   accuracy = 0;
   if(totalshots > 0) {
@@ -68,20 +68,20 @@ function logmatchsummary(player) {
   }
   var_6a98da9a = function_b918cb9(player);
   var_24a24c3f = function_edae084d(player);
-  corners = getentarray("minimap_corner", "targetname");
+  corners = getEntArray("minimap_corner", "targetname");
   dimensions0 = 0;
   dimensions1 = 0;
-  if(isdefined(corners) && corners.size >= 2) {
+  if(isDefined(corners) && corners.size >= 2) {
     dimensions0 = corners[1].origin[0] - corners[0].origin[0];
     dimensions1 = corners[1].origin[1] - corners[0].origin[1];
   }
   rankxp = 0;
   rank = 0;
-  if(isdefined(player.pers)) {
-    if(isdefined(player.pers["rank"])) {
+  if(isDefined(player.pers)) {
+    if(isDefined(player.pers["rank"])) {
       rank = player.pers["rank"];
     }
-    if(isdefined(player.pers["rankxp"])) {
+    if(isDefined(player.pers["rankxp"])) {
       rankxp = player.pers["rankxp"];
     }
   }
@@ -94,36 +94,36 @@ function logmatchsummary(player) {
   sprintdistance = 0;
   sprintcount = 0;
   sprinttime = 0;
-  if(isdefined(player.movementtracking)) {
-    if(isdefined(player.movementtracking.doublejump)) {
+  if(isDefined(player.movementtracking)) {
+    if(isDefined(player.movementtracking.doublejump)) {
       doublejumpdistance = player.movementtracking.doublejump.distance;
       doublejumpcount = player.movementtracking.doublejump.count;
       doublejumptime = player.movementtracking.doublejump.time;
     }
-    if(isdefined(player.movementtracking.wallrunning)) {
+    if(isDefined(player.movementtracking.wallrunning)) {
       wallrundistance = player.movementtracking.wallrunning.distance;
       wallruncount = player.movementtracking.wallrunning.count;
       wallruntime = player.movementtracking.wallrunning.time;
     }
-    if(isdefined(player.movementtracking.sprinting)) {
+    if(isDefined(player.movementtracking.sprinting)) {
       sprintdistance = player.movementtracking.sprinting.distance;
       sprintcount = player.movementtracking.sprinting.count;
       sprinttime = player.movementtracking.sprinting.time;
     }
   }
   playerid = getplayerspawnid(player);
-  bestkillstreak = (isdefined(player.pers["best_kill_streak"]) ? player.pers["best_kill_streak"] : 0);
-  meleekills = (isdefined(player.meleekills) ? player.meleekills : 0);
-  headshots = (isdefined(player.headshots) ? player.headshots : 0);
-  var_7b9eb83b = (isdefined(player.primaryloadoutweapon) ? player.primaryloadoutweapon.name : "undefined");
-  currentweapon = (isdefined(player.currentweapon) ? player.currentweapon.name : "undefined");
-  grenadesused = (isdefined(player.grenadesused) ? player.grenadesused : 0);
-  playername = (isdefined(player.name) ? player.name : "undefined");
-  kills = (isdefined(player.kills) ? player.kills : 0);
-  deaths = (isdefined(player.deaths) ? player.deaths : 0);
-  incaps = (isdefined(player.pers["incaps"]) ? player.pers["incaps"] : 0);
-  assists = (isdefined(player.assists) ? player.assists : 0);
-  score = (isdefined(player.score) ? player.score : 0);
+  bestkillstreak = (isDefined(player.pers["best_kill_streak"]) ? player.pers["best_kill_streak"] : 0);
+  meleekills = (isDefined(player.meleekills) ? player.meleekills : 0);
+  headshots = (isDefined(player.headshots) ? player.headshots : 0);
+  var_7b9eb83b = (isDefined(player.primaryloadoutweapon) ? player.primaryloadoutweapon.name : "undefined");
+  currentweapon = (isDefined(player.currentweapon) ? player.currentweapon.name : "undefined");
+  grenadesused = (isDefined(player.grenadesused) ? player.grenadesused : 0);
+  playername = (isDefined(player.name) ? player.name : "undefined");
+  kills = (isDefined(player.kills) ? player.kills : 0);
+  deaths = (isDefined(player.deaths) ? player.deaths : 0);
+  incaps = (isDefined(player.pers["incaps"]) ? player.pers["incaps"] : 0);
+  assists = (isDefined(player.assists) ? player.assists : 0);
+  score = (isDefined(player.score) ? player.score : 0);
   bbprint("cpplayermatchsummary", "gametime %d spawnid %d username %s kills %d deaths %d incaps %d kd %f shotshit %d totalshots %d accuracy %f assists %d score %d playertime %d meleekills %d headshots %d primaryloadoutweapon %s currentweapon %s grenadesused %d bestkillstreak %d dj_dist %d dj_count %d dj_time %d wallrun_dist %d wallrun_count %d wallrun_time %d sprint_dist %d sprint_count %d sprint_time %d cybercomsused %s dim0 %d dim1 %d rank %d rankxp %d collectibles %s", gettime(), playerid, playername, kills, deaths, incaps, kdratio, shotshit, totalshots, accuracy, assists, score, playertime, meleekills, headshots, var_7b9eb83b, currentweapon, grenadesused, bestkillstreak, doublejumpdistance, doublejumpcount, doublejumptime, wallrundistance, wallruncount, wallruntime, sprintdistance, sprintcount, sprinttime, var_6a98da9a, dimensions0, dimensions1, rank, rankxp, var_24a24c3f);
 }
 
@@ -165,7 +165,7 @@ function logdamage(attacker, victim, weapon, damage, damagetype, hitlocation, vi
   var_c46938ee = "";
   var_5833b024 = "";
   aiattackercombatmode = "";
-  if(isdefined(attacker)) {
+  if(isDefined(attacker)) {
     if(isplayer(attacker)) {
       attackerid = getplayerspawnid(attacker);
       attackertype = "_player";
@@ -183,14 +183,14 @@ function logdamage(attacker, victim, weapon, damage, damagetype, hitlocation, vi
     attackerignoreme = attacker.ignoreme;
     attackerfovcos = attacker.fovcosine;
     attackermaxsightdistsqrd = attacker.maxsightdistsqrd;
-    if(isdefined(attacker.animname)) {
+    if(isDefined(attacker.animname)) {
       attackeranimname = attacker.animname;
     }
-    if(isdefined(attacker.laststand)) {
+    if(isDefined(attacker.laststand)) {
       attackerlaststand = attacker.laststand;
     }
   }
-  if(isdefined(victim)) {
+  if(isDefined(victim)) {
     if(isplayer(victim)) {
       victimid = getplayerspawnid(victim);
       victimtype = "_player";
@@ -209,10 +209,10 @@ function logdamage(attacker, victim, weapon, damage, damagetype, hitlocation, vi
     victimignoreme = victim.ignoreme;
     victimfovcos = victim.fovcosine;
     victimmaxsightdistsqrd = victim.maxsightdistsqrd;
-    if(isdefined(victim.animname)) {
+    if(isDefined(victim.animname)) {
       victimanimname = victim.animname;
     }
-    if(isdefined(victim.laststand)) {
+    if(isDefined(victim.laststand)) {
       victimlaststand = victim.laststand;
     }
   }

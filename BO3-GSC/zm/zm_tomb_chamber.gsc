@@ -15,7 +15,7 @@
 #namespace zm_tomb_chamber;
 
 function autoexec __init__sytem__() {
-  system::register("zm_tomb_chamber", & __init__, undefined, undefined);
+  system::register("zm_tomb_chamber", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -24,7 +24,7 @@ function __init__() {
 
 function main() {
   level thread chamber_wall_change_randomly();
-  a_walls = getentarray("chamber_wall", "script_noteworthy");
+  a_walls = getEntArray("chamber_wall", "script_noteworthy");
   foreach(e_wall in a_walls) {
     e_wall.down_origin = e_wall.origin;
     e_wall.up_origin = (e_wall.origin[0], e_wall.origin[1], e_wall.origin[2] + 1000);
@@ -50,7 +50,7 @@ function chamber_devgui() {
 }
 
 function watch_chamber_wall() {
-  while (true) {
+  while(true) {
     if(getdvarint("") != 5) {
       chamber_change_walls(getdvarint(""));
       setdvar("", 5);
@@ -76,7 +76,7 @@ function chamber_change_walls(n_element) {
   e_current_wall = undefined;
   e_new_wall = undefined;
   playsoundatposition("zmb_chamber_wallchange", (10342, -7921, -272));
-  a_walls = getentarray("chamber_wall", "script_noteworthy");
+  a_walls = getEntArray("chamber_wall", "script_noteworthy");
   foreach(e_wall in a_walls) {
     if(e_wall.script_int == n_element) {
       e_wall thread move_wall_down();
@@ -100,7 +100,7 @@ function is_chamber_occupied() {
 }
 
 function is_point_in_chamber(v_origin) {
-  if(!isdefined(level.s_chamber_center)) {
+  if(!isDefined(level.s_chamber_center)) {
     level.s_chamber_center = struct::get("chamber_center", "targetname");
     level.s_chamber_center.radius_sq = level.s_chamber_center.script_float * level.s_chamber_center.script_float;
   }
@@ -112,8 +112,8 @@ function chamber_wall_change_randomly() {
   a_element_enums = array(1, 2, 3, 4);
   level endon("stop_random_chamber_walls");
   n_elem_prev = undefined;
-  while (true) {
-    while (!is_chamber_occupied()) {
+  while(true) {
+    while(!is_chamber_occupied()) {
       wait(1);
     }
     level flag::wait_till("any_crystal_picked_up");
@@ -122,7 +122,7 @@ function chamber_wall_change_randomly() {
     n_change_wall_time = lerpfloat(15, 5, f_progression_pct);
     n_elem = array::random(a_element_enums);
     arrayremovevalue(a_element_enums, n_elem, 0);
-    if(isdefined(n_elem_prev)) {
+    if(isDefined(n_elem_prev)) {
       a_element_enums[a_element_enums.size] = n_elem_prev;
     }
     chamber_change_walls(n_elem);
@@ -147,10 +147,10 @@ function move_wall_down() {
 
 function random_shuffle(a_items, item) {
   b_done_shuffling = undefined;
-  if(!isdefined(item)) {
+  if(!isDefined(item)) {
     item = a_items[a_items.size - 1];
   }
-  while (!(isdefined(b_done_shuffling) && b_done_shuffling)) {
+  while(!(isDefined(b_done_shuffling) && b_done_shuffling)) {
     a_items = array::randomize(a_items);
     if(a_items[0] != item) {
       b_done_shuffling = 1;
@@ -169,7 +169,7 @@ function tomb_chamber_find_exit_point() {
   away = vectornormalize(self.origin - player.origin);
   endpos = self.origin + vectorscale(away, 600);
   locs = array::randomize(level.zm_loc_types["wait_location"]);
-  for (i = 0; i < locs.size; i++) {
+  for(i = 0; i < locs.size; i++) {
     dist_zombie = distancesquared(locs[i].origin, endpos);
     dist_player = distancesquared(locs[i].origin, player.origin);
     if(dist_zombie < dist_player) {
@@ -179,7 +179,7 @@ function tomb_chamber_find_exit_point() {
   }
   self notify("stop_find_flesh");
   self notify("zombie_acquire_enemy");
-  if(isdefined(locs[dest])) {
+  if(isDefined(locs[dest])) {
     self setgoalpos(locs[dest].origin);
   }
   self.b_wandering_in_chamber = 1;
@@ -189,8 +189,8 @@ function tomb_chamber_find_exit_point() {
 
 function chamber_zombies_find_poi() {
   zombies = getaiteamarray(level.zombie_team);
-  for (i = 0; i < zombies.size; i++) {
-    if(isdefined(zombies[i].b_wandering_in_chamber) && zombies[i].b_wandering_in_chamber) {
+  for(i = 0; i < zombies.size; i++) {
+    if(isDefined(zombies[i].b_wandering_in_chamber) && zombies[i].b_wandering_in_chamber) {
       continue;
     }
     if(!is_point_in_chamber(zombies[i].origin)) {
@@ -206,7 +206,7 @@ function tomb_is_valid_target_in_chamber() {
     if(e_player laststand::player_is_in_laststand()) {
       continue;
     }
-    if(isdefined(e_player.b_zombie_blood) && e_player.b_zombie_blood || (isdefined(e_player.ignoreme) && e_player.ignoreme)) {
+    if(isDefined(e_player.b_zombie_blood) && e_player.b_zombie_blood || (isDefined(e_player.ignoreme) && e_player.ignoreme)) {
       continue;
     }
     if(!is_point_in_chamber(e_player.origin)) {
@@ -227,7 +227,7 @@ function is_player_in_chamber() {
 function tomb_watch_chamber_player_activity() {
   level flag::init("player_active_in_chamber");
   level flag::wait_till("start_zombie_round_logic");
-  while (true) {
+  while(true) {
     wait(1);
     if(is_chamber_occupied()) {
       if(tomb_is_valid_target_in_chamber()) {

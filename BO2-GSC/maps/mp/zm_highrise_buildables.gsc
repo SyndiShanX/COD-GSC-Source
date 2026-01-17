@@ -14,11 +14,11 @@
 
 init_buildables() {
   level.buildable_piece_count = 13;
-  add_zombie_buildable("springpad_zm", & "ZM_HIGHRISE_BUILD_SPRINGPAD", & "ZM_HIGHRISE_BUILDING_SPRINGPAD", & "ZM_HIGHRISE_BOUGHT_SPRINGPAD");
-  add_zombie_buildable("slipgun_zm", & "ZM_HIGHRISE_BUILD_SLIPGUN", & "ZM_HIGHRISE_BUILDING_SLIPGUN", & "ZM_HIGHRISE_BOUGHT_SLIPGUN");
-  add_zombie_buildable("keys_zm", & "ZM_HIGHRISE_BUILD_KEYS", & "ZM_HIGHRISE_BUILDING_KEYS", & "ZM_HIGHRISE_BOUGHT_KEYS");
-  add_zombie_buildable("ekeys_zm", & "ZM_HIGHRISE_BUILD_KEYS", & "ZM_HIGHRISE_BUILDING_KEYS", & "ZM_HIGHRISE_BOUGHT_KEYS");
-  add_zombie_buildable("sq_common", & "ZOMBIE_BUILD_SQ_COMMON", & "ZOMBIE_BUILDING_SQ_COMMON");
+  add_zombie_buildable("springpad_zm", &"ZM_HIGHRISE_BUILD_SPRINGPAD", &"ZM_HIGHRISE_BUILDING_SPRINGPAD", &"ZM_HIGHRISE_BOUGHT_SPRINGPAD");
+  add_zombie_buildable("slipgun_zm", &"ZM_HIGHRISE_BUILD_SLIPGUN", &"ZM_HIGHRISE_BUILDING_SLIPGUN", &"ZM_HIGHRISE_BOUGHT_SLIPGUN");
+  add_zombie_buildable("keys_zm", &"ZM_HIGHRISE_BUILD_KEYS", &"ZM_HIGHRISE_BUILDING_KEYS", &"ZM_HIGHRISE_BOUGHT_KEYS");
+  add_zombie_buildable("ekeys_zm", &"ZM_HIGHRISE_BUILD_KEYS", &"ZM_HIGHRISE_BUILDING_KEYS", &"ZM_HIGHRISE_BOUGHT_KEYS");
+  add_zombie_buildable("sq_common", &"ZOMBIE_BUILD_SQ_COMMON", &"ZOMBIE_BUILDING_SQ_COMMON");
 }
 
 include_buildables() {
@@ -26,7 +26,7 @@ include_buildables() {
   springpad_flag = generate_zombie_buildable_piece("springpad_zm", "p6_zm_buildable_tramplesteam_bellows", 48, 15, 0, "zom_hud_trample_steam_bellow", ::onpickup_common, ::ondrop_common, undefined, "Tag_part_04", undefined, 2);
   springpad_motor = generate_zombie_buildable_piece("springpad_zm", "p6_zm_buildable_tramplesteam_compressor", 48, 15, 0, "zom_hud_trample_steam_compressor", ::onpickup_common, ::ondrop_common, undefined, "Tag_part_01", undefined, 3);
   springpad_whistle = generate_zombie_buildable_piece("springpad_zm", "p6_zm_buildable_tramplesteam_flag", 48, 15, 0, "zom_hud_trample_steam_whistle", ::onpickup_common, ::ondrop_common, undefined, "Tag_part_03", undefined, 4);
-  springpad = spawnstruct();
+  springpad = spawnStruct();
   springpad.name = "springpad_zm";
   springpad add_buildable_piece(springpad_door);
   springpad add_buildable_piece(springpad_flag);
@@ -38,7 +38,7 @@ include_buildables() {
   slipgun_cooker = generate_zombie_buildable_piece("slipgun_zm", "t6_zmb_buildable_slipgun_cooker", 48, 15, 0, "zom_hud_icon_buildable_slip_cooker", ::onpickup_common, ::ondrop_common, undefined, "TAG_COOKER", undefined, 6);
   slipgun_foot = generate_zombie_buildable_piece("slipgun_zm", "t6_zmb_buildable_slipgun_foot", 48, 15, 0, "zom_hud_icon_buildable_slip_foot", ::onpickup_common, ::ondrop_common, undefined, "TAG_FOOT", undefined, 7);
   slipgun_throttle = generate_zombie_buildable_piece("slipgun_zm", "t6_zmb_buildable_slipgun_throttle", 48, 15, 0, "zom_hud_icon_buildable_slip_handle", ::onpickup_common, ::ondrop_common, undefined, "TAG_THROTTLE", undefined, 8);
-  slipgun = spawnstruct();
+  slipgun = spawnStruct();
   slipgun.name = "slipgun_zm";
   slipgun add_buildable_piece(slipgun_canister);
   slipgun add_buildable_piece(slipgun_cooker);
@@ -51,14 +51,14 @@ include_buildables() {
   key_chain = generate_zombie_buildable_piece("keys_zm", "P6_zm_hr_key", 32, 64, 2.4, "zom_hud_icon_epod_key", ::onpickup_keys, ::ondrop_keys, undefined, undefined, 0, 9);
   key_chain.onspawn = ::onspawn_keys;
   key_chain manage_multiple_pieces(4);
-  key = spawnstruct();
+  key = spawnStruct();
   key.name = "keys_zm";
   key add_buildable_piece(key_chain);
   key.triggerthink = ::keysbuildable;
   key.onuseplantobject = ::onuseplantobject_escapepodkey;
   key.buildablepieces[0].onspawn = ::onspawn_keys;
   include_buildable(key);
-  ekey = spawnstruct();
+  ekey = spawnStruct();
   ekey.name = "ekeys_zm";
   ekey add_buildable_piece(key_chain);
   ekey.triggerthink = ::ekeysbuildable;
@@ -71,7 +71,7 @@ include_buildables() {
     sq_common_meteor = generate_zombie_buildable_piece("sq_common", "p6_zm_buildable_sq_meteor", 32, 64, 0, "zm_hud_icon_sq_meteor", ::onpickup_common, ::ondrop_common, undefined, "tag_part_04", undefined, 11);
     sq_common_scaffolding = generate_zombie_buildable_piece("sq_common", "p6_zm_buildable_sq_scaffolding", 64, 96, 0, "zm_hud_icon_sq_scafold", ::onpickup_common, ::ondrop_common, undefined, "tag_part_01", undefined, 12);
     sq_common_transceiver = generate_zombie_buildable_piece("sq_common", "p6_zm_buildable_sq_transceiver", 64, 96, 0, "zm_hud_icon_sq_tranceiver", ::onpickup_common, ::ondrop_common, undefined, "tag_part_03", undefined, 13);
-    sqcommon = spawnstruct();
+    sqcommon = spawnStruct();
     sqcommon.name = "sq_common";
     sqcommon add_buildable_piece(sq_common_electricbox);
     sqcommon add_buildable_piece(sq_common_meteor);
@@ -84,7 +84,7 @@ include_buildables() {
 }
 
 springpadbuildable() {
-  maps\mp\zombies\_zm_buildables::buildable_trigger_think("springpad_zm_buildable_trigger", "springpad_zm", "equip_springpad_zm", & "ZM_HIGHRISE_GRAB_SPRINGPAD", 1, 1);
+  maps\mp\zombies\_zm_buildables::buildable_trigger_think("springpad_zm_buildable_trigger", "springpad_zm", "equip_springpad_zm", &"ZM_HIGHRISE_GRAB_SPRINGPAD", 1, 1);
 }
 
 slipgunbuildable() {
@@ -95,7 +95,7 @@ slipgunbuildable() {
   else
     persist = 1;
 
-  maps\mp\zombies\_zm_buildables::buildable_trigger_think("slipgun_zm_buildable_trigger", "slipgun_zm", "slipgun_zm", & "ZM_HIGHRISE_GRAB_SLIPGUN", 1, persist);
+  maps\mp\zombies\_zm_buildables::buildable_trigger_think("slipgun_zm_buildable_trigger", "slipgun_zm", "slipgun_zm", &"ZM_HIGHRISE_GRAB_SLIPGUN", 1, persist);
 }
 
 keysbuildable() {
@@ -122,7 +122,7 @@ ondrop_common(player) {
 onpickup_common(player) {
   println("ZM >> Common part callback onPickup()");
 
-  player playsound("zmb_buildable_pickup");
+  player playSound("zmb_buildable_pickup");
   self pickupfromelevator();
   self.piece_owner = player;
 }
@@ -149,7 +149,7 @@ wait_for_slipgun() {
 
 keyscreateglint() {
   if(!isDefined(self.model.glint_fx))
-    playfxontag(level._effect["elevator_glint"], self.model, "tag_origin");
+    playFXOnTag(level._effect["elevator_glint"], self.model, "tag_origin");
 }
 
 onspawn_keys() {
@@ -160,8 +160,7 @@ ondrop_keys(player) {
   self keyscreateglint();
 }
 
-onpickup_keys(player) {
-}
+onpickup_keys(player) {}
 
 escape_pod_key_prompt(player) {
   if(!flag("escape_pod_needs_reset")) {

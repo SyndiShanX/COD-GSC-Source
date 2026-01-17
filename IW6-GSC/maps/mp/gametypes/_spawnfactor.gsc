@@ -28,13 +28,9 @@ init_spawn_factors() {
 
 score_factor(weight, spawnFactorFunction, spawnPoint, optionalParam) {
   if(isDefined(optionalParam)) {
-    scoreFactor = [
-      [spawnFactorFunction]
-    ](spawnPoint, optionalParam);
+    scoreFactor = [[spawnFactorFunction]](spawnPoint, optionalParam);
   } else {
-    scoreFactor = [
-      [spawnFactorFunction]
-    ](spawnPoint);
+    scoreFactor = [[spawnFactorFunction]](spawnPoint);
   }
 
   scoreFactor = clamp(scoreFactor, CONST_SCORE_FACTOR_MIN, CONST_SCORE_FACTOR_MAX);
@@ -424,15 +420,9 @@ spawnFrontLineThink() {
     if((useLog || useDebugDraw)) {
       if(useLog && !isDefined(level.frontlineLogIDs)) {
         level.frontlineLogIDs = [];
-        level.frontlineLogIDs["line"] = [
-          [level.matchRecording_generateID]
-        ]();
-        level.frontlineLogIDs["alliesCenter"] = [
-          [level.matchRecording_generateID]
-        ]();
-        level.frontlineLogIDs["axisCenter"] = [
-          [level.matchRecording_generateID]
-        ]();
+        level.frontlineLogIDs["line"] = [[level.matchRecording_generateID]]();
+        level.frontlineLogIDs["alliesCenter"] = [[level.matchRecording_generateID]]();
+        level.frontlineLogIDs["axisCenter"] = [[level.matchRecording_generateID]]();
       }
 
       if(isDefined(frontLineMidpoint) && isDefined(frontLineTeamDiffYaw)) {
@@ -464,12 +454,8 @@ spawnFrontLineThink() {
       }
 
       if(useLog) {
-        [
-          [level.matchRecording_logEvent]
-        ](level.frontlineLogIDs["alliesCenter"], "axis", "ANCHOR", axisAverage[0], axisAverage[1], GetTime());
-        [
-          [level.matchRecording_logEvent]
-        ](level.frontlineLogIDs["axisCenter"], "allies", "ANCHOR", alliesAverage[0], alliesAverage[1], GetTime());
+        [[level.matchRecording_logEvent]](level.frontlineLogIDs["alliesCenter"], "axis", "ANCHOR", axisAverage[0], axisAverage[1], GetTime());
+        [[level.matchRecording_logEvent]](level.frontlineLogIDs["axisCenter"], "allies", "ANCHOR", alliesAverage[0], alliesAverage[1], GetTime());
       }
     }
   }

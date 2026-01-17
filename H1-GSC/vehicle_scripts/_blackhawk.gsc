@@ -57,8 +57,8 @@ handle_audio() {
   vehicle_scripts\_blackhawk_aud::snd_init_blackhawk();
   thread monitor_death_stop_sounds();
 
-  for (;;) {
-    if(!isdefined(self.script_disablevehicleaudio) || !self.script_disablevehicleaudio) {
+  for(;;) {
+    if(!isDefined(self.script_disablevehicleaudio) || !self.script_disablevehicleaudio) {
       var_2 = distance(self.origin, level.player.origin);
 
       if(var_0 && var_2 > var_1) {
@@ -84,7 +84,7 @@ monitor_death_stop_sounds() {
 }
 
 set_vehicle_anims(var_0) {
-  for (var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++)
     var_0[var_1].vehicle_getoutanim = % bh_idle;
 
   return var_0;
@@ -95,7 +95,7 @@ set_vehicle_anims(var_0) {
 setplayer_anims(var_0) {
   var_0[3].player_idle = % bh_player_idle;
 
-  if(!isdefined(level.override_blackhawk_unload_audio)) {
+  if(!isDefined(level.override_blackhawk_unload_audio)) {
     var_0[3].player_getout_sound = "fastrope_start_plr";
     var_0[3].player_getout_sound_loop = "fastrope_loop_plr";
     var_0[3].player_getout_sound_end = "fastrope_end_plr";
@@ -111,8 +111,8 @@ setplayer_anims(var_0) {
 setanims() {
   var_0 = [];
 
-  for (var_1 = 0; var_1 < 8; var_1++)
-    var_0[var_1] = spawnstruct();
+  for(var_1 = 0; var_1 < 8; var_1++)
+    var_0[var_1] = spawnStruct();
 
   var_0[0].idle = % bh_pilot_idle;
   var_0[1].idle = % bh_copilot_idle;
@@ -198,19 +198,19 @@ unload_groups() {
 
 set_attached_models() {
   var_0 = [];
-  var_0["TAG_FastRope_LE"] = spawnstruct();
+  var_0["TAG_FastRope_LE"] = spawnStruct();
   var_0["TAG_FastRope_LE"].model = "rope_test";
   var_0["TAG_FastRope_LE"].tag = "TAG_FastRope_LE";
   var_0["TAG_FastRope_LE"].idleanim = % bh_rope_idle_le;
   var_0["TAG_FastRope_LE"].dropanim = % bh_rope_drop_le;
-  var_0["TAG_FastRope_RI"] = spawnstruct();
+  var_0["TAG_FastRope_RI"] = spawnStruct();
   var_0["TAG_FastRope_RI"].model = "rope_test_ri";
   var_0["TAG_FastRope_RI"].tag = "TAG_FastRope_RI";
   var_0["TAG_FastRope_RI"].idleanim = % bh_rope_idle_ri;
   var_0["TAG_FastRope_RI"].dropanim = % bh_rope_drop_ri;
   var_1 = getarraykeys(var_0);
 
-  for (var_2 = 0; var_2 < var_1.size; var_2++)
+  for(var_2 = 0; var_2 < var_1.size; var_2++)
     precachemodel(var_0[var_1[var_2]].model);
 
   return var_0;

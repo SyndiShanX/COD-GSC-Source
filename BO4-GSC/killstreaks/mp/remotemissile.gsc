@@ -7,11 +7,10 @@
 #include scripts\killstreaks\remotemissile_shared;
 #include scripts\mp_common\gametypes\battlechatter;
 #include scripts\mp_common\gametypes\globallogic_audio;
-
 #namespace remotemissile;
 
 autoexec __init__system__() {
-  system::register(#"remotemissile", &__init__, undefined, #"killstreaks");
+  system::register(#"remotemissile", &__init__, undefined, # "killstreaks");
 }
 
 __init__() {

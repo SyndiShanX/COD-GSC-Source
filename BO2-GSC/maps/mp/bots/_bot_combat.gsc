@@ -493,7 +493,7 @@ bot_update_lookat(origin, frac) {
 
 bot_on_target(aim_target, radius) {
   angles = self getplayerangles();
-  forward = anglestoforward(angles);
+  forward = anglesToForward(angles);
   origin = self getplayercamerapos();
   len = distance(aim_target, origin);
   end = origin + forward * len;
@@ -506,7 +506,7 @@ bot_on_target(aim_target, radius) {
 
 bot_dot_product(origin) {
   angles = self getplayerangles();
-  forward = anglestoforward(angles);
+  forward = anglesToForward(angles);
   delta = origin - self getplayercamerapos();
   delta = vectornormalize(delta);
   dot = vectordot(forward, delta);
@@ -1338,7 +1338,7 @@ bot_turret_set_dangerous(turret) {
   if(!isDefined(nearest)) {
     return;
   }
-  forward = anglestoforward(turret.angles);
+  forward = anglesToForward(turret.angles);
 
   if(turret.turrettype == "sentry") {
     nodes = getvisiblenodes(nearest);
@@ -1368,7 +1368,7 @@ bot_turret_set_dangerous(turret) {
 
 bot_turret_nearest_node(turret) {
   nodes = getnodesinradiussorted(turret.origin, 256, 0);
-  forward = anglestoforward(turret.angles);
+  forward = anglesToForward(turret.angles);
 
   foreach(node in nodes) {
     dir = vectornormalize(node.origin - turret.origin);
@@ -1402,7 +1402,7 @@ turret_get_attack_node() {
     return undefined;
 
   nodes = getnodesinradiussorted(self.origin, 512, 64);
-  forward = anglestoforward(self.angles);
+  forward = anglesToForward(self.angles);
 
   foreach(node in nodes) {
     if(!nodesvisible(node, nearest)) {
@@ -1426,7 +1426,7 @@ bot_riotshield_think(enemy) {
       self allowattack(0);
   }
 
-  forward = anglestoforward(enemy.angles);
+  forward = anglesToForward(enemy.angles);
   origin = enemy.origin + forward * randomintrange(256, 512);
 
   if(self bot_combat_throw_lethal(origin)) {
@@ -1463,7 +1463,7 @@ bot_riotshield_dangerous_think(enemy, goal) {
   }
 
   nodes = array_randomize(nodes);
-  forward = anglestoforward(enemy.angles);
+  forward = anglesToForward(enemy.angles);
 
   foreach(node in nodes) {
     if(!nodesvisible(node, nearest)) {

@@ -44,7 +44,7 @@ onPrecacheGameType() {
 onStartGameType() {
   setClientNameMode("auto_change");
 
-  if(!isdefined(game["switchedsides"]))
+  if(!isDefined(game["switchedsides"]))
     game["switchedsides"] = false;
 
   if(game["switchedsides"]) {
@@ -54,14 +54,14 @@ onStartGameType() {
     game["defenders"] = oldAttackers;
   }
 
-  setObjectiveText("allies", & "OBJECTIVES_CONF");
-  setObjectiveText("axis", & "OBJECTIVES_CONF");
+  setObjectiveText("allies", &"OBJECTIVES_CONF");
+  setObjectiveText("axis", &"OBJECTIVES_CONF");
 
-  setObjectiveScoreText("allies", & "OBJECTIVES_CONF_SCORE");
-  setObjectiveScoreText("axis", & "OBJECTIVES_CONF_SCORE");
+  setObjectiveScoreText("allies", &"OBJECTIVES_CONF_SCORE");
+  setObjectiveScoreText("axis", &"OBJECTIVES_CONF_SCORE");
 
-  setObjectiveHintText("allies", & "OBJECTIVES_CONF_HINT");
-  setObjectiveHintText("axis", & "OBJECTIVES_CONF_HINT");
+  setObjectiveHintText("allies", &"OBJECTIVES_CONF_HINT");
+  setObjectiveHintText("axis", &"OBJECTIVES_CONF_HINT");
 
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);
@@ -110,7 +110,7 @@ onNormalDeath(victim, attacker, lifeId) {
 
 spawnDogTags(victim, attacker) {
   if(isDefined(level.dogtags[victim.guid])) {
-    PlayFx(level.conf_fx["vanish"], level.dogtags[victim.guid].curOrigin);
+    playFX(level.conf_fx["vanish"], level.dogtags[victim.guid].curOrigin);
     level.dogtags[victim.guid] notify("reset");
   } else {
     visuals[0] = spawn("script_model", (0, 0, 0));
@@ -175,7 +175,7 @@ showToTeam(gameObject, team) {
       self ShowToPlayer(player);
   }
 
-  for (;;) {
+  for(;;) {
     level waittill("joined_team");
 
     self hide();
@@ -196,10 +196,10 @@ onUse(player) {
 
     if(self.victim == player) {
       event = "tags_retrieved";
-      splash = & "SPLASHES_TAGS_RETRIEVED";
+      splash = &"SPLASHES_TAGS_RETRIEVED";
     } else {
       event = "kill_denied";
-      splash = & "SPLASHES_KILL_DENIED";
+      splash = &"SPLASHES_KILL_DENIED";
     }
 
     //	tell the attacker their kill was denied
@@ -211,7 +211,7 @@ onUse(player) {
     self.trigger playSound("mp_killconfirm_tags_pickup");
 
     event = "kill_confirmed";
-    splash = & "SPLASHES_KILL_CONFIRMED";
+    splash = &"SPLASHES_KILL_CONFIRMED";
 
     //	if not us, tell the attacker their kill was confirmed
     if(self.attacker != player)
@@ -257,7 +257,7 @@ bounce() {
   bottomPos = self.curOrigin;
   topPos = self.curOrigin + (0, 0, 12);
 
-  while (true) {
+  while(true) {
     self.visuals[0] moveTo(topPos, 0.5, 0.15, 0.15);
     self.visuals[0] rotateYaw(180, 0.5);
     self.visuals[1] moveTo(topPos, 0.5, 0.15, 0.15);
@@ -295,7 +295,7 @@ tagTeamUpdater(tags) {
   level endon("game_ended");
   self endon("disconnect");
 
-  while (true) {
+  while(true) {
     self waittill("joined_team");
 
     tags.victimTeam = self.pers["team"];
@@ -318,7 +318,7 @@ clearOnVictimDisconnect(victim) {
       level.dogtags[guid].attacker thread maps\mp\gametypes\_rank::xpEventPopup(&"SPLASHES_DENIED_KILL", (1, 0.5, 0.5));
 
     //	play vanish effect, reset, and wait for reset to process
-    PlayFx(level.conf_fx["vanish"], level.dogtags[guid].curOrigin);
+    playFX(level.conf_fx["vanish"], level.dogtags[guid].curOrigin);
     level.dogtags[guid] notify("reset");
     wait(0.05);
 
@@ -327,7 +327,7 @@ clearOnVictimDisconnect(victim) {
       //	delete objective and visuals
       objective_delete(level.dogtags[guid].objId);
       level.dogtags[guid].trigger delete();
-      for (i = 0; i < level.dogtags[guid].visuals.size; i++)
+      for(i = 0; i < level.dogtags[guid].visuals.size; i++)
         level.dogtags[guid].visuals[i] delete();
       level.dogtags[guid] notify("deleted");
 

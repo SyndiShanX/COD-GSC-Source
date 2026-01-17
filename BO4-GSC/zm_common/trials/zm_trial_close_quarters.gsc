@@ -9,7 +9,6 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_weapons;
-
 #namespace zm_trial_close_quarters;
 
 autoexec __init__system__() {
@@ -24,11 +23,11 @@ __init__() {
   zm_trial::register_challenge(#"close_quarters", &on_begin, &on_end);
 }
 
-private on_begin() {
+on_begin() {
   zm::register_actor_damage_callback(&range_check);
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   if(isinarray(level.actor_damage_callbacks, &range_check)) {
     arrayremovevalue(level.actor_damage_callbacks, &range_check, 0);
   }
@@ -39,7 +38,7 @@ is_active() {
   return isDefined(challenge);
 }
 
-private range_check(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {
+range_check(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {
   if(!isplayer(attacker) && !isplayer(inflictor)) {
     return -1;
   }

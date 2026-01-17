@@ -13,7 +13,6 @@
 #include scripts\zm_common\zm_perks;
 #include scripts\zm_common\zm_stats;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_perk_staminup;
 
 autoexec __init__system__() {
@@ -26,9 +25,9 @@ __init__() {
 
 enable_staminup_perk_for_level() {
   if(function_8b1a219a()) {
-    zm_perks::register_perk_basic_info(#"specialty_staminup", #"perk_staminup", 2000, #"hash_26af21c3b4413875", getweapon("zombie_perk_bottle_marathon"), getweapon("zombie_perk_totem_staminup"), #"zmperksstaminup");
+    zm_perks::register_perk_basic_info(#"specialty_staminup", # "perk_staminup", 2000, # "hash_26af21c3b4413875", getweapon("zombie_perk_bottle_marathon"), getweapon("zombie_perk_totem_staminup"), # "zmperksstaminup");
   } else {
-    zm_perks::register_perk_basic_info(#"specialty_staminup", #"perk_staminup", 2000, #"zombie/perk_marathon", getweapon("zombie_perk_bottle_marathon"), getweapon("zombie_perk_totem_staminup"), #"zmperksstaminup");
+    zm_perks::register_perk_basic_info(#"specialty_staminup", # "perk_staminup", 2000, # "zombie/perk_marathon", getweapon("zombie_perk_bottle_marathon"), getweapon("zombie_perk_totem_staminup"), # "zmperksstaminup");
   }
 
   zm_perks::register_perk_precache_func(#"specialty_staminup", &staminup_precache);
@@ -43,11 +42,11 @@ staminup_precache() {
     return;
   }
 
-  level._effect[#"marathon_light"] = "zombie/fx_perk_stamin_up_zmb";
-  level.machine_assets[#"specialty_staminup"] = spawnStruct();
-  level.machine_assets[#"specialty_staminup"].weapon = getweapon("zombie_perk_bottle_marathon");
-  level.machine_assets[#"specialty_staminup"].off_model = "p7_zm_vending_marathon";
-  level.machine_assets[#"specialty_staminup"].on_model = "p7_zm_vending_marathon";
+  level._effect[# "marathon_light"] = "zombie/fx_perk_stamin_up_zmb";
+  level.machine_assets[# "specialty_staminup"] = spawnStruct();
+  level.machine_assets[# "specialty_staminup"].weapon = getweapon("zombie_perk_bottle_marathon");
+  level.machine_assets[# "specialty_staminup"].off_model = "p7_zm_vending_marathon";
+  level.machine_assets[# "specialty_staminup"].on_model = "p7_zm_vending_marathon";
 }
 
 staminup_register_clientfield() {}

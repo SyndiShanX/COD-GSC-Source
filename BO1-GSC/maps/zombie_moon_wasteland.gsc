@@ -109,11 +109,11 @@ init_teleporter_message() {
 }
 
 set_teleporter_message(message) {
-  if(message != & "NULL_EMPTY") {
+  if(message != &"NULL_EMPTY") {
     level.lastMessageTime = gettime();
   }
   time = gettime() - level.lastMessageTime;
-  if((time < (1000 * 1)) && (message == & "NULL_EMPTY")) {
+  if((time < (1000 * 1)) && (message == &"NULL_EMPTY")) {
     return;
   }
   players = get_players();
@@ -411,7 +411,7 @@ spawn_a_zombie(max_zombies, spawner_zone_name, wait_delay) {
   if(zombies.size >= max_zombies) {
     return (undefined);
   }
-  zombie_spawners = getentarray(spawner_zone_name, "targetname");
+  zombie_spawners = getEntArray(spawner_zone_name, "targetname");
   spawn_point = zombie_spawners[randomInt(zombie_spawners.size)];
   ai = spawn_zombie(spawn_point);
   if(isDefined(ai)) {
@@ -490,7 +490,7 @@ get_vending_ents(vending_name, perk_script_string, nml_pos, nml_radius) {
   names[1] = "zombie_vending";
   ent_array = [];
   for(i = 0; i < names.size; i++) {
-    ents = getentarray(names[i], "targetname");
+    ents = getEntArray(names[i], "targetname");
     for(j = 0; j < ents.size; j++) {
       ent = ents[j];
       if(isDefined(ent.script_string) && (ent.script_string == perk_script_string)) {
@@ -599,11 +599,11 @@ perk_machine_arrival_update() {
 
 perk_arrive_fx(pos) {
   wait(0.15);
-  Playfx(level._effect["lightning_dog_spawn"], pos);
+  playFX(level._effect["lightning_dog_spawn"], pos);
   playsoundatposition("zmb_hellhound_spawn", pos);
   playsoundatposition("zmb_hellhound_bolt", pos);
   wait(1.1);
-  Playfx(level._effect["lightning_dog_spawn"], pos);
+  playFX(level._effect["lightning_dog_spawn"], pos);
   playsoundatposition("zmb_hellhound_spawn", pos);
   playsoundatposition("zmb_hellhound_bolt", pos);
 }

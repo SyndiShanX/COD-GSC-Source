@@ -41,14 +41,14 @@ subclass_dualwield() {
   self.a.disablewoundedset = 1;
   self.pathenemyfightdist = 64;
   self.leftgunmodel = spawn("script_model", self.origin);
-  self.leftgunmodel setmodel(self.weaponmodel);
+  self.leftgunmodel setModel(self.weaponmodel);
   self.leftgunmodel useweaponhidetags(self.weapon);
   self.leftgunmodel linkto(self, "tag_weapon_left", (0, 0, 0), (0, 0, 0));
 
   recordent(self.leftgunmodel);
 
   self.rightgunmodel = spawn("script_model", self.origin);
-  self.rightgunmodel setmodel(self.weaponmodel);
+  self.rightgunmodel setModel(self.weaponmodel);
   self.rightgunmodel useweaponhidetags(self.weapon);
   self.rightgunmodel linkto(self, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
 

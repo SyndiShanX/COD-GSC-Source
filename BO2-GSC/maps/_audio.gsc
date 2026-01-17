@@ -8,14 +8,14 @@
 #include maps\_music;
 
 main() {
-  array_thread(getentarray("audio_sound_trigger", "targetname"), ::thread_sound_trigger);
+  array_thread(getEntArray("audio_sound_trigger", "targetname"), ::thread_sound_trigger);
   level.disablegenericdialog = 0;
   thread fadeinsound();
 }
 
 fadeinsound() {
   flag_wait("all_players_connected");
-  get_players()[0] playsound("uin_transition_" + level.script);
+  get_players()[0] playSound("uin_transition_" + level.script);
   level thread battlechatter_on();
 }
 
@@ -29,7 +29,7 @@ wait_until_first_player() {
 thread_sound_trigger() {
   self waittill("trigger");
   struct_targs = getstructarray(self.target, "targetname");
-  ent_targs = getentarray(self.target, "targetname");
+  ent_targs = getEntArray(self.target, "targetname");
 
   if(isDefined(struct_targs)) {
     for(i = 0; i < struct_targs.size; i++) {
@@ -109,9 +109,9 @@ line_sound_player() {
   self endon("end line sound");
 
   if(isDefined(self.script_looping))
-    self playloopsound(self.script_sound);
+    self playLoopSound(self.script_sound);
   else
-    self playsound(self.script_sound);
+    self playSound(self.script_sound);
 }
 
 move_sound_along_line() {
@@ -168,7 +168,7 @@ static_sound_random_play(soundpoint) {
 
   while(true) {
     wait(randomfloatrange(self.script_wait_min, self.script_wait_max));
-    soundpoint playsound(self.script_sound);
+    soundpoint playSound(self.script_sound);
 
     if(getdvarint(#"_id_0AEB127D") > 0)
       print3d(soundpoint.origin, self.script_sound, (1.0, 0.8, 0.5), 1, 3, 5);
@@ -177,7 +177,7 @@ static_sound_random_play(soundpoint) {
 }
 
 static_sound_loop_play(soundpoint) {
-  self playloopsound(self.script_sound);
+  self playLoopSound(self.script_sound);
 
   if(getdvarint(#"_id_0AEB127D") > 0) {
     while(true) {
@@ -219,7 +219,7 @@ create_2d_sound_list(sound_alias) {
 
   variation = random(level.sound_alias_available);
   arrayremovevalue(level.sound_alias_available, variation);
-  player[0] playsound(variation, "sound_done");
+  player[0] playSound(variation, "sound_done");
   player[0] waittill("sound_done");
   level notify("2D_sound_finished");
 }
@@ -235,7 +235,7 @@ missionfailwatcher() {
   if(isDefined(level.missionfailsndspecial))
     [[level.missionfailsndspecial]]();
 
-  self playsound("chr_death");
+  self playSound("chr_death");
 }
 
 death_sounds() {
@@ -244,7 +244,7 @@ death_sounds() {
 
   println("Sound : do death sound");
 
-  self playsound("evt_player_death");
+  self playSound("evt_player_death");
 }
 
 play_music_stinger_manual(alias, time) {

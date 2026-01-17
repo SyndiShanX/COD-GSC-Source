@@ -6,7 +6,7 @@
 alive_array(strSquadName) {
   aSquad = [];
   aRoster = getaiarray();
-  for (i = 0; i < aRoster.size; i++) {
+  for(i = 0; i < aRoster.size; i++) {
     if(isDefined(aRoster[i].script_squadname)) {
       if(aRoster[i].script_squadname == strSquadName) {
         aSquad[aSquad.size] = aRoster[i];
@@ -19,7 +19,7 @@ alive_array(strSquadName) {
 spawn_array(strSquadName) {
   squad_spawn = [];
   aSpawner = getspawnerarray();
-  for (i = 0; i < aSpawner.size; i++) {
+  for(i = 0; i < aSpawner.size; i++) {
     if(isDefined(aSpawner[i].script_squadname)) {
       if(aSpawner[i].script_squadname == strSquadName) {
         squad_spawn[squad_spawn.size] = aSpawner[i];
@@ -30,7 +30,7 @@ spawn_array(strSquadName) {
 }
 
 set_goals(squad_array, targets) {
-  for (i = 0; i < squad_array.size; i++) {
+  for(i = 0; i < squad_array.size; i++) {
     rr = randomint(targets.size);
     squad_array[i] setgoalpos(targets[rr].origin);
   }
@@ -57,16 +57,16 @@ manage_spawners(strSquadName, mincount, maxcount, ender, spawntime, spawnfunctio
   }
   if(!isDefined(spawntime))
     spawntime = 0.05;
-  while (1) {
+  while(1) {
     aSquad = alive_array(strSquadName);
     if(aSquad.size < mincount) {
       level notify(strSquadName + " min threshold reached");
-      while (aSquad.size < maxcount) {
+      while(aSquad.size < maxcount) {
         if(isDefined(squad_spawn[spawn_index].script_forcespawn) &&
           squad_spawn[spawn_index].script_forcespawn) {
-          spawned = squad_spawn[spawn_index] stalingradSpawn();
+          spawned = squad_spawn[spawn_index] stalingradspawn();
         } else {
-          spawned = squad_spawn[spawn_index] doSpawn();
+          spawned = squad_spawn[spawn_index] dospawn();
         }
         if(isDefined(spawned)) {
           spawned setgoalnode(squad_targets[goal_index]);

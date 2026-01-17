@@ -38,8 +38,8 @@ set_vehicle_anims(var_0) {
 setanims() {
   var_0 = [];
 
-  for (var_1 = 0; var_1 < 4; var_1++)
-    var_0[var_1] = spawnstruct();
+  for(var_1 = 0; var_1 < 4; var_1++)
+    var_0[var_1] = spawnStruct();
 
   var_0[0].sittag = "body_animate_jnt";
   var_0[1].sittag = "body_animate_jnt";

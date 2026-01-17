@@ -29,7 +29,7 @@ vsmgr_register_info(type, name, version, priority, lerp_step_count, activate_per
   validate_info(type, lower_name, priority);
   add_sorted_name_key(type, lower_name);
   add_sorted_priority_key(type, lower_name, priority);
-  level.vsmgr[type].info[lower_name] = spawnstruct();
+  level.vsmgr[type].info[lower_name] = spawnStruct();
   level.vsmgr[type].info[lower_name] add_info(type, lower_name, version, priority, lerp_step_count, activate_per_player, lerp_thread, ref_count_lerp_thread);
 
   if(level.vsmgr[type].highest_version < version)
@@ -166,7 +166,7 @@ vsmgr_duration_lerp_thread_per_player(player, duration, max_duration) {
 }
 
 register_type(type) {
-  level.vsmgr[type] = spawnstruct();
+  level.vsmgr[type] = spawnStruct();
   level.vsmgr[type].type = type;
   level.vsmgr[type].in_use = 0;
   level.vsmgr[type].highest_version = 0;
@@ -257,7 +257,7 @@ add_info(type, name, version, priority, lerp_step_count, activate_per_player, le
   if(!isDefined(ref_count_lerp_thread))
     ref_count_lerp_thread = 0;
 
-  self.state = spawnstruct();
+  self.state = spawnStruct();
   self.state.type = type;
   self.state.name = name;
   self.state.activate_per_player = activate_per_player;
@@ -288,7 +288,7 @@ on_player_connect() {
     }
     for(name_index = 0; name_index < level.vsmgr[type].sorted_name_keys.size; name_index++) {
       name_key = level.vsmgr[type].sorted_name_keys[name_index];
-      level.vsmgr[type].info[name_key].state.players[self._player_entnum] = spawnstruct();
+      level.vsmgr[type].info[name_key].state.players[self._player_entnum] = spawnStruct();
       level.vsmgr[type].info[name_key].state.players[self._player_entnum].active = 0;
       level.vsmgr[type].info[name_key].state.players[self._player_entnum].lerp = 0;
 

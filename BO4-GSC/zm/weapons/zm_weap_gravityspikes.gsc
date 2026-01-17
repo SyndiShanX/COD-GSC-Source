@@ -29,7 +29,6 @@
 #include scripts\zm_common\zm_perks;
 #include scripts\zm_common\zm_player;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_weap_gravityspikes;
 
 autoexec __init__system__() {
@@ -37,9 +36,9 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  level.hero_weapon[#"gravityspikes"][0] = getweapon(#"hero_gravityspikes_t8_lv1");
-  level.hero_weapon[#"gravityspikes"][1] = getweapon(#"hero_gravityspikes_t8_lv2");
-  level.hero_weapon[#"gravityspikes"][2] = getweapon(#"hero_gravityspikes_t8_lv3");
+  level.hero_weapon[# "gravityspikes"][0] = getweapon(#"hero_gravityspikes_t8_lv1");
+  level.hero_weapon[# "gravityspikes"][1] = getweapon(#"hero_gravityspikes_t8_lv2");
+  level.hero_weapon[# "gravityspikes"][2] = getweapon(#"hero_gravityspikes_t8_lv3");
   zm_loadout::register_hero_weapon_for_level(#"hero_gravityspikes_t8_lv1");
   zm_loadout::register_hero_weapon_for_level(#"hero_gravityspikes_t8_lv2");
   zm_loadout::register_hero_weapon_for_level(#"hero_gravityspikes_t8_lv3");
@@ -81,15 +80,15 @@ register_clientfields() {
 }
 
 function_4d17107b(weapon, var_e7c11b0c = 1) {
-  if(weapon == level.hero_weapon[#"gravityspikes"][2]) {
+  if(weapon == level.hero_weapon[# "gravityspikes"][2]) {
     return true;
   }
 
-  if(weapon == level.hero_weapon[#"gravityspikes"][1] && var_e7c11b0c < 3) {
+  if(weapon == level.hero_weapon[# "gravityspikes"][1] && var_e7c11b0c < 3) {
     return true;
   }
 
-  if(weapon == level.hero_weapon[#"gravityspikes"][0] && var_e7c11b0c < 2) {
+  if(weapon == level.hero_weapon[# "gravityspikes"][0] && var_e7c11b0c < 2) {
     return true;
   }
 
@@ -105,27 +104,27 @@ function_326aec56() {
     wpn_cur = waitresult.weapon;
     wpn_prev = waitresult.last_weapon;
 
-    if(isinarray(level.hero_weapon[#"gravityspikes"], wpn_cur)) {
+    if(isinarray(level.hero_weapon[# "gravityspikes"], wpn_cur)) {
       self clientfield::increment_to_player("hero_gravityspikes_vigor_postfx");
       self update_gravityspikes_state(1);
       self.b_gravity_trap_fx_on = 0;
       self.var_de01b5c2 = undefined;
       self thread gravityspikes_stuck_above_zombie_watcher();
-    } else if(isinarray(level.hero_weapon[#"gravityspikes"], wpn_prev)) {
+    } else if(isinarray(level.hero_weapon[# "gravityspikes"], wpn_prev)) {
       self thread function_e0537f19(wpn_prev);
     }
 
-    if(wpn_cur == level.hero_weapon[#"gravityspikes"][0]) {
-      zm_hero_weapon::show_hint(wpn_cur, #"hash_2ed06d351658eadf");
+    if(wpn_cur == level.hero_weapon[# "gravityspikes"][0]) {
+      zm_hero_weapon::show_hint(wpn_cur, # "hash_2ed06d351658eadf");
       self thread gravityspikes_attack_watcher(wpn_cur, 1);
       continue;
     }
 
-    if(wpn_cur == level.hero_weapon[#"gravityspikes"][1]) {
+    if(wpn_cur == level.hero_weapon[# "gravityspikes"][1]) {
       if(!self gamepadusedlast()) {
-        self zm_hero_weapon::show_hint(wpn_cur, #"hash_6b4f0b375a21c020");
+        self zm_hero_weapon::show_hint(wpn_cur, # "hash_6b4f0b375a21c020");
       } else {
-        self zm_hero_weapon::show_hint(wpn_cur, #"hash_1014fb82e4e32c24");
+        self zm_hero_weapon::show_hint(wpn_cur, # "hash_1014fb82e4e32c24");
       }
 
       self thread gravityspikes_attack_watcher(wpn_cur, 2);
@@ -134,11 +133,11 @@ function_326aec56() {
       continue;
     }
 
-    if(wpn_cur == level.hero_weapon[#"gravityspikes"][2]) {
+    if(wpn_cur == level.hero_weapon[# "gravityspikes"][2]) {
       if(!self gamepadusedlast()) {
-        self zm_hero_weapon::show_hint(wpn_cur, #"hash_22403f43ff20f2db");
+        self zm_hero_weapon::show_hint(wpn_cur, # "hash_22403f43ff20f2db");
       } else {
-        self zm_hero_weapon::show_hint(wpn_cur, #"hash_3b5dc0adfa400025");
+        self zm_hero_weapon::show_hint(wpn_cur, # "hash_3b5dc0adfa400025");
       }
 
       self thread gravityspikes_attack_watcher(wpn_cur, 3);
@@ -148,7 +147,7 @@ function_326aec56() {
   }
 }
 
-private function_5a6c0fea() {
+function_5a6c0fea() {
   self endon(#"disconnect");
 
   while(true) {
@@ -161,7 +160,7 @@ private function_5a6c0fea() {
   }
 }
 
-private function_e0537f19(w_gravityspikes) {
+function_e0537f19(w_gravityspikes) {
   self notify("3e6e1fb0a555c2a5");
   self endon("3e6e1fb0a555c2a5");
   self endon(#"disconnect");
@@ -187,13 +186,13 @@ private function_e0537f19(w_gravityspikes) {
 }
 
 gravityspikes_attack_watcher(w_gravityspikes, n_level) {
-  self endon(#"disconnect", #"bled_out", #"death", #"gravity_spike_expired");
+  self endon(#"disconnect", # "bled_out", # "death", # "gravity_spike_expired");
 
   while(true) {
     if(n_level >= 3) {
       s_result = self waittill(#"weapon_melee_power");
     } else {
-      s_result = self waittill(#"weapon_melee_power", #"weapon_melee");
+      s_result = self waittill(#"weapon_melee_power", # "weapon_melee");
     }
 
     if(s_result.weapon == w_gravityspikes) {
@@ -204,7 +203,7 @@ gravityspikes_attack_watcher(w_gravityspikes, n_level) {
   }
 }
 
-private knockdown_zombies_slam(var_52b14308) {
+knockdown_zombies_slam(var_52b14308) {
   v_forward = anglesToForward(self getplayerangles());
   v_pos = self.origin + vectorscale(v_forward, 24);
   a_ai = getaiteamarray(level.zombie_team);
@@ -216,7 +215,7 @@ private knockdown_zombies_slam(var_52b14308) {
   self thread play_slam_fx(v_pos);
 }
 
-private play_slam_fx(v_pos) {
+play_slam_fx(v_pos) {
   mdl_fx_pos = util::spawn_model("tag_origin", v_pos, (-90, 0, 0));
   waitframe(1);
   mdl_fx_pos clientfield::set("gravity_slam_fx", 1);
@@ -229,17 +228,17 @@ private play_slam_fx(v_pos) {
   mdl_fx_pos delete();
 }
 
-private zombie_slam_direction(v_position) {
+zombie_slam_direction(v_position) {
   self endon(#"death");
 
-  if(!(self.archetype === #"zombie") || isDefined(self.knockdown) && self.knockdown) {
+  if(!(self.archetype === # "zombie") || isDefined(self.knockdown) && self.knockdown) {
     return;
   }
 
   zombie_utility::setup_zombie_knockdown(v_position);
 }
 
-private player_invulnerable_during_gravityspike_slam(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex) {
+player_invulnerable_during_gravityspike_slam(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex) {
   if(self.n_gravityspikes_state === 1 && isDefined(self.gravityspikes_slam) && self.gravityspikes_slam) {
     return 0;
   }
@@ -247,17 +246,17 @@ private player_invulnerable_during_gravityspike_slam(einflictor, eattacker, idam
   return idamage;
 }
 
-private no_damage_gravityspikes_slam() {
+no_damage_gravityspikes_slam() {
   self endon(#"disconnect");
   self.gravityspikes_slam = 1;
   wait 1.5;
   self.gravityspikes_slam = undefined;
 }
 
-private gravityspikes_stuck_above_zombie_watcher() {
+gravityspikes_stuck_above_zombie_watcher() {
   self notify("3582bc9c4933ff9f");
   self endon("3582bc9c4933ff9f");
-  self endon(#"disconnect", #"bled_out", #"death", #"gravity_spike_expired", #"hash_55b145e95edc2ebe");
+  self endon(#"disconnect", # "bled_out", # "death", # "gravity_spike_expired", # "hash_55b145e95edc2ebe");
   var_88758440 = 1;
 
   while(function_4d17107b(self getcurrentweapon())) {
@@ -296,14 +295,14 @@ private gravityspikes_stuck_above_zombie_watcher() {
         recordline(start_point, var_a024434f[i], (1, 1, 1), "<dev string:x38>", self);
       }
 
-        if(trace[#"fraction"] < 1) {
-          if(isactor(trace[#"entity"]) && trace[#"entity"].health > 0 && (trace[#"entity"].archetype == #"zombie" || trace[#"entity"].archetype == #"zombie_dog")) {
-            self thread knockdown_zombies_slam();
-            self thread no_damage_gravityspikes_slam();
-            wait 1;
-            break;
-          }
+      if(trace[# "fraction"] < 1) {
+        if(isactor(trace[# "entity"]) && trace[# "entity"].health > 0 && (trace[# "entity"].archetype == # "zombie" || trace[# "entity"].archetype == # "zombie_dog")) {
+          self thread knockdown_zombies_slam();
+          self thread no_damage_gravityspikes_slam();
+          wait 1;
+          break;
         }
+      }
     }
 
     waitframe(1);
@@ -311,7 +310,7 @@ private gravityspikes_stuck_above_zombie_watcher() {
 }
 
 gravityspikes_altfire_watcher(w_gravityspikes) {
-  self endon(#"disconnect", #"bled_out", #"death", #"gravity_spike_expired", #"gravity_spike_planted");
+  self endon(#"disconnect", # "bled_out", # "death", # "gravity_spike_expired", # "gravity_spike_planted");
 
   while(true) {
     s_result = self waittill(#"weapon_melee_power_left");
@@ -320,14 +319,14 @@ gravityspikes_altfire_watcher(w_gravityspikes) {
       self.var_de01b5c2 = 1;
       self playrumbleonentity("damage_heavy");
       self thread function_26a4b7f5(w_gravityspikes);
-      self waittilltimeout(5, #"stop_shockwave");
+      self waittilltimeout(5, # "stop_shockwave");
       self.var_de01b5c2 = undefined;
     }
   }
 }
 
-private function_26a4b7f5(w_gravityspikes) {
-  self endon(#"disconnect", #"gravity_spike_expired", #"gravity_spike_planted");
+function_26a4b7f5(w_gravityspikes) {
+  self endon(#"disconnect", # "gravity_spike_expired", # "gravity_spike_planted");
   self clientfield::set("gravity_shock_wave_fx", 1);
 
   while(isDefined(self.var_de01b5c2) && self.var_de01b5c2) {
@@ -337,7 +336,7 @@ private function_26a4b7f5(w_gravityspikes) {
     a_ai_zombies = array::get_all_closest(self.origin, getaiteamarray(level.zombie_team), undefined, undefined, 200);
 
     foreach(ai_zombie in a_ai_zombies) {
-      if(isalive(ai_zombie) && (ai_zombie.zm_ai_category == #"basic" || ai_zombie.zm_ai_category == #"enhanced") && math::cointoss()) {
+      if(isalive(ai_zombie) && (ai_zombie.zm_ai_category == # "basic" || ai_zombie.zm_ai_category == # "enhanced") && math::cointoss()) {
         ai_zombie thread zombie_utility::setup_zombie_knockdown(v_pos);
       }
     }
@@ -347,7 +346,7 @@ private function_26a4b7f5(w_gravityspikes) {
       continue;
     }
 
-    if(var_b735005c.zm_ai_category == #"basic" || var_b735005c.zm_ai_category == #"popcorn" || var_b735005c.zm_ai_category == #"enhanced") {
+    if(var_b735005c.zm_ai_category == # "basic" || var_b735005c.zm_ai_category == # "popcorn" || var_b735005c.zm_ai_category == # "enhanced") {
       while(isalive(var_b735005c)) {
         var_b735005c thread function_6a21cc79(self, w_gravityspikes);
         wait 0.2;
@@ -363,10 +362,10 @@ private function_26a4b7f5(w_gravityspikes) {
   self clientfield::set("gravity_shock_wave_fx", 0);
 }
 
-private function_6a21cc79(e_player, w_gravityspikes) {
+function_6a21cc79(e_player, w_gravityspikes) {
   self endon(#"death");
 
-  if(self.zm_ai_category == #"basic" || self.zm_ai_category == #"enhanced") {
+  if(self.zm_ai_category == # "basic" || self.zm_ai_category == # "enhanced") {
     [[level.ai_gravity_throttle]] - > waitinqueue(self);
     n_damage = self.maxhealth * 0.25;
     self clientfield::increment("gravity_aoe_impact_tu6");
@@ -381,14 +380,14 @@ private function_6a21cc79(e_player, w_gravityspikes) {
     return;
   }
 
-  if(self.zm_ai_category == #"popcorn") {
+  if(self.zm_ai_category == # "popcorn") {
     self clientfield::increment("gravity_aoe_impact_tu6");
     [[level.ai_gravity_throttle]] - > waitinqueue(self);
     self dodamage(self.health + 100, self.origin, e_player, e_player, "head", "MOD_ELECTROCUTED", 0, w_gravityspikes);
     return;
   }
 
-  if(self.zm_ai_category == #"miniboss" || self.zm_ai_category == #"boss") {
+  if(self.zm_ai_category == # "miniboss" || self.zm_ai_category == # "boss") {
     self clientfield::increment("gravity_aoe_impact_tu6");
     [[level.ai_gravity_throttle]] - > waitinqueue(self);
     self dodamage(self.maxhealth * 0.1, self.origin, e_player, e_player, "head", "MOD_ELECTROCUTED", 0, w_gravityspikes);
@@ -400,7 +399,7 @@ private function_6a21cc79(e_player, w_gravityspikes) {
   self dodamage(self.maxhealth * 0.2, self.origin, e_player, e_player, "head", "MOD_ELECTROCUTED", 0, w_gravityspikes);
 }
 
-private electrocute_actor(ai_zombie) {
+electrocute_actor(ai_zombie) {
   self endon(#"disconnect");
 
   if(!isDefined(ai_zombie) || !isalive(ai_zombie)) {
@@ -425,7 +424,7 @@ private electrocute_actor(ai_zombie) {
   ai_zombie thread tesla_death(self);
 }
 
-private arc_damage_init(ai_zombie, params) {
+arc_damage_init(ai_zombie, params) {
   self endon(#"disconnect");
 
   if(ai_zombie ai::is_stunned()) {
@@ -435,7 +434,7 @@ private arc_damage_init(ai_zombie, params) {
   ai_zombie lightning_chain::arc_damage_ent(self, 1, params);
 }
 
-private tesla_death(e_player) {
+tesla_death(e_player) {
   self endon(#"death");
 
   if(isDefined(level.no_gib_in_wolf_area) && isDefined(self[[level.no_gib_in_wolf_area]]()) && self[[level.no_gib_in_wolf_area]]()) {
@@ -459,7 +458,7 @@ private tesla_death(e_player) {
   }
 }
 
-private function_cc9e1996() {
+function_cc9e1996() {
   self notify("3e6df5bd8abc99d1");
   self endon("3e6df5bd8abc99d1");
   self waittill(#"death");
@@ -486,7 +485,7 @@ private function_cc9e1996() {
 }
 
 function_28be8532(w_gravityspikes) {
-  self endon(#"disconnect", #"bled_out", #"death", #"gravity_spike_expired", #"hash_55b145e95edc2ebe");
+  self endon(#"disconnect", # "bled_out", # "death", # "gravity_spike_expired", # "hash_55b145e95edc2ebe");
 
   while(true) {
     s_result = self waittill(#"weapon_melee");
@@ -507,7 +506,7 @@ function_28be8532(w_gravityspikes) {
   }
 }
 
-private gravity_spike_position_valid() {
+gravity_spike_position_valid() {
   if(!ispointonnavmesh(self.origin, self)) {
     return 0;
   }
@@ -519,8 +518,8 @@ private gravity_spike_position_valid() {
   return 1;
 }
 
-private player_near_gravity_vortex() {
-  self endon(#"disconnect", #"bled_out", #"death", #"gravity_spike_expired");
+player_near_gravity_vortex() {
+  self endon(#"disconnect", # "bled_out", # "death", # "gravity_spike_expired");
 
   while(isDefined(self.b_gravity_trap_spikes_in_ground) && self.b_gravity_trap_spikes_in_ground && self.n_gravityspikes_state === 1 && isDefined(self.mdl_gravity_trap_fx_source)) {
     foreach(e_player in level.players) {
@@ -570,7 +569,7 @@ function_fa0a1b19() {
   self.var_f9c533d9[self.var_f9c533d9.size] = s_revive_override;
 }
 
-private function_23494ff7(e_revivee) {
+function_23494ff7(e_revivee) {
   if(!(isDefined(e_revivee.var_4fc8bf2a) && e_revivee.var_4fc8bf2a)) {
     if(self !== e_revivee) {
       e_revivee.var_ec334996 += 100;
@@ -583,9 +582,9 @@ private function_23494ff7(e_revivee) {
   }
 }
 
-private function_9c510b18(e_revivee) {
-  e_revivee endon(#"disconnect", #"death", #"bledout", #"stop_revive_trigger");
-  self waittill(#"disconnect", #"gravity_spike_expired");
+function_9c510b18(e_revivee) {
+  e_revivee endon(#"disconnect", # "death", # "bledout", # "stop_revive_trigger");
+  self waittill(#"disconnect", # "gravity_spike_expired");
   e_revivee thread function_569653b();
 }
 
@@ -669,19 +668,19 @@ function_1049648d(e_reviver, var_84280a99) {
 }
 
 plant_gravity_trap(w_gravityspikes) {
-  self endoncallback(&function_c9830e97, #"bled_out", #"death");
+  self endoncallback(&function_c9830e97, # "bled_out", # "death");
   self notify(#"hash_55b145e95edc2ebe");
   self thread zm_hero_weapon::function_4e984e83(w_gravityspikes, 0.35);
   self.var_80612bea = 1;
-  self thread zm_audio::create_and_play_dialog(#"hero_level_3", #"gravityspikes");
+  self thread zm_audio::create_and_play_dialog(#"hero_level_3", # "gravityspikes");
   v_forward = anglesToForward(self.angles);
   v_right = anglestoright(self.angles);
   v_spawn_pos_right = self.origin + (0, 0, 32);
   v_spawn_pos_left = v_spawn_pos_right;
   a_trace = physicstraceex(v_spawn_pos_right, v_spawn_pos_right + v_right * 24, (-16, -16, -16), (16, 16, 16), self);
-  v_spawn_pos_right += v_right * a_trace[#"fraction"] * 24;
+  v_spawn_pos_right += v_right * a_trace[# "fraction"] * 24;
   a_trace = physicstraceex(v_spawn_pos_left, v_spawn_pos_left + v_right * -24, (-16, -16, -16), (16, 16, 16), self);
-  v_spawn_pos_left += v_right * a_trace[#"fraction"] * -24;
+  v_spawn_pos_left += v_right * a_trace[# "fraction"] * -24;
   var_f4daeb3f = util::function_97cf7eb0(v_spawn_pos_right, 1000, 24);
   var_d7061a0d = util::function_97cf7eb0(v_spawn_pos_left, 1000, 24);
   a_s_spawn_pos = array(var_f4daeb3f, var_d7061a0d);
@@ -689,7 +688,7 @@ plant_gravity_trap(w_gravityspikes) {
 
   if(self isonground()) {
     var_aa0fedb0 = {
-      #position: self.origin + (0, 0, 32), 
+      #position: self.origin + (0, 0, 32),
       #entity: self getgroundent()
     };
   } else {
@@ -721,8 +720,8 @@ function_c9830e97(var_c34665fc) {
   }
 }
 
-private gravity_trap_loop(w_gravityspikes) {
-  self endon(#"disconnect", #"bled_out", #"death");
+gravity_trap_loop(w_gravityspikes) {
+  self endon(#"disconnect", # "bled_out", # "death");
   is_gravity_trap_fx_on = 1;
 
   while(true) {
@@ -744,8 +743,8 @@ private gravity_trap_loop(w_gravityspikes) {
   }
 }
 
-private gravity_trap_check(player) {
-  player endon(#"disconnect", #"bled_out", #"death");
+gravity_trap_check(player) {
+  player endon(#"disconnect", # "bled_out", # "death");
   assert(isDefined(level.ai_gravity_throttle));
   assert(isDefined(player));
 
@@ -774,7 +773,7 @@ private gravity_trap_check(player) {
   }
 }
 
-private create_gravity_trap_spikes_in_ground(a_s_spawn_pos) {
+create_gravity_trap_spikes_in_ground(a_s_spawn_pos) {
   if(!isDefined(self.mdl_gravity_trap_spikes)) {
     self.mdl_gravity_trap_spikes = [];
   }
@@ -804,18 +803,18 @@ private create_gravity_trap_spikes_in_ground(a_s_spawn_pos) {
   }
 }
 
-private gravity_spike_planted_play() {
+gravity_spike_planted_play() {
   self endon(#"death");
   wait 2;
   self useanimtree("generic");
   self animation::play(#"o_spikes_stand_plant", self, undefined, 1, 0, 0, 0, 0, 0, 0, undefined, undefined);
 }
 
-private destroy_gravity_trap_spikes_in_ground() {
+destroy_gravity_trap_spikes_in_ground() {
   mdl_spike_source = self.mdl_gravity_trap_fx_source;
   mdl_gravity_trap_spikes = self.mdl_gravity_trap_spikes;
   self.var_6d772cb = mdl_spike_source;
-  self waittill(#"destroy_ground_spikes", #"disconnect", #"bled_out");
+  self waittill(#"destroy_ground_spikes", # "disconnect", # "bled_out");
   self.var_6d772cb = undefined;
 
   if(isDefined(mdl_spike_source)) {
@@ -837,8 +836,8 @@ private destroy_gravity_trap_spikes_in_ground() {
   }
 }
 
-private gravity_trap_fx_on(s_spawn_pos) {
-  self endoncallback(&function_f1c63c4c, #"disconnect");
+gravity_trap_fx_on(s_spawn_pos) {
+  self endoncallback(&function_f1c63c4c, # "disconnect");
 
   if(!isDefined(self.mdl_gravity_trap_fx_source)) {
     self.mdl_gravity_trap_fx_source = util::spawn_model("tag_origin", s_spawn_pos.position);
@@ -862,7 +861,7 @@ function_f1c63c4c(str_notify) {
   }
 }
 
-private gravity_trap_fx_off() {
+gravity_trap_fx_off() {
   if(!isDefined(self.mdl_gravity_trap_fx_source)) {
     return;
   }
@@ -876,7 +875,7 @@ update_gravityspikes_state(n_gravityspikes_state) {
   self.n_gravityspikes_state = n_gravityspikes_state;
 }
 
-private check_for_range_and_los(v_attack_source, n_allowed_z_diff, n_radius_sq) {
+check_for_range_and_los(v_attack_source, n_allowed_z_diff, n_radius_sq) {
   if(isalive(self)) {
     n_z_diff = self.origin[2] - v_attack_source[2];
 
@@ -894,7 +893,7 @@ private check_for_range_and_los(v_attack_source, n_allowed_z_diff, n_radius_sq) 
   return false;
 }
 
-private gravityspikes_target_filtering(ai_enemy) {
+gravityspikes_target_filtering(ai_enemy) {
   b_callback_result = 1;
 
   if(isDefined(level.var_722474af)) {
@@ -904,7 +903,7 @@ private gravityspikes_target_filtering(ai_enemy) {
   return b_callback_result;
 }
 
-private zombie_lift(player, v_attack_source, n_push_away, n_lift_height, v_lift_offset, n_lift_speed) {
+zombie_lift(player, v_attack_source, n_push_away, n_lift_height, v_lift_offset, n_lift_speed) {
   self endon(#"death");
   w_gravityspikes = player.var_fd05e363;
 
@@ -917,7 +916,7 @@ private zombie_lift(player, v_attack_source, n_push_away, n_lift_height, v_lift_
     return;
   }
 
-  if(self.zm_ai_category === #"popcorn") {
+  if(self.zm_ai_category === # "popcorn") {
     [[level.ai_gravity_throttle]] - > waitinqueue(self);
     self.no_powerups = 1;
     self dodamage(self.health + 100, self.origin, player, player, "head", "MOD_ELECTROCUTED", 0, w_gravityspikes);
@@ -925,7 +924,7 @@ private zombie_lift(player, v_attack_source, n_push_away, n_lift_height, v_lift_
     return;
   }
 
-  if(self.zm_ai_category === #"miniboss") {
+  if(self.zm_ai_category === # "miniboss") {
     [[level.ai_gravity_throttle]] - > waitinqueue(self);
 
     if(isalive(self) && isDefined(self.b_melee_kill) && self.b_melee_kill && !(isDefined(self.var_5bf7575e) && self.var_5bf7575e) && !(isDefined(player.b_gravity_trap_spikes_in_ground) && player.b_gravity_trap_spikes_in_ground)) {
@@ -944,7 +943,7 @@ private zombie_lift(player, v_attack_source, n_push_away, n_lift_height, v_lift_
       self thread track_lifted_for_ragdoll_count();
       self.var_42d5176d = 1;
       self val::set(#"trap_ignore", "ignoreall", 1);
-      v_pos = groundtrace(self.origin + (0, 0, 100), self.origin + (0, 0, -1000), 0, self)[#"position"];
+      v_pos = groundtrace(self.origin + (0, 0, 100), self.origin + (0, 0, -1000), 0, self)[# "position"];
 
       if(!isDefined(v_pos)) {
         v_pos = self.origin;
@@ -981,7 +980,7 @@ private zombie_lift(player, v_attack_source, n_push_away, n_lift_height, v_lift_
     return;
   }
 
-  if(self.zm_ai_category === #"boss") {
+  if(self.zm_ai_category === # "boss") {
     if(isalive(self) && isDefined(self.b_melee_kill) && self.b_melee_kill && !(isDefined(self.var_5bf7575e) && self.var_5bf7575e) && !(isDefined(player.b_gravity_trap_spikes_in_ground) && player.b_gravity_trap_spikes_in_ground)) {
       [
         [level.ai_gravity_throttle]
@@ -997,7 +996,7 @@ private zombie_lift(player, v_attack_source, n_push_away, n_lift_height, v_lift_
       ] - > waitinqueue(self);
       self dodamage(self.maxhealth * 0.05, self.origin, player, player, "head", "MOD_ELECTROCUTED", 0, w_gravityspikes);
       self.var_42d5176d = 1;
-      self waittill(#"death", #"gravity_trap_complete");
+      self waittill(#"death", # "gravity_trap_complete");
       self.var_42d5176d = undefined;
       self.in_gravity_trap = undefined;
     }
@@ -1016,11 +1015,11 @@ private zombie_lift(player, v_attack_source, n_push_away, n_lift_height, v_lift_
     v_away_from_source *= n_push_away;
     v_away_from_source = (v_away_from_source[0], v_away_from_source[1], n_lift_height);
     a_trace = physicstraceex(v_centroid + (0, 0, 32), v_centroid + v_away_from_source, (-16, -16, -16), (16, 16, 16), self);
-    v_lift = a_trace[#"fraction"] * v_away_from_source;
+    v_lift = a_trace[# "fraction"] * v_away_from_source;
     v_lift += v_lift_offset;
 
     if(!(isDefined(bullettracepassed(v_centroid, v_centroid + v_lift, 0, self)) && bullettracepassed(v_centroid, v_centroid + v_lift, 0, self))) {
-      v_trace_pos = bulletTrace(v_centroid, v_centroid + v_lift, 0, self)[#"position"];
+      v_trace_pos = bulletTrace(v_centroid, v_centroid + v_lift, 0, self)[# "position"];
 
       if(isDefined(v_trace_pos)) {
         v_lift = v_trace_pos + v_lift_offset;
@@ -1106,20 +1105,20 @@ function_8d31d238(a_ents) {
   }
 }
 
-private gravity_trap_notify_watcher(player) {
+gravity_trap_notify_watcher(player) {
   self endon(#"gravity_trap_complete");
 
   if(isDefined(self.mdl_trap_mover)) {
     self thread gravity_trap_timeout_watcher();
   }
 
-  util::waittill_any_ents(self, "death", player, #"gravity_spike_expired", player, "disconnect", player, "bled_out");
+  util::waittill_any_ents(self, "death", player, # "gravity_spike_expired", player, "disconnect", player, "bled_out");
   self notify(#"gravity_trap_complete");
 }
 
-private gravity_trap_timeout_watcher() {
+gravity_trap_timeout_watcher() {
   self endon(#"gravity_trap_complete");
-  self.mdl_trap_mover waittilltimeout(4, #"movedone");
+  self.mdl_trap_mover waittilltimeout(4, # "movedone");
 
   if(isalive(self) && !(isDefined(self.b_melee_kill) && self.b_melee_kill)) {
     wait randomfloatrange(0.2, 1);
@@ -1128,7 +1127,7 @@ private gravity_trap_timeout_watcher() {
   self notify(#"gravity_trap_complete");
 }
 
-private zombie_lift_wacky_rotate(n_lift_time, player) {
+zombie_lift_wacky_rotate(n_lift_time, player) {
   player endon(#"gravity_spike_expired");
   self endon(#"death");
 
@@ -1140,7 +1139,7 @@ private zombie_lift_wacky_rotate(n_lift_time, player) {
   }
 }
 
-private zombie_kill_and_gib(player) {
+zombie_kill_and_gib(player) {
   self endon(#"death");
 
   if(isDefined(player) && isDefined(player.var_fd05e363)) {
@@ -1169,20 +1168,20 @@ private zombie_kill_and_gib(player) {
   }
 }
 
-private track_lifted_for_ragdoll_count() {
+track_lifted_for_ragdoll_count() {
   level.n_zombies_lifted_for_ragdoll++;
-  self waittill(#"death", #"gravity_trap_complete");
+  self waittill(#"death", # "gravity_trap_complete");
   level.n_zombies_lifted_for_ragdoll--;
 }
 
-private corpse_off_navmesh_watcher(n_timeout) {
+corpse_off_navmesh_watcher(n_timeout) {
   self.b_ignore_cleanup = 1;
 
-  if(self.zm_ai_category !== #"basic" && self.zm_ai_category !== #"enhanced") {
+  if(self.zm_ai_category !== # "basic" && self.zm_ai_category !== # "enhanced") {
     return;
   }
 
-  s_result = self waittilltimeout(n_timeout, #"actor_corpse", #"deleted");
+  s_result = self waittilltimeout(n_timeout, # "actor_corpse", # "deleted");
 
   if(s_result._notify == "actor_corpse") {
     v_pos = getclosestpointonnavmesh(s_result.corpse.origin, 256);
@@ -1199,7 +1198,7 @@ private corpse_off_navmesh_watcher(n_timeout) {
   }
 }
 
-private do_zombie_explode() {
+do_zombie_explode() {
   waitframe(1);
 
   if(isDefined(self)) {
@@ -1218,7 +1217,7 @@ private do_zombie_explode() {
   }
 }
 
-private gravity_spike_melee_kill(v_position, player, var_52b14308) {
+gravity_spike_melee_kill(v_position, player, var_52b14308) {
   self.b_melee_kill = 1;
   self.var_46d39f48 = var_52b14308;
 
@@ -1228,10 +1227,10 @@ private gravity_spike_melee_kill(v_position, player, var_52b14308) {
 }
 
 function_478a4910(w_gravityspikes) {
-  self endon(#"disconnect", #"bled_out", #"death", #"gravity_spike_expired", #"gravity_spike_planted");
+  self endon(#"disconnect", # "bled_out", # "death", # "gravity_spike_expired", # "gravity_spike_planted");
   s_result = self waittill(#"weapon_melee_power_left");
 
   if(s_result.weapon == w_gravityspikes) {
-    self thread zm_audio::create_and_play_dialog(#"hero_level_2", #"gravityspikes");
+    self thread zm_audio::create_and_play_dialog(#"hero_level_2", # "gravityspikes");
   }
 }

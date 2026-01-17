@@ -4,11 +4,9 @@
 ************************************************************/
 
 #include scripts\core_common\lui_shared;
-
 #namespace ct_timer_mod_ticks;
 
 class cct_timer_mod_ticks: cluielem {
-
   function set_timemod(localclientnum, value) {
     set_data(localclientnum, "timeMod", value);
   }
@@ -53,12 +51,12 @@ class cct_timer_mod_ticks: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, #"ct_timer_mod_ticks");
+    cluielem::open(localclientnum, # "ct_timer_mod_ticks");
   }
 
   function function_fa582112(localclientnum) {
     cluielem::function_fa582112(localclientnum);
-    set_state(localclientnum, #"defaultstate");
+    set_state(localclientnum, # "defaultstate");
     set_data(localclientnum, "timeMod", 0);
   }
 

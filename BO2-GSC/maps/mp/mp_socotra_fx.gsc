@@ -7,11 +7,9 @@
 #include maps\mp\createfx\mp_socotra_fx;
 #include maps\mp\createart\mp_socotra_art;
 
-precache_util_fx() {
-}
+precache_util_fx() {}
 
-precache_scripted_fx() {
-}
+precache_scripted_fx() {}
 
 #using_animtree("fxanim_props");
 

@@ -9,7 +9,6 @@
 #include scripts\zm_common\zm_loadout;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
-
 #namespace zm_trial_no_ads;
 
 autoexec __init__system__() {
@@ -24,7 +23,7 @@ __init__() {
   zm_trial::register_challenge(#"no_ads", &on_begin, &on_end);
 }
 
-private on_begin() {
+on_begin() {
   callback::on_spawned(&function_dc856fd8);
   callback::on_ai_spawned(&on_ai_spawned);
 
@@ -51,7 +50,7 @@ private on_begin() {
   level zm_trial::function_cd75b690(1);
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   callback::remove_on_spawned(&function_dc856fd8);
   callback::function_824d206(&function_33f0ddd3);
   callback::remove_on_ai_spawned(&on_ai_spawned);
@@ -81,14 +80,14 @@ on_ai_spawned(params) {
   self disableaimassist();
 }
 
-private function_dc856fd8() {
+function_dc856fd8() {
   self notify("7b8b17371dc9188f");
   self endon("7b8b17371dc9188f");
-  self endon(#"disconnect", #"allow_ads");
+  self endon(#"disconnect", # "allow_ads");
   self allowads(0);
 
   while(true) {
-    self waittill(#"crafting_fail", #"crafting_success", #"bgb_update");
+    self waittill(#"crafting_fail", # "crafting_success", # "bgb_update");
 
     if(isalive(self)) {
       self allowads(0);
@@ -96,8 +95,8 @@ private function_dc856fd8() {
   }
 }
 
-private function_16824dc3() {
-  self endon(#"disconnect", #"allow_ads");
+function_16824dc3() {
+  self endon(#"disconnect", # "allow_ads");
 
   while(true) {
     w_curr = self getcurrentweapon();
@@ -114,7 +113,7 @@ private function_16824dc3() {
   }
 }
 
-private function_33f0ddd3(s_event) {
+function_33f0ddd3(s_event) {
   if(s_event.event === "give_weapon") {
     self lockweapon(s_event.weapon, 0, 1);
 
@@ -125,7 +124,7 @@ private function_33f0ddd3(s_event) {
 }
 
 function_2d961b95() {
-  self endon(#"disconnect", #"allow_ads");
+  self endon(#"disconnect", # "allow_ads");
 
   while(true) {
     s_waitresult = self waittill(#"weapon_change");

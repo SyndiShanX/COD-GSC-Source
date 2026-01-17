@@ -17,7 +17,7 @@ spawn_manager_main() {
   level thread spawn_manager_throttle_think();
   level.spawn_managers = [];
   trigger_spawn_manager_setup();
-  array_func(getentarray("spawn_manager", "classname"), ::spawn_manager_create_spawn_manager_struct);
+  array_func(getEntArray("spawn_manager", "classname"), ::spawn_manager_create_spawn_manager_struct);
   array_thread(level.spawn_managers, ::spawn_manager_think);
   start_triggers();
 
@@ -40,7 +40,7 @@ trigger_spawn_manager_setup() {
 trigger_spawn_manager_create(trigger) {
   ents = undefined;
   assert(isDefined(trigger.target), "Trigger at " + trigger.origin + " is a spawn manager type ( TRIGGER_SPAWN_MANAGER ) but does not target any spawners");
-  ents = getentarray(trigger.target, "targetname");
+  ents = getEntArray(trigger.target, "targetname");
 
   for(i = 0; i < ents.size; i++) {
     ent = ents[i];
@@ -55,7 +55,7 @@ spawn_manager_create_spawn_manager_struct(from_ent) {
   if(!isDefined(from_ent))
     from_ent = self;
 
-  spawn_manager_ent = spawnstruct();
+  spawn_manager_ent = spawnStruct();
   spawn_manager_ent.script_noteworthy = "spawn_manager";
   is_trigger = issubstr(tolower(from_ent.classname), "trigger");
 
@@ -275,7 +275,7 @@ spawn_manager_think() {
   self.activeai = [];
   self.spawncount = 0;
   isfirsttime = 1;
-  self.allspawners = getentarray(self.target, "targetname");
+  self.allspawners = getEntArray(self.target, "targetname");
   assert(self.allspawners.size, "Spawn manager '" + self.sm_id + "' doesn't target any spawners.");
   self waittill("enable");
   script_delay();

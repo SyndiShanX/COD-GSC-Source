@@ -26,14 +26,14 @@ autoexec init_plaza() {
   add_spawn_function_group("plaza_balcony_sniper0", "script_noteworthy", ::init_balcony_ai);
   add_spawn_function_group("plaza_gunner", "targetname", ::plaza_gunner);
   a_prop = getent("plaza_cart_1", "targetname");
-  a_prop_links = getentarray("plaza_cart_1_link", "targetname");
+  a_prop_links = getEntArray("plaza_cart_1_link", "targetname");
   level thread cart_1_watcher();
 
   foreach(m_prop_link in a_prop_links)
   m_prop_link linkto(a_prop);
 
   a_prop = getent("plaza_cart_2", "targetname");
-  a_prop_links = getentarray("plaza_cart_2_link", "targetname");
+  a_prop_links = getEntArray("plaza_cart_2_link", "targetname");
   level thread cart_2_watcher();
 
   foreach(m_prop_link in a_prop_links)
@@ -442,7 +442,7 @@ clear_behind() {
       if(level.player.origin[1] - ai_enemy.origin[1] < 512) {
         continue;
       }
-      a_nearest_friendly = spawnstruct();
+      a_nearest_friendly = spawnStruct();
       a_nearest_friendly.dist_sq = 262144;
 
       foreach(ai_friendly in a_friendlies) {
@@ -522,7 +522,7 @@ plaza_harper_movement_left() {
   level endon("delete_plaza_left_color");
   trigger_wait("color_plaza_left_0");
   level notify("delete_plaza_right_color");
-  a_plaza_right_color = getentarray("plaza_right_color", "script_noteworthy");
+  a_plaza_right_color = getEntArray("plaza_right_color", "script_noteworthy");
 
   foreach(t_plaza_right_color in a_plaza_right_color)
   t_plaza_right_color delete();
@@ -534,7 +534,7 @@ plaza_harper_movement_right() {
   level endon("delete_plaza_right_color");
   trigger_wait("sm_plaza_right_0");
   level notify("delete_plaza_left_color");
-  a_plaza_left_color = getentarray("plaza_left_color", "script_noteworthy");
+  a_plaza_left_color = getEntArray("plaza_left_color", "script_noteworthy");
 
   foreach(t_plaza_left_color in a_plaza_left_color)
   t_plaza_left_color delete();
@@ -606,10 +606,10 @@ f35_crash_fx(m_f35) {
 
 f35_crash_sound() {
   temp_ent = spawn("script_origin", (12331, -440, 657));
-  temp_ent playsound("evt_f35_crash_incoming");
+  temp_ent playSound("evt_f35_crash_incoming");
   wait 2;
   clientnotify("snd_f35_crash");
-  level.player playsound("evt_f35_crash_impact");
+  level.player playSound("evt_f35_crash_impact");
   level.player playrumbleonentity("artillery_rumble");
   earthquake(0.5, 4.0, level.player.origin, 100);
   temp_ent delete();
@@ -627,7 +627,7 @@ kill_player_if_run_over(str_scene_name) {
 }
 
 cleanup_street() {
-  a_fxanim_models = getentarray("fxanim", "script_noteworthy");
+  a_fxanim_models = getEntArray("fxanim", "script_noteworthy");
 
   foreach(ent in a_fxanim_models) {
     e_linked = ent getlinkedent();
@@ -699,8 +699,7 @@ lockbreaker() {
   level thread intruder_sam();
 }
 
-lockbreaker_planted(m_player) {
-}
+lockbreaker_planted(m_player) {}
 
 lockbreaker_door_open(m_player) {
   m_left_org = getent("lockbreaker_left", "targetname");
@@ -810,7 +809,7 @@ update_drone_sam_attack_score() {
 }
 
 fxanim_drones() {
-  a_fxanim_drones = getentarray("fxanim_ambient_drone", "targetname");
+  a_fxanim_drones = getEntArray("fxanim_ambient_drone", "targetname");
   level.is_player_in_sam = 1;
 
   foreach(m_drone in a_fxanim_drones) {

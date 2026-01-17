@@ -51,8 +51,7 @@ precache_createfx_fx() {
   level._effect["fx_mp_nuke_steam_sm_fast"] = loadfx("maps/mp_maps/fx_mp_nuke_steam_sm_fast");
 }
 
-precache_scripted_fx() {
-}
+precache_scripted_fx() {}
 
 #using_animtree("fxanim_props");
 
@@ -77,12 +76,12 @@ fxanim_init(localclientnum) {
     }
   }
 
-  fxanims = getentarray(localclientnum, "fxanim", "targetname");
+  fxanims = getEntArray(localclientnum, "fxanim", "targetname");
 
   foreach(ent in fxanims) {
     if(isDefined(ent.model) && ent.model == "fxanim_mp_nuked2025_sprinkler_mod") {
       ent waittill_dobj(localclientnum);
-      ent playloopsound("amb_track_sprinkler");
+      ent playLoopSound("amb_track_sprinkler");
     }
   }
 }

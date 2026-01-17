@@ -394,9 +394,7 @@ onFlashbanged() {
 
 onDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset) {
   if(isDefined(level.dlc_can_do_pain_override_func)) {
-    painAllowed = [
-      [level.dlc_can_do_pain_override_func]
-    ]("move");
+    painAllowed = [[level.dlc_can_do_pain_override_func]]("move");
     if(!painAllowed)
       return;
   }
@@ -415,7 +413,7 @@ DoStumble(iDFlags, damageDirection, hitLocation, iDamage, sMeansOfDeath, eAttack
   self.stateLocked = true;
   self.playing_pain_animation = true;
 
-  is_stun = (iDFlags & level.iDFLAGS_STUN);
+  is_stun = (iDFlags &level.iDFLAGS_STUN);
 
   if(sMeansOfDeath == "MOD_MELEE" || is_stun) {
     animState = "pain_pushback";

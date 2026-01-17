@@ -6,12 +6,11 @@
 #include common_scripts\utility;
 
 main(painter_spmp) {
+  painter_setup_array = getEntArray("painter_setup", "targetname");
 
-  painter_setup_array = getentarray("painter_setup", "targetname");
-
-  if(!painter_setup_array.size)
+  if(!painter_setup_array.size) {
     return;
-
+  }
   if(!getdvarint("painter")) {
     array_thread(painter_setup_array, ::painter_clean_me);
     return;
@@ -34,7 +33,7 @@ main(painter_spmp) {
 }
 
 painter_clean_me() {
-  if(isdefined(self.target)) {
+  if(isDefined(self.target)) {
     ent = getent(self.target, "targetname");
     ent delete();
   }
@@ -42,23 +41,22 @@ painter_clean_me() {
 }
 
 default_undefined() {
-  if(!isdefined(self.bPosedstyle))
+  if(!isDefined(self.bPosedstyle))
     self.bPosedstyle = false;
-  if(!isdefined(self.bOrienttoplayeryrot))
+  if(!isDefined(self.bOrienttoplayeryrot))
     self.bOrienttoplayeryrot = false;
-  if(!isdefined(self.bTreeOrient))
+  if(!isDefined(self.bTreeOrient))
     self.bTreeOrient = false;
-  if(!isdefined(self.bFacade))
+  if(!isDefined(self.bFacade))
     self.bFacade = false;
-  if(!isdefined(self.density))
+  if(!isDefined(self.density))
     self.density = 32;
-  if(!isdefined(self.radius))
+  if(!isDefined(self.radius))
     self.radius = 84;
-  if(!isdefined(self.maxdist))
+  if(!isDefined(self.maxdist))
     self.maxdist = 1000;
-  if(!isdefined(self.angleoffset))
+  if(!isDefined(self.angleoffset))
     self.angleoffset = [];
-
 }
 
 setup_painter_group(group) {
@@ -77,15 +75,15 @@ setup_painter_group(group) {
   foreach(obj in group) {
     angleoffset = get_angle_offset(obj);
     offsetheight = get_height_offset(obj);
-    modeluseprefab = (isdefined(obj.script_parameters) && obj.script_parameters == "use_prefab_model");
+    modeluseprefab = (isDefined(obj.script_parameters) && obj.script_parameters == "use_prefab_model");
 
-    if(isdefined(obj.radius))
+    if(isDefined(obj.radius))
       radius = obj.radius;
-    if(isdefined(obj.script_painter_treeorient) && obj.script_painter_treeorient)
+    if(isDefined(obj.script_painter_treeorient) && obj.script_painter_treeorient)
       bTreeOrient = true;
-    if(isdefined(obj.script_painter_maxdist) && obj.script_painter_maxdist)
+    if(isDefined(obj.script_painter_maxdist) && obj.script_painter_maxdist)
       maxdist = obj.script_painter_maxdist;
-    if(isdefined(obj.script_painter_facade) && obj.script_painter_facade)
+    if(isDefined(obj.script_painter_facade) && obj.script_painter_facade)
       bFacade = true;
     foreach(other_obj in group_copy) {
       if(obj == other_obj)
@@ -102,39 +100,37 @@ setup_painter_group(group) {
 }
 
 get_angle_offset(obj) {
-  if(!isdefined(obj.target))
+  if(!isDefined(obj.target))
     return undefined;
 
   targent = getent(obj.target, "targetname");
-  assert(isdefined(targent));
+  assert(isDefined(targent));
   return targent.angles - obj.angles;
 }
 
 get_height_offset(obj) {
-  if(!isdefined(obj.target))
+  if(!isDefined(obj.target))
     return undefined;
 
   targent = getent(obj.target, "targetname");
-  assert(isdefined(targent));
+  assert(isDefined(targent));
   origin = targent.origin[2] - obj.origin[2];
   targent delete();
   return origin;
 }
 
-
-
 get_painter_groups(painter_setup_array) {
   groups = [];
   script_paintergroup = "";
   foreach(paint_obj in painter_setup_array) {
-    if(!isdefined(paint_obj.script_paintergroup)) {
+    if(!isDefined(paint_obj.script_paintergroup)) {
       paint_obj.script_paintergroup = paint_obj.model;
     }
     script_paintergroup = paint_obj.script_paintergroup;
 
     level.painter_startgroup = script_paintergroup;
 
-    if(!isdefined(groups[script_paintergroup]) || !groups[script_paintergroup].size)
+    if(!isDefined(groups[script_paintergroup]) || !groups[script_paintergroup].size)
       groups[script_paintergroup] = [];
     groups[script_paintergroup][groups[script_paintergroup].size] = paint_obj;
   }
@@ -166,7 +162,7 @@ painter_initvars(painter_spmp) {
 }
 
 hack_start(painter_spmp) {
-  if(!isdefined(painter_spmp))
+  if(!isDefined(painter_spmp))
     painter_spmp = "painter";
 
   precachemenu(painter_spmp);
@@ -176,7 +172,7 @@ hack_start(painter_spmp) {
   // get the player going.I don't handle people dieing in this tool since they are in ufo mode anyway.
 
   flag_init("user_alive");
-  while (!isdefined(get_player()))
+  while(!isDefined(get_player()))
     wait .05;
   level.painter_player = get_player();
   wait .05;
@@ -194,7 +190,7 @@ hack_start(painter_spmp) {
 }
 
 painter_init() {
-  array_call(getentarray("script_model", "classname"), ::delete);
+  array_call(getEntArray("script_model", "classname"), ::delete);
   setcurrentgroup(level.painter_startgroup);
   level.painter_startgroup = undefined;
   playerInit();
@@ -213,7 +209,6 @@ hud_update_placed_model_count() {
   b = g;
 
   level.hud_controler["helppm"].description.color = (r, g, b);
-
 }
 
 hud_init() {
@@ -232,7 +227,7 @@ hud_init() {
   alphainc = .5 / div;
   alpha = alphainc;
 
-  for (i = 0; i < listsize; i++) {
+  for(i = 0; i < listsize; i++) {
     hudelems[i] = _newhudelem();
     hudelems[i].location = 0;
     hudelems[i].alignX = "left";
@@ -310,7 +305,6 @@ hint_buttons_main() {
   controler_hud_update_text("helpdpl", "^8zOffset Clear ^7 / Set");
   controler_hud_update_text("helpdpu", "^8Rotation Clear ^7 / Set");
   //	controler_hud_update_text( "helpF", text );
-
 }
 
 hint_buttons_zoffset() {
@@ -339,7 +333,7 @@ setcurrentgroup(group) {
   keys = getarraykeys(level.spam_model_group);
   index = 0;
   div = int(level.spam_group_hudelems.size / 2);
-  for (i = 0; i < keys.size; i++)
+  for(i = 0; i < keys.size; i++)
     if(keys[i] == group) {
       index = i;
       break;
@@ -347,7 +341,7 @@ setcurrentgroup(group) {
 
   level.spam_group_hudelems[div] _settext(keys[index]);
 
-  for (i = 1; i < level.spam_group_hudelems.size - div; i++) {
+  for(i = 1; i < level.spam_group_hudelems.size - div; i++) {
     if(index - i < 0) {
       level.spam_group_hudelems[div + i] _settext(".");
       continue;
@@ -355,9 +349,9 @@ setcurrentgroup(group) {
     level.spam_group_hudelems[div + i] _settext(keys[index - i]);
   }
 
-  for (i = 1; i < level.spam_group_hudelems.size - div; i++) {
+  for(i = 1; i < level.spam_group_hudelems.size - div; i++) {
     if(index + i > keys.size - 1) {
-      //-- -- 
+      //-- --
       level.spam_group_hudelems[div - i] _settext(".");
       continue;
     }
@@ -379,7 +373,7 @@ setcurrentgroup(group) {
 setgroup_up() {
   index = undefined;
   keys = getarraykeys(level.spam_model_group);
-  for (i = 0; i < keys.size; i++)
+  for(i = 0; i < keys.size; i++)
     if(keys[i] == level.spam_model_current_group) {
       index = i + 1;
       break;
@@ -387,14 +381,14 @@ setgroup_up() {
   if(index == keys.size)
     return;
   setcurrentgroup(keys[index]);
-  while (level.painter_player buttonpressed("BUTTON_Y"))
+  while(level.painter_player buttonpressed("BUTTON_Y"))
     wait .05;
 }
 
 setgroup_down() {
   index = undefined;
   keys = getarraykeys(level.spam_model_group);
-  for (i = 0; i < keys.size; i++)
+  for(i = 0; i < keys.size; i++)
     if(keys[i] == level.spam_model_current_group) {
       index = i - 1;
       break;
@@ -402,18 +396,18 @@ setgroup_down() {
   if(index < 0)
     return;
   setcurrentgroup(keys[index]);
-  while (level.painter_player buttonpressed("BUTTON_X"))
+  while(level.painter_player buttonpressed("BUTTON_X"))
     wait .05;
 }
 
 Add_Spammodel(group, model, bTreeOrient, bFacade, density, radius, maxdist, offsetheight, bPosedstyle, bOrienttoplayeryrot, angleoffset, modelusesprefab) {
-  if(!isdefined(level.spam_model_group[group])) {
-    struct = spawnstruct();
+  if(!isDefined(level.spam_model_group[group])) {
+    struct = spawnStruct();
     level.spam_model_group[group] = struct;
     level.spam_model_group[group].models = [];
   }
 
-  if(!isdefined(angleoffset))
+  if(!isDefined(angleoffset))
     angleoffset = (0, 0, 0);
 
   level.spam_model_group[group].bFacade = bFacade;
@@ -424,15 +418,15 @@ Add_Spammodel(group, model, bTreeOrient, bFacade, density, radius, maxdist, offs
   level.spam_model_group[group].bPosedstyle = bPosedstyle;
   level.spam_model_group[group].bOrienttoplayeryrot = bOrienttoplayeryrot;
 
-  if(!isdefined(level.spam_model_group[group].angleoffset))
+  if(!isDefined(level.spam_model_group[group].angleoffset))
     level.spam_model_group[group].angleoffset = [];
   level.spam_model_group[group].angleoffset[model] = angleoffset;
 
-  if(!isdefined(level.spam_model_group[group].heightoffset))
+  if(!isDefined(level.spam_model_group[group].heightoffset))
     level.spam_model_group[group].heightoffset = [];
   level.spam_model_group[group].heightoffset[model] = offsetheight;
 
-  if(!isdefined(level.spam_model_group[group].modelusesprefab))
+  if(!isDefined(level.spam_model_group[group].modelusesprefab))
     level.spam_model_group[group].modelusesprefab = [];
   level.spam_model_group[group].modelusesprefab[model] = modelusesprefab;
 
@@ -444,7 +438,7 @@ playerInit() {
   level.painter_player takeAllWeapons();
 
   flag_wait("user_hud_active");
-  while (1) {
+  while(1) {
     trace = player_view_trace();
     draw_placement_circle(trace);
     if(level.painter_player buttonpressed("f"))
@@ -487,10 +481,10 @@ customheight_mode_off() {
 }
 
 customheight_mode(trace, button) {
-  if(trace["fraction"] == 1)
+  if(trace["fraction"] == 1) {
     return;
-
-  while (level.painter_player buttonpressed(button))
+  }
+  while(level.painter_player buttonpressed(button))
     wait .05;
 
   level.spam_models_isCustomheight = true;
@@ -502,7 +496,7 @@ customheight_mode(trace, button) {
   dir = 1;
 
   origin = trace["position"];
-  while (!level.painter_player buttonpressed(button)) {
+  while(!level.painter_player buttonpressed(button)) {
     height = level.spam_models_customheight;
     if(level.painter_player buttonpressed("BUTTON_A"))
       dir = -1;
@@ -522,7 +516,7 @@ customheight_mode(trace, button) {
   }
   array_thread(models, ::deleteme);
   hint_buttons_main();
-  while (level.painter_player buttonpressed(button))
+  while(level.painter_player buttonpressed(button))
     wait .05;
 }
 
@@ -536,10 +530,10 @@ customrotation_mode_off() {
 }
 
 customrotation_mode(trace, button) {
-  if(trace["fraction"] == 1)
+  if(trace["fraction"] == 1) {
     return;
-
-  while (level.painter_player buttonpressed(button))
+  }
+  while(level.painter_player buttonpressed(button))
     wait .05;
 
   hint_buttons_rotation();
@@ -553,7 +547,7 @@ customrotation_mode(trace, button) {
   otherangleinc = 1;
   dir = 0;
 
-  while (!level.painter_player buttonpressed(button)) {
+  while(!level.painter_player buttonpressed(button)) {
     dir = 0;
     if(level.painter_player buttonpressed("BUTTON_A"))
       dir = -1;
@@ -567,19 +561,18 @@ customrotation_mode(trace, button) {
     draw_placement_circle(trace, (0, 0, 1));
     level.spam_models_customrotation = level.painter_player getplayerangles();
     level.spam_models_customrotation += (0, 0, otherangle);
-    for (i = 0; i < models.size; i++)
+    for(i = 0; i < models.size; i++)
       models[i].angles = level.spam_models_customrotation;
     wait .05;
   }
 
   hint_buttons_main();
 
-  while (level.painter_player buttonpressed(button))
+  while(level.painter_player buttonpressed(button))
     wait .05;
 
-  for (i = 0; i < models.size; i++)
+  for(i = 0; i < models.size; i++)
     models[i] thread deleteme();
-
 }
 
 deleteme() {
@@ -640,7 +633,7 @@ spam_model_densityscale(trace, dir) {
 }
 
 draw_placement_circle(trace, coloroverride) {
-  if(!isdefined(coloroverride))
+  if(!isDefined(coloroverride))
     coloroverride = (0, 1, 0);
   if(trace["fraction"] == 1)
     return;
@@ -659,8 +652,8 @@ draw_placement_circle(trace, coloroverride) {
 
 player_view_trace() {
   maxdist = level.spam_maxdist;
-  traceorg = level.painter_player geteye();
-  return bullettrace(traceorg, traceorg + (anglestoforward(level.painter_player getplayerangles()) * maxdist), 0, self);
+  traceorg = level.painter_player getEye();
+  return bulletTrace(traceorg, traceorg + (anglesToForward(level.painter_player getplayerangles()) * maxdist), 0, self);
 }
 
 Orienttoplayeryrot() {
@@ -693,18 +686,16 @@ orient_model() {
     self addyaw(randomint(360));
 
   if(group.bFacade) {
-    self.angles = flat_angle(vectortoangles(self.origin - level.painter_player geteye()));
+    self.angles = flat_angle(vectortoangles(self.origin - level.painter_player getEye()));
     self addyaw(90);
 
   }
 
-  assert(isdefined(group.angleoffset) && isdefined(group.angleoffset[self.model]));
+  assert(isDefined(group.angleoffset) && isDefined(group.angleoffset[self.model]));
 
   self addroll(group.angleoffset[self.model][0]);
   self addpitch(group.angleoffset[self.model][1]);
   self addyaw(group.angleoffset[self.model][2]);
-
-
 }
 
 spam_model_place(trace) {
@@ -724,7 +715,7 @@ getrandom_spammodel() {
 }
 
 spam_models_atcircle(trace, bRandomrotation, bForcedSpam) {
-  if(!isdefined(bForcedSpam))
+  if(!isDefined(bForcedSpam))
     bForcedSpam = false;
   models = [];
   incdistance = level.spam_density_scale;
@@ -761,8 +752,8 @@ spam_models_atcircle(trace, bRandomrotation, bForcedSpam) {
   }
 
   countourtrace = [];
-  for (x = startpoint; x < incs; x++)
-    for (y = startpoint; y < incs; y++) {
+  for(x = startpoint; x < incs; x++)
+    for(y = startpoint; y < incs; y++) {
       if(!bForcedSpam)
         if(level.spamed_models.size + models.size > level.painter_max)
           return models;;
@@ -790,19 +781,19 @@ spam_models_atcircle(trace, bRandomrotation, bForcedSpam) {
 
 is_too_dense(testorg) {
   // going backwards will be faster
-  for (i = level.spamed_models.size - 1; i >= 0; i--)
+  for(i = level.spamed_models.size - 1; i >= 0; i--)
     if(distance(level.spamed_models[i].orgorg, testorg) < (level.spam_density_scale - 1))
       return true;
   return false;
 }
 
 get_player() {
-  return getentarray("player", "classname")[0];
+  return getEntArray("player", "classname")[0];
 }
 
 spam_modelattrace(trace, getmodel) {
   model = spawn("script_model", level.painter_player.origin);
-  model setmodel(getmodel);
+  model setModel(getmodel);
   model notsolid();
   model.origin = trace["position"];
   model.angles = vectortoangles(trace["normal"]);
@@ -813,9 +804,9 @@ spam_modelattrace(trace, getmodel) {
     model.origin += (trace["normal"] * level.spam_models_Customheight);
 
   group = getcurrent_groupstruct();
-  if(isdefined(group.heightoffset[getmodel]))
+  if(isDefined(group.heightoffset[getmodel]))
     model.origin += (trace["normal"] * group.heightoffset[getmodel]);
-  if(isdefined(group.modelusesprefab[getmodel]))
+  if(isDefined(group.modelusesprefab[getmodel]))
     model.modelusesprefab = group.modelusesprefab[getmodel];
 
   return model;
@@ -823,16 +814,16 @@ spam_modelattrace(trace, getmodel) {
 
 contour_point(origin, angles, height) {
   offset = height;
-  vect = anglestoforward(angles);
+  vect = anglesToForward(angles);
   destorg = origin + (vect * offset);
   targetorg = origin + (vect * -1 * offset);
-  return bullettrace(destorg, targetorg, 0, level.painter_player);
+  return bulletTrace(destorg, targetorg, 0, level.painter_player);
 }
 
 plot_circle(origin, radius, angles, color, circleres, contourdepth) {
-  if(!isdefined(color))
+  if(!isDefined(color))
     color = (0, 1, 0);
-  if(!isdefined(circleres))
+  if(!isDefined(circleres))
     circleres = 16;
   hemires = circleres / 2;
   circleinc = 360 / circleres;
@@ -841,7 +832,7 @@ plot_circle(origin, radius, angles, color, circleres, contourdepth) {
   rad = 0;
   plotpoints = [];
   rad = 0.000;
-  for (i = 0; i < circleres; i++) {
+  for(i = 0; i < circleres; i++) {
     baseorg = origin + (anglestoup((angles + (0, 0, rad))) * radius);
     point = contour_point(baseorg, angles, level.spam_model_radius);
     if(point["fraction"] != 1)
@@ -856,7 +847,7 @@ spam_model_erase(trace) {
   traceorg = trace["position"];
   keepmodels = [];
   deletemodels = [];
-  for (i = 0; i < level.spamed_models.size; i++) {
+  for(i = 0; i < level.spamed_models.size; i++) {
     if(distance(level.spamed_models[i].orgorg, traceorg) > level.spam_model_radius)
       keepmodels[keepmodels.size] = level.spamed_models[i];
     else
@@ -864,22 +855,21 @@ spam_model_erase(trace) {
   }
   level.spamed_models = keepmodels;
 
-  for (i = 0; i < deletemodels.size; i++)
+  for(i = 0; i < deletemodels.size; i++)
     deletemodels[i] delete();
 }
 
 dump_models() {
-  /#
   if(!level.spamed_models.size)
     return;
   fileprint_launcher_start_file();
   fileprint_map_start();
-  for (i = 0; i < level.spamed_models.size; i++) {
+  for(i = 0; i < level.spamed_models.size; i++) {
     origin = fileprint_radiant_vec(level.spamed_models[i].origin); // convert these vectors to mapfile keypair format
     angles = fileprint_radiant_vec(level.spamed_models[i].angles);
 
     fileprint_map_entity_start();
-    if(isdefined(level.spamed_models[i].modelusesprefab) && level.spamed_models[i].modelusesprefab) {
+    if(isDefined(level.spamed_models[i].modelusesprefab) && level.spamed_models[i].modelusesprefab) {
       fileprint_map_keypairprint("classname", "misc_prefab");
       fileprint_map_keypairprint("model", "prefabs/misc_models/" + level.spamed_models[i].model + ".map");
     } else {
@@ -897,12 +887,11 @@ dump_models() {
   launcher_write_clipboard(map_path);
   array_thread(level.spamed_models, ::deleteme);
   level.spamed_models = [];
-  # /
 }
 
 draw_axis(org, angles) {
   range = 32;
-  forward = range * anglestoforward(angles);
+  forward = range * anglesToForward(angles);
   right = range * anglestoright(angles);
   up = range * anglestoup(angles);
   line(org, org + forward, (1, 0, 0), 1);
@@ -911,7 +900,7 @@ draw_axis(org, angles) {
 }
 
 _newhudelem() {
-  if(!isdefined(level.scripted_elems))
+  if(!isDefined(level.scripted_elems))
     level.scripted_elems = [];
   elem = newhudelem();
   level.scripted_elems[level.scripted_elems.size] = elem;
@@ -924,7 +913,7 @@ _settext(text) {
   self thread _clearalltextafterhudelem();
   sizeofelems = 0;
   foreach(elem in level.scripted_elems) {
-    if(isdefined(elem.realtext)) {
+    if(isDefined(elem.realtext)) {
       sizeofelems += elem.realtext.size;
       elem settext(elem.realtext);
     }
@@ -941,10 +930,10 @@ controler_hud_add(identifier, inc, initial_text, initial_description_text, initi
   basealpha = .8;
   denradoffset = 20;
   descriptionscale = 1.4;
-  if(!isdefined(initial_text))
+  if(!isDefined(initial_text))
     initial_text = "";
 
-  if(!isdefined(level.hud_controler) || !isdefined(level.hud_controler[identifier])) {
+  if(!isDefined(level.hud_controler) || !isDefined(level.hud_controler[identifier])) {
     level.hud_controler[identifier] = _newhudelem();
     description = _newhudelem();
   } else
@@ -971,9 +960,9 @@ controler_hud_add(identifier, inc, initial_text, initial_description_text, initi
   description.alpha = basealpha;
   description.x = startx + denradoffset;
   description.y = starty + (inc * space);
-  if(isdefined(initial_value))
+  if(isDefined(initial_value))
     description setvalue(initial_value);
-  if(isdefined(initial_description_text))
+  if(isDefined(initial_description_text))
     description _settext(initial_description_text);
   level.hud_controler[identifier].description = description;
 }
@@ -984,8 +973,6 @@ controler_hud_update_text(hudid, text) {
     level.hud_controler[hudid].description _settext("");
   } else
     level.hud_controler[hudid].description _settext(text);
-
-
 }
 
 controler_hud_update_button(hudid, text) {
@@ -999,7 +986,6 @@ _clearalltextafterhudelem() {
   self clearalltextafterhudelem();
   wait .05;
   level._clearalltextafterhudelem = false;
-
 }
 
 is_mp() {

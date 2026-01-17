@@ -31,8 +31,7 @@ init_loadout() {
 }
 
 init_melee_weapon() {
-  if(level.script == "frontend") {
-  } else if(level.script == "angola" || level.script == "angola_2")
+  if(level.script == "frontend") {} else if(level.script == "angola" || level.script == "angola_2")
     add_weapon("machete_sp");
   else
     add_weapon("knife_sp");
@@ -57,8 +56,7 @@ init_loadout_weapons() {
     set_laststand_pistol("m1911_sp");
     set_switch_weapon("m16_sp");
     return;
-  } else if(getsubstr(level.script, 0, 6) == "sp_t6_") {
-  } else if(level.script == "frontend") {
+  } else if(getsubstr(level.script, 0, 6) == "sp_t6_") {} else if(level.script == "frontend") {
     set_laststand_pistol("none");
     return;
   } else if(level.script == "outro") {
@@ -291,7 +289,7 @@ set_action_slot(num, option1, option2) {
   if(!isDefined(level.player_actionslots))
     level.player_actionslots = [];
 
-  action_slot = spawnstruct();
+  action_slot = spawnStruct();
   action_slot.num = num;
   action_slot.option1 = option1;
 
@@ -423,8 +421,7 @@ give_loadout(wait_for_switch_weapon) {
 give_model() {
   entity_num = self getentitynumber();
 
-  if(level.campaign == "none") {
-  }
+  if(level.campaign == "none") {}
 
   if(isDefined(level.player_viewmodel))
     self setviewmodel(level.player_viewmodel);

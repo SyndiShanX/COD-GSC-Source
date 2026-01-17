@@ -16,29 +16,29 @@
 #namespace animationstatenetwork;
 
 function autoexec registerdefaultnotetrackhandlerfunctions() {
-  registernotetrackhandlerfunction("fire", & notetrackfirebullet);
-  registernotetrackhandlerfunction("gib_disable", & notetrackgibdisable);
-  registernotetrackhandlerfunction("gib = \"head\"", & gibserverutils::gibhead);
-  registernotetrackhandlerfunction("gib = \"arm_left\"", & gibserverutils::gibleftarm);
-  registernotetrackhandlerfunction("gib = \"arm_right\"", & gibserverutils::gibrightarm);
-  registernotetrackhandlerfunction("gib = \"leg_left\"", & gibserverutils::gibleftleg);
-  registernotetrackhandlerfunction("gib = \"leg_right\"", & gibserverutils::gibrightleg);
-  registernotetrackhandlerfunction("dropgun", & notetrackdropgun);
-  registernotetrackhandlerfunction("gun drop", & notetrackdropgun);
-  registernotetrackhandlerfunction("drop_shield", & notetrackdropshield);
-  registernotetrackhandlerfunction("hide_weapon", & notetrackhideweapon);
-  registernotetrackhandlerfunction("show_weapon", & notetrackshowweapon);
-  registernotetrackhandlerfunction("hide_ai", & notetrackhideai);
-  registernotetrackhandlerfunction("show_ai", & notetrackshowai);
-  registernotetrackhandlerfunction("attach_knife", & notetrackattachknife);
-  registernotetrackhandlerfunction("detach_knife", & notetrackdetachknife);
-  registernotetrackhandlerfunction("grenade_throw", & notetrackgrenadethrow);
-  registernotetrackhandlerfunction("start_ragdoll", & notetrackstartragdoll);
-  registernotetrackhandlerfunction("ragdoll_nodeath", & notetrackstartragdollnodeath);
-  registernotetrackhandlerfunction("unsync", & notetrackmeleeunsync);
-  registernotetrackhandlerfunction("step1", & notetrackstaircasestep1);
-  registernotetrackhandlerfunction("step2", & notetrackstaircasestep2);
-  registernotetrackhandlerfunction("anim_movement = \"stop\"", & notetrackanimmovementstop);
+  registernotetrackhandlerfunction("fire", &notetrackfirebullet);
+  registernotetrackhandlerfunction("gib_disable", &notetrackgibdisable);
+  registernotetrackhandlerfunction("gib = \"head\"", &gibserverutils::gibhead);
+  registernotetrackhandlerfunction("gib = \"arm_left\"", &gibserverutils::gibleftarm);
+  registernotetrackhandlerfunction("gib = \"arm_right\"", &gibserverutils::gibrightarm);
+  registernotetrackhandlerfunction("gib = \"leg_left\"", &gibserverutils::gibleftleg);
+  registernotetrackhandlerfunction("gib = \"leg_right\"", &gibserverutils::gibrightleg);
+  registernotetrackhandlerfunction("dropgun", &notetrackdropgun);
+  registernotetrackhandlerfunction("gun drop", &notetrackdropgun);
+  registernotetrackhandlerfunction("drop_shield", &notetrackdropshield);
+  registernotetrackhandlerfunction("hide_weapon", &notetrackhideweapon);
+  registernotetrackhandlerfunction("show_weapon", &notetrackshowweapon);
+  registernotetrackhandlerfunction("hide_ai", &notetrackhideai);
+  registernotetrackhandlerfunction("show_ai", &notetrackshowai);
+  registernotetrackhandlerfunction("attach_knife", &notetrackattachknife);
+  registernotetrackhandlerfunction("detach_knife", &notetrackdetachknife);
+  registernotetrackhandlerfunction("grenade_throw", &notetrackgrenadethrow);
+  registernotetrackhandlerfunction("start_ragdoll", &notetrackstartragdoll);
+  registernotetrackhandlerfunction("ragdoll_nodeath", &notetrackstartragdollnodeath);
+  registernotetrackhandlerfunction("unsync", &notetrackmeleeunsync);
+  registernotetrackhandlerfunction("step1", &notetrackstaircasestep1);
+  registernotetrackhandlerfunction("step2", &notetrackstaircasestep2);
+  registernotetrackhandlerfunction("anim_movement = \"stop\"", &notetrackanimmovementstop);
   registerblackboardnotetrackhandler("anim_pose = \"stand\"", "_stance", "stand");
   registerblackboardnotetrackhandler("anim_pose = \"crouch\"", "_stance", "crouch");
   registerblackboardnotetrackhandler("anim_pose = \"prone_front\"", "_stance", "prone_front");
@@ -74,14 +74,14 @@ function private notetrackdropguninternal(entity) {
 }
 
 function private notetrackattachknife(entity) {
-  if(!(isdefined(entity._ai_melee_attachedknife) && entity._ai_melee_attachedknife)) {
+  if(!(isDefined(entity._ai_melee_attachedknife) && entity._ai_melee_attachedknife)) {
     entity attach("t6_wpn_knife_melee", "TAG_WEAPON_LEFT");
     entity._ai_melee_attachedknife = 1;
   }
 }
 
 function private notetrackdetachknife(entity) {
-  if(isdefined(entity._ai_melee_attachedknife) && entity._ai_melee_attachedknife) {
+  if(isDefined(entity._ai_melee_attachedknife) && entity._ai_melee_attachedknife) {
     entity detach("t6_wpn_knife_melee", "TAG_WEAPON_LEFT");
     entity._ai_melee_attachedknife = 0;
   }
@@ -116,13 +116,13 @@ function private notetrackstartragdoll(entity) {
 
 function _delayedragdoll(entity) {
   wait(0.25);
-  if(isdefined(entity) && !entity isragdoll()) {
+  if(isDefined(entity) && !entity isragdoll()) {
     entity startragdoll();
   }
 }
 
 function notetrackstartragdollnodeath(entity) {
-  if(isdefined(entity._ai_melee_opponent)) {
+  if(isDefined(entity._ai_melee_opponent)) {
     entity._ai_melee_opponent unlink();
   }
   entity thread _delayedragdoll(entity);
@@ -152,18 +152,18 @@ function private notetrackdropshield(animationentity) {
 function private notetrackgrenadethrow(animationentity) {
   if(archetype_human_cover::shouldthrowgrenadeatcovercondition(animationentity, 1)) {
     animationentity grenadethrow();
-  } else if(isdefined(animationentity.grenadethrowposition)) {
+  } else if(isDefined(animationentity.grenadethrowposition)) {
     arm_offset = archetype_human_cover::temp_get_arm_offset(animationentity, animationentity.grenadethrowposition);
     throw_vel = animationentity canthrowgrenadepos(arm_offset, animationentity.grenadethrowposition);
-    if(isdefined(throw_vel)) {
+    if(isDefined(throw_vel)) {
       animationentity grenadethrow();
     }
   }
 }
 
 function private notetrackmeleeunsync(animationentity) {
-  if(isdefined(animationentity) && isdefined(animationentity.enemy)) {
-    if(isdefined(animationentity.enemy._ai_melee_markeddead) && animationentity.enemy._ai_melee_markeddead) {
+  if(isDefined(animationentity) && isDefined(animationentity.enemy)) {
+    if(isDefined(animationentity.enemy._ai_melee_markeddead) && animationentity.enemy._ai_melee_markeddead) {
       animationentity unlink();
     }
   }

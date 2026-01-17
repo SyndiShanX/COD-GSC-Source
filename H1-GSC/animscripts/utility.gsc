@@ -22,7 +22,7 @@ initanimtree(var_0) {
 }
 
 updateanimpose() {
-  if(isdefined(self.desired_anim_pose) && self.desired_anim_pose != self.a.pose) {
+  if(isDefined(self.desired_anim_pose) && self.desired_anim_pose != self.a.pose) {
     if(self.a.pose == "prone")
       exitpronewrapper(0.5);
 
@@ -37,7 +37,7 @@ updateanimpose() {
 }
 
 initialize(var_0) {
-  if(isdefined(self.longdeathstarting)) {
+  if(isDefined(self.longdeathstarting)) {
     if(var_0 != "pain" && var_0 != "death")
       self kill(self.origin);
 
@@ -47,15 +47,13 @@ initialize(var_0) {
     }
   }
 
-  if(isdefined(self.a.mayonlydie) && var_0 != "death")
+  if(isDefined(self.a.mayonlydie) && var_0 != "death")
     self kill(self.origin);
 
-  if(isdefined(self.a.postscriptfunc)) {
+  if(isDefined(self.a.postscriptfunc)) {
     var_1 = self.a.postscriptfunc;
     self.a.postscriptfunc = undefined;
-    [
-      [var_1]
-    ](var_0);
+    [[var_1]](var_0);
   }
 
   if(var_0 != "combat" && var_0 != "pain" && var_0 != "death" && usingsidearm())
@@ -67,7 +65,7 @@ initialize(var_0) {
   if(var_0 != "death")
     self.a.nodeath = 0;
 
-  if(isdefined(self.isholdinggrenade) && (var_0 == "pain" || var_0 == "death" || var_0 == "flashed"))
+  if(isDefined(self.isholdinggrenade) && (var_0 == "pain" || var_0 == "death" || var_0 == "flashed"))
     animscripts\combat_utility::dropgrenade();
 
   self.isholdinggrenade = undefined;
@@ -80,7 +78,7 @@ initialize(var_0) {
   self.a.scriptstarttime = gettime();
   self.a.atconcealmentnode = 0;
 
-  if(isdefined(self.node) && (self.node.type == "Conceal Prone" || self.node.type == "Conceal Crouch" || self.node.type == "Conceal Stand"))
+  if(isDefined(self.node) && (self.node.type == "Conceal Prone" || self.node.type == "Conceal Crouch" || self.node.type == "Conceal Stand"))
     self.a.atconcealmentnode = 1;
 
   initanimtree(var_0);
@@ -88,7 +86,7 @@ initialize(var_0) {
 }
 
 getpreferredweapon() {
-  if(isdefined(self.wantshotgun) && self.wantshotgun) {
+  if(isDefined(self.wantshotgun) && self.wantshotgun) {
     if(isshotgun(self.primaryweapon))
       return self.primaryweapon;
     else if(isshotgun(self.secondaryweapon))
@@ -99,10 +97,10 @@ getpreferredweapon() {
 }
 
 badplacer(var_0, var_1, var_2) {
-  for (var_3 = 0; var_3 < var_0 * 20; var_3++) {
-    for (var_4 = 0; var_4 < 10; var_4++) {
+  for(var_3 = 0; var_3 < var_0 * 20; var_3++) {
+    for(var_4 = 0; var_4 < 10; var_4++) {
       var_5 = (0, randomint(360), 0);
-      var_6 = anglestoforward(var_5);
+      var_6 = anglesToForward(var_5);
       var_7 = var_6 * var_2;
     }
 
@@ -115,24 +113,24 @@ printdisplaceinfo() {
   self notify("displaceprint");
   self endon("displaceprint");
 
-  for (;;)
+  for(;;)
     wait 0.05;
 }
 
 isincombat(var_0) {
-  if(isdefined(self.enemy))
+  if(isDefined(self.enemy))
     return 1;
 
   return self.a.combatendtime > gettime();
 }
 
 updateisincombattimer() {
-  if(isdefined(self.enemy))
+  if(isDefined(self.enemy))
     self.a.combatendtime = gettime() + anim.combatmemorytimeconst + randomint(anim.combatmemorytimerand);
 }
 
 getenemyeyepos() {
-  if(isdefined(self.enemy)) {
+  if(isDefined(self.enemy)) {
     if(common_scripts\utility::flag("_cloaked_stealth_enabled"))
       self.a.lastenemypos = animscripts\combat_utility::get_last_known_shoot_pos(self.enemy);
     else
@@ -140,7 +138,7 @@ getenemyeyepos() {
 
     self.a.lastenemytime = gettime();
     return self.a.lastenemypos;
-  } else if(isdefined(self.a.lastenemytime) && isdefined(self.a.lastenemypos) && self.a.lastenemytime + 3000 < gettime())
+  } else if(isDefined(self.a.lastenemytime) && isDefined(self.a.lastenemypos) && self.a.lastenemytime + 3000 < gettime())
     return self.a.lastenemypos;
   else {
     var_0 = self getshootatpos();
@@ -150,13 +148,13 @@ getenemyeyepos() {
 }
 
 getnodeforwardyaw(var_0) {
-  if(!isdefined(self.heat)) {
+  if(!isDefined(self.heat)) {
     if(isnodecoverleft(var_0))
       return var_0.angles[1] + 90;
     else if(isnodecoverright(var_0))
       return var_0.angles[1] - 90;
     else if(var_0.type == "Cover Multi") {
-      if(isdefined(self.cover) && isdefined(self.cover.state)) {
+      if(isDefined(self.cover) && isDefined(self.cover.state)) {
         if(self.cover.state == "right")
           return var_0.angles[1] - 90;
         else if(self.cover.state == "left")
@@ -169,7 +167,7 @@ getnodeforwardyaw(var_0) {
 }
 
 getnodeyawtoorigin(var_0) {
-  if(isdefined(self.node))
+  if(isDefined(self.node))
     var_1 = self.node.angles[1] - getyaw(var_0);
   else
     var_1 = self.angles[1] - getyaw(var_0);
@@ -181,19 +179,19 @@ getnodeyawtoorigin(var_0) {
 getnodeyawtoenemy() {
   var_0 = undefined;
 
-  if(isdefined(self.enemy))
+  if(isDefined(self.enemy))
     var_0 = self.enemy.origin;
   else {
-    if(isdefined(self.node))
-      var_1 = anglestoforward(self.node.angles);
+    if(isDefined(self.node))
+      var_1 = anglesToForward(self.node.angles);
     else
-      var_1 = anglestoforward(self.angles);
+      var_1 = anglesToForward(self.angles);
 
     var_1 = var_1 * 150;
     var_0 = self.origin + var_1;
   }
 
-  if(isdefined(self.node))
+  if(isDefined(self.node))
     var_2 = self.node.angles[1] - getyaw(var_0);
   else
     var_2 = self.angles[1] - getyaw(var_0);
@@ -204,7 +202,7 @@ getnodeyawtoenemy() {
 
 getyawtospot(var_0) {
   if(isspaceai()) {
-    var_1 = anglestoforward(self.angles);
+    var_1 = anglesToForward(self.angles);
     var_2 = rotatepointaroundvector(var_1, var_0 - self.origin, self.angles[2] * -1);
     var_0 = var_2 + self.origin;
   }
@@ -217,10 +215,10 @@ getyawtospot(var_0) {
 getyawtoenemy() {
   var_0 = undefined;
 
-  if(isdefined(self.enemy))
+  if(isDefined(self.enemy))
     var_0 = self.enemy.origin;
   else {
-    var_1 = anglestoforward(self.angles);
+    var_1 = anglesToForward(self.angles);
     var_1 = var_1 * 150;
     var_0 = self.origin + var_1;
   }
@@ -291,9 +289,9 @@ getyawtotag(var_0, var_1) {
 }
 
 getyawtoorigin(var_0) {
-  if(isdefined(self.type) && (self.type == "Cover Up 3D" || self.type == "Cover Left 3D" || self.type == "Cover Right 3D" || self.type == "Exposed 3D")) {
+  if(isDefined(self.type) && (self.type == "Cover Up 3D" || self.type == "Cover Left 3D" || self.type == "Cover Right 3D" || self.type == "Exposed 3D")) {
     var_1 = gettruenodeangles(self);
-    var_2 = anglestoforward(var_1);
+    var_2 = anglesToForward(var_1);
     var_3 = rotatepointaroundvector(var_2, var_0 - self.origin, var_1[2] * -1);
     var_3 = var_3 + self.origin;
     var_4 = var_1[1] - getyaw(var_3);
@@ -313,14 +311,14 @@ geteyeyawtoorigin(var_0) {
 }
 
 isstanceallowedwrapper(var_0) {
-  if(isdefined(self.covernode))
+  if(isDefined(self.covernode))
     return self.covernode doesnodeallowstance(var_0);
 
   return self isstanceallowed(var_0);
 }
 
 choosepose(var_0) {
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     var_0 = self.a.pose;
 
   switch (var_0) {
@@ -368,7 +366,7 @@ choosepose(var_0) {
 getclaimednode() {
   var_0 = self.node;
 
-  if(isdefined(var_0) && (self nearnode(var_0) || isdefined(self.covernode) && var_0 == self.covernode))
+  if(isDefined(var_0) && (self nearnode(var_0) || isDefined(self.covernode) && var_0 == self.covernode))
     return var_0;
 
   return undefined;
@@ -377,7 +375,7 @@ getclaimednode() {
 getnodetype() {
   var_0 = getclaimednode();
 
-  if(isdefined(var_0))
+  if(isDefined(var_0))
     return var_0.type;
 
   return "none";
@@ -386,7 +384,7 @@ getnodetype() {
 getnodedirection() {
   var_0 = getclaimednode();
 
-  if(isdefined(var_0))
+  if(isDefined(var_0))
     return var_0.angles[1];
 
   return self.desiredangle;
@@ -395,16 +393,16 @@ getnodedirection() {
 getnodeforward() {
   var_0 = getclaimednode();
 
-  if(isdefined(var_0))
-    return anglestoforward(var_0.angles);
+  if(isDefined(var_0))
+    return anglesToForward(var_0.angles);
 
-  return anglestoforward(self.angles);
+  return anglesToForward(self.angles);
 }
 
 getnodeorigin() {
   var_0 = getclaimednode();
 
-  if(isdefined(var_0))
+  if(isDefined(var_0))
     return var_0.origin;
 
   return self.origin;
@@ -428,7 +426,7 @@ quadrantanimweights(var_0) {
   var_3["back"] = 0;
   var_3["left"] = 0;
 
-  if(isdefined(self.alwaysrunforward)) {
+  if(isDefined(self.alwaysrunforward)) {
     var_3["front"] = 1;
     return var_3;
   }
@@ -470,7 +468,7 @@ getquadrant(var_0) {
 }
 
 isinset(var_0, var_1) {
-  for (var_2 = var_1.size - 1; var_2 >= 0; var_2--) {
+  for(var_2 = var_1.size - 1; var_2 >= 0; var_2--) {
     if(var_0 == var_1[var_2])
       return 1;
   }
@@ -479,7 +477,7 @@ isinset(var_0, var_1) {
 }
 
 playanim(var_0) {
-  if(isdefined(var_0)) {
+  if(isDefined(var_0)) {
     self setflaggedanimknoballrestart("playAnim", var_0, % animscript_root, 1, 0.1, 1);
     var_1 = getanimlength(var_0);
     var_1 = 3 * var_1 + 1;
@@ -500,14 +498,14 @@ drawstring(var_0) {
   self endon("killanimscript");
   self endon("enddrawstring");
 
-  for (;;)
+  for(;;)
     wait 0.05;
 }
 
 drawstringtime(var_0, var_1, var_2, var_3) {
   var_4 = var_3 * 20;
 
-  for (var_5 = 0; var_5 < var_4; var_5++)
+  for(var_5 = 0; var_5 < var_4; var_5++)
     wait 0.05;
 }
 
@@ -516,7 +514,7 @@ showlastenemysightpos(var_0) {
   self endon("got known enemy2");
   self endon("death");
 
-  if(!isdefined(self.enemy)) {
+  if(!isDefined(self.enemy)) {
     return;
   }
   if(self.enemy.team == "allies")
@@ -524,16 +522,16 @@ showlastenemysightpos(var_0) {
   else
     var_1 = (1, 0.7, 0.4);
 
-  for (;;) {
+  for(;;) {
     wait 0.05;
 
-    if(!isdefined(self.lastenemysightpos))
+    if(!isDefined(self.lastenemysightpos))
       continue;
   }
 }
 
 hasenemysightpos() {
-  if(isdefined(self.node))
+  if(isDefined(self.node))
     return canseeenemyfromexposed() || cansuppressenemyfromexposed();
   else
     return canseeenemy() || cansuppressenemy();
@@ -558,7 +556,7 @@ util_evaluateknownenemylocation() {
   var_0 = self getmuzzlepos();
   var_1 = self getshootatpos() - var_0;
 
-  if(isdefined(self.ignoresightpos) && isdefined(self.ignoreorigin)) {
+  if(isDefined(self.ignoresightpos) && isDefined(self.ignoreorigin)) {
     if(distance(self.origin, self.ignoreorigin) < 25)
       return 0;
   }
@@ -583,7 +581,7 @@ debugposinternal(var_0, var_1, var_2) {
   self endon("death");
   self notify("stop debug " + var_0);
   self endon("stop debug " + var_0);
-  var_3 = spawnstruct();
+  var_3 = spawnStruct();
   var_3 thread debugtimeout();
   var_3 endon("timeout");
 
@@ -592,7 +590,7 @@ debugposinternal(var_0, var_1, var_2) {
   else
     var_4 = (1, 0.7, 0.4);
 
-  for (;;)
+  for(;;)
     wait 0.05;
 }
 
@@ -628,7 +626,7 @@ printshootproc() {
   var_0 = 0.25;
   var_1 = var_0 * 20;
 
-  for (var_2 = 0; var_2 < var_1; var_2 = var_2 + 1)
+  for(var_2 = 0; var_2 < var_1; var_2 = var_2 + 1)
     wait 0.05;
 }
 
@@ -638,7 +636,7 @@ showdebugproc(var_0, var_1, var_2, var_3) {
   self endon("death");
   var_4 = var_3 * 20;
 
-  for (var_5 = 0; var_5 < var_4; var_5 = var_5 + 1)
+  for(var_5 = 0; var_5 < var_4; var_5 = var_5 + 1)
     wait 0.05;
 }
 
@@ -647,7 +645,7 @@ showdebugline(var_0, var_1, var_2, var_3) {
 }
 
 shootenemywrapper(var_0) {
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     var_0 = 1;
 
   [[anim.shootenemywrapper_func]](var_0);
@@ -669,7 +667,7 @@ shootposwrapper(var_0, var_1) {
   var_2 = bulletspread(self getmuzzlepos(), var_0, 4);
   self.a.lastshoottime = gettime();
 
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     var_1 = 1;
 
   self notify("shooting");
@@ -678,12 +676,12 @@ shootposwrapper(var_0, var_1) {
 
 throwgun() {
   var_0 = spawn("script_model", (0, 0, 0));
-  var_0 setmodel("temp");
+  var_0 setModel("temp");
   var_0.origin = self gettagorigin("tag_weapon_right") + (50, 50, 0);
   var_0.angles = self gettagangles("tag_weapon_right");
   var_1 = anglestoright(var_0.angles);
   var_1 = var_1 * 15;
-  var_2 = anglestoforward(var_0.angles);
+  var_2 = anglesToForward(var_0.angles);
   var_2 = var_2 * 15;
   var_0 movegravity((0, 50, 150), 100);
   var_3 = "weapon_" + self.weapon;
@@ -692,13 +690,13 @@ throwgun() {
   var_4 linkto(var_0);
   var_5 = var_0.origin;
 
-  while (isdefined(var_4) && isdefined(var_4.origin)) {
+  while(isDefined(var_4) && isDefined(var_4.origin)) {
     var_6 = var_5;
     var_7 = var_0.origin;
     var_8 = vectortoangles(var_7 - var_6);
-    var_2 = anglestoforward(var_8);
+    var_2 = anglesToForward(var_8);
     var_2 = var_2 * 4;
-    var_9 = bullettrace(var_7, var_7 + var_2, 1, var_4);
+    var_9 = bulletTrace(var_7, var_7 + var_2, 1, var_4);
 
     if(isalive(var_9["entity"]) && var_9["entity"] == self) {
       wait 0.05;
@@ -713,7 +711,7 @@ throwgun() {
     wait 0.05;
   }
 
-  if(isdefined(var_4) && isdefined(var_4.origin))
+  if(isDefined(var_4) && isDefined(var_4.origin))
     var_4 unlink();
 
   var_0 delete();
@@ -725,18 +723,18 @@ personalcoldbreath() {
   self notify("stop personal effect");
   self endon("stop personal effect");
 
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     wait 0.05;
 
-    if(!isdefined(self)) {
+    if(!isDefined(self)) {
       break;
     }
 
-    if(isdefined(self.a.movement) && self.a.movement == "stop") {
-      if(isdefined(self.isindoor) && self.isindoor == 1) {
+    if(isDefined(self.a.movement) && self.a.movement == "stop") {
+      if(isDefined(self.isindoor) && self.isindoor == 1) {
         continue;
       }
-      playfxontag(level._effect["cold_breath"], self, var_0);
+      playFXOnTag(level._effect["cold_breath"], self, var_0);
       wait(2.5 + randomfloat(3));
       continue;
     }
@@ -754,7 +752,7 @@ personalcoldbreathspawner() {
   self notify("stop personal effect");
   self endon("stop personal effect");
 
-  for (;;) {
+  for(;;) {
     self waittill("spawned", var_0);
 
     if(maps\_utility::spawn_failed(var_0)) {
@@ -765,7 +763,7 @@ personalcoldbreathspawner() {
 }
 
 issuppressedwrapper() {
-  if(isdefined(self.forcesuppression))
+  if(isDefined(self.forcesuppression))
     return self.forcesuppression;
 
   if(self.suppressionmeter <= self.suppressionthreshold)
@@ -775,14 +773,14 @@ issuppressedwrapper() {
 }
 
 isspaceai() {
-  return isdefined(self.swimmer) && self.swimmer == 1 && (isdefined(self.space) && self.space == 1);
+  return isDefined(self.swimmer) && self.swimmer == 1 && (isDefined(self.space) && self.space == 1);
 }
 
 gettruenodeangles(var_0) {
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     return (0, 0, 0);
 
-  if(!isdefined(var_0.script_angles))
+  if(!isDefined(var_0.script_angles))
     return var_0.angles;
 
   var_1 = var_0.angles;
@@ -800,7 +798,7 @@ ispartiallysuppressedwrapper() {
 }
 
 getnodeoffset(var_0, var_1) {
-  if(isdefined(var_0.offset))
+  if(isDefined(var_0.offset))
     return var_0.offset;
 
   var_2 = (-26, 0.4, 36);
@@ -812,9 +810,9 @@ getnodeoffset(var_0, var_1) {
   var_8 = 0;
   var_9 = (0, 0, 0);
   var_10 = anglestoright(var_0.angles);
-  var_11 = anglestoforward(var_0.angles);
+  var_11 = anglesToForward(var_0.angles);
 
-  if(!isdefined(var_1)) {
+  if(!isDefined(var_1)) {
     var_1 = var_0.type;
 
     if(var_1 == "Cover Multi")
@@ -859,22 +857,22 @@ calculatenodeoffset(var_0, var_1, var_2) {
 }
 
 recentlysawenemy() {
-  return isdefined(self.enemy) && self seerecently(self.enemy, 5);
+  return isDefined(self.enemy) && self seerecently(self.enemy, 5);
 }
 
 canseeenemy(var_0) {
-  if(!isdefined(self.enemy))
+  if(!isDefined(self.enemy))
     return 0;
 
   if(common_scripts\utility::flag("_cloaked_stealth_enabled")) {
-    if(isdefined(self.enemy_who_surprised_me) && self.enemy_who_surprised_me == self.enemy)
+    if(isDefined(self.enemy_who_surprised_me) && self.enemy_who_surprised_me == self.enemy)
       return 1;
     else
       return self cansee(self.enemy);
   }
 
-  if(isdefined(var_0) && self cansee(self.enemy, var_0) || self cansee(self.enemy)) {
-    if(!checkpitchvisibility(self geteye(), self.enemy getshootatpos()))
+  if(isDefined(var_0) && self cansee(self.enemy, var_0) || self cansee(self.enemy)) {
+    if(!checkpitchvisibility(self getEye(), self.enemy getshootatpos()))
       return 0;
 
     self.goodshootpos = getenemyeyepos();
@@ -886,14 +884,14 @@ canseeenemy(var_0) {
 }
 
 canseeenemyfromexposed() {
-  if(!isdefined(self.enemy)) {
+  if(!isDefined(self.enemy)) {
     self.goodshootpos = undefined;
     return 0;
   }
 
   var_0 = getenemyeyepos();
 
-  if(!isdefined(self.node))
+  if(!isDefined(self.node))
     var_1 = self cansee(self.enemy);
   else
     var_1 = canseepointfromexposedatnode(var_0, self.node);
@@ -940,20 +938,20 @@ isnodecovermulticorner(var_0) {
   if(var_0.type != "Cover Multi")
     return 0;
 
-  if(!isdefined(self.cover))
+  if(!isDefined(self.cover))
     return 0;
 
-  if(isdefined(self.cover.state))
+  if(isDefined(self.cover.state))
     return self.cover.state == "right" || self.cover.state == "left";
 
-  if(isdefined(self.cover.arrivalnodetype))
+  if(isDefined(self.cover.arrivalnodetype))
     return self.cover.arrivalnodetype == "right" || self.cover.arrivalnodetype == "left";
 
   return 0;
 }
 
 getcovermultipretendtype(var_0, var_1) {
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     var_1 = var_0 animscripts\cover_multi::covermulti_getnonrandomvaliddir();
 
   switch (var_1) {
@@ -978,7 +976,7 @@ checkpitchvisibility(var_0, var_1, var_2) {
     return 0;
 
   if(var_5 < var_3) {
-    if(isdefined(var_2) && var_2.type != "Cover Crouch" && var_2.type != "Conceal Crouch")
+    if(isDefined(var_2) && var_2.type != "Cover Crouch" && var_2.type != "Conceal Crouch")
       return 0;
 
     if(var_5 < anim.covercrouchleanpitch + var_3)
@@ -993,7 +991,7 @@ dontgiveuponsuppressionyet() {
 }
 
 updategiveuponsuppressiontimer() {
-  if(!isdefined(self.a.shouldresetgiveuponsuppressiontimer))
+  if(!isDefined(self.a.shouldresetgiveuponsuppressiontimer))
     self.a.shouldresetgiveuponsuppressiontimer = 1;
 
   if(self.a.shouldresetgiveuponsuppressiontimer) {
@@ -1003,7 +1001,7 @@ updategiveuponsuppressiontimer() {
 }
 
 showlines(var_0, var_1, var_2) {
-  for (;;) {
+  for(;;) {
     wait 0.05;
     wait 0.05;
   }
@@ -1015,7 +1013,7 @@ aisuppressai() {
 
   var_0 = undefined;
 
-  if(isdefined(self.enemy.node)) {
+  if(isDefined(self.enemy.node)) {
     var_1 = getnodeoffset(self.enemy.node);
     var_0 = self.enemy.node.origin + var_1;
   } else if(common_scripts\utility::flag("_cloaked_stealth_enabled"))
@@ -1027,7 +1025,7 @@ aisuppressai() {
     return 0;
 
   if(self.script == "combat") {
-    if(!sighttracepassed(self geteye(), self getmuzzlepos(), 0, undefined))
+    if(!sighttracepassed(self getEye(), self getmuzzlepos(), 0, undefined))
       return 0;
   }
 
@@ -1044,7 +1042,7 @@ cansuppressenemyfromexposed() {
   if(!isplayer(self.enemy))
     return aisuppressai();
 
-  if(isdefined(self.node)) {
+  if(isDefined(self.node)) {
     if(isnodecoverleft(self.node) || isnodecoverright(self.node)) {
       if(!animscripts\corner::canseepointfromexposedatcorner(getenemyeyepos(), self.node))
         return 0;
@@ -1079,10 +1077,10 @@ cansuppressenemy() {
 }
 
 hassuppressableenemy() {
-  if(!isdefined(self.enemy))
+  if(!isDefined(self.enemy))
     return 0;
 
-  if(!isdefined(self.lastenemysightpos))
+  if(!isDefined(self.lastenemysightpos))
     return 0;
 
   updategiveuponsuppressiontimer();
@@ -1091,7 +1089,7 @@ hassuppressableenemy() {
     return 0;
 
   if(!needrecalculatesuppressspot())
-    return isdefined(self.goodshootpos);
+    return isDefined(self.goodshootpos);
 
   return 1;
 }
@@ -1108,17 +1106,17 @@ canseeandshootpoint(var_0) {
 }
 
 needrecalculatesuppressspot() {
-  if(isdefined(self.goodshootpos) && !canseeandshootpoint(self.goodshootpos))
+  if(isDefined(self.goodshootpos) && !canseeandshootpoint(self.goodshootpos))
     return 1;
 
-  return !isdefined(self.lastenemysightposold) || self.lastenemysightposold != self.lastenemysightpos || distancesquared(self.lastenemysightposselforigin, self.origin) > 1024;
+  return !isDefined(self.lastenemysightposold) || self.lastenemysightposold != self.lastenemysightpos || distancesquared(self.lastenemysightposselforigin, self.origin) > 1024;
 }
 
 findgoodsuppressspot(var_0) {
   if(!needrecalculatesuppressspot())
-    return isdefined(self.goodshootpos);
+    return isDefined(self.goodshootpos);
 
-  if(isdefined(self.enemy) && distancesquared(self.origin, self.enemy.origin) > squared(self.enemy.maxvisibledist)) {
+  if(isDefined(self.enemy) && distancesquared(self.origin, self.enemy.origin) > squared(self.enemy.maxvisibledist)) {
     self.goodshootpos = undefined;
     return 0;
   }
@@ -1131,7 +1129,7 @@ findgoodsuppressspot(var_0) {
   self.lastenemysightposselforigin = self.origin;
   self.lastenemysightposold = self.lastenemysightpos;
   var_1 = getenemyeyepos();
-  var_2 = bullettrace(self.lastenemysightpos, var_1, 0, undefined);
+  var_2 = bulletTrace(self.lastenemysightpos, var_1, 0, undefined);
   var_3 = var_2["position"];
   var_4 = self.lastenemysightpos - var_3;
   var_5 = vectornormalize(self.lastenemysightpos - var_0);
@@ -1153,7 +1151,7 @@ findgoodsuppressspot(var_0) {
   var_10 = 0;
   var_11 = 2;
 
-  for (var_12 = 0; var_12 < var_7 + var_11; var_12++) {
+  for(var_12 = 0; var_12 < var_7 + var_11; var_12++) {
     var_13 = sighttracepassed(var_0, var_9, 0, undefined);
     var_14 = var_9;
 
@@ -1174,7 +1172,7 @@ findgoodsuppressspot(var_0) {
       var_10 = 0;
   }
 
-  return isdefined(self.goodshootpos);
+  return isDefined(self.goodshootpos);
 }
 
 anim_array(var_0, var_1) {
@@ -1187,13 +1185,13 @@ anim_array(var_0, var_1) {
   var_4 = 0;
   var_5 = 0;
 
-  for (var_6 = 0; var_6 < var_2; var_6++)
+  for(var_6 = 0; var_6 < var_2; var_6++)
     var_5 = var_5 + var_1[var_6];
 
   var_7 = randomfloat(var_5);
   var_8 = 0;
 
-  for (var_6 = 0; var_6 < var_2; var_6++) {
+  for(var_6 = 0; var_6 < var_2; var_6++) {
     var_8 = var_8 + var_1[var_6];
 
     if(var_7 >= var_8) {
@@ -1209,7 +1207,7 @@ anim_array(var_0, var_1) {
 print3dtime(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = var_0 / 0.05;
 
-  for (var_7 = 0; var_7 < var_6; var_7++)
+  for(var_7 = 0; var_7 < var_6; var_7++)
     wait 0.05;
 }
 
@@ -1218,7 +1216,7 @@ print3drise(var_0, var_1, var_2, var_3, var_4) {
   var_6 = 0;
   var_0 = var_0 + common_scripts\utility::randomvector(30);
 
-  for (var_7 = 0; var_7 < var_5; var_7++) {
+  for(var_7 = 0; var_7 < var_5; var_7++) {
     var_6 = var_6 + 0.5;
     wait 0.05;
   }
@@ -1233,7 +1231,7 @@ getgrenademodel() {
 }
 
 sawenemymove(var_0) {
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     var_0 = 500;
 
   return gettime() - self.personalsighttime < var_0;
@@ -1259,13 +1257,13 @@ random_weight(var_0) {
   if(var_0.size > 1) {
     var_2 = 0;
 
-    for (var_3 = 0; var_3 < var_0.size; var_3++)
+    for(var_3 = 0; var_3 < var_0.size; var_3++)
       var_2 = var_2 + var_0[var_3];
 
     var_4 = randomfloat(var_2);
     var_2 = 0;
 
-    for (var_3 = 0; var_3 < var_0.size; var_3++) {
+    for(var_3 = 0; var_3 < var_0.size; var_3++) {
       var_2 = var_2 + var_0[var_3];
 
       if(var_4 < var_2) {
@@ -1279,7 +1277,7 @@ random_weight(var_0) {
 }
 
 setfootstepeffect(var_0, var_1) {
-  if(!isdefined(anim.optionalstepeffects))
+  if(!isDefined(anim.optionalstepeffects))
     anim.optionalstepeffects = [];
 
   anim.optionalstepeffects[var_0] = 1;
@@ -1287,7 +1285,7 @@ setfootstepeffect(var_0, var_1) {
 }
 
 setfootstepeffectsmall(var_0, var_1) {
-  if(!isdefined(anim.optionalstepeffectssmall))
+  if(!isDefined(anim.optionalstepeffectssmall))
     anim.optionalstepeffectssmall = [];
 
   anim.optionalstepeffectssmall[var_0] = 1;
@@ -1295,27 +1293,27 @@ setfootstepeffectsmall(var_0, var_1) {
 }
 
 unsetfootstepeffect(var_0) {
-  if(isdefined(anim.optionalstepeffects))
+  if(isDefined(anim.optionalstepeffects))
     anim.optionalstepeffects[var_0] = undefined;
 
   level._effect["step_" + var_0] = undefined;
 }
 
 unsetfootstepeffectsmall(var_0) {
-  if(isdefined(anim.optionalstepeffectssmall))
+  if(isDefined(anim.optionalstepeffectssmall))
     anim.optionalstepeffectssmall[var_0] = undefined;
 
   level._effect["step_small_" + var_0] = undefined;
 }
 
 setnotetrackeffect(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(!isdefined(var_2))
+  if(!isDefined(var_2))
     var_2 = "all";
 
-  if(!isdefined(level._notetrackfx))
+  if(!isDefined(level._notetrackfx))
     level._notetrackfx = [];
 
-  level._notetrackfx[var_0][var_2] = spawnstruct();
+  level._notetrackfx[var_0][var_2] = spawnStruct();
   level._notetrackfx[var_0][var_2].tag = var_1;
   level._notetrackfx[var_0][var_2].fx = var_3;
   anim.notetracks[var_0] = animscripts\notetracks::customnotetrackfx;
@@ -1323,25 +1321,25 @@ setnotetrackeffect(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 setnotetracksound(var_0, var_1, var_2, var_3) {
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     var_1 = "all";
 
-  if(!isdefined(level._notetrackfx))
+  if(!isDefined(level._notetrackfx))
     level._notetrackfx = [];
 
-  if(isdefined(level._notetrackfx[var_0][var_1]))
+  if(isDefined(level._notetrackfx[var_0][var_1]))
     var_4 = level._notetrackfx[var_0][var_1];
   else {
-    var_4 = spawnstruct();
+    var_4 = spawnStruct();
     level._notetrackfx[var_0][var_1] = var_4;
   }
 
   anim.notetracks[var_0] = animscripts\notetracks::customnotetrackfx;
 
-  if(isdefined(var_2))
+  if(isDefined(var_2))
     var_4.sound_prefix = var_2;
 
-  if(isdefined(var_3))
+  if(isDefined(var_3))
     var_4.sound_suffix = var_3;
 }
 
@@ -1350,7 +1348,7 @@ persistentdebugline(var_0, var_1) {
   level notify("newdebugline");
   level endon("newdebugline");
 
-  for (;;)
+  for(;;)
     wait 0.05;
 }
 
@@ -1363,10 +1361,10 @@ enterpronewrapperproc(var_0) {
   self endon("death");
   self notify("anim_prone_change");
   self endon("anim_prone_change");
-  self enterprone(var_0, isdefined(self.a.onback));
+  self enterprone(var_0, isDefined(self.a.onback));
   self waittill("killanimscript");
 
-  if(self.a.pose != "prone" && !isdefined(self.a.onback))
+  if(self.a.pose != "prone" && !isDefined(self.a.onback))
     self.a.pose = "prone";
 }
 
@@ -1396,7 +1394,7 @@ canblindfire() {
   if(weaponclass(self.weapon) == "mg")
     return 0;
 
-  if(isdefined(self.disable_blindfire) && self.disable_blindfire == 1)
+  if(isDefined(self.disable_blindfire) && self.disable_blindfire == 1)
     return 0;
 
   return 1;
@@ -1415,7 +1413,7 @@ getmoveanim(var_0) {
 }
 
 gettwitchanim(var_0) {
-  if(isdefined(self.a.lastloopcountfortwitch) && self.a.lastloopcountfortwitch == self.a.runloopcount)
+  if(isDefined(self.a.lastloopcountfortwitch) && self.a.lastloopcountfortwitch == self.a.runloopcount)
     return self.a.lasttwitchanims;
 
   var_1 = randomint(var_0.size);
@@ -1436,7 +1434,7 @@ animarray(var_0) {
 }
 
 animarrayanyexist(var_0) {
-  return isdefined(self.a.array[var_0]) && self.a.array[var_0].size > 0;
+  return isDefined(self.a.array[var_0]) && self.a.array[var_0].size > 0;
 }
 
 animarraypickrandom(var_0) {
@@ -1447,72 +1445,72 @@ animarraypickrandom(var_0) {
 array(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13) {
   var_14 = [];
 
-  if(isdefined(var_0))
+  if(isDefined(var_0))
     var_14[0] = var_0;
   else
     return var_14;
 
-  if(isdefined(var_1))
+  if(isDefined(var_1))
     var_14[1] = var_1;
   else
     return var_14;
 
-  if(isdefined(var_2))
+  if(isDefined(var_2))
     var_14[2] = var_2;
   else
     return var_14;
 
-  if(isdefined(var_3))
+  if(isDefined(var_3))
     var_14[3] = var_3;
   else
     return var_14;
 
-  if(isdefined(var_4))
+  if(isDefined(var_4))
     var_14[4] = var_4;
   else
     return var_14;
 
-  if(isdefined(var_5))
+  if(isDefined(var_5))
     var_14[5] = var_5;
   else
     return var_14;
 
-  if(isdefined(var_6))
+  if(isDefined(var_6))
     var_14[6] = var_6;
   else
     return var_14;
 
-  if(isdefined(var_7))
+  if(isDefined(var_7))
     var_14[7] = var_7;
   else
     return var_14;
 
-  if(isdefined(var_8))
+  if(isDefined(var_8))
     var_14[8] = var_8;
   else
     return var_14;
 
-  if(isdefined(var_9))
+  if(isDefined(var_9))
     var_14[9] = var_9;
   else
     return var_14;
 
-  if(isdefined(var_10))
+  if(isDefined(var_10))
     var_14[10] = var_10;
   else
     return var_14;
 
-  if(isdefined(var_11))
+  if(isDefined(var_11))
     var_14[11] = var_11;
   else
     return var_14;
 
-  if(isdefined(var_12))
+  if(isDefined(var_12))
     var_14[12] = var_12;
   else
     return var_14;
 
-  if(isdefined(var_13))
+  if(isDefined(var_13))
     var_14[13] = var_13;
 
   return var_14;
@@ -1557,7 +1555,7 @@ getaicurrentweaponslot() {
 }
 
 aihasweapon(var_0) {
-  if(isdefined(self.weaponinfo[var_0]))
+  if(isDefined(self.weaponinfo[var_0]))
     return 1;
 
   return 0;
@@ -1569,67 +1567,67 @@ getanimendpos(var_0) {
 }
 
 damagelocationisany(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     return 0;
 
   if(self.damagelocation == var_0)
     return 1;
 
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     return 0;
 
   if(self.damagelocation == var_1)
     return 1;
 
-  if(!isdefined(var_2))
+  if(!isDefined(var_2))
     return 0;
 
   if(self.damagelocation == var_2)
     return 1;
 
-  if(!isdefined(var_3))
+  if(!isDefined(var_3))
     return 0;
 
   if(self.damagelocation == var_3)
     return 1;
 
-  if(!isdefined(var_4))
+  if(!isDefined(var_4))
     return 0;
 
   if(self.damagelocation == var_4)
     return 1;
 
-  if(!isdefined(var_5))
+  if(!isDefined(var_5))
     return 0;
 
   if(self.damagelocation == var_5)
     return 1;
 
-  if(!isdefined(var_6))
+  if(!isDefined(var_6))
     return 0;
 
   if(self.damagelocation == var_6)
     return 1;
 
-  if(!isdefined(var_7))
+  if(!isDefined(var_7))
     return 0;
 
   if(self.damagelocation == var_7)
     return 1;
 
-  if(!isdefined(var_8))
+  if(!isDefined(var_8))
     return 0;
 
   if(self.damagelocation == var_8)
     return 1;
 
-  if(!isdefined(var_9))
+  if(!isDefined(var_9))
     return 0;
 
   if(self.damagelocation == var_9)
     return 1;
 
-  if(!isdefined(var_10))
+  if(!isDefined(var_10))
     return 0;
 
   if(self.damagelocation == var_10)
@@ -1639,42 +1637,42 @@ damagelocationisany(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_
 }
 
 usingpistol() {
-  if(!isdefined(self.weapon))
+  if(!isDefined(self.weapon))
     return 0;
 
   return weaponclass(self.weapon) == "pistol";
 }
 
 usingrocketlauncher() {
-  if(!isdefined(self.weapon))
+  if(!isDefined(self.weapon))
     return 0;
 
   return weaponclass(self.weapon) == "rocketlauncher";
 }
 
 usingmg() {
-  if(!isdefined(self.weapon))
+  if(!isDefined(self.weapon))
     return 0;
 
   return weaponclass(self.weapon) == "mg";
 }
 
 usingshotgun() {
-  if(!isdefined(self.weapon))
+  if(!isDefined(self.weapon))
     return 0;
 
   return weaponclass(self.weapon) == "spread";
 }
 
 usingsmg() {
-  if(!isdefined(self.weapon))
+  if(!isDefined(self.weapon))
     return 0;
 
   return weaponclass(self.weapon) == "smg";
 }
 
 usingriflelikeweapon() {
-  if(!isdefined(self.weapon))
+  if(!isDefined(self.weapon))
     return 0;
 
   var_0 = weaponclass(self.weapon);
@@ -1692,7 +1690,7 @@ usingriflelikeweapon() {
 }
 
 shoulddroprocketlauncher(var_0) {
-  return isdefined(self.secondaryweapon) && self.secondaryweapon != "none" && (var_0 < squared(512) || self.a.rockets < 1);
+  return isDefined(self.secondaryweapon) && self.secondaryweapon != "none" && (var_0 < squared(512) || self.a.rockets < 1);
 }
 
 ragdolldeath(var_0) {
@@ -1700,7 +1698,7 @@ ragdolldeath(var_0) {
   var_1 = self.origin;
   var_2 = (0, 0, 0);
 
-  for (;;) {
+  for(;;) {
     wait 0.05;
     var_3 = distance(self.origin, var_1);
     var_1 = self.origin;
@@ -1718,15 +1716,15 @@ ragdolldeath(var_0) {
 }
 
 is_free_running() {
-  return isdefined(self.free_running);
+  return isDefined(self.free_running);
 }
 
 shouldcqb() {
-  return isdefined(self.cqbwalking) && !isdefined(self.grenade);
+  return isDefined(self.cqbwalking) && !isDefined(self.grenade);
 }
 
 iscqbwalking() {
-  return isdefined(self.cqbwalking);
+  return isDefined(self.cqbwalking);
 }
 
 is_in_casual_standing_stance() {
@@ -1753,11 +1751,11 @@ setunstableground(var_0) {
 }
 
 isunstableground() {
-  return isdefined(self.isunstableground);
+  return isDefined(self.isunstableground);
 }
 
 setalwaysusepistol(var_0) {
-  if(!isdefined(var_0)) {
+  if(!isDefined(var_0)) {
     return;
   }
   if(var_0) {
@@ -1780,7 +1778,7 @@ setalwaysusepistol(var_0) {
 }
 
 iscqbwalkingorfacingenemy() {
-  return !self.facemotion || isdefined(self.cqbwalking);
+  return !self.facemotion || isDefined(self.cqbwalking);
 }
 
 randomizeidleset() {
@@ -1827,11 +1825,11 @@ isnodecover3d(var_0) {
 }
 
 lookupanim(var_0, var_1) {
-  if(isdefined(anim.forced_s1_motionset) || isdefined(anim.forced_s1_motionset_overided))
+  if(isDefined(anim.forced_s1_motionset) || isDefined(anim.forced_s1_motionset_overided))
     maps\_utility::enable_s1_motionset(1);
 
-  if(isdefined(self.animarchetype)) {
-    if(isdefined(anim.archetypes[self.animarchetype][var_0]) && isdefined(anim.archetypes[self.animarchetype][var_0][var_1]))
+  if(isDefined(self.animarchetype)) {
+    if(isDefined(anim.archetypes[self.animarchetype][var_0]) && isDefined(anim.archetypes[self.animarchetype][var_0][var_1]))
       return anim.archetypes[self.animarchetype][var_0][var_1];
   }
 
@@ -1839,12 +1837,12 @@ lookupanim(var_0, var_1) {
 }
 
 lookupanimarray(var_0) {
-  if(isdefined(anim.forced_s1_motionset) || isdefined(anim.forced_s1_motionset_overided))
+  if(isDefined(anim.forced_s1_motionset) || isDefined(anim.forced_s1_motionset_overided))
     maps\_utility::enable_s1_motionset(1);
 
-  if(isdefined(self.animarchetype)) {
-    if(isdefined(anim.archetypes[self.animarchetype][var_0])) {
-      if(isdefined(anim.archetypes["soldier"][var_0])) {
+  if(isDefined(self.animarchetype)) {
+    if(isDefined(anim.archetypes[self.animarchetype][var_0])) {
+      if(isDefined(anim.archetypes["soldier"][var_0])) {
         var_1 = anim.archetypes["soldier"][var_0];
 
         foreach(var_4, var_3 in anim.archetypes[self.animarchetype][var_0])
@@ -1861,11 +1859,11 @@ lookupanimarray(var_0) {
 }
 
 lookuptransitionanim(var_0, var_1, var_2) {
-  if(isdefined(self.animarchetype)) {
-    if(isdefined(anim.archetypes[self.animarchetype][var_0]) && isdefined(anim.archetypes[self.animarchetype][var_0][var_1]) && isdefined(anim.archetypes[self.animarchetype][var_0][var_1][var_2]))
+  if(isDefined(self.animarchetype)) {
+    if(isDefined(anim.archetypes[self.animarchetype][var_0]) && isDefined(anim.archetypes[self.animarchetype][var_0][var_1]) && isDefined(anim.archetypes[self.animarchetype][var_0][var_1][var_2]))
       return anim.archetypes[self.animarchetype][var_0][var_1][var_2];
 
-    if(isdefined(anim.archetypes[self.animarchetype][var_0]) && isdefined(anim.archetypes[self.animarchetype][var_0][var_1]))
+    if(isDefined(anim.archetypes[self.animarchetype][var_0]) && isDefined(anim.archetypes[self.animarchetype][var_0][var_1]))
       return anim.archetypes[self.animarchetype][var_0][var_1];
   }
 
@@ -1873,8 +1871,8 @@ lookuptransitionanim(var_0, var_1, var_2) {
 }
 
 lookupdoganim(var_0, var_1) {
-  if(isdefined(self.animarchetype)) {
-    if(isdefined(anim.archetypes[self.animarchetype][var_0]) && isdefined(anim.archetypes[self.animarchetype][var_0][var_1]))
+  if(isDefined(self.animarchetype)) {
+    if(isDefined(anim.archetypes[self.animarchetype][var_0]) && isDefined(anim.archetypes[self.animarchetype][var_0][var_1]))
       return anim.archetypes[self.animarchetype][var_0][var_1];
   }
 
@@ -1882,7 +1880,7 @@ lookupdoganim(var_0, var_1) {
 }
 
 isdoingpain() {
-  if(isdefined(self.a.paintime) && isdefined(self.a.painanimlength)) {
+  if(isDefined(self.a.paintime) && isDefined(self.a.painanimlength)) {
     var_0 = self.a.paintime + self.a.painanimlength * 1000;
     var_1 = gettime() < var_0;
 
@@ -1931,10 +1929,10 @@ get_trajectory_v_given_x(var_0, var_1, var_2, var_3) {
 }
 
 follow_enemy_with_laser(var_0, var_1) {
-  if(!isdefined(var_0) || var_1 == "") {
+  if(!isDefined(var_0) || var_1 == "") {
     return;
   }
-  if(!isdefined(var_0.laser_follower))
+  if(!isDefined(var_0.laser_follower))
     var_0.laser_follower = 1;
   else
     return;
@@ -1946,26 +1944,26 @@ follow_enemy_with_laser(var_0, var_1) {
 
   var_2 = spawn("script_model", var_0 gettagorigin("tag_flash"));
 
-  if(!isdefined(var_2)) {
+  if(!isDefined(var_2)) {
     var_0.laser_follower = undefined;
     return;
   }
 
-  var_2 setmodel("tag_laser");
+  var_2 setModel("tag_laser");
   var_2 laseron(var_1);
   var_3 = cos(10);
   var_4 = 0.5;
 
-  for (;;) {
-    if(!isdefined(var_0) || !isalive(var_0)) {
+  for(;;) {
+    if(!isDefined(var_0) || !isalive(var_0)) {
       break;
     }
 
-    if(isdefined(var_0.enemy)) {
+    if(isDefined(var_0.enemy)) {
       var_2.origin = var_0 gettagorigin("tag_flash");
       var_5 = var_0 gettagangles("tag_flash");
       var_6 = vectornormalize(var_0.enemy getshootatpos() - var_2.origin);
-      var_7 = anglestoforward(var_5);
+      var_7 = anglesToForward(var_5);
       var_8 = vectornormalize(var_6);
       var_9 = vectortoangles(var_8);
       var_10 = vectordot(var_7, var_8);
@@ -1984,12 +1982,12 @@ follow_enemy_with_laser(var_0, var_1) {
   var_2 laseroff();
   var_2 delete();
 
-  if(isdefined(var_0))
+  if(isDefined(var_0))
     var_0.laser_follower = undefined;
 }
 
 getreacttobulletchance() {
-  if(isdefined(self.a.reacttobulletchance))
+  if(isDefined(self.a.reacttobulletchance))
     return self.a.reacttobulletchance;
 
   return getdvarfloat("ai_reactToBulletChance");
@@ -2013,7 +2011,7 @@ set_run_twitch_animation(var_0) {
 }
 
 set_team_run_twitch_animation(var_0, var_1) {
-  if(!isdefined(level.h1_team_run_twitch_enabled)) {
+  if(!isDefined(level.h1_team_run_twitch_enabled)) {
     level.h1_team_run_twitch_enabled = [];
     level.h1_team_run_twitch_enabled["allies"] = 0;
     level.h1_team_run_twitch_enabled["axis"] = 0;
@@ -2034,15 +2032,15 @@ using_improved_transitions() {
 }
 
 using_tight_turn_anims() {
-  if(isdefined(level.script))
+  if(isDefined(level.script))
     var_0 = level.script;
   else
     var_0 = tolower(getdvar("mapname"));
 
-  if(isdefined(getdvar("debug_force_tight_turn")) && getdvarint("debug_force_tight_turn"))
+  if(isDefined(getdvar("debug_force_tight_turn")) && getdvarint("debug_force_tight_turn"))
     return 1;
 
-  if(isai(self) && isdefined(self.disable_tight_turn))
+  if(isai(self) && isDefined(self.disable_tight_turn))
     return !self.disable_tight_turn;
 
   switch (var_0) {
@@ -2074,7 +2072,7 @@ using_tight_turn_anims() {
 }
 
 using_cqb_tight_turn_20() {
-  if(isdefined(level.script))
+  if(isDefined(level.script))
     var_0 = level.script;
   else
     var_0 = tolower(getdvar("mapname"));
@@ -2114,7 +2112,7 @@ using_exit_node_to_cover_arrival_early_out() {
   if(getdvarint("force_enable_cover_arrival_early_out", 0))
     return 1;
 
-  if(isdefined(level.script))
+  if(isDefined(level.script))
     var_0 = level.script;
   else
     var_0 = tolower(getdvar("mapname"));
@@ -2148,7 +2146,7 @@ using_exit_node_to_cover_arrival_early_out() {
 }
 
 using_cover_transition_angle_correction() {
-  if(isdefined(level.script))
+  if(isDefined(level.script))
     var_0 = level.script;
   else
     var_0 = tolower(getdvar("mapname"));

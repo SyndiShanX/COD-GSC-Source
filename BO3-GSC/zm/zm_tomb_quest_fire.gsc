@@ -23,7 +23,7 @@ function main() {
   level flag::init("fire_puzzle_1_complete");
   level flag::init("fire_puzzle_2_complete");
   level flag::init("fire_upgrade_available");
-  callback::on_connect( & onplayerconnect);
+  callback::on_connect(&onplayerconnect);
   fire_puzzle_1_init();
   fire_puzzle_2_init();
   zm_tomb_vo::add_puzzle_completion_line(1, "vox_sam_fire_puz_solve_0");
@@ -49,12 +49,12 @@ function onplayerconnect() {
 function fire_puzzle_1_init() {}
 
 function fire_puzzle_1_run() {
-  level.sacrifice_volumes = getentarray("fire_sacrifice_volume", "targetname");
+  level.sacrifice_volumes = getEntArray("fire_sacrifice_volume", "targetname");
   level.clone_list = [];
   level thread clone_cleanup_watch_player_presence();
-  array::thread_all(level.sacrifice_volumes, & init_sacrifice_volume);
+  array::thread_all(level.sacrifice_volumes, &init_sacrifice_volume);
   b_any_volumes_unfinished = 1;
-  while (b_any_volumes_unfinished) {
+  while(b_any_volumes_unfinished) {
     level waittill("fire_sacrifice_completed");
     b_any_volumes_unfinished = 0;
     foreach(e_volume in level.sacrifice_volumes) {
@@ -78,7 +78,7 @@ function fire_puzzle_1_cleanup() {
 
 function clone_cleanup_watch_player_presence() {
   level endon("fire_puzzle_1_complete");
-  while (true) {
+  while(true) {
     wait(1);
     if(level.clone_list.size > 0) {
       if(!zm_tomb_chamber::is_chamber_occupied()) {
@@ -98,10 +98,10 @@ function init_sacrifice_volume() {
 }
 
 function run_sacrifice_plinth(e_volume) {
-  while (true) {
+  while(true) {
     if(level flag::get("fire_puzzle_1_complete")) {
       break;
-    } else if(isdefined(e_volume)) {
+    } else if(isDefined(e_volume)) {
       if(e_volume.pct_sacrifices_received > self.script_float || e_volume.b_gods_pleased) {
         break;
       }
@@ -118,13 +118,13 @@ function run_sacrifice_ignition(e_volume) {
   }
   level endon("fire_puzzle_1_complete");
   a_torch_pos = struct::get_array(self.target, "targetname");
-  array::thread_all(a_torch_pos, & run_sacrifice_plinth, e_volume);
+  array::thread_all(a_torch_pos, &run_sacrifice_plinth, e_volume);
   sndorigin = a_torch_pos[0].origin;
-  if(!isdefined(self.angles)) {
+  if(!isDefined(self.angles)) {
     self.angles = (0, 0, 0);
   }
   max_hit_distance_sq = 10000;
-  while (!e_volume.b_gods_pleased) {
+  while(!e_volume.b_gods_pleased) {
     e_volume flag::clear("flame_on");
     level waittill("fire_staff_explosion", v_point, e_projectile);
     if(!zm_tomb_chamber::is_chamber_occupied()) {
@@ -135,7 +135,7 @@ function run_sacrifice_ignition(e_volume) {
     }
     self.e_fx = spawn("script_model", self.origin);
     self.e_fx.angles = vectorscale((-1, 0, 0), 90);
-    self.e_fx setmodel("tag_origin");
+    self.e_fx setModel("tag_origin");
     self.e_fx clientfield::set("barbecue_fx", 1);
     e_volume flag::set("flame_on");
     wait(6);
@@ -146,16 +146,16 @@ function run_sacrifice_ignition(e_volume) {
 
 function light_plinth() {
   e_fx = spawn("script_model", self.origin);
-  e_fx setmodel("tag_origin");
+  e_fx setModel("tag_origin");
   str_exploder_name = "lgtexp_fire_charge_0" + self.script_int;
   exploder::exploder(str_exploder_name);
   e_fx.angles = vectorscale((-1, 0, 0), 90);
-  e_fx playsound("zmb_squest_fire_torch_ignite");
-  e_fx playloopsound("zmb_squest_fire_torch_loop", 0.6);
+  e_fx playSound("zmb_squest_fire_torch_ignite");
+  e_fx playLoopSound("zmb_squest_fire_torch_loop", 0.6);
   level flag::wait_till("fire_puzzle_1_complete");
   wait(30);
   e_fx stoploopsound(0.1);
-  e_fx playsound("zmb_squest_fire_torch_out");
+  e_fx playSound("zmb_squest_fire_torch_out");
   e_fx delete();
   exploder::kill_exploder(str_exploder_name);
 }
@@ -165,13 +165,13 @@ function is_church_occupied() {
 }
 
 function sacrifice_puzzle_zombie_killed(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime) {
-  if(!(isdefined(level.craftables_crafted["elemental_staff_fire"]) && level.craftables_crafted["elemental_staff_fire"]) && getdvarint("zombie_cheat") <= 0) {
+  if(!(isDefined(level.craftables_crafted["elemental_staff_fire"]) && level.craftables_crafted["elemental_staff_fire"]) && getdvarint("zombie_cheat") <= 0) {
     return;
   }
-  if(isdefined(self.is_mechz) && self.is_mechz) {
+  if(isDefined(self.is_mechz) && self.is_mechz) {
     return;
   }
-  if(!isdefined(level.sacrifice_volumes)) {
+  if(!isDefined(level.sacrifice_volumes)) {
     return;
   }
   if(!zm_tomb_chamber::is_chamber_occupied()) {
@@ -206,7 +206,7 @@ function fire_sacrifice_death_clone(e_sacrifice_volume) {
   clone = self spawn_zombie_clone();
   level.clone_list[level.clone_list.size] = clone;
   clone endon("death");
-  if(isdefined(self.missinglegs) && self.missinglegs) {
+  if(isDefined(self.missinglegs) && self.missinglegs) {
     clone scene::play("cin_zmhd_zombie_death_crawl", clone);
   } else {
     clone scene::play("cin_zmhd_zombie_death", clone);
@@ -219,7 +219,7 @@ function fire_sacrifice_death_clone(e_sacrifice_volume) {
       level notify("vo_puzzle_good", e_player);
     }
   }
-  playfx(level._effect["fire_ash_explosion"], clone.origin, anglestoforward(clone.angles), anglestoup(clone.angles));
+  playFX(level._effect["fire_ash_explosion"], clone.origin, anglesToForward(clone.angles), anglestoup(clone.angles));
   e_sacrifice_volume.num_sacrifices_received++;
   e_sacrifice_volume.pct_sacrifices_received = e_sacrifice_volume.num_sacrifices_received / 32;
   if(e_sacrifice_volume.num_sacrifices_received >= 32) {
@@ -232,7 +232,7 @@ function fire_sacrifice_death_clone(e_sacrifice_volume) {
 
 function spawn_zombie_clone() {
   clone = util::spawn_model(self.model, self.origin, self.angles);
-  if(isdefined(self.headmodel)) {
+  if(isDefined(self.headmodel)) {
     clone.headmodel = self.headmodel;
     clone attach(clone.headmodel, "", 1);
   }
@@ -241,8 +241,8 @@ function spawn_zombie_clone() {
 }
 
 function fire_puzzle_2_init() {
-  for (i = 1; i <= 4; i++) {
-    a_ternary = getentarray("fire_torch_ternary_group_0" + i, "targetname");
+  for(i = 1; i <= 4; i++) {
+    a_ternary = getEntArray("fire_torch_ternary_group_0" + i, "targetname");
     if(a_ternary.size > 1) {
       index_to_save = randomintrange(0, a_ternary.size);
       a_ternary[index_to_save] ghost();
@@ -253,11 +253,11 @@ function fire_puzzle_2_init() {
     a_ternary[0] ghost();
   }
   a_torches = struct::get_array("church_torch_target", "script_noteworthy");
-  array::thread_all(a_torches, & fire_puzzle_torch_run);
+  array::thread_all(a_torches, &fire_puzzle_torch_run);
 }
 
 function fire_puzzle_2_run() {
-  a_ternary = getentarray("fire_torch_ternary", "script_noteworthy");
+  a_ternary = getEntArray("fire_torch_ternary", "script_noteworthy");
   assert(a_ternary.size == 4);
   foreach(e_number in a_ternary) {
     e_number show();
@@ -270,14 +270,14 @@ function fire_puzzle_2_run() {
 function fire_puzzle_2_cleanup() {
   a_torches = struct::get_array("church_torch_target", "script_noteworthy");
   foreach(s_torch in a_torches) {
-    if(!isdefined(s_torch.e_fx)) {
+    if(!isDefined(s_torch.e_fx)) {
       s_torch thread fire_puzzle_2_torch_flame();
       wait(0.25);
     }
   }
   wait(30);
   foreach(s_torch in a_torches) {
-    if(isdefined(s_torch.e_fx)) {
+    if(isDefined(s_torch.e_fx)) {
       s_torch.e_fx delete();
       wait(0.25);
     }
@@ -289,17 +289,17 @@ function fire_puzzle_2_is_complete() {
   wrong_torch = 0;
   unlit_torch = 0;
   foreach(e_torch in a_torches) {
-    if(isdefined(e_torch.e_fx) && !e_torch.b_correct_torch) {
+    if(isDefined(e_torch.e_fx) && !e_torch.b_correct_torch) {
       wrong_torch = 1;
     }
-    if(!isdefined(e_torch.e_fx) && e_torch.b_correct_torch) {
+    if(!isDefined(e_torch.e_fx) && e_torch.b_correct_torch) {
       unlit_torch = 1;
     }
   }
-  if(!isdefined(level.n_torches_lit)) {
+  if(!isDefined(level.n_torches_lit)) {
     level.n_torches_lit = 0;
   }
-  if(!isdefined(level.n_wrong_torches)) {
+  if(!isDefined(level.n_wrong_torches)) {
     level.n_wrong_torches = 0;
   }
   level.n_torches_lit++;
@@ -327,7 +327,7 @@ function fire_puzzle_2_is_complete() {
 
 function fire_puzzle_watch_staff() {
   self endon("disconnect");
-  while (true) {
+  while(true) {
     self waittill("projectile_impact", weapon, v_explode_point, n_radius, e_projectile, n_impact);
     if(weapon == level.a_elemental_staffs["staff_fire"].w_weapon) {
       level notify("fire_staff_explosion", v_explode_point, e_projectile);
@@ -336,15 +336,15 @@ function fire_puzzle_watch_staff() {
 }
 
 function fire_puzzle_2_torch_flame() {
-  if(isdefined(self.e_fx)) {
+  if(isDefined(self.e_fx)) {
     self.e_fx delete();
   }
   self.e_fx = spawn("script_model", self.origin);
   self.e_fx.angles = vectorscale((-1, 0, 0), 90);
-  self.e_fx setmodel("tag_origin");
-  playfxontag(level._effect["fire_torch"], self.e_fx, "tag_origin");
-  self.e_fx playsound("zmb_squest_fire_torch_ignite");
-  self.e_fx playloopsound("zmb_squest_fire_torch_loop", 0.6);
+  self.e_fx setModel("tag_origin");
+  playFXOnTag(level._effect["fire_torch"], self.e_fx, "tag_origin");
+  self.e_fx playSound("zmb_squest_fire_torch_ignite");
+  self.e_fx playLoopSound("zmb_squest_fire_torch_loop", 0.6);
   zm_tomb_utility::rumble_nearby_players(self.origin, 1500, 2);
   self.e_fx endon("death");
   if(fire_puzzle_2_is_complete() && !level flag::get("fire_puzzle_2_complete")) {
@@ -354,7 +354,7 @@ function fire_puzzle_2_torch_flame() {
   }
   wait(15);
   self.e_fx stoploopsound(0.1);
-  self.e_fx playsound("zmb_squest_fire_torch_out");
+  self.e_fx playSound("zmb_squest_fire_torch_out");
   if(!level flag::get("fire_puzzle_2_complete")) {
     self.e_fx delete();
   }
@@ -365,7 +365,7 @@ function fire_puzzle_torch_run() {
   self.b_correct_torch = 0;
   max_hit_distance_sq = 4096;
   w_staff_fire = level.a_elemental_staffs["staff_fire"].w_weapon;
-  while (true) {
+  while(true) {
     level waittill("fire_staff_explosion", v_point);
     if(!is_church_occupied()) {
       continue;

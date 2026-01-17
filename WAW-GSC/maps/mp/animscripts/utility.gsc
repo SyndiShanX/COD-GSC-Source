@@ -30,7 +30,6 @@ set_orient_mode(mode, val1) {
 }
 
 debug_anim_print(text) {
-
   if(level.dog_debug_anims)
     println(text + " " + getTime());
   if(level.dog_debug_anims_ent == self getentnum())
@@ -38,7 +37,6 @@ debug_anim_print(text) {
 }
 
 debug_turn_print(text, line) {
-
   if(level.dog_debug_turns == self getentnum()) {
     duration = 200;
     currentYawColor = (1, 1, 1);
@@ -54,7 +52,6 @@ debug_turn_print(text, line) {
 }
 
 current_yaw_line_debug(duration) {
-
   currentYawColor = [];
   currentYawColor[0] = (0, 0, 1);
   currentYawColor[1] = (1, 0, 1);
@@ -63,9 +60,9 @@ current_yaw_line_debug(duration) {
   if(!isDefined(level.lastDebugHeight)) {
     level.lastDebugHeight = 15;
   }
-  while (gettime() - start_time < 1000) {
+  while(gettime() - start_time < 1000) {
     pos1 = (self.origin[0], self.origin[1], self.origin[2] + level.lastDebugHeight);
-    pos2 = pos1 + common_scripts\utility::vectorscale(anglestoforward(self.angles), (current_color_index + 1) * 10);
+    pos2 = pos1 + common_scripts\utility::vectorscale(anglesToForward(self.angles), (current_color_index + 1) * 10);
     line(pos1, pos2, currentYawColor[current_color_index], 0.3, 1, duration);
     current_color_index = (current_color_index + 1) % currentYawColor.size;
     wait(0.05);

@@ -9,7 +9,7 @@ init() {
 }
 
 onplayerconnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connected", var_0);
 
     if(!isai(var_0)) {

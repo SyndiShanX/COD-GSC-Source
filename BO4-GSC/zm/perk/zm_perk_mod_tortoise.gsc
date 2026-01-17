@@ -5,7 +5,6 @@
 
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_perks;
-
 #namespace zm_perk_mod_tortoise;
 
 autoexec __init__system__() {
@@ -19,7 +18,7 @@ __init__() {
 __main__() {}
 
 function_dfb8db6a() {
-  zm_perks::register_perk_mod_basic_info(#"specialty_mod_shield", "mod_tortoise", #"perk_tortoise", #"specialty_shield", 3500);
+  zm_perks::register_perk_mod_basic_info(#"specialty_mod_shield", "mod_tortoise", # "perk_tortoise", # "specialty_shield", 3500);
   zm_perks::register_perk_threads(#"specialty_mod_shield", &function_f2b55850, &function_844bdb66);
 }
 

@@ -77,11 +77,11 @@ watchrestartfx(localclientnum) {
 
 spawn_solid_fx(localclientnum) {
   if(self islocalclientdriver(localclientnum))
-    fx_handle = playfxontag(localclientnum, level._effect["qrdrone_viewmodel_light"], self, "tag_body");
+    fx_handle = playFXOnTag(localclientnum, level._effect["qrdrone_viewmodel_light"], self, "tag_body");
   else if(self friendnotfoe(localclientnum))
-    fx_handle = playfxontag(localclientnum, level._effect["qrdrone_friendly_light"], self, "tag_body");
+    fx_handle = playFXOnTag(localclientnum, level._effect["qrdrone_friendly_light"], self, "tag_body");
   else
-    fx_handle = playfxontag(localclientnum, level._effect["qrdrone_enemy_light"], self, "tag_body");
+    fx_handle = playFXOnTag(localclientnum, level._effect["qrdrone_enemy_light"], self, "tag_body");
 
   self thread cleanupfx(localclientnum, fx_handle);
   return fx_handle;
@@ -100,7 +100,7 @@ blink_fx_and_sound(localclientnum, soundalias) {
     self.interval = 1.0;
 
   while(true) {
-    self playsound(localclientnum, soundalias);
+    self playSound(localclientnum, soundalias);
     self spawn_solid_fx(localclientnum);
     serverwait(localclientnum, self.interval / 2);
     self notify("stopfx");
@@ -141,7 +141,7 @@ loop_local_sound(localclientnum, alias, interval, fx) {
     self.interval = interval;
 
   while(true) {
-    self playsound(localclientnum, alias);
+    self playSound(localclientnum, alias);
     self spawn_solid_fx(localclientnum);
     serverwait(localclientnum, self.interval / 2);
     self notify("stopfx");
@@ -277,7 +277,7 @@ qrdrone_watch_distance() {
           staticalpha = min(1, dist / 200);
         }
 
-        sid = soundent playloopsound("veh_qrdrone_static_lp", 0.2);
+        sid = soundent playLoopSound("veh_qrdrone_static_lp", 0.2);
         self clientscripts\mp\_vehicle::set_static_amount(staticalpha * 2);
         wait 0.05;
       }

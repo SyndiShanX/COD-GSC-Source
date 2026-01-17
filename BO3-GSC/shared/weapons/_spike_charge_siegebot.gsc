@@ -8,7 +8,7 @@
 #namespace spike_charge_siegebot;
 
 function autoexec __init__sytem__() {
-  system::register("spike_charge_siegebot", & __init__, undefined, undefined);
+  system::register("spike_charge_siegebot", &__init__, undefined, undefined);
 }
 
 function __init__() {}

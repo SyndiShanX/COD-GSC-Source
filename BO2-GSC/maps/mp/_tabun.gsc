@@ -106,7 +106,7 @@ damageeffectarea(owner, position, radius, height, killcament) {
       if(!isDefined(players[i].inpoisonarea) || players[i].inpoisonarea == 0) {
         if(players[i] istouching(gaseffectarea) && players[i].sessionstate == "playing") {
           if(!players[i] hasperk("specialty_proximityprotection")) {
-            trace = bullettrace(position, players[i].origin + vectorscale((0, 0, 1), 12.0), 0, players[i]);
+            trace = bulletTrace(position, players[i].origin + vectorscale((0, 0, 1), 12.0), 0, players[i]);
 
             if(trace["fraction"] == 1) {
               players[i].lastpoisonedby = owner;
@@ -141,8 +141,8 @@ damageinpoisonarea(gaseffectarea, killcament, trace, position) {
   tabunshocksound = spawn("script_origin", (0, 0, 1));
   tabunshocksound thread deleteentonownerdeath(self);
   tabunshocksound.origin = position;
-  tabunshocksound playsound(level.sound_shock_tabun_start);
-  tabunshocksound playloopsound(level.sound_shock_tabun_loop);
+  tabunshocksound playSound(level.sound_shock_tabun_start);
+  tabunshocksound playLoopSound(level.sound_shock_tabun_loop);
   timer = 0;
 
   while(trace["fraction"] == 1 && isDefined(gaseffectarea) && self istouching(gaseffectarea) && self.sessionstate == "playing" && isDefined(self.lastpoisonedby)) {
@@ -174,7 +174,7 @@ damageinpoisonarea(gaseffectarea, killcament, trace, position) {
     }
 
     wait 1.0;
-    trace = bullettrace(position, self.origin + vectorscale((0, 0, 1), 12.0), 0, self);
+    trace = bulletTrace(position, self.origin + vectorscale((0, 0, 1), 12.0), 0, self);
   }
 
   tabunshocksound stoploopsound(0.5);
@@ -243,7 +243,7 @@ singlelocation(position, owner) {
 }
 
 hitpos(start, end, color) {
-  trace = bullettrace(start, end, 0, undefined);
+  trace = bulletTrace(start, end, 0, undefined);
 
   level.tabun_debug = getdvarintdefault("scr_tabun_debug", 0);
 
@@ -370,8 +370,8 @@ spawnalllocs(owner, startpos) {
 playtabunsound(position) {
   tabunsound = spawn("script_origin", (0, 0, 1));
   tabunsound.origin = position;
-  tabunsound playsound(level.sound_tabun_start);
-  tabunsound playloopsound(level.sound_tabun_loop);
+  tabunsound playSound(level.sound_tabun_start);
+  tabunsound playLoopSound(level.sound_tabun_loop);
   wait(level.tabungasduration);
   thread playsoundinspace(level.sound_tabun_stop, position);
   tabunsound stoploopsound(0.5);

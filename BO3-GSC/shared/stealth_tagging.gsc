@@ -13,11 +13,11 @@
 function init() {}
 
 function enabled() {
-  return isdefined(self.stealth) && isdefined(self.stealth.tagging);
+  return isDefined(self.stealth) && isDefined(self.stealth.tagging);
 }
 
 function get_tagged() {
-  return isdefined(self.stealth) && isdefined(self.stealth.tagging) && (isdefined(self.stealth.tagging.tagged) && self.stealth.tagging.tagged);
+  return isDefined(self.stealth) && isDefined(self.stealth.tagging) && (isDefined(self.stealth.tagging.tagged) && self.stealth.tagging.tagged);
 }
 
 function tagging_thread() {
@@ -26,24 +26,24 @@ function tagging_thread() {
   self endon("disconnect");
   timeinc = 0.25;
   wait(randomfloatrange(0.05, 1));
-  while (true) {
+  while(true) {
     if(self playerads() > 0.3) {
-      vec_eye_dir = anglestoforward(self getplayerangles());
+      vec_eye_dir = anglesToForward(self getplayerangles());
       vec_eye_pos = self getplayercamerapos();
       rangesq = self.stealth.tagging.range * self.stealth.tagging.range;
-      trace = bullettrace(vec_eye_pos, vec_eye_pos + (vec_eye_dir * 32000), 1, self);
+      trace = bulletTrace(vec_eye_pos, vec_eye_pos + (vec_eye_dir * 32000), 1, self);
       foreach(enemy in level.stealth.enemies[self.team]) {
-        if(!isdefined(enemy) || !isalive(enemy)) {
+        if(!isDefined(enemy) || !isalive(enemy)) {
           continue;
         }
-        if(!enemy enabled() || (isdefined(enemy.stealth.tagging.tagged) && enemy.stealth.tagging.tagged)) {
+        if(!enemy enabled() || (isDefined(enemy.stealth.tagging.tagged) && enemy.stealth.tagging.tagged)) {
           continue;
         }
         if(!isactor(enemy)) {
           continue;
         }
         enemyentnum = enemy getentitynumber();
-        bdirectaiming = isdefined(trace["entity"]) && trace["entity"] == enemy;
+        bdirectaiming = isDefined(trace["entity"]) && trace["entity"] == enemy;
         bbroadaiming = 0;
         if(!bdirectaiming) {
           distsq = distancesquared(enemy.origin, vec_eye_pos);
@@ -53,7 +53,7 @@ function tagging_thread() {
           }
         }
         if(bdirectaiming || bbroadaiming) {
-          if(!isdefined(self.stealth.tagging.tag_times[enemyentnum])) {
+          if(!isDefined(self.stealth.tagging.tag_times[enemyentnum])) {
             self.stealth.tagging.tag_times[enemyentnum] = 0;
           }
           self.stealth.tagging.tag_times[enemyentnum] = self.stealth.tagging.tag_times[enemyentnum] + ((1 / self.stealth.tagging.tag_time) * timeinc);
@@ -65,7 +65,7 @@ function tagging_thread() {
           }
           continue;
         }
-        if(isdefined(self.stealth.tagging.tag_times[enemyentnum])) {
+        if(isDefined(self.stealth.tagging.tag_times[enemyentnum])) {
           self.stealth.tagging.tag_times[enemyentnum] = undefined;
         }
       }
@@ -77,7 +77,7 @@ function tagging_thread() {
 function tagging_set_tagged(tagged) {
   if(isalive(self)) {
     self oed::set_force_tmode(tagged);
-    if(isdefined(self.stealth) && isdefined(self.stealth.tagging)) {
+    if(isDefined(self.stealth) && isDefined(self.stealth.tagging)) {
       if(!tagged) {
         self.stealth.tagging.tagged = undefined;
       } else {

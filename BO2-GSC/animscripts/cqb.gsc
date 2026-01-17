@@ -20,7 +20,7 @@ setupcqbpointsofinterest() {
     wait 0.05;
 
   level.cqbsetupcomplete = 1;
-  pointents = getentarray("cqb_point_of_interest", "targetname");
+  pointents = getEntArray("cqb_point_of_interest", "targetname");
   pointstructs = getstructarray("cqb_point_of_interest", "targetname");
   points = arraycombine(pointents, pointstructs, 1, 0);
 
@@ -56,10 +56,10 @@ findcqbpointsofinterest() {
         moving = ai[i].a.movement != "stop";
         shootatpos = ai[i] getshootatpos();
         lookaheadpoint = shootatpos;
-        forward = anglestoforward(ai[i].angles);
+        forward = anglesToForward(ai[i].angles);
 
         if(moving) {
-          trace = bullettrace(lookaheadpoint, lookaheadpoint + forward * 128, 0, undefined);
+          trace = bulletTrace(lookaheadpoint, lookaheadpoint + forward * 128, 0, undefined);
           lookaheadpoint = trace["position"];
         }
 
@@ -127,7 +127,7 @@ cqbdebug() {
         record3dtext("cqb_target", self.cqb_target.origin + vectorscale((0, 0, 1), 70.0), (0.5, 1, 0.5), "Animscript");
       } else {
         moving = self.a.movement != "stop";
-        forward = anglestoforward(self.angles);
+        forward = anglesToForward(self.angles);
         shootatpos = self getshootatpos();
         lookaheadpoint = shootatpos;
 

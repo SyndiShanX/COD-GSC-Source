@@ -19,7 +19,7 @@ weapon_box_callback(localClientNum, set, newEnt) {
 cleanup_weapon_models() {
   if(isDefined(self.weapon_models)) {
     players = getlocalplayers();
-    for (index = 0; index < players.size; index++) {
+    for(index = 0; index < players.size; index++) {
       if(isDefined(self.weapon_models[index])) {
         self.weapon_models[index].dw Delete();
         self.weapon_models[index] Delete();
@@ -61,19 +61,19 @@ weapon_floats_up() {
   rand = treasure_chest_ChooseRandomWeapon();
   modelname = GetWeaponModel(rand);
   players = getlocalplayers();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     self.weapon_models[i] = spawn(i, self.origin, "script_model");
     self.weapon_models[i].angles = self.angles + (0, 180, 0);
     self.weapon_models[i].dw = spawn(i, self.weapon_models[i].origin - (3, 3, 3), "script_model");
     self.weapon_models[i].dw.angles = self.weapon_models[i].angles;
     self.weapon_models[i].dw Hide();
-    self.weapon_models[i] SetModel(modelname);
-    self.weapon_models[i].dw SetModel(modelname);
+    self.weapon_models[i] setModel(modelname);
+    self.weapon_models[i].dw setModel(modelname);
     self.weapon_models[i] useweaponhidetags(rand);
     self.weapon_models[i] moveto(self.origin + (0, 0, floatHeight), 3, 2, 0.9);
     self.weapon_models[i].dw MoveTo(self.origin + (0, 0, floatHeight) - (3, 3, 3), 3, 2, 0.9);
   }
-  for (i = 0; i < number_cycles; i++) {
+  for(i = 0; i < number_cycles; i++) {
     if(i < 20) {
       wait(0.05);
     } else if(i < 30) {
@@ -86,12 +86,12 @@ weapon_floats_up() {
     rand = treasure_chest_ChooseRandomWeapon();
     modelname = GetWeaponModel(rand);
     players = getlocalplayers();
-    for (index = 0; index < players.size; index++) {
+    for(index = 0; index < players.size; index++) {
       if(isDefined(self.weapon_models[index])) {
-        self.weapon_models[index] SetModel(modelname);
+        self.weapon_models[index] setModel(modelname);
         self.weapon_models[index] useweaponhidetags(rand);
         if(weapon_is_dual_wield(rand)) {
-          self.weapon_models[index].dw SetModel(get_left_hand_weapon_model_name(rand));
+          self.weapon_models[index].dw setModel(get_left_hand_weapon_model_name(rand));
           self.weapon_models[index].dw useweaponhidetags(rand);
           self.weapon_models[index].dw show();
         } else {
@@ -106,7 +106,7 @@ is_weapon_included(weapon_name) {
   if(!isDefined(level._included_weapons)) {
     return false;
   }
-  for (i = 0; i < level._included_weapons.size; i++) {
+  for(i = 0; i < level._included_weapons.size; i++) {
     if(weapon_name == level._included_weapons[i]) {
       return true;
     }

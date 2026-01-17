@@ -38,7 +38,7 @@ get_vehicle_type_count(wave_num, type) {
 // UAV Section ---------------------------------------------- //
 uav_pickup_setup() {
   uav_pickup = GetEnt("uav_controller", "targetname");
-  AssertEx(IsDefined(uav_pickup), "Missing UAV controller pickup objective model in level.");
+  AssertEx(isDefined(uav_pickup), "Missing UAV controller pickup objective model in level.");
 
   uav_pickup Hide();
 
@@ -48,18 +48,18 @@ uav_pickup_setup() {
 
   wait(1);
 
-  while (1) {
+  while(1) {
     //level waittill( "new_wave_started" );
     wait(2);
     uav_pickup Show();
 
     uav_pickup MakeUsable();
     uav_pickup SetCursorHint("HINT_NOICON");
-    // Hold &&1 to pick up
+    // Hold && 1 to pick up
     uav_pickup SetHintString(&"SO_ROOFTOP_CONTINGENCY_DRONE_PICKUP");
     uav_pickup waittill("trigger", player);
 
-    uav_pickup PlaySound("detpack_pickup");
+    uav_pickup playSound("detpack_pickup");
 
     level.so_uav_picked_up = true;
     level.so_uav_player = player;
@@ -76,7 +76,7 @@ uav_pickup_setup() {
     uav_pickup MakeUnusable();
     uav_pickup Hide();
 
-    if(!isdefined(player.already_displayed_hint)) {
+    if(!isDefined(player.already_displayed_hint)) {
       // If the wave 2 hasn't already started, then hold on displaying hint until it actually does.
       if(level.gameskill > 1 && !flag("wave_2_started")) {
         flag_wait("wave_2_started");
@@ -86,7 +86,7 @@ uav_pickup_setup() {
 
       player.already_displayed_hint = 1;
 
-      if(IsDefined(player.remotemissile_actionslot)) {
+      if(isDefined(player.remotemissile_actionslot)) {
         player display_hint("use_uav_" + player.remotemissile_actionslot);
       } else {
         player display_hint("use_uav_4");
@@ -105,7 +105,7 @@ uav_pickup_setup() {
 pickup_uav_reminder() {
   level endon("uav_in_use");
 
-  while (1) {
+  while(1) {
     wait(RandomFloatRange(15, 20));
 
     if(flag("special_op_terminated")) {
@@ -119,15 +119,13 @@ pickup_uav_reminder() {
 wait_to_pickup_uav() {
   wait_to_pickup = true;
 
-  /#
   if(GetDvarInt("uav_now") > 0) {
     wait_to_pickup = false;
   }
-  # /
 
-    if(level.gameSkill < 2) {
-      wait_to_pickup = false;
-    }
+  if(level.gameSkill < 2) {
+    wait_to_pickup = false;
+  }
 
   if(wait_to_pickup) {
     // Just wait for the first wave to be wiped out
@@ -145,9 +143,9 @@ uav() {
 
   level.uav = spawn_vehicle_from_targetname_and_drive("second_uav");
 
-  level.uav PlayLoopSound("uav_engine_loop");
-  level.uavRig = Spawn("script_model", level.uav.origin);
-  level.uavRig SetModel("tag_origin");
+  level.uav playLoopSound("uav_engine_loop");
+  level.uavRig = spawn("script_model", level.uav.origin);
+  level.uavRig setModel("tag_origin");
   thread uav_rig_aiming();
 }
 
@@ -161,15 +159,15 @@ uav_rig_aiming() {
     return;
   }
 
-  if(IsDefined(level.uav_is_destroyed)) {
+  if(isDefined(level.uav_is_destroyed)) {
     return;
   }
 
-  focus_points = GetEntArray("uav_focus_point", "targetname");
+  focus_points = getEntArray("uav_focus_point", "targetname");
 
   level endon("uav_destroyed");
   level.uav endon("death");
-  for (;;) {
+  for(;;) {
     closest_focus = getClosest(level.player.origin, focus_points);
     targetPos = closest_focus.origin;
     angles = VectorToAngles(targetPos - level.uav.origin);
@@ -192,7 +190,7 @@ setup_base_vehicles() {
   self thread vehicle_death_paths();
   self waittill("unloaded");
 
-  if(IsDefined(self.has_target_shader)) {
+  if(isDefined(self.has_target_shader)) {
     self.has_target_shader = undefined;
     Target_Remove(self);
   }
@@ -209,7 +207,7 @@ vehicle_death_paths() {
   min_dist = 50 * 50;
   death_origin = self.origin;
 
-  while (IsDefined(self)) {
+  while(isDefined(self)) {
     if(DistanceSquared(self.origin, death_origin) > min_dist) {
       death_origin = self.origin;
 
@@ -217,9 +215,9 @@ vehicle_death_paths() {
       self ConnectPaths();
 
       // Don't disconnectpaths until we're done moving.
-      while (1) {
+      while(1) {
         wait(0.05);
-        if(!IsDefined(self)) {
+        if(!isDefined(self)) {
           return;
         }
 
@@ -265,7 +263,7 @@ vehicle_death_paths() {
 //
 //	height = 300;
 //
-//	while ( 1 )
+//	while( 1 )
 //	{
 //		speed = self Vehicle_GetSpeed();
 //		if( !IsAlive( self ) || speed < 0.2 )
@@ -282,7 +280,7 @@ unload_when_stuck() {
   self endon("unloading");
 
   self endon("death");
-  while (1) {
+  while(1) {
     wait(2);
     if(self Vehicle_GetSpeed() < 2) {
       self Vehicle_SetSpeed(0, 15);
@@ -296,11 +294,11 @@ unload_when_stuck() {
 spawn_vehicle_and_go(struct) {
   spawner = struct.ent;
 
-  if(IsDefined(struct.delay)) {
+  if(isDefined(struct.delay)) {
     wait(struct.delay);
   }
 
-  if(IsDefined(struct.alt_node)) {
+  if(isDefined(struct.alt_node)) {
     targetname = struct.alt_node.targetname;
 
     spawner.target = targetname;
@@ -317,13 +315,11 @@ spawn_vehicle_and_go(struct) {
   vehicle StartPath();
   //	vehicle thread force_unload( spawner.target + "_end" );
 
-  /#
   so_debug_print("vehicle[" + spawner.targetname + "] spawned");
   vehicle waittill("unloading");
   so_debug_print("vehicle[" + spawner.targetname + "] unloading guys");
   vehicle waittill("unloaded");
   so_debug_print("vehicle[" + spawner.targetname + "] unloading complete");
-  # /
 }
 
 //force_unload( end_name )
@@ -340,7 +336,7 @@ spawn_vehicle_and_go(struct) {
 
 // HUD ----------------------------------------------------
 hud_wave_num() {
-  while (1) {
+  while(1) {
     level waittill("new_wave_started");
 
     // Little delay so the "Wave Starting in..." can be removed
@@ -348,13 +344,13 @@ hud_wave_num() {
 
     hud_count = undefined;
     if(level.current_wave < get_wave_count()) {
-      hud = so_create_hud_item(0, so_hud_ypos(), & "SPECIAL_OPS_WAVENUM", self);
+      hud = so_create_hud_item(0, so_hud_ypos(), &"SPECIAL_OPS_WAVENUM", self);
       hud_count = so_create_hud_item(0, so_hud_ypos(), undefined, self);
       hud_count.alignx = "left";
 
       hud_count SetValue(level.current_wave);
     } else {
-      hud = so_create_hud_item(0, so_hud_ypos(), & "SPECIAL_OPS_WAVEFINAL", self);
+      hud = so_create_hud_item(0, so_hud_ypos(), &"SPECIAL_OPS_WAVEFINAL", self);
       hud.alignx = "center";
     }
 
@@ -366,7 +362,7 @@ hud_wave_num() {
 
     hud thread so_remove_hud_item(true);
 
-    if(IsDefined(hud_count)) {
+    if(isDefined(hud_count)) {
       hud_count thread so_remove_hud_item(true);
     }
   }
@@ -374,8 +370,8 @@ hud_wave_num() {
 
 hud_hostile_count() {
   // Hostiles:
-  hudelem_title = so_create_hud_item(2, so_hud_ypos(), & "SO_ROOFTOP_CONTINGENCY_HOSTILES", self);
-  hudelem_count = so_create_hud_item(2, so_hud_ypos(), & "SPECIAL_OPS_DASHDASH", self);
+  hudelem_title = so_create_hud_item(2, so_hud_ypos(), &"SO_ROOFTOP_CONTINGENCY_HOSTILES", self);
+  hudelem_count = so_create_hud_item(2, so_hud_ypos(), &"SPECIAL_OPS_DASHDASH", self);
   hudelem_count.alignx = "left";
 
   flag_wait("waves_start");
@@ -385,7 +381,7 @@ hud_hostile_count() {
 
   max_count = level.hostile_count;
 
-  while (!flag("challenge_success") || !flag("special_op_terminated")) {
+  while(!flag("challenge_success") || !flag("special_op_terminated")) {
     // Be sure to only play the dialog once.
     if(self == level.player) {
       thread so_dialog_counter_update(level.hostile_count, max_count);
@@ -397,7 +393,7 @@ hud_hostile_count() {
 
     if(curr_count <= 0) {
       hudelem_count so_remove_hud_item(true);
-      hudelem_count = so_create_hud_item(2, so_hud_ypos(), & "SPECIAL_OPS_DASHDASH", self);
+      hudelem_count = so_create_hud_item(2, so_hud_ypos(), &"SPECIAL_OPS_DASHDASH", self);
       hudelem_count.alignx = "left";
 
       hudelem_title thread so_hud_pulse_success();
@@ -407,7 +403,7 @@ hud_hostile_count() {
       hudelem_count thread so_hud_pulse_close();
     }
 
-    while (!flag("challenge_success") && (curr_count == level.hostile_count)) {
+    while(!flag("challenge_success") && (curr_count == level.hostile_count)) {
       wait(0.05);
       // This indicates a new wave has started...
       if(level.hostile_count > curr_count) {
@@ -420,7 +416,7 @@ hud_hostile_count() {
   }
 
   hudelem_count so_remove_hud_item(true);
-  hudelem_count = so_create_hud_item(2, so_hud_ypos(), & "SPECIAL_OPS_DASHDASH", self);
+  hudelem_count = so_create_hud_item(2, so_hud_ypos(), &"SPECIAL_OPS_DASHDASH", self);
   hudelem_count.alignx = "left";
 
   hudelem_title thread so_remove_hud_item();
@@ -436,26 +432,26 @@ hud_new_wave() {
     return;
   }
 
-  // Next Wave in: 
-  wave_msg = & "SO_ROOFTOP_CONTINGENCY_WAVE_STARTS";
+  // Next Wave in:
+  wave_msg = &"SO_ROOFTOP_CONTINGENCY_WAVE_STARTS";
   wave_delay = 0.75;
   if(current_wave == get_wave_count()) {
-    // Final Wave in: 
-    wave_msg = & "SO_ROOFTOP_CONTINGENCY_WAVE_FINAL_STARTS";
+    // Final Wave in:
+    wave_msg = &"SO_ROOFTOP_CONTINGENCY_WAVE_FINAL_STARTS";
   } else {
     if(current_wave == 2) {
-      // Second Wave in: 
-      wave_msg = & "SO_ROOFTOP_CONTINGENCY_WAVE_SECOND_STARTS";
+      // Second Wave in:
+      wave_msg = &"SO_ROOFTOP_CONTINGENCY_WAVE_SECOND_STARTS";
     }
 
     if(current_wave == 3) {
-      // Third Wave in: 
-      wave_msg = & "SO_ROOFTOP_CONTINGENCY_WAVE_THIRD_STARTS";
+      // Third Wave in:
+      wave_msg = &"SO_ROOFTOP_CONTINGENCY_WAVE_THIRD_STARTS";
     }
 
     if(current_wave == 4) {
-      // Fourth Wave in: 
-      wave_msg = & "SO_ROOFTOP_CONTINGENCY_WAVE_FOURTH_STARTS";
+      // Fourth Wave in:
+      wave_msg = &"SO_ROOFTOP_CONTINGENCY_WAVE_FOURTH_STARTS";
     }
   }
 
@@ -479,13 +475,13 @@ hud_new_wave() {
 hud_get_wave_list(wave_num) {
   list = [];
 
-  list[0] = SpawnStruct();
+  list[0] = spawnStruct();
 
   if(wave_num < get_wave_count()) {
-    list[0].text = & "SPECIAL_OPS_INTERMISSION_WAVENUM";
+    list[0].text = &"SPECIAL_OPS_INTERMISSION_WAVENUM";
     list[0].count = wave_num;
   } else {
-    list[0].text = & "SPECIAL_OPS_INTERMISSION_WAVEFINAL";
+    list[0].text = &"SPECIAL_OPS_INTERMISSION_WAVEFINAL";
   }
 
   //	switch( wave_num )
@@ -520,9 +516,9 @@ hud_get_wave_list(wave_num) {
   //			break;
   //	}
 
-  list[1] = SpawnStruct();
-  // &&1 Hostiles
-  list[1].text = & "SO_ROOFTOP_CONTINGENCY_HOSTILES_COUNT";
+  list[1] = spawnStruct();
+  // && 1 Hostiles
+  list[1].text = &"SO_ROOFTOP_CONTINGENCY_HOSTILES_COUNT";
   list[1].count = get_wave_ai_count(wave_num);
 
   index = 2;
@@ -535,14 +531,14 @@ hud_get_wave_list(wave_num) {
 
   if(uaz_count > 0) {
     if(uaz_count == 1) {
-      // &&1 UAZ Vehicle
-      str = & "SO_ROOFTOP_CONTINGENCY_UAZ_COUNT_SINGLE";
+      // && 1 UAZ Vehicle
+      str = &"SO_ROOFTOP_CONTINGENCY_UAZ_COUNT_SINGLE";
     } else {
-      // &&1 UAZ Vehicles
-      str = & "SO_ROOFTOP_CONTINGENCY_UAZ_COUNT";
+      // && 1 UAZ Vehicles
+      str = &"SO_ROOFTOP_CONTINGENCY_UAZ_COUNT";
     }
 
-    list[index] = SpawnStruct();
+    list[index] = spawnStruct();
     list[index].text = str;
     list[index].count = uaz_count;
     index++;
@@ -555,14 +551,14 @@ hud_get_wave_list(wave_num) {
 
   if(bm21_count > 0) {
     if(bm21_count == 1) {
-      // &&1 BM21 Troop Carrier
-      str = & "SO_ROOFTOP_CONTINGENCY_BM21_COUNT_SINGLE";
+      // && 1 BM21 Troop Carrier
+      str = &"SO_ROOFTOP_CONTINGENCY_BM21_COUNT_SINGLE";
     } else {
-      // &&1 BM21 Troop Carriers
-      str = & "SO_ROOFTOP_CONTINGENCY_BM21_COUNT";
+      // && 1 BM21 Troop Carriers
+      str = &"SO_ROOFTOP_CONTINGENCY_BM21_COUNT";
     }
 
-    list[index] = SpawnStruct();
+    list[index] = spawnStruct();
     list[index].text = str;
     list[index].count = bm21_count;
   }
@@ -581,10 +577,10 @@ hud_create_wave_splash(yLine, message) {
 hud_wave_splash(wave_num, timer) {
   hudelems = [];
   list = hud_get_wave_list(wave_num);
-  for (i = 0; i < list.size; i++) {
+  for(i = 0; i < list.size; i++) {
     hudelems[i] = hud_create_wave_splash(i, list[i].text);
 
-    if(IsDefined(list[i].count)) {
+    if(isDefined(list[i].count)) {
       hudelems[i] SetValue(list[i].count);
     }
 
@@ -604,7 +600,7 @@ hud_wave_splash(wave_num, timer) {
 so_debug_print(msg, delay) {
   message = "> " + msg;
 
-  if(IsDefined(delay)) {
+  if(isDefined(delay)) {
     wait delay;
     message = "+>" + message;
   } else {
@@ -626,10 +622,10 @@ distance2d_squared(pos1, pos2) {
 //{
 //	while( 1 )
 //	{
-//		eye_pos = level.player GetEye();
-//		forward = AnglesToForward( level.player GetPlayerAngles() );
+//		eye_pos = level.player getEye();
+//		forward = anglesToForward( level.player GetPlayerAngles() );
 //		forward_pos = eye_pos + vector_multiply( forward, 2000 );
-//		trace = BulletTrace( eye_pos, forward_pos, false, undefined );
+//		trace = bulletTrace( eye_pos, forward_pos, false, undefined );
 //		pos = trace[ "position" ];
 //		draw_circle( pos, 32 );
 //
@@ -667,7 +663,7 @@ distance2d_squared(pos1, pos2) {
 //
 //	// Z circle
 //	circlepoints = [];
-//	for ( i = 0; i < circle_sides; i++ )
+//	for( i = 0; i < circle_sides; i++ )
 //	{
 //		angle = ( angleFrac * i );
 //		xAdd = Cos( angle ) * radius;
@@ -685,7 +681,7 @@ distance2d_squared(pos1, pos2) {
 //{
 //	color = ( 0.8, 0, 0 );
 //
-//	for ( i = 0; i < circlepoints.size; i++ )
+//	for( i = 0; i < circlepoints.size; i++ )
 //	{
 //		start = circlepoints[ i ];
 //		if( i + 1 >= circlepoints.size )

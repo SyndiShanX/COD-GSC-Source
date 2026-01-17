@@ -32,7 +32,7 @@ init_ee_ghost_piano_flags() {
 }
 
 wait_for_valid_damage() {
-  self setcandamage(1);
+  self setCanDamage(1);
 
   while(true) {
     self waittill("damage", undefined, e_inflictor, undefined, undefined, undefined, undefined, undefined, undefined, str_weapon_name, undefined);
@@ -104,7 +104,7 @@ spawn_and_animate_ghost_pianist() {
   e_temp = spawn("script_model", s_anim.origin);
   e_temp.angles = s_anim.angles;
   e_temp setclientfield("ghost_fx", 3);
-  e_temp setmodel("c_zom_zombie_buried_ghost_woman_fb");
+  e_temp setModel("c_zom_zombie_buried_ghost_woman_fb");
   e_temp useanimtree(#animtree);
   e_temp setanim( % ai_zombie_ghost_playing_piano);
   e_temp setclientfield("sndGhostAudio", 1);
@@ -165,7 +165,7 @@ has_player_received_reward() {
 
 delete_ghost_pianist() {
   self setclientfield("ghost_fx", 5);
-  self playsound("zmb_ai_ghost_death");
+  self playSound("zmb_ai_ghost_death");
   wait_network_frame();
   self delete();
 

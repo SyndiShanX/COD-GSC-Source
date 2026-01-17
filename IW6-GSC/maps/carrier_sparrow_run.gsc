@@ -492,7 +492,7 @@ sparrow_run_death() {
         var_4 = vectornormalize(anglesToForward(level.player.angles)) * 90;
         magicbullet("ac130_25mm_carrier", self.origin + (0, 0, 400), self.origin + var_4 + (0, 0, 24));
         wait 0.2;
-        setdvar("ui_deadquote", & "CARRIER_DEATH_GUNSHIP");
+        setdvar("ui_deadquote", &"CARRIER_DEATH_GUNSHIP");
         maps\_utility::missionfailedwrapper();
         self kill();
         level notify("left_area");
@@ -503,7 +503,7 @@ sparrow_run_death() {
       var_4 = vectornormalize(anglesToForward(level.player.angles)) * 80;
       magicbullet("ac130_25mm_carrier", self.origin + (0, 0, 400), self.origin + var_4 + (0, 0, 24));
       wait 0.2;
-      setdvar("ui_deadquote", & "CARRIER_DEATH_GUNSHIP");
+      setdvar("ui_deadquote", &"CARRIER_DEATH_GUNSHIP");
       maps\_utility::missionfailedwrapper();
       self kill();
       level notify("left_area");
@@ -588,7 +588,7 @@ gunship_death_sparrow_platform() {
         wait 1;
 
         if(isalive(self)) {
-          setdvar("ui_deadquote", & "CARRIER_DEATH_GUNSHIP");
+          setdvar("ui_deadquote", &"CARRIER_DEATH_GUNSHIP");
           maps\_utility::missionfailedwrapper();
           self kill();
         }
@@ -603,7 +603,7 @@ gunship_death_sparrow_platform() {
     if(var_1 >= 20.0) {
       maps\carrier_code::gunship_line_attack_death();
       wait 1;
-      setdvar("ui_deadquote", & "CARRIER_DEATH_GUNSHIP");
+      setdvar("ui_deadquote", &"CARRIER_DEATH_GUNSHIP");
       maps\_utility::missionfailedwrapper();
       self kill();
     }

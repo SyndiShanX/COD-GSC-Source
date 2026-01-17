@@ -145,9 +145,7 @@ init_astro_zombie_anims() {
   level._zombie_melee["astro_zombie"][1] = % ai_zombie_attack_v4;
   level._zombie_melee["astro_zombie"][2] = % ai_zombie_attack_v6;
   if(isDefined(level.astro_zombie_anim_override)) {
-    [
-      [level.astro_zombie_anim_override]
-    ]();
+    [[level.astro_zombie_anim_override]]();
   }
   if(!isDefined(level._zombie_deaths)) {
     level._zombie_deaths = [];
@@ -284,8 +282,8 @@ astro_zombie_headbutt_think() {
       continue;
     }
     if(!self.is_headbutt && GetTime() > self.next_headbutt_time) {
-      origin = self GetEye();
-      test_origin = self.enemy GetEye();
+      origin = self getEye();
+      test_origin = self.enemy getEye();
       dist_sqr = distanceSquared(origin, test_origin);
       if(dist_sqr > level.astro_headbutt_radius_sqr) {
         wait_network_frame();
@@ -405,7 +403,7 @@ astro_zombie_attack() {
   }
   player = self.player_to_headbutt;
   perk_list = [];
-  vending_triggers = getentarray("zombie_vending", "targetname");
+  vending_triggers = getEntArray("zombie_vending", "targetname");
   for(i = 0; i < vending_triggers.size; i++) {
     perk = vending_triggers[i].script_noteworthy;
     if(player HasPerk(perk)) {
@@ -447,9 +445,7 @@ astro_zombie_teleport_enemy() {
   black_hole_teleport_structs = getstructarray("struct_black_hole_teleport", "targetname");
   chosen_spot = undefined;
   if(isDefined(level._special_blackhole_bomb_structs)) {
-    black_hole_teleport_structs = [
-      [level._special_blackhole_bomb_structs]
-    ]();
+    black_hole_teleport_structs = [[level._special_blackhole_bomb_structs]]();
   }
   player_current_zone = player get_current_zone();
   if(!isDefined(black_hole_teleport_structs) || black_hole_teleport_structs.size == 0 || !isDefined(player_current_zone)) {
@@ -510,9 +506,9 @@ astro_zombie_teleport(struct_dest) {
 }
 
 astro_zombie_die() {
-  PlayFxOnTag(level._effect["astro_explosion"], self, "J_SpineLower");
+  playFXOnTag(level._effect["astro_explosion"], self, "J_SpineLower");
   self stopLoopSound(1);
-  self playsound("evt_astro_zombie_explo");
+  self playSound("evt_astro_zombie_explo");
   self thread astro_delay_delete();
   self thread astro_player_pulse();
   level.num_astro_zombies--;
@@ -531,7 +527,7 @@ astro_delay_delete() {
 }
 
 astro_player_pulse() {
-  eye_org = self GetEye();
+  eye_org = self getEye();
   foot_org = self.origin + (0, 0, 8);
   mid_org = (foot_org[0], foot_org[1], (foot_org[2] + eye_org[2]) / 2);
   astro_org = self.origin;
@@ -549,7 +545,7 @@ astro_player_pulse() {
     if(!is_player_valid(player)) {
       continue;
     }
-    test_org = player GetEye();
+    test_org = player getEye();
     explode_radius = level.astro_explode_radius;
     if(distanceSquared(eye_org, test_org) > explode_radius * explode_radius) {
       continue;
@@ -612,7 +608,7 @@ astro_microwavegun_sizzle(player) {
 }
 
 astro_zombie_default_enter_level() {
-  Playfx(level._effect["astro_spawn"], self.origin);
+  playFX(level._effect["astro_spawn"], self.origin);
   playsoundatposition("zmb_bolt", self.origin);
   PlayRumbleOnPosition("explosion_generic", self.origin);
   players = get_players();

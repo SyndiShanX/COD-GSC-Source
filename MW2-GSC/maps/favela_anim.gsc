@@ -174,7 +174,6 @@ model_anims() {
   level.scr_model["hula_girl"] = "vehicle_hummer_hula_girl";
   level.scr_anim["hula_girl"]["bobble"] = % hula_girl_bobble;
   level.scr_anim["hula_girl"]["bobble_stop"] = % hula_girl_bobble_stop;
-
 }
 
 dialog() {
@@ -347,7 +346,7 @@ dialog() {
   // Roach! I've spotted Faust, he's making a run for it! He's headed your way!
   level.scr_radio["favela_cmt_spottedfaust"] = "favela_cmt_spottedfaust";
 
-  // And don't shoot him! We need him alive and unharmed! 
+  // And don't shoot him! We need him alive and unharmed!
   level.scr_radio["favela_cmt_unharmed"] = "favela_cmt_unharmed";
 
   // Roach, we're going to cut him off at the summit, keep pushing him that way! Go! Go!
@@ -402,7 +401,7 @@ dialog() {
   // Keep corraling him up the hill! We'll cut him off at the top!
   level.scr_radio["favela_cmt_corraling"] = "favela_cmt_corraling";
 
-  // We've got eyes on Faust - wait! Shite! he's headed back towards you! 
+  // We've got eyes on Faust - wait! Shite! he's headed back towards you!
   level.scr_radio["favela_cmt_backtowards"] = "favela_cmt_backtowards";
 
   // Roach, keep pushing him up the hill! Don't let him double back!
@@ -430,12 +429,6 @@ dialog() {
   level.scr_sound["ghost"]["favela_gst_sendchopper"] = "favela_gst_sendchopper";
   level.scr_sound["ghost"]["favela_gst_skiesareclear"] = "favela_gst_skiesareclear";
   level.scr_sound["ghost"]["favela_gst_onourown"] = "favela_gst_onourown";
-
-
-
-
-
-
 
   //------------
   // CIVILIAN WALLA

@@ -127,7 +127,7 @@ bank_withdraw_unitrigger() {
 }
 
 bank_unitrigger(name, prompt_fn, think_fn, override_length, override_width, override_height, override_radius) {
-  unitrigger_stub = spawnstruct();
+  unitrigger_stub = spawnStruct();
   unitrigger_stub.origin = self.origin;
 
   if(isDefined(self.script_angles))

@@ -11,19 +11,19 @@
 function main() {
   level thread function_87c8026c();
   level thread function_ca589ae4();
-  clientfield::register("toplayer", "slowmo_duck_active", 1, 2, "int", & function_41d671f5, 0, 0);
+  clientfield::register("toplayer", "slowmo_duck_active", 1, 2, "int", &function_41d671f5, 0, 0);
 }
 
 function sndwindsystem(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    if(!isdefined(self.soundid1)) {
+    if(!isDefined(self.soundid1)) {
       self stopallloopsounds();
-      self.soundid1 = self playloopsound("amb_scripted_wind_normal", 2);
+      self.soundid1 = self playLoopSound("amb_scripted_wind_normal", 2);
       setsoundvolume(self.soundid1, 1);
       setsoundvolumerate(self.soundid1, 0.5);
     }
-    if(!isdefined(self.soundid2)) {
-      self.soundid2 = self playloopsound("amb_scripted_wind_heavy", 2);
+    if(!isDefined(self.soundid2)) {
+      self.soundid2 = self playLoopSound("amb_scripted_wind_heavy", 2);
       setsoundvolume(self.soundid2, 0);
       setsoundvolumerate(self.soundid2, 0.5);
     }
@@ -45,10 +45,10 @@ function sndwindsystem(localclientnum, oldval, newval, bnewent, binitialsnap, fi
   } else {
     self notify("hash_450e1742");
     self stopallloopsounds();
-    if(isdefined(self.soundid1)) {
+    if(isDefined(self.soundid1)) {
       self.soundid1 = undefined;
     }
-    if(isdefined(self.soundid2)) {
+    if(isDefined(self.soundid2)) {
       self.soundid2 = undefined;
     }
   }
@@ -59,7 +59,7 @@ function function_d84ed3d1() {
   self endon("hash_d84ed3d1");
   self endon("hash_450e1742");
   self waittill("entityshutdown");
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     self stopallloopsounds();
   }
 }

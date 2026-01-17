@@ -12,7 +12,7 @@
 #namespace ballistic_knife;
 
 function init_shared() {
-  callback::add_weapon_watcher( & createballisticknifewatcher);
+  callback::add_weapon_watcher(&createballisticknifewatcher);
 }
 
 function onspawn(watcher, player) {
@@ -21,16 +21,16 @@ function onspawn(watcher, player) {
   level endon("game_ended");
   self waittill("stationary", endpos, normal, angles, attacker, prey, bone);
   isfriendly = 0;
-  if(isdefined(endpos)) {
+  if(isDefined(endpos)) {
     retrievable_model = spawn("script_model", endpos);
-    retrievable_model setmodel("wpn_t7_loot_ballistic_knife_projectile");
+    retrievable_model setModel("wpn_t7_loot_ballistic_knife_projectile");
     retrievable_model setteam(player.team);
     retrievable_model setowner(player);
     retrievable_model.owner = player;
     retrievable_model.angles = angles;
     retrievable_model.name = watcher.weapon;
     retrievable_model.targetname = "sticky_weapon";
-    if(isdefined(prey)) {
+    if(isDefined(prey)) {
       if(level.teambased && player.team == prey.team) {
         isfriendly = 1;
       }
@@ -61,7 +61,7 @@ function onspawn(watcher, player) {
 function watch_shutdown() {
   pickuptrigger = self.pickuptrigger;
   self waittill("death");
-  if(isdefined(pickuptrigger)) {
+  if(isDefined(pickuptrigger)) {
     pickuptrigger delete();
   }
 }
@@ -71,12 +71,12 @@ function onspawnretrievetrigger(watcher, player) {
   player endon("disconnect");
   level endon("game_ended");
   player waittill("ballistic_knife_stationary", retrievable_model, normal, prey);
-  if(!isdefined(retrievable_model)) {
+  if(!isDefined(retrievable_model)) {
     return;
   }
   vec_scale = 10;
   trigger_pos = [];
-  if(isdefined(prey) && (isplayer(prey) || isai(prey))) {
+  if(isDefined(prey) && (isplayer(prey) || isai(prey))) {
     trigger_pos[0] = prey.origin[0];
     trigger_pos[1] = prey.origin[1];
     trigger_pos[2] = prey.origin[2] + vec_scale;
@@ -91,12 +91,12 @@ function onspawnretrievetrigger(watcher, player) {
   pickup_trigger.owner = player;
   retrievable_model.pickuptrigger = pickup_trigger;
   pickup_trigger enablelinkto();
-  if(isdefined(prey)) {
+  if(isDefined(prey)) {
     pickup_trigger linkto(prey);
   } else {
     pickup_trigger linkto(retrievable_model);
   }
-  retrievable_model thread watch_use_trigger(pickup_trigger, retrievable_model, & pick_up, watcher.pickupsoundplayer, watcher.pickupsound);
+  retrievable_model thread watch_use_trigger(pickup_trigger, retrievable_model, &pick_up, watcher.pickupsoundplayer, watcher.pickupsound);
   retrievable_model thread watch_shutdown();
 }
 
@@ -105,7 +105,7 @@ function watch_use_trigger(trigger, model, callback, playersoundonuse, npcsoundo
   self endon("delete");
   level endon("game_ended");
   max_ammo = level.weaponballisticknife.maxammo + 1;
-  while (true) {
+  while(true) {
     trigger waittill("trigger", player);
     if(!isalive(player)) {
       continue;
@@ -113,17 +113,17 @@ function watch_use_trigger(trigger, model, callback, playersoundonuse, npcsoundo
     if(!player isonground() && !sessionmodeismultiplayergame()) {
       continue;
     }
-    if(isdefined(trigger.triggerteam) && player.team != trigger.triggerteam) {
+    if(isDefined(trigger.triggerteam) && player.team != trigger.triggerteam) {
       continue;
     }
-    if(isdefined(trigger.claimedby) && player != trigger.claimedby) {
+    if(isDefined(trigger.claimedby) && player != trigger.claimedby) {
       continue;
     }
     if(!player hasweapon(level.weaponballisticknife, 1)) {
       continue;
     }
     heldballisticknife = player getweaponforweaponroot(level.weaponballisticknife);
-    if(!isdefined(heldballisticknife)) {
+    if(!isDefined(heldballisticknife)) {
       continue;
     }
     ammo_stock = player getweaponammostock(heldballisticknife);
@@ -136,11 +136,11 @@ function watch_use_trigger(trigger, model, callback, playersoundonuse, npcsoundo
     if(total_ammo >= max_ammo || !hasreloaded) {
       continue;
     }
-    if(isdefined(playersoundonuse)) {
+    if(isDefined(playersoundonuse)) {
       player playlocalsound(playersoundonuse);
     }
-    if(isdefined(npcsoundonuse)) {
-      player playsound(npcsoundonuse);
+    if(isDefined(npcsoundonuse)) {
+      player playSound(npcsoundonuse);
     }
     self thread[[callback]](player);
     break;
@@ -153,7 +153,7 @@ function pick_up(player) {
   player challenges::pickedupballisticknife();
   if(current_weapon.rootweapon != level.weaponballisticknife) {
     heldballisticknife = player getweaponforweaponroot(level.weaponballisticknife);
-    if(!isdefined(heldballisticknife)) {
+    if(!isDefined(heldballisticknife)) {
       return;
     }
     clip_ammo = player getweaponammoclip(heldballisticknife);
@@ -170,9 +170,9 @@ function pick_up(player) {
 }
 
 function destroy_ent() {
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     pickuptrigger = self.pickuptrigger;
-    if(isdefined(pickuptrigger)) {
+    if(isDefined(pickuptrigger)) {
       pickuptrigger delete();
     }
     self delete();
@@ -181,7 +181,7 @@ function destroy_ent() {
 
 function dropknivestoground() {
   self endon("death");
-  for (;;) {
+  for(;;) {
     level waittill("drop_objects_to_ground", origin, radius);
     self droptoground(origin, radius);
   }
@@ -204,8 +204,8 @@ function updateretrievetrigger() {
 
 function createballisticknifewatcher() {
   watcher = self weaponobjects::createuseweaponobjectwatcher("knife_ballistic", self.team);
-  watcher.onspawn = & onspawn;
-  watcher.ondetonatecallback = & weaponobjects::deleteent;
-  watcher.onspawnretrievetriggers = & onspawnretrievetrigger;
+  watcher.onspawn = &onspawn;
+  watcher.ondetonatecallback = &weaponobjects::deleteent;
+  watcher.onspawnretrievetriggers = &onspawnretrievetrigger;
   watcher.storedifferentobject = 1;
 }

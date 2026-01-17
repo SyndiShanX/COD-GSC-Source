@@ -206,7 +206,7 @@ pickTeamFromScores(teams) {
   return assignment;
 }
 getSplitscreenTeam() {
-  for (index = 0; index < level.players.size; index++) {
+  for(index = 0; index < level.players.size; index++) {
     if(!isDefined(level.players[index]))
       continue;
     if(level.players[index] == self)
@@ -357,9 +357,7 @@ menuSpectator() {
     self.sessionteam = "spectator";
     if(!level.teamBased)
       self.ffateam = "spectator";
-    [
-      [level.spawnSpectator]
-    ]();
+    [[level.spawnSpectator]]();
     self setclientdvar("g_scriptMainMenu", game["menu_team"]);
     self notify("joined_spectators");
   }
@@ -398,7 +396,7 @@ menuClass(response) {
       self maps\mp\gametypes\_class::giveLoadout(self.pers["team"], self.pers["class"]);
       self maps\mp\gametypes\_hardpoints::giveOwnedKillstreak();
     } else if(!level.splitScreen) {
-      notifyData = spawnstruct();
+      notifyData = spawnStruct();
       self DisplayGameModeMessage(game["strings"]["change_class"], "uin_alert_slideout");
     }
   } else {
@@ -448,4 +446,3 @@ getObjectiveScoreText(team) {
 getObjectiveHintText(team) {
   return game["strings"]["objective_hint_" + team];
 }
-

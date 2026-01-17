@@ -15,7 +15,7 @@ player_add_points(points) {
 add_to_player_score(points) {
   lowMask = 15;
   curScore = self getscoremultiplier();
-  actual_multiplier = (curScore & lowMask) + 1;
+  actual_multiplier = (curScore &lowMask) + 1;
   points *= actual_multiplier;
   self.score += points;
   if(self.score >= self.next_extra_life) {
@@ -34,7 +34,7 @@ update_hud() {
 update_multiplier_bar(increment) {
   lowMask = 15;
   curScore = self getscoremultiplier();
-  actual_multiplier = (curScore & lowMask) + 1;
+  actual_multiplier = (curScore &lowMask) + 1;
   actual_increment = curScore >> 4;
   increment = int(increment);
   if(increment == 0) {

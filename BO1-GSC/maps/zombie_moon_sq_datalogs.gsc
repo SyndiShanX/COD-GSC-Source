@@ -43,7 +43,7 @@ init() {
     who._has_log = undefined;
     who remove_sidequest_icon("sq", "datalog");
     sound_ent = spawn("script_origin", player.origin);
-    sound_ent PlaySound(datalogs[i], "sounddone");
+    sound_ent playSound(datalogs[i], "sounddone");
     sound_ent playLoopSound("vox_radio_egg_snapshot", 1);
     wait(datalogs_delay[datalogs[i]]);
     sound_ent stopLoopSound(1);

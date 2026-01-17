@@ -10,14 +10,14 @@
 
 // this script handles all major global gameskill considerations
 setSkill(reset) {
-  if(!isdefined(level.script))
+  if(!isDefined(level.script))
     level.script = ToLower(GetDvar("mapname"));
 
-  if(!isdefined(reset) || reset == false) {
-    if(IsDefined(level.gameSkill))
+  if(!isDefined(reset) || reset == false) {
+    if(isDefined(level.gameSkill)) {
       return;
-
-    if(!isdefined(level.custom_player_attacker))
+    }
+    if(!isDefined(level.custom_player_attacker))
       level.custom_player_attacker = ::return_false;
 
     level.global_damage_func_ads = ::empty_kill_func;
@@ -34,7 +34,7 @@ setSkill(reset) {
         player ent_flag_init("coop_downed");
         player ent_flag_init("coop_pause_bleedout_timer");
         player ent_flag_init("coop_proc_running");
-        player.coop = SpawnStruct();
+        player.coop = spawnStruct();
       }
 
       player ent_flag_init("player_has_red_flashing_overlay");
@@ -45,8 +45,8 @@ setSkill(reset) {
       player ent_flag_init("near_death_vision_enabled");
       player ent_flag_set("near_death_vision_enabled");
 
-      player.gs = SpawnStruct(); // gs = gameskill
-      player.a = SpawnStruct();
+      player.gs = spawnStruct(); // gs = gameskill
+      player.a = spawnStruct();
 
       player.damage_functions = [];
       player maps\_player_stats::init_stats();
@@ -72,19 +72,18 @@ setSkill(reset) {
     level.difficultyType[3] = "veteran";
 
     // string not found for GAMESKILL_EASY
-    level.difficultyString["easy"] = & "GAMESKILL_EASY";
+    level.difficultyString["easy"] = &"GAMESKILL_EASY";
     // string not found for GAMESKILL_NORMAL
-    level.difficultyString["normal"] = & "GAMESKILL_NORMAL";
+    level.difficultyString["normal"] = &"GAMESKILL_NORMAL";
     // string not found for GAMESKILL_HARDENED
-    level.difficultyString["hardened"] = & "GAMESKILL_HARDENED";
+    level.difficultyString["hardened"] = &"GAMESKILL_HARDENED";
     // string not found for GAMESKILL_VETERAN
-    level.difficultyString["veteran"] = & "GAMESKILL_VETERAN";
+    level.difficultyString["veteran"] = &"GAMESKILL_VETERAN";
     //thread update_skill_on_change();
-    /#
-    thread playerHealthDebug();
-    # /
 
-      thread gameskill_change_monitor();
+    thread playerHealthDebug();
+
+    thread gameskill_change_monitor();
   }
 
   //createprintchannel( "script_autodifficulty" );
@@ -140,7 +139,7 @@ setSkill(reset) {
   // level.longRegenTime
   // this var controls how long it takes before your health comes back
 
-  // 
+  //
   level.difficultySettings["base_enemy_accuracy"]["easy"] = 0.9;
   level.difficultySettings["base_enemy_accuracy"]["normal"] = 1.0;
   level.difficultySettings["base_enemy_accuracy"]["hardened"] = 1.15;
@@ -290,10 +289,10 @@ setSkill(reset) {
   level.difficultySettings["player_downed_buffer_time"]["hardened"] = 1.5;
   level.difficultySettings["player_downed_buffer_time"]["veteran"] = 0;
 
-  // in case there are no enties in the map. 
+  // in case there are no enties in the map.
   level.lastPlayerSighted = 0;
 
-  if(IsDefined(level.custom_gameskill_func))
+  if(isDefined(level.custom_gameskill_func))
     [[level.custom_gameskill_func]]();
 
   if(coop_with_one_player_downed()) {
@@ -378,14 +377,14 @@ make_remaining_player_a_little_stronger() {
 updateAllDifficulty() {
   setGlobalDifficulty();
 
-  for (i = 0; i < level.players.size; i++) {
+  for(i = 0; i < level.players.size; i++) {
     level.players[i] setDifficulty();
   }
 }
 
 setDifficulty() {
   Assert(IsPlayer(self));
-  Assert(IsDefined(self.gameskill));
+  Assert(isDefined(self.gameskill));
 
   self set_difficulty_from_locked_settings();
 }
@@ -408,7 +407,7 @@ setGlobalDifficulty() {
 
   if(is_coop()) {
     // Once a player is downed, the other player gets this much time before they can be downed.
-    AssertEx(IsDefined(level.difficultySettings["player_downed_buffer_time"][current_skill]), "No player_downed_buffer_time for " + current_skill);
+    AssertEx(isDefined(level.difficultySettings["player_downed_buffer_time"][current_skill]), "No player_downed_buffer_time for " + current_skill);
     level.player_downed_death_buffer_time = level.difficultySettings["player_downed_buffer_time"][current_skill];
   }
 
@@ -427,7 +426,7 @@ updateGameSkill() {
   if(is_coop() && (level.player2.gameskill < level.specops_reward_gameskill))
     level.specops_reward_gameskill = level.player2.gameskill;
 
-  if(IsDefined(level.forcedgameskill))
+  if(isDefined(level.forcedgameskill))
     level.gameskill = level.forcedgameskill;
 
   Assert(level.gameSkill >= 0 && level.gameSkill <= 3);
@@ -446,8 +445,8 @@ updateGameSkill() {
 gameskill_change_monitor() {
   current_gameskill = level.gameSkill;
 
-  while (1) {
-    if(!isdefined(current_gameskill)) {
+  while(1) {
+    if(!isDefined(current_gameskill)) {
       wait 1;
       current_gameskill = level.gameSkill;
       continue;
@@ -513,9 +512,9 @@ apply_difficulty_frac_with_func(difficulty_func, current_frac) {
 }
 
 update_player_attacker_accuracy() {
-  if(self ent_flag("player_zero_attacker_accuracy"))
+  if(self ent_flag("player_zero_attacker_accuracy")) {
     return;
-
+  }
   self.IgnoreRandomBulletDamage = self.baseIgnoreRandomBulletDamage;
   self.attackeraccuracy = self.gs.player_attacker_accuracy;
 }
@@ -526,7 +525,7 @@ apply_difficulty_step_with_func(difficulty_func, current_frac) {
 
   //prof_begin( "apply_difficulty_step_with_func" );
 
-  // sets the value of difficulty settings that can't blend between two 
+  // sets the value of difficulty settings that can't blend between two
   self.gs.missTimeConstant = [[difficulty_func]]("missTimeConstant", current_frac);
   self.gs.missTimeDistanceFactor = [[difficulty_func]]("missTimeDistanceFactor", current_frac);
   self.gs.dog_hits_before_kill = [[difficulty_func]]("dog_hits_before_kill", current_frac);
@@ -553,10 +552,10 @@ get_blended_difficulty(system, current_frac) {
 
   // get the value from the available data points
   difficulty_array = level.difficultySettings_frac_data_points[system];
-  Assert(IsDefined(difficulty_array));
+  Assert(isDefined(difficulty_array));
   Assert(difficulty_array.size >= 1);
 
-  for (i = 1; i < difficulty_array.size; i++) {
+  for(i = 1; i < difficulty_array.size; i++) {
     high_frac = difficulty_array[i]["frac"];
     high_val = difficulty_array[i]["val"];
 
@@ -628,21 +627,22 @@ pain_protection_check() {
   return true;
 }
 
-/#
 playerHealthDebug() {
   waittillframeend; // for init to finish
   SetDvarIfUninitialized("scr_health_debug", "0");
 
-  while (1) {
-    while (1) {
-      if(GetDebugDvar("scr_health_debug") == "1")
+  while(1) {
+    while(1) {
+      if(GetDebugDvar("scr_health_debug") == "1") {
         break;
+      }
       wait .5;
     }
     thread printHealthDebug();
-    while (1) {
-      if(GetDebugDvar("scr_health_debug") != "1")
+    while(1) {
+      if(GetDebugDvar("scr_health_debug") != "1") {
         break;
+      }
       wait .5;
     }
     level notify("stop_printing_health_bars");
@@ -663,14 +663,14 @@ printHealthDebug() {
   healthBarKeys[1] = "No Hit Time";
   healthBarKeys[2] = "No Die Time";
 
-  for (playerIndex = 0; playerIndex < level.players.size; playerIndex++) {
+  for(playerIndex = 0; playerIndex < level.players.size; playerIndex++) {
     player = level.players[playerIndex];
     if(!isDefined(player.playerInvulTimeEnd))
       player.playerInvulTimeEnd = 0;
     if(!isDefined(player.deathInvulnerableTimeout))
       player.deathInvulnerableTimeout = 0;
 
-    for (i = 0; i < healthBarKeys.size; i++) {
+    for(i = 0; i < healthBarKeys.size; i++) {
       key = healthBarKeys[i];
 
       textelem = NewHudElem();
@@ -701,10 +701,10 @@ printHealthDebug() {
     }
   }
 
-  while (1) {
+  while(1) {
     wait .05;
 
-    for (i = 0; i < level.healthBarHudElems.size; i++) {
+    for(i = 0; i < level.healthBarHudElems.size; i++) {
       player = level.healthBarHudElems[i].player;
 
       width = 0;
@@ -725,103 +725,102 @@ printHealthDebug() {
 }
 
 destroyHealthDebug() {
-  if(!isdefined(level.healthBarHudElems))
+  if(!isDefined(level.healthBarHudElems))
     return;
-  for (i = 0; i < level.healthBarHudElems.size; i++) {
+  for(i = 0; i < level.healthBarHudElems.size; i++) {
     level.healthBarHudElems[i].bar Destroy();
     level.healthBarHudElems[i] Destroy();
   }
 }
-# /
 
-  /* 
-  // this is run on each enemy AI.
-  axisAccuracyControl()
-  {
-  	self endon( "long_death" );
-  	self endon( "death" );
-  	
-  	//prof_begin( "axisAccuracyControl" );
-  	
-  	SetDvarIfUninitialized( "scr_dynamicaccuracy", "off" );
-  	if( GetDvar( "scr_dynamicaccuracy" ) != "on" )
-  	{
-  // 		self simpleAccuracyControl();
-  	}
-  	else
-  	{
-  		for ( ;; )
-  		{
-  			wait( 0.05 );
-  			waittillframeend;// in case our accuracy changed this frame
-  			
-  			//prof_begin( "axisAccuracyControl" );
-  			
-  			if( IsDefined( self.enemy ) && IsPlayer( self.enemy ) && self CanSee( self.enemy ) )
-  			{
-  				self.a.accuracyGrowthMultiplier += 0.05 * anim.accuracyGrowthRate;
-  				if( self.a.accuracyGrowthMultiplier > anim.accuracyGrowthMax )
-  					self.a.accuracyGrowthMultiplier = anim.accuracyGrowthMax;
-  			}
-  			else
-  			{
-  				self.a.accuracyGrowthMultiplier = 1;
-  			}
-  			
-  			self setEnemyAccuracy();
-  			
-  			//prof_end( "axisAccuracyControl" );
-  		}
-  	}
-  	
-  	//prof_end( "axisAccuracyControl" );
+/*
+// this is run on each enemy AI.
+axisAccuracyControl()
+{
+	self endon( "long_death" );
+	self endon( "death" );
+	
+	//prof_begin( "axisAccuracyControl" );
+	
+	SetDvarIfUninitialized( "scr_dynamicaccuracy", "off" );
+	if( GetDvar( "scr_dynamicaccuracy" ) != "on" )
+	{
+// 		self simpleAccuracyControl();
+	}
+	else
+	{
+		for( ;; )
+		{
+			wait( 0.05 );
+			waittillframeend;// in case our accuracy changed this frame
+			
+			//prof_begin( "axisAccuracyControl" );
+			
+			if( isDefined( self.enemy ) && IsPlayer( self.enemy ) && self CanSee( self.enemy ) )
+			{
+				self.a.accuracyGrowthMultiplier += 0.05 * anim.accuracyGrowthRate;
+				if( self.a.accuracyGrowthMultiplier > anim.accuracyGrowthMax )
+					self.a.accuracyGrowthMultiplier = anim.accuracyGrowthMax;
+			}
+			else
+			{
+				self.a.accuracyGrowthMultiplier = 1;
+			}
+			
+			self setEnemyAccuracy();
+			
+			//prof_end( "axisAccuracyControl" );
+		}
+	}
+	
+	//prof_end( "axisAccuracyControl" );
+}
+
+alliesAccuracyControl()
+{
+	self endon( "long_death" );
+	self endon( "death" );
+	
+// 	self simpleAccuracyControl();
+}
+*/
+
+set_accuracy_based_on_situation() {
+  if(self animscripts\combat_utility::isSniper() && IsAlive(self.enemy)) {
+    self setSniperAccuracy();
+    return;
   }
 
-  alliesAccuracyControl()
-  {
-  	self endon( "long_death" );
-  	self endon( "death" );
-  	
-  // 	self simpleAccuracyControl();
-  }
-  */
-
-  set_accuracy_based_on_situation() {
-    if(self animscripts\combat_utility::isSniper() && IsAlive(self.enemy)) {
-      self setSniperAccuracy();
+  if(IsPlayer(self.enemy)) {
+    resetMissDebounceTime();
+    if(self.a.missTime > GetTime()) {
+      self.accuracy = 0;
       return;
     }
-
-    if(IsPlayer(self.enemy)) {
-      resetMissDebounceTime();
-      if(self.a.missTime > GetTime()) {
-        self.accuracy = 0;
-        return;
-      }
-    }
-
-    if(self.script == "move") {
-      if(self isCQBWalkingOrFacingEnemy())
-        self.accuracy = anim.walk_accuracy * self.baseAccuracy;
-      else
-        self.accuracy = anim.run_accuracy * self.baseAccuracy;
-      return;
-    }
-
-    self.accuracy = self.baseAccuracy;
-
-    // rambo corner is more accurate so it's still a threat to the player
-    if(IsDefined(self.isRambo) && IsDefined(self.ramboAccuracyMult))
-      self.accuracy *= self.ramboAccuracyMult;
   }
+
+  if(self.script == "move") {
+    if(self isCQBWalkingOrFacingEnemy())
+      self.accuracy = anim.walk_accuracy * self.baseAccuracy;
+    else
+      self.accuracy = anim.run_accuracy * self.baseAccuracy;
+    return;
+  }
+
+  self.accuracy = self.baseAccuracy;
+
+  // rambo corner is more accurate so it's still a threat to the player
+  if(isDefined(self.isRambo) && isDefined(self.ramboAccuracyMult))
+    self.accuracy *= self.ramboAccuracyMult;
+}
 
 setSniperAccuracy() {
   /*
   // if sniperShotCount isn't defined, a sniper is shooting from some place that's not in normal shoot behavior.
   // that probably means they're doing some sort of blindfire or something that would look stupid for a sniper to do.
-  Assert( IsDefined( self.sniperShotCount ) );
+  Assert( isDefined( self.sniperShotCount ) );
   */
-  if(!isdefined(self.sniperShotCount)) {
+  if(!isDefined(self.sniperShotCount)) {
     // snipers get this error if a dog attacks them
     self.sniperShotCount = 0;
     self.sniperHitCount = 0;
@@ -852,7 +851,7 @@ setSniperAccuracy() {
 }
 
 shouldForceSniperMissShot() {
-  if(isdefined(self.neverForceSniperMissEnemy) && self.neverForceSniperMissEnemy)
+  if(isDefined(self.neverForceSniperMissEnemy) && self.neverForceSniperMissEnemy)
     return false;
 
   //dont do this if you're an ally of the player, changed by z for Price cliffhanger sniping
@@ -900,7 +899,7 @@ waitTimeIfPlayerIsHit() {
 
 print3d_time(org, text, color, timer) {
   timer *= 20;
-  for (i = 0; i < timer; i++) {
+  for(i = 0; i < timer; i++) {
     Print3d(org, text, color);
     wait(0.05);
   }
@@ -908,12 +907,12 @@ print3d_time(org, text, color, timer) {
 
 resetMissTime() {
   //prof_begin( "resetMissTime" );
-  if(!self IsBadGuy())
+  if(!self IsBadGuy()) {
     return;
-
-  if(self.weapon == "none")
+  }
+  if(self.weapon == "none") {
     return;
-
+  }
   if(!self animscripts\weaponList::usingAutomaticWeapon() && !self animscripts\weaponList::usingSemiAutoWeapon()) {
     self.missTime = 0;
     //prof_end( "resetMissTime" );
@@ -964,7 +963,7 @@ player_aim_debug() {
   self notify("playeraim");
   self endon("playeraim");
 
-  for (;;) {
+  for(;;) {
     color = (0, 1, 0);
     if(self.a.misstime > GetTime())
       color = (1, 0, 0);
@@ -1082,16 +1081,16 @@ dirt_right_blurry_alpha() {
 }
 
 grenade_dirt_on_screen(type) {
-  if(!isalive(self))
+  if(!isalive(self)) {
     return;
-
-  if(IsDefined(self.is_controlling_UAV))
+  }
+  if(isDefined(self.is_controlling_UAV)) {
     return;
-
+  }
   // already did this effect on this frame
-  if(self.dirt_on_screen[type] == GetTime())
+  if(self.dirt_on_screen[type] == GetTime()) {
     return;
-
+  }
   self.dirt_on_screen[type] = GetTime();
 
   self endon("death");
@@ -1137,14 +1136,14 @@ playerHurtcheck() {
   mods["MOD_EXPLOSIVE"] = func;
 
   self.hurtAgain = false;
-  for (;;) {
+  for(;;) {
     self waittill("damage", amount, attacker, dir, point, type);
 
     self.hurtAgain = true;
     self.damagePoint = point;
     self.damageAttacker = attacker;
 
-    if(IsDefined(mods[type])) {
+    if(isDefined(mods[type])) {
       waittillframeend; // let the scripted grenade - specific stuff from _utility try first
       [
         [mods[type]]
@@ -1162,7 +1161,7 @@ playerHurtcheck() {
 	orange = ( 1, 0.5, 0 );
 	green = ( 0, 1, 0 );
 	
-	for ( i = 0; i < 3; i++ )
+	for( i = 0; i < 3; i++ )
 	{
 		overlay = NewHudElem();
 		overlay.x = 5 + 20 * i;
@@ -1175,20 +1174,20 @@ playerHurtcheck() {
 		packets[ packets.size ] = overlay;
 	}
 	
-	for ( ;; )
+	for( ;; )
 	{
 		self waittill( "update_health_packets" );
 		if( self ent_flag( "player_has_red_flashing_overlay" ) )
 		{
 			packetBase = 1;
-			for ( i = 0; i < packetBase; i++ )
+			for( i = 0; i < packetBase; i++ )
 			{
 				packets[ i ] FadeOverTime( 0.5 );
 				packets[ i ].alpha = 1;
 				packets[ i ].color = red;
 			}
 
-			for ( i = packetBase; i < 3; i++ )
+			for( i = packetBase; i < 3; i++ )
 			{
 				packets[ i ] FadeOverTime( 0.5 );
 				packets[ i ].alpha = 0;
@@ -1202,20 +1201,20 @@ playerHurtcheck() {
 		if( packetBase <= 0 )
 			packetBase = 0;
 		
-		color = red; 
+		color = red;
 		if( packetBase == 2 )
 			color = orange;
 		if( packetBase == 3 )
 			color = green;
 			
-		for ( i = 0; i < packetBase; i++ )
+		for( i = 0; i < packetBase; i++ )
 		{
 			packets[ i ] FadeOverTime( 0.5 );
 			packets[ i ].alpha = 1;
 			packets[ i ].color = color;
 		}
 			
-		for ( i = packetBase; i < 3; i++ )
+		for( i = packetBase; i < 3; i++ )
 		{
 			packets[ i ] FadeOverTime( 0.5 );
 			packets[ i ].alpha = 0;
@@ -1230,21 +1229,21 @@ player_health_packets() {
   // 	thread draw_player_health_packets();
   self.player_health_packets = 3;
   /*
-	for ( ;; )
-	{
-		self ent_flag_wait( "player_has_red_flashing_overlay" );
-// 		change_player_health_packets( - 1 );
-		self ent_flag_waitopen( "player_has_red_flashing_overlay" );
-	}
-	*/
+  	for( ;; )
+  	{
+  		self ent_flag_wait( "player_has_red_flashing_overlay" );
+  // 		change_player_health_packets( - 1 );
+  		self ent_flag_waitopen( "player_has_red_flashing_overlay" );
+  	}
+  	*/
 }
 
 playerHealthRegenInit() {
   wait(0.05); // to give a chance for moscow to init level.strings so it doesnt clear ours
 
-  level.strings["take_cover"] = SpawnStruct();
+  level.strings["take_cover"] = spawnStruct();
   // You are Hurt. Get to Cover!
-  level.strings["take_cover"].text = & "GAME_GET_TO_COVER";
+  level.strings["take_cover"].text = &"GAME_GET_TO_COVER";
 }
 
 playerHealthRegen() {
@@ -1271,7 +1270,7 @@ playerHealthRegen() {
   self.boltHit = false;
   // self thread boltCheck();
 
-  for (;;) {
+  for(;;) {
     wait(0.05);
     waittillframeend; // if we're on hard, we need to wait until the bolt damage check before we decide what to do
     //prof_begin( "playerHealthRegen" );
@@ -1292,7 +1291,7 @@ playerHealthRegen() {
     }
 
     if(self.health <= 0) {
-      /#showHitLog();#/
+      /#showHitLog();
       //prof_end( "playerHealthRegen" );
       return;
     }
@@ -1328,9 +1327,9 @@ playerHealthRegen() {
     }
 
     if(self.health / self.maxhealth >= oldratio) {
-      if(GetTime() - hurttime < self.gs.playerHealth_RegularRegenDelay)
+      if(GetTime() - hurttime < self.gs.playerHealth_RegularRegenDelay) {
         continue;
-
+      }
       if(veryHurt) {
         newHealth = ratio;
         if(GetTime() > hurtTime + self.gs.longRegenTime)
@@ -1349,11 +1348,10 @@ playerHealthRegen() {
         return;
       }
 
-      /#
       if(newHealth > self.health / self.maxhealth)
         logRegen(newHealth);
-      # /
-        self SetNormalHealth(newHealth);
+
+      self SetNormalHealth(newHealth);
       oldRatio = self.health / self.maxHealth;
       continue;
     }
@@ -1373,12 +1371,12 @@ playerHealthRegen() {
       // set the health to 2 so we can at least detect when they're getting hit.
       self SetNormalHealth(2 / self.maxhealth);
       invulWorthyHealthDrop = true;
-      /#
+
       if(!isDefined(self.deathInvulnerableTimeout))
         self.deathInvulnerableTimeout = 0;
       if(self.deathInvulnerableTimeout < GetTime())
         self.deathInvulnerableTimeout = GetTime() + self.deathInvulnerableTime;
-      # /
+
     }
 
     oldRatio = self.health / self.maxHealth;
@@ -1389,7 +1387,7 @@ playerHealthRegen() {
     thread blurView(3, 0.8);
 
     if(!invulWorthyHealthDrop) {
-      /#logHit( self.health, 0 );#/
+      /#logHit( self.health, 0 );
       continue;
     }
     if(self ent_flag("player_is_invulnerable"))
@@ -1406,7 +1404,7 @@ playerHealthRegen() {
       invulTime = self.gs.invulTime_preShield;
     }
 
-    /#logHit( self.health, invulTime );#/
+    /#logHit( self.health, invulTime );
     lastinvulratio = self.health / self.maxHealth;
 
     self thread playerInvul(invulTime);
@@ -1420,71 +1418,68 @@ reduceTakeCoverWarnings() {
 
   //prof_begin( "reduceTakeCoverWarnings" );
 
-  if(!self take_cover_warnings_enabled())
+  if(!self take_cover_warnings_enabled()) {
     return;
-
+  }
   if(IsAlive(self)) {
     takeCoverWarnings = (self GetLocalPlayerProfileData("takeCoverWarnings"));
     if(takeCoverWarnings > 0) {
       takeCoverWarnings--;
       self SetLocalPlayerProfileData("takeCoverWarnings", takeCoverWarnings);
-      /#DebugTakeCoverWarnings();#/
+      /#DebugTakeCoverWarnings();
     }
   }
 
   //prof_end( "reduceTakeCoverWarnings" );
 }
 
-/#
 DebugTakeCoverWarnings() {
   SetDvarIfUninitialized("scr_debugtakecover", "0");
   if(GetDebugDvar("scr_debugtakecover") == "1") {
     IPrintLn("Warnings remaining: ", self GetLocalPlayerProfileData("takeCoverWarnings") - 3);
   }
 }
-# /
 
-  /#
 logHit(newhealth, invulTime) {
-  /* if( !isdefined( level.hitlog ) )
+  /* if( !isDefined( level.hitlog ) )
   {
   	level.hitlog = [];
   	thread showHitLog();
   }
-	
-  data = SpawnStruct();
+  	
+  data = spawnStruct();
   data.regen = false;
   data.time = GetTime();
   data.health = newhealth / level.player.maxhealth;
   data.invulTime = invulTime;
-	
+  	
   level.hitlog[ level.hitlog.size ] = data;*/
 }
 
 logRegen(newhealth) {
-  /* if( !isdefined( level.hitlog ) )
+  /* if( !isDefined( level.hitlog ) )
   {
   	level.hitlog = [];
   	thread showHitLog();
   }
-	
-  data = SpawnStruct();
+  	
+  data = spawnStruct();
   data.regen = true;
   data.time = GetTime();
   data.health = newhealth / level.player.maxhealth;
-	
+  	
   level.hitlog[ level.hitlog.size ] = data;*/
 }
 
 showHitLog() {
   /* level.player waittill( "death" );
-	
+  	
   PrintLn( "" );
   PrintLn( "^3Hit Log:" );
-	
+  	
   prevhealth = 1;
   prevtime = 0;
-  for ( i = 0; i < level.hitlog.size; i++ )
+  for( i = 0; i < level.hitlog.size; i++ )
   {
   	timepassed = ( level.hitlog[ i ].time - prevtime ) / 1000;
   	healthlost = prevhealth - level.hitlog[ i ].health;
@@ -1504,35 +1499,33 @@ showHitLog() {
   	prevtime = level.hitlog[ i ].time;
   	prevhealth = level.hitlog[ i ].health;
   }
-	
+  	
   PrintLn( "" );*/
 }
-# /
 
-  playerInvul(timer) {
-    Assert(IsPlayer(self));
+playerInvul(timer) {
+  Assert(IsPlayer(self));
 
-    if(IsDefined(self.flashendtime) && self.flashendtime > GetTime())
-      timer = timer * getCurrentDifficultySetting("flashbangedInvulFactor");
+  if(isDefined(self.flashendtime) && self.flashendtime > GetTime())
+    timer = timer * getCurrentDifficultySetting("flashbangedInvulFactor");
 
-    if(timer > 0) {
-      if(!isdefined(self.noPlayerInvul))
-        self.attackeraccuracy = 0;
-      self.IgnoreRandomBulletDamage = true;
-      /#
-      self.playerInvulTimeEnd = GetTime() + timer * 1000;
-      # /
+  if(timer > 0) {
+    if(!isDefined(self.noPlayerInvul))
+      self.attackeraccuracy = 0;
+    self.IgnoreRandomBulletDamage = true;
 
-        wait(timer);
-    }
+    self.playerInvulTimeEnd = GetTime() + timer * 1000;
 
-    update_player_attacker_accuracy();
-
-    self ent_flag_clear("player_is_invulnerable");
+    wait(timer);
   }
 
+  update_player_attacker_accuracy();
+
+  self ent_flag_clear("player_is_invulnerable");
+}
+
 default_door_node_flashbang_frequency() {
-  //added .doorFragChance and .doorFlashChance for throwing frag/flash grenades through doors. 
+  //added .doorFragChance and .doorFlashChance for throwing frag/flash grenades through doors.
   //Set it to a value between 0 and 1; 0 for never, 1 for always if possible.
 
   if(self.team == "allies")
@@ -1574,9 +1567,9 @@ grenadeAwareness() {
 
 blurView(blur, timer) {
   Assert(IsPlayer(self));
-  if(ent_flag("player_no_auto_blur"))
+  if(ent_flag("player_no_auto_blur")) {
     return;
-
+  }
   self notify("blurview_stop");
   self endon("blurview_stop");
   self SetBlurForPlayer(blur, 0);
@@ -1588,16 +1581,16 @@ playerBreathingSound(healthcap) {
   Assert(IsPlayer(self));
 
   wait(2);
-  for (;;) {
+  for(;;) {
     wait(0.2);
-    if(self.health <= 0)
+    if(self.health <= 0) {
       return;
-
+    }
     // Player still has a lot of health so no breathing sound
     ratio = self.health / self.maxHealth;
-    if(ratio > self.gs.healthOverlayCutoff)
+    if(ratio > self.gs.healthOverlayCutoff) {
       continue;
-
+    }
     self PlayLocalSound("breathing_hurt");
     wait(0.1 + RandomFloat(0.8));
   }
@@ -1639,7 +1632,7 @@ healthOverlay() {
   updateTime = 0.05;
   lerpRate = 0.3;
 
-  while (IsAlive(self)) {
+  while(IsAlive(self)) {
     wait updateTime;
 
     targetDamageAlpha = 1.0 - self.health / self.maxHealth;
@@ -1655,7 +1648,7 @@ healthOverlay() {
 }
 
 take_cover_warning_loop() {
-  while (IsAlive(self)) {
+  while(IsAlive(self)) {
     self ent_flag_wait("player_has_red_flashing_overlay");
 
     //prof_begin( "healthOverlay" );
@@ -1667,7 +1660,7 @@ take_cover_warning_loop() {
 overlay_non_flashing_alpha( overlay )
 {
 	self endon( "death" );
-	for ( ;; )
+	for( ;; )
 	{
 		do_non_flashing_alpha_when_not_hurt( overlay );
 		self ent_flag_waitopen( "player_has_red_flashing_overlay" );
@@ -1679,7 +1672,7 @@ do_non_flashing_alpha_when_not_hurt( overlay )
 	level.player_overlay = overlay;
 	level endon( "player_has_red_flashing_overlay" );
 //	dif = 0.95;
-	for ( ;; )
+	for( ;; )
 	{
 		// Overlay comes in immediately, but fades out gradually
 		new_alpha = ( 1 - ( self.health * 0.01 ) ) * 0.5;
@@ -1709,7 +1702,7 @@ add_hudelm_position_internal(alignY) {
 
   /* if( 0 )// if we ever get the chance to localize or find a way to dynamically find how many lines in a string
   {
-  	if( IsDefined( alignY ) )
+  	if( isDefined( alignY ) )
   		self.alignY = alignY;
   	else
   		self.alignY = "middle";	
@@ -1722,7 +1715,7 @@ add_hudelm_position_internal(alignY) {
   self.horzAlign = "center";
   self.vertAlign = "middle";
 
-  if(!isdefined(self.background))
+  if(!isDefined(self.background))
     return;
   self.background.x = 0; // 320;
   self.background.y = -40; // 200;
@@ -1747,7 +1740,7 @@ create_warning_elem() {
   thread destroy_warning_elem_when_hit_again(hudelem);
   hudelem thread destroy_warning_elem_when_mission_failed();
   // You are Hurt. Get to Cover!
-  //hudelem SetText( &"GAME_GET_TO_COVER" );
+  //hudelem SetText(&"GAME_GET_TO_COVER" );
   hudelem SetText(level.strings["take_cover"].text);
   hudelem.fontscale = 2;
   hudelem.alpha = 1;
@@ -1796,9 +1789,9 @@ destroy_warning_elem(fadeout) {
 }
 
 may_change_cover_warning_alpha(coverWarning) {
-  if(!isdefined(coverWarning))
+  if(!isDefined(coverWarning))
     return false;
-  if(IsDefined(coverWarning.beingDestroyed))
+  if(isDefined(coverWarning.beingDestroyed))
     return false;
   return true;
 }
@@ -1833,7 +1826,7 @@ fadeFunc(coverWarning, severity, mult, hud_scaleOnly) {
       coverWarning.alpha = mult * 1.0;
     }
   }
-  if(IsDefined(coverWarning))
+  if(isDefined(coverWarning))
     coverWarning thread fontScaler(1.0, fadeInTime);
   wait fadeInTime + stayFullTime;
 
@@ -1852,7 +1845,7 @@ fadeFunc(coverWarning, severity, mult, hud_scaleOnly) {
       coverWarning.alpha = mult * leastAlpha;
     }
   }
-  if(IsDefined(coverWarning))
+  if(isDefined(coverWarning))
     coverWarning thread fontScaler(0.9, fadeOutFullTime);
   wait fadeOutFullTime;
 
@@ -1862,12 +1855,12 @@ fadeFunc(coverWarning, severity, mult, hud_scaleOnly) {
 take_cover_warnings_enabled() {
   Assert(IsPlayer(self));
 
-  if(IsDefined(level.cover_warnings_disabled)) {
+  if(isDefined(level.cover_warnings_disabled)) {
     AssertEx(level.cover_warnings_disabled, "level.cover_warnings_disabled must be true or undefined");
     return false;
   }
 
-  if(IsDefined(self.vehicle))
+  if(isDefined(self.vehicle))
     return false;
 
   return true;
@@ -1927,7 +1920,7 @@ take_cover_warning() {
   stopFlashingBadlyTime += regen_time;
 
   fadeFunc(coverWarning, 1, 1, false);
-  while (GetTime() < stopFlashingBadlyTime && IsAlive(self))
+  while(GetTime() < stopFlashingBadlyTime && IsAlive(self))
     fadeFunc(coverWarning, .9, 1, false);
 
   if(IsAlive(self))
@@ -2003,7 +1996,7 @@ init_take_cover_warnings() {
     self SetLocalPlayerProfileData("takeCoverWarnings", 9);
   }
 
-  /#DebugTakeCoverWarnings();#/
+  /#DebugTakeCoverWarnings();
 }
 
 increment_take_cover_warnings_on_death() {
@@ -2012,17 +2005,17 @@ increment_take_cover_warnings_on_death() {
   self waittill("death");
 
   // dont increment if player died to grenades, explosion, etc
-  if(!self ent_flag("player_has_red_flashing_overlay"))
+  if(!self ent_flag("player_has_red_flashing_overlay")) {
     return;
-
-  if(!self take_cover_warnings_enabled())
+  }
+  if(!self take_cover_warnings_enabled()) {
     return;
-
+  }
   warnings = (self GetLocalPlayerProfileData("takeCoverWarnings"));
   if(warnings < 10)
     self SetLocalPlayerProfileData("takeCoverWarnings", warnings + 1);
 
-  /#DebugTakeCoverWarnings();#/
+  /#DebugTakeCoverWarnings();
 }
 
 auto_adjust_difficulty_player_positioner() {
@@ -2046,7 +2039,7 @@ auto_adjust_difficulty_player_movement_check() {
   level.player.movedRecently = true;
   wait(1); // for lvl start precaching of debug strings
 
-  for (;;) {
+  for(;;) {
     level.player thread auto_adjust_difficulty_player_positioner();
     level.player.movedRecently = true;
     newSpots = [];
@@ -2054,10 +2047,10 @@ auto_adjust_difficulty_player_movement_check() {
     if(start < 0)
       start = 0;
 
-    for (i = start; i < level.autoAdjust_playerSpots.size; i++) {
-      if(!level.player autospot_is_close_to_player(level.autoAdjust_playerSpots[i]))
+    for(i = start; i < level.autoAdjust_playerSpots.size; i++) {
+      if(!level.player autospot_is_close_to_player(level.autoAdjust_playerSpots[i])) {
         continue;
-
+      }
       newSpots[newSpots.size] = level.autoAdjust_playerSpots[i];
       level.player.movedRecently = false;
       // 	thread debug_message( "!", newSpots[ newSpots.size - 1 ], 1 );
@@ -2081,13 +2074,13 @@ auto_adjust_difficulty_track_player_death() {
 auto_adjust_difficulty_track_player_shots() {
   // reduce the "time spent alive" by the time between shots fired if there has been significant time between shots
   lastShotTime = GetTime();
-  for (;;) {
+  for(;;) {
     if(level.player AttackButtonPressed())
       lastShotTime = GetTime();
 
     level.timeBetweenShots = GetTime() - lastShotTime;
     wait(0.05);
-    /* 
+    /*
     if( lastShotTime < 10000 )
     	continue;
 
@@ -2108,8 +2101,8 @@ hud_debug_add(msg, num) {
 
 hud_debug_clear() {
   level.hudNum = 0;
-  if(IsDefined(level.hudDebugNum)) {
-    for (i = 0; i < level.hudDebugNum.size; i++)
+  if(isDefined(level.hudDebugNum)) {
+    for(i = 0; i < level.hudDebugNum.size; i++)
       level.hudDebugNum[i] Destroy();
   }
 
@@ -2117,9 +2110,9 @@ hud_debug_clear() {
 }
 
 hud_debug_add_message(msg) {
-  if(!isdefined(level.hudMsgShare))
+  if(!isDefined(level.hudMsgShare))
     level.hudMsgShare = [];
-  if(!isdefined(level.hudMsgShare[msg])) {
+  if(!isDefined(level.hudMsgShare[msg])) {
     hud = NewHudElem();
     hud.x = level.debugLeft;
     hud.y = level.debugHeight + level.hudNum * 15;
@@ -2148,22 +2141,22 @@ hud_debug_add_display(msg, num, isfloat) {
   hundreds = 0;
   tens = 0;
   ones = 0;
-  while (num >= 10000)
+  while(num >= 10000)
     num -= 10000;
 
-  while (num >= 1000) {
+  while(num >= 1000) {
     num -= 1000;
     thousands++;
   }
-  while (num >= 100) {
+  while(num >= 100) {
     num -= 100;
     hundreds++;
   }
-  while (num >= 10) {
+  while(num >= 10) {
     num -= 10;
     tens++;
   }
-  while (num >= 1) {
+  while(num >= 1) {
     num -= 1;
     ones++;
   }
@@ -2265,7 +2258,6 @@ hud_debug_add_second_string(num, offset) {
 }
 
 aa_init_stats() {
-  /#
   if(GetDvar("createfx") == "on")
     return;
   if(GetDvarInt("noder") || GetDvarInt("painter")) {
@@ -2274,10 +2266,10 @@ aa_init_stats() {
   if(GetDvar("r_reflectionProbeGenerate") == "1") {
     return;
   }
-  # /
-    //prof_begin( "aa_init_stats" );
 
-    level.sp_stat_tracking_func = maps\_gameskill::auto_adjust_new_zone;
+  //prof_begin( "aa_init_stats" );
+
+  level.sp_stat_tracking_func = maps\_gameskill::auto_adjust_new_zone;
 
   SetDvar("aa_player_kills", "0");
   SetDvar("aa_enemy_deaths", "0");
@@ -2313,7 +2305,7 @@ command_used(cmd) {
     return false;
   }
 
-  for (i = 1; i < binding["count"] + 1; i++) {
+  for(i = 1; i < binding["count"] + 1; i++) {
     if(self ButtonPressed(binding["key" + i])) {
       //prof_end( "command_used" );
       return true;
@@ -2325,48 +2317,46 @@ command_used(cmd) {
 }
 
 aa_time_tracking() {
-  /#
   if(GetDvar("createfx") != "")
     return;
   if(GetDvar("scr_generateClipModels") != "" && GetDvar("scr_generateClipModels") != "0")
     return; // shortcut for generating clipmodels gah.
 
-  # /
-    waittillframeend; // so level.start_point is defined
-  for (;;) {
+  waittillframeend; // so level.start_point is defined
+  for(;;) {
     //prof_begin( "aa_time_tracking" );
 
     //aa_add_event_float( "aa_time_tracking", 0.2 );
-    /#
+
     if(IsGodMode(level.player) || level.start_point != "default" || GetDvar("timescale", 1) != "1") {
       if(GetDvar("player_cheated") != "1")
         SetDvar("player_cheated", 1);
     }
-    # /
-      /*
-      level.sprint_key = GetKeyBinding( "+breath_sprint" );
-      sprinting = false;
-      sprinting = level.player command_used( "+sprint" );
-      if( !sprinting )
-      {
-      	sprinting = level.player command_used( "+breath_sprint" );
-      }
-      if( sprinting )
-      {
-      	aa_add_event_float( "aa_sprint_time", 0.2 );
-      }
-      */
-      wait(0.2);
+
+    /*
+    level.sprint_key = GetKeyBinding( "+breath_sprint" );
+    sprinting = false;
+    sprinting = level.player command_used( "+sprint" );
+    if( !sprinting )
+    {
+    	sprinting = level.player command_used( "+breath_sprint" );
+    }
+    if( sprinting )
+    {
+    	aa_add_event_float( "aa_sprint_time", 0.2 );
+    }
+    */
+    wait(0.2);
   }
 }
 
 aa_player_ads_tracking() {
   level.player endon("death");
   level.player_ads_time = 0;
-  for (;;) {
+  for(;;) {
     if(level.player isADS()) {
       level.player_ads_time = GetTime();
-      while (level.player isADS()) {
+      while(level.player isADS()) {
         wait(0.05);
       }
       continue;
@@ -2376,7 +2366,7 @@ aa_player_ads_tracking() {
 }
 
 aa_player_health_tracking() {
-  for (;;) {
+  for(;;) {
     level.player waittill("damage", amount, a, b, c, d, e, f);
     aa_add_event("aa_player_damage_taken", amount);
     if(!isalive(level.player)) {
@@ -2387,14 +2377,12 @@ aa_player_health_tracking() {
 }
 
 auto_adjust_new_zone(zone) {
-
-  /#
-  if(GetDvar("createfx") == "on")
+  if(GetDvar("createfx") == "on") {
     return;
-  # /
-    if(!isdefined(level.auto_adjust_flags)) {
-      level.auto_adjust_flags = [];
-    }
+  }
+  if(!isDefined(level.auto_adjust_flags)) {
+    level.auto_adjust_flags = [];
+  }
 
   flag_wait("auto_adjust_initialized");
 
@@ -2505,17 +2493,16 @@ auto_adust_zone_complete(zone) {
   level.auto_adjust_results[zone] = aa_array;
 
   msg = "Completed AA sequence: ";
-  /#
+
   if(GetDvar("player_cheated") == "1") {
     msg = "Cheated in AA sequence: ";
   }
-  # /
 
-    msg += level.script + "/" + zone;
+  msg += level.script + "/" + zone;
   keys = GetArrayKeys(aa_array);
   //	array_levelthread( keys, ::aa_print_vals, aa_array );
 
-  for (i = 0; i < keys.size; i++) {
+  for(i = 0; i < keys.size; i++) {
     msg = msg + ", " + keys[i] + ": " + aa_array[keys[i]];
   }
 
@@ -2554,15 +2541,13 @@ return_false(attacker) {
 }
 
 player_attacker(attacker) {
-  if([
-      [level.custom_player_attacker]
-    ](attacker))
+  if([[level.custom_player_attacker]](attacker))
     return true;
 
   if(IsPlayer(attacker))
     return true;
 
-  if(!isdefined(attacker.car_damage_owner_recorder))
+  if(!isDefined(attacker.car_damage_owner_recorder))
     return false;
 
   return attacker player_did_most_damage();
@@ -2572,9 +2557,7 @@ player_did_most_damage() {
   return self.player_damage * 1.75 > self.non_player_damage;
 }
 
-empty_kill_func(type, loc, point) {
-
-}
+empty_kill_func(type, loc, point) {}
 
 auto_adjust_enemy_died(amount, attacker, type, point) {
   //prof_begin( "auto_adjust_enemy_died" );
@@ -2589,7 +2572,7 @@ auto_adjust_enemy_died(amount, attacker, type, point) {
   */
 
   aa_add_event("aa_enemy_deaths", 1);
-  if(!isdefined(attacker)) {
+  if(!isDefined(attacker)) {
     //prof_end( "auto_adjust_enemy_died" );
     return;
   }
@@ -2622,17 +2605,13 @@ aa_player_attacks_enemy_with_ads(amount, type, point) {
   AssertEx(GetDvarInt("aa_player_damage_dealt") > 0);
   if(!level.player isADS()) {
     // defaults to empty_kill_func, for arcademode
-    [
-      [level.global_damage_func]
-    ](type, self.damagelocation, point);
+    [[level.global_damage_func]](type, self.damagelocation, point);
     return false;
   }
 
   if(!bullet_attack(type)) {
     // defaults to empty_kill_func, for arcademode
-    [
-      [level.global_damage_func]
-    ](type, self.damagelocation, point);
+    [[level.global_damage_func]](type, self.damagelocation, point);
     return false;
   }
 
@@ -2667,7 +2646,7 @@ bullet_attack(type) {
 add_fractional_data_point(name, frac, val) {
   //prof_begin( "add_fractional_data_point" );
 
-  if(!isdefined(level.difficultySettings_frac_data_points[name])) {
+  if(!isDefined(level.difficultySettings_frac_data_points[name])) {
     level.difficultySettings_frac_data_points[name] = [];
   }
 
@@ -2691,9 +2670,9 @@ coop_with_one_player_downed() {
 
   downed_players = 0;
   foreach(player in level.players) {
-    if(!player ent_flag("coop_downed"))
+    if(!player ent_flag("coop_downed")) {
       continue;
-
+    }
     downed_players++;
   }
 

@@ -18,7 +18,6 @@
 #include scripts\zm_common\zm_pack_a_punch_util;
 #include scripts\zm_common\zm_perks;
 #include scripts\zm_common\zm_unitrigger;
-
 #namespace zm_white_perk_pap;
 
 init() {
@@ -29,15 +28,15 @@ init() {
   level.var_ef785c4c = 0;
   level.pack_a_punch.custom_power_think = &function_9b917fd5;
   zm_pap_util::function_11fdb083(32);
-  clientfield::register("scriptmover", "" + #"hash_28b770e7e782837", 1, 1, "int");
+  clientfield::register("scriptmover", "" + # "hash_28b770e7e782837", 1, 1, "int");
   level thread function_834ab8cc();
   level thread function_ee662714();
 }
 
 init_fx() {
-  level._effect[#"hash_7866a63fde6b972d"] = #"hash_2edb406c045a5b80";
-  level._effect[#"perk_marker"] = #"hash_2eb17822848d1484";
-  level._effect[#"hash_498a1ea189a3ea3b"] = #"hash_4d4ecfd7d55314e9";
+  level._effect[# "hash_7866a63fde6b972d"] = # "hash_2edb406c045a5b80";
+  level._effect[# "perk_marker"] = # "hash_2eb17822848d1484";
+  level._effect[# "hash_498a1ea189a3ea3b"] = # "hash_4d4ecfd7d55314e9";
 }
 
 function_48acb6ed(position) {
@@ -64,33 +63,31 @@ function_68792ab6() {
 
   level.var_e8d9c0d1 = 0;
 
-    for(i = 0; i < 5; i++) {
-      while(level.round_number < var_c43b94a8[i]) {
-
-        if(level.var_e8d9c0d1) {
-          break;
-        }
-
-          wait 1;
+  for(i = 0; i < 5; i++) {
+    while(level.round_number < var_c43b94a8[i]) {
+      if(level.var_e8d9c0d1) {
+        break;
       }
 
-      if(level.round_number == var_c43b94a8[i]) {
-        wait randomintrange(10, 15);
-      }
-
-      function_99d6f707();
+      wait 1;
     }
+
+    if(level.round_number == var_c43b94a8[i]) {
+      wait randomintrange(10, 15);
+    }
+
+    function_99d6f707();
+  }
 }
 
 function_99d6f707() {
-
   iprintlnbold("<dev string:x38>");
 
-    if(level.var_1594a906.size > 0) {
-      function_22bf8bd4(level.var_1594a906[0]);
-      level flag::set("power_on" + level.var_1594a906[0] + 1);
-      arrayremoveindex(level.var_1594a906, 0);
-    }
+  if(level.var_1594a906.size > 0) {
+    function_22bf8bd4(level.var_1594a906[0]);
+    level flag::set("power_on" + level.var_1594a906[0] + 1);
+    arrayremoveindex(level.var_1594a906, 0);
+  }
 }
 
 function_834ab8cc() {
@@ -160,7 +157,7 @@ function_cb235436() {
 
 function_da95f7() {
   wait 0.5;
-  self clientfield::set("" + #"hash_28b770e7e782837", 1);
+  self clientfield::set("" + # "hash_28b770e7e782837", 1);
   wait 0.8;
   self delete();
 }

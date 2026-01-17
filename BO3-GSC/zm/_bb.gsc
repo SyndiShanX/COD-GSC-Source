@@ -10,7 +10,7 @@
 #namespace bb;
 
 function autoexec __init__sytem__() {
-  system::register("bb", & __init__, undefined, undefined);
+  system::register("bb", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -43,7 +43,7 @@ function logdamage(attacker, victim, weapon, damage, damagetype, hitlocation, vi
   var_c46938ee = "";
   var_5833b024 = "";
   aiattackercombatmode = "";
-  if(isdefined(attacker)) {
+  if(isDefined(attacker)) {
     if(isplayer(attacker)) {
       attackerid = getplayerspawnid(attacker);
       attackertype = "_player";
@@ -61,11 +61,11 @@ function logdamage(attacker, victim, weapon, damage, damagetype, hitlocation, vi
     attackerignoreme = attacker.ignoreme;
     attackerfovcos = attacker.fovcosine;
     attackermaxsightdistsqrd = attacker.maxsightdistsqrd;
-    if(isdefined(attacker.animname)) {
+    if(isDefined(attacker.animname)) {
       attackeranimname = attacker.animname;
     }
   }
-  if(isdefined(victim)) {
+  if(isDefined(victim)) {
     if(isplayer(victim)) {
       victimid = getplayerspawnid(victim);
       victimtype = "_player";
@@ -84,7 +84,7 @@ function logdamage(attacker, victim, weapon, damage, damagetype, hitlocation, vi
     victimignoreme = victim.ignoreme;
     victimfovcos = victim.fovcosine;
     victimmaxsightdistsqrd = victim.maxsightdistsqrd;
-    if(isdefined(victim.animname)) {
+    if(isDefined(victim.animname)) {
       victimanimname = victim.animname;
     }
   }
@@ -98,10 +98,10 @@ function logaispawn(aient, spawner) {
 function logplayerevent(player, eventname) {
   currentweapon = "";
   beastmodeactive = 0;
-  if(isdefined(player.currentweapon)) {
+  if(isDefined(player.currentweapon)) {
     currentweapon = player.currentweapon.name;
   }
-  if(isdefined(player.beastmode)) {
+  if(isDefined(player.beastmode)) {
     beastmodeactive = player.beastmode;
   }
   bbprint("zmplayerevents", "gametime %d roundnumber %d eventname %s spawnid %d username %s originx %d originy %d originz %d health %d beastlives %d currentweapon %s kills %d zone_name %s sessionstate %s currentscore %d totalscore %d beastmodeon %d", gettime(), level.round_number, eventname, getplayerspawnid(player), player.name, player.origin, player.health, player.beastlives, currentweapon, player.kills, player.zone_name, player.sessionstate, player.score, player.score_total, beastmodeactive);
@@ -121,7 +121,7 @@ function logpurchaseevent(player, sellerent, cost, itemname, itemupgraded, itemt
 function logpowerupevent(powerup, optplayer, eventname) {
   playerspawnid = -1;
   playername = "";
-  if(isdefined(optplayer) && isplayer(optplayer)) {
+  if(isDefined(optplayer) && isplayer(optplayer)) {
     playerspawnid = getplayerspawnid(optplayer);
     playername = optplayer.name;
   }

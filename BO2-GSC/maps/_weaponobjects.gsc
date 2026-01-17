@@ -42,14 +42,14 @@ onplayerspawned() {
 }
 
 setup_retrievable_hint_strings() {
-  create_retrievable_hint("hatchet", & "WEAPON_HATCHET_PICKUP");
-  create_retrievable_hint("satchel_charge", & "WEAPON_SATCHEL_CHARGE_PICKUP");
-  create_retrievable_hint("claymore", & "WEAPON_CLAYMORE_PICKUP");
-  create_retrievable_hint("proximity_grenade", & "WEAPON_TASER_SPIKE_PICKUP");
+  create_retrievable_hint("hatchet", &"WEAPON_HATCHET_PICKUP");
+  create_retrievable_hint("satchel_charge", &"WEAPON_SATCHEL_CHARGE_PICKUP");
+  create_retrievable_hint("claymore", &"WEAPON_CLAYMORE_PICKUP");
+  create_retrievable_hint("proximity_grenade", &"WEAPON_TASER_SPIKE_PICKUP");
 }
 
 create_retrievable_hint(name, hint) {
-  retrievehint = spawnstruct();
+  retrievehint = spawnStruct();
   retrievehint.name = name;
   retrievehint.hint = hint;
   level.retrievehints[name] = retrievehint;
@@ -104,7 +104,7 @@ on_spawn_claymore_fx() {
     self waittill_not_moving();
     org = self gettagorigin("tag_fx");
     ang = self gettagangles("tag_fx");
-    fx = spawnfx(level.claymorefxid, org, anglestoforward(ang), anglestoup(ang));
+    fx = spawnfx(level.claymorefxid, org, anglesToForward(ang), anglestoup(ang));
     triggerfx(fx);
     self thread clear_fx_on_death(fx);
     originalorigin = self.origin;
@@ -192,7 +192,7 @@ create_weapon_object_watcher(name, weapon, ownerteam) {
   weaponobjectwatcher = get_weapon_object_watcher(name);
 
   if(!isDefined(weaponobjectwatcher)) {
-    weaponobjectwatcher = spawnstruct();
+    weaponobjectwatcher = spawnStruct();
     self.weaponobjectwatcherarray[self.weaponobjectwatcherarray.size] = weaponobjectwatcher;
   }
 
@@ -329,7 +329,7 @@ delete_weapon_objects_on_disconnect() {
   watchers = [];
 
   for(watcher = 0; watcher < self.weaponobjectwatcherarray.size; watcher++) {
-    weaponobjectwatcher = spawnstruct();
+    weaponobjectwatcher = spawnStruct();
     watchers[watchers.size] = weaponobjectwatcher;
     weaponobjectwatcher.objectarray = [];
 
@@ -521,7 +521,7 @@ watch_shutdown(player) {
 
 weapon_object_damage(watcher) {
   self endon("death");
-  self setcandamage(1);
+  self setCanDamage(1);
   self.health = 100000;
   attacker = undefined;
 
@@ -557,7 +557,7 @@ weapon_object_damage(watcher) {
   if(isDefined(type) && (issubstr(type, "MOD_GRENADE_SPLASH") || issubstr(type, "MOD_GRENADE") || issubstr(type, "MOD_EXPLOSIVE")))
     self.waschained = 1;
 
-  if(isDefined(idflags) && idflags & level.idflags_penetration)
+  if(isDefined(idflags) && idflags &level.idflags_penetration)
     self.wasdamagedfrombulletpenetration = 1;
 
   self.wasdamaged = 1;
@@ -635,11 +635,11 @@ weaponstun() {
     origin = self.origin + vectorscale((0, 0, 1), 10.0);
 
   self.stun_fx = spawn("script_model", origin);
-  self.stun_fx setmodel("tag_origin");
+  self.stun_fx setModel("tag_origin");
   self thread stunfxthink(self.stun_fx);
   wait 0.1;
-  playfxontag(level._equipment_spark_fx, self.stun_fx, "tag_origin");
-  self.stun_fx playsound("dst_disable_spark");
+  playFXOnTag(level._equipment_spark_fx, self.stun_fx, "tag_origin");
+  self.stun_fx playSound("dst_disable_spark");
 }
 
 stunfxthink(fx) {

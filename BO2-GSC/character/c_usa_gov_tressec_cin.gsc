@@ -4,7 +4,7 @@
 ***********************************************/
 
 main() {
-  self setmodel("c_usa_gov_treassec_cin_fb");
+  self setModel("c_usa_gov_treassec_cin_fb");
   self.voice = "american";
   self.skeleton = "base";
 }

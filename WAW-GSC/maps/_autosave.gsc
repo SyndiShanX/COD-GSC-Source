@@ -19,9 +19,9 @@ autosave_description() {
 
 autosave_names(num) {
   if(num == 0) {
-    savedescription = & "AUTOSAVE_GAME";
+    savedescription = &"AUTOSAVE_GAME";
   } else {
-    savedescription = & "AUTOSAVE_NOGAME";
+    savedescription = &"AUTOSAVE_NOGAME";
   }
   return savedescription;
 }
@@ -46,11 +46,11 @@ start_level_save() {
   }
   flag_set("game_saving");
   imagename = "levelshots/autosave/autosave_" + level.script + "start";
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i].savedVisionSet = players[i] GetVisionSetNaked();
   }
   auto_save_print("start_level_save: Start of level save");
-  SaveGame("levelstart", & "AUTOSAVE_LEVELSTART", imagename, true);
+  SaveGame("levelstart", &"AUTOSAVE_LEVELSTART", imagename, true);
   setDvar("ui_grenade_death", "0");
   println("Saving level start saved game");
   flag_clear("game_saving");
@@ -135,7 +135,7 @@ autosave_game_now(suppress_print) {
   filename = "save_now";
   descriptionString = autosave_description();
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i].savedVisionSet = players[i] GetVisionSetNaked();
   }
   if(isDefined(suppress_print)) {
@@ -189,9 +189,7 @@ try_to_autosave_now() {
 }
 
 autosave_check_simple() {
-  if(isDefined(level.special_autosavecondition) && ![
-      [level.special_autosavecondition]
-    ]()) {
+  if(isDefined(level.special_autosavecondition) && ![[level.special_autosavecondition]]()) {
     return false;
   }
   if(level.missionfailed) {
@@ -213,12 +211,12 @@ autosave_check_simple() {
     return false;
   }
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(players[i] animscripts\banzai::in_banzai_attack()) {
       return false;
     }
     axis = GetAiArray("axis");
-    for (j = 0; j < axis.size; j++) {
+    for(j = 0; j < axis.size; j++) {
       if(isDefined(axis[j].banzai) && axis[j].banzai) {
         if(isDefined(axis[j].enemy) && axis[j].enemy == players[i]) {
           auto_save_print("autosave_player_check: FAILED!!! -> player " + i + " is in banzai chase.");
@@ -232,7 +230,7 @@ autosave_check_simple() {
     }
   }
   if(maps\_collectibles::has_collectible("collectible_berserker")) {
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       if(players[i].collectibles_berserker_mode_on) {
         return false;
       }
@@ -258,14 +256,14 @@ try_auto_save(filename, description, image, timeout, ent) {
   level._save_trig_ent = ent getentitynumber();
   maps\_utility::set_breadcrumbs_player_positions();
   wait(0.05);
-  while (1) {
+  while(1) {
     if(isSaveRecentlyLoaded()) {
       level.lastAutoSaveTime = GetTime();
       break;
     }
     if(autosave_check() && !isSaveRecentlyLoaded()) {
       players = get_players();
-      for (i = 0; i < players.size; i++) {
+      for(i = 0; i < players.size; i++) {
         players[i].savedVisionSet = players[i] GetVisionSetNaked();
       }
       saveId = saveGameNoCommit(filename, descriptionString, image, coopGame());
@@ -276,7 +274,7 @@ try_auto_save(filename, description, image, timeout, ent) {
       }
       wait(6);
       retries = 0;
-      while (retries < 8) {
+      while(retries < 8) {
         if(autosave_check_simple()) {
           commitSave(saveId);
           level.lastSaveTime = GetTime();
@@ -301,9 +299,7 @@ autosave_check_not_picky() {
 }
 
 autosave_check(doPickyChecks) {
-  if(isDefined(level.special_autosavecondition) && ![
-      [level.special_autosavecondition]
-    ]()) {
+  if(isDefined(level.special_autosavecondition) && ![[level.special_autosavecondition]]()) {
     return false;
   }
   if(level.missionfailed) {
@@ -356,13 +352,13 @@ autosave_player_check() {
     return false;
   }
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(players[i] animscripts\banzai::in_banzai_attack()) {
       auto_save_print("autosave_player_check: FAILED!!! -> player " + i + " is in banzai attack.");
       return false;
     }
     axis = GetAiArray("axis");
-    for (j = 0; j < axis.size; j++) {
+    for(j = 0; j < axis.size; j++) {
       if(isDefined(axis[j].banzai) && axis[j].banzai) {
         if(isDefined(axis[j].enemy) && axis[j].enemy == players[i]) {
           auto_save_print("autosave_player_check: FAILED!!! -> player " + i + " is in banzai chase.");
@@ -376,7 +372,7 @@ autosave_player_check() {
     }
   }
   if(maps\_collectibles::has_collectible("collectible_berserker")) {
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       if(players[i].collectibles_berserker_mode_on) {
         auto_save_print("autosave_player_check: FAILED!!! -> player " + i + " is in berserker mode.");
         return false;
@@ -395,9 +391,9 @@ autosave_ammo_check() {
     return true;
   }
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     weapons = players[i] GetWeaponsListPrimaries();
-    for (idx = 0; idx < weapons.size; idx++) {
+    for(idx = 0; idx < weapons.size; idx++) {
       if(WeaponClass(weapons[idx]) == "gas") {
         continue;
       }
@@ -414,7 +410,7 @@ autosave_ammo_check() {
 autosave_health_check() {
   players = get_players();
   if(players.size > 1) {
-    for (i = 1; i < players.size; i++) {
+    for(i = 1; i < players.size; i++) {
       if(players[i] player_flag("player_has_red_flashing_overlay")) {
         auto_save_print("autosave_health_check: FAILED!!! -> player " + i + " has red flashing overlay");
         return false;
@@ -440,7 +436,7 @@ autosave_threat_check(doPickyChecks) {
   }
   host = get_host();
   enemies = GetAISpeciesArray("axis", "all");
-  for (i = 0; i < enemies.size; i++) {
+  for(i = 0; i < enemies.size; i++) {
     if(!isDefined(enemies[i].enemy)) {
       continue;
     }

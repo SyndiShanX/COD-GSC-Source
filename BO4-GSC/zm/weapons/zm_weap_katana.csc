@@ -11,7 +11,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_weap_katana;
 
 autoexec __init__system__() {
@@ -19,12 +18,12 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  clientfield::register("toplayer", "" + #"hero_katana_vigor_postfx", 1, 1, "counter", &function_d05553c6, 0, 0);
-  clientfield::register("allplayers", "" + #"katana_rush_postfx", 1, 1, "int", &katana_rush_postfx, 0, 1);
-  clientfield::register("allplayers", "" + #"katana_rush_sfx", 1, 1, "int", &katana_rush_sfx, 0, 1);
+  clientfield::register("toplayer", "" + # "hero_katana_vigor_postfx", 1, 1, "counter", &function_d05553c6, 0, 0);
+  clientfield::register("allplayers", "" + # "katana_rush_postfx", 1, 1, "int", &katana_rush_postfx, 0, 1);
+  clientfield::register("allplayers", "" + # "katana_rush_sfx", 1, 1, "int", &katana_rush_sfx, 0, 1);
 }
 
-private function_d05553c6(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
+function_d05553c6(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   if(newvalue && !namespace_a6aea2c6::is_active(#"silent_film")) {
     self thread postfx::playpostfxbundle(#"hash_4e5b35f770492ddb");
   }
@@ -51,7 +50,7 @@ katana_rush_postfx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldn
 
       foreach(e_player in a_e_players) {
         if(!e_player util::function_50ed1561(localclientnum)) {
-          e_player thread zm_utility::function_bb54a31f(localclientnum, #"hash_34ce6f9f022458f8", #"hash_49e404aa0d33e9ac");
+          e_player thread zm_utility::function_bb54a31f(localclientnum, # "hash_34ce6f9f022458f8", # "hash_49e404aa0d33e9ac");
         }
       }
     } else if(self hasdobj(localclientnum)) {
@@ -84,7 +83,7 @@ katana_rush_postfx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldn
   }
 }
 
-private function_66752a96(localclientnum) {
+function_66752a96(localclientnum) {
   ai::add_ai_spawn_function(&function_74541167);
   a_ai = getentarraybytype(localclientnum, 15);
 
@@ -93,7 +92,7 @@ private function_66752a96(localclientnum) {
   }
 }
 
-private function_74541167(localclientnum) {
+function_74541167(localclientnum) {
   if(!isDefined(self.var_1030ad00)) {
     self.var_1030ad00 = [];
   }
@@ -107,7 +106,7 @@ private function_74541167(localclientnum) {
   }
 }
 
-private function_82ee4d9d(localclientnum) {
+function_82ee4d9d(localclientnum) {
   ai::function_932006d1(&function_74541167);
   a_ai = getentarraybytype(localclientnum, 15);
 
@@ -125,7 +124,7 @@ private function_82ee4d9d(localclientnum) {
 katana_rush_sfx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
     if(!isDefined(self.var_7804a42c)) {
-      self playSound(localclientnum, #"hash_74fd1bb2db3d91ee");
+      self playSound(localclientnum, # "hash_74fd1bb2db3d91ee");
       self.var_7804a42c = self playLoopSound(#"hash_4f7953dcf02e2ba7");
     }
 
@@ -133,7 +132,7 @@ katana_rush_sfx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname
   }
 
   if(isDefined(self.var_7804a42c)) {
-    self playSound(localclientnum, #"hash_76e75d7b16257c11");
+    self playSound(localclientnum, # "hash_76e75d7b16257c11");
     self stoploopsound(self.var_7804a42c);
     self.var_7804a42c = undefined;
   }

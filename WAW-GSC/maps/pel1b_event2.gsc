@@ -81,7 +81,7 @@ initial_plane_napalm_drop() {
   level thread initial_napalm_drones2();
   radiusdamage((44310, 5649, 200), 50, 5000, 5000);
   wait(4);
-  PlayFx(level._effect["fireball_explosion"], (44012, 4927, 214.4));
+  playFX(level._effect["fireball_explosion"], (44012, 4927, 214.4));
   trigger = getent("ev2_plane_strafe_trigger", "targetname");
   trigger notify("trigger");
 }
@@ -124,8 +124,8 @@ second_plane_napalm_drop() {
   thread drop_bombs_rumble();
   wait(1);
   fire_points = getstructarray("naplam_battle_residual_fire", "targetname");
-  for (i = 0; i < fire_points.size; i++) {
-    playfx(level._effect["fire_foliage_large"], fire_points[i].origin);
+  for(i = 0; i < fire_points.size; i++) {
+    playFX(level._effect["fire_foliage_large"], fire_points[i].origin);
   }
   level notify("bombing_complete");
 }
@@ -136,15 +136,15 @@ bomber_sound_flyby(vehiclenode_targetname, wait_time) {
   if(isDefined(wait_time)) {
     wait(wait_time);
   }
-  self playsound("p51_bomber_by");
+  self playSound("p51_bomber_by");
 }
 
 setup_spawn_functions() {
-  ignore_players_guy = getentarray("ignore_player_guy", "script_noteworthy");
+  ignore_players_guy = getEntArray("ignore_player_guy", "script_noteworthy");
   array_thread(ignore_players_guy, ::add_spawn_function, ::force_to_goal_ignore_player);
-  friendlies = getentarray("ev2_allies_reinforcements", "script_noteworthy");
+  friendlies = getEntArray("ev2_allies_reinforcements", "script_noteworthy");
   array_thread(friendlies, ::add_spawn_function, ::friendlies_setup);
-  radio_guy = getentarray("ev2_radio_guy", "script_noteworthy");
+  radio_guy = getEntArray("ev2_radio_guy", "script_noteworthy");
   array_thread(radio_guy, ::add_spawn_function, ::radio_guy_setup);
 }
 
@@ -180,11 +180,11 @@ flametank_tree_sniper() {
   tree = getent("test_tree", "script_noteworthy");
   tree thread flame_notify();
   model_tag_origin = spawn("script_model", tree.origin);
-  model_tag_origin setmodel("tag_origin");
+  model_tag_origin setModel("tag_origin");
   model_tag_origin linkto(tree, "tag_origin", (0, 0, 0), (0, 0, 0));
   node = getvehiclenode("auto5390", "targetname");
   node waittill("trigger");
-  playfxontag(level._effect["sniper_leaf_loop"], model_tag_origin, "TAG_ORIGIN");
+  playFXOnTag(level._effect["sniper_leaf_loop"], model_tag_origin, "TAG_ORIGIN");
   level.flametank setspeed(0, 10, 10);
   sniper_spawner = getent("ev2_tree_sniper", "targetname");
   sniper = force_spawn_guy(sniper_spawner);
@@ -299,7 +299,7 @@ fire_guys_in_area(event_flag, trigger_targetname, goal_volume) {
   area_trigger = getent(trigger_targetname, "targetname");
   self thread check_ai_existance(event_flag, area_trigger, goal_volume);
   self thread should_move_ahead(randomintrange(15, 20), event_flag);
-  while (!flag(event_flag)) {
+  while(!flag(event_flag)) {
     self clearturrettarget();
     axis_guys = getAIarrayTouchingVolume("axis", goal_volume);
     i = 0;
@@ -321,10 +321,10 @@ fire_guys_in_area(event_flag, trigger_targetname, goal_volume) {
 }
 
 check_ai_existance(event_flag, area_trigger, goal_volume) {
-  while (!flag(event_flag)) {
+  while(!flag(event_flag)) {
     ai_count = 0;
     axis_guys = getAIarrayTouchingVolume("axis", goal_volume);
-    for (i = 0; i < axis_guys.size; i++) {
+    for(i = 0; i < axis_guys.size; i++) {
       if(isalive(axis_guys[i]) && axis_guys[i] istouching(area_trigger))
         ai_count++;
     }
@@ -373,15 +373,15 @@ pel1b_outro() {
   flag_wait_all("roebuck_reached_outro", "polonsky_reached_outro", "radio_guy_reached_outro");
   players = get_players();
   player_close = false;
-  while (!player_close) {
-    for (i = 0; i < players.size; i++) {
+  while(!player_close) {
+    for(i = 0; i < players.size; i++) {
       if(distancesquared(players[i].origin, guys[0].origin) < 400 * 400) {
         player_close = true;
       }
     }
     wait(0.05);
   }
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i] DisableWeapons();
     players[i] EnableInvulnerability();
   }
@@ -412,7 +412,7 @@ pacing_vignette_in_place_think(goal_node, flag_name, anim_in, anim_looping) {
 
 outro_animate_radio_model(goal_node) {
   radio_model = spawn("script_model", self.origin);
-  radio_model setmodel("char_usa_marine_radiohandset");
+  radio_model setModel("char_usa_marine_radiohandset");
   radio_model linkto(self, "tag_weapon_left", (0, 0, 0), (0, 0, 0));
   radio_model UseAnimTree(#animtree);
   radio_model.animname = "radio";
@@ -423,35 +423,35 @@ outro_animate_radio_model(goal_node) {
 }
 
 setup_objectives() {
-  objective_add(3, "current", & "PEL1B_OBJECTIVE_EV2_FLANK", (43393.7, 4060.1, 168.2));
+  objective_add(3, "current", &"PEL1B_OBJECTIVE_EV2_FLANK", (43393.7, 4060.1, 168.2));
   trigger = getent("ev2_initial_plane_spawn", "targetname");
   trigger waittill("trigger");
   objective_state(3, "done");
   objective_delete(3);
   autosave_by_name("airstrike done");
-  objective_add(4, "current", & "PEL1B_OBJECTIVE_EV2_FOLLOW_FLAME");
+  objective_add(4, "current", &"PEL1B_OBJECTIVE_EV2_FOLLOW_FLAME");
   Objective_additionalPosition(4, 0, level.flametank);
   level.flametank thread objective_follow_me(4, "tank_destroyed");
   level thread trigger_wait_with_notify("cave_entrance_trigger", "targetname", "tank_destroyed");
   level waittill("tank_destroyed");
   objective_state(4, "done");
   autosave_by_name("flametank dead");
-  objective_add(5, "current", & "PEL1B_OBJECTIVE_EV2_ASSAULT_CAVE");
+  objective_add(5, "current", &"PEL1B_OBJECTIVE_EV2_ASSAULT_CAVE");
   cave_entrance_trigger = getent("cave_entrance", "targetname");
   cave_entrance_trigger waittill("trigger");
   objective_state(5, "done");
   autosave_by_name("cave entrance");
-  objective_add(6, "current", & "PEL1B_OBJECTIVE_EV2_CAVE_CLEAR", (40871.2, -218.9, 885.508));
+  objective_add(6, "current", &"PEL1B_OBJECTIVE_EV2_CAVE_CLEAR", (40871.2, -218.9, 885.508));
   final_trigger = getent("last_cave_room_reached", "targetname");
   final_trigger waittill("trigger");
   autosave_by_name("artillery room");
-  objective_string(6, & "PEL1B_OBJECTIVE_EV2_ART_CLEAR");
+  objective_string(6, &"PEL1B_OBJECTIVE_EV2_ART_CLEAR");
   final_room = getent("final_room_trigger", "targetname");
   wait(5);
-  while (1) {
+  while(1) {
     cleared = true;
     axis_guys = GetAiArray("axis");
-    for (i = 0; i < axis_guys.size; i++) {
+    for(i = 0; i < axis_guys.size; i++) {
       if(axis_guys[i] istouching(final_room)) {
         cleared = false;
       }
@@ -464,7 +464,7 @@ setup_objectives() {
   objective_state(6, "done");
   thread battlechatter_off("allies");
   thread battlechatter_off("axis");
-  objective_add(7, "current", & "PEL1B_OBJECTIVE_FOLLOW_SQUAD", (41063.2, -538.3, 857.6));
+  objective_add(7, "current", &"PEL1B_OBJECTIVE_FOLLOW_SQUAD", (41063.2, -538.3, 857.6));
   level thread pel1b_outro();
 }
 
@@ -501,7 +501,7 @@ cave_effects() {
 cave_dust_fx_loop() {
   level endon("stop_dust_fx");
   setmusicstate("CAVE");
-  while (flag("cave_artillery_active")) {
+  while(flag("cave_artillery_active")) {
     wait(randomfloat(3) + 3);
     playsoundatposition("mortar_dirt", (41063.2, -538.3, 857.6));
     level thread play_dust_fx_near_players();

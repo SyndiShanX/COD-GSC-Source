@@ -13,8 +13,7 @@ main() {
   maps\mp\createfx\mp_skate_fx::main();
 }
 
-precache_scripted_fx() {
-}
+precache_scripted_fx() {}
 
 precache_createfx_fx() {
   level._effect["fx_lf_mp_skate_sun1"] = loadfx("lens_flares/fx_lf_mp_skate_sun1");

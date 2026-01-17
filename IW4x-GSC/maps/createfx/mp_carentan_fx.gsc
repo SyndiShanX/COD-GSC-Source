@@ -1336,5 +1336,4 @@ main() {
   ent.v["angles"] = (0, 90, 0);
   ent.v["fxid"] = "chinese_lantern_FX";
   ent.v["delay"] = -16.319;
-
 }

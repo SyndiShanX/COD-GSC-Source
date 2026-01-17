@@ -27,11 +27,11 @@ main() {
 }
 
 lightning_audio() {
-  while (1) {
+  while(1) {
     wait(randomintrange(45, 120));
     {
-      playfx(0, level._effect["mp_lightning_flash"], self.origin);
-      playsound(0, "thunder", self.origin);
+      playFX(0, level._effect["mp_lightning_flash"], self.origin);
+      playSound(0, "thunder", self.origin);
     }
   }
 }

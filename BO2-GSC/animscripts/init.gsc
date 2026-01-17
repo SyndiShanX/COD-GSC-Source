@@ -28,7 +28,7 @@
 #include animscripts\balcony;
 
 initweapon(weapon) {
-  self.weaponinfo[weapon] = spawnstruct();
+  self.weaponinfo[weapon] = spawnStruct();
   self.weaponinfo[weapon].position = "none";
   self.weaponinfo[weapon].hasclip = 1;
 
@@ -45,7 +45,7 @@ isweaponinitialized(weapon) {
 #using_animtree("generic_human");
 
 main() {
-  self.a = spawnstruct();
+  self.a = spawnStruct();
   self.a.laseron = 0;
 
   if(self.weapon == "")
@@ -215,7 +215,7 @@ main() {
   for(i = 0; i < keys.size; i++)
     clear_exception(keys[i]);
 
-  self.old = spawnstruct();
+  self.old = spawnStruct();
   self.reacquire_state = 0;
   self thread setnameandrank();
   self.shouldconserveammotime = 0;
@@ -233,8 +233,8 @@ printeyeoffsetfromnode() {
   while(true) {
     if(getdvarint(#"_id_EF4ABB36") == self getentnum()) {
       if(isDefined(self.covernode)) {
-        offset = self geteye() - self.covernode.origin;
-        forward = anglestoforward(self.covernode.angles);
+        offset = self getEye() - self.covernode.origin;
+        forward = anglesToForward(self.covernode.angles);
         right = anglestoright(self.covernode.angles);
         trueoffset = (vectordot(right, offset), vectordot(forward, offset), offset[2]);
         println(trueoffset);
@@ -261,7 +261,7 @@ showlikelyenemypathdir() {
       if(isDefined(dir))
         yaw = dir[1];
 
-      printpos = self.origin + vectorscale((0, 0, 1), 60.0) + anglestoforward((0, yaw, 0)) * 100;
+      printpos = self.origin + vectorscale((0, 0, 1), 60.0) + anglesToForward((0, yaw, 0)) * 100;
       line(self.origin + vectorscale((0, 0, 1), 60.0), printpos);
 
       if(isDefined(dir))
@@ -301,8 +301,7 @@ setweapondist() {
   }
 }
 
-donothing() {
-}
+donothing() {}
 
 setupuniqueanims() {
   if(!isDefined(self.animplaybackrate) || !isDefined(self.moveplaybackrate))

@@ -8,27 +8,27 @@
 
 init() {
   level.medalSettings.waitTime = 1.25;
-  level.contractSettings = spawnstruct();
+  level.contractSettings = spawnStruct();
   level.contractSettings.waitTime = 4.2;
-  level.killstreakSettings = spawnstruct();
+  level.killstreakSettings = spawnStruct();
   level.killstreakSettings.waitTime = 3;
-  level.rankSettings = spawnstruct();
+  level.rankSettings = spawnStruct();
   level.rankSettings.waitTime = 3;
-  level.startMessage = spawnstruct();
+  level.startMessage = spawnStruct();
   level.startMessageDefaultDuration = 2.0;
   level.endMessageDefaultDuration = 2.0;
-  level.challengeSettings = spawnstruct();
+  level.challengeSettings = spawnStruct();
   level.challengeSettings.waitTime = 3;
-  level.teamMessage = spawnstruct();
+  level.teamMessage = spawnStruct();
   level.teamMessage.waittime = 3;
-  level.regularGameMessages = spawnstruct();
+  level.regularGameMessages = spawnStruct();
   level.regularGameMessages.waittime = 6;
-  level.wagerSettings = spawnstruct();
+  level.wagerSettings = spawnStruct();
   level.wagerSettings.waittime = 3;
   level thread onPlayerConnect();
 }
 popupsFromConsole() {
-  while (1) {
+  while(1) {
     timeout = getDvarIntDefault(#"scr_popuptime", 1.0);
     if(timeout == 0)
       timeout = 1;
@@ -41,19 +41,19 @@ popupsFromConsole() {
     gameModeMsg = getDvarIntDefault(#"scr_gamemodeslideout", 0);
     teamMsg = getDvarIntDefault(#"scr_teamslideout", 0);
     challengeIndex = getDvarIntDefault(#"scr_challengeIndex", 1);
-    for (i = 0; i < medal; i++)
+    for(i = 0; i < medal; i++)
       level.players[0] maps\mp\gametypes\_persistence::statAdd("BACK_STABBER", 1, false);
-    for (i = 0; i < challenge; i++)
+    for(i = 0; i < challenge; i++)
       level.players[0] maps\mp\gametypes\_missions::milestoneNotify(1, challengeIndex, 1, 1);
-    for (i = 0; i < rank; i++)
+    for(i = 0; i < rank; i++)
       level.players[0] maps\mp\gametypes\_rank::updateRankAnnounceHUD();
-    for (i = 0; i < contractPass; i++)
+    for(i = 0; i < contractPass; i++)
       level.players[0] maps\mp\gametypes\_persistence::addContractToQueue(12, 1);
-    for (i = 0; i < contractFail; i++)
+    for(i = 0; i < contractFail; i++)
       level.players[0] maps\mp\gametypes\_persistence::addContractToQueue(12, 0);
-    for (i = 0; i < gameModeMsg; i++)
+    for(i = 0; i < gameModeMsg; i++)
       level.players[0] DisplayGameModeMessage(&"MP_HQ_REVEALED", "uin_alert_slideout");
-    for (i = 0; i < teamMsg; i++) {
+    for(i = 0; i < teamMsg; i++) {
       player = level.players[0];
       if(isDefined(level.players[1]))
         player = level.players[1];
@@ -94,7 +94,7 @@ shouldDisplayTeamMessages() {
 DisplayTeamMessageToAll(message, player) {
   if(!shouldDisplayTeamMessages())
     return;
-  for (i = 0; i < level.players.size; i++) {
+  for(i = 0; i < level.players.size; i++) {
     cur_player = level.players[i];
     size = cur_player.teamMessageQueue.size;
     cur_player.teamMessageQueue[size] = spawnStruct();
@@ -106,7 +106,7 @@ DisplayTeamMessageToAll(message, player) {
 DisplayTeamMessageToTeam(message, player, team) {
   if(!shouldDisplayTeamMessages())
     return;
-  for (i = 0; i < level.players.size; i++) {
+  for(i = 0; i < level.players.size; i++) {
     cur_player = level.players[i];
     if(cur_player.team != team)
       continue;
@@ -123,13 +123,13 @@ displayTeamMessageWaiter() {
   self endon("disconnect");
   level endon("game_ended");
   self.teamMessageQueue = [];
-  for (;;) {
+  for(;;) {
     if(self.teamMessageQueue.size == 0)
       self waittill("received teammessage");
     if(self.teamMessageQueue.size > 0) {
       nextNotifyData = self.teamMessageQueue[0];
       size = self.teamMessageQueue.size;
-      for (i = 0; i < size - 1; i++) {
+      for(i = 0; i < size - 1; i++) {
         self.teamMessageQueue[i] = self.teamMessageQueue[i + 1];
       }
       self.teamMessageQueue[size - 1] = undefined;
@@ -154,7 +154,7 @@ displayPopUpsWaiter() {
   self.messageNotifyQueue = [];
   self.startMessageNotifyQueue = [];
   self.wagerNotifyQueue = [];
-  while (!level.gameEnded && !wasLastRound()) {
+  while(!level.gameEnded && !wasLastRound()) {
     if(self.startMessageNotifyQueue.size == 0 && self.rankNotifyQueue.size == 0 && self.wagerNotifyQueue.size == 0 && self.pers["contractNotifyQueue"].size == 0 && self.medalNotifyQueue.size == 0 && self.killstreakNotifyQueue.size == 0 && self.messageNotifyQueue.size == 0 && self.pers["challengeNotifyQueue"].size == 0)
       self waittill("received award");
     waittillframeend;
@@ -164,7 +164,7 @@ displayPopUpsWaiter() {
     if(self.startMessageNotifyQueue.size > 0) {
       self clearCenterPopups();
       nextNotifyData = self.startMessageNotifyQueue[0];
-      for (i = 1; i < self.startMessageNotifyQueue.size; i++)
+      for(i = 1; i < self.startMessageNotifyQueue.size; i++)
         self.startMessageNotifyQueue[i - 1] = self.startMessageNotifyQueue[i];
       self.startMessageNotifyQueue[i - 1] = undefined;
       if(isDefined(nextNotifyData.duration))
@@ -181,7 +181,7 @@ displayPopUpsWaiter() {
         points = 0;
       subMessage = self.wagerNotifyQueue[0].subMessage;
       announcement = self.wagerNotifyQueue[0].announcement;
-      for (i = 1; i < self.wagerNotifyQueue.size; i++)
+      for(i = 1; i < self.wagerNotifyQueue.size; i++)
         self.wagerNotifyQueue[i - 1] = self.wagerNotifyQueue[i];
       self.wagerNotifyQueue[i - 1] = undefined;
       if(isDefined(subMessage))
@@ -196,7 +196,7 @@ displayPopUpsWaiter() {
       self.doingNotify = false;
     } else if(self.medalNotifyQueue.size > 0) {
       nextNotifyData = self.medalNotifyQueue[0];
-      for (i = 1; i < self.medalNotifyQueue.size; i++)
+      for(i = 1; i < self.medalNotifyQueue.size; i++)
         self.medalNotifyQueue[i - 1] = self.medalNotifyQueue[i];
       self.medalNotifyQueue[i - 1] = undefined;
       sound = "uin_challenge_repeatable";
@@ -218,7 +218,7 @@ displayPopUpsWaiter() {
       self displayContract(contractIndex, sound, passed);
       wait(level.contractSettings.waitTime);
       if(!level.gameended && !wasLastRound()) {
-        for (i = 1; i < self.pers["contractNotifyQueue"].size; i++)
+        for(i = 1; i < self.pers["contractNotifyQueue"].size; i++)
           self.pers["contractNotifyQueue"][i - 1] = self.pers["contractNotifyQueue"][i];
         self.pers["contractNotifyQueue"][i - 1] = undefined;
       }
@@ -235,7 +235,7 @@ displayPopUpsWaiter() {
       self displayChallengeComplete(tier, index, 1, itemIndex, sound, type);
       wait(level.challengeSettings.waitTime);
       if(!level.gameended && !wasLastRound()) {
-        for (i = 1; i < self.pers["challengeNotifyQueue"].size; i++)
+        for(i = 1; i < self.pers["challengeNotifyQueue"].size; i++)
           self.pers["challengeNotifyQueue"][i - 1] = self.pers["challengeNotifyQueue"][i];
         self.pers["challengeNotifyQueue"][i - 1] = undefined;
       }
@@ -250,7 +250,7 @@ displayPopUpsWaiter() {
       self displayRankUp(rank, prestige, sound);
       wait(level.rankSettings.waitTime);
       if(!level.gameended && !wasLastRound()) {
-        for (i = 1; i < self.rankNotifyQueue.size; i++)
+        for(i = 1; i < self.rankNotifyQueue.size; i++)
           self.rankNotifyQueue[i - 1] = self.rankNotifyQueue[i];
         self.rankNotifyQueue[i - 1] = undefined;
       }
@@ -258,7 +258,7 @@ displayPopUpsWaiter() {
       streakCount = self.killstreakNotifyQueue[0].streakCount;
       killstreakTableNumber = self.killstreakNotifyQueue[0].killstreakTableNumber;
       hardpointType = self.killstreakNotifyQueue[0].hardpointType;
-      for (i = 1; i < self.killstreakNotifyQueue.size; i++)
+      for(i = 1; i < self.killstreakNotifyQueue.size; i++)
         self.killstreakNotifyQueue[i - 1] = self.killstreakNotifyQueue[i];
       self.killstreakNotifyQueue[i - 1] = undefined;
       if(!isDefined(streakCount))
@@ -269,7 +269,7 @@ displayPopUpsWaiter() {
     } else if(self.messageNotifyQueue.size > 0) {
       self clearCenterPopups();
       nextNotifyData = self.messageNotifyQueue[0];
-      for (i = 1; i < self.messageNotifyQueue.size; i++)
+      for(i = 1; i < self.messageNotifyQueue.size; i++)
         self.messageNotifyQueue[i - 1] = self.messageNotifyQueue[i];
       self.messageNotifyQueue[i - 1] = undefined;
       if(isDefined(nextNotifyData.duration))
@@ -295,9 +295,9 @@ displayEndGamePopUps() {
     sendMessage = true;
   }
   if(self.pers["contractNotifyQueue"].size > 0) {
-    for (i = 0; i < self.pers["contractNotifyQueue"].size; i++) {
+    for(i = 0; i < self.pers["contractNotifyQueue"].size; i++) {
       if(self.pers["contractNotifyQueue"][0]["passed"] == false) {
-        for (i = 1; i < self.pers["contractNotifyQueue"].size; i++)
+        for(i = 1; i < self.pers["contractNotifyQueue"].size; i++)
           self.pers["contractNotifyQueue"][i - 1] = self.pers["contractNotifyQueue"][i];
         self.pers["contractNotifyQueue"][i - 1] = undefined;
       }
@@ -325,7 +325,7 @@ displayEndGamePopUps() {
   if(sendMessage == true) {
     self DisplayEndGame(promoted, contract0, contract1, contract2);
   }
-  for (challengeNotifyCount = 0; challengeNotifyCount < self.pers["challengeNotifyQueue"].size && challengeNotifyCount < 3; challengeNotifyCount++) {
+  for(challengeNotifyCount = 0; challengeNotifyCount < self.pers["challengeNotifyQueue"].size && challengeNotifyCount < 3; challengeNotifyCount++) {
     self.postGameMilestones++;
     tier = self.pers["challengeNotifyQueue"][challengeNotifyCount]["tier"];
     index = self.pers["challengeNotifyQueue"][challengeNotifyCount]["index"];
@@ -335,7 +335,7 @@ displayEndGamePopUps() {
   }
 }
 onPlayerConnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connecting", player);
     player clearendgame();
     player clearPopups();
@@ -346,4 +346,3 @@ onPlayerConnect() {
     }
   }
 }
-

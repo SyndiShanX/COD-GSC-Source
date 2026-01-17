@@ -30,15 +30,15 @@ function main() {
   level._effect["sensory_disable_human"] = "electric/fx_ability_elec_sensory_ol_human";
   level._effect["sensory_disable_human_riotshield"] = "electric/fx_ability_elec_sensory_ol_human";
   level._effect["sensory_disable_warlord"] = "electric/fx_ability_elec_sensory_ol_human";
-  level.cybercom.sensory_overload = spawnstruct();
-  level.cybercom.sensory_overload._is_flickering = & _is_flickering;
-  level.cybercom.sensory_overload._on_flicker = & _on_flicker;
-  level.cybercom.sensory_overload._on_give = & _on_give;
-  level.cybercom.sensory_overload._on_take = & _on_take;
-  level.cybercom.sensory_overload._on_connect = & _on_connect;
-  level.cybercom.sensory_overload._on = & _on;
-  level.cybercom.sensory_overload._off = & _off;
-  level.cybercom.sensory_overload._is_primed = & _is_primed;
+  level.cybercom.sensory_overload = spawnStruct();
+  level.cybercom.sensory_overload._is_flickering = &_is_flickering;
+  level.cybercom.sensory_overload._on_flicker = &_on_flicker;
+  level.cybercom.sensory_overload._on_give = &_on_give;
+  level.cybercom.sensory_overload._on_take = &_on_take;
+  level.cybercom.sensory_overload._on_connect = &_on_connect;
+  level.cybercom.sensory_overload._on = &_on;
+  level.cybercom.sensory_overload._off = &_off;
+  level.cybercom.sensory_overload._is_primed = &_is_primed;
 }
 
 function _is_flickering(slot) {}
@@ -52,8 +52,8 @@ function _on_give(slot, weapon) {
     self.cybercom.var_110c156a = getdvarint("scr_sensory_overload_upgraded_count", 5);
     self.cybercom.var_bf39536d = getdvarint("scr_sensory_overload_upgraded_loops", 2);
   }
-  self.cybercom.targetlockcb = & _get_valid_targets;
-  self.cybercom.targetlockrequirementcb = & _lock_requirement;
+  self.cybercom.targetlockcb = &_get_valid_targets;
+  self.cybercom.targetlockrequirementcb = &_lock_requirement;
   self thread cybercom::function_b5f4e597(weapon);
   self cybercom::function_8257bcb3("base_rifle_stn", 8);
   self cybercom::function_8257bcb3("base_rifle_crc", 2);
@@ -80,7 +80,7 @@ function _off(slot, weapon) {
 }
 
 function _is_primed(slot, weapon) {
-  if(!(isdefined(self.cybercom.is_primed) && self.cybercom.is_primed)) {
+  if(!(isDefined(self.cybercom.is_primed) && self.cybercom.is_primed)) {
     assert(self.cybercom.activecybercomweapon == weapon);
     self thread cybercom::weaponlockwatcher(slot, weapon, self.cybercom.var_110c156a);
     self.cybercom.is_primed = 1;
@@ -92,11 +92,11 @@ function private _lock_requirement(target) {
     self cybercom::function_29bf9dee(target, 2);
     return false;
   }
-  if(isdefined(target.is_disabled) && target.is_disabled) {
+  if(isDefined(target.is_disabled) && target.is_disabled) {
     self cybercom::function_29bf9dee(target, 6);
     return false;
   }
-  if(isvehicle(target) || !isdefined(target.archetype)) {
+  if(isvehicle(target) || !isDefined(target.archetype)) {
     self cybercom::function_29bf9dee(target, 2);
     return false;
   }
@@ -121,7 +121,7 @@ function private _activate_sensory_overload(slot, weapon) {
   aborted = 0;
   fired = 0;
   foreach(item in self.cybercom.lock_targets) {
-    if(isdefined(item.target) && (isdefined(item.inrange) && item.inrange)) {
+    if(isDefined(item.target) && (isDefined(item.inrange) && item.inrange)) {
       if(item.inrange == 1) {
         if(!cybercom::targetisvalid(item.target, weapon)) {
           continue;
@@ -143,7 +143,7 @@ function private _activate_sensory_overload(slot, weapon) {
   cybercom::function_adc40f11(weapon, fired);
   if(fired && isplayer(self)) {
     itemindex = getitemindexfromref("cybercom_sensoryoverload");
-    if(isdefined(itemindex)) {
+    if(isDefined(itemindex)) {
       self adddstat("ItemStats", itemindex, "stats", "assists", "statValue", fired);
       self adddstat("ItemStats", itemindex, "stats", "used", "statValue", 1);
     }
@@ -151,7 +151,7 @@ function private _activate_sensory_overload(slot, weapon) {
 }
 
 function ai_activatesensoryoverload(target, var_9bc2efcb = 1) {
-  if(!isdefined(target)) {
+  if(!isDefined(target)) {
     return;
   }
   if(self.archetype != "human") {
@@ -171,7 +171,7 @@ function ai_activatesensoryoverload(target, var_9bc2efcb = 1) {
     }
     validtargets[validtargets.size] = target;
   }
-  if(isdefined(var_9bc2efcb) && var_9bc2efcb) {
+  if(isDefined(var_9bc2efcb) && var_9bc2efcb) {
     type = self cybercom::function_5e3d3aa();
     self orientmode("face default");
     self animscripted("ai_cybercom_anim", self.origin, self.angles, ("ai_base_rifle_" + type) + "_exposed_cybercom_activate", "normal", % generic::root, 1, 0.3);
@@ -191,7 +191,7 @@ function sensory_overload(attacker, var_7d4fd98c) {
   self endon("death");
   weapon = getweapon("gadget_sensory_overload");
   self notify("hash_f8c5dd60", weapon, attacker);
-  if(isdefined(attacker.cybercom) && isdefined(attacker.cybercom.var_bf39536d)) {
+  if(isDefined(attacker.cybercom) && isDefined(attacker.cybercom.var_bf39536d)) {
     loops = attacker.cybercom.var_bf39536d;
   } else {
     loops = 1;
@@ -201,35 +201,35 @@ function sensory_overload(attacker, var_7d4fd98c) {
     return;
   }
   if(self cybercom::function_421746e0()) {
-    self kill(self.origin, (isdefined(attacker) ? attacker : undefined), undefined, weapon);
+    self kill(self.origin, (isDefined(attacker) ? attacker : undefined), undefined, weapon);
     return;
   }
   self orientmode("face default");
   self.is_disabled = 1;
   self.ignoreall = 1;
-  if(isdefined(var_7d4fd98c)) {
+  if(isDefined(var_7d4fd98c)) {
     if(var_7d4fd98c == "cybercom_smokescreen") {
       self.var_d90f9ddb = 1;
     }
   }
   if(isplayer(attacker) && attacker hascybercomability("cybercom_sensoryoverload") == 2) {
-    self playsound("gdt_sensory_feedback_start");
-    self playloopsound("gdt_sensory_feedback_lp_upg", 0.5);
+    self playSound("gdt_sensory_feedback_start");
+    self playLoopSound("gdt_sensory_feedback_lp_upg", 0.5);
     self clientfield::set("sensory_overload", 2);
   } else {
-    self playsound("gdt_sensory_feedback_start");
-    self playloopsound("gdt_sensory_feedback_lp", 0.5);
+    self playSound("gdt_sensory_feedback_start");
+    self playLoopSound("gdt_sensory_feedback_lp", 0.5);
     self clientfield::set("sensory_overload", 1);
   }
   self notify("bhtn_action_notify", "reactSensory");
   if(self.archetype == "warlord") {
-    self dodamage(2, self.origin, (isdefined(attacker) ? attacker : undefined), undefined, "none", "MOD_UNKNOWN", 0, weapon, -1, 1);
+    self dodamage(2, self.origin, (isDefined(attacker) ? attacker : undefined), undefined, "none", "MOD_UNKNOWN", 0, weapon, -1, 1);
     self waittillmatch("bhtn_action_terminate");
     self clientfield::set("sensory_overload", 0);
   } else {
     if(self.archetype == "human_riotshield") {
-      while (loops) {
-        self dodamage(2, self.origin, (isdefined(attacker) ? attacker : undefined), undefined, "none", "MOD_UNKNOWN", 0, weapon, -1, 1);
+      while(loops) {
+        self dodamage(2, self.origin, (isDefined(attacker) ? attacker : undefined), undefined, "none", "MOD_UNKNOWN", 0, weapon, -1, 1);
         self waittillmatch("bhtn_action_terminate");
         loops--;
       }
@@ -237,7 +237,7 @@ function sensory_overload(attacker, var_7d4fd98c) {
     } else {
       assert(self.archetype == "");
       base = "base_rifle";
-      if(isdefined(self.voiceprefix) && getsubstr(self.voiceprefix, 7) == "f") {
+      if(isDefined(self.voiceprefix) && getsubstr(self.voiceprefix, 7) == "f") {
         base = "fem_rifle";
       }
       type = self cybercom::function_5e3d3aa();
@@ -259,7 +259,7 @@ function sensory_overload(attacker, var_7d4fd98c) {
   self stoploopsound(0.75);
   self.is_disabled = undefined;
   self.ignoreall = 0;
-  if(isdefined(var_7d4fd98c)) {
+  if(isDefined(var_7d4fd98c)) {
     if(var_7d4fd98c == "cybercom_smokescreen") {
       self.var_d90f9ddb = 0;
     }
@@ -269,7 +269,7 @@ function sensory_overload(attacker, var_7d4fd98c) {
 function function_58831b5a(loops, attacker, weapon, variant, base, type) {
   self endon("hash_8817762c");
   self thread function_53cfe88a();
-  while (loops) {
+  while(loops) {
     self function_e01b8059(attacker, weapon, variant, base, type);
     loops--;
   }

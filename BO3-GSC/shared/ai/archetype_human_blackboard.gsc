@@ -14,19 +14,19 @@
 #namespace blackboard;
 
 function registeractorblackboardattributes() {
-  registerblackboardattribute(self, "_tactical_arrival_facing_yaw", undefined, & bb_gettacticalarrivalfacingyaw);
+  registerblackboardattribute(self, "_tactical_arrival_facing_yaw", undefined, &bb_gettacticalarrivalfacingyaw);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  registerblackboardattribute(self, "_human_locomotion_movement_type", undefined, & bb_getlocomotionmovementtype);
+  registerblackboardattribute(self, "_human_locomotion_movement_type", undefined, &bb_getlocomotionmovementtype);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  registerblackboardattribute(self, "_human_cover_flankability", undefined, & bb_getcoverflankability);
+  registerblackboardattribute(self, "_human_cover_flankability", undefined, &bb_getcoverflankability);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  registerblackboardattribute(self, "_arrival_type", undefined, & bb_getarrivaltype);
+  registerblackboardattribute(self, "_arrival_type", undefined, &bb_getarrivaltype);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
@@ -52,7 +52,7 @@ function private bb_getlocomotionmovementtype() {
     if(ai::getaiattribute(self, "sprint")) {
       return "human_locomotion_movement_sprint";
     }
-    if(!isdefined(self.nearbyfriendlycheck)) {
+    if(!isDefined(self.nearbyfriendlycheck)) {
       self.nearbyfriendlycheck = 0;
     }
     now = gettime();
@@ -63,11 +63,11 @@ function private bb_getlocomotionmovementtype() {
     if(self.nearbyfriendlycount >= 3) {
       return "human_locomotion_movement_default";
     }
-    if(isdefined(self.enemy) && isdefined(self.runandgundist)) {
+    if(isDefined(self.enemy) && isDefined(self.runandgundist)) {
       if(distancesquared(self.origin, self lastknownpos(self.enemy)) > (self.runandgundist * self.runandgundist)) {
         return "human_locomotion_movement_sprint";
       }
-    } else if(isdefined(self.goalpos) && isdefined(self.runandgundist)) {
+    } else if(isDefined(self.goalpos) && isDefined(self.runandgundist)) {
       if(distancesquared(self.origin, self.goalpos) > (self.runandgundist * self.runandgundist)) {
         return "human_locomotion_movement_sprint";
       }
@@ -80,11 +80,11 @@ function private bb_getcoverflankability() {
   if(self asmistransitionrunning()) {
     return "unflankable";
   }
-  if(!isdefined(self.node)) {
+  if(!isDefined(self.node)) {
     return "unflankable";
   }
   covermode = getblackboardattribute(self, "_cover_mode");
-  if(isdefined(covermode)) {
+  if(isDefined(covermode)) {
     covernode = self.node;
     if(covermode == "cover_alert" || covermode == "cover_mode_none") {
       return "flankable";

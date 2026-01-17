@@ -27,7 +27,6 @@
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\ai\zm_ai_utility;
 #include scripts\zm_common\zm_aoe;
-
 #namespace zm_ai_elephant;
 
 autoexec main() {
@@ -35,19 +34,19 @@ autoexec main() {
   spawner::add_archetype_spawn_function(#"elephant", &function_4c731a08);
 }
 
-private registerbehaviorscriptfunctions() {
+registerbehaviorscriptfunctions() {
   animation::add_global_notetrack_handler("arrow_throw", &function_aef0aaa4, 0);
   animation::add_global_notetrack_handler("spear_unhide", &function_882f233, 0);
   animation::add_global_notetrack_handler("spear_hide", &function_e41280fd, 0);
   animation::add_global_notetrack_handler("start_gib", &function_dae74ff5, 0);
 }
 
-private function_4c731a08() {
+function_4c731a08() {
   if(!(isDefined(level.var_c8d8fe54) && level.var_c8d8fe54)) {
-    level thread aat::register_immunity("zm_aat_brain_decay", #"elephant", 1, 0, 0);
-    level thread aat::register_immunity("zm_aat_frostbite", #"elephant", 1, 0, 0);
-    level thread aat::register_immunity("zm_aat_kill_o_watt", #"elephant", 1, 0, 0);
-    level thread aat::register_immunity("zm_aat_plasmatic_burst", #"elephant", 1, 0, 0);
+    level thread aat::register_immunity("zm_aat_brain_decay", # "elephant", 1, 0, 0);
+    level thread aat::register_immunity("zm_aat_frostbite", # "elephant", 1, 0, 0);
+    level thread aat::register_immunity("zm_aat_kill_o_watt", # "elephant", 1, 0, 0);
+    level thread aat::register_immunity("zm_aat_plasmatic_burst", # "elephant", 1, 0, 0);
     level.var_c8d8fe54 = 1;
   }
 
@@ -60,7 +59,7 @@ private function_4c731a08() {
   function_deb99302();
 }
 
-private function_deb99302() {
+function_deb99302() {
   if(isDefined(level.var_a92449fa)) {
     return;
   }
@@ -70,7 +69,7 @@ private function_deb99302() {
   level.var_6efc944c = &function_ad0f2b39;
 }
 
-private function_767db9a1(attacker, weapon, boneindex, hitloc, point) {
+function_767db9a1(attacker, weapon, boneindex, hitloc, point) {
   var_786d7e06 = zm_ai_utility::function_422fdfd4(self, attacker, weapon, boneindex, hitloc, point);
   damage_scale = var_786d7e06.damage_scale;
   return damage_scale;
@@ -82,7 +81,7 @@ function_ad0f2b39(aoe) {
   }
 }
 
-private function_848ff0cc(elephant, rider) {
+function_848ff0cc(elephant, rider) {
   if(isDefined(level.var_a92449fa)) {
     validstructs = [];
 
@@ -108,34 +107,34 @@ private function_848ff0cc(elephant, rider) {
   return undefined;
 }
 
-private function_9b64dc73(enemies, entity) {
+function_9b64dc73(enemies, entity) {
   foreach(enemy in enemies) {
     enemy zombie_utility::setup_zombie_knockdown(entity);
     enemy.knockdown_type = "knockdown_stun";
   }
 }
 
-private function_502d9d0d(entity, projectile) {
+function_502d9d0d(entity, projectile) {
   projectile thread function_d13a21cb(entity, projectile);
 }
 
-private function_dae74ff5() {}
+function_dae74ff5() {}
 
-private function_e41280fd() {
+function_e41280fd() {
   if(isDefined(self.var_c8ec4813) && self.var_c8ec4813) {
     self detach("p7_shr_weapon_spear_lrg", "tag_weapon_right");
     self.var_c8ec4813 = 0;
   }
 }
 
-private function_882f233() {
+function_882f233() {
   if(isDefined(self.var_c8ec4813) && !self.var_c8ec4813) {
     self attach("p7_shr_weapon_spear_lrg", "tag_weapon_right");
     self.var_c8ec4813 = 1;
   }
 }
 
-private function_aef0aaa4() {
+function_aef0aaa4() {
   assert(isDefined(self.ai.spearweapon));
   forwarddir = anglesToForward(self.angles);
   var_a137cb9f = self gettagorigin("tag_weapon_right");
@@ -152,7 +151,7 @@ private function_aef0aaa4() {
 
   var_e15d8b1f = 2;
 
-  if(self.ai.elephant.ai.var_112ec817 == #"hash_8e170ae91588f20") {
+  if(self.ai.elephant.ai.var_112ec817 == # "hash_8e170ae91588f20") {
     var_e15d8b1f = 3;
   }
 
@@ -181,7 +180,7 @@ function_7b10e526(index, multival, target) {
   return dir;
 }
 
-private function_d13a21cb(entity, projectile) {
+function_d13a21cb(entity, projectile) {
   projectile endon(#"death");
   landpos = entity.var_f6ea2286;
 
@@ -195,27 +194,27 @@ private function_d13a21cb(entity, projectile) {
 
   recordsphere(enemyorigin, 15, (0, 0, 0), "<dev string:x38>");
 
-    for(i = 0; i < 5; i++) {
-      randomdistance = randomintrange(120, 360);
-      var_a978e158 = randomfloatrange(-10, 10);
-      yaw = -180 + 72 * i + var_a978e158;
-      angles = (0, yaw, 0);
-      dir = anglesToForward(angles) * randomdistance;
-      var_c6b637a5 = landpos + dir;
+  for(i = 0; i < 5; i++) {
+    randomdistance = randomintrange(120, 360);
+    var_a978e158 = randomfloatrange(-10, 10);
+    yaw = -180 + 72 * i + var_a978e158;
+    angles = (0, yaw, 0);
+    dir = anglesToForward(angles) * randomdistance;
+    var_c6b637a5 = landpos + dir;
 
-      recordsphere(var_c6b637a5, 15, (1, 0.5, 0), "<dev string:x38>");
+    recordsphere(var_c6b637a5, 15, (1, 0.5, 0), "<dev string:x38>");
 
-        launchvelocity = vectornormalize(var_c6b637a5 - projectile.origin) * 1400;
-      grenade = entity magicmissile(entity.ai.var_a05929e4, projectile.origin, launchvelocity);
-      grenade thread function_7d162bd0(grenade);
-    }
+    launchvelocity = vectornormalize(var_c6b637a5 - projectile.origin) * 1400;
+    grenade = entity magicmissile(entity.ai.var_a05929e4, projectile.origin, launchvelocity);
+    grenade thread function_7d162bd0(grenade);
+  }
 
   projectile clientfield::set("towers_boss_head_proj_fx_cf", 0);
   wait 0.1;
   projectile delete();
 }
 
-private function_7d162bd0(projectile, var_e15d8b1f, var_c3f91959) {
+function_7d162bd0(projectile, var_e15d8b1f, var_c3f91959) {
   projectile endon(#"spear_death");
   result = projectile waittill(#"projectile_impact_explode");
 
@@ -239,9 +238,9 @@ private function_7d162bd0(projectile, var_e15d8b1f, var_c3f91959) {
 
       if(isDefined(function_9cc082d2(result.position, 30))) {
         if(isDefined(var_c3f91959)) {
-          aoe = zm_aoe::function_371b4147(id, var_f34f8a95, groundtrace(result.position + (0, 0, 8), result.position + (0, 0, -100000), 0, projectile)[#"position"], var_c3f91959);
+          aoe = zm_aoe::function_371b4147(id, var_f34f8a95, groundtrace(result.position + (0, 0, 8), result.position + (0, 0, -100000), 0, projectile)[# "position"], var_c3f91959);
         } else {
-          aoe = zm_aoe::function_371b4147(id, var_f34f8a95, groundtrace(result.position + (0, 0, 8), result.position + (0, 0, -100000), 0, projectile)[#"position"]);
+          aoe = zm_aoe::function_371b4147(id, var_f34f8a95, groundtrace(result.position + (0, 0, 8), result.position + (0, 0, -100000), 0, projectile)[# "position"]);
         }
       }
 
@@ -255,7 +254,7 @@ private function_7d162bd0(projectile, var_e15d8b1f, var_c3f91959) {
   }
 }
 
-private function_5ae551a6(enemy, projectile) {
+function_5ae551a6(enemy, projectile) {
   if(isDefined(enemy.knockdown) && enemy.knockdown) {
     return false;
   }
@@ -275,13 +274,13 @@ private function_5ae551a6(enemy, projectile) {
   return true;
 }
 
-private function_61d12301(projectile) {
+function_61d12301(projectile) {
   projectile endon(#"death");
   result = projectile waittill(#"damage");
   projectile.isdamaged = 1;
 }
 
-private watch_for_death(projectile) {
+watch_for_death(projectile) {
   projectile waittill(#"death");
   waittillframeend();
   projectile notify(#"spear_death");
@@ -309,7 +308,7 @@ function_6b086058(inflictor, attacker, damage, idflags, meansofdeath, weapon, po
     return (damage * var_786d7e06.damage_scale);
   }
 
-  if(self.ai.var_112ec817 == #"hash_8e173ae91589439") {
+  if(self.ai.var_112ec817 == # "hash_8e173ae91589439") {
     var_dd54fdb1 = namespace_81245006::function_37e3f011(self, "tag_carriage_ws_le");
 
     if(isDefined(var_dd54fdb1) && namespace_81245006::function_f29756fe(var_dd54fdb1) === 1) {
@@ -322,7 +321,7 @@ function_6b086058(inflictor, attacker, damage, idflags, meansofdeath, weapon, po
     attacker playhitmarker(undefined, 1, undefined, 0);
     var_786d7e06 = zm_ai_utility::function_422fdfd4(self, attacker, weapon, boneindex);
     return (damage * var_786d7e06.damage_scale);
-  } else if(self.ai.var_112ec817 == #"hash_8e170ae91588f20") {
+  } else if(self.ai.var_112ec817 == # "hash_8e170ae91588f20") {
     var_dd54fdb1 = namespace_81245006::function_37e3f011(self, "tag_head_ws");
 
     if(isDefined(var_dd54fdb1) && namespace_81245006::function_f29756fe(var_dd54fdb1) === 1) {
@@ -339,11 +338,10 @@ function_6b086058(inflictor, attacker, damage, idflags, meansofdeath, weapon, po
 
       iprintlnbold("<dev string:x41>" + var_dd54fdb1.health);
 
-        if(namespace_81245006::function_f29756fe(var_dd54fdb1) === 3) {
+      if(namespace_81245006::function_f29756fe(var_dd54fdb1) === 3) {
+        iprintlnbold("<dev string:x57>");
 
-          iprintlnbold("<dev string:x57>");
-
-        }
+      }
 
       return 0;
     }

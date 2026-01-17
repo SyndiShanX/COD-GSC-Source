@@ -32,7 +32,7 @@ default_onforfeit(team) {
   wait 10.0;
   announcement(game["strings"]["opponent_forfeiting_in"], 10.0, 0);
   wait 10.0;
-  endreason = & "";
+  endreason = &"";
 
   if(level.multiteam) {
     setdvar("ui_text_endreason", game["strings"]["other_teams_forfeited"]);
@@ -104,8 +104,7 @@ default_onlastteamaliveevent(team) {
   }
 }
 
-default_onalivecountchange(team) {
-}
+default_onalivecountchange(team) {}
 
 default_onroundendgame(winner) {
   return winner;
@@ -120,7 +119,7 @@ default_ononeleftevent(team) {
     else
       logstring("last one alive, win: unknown");
 
-    thread maps\mp\gametypes\_globallogic::endgame(winner, & "MP_ENEMIES_ELIMINATED");
+    thread maps\mp\gametypes\_globallogic::endgame(winner, &"MP_ENEMIES_ELIMINATED");
   } else {
     for(index = 0; index < level.players.size; index++) {
       player = level.players[index];
@@ -187,7 +186,7 @@ default_onspawnspectator(origin, angles) {
   }
 
   spawnpointname = "mp_global_intermission";
-  spawnpoints = getentarray(spawnpointname, "classname");
+  spawnpoints = getEntArray(spawnpointname, "classname");
   assert(spawnpoints.size, "There are no mp_global_intermission spawn points in the map.There must be at least one.");
   spawnpoint = maps\mp\gametypes\_spawnlogic::getspawnpoint_random(spawnpoints);
   self spawn(spawnpoint.origin, spawnpoint.angles);
@@ -195,7 +194,7 @@ default_onspawnspectator(origin, angles) {
 
 default_onspawnintermission() {
   spawnpointname = "mp_global_intermission";
-  spawnpoints = getentarray(spawnpointname, "classname");
+  spawnpoints = getEntArray(spawnpointname, "classname");
   spawnpoint = spawnpoints[0];
 
   if(isDefined(spawnpoint))

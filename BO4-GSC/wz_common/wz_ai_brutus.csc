@@ -11,7 +11,6 @@
 #include scripts\core_common\postfx_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace wz_ai_brutus;
 
 autoexec __init__system__() {

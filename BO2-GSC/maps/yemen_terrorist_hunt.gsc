@@ -20,8 +20,7 @@ init_flags() {
   flag_init("kill_rocket_hall_vo");
 }
 
-init_spawn_funcs() {
-}
+init_spawn_funcs() {}
 
 skipto_terrorist_hunt() {
   load_gump("yemen_gump_speech");
@@ -194,8 +193,7 @@ rocket_hall_american_destruction() {
     a_zone_ai[0] magicgrenade(s_grenade_2.origin + vectorscale((0, 0, 1), 16.0), s_grenade_2.origin, 1);
 }
 
-rocket_hall_rpgs() {
-}
+rocket_hall_rpgs() {}
 
 rocket_hall_rpg_fire(str_start_struct) {
   s_rpg_start = getstruct(str_start_struct, "targetname");

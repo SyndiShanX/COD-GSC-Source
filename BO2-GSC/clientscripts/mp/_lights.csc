@@ -102,7 +102,7 @@ set_light_notify(light_struct, name) {
 
 play_light_sound(light_struct, sound) {
   if(self.mixer.active == 0 && self.mixer.mix_val == light_struct.side)
-    playsound(0, sound, self.origin);
+    playSound(0, sound, self.origin);
 }
 
 play_light_fx(light_struct, fx) {
@@ -118,7 +118,7 @@ play_light_fx(light_struct, fx) {
       org = self.light_models[0].origin;
 
       if(isDefined(self.script_light_fx_offset)) {
-        atf = anglestoforward(self.light_models[0].angles);
+        atf = anglesToForward(self.light_models[0].angles);
         atr = anglestoright(self.light_models[0].angles);
         atu = anglestoup(self.light_models[0].angles);
         o = self.script_light_fx_offset;
@@ -128,7 +128,7 @@ play_light_fx(light_struct, fx) {
       off = self.script_light_fx_offset;
 
     for(i = 0; i < players.size; i++)
-      playfx(i, level._effect[fx], org + off);
+      playFX(i, level._effect[fx], org + off);
   }
 }
 
@@ -188,7 +188,7 @@ init_mixer_lights(client_num) {
   self.mixer.lights = [];
 
   for(i = 0; i < 2; i++)
-    self.mixer.lights[i] = spawnstruct();
+    self.mixer.lights[i] = spawnStruct();
 
   self.mixer.lights[0].light_color = self.lights[client_num] getlightcolor();
   self.mixer.lights[0].light_intensity = self.lights[client_num] getlightintensity();
@@ -506,7 +506,7 @@ mixer_thread(client_num) {
   if(!issplitscreenhost(client_num)) {
     return;
   }
-  self.mixer = spawnstruct();
+  self.mixer = spawnStruct();
   self.mixer.mix_pos = 0;
   self.mixer.mix_val = 0.0;
   self.mixer.last_mix_val = 0.0;
@@ -581,7 +581,7 @@ report_light_counts(clientnum, lights) {
 
 register_light_type(type, func) {
   if(!isDefined(level._light_types[type])) {
-    level._light_types[type] = spawnstruct();
+    level._light_types[type] = spawnStruct();
     level._light_types[type].func = func;
     level._light_types[type].count = [];
     level._light_types[type].count[0] = 0;

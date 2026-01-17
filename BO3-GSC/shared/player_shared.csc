@@ -8,11 +8,11 @@
 #namespace player;
 
 function autoexec __init__sytem__() {
-  system::register("player", & __init__, undefined, undefined);
+  system::register("player", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("world", "gameplay_started", 4000, 1, "int", & gameplay_started_callback, 0, 1);
+  clientfield::register("world", "gameplay_started", 4000, 1, "int", &gameplay_started_callback, 0, 1);
 }
 
 function gameplay_started_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

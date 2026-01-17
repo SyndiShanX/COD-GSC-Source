@@ -9,7 +9,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_zonemgr;
-
 #namespace zm_quick_spawning;
 
 autoexec __init__system__() {
@@ -24,15 +23,14 @@ __main__() {
   level thread function_af31614c();
   level thread function_497aad8f();
   level thread function_ba3ebac4();
-
 }
 
-private function_6a51df96(notifyhash) {
+function_6a51df96(notifyhash) {
   self.var_552afb80 = undefined;
 }
 
-private function_920e8738() {
-  self endoncallback(&function_6a51df96, #"death", #"disconnect");
+function_920e8738() {
+  self endoncallback(&function_6a51df96, # "death", # "disconnect");
 
   while(true) {
     if(!isDefined(self.var_552afb80)) {
@@ -83,8 +81,8 @@ function_15b283ea() {
 
   if(speed_sq >= getdvarfloat(#"hash_6d953db31bc657cc", 30625)) {
     player_dir = {
-      #player: self, 
-      #velocity: velocity, 
+      #player: self,
+      #velocity: velocity,
       #speed_sq: speed_sq
     };
   }
@@ -141,14 +139,14 @@ function_367e3573(force = 0) {
 
   if(force) {
     player_info = {
-      #player: level.players[0], 
+      #player: level.players[0],
       #velocity: level.players[0] function_c5ea0b0()
     };
   }
 
-    if(!isDefined(player_info)) {
-      return;
-    }
+  if(!isDefined(player_info)) {
+    return;
+  }
 
   var_1158d63 = function_f1ec5df(player_info.player, player_info.velocity, 1);
 
@@ -320,9 +318,9 @@ function_765cb1de(var_f4d3512f, player) {
 
   self thread function_cd00ea8(spot);
 
-    self notify(#"risen", {
-      #find_flesh_struct_string: "find_flesh"
-    });
+  self notify(#"risen", {
+    #find_flesh_struct_string: "find_flesh"
+  });
 }
 
 function_3b2d308f(player, zone) {
@@ -413,7 +411,7 @@ function_f1ec5df(player, direction, var_ef0ae03b) {
   return var_9521d651;
 }
 
-private function_dad4891b(player_in) {
+function_dad4891b(player_in) {
   var_a83960b5 = [];
 
   foreach(player in getplayers()) {
@@ -484,7 +482,7 @@ function_1dbfb733(type, name, condition, text_func) {
   level.var_fb3f2839[type][level.var_fb3f2839[type].size] = debug_info;
 }
 
-private create_hudelem(y, x) {
+create_hudelem(y, x) {
   if(!isDefined(x)) {
     x = 0;
   }
@@ -679,4 +677,3 @@ function_497aad8f() {
     }
   }
 }
-

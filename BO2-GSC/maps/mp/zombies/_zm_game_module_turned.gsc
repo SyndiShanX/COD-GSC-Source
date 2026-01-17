@@ -20,7 +20,7 @@ register_turned_match(start_func, end_func, name) {
   if(!isDefined(level._registered_turned_matches))
     level._registered_turned_matches = [];
 
-  match = spawnstruct();
+  match = spawnStruct();
   match.match_name = name;
   match.match_start_func = start_func;
   match.match_end_func = end_func;

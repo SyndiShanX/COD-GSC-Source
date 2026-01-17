@@ -2096,8 +2096,8 @@ tank_update_weapon_hud(var_0, var_1) {
     self.tank_hud_item["compass_heading"].alpha = 0.0;
     self.tank_hud_item["current_weapon"].x = 200;
     self.tank_hud_item["current_weapon"].weap = "missile";
-    update_weapon_status("turret", & "SATFARM_IDLE");
-    update_weapon_status("missile", & "SATFARM_READY");
+    update_weapon_status("turret", &"SATFARM_IDLE");
+    update_weapon_status("missile", &"SATFARM_READY");
     self.tank_hud_item["sabot_overlay"].alpha = 0.666;
     self.tank_hud_item["sabot_vignette"].alpha = 0.9;
     self.tank_hud_item["sabot_reticle"].alpha = 0.666;
@@ -2139,8 +2139,8 @@ tank_update_weapon_hud(var_0, var_1) {
     self.tank_hud_item["compass_heading"].alpha = 0.9;
     self.tank_hud_item["current_weapon"].x = 110;
     self.tank_hud_item["current_weapon"].weap = "turret";
-    update_weapon_status("missile", & "SATFARM_IDLE");
-    update_weapon_status("turret", & "SATFARM_READY");
+    update_weapon_status("missile", &"SATFARM_IDLE");
+    update_weapon_status("turret", &"SATFARM_READY");
     self.tank_hud_item["sabot_overlay"].alpha = 0.0;
     self.tank_hud_item["sabot_vignette"].alpha = 0.0;
     self.tank_hud_item["sabot_reticle"].alpha = 0.0;
@@ -2178,7 +2178,7 @@ update_weapon_status(var_0, var_1) {
   }
 
   if(!isDefined(level.player.tank_hud_item[var_0 + "_status"].loading) || !level.player.tank_hud_item[var_0 + "_status"].loading) {
-    if(var_1 == & "SATFARM_READY" && level.player.tank_hud_item["current_weapon"].weap != var_0)
+    if(var_1 == &"SATFARM_READY" && level.player.tank_hud_item["current_weapon"].weap != var_0)
       level.player.tank_hud_item[var_0 + "_status"] settext(&"SATFARM_IDLE");
     else
       level.player.tank_hud_item[var_0 + "_status"] settext(var_1);
@@ -2352,7 +2352,7 @@ on_fire_main_cannon() {
 
       if(isDefined(level.player.tank_hud_item["turret_status"])) {
         level.player.tank_hud_item["turret_state"] thread update_weapon_state(2.0);
-        update_weapon_status("turret", & "SATFARM_LOADING");
+        update_weapon_status("turret", &"SATFARM_LOADING");
         level.player.tank_hud_item["turret_status"].loading = 1;
       }
 
@@ -2361,7 +2361,7 @@ on_fire_main_cannon() {
 
       if(isDefined(level.player.tank_hud_item["turret_status"])) {
         level.player.tank_hud_item["turret_status"].loading = 0;
-        update_weapon_status("turret", & "SATFARM_READY");
+        update_weapon_status("turret", &"SATFARM_READY");
       }
 
       continue;
@@ -6903,7 +6903,7 @@ satfarm_timer(var_0, var_1, var_2, var_3) {
     var_3 = 0;
 
   if(!isDefined(var_1))
-    var_1 = & "SATFARM_TIME_IMACT";
+    var_1 = &"SATFARM_TIME_IMACT";
 
   level.hudtimerindex = 20;
   level.timer = maps\_hud_util::get_countdown_hud(-250);
@@ -6992,7 +6992,7 @@ exiting_combat_player_fail() {
   level.playertank makeusable();
   level.playertank useby(level.player);
   level.player disableinvulnerability();
-  setdvar("ui_deadquote", & "SATFARM_TANK_DEATH");
+  setdvar("ui_deadquote", &"SATFARM_TANK_DEATH");
   maps\_utility::missionfailedwrapper();
   level.player kill();
   level.playertank kill();

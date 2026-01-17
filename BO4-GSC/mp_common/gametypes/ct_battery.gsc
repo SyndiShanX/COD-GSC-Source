@@ -30,7 +30,6 @@
 #include scripts\mp_common\gametypes\globallogic_spawn;
 #include scripts\mp_common\player\player_loadout;
 #include scripts\mp_common\player\player_utils;
-
 #namespace ct_battery;
 
 event_handler[gametype_init] main(eventstruct) {
@@ -68,9 +67,9 @@ function_7c4ef26b(predictedspawn) {
   }
 
   setdvar(#"custom_killstreak_mode", 2);
-  setdvar(#"custom_killstreak1", level.killstreakindices[#"uav"]);
-  setdvar(#"custom_killstreak2", level.killstreakindices[#"satellite"]);
-  setdvar(#"custom_killstreak3", level.killstreakindices[#"remote_missile"]);
+  setdvar(#"custom_killstreak1", level.killstreakindices[# "uav"]);
+  setdvar(#"custom_killstreak2", level.killstreakindices[# "satellite"]);
+  setdvar(#"custom_killstreak3", level.killstreakindices[# "remote_missile"]);
   self thread ct_core::function_d2845186();
   spawning::onspawnplayer(predictedspawn);
 
@@ -92,7 +91,7 @@ function_9d65db70(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
     return;
   }
 
-  if(self.team == #"allies") {
+  if(self.team == # "allies") {
     self ct_utils::function_ee4639dd(-5, 1);
     self notify(#"hash_789b40a7845c0591");
     self.var_6b6241ac = self.last_valid_position;
@@ -100,7 +99,7 @@ function_9d65db70(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
     return;
   }
 
-  if(level flag::exists("combat_training_started") && level flag::get("combat_training_started") && self.team == #"axis" && isDefined(level.var_902e7351) && level.var_902e7351) {
+  if(level flag::exists("combat_training_started") && level flag::get("combat_training_started") && self.team == # "axis" && isDefined(level.var_902e7351) && level.var_902e7351) {
     self ct_bots::function_43df30a8();
     e_player = ct_utils::get_player();
 
@@ -127,7 +126,6 @@ function_6db6572b() {
   level thread ct_utils::function_6b71f442();
 
   level thread function_868cd9ac();
-
 }
 
 function_ba542258(mode) {
@@ -140,24 +138,24 @@ function_ba542258(mode) {
   var_27875ecd = 180000;
   self thread function_9270ab93(0, var_27875ecd);
   level.var_9468071 = [];
-  level.var_9468071[#"hash_4d612f606300433a"] = 0;
+  level.var_9468071[# "hash_4d612f606300433a"] = 0;
   level.var_902e7351 = 1;
 }
 
 function_9270ab93(var_db89c655, var_27875ecd) {
   var_e7cc5e43 = [];
-  var_e7cc5e43[#"mp_frenetic"][1] = 60000;
-  var_e7cc5e43[#"mp_frenetic"][2] = 52000;
-  var_e7cc5e43[#"mp_frenetic"][3] = 45000;
-  var_e7cc5e43[#"mp_offshore"][1] = 60000;
-  var_e7cc5e43[#"mp_offshore"][2] = 52000;
-  var_e7cc5e43[#"mp_offshore"][3] = 45000;
-  var_e7cc5e43[#"mp_seaside"][1] = 60000;
-  var_e7cc5e43[#"mp_seaside"][2] = 52000;
-  var_e7cc5e43[#"mp_seaside"][3] = 45000;
-  var_e7cc5e43[#"mp_silo"][1] = 60000;
-  var_e7cc5e43[#"mp_silo"][2] = 52000;
-  var_e7cc5e43[#"mp_silo"][3] = 45000;
+  var_e7cc5e43[# "mp_frenetic"][1] = 60000;
+  var_e7cc5e43[# "mp_frenetic"][2] = 52000;
+  var_e7cc5e43[# "mp_frenetic"][3] = 45000;
+  var_e7cc5e43[# "mp_offshore"][1] = 60000;
+  var_e7cc5e43[# "mp_offshore"][2] = 52000;
+  var_e7cc5e43[# "mp_offshore"][3] = 45000;
+  var_e7cc5e43[# "mp_seaside"][1] = 60000;
+  var_e7cc5e43[# "mp_seaside"][2] = 52000;
+  var_e7cc5e43[# "mp_seaside"][3] = 45000;
+  var_e7cc5e43[# "mp_silo"][1] = 60000;
+  var_e7cc5e43[# "mp_silo"][2] = 52000;
+  var_e7cc5e43[# "mp_silo"][3] = 45000;
   str_map = hash(getrootmapname());
   ct_utils::function_7a21ac57(0, var_27875ecd, var_e7cc5e43[str_map][1], var_e7cc5e43[str_map][2], var_e7cc5e43[str_map][3]);
 }
@@ -222,9 +220,9 @@ spawn_attack_wave(n_count, var_2c6e8cfe = 0, a_parms, var_1b783b8b = 0) {
     }
 
     if(var_2c6e8cfe == 0) {
-      var_d3dc6155[var_d3dc6155.size] = s_enemy spawn_attack_helicopter("enemy_chopper", #"axis", 1, 1, a_parms);
+      var_d3dc6155[var_d3dc6155.size] = s_enemy spawn_attack_helicopter("enemy_chopper", # "axis", 1, 1, a_parms);
     } else if(var_2c6e8cfe == 1) {
-      var_d3dc6155[var_d3dc6155.size] = s_enemy function_4c8f915a("enemy_mini_quad_tank", #"axis");
+      var_d3dc6155[var_d3dc6155.size] = s_enemy function_4c8f915a("enemy_mini_quad_tank", # "axis");
     }
 
     arrayremovevalue(a_s_enemy, s_enemy);
@@ -236,10 +234,10 @@ spawn_attack_wave(n_count, var_2c6e8cfe = 0, a_parms, var_1b783b8b = 0) {
 
 registerstart_killstreak_collision_rounds(s_veh) {
   switch (s_veh.script_noteworthy) {
-    case #"ct_mini_quadtank":
-      return s_veh function_4c8f915a("enemy_mini_quadtank", #"axis");
-    case #"ct_attack_helicopter":
-      return s_veh spawn_attack_helicopter("enemy_attack_chopper", #"axis");
+    case # "ct_mini_quadtank":
+      return s_veh function_4c8f915a("enemy_mini_quadtank", # "axis");
+    case # "ct_attack_helicopter":
+      return s_veh spawn_attack_helicopter("enemy_attack_chopper", # "axis");
   }
 }
 
@@ -250,36 +248,36 @@ spawn_attack_helicopter(str_targetname, str_team, b_guns = 1, b_missiles = 1, a_
     a_parms = [];
   }
 
-  if(!isDefined(a_parms[#"hash_340f1ead2b66b1e5"])) {
-    a_parms[#"hash_340f1ead2b66b1e5"] = 1200;
+  if(!isDefined(a_parms[# "hash_340f1ead2b66b1e5"])) {
+    a_parms[# "hash_340f1ead2b66b1e5"] = 1200;
   }
 
-  if(!isDefined(a_parms[#"attack_time"])) {
-    a_parms[#"attack_time"] = 5;
+  if(!isDefined(a_parms[# "attack_time"])) {
+    a_parms[# "attack_time"] = 5;
   }
 
-  if(!isDefined(a_parms[#"attack_rest"])) {
-    a_parms[#"attack_rest"] = 3;
+  if(!isDefined(a_parms[# "attack_rest"])) {
+    a_parms[# "attack_rest"] = 3;
   }
 
-  if(!isDefined(a_parms[#"shoot_spread"])) {
-    a_parms[#"shoot_spread"] = 25;
+  if(!isDefined(a_parms[# "shoot_spread"])) {
+    a_parms[# "shoot_spread"] = 25;
   }
 
-  if(!isDefined(a_parms[#"speed"])) {
-    a_parms[#"speed"] = 30;
+  if(!isDefined(a_parms[# "speed"])) {
+    a_parms[# "speed"] = 30;
   }
 
-  if(!isDefined(a_parms[#"ACCEL"])) {
-    a_parms[#"ACCEL"] = 10;
+  if(!isDefined(a_parms[# "ACCEL"])) {
+    a_parms[# "ACCEL"] = 10;
   }
 
-  chopper.var_6982e1d6 = a_parms[#"hash_340f1ead2b66b1e5"];
-  chopper.var_9d8645cf = a_parms[#"attack_time"];
-  chopper.var_847fac28 = a_parms[#"attack_rest"];
-  chopper.n_shoot_spread = a_parms[#"shoot_spread"];
-  chopper.n_speed = a_parms[#"speed"];
-  chopper.n_accel = a_parms[#"ACCEL"];
+  chopper.var_6982e1d6 = a_parms[# "hash_340f1ead2b66b1e5"];
+  chopper.var_9d8645cf = a_parms[# "attack_time"];
+  chopper.var_847fac28 = a_parms[# "attack_rest"];
+  chopper.n_shoot_spread = a_parms[# "shoot_spread"];
+  chopper.n_speed = a_parms[# "speed"];
+  chopper.n_accel = a_parms[# "ACCEL"];
   chopper setteam(str_team);
   chopper.originalteam = str_team;
   chopper.attackers = [];
@@ -333,7 +331,7 @@ spawn_attack_helicopter(str_targetname, str_team, b_guns = 1, b_missiles = 1, a_
 }
 
 function_62449dad() {
-  self endon(#"death", #"crashing", #"leaving");
+  self endon(#"death", # "crashing", # "leaving");
   level endon(#"game_ended");
   var_df0dfc2d = self.var_6982e1d6 * self.var_6982e1d6;
   level.heli_turretreloadtime = 5;
@@ -433,7 +431,7 @@ function_17786807() {
 }
 
 function_303fcbd8() {
-  self endon(#"death", #"crashing", #"leaving");
+  self endon(#"death", # "crashing", # "leaving");
 
   for(;;) {
     if(isDefined(self.secondarytarget)) {
@@ -492,9 +490,9 @@ function_430510ec(str_path_start, key = "targetname") {
 }
 
 function_560c5174(currentnode, startwait, hardpointtype) {
-  self endon(#"death", #"leaving");
+  self endon(#"death", # "leaving");
   self notify(#"flying");
-  self endon(#"flying", #"abandoned");
+  self endon(#"flying", # "abandoned");
   self.reached_dest = 0;
   helicopter::heli_reset();
   pos = self.origin;
@@ -562,7 +560,7 @@ function_560c5174(currentnode, startwait, hardpointtype) {
         helicopter::heli_wait(1);
       }
 
-        n_wait = nextnode.script_delay;
+      n_wait = nextnode.script_delay;
 
       if(isDefined(self.var_e55eb7b9)) {
         n_wait += self.var_e55eb7b9;
@@ -594,8 +592,8 @@ function_560c5174(currentnode, startwait, hardpointtype) {
 }
 
 function_ab637f96(waittime, var_f49cf7e0 = 0) {
-  self endon(#"death", #"crashing", #"evasive");
-  self endoncallback(&function_6b4ab31d, #"chase_target", #"damage", #"hash_1ef47c427ec739d7");
+  self endon(#"death", # "crashing", # "evasive");
+  self endoncallback(&function_6b4ab31d, # "chase_target", # "damage", # "hash_1ef47c427ec739d7");
   self thread helicopter::heli_hover();
 
   if(var_f49cf7e0 > 0) {
@@ -661,7 +659,7 @@ function_64dd0b39(var_fec7078b) {
   self delete();
 }
 
-private function_4e049216(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, damagefromunderneath, modelindex, partname, vsurfacenormal) {
+function_4e049216(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, damagefromunderneath, modelindex, partname, vsurfacenormal) {
   if(isDefined(einflictor) && einflictor == self) {
     return 0;
   }
@@ -675,8 +673,8 @@ private function_4e049216(einflictor, eattacker, idamage, idflags, smeansofdeath
   }
 
   if(smeansofdeath === "MOD_PISTOL_BULLET" || smeansofdeath === "MOD_RIFLE_BULLET") {
-    if(!(isDefined(level.var_9468071[#"hash_4d612f606300433a"]) && level.var_9468071[#"hash_4d612f606300433a"])) {
-      level.var_9468071[#"hash_4d612f606300433a"] = 1;
+    if(!(isDefined(level.var_9468071[# "hash_4d612f606300433a"]) && level.var_9468071[# "hash_4d612f606300433a"])) {
+      level.var_9468071[# "hash_4d612f606300433a"] = 1;
       ct_utils::get_player() thread ct_utils::function_329f9ba6(#"hash_70f2d94bae3edef5", 2, "red");
     }
   } else if(smeansofdeath === "MOD_IMPACT" && weapon === getweapon(#"hero_pineapplegun")) {
@@ -766,7 +764,7 @@ function_4c8f915a(str_targetname, str_team) {
   return drone;
 }
 
-private function_1f04fda(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, damagefromunderneath, modelindex, partname, vsurfacenormal) {
+function_1f04fda(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, damagefromunderneath, modelindex, partname, vsurfacenormal) {
   if(isDefined(einflictor) && einflictor == self) {
     return 0;
   }
@@ -805,7 +803,7 @@ private function_1f04fda(einflictor, eattacker, idamage, idflags, smeansofdeath,
   return idamage;
 }
 
-private state_combat_enter(params) {
+state_combat_enter(params) {
   self thread ai_tank::turretfireupdate();
 }
 
@@ -905,7 +903,7 @@ function_701302a8() {
   level.var_ae0bbaac = e_player spawn_attack_wave(10, 1, undefined, 1);
 
   foreach(var_c22808fd in level.var_ae0bbaac) {
-    var_c22808fd.waypoint = var_c22808fd ct_utils::create_waypoint(#"hash_4b08047cf5e74f2e", var_c22808fd.origin, var_c22808fd.angles, #"any", undefined, 0, undefined);
+    var_c22808fd.waypoint = var_c22808fd ct_utils::create_waypoint(#"hash_4b08047cf5e74f2e", var_c22808fd.origin, var_c22808fd.angles, # "any", undefined, 0, undefined);
 
     if(isDefined(level.var_d6d98fbe) && level.var_d6d98fbe) {
       var_c22808fd clientfield::set("enemy_vehicle_keyline_render", 1);
@@ -936,15 +934,15 @@ function_52d196f2(n_difficulty = 2) {
 
   e_player thread function_9be2d75f();
   a_parms = [];
-  a_parms[#"hash_72de0eaa7f3c7619"] = var_a7b6c024[n_difficulty];
-  a_parms[#"attack_rest"] = var_89d9697a[n_difficulty];
-  a_parms[#"shoot_spread"] = var_ed621a12[n_difficulty];
-  a_parms[#"speed"] = var_c52588b6[n_difficulty];
-  a_parms[#"ACCEL"] = var_c005d40b[n_difficulty];
+  a_parms[# "hash_72de0eaa7f3c7619"] = var_a7b6c024[n_difficulty];
+  a_parms[# "attack_rest"] = var_89d9697a[n_difficulty];
+  a_parms[# "shoot_spread"] = var_ed621a12[n_difficulty];
+  a_parms[# "speed"] = var_c52588b6[n_difficulty];
+  a_parms[# "ACCEL"] = var_c005d40b[n_difficulty];
   level.a_vh_choppers = e_player spawn_attack_wave(var_88e49d60[n_difficulty], 0, a_parms, 2);
 
   foreach(vh_chopper in level.a_vh_choppers) {
-    vh_chopper.waypoint = vh_chopper ct_utils::create_waypoint(#"hash_3489718f227fba3", vh_chopper.origin, vh_chopper.angles, #"any", undefined, 0, undefined);
+    vh_chopper.waypoint = vh_chopper ct_utils::create_waypoint(#"hash_3489718f227fba3", vh_chopper.origin, vh_chopper.angles, # "any", undefined, 0, undefined);
   }
 
   n_count = 10;
@@ -1096,7 +1094,7 @@ function_868cd9ac() {
     e_player = level.players[0];
 
     switch (cmd) {
-      case #"hash_3a7f84f30eb3613e":
+      case # "hash_3a7f84f30eb3613e":
         if(isDefined(level.var_ae0bbaac) && level.var_ae0bbaac.size > 0) {
           while(level.var_ae0bbaac.size > 0) {
             var_c95e2891 = level.var_ae0bbaac[0];
@@ -1110,15 +1108,15 @@ function_868cd9ac() {
         }
 
         break;
-      case #"spawn_chopper":
+      case # "spawn_chopper":
         a_s_chopper = struct::get_array("<dev string:x309>", "<dev string:x320>");
         registerstart_killstreak_collision_rounds(a_s_chopper[0]);
         break;
-      case #"hash_3336321eb0a42dd":
+      case # "hash_3336321eb0a42dd":
         var_e62f2b3d = struct::get_array("<dev string:x334>", "<dev string:x320>");
         e_player spawn_attack_wave(var_e62f2b3d.size, 1);
         break;
-      case #"hash_20f84a451b85817":
+      case # "hash_20f84a451b85817":
         if(level flag::get("<dev string:x6d>")) {
           iprintlnbold("<dev string:x347>");
           level flag::clear("<dev string:x6d>");
@@ -1128,7 +1126,7 @@ function_868cd9ac() {
         }
 
         break;
-      case #"hash_47e019566f91d4d1":
+      case # "hash_47e019566f91d4d1":
         if(!(isDefined(level.var_d6d98fbe) && level.var_d6d98fbe)) {
           level.var_d6d98fbe = 1;
 
@@ -1148,7 +1146,7 @@ function_868cd9ac() {
         }
 
         break;
-      case #"hash_3384d4df94b5c66d":
+      case # "hash_3384d4df94b5c66d":
         if(isDefined(level.var_d6d98fbe) && level.var_d6d98fbe) {
           level.var_d6d98fbe = 0;
 
@@ -1173,4 +1171,3 @@ function_868cd9ac() {
     setdvar(#"hash_16e650a0fe963515", "<dev string:x84>");
   }
 }
-

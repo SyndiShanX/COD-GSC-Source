@@ -23,7 +23,7 @@ main() {
   level.FXs = [];
 
   level.soundfx = spawn("script_model", (1397.66, 3142.13, 56.1417));
-  level.soundfx setmodel("tag_origin");
+  level.soundfx setModel("tag_origin");
 
   thread randomWeather();
 }
@@ -268,7 +268,7 @@ initFog_A() {
 }
 
 randomWeather() {
-  while (true) {
+  while(true) {
     switch (rollWeather(3)) {
       case 0:
         start_Normal();
@@ -289,30 +289,30 @@ randomWeather() {
 
 setup_Rain() {
   foreach(splash in level.Splashes)
-  level.FXs[level.FXs.size] = SpawnFx(level._effect["rain_splash_lite_128x128"], splash, anglestoforward((270, 0, 0)), anglestoup((270, 0, 0)));
+  level.FXs[level.FXs.size] = SpawnFx(level._effect["rain_splash_lite_128x128"], splash, anglesToForward((270, 0, 0)), anglestoup((270, 0, 0)));
 
   foreach(drip in level.Drips)
-  level.FXs[level.FXs.size] = SpawnFx(level._effect["drips_fast"], drip, anglestoforward((270, 357.614, 90.386)), anglestoup((270, 357.614, 90.386)));
+  level.FXs[level.FXs.size] = SpawnFx(level._effect["drips_fast"], drip, anglesToForward((270, 357.614, 90.386)), anglestoup((270, 357.614, 90.386)));
 
   foreach(rain in level.Rains)
-  level.FXs[level.FXs.size] = SpawnFx(level._effect["rain_mp_storm"], rain, anglestoforward((270, 0, 0)), anglestoup((270, 0, 0)));
+  level.FXs[level.FXs.size] = SpawnFx(level._effect["rain_mp_storm"], rain, anglesToForward((270, 0, 0)), anglestoup((270, 0, 0)));
 
   foreach(noise in level.Noises)
-  level.FXs[level.FXs.size] = SpawnFx(level._effect["rain_noise_splashes"], noise, anglestoforward((270, 0, 0)), anglestoup((270, 0, 0)));
+  level.FXs[level.FXs.size] = SpawnFx(level._effect["rain_noise_splashes"], noise, anglesToForward((270, 0, 0)), anglestoup((270, 0, 0)));
 
-  level.FXs[level.FXs.size] = SpawnFx(level._effect["lightning"], (-450.814, 1114.3, 1134.94), anglestoforward((270, 0, 0)), anglestoup((270, 0, 0)));
+  level.FXs[level.FXs.size] = SpawnFx(level._effect["lightning"], (-450.814, 1114.3, 1134.94), anglesToForward((270, 0, 0)), anglestoup((270, 0, 0)));
 
-  level.FXs[level.FXs.size] = SpawnFx(level._effect["waterfall_drainage_mp"], (1395.47, 3147.4, 155.855), anglestoforward((88, -68.7933, -180)), anglestoup((88, -68.7933, -180)));
+  level.FXs[level.FXs.size] = SpawnFx(level._effect["waterfall_drainage_mp"], (1395.47, 3147.4, 155.855), anglesToForward((88, -68.7933, -180)), anglestoup((88, -68.7933, -180)));
 
-  level.FXs[level.FXs.size] = SpawnFx(level._effect["waterfall_drainage_splash_mp"], (1397.94, 3136.79, 48.125), anglestoforward((270, 0, -110)), anglestoup((270, 0, -110)));
+  level.FXs[level.FXs.size] = SpawnFx(level._effect["waterfall_drainage_splash_mp"], (1397.94, 3136.79, 48.125), anglesToForward((270, 0, -110)), anglestoup((270, 0, -110)));
 }
 
 setup_Fog() {
   foreach(fog in level.Fog)
-  level.FXs[level.FXs.size] = SpawnFx(level._effect["fog_hunted"], fog, anglestoforward((270, 0, 0)), anglestoup((270, 0, 0)));
+  level.FXs[level.FXs.size] = SpawnFx(level._effect["fog_hunted"], fog, anglesToForward((270, 0, 0)), anglestoup((270, 0, 0)));
 
   foreach(fog_a in level.Fog_A)
-  level.FXs[level.FXs.size] = SpawnFx(level._effect["fog_hunted_a"], fog_a, anglestoforward((270, 0, 0)), anglestoup((270, 0, 0)));
+  level.FXs[level.FXs.size] = SpawnFx(level._effect["fog_hunted_a"], fog_a, anglesToForward((270, 0, 0)), anglestoup((270, 0, 0)));
 }
 
 start_Rain() {
@@ -353,7 +353,7 @@ start_Fx() {
   TriggerFX(fx, -15);
 
   if(level.FxType == 2 || level.FxType == 4)
-    level.soundfx PlayLoopSound("emt_water_drain_flowing");
+    level.soundfx playLoopSound("emt_water_drain_flowing");
 }
 
 stop_Fx() {
@@ -366,7 +366,7 @@ stop_Fx() {
 rollWeather(i) {
   random = randomInteger(i);
 
-  while (level.FxType == random) {
+  while(level.FxType == random) {
     wait 0.01;
     random = randomInteger(i);
   }

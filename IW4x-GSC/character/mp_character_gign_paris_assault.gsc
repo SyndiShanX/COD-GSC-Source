@@ -7,7 +7,7 @@
 // Decompiled by https://github.com/xensik/gsc-tool
 
 main() {
-  self setmodel("mp_body_gign_paris_assault");
+  self setModel("mp_body_gign_paris_assault");
   self attach("head_gign_c", "", 1);
   self.headmodel = "head_gign_c";
   self setviewmodel("viewhands_sas");

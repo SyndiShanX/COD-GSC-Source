@@ -122,18 +122,18 @@ main() {
   maps\_utility::set_empty_promotion_order("y");
   maps\_utility::set_empty_promotion_order("g");
   thread archway_color_trigger();
-  common_scripts\utility::array_thread(getentarray("stragglers_chase", "targetname"), ::stragglers_chase);
-  common_scripts\utility::array_thread(getentarray("flyby", "targetname"), ::flyby);
-  common_scripts\utility::array_thread(getentarray("chain_and_home", "script_noteworthy"), maps\_utility::add_spawn_function, ::chain_and_home);
-  common_scripts\utility::array_thread(getentarray("archway_bog_reinforcer", "targetname"), maps\_utility::add_spawn_function, ::ignored_by_tank_cannon);
-  common_scripts\utility::array_thread(getentarray("rpg_tank_shooter", "script_noteworthy"), maps\_utility::add_spawn_function, ::rpg_tank_shooter);
-  common_scripts\utility::array_thread(getentarray("rpg_tank_shooter_fall", "script_noteworthy"), maps\_utility::add_spawn_function, ::rpg_tank_shooter);
-  common_scripts\utility::array_thread(getentarray("rpg_tank_shooter_noignore", "script_noteworthy"), maps\_utility::add_spawn_function, ::rpg_tank_shooter);
-  common_scripts\utility::array_thread(getentarray("vehicle_path_disconnector", "targetname"), ::vehicle_path_disconnector);
-  common_scripts\utility::array_thread(getentarray("delete_ai", "targetname"), ::delete_ai_in_zone);
-  common_scripts\utility::array_thread(getentarray("autosave_when_trigger_cleared", "targetname"), ::autosave_when_trigger_cleared);
-  common_scripts\utility::array_thread(getentarray("delete_all_axis", "script_noteworthy"), ::delete_all_axis);
-  common_scripts\utility::array_thread(getentarray("computer_des", "targetname"), ::computer_destruct);
+  common_scripts\utility::array_thread(getEntArray("stragglers_chase", "targetname"), ::stragglers_chase);
+  common_scripts\utility::array_thread(getEntArray("flyby", "targetname"), ::flyby);
+  common_scripts\utility::array_thread(getEntArray("chain_and_home", "script_noteworthy"), maps\_utility::add_spawn_function, ::chain_and_home);
+  common_scripts\utility::array_thread(getEntArray("archway_bog_reinforcer", "targetname"), maps\_utility::add_spawn_function, ::ignored_by_tank_cannon);
+  common_scripts\utility::array_thread(getEntArray("rpg_tank_shooter", "script_noteworthy"), maps\_utility::add_spawn_function, ::rpg_tank_shooter);
+  common_scripts\utility::array_thread(getEntArray("rpg_tank_shooter_fall", "script_noteworthy"), maps\_utility::add_spawn_function, ::rpg_tank_shooter);
+  common_scripts\utility::array_thread(getEntArray("rpg_tank_shooter_noignore", "script_noteworthy"), maps\_utility::add_spawn_function, ::rpg_tank_shooter);
+  common_scripts\utility::array_thread(getEntArray("vehicle_path_disconnector", "targetname"), ::vehicle_path_disconnector);
+  common_scripts\utility::array_thread(getEntArray("delete_ai", "targetname"), ::delete_ai_in_zone);
+  common_scripts\utility::array_thread(getEntArray("autosave_when_trigger_cleared", "targetname"), ::autosave_when_trigger_cleared);
+  common_scripts\utility::array_thread(getEntArray("delete_all_axis", "script_noteworthy"), ::delete_all_axis);
+  common_scripts\utility::array_thread(getEntArray("computer_des", "targetname"), ::computer_destruct);
   thread maps\_utility::ai_team_run_twitch_think("allies", "alley_cleared", undefined, "ch46", undefined);
   level.abrams = maps\_vehicle::waittill_vehiclespawn("abrams");
   var_0 = getent("abrams_top_clip", "targetname");
@@ -154,9 +154,9 @@ main() {
   level.abrams.vehicle_treadfx_min_speed = 5;
   wait 0.05;
   var_1 = getent("alley_volume", "targetname");
-  var_2 = getentarray("destructible", "targetname");
+  var_2 = getEntArray("destructible", "targetname");
 
-  for (var_3 = 0; var_3 < var_2.size; var_3++) {
+  for(var_3 = 0; var_3 < var_2.size; var_3++) {
     if(var_2[var_3] istouching(var_1))
       var_2[var_3].disablebadplace = 1;
   }
@@ -169,25 +169,25 @@ main() {
   var_0 notsolid();
   var_0 delete();
   var_6 = spawn("script_model", (3900, -1500, 100));
-  var_6 setmodel("h1_bog_b_patch_concrete_slab");
+  var_6 setModel("h1_bog_b_patch_concrete_slab");
   level.abrams.issquad = 1;
   level.abrams.forwardent = spawn("script_origin", level.abrams gettagorigin("tag_flash"));
   level.abrams.forwardent linkto(level.abrams);
   level.tire_fire = getent("tire_fire", "targetname");
-  playfxontag(level._effect["fire_wreckage_ground"], level.tire_fire, "tag_origin");
+  playFXOnTag(level._effect["fire_wreckage_ground"], level.tire_fire, "tag_origin");
   common_scripts\utility::flag_set("aa_bog_b_zone_bog");
   wait 6.5;
   getent("player_spawn_safety_brush", "targetname") delete();
   wait 3.0;
-  objective_add(1, "current", & "BOG_B_OBJ_ESCORT_TANK", (4347, -4683, 130));
+  objective_add(1, "current", &"BOG_B_OBJ_ESCORT_TANK", (4347, -4683, 130));
 }
 
 makeminspec() {
   var_0 = getspawnerarray();
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++) {
-    if(!isdefined(var_0[var_1].script_minspec_level)) {
-      if(isdefined(var_0[var_1].baseaccuracy))
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+    if(!isDefined(var_0[var_1].script_minspec_level)) {
+      if(isDefined(var_0[var_1].baseaccuracy))
         var_0[var_1].baseaccuracy = var_0[var_1].baseaccuracy * 1.3;
       else
         var_0[var_1].baseaccuracy = 1.2;
@@ -227,7 +227,7 @@ bog_dialog() {
   level.price maps\_anim::anim_single_solo(level.price, "grabrpg");
   wait 10;
 
-  if(isdefined(level.alleyfriends)) {
+  if(isDefined(level.alleyfriends)) {
     foreach(var_4 in level.alleyfriends)
     common_scripts\utility::array_add(var_0, var_4);
   }
@@ -243,10 +243,10 @@ bog_dialog() {
 }
 
 ishero() {
-  if(!isdefined(self))
+  if(!isDefined(self))
     return 0;
 
-  if(!isdefined(self.script_noteworthy))
+  if(!isDefined(self.script_noteworthy))
     return 0;
 
   if(self.script_noteworthy == "hero")
@@ -259,7 +259,7 @@ fog_adjust() {
   var_0 = getent("fog_in", "targetname");
   var_1 = getent("fog_out", "targetname");
 
-  for (;;) {
+  for(;;) {
     var_0 waittill("trigger");
     setexpfog(0, 2842, 0.642709, 0.626383, 0.5, 1, 3.0, 0.642709, 0.626383, 0.3, (0, 1, 0.4), 0.0, 180.0, 2.0);
     var_1 waittill("trigger");
@@ -274,7 +274,7 @@ start_bog() {
   thread ignored_till_fastrope("introchopper2");
   thread bog_enemies_retreat();
 
-  while (!isdefined(level.abrams))
+  while(!isDefined(level.abrams))
     wait 0.05;
 
   thread tank_advancement_bog();
@@ -290,7 +290,7 @@ first_friendly_advancement_trigger() {
   var_0 endon("trigger");
   wait 3;
 
-  if(!isdefined(var_0)) {
+  if(!isDefined(var_0)) {
     return;
   }
   var_0 notify("trigger");
@@ -305,14 +305,14 @@ start_arch() {
   wait 0.05;
   var_1 = getaiarray("axis");
 
-  for (var_2 = 0; var_2 < var_1.size; var_2++) {
-    if(isdefined(var_1[var_2].magic_bullet_shield) && var_1[var_2].magic_bullet_shield)
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
+    if(isDefined(var_1[var_2].magic_bullet_shield) && var_1[var_2].magic_bullet_shield)
       var_1[var_2] maps\_utility::stop_magic_bullet_shield();
 
     var_1[var_2] delete();
   }
 
-  while (!isdefined(level.abrams))
+  while(!isDefined(level.abrams))
     wait 0.05;
 
   var_3 = getvehiclenode("tank_path_2", "targetname");
@@ -329,8 +329,8 @@ start_alley() {
   waittillframeend;
   var_1 = getaiarray("axis");
 
-  for (var_2 = 0; var_2 < var_1.size; var_2++) {
-    if(isdefined(var_1[var_2].magic_bullet_shield) && var_1[var_2].magic_bullet_shield) {
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
+    if(isDefined(var_1[var_2].magic_bullet_shield) && var_1[var_2].magic_bullet_shield) {
       var_1[var_2] maps\_utility::stop_magic_bullet_shield();
       var_1[var_2] delete();
     }
@@ -338,7 +338,7 @@ start_alley() {
 
   thread friendlies_become_invulnerable();
 
-  while (!isdefined(level.abrams))
+  while(!isDefined(level.abrams))
     wait 0.05;
 
   var_3 = getvehiclenode("tank_path_2", "targetname");
@@ -355,8 +355,8 @@ friendlies_become_invulnerable() {
   thread friendly_reinforcements_magic_bullet();
   var_0 = getaiarray("allies");
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++) {
-    if(isdefined(var_0[var_1].magic_bullet_shield) && var_0[var_1].magic_bullet_shield) {
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+    if(isDefined(var_0[var_1].magic_bullet_shield) && var_0[var_1].magic_bullet_shield) {
       continue;
     }
     var_0[var_1] thread maps\_utility::magic_bullet_shield(undefined, undefined, 5.0);
@@ -371,8 +371,8 @@ start_ch46() {
   waittillframeend;
   var_1 = getaiarray("axis");
 
-  for (var_2 = 0; var_2 < var_1.size; var_2++) {
-    if(isdefined(var_1[var_2].magic_bullet_shield) && var_1[var_2].magic_bullet_shield)
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
+    if(isDefined(var_1[var_2].magic_bullet_shield) && var_1[var_2].magic_bullet_shield)
       var_1[var_2] maps\_utility::stop_magic_bullet_shield();
 
     var_1[var_2] delete();
@@ -382,14 +382,12 @@ start_ch46() {
 }
 
 spawn_starting_friendlies(var_0) {
-  var_1 = getentarray(var_0, "targetname");
+  var_1 = getEntArray(var_0, "targetname");
 
-  for (var_2 = 0; var_2 < var_1.size; var_2++) {
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
     var_3 = var_1[var_2] stalingradspawn();
 
-    if(maps\_utility::spawn_failed(var_3)) {
-
-    }
+    if(maps\_utility::spawn_failed(var_3)) {}
 
     var_3.goalradius = 32;
 
@@ -420,7 +418,7 @@ ignored_till_fastrope(var_0) {
 
   soundscripts\_snd::snd_message("start_mi17_sequence");
 
-  for (var_2 = 0; var_2 < var_1.riders.size; var_2++) {
+  for(var_2 = 0; var_2 < var_1.riders.size; var_2++) {
     var_1.riders[var_2].ignoreme = 1;
     var_1.riders[var_2] thread ignored_by_tank_cannon();
   }
@@ -428,11 +426,11 @@ ignored_till_fastrope(var_0) {
   var_1 waittill("unloading");
   wait 5;
 
-  if(!isdefined(var_1)) {
+  if(!isDefined(var_1)) {
     return;
   }
-  for (var_2 = 0; var_2 < var_1.riders.size; var_2++) {
-    if(!isdefined(var_1.riders[var_2])) {
+  for(var_2 = 0; var_2 < var_1.riders.size; var_2++) {
+    if(!isDefined(var_1.riders[var_2])) {
       continue;
     }
     if(!isalive(var_1.riders[var_2])) {
@@ -448,7 +446,7 @@ stragglers_chase() {
   self waittill("trigger");
   var_1 = getaiarray("axis");
 
-  for (var_2 = 0; var_2 < var_1.size; var_2++) {
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
     if(!var_1[var_2] istouching(var_0)) {
       continue;
     }
@@ -468,13 +466,13 @@ truck_tank_collide_think(var_0, var_1, var_2) {
   var_3 = getvehiclenode(var_1, "script_noteworthy");
   var_3 waittill("trigger");
 
-  if(isdefined(var_2))
+  if(isDefined(var_2))
     wait(var_2);
 
   level endon(var_0 + "_stop_collide_think");
   var_4 = getent(var_0 + "_tank_collide_trigger", "targetname");
 
-  for (;;) {
+  for(;;) {
     var_4 waittill("trigger", var_5);
 
     if(var_5 == level.player) {
@@ -492,7 +490,7 @@ chain_and_home() {
   if(var_0 > 1024)
     var_0 = 1024;
 
-  for (;;) {
+  for(;;) {
     wait 5;
     self.goalradius = var_0;
     self setgoalentity(level.player);
@@ -508,12 +506,12 @@ chain_and_home() {
 rpg_tank_shooter() {
   self endon("death");
 
-  if(isdefined(self.script_noteworthy) && self.script_noteworthy != "rpg_tank_shooter_noignore")
+  if(isDefined(self.script_noteworthy) && self.script_noteworthy != "rpg_tank_shooter_noignore")
     self.ignoreme = 1;
 
   self waittill("goal");
 
-  if(isdefined(self.script_noteworthy) && self.script_noteworthy == "rpg_tank_shooter_fall") {
+  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "rpg_tank_shooter_fall") {
     if(getdvar("ragdoll_enable") == "1")
       thread roof_guy_fall_on_death();
   }
@@ -521,7 +519,7 @@ rpg_tank_shooter() {
   self setentitytarget(level.abrams);
   wait 10;
 
-  if(isdefined(self))
+  if(isDefined(self))
     self clearenemy();
 }
 
@@ -531,7 +529,7 @@ roof_guy_fall_on_death() {
   self endon("death");
   self.health = 10;
 
-  for (;;) {
+  for(;;) {
     self.deathanim = % bog_b_rpg_fall_death;
     wait 0.05;
   }
@@ -543,11 +541,11 @@ attack_troops() {
   self endon("death");
   wait 1;
 
-  for (;;) {
+  for(;;) {
     wait(randomfloatrange(2, 5));
     var_0 = maps\_helicopter_globals::getenemytarget(10000, level.cosine["80"], 1, 0, 0, 1);
 
-    if(!isdefined(var_0)) {
+    if(!isDefined(var_0)) {
       continue;
     }
     var_1 = abs(var_0.origin[2] - self.origin[2]);
@@ -595,7 +593,7 @@ ambush_ahead_dialog() {
 }
 
 playradiosound(var_0) {
-  if(!isdefined(level.radio_in_use))
+  if(!isDefined(level.radio_in_use))
     level.radio_in_use = 0;
 
   var_1 = 0;
@@ -606,15 +604,13 @@ playradiosound(var_0) {
   }
   level.radioforcedtransmissionqueue[level.radioforcedtransmissionqueue.size] = var_0;
 
-  while (!var_1) {
+  while(!var_1) {
     if(level.radio_in_use)
       level waittill("radio_not_in_use");
 
     var_1 = playaliasoverradio(level.radioforcedtransmissionqueue[0]);
 
-    if(!level.radio_in_use && !var_1) {
-
-    }
+    if(!level.radio_in_use && !var_1) {}
   }
 
   level.radioforcedtransmissionqueue = maps\_utility::array_remove_index(level.radioforcedtransmissionqueue, 0);
@@ -637,7 +633,7 @@ shoot_buildings(var_0) {
   self notify("stop_attacking_troops");
   common_scripts\utility::flag_wait("tank_clear_to_shoot");
 
-  for (;;) {
+  for(;;) {
     if(level.exploderarray[var_0].size <= 0) {
       break;
     }
@@ -645,7 +641,7 @@ shoot_buildings(var_0) {
     var_1 = undefined;
     var_1 = getnextexploder(var_0);
 
-    if(!isdefined(var_1)) {
+    if(!isDefined(var_1)) {
       wait(randomfloat(2));
       continue;
     }
@@ -659,26 +655,26 @@ shoot_buildings(var_0) {
 }
 
 setupexploder(var_0, var_1, var_2) {
-  var_3 = spawnstruct();
+  var_3 = spawnStruct();
   var_3.inumber = int(var_0);
   var_3.snumber = maps\_utility::string(var_0);
-  var_4 = getentarray("exploder_tank_target", "targetname");
+  var_4 = getEntArray("exploder_tank_target", "targetname");
 
-  for (var_5 = 0; var_5 < var_4.size; var_5++) {
+  for(var_5 = 0; var_5 < var_4.size; var_5++) {
     if(var_4[var_5].script_noteworthy == var_3.snumber)
       var_3.origin = var_4[var_5].origin;
   }
 
-  var_6 = getentarray("exploder_area", "targetname");
+  var_6 = getEntArray("exploder_area", "targetname");
 
-  for (var_5 = 0; var_5 < var_6.size; var_5++) {
+  for(var_5 = 0; var_5 < var_6.size; var_5++) {
     if(var_6[var_5].script_noteworthy == var_3.snumber)
       var_3.areatrig = var_6[var_5];
   }
 
   var_3.impact_detector = getent("exploder_detectimpact_" + var_3.snumber, "targetname");
 
-  if(isdefined(var_3.impact_detector))
+  if(isDefined(var_3.impact_detector))
     var_3.impact_detector notsolid();
 
   var_3.explodedfunction = var_1;
@@ -689,8 +685,8 @@ setupexploder(var_0, var_1, var_2) {
 getnextexploder(var_0) {
   var_1 = [];
 
-  for (var_2 = 0; var_2 < level.exploderarray[var_0].size; var_2++) {
-    if(isdefined(level.exploderarray[var_0][var_2].areatrig) && level.player istouching(level.exploderarray[var_0][var_2].areatrig)) {
+  for(var_2 = 0; var_2 < level.exploderarray[var_0].size; var_2++) {
+    if(isDefined(level.exploderarray[var_0][var_2].areatrig) && level.player istouching(level.exploderarray[var_0][var_2].areatrig)) {
       continue;
     }
     var_1[var_1.size] = var_2;
@@ -699,8 +695,8 @@ getnextexploder(var_0) {
   if(var_1.size == 0)
     return undefined;
 
-  for (var_2 = 0; var_2 < var_1.size; var_2++) {
-    var_3 = common_scripts\utility::within_fov(level.player geteye(), level.player getplayerangles(), level.exploderarray[var_0][var_1[var_2]].origin, level.cosine["35"]);
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
+    var_3 = common_scripts\utility::within_fov(level.player getEye(), level.player getplayerangles(), level.exploderarray[var_0][var_1[var_2]].origin, level.cosine["35"]);
 
     if(var_3)
       return var_1[var_2];
@@ -731,8 +727,8 @@ shoot_exploder(var_0) {
   common_scripts\_exploder::exploder(var_0.inumber);
   playrumbleonposition("tank_impact", var_0.origin);
 
-  if(isdefined(var_0.explodedfunction)) {
-    if(isdefined(var_0.parm1))
+  if(isDefined(var_0.explodedfunction)) {
+    if(isDefined(var_0.parm1))
       level thread[[var_0.explodedfunction]](var_0.parm1);
     else
       level thread[[var_0.explodedfunction]]();
@@ -757,7 +753,7 @@ shoot_exploder_wait(var_0) {
 shoot_exploder_detect_impact(var_0) {
   level endon("shoot_exploder_wait_complete");
 
-  if(!isdefined(var_0.impact_detector)) {
+  if(!isDefined(var_0.impact_detector)) {
     return;
   }
   shoot_exploder_detect_damage(var_0.impact_detector, "script_vehicle_m1a1_abrams");
@@ -766,12 +762,12 @@ shoot_exploder_detect_impact(var_0) {
 }
 
 shoot_exploder_detect_damage(var_0, var_1) {
-  for (;;) {
+  for(;;) {
     var_0 solid();
-    var_0 setcandamage(1);
+    var_0 setCanDamage(1);
     var_0 waittill("damage", var_2, var_3, var_4, var_5, var_6);
 
-    if(!isdefined(var_3)) {
+    if(!isDefined(var_3)) {
       continue;
     }
     if(var_3.classname != var_1) {
@@ -794,7 +790,7 @@ tank_shooting_exploder_dialog(var_0) {
     level.player playradiosound(level.scr_sound["tank_commander"]["2story1_ground"]);
     self notify("target_aquired");
 
-    while (!isdefined(self.readytofire))
+    while(!isDefined(self.readytofire))
       wait 0.05;
 
     level.player playradiosound(level.scr_sound["tank_gunner"]["targetacquired1"]);
@@ -805,7 +801,7 @@ tank_shooting_exploder_dialog(var_0) {
     level.player playradiosound(level.scr_sound["tank_commander"]["2story1_2ndfloor"]);
     self notify("target_aquired");
 
-    while (!isdefined(self.readytofire))
+    while(!isDefined(self.readytofire))
       wait 0.05;
 
     level.player playradiosound(level.scr_sound["tank_gunner"]["targetacquired2"]);
@@ -816,7 +812,7 @@ tank_shooting_exploder_dialog(var_0) {
     level.player playradiosound(level.scr_sound["tank_commander"]["3story11_2ndfloor"]);
     self notify("target_aquired");
 
-    while (!isdefined(self.readytofire))
+    while(!isDefined(self.readytofire))
       wait 0.05;
 
     level.player playradiosound(level.scr_sound["tank_gunner"]["targetacquired3"]);
@@ -827,7 +823,7 @@ tank_shooting_exploder_dialog(var_0) {
     level.player playradiosound(level.scr_sound["tank_commander"]["3story1130_2ndfloor"]);
     self notify("target_aquired");
 
-    while (!isdefined(self.readytofire))
+    while(!isDefined(self.readytofire))
       wait 0.05;
 
     level.player playradiosound(level.scr_sound["tank_gunner"]["targetacquired1"]);
@@ -838,7 +834,7 @@ tank_shooting_exploder_dialog(var_0) {
     level.player playradiosound(level.scr_sound["tank_commander"]["3story11_2ndfloor"]);
     self notify("target_aquired");
 
-    while (!isdefined(self.readytofire))
+    while(!isDefined(self.readytofire))
       wait 0.05;
 
     level.player playradiosound(level.scr_sound["tank_gunner"]["targetacquired2"]);
@@ -849,7 +845,7 @@ tank_shooting_exploder_dialog(var_0) {
     level.player playradiosound(level.scr_sound["tank_commander"]["3story1230_2ndfloor"]);
     self notify("target_aquired");
 
-    while (!isdefined(self.readytofire))
+    while(!isDefined(self.readytofire))
       wait 0.05;
 
     level.player playradiosound(level.scr_sound["tank_gunner"]["targetacquired2"]);
@@ -859,7 +855,7 @@ tank_shooting_exploder_dialog(var_0) {
     level.player playradiosound(level.scr_sound["tank_loader"]["up1"]);
     self notify("target_aquired");
 
-    while (!isdefined(self.readytofire))
+    while(!isDefined(self.readytofire))
       wait 0.05;
 
     level.player playradiosound(level.scr_sound["tank_gunner"]["targetacquired2"]);
@@ -869,7 +865,7 @@ tank_shooting_exploder_dialog(var_0) {
     level.player playradiosound(level.scr_sound["tank_loader"]["up3"]);
     self notify("target_aquired");
 
-    while (!isdefined(self.readytofire))
+    while(!isDefined(self.readytofire))
       wait 0.05;
 
     level.player playradiosound(level.scr_sound["tank_gunner"]["targetacquired1"]);
@@ -919,7 +915,7 @@ alley_dumpster_sequence() {
 
   var_6 = undefined;
 
-  for (var_7 = 0; var_7 < level.alleyfriends.size; var_7++) {
+  for(var_7 = 0; var_7 < level.alleyfriends.size; var_7++) {
     if(level.alleyfriends[var_7] == level.price) {
       continue;
     }
@@ -931,7 +927,7 @@ alley_dumpster_sequence() {
   var_6 maps\_utility::disable_ai_color();
   var_6 maps\_utility::make_hero();
 
-  if(!isdefined(var_6.magic_bullet_shield))
+  if(!isDefined(var_6.magic_bullet_shield))
     var_6 thread maps\_utility::magic_bullet_shield();
 
   var_8 = getent("dumpster", "targetname");
@@ -943,7 +939,7 @@ alley_dumpster_sequence() {
   var_8 thread updateclippos(var_9);
   var_10 = getent("dumpster_new_model", "targetname");
 
-  if(isdefined(var_10)) {
+  if(isDefined(var_10)) {
     var_8 hide();
     var_10 linkto(var_8);
   }
@@ -990,7 +986,7 @@ alley_dumpster_sequence() {
 remove_alley_seperation_clip() {
   var_0 = getent("alley_seperation_clip", "targetname");
 
-  if(!isdefined(var_0)) {
+  if(!isDefined(var_0)) {
     return;
   }
   var_0 connectpaths();
@@ -1023,7 +1019,7 @@ updateclippos(var_0) {
   var_0.origin = self.origin;
   var_0.angles = self.angles;
 
-  for (;;) {
+  for(;;) {
     var_0 moveto(self.origin, 0.1);
     var_0 rotateto((0, self.angles[1], 0), 0.1);
     wait 0.1;
@@ -1034,13 +1030,13 @@ wait_to_reach_dumpster_node() {
   common_scripts\utility::flag_init("vasquez_in_position");
   var_0 = getnode("vasquez_dumpster_node", "targetname");
 
-  while (distancesquared(self.origin, var_0.origin) > 250000)
+  while(distancesquared(self.origin, var_0.origin) > 250000)
     wait 0.05;
 
   self.pushplayer = 1;
   self.ignoreall = 1;
 
-  while (distancesquared(self.origin, var_0.origin) > 100)
+  while(distancesquared(self.origin, var_0.origin) > 100)
     wait 0.05;
 
   self.pushplayer = undefined;
@@ -1104,7 +1100,7 @@ anim_reach_orient_and_play(var_0, var_1, var_2, var_3) {
   maps\_anim::anim_reach_and_arrive_facing_anim_solo(var_0, var_1, var_3, 0.3);
   common_scripts\utility::flag_set("at_" + var_1 + "_" + var_0.animname);
 
-  while (!common_scripts\utility::flags(var_2))
+  while(!common_scripts\utility::flags(var_2))
     waitframe();
 
   maps\_anim::anim_single_solo(var_0, var_1);
@@ -1114,7 +1110,7 @@ anim_reach_orient_and_play(var_0, var_1, var_2, var_3) {
 breach_cqb_wait() {
   var_0 = 122500;
 
-  for (var_1 = distancesquared(self.origin, (3966, -4898, -111.97)); var_1 > var_0; var_1 = distancesquared(self.origin, (3966, -4898, -111.97)))
+  for(var_1 = distancesquared(self.origin, (3966, -4898, -111.97)); var_1 > var_0; var_1 = distancesquared(self.origin, (3966, -4898, -111.97)))
     wait 0.2;
 
   maps\_utility::enable_cqbwalk();
@@ -1125,14 +1121,14 @@ alley_door_vasquez_wait_on_other(var_0, var_1) {
   var_2 = 400;
   var_3 = distancesquared(var_0.origin, var_1);
 
-  while (var_3 > var_2 * var_2) {
+  while(var_3 > var_2 * var_2) {
     var_3 = distancesquared(var_0.origin, var_1);
     wait 0.2;
   }
 }
 
 alley_door_remove_player_clip(var_0) {
-  if(isdefined(var_0))
+  if(isDefined(var_0))
     wait(var_0);
 
   getent("alley_door_player_clip", "targetname") delete();
@@ -1156,9 +1152,9 @@ flyby() {
   if(getdvar("bog_b_min_spec") == "1") {
     return;
   }
-  var_0 = getentarray(self.target, "targetname");
+  var_0 = getEntArray(self.target, "targetname");
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++)
     thread flyby_go(var_0[var_1]);
 }
 
@@ -1170,19 +1166,19 @@ flyby_go(var_0) {
   var_5 = -20000;
   var_6 = 20000;
   var_7 = 4000;
-  var_8 = var_2 + anglestoforward(var_4) * var_5;
+  var_8 = var_2 + anglesToForward(var_4) * var_5;
   var_8 = var_8 + (0, 0, var_0.origin[2]);
-  var_9 = var_2 + anglestoforward(var_4) * var_6;
+  var_9 = var_2 + anglesToForward(var_4) * var_6;
   var_9 = var_9 + (0, 0, var_1.origin[2]);
   self waittill("trigger");
   var_10 = spawn("script_model", var_8);
-  var_10 setmodel("vehicle_av8b_harrier_jet");
+  var_10 setModel("vehicle_av8b_harrier_jet");
   var_10.angles = var_4;
   var_11 = abs(var_5 - var_6);
   var_12 = var_11 / var_7;
   var_10 moveto(var_9, var_12, 0, 0);
-  playfxontag(level._effect["contrail"], var_10, "tag_right_wingtip");
-  playfxontag(level._effect["contrail_02"], var_10, "tag_left_wingtip");
+  playFXOnTag(level._effect["contrail"], var_10, "tag_right_wingtip");
+  playFXOnTag(level._effect["contrail_02"], var_10, "tag_left_wingtip");
   thread flyby_planesound(var_10);
   wait(var_12);
   var_10 notify("delete");
@@ -1192,28 +1188,28 @@ flyby_go(var_0) {
 flyby_afterburner(var_0) {
   var_0 endon("delete");
   wait(randomfloatrange(0.5, 2.5));
-  playfxontag(level._effect["afterburner"], var_0, "tag_engine_right");
-  playfxontag(level._effect["afterburner"], var_0, "tag_engine_left");
+  playFXOnTag(level._effect["afterburner"], var_0, "tag_engine_right");
+  playFXOnTag(level._effect["afterburner"], var_0, "tag_engine_left");
 }
 
 flyby_planesound(var_0) {
   var_0 thread common_scripts\utility::play_loop_sound_on_entity("veh_mig29_dist_loop");
 
-  while (!vehicle_scripts\_mig29::playerisclose(var_0))
+  while(!vehicle_scripts\_mig29::playerisclose(var_0))
     wait 0.05;
 
   var_0 notify("stop soundveh_mig29_dist_loop");
   var_0 thread common_scripts\utility::play_loop_sound_on_entity("veh_mig29_close_loop");
   var_0 thread maps\_utility::play_sound_on_entity("veh_mig29_passby");
 
-  while (vehicle_scripts\_mig29::playerisinfront(var_0))
+  while(vehicle_scripts\_mig29::playerisinfront(var_0))
     wait 0.05;
 
   wait 0.5;
   var_0 thread common_scripts\utility::play_sound_in_space("veh_mig29_sonic_boom");
   thread flyby_afterburner(var_0);
 
-  while (vehicle_scripts\_mig29::playerisclose(var_0))
+  while(vehicle_scripts\_mig29::playerisclose(var_0))
     wait 0.05;
 
   var_0 notify("stop soundveh_mig29_close_loop");
@@ -1226,10 +1222,10 @@ teamssplitup() {
   getent("teams_split_up", "script_noteworthy") waittill("trigger");
   var_0 = getent("price_inside_split_up_house", "targetname");
 
-  for (;;) {
+  for(;;) {
     var_0 waittill("trigger", var_1);
 
-    if(!isdefined(var_1)) {
+    if(!isDefined(var_1)) {
       continue;
     }
     if(var_1 == level.price) {
@@ -1240,7 +1236,7 @@ teamssplitup() {
   level.price.animname = "price";
   maps\_anim::anim_single_solo(level.price, "keeppinned");
 
-  if(isdefined(level.grigsby)) {
+  if(isDefined(level.grigsby)) {
     level.grigsby.animname = "grigsby";
     thread maps\_anim::anim_single_solo(level.grigsby, "staysharp");
   }
@@ -1248,10 +1244,10 @@ teamssplitup() {
   thread friendly_reinforcements_magic_bullet();
   var_2 = getaiarray("allies");
 
-  for (var_3 = 0; var_3 < var_2.size; var_3++) {
+  for(var_3 = 0; var_3 < var_2.size; var_3++) {
     var_2[var_3] maps\_utility::set_ignoresuppression(1);
 
-    if(isdefined(var_2[var_3].magic_bullet_shield) && var_2[var_3].magic_bullet_shield) {
+    if(isDefined(var_2[var_3].magic_bullet_shield) && var_2[var_3].magic_bullet_shield) {
       continue;
     }
     var_2[var_3] thread maps\_utility::magic_bullet_shield(undefined, undefined, 5.0);
@@ -1310,12 +1306,12 @@ lastsequence() {
   soundscripts\_snd::snd_message("start_t72_wall_explode_mix");
   level.player.ignoreme = 0;
 
-  for (var_0 = 0; var_0 < level.alleyfriends.size; var_0++)
+  for(var_0 = 0; var_0 < level.alleyfriends.size; var_0++)
     level.alleyfriends[var_0].ignoreme = 0;
 
-  var_1 = getentarray("end_sequence_physics_explosion", "targetname");
+  var_1 = getEntArray("end_sequence_physics_explosion", "targetname");
 
-  for (var_0 = 0; var_0 < var_1.size; var_0++)
+  for(var_0 = 0; var_0 < var_1.size; var_0++)
     physicsexplosionsphere(var_1[var_0].origin, 550, 100, 1.2);
 
   wait 0.2;
@@ -1347,7 +1343,7 @@ t72_kill_player_trigger() {
   level endon("t72_exploded");
   var_0 = getent("t72_kill_player_trigger", "targetname");
 
-  for (;;) {
+  for(;;) {
     var_0 waittill("trigger", var_1);
 
     if(!isplayer(var_1)) {
@@ -1355,10 +1351,10 @@ t72_kill_player_trigger() {
     }
     var_2 = level.player.health / 3;
 
-    while (isalive(level.player)) {
+    while(isalive(level.player)) {
       wait 0.1;
 
-      if(isdefined(level.t72)) {
+      if(isDefined(level.t72)) {
         level.t72 thread maps\_utility::play_sound_on_entity("t72_fire");
         level.player dodamage(var_2, level.t72.origin);
         continue;
@@ -1378,7 +1374,7 @@ t72_explosion_explode() {
   var_0 = level.t72.mgturret;
   var_1 = spawn("script_model", level.t72.origin);
   var_1.angles = level.t72.angles;
-  var_1 setmodel(level.t72.model);
+  var_1 setModel(level.t72.model);
   level.t72 = var_1;
   var_1 = undefined;
   soundscripts\_snd::snd_message("start_t72_hit_mix");
@@ -1388,7 +1384,7 @@ t72_explosion_explode() {
   level.t72 useanimtree(level.scr_animtree["tank_explosion"]);
   level.t72 setflaggedanim("tank_explosion_anim1", level.scr_anim["tank"]["explosion1"], 1, 0.1, 1);
   level.t72 waittillmatch("tank_explosion_anim1", "end");
-  level.t72 setmodel("vehicle_t72_tank_d_animated_sequence");
+  level.t72 setModel("vehicle_t72_tank_d_animated_sequence");
   earthquake(0.6, 1.0, level.t72.origin, 8000);
   common_scripts\utility::array_thread(var_0, ::turret_deleteme);
   level.t72 setflaggedanimknobrestart("tank_explosion_anim2", level.scr_anim["tank"]["explosion2"], 1, 0.1, 1);
@@ -1398,17 +1394,17 @@ t72_explosion_explode() {
 
 t72_explosionfx() {
   physicsexplosionsphere(level.t72.origin, 1000, 20, 2);
-  playfxontag(level._effect["t72_ammo_breach"], level.t72, "tag_deathfx");
+  playFXOnTag(level._effect["t72_ammo_breach"], level.t72, "tag_deathfx");
   radiusdamage(level.t72.origin, 550, 30, 10);
   wait 3.5;
   thread friendlyreactionanims();
   common_scripts\utility::flag_set("t72_exploded");
-  playfxontag(level._effect["t72_ammo_explosion"], level.t72, "tag_deathfx");
+  playFXOnTag(level._effect["t72_ammo_explosion"], level.t72, "tag_deathfx");
   wait 0.15;
   physicsexplosionsphere(level.t72.origin, 1000, 100, 2);
   radiusdamage(level.t72.origin, 750, 100, 20);
   wait 1.4;
-  playfxontag(level._effect["firelp_large_pm"], level.t72, "tag_deathfx");
+  playFXOnTag(level._effect["firelp_large_pm"], level.t72, "tag_deathfx");
   level.t72 thread common_scripts\utility::play_loop_sound_on_entity("fire_metal_large");
 }
 
@@ -1476,10 +1472,10 @@ friendly_reinforcements_magic_bullet() {
   level notify("friendly_reinforcements_magic_bullet");
   level endon("friendly_reinforcements_magic_bullet");
 
-  for (;;) {
+  for(;;) {
     level waittill("reinforcement_spawned", var_0);
 
-    if(!isdefined(var_0)) {
+    if(!isDefined(var_0)) {
       continue;
     }
     if(!isalive(var_0)) {
@@ -1498,7 +1494,7 @@ finalgenericdialog() {
   var_0 = getaiarray("allies");
   var_1 = [];
 
-  for (var_2 = 0; var_2 < var_0.size; var_2++) {
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
     if(var_0[var_2] == level.price) {
       continue;
     }
@@ -1507,14 +1503,14 @@ finalgenericdialog() {
 
   level thread getfivefriendliestimeout(8.0);
 
-  for (;;) {
+  for(;;) {
     if(var_1.size >= 5) {
       break;
     }
 
     level waittill("reinforcement_spawned", var_3);
 
-    if(!isdefined(var_3)) {
+    if(!isDefined(var_3)) {
       continue;
     }
     if(!isalive(var_3)) {
@@ -1552,27 +1548,27 @@ finalgenericdialog_h1() {
   var_0 = getaiarray("allies");
   var_1 = [];
 
-  for (var_2 = 0; var_2 < var_0.size; var_2++) {
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
     if(var_0[var_2] == level.price) {
       continue;
     }
-    if(isdefined(var_0[var_2].script_noteworthy) && var_0[var_2].script_noteworthy == "doorblocker") {
+    if(isDefined(var_0[var_2].script_noteworthy) && var_0[var_2].script_noteworthy == "doorblocker") {
       continue;
     }
-    if(isdefined(var_0[var_2].script_noteworthy) && var_0[var_2].script_noteworthy == "third_soldier") {
+    if(isDefined(var_0[var_2].script_noteworthy) && var_0[var_2].script_noteworthy == "third_soldier") {
       continue;
     }
     var_1[var_1.size] = var_0[var_2];
   }
 
-  for (;;) {
+  for(;;) {
     if(var_1.size >= 2) {
       break;
     }
 
     level waittill("reinforcement_spawned", var_3);
 
-    if(!isdefined(var_3)) {
+    if(!isDefined(var_3)) {
       continue;
     }
     if(!isalive(var_3)) {
@@ -1599,7 +1595,7 @@ finalgenericdialog_h1() {
 friendlyreactionanims() {
   var_0 = getaiarray("allies");
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++) {
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     if(!isalive(var_0[var_1])) {
       continue;
     }
@@ -1608,7 +1604,7 @@ friendlyreactionanims() {
       continue;
     }
 
-    if(isdefined(var_0[var_1].script_noteworthy) && var_0[var_1].script_noteworthy == "doorblocker") {
+    if(isDefined(var_0[var_1].script_noteworthy) && var_0[var_1].script_noteworthy == "doorblocker") {
       var_0[var_1] thread guard_react_and_celebrate();
       continue;
     }
@@ -1620,7 +1616,7 @@ friendlyreactionanims() {
       continue;
     }
 
-    if(isdefined(var_0[var_1].script_noteworthy) && var_0[var_1].script_noteworthy == "third_soldier") {
+    if(isDefined(var_0[var_1].script_noteworthy) && var_0[var_1].script_noteworthy == "third_soldier") {
       var_0[var_1] thread maps\_anim::anim_single_solo(var_0[var_1], "new_react");
       continue;
     }
@@ -1665,15 +1661,15 @@ advancealleyfriendliestoend(var_0, var_1, var_2) {
     var_4 = var_0;
   else if(var_1 != level.price && var_1 != var_3)
     var_4 = var_1;
-  else if(isdefined(var_2) && var_2 != level.price && var_2 != var_3)
+  else if(isDefined(var_2) && var_2 != level.price && var_2 != var_3)
     var_4 = var_2;
 
-  if(isdefined(var_4))
+  if(isDefined(var_4))
     var_4.script_noteworthy = "third_soldier";
 
   level.player.ignoreme = 1;
 
-  for (var_5 = 0; var_5 < level.alleyfriends.size; var_5++)
+  for(var_5 = 0; var_5 < level.alleyfriends.size; var_5++)
     level.alleyfriends[var_5].ignoreme = 1;
 
   remove_alley_seperation_clip();
@@ -1695,7 +1691,7 @@ advancealleyfriendliestoend(var_0, var_1, var_2) {
   level.price setgoalnode(getnode("price_last_node1", "targetname"));
   level.price waittill("goal");
 
-  if(isdefined(var_4))
+  if(isDefined(var_4))
     vasquez_wait_on_other_marine(var_4);
   else
     wait 4.0;
@@ -1712,10 +1708,10 @@ vasquez_wait_on_other_marine(var_0) {
   var_3 = var_2;
   var_4 = gettime();
 
-  while (var_2 <= var_3 && var_2 < var_1) {
+  while(var_2 <= var_3 && var_2 < var_1) {
     wait 0.2;
 
-    if(!isdefined(var_0)) {
+    if(!isDefined(var_0)) {
       break;
     }
 
@@ -1746,7 +1742,7 @@ doorblocker_reach_door() {
   self waittill("goal");
   common_scripts\utility::flag_set("doorblocker_reach_door");
 
-  if(isdefined(self.player_clip))
+  if(isDefined(self.player_clip))
     self.player_clip delete();
 }
 
@@ -1759,11 +1755,11 @@ disable_door_block_clip(var_0) {
 doorblocker_slow_trigger() {
   var_0 = getent("doorblocker_slow_trig", "targetname");
 
-  while (!common_scripts\utility::flag("doorblocker_reach_door")) {
+  while(!common_scripts\utility::flag("doorblocker_reach_door")) {
     if(level.player istouching(var_0)) {
-      if(!isdefined(level.player.g_speed))
+      if(!isDefined(level.player.g_speed))
         thread maps\_utility::player_speed_set(124, 1);
-    } else if(isdefined(level.player.g_speed)) {
+    } else if(isDefined(level.player.g_speed)) {
       maps\_utility::player_speed_set(level.player.g_speed, 0.5);
       level.player.g_speed = undefined;
     }
@@ -1771,7 +1767,7 @@ doorblocker_slow_trigger() {
     waitframe();
   }
 
-  if(isdefined(level.player.g_speed)) {
+  if(isDefined(level.player.g_speed)) {
     maps\_utility::player_speed_set(level.player.g_speed, 0.5);
     level.player.g_speed = undefined;
   }
@@ -1801,7 +1797,7 @@ t72_in_final_position_preh1() {
     var_5 = distance(var_2, var_3);
     var_6 = asin(var_4 / var_5);
     iprintlnbold("UP: " + var_6);
-    var_7 = anglestoforward(level.t72.angles);
+    var_7 = anglesToForward(level.t72.angles);
     var_8 = vectornormalize(var_1.origin - level.t72.origin);
     var_9 = acos(vectordot(var_7, var_8));
     iprintlnbold("LEFT: " + var_9);
@@ -1846,7 +1842,7 @@ t72_exploder_detect_impact_init() {
   }
   level.t72_impact_detector = getent("exploder_detectimpact_300", "targetname");
 
-  if(!isdefined(level.t72_impact_detector)) {
+  if(!isDefined(level.t72_impact_detector)) {
     return;
   }
   level.t72_impact_detector notsolid();
@@ -1856,7 +1852,7 @@ t72_exploder_detect_impact_delay() {
   if(getdvarint("use_old_exploderdelay")) {
     return;
   }
-  if(!isdefined(level.t72_impact_detector)) {
+  if(!isDefined(level.t72_impact_detector)) {
     return;
   }
   shoot_exploder_detect_damage(level.t72_impact_detector, "script_vehicle_t72_tank");
@@ -1864,7 +1860,7 @@ t72_exploder_detect_impact_delay() {
 }
 
 sustain_fire() {
-  while (!common_scripts\utility::flag("tank_in_final_position")) {
+  while(!common_scripts\utility::flag("tank_in_final_position")) {
     wait(randomintrange(7, 10));
 
     if(!common_scripts\utility::flag("tank_in_final_position")) {
@@ -1880,13 +1876,13 @@ vehicle_path_disconnector() {
   var_0.origin = var_0.origin - (0, 0, 1024);
   var_1 = "tank_bad_place_brush_" + var_0 getentitynumber();
 
-  for (;;) {
+  for(;;) {
     self waittill("trigger", var_2);
 
     if(var_2 vehicle_getspeed() == 0) {
       continue;
     }
-    if(!isdefined(var_0.pathsdisconnected)) {
+    if(!isDefined(var_0.pathsdisconnected)) {
       var_0 solid();
       badplace_brush(var_1, 0, var_0, "allies", "axis");
       var_0 notsolid();
@@ -1912,7 +1908,7 @@ delete_ai_in_zone() {
   self waittill("trigger");
   var_1 = getaiarray("axis");
 
-  for (var_2 = 0; var_2 < var_1.size; var_2++) {
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
     if(var_1[var_2] istouching(var_0))
       var_1[var_2] delete();
   }
@@ -1922,8 +1918,8 @@ delete_all_axis() {
   self waittill("trigger");
   var_0 = getaiarray("axis");
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++) {
-    if(isdefined(var_0[var_1].magic_bullet_shield) && var_0[var_1].magic_bullet_shield)
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+    if(isDefined(var_0[var_1].magic_bullet_shield) && var_0[var_1].magic_bullet_shield)
       var_0[var_1] maps\_utility::stop_magic_bullet_shield();
 
     var_0[var_1] delete();
@@ -1931,7 +1927,7 @@ delete_all_axis() {
 }
 
 autosave_when_trigger_cleared() {
-  for (;;) {
+  for(;;) {
     self waittill("trigger");
 
     if(!ai_touching_area(self)) {
@@ -1953,7 +1949,7 @@ dosavegame(var_0) {
 }
 
 savegame_redundancy_check() {
-  if(!isdefined(level.lastsavetime))
+  if(!isDefined(level.lastsavetime))
     return 1;
 
   if(level.lastsavetime + level.minimumtimebetweenautosaves * 1000 > gettime())
@@ -1965,14 +1961,14 @@ savegame_redundancy_check() {
 waittill_zone_clear(var_0) {
   var_1 = getent(var_0, "targetname");
 
-  while (ai_touching_area(var_1))
+  while(ai_touching_area(var_1))
     wait 2;
 }
 
 ai_touching_area(var_0) {
   var_1 = getaiarray("axis");
 
-  for (var_2 = 0; var_2 < var_1.size; var_2++) {
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
     if(var_1[var_2] istouching(var_0))
       return 1;
   }
@@ -1992,8 +1988,8 @@ tank_advancement_bog() {
   var_0 = getent("crunch_truck_1", "targetname");
   var_1 = 10;
 
-  for (var_2 = 0; var_2 < var_1 * 20; var_2++) {
-    if(common_scripts\utility::within_fov(level.player geteye(), level.player getplayerangles(), var_0.origin, level.cosine["65"])) {
+  for(var_2 = 0; var_2 < var_1 * 20; var_2++) {
+    if(common_scripts\utility::within_fov(level.player getEye(), level.player getplayerangles(), var_0.origin, level.cosine["65"])) {
       break;
     }
 
@@ -2019,7 +2015,7 @@ archway_color_trigger() {
   var_1 common_scripts\utility::trigger_off();
   var_2 = getvehiclenode("truck_approach_crush_node", "script_noteworthy");
   var_2 waittill("trigger");
-  var_3 = getentarray("pre_arch_friendly_advancement_trigger", "targetname");
+  var_3 = getEntArray("pre_arch_friendly_advancement_trigger", "targetname");
   common_scripts\utility::array_thread(var_3, common_scripts\utility::trigger_off);
   var_0 common_scripts\utility::trigger_on();
   var_0 maps\_utility::activate_trigger();
@@ -2109,19 +2105,19 @@ seaknight() {
   objective_state(1, "done");
   wait 1.0;
   var_2 = getent("seaknight_wait_location", "script_noteworthy");
-  objective_add(2, "current", & "BOG_B_OBJ_SEAKNIGHT", var_2.origin);
+  objective_add(2, "current", &"BOG_B_OBJ_SEAKNIGHT", var_2.origin);
   thread dosavegame("seaknight");
   common_scripts\utility::flag_set("seaknight_start");
   thread disperse_allies_unevenly_to_seaknight();
   getent("seaknight_friendly_trigger", "targetname") notify("trigger");
   level.seaknight = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("seaknight");
-  level.seaknight setmodel("vehicle_ch46e_opened_door_interior_a");
+  level.seaknight setModel("vehicle_ch46e_opened_door_interior_a");
   var_3 = spawn("script_model", level.seaknight gettagorigin("body_animate_jnt"));
-  var_3 setmodel("vehicle_ch46e_opened_door_interior_b");
+  var_3 setModel("vehicle_ch46e_opened_door_interior_b");
   var_3.angles = level.seaknight.angles;
   var_3 linkto(level.seaknight, "body_animate_jnt");
   var_4 = spawn("script_model", level.seaknight gettagorigin("body_animate_jnt"));
-  var_4 setmodel("vehicle_ch46e_wires");
+  var_4 setModel("vehicle_ch46e_wires");
   var_4.angles = level.seaknight.angles;
   var_4 linkto(level.seaknight, "body_animate_jnt");
   maps\_wibble::wibble_add_heli_to_track(level.seaknight);
@@ -2146,7 +2142,7 @@ disperse_allies_unevenly_to_seaknight() {
   var_0 = getaiarray("allies");
 
   if(var_0.size > 0) {
-    for (var_1 = 1; var_1 <= 3; var_1++) {
+    for(var_1 = 1; var_1 <= 3; var_1++) {
       var_2 = getnodearray("overlook_jumpdown_" + var_1, "script_noteworthy");
       var_3 = get_traverse_node_start(var_2);
       var_3 disconnectnode();
@@ -2154,8 +2150,8 @@ disperse_allies_unevenly_to_seaknight() {
 
     wait 0.05;
 
-    for (var_1 = 0; var_1 < level.alleyfriends.size; var_1++) {
-      if(isdefined(level.alleyfriends[var_1]) && isalive(level.alleyfriends[var_1])) {
+    for(var_1 = 0; var_1 < level.alleyfriends.size; var_1++) {
+      if(isDefined(level.alleyfriends[var_1]) && isalive(level.alleyfriends[var_1])) {
         level.alleyfriends[var_1].ignoreall = 1;
         var_2 = getnodearray("overlook_jumpdown_" + (var_1 + 1), "script_noteworthy");
         var_3 = get_traverse_node_start(var_2);
@@ -2169,13 +2165,13 @@ disperse_allies_unevenly_to_seaknight() {
       }
     }
 
-    for (var_1 = 1; var_1 <= 3; var_1++) {
+    for(var_1 = 1; var_1 <= 3; var_1++) {
       var_2 = getnodearray("overlook_jumpdown_" + var_1, "script_noteworthy");
       var_3 = get_traverse_node_start(var_2);
       var_3 connectnode();
     }
 
-    for (var_1 = 0; var_1 < var_0.size; var_1++) {
+    for(var_1 = 0; var_1 < var_0.size; var_1++) {
       if(!common_scripts\utility::array_contains(level.alleyfriends, var_0[var_1]))
         var_0[var_1] thread maps\_utility::set_force_color("c");
     }
@@ -2235,8 +2231,8 @@ bog_enemies_retreat() {
   var_0 = getaiarray("axis");
   var_1 = getnodearray("bog_enemies_retreat_node", "targetname");
 
-  for (var_2 = 0; var_2 < var_0.size; var_2++) {
-    if(!isdefined(var_0[var_2])) {
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
+    if(!isDefined(var_0[var_2])) {
       continue;
     }
     if(!isalive(var_0[var_2])) {
@@ -2253,7 +2249,7 @@ bog_enemies_retreat() {
 enemy_retreat_think(var_0) {
   self endon("death");
 
-  if(isdefined(self.script_noteworthy) && issubstr(self.script_noteworthy, "introchopper")) {
+  if(isDefined(self.script_noteworthy) && issubstr(self.script_noteworthy, "introchopper")) {
     if(issubstr(self.script_noteworthy, "introchopper1"))
       maps\_utility::set_force_color("p");
     else
@@ -2270,7 +2266,7 @@ enemy_retreat_think(var_0) {
 go_to_node_delayed(var_0, var_1, var_2) {
   wait(var_2);
 
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   if(!isalive(self)) {
@@ -2281,7 +2277,7 @@ go_to_node_delayed(var_0, var_1, var_2) {
 }
 
 ignored_by_tank_cannon(var_0) {
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     var_0 = 1;
 
   if(var_0)
@@ -2296,7 +2292,7 @@ player_passed_dumpster() {
 }
 
 rotate_fans() {
-  var_0 = getentarray("rotate", "targetname");
+  var_0 = getEntArray("rotate", "targetname");
 
   foreach(var_2 in var_0)
   var_2 thread rotate_fan();
@@ -2305,7 +2301,7 @@ rotate_fans() {
 rotate_fan() {
   var_0 = 360;
 
-  if(isdefined(self.turn_time)) {
+  if(isDefined(self.turn_time)) {
     if(randomfloat(1.0) > 0.5)
       var_0 = var_0 * -1;
   } else {
@@ -2320,7 +2316,7 @@ rotate_fan() {
     self.turn_time = var_2 + var_1 * var_3;
   }
 
-  if(!isdefined(self.script_noteworthy))
+  if(!isDefined(self.script_noteworthy))
     self.script_noteworthy = "z";
 
   switch (self.script_noteworthy) {
@@ -2337,7 +2333,7 @@ rotate_fan() {
 }
 
 rotate_fan_loop(var_0, var_1) {
-  for (;;) {
+  for(;;) {
     self rotatevelocity(var_0, var_1);
     wait(var_1 - 0.05);
   }
@@ -2363,12 +2359,12 @@ docomingthroughaudio(var_0) {
 }
 
 setasdestructible(var_0, var_1, var_2) {
-  self setcandamage(1);
+  self setCanDamage(1);
   self waittill("damage", var_3, var_4);
-  self setmodel(var_0);
+  self setModel(var_0);
   var_5 = self getorigin();
   var_6 = var_5 + var_2;
-  playfx(level._effect[var_1], var_6);
+  playFX(level._effect[var_1], var_6);
 }
 
 computer_destruct() {

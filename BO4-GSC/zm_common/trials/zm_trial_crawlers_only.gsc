@@ -5,7 +5,6 @@
 
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_trial;
-
 #namespace zm_trial_crawlers_only;
 
 autoexec __init__system__() {
@@ -20,7 +19,7 @@ __init__() {
   zm_trial::register_challenge(#"crawlers_only", &on_begin, &on_end);
 }
 
-private on_begin() {
+on_begin() {
   level.var_6d8a8e47 = 1;
   level.var_153e9058 = 1;
   level.var_fe2bb2ac = 1;
@@ -29,7 +28,7 @@ private on_begin() {
   level.var_9b91564e = undefined;
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   level.var_6d8a8e47 = 0;
   level.var_153e9058 = 0;
   level.var_fe2bb2ac = 0;

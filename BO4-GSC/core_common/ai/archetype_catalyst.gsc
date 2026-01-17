@@ -10,7 +10,6 @@
 #include scripts\core_common\ai\systems\blackboard;
 #include scripts\core_common\ai\zombie_utility;
 #include scripts\core_common\spawner_shared;
-
 #namespace archetypecatalyst;
 
 autoexec main() {
@@ -20,30 +19,30 @@ autoexec main() {
   catalystinterface::registercatalystinterfaceattributes();
 }
 
-private registerbehaviorscriptfunctions() {
+registerbehaviorscriptfunctions() {
   assert(isscriptfunctionptr(&iscatalyst));
   behaviortreenetworkutility::registerbehaviortreescriptapi(#"iscatalyst", &iscatalyst);
   animationstatenetwork::registeranimationmocomp("mocomp_teleport_traversal@catalyst", &function_720a0584, undefined, undefined);
 }
 
 iscatalyst(entity) {
-  return self.archetype === #"catalyst";
+  return self.archetype === # "catalyst";
 }
 
 function_5608540a() {
   self.zombie_move_speed = "walk";
   var_9d3ec6f = [];
-  var_9d3ec6f[#"catalyst_corrosive"] = 1;
-  var_9d3ec6f[#"catalyst_electric"] = 3;
-  var_9d3ec6f[#"catalyst_plasma"] = 2;
-  var_9d3ec6f[#"catalyst_water"] = 4;
+  var_9d3ec6f[# "catalyst_corrosive"] = 1;
+  var_9d3ec6f[# "catalyst_electric"] = 3;
+  var_9d3ec6f[# "catalyst_plasma"] = 2;
+  var_9d3ec6f[# "catalyst_water"] = 4;
 
   if(isDefined(self.subarchetype) && isDefined(var_9d3ec6f[self.subarchetype])) {
     function_27c82a36(self, var_9d3ec6f[self.subarchetype]);
   }
 }
 
-private function_728127b() {
+function_728127b() {
   blackboard::createblackboardforentity(self);
   ai::createinterfaceforentity(self);
   self.___archetypeonanimscriptedcallback = &function_dc16721f;
@@ -93,11 +92,11 @@ function_84c6177b(spawner, catalyst_type, location) {
   return entity;
 }
 
-private function_b7e4069(catalyst_type) {
+function_b7e4069(catalyst_type) {
   self.catalyst_type = catalyst_type;
 }
 
-private function_dc16721f(entity) {
+function_dc16721f(entity) {
   entity.__blackboard = undefined;
   entity function_728127b();
 }

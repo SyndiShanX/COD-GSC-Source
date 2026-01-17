@@ -15,7 +15,6 @@
 #include scripts\zm_common\zm_stats;
 #include scripts\zm_common\zm_talisman;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_talisman_extra_claymore;
 
 autoexec __init__system__() {
@@ -41,7 +40,7 @@ function_4a46cf14() {
 
   level flagsys::wait_till(#"all_players_spawned");
 
-  if(self.slot_weapons[#"lethal_grenade"] === getweapon(#"claymore")) {
+  if(self.slot_weapons[# "lethal_grenade"] === getweapon(#"claymore")) {
     self takeweapon(getweapon(#"claymore"));
     self giveweapon(getweapon(#"claymore_extra"));
   }

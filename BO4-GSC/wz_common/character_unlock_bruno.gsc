@@ -9,11 +9,10 @@
 #include scripts\core_common\util_shared;
 #include scripts\wz_common\character_unlock;
 #include scripts\wz_common\character_unlock_fixup;
-
 #namespace character_unlock_bruno;
 
 autoexec __init__system__() {
-  system::register(#"character_unlock_bruno", &__init__, undefined, #"character_unlock_bruno_fixup");
+  system::register(#"character_unlock_bruno", &__init__, undefined, # "character_unlock_bruno_fixup");
 }
 
 __init__() {
@@ -47,6 +46,6 @@ on_player_downed() {
       return;
     }
 
-    attacker character_unlock::function_c8beca5e(#"bruno_unlock", #"hash_21c5510d64c20b71", 1);
+    attacker character_unlock::function_c8beca5e(#"bruno_unlock", # "hash_21c5510d64c20b71", 1);
   }
 }

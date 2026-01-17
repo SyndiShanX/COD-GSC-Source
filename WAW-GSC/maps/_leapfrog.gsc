@@ -18,7 +18,7 @@ main() {
 }
 
 leapfrog_masterthread() {
-  while (true) {
+  while(true) {
     if(!level.leap_delay_override)
       wait(randomFloatRange(level.leap_delay_min, level.leap_delay_max));
     else
@@ -30,7 +30,7 @@ leapfrog_masterthread() {
     if(!level.leap_node_array.size) {
       continue;
     }
-    for (i = 0; i < level.leap_node_array.size; i++) {
+    for(i = 0; i < level.leap_node_array.size; i++) {
       weight = level.leap_node_array[i].leap_weight;
       if(!isDefined(node_arr[weight]))
         node_arr[weight] = [];
@@ -72,7 +72,7 @@ leapfrog() {
   self notify("stop_going_to_node");
   node_arr = getnodearray(self.target, "targetname");
   node = node_arr[randomint(node_arr.size)];
-  while (true) {
+  while(true) {
     if(node.radius != 0)
       self.goalradius = node.radius;
     if(isDefined(node.height))
@@ -159,7 +159,7 @@ debug_leap_node() {
   if(isDefined(self.debug_leapnode))
     return;
   self.debug_leapnode = true;
-  while (true) {
+  while(true) {
     if(isDefined(self.leap_weight))
       self thread print3Dmessage(self.leap_weight, .5);
     if(isDefined(self.leapfrog_ai_count))
@@ -176,7 +176,7 @@ print3Dmessage(message, show_time, color, offset, scale) {
   if(!isDefined(scale))
     scale = 6;
   show_time = gettime() + (show_time * 1000);
-  while (gettime() < show_time) {
+  while(gettime() < show_time) {
     print3d(self.origin + offset, message, color, 1, scale);
     wait(0.05);
   }

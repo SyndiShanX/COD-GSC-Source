@@ -496,7 +496,7 @@ nightingale_watch() {
 }
 
 nightingale_think() {
-  playfxontag(level._effect["nightingale_smoke"], self, "tag_fx");
+  playFXOnTag(level._effect["nightingale_smoke"], self, "tag_fx");
 
   for(i = 0; i < 256; i++) {
     v_start_pos = self.origin + vectorscale((0, 0, 1), 10.0);
@@ -607,7 +607,7 @@ movedecoy(count, fire_time, main_dir, max_offset_angle) {
 
   for(i = 0; i < 1; i++) {
     angles = (0, randomintrange(current_main_dir - max_offset_angle, current_main_dir + max_offset_angle), 0);
-    dir = anglestoforward(angles);
+    dir = anglesToForward(angles);
     dir = vectorscale(dir, randomfloatrange(min_speed, max_speed));
     deltatime = (gettime() - start_time) * 0.001;
     up = (0, 0, intial_up - 800 * deltatime);
@@ -677,7 +677,7 @@ ir_strobe_watch() {
     return;
   }
   if(level.script == "panama_2") {
-    screen_message_create(&"PANAMA_STROBE_GRENADE_TUTORIAL", & "PANAMA_SELECT_IRSTROBE");
+    screen_message_create(&"PANAMA_STROBE_GRENADE_TUTORIAL", &"PANAMA_SELECT_IRSTROBE");
     self thread watch_ir_strobe_equipped();
     self waittill_notify_or_timeout("strobe_equipped", 10);
     self notify("hint_over");
@@ -755,9 +755,9 @@ _ir_strobe_queue() {
 _ir_strobe_logic() {
   wait 2;
   e_model = spawn("script_model", self.origin);
-  e_model setmodel("tag_origin");
-  playfxontag(level._effect["ir_strobe"], e_model, "tag_origin");
-  e_model playloopsound("fly_irstrobe_beep", 0.1);
+  e_model setModel("tag_origin");
+  playFXOnTag(level._effect["ir_strobe"], e_model, "tag_origin");
+  e_model playLoopSound("fly_irstrobe_beep", 0.1);
   self ent_flag_wait("start_fire");
   level.player queue_dialog(level.strobe_vo[level.strobe_vo_tracker], 0.5);
   level.strobe_vo_tracker++;
@@ -766,7 +766,7 @@ _ir_strobe_logic() {
     level.strobe_vo_tracker = 0;
 
   wait 3;
-  tracedata = bullettrace(self.origin, self.origin + vectorscale((0, 0, 1), 256.0), 0, self);
+  tracedata = bulletTrace(self.origin, self.origin + vectorscale((0, 0, 1), 256.0), 0, self);
 
   if(tracedata["fraction"] == 1 && !flag("post_gauntlet_mason_open_door")) {
     v_end_pos = self.origin;
@@ -797,8 +797,7 @@ air_ambience(str_veh_targetname, str_paths, flag_ender, n_min_wait, n_max_wait) 
   nd_last_path = a_paths[0];
 
   while(!flag(flag_ender)) {
-    for(nd_path = a_paths[randomint(a_paths.size)]; nd_path == nd_last_path; nd_path = a_paths[randomint(a_paths.size)]) {
-    }
+    for(nd_path = a_paths[randomint(a_paths.size)]; nd_path == nd_last_path; nd_path = a_paths[randomint(a_paths.size)]) {}
 
     nd_last_path = nd_path;
     v_jet = spawn_vehicle_from_targetname(str_veh_targetname);
@@ -823,14 +822,14 @@ _air_ambience_think(nd_path) {
 }
 
 add_jet_fx() {
-  playfxontag(level._effect["jet_contrail"], self, "tag_wingtip_l");
-  playfxontag(level._effect["jet_contrail"], self, "tag_wingtip_r");
-  playfxontag(level._effect["jet_exhaust"], self, "tag_engine_fx");
+  playFXOnTag(level._effect["jet_contrail"], self, "tag_wingtip_l");
+  playFXOnTag(level._effect["jet_contrail"], self, "tag_wingtip_r");
+  playFXOnTag(level._effect["jet_exhaust"], self, "tag_engine_fx");
 }
 
 ac130_ambience(flag_ender) {
   while(!flag(flag_ender)) {
-    v_forward = anglestoforward(level.player getplayerangles()) * 5000;
+    v_forward = anglesToForward(level.player getplayerangles()) * 5000;
     v_end_pos = level.player.origin + (v_forward[0], v_forward[1], 0);
     v_offset = (randomintrange(-2000, 2000), randomintrange(-2000, 2000), 0);
     v_end_pos = v_end_pos + v_offset;
@@ -852,18 +851,18 @@ ac130_shoot(v_end_pos, b_close) {
 
   for(i = 0; i < 60; i++) {
     v_offset_end = v_end_pos + (randomintrange(-200, 200), randomintrange(-200, 200), 0);
-    sound_ent playloopsound("wpn_ac130_fire_loop_npc", 0.25);
+    sound_ent playLoopSound("wpn_ac130_fire_loop_npc", 0.25);
     playsoundatposition("prj_ac130_impact", v_offset_end);
     magicbullet("ac130_vulcan_minigun", v_start_pos, v_offset_end);
     wait 0.1;
   }
 
-  sound_ent playsound("wpn_ac130_fire_loop_ring_npc");
+  sound_ent playSound("wpn_ac130_fire_loop_ring_npc");
   sound_ent delete();
 
   if(isDefined(b_close) && b_close) {
     level.player notify("stop_rumble_check");
-    level.player playsound("evt_ac130_fire");
+    level.player playSound("evt_ac130_fire");
   }
 }
 
@@ -921,7 +920,7 @@ sky_fire_light_ambience(str_area, flag_ender) {
 player_lock_in_position(origin, angles) {
   link_to_ent = spawn("script_model", origin);
   link_to_ent.angles = angles;
-  link_to_ent setmodel("tag_origin");
+  link_to_ent setModel("tag_origin");
   self playerlinktoabsolute(link_to_ent, "tag_origin");
   self waittill("unlink_from_ent");
   self unlink();

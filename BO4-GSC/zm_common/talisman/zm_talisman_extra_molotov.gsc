@@ -15,7 +15,6 @@
 #include scripts\zm_common\zm_stats;
 #include scripts\zm_common\zm_talisman;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_talisman_extra_molotov;
 
 autoexec __init__system__() {
@@ -41,7 +40,7 @@ function_94c5165b() {
 
   level flagsys::wait_till(#"all_players_spawned");
 
-  if(self.slot_weapons[#"lethal_grenade"] === getweapon(#"eq_wraith_fire")) {
+  if(self.slot_weapons[# "lethal_grenade"] === getweapon(#"eq_wraith_fire")) {
     self takeweapon(getweapon(#"eq_wraith_fire"));
     self giveweapon(getweapon(#"eq_wraith_fire_extra"));
   }

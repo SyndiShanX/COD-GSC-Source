@@ -135,7 +135,7 @@ endpart_objective()
 {
 	flag_wait( "tunnels_teleport_done" );
 
-	if( isdefined( level.objnum ) )
+	if( isDefined( level.objnum ) )
 		objective_state( level.objnum, "done" );
 
 	flag_wait( "whitehouse_moveout" );
@@ -182,7 +182,7 @@ whitehouse_dialogue()
 	wait 0.5;
 	level thread whitehouse_nag();
 
-	// Keep hitting 'em with the Two-Forty Bravos! Get more men moving on the left flank! 
+	// Keep hitting 'em with the Two-Forty Bravos! Get more men moving on the left flank!
 	level.marshall dialogue_queue( "dcemp_cml_moremen" );	
 
 	flag_wait( "whitehouse_entrance_init" );
@@ -194,7 +194,7 @@ whitehouse_dialogue()
 
 	flag_wait( "whitehouse_entrance_clear" );
 
-	//Ramirez, let's go! 
+	//Ramirez, let's go!
 	level.foley dialogue_queue( "dcemp_fly_ramirezgo" );	
 
 	flag_wait( "whitehouse_radio" );
@@ -210,7 +210,7 @@ whitehouse_dialogue()
 
 	thread flag_set_delayed( "whitehouse_flare_obj", 1.5 );
 
-	//Hammer Down means they're gonna flatten the city - we gotta get to the roof and stop 'em! 
+	//Hammer Down means they're gonna flatten the city - we gotta get to the roof and stop 'em!
 	level.foley dialogue_queue( "dcemp_fly_flattenthecity" );	
 
 	//We got less than two minutes, let's go!
@@ -227,7 +227,6 @@ whitehouse_dialogue()
 	flag_wait( "whitehouse_30sec" );
 	// 30 seconds! We gotta get to the roof now!! Go! Go!
 	level.foley dialogue_queue( "dcemp_fly_30seconds" );
-
 }
 
 whitehouse_radio_broadcast( soundalias )
@@ -238,7 +237,7 @@ whitehouse_radio_broadcast( soundalias )
 	play_count = 1; // 3
 
 	radio = undefined;
-	for ( i=0; i<radio_array.size; i++ )
+	for( i=0; i<radio_array.size; i++ )
 	{	
 		// distance above or below player
 		dist = abs( level.player.origin[2] - radio_array[i].origin[2] );
@@ -246,13 +245,13 @@ whitehouse_radio_broadcast( soundalias )
 			continue;
 
 		radio =radio_array[i];
-		radio PlaySound( soundalias, "sounddone" );
+		radio playSound( soundalias, "sounddone" );
 
 		play_count--;
 		if( !play_count )
 			break;
 	}
-	assert( isdefined( radio ) );
+	assert( isDefined( radio ) );
 	radio waittill( "sounddone" );
 	flag_clear( "broadcast" );
 }
@@ -267,19 +266,19 @@ whitehouse_radio_loop()
 		flag_clear( "broadcast_end" );
 
 		flag_waitopen( "broadcast_pause" );
-		// This is Cujo-Five-One to any friendly units in D.C.: Hammer Down is in effect, I repeat, Hammer Down is in effect. 
+		// This is Cujo-Five-One to any friendly units in D.C.: Hammer Down is in effect, I repeat, Hammer Down is in effect.
 		whitehouse_radio_broadcast( "dcemp_fp1_hammerdown" );
 
 		flag_waitopen( "broadcast_pause" );
-		// If you can receive this transmission, you are in a hardened high-value structure. 
+		// If you can receive this transmission, you are in a hardened high-value structure.
 		whitehouse_radio_broadcast( "dcemp_fp1_highvalue" );
 
 		flag_waitopen( "broadcast_pause" );
-		// Deploy green flares on the roof of this structure to indicate you are still combat effective. 
+		// Deploy green flares on the roof of this structure to indicate you are still combat effective.
 		whitehouse_radio_broadcast( "dcemp_fp1_greenflares" );
 
 		flag_waitopen( "broadcast_pause" );
-		// We will abort our mission on direct visual contact with this countersign. 
+		// We will abort our mission on direct visual contact with this countersign.
 		whitehouse_radio_broadcast( "dcemp_fp1_willabort" );
 
 		flag_set( "broadcast_end" );
@@ -309,13 +308,13 @@ whitehouse_radio()
 {
 	level endon( "whitehouse_hammerdown" );
 
-	level.radio_array = getentarray( "radio_origin", "targetname" );
+	level.radio_array = getEntArray( "radio_origin", "targetname" );
 
 	flag_wait( "whitehouse_entrance_lobby" );
 
 	level.countdown_index = 0;
 
-	triggers = getentarray( "countdown_trigger", "targetname" );
+	triggers = getEntArray( "countdown_trigger", "targetname" );
 	array_thread( triggers, ::countdown_trigger );
 
 	level.hammerdown_time = gettime() + 120 * 1000;
@@ -386,7 +385,7 @@ whitehouse_radio()
 	whitehouse_radio_broadcast( "dcemp_fp3_rollingout" );
 	//Roger, weapons on safe! Aborting mission!
 	whitehouse_radio_broadcast( "dcemp_fp4_abortingmission" );
-	// Cujo 5-1 to friendly ground units at the Whiskey Hotel - that was a close one. 
+	// Cujo 5-1 to friendly ground units at the Whiskey Hotel - that was a close one.
 	whitehouse_radio_broadcast( "dcemp_fp1_closeone" );
 	//We're sending word back to HQ, stay alive down there. Cujo 5-1 out.
 	whitehouse_radio_broadcast( "dcemp_fp1_wordtohq" );
@@ -449,8 +448,8 @@ whitehouse_hammerdown()
 
 	level notify( "whitehouse_hammerdown_death" );
 
-	PlayFX( level._effect[ "carpetbomb" ], level.player.origin );
-	level.player PlaySound( "explo_metal_rand" );
+	playFX( level._effect[ "carpetbomb" ], level.player.origin );
+	level.player playSound( "explo_metal_rand" );
 	wait 0.5;
 
 	level.foley stop_magic_bullet_shield();
@@ -488,7 +487,7 @@ whitehouse_nag()
 		level.foley dialogue_queue( "dcemp_fly_workyourwayleft" );	
 		wait 3;
 
-		//Ramirez, let's go! 
+		//Ramirez, let's go!
 		level.foley dialogue_queue( "dcemp_fly_ramirezgo" );	
 		wait 8;
 	
@@ -594,7 +593,7 @@ whitehouse_foley()
 	self notify( "stop_going_to_node" );
 
 	door = getent( "whitehouse_kitchen_door", "targetname" );
-	parts = getentarray( door.target, "targetname" );
+	parts = getEntArray( door.target, "targetname" );
 	array_call( parts, ::linkto, door );
 
 	// kick open kitchen door
@@ -773,7 +772,7 @@ whitehouse_drone()
 {
 	self endon( "death" );
 
-	if( !isdefined( level.whitehouse_drone_array ) )
+	if( !isDefined( level.whitehouse_drone_array ) )
 		level.whitehouse_drone_array = [];
 	level.whitehouse_drone_array[ level.whitehouse_drone_array.size ] = self;
 
@@ -781,7 +780,7 @@ whitehouse_drone()
 
 	flag_wait( "whitehouse_silhouette_ready");
 
-	if( isdefined( self.script_animation ) )
+	if( isDefined( self.script_animation ) )
 		self.deathanim = level.drone_death_anims[ self.script_animation ];
 
 	self.health = 200;
@@ -866,9 +865,9 @@ flare_dialogue()
 
 	// What happens now?
 	level.dunn dialogue_queue( "dcemp_cpd_happensnow" );	
-	//This war ain't over yet Corporal...all we did was level the playing field. 
+	//This war ain't over yet Corporal...all we did was level the playing field.
 	level.foley dialogue_queue( "dcemp_fly_waraintover" );	
-	//Everyone downstairs. Let's try and get the transmitter working on that radio. 
+	//Everyone downstairs. Let's try and get the transmitter working on that radio.
 	level.foley dialogue_queue( "dcemp_fly_backdownstairs" );	
 
 	flag_set( "whitehouse_completed" );
@@ -878,7 +877,7 @@ whitehouse_player_flare()
 {
 	level endon( "whitehouse_hammerdown_started" );
 
-	player_attached_use( &"SCRIPT_PLATFORM_HINTSTR_POPFLARE" );
+	player_attached_use(&"SCRIPT_PLATFORM_HINTSTR_POPFLARE" );
 
 	while( !level.player IsOnGround() )
 		wait 0.05;
@@ -1219,7 +1218,7 @@ tunnels_twirl_guy()
 	self walkdist_zero();
 	animent anim_generic_reach( self, "combatwalk_F_spin" );
 
-	// Let's go! Let's go! 
+	// Let's go! Let's go!
 //	self thread generic_dialogue_queue( "dcemp_ar2_letsgo" );
 
 	animent anim_generic( self, "combatwalk_F_spin" );
@@ -1289,7 +1288,7 @@ tunnels_dead_check_clear(drone, animent) {
 vision_set_tunnels() {
   flag_clear("spotlight_lightning");
   thread lerp_saveddvar("r_specularColorScale", 2.5, 2);
-  lights = getentarray("parking_lighting_primary", "script_noteworthy");
+  lights = getEntArray("parking_lighting_primary", "script_noteworthy");
   array_call(lights, ::setLightIntensity, 0);
 
   thread maps\_utility::set_vision_set("dcemp_tunnels", 4);

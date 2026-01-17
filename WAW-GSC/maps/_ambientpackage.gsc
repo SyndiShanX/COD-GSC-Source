@@ -13,7 +13,7 @@ init() {
     level.ambientPackages = [];
     thread updateActiveAmbientPackage();
     level.ambientPackageScriptOriginPool = [];
-    for (i = 0; i < 5; i++) {
+    for(i = 0; i < 5; i++) {
       level.ambientPackageScriptOriginPool[i] = spawnStruct();
       level.ambientPackageScriptOriginPool[i].org = spawn("script_origin", (0, 0, 0));
       level.ambientPackageScriptOriginPool[i].inuse = false;
@@ -22,7 +22,7 @@ init() {
     level.activeAmbientRoom = "";
     level.ambientRoomToneOriginPool = [];
     level.ambientRoomToneOriginPoolIndex = 0;
-    for (i = 0; i < 5; i++) {
+    for(i = 0; i < 5; i++) {
       level.ambientRoomToneOriginPool[i] = spawnStruct();
       level.ambientRoomToneOriginPool[i].org = spawn("script_origin", (0, 0, 0));
       level.ambientRoomToneOriginPool[i].inuse = false;
@@ -52,9 +52,9 @@ delayed_first_notify() {
 }
 
 tidyup_triggers(client_num) {
-  amb_triggers = GetEntArray("ambient_package", "targetname");
+  amb_triggers = getEntArray("ambient_package", "targetname");
   if(isDefined(amb_triggers) && amb_triggers.size > 0) {
-    for (i = 0; i < amb_triggers.size; i++) {
+    for(i = 0; i < amb_triggers.size; i++) {
       trig = amb_triggers[i];
       if(isDefined(trig.in_volume) && isDefined(trig.in_volume[client_num])) {
         trig.in_volume[client_num] = 0;
@@ -65,7 +65,7 @@ tidyup_triggers(client_num) {
 
 monitor_for_player_leave_trigger(trigPlayer, useAmbientRoom, useAmbientPackage) {
   trigPlayer endon("disconnect");
-  while (trigPlayer isTouching(self)) {
+  while(trigPlayer isTouching(self)) {
     wait 0.1;
   }
   self.in_volume[trigPlayer getentitynumber()] = 0;
@@ -117,7 +117,7 @@ ambientPackageTrigger() {
     self.script_ambientpriority = 1;
   }
   self.in_volume = [];
-  for (;;) {
+  for(;;) {
     self waittill("trigger", trigPlayer);
     self player_entered_trigger(trigPlayer, useAmbientRoom, useAmbientPackage);
     wait(0.01);
@@ -128,8 +128,8 @@ findHighestPriorityAmbientPackage() {
   package = "";
   priority = -1;
   packageArray = getArrayKeys(level.ambientPackages);
-  for (i = 0; i < packageArray.size; i++) {
-    for (j = 0; j < level.ambientPackages[packageArray[i]].priority.size; j++) {
+  for(i = 0; i < packageArray.size; i++) {
+    for(j = 0; j < level.ambientPackages[packageArray[i]].priority.size; j++) {
       if(level.ambientPackages[packageArray[i]].refcount[j] && level.ambientPackages[packageArray[i]].priority[j] > priority) {
         package = packageArray[i];
         priority = level.ambientPackages[packageArray[i]].priority[j];
@@ -141,7 +141,7 @@ findHighestPriorityAmbientPackage() {
 
 updateActiveAmbientPackage() {
   wait_until_first_player();
-  for (;;) {
+  for(;;) {
     level waittill("updateActiveAmbientPackage");
     newAmbientPackage = findHighestPriorityAmbientPackage();
     if(newAmbientPackage != "" && level.activeAmbientPackage != newAmbientPackage) {
@@ -158,7 +158,7 @@ activateAmbientPackage(package, priority, trigPlayer) {
       assertmsg("activateAmbientPackage: must declare ambient package \"" + package + "\" in level_amb main before it can be activated");
       return;
     }
-    for (i = 0; i < level.ambientPackages[package].priority.size; i++) {
+    for(i = 0; i < level.ambientPackages[package].priority.size; i++) {
       if(level.ambientPackages[package].priority[i] == priority) {
         level.ambientPackages[package].refcount[i]++;
         break;
@@ -181,7 +181,7 @@ deactivateAmbientPackage(package, priority, trigPlayer) {
       assertmsg("deactivateAmbientPackage: must declare ambient package \"" + package + "\" in level_amb main before it can be deactivated");
       return;
     }
-    for (i = 0; i < level.ambientPackages[package].priority.size; i++) {
+    for(i = 0; i < level.ambientPackages[package].priority.size; i++) {
       if(level.ambientPackages[package].priority[i] == priority && level.ambientPackages[package].refcount[i]) {
         level.ambientPackages[package].refcount[i]--;
         level notify("updateActiveAmbientPackage");
@@ -243,7 +243,7 @@ ambientElementThread() {
   player endon("disconnect");
   timer = 0;
   if(self.distMin < 0) {
-    for (;;) {
+    for(;;) {
       timer = randomfloatrange(self.spawnMin, self.spawnMax);
       wait timer;
       player playLocalSound(self.alias);
@@ -253,7 +253,7 @@ ambientElementThread() {
     angle = 0;
     offset = (0, 0, 0);
     index = -1;
-    for (;;) {
+    for(;;) {
       timer = randomfloatrange(self.spawnMin, self.spawnMax);
       wait timer;
       index = getScriptOriginPoolIndex();
@@ -261,9 +261,9 @@ ambientElementThread() {
         dist = randomintrange(self.distMin, self.distMax);
         angle = randomintrange(self.angleMin, self.angleMax);
         player_angle = player.angles[1];
-        offset = anglestoforward((0, angle + player_angle, 0));
+        offset = anglesToForward((0, angle + player_angle, 0));
         offset = vectorscale(offset, dist);
-        level.ambientPackageScriptOriginPool[index].org.origin = player geteye() + offset;
+        level.ambientPackageScriptOriginPool[index].org.origin = player getEye() + offset;
         wait .05;
         level.ambientPackageScriptOriginPool[index].org playSound(self.alias, "sounddone");
         level.ambientPackageScriptOriginPool[index] waittill("sounddone");
@@ -273,7 +273,7 @@ ambientElementThread() {
 }
 
 getScriptOriginPoolIndex() {
-  for (index = 0; index < level.ambientPackageScriptOriginPool.size; index++) {
+  for(index = 0; index < level.ambientPackageScriptOriginPool.size; index++) {
     if(!level.ambientPackageScriptOriginPool[index].inuse) {
       level.ambientPackageScriptOriginPool[index].inuse = true;
       return index;
@@ -283,7 +283,7 @@ getScriptOriginPoolIndex() {
 }
 
 scriptOriginPoolThread() {
-  for (;;) {
+  for(;;) {
     self.org waittill("sounddone");
     self.inuse = false;
     self notify("sounddone");
@@ -300,8 +300,8 @@ findHighestPriorityAmbientRoom() {
   room = "";
   priority = -1;
   roomArray = getArrayKeys(level.ambientRooms);
-  for (i = 0; i < roomArray.size; i++) {
-    for (j = 0; j < level.ambientRooms[roomArray[i]].priority.size; j++) {
+  for(i = 0; i < roomArray.size; i++) {
+    for(j = 0; j < level.ambientRooms[roomArray[i]].priority.size; j++) {
       if(level.ambientRooms[roomArray[i]].refcount[j]) {}
       if(level.ambientRooms[roomArray[i]].refcount[j] && level.ambientRooms[roomArray[i]].priority[j] > priority) {
         room = roomArray[i];
@@ -317,12 +317,12 @@ updateActiveAmbientRoom() {
   wait_until_first_player();
   players = get_players();
   player = players[0];
-  for (;;) {
+  for(;;) {
     level waittill("updateActiveAmbientRoom");
     newAmbientRoom = findHighestPriorityAmbientRoom();
     if(newAmbientRoom != "" && level.activeAmbientRoom != newAmbientRoom) {
       if(level.activeAmbientRoom != "" && isDefined(level.ambientRooms[level.activeAmbientRoom].tone)) {
-        for (i = 0; i < level.ambientRoomToneOriginPool.size; i++) {
+        for(i = 0; i < level.ambientRoomToneOriginPool.size; i++) {
           if(level.ambientRoomToneOriginPool[i].inuse && level.ambientRoomToneOriginPool[i].alias == level.ambientRooms[level.activeAmbientRoom].tone) {
             level.ambientRoomToneOriginPool[i].org stopLoopSound(level.ambientRooms[level.activeAmbientRoom].fadeOut);
             level.ambientRoomToneOriginPool[i] thread roomToneFadeOutTimerThread(level.ambientRooms[level.activeAmbientRoom].fadeOut);
@@ -332,7 +332,7 @@ updateActiveAmbientRoom() {
       }
       level.activeAmbientRoom = newAmbientRoom;
       if(isDefined(level.ambientRooms[level.activeAmbientRoom].tone)) {
-        for (i = 0; i < level.ambientRoomToneOriginPool.size; i++) {
+        for(i = 0; i < level.ambientRoomToneOriginPool.size; i++) {
           if(level.ambientRoomToneOriginPool[i].inuse && level.ambientRoomToneOriginPool[i].alias == level.ambientRooms[level.activeAmbientRoom].tone) {
             org = level.ambientRoomToneOriginPool[i].org;
             level.ambientRoomToneOriginPool[i] notify("killRoomToneFadeOutTimer");
@@ -365,7 +365,7 @@ activateAmbientRoom(room, priority, trigPlayer) {
       assertmsg("activateAmbientRoom: must declare ambient room \"" + room + "\" in level_amb main before it can be activated");
       return;
     }
-    for (i = 0; i < level.ambientRooms[room].priority.size; i++) {
+    for(i = 0; i < level.ambientRooms[room].priority.size; i++) {
       if(level.ambientRooms[room].priority[i] == priority) {
         level.ambientRooms[room].refcount[i]++;
         break;
@@ -389,7 +389,7 @@ deactivateAmbientRoom(room, priority, trigPlayer) {
       assertmsg("deactivateAmbientRoom: must declare ambient room \"" + room + "\" in level_amb main before it can be deactivated");
       return;
     }
-    for (i = 0; i < level.ambientRooms[room].priority.size; i++) {
+    for(i = 0; i < level.ambientRooms[room].priority.size; i++) {
       if(level.ambientRooms[room].priority[i] == priority && level.ambientRooms[room].refcount[i]) {
         level.ambientRooms[room].refcount[i]--;
         level notify("updateActiveAmbientRoom");

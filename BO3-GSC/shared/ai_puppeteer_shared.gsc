@@ -13,7 +13,7 @@
 #namespace ai_puppeteer;
 
 function autoexec __init__sytem__() {
-  system::register("ai_puppeteer", & __init__, undefined, undefined);
+  system::register("ai_puppeteer", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -21,13 +21,13 @@ function __init__() {
 }
 
 function ai_puppeteer_think() {
-  while (true) {
-    if(getdvarstring("") == "" && (!isdefined(level.ai_puppeteer_active) || level.ai_puppeteer_active == 0)) {
+  while(true) {
+    if(getdvarstring("") == "" && (!isDefined(level.ai_puppeteer_active) || level.ai_puppeteer_active == 0)) {
       level.ai_puppeteer_active = 1;
       level notify("hash_23dbb5b");
       adddebugcommand("");
       thread ai_puppeteer();
-    } else if(getdvarstring("") == "" && isdefined(level.ai_puppeteer_active) && level.ai_puppeteer_active == 1) {
+    } else if(getdvarstring("") == "" && isDefined(level.ai_puppeteer_active) && level.ai_puppeteer_active == 1) {
       level.ai_puppeteer_active = 0;
       adddebugcommand("");
       level notify("hash_23dbb5b");
@@ -38,7 +38,7 @@ function ai_puppeteer_think() {
 
 function ai_puppeteer() {
   player = undefined;
-  while (!isplayer(player)) {
+  while(!isplayer(player)) {
     player = getplayers()[0];
     wait(0.05);
   }
@@ -50,7 +50,7 @@ function ai_puppeteer() {
   level waittill("hash_23dbb5b");
   player.ignoreme = 0;
   ai_puppet_release(1);
-  if(isdefined(level.ai_puppet_target)) {
+  if(isDefined(level.ai_puppet_target)) {
     level.ai_puppet_target delete();
   }
   ai_puppeteer_destroy_hud();
@@ -59,30 +59,30 @@ function ai_puppeteer() {
 function ai_puppet_manager() {
   level endon("hash_23dbb5b");
   self endon("death");
-  while (true) {
-    if(isdefined(level.playercursor[""]) && isdefined(level.ai_puppet) && isdefined(level.ai_puppet.debuglookatenabled) && level.ai_puppet.debuglookatenabled == 1) {
+  while(true) {
+    if(isDefined(level.playercursor[""]) && isDefined(level.ai_puppet) && isDefined(level.ai_puppet.debuglookatenabled) && level.ai_puppet.debuglookatenabled == 1) {
       level.ai_puppet lookatpos(level.playercursor[""]);
     }
     if(self buttonpressed("") && self buttonpressed("")) {
-      if(isdefined(level.ai_puppet)) {
+      if(isDefined(level.ai_puppet)) {
         level.ai_puppet forceteleport(level.playercursor[""], level.ai_puppet.angles);
       }
       wait(0.2);
     } else {
       if(self buttonpressed("")) {
-        if(isdefined(level.ai_puppet)) {
-          if(isdefined(level.ai_puppet_target)) {
+        if(isDefined(level.ai_puppet)) {
+          if(isDefined(level.ai_puppet_target)) {
             if(isai(level.ai_puppet_target)) {
               self thread ai_puppeteer_highlight_ai(level.ai_puppet_target, (1, 0, 0));
               level.ai_puppet clearentitytarget();
               level.ai_puppet_target = undefined;
             } else {
-              self thread ai_puppeteer_highlight_point(level.ai_puppet_target.origin, level.ai_puppet_target_normal, anglestoforward(self getplayerangles()), (1, 0, 0));
+              self thread ai_puppeteer_highlight_point(level.ai_puppet_target.origin, level.ai_puppet_target_normal, anglesToForward(self getplayerangles()), (1, 0, 0));
               level.ai_puppet clearentitytarget();
               level.ai_puppet_target delete();
             }
           } else {
-            if(isdefined(level.playercursorai)) {
+            if(isDefined(level.playercursorai)) {
               if(level.playercursorai != level.ai_puppet) {
                 level.ai_puppet setentitytarget(level.playercursorai);
                 level.ai_puppet_target = level.playercursorai;
@@ -93,66 +93,66 @@ function ai_puppet_manager() {
               level.ai_puppet_target = spawn("", level.playercursor[""]);
               level.ai_puppet_target_normal = level.playercursor[""];
               level.ai_puppet setentitytarget(level.ai_puppet_target);
-              self thread ai_puppeteer_highlight_point(level.ai_puppet_target.origin, level.ai_puppet_target_normal, anglestoforward(self getplayerangles()), (1, 0, 0));
+              self thread ai_puppeteer_highlight_point(level.ai_puppet_target.origin, level.ai_puppet_target_normal, anglesToForward(self getplayerangles()), (1, 0, 0));
             }
           }
         }
         wait(0.2);
       } else {
         if(self buttonpressed("")) {
-          if(isdefined(level.ai_puppet)) {
-            if(isdefined(level.playercursorai) && level.playercursorai != level.ai_puppet) {
+          if(isDefined(level.ai_puppet)) {
+            if(isDefined(level.playercursorai) && level.playercursorai != level.ai_puppet) {
               level.ai_puppet setgoal(level.playercursorai);
               level.ai_puppet.goalradius = 64;
               self thread ai_puppeteer_highlight_ai(level.playercursorai, (0, 1, 0));
             } else {
-              if(isdefined(level.playercursornode)) {
+              if(isDefined(level.playercursornode)) {
                 level.ai_puppet setgoal(level.playercursornode);
                 self thread ai_puppeteer_highlight_node(level.playercursornode);
               } else {
-                if(isdefined(level.ai_puppet.scriptenemy)) {
+                if(isDefined(level.ai_puppet.scriptenemy)) {
                   to_target = level.ai_puppet.scriptenemy.origin - level.ai_puppet.origin;
                 } else {
                   to_target = level.playercursor[""] - level.ai_puppet.origin;
                 }
                 angles = vectortoangles(to_target);
                 level.ai_puppet setgoal(level.playercursor[""]);
-                self thread ai_puppeteer_highlight_point(level.playercursor[""], level.playercursor[""], anglestoforward(self getplayerangles()), (0, 1, 0));
+                self thread ai_puppeteer_highlight_point(level.playercursor[""], level.playercursor[""], anglesToForward(self getplayerangles()), (0, 1, 0));
               }
             }
           }
           wait(0.2);
         } else {
           if(self buttonpressed("") && self buttonpressed("")) {
-            if(isdefined(level.ai_puppet)) {
-              if(isdefined(level.playercursorai) && level.playercursorai != level.ai_puppet) {
+            if(isDefined(level.ai_puppet)) {
+              if(isDefined(level.playercursorai) && level.playercursorai != level.ai_puppet) {
                 level.ai_puppet setgoal(level.playercursorai);
                 level.ai_puppet.goalradius = 64;
                 self thread ai_puppeteer_highlight_ai(level.playercursorai, (0, 1, 0));
               } else {
-                if(isdefined(level.playercursornode)) {
+                if(isDefined(level.playercursornode)) {
                   level.ai_puppet setgoal(level.playercursornode, 1);
                   self thread ai_puppeteer_highlight_node(level.playercursornode);
                 } else {
-                  if(isdefined(level.ai_puppet.scriptenemy)) {
+                  if(isDefined(level.ai_puppet.scriptenemy)) {
                     to_target = level.ai_puppet.scriptenemy.origin - level.ai_puppet.origin;
                   } else {
                     to_target = level.playercursor[""] - level.ai_puppet.origin;
                   }
                   angles = vectortoangles(to_target);
                   level.ai_puppet setgoal(level.playercursor[""], 1);
-                  self thread ai_puppeteer_highlight_point(level.playercursor[""], level.playercursor[""], anglestoforward(self getplayerangles()), (0, 1, 0));
+                  self thread ai_puppeteer_highlight_point(level.playercursor[""], level.playercursor[""], anglesToForward(self getplayerangles()), (0, 1, 0));
                 }
               }
             }
             wait(0.2);
           } else {
             if(self buttonpressed("")) {
-              if(isdefined(level.playercursorai)) {
-                if(isdefined(level.ai_puppet) && level.playercursorai == level.ai_puppet) {
+              if(isDefined(level.playercursorai)) {
+                if(isDefined(level.ai_puppet) && level.playercursorai == level.ai_puppet) {
                   ai_puppet_release(1);
                 } else {
-                  if(isdefined(level.ai_puppet)) {
+                  if(isDefined(level.ai_puppet)) {
                     ai_puppet_release(0);
                   }
                   ai_puppet_set();
@@ -161,7 +161,7 @@ function ai_puppet_manager() {
               }
               wait(0.2);
             } else if(self buttonpressed("")) {
-              if(isdefined(level.ai_puppet)) {
+              if(isDefined(level.ai_puppet)) {
                 level.ai_puppet clearforcedgoal();
               }
               wait(0.2);
@@ -170,17 +170,17 @@ function ai_puppet_manager() {
         }
       }
     }
-    if(isdefined(level.ai_puppet)) {
+    if(isDefined(level.ai_puppet)) {
       ai_puppeteer_render_ai(level.ai_puppet, (0, 1, 1));
-      if(isdefined(level.ai_puppet.scriptenemy) && !level.ai_puppet_highlighting) {
+      if(isDefined(level.ai_puppet.scriptenemy) && !level.ai_puppet_highlighting) {
         if(isai(level.ai_puppet.scriptenemy)) {
           ai_puppeteer_render_ai(level.ai_puppet.scriptenemy, (1, 0, 0));
-        } else if(isdefined(level.ai_puppet_target)) {
-          self thread ai_puppeteer_render_point(level.ai_puppet_target.origin, level.ai_puppet_target_normal, anglestoforward(self getplayerangles()), (1, 0, 0));
+        } else if(isDefined(level.ai_puppet_target)) {
+          self thread ai_puppeteer_render_point(level.ai_puppet_target.origin, level.ai_puppet_target_normal, anglesToForward(self getplayerangles()), (1, 0, 0));
         }
       }
     }
-    if(isdefined(level.ai_puppet)) {
+    if(isDefined(level.ai_puppet)) {
       if(self buttonpressed("")) {
         level.ai_puppet.goalradius = level.ai_puppet.goalradius + 64;
       } else {
@@ -195,7 +195,7 @@ function ai_puppet_manager() {
         }
       }
     }
-    if(isdefined(level.ai_puppet)) {
+    if(isDefined(level.ai_puppet)) {
       if(getdvarstring("") == "") {
         level.ai_puppet.fixednode = 1;
         ai_puppeteer_render_ai(level.ai_puppet, (1, 1, 1));
@@ -216,7 +216,7 @@ function ai_puppet_set() {
 }
 
 function ai_puppet_release(restore) {
-  if(isdefined(level.ai_puppet)) {
+  if(isDefined(level.ai_puppet)) {
     if(restore) {
       level.ai_puppet.goalradius = level.ai_puppet.old_goalradius;
       level.ai_puppet.ispuppet = 0;
@@ -229,23 +229,23 @@ function ai_puppet_release(restore) {
 function ai_puppet_cursor_tracker() {
   level endon("hash_23dbb5b");
   self endon("death");
-  while (true) {
-    forward = anglestoforward(self getplayerangles());
+  while(true) {
+    forward = anglesToForward(self getplayerangles());
     forward_vector = vectorscale(forward, 4000);
-    level.playercursor = bullettrace(self geteye(), self geteye() + forward_vector, 1, self);
+    level.playercursor = bulletTrace(self getEye(), self getEye() + forward_vector, 1, self);
     level.playercursorai = undefined;
     level.playercursornode = undefined;
     cursorcolor = (0, 1, 1);
     hitent = level.playercursor[""];
-    if(isdefined(hitent) && isai(hitent)) {
+    if(isDefined(hitent) && isai(hitent)) {
       cursorcolor = (1, 0, 0);
-      if(isdefined(level.ai_puppet) && level.ai_puppet != hitent) {
+      if(isDefined(level.ai_puppet) && level.ai_puppet != hitent) {
         if(!level.ai_puppet_highlighting) {
           ai_puppeteer_render_ai(hitent, cursorcolor);
         }
       }
       level.playercursorai = hitent;
-    } else if(isdefined(level.ai_puppet)) {
+    } else if(isDefined(level.ai_puppet)) {
       nodes = getanynodearray(level.playercursor[""], 24);
       if(nodes.size > 0) {
         node = nodes[0];
@@ -265,7 +265,7 @@ function ai_puppet_cursor_tracker() {
 }
 
 function ai_puppeteer_create_hud() {
-  /# /
+  /
   #
   level.puppeteer_hud_select = newdebughudelem();
   level.puppeteer_hud_select.x = 0;
@@ -310,16 +310,16 @@ function ai_puppeteer_create_hud() {
 }
 
 function ai_puppeteer_destroy_hud() {
-  if(isdefined(level.puppeteer_hud_select)) {
+  if(isDefined(level.puppeteer_hud_select)) {
     level.puppeteer_hud_select destroy();
   }
-  if(isdefined(level.puppeteer_hud_lookat)) {
+  if(isDefined(level.puppeteer_hud_lookat)) {
     level.puppeteer_hud_lookat destroy();
   }
-  if(isdefined(level.puppeteer_hud_goto)) {
+  if(isDefined(level.puppeteer_hud_goto)) {
     level.puppeteer_hud_goto destroy();
   }
-  if(isdefined(level.puppeteer_hud_shoot)) {
+  if(isDefined(level.puppeteer_hud_shoot)) {
     level.puppeteer_hud_shoot destroy();
   }
 }
@@ -338,7 +338,7 @@ function ai_puppeteer_render_point(point, normal, forward, color) {
 function ai_puppeteer_render_node(node, color) {
   print3d(node.origin, node.type, color, 1, 0.35);
   box(node.origin, vectorscale((-1, -1, 0), 16), vectorscale((1, 1, 1), 16), node.angles[1], color, 1, 1);
-  nodeforward = anglestoforward(node.angles);
+  nodeforward = anglesToForward(node.angles);
   nodeforward = vectorscale(nodeforward, 8);
   line(node.origin, node.origin + nodeforward, color, 1, 1);
 }
@@ -354,7 +354,7 @@ function ai_puppeteer_highlight_point(point, normal, forward, color) {
   self endon("death");
   level.ai_puppet_highlighting = 1;
   timer = 0;
-  while (timer < 0.7) {
+  while(timer < 0.7) {
     ai_puppeteer_render_point(point, normal, forward, color);
     timer = timer + 0.15;
     wait(0.15);
@@ -367,7 +367,7 @@ function ai_puppeteer_highlight_node(node) {
   self endon("death");
   level.ai_puppet_highlighting = 1;
   timer = 0;
-  while (timer < 0.7) {
+  while(timer < 0.7) {
     ai_puppeteer_render_node(node, (0, 1, 0));
     timer = timer + 0.15;
     wait(0.15);
@@ -380,7 +380,7 @@ function ai_puppeteer_highlight_ai(ai, color) {
   self endon("death");
   level.ai_puppet_highlighting = 1;
   timer = 0;
-  while (timer < 0.7 && isdefined(ai)) {
+  while(timer < 0.7 && isDefined(ai)) {
     ai_puppeteer_render_ai(ai, color);
     timer = timer + 0.15;
     wait(0.15);

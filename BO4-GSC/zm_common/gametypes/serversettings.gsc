@@ -7,7 +7,6 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_customgame;
-
 #namespace serversettings;
 
 autoexec __init__system__() {

@@ -17,7 +17,7 @@ barbecue_fx_loop(localclientnum) {
   self endon("entityshutdown");
 
   while(true) {
-    playfxontag(localclientnum, level._effect["fire_sacrifice_flame"], self, "tag_origin");
+    playFXOnTag(localclientnum, level._effect["fire_sacrifice_flame"], self, "tag_origin");
     wait 0.5;
   }
 }

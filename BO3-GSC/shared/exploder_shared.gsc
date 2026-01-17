@@ -12,7 +12,7 @@
 #namespace exploder;
 
 function autoexec __init__sytem__() {
-  system::register("exploder", & __init__, & __main__, undefined);
+  system::register("exploder", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -22,79 +22,79 @@ function __init__() {
 
 function __main__() {
   level.exploders = [];
-  ents = getentarray("script_brushmodel", "classname");
-  smodels = getentarray("script_model", "classname");
-  for (i = 0; i < smodels.size; i++) {
+  ents = getEntArray("script_brushmodel", "classname");
+  smodels = getEntArray("script_model", "classname");
+  for(i = 0; i < smodels.size; i++) {
     ents[ents.size] = smodels[i];
   }
-  for (i = 0; i < ents.size; i++) {
-    if(isdefined(ents[i].script_prefab_exploder)) {
+  for(i = 0; i < ents.size; i++) {
+    if(isDefined(ents[i].script_prefab_exploder)) {
       ents[i].script_exploder = ents[i].script_prefab_exploder;
     }
-    if(isdefined(ents[i].script_exploder)) {
+    if(isDefined(ents[i].script_exploder)) {
       if(ents[i].script_exploder < 10000) {
         level.exploders[ents[i].script_exploder] = 1;
       }
-      if(ents[i].model == "fx" && (!isdefined(ents[i].targetname) || ents[i].targetname != "exploderchunk")) {
+      if(ents[i].model == "fx" && (!isDefined(ents[i].targetname) || ents[i].targetname != "exploderchunk")) {
         ents[i] hide();
         continue;
       }
-      if(isdefined(ents[i].targetname) && ents[i].targetname == "exploder") {
+      if(isDefined(ents[i].targetname) && ents[i].targetname == "exploder") {
         ents[i] hide();
         ents[i] notsolid();
-        if(isdefined(ents[i].script_disconnectpaths)) {
+        if(isDefined(ents[i].script_disconnectpaths)) {
           ents[i] connectpaths();
         }
         continue;
       }
-      if(isdefined(ents[i].targetname) && ents[i].targetname == "exploderchunk") {
+      if(isDefined(ents[i].targetname) && ents[i].targetname == "exploderchunk") {
         ents[i] hide();
         ents[i] notsolid();
-        if(isdefined(ents[i].spawnflags) && (ents[i].spawnflags & 1) == 1) {
+        if(isDefined(ents[i].spawnflags) && (ents[i].spawnflags & 1) == 1) {
           ents[i] connectpaths();
         }
       }
     }
   }
   script_exploders = [];
-  potentialexploders = getentarray("script_brushmodel", "classname");
-  for (i = 0; i < potentialexploders.size; i++) {
-    if(isdefined(potentialexploders[i].script_prefab_exploder)) {
+  potentialexploders = getEntArray("script_brushmodel", "classname");
+  for(i = 0; i < potentialexploders.size; i++) {
+    if(isDefined(potentialexploders[i].script_prefab_exploder)) {
       potentialexploders[i].script_exploder = potentialexploders[i].script_prefab_exploder;
     }
-    if(isdefined(potentialexploders[i].script_exploder)) {
+    if(isDefined(potentialexploders[i].script_exploder)) {
       script_exploders[script_exploders.size] = potentialexploders[i];
     }
   }
   println("" + potentialexploders.size);
-  potentialexploders = getentarray("script_model", "classname");
-  for (i = 0; i < potentialexploders.size; i++) {
-    if(isdefined(potentialexploders[i].script_prefab_exploder)) {
+  potentialexploders = getEntArray("script_model", "classname");
+  for(i = 0; i < potentialexploders.size; i++) {
+    if(isDefined(potentialexploders[i].script_prefab_exploder)) {
       potentialexploders[i].script_exploder = potentialexploders[i].script_prefab_exploder;
     }
-    if(isdefined(potentialexploders[i].script_exploder)) {
+    if(isDefined(potentialexploders[i].script_exploder)) {
       script_exploders[script_exploders.size] = potentialexploders[i];
     }
   }
   println("" + potentialexploders.size);
-  potentialexploders = getentarray("item_health", "classname");
-  for (i = 0; i < potentialexploders.size; i++) {
-    if(isdefined(potentialexploders[i].script_prefab_exploder)) {
+  potentialexploders = getEntArray("item_health", "classname");
+  for(i = 0; i < potentialexploders.size; i++) {
+    if(isDefined(potentialexploders[i].script_prefab_exploder)) {
       potentialexploders[i].script_exploder = potentialexploders[i].script_prefab_exploder;
     }
-    if(isdefined(potentialexploders[i].script_exploder)) {
+    if(isDefined(potentialexploders[i].script_exploder)) {
       script_exploders[script_exploders.size] = potentialexploders[i];
     }
   }
   println("" + potentialexploders.size);
-  if(!isdefined(level.createfxent)) {
+  if(!isDefined(level.createfxent)) {
     level.createfxent = [];
   }
   acceptabletargetnames = [];
   acceptabletargetnames["exploderchunk visible"] = 1;
   acceptabletargetnames["exploderchunk"] = 1;
   acceptabletargetnames["exploder"] = 1;
-  for (i = 0; i < script_exploders.size; i++) {
+  for(i = 0; i < script_exploders.size; i++) {
     exploder = script_exploders[i];
     ent = createexploder(exploder.script_fxid);
     ent.v = [];
@@ -115,42 +115,42 @@ function __main__() {
     ent.v["target"] = exploder.target;
     ent.v["ender"] = exploder.script_ender;
     ent.v["type"] = "exploder";
-    if(!isdefined(exploder.script_fxid)) {
+    if(!isDefined(exploder.script_fxid)) {
       ent.v["fxid"] = "No FX";
     } else {
       ent.v["fxid"] = exploder.script_fxid;
     }
     ent.v["exploder"] = exploder.script_exploder;
-    assert(isdefined(exploder.script_exploder), ("" + exploder.origin) + "");
-    if(!isdefined(ent.v["delay"])) {
+    assert(isDefined(exploder.script_exploder), ("" + exploder.origin) + "");
+    if(!isDefined(ent.v["delay"])) {
       ent.v["delay"] = 0;
     }
-    if(isdefined(exploder.target)) {
+    if(isDefined(exploder.target)) {
       e_target = getent(ent.v["target"], "targetname");
-      if(!isdefined(e_target)) {
+      if(!isDefined(e_target)) {
         e_target = struct::get(ent.v["target"], "targetname");
       }
       org = e_target.origin;
       ent.v["angles"] = vectortoangles(org - ent.v["origin"]);
     }
-    if(exploder.classname == "script_brushmodel" || isdefined(exploder.model)) {
+    if(exploder.classname == "script_brushmodel" || isDefined(exploder.model)) {
       ent.model = exploder;
       ent.model.disconnect_paths = exploder.script_disconnectpaths;
     }
-    if(isdefined(exploder.targetname) && isdefined(acceptabletargetnames[exploder.targetname])) {
+    if(isDefined(exploder.targetname) && isDefined(acceptabletargetnames[exploder.targetname])) {
       ent.v["exploder_type"] = exploder.targetname;
       continue;
     }
     ent.v["exploder_type"] = "normal";
   }
   level.createfxexploders = [];
-  for (i = 0; i < level.createfxent.size; i++) {
+  for(i = 0; i < level.createfxent.size; i++) {
     ent = level.createfxent[i];
     if(ent.v["type"] != "exploder") {
       continue;
     }
     ent.v["exploder_id"] = getexploderid(ent);
-    if(!isdefined(level.createfxexploders[ent.v["exploder"]])) {
+    if(!isDefined(level.createfxexploders[ent.v["exploder"]])) {
       level.createfxexploders[ent.v["exploder"]] = [];
     }
     level.createfxexploders[ent.v["exploder"]][level.createfxexploders[ent.v["exploder"]].size] = ent;
@@ -158,20 +158,20 @@ function __main__() {
   level.radiantexploders = [];
   reportexploderids();
   foreach(trig in trigger::get_all()) {
-    if(isdefined(trig.script_prefab_exploder)) {
+    if(isDefined(trig.script_prefab_exploder)) {
       trig.script_exploder = trig.script_prefab_exploder;
     }
-    if(isdefined(trig.script_exploder)) {
+    if(isDefined(trig.script_exploder)) {
       level thread exploder_trigger(trig, trig.script_exploder);
     }
-    if(isdefined(trig.script_exploder_radiant)) {
+    if(isDefined(trig.script_exploder_radiant)) {
       level thread exploder_trigger(trig, trig.script_exploder_radiant);
     }
-    if(isdefined(trig.script_stop_exploder)) {
-      level trigger::add_function(trig, undefined, & stop_exploder, trig.script_stop_exploder);
+    if(isDefined(trig.script_stop_exploder)) {
+      level trigger::add_function(trig, undefined, &stop_exploder, trig.script_stop_exploder);
     }
-    if(isdefined(trig.script_stop_exploder_radiant)) {
-      level trigger::add_function(trig, undefined, & stop_exploder, trig.script_stop_exploder_radiant);
+    if(isDefined(trig.script_stop_exploder_radiant)) {
+      level trigger::add_function(trig, undefined, &stop_exploder, trig.script_stop_exploder_radiant);
     }
   }
 }
@@ -195,27 +195,27 @@ function exploder_stop(num) {
 }
 
 function exploder_sound() {
-  if(isdefined(self.script_delay)) {
+  if(isDefined(self.script_delay)) {
     wait(self.script_delay);
   }
-  self playsound(level.scr_sound[self.script_sound]);
+  self playSound(level.scr_sound[self.script_sound]);
 }
 
 function cannon_effect() {
-  if(isdefined(self.v["repeat"])) {
-    for (i = 0; i < self.v["repeat"]; i++) {
-      playfx(level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
+  if(isDefined(self.v["repeat"])) {
+    for(i = 0; i < self.v["repeat"]; i++) {
+      playFX(level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
       self exploder_delay();
     }
     return;
   }
   self exploder_delay();
-  if(isdefined(self.looper)) {
+  if(isDefined(self.looper)) {
     self.looper delete();
   }
   self.looper = spawnfx(fx::get(self.v["fxid"]), self.v["origin"], self.v["forward"], self.v["up"]);
   triggerfx(self.looper);
-  exploder_playsound();
+  exploder_playSound();
 }
 
 function fire_effect() {
@@ -225,18 +225,18 @@ function fire_effect() {
   origin = self.v["origin"];
   firefx = self.v["firefx"];
   ender = self.v["ender"];
-  if(!isdefined(ender)) {
+  if(!isDefined(ender)) {
     ender = "createfx_effectStopper";
   }
   firefxdelay = 0.5;
-  if(isdefined(self.v["firefxdelay"])) {
+  if(isDefined(self.v["firefxdelay"])) {
     firefxdelay = self.v["firefxdelay"];
   }
   self exploder_delay();
-  if(isdefined(firefxsound)) {
+  if(isDefined(firefxsound)) {
     level thread sound::loop_fx_sound(firefxsound, origin, ender);
   }
-  playfx(level._effect[firefx], self.v["origin"], forward, up);
+  playFX(level._effect[firefx], self.v["origin"], forward, up);
 }
 
 function sound_effect() {
@@ -252,33 +252,33 @@ function effect_soundalias() {
 
 function trail_effect() {
   self exploder_delay();
-  if(!isdefined(self.v["trailfxtag"])) {
+  if(!isDefined(self.v["trailfxtag"])) {
     self.v["trailfxtag"] = "tag_origin";
   }
   temp_ent = undefined;
   if(self.v["trailfxtag"] == "tag_origin") {
-    playfxontag(level._effect[self.v["trailfx"]], self.model, self.v["trailfxtag"]);
+    playFXOnTag(level._effect[self.v["trailfx"]], self.model, self.v["trailfxtag"]);
   } else {
     temp_ent = spawn("script_model", self.model.origin);
-    temp_ent setmodel("tag_origin");
+    temp_ent setModel("tag_origin");
     temp_ent linkto(self.model, self.v["trailfxtag"]);
-    playfxontag(level._effect[self.v["trailfx"]], temp_ent, "tag_origin");
+    playFXOnTag(level._effect[self.v["trailfx"]], temp_ent, "tag_origin");
   }
-  if(isdefined(self.v["trailfxsound"])) {
-    if(!isdefined(temp_ent)) {
-      self.model playloopsound(self.v["trailfxsound"]);
+  if(isDefined(self.v["trailfxsound"])) {
+    if(!isDefined(temp_ent)) {
+      self.model playLoopSound(self.v["trailfxsound"]);
     } else {
-      temp_ent playloopsound(self.v["trailfxsound"]);
+      temp_ent playLoopSound(self.v["trailfxsound"]);
     }
   }
-  if(isdefined(self.v["ender"]) && isdefined(temp_ent)) {
+  if(isDefined(self.v["ender"]) && isDefined(temp_ent)) {
     level thread trail_effect_ender(temp_ent, self.v["ender"]);
   }
-  if(!isdefined(self.v["trailfxtimeout"])) {
+  if(!isDefined(self.v["trailfxtimeout"])) {
     return;
   }
   wait(self.v["trailfxtimeout"]);
-  if(isdefined(temp_ent)) {
+  if(isDefined(temp_ent)) {
     temp_ent delete();
   }
 }
@@ -290,15 +290,15 @@ function trail_effect_ender(ent, ender) {
 }
 
 function exploder_delay() {
-  if(!isdefined(self.v["delay"])) {
+  if(!isDefined(self.v["delay"])) {
     self.v["delay"] = 0;
   }
   min_delay = self.v["delay"];
   max_delay = self.v["delay"] + 0.001;
-  if(isdefined(self.v["delay_min"])) {
+  if(isDefined(self.v["delay_min"])) {
     min_delay = self.v["delay_min"];
   }
-  if(isdefined(self.v["delay_max"])) {
+  if(isDefined(self.v["delay_max"])) {
     max_delay = self.v["delay_max"];
   }
   if(min_delay > 0) {
@@ -306,8 +306,8 @@ function exploder_delay() {
   }
 }
 
-function exploder_playsound() {
-  if(!isdefined(self.v["soundalias"]) || self.v["soundalias"] == "nil") {
+function exploder_playSound() {
+  if(!isDefined(self.v["soundalias"]) || self.v["soundalias"] == "nil") {
     return;
   }
   sound::play_in_space(self.v["soundalias"], self.v["origin"]);
@@ -315,16 +315,16 @@ function exploder_playsound() {
 
 function brush_delete() {
   num = self.v["exploder"];
-  if(isdefined(self.v["delay"])) {
+  if(isDefined(self.v["delay"])) {
     wait(self.v["delay"]);
   } else {
     wait(0.05);
   }
-  if(!isdefined(self.model)) {
+  if(!isDefined(self.model)) {
     return;
   }
-  assert(isdefined(self.model));
-  if(!isdefined(self.v["fxid"]) || self.v["fxid"] == "No FX") {
+  assert(isDefined(self.model));
+  if(!isDefined(self.v["fxid"]) || self.v["fxid"] == "No FX") {
     self.v["exploder"] = undefined;
   }
   waittillframeend();
@@ -332,23 +332,23 @@ function brush_delete() {
 }
 
 function brush_show() {
-  if(isdefined(self.v["delay"])) {
+  if(isDefined(self.v["delay"])) {
     wait(self.v["delay"]);
   }
-  assert(isdefined(self.model));
+  assert(isDefined(self.model));
   self.model show();
   self.model solid();
 }
 
 function brush_throw() {
-  if(isdefined(self.v["delay"])) {
+  if(isDefined(self.v["delay"])) {
     wait(self.v["delay"]);
   }
   ent = undefined;
-  if(isdefined(self.v["target"])) {
+  if(isDefined(self.v["target"])) {
     ent = getent(self.v["target"], "targetname");
   }
-  if(!isdefined(ent)) {
+  if(!isDefined(ent)) {
     self.model delete();
     return;
   }
@@ -371,8 +371,8 @@ function exploder_trigger(trigger, script_value) {
   trigger endon("death");
   level endon("killexplodertridgers" + script_value);
   trigger trigger::wait_till();
-  if(isdefined(trigger.script_chance) && randomfloat(1) > trigger.script_chance) {
-    if(isdefined(trigger.script_delay)) {
+  if(isDefined(trigger.script_chance) && randomfloat(1) > trigger.script_chance) {
+    if(isDefined(trigger.script_delay)) {
       wait(trigger.script_delay);
     } else {
       wait(4);
@@ -385,22 +385,22 @@ function exploder_trigger(trigger, script_value) {
 }
 
 function reportexploderids() {
-  if(!isdefined(level._exploder_ids)) {
+  if(!isDefined(level._exploder_ids)) {
     return;
   }
   keys = getarraykeys(level._exploder_ids);
   println("");
-  for (i = 0; i < keys.size; i++) {
+  for(i = 0; i < keys.size; i++) {
     println((keys[i] + "") + level._exploder_ids[keys[i]]);
   }
 }
 
 function getexploderid(ent) {
-  if(!isdefined(level._exploder_ids)) {
+  if(!isDefined(level._exploder_ids)) {
     level._exploder_ids = [];
     level._exploder_id = 1;
   }
-  if(!isdefined(level._exploder_ids[ent.v["exploder"]])) {
+  if(!isDefined(level._exploder_ids[ent.v["exploder"]])) {
     level._exploder_ids[ent.v["exploder"]] = level._exploder_id;
     level._exploder_id++;
   }
@@ -419,9 +419,9 @@ function activate_exploder(num) {
   num = int(num);
   level notify("exploder" + num);
   client_send = 1;
-  if(isdefined(level.createfxexploders[num])) {
-    for (i = 0; i < level.createfxexploders[num].size; i++) {
-      if(client_send && isdefined(level.createfxexploders[num][i].v["exploder_server"])) {
+  if(isDefined(level.createfxexploders[num])) {
+    for(i = 0; i < level.createfxexploders[num].size; i++) {
+      if(client_send && isDefined(level.createfxexploders[num][i].v["exploder_server"])) {
         client_send = 0;
       }
       level.createfxexploders[num][i] activate_individual_exploder(num);
@@ -441,27 +441,27 @@ function activate_radiant_exploder(string) {
 
 function activate_individual_exploder(num) {
   level notify("exploder" + self.v["exploder"]);
-  if(!level.clientscripts || !isdefined(level._exploder_ids[int(self.v["exploder"])]) || isdefined(self.v["exploder_server"])) {
+  if(!level.clientscripts || !isDefined(level._exploder_ids[int(self.v["exploder"])]) || isDefined(self.v["exploder_server"])) {
     println(("" + self.v[""]) + "");
-    if(isdefined(self.v["firefx"])) {
+    if(isDefined(self.v["firefx"])) {
       self thread fire_effect();
     }
-    if(isdefined(self.v["fxid"]) && self.v["fxid"] != "No FX") {
+    if(isDefined(self.v["fxid"]) && self.v["fxid"] != "No FX") {
       self thread cannon_effect();
-    } else if(isdefined(self.v["soundalias"])) {
+    } else if(isDefined(self.v["soundalias"])) {
       self thread sound_effect();
     }
-    if(isdefined(self.v["earthquake"])) {
+    if(isDefined(self.v["earthquake"])) {
       self thread earthquake();
     }
-    if(isdefined(self.v["rumble"])) {
+    if(isDefined(self.v["rumble"])) {
       self thread rumble();
     }
   }
-  if(isdefined(self.v["trailfx"])) {
+  if(isDefined(self.v["trailfx"])) {
     self thread trail_effect();
   }
-  if(isdefined(self.v["damage"])) {
+  if(isDefined(self.v["damage"])) {
     self thread exploder_damage();
   }
   if(self.v["exploder_type"] == "exploder") {
@@ -476,13 +476,13 @@ function activate_individual_exploder(num) {
 }
 
 function activate_exploder_on_clients(num) {
-  if(!isdefined(level._exploder_ids[num])) {
+  if(!isDefined(level._exploder_ids[num])) {
     return;
   }
-  if(!isdefined(level._client_exploders[num])) {
+  if(!isDefined(level._client_exploders[num])) {
     level._client_exploders[num] = 1;
   }
-  if(!isdefined(level._client_exploder_ids[num])) {
+  if(!isDefined(level._client_exploder_ids[num])) {
     level._client_exploder_ids[num] = 1;
   }
   activateclientexploder(level._exploder_ids[num]);
@@ -492,9 +492,9 @@ function stop_exploder(num) {
   if(level.clientscripts) {
     delete_exploder_on_clients(num);
   }
-  if(isdefined(level.createfxexploders[num])) {
-    for (i = 0; i < level.createfxexploders[num].size; i++) {
-      if(!isdefined(level.createfxexploders[num][i].looper)) {
+  if(isDefined(level.createfxexploders[num])) {
+    for(i = 0; i < level.createfxexploders[num].size; i++) {
+      if(!isDefined(level.createfxexploders[num][i].looper)) {
         continue;
       }
       level.createfxexploders[num][i].looper delete();
@@ -507,10 +507,10 @@ function delete_exploder_on_clients(exploder_id) {
     deactivateclientradiantexploder(exploder_id);
     return;
   }
-  if(!isdefined(level._exploder_ids[exploder_id])) {
+  if(!isDefined(level._exploder_ids[exploder_id])) {
     return;
   }
-  if(!isdefined(level._client_exploders[exploder_id])) {
+  if(!isDefined(level._client_exploders[exploder_id])) {
     return;
   }
   level._client_exploders[exploder_id] = undefined;
@@ -527,12 +527,12 @@ function kill_exploder(exploder_string) {
 }
 
 function exploder_damage() {
-  if(isdefined(self.v["delay"])) {
+  if(isDefined(self.v["delay"])) {
     delay = self.v["delay"];
   } else {
     delay = 0;
   }
-  if(isdefined(self.v["damage_radius"])) {
+  if(isDefined(self.v["damage_radius"])) {
     radius = self.v["damage_radius"];
   } else {
     radius = 128;
@@ -545,7 +545,7 @@ function exploder_damage() {
 
 function earthquake() {
   earthquake_name = self.v["earthquake"];
-  assert(isdefined(level.earthquake) && isdefined(level.earthquake[earthquake_name]), ("" + earthquake_name) + "");
+  assert(isDefined(level.earthquake) && isDefined(level.earthquake[earthquake_name]), ("" + earthquake_name) + "");
   self exploder_delay();
   eq = level.earthquake[earthquake_name];
   earthquake(eq["magnitude"], eq["duration"], self.v["origin"], eq["radius"]);
@@ -554,13 +554,13 @@ function earthquake() {
 function rumble() {
   self exploder_delay();
   a_players = getplayers();
-  if(isdefined(self.v["damage_radius"])) {
+  if(isDefined(self.v["damage_radius"])) {
     n_rumble_threshold_squared = self.v["damage_radius"] * self.v["damage_radius"];
   } else {
     println(("" + self.v[""]) + "");
     n_rumble_threshold_squared = 16384;
   }
-  for (i = 0; i < a_players.size; i++) {
+  for(i = 0; i < a_players.size; i++) {
     n_player_dist_squared = distancesquared(a_players[i].origin, self.v["origin"]);
     if(n_player_dist_squared < n_rumble_threshold_squared) {
       a_players[i] playrumbleonentity(self.v["rumble"]);
@@ -574,7 +574,7 @@ function stop_after_duration(name, duration) {
 }
 
 function exploder_duration(name, duration) {
-  if(!(isdefined(duration) && duration)) {
+  if(!(isDefined(duration) && duration)) {
     return;
   }
   exploder(name);

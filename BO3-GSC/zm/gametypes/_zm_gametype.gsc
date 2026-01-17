@@ -70,18 +70,18 @@ function main() {
   level.allow_teamchange = 0;
   setdvar("scr_disable_team_selection", 1);
   setdvar("scr_disable_weapondrop", 1);
-  level.onstartgametype = & onstartgametype;
-  level.onspawnplayer = & globallogic::blank;
-  level.onspawnplayerunified = & onspawnplayerunified;
-  level.onroundendgame = & onroundendgame;
-  level.playermayspawn = & mayspawn;
+  level.onstartgametype = &onstartgametype;
+  level.onspawnplayer = &globallogic::blank;
+  level.onspawnplayerunified = &onspawnplayerunified;
+  level.onroundendgame = &onroundendgame;
+  level.playermayspawn = &mayspawn;
   zm_utility::set_game_var("ZM_roundLimit", 1);
   zm_utility::set_game_var("ZM_scoreLimit", 1);
   zm_utility::set_game_var("_team1_num", 0);
   zm_utility::set_game_var("_team2_num", 0);
   map_name = level.script;
   mode = getdvarstring("ui_gametype");
-  if(!isdefined(mode) || mode == "" && isdefined(level.default_game_mode)) {
+  if(!isDefined(mode) || mode == "" && isDefined(level.default_game_mode)) {
     mode = level.default_game_mode;
   }
   zm_utility::set_gamemode_var_once("mode", mode);
@@ -105,62 +105,62 @@ function main() {
   zm_utility::set_gamemode_var("match_end_notify", undefined);
   zm_utility::set_gamemode_var("match_end_func", undefined);
   setscoreboardcolumns("score", "kills", "downs", "revives", "headshots");
-  callback::on_connect( & onplayerconnect_check_for_hotjoin);
+  callback::on_connect(&onplayerconnect_check_for_hotjoin);
 }
 
 function globallogic_setupdefault_zombiecallbacks() {
-  level.spawnplayer = & globallogic_spawn::spawnplayer;
-  level.spawnplayerprediction = & globallogic_spawn::spawnplayerprediction;
-  level.spawnclient = & globallogic_spawn::spawnclient;
-  level.spawnspectator = & globallogic_spawn::spawnspectator;
-  level.spawnintermission = & globallogic_spawn::spawnintermission;
-  level.scoreongiveplayerscore = & globallogic_score::giveplayerscore;
-  level.onplayerscore = & globallogic::blank;
-  level.onteamscore = & globallogic::blank;
-  level.wavespawntimer = & globallogic::wavespawntimer;
-  level.onspawnplayer = & globallogic::blank;
-  level.onspawnplayerunified = & globallogic::blank;
-  level.onspawnspectator = & onspawnspectator;
-  level.onspawnintermission = & onspawnintermission;
-  level.onrespawndelay = & globallogic::blank;
-  level.onforfeit = & globallogic::blank;
-  level.ontimelimit = & globallogic::blank;
-  level.onscorelimit = & globallogic::blank;
-  level.ondeadevent = & ondeadevent;
-  level.ononeleftevent = & globallogic::blank;
-  level.giveteamscore = & globallogic::blank;
-  level.gettimepassed = & globallogic_utils::gettimepassed;
-  level.gettimelimit = & globallogic_defaults::default_gettimelimit;
-  level.getteamkillpenalty = & globallogic::blank;
-  level.getteamkillscore = & globallogic::blank;
-  level.iskillboosting = & globallogic::blank;
-  level._setteamscore = & globallogic_score::_setteamscore;
-  level._setplayerscore = & globallogic::blank;
-  level._getteamscore = & globallogic::blank;
-  level._getplayerscore = & globallogic::blank;
-  level.onprecachegametype = & globallogic::blank;
-  level.onstartgametype = & globallogic::blank;
-  level.onplayerconnect = & globallogic::blank;
-  level.onplayerdisconnect = & onplayerdisconnect;
-  level.onplayerdamage = & globallogic::blank;
-  level.onplayerkilled = & globallogic::blank;
+  level.spawnplayer = &globallogic_spawn::spawnplayer;
+  level.spawnplayerprediction = &globallogic_spawn::spawnplayerprediction;
+  level.spawnclient = &globallogic_spawn::spawnclient;
+  level.spawnspectator = &globallogic_spawn::spawnspectator;
+  level.spawnintermission = &globallogic_spawn::spawnintermission;
+  level.scoreongiveplayerscore = &globallogic_score::giveplayerscore;
+  level.onplayerscore = &globallogic::blank;
+  level.onteamscore = &globallogic::blank;
+  level.wavespawntimer = &globallogic::wavespawntimer;
+  level.onspawnplayer = &globallogic::blank;
+  level.onspawnplayerunified = &globallogic::blank;
+  level.onspawnspectator = &onspawnspectator;
+  level.onspawnintermission = &onspawnintermission;
+  level.onrespawndelay = &globallogic::blank;
+  level.onforfeit = &globallogic::blank;
+  level.ontimelimit = &globallogic::blank;
+  level.onscorelimit = &globallogic::blank;
+  level.ondeadevent = &ondeadevent;
+  level.ononeleftevent = &globallogic::blank;
+  level.giveteamscore = &globallogic::blank;
+  level.gettimepassed = &globallogic_utils::gettimepassed;
+  level.gettimelimit = &globallogic_defaults::default_gettimelimit;
+  level.getteamkillpenalty = &globallogic::blank;
+  level.getteamkillscore = &globallogic::blank;
+  level.iskillboosting = &globallogic::blank;
+  level._setteamscore = &globallogic_score::_setteamscore;
+  level._setplayerscore = &globallogic::blank;
+  level._getteamscore = &globallogic::blank;
+  level._getplayerscore = &globallogic::blank;
+  level.onprecachegametype = &globallogic::blank;
+  level.onstartgametype = &globallogic::blank;
+  level.onplayerconnect = &globallogic::blank;
+  level.onplayerdisconnect = &onplayerdisconnect;
+  level.onplayerdamage = &globallogic::blank;
+  level.onplayerkilled = &globallogic::blank;
   level.onplayerkilledextraunthreadedcbs = [];
-  level.onteamoutcomenotify = & hud_message::teamoutcomenotifyzombie;
-  level.onoutcomenotify = & globallogic::blank;
-  level.onteamwageroutcomenotify = & globallogic::blank;
-  level.onwageroutcomenotify = & globallogic::blank;
-  level.onendgame = & onendgame;
-  level.onroundendgame = & globallogic::blank;
-  level.onmedalawarded = & globallogic::blank;
-  level.dogmanagerongetdogs = & globallogic::blank;
-  level.autoassign = & globallogic_ui::menuautoassign;
-  level.spectator = & globallogic_ui::menuspectator;
-  level.curclass = & globallogic_ui::menuclass;
-  level.allies = & menuallieszombies;
-  level.teammenu = & globallogic_ui::menuteam;
-  level.callbackactorkilled = & globallogic::blank;
-  level.callbackvehicledamage = & globallogic::blank;
-  level.callbackvehiclekilled = & globallogic::blank;
+  level.onteamoutcomenotify = &hud_message::teamoutcomenotifyzombie;
+  level.onoutcomenotify = &globallogic::blank;
+  level.onteamwageroutcomenotify = &globallogic::blank;
+  level.onwageroutcomenotify = &globallogic::blank;
+  level.onendgame = &onendgame;
+  level.onroundendgame = &globallogic::blank;
+  level.onmedalawarded = &globallogic::blank;
+  level.dogmanagerongetdogs = &globallogic::blank;
+  level.autoassign = &globallogic_ui::menuautoassign;
+  level.spectator = &globallogic_ui::menuspectator;
+  level.curclass = &globallogic_ui::menuclass;
+  level.allies = &menuallieszombies;
+  level.teammenu = &globallogic_ui::menuteam;
+  level.callbackactorkilled = &globallogic::blank;
+  level.callbackvehicledamage = &globallogic::blank;
+  level.callbackvehiclekilled = &globallogic::blank;
 }
 
 function do_game_mode_shellshock() {
@@ -176,10 +176,10 @@ function canplayersuicide() {
 }
 
 function onplayerdisconnect() {
-  if(isdefined(level.game_mode_custom_onplayerdisconnect)) {
+  if(isDefined(level.game_mode_custom_onplayerdisconnect)) {
     level[[level.game_mode_custom_onplayerdisconnect]](self);
   }
-  if(isdefined(level.check_quickrevive_hotjoin)) {
+  if(isDefined(level.check_quickrevive_hotjoin)) {
     level thread[[level.check_quickrevive_hotjoin]]();
   }
   self zm_laststand::add_weighted_down();
@@ -192,13 +192,13 @@ function ondeadevent(team) {
 
 function onspawnintermission() {
   spawnpointname = "info_intermission";
-  spawnpoints = getentarray(spawnpointname, "classname");
+  spawnpoints = getEntArray(spawnpointname, "classname");
   if(spawnpoints.size < 1) {
     println(("" + spawnpointname) + "");
     return;
   }
   spawnpoint = spawnpoints[randomint(spawnpoints.size)];
-  if(isdefined(spawnpoint)) {
+  if(isDefined(spawnpoint)) {
     self spawn(spawnpoint.origin, spawnpoint.angles);
   }
 }
@@ -206,7 +206,7 @@ function onspawnintermission() {
 function onspawnspectator(origin, angles) {}
 
 function mayspawn() {
-  if(isdefined(level.custommayspawnlogic)) {
+  if(isDefined(level.custommayspawnlogic)) {
     return self[[level.custommayspawnlogic]]();
   }
   if(self.pers["lives"] == 0) {
@@ -246,22 +246,22 @@ function onfindvalidspawnpoint() {
   println("");
   if(level flag::get("begin_spawning")) {
     spawnpoint = zm::check_for_valid_spawn_near_team(self, 1);
-    if(!isdefined(spawnpoint)) {
+    if(!isDefined(spawnpoint)) {
       println("");
     }
   }
-  if(!isdefined(spawnpoint)) {
+  if(!isDefined(spawnpoint)) {
     match_string = "";
     location = level.scr_zm_map_start_location;
-    if(location == "default" || location == "" && isdefined(level.default_start_location)) {
+    if(location == "default" || location == "" && isDefined(level.default_start_location)) {
       location = level.default_start_location;
     }
     match_string = (level.scr_zm_ui_gametype + "_") + location;
     spawnpoints = [];
     structs = struct::get_array("initial_spawn", "script_noteworthy");
-    if(isdefined(structs)) {
+    if(isDefined(structs)) {
       foreach(struct in structs) {
-        if(isdefined(struct.script_string)) {
+        if(isDefined(struct.script_string)) {
           tokens = strtok(struct.script_string, " ");
           foreach(token in tokens) {
             if(token == match_string) {
@@ -271,10 +271,10 @@ function onfindvalidspawnpoint() {
         }
       }
     }
-    if(!isdefined(spawnpoints) || spawnpoints.size == 0) {
+    if(!isDefined(spawnpoints) || spawnpoints.size == 0) {
       spawnpoints = struct::get_array("initial_spawn_points", "targetname");
     }
-    assert(isdefined(spawnpoints), "");
+    assert(isDefined(spawnpoints), "");
     spawnpoint = zm::getfreespawnpoint(spawnpoints, self);
   }
   return spawnpoint;
@@ -285,11 +285,11 @@ function onspawnplayer(predictedspawn = 0) {
   self.usingobj = undefined;
   self.is_zombie = 0;
   zm::updateplayernum(self);
-  if(isdefined(level.custom_spawnplayer) && (isdefined(self.player_initialized) && self.player_initialized)) {
+  if(isDefined(level.custom_spawnplayer) && (isDefined(self.player_initialized) && self.player_initialized)) {
     self[[level.custom_spawnplayer]]();
     return;
   }
-  if(isdefined(level.customspawnlogic)) {
+  if(isDefined(level.customspawnlogic)) {
     println("");
     spawnpoint = self[[level.customspawnlogic]](predictedspawn);
     if(predictedspawn) {
@@ -320,16 +320,14 @@ function onspawnplayer(predictedspawn = 0) {
   self.zombification_time = 0;
   self.enabletext = 1;
   self thread zm_blockers::rebuild_barrier_reward_reset();
-  if(!(isdefined(level.host_ended_game) && level.host_ended_game)) {
+  if(!(isDefined(level.host_ended_game) && level.host_ended_game)) {
     self util::freeze_player_controls(0);
     self enableweapons();
   }
-  if(isdefined(level.game_mode_spawn_player_logic)) {
-    spawn_in_spectate = [
-      [level.game_mode_spawn_player_logic]
-    ]();
+  if(isDefined(level.game_mode_spawn_player_logic)) {
+    spawn_in_spectate = [[level.game_mode_spawn_player_logic]]();
     if(spawn_in_spectate) {
-      self util::delay(0.05, undefined, & zm::spawnspectator);
+      self util::delay(0.05, undefined, &zm::spawnspectator);
     }
   }
   pixendevent();
@@ -338,14 +336,14 @@ function onspawnplayer(predictedspawn = 0) {
 function get_player_spawns_for_gametype() {
   match_string = "";
   location = level.scr_zm_map_start_location;
-  if(location == "default" || location == "" && isdefined(level.default_start_location)) {
+  if(location == "default" || location == "" && isDefined(level.default_start_location)) {
     location = level.default_start_location;
   }
   match_string = (level.scr_zm_ui_gametype + "_") + location;
   player_spawns = [];
   structs = struct::get_array("player_respawn_point", "targetname");
   foreach(struct in structs) {
-    if(isdefined(struct.script_string)) {
+    if(isDefined(struct.script_string)) {
       tokens = strtok(struct.script_string, " ");
       foreach(token in tokens) {
         if(token == match_string) {
@@ -397,7 +395,7 @@ function menu_init() {
 }
 
 function menu_onplayerconnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connecting", player);
     player thread menu_onmenuresponse();
   }
@@ -405,7 +403,7 @@ function menu_onplayerconnect() {
 
 function menu_onmenuresponse() {
   self endon("disconnect");
-  for (;;) {
+  for(;;) {
     self waittill("menuresponse", menu, response);
     if(response == "back") {
       self closeingamemenu();
@@ -459,7 +457,7 @@ function menu_onmenuresponse() {
     if(response == "endgame") {
       if(self issplitscreen()) {
         level.skipvote = 1;
-        if(!(isdefined(level.gameended) && level.gameended)) {
+        if(!(isDefined(level.gameended) && level.gameended)) {
           self zm_laststand::add_weighted_down();
           self zm_stats::increment_client_stat("deaths");
           self zm_stats::increment_player_stat("deaths");
@@ -483,7 +481,7 @@ function menu_onmenuresponse() {
       continue;
     }
     if(response == "endround") {
-      if(!(isdefined(level.gameended) && level.gameended)) {
+      if(!(isDefined(level.gameended) && level.gameended)) {
         self globallogic::gamehistoryplayerquit();
         self zm_laststand::add_weighted_down();
         self closeingamemenu();
@@ -527,11 +525,11 @@ function menu_onmenuresponse() {
 
 function menuallieszombies() {
   self globallogic_ui::closemenus();
-  if(!level.console && level.allow_teamchange == "0" && (isdefined(self.hasdonecombat) && self.hasdonecombat)) {
+  if(!level.console && level.allow_teamchange == "0" && (isDefined(self.hasdonecombat) && self.hasdonecombat)) {
     return;
   }
   if(self.pers["team"] != "allies") {
-    if(level.ingraceperiod && (!isdefined(self.hasdonecombat) || !self.hasdonecombat)) {
+    if(level.ingraceperiod && (!isDefined(self.hasdonecombat) || !self.hasdonecombat)) {
       self.hasspawned = 0;
     }
     if(self.sessionstate == "playing") {
@@ -557,8 +555,8 @@ function menuallieszombies() {
 }
 
 function custom_spawn_init_func() {
-  array::thread_all(level.zombie_spawners, & spawner::add_spawn_function, & zm_spawner::zombie_spawn_init);
-  array::thread_all(level.zombie_spawners, & spawner::add_spawn_function, level._zombies_round_spawn_failsafe);
+  array::thread_all(level.zombie_spawners, &spawner::add_spawn_function, &zm_spawner::zombie_spawn_init);
+  array::thread_all(level.zombie_spawners, &spawner::add_spawn_function, level._zombies_round_spawn_failsafe);
 }
 
 function init() {
@@ -568,10 +566,10 @@ function init() {
 }
 
 function onplayerconnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connected", player);
     player thread onplayerspawned();
-    if(isdefined(level.game_module_onplayerconnect)) {
+    if(isDefined(level.game_module_onplayerconnect)) {
       player[[level.game_module_onplayerconnect]]();
     }
   }
@@ -580,15 +578,15 @@ function onplayerconnect() {
 function onplayerspawned() {
   level endon("end_game");
   self endon("disconnect");
-  for (;;) {
+  for(;;) {
     self util::waittill_either("spawned_player", "fake_spawned_player");
-    if(isdefined(level.match_is_ending) && level.match_is_ending) {
+    if(isDefined(level.match_is_ending) && level.match_is_ending) {
       return;
     }
     if(self laststand::player_is_in_laststand()) {
       self thread zm_laststand::auto_revive(self);
     }
-    if(isdefined(level.custom_player_fake_death_cleanup)) {
+    if(isDefined(level.custom_player_fake_death_cleanup)) {
       self[[level.custom_player_fake_death_cleanup]]();
     }
     self setstance("stand");
@@ -597,22 +595,22 @@ function onplayerspawned() {
     self.zmbdialoggroups = [];
     self.zmbdialoggroup = "";
     self takeallweapons();
-    if(isdefined(level.givecustomcharacters)) {
+    if(isDefined(level.givecustomcharacters)) {
       self[[level.givecustomcharacters]]();
     }
     self giveweapon(level.weaponbasemelee);
-    if(isdefined(level.onplayerspawned_restore_previous_weapons) && (isdefined(level.isresetting_grief) && level.isresetting_grief)) {
+    if(isDefined(level.onplayerspawned_restore_previous_weapons) && (isDefined(level.isresetting_grief) && level.isresetting_grief)) {
       weapons_restored = self[[level.onplayerspawned_restore_previous_weapons]]();
     }
-    if(!(isdefined(weapons_restored) && weapons_restored)) {
+    if(!(isDefined(weapons_restored) && weapons_restored)) {
       self zm_utility::give_start_weapon(1);
     }
     weapons_restored = 0;
-    if(isdefined(level._team_loadout)) {
+    if(isDefined(level._team_loadout)) {
       self giveweapon(level._team_loadout);
       self switchtoweapon(level._team_loadout);
     }
-    if(isdefined(level.gamemode_post_spawn_logic)) {
+    if(isDefined(level.gamemode_post_spawn_logic)) {
       self[[level.gamemode_post_spawn_logic]]();
     }
   }
@@ -635,7 +633,7 @@ function player_hotjoin() {
   self.rebuild_barrier_reward = 1;
   self.is_hotjoining = 1;
   wait(0.5);
-  if(isdefined(level.givecustomcharacters)) {
+  if(isDefined(level.givecustomcharacters)) {
     self[[level.givecustomcharacters]]();
   }
   self zm::spawnspectator();
@@ -643,7 +641,7 @@ function player_hotjoin() {
   self.is_hotjoining = 0;
   self.is_hotjoin = 1;
   self thread wait_fade_in();
-  if(isdefined(level.intermission) && level.intermission || (isdefined(level.host_ended_game) && level.host_ended_game)) {
+  if(isDefined(level.intermission) && level.intermission || (isDefined(level.host_ended_game) && level.host_ended_game)) {
     self setclientthirdperson(0);
     self resetfov();
     self.health = 100;
@@ -653,7 +651,7 @@ function player_hotjoin() {
 
 function wait_fade_in() {
   self util::streamer_wait(undefined, 0, 30);
-  if(isdefined(level.hotjoin_extra_blackscreen_time)) {
+  if(isDefined(level.hotjoin_extra_blackscreen_time)) {
     wait(level.hotjoin_extra_blackscreen_time);
   }
   initialblackend();

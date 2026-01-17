@@ -69,7 +69,7 @@ zone_init(zone_name) {
   if(isDefined(level.zones[zone_name])) {
     return;
   }
-  level.zones[zone_name] = SpawnStruct();
+  level.zones[zone_name] = spawnStruct();
   zone = level.zones[zone_name];
   zone.is_enabled = false;
   zone.is_occupied = false;
@@ -94,9 +94,7 @@ zone_init(zone_name) {
       if(spawner.classname == "actor_zombie_dog") {
         zone.dog_spawners[zone.dog_spawners.size] = spawner;
       } else if(isDefined(level.ignore_spawner_func)) {
-        ignore = [
-          [level.ignore_spawner_func]
-        ](spawner);
+        ignore = [[level.ignore_spawner_func]](spawner);
         if(!ignore) {
           zone.spawners[zone.spawners.size] = spawner;
         }
@@ -162,7 +160,7 @@ enable_zone(zone_name) {
 make_zone_adjacent(main_zone_name, adj_zone_name, flag_name) {
   main_zone = level.zones[main_zone_name];
   if(!isDefined(main_zone.adjacent_zones[adj_zone_name])) {
-    main_zone.adjacent_zones[adj_zone_name] = SpawnStruct();
+    main_zone.adjacent_zones[adj_zone_name] = spawnStruct();
     adj_zone = main_zone.adjacent_zones[adj_zone_name];
     adj_zone.is_connected = false;
     adj_zone.flags_do_or_check = false;
@@ -289,12 +287,12 @@ connect_zones(zone_name_a, zone_name_b, one_way) {
   enable_zone(zone_name_a);
   enable_zone(zone_name_b);
   if(!isDefined(level.zones[zone_name_a].adjacent_zones[zone_name_b])) {
-    level.zones[zone_name_a].adjacent_zones[zone_name_b] = SpawnStruct();
+    level.zones[zone_name_a].adjacent_zones[zone_name_b] = spawnStruct();
     level.zones[zone_name_a].adjacent_zones[zone_name_b].is_connected = true;
   }
   if(!one_way) {
     if(!isDefined(level.zones[zone_name_b].adjacent_zones[zone_name_a])) {
-      level.zones[zone_name_b].adjacent_zones[zone_name_a] = SpawnStruct();
+      level.zones[zone_name_b].adjacent_zones[zone_name_a] = spawnStruct();
       level.zones[zone_name_b].adjacent_zones[zone_name_a].is_connected = true;
     }
   }
@@ -309,9 +307,7 @@ manage_zones(initial_zone) {
     spawn_points[i].locked = true;
   }
   if(isDefined(level.zone_manager_init_func)) {
-    [
-      [level.zone_manager_init_func]
-    ]();
+    [[level.zone_manager_init_func]]();
   }
   if(IsArray(initial_zone)) {
     for(i = 0; i < initial_zone.size; i++) {
@@ -359,9 +355,7 @@ manage_zones(initial_zone) {
         level.zones[initial_zone].is_occupied = true;
       }
     }
-    [
-      [level.create_spawner_list_func]
-    ](zkeys);
+    [[level.create_spawner_list_func]](zkeys);
     wait(1);
   }
 }

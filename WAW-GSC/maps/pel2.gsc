@@ -22,14 +22,14 @@ main() {
   maps\_coop_weaponswap::init();
   maps\_destructible_type94truck::init();
   precache_assets();
-  add_start("bunkers", ::start_bunkers, & "STARTS_PEL2_BUNKERS");
-  add_start("flame", ::start_flame, & "STARTS_PEL2_FLAME");
-  add_start("forest", ::start_forest, & "STARTS_PEL2_FOREST");
-  add_start("admin", ::start_admin, & "STARTS_PEL2_ADMIN");
-  add_start("stairs", ::start_debug_stairs, & "STARTS_PEL2_ADMIN");
-  add_start("airfield", ::start_airfield, & "STARTS_PEL2_AIRFIELD");
-  add_start("aaguns", ::start_aaguns, & "STARTS_PEL2_AAGUNS");
-  add_start("napalm", ::start_napalm, & "STARTS_PEL2_NAPALM");
+  add_start("bunkers", ::start_bunkers, &"STARTS_PEL2_BUNKERS");
+  add_start("flame", ::start_flame, &"STARTS_PEL2_FLAME");
+  add_start("forest", ::start_forest, &"STARTS_PEL2_FOREST");
+  add_start("admin", ::start_admin, &"STARTS_PEL2_ADMIN");
+  add_start("stairs", ::start_debug_stairs, &"STARTS_PEL2_ADMIN");
+  add_start("airfield", ::start_airfield, &"STARTS_PEL2_AIRFIELD");
+  add_start("aaguns", ::start_aaguns, &"STARTS_PEL2_AAGUNS");
+  add_start("napalm", ::start_napalm, &"STARTS_PEL2_NAPALM");
   default_start(::mangrove);
   createthreatbiasgroup("players");
   init_callbacks();
@@ -202,14 +202,14 @@ setup_level() {
 
 set_player_shock(var1, var2) {
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i] Shellshock(var1, var2);
   }
 }
 
 setup_players() {
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i] SetWeaponAmmoStock("colt", 80);
     players[i] setthreatbiasgroup("players");
   }
@@ -229,7 +229,7 @@ mangrove() {
   chain_after_vignette();
   array_thread(level.heroes, ::set_pacifist_on);
   array_thread(level.heroes, ::set_ignoreme_on);
-  for (i = 0; i < level.heroes.size; i++) {
+  for(i = 0; i < level.heroes.size; i++) {
     level.heroes[i].previous_accuracy = level.heroes[i].baseaccuracy;
     level.heroes[i].baseaccuracy = 0.2;
   }
@@ -247,7 +247,7 @@ mangrove() {
 }
 
 mangrove_intro_positions() {
-  for (i = 0; i < level.heroes.size; i++) {
+  for(i = 0; i < level.heroes.size; i++) {
     goal_node = getnode(level.heroes[i].target, "targetname");
     level.heroes[i] setgoalnode(goal_node);
     level.heroes[i] thread enable_cqbwalk();
@@ -260,7 +260,7 @@ mangrove_intro_positions() {
 }
 
 mangrove_custom_transitions() {
-  for (i = 0; i < level.heroes.size; i++) {
+  for(i = 0; i < level.heroes.size; i++) {
     level.heroes[i] thread mangrove_custom_transitions_delay();
   }
   level.mangrove_extra_redshirt thread mangrove_custom_transitions_delay();
@@ -419,7 +419,7 @@ post_trap_chain_1() {
   objective_position(1, (2562, -13802, -135));
   wait_network_frame();
   level thread battlechatter_off();
-  for (i = 0; i < level.heroes.size; i++) {
+  for(i = 0; i < level.heroes.size; i++) {
     level.heroes[i].baseaccuracy = level.heroes[i].previous_accuracy;
   }
   trig = getent("trig_chain_post_trap_1", "targetname");
@@ -445,11 +445,11 @@ post_trap_chain_3() {
 }
 
 mangrove_ambush_2_heroes_sneak() {
-  for (i = 0; i < level.heroes.size; i++) {
+  for(i = 0; i < level.heroes.size; i++) {
     level.heroes[i] setgoalpos((2944.5, -14091, -129));
   }
   wait(2);
-  for (i = 0; i < level.heroes.size; i++) {
+  for(i = 0; i < level.heroes.size; i++) {
     level.heroes[i] setgoalpos(level.heroes[i].origin);
   }
 }
@@ -462,7 +462,7 @@ mangrove_ambush_2_heroes_sneak_2() {
   level.roebuck setgoalnode(node_roebuck);
   level.extra_hero setgoalnode(node_extra_hero);
   wait(1.75);
-  for (i = 0; i < level.heroes.size; i++) {
+  for(i = 0; i < level.heroes.size; i++) {
     if(level.heroes[i] == level.roebuck) {
       goal_node = getnode("node_ambush_beat_3_roebuck", "targetname");
       level.roebuck disable_ai_color();
@@ -572,7 +572,7 @@ trap_checkers() {
   level thread anim_single(anim_guys, "mangrove_trap", undefined, undefined, anim_node);
   flag_wait("mangrove_ambush_guys_2");
   if(!flag("corsair_trap_about_to_explode")) {
-    for (i = 0; i < anim_guys.size; i++) {
+    for(i = 0; i < anim_guys.size; i++) {
       if(isDefined(anim_guys[i]) && isalive(anim_guys[i])) {
         anim_guys[i] notify("killanimscript");
         anim_guys[i].animname = "stand";
@@ -594,12 +594,12 @@ plane_trap_fx() {
   flag_wait("mangrove_ambush");
   flag_set("mangrove_click_sound");
   exploder(100);
-  temp_orig playsound("mangrove_explo");
+  temp_orig playSound("mangrove_explo");
   earthquake(0.65, 2.4, orig.origin, 1300);
   PlayRumbleOnPosition("explosion_generic", orig.origin);
   radiusdamage(orig.origin, 260, 90, 55);
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(distanceSquared(players[i].origin, orig.origin) < (270 * 270)) {
       players[i] shellshock("default", 1.75);
     }
@@ -609,7 +609,7 @@ plane_trap_fx() {
 plane_trap_click_fx(temp_orig) {
   level waittill("trap_sprung");
   wait(1.5);
-  temp_orig playsound("ambush_click");
+  temp_orig playSound("ambush_click");
 }
 
 #using_animtree("generic_human");
@@ -668,7 +668,7 @@ mangrove_extra_redshirt_trap_strat() {
 mangrove_ambush_guys_strat() {
   self endon("death");
   self thread magic_bullet_shield();
-  self setcandamage(false);
+  self setCanDamage(false);
   old_sight = self.maxSightDistSqrd;
   self.maxSightDistSqrd = 0;
   self.grenadeawareness = 0;
@@ -682,7 +682,7 @@ mangrove_ambush_guys_strat() {
   self disableaimassist();
   self toggleik(false);
   flag_wait("mangrove_ambush");
-  self setcandamage(true);
+  self setCanDamage(true);
   self stop_magic_bullet_shield();
   wait(RandomFloatRange(0.5, 1.25));
   self.activatecrosshair = true;
@@ -729,7 +729,7 @@ mangrove_ambush_guys_strat() {
 mangrove_ambush_guys_3_strat() {
   self endon("death");
   self thread magic_bullet_shield();
-  self setcandamage(false);
+  self setCanDamage(false);
   old_sight = self.maxSightDistSqrd;
   self.maxSightDistSqrd = 0;
   self.grenadeawareness = 0;
@@ -743,7 +743,7 @@ mangrove_ambush_guys_3_strat() {
   self disableaimassist();
   self toggleik(false);
   flag_wait("mangrove_ambush_guys_3");
-  self setcandamage(true);
+  self setCanDamage(true);
   self stop_magic_bullet_shield();
   self.activatecrosshair = true;
   self enableaimassist();
@@ -809,7 +809,7 @@ grenade_vignette() {
   event_text("in place. waiting to regroup nearby");
   regroup_trig = getent("trig_near_grenaders", "targetname");
   level thread gren_lookat_override();
-  while (1) {
+  while(1) {
     if(any_player_IsTouching(regroup_trig) || flag("mangrove_gren_lookat") || flag("trig_box_carry")) {
       break;
     }
@@ -932,7 +932,7 @@ box_detach_delay(guy_box_host) {
   angles = guy_box_host gettagangles("tag_weapon_left");
   box = spawn("script_model", orig);
   box.angles = angles;
-  box setmodel("static_peleliu_crate_jpn_clsd_char");
+  box setModel("static_peleliu_crate_jpn_clsd_char");
   guy_box_host detach("static_peleliu_crate_jpn_clsd_char", "tag_weapon_left");
 }
 
@@ -941,10 +941,10 @@ box_carry_drop() {
   level waittill("box_carry_stop");
   orig = self gettagorigin("tag_weapon_left");
   angles = self gettagangles("tag_weapon_left");
-  ground_trace = bullettrace(orig, orig - (0, 0, 100000), 0, undefined);
+  ground_trace = bulletTrace(orig, orig - (0, 0, 100000), 0, undefined);
   box = spawn("script_model", orig);
   box.angles = angles;
-  box setmodel("static_peleliu_crate_jpn_clsd_char");
+  box setModel("static_peleliu_crate_jpn_clsd_char");
   self detach("static_peleliu_crate_jpn_clsd_char", "tag_weapon_left");
   box moveto(ground_trace["position"] - (0, 0, 2), 0.2);
 }
@@ -954,7 +954,7 @@ box_carry_damage() {
   self waittill("damage");
   level notify("box_carry_stop");
   guys = get_ai_group_ai("box_carrier_ai");
-  for (i = 0; i < guys.size; i++) {
+  for(i = 0; i < guys.size; i++) {
     guys[i] notify("killanimscript");
     guys[i] thread box_carry_death_run();
   }
@@ -1003,7 +1003,7 @@ start_flame() {
   prepare_flame_bunker_aiming_origins();
   level.roebuck set_generic_run_anim("roebuck_run", true);
   amb_friends = simple_spawn("bunker_2_ambient_friendlies");
-  for (i = 0; i < amb_friends.size; i++) {
+  for(i = 0; i < amb_friends.size; i++) {
     amb_friends[i] forceteleport((-125, -8808, -31.4));
   }
   level.flamer = simple_spawn_single("flamer_guy", ::flamer_spawn_strat);
@@ -1031,7 +1031,7 @@ start_flamer_setup() {
   level.flamer.ignoresuppression = true;
   level.flamer.baseaccuracy = 0.05;
   level.flamer.dropweapon = false;
-  level.flamer setcandamage(false);
+  level.flamer setCanDamage(false);
   level.flamer thread magic_bullet_shield();
   level.flamer set_force_color("y");
 }
@@ -1061,7 +1061,7 @@ start_admin() {
   level thread skipto_fog_set();
   level.roebuck set_generic_run_anim("roebuck_run", true);
   forest_friends = simple_spawn("friend_forest_spawner");
-  for (i = 0; i < forest_friends.size; i++) {
+  for(i = 0; i < forest_friends.size; i++) {
     forest_friends[i] disable_replace_on_death();
     forest_friends[i].targetname = "forest_friendly";
     forest_friends[i] set_force_color("y");
@@ -1097,7 +1097,7 @@ start_airfield() {
   killspawner = 113;
   killspawner_2 = 207;
   spawners = GetSpawnerArray();
-  for (i = 0; i < spawners.size; i++) {
+  for(i = 0; i < spawners.size; i++) {
     if((isDefined(spawners[i].script_killspawner)) && (killspawner == spawners[i].script_killspawner || killspawner_2 == spawners[i].script_killspawner)) {
       spawners[i] Delete();
       deleted_spawners++;
@@ -1117,7 +1117,7 @@ start_airfield() {
   reinforcements = simple_spawn("friend_admin_spawner");
   extra_guy = simple_spawn("friend_admin_spawner_2");
   reinforcements = array_combine(reinforcements, extra_guy);
-  for (i = 0; i < reinforcements.size; i++) {
+  for(i = 0; i < reinforcements.size; i++) {
     reinforcements[i] forceteleport((2862, 190, 179));
   }
   start_teleport("orig_start_airfield");
@@ -1137,7 +1137,7 @@ start_aaguns() {
   reinforcements = simple_spawn("friend_admin_spawner");
   extra_guy = simple_spawn("friend_admin_spawner_2");
   reinforcements = array_combine(reinforcements, extra_guy);
-  for (i = 0; i < reinforcements.size; i++) {
+  for(i = 0; i < reinforcements.size; i++) {
     reinforcements[i] forceteleport((2932, 7240, 51.6));
   }
   start_teleport("start_airfield_napalm");
@@ -1170,7 +1170,7 @@ start_napalm() {
   extra_guy = simple_spawn("friend_admin_spawner_2");
   reinforcements = array_combine(reinforcements, extra_guy);
   getent("auto2608", "target") delete();
-  for (i = 0; i < reinforcements.size; i++) {
+  for(i = 0; i < reinforcements.size; i++) {
     reinforcements[i] forceteleport((2619.5, 8199, 124));
   }
   start_teleport("start_airfield_napalm_2");
@@ -1197,9 +1197,9 @@ skipto_fog_set() {
 
 airfield_temp_kill_axis() {
   level endon("stop_airfield_temp_kill_axis");
-  while (1) {
+  while(1) {
     ai = getaiarray("axis");
-    for (i = 0; i < ai.size; i++) {
+    for(i = 0; i < ai.size; i++) {
       ai[i] dodamage(70, (0, 0, 0));
     }
     wait(2);
@@ -1260,7 +1260,7 @@ bunkers() {
   level thread intro_tank_lookat();
   level notify("on_dry_land");
   array_thread(level.heroes, ::on_dry_land);
-  level.roebuck playsound("bunker_clear");
+  level.roebuck playSound("bunker_clear");
   bunkers_2();
 }
 
@@ -1366,7 +1366,7 @@ grass_camo_guys_1_strat() {
   if(isDefined(self.script_float)) {
     wait(self.script_float);
   }
-  self setcandamage(true);
+  self setCanDamage(true);
   if(isDefined(self.magic_bullet_shield) && self.magic_bullet_shield) {
     self stop_magic_bullet_shield();
   }
@@ -1386,7 +1386,7 @@ grass_surprise_half_shield(delay_time) {
   self.pel2_real_health = self.health;
   self.health = 10000;
   attacker = undefined;
-  while (self.health > 0) {
+  while(self.health > 0) {
     self waittill("damage", amount, attacker, direction_vec, point, type, modelName, tagName);
     type = tolower(type);
     if(!isplayer(attacker) && issubstr(type, "bullet")) {
@@ -1416,14 +1416,14 @@ grass_camo_halfshield_delay(delay_time) {
 grass_bunkers_surprise_damage(flag_name) {
   self endon("clear_ambush_fields");
   level endon(flag_name);
-  while (1) {
+  while(1) {
     self waittill("damage", amount, attacker);
     if(isplayer(attacker)) {
       if(amount >= self.mbs_oldhealth) {
         attacker giveachievement_wrapper("ANY_ACHIEVEMENT_GRASSJAP");
       }
       self stop_magic_bullet_shield();
-      self setcandamage(true);
+      self setCanDamage(true);
       self dodamage(amount, (0, 0, 0));
       self.pel2_startled = true;
       quick_text("grass surprise damage!");
@@ -1434,7 +1434,7 @@ grass_bunkers_surprise_damage(flag_name) {
 
 flamer_spawn_strat() {
   self thread magic_bullet_shield();
-  self setcandamage(false);
+  self setCanDamage(false);
   self.a.flamethrowerShootTime_min = 10000;
   self.a.flamethrowerShootTime_max = 15000;
   self.a.flamethrowerShootDelay_min = 0;
@@ -1513,7 +1513,7 @@ flamer_advance_bunkers() {
 flame_burst_ensure_dmg(vol_name) {
   wait(1.35);
   guys = getAIarrayTouchingVolume("axis", vol_name);
-  for (i = 0; i < guys.size; i++) {
+  for(i = 0; i < guys.size; i++) {
     guys[i].a.forceflamedeath = 1;
     guys[i] dodamage(guys[i].health + 50, (0, 0, 0));
   }
@@ -1521,7 +1521,7 @@ flame_burst_ensure_dmg(vol_name) {
 
 flame_burst(fire_spot, flag_notify) {
   level endon(flag_notify);
-  while (1) {
+  while(1) {
     self SetEntityTarget(fire_spot);
     wait(RandomFloatRange(2.75, 3.75));
     self ClearEntityTarget();
@@ -1602,7 +1602,7 @@ flamer_strat_fake_death(goal_node) {
   }
   self animscripts\shared::placeWeaponOn(self.primaryweapon, "none");
   self notify("stop_flamebunker_death_loop");
-  self setcandamage(true);
+  self setCanDamage(true);
   self stop_magic_bullet_shield();
   self dodamage(self.health + 1, (0, 0, 0));
 }
@@ -1618,7 +1618,7 @@ player_pickup_flamethrower(guy) {
   flamethrower_pickup = spawn("weapon_m2_flamethrower", flamethrower_origin, 1);
   flamethrower_pickup.angles = (0, 249, -90);
   flamethrower_pickup hide();
-  objective_string(3, & "PEL2_RETRIEVE_FLAME");
+  objective_string(3, &"PEL2_RETRIEVE_FLAME");
   objective_position(3, flamethrower_origin);
   objective_ring(3);
   autosave_by_name("Pel2 pickup flamethrower");
@@ -1635,10 +1635,10 @@ bunker_killed_but_not_flamed() {
 
 bunker_killed_with_barrels() {
   level endon("bunkers_flamed");
-  while (1) {
-    barrels = getentarray("bunker_barrels", "script_noteworthy");
+  while(1) {
+    barrels = getEntArray("bunker_barrels", "script_noteworthy");
     barrels_with_health = 0;
-    for (i = 0; i < barrels.size; i++) {
+    for(i = 0; i < barrels.size; i++) {
       if(barrels[i].health >= 0) {
         barrels_with_health++;
       }
@@ -1658,8 +1658,8 @@ bunker_killed_with_barrels() {
 }
 
 bunker_defenders_reduce_count() {
-  bunker_defender_spawners = getentarray("bunker_defenders", "targetname");
-  for (i = 0; i < bunker_defender_spawners.size; i++) {
+  bunker_defender_spawners = getEntArray("bunker_defenders", "targetname");
+  for(i = 0; i < bunker_defender_spawners.size; i++) {
     if(bunker_defender_spawners[i].count > 2) {
       bunker_defender_spawners[i].count = 2;
     }
@@ -1689,7 +1689,7 @@ mgs_targets_move() {
   level thread flame_move_target(mg_targets[3], 3.75);
   level thread flame_move_target(mg_targets[4], 3.25);
   flag_wait("bunkers_flamed");
-  for (i = 0; i < mg_targets.size; i++) {
+  for(i = 0; i < mg_targets.size; i++) {
     mg_targets[i] notify("stop_fakefire_mover");
     mg_targets[i] delete();
   }
@@ -1698,7 +1698,7 @@ mgs_targets_move() {
 bunker_distract(which_flag) {
   damage_total = 0;
   damage_trig = getent("trig_damage_end_bunker", "targetname");
-  while (level.bunker_mg_damage_total < 500) {
+  while(level.bunker_mg_damage_total < 500) {
     damage_trig waittill("damage", damage_amount, attacker);
     if(IsPlayer(attacker)) {
       level.bunker_mg_damage_total += damage_amount;
@@ -1767,7 +1767,7 @@ player_flame_bunker() {
   damage_total = 0;
   damage_trig = getent("trig_damage_end_bunker_flame", "targetname");
   flame_bunker_mg_damage_total = 0;
-  while (flame_bunker_mg_damage_total < 35000) {
+  while(flame_bunker_mg_damage_total < 35000) {
     damage_trig waittill("damage", damage_amount, attacker, direction_vec, point, type);
     type = tolower(type);
     if(IsPlayer(attacker) && type == "mod_burned" && damage_amount >= 5) {
@@ -1777,7 +1777,7 @@ player_flame_bunker() {
   }
   flag_set("bunker_window_1_flamed");
   level thread bunker_window_1_flamed_delay();
-  while (flame_bunker_mg_damage_total < 70000) {
+  while(flame_bunker_mg_damage_total < 70000) {
     damage_trig waittill("damage", damage_amount, attacker, direction_vec, point, type);
     type = tolower(type);
     if(IsPlayer(attacker) && type == "mod_burned" && damage_amount >= 5) {
@@ -1813,7 +1813,7 @@ flame_bunker_continue() {
   guy_1 = get_ai_group_ai("last_bunker_ai_1");
   guy_2 = get_ai_group_ai("last_bunker_ai_2");
   guys = array_combine(guy_1, guy_2);
-  for (i = 0; i < guys.size; i++) {
+  for(i = 0; i < guys.size; i++) {
     guys[i].a.special = "none";
     guys[i].a.forceflamedeath = 1;
   }
@@ -1830,7 +1830,7 @@ flame_bunker_continue() {
   level thread bunkers_flamed_fx();
   level thread flame_bunker_inside();
   level thread chain_bunker_flame_back();
-  for (i = 0; i < level.heroes.size; i++) {
+  for(i = 0; i < level.heroes.size; i++) {
     level.heroes[i].pacifist = 0;
     level.heroes[i].ignoreall = 0;
     level.heroes[i].ignoresuppression = 0;
@@ -1853,9 +1853,9 @@ flame_bunker_continue() {
 
 player_got_flamethrower_after_obj() {
   level endon("stop_flamer_fake_death");
-  while (!flag("player_got_flamethrower")) {
+  while(!flag("player_got_flamethrower")) {
     players = get_players();
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       if(players[i] HasWeapon("m2_flamethrower")) {
         flag_set("player_got_flamethrower");
         break;
@@ -1885,9 +1885,9 @@ bunkers_flame_pre_explosions() {
 chain_reaction_fx() {
   level endon("obj_flame_complete");
   fx_origins = getstructarray("orig_bunker_chain_reaction", "targetname");
-  while (1) {
+  while(1) {
     fx_orig = fx_origins[randomint(fx_origins.size)];
-    playfx(level._effect["bunker_chain_reaction"], fx_orig.origin, anglestoforward(fx_orig.angles));
+    playFX(level._effect["bunker_chain_reaction"], fx_orig.origin, anglesToForward(fx_orig.angles));
     wait(0.5);
   }
 }
@@ -1906,7 +1906,7 @@ blow_hole_in_bunker_wall() {
   exploder(202);
   exploder(201);
   temp_sound_orig = spawn("script_origin", fx_orig.origin);
-  temp_sound_orig playsound("wall_explo", "wall_explo_done");
+  temp_sound_orig playSound("wall_explo", "wall_explo_done");
   temp_sound_orig waittill("wall_explo_done");
   temp_sound_orig delete();
 }
@@ -1972,12 +1972,12 @@ flame_bunker_vo() {
   wait(2.0);
   level thread flame_bunker_get_flame_vo();
   level thread bunker_defenders_rhythm_stop();
-  while (!flag("player_got_flamethrower")) {
+  while(!flag("player_got_flamethrower")) {
     players = get_players();
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       if(players[i] HasWeapon("m2_flamethrower")) {
         flag_set("player_got_flamethrower");
-        objective_string(3, & "PEL2_FLAME_BUNKER");
+        objective_string(3, &"PEL2_FLAME_BUNKER");
         objective_position(3, (-281, -7098, -26));
         objective_ring(3);
         break;
@@ -1985,7 +1985,7 @@ flame_bunker_vo() {
     }
     wait(0.5);
   }
-  while (!flag("bunker_window_1_flamed")) {
+  while(!flag("bunker_window_1_flamed")) {
     random_int = randomint(100);
     if(random_int > 66) {
       play_vo(level.roebuck, "vo", "burn_those_mgs");
@@ -2005,7 +2005,7 @@ flame_bunker_get_flame_vo() {
   level endon("bunkers_flamed");
   wait(5);
   vo_just_played = false;
-  while (!flag("player_got_flamethrower")) {
+  while(!flag("player_got_flamethrower")) {
     flag_wait("flame_bunker_rhythm_stop");
     if(!vo_just_played) {
       wait(1.75);
@@ -2050,7 +2050,7 @@ chain_bunkers_entrance() {
 
 chain_bunkers_5() {
   level endon("trig_chain_bunkers_5");
-  while (1) {
+  while(1) {
     guys_count = get_specific_ai("47mm_2_noteworthy").size;
     guys_count += get_ai_group_count("bunker_2_back_ai");
     if(guys_count < 2) {
@@ -2068,7 +2068,7 @@ bunkers_end_heros_in_place() {
   assertex(hero_nodes.size >= level.heroes.size, "not enough goal_nodes for heroes!");
   suppression_target = convert_aiming_struct_to_origin("orig_flame_bunker_heroes_targ");
   level thread flame_move_target(suppression_target, 4);
-  for (i = 0; i < level.heroes.size; i++) {
+  for(i = 0; i < level.heroes.size; i++) {
     level.heroes[i].goalradius = 20;
     level.heroes[i] setgoalnode(hero_nodes[i]);
     level.heroes[i] thread bunkers_end_heroes_strat(hero_nodes[i]);
@@ -2081,7 +2081,7 @@ bunkers_end_heros_in_place() {
 
 bunkers_end_heroes_strat(goal) {
   level endon("bunkers_flamed");
-  self setcandamage(false);
+  self setCanDamage(false);
   self waittill("goal");
   self.pacifist = 1;
   self.pacifistwait = 0.05;
@@ -2094,7 +2094,7 @@ bunkers_end_heroes_strat(goal) {
   self.pacifist = 0;
   self.ignoreall = 0;
   self.ignoresuppression = 1;
-  while (1) {
+  while(1) {
     wait(5.25 + RandomFloat(0.5));
     self.bulletsinclip = 0;
     self ClearEntityTarget();
@@ -2114,7 +2114,7 @@ bunkers_end_heroes_vo() {
   level endon("bunker_suppressed_twice");
   wait(4);
   wait(1);
-  while (!flag("bunkers_flamed")) {
+  while(!flag("bunkers_flamed")) {
     level notify("suppressing_fire");
     wait(10);
   }
@@ -2126,7 +2126,7 @@ bunker_mg_killzone() {
   level.player_being_targetted = false;
   killzone_trigger = getent("trig_bunker_mg_killzone", "targetname");
   killzone_trigger_extra = getent("trig_bunker_mg_killzone_extra", "targetname");
-  while (!flag("bunkers_flamed")) {
+  while(!flag("bunkers_flamed")) {
     player_touching = get_player_touching(killzone_trigger);
     player_touching_2 = undefined;
     if(!RandomInt(9)) {
@@ -2156,9 +2156,9 @@ bunker_mg_killzone() {
 smoke_grenade_on_the_scene() {
   level endon("bunkers_flamed");
   trig = getent("trig_bunker_regroup", "targetname");
-  while (1) {
-    grenades = GetEntArray("grenade", "classname");
-    for (i = 0; i < grenades.size; i++) {
+  while(1) {
+    grenades = getEntArray("grenade", "classname");
+    for(i = 0; i < grenades.size; i++) {
       if(grenades[i].model == "projectile_us_smoke_grenade" && grenades[i] istouching(trig) && !isDefined(grenades[i].pel2_counted)) {
         grenades[i].pel2_counted = true;
         level.smoke_grenades_on_the_scene++;
@@ -2188,7 +2188,7 @@ guys_47mm_1_radius_expand() {
   change_noteworthy_goalradii("47mm_1_noteworthy", 465);
   at_gun = getent("bunker_gun_1", "targetname");
   at_gun notify("shut down arty");
-  for (i = 0; i < at_gun.arty_crew.size; i++) {
+  for(i = 0; i < at_gun.arty_crew.size; i++) {
     if(isDefined(at_gun.arty_crew[i]) && isalive(at_gun.arty_crew[i])) {
       at_gun.arty_crew[i] animscripts\shared::placeWeaponOn(at_gun.arty_crew[i].primaryweapon, "right");
     }
@@ -2205,7 +2205,7 @@ guys_47mm_2_radius_expand() {
     guys[0] thread bloody_death(true);
   }
   wait(0.05);
-  for (i = 0; i < guys.size; i++) {
+  for(i = 0; i < guys.size; i++) {
     if(!isDefined(guys[i]) || !isalive(guys[i])) {
       continue;
     }
@@ -2220,7 +2220,7 @@ guys_47mm_2_radius_expand() {
   }
   at_gun = getent("bunker_gun_2", "targetname");
   at_gun notify("shut down arty");
-  for (i = 0; i < at_gun.arty_crew.size; i++) {
+  for(i = 0; i < at_gun.arty_crew.size; i++) {
     if(isDefined(at_gun.arty_crew[i]) && isalive(at_gun.arty_crew[i])) {
       at_gun.arty_crew[i] animscripts\shared::placeWeaponOn(at_gun.arty_crew[i].primaryweapon, "right");
     }
@@ -2240,7 +2240,7 @@ guys_47mm_4_radius_expand() {
   change_noteworthy_goalradii("47mm_4_noteworthy", 450);
   at_gun = getent("bunker_gun_4", "targetname");
   at_gun notify("shut down arty");
-  for (i = 0; i < at_gun.arty_crew.size; i++) {
+  for(i = 0; i < at_gun.arty_crew.size; i++) {
     if(isDefined(at_gun.arty_crew[i]) && isalive(at_gun.arty_crew[i])) {
       at_gun.arty_crew[i] animscripts\shared::placeWeaponOn(at_gun.arty_crew[i].primaryweapon, "right");
     }
@@ -2310,7 +2310,7 @@ bunker_1_retreat() {
   goal_spots[goal_spots.size] = ((532, -9395, 1.5));
   goal_spots = array_randomize(goal_spots);
   assertex(goal_spots.size >= guys.size, "not enough goal_pos for guys!");
-  for (i = 0; i < guys.size; i++) {
+  for(i = 0; i < guys.size; i++) {
     if(isalive(guys[i])) {
       guys[i] thread bunker_1_retreat_strat_b(goal_spots[i]);
     }
@@ -2335,7 +2335,7 @@ bunker_stop_friendly_waves() {
   flag_set("trig_forest_friendlies");
   level.respawn_spawner = undefined;
   allies = getaiarray("allies");
-  for (i = 0; i < allies.size; i++) {
+  for(i = 0; i < allies.size; i++) {
     allies[i] disable_replace_on_death();
   }
 }
@@ -2363,7 +2363,7 @@ bunker_1_axis_banzai() {
   flag_wait("trig_marines_advance");
   wait(RandomIntRange(2, 4));
   guys = get_ai_group_ai("bunker_1_ai_chargers");
-  for (i = 0; i < guys.size; i++) {
+  for(i = 0; i < guys.size; i++) {
     guys[i].banzai_no_wait = 1;
     guys[i].ignoresuppression = 1;
     guys[i] thread maps\_banzai::banzai_force();
@@ -2372,8 +2372,8 @@ bunker_1_axis_banzai() {
 
 intro_guys_advance() {
   intro_guys = get_ai_group_ai("intro_igc_ai");
-  for (i = 0; i < intro_guys.size; i++) {
-    intro_guys[i] setcandamage(true);
+  for(i = 0; i < intro_guys.size; i++) {
+    intro_guys[i] setCanDamage(true);
     if(isDefined(intro_guys[i].script_noteworthy)) {
       intro_guys[i].moveplaybackrate = 1.3;
       intro_guys[i] thread maps\_spawner::go_to_node(getnode(intro_guys[i].script_noteworthy, "targetname"));
@@ -2385,7 +2385,7 @@ intro_guys_advance() {
 bunker_1_mgs_off() {
   wait(3);
   guys = get_ai_group_ai("intro_mg_ai");
-  for (i = 0; i < guys.size; i++) {
+  for(i = 0; i < guys.size; i++) {
     guys[i] StopUSeturret();
   }
 }
@@ -2410,7 +2410,7 @@ bunker_prepare_flame() {
   event_text("waiting to clear end bunkers");
   regroup_trig = getent("trig_bunker_regroup", "targetname");
   event_text("waiting to regroup");
-  while (1) {
+  while(1) {
     if(any_player_IsTouching(regroup_trig)) {
       break;
     }
@@ -2425,7 +2425,7 @@ bunker_defenders_rhythm_stop() {
   level endon("bunkers_flamed");
   turret_left = getent("flame_bunker_mg_l", "targetname");
   turret_right = getent("flame_bunker_mg_r", "targetname");
-  while (1) {
+  while(1) {
     wait(RandomIntRange(11, 13));
     guy_1 = get_ai_group_ai("last_bunker_ai_1");
     guy_2 = get_ai_group_ai("last_bunker_ai_2");
@@ -2483,14 +2483,14 @@ intro_tank_lookat() {
   vnode = getvehiclenode("node_intro_tank_die", "script_noteworthy");
   vnode waittill("trigger");
   tank = getent("intro_tank_1", "targetname");
-  playfx(level._effect["arty_dirt"], tank.origin, (1, 0, 0));
+  playFX(level._effect["arty_dirt"], tank.origin, (1, 0, 0));
   radiusdamage(tank.origin, 10, tank.health, tank.health);
 }
 
 intro_igc_friendlies_strat() {
   self endon("death");
   self thread magic_bullet_shield();
-  self setcandamage(false);
+  self setCanDamage(false);
   self.pacifist = true;
   self.ignoresuppression = true;
   self.baseAccuracy = 0.05;
@@ -2565,19 +2565,19 @@ mgs_focus_on_flamer() {
   mg_left SetTargetEntity(flamer_spot);
   mg_right SetTargetEntity(flamer_spot);
   guy_1 = get_ai_group_ai("last_bunker_ai_1");
-  for (i = 0; i < guy_1.size; i++) {
-    guy_1[i] setcandamage(false);
+  for(i = 0; i < guy_1.size; i++) {
+    guy_1[i] setCanDamage(false);
   }
   guy_2 = get_ai_group_ai("last_bunker_ai_2");
-  for (i = 0; i < guy_2.size; i++) {
-    guy_2[i] setcandamage(false);
+  for(i = 0; i < guy_2.size; i++) {
+    guy_2[i] setCanDamage(false);
   }
   flag_wait("flame_guy_killed");
   if(isDefined(guy_1[0])) {
-    guy_1[0] setcandamage(true);
+    guy_1[0] setCanDamage(true);
   }
   if(isDefined(guy_2[0])) {
-    guy_2[0] setcandamage(true);
+    guy_2[0] setCanDamage(true);
   }
   flag_clear("mgs_focus_on_flamer");
   level endon("bunkers_flamed");
@@ -2600,7 +2600,7 @@ flame_squad_remainder() {
   guys = get_ai_group_ai("bunker_2_ambient_friendlies_ai");
   goal_nodes = getnodearray("node_advance_end_bunkers", "targetname");
   assertex(goal_nodes.size >= guys.size, "not enough goal_nodes for guys!");
-  for (i = 0; i < guys.size; i++) {
+  for(i = 0; i < guys.size; i++) {
     guys[i] setgoalnode(goal_nodes[i]);
     guys[i] thread bunker_2_ambient_friendlies_strat();
   }
@@ -2612,12 +2612,12 @@ setup_drone_models() {
   level.drone_spawnFunction["axis"] = character\char_jap_pel2_rifle::main;
   level.drone_spawnFunction["allies"] = character\char_usa_marine_r_rifle::main;
   if(NumRemoteClients() > 1) {
-    spawners = GetEntArray("drone_axis", "targetname");
-    for (i = 0; i < spawners.size; i++) {
+    spawners = getEntArray("drone_axis", "targetname");
+    for(i = 0; i < spawners.size; i++) {
       spawners[i] delete();
     }
-    spawners = GetEntArray("drone_allies", "targetname");
-    for (i = 0; i < spawners.size; i++) {
+    spawners = getEntArray("drone_allies", "targetname");
+    for(i = 0; i < spawners.size; i++) {
       spawners[i] delete();
     }
   }
@@ -2637,18 +2637,18 @@ arty_fire_impacts(orig) {
   self endon("shut down arty");
   self endon("stop_arty_fire_loop");
   level endon("obj_bunkers_complete");
-  while (1) {
+  while(1) {
     self waittill("arty_fire");
     wait(0.5);
-    playfx(level._effect["arty_dirt"], orig + random_vector(40), (1, 0, 0));
+    playFX(level._effect["arty_dirt"], orig + random_vector(40), (1, 0, 0));
   }
 }
 
 arty_fake_fire_impacts(orig) {
   level endon("stop_fake_arty_2");
-  while (1) {
+  while(1) {
     wait(RandomFloatRange(3, 4.5));
-    playfx(level._effect["arty_dirt"], orig + random_vector(40), (1, 0, 0));
+    playFX(level._effect["arty_dirt"], orig + random_vector(40), (1, 0, 0));
   }
 }
 
@@ -2659,13 +2659,13 @@ bunker_1_47mm() {
   at_gun thread arty_fire_impacts((-1213.5, -11928.5, -59.7));
   array_thread(at_gun.arty_crew, ::set_ignoreme_on);
   at_gun maps\_artillery::arty_fire_without_move();
-  for (i = 0; i < at_gun.arty_crew.size; i++) {
+  for(i = 0; i < at_gun.arty_crew.size; i++) {
     if(isDefined(at_gun.arty_crew[i]) && isalive(at_gun.arty_crew[i])) {
       at_gun.arty_crew[i].goalradius = 400;
     }
   }
   wait(0.2);
-  for (i = 0; i < at_gun.arty_crew.size; i++) {
+  for(i = 0; i < at_gun.arty_crew.size; i++) {
     if(isDefined(at_gun.arty_crew[i]) && isalive(at_gun.arty_crew[i])) {
       if(at_gun.arty_crew[i].animname == "commander") {
         at_gun.arty_crew[i] dodamage(at_gun.arty_crew[i].health + 100, (0, 0, 0));
@@ -2685,13 +2685,13 @@ bunker_2_47mm() {
   at_gun thread arty_fire_impacts((-1294, -12475, -57.7));
   array_thread(at_gun.arty_crew, ::set_ignoreme_on);
   at_gun maps\_artillery::arty_fire_without_move();
-  for (i = 0; i < at_gun.arty_crew.size; i++) {
+  for(i = 0; i < at_gun.arty_crew.size; i++) {
     if(isDefined(at_gun.arty_crew[i]) && isalive(at_gun.arty_crew[i])) {
       at_gun.arty_crew[i].goalradius = 400;
     }
   }
   wait(0.2);
-  for (i = 0; i < at_gun.arty_crew.size; i++) {
+  for(i = 0; i < at_gun.arty_crew.size; i++) {
     if(isDefined(at_gun.arty_crew[i]) && isalive(at_gun.arty_crew[i])) {
       if(at_gun.arty_crew[i].animname == "commander") {
         at_gun.arty_crew[i] dodamage(at_gun.arty_crew[i].health + 100, (0, 0, 0));
@@ -2706,7 +2706,7 @@ bunker_4_47mm() {
   level waittill("spawnvehiclegroup" + 24);
   wait(0.05);
   at_gun = getent("bunker_gun_4", "targetname");
-  for (i = 0; i < at_gun.arty_crew.size; i++) {
+  for(i = 0; i < at_gun.arty_crew.size; i++) {
     at_gun.arty_crew[i].goalradius = 30;
     at_gun.arty_crew[i].ignoreme = true;
     at_gun.arty_crew[i].ignoreall = true;
@@ -2714,7 +2714,7 @@ bunker_4_47mm() {
     at_gun.arty_crew[i].pacifistwait = 0.05;
   }
   at_gun maps\_artillery::arty_fire_without_move();
-  for (i = 0; i < at_gun.arty_crew.size; i++) {
+  for(i = 0; i < at_gun.arty_crew.size; i++) {
     if(isDefined(at_gun.arty_crew[i]) && isalive(at_gun.arty_crew[i])) {
       at_gun.arty_crew[i].goalradius = 400;
     }
@@ -2725,9 +2725,9 @@ bunker_4_47mm() {
 
 battle_line_ambient_sound() {
   temp_sound_orig = spawn("script_origin", (-1167.89, -8756.53, -51.1988));
-  temp_sound_orig playloopsound("battle_line_jap");
+  temp_sound_orig playLoopSound("battle_line_jap");
   temp_sound_orig_2 = spawn("script_origin", (-2394.69, -8158.39, -51.1988));
-  temp_sound_orig_2 playloopsound("battle_line_us");
+  temp_sound_orig_2 playLoopSound("battle_line_us");
   flag_wait("trig_flame_bunker_exit");
   temp_sound_orig delete();
   temp_sound_orig_2 delete();
@@ -2736,31 +2736,31 @@ battle_line_ambient_sound() {
 spawn_bunkers_pickup_weapons() {
   flag_wait("trig_bunker_2_start");
   bunker_weapons = [];
-  bunker_weapons[0] = spawnstruct();
+  bunker_weapons[0] = spawnStruct();
   bunker_weapons[0].weapon_name = "weapon_type97_frag";
   bunker_weapons[0].origin = (-118.8, -6946.6, -23);
   bunker_weapons[0].angles = (270, 240.6, 0);
-  bunker_weapons[1] = spawnstruct();
+  bunker_weapons[1] = spawnStruct();
   bunker_weapons[1].weapon_name = "weapon_type97_frag";
   bunker_weapons[1].origin = (-120.7, -6933.9, -23);
   bunker_weapons[1].angles = (270, 318.4, 0);
-  bunker_weapons[2] = spawnstruct();
+  bunker_weapons[2] = spawnStruct();
   bunker_weapons[2].weapon_name = "weapon_nambu";
   bunker_weapons[2].origin = (-234, -6898.3, -12.5);
   bunker_weapons[2].angles = (0, 70.1, -90.0001);
-  bunker_weapons[3] = spawnstruct();
+  bunker_weapons[3] = spawnStruct();
   bunker_weapons[3].weapon_name = "weapon_type99_rifle";
   bunker_weapons[3].origin = (-405.6, -6903.9, -25.9);
   bunker_weapons[3].angles = (295.642, 99.2652, -72.4286);
-  bunker_weapons[4] = spawnstruct();
+  bunker_weapons[4] = spawnStruct();
   bunker_weapons[4].weapon_name = "weapon_type99_rifle";
   bunker_weapons[4].origin = (-407.7, -6898, -25.6);
   bunker_weapons[4].angles = (294.595, 149.005, 167.911);
-  bunker_weapons[5] = spawnstruct();
+  bunker_weapons[5] = spawnStruct();
   bunker_weapons[5].weapon_name = "weapon_type97_frag";
   bunker_weapons[5].origin = (84.8, -8512.4, -26.5);
   bunker_weapons[5].angles = (270, 318.4, 0);
-  bunker_weapons[6] = spawnstruct();
+  bunker_weapons[6] = spawnStruct();
   bunker_weapons[6].weapon_name = "weapon_type97_frag";
   bunker_weapons[6].origin = (-7.3, -8511.1, -27);
   bunker_weapons[6].angles = (270, 240.6, 0);
@@ -2829,41 +2829,41 @@ init_callbacks() {
 }
 
 setup_objectives() {
-  objective_add(1, "active", & "PEL2_SECURE_MANGROVE_AREA", (4032, -14250, -47));
+  objective_add(1, "active", &"PEL2_SECURE_MANGROVE_AREA", (4032, -14250, -47));
   objective_current(1);
   level waittill("obj_mangrove_complete");
   objective_state(1, "done");
-  objective_add(2, "active", & "PEL2_CLEAR_BUNKERS", (970, -10388, -42));
+  objective_add(2, "active", &"PEL2_CLEAR_BUNKERS", (970, -10388, -42));
   objective_current(2);
   level waittill("obj_bunkers_complete");
   objective_state(2, "done");
-  objective_add(3, "active", & "PEL2_FLAME_MG", (-244.7, -6972.4, -31));
+  objective_add(3, "active", &"PEL2_FLAME_MG", (-244.7, -6972.4, -31));
   objective_current(3);
   level waittill("obj_flame_complete");
-  objective_string(3, & "PEL2_ADVANCE_TOWARDS_AIRFIELD");
+  objective_string(3, &"PEL2_ADVANCE_TOWARDS_AIRFIELD");
   objective_position(3, (-301, -6976, -260));
   level waittill("obj_forest_complete");
   objective_state(3, "done");
-  objective_add(4, "active", & "PEL2_CLEAR_THE_BUILDING", (2605, -602, 37));
+  objective_add(4, "active", &"PEL2_CLEAR_THE_BUILDING", (2605, -602, 37));
   objective_current(4);
   level waittill("obj_building_complete");
-  objective_string(4, & "PEL2_ASSAULT_AIRFIELD");
+  objective_string(4, &"PEL2_ASSAULT_AIRFIELD");
   objective_position(4, (2755, 8112.7, 127));
   level waittill("obj_assault_airfield_complete");
-  objective_string(4, & "PEL2_GET_BAZOOKA");
+  objective_string(4, &"PEL2_GET_BAZOOKA");
   objective_position(4, (2704.9, 4525.2, -23.1));
   objective_ring(4);
   level waittill("obj_airfield_tanks_complete");
-  objective_add(5, "active", & "PEL2_AA_BUNKER", (4091, 7782, 58));
+  objective_add(5, "active", &"PEL2_AA_BUNKER", (4091, 7782, 58));
   objective_current(5);
   flag_wait("trig_last_aa_guys");
-  objective_string(5, & "PEL2_DESTROY_AA_GUNS_4");
+  objective_string(5, &"PEL2_DESTROY_AA_GUNS_4");
   wait_network_frame();
   level thread maps\pel2_airfield::last_aa_guns_objective();
   level waittill("obj_airfield_complete");
   objective_state(5, "done");
   flag_wait("last_counterattack_start");
-  objective_add(6, "active", & "PEL2_COUNTERATTACK", (2251.1, 8557.9, 124));
+  objective_add(6, "active", &"PEL2_COUNTERATTACK", (2251.1, 8557.9, 124));
   objective_current(6);
   level waittill("obj_counterattack_complete");
   objective_state(6, "done");
@@ -2896,7 +2896,7 @@ setup_objectives_skip() {
       return;
   }
   obj_index = 1;
-  while (obj_index <= obj_complete) {
+  while(obj_index <= obj_complete) {
     if(obj_index == 1) {
       level notify("obj_mangrove_complete");
     } else if(obj_index == 2) {

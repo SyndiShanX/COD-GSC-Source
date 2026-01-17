@@ -63,7 +63,7 @@ skipcreditscheck() {
   level.wanttoshowskip = 0;
   level endon("credits_ended");
 
-  for (;;) {
+  for(;;) {
     var_0 = skipbuttonpressed();
     var_1 = showskipbuttonpressed();
 
@@ -160,7 +160,7 @@ quitcredits() {
   wait(var_0);
   setdvar("credits_active", "0");
 
-  if(isdefined(level.credits_frommenu))
+  if(isDefined(level.credits_frommenu))
     changelevel("");
   else
     maps\_endmission::credits_end();

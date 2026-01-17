@@ -101,7 +101,7 @@ start_player_rain() {
   players = getLocalPlayers();
   while(1) {
     if(isDefined(players[0])) {
-      PlayFxOnTag(0, level._effect["player_rain"], players[0], "tag_origin");
+      playFXOnTag(0, level._effect["player_rain"], players[0], "tag_origin");
     }
     realwait(0.3);
   }
@@ -109,15 +109,15 @@ start_player_rain() {
 }
 
 coast_fog_triggers_init(localClientNum) {
-  lighthouse_array = GetEntArray(localClientNum, "lighthouseFog_interior", "targetname");
+  lighthouse_array = getEntArray(localClientNum, "lighthouseFog_interior", "targetname");
   array_thread(lighthouse_array, ::fog_trigger, ::lighthouse_fog_change, 1);
-  shipfront_array = GetEntArray(localClientNum, "shipFrontDeck_interior", "targetname");
+  shipfront_array = getEntArray(localClientNum, "shipFrontDeck_interior", "targetname");
   array_thread(shipfront_array, ::fog_trigger, ::shipfront_fog_change, 2);
-  shipback_array = GetEntArray(localClientNum, "shipMedium_interior", "targetname");
+  shipback_array = getEntArray(localClientNum, "shipMedium_interior", "targetname");
   array_thread(shipback_array, ::fog_trigger, ::shipback_fog_change, 3);
-  shipback_array = GetEntArray(localClientNum, "shipIce_interior", "targetname");
+  shipback_array = getEntArray(localClientNum, "shipIce_interior", "targetname");
   array_thread(shipback_array, ::fog_trigger, ::shipIce_fog_change, 4);
-  exterior_array = GetEntArray(localClientNum, "exteriorfog_trigger", "targetname");
+  exterior_array = getEntArray(localClientNum, "exteriorfog_trigger", "targetname");
   array_thread(exterior_array, ::fog_trigger, ::exterior_fog_change, 0);
 }
 

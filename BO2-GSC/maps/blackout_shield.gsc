@@ -62,13 +62,13 @@ shield_add_enemy(ai_enemy) {
 
 shield_run(e_victim, str_volume, str_scene_name) {
   level thread run_scene_and_delete(str_scene_name);
-  level.m_shield = spawnstruct();
+  level.m_shield = spawnStruct();
   wait 0.1;
-  a_rigs = getentarray("player_body", "targetname");
+  a_rigs = getEntArray("player_body", "targetname");
   m_player_rig = a_rigs[0];
   end_pos = getstruct("meat_shield_end_struct", "targetname");
   max_turn_dot = cos(40);
-  turning_center_vec = anglestoforward(end_pos.angles);
+  turning_center_vec = anglesToForward(end_pos.angles);
   level.m_shield.player_rig = m_player_rig;
   level.m_shield.victim = e_victim;
   level.m_shield.weapon = getent("shield_gun", "targetname");
@@ -90,22 +90,22 @@ shield_run(e_victim, str_volume, str_scene_name) {
   level.player hideviewmodel();
   level.player disableweapons();
   level.player playerlinktodelta(level.m_shield.player_rig, "tag_player", 1, 0, 0, 30, 0, 0);
-  valid_spaces = getentarray(str_volume, "targetname");
+  valid_spaces = getEntArray(str_volume, "targetname");
 
   while(!flag("meat_shield_done")) {
     invalid_space_fwd = 0;
 
     if(0) {
       pos_player = align_ent.origin;
-      fvec_player = anglestoforward(align_ent.angles);
+      fvec_player = anglesToForward(align_ent.angles);
       pos_victim = e_victim gettagorigin("tag_origin");
-      fvec_victim = anglestoforward(e_victim gettagangles("tag_origin"));
+      fvec_victim = anglesToForward(e_victim gettagangles("tag_origin"));
       draw_arrow_time(pos_player, pos_player + fvec_player * 64, (0, 1, 0), 0.1);
       draw_arrow_time(pos_victim, pos_victim + fvec_victim * 64, (1, 0, 0), 0.1);
     }
 
     if(level.m_shield.turn != 0.0) {
-      new_vec = anglestoforward((0, align_ent.angles[1] + level.m_shield.turn, 0));
+      new_vec = anglesToForward((0, align_ent.angles[1] + level.m_shield.turn, 0));
       new_vec_dot = vectordot(new_vec, turning_center_vec);
 
       if(new_vec_dot > max_turn_dot)

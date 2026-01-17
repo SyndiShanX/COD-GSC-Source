@@ -25,7 +25,7 @@ skipto_escape_bosses() {
   level.vh_player_soct thread watch_for_boost();
   nd_start = getvehiclenode(level.skipto_point + "_player_start", "script_noteworthy");
   level thread vehicle_switch(nd_start);
-  a_ai_targets = getentarray("ai_target", "script_noteworthy");
+  a_ai_targets = getEntArray("ai_target", "script_noteworthy");
   array_thread(a_ai_targets, ::add_spawn_function, ::set_lock_on_target, vectorscale((0, 0, 1), 45.0));
   add_spawn_function_veh("boss_apache", ::apache_setup);
   trigger_use("spawn_apache");
@@ -116,7 +116,7 @@ hotel_super_soct_condition() {
 
 player_hotel_collision_effects() {
   level.vh_player_soct dodamage(150, level.vh_player_soct.origin);
-  level.player playsound("exp_veh_large");
+  level.player playSound("exp_veh_large");
   power = 0.6;
   time = 0.8;
   earthquake(power, time, level.player.origin, 1500);
@@ -130,8 +130,7 @@ player_hotel_collision_effects() {
 hotel_super_soct_condition_vo() {
   level.vh_salazar_soct waittill("turn_left");
 
-  if(level.player.vehicle_state == 1) {
-  }
+  if(level.player.vehicle_state == 1) {}
 }
 
 hotel_drone_condition_vo() {
@@ -191,8 +190,7 @@ escape_bosses_vo() {
 takedown_apache_vo() {
   trigger_wait("apache_retreat");
 
-  if(level.player.vehicle_state == 2) {
-  }
+  if(level.player.vehicle_state == 2) {}
 }
 
 hack_triggers() {
@@ -202,9 +200,9 @@ hack_triggers() {
 }
 
 escape_boss_spawn_func() {
-  a_hallway_bad = getentarray("hotel_hallway_0", "targetname");
+  a_hallway_bad = getEntArray("hotel_hallway_0", "targetname");
   array_thread(a_hallway_bad, ::add_spawn_function, ::hallway_ai_logic);
-  a_factory_walkway_2 = getentarray("factory_walkway_2", "targetname");
+  a_factory_walkway_2 = getEntArray("factory_walkway_2", "targetname");
   array_thread(a_factory_walkway_2, ::add_spawn_function, ::soct_walkway_ai_logic);
   add_spawn_function_veh("hotel_block_l", ::hotel_blocker_soct_setup);
   add_spawn_function_veh("hotel_block_r", ::hotel_blocker_soct_setup);
@@ -230,7 +228,7 @@ hotel_left_garage_trigger() {
   e_trigger = getent("hotel_left_garage_trigger", "targetname");
   e_trigger waittill("trigger");
   wait 0.01;
-  a_ai = getentarray("hotel_left_garage_spawner", "targetname");
+  a_ai = getEntArray("hotel_left_garage_spawner", "targetname");
 
   for(i = 0; i < a_ai.size; i++) {
     e_ai = simple_spawn_single(a_ai[i]);
@@ -331,7 +329,7 @@ escape_boss_drone_logic() {
 
 elevator_logic(n_elevator_number, n_move_time) {
   self endon("being_deleted");
-  self setcandamage(1);
+  self setCanDamage(1);
   self.health = 512;
   self.is_alive = 1;
   ai_elevator = undefined;
@@ -382,7 +380,7 @@ elevator_fall_and_explode(v_dest_position) {
   while(self.origin[2] > 150)
     wait 0.05;
 
-  playfx(level._effect["blockade_explosion"], self.origin);
+  playFX(level._effect["blockade_explosion"], self.origin);
   self delete();
 }
 
@@ -592,9 +590,9 @@ drone_attack_silo() {
   vh_drone fire_turret(1);
   vh_drone fire_turret(2);
   wait 0.05;
-  e_target playsound("exp_veh_large");
-  e_target playsound("evt_watertower_collapse");
-  playfx(level._effect["blockade_explosion"], e_target.origin);
+  e_target playSound("exp_veh_large");
+  e_target playSound("evt_watertower_collapse");
+  playFX(level._effect["blockade_explosion"], e_target.origin);
   level notify("fxanim_silo_end_collapse_start");
   level notify("fxanim_catwalk_end_collapse_start");
   vh_drone waittill("stop_lookat");
@@ -695,7 +693,7 @@ pipe_zone_player_damage_override(e_inflictor, e_attacker, n_damage, n_flags, str
 
 play_delayed_impact_sound(num) {
   self waittill("movedone");
-  self playsound("evt_water_impact_0" + num);
+  self playSound("evt_water_impact_0" + num);
 }
 
 water_tower() {
@@ -792,7 +790,7 @@ hotel_approach_wall_hole_damage_trigger() {
     e_damage_trigger waittill("damage", n_damage, e_attacker, direction_vec, point, damagetype);
 
     if(isDefined(e_attacker) && e_attacker == level.player) {
-      a_ai = getentarray("hotel_0_ai", "targetname");
+      a_ai = getEntArray("hotel_0_ai", "targetname");
 
       if(isDefined(a_ai)) {
         for(i = 0; i < a_ai.size; i++) {
@@ -802,7 +800,7 @@ hotel_approach_wall_hole_damage_trigger() {
           e_ent thread ai_explosive_death(height, 30, delay);
         }
 
-        playfx(level._effect["blockade_explosion"], point);
+        playFX(level._effect["blockade_explosion"], point);
         break;
       }
     }
@@ -821,7 +819,7 @@ post_bosses_trigger() {
 warehouse_approach_catwalk_trigger() {
   e_trigger = getent("warehouse_approach_catwalk_trigger", "targetname");
   e_trigger waittill("trigger");
-  a_ai = getentarray("warehouse_approach_catwalk_spawner", "targetname");
+  a_ai = getEntArray("warehouse_approach_catwalk_spawner", "targetname");
 
   for(i = 0; i < a_ai.size; i++) {
     e_ai = simple_spawn_single(a_ai[i]);
@@ -836,7 +834,7 @@ warehouse_approach_chopper_trigger() {
   vh_drone thread drone_follow_linked_structs("warehouse_approach_chopper_path", 20, 1, 1, undefined, 0);
   vh_drone = spawn_vehicle_from_targetname("drone_respawner");
   vh_drone thread drone_follow_linked_structs("warehouse_approach_chopper1_1_path", 55, 1, 1, level.player, 1);
-  a_ai = getentarray("warehouse_approach_chopper_spawner", "targetname");
+  a_ai = getEntArray("warehouse_approach_chopper_spawner", "targetname");
 
   for(i = 0; i < a_ai.size; i++) {
     e_ai = simple_spawn_single(a_ai[i]);
@@ -976,7 +974,7 @@ enemy_runner_in_warehouse_spawner(delay) {
   if(isDefined(delay) && delay > 0)
     wait(delay);
 
-  a_spawners = getentarray("enemy_runner_in_warehouse_spawner", "targetname");
+  a_spawners = getEntArray("enemy_runner_in_warehouse_spawner", "targetname");
 
   if(isDefined(a_spawners)) {
     for(i = 0; i < a_spawners.size; i++) {

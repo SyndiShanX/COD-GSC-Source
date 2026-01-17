@@ -21,11 +21,11 @@ main() {
   maps\mp\_compass::setupminimap("compass_map_mp_castaway");
   setdvar("compassmaxrange", "2100");
   setdvar("bg_dog_swim_enabled", 1);
-  game["strings"]["war_callsign_a"] = & "MPUI_CALLSIGN_MAPNAME_A";
-  game["strings"]["war_callsign_b"] = & "MPUI_CALLSIGN_MAPNAME_B";
-  game["strings"]["war_callsign_c"] = & "MPUI_CALLSIGN_MAPNAME_C";
-  game["strings"]["war_callsign_d"] = & "MPUI_CALLSIGN_MAPNAME_D";
-  game["strings"]["war_callsign_e"] = & "MPUI_CALLSIGN_MAPNAME_E";
+  game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_MAPNAME_A";
+  game["strings"]["war_callsign_b"] = &"MPUI_CALLSIGN_MAPNAME_B";
+  game["strings"]["war_callsign_c"] = &"MPUI_CALLSIGN_MAPNAME_C";
+  game["strings"]["war_callsign_d"] = &"MPUI_CALLSIGN_MAPNAME_D";
+  game["strings"]["war_callsign_e"] = &"MPUI_CALLSIGN_MAPNAME_E";
   game["strings_menu"]["war_callsign_a"] = "@MPUI_CALLSIGN_MAPNAME_A";
   game["strings_menu"]["war_callsign_b"] = "@MPUI_CALLSIGN_MAPNAME_B";
   game["strings_menu"]["war_callsign_c"] = "@MPUI_CALLSIGN_MAPNAME_C";
@@ -45,7 +45,7 @@ main() {
   spawncollision("collision_clip_64x64x10", "collider", (357, 525, 129.5), vectorscale((0, 1, 0), 23.0));
   rock1 = spawn("script_model", (373.607, 484.974, 42.6));
   rock1.angles = (350.899, 243.975, 4.02471);
-  rock1 setmodel("p6_cas_rock_medium_02_trimmed");
+  rock1 setModel("p6_cas_rock_medium_02_trimmed");
   spawncollision("collision_physics_64x64x10", "collider", (479.5, 270, 75), (346.453, 344.758, 4.31137));
   spawncollision("collision_physics_64x64x10", "collider", (477.5, 270, 76), (349.833, 342.352, 15.9726));
   spawncollision("collision_physics_128x128x10", "collider", (1503, 186, 121), (16.2357, 331.376, -70.4431));

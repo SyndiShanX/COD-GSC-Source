@@ -10,7 +10,7 @@
 #using_animtree("generic_human");
 
 initWeapon(weapon, slot) {
-  self.weaponInfo[weapon] = spawnstruct();
+  self.weaponInfo[weapon] = spawnStruct();
   self.weaponInfo[weapon].position = "none";
   self.weaponInfo[weapon].hasClip = true;
   if(getWeaponClipModel(weapon) != "")
@@ -155,10 +155,10 @@ main() {
   self.exception["exposed"] = 1;
   self.exception["corner_normal"] = 1;
   keys = getArrayKeys(self.exception);
-  for (i = 0; i < keys.size; i++) {
+  for(i = 0; i < keys.size; i++) {
     clear_exception(keys[i]);
   }
-  self.old = spawnstruct();
+  self.old = spawnStruct();
   self.reacquire_state = 0;
   self thread setNameAndRank();
   self thread animscripts\squadManager::addToSquad();
@@ -171,13 +171,13 @@ main() {
 
 printEyeOffsetFromNode() {
   self endon("death");
-  while (1) {
+  while(1) {
     if(getdebugdvar("replay_debug") == "1")
       println("File: init.gsc. Function: printEyeOffsetFromNode() - INNER LOOP START\n");
     if(getdvarint("scr_eyeoffset") == self getentnum()) {
       if(isDefined(self.coverNode)) {
-        offset = self geteye() - self.coverNode.origin;
-        forward = anglestoforward(self.coverNode.angles);
+        offset = self getEye() - self.coverNode.origin;
+        forward = anglesToForward(self.coverNode.angles);
         right = anglestoright(self.coverNode.angles);
         trueoffset = (vectordot(right, offset), vectordot(forward, offset), offset[2]);
         println(trueoffset);
@@ -196,7 +196,7 @@ showLikelyEnemyPathDir() {
   self endon("death");
   if(getdvar("scr_showlikelyenemypathdir") == "")
     setdvar("scr_showlikelyenemypathdir", "-1");
-  while (1) {
+  while(1) {
     if(getdebugdvar("replay_debug") == "1")
       println("File: init.gsc. Function: showLikelyEnemyPathDir() - INNER LOOP START\n");
     if(getdvarint("scr_showlikelyenemypathdir") == self getentnum()) {
@@ -204,7 +204,7 @@ showLikelyEnemyPathDir() {
       dir = self getAnglesToLikelyEnemyPath();
       if(isDefined(dir))
         yaw = dir[1];
-      printpos = self.origin + (0, 0, 60) + anglestoforward((0, yaw, 0)) * 100;
+      printpos = self.origin + (0, 0, 60) + anglesToForward((0, yaw, 0)) * 100;
       line(self.origin + (0, 0, 60), printpos);
       if(isDefined(dir))
         print3d(printpos, "likelyEnemyPathDir: " + yaw, (1, 1, 1), 1, 0.5);
@@ -251,7 +251,7 @@ SetAmmoCounts() {}
 
 DoNothing() {}
 PollAllowedStancesThread() {
-  for (;;) {
+  for(;;) {
     if(self isStanceAllowed("stand")) {
       line[0] = "stand allowed";
       color[0] = (0, 1, 0);
@@ -275,7 +275,7 @@ PollAllowedStancesThread() {
     }
     aboveHead = self getshootatpos() + (0, 0, 30);
     offset = (0, 0, -10);
-    for (i = 0; i < line.size; i++) {
+    for(i = 0; i < line.size; i++) {
       textPos = (aboveHead[0] + (offset[0] * i), aboveHead[1] + (offset[1] * i), aboveHead[2] + (offset[2] * i));
       print3d(textPos, line[i], color[i], 1, 0.75);
     }
@@ -305,7 +305,7 @@ infiniteLoop(one, two, three, whatever) {
 empty(one, two, three, whatever) {}
 removeFirstArrayIndex(array) {
   newArray = [];
-  for (i = 1; i < array.size; i++)
+  for(i = 1; i < array.size; i++)
     newArray[newArray.size] = array[i];
   return newArray;
 }
@@ -320,7 +320,7 @@ lastSightUpdater() {
   thread previewAccuracy();
   lastEnemy = undefined;
   hasLastEnemySightPos = false;
-  for (;;) {
+  for(;;) {
     if(!isDefined(self.squad)) {
       wait(0.2);
       continue;
@@ -356,7 +356,7 @@ clearEnemy() {
 
 previewSightPos() {
   self endon("death");
-  for (;;) {
+  for(;;) {
     if(getdebugdvar("replay_debug") == "1")
       println("File: init.gsc. Function: previewSightPos() - INNER LOOP START\n");
     if(getdebugdvar("debug_lastsightpos") != "on") {
@@ -381,7 +381,7 @@ previewAccuracy() {
   if(level.offsetNum > 5)
     level.offsetNum = 1;
   self endon("death");
-  for (;;) {
+  for(;;) {
     if(getdebugdvar("debug_accuracypreview") != "on") {
       wait(1);
       continue;
@@ -393,7 +393,7 @@ previewAccuracy() {
 
 trackVelocity() {
   self endon("death");
-  for (;;) {
+  for(;;) {
     self.oldOrigin = self.origin;
     wait(0.2);
   }
@@ -402,11 +402,11 @@ trackVelocity() {
 enemyNotify() {
   self endon("death");
   if(1) return;
-  for (;;) {
+  for(;;) {
     self waittill("enemy");
     if(!isalive(self.enemy))
       continue;
-    while (IsPlayer(self.enemy)) {
+    while(IsPlayer(self.enemy)) {
       if(hasEnemySightPos())
         level.lastPlayerSighted = gettime();
       wait(2);
@@ -420,7 +420,7 @@ deathNotify() {
 }
 
 testLife() {
-  for (;;) {
+  for(;;) {
     if(!isalive(self)) {
       break;
     }
@@ -434,7 +434,7 @@ testLifeThink() {
   self endon("new test");
   self endon("killanimscript");
   assert(isalive(self));
-  for (;;) {
+  for(;;) {
     assertEX(isalive(self), "This should never be hittable due to endon killanimscript. Make your peace and prepare to die.");
     if(isalive(self))
       wait(0.05);
@@ -745,11 +745,11 @@ initMoveStartStopTransitions() {
   anim.coverTransPreDist = [];
   anim.coverTransAngles = [];
   anim.coverExitAngles = [];
-  for (i = 1; i <= 6; i++) {
+  for(i = 1; i <= 6; i++) {
     if(i == 5) {
       continue;
     }
-    for (j = 0; j < transTypes.size; j++) {
+    for(j = 0; j < transTypes.size; j++) {
       trans = transTypes[j];
       if(isDefined(anim.coverTrans[trans][i])) {
         anim.coverTransDist[trans][i] = getMoveDelta(anim.coverTrans[trans][i], 0, 1);
@@ -765,9 +765,9 @@ initMoveStartStopTransitions() {
   exposedTransTypes[0] = "exposed";
   exposedTransTypes[1] = "exposed_crouch";
   anim.longestExposedApproachDist = 0;
-  for (j = 0; j < exposedTransTypes.size; j++) {
+  for(j = 0; j < exposedTransTypes.size; j++) {
     trans = exposedTransTypes[j];
-    for (i = 7; i <= 9; i++) {
+    for(i = 7; i <= 9; i++) {
       if(isDefined(anim.coverTrans[trans][i])) {
         anim.coverTransDist[trans][i] = getMoveDelta(anim.coverTrans[trans][i], 0, 1);
         anim.coverTransAngles[trans][i] = getAngleDelta(anim.coverTrans[trans][i], 0, 1);
@@ -777,7 +777,7 @@ initMoveStartStopTransitions() {
         anim.coverExitAngles[trans][i] = getAngleDelta(anim.coverExit[trans][i], 0, 1);
       }
     }
-    for (i = 1; i <= 9; i++) {
+    for(i = 1; i <= 9; i++) {
       if(!isDefined(anim.coverTrans[trans][i])) {
         continue;
       }
@@ -804,7 +804,7 @@ initMoveStartStopTransitions() {
   anim.coverTransSplit["right_crouch"][9] = 0.349349;
   anim.coverExitSplit["right"][9] = 0.521522;
   anim.coverExitSplit["right_crouch"][9] = 0.664665;
-  for (i = 7; i <= 8; i++) {
+  for(i = 7; i <= 8; i++) {
     anim.coverTransPreDist["left"][i] = getMoveDelta(anim.coverTrans["left"][i], 0, getTransSplitTime("left", i));
     anim.coverTransDist["left"][i] = getMoveDelta(anim.coverTrans["left"][i], 0, 1) - anim.coverTransPreDist["left"][i];
     anim.coverTransAngles["left"][i] = getAngleDelta(anim.coverTrans["left"][i], 0, 1);
@@ -818,7 +818,7 @@ initMoveStartStopTransitions() {
     anim.coverExitPostDist["left_crouch"][i] = getMoveDelta(anim.coverExit["left_crouch"][i], 0, 1) - anim.coverExitDist["left_crouch"][i];
     anim.coverExitAngles["left_crouch"][i] = getAngleDelta(anim.coverExit["left"][i], 0, 1);
   }
-  for (i = 8; i <= 9; i++) {
+  for(i = 8; i <= 9; i++) {
     anim.coverTransPreDist["right"][i] = getMoveDelta(anim.coverTrans["right"][i], 0, getTransSplitTime("right", i));
     anim.coverTransDist["right"][i] = getMoveDelta(anim.coverTrans["right"][i], 0, 1) - anim.coverTransPreDist["right"][i];
     anim.coverTransAngles["right"][i] = getAngleDelta(anim.coverTrans["right"][i], 0, 1);
@@ -841,7 +841,7 @@ FindBestSplitTime(exitanim, isapproach, isright, arrayname, debugname) {
     bestsplit = -1;
     bestvalue = -100000000;
     bestdelta = (0, 0, 0);
-    for (i = 0; i < numiter; i++) {
+    for(i = 0; i < numiter; i++) {
       splitTime = 1.0 * i / (numiter - 1);
       delta = getMoveDelta(exitanim, 0, splitTime);
       if(isapproach)
@@ -886,8 +886,8 @@ FindBestSplitTime(exitanim, isapproach, isright, arrayname, debugname) {
       idealTransAngles[8] = 180;
       idealTransAngles[9] = -135;
       wait .05;
-      for (i = 1; i <= 9; i++) {
-        for (j = 0; j < transTypes.size; j++) {
+      for(i = 1; i <= 9; i++) {
+        for(j = 0; j < transTypes.size; j++) {
           trans = transTypes[j];
           idealAdd = 0;
           if(trans == "left" || trans == "left_crouch")
@@ -903,8 +903,8 @@ FindBestSplitTime(exitanim, isapproach, isright, arrayname, debugname) {
           }
         }
       }
-      for (i = 1; i <= 9; i++) {
-        for (j = 0; j < transTypes.size; j++) {
+      for(i = 1; i <= 9; i++) {
+        for(j = 0; j < transTypes.size; j++) {
           trans = transTypes[j];
           idealAdd = 0;
           if(trans == "left" || trans == "left_crouch")
@@ -997,9 +997,9 @@ FindBestSplitTime(exitanim, isapproach, isright, arrayname, debugname) {
       anim.animFlagNameIndex = 0;
       if(!isDefined(level.squadEnt))
         level.squadEnt = [];
-      anim.masterGroup["axis"] = spawnstruct();
+      anim.masterGroup["axis"] = spawnStruct();
       anim.masterGroup["axis"].sightTime = 0;
-      anim.masterGroup["allies"] = spawnstruct();
+      anim.masterGroup["allies"] = spawnStruct();
       anim.masterGroup["allies"].sightTime = 0;
       anim.scriptSquadGroup = [];
       initMoveStartStopTransitions();
@@ -1115,14 +1115,14 @@ FindBestSplitTime(exitanim, isapproach, isright, arrayname, debugname) {
     AITurnNotifies() {
       numTurnsThisFrame = 0;
       maxAIPerFrame = 3;
-      while (1) {
+      while(1) {
         ai = getAIArray();
         if(ai.size == 0) {
           wait .05;
           numTurnsThisFrame = 0;
           continue;
         }
-        for (i = 0; i < ai.size; i++) {
+        for(i = 0; i < ai.size; i++) {
           if(!isDefined(ai[i]))
             continue;
           ai[i] notify("do_slow_things");
@@ -1153,7 +1153,7 @@ FindBestSplitTime(exitanim, isapproach, isright, arrayname, debugname) {
     }
     beginGrenadeTracking() {
       self endon("death");
-      for (;;) {
+      for(;;) {
         self waittill("grenade_fire", grenade, weaponName);
         grenade thread grenade_earthQuake();
       }
@@ -1161,9 +1161,9 @@ FindBestSplitTime(exitanim, isapproach, isright, arrayname, debugname) {
     setupRandomTable() {
       anim.randomIntTableSize = 60;
       anim.randomIntTable = [];
-      for (i = 0; i < anim.randomIntTableSize; i++)
+      for(i = 0; i < anim.randomIntTableSize; i++)
         anim.randomIntTable[i] = i;
-      for (i = 0; i < anim.randomIntTableSize; i++) {
+      for(i = 0; i < anim.randomIntTableSize; i++) {
         switchwith = randomint(anim.randomIntTableSize);
         temp = anim.randomIntTable[i];
         anim.randomIntTable[i] = anim.randomIntTable[switchwith];

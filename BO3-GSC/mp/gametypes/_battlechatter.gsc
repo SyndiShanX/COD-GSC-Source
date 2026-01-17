@@ -19,20 +19,20 @@
 #namespace battlechatter;
 
 function autoexec __init__sytem__() {
-  system::register("battlechatter", & __init__, undefined, undefined);
+  system::register("battlechatter", &__init__, undefined, undefined);
 }
 
 function __init__() {
   level thread devgui_think();
-  callback::on_joined_team( & on_joined_team);
-  callback::on_connect( & on_player_connect);
-  callback::on_spawned( & on_player_spawned);
-  level.heroplaydialog = & play_dialog;
-  level.playgadgetready = & play_gadget_ready;
-  level.playgadgetactivate = & play_gadget_activate;
-  level.playgadgetsuccess = & play_gadget_success;
-  level.playpromotionreaction = & play_promotion_reaction;
-  level.playthrowhatchet = & play_throw_hatchet;
+  callback::on_joined_team(&on_joined_team);
+  callback::on_connect(&on_player_connect);
+  callback::on_spawned(&on_player_spawned);
+  level.heroplaydialog = &play_dialog;
+  level.playgadgetready = &play_gadget_ready;
+  level.playgadgetactivate = &play_gadget_activate;
+  level.playgadgetsuccess = &play_gadget_success;
+  level.playpromotionreaction = &play_promotion_reaction;
+  level.playthrowhatchet = &play_throw_hatchet;
   level.bcsounds = [];
   level.bcsounds["incoming_alert"] = [];
   level.bcsounds["incoming_alert"]["frag_grenade"] = "incomingFrag";
@@ -55,7 +55,7 @@ function __init__() {
   level.bcsounds["kill_dialog"]["seraph"] = "killEnforcer";
   level.bcsounds["kill_dialog"]["trapper"] = "killTrapper";
   level.bcsounds["kill_dialog"]["blackjack"] = "killBlackjack";
-  if(level.teambased && !isdefined(game["boostPlayersPicked"])) {
+  if(level.teambased && !isDefined(game["boostPlayersPicked"])) {
     game["boostPlayersPicked"] = [];
     foreach(team in level.teams) {
       game["boostPlayersPicked"][team] = 0;
@@ -108,7 +108,7 @@ function on_joined_team() {
   if(level.disableprematchmessages === 1) {
     return;
   }
-  if(isdefined(level.inprematchperiod) && level.inprematchperiod && (!(isdefined(self.pers["playedGameMode"]) && self.pers["playedGameMode"])) && isdefined(level.leaderdialog)) {
+  if(isDefined(level.inprematchperiod) && level.inprematchperiod && (!(isDefined(self.pers["playedGameMode"]) && self.pers["playedGameMode"])) && isDefined(level.leaderdialog)) {
     if(level.hardcoremode) {
       self globallogic_audio::leader_dialog_on_player(level.leaderdialog.starthcgamedialog, undefined, undefined, undefined, 1);
     } else {
@@ -162,7 +162,7 @@ function reset_dialog_fields() {
 
 function dialog_chance(chancekey) {
   dialogchance = mpdialog_value(chancekey);
-  if(!isdefined(dialogchance) || dialogchance <= 0) {
+  if(!isDefined(dialogchance) || dialogchance <= 0) {
     return 0;
   }
   if(dialogchance >= 100) {
@@ -172,15 +172,15 @@ function dialog_chance(chancekey) {
 }
 
 function mpdialog_value(mpdialogkey, defaultvalue) {
-  if(!isdefined(mpdialogkey)) {
+  if(!isDefined(mpdialogkey)) {
     return defaultvalue;
   }
   mpdialog = struct::get_script_bundle("mpdialog", "mpdialog_default");
-  if(!isdefined(mpdialog)) {
+  if(!isDefined(mpdialog)) {
     return defaultvalue;
   }
   structvalue = getstructfield(mpdialog, mpdialogkey);
-  if(!isdefined(structvalue)) {
+  if(!isDefined(structvalue)) {
     return defaultvalue;
   }
   return structvalue;
@@ -189,7 +189,7 @@ function mpdialog_value(mpdialogkey, defaultvalue) {
 function water_vox() {
   self endon("death");
   level endon("game_ended");
-  while (true) {
+  while(true) {
     interval = mpdialog_value("underwaterInterval", 0.05);
     if(interval <= 0) {
       assert(interval > 0, "");
@@ -263,7 +263,7 @@ function enemy_threat() {
   if(util::isprophuntgametype()) {
     return;
   }
-  while (true) {
+  while(true) {
     self waittill("weapon_ads");
     if(self hasperk("specialty_quieter")) {
       continue;
@@ -272,17 +272,17 @@ function enemy_threat() {
       continue;
     }
     closest_ally = self get_closest_player_ally(1);
-    if(!isdefined(closest_ally)) {
+    if(!isDefined(closest_ally)) {
       continue;
     }
     allyradius = mpdialog_value("enemyContactAllyRadius", 0);
     if(distancesquared(self.origin, closest_ally.origin) < (allyradius * allyradius)) {
-      eyepoint = self geteye();
-      dir = anglestoforward(self getplayerangles());
+      eyepoint = self getEye();
+      dir = anglesToForward(self getplayerangles());
       dir = dir * mpdialog_value("enemyContactDistance", 0);
       endpoint = eyepoint + dir;
-      traceresult = bullettrace(eyepoint, endpoint, 1, self);
-      if(isdefined(traceresult["entity"]) && traceresult["entity"].classname == "player" && traceresult["entity"].team != self.team) {
+      traceresult = bulletTrace(eyepoint, endpoint, 1, self);
+      if(isDefined(traceresult["entity"]) && traceresult["entity"].classname == "player" && traceresult["entity"].team != self.team) {
         if(dialog_chance("enemyContactChance")) {
           self thread play_dialog("threatInfantry", 1);
           level notify("level_enemy_spotted", self.team);
@@ -307,7 +307,7 @@ function killed_by_sniper(sniper) {
   if(dialog_chance("sniperKillChance")) {
     closest_ally = self get_closest_player_ally();
     allyradius = mpdialog_value("sniperKillAllyRadius", 0);
-    if(isdefined(closest_ally) && distancesquared(self.origin, closest_ally.origin) < (allyradius * allyradius)) {
+    if(isDefined(closest_ally) && distancesquared(self.origin, closest_ally.origin) < (allyradius * allyradius)) {
       closest_ally thread play_dialog("threatSniper", 1);
       sniper.spottedtime = gettime();
       sniper.spottedby = [];
@@ -332,49 +332,49 @@ function player_killed(attacker, killstreaktype) {
     return;
   }
   waittillframeend();
-  if(isdefined(killstreaktype)) {
-    if(!isdefined(level.killstreaks[killstreaktype]) || !isdefined(level.killstreaks[killstreaktype].threatonkill) || !level.killstreaks[killstreaktype].threatonkill || !dialog_chance("killstreakKillChance")) {
+  if(isDefined(killstreaktype)) {
+    if(!isDefined(level.killstreaks[killstreaktype]) || !isDefined(level.killstreaks[killstreaktype].threatonkill) || !level.killstreaks[killstreaktype].threatonkill || !dialog_chance("killstreakKillChance")) {
       return;
     }
     ally = get_closest_player_ally(1);
     allyradius = mpdialog_value("killstreakKillAllyRadius", 0);
-    if(isdefined(ally) && distancesquared(self.origin, ally.origin) < (allyradius * allyradius)) {
+    if(isDefined(ally) && distancesquared(self.origin, ally.origin) < (allyradius * allyradius)) {
       ally play_killstreak_threat(killstreaktype);
     }
   }
 }
 
 function say_kill_battle_chatter(attacker, weapon, victim, inflictor) {
-  if(weapon.skipbattlechatterkill || !isdefined(attacker) || !isplayer(attacker) || !isalive(attacker) || attacker isremotecontrolling() || attacker isinvehicle() || attacker isweaponviewonlylinked() || !isdefined(victim) || !isplayer(victim) || util::isprophuntgametype()) {
+  if(weapon.skipbattlechatterkill || !isDefined(attacker) || !isplayer(attacker) || !isalive(attacker) || attacker isremotecontrolling() || attacker isinvehicle() || attacker isweaponviewonlylinked() || !isDefined(victim) || !isplayer(victim) || util::isprophuntgametype()) {
     return;
   }
-  if(isdefined(inflictor) && !isplayer(inflictor) && inflictor.birthtime < attacker.spawntime) {
+  if(isDefined(inflictor) && !isplayer(inflictor) && inflictor.birthtime < attacker.spawntime) {
     return;
   }
   if(weapon.inventorytype == "hero") {
-    if(!isdefined(attacker.heroweaponkillcount)) {
+    if(!isDefined(attacker.heroweaponkillcount)) {
       attacker.heroweaponkillcount = 0;
     }
     attacker.heroweaponkillcount++;
-    if(!(isdefined(attacker.playedgadgetsuccess) && attacker.playedgadgetsuccess) && attacker.heroweaponkillcount === mpdialog_value("heroWeaponKillCount", 0)) {
+    if(!(isDefined(attacker.playedgadgetsuccess) && attacker.playedgadgetsuccess) && attacker.heroweaponkillcount === mpdialog_value("heroWeaponKillCount", 0)) {
       attacker thread play_gadget_success(weapon, "enemyKillDelay", victim);
       attacker thread hero_weapon_success_reaction();
     }
   } else {
-    if(isdefined(attacker.speedburston) && attacker.speedburston) {
-      if(!(isdefined(attacker.speedburstkill) && attacker.speedburstkill)) {
+    if(isDefined(attacker.speedburston) && attacker.speedburston) {
+      if(!(isDefined(attacker.speedburstkill) && attacker.speedburstkill)) {
         speedburstkilldist = mpdialog_value("speedBurstKillDistance", 0);
         if(distancesquared(attacker.origin, victim.origin) < (speedburstkilldist * speedburstkilldist)) {
           attacker.speedburstkill = 1;
         }
       }
     } else {
-      if(attacker _gadget_camo::camo_is_inuse() || (isdefined(attacker.gadget_camo_off_time) && (attacker.gadget_camo_off_time + (mpdialog_value("camoKillTime", 0) * 1000)) >= gettime())) {
-        if(!(isdefined(attacker.playedgadgetsuccess) && attacker.playedgadgetsuccess)) {
+      if(attacker _gadget_camo::camo_is_inuse() || (isDefined(attacker.gadget_camo_off_time) && (attacker.gadget_camo_off_time + (mpdialog_value("camoKillTime", 0) * 1000)) >= gettime())) {
+        if(!(isDefined(attacker.playedgadgetsuccess) && attacker.playedgadgetsuccess)) {
           attacker thread play_gadget_success(getweapon("gadget_camo"), "enemyKillDelay", victim);
         }
       } else if(dialog_chance("enemyKillChance")) {
-        if(isdefined(victim.spottedtime) && (victim.spottedtime + mpdialog_value("enemySniperKillTime", 0)) >= gettime() && array::contains(victim.spottedby, attacker) && dialog_chance("enemySniperKillChance")) {
+        if(isDefined(victim.spottedtime) && (victim.spottedtime + mpdialog_value("enemySniperKillTime", 0)) >= gettime() && array::contains(victim.spottedby, attacker) && dialog_chance("enemySniperKillChance")) {
           killdialog = attacker get_random_key("killSniper");
         } else {
           if(dialog_chance("enemyHeroKillChance")) {
@@ -389,7 +389,7 @@ function say_kill_battle_chatter(attacker, weapon, victim, inflictor) {
   }
   victim.spottedtime = undefined;
   victim.spottedby = undefined;
-  if(!isdefined(killdialog)) {
+  if(!isDefined(killdialog)) {
     return;
   }
   attacker thread wait_play_dialog(mpdialog_value("enemyKillDelay", 0), killdialog, 1, undefined, victim, "cancel_kill_dialog");
@@ -398,13 +398,13 @@ function say_kill_battle_chatter(attacker, weapon, victim, inflictor) {
 function grenade_tracking() {
   self endon("death");
   level endon("game_ended");
-  while (true) {
+  while(true) {
     self waittill("grenade_fire", grenade, weapon);
-    if(!isdefined(grenade.weapon) || !isdefined(grenade.weapon.rootweapon) || !dialog_chance("incomingProjectileChance")) {
+    if(!isDefined(grenade.weapon) || !isDefined(grenade.weapon.rootweapon) || !dialog_chance("incomingProjectileChance")) {
       continue;
     }
     dialogkey = level.bcsounds["incoming_alert"][grenade.weapon.rootweapon.name];
-    if(isdefined(dialogkey)) {
+    if(isDefined(dialogkey)) {
       waittime = mpdialog_value(level.bcsounds["incoming_delay"][grenade.weapon.rootweapon.name], 0.05);
       level thread incoming_projectile_alert(self, grenade, dialogkey, waittime);
     }
@@ -414,13 +414,13 @@ function grenade_tracking() {
 function missile_tracking() {
   self endon("death");
   level endon("game_ended");
-  while (true) {
+  while(true) {
     self waittill("missile_fire", missile, weapon);
-    if(!isdefined(missile.item) || !isdefined(missile.item.rootweapon) || !dialog_chance("incomingProjectileChance")) {
+    if(!isDefined(missile.item) || !isDefined(missile.item.rootweapon) || !dialog_chance("incomingProjectileChance")) {
       continue;
     }
     dialogkey = level.bcsounds["incoming_alert"][missile.item.rootweapon.name];
-    if(isdefined(dialogkey)) {
+    if(isDefined(dialogkey)) {
       waittime = mpdialog_value(level.bcsounds["incoming_delay"][missile.item.rootweapon.name], 0.05);
       level thread incoming_projectile_alert(self, missile, dialogkey, waittime);
     }
@@ -436,21 +436,21 @@ function incoming_projectile_alert(thrower, projectile, dialogkey, waittime) {
   if(util::isprophuntgametype()) {
     return;
   }
-  while (true) {
+  while(true) {
     wait(waittime);
     if(waittime > 0.2) {
       waittime = waittime / 2;
     }
-    if(!isdefined(projectile)) {
+    if(!isDefined(projectile)) {
       return;
     }
-    if(!isdefined(thrower) || thrower.team == "spectator") {
+    if(!isDefined(thrower) || thrower.team == "spectator") {
       return;
     }
     if(level.players.size) {
       closest_enemy = thrower get_closest_player_enemy(projectile.origin);
       incomingprojectileradius = mpdialog_value("incomingProjectileRadius", 0);
-      if(isdefined(closest_enemy) && distancesquared(projectile.origin, closest_enemy.origin) < (incomingprojectileradius * incomingprojectileradius)) {
+      if(isDefined(closest_enemy) && distancesquared(projectile.origin, closest_enemy.origin) < (incomingprojectileradius * incomingprojectileradius)) {
         closest_enemy thread play_dialog(dialogkey, 6);
         return;
       }
@@ -461,9 +461,9 @@ function incoming_projectile_alert(thrower, projectile, dialogkey, waittime) {
 function sticky_grenade_tracking() {
   self endon("death");
   level endon("game_ended");
-  while (true) {
+  while(true) {
     self waittill("grenade_stuck", grenade);
-    if(isalive(self) && isdefined(grenade) && isdefined(grenade.weapon)) {
+    if(isalive(self) && isDefined(grenade) && isDefined(grenade.weapon)) {
       if(grenade.weapon.rootweapon.name == "sticky_grenade") {
         self thread play_dialog("stuckSticky", 6);
       }
@@ -484,7 +484,7 @@ function hero_weapon_success_reaction() {
   allyradiussq = mpdialog_value("playerVoiceRadius", 0);
   allyradiussq = allyradiussq * allyradiussq;
   foreach(player in level.players) {
-    if(!isdefined(player) || !isalive(player) || player.sessionstate != "playing" || player == self || player.team != self.team) {
+    if(!isDefined(player) || !isalive(player) || player.sessionstate != "playing" || player == self || player.team != self.team) {
       continue;
     }
     distsq = distancesquared(self.origin, player.origin);
@@ -494,7 +494,7 @@ function hero_weapon_success_reaction() {
     allies[allies.size] = player;
   }
   wait(mpdialog_value("enemyKillDelay", 0) + 0.1);
-  while (self.playingdialog) {
+  while(self.playingdialog) {
     wait(0.5);
   }
   allies = arraysort(allies, self.origin);
@@ -531,13 +531,13 @@ function play_promotion_reaction() {
       continue;
     }
     dialogalias = player get_player_dialog_alias("promotionReaction");
-    if(!isdefined(dialogalias)) {
+    if(!isDefined(dialogalias)) {
       continue;
     }
     ally = player;
     break;
   }
-  if(isdefined(ally)) {
+  if(isDefined(ally)) {
     ally playsoundontag(dialogalias, "J_Head", undefined, self);
     ally thread wait_dialog_buffer(mpdialog_value("playerDialogBuffer", 0));
   }
@@ -551,7 +551,7 @@ function gametype_specific_battle_chatter(event, team) {
 function play_death_vox(body, attacker, weapon, meansofdeath) {
   dialogkey = self get_death_vox(weapon, meansofdeath);
   dialogalias = self get_player_dialog_alias(dialogkey);
-  if(isdefined(dialogalias)) {
+  if(isDefined(dialogalias)) {
     body playsoundontag(dialogalias, "J_Head");
   }
 }
@@ -560,7 +560,7 @@ function get_death_vox(weapon, meansofdeath) {
   if(self isplayerunderwater()) {
     return "exertDeathDrowned";
   }
-  if(isdefined(meansofdeath)) {
+  if(isDefined(meansofdeath)) {
     switch (meansofdeath) {
       case "MOD_BURNED": {
         return "exertDeathBurned";
@@ -570,7 +570,7 @@ function get_death_vox(weapon, meansofdeath) {
       }
     }
   }
-  if(isdefined(weapon) && meansofdeath !== "MOD_MELEE_WEAPON_BUTT") {
+  if(isDefined(weapon) && meansofdeath !== "MOD_MELEE_WEAPON_BUTT") {
     switch (weapon.rootweapon.name) {
       case "hatchet":
       case "hero_armblade":
@@ -589,7 +589,7 @@ function get_death_vox(weapon, meansofdeath) {
 }
 
 function play_killstreak_threat(killstreaktype) {
-  if(!isdefined(killstreaktype) || !isdefined(level.killstreaks[killstreaktype])) {
+  if(!isDefined(killstreaktype) || !isDefined(level.killstreaks[killstreaktype])) {
     return;
   }
   self thread play_dialog(level.killstreaks[killstreaktype].threatdialogkey, 1);
@@ -598,8 +598,8 @@ function play_killstreak_threat(killstreaktype) {
 function wait_play_dialog(waittime, dialogkey, dialogflags, dialogbuffer, enemy, endnotify) {
   self endon("death");
   level endon("game_ended");
-  if(isdefined(waittime) && waittime > 0) {
-    if(isdefined(endnotify)) {
+  if(isDefined(waittime) && waittime > 0) {
+    if(isDefined(endnotify)) {
       self endon(endnotify);
     }
     wait(waittime);
@@ -610,20 +610,20 @@ function wait_play_dialog(waittime, dialogkey, dialogflags, dialogbuffer, enemy,
 function play_dialog(dialogkey, dialogflags, dialogbuffer, enemy) {
   self endon("death");
   level endon("game_ended");
-  if(!isdefined(dialogkey) || !isplayer(self) || !isalive(self) || level.gameended) {
+  if(!isDefined(dialogkey) || !isplayer(self) || !isalive(self) || level.gameended) {
     return;
   }
-  if(!isdefined(dialogflags)) {
+  if(!isDefined(dialogflags)) {
     dialogflags = 0;
   }
   if(!level.allowspecialistdialog && (dialogflags & 16) == 0) {
     return;
   }
-  if(!isdefined(dialogbuffer)) {
+  if(!isDefined(dialogbuffer)) {
     dialogbuffer = mpdialog_value("playerDialogBuffer", 0);
   }
   dialogalias = self get_player_dialog_alias(dialogkey);
-  if(!isdefined(dialogalias)) {
+  if(!isDefined(dialogalias)) {
     return;
   }
   if(self isplayerunderwater() && !dialogflags & 8) {
@@ -640,7 +640,7 @@ function play_dialog(dialogkey, dialogflags, dialogbuffer, enemy) {
     self.playinggadgetreadydialog = 1;
   }
   if(dialogflags & 64) {
-    if(!isdefined(self.stolendialogindex)) {
+    if(!isDefined(self.stolendialogindex)) {
       self.stolendialogindex = 0;
     }
     dialogalias = (dialogalias + "_0") + self.stolendialogindex;
@@ -651,7 +651,7 @@ function play_dialog(dialogkey, dialogflags, dialogbuffer, enemy) {
     self playsoundontag(dialogalias, "J_Head");
   } else {
     if(dialogflags & 1) {
-      if(isdefined(enemy)) {
+      if(isDefined(enemy)) {
         self playsoundontag(dialogalias, "J_Head", self.team, enemy);
       } else {
         self playsoundontag(dialogalias, "J_Head", self.team);
@@ -670,7 +670,7 @@ function wait_dialog_buffer(dialogbuffer) {
   self endon("stop_dialog");
   level endon("game_ended");
   self.playingdialog = 1;
-  if(isdefined(dialogbuffer) && dialogbuffer > 0) {
+  if(isDefined(dialogbuffer) && dialogbuffer > 0) {
     wait(dialogbuffer);
   }
   self.playingdialog = 0;
@@ -691,11 +691,11 @@ function get_player_dialog_alias(dialogkey) {
     return undefined;
   }
   bundlename = self getmpdialogname();
-  if(!isdefined(bundlename)) {
+  if(!isDefined(bundlename)) {
     return undefined;
   }
   playerbundle = struct::get_script_bundle("mpdialog_player", bundlename);
-  if(!isdefined(playerbundle)) {
+  if(!isDefined(playerbundle)) {
     return undefined;
   }
   return globallogic_audio::get_dialog_bundle_alias(playerbundle, dialogkey);
@@ -705,13 +705,13 @@ function count_keys(bundle, dialogkey) {
   i = 0;
   field = dialogkey + i;
   fieldvalue = getstructfield(bundle, field);
-  while (isdefined(fieldvalue)) {
+  while(isDefined(fieldvalue)) {
     aliasarray[i] = fieldvalue;
     i++;
     field = dialogkey + i;
     fieldvalue = getstructfield(bundle, field);
   }
-  if(!isdefined(bundle.keycounts)) {
+  if(!isDefined(bundle.keycounts)) {
     bundle.keycounts = [];
   }
   bundle.keycounts[dialogkey] = i;
@@ -719,18 +719,18 @@ function count_keys(bundle, dialogkey) {
 
 function get_random_key(dialogkey) {
   bundlename = self getmpdialogname();
-  if(!isdefined(bundlename)) {
+  if(!isDefined(bundlename)) {
     return undefined;
   }
   playerbundle = struct::get_script_bundle("mpdialog_player", bundlename);
-  if(!isdefined(playerbundle) || !isdefined(playerbundle.keycounts) || !isdefined(playerbundle.keycounts[dialogkey])) {
+  if(!isDefined(playerbundle) || !isDefined(playerbundle.keycounts) || !isDefined(playerbundle.keycounts[dialogkey])) {
     return dialogkey;
   }
   return dialogkey + randomint(playerbundle.keycounts[dialogkey]);
 }
 
 function play_gadget_ready(weapon, userflip = 0) {
-  if(!isdefined(weapon)) {
+  if(!isDefined(weapon)) {
     return;
   }
   dialogkey = undefined;
@@ -816,7 +816,7 @@ function play_gadget_ready(weapon, userflip = 0) {
       return;
     }
   }
-  if(!(isdefined(self.isthief) && self.isthief) && (!(isdefined(self.isroulette) && self.isroulette))) {
+  if(!(isDefined(self.isthief) && self.isthief) && (!(isDefined(self.isroulette) && self.isroulette))) {
     self thread play_dialog(dialogkey);
     return;
   }
@@ -828,7 +828,7 @@ function play_gadget_ready(weapon, userflip = 0) {
       self stop_dialog();
       minwaittime = 0.05;
     }
-    if(isdefined(self.isthief) && self.isthief) {
+    if(isDefined(self.isthief) && self.isthief) {
       delaykey = "thiefFlipDelay";
     } else {
       delaykey = "rouletteFlipDelay";
@@ -836,7 +836,7 @@ function play_gadget_ready(weapon, userflip = 0) {
     waittime = mpdialog_value(delaykey, minwaittime);
     dialogflags = dialogflags + 64;
   } else {
-    if(isdefined(self.isthief) && self.isthief) {
+    if(isDefined(self.isthief) && self.isthief) {
       generickey = "thiefWeaponReady";
       repeatkey = "thiefWeaponRepeat";
       repeatthresholdkey = "thiefRepeatThreshold";
@@ -869,7 +869,7 @@ function play_gadget_ready(weapon, userflip = 0) {
 }
 
 function play_gadget_activate(weapon) {
-  if(!isdefined(weapon)) {
+  if(!isDefined(weapon)) {
     return;
   }
   dialogkey = undefined;
@@ -961,7 +961,7 @@ function play_gadget_activate(weapon) {
 }
 
 function play_gadget_success(weapon, waitkey, victim) {
-  if(!isdefined(weapon)) {
+  if(!isDefined(weapon)) {
     return;
   }
   dialogkey = undefined;
@@ -1047,7 +1047,7 @@ function play_gadget_success(weapon, waitkey, victim) {
       return;
     }
   }
-  if(isdefined(waitkey)) {
+  if(isDefined(waitkey)) {
     waittime = mpdialog_value(waitkey, 0);
   }
   dialogkey = dialogkey + "0";
@@ -1096,7 +1096,7 @@ function can_play_dialog(teamonly) {
   if(!isplayer(self) || !isalive(self) || self.playingdialog === 1 || self isplayerunderwater() || self isremotecontrolling() || self isinvehicle() || self isweaponviewonlylinked()) {
     return false;
   }
-  if(isdefined(teamonly) && !teamonly && self hasperk("specialty_quieter")) {
+  if(isDefined(teamonly) && !teamonly && self hasperk("specialty_quieter")) {
     return false;
   }
   return true;
@@ -1142,7 +1142,7 @@ function check_boost_start_conversation() {
   playerindex = 1;
   foreach(player in players) {
     playerdialog = player getmpdialogname();
-    for (i = playerindex; i < players.size; i++) {
+    for(i = playerindex; i < players.size; i++) {
       playeri = players[i];
       if(playerdialog != playeri getmpdialogname()) {
         pick_boost_players(player, playeri);
@@ -1163,7 +1163,7 @@ function game_end_vox(winner) {
   if(!level.allowspecialistdialog) {
     return;
   }
-  gameisdraw = !isdefined(winner) || (level.teambased && winner == "tie");
+  gameisdraw = !isDefined(winner) || (level.teambased && winner == "tie");
   foreach(player in level.players) {
     if(player issplitscreen()) {
       continue;
@@ -1171,14 +1171,14 @@ function game_end_vox(winner) {
     if(gameisdraw) {
       dialogkey = "boostDraw";
     } else {
-      if(level.teambased && isdefined(level.teams[winner]) && player.pers["team"] == winner || (!level.teambased && player == winner)) {
+      if(level.teambased && isDefined(level.teams[winner]) && player.pers["team"] == winner || (!level.teambased && player == winner)) {
         dialogkey = "boostWin";
       } else {
         dialogkey = "boostLoss";
       }
     }
     dialogalias = player get_player_dialog_alias(dialogkey);
-    if(isdefined(dialogalias)) {
+    if(isDefined(dialogalias)) {
       player playlocalsound(dialogalias);
     }
   }
@@ -1189,10 +1189,10 @@ function devgui_think() {
   setdvar("", "");
   setdvar("", "");
   setdvar("", "");
-  while (true) {
+  while(true) {
     wait(1);
     player = util::gethostplayer();
-    if(!isdefined(player)) {
+    if(!isDefined(player)) {
       continue;
     }
     spacing = getdvarfloat("", 0.25);
@@ -1261,7 +1261,7 @@ function test_other_dialog(delay) {
 }
 
 function test_player_dialog(delay) {
-  if(!isdefined(delay)) {
+  if(!isDefined(delay)) {
     delay = 0;
   }
   wait(delay);
@@ -1269,7 +1269,7 @@ function test_player_dialog(delay) {
 }
 
 function test_taacom_dialog(delay) {
-  if(!isdefined(delay)) {
+  if(!isDefined(delay)) {
     delay = 0;
   }
   wait(delay);
@@ -1277,7 +1277,7 @@ function test_taacom_dialog(delay) {
 }
 
 function test_commander_dialog(delay) {
-  if(!isdefined(delay)) {
+  if(!isDefined(delay)) {
     delay = 0;
   }
   wait(delay);

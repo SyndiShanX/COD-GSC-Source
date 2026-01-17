@@ -5,16 +5,16 @@
 *******************************************/
 
 setparent(var_0) {
-  if(isdefined(self.parent) && self.parent == var_0) {
+  if(isDefined(self.parent) && self.parent == var_0) {
     return;
   }
-  if(isdefined(self.parent))
+  if(isDefined(self.parent))
     self.parent removechild(self);
 
   self.parent = var_0;
   self.parent addchild(self);
 
-  if(isdefined(self.point))
+  if(isDefined(self.point))
     setpoint(self.point, self.relativepoint, self.xoffset, self.yoffset);
   else
     setpoint("TOPLEFT");
@@ -42,7 +42,7 @@ removechild(var_0) {
 }
 
 setpoint(var_0, var_1, var_2, var_3, var_4) {
-  if(!isdefined(var_4))
+  if(!isDefined(var_4))
     var_4 = 0;
 
   var_5 = getparent();
@@ -50,12 +50,12 @@ setpoint(var_0, var_1, var_2, var_3, var_4) {
   if(var_4)
     self moveovertime(var_4);
 
-  if(!isdefined(var_2))
+  if(!isDefined(var_2))
     var_2 = 0;
 
   self.xoffset = var_2;
 
-  if(!isdefined(var_3))
+  if(!isDefined(var_3))
     var_3 = 0;
 
   self.yoffset = var_3;
@@ -75,7 +75,7 @@ setpoint(var_0, var_1, var_2, var_3, var_4) {
   if(issubstr(var_0, "RIGHT"))
     self.alignx = "right";
 
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     var_1 = var_0;
 
   self.relativepoint = var_1;
@@ -191,7 +191,7 @@ updatebarscale(var_0, var_1) {
   self.bar.frac = var_0;
   self.bar setshader(self.bar.shader, var_2, self.height);
 
-  if(isdefined(var_1) && var_2 < self.width) {
+  if(isDefined(var_1) && var_2 < self.width) {
     if(var_1 > 0)
       self.bar scaleovertime((1 - var_0) / var_1, self.width, self.height);
     else if(var_1 < 0)
@@ -221,7 +221,7 @@ createfontstring(var_0, var_1) {
 }
 
 createserverfontstring(var_0, var_1, var_2) {
-  if(isdefined(var_2))
+  if(isDefined(var_2))
     var_3 = newteamhudelem(var_2);
   else
     var_3 = newhudelem();
@@ -243,7 +243,7 @@ createserverfontstring(var_0, var_1, var_2) {
 }
 
 createservertimer(var_0, var_1, var_2) {
-  if(isdefined(var_2))
+  if(isDefined(var_2))
     var_3 = newteamhudelem(var_2);
   else
     var_3 = newhudelem();
@@ -297,7 +297,7 @@ createicon(var_0, var_1, var_2) {
   var_3 setparent(level.uiparent);
   var_3.hidden = 0;
 
-  if(isdefined(var_0)) {
+  if(isDefined(var_0)) {
     var_3 setshader(var_0, var_1, var_2);
     var_3.shader = var_0;
   }
@@ -306,7 +306,7 @@ createicon(var_0, var_1, var_2) {
 }
 
 createservericon(var_0, var_1, var_2, var_3) {
-  if(isdefined(var_3))
+  if(isDefined(var_3))
     var_4 = newteamhudelem(var_3);
   else
     var_4 = newhudelem();
@@ -324,7 +324,7 @@ createservericon(var_0, var_1, var_2, var_3) {
   var_4 setparent(level.uiparent);
   var_4.hidden = 0;
 
-  if(isdefined(var_0)) {
+  if(isDefined(var_0)) {
     var_4 setshader(var_0, var_1, var_2);
     var_4.shader = var_0;
   }
@@ -333,7 +333,7 @@ createservericon(var_0, var_1, var_2, var_3) {
 }
 
 createserverbar(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(isdefined(var_4))
+  if(isDefined(var_4))
     var_6 = newteamhudelem(var_4);
   else
     var_6 = newhudelem();
@@ -347,10 +347,10 @@ createserverbar(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 setshader("progress_bar_fill", var_1, var_2);
   var_6.hidden = 0;
 
-  if(isdefined(var_3))
+  if(isDefined(var_3))
     var_6.flashfrac = var_3;
 
-  if(isdefined(var_4))
+  if(isDefined(var_4))
     var_7 = newteamhudelem(var_4);
   else
     var_7 = newhudelem();
@@ -384,7 +384,7 @@ createbar(var_0, var_1, var_2, var_3) {
   var_4 setshader("progress_bar_fill", var_1, var_2);
   var_4.hidden = 0;
 
-  if(isdefined(var_3))
+  if(isDefined(var_3))
     var_4.flashfrac = var_3;
 
   var_5 = newclienthudelem(self);
@@ -407,7 +407,7 @@ createbar(var_0, var_1, var_2, var_3) {
 getcurrentfraction() {
   var_0 = self.bar.frac;
 
-  if(isdefined(self.bar.rateofchange)) {
+  if(isDefined(self.bar.rateofchange)) {
     var_0 = var_0 + (gettime() - self.bar.lastupdatetime) * self.bar.rateofchange / 1000;
 
     if(var_0 > 1)
@@ -421,10 +421,10 @@ getcurrentfraction() {
 }
 
 createprimaryprogressbar(var_0, var_1) {
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     var_0 = 0;
 
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     var_1 = 0;
 
   if(self issplitscreenplayer())
@@ -436,10 +436,10 @@ createprimaryprogressbar(var_0, var_1) {
 }
 
 createprimaryprogressbartext(var_0, var_1) {
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     var_0 = 0;
 
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     var_1 = 0;
 
   if(self issplitscreenplayer())
@@ -508,7 +508,7 @@ flashthread() {
   if(!self.hidden)
     self.alpha = 1;
 
-  for (;;) {
+  for(;;) {
     if(self.frac >= self.flashfrac) {
       if(!self.hidden) {
         self fadeovertime(0.3);
@@ -532,12 +532,12 @@ flashthread() {
 destroyelem() {
   var_0 = [];
 
-  for (var_1 = 0; var_1 < self.children.size; var_1++) {
-    if(isdefined(self.children[var_1]))
+  for(var_1 = 0; var_1 < self.children.size; var_1++) {
+    if(isDefined(self.children[var_1]))
       var_0[var_0.size] = self.children[var_1];
   }
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++)
     var_0[var_1] setparent(getparent());
 
   if(self.elemtype == "bar" || self.elemtype == "bar_shader")
@@ -573,7 +573,7 @@ setsize(var_0, var_1) {
 }
 
 updatechildren() {
-  for (var_0 = 0; var_0 < self.children.size; var_0++) {
+  for(var_0 = 0; var_0 < self.children.size; var_0++) {
     var_1 = self.children[var_0];
     var_1 setpoint(var_1.point, var_1.relativepoint, var_1.xoffset, var_1.yoffset);
   }
@@ -585,7 +585,7 @@ transitionreset() {
 
   if(self.elemtype == "font") {
     self.fontscale = self.basefontscale;
-    self.label = & "";
+    self.label = &"";
   } else if(self.elemtype == "icon")
     self setshader(self.shader, self.width, self.height);
 
@@ -622,7 +622,7 @@ transitionpulsefxin(var_0, var_1) {
 }
 
 transitionslidein(var_0, var_1) {
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     var_1 = "left";
 
   switch (var_1) {
@@ -646,7 +646,7 @@ transitionslidein(var_0, var_1) {
 }
 
 transitionslideout(var_0, var_1) {
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     var_1 = "left";
 
   var_2 = self.xoffset;
@@ -688,7 +688,7 @@ transitionzoomout(var_0) {
 transitionfadein(var_0) {
   self fadeovertime(var_0);
 
-  if(isdefined(self.maxalpha))
+  if(isDefined(self.maxalpha))
     self.alpha = self.maxalpha;
   else
     self.alpha = 1;
@@ -762,7 +762,7 @@ ch_setstate(var_0, var_1) {
 ch_gettarget(var_0, var_1) {
   var_2 = tablelookup("mp\allChallengesTable.csv", 0, var_0, 10 + (var_1 - 1) * 2);
 
-  if(isdefined(var_2) && var_2 != "")
+  if(isDefined(var_2) && var_2 != "")
     return int(var_2);
 
   return 0;
@@ -778,7 +778,7 @@ displayclientstring(var_0, var_1, var_2, var_3) {
   var_4 settext(var_0);
   common_scripts\utility::waittill_any(var_3, "joined_team", "death");
 
-  if(isdefined(var_4))
+  if(isDefined(var_4))
     var_4 destroyelem();
 }
 
@@ -795,7 +795,7 @@ processviaitemstatsstate(var_0) {
   var_1 = processviaitemstatsprogress(var_0);
   var_2 = 1;
 
-  for (var_3 = ch_gettarget(var_0, var_2); var_3 > 0 && var_1 >= var_3; var_3 = ch_gettarget(var_0, var_2))
+  for(var_3 = ch_gettarget(var_0, var_2); var_3 > 0 && var_1 >= var_3; var_3 = ch_gettarget(var_0, var_2))
     var_2++;
 
   return var_2;
@@ -806,26 +806,26 @@ totalallweaponvariants(var_0, var_1) {
   var_3 = 0;
   var_4 = strtok(var_0, "_");
 
-  for (var_5 = 0; var_5 < var_4.size - 1; var_5++) {
+  for(var_5 = 0; var_5 < var_4.size - 1; var_5++) {
     if(var_4[var_5] == var_1) {
       var_2 = var_4[var_5 + 1];
       break;
     }
   }
 
-  if(isdefined(var_2)) {
-    for (var_6 = tablelookuprownum("mp\statstable.csv", 59, var_2); var_6 >= 0; var_6 = tablelookuprownum("mp\statstable.csv", 59, var_2, var_6 - 1)) {
+  if(isDefined(var_2)) {
+    for(var_6 = tablelookuprownum("mp\statstable.csv", 59, var_2); var_6 >= 0; var_6 = tablelookuprownum("mp\statstable.csv", 59, var_2, var_6 - 1)) {
       var_7 = tablelookupbyrow("mp\statstable.csv", var_6, 4);
       var_3 = var_3 + self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "weaponStats", var_7, var_1);
     }
 
-    if(var_1 == "kills" && isdefined(self.trackingweaponkills))
+    if(var_1 == "kills" && isDefined(self.trackingweaponkills))
       var_3 = var_3 + self.trackingweaponkills;
 
-    if(var_1 == "hipfirekills" && isdefined(self.trackingweaponhipfirekills))
+    if(var_1 == "hipfirekills" && isDefined(self.trackingweaponhipfirekills))
       var_3 = var_3 + self.trackingweaponhipfirekills;
 
-    if(var_1 == "headShots" && isdefined(self.trackingweaponheadshots))
+    if(var_1 == "headShots" && isDefined(self.trackingweaponheadshots))
       var_3 = var_3 + self.trackingweaponheadshots;
 
     var_8 = self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "attachUnlock_" + var_1, var_2);

@@ -225,7 +225,7 @@ vehicle_get_riders() {
 get_my_vehicleride() {
   array = [];
   assertex(isDefined(self.script_vehicleride), "Tried to get my ride but I have no .script_vehicleride");
-  vehicles = getentarray("script_vehicle", "classname");
+  vehicles = getEntArray("script_vehicle", "classname");
   for(i = 0; i < vehicles.size; i++) {
     vehicle = vehicles[i];
     if(!isDefined(vehicle.script_vehicleride))
@@ -1255,9 +1255,7 @@ guy_vehicle_death(guy) {
   if(isDefined(guy)) {
     origin = guy.origin;
     guy delete();
-    [
-      [level.global_kill_func]
-    ]("MOD_RIFLE_BULLET", "torso_upper", origin);
+    [[level.global_kill_func]]("MOD_RIFLE_BULLET", "torso_upper", origin);
   }
 }
 
@@ -1462,7 +1460,7 @@ guy_blowup(guy) {
   angles = self.angles;
   origin = guy.origin;
   if(isDefined(anim_pos.explosion_death_offset)) {
-    origin += vector_scale(anglestoforward(angles), anim_pos.explosion_death_offset[0]);
+    origin += vector_scale(anglesToForward(angles), anim_pos.explosion_death_offset[0]);
     origin += vector_scale(anglestoright(angles), anim_pos.explosion_death_offset[1]);
     origin += vector_scale(anglestoup(angles), anim_pos.explosion_death_offset[2]);
   }
@@ -1532,7 +1530,7 @@ vehicle_getInstart(pos) {
 }
 
 vehicle_getanimstart(animation, tag, pos) {
-  struct = spawnstruct();
+  struct = spawnStruct();
   origin = undefined;
   angles = undefined;
   assert(isDefined(animation));
@@ -1559,7 +1557,7 @@ get_availablepositions() {
       }
     }
   }
-  struct = spawnstruct();
+  struct = spawnStruct();
   struct.availablepositions = availablepositions;
   struct.nonanimatedpositions = nonanimatedpositions;
   return struct;
@@ -1789,7 +1787,7 @@ override_anim(action, tag, animation) {
   pos = anim_pos_from_tag(self, tag);
   AssertEx(isDefined(pos), "_vehicle_aianim::override_anim - No valid position set up for tag '" + tag + "' on vehicle of type '" + self.vehicletype + "'.");
   if(!isDefined(self.vehicle_aianims) || !isDefined(self.vehicle_aianims[pos])) {
-    self.vehicle_aianims[pos] = SpawnStruct();
+    self.vehicle_aianims[pos] = spawnStruct();
   }
   switch (action) {
     case "getin":

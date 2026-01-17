@@ -8,8 +8,8 @@
 #include maps\_zombiemode_utility;
 
 init_elec_trap_trigs() {
-  trap_trigs = getentarray("elec_trap_trig", "targetname");
-  for (i = 0; i < trap_trigs.size; i++) {
+  trap_trigs = getEntArray("elec_trap_trig", "targetname");
+  for(i = 0; i < trap_trigs.size; i++) {
     trap_trigs[i] thread electric_trap_think();
     trap_trigs[i] thread electric_trap_dialog();
     wait_network_frame();
@@ -20,10 +20,10 @@ electric_trap_dialog() {
   self endon("warning_dialog");
   level endon("switch_flipped");
   timer = 0;
-  while (1) {
+  while(1) {
     wait(0.5);
     players = get_players();
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       dist = distancesquared(players[i].origin, self.origin);
       if(dist > 70 * 70) {
         timer = 0;
@@ -49,7 +49,7 @@ electric_trap_think() {
   self.zombie_cost = 1000;
   self.in_use = 0;
   level thread maps\nazi_zombie_sumpf::turnLightGreen(self.script_string);
-  while (1) {
+  while(1) {
     self waittill("trigger", who);
     if(who in_revive_trigger()) {
       continue;
@@ -103,7 +103,7 @@ add_trap_dialog() {
     if(!isDefined(self.vox_trap_barrel)) {
       num_variants = maps\_zombiemode_spawner::get_number_variants(player_index + "vox_trap_barrel");
       self.vox_trap_barrel = [];
-      for (i = 0; i < num_variants; i++) {
+      for(i = 0; i < num_variants; i++) {
         self.vox_trap_barrel[self.vox_trap_barrel.size] = "vox_trap_barrel_" + i;
       }
       self.vox_trap_barrel_available = self.vox_trap_barrel;
@@ -121,28 +121,28 @@ electric_trap_move_switch(parent) {
   tswitch = getent(parent.script_linkto, "script_linkname");
   if(tswitch.script_linkname == "110") {
     tswitch rotatepitch(180, .5);
-    tswitch playsound("amb_sparks_l_b");
+    tswitch playSound("amb_sparks_l_b");
     tswitch waittill("rotatedone");
     self notify("switch_activated");
     self waittill("available");
     tswitch rotatepitch(-180, .5);
   } else if(tswitch.script_linkname == "111") {
     tswitch rotatepitch(180, .5);
-    tswitch playsound("amb_sparks_l_b");
+    tswitch playSound("amb_sparks_l_b");
     tswitch waittill("rotatedone");
     self notify("switch_activated");
     self waittill("available");
     tswitch rotatepitch(-180, .5);
   } else if(tswitch.script_linkname == "112") {
     tswitch rotatepitch(180, .5);
-    tswitch playsound("amb_sparks_l_b");
+    tswitch playSound("amb_sparks_l_b");
     tswitch waittill("rotatedone");
     self notify("switch_activated");
     self waittill("available");
     tswitch rotatepitch(-180, .5);
   } else if(tswitch.script_linkname == "113") {
     tswitch rotatepitch(180, .5);
-    tswitch playsound("amb_sparks_l_b");
+    tswitch playSound("amb_sparks_l_b");
     tswitch waittill("rotatedone");
     self notify("switch_activated");
     self waittill("available");
@@ -153,7 +153,7 @@ electric_trap_move_switch(parent) {
 activate_electric_trap(who) {
   clientnotify(self.target);
   fire_points = getstructarray(self.target, "targetname");
-  for (i = 0; i < fire_points.size; i++) {
+  for(i = 0; i < fire_points.size; i++) {
     wait_network_frame();
     fire_points[i] thread electric_trap_fx(self);
   }
@@ -163,8 +163,8 @@ activate_electric_trap(who) {
 
 electric_trap_fx(notify_ent) {
   self.tag_origin = spawn("script_model", self.origin);
-  self.tag_origin playsound("elec_start");
-  self.tag_origin playloopsound("elec_loop");
+  self.tag_origin playSound("elec_start");
+  self.tag_origin playLoopSound("elec_loop");
   self thread play_electrical_sound();
   wait(25);
   if(isDefined(self.script_sound)) {
@@ -177,14 +177,14 @@ electric_trap_fx(notify_ent) {
 
 play_electrical_sound() {
   level endon("arc_done");
-  while (1) {
+  while(1) {
     wait(randomfloatrange(0.1, 0.5));
     playsoundatposition("elec_arc", self.origin);
   }
 }
 
 elec_barrier_damage(who) {
-  while (1) {
+  while(1) {
     self waittill("trigger", ent);
     if(isplayer(ent)) {
       ent thread player_elec_damage();
@@ -224,7 +224,7 @@ player_elec_damage() {
     self shellshock("electrocution", shocktime);
     if(level.elec_loop == 0) {
       elec_loop = 1;
-      self playsound("zombie_arc");
+      self playSound("zombie_arc");
     }
     if(!self hasperk("specialty_armorvest") || self.health - 100 < 1) {
       radiusdamage(self.origin, 10, self.health + 100, self.health + 100);
@@ -242,7 +242,7 @@ zombie_elec_death(flame_chance) {
   if(flame_chance > 90 && level.burning_zombies.size < 6) {
     level.burning_zombies[level.burning_zombies.size] = self;
     self thread zombie_flame_watch();
-    self playsound("ignite");
+    self playSound("ignite");
     self thread animscripts\death::flame_death_fx();
     wait(randomfloat(1.25));
   } else {
@@ -262,7 +262,7 @@ zombie_elec_death(flame_chance) {
       self thread play_elec_vocals();
     }
     wait(randomfloat(1.25));
-    self playsound("zombie_arc");
+    self playSound("zombie_arc");
   }
   self dodamage(self.health + 666, self.origin);
 }
@@ -292,11 +292,11 @@ electroctute_death_fx() {
   tagArray[3] = "J_Knee_LE";
   tagArray = array_randomize(tagArray);
   if(isDefined(tagArray[0])) {
-    PlayFxOnTag(level._effect["elec_md"], self, tagArray[0]);
+    playFXOnTag(level._effect["elec_md"], self, tagArray[0]);
   }
-  self playsound("elec_jib_zombie");
+  self playSound("elec_jib_zombie");
   wait 1;
-  self playsound("elec_jib_zombie");
+  self playSound("elec_jib_zombie");
   tagArray[0] = "J_Wrist_RI";
   tagArray[1] = "J_Wrist_LE";
   if(!isDefined(self.a.gib_ref) || self.a.gib_ref != "no_legs") {
@@ -305,16 +305,16 @@ electroctute_death_fx() {
   }
   tagArray = array_randomize(tagArray);
   if(isDefined(tagArray[0])) {
-    PlayFxOnTag(level._effect["elec_sm"], self, tagArray[0]);
+    playFXOnTag(level._effect["elec_sm"], self, tagArray[0]);
   }
   if(isDefined(tagArray[1])) {
-    PlayFxOnTag(level._effect["elec_sm"], self, tagArray[1]);
+    playFXOnTag(level._effect["elec_sm"], self, tagArray[1]);
   }
 }
 
 electrocute_timeout() {
   self endon("death");
-  self playloopsound("fire_manager_0");
+  self playLoopSound("fire_manager_0");
   wait 12;
   self stoploopsound();
   if(isDefined(self) && isalive(self)) {

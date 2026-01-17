@@ -5,7 +5,7 @@
 ***************************************************/
 
 init_littlebird_landing() {
-  if(isdefined(level.little_bird_landing_init)) {
+  if(isDefined(level.little_bird_landing_init)) {
     return;
   }
   level.little_bird_landing_init = 1;
@@ -42,21 +42,21 @@ stage_guy(var_0, var_1, var_2, var_3) {
 }
 
 setup_gag_stage_littlebird_unload() {
-  for (;;) {
+  for(;;) {
     self waittill("trigger", var_0);
     littlebird_lands_and_unloads(var_0);
   }
 }
 
 setup_gag_stage_littlebird_load() {
-  for (;;) {
+  for(;;) {
     self waittill("trigger", var_0);
     var_0 setdeceleration(6);
     var_0 setacceleration(4);
     var_0 settargetyaw(self.angles[1]);
     var_0 vehicle_setspeed(20, 7, 7);
 
-    while (distance(common_scripts\utility::flat_origin(var_0.origin), common_scripts\utility::flat_origin(self.origin)) > 256)
+    while(distance(common_scripts\utility::flat_origin(var_0.origin), common_scripts\utility::flat_origin(self.origin)) > 256)
       wait 0.05;
 
     var_0 endon("death");
@@ -77,7 +77,7 @@ littlebird_lands_and_unloads(var_0) {
   var_0 settargetyaw(self.angles[1]);
   var_0 vehicle_setspeed(20, 7, 7);
 
-  while (distance(common_scripts\utility::flat_origin(var_0.origin), common_scripts\utility::flat_origin(self.origin)) > 512)
+  while(distance(common_scripts\utility::flat_origin(var_0.origin), common_scripts\utility::flat_origin(self.origin)) > 512)
     wait 0.05;
 
   var_0 endon("death");
@@ -92,7 +92,7 @@ littlebird_lands_and_unloads(var_0) {
   var_0 vehicle_setspeed(20, 22, 7);
   var_0 notify("nearing_landing");
 
-  if(isdefined(var_0.custom_landing)) {
+  if(isDefined(var_0.custom_landing)) {
     switch (var_0.custom_landing) {
       case "hover_then_land":
         var_0 vehicle_setspeed(10, 22, 7);
@@ -117,10 +117,10 @@ littlebird_lands_and_unloads(var_0) {
   var_0 notify("stable_for_unlink");
   wait 0.2;
 
-  if(isdefined(self.script_flag_set))
+  if(isDefined(self.script_flag_set))
     common_scripts\utility::flag_set(self.script_flag_set);
 
-  if(isdefined(self.script_flag_wait))
+  if(isDefined(self.script_flag_wait))
     common_scripts\utility::flag_wait(self.script_flag_wait);
 
   var_0 notify("littlebird_liftoff");
@@ -140,9 +140,9 @@ set_stage(var_0, var_1, var_2) {
   var_3 = get_stage_nodes(var_0, var_2);
   var_4 = common_scripts\utility::getstruct(var_0.target, "targetname");
   var_5 = spawn("script_model", (0, 0, 0));
-  var_5 setmodel(self.model);
+  var_5 setModel(self.model);
 
-  if(isdefined(self.new_stage_heli_spawn))
+  if(isDefined(self.new_stage_heli_spawn))
     var_5.origin = self.origin;
   else
     var_5.origin = common_scripts\utility::drop_to_ground(var_4.origin) + (0, 0, self.originheightoffset);
@@ -157,13 +157,13 @@ set_stage(var_0, var_1, var_2) {
     var_11 = undefined;
 
     foreach(var_13 in var_1) {
-      if(isdefined(var_13.script_startingposition) && var_13.script_startingposition == var_10.script_startingposition) {
+      if(isDefined(var_13.script_startingposition) && var_13.script_startingposition == var_10.script_startingposition) {
         var_11 = var_13;
         break;
       }
     }
 
-    if(!isdefined(var_11))
+    if(!isDefined(var_11))
       var_11 = common_scripts\utility::getclosest(var_10.origin, var_1);
 
     var_11.script_startingposition = var_10.script_startingposition;
@@ -200,10 +200,10 @@ get_stage_nodes(var_0, var_1) {
 get_landing_node() {
   var_0 = self.currentnode;
 
-  for (;;) {
+  for(;;) {
     var_1 = maps\_utility::getent_or_struct(var_0.target, "targetname");
 
-    if(isdefined(var_1.script_unload))
+    if(isDefined(var_1.script_unload))
       return var_1;
 
     var_0 = var_1;
@@ -239,12 +239,12 @@ load_side(var_0, var_1) {
 }
 
 vehicle_land_beneath_node(var_0, var_1, var_2) {
-  if(!isdefined(var_2))
+  if(!isDefined(var_2))
     var_2 = 0;
 
   self notify("newpath");
 
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     var_0 = 2;
 
   self setneargoalnotifydist(var_0);

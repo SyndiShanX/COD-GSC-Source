@@ -8,7 +8,7 @@
 
 function setupminimap(material) {
   requiredmapaspectratio = getdvarfloat("scr_requiredMapAspectRatio");
-  corners = getentarray("minimap_corner", "targetname");
+  corners = getEntArray("minimap_corner", "targetname");
   if(corners.size != 2) {
     println("");
     return;

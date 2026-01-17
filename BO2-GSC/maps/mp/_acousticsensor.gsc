@@ -35,7 +35,7 @@ onspawnacousticsensor(watcher, player) {
   self setowner(player);
   self setteam(player.team);
   self.owner = player;
-  self playloopsound("fly_acoustic_sensor_lp");
+  self playLoopSound("fly_acoustic_sensor_lp");
 
   if(!self maps\mp\_utility::ishacked())
     player addweaponstat("acoustic_sensor_mp", "used", 1);
@@ -47,7 +47,7 @@ acousticsensordetonate(attacker, weaponname) {
   from_emp = maps\mp\killstreaks\_emp::isempweapon(weaponname);
 
   if(!from_emp)
-    playfx(level._equipment_explode_fx, self.origin);
+    playFX(level._equipment_explode_fx, self.origin);
 
   if(isDefined(attacker)) {
     if(self.owner isenemyplayer(attacker)) {
@@ -74,7 +74,7 @@ watchshutdown(player, origin) {
 watchacousticsensordamage(watcher) {
   self endon("death");
   self endon("hacked");
-  self setcandamage(1);
+  self setCanDamage(1);
   damagemax = 100;
 
   if(!self maps\mp\_utility::ishacked())

@@ -23,7 +23,7 @@
 #namespace zm_zod_util;
 
 function autoexec __init__sytem__() {
-  system::register("zm_zod_util", & __init__, & __main__, undefined);
+  system::register("zm_zod_util", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -31,15 +31,15 @@ function __init__() {
 }
 
 function __main__() {
-  assert(isdefined(level.zombie_spawners));
-  if(isdefined(level.zombie_spawn_callbacks)) {
+  assert(isDefined(level.zombie_spawners));
+  if(isDefined(level.zombie_spawn_callbacks)) {
     foreach(fn in level.zombie_spawn_callbacks) {
       add_zod_zombie_spawn_func(fn);
     }
   }
   level.zombie_spawn_callbacks = undefined;
-  add_zod_zombie_spawn_func( & watch_zombie_death);
-  callback::on_connect( & on_player_connect);
+  add_zod_zombie_spawn_func(&watch_zombie_death);
+  callback::on_connect(&on_player_connect);
   level.teleport_positions = struct::get_array("teleport_position");
 }
 
@@ -58,7 +58,7 @@ function tag_origin_allocate(v_pos, v_angles) {
 }
 
 function tag_origin_free() {
-  if(!isdefined(level.tag_origin_pool)) {
+  if(!isDefined(level.tag_origin_pool)) {
     level.tag_origin_pool = [];
   } else if(!isarray(level.tag_origin_pool)) {
     level.tag_origin_pool = array(level.tag_origin_pool);
@@ -76,8 +76,8 @@ function private tag_origin_expire() {
 
 function private watch_zombie_death() {
   self waittill("death", e_attacker, str_means_of_death, weapon);
-  if(isdefined(self)) {
-    if(isdefined(level.zombie_death_callbacks)) {
+  if(isDefined(self)) {
+    if(isDefined(level.zombie_death_callbacks)) {
       foreach(fn_callback in level.zombie_death_callbacks) {
         self thread[[fn_callback]](e_attacker, str_means_of_death, weapon);
       }
@@ -91,22 +91,22 @@ function vec_to_string(v) {
 
 function zod_unitrigger_assess_visibility(player) {
   b_visible = 1;
-  if(isdefined(player.beastmode) && player.beastmode && (!(isdefined(self.allow_beastmode) && self.allow_beastmode))) {
+  if(isDefined(player.beastmode) && player.beastmode && (!(isDefined(self.allow_beastmode) && self.allow_beastmode))) {
     b_visible = 0;
-  } else if(isdefined(self.stub.func_unitrigger_visible)) {
+  } else if(isDefined(self.stub.func_unitrigger_visible)) {
     b_visible = self[[self.stub.func_unitrigger_visible]](player);
   }
-  str_msg = & "";
+  str_msg = &"";
   param1 = undefined;
   if(b_visible) {
-    if(isdefined(self.stub.func_unitrigger_message)) {
+    if(isDefined(self.stub.func_unitrigger_message)) {
       str_msg = self[[self.stub.func_unitrigger_message]](player);
     } else {
       str_msg = self.stub.hint_string;
       param1 = self.stub.hint_parm1;
     }
   }
-  if(isdefined(param1)) {
+  if(isDefined(param1)) {
     self sethintstring(str_msg, param1);
   } else {
     self sethintstring(str_msg);
@@ -125,19 +125,19 @@ function unitrigger_allow_beastmode() {
 function private unitrigger_think() {
   self endon("kill_trigger");
   self.stub thread unitrigger_refresh_message();
-  while (true) {
+  while(true) {
     self waittill("trigger", player);
-    if(isdefined(self.allow_beastmode) && self.allow_beastmode || (!(isdefined(player.beastmode) && player.beastmode))) {
+    if(isDefined(self.allow_beastmode) && self.allow_beastmode || (!(isDefined(player.beastmode) && player.beastmode))) {
       self.stub notify("trigger", player);
     }
   }
 }
 
 function teleport_player(struct_targetname) {
-  assert(isdefined(struct_targetname));
+  assert(isDefined(struct_targetname));
   a_dest = struct::get_array(struct_targetname, "targetname");
   if(a_dest.size == 0) {
-    /# /
+    /
     #
     assertmsg(("" + struct_targetname) + "");
     return;
@@ -180,11 +180,11 @@ function set_unitrigger_hint_string(str_message, param1) {
   self.hint_string = str_message;
   self.hint_parm1 = param1;
   zm_unitrigger::unregister_unitrigger(self);
-  zm_unitrigger::register_unitrigger(self, & unitrigger_think);
+  zm_unitrigger::register_unitrigger(self, &unitrigger_think);
 }
 
 function private spawn_unitrigger(origin, angles, radius_or_dims, use_trigger = 0, func_per_player_msg) {
-  trigger_stub = spawnstruct();
+  trigger_stub = spawnStruct();
   trigger_stub.origin = origin;
   str_type = "unitrigger_radius";
   if(isvec(radius_or_dims)) {
@@ -192,7 +192,7 @@ function private spawn_unitrigger(origin, angles, radius_or_dims, use_trigger = 
     trigger_stub.script_width = radius_or_dims[1];
     trigger_stub.script_height = radius_or_dims[2];
     str_type = "unitrigger_box";
-    if(!isdefined(angles)) {
+    if(!isDefined(angles)) {
       angles = (0, 0, 0);
     }
     trigger_stub.angles = angles;
@@ -205,12 +205,12 @@ function private spawn_unitrigger(origin, angles, radius_or_dims, use_trigger = 
   } else {
     trigger_stub.script_unitrigger_type = str_type;
   }
-  if(isdefined(func_per_player_msg)) {
+  if(isDefined(func_per_player_msg)) {
     trigger_stub.func_unitrigger_message = func_per_player_msg;
     zm_unitrigger::unitrigger_force_per_player_triggers(trigger_stub, 1);
   }
-  trigger_stub.prompt_and_visibility_func = & zod_unitrigger_assess_visibility;
-  zm_unitrigger::register_unitrigger(trigger_stub, & unitrigger_think);
+  trigger_stub.prompt_and_visibility_func = &zod_unitrigger_assess_visibility;
+  zm_unitrigger::register_unitrigger(trigger_stub, &unitrigger_think);
   return trigger_stub;
 }
 
@@ -223,28 +223,28 @@ function spawn_trigger_box(origin, angles, dims, use_trigger = 0, func_per_playe
 }
 
 function add_zod_zombie_spawn_func(fn_zombie_spawned) {
-  if(!isdefined(level.zombie_spawners)) {
-    if(!isdefined(level.zombie_spawn_callbacks)) {
+  if(!isDefined(level.zombie_spawners)) {
+    if(!isDefined(level.zombie_spawn_callbacks)) {
       level.zombie_spawn_callbacks = [];
     }
-    if(!isdefined(level.zombie_spawn_callbacks)) {
+    if(!isDefined(level.zombie_spawn_callbacks)) {
       level.zombie_spawn_callbacks = [];
     } else if(!isarray(level.zombie_spawn_callbacks)) {
       level.zombie_spawn_callbacks = array(level.zombie_spawn_callbacks);
     }
     level.zombie_spawn_callbacks[level.zombie_spawn_callbacks.size] = fn_zombie_spawned;
   } else {
-    array::thread_all(level.zombie_spawners, & spawner::add_spawn_function, fn_zombie_spawned);
-    a_ritual_spawners = getentarray("ritual_zombie_spawner", "targetname");
-    array::thread_all(a_ritual_spawners, & spawner::add_spawn_function, fn_zombie_spawned);
+    array::thread_all(level.zombie_spawners, &spawner::add_spawn_function, fn_zombie_spawned);
+    a_ritual_spawners = getEntArray("ritual_zombie_spawner", "targetname");
+    array::thread_all(a_ritual_spawners, &spawner::add_spawn_function, fn_zombie_spawned);
   }
 }
 
 function on_player_connect() {
   self endon("disconnect");
-  while (true) {
+  while(true) {
     self waittill("bled_out");
-    if(isdefined(level.bled_out_callbacks)) {
+    if(isDefined(level.bled_out_callbacks)) {
       foreach(fn in level.bled_out_callbacks) {
         self thread[[fn]]();
       }
@@ -253,10 +253,10 @@ function on_player_connect() {
 }
 
 function on_zombie_killed(fn_zombie_killed) {
-  if(!isdefined(level.zombie_death_callbacks)) {
+  if(!isDefined(level.zombie_death_callbacks)) {
     level.zombie_death_callbacks = [];
   }
-  if(!isdefined(level.zombie_death_callbacks)) {
+  if(!isDefined(level.zombie_death_callbacks)) {
     level.zombie_death_callbacks = [];
   } else if(!isarray(level.zombie_death_callbacks)) {
     level.zombie_death_callbacks = array(level.zombie_death_callbacks);
@@ -265,10 +265,10 @@ function on_zombie_killed(fn_zombie_killed) {
 }
 
 function on_player_bled_out(fn_callback) {
-  if(!isdefined(level.bled_out_callbacks)) {
+  if(!isDefined(level.bled_out_callbacks)) {
     level.bled_out_callbacks = [];
   }
-  if(!isdefined(level.bled_out_callbacks)) {
+  if(!isDefined(level.bled_out_callbacks)) {
     level.bled_out_callbacks = [];
   } else if(!isarray(level.bled_out_callbacks)) {
     level.bled_out_callbacks = array(level.bled_out_callbacks);
@@ -281,7 +281,7 @@ function set_rumble_to_player(n_rumbletype, var_d00db512) {
   self endon("disconnect");
   self endon("set_rumble_to_player");
   self thread clientfield::set_to_player("player_rumble_and_shake", n_rumbletype);
-  if(isdefined(var_d00db512)) {
+  if(isDefined(var_d00db512)) {
     wait(var_d00db512);
     self thread set_rumble_to_player(0);
   }
@@ -290,15 +290,15 @@ function set_rumble_to_player(n_rumbletype, var_d00db512) {
 function function_3a7a7013(n_rumbletype, n_radius, v_origin, var_d00db512) {
   var_699d80d5 = n_radius * n_radius;
   foreach(player in level.activeplayers) {
-    if(isdefined(player) && distance2dsquared(player.origin, v_origin) <= var_699d80d5) {
+    if(isDefined(player) && distance2dsquared(player.origin, v_origin) <= var_699d80d5) {
       player thread set_rumble_to_player(n_rumbletype, var_d00db512);
     }
   }
 }
 
 function function_5cc835d6(v_origin, v_target, n_duration) {
-  assert(isdefined(v_origin), "");
-  assert(isdefined(v_target), "");
+  assert(isDefined(v_origin), "");
+  assert(isDefined(v_target), "");
   e_fx = tag_origin_allocate(v_origin, (0, 0, 0));
   e_fx clientfield::set("zod_egg_soul", 1);
   e_fx moveto(v_target, n_duration);
@@ -365,7 +365,7 @@ function show_infotext_for_duration(str_infotext, n_duration) {
 function setup_devgui_func(str_devgui_path, str_dvar, n_value, func, n_base_value = -1) {
   setdvar(str_dvar, n_base_value);
   adddebugcommand(((((("devgui_cmd \"" + str_devgui_path) + "\" \"") + str_dvar) + " ") + n_value) + "\"\n");
-  while (true) {
+  while(true) {
     n_dvar = getdvarint(str_dvar);
     if(n_dvar > n_base_value) {
       [

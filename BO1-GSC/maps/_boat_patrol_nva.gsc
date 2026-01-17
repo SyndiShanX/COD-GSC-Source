@@ -20,11 +20,11 @@ delete_and_sink_fx() {
     self.weapon_last_damage = "hind_rockets";
   }
   if(self.weapon_last_damage == "hind_rockets") {
-    PlayFX(level._effect["explo_fx" + self.vehicletype], self.origin, AnglesToForward(self.angles));
-    self PlaySound("evt_nva_patrol_boat_explo");
+    playFX(level._effect["explo_fx" + self.vehicletype], self.origin, anglesToForward(self.angles));
+    self playSound("evt_nva_patrol_boat_explo");
   } else {
-    PlayFX(level._effect["sink_fx" + self.vehicletype], self.origin, AnglesToForward(self.angles));
-    self PlaySound("evt_nva_patrol_boat_sink");
+    playFX(level._effect["sink_fx" + self.vehicletype], self.origin, anglesToForward(self.angles));
+    self playSound("evt_nva_patrol_boat_sink");
   }
   waittillframeend;
   self Delete();

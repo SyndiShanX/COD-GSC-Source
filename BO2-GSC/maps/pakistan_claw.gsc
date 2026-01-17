@@ -125,7 +125,7 @@ setup_garage_doors() {
   m_soct_02 hidepart("tag_gunner_barrel1");
   m_soct_02 hidepart("tag_flash_gunner1");
   m_soct_02 hidepart("tag_steeringwheel");
-  a_jiffy_window_after = getentarray("jiffy_window_after", "targetname");
+  a_jiffy_window_after = getEntArray("jiffy_window_after", "targetname");
 
   foreach(destroyed_piece in a_jiffy_window_after)
   destroyed_piece hide();
@@ -139,11 +139,11 @@ setup_garage_doors() {
 }
 
 claw_event_spawn_funcs() {
-  a_garage_door_guys = getentarray("garage_door_guys", "targetname");
+  a_garage_door_guys = getEntArray("garage_door_guys", "targetname");
   array_thread(a_garage_door_guys, ::add_spawn_function, ::init_garage_door_guys);
-  a_right_path_runners = getentarray("right_path_runners", "targetname");
+  a_right_path_runners = getEntArray("right_path_runners", "targetname");
   array_thread(a_right_path_runners, ::add_spawn_function, ::init_runner_delete);
-  a_ai_courtyard_guys = getentarray("courtyard_guys", "targetname");
+  a_ai_courtyard_guys = getEntArray("courtyard_guys", "targetname");
   array_thread(a_ai_courtyard_guys, ::add_spawn_function, ::setup_courtyard_guys);
   a_sp_isi = getspawnerteamarray("axis");
   array_thread(a_sp_isi, ::add_spawn_function, ::set_isi_color);
@@ -615,12 +615,12 @@ drone_suppress_archway_think(vh_claw, t_courtryard_trig, t_arch_trig, b_do_switc
 
 watch_window_damage() {
   trigger_wait("trig_window_damage", "targetname", level.vh_intro_courtyard_drone);
-  a_jiffy_window_before = getentarray("jiffy_window_before", "targetname");
+  a_jiffy_window_before = getEntArray("jiffy_window_before", "targetname");
 
   foreach(prestine_piece in a_jiffy_window_before)
   prestine_piece hide();
 
-  a_jiffy_window_after = getentarray("jiffy_window_after", "targetname");
+  a_jiffy_window_after = getEntArray("jiffy_window_after", "targetname");
 
   foreach(destroyed_piece in a_jiffy_window_after)
   destroyed_piece show();
@@ -1090,7 +1090,7 @@ spawn_vehicle_ground_claw() {
 }
 
 claw_run_over_destructibles() {
-  a_t_dustructible_area = getentarray("destructible_area_trig", "targetname");
+  a_t_dustructible_area = getEntArray("destructible_area_trig", "targetname");
   array_thread(a_t_dustructible_area, ::claw_run_over_destructible_think);
 }
 
@@ -1224,9 +1224,9 @@ claw_fire_grenade(delay_time) {
   v_start_pos = self gettagorigin("tag_barrel");
 
   if(level.wiiu)
-    v_end_pos = v_start_pos + anglestoforward(level.player getgunangles()) * n_grenade_max_range;
+    v_end_pos = v_start_pos + anglesToForward(level.player getgunangles()) * n_grenade_max_range;
   else
-    v_end_pos = v_start_pos + anglestoforward(self gettagangles("tag_barrel")) * n_grenade_max_range;
+    v_end_pos = v_start_pos + anglesToForward(self gettagangles("tag_barrel")) * n_grenade_max_range;
 
   v_grenade_velocity = vectornormalize(v_end_pos - v_start_pos) * n_grenade_speed_scale;
   driver = self getseatoccupant(0);
@@ -1235,7 +1235,7 @@ claw_fire_grenade(delay_time) {
     driver = self;
 
   driver magicgrenadetype("claw_grenade_impact_explode_sp", v_start_pos, v_grenade_velocity, delay_time);
-  self playsound("wpn_claw_gren_fire_plr");
+  self playSound("wpn_claw_gren_fire_plr");
   level thread grenade_launch_rumble();
   luinotifyevent(&"hud_claw_grenade_fire", 1, int(n_grenade_timer * 1000));
 }
@@ -1651,7 +1651,7 @@ garage_doors_control() {
   m_garage_back_door rotateyaw(-145, 1);
   m_garage_back_door_2 rotateyaw(145, 1);
   s_garage_back_door_fx = getstruct("garage_back_door_fx", "targetname");
-  playfx(getfx("door_breach"), s_garage_back_door_fx.origin);
+  playFX(getfx("door_breach"), s_garage_back_door_fx.origin);
   m_garage_door_back waittill("movedone");
   m_garage_door_back rotateyaw(15, 0.5);
   m_garage_back_door_2 rotateyaw(-20, 0.5);
@@ -1698,18 +1698,18 @@ friendly_convoy() {
   vh_claw_player_soct attach("veh_t6_mil_soc_t_steeringwheel", "tag_steeringwheel");
   vh_claw_player_soct veh_magic_bullet_shield(1);
   vh_claw_player_soct thread notify_end_position();
-  vh_claw_player_soct playsound("evt_driveup_1");
+  vh_claw_player_soct playSound("evt_driveup_1");
   vh_claw_player_soct.dontunloadonend = 1;
   vh_claw_player_soct thread go_path(getnode("soct_start", "targetname"));
   wait 1.5;
   vh_claw_salazar_soct = spawn_vehicle_from_targetname_and_drive("claw_salazar_soct");
   vh_claw_salazar_soct attach("veh_t6_mil_soc_t_steeringwheel", "tag_steeringwheel");
   vh_claw_salazar_soct veh_magic_bullet_shield(1);
-  vh_claw_salazar_soct playsound("evt_driveup_2");
+  vh_claw_salazar_soct playSound("evt_driveup_2");
   vh_claw_salazar_soct.dontunloadonend = 1;
   a_ai_soct_riders = get_ai_array("soct_riders", "script_noteworthy");
   array_func(a_ai_soct_riders, ::setup_soct_riders);
-  a_intro_courtyard_convoy = getentarray("intro_courtyard_convoy", "targetname");
+  a_intro_courtyard_convoy = getEntArray("intro_courtyard_convoy", "targetname");
 
   foreach(veh in a_intro_courtyard_convoy) {
     if(isDefined(veh))
@@ -1928,7 +1928,7 @@ get_targets(str_target, str_key, str_ai_team) {
     a_e_targets = get_vehicle_array(str_target, str_key);
 
     if(!isDefined(a_e_targets))
-      a_e_targets = getentarray(str_target, str_key);
+      a_e_targets = getEntArray(str_target, str_key);
   }
 
   return a_e_targets;

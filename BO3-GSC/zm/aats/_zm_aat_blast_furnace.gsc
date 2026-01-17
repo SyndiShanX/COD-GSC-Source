@@ -17,14 +17,14 @@
 #namespace zm_aat_blast_furnace;
 
 function autoexec __init__sytem__() {
-  system::register("zm_aat_blast_furnace", & __init__, undefined, "aat");
+  system::register("zm_aat_blast_furnace", &__init__, undefined, "aat");
 }
 
 function __init__() {
-  if(!(isdefined(level.aat_in_use) && level.aat_in_use)) {
+  if(!(isDefined(level.aat_in_use) && level.aat_in_use)) {
     return;
   }
-  aat::register("zm_aat_blast_furnace", 0.15, 0, 15, 0, 1, & result, "t7_hud_zm_aat_blastfurnace", "wpn_aat_blast_furnace_plr");
+  aat::register("zm_aat_blast_furnace", 0.15, 0, 15, 0, 1, &result, "t7_hud_zm_aat_blastfurnace", "wpn_aat_blast_furnace_plr");
   clientfield::register("actor", "zm_aat_blast_furnace" + "_explosion", 1, 1, "counter");
   clientfield::register("vehicle", "zm_aat_blast_furnace" + "_explosion_vehicle", 1, 1, "counter");
   clientfield::register("actor", "zm_aat_blast_furnace" + "_burn", 1, 1, "counter");
@@ -44,13 +44,13 @@ function blast_furnace_explosion(e_attacker, w_weapon) {
   a_e_blasted_zombies = array::get_all_closest(self.origin, getaiteamarray("axis"), undefined, undefined, 120);
   if(a_e_blasted_zombies.size > 0) {
     i = 0;
-    while (i < a_e_blasted_zombies.size) {
+    while(i < a_e_blasted_zombies.size) {
       if(isalive(a_e_blasted_zombies[i])) {
-        if(isdefined(level.aat["zm_aat_blast_furnace"].immune_result_indirect[a_e_blasted_zombies[i].archetype]) && level.aat["zm_aat_blast_furnace"].immune_result_indirect[a_e_blasted_zombies[i].archetype]) {
+        if(isDefined(level.aat["zm_aat_blast_furnace"].immune_result_indirect[a_e_blasted_zombies[i].archetype]) && level.aat["zm_aat_blast_furnace"].immune_result_indirect[a_e_blasted_zombies[i].archetype]) {
           arrayremovevalue(a_e_blasted_zombies, a_e_blasted_zombies[i]);
           continue;
         }
-        if(a_e_blasted_zombies[i] == self && (!(isdefined(level.aat["zm_aat_blast_furnace"].immune_result_direct[a_e_blasted_zombies[i].archetype]) && level.aat["zm_aat_blast_furnace"].immune_result_direct[a_e_blasted_zombies[i].archetype]))) {
+        if(a_e_blasted_zombies[i] == self && (!(isDefined(level.aat["zm_aat_blast_furnace"].immune_result_direct[a_e_blasted_zombies[i].archetype]) && level.aat["zm_aat_blast_furnace"].immune_result_direct[a_e_blasted_zombies[i].archetype]))) {
           self thread zombie_death_gib(e_attacker, w_weapon);
           if(isvehicle(a_e_blasted_zombies[i])) {
             a_e_blasted_zombies[i] thread clientfield::increment("zm_aat_blast_furnace" + "_burn_vehicle");
@@ -71,7 +71,7 @@ function blast_furnace_explosion(e_attacker, w_weapon) {
     wait(0.25);
     a_e_blasted_zombies = array::remove_dead(a_e_blasted_zombies);
     a_e_blasted_zombies = array::remove_undefined(a_e_blasted_zombies);
-    array::thread_all(a_e_blasted_zombies, & blast_furnace_zombie_burn, e_attacker, w_weapon);
+    array::thread_all(a_e_blasted_zombies, &blast_furnace_zombie_burn, e_attacker, w_weapon);
   }
 }
 
@@ -79,7 +79,7 @@ function blast_furnace_zombie_burn(e_attacker, w_weapon) {
   self endon("death");
   n_damage = self.health / 6;
   i = 0;
-  while (i <= 6) {
+  while(i <= 6) {
     if(self.health < n_damage) {
       e_attacker zm_stats::increment_challenge_stat("ZOMBIE_HUNTER_BLAST_FURNACE");
     }
@@ -98,7 +98,7 @@ function zombie_death_gib(e_attacker, w_weapon) {
   }
   gibserverutils::giblegs(self);
   self dodamage(self.health, self.origin, e_attacker);
-  if(isdefined(e_attacker) && isplayer(e_attacker)) {
+  if(isDefined(e_attacker) && isplayer(e_attacker)) {
     e_attacker zm_stats::increment_challenge_stat("ZOMBIE_HUNTER_BLAST_FURNACE");
   }
 }

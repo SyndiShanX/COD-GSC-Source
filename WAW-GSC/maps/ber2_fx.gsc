@@ -211,7 +211,7 @@ lightning_flash() {}
 lightning_normal() {}
 
 water_drops_init(startCount) {
-  trigs = GetEntArray("trigger_water_drops", "targetname");
+  trigs = getEntArray("trigger_water_drops", "targetname");
   ASSERTEX(isDefined(trigs) && trigs.size > 0, "Can't find any water drop fx triggers.");
   array_thread(trigs, ::water_drops_trigger_think);
   if(isDefined(startCount) && startCount > 0) {
@@ -243,11 +243,11 @@ water_drops_trigger_think() {
     ASSERTMSG("Water drop fx trigger at origin " + self.origin + " does not have script_int set.You need to set this to specify the amount of water drops that will be generated.");
     return;
   }
-  while (1) {
+  while(1) {
     self waittill("trigger", player);
     if(IsPlayer(player)) {
       player scr_set_water_drops(self.script_int);
-      while (player IsTouching(self)) {
+      while(player IsTouching(self)) {
         wait(0.05);
       }
     } else {
@@ -327,12 +327,12 @@ ambient_fakefire(endonString, delayStart) {
     reloadTimeMin = 5;
     reloadTimeMax = 12;
   }
-  while (1) {
+  while(1) {
     burst = RandomIntRange(burstMin, burstMax);
-    for (i = 0; i < burst; i++) {
+    for(i = 0; i < burst; i++) {
       traceDist = 10000;
-      target = self.origin + vector_multiply(AnglesToForward(self.angles), traceDist);
-      PlayFX(muzzleFlash, self.origin, AnglesToForward(self.angles));
+      target = self.origin + vector_multiply(anglesToForward(self.angles), traceDist);
+      playFX(muzzleFlash, self.origin, anglesToForward(self.angles));
       BulletTracer(self.origin, target, false);
       if(RandomInt(100) <= soundChance) {
         thread play_sound_in_space(fireSound, self.origin);
@@ -357,14 +357,14 @@ ambient_cloudburst_fx(endonString) {
   burstWaitMax = 0.65;
   pauseMin = 4;
   pauseMax = 10;
-  while (1) {
+  while(1) {
     numBursts = RandomIntRange(burstsMin, burstsMax);
-    for (i = 0; i < numBursts; i++) {
+    for(i = 0; i < numBursts; i++) {
       offsetVec = self.origin +
         (RandomIntRange((offsetX * -1), offsetX),
           RandomIntRange((offsetY * -1), offsetY),
           RandomIntRange((offsetZ * -1), offsetZ));
-      PlayFX(level._effect["cloudburst"], self.origin + offsetVec);
+      playFX(level._effect["cloudburst"], self.origin + offsetVec);
       wait(RandomFloatRange(burstWaitMin, burstWaitMax));
     }
     wait(RandomFloatRange(pauseMin, pauseMax));
@@ -376,10 +376,10 @@ ambient_aaa_fx(endonString) {
     level endon(endonString);
   }
   self thread ambient_aaa_fx_rotate(endonString);
-  while (1) {
+  while(1) {
     firetime = RandomIntRange(3, 8);
-    for (i = 0; i < firetime * 5; i++) {
-      PlayFX(level._effect["aaa_tracer"], self.origin, AnglesToForward(self.angles));
+    for(i = 0; i < firetime * 5; i++) {
+      playFX(level._effect["aaa_tracer"], self.origin, anglesToForward(self.angles));
       wait(RandomFloatRange(0.14, 0.19));
     }
     wait RandomFloatRange(1.5, 3);
@@ -390,7 +390,7 @@ ambient_aaa_fx_rotate(endonString) {
   if(isDefined(endonString)) {
     level endon(endonString);
   }
-  while (1) {
+  while(1) {
     self RotateTo((312.6, 180, -90), RandomFloatRange(3.5, 6));
     self waittill("rotatedone");
     self RotateTo((307.4, 1.7, 90), RandomFloatRange(3.5, 6));
@@ -399,9 +399,9 @@ ambient_aaa_fx_rotate(endonString) {
 }
 
 lights_arty_init() {
-  hatLamps = GetEntArray("metro_flicker_hatlamp", "targetname");
+  hatLamps = getEntArray("metro_flicker_hatlamp", "targetname");
   ASSERTEX(array_validate(hatLamps), "Can't find any metro flickering hat lamp light sets.");
-  for (i = 0; i < hatLamps.size; i++) {
+  for(i = 0; i < hatLamps.size; i++) {
     hatLamp = hatLamps[i];
     hatLamp.offModel = getent_safe(hatLamp.target, "targetname");
     hatLamp.light = getent_safe(hatLamp.offModel.target, "targetname");
@@ -426,7 +426,7 @@ light_arty_flicker(darkTimeMin, darkTimeMax) {
   onFrac = on * RandomFloatRange(0.1, 0.15);
   intensityCap = on * 0.9;
   stepMultiplier = 0.04;
-  while (GetTime() < endTime) {
+  while(GetTime() < endTime) {
     if(firstFlicker) {
       wait(RandomFloat(0.5));
       if(RandomInt(100) > 25) {
@@ -520,10 +520,10 @@ particle_light(state, intensity) {
     if(isDefined(self.particleLight)) {
       self.particleLight Delete();
     }
-    self.particleLight = Spawn("script_model", self.origin + (0, 0, -4));
+    self.particleLight = spawn("script_model", self.origin + (0, 0, -4));
     self.particleLight.angles = (90, 0, 0);
-    self.particleLight SetModel("tag_origin");
-    PlayFxOnTag(lightFX, self.particleLight, "tag_origin");
+    self.particleLight setModel("tag_origin");
+    playFXOnTag(lightFX, self.particleLight, "tag_origin");
     self.lastParticleLight = lightFX;
   } else {
     if(isDefined(self.particleLight)) {

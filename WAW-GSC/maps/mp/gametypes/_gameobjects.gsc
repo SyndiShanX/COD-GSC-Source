@@ -22,8 +22,8 @@ main(allowed) {
     allowed[allowed.size] = "vehicle";
     filter_script_vehicles_from_vehicle_descriptors(allowed);
   }
-  entities = GetEntArray();
-  for (entity_index = entities.size - 1; entity_index >= 0; entity_index--) {
+  entities = getEntArray();
+  for(entity_index = entities.size - 1; entity_index >= 0; entity_index--) {
     entity = entities[entity_index];
     if(!entity_is_allowed(entity, allowed)) {
       entity delete();
@@ -40,8 +40,8 @@ entity_is_allowed(
     entity.script_gameobjectname != "[all_modes]") {
     allowed = false;
     gameobjectnames = strtok(entity.script_gameobjectname, " ");
-    for (i = 0; i < allowed_game_modes.size && !allowed; i++) {
-      for (j = 0; j < gameobjectnames.size && !allowed; j++) {
+    for(i = 0; i < allowed_game_modes.size && !allowed; i++) {
+      for(j = 0; j < gameobjectnames.size && !allowed; j++) {
         allowed = (gameobjectnames[j] == allowed_game_modes[i]);
       }
     }
@@ -51,14 +51,14 @@ entity_is_allowed(
 
 filter_script_vehicles_from_vehicle_descriptors(
   allowed_game_modes) {
-  vehicle_descriptors = GetEntArray("vehicle_descriptor", "targetname");
-  script_vehicles = GetEntArray("script_vehicle", "classname");
+  vehicle_descriptors = getEntArray("vehicle_descriptor", "targetname");
+  script_vehicles = getEntArray("script_vehicle", "classname");
   vehicles_to_remove = [];
-  for (descriptor_index = 0; descriptor_index < vehicle_descriptors.size; descriptor_index++) {
+  for(descriptor_index = 0; descriptor_index < vehicle_descriptors.size; descriptor_index++) {
     descriptor = vehicle_descriptors[descriptor_index];
     closest_distance_sq = 1000000000000.0;
     closest_vehicle = undefined;
-    for (vehicle_index = 0; vehicle_index < script_vehicles.size; vehicle_index++) {
+    for(vehicle_index = 0; vehicle_index < script_vehicles.size; vehicle_index++) {
       vehicle = script_vehicles[vehicle_index];
       dsquared = DistanceSquared(vehicle GetOrigin(), descriptor GetOrigin());
       if(dsquared < closest_distance_sq) {
@@ -72,7 +72,7 @@ filter_script_vehicles_from_vehicle_descriptors(
       }
     }
   }
-  for (vehicle_index = 0; vehicle_index < vehicles_to_remove.size; vehicle_index++) {
+  for(vehicle_index = 0; vehicle_index < vehicles_to_remove.size; vehicle_index++) {
     vehicles_to_remove[vehicle_index] delete();
   }
   return;
@@ -88,7 +88,7 @@ init() {
 
 onPlayerConnect() {
   level endon("game_ended");
-  for (;;) {
+  for(;;) {
     level waittill("connecting", player);
     player thread onPlayerSpawned();
     player thread onDisconnect();
@@ -98,7 +98,7 @@ onPlayerConnect() {
 onPlayerSpawned() {
   self endon("disconnect");
   level endon("game_ended");
-  for (;;) {
+  for(;;) {
     self waittill("spawned_player");
     self thread onDeath();
     self.touchTriggers = [];
@@ -140,7 +140,7 @@ createCarryObject(ownerTeam, trigger, visuals, offset) {
   if(!isDefined(offset))
     offset = (0, 0, 0);
   carryObject.offset3d = offset;
-  for (index = 0; index < visuals.size; index++) {
+  for(index = 0; index < visuals.size; index++) {
     visuals[index].baseOrigin = visuals[index].origin;
     visuals[index].baseAngles = visuals[index].angles;
   }
@@ -182,7 +182,7 @@ createCarryObject(ownerTeam, trigger, visuals, offset) {
 
 carryObjectUseThink() {
   level endon("game_ended");
-  while (true) {
+  while(true) {
     self.trigger waittill("trigger", player);
     if(self.isResetting) {
       continue;
@@ -217,7 +217,7 @@ carryObjectUseThink() {
 
 carryObjectProxThink() {
   level endon("game_ended");
-  while (true) {
+  while(true) {
     self.trigger waittill("trigger", player);
     if(self.isResetting) {
       continue;
@@ -255,7 +255,7 @@ pickupObjectDelay(origin) {
   self endon("death");
   self endon("disconnect");
   self.canPickupObject = false;
-  for (;;) {
+  for(;;) {
     if(distanceSquared(self.origin, origin) > 64 * 64) {
       break;
     }
@@ -272,7 +272,7 @@ setPickedUp(player) {
   }
   player giveObject(self);
   self setCarrier(player);
-  for (index = 0; index < self.visuals.size; index++)
+  for(index = 0; index < self.visuals.size; index++)
     self.visuals[index] hide();
   self.trigger.origin += (0, 0, 10000);
   self notify("pickup_object");
@@ -285,7 +285,7 @@ setPickedUp(player) {
 updateCarryObjectOrigin() {
   level endon("game_ended");
   objPingDelay = 5.0;
-  for (;;) {
+  for(;;) {
     if(isDefined(self.carrier)) {
       self.curOrigin = self.carrier.origin + (0, 0, 75);
       self.objPoints["allies"] maps\mp\gametypes\_objpoints::updateOrigin(self.curOrigin);
@@ -358,7 +358,7 @@ giveObject(object) {
 returnHome() {
   self.isResetting = true;
   self notify("reset");
-  for (index = 0; index < self.visuals.size; index++) {
+  for(index = 0; index < self.visuals.size; index++) {
     self.visuals[index].origin = self.visuals[index].baseOrigin;
     self.visuals[index].angles = self.visuals[index].baseAngles;
     self.visuals[index] show();
@@ -383,7 +383,7 @@ isObjectAwayFromHome() {
 
 setPosition(origin, angles) {
   self.isResetting = true;
-  for (index = 0; index < self.visuals.size; index++) {
+  for(index = 0; index < self.visuals.size; index++) {
     self.visuals[index].origin = self.origin;
     self.visuals[index].angles = self.angles;
     self.visuals[index] show();
@@ -422,7 +422,7 @@ setDropped() {
     } else {
       dropAngles = (0, tempAngle, 0);
     }
-    for (index = 0; index < self.visuals.size; index++) {
+    for(index = 0; index < self.visuals.size; index++) {
       self.visuals[index].origin = dropOrigin;
       self.visuals[index].angles = dropAngles;
       self.visuals[index] show();
@@ -431,7 +431,7 @@ setDropped() {
     self.curOrigin = self.trigger.origin;
     self thread pickupTimeout();
   } else {
-    for (index = 0; index < self.visuals.size; index++) {
+    for(index = 0; index < self.visuals.size; index++) {
       self.visuals[index].origin = self.visuals[index].baseOrigin;
       self.visuals[index].angles = self.visuals[index].baseAngles;
       self.visuals[index] show();
@@ -467,14 +467,14 @@ pickupTimeout() {
   wait(0.05);
   mineTriggers = getEntArray("minefield", "targetname");
   hurtTriggers = getEntArray("trigger_hurt", "classname");
-  for (index = 0; index < mineTriggers.size; index++) {
+  for(index = 0; index < mineTriggers.size; index++) {
     if(!self.visuals[0] isTouching(mineTriggers[index])) {
       continue;
     }
     self returnHome();
     return;
   }
-  for (index = 0; index < hurtTriggers.size; index++) {
+  for(index = 0; index < hurtTriggers.size; index++) {
     if(!self.visuals[0] isTouching(hurtTriggers[index])) {
       continue;
     }
@@ -512,7 +512,7 @@ trackCarrier() {
   self endon("disconnect");
   self endon("death");
   self endon("drop_object");
-  while (isDefined(self.carryObject) && isAlive(self)) {
+  while(isDefined(self.carryObject) && isAlive(self)) {
     if(self isOnGround()) {
       trace = bulletTrace(self.origin + (0, 0, 20), self.origin - (0, 0, 20), false, undefined);
       if(trace["fraction"] < 1)
@@ -527,10 +527,10 @@ manualDropThink() {
   self endon("disconnect");
   self endon("death");
   self endon("drop_object");
-  for (;;) {
-    while (self attackButtonPressed() || self fragButtonPressed() || self secondaryOffhandButtonPressed() || self meleeButtonPressed())
+  for(;;) {
+    while(self attackButtonPressed() || self fragButtonPressed() || self secondaryOffhandButtonPressed() || self meleeButtonPressed())
       wait .05;
-    while (!self attackButtonPressed() && !self fragButtonPressed() && !self secondaryOffhandButtonPressed() && !self meleeButtonPressed())
+    while(!self attackButtonPressed() && !self fragButtonPressed() && !self secondaryOffhandButtonPressed() && !self meleeButtonPressed())
       wait .05;
     if(isDefined(self.carryObject) && !self useButtonPressed())
       self.carryObject thread setDropped();
@@ -549,7 +549,7 @@ createUseObject(ownerTeam, trigger, visuals, offset) {
   else
     useObject.triggerType = "proximity";
   useObject.trigger = trigger;
-  for (index = 0; index < visuals.size; index++) {
+  for(index = 0; index < visuals.size; index++) {
     visuals[index].baseOrigin = visuals[index].origin;
     visuals[index].baseAngles = visuals[index].angles;
   }
@@ -606,7 +606,7 @@ setKeyObject(object) {
 
 useObjectUseThink() {
   level endon("game_ended");
-  while (true) {
+  while(true) {
     self.trigger waittill("trigger", player);
     if(!isAlive(player)) {
       continue;
@@ -649,7 +649,7 @@ getEarliestClaimPlayer() {
   if(self.touchList[team].size > 0) {
     earliestTime = undefined;
     players = getArrayKeys(self.touchList[team]);
-    for (index = 0; index < players.size; index++) {
+    for(index = 0; index < players.size; index++) {
       touchdata = self.touchList[team][players[index]];
       if(!isDefined(earliestTime) || touchdata.starttime < earliestTime) {
         earliestPlayer = touchdata.player;
@@ -663,7 +663,7 @@ getEarliestClaimPlayer() {
 useObjectProxThink() {
   level endon("game_ended");
   self thread proxTriggerThink();
-  while (true) {
+  while(true) {
     if(self.useTime && self.curProgress >= self.useTime) {
       self.curProgress = 0;
       creditPlayer = getEarliestClaimPlayer();
@@ -728,7 +728,7 @@ useObjectLockedForTeam(team) {
 proxTriggerThink() {
   level endon("game_ended");
   entityNumber = self.entNum;
-  while (true) {
+  while(true) {
     self.trigger waittill("trigger", player);
     if(!isAlive(player) || self useObjectLockedForTeam(player.pers["team"])) {
       continue;
@@ -773,7 +773,7 @@ triggerTouchThink(object) {
   object.numTouching[team]++;
   object updateUseRate();
   touchName = "player" + self.clientid;
-  struct = spawnstruct();
+  struct = spawnStruct();
   struct.player = self;
   struct.starttime = gettime();
   object.touchList[team][touchName] = struct;
@@ -781,7 +781,7 @@ triggerTouchThink(object) {
   self.dont_auto_balance = true;
   if(isDefined(object.onTouchUse))
     object[[object.onTouchUse]](self);
-  while (isAlive(self) && self isTouching(object.trigger) && (self useObjectLockedForTeam(team) == false)) {
+  while(isAlive(self) && self isTouching(object.trigger) && (self useObjectLockedForTeam(team) == false)) {
     self updateProxBar(object, false);
     wait(0.05);
   }
@@ -959,7 +959,7 @@ takeUseWeapon(useWeapon) {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
-  while (self getCurrentWeapon() == useWeapon && !self.throwingGrenade)
+  while(self getCurrentWeapon() == useWeapon && !self.throwingGrenade)
     wait(0.05);
   self takeWeapon(useWeapon);
 }
@@ -971,7 +971,7 @@ useHoldThinkLoop(player, lastWeapon) {
   waitForWeapon = true;
   timedOut = 0;
   maxWaitTime = 1.5;
-  while (isAlive(player) && player isTouching(self.trigger) && player useButtonPressed() && !player.throwingGrenade && !player meleeButtonPressed() && self.curProgress < self.useTime && (self.useRate || waitForWeapon) && !(waitForWeapon && timedOut > maxWaitTime)) {
+  while(isAlive(player) && player isTouching(self.trigger) && player useButtonPressed() && !player.throwingGrenade && !player meleeButtonPressed() && self.curProgress < self.useTime && (self.useRate || waitForWeapon) && !(waitForWeapon && timedOut > maxWaitTime)) {
     timedOut += 0.05;
     if(!isDefined(useWeapon) || player getCurrentWeapon() == useWeapon) {
       self.curProgress += (50 * self.useRate);
@@ -1011,7 +1011,7 @@ personalUseBar(object) {
   useBar = self.useBar;
   useBarText = self.useBarText;
   lastRate = -1;
-  while (isAlive(self) && object.inUse && !level.gameEnded) {
+  while(isAlive(self) && object.inUse && !level.gameEnded) {
     if(lastRate != object.useRate) {
       if(object.curProgress > object.useTime)
         object.curProgress = object.useTime;
@@ -1085,7 +1085,7 @@ updateWorldIcon(relativeTeam, showIcon) {
   if(!isDefined(self.worldIcons[relativeTeam]))
     showIcon = false;
   updateTeams = getUpdateTeams(relativeTeam);
-  for (index = 0; index < updateTeams.size; index++) {
+  for(index = 0; index < updateTeams.size; index++) {
     opName = "objpoint_" + updateTeams[index] + "_" + self.entNum;
     objPoint = maps\mp\gametypes\_objpoints::getObjPointByName(opName);
     objPoint notify("stop_flashing_thread");
@@ -1135,7 +1135,7 @@ updateCompassIcons() {
 
 updateCompassIcon(relativeTeam, showIcon) {
   updateTeams = getUpdateTeams(relativeTeam);
-  for (index = 0; index < updateTeams.size; index++) {
+  for(index = 0; index < updateTeams.size; index++) {
     showIconThisTeam = showIcon;
     if(!showIconThisTeam && shouldShowCompassDueToRadar(updateTeams[index]))
       showIconThisTeam = true;
@@ -1192,7 +1192,7 @@ shouldShowCompassDueToRadar(team) {
 updateVisibilityAccordingToRadar() {
   self endon("death");
   self endon("carrier_cleared");
-  while (1) {
+  while(1) {
     level waittill("radar_status_change");
     self updateCompassIcons();
   }
@@ -1240,14 +1240,14 @@ setVisibleTeam(relativeTeam) {
 
 setModelVisibility(visibility) {
   if(visibility) {
-    for (index = 0; index < self.visuals.size; index++) {
+    for(index = 0; index < self.visuals.size; index++) {
       self.visuals[index] show();
       if(self.visuals[index].classname == "script_brushmodel" || self.visuals[index].classname == "script_model") {
         self.visuals[index] thread makeSolid();
       }
     }
   } else {
-    for (index = 0; index < self.visuals.size; index++) {
+    for(index = 0; index < self.visuals.size; index++) {
       self.visuals[index] hide();
       if(self.visuals[index].classname == "script_brushmodel" || self.visuals[index].classname == "script_model") {
         self.visuals[index] notify("changing_solidness");
@@ -1261,8 +1261,8 @@ makeSolid() {
   self endon("death");
   self notify("changing_solidness");
   self endon("changing_solidness");
-  while (1) {
-    for (i = 0; i < level.players.size; i++) {
+  while(1) {
+    for(i = 0; i < level.players.size; i++) {
       if(level.players[i] isTouching(self)) {
         break;
       }
@@ -1318,7 +1318,7 @@ disableObject() {
   if(self.type == "carryObject") {
     if(isDefined(self.carrier))
       self.carrier takeObject(self);
-    for (index = 0; index < self.visuals.size; index++) {
+    for(index = 0; index < self.visuals.size; index++) {
       self.visuals[index] hide();
     }
   }
@@ -1328,7 +1328,7 @@ disableObject() {
 
 enableObject() {
   if(self.type == "carryObject") {
-    for (index = 0; index < self.visuals.size; index++) {
+    for(index = 0; index < self.visuals.size; index++) {
       self.visuals[index] show();
     }
   }

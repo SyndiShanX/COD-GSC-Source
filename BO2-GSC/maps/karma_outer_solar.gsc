@@ -26,8 +26,7 @@ init_flags() {
   flag_init("club_door_closed");
 }
 
-init_spawn_funcs() {
-}
+init_spawn_funcs() {}
 
 skipto_club_solar() {
   cleanup_ents("cleanup_checkin");
@@ -66,7 +65,7 @@ main() {
   flag_set("player_among_civilians");
   setmusicstate("KARMA_1_OUTER_SOLAR");
 
-  foreach(ent in getentarray("velvet_rope", "script_noteworthy"))
+  foreach(ent in getEntArray("velvet_rope", "script_noteworthy"))
   ent setscale(0.9);
 
   trigger_wait("t_club_entrance");
@@ -92,7 +91,7 @@ outer_solar_objectives() {
 harper_finds_karma_pip() {
   level.player show_hud();
   pip_snd_ent = spawn("script_origin", level.player.origin);
-  pip_snd_ent playloopsound("evt_pip_club_loop");
+  pip_snd_ent playLoopSound("evt_pip_club_loop");
   wait 0.1;
   level thread maps\_glasses::play_bink_on_hud("karma_pip_club", 0, 1, 0, 0, 1);
   flag_wait("glasses_bink_playing");
@@ -105,14 +104,14 @@ harper_finds_karma_pip() {
 }
 
 bar_glass_visibility_think() {
-  foreach(e_glass in getentarray("club_glass", "targetname")) {
+  foreach(e_glass in getEntArray("club_glass", "targetname")) {
     e_glass setscale(0.5);
     e_glass hide();
   }
 
   flag_wait("start_club_encounter");
 
-  foreach(e_glass in getentarray("club_glass", "targetname"))
+  foreach(e_glass in getEntArray("club_glass", "targetname"))
   e_glass show();
 }
 
@@ -166,7 +165,7 @@ globe_activate(str_targetname, n_orbit_time, n_orbit_direction, str_endon, str_c
   if(!isDefined(v_offset))
     v_offset = (0, 0, 0);
 
-  a_m_globes = getentarray(str_targetname, "targetname");
+  a_m_globes = getEntArray(str_targetname, "targetname");
 
   foreach(m_globe in a_m_globes) {
     m_globe setforcenocull();
@@ -207,7 +206,7 @@ spin_globe(str_endon, n_orbit_time, n_orbit_direction) {
 outer_door() {
   trigger_wait("t_lounge_door");
   time = 2.0;
-  a_doors = getentarray("solarentrance_door", "targetname");
+  a_doors = getEntArray("solarentrance_door", "targetname");
 
   for(i = 0; i < a_doors.size; i++) {
     e_door = a_doors[i];
@@ -275,7 +274,7 @@ init_solar_systems() {
 
 start_civs_outer_solar(str_kill_flag) {
   if(!is_mature()) {
-    foreach(e_dancer in getentarray("dancers", "script_noteworthy"))
+    foreach(e_dancer in getEntArray("dancers", "script_noteworthy"))
     e_dancer delete();
 
     level thread init_solar_systems();
@@ -466,16 +465,16 @@ outer_solar_cleanup() {
   delete_exploder(601);
   wait 0.1;
 
-  foreach(e_door in getentarray("script_doors", "script_noteworthy"))
+  foreach(e_door in getEntArray("script_doors", "script_noteworthy"))
   e_door delete();
 
   if(is_mature()) {
-    foreach(e_dancer in getentarray("dancers", "script_noteworthy")) {
+    foreach(e_dancer in getEntArray("dancers", "script_noteworthy")) {
       if(isDefined(e_dancer.script_float) && e_dancer.script_float == 1.0)
         e_dancer delete();
     }
   } else {
-    foreach(e_solarsystem in getentarray("fxanim_solar_system", "targetname")) {
+    foreach(e_solarsystem in getEntArray("fxanim_solar_system", "targetname")) {
       if(isDefined(e_solarsystem.script_int) && e_solarsystem.script_int == 1)
         e_solarsystem.script_string = "solar_system_delete";
     }

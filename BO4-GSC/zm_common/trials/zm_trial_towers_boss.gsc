@@ -28,7 +28,6 @@
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_vo;
 #include scripts\zm_common\zm_zonemgr;
-
 #namespace zm_trial_towers_boss;
 
 autoexec __init__system__() {
@@ -43,7 +42,7 @@ __init__() {
   zm_trial::register_challenge(#"towers_boss", &on_begin, &on_end);
 }
 
-private on_begin(var_6325d314, var_52b8b3a2, n_time) {
+on_begin(var_6325d314, var_52b8b3a2, n_time) {
   level flag::clear(#"spawn_zombies");
   callback::on_spawned(&zm_towers_main_quest::function_d4e923e7);
   wait 10;
@@ -51,11 +50,11 @@ private on_begin(var_6325d314, var_52b8b3a2, n_time) {
   level thread function_353ea592();
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   callback::remove_on_spawned(&zm_towers_main_quest::function_d4e923e7);
 }
 
-private function_353ea592() {
+function_353ea592() {
   self notify("6fdbe26c6aeb036");
   self endon("6fdbe26c6aeb036");
   level endon(#"end_of_round");
@@ -70,7 +69,7 @@ private function_353ea592() {
   level notify(#"kill_round_wait");
 }
 
-private function_8318a404() {
+function_8318a404() {
   self notify("3eafbccd965262a6");
   self endon("3eafbccd965262a6");
   level endon(#"end_of_round");
@@ -111,7 +110,7 @@ private function_8318a404() {
   level thread boss_fight();
 }
 
-private boss_fight() {
+boss_fight() {
   self notify("4b6131952d06894a");
   self endon("4b6131952d06894a");
   wait 5;
@@ -145,7 +144,7 @@ private boss_fight() {
   level thread function_95785950(187, level.var_8b66546e, "m_quest", "basket_nag");
   level thread function_95785950(211, level.var_49328379, "m_quest", "heart_nag");
   array::thread_all(level.players, &function_3d487e02);
-  e_elephant = spawner::simple_spawn_single(sp_spawner, &function_f9da4403, var_47312393, #"hash_266f53fb994e6120");
+  e_elephant = spawner::simple_spawn_single(sp_spawner, &function_f9da4403, var_47312393, # "hash_266f53fb994e6120");
 
   while(!isDefined(e_elephant.ai.riders) || e_elephant.ai.riders.size < 2) {
     wait 0.1;
@@ -165,7 +164,7 @@ private boss_fight() {
   level notify(#"elephant_death");
 }
 
-private function_13576d14() {
+function_13576d14() {
   var_bfd0a84a = getEntArray("towers_boss_tower_trigger", "targetname");
   var_6848389e = 0;
   var_a406cb50 = 40;
@@ -175,23 +174,23 @@ private function_13576d14() {
 
     recordent(var_e220a902);
 
-      var_d7267ad9 = "towers_boss_tower_badplace_" + var_6848389e;
+    var_d7267ad9 = "towers_boss_tower_badplace_" + var_6848389e;
     var_e220a902.badplace_name = var_d7267ad9;
-    badplace_box(var_d7267ad9, 0, groundtrace(var_e220a902.origin + (0, 0, 8), var_e220a902.origin + (0, 0, -100000), 0, var_e220a902)[#"position"], var_a406cb50, "all");
+    badplace_box(var_d7267ad9, 0, groundtrace(var_e220a902.origin + (0, 0, 8), var_e220a902.origin + (0, 0, -100000), 0, var_e220a902)[# "position"], var_a406cb50, "all");
     var_6848389e++;
     waitframe(1);
   }
 }
 
-private function_33935d5f() {
+function_33935d5f() {
   self notify("51b1374f19c0864a");
   self endon("51b1374f19c0864a");
   self.b_exploded = 0;
   e_clip = getent(self.target, "targetname");
 
   while(!self.b_exploded) {
-    waitresult = self waittill(#"trigger", #"tower_boss_scripted_trigger_tower");
-    shouldexplode = isDefined(waitresult.activator) && isDefined(waitresult.activator.archetype) && waitresult.activator.archetype === #"elephant";
+    waitresult = self waittill(#"trigger", # "tower_boss_scripted_trigger_tower");
+    shouldexplode = isDefined(waitresult.activator) && isDefined(waitresult.activator.archetype) && waitresult.activator.archetype === # "elephant";
 
     if(shouldexplode || waitresult._notify == "tower_boss_scripted_trigger_tower") {
       if(isDefined(e_clip)) {
@@ -211,10 +210,10 @@ private function_33935d5f() {
   }
 }
 
-private function_92e1954c() {
+function_92e1954c() {
   self notify("602480c649d8e17f");
   self endon("602480c649d8e17f");
-  level endon(#"end_game", #"boss_battle_done");
+  level endon(#"end_game", # "boss_battle_done");
 
   while(true) {
     level waittill(#"hash_3aa3137f1bf70773");
@@ -224,10 +223,10 @@ private function_92e1954c() {
   }
 }
 
-private function_4d682898() {
+function_4d682898() {
   self notify("1d04cafdc26414eb");
   self endon("1d04cafdc26414eb");
-  level endon(#"end_game", #"boss_battle_done");
+  level endon(#"end_game", # "boss_battle_done");
 
   while(true) {
     level waittill(#"basket_hit");
@@ -237,10 +236,10 @@ private function_4d682898() {
   }
 }
 
-private function_3d487e02() {
+function_3d487e02() {
   self notify("72b45c7bc8c76fc3");
   self endon("72b45c7bc8c76fc3");
-  level endon(#"end_game", #"boss_battle_done");
+  level endon(#"end_game", # "boss_battle_done");
   self endon(#"disconnect");
   b_success = 0;
   params = getstatuseffect(#"hash_12a64221f4d27f9b");
@@ -253,7 +252,7 @@ private function_3d487e02() {
       self status_effect::status_effect_apply(params, weapon, undefined, 0, 3000, undefined, waitresult.origin);
 
       if(!(isDefined(b_success) && b_success)) {
-        b_success = self zm_audio::create_and_play_dialog(#"m_quest", #"spear_warn");
+        b_success = self zm_audio::create_and_play_dialog(#"m_quest", # "spear_warn");
       }
     }
   }
@@ -267,7 +266,7 @@ function_f9da4403(s_spawn, phase) {
   self.instakill_func = &zm_powerups::function_16c2586a;
 }
 
-private function_dd2db3df() {
+function_dd2db3df() {
   tower = struct::get("entrance_tower", "targetname");
   entrance_tower_collision = getent("entrance_tower_collision", "targetname");
 
@@ -286,10 +285,10 @@ private function_dd2db3df() {
   }
 }
 
-private function_95785950(var_c625106d, var_86163b89, n_stage, var_39acfdda) {
+function_95785950(var_c625106d, var_86163b89, n_stage, var_39acfdda) {
   self notify("683195b7da79b6b9");
   self endon("683195b7da79b6b9");
-  level endon(#"end_game", #"boss_battle_done");
+  level endon(#"end_game", # "boss_battle_done");
 
   while(true) {
     wait var_c625106d;
@@ -302,7 +301,7 @@ private function_95785950(var_c625106d, var_86163b89, n_stage, var_39acfdda) {
   }
 }
 
-private function_ae1cbf2e() {
+function_ae1cbf2e() {
   self notify("6a1dc39ab115329");
   self endon("6a1dc39ab115329");
   level zm_audio::sndannouncerplayvox(#"hash_c8182d04e7f43c9");
@@ -311,17 +310,17 @@ private function_ae1cbf2e() {
   zm_vo::function_7e4562d7(#"hash_1a458ffc30e9306d");
 }
 
-private function_1a05e10c(str_notify, var_f13787ad, var_ca8a3a53) {
+function_1a05e10c(str_notify, var_f13787ad, var_ca8a3a53) {
   self notify("588886ce796505cd");
   self endon("588886ce796505cd");
-  level endon(#"end_game", #"boss_battle_done");
+  level endon(#"end_game", # "boss_battle_done");
 
   for(b_success = 0; !b_success; b_success = zm_audio::function_bca32e49(var_f13787ad, var_ca8a3a53)) {
     level waittill(str_notify);
   }
 }
 
-private function_c64fc074() {
+function_c64fc074() {
   self notify("7d5d5c98ec5ee437");
   self endon("7d5d5c98ec5ee437");
   level waittill(#"hash_634700dd42db02d8");

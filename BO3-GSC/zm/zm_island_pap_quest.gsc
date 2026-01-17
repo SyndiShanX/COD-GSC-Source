@@ -60,9 +60,9 @@ function function_16f0344e() {
     s_valve thread function_dd9ccb8(s_valve.script_int);
   }
   level thread function_aa37ce2d();
-  level scene::add_scene_func("p7_fxanim_zm_island_pap_elements_gauge_bundle", & function_b6d4787d, "init");
-  level scene::add_scene_func("p7_fxanim_zm_island_pap_elements_whistle_bundle", & function_e0bc0bdc, "init");
-  level scene::add_scene_func("p7_fxanim_zm_island_pap_elements_wheel_bundle", & function_f7c8e279, "init");
+  level scene::add_scene_func("p7_fxanim_zm_island_pap_elements_gauge_bundle", &function_b6d4787d, "init");
+  level scene::add_scene_func("p7_fxanim_zm_island_pap_elements_whistle_bundle", &function_e0bc0bdc, "init");
+  level scene::add_scene_func("p7_fxanim_zm_island_pap_elements_wheel_bundle", &function_f7c8e279, "init");
   level scene::init("p7_fxanim_zm_island_pap_elements_gauge_bundle");
   level scene::init("p7_fxanim_zm_island_pap_elements_whistle_bundle");
   level scene::init("p7_fxanim_zm_island_pap_elements_wheel_bundle");
@@ -111,7 +111,7 @@ function function_aa37ce2d() {
     level.var_16e32c2f notify("player_opened_pap");
   }
   mdl_gate moveto(mdl_gate.s_pos.origin, 3);
-  mdl_gate playsound("zmb_papquest_gate_move");
+  mdl_gate playSound("zmb_papquest_gate_move");
   level thread zm_island_vo::function_3bf2d62a("pap_opens", 0, 1, 0);
   mdl_gate waittill("movedone");
   level flag::set("pap_open");
@@ -141,7 +141,7 @@ function function_4c046b1b() {
       break;
     }
   }
-  level.pack_a_punch.triggers[0] playsound("zmb_papquest_drain_oneshot");
+  level.pack_a_punch.triggers[0] playSound("zmb_papquest_drain_oneshot");
   level flag::set("pap_water_is_draining");
   level clientfield::set("lower_pap_water", level.var_12542033);
   wait(3);
@@ -166,20 +166,20 @@ function function_4c046b1b() {
 
 function function_dd9ccb8(n_id) {
   if(n_id == 1) {
-    self.trigger = zm_island_util::spawn_trigger_radius(self.origin, 50, 1, & function_72a105ff);
+    self.trigger = zm_island_util::spawn_trigger_radius(self.origin, 50, 1, &function_72a105ff);
   } else {
     if(n_id == 2) {
-      self.trigger = zm_island_util::spawn_trigger_radius(self.origin, 50, 1, & function_e35907c);
+      self.trigger = zm_island_util::spawn_trigger_radius(self.origin, 50, 1, &function_e35907c);
     } else {
-      self.trigger = zm_island_util::spawn_trigger_radius(self.origin, 50, 1, & function_578e801d);
+      self.trigger = zm_island_util::spawn_trigger_radius(self.origin, 50, 1, &function_578e801d);
     }
   }
-  while (true) {
+  while(true) {
     self.trigger waittill("trigger", player);
     if(zm_utility::is_player_valid(player) && level flag::get(self.script_noteworthy)) {
       zm_unitrigger::unregister_unitrigger(self.trigger);
       self.trigger = undefined;
-      player playsound("zmb_papquest_valve_replace");
+      player playSound("zmb_papquest_valve_replace");
       level thread function_4c046b1b();
       level.var_16e32c2f = player;
       if(n_id == 1) {
@@ -198,32 +198,32 @@ function function_dd9ccb8(n_id) {
 
 function private function_72a105ff(e_player) {
   if(level flag::get("valve1_found")) {
-    return & "ZM_ISLAND_DRAIN_WATER";
+    return &"ZM_ISLAND_DRAIN_WATER";
   }
-  return & "ZOMBIE_BUILD_PIECE_MORE";
+  return &"ZOMBIE_BUILD_PIECE_MORE";
 }
 
 function private function_e35907c(e_player) {
   if(level flag::get("valve2_found")) {
-    return & "ZM_ISLAND_DRAIN_WATER";
+    return &"ZM_ISLAND_DRAIN_WATER";
   }
-  return & "ZOMBIE_BUILD_PIECE_MORE";
+  return &"ZOMBIE_BUILD_PIECE_MORE";
 }
 
 function private function_578e801d(e_player) {
   if(level flag::get("valve3_found")) {
-    return & "ZM_ISLAND_DRAIN_WATER";
+    return &"ZM_ISLAND_DRAIN_WATER";
   }
-  return & "ZOMBIE_BUILD_PIECE_MORE";
+  return &"ZOMBIE_BUILD_PIECE_MORE";
 }
 
 function function_1a519eae(str_flag) {
-  while (true) {
+  while(true) {
     self.trigger waittill("trigger", player);
     if(zm_utility::is_player_valid(player)) {
       player notify("player_got_valve_part");
       zm_unitrigger::unregister_unitrigger(self.trigger);
-      player playsound("zmb_valve_pickup");
+      player playSound("zmb_valve_pickup");
       level flag::set(str_flag);
       self.trigger = undefined;
       self delete();
@@ -272,12 +272,12 @@ function function_90913542(str_flag) {
 function function_d0901c34() {
   level.var_e1bb72d5 = 0;
   level.var_69ca3c45 = 0;
-  var_1daee2f1 = getentarray("cocoon_bunker", "targetname");
+  var_1daee2f1 = getEntArray("cocoon_bunker", "targetname");
   foreach(mdl_cocoon in var_1daee2f1) {
     mdl_cocoon.is_open = 0;
     mdl_cocoon.clip = getent(mdl_cocoon.target, "targetname");
     mdl_cocoon.var_aa12511 = struct::get(mdl_cocoon.clip.target);
-    mdl_cocoon.clip setcandamage(1);
+    mdl_cocoon.clip setCanDamage(1);
     mdl_cocoon.clip.health = 100000;
     mdl_cocoon scene::init("p7_fxanim_zm_island_cocoon_open_bundle", mdl_cocoon);
     mdl_cocoon thread function_c762197b();
@@ -286,7 +286,7 @@ function function_d0901c34() {
 
 function function_c762197b() {
   self waittill("opened");
-  if(isdefined(self.clip)) {
+  if(isDefined(self.clip)) {
     self.clip connectpaths();
     self.clip delete();
   }
@@ -294,7 +294,7 @@ function function_c762197b() {
   self thread function_7a0ede5();
   var_aa12511 = self.var_aa12511;
   ai_zombie = zombie_utility::spawn_zombie(level.zombie_spawners[0], "cocoon_zombie", var_aa12511);
-  if(isdefined(ai_zombie)) {
+  if(isDefined(ai_zombie)) {
     ai_zombie.b_ignore_cleanup = 1;
     ai_zombie.no_damage_points = 1;
     ai_zombie.deathpoints_already_given = 1;
@@ -305,11 +305,11 @@ function function_c762197b() {
 }
 
 function function_bd8082d1() {
-  var_1daee2f1 = getentarray("cocoon_bunker", "targetname");
+  var_1daee2f1 = getEntArray("cocoon_bunker", "targetname");
   var_d43245b8 = [];
   foreach(mdl_cocoon in var_1daee2f1) {
     if(!mdl_cocoon.is_open) {
-      if(!isdefined(var_d43245b8)) {
+      if(!isDefined(var_d43245b8)) {
         var_d43245b8 = [];
       } else if(!isarray(var_d43245b8)) {
         var_d43245b8 = array(var_d43245b8);
@@ -322,10 +322,10 @@ function function_bd8082d1() {
 }
 
 function function_7a0ede5() {
-  self playloopsound("zmb_cocoon_lp", 1);
+  self playLoopSound("zmb_cocoon_lp", 1);
   playsoundatposition("evt_cocoon_explode", self.origin + (vectorscale((0, 0, -1), 100)));
   self stoploopsound();
-  if(isdefined(self.var_166a0518)) {
+  if(isDefined(self.var_166a0518)) {
     self function_14c57bc9();
   }
   level.var_e1bb72d5++;
@@ -346,12 +346,12 @@ function function_14c57bc9() {
   mdl_part = util::spawn_model("p7_zm_isl_pap_elements_gauge", self.origin + (vectorscale((0, 0, -1), 154)));
   mdl_part clientfield::set("show_part", 1);
   mdl_part setscale(1.5);
-  mdl_part.trigger = zm_island_util::spawn_trigger_radius(mdl_part.origin, 50, 1, & function_9bd3096f);
+  mdl_part.trigger = zm_island_util::spawn_trigger_radius(mdl_part.origin, 50, 1, &function_9bd3096f);
   mdl_part thread function_1a519eae("valve1_found");
 }
 
 function private function_9bd3096f(player) {
-  return & "ZOMBIE_BUILD_PIECE_GRAB";
+  return &"ZOMBIE_BUILD_PIECE_GRAB";
 }
 
 function function_f4a071bb() {
@@ -371,7 +371,7 @@ function function_f4a071bb() {
 }
 
 function defend_start() {
-  while (!level flag::exists("penstock_debris_cleared")) {
+  while(!level flag::exists("penstock_debris_cleared")) {
     wait(1);
   }
   var_44f2dff7 = struct::get_array("defend_valve_spawnpt");
@@ -400,24 +400,24 @@ function defend_start() {
   level.mdl_clip solid();
   level.mdl_clip disconnectpaths();
   level.mdl_gate moveto(level.mdl_gate.v_pos, 3);
-  level.mdl_gate playsound("zmb_papquest_defend_gate_close");
+  level.mdl_gate playSound("zmb_papquest_defend_gate_close");
   exploder::exploder("fxexp_202");
   level.disable_nuke_delay_spawning = 1;
   level flag::clear("spawn_zombies");
   level thread function_3d4e00c();
   exploder::exploder("lgt_penstock_event");
-  while (level.var_74049442 < 13) {
+  while(level.var_74049442 < 13) {
     var_44f2dff7 = array::randomize(var_44f2dff7);
-    for (i = 0; i < var_44f2dff7.size; i++) {
-      while (getfreeactorcount() < 1) {
+    for(i = 0; i < var_44f2dff7.size; i++) {
+      while(getfreeactorcount() < 1) {
         wait(0.05);
       }
-      while (function_a3ebebe() >= var_4cf30066) {
+      while(function_a3ebebe() >= var_4cf30066) {
         wait(0.05);
       }
       ai_zombie = zombie_utility::spawn_zombie(level.zombie_spawners[0], "defend_zombie", var_44f2dff7[i]);
-      if(isdefined(ai_zombie)) {
-        if(isdefined(var_44f2dff7[i].script_int)) {
+      if(isDefined(ai_zombie)) {
+        if(isDefined(var_44f2dff7[i].script_int)) {
           ai_zombie.var_57b55f08 = 1;
         }
         ai_zombie thread function_2392e644();
@@ -435,7 +435,7 @@ function defend_start() {
 function function_3d4e00c() {
   level endon("defend_over");
   wait(5);
-  while (true) {
+  while(true) {
     n_zombies = function_a3ebebe();
     var_4cba8874 = function_2870b97d();
     if(!n_zombies && level.var_74049442 >= 13 || var_4cba8874.size == 0) {
@@ -455,11 +455,11 @@ function function_9fcd89f7() {
   level.var_ced49fc moveto(level.var_ced49fc.v_org, 3);
   level.var_ced49fc rotateto(level.var_ced49fc.v_ang, 3);
   level.var_ced49fc waittill("movedone");
-  level.var_ced49fc.trigger = zm_island_util::spawn_trigger_radius(level.var_ced49fc.origin, 50, 1, & function_9bd3096f);
+  level.var_ced49fc.trigger = zm_island_util::spawn_trigger_radius(level.var_ced49fc.origin, 50, 1, &function_9bd3096f);
   level.var_ced49fc thread function_1a519eae("valve3_found");
   level flag::set("defend_success");
   level.mdl_gate moveto(level.mdl_gate.v_org, 3);
-  level.mdl_gate playsound("zmb_papquest_defend_gate_open");
+  level.mdl_gate playSound("zmb_papquest_defend_gate_open");
   exploder::exploder("fxexp_202");
   level.mdl_gate waittill("movedone");
   level.mdl_clip delete();
@@ -482,7 +482,7 @@ function function_2870b97d() {
   var_34dc7362 = getent("penstock_defend", "script_noteworthy");
   foreach(player in level.players) {
     if(player istouching(var_34dc7362) && zm_utility::is_player_valid(player) && !player laststand::player_is_in_laststand()) {
-      if(!isdefined(var_4399a34)) {
+      if(!isDefined(var_4399a34)) {
         var_4399a34 = [];
       } else if(!isarray(var_4399a34)) {
         var_4399a34 = array(var_4399a34);
@@ -499,7 +499,7 @@ function function_55dac330() {
   }
   iprintlnbold("DEFEND FAILED");
   level.mdl_gate movez(96, 3);
-  level.mdl_gate playsound("zmb_papquest_defend_gate_open");
+  level.mdl_gate playSound("zmb_papquest_defend_gate_open");
   level.mdl_gate waittill("movedone");
   level.mdl_clip movez(96, 3);
   level thread defend_start();
@@ -509,7 +509,7 @@ function function_55dac330() {
 function function_2392e644() {
   self endon("death");
   self.var_6eb9188d = 1;
-  if(isdefined(self.var_57b55f08)) {
+  if(isDefined(self.var_57b55f08)) {
     self thread function_318ec9ba();
   }
   self waittill("completed_emerging_into_playable_area");
@@ -528,15 +528,15 @@ function function_318ec9ba() {
 
 function function_83af0b87(t_water) {
   self endon("death");
-  while (true) {
-    while (!self istouching(t_water)) {
+  while(true) {
+    while(!self istouching(t_water)) {
       wait(0.1);
     }
     if(!self.is_underwater) {
       self.is_underwater = 1;
       self asmsetanimationrate(0.8);
     }
-    while (self istouching(t_water)) {
+    while(self istouching(t_water)) {
       wait(0.1);
     }
     self.is_underwater = 0;
@@ -551,7 +551,7 @@ function function_4fdc8e70() {
   mdl_part = util::spawn_model("p7_zm_isl_pap_elements_wheel", array::random(var_f89319f8).origin);
   mdl_part clientfield::set("show_part", 1);
   mdl_part setscale(1.5);
-  mdl_part.trigger = zm_island_util::spawn_trigger_radius(mdl_part.origin, 50, 1, & function_9bd3096f);
+  mdl_part.trigger = zm_island_util::spawn_trigger_radius(mdl_part.origin, 50, 1, &function_9bd3096f);
   mdl_part thread function_1a519eae("valve2_found");
 }
 
@@ -569,13 +569,13 @@ function function_145f4b1a() {
 }
 
 function function_336744d2() {
-  callback::remove_on_spawned( & on_player_spawned);
+  callback::remove_on_spawned(&on_player_spawned);
   level notify("hash_62f73de6");
   self clientfield::set("do_emissive_material", 1);
 }
 
 function function_7cd896fc() {
-  zm_devgui::add_custom_devgui_callback( & function_9e3140d6);
+  zm_devgui::add_custom_devgui_callback(&function_9e3140d6);
   adddebugcommand("");
   adddebugcommand("");
   adddebugcommand("");

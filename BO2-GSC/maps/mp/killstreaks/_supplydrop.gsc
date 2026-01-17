@@ -39,8 +39,8 @@ init() {
   level.crateownerusetime = 500;
   level.cratenonownerusetime = getgametypesetting("crateCaptureTime") * 1000;
   level.crate_headicon_offset = vectorscale((0, 0, 1), 15.0);
-  level.supplydropdisarmcrate = & "KILLSTREAK_SUPPLY_DROP_DISARM_HINT";
-  level.disarmingcrate = & "KILLSTREAK_SUPPLY_DROP_DISARMING_CRATE";
+  level.supplydropdisarmcrate = &"KILLSTREAK_SUPPLY_DROP_DISARM_HINT";
+  level.disarmingcrate = &"KILLSTREAK_SUPPLY_DROP_DISARMING_CRATE";
   level.supplydropcarepackageidleanim = % o_drone_supply_care_idle;
   level.supplydropcarepackagedropanim = % o_drone_supply_care_drop;
   level.supplydropaitankidleanim = % o_drone_supply_agr_idle;
@@ -75,87 +75,87 @@ init() {
   level._supply_drop_smoke_fx = loadfx("env/smoke/fx_smoke_supply_drop_blue_mp");
   level._supply_drop_explosion_fx = loadfx("explosions/fx_grenadeexp_default");
   maps\mp\killstreaks\_killstreaks::registerkillstreak("inventory_supply_drop_mp", "inventory_supplydrop_mp", "killstreak_supply_drop", "supply_drop_used", ::usekillstreaksupplydrop, undefined, 1);
-  maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("inventory_supply_drop_mp", & "KILLSTREAK_EARNED_SUPPLY_DROP", & "KILLSTREAK_AIRSPACE_FULL", & "KILLSTREAK_SUPPLY_DROP_INBOUND");
+  maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("inventory_supply_drop_mp", &"KILLSTREAK_EARNED_SUPPLY_DROP", &"KILLSTREAK_AIRSPACE_FULL", &"KILLSTREAK_SUPPLY_DROP_INBOUND");
   maps\mp\killstreaks\_killstreaks::registerkillstreakdialog("inventory_supply_drop_mp", "mpl_killstreak_supply", "kls_supply_used", "", "kls_supply_enemy", "", "kls_supply_ready");
   maps\mp\killstreaks\_killstreaks::registerkillstreakaltweapon("inventory_supply_drop_mp", "mp40_blinged_mp");
   maps\mp\killstreaks\_killstreaks::allowkillstreakassists("inventory_supply_drop_mp", 1);
   maps\mp\killstreaks\_killstreaks::registerkillstreakdevdvar("inventory_supply_drop_mp", "scr_givesupplydrop");
   maps\mp\killstreaks\_killstreaks::registerkillstreak("supply_drop_mp", "supplydrop_mp", "killstreak_supply_drop", "supply_drop_used", ::usekillstreaksupplydrop, undefined, 1);
-  maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("supply_drop_mp", & "KILLSTREAK_EARNED_SUPPLY_DROP", & "KILLSTREAK_AIRSPACE_FULL", & "KILLSTREAK_SUPPLY_DROP_INBOUND");
+  maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("supply_drop_mp", &"KILLSTREAK_EARNED_SUPPLY_DROP", &"KILLSTREAK_AIRSPACE_FULL", &"KILLSTREAK_SUPPLY_DROP_INBOUND");
   maps\mp\killstreaks\_killstreaks::registerkillstreakdialog("supply_drop_mp", "mpl_killstreak_supply", "kls_supply_used", "", "kls_supply_enemy", "", "kls_supply_ready");
   maps\mp\killstreaks\_killstreaks::registerkillstreakaltweapon("supply_drop_mp", "mp40_blinged_mp");
   maps\mp\killstreaks\_killstreaks::allowkillstreakassists("supply_drop_mp", 1);
   level.cratetypes = [];
   level.categorytypeweight = [];
-  registercratetype("ai_tank_drop_mp", "killstreak", "ai_tank_mp", 1, & "KILLSTREAK_AI_TANK_CRATE", undefined, undefined, undefined, maps\mp\killstreaks\_ai_tank::crateland);
-  registercratetype("inventory_ai_tank_drop_mp", "killstreak", "ai_tank_mp", 1, & "KILLSTREAK_AI_TANK_CRATE", undefined, undefined, undefined, maps\mp\killstreaks\_ai_tank::crateland);
-  registercratetype("minigun_drop_mp", "killstreak", "minigun_mp", 1, & "KILLSTREAK_MINIGUN_CRATE", & "PLATFORM_MINIGUN_GAMBLER", "share_package_death_machine", ::givecrateweapon);
-  registercratetype("inventory_minigun_drop_mp", "killstreak", "minigun_mp", 1, & "KILLSTREAK_MINIGUN_CRATE", & "PLATFORM_MINIGUN_GAMBLER", "share_package_death_machine", ::givecrateweapon);
-  registercratetype("m32_drop_mp", "killstreak", "m32_mp", 1, & "KILLSTREAK_M32_CRATE", & "PLATFORM_M32_GAMBLER", "share_package_multiple_grenade_launcher", ::givecrateweapon);
-  registercratetype("inventory_m32_drop_mp", "killstreak", "m32_mp", 1, & "KILLSTREAK_M32_CRATE", & "PLATFORM_M32_GAMBLER", "share_package_multiple_grenade_launcher", ::givecrateweapon);
-  registercratetype("supplydrop_mp", "killstreak", "radar_mp", 100, & "KILLSTREAK_RADAR_CRATE", & "PLATFORM_RADAR_GAMBLER", "share_package_uav", ::givecratekillstreak);
-  registercratetype("supplydrop_mp", "killstreak", "rcbomb_mp", 100, & "KILLSTREAK_RCBOMB_CRATE", & "PLATFORM_RCBOMB_GAMBLER", "share_package_rcbomb", ::givecratekillstreak);
-  registercratetype("supplydrop_mp", "killstreak", "inventory_missile_drone_mp", 100, & "KILLSTREAK_MISSILE_DRONE_CRATE", & "PLATFORM_MISSILE_DRONE_GAMBLER", "share_package_missile_drone", ::givecratekillstreak);
-  registercratetype("supplydrop_mp", "killstreak", "counteruav_mp", 100, & "KILLSTREAK_COUNTERU2_CRATE", & "PLATFORM_COUNTERU2_GAMBLER", "share_package_counter_uav", ::givecratekillstreak);
-  registercratetype("supplydrop_mp", "killstreak", "remote_missile_mp", 85, & "KILLSTREAK_REMOTE_MISSILE_CRATE", & "PLATFORM_REMOTE_MISSILE_GAMBLER", "share_package_remote_missile", ::givecratekillstreak);
-  registercratetype("supplydrop_mp", "killstreak", "planemortar_mp", 80, & "KILLSTREAK_PLANE_MORTAR_CRATE", & "PLATFORM_PLANE_MORTAR_GAMBLER", "share_package_plane_mortar", ::givecratekillstreak);
-  registercratetype("supplydrop_mp", "killstreak", "autoturret_mp", 80, & "KILLSTREAK_AUTO_TURRET_CRATE", & "PLATFORM_AUTO_TURRET_GAMBLER", "share_package_sentry_gun", ::givecratekillstreak);
-  registercratetype("supplydrop_mp", "killstreak", "microwaveturret_mp", 120, & "KILLSTREAK_MICROWAVE_TURRET_CRATE", & "PLATFORM_MICROWAVE_TURRET_GAMBLER", "share_package_microwave_turret", ::givecratekillstreak);
-  registercratetype("supplydrop_mp", "killstreak", "inventory_minigun_mp", 60, & "KILLSTREAK_MINIGUN_CRATE", & "PLATFORM_MINIGUN_GAMBLER", "share_package_death_machine", ::givecratekillstreak);
-  registercratetype("supplydrop_mp", "killstreak", "inventory_m32_mp", 60, & "KILLSTREAK_M32_CRATE", & "PLATFORM_M32_GAMBLER", "share_package_multiple_grenade_launcher", ::givecratekillstreak);
-  registercratetype("supplydrop_mp", "killstreak", "helicopter_guard_mp", 20, & "KILLSTREAK_HELICOPTER_GUARD_CRATE", & "PLATFORM_HELICOPTER_GUARD_GAMBLER", "share_package_helicopter_guard", ::givecratekillstreak);
-  registercratetype("supplydrop_mp", "killstreak", "radardirection_mp", 20, & "KILLSTREAK_SATELLITE_CRATE", & "PLATFORM_SATELLITE_GAMBLER", "share_package_satellite", ::givecratekillstreak);
-  registercratetype("supplydrop_mp", "killstreak", "qrdrone_mp", 20, & "KILLSTREAK_QRDRONE_CRATE", & "PLATFORM_QRDRONE_GAMBLER", "share_package_qrdrone", ::givecratekillstreak);
-  registercratetype("supplydrop_mp", "killstreak", "inventory_ai_tank_drop_mp", 20, & "KILLSTREAK_AI_TANK_CRATE", & "PLATFORM_AI_TANK_GAMBLER", "share_package_aitank", ::givecratekillstreak);
-  registercratetype("supplydrop_mp", "killstreak", "helicopter_comlink_mp", 20, & "KILLSTREAK_HELICOPTER_CRATE", & "PLATFORM_HELICOPTER_GAMBLER", "share_package_helicopter_comlink", ::givecratekillstreak);
-  registercratetype("supplydrop_mp", "killstreak", "emp_mp", 5, & "KILLSTREAK_EMP_CRATE", & "PLATFORM_EMP_GAMBLER", "share_package_emp", ::givecratekillstreak);
-  registercratetype("supplydrop_mp", "killstreak", "remote_mortar_mp", 2, & "KILLSTREAK_REMOTE_MORTAR_CRATE", & "PLATFORM_REMOTE_MORTAR_GAMBLER", "share_package_remote_mortar", ::givecratekillstreak);
-  registercratetype("supplydrop_mp", "killstreak", "helicopter_player_gunner_mp", 2, & "KILLSTREAK_HELICOPTER_GUNNER_CRATE", & "PLATFORM_HELICOPTER_GUNNER_GAMBLER", "share_package_helicopter_gunner", ::givecratekillstreak);
-  registercratetype("supplydrop_mp", "killstreak", "dogs_mp", 2, & "KILLSTREAK_DOGS_CRATE", & "PLATFORM_DOGS_GAMBLER", "share_package_dogs", ::givecratekillstreak);
-  registercratetype("supplydrop_mp", "killstreak", "straferun_mp", 2, & "KILLSTREAK_STRAFERUN_CRATE", & "PLATFORM_STRAFERUN_GAMBLER", "share_package_strafe_run", ::givecratekillstreak);
-  registercratetype("supplydrop_mp", "killstreak", "missile_swarm_mp", 2, & "KILLSTREAK_MISSILE_SWARM_CRATE", & "PLATFORM_MISSILE_SWARM_GAMBLER", "share_package_missile_swarm", ::givecratekillstreak);
-  registercratetype("inventory_supplydrop_mp", "killstreak", "radar_mp", 100, & "KILLSTREAK_RADAR_CRATE", & "PLATFORM_RADAR_GAMBLER", "share_package_uav", ::givecratekillstreak);
-  registercratetype("inventory_supplydrop_mp", "killstreak", "counteruav_mp", 100, & "KILLSTREAK_COUNTERU2_CRATE", & "PLATFORM_COUNTERU2_GAMBLER", "share_package_counter_uav", ::givecratekillstreak);
-  registercratetype("inventory_supplydrop_mp", "killstreak", "rcbomb_mp", 100, & "KILLSTREAK_RCBOMB_CRATE", & "PLATFORM_RCBOMB_GAMBLER", "share_package_rcbomb", ::givecratekillstreak);
-  registercratetype("inventory_supplydrop_mp", "killstreak", "inventory_missile_drone_mp", 100, & "KILLSTREAK_MISSILE_DRONE_CRATE", & "PLATFORM_MISSILE_DRONE_GAMBLER", "share_package_missile_drone", ::givecratekillstreak);
-  registercratetype("inventory_supplydrop_mp", "killstreak", "qrdrone_mp", 20, & "KILLSTREAK_QRDRONE_CRATE", & "PLATFORM_QRDRONE_GAMBLER", "share_package_qrdrone", ::givecratekillstreak);
-  registercratetype("inventory_supplydrop_mp", "killstreak", "remote_missile_mp", 85, & "KILLSTREAK_REMOTE_MISSILE_CRATE", & "PLATFORM_REMOTE_MISSILE_GAMBLER", "share_package_remote_missile", ::givecratekillstreak);
-  registercratetype("inventory_supplydrop_mp", "killstreak", "planemortar_mp", 80, & "KILLSTREAK_PLANE_MORTAR_CRATE", & "PLATFORM_PLANE_MORTAR_GAMBLER", "share_package_plane_mortar", ::givecratekillstreak);
-  registercratetype("inventory_supplydrop_mp", "killstreak", "autoturret_mp", 80, & "KILLSTREAK_AUTO_TURRET_CRATE", & "PLATFORM_AUTO_TURRET_GAMBLER", "share_package_sentry_gun", ::givecratekillstreak);
-  registercratetype("inventory_supplydrop_mp", "killstreak", "microwaveturret_mp", 120, & "KILLSTREAK_MICROWAVE_TURRET_CRATE", & "PLATFORM_MICROWAVE_TURRET_GAMBLER", "share_package_microwave_turret", ::givecratekillstreak);
-  registercratetype("inventory_supplydrop_mp", "killstreak", "inventory_minigun_mp", 60, & "KILLSTREAK_MINIGUN_CRATE", & "PLATFORM_MINIGUN_GAMBLER", "share_package_death_machine", ::givecratekillstreak);
-  registercratetype("inventory_supplydrop_mp", "killstreak", "inventory_m32_mp", 60, & "KILLSTREAK_M32_CRATE", & "PLATFORM_M32_GAMBLER", "share_package_multiple_grenade_launcher", ::givecratekillstreak);
-  registercratetype("inventory_supplydrop_mp", "killstreak", "remote_mortar_mp", 2, & "KILLSTREAK_REMOTE_MORTAR_CRATE", & "PLATFORM_REMOTE_MORTAR_GAMBLER", "share_package_remote_mortar", ::givecratekillstreak);
-  registercratetype("inventory_supplydrop_mp", "killstreak", "helicopter_guard_mp", 20, & "KILLSTREAK_HELICOPTER_GUARD_CRATE", & "PLATFORM_HELICOPTER_GUARD_GAMBLER", "share_package_helicopter_guard", ::givecratekillstreak);
-  registercratetype("inventory_supplydrop_mp", "killstreak", "radardirection_mp", 20, & "KILLSTREAK_SATELLITE_CRATE", & "PLATFORM_SATELLITE_GAMBLER", "share_package_satellite", ::givecratekillstreak);
-  registercratetype("inventory_supplydrop_mp", "killstreak", "inventory_ai_tank_drop_mp", 20, & "KILLSTREAK_AI_TANK_CRATE", & "PLATFORM_AI_TANK_GAMBLER", "share_package_aitank", ::givecratekillstreak);
-  registercratetype("inventory_supplydrop_mp", "killstreak", "helicopter_comlink_mp", 20, & "KILLSTREAK_HELICOPTER_CRATE", & "PLATFORM_HELICOPTER_GAMBLER", "share_package_helicopter_comlink", ::givecratekillstreak);
-  registercratetype("inventory_supplydrop_mp", "killstreak", "emp_mp", 5, & "KILLSTREAK_EMP_CRATE", & "PLATFORM_EMP_GAMBLER", "share_package_emp", ::givecratekillstreak);
-  registercratetype("inventory_supplydrop_mp", "killstreak", "helicopter_player_gunner_mp", 2, & "KILLSTREAK_HELICOPTER_GUNNER_CRATE", & "PLATFORM_HELICOPTER_GUNNER_GAMBLER", "share_package_helicopter_gunner", ::givecratekillstreak);
-  registercratetype("inventory_supplydrop_mp", "killstreak", "dogs_mp", 2, & "KILLSTREAK_DOGS_CRATE", & "PLATFORM_DOGS_GAMBLER", "share_package_dogs", ::givecratekillstreak);
-  registercratetype("inventory_supplydrop_mp", "killstreak", "straferun_mp", 2, & "KILLSTREAK_STRAFERUN_CRATE", & "PLATFORM_STRAFERUN_GAMBLER", "share_package_strafe_run", ::givecratekillstreak);
-  registercratetype("inventory_supplydrop_mp", "killstreak", "missile_swarm_mp", 2, & "KILLSTREAK_MISSILE_SWARM_CRATE", & "PLATFORM_MISSILE_SWARM_GAMBLER", "share_package_missile_swarm", ::givecratekillstreak);
-  registercratetype("gambler_mp", "killstreak", "radar_mp", 80, & "KILLSTREAK_RADAR_CRATE", undefined, "share_package_uav", ::givecratekillstreak);
-  registercratetype("gambler_mp", "killstreak", "counteruav_mp", 80, & "KILLSTREAK_COUNTERU2_CRATE", undefined, "share_package_counter_uav", ::givecratekillstreak);
-  registercratetype("gambler_mp", "killstreak", "rcbomb_mp", 80, & "KILLSTREAK_RCBOMB_CRATE", undefined, "share_package_rcbomb", ::givecratekillstreak);
-  registercratetype("gambler_mp", "killstreak", "inventory_missile_drone_mp", 90, & "KILLSTREAK_MISSILE_DRONE_CRATE", undefined, "share_package_missile_drone", ::givecratekillstreak);
-  registercratetype("gambler_mp", "killstreak", "qrdrone_mp", 30, & "KILLSTREAK_QRDRONE_CRATE", undefined, "share_package_qrdrone", ::givecratekillstreak);
-  registercratetype("gambler_mp", "killstreak", "microwaveturret_mp", 100, & "KILLSTREAK_MICROWAVE_TURRET_CRATE", undefined, "share_package_microwave_turret", ::givecratekillstreak);
-  registercratetype("gambler_mp", "killstreak", "remote_missile_mp", 90, & "KILLSTREAK_REMOTE_MISSILE_CRATE", undefined, "share_package_remote_missile", ::givecratekillstreak);
-  registercratetype("gambler_mp", "killstreak", "planemortar_mp", 90, & "KILLSTREAK_PLANE_MORTAR_CRATE", undefined, "share_package_plane_mortar", ::givecratekillstreak);
-  registercratetype("gambler_mp", "killstreak", "autoturret_mp", 90, & "KILLSTREAK_AUTO_TURRET_CRATE", undefined, "share_package_sentry_gun", ::givecratekillstreak);
-  registercratetype("gambler_mp", "killstreak", "inventory_minigun_mp", 60, & "KILLSTREAK_MINIGUN_CRATE", undefined, "share_package_death_machine", ::givecratekillstreak);
-  registercratetype("gambler_mp", "killstreak", "inventory_m32_mp", 60, & "KILLSTREAK_M32_CRATE", undefined, "share_package_multiple_grenade_launcher", ::givecratekillstreak);
-  registercratetype("gambler_mp", "killstreak", "remote_mortar_mp", 2, & "KILLSTREAK_REMOTE_MORTAR_CRATE", undefined, "share_package_remote_mortar", ::givecratekillstreak);
-  registercratetype("gambler_mp", "killstreak", "helicopter_guard_mp", 30, & "KILLSTREAK_HELICOPTER_GUARD_CRATE", undefined, "share_package_helicopter_guard", ::givecratekillstreak);
-  registercratetype("gambler_mp", "killstreak", "radardirection_mp", 30, & "KILLSTREAK_SATELLITE_CRATE", undefined, "share_package_satellite", ::givecratekillstreak);
-  registercratetype("gambler_mp", "killstreak", "inventory_ai_tank_drop_mp", 30, & "KILLSTREAK_AI_TANK_CRATE", undefined, "share_package_aitank", ::givecratekillstreak);
-  registercratetype("gambler_mp", "killstreak", "helicopter_comlink_mp", 30, & "KILLSTREAK_HELICOPTER_CRATE", undefined, "share_package_helicopter_comlink", ::givecratekillstreak);
-  registercratetype("gambler_mp", "killstreak", "straferun_mp", 2, & "KILLSTREAK_STRAFERUN_CRATE", undefined, "share_package_strafe_run", ::givecratekillstreak);
-  registercratetype("gambler_mp", "killstreak", "emp_mp", 10, & "KILLSTREAK_EMP_CRATE", undefined, "share_package_emp", ::givecratekillstreak);
-  registercratetype("gambler_mp", "killstreak", "helicopter_player_gunner_mp", 2, & "KILLSTREAK_HELICOPTER_GUNNER_CRATE", undefined, "share_package_helicopter_gunner", ::givecratekillstreak);
-  registercratetype("gambler_mp", "killstreak", "dogs_mp", 2, & "KILLSTREAK_DOGS_CRATE", undefined, "share_package_dogs", ::givecratekillstreak);
-  registercratetype("gambler_mp", "killstreak", "missile_swarm_mp", 2, & "KILLSTREAK_MISSILE_SWARM_CRATE", undefined, "share_package_missile_swarm", ::givecratekillstreak);
+  registercratetype("ai_tank_drop_mp", "killstreak", "ai_tank_mp", 1, &"KILLSTREAK_AI_TANK_CRATE", undefined, undefined, undefined, maps\mp\killstreaks\_ai_tank::crateland);
+  registercratetype("inventory_ai_tank_drop_mp", "killstreak", "ai_tank_mp", 1, &"KILLSTREAK_AI_TANK_CRATE", undefined, undefined, undefined, maps\mp\killstreaks\_ai_tank::crateland);
+  registercratetype("minigun_drop_mp", "killstreak", "minigun_mp", 1, &"KILLSTREAK_MINIGUN_CRATE", &"PLATFORM_MINIGUN_GAMBLER", "share_package_death_machine", ::givecrateweapon);
+  registercratetype("inventory_minigun_drop_mp", "killstreak", "minigun_mp", 1, &"KILLSTREAK_MINIGUN_CRATE", &"PLATFORM_MINIGUN_GAMBLER", "share_package_death_machine", ::givecrateweapon);
+  registercratetype("m32_drop_mp", "killstreak", "m32_mp", 1, &"KILLSTREAK_M32_CRATE", &"PLATFORM_M32_GAMBLER", "share_package_multiple_grenade_launcher", ::givecrateweapon);
+  registercratetype("inventory_m32_drop_mp", "killstreak", "m32_mp", 1, &"KILLSTREAK_M32_CRATE", &"PLATFORM_M32_GAMBLER", "share_package_multiple_grenade_launcher", ::givecrateweapon);
+  registercratetype("supplydrop_mp", "killstreak", "radar_mp", 100, &"KILLSTREAK_RADAR_CRATE", &"PLATFORM_RADAR_GAMBLER", "share_package_uav", ::givecratekillstreak);
+  registercratetype("supplydrop_mp", "killstreak", "rcbomb_mp", 100, &"KILLSTREAK_RCBOMB_CRATE", &"PLATFORM_RCBOMB_GAMBLER", "share_package_rcbomb", ::givecratekillstreak);
+  registercratetype("supplydrop_mp", "killstreak", "inventory_missile_drone_mp", 100, &"KILLSTREAK_MISSILE_DRONE_CRATE", &"PLATFORM_MISSILE_DRONE_GAMBLER", "share_package_missile_drone", ::givecratekillstreak);
+  registercratetype("supplydrop_mp", "killstreak", "counteruav_mp", 100, &"KILLSTREAK_COUNTERU2_CRATE", &"PLATFORM_COUNTERU2_GAMBLER", "share_package_counter_uav", ::givecratekillstreak);
+  registercratetype("supplydrop_mp", "killstreak", "remote_missile_mp", 85, &"KILLSTREAK_REMOTE_MISSILE_CRATE", &"PLATFORM_REMOTE_MISSILE_GAMBLER", "share_package_remote_missile", ::givecratekillstreak);
+  registercratetype("supplydrop_mp", "killstreak", "planemortar_mp", 80, &"KILLSTREAK_PLANE_MORTAR_CRATE", &"PLATFORM_PLANE_MORTAR_GAMBLER", "share_package_plane_mortar", ::givecratekillstreak);
+  registercratetype("supplydrop_mp", "killstreak", "autoturret_mp", 80, &"KILLSTREAK_AUTO_TURRET_CRATE", &"PLATFORM_AUTO_TURRET_GAMBLER", "share_package_sentry_gun", ::givecratekillstreak);
+  registercratetype("supplydrop_mp", "killstreak", "microwaveturret_mp", 120, &"KILLSTREAK_MICROWAVE_TURRET_CRATE", &"PLATFORM_MICROWAVE_TURRET_GAMBLER", "share_package_microwave_turret", ::givecratekillstreak);
+  registercratetype("supplydrop_mp", "killstreak", "inventory_minigun_mp", 60, &"KILLSTREAK_MINIGUN_CRATE", &"PLATFORM_MINIGUN_GAMBLER", "share_package_death_machine", ::givecratekillstreak);
+  registercratetype("supplydrop_mp", "killstreak", "inventory_m32_mp", 60, &"KILLSTREAK_M32_CRATE", &"PLATFORM_M32_GAMBLER", "share_package_multiple_grenade_launcher", ::givecratekillstreak);
+  registercratetype("supplydrop_mp", "killstreak", "helicopter_guard_mp", 20, &"KILLSTREAK_HELICOPTER_GUARD_CRATE", &"PLATFORM_HELICOPTER_GUARD_GAMBLER", "share_package_helicopter_guard", ::givecratekillstreak);
+  registercratetype("supplydrop_mp", "killstreak", "radardirection_mp", 20, &"KILLSTREAK_SATELLITE_CRATE", &"PLATFORM_SATELLITE_GAMBLER", "share_package_satellite", ::givecratekillstreak);
+  registercratetype("supplydrop_mp", "killstreak", "qrdrone_mp", 20, &"KILLSTREAK_QRDRONE_CRATE", &"PLATFORM_QRDRONE_GAMBLER", "share_package_qrdrone", ::givecratekillstreak);
+  registercratetype("supplydrop_mp", "killstreak", "inventory_ai_tank_drop_mp", 20, &"KILLSTREAK_AI_TANK_CRATE", &"PLATFORM_AI_TANK_GAMBLER", "share_package_aitank", ::givecratekillstreak);
+  registercratetype("supplydrop_mp", "killstreak", "helicopter_comlink_mp", 20, &"KILLSTREAK_HELICOPTER_CRATE", &"PLATFORM_HELICOPTER_GAMBLER", "share_package_helicopter_comlink", ::givecratekillstreak);
+  registercratetype("supplydrop_mp", "killstreak", "emp_mp", 5, &"KILLSTREAK_EMP_CRATE", &"PLATFORM_EMP_GAMBLER", "share_package_emp", ::givecratekillstreak);
+  registercratetype("supplydrop_mp", "killstreak", "remote_mortar_mp", 2, &"KILLSTREAK_REMOTE_MORTAR_CRATE", &"PLATFORM_REMOTE_MORTAR_GAMBLER", "share_package_remote_mortar", ::givecratekillstreak);
+  registercratetype("supplydrop_mp", "killstreak", "helicopter_player_gunner_mp", 2, &"KILLSTREAK_HELICOPTER_GUNNER_CRATE", &"PLATFORM_HELICOPTER_GUNNER_GAMBLER", "share_package_helicopter_gunner", ::givecratekillstreak);
+  registercratetype("supplydrop_mp", "killstreak", "dogs_mp", 2, &"KILLSTREAK_DOGS_CRATE", &"PLATFORM_DOGS_GAMBLER", "share_package_dogs", ::givecratekillstreak);
+  registercratetype("supplydrop_mp", "killstreak", "straferun_mp", 2, &"KILLSTREAK_STRAFERUN_CRATE", &"PLATFORM_STRAFERUN_GAMBLER", "share_package_strafe_run", ::givecratekillstreak);
+  registercratetype("supplydrop_mp", "killstreak", "missile_swarm_mp", 2, &"KILLSTREAK_MISSILE_SWARM_CRATE", &"PLATFORM_MISSILE_SWARM_GAMBLER", "share_package_missile_swarm", ::givecratekillstreak);
+  registercratetype("inventory_supplydrop_mp", "killstreak", "radar_mp", 100, &"KILLSTREAK_RADAR_CRATE", &"PLATFORM_RADAR_GAMBLER", "share_package_uav", ::givecratekillstreak);
+  registercratetype("inventory_supplydrop_mp", "killstreak", "counteruav_mp", 100, &"KILLSTREAK_COUNTERU2_CRATE", &"PLATFORM_COUNTERU2_GAMBLER", "share_package_counter_uav", ::givecratekillstreak);
+  registercratetype("inventory_supplydrop_mp", "killstreak", "rcbomb_mp", 100, &"KILLSTREAK_RCBOMB_CRATE", &"PLATFORM_RCBOMB_GAMBLER", "share_package_rcbomb", ::givecratekillstreak);
+  registercratetype("inventory_supplydrop_mp", "killstreak", "inventory_missile_drone_mp", 100, &"KILLSTREAK_MISSILE_DRONE_CRATE", &"PLATFORM_MISSILE_DRONE_GAMBLER", "share_package_missile_drone", ::givecratekillstreak);
+  registercratetype("inventory_supplydrop_mp", "killstreak", "qrdrone_mp", 20, &"KILLSTREAK_QRDRONE_CRATE", &"PLATFORM_QRDRONE_GAMBLER", "share_package_qrdrone", ::givecratekillstreak);
+  registercratetype("inventory_supplydrop_mp", "killstreak", "remote_missile_mp", 85, &"KILLSTREAK_REMOTE_MISSILE_CRATE", &"PLATFORM_REMOTE_MISSILE_GAMBLER", "share_package_remote_missile", ::givecratekillstreak);
+  registercratetype("inventory_supplydrop_mp", "killstreak", "planemortar_mp", 80, &"KILLSTREAK_PLANE_MORTAR_CRATE", &"PLATFORM_PLANE_MORTAR_GAMBLER", "share_package_plane_mortar", ::givecratekillstreak);
+  registercratetype("inventory_supplydrop_mp", "killstreak", "autoturret_mp", 80, &"KILLSTREAK_AUTO_TURRET_CRATE", &"PLATFORM_AUTO_TURRET_GAMBLER", "share_package_sentry_gun", ::givecratekillstreak);
+  registercratetype("inventory_supplydrop_mp", "killstreak", "microwaveturret_mp", 120, &"KILLSTREAK_MICROWAVE_TURRET_CRATE", &"PLATFORM_MICROWAVE_TURRET_GAMBLER", "share_package_microwave_turret", ::givecratekillstreak);
+  registercratetype("inventory_supplydrop_mp", "killstreak", "inventory_minigun_mp", 60, &"KILLSTREAK_MINIGUN_CRATE", &"PLATFORM_MINIGUN_GAMBLER", "share_package_death_machine", ::givecratekillstreak);
+  registercratetype("inventory_supplydrop_mp", "killstreak", "inventory_m32_mp", 60, &"KILLSTREAK_M32_CRATE", &"PLATFORM_M32_GAMBLER", "share_package_multiple_grenade_launcher", ::givecratekillstreak);
+  registercratetype("inventory_supplydrop_mp", "killstreak", "remote_mortar_mp", 2, &"KILLSTREAK_REMOTE_MORTAR_CRATE", &"PLATFORM_REMOTE_MORTAR_GAMBLER", "share_package_remote_mortar", ::givecratekillstreak);
+  registercratetype("inventory_supplydrop_mp", "killstreak", "helicopter_guard_mp", 20, &"KILLSTREAK_HELICOPTER_GUARD_CRATE", &"PLATFORM_HELICOPTER_GUARD_GAMBLER", "share_package_helicopter_guard", ::givecratekillstreak);
+  registercratetype("inventory_supplydrop_mp", "killstreak", "radardirection_mp", 20, &"KILLSTREAK_SATELLITE_CRATE", &"PLATFORM_SATELLITE_GAMBLER", "share_package_satellite", ::givecratekillstreak);
+  registercratetype("inventory_supplydrop_mp", "killstreak", "inventory_ai_tank_drop_mp", 20, &"KILLSTREAK_AI_TANK_CRATE", &"PLATFORM_AI_TANK_GAMBLER", "share_package_aitank", ::givecratekillstreak);
+  registercratetype("inventory_supplydrop_mp", "killstreak", "helicopter_comlink_mp", 20, &"KILLSTREAK_HELICOPTER_CRATE", &"PLATFORM_HELICOPTER_GAMBLER", "share_package_helicopter_comlink", ::givecratekillstreak);
+  registercratetype("inventory_supplydrop_mp", "killstreak", "emp_mp", 5, &"KILLSTREAK_EMP_CRATE", &"PLATFORM_EMP_GAMBLER", "share_package_emp", ::givecratekillstreak);
+  registercratetype("inventory_supplydrop_mp", "killstreak", "helicopter_player_gunner_mp", 2, &"KILLSTREAK_HELICOPTER_GUNNER_CRATE", &"PLATFORM_HELICOPTER_GUNNER_GAMBLER", "share_package_helicopter_gunner", ::givecratekillstreak);
+  registercratetype("inventory_supplydrop_mp", "killstreak", "dogs_mp", 2, &"KILLSTREAK_DOGS_CRATE", &"PLATFORM_DOGS_GAMBLER", "share_package_dogs", ::givecratekillstreak);
+  registercratetype("inventory_supplydrop_mp", "killstreak", "straferun_mp", 2, &"KILLSTREAK_STRAFERUN_CRATE", &"PLATFORM_STRAFERUN_GAMBLER", "share_package_strafe_run", ::givecratekillstreak);
+  registercratetype("inventory_supplydrop_mp", "killstreak", "missile_swarm_mp", 2, &"KILLSTREAK_MISSILE_SWARM_CRATE", &"PLATFORM_MISSILE_SWARM_GAMBLER", "share_package_missile_swarm", ::givecratekillstreak);
+  registercratetype("gambler_mp", "killstreak", "radar_mp", 80, &"KILLSTREAK_RADAR_CRATE", undefined, "share_package_uav", ::givecratekillstreak);
+  registercratetype("gambler_mp", "killstreak", "counteruav_mp", 80, &"KILLSTREAK_COUNTERU2_CRATE", undefined, "share_package_counter_uav", ::givecratekillstreak);
+  registercratetype("gambler_mp", "killstreak", "rcbomb_mp", 80, &"KILLSTREAK_RCBOMB_CRATE", undefined, "share_package_rcbomb", ::givecratekillstreak);
+  registercratetype("gambler_mp", "killstreak", "inventory_missile_drone_mp", 90, &"KILLSTREAK_MISSILE_DRONE_CRATE", undefined, "share_package_missile_drone", ::givecratekillstreak);
+  registercratetype("gambler_mp", "killstreak", "qrdrone_mp", 30, &"KILLSTREAK_QRDRONE_CRATE", undefined, "share_package_qrdrone", ::givecratekillstreak);
+  registercratetype("gambler_mp", "killstreak", "microwaveturret_mp", 100, &"KILLSTREAK_MICROWAVE_TURRET_CRATE", undefined, "share_package_microwave_turret", ::givecratekillstreak);
+  registercratetype("gambler_mp", "killstreak", "remote_missile_mp", 90, &"KILLSTREAK_REMOTE_MISSILE_CRATE", undefined, "share_package_remote_missile", ::givecratekillstreak);
+  registercratetype("gambler_mp", "killstreak", "planemortar_mp", 90, &"KILLSTREAK_PLANE_MORTAR_CRATE", undefined, "share_package_plane_mortar", ::givecratekillstreak);
+  registercratetype("gambler_mp", "killstreak", "autoturret_mp", 90, &"KILLSTREAK_AUTO_TURRET_CRATE", undefined, "share_package_sentry_gun", ::givecratekillstreak);
+  registercratetype("gambler_mp", "killstreak", "inventory_minigun_mp", 60, &"KILLSTREAK_MINIGUN_CRATE", undefined, "share_package_death_machine", ::givecratekillstreak);
+  registercratetype("gambler_mp", "killstreak", "inventory_m32_mp", 60, &"KILLSTREAK_M32_CRATE", undefined, "share_package_multiple_grenade_launcher", ::givecratekillstreak);
+  registercratetype("gambler_mp", "killstreak", "remote_mortar_mp", 2, &"KILLSTREAK_REMOTE_MORTAR_CRATE", undefined, "share_package_remote_mortar", ::givecratekillstreak);
+  registercratetype("gambler_mp", "killstreak", "helicopter_guard_mp", 30, &"KILLSTREAK_HELICOPTER_GUARD_CRATE", undefined, "share_package_helicopter_guard", ::givecratekillstreak);
+  registercratetype("gambler_mp", "killstreak", "radardirection_mp", 30, &"KILLSTREAK_SATELLITE_CRATE", undefined, "share_package_satellite", ::givecratekillstreak);
+  registercratetype("gambler_mp", "killstreak", "inventory_ai_tank_drop_mp", 30, &"KILLSTREAK_AI_TANK_CRATE", undefined, "share_package_aitank", ::givecratekillstreak);
+  registercratetype("gambler_mp", "killstreak", "helicopter_comlink_mp", 30, &"KILLSTREAK_HELICOPTER_CRATE", undefined, "share_package_helicopter_comlink", ::givecratekillstreak);
+  registercratetype("gambler_mp", "killstreak", "straferun_mp", 2, &"KILLSTREAK_STRAFERUN_CRATE", undefined, "share_package_strafe_run", ::givecratekillstreak);
+  registercratetype("gambler_mp", "killstreak", "emp_mp", 10, &"KILLSTREAK_EMP_CRATE", undefined, "share_package_emp", ::givecratekillstreak);
+  registercratetype("gambler_mp", "killstreak", "helicopter_player_gunner_mp", 2, &"KILLSTREAK_HELICOPTER_GUNNER_CRATE", undefined, "share_package_helicopter_gunner", ::givecratekillstreak);
+  registercratetype("gambler_mp", "killstreak", "dogs_mp", 2, &"KILLSTREAK_DOGS_CRATE", undefined, "share_package_dogs", ::givecratekillstreak);
+  registercratetype("gambler_mp", "killstreak", "missile_swarm_mp", 2, &"KILLSTREAK_MISSILE_SWARM_CRATE", undefined, "share_package_missile_swarm", ::givecratekillstreak);
   level.cratecategoryweights = [];
   level.cratecategorytypeweights = [];
 
@@ -195,7 +195,7 @@ setcategorytypeweight(category, type, weight) {
   if(!isDefined(level.categorytypeweight[category]))
     level.categorytypeweight[category] = [];
 
-  level.categorytypeweight[category][type] = spawnstruct();
+  level.categorytypeweight[category][type] = spawnStruct();
   level.categorytypeweight[category][type].weight = weight;
   count = 0;
   totalweight = 0;
@@ -234,7 +234,7 @@ registercratetype(category, type, name, weight, hint, hint_gambler, sharestat, g
   if(!isDefined(level.cratetypes[category]))
     level.cratetypes[category] = [];
 
-  cratetype = spawnstruct();
+  cratetype = spawnStruct();
   cratetype.type = type;
   cratetype.name = name;
   cratetype.weight = weight;
@@ -321,12 +321,12 @@ validate_crate_type(killstreak_name, weapon_name, crate_type_name) {
           return true;
       }
 
-      ents = getentarray("weapon_" + weapon_name, "classname");
+      ents = getEntArray("weapon_" + weapon_name, "classname");
 
       if(isDefined(ents) && ents.size > 0)
         return true;
 
-      crate_ents = getentarray("care_package", "script_noteworthy");
+      crate_ents = getEntArray("care_package", "script_noteworthy");
 
       for(j = 0; j < crate_ents.size; j++) {
         if(!isDefined(crate_ents[j].cratetype)) {
@@ -944,7 +944,7 @@ dropalltogroundaftercratedelete(crate, crate_origin) {
 }
 
 dropcratestoground(origin, radius) {
-  crate_ents = getentarray("care_package", "script_noteworthy");
+  crate_ents = getEntArray("care_package", "script_noteworthy");
   radius_sq = radius * radius;
 
   for(i = 0; i < crate_ents.size; i++) {
@@ -986,10 +986,10 @@ cratespawn(category, owner, team, drop_origin, drop_angle) {
   crate thread ownerteamchangewatcher();
 
   if(category == "ai_tank_drop_mp" || category == "inventory_ai_tank_drop_mp") {
-    crate setmodel(level.cratemodeltank);
+    crate setModel(level.cratemodeltank);
     crate setenemymodel(level.cratemodeltank);
   } else {
-    crate setmodel(level.cratemodelfriendly);
+    crate setModel(level.cratemodelfriendly);
     crate setenemymodel(level.cratemodelenemy);
   }
 
@@ -1090,7 +1090,7 @@ play_impact_sound() {
   while(abs(self.velocity[2]) > 5)
     wait 0.1;
 
-  self playsound("phy_impact_supply");
+  self playSound("phy_impact_supply");
 }
 
 update_crate_velocity() {
@@ -1128,7 +1128,7 @@ do_supply_drop_detonation(weapname, owner) {
 
   if(!isDefined(owner) || owner maps\mp\killstreaks\_emp::isenemyempkillstreakactive() == 0) {
     thread playsmokesound(self.origin, 6, level.sound_smoke_start, level.sound_smoke_stop, level.sound_smoke_loop);
-    playfxontag(level._supply_drop_smoke_fx, self, "tag_fx");
+    playFXOnTag(level._supply_drop_smoke_fx, self, "tag_fx");
     proj_explosion_sound = getweaponprojexplosionsound(weapname);
     play_sound_in_space(proj_explosion_sound, self.origin);
   }
@@ -1207,12 +1207,12 @@ unlinkonrotation(crate) {
   wait(waitbeforerotationcheck);
   mincos = getdvarintdefault("scr_supplydrop_killcam_max_rot", 0.999);
   cosine = 1;
-  currentdirection = vectornormalize(anglestoforward(crate.angles));
+  currentdirection = vectornormalize(anglesToForward(crate.angles));
 
   while(cosine > mincos) {
     olddirection = currentdirection;
     wait 0.05;
-    currentdirection = vectornormalize(anglestoforward(crate.angles));
+    currentdirection = vectornormalize(anglesToForward(crate.angles));
     cosine = vectordot(olddirection, currentdirection);
   }
 
@@ -1272,7 +1272,7 @@ watch_explosive_crate() {
       self.hacker = self;
 
     self radiusdamage(self.origin, 256, 300, 75, self.hacker, "MOD_EXPLOSIVE", "supplydrop_mp");
-    playfx(level._supply_drop_explosion_fx, self.origin);
+    playFX(level._supply_drop_explosion_fx, self.origin);
     playsoundatposition("wpn_grenade_explode", self.origin);
   } else {
     playsoundatposition("mpl_turret_alert", self.origin);
@@ -1387,7 +1387,7 @@ cratedroptogroundkill() {
 
 cratedroptogroundtrace(start) {
   end = start + vectorscale((0, 0, -1), 8000.0);
-  trace = bullettrace(start, end, 1, self, 1, 1);
+  trace = bulletTrace(start, end, 1, self, 1, 1);
 
   if(isDefined(trace["entity"]) && isplayer(trace["entity"]) && isalive(trace["entity"])) {
     player = trace["entity"];
@@ -1400,8 +1400,8 @@ cratedroptogroundtrace(start) {
     }
     if(distancesquared(start, trace["position"]) < 144 || self istouching(player)) {
       player dodamage(player.health + 1, player.origin, self.owner, self, "none", "MOD_HIT_BY_OBJECT", 0, "supplydrop_mp");
-      player playsound("mpl_supply_crush");
-      player playsound("phy_impact_supply");
+      player playSound("mpl_supply_crush");
+      player playSound("phy_impact_supply");
     }
   }
 }
@@ -1414,8 +1414,8 @@ is_touching_crate() {
     if(isDefined(players[i]) && isalive(players[i]) && self istouching(players[i], extraboundary)) {
       attacker = isDefined(self.owner) ? self.owner : self;
       players[i] dodamage(players[i].health + 1, players[i].origin, attacker, self, "none", "MOD_HIT_BY_OBJECT", 0, "supplydrop_mp");
-      players[i] playsound("mpl_supply_crush");
-      players[i] playsound("phy_impact_supply");
+      players[i] playSound("mpl_supply_crush");
+      players[i] playSound("phy_impact_supply");
     }
 
     self is_equipment_touching_crate(players[i]);
@@ -1770,7 +1770,7 @@ gethelistart(drop_origin, drop_direction) {
   dist = -1 * getdvarintdefault("scr_supplydropIncomingDistance", 10000);
   pathrandomness = 100;
   direction = drop_direction + (0, randomintrange(-2, 3), 0);
-  start_origin = drop_origin + anglestoforward(direction) * dist;
+  start_origin = drop_origin + anglesToForward(direction) * dist;
   start_origin = start_origin + ((randomfloat(2) - 1) * pathrandomness, (randomfloat(2) - 1) * pathrandomness, 0);
 
   if(getdvarintdefault("scr_noflyzones_debug", 0)) {
@@ -1796,7 +1796,7 @@ getheliend(drop_origin, drop_direction) {
     turn = -1 * randomintrange(60, 121);
 
   direction = drop_direction + (0, turn, 0);
-  end_origin = drop_origin + anglestoforward(direction) * dist;
+  end_origin = drop_origin + anglesToForward(direction) * dist;
   end_origin = end_origin + ((randomfloat(2) - 1) * pathrandomness, (randomfloat(2) - 1) * pathrandomness, 0);
   return end_origin;
 }
@@ -1810,7 +1810,7 @@ addoffsetontopoint(point, direction, offset) {
 supplydrophelistartpath(goal, goal_offset) {
   total_tries = 12;
   tries = 0;
-  goalpath = spawnstruct();
+  goalpath = spawnStruct();
   drop_direction = getdropdirection();
 
   while(tries < total_tries) {
@@ -1846,7 +1846,7 @@ supplydrophelistartpath(goal, goal_offset) {
 supplydropheliendpath(origin, drop_direction) {
   total_tries = 5;
   tries = 0;
-  goalpath = spawnstruct();
+  goalpath = spawnStruct();
 
   while(tries < total_tries) {
     goal = getheliend(origin, drop_direction);
@@ -1858,7 +1858,7 @@ supplydropheliendpath(origin, drop_direction) {
     tries++;
   }
 
-  leave_nodes = getentarray("heli_leave", "targetname");
+  leave_nodes = getEntArray("heli_leave", "targetname");
 
   foreach(node in leave_nodes) {
     goalpath.path = gethelipath(origin, node.origin);
@@ -1945,7 +1945,7 @@ helidelivercrate(origin, weaponname, owner, team, killstreak_id, package_content
   wait 1.2;
   chopper notify("drop_crate", chopper.origin, chopper.angles);
   chopper.droptime = gettime();
-  chopper playsound("veh_supply_drop");
+  chopper playSound("veh_supply_drop");
   wait 0.7;
   supplydropspeed = getdvarintdefault("scr_supplydropSpeedLeaving", 150);
   supplydropaccel = getdvarintdefault("scr_supplydropAccelLeaving", 40);
@@ -2047,16 +2047,16 @@ helidestroyed() {
 
 lbexplode() {
   forward = self.origin + (0, 0, 1) - self.origin;
-  playfx(level.chopper_fx["explode"]["death"], self.origin, forward);
-  self playsound(level.heli_sound["crash"]);
+  playFX(level.chopper_fx["explode"]["death"], self.origin, forward);
+  self playSound(level.heli_sound["crash"]);
   self notify("explode");
   self delete();
 }
 
 lbspin(speed) {
   self endon("explode");
-  playfxontag(level.chopper_fx["explode"]["large"], self, "tail_rotor_jnt");
-  playfxontag(level.chopper_fx["fire"]["trail"]["large"], self, "tail_rotor_jnt");
+  playFXOnTag(level.chopper_fx["explode"]["large"], self, "tail_rotor_jnt");
+  playFXOnTag(level.chopper_fx["fire"]["trail"]["large"], self, "tail_rotor_jnt");
   self setyawspeed(speed, speed, speed);
 
   while(isDefined(self)) {
@@ -2076,7 +2076,7 @@ attachreconmodel(modelname, owner) {
   }
   reconmodel = spawn("script_model", self.origin);
   reconmodel.angles = self.angles;
-  reconmodel setmodel(modelname);
+  reconmodel setModel(modelname);
   reconmodel.model_name = modelname;
   reconmodel linkto(self);
   reconmodel setcontents(0);

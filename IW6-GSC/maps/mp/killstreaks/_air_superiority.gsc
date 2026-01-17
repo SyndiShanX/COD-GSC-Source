@@ -137,9 +137,7 @@ cleanupFlyby(owner, plane, streakName) {
 findTargetsOfType(attacker, victimTeam, checkFunc, candidateList, curTargetsStruct) {
   if(isDefined(candidateList)) {
     foreach(target in candidateList) {
-      if([
-          [checkFunc]
-        ](attacker, victimTeam, target)) {
+      if([[checkFunc]](attacker, victimTeam, target)) {
         curTargetsStruct.targets[curTargetsStruct.targets.size] = target;
       }
     }

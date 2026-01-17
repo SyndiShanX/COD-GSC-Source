@@ -32,26 +32,26 @@ function main() {
 function function_6dd507bc() {
   self endon("death");
   level endon("apothicon_trapped");
-  while (true) {
-    if(isdefined(level.hostmigrationtimer) && level.hostmigrationtimer) {
+  while(true) {
+    if(isDefined(level.hostmigrationtimer) && level.hostmigrationtimer) {
       util::wait_network_frame();
       continue;
     }
     self function_3dd4e95e("zm_genesis_apothicon_rumble");
     wait(0.1);
-    while (level flag::get("apothicon_near_trap")) {
+    while(level flag::get("apothicon_near_trap")) {
       util::wait_network_frame();
     }
   }
 }
 
 function function_16364bba() {
-  for (i = 0; i < 5; i++) {
+  for(i = 0; i < 5; i++) {
     self waittill("hash_b58a19d3");
     self function_3dd4e95e("zm_genesis_apothicon_roar");
   }
   self waittill("hash_c091a029");
-  while (!level flag::get("pap_room_open")) {
+  while(!level flag::get("pap_room_open")) {
     self function_3dd4e95e("zm_genesis_apothicon_rumble");
     wait(0.1);
   }
@@ -71,8 +71,8 @@ function function_3dd4e95e(str_rumble) {
 
 function function_e30ec73e() {
   s_start = struct::get("apothicon_intro_bundle");
-  scene::add_scene_func("cin_genesis_apothicon_papintro", & function_860971ff, "play");
-  scene::add_scene_func("cin_genesis_apothicon_papintro", & function_a2294b99, "done");
+  scene::add_scene_func("cin_genesis_apothicon_papintro", &function_860971ff, "play");
+  scene::add_scene_func("cin_genesis_apothicon_papintro", &function_a2294b99, "done");
   level thread scene::init("cin_genesis_apothicon_papintro");
   level waittill("start_zombie_round_logic");
   level thread function_4fa16b52();
@@ -92,18 +92,18 @@ function function_a2294b99(a_ents) {
 function function_4fa16b52() {
   var_446599c2 = struct::get("apothicon_trap_trig", "targetname");
   var_e80ed647 = struct::get("apothicon_trap_door", "targetname");
-  if(isdefined(var_446599c2.script_flag) && !isdefined(level.flag[var_446599c2.script_flag])) {
+  if(isDefined(var_446599c2.script_flag) && !isDefined(level.flag[var_446599c2.script_flag])) {
     level flag::init(var_446599c2.script_flag);
   }
   var_446599c2 thread function_d5419c08();
-  var_cf61f0f8 = var_e80ed647 zm_unitrigger::create_unitrigger(&"ZM_GENESIS_APOTHICON_DOOR", 128, & function_d9879865, undefined, "unitrigger_radius");
+  var_cf61f0f8 = var_e80ed647 zm_unitrigger::create_unitrigger(&"ZM_GENESIS_APOTHICON_DOOR", 128, &function_d9879865, undefined, "unitrigger_radius");
   var_cf61f0f8 thread function_16d77af();
 }
 
 function function_d5419c08() {
-  s_unitrigger = self zm_unitrigger::create_dyn_unitrigger(&"ZM_GENESIS_APOTHICON_TRAP_READY", undefined, & function_f94d9124);
+  s_unitrigger = self zm_unitrigger::create_dyn_unitrigger(&"ZM_GENESIS_APOTHICON_TRAP_READY", undefined, &function_f94d9124);
   s_unitrigger.inactive_reassess_time = 0.1;
-  a_e_parts = getentarray(self.target, "targetname");
+  a_e_parts = getEntArray(self.target, "targetname");
   foreach(e_part in a_e_parts) {
     if(e_part.script_noteworthy === "clip") {
       s_unitrigger.e_clip = e_part;
@@ -113,7 +113,7 @@ function function_d5419c08() {
   }
   self thread function_a15e0860(s_unitrigger);
   if(1) {
-    for (;;) {
+    for(;;) {
       self waittill("trigger_activated", e_player);
     }
     if(!level flag::get("apothicon_near_trap")) {}
@@ -121,7 +121,7 @@ function function_d5419c08() {
     exploder::exploder("fxexp_361");
     level function_73f1531();
     e_player notify("gen_pos");
-    if(isdefined(self.script_flag)) {
+    if(isDefined(self.script_flag)) {
       level flag::set(self.script_flag);
     }
     return;
@@ -176,7 +176,7 @@ function function_d6eeedf0(n_state) {
 }
 
 function function_81a3e18f(b_on) {
-  for (i = 1; i <= 4; i++) {
+  for(i = 1; i <= 4; i++) {
     if(b_on) {
       self showpart("j_flash_0" + i);
       self hidepart("j_green_0" + i);
@@ -191,14 +191,14 @@ function function_78f98ad9() {
   var_329d83b2 = getent("tesla_trap_console", "targetname");
   var_329d83b2 function_81a3e18f(1);
   var_329d83b2 function_d6eeedf0(1);
-  var_329d83b2 playsound("zmb_deathray_console_ready");
-  while (level flag::get("apothicon_near_trap")) {
-    for (i = 1; i < 5; i++) {
+  var_329d83b2 playSound("zmb_deathray_console_ready");
+  while(level flag::get("apothicon_near_trap")) {
+    for(i = 1; i < 5; i++) {
       hidemiscmodels("apothicon_trap_power_on" + i);
       showmiscmodels("apothicon_trap_power_off" + i);
     }
     wait(0.2);
-    for (i = 1; i < 5; i++) {
+    for(i = 1; i < 5; i++) {
       hidemiscmodels("apothicon_trap_power_off" + i);
       showmiscmodels("apothicon_trap_power_on" + i);
     }
@@ -209,7 +209,7 @@ function function_78f98ad9() {
   }
   var_329d83b2 function_d6eeedf0(0);
   var_329d83b2 function_81a3e18f(0);
-  var_329d83b2 playsound("zmb_deathray_console_unavailable");
+  var_329d83b2 playSound("zmb_deathray_console_unavailable");
 }
 
 function function_b89b1260() {
@@ -217,14 +217,14 @@ function function_b89b1260() {
   level endon("apothicon_trapped");
   var_217ba6c8 = struct::get("apothicon_approach_tesla", "targetname");
   var_329d83b2 = getent("tesla_trap_console", "targetname");
-  while (true) {
+  while(true) {
     level waittill("hash_864571db");
     playsoundatposition("evt_apothicon_alarm", (714, 303, 91));
     level flag::set("apothicon_near_trap");
     level thread function_78f98ad9();
     level waittill("hash_53fb6fd3");
     level flag::clear("apothicon_near_trap");
-    for (i = 1; i < 5; i++) {
+    for(i = 1; i < 5; i++) {
       hidemiscmodels("apothicon_trap_power_off" + i);
       showmiscmodels("apothicon_trap_power_on" + i);
     }
@@ -233,7 +233,7 @@ function function_b89b1260() {
 
 function function_3187e8a6() {
   level endon("apothicon_trapped");
-  while (true) {
+  while(true) {
     level scene::play("cin_genesis_apothicon_flightpath", self);
     level function_1ff56fb0("cin_genesis_apothicon_flightpath");
   }
@@ -241,7 +241,7 @@ function function_3187e8a6() {
 
 function function_73f1531() {
   level flag::set("apothicon_trapped");
-  for (i = 1; i < 5; i++) {
+  for(i = 1; i < 5; i++) {
     hidemiscmodels("apothicon_trap_power_off" + i);
     showmiscmodels("apothicon_trap_power_on" + i);
   }
@@ -256,7 +256,7 @@ function function_73f1531() {
 
 function function_1ff56fb0(str_scene) {
   s_scene = struct::get(str_scene, "scriptbundlename");
-  if(isdefined(s_scene)) {
+  if(isDefined(s_scene)) {
     s_scene.scene_played = 0;
   }
 }

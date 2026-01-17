@@ -152,8 +152,8 @@ bunker_setup() {
   }
 
   level.player set_ignoreme(1);
-  a_sp_spawners1 = getentarray("bunker_1st_room_coke_worker", "script_noteworthy");
-  a_sp_spawners2 = getentarray("bunker_civilian_runner", "script_noteworthy");
+  a_sp_spawners1 = getEntArray("bunker_1st_room_coke_worker", "script_noteworthy");
+  a_sp_spawners2 = getEntArray("bunker_civilian_runner", "script_noteworthy");
   a_sp_spawners = arraycombine(a_sp_spawners1, a_sp_spawners2, 0, 0);
 
   foreach(spawner in a_sp_spawners)
@@ -166,7 +166,7 @@ bunker_setup() {
   add_spawn_function_ai_group("bunker_1st_room", ::bunker_waittill_enemy_alerted);
   level thread bunker_ambient_mortars();
   level thread fake_destructible_blue_bowl();
-  a_e_lights = getentarray("firelight_bunker", "targetname");
+  a_e_lights = getEntArray("firelight_bunker", "targetname");
 
   foreach(light in a_e_lights)
   light setlightintensity(5.0);
@@ -611,15 +611,13 @@ bunker_patroller_play_table_kick() {
 }
 
 bunker_table_kick_1_deathfunction() {
-  if(!flag("bunker_table_01_flipped")) {
-  }
+  if(!flag("bunker_table_01_flipped")) {}
 
   return false;
 }
 
 bunker_table_kick_2_deathfunction() {
-  if(!flag("bunker_table_03_flipped")) {
-  }
+  if(!flag("bunker_table_03_flipped")) {}
 
   return false;
 }
@@ -747,7 +745,7 @@ bunker_1stroom_fight() {
   level thread move_friendlies_up_to_mid_bunker();
   trigger_use("mason_bunker_colortrigger1");
   trigger_wait("bunker_mid_trigger");
-  a_sp_midguys = getentarray("bunker_1stroom_end_reinforcements", "targetname");
+  a_sp_midguys = getEntArray("bunker_1stroom_end_reinforcements", "targetname");
   simple_spawn(a_sp_midguys);
 }
 
@@ -1152,7 +1150,7 @@ bunker_lookat_physics_pulse(str_flag) {
 }
 
 cocaine_vision_setup() {
-  a_destructibles = getentarray("destructible", "targetname");
+  a_destructibles = getEntArray("destructible", "targetname");
 
   foreach(object in a_destructibles) {
     if(object.destructibledef == "fxdest_accessories_cocaine")

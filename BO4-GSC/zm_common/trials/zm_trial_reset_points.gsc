@@ -9,7 +9,6 @@
 #include scripts\zm_common\zm_loadout;
 #include scripts\zm_common\zm_score;
 #include scripts\zm_common\zm_trial;
-
 #namespace zm_trial_reset_points;
 
 autoexec __init__system__() {
@@ -24,7 +23,7 @@ __init__() {
   zm_trial::register_challenge(#"reset_points", &on_begin, &on_end);
 }
 
-private on_begin(var_899c6d17) {
+on_begin(var_899c6d17) {
   if(isDefined(var_899c6d17)) {
     var_899c6d17 = zm_trial::function_5769f26a(var_899c6d17);
   } else {
@@ -38,7 +37,7 @@ private on_begin(var_899c6d17) {
   }
 }
 
-private reset_points(var_899c6d17) {
+reset_points(var_899c6d17) {
   if(self bgb::is_enabled(#"zm_bgb_shopping_free")) {
     self bgb::do_one_shot_use();
     self playsoundtoplayer(#"zmb_bgb_shoppingfree_coinreturn", self);
@@ -46,7 +45,7 @@ private reset_points(var_899c6d17) {
   }
 
   self.score = var_899c6d17;
-  self.pers[#"score"] = var_899c6d17;
+  self.pers[# "score"] = var_899c6d17;
 }
 
-private on_end(round_reset) {}
+on_end(round_reset) {}

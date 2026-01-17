@@ -9,16 +9,16 @@
 
 /* -=-=-=-=-=-=-=-=-=-=
 
-SP & CO-OP XP/Rank system
+SP &CO-OP XP/Rank system
 
 -=-=-=-=-=-=-=-=-=-=-=- */
 
 init() {
   maps\_hud::init();
 
-  // &&1 was promoted to &&2 &&3!
+  // && 1 was promoted to && 2 && 3!
   precacheString(&"RANK_PLAYER_WAS_PROMOTED_N");
-  // &&1 was promoted to &&2!
+  // && 1 was promoted to && 2!
   precacheString(&"RANK_PLAYER_WAS_PROMOTED");
   // You've been promoted!
   precacheString(&"RANK_PROMOTED");
@@ -37,14 +37,14 @@ init() {
 
   level.maxRank = int(tableLookup("sp/rankTable.csv", 0, "maxrank", 1));
 
-  /*	for ( rId = 0; rId <= level.maxRank; rId++ )
+  /*	for( rId = 0; rId <= level.maxRank; rId++ )
   		precacheShader( tableLookup( "sp/rankIconTable.csv", 0, rId, 1 ) );*/
 
   rankId = 0;
   rankName = tableLookup("sp/ranktable.csv", 0, rankId, 1);
   assert(isDefined(rankName) && rankName != "");
 
-  while (isDefined(rankName) && rankName != "") {
+  while(isDefined(rankName) && rankName != "") {
     level.rankTable[rankId][1] = tableLookup("sp/ranktable.csv", 0, rankId, 1);
     level.rankTable[rankId][2] = tableLookup("sp/ranktable.csv", 0, rankId, 2);
     level.rankTable[rankId][3] = tableLookup("sp/ranktable.csv", 0, rankId, 3);
@@ -172,9 +172,9 @@ giveXP_think() {
 
 giveXP_helper(attacker) {
   // if AI removed by script/game, no xp to player
-  if(!isdefined(attacker))
+  if(!isDefined(attacker)) {
     return;
-
+  }
   // if player is last to kill, give player kill points	
   if(isPlayer(attacker)) {
     attacker thread giveXp("kill");
@@ -182,23 +182,23 @@ giveXP_helper(attacker) {
   }
 
   // no xp if enemy was finished off by other enemies
-  if(isAI(attacker) && attacker isBadGuy())
+  if(isAI(attacker) && attacker isBadGuy()) {
     return;
-
+  }
   // if enemy shot by player was killed by destructibles
   if(is_special_targetname_attacker(attacker)) {
-    if(isdefined(attacker.attacker))
+    if(isDefined(attacker.attacker))
       self thread giveXP_helper(attacker.attacker);
     return;
   }
 
   // if enemy shot by player was killed by natural causes, no xp
-  if(!isPlayer(attacker) && !isAI(attacker))
+  if(!isPlayer(attacker) && !isAI(attacker)) {
     return;
-
+  }
   // if enemy shot by player was killed by friendly, give assist
-  if(isdefined(self.attacker_list) && self.attacker_list.size > 0) {
-    for (i = 0; i < self.attacker_list.size; i++) {
+  if(isDefined(self.attacker_list) && self.attacker_list.size > 0) {
+    for(i = 0; i < self.attacker_list.size; i++) {
       // if attacker is player and not the last to kill, give player assist points
       if(isPlayer(self.attacker_list[i]) && self.attacker_list[i] != attacker)
         self.attacker_list[i] thread giveXp("assist");
@@ -207,9 +207,9 @@ giveXP_helper(attacker) {
 }
 
 is_special_targetname_attacker(attacker) {
-  assert(isdefined(attacker));
+  assert(isDefined(attacker));
 
-  if(!isdefined(attacker.targetname))
+  if(!isDefined(attacker.targetname))
     return false;
 
   if(attacker.targetname == "destructible")
@@ -229,9 +229,9 @@ AI_xp_init() {
 }
 
 xp_took_damage(damage, attacker, direction_vec, point, type, modelName, tagName) {
-  if(!isdefined(attacker))
+  if(!isDefined(attacker)) {
     return;
-
+  }
   currentTime = gettime();
   timeElapsed = currentTime - self.last_attacked;
   if(timeElapsed <= 10 * 1000) {
@@ -250,9 +250,9 @@ updatePlayerScore(type, value) {
   self notify("update_xp");
   self endon("update_xp");
 
-  if(getdvar("xp_enable", "0") != "1")
+  if(getdvar("xp_enable", "0") != "1") {
     return;
-
+  }
   //assertex ( isDefined( level.scoreInfo ), "Trying to give player XP when XP feature is not enabled, set dvar xp_enable to 1." );
   //assertex ( isDefined( type ), "First string parameter <type> is undefined or missing, you must label this XP reward." );
 
@@ -279,7 +279,7 @@ updatePlayerScore(type, value) {
   self.rankUpdateTotal += value;
 
   // +
-  self.hud_rankscroreupdate.label = & "SCRIPT_PLUS";
+  self.hud_rankscroreupdate.label = &"SCRIPT_PLUS";
 
   self.hud_rankscroreupdate setValue(self.rankUpdateTotal);
   self.hud_rankscroreupdate.alpha = 0.65;
@@ -325,12 +325,12 @@ fontPulse(player) {
   scaleRange = self.maxFontScale - self.baseFontScale;
   //self thread fontMoveup( -60 );
 
-  while (self.fontScale < self.maxFontScale) {
+  while(self.fontScale < self.maxFontScale) {
     self.fontScale = min(self.maxFontScale, self.fontScale + (scaleRange / self.inFrames));
     wait 0.05;
   }
 
-  while (self.fontScale > self.baseFontScale) {
+  while(self.fontScale > self.baseFontScale) {
     self.fontScale = max(self.baseFontScale, self.fontScale - (scaleRange / self.outFrames));
     wait 0.05;
   }
@@ -342,7 +342,7 @@ fontMoveup( start )
 	self endon( "fontPulse" );
 	self.y = start;
 
-	while ( abs( start ) - abs( self.y ) < 60 )
+	while( abs( start ) - abs( self.y ) < 60 )
 	{
 		self.y = self.y - self.moveUpSpeed;
 		wait 0.05;
@@ -366,7 +366,7 @@ updateRank() {
 
   self xpbar_update();
 
-  while (rankId <= newRankId) {
+  while(rankId <= newRankId) {
     self.setPromotion = true;
     rankId++;
   }
@@ -385,7 +385,7 @@ updateRankAnnounceHUD() {
   notifyData = spawnStruct();
 
   // You've been promoted!
-  notifyData.titleText = & "RANK_PROMOTED";
+  notifyData.titleText = &"RANK_PROMOTED";
   notifyData.iconName = self getRankInfoIcon(self.summary["rank"]);
   notifyData.sound = "sp_level_up";
   notifyData.duration = 4.0;
@@ -396,12 +396,12 @@ updateRankAnnounceHUD() {
   if(subRank == 2) {
     notifyData.textLabel = newRankName;
     // I
-    notifyData.notifyText = & "RANK_ROMANI";
+    notifyData.notifyText = &"RANK_ROMANI";
     notifyData.textIsString = true;
   } else if(subRank == 3) {
     notifyData.textLabel = newRankName;
     // II
-    notifyData.notifyText = & "RANK_ROMANII";
+    notifyData.notifyText = &"RANK_ROMANII";
     notifyData.textIsString = true;
   } else {
     notifyData.notifyText = newRankName;
@@ -411,7 +411,6 @@ updateRankAnnounceHUD() {
 
   if(subRank > 1)
     return;
-
 }
 
 notifyMessage(notifyData) {
@@ -451,12 +450,11 @@ showNotifyMessage(notifyData) {
   anchorElem = self.notifyTitle;
 
   if(isDefined(notifyData.titleText)) {
-
     if(isDefined(notifyData.titleLabel))
       self.notifyTitle.label = notifyData.titleLabel;
     else
-      // string not found for 
-      self.notifyTitle.label = & "";
+      // string not found for
+      self.notifyTitle.label = &"";
 
     if(isDefined(notifyData.titleLabel) && !isDefined(notifyData.titleIsString))
       self.notifyTitle setValue(notifyData.titleText);
@@ -471,8 +469,8 @@ showNotifyMessage(notifyData) {
     if(isDefined(notifyData.textLabel))
       self.notifyText.label = notifyData.textLabel;
     else
-      // string not found for 
-      self.notifyText.label = & "";
+      // string not found for
+      self.notifyText.label = &"";
 
     if(isDefined(notifyData.textLabel) && !isDefined(notifyData.textIsString))
       self.notifyText setValue(notifyData.notifyText);
@@ -490,8 +488,8 @@ showNotifyMessage(notifyData) {
     if(isDefined(notifyData.text2Label))
       self.notifyText2.label = notifyData.text2Label;
     else
-      // string not found for 
-      self.notifyText2.label = & "";
+      // string not found for
+      self.notifyText2.label = &"";
 
     self.notifyText2 setText(notifyData.notifyText2);
     self.notifyText2 setPulseFX(100, int(duration * 1000), 1000);
@@ -522,7 +520,7 @@ showNotifyMessage(notifyData) {
     nextNotifyData = self.notifyQueue[0];
 
     newQueue = [];
-    for (i = 1; i < self.notifyQueue.size; i++)
+    for(i = 1; i < self.notifyQueue.size; i++)
       self.notifyQueue[i - 1] = self.notifyQueue[i];
     self.notifyQueue[i - 1] = undefined;
 
@@ -548,10 +546,10 @@ resetOnCancel() {
 waitRequireVisibility(waitTime) {
   interval = .05;
 
-  while (!self canReadText())
+  while(!self canReadText())
     wait interval;
 
-  while (waitTime > 0) {
+  while(waitTime > 0) {
     wait interval;
     if(self canReadText())
       waitTime -= interval;
@@ -613,7 +611,7 @@ getRankForXp(xpVal) {
   rankName = level.rankTable[rankId][1];
   assert(isDefined(rankName));
 
-  while (isDefined(rankName) && rankName != "") {
+  while(isDefined(rankName) && rankName != "") {
     if(xpVal < getRankInfoMinXP(rankId) + getRankInfoXPAmt(rankId))
       return rankId;
 

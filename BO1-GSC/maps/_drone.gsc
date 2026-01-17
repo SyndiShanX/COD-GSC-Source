@@ -85,7 +85,7 @@ drone_init() {
   if(self.team == "allies") {
     self.voice = "american";
     self maps\_names::get_name();
-    self setlookattext(self.name, & "");
+    self setlookattext(self.name, &"");
   }
   if(isDefined(level.droneCallbackThread)) {
     self thread[[level.droneCallbackThread]]();
@@ -285,7 +285,7 @@ getPathArray(firstTargetName, initialPoint) {
         node.angles = (0, 0, 0);
       }
       prof_begin("drone_math");
-      forwardVec = anglestoforward(node.angles);
+      forwardVec = anglesToForward(node.angles);
       rightVec = anglestoright(node.angles);
       upVec = anglestoup(node.angles);
       relativeOffset = (0, (self.droneRunOffset * node.radius), 0);
@@ -396,7 +396,7 @@ drone_fire_at_target(target, was_moving) {
   temp_count = 0;
   while(true) {
     if(Distance2d(drone.origin, target.origin) < 5000) {
-      playfxontag(level.drone_muzzleflash, self, "tag_flash");
+      playFXOnTag(level.drone_muzzleflash, self, "tag_flash");
       MagicBullet("type99_rifle", drone GetTagOrigin("tag_flash"), target.origin);
       wait(RandomFloatRange(1.0, 2.0));
       temp_count++;

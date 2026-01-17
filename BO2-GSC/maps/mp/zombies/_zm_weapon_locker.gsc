@@ -50,7 +50,7 @@ wl_set_stored_weapondata(weapondata) {
 }
 
 triggerweaponslockerwatch() {
-  unitrigger_stub = spawnstruct();
+  unitrigger_stub = spawnStruct();
   unitrigger_stub.origin = self.origin;
 
   if(isDefined(self.script_angles))

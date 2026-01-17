@@ -26,7 +26,7 @@ main(allowed) {
     filter_script_vehicles_from_vehicle_descriptors(allowed);
   }
 
-  entities = getentarray();
+  entities = getEntArray();
 
   for(entity_index = entities.size - 1; entity_index >= 0; entity_index--) {
     entity = entities[entity_index];
@@ -56,8 +56,8 @@ entity_is_allowed(entity, allowed_game_modes) {
 }
 
 filter_script_vehicles_from_vehicle_descriptors(allowed_game_modes) {
-  vehicle_descriptors = getentarray("vehicle_descriptor", "targetname");
-  script_vehicles = getentarray("script_vehicle", "classname");
+  vehicle_descriptors = getEntArray("vehicle_descriptor", "targetname");
+  script_vehicles = getEntArray("script_vehicle", "classname");
   vehicles_to_remove = [];
 
   for(descriptor_index = 0; descriptor_index < vehicle_descriptors.size; descriptor_index++) {
@@ -133,7 +133,7 @@ ondisconnect() {
 }
 
 createcarryobject(ownerteam, trigger, visuals, offset) {
-  carryobject = spawnstruct();
+  carryobject = spawnStruct();
   carryobject.type = "carryObject";
   carryobject.curorigin = trigger.origin;
   carryobject.ownerteam = ownerteam;
@@ -435,9 +435,9 @@ setdropped() {
   trace = undefined;
 
   if(isDefined(self.carrier))
-    angletrace = bullettrace(self.carrier.origin + vectorscale((0, 0, 1), 20.0), self.carrier.origin - vectorscale((0, 0, 1), 2000.0), 0, self.carrier.body);
+    angletrace = bulletTrace(self.carrier.origin + vectorscale((0, 0, 1), 20.0), self.carrier.origin - vectorscale((0, 0, 1), 2000.0), 0, self.carrier.body);
   else
-    angletrace = bullettrace(self.safeorigin + vectorscale((0, 0, 1), 20.0), self.safeorigin - vectorscale((0, 0, 1), 20.0), 0, undefined);
+    angletrace = bulletTrace(self.safeorigin + vectorscale((0, 0, 1), 20.0), self.safeorigin - vectorscale((0, 0, 1), 20.0), 0, undefined);
 
   droppingplayer = self.carrier;
 
@@ -499,8 +499,8 @@ pickuptimeout() {
   self endon("pickup_object");
   self endon("stop_pickup_timeout");
   wait 0.05;
-  minetriggers = getentarray("minefield", "targetname");
-  hurttriggers = getentarray("trigger_hurt", "classname");
+  minetriggers = getEntArray("minefield", "targetname");
+  hurttriggers = getEntArray("trigger_hurt", "classname");
 
   for(index = 0; index < minetriggers.size; index++) {
     if(!self.visuals[0] istouching(minetriggers[index])) {
@@ -553,7 +553,7 @@ trackcarrier() {
 
   while(isDefined(self.carryobject) && isalive(self)) {
     if(self isonground()) {
-      trace = bullettrace(self.origin + vectorscale((0, 0, 1), 20.0), self.origin - vectorscale((0, 0, 1), 20.0), 0, undefined);
+      trace = bulletTrace(self.origin + vectorscale((0, 0, 1), 20.0), self.origin - vectorscale((0, 0, 1), 20.0), 0, undefined);
 
       if(trace["fraction"] < 1)
         self.carryobject.safeorigin = trace["position"];
@@ -582,7 +582,7 @@ manualdropthink() {
 }
 
 createuseobject(ownerteam, trigger, visuals, offset, descriptionallies, descriptionaxis) {
-  useobject = spawnstruct();
+  useobject = spawnStruct();
   useobject.type = "useObject";
   useobject.curorigin = trigger.origin;
   useobject.ownerteam = ownerteam;
@@ -856,7 +856,7 @@ triggertouchthink(object) {
   object.numtouching[team]++;
   object updateuserate();
   touchname = "player" + self.clientid;
-  struct = spawnstruct();
+  struct = spawnStruct();
   struct.player = self;
   struct.starttime = gettime();
   object.touchlist[team][touchname] = struct;
@@ -1621,7 +1621,7 @@ getlabel() {
 }
 
 createdistanceobject(ownerteam, trigger, offset, wholeteamhastoreach, descriptionallies, descriptionaxis) {
-  distanceobject = spawnstruct();
+  distanceobject = spawnStruct();
   distanceobject.type = "distanceObject";
   distanceobject.curorigin = trigger.origin;
   distanceobject.ownerteam = ownerteam;

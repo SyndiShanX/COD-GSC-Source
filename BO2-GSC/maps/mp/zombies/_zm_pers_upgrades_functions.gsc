@@ -766,7 +766,7 @@ pers_magic_box_teddy_bear() {
     self thread pers_magic_box_firesale();
 
   m_bear = spawn("script_model", self.origin);
-  m_bear setmodel(level.chest_joker_model);
+  m_bear setModel(level.chest_joker_model);
   m_bear pers_magic_box_set_teddy_location(level.chest_index);
   self.pers_magix_box_teddy_bear = m_bear;
   m_bear setinvisibletoall();
@@ -881,7 +881,7 @@ pers_treasure_chest_choosespecialweapon(player) {
     if(forced_weapon != "" && isDefined(level.zombie_weapons[forced_weapon]))
       arrayinsert(keys, forced_weapon, 0);
 
-    pap_triggers = getentarray("specialty_weapupgrade", "script_noteworthy");
+    pap_triggers = getEntArray("specialty_weapupgrade", "script_noteworthy");
 
     for(i = 0; i < keys.size; i++) {
       if(maps\mp\zombies\_zm_magicbox::treasure_chest_canplayerreceiveweapon(player, keys[i], pap_triggers))
@@ -944,7 +944,7 @@ pers_magic_box_firesale() {
 box_firesale_teddy_bear(box, box_index) {
   self endon("disconnect");
   m_bear = spawn("script_model", self.origin);
-  m_bear setmodel(level.chest_joker_model);
+  m_bear setModel(level.chest_joker_model);
   m_bear pers_magic_box_set_teddy_location(box_index);
   m_bear setinvisibletoall();
   wait 0.1;
@@ -1024,7 +1024,7 @@ pers_nube_weapon_upgrade_check(player, str_weapon) {
           player maps\mp\zombies\_zm_stats::increment_client_stat("pers_nube_counter", 0);
           str_weapon = "ray_gun_zm";
           fx_org = player.origin;
-          v_dir = anglestoforward(player getplayerangles());
+          v_dir = anglesToForward(player getplayerangles());
           v_up = anglestoup(player getplayerangles());
           fx_org = fx_org + v_dir * 5 + v_up * 12;
           player.upgrade_fx_origin = fx_org;
@@ -1091,7 +1091,7 @@ pers_nube_ammo_hint_string(player, weapon) {
   if(!ammo_cost)
     return false;
 
-  self.stub.hint_string = & "ZOMBIE_WEAPONAMMOONLY";
+  self.stub.hint_string = &"ZOMBIE_WEAPONAMMOONLY";
   self sethintstring(self.stub.hint_string, ammo_cost);
   return true;
 }

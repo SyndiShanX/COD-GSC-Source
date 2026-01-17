@@ -144,7 +144,7 @@ check_ang_and_dist_to_node(node) {
 
     if(ang_diff <= 75) {
       vec = self.origin - node.origin;
-      dot = vectordot(vectornormalize(vec), anglestoforward(node.angles));
+      dot = vectordot(vectornormalize(vec), anglesToForward(node.angles));
 
       debug_balcony_line(node.origin, self.origin, (1, 1, 0));
 
@@ -197,10 +197,10 @@ dobalcony() {
   disable_react();
 
   if(self.a.pose == "crouch" && balconynodetype == "balcony_norailing") {
-    forward = anglestoforward(self.angles);
+    forward = anglesToForward(self.angles);
 
     if(isDefined(self.balcony_node))
-      forward = anglestoforward(self.balcony_node.angles);
+      forward = anglesToForward(self.balcony_node.angles);
 
     self startragdoll();
     self launchragdoll(vectorscale(forward, randomintrange(25, 35)), "tag_eye");

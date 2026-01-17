@@ -6,7 +6,6 @@
 #include scripts\core_common\ai_shared;
 #include scripts\core_common\bots\bot;
 #include scripts\core_common\system_shared;
-
 #namespace bot_stance;
 
 autoexec __init__system__() {
@@ -60,7 +59,7 @@ update(tacbundle) {
 }
 
 handle_path_success() {
-  self endon(#"death", #"hash_399ca08ed5c94410");
+  self endon(#"death", # "hash_399ca08ed5c94410");
   level endon(#"game_ended");
 
   while(isDefined(self.bot)) {
@@ -75,7 +74,7 @@ handle_path_success() {
 }
 
 handle_goal_reached() {
-  self endon(#"death", #"hash_399ca08ed5c94410");
+  self endon(#"death", # "hash_399ca08ed5c94410");
   level endon(#"game_ended");
 
   while(isDefined(self.bot)) {
@@ -277,13 +276,13 @@ function_821cce69(tacbundle, params, node) {
     return false;
   }
 
-  if(!(node.spawnflags&8)) {
+  if(!(node.spawnflags & 8)) {
     self bot::record_text("<dev string:x12c>", (1, 0, 0), "<dev string:x4c>");
 
     return false;
   }
 
-  if(node.spawnflags&4) {
+  if(node.spawnflags & 4) {
     self bot::record_text("<dev string:x147>", (1, 0, 0), "<dev string:x4c>");
 
     return false;

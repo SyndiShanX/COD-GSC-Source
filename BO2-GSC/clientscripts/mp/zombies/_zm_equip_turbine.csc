@@ -35,7 +35,7 @@ turbine_activated_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
   }
 
   if(playsound)
-    self playsound(0, "zmb_turbine_pulse");
+    self playSound(0, "zmb_turbine_pulse");
 }
 
 #using_animtree("zombie_turbine");

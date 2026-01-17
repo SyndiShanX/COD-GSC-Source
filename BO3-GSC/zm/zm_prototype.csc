@@ -41,7 +41,7 @@
 #namespace zm_prototype;
 
 function autoexec __init__sytem__() {
-  system::register("zm_prototype", & __init__, undefined, undefined);
+  system::register("zm_prototype", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -79,7 +79,7 @@ function include_weapons() {
 
 function function_d87a7dcc() {
   var_bd7ba30 = 0;
-  while (true) {
+  while(true) {
     if(!level clientfield::get("zombie_power_on")) {
       level.power_on = 0;
       if(var_bd7ba30) {

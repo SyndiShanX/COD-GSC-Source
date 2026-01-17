@@ -24,13 +24,13 @@ init() {
   precacheitem("missile_drone_projectile_mp");
   loadfx("weapon/missile/fx_missile_drone_light_red");
   registerkillstreak("inventory_missile_drone_mp", "inventory_missile_drone_mp", "killstreak_missile_drone", "missile_drone_used", ::missile_drone_killstreak, 1);
-  registerkillstreakstrings("inventory_missile_drone_mp", & "KILLSTREAK_EARNED_MISSILE_DRONE", & "KILLSTREAK_MISSILE_DRONE_NOT_AVAILABLE", & "KILLSTREAK_MISSILE_DRONE_INBOUND");
+  registerkillstreakstrings("inventory_missile_drone_mp", &"KILLSTREAK_EARNED_MISSILE_DRONE", &"KILLSTREAK_MISSILE_DRONE_NOT_AVAILABLE", &"KILLSTREAK_MISSILE_DRONE_INBOUND");
   registerkillstreakdialog("inventory_missile_drone_mp", "mpl_killstreak_missile_drone", "kls_hkdrone_used", "", "kls_hkdrone_enemy", "", "kls_hkdrone_ready");
   registerkillstreakdevdvar("inventory_missile_drone_mp", "scr_givemissiledrone");
   registerkillstreak("missile_drone_mp", "missile_drone_mp", "killstreak_missile_drone", "missile_drone_used", ::missile_drone_killstreak, 1);
   registerkillstreakaltweapon("missile_drone_mp", "missile_drone_projectile_mp");
   registerkillstreakaltweapon("inventory_missile_drone_mp", "missile_drone_projectile_mp");
-  registerkillstreakstrings("missile_drone_mp", & "KILLSTREAK_EARNED_MISSILE_DRONE", & "KILLSTREAK_MISSILE_DRONE_NOT_AVAILABLE", & "KILLSTREAK_MISSILE_DRONE_INBOUND");
+  registerkillstreakstrings("missile_drone_mp", &"KILLSTREAK_EARNED_MISSILE_DRONE", &"KILLSTREAK_MISSILE_DRONE_NOT_AVAILABLE", &"KILLSTREAK_MISSILE_DRONE_INBOUND");
   registerkillstreakdialog("missile_drone_mp", "mpl_killstreak_missile_drone", "kls_hkdrone_used", "", "kls_hkdrone_enemy", "", "kls_hkdrone_ready");
   setkillstreakteamkillpenaltyscale("missile_drone_mp", 0.0);
 }
@@ -123,7 +123,7 @@ missiledronewatcher(hardpointtype) {
 
 domissiledrone(origin, weapname, killstreak_id, hardpointtype, team) {
   direction = self getplayerangles();
-  forward = anglestoforward(direction);
+  forward = anglesToForward(direction);
   target = origin + vectorscale(forward, 10000);
   debug_line(origin, target, (0.9, 0.1, 0.1));
   projectile = maps\mp\killstreaks\_missile_swarm::projectile_spawn_utility(self, target, origin, "missile_drone_projectile_mp", "drone_missile", 0);
@@ -134,7 +134,7 @@ domissiledrone(origin, weapname, killstreak_id, hardpointtype, team) {
   projectile thread projectile_death_think();
   projectile thread watchdamage();
   projectile.targetname = "remote_drone";
-  projectile playsound("wpn_hunter_ignite");
+  projectile playSound("wpn_hunter_ignite");
   projectile thread killstreak_stop_think(killstreak_id, hardpointtype, team);
   projectile setclientfield("missile_drone_projectile_animate", 1);
 }
@@ -185,7 +185,7 @@ drone_target_search(hardpointtype) {
       searchcounter++;
     else if(level.missile_drone_origin[2] != self.goal.origin[2]) {
       currentangles = self.angles;
-      direction = vectornormalize(anglestoforward(self.angles));
+      direction = vectornormalize(anglesToForward(self.angles));
       direction = vecscale(direction, 1024);
       self.goal.origin = (self.origin[0] + direction[0], self.origin[1] + direction[1], level.missile_drone_origin[2]);
 
@@ -193,7 +193,7 @@ drone_target_search(hardpointtype) {
 
     } else {
       currentangles = self.angles;
-      direction = vectornormalize(anglestoforward(self.angles));
+      direction = vectornormalize(anglesToForward(self.angles));
       direction = vecscale(direction, 1024);
       self.goal.origin = (level.missile_drone_origin[0] + direction[0], level.missile_drone_origin[1] + direction[1], level.missile_drone_origin[2]);
 
@@ -221,7 +221,7 @@ set_drone_target(hardpointtype, target) {
   target["entity"].swarm = self;
   debug_line(self.origin, target["entity"].origin, (0, 0, 0), 5000);
   self missile_settarget(target["entity"], target["offset"]);
-  self playsound("veh_harpy_drone_swarm_incomming");
+  self playSound("veh_harpy_drone_swarm_incomming");
 
   if(!isDefined(target["entity"].swarmsound) || target["entity"].swarmsound == 0)
     self thread target_sounds(target["entity"]);
@@ -284,7 +284,7 @@ projectile_find_target_killstreak(owner, mincos) {
   ks = [];
   ks["offset"] = vectorscale((0, 0, -1), 10.0);
   targets = target_getarray();
-  rcbombs = getentarray("rcbomb", "targetname");
+  rcbombs = getEntArray("rcbomb", "targetname");
   dogs = maps\mp\killstreaks\_dogs::dog_manager_get_dogs();
   targets = arraycombine(targets, rcbombs, 1, 0);
   targets = arraycombine(targets, dogs, 1, 0);
@@ -451,7 +451,7 @@ checkforemp() {
 
 watchdamage() {
   self endon("death");
-  self setcandamage(1);
+  self setCanDamage(1);
   self.maxhealth = 100000;
   self.health = self.maxhealth;
 
@@ -467,8 +467,7 @@ watchdamage() {
     if(self.owner isenemyplayer(attacker)) {
       maps\mp\_scoreevents::processscoreevent("destroyed_missile_drone", attacker, self.owner, weaponname);
       attacker maps\mp\_challenges::addflyswatterstat(weaponname, self);
-    } else {
-    }
+    } else {}
 
     self detonate();
   }
@@ -485,7 +484,7 @@ get_array_sorted_dot_prod(array, mincos) {
     angles = self.angles;
   }
 
-  forwardvec = vectornormalize(anglestoforward(angles));
+  forwardvec = vectornormalize(anglesToForward(angles));
   dotprod = [];
   index = [];
 

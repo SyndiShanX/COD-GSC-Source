@@ -30,16 +30,16 @@ registerbehaviortreeaction(actionname, startfuncptr, updatefuncptr, terminatefun
 
   if(isDefined(startfuncptr)) {
     assert(isfunctionptr(startfuncptr), "<dev string:x1a3>");
-    level._behaviortreeactions[actionname][#"bhtn_action_start"] = startfuncptr;
+    level._behaviortreeactions[actionname][# "bhtn_action_start"] = startfuncptr;
   }
 
   if(isDefined(updatefuncptr)) {
     assert(isfunctionptr(updatefuncptr), "<dev string:x1e7>");
-    level._behaviortreeactions[actionname][#"bhtn_action_update"] = updatefuncptr;
+    level._behaviortreeactions[actionname][# "bhtn_action_update"] = updatefuncptr;
   }
 
   if(isDefined(terminatefuncptr)) {
     assert(isfunctionptr(terminatefuncptr), "<dev string:x22c>");
-    level._behaviortreeactions[actionname][#"bhtn_action_terminate"] = terminatefuncptr;
+    level._behaviortreeactions[actionname][# "bhtn_action_terminate"] = terminatefuncptr;
   }
 }

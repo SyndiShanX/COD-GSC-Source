@@ -6,7 +6,7 @@
 #namespace ball;
 
 function add_ball_return_trigger(trigger) {
-  if(!isdefined(level.ball_return_trigger)) {
+  if(!isDefined(level.ball_return_trigger)) {
     level.ball_return_trigger = [];
   }
   level.ball_return_trigger[level.ball_return_trigger.size] = trigger;

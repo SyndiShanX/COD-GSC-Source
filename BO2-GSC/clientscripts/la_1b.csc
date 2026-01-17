@@ -97,5 +97,4 @@ init_sam_hud_damage() {
   level thread sam_damage();
 }
 
-sam_damage() {
-}
+sam_damage() {}

@@ -8,7 +8,7 @@
 #include xmodelalias\c_mul_pmc_undercover_gear_ol_als;
 
 main() {
-  self setmodel("c_mul_pmc_undercover_body1_ol");
+  self setModel("c_mul_pmc_undercover_body1_ol");
   self.headmodel = codescripts\character::randomelement(xmodelalias\c_mul_pmc_undercover_head_ol_als::main());
   self attach(self.headmodel, "", 1);
   self.gearmodel = codescripts\character::randomelement(xmodelalias\c_mul_pmc_undercover_gear_ol_als::main());

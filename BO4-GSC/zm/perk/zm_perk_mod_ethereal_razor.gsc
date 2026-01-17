@@ -6,7 +6,6 @@
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_perks;
-
 #namespace zm_perk_mod_ethereal_razor;
 
 autoexec __init__system__() {
@@ -18,7 +17,7 @@ __init__() {
 }
 
 enable_ethereal_razor_perk_for_level() {
-  zm_perks::register_perk_mod_basic_info(#"specialty_mod_etherealrazor", "mod_ethereal_razor", #"perk_ethereal_razor", #"specialty_etherealrazor", 5500);
+  zm_perks::register_perk_mod_basic_info(#"specialty_mod_etherealrazor", "mod_ethereal_razor", # "perk_ethereal_razor", # "specialty_etherealrazor", 5500);
   zm_perks::register_perk_threads(#"specialty_mod_etherealrazor", &function_5b26f1e3, &function_98c3f271);
 }
 

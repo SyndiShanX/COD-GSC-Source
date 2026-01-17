@@ -30,7 +30,7 @@ precache() {
   maps\mp\zm_highrise_buildables::include_buildables();
   maps\mp\zm_highrise_buildables::init_buildables();
   maps\mp\zm_highrise_sq::init();
-  maps\mp\zombies\_zm_equip_springpad::init(&"ZM_HIGHRISE_EQUIP_SPRINGPAD_PICKUP_HINT_STRING", & "ZM_HIGHRISE_EQUIP_SPRINGPAD_HOWTO");
+  maps\mp\zombies\_zm_equip_springpad::init(&"ZM_HIGHRISE_EQUIP_SPRINGPAD_PICKUP_HINT_STRING", &"ZM_HIGHRISE_EQUIP_SPRINGPAD_HOWTO");
   level._zombiemode_post_respawn_callback = ::highrise_post_respawn_callback;
   onplayerconnect_callback(::highrise_player_connect_callback);
 }
@@ -47,7 +47,7 @@ main() {
   level.validate_enemy_path_length = ::highrise_validate_enemy_path_length;
   level thread maps\mp\zm_highrise_classic::init_escape_pod();
   level thread maps\mp\zm_highrise_elevators::init_elevators();
-  temp_clips = getentarray("elevator_delete", "targetname");
+  temp_clips = getEntArray("elevator_delete", "targetname");
 
   if(isDefined(temp_clips) && temp_clips.size > 0)
     array_thread(temp_clips, ::self_delete);
@@ -73,7 +73,7 @@ main() {
   level._chugabug_reject_corpse_override_func = ::highrise_chugabud_reject_corpse_func;
   level._chugabud_reject_node_override_func = ::highrise_chugabud_reject_node_func;
   level._chugabud_post_respawn_override_func = ::highrise_chugabud_post_respawn_func;
-  level.insta_kill_triggers = getentarray("instant_death", "targetname");
+  level.insta_kill_triggers = getEntArray("instant_death", "targetname");
   array_thread(level.insta_kill_triggers, ::squashed_death_init, 0);
   e_trigger = getent("instant_death_escape_pod_shaft", "targetname");
 
@@ -707,8 +707,8 @@ escape_pod() {
     escape_pod setclientfield("clientfield_escape_pod_impact_fx", 0);
     escape_pod thread escape_pod_breaking_rotate();
     wait 6;
-    escape_pod playsound("zmb_elevator_run_start");
-    escape_pod playloopsound("zmb_elevator_run", 1);
+    escape_pod playSound("zmb_elevator_run_start");
+    escape_pod playLoopSound("zmb_elevator_run", 1);
     level notify("escape_pod_moving_back_to_start_position");
 
     if(isDefined(escape_pod_blocker_door)) {
@@ -721,9 +721,9 @@ escape_pod() {
     escape_pod moveto(escape_pod.home_origin, 3, 0.1, 0.1);
     escape_pod waittill("movedone");
     escape_pod stoploopsound(1);
-    escape_pod playsound("zmb_esc_pod_crash");
-    escape_pod playsound("zmb_elevator_run_stop");
-    escape_pod playsound("zmb_elevator_ding");
+    escape_pod playSound("zmb_esc_pod_crash");
+    escape_pod playSound("zmb_elevator_run_stop");
+    escape_pod playSound("zmb_elevator_ding");
     escape_pod thread reset_impact_animate();
     used_at_least_once = 1;
   }
@@ -877,7 +877,7 @@ escape_pod_breaking_rotate() {
 
   foreach(roll in rolls) {
     self rotateroll(roll, time, accel, deccel);
-    self playsound("zmb_esc_pod_bump");
+    self playSound("zmb_esc_pod_bump");
     self waittill("rotatedone");
   }
 }
@@ -898,10 +898,10 @@ escape_pod_move() {
   shock_radius = 117.6;
   destination_struct = getstruct(self.target, "targetname");
   level notify("free_fall");
-  self playsound("zmb_esc_pod_break");
+  self playSound("zmb_esc_pod_break");
   self moveto(destination_struct.origin, 3, 0.1, 0.1);
   self waittill("movedone");
-  self playsound("zmb_esc_pod_crash");
+  self playSound("zmb_esc_pod_crash");
   earthquake(0.3, 1.5, self.origin, 256);
   self notify("reached_destination");
   players = get_players();

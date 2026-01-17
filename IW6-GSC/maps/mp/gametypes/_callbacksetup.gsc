@@ -8,9 +8,7 @@ CodeCallback_StartGameType() {
     level waittill("eternity");
 
   if(!isDefined(level.gametypestarted) || !level.gametypestarted) {
-    [
-      [level.callbackStartGameType]
-    ]();
+    [[level.callbackStartGameType]]();
 
     level.gametypestarted = true;
   }

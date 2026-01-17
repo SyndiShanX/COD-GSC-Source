@@ -12,11 +12,11 @@
 #include maps\mp\zombies\_zm_score;
 
 init() {
-  level._challenges = spawnstruct();
+  level._challenges = spawnStruct();
   stats_init();
   level.a_m_challenge_boards = [];
   level.a_uts_challenge_boxes = [];
-  a_m_challenge_boxes = getentarray("challenge_box", "targetname");
+  a_m_challenge_boxes = getEntArray("challenge_box", "targetname");
   array_thread(a_m_challenge_boxes, ::box_init);
   onplayerconnect_callback(::onplayerconnect);
   n_bits = getminbitcountfornum(14);
@@ -89,12 +89,12 @@ add_stat(str_name, b_team, str_hint, n_goal, str_reward_model, fp_give_reward, f
     b_team = 0;
 
   if(!isDefined(str_hint))
-    str_hint = & "";
+    str_hint = &"";
 
   if(!isDefined(n_goal))
     n_goal = 1;
 
-  stat = spawnstruct();
+  stat = spawnStruct();
   stat.str_name = str_name;
   stat.b_team = b_team;
   stat.str_hint = str_hint;
@@ -114,7 +114,7 @@ player_stats_init(n_index) {
   str_character = a_characters[n_index];
 
   if(!isDefined(level._challenges.a_players[n_index])) {
-    level._challenges.a_players[n_index] = spawnstruct();
+    level._challenges.a_players[n_index] = spawnStruct();
     level._challenges.a_players[n_index].a_stats = [];
   }
 
@@ -124,7 +124,7 @@ player_stats_init(n_index) {
   foreach(s_challenge in level._challenges.a_stats) {
     if(!s_challenge.b_team) {
       if(!isDefined(s_player_set.a_stats[s_challenge.str_name]))
-        s_player_set.a_stats[s_challenge.str_name] = spawnstruct();
+        s_player_set.a_stats[s_challenge.str_name] = spawnStruct();
 
       s_stat = s_player_set.a_stats[s_challenge.str_name];
       s_stat.s_parent = s_challenge;
@@ -145,7 +145,7 @@ player_stats_init(n_index) {
 
 team_stats_init(n_index) {
   if(!isDefined(level._challenges.s_team)) {
-    level._challenges.s_team = spawnstruct();
+    level._challenges.s_team = spawnStruct();
     level._challenges.s_team.a_stats = [];
   }
 
@@ -154,7 +154,7 @@ team_stats_init(n_index) {
   foreach(s_challenge in level._challenges.a_stats) {
     if(s_challenge.b_team) {
       if(!isDefined(s_team_set.a_stats[s_challenge.str_name]))
-        s_team_set.a_stats[s_challenge.str_name] = spawnstruct();
+        s_team_set.a_stats[s_challenge.str_name] = spawnStruct();
 
       s_stat = s_team_set.a_stats[s_challenge.str_name];
       s_stat.s_parent = s_challenge;
@@ -228,14 +228,14 @@ check_stat_complete(s_stat) {
 
       foreach(player in a_players) {
         player setclientfieldtoplayer(s_stat.s_parent.cf_complete, 1);
-        player playsound("evt_medal_acquired");
+        player playSound("evt_medal_acquired");
         wait_network_frame();
       }
     } else {
       s_player_stats = level._challenges.a_players[self.characterindex];
       s_player_stats.n_completed++;
       s_player_stats.n_medals_held++;
-      self playsound("evt_medal_acquired");
+      self playSound("evt_medal_acquired");
       self setclientfieldtoplayer(s_stat.s_parent.cf_complete, 1);
     }
 
@@ -299,7 +299,7 @@ board_init(m_board) {
     foreach(s_stat in s_set.a_stats) {
       str_medal_tag = "j_" + str_character + "_medal_0" + n_challenge_index;
       str_glow_tag = "j_" + str_character + "_glow_0" + n_challenge_index;
-      s_tag = spawnstruct();
+      s_tag = spawnStruct();
       s_tag.v_origin = m_board gettagorigin(str_medal_tag);
       s_tag.s_stat = s_stat;
       s_tag.n_character_index = n_char_index;
@@ -314,7 +314,7 @@ board_init(m_board) {
   foreach(s_stat in level._challenges.s_team.a_stats) {
     str_medal_tag = "j_g_medal";
     str_glow_tag = "j_g_glow";
-    s_tag = spawnstruct();
+    s_tag = spawnStruct();
     s_tag.v_origin = m_board gettagorigin(str_medal_tag);
     s_tag.s_stat = s_stat;
     s_tag.n_character_index = 4;
@@ -331,7 +331,7 @@ board_init(m_board) {
 
 box_init() {
   self useanimtree(#animtree);
-  s_unitrigger_stub = spawnstruct();
+  s_unitrigger_stub = spawnStruct();
   s_unitrigger_stub.origin = self.origin + (0, 0, 0);
   s_unitrigger_stub.angles = self.angles;
   s_unitrigger_stub.radius = 64;
@@ -339,7 +339,7 @@ box_init() {
   s_unitrigger_stub.script_width = 64;
   s_unitrigger_stub.script_height = 64;
   s_unitrigger_stub.cursor_hint = "HINT_NOICON";
-  s_unitrigger_stub.hint_string = & "";
+  s_unitrigger_stub.hint_string = &"";
   s_unitrigger_stub.script_unitrigger_type = "unitrigger_box_use";
   s_unitrigger_stub.prompt_and_visibility_func = ::box_prompt_and_visiblity;
   s_unitrigger_stub ent_flag_init("waiting_for_grab");
@@ -372,8 +372,8 @@ box_prompt_and_visiblity(player) {
 update_box_prompt(player) {
   self endon("kill_trigger");
   player endon("death_or_disconnect");
-  str_hint = & "";
-  str_old_hint = & "";
+  str_hint = &"";
+  str_old_hint = &"";
   m_board = self.stub.m_board;
   self sethintstring(str_hint);
 
@@ -384,15 +384,15 @@ update_box_prompt(player) {
 
     if(self.stub.b_busy) {
       if(self.stub ent_flag("waiting_for_grab") && (!isDefined(self.stub.player_using) || self.stub.player_using == player))
-        str_hint = & "ZM_TOMB_CH_G";
+        str_hint = &"ZM_TOMB_CH_G";
       else
-        str_hint = & "";
+        str_hint = &"";
     } else {
-      str_hint = & "";
+      str_hint = &"";
       player.s_lookat_stat = undefined;
       n_closest_dot = 0.996;
       v_eye_origin = player getplayercamerapos();
-      v_eye_direction = anglestoforward(player getplayerangles());
+      v_eye_direction = anglesToForward(player getplayerangles());
 
       foreach(str_tag, s_tag in m_board.a_s_medal_tags) {
         if(!s_tag.s_stat.b_display_tag) {
@@ -413,7 +413,7 @@ update_box_prompt(player) {
             player.s_lookat_stat = s_tag.s_stat;
 
             if(stat_reward_available(s_tag.s_stat, player)) {
-              str_hint = & "ZM_TOMB_CH_S";
+              str_hint = &"ZM_TOMB_CH_S";
               b_showing_stat = 0;
               self.b_can_open = 1;
             }
@@ -421,15 +421,15 @@ update_box_prompt(player) {
         }
       }
 
-      if(str_hint == & "") {
+      if(str_hint == &"") {
         s_player = level._challenges.a_players[player.characterindex];
         s_team = level._challenges.s_team;
 
         if(s_player.n_medals_held > 0 || player player_has_unclaimed_team_reward()) {
-          str_hint = & "ZM_TOMB_CH_O";
+          str_hint = &"ZM_TOMB_CH_O";
           self.b_can_open = 1;
         } else
-          str_hint = & "ZM_TOMB_CH_V";
+          str_hint = &"ZM_TOMB_CH_V";
       }
     }
 
@@ -443,8 +443,7 @@ update_box_prompt(player) {
 
         if(n_character_index != 4)
           s_player_stat = level._challenges.a_players[n_character_index].a_stats[str_name];
-        else {
-        }
+        else {}
       }
 
       self sethintstring(self.stub.hint_string);
@@ -485,7 +484,7 @@ box_think() {
     }
 
     if(self.b_can_open) {
-      self.stub.hint_string = & "";
+      self.stub.hint_string = &"";
       self sethintstring(self.stub.hint_string);
       level thread open_box(player, self.stub);
     }

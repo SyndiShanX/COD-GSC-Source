@@ -22,7 +22,7 @@
 #namespace zm_genesis_timer;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_timer", & __init__, & __main__, undefined);
+  system::register("zm_genesis_timer", &__init__, &__main__, undefined);
 }
 
 function __init__() {}
@@ -34,7 +34,7 @@ function __main__() {
   foreach(s_wallbuy in level._spawned_wallbuys) {
     if(s_wallbuy.zombie_weapon_upgrade == "melee_nunchuks") {
       level.var_b9f3bf28 = s_wallbuy;
-      level.var_b9f3bf28.trigger_stub.prompt_and_visibility_func = & function_6ac3689a;
+      level.var_b9f3bf28.trigger_stub.prompt_and_visibility_func = &function_6ac3689a;
       break;
     }
   }
@@ -151,14 +151,14 @@ function function_86419da() {
       }
     }
     if((var_99870abd % 5) == 0) {
-      if(isdefined(var_ec31aba8) && n_current_time < var_ec31aba8) {
+      if(isDefined(var_ec31aba8) && n_current_time < var_ec31aba8) {
         luinotifyevent(&"zombie_time_attack_notification", 2, zm::get_round_number() - 1, level.players.size);
         playsoundatposition("zmb_genesis_timetrial_complete", (0, 0, 0));
         level thread function_cc8ae246(var_99870abd);
       }
     }
   }
-  while (var_99870abd < 50);
+  while(var_99870abd < 50);
 }
 
 function function_cc8ae246(n_reward) {

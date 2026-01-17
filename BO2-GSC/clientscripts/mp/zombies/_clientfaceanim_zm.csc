@@ -50,9 +50,7 @@ doface(localclientnum) {
 
 buildface_player() {
   if(isDefined(level.face_override_func)) {
-    [
-      [level.face_override_func]
-    ]();
+    [[level.face_override_func]]();
     return;
   }
 

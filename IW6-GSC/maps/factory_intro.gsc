@@ -72,8 +72,8 @@ section_flag_init() {
 }
 
 section_hint_string_init() {
-  maps\_utility::add_hint_string("train_stab_hint", & "SCRIPT_PLATFORM_OILRIG_HINT_STEALTH_KILL", ::hint_train_stab_should_break);
-  maps\_utility::add_hint_string("drop_kill_hint", & "FACTORY_DROP_KILL_HINT", ::hint_drop_kill_should_break);
+  maps\_utility::add_hint_string("train_stab_hint", &"SCRIPT_PLATFORM_OILRIG_HINT_STEALTH_KILL", ::hint_train_stab_should_break);
+  maps\_utility::add_hint_string("drop_kill_hint", &"FACTORY_DROP_KILL_HINT", ::hint_drop_kill_should_break);
 }
 
 hint_drop_kill_should_break() {
@@ -911,7 +911,7 @@ detect_player_shot() {
 
     if(var_1 == level.player) {
       level notify("new_quote_string");
-      setdvar("ui_deadquote", & "FACTORY_FAIL_ALERTED_ENEMY");
+      setdvar("ui_deadquote", &"FACTORY_FAIL_ALERTED_ENEMY");
       maps\_utility::missionfailedwrapper();
     }
   }
@@ -1382,7 +1382,7 @@ check_for_player_leaving() {
   level endon("railgun_reveal_setup");
   common_scripts\utility::flag_wait("player_exited_mission");
   level notify("new_quote_string");
-  setdvar("ui_deadquote", & "FACTORY_FAIL_ABANDONED");
+  setdvar("ui_deadquote", &"FACTORY_FAIL_ABANDONED");
   maps\_utility::missionfailedwrapper();
 }
 

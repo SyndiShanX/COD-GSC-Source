@@ -58,8 +58,7 @@ skipto_hijacked_bridge() {
   flag_set("menendez_hijack_vtol_active");
 }
 
-skipto_hijacked_menendez() {
-}
+skipto_hijacked_menendez() {}
 
 main() {
   iprintln("Event Name");
@@ -140,7 +139,7 @@ hijacked_skipto_setup() {
 hijacked_skipto_quadrotors_init() {
   maps\yemen_drone_control::drone_control_skipto_setup();
   maps\yemen_drone_control::setup_allied_quadrotors();
-  a_vh_quadrotors = getentarray("allied_quadrotor", "targetname");
+  a_vh_quadrotors = getEntArray("allied_quadrotor", "targetname");
 
   foreach(vh_quadrotor in a_vh_quadrotors)
   vh_quadrotor.origin = level.player.origin + (randomintrange(34, 128), randomintrange(34, 128), randomintrange(34, 128));
@@ -155,7 +154,7 @@ hijacked_skipto_salazar_init() {
 
 allied_quadrotors_move_ahead_and_delete() {
   s_goal = getstruct("s_hijacked_hostile_qrotor_goal1");
-  a_quadrotors = getentarray("allied_quadrotor", "targetname");
+  a_quadrotors = getEntArray("allied_quadrotor", "targetname");
 
   foreach(vh_quadrotor in a_quadrotors)
   vh_quadrotor.goalpos = s_goal.origin;
@@ -165,8 +164,8 @@ allied_quadrotors_move_ahead_and_delete() {
 }
 
 hijacked_destructibles_setup() {
-  a_m_bridge_destroyed_parts = getentarray("bridge_destroyed", "targetname");
-  a_m_building_destroyed = getentarray("bridge_building_destroyed", "targetname");
+  a_m_bridge_destroyed_parts = getEntArray("bridge_destroyed", "targetname");
+  a_m_building_destroyed = getEntArray("bridge_building_destroyed", "targetname");
 
   foreach(m_bridge_destroyed in a_m_bridge_destroyed_parts)
   m_bridge_destroyed hide();
@@ -176,17 +175,17 @@ hijacked_destructibles_setup() {
 }
 
 hijacked_setup_trees() {
-  a_t_crash_trigs = getentarray("quadrotor_tree_crash_trig", "targetname");
+  a_t_crash_trigs = getEntArray("quadrotor_tree_crash_trig", "targetname");
   array_thread(a_t_crash_trigs, ::quadrotor_crash_tree_think);
 }
 
 hijacked_ambient_guys() {
-  a_ambient_spawners = getentarray("ambient_guys_ai", "script_noteworthy");
+  a_ambient_spawners = getEntArray("ambient_guys_ai", "script_noteworthy");
   array_thread(a_ambient_spawners, ::hijacked_ambient_spawnfunc);
 }
 
 hijacked_bridge_guys() {
-  a_ambient_spawners = getentarray("sp_hijacked_ally_capture", "targetname");
+  a_ambient_spawners = getEntArray("sp_hijacked_ally_capture", "targetname");
   array_thread(a_ambient_spawners, ::hijacked_ambient_spawnfunc);
 }
 
@@ -198,7 +197,7 @@ hijacked_ambient_spawnfunc() {
 hijacked_crash_drone_near_player() {
   v_qrotor = spawn_vehicle_from_targetname("yemen_quadrotor_spawner");
   wait 1;
-  v_trace_to_point = level.player geteye() + vectornormalize(anglestoforward(level.player getplayerangles())) * 350;
+  v_trace_to_point = level.player getEye() + vectornormalize(anglesToForward(level.player getplayerangles())) * 350;
   v_qrotor.origin = v_trace_to_point + vectorscale((0, 0, 1), 256.0);
   v_qrotor.goalpos = v_trace_to_point + vectorscale((0, 0, 1), 256.0);
   radiusdamage(v_qrotor.origin + vectorscale((0, 0, 1), 10.0), 32, v_qrotor.health + 10, v_qrotor.health + 10);
@@ -254,12 +253,12 @@ hijacked_cleanup() {
   array_delete_ai_from_noteworthy("hijacked_terrorists", 1);
   array_delete_ai_from_noteworthy("crossover_terrorist", 1);
   level waittill("swap_quadrotors");
-  a_vh_hijacked_robots = getentarray("hijacked_robot", "script_noteworthy");
+  a_vh_hijacked_robots = getEntArray("hijacked_robot", "script_noteworthy");
   kill_units(a_vh_hijacked_robots, 1);
   level waittill("bridge_crossing");
-  a_vh_bridge_robots = getentarray("hijacked_bridge_robot", "script_noteworthy");
+  a_vh_bridge_robots = getEntArray("hijacked_bridge_robot", "script_noteworthy");
   kill_units(a_vh_bridge_robots, 1);
-  a_vh_bridge_player_quad_spawners = getentarray("hijacked_player_only_quad", "script_noteworthy");
+  a_vh_bridge_player_quad_spawners = getEntArray("hijacked_player_only_quad", "script_noteworthy");
   kill_units(a_vh_bridge_player_quad_spawners);
 }
 
@@ -315,7 +314,7 @@ hijacked_drone_control_lost() {
 }
 
 qr_drones_fly_away() {
-  a_qrotors = getentarray("allied_quadrotor", "targetname");
+  a_qrotors = getEntArray("allied_quadrotor", "targetname");
   s_goal_spot = getstruct("s_qr_drones_fly_away", "targetname");
   e_target = getent("qr_drones_dummy_target", "targetname");
 
@@ -346,8 +345,8 @@ qr_drones_move(s_goal, e_target) {
 quadrotors_guard_metalstorm() {
   wait 5;
   vh_metalstorm = getent("hijacked_first_metalstorm", "targetname");
-  a_vh_quadrotors = getentarray("hijacked_first_metalstorm_guard1", "targetname");
-  a_vh_quadrotors2 = getentarray("yemen_hijacked_quadrotor_hostile_formation", "targetname");
+  a_vh_quadrotors = getEntArray("hijacked_first_metalstorm_guard1", "targetname");
+  a_vh_quadrotors2 = getEntArray("yemen_hijacked_quadrotor_hostile_formation", "targetname");
   array_thread(a_vh_quadrotors, ::set_quadrotor_guard_position, vh_metalstorm);
   array_thread(a_vh_quadrotors2, ::set_quadrotor_guard_position, vh_metalstorm);
   level thread hijacked_miniboss_clear_listener();
@@ -355,8 +354,8 @@ quadrotors_guard_metalstorm() {
 
 hijacked_miniboss_clear_listener() {
   while(true) {
-    a_vh_quadrotors = getentarray("hijacked_first_metalstorm_guard1", "targetname");
-    a_vh_quadrotors2 = getentarray("yemen_hijacked_quadrotor_hostile_formation", "targetname");
+    a_vh_quadrotors = getEntArray("hijacked_first_metalstorm_guard1", "targetname");
+    a_vh_quadrotors2 = getEntArray("yemen_hijacked_quadrotor_hostile_formation", "targetname");
     n_squad_size = a_vh_quadrotors.size + a_vh_quadrotors2.size;
 
     if(n_squad_size == 0) {
@@ -425,7 +424,7 @@ set_quadrotor_guard_position(vh_guard_this) {
 quadrotors_guard_bridge() {
   trigger_wait("trigs_hijacked_bridge_drop");
   wait 3;
-  a_vh_quads = getentarray("hijacked_bridge_robot", "script_noteworthy");
+  a_vh_quads = getEntArray("hijacked_bridge_robot", "script_noteworthy");
   nd_goal = getvehiclenode("hijacked_hostile_formation_bridge_spline_end", "targetname");
 
   foreach(vh_quad in a_vh_quads)
@@ -514,12 +513,12 @@ hijacked_bridge_ledge_crumble() {
 }
 
 hijacked_bridge_ledge_delete_collision_clip() {
-  a_m_collision = getentarray("m_hijacked_bridge_fall_clip", "targetname");
+  a_m_collision = getEntArray("m_hijacked_bridge_fall_clip", "targetname");
   array_delete(a_m_collision);
 }
 
 hijacked_bridge_guys_move_up() {
-  a_bridge_guys = getentarray("sp_hijacked_soldier_rpg_ai", "targetname");
+  a_bridge_guys = getEntArray("sp_hijacked_soldier_rpg_ai", "targetname");
 
   foreach(ai_guy in a_bridge_guys) {
     nd_goal = getnode(self.script_noteworthy, "targetname");
@@ -550,8 +549,8 @@ hijacked_bridge_enemies_clear() {
 }
 
 hijacked_bridge_swap() {
-  a_m_bridge_whole_parts = getentarray("bridge_whole", "targetname");
-  a_m_bridge_destroyed_parts = getentarray("bridge_destroyed", "targetname");
+  a_m_bridge_whole_parts = getEntArray("bridge_whole", "targetname");
+  a_m_bridge_destroyed_parts = getEntArray("bridge_destroyed", "targetname");
 
   foreach(m_bridge_destroyed in a_m_bridge_destroyed_parts)
   m_bridge_destroyed show();
@@ -561,8 +560,8 @@ hijacked_bridge_swap() {
 }
 
 hijacked_bridge_building_swap() {
-  a_m_building_whole = getentarray("bridge_building_whole", "targetname");
-  a_m_building_destroyed = getentarray("bridge_building_destroyed", "targetname");
+  a_m_building_whole = getEntArray("bridge_building_whole", "targetname");
+  a_m_building_destroyed = getEntArray("bridge_building_destroyed", "targetname");
 
   foreach(m_building_destroyed in a_m_building_destroyed)
   m_building_destroyed show();
@@ -599,7 +598,7 @@ stairs_shoot_stairs_building() {
 environmental_challenge(str_notify) {
   level endon("capture_sniper_active");
   flag_wait("drone_control_farmhouse_started");
-  a_dmg_trigs = getentarray("hijacked_environmental", "script_noteworthy");
+  a_dmg_trigs = getEntArray("hijacked_environmental", "script_noteworthy");
   n_min = a_dmg_trigs.size * 0.5;
   n_destroyed = 0;
 
@@ -621,7 +620,7 @@ environmental_challenge(str_notify) {
 lumberjack_challenge(str_notify) {
   level endon("capture_sniper_active");
   flag_wait("drone_control_farmhouse_started");
-  a_dmg_trigs = getentarray("hijacked_lumberjack", "script_noteworthy");
+  a_dmg_trigs = getEntArray("hijacked_lumberjack", "script_noteworthy");
   n_min = a_dmg_trigs.size * 0.5;
   n_destroyed = 0;
 
@@ -648,7 +647,7 @@ clutz_challenge(str_notify) {
 
 bridge_groan_sound_loop() {
   o_groan_location = spawn("script_origin", (-9303, -13775, 828));
-  o_groan_location playloopsound("amb_bridge_failing");
+  o_groan_location playLoopSound("amb_bridge_failing");
   level waittill("fxanim_bridge_drop_start");
   playsoundatposition("fxa_bridge_give_way", o_groan_location.origin);
   o_groan_location stoploopsound(2);

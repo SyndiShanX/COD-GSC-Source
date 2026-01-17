@@ -24,7 +24,7 @@ init() {
   precachemodel("veh_iw_littlebird_minigun_right");
   registerkillstreak("helicopter_guard_mp", "helicopter_guard_mp", "killstreak_helicopter_guard", "helicopter_used", ::tryuseheliguardsupport, 1);
   registerkillstreakaltweapon("helicopter_guard_mp", "littlebird_guard_minigun_mp");
-  registerkillstreakstrings("helicopter_guard_mp", & "KILLSTREAK_EARNED_HELICOPTER_GUARD", & "KILLSTREAK_HELICOPTER_GUARD_NOT_AVAILABLE", & "KILLSTREAK_HELICOPTER_GUARD_INBOUND");
+  registerkillstreakstrings("helicopter_guard_mp", &"KILLSTREAK_EARNED_HELICOPTER_GUARD", &"KILLSTREAK_HELICOPTER_GUARD_NOT_AVAILABLE", &"KILLSTREAK_HELICOPTER_GUARD_INBOUND");
   registerkillstreakdialog("helicopter_guard_mp", "mpl_killstreak_lbguard_strt", "kls_littlebird_used", "", "kls_littlebird_enemy", "", "kls_littlebird_ready");
   registerkillstreakdevdvar("helicopter_guard_mp", "scr_givehelicopterguard");
   setkillstreakteamkillpenaltyscale("helicopter_guard_mp", 0.0);
@@ -84,7 +84,7 @@ createheliguardsupport(lifeid, killstreak_id) {
 
   closestnode = heliguardsupport_getclosestnode(self.origin);
   flyheight = max(self.origin[2] + 1600, getnoflyzoneheight(self.origin));
-  forward = anglestoforward(self.angles);
+  forward = anglesToForward(self.angles);
   targetpos = self.origin * (1, 1, 0) + (0, 0, 1) * flyheight + forward * -100;
   startpos = closeststartnode.origin;
   heliguard = spawnhelicopter(self, startpos, startang, "heli_guard_mp", "veh_t6_drone_overwatch_light");
@@ -96,7 +96,7 @@ createheliguardsupport(lifeid, killstreak_id) {
   heliguard setenemymodel("veh_t6_drone_overwatch_dark");
   heliguard.speed = 150;
   heliguard.followspeed = 40;
-  heliguard setcandamage(1);
+  heliguard setCanDamage(1);
   heliguard.owner = self;
   heliguard.team = self.team;
   heliguard setmaxpitchroll(45, 45);
@@ -368,12 +368,12 @@ heliguardsupport_leave() {
   self clearturrettarget();
   self clearlookatent();
   flyheight = getnoflyzoneheight(self.origin);
-  targetpos = self.origin + anglestoforward(self.angles) * 1500 + (0, 0, flyheight);
+  targetpos = self.origin + anglesToForward(self.angles) * 1500 + (0, 0, flyheight);
   collide = crossesnoflyzone(self.origin, targetpos);
 
   for(tries = 5; isDefined(collide) && tries > 0; tries--) {
     yaw = randomint(360);
-    targetpos = self.origin + anglestoforward((self.angles[0], yaw, self.angles[2])) * 1500 + (0, 0, flyheight);
+    targetpos = self.origin + anglesToForward((self.angles[0], yaw, self.angles[2])) * 1500 + (0, 0, flyheight);
     collide = crossesnoflyzone(self.origin, targetpos);
   }
 
@@ -384,7 +384,7 @@ heliguardsupport_leave() {
   self setmaxpitchroll(45, 180);
   self setvehgoalpos(targetpos);
   self waittill("goal");
-  targetpos = targetpos + anglestoforward((0, self.angles[1], self.angles[2])) * 14000;
+  targetpos = targetpos + anglesToForward((0, self.angles[1], self.angles[2])) * 14000;
   self setvehgoalpos(targetpos);
   self waittill("goal");
   self notify("gone");
@@ -410,7 +410,7 @@ lbexplode() {
 
 lbspin(speed) {
   self endon("explode");
-  playfxontag(level.chopper_fx["explode"]["large"], self, "tail_rotor_jnt");
+  playFXOnTag(level.chopper_fx["explode"]["large"], self, "tail_rotor_jnt");
   self thread trail_fx(level.chopper_fx["smoke"]["trail"], "tail_rotor_jnt", "stop tail smoke");
   self setyawspeed(speed, speed, speed);
 
@@ -426,7 +426,7 @@ trail_fx(trail_fx, trail_tag, stop_notify) {
   self endon("death");
 
   for(;;) {
-    playfxontag(trail_fx, self, trail_tag);
+    playFXOnTag(trail_fx, self, trail_tag);
     wait 0.05;
   }
 }

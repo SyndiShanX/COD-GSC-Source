@@ -73,7 +73,7 @@ radio9_override(struct) {
   self.trigger thread trig_thread();
   self waittill("triggered");
   snd = "vox_radio_egg_" + (self.script_int - 1);
-  self PlaySound(snd, "radiodone");
+  self playSound(snd, "radiodone");
   self playLoopSound("vox_radio_egg_snapshot", 1);
   wait(self.manual_wait);
   self stopLoopSound(1);
@@ -116,7 +116,7 @@ radio2_override(struct) {
       break;
   }
   snd = "vox_radio_egg_" + (self.script_int - 1) + "" + post_fix;
-  self PlaySound(snd, "radiodone");
+  self playSound(snd, "radiodone");
   self playLoopSound("vox_radio_egg_snapshot", 1);
   wait(self.manual_wait);
   self stopLoopSound(1);
@@ -128,7 +128,7 @@ radio_thread() {
   self thread radio_debug();
   self waittill("triggered");
   snd = "vox_radio_egg_" + (self.script_int - 1);
-  self PlaySound(snd, "radiodone");
+  self playSound(snd, "radiodone");
   self playLoopSound("vox_radio_egg_snapshot", 1);
   wait(self.manual_wait);
   self stopLoopSound(1);

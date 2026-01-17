@@ -30,16 +30,16 @@ function init() {}
 
 function main() {
   cybercom_gadget::registerability(0, 16);
-  level.cybercom.ravage_core = spawnstruct();
-  level.cybercom.ravage_core._is_flickering = & _is_flickering;
-  level.cybercom.ravage_core._on_flicker = & _on_flicker;
-  level.cybercom.ravage_core._on_give = & _on_give;
-  level.cybercom.ravage_core._on_take = & _on_take;
-  level.cybercom.ravage_core._on_connect = & _on_connect;
-  level.cybercom.ravage_core._on = & _on;
-  level.cybercom.ravage_core._off = & _off;
+  level.cybercom.ravage_core = spawnStruct();
+  level.cybercom.ravage_core._is_flickering = &_is_flickering;
+  level.cybercom.ravage_core._on_flicker = &_on_flicker;
+  level.cybercom.ravage_core._on_give = &_on_give;
+  level.cybercom.ravage_core._on_take = &_on_take;
+  level.cybercom.ravage_core._on_connect = &_on_connect;
+  level.cybercom.ravage_core._on = &_on;
+  level.cybercom.ravage_core._off = &_off;
   level.cybercom.ravage_core.weapon = getweapon("gadget_ravage_core");
-  callback::on_spawned( & on_player_spawned);
+  callback::on_spawned(&on_player_spawned);
 }
 
 function on_player_spawned() {}
@@ -67,7 +67,7 @@ function function_677ed44f(weapon) {
   self endon("hash_677ed44f");
   self endon("hash_343d4580");
   self endon("disconnect");
-  while (true) {
+  while(true) {
     level waittill("ravage_core", target, attacker, damage, weapon, hitorigin);
     self notify("ravage_core", target, damage, weapon);
     destructserverutils::destructhitlocpieces(target, "torso_upper");
@@ -79,7 +79,7 @@ function function_677ed44f(weapon) {
     attacker thread challenges::function_96ed590f("cybercom_uses_control");
     if(isplayer(self)) {
       itemindex = getitemindexfromref("cybercom_ravagecore");
-      if(isdefined(itemindex)) {
+      if(isDefined(itemindex)) {
         self adddstat("ItemStats", itemindex, "stats", "kills", "statValue", 1);
         self adddstat("ItemStats", itemindex, "stats", "used", "statValue", 1);
       }
@@ -91,7 +91,7 @@ function function_677ed44f(weapon) {
 
 function private _corpsewatcher() {
   self waittill("actor_corpse", corpse);
-  if(isdefined(corpse)) {
+  if(isDefined(corpse)) {
     corpse hidepart("j_chest_door");
   }
 }

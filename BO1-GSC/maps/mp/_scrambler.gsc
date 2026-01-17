@@ -40,7 +40,7 @@ onSpawnScrambler(watcher, player) {
   level notify("scrambler_spawn");
 }
 scramblerDetonate(attacker) {
-  PlayFX(level._equipment_explode_fx, self.origin);
+  playFX(level._equipment_explode_fx, self.origin);
   PlaySoundAtPosition("dst_equipment_destroy", self.origin);
   self delete();
 }
@@ -56,12 +56,12 @@ destroyEnt() {
 watchScramblerDamage(watcher) {
   self endon("death");
   self endon("hacked");
-  self SetCanDamage(true);
+  self setCanDamage(true);
   damageMax = 100;
   if(!self maps\mp\gametypes\_weaponobjects::isHacked()) {
     self.damageTaken = 0;
   }
-  while (true) {
+  while(true) {
     self.maxhealth = 100000;
     self.health = self.maxhealth;
     self waittill("damage", damage, attacker, direction, point, type, tagName, modelName, partname, weaponName, iDFlags);
@@ -116,11 +116,11 @@ ownerSameTeam(owner1, owner2) {
   return (owner1.team == owner2.team);
 }
 checkScramblerStun() {
-  scramblers = GetEntArray("grenade", "classname");
+  scramblers = getEntArray("grenade", "classname");
   if(isDefined(self.name) && self.name == "scrambler_mp") {
     return false;
   }
-  for (i = 0; i < scramblers.size; i++) {
+  for(i = 0; i < scramblers.size; i++) {
     scrambler = scramblers[i];
     if(!IsAlive(scrambler)) {
       continue;

@@ -31,7 +31,6 @@
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
-
 #namespace zm_crafting;
 
 autoexec __init__system__() {
@@ -54,7 +53,6 @@ __main__() {
   }
 
   thread devgui_think();
-
 }
 
 function_60a6c623() {
@@ -221,7 +219,7 @@ get_component(component, blueprint) {
 
     function_4765f5b3(component);
 
-      level.crafting_components[component.name] = component;
+    level.crafting_components[component.name] = component;
   }
 
   if(isDefined(blueprint) && isDefined(blueprint.result)) {
@@ -245,7 +243,7 @@ get_component(component, blueprint) {
   return level.crafting_components[component.name];
 }
 
-private function_40f32480() {
+function_40f32480() {
   level waittill(#"all_players_spawned");
   a_items = getitemarray();
 
@@ -417,22 +415,20 @@ function_48ce9379(weapon) {
 
 function_126fc77c(player) {
   if(!isDefined(self.stub)) {
-
     iprintlnbold("<dev string:xdd>");
 
-      return 0;
+    return 0;
   }
 
   can_use = self.stub function_18f2be60(player);
 
   if(!isDefined(self.stub.hint_string)) {
-
     iprintlnbold("<dev string:x118>");
 
-      return can_use;
+    return can_use;
   }
 
-  if(isDefined(level.var_a6f62e91) && isDefined(self.stub.cost) && self.stub[[level.var_a6f62e91]](player, #"crafting_table")) {
+  if(isDefined(level.var_a6f62e91) && isDefined(self.stub.cost) && self.stub[[level.var_a6f62e91]](player, # "crafting_table")) {
     self sethintstringforplayer(player, self.stub.hint_string, self.stub.cost);
   } else if(isDefined(self.stub.cost) && self.stub.cost != 0) {
     self sethintstring(self.stub.hint_string, self.stub.cost);
@@ -517,7 +513,7 @@ function_f665fde0(trig) {
   unitrigger_stub.script_parameters = trig.script_parameters;
   unitrigger_stub.script_string = trig.script_string;
   unitrigger_stub.cursor_hint = "HINT_NOICON";
-  unitrigger_stub.hint_string = #"hash_a502ccb8fec4c7a";
+  unitrigger_stub.hint_string = # "hash_a502ccb8fec4c7a";
   unitrigger_stub.script_unitrigger_type = "unitrigger_box_use";
   unitrigger_stub.require_look_at = 1;
   unitrigger_stub.require_look_toward = 0;
@@ -625,7 +621,7 @@ function_987a472(modelname, blueprint) {
   s_crafting.model show();
 }
 
-private function_356e77bd() {
+function_356e77bd() {
   self endon(#"death");
 
   while(isDefined(self)) {
@@ -635,9 +631,9 @@ private function_356e77bd() {
   }
 }
 
-private function_514b8f17(player) {
+function_514b8f17(player) {
   self notify(#"hash_295a022a1c72a359");
-  self endon(#"hash_295a022a1c72a359", #"unitrigger_deactivated");
+  self endon(#"hash_295a022a1c72a359", # "unitrigger_deactivated");
   player endon(#"death");
   player.crafting_melee = 0;
 
@@ -692,7 +688,7 @@ function_86531922(e_holder, w_item) {
   if(isDefined(w_item.gadgetreadysoundplayer)) {
     self thread zm_audio::create_and_play_dialog(#"shield_pickup", w_item.gadgetreadysoundplayer);
   } else {
-    self thread zm_audio::create_and_play_dialog(#"shield_piece", #"pickup");
+    self thread zm_audio::create_and_play_dialog(#"shield_piece", # "pickup");
   }
 
   self playSound(#"hash_230737b2535a3374");
@@ -723,10 +719,10 @@ function_d56724a6(e_holder, w_item) {
     return;
   }
 
-  self thread zm_audio::create_and_play_dialog(#"component_pickup", #"generic");
+  self thread zm_audio::create_and_play_dialog(#"component_pickup", # "generic");
 }
 
-private function_475a63eb() {
+function_475a63eb() {
   if(!isDefined(level.var_b87dee47)) {
     level.var_b87dee47 = [];
   }
@@ -739,7 +735,7 @@ private function_475a63eb() {
   function_e1eeba22(#"spawn_as_item", &function_f189f7f, &function_5a4c40a2, &function_230f6303);
 }
 
-private function_e1eeba22(state, var_a3d8c117, var_ea7ebe1f, var_aee03b4c, var_cb2020d8) {
+function_e1eeba22(state, var_a3d8c117, var_ea7ebe1f, var_aee03b4c, var_cb2020d8) {
   var_90dfb0bf = spawnStruct();
   var_90dfb0bf.name = state;
   var_90dfb0bf.var_a3d8c117 = var_a3d8c117;
@@ -749,7 +745,7 @@ private function_e1eeba22(state, var_a3d8c117, var_ea7ebe1f, var_aee03b4c, var_c
   level.var_b87dee47[state] = var_90dfb0bf;
 }
 
-private function_35f5c90b(state) {
+function_35f5c90b(state) {
   if(!isDefined(state)) {
     return;
   }
@@ -757,14 +753,13 @@ private function_35f5c90b(state) {
   self.var_90dfb0bf = state;
 
   if(!isDefined(level.var_b87dee47[self.var_90dfb0bf])) {
-
     if(ishash(state)) {
       state = "<dev string:x17a>" + function_9e72a96(state);
     }
 
     assertmsg("<dev string:x17e>" + state);
 
-      return;
+    return;
   }
 
   if(isDefined(level.var_b87dee47[self.var_90dfb0bf].var_aee03b4c)) {
@@ -806,13 +801,13 @@ function_18f2be60(player) {
 
 crafting_think() {
   self notify(#"crafting_think");
-  self endon(#"crafting_think", #"kill_trigger", #"death");
+  self endon(#"crafting_think", # "kill_trigger", # "death");
 
   while(isDefined(self)) {
     waitresult = self waittill(#"trigger");
     player = waitresult.activator;
     level notify(#"crafting_started", {
-      #unitrigger: self, 
+      #unitrigger: self,
       #activator: player
     });
 
@@ -822,16 +817,16 @@ crafting_think() {
   }
 }
 
-private function_b03ccfce() {}
+function_b03ccfce() {}
 
-private function_f189f7f(player) {
+function_f189f7f(player) {
   self.hint_string = "";
   return false;
 }
 
-private function_5a4c40a2(player) {}
+function_5a4c40a2(player) {}
 
-private function_8109ae21(player) {
+function_8109ae21(player) {
   blueprints = function_4165306b(player);
   var_9c8338de = blueprints.size;
 
@@ -854,7 +849,7 @@ private function_8109ae21(player) {
   }
 
   if(blueprints.size < 1 || !array::contains(blueprints, self.blueprint)) {
-    self.hint_string = #"hash_64cb545dd18c607";
+    self.hint_string = # "hash_64cb545dd18c607";
 
     if(zm_utility::get_story() == 1 && isDefined(self.var_c2f40a58) && isDefined(self.var_c2f40a58.is_visible) && self.var_c2f40a58.is_visible) {
       self.var_c2f40a58 ghost();
@@ -894,7 +889,7 @@ private function_8109ae21(player) {
   return true;
 }
 
-private function_d564a5c0(player) {
+function_d564a5c0(player) {
   if(self.crafted) {
     return;
   }
@@ -931,7 +926,7 @@ private function_d564a5c0(player) {
   }
 }
 
-private function_f37c4bb5(player) {
+function_f37c4bb5(player) {
   if(self.stub.crafted) {
     return;
   }
@@ -969,12 +964,12 @@ private function_f37c4bb5(player) {
     }
 
     level notify(#"blueprint_completed", {
-      #blueprint: self.stub.blueprint, 
-      #produced: self.stub.blueprint.var_54a97edd, 
+      #blueprint: self.stub.blueprint,
+      #produced: self.stub.blueprint.var_54a97edd,
       #player: player
     });
     player notify(#"blueprint_completed", {
-      #blueprint: self.stub.blueprint, 
+      #blueprint: self.stub.blueprint,
       #produced: self.stub.blueprint.var_54a97edd
     });
 
@@ -998,10 +993,9 @@ private function_f37c4bb5(player) {
 
     if(isDefined(self.stub.blueprint.var_54a97edd) && isDefined(self.stub.blueprint.var_54a97edd.isriotshield) && self.stub.blueprint.var_54a97edd.isriotshield) {
       foreach(e_player in getplayers()) {
-
         e_player zm_challenges::debug_print("<dev string:x198>");
 
-          e_player zm_stats::increment_challenge_stat(#"shields_built", undefined, 1);
+        e_player zm_stats::increment_challenge_stat(#"shields_built", undefined, 1);
       }
     }
 
@@ -1044,11 +1038,11 @@ function_a187b293(player) {
   }
 }
 
-private function_578c67bf() {
+function_578c67bf() {
   thread zm_unitrigger::unregister_unitrigger(self);
 }
 
-private function_3c45b116() {
+function_3c45b116() {
   v_origin = self.origin;
   v_angles = self.angles;
 
@@ -1077,7 +1071,7 @@ private function_3c45b116() {
   thread zm_unitrigger::unregister_unitrigger(self);
 }
 
-private function_230f6303() {
+function_230f6303() {
   v_origin = self.origin;
   v_angles = self.angles;
 
@@ -1105,9 +1099,9 @@ private function_230f6303() {
   thread zm_unitrigger::unregister_unitrigger(self);
 }
 
-private function_9693e041(player) {
+function_9693e041(player) {
   if(player function_7bffa1ac(self.blueprint.var_54a97edd)) {
-    self.hint_string = #"hash_718d32f9e8cea17";
+    self.hint_string = # "hash_718d32f9e8cea17";
     self.cost = undefined;
     return true;
   }
@@ -1122,11 +1116,11 @@ private function_9693e041(player) {
       str = self.blueprint.var_1238231a;
       var_e7ed2264 = function_c9163c5d(str);
       hint_str = zm_utility::function_d6046228(str, var_e7ed2264);
-      backup_str = zm_utility::function_d6046228(#"zombie/repair_shield", #"hash_197687e8f04962c9");
+      backup_str = zm_utility::function_d6046228(#"zombie/repair_shield", # "hash_197687e8f04962c9");
       self.hint_string = isDefined(hint_str) ? hint_str : backup_str;
       _shad_turret_debug_server = 1;
     } else {
-      self.hint_string = #"hash_53fd856df9288be7";
+      self.hint_string = # "hash_53fd856df9288be7";
       self.cost = undefined;
       return true;
     }
@@ -1137,7 +1131,7 @@ private function_9693e041(player) {
     self.hint_string = isDefined(hint_str) ? hint_str : "";
     self.cost = undefined;
   } else if(zm_trial_disable_buys::is_active()) {
-    self.hint_string = #"hash_55d25caf8f7bbb2f";
+    self.hint_string = # "hash_55d25caf8f7bbb2f";
   } else {
     if(!(isDefined(_shad_turret_debug_server) && _shad_turret_debug_server)) {
       str = self.blueprint.var_391591d0;
@@ -1229,7 +1223,7 @@ function_ceac3bf9(player, b_repaired = 0) {
   return n_cost;
 }
 
-private function_86cab486() {
+function_86cab486() {
   if(!isDefined(self.var_76a15cfd)) {
     self.var_76a15cfd = 0;
   }
@@ -1269,7 +1263,7 @@ function_fccf9f0d() {
   self.var_36ea3103++;
 }
 
-private function_df8ce6e2(player) {
+function_df8ce6e2(player) {
   if(isDefined(level.var_f7d93c4e)) {
     if(!(isDefined(self[[level.var_f7d93c4e]](player)) && self[[level.var_f7d93c4e]](player))) {
       return;
@@ -1292,7 +1286,7 @@ private function_df8ce6e2(player) {
   }
 
   if(isDefined(level.var_a6f62e91)) {
-    if(self[[level.var_a6f62e91]](player, #"crafting_table")) {
+    if(self[[level.var_a6f62e91]](player, # "crafting_table")) {
       return;
     }
   }
@@ -1333,7 +1327,7 @@ private function_df8ce6e2(player) {
       player zm_utility::play_sound_on_ent("purchase");
     } else {
       zm_utility::play_sound_on_ent("no_purchase");
-      player zm_audio::create_and_play_dialog(#"general", #"outofmoney");
+      player zm_audio::create_and_play_dialog(#"general", # "outofmoney");
       return;
     }
   }
@@ -1367,7 +1361,7 @@ private function_df8ce6e2(player) {
     #weapon: self.stub.blueprint.var_54a97edd
   });
   player zm_stats::function_c0c6ab19(#"weapons_bought", 1, 1);
-  player contracts::increment_zm_contract(#"contract_zm_weapons_bought", 1, #"zstandard");
+  player contracts::increment_zm_contract(#"contract_zm_weapons_bought", 1, # "zstandard");
   self.stub.bought = 1;
   self.stub.hint_string = "";
   self.stub.cost = undefined;
@@ -1381,7 +1375,7 @@ private function_df8ce6e2(player) {
   }
 }
 
-private function_d94efa98() {
+function_d94efa98() {
   self endon(#"death");
   self notify("7ba5a8cb350587cf");
   self endon("7ba5a8cb350587cf");
@@ -1389,19 +1383,19 @@ private function_d94efa98() {
   self.var_ad7ae074 = undefined;
 }
 
-private function_6e16f902() {
+function_6e16f902() {
   if(isDefined(self.model)) {
     self.model notsolid();
     self.model show();
   }
 }
 
-private function_15d10d06(player) {
+function_15d10d06(player) {
   if(player function_7bffa1ac(self.blueprint.var_54a97edd)) {
-    self.hint_string = #"hash_7b4e31b02c13ed59";
+    self.hint_string = # "hash_7b4e31b02c13ed59";
     return true;
   } else if(isDefined(self.bought) && self.bought) {
-    self.hint_string = #"hash_48157c44f8771b6c";
+    self.hint_string = # "hash_48157c44f8771b6c";
     return true;
   }
 
@@ -1411,7 +1405,7 @@ private function_15d10d06(player) {
   return true;
 }
 
-private function_42673a26(player) {
+function_42673a26(player) {
   if(isDefined(self.stub.bought) && self.stub.bought) {
     return;
   }
@@ -1446,9 +1440,9 @@ private function_42673a26(player) {
   }
 
   if(player function_7bffa1ac(self.stub.blueprint.var_54a97edd)) {
-    self.stub.hint_string = #"hash_7b4e31b02c13ed59";
+    self.stub.hint_string = # "hash_7b4e31b02c13ed59";
   } else {
-    self.stub.hint_string = #"hash_48157c44f8771b6c";
+    self.stub.hint_string = # "hash_48157c44f8771b6c";
   }
 
   self sethintstring(self.stub.hint_string);
@@ -1580,4 +1574,3 @@ function_fe738a08(table_id) {
   self setorigin(plorigin);
   self setplayerangles(var_21f5823e);
 }
-

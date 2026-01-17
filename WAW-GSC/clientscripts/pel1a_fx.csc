@@ -45,7 +45,7 @@ precache_createfx_fx() {
 }
 
 increase_mortar_delay() {
-  while (1) {
+  while(1) {
     level waittill("imd");
     min_delay = level._explosion_min_delay["dirt_mortar"] + (level._explosion_min_delay["dirt_mortar"] * 0.5);
     max_delay = level._explosion_max_delay["dirt_mortar"] + (level._explosion_max_delay["dirt_mortar"] * 0.5);
@@ -56,7 +56,7 @@ increase_mortar_delay() {
 event1_mortars() {
   level waittill("sm");
   dust_points = getstructarray("ceiling_dust", "targetname");
-  for (i = 0; i < dust_points.size; i++) {
+  for(i = 0; i < dust_points.size; i++) {
     dust_points[i].is_struct = true;
   }
   struct = getstruct("event1_mortar1", "targetname");

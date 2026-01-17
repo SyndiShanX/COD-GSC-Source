@@ -256,7 +256,7 @@ aud_container_doors_creak() {
 }
 
 start_blackhawk_move(var_0, var_1) {
-  if(!isdefined(var_0) || !isdefined(var_1)) {
+  if(!isDefined(var_0) || !isDefined(var_1)) {
     return;
   }
   soundscripts\_audio_mix_manager::mm_add_submix("mix_heli_above_deck");
@@ -268,7 +268,7 @@ stop_blackhawk_move() {
 }
 
 aud_alarm_sound() {
-  for (;;) {
+  for(;;) {
     thread common_scripts\utility::play_sound_in_space("alarm_buzzer_control_room_3", (-2332.8, -96.3121, -84.7888));
     thread common_scripts\utility::play_sound_in_space("alarm_buzzer_control_room_3", (-3082.43, -216.679, 17.2978));
     thread common_scripts\utility::play_sound_in_space("alarm_buzzer_control_room_3", (-2513.76, -36.1929, 159.563));

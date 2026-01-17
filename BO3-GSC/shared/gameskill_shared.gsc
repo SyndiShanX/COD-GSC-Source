@@ -16,16 +16,16 @@ function autoexec init() {
 }
 
 function setskill(reset, skill_override) {
-  if(!isdefined(level.script)) {
+  if(!isDefined(level.script)) {
     level.script = tolower(getdvarstring("mapname"));
   }
-  if(!(isdefined(reset) && reset)) {
-    if(isdefined(level.b_gameskillset) && level.b_gameskillset) {
+  if(!(isDefined(reset) && reset)) {
+    if(isDefined(level.b_gameskillset) && level.b_gameskillset) {
       return;
     }
-    level.global_damage_func_ads = & empty_kill_func;
-    level.global_damage_func = & empty_kill_func;
-    level.global_kill_func = & empty_kill_func;
+    level.global_damage_func_ads = &empty_kill_func;
+    level.global_damage_func = &empty_kill_func;
+    level.global_kill_func = &empty_kill_func;
     util::set_console_status();
     thread playerhealthdebug();
     if(util::coopgame()) {
@@ -43,12 +43,12 @@ function setskill(reset, skill_override) {
     }
   }
   level thread update_skill_level(skill_override);
-  if(!isdefined(level.player_attacker_accuracy_multiplier)) {
+  if(!isDefined(level.player_attacker_accuracy_multiplier)) {
     level.player_attacker_accuracy_multiplier = 1;
   }
   anim.run_accuracy = 0.5;
   level.auto_adjust_threatbias = 1;
-  anim.pain_test = & pain_protection;
+  anim.pain_test = &pain_protection;
   set_difficulty_from_locked_settings();
 }
 
@@ -70,7 +70,7 @@ function apply_difficulty_var_with_func(difficulty_func) {
 function apply_threat_bias_to_all_players(difficulty_func) {
   level flag::wait_till("all_players_connected");
   players = level.players;
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i].threatbias = int(get_player_threat_bias());
   }
 }
@@ -78,7 +78,7 @@ function apply_threat_bias_to_all_players(difficulty_func) {
 function coop_damage_and_accuracy_scaling(difficulty_func) {}
 
 function set_difficulty_from_locked_settings() {
-  apply_difficulty_var_with_func( & get_locked_difficulty_val);
+  apply_difficulty_var_with_func(&get_locked_difficulty_val);
 }
 
 function get_locked_difficulty_val(msg, ignored) {
@@ -118,15 +118,15 @@ function pain_protection_check() {
 function playerhealthdebug() {
   setdvar("", "");
   waittillframeend();
-  while (true) {
-    while (true) {
+  while(true) {
+    while(true) {
       if(getdvarstring("") != "") {
         break;
       }
       wait(0.5);
     }
     thread printhealthdebug();
-    while (true) {
+    while(true) {
       if(getdvarstring("") == "") {
         break;
       }
@@ -145,13 +145,13 @@ function printhealthdebug() {
   level.healthbarkeys[0] = "Health";
   level.healthbarkeys[1] = "No Hit Time";
   level.healthbarkeys[2] = "No Die Time";
-  if(!isdefined(level.playerinvultimeend)) {
+  if(!isDefined(level.playerinvultimeend)) {
     level.playerinvultimeend = 0;
   }
-  if(!isdefined(level.player_deathinvulnerabletimeout)) {
+  if(!isDefined(level.player_deathinvulnerabletimeout)) {
     level.player_deathinvulnerabletimeout = 0;
   }
-  for (i = 0; i < level.healthbarkeys.size; i++) {
+  for(i = 0; i < level.healthbarkeys.size; i++) {
     key = level.healthbarkeys[i];
     textelem = newhudelem();
     textelem.x = 150;
@@ -188,10 +188,10 @@ function printhealthdebug() {
     level.healthbarhudelems[key] = textelem;
   }
   level flag::wait_till("all_players_spawned");
-  while (true) {
+  while(true) {
     wait(0.05);
     players = level.players;
-    for (i = 0; i < level.healthbarkeys.size && players.size > 0; i++) {
+    for(i = 0; i < level.healthbarkeys.size && players.size > 0; i++) {
       key = level.healthbarkeys[i];
       player = players[0];
       width = 0;
@@ -221,10 +221,10 @@ function printhealthdebug() {
 
 function destroyhealthdebug() {
   level notify("stop_printing_health_bars");
-  if(!isdefined(level.healthbarhudelems)) {
+  if(!isDefined(level.healthbarhudelems)) {
     return;
   }
-  for (i = 0; i < level.healthbarkeys.size; i++) {
+  for(i = 0; i < level.healthbarkeys.size; i++) {
     level.healthbarhudelems[level.healthbarkeys[i]].bgbar destroy();
     level.healthbarhudelems[level.healthbarkeys[i]].bar destroy();
     level.healthbarhudelems[level.healthbarkeys[i]] destroy();
@@ -234,7 +234,7 @@ function destroyhealthdebug() {
 function axisaccuracycontrol() {
   self endon("long_death");
   self endon("death");
-  if(isdefined(level.script) && level.script != "core_frontend") {
+  if(isDefined(level.script) && level.script != "core_frontend") {
     self coop_axis_accuracy_scaler();
   }
 }
@@ -249,17 +249,17 @@ function playerhurtcheck() {
   self endon("death");
   self endon("killhurtcheck");
   self.hurtagain = 0;
-  for (;;) {
+  for(;;) {
     self waittill("damage", amount, attacker, dir, point, mod);
-    if(isdefined(attacker) && isplayer(attacker) && attacker.team == self.team) {
+    if(isDefined(attacker) && isplayer(attacker) && attacker.team == self.team) {
       continue;
     }
     self.hurtagain = 1;
     self.damagepoint = point;
     self.damageattacker = attacker;
-    if(isdefined(mod) && mod == "MOD_BURNED") {
+    if(isDefined(mod) && mod == "MOD_BURNED") {
       self setburn(0.5);
-      self playsound("chr_burn");
+      self playSound("chr_burn");
     }
     invulworthyhealthdrop = (amount / self.maxhealth) >= level.worthydamageratio;
     death_invuln_time = 0;
@@ -276,7 +276,7 @@ function playerhurtcheck() {
     level notify("hit_again");
     health_add = 0;
     hurttime = gettime();
-    if(!isdefined(level.disable_damage_blur)) {
+    if(!isDefined(level.disable_damage_blur)) {
       self startfadingblur(3, 0.8);
     }
     if(!invulworthyhealthdrop) {
@@ -300,11 +300,11 @@ function playerhealthregen() {
   self endon("death");
   self endon("disconnect");
   self endon("removehealthregen");
-  if(!isdefined(self.flag)) {
+  if(!isDefined(self.flag)) {
     self.flag = [];
     self.flags_lock = [];
   }
-  if(!isdefined(self.flag["player_has_red_flashing_overlay"])) {
+  if(!isDefined(self.flag["player_has_red_flashing_overlay"])) {
     self flag::init("player_has_red_flashing_overlay");
     self flag::init("player_is_invulnerable");
   }
@@ -324,11 +324,11 @@ function playerhealthregen() {
   self.oldattackeraccuracy = 1;
   self.ignorebulletdamage = 0;
   self thread playerhurtcheck();
-  if(!isdefined(self.veryhurt)) {
+  if(!isDefined(self.veryhurt)) {
     self.veryhurt = 0;
   }
   self.bolthit = 0;
-  for (;;) {
+  for(;;) {
     wait(0.05);
     waittillframeend();
     if(self.health == self.maxhealth) {
@@ -389,7 +389,7 @@ function playerhealthregen() {
 
 function reducetakecoverwarnings() {
   players = level.players;
-  if(isdefined(players[0]) && isalive(players[0])) {
+  if(isDefined(players[0]) && isalive(players[0])) {
     takecoverwarnings = getlocalprofileint("takeCoverWarnings");
     if(takecoverwarnings > 0) {
       takecoverwarnings--;
@@ -429,7 +429,7 @@ function grenadeawareness() {
     return;
   }
   if(self.team == "axis") {
-    if(isdefined(level.gameskill) && level.gameskill >= 2) {
+    if(isDefined(level.gameskill) && level.gameskill >= 2) {
       if(randomint(100) < 33) {
         self.grenadeawareness = 0.2;
       } else {
@@ -451,17 +451,17 @@ function playerheartbeatloop(healthcap) {
   wait(2);
   player = self;
   ent = undefined;
-  for (;;) {
+  for(;;) {
     wait(0.2);
     if(player.health >= healthcap) {
-      if(isdefined(ent)) {
+      if(isDefined(ent)) {
         ent stoploopsound(1.5);
         level thread delayed_delete(ent, 1.5);
       }
       continue;
     }
     ent = spawn("script_origin", self.origin);
-    ent playloopsound("", 0.5);
+    ent playLoopSound("", 0.5);
   }
 }
 
@@ -474,11 +474,11 @@ function delayed_delete(ent, time) {
 function healthfadeoffwatcher(overlay, timetofadeout) {
   self notify("new_style_health_overlay_done");
   self endon("new_style_health_overlay_done");
-  while (!(isdefined(level.disable_damage_overlay) && level.disable_damage_overlay) && timetofadeout > 0) {
+  while(!(isDefined(level.disable_damage_overlay) && level.disable_damage_overlay) && timetofadeout > 0) {
     wait(0.05);
     timetofadeout = timetofadeout - 0.05;
   }
-  if(isdefined(level.disable_damage_overlay) && level.disable_damage_overlay) {
+  if(isDefined(level.disable_damage_overlay) && level.disable_damage_overlay) {
     overlay.alpha = 0;
     overlay fadeovertime(0.05);
   }
@@ -504,7 +504,7 @@ function add_hudelm_position_internal(aligny) {
   self.aligny = "bottom";
   self.horzalign = "center";
   self.vertalign = "middle";
-  if(!isdefined(self.background)) {
+  if(!isDefined(self.background)) {
     return;
   }
   self.background.x = 0;
@@ -534,7 +534,7 @@ function create_warning_elem(player) {
 }
 
 function play_hurt_vox() {
-  if(isdefined(self.veryhurt)) {
+  if(isDefined(self.veryhurt)) {
     if(self.veryhurt == 0) {
       if(randomintrange(0, 1) == 1) {
         playsoundatposition("chr_breathing_hurt_start", self.origin);
@@ -568,10 +568,10 @@ function destroy_warning_elem(fadeout) {
 }
 
 function maychangecoverwarningalpha(coverwarning) {
-  if(!isdefined(coverwarning)) {
+  if(!isDefined(coverwarning)) {
     return false;
   }
-  if(isdefined(coverwarning.beingdestroyed)) {
+  if(isDefined(coverwarning.beingdestroyed)) {
     return false;
   }
   return true;
@@ -593,13 +593,13 @@ function cover_warning_check() {
     coverwarning endon("death");
     stopflashingbadlytime = gettime() + level.longregentime;
     yellow_fac = 0.7;
-    while (gettime() < stopflashingbadlytime && isalive(self)) {
-      for (i = 0; i < 7; i++) {
+    while(gettime() < stopflashingbadlytime && isalive(self)) {
+      for(i = 0; i < 7; i++) {
         yellow_fac = yellow_fac + 0.03;
         coverwarning.color = (1, yellow_fac, 0);
         wait(0.05);
       }
-      for (i = 0; i < 7; i++) {
+      for(i = 0; i < 7; i++) {
         yellow_fac = yellow_fac - 0.03;
         coverwarning.color = (1, yellow_fac, 0);
         wait(0.05);
@@ -639,7 +639,7 @@ function fadefunc(overlay, coverwarning, severity, mult, hud_scaleonly) {
       coverwarning.alpha = mult * 1;
     }
   }
-  if(isdefined(coverwarning)) {
+  if(isDefined(coverwarning)) {
     coverwarning thread fontscaler(1, fadeintime);
   }
   wait(fadeintime + stayfulltime);
@@ -660,7 +660,7 @@ function fadefunc(overlay, coverwarning, severity, mult, hud_scaleonly) {
       coverwarning.alpha = mult * leastalpha;
     }
   }
-  if(isdefined(coverwarning)) {
+  if(isDefined(coverwarning)) {
     coverwarning thread fontscaler(0.9, fadeoutfulltime);
   }
   wait(fadeoutfulltime);
@@ -710,10 +710,10 @@ function update_skill_level(skill_override) {
   level.gameskilllowest = 9999;
   level.gameskillhighest = 0;
   n_last_gameskill = -1;
-  while (!isdefined(skill_override)) {
+  while(!isDefined(skill_override)) {
     level.gameskill = getlocalprofileint("g_gameskill");
     if(level.gameskill != n_last_gameskill) {
-      if(!isdefined(level.gameskill)) {
+      if(!isDefined(level.gameskill)) {
         level.gameskill = 0;
       }
       setdvar("saved_gameskill", level.gameskill);
@@ -765,7 +765,7 @@ function update_skill_level(skill_override) {
 function coop_enemy_accuracy_scalar_watcher() {
   level flagsys::wait_till("load_main_complete");
   level flag::wait_till("all_players_connected");
-  while (level.players.size > 1) {
+  while(level.players.size > 1) {
     players = getplayers("allies");
     level.coop_enemy_accuracy_scalar = get_coop_enemy_accuracy_modifier();
     wait(0.5);
@@ -775,7 +775,7 @@ function coop_enemy_accuracy_scalar_watcher() {
 function coop_friendly_accuracy_scalar_watcher() {
   level flagsys::wait_till("load_main_complete");
   level flag::wait_till("all_players_connected");
-  while (level.players.size > 1) {
+  while(level.players.size > 1) {
     players = getplayers("allies");
     level.coop_friendly_accuracy_scalar = get_coop_friendly_accuracy_modifier();
     wait(0.5);
@@ -792,8 +792,8 @@ function coop_axis_accuracy_scaler() {
 function coop_allies_accuracy_scaler() {
   self endon("death");
   initialvalue = self.baseaccuracy;
-  while (level.players.size > 1) {
-    if(!isdefined(level.coop_friendly_accuracy_scalar)) {
+  while(level.players.size > 1) {
+    if(!isDefined(level.coop_friendly_accuracy_scalar)) {
       wait(0.5);
       continue;
     }
@@ -803,11 +803,11 @@ function coop_allies_accuracy_scaler() {
 }
 
 function coop_player_threat_bias_adjuster() {
-  while (true) {
+  while(true) {
     wait(5);
     if(level.auto_adjust_threatbias) {
       players = getplayers("allies");
-      for (i = 0; i < players.size; i++) {
+      for(i = 0; i < players.size; i++) {
         enable_auto_adjust_threatbias(players[i]);
       }
     }
@@ -818,7 +818,7 @@ function enable_auto_adjust_threatbias(player) {
   level.auto_adjust_threatbias = 1;
   players = level.players;
   level.coop_player_threatbias_scalar = get_coop_friendly_threat_bias_scalar();
-  if(!isdefined(level.coop_player_threatbias_scalar)) {
+  if(!isDefined(level.coop_player_threatbias_scalar)) {
     level.coop_player_threatbias_scalar = 1;
   }
   player.threatbias = int(get_player_threat_bias() * level.coop_player_threatbias_scalar);
@@ -827,7 +827,7 @@ function enable_auto_adjust_threatbias(player) {
 function setdiffstructarrays() {
   reload = 0;
   reload = 1;
-  if(reload || !isdefined(level.s_game_difficulty)) {
+  if(reload || !isDefined(level.s_game_difficulty)) {
     level.s_game_difficulty = [];
     level.s_game_difficulty[0] = struct::get_script_bundle("gamedifficulty", "gamedifficulty_easy");
     level.s_game_difficulty[1] = struct::get_script_bundle("gamedifficulty", "gamedifficulty_medium");
@@ -840,7 +840,7 @@ function setdiffstructarrays() {
 function get_player_threat_bias() {
   setdiffstructarrays();
   diff_struct_value = level.s_game_difficulty[level.gameskill].threatbias;
-  if(isdefined(diff_struct_value)) {
+  if(isDefined(diff_struct_value)) {
     return diff_struct_value;
   }
   return 0;
@@ -849,7 +849,7 @@ function get_player_threat_bias() {
 function get_player_xp_difficulty_multiplier() {
   setdiffstructarrays();
   diff_xp_mult = level.s_game_difficulty[level.gameskill].difficulty_xp_multiplier;
-  if(isdefined(diff_xp_mult)) {
+  if(isDefined(diff_xp_mult)) {
     return diff_xp_mult;
   }
   return 1;
@@ -858,7 +858,7 @@ function get_player_xp_difficulty_multiplier() {
 function get_health_overlay_cutoff() {
   setdiffstructarrays();
   diff_struct_value = level.s_game_difficulty[level.gameskill].healthoverlaycutoff;
-  if(isdefined(diff_struct_value)) {
+  if(isDefined(diff_struct_value)) {
     return diff_struct_value;
   }
   return 0;
@@ -868,11 +868,11 @@ function get_enemy_pain_chance() {
   setdiffstructarrays();
   diff_struct_value = level.s_game_difficulty[level.gameskill].enemypainchance;
   modifier = get_coop_enemy_pain_chance_modifier();
-  if(isdefined(diff_struct_value)) {
+  if(isDefined(diff_struct_value)) {
     diff_struct_value = modifier * diff_struct_value;
     return diff_struct_value;
   }
-  if(isdefined(diff_struct_value)) {
+  if(isDefined(diff_struct_value)) {
     return diff_struct_value;
   }
   return 0;
@@ -881,7 +881,7 @@ function get_enemy_pain_chance() {
 function get_player_death_invulnerable_time() {
   setdiffstructarrays();
   diff_struct_value = level.s_game_difficulty[level.gameskill].player_deathinvulnerabletime;
-  if(isdefined(diff_struct_value)) {
+  if(isDefined(diff_struct_value)) {
     return diff_struct_value;
   }
   return 0;
@@ -890,7 +890,7 @@ function get_player_death_invulnerable_time() {
 function get_base_enemy_accuracy() {
   setdiffstructarrays();
   diff_struct_value = level.s_game_difficulty[level.gameskill].base_enemy_accuracy;
-  if(isdefined(diff_struct_value)) {
+  if(isDefined(diff_struct_value)) {
     return diff_struct_value;
   }
   return 0;
@@ -899,7 +899,7 @@ function get_base_enemy_accuracy() {
 function get_player_difficulty_health() {
   setdiffstructarrays();
   diff_struct_value = level.s_game_difficulty[level.gameskill].playerdifficultyhealth;
-  if(isdefined(diff_struct_value)) {
+  if(isDefined(diff_struct_value)) {
     return diff_struct_value;
   }
   return 0;
@@ -909,7 +909,7 @@ function get_player_hit_invuln_time() {
   setdiffstructarrays();
   diff_struct_value = level.s_game_difficulty[level.gameskill].playerhitinvulntime;
   modifier = get_coop_hit_invulnerability_modifier();
-  if(isdefined(diff_struct_value)) {
+  if(isDefined(diff_struct_value)) {
     diff_struct_value = modifier * diff_struct_value;
     return diff_struct_value;
   }
@@ -919,7 +919,7 @@ function get_player_hit_invuln_time() {
 function get_miss_time_constant() {
   setdiffstructarrays();
   diff_struct_value = level.s_game_difficulty[level.gameskill].misstimeconstant;
-  if(isdefined(diff_struct_value)) {
+  if(isDefined(diff_struct_value)) {
     return diff_struct_value;
   }
   return 0;
@@ -928,7 +928,7 @@ function get_miss_time_constant() {
 function get_miss_time_reset_delay() {
   setdiffstructarrays();
   diff_struct_value = level.s_game_difficulty[level.gameskill].misstimeresetdelay;
-  if(isdefined(diff_struct_value)) {
+  if(isDefined(diff_struct_value)) {
     return diff_struct_value;
   }
   return 0;
@@ -937,7 +937,7 @@ function get_miss_time_reset_delay() {
 function get_miss_time_distance_factor() {
   setdiffstructarrays();
   diff_struct_value = level.s_game_difficulty[level.gameskill].misstimedistancefactor;
-  if(isdefined(diff_struct_value)) {
+  if(isDefined(diff_struct_value)) {
     return diff_struct_value;
   }
   return 0;
@@ -946,7 +946,7 @@ function get_miss_time_distance_factor() {
 function get_dog_health() {
   setdiffstructarrays();
   diff_struct_value = level.s_game_difficulty[level.gameskill].dog_health;
-  if(isdefined(diff_struct_value)) {
+  if(isDefined(diff_struct_value)) {
     return diff_struct_value;
   }
   return 0;
@@ -955,7 +955,7 @@ function get_dog_health() {
 function get_dog_press_time() {
   setdiffstructarrays();
   diff_struct_value = level.s_game_difficulty[level.gameskill].dog_presstime;
-  if(isdefined(diff_struct_value)) {
+  if(isDefined(diff_struct_value)) {
     return diff_struct_value;
   }
   return 0;
@@ -964,7 +964,7 @@ function get_dog_press_time() {
 function get_dog_hits_before_kill() {
   setdiffstructarrays();
   diff_struct_value = level.s_game_difficulty[level.gameskill].dog_hits_before_kill;
-  if(isdefined(diff_struct_value)) {
+  if(isDefined(diff_struct_value)) {
     return diff_struct_value;
   }
   return 0;
@@ -973,7 +973,7 @@ function get_dog_hits_before_kill() {
 function get_long_regen_time() {
   setdiffstructarrays();
   diff_struct_value = level.s_game_difficulty[level.gameskill].longregentime;
-  if(isdefined(diff_struct_value)) {
+  if(isDefined(diff_struct_value)) {
     return diff_struct_value;
   }
   return 0;
@@ -982,7 +982,7 @@ function get_long_regen_time() {
 function get_player_health_regular_regen_delay() {
   setdiffstructarrays();
   diff_struct_value = level.s_game_difficulty[level.gameskill].playerhealth_regularregendelay;
-  if(isdefined(diff_struct_value)) {
+  if(isDefined(diff_struct_value)) {
     return diff_struct_value;
   }
   return 0;
@@ -991,7 +991,7 @@ function get_player_health_regular_regen_delay() {
 function get_worthy_damage_ratio() {
   setdiffstructarrays();
   diff_struct_value = level.s_game_difficulty[level.gameskill].worthydamageratio;
-  if(isdefined(diff_struct_value)) {
+  if(isDefined(diff_struct_value)) {
     return diff_struct_value;
   }
   return 0;
@@ -1002,7 +1002,7 @@ function get_coop_enemy_accuracy_modifier() {
   switch (level.players.size) {
     case 1: {
       diff_struct_value = level.s_game_difficulty[level.gameskill].one_player_coopenemyaccuracyscalar;
-      if(isdefined(diff_struct_value)) {
+      if(isDefined(diff_struct_value)) {
         return diff_struct_value;
       } else {
         return 0;
@@ -1011,7 +1011,7 @@ function get_coop_enemy_accuracy_modifier() {
     }
     case 2: {
       diff_struct_value = level.s_game_difficulty[level.gameskill].two_player_coopenemyaccuracyscalar;
-      if(isdefined(diff_struct_value)) {
+      if(isDefined(diff_struct_value)) {
         return diff_struct_value;
       } else {
         return 0;
@@ -1020,7 +1020,7 @@ function get_coop_enemy_accuracy_modifier() {
     }
     case 3: {
       diff_struct_value = level.s_game_difficulty[level.gameskill].three_player_coopenemyaccuracyscalar;
-      if(isdefined(diff_struct_value)) {
+      if(isDefined(diff_struct_value)) {
         return diff_struct_value;
       } else {
         return 0;
@@ -1029,7 +1029,7 @@ function get_coop_enemy_accuracy_modifier() {
     }
     case 4: {
       diff_struct_value = level.s_game_difficulty[level.gameskill].four_player_coopenemyaccuracyscalar;
-      if(isdefined(diff_struct_value)) {
+      if(isDefined(diff_struct_value)) {
         return diff_struct_value;
       } else {
         return 0;
@@ -1045,7 +1045,7 @@ function get_coop_friendly_accuracy_modifier() {
   switch (level.players.size) {
     case 1: {
       diff_struct_value = level.s_game_difficulty[level.gameskill].one_player_coopfriendlyaccuracyscalar;
-      if(isdefined(diff_struct_value)) {
+      if(isDefined(diff_struct_value)) {
         return diff_struct_value;
       } else {
         return 0;
@@ -1054,7 +1054,7 @@ function get_coop_friendly_accuracy_modifier() {
     }
     case 2: {
       diff_struct_value = level.s_game_difficulty[level.gameskill].two_player_coopfriendlyaccuracyscalar;
-      if(isdefined(diff_struct_value)) {
+      if(isDefined(diff_struct_value)) {
         return diff_struct_value;
       } else {
         return 0;
@@ -1063,7 +1063,7 @@ function get_coop_friendly_accuracy_modifier() {
     }
     case 3: {
       diff_struct_value = level.s_game_difficulty[level.gameskill].three_player_coopfriendlyaccuracyscalar;
-      if(isdefined(diff_struct_value)) {
+      if(isDefined(diff_struct_value)) {
         return diff_struct_value;
       } else {
         return 0;
@@ -1072,7 +1072,7 @@ function get_coop_friendly_accuracy_modifier() {
     }
     case 4: {
       diff_struct_value = level.s_game_difficulty[level.gameskill].four_player_coopfriendlyaccuracyscalar;
-      if(isdefined(diff_struct_value)) {
+      if(isDefined(diff_struct_value)) {
         return diff_struct_value;
       } else {
         return 0;
@@ -1090,7 +1090,7 @@ function get_coop_friendly_threat_bias_scalar() {
   switch (level.players.size) {
     case 1: {
       diff_struct_value = level.s_game_difficulty[level.gameskill].one_player_coopfriendlythreatbiasscalar;
-      if(isdefined(diff_struct_value)) {
+      if(isDefined(diff_struct_value)) {
         return diff_struct_value;
       } else {
         return 0;
@@ -1099,7 +1099,7 @@ function get_coop_friendly_threat_bias_scalar() {
     }
     case 2: {
       diff_struct_value = level.s_game_difficulty[level.gameskill].two_player_coopfriendlythreatbiasscalar;
-      if(isdefined(diff_struct_value)) {
+      if(isDefined(diff_struct_value)) {
         return diff_struct_value;
       } else {
         return 0;
@@ -1108,7 +1108,7 @@ function get_coop_friendly_threat_bias_scalar() {
     }
     case 3: {
       diff_struct_value = level.s_game_difficulty[level.gameskill].three_player_coopfriendlythreatbiasscalar;
-      if(isdefined(diff_struct_value)) {
+      if(isDefined(diff_struct_value)) {
         return diff_struct_value;
       } else {
         return 0;
@@ -1117,7 +1117,7 @@ function get_coop_friendly_threat_bias_scalar() {
     }
     case 4: {
       diff_struct_value = level.s_game_difficulty[level.gameskill].four_player_coopfriendlythreatbiasscalar;
-      if(isdefined(diff_struct_value)) {
+      if(isDefined(diff_struct_value)) {
         return diff_struct_value;
       } else {
         return 0;
@@ -1135,7 +1135,7 @@ function get_coop_player_health_modifier() {
   switch (level.players.size) {
     case 1: {
       diff_struct_value = level.s_game_difficulty[level.gameskill].one_player_coopplayerdifficultyhealth;
-      if(isdefined(diff_struct_value)) {
+      if(isDefined(diff_struct_value)) {
         return diff_struct_value;
       } else {
         return 0;
@@ -1144,7 +1144,7 @@ function get_coop_player_health_modifier() {
     }
     case 2: {
       diff_struct_value = level.s_game_difficulty[level.gameskill].two_player_coopplayerdifficultyhealth;
-      if(isdefined(diff_struct_value)) {
+      if(isDefined(diff_struct_value)) {
         return diff_struct_value;
       } else {
         return 0;
@@ -1153,7 +1153,7 @@ function get_coop_player_health_modifier() {
     }
     case 3: {
       diff_struct_value = level.s_game_difficulty[level.gameskill].three_player_coopplayerdifficultyhealth;
-      if(isdefined(diff_struct_value)) {
+      if(isDefined(diff_struct_value)) {
         return diff_struct_value;
       } else {
         return 0;
@@ -1162,7 +1162,7 @@ function get_coop_player_health_modifier() {
     }
     case 4: {
       diff_struct_value = level.s_game_difficulty[level.gameskill].four_player_coopplayerdifficultyhealth;
-      if(isdefined(diff_struct_value)) {
+      if(isDefined(diff_struct_value)) {
         return diff_struct_value;
       } else {
         return 0;
@@ -1180,7 +1180,7 @@ function get_coop_player_death_invulnerable_time_modifier() {
   switch (level.players.size) {
     case 1: {
       diff_struct_value = level.s_game_difficulty[level.gameskill].one_player_deathinvulnerabletimemodifier;
-      if(isdefined(diff_struct_value)) {
+      if(isDefined(diff_struct_value)) {
         return diff_struct_value;
       } else {
         return 0;
@@ -1189,7 +1189,7 @@ function get_coop_player_death_invulnerable_time_modifier() {
     }
     case 2: {
       diff_struct_value = level.s_game_difficulty[level.gameskill].two_player_deathinvulnerabletimemodifier;
-      if(isdefined(diff_struct_value)) {
+      if(isDefined(diff_struct_value)) {
         return diff_struct_value;
       } else {
         return 0;
@@ -1198,7 +1198,7 @@ function get_coop_player_death_invulnerable_time_modifier() {
     }
     case 3: {
       diff_struct_value = level.s_game_difficulty[level.gameskill].three_player_deathinvulnerabletimemodifier;
-      if(isdefined(diff_struct_value)) {
+      if(isDefined(diff_struct_value)) {
         return diff_struct_value;
       } else {
         return 0;
@@ -1207,7 +1207,7 @@ function get_coop_player_death_invulnerable_time_modifier() {
     }
     case 4: {
       diff_struct_value = level.s_game_difficulty[level.gameskill].four_player_deathinvulnerabletimemodifier;
-      if(isdefined(diff_struct_value)) {
+      if(isDefined(diff_struct_value)) {
         return diff_struct_value;
       } else {
         return 0;
@@ -1225,7 +1225,7 @@ function get_coop_hit_invulnerability_modifier() {
   switch (level.players.size) {
     case 1: {
       diff_struct_value = level.s_game_difficulty[level.gameskill].one_player_hit_invulnerability_modifier;
-      if(isdefined(diff_struct_value)) {
+      if(isDefined(diff_struct_value)) {
         return diff_struct_value;
       } else {
         return 0;
@@ -1234,7 +1234,7 @@ function get_coop_hit_invulnerability_modifier() {
     }
     case 2: {
       diff_struct_value = level.s_game_difficulty[level.gameskill].two_player_hit_invulnerability_modifier;
-      if(isdefined(diff_struct_value)) {
+      if(isDefined(diff_struct_value)) {
         return diff_struct_value;
       } else {
         return 0;
@@ -1243,7 +1243,7 @@ function get_coop_hit_invulnerability_modifier() {
     }
     case 3: {
       diff_struct_value = level.s_game_difficulty[level.gameskill].three_player_hit_invulnerability_modifier;
-      if(isdefined(diff_struct_value)) {
+      if(isDefined(diff_struct_value)) {
         return diff_struct_value;
       } else {
         return 0;
@@ -1252,7 +1252,7 @@ function get_coop_hit_invulnerability_modifier() {
     }
     case 4: {
       diff_struct_value = level.s_game_difficulty[level.gameskill].four_player_hit_invulnerability_modifier;
-      if(isdefined(diff_struct_value)) {
+      if(isDefined(diff_struct_value)) {
         return diff_struct_value;
       } else {
         return 0;
@@ -1268,7 +1268,7 @@ function get_coop_enemy_pain_chance_modifier() {
   switch (level.players.size) {
     case 1: {
       diff_struct_value = level.s_game_difficulty[level.gameskill].one_player_enemy_pain_chance_modifier;
-      if(isdefined(diff_struct_value)) {
+      if(isDefined(diff_struct_value)) {
         return diff_struct_value;
       } else {
         return 0;
@@ -1277,7 +1277,7 @@ function get_coop_enemy_pain_chance_modifier() {
     }
     case 2: {
       diff_struct_value = level.s_game_difficulty[level.gameskill].two_player_enemy_pain_chance_modifier;
-      if(isdefined(diff_struct_value)) {
+      if(isDefined(diff_struct_value)) {
         return diff_struct_value;
       } else {
         return 0;
@@ -1286,7 +1286,7 @@ function get_coop_enemy_pain_chance_modifier() {
     }
     case 3: {
       diff_struct_value = level.s_game_difficulty[level.gameskill].three_player_enemy_pain_chance_modifier;
-      if(isdefined(diff_struct_value)) {
+      if(isDefined(diff_struct_value)) {
         return diff_struct_value;
       } else {
         return 0;
@@ -1295,7 +1295,7 @@ function get_coop_enemy_pain_chance_modifier() {
     }
     case 4: {
       diff_struct_value = level.s_game_difficulty[level.gameskill].four_player_enemy_pain_chance_modifier;
-      if(isdefined(diff_struct_value)) {
+      if(isDefined(diff_struct_value)) {
         return diff_struct_value;
       } else {
         return 0;
@@ -1319,7 +1319,7 @@ function player_eligible_for_death_invulnerability() {
   if(level.gameskill >= 4) {
     return 0;
   }
-  if(!isdefined(self.eligible_for_death_invulnerability)) {
+  if(!isDefined(self.eligible_for_death_invulnerability)) {
     self.eligible_for_death_invulnerability = 1;
   }
   return self.eligible_for_death_invulnerability;
@@ -1328,7 +1328,7 @@ function player_eligible_for_death_invulnerability() {
 function monitor_player_death_invulnerability_eligibility() {
   self endon("disconnect");
   self endon("death");
-  while (!self.eligible_for_death_invulnerability) {
+  while(!self.eligible_for_death_invulnerability) {
     if(self.health >= self.maxhealth) {
       self.eligible_for_death_invulnerability = 1;
     }
@@ -1348,7 +1348,7 @@ function adjust_melee_damage(player, eattacker, einflictor, idamage, weapon, shi
   if(smeansofdamage == "MOD_MELEE" || smeansofdamage == "MOD_MELEE_WEAPON_BUTT" && isentity(eattacker)) {
     idamage = idamage / 5;
     if(idamage > 40) {
-      playerforward = anglestoforward(player.angles);
+      playerforward = anglesToForward(player.angles);
       toattacker = vectornormalize(eattacker.origin - player.origin);
       if(vectordot(playerforward, toattacker) < 0.342) {
         idamage = 40;
@@ -1368,10 +1368,10 @@ function accuracy_buildup_before_fire(ai) {
   if(getdvarint("ai_codeGameskill")) {
     return;
   }
-  while (true) {
-    if(isdefined(ai.enemy)) {
+  while(true) {
+    if(isDefined(ai.enemy)) {
       if(isplayer(ai.enemy)) {
-        if(!isdefined(ai.lastenemyshotat)) {
+        if(!isDefined(ai.lastenemyshotat)) {
           ai.lastenemyshotat = ai.enemy;
           ai.buildupaccuracymodifier = 0;
           ai.shoottimestart = gettime();
@@ -1394,7 +1394,7 @@ function accuracy_buildup_before_fire(ai) {
           distance = distance(ai.origin, ai.enemy.origin);
           misstime = ai.miss_time_constant * 1000;
           accuracybuilduptime = misstime + (distance * ai.miss_time_distance_factor);
-          targetfacingangle = anglestoforward(ai.enemy.angles);
+          targetfacingangle = anglesToForward(ai.enemy.angles);
           anglefromtarget = vectornormalize(ai.origin - ai.enemy.origin);
           if(vectordot(targetfacingangle, anglefromtarget) < 0.7) {
             accuracybuilduptime = accuracybuilduptime * 2;

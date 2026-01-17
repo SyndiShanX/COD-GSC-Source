@@ -15,8 +15,10 @@ stealth_visibility_friendly_main() {
 }
 
 /************************************************************************************************************/
+
 /*												FRIENDLY LOGIC												*/
 /************************************************************************************************************/
+
 friendly_visibility_logic() {
   self endon("death");
   self endon("pain_death");
@@ -24,12 +26,12 @@ friendly_visibility_logic() {
   current_stance_func = self._stealth.logic.current_stance_func;
 
   //for right now - we only do this for player...the system actually looks good doing it for player only,
-  //but maybe in the future we'll want to change this...if we do theres a bunch of evaluation stuff 
+  //but maybe in the future we'll want to change this...if we do theres a bunch of evaluation stuff
   //based on stance in the _behavior script that will have to be changed.
   if(isPlayer(self))
     self thread player_movespeed_calc_loop();
 
-  while (1) {
+  while(1) {
     self ent_flag_wait("_stealth_enabled");
 
     //find the current stance
@@ -83,7 +85,7 @@ player_getvelocity_pc() {
 }
 
 friendly_compute_score(stance) {
-  if(!isdefined(stance))
+  if(!isDefined(stance))
     stance = self._stealth.logic.stance;
 
   if(stance == "back")
@@ -100,7 +102,7 @@ friendly_compute_score(stance) {
   }
 
   score_move = self._stealth.logic.movespeed_multiplier[detection_level][stance];
-  if(isdefined(self._stealth_move_detection_cap) && score_move > self._stealth_move_detection_cap)
+  if(isDefined(self._stealth_move_detection_cap) && score_move > self._stealth_move_detection_cap)
     score_move = self._stealth_move_detection_cap;
 
   return (score_range + score_move);
@@ -120,8 +122,10 @@ friendly_compute_stances_ai() {
 }
 
 /************************************************************************************************************/
+
 /*												PLAYER LOGIC												*/
 /************************************************************************************************************/
+
 player_movespeed_calc_loop() {
   self endon("death");
   self endon("pain_death");
@@ -130,7 +134,7 @@ player_movespeed_calc_loop() {
   velocity_func = self._stealth.logic.getvelocity_func;
   oldangles = self[[angles_func]]();
 
-  while (1) {
+  while(1) {
     self ent_flag_wait("_stealth_enabled");
 
     score = undefined;
@@ -183,7 +187,7 @@ friendly_compute_stances_player() {
         break;
     }
   }
-  //ok so this means we're moving down...if so then make our current stance actually our 
+  //ok so this means we're moving down...if so then make our current stance actually our
   //old stance over .2 seconds until we actually get to the lower stance in the game
   //we do this because the player is still moving at a high speed when he goes
   //into a lower stance - which messes with the movespeed multiplier calculation
@@ -202,7 +206,7 @@ friendly_compute_stances_player() {
   }
   //otherwise lets set our stance to the current stance...and make our old stance also the current stance
   //we can set the old stance at the same time, because we already decided above that either our old stance
-  //was the same stance, or that we just finished go through a stance change, and either way - it's safe to set 
+  //was the same stance, or that we just finished go through a stance change, and either way - it's safe to set
   //the old stance
   else {
     self._stealth.logic.stance = stance;
@@ -211,17 +215,19 @@ friendly_compute_stances_player() {
 }
 
 /************************************************************************************************************/
+
 /*													SETUP													*/
 /************************************************************************************************************/
+
 friendly_init() {
   self ent_flag_init("_stealth_in_shadow");
   self ent_flag_init("_stealth_enabled");
   self ent_flag_set("_stealth_enabled");
 
-  assertex(!isdefined(self._stealth), "you called maps\_stealth_logic::friendly_init() twice on the same ai or player");
+  assertex(!isDefined(self._stealth), "you called maps\_stealth_logic::friendly_init() twice on the same ai or player");
 
-  self._stealth = spawnstruct();
-  self._stealth.logic = spawnstruct();
+  self._stealth = spawnStruct();
+  self._stealth.logic = spawnStruct();
 
   if(isPlayer(self)) {
     self._stealth.logic.getstance_func = ::friendly_getstance_player;
@@ -264,6 +270,7 @@ friendly_init() {
 }
 
 /************************************************************************************************************/
+
 /*												UTILITIES													*/
 /************************************************************************************************************/
 
@@ -282,12 +289,12 @@ friendly_default_movespeed_scale() {
 }
 
 friendly_set_movespeed_scale(hidden, spotted) {
-  if(isdefined(hidden)) {
+  if(isDefined(hidden)) {
     self._stealth.logic.movespeed_scale["hidden"]["prone"] = hidden["prone"];
     self._stealth.logic.movespeed_scale["hidden"]["crouch"] = hidden["crouch"];
     self._stealth.logic.movespeed_scale["hidden"]["stand"] = hidden["stand"];
   }
-  if(isdefined(spotted)) {
+  if(isDefined(spotted)) {
     self._stealth.logic.movespeed_scale["spotted"]["prone"] = spotted["prone"];
     self._stealth.logic.movespeed_scale["spotted"]["crouch"] = spotted["crouch"];
     self._stealth.logic.movespeed_scale["spotted"]["stand"] = spotted["stand"];

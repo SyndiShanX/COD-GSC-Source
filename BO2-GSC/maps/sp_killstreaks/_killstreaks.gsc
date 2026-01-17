@@ -83,7 +83,7 @@ registerkillstreak(killstreaktype, killstreakweapon, killstreakmenuname, killstr
   assert(isDefined(killstreaktype), "Can not register a killstreak without a valid type name.");
   assert(!isDefined(level.killstreaks[killstreaktype]), "Killstreak " + killstreaktype + " already registered");
   assert(isDefined(killstreakusefunction), "No use function defined for killstreak " + killstreaktype);
-  level.killstreaks[killstreaktype] = spawnstruct();
+  level.killstreaks[killstreaktype] = spawnStruct();
   level.killstreaks[killstreaktype].killstreaklevel = int(tablelookup("sp/statsTable.csv", level.cac_creference, killstreakmenuname, level.cac_ccount));
   level.killstreaks[killstreaktype].usagekey = killstreakusagekey;
   level.killstreaks[killstreaktype].usefunction = killstreakusefunction;
@@ -298,8 +298,8 @@ streaknotify(streakval) {
   self endon("disconnect");
   self waittill("playerKilledChallengesProcessed");
   wait 0.05;
-  notifydata = spawnstruct();
-  notifydata.titlelabel = & "MP_KILLSTREAK_N";
+  notifydata = spawnStruct();
+  notifydata.titlelabel = &"MP_KILLSTREAK_N";
   notifydata.titletext = streakval;
   notifydata.iconheight = 32;
 }
@@ -380,7 +380,7 @@ addkillstreaktoqueue(menuname, streakcount, hardpointtype, nonotify) {
     self.killstreaknotifyqueue = [];
 
   size = self.killstreaknotifyqueue.size;
-  self.killstreaknotifyqueue[size] = spawnstruct();
+  self.killstreaknotifyqueue[size] = spawnStruct();
   self.killstreaknotifyqueue[size].streakcount = streakcount;
   self.killstreaknotifyqueue[size].killstreaktablenumber = killstreaktablenumber;
   self.killstreaknotifyqueue[size].hardpointtype = hardpointtype;
@@ -801,9 +801,7 @@ getxpamountforkillstreak(killstreaktype) {
 triggerkillstreak(killstreaktype) {
   assert(isDefined(level.killstreaks[killstreaktype].usefunction), "No use function defined for killstreak " + killstreaktype);
 
-  if([
-      [level.killstreaks[killstreaktype].usefunction]
-    ](killstreaktype)) {
+  if([[level.killstreaks[killstreaktype].usefunction]](killstreaktype)) {
     if(isDefined(level.killstreaks[killstreaktype].killstreaklevel))
       xpamount = getxpamountforkillstreak(killstreaktype);
 
@@ -884,8 +882,7 @@ playkillstreakstartdialog(killstreaktype, team, playnonteambasedenemysounds) {
   }
 }
 
-playkillstreakreadydialog(killstreaktype) {
-}
+playkillstreakreadydialog(killstreaktype) {}
 
 playkillstreakreadyandinformdialog(killstreaktype) {
   if(isDefined(level.killstreaks[killstreaktype].informdialog))

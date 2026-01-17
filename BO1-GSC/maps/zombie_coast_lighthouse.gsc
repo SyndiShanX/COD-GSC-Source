@@ -51,7 +51,7 @@ pack_a_punch_move_to_spot() {
   pap_clip = getEnt("zombie_vending_upgrade_clip", "targetname");
   pap_clip notsolid();
   pap_machine_trig = getEnt("zombie_vending_upgrade", "targetname");
-  pap_pieces = getentarray(pap_machine_trig.target, "targetname");
+  pap_pieces = getEntArray(pap_machine_trig.target, "targetname");
   pap_bump_trig = getEnt("pack_bump_trig", "script_noteworthy");
   pap_jingle_struct = getstruct("pack_jingle_struct", "script_noteworthy");
   link_ent = spawn("script_origin", pap_clip.origin);
@@ -82,7 +82,7 @@ pack_a_punch_move_to_spot() {
     pap_pieces[i] show();
   }
   link_ent moveTo(new_spot.origin, 5);
-  link_ent PlaySound("zmb_pap_rise");
+  link_ent playSound("zmb_pap_rise");
   link_ent thread pap_rise_fx();
   link_ent thread pap_wobble();
   wait(1);
@@ -175,7 +175,7 @@ pack_a_punch_hide() {
   pap_clip = getEnt("zombie_vending_upgrade_clip", "targetname");
   pap_clip notsolid();
   pap_machine_trig = getEnt("zombie_vending_upgrade", "targetname");
-  pap_pieces = getentarray(pap_machine_trig.target, "targetname");
+  pap_pieces = getEntArray(pap_machine_trig.target, "targetname");
   pap_bump_trig = getEnt("pack_bump_trig", "script_noteworthy");
   pap_jingle_struct = getstruct("pack_jingle_struct", "script_noteworthy");
   link_ent = spawn("script_origin", pap_machine_trig.origin);
@@ -190,7 +190,7 @@ pack_a_punch_hide() {
     pap_pieces[i] linkto(link_ent);
   }
   link_ent moveTo(link_ent.origin + (0, 0, -350), 5);
-  link_ent PlaySound("zmb_pap_lower");
+  link_ent playSound("zmb_pap_lower");
   link_ent thread pap_rise_fx();
   wait(1);
   level thread replace_pap_debris();
@@ -223,7 +223,7 @@ replace_pap_debris() {
   if(!isDefined(level.current_pap_spot)) {
     return undefined;
   }
-  playfx(level._effect["rise_burst_water"], level.current_pap_spot.origin);
+  playFX(level._effect["rise_burst_water"], level.current_pap_spot.origin);
   debris = getEnt(level.current_pap_spot.target, "targetname");
   if(isDefined(debris)) {
     debris show();
@@ -238,7 +238,7 @@ hide_pap_debris() {
   if(!isDefined(level.current_pap_spot)) {
     return undefined;
   }
-  playfx(level._effect["rise_burst_water"], level.current_pap_spot.origin);
+  playFX(level._effect["rise_burst_water"], level.current_pap_spot.origin);
   debris = getEnt(level.current_pap_spot.target, "targetname");
   if(isDefined(debris)) {
     debris._hidden = true;

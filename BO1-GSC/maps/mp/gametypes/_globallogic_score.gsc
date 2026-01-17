@@ -41,7 +41,7 @@ updateMatchBonusScores(winner) {
       loserScale = maps\mp\gametypes\_rank::getScoreInfoValue("tie");
     }
     players = level.players;
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       player = players[i];
       if(player.timePlayed["total"] < 1 || player.pers["participation"] < 1) {
         player thread maps\mp\gametypes\_rank::endGameUpdate();
@@ -79,7 +79,7 @@ updateMatchBonusScores(winner) {
       loserScale = maps\mp\gametypes\_rank::getScoreInfoValue("tie");
     }
     players = level.players;
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       player = players[i];
       if(player.timePlayed["total"] < 1 || player.pers["participation"] < 1) {
         player thread maps\mp\gametypes\_rank::endGameUpdate();
@@ -91,7 +91,7 @@ updateMatchBonusScores(winner) {
       }
       spm = player maps\mp\gametypes\_rank::getSPM();
       isWinner = false;
-      for (pIdx = 0; pIdx < min(level.placement["all"][0].size, 3); pIdx++) {
+      for(pIdx = 0; pIdx < min(level.placement["all"][0].size, 3); pIdx++) {
         if(level.placement["all"][pIdx] != player)
           continue;
         isWinner = true;
@@ -117,12 +117,12 @@ giveMatchBonus(scoreType, score) {
 }
 setXenonRanks(winner) {
   players = level.players;
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     player = players[i];
     if(!isDefined(player.score) || !isDefined(player.pers["team"]))
       continue;
   }
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     player = players[i];
     if(!isDefined(player.score) || !isDefined(player.pers["team"]))
       continue;
@@ -135,7 +135,7 @@ getHighestScoringPlayer() {
   players = level.players;
   winner = undefined;
   tie = false;
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(!isDefined(players[i].score))
       continue;
     if(players[i].score < 1)
@@ -241,7 +241,7 @@ resetPlayerScores() {
   players = level.players;
   winner = undefined;
   tie = false;
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(isDefined(players[i].pers["score"]))
       _setPlayerScore(players[i], 0);
   }
@@ -361,7 +361,7 @@ updateWinLossStats(winner) {
     return;
   players = level.players;
   if(!isDefined(winner) || (isDefined(winner) && !isPlayer(winner) && winner == "tie")) {
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       if(!isDefined(players[i].pers["team"]))
         continue;
       if(level.hostForcedEnd && players[i] IsHost())
@@ -373,7 +373,7 @@ updateWinLossStats(winner) {
       return;
     updateWinStats(winner);
   } else {
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       if(!isDefined(players[i].pers["team"]))
         continue;
       if(level.hostForcedEnd && players[i] IsHost())
@@ -536,7 +536,7 @@ setAttachmentStat(name, incValue, statName) {
       if(!numAttachments) {
         return;
       }
-      for (currentAttachment = 0; currentAttachment < numAttachments; currentAttachment++) {
+      for(currentAttachment = 0; currentAttachment < numAttachments; currentAttachment++) {
         attachmentName = self.currentAttachments[currentAttachment]["name"];
         if((!isDefined(self.currentAttachments[currentAttachment]["owned"])) || (!self.currentAttachments[currentAttachment]["owned"])) {
           continue;
@@ -590,7 +590,7 @@ setInflictorStat(eInflictor, eAttacker, sWeapon) {
   if(!isDefined(eInflictor.playerAffectedArray))
     eInflictor.playerAffectedArray = [];
   foundNewPlayer = true;
-  for (i = 0; i < eInflictor.playerAffectedArray.size; i++) {
+  for(i = 0; i < eInflictor.playerAffectedArray.size; i++) {
     if(eInflictor.playerAffectedArray[i] == self) {
       foundNewPlayer = false;
       break;
@@ -651,11 +651,10 @@ logXPGains() {
   if(!isDefined(self.xpGains))
     return;
   xpTypes = getArrayKeys(self.xpGains);
-  for (index = 0; index < xpTypes.size; index++) {
+  for(index = 0; index < xpTypes.size; index++) {
     gain = self.xpGains[xpTypes[index]];
     if(!gain)
       continue;
     self logString("xp " + xpTypes[index] + ": " + gain);
   }
 }
-

@@ -99,7 +99,7 @@ createrewindwatcher(localclientnum, name) {
   rewindwatcher = getrewindwatcher(localclientnum, name);
 
   if(!isDefined(rewindwatcher)) {
-    rewindwatcher = spawnstruct();
+    rewindwatcher = spawnStruct();
     level.rewindwatcherarray[localclientnum][level.rewindwatcherarray[localclientnum].size] = rewindwatcher;
   }
 
@@ -135,7 +135,7 @@ addtimedfunction(name, function, relativestarttimeinsecs) {
     self.timedfunctions = [];
 
   assert(!isDefined(self.timedfunctions[name]));
-  self.timedfunctions[name] = spawnstruct();
+  self.timedfunctions[name] = spawnStruct();
   self.timedfunctions[name].inprogress = 0;
   self.timedfunctions[name].function = function;
   self.timedfunctions[name].starttimesec = relativestarttimeinsecs;
@@ -157,7 +157,7 @@ addrewindableeventtowatcher(starttime, data) {
   if(isDefined(self.event[starttime])) {
     return;
   }
-  self.event[starttime] = spawnstruct();
+  self.event[starttime] = spawnStruct();
   self.event[starttime].data = data;
   self.event[starttime].inprogress = 0;
 

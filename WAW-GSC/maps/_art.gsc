@@ -65,7 +65,7 @@ artfxprintln(file, string) {
 strtok_loc(string, par1) {
   stringlist = [];
   indexstring = "";
-  for (i = 0; i < string.size; i++) {
+  for(i = 0; i < string.size; i++) {
     if(string[i] == " ") {
       stringlist[stringlist.size] = indexstring;
       indexstring = "";
@@ -134,10 +134,10 @@ tweakart() {
   dofvarupdate();
   wait_for_first_player();
   players = get_players();
-  for (;;) {
+  for(;;) {
     if(getdebugdvar("replay_debug") == "1")
       println("File: _art.gsc. Function: tweakart() - INNER LOOP START\n");
-    while (getDvarint("scr_art_tweak") == 0) {
+    while(getDvarint("scr_art_tweak") == 0) {
       if(getdebugdvar("replay_debug") == "1")
         println("File: _art.gsc. Function: tweakart() - INNER INNER LOOP START\n");
       if(getdebugdvar("replay_debug") == "1")
@@ -260,13 +260,13 @@ dumpsettings() {
               }
               fc = [];
               larger = 1;
-              for (i = 0; i < color.size; i++) {
+              for(i = 0; i < color.size; i++) {
                 fc[i] = fogfraction * color[i];
                 if(fc[i] > larger)
                   larger = fc[i];
               }
               if(larger > 1)
-                for (i = 0; i < fc.size; i++)
+                for(i = 0; i < fc.size; i++)
                   fc[i] = fc[i] / larger;
               setdvar("scr_fog_red", fc[0]);
               setdvar("scr_fog_green", fc[1]);
@@ -280,7 +280,7 @@ dumpsettings() {
               setdvar("r_lighttweaksunlight", level.sunlight_dark);
               setdvar("r_lighttweakdiffusefraction", level.diffuse_low);
               direction = "up";
-              for (;;) {
+              for(;;) {
                 sunlight = getdvarFloat("r_lighttweaksunlight");
                 jitter = scale(1 + randomint(21));
                 flip = randomint(2);
@@ -308,7 +308,7 @@ dumpsettings() {
               sunlight = getdvarFloat("r_lighttweaksunlight");
               totalchange = target_sunlight - sunlight;
               changeamount = totalchange / (time / freq);
-              while (time > 0) {
+              while(time > 0) {
                 time = time - freq;
                 sunlight = sunlight + changeamount;
                 setdvar("r_lighttweaksunlight", sunlight);
@@ -322,7 +322,7 @@ dumpsettings() {
               sunlight = getdvarFloat("r_lighttweaksunlight");
               totalchange = sunlight - target_sunlight;
               changeamount = totalchange / (time / freq);
-              while (time > 0) {
+              while(time > 0) {
                 time = time - freq;
                 sunlight = sunlight - changeamount;
                 setdvar("r_lighttweaksunlight", sunlight);
@@ -341,7 +341,7 @@ dumpsettings() {
                 println("File: _art.gsc. Function: adsDoF()\n");
               level.dof = level.dofDefault;
               art_tweak = false;
-              for (;;) {
+              for(;;) {
                 wait(0.05);
                 if(getdebugdvar("replay_debug") == "1")
                   println("File: _art.gsc. Function: adsDoF() - INNER LOOP START\n");
@@ -368,7 +368,7 @@ dumpsettings() {
                   continue;
                 }
                 players = get_players();
-                for (i = 0; i < players.size; i++) {
+                for(i = 0; i < players.size; i++) {
                   players[i] setDefaultDepthOfField();
                 }
                 if(getdebugdvar("replay_debug") == "1")
@@ -383,7 +383,7 @@ dumpsettings() {
               if(players.size == 0) {
                 return;
               }
-              for (i = 0; i < players.size; i++) {
+              for(i = 0; i < players.size; i++) {
                 adsFrac = players[i] playerADS();
                 if(adsFrac == 1 && getDvarInt("scr_cinematic_autofocus")) {
                   traceDir = vectorNormalize(anglesToForward(players[i] getPlayerAngles()));
@@ -395,10 +395,10 @@ dumpsettings() {
                   start_angles = players[i] getPlayerAngles();
                   bestDot = 0;
                   bestFocalPoint = undefined;
-                  for (index = 0; index < enemies.size; index++) {
+                  for(index = 0; index < enemies.size; index++) {
                     end_origin = enemies[index].origin;
                     normal = vectorNormalize(end_origin - start_origin);
-                    forward = anglestoforward(start_angles);
+                    forward = anglesToForward(start_angles);
                     dot = vectorDot(forward, normal);
                     if(dot > bestDot) {
                       bestDot = dot;
@@ -443,7 +443,7 @@ dumpsettings() {
               if(players.size == 0) {
                 return;
               }
-              for (i = 0; i < players.size; i++) {
+              for(i = 0; i < players.size; i++) {
                 if(players[i] playerADS() == 0.0) {
                   players[i] setDefaultDepthOfField();
                   continue;
@@ -455,7 +455,7 @@ dumpsettings() {
                 enemies = getAIArray("axis");
                 nearEnd = 10000;
                 farStart = -1;
-                for (index = 0; index < enemies.size; index++) {
+                for(index = 0; index < enemies.size; index++) {
                   enemyDir = vectorNormalize(enemies[index].origin - playerEye);
                   dot = vectorDot(playerForward, enemyDir);
                   if(dot < 0.923) {

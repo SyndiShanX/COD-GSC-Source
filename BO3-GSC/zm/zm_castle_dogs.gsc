@@ -17,7 +17,7 @@
 #namespace zm_castle_dogs;
 
 function autoexec init() {
-  spawner::add_archetype_spawn_function("zombie_dog", & function_9f8cfcf5);
+  spawner::add_archetype_spawn_function("zombie_dog", &function_9f8cfcf5);
 }
 
 function function_9f8cfcf5() {
@@ -29,7 +29,7 @@ function dog_round_tracker() {
   level.next_dog_round = level.round_number + randomintrange(4, 6);
   old_spawn_func = level.round_spawn_func;
   old_wait_func = level.round_wait_func;
-  while (true) {
+  while(true) {
     level waittill("between_round_over");
     if(getdvarint("") > 0) {
       level.next_dog_round = level.round_number;
@@ -39,8 +39,8 @@ function dog_round_tracker() {
       old_spawn_func = level.round_spawn_func;
       old_wait_func = level.round_wait_func;
       zm_ai_dogs::dog_round_start();
-      level.round_spawn_func = & zm_ai_dogs::dog_round_spawning;
-      level.round_wait_func = & zm_ai_dogs::dog_round_wait_func;
+      level.round_spawn_func = &zm_ai_dogs::dog_round_spawning;
+      level.round_wait_func = &zm_ai_dogs::dog_round_wait_func;
       level clientfield::set("castle_fog_bank_switch", 1);
       level.next_dog_round = level.round_number + randomintrange(7, 14);
       getplayers()[0] iprintln("" + level.next_dog_round);
@@ -86,11 +86,11 @@ function function_33aa4940() {
 
 function function_92e4eaff(var_70e0fe97, var_19764360) {
   var_2ad6ea05 = array::randomize(level.zm_loc_types["dog_location"]);
-  for (i = 0; i < var_2ad6ea05.size; i++) {
-    if(isdefined(level.old_dog_spawn) && level.old_dog_spawn == var_2ad6ea05[i]) {
+  for(i = 0; i < var_2ad6ea05.size; i++) {
+    if(isDefined(level.old_dog_spawn) && level.old_dog_spawn == var_2ad6ea05[i]) {
       continue;
     }
-    if(isdefined(var_19764360)) {
+    if(isDefined(var_19764360)) {
       n_dist_squared = distancesquared(var_2ad6ea05[i].origin, var_19764360.origin);
       if(n_dist_squared > 360000 && n_dist_squared < 1440000) {
         level.old_dog_spawn = var_2ad6ea05[i];
@@ -106,12 +106,12 @@ function function_8cf500c9() {
 }
 
 function function_1aaa22b5() {
-  if(!isdefined(self.favoriteenemy)) {
+  if(!isDefined(self.favoriteenemy)) {
     return;
   }
   var_4b010f36 = self zm_utility::get_current_zone();
   var_3d24b4b1 = self.favoriteenemy zm_utility::get_current_zone();
-  if(isdefined(var_4b010f36) && isdefined(var_3d24b4b1)) {
+  if(isDefined(var_4b010f36) && isDefined(var_3d24b4b1)) {
     if(issubstr(var_4b010f36, "v10") && !issubstr(var_3d24b4b1, "v10") || (!issubstr(var_4b010f36, "v10") && issubstr(var_3d24b4b1, "v10"))) {
       level.dog_round_count++;
       self kill();

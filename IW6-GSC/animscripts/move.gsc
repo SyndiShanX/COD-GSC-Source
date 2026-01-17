@@ -382,9 +382,7 @@ pathchangelistener() {
 
 pathchange_getturnanim(var_0, var_1) {
   if(isDefined(self.pathturnanimoverridefunc))
-    return [
-      [self.pathturnanimoverridefunc]
-    ](var_0, var_1);
+    return [[self.pathturnanimoverridefunc]](var_0, var_1);
 
   var_2 = undefined;
   var_3 = undefined;

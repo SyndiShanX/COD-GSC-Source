@@ -66,13 +66,13 @@ section_flag_init() {
 }
 
 section_hint_string_init() {
-  maps\_utility::add_hint_string("intro_bumper_hint", & "ODIN_INTRO_BUMPER_HINT", ::hint_bumpers_intro);
-  maps\_utility::add_hint_string("intro_bumper_hint2", & "ODIN_INTRO_BUMPER_HINT2", ::hint_bumpers_intro2);
-  maps\_utility::add_hint_string("intro_bumper_hint2_PC", & "ODIN_INTRO_BUMPER_HINT2_PC", ::hint_bumpers_intro2);
-  maps\_utility::add_hint_string("intro_bumper_hint2_CROUCH", & "ODIN_INTRO_BUMPER_HINT2_CROUCH", ::hint_bumpers_intro2);
-  maps\_utility::add_hint_string("intro_bumper_hint_pc", & "ODIN_INTRO_BUMPER_HINT_PC", ::hint_bumpers_intro);
-  maps\_utility::add_hint_string("intro_stray_fail", & "ODIN_FAIL_STRAY_INTRO");
-  maps\_utility::add_hint_string("intro_stray_warn", & "ODIN_STRAY_INTRO_WARNING", ::hint_stray_warn);
+  maps\_utility::add_hint_string("intro_bumper_hint", &"ODIN_INTRO_BUMPER_HINT", ::hint_bumpers_intro);
+  maps\_utility::add_hint_string("intro_bumper_hint2", &"ODIN_INTRO_BUMPER_HINT2", ::hint_bumpers_intro2);
+  maps\_utility::add_hint_string("intro_bumper_hint2_PC", &"ODIN_INTRO_BUMPER_HINT2_PC", ::hint_bumpers_intro2);
+  maps\_utility::add_hint_string("intro_bumper_hint2_CROUCH", &"ODIN_INTRO_BUMPER_HINT2_CROUCH", ::hint_bumpers_intro2);
+  maps\_utility::add_hint_string("intro_bumper_hint_pc", &"ODIN_INTRO_BUMPER_HINT_PC", ::hint_bumpers_intro);
+  maps\_utility::add_hint_string("intro_stray_fail", &"ODIN_FAIL_STRAY_INTRO");
+  maps\_utility::add_hint_string("intro_stray_warn", &"ODIN_STRAY_INTRO_WARNING", ::hint_stray_warn);
 }
 
 hint_bumpers_intro() {
@@ -1094,7 +1094,7 @@ odin_intro_screen() {
   thread introscreen_generic_fade_in("white", var_2, var_1, var_0);
   wait 2.75;
   var_4 = [];
-  var_4[0] = & "ODIN_INTROSCREEN_LINE_0";
+  var_4[0] = &"ODIN_INTROSCREEN_LINE_0";
   thread maps\_utility::stylized_center_text(var_4, var_3);
   thread delayed_intro();
   wait 4.0;
@@ -1123,7 +1123,7 @@ delayed_intro() {
   level.introscreen.completed_delay = 3;
   level.introscreen.fade_out_time = 1.5;
   level.introscreen.fade_in_time = undefined;
-  level.introscreen.lines = [ & "ODIN_INTROSCREEN_LINE_3", & "ODIN_INTROSCREEN_LINE_2", & "ODIN_INTROSCREEN_LINE_1"];
+  level.introscreen.lines = [ &"ODIN_INTROSCREEN_LINE_3", &"ODIN_INTROSCREEN_LINE_2", &"ODIN_INTROSCREEN_LINE_1"];
   maps\_introscreen::introscreen(1, undefined);
 }
 

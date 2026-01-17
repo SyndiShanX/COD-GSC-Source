@@ -125,7 +125,7 @@ start_rescue_checkpoint(var_0) {
 }
 
 aud_open_door_meeting() {
-  if(isdefined(level.aud.first_door_open_trigger)) {
+  if(isDefined(level.aud.first_door_open_trigger)) {
     wait 1.5;
     common_scripts\utility::array_thread(level.aud.first_door_open_trigger, common_scripts\utility::trigger_on);
   }
@@ -182,7 +182,7 @@ aud_stop_post_rappel_mix() {
 }
 
 aud_gaz_open_door_rescue() {
-  if(isdefined(level.aud.gaz_door_open_trigger)) {
+  if(isDefined(level.aud.gaz_door_open_trigger)) {
     wait 1.5;
     level.aud.gaz_door_open_trigger common_scripts\utility::trigger_on();
   }
@@ -201,7 +201,7 @@ start_player_gets_on_heli_mix() {
 aud_start_power_off_sfx() {
   var_0 = getent("exterior_light_turn_power_off_sfx", "targetname");
 
-  if(isdefined(var_0)) {
+  if(isDefined(var_0)) {
     var_0 thread maps\_utility::play_sound_on_entity("scn_blackout_power_down");
     var_0 maps\_utility::play_sound_on_entity("scn_light_power_off");
   }
@@ -215,16 +215,16 @@ start_scripted_uaz_audio() {
 }
 
 play_uaz_scripted_sfx() {
-  for (var_0 = 1; var_0 <= 2; var_0++) {
+  for(var_0 = 1; var_0 <= 2; var_0++) {
     self waittill("trigger", var_1);
     var_1 vehicle_turnengineoff();
     var_1.script_disablevehicleaudio = 1;
-    var_1 playsound("scn_blackout_uaz_" + var_0 + "_scripted_track");
+    var_1 playSound("scn_blackout_uaz_" + var_0 + "_scripted_track");
   }
 }
 
 play_uaz_rock_falling_sfx() {
-  for (var_0 = 1; var_0 <= 2; var_0++) {
+  for(var_0 = 1; var_0 <= 2; var_0++) {
     self waittill("trigger", var_1);
     wait 2;
     var_1 thread common_scripts\utility::play_sound_in_space("emt_truck_rock_rubble", var_1.origin + (0, 0, -100));
@@ -243,7 +243,7 @@ set_all_audio_zone_streamed_ambiance(var_0) {
 }
 
 disable_azm_trigger_before_meeting_door_open() {
-  level.aud.first_door_open_trigger = getentarray("flag_before_first_door_open", "script_noteworthy");
+  level.aud.first_door_open_trigger = getEntArray("flag_before_first_door_open", "script_noteworthy");
   common_scripts\utility::array_thread(level.aud.first_door_open_trigger, common_scripts\utility::trigger_off);
 }
 

@@ -18,7 +18,7 @@ init_color_grouping(nodes) {
   level.colorcoded_volumes["axis"] = [];
   level.colorcoded_volumes["allies"] = [];
   triggers = get_triggers("trigger_once", "trigger_multiple", "trigger_radius", "trigger_box");
-  volumes = getentarray("info_volume", "classname");
+  volumes = getEntArray("info_volume", "classname");
 
   for(i = 0; i < nodes.size; i++) {
     if(isDefined(nodes[i].script_color_allies))
@@ -317,7 +317,7 @@ process_path_node(node, null) {
 
 prioritize_colorcoded_nodes(team, colorcode, color) {
   nodes = level.arrays_of_colorcoded_nodes[team][colorcode];
-  ent = spawnstruct();
+  ent = spawnStruct();
   ent.path_nodes = [];
   ent.cover_nodes_first = [];
   ent.cover_nodes_last = [];
@@ -966,7 +966,7 @@ friendly_spawner_vision_checker() {
         break;
       }
 
-      forward = anglestoforward((0, players[q] getplayerangles()[1], 0));
+      forward = anglesToForward((0, players[q] getplayerangles()[1], 0));
       difference = vectornormalize(difference_vec);
       dot = vectordot(forward, difference);
 
@@ -1009,7 +1009,7 @@ get_color_spawner(classname, fromcolor) {
       return level.respawn_spawner;
   }
 
-  spawners = getentarray("color_spawner", "targetname");
+  spawners = getEntArray("color_spawner", "targetname");
   class_spawners = [];
 
   for(i = 0; i < spawners.size; i++)

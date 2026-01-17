@@ -22,7 +22,7 @@ retreat_truck_behavior() {
   movetrigger waittill("trigger");
   level notify("retreaters", self);
   if(!isDefined(self.script_string)) {
-    for (i = 0; i < level.retreat_points.size; i++) {
+    for(i = 0; i < level.retreat_points.size; i++) {
       if(isDefined(self) && self.health > 0 && self.classname != "script_vehicle_corpse") {
         wait_node = getVehicleNode(self.script_noteworthy + " " + level.retreat_points[i] + " wait", "script_noteworthy");
         if(isDefined(wait_node)) {
@@ -30,7 +30,7 @@ retreat_truck_behavior() {
           self waittill("reached_wait_node");
           oldspeed = self GetSpeedMPH();
           self setSpeed(0, 6, 6);
-          while (1) {
+          while(1) {
             if(!array_check_for_dupes(level.invalid_retreat_points, "stop " + level.retreat_points[i] + " wait")) {
               break;
             }
@@ -48,7 +48,7 @@ retreat_truck_behavior() {
 
 retreat_truck_player_hit_me() {
   self endon("death");
-  while (1) {
+  while(1) {
     self waittill("damage", amt, guy, direction, origin, damage_type);
     if(damage_type == "MOD_PROJECTILE") {
       if(IsPlayer(guy)) {
@@ -68,15 +68,15 @@ retreat_truck_behavior_node_kill() {
 do_death_fx() {
   self waittill("death");
   if(is_mature()) {
-    playfx(level._effect["truck_gib_explode"], self.origin);
+    playFX(level._effect["truck_gib_explode"], self.origin);
   }
 }
 
 wait_for_global_trigger(area) {
   all_trigger = GetEnt("area " + area + " trigger all", "script_noteworthy");
-  trigger_array = GetEntArray("area " + area + " trigger");
+  trigger_array = getEntArray("area " + area + " trigger");
   all_trigger waittill("trigger");
-  for (i = 0; i < trigger_array.size; i++) {
+  for(i = 0; i < trigger_array.size; i++) {
     if(isDefined(trigger_array[i])) {
       trigger_array[i] notify("trigger");
     }
@@ -106,7 +106,7 @@ see2_veh_death_thread() {
     return;
   }
   if(rand > pop_threshold) {
-    playfxontag(level._effect[turret_fx], self, "tag_turret");
+    playFXOnTag(level._effect[turret_fx], self, "tag_turret");
   } else {}
 }
 
@@ -117,8 +117,8 @@ do_tarp_flap() {
   self.animname = "arty tarp";
   self UseAnimTree(#animtree);
   targetEnt = undefined;
-  while (1) {
-    while (!isDefined(targetEnt)) {
+  while(1) {
+    while(!isDefined(targetEnt)) {
       targetEnt = GetEnt(self.target, "targetname");
       wait(0.05);
     }
@@ -130,7 +130,7 @@ do_tarp_flap() {
 
 cleanup_tarp() {
   targetEnt = undefined;
-  while (!isDefined(targetEnt)) {
+  while(!isDefined(targetEnt)) {
     targetEnt = GetEnt(self.target, "targetname");
     wait(0.05);
   }
@@ -139,8 +139,8 @@ cleanup_tarp() {
   wait(0.1);
   if(isDefined(self.script_string)) {
     sticks = [];
-    sticks = GetEntArray(self.script_string, "targetname");
-    for (i = 0; i < sticks.size; i++) {
+    sticks = getEntArray(self.script_string, "targetname");
+    for(i = 0; i < sticks.size; i++) {
       sticks[i] Delete();
     }
   }
@@ -151,7 +151,7 @@ do_arty_spawn(areaNum) {
   extra_count = 0;
   num_extra = get_players().size - 1;
   trigger_array = getEntArray("arty" + areaNum + " trigger", "targetname");
-  for (i = 0; i < trigger_array.size; i++) {
+  for(i = 0; i < trigger_array.size; i++) {
     should_spawn = false;
     if(!isDefined(trigger_array[i].script_noteworthy)) {
       should_spawn = true;
@@ -165,7 +165,7 @@ do_arty_spawn(areaNum) {
     }
   }
   wait(1);
-  for (j = 1; j < 6; j++) {
+  for(j = 1; j < 6; j++) {
     arty = getEnt("arty " + j, "targetname");
     if(isDefined(arty)) {
       level.enemy_armor = array_add(level.enemy_armor, arty);
@@ -175,7 +175,7 @@ do_arty_spawn(areaNum) {
 }
 
 self_inform_on_damage_trigger(event) {
-  while (1) {
+  while(1) {
     self waittill("damage", damage, other, direction, origin, damage_type);
     if(maps\see2::explosive_damage(damage_type)) {
       if(isDefined(other.script_team) && other.script_team == "allies") {
@@ -189,11 +189,11 @@ self_inform_on_damage_trigger(event) {
 
 check_for_player_proximity(distance) {
   self endon("death");
-  while (!isDefined(get_players())) {
+  while(!isDefined(get_players())) {
     wait(0.05);
   }
-  while (1) {
-    for (i = 0; i < get_players().size; i++) {
+  while(1) {
+    for(i = 0; i < get_players().size; i++) {
       if(distancesquared(get_players()[i].origin, self.origin) < (distance * distance)) {
         speed = self getSpeedMPH();
         if(speed > 0) {
@@ -210,7 +210,7 @@ setup_spawngroup_generics(groupnum) {
   max_group_tanks = 12;
   level waittill("area" + groupNum + " spawned");
   wait(1);
-  for (i = 0; i < max_group_tanks; i++) {
+  for(i = 0; i < max_group_tanks; i++) {
     tank = GetEnt("loopveh " + i + " group" + groupNum, "script_noteworthy");
     if(isDefined(tank)) {
       approach = tank check_for_approach(i, groupnum);
@@ -225,7 +225,7 @@ setup_spawngroup_generics(groupnum) {
       continue;
     }
   }
-  for (i = 0; i < max_group_tanks; i++) {
+  for(i = 0; i < max_group_tanks; i++) {
     tankname = "advance_retreat " + i + " group" + groupNum;
     tank = getEnt(tankname, "script_noteworthy");
     if(isDefined(tank)) {
@@ -238,7 +238,7 @@ setup_spawngroup_generics(groupnum) {
       continue;
     }
   }
-  for (i = 0; i < max_group_tanks; i++) {
+  for(i = 0; i < max_group_tanks; i++) {
     tank = GetEnt("lineveh " + i + " group" + groupNum, "script_noteworthy");
     if(isDefined(tank)) {
       tank thread linear_movement_behavior(undefined, undefined, i, groupNum);
@@ -250,7 +250,7 @@ setup_spawngroup_generics(groupnum) {
       continue;
     }
   }
-  for (i = 0; i < max_group_tanks; i++) {
+  for(i = 0; i < max_group_tanks; i++) {
     tank = GetEnt("lineveh_with_backup " + i + " group" + groupNum, "script_noteworthy");
     if(isDefined(tank)) {
       tank thread linear_movement_behavior_adjusted(undefined, undefined, i, groupNum);
@@ -262,7 +262,7 @@ setup_spawngroup_generics(groupnum) {
       continue;
     }
   }
-  for (i = 0; i < max_group_tanks; i++) {
+  for(i = 0; i < max_group_tanks; i++) {
     tank = GetEnt("staticveh " + i + " group" + groupNum, "script_noteworthy");
     if(isDefined(tank)) {
       tank thread static_firing_behavior();
@@ -309,7 +309,7 @@ do_intermediate_damage_states() {
     int_damage_model = "veh_rus_tracked_ot34_dmg1";
     max_health = 3000;
   }
-  while (1) {
+  while(1) {
     self waittill("damage", amount);
     if(damage_count >= (max_health / 2)) {
       if(isDefined(int_dmg_fx)) {
@@ -324,8 +324,8 @@ do_intermediate_damage_states() {
 
 play_int_dmg_fx(fx_name) {
   self endon("death");
-  while (1) {
-    playfxontag(level._effect[fx_name], self, "tag_origin");
+  while(1) {
+    playFXOnTag(level._effect[fx_name], self, "tag_origin");
     wait(0.3);
   }
 }
@@ -338,7 +338,7 @@ advance_retreat_behavior(identifier, groupNum) {
   self.curr_node = getVehicleNode(start_node.target, "targetname");
   end_node = getVehicleNode("line " + identifier + " group" + groupNum + " advance end", "script_noteworthy");
   switch_node = getVehicleNode("line " + identifier + " group" + groupNum + " retreat start", "script_noteworthy");
-  while (1) {
+  while(1) {
     self setWaitNode(self.curr_node);
     self waittill("reached_wait_node");
     self.curr_node = getVehicleNode(self.curr_node.target, "targetname");
@@ -356,10 +356,10 @@ wait_for_retreat(identifier, groupNum) {
   }
   best_node = undefined;
   best_dist = 10000000000;
-  while (1) {
+  while(1) {
     self waittill("damage");
     if(((self.health - self.healthbuffer) / (self.maxhealth - self.healthbuffer)) <= level.retreat_threshold) {
-      for (i = 0; i < retreat_nodes.size; i++) {
+      for(i = 0; i < retreat_nodes.size; i++) {
         dist = distanceSquared(retreat_nodes[i].origin, self.origin);
         if(dist < best_dist) {
           best_node = retreat_nodes[i];
@@ -372,7 +372,7 @@ wait_for_retreat(identifier, groupNum) {
           self.curr_node = best_node;
           self setWaitNode(best_node);
         } else {
-          for (i = 0; i < retreat_nodes.size; i++) {
+          for(i = 0; i < retreat_nodes.size; i++) {
             dist = distanceSquared(retreat_nodes[i].origin, self.curr_node.origin);
             if(dist < best_dist) {
               best_node = retreat_nodes[i];
@@ -428,7 +428,7 @@ linear_movement_behavior(speed, accel, identifier, groupNum, signalArray) {
     self setSpeed(speed);
   }
   self thread check_for_player_proximity(1500);
-  for (i = 0;; i++) {
+  for(i = 0;; i++) {
     self.currPart = i;
     if(isDefined(groupNum)) {
       destName = "line " + identifier + " group" + groupNum + " part" + i + " end";
@@ -463,7 +463,7 @@ linear_movement_behavior_adjusted(speed, accel, identifier, groupNum, signalArra
   self SetSpeed(0, 50, 50);
   self.attached_to_backup_path_but_not_moving = true;
   temp_node = backup_path;
-  while (isDefined(temp_node.target)) {
+  while(isDefined(temp_node.target)) {
     temp_node = GetVehicleNode(temp_node.target, "targetname");
   }
   if(isDefined(temp_node.script_noteworthy)) {
@@ -472,7 +472,7 @@ linear_movement_behavior_adjusted(speed, accel, identifier, groupNum, signalArra
     self.script_noteworthy = undefined;
   }
   time_hit = 0;
-  while (1) {
+  while(1) {
     self waittill("damage", amount, attacker, direction, point, type);
     if(type == "MOD_PROJECTILE") {
       time_hit++;
@@ -496,7 +496,7 @@ linear_movement_behavior_adjusted(speed, accel, identifier, groupNum, signalArra
 linear_movement_behavior_adjusted_hit_react() {
   self endon("death");
   wait(2);
-  while (1) {
+  while(1) {
     self waittill("damage", amount, attacker, direction, point, type);
     if(type != "MOD_PROJECTILE") {
       continue;
@@ -518,7 +518,7 @@ loop_movement_behavior(speed, accel, identifier, groupNum, signalArray) {
   } else if(isDefined(speed)) {
     self setSpeed(speed);
   }
-  for (i = 0;; i++) {
+  for(i = 0;; i++) {
     self set_path_wait_points(groupNum);
     self.currPart = i;
     if(isDefined(groupNum)) {
@@ -548,8 +548,8 @@ loop_movement_behavior(speed, accel, identifier, groupNum, signalArray) {
 }
 
 do_vehicle_retreats(groupNum) {
-  retreatTriggers = GetEntArray("retreat trigger group" + groupNum, "script_noteworthy");
-  for (i = 0; i < retreatTriggers.size; i++) {
+  retreatTriggers = getEntArray("retreat trigger group" + groupNum, "script_noteworthy");
+  for(i = 0; i < retreatTriggers.size; i++) {
     retreatTriggers[i] thread wait_for_vehicle_retreat();
   }
 }
@@ -565,7 +565,7 @@ wait_for_vehicle_retreat() {
 
 custom_array_remove(array, element) {
   new_array = [];
-  for (i = 0; i < array.size; i++) {
+  for(i = 0; i < array.size; i++) {
     if(array[i] == element) {
       continue;
     }
@@ -576,7 +576,7 @@ custom_array_remove(array, element) {
 
 wait_for_arrive() {
   self endon("death");
-  while (1) {
+  while(1) {
     self waittill("reached_wait_node");
     self.current_node = self.target_node;
     self returnplayercontrol();
@@ -586,7 +586,7 @@ wait_for_arrive() {
 }
 
 wait_for_player_advance() {
-  while (1) {
+  while(1) {
     self waittill("trigger", guy);
     if(!isPlayer(guy)) {
       continue;
@@ -598,7 +598,7 @@ wait_for_player_advance() {
 
 lerp_to_stop() {
   self endon("death");
-  while (1) {
+  while(1) {
     current_speed = self getspeedMPH();
     current_speed -= (current_speed * 0.5 * 0.05);
     if(current_speed < 1) {
@@ -614,7 +614,7 @@ lerp_to_stop() {
 
 set_path_wait_points(lineOrLoop, identifier, groupNum, partNum) {
   nextNode = GetEnt(lineOrLoop + " " + identifier + " group" + groupNum + " part" + partNum + " start", "targetname");
-  while (1) {
+  while(1) {
     if(isDefined(nextNode)) {
       if(isDefined(nextNode.script_string)) {
         self setWaitNode(nextNode);
@@ -638,7 +638,7 @@ wait_for_signals(signalArray, identifier, loop) {
     loop = false;
   check_array = [];
   if(isDefined(signalArray)) {
-    for (i = 0; i < signalArray.size; i++) {
+    for(i = 0; i < signalArray.size; i++) {
       if(!loop) {
         check_array[i].forkpoint = "line" + identifier + "part" + (signalArray[i].part - 1) + " end";
         check_array[i].targetpoint = "line" + identifier + "part" + signalArray[i].part + signalArray[i].letter + " start";
@@ -684,7 +684,7 @@ arty_behavior() {
   damage_trigger = GetEnt(self.targetname + " damage trigger", "script_noteworthy");
   damage_trigger thread maps\see2::inform_on_damage_trigger(damage_trigger.script_noteworthy);
   trigger thread maps\see2::inform_on_touch_trigger(trigger.script_noteworthy);
-  while (1) {
+  while(1) {
     level waittill_either(damage_trigger.script_noteworthy, trigger.script_noteworthy);
     current_target = self maps\_vehicle::get_nearest_target(level.player_tanks);
     if(isDefined(current_target)) {
@@ -694,7 +694,7 @@ arty_behavior() {
 }
 
 arty_custom_targeting() {
-  while (1) {
+  while(1) {
     level waittill("target this", ent);
     self.customTarget = level.customTarget;
     level waittill("stop target this");
@@ -711,7 +711,7 @@ moving_firing_behavior() {
   self endon("kill old firing behavior");
   self endon("death");
   if(!isDefined(get_players())) {
-    while (1) {
+    while(1) {
       if(isDefined(get_players())) {
         break;
       }
@@ -720,13 +720,13 @@ moving_firing_behavior() {
   }
   current_target = undefined;
   best_target = undefined;
-  while (1) {
+  while(1) {
     if(isDefined(level.custom_target)) {
       best_target = level.custom_target;
       current_target = level.custom_target;
       myOrigin = self.origin + (0, 0, 200);
       theirOrigin = current_target.origin + (0, 0, 200);
-      trace = bullettrace(myOrigin, theirOrigin, false, undefined);
+      trace = bulletTrace(myOrigin, theirOrigin, false, undefined);
       if(trace["fraction"] < 0.95 || current_target == self) {
         current_target = undefined;
         wait(3);
@@ -738,7 +738,7 @@ moving_firing_behavior() {
       current_target = self maps\see2::request_target(best_target);
       myOrigin = self.origin + (0, 0, 200);
       theirOrigin = current_target.origin + (0, 0, 200);
-      trace = bullettrace(myOrigin, theirOrigin, false, undefined);
+      trace = bulletTrace(myOrigin, theirOrigin, false, undefined);
       if(trace["fraction"] < 0.95 || current_target == self) {
         current_target = undefined;
         wait(3);
@@ -755,7 +755,7 @@ moving_firing_behavior() {
     }
     self thread set_tank_accuracy(current_target, best_target);
     self thread wait_fire_weapon(current_target);
-    while (isDefined(current_target) && isDefined(best_target) && distancesquared(current_target.origin, self.origin) < level.see2_max_tank_target_dist * level.see2_max_tank_target_dist && current_target.classname != "script_vehicle_corpse") {
+    while(isDefined(current_target) && isDefined(best_target) && distancesquared(current_target.origin, self.origin) < level.see2_max_tank_target_dist * level.see2_max_tank_target_dist && current_target.classname != "script_vehicle_corpse") {
       if(isDefined(self.my_target_point)) {
         self setturrettargetvec(self.my_target_point);
       }
@@ -778,8 +778,8 @@ notify_on_advance_trigger() {
 }
 
 setup_friendly_advance_triggers() {
-  advance_triggers = GetEntArray("friendly advance trigger", "targetname");
-  for (i = 0; i < advance_triggers.size; i++) {
+  advance_triggers = getEntArray("friendly advance trigger", "targetname");
+  for(i = 0; i < advance_triggers.size; i++) {
     advance_triggers[i] thread wait_for_player_advance();
   }
 }
@@ -789,7 +789,7 @@ do_depth_setup() {
   current_depth = 0;
   next_node = undefined;
   self.current_path_depth = current_depth;
-  while (1) {
+  while(1) {
     if(isDefined(current_node)) {
       current_node.path_depth = current_depth;
       if(!isDefined(current_node.target)) {
@@ -816,7 +816,7 @@ do_player_support() {
   self thread wait_for_arrive();
   self thread notify_on_advance_trigger();
   self thread check_should_stop();
-  while (1) {
+  while(1) {
     if(isDefined(level.current_advance_level)) {
       current_support_positions = getVehicleNodeArray(level.current_advance_level, "script_noteworthy");
     } else {
@@ -824,7 +824,7 @@ do_player_support() {
       continue;
     }
     my_node = undefined;
-    for (i = 0; i < current_support_positions.size; i++) {
+    for(i = 0; i < current_support_positions.size; i++) {
       if(current_support_positions[i].script_string == self.script_noteworthy) {
         my_node = current_support_positions[i];
       }
@@ -851,9 +851,9 @@ cleanup_targeting() {
 check_should_stop() {
   self endon("death");
   distance = 1000;
-  while (1) {
+  while(1) {
     self.should_stop = false;
-    for (i = 0; i < level.player_tanks.size; i++) {
+    for(i = 0; i < level.player_tanks.size; i++) {
       if(level.player_tanks[i].script_int < self.script_int) {
         if(distanceSquared(self.origin, level.player_tanks[i].origin) < distance * distance) {
           self.should_stop = true;
@@ -885,7 +885,7 @@ do_friendly_firing() {
   hull_dist = 2000;
   fire_time = 5;
   time_since_fire = 0;
-  while (1) {
+  while(1) {
     main_turret_target = undefined;
     hull_target = undefined;
     main_turret_target = self maps\_vehicle::get_nearest_target(level.enemy_armor);
@@ -894,7 +894,7 @@ do_friendly_firing() {
       if(distanceSquared(main_turret_target.origin, self.origin) < (main_turret_dist * main_turret_dist)) {
         self notify("stop scanning");
         self.scanning = false;
-        trace = bullettrace(self.origin + (0, 0, 200), main_turret_target.origin + (0, 0, 200), false, main_turret_target);
+        trace = bulletTrace(self.origin + (0, 0, 200), main_turret_target.origin + (0, 0, 200), false, main_turret_target);
         self setTurretTargetEnt(main_turret_target);
         if(trace["fraction"] > 0.95) {
           self fireweapon();
@@ -924,7 +924,7 @@ do_friendly_firing() {
 
 do_turret_scanning() {
   self endon("death");
-  while (1) {
+  while(1) {
     if(self.scanning) {
       angles = (randomintrange(-5, 10), randomintrange(-45, 45), 0);
       angles += self.angles;
@@ -948,7 +948,7 @@ set_tank_accuracy(curr_target, best_target, min_speed_for_motion, time_before_ac
   lastpos = curr_target.origin;
   time_stationary = 0;
   time_since_last_adjust = 0;
-  while (1) {
+  while(1) {
     if(!isDefined(curr_target) || !isDefined(best_target)) {
       return;
     }
@@ -986,7 +986,7 @@ static_firing_behavior() {
   self endon("kill old firing behavior");
   self endon("death");
   if(!isDefined(get_players())) {
-    while (1) {
+    while(1) {
       if(isDefined(get_players())) {
         break;
       }
@@ -995,13 +995,13 @@ static_firing_behavior() {
   }
   current_target = undefined;
   best_target = undefined;
-  while (1) {
+  while(1) {
     if(isDefined(level.custom_target)) {
       best_target = level.custom_target;
       current_target = level.custom_target;
       myOrigin = self.origin + (0, 0, 200);
       theirOrigin = current_target.origin + (0, 0, 200);
-      trace = bullettrace(myOrigin, theirOrigin, false, undefined);
+      trace = bulletTrace(myOrigin, theirOrigin, false, undefined);
       if(trace["fraction"] < 0.95 || current_target == self) {
         current_target = undefined;
         wait(3);
@@ -1013,7 +1013,7 @@ static_firing_behavior() {
       current_target = self maps\see2::request_target(best_target);
       myOrigin = self.origin + (0, 0, 200);
       theirOrigin = current_target.origin + (0, 0, 200);
-      trace = bullettrace(myOrigin, theirOrigin, false, undefined);
+      trace = bulletTrace(myOrigin, theirOrigin, false, undefined);
       if(trace["fraction"] < 0.95 || current_target == self) {
         current_target = undefined;
         wait(3);
@@ -1030,7 +1030,7 @@ static_firing_behavior() {
     }
     self thread set_tank_accuracy(current_target, best_target);
     self thread wait_fire_weapon(current_target);
-    while (isDefined(current_target) && isDefined(best_target) && distancesquared(current_target.origin, self.origin) < level.see2_max_tank_target_dist * level.see2_max_tank_target_dist && current_target.classname != "script_vehicle_corpse") {
+    while(isDefined(current_target) && isDefined(best_target) && distancesquared(current_target.origin, self.origin) < level.see2_max_tank_target_dist * level.see2_max_tank_target_dist && current_target.classname != "script_vehicle_corpse") {
       if(isDefined(self.my_target_point)) {
         self setturrettargetvec(self.my_target_point);
       }
@@ -1049,7 +1049,7 @@ wait_fire_weapon(current_target) {
   }
   someone_is_close = false;
   my_target = undefined;
-  while (1) {
+  while(1) {
     angles = vectortoangles(current_target.origin - self.origin);
     turret_angles = self GetTagAngles("tag_barrel");
     if(abs(angles[1] - turret_angles[1]) > 20) {
@@ -1063,18 +1063,18 @@ wait_fire_weapon(current_target) {
     }
     old_speed = self GetSpeedMPH();
     self SetSpeed(0, 5, 5);
-    while (self GetSpeedMPH() > 0.1) {
+    while(self GetSpeedMPH() > 0.1) {
       wait(0.05);
     }
     wait(0.2);
     if(someone_is_close) {
       player_tanks = [];
       players = get_players();
-      for (i = 0; i < players.size; i++) {
+      for(i = 0; i < players.size; i++) {
         player_tanks[i] = players[i].myTank;
       }
       my_target = player_tanks[0];
-      for (j = 0; j < player_tanks.size; j++) {
+      for(j = 0; j < player_tanks.size; j++) {
         if(DistanceSquared(current_target.origin, my_target.origin) > DistanceSquared(current_target.origin, player_tanks[j].origin)) {
           my_target = player_tanks[j];
         }

@@ -4,7 +4,6 @@
 ********************************************************/
 
 main() {
-
   character\mp_character_ally_ghillie_forest::main();
 }
 

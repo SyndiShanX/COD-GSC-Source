@@ -16,9 +16,7 @@ main() {
     self waittill("killanimscript");
     return;
   }
-  if([
-      [anim.pain_test]
-    ]())
+  if([[anim.pain_test]]())
     return;
   if(self.a.disablePain) {
     return;
@@ -118,7 +116,7 @@ get_flamethrower_pain() {
   }
   anim_num = RandomInt(painArray.size);
   if(self.team == "axis" && isDefined(level._effect["character_fire_pain_sm"])) {
-    PlayFxOnTag(level._effect["character_fire_pain_sm"], self, tagArray[anim_num]);
+    playFXOnTag(level._effect["character_fire_pain_sm"], self, tagArray[anim_num]);
   } else {
     println("^3ANIMSCRIPT WARNING: You are missing level._effect[\"character_fire_pain_sm\"], please set it in your levelname_fx.gsc. Use \"env/fire/fx_fire_player_sm\"");
   }
@@ -138,7 +136,7 @@ get_flamethrower_crouch_pain() {
   }
   anim_num = RandomInt(painArray.size);
   if(self.team == "axis" && isDefined(level._effect["character_fire_pain_sm"])) {
-    PlayFxOnTag(level._effect["character_fire_pain_sm"], self, tagArray[anim_num]);
+    playFXOnTag(level._effect["character_fire_pain_sm"], self, tagArray[anim_num]);
   } else {
     println("^3ANIMSCRIPT WARNING: You are missing level._effect[\"character_fire_pain_sm\"], please set it in your levelname_fx.gsc. Use \"env/fire/fx_fire_player_sm\"");
   }
@@ -240,7 +238,7 @@ getStandPainAnim() {
 
 removeBlockedAnims(array) {
   newArray = [];
-  for (index = 0; index < array.size; index++) {
+  for(index = 0; index < array.size; index++) {
     localDeltaVector = getMoveDelta(array[index], 0, 1);
     endPoint = self localToWorldCoords(localDeltaVector);
     if(self mayMoveToPoint(endPoint))
@@ -523,7 +521,7 @@ crawlingPain() {
   if(players.size == 0)
     return false;
   anybody_nearby = 0;
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(isDefined(players[i]) && distance(self.origin, players[i].origin) < 175) {
       anybody_nearby = 1;
       break;
@@ -582,7 +580,7 @@ crawlingPistol() {
   self.a.special = "dying_crawl";
   self thread dyingCrawlBackAim();
   decideNumCrawls();
-  while (shouldKeepCrawling()) {
+  while(shouldKeepCrawling()) {
     crawlAnim = animArray("back_crawl");
     delta = getMoveDelta(crawlAnim, 0, 1);
     endPos = self localToWorldCoords(delta);
@@ -593,7 +591,7 @@ crawlingPistol() {
     self animscripts\shared::DoNoteTracksIntercept("back_crawl", ::handleBackCrawlNotetracks);
   }
   self.desiredTimeOfDeath = gettime() + randomintrange(4000, 20000);
-  while (shouldStayAlive()) {
+  while(shouldStayAlive()) {
     if(self canSeeEnemy() && self aimedSomewhatAtEnemy()) {
       backAnim = animArray("back_fire");
       self setFlaggedAnimKnobRestart("back_idle_or_fire", backAnim, 1, 0.2, 1.0);
@@ -604,7 +602,7 @@ crawlingPistol() {
         backAnim = animArrayPickRandom("back_idle_twitch");
       self setFlaggedAnimKnobRestart("back_idle_or_fire", backAnim, 1, 0.1, 1.0);
       timeRemaining = getAnimLength(backAnim);
-      while (timeRemaining > 0) {
+      while(timeRemaining > 0) {
         if(self canSeeEnemy() && self aimedSomewhatAtEnemy()) {
           break;
         }
@@ -663,7 +661,7 @@ dyingCrawl() {
   assert(self.a.pose == "prone");
   self.a.special = "dying_crawl";
   decideNumCrawls();
-  while (shouldKeepCrawling()) {
+  while(shouldKeepCrawling()) {
     crawlAnim = animArray("crawl");
     delta = getMoveDelta(crawlAnim, 0, 1);
     endPos = self localToWorldCoords(delta);
@@ -691,7 +689,7 @@ dyingCrawlBackAim() {
   self setAnimLimited( % dying_back_aim_4, 1, 0);
   self setAnimLimited( % dying_back_aim_6, 1, 0);
   prevyaw = 0;
-  while (1) {
+  while(1) {
     aimyaw = self getYawToEnemy();
     diff = AngleClamp180(aimyaw - prevyaw);
     if(abs(diff) > 3)
@@ -775,7 +773,7 @@ preventPainForAShortTime(type) {
     wait 1.0;
     players = GetPlayers();
     anybody_nearby = 0;
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       if(isDefined(players[i]) && distanceSquared(self.origin, players[i].origin) < 1048576) {
         anybody_nearby = 1;
         break;
@@ -797,7 +795,7 @@ preventPainForAShortTime(type) {
     wait 1.0;
     players = GetPlayers();
     anybody_nearby = 0;
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       if(isDefined(players[i]) && distanceSquared(self.origin, players[i].origin) < 490000) {
         anybody_nearby = 1;
         break;
@@ -818,7 +816,7 @@ preventPainForAShortTime(type) {
 }
 
 printLongDeathDebugText(loc, text) {
-  for (i = 0; i < 100; i++) {
+  for(i = 0; i < 100; i++) {
     print3d(loc, text);
     wait .05;
   }
@@ -860,7 +858,7 @@ TryCornerRightGrenadeDeath() {
   if(players.size == 0)
     return false;
   anybody_nearby = 0;
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(isDefined(players[i]) && distance(self.origin, players[i].origin) < 175) {
       anybody_nearby = 1;
       break;
@@ -894,7 +892,7 @@ CornerRightGrenadeDeath() {
   desiredDeathTime = gettime() + randomintrange(25000, 60000);
   self setFlaggedAnimKnobAllRestart("corner_grenade_idle", % corner_standR_death_grenade_idle, % body, 1, .2);
   self thread watchEnemyVelocity();
-  while (!enemyIsApproaching()) {
+  while(!enemyIsApproaching()) {
     if(gettime() >= desiredDeathTime) {
       break;
     }
@@ -920,7 +918,7 @@ CornerDeathReleaseGrenade(velocity, fusetime) {
   releasePoint = self getTagOrigin("tag_inhand");
   releasePointLifted = releasePoint + (0, 0, 20);
   releasePointDropped = releasePoint - (0, 0, 20);
-  trace = bullettrace(releasePointLifted, releasePointDropped, false, undefined);
+  trace = bulletTrace(releasePointLifted, releasePointDropped, false, undefined);
   if(trace["fraction"] < .5)
     releasePoint = trace["position"];
   surfaceType = "default";
@@ -933,7 +931,7 @@ CornerDeathReleaseGrenade(velocity, fusetime) {
 
 playSoundAtPoint(alias, origin) {
   org = spawn("script_origin", origin);
-  org playsound(alias, "sounddone");
+  org playSound(alias, "sounddone");
   org waittill("sounddone");
   org delete();
 }
@@ -987,7 +985,7 @@ watchEnemyVelocity() {
   prevenemy = undefined;
   prevpos = self.origin;
   interval = .15;
-  while (1) {
+  while(1) {
     if(isDefined(self.enemy) && isDefined(prevenemy) && self.enemy == prevenemy) {
       curpos = self.enemy.origin;
       self.enemyVelocity = vectorScale(curpos - prevpos, 1 / interval);

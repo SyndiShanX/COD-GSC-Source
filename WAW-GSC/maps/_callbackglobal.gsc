@@ -65,7 +65,7 @@ Callback_SaveRestored() {
   if(isDefined(level._save_pos)) {
     num = level._save_trig_ent;
   }
-  for (i = 0; i < 4; i++) {
+  for(i = 0; i < 4; i++) {
     player = players[i];
     if(isDefined(player)) {
       player thread BriefInvulnerability();
@@ -92,15 +92,15 @@ Player_BreadCrumb_Reset(position, angles) {
   level.playerPrevOrigin1 = position;
   if(!isDefined(level._player_breadcrumbs)) {
     level._player_breadcrumbs = [];
-    for (i = 0; i < 4; i++) {
+    for(i = 0; i < 4; i++) {
       level._player_breadcrumbs[i] = [];
-      for (j = 0; j < 4; j++) {
-        level._player_breadcrumbs[i][j] = spawnstruct();
+      for(j = 0; j < 4; j++) {
+        level._player_breadcrumbs[i][j] = spawnStruct();
       }
     }
   }
-  for (i = 0; i < 4; i++) {
-    for (j = 0; j < 4; j++) {
+  for(i = 0; i < 4; i++) {
+    for(j = 0; j < 4; j++) {
       level._player_breadcrumbs[i][j].pos = position;
       level._player_breadcrumbs[i][j].ang = angles;
     }
@@ -117,7 +117,7 @@ Player_BreadCrumb_Update() {
     Player_BreadCrumb_Reset(self.origin, self.angles);
   }
   num = self GetEntityNumber();
-  while (1) {
+  while(1) {
     wait 1;
     dist_squared = distancesquared(self.origin, level.playerPrevOrigin0);
     if(dist_squared > 500 * 500) {
@@ -136,7 +136,7 @@ Player_BreadCrumb_Update() {
       }
     }
     if(dropBreadcrumbs && (dist_squared > drop_distance * drop_distance)) {
-      for (i = 2; i >= 0; i--) {
+      for(i = 2; i >= 0; i--) {
         level._player_breadcrumbs[num][i + 1].pos = level._player_breadcrumbs[num][i].pos;
         level._player_breadcrumbs[num][i + 1].ang = level._player_breadcrumbs[num][i].ang;
       }
@@ -150,7 +150,7 @@ SetPlayerSpawnPos() {
   players = get_players();
   player = players[0];
   if(!isDefined(level._player_breadcrumbs)) {
-    spawnpoints = getentarray("info_player_deathmatch", "classname");
+    spawnpoints = getEntArray("info_player_deathmatch", "classname");
     if(player.origin == (0, 0, 0) && isDefined(spawnpoints) && spawnpoints.size > 0) {
       Player_BreadCrumb_Reset(spawnpoints[0].origin, spawnpoints[0].angles);
     } else {
@@ -191,7 +191,7 @@ Callback_PlayerConnect() {
   }
   level notify("connected", self);
   self thread maps\_load::player_special_death_hint();
-  info_player_spawn = getentarray("info_player_deathmatch", "classname");
+  info_player_spawn = getEntArray("info_player_deathmatch", "classname");
   if(isDefined(info_player_spawn) && info_player_spawn.size > 0) {
     players = get_players();
     if(isDefined(players) && (players.size != 0)) {
@@ -318,7 +318,7 @@ Callback_PlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDi
   }
   if(get_players().size > 1) {
     players = get_players();
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       if(isDefined(players[i])) {
         players[i] thread maps\_quotes::displayMissionFailed();
         if(!isAlive(players[i])) {
@@ -385,10 +385,10 @@ spawnPlayer(spawnOnHost) {
   }
   wait_for_first_player();
   if(isDefined(spawnOnHost)) {
-    self Spawn(get_players()[0].origin, get_players()[0].angles);
+    self spawn(get_players()[0].origin, get_players()[0].angles);
     self SetPlayerSpawnPos();
   } else {
-    self Spawn(self.origin, self.angles);
+    self spawn(self.origin, self.angles);
   }
   if(isDefined(level.onPostSpawnPlayer)) {
     self[[level.onPostSpawnPlayer]]();
@@ -432,7 +432,7 @@ synchronize_players() {
   flag_wait("all_players_connected");
   if(level.onlineGame || level.systemLink) {
     players = get_players();
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       players[i] CloseMenu();
     }
   } else {
@@ -469,7 +469,7 @@ spawnSpectator() {
   if(isDefined(level.onSpawnSpectator)) {
     self[[level.onSpawnSpectator]]();
   }
-  self Spawn(self.origin, self.angles);
+  self spawn(self.origin, self.angles);
   waittillframeend;
   flag_wait("all_players_connected");
   self notify("spawned_spectator");
@@ -503,7 +503,7 @@ default_onPostSpawnPlayer() {}
 default_onSpawnSpectator() {}
 default_onSpawnIntermission() {
   spawnpointname = "info_intermission";
-  spawnpoints = getentarray(spawnpointname, "classname");
+  spawnpoints = getEntArray(spawnpointname, "classname");
   if(spawnpoints.size < 1) {
     println("NO " + spawnpointname + " SPAWNPOINTS IN MAP");
     return;

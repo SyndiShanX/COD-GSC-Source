@@ -10,7 +10,6 @@
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
-
 #namespace namespace_919f68ad;
 
 autoexec __init__system__() {
@@ -25,7 +24,7 @@ __init__() {
   zm_trial::register_challenge(#"hash_2bec904229ece9ed", &on_begin, &on_end);
 }
 
-private on_begin(var_49106f6b) {
+on_begin(var_49106f6b) {
   level.var_60aa7ebf = zm_trial::function_5769f26a(var_49106f6b);
 
   foreach(player in getplayers()) {
@@ -37,7 +36,7 @@ private on_begin(var_49106f6b) {
   callback::on_ai_killed(&on_ai_killed);
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   if(!round_reset) {
     var_696c3b4 = [];
 
@@ -71,7 +70,7 @@ is_active() {
   return isDefined(challenge);
 }
 
-private on_ai_killed(params) {
+on_ai_killed(params) {
   if(isplayer(params.eattacker)) {
     player = params.eattacker;
   } else if(isplayer(params.einflictor)) {

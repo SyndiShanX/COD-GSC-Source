@@ -145,10 +145,10 @@ main() {
     var_38.alpha = 1;
     var_38.foreground = 0;
     wait 1.2;
-    setdvar("ui_deadquote", & "BLACK_ICE_EXFIL_LATE");
+    setdvar("ui_deadquote", &"BLACK_ICE_EXFIL_LATE");
     thread maps\_utility::missionfailedwrapper();
   } else if(common_scripts\utility::flag("flag_ladder_jumpfail_nojump")) {
-    setdvar("ui_deadquote", & "BLACK_ICE_EXFIL_NOJUMP");
+    setdvar("ui_deadquote", &"BLACK_ICE_EXFIL_NOJUMP");
     player_fail_rigexplode();
   } else {
     maps\_utility::autosave_by_name("exfil_end");
@@ -541,7 +541,7 @@ rubberband_near_ally_steam_reaction_runout(var_0, var_1) {
     maps\_anim::anim_set_rate_single(var_0[0], "exfil_steam_react", var_16);
 
     if(var_11 > var_5) {
-      setdvar("ui_deadquote", & "BLACK_ICE_SPRINT_ESCAPE");
+      setdvar("ui_deadquote", &"BLACK_ICE_SPRINT_ESCAPE");
       player_fail_rigexplode();
     }
 
@@ -609,7 +609,7 @@ player_rubber_banding_solo(var_0) {
     var_5 = distance(self.origin, var_0.origin);
 
     if(var_5 > var_4) {
-      setdvar("ui_deadquote", & "BLACK_ICE_FOLLOW_ALLIES");
+      setdvar("ui_deadquote", &"BLACK_ICE_FOLLOW_ALLIES");
       thread player_fail_rigexplode();
     } else if(var_5 > var_3)
       var_5 = var_3;

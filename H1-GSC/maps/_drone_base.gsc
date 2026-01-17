@@ -8,7 +8,7 @@ drone_give_soul() {
   assign_drone_tree();
   self startusingheroonlylighting();
 
-  if(isdefined(self.script_moveplaybackrate))
+  if(isDefined(self.script_moveplaybackrate))
     self.moveplaybackrate = self.script_moveplaybackrate;
   else
     self.moveplaybackrate = 1;
@@ -16,22 +16,22 @@ drone_give_soul() {
   if(self.team == "allies") {
     maps\_names::get_name();
 
-    if(isdefined(self.name))
-      self setlookattext(self.name, & "");
+    if(isDefined(self.name))
+      self setlookattext(self.name, &"");
   }
 
-  if(isdefined(level.dronecallbackthread))
+  if(isDefined(level.dronecallbackthread))
     self thread[[level.dronecallbackthread]]();
 
-  if(!isdefined(self.script_friendly_fire_disable))
+  if(!isDefined(self.script_friendly_fire_disable))
     level thread maps\_friendlyfire::friendly_fire_think(self);
 
-  if(!isdefined(level.ai_dont_glow_in_thermal))
+  if(!isDefined(level.ai_dont_glow_in_thermal))
     thermaldrawenabledrone();
 }
 
 thermaldrawenabledrone() {
-  if(!isdefined(level.dronesthermalteamselect))
+  if(!isDefined(level.dronesthermalteamselect))
     level.dronesthermalteamselect = "all";
 
   var_0 = 0;
@@ -52,29 +52,29 @@ thermaldrawenabledrone() {
 }
 
 drone_init_path() {
-  if(!isdefined(self.target)) {
+  if(!isDefined(self.target)) {
     return;
   }
-  if(isdefined(level.drone_paths[self.target])) {
+  if(isDefined(level.drone_paths[self.target])) {
     return;
   }
   level.drone_paths[self.target] = 1;
   var_0 = self.target;
   var_1 = common_scripts\utility::getstruct(var_0, "targetname");
 
-  if(!isdefined(var_1)) {
+  if(!isDefined(var_1)) {
     return;
   }
   var_2 = [];
   var_3 = [];
   var_4 = var_1;
 
-  for (;;) {
+  for(;;) {
     var_1 = var_4;
     var_5 = 0;
 
-    for (;;) {
-      if(!isdefined(var_1.target)) {
+    for(;;) {
+      if(!isDefined(var_1.target)) {
         break;
       }
 
@@ -87,14 +87,14 @@ drone_init_path() {
       var_7 = undefined;
 
       foreach(var_9 in var_6) {
-        if(isdefined(var_3[var_9.origin + ""])) {
+        if(isDefined(var_3[var_9.origin + ""])) {
           continue;
         }
         var_7 = var_9;
         break;
       }
 
-      if(!isdefined(var_7)) {
+      if(!isDefined(var_7)) {
         break;
       }
 
@@ -115,15 +115,15 @@ drone_init_path() {
   var_11 = var_1;
   var_3 = [];
 
-  for (;;) {
+  for(;;) {
     var_1 = var_4;
     var_5 = 0;
 
-    for (;;) {
-      if(!isdefined(var_1.target)) {
+    for(;;) {
+      if(!isDefined(var_1.target)) {
         return;
       }
-      if(!isdefined(var_2[var_1.targetname])) {
+      if(!isDefined(var_2[var_1.targetname])) {
         return;
       }
       var_6 = common_scripts\utility::getstructarray(var_1.target, "targetname");
@@ -135,18 +135,18 @@ drone_init_path() {
       var_7 = undefined;
 
       foreach(var_9 in var_6) {
-        if(isdefined(var_3[var_9.origin + ""])) {
+        if(isDefined(var_3[var_9.origin + ""])) {
           continue;
         }
         var_7 = var_9;
         break;
       }
 
-      if(!isdefined(var_7)) {
+      if(!isDefined(var_7)) {
         break;
       }
 
-      if(isdefined(var_1.radius)) {
+      if(isDefined(var_1.radius)) {
         var_14 = var_2[var_11.targetname];
         var_15 = var_2[var_1.targetname];
         var_16 = (var_14 + var_15) * 0.5;
@@ -165,7 +165,7 @@ drone_init_path() {
 }
 
 assign_drone_tree() {
-  if(isdefined(self.type)) {
+  if(isDefined(self.type)) {
     if(self.type == "dog")
       assign_animals_tree();
     else

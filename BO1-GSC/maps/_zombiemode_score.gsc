@@ -270,7 +270,7 @@ create_highlight_hud(x, y, value) {
     hud.color = (0.21, 0, 0);
   } else {
     hud.color = (0.9, 0.9, 0.0);
-    hud.label = & "SCRIPT_PLUS";
+    hud.label = &"SCRIPT_PLUS";
   }
   hud.hidewheninmenu = false;
   hud SetValue(value);
@@ -319,7 +319,7 @@ team_score_init() {
   level.team_pool = [];
   players = get_players();
   if(players.size == 1) {
-    level.team_pool[0] = SpawnStruct();
+    level.team_pool[0] = spawnStruct();
     pool = level.team_pool[0];
     pool.team_num = 0;
     pool.score = 0;
@@ -333,7 +333,7 @@ team_score_init() {
     num_pools = 1;
   }
   for(i = 0; i < num_pools; i++) {
-    level.team_pool[i] = SpawnStruct();
+    level.team_pool[i] = spawnStruct();
     pool = level.team_pool[i];
     pool.team_num = i;
     pool.score = 0;

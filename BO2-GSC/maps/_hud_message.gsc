@@ -19,7 +19,7 @@ onplayerconnect() {
 }
 
 hintmessageplayers(players, hinttext) {
-  notifydata = spawnstruct();
+  notifydata = spawnStruct();
   notifydata.notifytext = hinttext;
 
   for(i = 0; i < players.size; i++)
@@ -27,7 +27,7 @@ hintmessageplayers(players, hinttext) {
 }
 
 hintmessage(hinttext) {
-  notifydata = spawnstruct();
+  notifydata = spawnStruct();
   notifydata.notifytext = hinttext;
   notifymessage(notifydata);
 }
@@ -147,7 +147,7 @@ shownotifymessageinternal(notifydata) {
       if(isDefined(notifydata.titlelabel))
         self.notifytitle.label = notifydata.titlelabel;
       else
-        self.notifytitle.label = & "";
+        self.notifytitle.label = &"";
 
       if(isDefined(notifydata.titlelabel) && !isDefined(notifydata.titleisstring))
         self.notifytitle setvalue(notifydata.titletext);
@@ -170,7 +170,7 @@ shownotifymessageinternal(notifydata) {
       if(isDefined(notifydata.textlabel))
         self.notifytext.label = notifydata.textlabel;
       else
-        self.notifytext.label = & "";
+        self.notifytext.label = &"";
 
       if(isDefined(notifydata.textlabel) && !isDefined(notifydata.textisstring))
         self.notifytext setvalue(notifydata.notifytext);
@@ -196,7 +196,7 @@ shownotifymessageinternal(notifydata) {
       if(isDefined(notifydata.text2label))
         self.notifytext2.label = notifydata.text2label;
       else
-        self.notifytext2.label = & "";
+        self.notifytext2.label = &"";
 
       if(isDefined(notifydata.text2label) && !isDefined(notifydata.textisstring))
         self.notifytext2 setvalue(notifydata.notifytext2);
@@ -223,7 +223,7 @@ shownotifymessageinternal(notifydata) {
       if(isDefined(notifydata.text3label))
         self.notifytext3.label = notifydata.text3label;
       else
-        self.notifytext3.label = & "";
+        self.notifytext3.label = &"";
 
       if(isDefined(notifydata.text3label) && !isDefined(notifydata.textisstring))
         self.notifytext3 setvalue(notifydata.notifytext3);

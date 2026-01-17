@@ -163,10 +163,10 @@ mortar_loop(mortar_name, barrage_amount, no_terrain) {
     level._explosion_stop_barrage[mortar_name] = false;
   }
   explosion_points = [];
-  explosion_points = GetEntArray(mortar_name, "targetname");
+  explosion_points = getEntArray(mortar_name, "targetname");
   explosion_points_structs = [];
   explosion_points_structs = getstructarray(mortar_name, "targetname");
-  for (i = 0; i < explosion_points_structs.size; i++) {
+  for(i = 0; i < explosion_points_structs.size; i++) {
     explosion_points_structs[i].is_struct = true;
     explosion_points = add_to_array(explosion_points, explosion_points_structs[i]);
   }
@@ -174,16 +174,16 @@ mortar_loop(mortar_name, barrage_amount, no_terrain) {
   dust_points = [];
   if(isDefined(level._explosion_dust_name[mortar_name])) {
     dust_name = level._explosion_dust_name[mortar_name];
-    dust_points = GetEntArray(dust_name, "targetname");
+    dust_points = getEntArray(dust_name, "targetname");
     dust_points_structs = [];
     dust_points_structs = getstructarray(dust_name, "targetname");
-    for (i = 0; i < dust_points_structs.size; i++) {
+    for(i = 0; i < dust_points_structs.size; i++) {
       dust_points_structs[i].is_struct = true;
       dust_points = add_to_array(dust_points, dust_points_structs[i]);
     }
     dust_points_structs = [];
   }
-  for (i = 0; i < explosion_points.size; i++) {
+  for(i = 0; i < explosion_points.size; i++) {
     if(isDefined(explosion_points[i].target) && (!no_terrain)) {
       explosion_points[i] setup_mortar_terrain();
     }
@@ -191,18 +191,18 @@ mortar_loop(mortar_name, barrage_amount, no_terrain) {
   if(isDefined(level._explosion_start_notify) && isDefined(level._explosion_start_notify[mortar_name])) {
     level waittill(level._explosion_start_notify[mortar_name]);
   }
-  while (true) {
-    while (!level._explosion_stop_barrage[mortar_name]) {
+  while(true) {
+    while(!level._explosion_stop_barrage[mortar_name]) {
       do_mortar = false;
-      for (j = 0; j < barrage_amount; j++) {
+      for(j = 0; j < barrage_amount; j++) {
         max_rangeSQ = level._explosion_max_range[mortar_name] * level._explosion_max_range[mortar_name];
         min_rangeSQ = level._explosion_min_range[mortar_name] * level._explosion_min_range[mortar_name];
         random_num = RandomInt(explosion_points.size);
-        for (i = 0; i < explosion_points.size; i++) {
+        for(i = 0; i < explosion_points.size; i++) {
           num = (i + random_num) % explosion_points.size;
           do_mortar = false;
           players = get_players();
-          for (q = 0; q < players.size; q++) {
+          for(q = 0; q < players.size; q++) {
             dist = DistanceSquared(players[q] GetOrigin(), explosion_points[num].origin);
             if(num != last_explosion && dist < max_rangeSQ && dist > min_rangeSQ) {
               if(level._explosion_view_chance[mortar_name] > 0) {
@@ -253,7 +253,7 @@ mortar_loop(mortar_name, barrage_amount, no_terrain) {
 player_view_chance(view_chance, explosion_point) {
   chance = RandomFloat(1);
   if(chance <= view_chance) {
-    if(within_fov(self GetEye(), self GetPlayerAngles(), explosion_point, cos(30))) {
+    if(within_fov(self getEye(), self GetPlayerAngles(), explosion_point, cos(30))) {
       return true;
     }
   }
@@ -284,7 +284,7 @@ explosion_activate(mortar_name, blast_radius, min_damage, max_damage, quake_powe
   is_struct = isDefined(self.is_struct) && self.is_struct;
   temp_ent = undefined;
   if(is_struct) {
-    temp_ent = Spawn("script_origin", self.origin);
+    temp_ent = spawn("script_origin", self.origin);
   }
   if(is_struct) {
     temp_ent explosion_incoming(mortar_name);
@@ -294,7 +294,7 @@ explosion_activate(mortar_name, blast_radius, min_damage, max_damage, quake_powe
   level notify("explosion", mortar_name);
   RadiusDamage(self.origin, blast_radius, max_damage, min_damage);
   if((isDefined(self.has_terrain) && self.has_terrain == true) && (isDefined(self.terrain))) {
-    for (i = 0; i < self.terrain.size; i++) {
+    for(i = 0; i < self.terrain.size; i++) {
       if(isDefined(self.terrain[i])) {
         self.terrain[i] Delete();
       }
@@ -314,12 +314,12 @@ explosion_activate(mortar_name, blast_radius, min_damage, max_damage, quake_powe
     if(isDefined(level._explosion_dust_range) && isDefined(level._explosion_dust_range[mortar_name])) {
       max_range = level._explosion_dust_range[mortar_name];
     }
-    for (i = 0; i < dust_points.size; i++) {
+    for(i = 0; i < dust_points.size; i++) {
       if(DistanceSquared(dust_points[i].origin, self.origin) < max_range * max_range) {
         if(isDefined(dust_points[i].script_fxid)) {
-          PlayFx(level._effect[dust_points[i].script_fxid], dust_points[i].origin);
+          playFX(level._effect[dust_points[i].script_fxid], dust_points[i].origin);
         } else {
-          PlayFx(level._effect[level._explosion_dust_name[mortar_name]], dust_points[i].origin);
+          playFX(level._effect[level._explosion_dust_name[mortar_name]], dust_points[i].origin);
         }
       }
     }
@@ -347,12 +347,12 @@ explosion_boom(mortar_name, power, time, radius, is_struct) {
   if(!isDefined(is_struct)) {
     explosion_sound(mortar_name);
   } else {
-    temp_ent = Spawn("script_origin", self.origin);
+    temp_ent = spawn("script_origin", self.origin);
     temp_ent explosion_sound(mortar_name);
     temp_ent thread delete_temp_ent();
   }
   explosion_origin = self.origin;
-  PlayFx(level._effect[mortar_name], explosion_origin);
+  playFX(level._effect[mortar_name], explosion_origin);
   Earthquake(power, time, explosion_origin, radius);
   thread mortar_rumble_on_all_players("damage_light", "damage_heavy", explosion_origin, radius * 0.75, radius * 1.25);
   physRadius = radius;
@@ -362,7 +362,7 @@ explosion_boom(mortar_name, power, time, radius, is_struct) {
   PhysicsExplosionSphere(explosion_origin, physRadius, physRadius * 0.25, 0.75);
   players = get_players();
   player_count = 0;
-  for (q = 0; q < players.size; q++) {
+  for(q = 0; q < players.size; q++) {
     if(Distancesquared(players[q].origin, explosion_origin) > 300 * 300) {
       player_count++;
     }
@@ -382,57 +382,57 @@ explosion_sound(mortar_name) {
     level._explosion_last_sound = 0;
   }
   soundnum = RandomInt(3) + 1;
-  while (soundnum == level._explosion_last_sound) {
+  while(soundnum == level._explosion_last_sound) {
     soundnum = RandomInt(3) + 1;
   }
   level._explosion_last_sound = soundnum;
   if(level._effectType[mortar_name] == "mortar") {
     switch (soundnum) {
       case 1:
-        self PlaySound("mortar_dirt");
+        self playSound("mortar_dirt");
         break;
       case 2:
-        self PlaySound("mortar_dirt");
+        self playSound("mortar_dirt");
         break;
       case 3:
-        self PlaySound("mortar_dirt");
+        self playSound("mortar_dirt");
         break;
     }
   }
   if(level._effectType[mortar_name] == "mortar_water") {
     switch (soundnum) {
       case 1:
-        self PlaySound("mortar_impact_water");
+        self playSound("mortar_impact_water");
         break;
       case 2:
-        self PlaySound("mortar_impact_water");
+        self playSound("mortar_impact_water");
         break;
       case 3:
-        self PlaySound("mortar_impact_water");
+        self playSound("mortar_impact_water");
         break;
     }
   } else if(level._effectType[mortar_name] == "artillery") {
     switch (soundnum) {
       case 1:
-        self PlaySound("mortar_explosion4");
+        self playSound("mortar_explosion4");
         break;
       case 2:
-        self PlaySound("mortar_explosion5");
+        self playSound("mortar_explosion5");
         break;
       case 3:
-        self PlaySound("mortar_explosion1");
+        self playSound("mortar_explosion1");
         break;
     }
   } else if(level._effectType[mortar_name] == "bomb") {
     switch (soundnum) {
       case 1:
-        self PlaySound("mortar_explosion1");
+        self playSound("mortar_explosion1");
         break;
       case 2:
-        self PlaySound("mortar_explosion4");
+        self playSound("mortar_explosion4");
         break;
       case 3:
-        self PlaySound("mortar_explosion5");
+        self playSound("mortar_explosion5");
         break;
     }
   }
@@ -443,23 +443,23 @@ explosion_incoming(mortar_name) {
     if(!SoundExists("art_incoming")) {
       return;
     }
-    self PlaySound("art_incoming", "sounddone");
+    self playSound("art_incoming", "sounddone");
   }
   if(level._effectType[mortar_name] == "mortar_water") {
     if(!SoundExists("art_incoming")) {
       return;
     }
-    self PlaySound("art_incoming", "sounddone");
+    self playSound("art_incoming", "sounddone");
   } else if(level._effectType[mortar_name] == "artillery") {
     if(!SoundExists("art_incoming")) {
       return;
     }
-    self PlaySound("art_incoming", "sounddone");
+    self playSound("art_incoming", "sounddone");
   } else if(level._effectType[mortar_name] == "bomb") {
     if(!SoundExists("art_incoming")) {
       return;
     }
-    self PlaySound("art_incoming", "sounddone");
+    self playSound("art_incoming", "sounddone");
   }
   self waittill("sounddone");
 }
@@ -467,7 +467,7 @@ explosion_incoming(mortar_name) {
 setup_mortar_terrain() {
   self.has_terrain = false;
   if(isDefined(self.target)) {
-    self.terrain = GetEntArray(self.target, "targetname");
+    self.terrain = getEntArray(self.target, "targetname");
     self.has_terrain = true;
   } else {
     println("z:mortar entity has no target: ", self.origin);
@@ -509,7 +509,7 @@ activate_mortar(range, max_damage, min_damage, quake_power, quake_time, quake_ra
   }
   RadiusDamage(self.origin, range, max_damage, min_damage);
   if((isDefined(self.has_terrain) && self.has_terrain == true) && (isDefined(self.terrain))) {
-    for (i = 0; i < self.terrain.size; i++) {
+    for(i = 0; i < self.terrain.size; i++) {
       if(isDefined(self.terrain[i])) {
         self.terrain[i] Delete();
       }
@@ -534,9 +534,9 @@ mortar_boom(origin, power, time, radius, effect, bIsstruct) {
   }
   thread mortar_sound(bIsstruct);
   if(isDefined(effect)) {
-    PlayFx(effect, origin);
+    playFX(effect, origin);
   } else {
-    PlayFx(level.mortar, origin);
+    playFX(level.mortar, origin);
   }
   Earthquake(power, time, origin, radius);
   thread mortar_rumble_on_all_players("damage_light", "damage_heavy", origin, radius * 0.75, radius * 1.25);
@@ -551,7 +551,7 @@ mortar_boom(origin, power, time, radius, effect, bIsstruct) {
   players = get_players();
   players = get_players();
   player_count = 0;
-  for (q = 0; q < players.size; q++) {
+  for(q = 0; q < players.size; q++) {
     if(Distancesquared(players[q].origin, origin) > 300 * 300) {
       player_count++;
     }
@@ -572,7 +572,7 @@ mortar_sound(bIsstruct) {
     level.mortar_last_sound = -1;
   }
   soundnum = RandomInt(3) + 1;
-  while (soundnum == level.mortar_last_sound) {
+  while(soundnum == level.mortar_last_sound) {
     soundnum = RandomInt(3) + 1;
   }
   level.mortar_last_sound = soundnum;
@@ -614,7 +614,7 @@ incoming_sound(soundnum, bIsstruct) {
 
 mortar_rumble_on_all_players(high_rumble_string, low_rumble_string, rumble_org, high_rumble_range, low_rumble_range) {
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(isDefined(high_rumble_range) && isDefined(low_rumble_range) && isDefined(rumble_org)) {
       if(distance(players[i].origin, rumble_org) < high_rumble_range) {
         players[i] playrumbleonentity(high_rumble_string);

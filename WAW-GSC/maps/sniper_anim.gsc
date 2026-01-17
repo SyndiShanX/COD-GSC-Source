@@ -671,17 +671,17 @@ officers_sniper_shoot_atyou() {
   if((flag("officer_last_run") || flag("officer_isincar")) && level.difficulty < 3) {
     return;
   }
-  shotspot = get_players()[0] geteye();
+  shotspot = get_players()[0] getEye();
   firespot = level.officers_sniper gettagorigin("tag_flash");
   chance = 25 * level.difficulty;
   perc = randomint(100);
   if(chance < perc) {
-    shotspot = (get_players()[0] geteye()) + (randomint(15), randomint(15), randomint(15));
+    shotspot = (get_players()[0] getEye()) + (randomint(15), randomint(15), randomint(15));
   }
   vec = firespot - shotspot;
   nvec = vectornormalize(vec);
-  playfx(level._effect["fake_rifleflash"], firespot);
-  trace = bullettrace(firespot + (nvec * 5), shotspot, false, undefined);
+  playFX(level._effect["fake_rifleflash"], firespot);
+  trace = bulletTrace(firespot + (nvec * 5), shotspot, false, undefined);
   bullettracer(firespot + (nvec * 5), shotspot, true);
   wait 0.45;
   magicbullet("mosin_rifle_scoped", firespot + (nvec * 10), shotspot);
@@ -689,7 +689,7 @@ officers_sniper_shoot_atyou() {
 
 lookat_notetracks() {
   keys = getarraykeys(level.scr_anim["hero"]);
-  for (i = 0; i < keys.size; i++) {
+  for(i = 0; i < keys.size; i++) {
     level thread addNotetrack_customFunction("hero", "look_at", ::lookat_player, keys[i]);
     level thread addNotetrack_customFunction("hero", "look_away", ::lookaway_player, keys[i]);
   }

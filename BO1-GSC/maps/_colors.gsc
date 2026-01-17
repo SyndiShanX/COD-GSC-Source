@@ -303,7 +303,7 @@ process_path_node(node, null) {
 
 prioritize_colorCoded_nodes(team, colorCode, color) {
   nodes = level.arrays_of_colorCoded_nodes[team][colorCode];
-  ent = spawnstruct();
+  ent = spawnStruct();
   ent.path_nodes = [];
   ent.cover_nodes_first = [];
   ent.cover_nodes_last = [];

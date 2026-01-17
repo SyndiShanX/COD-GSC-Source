@@ -65,7 +65,7 @@ init() {
         level.veh_husk_models["t34_mp"] = "veh_t34_destroyed_mp";
       }
       keys = GetArrayKeys(level.veh_husk_models);
-      for (i = 0; i < keys.size; i++) {
+      for(i = 0; i < keys.size; i++) {
         precacheModel(level.veh_husk_models[keys[i]]);
       }
     }
@@ -97,39 +97,39 @@ initialize_vehicle_damage_effects_for_level() {
     level.vehicles_damage_states[vehicle_name] = [];
     level.vehicles_damage_treadfx[vehicle_name] = [];
     {
-      level.vehicles_damage_states[vehicle_name][k_mild_damage_index] = SpawnStruct();
+      level.vehicles_damage_states[vehicle_name][k_mild_damage_index] = spawnStruct();
       level.vehicles_damage_states[vehicle_name][k_mild_damage_index].health_percentage = k_mild_damage_health_percentage;
       level.vehicles_damage_states[vehicle_name][k_mild_damage_index].effect_array = [];
-      level.vehicles_damage_states[vehicle_name][k_mild_damage_index].effect_array[0] = SpawnStruct();
+      level.vehicles_damage_states[vehicle_name][k_mild_damage_index].effect_array[0] = spawnStruct();
       level.vehicles_damage_states[vehicle_name][k_mild_damage_index].effect_array[0].damage_effect = loadFX("vehicle/vfire/fx_tank_sherman_smldr");
       level.vehicles_damage_states[vehicle_name][k_mild_damage_index].effect_array[0].sound_effect = undefined;
       level.vehicles_damage_states[vehicle_name][k_mild_damage_index].effect_array[0].vehicle_tag = "tag_origin";
     } {
-      level.vehicles_damage_states[vehicle_name][k_moderate_damage_index] = SpawnStruct();
+      level.vehicles_damage_states[vehicle_name][k_moderate_damage_index] = spawnStruct();
       level.vehicles_damage_states[vehicle_name][k_moderate_damage_index].health_percentage = k_moderate_damage_health_percentage;
       level.vehicles_damage_states[vehicle_name][k_moderate_damage_index].effect_array = [];
-      level.vehicles_damage_states[vehicle_name][k_moderate_damage_index].effect_array[0] = SpawnStruct();
+      level.vehicles_damage_states[vehicle_name][k_moderate_damage_index].effect_array[0] = spawnStruct();
       level.vehicles_damage_states[vehicle_name][k_moderate_damage_index].effect_array[0].damage_effect = loadFX("vehicle/vfire/fx_vfire_med_12");
       level.vehicles_damage_states[vehicle_name][k_moderate_damage_index].effect_array[0].sound_effect = undefined;
       level.vehicles_damage_states[vehicle_name][k_moderate_damage_index].effect_array[0].vehicle_tag = "tag_origin";
     } {
-      level.vehicles_damage_states[vehicle_name][k_severe_damage_index] = SpawnStruct();
+      level.vehicles_damage_states[vehicle_name][k_severe_damage_index] = spawnStruct();
       level.vehicles_damage_states[vehicle_name][k_severe_damage_index].health_percentage = k_severe_damage_health_percentage;
       level.vehicles_damage_states[vehicle_name][k_severe_damage_index].effect_array = [];
-      level.vehicles_damage_states[vehicle_name][k_severe_damage_index].effect_array[0] = SpawnStruct();
+      level.vehicles_damage_states[vehicle_name][k_severe_damage_index].effect_array[0] = spawnStruct();
       level.vehicles_damage_states[vehicle_name][k_severe_damage_index].effect_array[0].damage_effect = loadFX("vehicle/vfire/fx_vfire_sherman");
       level.vehicles_damage_states[vehicle_name][k_severe_damage_index].effect_array[0].sound_effect = undefined;
       level.vehicles_damage_states[vehicle_name][k_severe_damage_index].effect_array[0].vehicle_tag = "tag_origin";
     } {
-      level.vehicles_damage_states[vehicle_name][k_total_damage_index] = SpawnStruct();
+      level.vehicles_damage_states[vehicle_name][k_total_damage_index] = spawnStruct();
       level.vehicles_damage_states[vehicle_name][k_total_damage_index].health_percentage = k_total_damage_health_percentage;
       level.vehicles_damage_states[vehicle_name][k_total_damage_index].effect_array = [];
-      level.vehicles_damage_states[vehicle_name][k_total_damage_index].effect_array[0] = SpawnStruct();
+      level.vehicles_damage_states[vehicle_name][k_total_damage_index].effect_array[0] = spawnStruct();
       level.vehicles_damage_states[vehicle_name][k_total_damage_index].effect_array[0].damage_effect = loadFX("explosions/large_vehicle_explosion");
       level.vehicles_damage_states[vehicle_name][k_total_damage_index].effect_array[0].sound_effect = "vehicle_explo";
       level.vehicles_damage_states[vehicle_name][k_total_damage_index].effect_array[0].vehicle_tag = "tag_origin";
     } {
-      default_husk_effects = SpawnStruct();
+      default_husk_effects = spawnStruct();
       default_husk_effects.damage_effect = undefined;
       default_husk_effects.sound_effect = undefined;
       default_husk_effects.vehicle_tag = "tag_origin";
@@ -169,7 +169,7 @@ get_vehicle_damage_state_index_from_health_percentage(
   vehicle) {
   damage_state_index = -1;
   vehicle_name = get_vehicle_name_key_for_damage_states();
-  for (test_index = 0; test_index < level.vehicles_damage_states[vehicle_name].size; test_index++) {
+  for(test_index = 0; test_index < level.vehicles_damage_states[vehicle_name].size; test_index++) {
     if(vehicle.current_health_percentage <= level.vehicles_damage_states[vehicle_name][test_index].health_percentage) {
       damage_state_index = test_index;
     } else {
@@ -207,8 +207,8 @@ play_damage_state_effects(
   start_damage_state_index,
   end_damage_state_index) {
   vehicle_name = get_vehicle_name_key_for_damage_states(vehicle);
-  for (damage_state_index = start_damage_state_index; damage_state_index <= end_damage_state_index; damage_state_index++) {
-    for (effect_index = 0; effect_index < level.vehicles_damage_states[vehicle_name][damage_state_index].effect_array.size; effect_index++) {
+  for(damage_state_index = start_damage_state_index; damage_state_index <= end_damage_state_index; damage_state_index++) {
+    for(effect_index = 0; effect_index < level.vehicles_damage_states[vehicle_name][damage_state_index].effect_array.size; effect_index++) {
       effects = level.vehicles_damage_states[vehicle_name][damage_state_index].effect_array[effect_index];
       vehicle thread play_vehicle_effects(effects);
     }
@@ -223,22 +223,22 @@ play_vehicle_effects(effects, isDamagedTread) {
     self endon("damage_state_changed");
   }
   if(isDefined(effects.sound_effect)) {
-    self PlaySound(effects.sound_effect);
+    self playSound(effects.sound_effect);
   }
   waitTime = 0;
   if(isDefined(effects.damage_effect_loop_time)) {
     waitTime = effects.damage_effect_loop_time;
   }
-  while (waitTime > 0) {
+  while(waitTime > 0) {
     if(isDefined(effects.damage_effect)) {
-      PlayFxOnTag(effects.damage_effect, self, effects.vehicle_tag);
+      playFXOnTag(effects.damage_effect, self, effects.vehicle_tag);
     }
     wait(waitTime);
   }
 }
 
 init_vehicle_entities() {
-  vehicles = getentarray("script_vehicle", "classname");
+  vehicles = getEntArray("script_vehicle", "classname");
   array_thread(vehicles, ::init_original_vehicle);
   if(isDefined(vehicles)) {
     return vehicles.size;
@@ -261,7 +261,7 @@ manage_vehicles() {
     MAX_VEHICLES = GetMaxVehicles();
     {
       newArray = [];
-      for (i = 0; i < level.vehicles_list.size; i++) {
+      for(i = 0; i < level.vehicles_list.size; i++) {
         if(isDefined(level.vehicles_list[i])) {
           newArray[newArray.size] = level.vehicles_list[i];
         }
@@ -271,7 +271,7 @@ manage_vehicles() {
     vehiclesToDelete = (level.vehicles_list.size + 1) - MAX_VEHICLES;
     if(vehiclesToDelete > 0) {
       newArray = [];
-      for (i = 0; i < level.vehicles_list.size; i++) {
+      for(i = 0; i < level.vehicles_list.size; i++) {
         vehicle = level.vehicles_list[i];
         if(vehiclesToDelete > 0) {
           if(isDefined(vehicle.is_husk) && !isDefined(vehicle.permanentlyRemoved)) {
@@ -323,7 +323,7 @@ init_original_vehicle() {
 
 monitorTankDeath() {
   self endon("disconnect");
-  for (;;) {
+  for(;;) {
     self waittill("death", attacker, damageFromUnderneath, weaponName);
     if(isDefined(attacker) && isDefined(weaponName)) {
       if(attacker.health < 100 && isDefined(attacker.lastTankThatAttacked)) {
@@ -380,7 +380,7 @@ build_rumble(rumble, scale, duration, radius, basetime, randomaditionaltime) {
 }
 
 build_quake(scale, duration, radius, basetime, randomaditionaltime) {
-  struct = spawnstruct();
+  struct = spawnStruct();
   struct.scale = scale;
   struct.duration = duration;
   struct.radius = radius;
@@ -405,7 +405,7 @@ cleanup_debug_print_t() {
   self endon("transmute");
   self endon("death");
   self endon("delete");
-  while (1) {
+  while(1) {
     if(isDefined(self.debug_message) &&
       getdvarint("scr_veh_cleanupdebugprint") != 0) {
       Print3d(self.origin + (0, 0, 150), self.debug_message, (0, 1, 0), 1, 1, 1);
@@ -418,7 +418,7 @@ cleanup_debug_print_clearmsg_t() {
   self endon("transmute");
   self endon("death");
   self endon("delete");
-  while (1) {
+  while(1) {
     self waittill("enter_vehicle");
     self.debug_message = undefined;
   }
@@ -451,7 +451,7 @@ wait_then_cleanup_vehicle(test_name, cleanup_dvar_name) {
 }
 
 wait_until_severely_damaged() {
-  while (1) {
+  while(1) {
     health_percentage = self.health / self.initial_state.health;
     if(isDefined(level.k_severe_damage_health_percentage)) {
       self cleanup_debug_print("Damage Test: Still healthy - (" + health_percentage + " >= " + level.k_severe_damage_health_percentage + ") and working treads");
@@ -483,7 +483,7 @@ do_alive_cleanup_wait(test_name) {
   initialRandomWaitSeconds = get_random_cleanup_wait_time("alive");
   secondsWaited = 0.0;
   seconds_per_iteration = 1.0;
-  while (true) {
+  while(true) {
     curve_begin = GetDvarFloat("scr_veh_cleanuptime_dmgfraction_curve_begin");
     curve_end = GetDvarFloat("scr_veh_cleanuptime_dmgfraction_curve_end");
     factor_min = GetDvarFloat("scr_veh_cleanuptime_dmgfactor_min");
@@ -504,7 +504,7 @@ do_alive_cleanup_wait(test_name) {
       dydx = (factor_min - factor_max) / (curve_end - curve_begin);
       damageFactor = factor_max + (damageFraction - curve_begin) * dydx;
     } {
-      for (i = 0; i < 2; i++) {
+      for(i = 0; i < 2; i++) {
         if((self GetTreadHealth(i)) <= 0) {
           damageFactor -= treadDeadDamageFactor;
         }
@@ -524,7 +524,7 @@ do_dead_cleanup_wait(test_name) {
   total_secs_to_wait = get_random_cleanup_wait_time("dead");
   seconds_waited = 0.0;
   seconds_per_iteration = 1.0;
-  while (seconds_waited < total_secs_to_wait) {
+  while(seconds_waited < total_secs_to_wait) {
     self cleanup_debug_print(test_name + ": Waiting " + (total_secs_to_wait - seconds_waited) + "s");
     wait seconds_per_iteration;
     seconds_waited = seconds_waited + seconds_per_iteration;
@@ -533,7 +533,7 @@ do_dead_cleanup_wait(test_name) {
 
 cleanup(test_name, cleanup_dvar_name, cleanup_func) {
   keep_waiting = true;
-  while (keep_waiting) {
+  while(keep_waiting) {
     cleanupEnabled = !isDefined(cleanup_dvar_name) ||
       getdvarint(cleanup_dvar_name) != 0;
     if(cleanupEnabled != 0) {
@@ -551,7 +551,7 @@ vehicle_wait_tread_damage() {
   self endon("death");
   self endon("delete");
   vehicle_name = get_vehicle_name(self);
-  while (1) {
+  while(1) {
     self waittill("broken", brokenNotify);
     if(brokenNotify == "left_tread_destroyed") {
       if(isDefined(level.vehicles_damage_treadfx[vehicle_name]) && isDefined(level.vehicles_damage_treadfx[vehicle_name][0])) {
@@ -570,7 +570,7 @@ wait_for_vehicle_to_stop_outside_min_radius() {
   iterationWaitSeconds = 1.0;
   maxWaitTimeEnableDistInches = 12 * getdvarfloat("scr_veh_waittillstoppedandmindist_maxtimeenabledistfeet");
   initialOrigin = self.initial_state.origin;
-  for (totalSecondsWaited = 0.0; totalSecondsWaited < maxWaitTime; totalSecondsWaited += iterationWaitSeconds) {
+  for(totalSecondsWaited = 0.0; totalSecondsWaited < maxWaitTime; totalSecondsWaited += iterationWaitSeconds) {
     speedMPH = self GetSpeedMPH();
     cutoffMPH = getdvarfloat("scr_veh_cleanupmaxspeedmph");
     if(speedMPH > cutoffMPH) {
@@ -586,7 +586,7 @@ vehicle_abandoned_by_occupants_t() {
   self endon("transmute");
   self endon("death");
   self endon("delete");
-  while (1) {
+  while(1) {
     self waittill("exit_vehicle");
     occupants = self GetVehOccupants();
     if(occupants.size == 0) {
@@ -606,7 +606,7 @@ vehicle_ghost_entering_occupants_t() {
   self endon("death");
   self endon("delete");
   {
-    while (1) {
+    while(1) {
       self waittill("enter_vehicle", player, seat);
       isDriver = seat == 0;
       if(getdvarint("scr_veh_driversarehidden") != 0 &&
@@ -644,7 +644,7 @@ player_is_driver() {
 player_change_seat_handler_t(vehicle) {
   self endon("disconnect");
   self endon("exit_vehicle");
-  while (1) {
+  while(1) {
     self waittill("change_seat", vehicle, oldSeat, newSeat);
     isDriver = newSeat == 0;
     if(isDriver) {
@@ -675,7 +675,7 @@ vehicle_is_tank() {
 
 vehicle_record_initial_values() {
   if(!isDefined(self.initial_state)) {
-    self.initial_state = SpawnStruct();
+    self.initial_state = spawnStruct();
   }
   if(isDefined(self.origin)) {
     self.initial_state.origin = self.origin;
@@ -695,7 +695,7 @@ vehicle_fireweapon_t() {
   self endon("transmute");
   self endon("death");
   self endon("delete");
-  for (;;) {
+  for(;;) {
     self waittill("turret_fire", player);
     if(isDefined(player) && isalive(player) && player isinvehicle())
       self fireweapon();
@@ -718,7 +718,7 @@ wait_for_vehicle_overturn() {
   self endon("delete");
   worldup = anglestoup((0, 90, 0));
   overturned = 0;
-  while (!overturned) {
+  while(!overturned) {
     if(isDefined(self.angles)) {
       up = AnglesToUp(self.angles);
       dot = vectordot(up, worldup);
@@ -762,7 +762,7 @@ vehicle_transmute(attacker) {
   deathAngles = self.angles;
   modelname = self VehGetModel();
   vehicle_name = get_vehicle_name_key_for_damage_states(self);
-  respawn_parameters = SpawnStruct();
+  respawn_parameters = spawnStruct();
   respawn_parameters.origin = self.initial_state.origin;
   respawn_parameters.angles = self.initial_state.angles;
   respawn_parameters.health = self.initial_state.health;
@@ -874,17 +874,17 @@ wait_for_unnoticeable_cleanup_opportunity() {
   maxPreventVisibilityInchesSq = 144 * maxPreventVisibilityFeet * maxPreventVisibilityFeet;
   maxSecondsToWait = getdvarfloat("scr_veh_disappear_maxwaittime");
   iterationWaitSeconds = 1.0;
-  for (secondsWaited = 0.0; secondsWaited < maxSecondsToWait; secondsWaited += iterationWaitSeconds) {
+  for(secondsWaited = 0.0; secondsWaited < maxSecondsToWait; secondsWaited += iterationWaitSeconds) {
     players_s = get_all_alive_players_s();
     okToCleanup = true;
-    for (j = 0; j < players_s.a.size && okToCleanup; j++) {
+    for(j = 0; j < players_s.a.size && okToCleanup; j++) {
       player = players_s.a[j];
       distInchesSq = DistanceSquared(self.origin, player.origin);
       if(distInchesSq < maxPreventDistanceInchesSq) {
         self cleanup_debug_print("(" + (maxSecondsToWait - secondsWaited) + "s) Player too close: " + distInchesSq + "<" + maxPreventDistanceInchesSq);
         okToCleanup = false;
       } else if(distInchesSq < maxPreventVisibilityInchesSq) {
-        vehicleVisibilityFromPlayer = self SightConeTrace(player.origin, player, AnglesToForward(player.angles));
+        vehicleVisibilityFromPlayer = self SightConeTrace(player.origin, player, anglesToForward(player.angles));
         if(vehicleVisibilityFromPlayer > 0) {
           self cleanup_debug_print("(" + (maxSecondsToWait - secondsWaited) + "s) Player can see");
           okToCleanup = false;
@@ -901,7 +901,7 @@ wait_for_unnoticeable_cleanup_opportunity() {
 wait_until_vehicle_position_wont_telefrag(position) {
   maxIterations = getdvarint("scr_veh_respawnwait_maxiterations");
   iterationWaitSeconds = getdvarint("scr_veh_respawnwait_iterationwaitseconds");
-  for (i = 0; i < maxIterations; i++) {
+  for(i = 0; i < maxIterations; i++) {
     if(!vehicle_position_will_telefrag(position)) {
       return;
     }
@@ -911,7 +911,7 @@ wait_until_vehicle_position_wont_telefrag(position) {
 
 vehicle_position_will_telefrag(position) {
   players_s = get_all_alive_players_s();
-  for (i = 0; i < players_s.a.size; i++) {
+  for(i = 0; i < players_s.a.size; i++) {
     if(players_s.a[i] player_vehicle_position_will_telefrag(position)) {
       return true;
     }
@@ -924,7 +924,7 @@ vehicle_telefrag_griefers_at_position(position) {
   inflictor = self;
   doDamageToHead = 0;
   players_s = get_all_alive_players_s();
-  for (i = 0; i < players_s.a.size; i++) {
+  for(i = 0; i < players_s.a.size; i++) {
     player = players_s.a[i];
     if(player player_vehicle_position_will_telefrag(position)) {
       player DoDamage(20000, player.origin + (0, 0, 1), attacker, inflictor, doDamageToHead);
@@ -954,10 +954,10 @@ vehicle_play_explosion_sound() {
 vehicle_damage_t() {
   self endon("delete");
   self endon("removed");
-  for (;;) {
+  for(;;) {
     self waittill("damage", damage, attacker);
     players = get_players();
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       if(!isalive(players[i])) {
         continue;
       }
@@ -983,11 +983,11 @@ vehicle_damage_t() {
 }
 
 _spawn_husk(origin, angles, modelname) {
-  husk = Spawn("script_model", origin);
+  husk = spawn("script_model", origin);
   husk.angles = angles;
-  husk SetModel(modelname);
+  husk setModel(modelname);
   husk.health = 1;
-  husk SetCanDamage(false);
+  husk setCanDamage(false);
   return husk;
 }
 
@@ -999,7 +999,7 @@ swap_to_husk_model() {
   if(isDefined(self.vehicletype)) {
     husk_model = level.veh_husk_models[self.vehicletype];
     if(isDefined(husk_model)) {
-      self SetModel(husk_model);
+      self setModel(husk_model);
     }
   }
 }
@@ -1065,13 +1065,13 @@ _spawn_explosion(origin) {
     forward = (0, 0, 1);
     rot = randomfloat(360);
     up = (cos(rot), sin(rot), 0);
-    PlayFX(level.vehicle_explosion_effect, origin, forward, up);
+    playFX(level.vehicle_explosion_effect, origin, forward, up);
   }
   thread _play_sound_in_space("vehicle_explo", origin);
 }
 
 _play_sound_in_space(soundEffectName, origin) {
-  org = Spawn("script_origin", origin);
+  org = spawn("script_origin", origin);
   org.origin = origin;
   org playSound(soundEffectName);
   wait 10;
@@ -1093,7 +1093,7 @@ vehicleDeathWaiter() {
   self notify("vehicleDeathWaiter");
   self endon("vehicleDeathWaiter");
   self endon("disconnect");
-  while (true) {
+  while(true) {
     self waittill("vehicle_death", vehicle_died);
     if(vehicle_died) {
       self.diedOnVehicle = true;
@@ -1116,12 +1116,12 @@ vehicle_disconnect_paths() {
     return;
   }
   wait(randomfloat(1));
-  while (isDefined(self)) {
+  while(isDefined(self)) {
     if(self getspeed() < 1) {
       if(!isDefined(self.dontDisconnectPaths))
         self disconnectpaths();
       self notify("speed_zero_path_disconnect");
-      while (self getspeed() < 1)
+      while(self getspeed() < 1)
         wait .05;
     }
     self connectpaths();

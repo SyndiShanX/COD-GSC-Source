@@ -10,7 +10,6 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_utility;
-
 #namespace namespace_6c76c1da;
 
 autoexec __init__system__() {
@@ -25,7 +24,7 @@ __init__() {
   zm_trial::register_challenge(#"hash_5124770c13a75bab", &on_begin, &on_end);
 }
 
-private on_begin(var_93fc795f, var_a7c52900, var_c8a36f90) {
+on_begin(var_93fc795f, var_a7c52900, var_c8a36f90) {
   var_a7c52900 = zm_trial::function_5769f26a(var_a7c52900);
   level.var_1c8f9eba = var_c8a36f90;
   wait 6;
@@ -33,10 +32,10 @@ private on_begin(var_93fc795f, var_a7c52900, var_c8a36f90) {
   foreach(player in getplayers()) {
     if(isDefined(var_c8a36f90)) {
       switch (var_c8a36f90) {
-        case #"prone_random":
+        case # "prone_random":
           player thread function_9c988cd8(var_93fc795f, var_a7c52900, 1);
           break;
-        case #"crouch":
+        case # "crouch":
           player thread function_9c988cd8(var_93fc795f, var_a7c52900, 0);
           break;
       }
@@ -48,7 +47,7 @@ private on_begin(var_93fc795f, var_a7c52900, var_c8a36f90) {
   }
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   level.var_1c8f9eba = undefined;
 }
 
@@ -57,7 +56,7 @@ is_active() {
   return isDefined(challenge);
 }
 
-private movement_watcher(var_93fc795f, var_98de1f93) {
+movement_watcher(var_93fc795f, var_98de1f93) {
   self endon(#"disconnect");
   level endon(#"hash_7646638df88a3656");
 
@@ -81,7 +80,7 @@ private movement_watcher(var_93fc795f, var_98de1f93) {
   }
 }
 
-private function_6b13a114(var_93fc795f, var_a7c52900) {
+function_6b13a114(var_93fc795f, var_a7c52900) {
   self playsoundtoplayer(#"hash_6df374d848ba6a60", self);
 
   if(var_93fc795f === "health") {
@@ -94,13 +93,13 @@ private function_6b13a114(var_93fc795f, var_a7c52900) {
   }
 }
 
-private function_26f124d8() {
+function_26f124d8() {
   if(!isDefined(level.var_1c8f9eba)) {
     return true;
   }
 
   switch (level.var_1c8f9eba) {
-    case #"ads":
+    case # "ads":
       var_389b3ef1 = self playerads();
 
       if(self adsbuttonpressed() && var_389b3ef1 > 0) {
@@ -108,32 +107,32 @@ private function_26f124d8() {
       }
 
       return false;
-    case #"jump":
+    case # "jump":
       if(self zm_utility::is_jumping()) {
         return true;
       }
 
       return false;
-    case #"slide":
+    case # "slide":
       if(self issliding()) {
         return true;
       }
 
       return false;
-    case #"crouch":
+    case # "crouch":
       if(self getstance() === "crouch") {
         return true;
       }
 
       return false;
-    case #"prone_random":
-    case #"prone":
+    case # "prone_random":
+    case # "prone":
       if(self getstance() === "prone") {
         return true;
       }
 
       return false;
-    case #"movement":
+    case # "movement":
     default:
       v_velocity = self getvelocity();
 
@@ -145,7 +144,7 @@ private function_26f124d8() {
   }
 }
 
-private function_9c988cd8(var_93fc795f, var_98de1f93, var_e898f976 = 0) {
+function_9c988cd8(var_93fc795f, var_98de1f93, var_e898f976 = 0) {
   self endon(#"disconnect");
   level endon(#"hash_7646638df88a3656");
 

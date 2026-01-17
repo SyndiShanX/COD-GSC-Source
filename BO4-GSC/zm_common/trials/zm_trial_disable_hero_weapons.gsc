@@ -8,7 +8,6 @@
 #include scripts\zm_common\trials\zm_trial_disable_upgraded_weapons;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
-
 #namespace zm_trial_disable_hero_weapons;
 
 autoexec __init__system__() {
@@ -23,8 +22,8 @@ __init__() {
   zm_trial::register_challenge(#"disable_hero_weapons", &on_begin, &on_end);
 }
 
-private on_begin() {
-  weapon_names = array(#"hero_chakram_lv1", #"hero_chakram_lv2", #"hero_chakram_lv3", #"hero_chakram_lh_lv1", #"hero_chakram_lh_lv2", #"hero_chakram_lh_lv3", #"hero_hammer_lv1", #"hero_hammer_lv2", #"hero_hammer_lv3", #"hero_katana_t8_lv1", #"hero_katana_t8_lv2", #"hero_katana_t8_lv3", #"hero_scepter_lv1", #"hero_scepter_lv2", #"hero_scepter_lv3", #"hero_sword_pistol_lv1", #"hero_sword_pistol_lv2", #"hero_sword_pistol_lv3", #"hero_sword_pistol_lh_lv1", #"hero_sword_pistol_lh_lv2", #"hero_sword_pistol_lh_lv3");
+on_begin() {
+  weapon_names = array(#"hero_chakram_lv1", # "hero_chakram_lv2", # "hero_chakram_lv3", # "hero_chakram_lh_lv1", # "hero_chakram_lh_lv2", # "hero_chakram_lh_lv3", # "hero_hammer_lv1", # "hero_hammer_lv2", # "hero_hammer_lv3", # "hero_katana_t8_lv1", # "hero_katana_t8_lv2", # "hero_katana_t8_lv3", # "hero_scepter_lv1", # "hero_scepter_lv2", # "hero_scepter_lv3", # "hero_sword_pistol_lv1", # "hero_sword_pistol_lv2", # "hero_sword_pistol_lv3", # "hero_sword_pistol_lh_lv1", # "hero_sword_pistol_lh_lv2", # "hero_sword_pistol_lh_lv3");
   level.var_3e2ac3b6 = [];
 
   foreach(weapon_name in weapon_names) {
@@ -44,7 +43,7 @@ private on_begin() {
   level zm_trial::function_44200d07(1);
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   foreach(player in getplayers()) {
     player callback::function_824d206(&function_33f0ddd3);
 
@@ -68,11 +67,11 @@ is_active() {
   return isDefined(challenge);
 }
 
-private function_33f0ddd3(eventstruct) {
+function_33f0ddd3(eventstruct) {
   self function_6a8979c9();
 }
 
-private function_6a8979c9() {
+function_6a8979c9() {
   assert(isDefined(level.var_3e2ac3b6));
 
   foreach(weapon in self getweaponslist(1)) {

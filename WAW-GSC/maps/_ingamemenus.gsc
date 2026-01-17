@@ -15,14 +15,14 @@ init() {
 }
 
 onPlayerConnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connecting", player);
     player thread onMenuResponse();
   }
 }
 
 onMenuResponse() {
-  for (;;) {
+  for(;;) {
     self waittill("menuresponse", menu, response);
     if(menu == "loadout_splitscreen") {
       self closeMenu();

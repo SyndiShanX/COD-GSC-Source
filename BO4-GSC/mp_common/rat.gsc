@@ -10,7 +10,6 @@
 #include scripts\core_common\util_shared;
 #include scripts\mp_common\gametypes\dev;
 #include scripts\mp_common\util;
-
 #namespace rat;
 
 autoexec __init__system__() {
@@ -39,10 +38,10 @@ function_50634409(params) {
 
 rscaddenemy(params) {
   player = [[level.rat.common.gethostplayer]]();
-  team = #"axis";
+  team = # "axis";
 
-  if(isDefined(player.pers[#"team"])) {
-    team = util::getotherteam(player.pers[#"team"]);
+  if(isDefined(player.pers[# "team"])) {
+    team = util::getotherteam(player.pers[# "team"]);
   }
 
   bot = dev::getormakebot(team);
@@ -70,14 +69,14 @@ rscaddenemy(params) {
 testenemy(team) {
   self endon(#"disconnect");
 
-  while(!isDefined(self.pers[#"team"])) {
+  while(!isDefined(self.pers[# "team"])) {
     waitframe(1);
   }
 
   if(level.teambased) {
     params = {
-      #menu: game.menu[#"menu_team"], 
-      #response: level.teams[team], 
+      #menu: game.menu[# "menu_team"],
+      #response: level.teams[team],
       #intpayload: 0
     };
     self notify(#"menuresponse", params);
@@ -90,4 +89,3 @@ deathcounter() {
   level.rat.deathcount++;
   setdvar(#"rat_death_count", level.rat.deathcount);
 }
-

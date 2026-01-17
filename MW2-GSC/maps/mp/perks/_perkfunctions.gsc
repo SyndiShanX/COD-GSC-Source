@@ -3,10 +3,10 @@
  * Script: maps\mp\perks\_perkfunctions.gsc
 ********************************************************/
 
-/******************************************************************* 
+/*******************************************************************
 //						_perkfunctions.gsc
 //	
-//	Holds all the perk set/unset and listening functions 
+//	Holds all the perk set/unset and listening functions
 //	
 //	Jordan Hirsh	Sept. 11th 	2008
 ********************************************************************/
@@ -22,12 +22,12 @@ blastshieldUseTracker(perkName, useFunc) {
   self endon("end_perkUseTracker");
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     self waittill("empty_offhand");
 
-    if(!isOffhandWeaponEnabled())
+    if(!isOffhandWeaponEnabled()) {
       continue;
-
+    }
     self[[useFunc]](self _hasPerk("_specialty_blastshield"));
   }
 }
@@ -58,9 +58,9 @@ toggleRearView(isEnabled) {
 }
 
 setEndGame() {
-  if(isdefined(self.endGame))
+  if(isDefined(self.endGame)) {
     return;
-
+  }
   self.maxhealth = (maps\mp\gametypes\_tweakables::getTweakableValue("player", "maxhealth") * 4);
   self.health = self.maxhealth;
   self.endGame = true;
@@ -75,9 +75,9 @@ unsetEndGame() {
   self.endGame = undefined;
   revertVisionSet();
 
-  if(!isDefined(self.endGameTimer))
+  if(!isDefined(self.endGameTimer)) {
     return;
-
+  }
   self.endGameTimer destroyElem();
   self.endGameIcon destroyElem();
 }
@@ -193,7 +193,7 @@ trackSiegeEnable() {
   self endon("disconnect");
   self endon("stop_trackSiege");
 
-  for (;;) {
+  for(;;) {
     self waittill("gambit_on");
 
     //self setStance( "crouch" );
@@ -218,7 +218,7 @@ trackSiegeDissable() {
   self endon("disconnect");
   self endon("stop_trackSiege");
 
-  for (;;) {
+  for(;;) {
     self waittill("gambit_off");
 
     unsetSiege();
@@ -231,11 +231,11 @@ stanceStateListener() {
 
   self notifyOnPlayerCommand("adjustedStance", "+stance");
 
-  for (;;) {
+  for(;;) {
     self waittill("adjustedStance");
-    if(self.moveSPeedScaler != 0)
+    if(self.moveSPeedScaler != 0) {
       continue;
-
+    }
     unsetSiege();
   }
 }
@@ -246,11 +246,11 @@ jumpStateListener() {
 
   self notifyOnPlayerCommand("jumped", "+goStand");
 
-  for (;;) {
+  for(;;) {
     self waittill("jumped");
-    if(self.moveSPeedScaler != 0)
+    if(self.moveSPeedScaler != 0) {
       continue;
-
+    }
     unsetSiege();
   }
 }
@@ -401,18 +401,17 @@ unsetHelicopterMinigun() {
   self notify("end_helicopter_minigunThink");
 }
 
-
 killstreakThink(streakName, streakVal, endonString) {
   self endon("death");
   self endon("disconnect");
   self endon(endonString);
 
-  for (;;) {
+  for(;;) {
     self waittill("killed_enemy");
 
-    if(self.pers["cur_kill_streak"] != streakVal)
+    if(self.pers["cur_kill_streak"] != streakVal) {
       continue;
-
+    }
     self thread maps\mp\killstreaks\_killstreaks::giveKillstreak(streakName);
     self thread maps\mp\gametypes\_hud_message::killstreakSplashNotify(streakName, streakVal);
     return;
@@ -441,12 +440,12 @@ oneManArmyWeaponChangeTracker() {
   level endon("game_ended");
   self endon("stop_oneManArmyTracker");
 
-  for (;;) {
+  for(;;) {
     self waittill("weapon_change", newWeapon);
 
-    if(newWeapon != "onemanarmy_mp")
+    if(newWeapon != "onemanarmy_mp") {
       continue;
-
+    }
     //if( self isUsingRemote() )
     //	continue;
 
@@ -554,7 +553,7 @@ omaUseBar(duration) {
   useBarText setText(&"MPUI_CHANGING_KIT");
 
   useBar updateBar(0, 1 / duration);
-  for (waitedTime = 0; waitedTime < duration && isAlive(self) && !level.gameEnded; waitedTime += 0.05)
+  for(waitedTime = 0; waitedTime < duration && isAlive(self) && !level.gameEnded; waitedTime += 0.05)
     wait(0.05);
 
   useBar destroyElem();
@@ -617,7 +616,7 @@ updateTISpawnPosition() {
   level endon("game_ended");
   self endon("end_monitorTIUse");
 
-  while (isReallyAlive(self)) {
+  while(isReallyAlive(self)) {
     if(self isValidTISpawnPosition())
       self.TISpawnPosition = self.origin;
 
@@ -626,7 +625,7 @@ updateTISpawnPosition() {
 }
 
 isValidTISpawnPosition() {
-  if(CanSpawn(self.origin) && self IsOnGround())
+  if(Canspawn(self.origin) && self IsOnGround())
     return true;
   else
     return false;
@@ -641,23 +640,23 @@ monitorTIUse() {
   self thread updateTISpawnPosition();
   self thread clearPreviousTISpawnpoint();
 
-  for (;;) {
+  for(;;) {
     self waittill("grenade_fire", lightstick, weapName);
 
-    if(weapName != "flare_mp")
+    if(weapName != "flare_mp") {
       continue;
-
+    }
     //lightstick delete();
 
     if(isDefined(self.setSpawnPoint))
       self deleteTI(self.setSpawnPoint);
 
-    if(!isDefined(self.TISpawnPosition))
+    if(!isDefined(self.TISpawnPosition)) {
       continue;
-
-    if(self touchingBadTrigger())
+    }
+    if(self touchingBadTrigger()) {
       continue;
-
+    }
     TIGroundPosition = playerPhysicsTrace(self.TISpawnPosition + (0, 0, 16), self.TISpawnPosition - (0, 0, 2048)) + (0, 0, 1);
 
     glowStick = spawn("script_model", TIGroundPosition);
@@ -706,14 +705,14 @@ GlowStickTeamUpdater(showForTeam, showEffect, owner) {
   // PlayFXOnTag fails if run on the same frame the parent entity was created
   wait(0.05);
 
-  //PlayFXOnTag( showEffect, self, "TAG_FX" );
+  //playFXOnTag( showEffect, self, "TAG_FX" );
   angles = self getTagAngles("tag_fire_fx");
   fxEnt = SpawnFx(showEffect, self getTagOrigin("tag_fire_fx"), anglesToForward(angles), anglesToUp(angles));
   TriggerFx(fxEnt);
 
   self thread deleteOnDeath(fxEnt);
 
-  for (;;) {
+  for(;;) {
     self hide();
     fxEnt hide();
     foreach(player in level.players) {
@@ -735,7 +734,7 @@ GlowStickTeamUpdater(showForTeam, showEffect, owner) {
 
 deleteOnDeath(ent) {
   self waittill("death");
-  if(isdefined(ent))
+  if(isDefined(ent))
     ent delete();
 }
 
@@ -746,7 +745,7 @@ GlowStickDamageListener(owner) {
   // use large health to work around teamkilling issue
   self.health = 5000;
 
-  for (;;) {
+  for(;;) {
     self waittill("damage", amount, attacker);
 
     if(level.teambased && isDefined(owner) && attacker != owner && (isDefined(attacker.team) && attacker.team == self.team)) {
@@ -776,7 +775,7 @@ GlowStickUseListener(owner) {
 
   self thread updateEnemyUse(owner);
 
-  for (;;) {
+  for(;;) {
     self waittill("trigger", player);
 
     player playSound("chemlight_pu");
@@ -788,7 +787,7 @@ GlowStickUseListener(owner) {
 updateEnemyUse(owner) {
   self endon("death");
 
-  for (;;) {
+  for(;;) {
     self setSelfUsable(owner);
     level waittill_either("joined_team", "player_spawned");
   }
@@ -825,7 +824,7 @@ GlowStickEnemyUseListener(owner) {
   self.enemyTrigger setHintString(&"MP_DESTROY_TI");
   self.enemyTrigger makeEnemyUsable(owner);
 
-  for (;;) {
+  for(;;) {
     self.enemyTrigger waittill("trigger", player);
 
     player notify("destroyed_insertion", owner);
@@ -853,6 +852,4 @@ setC4Death() {
     self _setperk("specialty_pistoldeath");
 }
 
-unsetC4Death() {
-
-}
+unsetC4Death() {}

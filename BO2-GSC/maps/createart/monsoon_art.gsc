@@ -77,17 +77,13 @@ intro_dof_look_rhand(m_player_body) {
   level.player depth_of_field_off(0.5);
 }
 
-intro_dof_rhand_plant(m_player_body) {
-}
+intro_dof_rhand_plant(m_player_body) {}
 
-intro_dof_look_left(m_player_body) {
-}
+intro_dof_look_left(m_player_body) {}
 
-intro_dof_lhand_plant(m_player_body) {
-}
+intro_dof_lhand_plant(m_player_body) {}
 
-intro_dof_grab_rope(m_player_body) {
-}
+intro_dof_grab_rope(m_player_body) {}
 
 treefall_dof_look_down(m_player_body) {
   iprintlnbold("DOF:treefall_DOF_look_down");
@@ -143,8 +139,7 @@ treefall_dof_get_up(m_player_body) {
   level.player depth_of_field_off(0.5);
 }
 
-treefall_dof_look_harper_2(m_player_body) {
-}
+treefall_dof_look_harper_2(m_player_body) {}
 
 chamber_dof_chamber_center(m_player_body) {
   iprintlnbold("DOF:chamber_DOF_chamber_center");
@@ -208,8 +203,7 @@ briggs_ending_dof() {
   level.player depth_of_field_tween(8, 10, 150, 300, 4, 3, 2);
 }
 
-dof_reset(m_player_body) {
-}
+dof_reset(m_player_body) {}
 
 _lightning() {
   level endon("_rain_lightning");
@@ -220,11 +214,11 @@ _lightning() {
     if(!is_true(level.lightning_strike)) {
       level.lightning_strike = 1;
       v_p_angles = level.player getplayerangles();
-      v_forward = anglestoforward(level.player getplayerangles()) * 25000;
+      v_forward = anglesToForward(level.player getplayerangles()) * 25000;
       v_end_pos = level.player.origin + (v_forward[0], v_forward[1], 0);
       v_offset = (randomintrange(-5000, 5000), randomintrange(-5000, 5000), randomint(3000));
       v_end_pos = v_end_pos + v_offset;
-      playfx(getfx("fx_lightning_flash_single_lg"), v_end_pos);
+      playFX(getfx("fx_lightning_flash_single_lg"), v_end_pos);
       wait(randomfloatrange(0.2, 0.3));
       n_level_sunlight = getdvarfloat(#"r_lightTweakSunLight");
       n_level_exposure = getdvarfloat(#"r_exposureValue");
@@ -251,11 +245,11 @@ lightning_strike() {
   if(!is_true(level.lightning_strike)) {
     level.lightning_strike = 1;
     v_p_angles = level.player getplayerangles();
-    v_forward = anglestoforward(level.player getplayerangles()) * 25000;
+    v_forward = anglesToForward(level.player getplayerangles()) * 25000;
     v_end_pos = level.player.origin + (v_forward[0], v_forward[1], 0);
     v_offset = (randomintrange(-5000, 5000), randomintrange(-5000, 5000), randomint(3000));
     v_end_pos = v_end_pos + v_offset;
-    playfx(getfx("fx_lightning_flash_single_lg"), v_end_pos);
+    playFX(getfx("fx_lightning_flash_single_lg"), v_end_pos);
     wait(randomfloatrange(0.2, 0.3));
     n_level_sunlight = getdvarfloat(#"r_lightTweakSunLight");
     n_level_exposure = getdvarfloat(#"r_exposureValue");

@@ -22,8 +22,8 @@
 function init() {
   level.planemortarexhaustfx = "killstreaks/fx_ls_exhaust_afterburner";
   clientfield::register("scriptmover", "planemortar_contrail", 1, 1, "int");
-  killstreaks::register("planemortar", "planemortar", "killstreak_planemortar", "planemortar_used", & usekillstreakplanemortar, 1);
-  killstreaks::register_strings("planemortar", & "MP_EARNED_PLANEMORTAR", & "KILLSTREAK_PLANEMORTAR_NOT_AVAILABLE", & "MP_WAR_PLANEMORTAR_INBOUND", & "MP_WAR_PLANEMORTAR_INBOUND_NEAR_YOUR_POSITION", & "KILLSTREAK_PLANEMORTAR_HACKED");
+  killstreaks::register("planemortar", "planemortar", "killstreak_planemortar", "planemortar_used", &usekillstreakplanemortar, 1);
+  killstreaks::register_strings("planemortar", &"MP_EARNED_PLANEMORTAR", &"KILLSTREAK_PLANEMORTAR_NOT_AVAILABLE", &"MP_WAR_PLANEMORTAR_INBOUND", &"MP_WAR_PLANEMORTAR_INBOUND_NEAR_YOUR_POSITION", &"KILLSTREAK_PLANEMORTAR_HACKED");
   killstreaks::register_dialog("planemortar", "mpl_killstreak_planemortar", "planeMortarDialogBundle", "planeMortarPilotDialogBundle", "friendlyPlaneMortar", "enemyPlaneMortar", "enemyPlaneMortarMultiple", "friendlyPlaneMortarHacked", "enemyPlaneMortarHacked", "requestPlaneMortar");
   killstreaks::set_team_kill_penalty_scale("planemortar", level.teamkillreducedpenalty);
 }
@@ -33,7 +33,7 @@ function usekillstreakplanemortar(hardpointtype) {
     return false;
   }
   result = self selectplanemortarlocation(hardpointtype);
-  if(!isdefined(result) || !result) {
+  if(!isDefined(result) || !result) {
     return false;
   }
   return true;
@@ -51,17 +51,17 @@ function selectplanemortarlocation(hardpointtype) {
   self.selectinglocation = 1;
   self thread airsupport::endselectionthink();
   locations = [];
-  if(!isdefined(self.pers["mortarRadarUsed"]) || !self.pers["mortarRadarUsed"]) {
+  if(!isDefined(self.pers["mortarRadarUsed"]) || !self.pers["mortarRadarUsed"]) {
     self thread singleradarsweep();
     otherteam = util::getotherteam(self.team);
     globallogic_audio::leader_dialog("enemyPlaneMortarUsed", otherteam);
   }
-  for (i = 0; i < 3; i++) {
+  for(i = 0; i < 3; i++) {
     location = self waittill_confirm_location();
-    if(!isdefined(self)) {
+    if(!isDefined(self)) {
       return 0;
     }
-    if(!isdefined(location)) {
+    if(!isDefined(location)) {
       self.pers["mortarRadarUsed"] = 1;
       self notify("cancel_selection");
       return 0;
@@ -74,7 +74,7 @@ function selectplanemortarlocation(hardpointtype) {
     return 0;
   }
   self.pers["mortarRadarUsed"] = 0;
-  return self airsupport::finishhardpointlocationusage(locations, & useplanemortar);
+  return self airsupport::finishhardpointlocationusage(locations, &useplanemortar);
 }
 
 function waitplaybacktime(soundalias) {
@@ -149,7 +149,7 @@ function doplanemortar(positions, team, killstreak_id) {
 }
 
 function plane_mortar_bda_dialog() {
-  if(isdefined(self.planemortarbda)) {
+  if(isDefined(self.planemortarbda)) {
     if(self.planemortarbda === 1) {
       bdadialog = "kill1";
     } else {
@@ -158,7 +158,7 @@ function plane_mortar_bda_dialog() {
       } else {
         if(self.planemortarbda === 3) {
           bdadialog = "kill3";
-        } else if(isdefined(self.planemortarbda) && self.planemortarbda > 3) {
+        } else if(isDefined(self.planemortarbda) && self.planemortarbda > 3) {
           bdadialog = "killMultiple";
         }
       }
@@ -189,7 +189,7 @@ function dobombrun(position, yaw, team) {
   self endon("emp_jammed");
   player = self;
   angles = (0, yaw, 0);
-  direction = anglestoforward(angles);
+  direction = anglesToForward(angles);
   height = airsupport::getminimumflyheight() + 2000;
   position = (position[0], position[1], height);
   startpoint = position + (vectorscale(direction, -12000));
@@ -206,11 +206,11 @@ function dobombrun(position, yaw, team) {
   plane endon("death");
   plane thread planewatchforemp(self);
   plane.angles = angles;
-  plane setmodel("veh_t7_mil_vtol_fighter_mp");
+  plane setModel("veh_t7_mil_vtol_fighter_mp");
   plane setenemymodel("veh_t7_mil_vtol_fighter_mp_dark");
   plane clientfield::set("planemortar_contrail", 1);
   plane clientfield::set("enemyvehicle", 1);
-  plane playsound("mpl_lightning_flyover_boom");
+  plane playSound("mpl_lightning_flyover_boom");
   plane setdrawinfrared(1);
   plane.killcament = spawn("script_model", (plane.origin + vectorscale((0, 0, 1), 700)) + (vectorscale(direction, -1500)));
   plane.killcament util::deleteaftertime(2 * 3);
@@ -218,11 +218,11 @@ function dobombrun(position, yaw, team) {
   plane.killcament.starttime = gettime();
   plane.killcament linkto(plane);
   start = (position[0], position[1], plane.origin[2]);
-  impact = bullettrace(start, start + (vectorscale((0, 0, -1), 100000)), 1, plane);
+  impact = bulletTrace(start, start + (vectorscale((0, 0, -1), 100000)), 1, plane);
   plane moveto(endpoint, (2 * 5) / 4, 0, 0);
   plane.killcament thread followbomb(plane, position, direction, impact, player);
   wait(2 / 2);
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     self thread dropbomb(plane, position);
   }
   wait((2 * 3) / 4);
@@ -237,7 +237,7 @@ function followbomb(plane, position, direction, impact, player) {
 }
 
 function lookatexplosion(bomb) {
-  while (isdefined(self) && isdefined(bomb)) {
+  while(isDefined(self) && isDefined(bomb)) {
     angles = vectortoangles(vectornormalize(bomb.origin - self.origin));
     self.angles = (max(angles[0], 15), angles[1], angles[2]);
     wait(0.05);
@@ -257,7 +257,7 @@ function planeawardscoreevent(attacker, plane) {
   attacker notify("planeawardscoreevent_singleton");
   attacker endon("planeawardscoreevent_singleton");
   waittillframeend();
-  if(isdefined(attacker) && (!isdefined(plane.owner) || plane.owner util::isenemyplayer(attacker))) {
+  if(isDefined(attacker) && (!isDefined(plane.owner) || plane.owner util::isenemyplayer(attacker))) {
     challenges::destroyedaircraft(attacker, getweapon("emp"), 0);
     scoreevents::processscoreevent("destroyed_plane_mortar", attacker, plane.owner, getweapon("emp"));
     attacker challenges::addflyswatterstat(getweapon("emp"), plane);
@@ -269,7 +269,7 @@ function plane_cleanupondeath() {
 }
 
 function dropbomb(plane, bombposition) {
-  if(!isdefined(plane.owner)) {
+  if(!isDefined(plane.owner)) {
     return;
   }
   targets = getplayers();
@@ -284,7 +284,7 @@ function dropbomb(plane, bombposition) {
   bombposition = (bombposition[0], bombposition[1], plane.origin[2]);
   bomb = self launchbomb(getweapon("planemortar"), bombposition, vectorscale((0, 0, -1), 5000));
   bomb.soundmod = "heli";
-  bomb playsound("mpl_lightning_bomb_incoming");
+  bomb playSound("mpl_lightning_bomb_incoming");
   bomb.killcament = plane.killcament;
   plane.killcament thread lookatexplosion(bomb);
 }

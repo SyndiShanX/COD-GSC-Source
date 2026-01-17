@@ -26,9 +26,9 @@ attach_model(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, b
     if(isDefined(self.ice_shard_fx))
       stopfx(localclientnum, self.ice_shard_fx);
 
-    self.ice_shard_fx = playfxontag(localclientnum, level._effect["staff_water_ice_shard"], self, "j_spine4");
+    self.ice_shard_fx = playFXOnTag(localclientnum, level._effect["staff_water_ice_shard"], self, "j_spine4");
     self thread ice_freeze_fx(localclientnum);
-    self playsound(0, "wpn_waterstaff_freeze_zombie");
+    self playSound(0, "wpn_waterstaff_freeze_zombie");
   } else {
     if(isDefined(self.ice_shard_fx)) {
       stopfx(localclientnum, self.ice_shard_fx);
@@ -66,12 +66,12 @@ ice_unfreeze(localclientnum) {
 
 staff_blizzard_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval == 1) {
-    self.ice_fx = playfxontag(localclientnum, level._effect["staff_water_blizzard"], self, "tag_origin");
+    self.ice_fx = playFXOnTag(localclientnum, level._effect["staff_water_blizzard"], self, "tag_origin");
 
     if(!isDefined(self.sndent)) {
       self.sndent = spawn(0, self.origin, "script_origin");
-      self.sndent playsound(0, "wpn_waterstaff_storm_imp");
-      self.sndent playloopsound("wpn_waterstaff_storm");
+      self.sndent playSound(0, "wpn_waterstaff_storm_imp");
+      self.sndent playLoopSound("wpn_waterstaff_storm");
       self.sndent thread clientscripts\mp\zm_tomb::snddemojumpmonitor();
     }
   } else {

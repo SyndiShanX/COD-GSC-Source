@@ -34,7 +34,7 @@ menendez_hill_vo() {
   level thread menendez_hill_intro_vo();
   trigger_wait("trig_mh_ransack_3");
   n_array_counter = 0;
-  a_mh_ents = getentarray("menendez_hill", "script_noteworthy");
+  a_mh_ents = getEntArray("menendez_hill", "script_noteworthy");
   a_mh_vo = array("pdf2_hold_your_ground_0", "pdf2_it_s_menendez_he_l_0", "pdf3_stop_where_you_are_0");
 
   while(a_mh_ents.size > 0) {
@@ -53,7 +53,7 @@ menendez_hill_vo() {
     }
 
     wait 0.05;
-    a_mh_ents = getentarray("menendez_hill", "script_noteworthy");
+    a_mh_ents = getEntArray("menendez_hill", "script_noteworthy");
   }
 }
 
@@ -62,7 +62,7 @@ menendez_hill_intro_vo() {
   n_pdf_line = 0;
   a_pdf_lines = array("pdf1_general_noriega_0", "pdf1_don_t_let_him_into_t_0", "pdf2_it_s_menendez_he_l_0");
 
-  for(a_mh_intro = getentarray("mh_intro_ai", "targetname"); a_mh_intro.size; a_mh_intro = array_removedead(a_mh_intro)) {
+  for(a_mh_intro = getEntArray("mh_intro_ai", "targetname"); a_mh_intro.size; a_mh_intro = array_removedead(a_mh_intro)) {
     ai_mh_intro = get_closest_living(level.player.origin, a_mh_intro);
     ai_mh_intro say_dialog_and_waittill_death(a_pdf_lines[n_pdf_line]);
     n_pdf_line++;
@@ -466,7 +466,7 @@ shoot_at_targets_ahead_of_me(str_target_names, total_time) {
       break;
     }
 
-    a_ai = getentarray(str_target_names, "targetname");
+    a_ai = getEntArray(str_target_names, "targetname");
 
     if(isDefined(a_ai)) {
       closest_dist = 999999;

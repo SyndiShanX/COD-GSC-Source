@@ -48,7 +48,7 @@ entity_died(localclientnum, set, newent) {
 }
 
 gpr_updated(localclientnum, set, newent) {
-  signbit = self.gpr & -2147483648;
+  signbit = self.gpr &-2147483648;
   self.gpr = self.gpr & 2147483647;
   data = self.gpr & 268435455;
   op = self.gpr >> 28;
@@ -498,7 +498,7 @@ waitfor_characterswitch() {
   while(true) {
     level waittill("chr_swtch_start");
     snd_set_snapshot("spl_rts_character_switch");
-    playsound(0, "evt_command_switch_static", (0, 0, 0));
+    playSound(0, "evt_command_switch_static", (0, 0, 0));
     level waittill("chr_swtch_end");
     snd_set_snapshot("default");
   }
@@ -510,8 +510,8 @@ commandservosounds() {
   move_volume = 0;
   pansoundent = spawn(0, (0, 0, 0), "script_origin");
   movesoundent = spawn(0, (0, 0, 0), "script_origin");
-  panlooper = pansoundent playloopsound("evt_rts_cmd_pan_lp", 0.1);
-  movelooper = movesoundent playloopsound("evt_rts_cmd_move_lp", 0.1);
+  panlooper = pansoundent playLoopSound("evt_rts_cmd_pan_lp", 0.1);
+  movelooper = movesoundent playLoopSound("evt_rts_cmd_move_lp", 0.1);
 
   while(level.rts_mode == 1) {
     pan = player getnormalizedcameramovement();
@@ -544,7 +544,7 @@ vehicleloopsounds(string, alias) {
 
   while(true) {
     level waittill(string);
-    level.vehicle_sound_ent playloopsound(alias, 1);
+    level.vehicle_sound_ent playLoopSound(alias, 1);
     level waittill_any("chr_swtch_start", "rts_ON");
     level.vehicle_sound_ent stoploopsound(1);
   }
@@ -576,7 +576,7 @@ rtshealthsystem(clientnum) {
     if(health > 60) {
       if(level.health_ambient_room_change) {
         setsoundcontext("health", "full");
-        playsound(0, level.healthsound + "_out", (0, 0, 0));
+        playSound(0, level.healthsound + "_out", (0, 0, 0));
         deactivateambientroom(0, "health", 100);
         level.health_ambient_room_change = 0;
         level notify("pain_out");
@@ -586,7 +586,7 @@ rtshealthsystem(clientnum) {
     } else {
       if(!level.health_ambient_room_change) {
         setsoundcontext("health", "half");
-        playsound(0, level.healthsound + "_in", (0, 0, 0));
+        playSound(0, level.healthsound + "_in", (0, 0, 0));
         activateambientroom(0, "health", 100);
         level.health_ambient_room_change = 1;
       }

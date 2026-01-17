@@ -46,9 +46,7 @@ main() {
 
   if(isUsingMatchRulesData()) {
     level.initializeMatchRules = ::initializeMatchRules;
-    [
-      [level.initializeMatchRules]
-    ]();
+    [[level.initializeMatchRules]]();
     level thread reInitializeMatchRulesOnMigration();
   } else {
     registerRoundSwitchDvar(level.gameType, 0, 0, 9);
@@ -268,13 +266,13 @@ onStartGameType() {
   if(!isDefined(game["switchedsides"]))
     game["switchedsides"] = false;
 
-  setObjectiveText("allies", & "HORDE_OBJECTIVE");
-  setObjectiveText("axis", & "HORDE_OBJECTIVE");
-  setObjectiveScoreText("allies", & "HORDE_OBJECTIVE_SCORE");
-  setObjectiveScoreText("axis", & "HORDE_OBJECTIVE_SCORE");
+  setObjectiveText("allies", &"HORDE_OBJECTIVE");
+  setObjectiveText("axis", &"HORDE_OBJECTIVE");
+  setObjectiveScoreText("allies", &"HORDE_OBJECTIVE_SCORE");
+  setObjectiveScoreText("axis", &"HORDE_OBJECTIVE_SCORE");
 
-  setObjectiveHintText("allies", & "HORDE_OBJECTIVE_HINT");
-  setObjectiveHintText("axis", & "HORDE_OBJECTIVE_HINT");
+  setObjectiveHintText("allies", &"HORDE_OBJECTIVE_HINT");
+  setObjectiveHintText("axis", &"HORDE_OBJECTIVE_HINT");
 
   initSpawns();
   setupDialog();
@@ -526,7 +524,7 @@ onSpawnFinished() {
     }
 
     if(IsAgent(self)) {
-      self.agentname = & "HORDE_BUDDY";
+      self.agentname = &"HORDE_BUDDY";
       self.horde_type = "Buddy";
 
       self childthread ammoRefillPrimary();
@@ -1975,7 +1973,7 @@ setSpecialLoadouts() {
   level.hordeLoadouts[CONST_ENEMY_TEAM]["a"]["loadoutKillstreak2"] = "none";
   level.hordeLoadouts[CONST_ENEMY_TEAM]["a"]["loadoutKillstreak3"] = "none";
   level.hordeLoadouts[CONST_ENEMY_TEAM]["a"]["loadoutJuggernaut"] = false;
-  level.hordeLoadouts[CONST_ENEMY_TEAM]["a"]["name_localized"] = & "HORDE_RAVAGER";
+  level.hordeLoadouts[CONST_ENEMY_TEAM]["a"]["name_localized"] = &"HORDE_RAVAGER";
   level.hordeLoadouts[CONST_ENEMY_TEAM]["a"]["type"] = "Ravager";
   level.hordeLoadouts[CONST_ENEMY_TEAM]["a"]["loadoutPerks"] = ["specialty_falldamage"];
 
@@ -1998,7 +1996,7 @@ setSpecialLoadouts() {
   level.hordeLoadouts[CONST_ENEMY_TEAM]["b"]["loadoutKillstreak2"] = "none";
   level.hordeLoadouts[CONST_ENEMY_TEAM]["b"]["loadoutKillstreak3"] = "none";
   level.hordeLoadouts[CONST_ENEMY_TEAM]["b"]["loadoutJuggernaut"] = false;
-  level.hordeLoadouts[CONST_ENEMY_TEAM]["b"]["name_localized"] = & "HORDE_ENFORCER";
+  level.hordeLoadouts[CONST_ENEMY_TEAM]["b"]["name_localized"] = &"HORDE_ENFORCER";
   level.hordeLoadouts[CONST_ENEMY_TEAM]["b"]["type"] = "Enforcer";
   level.hordeLoadouts[CONST_ENEMY_TEAM]["b"]["loadoutPerks"] = ["specialty_falldamage"];
 
@@ -2021,7 +2019,7 @@ setSpecialLoadouts() {
   level.hordeLoadouts[CONST_ENEMY_TEAM]["c"]["loadoutKillstreak2"] = "none";
   level.hordeLoadouts[CONST_ENEMY_TEAM]["c"]["loadoutKillstreak3"] = "none";
   level.hordeLoadouts[CONST_ENEMY_TEAM]["c"]["loadoutJuggernaut"] = false;
-  level.hordeLoadouts[CONST_ENEMY_TEAM]["c"]["name_localized"] = & "HORDE_STRIKER";
+  level.hordeLoadouts[CONST_ENEMY_TEAM]["c"]["name_localized"] = &"HORDE_STRIKER";
   level.hordeLoadouts[CONST_ENEMY_TEAM]["c"]["type"] = "Striker";
   level.hordeLoadouts[CONST_ENEMY_TEAM]["c"]["loadoutPerks"] = ["specialty_falldamage"];
 
@@ -2044,7 +2042,7 @@ setSpecialLoadouts() {
   level.hordeLoadouts[CONST_ENEMY_TEAM]["d"]["loadoutKillstreak2"] = "none";
   level.hordeLoadouts[CONST_ENEMY_TEAM]["d"]["loadoutKillstreak3"] = "none";
   level.hordeLoadouts[CONST_ENEMY_TEAM]["d"]["loadoutJuggernaut"] = false;
-  level.hordeLoadouts[CONST_ENEMY_TEAM]["d"]["name_localized"] = & "HORDE_BLASTER";
+  level.hordeLoadouts[CONST_ENEMY_TEAM]["d"]["name_localized"] = &"HORDE_BLASTER";
   level.hordeLoadouts[CONST_ENEMY_TEAM]["d"]["type"] = "Blaster";
   level.hordeLoadouts[CONST_ENEMY_TEAM]["d"]["loadoutPerks"] = ["specialty_falldamage"];
 
@@ -2067,7 +2065,7 @@ setSpecialLoadouts() {
   level.hordeLoadouts[CONST_ENEMY_TEAM]["e"]["loadoutKillstreak2"] = "none";
   level.hordeLoadouts[CONST_ENEMY_TEAM]["e"]["loadoutKillstreak3"] = "none";
   level.hordeLoadouts[CONST_ENEMY_TEAM]["e"]["loadoutJuggernaut"] = false;
-  level.hordeLoadouts[CONST_ENEMY_TEAM]["e"]["name_localized"] = & "HORDE_HAMMER";
+  level.hordeLoadouts[CONST_ENEMY_TEAM]["e"]["name_localized"] = &"HORDE_HAMMER";
   level.hordeLoadouts[CONST_ENEMY_TEAM]["e"]["type"] = "Hammer";
   level.hordeLoadouts[CONST_ENEMY_TEAM]["e"]["loadoutPerks"] = ["specialty_falldamage"];
 }

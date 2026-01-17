@@ -33,7 +33,7 @@ fountain_setup() {
 }
 
 maze_fountain_collmap() {
-  collmap = getentarray("maze_fountain_collmap", "targetname");
+  collmap = getEntArray("maze_fountain_collmap", "targetname");
   flag_wait("maze_fountain_broken");
   array_thread(collmap, ::self_delete);
 }
@@ -46,9 +46,9 @@ sloth_fountain_think() {
   if(isDefined(s_courtyard_fountain)) {
     sound_offset = vectorscale((0, 0, 1), 100.0);
     sound_ent = spawn("script_origin", s_courtyard_fountain.origin + sound_offset);
-    playfx(level._effect["fx_buried_fountain_spray"], s_courtyard_fountain.origin);
-    playfx(level._effect["fountain_break"], s_courtyard_fountain.origin);
-    sound_ent playloopsound("zmb_fountain_spray", 0.2);
+    playFX(level._effect["fx_buried_fountain_spray"], s_courtyard_fountain.origin);
+    playFX(level._effect["fountain_break"], s_courtyard_fountain.origin);
+    sound_ent playLoopSound("zmb_fountain_spray", 0.2);
   }
 
   show_maze_fountain_water();
@@ -110,7 +110,7 @@ destroy_maze_fountain() {
   level setclientfield("maze_fountain_start", 1);
 
   if(isDefined(s_fountain))
-    playfx(level._effect["fountain_break"], s_fountain.origin);
+    playFX(level._effect["fountain_break"], s_fountain.origin);
 
   s_fountain_clip = getent("maze_fountain_clip", "targetname");
   s_fountain_clip delete();
@@ -146,7 +146,7 @@ transport_player_to_start_zone() {
   fountain_debug_print("transport player!");
 
   if(!isDefined(level._fountain_transporter)) {
-    level._fountain_transporter = spawnstruct();
+    level._fountain_transporter = spawnStruct();
     level._fountain_transporter.index = 0;
     level._fountain_transporter.end_points = getstructarray("fountain_transport_end_location", "targetname");
   }
@@ -192,7 +192,7 @@ transport_player_to_start_zone() {
 }
 
 play_teleport_fx() {
-  playfx(level._effect["fountain_teleport"], self gettagorigin("J_SpineLower"));
+  playFX(level._effect["fountain_teleport"], self gettagorigin("J_SpineLower"));
 }
 
 flash_screen_white() {

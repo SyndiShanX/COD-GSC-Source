@@ -61,14 +61,14 @@ warning(msg) {
 }
 
 spawn_array_struct() {
-  s = spawnstruct();
+  s = spawnStruct();
   s.a = [];
   return s;
 }
 
 within_fov(start_origin, start_angles, end_origin, fov) {
   normal = vectornormalize(end_origin - start_origin);
-  forward = anglestoforward(start_angles);
+  forward = anglesToForward(start_angles);
   dot = vectordot(forward, normal);
   return dot >= fov;
 }
@@ -90,13 +90,13 @@ exploder_sound() {
   if(isDefined(self.script_delay))
     wait(self.script_delay);
 
-  self playsound(level.scr_sound[self.script_sound]);
+  self playSound(level.scr_sound[self.script_sound]);
 }
 
 cannon_effect() {
   if(isDefined(self.v["repeat"])) {
     for(i = 0; i < self.v["repeat"]; i++) {
-      playfx(level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
+      playFX(level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
       self exploder_delay();
     }
 
@@ -110,7 +110,7 @@ cannon_effect() {
 
   self.looper = spawnfx(getfx(self.v["fxid"]), self.v["origin"], self.v["forward"], self.v["up"]);
   triggerfx(self.looper);
-  exploder_playsound();
+  exploder_playSound();
 }
 
 exploder_delay() {
@@ -130,7 +130,7 @@ exploder_delay() {
     wait(randomfloatrange(min_delay, max_delay));
 }
 
-exploder_playsound() {
+exploder_playSound() {
   if(!isDefined(self.v["soundalias"]) || self.v["soundalias"] == "nil") {
     return;
   }
@@ -237,23 +237,23 @@ brush_throw() {
 getplant() {
   start = self.origin + vectorscale((0, 0, 1), 10.0);
   range = 11;
-  forward = anglestoforward(self.angles);
+  forward = anglesToForward(self.angles);
   forward = vectorscale(forward, range);
   traceorigins[0] = start + forward;
   traceorigins[1] = start;
-  trace = bullettrace(traceorigins[0], traceorigins[0] + vectorscale((0, 0, -1), 18.0), 0, undefined);
+  trace = bulletTrace(traceorigins[0], traceorigins[0] + vectorscale((0, 0, -1), 18.0), 0, undefined);
 
   if(trace["fraction"] < 1) {
-    temp = spawnstruct();
+    temp = spawnStruct();
     temp.origin = trace["position"];
     temp.angles = orienttonormal(trace["normal"]);
     return temp;
   }
 
-  trace = bullettrace(traceorigins[1], traceorigins[1] + vectorscale((0, 0, -1), 18.0), 0, undefined);
+  trace = bulletTrace(traceorigins[1], traceorigins[1] + vectorscale((0, 0, -1), 18.0), 0, undefined);
 
   if(trace["fraction"] < 1) {
-    temp = spawnstruct();
+    temp = spawnStruct();
     temp.origin = trace["position"];
     temp.angles = orienttonormal(trace["normal"]);
     return temp;
@@ -267,7 +267,7 @@ getplant() {
   besttraceposition = undefined;
 
   for(i = 0; i < traceorigins.size; i++) {
-    trace = bullettrace(traceorigins[i], traceorigins[i] + vectorscale((0, 0, -1), 1000.0), 0, undefined);
+    trace = bulletTrace(traceorigins[i], traceorigins[i] + vectorscale((0, 0, -1), 1000.0), 0, undefined);
 
     if(!isDefined(besttracefraction) || trace["fraction"] < besttracefraction) {
       besttracefraction = trace["fraction"];
@@ -278,7 +278,7 @@ getplant() {
   if(besttracefraction == 1)
     besttraceposition = self.origin;
 
-  temp = spawnstruct();
+  temp = spawnStruct();
   temp.origin = besttraceposition;
   temp.angles = orienttonormal(trace["normal"]);
   return temp;
@@ -328,7 +328,7 @@ array_levelthread(ents, process,
 }
 
 deleteplacedentity(entity) {
-  entities = getentarray(entity, "classname");
+  entities = getEntArray(entity, "classname");
 
   for(i = 0; i < entities.size; i++)
     entities[i] delete();
@@ -401,7 +401,7 @@ setlowermessage(text, time, combinemessageandtimer) {
   if(!isDefined(self.lowermessage)) {
     return;
   }
-  if(isDefined(self.lowermessageoverride) && text != & "") {
+  if(isDefined(self.lowermessageoverride) && text != &"") {
     text = self.lowermessageoverride;
     time = undefined;
   }
@@ -411,7 +411,7 @@ setlowermessage(text, time, combinemessageandtimer) {
 
   if(isDefined(time) && time > 0) {
     if(!isDefined(combinemessageandtimer) || !combinemessageandtimer)
-      self.lowertimer.label = & "";
+      self.lowertimer.label = &"";
     else {
       self.lowermessage settext("");
       self.lowertimer.label = text;
@@ -420,7 +420,7 @@ setlowermessage(text, time, combinemessageandtimer) {
     self.lowertimer settimer(time);
   } else {
     self.lowertimer settext("");
-    self.lowertimer.label = & "";
+    self.lowertimer.label = &"";
   }
 
   if(self issplitscreen())
@@ -436,7 +436,7 @@ setlowermessagevalue(text, value, combinemessage) {
   if(!isDefined(self.lowermessage)) {
     return;
   }
-  if(isDefined(self.lowermessageoverride) && text != & "") {
+  if(isDefined(self.lowermessageoverride) && text != &"") {
     text = self.lowermessageoverride;
     time = undefined;
   }
@@ -450,14 +450,14 @@ setlowermessagevalue(text, value, combinemessage) {
 
   if(isDefined(value) && value > 0) {
     if(!isDefined(combinemessage) || !combinemessage)
-      self.lowertimer.label = & "";
+      self.lowertimer.label = &"";
     else
       self.lowertimer.label = text;
 
     self.lowertimer setvalue(value);
   } else {
     self.lowertimer settext("");
-    self.lowertimer.label = & "";
+    self.lowertimer.label = &"";
   }
 
   if(self issplitscreen())
@@ -522,8 +522,7 @@ printboldonteamarg(text, team, arg) {
   }
 }
 
-printonteamarg(text, team, arg) {
-}
+printonteamarg(text, team, arg) {}
 
 printonplayers(text, team) {
   players = level.players;
@@ -558,12 +557,12 @@ printandsoundoneveryone(team, enemyteam, printfriendly, printenemy, soundfriendl
       playerteam = player.pers["team"];
 
       if(isDefined(playerteam)) {
-        if(playerteam == team && isDefined(printfriendly) && printfriendly != & "") {
+        if(playerteam == team && isDefined(printfriendly) && printfriendly != &"") {
           player iprintln(printfriendly, printarg);
           continue;
         }
 
-        if(isDefined(printenemy) && printenemy != & "") {
+        if(isDefined(printenemy) && printenemy != &"") {
           if(isDefined(enemyteam) && playerteam == enemyteam) {
             player iprintln(printenemy, printarg);
             continue;
@@ -589,7 +588,7 @@ printandsoundoneveryone(team, enemyteam, printfriendly, printenemy, soundfriendl
 
         if(isDefined(playerteam)) {
           if(playerteam == team) {
-            if(isDefined(printfriendly) && printfriendly != & "")
+            if(isDefined(printfriendly) && printfriendly != &"")
               player iprintln(printfriendly, printarg);
 
             player playlocalsound(soundfriendly);
@@ -597,7 +596,7 @@ printandsoundoneveryone(team, enemyteam, printfriendly, printenemy, soundfriendl
           }
 
           if(isDefined(enemyteam) && playerteam == enemyteam || !isDefined(enemyteam) && playerteam != team) {
-            if(isDefined(printenemy) && printenemy != & "")
+            if(isDefined(printenemy) && printenemy != &"")
               player iprintln(printenemy, printarg);
 
             player playlocalsound(soundenemy);
@@ -611,14 +610,14 @@ printandsoundoneveryone(team, enemyteam, printfriendly, printenemy, soundfriendl
 
         if(isDefined(playerteam)) {
           if(playerteam == team) {
-            if(isDefined(printfriendly) && printfriendly != & "")
+            if(isDefined(printfriendly) && printfriendly != &"")
               player iprintln(printfriendly, printarg);
 
             player playlocalsound(soundfriendly);
             continue;
           }
 
-          if(isDefined(printenemy) && printenemy != & "") {
+          if(isDefined(printenemy) && printenemy != &"") {
             if(isDefined(enemyteam) && playerteam == enemyteam) {
               player iprintln(printenemy, printarg);
               continue;
@@ -693,7 +692,7 @@ play_sound_on_tag(alias, tag) {
     org linkto(self);
   }
 
-  org playsound(alias);
+  org playSound(alias);
   wait 5.0;
   org delete();
 }
@@ -719,7 +718,7 @@ loop_fx_sound(alias, origin, ender, timeout) {
   }
 
   org.origin = origin;
-  org playloopsound(alias);
+  org playLoopSound(alias);
 
   if(!isDefined(timeout)) {
     return;
@@ -831,19 +830,19 @@ trail_effect() {
   temp_ent = undefined;
 
   if(self.v["trailfxtag"] == "tag_origin")
-    playfxontag(level._effect[self.v["trailfx"]], self.model, self.v["trailfxtag"]);
+    playFXOnTag(level._effect[self.v["trailfx"]], self.model, self.v["trailfxtag"]);
   else {
     temp_ent = spawn("script_model", self.model.origin);
-    temp_ent setmodel("tag_origin");
+    temp_ent setModel("tag_origin");
     temp_ent linkto(self.model, self.v["trailfxtag"]);
-    playfxontag(level._effect[self.v["trailfx"]], temp_ent, "tag_origin");
+    playFXOnTag(level._effect[self.v["trailfx"]], temp_ent, "tag_origin");
   }
 
   if(isDefined(self.v["trailfxsound"])) {
     if(!isDefined(temp_ent))
-      self.model playloopsound(self.v["trailfxsound"]);
+      self.model playLoopSound(self.v["trailfxsound"]);
     else
-      temp_ent playloopsound(self.v["trailfxsound"]);
+      temp_ent playLoopSound(self.v["trailfxsound"]);
   }
 
   if(isDefined(self.v["ender"]) && isDefined(temp_ent))
@@ -952,7 +951,7 @@ play_sound_in_space(alias, origin, master) {
   if(isDefined(master) && master)
     org playsoundasmaster(alias);
   else
-    org playsound(alias);
+    org playSound(alias);
 
   wait 10.0;
   org delete();
@@ -965,7 +964,7 @@ loop_sound_in_space(alias, origin, ender) {
     origin = self.origin;
 
   org.origin = origin;
-  org playloopsound(alias);
+  org playLoopSound(alias);
   level waittill(ender);
   org stoploopsound();
   wait 0.1;
@@ -1003,7 +1002,7 @@ fire_effect() {
   if(isDefined(firefxsound))
     level thread loop_fx_sound(firefxsound, origin, ender, timeout);
 
-  playfx(level._effect[firefx], self.v["origin"], forward, up);
+  playFX(level._effect[firefx], self.v["origin"], forward, up);
 }
 
 loop_sound_delete(ender, ent) {
@@ -1174,7 +1173,7 @@ registerclientsys(ssysname) {
 
     return;
   } else {
-    level._clientsys[ssysname] = spawnstruct();
+    level._clientsys[ssysname] = spawnStruct();
     level._clientsys[ssysname].sysid = clientsysregister(ssysname);
   }
 }
@@ -1387,7 +1386,7 @@ getfx(fx) {
 }
 
 struct_arrayspawn() {
-  struct = spawnstruct();
+  struct = spawnStruct();
   struct.array = [];
   struct.lastindex = 0;
   return struct;
@@ -1468,9 +1467,7 @@ comparesizesfx(org, array, dist, comparefunc) {
     for(i = 0; i < keys.size; i++) {
       newdistsqr = distancesquared(array[keys[i]].v["origin"], org);
 
-      if([
-          [comparefunc]
-        ](newdistsqr, distsqr)) {
+      if([[comparefunc]](newdistsqr, distsqr)) {
         continue;
       }
       distsqr = newdistsqr;
@@ -1514,9 +1511,7 @@ comparesizes(org, array, dist, comparefunc) {
       }
       newdistsqr = distancesquared(array[keys[i]].origin, org);
 
-      if([
-          [comparefunc]
-        ](newdistsqr, distsqr)) {
+      if([[comparefunc]](newdistsqr, distsqr)) {
         continue;
       }
       distsqr = newdistsqr;
@@ -2080,8 +2075,8 @@ isrankenabled() {
 playsmokesound(position, duration, startsound, stopsound, loopsound) {
   smokesound = spawn("script_origin", (0, 0, 1));
   smokesound.origin = position;
-  smokesound playsound(startsound);
-  smokesound playloopsound(loopsound);
+  smokesound playSound(startsound);
+  smokesound playLoopSound(loopsound);
 
   if(duration > 0.5)
     wait(duration - 0.5);
@@ -2103,7 +2098,7 @@ playsoundinspace(alias, origin, master) {
   if(isDefined(master) && master)
     org playsoundasmaster(alias);
   else
-    org playsound(alias);
+    org playSound(alias);
 
   wait 10.0;
   org delete();

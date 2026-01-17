@@ -7,7 +7,7 @@
 evasive_think(var_0) {
   var_0 endon("death");
 
-  while (var_0.health > 0) {
+  while(var_0.health > 0) {
     var_0 waittill("missile_lock", var_1);
     var_2 = evasive_createmaneuvers(var_0, "random");
     evasive_startmaneuvers(var_0, var_2);
@@ -72,8 +72,8 @@ evasive_startmaneuvers(var_0, var_1) {
   var_0 vehicle_setspeed(100, 30, 30);
   var_2 = var_0.angles[1];
 
-  for (var_3 = 1; var_3 < var_1.size; var_3++) {
-    if(isdefined(var_1[var_3 + 1]))
+  for(var_3 = 1; var_3 < var_1.size; var_3++) {
+    if(isDefined(var_1[var_3 + 1]))
       var_4 = vectortoangles(var_1[var_3 + 1]["pos"] - var_1[var_3]["pos"]);
     else
       var_4 = (0, var_2, 0);
@@ -86,7 +86,7 @@ evasive_startmaneuvers(var_0, var_1) {
       var_5 = var_0.angles[1];
 
     if(getdvar("cobrapilot_debug") == "1")
-      thread maps\_utility::draw_line_until_notify(var_1[var_3]["pos"], var_1[var_3]["pos"] + anglestoforward((0, var_5, 0)) * 250, 1.0, 1.0, 0.2, var_0, "evasive_action_done");
+      thread maps\_utility::draw_line_until_notify(var_1[var_3]["pos"], var_1[var_3]["pos"] + anglesToForward((0, var_5, 0)) * 250, 1.0, 1.0, 0.2, var_0, "evasive_action_done");
 
     var_0 settargetyaw(var_5);
     var_0 thread maps\_vehicle_code::setvehgoalpos_wrap(var_1[var_3]["pos"], 0);
@@ -107,7 +107,7 @@ evasive_endmaneuvers(var_0) {
 }
 
 evasive_addpoint(var_0, var_1, var_2, var_3) {
-  if(!isdefined(self.evasive_points)) {
+  if(!isDefined(self.evasive_points)) {
     self.evasive_points = [];
     self.evasive_points[0]["pos"] = self.origin;
     self.evasive_points[0]["ang"] = (0, self.angles[1], 0);
@@ -115,16 +115,16 @@ evasive_addpoint(var_0, var_1, var_2, var_3) {
 
   var_4 = self.evasive_points.size;
 
-  if(!isdefined(var_3))
+  if(!isDefined(var_3))
     var_3 = "none";
 
-  if(!isdefined(var_2))
+  if(!isDefined(var_2))
     var_2 = 0;
 
   self.evasive_points[var_4]["forward"] = var_0;
   self.evasive_points[var_4]["side"] = var_1;
   self.evasive_points[var_4]["up"] = var_2;
-  var_5 = anglestoforward(self.evasive_points[0]["ang"]);
+  var_5 = anglesToForward(self.evasive_points[0]["ang"]);
   var_6 = anglestoright(self.evasive_points[0]["ang"]);
   self.evasive_points[var_4]["pos"] = self.evasive_points[var_4 - 1]["pos"] + var_5 * self.evasive_points[var_4]["forward"] + var_6 * self.evasive_points[var_4]["side"] + (0, 0, var_2);
   self.evasive_points[var_4]["goalYawMethod"] = var_3;
@@ -137,7 +137,7 @@ evasive_getallpoints(var_0) {
 }
 
 evasive_drawpoints(var_0) {
-  for (var_1 = 1; var_1 < var_0.size; var_1++)
+  for(var_1 = 1; var_1 < var_0.size; var_1++)
     thread maps\_utility::draw_line_until_notify(var_0[var_1 - 1]["pos"], var_0[var_1]["pos"], 1.0, 0.2, 0.2, self, "evasive_action_done");
 }
 
@@ -160,7 +160,7 @@ wingman_think(var_0) {
   var_0 settargetyaw(level.playervehicle.angles[1]);
   var_0 setvehgoalpos(var_12, 1);
 
-  for (;;) {
+  for(;;) {
     var_12 = wingman_getgoalpos(var_1, var_2, var_3);
 
     if(getdvar("cobrapilot_debug") == "1") {
@@ -217,7 +217,7 @@ wingman_think(var_0) {
 }
 
 wingman_getgoalpos(var_0, var_1, var_2) {
-  var_3 = anglestoforward(common_scripts\utility::flat_angle(level.playervehicle.angles));
+  var_3 = anglesToForward(common_scripts\utility::flat_angle(level.playervehicle.angles));
   var_4 = anglestoright(common_scripts\utility::flat_angle(level.playervehicle.angles));
   var_5 = level.playervehicle.origin + var_3 * var_0 + var_4 * var_1 + (0, 0, var_2);
   return var_5;

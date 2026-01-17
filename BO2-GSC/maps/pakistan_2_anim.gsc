@@ -497,12 +497,12 @@ door_shut_rumble(truck) {
 }
 
 rooftop_melee_bloodfx(guard) {
-  playfxontag(getfx("melee_knife_blood_player"), guard, "J_Head");
+  playFXOnTag(getfx("melee_knife_blood_player"), guard, "J_Head");
   level.player playrumbleonentity("grenade_rumble");
   wait 1;
-  playfxontag(getfx("melee_knife_blood_player"), guard, "J_NECK");
+  playFXOnTag(getfx("melee_knife_blood_player"), guard, "J_NECK");
   level waittill("knife_pullout");
-  playfxontag(getfx("melee_knife_blood_player"), guard, "J_NECK");
+  playFXOnTag(getfx("melee_knife_blood_player"), guard, "J_NECK");
 }
 
 rooftop_melee_knifeout(player) {
@@ -511,7 +511,7 @@ rooftop_melee_knifeout(player) {
 }
 
 tower_guard_bloodfx(guard) {
-  playfxontag(getfx("melee_knife_blood_player"), guard, "J_Head");
+  playFXOnTag(getfx("melee_knife_blood_player"), guard, "J_Head");
 }
 
 incendiary_grenade_explosion(e_temp) {

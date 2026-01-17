@@ -69,7 +69,7 @@ init_spawns() {
 initkillstreak() {
   if(maps\mp\gametypes\_tweakables::gettweakablevalue("killstreak", "allowdogs")) {
     maps\mp\killstreaks\_killstreaks::registerkillstreak("dogs_mp", "dogs_mp", "killstreak_dogs", "dogs_used", ::usekillstreakdogs, 1);
-    maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("dogs_mp", & "KILLSTREAK_EARNED_DOGS", & "KILLSTREAK_DOGS_NOT_AVAILABLE", & "KILLSTREAK_DOGS_INBOUND");
+    maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("dogs_mp", &"KILLSTREAK_EARNED_DOGS", &"KILLSTREAK_DOGS_NOT_AVAILABLE", &"KILLSTREAK_DOGS_INBOUND");
     maps\mp\killstreaks\_killstreaks::registerkillstreakdialog("dogs_mp", "mpl_killstreak_dogs", "kls_dogs_used", "", "kls_dogs_enemy", "", "kls_dogs_ready");
     maps\mp\killstreaks\_killstreaks::registerkillstreakdevdvar("dogs_mp", "scr_givedogs");
     maps\mp\killstreaks\_killstreaks::setkillstreakteamkillpenaltyscale("dogs_mp", 0.0);
@@ -146,7 +146,7 @@ dog_killstreak_init() {
 }
 
 dog_set_model() {
-  self setmodel("german_shepherd_vest");
+  self setModel("german_shepherd_vest");
   self setenemymodel("german_shepherd_vest_black");
 }
 
@@ -389,7 +389,7 @@ dog_patrol_near_objective() {
     level.dog_objectives = [];
 
     foreach(target in level.dog_targets) {
-      ents = getentarray(target, "classname");
+      ents = getEntArray(target, "classname");
 
       foreach(ent in ents) {
         if(level.gametype == "koth") {
@@ -466,7 +466,7 @@ dog_patrol_near_enemy() {
 }
 
 dog_manager_get_dogs() {
-  dogs = getentarray("attack_dog", "targetname");
+  dogs = getEntArray("attack_dog", "targetname");
   return dogs;
 }
 
@@ -510,7 +510,7 @@ trackattackerdamage(attacker, weapon) {
   }
 
   if(!isDefined(self.attackerdata[attacker.clientid])) {
-    self.attackerclientid[attacker.clientid] = spawnstruct();
+    self.attackerclientid[attacker.clientid] = spawnStruct();
     self.attackers[self.attackers.size] = attacker;
   }
 }
@@ -658,11 +658,11 @@ devgui_dog_spawn(team) {
   }
 
   direction = player getplayerangles();
-  direction_vec = anglestoforward(direction);
-  eye = player geteye();
+  direction_vec = anglesToForward(direction);
+  eye = player getEye();
   scale = 8000;
   direction_vec = (direction_vec[0] * scale, direction_vec[1] * scale, direction_vec[2] * scale);
-  trace = bullettrace(eye, eye + direction_vec, 0, undefined);
+  trace = bulletTrace(eye, eye + direction_vec, 0, undefined);
   nodes = getnodesinradius(trace["position"], 256, 0, 128, "Path", 8);
 
   if(!nodes.size) {
@@ -706,9 +706,9 @@ devgui_dog_camera() {
     }
 
     if(!isDefined(dog.cam)) {
-      forward = anglestoforward(dog.angles);
+      forward = anglesToForward(dog.angles);
       dog.cam = spawn("script_model", dog.origin + vectorscale((0, 0, 1), 50.0) + forward * -100);
-      dog.cam setmodel("tag_origin");
+      dog.cam setModel("tag_origin");
       dog.cam linkto(dog);
     }
 
@@ -735,11 +735,11 @@ devgui_dog_camera() {
 devgui_crate_spawn() {
   player = gethostplayer();
   direction = player getplayerangles();
-  direction_vec = anglestoforward(direction);
-  eye = player geteye();
+  direction_vec = anglesToForward(direction);
+  eye = player getEye();
   scale = 8000;
   direction_vec = (direction_vec[0] * scale, direction_vec[1] * scale, direction_vec[2] * scale);
-  trace = bullettrace(eye, eye + direction_vec, 0, undefined);
+  trace = bulletTrace(eye, eye + direction_vec, 0, undefined);
   killcament = spawn("script_model", player.origin);
   level thread maps\mp\killstreaks\_supplydrop::dropcrate(trace["position"] + vectorscale((0, 0, 1), 25.0), direction, "supplydrop_mp", player, player.team, killcament);
 }

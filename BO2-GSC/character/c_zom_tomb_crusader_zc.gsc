@@ -4,7 +4,7 @@
 ************************************************/
 
 main() {
-  self setmodel("c_zom_tomb_crusader_body_zc");
+  self setModel("c_zom_tomb_crusader_body_zc");
   self.headmodel = "c_zom_tomb_crusader_headz";
   self attach(self.headmodel, "", 1);
   self.hatmodel = "c_zom_tomb_crusader_hat_3";

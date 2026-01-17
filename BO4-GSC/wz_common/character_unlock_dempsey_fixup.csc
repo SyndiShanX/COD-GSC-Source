@@ -5,15 +5,14 @@
 
 #include scripts\core_common\system_shared;
 #include scripts\wz_common\character_unlock_fixup;
-
 #namespace character_unlock_dempsey_fixup;
 
 autoexec __init__system__() {
-  system::register(#"character_unlock_dempsey_fixup", &__init__, undefined, #"character_unlock_fixup");
+  system::register(#"character_unlock_dempsey_fixup", &__init__, undefined, # "character_unlock_fixup");
 }
 
 __init__() {
-  character_unlock_fixup::register_character_unlock(#"dempsey_unlock", #"hash_23d5f8566508f9f5", #"cu15_item", &function_d95e620c, #"hash_557b228047615fb0");
+  character_unlock_fixup::register_character_unlock(#"dempsey_unlock", # "hash_23d5f8566508f9f5", # "cu15_item", &function_d95e620c, # "hash_557b228047615fb0");
 }
 
 function_d95e620c() {

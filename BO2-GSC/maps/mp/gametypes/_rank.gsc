@@ -108,7 +108,7 @@ initscoreinfo() {
         ismedal = 0;
         istring = tablelookupistring(scoreinfotableid, 0, type, 2);
 
-        if(isDefined(istring) && istring != & "")
+        if(isDefined(istring) && istring != &"")
           ismedal = 1;
 
         demobookmarkpriority = int(tablelookupcolumnforrow(scoreinfotableid, row, 6));
@@ -568,10 +568,10 @@ updaterankscorehud(amount) {
 
   if(isDefined(self.hud_rankscroreupdate)) {
     if(self.rankupdatetotal < 0) {
-      self.hud_rankscroreupdate.label = & "";
+      self.hud_rankscroreupdate.label = &"";
       self.hud_rankscroreupdate.color = (0.73, 0.19, 0.19);
     } else {
-      self.hud_rankscroreupdate.label = & "MP_PLUS";
+      self.hud_rankscroreupdate.label = &"MP_PLUS";
       self.hud_rankscroreupdate.color = (1, 1, 0.5);
     }
 
@@ -599,10 +599,10 @@ updatemomentumhud(amount, reason, reasonvalue) {
 
   if(isDefined(self.hud_rankscroreupdate)) {
     if(self.rankupdatetotal < 0) {
-      self.hud_rankscroreupdate.label = & "";
+      self.hud_rankscroreupdate.label = &"";
       self.hud_rankscroreupdate.color = (0.73, 0.19, 0.19);
     } else {
-      self.hud_rankscroreupdate.label = & "MP_PLUS";
+      self.hud_rankscroreupdate.label = &"MP_PLUS";
       self.hud_rankscroreupdate.color = (1, 1, 0.5);
     }
 

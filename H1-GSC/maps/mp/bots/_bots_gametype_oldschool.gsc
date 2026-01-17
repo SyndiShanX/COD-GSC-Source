@@ -8,17 +8,17 @@ bot_oldschool_init() {
   if(!level.oldschool) {
     return;
   }
-  while (!isdefined(level.allpickupstracked))
+  while(!isDefined(level.allpickupstracked))
     wait 0.05;
 
   level.bot_oldschool_pickup_struct_array = [];
-  var_0 = getentarray("oldschool_pickup", "targetname");
+  var_0 = getEntArray("oldschool_pickup", "targetname");
 
   foreach(var_2 in var_0) {
-    if(isdefined(var_2.script_parameters) && var_2.script_parameters == "bots_ignore") {
+    if(isDefined(var_2.script_parameters) && var_2.script_parameters == "bots_ignore") {
       continue;
     }
-    var_3 = spawnstruct();
+    var_3 = spawnStruct();
     var_3.origin = var_2.origin;
     var_3.nearest_node = bot_oldschool_pickup_get_nearest_node(var_2);
     var_3.ground_pos = var_2.groundpoint;
@@ -37,7 +37,7 @@ bot_oldschool_init() {
 
   maps\mp\bots\_bots_util::bot_waittill_bots_enabled();
 
-  if(!isdefined(level.bot_oldschool_primary_weapon_priorities)) {
+  if(!isDefined(level.bot_oldschool_primary_weapon_priorities)) {
     level.bot_oldschool_primary_weapon_priorities["camper"] = [];
     level.bot_oldschool_primary_weapon_priorities["camper"]["pistol"] = 0;
     level.bot_oldschool_primary_weapon_priorities["camper"]["spread"] = 2;
@@ -61,7 +61,7 @@ bot_oldschool_init() {
     level.bot_oldschool_primary_weapon_priorities["run_and_gun"]["mg"] = 10;
   }
 
-  if(!isdefined(level.bot_oldschool_secondary_weapon_priorities)) {
+  if(!isDefined(level.bot_oldschool_secondary_weapon_priorities)) {
     level.bot_oldschool_secondary_weapon_priorities["camper"] = [];
     level.bot_oldschool_secondary_weapon_priorities["camper"]["rifle"] = 0;
     level.bot_oldschool_secondary_weapon_priorities["camper"]["mg"] = 0;
@@ -85,31 +85,31 @@ bot_oldschool_init() {
     level.bot_oldschool_secondary_weapon_priorities["run_and_gun"]["pistol"] = 10;
   }
 
-  if(!isdefined(level.bot_oldschool_pickup_memory_time_seen)) {
+  if(!isDefined(level.bot_oldschool_pickup_memory_time_seen)) {
     level.bot_oldschool_pickup_memory_time_seen["recruit"] = 10000;
     level.bot_oldschool_pickup_memory_time_seen["regular"] = 20000;
     level.bot_oldschool_pickup_memory_time_seen["hardened"] = 30000;
   }
 
-  if(!isdefined(level.bot_oldschool_pickup_memory_picked_up)) {
+  if(!isDefined(level.bot_oldschool_pickup_memory_picked_up)) {
     level.bot_oldschool_pickup_memory_picked_up["recruit"] = 20000;
     level.bot_oldschool_pickup_memory_picked_up["regular"] = 40000;
     level.bot_oldschool_pickup_memory_picked_up["hardened"] = 60000;
   }
 
-  if(!isdefined(level.bot_oldschool_pickup_close_radius_self_sq))
+  if(!isDefined(level.bot_oldschool_pickup_close_radius_self_sq))
     level.bot_oldschool_pickup_close_radius_self_sq = 490000;
 
-  if(!isdefined(level.bot_oldschool_pickup_close_obj_radius_self_sq))
+  if(!isDefined(level.bot_oldschool_pickup_close_obj_radius_self_sq))
     level.bot_oldschool_pickup_close_obj_radius_self_sq = 250000;
 
-  if(!isdefined(level.bot_oldschool_pickup_close_crit_radius_self_sq))
+  if(!isDefined(level.bot_oldschool_pickup_close_crit_radius_self_sq))
     level.bot_oldschool_pickup_close_crit_radius_self_sq = 160000;
 
-  if(!isdefined(level.bot_oldschool_use_radius_sq))
+  if(!isDefined(level.bot_oldschool_use_radius_sq))
     level.bot_oldschool_use_radius_sq = squared(getdvarfloat("player_useRadius"));
 
-  if(!isdefined(level.bot_oldschool_weapon_switch_time)) {
+  if(!isDefined(level.bot_oldschool_weapon_switch_time)) {
     level.bot_oldschool_weapon_switch_time["veteran"]["min"] = 0.75;
     level.bot_oldschool_weapon_switch_time["veteran"]["max"] = 0.85;
     level.bot_oldschool_weapon_switch_time["hardened"]["min"] = 0.85;
@@ -120,7 +120,7 @@ bot_oldschool_init() {
     level.bot_oldschool_weapon_switch_time["recruit"]["max"] = 2.0;
   }
 
-  if(!isdefined(level.bot_oldschool_weapon_pickup_time)) {
+  if(!isDefined(level.bot_oldschool_weapon_pickup_time)) {
     level.bot_oldschool_weapon_pickup_time["veteran"]["min"] = 0.5;
     level.bot_oldschool_weapon_pickup_time["veteran"]["max"] = 0.6;
     level.bot_oldschool_weapon_pickup_time["hardened"]["min"] = 0.6;
@@ -131,7 +131,7 @@ bot_oldschool_init() {
     level.bot_oldschool_weapon_pickup_time["recruit"]["max"] = 2.5;
   }
 
-  if(!isdefined(level.bot_oldschool_perk_pickup_time)) {
+  if(!isDefined(level.bot_oldschool_perk_pickup_time)) {
     level.bot_oldschool_perk_pickup_time["veteran"]["min"] = 0.05;
     level.bot_oldschool_perk_pickup_time["veteran"]["max"] = 0.1;
     level.bot_oldschool_perk_pickup_time["hardened"]["min"] = 0.1;
@@ -160,10 +160,10 @@ bot_think_oldschool() {
 }
 
 bot_oldschool_pickup_get_nearest_node(var_0) {
-  if(!isdefined(var_0.calculated_nearest_node)) {
+  if(!isDefined(var_0.calculated_nearest_node)) {
     var_0.nearest_node = getclosestnodeinsight(var_0.origin);
 
-    if(!isdefined(var_0.nearest_node))
+    if(!isDefined(var_0.nearest_node))
       var_0.nearest_node = getclosestnodeinsight(var_0.groundpoint);
 
     var_0.calculated_nearest_node = 1;
@@ -173,7 +173,7 @@ bot_oldschool_pickup_get_nearest_node(var_0) {
 }
 
 bot_oldschool_init_pickups() {
-  while (!isdefined(level.bot_oldschool_pickup_struct_array))
+  while(!isDefined(level.bot_oldschool_pickup_struct_array))
     wait 0.05;
 
   self.pickup_array = [];
@@ -181,7 +181,7 @@ bot_oldschool_init_pickups() {
   var_1 = var_0 / 3.0;
 
   foreach(var_3 in level.bot_oldschool_pickup_struct_array) {
-    var_4 = spawnstruct();
+    var_4 = spawnStruct();
     var_4.parent = var_3;
     var_4.origin = var_3.origin;
     var_4.nearest_node = var_3.nearest_node;
@@ -203,19 +203,19 @@ bot_oldschool_track_pickups_in_sight() {
   self endon("disconnect");
   level endon("game_ended");
 
-  if(isdefined(self.pickup_array)) {
+  if(isDefined(self.pickup_array)) {
     return;
   }
   bot_oldschool_init_pickups();
   var_0 = self botgetdifficultysetting("averageEnemySightTime") / 1000.0;
   var_1 = var_0 * 0.7;
 
-  for (;;) {
+  for(;;) {
     var_2 = common_scripts\utility::random([0.1, 0.15, 0.2]);
     wait(var_2);
     var_3 = self getnearestnode();
 
-    if(!isdefined(var_3)) {
+    if(!isDefined(var_3)) {
       continue;
     }
     var_4 = gettime();
@@ -223,7 +223,7 @@ bot_oldschool_track_pickups_in_sight() {
     var_6 = self _meth_8576();
 
     foreach(var_8 in self.pickup_array) {
-      if(!isdefined(var_8.pickup))
+      if(!isDefined(var_8.pickup))
         var_8.pickup = bot_oldschool_get_pickup_ent_for_struct(var_8);
 
       var_9 = 0;
@@ -237,7 +237,7 @@ bot_oldschool_track_pickups_in_sight() {
       if(var_9) {
         if(var_8.sight_time < var_1) {
           var_10 = vectornormalize(var_8.origin - self.origin);
-          var_11 = anglestoforward(self getplayerangles());
+          var_11 = anglesToForward(self getplayerangles());
           var_12 = vectordot(var_10, var_11);
           var_13 = clamp((var_12 - var_5) / (1.0 - var_5), 0.0, 1.0);
           var_14 = distance(self.origin, var_8.origin);
@@ -251,7 +251,7 @@ bot_oldschool_track_pickups_in_sight() {
       if(var_8.sight_time >= var_1) {
         var_8.last_time_seen = var_4;
 
-        if(!isdefined(var_8.pickup)) {
+        if(!isDefined(var_8.pickup)) {
           bot_oldschool_update_pickup_recharge_time(var_4, var_8);
           continue;
         }
@@ -273,7 +273,7 @@ bot_oldschool_track_pickups_in_sight() {
 bot_oldschool_handle_pickup_goals() {
   var_0 = undefined;
 
-  for (;;) {
+  for(;;) {
     wait 0.5;
 
     if(!isalive(self) || maps\mp\_utility::is_true(self.inlaststand) || maps\mp\bots\_bots_util::bot_is_remote_or_linked() || self usebuttonpressed()) {
@@ -302,7 +302,7 @@ bot_oldschool_handle_pickup_goals() {
     if(maps\mp\bots\_bots_util::bot_in_combat(1000)) {
       continue;
     }
-    if(isdefined(self.role) && self.role == "defuser") {
+    if(isDefined(self.role) && self.role == "defuser") {
       continue;
     }
     var_4 = gettime();
@@ -320,7 +320,7 @@ bot_oldschool_handle_pickup_goals() {
 
     var_9 = common_scripts\utility::get_array_of_closest(self.origin, var_5);
 
-    if(isdefined(var_0))
+    if(isDefined(var_0))
       var_10 = var_0;
     else {
       var_10 = "normal";
@@ -353,13 +353,11 @@ bot_oldschool_handle_pickup_goals() {
           var_11["action"] = "pickup_perk";
           break;
         }
-      } else {
-
-      }
+      } else {}
     }
 
     if(var_1.size > 0) {
-      if(isdefined(var_11) && maps\mp\bots\_bots_strategy::bot_has_tactical_goal("oldschool_pickup", var_11["pickup_struct"])) {
+      if(isDefined(var_11) && maps\mp\bots\_bots_strategy::bot_has_tactical_goal("oldschool_pickup", var_11["pickup_struct"])) {
         continue;
       }
       var_15 = distancesquared(self.origin, var_1[0].object.origin);
@@ -371,8 +369,8 @@ bot_oldschool_handle_pickup_goals() {
       wait 0.25;
     }
 
-    if(isdefined(var_11)) {
-      var_16 = spawnstruct();
+    if(isDefined(var_11)) {
+      var_16 = spawnStruct();
       var_16.object = var_11["pickup_struct"];
       var_16.script_goal_radius = 40;
       var_16.should_abort = ::bot_oldschool_pickup_deleted;
@@ -390,9 +388,7 @@ bot_oldschool_handle_pickup_goals() {
         var_16.action_thread = ::bot_oldschool_pickup_perk;
       else if(var_11["action"] == "pickup_ammo")
         var_16.action_thread = ::bot_oldschool_pickup_ammo;
-      else {
-
-      }
+      else {}
 
       maps\mp\bots\_bots_strategy::bot_new_tactical_goal("oldschool_pickup", var_11["pickup_struct"].ground_pos, 20, var_16);
       var_0 = var_10;
@@ -432,7 +428,7 @@ bot_oldschool_can_currently_see_pickup(var_0, var_1) {
 }
 
 bot_oldschool_get_pickup_ent_for_struct(var_0) {
-  var_1 = getentarray("oldschool_pickup", "targetname");
+  var_1 = getEntArray("oldschool_pickup", "targetname");
 
   foreach(var_3 in var_1) {
     if(distance2dsquared(var_0.origin, var_3.origin) < 16)
@@ -535,15 +531,15 @@ bot_oldschool_should_pursue_pickup(var_0, var_1) {
 
 bot_oldschool_pickup_weapon(var_0) {
   if(maps\mp\bots\_bots_util::bot_in_combat(1000)) {
-    while (maps\mp\bots\_bots_util::bot_in_combat(1000))
+    while(maps\mp\bots\_bots_util::bot_in_combat(1000))
       wait 0.05;
   } else {
     var_1 = randomfloatrange(level.bot_oldschool_weapon_pickup_time[self.difficulty]["min"], level.bot_oldschool_weapon_pickup_time[self.difficulty]["max"]) * 0.5;
     wait(var_1);
   }
 
-  if(isdefined(var_0.object) && !bot_oldschool_pickup_is_recharging(gettime(), var_0.object)) {
-    if(isdefined(var_0.optional_params)) {
+  if(isDefined(var_0.object) && !bot_oldschool_pickup_is_recharging(gettime(), var_0.object)) {
+    if(isDefined(var_0.optional_params)) {
       var_2 = self getcurrentweapon() != var_0.optional_params;
       self switchtoweapon(var_0.optional_params);
 
@@ -556,7 +552,7 @@ bot_oldschool_pickup_weapon(var_0) {
     self botpressbutton("use", 1.0);
     var_4 = gettime();
 
-    while (!self hasweapon(var_0.object.weaponname) && gettime() - var_4 < 1000.0 || gettime() - var_4 <= 100)
+    while(!self hasweapon(var_0.object.weaponname) && gettime() - var_4 < 1000.0 || gettime() - var_4 <= 100)
       wait 0.05;
 
     var_5 = randomfloatrange(level.bot_oldschool_weapon_pickup_time[self.difficulty]["min"], level.bot_oldschool_weapon_pickup_time[self.difficulty]["max"]);
@@ -585,18 +581,18 @@ bot_oldschool_pickup_ammo(var_0) {
 
 bot_oldschool_pickup_perk(var_0) {
   if(maps\mp\bots\_bots_util::bot_in_combat(1000)) {
-    while (maps\mp\bots\_bots_util::bot_in_combat(1000))
+    while(maps\mp\bots\_bots_util::bot_in_combat(1000))
       wait 0.05;
   } else {
     var_1 = randomfloatrange(level.bot_oldschool_perk_pickup_time[self.difficulty]["min"], level.bot_oldschool_perk_pickup_time[self.difficulty]["max"]) * 0.5;
     wait(var_1);
   }
 
-  if(isdefined(var_0.object) && !bot_oldschool_pickup_is_recharging(gettime(), var_0.object)) {
+  if(isDefined(var_0.object) && !bot_oldschool_pickup_is_recharging(gettime(), var_0.object)) {
     self botpressbutton("use", 1.0);
     var_2 = gettime();
 
-    while (!maps\mp\_utility::_hasperk(var_0.object.perkname) && gettime() - var_2 < 1000.0 || gettime() - var_2 <= 100)
+    while(!maps\mp\_utility::_hasperk(var_0.object.perkname) && gettime() - var_2 < 1000.0 || gettime() - var_2 <= 100)
       wait 0.05;
 
     var_3 = randomfloatrange(level.bot_oldschool_perk_pickup_time[self.difficulty]["min"], level.bot_oldschool_perk_pickup_time[self.difficulty]["max"]);
@@ -608,7 +604,7 @@ bot_oldschool_pickup_perk(var_0) {
 }
 
 bot_oldschool_pickup_deleted(var_0) {
-  if(!isdefined(var_0.object) || bot_oldschool_pickup_is_recharging(gettime(), var_0.object))
+  if(!isDefined(var_0.object) || bot_oldschool_pickup_is_recharging(gettime(), var_0.object))
     return 1;
 
   return 0;
@@ -786,9 +782,9 @@ bot_oldschool_pickup_is_probably_visible(var_0, var_1, var_2, var_3) {
   if(!nodesvisible(var_0.nearest_node, var_1, 1))
     return 0;
 
-  var_4 = var_0.origin - self geteye();
+  var_4 = var_0.origin - self getEye();
   var_5 = lengthsquared(var_4);
-  var_6 = anglestoforward(self getplayerangles());
+  var_6 = anglesToForward(self getplayerangles());
   var_7 = vectordot(var_4, var_6);
 
   if(var_7 < 0 || var_7 * var_7 < var_5 * var_2 * var_2)
@@ -807,10 +803,10 @@ bot_oldschool_pickup_is_probably_visible(var_0, var_1, var_2, var_3) {
 }
 
 bot_oldschool_pickup_trace_passed(var_0) {
-  if(sighttracepassed(self geteye(), var_0.origin + (0, 0, 30), 1, self, var_0.pickup, 0))
+  if(sighttracepassed(self getEye(), var_0.origin + (0, 0, 30), 1, self, var_0.pickup, 0))
     return 1;
 
-  return sighttracepassed(self geteye(), var_0.origin, 1, self, var_0.pickup, 0);
+  return sighttracepassed(self getEye(), var_0.origin, 1, self, var_0.pickup, 0);
 }
 
 oldschool_attempt_camp_pickup() {

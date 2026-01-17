@@ -93,16 +93,16 @@ scene_afghanistan_models() {
   afghani_models = [];
   base = spawn("script_model", (0, 0, 0));
   base.angles = vectorscale((0, 1, 0), 90.0);
-  base setmodel("p6_hologram_af_base_map");
+  base setModel("p6_hologram_af_base_map");
   afghani_models[afghani_models.size] = base;
   base play_fx("fx_dockside_base", base.origin, base.angles, "stop_geo_fx", 1, "tag_origin");
   cougar = spawn("script_model", (0, 0, 0));
   cougar.angles = (0, 0, 0);
-  cougar setmodel("p6_hologram_cougar_combined");
+  cougar setModel("p6_hologram_cougar_combined");
   afghani_models[afghani_models.size] = cougar;
   arrow = spawn("script_model", (0, 0, 0));
   arrow.angles = (0, 0, 0);
-  arrow setmodel("p6_hologram_af_path_arrow");
+  arrow setModel("p6_hologram_af_path_arrow");
   afghani_models[afghani_models.size] = arrow;
 
   for(i = 0; i < afghani_models.size; i++)

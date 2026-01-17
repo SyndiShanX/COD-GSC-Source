@@ -150,7 +150,7 @@ sam_cougar_think() {
   self set_turret_ignore_line_of_sight(1, 2);
   self setbrake(1);
   e_target = spawn_model("veh_t6_air_fa38_low");
-  e_target.origin = self.origin + vectorscale((0, 0, 1), 1000.0) + anglestoforward(self.angles) * 50000;
+  e_target.origin = self.origin + vectorscale((0, 0, 1), 1000.0) + anglesToForward(self.angles) * 50000;
   e_target hide();
   self maps\_turret::set_turret_target(e_target, (0, 0, 0), 2);
 
@@ -158,7 +158,7 @@ sam_cougar_think() {
     n_yaw_delta = randomfloatrange(-45, 45);
     n_pitch_delta = randomfloatrange(-35, -20);
     v_direction = self.angles + (n_pitch_delta, n_yaw_delta, 0);
-    v_origin = self.origin + anglestoforward(v_direction) * randomintrange(40000, 60000);
+    v_origin = self.origin + anglesToForward(v_direction) * randomintrange(40000, 60000);
     e_target moveto(v_origin, 4.0);
 
     if(randomint(100) < 25) {
@@ -192,7 +192,7 @@ laser_turret_fire() {
   self endon("death");
 
   while(true) {
-    playfxontag(level._effect["laser_turret_shoot"], self, "tag_flash");
+    playFXOnTag(level._effect["laser_turret_shoot"], self, "tag_flash");
     wait(randomfloatrange(4.0, 6.0));
   }
 }
@@ -206,8 +206,8 @@ laser_turret_challenge() {
 }
 
 main_entrance_shutters() {
-  a_m_outermost_doors = getentarray("sec_gate_side_01", "targetname");
-  a_m_middle_doors = getentarray("sec_gate_side_02", "targetname");
+  a_m_outermost_doors = getEntArray("sec_gate_side_01", "targetname");
+  a_m_middle_doors = getEntArray("sec_gate_side_02", "targetname");
   m_center_door = getent("sec_gate_mid", "targetname");
 
   foreach(m_door in a_m_outermost_doors)
@@ -366,7 +366,7 @@ walkway_collapse() {
   level notify("fxanim_catwalk_vtol_start");
   wait 0.05;
   m_vtol = getent("fxanim_catwalk_vtol", "targetname");
-  playfxontag(level._effect["crash_vtol_trail"], m_vtol, "engine_l_left_flap_anim_jnt");
+  playFXOnTag(level._effect["crash_vtol_trail"], m_vtol, "engine_l_left_flap_anim_jnt");
   wait 3.0;
   level notify("fxanim_catwalk_collapse_start");
   m_walkway = getent("fxanim_catwalk_collapse", "targetname");
@@ -386,7 +386,7 @@ garage() {
   level thread tigr_attack_dialog();
   wait 0.1;
   vh_tigr = getent("vn_tigr_attack1", "target");
-  vh_tigr playsound("evt_pickup_drive_in");
+  vh_tigr playSound("evt_pickup_drive_in");
   flag_wait("garage_start");
   level thread kill_and_cleanup_ents("cleanup_launchers");
   level thread kill_and_cleanup_ents("cleanup_ramp_shack");
@@ -424,7 +424,7 @@ west_walkway() {
   level thread west_walkway_support_northeast();
   level thread west_walkway_support_north();
   level thread walkway_support_dialog();
-  a_e_kill = getentarray("cleanup_lot_vees", "script_noteworthy");
+  a_e_kill = getEntArray("cleanup_lot_vees", "script_noteworthy");
   level thread kill_array(a_e_kill);
 }
 
@@ -667,7 +667,7 @@ intruder_perk() {
   t_perk trigger_on();
   set_objective_perk(level.obj_perk_intruder, t_perk);
   t_perk waittill("trigger");
-  a_vh_qr_old = getentarray("sp_battle_start_qr_allies", "targetname");
+  a_vh_qr_old = getEntArray("sp_battle_start_qr_allies", "targetname");
   level thread kill_array(a_vh_qr_old);
   a_vh_qr = spawn_vehicles_from_targetname("intruder_quadrotors");
   remove_objective_perk(level.obj_perk_intruder);

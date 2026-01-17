@@ -7,8 +7,7 @@
 #include clientscripts\createfx\so_tut_mp_drone_fx;
 #include clientscripts\_fx;
 
-precache_scripted_fx() {
-}
+precache_scripted_fx() {}
 
 precache_fxanim_props() {
   level.scr_anim["fxanim_props"] = [];

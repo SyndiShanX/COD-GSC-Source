@@ -46,7 +46,7 @@ function subway_main() {
     ai delete();
   }
   level clientfield::set("subway_entrance_crash", 1);
-  if(isdefined(level.bzm_blackstationdialogue3_5callback)) {
+  if(isDefined(level.bzm_blackstationdialogue3_5callback)) {
     level thread[[level.bzm_blackstationdialogue3_5callback]]();
   }
   a_s_subway = struct::get_array("player_subway_pos");
@@ -61,7 +61,7 @@ function function_eb060258() {
 }
 
 function function_27e6ca54() {
-  var_ec39b8a8 = getentarray("subway_corpse_floating", "targetname");
+  var_ec39b8a8 = getEntArray("subway_corpse_floating", "targetname");
   foreach(e_corpse in var_ec39b8a8) {
     e_corpse thread function_62437267();
   }
@@ -81,8 +81,8 @@ function function_c7ea2242() {
 function function_99f304f0() {
   self endon("death");
   self.var_15caaa0c = 0;
-  while (!level flag::get("flag_kane_intro_complete")) {
-    while (!self isplayerunderwater()) {
+  while(!level flag::get("flag_kane_intro_complete")) {
+    while(!self isplayerunderwater()) {
       wait(0.1);
     }
     if(!self.var_15caaa0c) {
@@ -91,7 +91,7 @@ function function_99f304f0() {
     }
     self clientfield::set_to_player("play_bubbles", 1);
     self fx::play("bubbles", self.origin, (0, 0, 0), "swim_done", 1, "j_spineupper");
-    while (self isplayerunderwater()) {
+    while(self isplayerunderwater()) {
       wait(0.1);
     }
     self clientfield::set_to_player("play_bubbles", 0);
@@ -124,12 +124,12 @@ function subway_dialog() {
 function hendricks_swimming() {
   level scene::init("cin_bla_08_02_subway_vign_swim_first_section");
   trigger::wait_till("trig_hendricks_swim");
-  level scene::add_scene_func("cin_bla_08_02_subway_vign_swim_first_section", & function_561cae8a, "play");
+  level scene::add_scene_func("cin_bla_08_02_subway_vign_swim_first_section", &function_561cae8a, "play");
   level scene::play("cin_bla_08_02_subway_vign_swim_first_section");
   level flag::wait_till("subway_second_section");
   level scene::play("cin_bla_08_02_subway_vign_swim_second_section");
   level flag::wait_till("subway_third_section");
-  level scene::add_scene_func("cin_bla_08_02_subway_vign_swim_third_section", & function_5f8ce82c, "done");
+  level scene::add_scene_func("cin_bla_08_02_subway_vign_swim_third_section", &function_5f8ce82c, "done");
   level scene::play("cin_bla_08_02_subway_vign_swim_third_section");
   if(!level flag::get("flag_waypoint_subway01")) {
     trigger::use("trig_hendricks_color_b2", "targetname");
@@ -151,8 +151,8 @@ function function_5f8ce82c(a_ents) {
 
 function subway_floating_bodies() {
   level endon("out_of_water");
-  e_floating_bodies = getentarray("subway_corpse_floating", "targetname");
-  array::thread_all(e_floating_bodies, & subway_floating_bodies_move);
+  e_floating_bodies = getEntArray("subway_corpse_floating", "targetname");
+  array::thread_all(e_floating_bodies, &subway_floating_bodies_move);
 }
 
 function subway_floating_bodies_move() {
@@ -160,7 +160,7 @@ function subway_floating_bodies_move() {
   self endon("death");
   e_body = self;
   n_rotate_angle = 60;
-  while (true) {
+  while(true) {
     e_body rotatepitch(n_rotate_angle, 5);
     wait(4.5);
   }

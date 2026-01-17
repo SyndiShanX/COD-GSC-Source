@@ -115,10 +115,10 @@ playground() {
 }
 
 slowview() {
-  for (;;) {
+  for(;;) {
     level waittill("slowview", var_0);
 
-    if(isdefined(var_0))
+    if(isDefined(var_0))
       wait(var_0);
 
     thread restart_slowview();
@@ -173,7 +173,7 @@ objective() {
   common_scripts\utility::flag_wait("awake");
   wait 4;
   var_0 = getent("radiac_equipment", "targetname");
-  objective_add(1, "active", & "AFTERMATH_OBJ_OFFICER", var_0.origin);
+  objective_add(1, "active", &"AFTERMATH_OBJ_OFFICER", var_0.origin);
   objective_current(1);
   var_1 = getent("officer", "targetname");
   var_1 waittill("trigger");
@@ -181,13 +181,13 @@ objective() {
   level.player thread player_jump_punishment();
   wait 3;
   var_0 = getent("overhead_cover", "targetname");
-  objective_add(2, "active", & "AFTERMATH_OBJ_SECURE_COVER", var_0.origin);
+  objective_add(2, "active", &"AFTERMATH_OBJ_SECURE_COVER", var_0.origin);
   objective_current(2);
   var_1 = getent("death_point", "targetname");
   var_1 waittill("trigger");
   var_2 = cos(30);
 
-  while (!common_scripts\utility::within_fov(level.player.origin, level.player getplayerangles(), var_0.origin, var_2))
+  while(!common_scripts\utility::within_fov(level.player.origin, level.player getplayerangles(), var_0.origin, var_2))
     wait 0.05;
 
   level.player radiation_death();
@@ -274,10 +274,10 @@ building_collapse_extra() {
   var_0 = getent("collapse_extra", "targetname");
   var_0 waittill("trigger", var_1);
 
-  while (common_scripts\utility::flag("building_collapse_side") || common_scripts\utility::flag("building_collapse_back"))
+  while(common_scripts\utility::flag("building_collapse_side") || common_scripts\utility::flag("building_collapse_back"))
     wait 0.05;
 
-  if(!isdefined(var_1) && !var_1)
+  if(!isDefined(var_1) && !var_1)
     building_collapse_wait_for_ready("collapse_center_1");
 
   building_collapse_active("building_collapse_extra");
@@ -312,8 +312,8 @@ building_collapse_wait_for_ready(var_0) {
   var_1 = getent(var_0, "targetname");
   var_2 = cos(45);
 
-  for (;;) {
-    while (!common_scripts\utility::within_fov(level.player.origin, level.player getplayerangles(), var_1.origin, var_2))
+  for(;;) {
+    while(!common_scripts\utility::within_fov(level.player.origin, level.player getplayerangles(), var_1.origin, var_2))
       wait 0.05;
 
     if(common_scripts\utility::flag("fall")) {
@@ -355,14 +355,14 @@ building_collapse() {
   var_0 = getent("building_collapse", "targetname");
   var_1 = cos(45);
 
-  while (!common_scripts\utility::within_fov(level.player.origin, level.player getplayerangles(), var_0.origin + (0, 0, -1000), var_1))
+  while(!common_scripts\utility::within_fov(level.player.origin, level.player getplayerangles(), var_0.origin + (0, 0, -1000), var_1))
     wait 0.05;
 
   common_scripts\utility::flag_waitopen("fall");
   common_scripts\utility::flag_set("collapse");
   level notify("stop_stumble");
   thread common_scripts\utility::play_sound_in_space("exp_building_collapse_dist", level.player.origin);
-  var_2 = getentarray(var_0.target, "targetname");
+  var_2 = getEntArray(var_0.target, "targetname");
   common_scripts\utility::array_thread(var_2, ::collapse, var_0);
   var_0 moveto(var_0.origin + (0, 0, -3000), 7, 4, 0);
   wait 0.5;
@@ -381,12 +381,12 @@ building_collapse() {
 collapse(var_0) {
   var_1 = distance(var_0.origin, self.origin);
 
-  while (distance(var_0.origin, self.origin) <= var_1) {
+  while(distance(var_0.origin, self.origin) <= var_1) {
     var_1 = distance(var_0.origin, self.origin);
     wait 0.05;
   }
 
-  if(!isdefined(self.script_delay))
+  if(!isDefined(self.script_delay))
     self.script_delay = 0;
 
   wait(randomfloat(0.1) + self.script_delay);
@@ -409,7 +409,7 @@ random_vector(var_0) {
 }
 
 player_speed_over_time() {
-  for (;;) {
+  for(;;) {
     level.player setmovespeedscale(level.player_speed / 190);
     wait 10;
     level.player_speed--;
@@ -423,20 +423,20 @@ player_heartbeat() {
   level endon("stop_heart");
   wait 3;
 
-  if(!isdefined(level.heartbeat_ent)) {
+  if(!isDefined(level.heartbeat_ent)) {
     level.heartbeat_ent = spawn("script_origin", level.player.origin);
     level.heartbeat_ent linkto(level.player);
   }
 
-  level.heartbeat_ent playloopsound("aftermath_heartbeat");
+  level.heartbeat_ent playLoopSound("aftermath_heartbeat");
 
-  for (;;) {
+  for(;;) {
     if(common_scripts\utility::flag("helicopterfall_bodysense")) {
       level.player thread common_scripts\utility::stop_loop_sound_on_entity(level.playerbreathalias);
       level.heartbeat_ent stoploopsound();
-      level.player playsound("h1_heartbeat_fall");
+      level.player playSound("h1_heartbeat_fall");
       wait 3.5;
-      level.heartbeat_ent playloopsound("aftermath_heartbeat");
+      level.heartbeat_ent playLoopSound("aftermath_heartbeat");
 
       if(level.playerbreathalias == "h1_plr_breath_injured_low")
         level.playerbreathalias = "h1_plr_breath_injured_heavy";
@@ -444,7 +444,7 @@ player_heartbeat() {
       level.player thread common_scripts\utility::play_loop_sound_on_entity(level.playerbreathalias);
       var_0 = 1.0;
 
-      while (var_0 >= 0.95) {
+      while(var_0 >= 0.95) {
         level.heartbeat_ent scalepitch(var_0, 0.5);
         var_0 = var_0 - 0.05;
         wait 2;
@@ -580,7 +580,7 @@ adjust_angles_to_player(var_0) {
   var_1 = var_0[0];
   var_2 = var_0[2];
   var_3 = anglestoright(level.player.angles);
-  var_4 = anglestoforward(level.player.angles);
+  var_4 = anglesToForward(level.player.angles);
   var_5 = (var_3[0], 0, var_3[1] * -1);
   var_6 = (var_4[0], 0, var_4[1] * -1);
   var_7 = maps\_utility::vector_multiply(var_5, var_1);
@@ -596,7 +596,7 @@ limp() {
   var_1 = 0;
   var_2 = 1.0;
 
-  for (;;) {
+  for(;;) {
     var_3 = level.player getvelocity();
     var_4 = abs(var_3[0]) + abs(var_3[1]);
 
@@ -641,7 +641,7 @@ limp() {
 player_jump_punishment() {
   wait 1;
 
-  for (;;) {
+  for(;;) {
     wait 0.05;
 
     if(getdvarint("aftermath_body_sense", 1) == 1) {
@@ -665,9 +665,9 @@ player_jump_punishment() {
 
 setup_force_fall() {
   if(getdvarint("aftermath_body_sense", 1) == 1)
-    var_0 = getentarray("force_fall_body_sense", "targetname");
+    var_0 = getEntArray("force_fall_body_sense", "targetname");
   else
-    var_0 = getentarray("force_fall", "targetname");
+    var_0 = getEntArray("force_fall", "targetname");
 
   common_scripts\utility::array_thread(var_0, ::force_fall);
 }
@@ -681,7 +681,7 @@ force_fall() {
   }
 
   if(self.script_noteworthy == "upper_fall") {
-    if(isdefined(level.lower_fall_used) && level.lower_fall_used == 1)
+    if(isDefined(level.lower_fall_used) && level.lower_fall_used == 1)
       return;
   }
 
@@ -731,7 +731,7 @@ stumble(var_0, var_1, var_2, var_3, var_4) {
   level.ground_ref_ent rotateto(var_5, var_2, 0, var_2 / 2);
   level.ground_ref_ent waittill("rotatedone");
 
-  if(!isdefined(var_4))
+  if(!isDefined(var_4))
     level notify("recovered");
 }
 

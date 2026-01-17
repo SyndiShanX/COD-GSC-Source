@@ -49,22 +49,22 @@ plane_crash_move_shockwave() {
   target_right = getent(origin_right.target, "targetname");
   ent1 = spawn("script_origin", origin_left.origin);
   ent2 = spawn("script_origin", origin_right.origin);
-  ent1 playsound("bomber_shockwave_l");
-  ent2 playsound("bomber_shockwave_r");
+  ent1 playSound("bomber_shockwave_l");
+  ent2 playSound("bomber_shockwave_r");
   ent1 moveto(target_left.origin, 7.5);
   ent2 moveto(target_right.origin, 7.5);
 }
 
 line_to_me(guy) {
   self endon("movedone");
-  while (1) {
+  while(1) {
     line(self.origin, guy.origin, (1, 1, 1));
     wait 0.05;
   }
 }
 
 play_flame_tree_loop(tree) {
-  tree playloopsound("flame_tree_loop");
+  tree playLoopSound("flame_tree_loop");
   wait(10);
   tree stoploopsound();
   playsoundatposition("flame_tree_stop_loop", tree.origin);

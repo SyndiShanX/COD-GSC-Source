@@ -15,7 +15,7 @@ heli_alarm() {
   while(true) {
     level waittill("hel_alrm_on");
     temp_ent = spawn("script_origin", level.player.origin);
-    temp_ent playloopsound("veh_heli_alarm", 1);
+    temp_ent playLoopSound("veh_heli_alarm", 1);
     level waittill("hel_alrm_off");
     temp_ent stoploopsound(0.5);
     wait 0.75;

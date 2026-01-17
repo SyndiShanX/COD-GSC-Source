@@ -54,9 +54,9 @@ setleveldvars() {
   level.buildingclearnextaudio = 0;
   level.air_support_hint_print_dialog_next = 0;
   level.choppersupporthoverlocations = [];
-  var_0 = getentarray("chopper_location", "targetname");
+  var_0 = getEntArray("chopper_location", "targetname");
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++) {
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     level.choppersupporthoverlocations[level.choppersupporthoverlocations.size] = var_0[var_1].origin;
     var_0[var_1] delete();
   }
@@ -82,7 +82,7 @@ setleveldvars() {
     case "easy":
     case "gimp":
       level.timedautosavetime = 60;
-      common_scripts\utility::array_thread(getentarray("bmp_spawn_trigger", "script_noteworthy"), common_scripts\utility::trigger_off);
+      common_scripts\utility::array_thread(getEntArray("bmp_spawn_trigger", "script_noteworthy"), common_scripts\utility::trigger_off);
       break;
     case "medium":
       level.timedautosavetime = 120;
@@ -101,17 +101,17 @@ scriptcalls() {
   maps\village_assault_anim::main();
   level thread maps\village_assault_amb::main();
   maps\_compass::setupminimap("compass_map_village_assault");
-  common_scripts\utility::array_thread(getentarray("seek_player", "script_noteworthy"), maps\_utility::add_spawn_function, ::seek_player);
-  common_scripts\utility::array_thread(getentarray("indoor_enemy", "script_noteworthy"), maps\_utility::add_spawn_function, ::indoor_enemy);
-  common_scripts\utility::array_thread(getentarray("seek_player_smart", "script_noteworthy"), maps\_utility::add_spawn_function, ::seek_player_smart);
-  common_scripts\utility::array_thread(getentarray("dog", "script_noteworthy"), maps\_utility::add_spawn_function, ::seek_player_dog);
-  common_scripts\utility::array_thread(getentarray("enemy_color_hint_trigger", "targetname"), ::enemy_color_hint_trigger_think);
-  common_scripts\utility::array_thread(getentarray("genocide_audio_trigger", "targetname"), ::genocide_audio_trigger);
-  common_scripts\utility::array_thread(getentarray("dead_civilian", "targetname"), ::dead_civilian);
-  common_scripts\utility::array_thread(getentarray("trigger_upstairs_guys", "targetname"), ::trigger_upstairs_guys);
-  common_scripts\utility::array_thread(getentarray("alasad_barn_deletable", "script_noteworthy"), ::alasad_deletable_hide);
-  common_scripts\utility::array_thread(getentarray("alasad_house_deletable", "script_noteworthy"), ::alasad_deletable_hide);
-  maps\_utility::add_hint_string("call_air_support2", & "SCRIPT_PLATFORM_LEARN_CHOPPER_AIR_SUPPORT2", ::should_delete_attack_coord_hint);
+  common_scripts\utility::array_thread(getEntArray("seek_player", "script_noteworthy"), maps\_utility::add_spawn_function, ::seek_player);
+  common_scripts\utility::array_thread(getEntArray("indoor_enemy", "script_noteworthy"), maps\_utility::add_spawn_function, ::indoor_enemy);
+  common_scripts\utility::array_thread(getEntArray("seek_player_smart", "script_noteworthy"), maps\_utility::add_spawn_function, ::seek_player_smart);
+  common_scripts\utility::array_thread(getEntArray("dog", "script_noteworthy"), maps\_utility::add_spawn_function, ::seek_player_dog);
+  common_scripts\utility::array_thread(getEntArray("enemy_color_hint_trigger", "targetname"), ::enemy_color_hint_trigger_think);
+  common_scripts\utility::array_thread(getEntArray("genocide_audio_trigger", "targetname"), ::genocide_audio_trigger);
+  common_scripts\utility::array_thread(getEntArray("dead_civilian", "targetname"), ::dead_civilian);
+  common_scripts\utility::array_thread(getEntArray("trigger_upstairs_guys", "targetname"), ::trigger_upstairs_guys);
+  common_scripts\utility::array_thread(getEntArray("alasad_barn_deletable", "script_noteworthy"), ::alasad_deletable_hide);
+  common_scripts\utility::array_thread(getEntArray("alasad_house_deletable", "script_noteworthy"), ::alasad_deletable_hide);
+  maps\_utility::add_hint_string("call_air_support2", &"SCRIPT_PLATFORM_LEARN_CHOPPER_AIR_SUPPORT2", ::should_delete_attack_coord_hint);
   thread chopper_air_support();
   thread vehicle_patrol_init();
   thread roaming_bmp();
@@ -121,12 +121,12 @@ scriptcalls() {
     thread disable_gameplay();
 
   wait 6.5;
-  objective_add(0, "current", & "VILLAGE_ASSAULT_OBJECTIVE_LOCATE_ALASAD", (0, 0, 0));
+  objective_add(0, "current", &"VILLAGE_ASSAULT_OBJECTIVE_LOCATE_ALASAD", (0, 0, 0));
 }
 
 disable_gameplay() {
-  common_scripts\utility::array_thread(getentarray("trigger_multiple", "classname"), ::disable_gameplay_trigger);
-  common_scripts\utility::array_thread(getentarray("trigger_radius", "classname"), ::disable_gameplay_trigger);
+  common_scripts\utility::array_thread(getEntArray("trigger_multiple", "classname"), ::disable_gameplay_trigger);
+  common_scripts\utility::array_thread(getEntArray("trigger_radius", "classname"), ::disable_gameplay_trigger);
 }
 
 moveplayertolocation(var_0) {
@@ -141,7 +141,7 @@ disable_gameplay_trigger() {
   if(self.spawnflags & 32)
     var_0 = 1;
 
-  if(isdefined(self.targetname)) {
+  if(isDefined(self.targetname)) {
     if(self.targetname == "flood_and_secure")
       var_0 = 1;
     else if(self.targetname == "flood_spawner")
@@ -154,14 +154,12 @@ disable_gameplay_trigger() {
 
 spawn_starting_friendlies(var_0) {
   level.friendlies = [];
-  var_1 = getentarray(var_0, "targetname");
+  var_1 = getEntArray(var_0, "targetname");
 
-  for (var_2 = 0; var_2 < var_1.size; var_2++) {
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
     var_3 = var_1[var_2] stalingradspawn();
 
-    if(maps\_utility::spawn_failed(var_3)) {
-
-    }
+    if(maps\_utility::spawn_failed(var_3)) {}
 
     var_3.goalradius = 32;
     var_3.interval = 128;
@@ -194,13 +192,13 @@ spawn_starting_friendlies(var_0) {
 friendly_bmp_damage_ignore_timer() {
   self endon("death");
 
-  for (;;) {
+  for(;;) {
     self waittill("damage", var_0, var_1);
 
-    if(!isdefined(var_1)) {
+    if(!isDefined(var_1)) {
       continue;
     }
-    if(!isdefined(var_1.classname)) {
+    if(!isDefined(var_1.classname)) {
       continue;
     }
     if(var_1.classname != "script_vehicle") {
@@ -215,10 +213,10 @@ friendly_bmp_damage_ignore_timer() {
 friendly_adjust_movement_speed() {
   self endon("death");
 
-  for (;;) {
+  for(;;) {
     wait(randomfloatrange(1.0, 3.0));
 
-    while (friendly_should_speed_up()) {
+    while(friendly_should_speed_up()) {
       self.moveplaybackrate = 2.0;
       wait 0.05;
     }
@@ -228,7 +226,7 @@ friendly_adjust_movement_speed() {
 }
 
 friendly_should_speed_up() {
-  if(!isdefined(self.goalpos))
+  if(!isDefined(self.goalpos))
     return 0;
 
   if(distancesquared(self.origin, self.goalpos) <= level.goodfriendlydistancefromplayersquared)
@@ -241,10 +239,10 @@ friendly_should_speed_up() {
 }
 
 ishero() {
-  if(!isdefined(self))
+  if(!isDefined(self))
     return 0;
 
-  if(!isdefined(self.script_noteworthy))
+  if(!isDefined(self.script_noteworthy))
     return 0;
 
   if(self.script_noteworthy == "hero")
@@ -256,23 +254,23 @@ ishero() {
 friendly_sight_distance(var_0) {
   var_1 = var_0 * var_0;
 
-  for (var_2 = 0; var_2 < level.friendlies.size; var_2++)
+  for(var_2 = 0; var_2 < level.friendlies.size; var_2++)
     level.friendlies[var_2].maxsightdistsqrd = var_1;
 }
 
 friendly_movement_speed(var_0) {
-  for (var_1 = 0; var_1 < level.friendlies.size; var_1++)
+  for(var_1 = 0; var_1 < level.friendlies.size; var_1++)
     level.friendlies[var_1].moveplaybackrate = var_0;
 }
 
 friendly_stance(var_0, var_1, var_2) {
-  for (var_3 = 0; var_3 < level.friendlies.size; var_3++) {
-    if(isdefined(var_2)) {
+  for(var_3 = 0; var_3 < level.friendlies.size; var_3++) {
+    if(isDefined(var_2)) {
       level.friendlies[var_3] allowedstances(var_0, var_1, var_2);
       continue;
     }
 
-    if(isdefined(var_1)) {
+    if(isDefined(var_1)) {
       level.friendlies[var_3] allowedstances(var_0, var_1);
       continue;
     }
@@ -283,12 +281,12 @@ friendly_stance(var_0, var_1, var_2) {
 
 distracted_guys_spawn() {
   var_0 = getent(self.target, "targetname");
-  var_1 = spawnstruct();
-  var_2 = getentarray(var_0.target, "targetname");
+  var_1 = spawnStruct();
+  var_2 = getEntArray(var_0.target, "targetname");
   var_1.alert_triggers = [];
   var_1.spawners = [];
 
-  for (var_3 = 0; var_3 < var_2.size; var_3++) {
+  for(var_3 = 0; var_3 < var_2.size; var_3++) {
     if(issubstr(var_2[var_3].classname, "trigger")) {
       var_1.alert_triggers[var_1.alert_triggers.size] = var_2[var_3];
       continue;
@@ -300,7 +298,7 @@ distracted_guys_spawn() {
 
   var_1.nodes = [];
 
-  for (var_3 = 0; var_3 < var_1.spawners.size; var_3++) {
+  for(var_3 = 0; var_3 < var_1.spawners.size; var_3++) {
     var_4 = getnode(var_1.spawners[var_3].target, "targetname");
     var_1.nodes[var_1.nodes.size] = var_4;
   }
@@ -308,7 +306,7 @@ distracted_guys_spawn() {
   self waittill("trigger");
   var_1.guys = [];
 
-  for (var_3 = 0; var_3 < var_1.spawners.size; var_3++) {
+  for(var_3 = 0; var_3 < var_1.spawners.size; var_3++) {
     var_5 = var_1.spawners[var_3] stalingradspawn();
 
     if(maps\_utility::spawn_failed(var_5)) {
@@ -321,17 +319,17 @@ distracted_guys_spawn() {
 }
 
 distractedguys_animate(var_0) {
-  for (var_1 = 0; var_1 < var_0.alert_triggers.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.alert_triggers.size; var_1++)
     var_0.alert_triggers[var_1] thread distractedguys_alert_trigger(var_0);
 
-  for (var_1 = 0; var_1 < var_0.guys.size; var_1++) {
+  for(var_1 = 0; var_1 < var_0.guys.size; var_1++) {
     var_0.guys[var_1].distracted = 1;
     var_0.guys[var_1] thread alert_event_notify(var_0);
     var_0.guys[var_1].animname = var_0.guys[var_1].script_animation;
     var_0.nodes[var_1] thread maps\_anim::anim_loop_solo(var_0.guys[var_1], "idle", undefined, "stop_idle");
     var_0.guys[var_1].allowdeath = 1;
 
-    if(isdefined(level.scr_anim[var_0.guys[var_1].animname]["death"]))
+    if(isDefined(level.scr_anim[var_0.guys[var_1].animname]["death"]))
       var_0.guys[var_1].deathanim = level.scr_anim[var_0.guys[var_1].animname]["death"];
   }
 
@@ -356,7 +354,7 @@ distractedguys_alert(var_0) {
   var_0 notify("alerted");
   wait(randomfloatrange(0, 1.3));
 
-  for (var_1 = 0; var_1 < var_0.guys.size; var_1++) {
+  for(var_1 = 0; var_1 < var_0.guys.size; var_1++) {
     if(!isalive(var_0.guys[var_1])) {
       continue;
     }
@@ -365,7 +363,7 @@ distractedguys_alert(var_0) {
     var_0.guys[var_1] notify("stop_idle");
     var_0.guys[var_1].deathanim = undefined;
 
-    if(isdefined(level.scr_anim[var_0.guys[var_1].animname]["react"])) {
+    if(isDefined(level.scr_anim[var_0.guys[var_1].animname]["react"])) {
       var_0.nodes[var_1] thread maps\_anim::anim_single_solo(var_0.guys[var_1], "react");
       continue;
     }
@@ -375,11 +373,11 @@ distractedguys_alert(var_0) {
 }
 
 assasination() {
-  var_0 = getentarray(self.target, "targetname");
+  var_0 = getEntArray(self.target, "targetname");
   var_1 = undefined;
   var_2 = undefined;
 
-  for (var_3 = 0; var_3 < var_0.size; var_3++) {
+  for(var_3 = 0; var_3 < var_0.size; var_3++) {
     if(var_0[var_3].classname == "script_origin")
       var_1 = var_0[var_3];
 
@@ -387,16 +385,16 @@ assasination() {
       var_2 = var_0[var_3];
   }
 
-  var_4 = spawnstruct();
+  var_4 = spawnStruct();
 
-  if(isdefined(var_2))
+  if(isDefined(var_2))
     var_4.assasinate_trigger = var_2;
 
-  var_0 = getentarray(var_1.target, "targetname");
+  var_0 = getEntArray(var_1.target, "targetname");
   var_4.assasination_triggers = [];
   var_4.spawners = [];
 
-  for (var_3 = 0; var_3 < var_0.size; var_3++) {
+  for(var_3 = 0; var_3 < var_0.size; var_3++) {
     if(issubstr(var_0[var_3].classname, "trigger")) {
       var_4.assasination_triggers[var_4.assasination_triggers.size] = var_0[var_3];
       continue;
@@ -406,7 +404,7 @@ assasination() {
       var_4.spawners[var_4.spawners.size] = var_0[var_3];
   }
 
-  for (var_3 = 0; var_3 < var_4.spawners.size; var_3++) {
+  for(var_3 = 0; var_3 < var_4.spawners.size; var_3++) {
     var_5 = getnode(var_4.spawners[var_3].target, "targetname");
     var_4.spawners[var_3].animnode = var_5;
   }
@@ -414,7 +412,7 @@ assasination() {
   self waittill("trigger");
   var_4.guys = [];
 
-  for (var_3 = 0; var_3 < var_4.spawners.size; var_3++) {
+  for(var_3 = 0; var_3 < var_4.spawners.size; var_3++) {
     var_6 = var_4.spawners[var_3] stalingradspawn();
 
     if(maps\_utility::spawn_failed(var_6)) {
@@ -427,7 +425,7 @@ assasination() {
   var_4.executioners = [];
   var_7 = var_4.guys;
 
-  for (var_3 = 0; var_3 < var_7.size; var_3++) {
+  for(var_3 = 0; var_3 < var_7.size; var_3++) {
     if(var_7[var_3].team != "axis") {
       continue;
     }
@@ -439,13 +437,13 @@ assasination() {
 }
 
 assasination_think(var_0) {
-  for (var_1 = 0; var_1 < var_0.executioners.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.executioners.size; var_1++)
     var_0.executioners[var_1] endon("death");
 
-  for (var_1 = 0; var_1 < var_0.guys.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.guys.size; var_1++)
     thread assasination_assasinated_idle(var_0, var_1);
 
-  for (var_1 = 0; var_1 < var_0.executioners.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.executioners.size; var_1++)
     thread assasination_executioner_idle(var_0, var_1);
 
   thread assasination_alert(var_0);
@@ -454,7 +452,7 @@ assasination_think(var_0) {
   createthreatbiasgroup("assasinated");
   setthreatbias("assasinated", "executioner", 100000);
 
-  for (var_1 = 0; var_1 < var_0.executioners.size; var_1++) {
+  for(var_1 = 0; var_1 < var_0.executioners.size; var_1++) {
     var_0.executioners[var_1] setthreatbiasgroup("executioner");
     var_0.executioners[var_1] notify("stop_idle");
     var_0.executioners[var_1] stopanimscripted();
@@ -464,7 +462,7 @@ assasination_think(var_0) {
     var_0.executioners[var_1].baseaccuracy = 1000;
   }
 
-  for (var_1 = 0; var_1 < var_0.guys.size; var_1++) {
+  for(var_1 = 0; var_1 < var_0.guys.size; var_1++) {
     var_0.guys[var_1] setthreatbiasgroup("assasinated");
     var_0.guys[var_1].deathanim = level.scr_anim["assasinated"]["knees_fall"];
     var_0.guys[var_1] thread assasination_ragdoll_death();
@@ -486,17 +484,17 @@ assasination_think(var_0) {
       break;
   }
 
-  for (var_1 = 0; var_1 < var_0.executioners.size; var_1++) {
+  for(var_1 = 0; var_1 < var_0.executioners.size; var_1++) {
     var_0.executioners[var_1].baseaccuracy = var_0.executioners[var_1].old_baseaccuracy;
     var_0.executioners[var_1].old_baseaccuracy = undefined;
   }
 }
 
 assasination_alert(var_0) {
-  for (var_1 = 0; var_1 < var_0.assasination_triggers.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.assasination_triggers.size; var_1++)
     var_0.assasination_triggers[var_1] thread assasination_kill_trigger(var_0);
 
-  for (var_1 = 0; var_1 < var_0.executioners.size; var_1++) {
+  for(var_1 = 0; var_1 < var_0.executioners.size; var_1++) {
     var_0.executioners[var_1] thread alert_event_notify(var_0);
     thread assasination_alert_thread(var_0.executioners[var_1], var_0);
   }
@@ -511,7 +509,7 @@ assasination_ragdoll_death() {
   self waittill("death");
   wait 0.5;
 
-  if(isdefined(self))
+  if(isDefined(self))
     self startragdoll();
 }
 
@@ -557,7 +555,7 @@ add_event_listener(var_0) {
   self endon("event_notify");
   self addaieventlistener(var_0);
 
-  for (;;) {
+  for(;;) {
     self waittill("ai_event", var_1);
 
     if(var_1 == var_0) {
@@ -571,7 +569,7 @@ add_event_listener(var_0) {
 seek_player() {
   self endon("death");
 
-  if(isdefined(self.distracted) && self.distracted == 1)
+  if(isDefined(self.distracted) && self.distracted == 1)
     self waittill("alerted");
 
   self.goalradius = 600;
@@ -579,12 +577,12 @@ seek_player() {
 }
 
 enemy_color_hint_trigger_think() {
-  for (;;) {
+  for(;;) {
     self waittill("trigger");
     getent(self.target, "targetname") notify("trigger");
     level.seekersusingcolors = 1;
 
-    while (level.player istouching(self))
+    while(level.player istouching(self))
       wait 0.1;
 
     level.seekersusingcolors = 0;
@@ -595,12 +593,12 @@ enemy_color_hint_trigger_think() {
 seek_player_smart() {
   self endon("death");
 
-  if(isdefined(self.distracted) && self.distracted == 1)
+  if(isDefined(self.distracted) && self.distracted == 1)
     self waittill("alerted");
 
   maps\_utility::set_force_color("r");
 
-  for (;;) {
+  for(;;) {
     if(!level.seekersusingcolors) {
       self.goalradius = 2000;
       self.pathenemyfightdist = 1500;
@@ -624,7 +622,7 @@ waittill_ai_in_volume_dead(var_0) {
   var_2 = getaiarray("axis");
   var_3 = [];
 
-  for (var_4 = 0; var_4 < var_2.size; var_4++) {
+  for(var_4 = 0; var_4 < var_2.size; var_4++) {
     if(!var_2[var_4] istouching(var_1)) {
       continue;
     }
@@ -636,24 +634,24 @@ waittill_ai_in_volume_dead(var_0) {
 }
 
 add_objective_building(var_0) {
-  if(!isdefined(level._ai_group)) {
+  if(!isDefined(level._ai_group)) {
     return;
   }
-  if(!isdefined(level._ai_group[var_0])) {
+  if(!isDefined(level._ai_group[var_0])) {
     return;
   }
-  if(!isdefined(level.buildings_remaining))
+  if(!isDefined(level.buildings_remaining))
     level.buildings_remaining = 0;
 
   level.buildings_remaining++;
 
-  if(!isdefined(level.suggested_objective_order))
+  if(!isDefined(level.suggested_objective_order))
     level.suggested_objective_order = [];
 
-  var_1 = getentarray("objective_location", "targetname");
+  var_1 = getEntArray("objective_location", "targetname");
   var_2 = undefined;
 
-  for (var_3 = 0; var_3 < var_1.size; var_3++) {
+  for(var_3 = 0; var_3 < var_1.size; var_3++) {
     if(var_1[var_3].script_aigroup != var_0) {
       continue;
     }
@@ -662,7 +660,7 @@ add_objective_building(var_0) {
   }
 
   var_4 = level.suggested_objective_order.size;
-  level.suggested_objective_order[var_4] = spawnstruct();
+  level.suggested_objective_order[var_4] = spawnStruct();
   level.suggested_objective_order[var_4].aigroupnum = var_0;
   level.suggested_objective_order[var_4].completed = 0;
   level.suggested_objective_order[var_4].additionalpositionindex = level.buildings_remaining;
@@ -671,7 +669,7 @@ add_objective_building(var_0) {
   wait(randomfloatrange(1.5, 3.0));
   maps\_utility::arcademode_checkpoint(4, "building_" + var_0);
 
-  if(isdefined(level.alasad_objective_location) && var_0 == level.alasad_objective_location) {
+  if(isDefined(level.alasad_objective_location) && var_0 == level.alasad_objective_location) {
     return;
   }
   level.buildings_remaining--;
@@ -701,7 +699,7 @@ add_objective_building(var_0) {
   if(level.alasad_possible_objective_locations_remaining.size > 1) {
     return;
   }
-  if(isdefined(level.alasad_sequence_init)) {
+  if(isDefined(level.alasad_sequence_init)) {
     return;
   }
   if(level.alasad_possible_objective_locations_remaining[0] == "2")
@@ -714,10 +712,10 @@ objective_updatenextwaypoints() {
   var_0 = 2;
   var_1 = 0;
 
-  for (var_2 = 0; var_2 < level.suggested_objective_order.size; var_2++)
+  for(var_2 = 0; var_2 < level.suggested_objective_order.size; var_2++)
     objective_additionalposition(0, var_2, (0, 0, 0));
 
-  for (var_3 = 0; var_3 < level.suggested_objective_order.size; var_3++) {
+  for(var_3 = 0; var_3 < level.suggested_objective_order.size; var_3++) {
     if(level.suggested_objective_order[var_3].completed) {
       continue;
     }
@@ -734,7 +732,7 @@ objective_updatenextwaypoints() {
 chopper_air_support_arcade_mode() {
   self waittill("death", var_0, var_1);
 
-  if(isdefined(var_0) && isdefined(level.chopper) && var_0 == level.chopper)
+  if(isDefined(var_0) && isDefined(level.chopper) && var_0 == level.chopper)
     maps\_utility::arcademode_kill(self.origin, var_1, 30);
 }
 
@@ -746,8 +744,8 @@ chopper_air_support() {
   maps\_utility::add_global_spawn_function("axis", ::chopper_air_support_arcade_mode);
   common_scripts\utility::array_thread(getaiarray("axis"), ::chopper_air_support_arcade_mode);
 
-  for (;;) {
-    while (level.player getcurrentweapon() != "cobra_air_support") {
+  for(;;) {
+    while(level.player getcurrentweapon() != "cobra_air_support") {
       level.lastusedweapon = level.player getcurrentweapon();
       wait 0.05;
     }
@@ -759,7 +757,7 @@ chopper_air_support() {
       var_1 = level.fake_chopper_ammo;
     }
 
-    if(!isdefined(var_1) || var_1 <= 0) {
+    if(!isDefined(var_1) || var_1 <= 0) {
       chopper_air_support_givebackweapon();
 
       if(common_scripts\utility::flag("air_support_refueling")) {
@@ -772,7 +770,7 @@ chopper_air_support() {
         }
       }
 
-      while (level.player getcurrentweapon() == "cobra_air_support")
+      while(level.player getcurrentweapon() == "cobra_air_support")
         wait 0.05;
 
       continue;
@@ -780,7 +778,7 @@ chopper_air_support() {
 
     thread chopper_air_support_activate();
 
-    while (level.player getcurrentweapon() == "cobra_air_support")
+    while(level.player getcurrentweapon() == "cobra_air_support")
       wait 0.05;
 
     level notify("air_support_canceled");
@@ -794,12 +792,12 @@ chopper_air_support_removefunctionality() {
   level notify("air_support_deleted");
   thread chopper_air_support_deactive();
 
-  if(isdefined(level.chopper)) {
+  if(isDefined(level.chopper)) {
     level.chopper.delete_on_death = 1;
     level.chopper notify("death");
   }
 
-  if(isdefined(level.airsupportmarker))
+  if(isDefined(level.airsupportmarker))
     level.airsupportmarker delete();
 }
 
@@ -819,17 +817,17 @@ chopper_air_support_deactive() {
   thread delete_attack_coord_hint();
   wait 0.05;
 
-  if(isdefined(level.chopperattackarrow))
+  if(isDefined(level.chopperattackarrow))
     level.chopperattackarrow delete();
 }
 
 chopper_air_support_givebackweapon() {
-  if(isdefined(level.lastusedweapon) && level.player hasweapon(level.lastusedweapon))
+  if(isDefined(level.lastusedweapon) && level.player hasweapon(level.lastusedweapon))
     level.player switchtoweapon(level.lastusedweapon);
   else {
     var_0 = level.player getweaponslistprimaries();
 
-    if(isdefined(var_0[0]))
+    if(isDefined(var_0[0]))
       level.player switchtoweapon(var_0[0]);
   }
 }
@@ -873,17 +871,17 @@ chopper_air_support_friendlyfire() {
   self endon("death");
   var_0 = 0;
 
-  for (;;) {
+  for(;;) {
     self waittill("damage", var_1, var_2, var_3, var_4, var_5);
 
     if(!isplayer(var_2)) {
       continue;
     }
-    if(isdefined(var_5) && !issubstr(tolower(var_5), "bullet")) {
+    if(isDefined(var_5) && !issubstr(tolower(var_5), "bullet")) {
       break;
     }
 
-    if(isdefined(var_1) && var_1 > 0)
+    if(isDefined(var_1) && var_1 > 0)
       var_0 = var_0 + var_1;
 
     if(var_0 >= 500) {
@@ -931,13 +929,13 @@ chopper_air_support_call_chopper(var_0) {
   level.chopper thread chopper_ai_mode(var_5);
   level.chopper settargetyaw(var_6[1]);
   level.chopper waittill("goal");
-  var_7 = getentarray("helicopter_force_kill_spawn", "targetname");
+  var_7 = getEntArray("helicopter_force_kill_spawn", "targetname");
 
-  for (var_8 = 0; var_8 < var_7.size; var_8++) {
+  for(var_8 = 0; var_8 < var_7.size; var_8++) {
     if(var_5 istouching(var_7[var_8])) {
-      var_9 = getentarray(var_7[var_8].target, "targetname");
+      var_9 = getEntArray(var_7[var_8].target, "targetname");
 
-      for (var_10 = 0; var_10 < var_9.size; var_10++)
+      for(var_10 = 0; var_10 < var_9.size; var_10++)
         var_9[var_10] notify("trigger");
     }
   }
@@ -948,20 +946,20 @@ chopper_air_support_call_chopper(var_0) {
 }
 
 player_activated_air_support() {
-  return isdefined(level.playeractivatedairsupport);
+  return isDefined(level.playeractivatedairsupport);
 }
 
 player_called_air_support() {
-  return isdefined(level.playercalledairsupport);
+  return isDefined(level.playercalledairsupport);
 }
 
 delete_hint_print_activated_air_support() {
-  if(isdefined(level.air_support_hint_delete)) {
+  if(isDefined(level.air_support_hint_delete)) {
     level.air_support_hint_delete = undefined;
     return 1;
   }
 
-  return isdefined(level.playeractivatedairsupport);
+  return isDefined(level.playeractivatedairsupport);
 }
 
 delete_attack_coord_hint() {
@@ -985,14 +983,14 @@ findbestchopperwaypoint(var_0, var_1, var_2) {
   var_5 = var_4 + (0, 180, 0);
   var_6 = cos(var_1);
 
-  if(!isdefined(var_2))
+  if(!isDefined(var_2))
     var_2 = 0;
 
   var_7 = -1;
   var_8 = 1000000000;
   var_9 = 202500;
 
-  for (var_10 = 0; var_10 < level.choppersupporthoverlocations.size; var_10++) {
+  for(var_10 = 0; var_10 < level.choppersupporthoverlocations.size; var_10++) {
     var_11 = level.choppersupporthoverlocations[var_10];
 
     if(!var_2) {
@@ -1013,9 +1011,7 @@ findbestchopperwaypoint(var_0, var_1, var_2) {
       var_8 = var_13;
     }
 
-    if(getdvar("debug_chopper_air_support") == "1") {
-
-    }
+    if(getdvar("debug_chopper_air_support") == "1") {}
   }
 
   return var_7;
@@ -1031,7 +1027,7 @@ chopper_air_support_end(var_0) {
   level notify("air_support_over");
   var_1 = vectortoangles(var_0 - level.chopper.origin);
 
-  if(!isdefined(level.chopper)) {
+  if(!isDefined(level.chopper)) {
     return;
   }
   level.chopper clearlookatent();
@@ -1060,15 +1056,15 @@ chopper_ai_mode_aim_turret(var_0) {
   level endon("air_support_over");
   var_1 = var_0;
 
-  for (;;) {
+  for(;;) {
     var_0 = maps\_helicopter_globals::getenemytarget(6000, level.cosine["45"], 1, 1, 1, 1);
 
-    if(!isdefined(var_0))
+    if(!isDefined(var_0))
       var_0 = var_1;
 
     var_2 = (0, 0, 0);
 
-    if(isdefined(var_0.script_targetoffset_z))
+    if(isDefined(var_0.script_targetoffset_z))
       var_2 = var_2 + (0, 0, var_0.script_targetoffset_z);
     else if(issentient(var_0))
       var_2 = (0, 0, 32);
@@ -1082,11 +1078,11 @@ chopper_ai_mode_shoot_turret() {
   self endon("death");
   level endon("air_support_over");
 
-  for (;;) {
+  for(;;) {
     var_0 = randomintrange(30, 60);
     self setvehweapon("hind_turret");
 
-    for (var_1 = 0; var_1 < var_0; var_1++) {
+    for(var_1 = 0; var_1 < var_0; var_1++) {
       self fireweapon("tag_flash");
       wait 0.05;
     }
@@ -1099,7 +1095,7 @@ chopper_ai_mode_flares() {
   self endon("death");
   level endon("air_support_over");
 
-  for (;;) {
+  for(;;) {
     var_0 = randomintrange(2, 8);
     thread maps\_helicopter_globals::flares_fire_burst(self, var_0, 1, 5.0);
     wait(randomfloatrange(4.0, 8.0));
@@ -1111,11 +1107,11 @@ chopper_ai_mode_missiles(var_0) {
   self endon("death");
   level endon("air_support_over");
 
-  for (;;) {
+  for(;;) {
     var_2 = randomintrange(1, 5);
     var_0 = maps\_helicopter_globals::getenemytarget(6000, level.cosine["25"], 1, 1, 1, 1);
 
-    if(isdefined(var_0) && isdefined(var_0.origin))
+    if(isDefined(var_0) && isDefined(var_0.origin))
       maps\_helicopter_globals::fire_missile("ffar_mi28_village_assault", var_2, var_0);
     else
       maps\_helicopter_globals::fire_missile("ffar_mi28_village_assault", var_2, var_1);
@@ -1130,7 +1126,7 @@ getclosestinfov(var_0, var_1, var_2, var_3) {
   var_6 = undefined;
   var_7 = 1000000000;
 
-  for (var_8 = 0; var_8 < var_1.size; var_8++) {
+  for(var_8 = 0; var_8 < var_1.size; var_8++) {
     var_9 = distancesquared(var_0, var_1[var_8].origin);
 
     if(var_9 < var_3) {
@@ -1176,7 +1172,7 @@ vehicle_death(var_0) {
   thread common_scripts\utility::play_sound_in_space("exp_armor_vehicle", self gettagorigin("tag_turret"));
   var_1 = get_ai_within_radius(1024, self.origin, "axis");
 
-  if(isdefined(var_1) && var_1.size > 0)
+  if(isDefined(var_1) && var_1.size > 0)
     common_scripts\utility::array_thread(var_1, ::ai_stun, 0.85);
 
   radiusdamage(self.origin, 256, 200, 100);
@@ -1188,19 +1184,19 @@ vehicle_death(var_0) {
 ai_stun(var_0) {
   self endon("death");
 
-  if(isdefined(self) && isalive(self) && maps\_utility::flashbangisactive())
+  if(isDefined(self) && isalive(self) && maps\_utility::flashbangisactive())
     maps\_utility::flashbangstart(var_0);
 }
 
 get_ai_within_radius(var_0, var_1, var_2) {
-  if(isdefined(var_2))
+  if(isDefined(var_2))
     var_3 = getaiarray(var_2);
   else
     var_3 = getaiarray();
 
   var_4 = [];
 
-  for (var_5 = 0; var_5 < var_3.size; var_5++) {
+  for(var_5 = 0; var_5 < var_3.size; var_5++) {
     if(distance(var_1, self.origin) <= var_0)
       common_scripts\utility::array_add(var_4, var_3[var_5]);
   }
@@ -1221,7 +1217,7 @@ roaming_bmp() {
 }
 
 getdamagetype(var_0) {
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     return "unknown";
 
   var_0 = tolower(var_0);
@@ -1246,13 +1242,13 @@ getdamagetype(var_0) {
 vehicle_death_think() {
   self endon("death");
 
-  for (;;) {
+  for(;;) {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4);
 
     if(!isplayer(var_1)) {
       continue;
     }
-    if(!isdefined(var_0)) {
+    if(!isDefined(var_0)) {
       continue;
     }
     if(var_0 <= 0) {
@@ -1261,10 +1257,10 @@ vehicle_death_think() {
     var_4 = getdamagetype(var_4);
 
     if(var_4 == "rocket" && var_0 >= 300 || var_4 == "c4" && var_0 >= 250) {
-      if(isdefined(level.vehicle_c4_models[0]))
+      if(isDefined(level.vehicle_c4_models[0]))
         level.vehicle_c4_models[0] delete();
 
-      if(isdefined(level.vehicle_c4_models[1]))
+      if(isDefined(level.vehicle_c4_models[1]))
         level.vehicle_c4_models[1] delete();
 
       break;
@@ -1287,7 +1283,7 @@ vehicle_patrol_think() {
   var_0 = self.attachedpath;
   self waittill("reached_end_node");
 
-  for (;;) {
+  for(;;) {
     var_1 = [];
     var_2 = undefined;
     var_3 = undefined;
@@ -1300,33 +1296,33 @@ vehicle_patrol_think() {
     var_7 = level.avehiclenodes;
     var_8 = var_2.script_vehiclenodegroup;
 
-    for (var_9 = 0; var_9 < var_7.size; var_9++) {
+    for(var_9 = 0; var_9 < var_7.size; var_9++) {
       if(var_7[var_9].script_vehiclenodegroup != var_8)
         var_1 = common_scripts\utility::array_remove(var_1, var_7[var_9]);
     }
 
-    for (var_9 = 0; var_9 < var_1.size; var_9++) {
-      if(isdefined(var_1[var_9].script_noteworthy) && var_1[var_9].script_noteworthy == "go_backward") {
+    for(var_9 = 0; var_9 < var_1.size; var_9++) {
+      if(isDefined(var_1[var_9].script_noteworthy) && var_1[var_9].script_noteworthy == "go_backward") {
         var_3 = var_1[var_9];
         var_3.end = undefined;
         continue;
       }
 
-      if(isdefined(var_1[var_9].script_noteworthy) && var_1[var_9].script_noteworthy == "go_forward") {
+      if(isDefined(var_1[var_9].script_noteworthy) && var_1[var_9].script_noteworthy == "go_forward") {
         var_4 = var_1[var_9];
         var_4.end = undefined;
       }
     }
 
-    if(isdefined(var_3))
+    if(isDefined(var_3))
       var_3.end = var_3 maps\_utility::get_last_ent_in_chain("vehiclenode");
 
-    if(isdefined(var_4))
+    if(isDefined(var_4))
       var_4.end = var_4 maps\_utility::get_last_ent_in_chain("vehiclenode");
 
     var_6 = getclosestinfov(level.player.origin, level.avehiclenodes, 55, level.bmp_safety_distance);
 
-    if(isdefined(var_6[1])) {
+    if(isDefined(var_6[1])) {
       if(var_6[1].script_vehiclenodegroup < var_6[0].script_vehiclenodegroup) {
         var_10 = var_6[0];
         var_6[0] = var_6[1];
@@ -1336,15 +1332,15 @@ vehicle_patrol_think() {
 
     if(var_6[0] == var_2)
       var_5 = undefined;
-    else if(isdefined(var_4) && var_6[0].script_vehiclenodegroup >= var_4.end.script_vehiclenodegroup)
+    else if(isDefined(var_4) && var_6[0].script_vehiclenodegroup >= var_4.end.script_vehiclenodegroup)
       var_5 = var_4;
-    else if(isdefined(var_3) && var_6[0].script_vehiclenodegroup <= var_3.end.script_vehiclenodegroup)
+    else if(isDefined(var_3) && var_6[0].script_vehiclenodegroup <= var_3.end.script_vehiclenodegroup)
       var_5 = var_3;
 
-    if(isdefined(var_5)) {
+    if(isDefined(var_5)) {
       self attachpath(var_5);
 
-      if(isdefined(var_5.script_wheeldirection))
+      if(isDefined(var_5.script_wheeldirection))
         thread maps\_vehicle_code::wheeldirectionchange(var_5.script_wheeldirection);
 
       var_0 = var_5;
@@ -1363,16 +1359,16 @@ vehicle_turret_think() {
   self endon("death");
   var_0 = undefined;
 
-  for (;;) {
+  for(;;) {
     var_0 = maps\_helicopter_globals::getenemytarget(3000, undefined, 1, 1, 0, 1);
 
-    if(isdefined(var_0)) {
+    if(isDefined(var_0)) {
       self setturrettargetent(var_0, (0, 0, 32));
       common_scripts\utility::waittill_notify_or_timeout("turret_rotate_stopped", randomfloatrange(2.0, 3.0));
       var_1 = weaponfiretime("bmp_turret");
       var_2 = randomintrange(3, 8);
 
-      for (var_3 = 0; var_3 < var_2; var_3++) {
+      for(var_3 = 0; var_3 < var_2; var_3++) {
         self fireweapon();
         wait(var_1);
       }
@@ -1390,7 +1386,7 @@ doautosave(var_0) {
 bmp_autosave_on_death() {
   self waittill("death");
 
-  if(isdefined(self))
+  if(isDefined(self))
     target_remove(self);
 
   thread doautosave("bmp_destroyed");
@@ -1404,7 +1400,7 @@ timedautosaves() {
   if(level.timedautosavetime == 0) {
     return;
   }
-  for (;;) {
+  for(;;) {
     wait(level.timedautosavetime);
     level.timedautosavenumber++;
     thread doautosave("timed_autosave" + level.timedautosavenumber);
@@ -1415,10 +1411,10 @@ genocide_audio_trigger() {
   var_0 = getent(self.target, "targetname");
   self waittill("trigger");
 
-  if(isdefined(self.script_delay))
+  if(isDefined(self.script_delay))
     wait(self.script_delay);
 
-  var_0 playsound(level.genocide_audio[level.next_genocide_audio]);
+  var_0 playSound(level.genocide_audio[level.next_genocide_audio]);
   level.next_genocide_audio++;
 }
 
@@ -1432,7 +1428,7 @@ dead_civilian() {
 air_support_hint_print_activate() {
   level endon("alasad_sequence_started");
 
-  while (!player_activated_air_support()) {
+  while(!player_activated_air_support()) {
     if(level.air_support_hint_print_dialog_next == 0)
       level.price thread maps\_anim::anim_single_solo(level.price, "airsupport");
     else if(level.air_support_hint_print_dialog_next == 1)
@@ -1502,13 +1498,13 @@ clear_hints() {
   maps\_utility::hint_fade(0);
   level notify("clearing_hints");
 
-  if(isdefined(level.iconelem1))
+  if(isDefined(level.iconelem1))
     level.iconelem1 destroy();
 
-  if(isdefined(level.iconelem2))
+  if(isDefined(level.iconelem2))
     level.iconelem2 destroy();
 
-  if(isdefined(level.iconelem3))
+  if(isDefined(level.iconelem3))
     level.iconelem3 destroy();
 }
 
@@ -1530,7 +1526,7 @@ trigger_upstairs_guys() {
   wait(randomfloatrange(5.0, 10.0));
   var_2 = getaiarray("axis");
 
-  for (var_3 = 0; var_3 < var_2.size; var_3++) {
+  for(var_3 = 0; var_3 < var_2.size; var_3++) {
     if(!var_2[var_3] istouching(var_0)) {
       continue;
     }
@@ -1559,11 +1555,11 @@ delete_dropped_weapons() {
   var_0 = common_scripts\utility::array_add(var_0, "weapon_g3");
   var_0 = common_scripts\utility::array_add(var_0, "weapon_uzi");
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++) {
-    var_2 = getentarray(var_0[var_1], "classname");
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+    var_2 = getEntArray(var_0[var_1], "classname");
 
-    for (var_3 = 0; var_3 < var_2.size; var_3++) {
-      if(isdefined(var_2[var_3].targetname)) {
+    for(var_3 = 0; var_3 < var_2.size; var_3++) {
+      if(isDefined(var_2[var_3].targetname)) {
         continue;
       }
       var_2[var_3] delete();
@@ -1572,7 +1568,7 @@ delete_dropped_weapons() {
 }
 
 alasad_deletable_hide() {
-  if(isdefined(self.spawnflags) && self.spawnflags & 1)
+  if(isDefined(self.spawnflags) && self.spawnflags & 1)
     self connectpaths();
 
   self.origin = self.origin - (0, 0, 5000);
@@ -1581,14 +1577,14 @@ alasad_deletable_hide() {
 alasad_deletable_show() {
   self.origin = self.origin + (0, 0, 5000);
 
-  if(isdefined(self.spawnflags) && self.spawnflags & 1)
+  if(isDefined(self.spawnflags) && self.spawnflags & 1)
     self disconnectpaths();
 }
 
 spawn_ai_and_make_dumb(var_0, var_1) {
   var_2 = getent(var_0, "targetname");
 
-  if(isdefined(var_2.script_drone))
+  if(isDefined(var_2.script_drone))
     var_3 = maps\_utility::dronespawn(var_2);
   else {
     var_3 = var_2 stalingradspawn();
@@ -1601,7 +1597,7 @@ spawn_ai_and_make_dumb(var_0, var_1) {
 
   var_3.health = 100000;
 
-  if(isdefined(var_1)) {
+  if(isDefined(var_1)) {
     var_4 = spawn("script_origin", var_2.origin);
     var_3 linkto(var_4);
   }
@@ -1610,19 +1606,19 @@ spawn_ai_and_make_dumb(var_0, var_1) {
 }
 
 headshot(var_0, var_1, var_2) {
-  if(!isdefined(var_0)) {
+  if(!isDefined(var_0)) {
     return;
   }
   if(!isalive(var_0)) {
     return;
   }
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     var_1 = 1;
 
-  if(!isdefined(var_2))
-    playfx(common_scripts\utility::getfx("headshot"), var_0 gettagorigin("tag_eye"));
+  if(!isDefined(var_2))
+    playFX(common_scripts\utility::getfx("headshot"), var_0 gettagorigin("tag_eye"));
   else
-    playfx(level._effect["va_headshot"], var_0 gettagorigin("j_head"), anglestoforward(var_0 gettagangles("j_head")));
+    playFX(level._effect["va_headshot"], var_0 gettagorigin("j_head"), anglesToForward(var_0 gettagangles("j_head")));
 
   if(var_1)
     var_0 kill(var_0 gettagorigin("tag_eye"));
@@ -1630,7 +1626,7 @@ headshot(var_0, var_1, var_2) {
 
 do_alasad(var_0) {
   level.alasad_sequence_init = 1;
-  var_1 = spawnstruct();
+  var_1 = spawnStruct();
 
   if(var_0 == "barn") {
     var_1.nodetargetname1 = "alasad_barn_node";
@@ -1681,10 +1677,10 @@ alasad_sequence_init(var_0) {
   var_0.alasad_area_exterior = getent(var_0.setupareaexteriortriggertargetname, "targetname");
   var_0.alasad_area_interior = getent(var_0.setupareainteriortriggertargetname, "targetname");
 
-  while (level.player istouching(var_0.alasad_area_interior))
+  while(level.player istouching(var_0.alasad_area_interior))
     wait 0.05;
 
-  common_scripts\utility::array_thread(getentarray(var_0.deletablenoteworthy, "script_noteworthy"), ::alasad_deletable_show);
+  common_scripts\utility::array_thread(getEntArray(var_0.deletablenoteworthy, "script_noteworthy"), ::alasad_deletable_show);
   var_0.node = getnode(var_0.nodetargetname1, "targetname");
   var_0.door = maps\_utility::spawn_anim_model("door");
   var_0.node thread maps\_anim::anim_first_frame_solo(var_0.door, "interrogationA");
@@ -1693,17 +1689,17 @@ alasad_sequence_init(var_0) {
   var_0.door hide();
   var_0.brushmodel_door hide();
   var_1 = spawn("script_model", var_0.brushmodel_door.origin);
-  var_1 setmodel("h1_ch_interior_door_02");
+  var_1 setModel("h1_ch_interior_door_02");
   var_1 linkto(var_0.brushmodel_door, "", var_0.door_offset_origin, var_0.door_offset_angle);
 
-  if(isdefined(var_0.spawnerstodeletekillspawner))
+  if(isDefined(var_0.spawnerstodeletekillspawner))
     thread maps\_spawner::kill_spawnernum(var_0.spawnerstodeletekillspawner);
 
-  if(isdefined(var_0.aitodeleteareatargetname)) {
+  if(isDefined(var_0.aitodeleteareatargetname)) {
     var_2 = getent(var_0.aitodeleteareatargetname, "targetname");
     var_3 = getaiarray("axis");
 
-    for (var_4 = 0; var_4 < var_3.size; var_4++) {
+    for(var_4 = 0; var_4 < var_3.size; var_4++) {
       if(!var_3[var_4] istouching(var_2)) {
         continue;
       }
@@ -1720,13 +1716,13 @@ alasad_sequence_wait(var_0) {
   common_scripts\utility::flag_init("price_ready_for_interrogation");
   var_0.color_trigger = getent(var_0.friendlycolortriggertargetname1, "targetname");
 
-  for (;;) {
+  for(;;) {
     if(level.player istouching(var_0.alasad_area_interior)) {
       common_scripts\utility::array_thread(getaiarray("allies"), maps\_utility::set_force_color, "o");
       var_0.color_trigger notify("trigger");
       thread alasad_sequence_ready(var_0);
 
-      while (level.player istouching(var_0.alasad_area_exterior))
+      while(level.player istouching(var_0.alasad_area_exterior))
         wait 0.05;
 
       continue;
@@ -1737,7 +1733,7 @@ alasad_sequence_wait(var_0) {
     var_0.node notify("stop_loop");
     common_scripts\utility::array_thread(getaiarray("allies"), maps\_utility::set_force_color, "r");
 
-    while (!level.player istouching(var_0.alasad_area_interior))
+    while(!level.player istouching(var_0.alasad_area_interior))
       wait 0.05;
   }
 }
@@ -1761,10 +1757,10 @@ h1_do_price_reach_interrogation() {
 alasad_damage_monitor() {
   level endon("fade_from_black");
 
-  for (;;) {
+  for(;;) {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6);
 
-    if(isdefined(var_1) && var_1 == level.player) {
+    if(isDefined(var_1) && var_1 == level.player) {
       maps\_player_death::set_deadquote(&"VILLAGE_ASSAULT_YOU_KILLED_ALASAD");
       maps\_utility::missionfailedwrapper();
       return;
@@ -1936,7 +1932,7 @@ alasad_cell_phone_sounds(var_0) {
 alasad_cell_phone_ring(var_0) {
   var_0 endon("stop ringing");
 
-  for (;;) {
+  for(;;) {
     level.gaz thread maps\_utility::play_sound_on_entity("scn_assault_mobile_ring");
     wait 2;
   }
@@ -1972,14 +1968,14 @@ alasad_notetracks(var_0) {
     var_0 waittillmatch("single anim", "pistol_pickup");
     level.price hidepart("J_Leg_Weapon_RI", "body_sas_woodland_assault_a");
     var_0 waittillmatch("single anim", "fire");
-    var_0 playsound("h1_interrogation_gunshot_enhanced");
+    var_0 playSound("h1_interrogation_gunshot_enhanced");
     headshot(level.alasad, 0, 1);
   }
 }
 
 alasad_flashbang(var_0) {
   wait(var_0);
-  playfx(common_scripts\utility::getfx("alasad_flash"), level.alasad_flashbang_location);
+  playFX(common_scripts\utility::getfx("alasad_flash"), level.alasad_flashbang_location);
   thread common_scripts\utility::play_sound_in_space("flashbang_explode_default", level.alasad_flashbang_location);
 
   if(getdvarint("use_old_interrogation") == 1) {
@@ -1993,7 +1989,7 @@ alasad_flashbang(var_0) {
 alasad_kill_axis() {
   var_0 = getaiarray("axis");
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++) {
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     if(!isalive(var_0[var_1])) {
       continue;
     }
@@ -2106,16 +2102,16 @@ ismodelattached(var_0, var_1) {
   var_0 = tolower(var_0);
   var_1 = tolower(var_1);
 
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     return var_2;
 
   var_3 = self getattachsize();
   var_4 = [];
 
-  for (var_5 = 0; var_5 < var_3; var_5++)
+  for(var_5 = 0; var_5 < var_3; var_5++)
     var_4[var_5] = tolower(self getattachmodelname(var_5));
 
-  for (var_5 = 0; var_5 < var_4.size; var_5++) {
+  for(var_5 = 0; var_5 < var_4.size; var_5++) {
     if(var_4[var_5] != var_0) {
       continue;
     }
@@ -2136,11 +2132,11 @@ flashlight_light(var_0) {
 
   if(var_0) {
     var_2 = spawn("script_model", (0, 0, 0));
-    var_2 setmodel("tag_origin");
+    var_2 setModel("tag_origin");
     var_2 hide();
     var_2 linkto(self, var_1, (0, 0, 0), (0, 0, 0));
     thread flashlight_light_death(var_2);
-    playfxontag(level._effect["flashlight"], var_2, "tag_origin");
+    playFXOnTag(level._effect["flashlight"], var_2, "tag_origin");
   } else
     self notify("flashlight_off");
 }
@@ -2161,11 +2157,11 @@ removeweapon(var_0) {
   else {
     var_1 = self getattachsize();
 
-    for (var_2 = 0; var_2 < var_1; var_2++) {
+    for(var_2 = 0; var_2 < var_1; var_2++) {
       var_3 = self getattachmodelname(var_2);
       var_4 = self getattachtagname(var_2);
 
-      if(isdefined(var_0)) {
+      if(isDefined(var_0)) {
         if(var_3 == var_0)
           self detach(var_3, var_4);
 

@@ -282,7 +282,7 @@ collision_test_points_in_sphere(
   sphere_origin,
   sphere_radius) {
   assertex((sphere_radius > 0.001), "invalid sphere radius");
-  collision_results_s = SpawnStruct();
+  collision_results_s = spawnStruct();
   collision_results_s.a = CollisionTestPointsInSphere(point_list_s.a, sphere_origin, 0.0 + sphere_radius);
   return collision_results_s;
 }
@@ -321,7 +321,7 @@ collision_test_points_in_cylinder(
   cylinder_height_unit_vector) {
   assertex((cylinder_radius > 0.001) && (cylinder_height > 0.001), "invalid cylinder geometry");
   assertex(vector3d_is_normalized(cylinder_height_unit_vector), "cylinder height vector must be unit vector");
-  collision_results_s = SpawnStruct();
+  collision_results_s = spawnStruct();
   collision_results_s.a = CollisionTestPointsInCylinder(
     point_list_s.a,
     cylinder_base,
@@ -368,7 +368,7 @@ collision_test_points_in_pill(
   bounding_sphere_radius_squared = bounding_sphere_radius * bounding_sphere_radius;
   cylinder_radius_squared = cylinder_radius * cylinder_radius;
   half_cylinder_height = cylinder_height * 0.5;
-  for (point_index = 0; point_index < point_list_s.a.size; point_index++) {
+  for(point_index = 0; point_index < point_list_s.a.size; point_index++) {
     collision = (0.0, 0.0, 0.0);
     if(point3d_distance_squared(point_list_s.a[point_index], axis_midpoint) < bounding_sphere_radius_squared) {
       if(point3d_distance_squared(point_list_s.a[point_index], cylinder_base) < cylinder_radius_squared) {
@@ -455,7 +455,7 @@ collision_test_points_in_cone(
   te_dot_to = vector3d_dot_product(te, to);
   te_magnitude_squared = Max(0.00001, vector3d_magnitude_squared(te));
   teto2_over_te = te_dot_to * te_dot_to / te_magnitude_squared;
-  for (point_index = 0; point_index < point_list_s.a.size; point_index++) {
+  for(point_index = 0; point_index < point_list_s.a.size; point_index++) {
     collision = (0.0, 0.0, 0.0);
     if(point3d_distance_squared(point_list_s.a[point_index], axis_midpoint) < bounding_sphere_radius_squared) {
       amp = vector3d_from_points(axis_midpoint, point_list_s.a[point_index]);
@@ -527,7 +527,7 @@ collision_test_points_in_box(
   half_box_width = 0.5 * box_width;
   half_box_height = 0.5 * box_height;
   half_box_depth = 0.5 * box_depth;
-  for (point_index = 0; point_index < point_list_s.a.size; point_index++) {
+  for(point_index = 0; point_index < point_list_s.a.size; point_index++) {
     collision = (0.0, 0.0, 0.0);
     if(point3d_distance_squared(box_origin, point_list_s.a[point_index]) < bounding_sphere_radius_squared) {
       bp = vector3d_from_points(box_origin, point_list_s.a[point_index]);
@@ -562,7 +562,7 @@ draw_line_segments(
   rgb_color) {
   k_depth_test = false;
   k_draw_duration_server_frames = 1;
-  for (point_index = 1; point_index < points.size; point_index++) {
+  for(point_index = 1; point_index < points.size; point_index++) {
     Line(points[point_index - 1], points[point_index], rgb_color, k_depth_test, k_draw_duration_server_frames);
   }
   return;
@@ -607,7 +607,7 @@ draw_box(
   up,
   rgb_color) {
   points = generate_box_points_lists(centroid, dimensions, forward, up);
-  for (list_index = 0; list_index < points.size; list_index++) {
+  for(list_index = 0; list_index < points.size; list_index++) {
     draw_line_segments(points[list_index], rgb_color);
   }
   return;
@@ -621,7 +621,7 @@ draw_pill(
   up,
   rgb_color) {
   points = generate_pill_points_lists(pill_base, pill_radius, pill_height, forward, up);
-  for (list_index = 0; list_index < points.size; list_index++) {
+  for(list_index = 0; list_index < points.size; list_index++) {
     draw_line_segments(points[list_index], rgb_color);
   }
   return;
@@ -635,7 +635,7 @@ draw_cone(
   up,
   rgb_color) {
   points = generate_cone_points_lists(cone_base, cone_radius, cone_height, forward, up);
-  for (list_index = 0; list_index < points.size; list_index++) {
+  for(list_index = 0; list_index < points.size; list_index++) {
     draw_line_segments(points[list_index], rgb_color);
   }
   return;
@@ -659,7 +659,7 @@ generate_sphere_points_list(
     c2 = [];
     left = vector3d_cross_product(up, forward);
     transform = matrix4x4_build_from_rotation_and_translation(forward, up, left, sphere_origin);
-    for (index = 0; index <= k_segment_count; index++) {
+    for(index = 0; index <= k_segment_count; index++) {
       theta = index * k_rotation_delta;
       rcos_theta = radius * Cos(theta);
       rsin_theta = radius * Sin(theta);
@@ -670,7 +670,7 @@ generate_sphere_points_list(
     c0 = matrix4x4_transform_points3d(c0, transform);
     c1 = matrix4x4_transform_points3d(c1, transform);
     c2 = matrix4x4_transform_points3d(c2, transform);
-    for (point_index = 0; point_index < c0.size; point_index++) {
+    for(point_index = 0; point_index < c0.size; point_index++) {
       points[points.size] = c0[point_index];
       if(point_index == (c0.size - 1)) {
         points[points.size] = c0[0];
@@ -678,7 +678,7 @@ generate_sphere_points_list(
         points[points.size] = c0[point_index + 1];
       }
     }
-    for (point_index = 0; point_index < c1.size; point_index++) {
+    for(point_index = 0; point_index < c1.size; point_index++) {
       points[points.size] = c1[point_index];
       if(point_index == (c1.size - 1)) {
         points[points.size] = c1[0];
@@ -686,7 +686,7 @@ generate_sphere_points_list(
         points[points.size] = c1[point_index + 1];
       }
     }
-    for (point_index = 0; point_index < c2.size; point_index++) {
+    for(point_index = 0; point_index < c2.size; point_index++) {
       points[points.size] = c2[point_index];
       if(point_index == (c2.size - 1)) {
         points[points.size] = c2[0];
@@ -712,7 +712,7 @@ generate_cylinder_points_list(
     top = [];
     left = vector3d_cross_product(up, forward);
     transform = matrix4x4_build_from_rotation_and_translation(forward, up, left, cylinder_base);
-    for (index = 0; index <= k_segment_count; index++) {
+    for(index = 0; index <= k_segment_count; index++) {
       theta = index * k_rotation_delta;
       rcos_theta = cylinder_radius * Cos(theta);
       rsin_theta = cylinder_radius * Sin(theta);
@@ -721,7 +721,7 @@ generate_cylinder_points_list(
     }
     bottom = matrix4x4_transform_points3d(bottom, transform);
     top = matrix4x4_transform_points3d(top, transform);
-    for (point_index = 0; point_index < bottom.size; point_index++) {
+    for(point_index = 0; point_index < bottom.size; point_index++) {
       points[points.size] = bottom[point_index];
       if(point_index == (bottom.size - 1)) {
         points[points.size] = bottom[0];
@@ -764,7 +764,7 @@ generate_pill_points_lists(
     cap0_index = 0;
     cap1_index = 0;
     cap2_index = 0;
-    for (index = 0; index <= k_segment_count; index++) {
+    for(index = 0; index <= k_segment_count; index++) {
       theta = index * k_rotation_delta;
       rcos_theta = pill_radius * Cos(theta);
       rsin_theta = pill_radius * Sin(theta);
@@ -811,7 +811,7 @@ generate_pill_points_lists(
     list_index++;
     points[list_index] = t2;
     list_index++;
-    for (index = 0; index < bottom.size; index++) {
+    for(index = 0; index < bottom.size; index++) {
       theta = index * k_rotation_delta;
       {
         line_segment = [];
@@ -838,7 +838,7 @@ generate_cone_points_lists(
     bottom = [];
     left = vector3d_cross_product(up, forward);
     transform = matrix4x4_build_from_rotation_and_translation(forward, up, left, cone_base);
-    for (index = 0; index <= k_segment_count; index++) {
+    for(index = 0; index <= k_segment_count; index++) {
       theta = index * k_rotation_delta;
       rcos_theta = cone_radius * Cos(theta);
       rsin_theta = cone_radius * Sin(theta);
@@ -849,7 +849,7 @@ generate_cone_points_lists(
     list_index = 0;
     points[list_index] = bottom;
     list_index++;
-    for (index = 0; index < bottom.size; index++) {
+    for(index = 0; index < bottom.size; index++) {
       line_segment = [];
       line_segment[0] = bottom[index];
       line_segment[1] = top;

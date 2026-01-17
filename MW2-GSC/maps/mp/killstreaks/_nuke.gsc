@@ -17,7 +17,7 @@ init() {
   level._effect["nuke_flash"] = loadfx("explosions/player_death_nuke_flash");
   level._effect["nuke_aftermath"] = loadfx("dust/nuke_aftermath_mp");
 
-  game["strings"]["nuclear_strike"] = & "MP_TACTICAL_NUKE";
+  game["strings"]["nuclear_strike"] = &"MP_TACTICAL_NUKE";
 
   level.killstreakFuncs["nuke"] = ::tryUseNuke;
 
@@ -27,11 +27,9 @@ init() {
   level.nukeTimer = getDvarInt("scr_nukeTimer");
   level.cancelMode = getDvarInt("scr_nukeCancelMode");
 
-  /#
   setDevDvarIfUninitialized("scr_nukeDistance", 5000);
   setDevDvarIfUninitialized("scr_nukeEndsGame", true);
   setDevDvarIfUninitialized("scr_nukeDebugPosition", false);
-  # /
 }
 
 tryUseNuke(lifeId, allowCancel) {
@@ -78,14 +76,14 @@ doNuke(allowCancel) {
     thread teamPlayerCardSplash("used_nuke", self, self.team);
     /*
     players = level.players;
-		
+    		
     foreach( player in level.players )
     {
     	playerteam = player.pers["team"];
-    	if( isdefined( playerteam ) )
+    	if( isDefined( playerteam ) )
     	{
     		if( playerteam == self.pers["team"] )
-    			player iprintln( &"MP_TACTICAL_NUKE_CALLED", self );
+    			player iprintln(&"MP_TACTICAL_NUKE_CALLED", self );
     	}
     }
     */
@@ -110,7 +108,7 @@ doNuke(allowCancel) {
   clockObject = spawn("script_origin", (0, 0, 0));
   clockObject hide();
 
-  while (!isDefined(level.nukeDetonated)) {
+  while(!isDefined(level.nukeDetonated)) {
     clockObject playSound("ui_mp_nukebomb_timer");
     wait(1.0);
   }
@@ -156,25 +154,23 @@ nukeEffects() {
   level maps\mp\killstreaks\_emp::destroyActiveVehicles(level.nukeInfo.player);
 
   foreach(player in level.players) {
-    playerForward = anglestoforward(player.angles);
+    playerForward = anglesToForward(player.angles);
     playerForward = (playerForward[0], playerForward[1], 0);
     playerForward = VectorNormalize(playerForward);
 
     nukeDistance = 5000;
-    /# nukeDistance = getDvarInt( "scr_nukeDistance" );	#/
+    /# nukeDistance = getDvarInt( "scr_nukeDistance" );	
 
-    nukeEnt = Spawn("script_model", player.origin + Vector_Multiply(playerForward, nukeDistance));
+    nukeEnt = spawn("script_model", player.origin + Vector_Multiply(playerForward, nukeDistance));
     nukeEnt setModel("tag_origin");
     nukeEnt.angles = (0, (player.angles[1] + 180), 90);
 
-    /#
     if(getDvarInt("scr_nukeDebugPosition")) {
       lineTop = (nukeEnt.origin[0], nukeEnt.origin[1], (nukeEnt.origin[2] + 500));
       thread draw_line_for_time(nukeEnt.origin, lineTop, 1, 0, 0, 10);
     }
-    # /
 
-      nukeEnt thread nukeEffect(player);
+    nukeEnt thread nukeEffect(player);
     player.nuked = true;
   }
 }
@@ -198,7 +194,7 @@ nukeAftermathEffect() {
   up = anglestoup(afermathEnt.angles);
   right = anglestoright(afermathEnt.angles);
 
-  PlayFX(level._effect["nuke_aftermath"], afermathEnt.origin, up, right);
+  playFX(level._effect["nuke_aftermath"], afermathEnt.origin, up, right);
 }
 
 nukeSlowMo() {

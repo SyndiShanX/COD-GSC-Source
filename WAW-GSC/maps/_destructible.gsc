@@ -13,14 +13,14 @@ main() {
 }
 
 find_destructibles() {
-  array_thread(getentarray("destructible", "targetname"), ::setup_destructibles);
+  array_thread(getEntArray("destructible", "targetname"), ::setup_destructibles);
 }
 
 do_explosion() {
   self useanimtree(#animtree);
   self.exploded = false;
   preexplode_fx_played = false;
-  for (;;) {
+  for(;;) {
     self waittill("damage", damage, attacker, direction_vec, point, type, modelName, tagName);
     if(IsPlayer(attacker)) {
       self.player_damage += damage;
@@ -31,9 +31,9 @@ do_explosion() {
     }
     if(self.health <= 200 && !self.exploded) {
       timer = GetTime() + 5000;
-      while (self.health > 0 && GetTime() < timer) {
+      while(self.health > 0 && GetTime() < timer) {
         if(isDefined(level._effect[self.destructibledef + "_preexplode"]) && !preexplode_fx_played) {
-          Playfx(level._effect[self.destructibledef + "_preexplode"], self GetTagOrigin("hood_jnt"));
+          playFX(level._effect[self.destructibledef + "_preexplode"], self GetTagOrigin("hood_jnt"));
           preexplode_fx_played = true;
         }
         wait(0.2);
@@ -69,18 +69,16 @@ do_explosion() {
 
 do_explosion_sound(sound_orig) {
   temp_org = spawn("script_origin", sound_orig);
-  temp_org playsound("explo_metal_rand", "explo_metal_rand_done");
+  temp_org playSound("explo_metal_rand", "explo_metal_rand_done");
   temp_org waittill("explo_metal_rand_done");
   temp_org delete();
 }
 
 do_flat_tires() {
   self useanimtree(#animtree);
-  for (;;) {
+  for(;;) {
     self waittill("broken", broken_notify);
-    animation = [
-      [level.destructible_pointers["flattire_anim_" + self.destructibledef]]
-    ](broken_notify);
+    animation = [[level.destructible_pointers["flattire_anim_" + self.destructibledef]]](broken_notify);
     self SetAnim(animation);
   }
 }
@@ -98,7 +96,7 @@ setup_destructibles() {
       self.destructibledef == "dest_type94truckcamo") {
       if(!isDefined(level.destructible_pointers_inited) || !isDefined(level.destructible_pointers_inited[self.destructibledef])) {
         temp_def = "";
-        for (i = 5; i < self.destructibledef.size; i++) {
+        for(i = 5; i < self.destructibledef.size; i++) {
           temp_def = temp_def + self.destructibledef[i];
         }
         ASSERTMSG("You have not initialized the destructible script for \"" + self.destructibledef + "\" -- It'd be something like: maps\\_destructible_" + temp_def + "::init(); before _load::main() in your level script.");
@@ -152,7 +150,7 @@ build_destructible_radiusdamage(destructibledef, offset, range, maxdamage, minda
     bKillplayer = false;
   if(!isDefined(offset))
     offset = (0, 0, 0);
-  struct = spawnstruct();
+  struct = spawnStruct();
   struct.offset = offset;
   struct.range = range;
   struct.maxdamage = maxdamage;
@@ -178,7 +176,7 @@ kill_damage(destructibledef, attacker) {
   }
   if(bKillplayer) {
     players = get_players();
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       players[i] enableHealthShield(false);
     }
   }
@@ -190,7 +188,7 @@ kill_damage(destructibledef, attacker) {
   radiusDamage(self.origin + offset, range, maxdamage, mindamage, attacker);
   if(bKillplayer) {
     players = get_players();
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       players[i] enableHealthShield(true);
     }
   }
@@ -202,7 +200,7 @@ build_destructible_deathquake(destructible_def, scale, duration, radius) {
   if(!isDefined(level.vehicle_death_earthquake)) {
     level.vehicle_death_earthquake = [];
   }
-  level.vehicle_death_earthquake[destructible_def] = spawnstruct();
+  level.vehicle_death_earthquake[destructible_def] = spawnStruct();
   level.vehicle_death_earthquake[destructible_def].scale = scale;
   level.vehicle_death_earthquake[destructible_def].duration = duration;
   level.vehicle_death_earthquake[destructible_def].radius = radius;

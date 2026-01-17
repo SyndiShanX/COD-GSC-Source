@@ -86,7 +86,7 @@ startriotshielddeploy() {
 spawnriotshieldcover(origin, angles) {
   shield_ent = spawn("script_model", origin, 1);
   shield_ent.angles = angles;
-  shield_ent setmodel(level.deployedshieldmodel);
+  shield_ent setModel(level.deployedshieldmodel);
   shield_ent setowner(self);
   shield_ent.owner = self;
   shield_ent setscriptmoverflag(0);
@@ -98,9 +98,9 @@ spawnriotshieldcover(origin, angles) {
 riotshielddeployanim() {
   self useanimtree(#animtree);
   self setanim( % o_riot_stand_deploy, 1.0, 0.0, 1.0);
-  playfxontag(level._effect["riotshield_dust"], self, "tag_origin");
+  playFXOnTag(level._effect["riotshield_dust"], self, "tag_origin");
   wait 0.8;
-  self.shieldlightfx = playfxontag(level._effect["riotshield_light"], self, "tag_fx");
+  self.shieldlightfx = playFXOnTag(level._effect["riotshield_light"], self, "tag_fx");
 }
 
 watchriotshielddeploy() {

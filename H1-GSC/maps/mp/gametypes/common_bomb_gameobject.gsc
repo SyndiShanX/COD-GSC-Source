@@ -22,8 +22,8 @@ loadbombfx() {
 getcarrybombvisuals(var_0) {
   var_1 = getent(var_0, "targetname");
 
-  if(isdefined(var_1)) {
-    var_1 setmodel("wpn_h1_briefcase_bomb_npc");
+  if(isDefined(var_1)) {
+    var_1 setModel("wpn_h1_briefcase_bomb_npc");
     return [var_1];
   }
 
@@ -55,7 +55,7 @@ createbombcarryobject(var_0, var_1, var_2, var_3) {
 }
 
 canusebomb(var_0) {
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     return 0;
 
   if(var_0 maps\mp\_utility::isjuggernaut())
@@ -76,7 +76,7 @@ oncarrybombpickup(var_0, var_1) {
   maps\mp\gametypes\_gameobjects::set2dicon("friendly", "waypoint_escort");
   maps\mp\gametypes\_gameobjects::set3dicon("friendly", "waypoint_escort");
 
-  if(isdefined(var_1))
+  if(isDefined(var_1))
     maps\mp\_utility::playsoundonplayers(game["bomb_recovered_sound"], var_1);
   else
     maps\mp\_utility::playsoundonplayers(game["bomb_recovered_sound"]);
@@ -91,15 +91,15 @@ oncarrybombdrop(var_0, var_1) {
 }
 
 createbombzoneobject(var_0, var_1, var_2, var_3, var_4, var_5) {
-  var_6 = getentarray(var_3.target, "targetname");
+  var_6 = getEntArray(var_3.target, "targetname");
   var_7 = maps\mp\gametypes\_gameobjects::createuseobject(var_0, var_3, var_6, (0, 0, 64));
   var_7.label = var_7 maps\mp\gametypes\_gameobjects::getlabel();
   var_7 resetbombzone(var_4, var_1, var_2, var_5);
   var_7.nousebar = 1;
   var_7.id = "bombZone";
 
-  for (var_8 = 0; var_8 < var_6.size; var_8++) {
-    if(isdefined(var_6[var_8].script_exploder)) {
+  for(var_8 = 0; var_8 < var_6.size; var_8++) {
+    if(isDefined(var_6[var_8].script_exploder)) {
       var_7.exploderindex = var_6[var_8].script_exploder;
       var_6[var_8] thread setupkillcament(var_7);
       break;
@@ -143,8 +143,8 @@ setupkillcament(var_0) {
   var_1 rotateyaw(-45, 0.05);
   wait 0.05;
   var_2 = self.origin + (0, 0, 5);
-  var_3 = self.origin + anglestoforward(var_1.angles) * 100 + (0, 0, 128);
-  var_4 = bullettrace(var_2, var_3, 0, self);
+  var_3 = self.origin + anglesToForward(var_1.angles) * 100 + (0, 0, 128);
+  var_4 = bulletTrace(var_2, var_3, 0, self);
   self.killcament = spawn("script_model", var_4["position"]);
   self.killcament setscriptmoverkillcam("explosive");
   var_0.killcamentnum = self.killcament getentitynumber();
@@ -178,7 +178,7 @@ onbeginplantbomb(var_0) {
 
   if(!level.silentplant) {
     var_0 maps\mp\_utility::notify_enemy_bots_bomb_used("plant");
-    var_0 playsound("mp_snd_bomb_arming");
+    var_0 playSound("mp_snd_bomb_arming");
     level thread play_looping_beep_on_player(var_0);
   }
 
@@ -190,13 +190,13 @@ onbegindefusebomb(var_0, var_1) {
 
   if(!level.silentplant) {
     var_0 maps\mp\_utility::notify_enemy_bots_bomb_used("defuse");
-    var_0 playsound("mp_snd_bomb_disarming");
+    var_0 playSound("mp_snd_bomb_disarming");
     level thread play_looping_beep_on_player(var_0);
   }
 
   var_0.isdefusing = 1;
 
-  if(isdefined(var_1)) {
+  if(isDefined(var_1)) {
     var_1 hide();
     self.hiddenmodel = var_1;
   }
@@ -214,7 +214,7 @@ stop_looping_beep_on_player(var_0) {
 }
 
 onendusebomb(var_0, var_1) {
-  if(!isdefined(var_0)) {
+  if(!isDefined(var_0)) {
     return;
   }
   var_0 allowmelee(1);
@@ -227,7 +227,7 @@ onendusebomb(var_0, var_1) {
   level thread stop_looping_beep_on_player(var_0);
   var_0 stopsound("weap_suitcase_raise_plr");
 
-  if(var_1 && isdefined(self.hiddenmodel)) {
+  if(var_1 && isDefined(self.hiddenmodel)) {
     self.hiddenmodel show();
     self.hiddenmodel = undefined;
   }
@@ -243,7 +243,7 @@ onplayerplantbomb(var_0, var_1, var_2) {
     self setclientomnvar("ui_carrying_bomb", 0);
   }
 
-  self playsound("mp_bomb_plant");
+  self playSound("mp_bomb_plant");
   maps\mp\_utility::playsoundonplayers(game["bomb_planted_sound"], var_1);
   maps\mp\_utility::playsoundonplayers(game["bomb_planted_enemy_sound"], var_2);
   maps\mp\_utility::leaderdialog("bomb_planted");
@@ -267,8 +267,8 @@ playtickingsound() {
   level endon("game_ended");
   var_0 = level.bombtimer;
 
-  for (;;) {
-    self playsound("ui_mp_suitcasebomb_timer");
+  for(;;) {
+    self playSound("ui_mp_suitcasebomb_timer");
 
     if(var_0 > 10) {
       var_0 = var_0 - 1;
@@ -302,7 +302,7 @@ onplayerdefusebomb(var_0, var_1, var_2) {
 }
 
 onbombexploded(var_0, var_1, var_2) {
-  if(isdefined(var_2)) {
+  if(isDefined(var_2)) {
     self.visuals[0] radiusdamage(var_0, 512, var_1, 20, var_2, "MOD_EXPLOSIVE", "bomb_site_mp");
     var_2 thread maps\mp\_events::bombdetonateevent();
   } else
@@ -310,7 +310,7 @@ onbombexploded(var_0, var_1, var_2) {
 
   var_3 = "bomb_explosion";
 
-  if(isdefined(self.trigger.effect))
+  if(isDefined(self.trigger.effect))
     var_3 = self.trigger.effect;
 
   var_4 = randomfloat(360);
@@ -322,6 +322,6 @@ onbombexploded(var_0, var_1, var_2) {
   earthquake(0.75, 2.0, var_0, 2000);
   thread maps\mp\_utility::playsoundinspace("h1_briefcase_exp_mid", var_0);
 
-  if(isdefined(self.exploderindex))
+  if(isDefined(self.exploderindex))
     common_scripts\_exploder::exploder(self.exploderindex);
 }

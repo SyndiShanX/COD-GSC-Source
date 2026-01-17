@@ -11,7 +11,6 @@
 #include scripts\zm_common\zm_score;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
-
 #namespace namespace_8cefe82f;
 
 autoexec __init__system__() {
@@ -26,7 +25,7 @@ __init__() {
   zm_trial::register_challenge(#"hash_163077e21e01f4a7", &on_begin, &on_end);
 }
 
-private on_begin(n_timer) {
+on_begin(n_timer) {
   n_timer = zm_trial::function_5769f26a(n_timer);
   level.var_f7236c66 = n_timer;
   callback::on_spawned(&on_player_spawned);
@@ -37,7 +36,7 @@ private on_begin(n_timer) {
   }
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   level.var_f7236c66 = undefined;
   callback::remove_on_spawned(&on_player_spawned);
   callback::remove_callback(#"on_host_migration_end", &function_ff66b979);
@@ -47,9 +46,9 @@ private on_end(round_reset) {
   }
 }
 
-private function_7650d9fb(n_timer, var_f97d1a30) {
+function_7650d9fb(n_timer, var_f97d1a30) {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656", #"hash_6223843ef1e3c6de", #"host_migration_begin");
+  level endon(#"hash_7646638df88a3656", # "hash_6223843ef1e3c6de", # "host_migration_begin");
 
   if(!(isDefined(var_f97d1a30) && var_f97d1a30)) {
     wait 12;
@@ -62,7 +61,7 @@ private function_7650d9fb(n_timer, var_f97d1a30) {
     }
 
     self start_timer(n_timer, var_f97d1a30);
-    s_waitresult = self waittilltimeout(n_timer, #"fasttravel_bought");
+    s_waitresult = self waittilltimeout(n_timer, # "fasttravel_bought");
     self stop_timer();
 
     if(s_waitresult._notify == "timeout") {
@@ -75,7 +74,7 @@ private function_7650d9fb(n_timer, var_f97d1a30) {
   }
 }
 
-private on_player_spawned() {
+on_player_spawned() {
   self endon(#"disconnect");
   level endon(#"host_migration_begin");
   wait 2;
@@ -85,10 +84,10 @@ private on_player_spawned() {
   }
 }
 
-private start_timer(timeout, var_f97d1a30) {
+start_timer(timeout, var_f97d1a30) {
   if(!level.var_f995ece6 zm_trial_timer::is_open(self)) {
     level.var_f995ece6 zm_trial_timer::open(self);
-    level.var_f995ece6 zm_trial_timer::set_timer_text(self, #"hash_459951bdd5145bf0");
+    level.var_f995ece6 zm_trial_timer::set_timer_text(self, # "hash_459951bdd5145bf0");
     level.var_f995ece6 zm_trial_timer::set_under_round_rules(self, 1);
     self zm_trial_util::start_timer(timeout);
     self thread function_a0f0109f(timeout, var_f97d1a30);
@@ -100,8 +99,8 @@ function_a0f0109f(timeout, var_f97d1a30) {
     return;
   }
 
-  self endon(#"disconnect", #"hash_2a79adac1fd03c09");
-  level endon(#"hash_7646638df88a3656", #"end_game", #"host_migration_begin");
+  self endon(#"disconnect", # "hash_2a79adac1fd03c09");
+  level endon(#"hash_7646638df88a3656", # "end_game", # "host_migration_begin");
 
   if(!isDefined(self.n_time_remaining)) {
     self.n_time_remaining = timeout;
@@ -113,7 +112,7 @@ function_a0f0109f(timeout, var_f97d1a30) {
   }
 }
 
-private stop_timer() {
+stop_timer() {
   if(level.var_f995ece6 zm_trial_timer::is_open(self)) {
     level.var_f995ece6 zm_trial_timer::close(self);
     self zm_trial_util::stop_timer();
@@ -123,8 +122,8 @@ private stop_timer() {
   self.n_time_remaining = undefined;
 }
 
-private function_ff66b979() {
-  level endon(#"end_round", #"host_migration_begin");
+function_ff66b979() {
+  level endon(#"end_round", # "host_migration_begin");
 
   foreach(player in getplayers()) {
     if(level.var_f995ece6 zm_trial_timer::is_open(player)) {

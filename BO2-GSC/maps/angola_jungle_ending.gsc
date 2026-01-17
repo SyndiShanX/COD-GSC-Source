@@ -223,7 +223,7 @@ jungle_explosions(vh_hind) {
   maxdamage = 300;
   s_exp1 = getstruct("je_end_explosion1", "targetname");
   pos = s_exp1.origin;
-  playfx(level._effect["def_explosion"], pos);
+  playFX(level._effect["def_explosion"], pos);
   playsoundatposition("exp_heli_rocket", s_exp1.origin);
   radiusdamage(pos, radius_big, maxdamage, mindamage);
   level.player playrumbleonentity("explosion_generic");
@@ -231,7 +231,7 @@ jungle_explosions(vh_hind) {
   wait 1.3;
   s_exp2 = getstruct("je_end_explosion2", "targetname");
   pos = s_exp2.origin;
-  playfx(level._effect["def_explosion"], pos);
+  playFX(level._effect["def_explosion"], pos);
   playsoundatposition("exp_heli_rocket", s_exp2.origin);
   radiusdamage(pos, radius_big, maxdamage, mindamage);
   level.player playrumbleonentity("explosion_generic");
@@ -239,7 +239,7 @@ jungle_explosions(vh_hind) {
   wait 0.5;
   s_exp3 = getstruct("je_end_explosion3", "targetname");
   pos = s_exp3.origin;
-  playfx(level._effect["def_explosion"], pos);
+  playFX(level._effect["def_explosion"], pos);
   playsoundatposition("exp_heli_rocket", s_exp3.origin);
   radiusdamage(pos, radius_small, maxdamage, mindamage);
   level.player playrumbleonentity("explosion_generic");
@@ -260,7 +260,7 @@ enemy_run_from_forest_to_beach(delay, str_category, alive_time) {
   if(isDefined(delay))
     wait(delay);
 
-  a_spawners = getentarray("ae_end_attack_spawner", "targetname");
+  a_spawners = getEntArray("ae_end_attack_spawner", "targetname");
 
   if(isDefined(a_spawners))
     a_ai = simple_spawn(a_spawners, ::spawn_fn_ai_run_to_target, 0, str_category, 0, 0, 0);
@@ -283,7 +283,7 @@ forest_enemy_damage_override_func(einflictor, e_attacker, idamage, idflags, smea
     v_launch = vectorscale((0, 0, 1), 100.0);
 
     if(randomint(100) < 40)
-      v_launch = v_launch + anglestoforward(einflictor.angles) * 300;
+      v_launch = v_launch + anglesToForward(einflictor.angles) * 300;
 
     self launchragdoll(v_launch, "J_SpineUpper");
   }

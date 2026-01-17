@@ -7,7 +7,7 @@
 // Decompiled by https://github.com/xensik/gsc-tool
 
 main() {
-  self setmodel("mp_body_russian_military_assault_a");
+  self setModel("mp_body_russian_military_assault_a");
   self attach("head_russian_military_aa", "", 1);
   self.headmodel = "head_russian_military_aa";
   self setviewmodel("viewhands_russian_a");

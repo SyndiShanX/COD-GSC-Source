@@ -69,7 +69,7 @@ init_vehicles() {
   setup_triggers();
   setup_nodes();
   maps\_vehicle_death::init();
-  allvehiclesprespawn = getentarray("script_vehicle", "classname");
+  allvehiclesprespawn = getEntArray("script_vehicle", "classname");
 
   level thread vehicle_spawner_tool(allvehiclesprespawn);
 
@@ -1247,7 +1247,7 @@ vehicle_spawn(vspawner, from) {
     vehicle.script_vehicleattackgroupwait = vspawner.script_vehicleattackgroupwait;
 
   if(isDefined(vspawner.script_friendname))
-    vehicle setvehiclelookattext(vspawner.script_friendname, & "");
+    vehicle setvehiclelookattext(vspawner.script_friendname, &"");
 
   if(isDefined(vspawner.script_unload))
     vehicle.unload_group = vspawner.script_unload;
@@ -1737,7 +1737,7 @@ node_trigger_process() {
     if(isDefined(get_from_entity(self.targetname)))
       get_func = ::get_from_entity_target;
 
-    if(isDefined(get_from_spawnstruct(self.targetname)))
+    if(isDefined(get_from_spawnStruct(self.targetname)))
       get_func = ::get_from_spawnstruct_target;
 
     if(isDefined(get_func)) {
@@ -1783,7 +1783,7 @@ node_trigger_process() {
 setup_triggers() {
   level.vehicle_processtriggers = [];
   triggers = [];
-  triggers = arraycombine(getallvehiclenodes(), getentarray("script_origin", "classname"), 1, 0);
+  triggers = arraycombine(getallvehiclenodes(), getEntArray("script_origin", "classname"), 1, 0);
   triggers = arraycombine(triggers, level.struct, 1, 0);
   triggers = arraycombine(triggers, get_triggers("trigger_radius", "trigger_multiple", "trigger_once", "trigger_lookat", "trigger_box"), 1, 0);
   array_thread(triggers, ::node_trigger_process);
@@ -2169,7 +2169,7 @@ playloopedfxontag(effect, durration, tag) {
   thread playloopedfxontag_originupdate(tag, effectorigin);
 
   while(true) {
-    playfx(effect, effectorigin.origin, effectorigin.upvec);
+    playFX(effect, effectorigin.origin, effectorigin.upvec);
     wait(durration);
   }
 }
@@ -2177,14 +2177,14 @@ playloopedfxontag(effect, durration, tag) {
 playloopedfxontag_originupdate(tag, effectorigin) {
   effectorigin.angles = self gettagangles(tag);
   effectorigin.origin = self gettagorigin(tag);
-  effectorigin.forwardvec = anglestoforward(effectorigin.angles);
+  effectorigin.forwardvec = anglesToForward(effectorigin.angles);
   effectorigin.upvec = anglestoup(effectorigin.angles);
 
   while(isDefined(self) && self.classname == "script_vehicle" && self getspeedmph() > 0) {
     emodel = get_dummy();
     effectorigin.angles = emodel gettagangles(tag);
     effectorigin.origin = emodel gettagorigin(tag);
-    effectorigin.forwardvec = anglestoforward(effectorigin.angles);
+    effectorigin.forwardvec = anglesToForward(effectorigin.angles);
     effectorigin.upvec = anglestoup(effectorigin.angles);
     wait 0.05;
   }
@@ -2215,7 +2215,7 @@ setup_levelvars() {
   level.vehicle_startnodes = [];
   level.vehicle_spawners = [];
   level.vehicle_walkercount = [];
-  level.helicopter_crash_locations = getentarray("helicopter_crash_location", "targetname");
+  level.helicopter_crash_locations = getEntArray("helicopter_crash_location", "targetname");
   level.playervehicle = spawn("script_origin", (0, 0, 0));
   level.playervehiclenone = level.playervehicle;
 
@@ -2381,9 +2381,9 @@ vehicle_badplace() {
       bp_radius = bp_radius * self.badplacemodifier;
 
     if(hasturret)
-      bp_direction = anglestoforward(self gettagangles("tag_turret"));
+      bp_direction = anglesToForward(self gettagangles("tag_turret"));
     else
-      bp_direction = anglestoforward(self.angles);
+      bp_direction = anglesToForward(self.angles);
 
     badplace_arc("", 0.5, self.origin, bp_radius * 1.9, 300, bp_direction, 17, 17, "allies", "axis");
     badplace_cylinder("", 0.5, self.origin, 200, 300, "allies", "axis");
@@ -2454,7 +2454,7 @@ vehicle_landvehicle() {
   self sethoverparams(0, 0, 10);
   self cleargoalyaw();
   self settargetyaw(flat_angle(self.angles)[1]);
-  self setvehgoalpos_wrap(bullettrace(self.origin, self.origin + vectorscale((0, 0, -1), 100000.0), 0, self)["position"], 1);
+  self setvehgoalpos_wrap(bulletTrace(self.origin, self.origin + vectorscale((0, 0, -1), 100000.0), 0, self)["position"], 1);
   self waittill("goal");
 }
 
@@ -2498,9 +2498,7 @@ waittill_stable() {
 
 unload_node(node) {
   if(isDefined(self.custom_unload_function)) {
-    [
-      [self.custom_unload_function]
-    ]();
+    [[self.custom_unload_function]]();
     return;
   }
 
@@ -2538,7 +2536,7 @@ unload_node_helicopter(node) {
   goal = self.nextnode.origin;
   start = self.nextnode.origin;
   end = start - vectorscale((0, 0, 1), 10000.0);
-  trace = bullettrace(start, end, 0, undefined, 1);
+  trace = bulletTrace(start, end, 0, undefined, 1);
 
   if(trace["fraction"] <= 1)
     goal = (trace["position"][0], trace["position"][1], trace["position"][2] + self.fastropeoffset);
@@ -2565,7 +2563,7 @@ vehicle_pathdetach() {
 
 setup_targetname_spawners() {
   level.vehicle_targetname_array = [];
-  vehicles = getentarray("script_vehicle", "classname");
+  vehicles = getEntArray("script_vehicle", "classname");
   highestgroup = 0;
 
   for(i = 0; i < vehicles.size; i++) {
@@ -2671,7 +2669,7 @@ aircraft_dust_kickup(model) {
 
     if(dotracethisframe <= 0) {
       dotracethisframe = 3;
-      trace = bullettrace(trace_ent.origin, trace_ent.origin - vectorscale((0, 0, 1), 100000.0), 0, trace_ent);
+      trace = bulletTrace(trace_ent.origin, trace_ent.origin - vectorscale((0, 0, 1), 100000.0), 0, trace_ent);
       d = distance(trace_ent.origin, trace["position"]);
       repeatrate = (d - 350) / (1200 - 350) * (0.15 - 0.05) + 0.05;
     }
@@ -2703,7 +2701,7 @@ aircraft_dust_kickup(model) {
     assert(isDefined(level._vehicle_effect[self.vehicletype][trace["surfacetype"]]), "UNKNOWN SURFACE TYPE: " + trace["surfacetype"]);
 
     if(level._vehicle_effect[self.vehicletype][trace["surfacetype"]] != -1)
-      playfx(level._vehicle_effect[self.vehicletype][trace["surfacetype"]], trace["position"]);
+      playFX(level._vehicle_effect[self.vehicletype][trace["surfacetype"]], trace["position"]);
   }
 }
 
@@ -2715,7 +2713,7 @@ maingun_fx() {
 
   while(true) {
     self waittill("weapon_fired");
-    playfxontag(level.vehicle_deckdust[self.model], self, "tag_engine_exhaust");
+    playFXOnTag(level.vehicle_deckdust[self.model], self, "tag_engine_exhaust");
     barrel_origin = self gettagorigin("tag_flash");
     ground = physicstrace(barrel_origin, barrel_origin + vectorscale((0, 0, -1), 128.0));
     physicsexplosionsphere(ground, 192, 100, 1);
@@ -2749,9 +2747,7 @@ build_aianims(aithread, vehiclethread) {
   level.vehicle_aianims[self.vehicletype] = [[aithread]]();
 
   if(isDefined(vehiclethread))
-    level.vehicle_aianims[self.vehicletype] = [
-      [vehiclethread]
-    ](level.vehicle_aianims[self.vehicletype]);
+    level.vehicle_aianims[self.vehicletype] = [[vehiclethread]](level.vehicle_aianims[self.vehicletype]);
 }
 
 build_attach_models(modelsthread) {
@@ -2762,7 +2758,7 @@ build_unload_groups(unloadgroupsthread) {
   level.vehicle_unloadgroups[self.vehicletype] = [[unloadgroupsthread]]();
 }
 
-get_from_spawnstruct(target) {
+get_from_spawnStruct(target) {
   return getstruct(target, "targetname");
 }
 
@@ -2791,7 +2787,7 @@ attackgroup_think() {
     wait(self.script_vehicleattackgroupwait);
 
   for(;;) {
-    group = getentarray("script_vehicle", "classname");
+    group = getEntArray("script_vehicle", "classname");
     valid_targets = [];
 
     for(i = 0; i < group.size; i++) {
@@ -3234,7 +3230,7 @@ vehicle_spawner_tool(allvehicles) {
       dynamic_spawn_dummy_model = spawn("script_model", (0, 0, 0));
 
       while(getdebugdvarint("debug_vehicle_spawn") > 0) {
-        origin = player.origin + anglestoforward(player getplayerangles()) * 270.0;
+        origin = player.origin + anglesToForward(player getplayerangles()) * 270.0;
         origin = origin + vectorscale((0, 0, 1), 40.0);
 
         if(player usebuttonpressed()) {
@@ -3273,7 +3269,7 @@ vehicle_spawner_tool(allvehicles) {
 
         type = types[type_index];
         dynamic_spawn_hud settext("Press X to spawn vehicle " + type);
-        dynamic_spawn_dummy_model setmodel(vehicletypes[type]);
+        dynamic_spawn_dummy_model setModel(vehicletypes[type]);
         dynamic_spawn_dummy_model show();
         dynamic_spawn_dummy_model notsolid();
         dynamic_spawn_dummy_model.origin = origin;

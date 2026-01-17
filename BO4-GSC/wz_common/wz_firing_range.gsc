@@ -5,7 +5,6 @@
 
 #include scripts\core_common\struct;
 #include scripts\core_common\util_shared;
-
 #namespace wz_firing_range;
 
 init_targets(targetname) {
@@ -18,7 +17,7 @@ init_targets(targetname) {
   }
 }
 
-private init_target() {
+init_target() {
   self.hitindex = 1;
 
   if(!isDefined(self.target)) {
@@ -47,7 +46,7 @@ private init_target() {
   return true;
 }
 
-private function_5bab934a(struct, var_d1d733b4) {
+function_5bab934a(struct, var_d1d733b4) {
   var_32c844bb = var_d1d733b4 - gettime();
 
   if(var_32c844bb <= 0) {
@@ -58,7 +57,7 @@ private function_5bab934a(struct, var_d1d733b4) {
   return movetime;
 }
 
-private follow_path() {
+follow_path() {
   starttime = int(floor(gettime() / self.totalms) * self.totalms + self.totalms);
 
   while(gettime() < starttime) {
@@ -79,7 +78,7 @@ private follow_path() {
   }
 }
 
-private event_handler[event_cf200f34] function_209450ae(eventstruct) {
+event_handler[event_cf200f34] function_209450ae(eventstruct) {
   dynent = eventstruct.ent;
 
   if(!isDefined(dynent.hitindex)) {

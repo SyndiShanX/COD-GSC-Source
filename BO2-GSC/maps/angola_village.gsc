@@ -37,14 +37,14 @@ skipto_village() {
   setmusicstate("ANGOLA_VILLAGE_APPROACH");
   flag_set("fxanim_grass_spawn");
   flag_init("player_failing_stealth");
-  triggers = getentarray("player_escaping_village_trigger", "targetname");
+  triggers = getEntArray("player_escaping_village_trigger", "targetname");
 
   foreach(trigger in triggers)
   trigger trigger_off();
 }
 
 clean_up_beartrap_test() {
-  a_enemies = getentarray("beartrap_enemy_test_ai", "targetname");
+  a_enemies = getEntArray("beartrap_enemy_test_ai", "targetname");
 
   foreach(ai_enemy in a_enemies)
   ai_enemy delete();
@@ -86,7 +86,7 @@ main() {
 }
 
 village_spawn_funcs() {
-  sp_fail_reinforcement = getentarray("enemy_fail_village", "targetname");
+  sp_fail_reinforcement = getEntArray("enemy_fail_village", "targetname");
   array_thread(sp_fail_reinforcement, ::add_spawn_function, ::chase_after_target, level.player);
 }
 
@@ -113,7 +113,7 @@ playguardwalla() {
   ent = spawn("script_origin", (-19214, -2232, 698));
 
   while(true) {
-    ent playsound("amb_guard_walla_" + i, "sounddone");
+    ent playSound("amb_guard_walla_" + i, "sounddone");
     ent waittill("sounddone");
     wait(randomfloatrange(1.5, 4));
 
@@ -262,7 +262,7 @@ village_guard_idle_logic(n_index) {
 
 radio_loop() {
   radio_loop_sound = spawn("script_origin", (-18601, -3066, 673));
-  radio_loop_sound playloopsound("amb_angola_radio_lp");
+  radio_loop_sound playLoopSound("amb_angola_radio_lp");
 }
 
 village_objectives() {
@@ -294,7 +294,7 @@ meatshield_event() {
   wait 0.5;
   model = get_model_or_models_from_scene("menendez_radio_room_idle", "menendez");
   model.team = "allies";
-  model setlookattext("", & "");
+  model setlookattext("", &"");
   player_enter_the_hut();
   level thread clean_up_village_guards();
   level thread clean_up_beartrap_test();
@@ -437,7 +437,7 @@ player_grabs_menendez_in_meatshield_hold() {
   str_scene_name = "player_grabs_menendez";
   level thread run_scene(str_scene_name);
   wait 0.1;
-  a_rigs = getentarray("player_body", "targetname");
+  a_rigs = getEntArray("player_body", "targetname");
   m_player_rig = a_rigs[0];
   level.m_player_rig = m_player_rig;
   level.mason_meatshield_weapon = spawn_model("t6_wpn_pistol_browninghp_prop_view", level.m_player_rig gettagorigin("tag_weapon1"), level.m_player_rig gettagangles("tag_weapon1"));
@@ -500,7 +500,7 @@ player_meatshield_move_and_rotate(e_menendez, player_speed) {
       v_start = (level.m_player_rig.origin[0], level.m_player_rig.origin[1], 0);
       v_norm_vec = vectornormalize(v_end - v_start);
       v_norm_vec = v_norm_vec * -1;
-      v_angles = anglestoforward(level.m_player_rig.angles);
+      v_angles = anglesToForward(level.m_player_rig.angles);
       v_angles = vectornormalize(v_angles);
       n_dot = vectordot(v_norm_vec, v_angles);
       n_facing_diff = acos(n_dot);
@@ -643,7 +643,7 @@ meatshield_screen_message(display_time) {
 grenade_explosion_effect() {
   level waittill("meatshield_grenade_explosion");
   e_grenade = getent("nada", "targetname");
-  playfx(level._effect["def_explosion"], e_grenade.origin);
+  playFX(level._effect["def_explosion"], e_grenade.origin);
   clientnotify("grn_dgs");
 }
 
@@ -698,7 +698,7 @@ meatshild_ai_try_and_shoot_target(str_enemy_scene, e_target, attack_time, player
 
     if(dt >= player_initial_prep_time) {
       v_dir = vectornormalize(self.origin - e_target.origin);
-      v_forward = anglestoforward(e_target.angles);
+      v_forward = anglesToForward(e_target.angles);
       dot = vectordot(v_dir, v_forward);
 
       if(dot < min_dot) {
@@ -763,7 +763,7 @@ spinning_fan() {
 clean_up_village_guards() {
   t_sm_village_fail = getent("sm_fail_village", "targetname");
   t_sm_village_fail delete();
-  a_enemies = getentarray("village_guards", "script_noteworthy");
+  a_enemies = getEntArray("village_guards", "script_noteworthy");
 
   foreach(e_enemy in a_enemies)
   e_enemy delete();
@@ -798,7 +798,7 @@ village_fail_general_logic() {
   end_scene("idle_bug");
   end_scene("idle_smoke");
   end_scene("idle_stretch");
-  a_enemies = getentarray("village_guards", "script_noteworthy");
+  a_enemies = getEntArray("village_guards", "script_noteworthy");
 
   foreach(e_enemy in a_enemies) {
     if(isalive(e_enemy)) {

@@ -24,7 +24,6 @@ precache_scripted_fx() {}
 
 // Ambient effects
 precache_createfx_fx() {
-
   level._effect["fx_insects_butterfly_flutter"] = loadfx("bio/insects/fx_insects_butterfly_flutter");
   level._effect["fx_insects_butterfly_flutter_radial"] = loadfx("bio/insects/fx_insects_butterfly_flutter_radial");
 
@@ -46,7 +45,6 @@ precache_createfx_fx() {
   level._effect["fx_mp_nuked_hose_spray"] = loadfx("maps/mp_maps/fx_mp_nuked_hose_spray");
 
   level._effect["fx_mp_nuked_glass_break"] = loadfx("maps/mp_maps/fx_mp_nuked_glass_break");
-
 }
 
 main() {
@@ -57,9 +55,7 @@ main() {
   maps\createfx\mp_nuked_fx::main();
   //maps\createart\mp_nuked_art::main();
 
-  /#
   if(getdvar("clientSideEffects") != "1")
     maps\createfx\mp_nuked_fx::main();
-  # /
 
 }

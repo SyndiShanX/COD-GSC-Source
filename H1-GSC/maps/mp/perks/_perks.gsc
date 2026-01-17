@@ -246,14 +246,14 @@ validateperk(var_0, var_1) {
 getemptyperks() {
   var_0 = [];
 
-  for (var_1 = 0; var_1 < 3; var_1++)
+  for(var_1 = 0; var_1 < 3; var_1++)
     var_0[var_1] = "specialty_null";
 
   return var_0;
 }
 
 onplayerconnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connected", var_0);
     var_0 thread onplayerspawned();
   }
@@ -266,10 +266,10 @@ onplayerspawned() {
 }
 
 cac_modified_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
-  if(!isdefined(var_0) || !isdefined(var_1) || !isplayer(var_1) || !maps\mp\_utility::invirtuallobby() && !isplayer(var_0))
+  if(!isDefined(var_0) || !isDefined(var_1) || !isplayer(var_1) || !maps\mp\_utility::invirtuallobby() && !isplayer(var_0))
     return var_2;
 
-  if(var_1.sessionstate != "playing" || !isdefined(var_2) || !isdefined(var_3))
+  if(var_1.sessionstate != "playing" || !isDefined(var_2) || !isDefined(var_3))
     return var_2;
 
   if(var_3 == "")
@@ -278,17 +278,17 @@ cac_modified_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_
   var_9 = var_2;
   var_10 = var_2;
 
-  if(isdefined(var_1) && var_1 maps\mp\_utility::_hasperk("specialty_bulletdamage") && maps\mp\_utility::isbulletdamage(var_3)) {
-    if(isdefined(var_0) && isplayer(var_0) && var_0 maps\mp\_utility::_hasperk("specialty_armorvest"))
+  if(isDefined(var_1) && var_1 maps\mp\_utility::_hasperk("specialty_bulletdamage") && maps\mp\_utility::isbulletdamage(var_3)) {
+    if(isDefined(var_0) && isplayer(var_0) && var_0 maps\mp\_utility::_hasperk("specialty_armorvest"))
       var_10 = var_9;
     else
       var_10 = var_10 + var_2 * level.bulletdamagemod;
-  } else if(isdefined(var_1) && var_1 maps\mp\_utility::_hasperk("specialty_explosivedamage") && isexplosivedamagemod(var_3)) {
-    if(isdefined(var_0) && isplayer(var_0) && var_0 maps\mp\_utility::_hasperk("specialty_armorvest"))
+  } else if(isDefined(var_1) && var_1 maps\mp\_utility::_hasperk("specialty_explosivedamage") && isexplosivedamagemod(var_3)) {
+    if(isDefined(var_0) && isplayer(var_0) && var_0 maps\mp\_utility::_hasperk("specialty_armorvest"))
       var_10 = var_9;
     else
       var_10 = var_10 + var_2 * level.explosivedamagemod;
-  } else if(isdefined(var_0) && isplayer(var_0) && var_0 maps\mp\_utility::_hasperk("specialty_armorvest"))
+  } else if(isDefined(var_0) && isplayer(var_0) && var_0 maps\mp\_utility::_hasperk("specialty_armorvest"))
     var_10 = var_10 - var_2 * level.armorvestmod;
   else
     var_10 = var_9;
@@ -323,7 +323,7 @@ giveblindeyeafterspawn() {
   maps\mp\_utility::giveperk("specialty_blindeye", 0);
   self.spawnperk = 1;
 
-  while (self.avoidkillstreakonspawntimer > 0) {
+  while(self.avoidkillstreakonspawntimer > 0) {
     self.avoidkillstreakonspawntimer = self.avoidkillstreakonspawntimer - 0.05;
     wait 0.05;
   }
@@ -347,7 +347,7 @@ applyperks() {
     maps\mp\_utility::giveperk("specialty_blastshield2", 0);
     self.specialty_blastshield_bonus = maps\mp\_utility::getintproperty("perk_blastShieldScale", 45) / 100;
 
-    if(isdefined(level.hardcoremode) && level.hardcoremode)
+    if(isDefined(level.hardcoremode) && level.hardcoremode)
       self.specialty_blastshield_bonus = maps\mp\_utility::getintproperty("perk_blastShieldScale_HC", 50) / 100;
   }
 
@@ -413,7 +413,7 @@ get_specialtydata(var_0, var_1, var_2) {
       else
         self.perkscustom["grenades_count"] = 1;
 
-      if(var_0 == "specialty_specialgrenade" && isdefined(var_2.offhand) && var_2.offhand != "h1_smokegrenade_mp")
+      if(var_0 == "specialty_specialgrenade" && isDefined(var_2.offhand) && var_2.offhand != "h1_smokegrenade_mp")
         self.perkscustom["specialgrenades_count"] = var_4;
       else
         self.perkscustom["specialgrenades_count"] = 1;
@@ -434,7 +434,7 @@ get_specialtydata(var_0, var_1, var_2) {
 giveperkinventory() {
   var_0 = self.perkscustom["inventory"];
 
-  if(isdefined(var_0) && var_0 != "") {
+  if(isDefined(var_0) && var_0 != "") {
     var_0 = "h1_" + var_0;
     self giveweapon(var_0);
     setweaponammooverall(var_0, self.perkscustom["inventory_count"]);

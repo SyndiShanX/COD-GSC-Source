@@ -194,7 +194,7 @@ attachreconmodel(modelname, owner) {
   }
   reconmodel = spawn("script_model", self.origin);
   reconmodel.angles = self.angles;
-  reconmodel setmodel(modelname);
+  reconmodel setModel(modelname);
   reconmodel.model_name = modelname;
   reconmodel linkto(self);
   reconmodel setcontents(0);
@@ -208,7 +208,7 @@ spawnriotshieldcover(origin, angles) {
   shield_ent = spawn("script_model", origin, 1);
   shield_ent.targetname = "riotshield_mp";
   shield_ent.angles = angles;
-  shield_ent setmodel(level.deployedshieldmodel);
+  shield_ent setModel(level.deployedshieldmodel);
   shield_ent setowner(self);
   shield_ent.owner = self;
   shield_ent.team = self.team;

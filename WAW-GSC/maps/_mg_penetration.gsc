@@ -19,7 +19,7 @@ gunner_think(turret) {
   }
   self.last_enemy_sighting_position = undefined;
   thread record_enemy_sightings();
-  forward = anglestoforward(turret.angles);
+  forward = anglesToForward(turret.angles);
   ent = spawn("script_origin", (0, 0, 0));
   thread target_ent_cleanup(ent);
   ent.origin = turret.origin + vectorScale(forward, 500);
@@ -28,7 +28,7 @@ gunner_think(turret) {
   }
   turret setTargetEntity(ent);
   enemy = undefined;
-  for (;;) {
+  for(;;) {
     if(!isalive(self.current_enemy)) {
       self stop_firing();
       self waittill("new_enemy");
@@ -55,17 +55,17 @@ shoot_enemy_until_he_hides_then_shoot_wall(ent) {
   self endon("new_enemy");
   self.current_enemy endon("death");
   enemy = self.current_enemy;
-  while (self canSee(enemy)) {
-    angles = vectortoangles(enemy geteye() - ent.origin);
-    angles = anglestoforward(angles);
+  while(self canSee(enemy)) {
+    angles = vectortoangles(enemy getEye() - ent.origin);
+    angles = anglesToForward(angles);
     ent moveto(ent.origin + vectorscale(angles, 12), 0.1);
     wait(0.1);
   }
   if(isplayer(enemy)) {
     self endon("saw_enemy");
-    eye = enemy geteye();
+    eye = enemy getEye();
     angles = vectortoangles(eye - ent.origin);
-    angles = anglestoforward(angles);
+    angles = anglesToForward(angles);
     units_per_second = 150;
     timer = distance(ent.origin, self.last_enemy_sighting_position) / units_per_second;
     if(timer > 0) {
@@ -73,7 +73,7 @@ shoot_enemy_until_he_hides_then_shoot_wall(ent) {
       wait(timer);
     }
     org = ent.origin + vectorscale(angles, 180);
-    oldOrigin = get_suppress_point(self geteye(), ent.origin, org);
+    oldOrigin = get_suppress_point(self getEye(), ent.origin, org);
     if(!isDefined(oldOrigin))
       oldOrigin = ent.origin;
     ent moveto(ent.origin + vectorscale(angles, 80) + (0, 0, randomfloatrange(15, 50) * -1), 3, 1, 1);
@@ -116,12 +116,12 @@ create_mg_team() {
   level.mg_gunner_team = [];
   level.mg_gunner_team[level.mg_gunner_team.size] = self;
   waittillframeend;
-  ent = spawnstruct();
+  ent = spawnStruct();
   array_thread(level.mg_gunner_team, ::mg_gunner_death_notify, ent);
   array = level.mg_gunner_team;
   level.mg_gunner_team = undefined;
   ent waittill("gunner_died");
-  for (i = 0; i < array.size; i++) {
+  for(i = 0; i < array.size; i++) {
     if(!isalive(array[i])) {
       continue;
     }
@@ -139,7 +139,7 @@ mgTeam_take_turns_firing(mgTeam) {
   wait(1);
   level notify("new_mg_firing_team" + mgTeam[0].script_noteworthy);
   level endon("new_mg_firing_team" + mgTeam[0].script_noteworthy);
-  for (;;) {
+  for(;;) {
     dual_firing(mgTeam);
     solo_firing(mgTeam);
   }
@@ -147,7 +147,7 @@ mgTeam_take_turns_firing(mgTeam) {
 
 solo_firing(mgTeam) {
   mgGunner = undefined;
-  for (i = 0; i < mgTeam.size; i++) {
+  for(i = 0; i < mgTeam.size; i++) {
     if(!isalive(mgTeam[i]))
       continue;
     mgGunner = mgTeam[i];
@@ -160,7 +160,7 @@ solo_firing(mgTeam) {
 
 solo_fires() {
   self endon("death");
-  for (;;) {
+  for(;;) {
     self.turret startFiring();
     wait(randomfloatrange(0.3, 0.7));
     self.turret stopFiring();
@@ -169,11 +169,11 @@ solo_fires() {
 }
 
 dual_firing(mgTeam) {
-  for (i = 0; i < mgTeam.size; i++)
+  for(i = 0; i < mgTeam.size; i++)
     mgTeam[i] endon("death");
   a = 0;
   b = 1;
-  for (;;) {
+  for(;;) {
     if(isalive(mgTeam[a]))
       mgTeam[a] set_firing(true);
     if(isalive(mgTeam[b]))
@@ -190,14 +190,14 @@ spotted_an_enemy(ent, enemy) {
   self endon("death");
   self endon("new_enemy");
   enemy endon("death");
-  while (self canSee(enemy)) {
-    angles = vectortoangles(enemy geteye() - ent.origin);
-    angles = anglestoforward(angles);
+  while(self canSee(enemy)) {
+    angles = vectortoangles(enemy getEye() - ent.origin);
+    angles = anglesToForward(angles);
     ent moveto(ent.origin + vectorscale(angles, 10), 0.2);
     wait(0.2);
   }
-  angles = vectortoangles(enemy geteye() - ent.origin);
-  angles = anglestoforward(angles);
+  angles = vectortoangles(enemy getEye() - ent.origin);
+  angles = anglesToForward(angles);
   units_per_second = 150;
   timer = distance(ent.origin, self.last_enemy_sighting_position) / units_per_second;
   ent moveto(self.last_enemy_sighting_position, timer);
@@ -220,8 +220,8 @@ get_suppress_point(origin, trace_start, trace_end) {
   vectorDif = (vectorDif[0] / traces, vectorDif[1] / traces, vectorDif[2] / traces);
   offset = (0, 0, 0);
   hit_pos = undefined;
-  for (i = 0; i < traces + 2; i++) {
-    trace = bullettrace(origin, trace_start + offset, false, undefined);
+  for(i = 0; i < traces + 2; i++) {
+    trace = bulletTrace(origin, trace_start + offset, false, undefined);
     if(trace["fraction"] < 1) {
       hit_pos = trace["position"];
       break;
@@ -235,7 +235,7 @@ record_enemy_sightings() {
   self endon("death");
   self endon("end_mg_behavior");
   self.current_enemy = undefined;
-  for (;;) {
+  for(;;) {
     record_sighting();
     wait(0.05);
   }
@@ -248,7 +248,7 @@ record_sighting() {
   if(!(self canSee(self.enemy))) {
     return;
   }
-  self.last_enemy_sighting_position = self.enemy geteye();
+  self.last_enemy_sighting_position = self.enemy getEye();
   self notify("saw_enemy");
   if(!isalive(self.current_enemy) || self.current_enemy != self.enemy) {
     self.current_enemy = self.enemy;

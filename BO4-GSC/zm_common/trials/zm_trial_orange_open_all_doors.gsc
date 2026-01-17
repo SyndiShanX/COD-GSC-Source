@@ -8,7 +8,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
-
 #namespace zm_trial_orange_open_all_doors;
 
 autoexec __init__system__() {
@@ -20,7 +19,7 @@ __init__() {
     return;
   }
 
-  level.var_c79f394d = array(#"hash_38c97197db36afb7", #"hash_48e7d63b38c5e2da", #"hash_52d967f4fc8b12fc", #"hash_6f7fd3d4d070db87");
+  level.var_c79f394d = array(#"hash_38c97197db36afb7", # "hash_48e7d63b38c5e2da", # "hash_52d967f4fc8b12fc", # "hash_6f7fd3d4d070db87");
   zombie_doors = getEntArray("zombie_door", "targetname");
   zombie_debris = getEntArray("zombie_debris", "targetname");
   level.var_a0f5e369 = function_d34c075e(zombie_doors);
@@ -28,7 +27,7 @@ __init__() {
   zm_trial::register_challenge(#"hash_12dc7b4f915f4cf1", &on_begin, &on_end);
 }
 
-private on_begin(n_timer) {
+on_begin(n_timer) {
   level.var_d39baced = level.zombie_total_set_func;
   level.zombie_total_set_func = &set_zombie_total;
   zm_trial_util::function_2976fa44(function_d2a5d1f0());
@@ -41,7 +40,7 @@ private on_begin(n_timer) {
   }
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   level.zombie_total_set_func = level.var_d39baced;
   zm_trial_util::function_f3dbeda7();
 
@@ -68,7 +67,7 @@ set_zombie_total() {
   level.zombie_total = int(max(level.zombie_total, var_92217b88));
 }
 
-private function_d34c075e(ents) {
+function_d34c075e(ents) {
   ents = array::remove_undefined(ents, 0);
   unique = [];
 
@@ -81,7 +80,7 @@ private function_d34c075e(ents) {
   return unique.size;
 }
 
-private function_a4cfa984(door_ents, debris_ents) {
+function_a4cfa984(door_ents, debris_ents) {
   var_8b730c3e = [];
 
   foreach(door_ent in door_ents) {
@@ -96,7 +95,7 @@ private function_a4cfa984(door_ents, debris_ents) {
   return var_eeba6731 + var_69310a8a;
 }
 
-private function_b2fa4678() {
+function_b2fa4678() {
   self endon(#"disconnect");
   level endon(#"hash_7646638df88a3656");
   var_c43a6efa = 0;
@@ -121,15 +120,15 @@ private function_b2fa4678() {
   }
 }
 
-private monitor_timer(n_timer) {
+monitor_timer(n_timer) {
   level endon(#"hash_7646638df88a3656");
   wait 12;
 
   foreach(player in getplayers()) {
-    player zm_trial_util::function_128378c9(n_timer, 1, #"hash_c2b77be4cf5b142");
+    player zm_trial_util::function_128378c9(n_timer, 1, # "hash_c2b77be4cf5b142");
   }
 
-  level waittilltimeout(n_timer + 1, #"hash_6ba2e2da302282");
+  level waittilltimeout(n_timer + 1, # "hash_6ba2e2da302282");
 
   foreach(player in getplayers()) {
     player zm_trial_util::function_885fb2c8();

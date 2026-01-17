@@ -14,7 +14,6 @@
 #include scripts\core_common\scene_shared;
 #include scripts\core_common\struct;
 #include scripts\core_common\util_shared;
-
 #namespace zombie_utility;
 
 zombiespawnsetup() {
@@ -201,7 +200,7 @@ initialize(animscript) {
   self.a.scriptstarttime = gettime();
   self.a.atconcealmentnode = 0;
 
-  if(isDefined(self.node) && (self.node.type == #"conceal crouch" || self.node.type == #"conceal stand")) {
+  if(isDefined(self.node) && (self.node.type == # "conceal crouch" || self.node.type == # "conceal stand")) {
     self.a.atconcealmentnode = 1;
   }
 
@@ -252,12 +251,12 @@ getcovernodeyawtoenemy() {
   if(isvalidenemy(self.enemy)) {
     pos = self.enemy.origin;
   } else {
-    forward = anglesToForward(self.covernode.angles + self.animarray[#"angle_step_out"][self.a.cornermode]);
+    forward = anglesToForward(self.covernode.angles + self.animarray[# "angle_step_out"][self.a.cornermode]);
     forward = vectorscale(forward, 150);
     pos = self.origin + forward;
   }
 
-  yaw = self.covernode.angles[1] + self.animarray[#"angle_step_out"][self.a.cornermode] - getyaw(pos);
+  yaw = self.covernode.angles[1] + self.animarray[# "angle_step_out"][self.a.cornermode] - getyaw(pos);
   yaw = angleclamp180(yaw);
   return yaw;
 }
@@ -365,7 +364,7 @@ geteyeyawtoorigin(org) {
 }
 
 getcovernodeyawtoorigin(org) {
-  yaw = self.covernode.angles[1] + self.animarray[#"angle_step_out"][self.a.cornermode] - getyaw(org);
+  yaw = self.covernode.angles[1] + self.animarray[# "angle_step_out"][self.a.cornermode] - getyaw(org);
   yaw = angleclamp180(yaw);
   return yaw;
 }
@@ -443,44 +442,44 @@ angleclamp(angle) {
 quadrantanimweights(yaw) {
   forwardweight = (90 - abs(yaw)) / 90;
   leftweight = (90 - absangleclamp180(abs(yaw - 90))) / 90;
-  result[#"front"] = 0;
-  result[#"right"] = 0;
-  result[#"back"] = 0;
-  result[#"left"] = 0;
+  result[# "front"] = 0;
+  result[# "right"] = 0;
+  result[# "back"] = 0;
+  result[# "left"] = 0;
 
   if(isDefined(self.alwaysrunforward)) {
     assert(self.alwaysrunforward);
-    result[#"front"] = 1;
+    result[# "front"] = 1;
     return result;
   }
 
   useleans = getdvarint(#"ai_useleanrunanimations", 0);
 
   if(forwardweight > 0) {
-    result[#"front"] = forwardweight;
+    result[# "front"] = forwardweight;
 
     if(leftweight > 0) {
-      result[#"left"] = leftweight;
+      result[# "left"] = leftweight;
     } else {
-      result[#"right"] = -1 * leftweight;
+      result[# "right"] = -1 * leftweight;
     }
   } else if(useleans) {
-    result[#"back"] = -1 * forwardweight;
+    result[# "back"] = -1 * forwardweight;
 
     if(leftweight > 0) {
-      result[#"left"] = leftweight;
+      result[# "left"] = leftweight;
     } else {
-      result[#"right"] = -1 * leftweight;
+      result[# "right"] = -1 * leftweight;
     }
   } else {
     backweight = -1 * forwardweight;
 
     if(leftweight > backweight) {
-      result[#"left"] = 1;
+      result[# "left"] = 1;
     } else if(leftweight < forwardweight) {
-      result[#"right"] = 1;
+      result[# "right"] = 1;
     } else {
-      result[#"back"] = 1;
+      result[# "back"] = 1;
     }
   }
 
@@ -530,13 +529,13 @@ drawstringtime(msg, org, color, timer) {
 
 showlastenemysightpos(string) {
   self notify(#"got known enemy2");
-  self endon(#"got known enemy2", #"death");
+  self endon(#"got known enemy2", # "death");
 
   if(!isvalidenemy(self.enemy)) {
     return;
   }
 
-  if(self.enemy.team == #"allies") {
+  if(self.enemy.team == # "allies") {
     color = (0.4, 0.7, 1);
   } else {
     color = (1, 0.7, 0.4);
@@ -566,7 +565,7 @@ debugposinternal(org, string, size) {
   ent thread debugtimeout();
   ent endon(#"timeout");
 
-  if(self.enemy.team == #"allies") {
+  if(self.enemy.team == # "allies") {
     color = (0.4, 0.7, 1);
   } else {
     color = (1, 0.7, 0.4);
@@ -621,8 +620,8 @@ getnodeoffset(node) {
   forward = anglesToForward(node.angles);
 
   switch (node.type) {
-    case #"hash_4767a02d3b3b87cc":
-    case #"cover left":
+    case # "hash_4767a02d3b3b87cc":
+    case # "cover left":
       if(node isnodedontstand() && !node isnodedontcrouch()) {
         nodeoffset = calculatenodeoffset(right, forward, cover_left_crouch_offset);
       } else {
@@ -630,8 +629,8 @@ getnodeoffset(node) {
       }
 
       break;
-    case #"cover right":
-    case #"hash_3aeea178f890eb31":
+    case # "cover right":
+    case # "hash_3aeea178f890eb31":
       if(node isnodedontstand() && !node isnodedontcrouch()) {
         nodeoffset = calculatenodeoffset(right, forward, cover_right_crouch_offset);
       } else {
@@ -639,14 +638,14 @@ getnodeoffset(node) {
       }
 
       break;
-    case #"conceal stand":
-    case #"turret":
-    case #"cover stand":
+    case # "conceal stand":
+    case # "turret":
+    case # "cover stand":
       nodeoffset = calculatenodeoffset(right, forward, cover_stand_offset);
       break;
-    case #"conceal crouch":
-    case #"cover crouch window":
-    case #"cover crouch":
+    case # "conceal crouch":
+    case # "cover crouch window":
+    case # "cover crouch":
       nodeoffset = calculatenodeoffset(right, forward, cover_crouch_offset);
       break;
   }
@@ -663,7 +662,7 @@ checkpitchvisibility(frompoint, topoint, atnode) {
   pitch = angleclamp180(vectortoangles(topoint - frompoint)[0]);
 
   if(abs(pitch) > 45) {
-    if(isDefined(atnode) && atnode.type != #"cover crouch" && atnode.type != #"conceal crouch") {
+    if(isDefined(atnode) && atnode.type != # "cover crouch" && atnode.type != # "conceal crouch") {
       return false;
     }
 
@@ -828,11 +827,11 @@ persistentdebugline(start, end) {
 }
 
 isnodedontstand() {
-  return (self.spawnflags&4) == 4;
+  return (self.spawnflags & 4) == 4;
 }
 
 isnodedontcrouch() {
-  return (self.spawnflags&8) == 8;
+  return (self.spawnflags & 8) == 8;
 }
 
 doesnodeallowstance(stance) {
@@ -1309,7 +1308,7 @@ finish_rise_notetracks(note, spot) {
 
 zombie_rise_death(zombie, spot) {
   zombie.zombie_rise_death_out = 0;
-  zombie endon(#"rise_anim_finished", #"death");
+  zombie endon(#"rise_anim_finished", # "death");
 
   while(isDefined(zombie) && isDefined(zombie.health) && zombie.health > 1) {
     zombie waittill(#"damage");
@@ -1352,7 +1351,7 @@ zombie_gut_explosion() {
 }
 
 delayed_zombie_eye_glow() {
-  self endon(#"zombie_delete", #"death");
+  self endon(#"zombie_delete", # "death");
   self endon(#"death");
 
   if(isDefined(self.in_the_ground) && self.in_the_ground || isDefined(self.in_the_ceiling) && self.in_the_ceiling) {
@@ -1484,7 +1483,7 @@ round_spawn_failsafe() {
             level.zombie_total++;
             level.zombie_total_subtract++;
             var_1a8c05ae = {
-              #n_health: self.health, 
+              #n_health: self.health,
               #var_e0d660f6: self.var_e0d660f6
             };
 
@@ -1517,7 +1516,7 @@ ai_calculate_health(base_health, round_number) {
     }
   }
 
-  if(util::get_game_type() == #"zclassic" && level.gamedifficulty < 2 && round_number > 35) {
+  if(util::get_game_type() == # "zclassic" && level.gamedifficulty < 2 && round_number > 35) {
     round_number = 35;
   }
 
@@ -1599,7 +1598,7 @@ get_zombie_array() {
   enemies = getaispeciesarray(level.zombie_team, "all");
 
   for(i = 0; i < enemies.size; i++) {
-    if(enemies[i].archetype === #"zombie") {
+    if(enemies[i].archetype === # "zombie") {
       if(!isDefined(valid_enemies)) {
         valid_enemies = [];
       } else if(!isarray(valid_enemies)) {
@@ -1631,19 +1630,19 @@ function_d2f660ce(var_a598c292) {
 
   if(isDefined(level.var_43fb4347)) {
     switch (level.var_43fb4347) {
-      case #"run":
+      case # "run":
         if(var_a598c292 == "walk") {
           var_70b46d1c = "run";
         }
 
         break;
-      case #"sprint":
+      case # "sprint":
         if(var_a598c292 == "walk" || var_a598c292 == "run") {
           var_70b46d1c = "sprint";
         }
 
         break;
-      case #"super_sprint":
+      case # "super_sprint":
         if(var_a598c292 != "super_sprint") {
           var_70b46d1c = "super_sprint";
         }
@@ -1654,19 +1653,19 @@ function_d2f660ce(var_a598c292) {
 
   if(isDefined(level.var_102b1301)) {
     switch (level.var_102b1301) {
-      case #"walk":
+      case # "walk":
         if(var_a598c292 != "walk") {
           var_70b46d1c = "walk";
         }
 
         break;
-      case #"run":
+      case # "run":
         if(var_a598c292 == "sprint" || var_a598c292 == "super_sprint") {
           var_70b46d1c = "run";
         }
 
         break;
-      case #"sprint":
+      case # "sprint":
         if(var_a598c292 == "super_sprint") {
           var_70b46d1c = "sprint";
         }
@@ -1718,7 +1717,7 @@ set_zombie_run_cycle(new_move_speed) {
       }
     }
 
-    if(self.archetype === #"zombie" || self.archetype === #"catalyst") {
+    if(self.archetype === # "zombie" || self.archetype === # "catalyst") {
       if(isDefined(self.zm_variant_type_max)) {
         self.variant_type = randomint(self.zm_variant_type_max[self.zombie_move_speed][self.zombie_arms_position]);
       } else {
@@ -1906,35 +1905,35 @@ zombie_gib(amount, attacker, direction_vec, point, type, tagname, modelname, par
     b_gibbed = 1;
 
     switch (self.damagelocation) {
-      case #"torso_upper":
-      case #"torso_lower":
+      case # "torso_upper":
+      case # "torso_lower":
         if(!gibserverutils::isgibbed(self, 32)) {
           gibserverutils::gibrightarm(self);
         }
 
         break;
-      case #"right_arm_lower":
-      case #"right_arm_upper":
-      case #"right_hand":
+      case # "right_arm_lower":
+      case # "right_arm_upper":
+      case # "right_hand":
         if(!gibserverutils::isgibbed(self, 32)) {
           gibserverutils::gibrightarm(self);
         }
 
         break;
-      case #"left_arm_lower":
-      case #"left_arm_upper":
-      case #"left_hand":
+      case # "left_arm_lower":
+      case # "left_arm_upper":
+      case # "left_hand":
         if(!gibserverutils::isgibbed(self, 16)) {
           gibserverutils::gibleftarm(self);
         }
 
         break;
-      case #"right_leg_upper":
-      case #"left_leg_lower":
-      case #"right_leg_lower":
-      case #"left_foot":
-      case #"right_foot":
-      case #"left_leg_upper":
+      case # "right_leg_upper":
+      case # "left_leg_lower":
+      case # "right_leg_lower":
+      case # "left_foot":
+      case # "right_foot":
+      case # "left_leg_upper":
         b_gibbed = 0;
         break;
       default:
@@ -1955,8 +1954,8 @@ zombie_gib(amount, attacker, direction_vec, point, type, tagname, modelname, par
     if(isDefined(self.missinglegs) && self.missinglegs && self.health > 0) {
       b_gibbed = 1;
       level notify(#"crawler_created", {
-        #zombie: self, 
-        #player: attacker, 
+        #zombie: self,
+        #player: attacker,
         #weapon: weapon
       });
       self allowedstances("crouch");
@@ -2117,14 +2116,14 @@ zombie_should_gib(amount, attacker, type) {
   }
 
   switch (type) {
-    case #"mod_telefrag":
-    case #"mod_unknown":
-    case #"mod_burned":
-    case #"mod_trigger_hurt":
-    case #"mod_suicide":
-    case #"mod_falling":
+    case # "mod_telefrag":
+    case # "mod_unknown":
+    case # "mod_burned":
+    case # "mod_trigger_hurt":
+    case # "mod_suicide":
+    case # "mod_falling":
       return false;
-    case #"mod_melee":
+    case # "mod_melee":
       return false;
   }
 
@@ -2232,7 +2231,7 @@ zombie_hat_gib(attacker, means_of_death) {
 }
 
 damage_over_time(dmg, delay, attacker, means_of_death) {
-  self endon(#"death", #"exploding");
+  self endon(#"death", # "exploding");
   self endon(#"exploding");
 
   if(!isalive(self)) {
@@ -2527,7 +2526,7 @@ function_df5afb5e(missinglegs = 0) {
   self.missinglegs = missinglegs;
 }
 
-private function_c768f32b(params) {
+function_c768f32b(params) {
   level.num_crawlers--;
 }
 
@@ -2549,7 +2548,7 @@ run_ignore_player_handler() {
 
 updateanimationrate() {
   self notify(#"updateanimationrate");
-  self endon(#"death", #"updateanimationrate");
+  self endon(#"death", # "updateanimationrate");
   settings_bundle = self ai::function_9139c839();
 
   if(!isDefined(settings_bundle)) {
@@ -2578,4 +2577,3 @@ updateanimationrate() {
     var_fd8e23d9 = animation_rate;
   }
 }
-

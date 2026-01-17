@@ -22,8 +22,8 @@ function init_tomb_ambient_scripts() {
 
 function main() {
   level thread init_zeppelin("sky_cowbell_zeppelin_low", "stop_ambient_zeppelins");
-  util::delay(20, undefined, & init_zeppelin, "sky_cowbell_zeppelin_mid", "stop_ambient_zeppelins");
-  util::delay(40, undefined, & init_zeppelin, "sky_cowbell_zeppelin_high", "stop_ambient_zeppelins");
+  util::delay(20, undefined, &init_zeppelin, "sky_cowbell_zeppelin_mid", "stop_ambient_zeppelins");
+  util::delay(40, undefined, &init_zeppelin, "sky_cowbell_zeppelin_high", "stop_ambient_zeppelins");
 }
 
 function init_zeppelin(str_script_noteworthy, str_ender) {
@@ -33,7 +33,7 @@ function init_zeppelin(str_script_noteworthy, str_ender) {
     m_zeppelin = util::spawn_model("veh_t7_dlc_zm_zeppelin", (0, 0, 0));
     m_zeppelin setforcenocull();
     m_zeppelin clientfield::set("zeppelin_fx", 1);
-    while (true) {
+    while(true) {
       m_zeppelin move_zeppelin_down_new_path(a_path_structs);
     }
   }
@@ -46,10 +46,10 @@ function move_zeppelin_down_new_path(a_structs) {
   self rotateto(s_path_start.angles, 0.1);
   self waittill("movedone");
   self show();
-  if(!isdefined(s_path_start.goal_struct)) {
-    assert(isdefined(s_path_start.target), ("" + s_path_start.origin) + "");
+  if(!isDefined(s_path_start.goal_struct)) {
+    assert(isDefined(s_path_start.target), ("" + s_path_start.origin) + "");
     s_path_start.goal_struct = struct::get(s_path_start.target, "targetname");
-    assert(isdefined(s_path_start.goal_struct), "" + s_path_start.origin);
+    assert(isDefined(s_path_start.goal_struct), "" + s_path_start.origin);
   }
   n_move_time = randomfloatrange(120, 150);
   self moveto(s_path_start.goal_struct.origin, n_move_time);
@@ -59,13 +59,13 @@ function move_zeppelin_down_new_path(a_structs) {
 function get_unused_struct(a_structs) {
   a_valid_structs = [];
   b_no_unused_structs = 0;
-  while (!a_valid_structs.size) {
+  while(!a_valid_structs.size) {
     foreach(struct in a_structs) {
-      if(!isdefined(struct.used) || b_no_unused_structs) {
+      if(!isDefined(struct.used) || b_no_unused_structs) {
         struct.used = 0;
       }
       if(!struct.used) {
-        if(!isdefined(a_valid_structs)) {
+        if(!isDefined(a_valid_structs)) {
           a_valid_structs = [];
         } else if(!isarray(a_valid_structs)) {
           a_valid_structs = array(a_valid_structs);
@@ -102,7 +102,7 @@ function function_add29756() {
 }
 
 function function_b6165329() {
-  while (true) {
+  while(true) {
     level flag::wait_till("play_animation_planes");
     self scene::play(self.str_scene, self);
     level flag::set(self.var_76d4be72);
@@ -112,7 +112,7 @@ function function_b6165329() {
 function function_511ab91d() {
   var_e1149395 = getent("ambiance_dogfights_1", "targetname");
   var_7170dfe = getent("ambiance_dogfights_2", "targetname");
-  while (true) {
+  while(true) {
     var_f4570d42 = randomint(3);
     if(level.var_1766c187) {
       var_f4570d42 = 0;

@@ -13,8 +13,8 @@ init() {
   boxConfig = spawnStruct();
   boxConfig.weaponInfo = "deployable_vest_marker_mp";
   boxConfig.modelBase = "afr_mortar_ammo_01";
-  boxConfig.hintString = & "KILLSTREAKS_HINTS_DEPLOYABLE_GRENADES_PICKUP";
-  boxConfig.capturingString = & "KILLSTREAKS_DEPLOYABLE_GRENADES_TAKING";
+  boxConfig.hintString = &"KILLSTREAKS_HINTS_DEPLOYABLE_GRENADES_PICKUP";
+  boxConfig.capturingString = &"KILLSTREAKS_DEPLOYABLE_GRENADES_TAKING";
   boxConfig.event = "deployable_grenades_taken";
   boxConfig.streakName = BOX_TYPE;
   boxConfig.splashName = "used_deployable_grenades";

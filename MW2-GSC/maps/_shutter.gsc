@@ -7,7 +7,7 @@
 #include common_scripts\utility;
 
 main() {
-  if(!isdefined(level.windStrength))
+  if(!isDefined(level.windStrength))
     level.windStrength = 0.2;
 
   //WIND SETTINGS
@@ -30,31 +30,31 @@ main() {
 
   thread new_style_shutters();
 
-  array_levelthread(GetEntArray("wire", "targetname"), ::wireWander);
-  array_levelthread(GetEntArray("awning", "targetname"), ::awningWander);
-  array_levelthread(GetEntArray("palm", "targetname"), ::palmTrees);
+  array_levelthread(getEntArray("wire", "targetname"), ::wireWander);
+  array_levelthread(getEntArray("awning", "targetname"), ::awningWander);
+  array_levelthread(getEntArray("palm", "targetname"), ::palmTrees);
 
   leftShutters = [];
-  array = GetEntArray("shutter_left", "targetname");
+  array = getEntArray("shutter_left", "targetname");
   leftShutters = array_combine(leftShutters, array);
 
-  array = GetEntArray("shutter_right_open", "targetname");
+  array = getEntArray("shutter_right_open", "targetname");
   leftShutters = array_combine(leftShutters, array);
 
-  array = GetEntArray("shutter_left_closed", "targetname");
+  array = getEntArray("shutter_left_closed", "targetname");
   leftShutters = array_combine(leftShutters, array);
 
   foreach(shutter in leftShutters)
   shutter AddYaw(180);
 
   rightShutters = [];
-  array = GetEntArray("shutter_right", "targetname");
+  array = getEntArray("shutter_right", "targetname");
   rightShutters = array_combine(rightShutters, array);
 
-  array = GetEntArray("shutter_left_open", "targetname");
+  array = getEntArray("shutter_left_open", "targetname");
   rightShutters = array_combine(rightShutters, array);
 
-  array = GetEntArray("shutter_right_closed", "targetname");
+  array = getEntArray("shutter_right_closed", "targetname");
   rightShutters = array_combine(rightShutters, array);
 
   wait(0.05);
@@ -67,7 +67,7 @@ main() {
   array = undefined;
 
   windDirection = "left";
-  for (;;) {
+  for(;;) {
     array_levelthread(leftShutters, ::shutterWanderLeft, windDirection);
     array_levelthread(rightShutters, ::shutterWanderRight, windDirection);
     level waittill("wind blows", windDirection);
@@ -75,7 +75,7 @@ main() {
 }
 
 windController() {
-  for (;;) {
+  for(;;) {
     windDirection = "left";
     if(RandomInt(100) > 50)
       windDirection = "right";
@@ -85,7 +85,7 @@ windController() {
 }
 
 new_style_shutters() {
-  shutters = getentarray("shutter", "targetname");
+  shutters = getEntArray("shutter", "targetname");
 
   foreach(shutter in shutters) {
     // all shutters target an ent that tells them what direction they're facing
@@ -104,7 +104,7 @@ new_style_shutters() {
   }
 
   windDirection = "left";
-  for (;;) {
+  for(;;) {
     array_levelthread(shutters, ::shutterWander, windDirection);
     level waittill("wind blows", windDirection);
   }
@@ -130,13 +130,13 @@ shutterWander(shutter, windDirection) {
   max_right_angle = 80;
   max_left_angle = 80;
 
-  if(isdefined(shutter.script_max_left_angle))
+  if(isDefined(shutter.script_max_left_angle))
     max_left_angle = shutter.script_max_left_angle;
 
-  if(isdefined(shutter.script_max_right_angle))
+  if(isDefined(shutter.script_max_right_angle))
     max_right_angle = shutter.script_max_right_angle;
 
-  for (;;) {
+  for(;;) {
     shutter notify("shutterSound");
     rot = RandomIntRange(50, 80);
 
@@ -187,7 +187,7 @@ shutterWanderLeft(shutter, windDirection) {
   shutter RotateTo((shutter.angles[0], newYaw, shutter.angles[2]), newTime);
   wait(newTime + 0.1);
 
-  for (;;) {
+  for(;;) {
     shutter notify("shutterSound");
     rot = RandomInt(80);
     if(coinToss())
@@ -231,7 +231,7 @@ shutterWanderRight(shutter, windDirection) {
   shutter RotateTo((shutter.angles[0], newYaw, shutter.angles[2]), newTime);
   wait(newTime + 0.1);
 
-  for (;;) {
+  for(;;) {
     shutter notify("shutterSound");
     rot = RandomInt(80);
     if(RandomInt(100) > 50)
@@ -259,21 +259,21 @@ shutterWanderRight(shutter, windDirection) {
 }
 
 shutterSound() {
-  for (;;) {
+  for(;;) {
     self waittill("shutterSound");
-    //self PlaySound( "shutter_move", "sounddone" );
+    //self playSound( "shutter_move", "sounddone" );
     self waittill("sounddone");
     wait(RandomFloat(2));
   }
 }
 
 wireWander(wire) {
-  origins = GetEntArray(wire.target, "targetname");
+  origins = getEntArray(wire.target, "targetname");
   org1 = origins[0].origin;
   org2 = origins[1].origin;
 
   angles = VectorToAngles(org1 - org2);
-  ent = Spawn("script_model", (0, 0, 0));
+  ent = spawn("script_model", (0, 0, 0));
   ent.origin = vector_multiply(org1, 0.5) + vector_multiply(org2, 0.5);
   //	ent setmodel ("temp");
   ent.angles = angles;
@@ -283,7 +283,7 @@ wireWander(wire) {
   dist = 4 + RandomFloat(2);
   ent RotateRoll(dist * 0.5, 0.2);
   wait(0.2);
-  for (;;) {
+  for(;;) {
     rottime = rottimer + RandomFloat(rotRange) - (rotRange * 0.5);
     ent RotateRoll(dist, rottime, rottime * 0.5, rottime * 0.5);
     wait(rottime);
@@ -343,7 +343,7 @@ awningWander(ent) {
   	
   	wait RandomFloat(2);
   	
-  	for (;;)
+  	for(;;)
   	{
   		fWeight = (level.animWeightMin + RandomFloat((level.animWeightMax - level.animWeightMin)) );
   		fLength = 4;
@@ -387,14 +387,12 @@ palmTrees(ent) {
       break;
   }
 
-
-
-  if(!isdefined(ent.animname))
+  if(!isDefined(ent.animname)) {
     return;
-
+  }
   wait RandomFloat(2);
 
-  for (;;) {
+  for(;;) {
     fWeight = (level.animWeightMin + RandomFloat((level.animWeightMax - level.animWeightMin)));
     fLength = 4;
 

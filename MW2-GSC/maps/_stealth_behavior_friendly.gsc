@@ -20,8 +20,10 @@ stealth_behavior_friendly_main() {
 }
 
 /************************************************************************************************************/
+
 /*												FRIENDLY LOGIC												*/
 /************************************************************************************************************/
+
 friendly_state_hidden() {
   self thread set_battlechatter(false);
 
@@ -29,10 +31,10 @@ friendly_state_hidden() {
   self.grenadeammo = 0;
 
   self.forceSideArm = undefined;
-  //used to be ignore all - but that makes him not aim at enemies when exposed - which isn't good...also 
+  //used to be ignore all - but that makes him not aim at enemies when exposed - which isn't good...also
   //after stealth groups were created we want to differentiate between who should be shot at and who shouldn't
   //so we don't all of a sudden alert another stealth group by shooting at them
-  //self.dontevershoot 	= true; 
+  //self.dontevershoot 	= true;
   self.ignoreme = true;
 }
 
@@ -44,11 +46,11 @@ friendly_state_spotted() {
 
   self thread set_battlechatter(true);
 
-  if(isdefined(self._stealth.behavior.oldgrenadeammo))
+  if(isDefined(self._stealth.behavior.oldgrenadeammo))
     self.grenadeammo = self._stealth.behavior.oldgrenadeammo;
   else
     self.grenadeammo = 3;
-  //used to be ignore all - but that makes him not aim at enemies when exposed - which isn't good...also 
+  //used to be ignore all - but that makes him not aim at enemies when exposed - which isn't good...also
   //after stealth groups were created we want to differentiate between who should be shot at and who shouldn't
   //so we don't all of a sudden alert another stealth group by shooting at them	
   //self.dontevershoot 	= undefined;
@@ -69,13 +71,13 @@ friendly_state_spotted() {
 friendly_spotted_getup_from_prone(angles) {
   self endon("death");
 
-  if(self._stealth.logic.stance != "prone")
+  if(self._stealth.logic.stance != "prone") {
     return;
-
+  }
   self ent_flag_set("_stealth_custom_anim");
   anime = "_stealth_prone_2_run_roll";
 
-  if(isdefined(angles))
+  if(isDefined(angles))
     self orientMode("face angle", angles[1] + 20);
   // self thread friendly_spotted_getup_from_prone_rotate( angles, anime );
 
@@ -87,23 +89,24 @@ friendly_spotted_getup_from_prone(angles) {
 }
 
 /************************************************************************************************************/
+
 /*													SETUP													*/
 /************************************************************************************************************/
 
 friendly_init() {
-  assertEX(isdefined(self._stealth), "There is no self._stealth struct.You ran stealth behavior before running the detection logic.Run _stealth_logic::friendly_init() on this AI first");
+  assertEX(isDefined(self._stealth), "There is no self._stealth struct.You ran stealth behavior before running the detection logic.Run _stealth_logic::friendly_init() on this AI first");
 
   self ent_flag_init("_stealth_custom_anim");
   self ent_flag_init("_stealth_override_goalpos");
 
   // AI FUNCTIONS
   // this is our behavior struct inside of _stealth...everything we do will go in here.
-  self._stealth.behavior = spawnstruct();
+  self._stealth.behavior = spawnStruct();
   self._stealth.behavior.ai_functions = [];
 
   self friendly_default_state_behavior();
 
-  self._stealth.plugins = spawnstruct();
+  self._stealth.plugins = spawnStruct();
 
   self thread ai_stealth_pause_handler();
 }

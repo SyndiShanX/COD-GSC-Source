@@ -136,9 +136,7 @@ playback() {
   for(i = 0; i < count; i++) {
     entry = self.codepredictcmd[i];
     handler = entry["handler"];
-    [
-      [handler]
-    ](entry);
+    [[handler]](entry);
     self.codepredictcmd[i] = undefined;
   }
 

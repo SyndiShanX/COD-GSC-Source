@@ -10,7 +10,7 @@
 #using_animtree("generic_human");
 main() {
   prof_begin("animscript_init");
-  self.a = SpawnStruct();
+  self.a = spawnStruct();
   self.root_anim = % root;
   self thread beginGrenadeTracking();
   firstInit();
@@ -98,7 +98,7 @@ main() {
   for(i = 0; i < keys.size; i++) {
     clear_exception(keys[i]);
   }
-  self.old = SpawnStruct();
+  self.old = spawnStruct();
   self.reacquire_state = 0;
   self thread setNameAndRank();
   self.shouldConserveAmmoTime = 0;
@@ -602,9 +602,9 @@ firstInit() {
   if(!isDefined(level.squadEnt)) {
     level.squadEnt = [];
   }
-  anim.masterGroup["axis"] = SpawnStruct();
+  anim.masterGroup["axis"] = spawnStruct();
   anim.masterGroup["axis"].sightTime = 0;
-  anim.masterGroup["allies"] = SpawnStruct();
+  anim.masterGroup["allies"] = spawnStruct();
   anim.masterGroup["allies"].sightTime = 0;
   anim.scriptSquadGroup = [];
   initMoveStartStopTransitions();

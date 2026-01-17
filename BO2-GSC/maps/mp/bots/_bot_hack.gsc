@@ -41,7 +41,7 @@ bot_hack_at_goal() {
   goal = self getgoal("hack");
 
   if(isDefined(goal)) {
-    tanks = getentarray("talon", "targetname");
+    tanks = getEntArray("talon", "targetname");
     tanks = arraysort(tanks, self.origin);
 
     foreach(tank in tanks) {
@@ -85,7 +85,7 @@ bot_hack_think() {
     self cancelgoal("hack");
   }
 
-  tanks = getentarray("talon", "targetname");
+  tanks = getEntArray("talon", "targetname");
   tanks = arraysort(tanks, self.origin);
 
   if(!is_true(level.drones_spawned))
@@ -118,7 +118,7 @@ bot_hack_think() {
     }
 
     if(!maps\mp\bots\_bot::bot_vehicle_weapon_ammo("emp_grenade_mp")) {
-      ammo = getentarray("weapon_scavenger_item_hack_mp", "classname");
+      ammo = getEntArray("weapon_scavenger_item_hack_mp", "classname");
       ammo = arraysort(ammo, self.origin);
 
       foreach(bag in ammo) {

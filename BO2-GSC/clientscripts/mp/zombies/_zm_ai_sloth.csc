@@ -61,7 +61,7 @@ actor_is_sloth_handler_cb(localclientnum, oldval, newval, bnewent, binitialsnap,
 
 sloth_vomit_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval)
-    playfxontag(localclientnum, level._effect["fx_zmb_taser_vomit"], self, "j_neck");
+    playFXOnTag(localclientnum, level._effect["fx_zmb_taser_vomit"], self, "j_neck");
 }
 
 sloth_buildable_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -100,22 +100,22 @@ loop_buildable_fx(localclientnum) {
   }
 
   while(true) {
-    playfx(localclientnum, level._effect["fx_buried_sloth_building"], closest, "tag_origin");
+    playFX(localclientnum, level._effect["fx_buried_sloth_building"], closest, "tag_origin");
     wait 0.25;
   }
 }
 
 sloth_drinking_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval)
-    playfxontag(localclientnum, level._effect["fx_buried_sloth_drinking"], self, "j_head");
+    playFXOnTag(localclientnum, level._effect["fx_buried_sloth_drinking"], self, "j_head");
 }
 
 sloth_eating_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval)
-    playfxontag(localclientnum, level._effect["fx_buried_sloth_eating"], self, "j_head");
+    playFXOnTag(localclientnum, level._effect["fx_buried_sloth_eating"], self, "j_head");
 }
 
 sloth_glass_brk_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval)
-    playfxontag(localclientnum, level._effect["fx_buried_sloth_glass_brk"], self, "tag_weapon_right");
+    playFXOnTag(localclientnum, level._effect["fx_buried_sloth_glass_brk"], self, "tag_weapon_right");
 }

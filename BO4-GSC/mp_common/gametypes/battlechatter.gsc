@@ -16,7 +16,6 @@
 #include scripts\mp_common\gametypes\match;
 #include scripts\weapons\grapple;
 #include scripts\weapons\weapon_utils;
-
 #namespace battlechatter;
 
 autoexec __init__system__() {
@@ -24,10 +23,9 @@ autoexec __init__system__() {
 }
 
 __init__() {
-
   level thread devgui_think();
 
-    callback::on_joined_team(&on_joined_team);
+  callback::on_joined_team(&on_joined_team);
   callback::on_spawned(&on_player_spawned);
   level.heroplaydialog = &play_dialog;
   level.var_9082a3b6 = &function_bf68a5ab;
@@ -60,33 +58,33 @@ __init__() {
   }
 
   level.bcsounds = [];
-  level.bcsounds[#"incoming_alert"] = [];
-  level.bcsounds[#"incoming_alert"][#"frag_grenade"] = "incomingFrag";
-  level.bcsounds[#"incoming_alert"][#"incendiary_grenade"] = "incomingIncendiary";
-  level.bcsounds[#"incoming_alert"][#"sticky_grenade"] = "incomingSemtex";
-  level.bcsounds[#"incoming_alert"][#"eq_sticky_grenade"] = "incomingSemtex";
-  level.bcsounds[#"incoming_alert"][#"launcher_standard"] = "threatRpg";
-  level.bcsounds[#"incoming_delay"] = [];
-  level.bcsounds[#"incoming_delay"][#"frag_grenade"] = "fragGrenadeDelay";
-  level.bcsounds[#"incoming_delay"][#"incendiary_grenade"] = "incendiaryGrenadeDelay";
-  level.bcsounds[#"incoming_alert"][#"sticky_grenade"] = "semtexDelay";
-  level.bcsounds[#"incoming_alert"][#"eq_sticky_grenade"] = "semtexDelay";
-  level.bcsounds[#"incoming_delay"][#"launcher_standard"] = "missileDelay";
-  level.bcsounds[#"kill_dialog"] = [];
-  level.bcsounds[#"kill_dialog"][#"battery"] = "killBattery";
-  level.bcsounds[#"kill_dialog"][#"buffassault"] = "killBuffAssault";
-  level.bcsounds[#"kill_dialog"][#"engineer"] = "killEngineer";
-  level.bcsounds[#"kill_dialog"][#"firebreak"] = "killFirebreak";
-  level.bcsounds[#"kill_dialog"][#"nomad"] = "killNomad";
-  level.bcsounds[#"kill_dialog"][#"prophet"] = "killProphet";
-  level.bcsounds[#"kill_dialog"][#"recon"] = "killRecon";
-  level.bcsounds[#"kill_dialog"][#"ruin"] = "killRuin";
-  level.bcsounds[#"kill_dialog"][#"seraph"] = "killSeraph";
-  level.bcsounds[#"kill_dialog"][#"swatpolice"] = "killSwatPolice";
-  level.bcsounds[#"kill_dialog"][#"zero"] = "killZero";
-  level.bcsounds[#"kill_dialog"][#"outrider"] = "killOutrider";
-  level.bcsounds[#"kill_dialog"][#"reaper"] = "killReaper";
-  level.bcsounds[#"kill_dialog"][#"spectre"] = "killSpectre";
+  level.bcsounds[# "incoming_alert"] = [];
+  level.bcsounds[# "incoming_alert"][# "frag_grenade"] = "incomingFrag";
+  level.bcsounds[# "incoming_alert"][# "incendiary_grenade"] = "incomingIncendiary";
+  level.bcsounds[# "incoming_alert"][# "sticky_grenade"] = "incomingSemtex";
+  level.bcsounds[# "incoming_alert"][# "eq_sticky_grenade"] = "incomingSemtex";
+  level.bcsounds[# "incoming_alert"][# "launcher_standard"] = "threatRpg";
+  level.bcsounds[# "incoming_delay"] = [];
+  level.bcsounds[# "incoming_delay"][# "frag_grenade"] = "fragGrenadeDelay";
+  level.bcsounds[# "incoming_delay"][# "incendiary_grenade"] = "incendiaryGrenadeDelay";
+  level.bcsounds[# "incoming_alert"][# "sticky_grenade"] = "semtexDelay";
+  level.bcsounds[# "incoming_alert"][# "eq_sticky_grenade"] = "semtexDelay";
+  level.bcsounds[# "incoming_delay"][# "launcher_standard"] = "missileDelay";
+  level.bcsounds[# "kill_dialog"] = [];
+  level.bcsounds[# "kill_dialog"][# "battery"] = "killBattery";
+  level.bcsounds[# "kill_dialog"][# "buffassault"] = "killBuffAssault";
+  level.bcsounds[# "kill_dialog"][# "engineer"] = "killEngineer";
+  level.bcsounds[# "kill_dialog"][# "firebreak"] = "killFirebreak";
+  level.bcsounds[# "kill_dialog"][# "nomad"] = "killNomad";
+  level.bcsounds[# "kill_dialog"][# "prophet"] = "killProphet";
+  level.bcsounds[# "kill_dialog"][# "recon"] = "killRecon";
+  level.bcsounds[# "kill_dialog"][# "ruin"] = "killRuin";
+  level.bcsounds[# "kill_dialog"][# "seraph"] = "killSeraph";
+  level.bcsounds[# "kill_dialog"][# "swatpolice"] = "killSwatPolice";
+  level.bcsounds[# "kill_dialog"][# "zero"] = "killZero";
+  level.bcsounds[# "kill_dialog"][# "outrider"] = "killOutrider";
+  level.bcsounds[# "kill_dialog"][# "reaper"] = "killReaper";
+  level.bcsounds[# "kill_dialog"][# "spectre"] = "killSpectre";
 
   if(level.teambased && !isDefined(game.boostplayerspicked)) {
     game.boostplayerspicked = [];
@@ -96,7 +94,7 @@ __init__() {
     }
   }
 
-  level.allowbattlechatter[#"bc"] = getgametypesetting(#"allowbattlechatter");
+  level.allowbattlechatter[# "bc"] = getgametypesetting(#"allowbattlechatter");
   level thread pick_boost_number();
   keycounts = [];
   playerdialogbundles = struct::get_script_bundles("mpdialog_player");
@@ -136,8 +134,8 @@ __init__() {
     mpdialog = spawnStruct();
   }
 
-  level.allowspecialistdialog = (isDefined(mpdialog.enableherodialog) ? mpdialog.enableherodialog : 0) && isDefined(level.allowbattlechatter[#"bc"]) && level.allowbattlechatter[#"bc"];
-  level.playstartconversation = (isDefined(mpdialog.enableconversation) ? mpdialog.enableconversation : 0) && isDefined(level.allowbattlechatter[#"bc"]) && level.allowbattlechatter[#"bc"];
+  level.allowspecialistdialog = (isDefined(mpdialog.enableherodialog) ? mpdialog.enableherodialog : 0) && isDefined(level.allowbattlechatter[# "bc"]) && level.allowbattlechatter[# "bc"];
+  level.playstartconversation = (isDefined(mpdialog.enableconversation) ? mpdialog.enableconversation : 0) && isDefined(level.allowbattlechatter[# "bc"]) && level.allowbattlechatter[# "bc"];
   level.var_bd715920 = &function_e44c3a3c;
 }
 
@@ -208,7 +206,7 @@ on_joined_team(params) {
 
   self globallogic_audio::flush_dialog();
 
-  if(!(isDefined(level.inprematchperiod) && level.inprematchperiod) && !(isDefined(self.pers[#"playedgamemode"]) && self.pers[#"playedgamemode"]) && isDefined(level.leaderdialog)) {
+  if(!(isDefined(level.inprematchperiod) && level.inprematchperiod) && !(isDefined(self.pers[# "playedgamemode"]) && self.pers[# "playedgamemode"]) && isDefined(level.leaderdialog)) {
     if(level.hardcoremode) {
       if(globallogic_utils::function_308e3379()) {
         self globallogic_audio::leader_dialog_on_player(level.leaderdialog.var_d04b3734, undefined, undefined, undefined, 1);
@@ -221,13 +219,13 @@ on_joined_team(params) {
       self globallogic_audio::leader_dialog_on_player(level.leaderdialog.startgamedialog, undefined, undefined, undefined, 1);
     }
 
-    self.pers[#"playedgamemode"] = 1;
+    self.pers[# "playedgamemode"] = 1;
   }
 }
 
 set_blops_dialog() {
-  self.pers[#"mptaacom"] = "blops_taacom";
-  self.pers[#"mpcommander"] = "blops_commander";
+  self.pers[# "mptaacom"] = "blops_taacom";
+  self.pers[# "mpcommander"] = "blops_commander";
 
   if(isDefined(level.var_cddcf1e3)) {
     self[[level.var_cddcf1e3]]();
@@ -235,8 +233,8 @@ set_blops_dialog() {
 }
 
 set_cdp_dialog() {
-  self.pers[#"mptaacom"] = "cdp_taacom";
-  self.pers[#"mpcommander"] = "cdp_commander";
+  self.pers[# "mptaacom"] = "cdp_taacom";
+  self.pers[# "mpcommander"] = "cdp_commander";
 
   if(isDefined(level.var_abaf1ec9)) {
     self[[level.var_abaf1ec9]]();
@@ -258,7 +256,7 @@ on_player_spawned() {
   self callback::add_callback("weapon_melee", &function_59f9cdab);
   self callback::add_callback("weapon_melee_charge", &function_59f9cdab);
 
-  if(level.splitscreen || !level.allowbattlechatter[#"bc"]) {
+  if(level.splitscreen || !level.allowbattlechatter[# "bc"]) {
     return;
   }
 
@@ -296,7 +294,7 @@ function_58c93260(player) {
 function_af2bf286(player) {
   self notify("40dcec56538c25e1");
   self endon("40dcec56538c25e1");
-  self endon(#"death", #"disconnect", #"weapon_change");
+  self endon(#"death", # "disconnect", # "weapon_change");
   level endon(#"game_ended");
   var_8e76086 = mpdialog_value("warmachineThreatMinDistance", 100);
   var_8e76086 *= var_8e76086;
@@ -355,7 +353,7 @@ function_af2bf286(player) {
 }
 
 function_44b5e397() {
-  self endon(#"death", #"disconnect");
+  self endon(#"death", # "disconnect");
   level endon(#"game_ended");
   self notify("3a7ae30337ee24bf");
   self endon("3a7ae30337ee24bf");
@@ -405,19 +403,19 @@ function_44b5e397() {
     }
 
     switch (nextweapon.name) {
-      case #"hero_pineapplegun":
+      case # "hero_pineapplegun":
         dialogkey = playerbundle.warmachineweaponuse;
         break;
-      case #"shock_rifle":
+      case # "shock_rifle":
         dialogkey = playerbundle.tempestweaponuse;
         break;
-      case #"sig_lmg":
-        if(waitresult.last_weapon.name != #"sig_lmg_alt") {
+      case # "sig_lmg":
+        if(waitresult.last_weapon.name != # "sig_lmg_alt") {
           dialogkey = playerbundle.scytheweaponuse;
         }
 
         break;
-      case #"sig_bow_quickshot":
+      case # "sig_bow_quickshot":
         dialogkey = playerbundle.sparrowweaponuse;
         break;
     }
@@ -593,46 +591,46 @@ function_551980b7(dialogname) {
   }
 
   switch (dialogname) {
-    case #"battery":
+    case # "battery":
       dialogkey = playerbundle.threatbattery;
       break;
-    case #"buffassault":
+    case # "buffassault":
       dialogkey = playerbundle.var_f33cef89;
       break;
-    case #"engineer":
+    case # "engineer":
       dialogkey = playerbundle.var_41e91a42;
       break;
-    case #"firebreak":
+    case # "firebreak":
       dialogkey = playerbundle.var_f671ae19;
       break;
-    case #"nomad":
+    case # "nomad":
       dialogkey = playerbundle.var_928f03c4;
       break;
-    case #"outrider":
+    case # "outrider":
       dialogkey = playerbundle.var_decbe599;
       break;
-    case #"prophet":
+    case # "prophet":
       dialogkey = playerbundle.var_443d5083;
       break;
-    case #"reaper":
+    case # "reaper":
       dialogkey = playerbundle.var_a8809c1c;
       break;
-    case #"recon":
+    case # "recon":
       dialogkey = playerbundle.var_f3745d99;
       break;
-    case #"ruin":
+    case # "ruin":
       dialogkey = playerbundle.var_1bfb0e39;
       break;
-    case #"seraph":
+    case # "seraph":
       dialogkey = playerbundle.threatseraph;
       break;
-    case #"spectre":
+    case # "spectre":
       dialogkey = playerbundle.var_5fdf57ca;
       break;
-    case #"swatpolice":
+    case # "swatpolice":
       dialogkey = playerbundle.var_aa447d74;
       break;
-    case #"zero":
+    case # "zero":
       dialogkey = playerbundle.var_53f12400;
       break;
   }
@@ -643,7 +641,7 @@ function_551980b7(dialogname) {
 }
 
 function_7139078d() {
-  self endon(#"death", #"disconnect");
+  self endon(#"death", # "disconnect");
   level endon(#"game_ended");
   self notify("6b96a91e5ff2b8a7");
   self endon("6b96a91e5ff2b8a7");
@@ -673,17 +671,17 @@ function_7139078d() {
       }
 
       switch (result.suppressor.currentweapon.name) {
-        case #"hero_annihilator":
+        case # "hero_annihilator":
           dialogkey = playerbundle.var_93ef961;
           break;
       }
     } else if(isDefined(result.suppressor.turretweapon)) {
-      if(result.suppressor.turretweapon.name == #"gun_ultimate_turret") {
+      if(result.suppressor.turretweapon.name == # "gun_ultimate_turret") {
         result.suppressor.var_87b1ba00 = 1;
         self play_killstreak_threat(result.suppressor.killstreaktype);
       }
     } else if(isDefined(result.suppressor.weapon)) {
-      if(isDefined(level.var_24de8afe) && isDefined(result.suppressor.ai) && isDefined(result.suppressor.ai.swat_gunner) && result.suppressor.ai.swat_gunner && result.suppressor.weapon.name == #"hash_6c1be4b025206124") {
+      if(isDefined(level.var_24de8afe) && isDefined(result.suppressor.ai) && isDefined(result.suppressor.ai.swat_gunner) && result.suppressor.ai.swat_gunner && result.suppressor.weapon.name == # "hash_6c1be4b025206124") {
         result.suppressor[[level.var_24de8afe]](self, result.suppressor.script_owner);
         result.suppressor.var_87b1ba00 = 1;
       }
@@ -708,39 +706,39 @@ function_bd715920(var_28b40381, attacker, eventorigin, eventobject, timedelay) {
   }
 
   switch (var_28b40381.name) {
-    case #"sig_buckler_dw":
-    case #"gadget_vision_pulse":
-    case #"sig_buckler_turret":
+    case # "sig_buckler_dw":
+    case # "gadget_vision_pulse":
+    case # "sig_buckler_turret":
       var_4a247dec = 1;
       break;
-    case #"eq_tripwire":
-    case #"eq_shroud":
-    case #"gadget_supplypod":
-    case #"eq_emp_grenade":
-    case #"dog_ai_defaultmelee":
-    case #"eq_concertina_wire":
-    case #"trophy_system":
+    case # "eq_tripwire":
+    case # "eq_shroud":
+    case # "gadget_supplypod":
+    case # "eq_emp_grenade":
+    case # "dog_ai_defaultmelee":
+    case # "eq_concertina_wire":
+    case # "trophy_system":
       var_2f741f8e = 1;
       break;
-    case #"eq_hawk":
-    case #"frag_grenade":
-    case #"eq_swat_grenade":
-    case #"hash_3f62a872201cd1ce":
-    case #"hash_5825488ac68418af":
-    case #"eq_cluster_semtex_grenade":
-    case #"eq_slow_grenade":
-    case #"eq_molotov":
-    case #"concussion_grenade":
+    case # "eq_hawk":
+    case # "frag_grenade":
+    case # "eq_swat_grenade":
+    case # "hash_3f62a872201cd1ce":
+    case # "hash_5825488ac68418af":
+    case # "eq_cluster_semtex_grenade":
+    case # "eq_slow_grenade":
+    case # "eq_molotov":
+    case # "concussion_grenade":
       var_4a247dec = 1;
       var_2f741f8e = 1;
       break;
-    case #"hero_flamethrower":
-    case #"gadget_radiation_field":
+    case # "hero_flamethrower":
+    case # "gadget_radiation_field":
       var_4e424b8b = 1;
       break;
-    case #"ability_smart_cover":
-    case #"sig_blade":
-    case #"eq_gravityslam":
+    case # "ability_smart_cover":
+    case # "sig_blade":
+    case # "eq_gravityslam":
       var_2f741f8e = 1;
       var_4e424b8b = 0;
       var_494ab587 = 1;
@@ -819,7 +817,7 @@ function_bd715920(var_28b40381, attacker, eventorigin, eventobject, timedelay) {
   }
 }
 
-private function_95e44f78(weapon, timedelay) {
+function_95e44f78(weapon, timedelay) {
   bundlename = self getmpdialogname();
 
   if(!isDefined(bundlename)) {
@@ -833,84 +831,84 @@ private function_95e44f78(weapon, timedelay) {
   }
 
   switch (weapon.name) {
-    case #"sig_buckler_dw":
-    case #"sig_buckler_turret":
+    case # "sig_buckler_dw":
+    case # "sig_buckler_turret":
       dialogkey = playerbundle.var_fa5db24c;
       break;
-    case #"eq_concertina_wire":
+    case # "eq_concertina_wire":
       dialogkey = playerbundle.var_b51a051a;
       break;
-    case #"eq_slow_grenade":
-    case #"concussion_grenade":
+    case # "eq_slow_grenade":
+    case # "concussion_grenade":
       dialogkey = playerbundle.var_b5677849;
       break;
-    case #"gadget_health_boost":
-    case #"gadget_cleanse":
+    case # "gadget_health_boost":
+    case # "gadget_cleanse":
       dialogkey = playerbundle.var_d04c6a79;
       break;
-    case #"dog_ai_defaultmelee":
+    case # "dog_ai_defaultmelee":
       dialogkey = playerbundle.var_35e44265;
       break;
-    case #"eq_swat_grenade":
-    case #"hash_3f62a872201cd1ce":
-    case #"hash_5825488ac68418af":
+    case # "eq_swat_grenade":
+    case # "hash_3f62a872201cd1ce":
+    case # "hash_5825488ac68418af":
       dialogkey = playerbundle.var_29a98af1;
       break;
-    case #"frag_grenade":
+    case # "frag_grenade":
       dialogkey = playerbundle.var_1d37ae8b;
       break;
-    case #"eq_gravityslam":
+    case # "eq_gravityslam":
       dialogkey = playerbundle.var_1d06de0e;
       break;
-    case #"hero_flamethrower":
+    case # "hero_flamethrower":
       dialogkey = playerbundle.var_3f4a1443;
       break;
-    case #"gadget_radiation_field":
+    case # "gadget_radiation_field":
       dialogkey = playerbundle.var_e6d1c1e3;
       break;
-    case #"ability_smart_cover":
+    case # "ability_smart_cover":
       dialogkey = playerbundle.var_efb67b32;
       break;
-    case #"gadget_supplypod":
+    case # "gadget_supplypod":
       dialogkey = playerbundle.var_2339275b;
       break;
-    case #"trophy_system":
+    case # "trophy_system":
       dialogkey = playerbundle.var_d3d0cdde;
       break;
-    case #"gadget_vision_pulse":
+    case # "gadget_vision_pulse":
       dialogkey = playerbundle.var_23824a56;
       break;
-    case #"eq_cluster_semtex_grenade":
+    case # "eq_cluster_semtex_grenade":
       dialogkey = playerbundle.var_606d0b06;
       break;
-    case #"eq_tripwire":
+    case # "eq_tripwire":
       dialogkey = playerbundle.var_6f89cd5;
       break;
-    case #"gadget_spawnbeacon":
+    case # "gadget_spawnbeacon":
       dialogkey = playerbundle.var_1b7e4074;
       break;
-    case #"eq_molotov":
+    case # "eq_molotov":
       dialogkey = playerbundle.var_c4b4c50e;
       break;
-    case #"eq_emp_grenade":
+    case # "eq_emp_grenade":
       dialogkey = playerbundle.var_27b0d135;
       break;
-    case #"gadget_icepick":
+    case # "gadget_icepick":
       dialogkey = playerbundle.var_e21e8b0a;
       break;
-    case #"eq_hawk":
+    case # "eq_hawk":
       dialogkey = playerbundle.var_f1416960;
       break;
-    case #"sig_blade":
+    case # "sig_blade":
       dialogkey = playerbundle.var_4ef902be;
       break;
-    case #"eq_smoke":
+    case # "eq_smoke":
       dialogkey = playerbundle.var_cfc7adfb;
       break;
-    case #"sig_lmg":
+    case # "sig_lmg":
       dialogkey = playerbundle.var_b50819f2;
       break;
-    case #"eq_shroud":
+    case # "eq_shroud":
       dialogkey = playerbundle.var_c41dc169;
       break;
     default:
@@ -941,35 +939,35 @@ enemy_threat() {
     endpoint = eyepoint + dir;
     traceresult = bulletTrace(eyepoint, endpoint, 1, self);
 
-    if(isDefined(traceresult[#"entity"]) && util::function_fbce7263(traceresult[#"entity"].team, self.team)) {
-      if(traceresult[#"entity"].classname == "player") {
-        if(!(traceresult[#"entity"].var_9ee835dc === 1)) {
+    if(isDefined(traceresult[# "entity"]) && util::function_fbce7263(traceresult[# "entity"].team, self.team)) {
+      if(traceresult[# "entity"].classname == "player") {
+        if(!(traceresult[# "entity"].var_9ee835dc === 1)) {
           playerweapon = undefined;
 
-          if(isDefined(traceresult[#"entity"].weapon)) {
-            playerweapon = traceresult[#"entity"].weapon;
-          } else if(isDefined(traceresult[#"entity"].currentweapon)) {
-            playerweapon = traceresult[#"entity"].currentweapon;
+          if(isDefined(traceresult[# "entity"].weapon)) {
+            playerweapon = traceresult[# "entity"].weapon;
+          } else if(isDefined(traceresult[# "entity"].currentweapon)) {
+            playerweapon = traceresult[# "entity"].currentweapon;
           }
 
-          if(isDefined(traceresult[#"entity"].killstreaktype) && !isarray(traceresult[#"entity"].killstreaktype)) {
-            self play_killstreak_threat(traceresult[#"entity"].killstreaktype);
-            traceresult[#"entity"].var_9ee835dc = 1;
+          if(isDefined(traceresult[# "entity"].killstreaktype) && !isarray(traceresult[# "entity"].killstreaktype)) {
+            self play_killstreak_threat(traceresult[# "entity"].killstreaktype);
+            traceresult[# "entity"].var_9ee835dc = 1;
             self.enemythreattime = gettime();
             continue;
           }
 
-          if(isDefined(playerweapon) && (isplayer(traceresult[#"entity"]) || isDefined(traceresult[#"entity"].owner))) {
-            var_24d3b6ca = isplayer(traceresult[#"entity"]) ? traceresult[#"entity"] : traceresult[#"entity"].owner;
-            var_24d3b6ca function_bd715920(playerweapon, self, traceresult[#"entity"].origin, traceresult[#"entity"]);
-            traceresult[#"entity"].var_9ee835dc = 1;
+          if(isDefined(playerweapon) && (isplayer(traceresult[# "entity"]) || isDefined(traceresult[# "entity"].owner))) {
+            var_24d3b6ca = isplayer(traceresult[# "entity"]) ? traceresult[# "entity"] : traceresult[# "entity"].owner;
+            var_24d3b6ca function_bd715920(playerweapon, self, traceresult[# "entity"].origin, traceresult[# "entity"]);
+            traceresult[# "entity"].var_9ee835dc = 1;
             self.enemythreattime = gettime();
             continue;
           }
 
           if(dialog_chance("enemyContactChance")) {
             if(dialog_chance("enemyHeroContactChance")) {
-              self function_551980b7(traceresult[#"entity"] getmpdialogname());
+              self function_551980b7(traceresult[# "entity"] getmpdialogname());
             } else {
               self thread play_dialog("threatInfantry", 2);
             }
@@ -1083,7 +1081,7 @@ function_e6457410(attacker, victim, weapon, inflictor) {
   dotproduct = vectordot(dir, relativepos);
 
   switch (weapon.name) {
-    case #"hero_annihilator":
+    case # "hero_annihilator":
       attacker.var_3528f7e9 = (isDefined(attacker.var_3528f7e9) ? attacker.var_3528f7e9 : 0) + 1;
 
       if(attacker.var_3528f7e9 == (isDefined(mpdialog.var_6bb5d97b) ? mpdialog.var_6bb5d97b : 0)) {
@@ -1091,8 +1089,8 @@ function_e6457410(attacker, victim, weapon, inflictor) {
       }
 
       break;
-    case #"sig_buckler_dw":
-    case #"sig_buckler_turret":
+    case # "sig_buckler_dw":
+    case # "sig_buckler_turret":
       attacker.var_3528f7e9 = (isDefined(attacker.var_3528f7e9) ? attacker.var_3528f7e9 : 0) + 1;
 
       if(attacker.var_3528f7e9 == (isDefined(mpdialog.var_a4237278) ? mpdialog.var_a4237278 : 0)) {
@@ -1100,13 +1098,13 @@ function_e6457410(attacker, victim, weapon, inflictor) {
       }
 
       break;
-    case #"claymore":
+    case # "claymore":
       if(dotproduct > 0 && sighttracepassed(attacker getEye(), victim getEye(), 1, attacker, victim)) {
         var_17a094cf = 1;
       }
 
       break;
-    case #"dog_ai_defaultmelee":
+    case # "dog_ai_defaultmelee":
       if(!isDefined(inflictor)) {
         return;
       }
@@ -1119,7 +1117,7 @@ function_e6457410(attacker, victim, weapon, inflictor) {
       }
 
       break;
-    case #"hero_flamethrower":
+    case # "hero_flamethrower":
       attacker.var_3528f7e9 = (isDefined(attacker.var_3528f7e9) ? attacker.var_3528f7e9 : 0) + 1;
 
       if(attacker.var_3528f7e9 == (isDefined(mpdialog.var_f221b000) ? mpdialog.var_f221b000 : 0)) {
@@ -1127,7 +1125,7 @@ function_e6457410(attacker, victim, weapon, inflictor) {
       }
 
       break;
-    case #"eq_gravityslam":
+    case # "eq_gravityslam":
       attacker.var_3528f7e9 = (isDefined(attacker.var_3528f7e9) ? attacker.var_3528f7e9 : 0) + 1;
 
       if(attacker.var_3528f7e9 == (isDefined(mpdialog.var_b7ee7b18) ? mpdialog.var_b7ee7b18 : 0)) {
@@ -1135,7 +1133,7 @@ function_e6457410(attacker, victim, weapon, inflictor) {
       }
 
       break;
-    case #"gun_mini_turret":
+    case # "gun_mini_turret":
       if(!isDefined(inflictor)) {
         return;
       }
@@ -1148,7 +1146,7 @@ function_e6457410(attacker, victim, weapon, inflictor) {
       }
 
       break;
-    case #"sig_bow_quickshot":
+    case # "sig_bow_quickshot":
       attacker.var_3528f7e9 = (isDefined(attacker.var_3528f7e9) ? attacker.var_3528f7e9 : 0) + 1;
 
       if(attacker.var_3528f7e9 == (isDefined(mpdialog.var_269d71a4) ? mpdialog.var_269d71a4 : 0)) {
@@ -1156,8 +1154,8 @@ function_e6457410(attacker, victim, weapon, inflictor) {
       }
 
       break;
-    case #"sig_lmg":
-    case #"sig_lmg_alt":
+    case # "sig_lmg":
+    case # "sig_lmg_alt":
       attacker.var_eefb1fd3 = (isDefined(attacker.var_eefb1fd3) ? attacker.var_eefb1fd3 : 0) + 1;
 
       if(attacker.var_eefb1fd3 == (isDefined(mpdialog.var_2c044553) ? mpdialog.var_2c044553 : 0)) {
@@ -1165,7 +1163,7 @@ function_e6457410(attacker, victim, weapon, inflictor) {
       }
 
       break;
-    case #"shock_rifle":
+    case # "shock_rifle":
       attacker.var_3528f7e9 = (isDefined(attacker.var_3528f7e9) ? attacker.var_3528f7e9 : 0) + 1;
 
       if(attacker.var_3528f7e9 == (isDefined(mpdialog.var_9460505c) ? mpdialog.var_9460505c : 0)) {
@@ -1173,13 +1171,13 @@ function_e6457410(attacker, victim, weapon, inflictor) {
       }
 
       break;
-    case #"eq_tripwire":
+    case # "eq_tripwire":
       if(dotproduct > 0 && sighttracepassed(attacker getEye(), victim getEye(), 1, attacker, victim)) {
         var_17a094cf = 1;
       }
 
       break;
-    case #"hero_pineapplegun":
+    case # "hero_pineapplegun":
       attacker.var_3528f7e9 = (isDefined(attacker.var_3528f7e9) ? attacker.var_3528f7e9 : 0) + 1;
 
       if(attacker.var_3528f7e9 == (isDefined(mpdialog.var_902e1bba) ? mpdialog.var_902e1bba : 0)) {
@@ -1187,7 +1185,7 @@ function_e6457410(attacker, victim, weapon, inflictor) {
       }
 
       break;
-    case #"sig_blade":
+    case # "sig_blade":
       attacker.var_3528f7e9 = (isDefined(attacker.var_3528f7e9) ? attacker.var_3528f7e9 : 0) + 1;
 
       if(attacker.var_3528f7e9 == (isDefined(mpdialog.var_66388426) ? mpdialog.var_66388426 : 0)) {
@@ -1219,9 +1217,9 @@ player_killed(attacker, killstreaktype, einflictor, weapon, mod) {
   waittillframeend();
 
   if(isDefined(attacker) && isplayer(attacker) && !attacker hasperk(#"specialty_quieter")) {
-    if(weapon.name == #"dog_ai_defaultmelee" && isDefined(einflictor)) {
+    if(weapon.name == # "dog_ai_defaultmelee" && isDefined(einflictor)) {
       attacker function_bd715920(weapon, self, einflictor.origin, einflictor);
-    } else if(weapon.name == #"hero_flamethrower" || weapon.name == #"sig_blade") {
+    } else if(weapon.name == # "hero_flamethrower" || weapon.name == # "sig_blade") {
       attacker function_bd715920(weapon, self, attacker.origin, attacker);
     }
   }
@@ -1249,33 +1247,33 @@ function_7c107ed4(attacker, weapon, victim, inflictor) {
 
   if(isDefined(victim.currentweapon) && isDefined(victim.currentweapon.name)) {
     switch (victim.currentweapon.name) {
-      case #"hero_annihilator":
+      case # "hero_annihilator":
         dialogkey = "annihilatorDestroyed";
         break;
-      case #"sig_buckler_dw":
-      case #"sig_buckler_turret":
+      case # "sig_buckler_dw":
+      case # "sig_buckler_turret":
         dialogkey = "battleShieldWeaponDestroyed";
         break;
-      case #"sig_bow_quickshot":
+      case # "sig_bow_quickshot":
         dialogkey = "sparrowWeaponDestroyed";
         break;
-      case #"hero_pineapplegun":
+      case # "hero_pineapplegun":
         dialogkey = "warmachineWeaponDestroyed";
         break;
-      case #"shock_rifle":
+      case # "shock_rifle":
         dialogkey = "tempestWeaponDestroyed";
         break;
-      case #"hero_flamethrower":
+      case # "hero_flamethrower":
         dialogkey = "purifierWeaponDestroyed";
         break;
-      case #"gadget_icepick":
+      case # "gadget_icepick":
         dialogkey = "icePickWeaponDestroyed";
         break;
-      case #"sig_blade":
+      case # "sig_blade":
         dialogkey = "armBladeWeaponDestroyed";
         break;
-      case #"sig_lmg":
-      case #"sig_lmg_alt":
+      case # "sig_lmg":
+      case # "sig_lmg_alt":
         dialogkey = "scytheWeaponDestroyed";
         break;
     }
@@ -1286,13 +1284,13 @@ function_7c107ed4(attacker, weapon, victim, inflictor) {
 
     if(heroabilitywasactiverecently) {
       switch (victim.heroability.name) {
-        case #"eq_gravityslam":
+        case # "eq_gravityslam":
           dialogkey = "gravitySlamWeaponDestroyed";
           break;
-        case #"eq_grapple":
+        case # "eq_grapple":
           dialogkey = "grappleGunWeaponDestroyed";
           break;
-        case #"gadget_radiation_field":
+        case # "gadget_radiation_field":
           dialogkey = "radiationFieldWeaponDestroyed";
           break;
       }
@@ -1340,7 +1338,7 @@ function_a43a3519(waittime, gadgetweapon) {
   }
 
   switch (gadgetweapon.name) {
-    case #"seeker_mine_arc":
+    case # "seeker_mine_arc":
       dialogkey = playerbundle.var_9b5a2501;
       break;
     default:
@@ -1381,47 +1379,47 @@ function_f5c48bfa(attacker, owner, gadgetweapon, attackerweapon) {
   var_45a3f7df = 0;
 
   switch (gadgetweapon.name) {
-    case #"eq_sensor":
+    case # "eq_sensor":
       dialogkey = playerbundle.var_6f728fb2;
       break;
-    case #"gadget_spawnbeacon":
+    case # "gadget_spawnbeacon":
       dialogkey = playerbundle.var_d2fd550a;
       break;
-    case #"claymore":
+    case # "claymore":
       dialogkey = playerbundle.var_827669e9;
       break;
-    case #"eq_concertina_wire":
+    case # "eq_concertina_wire":
       dialogkey = playerbundle.var_e4bd50dc;
       break;
-    case #"gun_mini_turret":
+    case # "gun_mini_turret":
       dialogkey = playerbundle.var_1b6223ae;
       break;
-    case #"dog_ai_defaultmelee":
+    case # "dog_ai_defaultmelee":
       dialogkey = playerbundle.dogweapondestroyed;
       break;
-    case #"seeker_mine_arc":
+    case # "seeker_mine_arc":
       dialogkey = playerbundle.var_e79fdef1;
       var_45a3f7df = 1;
       break;
-    case #"ability_smart_cover":
+    case # "ability_smart_cover":
       dialogkey = playerbundle.var_1ab815cb;
       break;
-    case #"gadget_supplypod":
+    case # "gadget_supplypod":
       dialogkey = playerbundle.supplypodweapondestroyed;
       break;
-    case #"eq_tripwire":
+    case # "eq_tripwire":
       dialogkey = playerbundle.var_63661ff;
       break;
-    case #"trophy_system":
+    case # "trophy_system":
       dialogkey = playerbundle.var_faa66cb4;
       break;
-    case #"eq_emp_grenade":
+    case # "eq_emp_grenade":
       dialogkey = playerbundle.var_bbc9856;
       break;
-    case #"eq_hawk":
+    case # "eq_hawk":
       dialogkey = playerbundle.hawkweapondestroyed;
       break;
-    case #"eq_shroud":
+    case # "eq_shroud":
       dialogkey = playerbundle.var_987d028;
       break;
     default:
@@ -1444,7 +1442,7 @@ say_kill_battle_chatter(attacker, weapon, victim, inflictor, meansofdeath) {
     return;
   }
 
-  if((isDefined(meansofdeath) && meansofdeath == "MOD_MELEE" && weapon.name != #"sig_blade" || meansofdeath == "MOD_MELEE_WEAPON_BUTT") && weapon != getweapon("dog_ai_defaultmelee")) {
+  if((isDefined(meansofdeath) && meansofdeath == "MOD_MELEE" && weapon.name != # "sig_blade" || meansofdeath == "MOD_MELEE_WEAPON_BUTT") && weapon != getweapon("dog_ai_defaultmelee")) {
     return;
   }
 
@@ -1470,8 +1468,8 @@ say_kill_battle_chatter(attacker, weapon, victim, inflictor, meansofdeath) {
     } else if(dialog_chance("enemyHeroKillChance")) {
       victimdialogname = victim getmpdialogname();
 
-      if(isDefined(victimdialogname) && isDefined(level.bcsounds[#"kill_dialog"][victimdialogname])) {
-        killdialog = attacker get_random_key(level.bcsounds[#"kill_dialog"][victimdialogname]);
+      if(isDefined(victimdialogname) && isDefined(level.bcsounds[# "kill_dialog"][victimdialogname])) {
+        killdialog = attacker get_random_key(level.bcsounds[# "kill_dialog"][victimdialogname]);
       } else {
         killdialog = attacker get_random_key("killGeneric");
       }
@@ -1501,14 +1499,14 @@ grenade_tracking() {
 
     if(isDefined(weapon) && isDefined(weapon.name)) {
       switch (weapon.name) {
-        case #"frag_grenade":
-        case #"eq_swat_grenade":
-        case #"hash_5825488ac68418af":
-        case #"eq_cluster_semtex_grenade":
-        case #"eq_slow_grenade":
-        case #"eq_molotov":
-        case #"concussion_grenade":
-          waitresult = grenade waittilltimeout(0.3, #"death");
+        case # "frag_grenade":
+        case # "eq_swat_grenade":
+        case # "hash_5825488ac68418af":
+        case # "eq_cluster_semtex_grenade":
+        case # "eq_slow_grenade":
+        case # "eq_molotov":
+        case # "concussion_grenade":
+          waitresult = grenade waittilltimeout(0.3, # "death");
 
           if(waitresult._notify == "death" || !isDefined(grenade)) {
             continue;
@@ -1534,10 +1532,10 @@ grenade_tracking() {
       continue;
     }
 
-    dialogkey = level.bcsounds[#"incoming_alert"][grenade.weapon.rootweapon.name];
+    dialogkey = level.bcsounds[# "incoming_alert"][grenade.weapon.rootweapon.name];
 
     if(isDefined(dialogkey)) {
-      waittime = mpdialog_value(level.bcsounds[#"incoming_delay"][grenade.weapon.rootweapon.name], float(function_60d95f53()) / 1000);
+      waittime = mpdialog_value(level.bcsounds[# "incoming_delay"][grenade.weapon.rootweapon.name], float(function_60d95f53()) / 1000);
       level thread incoming_projectile_alert(self, grenade, dialogkey, waittime);
     }
   }
@@ -1556,10 +1554,10 @@ missile_tracking() {
       continue;
     }
 
-    dialogkey = level.bcsounds[#"incoming_alert"][missile.item.rootweapon.name];
+    dialogkey = level.bcsounds[# "incoming_alert"][missile.item.rootweapon.name];
 
     if(isDefined(dialogkey)) {
-      waittime = mpdialog_value(level.bcsounds[#"incoming_delay"][missile.item.rootweapon.name], float(function_60d95f53()) / 1000);
+      waittime = mpdialog_value(level.bcsounds[# "incoming_delay"][missile.item.rootweapon.name], float(function_60d95f53()) / 1000);
       level thread incoming_projectile_alert(self, missile, dialogkey, waittime);
     }
   }
@@ -1584,7 +1582,7 @@ incoming_projectile_alert(thrower, projectile, dialogkey, waittime) {
       return;
     }
 
-    if(!isDefined(thrower) || thrower.team == #"spectator") {
+    if(!isDefined(thrower) || thrower.team == # "spectator") {
       return;
     }
 
@@ -1761,7 +1759,7 @@ function_deea4cc2(meansofdeath) {
     return;
   }
 
-  if(isDefined(meansofdeath) && meansofdeath == "MOD_META" && isDefined(self.pers) && (isDefined(self.pers[#"changed_specialist"]) ? self.pers[#"changed_specialist"] : 0)) {
+  if(isDefined(meansofdeath) && meansofdeath == "MOD_META" && isDefined(self.pers) && (isDefined(self.pers[# "changed_specialist"]) ? self.pers[# "changed_specialist"] : 0)) {
     bundlename = self.var_89c4a60f;
   }
 
@@ -1824,7 +1822,7 @@ get_death_vox(weapon, meansofdeath) {
     return;
   }
 
-  if(isDefined(meansofdeath) && meansofdeath == "MOD_META" && isDefined(self.pers) && (isDefined(self.pers[#"changed_specialist"]) ? self.pers[#"changed_specialist"] : 0)) {
+  if(isDefined(meansofdeath) && meansofdeath == "MOD_META" && isDefined(self.pers) && (isDefined(self.pers[# "changed_specialist"]) ? self.pers[# "changed_specialist"] : 0)) {
     bundlename = self.var_89c4a60f;
   }
 
@@ -1844,27 +1842,27 @@ get_death_vox(weapon, meansofdeath) {
 
   if(isDefined(meansofdeath)) {
     switch (meansofdeath) {
-      case #"mod_burned":
+      case # "mod_burned":
         return playerbundle.exertdeathburned;
-      case #"mod_melee_weapon_butt":
-        if(weapon.rootweapon.name == #"ar_stealth_t8" || weapon.rootweapon.name == #"pistol_standard_t8") {
+      case # "mod_melee_weapon_butt":
+        if(weapon.rootweapon.name == # "ar_stealth_t8" || weapon.rootweapon.name == # "pistol_standard_t8") {
           if(weaponhasattachment(weapon, "uber")) {
             return playerbundle.exertdeathstabbed;
           }
         }
 
         return playerbundle.var_53f25688;
-      case #"mod_head_shot":
+      case # "mod_head_shot":
         return playerbundle.var_207908de;
-      case #"mod_trigger_hurt":
+      case # "mod_trigger_hurt":
         if(self getvelocity()[2] < -100) {
           return playerbundle.var_1dfcabbd;
         } else {
           return playerbundle.exertdeath;
         }
-      case #"mod_drown":
+      case # "mod_drown":
         return playerbundle.exertdeathdrowned;
-      case #"mod_dot":
+      case # "mod_dot":
         if(weapon == getweapon(#"gadget_radiation_field")) {
           if(isDefined(self.suicide) && self.suicide) {
             return playerbundle.var_48305ed9;
@@ -1883,12 +1881,12 @@ get_death_vox(weapon, meansofdeath) {
 
   if(isDefined(weapon) && meansofdeath !== "MOD_MELEE_WEAPON_BUTT") {
     switch (weapon.rootweapon.name) {
-      case #"knife_loadout":
-      case #"hatchet":
+      case # "knife_loadout":
+      case # "hatchet":
         return playerbundle.exertdeathstabbed;
-      case #"melee_slaybell_t8":
+      case # "melee_slaybell_t8":
         return playerbundle.var_53f25688;
-      case #"shock_rifle":
+      case # "shock_rifle":
         return playerbundle.exertdeathelectrocuted;
     }
   }
@@ -1996,7 +1994,7 @@ play_dialog(dialogkey, dialogflags, dialogbuffer, enemy) {
     dialogflags = 0;
   }
 
-  if(!level.allowspecialistdialog && (dialogflags&16) == 0) {
+  if(!level.allowspecialistdialog && (dialogflags & 16) == 0) {
     return;
   }
 
@@ -2014,12 +2012,12 @@ play_dialog(dialogkey, dialogflags, dialogbuffer, enemy) {
     return;
   }
 
-  if(self isplayerunderwater() && !(dialogflags&8)) {
+  if(self isplayerunderwater() && !(dialogflags & 8)) {
     return;
   }
 
   if(isDefined(self.playingdialog) && self.playingdialog) {
-    if(!(dialogflags&4)) {
+    if(!(dialogflags & 4)) {
       return;
     }
 
@@ -2027,11 +2025,11 @@ play_dialog(dialogkey, dialogflags, dialogbuffer, enemy) {
     waitframe(1);
   }
 
-  if(dialogflags&32) {
+  if(dialogflags & 32) {
     self.playinggadgetreadydialog = 1;
   }
 
-  if(dialogflags&64) {
+  if(dialogflags & 64) {
     if(!isDefined(self.stolendialogindex)) {
       self.stolendialogindex = 0;
     }
@@ -2041,11 +2039,11 @@ play_dialog(dialogkey, dialogflags, dialogbuffer, enemy) {
     self.stolendialogindex %= 4;
   }
 
-  if(dialogflags&2) {
+  if(dialogflags & 2) {
     if(self function_1339f3f3()) {
       self playsoundontag(dialogalias, "J_Head");
     }
-  } else if(dialogflags&1) {
+  } else if(dialogflags & 1) {
     if(self function_1339f3f3()) {
       if(isDefined(enemy)) {
         self playsoundontag(dialogalias, "J_Head", self.team, enemy);
@@ -2078,7 +2076,7 @@ function_5896274(waittime, dialogalias, dialogflags, dialogbuffer, enemy, endnot
 
 function_a48c33ff(dialogalias, dialogflags, dialogbuffer, enemy) {
   self endon(#"death");
-  var_c84adc7e = !sessionmodeiswarzonegame() || !isDefined(dialogflags) || dialogflags&128;
+  var_c84adc7e = !sessionmodeiswarzonegame() || !isDefined(dialogflags) || dialogflags & 128;
 
   if(!var_c84adc7e) {
     level endon(#"game_ended");
@@ -2092,7 +2090,7 @@ function_a48c33ff(dialogalias, dialogflags, dialogbuffer, enemy) {
     dialogflags = 0;
   }
 
-  if(!level.allowspecialistdialog && (dialogflags&16) == 0) {
+  if(!level.allowspecialistdialog && (dialogflags & 16) == 0) {
     return;
   }
 
@@ -2100,12 +2098,12 @@ function_a48c33ff(dialogalias, dialogflags, dialogbuffer, enemy) {
     dialogbuffer = mpdialog_value("playerDialogBuffer", 0);
   }
 
-  if(self isplayerunderwater() && !(dialogflags&8)) {
+  if(self isplayerunderwater() && !(dialogflags & 8)) {
     return;
   }
 
   if(isDefined(self.playingdialog) && self.playingdialog) {
-    if(!(dialogflags&4)) {
+    if(!(dialogflags & 4)) {
       return;
     }
 
@@ -2113,15 +2111,15 @@ function_a48c33ff(dialogalias, dialogflags, dialogbuffer, enemy) {
     waitframe(1);
   }
 
-  if(dialogflags&32) {
+  if(dialogflags & 32) {
     self.playinggadgetreadydialog = 1;
   }
 
-  if(dialogflags&2) {
+  if(dialogflags & 2) {
     if(self function_1339f3f3()) {
       self playsoundontag(dialogalias, "J_Head");
     }
-  } else if(dialogflags&1) {
+  } else if(dialogflags & 1) {
     if(self function_1339f3f3()) {
       if(isDefined(enemy)) {
         self playsoundontag(dialogalias, "J_Head", self.team, enemy);
@@ -2138,7 +2136,7 @@ function_a48c33ff(dialogalias, dialogflags, dialogbuffer, enemy) {
 }
 
 wait_dialog_buffer(dialogbuffer) {
-  self endon(#"death", #"played_dialog", #"stop_dialog");
+  self endon(#"death", # "played_dialog", # "stop_dialog");
   level endon(#"game_ended");
   self.playingdialog = 1;
 
@@ -2168,7 +2166,7 @@ get_player_dialog_alias(dialogkey, meansofdeath) {
 
   bundlename = self getmpdialogname();
 
-  if(isDefined(meansofdeath) && meansofdeath == "MOD_META" && (isDefined(self.pers[#"changed_specialist"]) ? self.pers[#"changed_specialist"] : 0)) {
+  if(isDefined(meansofdeath) && meansofdeath == "MOD_META" && (isDefined(self.pers[# "changed_specialist"]) ? self.pers[# "changed_specialist"] : 0)) {
     bundlename = self.var_89c4a60f;
   }
 
@@ -2239,98 +2237,98 @@ play_gadget_ready(weapon, userflip = 0) {
   }
 
   switch (weapon.name) {
-    case #"hero_annihilator":
+    case # "hero_annihilator":
       dialogkey = playerbundle.annihilatorweaponready;
       break;
-    case #"sig_buckler_dw":
-    case #"hero_minigun":
+    case # "sig_buckler_dw":
+    case # "hero_minigun":
       dialogkey = playerbundle.var_bde3e948;
       break;
-    case #"eq_localheal":
+    case # "eq_localheal":
       dialogkey = playerbundle.var_9a9ffda6;
       break;
-    case #"gadget_health_boost":
-    case #"gadget_cleanse":
+    case # "gadget_health_boost":
+    case # "gadget_cleanse":
       dialogkey = playerbundle.var_45c0f5db;
       break;
-    case #"ability_dog":
+    case # "ability_dog":
       dialogkey = playerbundle.var_f484179b;
       break;
-    case #"eq_gravityslam":
+    case # "eq_gravityslam":
       dialogkey = playerbundle.var_ce2beea1;
       break;
-    case #"shock_rifle":
+    case # "shock_rifle":
       dialogkey = playerbundle.tempestweaponready;
       break;
-    case #"sig_minigun":
+    case # "sig_minigun":
       dialogkey = playerbundle.var_4630d039;
       break;
-    case #"gadget_spawnbeacon":
+    case # "gadget_spawnbeacon":
       dialogkey = playerbundle.var_d294848f;
       break;
-    case #"ability_smart_cover":
+    case # "ability_smart_cover":
       dialogkey = playerbundle.var_47d3c3bd;
       break;
-    case #"mute_smoke":
+    case # "mute_smoke":
       dialogkey = playerbundle.var_7b1fe307;
       break;
-    case #"hero_flamethrower":
+    case # "hero_flamethrower":
       dialogkey = playerbundle.purifierweaponready;
       break;
-    case #"gadget_radiation_field":
+    case # "gadget_radiation_field":
       dialogkey = playerbundle.var_a9a63fa;
       break;
-    case #"sig_bow_quickshot":
+    case # "sig_bow_quickshot":
       dialogkey = playerbundle.sparrowweaponready;
       break;
-    case #"eq_hawk":
+    case # "eq_hawk":
       dialogkey = playerbundle.var_e230637d;
       break;
-    case #"gadget_supplypod":
+    case # "gadget_supplypod":
       dialogkey = playerbundle.var_ade452b2;
       break;
-    case #"gadget_vision_pulse":
+    case # "gadget_vision_pulse":
       dialogkey = playerbundle.visionpulseabilityready;
       break;
-    case #"hero_pineapplegun":
+    case # "hero_pineapplegun":
       dialogkey = playerbundle.warmachineweaponready;
       break;
-    case #"eq_swat_grenade":
-    case #"hash_3f62a872201cd1ce":
-    case #"hash_5825488ac68418af":
+    case # "eq_swat_grenade":
+    case # "hash_3f62a872201cd1ce":
+    case # "hash_5825488ac68418af":
       dialogkey = playerbundle.var_cb080e91;
       break;
-    case #"eq_cluster_semtex_grenade":
+    case # "eq_cluster_semtex_grenade":
       dialogkey = playerbundle.semtexready;
       break;
-    case #"eq_concertina_wire":
+    case # "eq_concertina_wire":
       dialogkey = playerbundle.var_b55793d6;
       break;
-    case #"eq_seeker_mine":
+    case # "eq_seeker_mine":
       dialogkey = playerbundle.var_486b28c0;
       break;
-    case #"eq_sensor":
+    case # "eq_sensor":
       dialogkey = playerbundle.var_e4a019a;
       break;
-    case #"eq_tripwire":
+    case # "eq_tripwire":
       dialogkey = playerbundle.var_3a5a4e80;
       break;
-    case #"gadget_icepick":
+    case # "gadget_icepick":
       dialogkey = playerbundle.var_a2661f2f;
       break;
-    case #"eq_emp_grenade":
+    case # "eq_emp_grenade":
       dialogkey = playerbundle.var_8610c190;
       break;
-    case #"sig_blade":
+    case # "sig_blade":
       dialogkey = playerbundle.var_cb504af2;
       break;
-    case #"eq_smoke":
+    case # "eq_smoke":
       dialogkey = playerbundle.var_7b1fe307;
       break;
-    case #"sig_lmg":
+    case # "sig_lmg":
       dialogkey = playerbundle.scytheweaponready;
       break;
-    case #"eq_shroud":
+    case # "eq_shroud":
       dialogkey = playerbundle.var_30130c75;
       break;
     default:
@@ -2447,7 +2445,7 @@ function_e3ebbf87(var_aa988d26, var_c1132df6) {
 
   self notify("2f5480a370bfcd30");
   self endon("2f5480a370bfcd30");
-  self endon(#"death", #"disconnect");
+  self endon(#"death", # "disconnect");
 
   if(!sessionmodeiswarzonegame()) {
     level endon(#"game_ended");
@@ -2468,203 +2466,203 @@ function_e3ebbf87(var_aa988d26, var_c1132df6) {
 
   if(isDefined(var_c1132df6) && var_c1132df6) {
     switch (specialistname) {
-      case #"battery":
+      case # "battery":
         dialogalias = var_aa988d26.var_80407c8f;
         break;
-      case #"buffassault":
+      case # "buffassault":
         dialogalias = var_aa988d26.var_a5004222;
         break;
-      case #"engineer":
+      case # "engineer":
         dialogalias = var_aa988d26.var_aa265686;
         break;
-      case #"firebreak":
+      case # "firebreak":
         dialogalias = var_aa988d26.var_3b7efe03;
         break;
-      case #"nomad":
+      case # "nomad":
         dialogalias = var_aa988d26.var_cf76a9bd;
         break;
-      case #"outrider":
+      case # "outrider":
         dialogalias = var_aa988d26.var_f09797b3;
         break;
-      case #"prophet":
+      case # "prophet":
         dialogalias = var_aa988d26.var_f3279c55;
         break;
-      case #"reaper":
+      case # "reaper":
         dialogalias = var_aa988d26.var_ca5f991e;
         break;
-      case #"recon":
+      case # "recon":
         dialogalias = var_aa988d26.var_211d2d38;
         break;
-      case #"ruin":
+      case # "ruin":
         dialogalias = var_aa988d26.var_1ef4fd08;
         break;
-      case #"seraph":
+      case # "seraph":
         dialogalias = var_aa988d26.var_e995b5b2;
         break;
-      case #"spectre":
+      case # "spectre":
         dialogalias = var_aa988d26.var_b9953afb;
         break;
-      case #"swatpolice":
+      case # "swatpolice":
         dialogalias = var_aa988d26.var_c4f44015;
         break;
-      case #"blackjack_bo4":
+      case # "blackjack_bo4":
         dialogalias = var_aa988d26.var_8f349bdf;
         break;
-      case #"captain_price":
+      case # "captain_price":
         dialogalias = var_aa988d26.var_4aa5fa49;
         break;
-      case #"cosmic_silverback":
+      case # "cosmic_silverback":
         dialogalias = var_aa988d26.var_60412044;
         break;
-      case #"david_mason":
+      case # "david_mason":
         dialogalias = var_aa988d26.var_4b5e1168;
         break;
-      case #"hudson":
+      case # "hudson":
         dialogalias = var_aa988d26.var_48d23194;
         break;
-      case #"hudson_hawaiian":
+      case # "hudson_hawaiian":
         dialogalias = var_aa988d26.var_6fb717e9;
         break;
-      case #"mason":
+      case # "mason":
         dialogalias = var_aa988d26.var_432508cc;
         break;
-      case #"matt_shadows":
+      case # "matt_shadows":
         dialogalias = var_aa988d26.var_321df77f;
         break;
-      case #"menendez":
+      case # "menendez":
         dialogalias = var_aa988d26.var_53d583e7;
         break;
-      case #"replacer":
+      case # "replacer":
         dialogalias = var_aa988d26.var_cab536f0;
         break;
-      case #"reznov":
+      case # "reznov":
         dialogalias = var_aa988d26.var_1c943309;
         break;
-      case #"sarah_hall":
+      case # "sarah_hall":
         dialogalias = var_aa988d26.var_6b2e4d03;
         break;
-      case #"sergei":
+      case # "sergei":
         dialogalias = var_aa988d26.var_c1466c1d;
         break;
-      case #"trejo":
+      case # "trejo":
         dialogalias = var_aa988d26.var_c1466c1d;
         break;
-      case #"weaver":
+      case # "weaver":
         dialogalias = var_aa988d26.var_d5e3a527;
         break;
-      case #"woods":
+      case # "woods":
         dialogalias = var_aa988d26.var_46584bcd;
         break;
-      case #"woods_old":
+      case # "woods_old":
         dialogalias = var_aa988d26.var_46584bcd;
         break;
-      case #"yuri":
+      case # "yuri":
         dialogalias = var_aa988d26.var_c5c64fea;
         break;
-      case #"bruno":
+      case # "bruno":
         dialogalias = var_aa988d26.var_b37a5347;
         break;
-      case #"brutus":
+      case # "brutus":
         dialogalias = var_aa988d26.var_42e6fafc;
         break;
-      case #"primis_dempsey":
-      case #"dempsey":
+      case # "primis_dempsey":
+      case # "dempsey":
         dialogalias = var_aa988d26.var_4045f08d;
         break;
-      case #"diego":
+      case # "diego":
         dialogalias = var_aa988d26.var_2b93306e;
         break;
-      case #"marlton":
+      case # "marlton":
         dialogalias = var_aa988d26.var_a59c420;
         break;
-      case #"misty":
+      case # "misty":
         dialogalias = var_aa988d26.var_6bc7d2e1;
         break;
-      case #"nikolai":
-      case #"primis_nikolai":
+      case # "nikolai":
+      case # "primis_nikolai":
         dialogalias = var_aa988d26.var_9ed1fc02;
         break;
-      case #"ofc_dempsey":
+      case # "ofc_dempsey":
         dialogalias = var_aa988d26.var_a4215642;
         break;
-      case #"ofc_nikolai":
+      case # "ofc_nikolai":
         dialogalias = var_aa988d26.var_9f201adb;
         break;
-      case #"ofc_richtofen":
+      case # "ofc_richtofen":
         dialogalias = var_aa988d26.var_ce6ec646;
         break;
-      case #"ofc_takeo":
+      case # "ofc_takeo":
         dialogalias = var_aa988d26.var_94a73557;
         break;
-      case #"richtofen":
-      case #"primis_richtofen":
+      case # "richtofen":
+      case # "primis_richtofen":
         dialogalias = var_aa988d26.var_72259d2c;
         break;
-      case #"russman":
+      case # "russman":
         dialogalias = var_aa988d26.var_5d2187b6;
         break;
-      case #"scarlett":
+      case # "scarlett":
         dialogalias = var_aa988d26.var_89123a37;
         break;
-      case #"shadowman":
+      case # "shadowman":
         dialogalias = var_aa988d26.var_d9461c0d;
         break;
-      case #"shaw":
+      case # "shaw":
         dialogalias = var_aa988d26.var_85592cb6;
         break;
-      case #"stuhlinger":
+      case # "stuhlinger":
         dialogalias = var_aa988d26.var_35982a38;
         break;
-      case #"takeo":
-      case #"primis_takeo":
+      case # "takeo":
+      case # "primis_takeo":
         dialogalias = var_aa988d26.var_2d671c2b;
         break;
-      case #"tedd":
+      case # "tedd":
         dialogalias = var_aa988d26.var_d9286c13;
         break;
-      case #"zombie_female":
+      case # "zombie_female":
         dialogalias = var_aa988d26.var_330f1168;
         break;
-      case #"zombie_male":
+      case # "zombie_male":
         dialogalias = var_aa988d26.var_eb1d0a0f;
         break;
-      case #"female1":
+      case # "female1":
         dialogalias = var_aa988d26.var_e45c0917;
         break;
-      case #"female2":
+      case # "female2":
         dialogalias = var_aa988d26.var_e0ec221f;
         break;
-      case #"female3":
+      case # "female3":
         dialogalias = var_aa988d26.var_73a6dac1;
         break;
-      case #"female4":
+      case # "female4":
         dialogalias = var_aa988d26.var_f41f1940;
         break;
-      case #"air_female":
+      case # "air_female":
         dialogalias = var_aa988d26.var_92fcd922;
         break;
-      case #"seal_female":
+      case # "seal_female":
         dialogalias = var_aa988d26.var_efb78ea3;
         break;
-      case #"male1":
+      case # "male1":
         dialogalias = var_aa988d26.var_a7c0131a;
         break;
-      case #"male2":
+      case # "male2":
         dialogalias = var_aa988d26.var_c97b2728;
         break;
-      case #"male3":
+      case # "male3":
         dialogalias = var_aa988d26.var_bd4b3225;
         break;
-      case #"male4":
+      case # "male4":
         dialogalias = var_aa988d26.var_63a86387;
         break;
-      case #"hard_male":
+      case # "hard_male":
         dialogalias = var_aa988d26.var_e8e7012b;
         break;
-      case #"land_male":
+      case # "land_male":
         dialogalias = var_aa988d26.var_63d7db94;
         break;
-      case #"sea_male":
+      case # "sea_male":
         dialogalias = var_aa988d26.var_105e5d33;
         break;
       default:
@@ -2672,206 +2670,206 @@ function_e3ebbf87(var_aa988d26, var_c1132df6) {
     }
   } else {
     switch (specialistname) {
-      case #"battery":
+      case # "battery":
         dialogalias = var_aa988d26.batterycallout;
         break;
-      case #"buffassault":
+      case # "buffassault":
         dialogalias = var_aa988d26.crashcallout;
         break;
-      case #"engineer":
+      case # "engineer":
         dialogalias = var_aa988d26.engineercallout;
         break;
-      case #"firebreak":
+      case # "firebreak":
         dialogalias = var_aa988d26.firebreakcallout;
         break;
-      case #"nomad":
+      case # "nomad":
         dialogalias = var_aa988d26.nomadcallout;
         break;
-      case #"outrider":
+      case # "outrider":
         dialogalias = var_aa988d26.outridercallout;
         break;
-      case #"prophet":
+      case # "prophet":
         dialogalias = var_aa988d26.prophetcallout;
         break;
-      case #"reaper":
+      case # "reaper":
         dialogalias = var_aa988d26.reapercallout;
         break;
-      case #"recon":
+      case # "recon":
         dialogalias = var_aa988d26.reconcallout;
         break;
-      case #"ruin":
+      case # "ruin":
         dialogalias = var_aa988d26.ruincallout;
         break;
-      case #"seraph":
+      case # "seraph":
         dialogalias = var_aa988d26.seraphcallout;
         break;
-      case #"spectre":
+      case # "spectre":
         dialogalias = var_aa988d26.spectrecallout;
         break;
-      case #"swatpolice":
+      case # "swatpolice":
         dialogalias = var_aa988d26.swatcallout;
         break;
-      case #"zero":
+      case # "zero":
         dialogalias = var_aa988d26.zerocallout;
         break;
-      case #"blackjack_bo4":
+      case # "blackjack_bo4":
         dialogalias = var_aa988d26.blackjackcallout;
         break;
-      case #"captain_price":
+      case # "captain_price":
         dialogalias = var_aa988d26.var_1411ad27;
         break;
-      case #"cosmic_silverback":
+      case # "cosmic_silverback":
         dialogalias = var_aa988d26.var_f0be54bd;
         break;
-      case #"david_mason":
+      case # "david_mason":
         dialogalias = var_aa988d26.var_1d9994d5;
         break;
-      case #"hudson":
+      case # "hudson":
         dialogalias = var_aa988d26.hudsoncallout;
         break;
-      case #"hudson_hawaiian":
+      case # "hudson_hawaiian":
         dialogalias = var_aa988d26.var_609b5733;
         break;
-      case #"mason":
+      case # "mason":
         dialogalias = var_aa988d26.masoncallout;
         break;
-      case #"matt_shadows":
+      case # "matt_shadows":
         dialogalias = var_aa988d26.var_e7c3ff0b;
         break;
-      case #"menendez":
+      case # "menendez":
         dialogalias = var_aa988d26.menendezcallout;
         break;
-      case #"replacer":
+      case # "replacer":
         dialogalias = var_aa988d26.replacercallout;
         break;
-      case #"reznov":
+      case # "reznov":
         dialogalias = var_aa988d26.reznovcallout;
         break;
-      case #"sarah_hall":
+      case # "sarah_hall":
         dialogalias = var_aa988d26.var_9e49481e;
         break;
-      case #"sergei":
+      case # "sergei":
         dialogalias = var_aa988d26.sergeicallout;
         break;
-      case #"trejo":
+      case # "trejo":
         dialogalias = var_aa988d26.trejocallout;
         break;
-      case #"weaver":
+      case # "weaver":
         dialogalias = var_aa988d26.weavercallout;
         break;
-      case #"woods":
+      case # "woods":
         dialogalias = var_aa988d26.woodscallout;
         break;
-      case #"woods_old":
+      case # "woods_old":
         dialogalias = var_aa988d26.var_e5b468ae;
         break;
-      case #"yuri":
+      case # "yuri":
         dialogalias = var_aa988d26.yuricallout;
         break;
-      case #"bruno":
+      case # "bruno":
         dialogalias = var_aa988d26.brunocallout;
         break;
-      case #"brutus":
+      case # "brutus":
         dialogalias = var_aa988d26.brutuscallout;
         break;
-      case #"dempsey":
-      case #"primis_dempsey":
+      case # "dempsey":
+      case # "primis_dempsey":
         dialogalias = var_aa988d26.dempseycallout;
         break;
-      case #"diego":
+      case # "diego":
         dialogalias = var_aa988d26.diegocallout;
         break;
-      case #"marlton":
+      case # "marlton":
         dialogalias = var_aa988d26.marltoncallout;
         break;
-      case #"misty":
+      case # "misty":
         dialogalias = var_aa988d26.mistycallout;
         break;
-      case #"nikolai":
-      case #"primis_nikolai":
+      case # "nikolai":
+      case # "primis_nikolai":
         dialogalias = var_aa988d26.nikolaicallout;
         break;
-      case #"ofc_dempsey":
+      case # "ofc_dempsey":
         dialogalias = var_aa988d26.var_95a03453;
         break;
-      case #"ofc_nikolai":
+      case # "ofc_nikolai":
         dialogalias = var_aa988d26.var_69033114;
         break;
-      case #"ofc_richtofen":
+      case # "ofc_richtofen":
         dialogalias = var_aa988d26.var_d56828f1;
         break;
-      case #"ofc_takeo":
+      case # "ofc_takeo":
         dialogalias = var_aa988d26.var_33edc6fa;
         break;
-      case #"primis_richtofen":
-      case #"richtofen":
+      case # "primis_richtofen":
+      case # "richtofen":
         dialogalias = var_aa988d26.richtofencallout;
         break;
-      case #"russman":
+      case # "russman":
         dialogalias = var_aa988d26.russmancallout;
         break;
-      case #"scarlett":
+      case # "scarlett":
         dialogalias = var_aa988d26.scarlettcallout;
         break;
-      case #"shadowman":
+      case # "shadowman":
         dialogalias = var_aa988d26.shadowmancallout;
         break;
-      case #"shaw":
+      case # "shaw":
         dialogalias = var_aa988d26.shawcallout;
         break;
-      case #"stuhlinger":
+      case # "stuhlinger":
         dialogalias = var_aa988d26.stuhlingercallout;
         break;
-      case #"primis_takeo":
-      case #"takeo":
+      case # "primis_takeo":
+      case # "takeo":
         dialogalias = var_aa988d26.takeocallout;
         break;
-      case #"tedd":
+      case # "tedd":
         dialogalias = var_aa988d26.teddcallout;
         break;
-      case #"zombie_female":
+      case # "zombie_female":
         dialogalias = var_aa988d26.var_63dc7b96;
         break;
-      case #"zombie_male":
+      case # "zombie_male":
         dialogalias = var_aa988d26.var_afc5e0c1;
         break;
-      case #"female1":
+      case # "female1":
         dialogalias = var_aa988d26.female1callout;
         break;
-      case #"female2":
+      case # "female2":
         dialogalias = var_aa988d26.female2callout;
         break;
-      case #"female3":
+      case # "female3":
         dialogalias = var_aa988d26.female3callout;
         break;
-      case #"female4":
+      case # "female4":
         dialogalias = var_aa988d26.female4callout;
         break;
-      case #"air_female":
+      case # "air_female":
         dialogalias = var_aa988d26.var_19e39499;
         break;
-      case #"seal_female":
+      case # "seal_female":
         dialogalias = var_aa988d26.var_de7a214a;
         break;
-      case #"male1":
+      case # "male1":
         dialogalias = var_aa988d26.var_53c80d60;
         break;
-      case #"male2":
+      case # "male2":
         dialogalias = var_aa988d26.var_6db249ec;
         break;
-      case #"male3":
+      case # "male3":
         dialogalias = var_aa988d26.var_cf970750;
         break;
-      case #"male4":
+      case # "male4":
         dialogalias = var_aa988d26.var_ff548dc3;
         break;
-      case #"hard_male":
+      case # "hard_male":
         dialogalias = var_aa988d26.var_80c17c05;
         break;
-      case #"land_male":
+      case # "land_male":
         dialogalias = var_aa988d26.var_5bdd23de;
         break;
-      case #"sea_male":
+      case # "sea_male":
         dialogalias = var_aa988d26.var_8702f696;
         break;
       default:
@@ -2929,19 +2927,19 @@ function_cad61ec(weapon) {
   }
 
   switch (weapon.name) {
-    case #"eq_concertina_wire":
+    case # "eq_concertina_wire":
       dialogkey = playerbundle.var_6d3b52e5;
       var_4d031df6 = playerbundle.var_45efe6f7;
       break;
-    case #"ability_smart_cover":
+    case # "ability_smart_cover":
       dialogkey = playerbundle.var_906d49a;
       var_4d031df6 = playerbundle.var_918699f4;
       break;
-    case #"gadget_spawnbeacon":
+    case # "gadget_spawnbeacon":
       dialogkey = playerbundle.var_41c2519b;
       var_4d031df6 = playerbundle.var_9a961aab;
       break;
-    case #"gadget_supplypod":
+    case # "gadget_supplypod":
       dialogkey = playerbundle.var_7d3aa98a;
       var_4d031df6 = playerbundle.var_c1e8f95f;
       break;
@@ -2980,22 +2978,22 @@ function_916b4c72(weapon) {
   }
 
   switch (weapon.name) {
-    case #"eq_concertina_wire":
+    case # "eq_concertina_wire":
       dialogkey = playerbundle.var_4ecee308;
       break;
-    case #"dog_ai_defaultmelee":
+    case # "dog_ai_defaultmelee":
       dialogkey = playerbundle.var_e489dc9d;
       break;
-    case #"eq_localheal":
+    case # "eq_localheal":
       dialogkey = playerbundle.var_73b6ded8;
       break;
-    case #"ability_smart_cover":
+    case # "ability_smart_cover":
       dialogkey = playerbundle.var_2ece98;
       break;
-    case #"gadget_spawnbeacon":
+    case # "gadget_spawnbeacon":
       dialogkey = playerbundle.var_dbac4c7d;
       break;
-    case #"gadget_supplypod":
+    case # "gadget_supplypod":
       dialogkey = playerbundle.var_56487ba6;
       break;
     default:
@@ -3052,36 +3050,36 @@ play_gadget_activate(weapon) {
   dialogflags = 2;
 
   switch (weapon.name) {
-    case #"hero_annihilator":
+    case # "hero_annihilator":
       dialogkey = playerbundle.annihilatorweaponuse;
       break;
-    case #"sig_buckler_dw":
+    case # "sig_buckler_dw":
       dialogkey = playerbundle.var_f32e2;
       break;
-    case #"gadget_cleanse":
-    case #"gadget_health_boost":
+    case # "gadget_cleanse":
+    case # "gadget_health_boost":
       dialogkey = playerbundle.var_2292382;
       break;
-    case #"hatchet":
+    case # "hatchet":
       dialogkey = playerbundle.var_8ba3822;
       break;
-    case #"eq_slow_grenade":
-    case #"concussion_grenade":
+    case # "eq_slow_grenade":
+    case # "concussion_grenade":
       dialogkey = playerbundle.var_426ce83a;
       break;
-    case #"hash_5825488ac68418af":
-    case #"eq_swat_grenade":
-    case #"hash_3f62a872201cd1ce":
+    case # "hash_5825488ac68418af":
+    case # "eq_swat_grenade":
+    case # "hash_3f62a872201cd1ce":
       dialogkey = playerbundle.var_b3d4d56b;
       break;
-    case #"frag_grenade":
+    case # "frag_grenade":
       dialogkey = playerbundle.var_2f65caf3;
       break;
-    case #"eq_grapple":
+    case # "eq_grapple":
       dialogkey = playerbundle.grapplegunweaponuse;
       dialogbuffer = 0.05;
       break;
-    case #"eq_gravityslam":
+    case # "eq_gravityslam":
       if(grapple::function_d79e9bb5(self, undefined, undefined, undefined)) {
         dialogkey = playerbundle.var_71187505;
         dialogflags = dialogflags | 6 | 16;
@@ -3090,7 +3088,7 @@ play_gadget_activate(weapon) {
       }
 
       break;
-    case #"eq_localheal":
+    case # "eq_localheal":
       if(self.var_b6971302 === 1) {
         dialogkey = playerbundle.var_f0bfec90;
         var_4d031df6 = playerbundle.var_6cf57d59;
@@ -3100,47 +3098,47 @@ play_gadget_activate(weapon) {
       }
 
       break;
-    case #"mini_turret":
+    case # "mini_turret":
       dialogkey = playerbundle.var_80253e65;
       break;
-    case #"eq_molotov":
+    case # "eq_molotov":
       dialogkey = playerbundle.var_e324183;
       break;
-    case #"mute_smoke":
+    case # "mute_smoke":
       dialogkey = playerbundle.p8_chi_fuel_tank_large_01_catwalk_ladder_ring01;
       break;
-    case #"hero_flamethrower":
+    case # "hero_flamethrower":
       self function_bd715920(weapon, self, self.origin, self);
       dialogkey = playerbundle.purifierweaponuse;
       break;
-    case #"gadget_radiation_field":
+    case # "gadget_radiation_field":
       dialogkey = playerbundle.var_44c8bf55;
       break;
-    case #"eq_seeker_mine":
+    case # "eq_seeker_mine":
       dialogkey = playerbundle.var_931b8099;
       break;
-    case #"eq_cluster_semtex_grenade":
+    case # "eq_cluster_semtex_grenade":
       dialogkey = playerbundle.var_da293cfd;
       break;
-    case #"eq_sensor":
+    case # "eq_sensor":
       dialogkey = playerbundle.var_8a8c748;
       var_4d031df6 = playerbundle.var_15990d1b;
       break;
-    case #"eq_tripwire":
+    case # "eq_tripwire":
       if((isDefined(self.var_9e50f96) ? self.var_9e50f96 : 0) + float(mpdialog_value("tripwireUseCooldown", 0)) / 1000 < gettime()) {
         dialogkey = playerbundle.var_9ee8c066;
         self.var_9e50f96 = gettime();
       }
 
       break;
-    case #"trophy_system":
+    case # "trophy_system":
       dialogkey = playerbundle.var_6505d47a;
       break;
-    case #"gadget_vision_pulse":
+    case # "gadget_vision_pulse":
       dialogkey = playerbundle.visionpulseabilityuse;
       var_4d031df6 = playerbundle.var_8c880e98;
       break;
-    case #"gadget_spawnbeacon":
+    case # "gadget_spawnbeacon":
       var_3bf73cf3 = function_94b5718c(self);
 
       if(isDefined(var_3bf73cf3)) {
@@ -3148,7 +3146,7 @@ play_gadget_activate(weapon) {
       }
 
       break;
-    case #"eq_emp_grenade":
+    case # "eq_emp_grenade":
       dialogkey = playerbundle.var_cfa272a3;
       var_4d031df6 = playerbundle.var_b004cb37;
       var_3bf73cf3 = function_94b5718c(self);
@@ -3158,7 +3156,7 @@ play_gadget_activate(weapon) {
       }
 
       break;
-    case #"gadget_icepick":
+    case # "gadget_icepick":
       var_3bf73cf3 = function_94b5718c(self);
 
       if(isDefined(var_3bf73cf3)) {
@@ -3166,20 +3164,20 @@ play_gadget_activate(weapon) {
       }
 
       break;
-    case #"eq_hawk":
+    case # "eq_hawk":
       dialogkey = playerbundle.var_ce864f4c;
       break;
-    case #"sig_blade":
+    case # "sig_blade":
       dialogkey = playerbundle.var_4acffa3b;
       var_4d031df6 = playerbundle.var_3922bf3e;
       break;
-    case #"sig_lmg":
+    case # "sig_lmg":
       dialogkey = playerbundle.var_d30ab48d;
       break;
-    case #"eq_shroud":
+    case # "eq_shroud":
       dialogkey = playerbundle.var_6ca16623;
       break;
-    case #"eq_smoke":
+    case # "eq_smoke":
       dialogkey = playerbundle.p8_chi_fuel_tank_large_01_catwalk_ladder_ring01;
       var_4d031df6 = playerbundle.var_54bd09ab;
       var_3bf73cf3 = function_94b5718c(self);
@@ -3211,7 +3209,7 @@ function_bf68a5ab(var_4d5833c) {
   self function_253c2ba4(dialogalias, undefined);
 }
 
-private function_253c2ba4(var_cf210c5b, dialogbuffer) {
+function_253c2ba4(var_cf210c5b, dialogbuffer) {
   if(!level.allowspecialistdialog || !isDefined(self) || !isplayer(self) || !isDefined(var_cf210c5b)) {
     return;
   }
@@ -3267,23 +3265,23 @@ play_gadget_success(weapon, waitkey, victim, var_5d738b56) {
   var_2c976a90 = 0;
 
   switch (weapon.name) {
-    case #"eq_hawk":
-    case #"gadget_supplypod":
-    case #"gadget_vision_pulse":
-    case #"eq_localheal":
-    case #"eq_sensor":
-    case #"molotov_fire":
-    case #"eq_swat_grenade":
-    case #"eq_grapple":
-    case #"hash_3f62a872201cd1ce":
-    case #"eq_smoke":
-    case #"eq_concertina_wire":
-    case #"gadget_health_boost":
-    case #"hash_5825488ac68418af":
-    case #"eq_molotov":
-    case #"gadget_cleanse":
-    case #"gadget_radiation_field":
-    case #"gadget_icepick":
+    case # "eq_hawk":
+    case # "gadget_supplypod":
+    case # "gadget_vision_pulse":
+    case # "eq_localheal":
+    case # "eq_sensor":
+    case # "molotov_fire":
+    case # "eq_swat_grenade":
+    case # "eq_grapple":
+    case # "hash_3f62a872201cd1ce":
+    case # "eq_smoke":
+    case # "eq_concertina_wire":
+    case # "gadget_health_boost":
+    case # "hash_5825488ac68418af":
+    case # "eq_molotov":
+    case # "gadget_cleanse":
+    case # "gadget_radiation_field":
+    case # "gadget_icepick":
       var_2c976a90 = 1;
       break;
     default:
@@ -3302,95 +3300,95 @@ function_4fb91bc7(weapon, var_df17fa82, var_53c10ed8) {
   }
 
   switch (weapon.name) {
-    case #"eq_emp_grenade":
+    case # "eq_emp_grenade":
       taacomdialog = "jammerWeaponHacked";
       break;
-    case #"eq_tripwire":
+    case # "eq_tripwire":
       taacomdialog = "meshMineWeaponHacked";
       var_b3fe42a9 = 1;
       break;
-    case #"eq_seeker_mine":
+    case # "eq_seeker_mine":
       taacomdialog = "seekerMineWeaponHacked";
       var_b3fe42a9 = 1;
       break;
-    case #"eq_sensor":
+    case # "eq_sensor":
       taacomdialog = "sensorDartHacked";
       var_b3fe42a9 = 1;
       break;
-    case #"ability_smart_cover":
-    case #"gadget_smart_cover":
+    case # "ability_smart_cover":
+    case # "gadget_smart_cover":
       taacomdialog = "smartCoverHacked";
       var_b3fe42a9 = 1;
       break;
-    case #"gadget_spawnbeacon":
+    case # "gadget_spawnbeacon":
       taacomdialog = "spawnBeaconHacked";
       break;
-    case #"gadget_supplypod":
+    case # "gadget_supplypod":
       taacomdialog = "supplyPodHacked";
       var_b3fe42a9 = 1;
       break;
-    case #"trophy_system":
+    case # "trophy_system":
       taacomdialog = "trophyWeaponHacked";
       var_b3fe42a9 = 1;
       break;
-    case #"ac130":
-    case #"inventory_ac130":
+    case # "ac130":
+    case # "inventory_ac130":
       taacomdialog = "ac130Hacked";
       break;
-    case #"ai_tank_marker":
-    case #"tank_robot":
-    case #"inventory_tank_robot":
+    case # "ai_tank_marker":
+    case # "tank_robot":
+    case # "inventory_tank_robot":
       taacomdialog = "aiTankHacked";
       var_b3fe42a9 = 1;
       break;
-    case #"helicopter_comlink":
-    case #"inventory_helicopter_comlink":
-    case #"cobra_20mm_comlink":
+    case # "helicopter_comlink":
+    case # "inventory_helicopter_comlink":
+    case # "cobra_20mm_comlink":
       taacomdialog = "attackChopperHacked";
       break;
-    case #"counteruav":
+    case # "counteruav":
       taacomdialog = "cuavHacked";
       var_b3fe42a9 = 1;
       break;
-    case #"dart":
-    case #"inventory_dart":
+    case # "dart":
+    case # "inventory_dart":
       taacomdialog = "dartHacked";
       break;
-    case #"inventory_drone_squadron":
-    case #"drone_squadron":
+    case # "inventory_drone_squadron":
+    case # "drone_squadron":
       taacomdialog = "droneSquadHacked";
       var_b3fe42a9 = 1;
       break;
-    case #"recon_car":
-    case #"inventory_recon_car":
+    case # "recon_car":
+    case # "inventory_recon_car":
       taacomdialog = "reconCarHacked";
       break;
-    case #"inventory_remote_missile":
-    case #"remote_missile":
+    case # "inventory_remote_missile":
+    case # "remote_missile":
       taacomdialog = "hellstormHacked";
       break;
-    case #"inventory_planemortar":
-    case #"planemortar":
+    case # "inventory_planemortar":
+    case # "planemortar":
       taacomdialog = "lightningStrikeHacked";
       break;
-    case #"overwatch_helicopter":
-    case #"inventory_overwatch_helicopter":
+    case # "overwatch_helicopter":
+    case # "inventory_overwatch_helicopter":
       taacomdialog = "overwatchHelicopterHacked";
       break;
-    case #"straferun":
-    case #"inventory_straferun":
+    case # "straferun":
+    case # "inventory_straferun":
       taacomdialog = "strafeRunHacked";
       break;
-    case #"supplydrop":
+    case # "supplydrop":
       taacomdialog = "supplyDropHacked";
       var_b3fe42a9 = 1;
       break;
-    case #"uav":
+    case # "uav":
       taacomdialog = "uavHacked";
       var_b3fe42a9 = 1;
       break;
-    case #"ultimate_turret":
-    case #"inventory_ultimate_turret":
+    case # "ultimate_turret":
+    case # "inventory_ultimate_turret":
       taacomdialog = "sentryHacked";
       var_b3fe42a9 = 1;
       break;
@@ -3590,7 +3588,7 @@ game_end_vox(winner) {
 
     if(match::get_flag("tie")) {
       dialogkey = playerbundle.boostdraw;
-    } else if(isDefined(winner) && level.teambased && isDefined(level.teams[winner]) && player.pers[#"team"] == winner || !level.teambased && player == winner) {
+    } else if(isDefined(winner) && level.teambased && isDefined(level.teams[winner]) && player.pers[# "team"] == winner || !level.teambased && player == winner) {
       dialogkey = playerbundle.boostwin;
     } else {
       dialogkey = playerbundle.boostloss;
@@ -3641,42 +3639,42 @@ devgui_think() {
     spacing = getdvarfloat(#"testdialog_spacing", 0.25);
 
     switch (getdvarstring(#"devgui_mpdialog", "<dev string:x74>")) {
-      case #"hash_7912e80189f9c6":
+      case # "hash_7912e80189f9c6":
         player thread test_player_dialog(0);
         player thread test_taacom_dialog(spacing);
         player thread test_commander_dialog(2 * spacing);
         break;
-      case #"hash_69c6be086f76a9d4":
+      case # "hash_69c6be086f76a9d4":
         player thread test_player_dialog(0);
         player thread test_commander_dialog(spacing);
         break;
-      case #"hash_3af5f0a904b3f8fa":
+      case # "hash_3af5f0a904b3f8fa":
         player thread test_other_dialog(0);
         player thread test_commander_dialog(spacing);
         break;
-      case #"hash_32945da5f7ac491":
+      case # "hash_32945da5f7ac491":
         player thread test_taacom_dialog(0);
         player thread test_commander_dialog(spacing);
         break;
-      case #"hash_597b27a5c8857d19":
+      case # "hash_597b27a5c8857d19":
         player thread test_player_dialog(0);
         player thread test_taacom_dialog(spacing);
         break;
-      case #"hash_74f798193af006b3":
+      case # "hash_74f798193af006b3":
         player thread test_other_dialog(0);
         player thread test_taacom_dialog(spacing);
         break;
-      case #"hash_5bd6a2c5d0ff3cb2":
+      case # "hash_5bd6a2c5d0ff3cb2":
         player thread test_other_dialog(0);
         player thread test_player_dialog(spacing);
         break;
-      case #"hash_4a5a66c89be92eb":
+      case # "hash_4a5a66c89be92eb":
         player thread play_conv_self_other();
         break;
-      case #"hash_18683ef7652f40ed":
+      case # "hash_18683ef7652f40ed":
         player thread play_conv_other_self();
         break;
-      case #"hash_2b559b1a5e81715f":
+      case # "hash_2b559b1a5e81715f":
         player thread play_conv_other_other();
         break;
     }
@@ -3730,23 +3728,23 @@ play_test_dialog(dialogkey) {
 
 response_key() {
   switch (self getmpdialogname()) {
-    case #"spectre":
+    case # "spectre":
       return "<dev string:xdc>";
-    case #"battery":
+    case # "battery":
       return "<dev string:xe6>";
-    case #"outrider":
+    case # "outrider":
       return "<dev string:xf0>";
-    case #"prophet":
+    case # "prophet":
       return "<dev string:xfb>";
-    case #"firebreak":
+    case # "firebreak":
       return "<dev string:x105>";
-    case #"reaper":
+    case # "reaper":
       return "<dev string:x111>";
-    case #"ruin":
+    case # "ruin":
       return "<dev string:x11a>";
-    case #"seraph":
+    case # "seraph":
       return "<dev string:x121>";
-    case #"nomad":
+    case # "nomad":
       return "<dev string:x12a>";
   }
 
@@ -3803,4 +3801,3 @@ play_conv_other_other() {
     }
   }
 }
-

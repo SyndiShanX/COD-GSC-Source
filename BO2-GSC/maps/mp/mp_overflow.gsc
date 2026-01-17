@@ -32,11 +32,11 @@ main() {
   maps\mp\_compass::setupminimap("compass_map_mp_overflow");
   level.overrideplayerdeathwatchtimer = ::leveloverridetime;
   level.useintermissionpointsonwavespawn = ::useintermissionpointsonwavespawn;
-  game["strings"]["war_callsign_a"] = & "MPUI_CALLSIGN_MAPNAME_A";
-  game["strings"]["war_callsign_b"] = & "MPUI_CALLSIGN_MAPNAME_B";
-  game["strings"]["war_callsign_c"] = & "MPUI_CALLSIGN_MAPNAME_C";
-  game["strings"]["war_callsign_d"] = & "MPUI_CALLSIGN_MAPNAME_D";
-  game["strings"]["war_callsign_e"] = & "MPUI_CALLSIGN_MAPNAME_E";
+  game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_MAPNAME_A";
+  game["strings"]["war_callsign_b"] = &"MPUI_CALLSIGN_MAPNAME_B";
+  game["strings"]["war_callsign_c"] = &"MPUI_CALLSIGN_MAPNAME_C";
+  game["strings"]["war_callsign_d"] = &"MPUI_CALLSIGN_MAPNAME_D";
+  game["strings"]["war_callsign_e"] = &"MPUI_CALLSIGN_MAPNAME_E";
   game["strings_menu"]["war_callsign_a"] = "@MPUI_CALLSIGN_MAPNAME_A";
   game["strings_menu"]["war_callsign_b"] = "@MPUI_CALLSIGN_MAPNAME_B";
   game["strings_menu"]["war_callsign_c"] = "@MPUI_CALLSIGN_MAPNAME_C";
@@ -50,9 +50,9 @@ main() {
   plank2.angles = (270, 138.6, -104);
   plank3 = spawn("script_model", (-1249.94, 93.83, 288.2));
   plank3.angles = (270, 138.6, -128);
-  plank1 setmodel("intro_construction_scaffold_woodplanks_03");
-  plank2 setmodel("intro_construction_scaffold_woodplanks_05");
-  plank3 setmodel("intro_construction_scaffold_woodplanks_05");
+  plank1 setModel("intro_construction_scaffold_woodplanks_03");
+  plank2 setModel("intro_construction_scaffold_woodplanks_05");
+  plank3 setModel("intro_construction_scaffold_woodplanks_05");
   spawncollision("collision_physics_128x128x10", "collider", (-1252, -199, 283), (0, 0, 0));
   spawncollision("collision_physics_128x128x10", "collider", (-1252, 376, 283), (0, 0, 0));
   spawncollision("collision_physics_128x128x128", "collider", (-158, -592, 675), (0, 0, 0));
@@ -67,18 +67,18 @@ main() {
   spawncollision("collision_physics_64x64x64", "collider", (-119, -752, 436), (0, 0, 0));
   metalpiece = spawn("script_model", (-121, -757, 467));
   metalpiece.angles = vectorscale((0, 0, -1), 90.0);
-  metalpiece setmodel("afr_corrugated_metal4x4_holes");
+  metalpiece setModel("afr_corrugated_metal4x4_holes");
   metalpiece2 = spawn("script_model", (-144, -856, 408));
-  metalpiece2 setmodel("p_rus_rollup_door_136");
+  metalpiece2 setModel("p_rus_rollup_door_136");
   metalpiece3 = spawn("script_model", (-144, -997, 408));
-  metalpiece3 setmodel("p_rus_rollup_door_136");
+  metalpiece3 setModel("p_rus_rollup_door_136");
   metalpiece4 = spawn("script_model", (-144, -1077, 408));
-  metalpiece4 setmodel("p_rus_rollup_door_40");
+  metalpiece4 setModel("p_rus_rollup_door_40");
   board1 = spawn("script_model", (-119, -783, 408));
   board1.angles = vectorscale((0, 1, 0), 270.0);
-  board1 setmodel("com_wallchunk_boardmedium01");
+  board1 setModel("com_wallchunk_boardmedium01");
   board2 = spawn("script_model", (-89, -749, 408));
-  board2 setmodel("com_wallchunk_boardmedium01");
+  board2 setModel("com_wallchunk_boardmedium01");
   spawncollision("collision_physics_64x64x64", "collider", (-699, -1267, -19), (0, 0, 0));
   spawncollision("collision_physics_32x32x32", "collider", (-683, -1219, -19), (0, 0, 0));
   spawncollision("collision_physics_32x32x32", "collider", (-683, -1162, -24), (0, 0, 0));
@@ -106,7 +106,7 @@ levelspawndvars(reset_dvars) {
 
 water_trigger_init() {
   wait 3;
-  triggers = getentarray("trigger_hurt", "classname");
+  triggers = getEntArray("trigger_hurt", "classname");
 
   foreach(trigger in triggers) {
     if(trigger.origin[2] > level.mapcenter[2]) {
@@ -121,8 +121,8 @@ water_trigger_think() {
     self waittill("trigger", entity);
 
     if(isplayer(entity)) {
-      entity playsound("mpl_splash_death");
-      playfx(level._effect["water_splash"], entity.origin + vectorscale((0, 0, 1), 10.0));
+      entity playSound("mpl_splash_death");
+      playFX(level._effect["water_splash"], entity.origin + vectorscale((0, 0, 1), 10.0));
     }
   }
 }
@@ -139,7 +139,7 @@ useintermissionpointsonwavespawn() {
 }
 
 isinwater() {
-  triggers = getentarray("trigger_hurt", "classname");
+  triggers = getEntArray("trigger_hurt", "classname");
 
   foreach(trigger in triggers) {
     if(trigger.origin[2] > level.mapcenter[2]) {

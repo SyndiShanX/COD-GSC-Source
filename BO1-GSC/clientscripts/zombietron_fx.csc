@@ -75,20 +75,20 @@ precache_createfx_fx() {
   level._effect["fx_snow_wall_avalanche"] = loadfx("env/weather/fx_snow_wall_avalanche");
 }
 trap_fx_monitor(name, id, trap_type) {
-  while (1) {
+  while(1) {
     level waittill(id + "1");
     points = getstructarray(name, "targetname");
-    for (i = 0; i < points.size; i++) {
+    for(i = 0; i < points.size; i++) {
       points[i] thread electric_trap_fx(name, id, trap_type);
     }
   }
 }
 electric_trap_fx(name, id, trap_type) {
   ang = self.angles;
-  forward = anglestoforward(ang);
+  forward = anglesToForward(ang);
   up = anglestoup(ang);
   if(isDefined(self.loopFX)) {
-    for (i = 0; i < self.loopFX.size; i++) {
+    for(i = 0; i < self.loopFX.size; i++) {
       self.loopFX[i] delete();
     }
     self.loopFX = [];
@@ -97,7 +97,7 @@ electric_trap_fx(name, id, trap_type) {
     self.loopFX = [];
   }
   players = getlocalplayers();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     switch (trap_type) {
       case "electric":
         self.loopFX[i] = SpawnFx(i, level._effect["zapper"], self.origin, 0, forward, up);
@@ -110,7 +110,7 @@ electric_trap_fx(name, id, trap_type) {
     triggerfx(self.loopFX[i]);
   }
   level waittill(id + "0");
-  for (i = 0; i < self.loopFX.size; i++) {
+  for(i = 0; i < self.loopFX.size; i++) {
     self.loopFX[i] delete();
   }
   self.loopFX = [];

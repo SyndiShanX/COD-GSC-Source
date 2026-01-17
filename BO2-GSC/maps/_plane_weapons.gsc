@@ -16,7 +16,7 @@ build_bomb_explosions(type, quakepower, quaketime, quakeradius, range, min_damag
   assert(isDefined(range), "_plane_weapons::build_bomb_explosions(): no range specified!");
   assert(isDefined(min_damage), "_plane_weapons::build_bomb_explosions(): no min_damage specified!");
   assert(isDefined(max_damage), "_plane_weapons::build_bomb_explosions(): no max_damage specified!");
-  struct = spawnstruct();
+  struct = spawnStruct();
   struct.quakepower = quakepower;
   struct.quaketime = quaketime;
   struct.quakeradius = quakeradius;
@@ -111,7 +111,7 @@ attach_bombs() {
 
   for(i = 0; i < self.bomb_count; i++) {
     self.bomb[i] = spawn("script_model", self.origin);
-    self.bomb[i] setmodel(level.plane_bomb_model[self.vehicletype]);
+    self.bomb[i] setModel(level.plane_bomb_model[self.vehicletype]);
     self.bomb[i].dropped = 0;
 
     if(isDefined(bomb_tag[i]))
@@ -166,7 +166,7 @@ drop_bombs(amount, delay, delay_trace, trace_dist) {
     total_bomb_count--;
     self.bomb_count--;
     self.bomb[new_bomb_index].dropped = 1;
-    forward = anglestoforward(self.angles);
+    forward = anglesToForward(self.angles);
     vec = vectorscale(forward, self getspeed());
     vec_predict = self.bomb[new_bomb_index].origin + vectorscale(forward, self getspeed() * 0.06);
     self.bomb[new_bomb_index] unlink();
@@ -230,9 +230,9 @@ bomb_trace(type, delay_trace, trace_dist) {
 
   while(true) {
     vec1 = self.origin;
-    direction = anglestoforward(vectorscale((1, 0, 0), 90.0));
+    direction = anglesToForward(vectorscale((1, 0, 0), 90.0));
     vec2 = vec1 + vectorscale(direction, 10000);
-    trace_result = bullettrace(vec1, vec2, 0, undefined);
+    trace_result = bulletTrace(vec1, vec2, 0, undefined);
     dist = distance(self.origin, trace_result["position"]);
 
     if(dist < trace_dist || dist >= 10000)
@@ -252,12 +252,12 @@ bomb_explosion(type) {
   max_damage = struct.mindamage;
   min_damage = struct.maxdamage;
   sound_org = spawn("script_origin", self.origin);
-  sound_org playsound(level.plane_bomb_sound[type]);
+  sound_org playSound(level.plane_bomb_sound[type]);
   sound_org thread bomb_sound_delete();
 
   println("^1plane bomb goes BOOM!!! ^7( Dmg Radius: ", damage_range, " | Max Dmg: ", max_damage, " | Min Dmg: ", min_damage, " )");
 
-  playfx(level.plane_bomb_fx[type], self.origin);
+  playFX(level.plane_bomb_fx[type], self.origin);
   earthquake(quake_power, quake_time, self.origin, quake_radius);
   radiusdamage(self.origin, damage_range, max_damage, min_damage);
   self delete();

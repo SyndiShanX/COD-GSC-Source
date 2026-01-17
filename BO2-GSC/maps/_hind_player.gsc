@@ -61,9 +61,9 @@ watch_for_cockpit_switch() {
       self hidepart("tag_instrument_warning", "t5_veh_helo_hind_cockpitview");
 
       if(isDefined(player) && isplayer(player)) {
-        self setmodel(self.cockpit_models[self.current_cockpit_state]);
+        self setModel(self.cockpit_models[self.current_cockpit_state]);
         self.console_model = maps\_utility::spawn("script_model", self.origin);
-        self.console_model setmodel("t5_veh_helo_hind_ckpitdmg0");
+        self.console_model setModel("t5_veh_helo_hind_ckpitdmg0");
         self.console_model linkto(self, "origin_animate_jnt", (0, 0, 0), (0, 0, 0));
         self hidepart("tag_window_l_dmg_0a", "t5_veh_helo_hind_cockpitview");
         self hidepart("tag_window_l_dmg_0b", "t5_veh_helo_hind_cockpitview");
@@ -85,7 +85,7 @@ watch_for_cockpit_switch() {
 
       if(isDefined(player) && isplayer(player)) {
         self notify("hind weapons disabled");
-        self setmodel("t5_veh_helo_hind_blockout");
+        self setModel("t5_veh_helo_hind_blockout");
         break;
       }
     }
@@ -444,7 +444,7 @@ setup_rockets() {
 
 add_rocket_pod(entity, tag, num_rockets) {
   if(!isDefined(self._rocket_pods)) {
-    self._rocket_pods = spawnstruct();
+    self._rocket_pods = spawnStruct();
     self._rocket_pods.arm_time = 0.6;
     self._rocket_pods.fire_wait = 0.15;
     self._rocket_pods.total_rockets = 0;
@@ -460,13 +460,13 @@ add_rocket_pod(entity, tag, num_rockets) {
     self._rocket_pods.pods = [];
 
   pod_index = self._rocket_pods.pods.size;
-  self._rocket_pods.pods[pod_index] = spawnstruct();
+  self._rocket_pods.pods[pod_index] = spawnStruct();
   self._rocket_pods.pods[pod_index].ent = entity;
   self._rocket_pods.pods[pod_index].tag = tag;
   rockets = [];
 
   for(i = 0; i < num_rockets; i++) {
-    rockets[i] = spawnstruct();
+    rockets[i] = spawnStruct();
     rockets[i].pod_index = pod_index;
     rockets[i].is_armed = 0;
   }
@@ -584,12 +584,12 @@ get_rocket_pod_fire_pos(pod_index) {
 fire_rocket(rocket) {
   trace_origin = self gettagorigin("tag_flash");
   trace_angles = self gettagangles("tag_flash");
-  forward = anglestoforward(trace_angles);
+  forward = anglesToForward(trace_angles);
   start_origin = get_rocket_pod_fire_pos(rocket.pod_index);
   trace_origin = self gettagorigin("tag_flash");
   trace_direction = self gettagangles("tag_barrel");
-  trace_direction = anglestoforward(trace_direction) * 5000;
-  trace = bullettrace(trace_origin, trace_origin + trace_direction, 0, self);
+  trace_direction = anglesToForward(trace_direction) * 5000;
+  trace = bulletTrace(trace_origin, trace_origin + trace_direction, 0, self);
   trace_dist_sq = distancesquared(trace_origin, trace["position"]);
 
   if(trace_dist_sq < 25000000 && trace_dist_sq > 250000)
@@ -648,7 +648,7 @@ debug_rocket_targetting() {
   for(;;) {
     rocket_pod_origin = self gettagorigin("tag_flash_gunner1");
     rocket_pod_angles = self gettagangles("tag_flash_gunner1");
-    forward = anglestoforward(rocket_pod_angles);
+    forward = anglesToForward(rocket_pod_angles);
     line(rocket_pod_origin + 2500 * forward, rocket_pod_origin + 8000 * forward, (1, 0, 0), 20, 1, 1);
     line(self.other_rocket_pod.origin + 2500 * forward, self.other_rocket_pod.origin + 8000 * forward, (1, 0, 0), 20, 1, 1);
     wait 0.05;
@@ -889,11 +889,11 @@ minigun_sound() {
 
     while(player attackbuttonpressed()) {
       wait 0.05;
-      player playloopsound("wpn_hind_pilot_fire_loop_plr");
+      player playLoopSound("wpn_hind_pilot_fire_loop_plr");
     }
 
     player stoploopsound();
-    player playsound("wpn_hind_pilot_stop_plr");
+    player playSound("wpn_hind_pilot_stop_plr");
   }
 }
 
@@ -912,7 +912,7 @@ hud_minigun_think() {
 
     while(player attackbuttonpressed()) {
       wait 0.05;
-      player playloopsound("wpn_hind_pilot_fire_loop_plr");
+      player playLoopSound("wpn_hind_pilot_fire_loop_plr");
       self.minigun_hud["gun"] setshader("hud_hind_cannon0" + swap_counter, 64, 64);
 
       if(swap_counter == 5)
@@ -925,7 +925,7 @@ hud_minigun_think() {
     self.minigun_hud["gun"] fadeovertime(0.05);
     self.minigun_hud["gun"].alpha = 0.55;
     player stoploopsound();
-    player playsound("wpn_hind_pilot_stop_plr");
+    player playSound("wpn_hind_pilot_stop_plr");
   }
 }
 
@@ -968,7 +968,7 @@ make_player_unusable() {
 }
 
 swap_for_interior(guy, no_attach) {
-  level.animating_helicopter setmodel("t5_veh_helo_hind_cockpitview");
+  level.animating_helicopter setModel("t5_veh_helo_hind_cockpitview");
 
   if(!isDefined(no_attach) || !no_attach)
     level.animating_helicopter attach("t5_veh_helo_hind_ckpitdmg0", "origin_animate_jnt");
@@ -984,7 +984,7 @@ swap_for_interior(guy, no_attach) {
 }
 
 swap_for_exterior(guy) {
-  level.animating_helicopter setmodel("t5_veh_helo_hind_blockout");
+  level.animating_helicopter setModel("t5_veh_helo_hind_blockout");
   level.animating_helicopter notify("switch_climbout_anim");
   level.animating_helicopter = undefined;
 }
@@ -1041,7 +1041,7 @@ player_exit_animation(player) {
   player_body delete();
   trace_start = player.origin + vectorscale((0, 0, 1), 200.0);
   trace_end = player.origin + vectorscale((0, 0, -1), 100.0);
-  player_trace = bullettrace(trace_start, trace_end, 0, self);
+  player_trace = bulletTrace(trace_start, trace_end, 0, self);
   player setorigin(player_trace["position"]);
 }
 

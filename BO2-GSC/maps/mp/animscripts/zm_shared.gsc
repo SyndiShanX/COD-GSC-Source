@@ -12,8 +12,7 @@ deleteatlimit() {
   self delete();
 }
 
-lookatentity(looktargetentity, lookduration, lookspeed, eyesonly, interruptothers) {
-}
+lookatentity(looktargetentity, lookduration, lookspeed, eyesonly, interruptothers) {}
 
 lookatposition(looktargetpos, lookduration, lookspeed, eyesonly, interruptothers) {
   assert(isai(self), "Can only call this function on an AI character");
@@ -43,7 +42,7 @@ lookatanimations(leftanim, rightanim) {
 
 handledogsoundnotetracks(note) {
   if(note == "sound_dogstep_run_default" || note == "dogstep_rf" || note == "dogstep_lf") {
-    self playsound("fly_dog_step_run_default");
+    self playSound("fly_dog_step_run_default");
     return true;
   }
 
@@ -90,8 +89,7 @@ registernotetracks() {
   anim.notetracks["start_ragdoll"] = ::notetrackstartragdoll;
 }
 
-notetrackstopanim(note, flagname) {
-}
+notetrackstopanim(note, flagname) {}
 
 notetrackstartragdoll(note, flagname) {
   if(isDefined(self.noragdoll)) {
@@ -160,9 +158,9 @@ notetrackbodyfall(note, flagname) {
     groundtype = "dirt";
 
   if(issubstr(note, "large"))
-    self playsound("fly_bodyfall_large_" + groundtype);
+    self playSound("fly_bodyfall_large_" + groundtype);
   else if(issubstr(note, "small"))
-    self playsound("fly_bodyfall_small_" + groundtype);
+    self playSound("fly_bodyfall_small_" + groundtype);
 }
 
 notetrackfootstep(note, flagname) {
@@ -172,7 +170,7 @@ notetrackfootstep(note, flagname) {
     playfootstep("J_BALL_RI");
 
   if(!level.clientscripts)
-    self playsound("fly_gear_run");
+    self playSound("fly_gear_run");
 }
 
 notetrackfootscrape(note, flagname) {
@@ -181,7 +179,7 @@ notetrackfootscrape(note, flagname) {
   else
     groundtype = "dirt";
 
-  self playsound("fly_step_scrape_" + groundtype);
+  self playSound("fly_step_scrape_" + groundtype);
 }
 
 notetrackland(note, flagname) {
@@ -190,7 +188,7 @@ notetrackland(note, flagname) {
   else
     groundtype = "dirt";
 
-  self playsound("fly_land_npc_" + groundtype);
+  self playSound("fly_land_npc_" + groundtype);
 }
 
 handlenotetrack(note, flagname, customfunction, var1) {
@@ -210,8 +208,7 @@ handlenotetrack(note, flagname, customfunction, var1) {
     case "end":
     case "finish":
     case "undefined":
-      if(isai(self) && self.a.pose == "back") {
-      }
+      if(isai(self) && self.a.pose == "back") {}
 
       return note;
     case "swish small":
@@ -288,9 +285,7 @@ donotetracksforeverproc(notetracksfunc, flagname, killstring, customfunction, va
 
   for(;;) {
     time = gettime();
-    returnednote = [
-      [notetracksfunc]
-    ](flagname, customfunction, var1);
+    returnednote = [[notetracksfunc]](flagname, customfunction, var1);
     timetaken = gettime() - time;
 
     if(timetaken < 0.05) {
@@ -319,7 +314,7 @@ donotetracksfortimeproc(donotetracksforeverfunc, time, flagname, customfunction,
 }
 
 donotetracksfortime(time, flagname, customfunction, var1) {
-  ent = spawnstruct();
+  ent = spawnStruct();
   ent thread donotetracksfortimeendnotify(time);
   donotetracksfortimeproc(::donotetracksforever, time, flagname, customfunction, ent, var1);
 }
@@ -332,7 +327,7 @@ donotetracksfortimeendnotify(time) {
 playfootstep(foot) {
   if(!level.clientscripts) {
     if(!isai(self)) {
-      self playsound("fly_step_run_dirt");
+      self playSound("fly_step_run_dirt");
       return;
     }
   }
@@ -342,7 +337,7 @@ playfootstep(foot) {
   if(!isDefined(self.groundtype)) {
     if(!isDefined(self.lastgroundtype)) {
       if(!level.clientscripts)
-        self playsound("fly_step_run_dirt");
+        self playSound("fly_step_run_dirt");
 
       return;
     }
@@ -354,7 +349,7 @@ playfootstep(foot) {
   }
 
   if(!level.clientscripts)
-    self playsound("fly_step_run_" + groundtype);
+    self playSound("fly_step_run_" + groundtype);
 
   [[anim.optionalstepeffectfunction]](foot, groundtype);
 }
@@ -371,7 +366,7 @@ playfootstepeffect(foot, groundtype) {
       continue;
     }
     org = self gettagorigin(foot);
-    playfx(level._effect["step_" + anim.optionalstepeffects[i]], org, org + vectorscale((0, 0, 1), 100.0));
+    playFX(level._effect["step_" + anim.optionalstepeffects[i]], org, org + vectorscale((0, 0, 1), 100.0));
     return;
   }
 }

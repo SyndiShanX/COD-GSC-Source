@@ -33,7 +33,7 @@
 #namespace bonuszm;
 
 function autoexec __init__sytem__() {
-  system::register("bonuszm", & __init__, undefined, undefined);
+  system::register("bonuszm", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -46,9 +46,9 @@ function __init__() {
   init_fx();
   setdvar("bg_friendlyFireMode", 0);
   level.setgibfxtoignorepause = 1;
-  callback::on_spawned( & on_player_spawned);
+  callback::on_spawned(&on_player_spawned);
   function_aea4686a();
-  vehicle::add_vehicletype_callback("raps", & function_938d1a68);
+  vehicle::add_vehicletype_callback("raps", &function_938d1a68);
 }
 
 function function_938d1a68(localclientnum) {
@@ -89,28 +89,28 @@ function function_9f75e681() {
 }
 
 function register_clientfields() {
-  clientfield::register("actor", "zombie_riser_fx", 1, 1, "int", & handle_zombie_risers, 0, 1);
-  clientfield::register("actor", "bonus_zombie_eye_color", 1, 3, "int", & zombie_eyes_clientfield_cb2, 0, 1);
-  clientfield::register("actor", "zombie_has_eyes", 1, 1, "int", & zombie_eyes_clientfield_cb, 0, 1);
-  clientfield::register("actor", "zombie_gut_explosion", 1, 1, "int", & zombie_gut_explosion_cb, 0, 1);
-  clientfield::register("actor", "bonuszm_zombie_on_fire_fx", 1, getminbitcountfornum(3), "int", & function_f83377d6, 0, 1);
-  clientfield::register("actor", "bonuszm_zombie_spark_fx", 1, getminbitcountfornum(2), "int", & function_4b335db, 0, 1);
-  clientfield::register("actor", "bonuszm_zombie_deimos_fx", 1, getminbitcountfornum(1), "int", & function_225fae17, 0, 1);
-  clientfield::register("vehicle", "bonuszm_meatball_death", 1, 1, "int", & function_1f4cd60d, 0, 1);
-  clientfield::register("actor", "zombie_riser_fx", 1, 1, "int", & handle_zombie_risers, 0, 1);
-  clientfield::register("actor", "bonuszm_zombie_death_fx", 1, getminbitcountfornum(5), "int", & function_e4d833e, 0, 1);
-  clientfield::register("actor", "zombie_appear_vanish_fx", 1, getminbitcountfornum(3), "int", & function_7fc0e06, 0, 1);
-  clientfield::register("scriptmover", "powerup_on_fx", 1, getminbitcountfornum(3), "int", & callback_powerup_on_fx, 0, 0);
-  clientfield::register("scriptmover", "powerup_grabbed_fx", 1, 1, "int", & function_50779600, 0, 0);
-  clientfield::register("scriptmover", "weapon_disappear_fx", 1, 1, "int", & function_42f6f16e, 0, 0);
-  clientfield::register("scriptmover", "sparky_trail_fx", 1, 1, "int", & function_ab68bae5, 0, 0);
-  clientfield::register("scriptmover", "sparky_attack_fx", 1, 1, "counter", & function_14312cfd, 0, 0);
-  clientfield::register("actor", "sparky_damaged_fx", 1, 1, "counter", & function_97590d4, 0, 0);
-  clientfield::register("actor", "fire_damaged_fx", 1, 1, "counter", & function_780c0a4, 0, 0);
-  clientfield::register("zbarrier", "magicbox_open_glow", 1, 1, "int", & magicbox_open_glow_callback, 0, 0);
-  clientfield::register("zbarrier", "magicbox_closed_glow", 1, 1, "int", & magicbox_closed_glow_callback, 0, 0);
-  clientfield::register("toplayer", "bonuszm_player_instakill_active_fx", 1, 1, "int", & function_bba3723b, 0, 0);
-  clientfield::register("world", "cpzm_song_suppression", 1, 1, "int", & function_2122d6fd, 0, 0);
+  clientfield::register("actor", "zombie_riser_fx", 1, 1, "int", &handle_zombie_risers, 0, 1);
+  clientfield::register("actor", "bonus_zombie_eye_color", 1, 3, "int", &zombie_eyes_clientfield_cb2, 0, 1);
+  clientfield::register("actor", "zombie_has_eyes", 1, 1, "int", &zombie_eyes_clientfield_cb, 0, 1);
+  clientfield::register("actor", "zombie_gut_explosion", 1, 1, "int", &zombie_gut_explosion_cb, 0, 1);
+  clientfield::register("actor", "bonuszm_zombie_on_fire_fx", 1, getminbitcountfornum(3), "int", &function_f83377d6, 0, 1);
+  clientfield::register("actor", "bonuszm_zombie_spark_fx", 1, getminbitcountfornum(2), "int", &function_4b335db, 0, 1);
+  clientfield::register("actor", "bonuszm_zombie_deimos_fx", 1, getminbitcountfornum(1), "int", &function_225fae17, 0, 1);
+  clientfield::register("vehicle", "bonuszm_meatball_death", 1, 1, "int", &function_1f4cd60d, 0, 1);
+  clientfield::register("actor", "zombie_riser_fx", 1, 1, "int", &handle_zombie_risers, 0, 1);
+  clientfield::register("actor", "bonuszm_zombie_death_fx", 1, getminbitcountfornum(5), "int", &function_e4d833e, 0, 1);
+  clientfield::register("actor", "zombie_appear_vanish_fx", 1, getminbitcountfornum(3), "int", &function_7fc0e06, 0, 1);
+  clientfield::register("scriptmover", "powerup_on_fx", 1, getminbitcountfornum(3), "int", &callback_powerup_on_fx, 0, 0);
+  clientfield::register("scriptmover", "powerup_grabbed_fx", 1, 1, "int", &function_50779600, 0, 0);
+  clientfield::register("scriptmover", "weapon_disappear_fx", 1, 1, "int", &function_42f6f16e, 0, 0);
+  clientfield::register("scriptmover", "sparky_trail_fx", 1, 1, "int", &function_ab68bae5, 0, 0);
+  clientfield::register("scriptmover", "sparky_attack_fx", 1, 1, "counter", &function_14312cfd, 0, 0);
+  clientfield::register("actor", "sparky_damaged_fx", 1, 1, "counter", &function_97590d4, 0, 0);
+  clientfield::register("actor", "fire_damaged_fx", 1, 1, "counter", &function_780c0a4, 0, 0);
+  clientfield::register("zbarrier", "magicbox_open_glow", 1, 1, "int", &magicbox_open_glow_callback, 0, 0);
+  clientfield::register("zbarrier", "magicbox_closed_glow", 1, 1, "int", &magicbox_closed_glow_callback, 0, 0);
+  clientfield::register("toplayer", "bonuszm_player_instakill_active_fx", 1, 1, "int", &function_bba3723b, 0, 0);
+  clientfield::register("world", "cpzm_song_suppression", 1, 1, "int", &function_2122d6fd, 0, 0);
 }
 
 function init_fx() {
@@ -153,13 +153,13 @@ function handle_zombie_risers(localclientnum, oldval, newval, bnewent, binitials
     burst_fx = level._effect["rise_burst"];
     billow_fx = level._effect["rise_billow"];
     type = "dirt";
-    if(isdefined(level.riser_type) && level.riser_type == "snow") {
+    if(isDefined(level.riser_type) && level.riser_type == "snow") {
       sound = "zmb_zombie_spawn";
       burst_fx = level._effect["rise_burst_snow"];
       billow_fx = level._effect["rise_billow_snow"];
       type = "snow";
     }
-    playsound(0, sound, self.origin);
+    playSound(0, sound, self.origin);
     self thread rise_dust_fx(localclientnum, type, billow_fx, burst_fx);
   }
 }
@@ -168,13 +168,13 @@ function rise_dust_fx(localclientnum, type, billow_fx, burst_fx) {
   dust_tag = "J_SpineUpper";
   self endon("entityshutdown");
   level endon("demo_jump");
-  if(isdefined(burst_fx)) {
-    fx = playfx(localclientnum, burst_fx, self.origin + (0, 0, randomintrange(5, 10)));
+  if(isDefined(burst_fx)) {
+    fx = playFX(localclientnum, burst_fx, self.origin + (0, 0, randomintrange(5, 10)));
     setfxignorepause(localclientnum, fx, 1);
   }
   wait(0.25);
-  if(isdefined(billow_fx)) {
-    fx = playfx(localclientnum, billow_fx, self.origin + (randomintrange(-10, 10), randomintrange(-10, 10), randomintrange(5, 10)));
+  if(isDefined(billow_fx)) {
+    fx = playFX(localclientnum, billow_fx, self.origin + (randomintrange(-10, 10), randomintrange(-10, 10), randomintrange(5, 10)));
     setfxignorepause(localclientnum, fx, 1);
   }
   wait(2);
@@ -189,8 +189,8 @@ function rise_dust_fx(localclientnum, type, billow_fx, burst_fx) {
   }
   self util::waittill_dobj(localclientnum);
   t = 0;
-  while (t < dust_time) {
-    fx = playfxontag(localclientnum, effect, self, dust_tag);
+  while(t < dust_time) {
+    fx = playFXOnTag(localclientnum, effect, self, dust_tag);
     setfxignorepause(localclientnum, fx, 1);
     wait(dust_interval);
     t = t + dust_interval;
@@ -198,19 +198,19 @@ function rise_dust_fx(localclientnum, type, billow_fx, burst_fx) {
 }
 
 function zombie_eyes_clientfield_cb2(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(!isdefined(newval)) {
+  if(!isDefined(newval)) {
     return;
   }
   self.eyecol = newval;
 }
 
 function zombie_eyes_clientfield_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(!isdefined(newval)) {
+  if(!isDefined(newval)) {
     return;
   }
   self endon("entityshutdown");
   self util::waittill_dobj(localclientnum);
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   if(newval) {
@@ -220,7 +220,7 @@ function zombie_eyes_clientfield_cb(localclientnum, oldval, newval, bnewent, bin
     self deletezombieeyes(localclientnum);
     self mapshaderconstant(localclientnum, 0, "scriptVector2", 0, get_eyeball_off_luminance(), self get_eyeball_color());
   }
-  if(isdefined(level.zombie_eyes_clientfield_cb_additional)) {
+  if(isDefined(level.zombie_eyes_clientfield_cb_additional)) {
     self[[level.zombie_eyes_clientfield_cb_additional]](localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump);
   }
 }
@@ -228,12 +228,12 @@ function zombie_eyes_clientfield_cb(localclientnum, oldval, newval, bnewent, bin
 function createzombieeyesinternal(localclientnum) {
   self endon("entityshutdown");
   self util::waittill_dobj(localclientnum);
-  if(!isdefined(self._eyearray)) {
+  if(!isDefined(self._eyearray)) {
     self._eyearray = [];
   }
-  if(!isdefined(self._eyearray[localclientnum])) {
+  if(!isDefined(self._eyearray[localclientnum])) {
     linktag = "j_eyeball_le";
-    if(!isdefined(self.eyecol)) {
+    if(!isDefined(self.eyecol)) {
       return;
     }
     if(self.eyecol == 0) {
@@ -253,28 +253,28 @@ function createzombieeyesinternal(localclientnum) {
         }
       }
     }
-    if(isdefined(level._override_eye_fx)) {
+    if(isDefined(level._override_eye_fx)) {
       effect = level._override_eye_fx;
     }
-    if(isdefined(self._eyeglow_fx_override)) {
+    if(isDefined(self._eyeglow_fx_override)) {
       effect = self._eyeglow_fx_override;
     }
-    if(isdefined(self._eyeglow_tag_override)) {
+    if(isDefined(self._eyeglow_tag_override)) {
       linktag = self._eyeglow_tag_override;
     }
-    self._eyearray[localclientnum] = playfxontag(localclientnum, effect, self, linktag);
+    self._eyearray[localclientnum] = playFXOnTag(localclientnum, effect, self, linktag);
   }
 }
 
 function get_eyeball_on_luminance() {
-  if(isdefined(level.eyeball_on_luminance_override)) {
+  if(isDefined(level.eyeball_on_luminance_override)) {
     return level.eyeball_on_luminance_override;
   }
   return 1;
 }
 
 function get_eyeball_off_luminance() {
-  if(isdefined(level.eyeball_off_luminance_override)) {
+  if(isDefined(level.eyeball_off_luminance_override)) {
     return level.eyeball_off_luminance_override;
   }
   return 0;
@@ -282,18 +282,18 @@ function get_eyeball_off_luminance() {
 
 function get_eyeball_color() {
   val = 0;
-  if(isdefined(level.zombie_eyeball_color_override)) {
+  if(isDefined(level.zombie_eyeball_color_override)) {
     val = level.zombie_eyeball_color_override;
   }
-  if(isdefined(self.zombie_eyeball_color_override)) {
+  if(isDefined(self.zombie_eyeball_color_override)) {
     val = self.zombie_eyeball_color_override;
   }
   return val;
 }
 
 function deletezombieeyes(localclientnum) {
-  if(isdefined(self._eyearray)) {
-    if(isdefined(self._eyearray[localclientnum])) {
+  if(isDefined(self._eyearray)) {
+    if(isDefined(self._eyearray[localclientnum])) {
       deletefx(localclientnum, self._eyearray[localclientnum], 1);
       self._eyearray[localclientnum] = undefined;
     }
@@ -301,105 +301,105 @@ function deletezombieeyes(localclientnum) {
 }
 
 function callback_powerup_on_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(!isdefined(newval)) {
+  if(!isDefined(newval)) {
     return;
   }
   self endon("entityshutdown");
   self util::waittill_dobj(localclientnum);
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   if(newval) {
     if(newval == 3) {
-      self.pwr_fx = playfxontag(localclientnum, level._effect["powerup_on_upgraded_all"], self, "tag_origin");
+      self.pwr_fx = playFXOnTag(localclientnum, level._effect["powerup_on_upgraded_all"], self, "tag_origin");
     } else {
       if(newval == 2) {
-        self.pwr_fx = playfxontag(localclientnum, level._effect["powerup_on_upgraded"], self, "tag_origin");
+        self.pwr_fx = playFXOnTag(localclientnum, level._effect["powerup_on_upgraded"], self, "tag_origin");
       } else {
-        self.pwr_fx = playfxontag(localclientnum, level._effect["powerup_on"], self, "tag_origin");
+        self.pwr_fx = playFXOnTag(localclientnum, level._effect["powerup_on"], self, "tag_origin");
       }
     }
     setfxignorepause(localclientnum, self.pwr_fx, 1);
     if(self.model === "p7_zm_teddybear_sitting") {} else {
-      playsound(localclientnum, "zmb_spawn_powerup", self.origin);
-      self playloopsound("zmb_spawn_powerup_loop", 0.5);
+      playSound(localclientnum, "zmb_spawn_powerup", self.origin);
+      self playLoopSound("zmb_spawn_powerup_loop", 0.5);
     }
-  } else if(isdefined(self.pwr_fx)) {
+  } else if(isDefined(self.pwr_fx)) {
     self stopallloopsounds();
     deletefx(localclientnum, self.pwr_fx, 1);
     self.pwr_fx = undefined;
-    fx = playfxontag(localclientnum, level._effect["electric_spark"], self, "tag_origin");
+    fx = playFXOnTag(localclientnum, level._effect["electric_spark"], self, "tag_origin");
     setfxignorepause(localclientnum, fx, 1);
-    playsound(localclientnum, "zmb_box_timeout_poof", self.origin);
+    playSound(localclientnum, "zmb_box_timeout_poof", self.origin);
     playrumbleonposition(localclientnum, "damage_light", self.origin);
   }
 }
 
 function function_50779600(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(!isdefined(newval)) {
+  if(!isDefined(newval)) {
     return;
   }
   if(newval) {
-    playsound(localclientnum, "zmb_powerup_grabbed", self.origin);
+    playSound(localclientnum, "zmb_powerup_grabbed", self.origin);
   }
 }
 
 function function_f83377d6(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(!isdefined(newval)) {
+  if(!isDefined(newval)) {
     return;
   }
   self endon("entityshutdown");
   self util::waittill_dobj(localclientnum);
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   if(newval == 1 || newval == 2) {
-    if(!isdefined(self.var_6044d98e)) {
-      self.var_6044d98e = self playloopsound("zmb_fire_burn_loop", 0.2);
+    if(!isDefined(self.var_6044d98e)) {
+      self.var_6044d98e = self playLoopSound("zmb_fire_burn_loop", 0.2);
     }
     if(newval == 2) {
-      fx = playfxontag(localclientnum, level._effect["zombie_fire_light"], self, "J_SpineUpper");
+      fx = playFXOnTag(localclientnum, level._effect["zombie_fire_light"], self, "J_SpineUpper");
       setfxignorepause(localclientnum, fx, 1);
       self function_d8c8d819(localclientnum, "fire");
     }
   } else if(newval == 3) {
-    playsound(localclientnum, "zmb_fire_charge_up", self.origin);
+    playSound(localclientnum, "zmb_fire_charge_up", self.origin);
   }
 }
 
 function function_780c0a4(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self endon("entityshutdown");
   self util::waittill_dobj(localclientnum);
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   if(newval) {
-    if(isdefined(level._effect["zombie_fire_damage"])) {
-      playsound(localclientnum, "gdt_electro_bounce", self.origin);
+    if(isDefined(level._effect["zombie_fire_damage"])) {
+      playSound(localclientnum, "gdt_electro_bounce", self.origin);
       locs = array("j_wrist_le", "j_wrist_ri");
-      fx = playfxontag(localclientnum, level._effect["zombie_fire_damage"], self, array::random(locs));
+      fx = playFXOnTag(localclientnum, level._effect["zombie_fire_damage"], self, array::random(locs));
       setfxignorepause(localclientnum, fx, 1);
     }
   }
 }
 
 function function_4b335db(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(!isdefined(newval)) {
+  if(!isDefined(newval)) {
     return;
   }
   self endon("entityshutdown");
   self util::waittill_dobj(localclientnum);
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   if(newval >= 1) {
-    if(!isdefined(self.var_6044d98e)) {
-      self.var_6044d98e = self playloopsound("zmb_electrozomb_lp", 0.2);
+    if(!isDefined(self.var_6044d98e)) {
+      self.var_6044d98e = self playLoopSound("zmb_electrozomb_lp", 0.2);
     }
-    fx = playfxontag(localclientnum, level._effect["zombie_sparky"], self, "J_SpineUpper");
+    fx = playFXOnTag(localclientnum, level._effect["zombie_sparky"], self, "J_SpineUpper");
     setfxignorepause(localclientnum, fx, 1);
     if(newval == 2) {
-      fx = playfxontag(localclientnum, level._effect["zombie_spark_light"], self, "J_SpineUpper");
+      fx = playFXOnTag(localclientnum, level._effect["zombie_spark_light"], self, "J_SpineUpper");
       setfxignorepause(localclientnum, fx, 1);
       self function_d8c8d819(localclientnum, "sparky");
     }
@@ -407,50 +407,50 @@ function function_4b335db(localclientnum, oldval, newval, bnewent, binitialsnap,
 }
 
 function function_225fae17(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(!isdefined(newval)) {
+  if(!isDefined(newval)) {
     return;
   }
   self endon("entityshutdown");
   self util::waittill_dobj(localclientnum);
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   if(newval) {
-    if(!isdefined(self.var_6044d98e)) {
-      self.var_6044d98e = self playloopsound("zmb_deimoszomb_lp", 0.2);
+    if(!isDefined(self.var_6044d98e)) {
+      self.var_6044d98e = self playLoopSound("zmb_deimoszomb_lp", 0.2);
     }
-    fx = playfxontag(localclientnum, level._effect["deimos_zombie"], self, "J_SpineUpper");
+    fx = playFXOnTag(localclientnum, level._effect["deimos_zombie"], self, "J_SpineUpper");
     setfxignorepause(localclientnum, fx, 1);
-    fx = playfxontag(localclientnum, level._effect["deimos_zombie_le"], self, "j_wrist_le");
+    fx = playFXOnTag(localclientnum, level._effect["deimos_zombie_le"], self, "j_wrist_le");
     setfxignorepause(localclientnum, fx, 1);
-    fx = playfxontag(localclientnum, level._effect["deimos_zombie_ri"], self, "j_wrist_ri");
+    fx = playFXOnTag(localclientnum, level._effect["deimos_zombie_ri"], self, "j_wrist_ri");
     setfxignorepause(localclientnum, fx, 1);
   }
 }
 
 function function_1f4cd60d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(!isdefined(newval)) {
+  if(!isDefined(newval)) {
     return;
   }
   self endon("entityshutdown");
   self util::waittill_dobj(localclientnum);
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   if(newval == 1) {
-    fx = playfxontag(localclientnum, level._effect["zombie_on_fire_suicide"], self, "tag_origin");
+    fx = playFXOnTag(localclientnum, level._effect["zombie_on_fire_suicide"], self, "tag_origin");
     setfxignorepause(localclientnum, fx, 1);
-    playsound(localclientnum, "zmb_fire_explode", self.origin);
+    playSound(localclientnum, "zmb_fire_explode", self.origin);
   }
 }
 
 function function_bba3723b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self.var_dedf9511 = self playloopsound("zmb_insta_kill_loop", 2);
+    self.var_dedf9511 = self playLoopSound("zmb_insta_kill_loop", 2);
     self thread function_69f683e7(localclientnum, 1);
   } else {
     self notify("hash_eb366021");
-    playsound(localclientnum, "zmb_insta_kill_loop_off", (0, 0, 0));
+    playSound(localclientnum, "zmb_insta_kill_loop_off", (0, 0, 0));
     self stoploopsound(self.var_dedf9511);
     self thread function_69f683e7(localclientnum, 0);
   }
@@ -481,7 +481,7 @@ function function_69f683e7(localclientnum, onoff) {
   cycle_time = var_d7805253;
   old_color = function_4778b020(var_781fc232, var_27745be8);
   new_color = old_color;
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     if(cycle_time >= var_d7805253) {
       old_color = new_color;
       new_color = function_4778b020(var_781fc232, var_27745be8);
@@ -524,44 +524,44 @@ function function_d8c8d819(localclientnum, var_d6ae4487) {
 }
 
 function function_e4d833e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(!isdefined(newval)) {
+  if(!isDefined(newval)) {
     return;
   }
   self endon("entityshutdown");
   self util::waittill_dobj(localclientnum);
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   if(newval == 5) {
     if(getdvarstring("mapname") != "cp_mi_zurich_coalescence") {
       self stopallloopsounds(1);
-      fx = playfx(localclientnum, level._effect["deimos_zombie_death"], self.origin + vectorscale((0, 0, 1), 35));
+      fx = playFX(localclientnum, level._effect["deimos_zombie_death"], self.origin + vectorscale((0, 0, 1), 35));
       setfxignorepause(localclientnum, fx, 1);
-      fx = playfx(localclientnum, level._effect["zombie_sparky_death"], self.origin + vectorscale((0, 0, 1), 35));
+      fx = playFX(localclientnum, level._effect["zombie_sparky_death"], self.origin + vectorscale((0, 0, 1), 35));
       setfxignorepause(localclientnum, fx, 1);
-      playsound(localclientnum, "zmb_deimoszomb_explo", self.origin);
+      playSound(localclientnum, "zmb_deimoszomb_explo", self.origin);
       playrumbleonposition(localclientnum, "damage_light", self.origin);
     }
   }
   if(newval == 4) {
     self stopallloopsounds(1);
-    fx = playfx(localclientnum, level._effect["zombie_sparky_attack_death"], self.origin + vectorscale((0, 0, 1), 35));
+    fx = playFX(localclientnum, level._effect["zombie_sparky_attack_death"], self.origin + vectorscale((0, 0, 1), 35));
     setfxignorepause(localclientnum, fx, 1);
-    playsound(localclientnum, "zmb_electrozomb_explo_small", self.origin);
+    playSound(localclientnum, "zmb_electrozomb_explo_small", self.origin);
     playrumbleonposition(localclientnum, "damage_light", self.origin);
   }
   if(newval == 3) {
     self stopallloopsounds(1);
-    fx = playfx(localclientnum, level._effect["zombie_sparky_death"], self.origin + vectorscale((0, 0, 1), 35));
+    fx = playFX(localclientnum, level._effect["zombie_sparky_death"], self.origin + vectorscale((0, 0, 1), 35));
     setfxignorepause(localclientnum, fx, 1);
-    playsound(localclientnum, "zmb_electrozomb_explo_large", self.origin);
+    playSound(localclientnum, "zmb_electrozomb_explo_large", self.origin);
     playrumbleonposition(localclientnum, "damage_light", self.origin);
   }
   if(newval == 2) {
     self stopallloopsounds(1);
-    fx = playfx(localclientnum, level._effect["zombie_on_fire_suicide"], self.origin + vectorscale((0, 0, 1), 35));
+    fx = playFX(localclientnum, level._effect["zombie_on_fire_suicide"], self.origin + vectorscale((0, 0, 1), 35));
     setfxignorepause(localclientnum, fx, 1);
-    playsound(localclientnum, "zmb_fire_explode", self.origin);
+    playSound(localclientnum, "zmb_fire_explode", self.origin);
     playrumbleonposition(localclientnum, "damage_light", self.origin);
   }
   if(newval > 0) {
@@ -571,7 +571,7 @@ function function_e4d833e(localclientnum, oldval, newval, bnewent, binitialsnap,
 }
 
 function private function_10dcbf51(localclientnum, fxobj) {
-  fxobj playsound(localclientnum, "evt_ai_insta_explode");
+  fxobj playSound(localclientnum, "evt_ai_insta_explode");
   wait(1);
   fxobj delete();
 }
@@ -579,14 +579,14 @@ function private function_10dcbf51(localclientnum, fxobj) {
 function zombie_gut_explosion_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self endon("entityshutdown");
   self util::waittill_dobj(localclientnum);
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   if(newval) {
-    if(isdefined(level._effect["zombie_guts_explosion"])) {
+    if(isDefined(level._effect["zombie_guts_explosion"])) {
       org = self gettagorigin("J_SpineLower");
-      if(isdefined(org)) {
-        fx = playfx(localclientnum, level._effect["zombie_guts_explosion"], org);
+      if(isDefined(org)) {
+        fx = playFX(localclientnum, level._effect["zombie_guts_explosion"], org);
         setfxignorepause(localclientnum, fx, 1);
       }
     }
@@ -596,13 +596,13 @@ function zombie_gut_explosion_cb(localclientnum, oldval, newval, bnewent, biniti
 function function_ab68bae5(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self endon("entityshutdown");
   self util::waittill_dobj(localclientnum);
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   if(newval) {
-    if(isdefined(level._effect["zombie_sparky_trail"])) {
-      self playloopsound("zmb_fire_burn_loop", 0.1);
-      fx = playfxontag(localclientnum, level._effect["zombie_sparky_trail"], self, "tag_origin");
+    if(isDefined(level._effect["zombie_sparky_trail"])) {
+      self playLoopSound("zmb_fire_burn_loop", 0.1);
+      fx = playFXOnTag(localclientnum, level._effect["zombie_sparky_trail"], self, "tag_origin");
       setfxignorepause(localclientnum, fx, 1);
     }
   }
@@ -611,12 +611,12 @@ function function_ab68bae5(localclientnum, oldval, newval, bnewent, binitialsnap
 function function_14312cfd(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self endon("entityshutdown");
   self util::waittill_dobj(localclientnum);
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   if(newval) {
-    if(isdefined(level._effect["zombie_sparky_impact"])) {
-      fx = playfx(localclientnum, level._effect["zombie_sparky_impact"], self.origin);
+    if(isDefined(level._effect["zombie_sparky_impact"])) {
+      fx = playFX(localclientnum, level._effect["zombie_sparky_impact"], self.origin);
       setfxignorepause(localclientnum, fx, 1);
     }
   }
@@ -625,15 +625,15 @@ function function_14312cfd(localclientnum, oldval, newval, bnewent, binitialsnap
 function function_97590d4(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self endon("entityshutdown");
   self util::waittill_dobj(localclientnum);
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   if(newval) {
-    if(isdefined(level._effect["zombie_sparky_left_hand"])) {
-      playsound(localclientnum, "gdt_electro_bounce", self.origin);
-      fx = playfxontag(localclientnum, level._effect["zombie_sparky_left_hand"], self, "j_wrist_le");
+    if(isDefined(level._effect["zombie_sparky_left_hand"])) {
+      playSound(localclientnum, "gdt_electro_bounce", self.origin);
+      fx = playFXOnTag(localclientnum, level._effect["zombie_sparky_left_hand"], self, "j_wrist_le");
       setfxignorepause(localclientnum, fx, 1);
-      fx = playfxontag(localclientnum, level._effect["zombie_sparky_right_hand"], self, "j_wrist_ri");
+      fx = playFXOnTag(localclientnum, level._effect["zombie_sparky_right_hand"], self, "j_wrist_ri");
       setfxignorepause(localclientnum, fx, 1);
     }
   }
@@ -642,33 +642,33 @@ function function_97590d4(localclientnum, oldval, newval, bnewent, binitialsnap,
 function function_42f6f16e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self endon("entityshutdown");
   self util::waittill_dobj(localclientnum);
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   if(newval) {
-    if(isdefined(level._effect["zombie_spawn"])) {
-      playsound(localclientnum, "zmb_box_timeout_poof", self.origin);
-      fx = playfx(localclientnum, level._effect["electric_spark"], self.origin);
+    if(isDefined(level._effect["zombie_spawn"])) {
+      playSound(localclientnum, "zmb_box_timeout_poof", self.origin);
+      fx = playFX(localclientnum, level._effect["electric_spark"], self.origin);
       setfxignorepause(localclientnum, fx, 1);
     }
   }
 }
 
 function magicbox_open_glow_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(!isdefined(self.open_glow_obj_array)) {
+  if(!isDefined(self.open_glow_obj_array)) {
     self.open_glow_obj_array = [];
   }
-  if(newval && !isdefined(self.open_glow_obj_array[localclientnum])) {
+  if(newval && !isDefined(self.open_glow_obj_array[localclientnum])) {
     fx_obj = spawn(localclientnum, self.origin, "script_model");
-    fx_obj setmodel("tag_origin");
+    fx_obj setModel("tag_origin");
     fx_obj.angles = self.angles;
-    fx = playfxontag(localclientnum, level._effect["chest_light"], fx_obj, "tag_origin");
+    fx = playFXOnTag(localclientnum, level._effect["chest_light"], fx_obj, "tag_origin");
     setfxignorepause(localclientnum, fx, 1);
-    playsound(localclientnum, "zmb_lid_open", self.origin);
-    playsound(localclientnum, "zmb_music_box", self.origin);
+    playSound(localclientnum, "zmb_lid_open", self.origin);
+    playSound(localclientnum, "zmb_music_box", self.origin);
     self.open_glow_obj_array[localclientnum] = fx_obj;
     self open_glow_obj_demo_jump_listener(localclientnum);
-  } else if(!newval && isdefined(self.open_glow_obj_array[localclientnum])) {
+  } else if(!newval && isDefined(self.open_glow_obj_array[localclientnum])) {
     self open_glow_obj_cleanup(localclientnum);
   }
 }
@@ -688,22 +688,22 @@ function open_glow_obj_cleanup(localclientnum) {
 function magicbox_closed_glow_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self endon("entityshutdown");
   self util::waittill_dobj(localclientnum);
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
-  if(!isdefined(self.closed_glow_obj_array)) {
+  if(!isDefined(self.closed_glow_obj_array)) {
     self.closed_glow_obj_array = [];
   }
-  if(newval && !isdefined(self.closed_glow_obj_array[localclientnum])) {
+  if(newval && !isDefined(self.closed_glow_obj_array[localclientnum])) {
     fx_obj = spawn(localclientnum, self.origin, "script_model");
-    fx_obj setmodel("tag_origin");
+    fx_obj setModel("tag_origin");
     fx_obj.angles = self.angles;
-    fx = playfxontag(localclientnum, level._effect["chest_light_closed"], fx_obj, "tag_origin");
+    fx = playFXOnTag(localclientnum, level._effect["chest_light_closed"], fx_obj, "tag_origin");
     setfxignorepause(localclientnum, fx, 1);
-    playsound(localclientnum, "zmb_lid_close", self.origin);
+    playSound(localclientnum, "zmb_lid_close", self.origin);
     self.closed_glow_obj_array[localclientnum] = fx_obj;
     self closed_glow_obj_demo_jump_listener(localclientnum);
-  } else if(!newval && isdefined(self.closed_glow_obj_array[localclientnum])) {
+  } else if(!newval && isDefined(self.closed_glow_obj_array[localclientnum])) {
     self closed_glow_obj_cleanup(localclientnum);
   }
 }
@@ -724,20 +724,20 @@ function function_aea4686a() {
   var_6a173bd1 = ("gamedata/tables/cpzm/") + "cpzm_weapons_sgen.csv";
   var_adeb478a = tablelookuprowcount(var_6a173bd1);
   var_709de245 = [];
-  for (i = 0; i < var_adeb478a; i++) {
+  for(i = 0; i < var_adeb478a; i++) {
     weaponname = tablelookupcolumnforrow(var_6a173bd1, i, 0);
     array::add(var_709de245, weaponname);
   }
   var_709de245 = array::randomize(var_709de245);
-  for (i = 0; i < var_709de245.size; i++) {
+  for(i = 0; i < var_709de245.size; i++) {
     if(i >= 30) {
       break;
     }
     weapon = getweapon(var_709de245[i]);
-    if(!isdefined(weapon)) {
+    if(!isDefined(weapon)) {
       continue;
     }
-    if(isdefined(weapon.worldmodel)) {
+    if(isDefined(weapon.worldmodel)) {
       addzombieboxweapon(weapon, weapon.worldmodel, 0);
     }
   }
@@ -754,30 +754,30 @@ function function_8cf4b0ee(localclientnum) {
 function function_7fc0e06(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self endon("entityshutdown");
   self util::waittill_dobj(localclientnum);
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   if(newval == 1) {
-    playsound(localclientnum, "zmb_flashback_disappear_npc", self.origin);
-    playfx(localclientnum, level._effect["zombie_spawn"], self.origin + vectorscale((0, 0, 1), 35));
+    playSound(localclientnum, "zmb_flashback_disappear_npc", self.origin);
+    playFX(localclientnum, level._effect["zombie_spawn"], self.origin + vectorscale((0, 0, 1), 35));
   } else {
     if(newval == 2) {
-      playsound(localclientnum, "zmb_flashback_reappear_npc", self.origin);
-      playfx(localclientnum, level._effect["zombie_spawn"], self.origin + vectorscale((0, 0, 1), 35));
+      playSound(localclientnum, "zmb_flashback_reappear_npc", self.origin);
+      playFX(localclientnum, level._effect["zombie_spawn"], self.origin + vectorscale((0, 0, 1), 35));
     } else if(newval == 3) {
-      playsound(localclientnum, "zmb_flashback_reappear_npc", self.origin);
-      playfx(localclientnum, level._effect["zombie_spawn"], self.origin + vectorscale((0, 0, 1), 35));
+      playSound(localclientnum, "zmb_flashback_reappear_npc", self.origin);
+      playFX(localclientnum, level._effect["zombie_spawn"], self.origin + vectorscale((0, 0, 1), 35));
     }
   }
 }
 
 function function_2122d6fd(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(!isdefined(level.var_673a9a22)) {
+  if(!isDefined(level.var_673a9a22)) {
     level.var_673a9a22 = spawn(0, (0, 0, 0), "script_origin");
   }
   if(newval) {
-    level.var_ed1ec8bc = level.var_673a9a22 playloopsound("zmb_cp_song_suppress");
-  } else if(isdefined(level.var_ed1ec8bc)) {
+    level.var_ed1ec8bc = level.var_673a9a22 playLoopSound("zmb_cp_song_suppress");
+  } else if(isDefined(level.var_ed1ec8bc)) {
     level.var_673a9a22 stoploopsound(level.var_ed1ec8bc);
   }
 }

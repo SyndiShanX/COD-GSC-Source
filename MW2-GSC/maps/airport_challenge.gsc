@@ -40,8 +40,8 @@ start_challenge_ggs() {
 start_common_ap_ch() {
   flag_set("game_type_challenge");
 
-  array_thread(getentarray("team", "targetname"), ::add_spawn_function, ::team_init);
-  array_thread(getentarray("team", "targetname"), ::add_spawn_function, ::team_init_ch);
+  array_thread(getEntArray("team", "targetname"), ::add_spawn_function, ::team_init);
+  array_thread(getEntArray("team", "targetname"), ::add_spawn_function, ::team_init_ch);
   activate_trigger("team", "target");
   thread flag_set_delayed("team_initialized", .05);
 

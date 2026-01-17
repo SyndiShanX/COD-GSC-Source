@@ -10,7 +10,7 @@
 KILLSTREAK_STRING_TABLE = "mp/killstreakTable.csv";
 
 init() {
-  // &&1 Kill Streak!
+  // && 1 Kill Streak!
   precacheString(&"MP_KILLSTREAK_N");
   precacheString(&"MP_NUKE_ALREADY_INBOUND");
   precacheString(&"MP_UNAVILABLE_IN_LASTSTAND");
@@ -44,16 +44,17 @@ init() {
 }
 
 initKillstreakData() {
-  for (i = 1; true; i++) {
+  for(i = 1; true; i++) {
     retVal = tableLookup(KILLSTREAK_STRING_TABLE, 0, i, 1);
-    if(!isDefined(retVal) || retVal == "")
+    if(!isDefined(retVal) || retVal == "") {
       break;
+    }
 
     streakRef = tableLookup(KILLSTREAK_STRING_TABLE, 0, i, 1);
     assert(streakRef != "");
 
     streakUseHint = tableLookupIString(KILLSTREAK_STRING_TABLE, 0, i, 6);
-    assert(streakUseHint != & "");
+    assert(streakUseHint != &"");
     precacheString(streakUseHint);
 
     streakEarnDialog = tableLookup(KILLSTREAK_STRING_TABLE, 0, i, 8);
@@ -87,7 +88,7 @@ initKillstreakData() {
 }
 
 onPlayerConnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connected", player);
 
     if(!isDefined(player.pers["killstreaks"]))
@@ -114,7 +115,7 @@ onPlayerConnect() {
 onPlayerSpawned() {
   self endon("disconnect");
 
-  for (;;) {
+  for(;;) {
     self waittill("spawned_player");
     self thread killstreakUseWaiter();
     self thread waitForChangeTeam();
@@ -126,7 +127,7 @@ onPlayerSpawned() {
 onPlayerChangeKit() {
   self endon("disconnect");
 
-  for (;;) {
+  for(;;) {
     self waittill("changed_kit");
     self giveOwnedKillstreakItem();
   }
@@ -138,7 +139,7 @@ waitForChangeTeam() {
   self notify("waitForChangeTeam");
   self endon("waitForChangeTeam");
 
-  for (;;) {
+  for(;;) {
     self waittill("joined_team");
     clearKillstreaks();
   }
@@ -250,10 +251,10 @@ shuffleKillStreaksFILO(streakName) {
   arraySize = self.pers["killstreaks"].size;
 
   streakIndex = -1;
-  for (i = 0; i < arraySize; i++) {
-    if(self.pers["killstreaks"][i].streakName != streakName)
+  for(i = 0; i < arraySize; i++) {
+    if(self.pers["killstreaks"][i].streakName != streakName) {
       continue;
-
+    }
     streakIndex = i;
     break;
   }
@@ -261,7 +262,7 @@ shuffleKillStreaksFILO(streakName) {
 
   self.pers["killstreaks"][streakIndex] = undefined;
 
-  for (i = streakIndex + 1; i < arraySize; i++) {
+  for(i = streakIndex + 1; i < arraySize; i++) {
     if(i == arraySize - 1) {
       self.pers["killstreaks"][i - 1] = self.pers["killstreaks"][i];
       self.pers["killstreaks"][i] = undefined;
@@ -332,18 +333,18 @@ killstreakUseWaiter() {
 
   self thread finishDeathWaiter();
 
-  for (;;) {
+  for(;;) {
     self waittill("weapon_change", newWeapon);
 
-    if(!isAlive(self))
+    if(!isAlive(self)) {
       continue;
-
-    if(!isDefined(self.pers["killstreaks"][0]))
+    }
+    if(!isDefined(self.pers["killstreaks"][0])) {
       continue;
-
-    if(newWeapon != getKillstreakWeapon(self.pers["killstreaks"][0].streakName))
+    }
+    if(newWeapon != getKillstreakWeapon(self.pers["killstreaks"][0].streakName)) {
       continue;
-
+    }
     waittillframeend;
 
     streakName = self.pers["killstreaks"][0].streakName;
@@ -358,10 +359,10 @@ killstreakUseWaiter() {
     }
 
     // give time to switch to the near weapon; when the weapon is none (such as during a "disableWeapon()" period
-    // re-enabling the weapon immediately does a "weapon_change" to the killstreak weapon we just used.In the case that 
+    // re-enabling the weapon immediately does a "weapon_change" to the killstreak weapon we just used.In the case that
     // we have two of that killstreak, it immediately uses the second one
     if(self getCurrentWeapon() == "none") {
-      while (self getCurrentWeapon() == "none")
+      while(self getCurrentWeapon() == "none")
         wait(0.05);
 
       waittillframeend;
@@ -392,12 +393,13 @@ checkKillstreakReward(streakCount) {
   foreach(streakVal, streakName in self.killStreaks) {
     actualVal = streakVal + level.killStreakMod;
 
-    if(actualVal > streakCount)
+    if(actualVal > streakCount) {
       break;
+    }
 
-    if(isDefined(self.pers["lastEarnedStreak"]) && killStreaks[streakName] <= killStreaks[self.pers["lastEarnedStreak"]])
+    if(isDefined(self.pers["lastEarnedStreak"]) && killStreaks[streakName] <= killStreaks[self.pers["lastEarnedStreak"]]) {
       continue;
-
+    }
     if(isSubStr(streakName, "-rollover")) {
       continue;
       /*
@@ -406,7 +408,7 @@ checkKillstreakReward(streakCount) {
       	self.pers["lastEarnedStreak"] = streakName;
       	continue;
       }
-			
+      			
       useStreakName = strTok( streakName, "-" )[0];
       */
     } else {
@@ -453,7 +455,7 @@ giveKillstreak(streakName, isEarned, awardXp, owner) {
   self giveKillstreakWeapon(weapon);
 
   // shuffle existing killstreaks up a notch
-  for (i = self.pers["killstreaks"].size; i >= 0; i--)
+  for(i = self.pers["killstreaks"].size; i >= 0; i--)
     self.pers["killstreaks"][i + 1] = self.pers["killstreaks"][i];
 
   self.pers["killstreaks"][0] = spawnStruct();
@@ -473,7 +475,7 @@ giveKillstreak(streakName, isEarned, awardXp, owner) {
     self.pers["killstreaks"][0].lifeId = self.pers["deaths"];
 
   // probably obsolete unless we bring back the autoshotty	
-  if(isdefined(level.killstreakSetupFuncs[streakName]))
+  if(isDefined(level.killstreakSetupFuncs[streakName]))
     self[[level.killstreakSetupFuncs[streakName]]]();
 
   if(isDefined(isEarned) && isEarned && isDefined(awardXp) && awardXp)
@@ -484,12 +486,12 @@ giveKillstreakWeapon(weapon) {
   weaponList = self getWeaponsListItems();
 
   foreach(item in weaponList) {
-    if(!isSubStr(item, "killstreak"))
+    if(!isSubStr(item, "killstreak")) {
       continue;
-
-    if(self getCurrentWeapon() == item)
+    }
+    if(self getCurrentWeapon() == item) {
       continue;
-
+    }
     self takeWeapon(item);
   }
 
@@ -530,9 +532,9 @@ getKillstreakCrateIcon(streakName) {
 }
 
 giveOwnedKillstreakItem(skipDialog) {
-  if(!isDefined(self.pers["killstreaks"][0]))
+  if(!isDefined(self.pers["killstreaks"][0])) {
     return;
-
+  }
   streakName = self.pers["killstreaks"][0].streakName;
 
   weapon = getKillstreakWeapon(streakName);

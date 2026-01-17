@@ -11,9 +11,9 @@ friendly_bubbles() {
   self endon("stop_friendly_bubbles");
   self thread friendly_bubbles_cleanup();
   tag = "TAG_EYE";
-  while (true) {
+  while(true) {
     wait(3.5 + randomfloat(3));
-    playfxOnTag(getfx("scuba_bubbles_friendly"), self, tag);
+    playFXOnTag(getfx("scuba_bubbles_friendly"), self, tag);
   }
 }
 
@@ -41,7 +41,7 @@ player_scuba_breathe_sound() {
   self notify("start_scuba_breathe");
   self endon("start_scuba_breathe");
   self endon("stop_scuba_breathe");
-  while (true) {
+  while(true) {
     wait(0.05);
     self notify("scuba_breathe_sound_starting");
     self playLocalSound("scuba_breathe_player", "scuba_breathe_sound_done");
@@ -55,7 +55,7 @@ stop_player_scuba() {
 }
 
 debug_org() {
-  while (true) {
+  while(true) {
     print3d(self.origin + (0, 0, 0), "ORG", (1, 1, 1), 1, 0.5);
     wait(0.5);
   }
@@ -65,14 +65,14 @@ debug_org() {
 player_scuba_bubbles() {
   self endon("stop_scuba_breathe");
   playerFxOrg = spawn("script_model", self.origin + (0, 0, 0));
-  playerFxOrg setmodel("tag_origin");
+  playerFxOrg setModel("tag_origin");
   playerFxOrg.angles = self.angles;
   playerFxOrg.origin = level.player.origin + (0, 0, 0);
   playerFxOrg linkto(self, "", (15, 0, 54), (0, 0, 0));
   playerFxOrg hide();
   self thread scuba_fx_cleanup(playerFxOrg);
   //playerFxOrg thread debug_org();
-  while (true) {
+  while(true) {
     wait(1.8);
     self thread player_bubbles_fx(playerFxOrg);
     wait(6.2);
@@ -96,7 +96,7 @@ scuba_fx_cleanup(playerFxOrg) {
 
 player_bubbles_fx(playerFxOrg) {
   self endon("stop_scuba_breathe");
-  playfxontag(getfx("scuba_bubbles"), playerFxOrg, "TAG_ORIGIN");
+  playFXOnTag(getfx("scuba_bubbles"), playerFxOrg, "TAG_ORIGIN");
 }
 
 underwater_hud_enable(bool) {
@@ -108,7 +108,7 @@ underwater_hud_enable(bool) {
     //SetDvar( "old_compass", "0" );
     SetSavedDvar("ammoCounterHide", "1");
     setsaveddvar("g_friendlyNameDist", 0);
-    //SetSavedDvar( "hud_showTextNoAmmo", "0" ); 
+    //SetSavedDvar( "hud_showTextNoAmmo", "0" );
   } else {
     //setsaveddvar( "ui_hidemap", 0 );
     setSavedDvar("hud_drawhud", "1");
@@ -117,6 +117,6 @@ underwater_hud_enable(bool) {
     //SetDvar( "old_compass", "1" );
     SetSavedDvar("ammoCounterHide", "0");
     setsaveddvar("g_friendlyNameDist", 15000);
-    //SetSavedDvar( "hud_showTextNoAmmo", "1" ); 
+    //SetSavedDvar( "hud_showTextNoAmmo", "1" );
   }
 }

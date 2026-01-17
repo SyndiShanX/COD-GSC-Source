@@ -15,14 +15,14 @@
 #namespace waterfall;
 
 function waterfalloverlay(localclientnum) {
-  triggers = getentarray(localclientnum, "waterfall", "targetname");
+  triggers = getEntArray(localclientnum, "waterfall", "targetname");
   foreach(trigger in triggers) {
     trigger thread setupwaterfall(localclientnum);
   }
 }
 
 function waterfallmistoverlay(localclientnum) {
-  triggers = getentarray(localclientnum, "waterfall_mist", "targetname");
+  triggers = getEntArray(localclientnum, "waterfall_mist", "targetname");
   foreach(trigger in triggers) {
     trigger thread setupwaterfallmist(localclientnum);
   }
@@ -37,19 +37,19 @@ function setupwaterfallmist(localclientnum) {
   level notify("setupWaterfallmist_waterfall_csc" + localclientnum);
   level endon("setupWaterfallmist_waterfall_csc" + localclientnum);
   trigger = self;
-  for (;;) {
+  for(;;) {
     trigger waittill("trigger", trigplayer);
     if(!trigplayer islocalplayer()) {
       continue;
     }
     localclientnum = trigplayer getlocalclientnumber();
-    if(isdefined(localclientnum)) {
+    if(isDefined(localclientnum)) {
       localplayer = getlocalplayer(localclientnum);
     } else {
       localplayer = trigplayer;
     }
     filter::init_filter_sprite_rain(localplayer);
-    trigger thread trigger::function_d1278be0(localplayer, & trig_enter_waterfall_mist, & trig_leave_waterfall_mist);
+    trigger thread trigger::function_d1278be0(localplayer, &trig_enter_waterfall_mist, &trig_leave_waterfall_mist);
   }
 }
 
@@ -57,18 +57,18 @@ function setupwaterfall(localclientnum, localowner) {
   level notify("setupWaterfall_waterfall_csc" + localclientnum);
   level endon("setupWaterfall_waterfall_csc" + localclientnum);
   trigger = self;
-  for (;;) {
+  for(;;) {
     trigger waittill("trigger", trigplayer);
     if(!trigplayer islocalplayer()) {
       continue;
     }
     localclientnum = trigplayer getlocalclientnumber();
-    if(isdefined(localclientnum)) {
+    if(isDefined(localclientnum)) {
       localplayer = getlocalplayer(localclientnum);
     } else {
       localplayer = trigplayer;
     }
-    trigger thread trigger::function_d1278be0(localplayer, & trig_enter_waterfall, & trig_leave_waterfall);
+    trigger thread trigger::function_d1278be0(localplayer, &trig_enter_waterfall, &trig_leave_waterfall);
   }
 }
 
@@ -76,8 +76,8 @@ function trig_enter_waterfall(localplayer) {
   trigger = self;
   localclientnum = localplayer.localclientnum;
   localplayer thread postfx::playpostfxbundle("pstfx_waterfall");
-  playsound(0, "amb_waterfall_hit", (0, 0, 0));
-  while (trigger istouching(localplayer)) {
+  playSound(0, "amb_waterfall_hit", (0, 0, 0));
+  while(trigger istouching(localplayer)) {
     localplayer playrumbleonentity(localclientnum, "waterfall_rumble");
     wait(0.1);
   }
@@ -95,16 +95,16 @@ function trig_leave_waterfall(localplayer) {
 function trig_enter_waterfall_mist(localplayer) {
   localplayer endon("entityshutdown");
   trigger = self;
-  if(!isdefined(localplayer.rainopacity)) {
+  if(!isDefined(localplayer.rainopacity)) {
     localplayer.rainopacity = 0;
   }
   if(localplayer.rainopacity == 0) {
     filter::set_filter_sprite_rain_seed_offset(localplayer, 0, randomfloat(1));
   }
   filter::enable_filter_sprite_rain(localplayer, 0);
-  while (trigger istouching(localplayer)) {
+  while(trigger istouching(localplayer)) {
     localclientnum = trigger.localclientnum;
-    if(!isdefined(localclientnum)) {
+    if(!isDefined(localclientnum)) {
       localclientnum = localplayer getlocalclientnumber();
     }
     if(isunderwater(localclientnum)) {
@@ -124,8 +124,8 @@ function trig_enter_waterfall_mist(localplayer) {
 function trig_leave_waterfall_mist(localplayer) {
   localplayer endon("entityshutdown");
   trigger = self;
-  if(isdefined(localplayer.rainopacity)) {
-    while (!trigger istouching(localplayer) && localplayer.rainopacity > 0) {
+  if(isDefined(localplayer.rainopacity)) {
+    while(!trigger istouching(localplayer) && localplayer.rainopacity > 0) {
       localclientnum = trigger.localclientnum;
       if(isunderwater(localclientnum)) {
         filter::disable_filter_sprite_rain(localplayer, 0);

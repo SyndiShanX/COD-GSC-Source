@@ -34,7 +34,7 @@ init() {
   flag_init("sq_players_out_of_sync");
   flag_init("sq_ball_picked_up");
   register_map_navcard("navcard_held_zm_highrise", "navcard_held_zm_transit");
-  ss_buttons = getentarray("sq_ss_button", "targetname");
+  ss_buttons = getEntArray("sq_ss_button", "targetname");
 
   for(i = 0; i < ss_buttons.size; i++) {
     ss_buttons[i] usetriggerrequirelookat();
@@ -97,20 +97,20 @@ sq_highrise_clientfield_init() {
 sq_easy_cleanup() {
   computer_buildable_trig = getent("sq_common_buildable_trigger", "targetname");
   computer_buildable_trig delete();
-  sq_buildables = getentarray("buildable_sq_common", "targetname");
+  sq_buildables = getEntArray("buildable_sq_common", "targetname");
 
   foreach(item in sq_buildables)
   item delete();
 
-  a_balls = getentarray("sq_dragon_lion_ball", "targetname");
+  a_balls = getEntArray("sq_dragon_lion_ball", "targetname");
   array_delete(a_balls);
-  a_tiles = getentarray("mahjong_tile", "script_noteworthy");
+  a_tiles = getEntArray("mahjong_tile", "script_noteworthy");
   array_delete(a_tiles);
-  a_emblems_lit = getentarray("elevator_dragon_lit", "targetname");
+  a_emblems_lit = getEntArray("elevator_dragon_lit", "targetname");
   array_delete(a_emblems_lit);
-  a_emblems = getentarray("elevator_dragon_icon", "targetname");
+  a_emblems = getEntArray("elevator_dragon_icon", "targetname");
   array_delete(a_emblems);
-  a_emblems = getentarray("atd2_marker_lit", "targetname");
+  a_emblems = getEntArray("atd2_marker_lit", "targetname");
   array_delete(a_emblems);
 }
 
@@ -137,7 +137,7 @@ start_highrise_sidequest() {
 init_sidequest() {
   players = get_players();
   thread sq_refresh_player_navcard_hud();
-  a_balls = getentarray("sq_sliquify_ball", "targetname");
+  a_balls = getEntArray("sq_sliquify_ball", "targetname");
 
   foreach(m_ball in a_balls) {
     m_ball.can_pickup = 0;
@@ -184,11 +184,9 @@ init_sidequest() {
   }
 }
 
-init_sidequest_1() {
-}
+init_sidequest_1() {}
 
-init_sidequest_2() {
-}
+init_sidequest_2() {}
 
 generic_stage_start() {
   level thread cheat_complete_stage();
@@ -327,19 +325,19 @@ tower_punch_watcher() {
 
 tower_in_sync_lightning() {
   s_tower_top = getstruct("sq_zombie_launch_target", "targetname");
-  playfx(level._effect["sidequest_tower_bolts"], s_tower_top.origin - vectorscale((0, 0, 1), 88.0), (0, 0, 1));
+  playFX(level._effect["sidequest_tower_bolts"], s_tower_top.origin - vectorscale((0, 0, 1), 88.0), (0, 0, 1));
 }
 
 playtoweraudio() {
   origin = (2207, 682, 3239);
   ent = spawn("script_origin", origin);
-  ent playsound("zmb_sq_tower_powerup_start_1");
-  ent playloopsound("zmb_sq_tower_powerup_loop_1", 1);
+  ent playSound("zmb_sq_tower_powerup_start_1");
+  ent playLoopSound("zmb_sq_tower_powerup_loop_1", 1);
   flag_wait("sq_tower_active");
   ent stoploopsound(2);
-  ent playsound("zmb_sq_tower_powerup_start_2");
+  ent playSound("zmb_sq_tower_powerup_start_2");
   wait 2;
-  ent playloopsound("zmb_sq_tower_powerup_loop_2", 1);
+  ent playLoopSound("zmb_sq_tower_powerup_loop_2", 1);
 }
 
 tower_punch_watch_leg(a_leg_trigs) {
@@ -349,21 +347,21 @@ tower_punch_watch_leg(a_leg_trigs) {
     if(level.n_cur_leg < a_leg_trigs.size && isplayer(who) && (who.current_melee_weapon == "tazer_knuckles_zm" || who.current_melee_weapon == "tazer_knuckles_upgraded_zm")) {
       if(self.script_noteworthy == a_leg_trigs[level.n_cur_leg]) {
         level.n_cur_leg++;
-        self playsound("zmb_sq_leg_powerup_" + level.n_cur_leg);
+        self playSound("zmb_sq_leg_powerup_" + level.n_cur_leg);
 
         if(level.n_cur_leg == 4)
           flag_set("sq_tower_active");
       } else {
         level.n_cur_leg = 0;
-        self playsound("zmb_sq_leg_powerdown");
+        self playSound("zmb_sq_leg_powerdown");
       }
 
       level.sq_leg_punches++;
-      self playsound("zmb_sq_leg_powerup_" + level.sq_leg_punches);
+      self playSound("zmb_sq_leg_powerup_" + level.sq_leg_punches);
 
       if(level.sq_leg_punches >= 4 && !flag("sq_tower_active")) {
         wait 1;
-        self playsound("zmb_sq_leg_powerdown");
+        self playSound("zmb_sq_leg_powerdown");
         exploder_stop(1002);
         exploder_stop(902);
         cur_round = level.round_number;
@@ -408,7 +406,7 @@ mahjong_tiles_setup() {
     m_num_tile.angles = s_spot.angles;
   }
 
-  a_tiles = getentarray("mahjong_tile", "script_noteworthy");
+  a_tiles = getEntArray("mahjong_tile", "script_noteworthy");
   array_delete(a_tiles);
   level.a_wind_order = a_winds;
 }
@@ -465,8 +463,7 @@ complete_sidequest() {
   level thread sidequest_done();
 }
 
-sidequest_done() {
-}
+sidequest_done() {}
 
 get_variant_from_entity_num(player_number) {
   if(!isDefined(player_number))
@@ -584,7 +581,7 @@ navcomputer_waitfor_navcard() {
     if(isplayer(who) && is_player_valid(who)) {
       if(does_player_have_correct_navcard(who)) {
         navcomputer_use_trig sethintstring(&"ZOMBIE_NAVCARD_SUCCESS");
-        who playsound("zmb_sq_navcard_success");
+        who playSound("zmb_sq_navcard_success");
         update_sidequest_stats("navcard_applied_zm_highrise");
         who.navcard_grabbed = undefined;
         wait 1;
@@ -592,7 +589,7 @@ navcomputer_waitfor_navcard() {
         return;
       } else {
         navcomputer_use_trig sethintstring(&"ZOMBIE_NAVCARD_FAIL");
-        who playsound("zmb_sq_navcard_fail");
+        who playSound("zmb_sq_navcard_fail");
         wait 1;
         navcomputer_use_trig sethintstring(&"ZOMBIE_NAVCARD_USE");
       }
@@ -637,7 +634,7 @@ update_sidequest_stats(stat_name) {
 }
 
 sq_give_all_perks() {
-  vending_triggers = getentarray("zombie_vending", "targetname");
+  vending_triggers = getEntArray("zombie_vending", "targetname");
   perks = [];
 
   for(i = 0; i < vending_triggers.size; i++) {
@@ -668,8 +665,8 @@ sq_give_all_perks() {
 sq_give_player_perks(perks, v_fireball_start_loc, n_fireball_exploder) {
   exploder(n_fireball_exploder);
   m_fireball = spawn("script_model", v_fireball_start_loc);
-  m_fireball setmodel("tag_origin");
-  playfxontag(level._effect["sidequest_dragon_fireball_max"], m_fireball, "tag_origin");
+  m_fireball setModel("tag_origin");
+  playFXOnTag(level._effect["sidequest_dragon_fireball_max"], m_fireball, "tag_origin");
 
   do {
     wait_network_frame();
@@ -682,7 +679,7 @@ sq_give_player_perks(perks, v_fireball_start_loc, n_fireball_exploder) {
   m_fireball.origin = self gettagorigin("J_SpineLower");
   m_fireball linkto(self, "J_SpineLower");
   wait 1.5;
-  playfx(level._effect["sidequest_flash"], m_fireball.origin);
+  playFX(level._effect["sidequest_flash"], m_fireball.origin);
   m_fireball delete();
   level notify("sq_fireball_hit_player");
 

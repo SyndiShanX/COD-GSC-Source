@@ -115,7 +115,7 @@ declarebusstate(name) {
   if(isDefined(level.busstates[name])) {
     return;
   }
-  level.busstates[name] = spawnstruct();
+  level.busstates[name] = spawnStruct();
   level.busstates[name].time = 0.5;
   level.busstates[name].levels = [];
 }
@@ -142,8 +142,7 @@ busvolumes(names, value) {
     busvolume(names[j], value);
 }
 
-busvolumeall(value) {
-}
+busvolumeall(value) {}
 
 argsasdict(a, b, c, d, e, f, g, h, i) {
   names = [];

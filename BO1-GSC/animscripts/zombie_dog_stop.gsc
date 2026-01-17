@@ -35,7 +35,7 @@ dogIdleNotetracks(note) {
       self.breath_fx.angles = self GetTagAngles("TAG_MOUTH_FX");
       self.breath_fx setModel("tag_origin");
       self.breath_fx LinkTo(self, "TAG_MOUTH_FX");
-      PlayFxOnTag(level._effect["dog_breath"], self.breath_fx, "tag_origin");
+      playFXOnTag(level._effect["dog_breath"], self.breath_fx, "tag_origin");
     }
   }
 }
@@ -47,7 +47,7 @@ isFacingEnemy(toleranceCosAngle) {
   if(distToEnemy < 1) {
     return true;
   }
-  forward = AnglesToForward(self.angles);
+  forward = anglesToForward(self.angles);
   return ((forward[0] * vecToEnemy[0]) + (forward[1] * vecToEnemy[1])) / distToEnemy > toleranceCosAngle;
 }
 

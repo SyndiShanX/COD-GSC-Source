@@ -26,7 +26,7 @@ main() {
   else
     level.max_number_of_dead_bodies = 0;
 
-  var_1 = spawnstruct();
+  var_1 = spawnStruct();
   var_1.bodies = [];
   common_scripts\utility::run_thread_on_targetname("trigger_body", ::trigger_body, var_1);
   common_scripts\utility::run_thread_on_targetname("dead_body", ::spawn_dead_body, var_1);
@@ -34,14 +34,14 @@ main() {
 
 trigger_body(var_0) {
   self waittill("trigger");
-  var_1 = getentarray(self.target, "targetname");
+  var_1 = getEntArray(self.target, "targetname");
   common_scripts\utility::array_thread(var_1, ::spawn_dead_body, var_0);
 }
 
 spawn_dead_body(var_0) {
   set_deadbody_info();
 
-  if(!h1_ragdollspecialcase(self) && !getdvarint("ragdoll_enable") && isdefined(self.require_ragdoll) && self.require_ragdoll) {
+  if(!h1_ragdollspecialcase(self) && !getdvarint("ragdoll_enable") && isDefined(self.require_ragdoll) && self.require_ragdoll) {
     return;
   }
   if(!h1_ragdollspecialcase(self) && level.max_number_of_dead_bodies == 0) {
@@ -49,7 +49,7 @@ spawn_dead_body(var_0) {
   }
   var_1 = undefined;
 
-  if(isdefined(self.script_index))
+  if(isDefined(self.script_index))
     var_1 = self.script_index;
   else {
     level.dead_body_count++;
@@ -72,22 +72,22 @@ spawn_dead_body(var_0) {
   if(!h1_ragdollspecialcase(self))
     var_0 que_body(var_2);
 
-  if(isdefined(self.custom_deadbody)) {
+  if(isDefined(self.custom_deadbody)) {
     precache_custom_deadbody();
     custom_deadbody(var_2);
   } else
     var_2[[level.scr_deadbody[var_1]]]();
 
-  if(!isdefined(self.script_trace)) {
-    var_3 = bullettrace(var_2.origin + (0, 0, 5), var_2.origin + (0, 0, -64), 0, undefined);
+  if(!isDefined(self.script_trace)) {
+    var_3 = bulletTrace(var_2.origin + (0, 0, 5), var_2.origin + (0, 0, -64), 0, undefined);
     var_2.origin = var_3["position"];
   }
 
-  if(isdefined(self.custom_death_anim)) {
-    if(isdefined(self.link_corpse_clip)) {
+  if(isDefined(self.custom_death_anim)) {
+    if(isDefined(self.link_corpse_clip)) {
       var_4 = getent("corpse_clip_" + self.script_noteworthy, "targetname");
 
-      if(isdefined(var_4)) {
+      if(isDefined(var_4)) {
         var_4.origin = var_2.origin;
         var_4 linkto(var_2, "tag_origin");
       }
@@ -98,7 +98,7 @@ spawn_dead_body(var_0) {
     var_2 setflaggedanim("flag", var_2 maps\_utility::getanim(self.script_noteworthy), 1, 0, 1);
     var_2 waittillmatch("flag", "end");
 
-    if(!isdefined(self.script_start))
+    if(!isDefined(self.script_start))
       var_2 startragdoll();
   }
 }
@@ -119,8 +119,8 @@ lookat_custom_death_anim(var_0) {
   var_1 = cos(45);
   var_2 = 0;
 
-  for (;;) {
-    if(distancesquared(level.player.origin, self.origin) > 5000 && (!checksighttrace(self) || !common_scripts\utility::within_fov(level.player geteye(), level.player getplayerangles(), self.origin + (0, 0, 12), var_1)))
+  for(;;) {
+    if(distancesquared(level.player.origin, self.origin) > 5000 && (!checksighttrace(self) || !common_scripts\utility::within_fov(level.player getEye(), level.player getplayerangles(), self.origin + (0, 0, 12), var_1)))
       var_2 = 0;
     else
       var_2++;
@@ -139,11 +139,11 @@ checksighttrace(var_0) {
   var_1 = var_0 gettagorigin("J_Ankle_LE") + (0, 0, 3);
   var_2 = var_0 gettagorigin("J_Hip_RI");
   var_3 = var_0 gettagorigin("J_HEAD");
-  return sighttracepassed(level.player geteye(), var_1, 0, level.player, self) || sighttracepassed(level.player geteye(), var_2, 0, level.player, self) || sighttracepassed(level.player geteye(), var_3, 0, level.player, self);
+  return sighttracepassed(level.player getEye(), var_1, 0, level.player, self) || sighttracepassed(level.player getEye(), var_2, 0, level.player, self) || sighttracepassed(level.player getEye(), var_3, 0, level.player, self);
 }
 
 set_deadbody_info() {
-  if(!isdefined(self.script_parameters)) {
+  if(!isDefined(self.script_parameters)) {
     return;
   }
   var_0 = strtok(self.script_parameters, "|");
@@ -172,7 +172,7 @@ set_deadbody_info() {
 get_custom_deadbody(var_0) {
   var_1 = strtok(var_0, ":, ");
   var_1 = common_scripts\utility::array_remove(var_1, var_1[0]);
-  var_2 = spawnstruct();
+  var_2 = spawnStruct();
   var_2.body = var_1[0];
   var_2.head = var_1[1];
   var_2.voice = var_1[2];
@@ -186,7 +186,7 @@ precache_custom_deadbody() {
 }
 
 custom_deadbody(var_0) {
-  var_0 setmodel(self.custom_deadbody.body);
+  var_0 setModel(self.custom_deadbody.body);
   var_0 attach(self.custom_deadbody.head, "", 1);
   var_0.headmodel = self.custom_deadbody.head;
   var_0.voice = self.custom_deadbody.voice;
@@ -194,5 +194,5 @@ custom_deadbody(var_0) {
 }
 
 h1_ragdollspecialcase(var_0) {
-  return isdefined(level.dead_bodies_ignore_ragdoll_settings) || isdefined(var_0.custom_death_anim);
+  return isDefined(level.dead_bodies_ignore_ragdoll_settings) || isDefined(var_0.custom_death_anim);
 }

@@ -13,18 +13,18 @@ initairsupport() {
 
   level.airsupportheightscale = getdvarintdefault("scr_airsupportHeightScale", level.airsupportheightscale);
   level.noflyzones = [];
-  level.noflyzones = getentarray("no_fly_zone", "targetname");
+  level.noflyzones = getEntArray("no_fly_zone", "targetname");
   airsupport_heights = getstructarray("air_support_height", "targetname");
 
   if(airsupport_heights.size > 1)
     error("Found more then one 'air_support_height' structs in the map");
 
-  airsupport_heights = getentarray("air_support_height", "targetname");
+  airsupport_heights = getEntArray("air_support_height", "targetname");
 
   if(airsupport_heights.size > 0)
     error("Found an entity in the map with an 'air_support_height' targetname.There should be only structs.");
 
-  heli_height_meshes = getentarray("heli_height_lock", "classname");
+  heli_height_meshes = getEntArray("heli_height_lock", "classname");
 
   if(heli_height_meshes.size > 1)
     error("Found more then one 'heli_height_lock' classname in the map");
@@ -142,7 +142,7 @@ callstrike(flightplan) {
   assert(flytime > bombtime);
   flightplan.owner endon("disconnect");
   requireddeathcount = flightplan.owner.deathcount;
-  side = vectorcross(anglestoforward(direction), (0, 0, 1));
+  side = vectorcross(anglesToForward(direction), (0, 0, 1));
   plane_seperation = 25;
   side_offset = vectorscale(side, plane_seperation);
   level thread planestrike(flightplan.owner, requireddeathcount, startpoint, endpoint, bombtime, flytime, flightplan.speed, flightplan.bombspeedscale, direction, flightplan.planespawncallback);
@@ -172,7 +172,7 @@ planestrike(owner, requireddeathcount, pathstart, pathend, bombtime, flytime, fl
 
 determinegroundpoint(player, position) {
   ground = (position[0], position[1], player.origin[2]);
-  trace = bullettrace(ground + vectorscale((0, 0, 1), 10000.0), ground, 0, undefined);
+  trace = bulletTrace(ground + vectorscale((0, 0, 1), 10000.0), ground, 0, undefined);
   return trace["position"];
 }
 
@@ -434,8 +434,8 @@ calculatepath(start, end, startnoflyzones, goalnoflyzones) {
 
 _getstrikepathstartandend(goal, yaw, halfdistance) {
   direction = (0, yaw, 0);
-  startpoint = goal + vectorscale(anglestoforward(direction), -1 * halfdistance);
-  endpoint = goal + vectorscale(anglestoforward(direction), halfdistance);
+  startpoint = goal + vectorscale(anglesToForward(direction), -1 * halfdistance);
+  endpoint = goal + vectorscale(anglesToForward(direction), halfdistance);
   noflyzone = crossesnoflyzone(startpoint, endpoint);
   path = [];
 
@@ -487,7 +487,7 @@ entlosradiusdamage(ent, pos, radius, max, min, owner, einflictor) {
 
   if(ent.isplayer || ent.isactor) {
     assumed_ceiling_height = 800;
-    eye_position = ent.entity geteye();
+    eye_position = ent.entity getEye();
     head_height = eye_position[2];
     debug_display_time = 4000;
     trace = maps\mp\gametypes\_weapons::weapondamagetrace(ent.entity.origin, ent.entity.origin + (0, 0, assumed_ceiling_height), 0, undefined);

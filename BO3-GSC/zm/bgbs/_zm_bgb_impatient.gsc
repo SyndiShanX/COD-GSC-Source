@@ -16,14 +16,14 @@
 #namespace zm_bgb_impatient;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_impatient", & __init__, undefined, "bgb");
+  system::register("zm_bgb_impatient", &__init__, undefined, "bgb");
 }
 
 function __init__() {
-  if(!(isdefined(level.bgb_in_use) && level.bgb_in_use)) {
+  if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
-  bgb::register("zm_bgb_impatient", "event", & event, undefined, undefined, undefined);
+  bgb::register("zm_bgb_impatient", "event", &event, undefined, undefined, undefined);
 }
 
 function event() {
@@ -36,7 +36,7 @@ function event() {
 function special_revive() {
   self endon("disconnect");
   wait(1);
-  while (level.zombie_total > 0) {
+  while(level.zombie_total > 0) {
     wait(0.05);
   }
   self zm::spectator_respawn_player();

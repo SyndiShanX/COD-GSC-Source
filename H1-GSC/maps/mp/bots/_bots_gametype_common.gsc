@@ -25,19 +25,19 @@ bot_cache_entrances_to_gametype_array(var_0, var_1, var_2, var_3) {
   var_6 = 0;
 
   foreach(var_10, var_8 in var_0) {
-    if(isdefined(var_0[var_10].bottarget))
+    if(isDefined(var_0[var_10].bottarget))
       var_4[var_6] = var_0[var_10].bottarget.origin;
     else {
       var_0[var_10].nearest_node = getclosestnodeinsight(var_0[var_10].origin);
 
-      if(!isdefined(var_0[var_10].nearest_node)) {
+      if(!isDefined(var_0[var_10].nearest_node)) {
         var_9 = getnodesinradiussorted(var_0[var_10].origin, 256, 0);
 
         if(var_9.size > 0)
           var_0[var_10].nearest_node = var_9[0];
       }
 
-      if(!isdefined(var_0[var_10].nearest_node)) {
+      if(!isDefined(var_0[var_10].nearest_node)) {
         continue;
       }
       if(distance(var_0[var_10].nearest_node.origin, var_0[var_10].origin) > 128) {
@@ -56,8 +56,8 @@ bot_cache_entrances_to_gametype_array(var_0, var_1, var_2, var_3) {
 }
 
 bot_cache_entrances(var_0, var_1, var_2, var_3) {
-  var_4 = !isdefined(var_2) || !var_2;
-  var_5 = isdefined(var_3) && var_3;
+  var_4 = !isDefined(var_2) || !var_2;
+  var_5 = isDefined(var_3) && var_3;
   wait 0.1;
 
   if(var_5 && var_4) {
@@ -69,12 +69,12 @@ bot_cache_entrances(var_0, var_1, var_2, var_3) {
 
   var_10 = [];
 
-  for (var_11 = 0; var_11 < var_0.size; var_11++) {
+  for(var_11 = 0; var_11 < var_0.size; var_11++) {
     var_12 = var_1[var_11];
     var_10[var_12] = findentrances(var_0[var_11]);
     wait 0.05;
 
-    for (var_13 = 0; var_13 < var_10[var_12].size; var_13++) {
+    for(var_13 = 0; var_13 < var_10[var_12].size; var_13++) {
       var_14 = var_10[var_12][var_13];
       var_14.is_precalculated_entrance = 1;
       var_14.prone_visible_from[var_12] = maps\mp\bots\_bots_util::entrance_visible_from(var_14.origin, var_0[var_11], "prone");
@@ -87,8 +87,8 @@ bot_cache_entrances(var_0, var_1, var_2, var_3) {
   var_15 = [];
 
   if(var_4) {
-    for (var_11 = 0; var_11 < var_0.size; var_11++) {
-      for (var_13 = var_11 + 1; var_13 < var_0.size; var_13++) {
+    for(var_11 = 0; var_11 < var_0.size; var_11++) {
+      for(var_13 = var_11 + 1; var_13 < var_0.size; var_13++) {
         var_16 = maps\mp\bots\_bots_util::get_extended_path(var_0[var_11], var_0[var_13]);
 
         foreach(var_8 in var_16)
@@ -97,13 +97,13 @@ bot_cache_entrances(var_0, var_1, var_2, var_3) {
     }
   }
 
-  if(!isdefined(level.entrance_origin_points))
+  if(!isDefined(level.entrance_origin_points))
     level.entrance_origin_points = [];
 
-  if(!isdefined(level.entrance_indices))
+  if(!isDefined(level.entrance_indices))
     level.entrance_indices = [];
 
-  if(!isdefined(level.entrance_points))
+  if(!isDefined(level.entrance_points))
     level.entrance_points = [];
 
   if(var_5) {
@@ -167,7 +167,7 @@ bot_setup_bombzone_bottargets() {
 
 bot_setup_bot_targets(var_0) {
   foreach(var_2 in var_0) {
-    if(!isdefined(var_2.bottargets))
+    if(!isDefined(var_2.bottargets))
       var_2.bottargets = bot_get_valid_nodes_in_trigger(var_2.trigger);
   }
 }
@@ -176,7 +176,7 @@ bot_gametype_get_num_players_on_team(var_0) {
   var_1 = 0;
 
   foreach(var_3 in level.participants) {
-    if(maps\mp\_utility::isteamparticipant(var_3) && isdefined(var_3.team) && var_3.team == var_0)
+    if(maps\mp\_utility::isteamparticipant(var_3) && isDefined(var_3.team) && var_3.team == var_0)
       var_1++;
   }
 
@@ -187,7 +187,7 @@ bot_gametype_get_allied_attackers_for_team(var_0, var_1, var_2) {
   var_3 = bot_gametype_get_players_by_role("attacker", var_0);
 
   foreach(var_5 in level.players) {
-    if(!isai(var_5) && isdefined(var_5.team) && var_5.team == var_0) {
+    if(!isai(var_5) && isDefined(var_5.team) && var_5.team == var_0) {
       if(var_5 bot_gametype_human_player_always_considered_attacker() || distancesquared(var_1, var_5.origin) > squared(var_2))
         var_3 = common_scripts\utility::array_add(var_3, var_5);
     }
@@ -200,7 +200,7 @@ bot_gametype_get_allied_defenders_for_team(var_0, var_1, var_2) {
   var_3 = bot_gametype_get_players_by_role("defender", var_0);
 
   foreach(var_5 in level.players) {
-    if(!isai(var_5) && isdefined(var_5.team) && var_5.team == var_0) {
+    if(!isai(var_5) && isDefined(var_5.team) && var_5.team == var_0) {
       if(var_5 bot_gametype_human_player_always_considered_defender() || distancesquared(var_1, var_5.origin) <= squared(var_2))
         var_3 = common_scripts\utility::array_add(var_3, var_5);
     }
@@ -210,14 +210,14 @@ bot_gametype_get_allied_defenders_for_team(var_0, var_1, var_2) {
 }
 
 bot_gametype_human_player_always_considered_attacker() {
-  if(isdefined(level.bot_gametype_human_player_always_attacker))
+  if(isDefined(level.bot_gametype_human_player_always_attacker))
     return self[[level.bot_gametype_human_player_always_attacker]]();
 
   return 0;
 }
 
 bot_gametype_human_player_always_considered_defender() {
-  if(isdefined(level.bot_gametype_human_player_always_defender))
+  if(isDefined(level.bot_gametype_human_player_always_defender))
     return self[[level.bot_gametype_human_player_always_defender]]();
 
   return 0;
@@ -233,7 +233,7 @@ bot_gametype_get_players_by_role(var_0, var_1) {
   var_2 = [];
 
   foreach(var_4 in level.participants) {
-    if(isdefined(var_4.team) && isalive(var_4) && maps\mp\_utility::isteamparticipant(var_4) && var_4.team == var_1 && isdefined(var_4.role) && var_4.role == var_0)
+    if(isDefined(var_4.team) && isalive(var_4) && maps\mp\_utility::isteamparticipant(var_4) && var_4.team == var_1 && isDefined(var_4.role) && var_4.role == var_0)
       var_2[var_2.size] = var_4;
   }
 
@@ -299,23 +299,15 @@ bot_gametype_attacker_defender_ai_director_update() {
   var_0 = ["allies", "axis"];
   var_1 = gettime() + 2000;
 
-  for (;;) {
+  for(;;) {
     if(gettime() > var_1) {
       var_1 = gettime() + 1000;
 
       foreach(var_3 in var_0) {
-        var_4 = [
-          [level.bot_gametype_allied_attackers_for_team]
-        ](var_3);
-        var_5 = [
-          [level.bot_gametype_allied_defenders_for_team]
-        ](var_3);
-        var_6 = [
-          [level.bot_gametype_attacker_limit_for_team]
-        ](var_3);
-        var_7 = [
-          [level.bot_gametype_defender_limit_for_team]
-        ](var_3);
+        var_4 = [[level.bot_gametype_allied_attackers_for_team]](var_3);
+        var_5 = [[level.bot_gametype_allied_defenders_for_team]](var_3);
+        var_6 = [[level.bot_gametype_attacker_limit_for_team]](var_3);
+        var_7 = [[level.bot_gametype_defender_limit_for_team]](var_3);
 
         if(var_4.size > var_6) {
           var_8 = [];
@@ -362,14 +354,14 @@ bot_gametype_attacker_defender_ai_director_update() {
 }
 
 bot_can_switch_to_attacker() {
-  if(isdefined(level.bot_gametype_allowed_to_switch_to_attacker))
+  if(isDefined(level.bot_gametype_allowed_to_switch_to_attacker))
     return self[[level.bot_gametype_allowed_to_switch_to_attacker]]();
 
   return 1;
 }
 
 bot_can_switch_to_defender() {
-  if(isdefined(level.bot_gametype_allowed_to_switch_to_defender))
+  if(isDefined(level.bot_gametype_allowed_to_switch_to_defender))
     return self[[level.bot_gametype_allowed_to_switch_to_defender]]();
 
   return 1;
@@ -426,7 +418,7 @@ bot_cache_entrances_to_zones(var_0) {
 }
 
 calculate_zone_node_extents(var_0) {
-  var_1 = spawnstruct();
+  var_1 = spawnStruct();
   var_1.min_pt = (999999, 999999, 999999);
   var_1.max_pt = (-999999, -999999, -999999);
 
@@ -465,10 +457,10 @@ monitor_zone_control() {
   level endon("game_ended");
   var_0 = getzonenearest(self.origin);
 
-  for (;;) {
+  for(;;) {
     var_1 = "none";
 
-    if(isdefined(self.gameobject))
+    if(isDefined(self.gameobject))
       var_1 = self.gameobject maps\mp\gametypes\_gameobjects::getownerteam();
 
     if(var_1 == "neutral" || var_1 == "none")
@@ -487,7 +479,7 @@ monitor_bombzone_control() {
   level endon("game_ended");
   var_0 = getzonenearest(self.curorigin);
 
-  for (;;) {
+  for(;;) {
     if(self.bombplantedon)
       var_1 = common_scripts\utility::get_enemy_team(self.ownerteam);
     else
@@ -521,11 +513,11 @@ get_living_players_on_team(var_0, var_1) {
   var_2 = [];
 
   foreach(var_4 in level.participants) {
-    if(!isdefined(var_4.team)) {
+    if(!isDefined(var_4.team)) {
       continue;
     }
     if(maps\mp\_utility::isreallyalive(var_4) && maps\mp\_utility::isteamparticipant(var_4) && var_4.team == var_0) {
-      if(!isdefined(var_1) || var_1 && isai(var_4) && isdefined(var_4.role))
+      if(!isDefined(var_1) || var_1 && isai(var_4) && isDefined(var_4.role))
         var_2[var_2.size] = var_4;
     }
   }
@@ -593,7 +585,7 @@ bombzone_press_use(var_0, var_1, var_2, var_3) {
   else if(self botgetdifficultysetting("strategyLevel") >= 2)
     var_4 = 80;
 
-  if(randomint(100) < var_4 && !(isdefined(var_3) && var_3)) {
+  if(randomint(100) < var_4 && !(isDefined(var_3) && var_3)) {
     self botsetstance("prone");
     wait 0.2;
   }
@@ -615,7 +607,7 @@ notify_on_whizby() {
   var_0 = find_closest_bombzone_to_player(self);
   self waittill("bulletwhizby", var_1);
 
-  if(!isdefined(var_1.team) || var_1.team != self.team) {
+  if(!isDefined(var_1.team) || var_1.team != self.team) {
     var_2 = var_0.usetime - var_0.curprogress;
 
     if(var_2 > 1000)
@@ -626,7 +618,7 @@ notify_on_whizby() {
 notify_on_damage() {
   self waittill("damage", var_0, var_1);
 
-  if(!isdefined(var_1.team) || var_1.team != self.team)
+  if(!isDefined(var_1.team) || var_1.team != self.team)
     self notify("use_interrupted");
 }
 

@@ -7,7 +7,7 @@
 #include xmodelalias\c_zom_chinese_zombie_head_als;
 
 main() {
-  self setmodel("c_zom_zombie_scientist_body");
+  self setModel("c_zom_zombie_scientist_body");
   self.headmodel = codescripts\character::randomelement(xmodelalias\c_zom_chinese_zombie_head_als::main());
   self attach(self.headmodel, "", 1);
   self.voice = "american";

@@ -11,7 +11,6 @@
 #include scripts\zm_common\zm_spawner;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_utility;
-
 #namespace namespace_a476311c;
 
 autoexec __init__system__() {
@@ -26,7 +25,7 @@ __init__() {
   zm_trial::register_challenge(#"hash_250115340b2e27a5", &on_begin, &on_end);
 }
 
-private on_begin(var_b9c6550, var_50d1120, var_43f824d6, var_73d6ae36) {
+on_begin(var_b9c6550, var_50d1120, var_43f824d6, var_73d6ae36) {
   if(isDefined(var_b9c6550)) {
     self.var_97330ad2 = zm_trial::function_5769f26a(var_b9c6550);
   } else {
@@ -53,12 +52,12 @@ private on_begin(var_b9c6550, var_50d1120, var_43f824d6, var_73d6ae36) {
   zm_spawner::register_zombie_death_event_callback(&function_138aec8e);
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   zm_spawner::deregister_zombie_death_event_callback(&function_138aec8e);
 }
 
-private function_e997bb0b(var_73d6ae36) {
-  level endon(#"hash_7646638df88a3656", #"end_game");
+function_e997bb0b(var_73d6ae36) {
+  level endon(#"hash_7646638df88a3656", # "end_game");
 
   if(isDefined(var_73d6ae36)) {
     wait var_73d6ae36;
@@ -69,42 +68,41 @@ private function_e997bb0b(var_73d6ae36) {
 
   while(true) {
     foreach(player in getplayers()) {
-
       if(isgodmode(player) || player isinmovemode("<dev string:x38>", "<dev string:x41>")) {
         continue;
       }
 
-        if(player.health > 0 && !player laststand::player_is_in_laststand() && !(isDefined(player.var_eb319d10) && player.var_eb319d10) && !(isDefined(level.intermission) && level.intermission)) {
-          if(player.health <= self.var_6633a592) {
-            if(zm_utility::is_magic_bullet_shield_enabled(player)) {
-              player util::stop_magic_bullet_shield();
-            }
-
-            player dodamage(player.health + 1000, player.origin);
-            continue;
+      if(player.health > 0 && !player laststand::player_is_in_laststand() && !(isDefined(player.var_eb319d10) && player.var_eb319d10) && !(isDefined(level.intermission) && level.intermission)) {
+        if(player.health <= self.var_6633a592) {
+          if(zm_utility::is_magic_bullet_shield_enabled(player)) {
+            player util::stop_magic_bullet_shield();
           }
 
-          if(isDefined(player.armor) && player.armor > 0) {
-            player dodamage(self.var_6633a592 + 5, player.origin);
-            continue;
-          }
-
-          player dodamage(self.var_6633a592, player.origin);
+          player dodamage(player.health + 1000, player.origin);
+          continue;
         }
+
+        if(isDefined(player.armor) && player.armor > 0) {
+          player dodamage(self.var_6633a592 + 5, player.origin);
+          continue;
+        }
+
+        player dodamage(self.var_6633a592, player.origin);
+      }
     }
 
     wait self.var_ead3a0f2;
   }
 }
 
-private function_49091c27() {
+function_49091c27() {
   challenge = zm_trial::function_a36e8c38(#"hash_250115340b2e27a5");
   assert(isDefined(challenge));
   new_health = self.health + challenge.var_97330ad2;
   self.health = int(math::clamp(floor(new_health), 0, max(self.maxhealth, self.var_66cb03ad)));
 }
 
-private function_138aec8e(attacker) {
+function_138aec8e(attacker) {
   if(isDefined(self.nuked) && self.nuked) {
     foreach(player in getplayers()) {
       player function_49091c27();

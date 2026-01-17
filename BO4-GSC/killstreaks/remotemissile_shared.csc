@@ -11,7 +11,6 @@
 #include scripts\core_common\shoutcaster;
 #include scripts\core_common\util_shared;
 #include scripts\killstreaks\killstreak_detect;
-
 #namespace remotemissile;
 
 init_shared() {
@@ -75,7 +74,7 @@ function_6d66e75a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 function_90b75549(localclientnum) {
   self notify(#"hash_3f127346d8e9769f");
-  self endon(#"hash_3f127346d8e9769f", #"death");
+  self endon(#"hash_3f127346d8e9769f", # "death");
   player = function_5c10bd79(localclientnum);
   self util::waittill_dobj(localclientnum);
 
@@ -106,7 +105,7 @@ missile_fired(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, 
     self thread destruction_watcher(localclientnum, clientobjid);
     objective_setstate(localclientnum, clientobjid, "active");
 
-    if(player hasperk(localclientnum, #"specialty_showscorestreakicons")) {
+    if(player hasperk(localclientnum, # "specialty_showscorestreakicons")) {
       objective_seticon(localclientnum, clientobjid, "remotemissile_targetF");
       objective_seticonsize(localclientnum, clientobjid, 50);
     }
@@ -114,7 +113,7 @@ missile_fired(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, 
     self thread hud_update(localclientnum);
 
     if(player === owner) {
-      player.clouds_fx = util::playFXOnTag(localclientnum, #"hash_50b25e352ba908d0", self, "tag_origin");
+      player.clouds_fx = util::playFXOnTag(localclientnum, # "hash_50b25e352ba908d0", self, "tag_origin");
     }
   } else if(newval == 2) {
     if(isDefined(self.hellfireobjid)) {
@@ -146,7 +145,7 @@ bomblets_deployed(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self thread destruction_watcher(localclientnum, clientobjid);
     objective_setstate(localclientnum, clientobjid, "active");
 
-    if(player hasperk(localclientnum, #"specialty_showscorestreakicons")) {
+    if(player hasperk(localclientnum, # "specialty_showscorestreakicons")) {
       objective_seticon(localclientnum, clientobjid, "remotemissile_target");
     }
   } else {
@@ -161,7 +160,7 @@ bomblets_deployed(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 destruction_watcher(localclientnum, clientobjid) {
-  self waittill(#"death", #"cleanup_objectives");
+  self waittill(#"death", # "cleanup_objectives");
   wait 0.1;
 
   if(isDefined(clientobjid)) {
@@ -204,10 +203,10 @@ hud_update(localclientnum) {
 
 function_d260edc9(localclientnum) {
   player = function_5c10bd79(localclientnum);
-  postfxbundle = #"hash_778f4a554a5cfc33";
+  postfxbundle = # "hash_778f4a554a5cfc33";
 
   if(!function_148ccc79(localclientnum, postfxbundle) && (!function_1cbf351b(localclientnum) || function_93e0f729(localclientnum) === function_27673a7(localclientnum)) && !shoutcaster::function_2e6e4ee0(localclientnum)) {
-    if(isDefined(self.weapon) && self.weapon.statname == #"remote_missile") {
+    if(isDefined(self.weapon) && self.weapon.statname == # "remote_missile") {
       function_a837926b(localclientnum, postfxbundle);
     }
 
@@ -225,7 +224,7 @@ function_d260edc9(localclientnum) {
 
 function_c65b18ed(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   player = function_5c10bd79(localclientnum);
-  postfxbundle = #"hash_778f4a554a5cfc33";
+  postfxbundle = # "hash_778f4a554a5cfc33";
 
   if(!isDefined(self)) {
     return;

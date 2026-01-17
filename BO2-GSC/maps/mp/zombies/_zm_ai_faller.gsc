@@ -394,9 +394,9 @@ zombie_fall_fx(spot) {
 zombie_fall_burst_fx() {
   self endon("stop_zombie_fall_fx");
   self endon("fall_anim_finished");
-  playfx(level._effect["rise_burst"], self.origin + (0, 0, randomintrange(5, 10)));
+  playFX(level._effect["rise_burst"], self.origin + (0, 0, randomintrange(5, 10)));
   wait 0.25;
-  playfx(level._effect["rise_billow"], self.origin + (randomintrange(-10, 10), randomintrange(-10, 10), randomintrange(5, 10)));
+  playFX(level._effect["rise_billow"], self.origin + (randomintrange(-10, 10), randomintrange(-10, 10), randomintrange(5, 10)));
 }
 
 zombie_fall_dust_fx(zombie) {
@@ -407,7 +407,7 @@ zombie_fall_dust_fx(zombie) {
   dust_interval = 0.3;
 
   for(t = 0; t < dust_time; t = t + dust_interval) {
-    playfxontag(level._effect["rise_dust"], zombie, dust_tag);
+    playFXOnTag(level._effect["rise_dust"], zombie, dust_tag);
     wait(dust_interval);
   }
 }
@@ -438,7 +438,7 @@ faller_death_ragdoll() {
 
 in_player_fov(player) {
   playerangles = player getplayerangles();
-  playerforwardvec = anglestoforward(playerangles);
+  playerforwardvec = anglesToForward(playerangles);
   playerunitforwardvec = vectornormalize(playerforwardvec);
   banzaipos = self.origin;
   playerpos = player getorigin();
@@ -529,7 +529,7 @@ zombie_emerge_dust_fx(zombie) {
   dust_interval = 0.5;
 
   for(t = 0; t < dust_time; t = t + dust_interval) {
-    playfxontag(level._effect["rise_dust"], zombie, dust_tag);
+    playFXOnTag(level._effect["rise_dust"], zombie, dust_tag);
     wait(dust_interval);
   }
 }

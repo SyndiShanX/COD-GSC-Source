@@ -8,14 +8,14 @@
 #using_animtree("generic_human");
 
 main() {
-  if(isDefined(anim.ramboAnims))
+  if(isDefined(anim.ramboAnims)) {
     return;
-
-  if(!isdefined(level.subclass_spawn_functions))
+  }
+  if(!isDefined(level.subclass_spawn_functions))
     level.subclass_spawn_functions = [];
   level.subclass_spawn_functions["militia"] = ::enable_militia_behavior;
 
-  anim.ramboAnims = spawnstruct();
+  anim.ramboAnims = spawnStruct();
 
   anim.ramboAnims.coverleft90 = array( % favela_chaotic_cornerL_hop90, % favela_chaotic_cornerL_high90, % favela_chaotic_cornerL_mid90);
   anim.ramboAnims.coverleft45 = array( % favela_chaotic_cornerL_high45, % favela_chaotic_cornerL_mid45);
@@ -56,18 +56,18 @@ SetRamboGrenadeOffsets() {
 =============
 */
 enable_militia_behavior() {
-  if(self.type == "dog")
+  if(self.type == "dog") {
     return;
-
+  }
   self.neverEnableCQB = true;
   self.maxfaceenemydist = 256; //default 512
 
   // don't enable rambo type behaviour on long range, rpg, or shotgun types
   if(animscripts\combat_utility::isLongRangeAI())
     return;
-  if(isShotgun(self.weapon))
+  if(isShotgun(self.weapon)) {
     return;
-
+  }
   self.disable_blindfire = undefined;
   self.favor_blindfire = true;
   self.ramboChance = .9;

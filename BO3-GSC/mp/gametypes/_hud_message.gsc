@@ -14,39 +14,39 @@
 #namespace hud_message;
 
 function init() {
-  game["strings"]["draw"] = & "MP_DRAW_CAPS";
-  game["strings"]["round_draw"] = & "MP_ROUND_DRAW_CAPS";
-  game["strings"]["round_win"] = & "MP_ROUND_WIN_CAPS";
-  game["strings"]["round_loss"] = & "MP_ROUND_LOSS_CAPS";
-  game["strings"]["victory"] = & "MP_VICTORY_CAPS";
-  game["strings"]["defeat"] = & "MP_DEFEAT_CAPS";
-  game["strings"]["top3"] = & "MP_TOP3_CAPS";
-  game["strings"]["game_over"] = & "MP_GAME_OVER_CAPS";
-  game["strings"]["halftime"] = & "MP_HALFTIME_CAPS";
-  game["strings"]["overtime"] = & "MP_OVERTIME_CAPS";
-  game["strings"]["roundend"] = & "MP_ROUNDEND_CAPS";
-  game["strings"]["intermission"] = & "MP_INTERMISSION_CAPS";
-  game["strings"]["side_switch"] = & "MP_SWITCHING_SIDES_CAPS";
-  game["strings"]["match_bonus"] = & "MP_MATCH_BONUS_IS";
-  game["strings"]["codpoints_match_bonus"] = & "MP_CODPOINTS_MATCH_BONUS_IS";
-  game["strings"]["wager_winnings"] = & "MP_WAGER_WINNINGS_ARE";
-  game["strings"]["wager_sidebet_winnings"] = & "MP_WAGER_SIDEBET_WINNINGS_ARE";
-  game["strings"]["wager_inthemoney"] = & "MP_WAGER_IN_THE_MONEY_CAPS";
-  game["strings"]["wager_loss"] = & "MP_WAGER_LOSS_CAPS";
-  game["strings"]["wager_topwinners"] = & "MP_WAGER_TOPWINNERS";
-  game["strings"]["join_in_progress_loss"] = & "MP_JOIN_IN_PROGRESS_LOSS";
-  game["strings"]["cod_caster_team_wins"] = & "MP_WINS";
-  game["strings"]["cod_caster_team_eliminated"] = & "MP_TEAM_ELIMINATED";
+  game["strings"]["draw"] = &"MP_DRAW_CAPS";
+  game["strings"]["round_draw"] = &"MP_ROUND_DRAW_CAPS";
+  game["strings"]["round_win"] = &"MP_ROUND_WIN_CAPS";
+  game["strings"]["round_loss"] = &"MP_ROUND_LOSS_CAPS";
+  game["strings"]["victory"] = &"MP_VICTORY_CAPS";
+  game["strings"]["defeat"] = &"MP_DEFEAT_CAPS";
+  game["strings"]["top3"] = &"MP_TOP3_CAPS";
+  game["strings"]["game_over"] = &"MP_GAME_OVER_CAPS";
+  game["strings"]["halftime"] = &"MP_HALFTIME_CAPS";
+  game["strings"]["overtime"] = &"MP_OVERTIME_CAPS";
+  game["strings"]["roundend"] = &"MP_ROUNDEND_CAPS";
+  game["strings"]["intermission"] = &"MP_INTERMISSION_CAPS";
+  game["strings"]["side_switch"] = &"MP_SWITCHING_SIDES_CAPS";
+  game["strings"]["match_bonus"] = &"MP_MATCH_BONUS_IS";
+  game["strings"]["codpoints_match_bonus"] = &"MP_CODPOINTS_MATCH_BONUS_IS";
+  game["strings"]["wager_winnings"] = &"MP_WAGER_WINNINGS_ARE";
+  game["strings"]["wager_sidebet_winnings"] = &"MP_WAGER_SIDEBET_WINNINGS_ARE";
+  game["strings"]["wager_inthemoney"] = &"MP_WAGER_IN_THE_MONEY_CAPS";
+  game["strings"]["wager_loss"] = &"MP_WAGER_LOSS_CAPS";
+  game["strings"]["wager_topwinners"] = &"MP_WAGER_TOPWINNERS";
+  game["strings"]["join_in_progress_loss"] = &"MP_JOIN_IN_PROGRESS_LOSS";
+  game["strings"]["cod_caster_team_wins"] = &"MP_WINS";
+  game["strings"]["cod_caster_team_eliminated"] = &"MP_TEAM_ELIMINATED";
 }
 
 function teamoutcomenotify(winner, endtype, endreasontext) {
   self endon("disconnect");
   self notify("reset_outcome");
   team = self.pers["team"];
-  if(team != "spectator" && (!isdefined(team) || !isdefined(level.teams[team]))) {
+  if(team != "spectator" && (!isDefined(team) || !isDefined(level.teams[team]))) {
     team = "allies";
   }
-  while (self.doingnotify) {
+  while(self.doingnotify) {
     wait(0.05);
   }
   self endon("reset_outcome");
@@ -69,12 +69,12 @@ function teamoutcomenotify(winner, endtype, endreasontext) {
           if(winner == "tie") {
             outcometext = game["strings"]["round_draw"];
           } else {
-            if(isdefined(self.pers["team"]) && winner == team) {
+            if(isDefined(self.pers["team"]) && winner == team) {
               outcometext = game["strings"]["round_win"];
               overridespectator = 1;
             } else {
               outcometext = game["strings"]["round_loss"];
-              if(isdefined(level.enddefeatreasontext)) {
+              if(isDefined(level.enddefeatreasontext)) {
                 endreasontext = level.enddefeatreasontext;
               }
               overridespectator = 1;
@@ -85,12 +85,12 @@ function teamoutcomenotify(winner, endtype, endreasontext) {
           if(winner == "tie") {
             outcometext = game["strings"]["draw"];
           } else {
-            if(isdefined(self.pers["team"]) && winner == team) {
+            if(isDefined(self.pers["team"]) && winner == team) {
               outcometext = game["strings"]["victory"];
               overridespectator = 1;
             } else {
               outcometext = game["strings"]["defeat"];
-              if(isdefined(level.enddefeatreasontext)) {
+              if(isDefined(level.enddefeatreasontext)) {
                 endreasontext = level.enddefeatreasontext;
               }
               if(level.rankedmatch || level.leaguematch && self.pers["lateJoin"] === 1) {
@@ -105,7 +105,7 @@ function teamoutcomenotify(winner, endtype, endreasontext) {
     }
   }
   matchbonus = 0;
-  if(isdefined(self.pers["totalMatchBonus"])) {
+  if(isDefined(self.pers["totalMatchBonus"])) {
     bonus = ceil(self.pers["totalMatchBonus"] * level.xpscale);
     if(bonus > 0) {
       matchbonus = bonus;
@@ -117,33 +117,31 @@ function teamoutcomenotify(winner, endtype, endreasontext) {
   } else if(winner == "axis") {
     winnerenum = 2;
   }
-  if(isdefined(level.var_c17c938d) && [
-      [level.var_c17c938d]
-    ](winner, endtype, endreasontext, outcometext, team, winnerenum, notifyroundendtoui, matchbonus)) {} else {
-    if(level.gametype == "ctf" || level.gametype == "escort" || level.gametype == "ball" && isdefined(game["overtime_round"])) {
+  if(isDefined(level.var_c17c938d) && [[level.var_c17c938d]](winner, endtype, endreasontext, outcometext, team, winnerenum, notifyroundendtoui, matchbonus)) {} else {
+    if(level.gametype == "ctf" || level.gametype == "escort" || level.gametype == "ball" && isDefined(game["overtime_round"])) {
       if(game["overtime_round"] == 1) {
-        if(isdefined(game[level.gametype + "_overtime_first_winner"])) {
+        if(isDefined(game[level.gametype + "_overtime_first_winner"])) {
           winner = game[level.gametype + "_overtime_first_winner"];
         }
-        if(isdefined(winner) && winner != "tie") {
+        if(isDefined(winner) && winner != "tie") {
           winningtime = game[level.gametype + "_overtime_time_to_beat"];
         }
       } else {
-        if(isdefined(game[level.gametype + "_overtime_first_winner"]) && (game[level.gametype + "_overtime_first_winner"]) == "tie") {
+        if(isDefined(game[level.gametype + "_overtime_first_winner"]) && (game[level.gametype + "_overtime_first_winner"]) == "tie") {
           winningtime = game[level.gametype + "_overtime_best_time"];
         } else {
           winningtime = undefined;
-          if(winner == "tie" && isdefined(game[level.gametype + "_overtime_first_winner"])) {
+          if(winner == "tie" && isDefined(game[level.gametype + "_overtime_first_winner"])) {
             if((game[level.gametype + "_overtime_first_winner"]) == "allies") {
               winnerenum = 1;
             } else if((game[level.gametype + "_overtime_first_winner"]) == "axis") {
               winnerenum = 2;
             }
           }
-          if(isdefined(game[level.gametype + "_overtime_time_to_beat"])) {
+          if(isDefined(game[level.gametype + "_overtime_time_to_beat"])) {
             winningtime = game[level.gametype + "_overtime_time_to_beat"];
           }
-          if(isdefined(game[level.gametype + "_overtime_best_time"]) && (!isdefined(winningtime) || winningtime > (game[level.gametype + "_overtime_best_time"]))) {
+          if(isDefined(game[level.gametype + "_overtime_best_time"]) && (!isDefined(winningtime) || winningtime > (game[level.gametype + "_overtime_best_time"]))) {
             if((game[level.gametype + "_overtime_first_winner"]) !== winner) {
               losingtime = winningtime;
             }
@@ -155,7 +153,7 @@ function teamoutcomenotify(winner, endtype, endreasontext) {
         }
         if(level.gametype == "escort" && winner === "tie") {
           winnerenum = 0;
-          if(!(isdefined(level.finalgameend) && level.finalgameend)) {
+          if(!(isDefined(level.finalgameend) && level.finalgameend)) {
             if(game["defenders"] == team) {
               outcometext = game["strings"]["round_win"];
             } else {
@@ -164,10 +162,10 @@ function teamoutcomenotify(winner, endtype, endreasontext) {
           }
         }
       }
-      if(!isdefined(winningtime)) {
+      if(!isDefined(winningtime)) {
         winningtime = 0;
       }
-      if(!isdefined(losingtime)) {
+      if(!isDefined(losingtime)) {
         losingtime = 0;
       }
       if(winningtime == 0 && losingtime == 0) {
@@ -179,9 +177,9 @@ function teamoutcomenotify(winner, endtype, endreasontext) {
       }
       self luinotifyevent(&"show_outcome", 7, outcometext, endreasontext, int(matchbonus), winnerenum, notifyroundendtoui, int(winningtime / 1000), int(losingtime / 1000));
     } else {
-      if(level.gametype == "ball" && isdefined(winner) && winner != "tie" && game["roundsplayed"] < level.roundlimit && isdefined(game["round_time_to_beat"]) && !isdefined(game["overtime_round"])) {
+      if(level.gametype == "ball" && isDefined(winner) && winner != "tie" && game["roundsplayed"] < level.roundlimit && isDefined(game["round_time_to_beat"]) && !isDefined(game["overtime_round"])) {
         winningtime = game["round_time_to_beat"];
-        if(!isdefined(losingtime)) {
+        if(!isDefined(losingtime)) {
           losingtime = 0;
         }
         switch (winner) {
@@ -223,18 +221,18 @@ function teamoutcomenotifyzombie(winner, isround, endreasontext) {
   self endon("disconnect");
   self notify("reset_outcome");
   team = self.pers["team"];
-  if(isdefined(team) && team == "spectator") {
-    for (i = 0; i < level.players.size; i++) {
+  if(isDefined(team) && team == "spectator") {
+    for(i = 0; i < level.players.size; i++) {
       if(self.currentspectatingclient == level.players[i].clientid) {
         team = level.players[i].pers["team"];
         break;
       }
     }
   }
-  if(!isdefined(team) || !isdefined(level.teams[team])) {
+  if(!isDefined(team) || !isDefined(level.teams[team])) {
     team = "allies";
   }
-  while (self.doingnotify) {
+  while(self.doingnotify) {
     wait(0.05);
   }
   self endon("reset_outcome");
@@ -262,7 +260,7 @@ function teamoutcomenotifyzombie(winner, isround, endreasontext) {
 function outcomenotify(winner, isroundend, endreasontext) {
   self endon("disconnect");
   self notify("reset_outcome");
-  while (self.doingnotify) {
+  while(self.doingnotify) {
     wait(0.05);
   }
   self endon("reset_outcome");
@@ -290,12 +288,12 @@ function outcomenotify(winner, isroundend, endreasontext) {
     }
   }
   matchbonus = 0;
-  if(isdefined(self.pers["totalMatchBonus"])) {
+  if(isDefined(self.pers["totalMatchBonus"])) {
     matchbonus = self.pers["totalMatchBonus"];
   }
   wait(2);
   team = self.pers["team"];
-  if(isdefined(team) && team == "spectator" && overridespectator) {
+  if(isDefined(team) && team == "spectator" && overridespectator) {
     outcometext = game["strings"]["cod_caster_team_wins"];
     self luinotifyevent(&"show_outcome", 5, outcometext, endreasontext, matchbonus, winner, 0);
   } else {
@@ -306,7 +304,7 @@ function outcomenotify(winner, isroundend, endreasontext) {
 function wageroutcomenotify(winner, endreasontext) {
   self endon("disconnect");
   self notify("reset_outcome");
-  while (self.doingnotify) {
+  while(self.doingnotify) {
     wait(0.05);
   }
   self endon("reset_outcome");
@@ -326,7 +324,7 @@ function wageroutcomenotify(winner, endreasontext) {
     spacing = 20;
   }
   halftime = 0;
-  if(isdefined(level.sidebet) && level.sidebet) {
+  if(isDefined(level.sidebet) && level.sidebet) {
     halftime = 1;
   }
   duration = 60000;
@@ -338,11 +336,11 @@ function wageroutcomenotify(winner, endreasontext) {
     outcometitle.color = (1, 1, 0);
     outcometitle.glowcolor = (1, 0, 0);
   } else {
-    if(isdefined(level.dontcalcwagerwinnings) && level.dontcalcwagerwinnings == 1) {
+    if(isDefined(level.dontcalcwagerwinnings) && level.dontcalcwagerwinnings == 1) {
       outcometitle settext(game["strings"]["wager_topwinners"]);
       outcometitle.color = (0.42, 0.68, 0.46);
     } else {
-      if(isdefined(self.wagerwinnings) && self.wagerwinnings > 0) {
+      if(isDefined(self.wagerwinnings) && self.wagerwinnings > 0) {
         outcometitle settext(game["strings"]["wager_inthemoney"]);
         outcometitle.color = (0.42, 0.68, 0.46);
       } else {
@@ -369,8 +367,8 @@ function wageroutcomenotify(winner, endreasontext) {
   playernamehudelems = [];
   playercphudelems = [];
   numplayers = players.size;
-  for (i = 0; i < numplayers; i++) {
-    if(!halftime && isdefined(players[i])) {
+  for(i = 0; i < numplayers; i++) {
+    if(!halftime && isDefined(players[i])) {
       secondtitle = hud::createfontstring(font, othersize);
       if(playernamehudelems.size == 0) {
         secondtitle hud::setparent(outcometext);
@@ -384,7 +382,7 @@ function wageroutcomenotify(winner, endreasontext) {
       secondtitle.archived = 0;
       secondtitle.immunetodemogamehudsettings = 1;
       secondtitle.immunetodemofreecamera = 1;
-      secondtitle.label = & "MP_WAGER_PLACE_NAME";
+      secondtitle.label = &"MP_WAGER_PLACE_NAME";
       secondtitle.playernum = i;
       secondtitle setplayernamestring(players[i]);
       playernamehudelems[playernamehudelems.size] = secondtitle;
@@ -396,9 +394,9 @@ function wageroutcomenotify(winner, endreasontext) {
       secondcp.archived = 0;
       secondcp.immunetodemogamehudsettings = 1;
       secondcp.immunetodemofreecamera = 1;
-      secondcp.label = & "MENU_POINTS";
+      secondcp.label = &"MENU_POINTS";
       secondcp.currentvalue = 0;
-      if(isdefined(players[i].wagerwinnings)) {
+      if(isDefined(players[i].wagerwinnings)) {
         secondcp.targetvalue = players[i].wagerwinnings;
       } else {
         secondcp.targetvalue = 0;
@@ -418,16 +416,16 @@ function wageroutcomenotify(winner, endreasontext) {
   stillupdating = 1;
   countupduration = 2;
   cpincrement = 9999;
-  if(isdefined(playercphudelems[0])) {
+  if(isDefined(playercphudelems[0])) {
     cpincrement = int(playercphudelems[0].targetvalue / (countupduration / 0.05));
     if(cpincrement < 1) {
       cpincrement = 1;
     }
   }
-  while (stillupdating) {
+  while(stillupdating) {
     stillupdating = 0;
-    for (i = 0; i < playercphudelems.size; i++) {
-      if(isdefined(playercphudelems[i]) && playercphudelems[i].currentvalue < playercphudelems[i].targetvalue) {
+    for(i = 0; i < playercphudelems.size; i++) {
+      if(isDefined(playercphudelems[i]) && playercphudelems[i].currentvalue < playercphudelems[i].targetvalue) {
         playercphudelems[i].currentvalue = playercphudelems[i].currentvalue + cpincrement;
         if(playercphudelems[i].currentvalue > playercphudelems[i].targetvalue) {
           playercphudelems[i].currentvalue = playercphudelems[i].targetvalue;
@@ -444,11 +442,11 @@ function teamwageroutcomenotify(winner, isroundend, endreasontext) {
   self endon("disconnect");
   self notify("reset_outcome");
   team = self.pers["team"];
-  if(!isdefined(team) || !isdefined(level.teams[team])) {
+  if(!isDefined(team) || !isDefined(level.teams[team])) {
     team = "allies";
   }
   wait(0.05);
-  while (self.doingnotify) {
+  while(self.doingnotify) {
     wait(0.05);
   }
   self endon("reset_outcome");
@@ -466,7 +464,7 @@ function teamwageroutcomenotify(winner, isroundend, endreasontext) {
     spacing = 15;
   }
   halftime = 0;
-  if(isdefined(level.sidebet) && level.sidebet) {
+  if(isDefined(level.sidebet) && level.sidebet) {
     halftime = 1;
   }
   duration = 60000;
@@ -498,7 +496,7 @@ function teamwageroutcomenotify(winner, isroundend, endreasontext) {
       outcometitle settext(game["strings"]["overtime"]);
       outcometitle.color = (1, 1, 1);
     } else {
-      if(isdefined(self.pers["team"]) && winner == team) {
+      if(isDefined(self.pers["team"]) && winner == team) {
         if(isroundend) {
           outcometitle settext(game["strings"]["round_win"]);
         } else {
@@ -515,7 +513,7 @@ function teamwageroutcomenotify(winner, isroundend, endreasontext) {
       }
     }
   }
-  if(!isdefined(level.dontshowendreason) || !level.dontshowendreason) {
+  if(!isDefined(level.dontshowendreason) || !level.dontshowendreason) {
     outcometext settext(endreasontext);
   }
   outcometitle setpulsefx(100, duration, 1000);
@@ -574,7 +572,7 @@ function teamwageroutcomenotify(winner, isroundend, endreasontext) {
   }
   matchbonus = undefined;
   sidebetwinnings = undefined;
-  if(!isroundend && !halftime && isdefined(self.wagerwinnings)) {
+  if(!isroundend && !halftime && isDefined(self.wagerwinnings)) {
     matchbonus = hud::createfontstring(font, 2);
     matchbonus hud::setparent(outcometext);
     matchbonus hud::setpoint("TOP", "BOTTOM", 0, (iconsize + (spacing * 3)) + teamscores[team].height);
@@ -585,7 +583,7 @@ function teamwageroutcomenotify(winner, isroundend, endreasontext) {
     matchbonus.immunetodemofreecamera = 1;
     matchbonus.label = game["strings"]["wager_winnings"];
     matchbonus setvalue(self.wagerwinnings);
-    if(isdefined(game["side_bets"]) && game["side_bets"]) {
+    if(isDefined(game["side_bets"]) && game["side_bets"]) {
       sidebetwinnings = hud::createfontstring(font, 2);
       sidebetwinnings hud::setparent(matchbonus);
       sidebetwinnings hud::setpoint("TOP", "BOTTOM", 0, spacing);
@@ -612,12 +610,12 @@ function resetoutcomenotify(hudelemlist1, hudelemlist2, hudelem3, hudelem4, hude
   destroyhudelem(hudelem8);
   destroyhudelem(hudelem9);
   destroyhudelem(hudelem10);
-  if(isdefined(hudelemlist1)) {
+  if(isDefined(hudelemlist1)) {
     foreach(elem in hudelemlist1) {
       destroyhudelem(elem);
     }
   }
-  if(isdefined(hudelemlist2)) {
+  if(isDefined(hudelemlist2)) {
     foreach(elem in hudelemlist2) {
       destroyhudelem(elem);
     }
@@ -627,20 +625,20 @@ function resetoutcomenotify(hudelemlist1, hudelemlist2, hudelem3, hudelem4, hude
 function resetwageroutcomenotify(playernamehudelems, playercphudelems, outcometitle, outcometext) {
   self endon("disconnect");
   self waittill("reset_outcome");
-  for (i = playernamehudelems.size - 1; i >= 0; i--) {
-    if(isdefined(playernamehudelems[i])) {
+  for(i = playernamehudelems.size - 1; i >= 0; i--) {
+    if(isDefined(playernamehudelems[i])) {
       playernamehudelems[i] destroy();
     }
   }
-  for (i = playercphudelems.size - 1; i >= 0; i--) {
-    if(isdefined(playercphudelems[i])) {
+  for(i = playercphudelems.size - 1; i >= 0; i--) {
+    if(isDefined(playercphudelems[i])) {
       playercphudelems[i] destroy();
     }
   }
-  if(isdefined(outcometext)) {
+  if(isDefined(outcometext)) {
     outcometext destroy();
   }
-  if(isdefined(outcometitle)) {
+  if(isDefined(outcometitle)) {
     outcometitle destroy();
   }
 }
@@ -648,22 +646,22 @@ function resetwageroutcomenotify(playernamehudelems, playercphudelems, outcometi
 function updateoutcome(firsttitle, secondtitle, thirdtitle) {
   self endon("disconnect");
   self endon("reset_outcome");
-  while (true) {
+  while(true) {
     self waittill("update_outcome");
     players = level.placement["all"];
-    if(isdefined(firsttitle) && isdefined(players[0])) {
+    if(isDefined(firsttitle) && isDefined(players[0])) {
       firsttitle setplayernamestring(players[0]);
-    } else if(isdefined(firsttitle)) {
+    } else if(isDefined(firsttitle)) {
       firsttitle.alpha = 0;
     }
-    if(isdefined(secondtitle) && isdefined(players[1])) {
+    if(isDefined(secondtitle) && isDefined(players[1])) {
       secondtitle setplayernamestring(players[1]);
-    } else if(isdefined(secondtitle)) {
+    } else if(isDefined(secondtitle)) {
       secondtitle.alpha = 0;
     }
-    if(isdefined(thirdtitle) && isdefined(players[2])) {
+    if(isDefined(thirdtitle) && isDefined(players[2])) {
       thirdtitle setplayernamestring(players[2]);
-    } else if(isdefined(thirdtitle)) {
+    } else if(isDefined(thirdtitle)) {
       thirdtitle.alpha = 0;
     }
   }
@@ -672,18 +670,18 @@ function updateoutcome(firsttitle, secondtitle, thirdtitle) {
 function updatewageroutcome(playernamehudelems, playercphudelems) {
   self endon("disconnect");
   self endon("reset_outcome");
-  while (true) {
+  while(true) {
     self waittill("update_outcome");
     players = level.placement["all"];
-    for (i = 0; i < playernamehudelems.size; i++) {
-      if(isdefined(playernamehudelems[i]) && isdefined(players[playernamehudelems[i].playernum])) {
+    for(i = 0; i < playernamehudelems.size; i++) {
+      if(isDefined(playernamehudelems[i]) && isDefined(players[playernamehudelems[i].playernum])) {
         playernamehudelems[i] setplayernamestring(players[playernamehudelems[i].playernum]);
         continue;
       }
-      if(isdefined(playernamehudelems[i])) {
+      if(isDefined(playernamehudelems[i])) {
         playernamehudelems[i].alpha = 0;
       }
-      if(isdefined(playercphudelems[i])) {
+      if(isDefined(playercphudelems[i])) {
         playercphudelems[i].alpha = 0;
       }
     }

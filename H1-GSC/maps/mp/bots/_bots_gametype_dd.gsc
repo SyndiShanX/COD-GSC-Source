@@ -40,7 +40,7 @@ bot_dd_think() {
   level endon("game_ended");
   self endon("owner_disconnect");
 
-  while (!isdefined(level.bot_gametype_precaching_done))
+  while(!isDefined(level.bot_gametype_precaching_done))
     wait 0.05;
 
   self botsetflag("separation", 0);
@@ -48,10 +48,10 @@ bot_dd_think() {
   self.current_bombzone = undefined;
   self.defuser_bad_path_counter = 0;
 
-  for (;;) {
+  for(;;) {
     wait 0.05;
 
-    if(isdefined(self.current_bombzone) && !bombzone_is_active(self.current_bombzone)) {
+    if(isDefined(self.current_bombzone) && !bombzone_is_active(self.current_bombzone)) {
       self.current_bombzone = undefined;
       bot_dd_clear_role();
     }
@@ -64,7 +64,7 @@ bot_dd_think() {
     if(var_0) {
       bot_pick_new_zone("attack");
 
-      if(!isdefined(self.current_bombzone)) {
+      if(!isDefined(self.current_bombzone)) {
         continue;
       }
       bot_try_switch_attack_zone();
@@ -92,7 +92,7 @@ bot_dd_think() {
 
     bot_pick_new_zone("defend");
 
-    if(!isdefined(self.current_bombzone)) {
+    if(!isDefined(self.current_bombzone)) {
       continue;
     }
     bot_choose_defend_role();
@@ -122,7 +122,7 @@ notify_enemy_team_bomb_used(var_0) {
   var_2 = maps\mp\bots\_bots_gametype_common::get_ai_hearing_bomb_plant_sound(var_0);
 
   foreach(var_4 in var_2) {
-    if(isdefined(var_4.current_bombzone) && var_1 == var_4.current_bombzone)
+    if(isDefined(var_4.current_bombzone) && var_1 == var_4.current_bombzone)
       var_4 bot_dd_set_role("investigate_someone_using_bomb");
   }
 }
@@ -161,14 +161,14 @@ defuse_bomb() {
     self.defuser_bad_path_counter++;
 
     if(self.defuser_bad_path_counter >= 4) {
-      for (;;) {
+      for(;;) {
         var_2 = getnodesinradiussorted(var_0, 50, 0);
         var_3 = self.defuser_bad_path_counter - 4;
 
         if(var_2.size <= var_3) {
           var_4 = botgetclosestnavigablepoint(var_0, 50, self);
 
-          if(isdefined(var_4))
+          if(isDefined(var_4))
             self botsetscriptgoal(var_4, 20, "critical");
           else
             break;
@@ -235,7 +235,7 @@ get_player_defusing_zone(var_0) {
 
   foreach(var_3 in var_1) {
     if(isai(var_3)) {
-      if(isdefined(var_3.role) && var_3.role == "defuser")
+      if(isDefined(var_3.role) && var_3.role == "defuser")
         return var_3;
     }
   }
@@ -255,7 +255,7 @@ get_player_planting_zone(var_0) {
 
   foreach(var_3 in var_1) {
     if(isai(var_3)) {
-      if(isdefined(var_3.role) && var_3.role == "atk_bomber")
+      if(isDefined(var_3.role) && var_3.role == "atk_bomber")
         return var_3;
     }
   }
@@ -287,7 +287,7 @@ get_players_at_zone(var_0, var_1) {
 
   foreach(var_5 in var_3) {
     if(isai(var_5)) {
-      if(isdefined(var_5.current_bombzone) && var_5.current_bombzone == var_0)
+      if(isDefined(var_5.current_bombzone) && var_5.current_bombzone == var_0)
         var_2 = common_scripts\utility::array_add(var_2, var_5);
 
       continue;
@@ -318,7 +318,7 @@ bot_pick_new_zone(var_0) {
   else if(var_0 == "defend")
     var_1 = bot_choose_defend_zone();
 
-  if(isdefined(var_1) && (!isdefined(self.current_bombzone) || self.current_bombzone != var_1)) {
+  if(isDefined(var_1) && (!isDefined(self.current_bombzone) || self.current_bombzone != var_1)) {
     self.current_bombzone = var_1;
     bot_dd_clear_role();
   }
@@ -339,12 +339,12 @@ bot_choose_defend_zone() {
     if(var_3[0] && var_3[1] || !var_3[0] && !var_3[1]) {
       var_4 = 0;
 
-      if(isdefined(self.current_bombzone))
+      if(isDefined(self.current_bombzone))
         var_4 = 1;
 
       var_1 = bot_pick_dd_zone_with_fewer_defenders(var_0, var_4);
 
-      if(!isdefined(var_1) && !isdefined(self.current_bombzone))
+      if(!isDefined(var_1) && !isDefined(self.current_bombzone))
         var_1 = common_scripts\utility::random(var_0);
     } else if(var_3[0] || var_3[1]) {
       var_5 = common_scripts\utility::ter_op(var_3[0], 0, 1);
@@ -354,7 +354,7 @@ bot_choose_defend_zone() {
         var_1 = var_0[var_6];
       else if(var_2[var_5] <= var_2[var_6])
         var_1 = var_0[var_5];
-      else if(!isdefined(self.current_bombzone)) {
+      else if(!isDefined(self.current_bombzone)) {
         if(var_2[var_5] >= var_2[var_6] + 2)
           var_1 = var_0[var_6];
         else if(var_2[var_5] < var_2[var_6] + 2)
@@ -376,22 +376,22 @@ get_other_active_zone(var_0) {
 }
 
 bot_choose_attack_zone() {
-  if(isdefined(self.current_bombzone)) {
+  if(isDefined(self.current_bombzone)) {
     return;
   }
-  if(!isdefined(level.current_zone_target) || !bombzone_is_active(level.current_zone_target) || gettime() > level.next_target_switch_time) {
+  if(!isDefined(level.current_zone_target) || !bombzone_is_active(level.current_zone_target) || gettime() > level.next_target_switch_time) {
     level.next_target_switch_time = gettime() + 1000 * randomintrange(30, 45);
     level.current_zone_target = common_scripts\utility::random(get_active_bombzones());
   }
 
-  if(!isdefined(level.current_zone_target)) {
+  if(!isDefined(level.current_zone_target)) {
     return;
   }
   var_0 = level.current_zone_target;
   var_1 = get_other_active_zone(var_0);
   self.current_bombzone = undefined;
 
-  if(isdefined(var_1)) {
+  if(isDefined(var_1)) {
     if(randomfloat(1.0) < 0.25)
       return var_1;
   }
@@ -402,7 +402,7 @@ bot_choose_attack_zone() {
 bot_try_switch_attack_zone() {
   var_0 = get_other_active_zone(self.current_bombzone);
 
-  if(isdefined(var_0)) {
+  if(isDefined(var_0)) {
     var_1 = distance(self.origin, self.current_bombzone.curorigin);
     var_2 = distance(self.origin, var_0.curorigin);
 
@@ -412,7 +412,7 @@ bot_try_switch_attack_zone() {
 }
 
 bot_choose_attack_role() {
-  if(isdefined(self.role)) {
+  if(isDefined(self.role)) {
     if(self.role == "investigate_someone_using_bomb")
       return;
   }
@@ -424,7 +424,7 @@ bot_choose_attack_role() {
   else {
     var_1 = get_player_planting_zone(self.current_bombzone);
 
-    if(!isdefined(var_1) || var_1 == self)
+    if(!isDefined(var_1) || var_1 == self)
       var_0 = "atk_bomber";
     else if(isai(var_1)) {
       var_2 = distance(self.origin, self.current_bombzone.curorigin);
@@ -437,14 +437,14 @@ bot_choose_attack_role() {
     }
   }
 
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     var_0 = "sweep_zone";
 
   bot_dd_set_role(var_0);
 }
 
 bot_choose_defend_role() {
-  if(isdefined(self.role)) {
+  if(isDefined(self.role)) {
     if(self.role == "investigate_someone_using_bomb")
       return;
   }
@@ -454,7 +454,7 @@ bot_choose_defend_role() {
   if(is_bomb_planted_on(self.current_bombzone)) {
     var_1 = get_player_defusing_zone(self.current_bombzone);
 
-    if(!isdefined(var_1) || var_1 == self)
+    if(!isDefined(var_1) || var_1 == self)
       var_0 = "defuser";
     else if(isai(var_1)) {
       var_2 = distance(self.origin, self.current_bombzone.curorigin);
@@ -467,14 +467,14 @@ bot_choose_defend_role() {
     }
   }
 
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     var_0 = "defend_zone";
 
   bot_dd_set_role(var_0);
 }
 
 bot_dd_set_role(var_0) {
-  if(!isdefined(self.role) || self.role != var_0) {
+  if(!isDefined(self.role) || self.role != var_0) {
     bot_dd_clear_role();
     self.role = var_0;
   }
@@ -495,10 +495,10 @@ bot_dd_ai_director_update() {
   level endon("game_ended");
   level.protect_radius = 725;
 
-  for (;;) {
+  for(;;) {
     foreach(var_1 in level.bombzones) {
       foreach(var_3 in level.players) {
-        if(isdefined(var_3.role) && isdefined(var_3.current_bombzone) && var_3.current_bombzone == var_1) {
+        if(isDefined(var_3.role) && isDefined(var_3.current_bombzone) && var_3.current_bombzone == var_1) {
           if(!bombzone_is_active(var_1)) {
             if(var_3.role == "atk_bomber" || var_3.role == "defuser")
               var_3 bot_dd_clear_role();

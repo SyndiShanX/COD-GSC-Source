@@ -13,7 +13,6 @@
 #include scripts\killstreaks\killstreakrules_shared;
 #include scripts\killstreaks\killstreaks_shared;
 #include scripts\weapons\weaponobjects;
-
 #namespace emp;
 
 init_shared() {
@@ -44,7 +43,7 @@ fx_flesh_hit_neck_fatal(params) {
 
       if(isDefined(scoregiven)) {
         player challenges::earnedempassistscore(scoregiven);
-        killstreakindex = level.killstreakindices[#"emp"];
+        killstreakindex = level.killstreakindices[# "emp"];
         killstreaks::killstreak_assist(player, self, killstreakindex);
       }
     }
@@ -78,7 +77,7 @@ onplayerconnect() {
 
 deployempturret(emp) {
   player = self;
-  player endon(#"disconnect", #"joined_team", #"joined_spectators");
+  player endon(#"disconnect", # "joined_team", # "joined_spectators");
   emp endon(#"death");
   emp.vehicle useanimtree("generic");
   emp.vehicle setanim(#"o_turret_emp_core_deploy", 1);
@@ -207,7 +206,7 @@ getenemies() {
   }
 
   foreach(combatant in combatants) {
-    if(combatant.team === #"spectator") {
+    if(combatant.team === # "spectator") {
       continue;
     }
 

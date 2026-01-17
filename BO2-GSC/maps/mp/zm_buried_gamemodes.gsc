@@ -27,15 +27,15 @@ init() {
 }
 
 deletechalktriggers() {
-  chalk_triggers = getentarray("chalk_buildable_trigger", "targetname");
+  chalk_triggers = getEntArray("chalk_buildable_trigger", "targetname");
   array_thread(chalk_triggers, ::self_delete);
 }
 
 deletebuyabledoors() {
-  doors_trigs = getentarray("zombie_door", "targetname");
+  doors_trigs = getEntArray("zombie_door", "targetname");
 
   foreach(door in doors_trigs) {
-    doors = getentarray(door.target, "targetname");
+    doors = getEntArray(door.target, "targetname");
     array_thread(doors, ::self_delete);
   }
 
@@ -43,14 +43,14 @@ deletebuyabledoors() {
 }
 
 deletebuyabledebris(justtriggers) {
-  debris_trigs = getentarray("zombie_debris", "targetname");
+  debris_trigs = getEntArray("zombie_debris", "targetname");
 
   if(!is_true(justtriggers)) {
     foreach(trig in debris_trigs) {
       if(isDefined(trig.script_flag))
         flag_set(trig.script_flag);
 
-      parts = getentarray(trig.target, "targetname");
+      parts = getEntArray(trig.target, "targetname");
       array_thread(parts, ::self_delete);
     }
   }
@@ -59,14 +59,14 @@ deletebuyabledebris(justtriggers) {
 }
 
 deleteslothbarricades(justtriggers) {
-  sloth_trigs = getentarray("sloth_barricade", "targetname");
+  sloth_trigs = getEntArray("sloth_barricade", "targetname");
 
   if(!is_true(justtriggers)) {
     foreach(trig in sloth_trigs) {
       if(isDefined(trig.script_flag) && level flag_exists(trig.script_flag))
         flag_set(trig.script_flag);
 
-      parts = getentarray(trig.target, "targetname");
+      parts = getEntArray(trig.target, "targetname");
       array_thread(parts, ::self_delete);
     }
   }
@@ -75,14 +75,14 @@ deleteslothbarricades(justtriggers) {
 }
 
 deleteslothbarricade(location) {
-  sloth_trigs = getentarray("sloth_barricade", "targetname");
+  sloth_trigs = getEntArray("sloth_barricade", "targetname");
 
   foreach(trig in sloth_trigs) {
     if(isDefined(trig.script_location) && trig.script_location == location) {
       if(isDefined(trig.script_flag))
         flag_set(trig.script_flag);
 
-      parts = getentarray(trig.target, "targetname");
+      parts = getEntArray(trig.target, "targetname");
       array_thread(parts, ::self_delete);
     }
   }
@@ -93,7 +93,7 @@ spawnmapcollision(collision_model, origin) {
     origin = (0, 0, 0);
 
   collision = spawn("script_model", origin, 1);
-  collision setmodel(collision_model);
+  collision setModel(collision_model);
   collision disconnectpaths();
 }
 
@@ -178,7 +178,7 @@ generatebuildabletarps() {
   foreach(struct in struct_locations) {
     tarp = spawn("script_model", struct.origin);
     tarp.angles = struct.angles;
-    tarp setmodel("p6_zm_bu_buildable_bench_tarp");
+    tarp setModel("p6_zm_bu_buildable_bench_tarp");
     tarp.targetname = "buildable_tarp";
 
     if(isDefined(struct.script_location))

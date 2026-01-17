@@ -43,11 +43,11 @@ directHitWithMolotov(attacker, inflictor, mod) {
   }
   self startTanning();
   if(isDefined(level._effect["character_fire_death_torso"])) {
-    for (arrayIndex = 0; arrayIndex < tagArray.size; arrayIndex++) {
-      PlayFxOnTag(level._effect["character_fire_death_sm"], self, tagArray[arrayIndex]);
+    for(arrayIndex = 0; arrayIndex < tagArray.size; arrayIndex++) {
+      playFXOnTag(level._effect["character_fire_death_sm"], self, tagArray[arrayIndex]);
     }
   }
-  PlayFxOnTag(level._effect["character_fire_death_torso"], self, "J_SpineLower");
+  playFXOnTag(level._effect["character_fire_death_torso"], self, "J_SpineLower");
   if(!isalive(self)) {
     return;
   }
@@ -82,8 +82,8 @@ walkedThroughFlames() {
     tagArray[tagArray.size] = "J_Ankle_LE";
   }
   if(isDefined(level._effect["character_fire_player_sm"])) {
-    for (arrayIndex = 0; arrayIndex < tagArray.size; arrayIndex++) {
-      PlayFxOnTag(level._effect["character_fire_player_sm"], self, tagArray[arrayIndex]);
+    for(arrayIndex = 0; arrayIndex < tagArray.size; arrayIndex++) {
+      playFXOnTag(level._effect["character_fire_player_sm"], self, tagArray[arrayIndex]);
     }
   }
   if(isplayer(self)) {
@@ -119,8 +119,8 @@ burnedWithFlameThrower() {
   }
   self startTanning();
   if(isDefined(level._effect["character_fire_player_sm"])) {
-    for (arrayIndex = 0; arrayIndex < tagArray.size; arrayIndex++) {
-      PlayFxOnTag(level._effect["character_fire_player_sm"], self, tagArray[arrayIndex]);
+    for(arrayIndex = 0; arrayIndex < tagArray.size; arrayIndex++) {
+      playFXOnTag(level._effect["character_fire_player_sm"], self, tagArray[arrayIndex]);
     }
   }
   if(isplayer(self)) {
@@ -156,11 +156,11 @@ burnedToDeath() {
   }
   self startTanning();
   if(isDefined(level._effect["character_fire_death_torso"])) {
-    for (arrayIndex = 0; arrayIndex < tagArray.size; arrayIndex++) {
-      PlayFxOnTag(level._effect["character_fire_death_sm"], self, tagArray[arrayIndex]);
+    for(arrayIndex = 0; arrayIndex < tagArray.size; arrayIndex++) {
+      playFXOnTag(level._effect["character_fire_death_sm"], self, tagArray[arrayIndex]);
     }
   }
-  PlayFxOnTag(level._effect["character_fire_death_torso"], self, "J_SpineLower");
+  playFXOnTag(level._effect["character_fire_death_torso"], self, "J_SpineLower");
 }
 
 watchForDeath() {
@@ -179,7 +179,7 @@ watchForWater(time) {
   self endon("watching for water");
   wait(.1);
   looptime = .1;
-  while (time > 0) {
+  while(time > 0) {
     wait(looptime);
     if(self DepthOfPlayerInWater() > 0) {
       self notify("stop burn damage");
@@ -192,8 +192,8 @@ watchForWater(time) {
       tagArray[3] = "j_knee_ri";
       tagArray[4] = "j_knee_le";
       if(isDefined(level._effect["fx_fire_player_sm_smk_2sec"])) {
-        for (arrayIndex = 0; arrayIndex < tagArray.size; arrayIndex++) {
-          PlayFxOnTag(level._effect["fx_fire_player_sm_smk_2sec"], self, tagArray[arrayIndex]);
+        for(arrayIndex = 0; arrayIndex < tagArray.size; arrayIndex++) {
+          playFXOnTag(level._effect["fx_fire_player_sm_smk_2sec"], self, tagArray[arrayIndex]);
         }
       }
       self.burning = undefined;
@@ -213,7 +213,7 @@ doMolotovSlapDamage(attacker, inflictor, mod) {
   self endon("disconnect");
   attacker endon("disconnect");
   self endon("stop burn damage");
-  while ((isDefined(level.slappedWithMolotovDamage)) && (isDefined(self)) && self DepthOfPlayerInWater() < 1) {
+  while((isDefined(level.slappedWithMolotovDamage)) && (isDefined(self)) && self DepthOfPlayerInWater() < 1) {
     self DoDamage(level.slappedWithMolotovDamage, self.origin, attacker, attacker, 0, mod);
     wait(1);
   }
@@ -223,7 +223,7 @@ doDogMolotovSlapDamage(attacker, inflictor, mod) {
   attacker endon("disconnect");
   self endon("death");
   self endon("stop burn damage");
-  while ((isDefined(level.slappedWithMolotovDamage)) && (isDefined(self))) {
+  while((isDefined(level.slappedWithMolotovDamage)) && (isDefined(self))) {
     self DoDamage(level.slappedWithMolotovDamage, self.origin, attacker, attacker, 0, mod);
     wait(1);
   }

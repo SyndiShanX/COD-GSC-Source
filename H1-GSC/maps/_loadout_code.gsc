@@ -7,7 +7,7 @@
 saveplayerweaponstatepersistent(var_0) {
   var_1 = level.player getcurrentweapon();
 
-  if(!isdefined(var_1) || var_1 == "none") {}
+  if(!isDefined(var_1) || var_1 == "none") {}
 
   game["weaponstates"][var_0]["current"] = var_1;
   var_2 = level.player getcurrentoffhand();
@@ -15,24 +15,24 @@ saveplayerweaponstatepersistent(var_0) {
   game["weaponstates"][var_0]["list"] = [];
   var_3 = level.player getweaponslistall();
 
-  for (var_4 = 0; var_4 < var_3.size; var_4++)
+  for(var_4 = 0; var_4 < var_3.size; var_4++)
     game["weaponstates"][var_0]["list"][var_4]["name"] = var_3[var_4];
 }
 
 restoreplayerweaponstatepersistent(var_0) {
-  if(!isdefined(game["weaponstates"]))
+  if(!isDefined(game["weaponstates"]))
     return 0;
 
-  if(!isdefined(game["weaponstates"][var_0]))
+  if(!isDefined(game["weaponstates"][var_0]))
     return 0;
 
   level.player takeallweapons();
 
-  for (var_1 = 0; var_1 < game["weaponstates"][var_0]["list"].size; var_1++) {
+  for(var_1 = 0; var_1 < game["weaponstates"][var_0]["list"].size; var_1++) {
     var_2 = game["weaponstates"][var_0]["list"][var_1]["name"];
 
-    if(isdefined(level.legit_weapons)) {
-      if(!isdefined(level.legit_weapons[var_2]))
+    if(isDefined(level.legit_weapons)) {
+      if(!isDefined(level.legit_weapons[var_2]))
         continue;
     }
 
@@ -46,15 +46,15 @@ restoreplayerweaponstatepersistent(var_0) {
     level.player givemaxammo(var_2);
   }
 
-  if(isdefined(level.legit_weapons)) {
+  if(isDefined(level.legit_weapons)) {
     var_2 = game["weaponstates"][var_0]["offhand"];
 
-    if(isdefined(level.legit_weapons[var_2]))
+    if(isDefined(level.legit_weapons[var_2]))
       level.player switchtooffhand(var_2);
 
     var_2 = game["weaponstates"][var_0]["current"];
 
-    if(isdefined(level.legit_weapons[var_2]))
+    if(isDefined(level.legit_weapons[var_2]))
       level.player switchtoweapon(var_2);
   } else {
     level.player switchtooffhand(game["weaponstates"][var_0]["offhand"]);
@@ -77,7 +77,7 @@ init_player() {
 }
 
 get_loadout() {
-  if(isdefined(level.loadout))
+  if(isDefined(level.loadout))
     return level.loadout;
 
   return level.script;
@@ -89,7 +89,7 @@ persist(var_0, var_1) {
   if(var_0 != var_2) {
     return;
   }
-  if(!isdefined(game["previous_map"])) {
+  if(!isDefined(game["previous_map"])) {
     return;
   }
   if(game["previous_map"] != var_1) {
@@ -101,60 +101,60 @@ persist(var_0, var_1) {
 }
 
 loadout(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  if(isdefined(var_0)) {
+  if(isDefined(var_0)) {
     var_7 = get_loadout();
 
     if(var_0 != var_7)
       return;
   }
 
-  if(!isdefined(level._lc_persists)) {
-    if(isdefined(var_1)) {
+  if(!isDefined(level._lc_persists)) {
+    if(isDefined(var_1)) {
       level.default_weapon = var_1;
       level.player giveweapon(var_1);
     }
 
-    if(isdefined(var_2))
+    if(isDefined(var_2))
       level.player giveweapon(var_2);
 
-    if(isdefined(var_1))
+    if(isDefined(var_1))
       level.player switchtoweapon(var_1);
-    else if(isdefined(var_2))
+    else if(isDefined(var_2))
       level.player switchtoweapon(var_2);
   }
 
-  if(isdefined(var_3)) {
+  if(isDefined(var_3)) {
     level.player setlethalweapon(var_3);
     level.player giveweapon(var_3);
   }
 
-  if(isdefined(var_4)) {
+  if(isDefined(var_4)) {
     level.player settacticalweapon(var_4);
     level.player giveweapon(var_4);
   }
 
-  if(isdefined(var_5))
+  if(isDefined(var_5))
     level.player setviewmodel(var_5);
 
-  if(isdefined(var_6))
+  if(isDefined(var_6))
     level.campaign = var_6;
 
   level.has_loadout = 1;
 }
 
 loadoutequipment(var_0, var_1, var_2) {
-  if(!isdefined(var_0)) {
+  if(!isDefined(var_0)) {
     return;
   }
   if(level.script != var_0) {
     return;
   }
-  if(isdefined(var_1)) {
+  if(isDefined(var_1)) {
     level.player giveweapon(var_1);
     level.player setactionslot(2, "weapon", var_1);
   }
 
-  if(isdefined(var_2)) {
+  if(isDefined(var_2)) {
     level.player giveweapon(var_2);
     level.player setactionslot(4, "weapon", var_2);
   }
@@ -282,7 +282,7 @@ loadout_launchfacility_b() {
       var_1 = 1;
   }
 
-  if(isdefined(var_0)) {
+  if(isDefined(var_0)) {
     level.player takeweapon(var_0);
 
     if(var_1)

@@ -18,7 +18,7 @@ main() {
 }
 
 initialize_intel() {
-  for (var_0 = 0; var_0 < level.intel_items.size; var_0++) {
+  for(var_0 = 0; var_0 < level.intel_items.size; var_0++) {
     var_1 = level.intel_items[var_0];
     var_2 = var_1.origin;
     level.intel_items[var_0].num = get_nums_from_origins(var_2);
@@ -38,9 +38,9 @@ initialize_intel() {
 }
 
 remove_found_intel() {
-  for (;;) {
-    for (var_0 = 0; var_0 < level.intel_items.size; var_0++) {
-      if(!isdefined(level.intel_items[var_0].removed) && level.intel_items[var_0] check_item_found()) {
+  for(;;) {
+    for(var_0 = 0; var_0 < level.intel_items.size; var_0++) {
+      if(!isDefined(level.intel_items[var_0].removed) && level.intel_items[var_0] check_item_found()) {
         level.intel_items[var_0].removed = 1;
         level.intel_items[var_0].item hide();
         level.intel_items[var_0].item notsolid();
@@ -58,9 +58,9 @@ check_item_found() {
 }
 
 create_array_of_intel_items() {
-  var_0 = getentarray("intelligence_item", "targetname");
+  var_0 = getEntArray("intelligence_item", "targetname");
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++) {
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_0[var_1].item = getent(var_0[var_1].target, "targetname");
     var_0[var_1].found = 0;
   }
@@ -71,13 +71,13 @@ create_array_of_intel_items() {
 create_array_of_origins_from_table() {
   var_0 = [];
 
-  for (var_1 = 1; var_1 <= level.intel_items_total; var_1++) {
+  for(var_1 = 1; var_1 <= level.intel_items_total; var_1++) {
     var_2 = tablelookup("sp\_intel_items.csv", 0, var_1, 4);
 
-    if(isdefined(var_2) && var_2 != "undefined") {
+    if(isDefined(var_2) && var_2 != "undefined") {
       var_3 = strtok(var_2, ",");
 
-      for (var_4 = 0; var_4 < var_3.size; var_4++)
+      for(var_4 = 0; var_4 < var_3.size; var_4++)
         var_3[var_4] = int(var_3[var_4]);
 
       var_0[var_1] = (var_3[0], var_3[1], var_3[2]);
@@ -107,8 +107,8 @@ save_that_item_is_found() {
 }
 
 get_nums_from_origins(var_0) {
-  for (var_1 = 1; var_1 < level.table_origins.size + 1; var_1++) {
-    if(!isdefined(level.table_origins[var_1])) {
+  for(var_1 = 1; var_1 < level.table_origins.size + 1; var_1++) {
+    if(!isDefined(level.table_origins[var_1])) {
       continue;
     }
     if(distancesquared(var_0, level.table_origins[var_1]) < 25)
@@ -182,13 +182,13 @@ setup_hud_elem() {
   self.horzalign = "center";
   self.vertalign = "middle";
   self.foreground = 1;
-  self.label = & "SCRIPT_INTELLIGENCE_OF_THIRTY";
+  self.label = &"SCRIPT_INTELLIGENCE_OF_THIRTY";
 }
 
 intel_found_total() {
   var_0 = 0;
 
-  for (var_1 = 1; var_1 <= level.intel_items_total; var_1++) {
+  for(var_1 = 1; var_1 <= level.intel_items_total; var_1++) {
     if(level.player getplayerintelisfound(var_1))
       var_0++;
   }

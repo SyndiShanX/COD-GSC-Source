@@ -8,7 +8,6 @@
 #include maps\mp\gametypes\_hud_util;
 
 init() {
-
   game["music"]["spawn_allies"] = maps\mp\gametypes\_teams::getTeamVoicePrefix("allies") + "spawn_music";
   game["music"]["defeat_allies"] = maps\mp\gametypes\_teams::getTeamVoicePrefix("allies") + "defeat_music";
   game["music"]["victory_allies"] = maps\mp\gametypes\_teams::getTeamVoicePrefix("allies") + "victory_music";
@@ -163,7 +162,7 @@ init() {
 }
 
 onPlayerConnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connected", player);
 
     player thread onPlayerSpawned();
@@ -199,9 +198,9 @@ onLastAlive() {
 
   level waittill("last_alive", player);
 
-  if(!isAlive(player))
+  if(!isAlive(player)) {
     return;
-
+  }
   player leaderDialogOnPlayer("last_alive");
 }
 
@@ -277,9 +276,9 @@ roundWinnerDialog() {
   if(delay > 0)
     wait(delay);
 
-  if(!isDefined(winner) || isPlayer(winner) || isDefined(level.nukeDetonated))
+  if(!isDefined(winner) || isPlayer(winner) || isDefined(level.nukeDetonated)) {
     return;
-
+  }
   if(winner == "allies") {
     leaderDialog("round_success", "allies");
     leaderDialog("round_failure", "axis");
@@ -296,9 +295,9 @@ gameWinnerDialog() {
   if(delay > 0)
     wait(delay);
 
-  if(!isDefined(winner) || isPlayer(winner) || isDefined(level.nukeDetonated))
+  if(!isDefined(winner) || isPlayer(winner) || isDefined(level.nukeDetonated)) {
     return;
-
+  }
   if(winner == "allies") {
     leaderDialog("mission_success", "allies");
     leaderDialog("mission_failure", "axis");
@@ -374,9 +373,9 @@ musicController() {
             winningPlayer playLocalSound(game["music"]["winning_" + winningPlayer.pers["team"]]);
 
             foreach(otherPlayer in level.players) {
-              if(otherPlayer == winningPlayer)
+              if(otherPlayer == winningPlayer) {
                 continue;
-
+              }
               otherPlayer playLocalSound(game["music"]["losing_" + otherPlayer.pers["team"]]);
             }
           }
@@ -402,7 +401,7 @@ suspenseMusic() {
   level endon("match_ending_soon");
 
   numTracks = game["music"]["suspense"].size;
-  for (;;) {
+  for(;;) {
     wait(randomFloatRange(60, 120));
 
     playSoundOnPlayers(game["music"]["suspense"][randomInt(numTracks)]);

@@ -30,7 +30,7 @@ init_zeppelin(str_script_noteworthy, str_ender) {
 
   if(a_path_structs.size > 0) {
     m_zeppelin = spawn("script_model", (0, 0, 0));
-    m_zeppelin setmodel("veh_t6_dlc_zm_zeppelin");
+    m_zeppelin setModel("veh_t6_dlc_zm_zeppelin");
     m_zeppelin setforcenocull();
 
     while(true)
@@ -98,7 +98,7 @@ vista_robot_pose() {
     v_angles = getstartangles(a_robots[i].origin, a_robots[i].angles, % ai_zombie_giant_robot_vista);
     e_robot = spawn("script_model", v_origin);
     e_robot.angles = v_angles;
-    e_robot setmodel("veh_t6_dlc_zm_robot");
+    e_robot setModel("veh_t6_dlc_zm_robot");
     e_robot useanimtree(#animtree);
     e_robot setanim( % ai_zombie_giant_robot_vista, 1, 0, 1);
   }

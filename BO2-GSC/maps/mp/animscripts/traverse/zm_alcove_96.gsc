@@ -14,8 +14,8 @@ main() {
 alcove_traverse_fx(str_fx) {
   self endon("death");
   wait 0.15;
-  v_facing = anglestoforward(self.angles);
+  v_facing = anglesToForward(self.angles);
   v_offset = v_facing * 32;
-  playfx(level._effect[str_fx], self.origin + v_offset);
-  self playsound("zmb_spawn_tomb");
+  playFX(level._effect[str_fx], self.origin + v_offset);
+  self playSound("zmb_spawn_tomb");
 }

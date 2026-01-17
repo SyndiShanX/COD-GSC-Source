@@ -10,13 +10,13 @@ snd_init_technical() {
 }
 
 snd_start_technical() {
-  if(isdefined(self.snd_instance)) {
+  if(isDefined(self.snd_instance)) {
     wait 1.0;
     snd_stop_technical(1.0);
   }
 
   thread snd_monitor_about_to_stop();
-  var_0 = spawnstruct();
+  var_0 = spawnStruct();
   var_0.preset_name = "technical";
   soundscripts\_snd::snd_message("snd_start_vehicle", var_0);
 }
@@ -29,7 +29,7 @@ snd_monitor_about_to_stop() {
   if(var_0 > 1.0) {
     wait(var_0 - 1.0);
 
-    if(!isdefined(self))
+    if(!isDefined(self))
       return;
   }
 
@@ -37,7 +37,7 @@ snd_monitor_about_to_stop() {
 }
 
 snd_stop_technical(var_0) {
-  if(isdefined(self.snd_instance)) {
+  if(isDefined(self.snd_instance)) {
     soundscripts\_snd::snd_message("snd_stop_vehicle", var_0);
     self notify("snd_stop_vehicle");
   }
@@ -94,33 +94,27 @@ snd_technical_constructor() {
   soundscripts\_audio_vehicle_manager::avm_end_state_group();
   soundscripts\_audio_vehicle_manager::avm_end_state_data();
   soundscripts\_audio_vehicle_manager::avm_add_envelope("technical_idle_vel2vol", [[0.0, 1.0],
-    [10.0, 0.0]
-  ]);
+    [10.0, 0.0]]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("technical_idle_vel2pch", [[0.0, 1.0],
-    [10.0, 1.25]
-  ]);
+    [10.0, 1.25]]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("technical_engine_vel2vol", [[0.0, 0.0],
     [4.0, 0.1],
-    [10.0, 1.0]
-  ]);
+    [10.0, 1.0]]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("technical_engine_vel2pch", [[0.0, 0.8],
     [4.0, 1.0],
-    [16.0, 1.1]
-  ]);
+    [16.0, 1.1]]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("technical_treads_vel2vol", [[0.0, 0.0],
     [4.0, 0.4],
-    [8.0, 1.0]
-  ]);
+    [8.0, 1.0]]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("technical_treads_vel2pch", [[0.0, 0.8],
     [8.0, 1.0],
-    [16.0, 1.1]
-  ]);
+    [16.0, 1.1]]);
   soundscripts\_audio_vehicle_manager::avm_end_preset_def();
 }
 
 technical_input_callback_about_to_stop() {
   var_0 = soundscripts\_audio_vehicle_manager::avmx_get_vehicle_entity();
-  return isdefined(var_0.about_to_stop);
+  return isDefined(var_0.about_to_stop);
 }
 
 technical_condition_callback_to_idle(var_0, var_1) {

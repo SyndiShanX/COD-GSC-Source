@@ -22,7 +22,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\core_common\values_shared;
-
 #namespace archetypenosferatu;
 
 class class_1546f28e {
@@ -43,20 +42,20 @@ autoexec init() {
   clientfield::register("actor", "nfrtu_leap_melee_rumb", 8000, 1, "counter");
 }
 
-private function_dbd0360f() {
+function_dbd0360f() {
   blackboard::createblackboardforentity(self);
   self.___archetypeonanimscriptedcallback = &function_f8ab724f;
   self.___archetypeonbehavecallback = &function_b1df7220;
 }
 
-private function_b1df7220(entity) {}
+function_b1df7220(entity) {}
 
-private function_f8ab724f(entity) {
+function_f8ab724f(entity) {
   self.__blackboard = undefined;
   self function_dbd0360f();
 }
 
-private function_5b800648() {
+function_5b800648() {
   assert(isDefined(self.ai));
   function_dbd0360f();
   self.ignorepathenemyfightdist = 1;
@@ -67,13 +66,13 @@ private function_5b800648() {
   self callback::function_d8abfc3d(#"on_ai_melee", &function_2e5f2af4);
 }
 
-private function_2e5f2af4() {
+function_2e5f2af4() {
   if(isDefined(self.meleeinfo)) {
     radiusdamage(self.origin, 150, 15, 5, self, "MOD_MELEE");
   }
 }
 
-private registerbehaviorscriptfunctions() {
+registerbehaviorscriptfunctions() {
   assert(isscriptfunctionptr(&nosferatushouldmelee));
   behaviortreenetworkutility::registerbehaviortreescriptapi(#"nosferatushouldmelee", &nosferatushouldmelee);
   assert(isscriptfunctionptr(&function_7ffbbff));
@@ -121,12 +120,12 @@ function_2e8014e(entity) {
   }
 }
 
-private function_b75dd595(entity) {
+function_b75dd595(entity) {
   if(!isDefined(entity.enemy)) {
     return false;
   }
 
-  if(entity.subarchetype !== #"crimson_nosferatu") {
+  if(entity.subarchetype !== # "crimson_nosferatu") {
     return false;
   }
 
@@ -143,14 +142,14 @@ private function_b75dd595(entity) {
   return true;
 }
 
-private function_8b2173e0(entity) {
+function_8b2173e0(entity) {
   var_d86ae1c4 = spawnStruct();
   var_d86ae1c4.enemy = entity.enemy;
   blackboard::addblackboardevent("nfrtu_move_dash", var_d86ae1c4, randomintrange(8500, 10000));
   return true;
 }
 
-private function_3df24b25(entity) {
+function_3df24b25(entity) {
   if(getdvarint(#"hash_5ebc5d42d65e6fd1", 0)) {
     return true;
   }
@@ -172,7 +171,7 @@ private function_3df24b25(entity) {
   return true;
 }
 
-private function_15d413b9(entity) {
+function_15d413b9(entity) {
   entity.var_1c33120d = 1;
   var_1e5d8d32 = spawnStruct();
   var_1e5d8d32.enemy = entity.enemy;
@@ -180,7 +179,7 @@ private function_15d413b9(entity) {
   return true;
 }
 
-private function_b758de87(entity) {
+function_b758de87(entity) {
   entity.var_1c33120d = 0;
   entity clearpath();
   var_3bfe8ebe = spawnStruct();
@@ -188,7 +187,7 @@ private function_b758de87(entity) {
   blackboard::addblackboardevent("nfrtu_leap_melee", var_3bfe8ebe, randomintrange(6000, 9000));
 }
 
-private function_b5305a8f(entity) {
+function_b5305a8f(entity) {
   if(isDefined(entity.enemy)) {
     entity thread function_20a76c21(entity);
   }
@@ -196,7 +195,7 @@ private function_b5305a8f(entity) {
   return true;
 }
 
-private function_2ad18645(notifyhash) {
+function_2ad18645(notifyhash) {
   player = self;
 
   if(isDefined(self) && !isplayer(self) && isDefined(self.enemy) && isplayer(self.enemy)) {
@@ -209,9 +208,9 @@ private function_2ad18645(notifyhash) {
   }
 }
 
-private function_fb3fdf43(entity, latch_enemy) {
-  entity endoncallback(&function_2ad18645, #"death");
-  latch_enemy endoncallback(&function_2ad18645, #"disconnect", #"death");
+function_fb3fdf43(entity, latch_enemy) {
+  entity endoncallback(&function_2ad18645, # "death");
+  latch_enemy endoncallback(&function_2ad18645, # "disconnect", # "death");
 
   if(isDefined(self) && isDefined(entity) && isDefined(latch_enemy)) {
     self scene::play(#"aib_vign_cust_mnsn_nfrtu_attack_latch_01", array(entity, latch_enemy));
@@ -227,10 +226,10 @@ private function_fb3fdf43(entity, latch_enemy) {
   }
 }
 
-private function_20a76c21(entity) {
-  entity endoncallback(&function_2ad18645, #"death");
+function_20a76c21(entity) {
+  entity endoncallback(&function_2ad18645, # "death");
   latch_enemy = entity.enemy;
-  latch_enemy endoncallback(&function_2ad18645, #"disconnect", #"death");
+  latch_enemy endoncallback(&function_2ad18645, # "disconnect", # "death");
 
   if(isDefined(latch_enemy)) {
     latch_enemy thread function_db62d88a();
@@ -240,7 +239,7 @@ private function_20a76c21(entity) {
   alignnode.origin = entity.enemy.origin;
   alignnode.angles = entity.enemy.angles;
   alignnode thread function_fb3fdf43(entity, latch_enemy);
-  alignnode waittilltimeout(7, #"hash_7a32b2af2eef5415");
+  alignnode waittilltimeout(7, # "hash_7a32b2af2eef5415");
 
   if(isDefined(alignnode)) {
     alignnode struct::delete();
@@ -261,8 +260,8 @@ private function_20a76c21(entity) {
   blackboard::addblackboardevent("nfrtu_leap_melee", var_3bfe8ebe, randomintrange(6000, 9000));
 }
 
-private function_db62d88a() {
-  self endon(#"disconnect", #"death");
+function_db62d88a() {
+  self endon(#"disconnect", # "death");
   self val::set(#"nosferatu_latch", "ignoreme", 1);
   w_current = self getcurrentweapon();
 
@@ -274,7 +273,7 @@ private function_db62d88a() {
   self val::reset(#"nosferatu_latch", "ignoreme");
 }
 
-private function_a41a5aea(entity) {
+function_a41a5aea(entity) {
   if(!isDefined(entity.enemy)) {
     return false;
   }
@@ -314,7 +313,7 @@ private function_a41a5aea(entity) {
   return true;
 }
 
-private function_b5047448(entity) {
+function_b5047448(entity) {
   if(entity asmistransitionrunning() || entity asmistransdecrunning()) {
     return false;
   }
@@ -354,8 +353,8 @@ private function_b5047448(entity) {
   return false;
 }
 
-private function_e9819a23(entity) {
-  if(entity.subarchetype !== #"crimson_nosferatu") {
+function_e9819a23(entity) {
+  if(entity.subarchetype !== # "crimson_nosferatu") {
     return false;
   }
 
@@ -430,7 +429,7 @@ private function_e9819a23(entity) {
   return false;
 }
 
-private function_85d8b15d(entity) {
+function_85d8b15d(entity) {
   if(entity asmistransitionrunning() || entity asmistransdecrunning()) {
     return false;
   }
@@ -510,17 +509,17 @@ function_ebe0e1b5(entity) {
   return true;
 }
 
-private function_76505306(entity) {
+function_76505306(entity) {
   var_77d2339d = spawnStruct();
   var_77d2339d.enemy = entity.enemy;
   blackboard::addblackboardevent("nfrtu_full_pain", var_77d2339d, randomintrange(4500, 6500));
 }
 
-private function_e0ad0db2(entity) {
+function_e0ad0db2(entity) {
   entity pathmode("move allowed");
 }
 
-private nosferatushouldmelee(entity) {
+nosferatushouldmelee(entity) {
   if(function_85d8b15d(entity) || function_7ffbbff(entity) || function_e9819a23(entity) || function_b5047448(entity)) {
     return true;
   }
@@ -528,7 +527,7 @@ private nosferatushouldmelee(entity) {
   return false;
 }
 
-private function_7ffbbff(entity) {
+function_7ffbbff(entity) {
   if(!isDefined(entity.enemy)) {
     return false;
   }
@@ -570,7 +569,7 @@ private function_7ffbbff(entity) {
   return true;
 }
 
-private function_105988a0(entity) {
+function_105988a0(entity) {
   if(getdvarint(#"hash_541d64bc060bdd29", 0)) {
     return true;
   }
@@ -592,7 +591,7 @@ private function_105988a0(entity) {
   return true;
 }
 
-private function_c2f87d6(entity) {
+function_c2f87d6(entity) {
   if(getdvarint(#"hash_43a13163c1956e08", 0)) {
     return true;
   }
@@ -614,13 +613,13 @@ private function_c2f87d6(entity) {
   return true;
 }
 
-private function_ed80a3bc(entity) {
+function_ed80a3bc(entity) {
   var_3bfe8ebe = spawnStruct();
   var_3bfe8ebe.enemy = entity.enemy;
   blackboard::addblackboardevent("nfrtu_run_melee", var_3bfe8ebe, randomintrange(10000, 12000));
 }
 
-private function_4df0b87d(entity) {
+function_4df0b87d(entity) {
   var_3bfe8ebe = spawnStruct();
   var_3bfe8ebe.enemy = entity.enemy;
   blackboard::addblackboardevent("nfrtu_leap_melee", var_3bfe8ebe, randomintrange(6000, 9000));
@@ -688,16 +687,16 @@ function_3511ecd1(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mo
     var_65cbfb52 = distancesquared(entity.meleeinfo.var_9bfa8497, entity.meleeinfo.adjustedendpos);
     var_201660e6 = tracepassedonnavmesh(entity.meleeinfo.var_9bfa8497, entity.meleeinfo.adjustedendpos, entity getpathfindingradius());
     traceresult = bulletTrace(entity.origin, entity.meleeinfo.adjustedendpos + (0, 0, 30), 0, entity, 0, 0, entity.enemy);
-    isvisible = traceresult[#"fraction"] == 1;
+    isvisible = traceresult[# "fraction"] == 1;
     var_535d098c = 0;
 
-    if(isDefined(traceresult[#"hitloc"]) && traceresult[#"hitloc"] == "riotshield") {
+    if(isDefined(traceresult[# "hitloc"]) && traceresult[# "hitloc"] == "riotshield") {
       var_cc075bd0 = vectornormalize(entity.origin - entity.meleeinfo.adjustedendpos);
       entity.meleeinfo.adjustedendpos += vectorscale(var_cc075bd0, 50);
       var_535d098c = 1;
     }
 
-    if(traceresult[#"fraction"] < 0.9) {
+    if(traceresult[# "fraction"] < 0.9) {
       record3dtext("<dev string:x5f>", entity.origin + (0, 0, 60), (1, 0, 0), "<dev string:x53>");
 
       entity.meleeinfo.var_425c4c8b = 0;

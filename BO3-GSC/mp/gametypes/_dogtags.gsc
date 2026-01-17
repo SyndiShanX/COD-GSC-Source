@@ -25,18 +25,18 @@ function init() {
 }
 
 function spawn_dog_tag(victim, attacker, on_use_function, objectives_for_attacker_and_victim_only) {
-  if(isdefined(level.dogtags[victim.entnum])) {
-    playfx("ui/fx_kill_confirmed_vanish", level.dogtags[victim.entnum].curorigin);
+  if(isDefined(level.dogtags[victim.entnum])) {
+    playFX("ui/fx_kill_confirmed_vanish", level.dogtags[victim.entnum].curorigin);
     level.dogtags[victim.entnum] notify("reset");
   } else {
     visuals[0] = spawn("script_model", (0, 0, 0));
-    visuals[0] setmodel(victim getenemydogtagmodel());
+    visuals[0] setModel(victim getenemydogtagmodel());
     visuals[1] = spawn("script_model", (0, 0, 0));
-    visuals[1] setmodel(victim getfriendlydogtagmodel());
+    visuals[1] setModel(victim getfriendlydogtagmodel());
     trigger = spawn("trigger_radius", (0, 0, 0), 0, 32, 32);
     level.dogtags[victim.entnum] = gameobjects::create_use_object("any", trigger, visuals, vectorscale((0, 0, 1), 16));
     level.dogtags[victim.entnum] gameobjects::set_use_time(0);
-    level.dogtags[victim.entnum].onuse = & onuse;
+    level.dogtags[victim.entnum].onuse = &onuse;
     level.dogtags[victim.entnum].custom_onuse = on_use_function;
     level.dogtags[victim.entnum].victim = victim;
     level.dogtags[victim.entnum].victimteam = victim.team;
@@ -47,10 +47,10 @@ function spawn_dog_tag(victim, attacker, on_use_function, objectives_for_attacke
       objective_icon(level.dogtags[victim.entnum].objid[team], "waypoint_dogtags");
       objective_team(level.dogtags[victim.entnum].objid[team], team);
       if(team == attacker.team) {
-        objective_setcolor(level.dogtags[victim.entnum].objid[team], & "EnemyOrange");
+        objective_setcolor(level.dogtags[victim.entnum].objid[team], &"EnemyOrange");
         continue;
       }
-      objective_setcolor(level.dogtags[victim.entnum].objid[team], & "FriendlyBlue");
+      objective_setcolor(level.dogtags[victim.entnum].objid[team], &"FriendlyBlue");
     }
   }
   pos = victim.origin + vectorscale((0, 0, 1), 14);
@@ -68,7 +68,7 @@ function spawn_dog_tag(victim, attacker, on_use_function, objectives_for_attacke
   level.dogtags[victim.entnum].unreachable = undefined;
   level.dogtags[victim.entnum].tacinsert = 0;
   foreach(team in level.teams) {
-    if(isdefined(level.dogtags[victim.entnum].objid[team])) {
+    if(isDefined(level.dogtags[victim.entnum].objid[team])) {
       objective_position(level.dogtags[victim.entnum].objid[team], pos);
       objective_state(level.dogtags[victim.entnum].objid[team], "active");
     }
@@ -104,7 +104,7 @@ function show_to_enemy_teams(gameobject, friend_team) {
 }
 
 function onuse(player) {
-  self.visuals[0] playsound("mpl_killconfirm_tags_pickup");
+  self.visuals[0] playSound("mpl_killconfirm_tags_pickup");
   tacinsertboost = 0;
   if(player.team != self.attackerteam) {
     player addplayerstat("KILLSDENIED", 1);
@@ -126,11 +126,11 @@ function onuse(player) {
     event = "kill_confirmed";
     player addplayerstat("KILLSCONFIRMED", 1);
     player recordgameevent("capture");
-    if(isdefined(self.attacker) && self.attacker != player) {
+    if(isDefined(self.attacker) && self.attacker != player) {
       self.attacker onpickup("teammate_kill_confirmed");
     }
   }
-  if(!tacinsertboost && isdefined(player)) {
+  if(!tacinsertboost && isDefined(player)) {
     player onpickup(event);
   }
   [[self.custom_onuse]](player);
@@ -162,17 +162,17 @@ function clear_on_victim_disconnect(victim) {
   level endon("game_ended");
   guid = victim.entnum;
   victim waittill("disconnect");
-  if(isdefined(level.dogtags[guid])) {
+  if(isDefined(level.dogtags[guid])) {
     level.dogtags[guid] gameobjects::allow_use("none");
-    playfx("ui/fx_kill_confirmed_vanish", level.dogtags[guid].curorigin);
+    playFX("ui/fx_kill_confirmed_vanish", level.dogtags[guid].curorigin);
     level.dogtags[guid] notify("reset");
     wait(0.05);
-    if(isdefined(level.dogtags[guid])) {
+    if(isDefined(level.dogtags[guid])) {
       foreach(team in level.teams) {
         objective_delete(level.dogtags[guid].objid[team]);
       }
       level.dogtags[guid].trigger delete();
-      for (i = 0; i < level.dogtags[guid].visuals.size; i++) {
+      for(i = 0; i < level.dogtags[guid].visuals.size; i++) {
         level.dogtags[guid].visuals[i] delete();
       }
       level.dogtags[guid] notify("deleted");
@@ -183,7 +183,7 @@ function clear_on_victim_disconnect(victim) {
 
 function on_spawn_player() {
   if(level.rankedmatch || level.leaguematch) {
-    if(isdefined(self.tacticalinsertiontime) && (self.tacticalinsertiontime + 100) > gettime()) {
+    if(isDefined(self.tacticalinsertiontime) && (self.tacticalinsertiontime + 100) > gettime()) {
       mindist = level.antiboostdistance;
       mindistsqr = mindist * mindist;
       distsqr = distancesquared(self.origin, level.dogtags[self.entnum].curorigin);
@@ -197,7 +197,7 @@ function on_spawn_player() {
 function team_updater(tags) {
   level endon("game_ended");
   self endon("disconnect");
-  while (true) {
+  while(true) {
     self waittill("joined_team");
     tags.victimteam = self.team;
     tags reset_tags();
@@ -225,7 +225,7 @@ function bounce() {
   self endon("reset");
   bottompos = self.curorigin;
   toppos = self.curorigin + vectorscale((0, 0, 1), 12);
-  while (true) {
+  while(true) {
     self.visuals[0] moveto(toppos, 0.5, 0.15, 0.15);
     self.visuals[0] rotateyaw(180, 0.5);
     self.visuals[1] moveto(toppos, 0.5, 0.15, 0.15);
@@ -249,16 +249,16 @@ function should_spawn_tags(einflictor, attacker, idamage, smeansofdeath, sweapon
   if(isalive(self)) {
     return false;
   }
-  if(isdefined(self.switching_teams)) {
+  if(isDefined(self.switching_teams)) {
     return false;
   }
-  if(isdefined(attacker) && attacker == self) {
+  if(isDefined(attacker) && attacker == self) {
     return false;
   }
-  if(level.teambased && isdefined(attacker) && isdefined(attacker.team) && attacker.team == self.team) {
+  if(level.teambased && isDefined(attacker) && isDefined(attacker.team) && attacker.team == self.team) {
     return false;
   }
-  if(isdefined(attacker) && (!isdefined(attacker.team) || attacker.team == "free") && (attacker.classname == "trigger_hurt" || attacker.classname == "worldspawn")) {
+  if(isDefined(attacker) && (!isDefined(attacker.team) || attacker.team == "free") && (attacker.classname == "trigger_hurt" || attacker.classname == "worldspawn")) {
     return false;
   }
   return true;
@@ -268,7 +268,7 @@ function onusedogtag(player) {
   if(player.pers["team"] == self.victimteam) {
     player.pers["rescues"]++;
     player.rescues = player.pers["rescues"];
-    if(isdefined(self.victim)) {
+    if(isDefined(self.victim)) {
       if(!level.gameended) {
         self.victim thread dt_respawn();
       }
@@ -281,9 +281,9 @@ function dt_respawn() {
 }
 
 function waittillcanspawnclient() {
-  for (;;) {
+  for(;;) {
     wait(0.05);
-    if(isdefined(self) && (self.sessionstate == "spectator" || !isalive(self))) {
+    if(isDefined(self) && (self.sessionstate == "spectator" || !isalive(self))) {
       self.pers["lives"] = 1;
       self thread[[level.spawnclient]]();
       continue;

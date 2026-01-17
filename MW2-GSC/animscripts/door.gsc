@@ -16,13 +16,14 @@ maxDistDoorToEnemySq = 600 * 600;
 doorEnterExitCheck() {
   self endon("killanimscript");
 
-  if(isdefined(self.disableDoorBehavior))
+  if(isDefined(self.disableDoorBehavior)) {
     return;
-
-  while (1) {
+  }
+  while(1) {
     doorNode = self getDoorPathNode();
-    if(isdefined(doorNode))
+    if(isDefined(doorNode)) {
       break;
+    }
 
     wait 0.2;
   }
@@ -35,10 +36,11 @@ doorEnterExitCheck() {
     self doorExit(doorNode);
 
   // waittill doorNode changes
-  while (1) {
+  while(1) {
     newDoorNode = self getDoorPathNode();
-    if(!isdefined(newDoorNode) || newDoorNode != doorNode)
+    if(!isDefined(newDoorNode) || newDoorNode != doorNode) {
       break;
+    }
 
     wait 0.2;
   }
@@ -110,29 +112,29 @@ doorEnter_TryGrenade(node, grenadeType, ricochet, minDistSq, checkInterval) {
     throwPos = doorPos + projLength * doorPlane;
   }
 
-  while (throwAttempts > 0) {
-    if(isdefined(self.grenade) || !isdefined(self.enemy))
+  while(throwAttempts > 0) {
+    if(isDefined(self.grenade) || !isDefined(self.enemy)) {
       return;
-
-    if(onSameSideOfDoor(node, doorForward))
+    }
+    if(onSameSideOfDoor(node, doorForward)) {
       return;
-
+    }
     if(!self seeRecently(self.enemy, 0.2) && self.a.pose == "stand" && distance2DAndHeightCheck(self.enemy.origin - node.origin, maxDistDoorToEnemySq, 128 * 128)) {
-      if(isdefined(node.nextDoorGrenadeTime) && node.nextDoorGrenadeTime > gettime())
+      if(isDefined(node.nextDoorGrenadeTime) && node.nextDoorGrenadeTime > gettime()) {
         return;
-
-      if(self canShootEnemy())
+      }
+      if(self canShootEnemy()) {
         return;
-
+      }
       // too close to door
       dirToDoor = node.origin - self.origin;
-      if(lengthSquared(dirToDoor) < minDistSq)
+      if(lengthSquared(dirToDoor) < minDistSq) {
         return;
-
+      }
       // don't throw backwards
-      if(vectordot(dirToDoor, doorForward) < 0)
+      if(vectordot(dirToDoor, doorForward) < 0) {
         return;
-
+      }
       self.oldGrenadeWeapon = self.grenadeWeapon;
       self.grenadeWeapon = grenadeType;
 
@@ -157,7 +159,7 @@ doorEnter_TryGrenade(node, grenadeType, ricochet, minDistSq, checkInterval) {
 
     // check if door node has past
     newNode = self getDoorPathNode();
-    if(!isdefined(newNode) || newNode != node)
+    if(!isDefined(newNode) || newNode != node)
       return;
   }
 }
@@ -165,15 +167,15 @@ doorEnter_TryGrenade(node, grenadeType, ricochet, minDistSq, checkInterval) {
 inDoorCqbToggleCheck() {
   self endon("killanimscript");
 
-  if(isdefined(self.disableDoorBehavior))
+  if(isDefined(self.disableDoorBehavior)) {
     return;
-
+  }
   self.isInDoor = false;
 
-  while (1) {
+  while(1) {
     if(self isInDoor() && !self.doingAmbush) {
       doorEnter_enable_cqbwalk();
-    } else if(!isdefined(self.minInDoorTime) || self.minInDoorTime < gettime()) {
+    } else if(!isDefined(self.minInDoorTime) || self.minInDoorTime < gettime()) {
       self.minInDoorTime = undefined;
       doorExit_disable_cqbwalk();
     }
@@ -184,18 +186,18 @@ inDoorCqbToggleCheck() {
 
 // substitute for enable_cqbwalk so LD can always disable cqb
 doorEnter_enable_cqbwalk() {
-  if(!isdefined(self.neverEnableCQB) && !self.doingAmbush) {
+  if(!isDefined(self.neverEnableCQB) && !self.doingAmbush) {
     self.isInDoor = true;
-    if(!isdefined(self.cqbWalking) || !self.cqbWalking)
+    if(!isDefined(self.cqbWalking) || !self.cqbWalking)
       enable_cqbwalk(true);
   }
 }
 
 // substitute for disable_cqbwalk so LD can force CQB even after exiting to outdoor
 doorExit_disable_cqbwalk() {
-  if(!isdefined(self.cqbEnabled)) {
+  if(!isDefined(self.cqbEnabled)) {
     self.isInDoor = false;
-    if(isdefined(self.cqbWalking) && self.cqbWalking)
+    if(isDefined(self.cqbWalking) && self.cqbWalking)
       disable_cqbwalk();
   }
 }
@@ -212,7 +214,7 @@ distance2DAndHeightCheck(vec, dist2DSq, heightSq) {
 }
 
 onSameSideOfDoor(node, doorForward) {
-  assert(isdefined(self.enemy));
+  assert(isDefined(self.enemy));
 
   selfToDoor = node.origin - self.origin;
   enemyToDoor = node.origin - self.enemy.origin;
@@ -222,31 +224,32 @@ onSameSideOfDoor(node, doorForward) {
 
 doorEnter(node) {
   // try frag
-  while (1) {
-    if(isdefined(self.doorFragChance) && (self.doorFragChance == 0 || self.doorFragChance < randomfloat(1)))
+  while(1) {
+    if(isDefined(self.doorFragChance) && (self.doorFragChance == 0 || self.doorFragChance < randomfloat(1))) {
       break;
+    }
 
     if(distance2DAndHeightCheck(self.origin - node.origin, maxFragDistSq, maxFragHeightDiffSq)) {
       self doorEnter_TryGrenade(node, "fraggrenade", false, minFragDistSq, 0.3);
 
       node = self getDoorPathNode();
-      if(!isdefined(node))
+      if(!isDefined(node)) {
         return;
-
+      }
       break;
     }
     wait 0.1;
   }
 
   // try flashbang
-  while (1) {
+  while(1) {
     if(distance2DAndHeightCheck(self.origin - node.origin, maxFlashDistSq, maxFlashHeightDiffSq)) {
       self doorEnter_enable_cqbwalk();
       self.minInDoorTime = gettime() + 6000;
 
-      if(isdefined(self.doorFlashChance) && (self.doorFlashChance == 0 || self.doorFlashChance < randomfloat(1)))
+      if(isDefined(self.doorFlashChance) && (self.doorFlashChance == 0 || self.doorFlashChance < randomfloat(1))) {
         return;
-
+      }
       self doorEnter_TryGrenade(node, "flash_grenade", true, minFlashDistSq, 0.2);
       return;
     }
@@ -256,7 +259,7 @@ doorEnter(node) {
 }
 
 doorExit(node) {
-  while (1) {
+  while(1) {
     if(!self.isInDoor || distanceSquared(self.origin, node.origin) < 32 * 32) {
       //self doorExit_disable_cqbwalk();
       return;

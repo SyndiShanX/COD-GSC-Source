@@ -13,17 +13,17 @@
 #namespace _zm_weapon_locker;
 
 function main() {
-  if(!isdefined(level.weapon_locker_map)) {
+  if(!isDefined(level.weapon_locker_map)) {
     level.weapon_locker_map = level.script;
   }
   level.weapon_locker_online = sessionmodeisonlinegame();
   weapon_lockers = struct::get_array("weapons_locker", "targetname");
-  array::thread_all(weapon_lockers, & triggerweaponslockerwatch);
+  array::thread_all(weapon_lockers, &triggerweaponslockerwatch);
 }
 
 function wl_has_stored_weapondata() {
   if(level.weapon_locker_online) {} else {
-    return isdefined(self.stored_weapon_data);
+    return isDefined(self.stored_weapon_data);
   }
 }
 
@@ -46,25 +46,25 @@ function wl_set_stored_weapondata(weapondata) {
 }
 
 function triggerweaponslockerwatch() {
-  unitrigger_stub = spawnstruct();
+  unitrigger_stub = spawnStruct();
   unitrigger_stub.origin = self.origin;
-  if(isdefined(self.script_angles)) {
+  if(isDefined(self.script_angles)) {
     unitrigger_stub.angles = self.script_angles;
   } else {
     unitrigger_stub.angles = self.angles;
   }
   unitrigger_stub.script_angles = unitrigger_stub.angles;
-  if(isdefined(self.script_length)) {
+  if(isDefined(self.script_length)) {
     unitrigger_stub.script_length = self.script_length;
   } else {
     unitrigger_stub.script_length = 16;
   }
-  if(isdefined(self.script_width)) {
+  if(isDefined(self.script_width)) {
     unitrigger_stub.script_width = self.script_width;
   } else {
     unitrigger_stub.script_width = 32;
   }
-  if(isdefined(self.script_height)) {
+  if(isDefined(self.script_height)) {
     unitrigger_stub.script_height = self.script_height;
   } else {
     unitrigger_stub.script_height = 64;
@@ -74,8 +74,8 @@ function triggerweaponslockerwatch() {
   unitrigger_stub.script_unitrigger_type = "unitrigger_box_use";
   unitrigger_stub.clientfieldname = "weapon_locker";
   zm_unitrigger::unitrigger_force_per_player_triggers(unitrigger_stub, 1);
-  unitrigger_stub.prompt_and_visibility_func = & triggerweaponslockerthinkupdateprompt;
-  zm_unitrigger::register_static_unitrigger(unitrigger_stub, & triggerweaponslockerthink);
+  unitrigger_stub.prompt_and_visibility_func = &triggerweaponslockerthinkupdateprompt;
+  zm_unitrigger::register_static_unitrigger(unitrigger_stub, &triggerweaponslockerthink);
 }
 
 function triggerweaponslockerisvalidweapon(weapon) {
@@ -110,14 +110,14 @@ function triggerweaponslockerisvalidweaponpromptupdate(player, weapon) {
     }
   } else {
     weapondata = player wl_get_stored_weapondata();
-    if(isdefined(level.remap_weapon_locker_weapons)) {
+    if(isDefined(level.remap_weapon_locker_weapons)) {
       weapondata = remap_weapon(weapondata, level.remap_weapon_locker_weapons);
     }
     weapontogive = weapondata["weapon"];
     primaries = player getweaponslistprimaries();
     maxweapons = zm_utility::get_player_weapon_limit(player);
     weapon = player zm_weapons::get_nonalternate_weapon(weapon);
-    if(isdefined(primaries) && primaries.size >= maxweapons || weapontogive == weapon) {
+    if(isDefined(primaries) && primaries.size >= maxweapons || weapontogive == weapon) {
       if(!triggerweaponslockerisvalidweapon(weapon)) {
         if(weapon == level.weaponnone) {
           self setcursorhint("HINT_NOICON", weapon);
@@ -141,7 +141,7 @@ function triggerweaponslockerthinkupdateprompt(player) {
 
 function triggerweaponslockerthink() {
   self.parent_player thread triggerweaponslockerweaponchangethink(self);
-  while (true) {
+  while(true) {
     self waittill("trigger", player);
     retrievingweapon = player wl_has_stored_weapondata();
     if(!retrievingweapon) {
@@ -155,7 +155,7 @@ function triggerweaponslockerthink() {
       assert(curweapon == weapondata[""], "");
       player takeweapon(curweapon);
       primaries = player getweaponslistprimaries();
-      if(isdefined(primaries[0])) {
+      if(isDefined(primaries[0])) {
         player switchtoweapon(primaries[0]);
       } else {
         player zm_weapons::give_fallback_weapon();
@@ -167,7 +167,7 @@ function triggerweaponslockerthink() {
       curweapon = player getcurrentweapon();
       primaries = player getweaponslistprimaries();
       weapondata = player wl_get_stored_weapondata();
-      if(isdefined(level.remap_weapon_locker_weapons)) {
+      if(isDefined(level.remap_weapon_locker_weapons)) {
         weapondata = remap_weapon(weapondata, level.remap_weapon_locker_weapons);
       }
       weapontogive = weapondata["weapon"];
@@ -186,7 +186,7 @@ function triggerweaponslockerthink() {
         continue;
       }
       maxweapons = zm_utility::get_player_weapon_limit(player);
-      if(isdefined(primaries) && primaries.size >= maxweapons || weapontogive == curweapon) {
+      if(isDefined(primaries) && primaries.size >= maxweapons || weapontogive == curweapon) {
         curweapon = player zm_weapons::switch_from_alt_weapon(curweapon);
         if(!triggerweaponslockerisvalidweapon(curweapon)) {
           self sethintstring(&"ZOMBIE_WEAPON_LOCKER_DENY");
@@ -219,14 +219,14 @@ function triggerweaponslockerweaponchangethink(trigger) {
   self endon("disconnect");
   self endon("death");
   trigger endon("kill_trigger");
-  while (true) {
+  while(true) {
     self waittill("weapon_change", newweapon);
     trigger triggerweaponslockerisvalidweaponpromptupdate(self, newweapon);
   }
 }
 
 function add_weapon_locker_mapping(fromweapon, toweapon) {
-  if(!isdefined(level.remap_weapon_locker_weapons)) {
+  if(!isDefined(level.remap_weapon_locker_weapons)) {
     level.remap_weapon_locker_weapons = [];
   }
   level.remap_weapon_locker_weapons[fromweapon] = toweapon;
@@ -238,13 +238,13 @@ function remap_weapon(weapondata, maptable) {
   if(weapondata["weapon"].attachments.size) {
     att = weapondata["weapon"].attachments[0];
   }
-  if(!isdefined(maptable[weapon])) {
+  if(!isDefined(maptable[weapon])) {
     return weapondata;
   }
   weapondata["weapon"] = maptable[weapon];
   weapon = weapondata["weapon"];
   if(zm_weapons::is_weapon_upgraded(weapon)) {
-    if(isdefined(att) && zm_weapons::weapon_supports_attachments(weapon)) {
+    if(isDefined(att) && zm_weapons::weapon_supports_attachments(weapon)) {
       base = zm_weapons::get_base_weapon(weapon);
       if(!zm_weapons::weapon_supports_this_attachment(base, att)) {
         att = zm_weapons::random_attachment(base);

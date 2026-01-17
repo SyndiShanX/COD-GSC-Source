@@ -12,7 +12,7 @@ main() {
   maps\_utility::precache("woodgib_small2");
   maps\_utility::precache("wood_plank2");
   maps\_utility::precache("gib_woodplank");
-  wood = getentarray("wood_splinter", "targetname");
+  wood = getEntArray("wood_splinter", "targetname");
   maps\_utility::array_thread(wood, ::wood_think);
 }
 
@@ -21,15 +21,15 @@ wood_think() {
     println("Wood at ", self getorigin(), " has no target");
     return;
   }
-  mainpiece = getentarray(self.target, "targetname");
-  for (i = 0; i < mainpiece.size; i++) {
+  mainpiece = getEntArray(self.target, "targetname");
+  for(i = 0; i < mainpiece.size; i++) {
     if((isDefined(mainpiece[i].script_noteworthy)) && (mainpiece[i].script_noteworthy == "notsolid"))
       mainpiece[i] notsolid();
     if(!isDefined(mainpiece[i].target)) {
       continue;
     }
-    mainpiece[i].brokenpiece = getentarray(mainpiece[i].target, "targetname");
-    for (j = 0; j < mainpiece[i].brokenpiece.size; j++) {
+    mainpiece[i].brokenpiece = getEntArray(mainpiece[i].target, "targetname");
+    for(j = 0; j < mainpiece[i].brokenpiece.size; j++) {
       if(isDefined(mainpiece[i].brokenpiece[j]))
         mainpiece[i].brokenpiece[j] hide();
     }
@@ -41,21 +41,21 @@ wood_think() {
     org = other getorigin();
   else
     org = other.origin;
-  for (i = 0; i < mainpiece.size; i++) {
+  for(i = 0; i < mainpiece.size; i++) {
     if(!isDefined(mainpiece[i].target)) {
       continue;
     }
-    mainpiece[i].brokenpiece = getentarray(mainpiece[i].target, "targetname");
-    for (j = 0; j < mainpiece[i].brokenpiece.size; j++) {
+    mainpiece[i].brokenpiece = getEntArray(mainpiece[i].target, "targetname");
+    for(j = 0; j < mainpiece[i].brokenpiece.size; j++) {
       if(isDefined(mainpiece[i].brokenpiece[j]))
         mainpiece[i].brokenpiece[j] show();
     }
   }
-  for (i = 0; i < mainpiece.size; i++) {
+  for(i = 0; i < mainpiece.size; i++) {
     if(!isDefined(mainpiece[i])) {
       continue;
     }
-    mainpiece[i] playsound("wood_break");
+    mainpiece[i] playSound("wood_break");
     mainpiece[i] thread splinter(org);
     mainpiece[i] delete();
   }
@@ -66,14 +66,14 @@ splinter(org) {
   if(randomint(100) > 25) {
     if((isDefined(self.script_noteworthy)) && (self.script_noteworthy == "dark")) {
       if(randomint(100) > 50)
-        splinter setmodel("wood_plank2");
+        splinter setModel("wood_plank2");
       else
-        splinter setmodel("gib_woodplank");
+        splinter setModel("gib_woodplank");
     } else {
       if(randomint(100) > 50)
-        splinter setmodel("woodgib_big");
+        splinter setModel("woodgib_big");
       else
-        splinter setmodel("woodgib_medium");
+        splinter setModel("woodgib_medium");
     }
   }
   splinter.origin = self getorigin();
@@ -101,13 +101,13 @@ go(org) {
 
 small_gibs(org, startorg) {
   splinter = [];
-  for (i = 0; i < randomint(6) + 1; i++) {
+  for(i = 0; i < randomint(6) + 1; i++) {
     splinter[i] = spawn("script_model", org);
     splinter[i].origin += (randomfloat(10) - 5, 0, randomfloat(30) - 15);
     if(randomint(100) > 50)
-      splinter[i] setmodel("woodgib_small1");
+      splinter[i] setModel("woodgib_small1");
     else
-      splinter[i] setmodel("woodgib_small2");
+      splinter[i] setModel("woodgib_small2");
     startorg += (50 - randomint(100), 50 - randomint(100), 0);
     temp_vec = vectornormalize(org - startorg);
     temp_vec = vectorScale(temp_vec, 300 + randomint(150));
@@ -121,6 +121,6 @@ small_gibs(org, startorg) {
       splinter[i] rotateroll(1500 + randomfloat(2500), 5, 0, 0);
   }
   wait(6);
-  for (i = 0; i < splinter.size; i++)
+  for(i = 0; i < splinter.size; i++)
     splinter[i] delete();
 }

@@ -325,14 +325,14 @@ truck_bashes_gate() {
   level.player thread say_dialog("mene_smash_the_gate_0");
   self setbrake(0);
   self resumespeed(1);
-  self playsound("evt_gate_truck");
+  self playSound("evt_gate_truck");
   self waittill("vehicle_hits_gate");
   level notify("fxanim_gate_crash_start");
   exploder(450);
   earthquake(0.45, 1.0, self.origin, 3000);
   bm_clip = get_ent("menendez_courtyard_gate_clip", "targetname", 1);
   bm_clip connectpaths();
-  bm_clip playsound("evt_gate_hit");
+  bm_clip playSound("evt_gate_hit");
   flag_set("courtyard_gate_breached");
   flag_clear("rage_weapon_fire_audio_on");
   level thread _truck_bashes_gate_aftermath(bm_clip);

@@ -4,7 +4,6 @@
 **************************************************/
 
 #include scripts\core_common\exploder_shared;
-
 #namespace flowgraph_fx;
 
 playfxatposition(x, fx_effect, v_position, v_forward, v_up) {

@@ -404,9 +404,7 @@ enemy_custom_corpse_behavior(var_0) {
 
 get_corpse_array() {
   if(isDefined(level._stealth.logic.corpse.collect_func))
-    return [
-      [level._stealth.logic.corpse.collect_func]
-    ]();
+    return [[level._stealth.logic.corpse.collect_func]]();
 
   return getcorpsearray();
 }

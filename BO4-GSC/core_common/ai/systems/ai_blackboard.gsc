@@ -9,12 +9,12 @@ autoexec main() {
   _initializeblackboard();
 }
 
-private _initializeblackboard() {
+_initializeblackboard() {
   level.__ai_blackboard = [];
   level thread _updateevents();
 }
 
-private _updateevents() {
+_updateevents() {
   waittime = 1 * float(function_60d95f53()) / 1000;
   updatemillis = int(waittime * 1000);
 

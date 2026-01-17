@@ -32,16 +32,13 @@ class csmashable {
   var m_a_b_parameters;
   var m_a_nodes;
 
-
   constructor() {
     m_a_callbacks = [];
     m_a_b_parameters = [];
     m_a_e_models = [];
   }
 
-
   destructor() {}
-
 
   function function_3408f1a2() {
     if(var_afea543d && var_6e27ff4) {
@@ -50,9 +47,8 @@ class csmashable {
     return false;
   }
 
-
   function function_89be164a(e_trigger) {
-    if(isdefined(e_trigger.script_int) && isdefined(e_trigger.script_percent)) {
+    if(isDefined(e_trigger.script_int) && isDefined(e_trigger.script_percent)) {
       var_afea543d = e_trigger.script_int;
       var_6e27ff4 = e_trigger.script_percent;
     } else {
@@ -61,56 +57,53 @@ class csmashable {
     }
   }
 
-
   function watch_all_damage(e_clip) {
-    e_clip setcandamage(1);
-    while (true) {
+    e_clip setCanDamage(1);
+    while(true) {
       e_clip waittill("damage", n_amt, e_attacker, v_dir, v_pos, str_type);
-      if(isdefined(e_attacker) && isplayer(e_attacker) && (isdefined(e_attacker.beastmode) && e_attacker.beastmode) && str_type === "MOD_MELEE") {
+      if(isDefined(e_attacker) && isplayer(e_attacker) && (isDefined(e_attacker.beastmode) && e_attacker.beastmode) && str_type === "MOD_MELEE") {
         m_e_trigger notify("trigger", e_attacker);
         break;
       }
     }
   }
 
-
   function add_callback(fn_callback, param1, param2, param3) {
-    assert(isdefined(fn_callback) && isfunctionptr(fn_callback));
-    s = spawnstruct();
+    assert(isDefined(fn_callback) && isfunctionptr(fn_callback));
+    s = spawnStruct();
     s.fn = fn_callback;
     s.params = [];
-    if(isdefined(param1)) {
-      if(!isdefined(s.params)) {
+    if(isDefined(param1)) {
+      if(!isDefined(s.params)) {
         s.params = [];
       } else if(!isarray(s.params)) {
         s.params = array(s.params);
       }
       s.params[s.params.size] = param1;
     }
-    if(isdefined(param2)) {
-      if(!isdefined(s.params)) {
+    if(isDefined(param2)) {
+      if(!isDefined(s.params)) {
         s.params = [];
       } else if(!isarray(s.params)) {
         s.params = array(s.params);
       }
       s.params[s.params.size] = param2;
     }
-    if(isdefined(param3)) {
-      if(!isdefined(s.params)) {
+    if(isDefined(param3)) {
+      if(!isDefined(s.params)) {
         s.params = [];
       } else if(!isarray(s.params)) {
         s.params = array(s.params);
       }
       s.params[s.params.size] = param3;
     }
-    if(!isdefined(m_a_callbacks)) {
+    if(!isDefined(m_a_callbacks)) {
       m_a_callbacks = [];
     } else if(!isarray(m_a_callbacks)) {
       m_a_callbacks = array(m_a_callbacks);
     }
     m_a_callbacks[m_a_callbacks.size] = s;
   }
-
 
   function private execute_callbacks() {
     foreach(s_cb in m_a_callbacks) {
@@ -135,24 +128,23 @@ class csmashable {
     }
   }
 
-
   function private main() {
     m_e_trigger waittill("trigger", who);
-    if(isdefined(who)) {
+    if(isDefined(who)) {
       who notify("smashable_smashed");
     }
     foreach(model in m_a_e_models) {
       if(model.targetname == "fxanim_beast_door") {
-        model playsound("zmb_bm_interaction_door");
+        model playSound("zmb_bm_interaction_door");
       }
       if(model.targetname == "fxanim_crate_breakable_01") {
-        model playsound("zmb_bm_interaction_crate_large");
+        model playSound("zmb_bm_interaction_crate_large");
       }
       if(model.targetname == "fxanim_crate_breakable_02") {
-        model playsound("zmb_bm_interaction_crate_small");
+        model playSound("zmb_bm_interaction_crate_small");
       }
       if(model.targetname == "fxanim_crate_breakable_03") {
-        model playsound("zmb_bm_interaction_crate_small");
+        model playSound("zmb_bm_interaction_crate_small");
       }
     }
     execute_callbacks();
@@ -161,31 +153,28 @@ class csmashable {
     }
     toggle_shader(0);
     function_6ea46467(0);
-    if(isdefined(m_e_trigger.script_flag_set)) {
+    if(isDefined(m_e_trigger.script_flag_set)) {
       level flag::set(m_e_trigger.script_flag_set);
     }
-    if(isdefined(m_func_trig)) {
+    if(isDefined(m_func_trig)) {
       [
         [m_func_trig]
       ](m_arg);
     }
   }
 
-
   function private function_387c449e() {
     self waittill("hash_13f02a5d");
     self clientfield::set("set_fade_material", 0);
   }
 
-
   function private function_d8055c34() {
     self thread function_387c449e();
     wait(10);
-    if(isdefined(self)) {
+    if(isDefined(self)) {
       self notify("hash_13f02a5d");
     }
   }
-
 
   function private function_6ea46467(b_shader_on) {
     foreach(e_model in m_a_e_models) {
@@ -197,7 +186,6 @@ class csmashable {
     }
   }
 
-
   function private toggle_shader(b_shader_on) {
     foreach(e_model in m_a_e_models) {
       e_model clientfield::set("bminteract", b_shader_on);
@@ -205,21 +193,19 @@ class csmashable {
     m_b_shader_on = b_shader_on;
   }
 
-
   function function_82bc26b5() {
     wait(1);
     level clientfield::set("breakable_show", var_afea543d);
     level clientfield::set("breakable_hide", var_6e27ff4);
   }
 
-
   function private setup_fxanims() {
     s_bundle_inst = struct::get(m_e_trigger.target, "targetname");
-    if(isdefined(s_bundle_inst) && isdefined(s_bundle_inst.scriptbundlename)) {
-      if(!isdefined(level.zod_smashable_scriptbundles)) {
+    if(isDefined(s_bundle_inst) && isDefined(s_bundle_inst.scriptbundlename)) {
+      if(!isDefined(level.zod_smashable_scriptbundles)) {
         level.zod_smashable_scriptbundles = [];
       }
-      if(!isdefined(level.zod_smashable_scriptbundles[s_bundle_inst.scriptbundlename])) {
+      if(!isDefined(level.zod_smashable_scriptbundles[s_bundle_inst.scriptbundlename])) {
         level.zod_smashable_scriptbundles[s_bundle_inst.scriptbundlename] = s_bundle_inst.scriptbundlename;
       }
       if(function_3408f1a2()) {
@@ -228,13 +214,12 @@ class csmashable {
         level scene::init(m_e_trigger.target, "targetname");
       }
       var_5b3a6271 = function_3408f1a2();
-      add_callback( & zm_zod_smashables::cb_fxanim, var_5b3a6271, var_afea543d, var_6e27ff4);
+      add_callback(&zm_zod_smashables::cb_fxanim, var_5b3a6271, var_afea543d, var_6e27ff4);
     }
   }
 
-
   function add_model(e_model) {
-    if(!isdefined(m_a_e_models)) {
+    if(!isDefined(m_a_e_models)) {
       m_a_e_models = [];
     } else if(!isarray(m_a_e_models)) {
       m_a_e_models = array(m_a_e_models);
@@ -247,21 +232,19 @@ class csmashable {
     function_6ea46467(1);
   }
 
-
   function has_parameter(str_parameter) {
-    return isdefined(m_a_b_parameters[str_parameter]) && m_a_b_parameters[str_parameter];
+    return isDefined(m_a_b_parameters[str_parameter]) && m_a_b_parameters[str_parameter];
   }
 
-
   function private parse_parameters() {
-    if(!isdefined(m_e_trigger.script_parameters)) {
+    if(!isDefined(m_e_trigger.script_parameters)) {
       return;
     }
     a_params = strtok(m_e_trigger.script_parameters, ",");
     foreach(str_param in a_params) {
       m_a_b_parameters[str_param] = 1;
       if(str_param == "connect_paths") {
-        add_callback( & zm_zod_smashables::cb_connect_paths);
+        add_callback(&zm_zod_smashables::cb_connect_paths);
         continue;
       }
       if(str_param == "any_damage") {
@@ -270,25 +253,23 @@ class csmashable {
         }
         continue;
       }
-      /# /
+      /
       #
       assertmsg(((("" + str_param) + "") + m_e_trigger.targetname) + "");
     }
   }
-
 
   function set_trigger_func(func_trig, arg) {
     m_func_trig = func_trig;
     m_arg = arg;
   }
 
-
   function init(e_trigger) {
     m_e_trigger = e_trigger;
-    m_a_clip = getentarray(e_trigger.target, "targetname");
+    m_a_clip = getEntArray(e_trigger.target, "targetname");
     m_a_nodes = getnodearray(e_trigger.target, "targetname");
     foreach(node in m_a_nodes) {
-      if(isdefined(node.script_noteworthy) && node.script_noteworthy == "air_beast_node") {
+      if(isDefined(node.script_noteworthy) && node.script_noteworthy == "air_beast_node") {
         unlinktraversal(node);
       }
     }
@@ -305,19 +286,19 @@ class csmashable {
 #namespace zm_zod_smashables;
 
 function autoexec __init__sytem__() {
-  system::register("zm_zod_smashables", & __init__, undefined, undefined);
+  system::register("zm_zod_smashables", &__init__, undefined, undefined);
 }
 
 function __init__() {
   level thread init_smashables();
   foreach(str_bundle in level.zod_smashable_scriptbundles) {
-    scene::add_scene_func(str_bundle, & add_scriptbundle_models, "init");
+    scene::add_scene_func(str_bundle, &add_scriptbundle_models, "init");
   }
 }
 
 function private smashable_from_scriptbundle_targetname(str_targetname) {
   foreach(o_smash in level.zod_smashables) {
-    if(isdefined(o_smash.m_e_trigger.target) && o_smash.m_e_trigger.target == str_targetname) {
+    if(isDefined(o_smash.m_e_trigger.target) && o_smash.m_e_trigger.target == str_targetname) {
       return o_smash;
     }
   }
@@ -327,10 +308,10 @@ function private smashable_from_scriptbundle_targetname(str_targetname) {
 function private add_scriptbundle_models(a_models) {
   o_smash = undefined;
   foreach(e_model in a_models) {
-    if(!isdefined(o_smash)) {
+    if(!isDefined(o_smash)) {
       o_smash = smashable_from_scriptbundle_targetname(e_model._o_scene._e_root.targetname);
     }
-    if(isdefined(o_smash)) {
+    if(isDefined(o_smash)) {
       [
         [o_smash]
       ] - > add_model(e_model);
@@ -340,18 +321,18 @@ function private add_scriptbundle_models(a_models) {
 
 function private init_smashables() {
   level.zod_smashables = [];
-  a_smashable_triggers = getentarray("beast_melee_only", "script_noteworthy");
+  a_smashable_triggers = getEntArray("beast_melee_only", "script_noteworthy");
   n_id = 0;
   foreach(trigger in a_smashable_triggers) {
     str_id = "smash_unnamed_" + n_id;
-    if(isdefined(trigger.targetname)) {
+    if(isDefined(trigger.targetname)) {
       str_id = trigger.targetname;
     } else {
       trigger.targetname = str_id;
       n_id++;
     }
-    if(isdefined(level.zod_smashables[str_id])) {
-      /# /
+    if(isDefined(level.zod_smashables[str_id])) {
+      /
       #
       assertmsg(("" + str_id) + "");
       continue;
@@ -361,26 +342,24 @@ function private init_smashables() {
     if(issubstr(str_id, "portal")) {
       [
         [o_smashable]
-      ] - > set_trigger_func( & zm_zod_portals::function_54ec766b, str_id);
+      ] - > set_trigger_func(&zm_zod_portals::function_54ec766b, str_id);
     }
     if(issubstr(str_id, "memento")) {
       [
         [o_smashable]
-      ] - > set_trigger_func( & zm_zod_quest::reveal_personal_item, str_id);
+      ] - > set_trigger_func(&zm_zod_quest::reveal_personal_item, str_id);
     }
     if(issubstr(str_id, "beast_kiosk")) {
       [
         [o_smashable]
-      ] - > set_trigger_func( & unlock_beast_kiosk, str_id);
+      ] - > set_trigger_func(&unlock_beast_kiosk, str_id);
     }
     if(str_id === "unlock_quest_key") {
       [
         [o_smashable]
-      ] - > set_trigger_func( & unlock_quest_key, str_id);
+      ] - > set_trigger_func(&unlock_quest_key, str_id);
     }
-    [
-      [o_smashable]
-    ] - > init(trigger);
+    [[o_smashable]] - > init(trigger);
   }
 }
 
@@ -390,7 +369,7 @@ function unlock_beast_kiosk(str_id) {
 }
 
 function unlock_beast_trigger(str_targetname, str_id) {
-  triggers = getentarray(str_targetname, "targetname");
+  triggers = getEntArray(str_targetname, "targetname");
   foreach(trigger in triggers) {
     if(trigger.script_noteworthy === str_id) {
       trigger.is_unlocked = 1;
@@ -404,8 +383,8 @@ function unlock_quest_key(str_id) {
 
 function add_callback(targetname, fn_callback, param1, param2, param3) {
   o_smashable = level.zod_smashables[targetname];
-  if(!isdefined(o_smashable)) {
-    /# /
+  if(!isDefined(o_smashable)) {
+    /
     #
     assertmsg(("" + targetname) + "");
     return;
@@ -415,9 +394,9 @@ function add_callback(targetname, fn_callback, param1, param2, param3) {
 
 function private cb_connect_paths() {
   self.m_a_clip[0] connectpaths();
-  if(isdefined(self.m_a_nodes)) {
+  if(isDefined(self.m_a_nodes)) {
     foreach(node in self.m_a_nodes) {
-      if(isdefined(node.script_noteworthy) && node.script_noteworthy == "air_beast_node") {
+      if(isDefined(node.script_noteworthy) && node.script_noteworthy == "air_beast_node") {
         linktraversal(node);
       }
     }

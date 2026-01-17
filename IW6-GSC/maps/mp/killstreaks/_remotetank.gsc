@@ -42,8 +42,8 @@ init() {
   level.tankSettings["remote_tank"].modelPlacement = "vehicle_ugv_talon_obj";
   level.tankSettings["remote_tank"].modelPlacementFailed = "vehicle_ugv_talon_obj_red";
   level.tankSettings["remote_tank"].modelDestroyed = "vehicle_ugv_talon_mp";
-  level.tankSettings["remote_tank"].stringPlace = & "KILLSTREAKS_REMOTE_TANK_PLACE";
-  level.tankSettings["remote_tank"].stringCannotPlace = & "KILLSTREAKS_REMOTE_TANK_CANNOT_PLACE";
+  level.tankSettings["remote_tank"].stringPlace = &"KILLSTREAKS_REMOTE_TANK_PLACE";
+  level.tankSettings["remote_tank"].stringCannotPlace = &"KILLSTREAKS_REMOTE_TANK_CANNOT_PLACE";
   level.tankSettings["remote_tank"].laptopInfo = "killstreak_remote_tank_laptop_mp";
   level.tankSettings["remote_tank"].remoteInfo = "killstreak_remote_tank_remote_mp";
 
@@ -749,7 +749,7 @@ Callback_VehicleDamage(inflictor, attacker, damage, iDFlags, meansOfDeath, weapo
   if(!maps\mp\gametypes\_weapons::friendlyFireCheck(vehicle.owner, attacker)) {
     return;
   }
-  if(isDefined(iDFlags) && (iDFlags & level.iDFLAGS_PENETRATION))
+  if(isDefined(iDFlags) && (iDFlags &level.iDFLAGS_PENETRATION))
     vehicle.wasDamagedFromBulletPenetration = true;
 
   vehicle.wasDamaged = true;

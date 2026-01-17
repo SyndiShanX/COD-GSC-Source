@@ -192,7 +192,7 @@ kill_transport() {
 }
 
 kill_transports() {
-  transports = getentarray("transport", "script_noteworthy");
+  transports = getEntArray("transport", "script_noteworthy");
   retreatlocs = getstructarray("retreat_loc", "targetname");
 
   foreach(transport in transports) {
@@ -201,7 +201,7 @@ kill_transports() {
   }
 
   while(transports.size > 0) {
-    transports = getentarray("transport", "script_noteworthy");
+    transports = getEntArray("transport", "script_noteworthy");
     level waittill("unloaded");
     squad = getsquadbypkg("quadrotor_pkg", "axis");
 
@@ -365,7 +365,7 @@ snddamagelooptimer(num) {
 
 play_looping_visor_text_audio() {
   ent = spawn("script_origin", (0, 0, 0));
-  ent playloopsound("evt_warning_text", 0.1);
+  ent playLoopSound("evt_warning_text", 0.1);
   wait 10;
   ent delete();
 }
@@ -416,13 +416,12 @@ setup_objectives() {
         break;
       case "rts_obj_silo":
         set_objective(level.obj_defend_tank, undefined, "failed");
-        tank_poi.entity setmodel("p6_drone_gas_silo_dmg");
+        tank_poi.entity setModel("p6_drone_gas_silo_dmg");
         break;
       case "rts_poi_dish":
         set_objective(level.obj_defend_comm, undefined, "failed");
 
-        if(level.m_lost_objectives < 3) {
-        }
+        if(level.m_lost_objectives < 3) {}
 
         break;
       case "rts_poi_mainframe":
@@ -442,7 +441,7 @@ setup_objectives() {
     if(level.m_lost_objectives == 2) {
       maps\_so_rts_event::trigger_event("dlg_doors_down_fps");
       maps\_so_rts_event::trigger_event("dlg_doors_down");
-      turrets = getentarray("turret_loc_friendly_inside", "targetname");
+      turrets = getEntArray("turret_loc_friendly_inside", "targetname");
 
       foreach(turret in turrets)
       turret.targetname = "turret_loc_friendly";
@@ -490,7 +489,7 @@ setup_objectives() {
       set_objective(level.obj_defend_computer);
       maps\_so_rts_poi::poi_setobjectivenumber("rts_poi_mainframe", level.obj_defend_computer, "waypoint_defend_d");
       flag_set("factory_breached");
-      spots = getentarray("base_event_disconnect", "targetname");
+      spots = getEntArray("base_event_disconnect", "targetname");
 
       foreach(spot in spots) {
         radius = isDefined(spot.radius) ? spot.radius : spot.script_parameters;
@@ -724,8 +723,7 @@ order_new_allysquad(squadid) {
   guy thread friendly_ai_think();
 }
 
-friendly_ai_think() {
-}
+friendly_ai_think() {}
 
 intro_jetpack_wait(stagger) {
   self.takedamage = 0;
@@ -808,7 +806,7 @@ dronecodespawner(pkg_ref, team, callback, squadid) {
       level.rts.squads[squadid].no_show_marker = 1;
       level.rts.squads[squadid].no_group_commands = 1;
       level.rts.squads[squadid].no_move_commands = 1;
-      turrets = getentarray("sentry_turret_friendly", "targetname");
+      turrets = getEntArray("sentry_turret_friendly", "targetname");
 
       foreach(turret in turrets) {
         turret.ai_ref = ai_ref;
@@ -887,7 +885,7 @@ drone_startintro() {
   ai_jetpacks[1] = get_model_or_models_from_scene("drone_intro", "jetpack_guy1");
 
   foreach(ai_jetpack in ai_jetpacks)
-  playfxontag(level._effect["jetwing_exhaust"], ai_jetpack, "tag_engine_fx");
+  playFXOnTag(level._effect["jetwing_exhaust"], ai_jetpack, "tag_engine_fx");
 
   scene_wait("drone_intro");
   flag_set("intro_done");
@@ -901,7 +899,7 @@ drone_intro_player_face_fx() {
   player_body endon("death");
 
   while(!flag("drone_player_landed")) {
-    playfxontag(level._effect["player_intro_face_fx"], player_body, "tag_camera");
+    playFXOnTag(level._effect["player_intro_face_fx"], player_body, "tag_camera");
     wait 0.2;
   }
 }
@@ -910,7 +908,7 @@ drone_intro_player_face_fx() {
 
 jetpack_deploy_chute_guy0(ai_jetpack) {
   m_chute = spawn("script_model", (0, 0, 0));
-  m_chute setmodel("fxanim_gp_parachute_jetpack_mod");
+  m_chute setModel("fxanim_gp_parachute_jetpack_mod");
   m_chute useanimtree(#animtree);
   m_chute endon("death");
 
@@ -924,7 +922,7 @@ jetpack_deploy_chute_guy0(ai_jetpack) {
 
 jetpack_deploy_chute_guy1(ai_jetpack) {
   m_chute = spawn("script_model", (0, 0, 0));
-  m_chute setmodel("fxanim_gp_parachute_jetpack_mod");
+  m_chute setModel("fxanim_gp_parachute_jetpack_mod");
   m_chute useanimtree(#animtree);
   m_chute endon("death");
 
@@ -992,7 +990,7 @@ drone_mission_complete_s1(success, basejustlost) {
 
 drone_outro_succeed() {
   level thread maps\createart\so_rts_mp_drone_art::success_igc();
-  sentry_turrets = getentarray("sentry_turret_friendly", "targetname");
+  sentry_turrets = getEntArray("sentry_turret_friendly", "targetname");
 
   foreach(sentry_turret in sentry_turrets)
   sentry_turret.ignoreall = 1;
@@ -1020,8 +1018,8 @@ drone_outro_player_fire() {
   player_body = get_model_or_models_from_scene("drone_outro_success", "player_body");
   muzzle_org = player_body gettagorigin("tag_flash");
   muzzle_ang = player_body gettagangles("tag_flash");
-  playfxontag(level._effect["kard_fake_flash"], player_body, "tag_flash");
-  magicbullet("kard_sp", muzzle_org, muzzle_org + vectorscale(anglestoforward(muzzle_ang), 150), level.player);
+  playFXOnTag(level._effect["kard_fake_flash"], player_body, "tag_flash");
+  magicbullet("kard_sp", muzzle_org, muzzle_org + vectorscale(anglesToForward(muzzle_ang), 150), level.player);
 }
 
 drone_outro_fail() {
@@ -1029,7 +1027,7 @@ drone_outro_fail() {
   scene = "drone_outro_fail";
   level thread run_scene(scene);
   flag_wait(scene + "_started");
-  luinotifyevent(&"hud_update_vehicle_custom", 2, 1, & "cctv_hud");
+  luinotifyevent(&"hud_update_vehicle_custom", 2, 1, &"cctv_hud");
   maps\_so_rts_event::trigger_event("dlg_mission_fail_fps");
   screen_fade_in(2.5);
   maps\_so_rts_event::trigger_event("dlg_mission_fail");
@@ -1040,7 +1038,7 @@ drone_outro_fail() {
 outro_emp_explosion() {
   emp_bomb = get_model_or_models_from_scene("drone_outro_fail", "briefcase_bomb");
   playsoundatposition("wpn_emp_explode_rts", emp_bomb.origin);
-  playfxontag(level._effect["rts_suitcase_bomb_emp"], emp_bomb, "tag_origin");
+  playFXOnTag(level._effect["rts_suitcase_bomb_emp"], emp_bomb, "tag_origin");
   level notify("cctv_futz_stop");
 }
 
@@ -1048,7 +1046,7 @@ outro_emp_lights() {
   emp_bomb = get_model_or_models_from_scene("drone_outro_fail", "briefcase_bomb");
 
   while(!flag("drone_emp_explosion")) {
-    playfxontag(level._effect["outro_emp_blink"], emp_bomb, "tag_origin");
+    playFXOnTag(level._effect["outro_emp_blink"], emp_bomb, "tag_origin");
     playsoundatposition("evt_outro_emp_alert", emp_bomb.origin);
     wait 0.1;
   }
@@ -1089,17 +1087,17 @@ level_fade_in(player, delay) {
 }
 
 drone_geo_changes() {
-  ents = getentarray("rts_poi_LZ", "targetname");
+  ents = getEntArray("rts_poi_LZ", "targetname");
 
   foreach(ent in ents)
   ent delete();
 
-  ents = getentarray("rts_remove", "targetname");
+  ents = getEntArray("rts_remove", "targetname");
 
   foreach(ent in ents)
   ent delete();
 
-  ents = getentarray("script_model", "classname");
+  ents = getEntArray("script_model", "classname");
 
   foreach(ent in ents) {
     if(isDefined(ent.script_index)) {
@@ -1108,12 +1106,12 @@ drone_geo_changes() {
     }
   }
 
-  ents = getentarray("delivery_van", "targetname");
+  ents = getEntArray("delivery_van", "targetname");
 
   foreach(ent in ents)
   ent delete();
 
-  level.laser_doors = getentarray("laser_door", "targetname");
+  level.laser_doors = getEntArray("laser_door", "targetname");
 
   foreach(ent in level.laser_doors)
   ent disconnectpaths();
@@ -1130,8 +1128,7 @@ drone_geo_changes() {
   flag_wait("start_rts");
 }
 
-enemyspawninit() {
-}
+enemyspawninit() {}
 
 drone_create_badplace_ontrig() {
   self endon("death");
@@ -1151,7 +1148,7 @@ drone_create_badplace_ontrig() {
 }
 
 drone_badplace_auto() {
-  trigs = getentarray("bad_place_auto_trig", "targetname");
+  trigs = getEntArray("bad_place_auto_trig", "targetname");
 
   foreach(trig in trigs)
   trig thread drone_create_badplace_ontrig();
@@ -1180,13 +1177,13 @@ drone_ai_takeover_trigger(oob) {
 
 drone_ai_takeover_off() {
   level endon("rts_terminated");
-  triggers = getentarray("rts_takeover_OFF", "targetname");
+  triggers = getEntArray("rts_takeover_OFF", "targetname");
   array_thread(triggers, ::drone_ai_takeover_trigger, 1);
 }
 
 drone_ai_takeover_on() {
   level endon("rts_terminated");
-  triggers = getentarray("rts_takeover_ON", "targetname");
+  triggers = getEntArray("rts_takeover_ON", "targetname");
   array_thread(triggers, ::drone_ai_takeover_trigger, 0);
 }
 
@@ -1197,7 +1194,7 @@ setup_challenges() {
   add_spawn_function_veh_by_type("turret_sentry_rts", ::watch_sentry_death);
   level.m_turret_deaths = 0;
   level.callbackactorkilled = maps\_so_rts_challenges::global_actor_killed_challenges_callback;
-  level.rts.kill_stats = spawnstruct();
+  level.rts.kill_stats = spawnStruct();
   level.rts.kill_stats.total_kills = 0;
   level.rts.kill_stats.headshot_kills = 0;
   level.rts.kill_stats.melee_kills = 0;

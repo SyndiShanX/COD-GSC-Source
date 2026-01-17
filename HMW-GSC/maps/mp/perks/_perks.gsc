@@ -273,7 +273,7 @@ validateperk(var_0, var_1) {
 getemptyperks() {
   var_0 = [];
 
-  for (var_1 = 0; var_1 < 3; var_1++)
+  for(var_1 = 0; var_1 < 3; var_1++)
     var_0[var_1] = "specialty_null";
 
   return var_0;
@@ -281,7 +281,7 @@ getemptyperks() {
 
 onplayerconnect() {
   level endon("game_ended");
-  for (;;) {
+  for(;;) {
     level waittill("connected", var_0);
     var_0 thread onplayerspawned();
   }
@@ -397,9 +397,7 @@ initperkdvars() {
   level.armorPiercingMod = getIntProperty("perk_armorPiercingDamage", 40) / 100; // increased bullet damage by this %
 }
 
-cac_selector() {
-
-}
+cac_selector() {}
 
 giveblindeyeafterspawn() {
   self endon("death");
@@ -407,7 +405,7 @@ giveblindeyeafterspawn() {
   maps\mp\_utility::giveperk("specialty_blindeye", 0);
   self.spawnperk = 1;
 
-  while (self.avoidkillstreakonspawntimer > 0) {
+  while(self.avoidkillstreakonspawntimer > 0) {
     self.avoidkillstreakonspawntimer -= 0.05;
     wait 0.05;
   }
@@ -424,7 +422,7 @@ applyperks() {
 
   table = "mp/perkTable.csv";
 
-  for (i = 0; i < tablegetrowcount(table); i++) {
+  for(i = 0; i < tablegetrowcount(table); i++) {
     pro_perk = tableLookup(table, 0, i, 8);
 
     if(!isSubStr(pro_perk, "specialty_")) {
@@ -447,7 +445,7 @@ get_specialtydata(var_0, var_1, var_2) // iw3/h1 remnants? this sucks
       else
         self.perkscustom["grenades_count"] = 1;
 
-      if(var_0 == "specialty_specialgrenade" && isdefined(var_2.offhand) && var_2.offhand != "h1_smokegrenade_mp")
+      if(var_0 == "specialty_specialgrenade" && isDefined(var_2.offhand) && var_2.offhand != "h1_smokegrenade_mp")
         self.perkscustom["specialgrenades_count"] = var_4;
       else
         self.perkscustom["specialgrenades_count"] = 1;
@@ -468,7 +466,7 @@ get_specialtydata(var_0, var_1, var_2) // iw3/h1 remnants? this sucks
 giveperkinventory() {
   var_0 = self.perkscustom["inventory"];
 
-  if(isdefined(var_0) && var_0 != "") {
+  if(isDefined(var_0) && var_0 != "") {
     var_0 = "h1_" + var_0;
     self giveweapon(var_0);
     setweaponammooverall(var_0, self.perkscustom["inventory_count"]);

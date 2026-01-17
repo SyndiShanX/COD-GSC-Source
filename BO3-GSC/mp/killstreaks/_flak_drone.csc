@@ -15,11 +15,11 @@
 #namespace flak_drone;
 
 function autoexec __init__sytem__() {
-  system::register("flak_drone", & __init__, undefined, undefined);
+  system::register("flak_drone", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("vehicle", "flak_drone_camo", 1, 3, "int", & active_camo_changed, 0, 0);
+  clientfield::register("vehicle", "flak_drone_camo", 1, 3, "int", &active_camo_changed, 0, 0);
 }
 
 function active_camo_changed(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -42,7 +42,7 @@ function doreveal(localclientnum, direction) {
   } else {
     startval = 0;
   }
-  while (startval >= 0 && startval <= 1) {
+  while(startval >= 0 && startval <= 1) {
     self mapshaderconstant(localclientnum, 0, "scriptVector0", startval, 0, 0, 0);
     if(direction) {
       startval = startval - 0.032;

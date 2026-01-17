@@ -12,8 +12,6 @@ main() {
   level._effect["_attack_heli_spotlight_ending"] = LoadFX("misc/hunted_spotlight_model_dim");
   //!!!!! This is not actually called anywhere, but it needs to load immediately otherwise I get a precache error (?)
 
-
-
   level._effect["vehicle_explosion_slamraam"] = LoadFX("explosions/vehicle_explosion_slamraam");
 
   level._effect["_attack_heli_spotlight"] = LoadFX("misc/spotlight_large_dcburning");
@@ -128,24 +126,25 @@ main() {
   level._effect["ceiling_dust_default"] = loadfx("dust/ceiling_dust_default");
   level._effect["commerce_window_shatter"] = loadfx("props/car_glass_large");
   maps\createfx\dcburning_fx::main();
-
 }
 
 littlebird_monument_crash(crashStruct) {
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     self waittill("damage", amount, attacker, enemy_org, impact_org, type);
-    if(!isdefined(type))
+    if(!isDefined(type))
       continue;
-    if(!isdefined(attacker))
+    if(!isDefined(attacker))
       continue;
-    if(!isdefined(amount))
+    if(!isDefined(amount))
       continue;
     if(isplayer(attacker))
       continue;
-    if((type == "MOD_PROJECTILE") && (amount > 999))
+    if((type == "MOD_PROJECTILE") && (amount > 999)) {
       break;
-    if((type == "MOD_PROJECTILE_SPLASH") && (amount == 4000))
+    }
+    if((type == "MOD_PROJECTILE_SPLASH") && (amount == 4000)) {
       break;
+    }
   }
 
   self vehicle_detachfrompath();
@@ -156,18 +155,17 @@ littlebird_monument_crash(crashStruct) {
   self thread littlebird_spinout();
 
   array_thread(self.riders, ::littlebird_monument_rider_death, self);
-  playfxOnTag(getfx("crash_main_01"), self, "tag_deathfx");
-  while (distance(self.origin, crashStruct.origin) > 100) {
-    playfxOnTag(getfx("chopper_smoke_trail"), self, "tag_deathfx");
+  playFXOnTag(getfx("crash_main_01"), self, "tag_deathfx");
+  while(distance(self.origin, crashStruct.origin) > 100) {
+    playFXOnTag(getfx("chopper_smoke_trail"), self, "tag_deathfx");
     wait(.1);
   }
   self thread play_sound_on_entity("exp_tanker_vehicle");
   dummy = spawn("script_origin", self gettagorigin("tag_deathfx"));
-  playfx(getfx("crash_end_01"), dummy.origin);
+  playFX(getfx("crash_end_01"), dummy.origin);
   earthquake(.3, 2, level.player.origin, 1600);
   self delete();
   dummy delete();
-
 }
 
 littlebird_monument_rider_death(heli) {
@@ -212,9 +210,8 @@ littlebird_monument_rider_death(heli) {
     self unlink();
   }
 
-  if(isdefined(self))
+  if(isDefined(self))
     self kill();
-
 }
 
 ent_cleanup(ent) {
@@ -226,14 +223,13 @@ updatePos(heli, tag) {
   heli endon("death");
   self endon("death ");
   org = undefined;
-  while (true) {
+  while(true) {
     wait(0.05);
     org = heli gettagorigin(tag);
     self.origin = org;
     //self.origin = ( org[ 0 ], org[ 1 ], self.origin[ 2 ] );
   }
 }
-
 
 //littlebird_crash()
 //{
@@ -243,17 +239,17 @@ updatePos(heli, tag) {
 //	self Vehicle_SetSpeed( 70 );
 //	self thread littlebird_spinout();
 //	array_thread( self.riders,::littlebird_rider_death, self );
-//	playfxOnTag( getfx( "crash_main_01" ), self, "tag_deathfx" );
-//	while ( !flag( "littlebird_crash_path_end") )
+//	playFXOnTag( getfx( "crash_main_01" ), self, "tag_deathfx" );
+//	while( !flag( "littlebird_crash_path_end") )
 //	{
-//		playfxOnTag( getfx( "chopper_smoke_trail" ), self, "tag_deathfx" );
+//		playFXOnTag( getfx( "chopper_smoke_trail" ), self, "tag_deathfx" );
 //		wait( .1 );
 //	}
 //	self thread play_sound_on_entity( "exp_tanker_vehicle" );
 //	dummy = spawn( "script_origin", self gettagorigin( "tag_deathfx" ) );
-//	playfx( getfx( "crash_main_02" ), dummy.origin );
-//	playfx( getfx( "crash_end_01" ), dummy.origin );
-//	playfx( getfx( "crash_end_02" ), dummy.origin );
+//	playFX( getfx( "crash_main_02" ), dummy.origin );
+//	playFX( getfx( "crash_end_01" ), dummy.origin );
+//	playFX( getfx( "crash_end_02" ), dummy.origin );
 //	earthquake( .3, 2, level.player.origin, 1600 );
 //	self delete();
 //	
@@ -269,17 +265,17 @@ updatePos(heli, tag) {
 //	
 //	self thread littlebird_spinout();
 //	
-//	playfxOnTag( getfx( "crash_main_01" ), self, "tag_deathfx" );
-//	while ( !flag( "littlebrid_crash_02_end") )
+//	playFXOnTag( getfx( "crash_main_01" ), self, "tag_deathfx" );
+//	while( !flag( "littlebrid_crash_02_end") )
 //	{
-//		playfxOnTag( getfx( "chopper_smoke_trail" ), self, "tag_deathfx" );
+//		playFXOnTag( getfx( "chopper_smoke_trail" ), self, "tag_deathfx" );
 //		wait( .1 );
 //	}
 //	self thread play_sound_on_entity( "exp_tanker_vehicle" );
 //	dummy = spawn( "script_origin", self gettagorigin( "tag_deathfx" ) );
-//	playfx( getfx( "crash_main_02" ), dummy.origin );
-//	playfx( getfx( "crash_end_01" ), dummy.origin );
-//	playfx( getfx( "crash_end_02" ), dummy.origin );
+//	playFX( getfx( "crash_main_02" ), dummy.origin );
+//	playFX( getfx( "crash_end_01" ), dummy.origin );
+//	playFX( getfx( "crash_end_02" ), dummy.origin );
 //	earthquake( .3, 2, level.player.origin, 1600 );
 //	self delete();
 //	
@@ -292,7 +288,7 @@ littlebird_spinout() {
   yawaccel = 200;
   targetyaw = undefined;
 
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     targetyaw = self.angles[1] - 300;
     self setyawspeed(yawspeed, yawaccel);
     self settargetyaw(targetyaw);
@@ -314,7 +310,7 @@ littlebird_spinout() {
 //	self stopanimscripted();
 //	self delaythread( randomfloatrange( .3, 1 ), ::play_sound_in_space, "generic_death_falling" );
 //	heli anim_generic( self, "littlebird_rider_death", tag );
-//	if( isdefined( self ) )
+//	if( isDefined( self ) )
 //		self kill();
 //
 //}
@@ -323,7 +319,7 @@ monument_heli_destroyed(monument_heli_owned) {
   monument_heli_owned_destroyed = getent("monument_heli_owned_destroyed", "targetname");
   monument_heli_owned delete();
   monument_heli_owned_destroyed show();
-  playfx(getfx("large_vehicle_explosion"), monument_heli_owned_destroyed.origin);
+  playFX(getfx("large_vehicle_explosion"), monument_heli_owned_destroyed.origin);
   monument_heli_owned_destroyed thread play_sound_in_space("exp_tanker_vehicle");
   monument_heli_owned_destroyeddummy = spawn("script_origin", monument_heli_owned_destroyed.origin + (0, 0, 0));
   monument_heli_owned_destroyeddummy.angles = monument_heli_owned_destroyed.angles;

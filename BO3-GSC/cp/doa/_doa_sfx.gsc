@@ -131,18 +131,18 @@ function init() {
 
 function function_ce931b57(name, type) {
   assert(type < 128, "");
-  if(!isdefined(level.doa.var_4a6df8b3)) {
+  if(!isDefined(level.doa.var_4a6df8b3)) {
     level.doa.var_4a6df8b3 = [];
   }
   level.doa.var_4a6df8b3[name] = type;
 }
 
 function function_7ad8eb52(name) {
-  assert(isdefined(level.doa.var_4a6df8b3[name]), "");
+  assert(isDefined(level.doa.var_4a6df8b3[name]), "");
   return level.doa.var_4a6df8b3[name];
 }
 
-function function_9ab759da( & queue, flag, var_a6cc22d4 = 0) {
+function function_9ab759da(&queue, flag, var_a6cc22d4 = 0) {
   self endon("death");
   if(!var_a6cc22d4) {
     self notify("sfxProcessQueue_" + flag);
@@ -167,13 +167,13 @@ function function_9ab759da( & queue, flag, var_a6cc22d4 = 0) {
 }
 
 function function_4f06fb8(name) {
-  if(!isdefined(name) || !isdefined(self)) {
+  if(!isDefined(name) || !isDefined(self)) {
     return;
   }
   self notify("hash_89ed98");
   self endon("hash_89ed98");
   self endon("death");
-  if(!isdefined(self.var_14f92b68)) {
+  if(!isDefined(self.var_14f92b68)) {
     self.var_14f92b68 = [];
   }
   self.var_14f92b68[self.var_14f92b68.size] = name;
@@ -182,13 +182,13 @@ function function_4f06fb8(name) {
 }
 
 function function_90118d8c(name) {
-  if(!isdefined(name) || !isdefined(self)) {
+  if(!isDefined(name) || !isDefined(self)) {
     return;
   }
   self notify("hash_42bd4d44");
   self endon("hash_42bd4d44");
   self endon("death");
-  if(!isdefined(self.var_60026b2)) {
+  if(!isDefined(self.var_60026b2)) {
     self.var_60026b2 = [];
   }
   self.var_60026b2[self.var_60026b2.size] = name;

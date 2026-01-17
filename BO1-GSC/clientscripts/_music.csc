@@ -154,8 +154,9 @@ transitionIn(previous, next) {
         time = 0;
         if(length != 0) {
           time = GetPlaybackTime(level.musicStates[next].id);
-          if(length - time <= fadein * 1000)
+          if(length - time <= fadein * 1000) {
             break;
+          }
         }
         wait(.01);
       }

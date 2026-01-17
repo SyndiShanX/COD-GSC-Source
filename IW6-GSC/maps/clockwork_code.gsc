@@ -384,7 +384,7 @@ hold_fire_unless_ads(var_0) {
   if(!level.player hasweapon(var_1))
     level.player giveweapon(var_1, 0, 0, 0, 1);
 
-  while(!common_scripts\utility::flag(var_0) & !common_scripts\utility::flag("exfil_fire_fail")) {
+  while(!common_scripts\utility::flag(var_0) &!common_scripts\utility::flag("exfil_fire_fail")) {
     level.player allowfire(0);
     level.player common_scripts\utility::waittill_any("playerisfiring", "player_cancel_hold_fire", "grenade_fire");
     common_scripts\utility::waitframe();
@@ -1821,7 +1821,7 @@ fail_on_player_kill() {
     self waittill("death", var_0);
 
     if(isDefined(var_0) && isplayer(var_0)) {
-      setdvar("ui_deadquote", & "CLOCKWORK_YOU_KILLED_A_CIVILIAN");
+      setdvar("ui_deadquote", &"CLOCKWORK_YOU_KILLED_A_CIVILIAN");
       maps\_utility::missionfailedwrapper();
       wait 20;
     }

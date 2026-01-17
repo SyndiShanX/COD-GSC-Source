@@ -19,8 +19,8 @@ init() {
   if(!maps\mp\zombies\_zm_weapons::is_weapon_included("jetgun_zm")) {
     return;
   }
-  maps\mp\zombies\_zm_equipment::register_equipment("jetgun_zm", & "ZOMBIE_EQUIP_JETGUN_PICKUP_HINT_STRING", & "ZOMBIE_EQUIP_JETGUN_HOWTO", "jetgun_zm_icon", "jetgun", ::jetgun_activation_watcher_thread, undefined, ::dropjetgun, ::pickupjetgun);
-  maps\mp\gametypes_zm\_weaponobjects::createretrievablehint("jetgun", & "ZOMBIE_EQUIP_JETGUN_PICKUP_HINT_STRING");
+  maps\mp\zombies\_zm_equipment::register_equipment("jetgun_zm", &"ZOMBIE_EQUIP_JETGUN_PICKUP_HINT_STRING", &"ZOMBIE_EQUIP_JETGUN_HOWTO", "jetgun_zm_icon", "jetgun", ::jetgun_activation_watcher_thread, undefined, ::dropjetgun, ::pickupjetgun);
+  maps\mp\gametypes_zm\_weaponobjects::createretrievablehint("jetgun", &"ZOMBIE_EQUIP_JETGUN_PICKUP_HINT_STRING");
   level._effect["jetgun_smoke_cloud"] = loadfx("weapon/thunder_gun/fx_thundergun_smoke_cloud");
   level._effect["jetgun_overheat"] = loadfx("weapon/jet_gun/fx_jetgun_overheat");
   level._effect["jetgun_vortex"] = loadfx("weapon/jet_gun/fx_jetgun_on");
@@ -173,7 +173,7 @@ watch_overheat() {
 play_overheat_fx() {
   if(!(isDefined(self.overheat_fx_playing) && self.overheat_fx_playing)) {
     self.overheat_fx_playing = 1;
-    playfxontag(level._effect["jetgun_overheat"], self, "tag_flash");
+    playFXOnTag(level._effect["jetgun_overheat"], self, "tag_flash");
     wait 5;
 
     if(isDefined(self))
@@ -196,7 +196,7 @@ handle_overheated_jetgun() {
         maps\mp\zombies\_zm_buildables::player_explode_buildable("jetgun_zm", weapon_org, 250, 1, pickup_time);
         self.jetgun_overheating = undefined;
         self.jetgun_heatval = undefined;
-        self playsound("wpn_jetgun_explo");
+        self playSound("wpn_jetgun_explo");
       } else if(isDefined(level.unbuild_overheated_jetgun) && level.unbuild_overheated_jetgun) {
         self thread maps\mp\zombies\_zm_equipment::equipment_release("jetgun_zm");
         maps\mp\zombies\_zm_buildables::unbuild_buildable("jetgun_zm", 1);
@@ -262,8 +262,8 @@ jetgun_firing() {
   jetgun_fired = 0;
 
   if(self is_jetgun_firing() && jetgun_fired == 0) {
-    self.jetsound_ent playloopsound("wpn_jetgun_effect_plr_loop", 0.8);
-    self.jetsound_ent playsound("wpn_jetgun_effect_plr_start");
+    self.jetsound_ent playLoopSound("wpn_jetgun_effect_plr_loop", 0.8);
+    self.jetsound_ent playSound("wpn_jetgun_effect_plr_start");
     self notify("jgun_snd");
   }
 
@@ -274,16 +274,16 @@ jetgun_firing() {
     view_angles = self gettagangles("tag_flash");
 
     if(self get_jetgun_engine_direction() < 0)
-      playfx(level._effect["jetgun_smoke_cloud"], view_pos - self getplayerviewheight(), anglestoforward(view_angles), anglestoup(view_angles));
+      playFX(level._effect["jetgun_smoke_cloud"], view_pos - self getplayerviewheight(), anglesToForward(view_angles), anglestoup(view_angles));
     else
-      playfx(level._effect["jetgun_smoke_cloud"], view_pos - self getplayerviewheight(), anglestoforward(view_angles) * -1, anglestoup(view_angles));
+      playFX(level._effect["jetgun_smoke_cloud"], view_pos - self getplayerviewheight(), anglesToForward(view_angles) * -1, anglestoup(view_angles));
 
     wait 0.25;
   }
 
   if(jetgun_fired == 1) {
     self.jetsound_ent stoploopsound(0.5);
-    self.jetsound_ent playsound("wpn_jetgun_effect_plr_end");
+    self.jetsound_ent playSound("wpn_jetgun_effect_plr_end");
     self.jetsound_ent thread sound_ent_cleanup();
     jetgun_fired = 0;
   }
@@ -367,8 +367,7 @@ jetgun_get_enemies_in_range(invert) {
   view_pos = self getweaponmuzzlepoint();
   zombies = get_array_of_closest(view_pos, get_round_enemy_array(), undefined, 3, level.zombie_vars["jetgun_drag_range"]);
 
-  if(!isDefined(zombies)) {
-  }
+  if(!isDefined(zombies)) {}
 
   knockdown_range_squared = level.zombie_vars["jetgun_knockdown_range"] * level.zombie_vars["jetgun_knockdown_range"];
   drag_range_squared = level.zombie_vars["jetgun_drag_range"] * level.zombie_vars["jetgun_drag_range"];
@@ -519,7 +518,7 @@ jetgun_grind_zombie(player) {
 
     if(is_mature()) {
       if(isDefined(level._effect["zombie_guts_explosion"]))
-        playfx(level._effect["zombie_guts_explosion"], self gettagorigin("J_SpineLower"));
+        playFX(level._effect["zombie_guts_explosion"], self gettagorigin("J_SpineLower"));
     }
 
     self.nodeathragdoll = 1;
@@ -556,7 +555,7 @@ jetgun_fling_zombie(player, index) {
       deathanim = "zm_jetgun_death_crawl";
 
     self.deathanim = deathanim;
-    player playsound("evt_jetgun_zmb_suck");
+    player playSound("evt_jetgun_zmb_suck");
   }
 
   self thread jetgun_grind_zombie(player);
@@ -591,7 +590,7 @@ jetgun_knockdown_zombie(player, gib) {
 
 handle_jetgun_pain_notetracks(note) {
   if(note == "zombie_knockdown_ground_impact")
-    playfx(level._effect["jetgun_knockdown_ground"], self.origin, anglestoforward(self.angles), anglestoup(self.angles));
+    playFX(level._effect["jetgun_knockdown_ground"], self.origin, anglesToForward(self.angles), anglestoup(self.angles));
 }
 
 is_jetgun_damage() {
@@ -669,7 +668,7 @@ zombie_exit_drag_state() {
 
     if(is_mature()) {
       if(isDefined(level._effect["zombie_guts_explosion"]))
-        playfx(level._effect["zombie_guts_explosion"], self gettagorigin("J_SpineLower"));
+        playFX(level._effect["zombie_guts_explosion"], self gettagorigin("J_SpineLower"));
     }
 
     self.nodeathragdoll = 1;

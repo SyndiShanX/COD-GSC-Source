@@ -25,8 +25,8 @@ precache() {
   maps\mp\zm_buried_buildables::init_buildables(griefbuildables);
   maps\mp\zombies\_zm_equip_turbine::init();
   maps\mp\zombies\_zm_equip_turbine::init_animtree();
-  maps\mp\zombies\_zm_equip_springpad::init(&"ZM_BURIED_EQ_SP_PHS", & "ZM_BURIED_EQ_SP_HTS");
-  maps\mp\zombies\_zm_equip_subwoofer::init(&"ZM_BURIED_EQ_SW_PHS", & "ZM_BURIED_EQ_SW_HTS");
+  maps\mp\zombies\_zm_equip_springpad::init(&"ZM_BURIED_EQ_SP_PHS", &"ZM_BURIED_EQ_SP_HTS");
+  maps\mp\zombies\_zm_equip_subwoofer::init(&"ZM_BURIED_EQ_SW_PHS", &"ZM_BURIED_EQ_SW_HTS");
 }
 
 street_treasure_chest_init() {

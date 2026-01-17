@@ -10,7 +10,7 @@
 planesounds(spawnsound, flybysound, flybysoundloop, lengthofflyby) {
   self endon("delete");
   fake_ent_plane = spawnfakeent(0);
-  playsound(0, spawnsound, (0, 0, 0));
+  playSound(0, spawnsound, (0, 0, 0));
   thread plane_position_updater(fake_ent_plane, self, flybysound, flybysoundloop, lengthofflyby);
 }
 
@@ -42,10 +42,10 @@ plane_position_updater(fake_ent, plane, flybysound, flybysoundloop, lengthofflyb
 
         if(time < lengthofflyby) {
           if(isDefined(flybysoundloop))
-            soundid = playloopsound(0, fake_ent, flybysoundloop, 0);
+            soundid = playLoopSound(0, fake_ent, flybysoundloop, 0);
 
           if(isDefined(flybysound))
-            plane playsound(0, flybysound);
+            plane playSound(0, flybysound);
 
           starttime = getrealtime();
         }

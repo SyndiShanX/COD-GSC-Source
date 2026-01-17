@@ -127,7 +127,7 @@ spawn_wounded(v_org, v_ang, str_animname, str_scene, str_anim_override, str_targ
     e_wounded.takedamage = 1;
   else {
     e_wounded.takedamage = 0;
-    e_wounded setlookattext("", & "");
+    e_wounded setlookattext("", &"");
     e_wounded notify("no_friendly_fire");
   }
 
@@ -155,7 +155,7 @@ spawn_wounded_at_struct(b_sight_trace) {
   if(b_sight_trace) {
     e_wounded hide();
 
-    if(e_wounded sightconetrace(level.player geteye(), level.player) < 0.05)
+    if(e_wounded sightconetrace(level.player getEye(), level.player) < 0.05)
       e_wounded show();
     else
       e_wounded delete();
@@ -180,8 +180,8 @@ _wounded_auto_delete_thread() {
 
     if(n_kill > 0) {
       n_now = gettime();
-      v_eye = level.player geteye();
-      v_player_forward = anglestoforward(level.player getplayerangles());
+      v_eye = level.player getEye();
+      v_player_forward = anglesToForward(level.player getplayerangles());
       i = 0;
 
       while(n_kill > 0 && i < level.a_wounded.size) {

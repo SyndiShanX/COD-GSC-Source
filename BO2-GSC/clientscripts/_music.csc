@@ -178,7 +178,7 @@ transitionout(previous, next) {
   haveoneshot = nextoneshotalias != "";
 
   if(stinger != "" && (!loopmatches || haveoneshot || forcestinger)) {
-    stingerid = playsound(0, stinger, (0, 0, 0));
+    stingerid = playSound(0, stinger, (0, 0, 0));
     level.musicstates[previous].stingerid = stingerid;
   }
 
@@ -188,8 +188,7 @@ transitionout(previous, next) {
 
       if(waittilldone)
         samestate = waitwithstatechangecheck(fadeoutloop);
-    } else {
-    }
+    } else {}
   }
 
   if(id != 0 && samestate) {
@@ -271,7 +270,7 @@ transitionin(previous, next) {
   }
 
   if(oneshotalias != "" && samestate) {
-    level.musicstates[next].id = playsound(0, oneshotalias, (0, 0, 0), 1.0, fadein);
+    level.musicstates[next].id = playSound(0, oneshotalias, (0, 0, 0), 1.0, fadein);
 
     if(level.musicstates[next].loopdelay == 0) {
       if(loopalias != "") {
@@ -298,7 +297,7 @@ transitionin(previous, next) {
     level.musicstates[next].loopid = level.musicstates[previous].loopid;
     level.musicstates[previous].loopid = -1;
   } else if(loopalias != "" && samestate)
-    level.musicstates[next].loopid = playloopsound(0, level.loopent, loopalias, fadeinloop);
+    level.musicstates[next].loopid = playLoopSound(0, level.loopent, loopalias, fadeinloop);
 }
 
 declaremusicstate(name) {
@@ -306,7 +305,7 @@ declaremusicstate(name) {
     return;
   }
   level.musicdeclarename = name;
-  level.musicstates[name] = spawnstruct();
+  level.musicstates[name] = spawnStruct();
   level.musicstates[name].aliasent = spawnfakeent(0);
   level.musicstates[name].loopalias = "";
   level.musicstates[name].oneshotalias = "";

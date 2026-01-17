@@ -78,7 +78,7 @@ current_yaw_line_debug(duration) {
 
   while(gettime() - start_time < 1000) {
     pos1 = (self.origin[0], self.origin[1], self.origin[2] + level.lastdebugheight);
-    pos2 = pos1 + vectorscale(anglestoforward(self.angles), (current_color_index + 1) * 10);
+    pos2 = pos1 + vectorscale(anglesToForward(self.angles), (current_color_index + 1) * 10);
     line(pos1, pos2, currentyawcolor[current_color_index], 0.3, 1, duration);
     current_color_index = (current_color_index + 1) % currentyawcolor.size;
     wait 0.05;

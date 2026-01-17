@@ -48,7 +48,7 @@ main() {
   level.collectibles = collectible_init();
   level thread onPlayerConnect();
   setDvar("ui_level_cheatpoints", level.collectibles.size);
-  for (i = 0; i < level.collectibles.size; i++) {
+  for(i = 0; i < level.collectibles.size; i++) {
     level.collectibles[i] thread collectible_wait_for_pickup();
   }
 }
@@ -57,7 +57,7 @@ onPlayerConnect() {
   if(!(level.onlineGame && (GetDvarInt("xblive_privatematch") || !level.console))) {
     return;
   }
-  for (;;) {
+  for(;;) {
     level waittill("connecting", player);
     player thread onPlayerSpawned();
   }
@@ -65,7 +65,7 @@ onPlayerConnect() {
 
 onPlayerSpawned() {
   self endon("disconnect");
-  for (;;) {
+  for(;;) {
     self waittill("spawned_player");
     if(isDefined(self.player_inited) && self.player_inited) {
       continue;
@@ -80,7 +80,7 @@ onSaveRestored() {
   level.collectible_save_restored = true;
   level.collectibles = collectible_init();
   setDvar("ui_level_cheatpoints", level.collectibles.size);
-  for (i = 0; i < level.collectibles.size; i++) {
+  for(i = 0; i < level.collectibles.size; i++) {
     level.collectibles[i] thread collectible_wait_for_pickup();
   }
 }
@@ -88,8 +88,8 @@ onSaveRestored() {
 collectible_init() {
   collectibles = [];
   items = 0;
-  map_collectibles = getentarray("collectible", "targetname");
-  for (i = 0; i < map_collectibles.size; i++) {
+  map_collectibles = getEntArray("collectible", "targetname");
+  for(i = 0; i < map_collectibles.size; i++) {
     map_collectibles[i].item = getent(map_collectibles[i].target, "targetname");
     map_collectibles[i].unlock = collectible_get_unlock(map_collectibles[i].item);
     if(collectible_has_been_found(map_collectibles[i].unlock)) {
@@ -112,8 +112,8 @@ host_options_init() {
   }
   keys = GetArrayKeys(level.collectible_unlocks);
   keys = array_reverse(keys);
-  for (i = 0; i < level.collectible_unlocks.size; i++) {
-    if((host_options & (1 << i)) != 0) {
+  for(i = 0; i < level.collectible_unlocks.size; i++) {
+    if((host_options &(1 << i)) != 0) {
       SetCollectible(keys[i]);
       switch (keys[i]) {
         case "collectible_vampire":
@@ -167,7 +167,7 @@ collectible_has_been_found(collectible_name) {
     return false;
   unlocks = GetDvarInt(level.collectible_dvar);
   collectible_value = collectible_get_unlock_value(collectible_name);
-  return ((unlocks & (1 << collectible_value)) != 0);
+  return ((unlocks &(1 << collectible_value)) != 0);
 }
 
 collectible_coop_found() {
@@ -197,43 +197,43 @@ collectible_get_unlock_message(unlock) {
   string = "";
   switch (unlock) {
     case "collectible_sticksstones":
-      string = & "SCRIPT_COLLECTIBLE_STICKS_AND_STONES_UNLOCK";
+      string = &"SCRIPT_COLLECTIBLE_STICKS_AND_STONES_UNLOCK";
       break;
     case "collectible_vampire":
-      string = & "SCRIPT_COLLECTIBLE_VAMPIRE_UNLOCK";
+      string = &"SCRIPT_COLLECTIBLE_VAMPIRE_UNLOCK";
       break;
     case "collectible_berserker":
-      string = & "SCRIPT_COLLECTIBLE_BERSERKER_UNLOCK";
+      string = &"SCRIPT_COLLECTIBLE_BERSERKER_UNLOCK";
       break;
     case "collectible_zombie":
-      string = & "SCRIPT_COLLECTIBLE_ZOMBIE_UNLOCK";
+      string = &"SCRIPT_COLLECTIBLE_ZOMBIE_UNLOCK";
       break;
     case "collectible_paintball":
-      string = & "SCRIPT_COLLECTIBLE_PAINTBALL_UNLOCK";
+      string = &"SCRIPT_COLLECTIBLE_PAINTBALL_UNLOCK";
       break;
     case "collectible_dirtyharry":
-      string = & "SCRIPT_COLLECTIBLE_DIRTY_HARRY_UNLOCK";
+      string = &"SCRIPT_COLLECTIBLE_DIRTY_HARRY_UNLOCK";
       break;
     case "collectible_morphine":
-      string = & "SCRIPT_COLLECTIBLE_MORPHINE_SHOT_UNLOCK";
+      string = &"SCRIPT_COLLECTIBLE_MORPHINE_SHOT_UNLOCK";
       break;
     case "collectible_thunder":
-      string = & "SCRIPT_COLLECTIBLE_THUNDER_UNLOCK";
+      string = &"SCRIPT_COLLECTIBLE_THUNDER_UNLOCK";
       break;
     case "collectible_flak_jacket":
-      string = & "SCRIPT_COLLECTIBLE_FLAK_JACKET_UNLOCK";
+      string = &"SCRIPT_COLLECTIBLE_FLAK_JACKET_UNLOCK";
       break;
     case "collectible_hardcore":
-      string = & "SCRIPT_COLLECTIBLE_HARDCORE_UNLOCK";
+      string = &"SCRIPT_COLLECTIBLE_HARDCORE_UNLOCK";
       break;
     case "collectible_body_armor":
-      string = & "SCRIPT_COLLECTIBLE_BODY_ARMOR_UNLOCK";
+      string = &"SCRIPT_COLLECTIBLE_BODY_ARMOR_UNLOCK";
       break;
     case "collectible_hard_headed":
-      string = & "SCRIPT_COLLECTIBLE_HARD_HEADED_UNLOCK";
+      string = &"SCRIPT_COLLECTIBLE_HARD_HEADED_UNLOCK";
       break;
     case "collectible_dead_hands":
-      string = & "SCRIPT_COLLECTIBLE_COLD_DEAD_HANDS_UNLOCK";
+      string = &"SCRIPT_COLLECTIBLE_COLD_DEAD_HANDS_UNLOCK";
       break;
     default:
       assertmsg("Collectible not found " + unlock);
@@ -266,11 +266,11 @@ collectibleNotify(Unlock, num_found) {
   message = collectible_get_unlock_message(unlock);
   notifyData = spawnStruct();
   notifyData.notifyText = num_found;
-  notifyData.textLabel = & "SCRIPT_COLLECTIBLE_OF_THIRTEEN";
+  notifyData.textLabel = &"SCRIPT_COLLECTIBLE_OF_THIRTEEN";
   notifyData.notifyText2 = message;
   notifyData.sound = undefined;
   if(!GetDvarInt(level.collectible_dvar))
-    notifyData.notifyText3 = & "SCRIPT_COLLECTIBLE_USAGE";
+    notifyData.notifyText3 = &"SCRIPT_COLLECTIBLE_USAGE";
   if(CoopGame()) {
     notifyData.notifyText = undefined;
     notifyData.textLabel = undefined;
@@ -284,11 +284,11 @@ host_options_development() {
   keys = GetArrayKeys(level.collectible_unlocks);
   keys = array_reverse(keys);
   self.running_collectibles = [];
-  for (;;) {
+  for(;;) {
     wait(1.0);
     host_options = GetDvarInt(level.host_options_dvar);
-    for (i = 0; i < level.collectible_unlocks.size; i++) {
-      if((host_options & (1 << i)) != 0) {
+    for(i = 0; i < level.collectible_unlocks.size; i++) {
+      if((host_options &(1 << i)) != 0) {
         continue;
       }
       if(HasCollectible(i) && !isDefined(self.running_collectibles[i])) {

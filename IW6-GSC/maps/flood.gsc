@@ -125,72 +125,72 @@ mission_objectives() {
   switch (level.start_point) {
     case "infil":
       wait 18.5;
-      objective_add(maps\_utility::obj("obj_find_boss"), "current", & "FLOOD_OBJ_FIND_BOSS");
+      objective_add(maps\_utility::obj("obj_find_boss"), "current", &"FLOOD_OBJ_FIND_BOSS");
     case "streets":
     case "streets_to_dam":
       if(level.start_point == "streets_to_dam")
-        objective_add(maps\_utility::obj("obj_find_boss"), "current", & "FLOOD_OBJ_FIND_BOSS");
+        objective_add(maps\_utility::obj("obj_find_boss"), "current", &"FLOOD_OBJ_FIND_BOSS");
 
       common_scripts\utility::flag_wait_either("player_out_of_garage", "launcher_objective_given");
-      objective_add(maps\_utility::obj("obj_disable_launcher"), "current", & "FLOOD_OBJ_DISABLE_LAUNCHER");
+      objective_add(maps\_utility::obj("obj_disable_launcher"), "current", &"FLOOD_OBJ_DISABLE_LAUNCHER");
       level waittill("end_of_streets_to_dam");
       maps\_utility::objective_complete(maps\_utility::obj("obj_disable_launcher"));
     case "streets_to_dam_2":
       if(level.start_point == "streets_to_dam_2") {
-        objective_add(maps\_utility::obj("obj_find_boss"), "current", & "FLOOD_OBJ_FIND_BOSS");
-        objective_add(maps\_utility::obj("obj_disable_launcher"), "done", & "FLOOD_OBJ_DISABLE_LAUNCHER");
+        objective_add(maps\_utility::obj("obj_find_boss"), "current", &"FLOOD_OBJ_FIND_BOSS");
+        objective_add(maps\_utility::obj("obj_disable_launcher"), "done", &"FLOOD_OBJ_DISABLE_LAUNCHER");
       }
     case "dam":
       if(level.start_point == "dam") {
-        objective_add(maps\_utility::obj("obj_find_boss"), "current", & "FLOOD_OBJ_FIND_BOSS");
-        objective_add(maps\_utility::obj("obj_disable_launcher"), "done", & "FLOOD_OBJ_DISABLE_LAUNCHER");
+        objective_add(maps\_utility::obj("obj_find_boss"), "current", &"FLOOD_OBJ_FIND_BOSS");
+        objective_add(maps\_utility::obj("obj_disable_launcher"), "done", &"FLOOD_OBJ_DISABLE_LAUNCHER");
         common_scripts\utility::flag_init("launcher_2_objective_given");
       }
 
       common_scripts\utility::flag_wait_either("missiles_ready", "launcher_2_objective_given");
-      objective_add(maps\_utility::obj("obj_disable_launcher_2"), "current", & "FLOOD_OBJ_DISABLE_NEXT_LAUNCHER");
+      objective_add(maps\_utility::obj("obj_disable_launcher_2"), "current", &"FLOOD_OBJ_DISABLE_NEXT_LAUNCHER");
       common_scripts\utility::flag_wait("start_flood");
       objective_state(maps\_utility::obj("obj_disable_launcher_2"), "failed");
       objective_delete(maps\_utility::obj("obj_find_boss"));
       wait 3.0;
-      objective_add(maps\_utility::obj("obj_higher_ground"), "current", & "FLOOD_OBJ_HIGHER_GROUND");
+      objective_add(maps\_utility::obj("obj_higher_ground"), "current", &"FLOOD_OBJ_HIGHER_GROUND");
     case "flooding_ext":
       if(level.start_point == "flooding_ext")
-        objective_add(maps\_utility::obj("obj_higher_ground"), "current", & "FLOOD_OBJ_HIGHER_GROUND");
+        objective_add(maps\_utility::obj("obj_higher_ground"), "current", &"FLOOD_OBJ_HIGHER_GROUND");
     case "flooding_int":
       if(level.start_point == "flooding_int")
-        objective_add(maps\_utility::obj("obj_higher_ground"), "current", & "FLOOD_OBJ_HIGHER_GROUND");
+        objective_add(maps\_utility::obj("obj_higher_ground"), "current", &"FLOOD_OBJ_HIGHER_GROUND");
 
       common_scripts\utility::flag_wait("player_at_stairs");
       objective_delete(maps\_utility::obj("obj_higher_ground"));
     case "mall":
       common_scripts\utility::flag_wait("stair_post_quake_vo_done");
-      objective_add(maps\_utility::obj("obj_find_boss"), "current", & "FLOOD_OBJ_FIND_BOSS");
+      objective_add(maps\_utility::obj("obj_find_boss"), "current", &"FLOOD_OBJ_FIND_BOSS");
     case "swept":
       if(level.start_point == "swept")
-        objective_add(maps\_utility::obj("obj_find_boss"), "current", & "FLOOD_OBJ_FIND_BOSS");
+        objective_add(maps\_utility::obj("obj_find_boss"), "current", &"FLOOD_OBJ_FIND_BOSS");
     case "roof_stealth":
       if(level.start_point == "roof_stealth")
-        objective_add(maps\_utility::obj("obj_find_boss"), "current", & "FLOOD_OBJ_FIND_BOSS");
+        objective_add(maps\_utility::obj("obj_find_boss"), "current", &"FLOOD_OBJ_FIND_BOSS");
     case "skybridge":
       if(level.start_point == "skybridge")
-        objective_add(maps\_utility::obj("obj_find_boss"), "current", & "FLOOD_OBJ_FIND_BOSS");
+        objective_add(maps\_utility::obj("obj_find_boss"), "current", &"FLOOD_OBJ_FIND_BOSS");
     case "rooftops":
       if(level.start_point == "rooftops")
-        objective_add(maps\_utility::obj("obj_find_boss"), "current", & "FLOOD_OBJ_FIND_BOSS");
+        objective_add(maps\_utility::obj("obj_find_boss"), "current", &"FLOOD_OBJ_FIND_BOSS");
 
       common_scripts\utility::flag_wait("rooftops_vo_check_drop");
       wait 1.0;
-      objective_add(maps\_utility::obj("obj_regroup"), "current", & "FLOOD_OBJ_REGROUP");
+      objective_add(maps\_utility::obj("obj_regroup"), "current", &"FLOOD_OBJ_REGROUP");
     case "rooftop_water":
       if(level.start_point == "rooftop_water") {
-        objective_add(maps\_utility::obj("obj_find_boss"), "current", & "FLOOD_OBJ_FIND_BOSS");
-        objective_add(maps\_utility::obj("obj_regroup"), "current", & "FLOOD_OBJ_REGROUP");
+        objective_add(maps\_utility::obj("obj_find_boss"), "current", &"FLOOD_OBJ_FIND_BOSS");
+        objective_add(maps\_utility::obj("obj_regroup"), "current", &"FLOOD_OBJ_REGROUP");
       }
     case "debrisbridge":
       if(level.start_point == "debrisbridge") {
-        objective_add(maps\_utility::obj("obj_find_boss"), "current", & "FLOOD_OBJ_FIND_BOSS");
-        objective_add(maps\_utility::obj("obj_regroup"), "current", & "FLOOD_OBJ_REGROUP");
+        objective_add(maps\_utility::obj("obj_find_boss"), "current", &"FLOOD_OBJ_FIND_BOSS");
+        objective_add(maps\_utility::obj("obj_regroup"), "current", &"FLOOD_OBJ_REGROUP");
       }
 
       maps\_utility::wait_for_targetname_trigger("debrisbridge_encounter_1_trigger");
@@ -199,17 +199,17 @@ mission_objectives() {
       wait 6.0;
       maps\_utility::objective_complete(maps\_utility::obj("obj_find_boss"));
       wait 1.0;
-      objective_add(maps\_utility::obj("obj_get_to_hotel"), "current", & "FLOOD_OBJ_GET_TO_HOTEL");
+      objective_add(maps\_utility::obj("obj_get_to_hotel"), "current", &"FLOOD_OBJ_GET_TO_HOTEL");
     case "garage":
       if(level.start_point == "garage")
-        objective_add(maps\_utility::obj("obj_get_to_hotel"), "current", & "FLOOD_OBJ_GET_TO_HOTEL");
+        objective_add(maps\_utility::obj("obj_get_to_hotel"), "current", &"FLOOD_OBJ_GET_TO_HOTEL");
 
       maps\_utility::wait_for_targetname_trigger("ending_heli_path");
       wait 4.0;
       maps\_utility::objective_complete(maps\_utility::obj("obj_get_to_hotel"));
     case "ending":
       wait 1.0;
-      objective_add(maps\_utility::obj("obj_capture_boss"), "current", & "FLOOD_OBJ_CAPTURE_BOSS");
+      objective_add(maps\_utility::obj("obj_capture_boss"), "current", &"FLOOD_OBJ_CAPTURE_BOSS");
       common_scripts\utility::flag_wait("vignette_ending_qte_pickup_gun");
       common_scripts\utility::flag_wait("vignette_ending_qte_success");
       maps\_utility::objective_complete(maps\_utility::obj("obj_capture_boss"));
@@ -834,7 +834,7 @@ flood_intro_screen() {
   wait 0.05;
   thread flood_intro_text();
   wait 5.0;
-  thread maps\_utility::stylized_center_text([ & "FLOOD_INTROSCREEN_12_YEARS"], 3.5);
+  thread maps\_utility::stylized_center_text([ &"FLOOD_INTROSCREEN_12_YEARS"], 3.5);
   common_scripts\utility::flag_set("start_intro_sequence");
   level maps\_utility::delaythread(1.5, maps\flood_infil::player_ride_rumble);
 }
@@ -862,7 +862,7 @@ flood_intro_text() {
   level.introscreen.completed_delay = 4;
   level.introscreen.fade_out_time = 1.5;
   level.introscreen.fade_in_time = 0.5;
-  level.introscreen.lines = [ & "FLOOD_INTROSCREEN_LINE_1", & "FLOOD_INTROSCREEN_LINE_2", & "FLOOD_INTROSCREEN_LINE_5", & "FLOOD_INTROSCREEN_LINE_6"];
+  level.introscreen.lines = [ &"FLOOD_INTROSCREEN_LINE_1", &"FLOOD_INTROSCREEN_LINE_2", &"FLOOD_INTROSCREEN_LINE_5", &"FLOOD_INTROSCREEN_LINE_6"];
   thread maps\_introscreen::introscreen(1);
 }
 

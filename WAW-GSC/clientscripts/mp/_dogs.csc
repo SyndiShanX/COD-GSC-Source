@@ -34,7 +34,7 @@ init() {
 }
 
 dog_dvar_updater() {
-  while (1) {
+  while(1) {
     level.dog_debug_sound = dog_get_dvar_int("debug_dog_sound", "0");
     level.dog_debug = dog_get_dvar_int("debug_dogs", "0");
     wait(1);
@@ -79,7 +79,7 @@ animCategoryWatcher(localClientNum) {
   if(!isDefined(self.animCategory)) {
     animCategoryChanged(localClientNum, self GetAnimStateCategory());
   }
-  while (1) {
+  while(1) {
     animCategory = self GetAnimStateCategory();
     if(isDefined(animCategory) && self.animCategory != animCategory && animCategory != "traverse") {
       animCategoryChanged(localClientNum, animCategory);
@@ -90,7 +90,7 @@ animCategoryWatcher(localClientNum) {
 
 enemyWatcher(localClientNum) {
   self endon("entityshutdown");
-  while (1) {
+  while(1) {
     self waittill("enemy");
 
     if(isDefined(self.enemy)) {
@@ -120,7 +120,7 @@ isLocalPlayerEnemy(enemy) {
   }
   players = getlocalplayers();
   if(isDefined(players)) {
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       if(players[i] == enemy)
         return true;
     }
@@ -132,7 +132,7 @@ isLocalPlayerEnemyTeam(team) {
   otherteam = getOtherTeam(team);
   players = getlocalplayers();
   if(isDefined(players)) {
-    for (i = 0; i < players.size; i++) {}
+    for(i = 0; i < players.size; i++) {}
   }
   return false;
 }
@@ -158,7 +158,7 @@ getMovementSoundState() {
     return "normal";
   }
   stateArray = getArrayKeys(level.movementStateSound);
-  for (i = 0; i < stateArray.size; i++) {
+  for(i = 0; i < stateArray.size; i++) {
     if(level.movementStateSound[stateArray[i]].localenemyonly && !localPlayer) {
       continue;
     }
@@ -181,7 +181,7 @@ playMovementSounds(localClientNum) {
   last_state = "normal";
   last_time = 0;
   wait_time = 0;
-  while (1) {
+  while(1) {
     state = getMovementSoundState();
     next_sound = false;
     if(state != last_state && level.movementStateSound[state].waitMax < wait_time) {
@@ -195,7 +195,7 @@ playMovementSounds(localClientNum) {
       soundId = self play_dog_sound(localClientNum, level.movementStateSound[state].sound);
       last_state = state;
       if(soundId >= 0) {
-        while (soundplaying(soundId)) {
+        while(soundplaying(soundId)) {
           wait(0.05);
         }
         last_time = GetRealTime();
@@ -232,7 +232,7 @@ playDogstep(client_num, dog, pos, ground_type, on_fire) {
   } else {
     sound_alias = "dogstep_run_dirt";
   }
-  dog playsound(client_num, sound_alias, pos);
+  dog playSound(client_num, sound_alias, pos);
   if(isDefined(self.enemy) && isLocalPlayerEnemy(self.enemy)) {
     dog playSound(client_num, "dog_gear_rattle_run_enemy", pos);
   } else {
@@ -251,11 +251,11 @@ do_foot_effect(client_num, ground_type, foot_pos, on_fire) {
   if(GetDvarInt("debug_surface_type")) {
     print3d(foot_pos, ground_type, (0.5, 0.5, 0.8), 1, 3, 30);
   }
-  for (i = 0; i < level._optionalStepEffects.size; i++) {
+  for(i = 0; i < level._optionalStepEffects.size; i++) {
     if(level._optionalStepEffects[i] == ground_type) {
       effect = "step_" + ground_type;
       if(isDefined(level._effect[effect])) {
-        playfx(client_num, level._effect[effect], foot_pos, foot_pos + (0, 0, 100));
+        playFX(client_num, level._effect[effect], foot_pos, foot_pos + (0, 0, 100));
         return;
       }
     }
@@ -264,7 +264,7 @@ do_foot_effect(client_num, ground_type, foot_pos, on_fire) {
 
 soundNotify(client_num, entity, note) {
   if(note == "sound_dogstep_run_default") {
-    entity playsound(client_num, "dogstep_run_default");
+    entity playSound(client_num, "dogstep_run_default");
     return true;
   }
   prefix = getsubstr(note, 0, 5);
@@ -303,7 +303,7 @@ dog_print(message) {
 play_dog_sound(localClientNum, sound, position) {
   dog_sound_print("SOUND " + sound);
   if(isDefined(position)) {
-    return self playsound(localClientNum, sound, position);
+    return self playSound(localClientNum, sound, position);
   }
-  return self playsound(localClientNum, sound);
+  return self playSound(localClientNum, sound);
 }

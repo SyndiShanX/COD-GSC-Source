@@ -23,10 +23,10 @@ bot_war_think() {
   level endon("game_ended");
   self endon("owner_disconnect");
 
-  if(isdefined(level.bot_ignore_personality)) {
+  if(isDefined(level.bot_ignore_personality)) {
     return;
   }
-  for (;;) {
+  for(;;) {
     self[[self.personality_update_function]]();
     wait 0.05;
   }

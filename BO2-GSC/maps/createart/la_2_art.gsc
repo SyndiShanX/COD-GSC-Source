@@ -35,7 +35,7 @@ art_jet_mode_settings(n_transition_time) {
     time = n_transition_time;
 
   setsaveddvar("sm_sunSampleSizeNear", 0.25);
-  m_god_rays = getentarray("godrays", "targetname");
+  m_god_rays = getEntArray("godrays", "targetname");
 
   foreach(m_godray in m_god_rays) {
     m_godray.is_hidden = 1;
@@ -48,7 +48,7 @@ art_vtol_mode_settings(n_transition_time) {
     time = n_transition_time;
 
   setsaveddvar("sm_sunSampleSizeNear", 0.5);
-  m_god_rays = getentarray("godrays", "targetname");
+  m_god_rays = getEntArray("godrays", "targetname");
 
   foreach(m_godray in m_god_rays) {
     if(isDefined(m_godray.is_hidden) && m_godray.is_hidden) {

@@ -74,7 +74,7 @@ init() {
   init_heli_anims();
   if(maps\mp\gametypes\_tweakables::getTweakableValue("killstreak", "allowhelicopter_player_firstperson")) {
     maps\mp\gametypes\_hardpoints::registerKillstreak("helicopter_player_firstperson_mp", "helicopter_player_firstperson_mp", "killstreak_helicopter_player_firstperson", "helicopter_used", ::useKillstreakHelicopterPlayer, true);
-    maps\mp\gametypes\_hardpoints::registerKillstreakStrings("helicopter_player_firstperson_mp", & "KILLSTREAK_EARNED_HELICOPTER_PLAYER", & "KILLSTREAK_HELICOPTER_PLAYER_NOT_AVAILABLE", & "KILLSTREAK_HELICOPTER_PLAYER_INBOUND");
+    maps\mp\gametypes\_hardpoints::registerKillstreakStrings("helicopter_player_firstperson_mp", &"KILLSTREAK_EARNED_HELICOPTER_PLAYER", &"KILLSTREAK_HELICOPTER_PLAYER_NOT_AVAILABLE", &"KILLSTREAK_HELICOPTER_PLAYER_INBOUND");
     maps\mp\gametypes\_hardpoints::registerKillstreakDialog("helicopter_player_firstperson_mp", "mpl_killstreak_heli", "kls_attackheli_used", "", "kls_attackheli_enemy", "", "kls_attackheli_ready");
     maps\mp\gametypes\_hardpoints::registerKillstreakDevDvar("helicopter_player_firstperson_mp", "scr_givehelicopterplayerfirstperson");
     maps\mp\gametypes\_hardpoints::registerKillstreakAltWeapon("helicopter_player_firstperson_mp", "hind_rockets_firstperson_mp");
@@ -82,7 +82,7 @@ init() {
   }
   if(maps\mp\gametypes\_tweakables::getTweakableValue("killstreak", "allowhelicopter_gunner")) {
     maps\mp\gametypes\_hardpoints::registerKillstreak("helicopter_gunner_mp", "helicopter_gunner_mp", "killstreak_helicopter_gunner", "helicopter_used", ::useKillstreakHelicopterGunner, true);
-    maps\mp\gametypes\_hardpoints::registerKillstreakStrings("helicopter_gunner_mp", & "KILLSTREAK_EARNED_HELICOPTER_GUNNER", & "KILLSTREAK_HELICOPTER_GUNNER_NOT_AVAILABLE", & "KILLSTREAK_HELICOPTER_GUNNER_INBOUND");
+    maps\mp\gametypes\_hardpoints::registerKillstreakStrings("helicopter_gunner_mp", &"KILLSTREAK_EARNED_HELICOPTER_GUNNER", &"KILLSTREAK_HELICOPTER_GUNNER_NOT_AVAILABLE", &"KILLSTREAK_HELICOPTER_GUNNER_INBOUND");
     maps\mp\gametypes\_hardpoints::registerKillstreakDialog("helicopter_gunner_mp", "mpl_killstreak_heli", "kls_huey_used", "", "kls_huey_enemy", "", "kls_huey_ready");
     maps\mp\gametypes\_hardpoints::registerKillstreakDevDvar("helicopter_gunner_mp", "scr_givehelicoptergunner");
     maps\mp\gametypes\_hardpoints::registerKillstreakAltWeapon("helicopter_gunner_mp", "hind_rockets_mp");
@@ -161,12 +161,12 @@ spawnPlayerHelicopter(owner, type, origin, angles, hardpointtype) {
   heli setowner(owner);
   heli setteam(owner.team);
   heli.destroyFunc = ::destroyPlayerHelicopter;
-  snd_ent = Spawn("script_origin", heli GetTagOrigin("snd_cockpit"));
+  snd_ent = spawn("script_origin", heli GetTagOrigin("snd_cockpit"));
   snd_ent LinkTo(heli, "snd_cockpit", (0, 0, 0), (0, 0, 0));
   heli.snd_ent = snd_ent;
   if(isDefined(level.chopper_interior_models) && isDefined(level.chopper_interior_models[type]) && isDefined(level.chopper_interior_models[type][owner.team])) {
     heli.interior_model = spawn("script_model", heli.origin);
-    heli.interior_model setmodel(level.chopper_interior_models[type][owner.team]);
+    heli.interior_model setModel(level.chopper_interior_models[type][owner.team]);
     heli.interior_model linkto(heli, "tag_origin", (0, 0, 0), (0, 0, 0));
   }
   heli.killcament = owner;
@@ -198,7 +198,7 @@ debugtag(tagName) {
 }
 debugTags() {
   self endon("death");
-  while (1) {
+  while(1) {
     wait(0.05);
     tagName = GetDvar(#"tagname");
     if(!isDefined(tagName) || tagname == "")
@@ -335,7 +335,7 @@ waitForTimeOut(hardpointtype) {
   self endon("heli_timeup");
   self.heli endon("death");
   self.killstreak_waitamount = self.heli.maxlifetime;
-  while (1) {
+  while(1) {
     timeleft = (self.heli.maxlifetime - (gettime() - self.heli.starttime));
     if(timeleft <= 0) {
       player_heli_leave(hardpointtype);
@@ -422,7 +422,7 @@ waitAndActivatePlayerControl() {
   self.heli endon("death");
   self endon("heli_timeup");
   wait(1.0);
-  for (;;) {
+  for(;;) {
     if(!isDefined(self.heli))
       return;
     distance_in = self.heli IsInsideHeliHeightLock();
@@ -447,7 +447,7 @@ watchLeavingBattlefield(hardpointtype) {
   self endon("heli_timeup");
   self.heli endon("death");
   self.heli waittill("player_controls_activated");
-  for (;;) {
+  for(;;) {
     distance_in = self.heli IsInsideHeliHeightLock();
     if(distance_in > 0 && distance_in < level.heli_warning_distance) {
       if(!isDefined(self.heli.beingWarnedAboutLeaving) || self.heli.beingWarnedAboutLeaving > 1) {
@@ -483,10 +483,10 @@ warnLeavingBattlefield(hardpointtype) {
   if(isDefined(self.leaving_play_area.alpha))
     self.leaving_play_area.alpha = 1.0;
   self thread crashLeavingBattlefield(hardpointtype);
-  for (;;) {
+  for(;;) {
     wait 1.0;
     earthquake(0.7, 1.5, self.heli.origin, 1000, self);
-    self.heli.snd_ent PlaySound("evt_helicopter_rumble");
+    self.heli.snd_ent playSound("evt_helicopter_rumble");
   }
 }
 crashLeavingBattlefield(hardpointtype) {
@@ -504,7 +504,7 @@ heli_player_damage_monitor(player) {
   self endon("death");
   self endon("crashing");
   self endon("leaving");
-  for (;;) {
+  for(;;) {
     self waittill("damage", damage, attacker, direction, point, type);
     if(!isDefined(attacker) || !isplayer(attacker))
       continue;
@@ -547,7 +547,7 @@ hind_setup_rocket_attack(hardpointtype, player) {
   self endon("stop_turret_shoot");
   index = 0;
   turrets = self.turrettagarray;
-  while (isDefined(self) && (self.health > 0)) {
+  while(isDefined(self) && (self.health > 0)) {
     self waittill("turret_fire");
     if(self.current_weapon == "rockets") {
       if(self.numberRockets > 0) {
@@ -588,8 +588,8 @@ hind_watch_rocket_fire(player) {
   rocketTags[0] = "tag_flash_gunner1";
   rocketTags[1] = "tag_rocket2";
   rocketTag = 0;
-  while (isDefined(self) && (self.health > 0)) {
-    while (!player ThrowButtonPressed())
+  while(isDefined(self) && (self.health > 0)) {
+    while(!player ThrowButtonPressed())
       wait 0.05;
     if(self.numberRockets > 0) {
       self fire_rocket(rocketTags[rocketTag]);
@@ -601,7 +601,7 @@ hind_watch_rocket_fire(player) {
         self thread hind_out_of_rockets(player);
       }
     }
-    while (player ThrowButtonPressed())
+    while(player ThrowButtonPressed())
       wait 0.05;
   }
 }
@@ -615,7 +615,7 @@ hind_out_of_rockets(player) {
   if(isDefined(player.alt_ammo_hud))
     player.alt_ammo_hud.alpha = 0.0;
   wait(max(0, level.heli_missile_reload_time - 0.5));
-  self.snd_ent PlaySound(level.chopper_sounds["missile_reload"]);
+  self.snd_ent playSound(level.chopper_sounds["missile_reload"]);
   wait(0.5);
   if(isDefined(player.alt_title))
     player.alt_title.alpha = 1.0;
@@ -628,11 +628,11 @@ hind_out_of_rockets(player) {
 fire_rocket(tagName) {
   start_origin = self GetTagOrigin(tagName);
   trace_angles = self GetTagAngles("tag_flash");
-  forward = AnglesToForward(trace_angles);
+  forward = anglesToForward(trace_angles);
   trace_origin = self GetTagOrigin("tag_flash");
   trace_direction = self GetTagAngles("tag_barrel");
-  trace_direction = AnglesToForward(trace_direction) * 5000;
-  trace = BulletTrace(trace_origin, trace_origin + trace_direction, false, self);
+  trace_direction = anglesToForward(trace_direction) * 5000;
+  trace = bulletTrace(trace_origin, trace_origin + trace_direction, false, self);
   end_origin = trace["position"];
   MagicBullet("hind_rockets_firstperson_mp", start_origin, end_origin, self);
   Earthquake(0.35, 0.5, start_origin, 1000, self);
@@ -666,7 +666,7 @@ heli_lock_monitor(player) {
   self endon("death");
   self endon("crashing");
   self endon("leaving");
-  for (;;) {
+  for(;;) {
     if(target_isTarget(self)) {
       if(self maps\mp\_helicopter::isMissileIncoming()) {
         self SetClientFlag(level.const_flag_warn_fired);
@@ -772,16 +772,16 @@ hud_minigun_think() {
   self endon("hind weapons disabled");
   self endon("disconnect");
   player = get_players()[0];
-  while (1) {
-    while (!player AttackButtonPressed()) {
+  while(1) {
+    while(!player AttackButtonPressed()) {
       wait(0.05);
     }
     swap_counter = 1;
     self.minigun_hud["gun"] fadeOverTime(0.05);
     self.minigun_hud["gun"].alpha = 0.65;
-    while (player AttackButtonPressed()) {
+    while(player AttackButtonPressed()) {
       wait(0.05);
-      player playloopsound("wpn_hind_minigun_fire_plr_loop");
+      player playLoopSound("wpn_hind_minigun_fire_plr_loop");
       self.minigun_hud["gun"] SetShader("hud_hind_cannon0" + swap_counter, 64, 64);
       if(swap_counter == 5) {
         swap_counter = 1;
@@ -835,7 +835,7 @@ hud_rocket_create() {
   self.rocket_hud["loading_bar"].shader = "hud_hind_rocket_loading_fill";
   self.rocket_hud["loading_bar"] SetShader("hud_hind_rocket_loading_fill", 20, 5);
   self.rocket_hud["loading_bar"].hidewheninmenu = true;
-  self.rocket_hud["loading_bar_bg"] = SpawnStruct();
+  self.rocket_hud["loading_bar_bg"] = spawnStruct();
   self.rocket_hud["loading_bar_bg"].elemType = "bar";
   self.rocket_hud["loading_bar_bg"].bar = self.rocket_hud["loading_bar"];
   self.rocket_hud["loading_bar_bg"].width = 20;
@@ -896,8 +896,8 @@ hud_rocket_think() {
   self endon("hind weapons disabled");
   self endon("disconnect");
   last_rocket_count = self.heli.numberRockets;
-  while (1) {
-    for (i = 1; i < 3; i++) {
+  while(1) {
+    for(i = 1; i < 3; i++) {
       if(i - 1 < self.heli.numberRockets) {
         self.rocket_hud["ammo" + i] SetShader("hud_hind_rocket", 48, 48);
         self.rocket_hud["ammo" + i].alpha = 0.55;

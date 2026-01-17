@@ -37,19 +37,16 @@ shouldstartambushround() {
   if(getdvarint(#"_id_FA81816F") == 2)
     return false;
 
-  if(level.numbusstopssincelastambushround < 2) {
-  }
+  if(level.numbusstopssincelastambushround < 2) {}
 
   randint = randomintrange(0, 100);
   percentchance = level.numbusstopssincelastambushround * level.ambushpercentageperstop;
 
-  if(randint < percentchance) {
-  }
+  if(randint < percentchance) {}
 
   percentchance = level.numroundssincelastambushround * level.ambushpercentageperround;
 
-  if(randint < percentchance) {
-  }
+  if(randint < percentchance) {}
 
   if(maps\mp\zm_transit_bus::busgasempty())
     return true;
@@ -120,8 +117,7 @@ ambushroundthink() {
   ambushendround();
 }
 
-ambushwaitfunction() {
-}
+ambushwaitfunction() {}
 
 ambushpointfailsafe() {
   level.the_bus endon("ambush_point");
@@ -215,7 +211,7 @@ ambushlightningeffect(tag) {
 setupdogspawnlocs() {
   level.enemy_dog_locations = [];
   currentzone = undefined;
-  ambush_zones = getentarray("ambush_volume", "script_noteworthy");
+  ambush_zones = getEntArray("ambush_volume", "script_noteworthy");
 
   for(i = 0; i < ambush_zones.size; i++) {
     touching = 0;

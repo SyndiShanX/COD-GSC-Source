@@ -11,11 +11,10 @@
 #include scripts\wz_common\character_unlock;
 #include scripts\wz_common\character_unlock_fixup;
 #include scripts\wz_common\character_unlock_nikolai_fixup;
-
 #namespace character_unlock_nikolai;
 
 autoexec __init__system__() {
-  system::register(#"character_unlock_nikolai", &__init__, undefined, #"character_unlock_nikolai_fixup");
+  system::register(#"character_unlock_nikolai", &__init__, undefined, # "character_unlock_nikolai_fixup");
 }
 
 __init__() {
@@ -60,9 +59,9 @@ function_19a80b40(var_a0ffe134) {
 
   check_origin = gate.origin + rotatepoint((100, 25, 0), gate.angles);
 
-    if(distancesquared(var_a0ffe134.origin, check_origin) > 150 * 150) {
-      return;
-    }
+  if(distancesquared(var_a0ffe134.origin, check_origin) > 150 * 150) {
+    return;
+  }
 
   var_a0ffe134 thread gadget_cymbal_monkey::function_b9934c1d();
 }
@@ -94,9 +93,9 @@ function_8bf71bd6() {
 
   check_origin = gate.origin + rotatepoint((100, 25, 0), gate.angles);
 
-    if(distancesquared(self.origin, check_origin) > 150 * 150) {
-      return;
-    }
+  if(distancesquared(self.origin, check_origin) > 150 * 150) {
+    return;
+  }
 
   traversal_start_node = getnode("gy_traversal_start", "targetname");
 
@@ -111,12 +110,12 @@ function_8bf71bd6() {
 function_1c4b5097(item) {
   itementry = item.itementry;
 
-  if(isDefined(itementry) && itementry.name === #"cu16_item") {
+  if(isDefined(itementry) && itementry.name === # "cu16_item") {
     var_c503939b = globallogic::function_e9e52d05();
 
     if(var_c503939b <= function_c816ea5b()) {
       if(self character_unlock::function_f0406288(#"nikolai_unlock")) {
-        self character_unlock::function_c8beca5e(#"nikolai_unlock", #"hash_6a5c9e02cc60e87e", 1);
+        self character_unlock::function_c8beca5e(#"nikolai_unlock", # "hash_6a5c9e02cc60e87e", 1);
       }
     }
   }
@@ -136,7 +135,7 @@ function_4ac25840(dead_team) {
 
         foreach(player in players) {
           if(player character_unlock::function_f0406288(#"nikolai_unlock")) {
-            player character_unlock::function_c8beca5e(#"nikolai_unlock", #"hash_6a5c9e02cc60e87e", 1);
+            player character_unlock::function_c8beca5e(#"nikolai_unlock", # "hash_6a5c9e02cc60e87e", 1);
           }
         }
       }
@@ -146,7 +145,7 @@ function_4ac25840(dead_team) {
   }
 }
 
-private function_587e512e() {
+function_587e512e() {
   self playsoundtoplayer(#"hash_1c4290ca92541819", self);
   self playSound(#"hash_8489803fbb0e650");
 
@@ -157,7 +156,7 @@ private function_587e512e() {
   }
 }
 
-private function_c816ea5b() {
+function_c816ea5b() {
   maxteamplayers = isDefined(getgametypesetting(#"maxteamplayers")) ? getgametypesetting(#"maxteamplayers") : 1;
 
   switch (maxteamplayers) {
@@ -182,4 +181,3 @@ function_3fbc7157(origin, radius) {
     waitframe(1);
   }
 }
-

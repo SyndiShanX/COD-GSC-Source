@@ -280,9 +280,7 @@ start_final_battle() {
   foreach(var_1 in level.final_battle_lane_order) {
     maps\mp\alien\_gamescore::reset_encounter_performance();
     level.current_encounter_info.force_end_func = ::debug_beat_ancestor_encounter;
-    [
-      [var_1]
-    ]();
+    [[var_1]]();
     level.final_battle_stage = level.final_battle_stage + 1;
     wait 8;
   }
@@ -1107,10 +1105,10 @@ watch_for_use_cortex_trigger(var_0, var_1) {
   self notify("watch_for_use_cortex");
   self endon("watch_for_use_cortex");
   self.player_using_cortex = 0;
-  var_2 = & "MP_ALIEN_LAST_CORTEX_START_HINT";
+  var_2 = &"MP_ALIEN_LAST_CORTEX_START_HINT";
 
   if(var_1 == "cortex_detonate_hint")
-    var_2 = & "MP_ALIEN_LAST_CORTEX_DETONATE_HINT";
+    var_2 = &"MP_ALIEN_LAST_CORTEX_DETONATE_HINT";
 
   var_3 = 16900;
 

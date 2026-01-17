@@ -9,7 +9,6 @@
 #include scripts\core_common\values_shared;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_zonemgr;
-
 #namespace zm_cleanup;
 
 autoexec __init__system__() {
@@ -31,7 +30,7 @@ force_check_now() {
   level notify(#"pump_distance_check");
 }
 
-private cleanup_main() {
+cleanup_main() {
   level endon(#"end_game");
   n_next_eval = 0;
 
@@ -153,7 +152,7 @@ do_cleanup_check(n_override_cleanup_dist) {
   }
 }
 
-private function_96f7787d() {
+function_96f7787d() {
   self.var_61c270 = 1;
   self delete_zombie_noone_looking();
 
@@ -162,7 +161,7 @@ private function_96f7787d() {
   }
 }
 
-private delete_zombie_noone_looking() {
+delete_zombie_noone_looking() {
   if(isDefined(self.in_the_ground) && self.in_the_ground) {
     return;
   }
@@ -194,7 +193,7 @@ function_cdf5a512(str_archetype, var_7e1eca2) {
   level.var_55a99841[str_archetype] = var_7e1eca2;
 }
 
-private override_cleanup() {
+override_cleanup() {
   if(!isDefined(level.var_55a99841)) {
     return false;
   }
@@ -221,7 +220,7 @@ function_39553a7c(str_archetype, func) {
   level.var_f51ae00f[str_archetype][level.var_f51ae00f[str_archetype].size] = func;
 }
 
-private function_8327a85d(var_3a145c54) {
+function_8327a85d(var_3a145c54) {
   if(isDefined(level.var_f51ae00f) && isDefined(level.var_f51ae00f[self.archetype])) {
     foreach(func in level.var_f51ae00f[self.archetype]) {
       self[[func]](var_3a145c54);
@@ -243,18 +242,17 @@ cleanup_zombie() {
   waitframe(1);
 
   if(isDefined(self)) {
-
     debugstar(self.origin, 1000, (1, 1, 1));
 
-      self delete();
+    self delete();
   }
 }
 
-private player_can_see_me(player) {
+player_can_see_me(player) {
   return !player function_80d68e4d(self, 0.766, 1);
 }
 
-private player_ahead_of_me(player) {
+player_ahead_of_me(player) {
   v_player_angles = player getplayerangles();
   v_player_forward = anglesToForward(v_player_angles);
   v_dir = player getorigin() - self.origin;
@@ -308,12 +306,12 @@ get_adjacencies_to_zone(str_zone) {
   return a_adjacencies;
 }
 
-private get_wait_locations_in_zones(a_zones) {
+get_wait_locations_in_zones(a_zones) {
   a_wait_locations = [];
 
   foreach(zone in a_zones) {
-    if(isDefined(level.zones[zone].a_loc_types) && isDefined(level.zones[zone].a_loc_types[#"wait_location"])) {
-      a_wait_locations = arraycombine(a_wait_locations, level.zones[zone].a_loc_types[#"wait_location"], 0, 0);
+    if(isDefined(level.zones[zone].a_loc_types) && isDefined(level.zones[zone].a_loc_types[# "wait_location"])) {
+      a_wait_locations = arraycombine(a_wait_locations, level.zones[zone].a_loc_types[# "wait_location"], 0, 0);
       continue;
     }
 
@@ -326,7 +324,7 @@ private get_wait_locations_in_zones(a_zones) {
   return a_wait_locations;
 }
 
-private get_farthest_wait_location(a_wait_locations) {
+get_farthest_wait_location(a_wait_locations) {
   if(!isDefined(a_wait_locations) || a_wait_locations.size == 0) {
     return undefined;
   }
@@ -335,10 +333,10 @@ private get_farthest_wait_location(a_wait_locations) {
   return var_16db4a88[var_16db4a88.size - 1];
 }
 
-private get_wait_locations_in_zone(zone) {
-  if(isDefined(level.zones[zone].a_loc_types[#"wait_location"])) {
+get_wait_locations_in_zone(zone) {
+  if(isDefined(level.zones[zone].a_loc_types[# "wait_location"])) {
     a_wait_locations = [];
-    a_wait_locations = arraycombine(a_wait_locations, level.zones[zone].a_loc_types[#"wait_location"], 0, 0);
+    a_wait_locations = arraycombine(a_wait_locations, level.zones[zone].a_loc_types[# "wait_location"], 0, 0);
     return a_wait_locations;
   }
 
@@ -423,7 +421,7 @@ function_23621259(var_3a145c54 = 0) {
 
     if(self.health < self.maxhealth || isDefined(self.var_bd2c55ef) && self.var_bd2c55ef) {
       var_1a8c05ae = {
-        #n_health: self.health, 
+        #n_health: self.health,
         #var_e0d660f6: self.var_e0d660f6
       };
 

@@ -253,7 +253,7 @@ mortar_loop(mortar_name, barrage_amount, no_terrain) {
 player_view_chance(view_chance, explosion_point) {
   chance = RandomFloat(1);
   if(chance <= view_chance) {
-    if(within_fov(self GetEye(), self GetPlayerAngles(), explosion_point, cos(30))) {
+    if(within_fov(self getEye(), self GetPlayerAngles(), explosion_point, cos(30))) {
       return true;
     }
   }
@@ -317,9 +317,9 @@ explosion_activate(mortar_name, blast_radius, min_damage, max_damage, quake_powe
     for(i = 0; i < dust_points.size; i++) {
       if(distanceSquared(dust_points[i].origin, self.origin) < max_range * max_range) {
         if(isDefined(dust_points[i].script_fxid)) {
-          PlayFx(level._effect[dust_points[i].script_fxid], dust_points[i].origin);
+          playFX(level._effect[dust_points[i].script_fxid], dust_points[i].origin);
         } else {
-          PlayFx(level._effect[level._explosion_dust_name[mortar_name]], dust_points[i].origin);
+          playFX(level._effect[level._explosion_dust_name[mortar_name]], dust_points[i].origin);
         }
       }
     }
@@ -352,7 +352,7 @@ explosion_boom(mortar_name, power, time, radius, is_struct) {
     temp_ent thread delete_temp_ent();
   }
   explosion_origin = self.origin;
-  PlayFx(level._effect[mortar_name], explosion_origin);
+  playFX(level._effect[mortar_name], explosion_origin);
   Earthquake(power, time, explosion_origin, radius);
   thread mortar_rumble_on_all_players("damage_light", "damage_heavy", explosion_origin, radius * 0.75, radius * 1.25);
   physRadius = radius;
@@ -381,27 +381,27 @@ explosion_boom(mortar_name, power, time, radius, is_struct) {
 
 explosion_sound(mortar_name) {
   if(level._effectType[mortar_name] == "mortar") {
-    self PlaySound("exp_mortar_dirt");
+    self playSound("exp_mortar_dirt");
   }
   if(level._effectType[mortar_name] == "mortar_water") {
-    self PlaySound("exp_mortar_water");
+    self playSound("exp_mortar_water");
   } else if(level._effectType[mortar_name] == "artillery") {
-    self PlaySound("exp_mortar_dirt");
+    self playSound("exp_mortar_dirt");
   } else if(level._effectType[mortar_name] == "bomb") {
-    self PlaySound("exp_mortar_dirt");
+    self playSound("exp_mortar_dirt");
   }
 }
 
 explosion_incoming(mortar_name) {
   if(level._effectType[mortar_name] == "mortar") {
-    self PlaySound("prj_mortar_incoming", "sounddone");
+    self playSound("prj_mortar_incoming", "sounddone");
   }
   if(level._effectType[mortar_name] == "mortar_water") {
-    self PlaySound("prj_mortar_incoming", "sounddone");
+    self playSound("prj_mortar_incoming", "sounddone");
   } else if(level._effectType[mortar_name] == "artillery") {
-    self PlaySound("prj_mortar_incoming", "sounddone");
+    self playSound("prj_mortar_incoming", "sounddone");
   } else if(level._effectType[mortar_name] == "bomb") {
-    self PlaySound("prj_mortar_incoming", "sounddone");
+    self playSound("prj_mortar_incoming", "sounddone");
   }
   self waittill("sounddone");
 }
@@ -485,9 +485,9 @@ mortar_boom(origin, power, time, radius, effect, bIsstruct, bShellShock) {
   }
   thread mortar_sound(bIsstruct);
   if(isDefined(effect)) {
-    PlayFx(effect, origin);
+    playFX(effect, origin);
   } else {
-    PlayFx(level.mortar, origin);
+    playFX(level.mortar, origin);
   }
   Earthquake(power, time, origin, radius);
   thread mortar_rumble_on_all_players("damage_light", "damage_heavy", origin, radius * 0.75, radius * 1.25);
@@ -523,10 +523,10 @@ mortar_boom(origin, power, time, radius, effect, bIsstruct, bShellShock) {
 mortar_sound(bIsstruct) {
   if(isDefined(bIsstruct) && bIsstruct == true) {
     temp_ent = spawn("script_origin", self.origin);
-    temp_ent PlaySound("exp_mortar_dirt");
+    temp_ent playSound("exp_mortar_dirt");
     temp_ent thread delete_temp_ent();
   } else {
-    self PlaySound("exp_mortar_dirt");
+    self playSound("exp_mortar_dirt");
   }
 }
 
@@ -542,12 +542,12 @@ incoming_sound(soundnum, bIsstruct) {
   }
   if(isDefined(bIsstruct) && bIsstruct == true) {
     temp_ent = spawn("script_origin", self.origin);
-    temp_ent PlaySound("prj_mortar_incoming", "sounddone");
+    temp_ent playSound("prj_mortar_incoming", "sounddone");
     temp_ent waittill("sounddone");
     level notify("mortar_inc_done");
     temp_ent thread delete_temp_ent();
   } else {
-    self PlaySound("prj_mortar_incoming", "sounddone");
+    self playSound("prj_mortar_incoming", "sounddone");
     self waittill("sounddone");
     level notify("mortar_inc_done");
   }

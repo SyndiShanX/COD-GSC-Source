@@ -67,7 +67,7 @@ open_all_doors() {
 }
 
 remove_barbed_wire_walls(var_0) {
-  var_1 = getentarray(var_0, "targetname");
+  var_1 = getEntArray(var_0, "targetname");
 
   foreach(var_3 in var_1)
   var_3 delete();

@@ -10,7 +10,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_ai_werewolf;
 
 autoexec __init__system__() {
@@ -29,7 +28,7 @@ __init__() {
 function_d45ef8ea(localclientnum) {
   self.breath_fx = util::playFXOnTag(localclientnum, "zm_ai/fx8_werewolf_breath", self, "j_head");
   self.var_f87f8fa0 = "tag_eye";
-  self zm_utility::function_3a020b0f(localclientnum, "rob_zm_eyes_orange", #"hash_524decea28717b7c");
+  self zm_utility::function_3a020b0f(localclientnum, "rob_zm_eyes_orange", # "hash_524decea28717b7c");
   self callback::on_shutdown(&on_entity_shutdown);
   self playrenderoverridebundle("rob_zm_man_werewolf_nonboss_weakpoint");
 }
@@ -69,13 +68,13 @@ function_3f3f0d8(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
   }
 }
 
-private function_39053880(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+function_39053880(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
     util::playFXOnTag(localclientnum, "maps/zm_mansion/fx8_silver_hit_werewolf", self, "j_spine4");
   }
 }
 
-private function_f4b140ab(localclientnum, pos, surface, notetrack, bone) {
+function_f4b140ab(localclientnum, pos, surface, notetrack, bone) {
   e_player = function_5c10bd79(localclientnum);
   n_dist = distancesquared(pos, e_player.origin);
   var_107019dc = 1000 * 1000;
@@ -101,7 +100,7 @@ private function_f4b140ab(localclientnum, pos, surface, notetrack, bone) {
   function_36e4ebd4(localclientnum, "damage_light");
 }
 
-private function_e980911c(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+function_e980911c(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   e_player = function_5c10bd79(localclientnum);
   n_dist = distancesquared(self.origin, e_player.origin);
   var_107019dc = 500 * 500;

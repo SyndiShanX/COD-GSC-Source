@@ -18,14 +18,14 @@
 #namespace _gadget_overdrive;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_overdrive", & __init__, undefined, undefined);
+  system::register("gadget_overdrive", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_localclient_connect( & on_player_connect);
-  callback::on_localplayer_spawned( & on_localplayer_spawned);
-  callback::on_localclient_shutdown( & on_localplayer_shutdown);
-  clientfield::register("toplayer", "overdrive_state", 1, 1, "int", & player_overdrive_handler, 0, 1);
+  callback::on_localclient_connect(&on_player_connect);
+  callback::on_localplayer_spawned(&on_localplayer_spawned);
+  callback::on_localclient_shutdown(&on_localplayer_shutdown);
+  clientfield::register("toplayer", "overdrive_state", 1, 1, "int", &player_overdrive_handler, 0, 1);
   visionset_mgr::register_visionset_info("overdrive", 1, 15, undefined, "overdrive_initialize");
 }
 
@@ -45,7 +45,7 @@ function on_localplayer_spawned(localclientnum) {
 function on_player_connect(local_client_num) {}
 
 function player_overdrive_handler(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(!self islocalplayer() || isspectating(localclientnum, 0) || (isdefined(level.localplayers[localclientnum]) && self getentitynumber() != level.localplayers[localclientnum] getentitynumber())) {
+  if(!self islocalplayer() || isspectating(localclientnum, 0) || (isDefined(level.localplayers[localclientnum]) && self getentitynumber() != level.localplayers[localclientnum] getentitynumber())) {
     return;
   }
   if(newval != oldval && newval) {
@@ -74,7 +74,7 @@ function activation_flash(localclientnum) {
 }
 
 function enable_boost_camera_fx(localclientnum) {
-  if(isdefined(self.firstperson_fx_overdrive)) {
+  if(isDefined(self.firstperson_fx_overdrive)) {
     stopfx(localclientnum, self.firstperson_fx_overdrive);
     self.firstperson_fx_overdrive = undefined;
   }
@@ -87,7 +87,7 @@ function watch_stop_player_fx(localclientnum, fx) {
   self endon("watch_stop_player_fx");
   self endon("entityshutdown");
   self util::waittill_any("stop_player_fx", "death", "disable_cybercom");
-  if(isdefined(fx)) {
+  if(isDefined(fx)) {
     stopfx(localclientnum, fx);
     self.firstperson_fx_overdrive = undefined;
   }
@@ -95,7 +95,7 @@ function watch_stop_player_fx(localclientnum, fx) {
 
 function stop_boost_camera_fx(localclientnum) {
   self notify("stop_player_fx");
-  if(isdefined(self.whiteflashfade) && self.whiteflashfade) {
+  if(isDefined(self.whiteflashfade) && self.whiteflashfade) {
     lui::screen_fade(getdvarfloat("scr_overdrive_flash_fade_out_time", 0.45), 0, getdvarfloat("scr_overdrive_flash_alpha", 0.7), "white");
   }
 }
@@ -109,7 +109,7 @@ function overdrive_boost_fx_interrupt_handler(localclientnum) {
 }
 
 function overdrive_shutdown(localclientnum) {
-  if(isdefined(localclientnum)) {
+  if(isDefined(localclientnum)) {
     self stop_boost_camera_fx(localclientnum);
     self clearalternateaimparams();
     filter::disable_filter_overdrive(self, 3);
@@ -126,16 +126,16 @@ function boost_fx_on_velocity(localclientnum) {
   self enable_boost_camera_fx(localclientnum);
   self thread overdrive_boost_fx_interrupt_handler(localclientnum);
   wait(getdvarfloat("scr_overdrive_boost_fx_time", 0.75));
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     v_player_velocity = self getvelocity();
-    v_player_forward = anglestoforward(self.angles);
+    v_player_forward = anglesToForward(self.angles);
     n_dot = vectordot(vectornormalize(v_player_velocity), v_player_forward);
     n_speed = length(v_player_velocity);
     if(n_speed >= getdvarint("scr_overdrive_boost_speed_tol", 280) && n_dot > 0.8) {
-      if(!isdefined(self.firstperson_fx_overdrive)) {
+      if(!isDefined(self.firstperson_fx_overdrive)) {
         self enable_boost_camera_fx(localclientnum);
       }
-    } else if(isdefined(self.firstperson_fx_overdrive)) {
+    } else if(isDefined(self.firstperson_fx_overdrive)) {
       self stop_boost_camera_fx(localclientnum);
     }
     wait(0.016);

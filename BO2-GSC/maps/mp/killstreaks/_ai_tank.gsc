@@ -43,14 +43,14 @@ init() {
   registerkillstreakaltweapon("inventory_ai_tank_drop_mp", "ai_tank_drone_gun_mp");
   registerkillstreakaltweapon("inventory_ai_tank_drop_mp", "ai_tank_drone_rocket_mp");
   registerkillstreakremoteoverrideweapon("inventory_ai_tank_drop_mp", "killstreak_ai_tank_mp");
-  registerkillstreakstrings("inventory_ai_tank_drop_mp", & "KILLSTREAK_EARNED_AI_TANK_DROP", & "KILLSTREAK_AI_TANK_NOT_AVAILABLE", & "KILLSTREAK_AI_TANK_INBOUND");
+  registerkillstreakstrings("inventory_ai_tank_drop_mp", &"KILLSTREAK_EARNED_AI_TANK_DROP", &"KILLSTREAK_AI_TANK_NOT_AVAILABLE", &"KILLSTREAK_AI_TANK_INBOUND");
   registerkillstreakdialog("inventory_ai_tank_drop_mp", "mpl_killstreak_ai_tank", "kls_aitank_used", "", "kls_aitank_enemy", "", "kls_aitank_ready");
   registerkillstreakdevdvar("inventory_ai_tank_drop_mp", "scr_giveaitankdrop");
   registerkillstreak("ai_tank_drop_mp", "ai_tank_drop_mp", "killstreak_ai_tank_drop", "ai_tank_drop_used", ::usekillstreakaitankdrop);
   registerkillstreakaltweapon("ai_tank_drop_mp", "ai_tank_drone_gun_mp");
   registerkillstreakaltweapon("ai_tank_drop_mp", "ai_tank_drone_rocket_mp");
   registerkillstreakremoteoverrideweapon("ai_tank_drop_mp", "killstreak_ai_tank_mp");
-  registerkillstreakstrings("ai_tank_drop_mp", & "KILLSTREAK_EARNED_AI_TANK_DROP", & "KILLSTREAK_AI_TANK_NOT_AVAILABLE", & "KILLSTREAK_AI_TANK_INBOUND");
+  registerkillstreakstrings("ai_tank_drop_mp", &"KILLSTREAK_EARNED_AI_TANK_DROP", &"KILLSTREAK_AI_TANK_NOT_AVAILABLE", &"KILLSTREAK_AI_TANK_INBOUND");
   registerkillstreakdialog("ai_tank_drop_mp", "mpl_killstreak_ai_tank", "kls_aitank_used", "", "kls_aitank_enemy", "", "kls_aitank_ready");
   level.ai_tank_fov = cos(160);
   level.ai_tank_turret_fire_rate = weaponfiretime("ai_tank_drone_gun_mp");
@@ -111,12 +111,12 @@ crateland(crate, weaponname, owner, team) {
   }
 
   origin = crate.origin;
-  cratebottom = bullettrace(origin, origin + vectorscale((0, 0, -1), 50.0), 0, crate);
+  cratebottom = bulletTrace(origin, origin + vectorscale((0, 0, -1), 50.0), 0, crate);
 
   if(isDefined(cratebottom))
     origin = cratebottom["position"] + (0, 0, 1);
 
-  playfx(level.ai_tank_crate_explode_fx, origin, (1, 0, 0), (0, 0, 1));
+  playFX(level.ai_tank_crate_explode_fx, origin, (1, 0, 0), (0, 0, 1));
   playsoundatposition("veh_talon_crate_exp", crate.origin);
   level thread ai_tank_killstreak_start(owner, origin, crate.package_contents_id, weaponname);
   crate delete();
@@ -151,7 +151,7 @@ ai_tank_killstreak_start(owner, origin, killstreak_id, weaponname) {
   waittillframeend;
   drone = spawnvehicle("veh_t6_drone_tank", "talon", "ai_tank_drone_mp", origin, (0, 0, 0));
   drone setenemymodel("veh_t6_drone_tank_alt");
-  drone playloopsound("veh_talon_idle_npc", 0.2);
+  drone playLoopSound("veh_talon_idle_npc", 0.2);
   drone setvehicleavoidance(1);
   drone setclientfield("ai_tank_missile_fire", 4);
   drone setowner(owner);
@@ -304,16 +304,16 @@ tank_damage_think() {
 tank_low_health_fx() {
   self endon("death");
   self.damage_fx = spawn("script_model", self gettagorigin("tag_origin") + vectorscale((0, 0, -1), 14.0));
-  self.damage_fx setmodel("tag_origin");
+  self.damage_fx setModel("tag_origin");
   self.damage_fx linkto(self, "tag_turret", vectorscale((0, 0, -1), 14.0), (0, 0, 0));
   wait 0.1;
-  playfxontag(level.ai_tank_damage_fx, self.damage_fx, "tag_origin");
+  playFXOnTag(level.ai_tank_damage_fx, self.damage_fx, "tag_origin");
 }
 
 deleteonkillbrush(player) {
   player endon("disconnect");
   self endon("death");
-  killbrushes = getentarray("trigger_hurt", "classname");
+  killbrushes = getEntArray("trigger_hurt", "classname");
 
   while(true) {
     for(i = 0; i < killbrushes.size; i++) {
@@ -333,7 +333,7 @@ tank_stun(duration) {
   self endon("death");
   self notify("stunned");
   self clearvehgoalpos();
-  forward = anglestoforward(self.angles);
+  forward = anglesToForward(self.angles);
   forward = self.origin + forward * 128;
   forward = forward - vectorscale((0, 0, 1), 64.0);
   self setturrettargetvec(forward);
@@ -373,7 +373,7 @@ emp_crazy_death() {
   randomangle = randomint(360);
 
   while(time < 1.45) {
-    self setturrettargetvec(self.origin + anglestoforward((randomintrange(305, 315), int(randomangle + time * 180), 0)) * 100);
+    self setturrettargetvec(self.origin + anglesToForward((randomintrange(305, 315), int(randomangle + time * 180), 0)) * 100);
 
     if(time > 0.2) {
       self fireweapon();
@@ -391,7 +391,7 @@ emp_crazy_death() {
   }
 
   self setclientfield("ai_tank_death", 1);
-  playfx(level.ai_tank_explode_fx, self.origin, (0, 0, 1));
+  playFX(level.ai_tank_explode_fx, self.origin, (0, 0, 1));
   playsoundatposition("wpn_agr_explode", self.origin);
   wait 0.05;
   self hide();
@@ -416,7 +416,7 @@ tank_death_think(hardpointname) {
   } else {
     self setclientfield("ai_tank_death", 1);
     stunned = 0;
-    playfx(level.ai_tank_explode_fx, self.origin, (0, 0, 1));
+    playFX(level.ai_tank_explode_fx, self.origin, (0, 0, 1));
     playsoundatposition("wpn_agr_explode", self.origin);
     wait 0.05;
     self hide();
@@ -432,8 +432,7 @@ tank_death_think(hardpointname) {
 
       if(isDefined(self.wascontrollednowdead) && self.wascontrollednowdead)
         attacker addweaponstat(weapon, "destroyed_controlled_killstreak", 1);
-    } else {
-    }
+    } else {}
   }
 
   wait 2;
@@ -577,7 +576,7 @@ tank_aim_think() {
     }
 
     yaw = (0, self.angles[1] + randomintrange(-75, 75), 0);
-    forward = anglestoforward(yaw);
+    forward = anglesToForward(yaw);
     origin = self.origin + forward * 1024;
     self.aim_entity.origin = (origin[0], origin[1], origin[2] + 20);
   }
@@ -600,13 +599,13 @@ tank_combat_think() {
     if(level.gametype != "hack") {
       dogs = maps\mp\killstreaks\_dogs::dog_manager_get_dogs();
       self tank_target_evaluate(dogs, origin, forward);
-      tanks = getentarray("talon", "targetname");
+      tanks = getEntArray("talon", "targetname");
       self tank_target_evaluate(tanks, origin, forward);
-      rcbombs = getentarray("rcbomb", "targetname");
+      rcbombs = getEntArray("rcbomb", "targetname");
       self tank_target_evaluate(rcbombs, origin, forward);
-      turrets = getentarray("auto_turret", "classname");
+      turrets = getEntArray("auto_turret", "classname");
       self tank_target_evaluate(turrets, origin, forward);
-      shields = getentarray("riotshield_mp", "targetname");
+      shields = getEntArray("riotshield_mp", "targetname");
       self tank_target_evaluate(shields, origin, forward);
     }
   }
@@ -671,7 +670,7 @@ tank_engage(enemy) {
       warning_shots = self.warningshots;
 
     if(do_fire_delay) {
-      self playsound("wpn_metalstorm_lock_on");
+      self playSound("wpn_metalstorm_lock_on");
       wait(randomfloatrange(0.4, 0.8));
       do_fire_delay = 0;
 
@@ -747,7 +746,7 @@ tank_rocket_think() {
     self.numberrockets--;
     self setclientfield("ai_tank_missile_fire", self.numberrockets);
     angles = self gettagangles("tag_flash_gunner1");
-    dir = anglestoforward(angles);
+    dir = anglesToForward(angles);
     self launchvehicle(dir * -30, self.origin + vectorscale((0, 0, 1), 50.0), 0);
     earthquake(0.4, 0.5, self.origin, 200);
 
@@ -776,7 +775,7 @@ tank_set_target(entity, use_rocket) {
     offset = vectorscale(right, 8);
     velocity = entity getvelocity();
     speed = length(velocity);
-    forward = anglestoforward(entity.angles);
+    forward = anglesToForward(entity.angles);
     origin = offset + vectorscale(forward, speed);
     self setturrettargetent(entity, origin);
   } else
@@ -979,7 +978,7 @@ tank_fire_watch(drone) {
     drone fireweapon();
     earthquake(0.2, 0.2, drone.origin, 200);
     angles = drone gettagangles("tag_barrel");
-    dir = anglestoforward(angles);
+    dir = anglesToForward(angles);
     drone launchvehicle(dir * -5, drone.origin + vectorscale((0, 0, 1), 10.0), 0);
     wait(level.ai_tank_turret_fire_rate);
   }
@@ -1010,7 +1009,7 @@ tank_rocket_watch(player) {
     self.numberrockets--;
     self setclientfield("ai_tank_missile_fire", self.numberrockets);
     angles = self gettagangles("tag_flash_gunner1");
-    dir = anglestoforward(angles);
+    dir = anglesToForward(angles);
 
     if(!self.controlled)
       self launchvehicle(dir * -30, self.origin + vectorscale((0, 0, 1), 50.0), 0);
@@ -1198,7 +1197,7 @@ devgui_debug_route() {
   }
 
   iprintln("Sending talons to chosen nodes");
-  tanks = getentarray("talon", "targetname");
+  tanks = getEntArray("talon", "targetname");
 
   foreach(tank in tanks) {
     tank notify("debug_patrol");

@@ -11,7 +11,6 @@
 #include scripts\core_common\player\player_shared;
 #include scripts\core_common\status_effects\status_effect_util;
 #include scripts\core_common\system_shared;
-
 #namespace gadget_health_regen;
 
 autoexec __init__system__() {
@@ -173,7 +172,7 @@ gadget_health_regen_off(slot, weapon) {
 enable_healing_after_wait(slot, weapon, wait_time, var_5818bd22, player) {
   self notify(#"healing_preamble");
   self.heal.var_a1cac2f1 = gettime() + var_5818bd22;
-  waitresult = self waittilltimeout(wait_time, #"death", #"disconnect", #"healing_disabled", #"healing_preamble");
+  waitresult = self waittilltimeout(wait_time, # "death", # "disconnect", # "healing_disabled", # "healing_preamble");
 
   if(waitresult._notify != "timeout") {
     return;
@@ -324,13 +323,13 @@ function_aba28004() {
   self function_18e0320b();
 }
 
-private function_18e0320b() {
+function_18e0320b() {
   if(self is_healing()) {
     self function_d91a057d();
   }
 }
 
-private function_dafd9cd(attacker) {
+function_dafd9cd(attacker) {
   if(gettime() < self.heal.var_a1cac2f1) {
     return false;
   }

@@ -139,7 +139,7 @@ dead_bodies() {
 
 alley_cleanup() {
   t_alley = getent("bus_dam_fxanim_cleanup_trig", "targetname");
-  a_script_models = getentarray("script_model", "classname");
+  a_script_models = getEntArray("script_model", "classname");
 
   foreach(script_model in a_script_models) {
     if(script_model istouching(t_alley)) {
@@ -190,8 +190,8 @@ monitor_drone_stealth_section() {
 }
 
 floating_bodies() {
-  a_m_bodies = getentarray("stealth_corpse", "targetname");
-  a_m_persistent_bodies = getentarray("persistent_corpse", "targetname");
+  a_m_bodies = getEntArray("stealth_corpse", "targetname");
+  a_m_persistent_bodies = getEntArray("persistent_corpse", "targetname");
   a_m_bodies = arraycombine(a_m_bodies, a_m_persistent_bodies, 1, 1);
   clearallcorpses();
 
@@ -824,7 +824,7 @@ vo_avoid_spotlight() {
 _can_spotlight_see_position(v_target_position, n_dot_tolerance) {
   v_spotlight_origin = self gettagorigin("tag_spotlight");
   v_to_harper_from_spotlight = vectornormalize(v_target_position - v_spotlight_origin);
-  v_drone_forward = anglestoforward(self gettagangles("tag_spotlight"));
+  v_drone_forward = anglesToForward(self gettagangles("tag_spotlight"));
   n_dot = vectordot(v_to_harper_from_spotlight, v_drone_forward);
 
   str_dvar = getdvar(#"_id_D8E6D53A");
@@ -871,7 +871,7 @@ drone_helicopter_setup() {
     self play_fx("drone_lens_flare", undefined, undefined, "spotlight_off", 1, "tag_spotlight");
     self.spotlight_target = getent("intro_target", "targetname");
   } else {
-    self.spotlight_target = spawn("script_origin", self.origin + anglestoforward(self.angles) * 5000 + vectorscale((0, 0, -1), 500.0));
+    self.spotlight_target = spawn("script_origin", self.origin + anglesToForward(self.angles) * 5000 + vectorscale((0, 0, -1), 500.0));
     self play_fx("helicopter_drone_spotlight_cheap", undefined, undefined, "death", 1, "tag_spotlight");
     self thread ambient_drone_target_delete(self.spotlight_target);
   }
@@ -1165,7 +1165,7 @@ player_behaviors_to_alert_drone() {
   level endon("sewer_move_up");
   level.player waittill_any("weapon_fired", "grenade_fire", "grenade_launcher_fire", "too_close");
   wait 0.5;
-  level notify("drone_detects_player", & "PAKISTAN_SHARED_DRONE_FAIL_SOUND");
+  level notify("drone_detects_player", &"PAKISTAN_SHARED_DRONE_FAIL_SOUND");
 }
 
 drone_detects_damage_for_alert() {
@@ -1179,7 +1179,7 @@ drone_detects_damage_for_alert() {
   else
     level.harper thread say_dialog("harp_what_are_you_doing_2", 1);
 
-  level notify("drone_detects_player", & "PAKISTAN_SHARED_DRONE_FAIL_SOUND");
+  level notify("drone_detects_player", &"PAKISTAN_SHARED_DRONE_FAIL_SOUND");
   self notify("player_shotme");
 }
 
@@ -1196,7 +1196,7 @@ drone_spotlight_detection() {
     v_spotlight_angles = self gettagangles("tag_flash");
     v_player_trace_origin = level.player get_eye();
     v_to_player = vectornormalize(v_player_trace_origin - v_spotlight_origin);
-    v_forward = anglestoforward(v_spotlight_angles);
+    v_forward = anglesToForward(v_spotlight_angles);
     n_dot = vectordot(v_forward, v_to_player);
     str_difficulty = getdifficulty();
     n_frames_before_detection = get_drone_spotlight_frames_before_detection(str_difficulty);
@@ -1218,7 +1218,7 @@ drone_spotlight_detection() {
         else
           level.harper say_dialog("harp_dammit_it_s_seen_y_0", 1);
 
-        level notify("drone_detects_player", & "PAKISTAN_SHARED_DRONE_FAIL_SIGHT");
+        level notify("drone_detects_player", &"PAKISTAN_SHARED_DRONE_FAIL_SIGHT");
       }
     }
 
@@ -1236,7 +1236,7 @@ drone_lens_flare() {
     v_spotlight_angles = self gettagangles("tag_flash");
     v_player_trace_origin = level.player get_eye();
     v_to_player = vectornormalize(v_player_trace_origin - v_spotlight_origin);
-    v_forward = anglestoforward(v_spotlight_angles);
+    v_forward = anglesToForward(v_spotlight_angles);
     n_dot = vectordot(v_forward, v_to_player);
     n_sight_trace = level.player sightconetrace(v_spotlight_origin, self, v_forward, 10);
     b_can_see = n_sight_trace > 0.667;

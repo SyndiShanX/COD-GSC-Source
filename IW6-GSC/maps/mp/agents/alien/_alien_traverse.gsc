@@ -79,9 +79,7 @@ Jump(startNode, endNode, nextNode) {
     nextPos = nextNode.origin;
 
   if(isDefined(level.dlc_alien_jump_override)) {
-    [
-      [level.dlc_alien_jump_override]
-    ](startNode, endNode, nextNode, nextPos);
+    [[level.dlc_alien_jump_override]](startNode, endNode, nextNode, nextPos);
     return;
   }
 

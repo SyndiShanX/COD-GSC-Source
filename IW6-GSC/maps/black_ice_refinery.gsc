@@ -804,7 +804,7 @@ event_derrick_explode_debris_damage() {
 
     if(self istouching(level.player)) {
       level.player kill();
-      setdvar("ui_deadquote", & "BLACK_ICE_REFINERY_DEBRIS_DEATH");
+      setdvar("ui_deadquote", &"BLACK_ICE_REFINERY_DEBRIS_DEATH");
       maps\_utility::missionfailedwrapper();
     }
 

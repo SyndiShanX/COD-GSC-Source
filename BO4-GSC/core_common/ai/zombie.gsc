@@ -23,7 +23,6 @@
 #include scripts\core_common\laststand_shared;
 #include scripts\core_common\math_shared;
 #include scripts\core_common\spawner_shared;
-
 #namespace zombiebehavior;
 
 autoexec init() {
@@ -40,7 +39,7 @@ autoexec init() {
   zombieinterface::registerzombieinterfaceattributes();
 }
 
-private initzombiebehaviorsandasm() {
+initzombiebehaviorsandasm() {
   assert(!isDefined(&zombiemoveactionstart) || isscriptfunctionptr(&zombiemoveactionstart));
   assert(!isDefined(&zombiemoveactionupdate) || isscriptfunctionptr(&zombiemoveactionupdate));
   assert(!isDefined(undefined) || isscriptfunctionptr(undefined));
@@ -148,7 +147,7 @@ archetypezombieblackboardinit() {
   self.___archetypeonanimscriptedcallback = &archetypezombieonanimscriptedcallback;
 }
 
-private archetypezombieonanimscriptedcallback(entity) {
+archetypezombieonanimscriptedcallback(entity) {
   entity.__blackboard = undefined;
   entity archetypezombieblackboardinit();
 }
@@ -157,7 +156,7 @@ archetypezombiespecialeffectsinit() {
   aiutility::addaioverridedamagecallback(self, &archetypezombiespecialeffectscallback);
 }
 
-private archetypezombiespecialeffectscallback(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, damagefromunderneath, modelindex, partname) {
+archetypezombiespecialeffectscallback(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, damagefromunderneath, modelindex, partname) {
   specialdayeffectchance = getdvarint(#"tu6_ffotd_zombiespecialdayeffectschance", 0);
 
   if(specialdayeffectchance && randomint(100) < specialdayeffectchance) {
@@ -217,7 +216,7 @@ zombieshouldstumblecondition(entity) {
   return false;
 }
 
-private zombiejukeactionstart(entity) {
+zombiejukeactionstart(entity) {
   entity setblackboardattribute("_juke_direction", entity.juke);
 
   if(isDefined(entity.jukedistance)) {
@@ -230,19 +229,19 @@ private zombiejukeactionstart(entity) {
   entity.juke = undefined;
 }
 
-private zombiejukeactionterminate(entity) {
+zombiejukeactionterminate(entity) {
   entity clearpath();
 }
 
-private zombiestumbleactionstart(entity) {
+zombiestumbleactionstart(entity) {
   entity.stumble = undefined;
 }
 
-private zombieattackobjectstart(entity) {
+zombieattackobjectstart(entity) {
   entity.is_inert = 1;
 }
 
-private zombieattackobjectterminate(entity) {
+zombieattackobjectterminate(entity) {
   entity.is_inert = 0;
 }
 
@@ -366,9 +365,7 @@ zombietargetservice(entity) {
 
   if(!isDefined(player)) {
     if(isDefined(self.ignore_player)) {
-      if(isDefined(level._should_skip_ignore_player_logic) && [
-          [level._should_skip_ignore_player_logic]
-        ]()) {
+      if(isDefined(level._should_skip_ignore_player_logic) && [[level._should_skip_ignore_player_logic]]()) {
         return 0;
       }
 
@@ -602,7 +599,7 @@ zombieshouldattackobject(entity) {
 }
 
 function_997f1224(entity) {
-  if(entity.archetype == #"zombie" && !isDefined(entity.subarchetype) && !(isDefined(self.missinglegs) && self.missinglegs)) {
+  if(entity.archetype == # "zombie" && !isDefined(entity.subarchetype) && !(isDefined(self.missinglegs) && self.missinglegs)) {
     if(entity.zombie_move_speed == "walk") {
       return (100 * 100);
     } else if(entity.zombie_move_speed == "run") {
@@ -686,7 +683,7 @@ zombieshouldmeleecondition(entity) {
   return true;
 }
 
-private function_1b8c9407(entity) {
+function_1b8c9407(entity) {
   if(getdvarint(#"hash_1a5939d8c37a2e07", 0)) {
     return false;
   }
@@ -704,21 +701,21 @@ private function_1b8c9407(entity) {
   return true;
 }
 
-private function_ecba5a44(entity) {
+function_ecba5a44(entity) {
   var_1e466fbb = spawnStruct();
   var_1e466fbb.enemy = entity.enemy;
   blackboard::addblackboardevent("zombie_full_pain", var_1e466fbb, randomintrange(6000, 9000));
 }
 
-private zombieshouldmovelowg(entity) {
+zombieshouldmovelowg(entity) {
   return isDefined(entity.low_gravity) && entity.low_gravity;
 }
 
-private zombieshouldturn(entity) {
+zombieshouldturn(entity) {
   return !isDefined(entity.turn_cooldown) || entity.turn_cooldown < gettime();
 }
 
-private function_a716a3af(entity) {
+function_a716a3af(entity) {
   entity.turn_cooldown = gettime() + 1000;
   return true;
 }
@@ -917,11 +914,11 @@ zombiejuke(entity) {
         entity.jukedistance = "long";
 
         switch (entity aiutility::function_cc26899f()) {
-          case #"locomotion_speed_run":
-          case #"locomotion_speed_walk":
+          case # "locomotion_speed_run":
+          case # "locomotion_speed_walk":
             forwardoffset = 122;
             break;
-          case #"locomotion_speed_sprint":
+          case # "locomotion_speed_sprint":
             forwardoffset = 129;
             break;
         }
@@ -934,11 +931,11 @@ zombiejuke(entity) {
         entity.jukedistance = "short";
 
         switch (entity aiutility::function_cc26899f()) {
-          case #"locomotion_speed_run":
-          case #"locomotion_speed_walk":
+          case # "locomotion_speed_run":
+          case # "locomotion_speed_walk":
             forwardoffset = 127;
             break;
-          case #"locomotion_speed_sprint":
+          case # "locomotion_speed_sprint":
             forwardoffset = 148;
             break;
         }
@@ -1003,13 +1000,13 @@ zombiemeleejumpmocompupdate(entity, mocompanim, mocompanimblendouttime, mocompan
 
   if(isDefined(entity.zombie_move_speed)) {
     switch (entity.zombie_move_speed) {
-      case #"walk":
+      case # "walk":
         speed = 5;
         break;
-      case #"run":
+      case # "run":
         speed = 6;
         break;
-      case #"sprint":
+      case # "sprint":
         speed = 7;
         break;
     }
@@ -1119,12 +1116,12 @@ zombieidgunholedeathmocompterminate(entity, mocompanim, mocompanimblendouttime, 
   }
 }
 
-private zombieturnmocompstart(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
+zombieturnmocompstart(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
   entity orientmode("face angle", entity.angles[1]);
   entity animmode("angle deltas", 0);
 }
 
-private zombieturnmocompupdate(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
+zombieturnmocompupdate(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
   normalizedtime = (entity getanimtime(mocompanim) + mocompanimblendouttime) / mocompduration;
 
   if(normalizedtime > 0.25) {
@@ -1133,7 +1130,7 @@ private zombieturnmocompupdate(entity, mocompanim, mocompanimblendouttime, mocom
   }
 }
 
-private zombieturnmocompterminate(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
+zombieturnmocompterminate(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
   entity orientmode("face motion");
   entity animmode("normal", 0);
 }
@@ -1151,7 +1148,7 @@ zombiemissinglegs(entity) {
 }
 
 zombieshouldproceduraltraverse(entity) {
-  return isDefined(entity.traversestartnode) && isDefined(entity.traverseendnode) && entity.traversestartnode.spawnflags&1024 && entity.traverseendnode.spawnflags&1024;
+  return isDefined(entity.traversestartnode) && isDefined(entity.traverseendnode) && entity.traversestartnode.spawnflags & 1024 && entity.traverseendnode.spawnflags & 1024;
 }
 
 zombieshouldmeleesuicide(entity) {
@@ -1205,7 +1202,7 @@ zombiemoveactionstart(entity, asmstatename) {
 
   if(isDefined(entity.stumble) && !isDefined(entity.move_anim_end_time)) {
     stumbleactionresult = entity astsearch(asmstatename);
-    stumbleactionanimation = animationstatenetworkutility::searchanimationmap(entity, stumbleactionresult[#"animation"]);
+    stumbleactionanimation = animationstatenetworkutility::searchanimationmap(entity, stumbleactionresult[# "animation"]);
     entity.move_anim_end_time = entity.movetime + getanimlength(stumbleactionanimation);
   }
 
@@ -1346,7 +1343,7 @@ archetypezombiedeathoverrideinit() {
   aiutility::addaioverridekilledcallback(self, &zombiegibkilledanhilateoverride);
 }
 
-private zombiegibkilledanhilateoverride(inflictor, attacker, damage, meansofdeath, weapon, dir, hitloc, offsettime) {
+zombiegibkilledanhilateoverride(inflictor, attacker, damage, meansofdeath, weapon, dir, hitloc, offsettime) {
   if(!(isDefined(level.zombieanhilationenabled) && level.zombieanhilationenabled)) {
     return damage;
   }
@@ -1386,7 +1383,7 @@ private zombiegibkilledanhilateoverride(inflictor, attacker, damage, meansofdeat
   return damage;
 }
 
-private zombiezombieidlemocompstart(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
+zombiezombieidlemocompstart(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
   if(isDefined(entity.enemyoverride) && isDefined(entity.enemyoverride[1]) && entity != entity.enemyoverride[1]) {
     entity orientmode("face direction", entity.enemyoverride[1].origin - entity.origin);
     entity animmode("zonly_physics", 0);
@@ -1397,7 +1394,7 @@ private zombiezombieidlemocompstart(entity, mocompanim, mocompanimblendouttime, 
   entity animmode("zonly_physics", 0);
 }
 
-private zombieattackobjectmocompstart(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
+zombieattackobjectmocompstart(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
   if(isDefined(entity.attackable_slot)) {
     entity orientmode("face angle", entity.attackable_slot.angles[1]);
     entity animmode("zonly_physics", 0);
@@ -1408,13 +1405,13 @@ private zombieattackobjectmocompstart(entity, mocompanim, mocompanimblendouttime
   entity animmode("zonly_physics", 0);
 }
 
-private zombieattackobjectmocompupdate(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
+zombieattackobjectmocompupdate(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
   if(isDefined(entity.attackable_slot)) {
     entity forceteleport(entity.attackable_slot.origin);
   }
 }
 
-private function_54d75299(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
+function_54d75299(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
   if(isDefined(entity.enemy)) {
     entity orientmode("face enemy");
   }
@@ -1429,15 +1426,15 @@ private function_54d75299(entity, mocompanim, mocompanimblendouttime, mocompanim
   record3dtext("<dev string:xa1>" + distance(entity.origin, endpoint) + "<dev string:xa9>" + function_9e72a96(mocompanim), endpoint, (1, 0, 0), "<dev string:x45>");
 }
 
-private function_d1474842(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
+function_d1474842(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
   entity pathmode("dont move");
 }
 
-private function_b6d297bb(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
+function_b6d297bb(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
   entity pathmode("move allowed");
 }
 
-private function_cbbae5cb(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
+function_cbbae5cb(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
   entity orientmode("face angle", entity.angles[1]);
   entity animmode("normal");
 
@@ -1456,7 +1453,7 @@ zombiegravity(entity, attribute, oldvalue, value) {
 
     if(!isDefined(self.low_gravity_variant) && isDefined(level.var_d9ffddf4)) {
       if(isDefined(self.missinglegs) && self.missinglegs) {
-        self.low_gravity_variant = randomint(level.var_d9ffddf4[#"crawl"]);
+        self.low_gravity_variant = randomint(level.var_d9ffddf4[# "crawl"]);
       } else {
         self.low_gravity_variant = randomint(level.var_d9ffddf4[self.zombie_move_speed]);
       }

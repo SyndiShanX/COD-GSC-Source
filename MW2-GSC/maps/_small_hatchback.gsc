@@ -28,12 +28,9 @@ main(model, type) {
   build_team("allies");
   build_aianims(::setanims, ::set_vehicle_anims);
   build_compassicon("automobile", false);
-
 }
 
-init_local() {
-
-}
+init_local() {}
 
 set_vehicle_anims(positions) {
   return positions;

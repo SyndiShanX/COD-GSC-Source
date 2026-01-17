@@ -198,7 +198,7 @@ quadrotor_adjust_goal_for_enemy_height(goalpos) {
 make_sure_goal_is_well_above_ground(pos) {
   start = pos + (0, 0, self.flyheight);
   end = pos + (0, 0, self.flyheight * -1);
-  trace = bullettrace(start, end, 0, self, 0, 0);
+  trace = bulletTrace(start, end, 0, self, 0, 0);
   end = trace["position"];
   pos = end + (0, 0, self.flyheight);
   z = self getheliheightlockheight(pos);
@@ -448,15 +448,15 @@ quadrotor_play_single_fx_on_tag(effect, tag) {
   }
 
   ent = spawn("script_model", (0, 0, 0));
-  ent setmodel("tag_origin");
+  ent setModel("tag_origin");
   ent.origin = self gettagorigin(tag);
   ent.angles = self gettagangles(tag);
   ent notsolid();
   ent hide();
   ent linkto(self, tag);
   ent.effect = effect;
-  playfxontag(effect, ent, "tag_origin");
-  ent playsound("veh_qrdrone_sparks");
+  playFXOnTag(effect, ent, "tag_origin");
+  ent playSound("veh_qrdrone_sparks");
   self.damage_fx_ent = ent;
 }
 
@@ -555,9 +555,9 @@ quadrotor_death() {
 
 death_fx() {
   if(isDefined(self.deathfx))
-    playfxontag(self.deathfx, self, self.deathfxtag);
+    playFXOnTag(self.deathfx, self, self.deathfxtag);
 
-  self playsound("veh_qrdrone_sparks");
+  self playSound("veh_qrdrone_sparks");
 }
 
 quadrotor_crash_movement(attacker, hitdir) {
@@ -589,7 +589,7 @@ quadrotor_crash_movement(attacker, hitdir) {
     self thread quadrotor_crash_accel();
 
   self thread quadrotor_collision();
-  self playsound("veh_qrdrone_dmg_hit");
+  self playSound("veh_qrdrone_dmg_hit");
   self vehicle_toggle_sounds(0);
 
   if(!isDefined(self.off))
@@ -607,7 +607,7 @@ quadrotor_crash_movement(attacker, hitdir) {
 qrotor_dmg_snd() {
   dmg_ent = spawn("script_origin", self.origin);
   dmg_ent linkto(self);
-  dmg_ent playloopsound("veh_qrdrone_dmg_loop");
+  dmg_ent playLoopSound("veh_qrdrone_dmg_loop");
   self waittill_any("crash_done", "death");
   dmg_ent stoploopsound(1);
   wait 2;
@@ -720,17 +720,17 @@ quadrotor_collision() {
 
     if(normal[2] < 0.6 || isalive(self) && !isDefined(self.emped)) {
       self setvehvelocity(self.velocity + normal * 90);
-      self playsound("veh_qrdrone_wall");
+      self playSound("veh_qrdrone_wall");
 
       if(normal[2] < 0.6)
         fx_origin = self.origin - normal * 28;
       else
         fx_origin = self.origin - normal * 10;
 
-      playfx(level._effect["quadrotor_nudge"], fx_origin, normal);
+      playFX(level._effect["quadrotor_nudge"], fx_origin, normal);
     } else if(isDefined(self.emped)) {
       if(isDefined(self.bounced)) {
-        self playsound("veh_qrdrone_wall");
+        self playSound("veh_qrdrone_wall");
         self setvehvelocity((0, 0, 0));
         self setangularvelocity((0, 0, 0));
 
@@ -750,18 +750,18 @@ quadrotor_collision() {
       } else {
         self.bounced = 1;
         self setvehvelocity(self.velocity + normal * 120);
-        self playsound("veh_qrdrone_wall");
+        self playSound("veh_qrdrone_wall");
 
         if(normal[2] < 0.6)
           fx_origin = self.origin - normal * 28;
         else
           fx_origin = self.origin - normal * 10;
 
-        playfx(level._effect["quadrotor_nudge"], fx_origin, normal);
+        playFX(level._effect["quadrotor_nudge"], fx_origin, normal);
       }
     } else {
       createdynentandlaunch(self.deathmodel, self.origin, self.angles, self.origin, self.velocity * 0.01, level._effect["quadrotor_crash"], 1);
-      self playsound("veh_qrdrone_explo");
+      self playSound("veh_qrdrone_explo");
       self thread death_fire_loop_audio();
       self notify("crash_done");
     }
@@ -770,7 +770,7 @@ quadrotor_collision() {
 
 death_fire_loop_audio() {
   sound_ent = spawn("script_origin", self.origin);
-  sound_ent playloopsound("veh_qrdrone_death_fire_loop", 0.1);
+  sound_ent playLoopSound("veh_qrdrone_death_fire_loop", 0.1);
   wait 11;
   sound_ent stoploopsound(1);
   sound_ent delete();
@@ -780,12 +780,11 @@ quadrotor_set_team(team) {
   self.vteam = team;
 
   if(isDefined(self.vehmodelenemy)) {
-    if(issubstr(level.script, "so_rts_")) {
-    } else if(team == "axis") {
-      self setmodel(self.vehmodelenemy);
+    if(issubstr(level.script, "so_rts_")) {} else if(team == "axis") {
+      self setModel(self.vehmodelenemy);
       self setvehweapon("quadrotor_turret_enemy");
     } else {
-      self setmodel(self.vehmodel);
+      self setModel(self.vehmodel);
       self setvehweapon("quadrotor_turret");
     }
   }
@@ -884,9 +883,9 @@ quadrotor_emped() {
 
   if(!isDefined(self.stun_fx)) {
     self.stun_fx = spawn("script_model", self.origin);
-    self.stun_fx setmodel("tag_origin");
+    self.stun_fx setModel("tag_origin");
     self.stun_fx linkto(self, "tag_origin", (0, 0, 0), (0, 0, 0));
-    playfxontag(level._effect["quadrotor_stun"], self.stun_fx, "tag_origin");
+    playFXOnTag(level._effect["quadrotor_stun"], self.stun_fx, "tag_origin");
   }
 
   wait(randomfloatrange(4, 7));
@@ -894,7 +893,7 @@ quadrotor_emped() {
   self.emped = undefined;
   self setphysacceleration((0, 0, 0));
   self quadrotor_on();
-  self playsound("veh_qrdrone_boot_qr");
+  self playSound("veh_qrdrone_boot_qr");
 }
 
 quadrotor_temp_bullet_shield(invulnerable_time) {

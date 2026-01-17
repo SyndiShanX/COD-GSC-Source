@@ -11,7 +11,7 @@
 #namespace hacker_tool;
 
 function autoexec __init__sytem__() {
-  system::register("hacker_tool", & __init__, undefined, undefined);
+  system::register("hacker_tool", &__init__, undefined, undefined);
 }
 
 function __init__() {

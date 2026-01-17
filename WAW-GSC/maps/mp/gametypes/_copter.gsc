@@ -17,15 +17,15 @@ init() {
 }
 
 getAboveBuildingsLocation(location) {
-  trace = bullettrace(location + (0, 0, 10000), location, false, undefined);
+  trace = bulletTrace(location + (0, 0, 10000), location, false, undefined);
   startorigin = trace["position"] + (0, 0, -514);
   zpos = 0;
   maxxpos = 13;
   maxypos = 13;
-  for (xpos = 0; xpos < maxxpos; xpos++) {
-    for (ypos = 0; ypos < maxypos; ypos++) {
+  for(xpos = 0; xpos < maxxpos; xpos++) {
+    for(ypos = 0; ypos < maxypos; ypos++) {
       thisstartorigin = startorigin + ((xpos / (maxxpos - 1) - .5) * 1024, (ypos / (maxypos - 1) - .5) * 1024, 0);
-      thisorigin = bullettrace(thisstartorigin, thisstartorigin + (0, 0, -10000), false, undefined);
+      thisorigin = bulletTrace(thisstartorigin, thisstartorigin + (0, 0, -10000), false, undefined);
       zpos += thisorigin["position"][2];
     }
   }
@@ -103,7 +103,7 @@ makeCopterActive(damagetrig) {
 
 mylinkto(obj) {
   self endon("unlink");
-  while (1) {
+  while(1) {
     self.angles = obj.angles;
     self.origin = obj.origin;
     wait .1;
@@ -114,9 +114,9 @@ setCopterDefenseArea(areaEnt) {
   self.areaEnt = areaEnt;
   self.areaDescentPoints = [];
   if(isDefined(areaEnt.target)) {
-    self.areaDescentPoints = getentarray(areaEnt.target, "targetname");
+    self.areaDescentPoints = getEntArray(areaEnt.target, "targetname");
   }
-  for (i = 0; i < self.areaDescentPoints.size; i++) {
+  for(i = 0; i < self.areaDescentPoints.size; i++) {
     self.areaDescentPoints[i].targetEnt = getent(self.areaDescentPoints[i].target, "targetname");
   }
 }
@@ -130,7 +130,7 @@ copterAI() {
   descendingEnt = undefined;
   reachedDescendingEnt = false;
   returningToArea = false;
-  while (1) {
+  while(1) {
     if(!isDefined(self.areaEnt)) {
       wait(1);
       continue;
@@ -138,7 +138,7 @@ copterAI() {
     players = level.players;
     enemyTargets = [];
     if(self.team != "neutral") {
-      for (i = 0; i < players.size; i++) {
+      for(i = 0; i < players.size; i++) {
         if(isalive(players[i]) && isDefined(players[i].pers["team"]) && players[i].pers["team"] != self.team && !isDefined(players[i].usingObj)) {
           playerorigin = players[i].origin;
           playerorigin = (playerorigin[0], playerorigin[1], self.areaEnt.origin[2]);
@@ -149,10 +149,10 @@ copterAI() {
     }
     insideTargets = [];
     outsideTargets = [];
-    skyheight = bullettrace(self.origin, self.origin + (0, 0, 10000), false, undefined)["position"][2] - 10;
+    skyheight = bulletTrace(self.origin, self.origin + (0, 0, 10000), false, undefined)["position"][2] - 10;
     bestTarget = undefined;
     bestWeight = 0;
-    for (i = 0; i < enemyTargets.size; i++) {
+    for(i = 0; i < enemyTargets.size; i++) {
       inside = false;
       trace = bulletTrace(enemyTargets[i].origin + (0, 0, 10), enemyTargets[i].origin + (0, 0, 10000), false, undefined);
       if(trace["position"][2] >= skyheight)
@@ -221,7 +221,7 @@ copterAI() {
         returningToArea = false;
       if(outsideTargets.size == 0 && !returningToArea) {
         if(self.team != "neutral") {
-          for (i = 0; i < players.size; i++) {
+          for(i = 0; i < players.size; i++) {
             if(isalive(players[i]) && isDefined(players[i].pers["team"]) && players[i].pers["team"] != self.team && !isDefined(players[i].usingObj)) {
               playerorigin = players[i].origin;
               playerorigin = (playerorigin[0], playerorigin[1], self.areaEnt.origin[2]);
@@ -233,7 +233,7 @@ copterAI() {
       }
       best = undefined;
       bestdist = 0;
-      for (i = 0; i < outsideTargets.size; i++) {
+      for(i = 0; i < outsideTargets.size; i++) {
         dist = abs(distance(outsideTargets[i].origin, self.origin) - desireddist);
         if(!isDefined(best) || dist < bestdist) {
           best = outsideTargets[i];
@@ -277,7 +277,7 @@ determineBestPos(targets, descendEnt, startorigin) {
   circleradius = distance(targetpos, descendEnt.origin);
   bestpoint = undefined;
   bestdist = 0;
-  for (i = 0; i < targets.size; i++) {
+  for(i = 0; i < targets.size; i++) {
     enemypos = targets[i].origin + level.copterTargetOffset;
     passed = bullettracepassed(enemypos, targetpos, false, undefined);
     if(passed) {
@@ -303,7 +303,7 @@ determineBestEnt(targets, descendEnts, startorigin) {
   bestpos = undefined;
   bestent = 0;
   bestdist = 0;
-  for (i = 0; i < descendEnts.size; i++) {
+  for(i = 0; i < descendEnts.size; i++) {
     thispos = determineBestPos(targets, descendEnts[i], startorigin);
     if(isDefined(thispos)) {
       thisdist = distance(thispos, startorigin);
@@ -330,7 +330,7 @@ determineBestAttackPos(targetpos, curpos, desireddist) {
   attackdiry = (0 - attackdirx[1], attackdirx[0], 0);
   bestpos = undefined;
   bestdist = 0;
-  for (i = 0; i < 8; i++) {
+  for(i = 0; i < 8; i++) {
     theta = (i / 8.0) * 360;
     thisdir = vecscale(attackdirx, cos(theta)) + vecscale(attackdiry, sin(theta));
     traceend = targetposcopterheight + vecscale(thisdir, desireddist);
@@ -358,7 +358,7 @@ determineBestAttackPos(targetpos, curpos, desireddist) {
 
 getRandomPos(origin, radius) {
   pos = origin + ((randomfloat(2) - 1) * radius, (randomfloat(2) - 1) * radius, 0);
-  while (distanceSquared(pos, origin) > radius * radius)
+  while(distanceSquared(pos, origin) > radius * radius)
     pos = origin + ((randomfloat(2) - 1) * radius, (randomfloat(2) - 1) * radius, 0);
   return pos;
 }
@@ -367,7 +367,7 @@ copterShoot() {
   self endon("death");
   self endon("passive");
   cosThreshold = cos(10);
-  while (1) {
+  while(1) {
     if(isDefined(self.desiredDirEntity) && isDefined(self.desiredDirEntity.origin)) {
       mypos = self.origin + level.copterCenterOffset;
       enemypos = self.desiredDirEntity.origin + self.desiredDirEntityOffset;
@@ -381,7 +381,7 @@ copterShoot() {
         if(canseetarget) {
           self playSound("mp_copter_shoot");
           numshots = 20;
-          for (i = 0; i < numshots; i++) {
+          for(i = 0; i < numshots; i++) {
             mypos = self.origin + level.copterCenterOffset;
             dir = anglesToForward(self.angles);
             dir = dir + ((randomfloat(2) - 1) * .015, (randomfloat(2) - 1) * .015, (randomfloat(2) - 1) * .015);
@@ -401,7 +401,7 @@ myMagicBullet(pos, dir) {
   damage = 20;
   if(getdvar("scr_copter_damage") != "")
     damage = getdvarint("scr_copter_damage");
-  trace = bullettrace(pos, pos + vecscale(dir, 10000), true, undefined);
+  trace = bulletTrace(pos, pos + vecscale(dir, 10000), true, undefined);
   if(isDefined(trace["entity"]) && isplayer(trace["entity"]) && isalive(trace["entity"])) {
     trace["entity"] thread[[level.callbackPlayerDamage]](
       self,
@@ -454,7 +454,7 @@ copterMove() {
   interval = .15;
   zinterp = .1;
   tiltamnt = 0;
-  while (1) {
+  while(1) {
     horizDistSquared = distanceSquared((self.origin[0], self.origin[1], 0), (self.finalDest[0], self.finalDest[1], 0));
     doneMoving = horizDistSquared < 10 * 10;
     {
@@ -553,7 +553,7 @@ copterMove() {
 
 copterDamage(damagetrig) {
   self endon("passive");
-  while (1) {
+  while(1) {
     damagetrig waittill("damage", amount, attacker);
     if(isDefined(attacker) && isplayer(attacker) && isDefined(attacker.pers["team"]) && attacker.pers["team"] == self.team) {
       continue;
@@ -576,7 +576,7 @@ copterDie() {
   self rotateyaw(360 + randomfloat(360), rottime);
   self rotatepitch(360 + randomfloat(360), rottime);
   self rotateroll(360 + randomfloat(360), rottime);
-  while (1) {
+  while(1) {
     self.vel = self.vel + vecscale((0, 0, -200), interval);
     newpos = self.origin + vecscale(self.vel, interval);
     pathclear = bullettracepassed(self.origin, newpos, false, undefined);
@@ -586,9 +586,9 @@ copterDie() {
     self moveto(newpos, interval * .999);
     wait(interval);
   }
-  playfx(level.copterfinalexplosion, self.origin);
+  playFX(level.copterfinalexplosion, self.origin);
   fakeself = spawn("script_origin", self.origin);
-  fakeself playsound("mp_copter_explosion");
+  fakeself playSound("mp_copter_explosion");
   self notify("finaldeath");
   deleteCopter();
   wait(2);
@@ -606,9 +606,9 @@ deleteCopter() {
 
 copterExplodeFX() {
   self endon("finaldeath");
-  while (1) {
-    playfx(level.copterexplosion, self.origin);
-    self playsound("mp_copter_explosion");
+  while(1) {
+    playFX(level.copterexplosion, self.origin);
+    self playSound("mp_copter_explosion");
     wait .5 + randomfloat(1);
   }
 }

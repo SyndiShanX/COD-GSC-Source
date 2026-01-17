@@ -138,7 +138,7 @@ flags() {
 
 createfx_setup() {
   // this array will be filled with code commands that SP or MP may use but doesn't exist in the other.
-  if(!isdefined(level.func))
+  if(!isDefined(level.func))
     level.func = [];
   level.func["create_triggerfx"] = ::dcemp_create_triggerfx;
 
@@ -179,7 +179,7 @@ global_inits() {
   triggers = array_combine(triggers, getEntArray("trigger_multiple_dyn_copier_no_light", "classname"));
   array_call(triggers, ::delete);
 
-  volumes = getentarray("mask_ents", "targetname");
+  volumes = getEntArray("mask_ents", "targetname");
   mask_destructibles_in_volumes(volumes);
   mask_interactives_in_volumes(volumes);
 
@@ -204,7 +204,7 @@ global_inits() {
   script2model_precache();
   level.bg_iss_darknum = 12;
 
-  for (i = 1; i <= level.bg_iss_darknum; i++) {
+  for(i = 1; i <= level.bg_iss_darknum; i++) {
     name = "bg_iss_dark0";
     if(i > 9)
       name = "bg_iss_dark";
@@ -285,8 +285,8 @@ global_inits() {
   //--------------->	setup corner
   corner_hide_damage();
 
-  array_thread(getentarray("flickerlight1", "script_noteworthy"), ::flickerlight_flares);
-  fire_lights = getentarray("light_street_fire", "script_noteworthy");
+  array_thread(getEntArray("flickerlight1", "script_noteworthy"), ::flickerlight_flares);
+  fire_lights = getEntArray("light_street_fire", "script_noteworthy");
   light = getclosest(getstruct("runner_light", "targetname").origin, fire_lights);
   light setlightintensity(3.5);
   array_thread(fire_lights, ::light_street_fire);
@@ -299,14 +299,15 @@ global_inits() {
   level.objnum = 0;
 }
 
-
 /************************************************************************************************************/
+
 /*													INTRO													*/
 /************************************************************************************************************/
+
 intro_main() {
   flag_set("player_crash_done");
 
-  emp_ents = getentarray("emp_show", "targetname");
+  emp_ents = getEntArray("emp_show", "targetname");
   array_thread(emp_ents, ::emp_entities);
 
   thread intro_crash_vehicle_setup();
@@ -323,8 +324,8 @@ intro_crash_vehicle_setup() {
     getent("btr80s_end", "targetname") add_spawn_function(::emp_btr);
   }
 
-  array_thread(getentarray("helis_crash_rappel", "targetname"), ::add_spawn_function, ::emp_heli_rappel);
-  array_thread(getentarray("helis_crash_distant", "targetname"), ::add_spawn_function, ::emp_heli_distant);
+  array_thread(getEntArray("helis_crash_rappel", "targetname"), ::add_spawn_function, ::emp_heli_rappel);
+  array_thread(getEntArray("helis_crash_distant", "targetname"), ::add_spawn_function, ::emp_heli_distant);
 
   flag_wait("first_wave_done");
 
@@ -332,10 +333,11 @@ intro_crash_vehicle_setup() {
   delaythread(0, ::spawn_vehicles_from_targetname_and_drive, "helis_crash_distant");
 }
 
-
 /************************************************************************************************************/
+
 /*													INTRO													*/
 /************************************************************************************************************/
+
 iss_main() {
   flag_wait("emp_entity_cleanup_done");
 
@@ -359,7 +361,7 @@ iss_main() {
   add_func(::iss_organize_ents);
   thread do_wait();
 
-  if(!isdefined(level.white_overlay))
+  if(!isDefined(level.white_overlay))
     level.white_overlay = create_client_overlay("white", 1);
 
   flag_wait("iss_organize_ents");
@@ -424,10 +426,10 @@ iss_wait_player_see_icbm(timeout) {
   self endon("iss_wait_player_see_icbm");
   level.iss_missile endon("death");
 
-  if(isdefined(timeout))
+  if(isDefined(timeout))
     self thread notify_delay("iss_wait_player_see_icbm", timeout);
 
-  while (!(self WorldPointInReticle_Circle(level.iss_missile.origin, getdvarint("cg_fov"), 200)))
+  while(!(self WorldPointInReticle_Circle(level.iss_missile.origin, getdvarint("cg_fov"), 200)))
     wait .1;
 
   return true;
@@ -436,13 +438,14 @@ iss_wait_player_see_icbm(timeout) {
 iss_nag_dialogue() {
   level endon("iss_nag_dialogue");
 
-  while (1) {
-    if(!isdefined(level.player iss_wait_player_see_icbm(.5)))
+  while(1) {
+    if(!isDefined(level.player iss_wait_player_see_icbm(.5)))
       //Sat1, rotate your view a little further to the right will ya?
       thread radio_dialogue("dcemp_iss_rotateview");
 
-    if(isdefined(level.player iss_wait_player_see_icbm(13)))
+    if(isDefined(level.player iss_wait_player_see_icbm(13))) {
       break;
+    }
   }
 }
 
@@ -497,7 +500,7 @@ iss_dialogue() {
 
 iss_nuke_scene() {
   missile = spawn_vehicle_from_targetname("iss_icbm_vehicle");
-  playfxontag(level._effect["dcemp_icbm_trail"], missile, "TAG_ORIGIN");
+  playFXOnTag(level._effect["dcemp_icbm_trail"], missile, "TAG_ORIGIN");
   missile startpath();
   missile vehicle_setspeedimmediate(55, 100);
 
@@ -524,8 +527,8 @@ iss_nuke_scene() {
   earth = getent("earth_model", "targetname");
   level.nuke_water_tag = spawn("script_model", earth.origin + (5000, 56500, 700 + 300));
   level.nuke_water_tag.angles = (-90, -90, 0);
-  level.nuke_water_tag setmodel("tag_origin");
-  playfxontag(level._effect["dcemp_water_nuke_glow"], level.nuke_water_tag, "TAG_ORIGIN");
+  level.nuke_water_tag setModel("tag_origin");
+  playFXOnTag(level._effect["dcemp_water_nuke_glow"], level.nuke_water_tag, "TAG_ORIGIN");
 
   thread iss_lights_out();
   thread iss_player_sounds_old();
@@ -652,7 +655,7 @@ iss_player_sounds() {
 
 iss_player_sounds_loop() {
   //while( !flag( "iss_nag_dialogue" ) )
-  while (!flag("iss_space_nuke")) {
+  while(!flag("iss_space_nuke")) {
     level.player play_sound_on_entity("scn_dcemp_iss_helmet_breathe_slow");
 
     wait 2;
@@ -660,8 +663,10 @@ iss_player_sounds_loop() {
 }
 
 /************************************************************************************************************/
+
 /*													EMP														*/
 /************************************************************************************************************/
+
 emp_main() {
   flag_wait("iss_done");
 
@@ -672,12 +677,12 @@ emp_main() {
   fx_intro_restart();
   script2model_intro();
 
-  array_thread(getentarray("street_crash_car", "script_noteworthy"), ::street_crash_cars);
-  array_thread(getentarray("street_cars_bounce", "targetname"), ::street_cars_bounce);
+  array_thread(getEntArray("street_crash_car", "script_noteworthy"), ::street_crash_cars);
+  array_thread(getEntArray("street_cars_bounce", "targetname"), ::street_cars_bounce);
 
-  emp_ents = getentarray("emp_delete", "targetname");
-  emp_ents = array_combine(emp_ents, getentarray("emp_swap", "targetname"));
-  emp_ents = array_combine(emp_ents, getentarray("emp_light", "targetname"));
+  emp_ents = getEntArray("emp_delete", "targetname");
+  emp_ents = array_combine(emp_ents, getEntArray("emp_swap", "targetname"));
+  emp_ents = array_combine(emp_ents, getEntArray("emp_light", "targetname"));
   array_thread(emp_ents, ::emp_entities);
 
   wait 2;
@@ -721,7 +726,7 @@ emp_empaftermath() {
   level.player lerpViewAngleClamp(.1, .1, 0, 60, 60, 40, 20);
   level.player PlayersetGroundReferenceEnt(undefined);
 
-  if(isdefined(level.emp_player_angles)) {
+  if(isDefined(level.emp_player_angles)) {
     level.player SetPlayerAngles(level.emp_player_angles);
     //level.player.playerrig.angles = level.player.angles;
   } else
@@ -730,7 +735,7 @@ emp_empaftermath() {
   level.player freezecontrols(false);
   level.player allowcrouch(true);
 
-  if(isdefined(level.emp_player_stance))
+  if(isDefined(level.emp_player_stance))
     level.player setstance(level.emp_player_stance);
 
   time = 1.5;
@@ -810,7 +815,7 @@ emp_foley() {
 
   flag_wait("emp_jet_crash");
 
-  self playsound("generic_pain_american_" + randomintrange(1, 9));
+  self playSound("generic_pain_american_" + randomintrange(1, 9));
   self anim_generic(self, "corner_standR_flinchB");
 
   self anim_generic(self, "corner_standR_alert_2_look");
@@ -834,7 +839,7 @@ emp_dunn() {
   flag_wait("emp_heli_crash");
 
   self notify("stop_loop");
-  self playsound("generic_pain_american_" + randomintrange(1, 9));
+  self playSound("generic_pain_american_" + randomintrange(1, 9));
   self thread anim_generic_gravity(self, "bog_b_spotter_react");
   length = getanimlength(getanim_generic("bog_b_spotter_react"));
   self delaythread(length * .93, ::anim_stopanimscripted);
@@ -919,8 +924,10 @@ emp_free_player() {
 }
 
 /************************************************************************************************************/
+
 /*													STREET													*/
 /************************************************************************************************************/
+
 street_main() {
   flag_wait("street_main");
   flag_clear("allow_ammo_pickups");
@@ -962,10 +969,10 @@ street_main() {
   level.foley thread dialogue_queue("dcemp_fly_seekshelter");
   //flag_set( "dc_emp_afternath" );
 
-  objective_add(level.objnum, "active", & "DCEMP_OBJ_CRASH_SITE");
+  objective_add(level.objnum, "active", &"DCEMP_OBJ_CRASH_SITE");
   objective_state(level.objnum, "done");
   level.objnum++;
-  objective_add(level.objnum, "active", & "DCEMP_OBJ_FIND_SHELTER");
+  objective_add(level.objnum, "active", &"DCEMP_OBJ_FIND_SHELTER");
   objective_onentity(level.objnum, level.dunn, (0, 0, 70));
   objective_current(level.objnum);
 
@@ -986,7 +993,7 @@ street_gohide_marine1() {
 
   self enable_heat_behavior();
 
-  temp = spawnstruct();
+  temp = spawnStruct();
   temp.origin = self.origin;
   temp.angles = self.angles + (0, -12, 0);
   temp thread anim_generic_gravity(self, "corner_standR_trans_OUT_6");
@@ -1012,11 +1019,11 @@ street_gohide_marine1() {
   node anim_generic_run(self, "run_turn_R45");
 
   self thread anim_generic_gravity(self, "run_react_stumble_non_loop");
-  self playsound("generic_pain_american_" + randomintrange(1, 9));
+  self playSound("generic_pain_american_" + randomintrange(1, 9));
   flag_wait("street_btr_death");
 
   self thread anim_generic(self, "bog_b_spotter_react");
-  self playsound("generic_pain_american_" + randomintrange(1, 9));
+  self playSound("generic_pain_american_" + randomintrange(1, 9));
   wait .05;
 
   self setanimtime(getanim_generic("bog_b_spotter_react"), .1);
@@ -1055,7 +1062,7 @@ street_gohide_marine1() {
   link delaycall(1.5, ::movez, 8, 1.5);
 
   link thread anim_generic(self, "traverse_window_M_2_dive");
-  self playsound("generic_meleecharge_american_" + randomintrange(1, 9));
+  self playSound("generic_meleecharge_american_" + randomintrange(1, 9));
 
   length = getanimlength(getanim_generic("traverse_window_M_2_dive"));
   wait length * .73;
@@ -1117,14 +1124,14 @@ street_gohide_dunn() {
   node anim_generic_reach(self, "exposed_idle_reactB");
   node thread anim_generic(self, "exposed_idle_reactB");
   length = getanimlength(getanim_generic("exposed_idle_reactB"));
-  self playsound("generic_pain_american_" + randomintrange(1, 9));
+  self playSound("generic_pain_american_" + randomintrange(1, 9));
   wait length - .75;
   self anim_stopanimscripted();
 
   node = getstruct(node.target, "targetname");
 
   node anim_generic_reach(self, "run_pain_fallonknee_03");
-  //self playsound( "generic_pain_american_" + randomintrange( 1,9 ) );
+  //self playSound( "generic_pain_american_" + randomintrange( 1,9 ) );
   //Whoa!!!
   level.foley delaythread(.5, ::dialogue_queue, "dcemp_fly_justkeepmovin");
   //Look out!!!
@@ -1143,12 +1150,12 @@ street_gohide_dunn() {
   self linkto(link);
   link delaycall(.25, ::movez, 12, 1);
 
-  self playsound("generic_meleecharge_american_" + randomintrange(1, 9));
+  self playSound("generic_meleecharge_american_" + randomintrange(1, 9));
   link anim_generic_run(self, "jump_across_100_spring");
 
   self unlink();
   link delete();
-  self playsound("generic_pain_american_" + randomintrange(1, 9));
+  self playSound("generic_pain_american_" + randomintrange(1, 9));
   self anim_generic_gravity_run(self, "run_react_duck_non_loop");
 
   self enable_arrivals();
@@ -1177,7 +1184,7 @@ street_gohide_foley() {
   node anim_generic_reach(self, "exposed_idle_reactB");
   node thread anim_generic(self, "exposed_idle_reactB");
   length = getanimlength(getanim_generic("exposed_idle_reactB"));
-  self playsound("generic_pain_american_" + randomintrange(1, 9));
+  self playSound("generic_pain_american_" + randomintrange(1, 9));
 
   //Don't stop!! Keep moving!!			
   self delaythread(length - 1.0, ::dialogue_queue, "dcemp_fly_dontstop");
@@ -1188,7 +1195,7 @@ street_gohide_foley() {
   node = getstruct(node.target, "targetname");
 
   node anim_generic_reach(self, "run_pain_fallonknee");
-  self playsound("generic_pain_american_" + randomintrange(1, 9));
+  self playSound("generic_pain_american_" + randomintrange(1, 9));
   node anim_generic_run(self, "run_pain_fallonknee");
 
   ////Go go go!!!			
@@ -1197,7 +1204,7 @@ street_gohide_foley() {
   node = getstruct(node.target, "targetname");
 
   node anim_generic_reach(self, "slide_across_car");
-  self playsound("generic_pain_american_" + randomintrange(1, 9));
+  self playSound("generic_pain_american_" + randomintrange(1, 9));
   node anim_generic_run(self, "slide_across_car");
 
   level.dunn delaythread(1.0, ::dialogue_queue, "dcemp_cpd_EMP");
@@ -1205,7 +1212,7 @@ street_gohide_foley() {
   node = getstruct(node.target, "targetname");
 
   node anim_generic_reach(self, "run_react_duck_non_loop");
-  self playsound("generic_pain_american_" + randomintrange(1, 9));
+  self playSound("generic_pain_american_" + randomintrange(1, 9));
   node anim_generic_run(self, "run_react_duck_non_loop");
 
   node = getstruct(node.target, "targetname");
@@ -1213,7 +1220,7 @@ street_gohide_foley() {
   node anim_generic_reach(self, "exposed_idle_reactB");
   node thread anim_generic(self, "exposed_idle_reactB");
   length = getanimlength(getanim_generic("exposed_idle_reactB"));
-  self playsound("generic_pain_american_" + randomintrange(1, 9));
+  self playSound("generic_pain_american_" + randomintrange(1, 9));
 
   wait length - .75;
   self anim_stopanimscripted();
@@ -1239,17 +1246,17 @@ street_gohide_foley() {
 }
 
 street_setup_stuff() {
-  array_thread(getentarray("meetup_allies", "targetname"), ::add_spawn_function, ::street_meetup_allies);
+  array_thread(getEntArray("meetup_allies", "targetname"), ::add_spawn_function, ::street_meetup_allies);
 
   getent("street_btr", "targetname") add_spawn_function(::street_btr_scene);
   getent("street_crash_motorcycle", "targetname") thread street_crash_motorcycle();
   level.fallguy = getent("street_guy_fall_guy", "targetname");
   level.fallguy add_spawn_function(::street_guy_fall_guy);
 
-  array_thread(getentarray("street_crash_heli", "script_noteworthy"), ::street_crash_helis);
+  array_thread(getEntArray("street_crash_heli", "script_noteworthy"), ::street_crash_helis);
   array_thread(getstructarray("street_crash_heli_anim", "script_noteworthy"), ::street_crash_helis_anim);
 
-  array_thread(getentarray("corner_truck_engine_crash", "targetname"), ::corner_truck_engine_crash);
+  array_thread(getEntArray("corner_truck_engine_crash", "targetname"), ::corner_truck_engine_crash);
   thread corner_plane_crash();
 
   clip = getent("hide_clip", "targetname");
@@ -1296,8 +1303,10 @@ init_meetup_allies() {
 }
 
 /************************************************************************************************************/
+
 /*													CORNER													*/
 /************************************************************************************************************/
+
 #using_animtree("generic_human");
 corner_main() {
   flag_wait("corner_main");
@@ -1327,7 +1336,7 @@ corner_main() {
 
   objective_state(level.objnum, "done");
   level.objnum++;
-  objective_add(level.objnum, "active", & "DCEMP_OBJ_FOLLOW_SGT_FOLEY", level.foley.origin);
+  objective_add(level.objnum, "active", &"DCEMP_OBJ_FOLLOW_SGT_FOLEY", level.foley.origin);
   objective_current(level.objnum);
   objective_onentity(level.objnum, level.foley, (0, 0, 70));
 
@@ -1579,7 +1588,7 @@ corner_plane_crash() {
   flag_wait("street_crash_heli_done");
 
   node = getent("corner_crash_plane_link", "targetname");
-  node playsound("scn_dcemp_jet_crash_offscreen");
+  node playSound("scn_dcemp_jet_crash_offscreen");
 
   wait 2.5;
 
@@ -1602,8 +1611,8 @@ corner_plane_crash() {
   node = getstruct("corner_plane_fx_light", "targetname");
   model = spawn("script_model", node.origin);
   model.angles = node.angles;
-  model setmodel("tag_origin");
-  playfxontag(level._effect["planecrash_spotlight"], model, "TAG_ORIGIN");
+  model setModel("tag_origin");
+  playFXOnTag(level._effect["planecrash_spotlight"], model, "TAG_ORIGIN");
   delaythread(.5, ::lerp_savedDvar, "r_spotlightBrightness", 0, 3);
 
   model delaycall(3.75, ::delete);
@@ -1625,8 +1634,10 @@ corner_plane_crash() {
 }
 
 /************************************************************************************************************/
+
 /*													MEETUP													*/
 /************************************************************************************************************/
+
 meetup_main() {
   getent("meetup_runner", "targetname") add_spawn_function(::meetup_runner);
 
@@ -1671,7 +1682,7 @@ meetup_main() {
 
   flag_wait("meetup_challenge_start");
 
-  aimobj = spawn("script_origin", level.runner geteye() + (0, 0, 16));
+  aimobj = spawn("script_origin", level.runner getEye() + (0, 0, 16));
   aimobj linkto(level.runner);
   level.dunn setentitytarget(aimobj);
   level.dunn enable_dontevershoot();
@@ -1888,7 +1899,7 @@ meetup_runner() {
 
   self waittillmatch("single anim", "footstep_left_small");
   wait .5;
-  vec = anglestoforward(node.angles);
+  vec = anglesToForward(node.angles);
   vec *= 16;
 
   node moveto(node.origin + vec, .5);
@@ -1912,8 +1923,10 @@ meetup_runner() {
 }
 
 /************************************************************************************************************/
+
 /*													LOBBY													*/
 /************************************************************************************************************/
+
 lobby_main() {
   thread handle_sunlight();
   thread vision_set_lobby();
@@ -1943,7 +1956,7 @@ lobby_main() {
 
   wait 1.5;
 
-  objective_string_NoMessage(level.objnum, & "DCEMP_OBJ_WHISKEY_HOTEL");
+  objective_string_NoMessage(level.objnum, &"DCEMP_OBJ_WHISKEY_HOTEL");
 
   lobby_moveout();
 
@@ -2246,7 +2259,7 @@ lobby_go_robo(node) {
 
   node = getstruct("lobby_door_open", "targetname");
   door = getent("lobby_door_left", "targetname");
-  parts = getentarray(door.target, "targetname");
+  parts = getEntArray(door.target, "targetname");
   array_call(parts, ::linkto, door);
 
   level.team["marine3"] delaythread(1.5, ::dialogue_queue, "dcemp_ar3_star");
@@ -2260,7 +2273,7 @@ lobby_go_robo(node) {
 
   wait .1;
 
-  node = spawnstruct();
+  node = spawnStruct();
   node.origin = self.origin;
   node.angles = (0, 48, 0);
 
@@ -2350,13 +2363,15 @@ lobby_go_extra(node) {
 }
 
 /************************************************************************************************************/
+
 /*													OFFICE													*/
 /************************************************************************************************************/
+
 office_main() {
   thread handle_color_advance("office_ally_color_", 2, 6);
-  array_thread(getentarray("office_enemies_wave1", "script_noteworthy"), ::add_spawn_function, ::office_enemies_wave1);
-  array_thread(getentarray("office_enemies_wave1_runner", "targetname"), ::add_spawn_function, ::office_enemies_wave1_runner);
-  array_thread(getentarray("office_enemies_wave3", "targetname"), ::add_spawn_function, ::flag_set, "office_enemies_wave3");
+  array_thread(getEntArray("office_enemies_wave1", "script_noteworthy"), ::add_spawn_function, ::office_enemies_wave1);
+  array_thread(getEntArray("office_enemies_wave1_runner", "targetname"), ::add_spawn_function, ::office_enemies_wave1_runner);
+  array_thread(getEntArray("office_enemies_wave3", "targetname"), ::add_spawn_function, ::flag_set, "office_enemies_wave3");
   getent("office_flickerlight1", "targetname") thread flickerlight_flares();
 
   snd = getent("office_suppressive_fire_target", "targetname");
@@ -2393,8 +2408,8 @@ office_main() {
 
   //wave 2
   enemies = get_living_ai_array("office_enemies_wave1", "script_noteworthy");
-  spawners = getentarray("office_enemies_wave2", "targetname");
-  for (i = 0; i < enemies.size; i++)
+  spawners = getEntArray("office_enemies_wave2", "targetname");
+  for(i = 0; i < enemies.size; i++)
     spawners[i] delete();
 
   //blue retreat 1	
@@ -2432,10 +2447,10 @@ office_main() {
   //wave 3
   enemies = get_living_ai_array("office_enemies_wave1", "script_noteworthy");
   enemies = array_combine(enemies, get_living_ai_array("office_enemies_wave2", "script_noteworthy"));
-  spawners = getentarray("office_enemies_wave3", "targetname");
+  spawners = getEntArray("office_enemies_wave3", "targetname");
 
   if(enemies.size < spawners.size) {
-    for (i = 0; i < enemies.size; i++)
+    for(i = 0; i < enemies.size; i++)
       spawners[i] delete();
   } else
     array_call(spawners, ::delete);
@@ -2474,9 +2489,9 @@ office_enemies_wait_spawn_final() {
 office_kill_enemies() {
   flag_wait("parking_player_jumped_down");
 
-  if(flag("office_done"))
+  if(flag("office_done")) {
     return;
-
+  }
   if(isalive(level.team["marine1"]))
     level.team["marine1"] kill();
 
@@ -2501,10 +2516,12 @@ office_kill_enemies() {
 }
 
 /************************************************************************************************************/
+
 /*													PARKING													*/
 /************************************************************************************************************/
+
 parking_main() {
-  array_thread(getentarray("parking_btr_guys", "targetname"), ::add_spawn_function, ::parking_btr_guys);
+  array_thread(getEntArray("parking_btr_guys", "targetname"), ::add_spawn_function, ::parking_btr_guys);
 
   thread parking_drone();
   thread parking_dead_check();
@@ -2567,16 +2584,16 @@ parking_main() {
 
 parking_lights_setup() {
   flag_wait_any("parking_player_jumped_down", "parking_main");
-  lights = getentarray("parking_lighting_primary", "script_noteworthy");
+  lights = getEntArray("parking_lighting_primary", "script_noteworthy");
   array_call(lights, ::setlightcolor, (.85, .85, 1));
   flag_set("spotlight_lightning");
 }
 
 parking_dialogue() {
   parking_dialogue_wait();
-  if(flag("parking_player_jumped_down"))
+  if(flag("parking_player_jumped_down")) {
     return;
-
+  }
   level endon("parking_open_fire");
 
   level.dunn dialogue_queue("dcemp_cpd_huaah");
@@ -2591,7 +2608,7 @@ parking_dialogue_wait() {
   level endon("parking_player_jumped_down");
 
   foreach(actor in level.team) {
-    while (actor.isSpeaking)
+    while(actor.isSpeaking)
       wait .1;
   }
 }
@@ -2610,9 +2627,9 @@ parking_dialogue2() {
 }
 
 parking_building_scene() {
-  if(flag("parking_player_jumped_down"))
+  if(flag("parking_player_jumped_down")) {
     return;
-
+  }
   level endon("parking_open_fire");
 
   level.foley waittill("parking_start_at_node");
@@ -2691,17 +2708,17 @@ parking_open_fire() {
 
   flag_wait("parking_open_fire");
 
-  while (!flag("parking_btr_guys_dead")) {
+  while(!flag("parking_btr_guys_dead")) {
     flashorigin = self gettagorigin("TAG_FLASH");
     vec1 = vectornormalize(node.origin - flashorigin);
-    vec2 = anglestoforward(self gettagAngles("TAG_FLASH"));
+    vec2 = anglesToForward(self gettagAngles("TAG_FLASH"));
     if(vectordot(vec1, vec2) > .7)
       self shoot();
     else
-    if(!player_looking_at(self geteye()) && distancesquared(self.origin, level.player.origin) > squared(512)) {
-      array = bullettrace(self geteye(), node.origin, false, self);
-      if(!isdefined(array["entity"]) || !isplayer(array["entity"]))
-        magicbullet(self.weapon, self geteye(), node.origin);
+    if(!player_looking_at(self getEye()) && distancesquared(self.origin, level.player.origin) > squared(512)) {
+      array = bulletTrace(self getEye(), node.origin, false, self);
+      if(!isDefined(array["entity"]) || !isplayer(array["entity"]))
+        magicbullet(self.weapon, self getEye(), node.origin);
     }
     wait .1;
   }
@@ -2952,17 +2969,17 @@ parking_btr_guys_dialogue() {
   guys[3] play_sound_on_entity("dcemp_rs2_shutup");
 
   if(!flag("parking_btr_shot_at")) {
-    guys[0] PlaySound("dcemp_rs3_wecanhearyou", "sounddone");
+    guys[0] playSound("dcemp_rs3_wecanhearyou", "sounddone");
     guys[0] waittill("sounddone");
   } else
     guys[4] play_sound_on_entity("dcemp_rs3_wecanhearyou");
   if(!flag("parking_btr_shot_at")) {
-    guys[1] playsound("dcemp_rs4_howthehell", "sounddone");
+    guys[1] playSound("dcemp_rs4_howthehell", "sounddone");
     guys[1] waittill("sounddone");
   } else
     guys[4] play_sound_on_entity("dcemp_rs4_howthehell");
   if(!flag("parking_btr_shot_at")) {
-    guys[2] playsound("dcemp_rs5_shutupandhelp", "sounddone");
+    guys[2] playSound("dcemp_rs5_shutupandhelp", "sounddone");
     guys[2] waittill("sounddone");
   } else
     guys[4] play_sound_on_entity("dcemp_rs5_shutupandhelp");
@@ -2971,22 +2988,22 @@ parking_btr_guys_dialogue() {
   guys[3] play_sound_on_entity("dcemp_rs2_whatthehell");
 
   if(!flag("parking_btr_shot_at")) {
-    guys[2] playsound("dcemp_rs5_juststaycalm", "sounddone");
+    guys[2] playSound("dcemp_rs5_juststaycalm", "sounddone");
     guys[2] waittill("sounddone");
   } else
     guys[4] play_sound_on_entity("dcemp_rs5_juststaycalm");
   if(!flag("parking_btr_shot_at")) {
-    guys[1] playsound("dcemp_rs4_notbudging", "sounddone");
+    guys[1] playSound("dcemp_rs4_notbudging", "sounddone");
     guys[1] waittill("sounddone");
   } else
     guys[4] play_sound_on_entity("dcemp_rs4_notbudging");
   if(!flag("parking_btr_shot_at")) {
-    guys[0] playsound("dcemp_rs3_maybewecan", "sounddone");
+    guys[0] playSound("dcemp_rs3_maybewecan", "sounddone");
     guys[0] waittill("sounddone");
   } else
     guys[4] play_sound_on_entity("dcemp_rs3_maybewecan");
   if(!flag("parking_btr_shot_at")) {
-    guys[2] playsound("dcemp_rs5_wedonthavetime", "sounddone");
+    guys[2] playSound("dcemp_rs5_wedonthavetime", "sounddone");
     guys[2] waittill("sounddone");
   } else
     guys[4] play_sound_on_entity("dcemp_rs5_wedonthavetime");
@@ -3019,7 +3036,7 @@ parking_btr_guys() {
   add_func(::flag_set, "parking_btr_shot_at");
   thread do_wait_any();
 
-  if(!isdefined(level.parking_btr_guys))
+  if(!isDefined(level.parking_btr_guys))
     level.parking_btr_guys = [];
   level.parking_btr_guys[level.parking_btr_guys.size] = self;
 
@@ -3075,7 +3092,7 @@ parking_btr_guys() {
   length = getanimlength(getanim_generic(self.script_animation));
 
   wait length - randomfloatrange(1.5, 2.25);
-  thread play_sound_in_space("generic_death_russian_" + randomintrange(1, 8), self geteye());
+  thread play_sound_in_space("generic_death_russian_" + randomintrange(1, 8), self getEye());
   self thread bodyshot("killshot");
 
   wait 1;
@@ -3086,16 +3103,18 @@ parking_btr_guys() {
 }
 
 /************************************************************************************************************/
+
 /*													PLAZA													*/
 /************************************************************************************************************/
+
 plaza_main() {
-  array_thread(getentarray("plaza_enemies", "targetname"), ::add_spawn_function, ::plaza_enemies);
+  array_thread(getEntArray("plaza_enemies", "targetname"), ::add_spawn_function, ::plaza_enemies);
 
   add_wait(::flag_wait, "parking_high_spec");
   foreach(member in level.team) {
-    if(member.script_noteworthy == "marine1")
+    if(member.script_noteworthy == "marine1") {
       continue;
-
+    }
     member ent_flag_init("plaza_at_tree");
     member add_wait(::ent_flag_wait, "plaza_at_tree");
   }
@@ -3158,7 +3177,7 @@ plaza_main2() {
     member.grenadeammo = 0;
   }
 
-  thread array_spawn(getentarray("plaza_enemies", "targetname"), true);
+  thread array_spawn(getEntArray("plaza_enemies", "targetname"), true);
 
   plaza_dialogue2();
 
@@ -3187,7 +3206,7 @@ plaza_main2() {
   array_call(level.team, ::allowedstances, "prone", "crouch", "stand");
 
   //enemy stuff
-  thread array_spawn(getentarray("plaza_backup", "targetname"), true);
+  thread array_spawn(getEntArray("plaza_backup", "targetname"), true);
   array_thread(getaiarray("axis"), ::set_force_color, "blue");
 
   //more team stuff
@@ -3248,13 +3267,13 @@ plaza_main2() {
 plaza_kill_enemies() {
   flag_wait("tunnels_dunn_anim_end");
 
-  if(flag("parking_plaza_guys_dead"))
+  if(flag("parking_plaza_guys_dead")) {
     return;
-
+  }
   //this means the player ran back to join the fight
-  if(flag("parking_high_spec"))
+  if(flag("parking_high_spec")) {
     return;
-
+  }
   ai = getaiarray("axis");
   foreach(member in ai)
   member.diequietly = true;
@@ -3270,7 +3289,7 @@ plaza_moveup_marine1_backup() {
   flag_wait("plaza_open_fire");
 
   self notify("stop_loop");
-  if(isdefined(self.refnode))
+  if(isDefined(self.refnode))
     self.refnode notify("stop_loop");
   self anim_stopanimscripted();
   self.moveplaybackrate = 1.25;
@@ -3292,7 +3311,7 @@ plaza_moveup_dunn_backup() {
   flag_wait("plaza_open_fire");
 
   self notify("stop_loop");
-  if(isdefined(self.refnode))
+  if(isDefined(self.refnode))
     self.refnode notify("stop_loop");
   self anim_stopanimscripted();
   self.moveplaybackrate = 1.25;
@@ -3310,7 +3329,7 @@ plaza_moveup_foley_backup() {
   flag_wait("plaza_open_fire");
 
   self notify("stop_loop");
-  if(isdefined(self.refnode))
+  if(isDefined(self.refnode))
     self.refnode notify("stop_loop");
   self anim_stopanimscripted();
   self.moveplaybackrate = 1.25;
@@ -3509,9 +3528,9 @@ plaza_moveup_foley_end() {
   node anim_generic(self, "street_flare_throw");
   flag_set("plaza_flare_thrown");
 
-  if(flag("plaza_open_fire"))
+  if(flag("plaza_open_fire")) {
     return;
-
+  }
   self setgoalpos(self.origin);
   self.goalradius = 8;
   self allowedstances("crouch");
@@ -3703,8 +3722,10 @@ plaza_moveout_foley() {
 }
 
 /************************************************************************************************************/
+
 /*												START POINTS												*/
 /************************************************************************************************************/
+
 start_intro() {
   script2model_intro();
   flag_set("intro_fx");
@@ -3801,7 +3822,7 @@ start_emp() {
 
   thread maps\dc_crashsite::crash_end_scene();
 
-  emp_ents = getentarray("emp_show", "targetname");
+  emp_ents = getEntArray("emp_show", "targetname");
   array_thread(emp_ents, ::emp_entities);
 }
 
@@ -3850,10 +3871,10 @@ start_corner() {
   SetSavedDvar("ai_friendlyFireBlockDuration", "0");
   thread vision_set_sunset(0);
 
-  array_thread(getentarray("street_crash_heli", "script_noteworthy"), ::street_crash_helis);
+  array_thread(getEntArray("street_crash_heli", "script_noteworthy"), ::street_crash_helis);
   array_thread(getstructarray("street_crash_heli_anim", "script_noteworthy"), ::street_crash_helis_anim);
 
-  array_thread(getentarray("meetup_allies", "targetname"), ::add_spawn_function, ::init_meetup_allies);
+  array_thread(getEntArray("meetup_allies", "targetname"), ::add_spawn_function, ::init_meetup_allies);
   activate_trigger("meetup_allies", "target");
 
   level.sky delete();
@@ -3862,16 +3883,16 @@ start_corner() {
 
   getent("street_btr", "targetname") add_spawn_function(::street_btr_scene);
   getent("street_crash_motorcycle", "targetname") thread street_crash_motorcycle();
-  array_thread(getentarray("street_crash_car", "script_noteworthy"), ::street_crash_cars);
-  array_thread(getentarray("street_crash_heli", "script_noteworthy"), ::street_crash_helis);
+  array_thread(getEntArray("street_crash_car", "script_noteworthy"), ::street_crash_cars);
+  array_thread(getEntArray("street_crash_heli", "script_noteworthy"), ::street_crash_helis);
 
-  array_thread(getentarray("corner_truck_engine_crash", "targetname"), ::corner_truck_engine_crash);
+  array_thread(getEntArray("corner_truck_engine_crash", "targetname"), ::corner_truck_engine_crash);
   thread corner_plane_crash();
 
   exploder("hide_heli_crash");
 
   glass = getglassarray("street_hide_glass");
-  dir = anglestoforward((0, 345, 0));
+  dir = anglesToForward((0, 345, 0));
   foreach(piece in glass)
   noself_delaycall(1, ::destroyglass, piece, dir * 200);
 
@@ -3898,7 +3919,7 @@ start_corner() {
   thread flag_set_delayed("corner_main", .5);
   thread flag_set_delayed("street_crash_heli_done", .5);
 
-  objective_add(level.objnum, "active", & "DCEMP_OBJ_FIND_SHELTER", getstruct("hide_obj", "targetname").origin);
+  objective_add(level.objnum, "active", &"DCEMP_OBJ_FIND_SHELTER", getstruct("hide_obj", "targetname").origin);
   objective_current(level.objnum);
 }
 
@@ -3910,10 +3931,10 @@ start_meetup() {
   SetSavedDvar("ai_friendlyFireBlockDuration", "0");
   thread vision_set_sunset(0);
 
-  array_thread(getentarray("street_crash_heli", "script_noteworthy"), ::street_crash_helis);
+  array_thread(getEntArray("street_crash_heli", "script_noteworthy"), ::street_crash_helis);
   array_thread(getstructarray("street_crash_heli_anim", "script_noteworthy"), ::street_crash_helis_anim);
 
-  array_thread(getentarray("meetup_allies", "targetname"), ::add_spawn_function, ::init_meetup_allies);
+  array_thread(getEntArray("meetup_allies", "targetname"), ::add_spawn_function, ::init_meetup_allies);
   activate_trigger("meetup_allies", "target");
 
   level.sky delete();
@@ -3931,7 +3952,7 @@ start_meetup() {
 
   thread flag_set_delayed("meetup_main", .5);
 
-  objective_add(level.objnum, "active", & "DCEMP_OBJ_FOLLOW_SGT_FOLEY", level.foley.origin);
+  objective_add(level.objnum, "active", &"DCEMP_OBJ_FOLLOW_SGT_FOLEY", level.foley.origin);
   objective_current(level.objnum);
   objective_onentity(level.objnum, level.foley, (0, 0, 70));
 }
@@ -3943,7 +3964,7 @@ start_lobby() {
 
   SetSavedDvar("ai_friendlyFireBlockDuration", "0");
   thread vision_set_sunset(0);
-  array_thread(getentarray("meetup_allies", "targetname"), ::add_spawn_function, ::init_meetup_allies);
+  array_thread(getEntArray("meetup_allies", "targetname"), ::add_spawn_function, ::init_meetup_allies);
   activate_trigger("meetup_allies", "target");
 
   waittillframeend;
@@ -3980,7 +4001,7 @@ start_lobby() {
   thread maps\_weather::rainMedium(1);
   delaythread(1, maps\_weather::lightning, maps\dcemp_fx::lightning_normal, maps\dcemp_fx::lightning_flash);
 
-  objective_add(level.objnum, "active", & "DCEMP_OBJ_WHISKEY_HOTEL", level.foley.origin);
+  objective_add(level.objnum, "active", &"DCEMP_OBJ_WHISKEY_HOTEL", level.foley.origin);
   objective_current(level.objnum);
   objective_onentity(level.objnum, level.foley, (0, 0, 70));
 }
@@ -3991,7 +4012,7 @@ start_office() {
   flag_set("intro_fx");
 
   thread vision_set_office(0);
-  array_thread(getentarray("meetup_allies", "targetname"), ::add_spawn_function, ::init_meetup_allies);
+  array_thread(getEntArray("meetup_allies", "targetname"), ::add_spawn_function, ::init_meetup_allies);
   activate_trigger("meetup_allies", "target");
 
   thread handle_sunlight();
@@ -4013,12 +4034,12 @@ start_office() {
   array_thread(level.team, ::set_force_color, "red");
 
   door = getent("lobby_door_left", "targetname");
-  parts = getentarray(door.target, "targetname");
+  parts = getEntArray(door.target, "targetname");
   array_call(parts, ::linkto, door);
   door thread hunted_style_door_open("door_wood_slow_creaky_open");
 
   door = getent("lobby_door_right", "targetname");
-  parts = getentarray(door.target, "targetname");
+  parts = getEntArray(door.target, "targetname");
   array_call(parts, ::linkto, door);
   door connectpaths();
 
@@ -4026,14 +4047,14 @@ start_office() {
 
   time = .4;
   door rotateroll(-90, time);
-  door playsound("wood_door_kick");
+  door playSound("wood_door_kick");
 
   thread flag_set_delayed("office_main", .25);
 
   thread maps\_weather::rainHard(1);
   delaythread(1, maps\_weather::lightning, maps\dcemp_fx::lightning_normal, maps\dcemp_fx::lightning_flash);
 
-  objective_add(level.objnum, "active", & "DCEMP_OBJ_WHISKEY_HOTEL", level.foley.origin);
+  objective_add(level.objnum, "active", &"DCEMP_OBJ_WHISKEY_HOTEL", level.foley.origin);
   objective_current(level.objnum);
   objective_onentity(level.objnum, level.foley, (0, 0, 70));
 }
@@ -4062,7 +4083,7 @@ start_parking() {
   thread maps\_weather::rainHard(.05);
   delaythread(.05, maps\_weather::lightning, maps\dcemp_fx::lightning_normal, maps\dcemp_fx::lightning_flash);
 
-  objective_add(level.objnum, "active", & "DCEMP_OBJ_WHISKEY_HOTEL", level.foley.origin);
+  objective_add(level.objnum, "active", &"DCEMP_OBJ_WHISKEY_HOTEL", level.foley.origin);
   objective_current(level.objnum);
   objective_onentity(level.objnum, level.foley, (0, 0, 70));
   //sun shadow optimization
@@ -4083,7 +4104,7 @@ start_plaza() {
   trigger_off("parking_btr_guys", "target");
 
   flag_set("parking_main");
-  lights = getentarray("parking_lighting_primary", "script_noteworthy");
+  lights = getEntArray("parking_lighting_primary", "script_noteworthy");
   array_call(lights, ::setlightcolor, (.85, .85, 1));
   flag_set("spotlight_lightning");
 
@@ -4107,7 +4128,7 @@ start_plaza() {
   thread maps\_weather::rainHard(.05);
   delaythread(.05, maps\_weather::lightning, maps\dcemp_fx::lightning_normal, maps\dcemp_fx::lightning_flash);
 
-  objective_add(level.objnum, "active", & "DCEMP_OBJ_WHISKEY_HOTEL", level.foley.origin);
+  objective_add(level.objnum, "active", &"DCEMP_OBJ_WHISKEY_HOTEL", level.foley.origin);
   objective_current(level.objnum);
   objective_onentity(level.objnum, level.foley, (0, 0, 70));
   //sun shadow optimization
@@ -4117,7 +4138,7 @@ start_plaza() {
 start_common_dcemp() {
   level.team = [];
   add_global_spawn_function("allies", ::set_color_goal_func);
-  array_thread(getentarray("intro_team", "targetname"), ::add_spawn_function, ::team_init);
+  array_thread(getEntArray("intro_team", "targetname"), ::add_spawn_function, ::team_init);
   activate_trigger("intro_team", "target");
 
   flag_wait("team_initialized");
@@ -4154,40 +4175,37 @@ dcemp_music() {
     case "iss":
       flag_wait("dc_emp_missile");
       thread music_play("dc_emp_missile");
-      /#
+
       println(" *** MUSIC: dc_emp_missile *** ");
-      # /
-        flag_wait("dc_emp_missile_hit");
+
+      flag_wait("dc_emp_missile_hit");
       //	thread music_stop( 1.0 );
       //	level.player thread playlocalsoundwrapper( "dc_emp_missile_hit_sfx" );
       thread music_play("dc_emp_missile_hit");
-      /#
+
       println(" *** MUSIC: dc_emp_missile_hit *** ");
-      # /
 
-        case "emp":
-        case "street":
-        flag_wait("dc_emp_afternath");
+    case "emp":
+    case "street":
+      flag_wait("dc_emp_afternath");
       thread music_play("dc_emp_afternath");
-      /#
-      println(" *** MUSIC: dc_emp_afternath *** ");
-      # /
 
-        case "corner":
-        case "meetup":
-        case "lobby":
-        case "office":
-        case "parking":
-        case "plaza":
-        case "tunnels":
-        flag_wait("dc_emp_bunker");
+      println(" *** MUSIC: dc_emp_afternath *** ");
+
+    case "corner":
+    case "meetup":
+    case "lobby":
+    case "office":
+    case "parking":
+    case "plaza":
+    case "tunnels":
+      flag_wait("dc_emp_bunker");
       wait 2.5;
       thread music_play("dc_emp_bunker");
-      /#
-      println(" *** MUSIC: dc_emp_bunker *** ");
-      # /
 
-        break;
+      println(" *** MUSIC: dc_emp_bunker *** ");
+
+      break;
 
     default:
       AssertMsg("Unhandled start point " + level.start_point);

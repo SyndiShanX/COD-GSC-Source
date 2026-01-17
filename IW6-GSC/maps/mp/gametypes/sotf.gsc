@@ -25,9 +25,7 @@ main() {
 
   if(IsUsingMatchRulesData()) {
     level.initializeMatchRules = ::initializeMatchRules;
-    [
-      [level.initializeMatchRules]
-    ]();
+    [[level.initializeMatchRules]]();
     level thread reInitializeMatchRulesOnMigration();
   } else {
     registerScoreLimitDvar(level.gameType, 65);
@@ -115,9 +113,9 @@ onStartGameType() {
     game["defenders"] = oldAttackers;
   }
 
-  obj_text = & "OBJECTIVES_WAR";
-  obj_score_text = & "OBJECTIVES_WAR_SCORE";
-  obj_hint_text = & "OBJECTIVES_WAR_HINT";
+  obj_text = &"OBJECTIVES_WAR";
+  obj_score_text = &"OBJECTIVES_WAR_SCORE";
+  obj_hint_text = &"OBJECTIVES_WAR_HINT";
 
   setObjectiveText("allies", obj_text);
   setObjectiveText("axis", obj_text);
@@ -491,7 +489,7 @@ defineChestWeapons() {
 }
 
 sotfCrateContents(friendly_crate_model, enemy_crate_model) {
-  maps\mp\killstreaks\_airdrop::addCrateType("airdrop_sotf", "sotf_weapon", 100, ::sotfCrateThink, friendly_crate_model, friendly_crate_model, & "KILLSTREAKS_HINTS_WEAPON_PICKUP");
+  maps\mp\killstreaks\_airdrop::addCrateType("airdrop_sotf", "sotf_weapon", 100, ::sotfCrateThink, friendly_crate_model, friendly_crate_model, &"KILLSTREAKS_HINTS_WEAPON_PICKUP");
 }
 
 sotfCrateThink(dropType) {
@@ -503,7 +501,7 @@ sotfCrateThink(dropType) {
     crateHint = game["strings"][self.crateType + "_hint"];
   else
 
-    crateHint = & "PLATFORM_GET_KILLSTREAK";
+    crateHint = &"PLATFORM_GET_KILLSTREAK";
 
   weaponOverheadIcon = "icon_hunted";
 

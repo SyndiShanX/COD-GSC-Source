@@ -15,7 +15,7 @@ radio_chatter() {
 
   while(true) {
     wait(randomintrange(1, 6));
-    level.player playsound("blk_f35_radio_chatter", "sound_done");
+    level.player playSound("blk_f35_radio_chatter", "sound_done");
     level.player waittill("sound_done");
   }
 }

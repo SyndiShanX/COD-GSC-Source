@@ -5,7 +5,6 @@
 
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_perks;
-
 #namespace zm_perk_mod_death_perception;
 
 autoexec __init__system__() {
@@ -19,7 +18,7 @@ __init__() {
 __main__() {}
 
 function_bc420db4() {
-  zm_perks::register_perk_mod_basic_info(#"specialty_mod_awareness", "mod_death_perception", #"perk_death_perception", #"specialty_awareness", 3500);
+  zm_perks::register_perk_mod_basic_info(#"specialty_mod_awareness", "mod_death_perception", # "perk_death_perception", # "specialty_awareness", 3500);
   zm_perks::register_perk_threads(#"specialty_mod_awareness", &function_422ccf78, &function_f8f0703b);
 }
 

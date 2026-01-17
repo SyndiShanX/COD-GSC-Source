@@ -8,7 +8,7 @@
 #include maps\_zombiemode_utility;
 
 init() {
-  trigs = getentarray("claymore_purchase", "targetname");
+  trigs = getEntArray("claymore_purchase", "targetname");
   for(i = 0; i < trigs.size; i++) {
     model = getEnt(trigs[i].target, "targetname");
     model hide();
@@ -50,7 +50,7 @@ buy_claymores() {
             model thread maps\_zombiemode_weapons::weapon_show(who);
             self.claymores_triggered = true;
           }
-          trigs = getentarray("claymore_purchase", "targetname");
+          trigs = getEntArray("claymore_purchase", "targetname");
           for(i = 0; i < trigs.size; i++) {
             trigs[i] SetInvisibleToPlayer(who);
           }
@@ -64,7 +64,7 @@ buy_claymores() {
 
 set_claymore_visible() {
   players = getplayers();
-  trigs = getentarray("claymore_purchase", "targetname");
+  trigs = getEntArray("claymore_purchase", "targetname");
   while(1) {
     for(j = 0; j < players.size; j++) {
       if(!isDefined(players[j].has_claymores)) {
@@ -192,7 +192,7 @@ claymore_detonation() {
     if(!ent shouldAffectWeaponObject(self))
       continue;
     if(ent damageConeTrace(self.origin, self) > 0) {
-      self playsound("claymore_activated_SP");
+      self playSound("claymore_activated_SP");
       wait 0.4;
       if(isDefined(self.owner))
         self detonate(self.owner);
@@ -212,7 +212,7 @@ delete_claymores_on_death(ent) {
 }
 
 satchel_damage() {
-  self setcandamage(true);
+  self setCanDamage(true);
   self.health = 100000;
   attacker = undefined;
   playerTeamToAllow = "axis";
@@ -249,7 +249,7 @@ reset_satchel_explode_this_frame() {
 play_claymore_effects() {
   self endon("death");
   self waittill_not_moving();
-  PlayFXOnTag(level._effect["claymore_laser"], self, "tag_fx");
+  playFXOnTag(level._effect["claymore_laser"], self, "tag_fx");
 }
 
 give_claymores_after_rounds() {
@@ -291,9 +291,9 @@ show_claymore_hint(string) {
   self endon("death");
   self endon("disconnect");
   if(string == "claymore_purchased")
-    text = & "ZOMBIE_CLAYMORE_HOWTO";
+    text = &"ZOMBIE_CLAYMORE_HOWTO";
   else
-    text = & "ZOMBIE_CLAYMORE_ALREADY_PURCHASED";
+    text = &"ZOMBIE_CLAYMORE_ALREADY_PURCHASED";
   self setup_client_hintelem();
   self.hintelem setText(text);
   wait(3.5);

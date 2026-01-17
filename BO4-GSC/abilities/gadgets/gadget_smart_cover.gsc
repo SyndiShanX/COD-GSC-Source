@@ -19,7 +19,6 @@
 #include scripts\killstreaks\killstreaks_shared;
 #include scripts\weapons\deployable;
 #include scripts\weapons\weaponobjects;
-
 #namespace smart_cover;
 
 init_shared() {
@@ -80,7 +79,7 @@ function_1c601b99() {
 }
 
 function_716c6c70() {
-  self endon(#"death", #"cancel_timeout");
+  self endon(#"death", # "cancel_timeout");
   util::wait_network_frame(1);
 
   if(isDefined(self) && self getentitytype() == 6) {
@@ -186,7 +185,7 @@ function_a9427b5c(func) {
 }
 
 function_b397b517(timeoutoverride) {
-  self endon(#"death", #"cancel_timeout");
+  self endon(#"death", # "cancel_timeout");
   timeouttime = isDefined(timeoutoverride) ? timeoutoverride : level.smartcoversettings.bundle.timeout;
 
   if((isDefined(timeouttime) ? timeouttime : 0) == 0) {
@@ -216,7 +215,7 @@ function_bd071599(player, smartcover) {
   level endon(#"game_ended");
   player notify(#"hash_53db5f084a244a94");
   player endon(#"hash_53db5f084a244a94");
-  player endon(#"death", #"disconnect", #"joined_team", #"changed_specialist");
+  player endon(#"death", # "disconnect", # "joined_team", # "changed_specialist");
   smartcover endon(#"death");
   var_f5929597 = gettime() + int((isDefined(level.smartcoversettings.bundle.var_fee887dc) ? level.smartcoversettings.bundle.var_fee887dc : 0) * 1000);
   player.var_622765b5 = 1;
@@ -258,7 +257,7 @@ function_7ecb04ff(player) {
   level endon(#"game_ended");
   player notify(#"hash_51faf1a32d7e36b0");
   player endon(#"hash_51faf1a32d7e36b0");
-  player endon(#"death", #"disconnect", #"joined_team", #"changed_specialist");
+  player endon(#"death", # "disconnect", # "joined_team", # "changed_specialist");
 
   while(true) {
     waitframe(1);
@@ -476,14 +475,14 @@ function_21e722f6(watcher) {
 }
 
 function_d82c03d4(player) {
-  self endon(#"death", #"hacked");
-  player waittill(#"joined_team", #"disconnect");
+  self endon(#"death", # "hacked");
+  player waittill(#"joined_team", # "disconnect");
   player function_b11be5dc();
 }
 
 function_37f1dcd1() {
   level endon(#"game_ended");
-  self.owner endon(#"disconnect", #"joined_team", #"changed_specialist", #"hacked");
+  self.owner endon(#"disconnect", # "joined_team", # "changed_specialist", # "hacked");
   self endon(#"hash_5de1fc3780ea0eaa");
   waitresult = self waittill(#"death");
 
@@ -609,11 +608,11 @@ onkilled(var_c946c04c) {
 }
 
 function_884d0700(var_796be15d) {
-  return self.team == #"allies" ? level.smartcoversettings.bundle.var_ee0c73a5 : level.smartcoversettings.bundle.var_d3ea02d6;
+  return self.team == # "allies" ? level.smartcoversettings.bundle.var_ee0c73a5 : level.smartcoversettings.bundle.var_d3ea02d6;
 }
 
 getmodel(var_796be15d) {
-  return self.team == #"allies" ? level.smartcoversettings.bundle.var_397ed90c : level.smartcoversettings.bundle.var_b256e3da;
+  return self.team == # "allies" ? level.smartcoversettings.bundle.var_397ed90c : level.smartcoversettings.bundle.var_b256e3da;
 }
 
 function_d2368084(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, iboneindex, imodelindex) {
@@ -641,17 +640,17 @@ function_d2368084(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
     idamage = startinghealth / bundle.kshero_gravityspikes;
   } else if(isDefined(bundle.var_4be7d629) && weapon == getweapon(#"shock_rifle") && smeansofdeath == "MOD_IMPACT") {
     idamage = startinghealth / bundle.var_4be7d629;
-  } else if(isDefined(bundle.var_843b7bd3) && weapon.statname == #"planemortar") {
+  } else if(isDefined(bundle.var_843b7bd3) && weapon.statname == # "planemortar") {
     idamage = startinghealth / bundle.var_843b7bd3;
   } else if(isDefined(bundle.ksdartstokill) && (weapon == getweapon(#"dart_blade") || weapon == getweapon(#"dart_turret"))) {
     idamage = startinghealth / bundle.ksdartstokill;
-  } else if(isDefined(bundle.var_8eca21ba) && weapon.statname == #"recon_car") {
+  } else if(isDefined(bundle.var_8eca21ba) && weapon.statname == # "recon_car") {
     idamage = startinghealth / bundle.var_8eca21ba;
-  } else if(isDefined(bundle.ksremote_missile_missile) && weapon.statname == #"remote_missile_missile") {
+  } else if(isDefined(bundle.ksremote_missile_missile) && weapon.statname == # "remote_missile_missile") {
     idamage = startinghealth / bundle.ksremote_missile_missile;
   } else if(isDefined(bundle.kshero_pineapplegun) && weapon == getweapon(#"hero_pineapplegun")) {
     idamage = startinghealth / bundle.kshero_pineapplegun;
-  } else if(isDefined(bundle.kshero_bowlauncher) && weapon.statname == #"sig_bow_quickshot" && (smeansofdeath == "MOD_PROJECTILE_SPLASH" || smeansofdeath == "MOD_PROJECTILE" || smeansofdeath == "MOD_GRENADE_SPLASH")) {
+  } else if(isDefined(bundle.kshero_bowlauncher) && weapon.statname == # "sig_bow_quickshot" && (smeansofdeath == "MOD_PROJECTILE_SPLASH" || smeansofdeath == "MOD_PROJECTILE" || smeansofdeath == "MOD_GRENADE_SPLASH")) {
     idamage = startinghealth / bundle.kshero_bowlauncher;
   }
 
@@ -864,7 +863,7 @@ function_92112113(attacker, victim, weapon, attackerweapon, meansofdeath) {
   return false;
 }
 
-private function_4e6d9621(smartcover, origins, radii) {
+function_4e6d9621(smartcover, origins, radii) {
   assert(isarray(origins));
   assert(!isarray(radii) || origins.size == radii.size);
   assert(isDefined(smartcover.var_eda9690f) && smartcover.var_eda9690f.size > 0);
@@ -997,7 +996,7 @@ turretthink() {
 }
 
 microwaveentitypostshutdowncleanup(entity) {
-  entity endon(#"disconnect", #"end_microwaveentitypostshutdowncleanup");
+  entity endon(#"disconnect", # "end_microwaveentitypostshutdowncleanup");
   self endon(#"death");
   turret = self;
   turret_vehicle_entnum = turret.turret_vehicle_entnum;
@@ -1012,11 +1011,11 @@ microwaveentitypostshutdowncleanup(entity) {
 
 microwaveentity(entity) {
   turret = self;
-  turret endon(#"microwave_turret_shutdown", #"death");
-  entity endon(#"disconnect", #"death");
+  turret endon(#"microwave_turret_shutdown", # "death");
+  entity endon(#"disconnect", # "death");
 
   if(isplayer(entity)) {
-    entity endon(#"joined_team", #"joined_spectators");
+    entity endon(#"joined_team", # "joined_spectators");
   }
 
   turret thread microwaveentitypostshutdowncleanup(entity);

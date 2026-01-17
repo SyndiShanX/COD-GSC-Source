@@ -44,7 +44,7 @@ init() {
   level.resetPlayerScoreEveryRound = false;
   level.gameForfeited = false;
   level.halftimeType = "halftime";
-  level.halftimeSubCaption = & "MP_SWITCHING_SIDES_CAPS";
+  level.halftimeSubCaption = &"MP_SWITCHING_SIDES_CAPS";
   level.lastStatusTime = 0;
   level.wasWinning = "none";
   level.lastSlowProcessFrame = 0;
@@ -180,12 +180,12 @@ forceEnd(hostsucks) {
   level.forcedEnd = true;
   level.hostForcedEnd = true;
   if(hostsucks) {
-    endString = & "MP_HOST_SUCKS";
+    endString = &"MP_HOST_SUCKS";
   } else {
     if(level.splitscreen)
-      endString = & "MP_ENDED_GAME";
+      endString = &"MP_ENDED_GAME";
     else
-      endString = & "MP_HOST_ENDED_GAME";
+      endString = &"MP_HOST_ENDED_GAME";
   }
   setMatchFlag("disableIngameMenu", 1);
   makeDvarServerInfo("ui_text_endreason", endString);
@@ -214,7 +214,7 @@ killserverPc() {
   level.forcedEnd = true;
   level.hostForcedEnd = true;
   level.killserver = true;
-  endString = & "MP_HOST_ENDED_GAME";
+  endString = &"MP_HOST_ENDED_GAME";
   thread endGame(winner, endString);
 }
 updateGameEvents() {
@@ -318,7 +318,7 @@ matchStartTimer() {
   matchStartTimer maps\mp\gametypes\_hud::fontPulseInit();
   countTime = int(level.prematchPeriod);
   if(countTime >= 2) {
-    while (countTime > 0 && !level.gameEnded) {
+    while(countTime > 0 && !level.gameEnded) {
       matchStartTimer setValue(countTime);
       matchStartTimer thread maps\mp\gametypes\_hud::fontPulse(level);
       if(countTime == 2)
@@ -340,7 +340,7 @@ matchStartTimerSkip() {
 }
 waveSpawnTimer() {
   level endon("game_ended");
-  while (game["state"] == "playing") {
+  while(game["state"] == "playing") {
     time = getTime();
     if(time - level.lastWave["allies"] > (level.waveDelay["allies"] * 1000)) {
       level notify("wave_respawn_allies");
@@ -364,7 +364,7 @@ hostIdledOut() {
 sendAfterActionReport() {
   if(isPregame())
     return;
-  for (index = 0; index < level.players.size; index++) {
+  for(index = 0; index < level.players.size; index++) {
     player = level.players[index];
     if(player is_bot() || player isdemoclient()) {
       continue;
@@ -400,7 +400,7 @@ sendAfterActionReport() {
     player maps\mp\gametypes\_persistence::setAfterActionReportStat("matchBonus", int(player.pers["summary"]["match"]));
     recordPlayerStats(player, "total_xp", player.pers["summary"]["xp"]);
     placement = level.placement["all"];
-    for (otherPlayerIndex = 0; otherPlayerIndex < placement.size; otherPlayerIndex++) {
+    for(otherPlayerIndex = 0; otherPlayerIndex < placement.size; otherPlayerIndex++) {
       if(level.placement["all"][otherPlayerIndex] == player) {
         recordPlayerStats(player, "position", otherPlayerIndex);
       }
@@ -438,7 +438,7 @@ displayRoundEnd(winner, endReasonText) {
   if(level.displayRoundEndText) {
     setmatchflag("cg_drawSpectatorMessages", 0);
     players = level.players;
-    for (index = 0; index < players.size; index++) {
+    for(index = 0; index < players.size; index++) {
       player = players[index];
       if(!isDefined(player.pers["team"]) || player.pers["team"] == "spectator") {
         player[[level.spawnIntermission]](true);
@@ -491,7 +491,7 @@ displayRoundSwitch(winner, endReasonText) {
   leaderdialog = maps\mp\gametypes\_globallogic_audio::getRoundSwitchDialog(switchType);
   SetMatchTalkFlag("EveryoneHearsEveryone", 1);
   players = level.players;
-  for (index = 0; index < players.size; index++) {
+  for(index = 0; index < players.size; index++) {
     player = players[index];
     if(!isDefined(player.pers["team"]) || player.pers["team"] == "spectator") {
       player[[level.spawnIntermission]](true);
@@ -513,7 +513,7 @@ displayGameEnd(winner, endReasonText) {
   SetMatchTalkFlag("EveryoneHearsEveryone", 1);
   setmatchflag("cg_drawSpectatorMessages", 0);
   players = level.players;
-  for (index = 0; index < players.size; index++) {
+  for(index = 0; index < players.size; index++) {
     player = players[index];
     if(!isDefined(player.pers["team"]) || player.pers["team"] == "spectator") {
       player[[level.spawnIntermission]](true);
@@ -543,7 +543,7 @@ displayGameEnd(winner, endReasonText) {
   if(level.teamBased) {
     thread maps\mp\gametypes\_globallogic_audio::announceGameWinner(winner, level.postRoundTime / 2);
     players = level.players;
-    for (index = 0; index < players.size; index++) {
+    for(index = 0; index < players.size; index++) {
       player = players[index];
       team = player.pers["team"];
       if(level.splitscreen) {
@@ -575,15 +575,15 @@ getEndReasonText() {
     return game["strings"]["score_limit_reached"];
   if(level.forcedEnd) {
     if(level.hostForcedEnd)
-      return & "MP_HOST_ENDED_GAME";
+      return &"MP_HOST_ENDED_GAME";
     else
-      return & "MP_ENDED_GAME";
+      return &"MP_ENDED_GAME";
   }
   return game["strings"]["time_limit_reached"];
 }
 resetOutcomeForAllPlayers() {
   players = level.players;
-  for (index = 0; index < players.size; index++) {
+  for(index = 0; index < players.size; index++) {
     player = players[index];
     player notify("reset_outcome");
   }
@@ -621,7 +621,7 @@ setTopPlayerStats() {
   if(level.rankedMatch || level.wagerMatch) {
     placement = level.placement["all"];
     topThreePlayers = min(3, placement.size);
-    for (index = 0; index < topThreePlayers; index++) {
+    for(index = 0; index < topThreePlayers; index++) {
       if(level.placement["all"][index].score) {
         if(!index) {
           level.placement["all"][index] maps\mp\gametypes\_persistence::statAdd("TOPPLAYER", 1, true);
@@ -632,7 +632,7 @@ setTopPlayerStats() {
         level.placement["all"][index] notify("top3");
       }
     }
-    for (index = 3; index < placement.size; index++) {
+    for(index = 3; index < placement.size; index++) {
       level.placement["all"][index] notify("nottop3");
       level.placement["all"][index] notify("nottopplayer");
     }
@@ -647,7 +647,7 @@ setTopTeamStats(team) {
   topThreeTeamPlayers = min(3, placementTeam.size);
   if(placementTeam.size < 5)
     return;
-  for (index = 0; index < topThreeTeamPlayers; index++) {
+  for(index = 0; index < topThreeTeamPlayers; index++) {
     if(placementTeam[index].score) {
       placementTeam[index] maps\mp\gametypes\_persistence::statAdd("BASIC_TOP_3_TEAM", 1, false);
       placementTeam[index] maps\mp\gametypes\_persistence::statAdd("TOP3TEAM", 1, true);
@@ -682,7 +682,7 @@ endGame(winner, endReasonText) {
   players = level.players;
   newTime = getTime();
   SetMatchTalkFlag("EveryoneHearsEveryone", 1);
-  for (index = 0; index < players.size; index++) {
+  for(index = 0; index < players.size; index++) {
     player = players[index];
     player maps\mp\gametypes\_globallogic_player::freezePlayerForRoundEnd();
     player thread roundEndDoF(4.0);
@@ -728,7 +728,7 @@ endGame(winner, endReasonText) {
   maps\mp\gametypes\_wager::finalizeWagerGame();
   SetMatchTalkFlag("EveryoneHearsEveryone", 1);
   players = level.players;
-  for (index = 0; index < players.size; index++) {
+  for(index = 0; index < players.size; index++) {
     player = players[index];
     player closeMenu();
     player closeInGameMenu();
@@ -757,7 +757,7 @@ endGame(winner, endReasonText) {
   wait GetDvarFloat(#"scr_show_unlock_wait");
   if(!isPregame()) {
     players = level.players;
-    for (index = 0; index < players.size; index++) {
+    for(index = 0; index < players.size; index++) {
       player = players[index];
       player openMenu(game["menu_eog_unlock"]);
     }
@@ -765,7 +765,7 @@ endGame(winner, endReasonText) {
   thread timeLimitClock_Intermission(GetDvarFloat(#"scr_intermission_time"));
   wait GetDvarFloat(#"scr_intermission_time");
   players = level.players;
-  for (index = 0; index < players.size; index++) {
+  for(index = 0; index < players.size; index++) {
     player = players[index];
     player closeMenu();
     player closeInGameMenu();
@@ -774,10 +774,10 @@ endGame(winner, endReasonText) {
 }
 roundEndWait(defaultDelay, matchBonus) {
   notifiesDone = false;
-  while (!notifiesDone) {
+  while(!notifiesDone) {
     players = level.players;
     notifiesDone = true;
-    for (index = 0; index < players.size; index++) {
+    for(index = 0; index < players.size; index++) {
       if(!isDefined(players[index].doingNotify) || !players[index].doingNotify)
         continue;
       notifiesDone = false;
@@ -793,10 +793,10 @@ roundEndWait(defaultDelay, matchBonus) {
   level notify("give_match_bonus");
   wait(defaultDelay / 2);
   notifiesDone = false;
-  while (!notifiesDone) {
+  while(!notifiesDone) {
     players = level.players;
     notifiesDone = true;
-    for (index = 0; index < players.size; index++) {
+    for(index = 0; index < players.size; index++) {
       if(!isDefined(players[index].doingNotify) || !players[index].doingNotify)
         continue;
       notifiesDone = false;
@@ -849,15 +849,13 @@ checkScoreLimit() {
 }
 updateGameTypeDvars() {
   level endon("game_ended");
-  while (game["state"] == "playing") {
+  while(game["state"] == "playing") {
     roundlimit = maps\mp\gametypes\_globallogic_utils::getValueInRange(getDvarInt(level.roundLimitDvar), level.roundLimitMin, level.roundLimitMax);
     if(roundlimit != level.roundlimit) {
       level.roundlimit = roundlimit;
       level notify("update_roundlimit");
     }
-    timeLimit = [
-      [level.getTimeLimitDvarValue]
-    ]();
+    timeLimit = [[level.getTimeLimitDvarValue]]();
     if(timeLimit != level.timeLimit) {
       level.timeLimit = timeLimit;
       setDvar("ui_timelimit", level.timeLimit);
@@ -884,7 +882,7 @@ removeDisconnectedPlayerFromPlacement() {
   offset = 0;
   numPlayers = level.placement["all"].size;
   found = false;
-  for (i = 0; i < numPlayers; i++) {
+  for(i = 0; i < numPlayers; i++) {
     if(level.placement["all"][i] == self)
       found = true;
     if(found)
@@ -898,7 +896,7 @@ removeDisconnectedPlayerFromPlacement() {
   if(level.teamBased)
     return;
   numPlayers = level.placement["all"].size;
-  for (i = 0; i < numPlayers; i++) {
+  for(i = 0; i < numPlayers; i++) {
     player = level.placement["all"][i];
     player notify("update_outcome");
   }
@@ -908,15 +906,15 @@ updatePlacement() {
   if(!level.players.size)
     return;
   level.placement["all"] = [];
-  for (index = 0; index < level.players.size; index++) {
+  for(index = 0; index < level.players.size; index++) {
     if(level.players[index].team == "allies" || level.players[index].team == "axis")
       level.placement["all"][level.placement["all"].size] = level.players[index];
   }
   placementAll = level.placement["all"];
-  for (i = 1; i < placementAll.size; i++) {
+  for(i = 1; i < placementAll.size; i++) {
     player = placementAll[i];
     playerScore = player.score;
-    for (j = i - 1; j >= 0 && (playerScore > placementAll[j].score || (playerScore == placementAll[j].score && player.deaths < placementAll[j].deaths)); j--)
+    for(j = i - 1; j >= 0 && (playerScore > placementAll[j].score || (playerScore == placementAll[j].score && player.deaths < placementAll[j].deaths)); j--)
       placementAll[j + 1] = placementAll[j];
     placementAll[j + 1] = player;
   }
@@ -932,7 +930,7 @@ updateTeamPlacement() {
     return;
   placementAll = level.placement["all"];
   placementAllSize = placementAll.size;
-  for (i = 0; i < placementAllSize; i++) {
+  for(i = 0; i < placementAllSize; i++) {
     player = placementAll[i];
     team = player.pers["team"];
     placement[team][placement[team].size] = player;
@@ -966,7 +964,7 @@ updateTeamStatus() {
   level.squads["allies"] = [];
   level.squads["axis"] = [];
   players = level.players;
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     player = players[i];
     if(!isDefined(player) && level.splitscreen)
       continue;
@@ -984,7 +982,7 @@ updateTeamStatus() {
           level.activeplayers[level.activeplayers.size] = player;
         }
       } else {
-        if(player maps\mp\gametypes\_globallogic_spawn::maySpawn())
+        if(player maps\mp\gametypes\_globallogic_spawn::mayspawn())
           level.playerLives[team]++;
       }
     }
@@ -1030,7 +1028,7 @@ timeLimitClock() {
   level endon("game_ended");
   wait .05;
   clockObject = spawn("script_origin", (0, 0, 0));
-  while (game["state"] == "playing") {
+  while(game["state"] == "playing") {
     if(!level.timerStopped && level.timeLimit) {
       timeLeft = maps\mp\gametypes\_globallogic_utils::getTimeRemaining() / 1000;
       timeLeftInt = int(timeLeft + 0.5);
@@ -1066,7 +1064,7 @@ timeLimitClock_Intermission(waitTime) {
   clockObject = spawn("script_origin", (0, 0, 0));
   if(waitTime >= 10.0)
     wait(waitTime - 10.0);
-  for (;;) {
+  for(;;) {
     clockObject playSound("mpl_ui_timer_countdown");
     wait(1.0);
   }
@@ -1109,7 +1107,7 @@ prematchPeriod() {
     matchStartTimerSkip();
   }
   level.inPrematchPeriod = false;
-  for (index = 0; index < level.players.size; index++) {
+  for(index = 0; index < level.players.size; index++) {
     level.players[index] freeze_player_controls(false);
     level.players[index] enableWeapons();
     hintMessage = maps\mp\gametypes\_globallogic_ui::getObjectiveHintText(level.players[index].pers["team"]);
@@ -1134,7 +1132,7 @@ gracePeriod() {
     return;
   if(level.numLives) {
     players = level.players;
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       player = players[i];
       if(!player.hasSpawned && player.sessionteam != "spectator" && !isAlive(player))
         player.statusicon = "hud_status_dead";
@@ -1172,29 +1170,29 @@ Callback_StartGameType() {
     makeDvarServerInfo("scr_axis", "nva");
     makeDvarServerInfo("cg_thirdPersonAngle", 354);
     setDvar("cg_thirdPersonAngle", 354);
-    game["strings"]["press_to_spawn"] = & "PLATFORM_PRESS_TO_SPAWN";
+    game["strings"]["press_to_spawn"] = &"PLATFORM_PRESS_TO_SPAWN";
     if(level.teamBased) {
-      game["strings"]["waiting_for_teams"] = & "MP_WAITING_FOR_TEAMS";
-      game["strings"]["opponent_forfeiting_in"] = & "MP_OPPONENT_FORFEITING_IN";
+      game["strings"]["waiting_for_teams"] = &"MP_WAITING_FOR_TEAMS";
+      game["strings"]["opponent_forfeiting_in"] = &"MP_OPPONENT_FORFEITING_IN";
     } else {
-      game["strings"]["waiting_for_teams"] = & "MP_WAITING_FOR_PLAYERS";
-      game["strings"]["opponent_forfeiting_in"] = & "MP_OPPONENT_FORFEITING_IN";
+      game["strings"]["waiting_for_teams"] = &"MP_WAITING_FOR_PLAYERS";
+      game["strings"]["opponent_forfeiting_in"] = &"MP_OPPONENT_FORFEITING_IN";
     }
-    game["strings"]["match_starting_in"] = & "MP_MATCH_STARTING_IN";
-    game["strings"]["spawn_next_round"] = & "MP_SPAWN_NEXT_ROUND";
-    game["strings"]["waiting_to_spawn"] = & "MP_WAITING_TO_SPAWN";
-    game["strings"]["waiting_to_spawn_ss"] = & "MP_WAITING_TO_SPAWN_SS";
-    game["strings"]["match_starting"] = & "MP_MATCH_STARTING";
-    game["strings"]["change_class"] = & "MP_CHANGE_CLASS_NEXT_SPAWN";
-    game["strings"]["last_stand"] = & "MPUI_LAST_STAND";
-    game["strings"]["cowards_way"] = & "PLATFORM_COWARDS_WAY_OUT";
-    game["strings"]["tie"] = & "MP_MATCH_TIE";
-    game["strings"]["round_draw"] = & "MP_ROUND_DRAW";
-    game["strings"]["enemies_eliminated"] = & "MP_ENEMIES_ELIMINATED";
-    game["strings"]["score_limit_reached"] = & "MP_SCORE_LIMIT_REACHED";
-    game["strings"]["round_limit_reached"] = & "MP_ROUND_LIMIT_REACHED";
-    game["strings"]["time_limit_reached"] = & "MP_TIME_LIMIT_REACHED";
-    game["strings"]["players_forfeited"] = & "MP_PLAYERS_FORFEITED";
+    game["strings"]["match_starting_in"] = &"MP_MATCH_STARTING_IN";
+    game["strings"]["spawn_next_round"] = &"MP_SPAWN_NEXT_ROUND";
+    game["strings"]["waiting_to_spawn"] = &"MP_WAITING_TO_SPAWN";
+    game["strings"]["waiting_to_spawn_ss"] = &"MP_WAITING_TO_SPAWN_SS";
+    game["strings"]["match_starting"] = &"MP_MATCH_STARTING";
+    game["strings"]["change_class"] = &"MP_CHANGE_CLASS_NEXT_SPAWN";
+    game["strings"]["last_stand"] = &"MPUI_LAST_STAND";
+    game["strings"]["cowards_way"] = &"PLATFORM_COWARDS_WAY_OUT";
+    game["strings"]["tie"] = &"MP_MATCH_TIE";
+    game["strings"]["round_draw"] = &"MP_ROUND_DRAW";
+    game["strings"]["enemies_eliminated"] = &"MP_ENEMIES_ELIMINATED";
+    game["strings"]["score_limit_reached"] = &"MP_SCORE_LIMIT_REACHED";
+    game["strings"]["round_limit_reached"] = &"MP_ROUND_LIMIT_REACHED";
+    game["strings"]["time_limit_reached"] = &"MP_TIME_LIMIT_REACHED";
+    game["strings"]["players_forfeited"] = &"MP_PLAYERS_FORFEITED";
     if(!level.createFX_enabled) {
       Assert(isDefined(game["strings"]["allies_win"]));
       Assert(isDefined(game["strings"]["allies_win_round"]));
@@ -1219,9 +1217,7 @@ Callback_StartGameType() {
       Assert(isDefined(game["colors"]["axis"]));
       Assert(isDefined(game["voice"]["axis"]));
     }
-    [
-      [level.onPrecacheGameType]
-    ]();
+    [[level.onPrecacheGameType]]();
     game["gamestarted"] = true;
     game["teamScores"]["allies"] = 0;
     game["teamScores"]["axis"] = 0;
@@ -1308,7 +1304,7 @@ Callback_StartGameType() {
     thread maps\mp\gametypes\_friendicons::init();
   thread maps\mp\gametypes\_hud_message::init();
   stringNames = getArrayKeys(game["strings"]);
-  for (index = 0; index < stringNames.size; index++)
+  for(index = 0; index < stringNames.size; index++)
     precacheString(game["strings"][stringNames[index]]);
   level.maxPlayerCount = 0;
   level.playerCount["allies"] = 0;
@@ -1408,9 +1404,7 @@ checkRoundSwitch() {
     return false;
   assert(game["roundsplayed"] > 0);
   if(game["roundsplayed"] % level.roundswitch == 0) {
-    [
-      [level.onRoundSwitch]
-    ]();
+    [[level.onRoundSwitch]]();
     return true;
   }
   return false;
@@ -1457,7 +1451,7 @@ getPerks(player) {
         perks[2] = player.bot["specialty3"];
     } else {
       if(isDefined(level.default_perkIcon) && !maps\mp\gametypes\_customClasses::isUsingCustomGameModeClasses()) {
-        for (numPerks = 0; numPerks < level.default_perkIcon[player.curClass].size; numPerks++) {
+        for(numPerks = 0; numPerks < level.default_perkIcon[player.curClass].size; numPerks++) {
           if(isDefined(level.default_perkIcon[player.curClass][numPerks])) {
             perks[numPerks] = level.default_perkIcon[player.curClass][numPerks];
           }

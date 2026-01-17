@@ -12,15 +12,15 @@
 function main() {
   level.current_zone = [];
   level.current_state = [];
-  for (i = 0; i < 4; i++) {
+  for(i = 0; i < 4; i++) {
     level.current_zone[i] = 0;
     level.current_state[i] = 0;
   }
   level.hardpoints = [];
   level.visuals = [];
   level.hardpointfx = [];
-  clientfield::register("world", "hardpoint", 1, 5, "int", & hardpoint, 0, 0);
-  clientfield::register("world", "hardpointteam", 1, 5, "int", & hardpoint_state, 0, 0);
+  clientfield::register("world", "hardpoint", 1, 5, "int", &hardpoint, 0, 0);
+  clientfield::register("world", "hardpointteam", 1, 5, "int", &hardpoint_state, 0, 0);
   level.effect_scriptbundles = [];
   level.effect_scriptbundles["zoneEdgeMarker"] = struct::get_script_bundle("teamcolorfx", "teamcolorfx_koth_edge_marker");
   level.effect_scriptbundles["zoneEdgeMarkerWndw"] = struct::get_script_bundle("teamcolorfx", "teamcolorfx_koth_edge_marker_window");
@@ -90,28 +90,28 @@ function setup_hardpoint_fx(local_client_num, zone_index, state) {
     effects["zoneEdgeMarker"] = level._effect["zoneEdgeMarker"];
     effects["zoneEdgeMarkerWndw"] = level._effect["zoneEdgeMarkerWndw"];
   }
-  if(isdefined(level.hardpointfx[local_client_num])) {
+  if(isDefined(level.hardpointfx[local_client_num])) {
     foreach(fx in level.hardpointfx[local_client_num]) {
       stopfx(local_client_num, fx);
     }
   }
   level.hardpointfx[local_client_num] = [];
   if(zone_index) {
-    if(isdefined(level.visuals[zone_index])) {
+    if(isDefined(level.visuals[zone_index])) {
       fx_state = get_fx_state(local_client_num, state, shoutcaster::is_shoutcaster(local_client_num));
       foreach(visual in level.visuals[zone_index]) {
-        if(!isdefined(visual.script_fxid)) {
+        if(!isDefined(visual.script_fxid)) {
           continue;
         }
         fxid = get_fx(visual.script_fxid, fx_state, effects);
-        if(isdefined(visual.angles)) {
-          forward = anglestoforward(visual.angles);
+        if(isDefined(visual.angles)) {
+          forward = anglesToForward(visual.angles);
         } else {
           forward = (0, 0, 0);
         }
-        fxhandle = playfx(local_client_num, fxid, visual.origin, forward);
+        fxhandle = playFX(local_client_num, fxid, visual.origin, forward);
         level.hardpointfx[local_client_num][level.hardpointfx[local_client_num].size] = fxhandle;
-        if(isdefined(fxhandle)) {
+        if(isDefined(fxhandle)) {
           if(state == 1) {
             setfxteam(local_client_num, fxhandle, "allies");
             continue;

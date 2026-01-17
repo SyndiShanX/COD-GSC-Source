@@ -1819,5 +1819,4 @@ main() {
   ent.v["exploder"] = "building_crumble";
   ent.v["soundalias"] = "nil";
   ent.v["loopsound"] = "nil";
-
 }

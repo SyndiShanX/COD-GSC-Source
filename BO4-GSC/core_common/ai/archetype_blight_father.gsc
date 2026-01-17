@@ -8,7 +8,6 @@
 #include scripts\core_common\ai\systems\blackboard;
 #include scripts\core_common\ai\zombie_utility;
 #include scripts\core_common\spawner_shared;
-
 #namespace archetypeblightfather;
 
 autoexec main() {
@@ -17,13 +16,13 @@ autoexec main() {
   blightfatherinterface::registerblightfatherinterfaceattributes();
 }
 
-private function_a27b7fcf() {
+function_a27b7fcf() {
   blackboard::createblackboardforentity(self);
   ai::createinterfaceforentity(self);
   self.___archetypeonanimscriptedcallback = &function_aefef9ae;
 }
 
-private function_aefef9ae(entity) {
+function_aefef9ae(entity) {
   entity.__blackboard = undefined;
   entity function_a27b7fcf();
 
@@ -36,7 +35,7 @@ private function_aefef9ae(entity) {
   }
 }
 
-private registerbehaviorscriptfunctions() {}
+registerbehaviorscriptfunctions() {}
 
 spawnblightfather(spawner, location) {
   spawner.script_forcespawn = 1;
@@ -56,7 +55,7 @@ spawnblightfather(spawner, location) {
   return entity;
 }
 
-private function_ac921de9(entity) {
+function_ac921de9(entity) {
   entity melee();
 }
 

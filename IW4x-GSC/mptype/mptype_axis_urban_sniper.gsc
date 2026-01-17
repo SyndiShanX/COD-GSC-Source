@@ -4,7 +4,6 @@
 ***********************************************/
 
 main() {
-
   character\character_mp_opforce_urban_sniper::main();
 }
 

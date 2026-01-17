@@ -17,7 +17,6 @@
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
-
 #namespace zm_items;
 
 autoexec __init__system__() {
@@ -97,17 +96,16 @@ __main__() {
 
     var_7a1b3d24 = getdvarint(#"hash_7f8707c59bcda3cb", 0);
 
-      if(var_7a1b3d24 === 0) {
-        if(a_items.size > var_b38ebe37) {
-          for(i = var_b38ebe37; i < a_items.size; i++) {
-            a_items[i] delete();
-          }
+    if(var_7a1b3d24 === 0) {
+      if(a_items.size > var_b38ebe37) {
+        for(i = var_b38ebe37; i < a_items.size; i++) {
+          a_items[i] delete();
         }
       }
+    }
   }
 
   level thread function_307756a0();
-
 }
 
 player_on_spawned() {
@@ -138,7 +136,7 @@ function_4d230236(w_item, fn_callback) {
   level.item_callbacks[w_item][level.item_callbacks[w_item].size] = fn_callback;
 }
 
-private function_307756a0() {
+function_307756a0() {
   while(true) {
     waitresult = level waittill(#"player_bled_out");
     player = waitresult.player;
@@ -146,7 +144,7 @@ private function_307756a0() {
   }
 }
 
-private function_b64c32cf(player) {
+function_b64c32cf(player) {
   foreach(item in level.item_list) {
     if(item.var_337fc1cf && isDefined(player.item_inventory[item]) && player.item_inventory[item]) {
       if(item.var_9fffdcee) {
@@ -203,11 +201,11 @@ player_pick_up(player, w_item) {
   }
 
   level notify(#"component_collected", {
-    #component: w_item, 
+    #component: w_item,
     #holder: holder
   });
   player notify(#"component_collected", {
-    #component: w_item, 
+    #component: w_item,
     #holder: holder
   });
 
@@ -253,11 +251,11 @@ function_ab3bb6bf(holder, w_item) {
   }
 
   level notify(#"component_lost", {
-    #component: w_item, 
+    #component: w_item,
     #holder: holder
   });
   self notify(#"component_lost", {
-    #component: w_item, 
+    #component: w_item,
     #holder: holder
   });
 
@@ -289,4 +287,3 @@ debug_items() {
     wait 1;
   }
 }
-

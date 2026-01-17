@@ -7,7 +7,7 @@
 #include common_scripts\utility;
 
 init_loadout() {
-  if(!isdefined(level.dodgeloadout))
+  if(!isDefined(level.dodgeloadout))
     give_loadout();
   level.loadoutComplete = true;
   level notify("loadout complete");
@@ -30,7 +30,7 @@ char_switcher() {
   level.coop_player1 = level.player;
   level.coop_player2 = level.player2;
 
-  if(isdefined(level.character_switched) && level.character_switched) {
+  if(isDefined(level.character_switched) && level.character_switched) {
     if(is_coop()) {
       foreach(player in level.players) {
         player init_player();
@@ -54,8 +54,7 @@ char_switcher() {
 }
 
 give_loadout(character_selected) {
-
-  if(!isdefined(character_selected))
+  if(!isDefined(character_selected))
     character_selected = false;
 
   level.character_selected = character_selected;
@@ -67,10 +66,10 @@ give_loadout(character_selected) {
   if(is_coop())
     level.player2 SetDefaultActionSlot();
 
-  if(!isdefined(game["expectedlevel"]))
+  if(!isDefined(game["expectedlevel"]))
     game["expectedlevel"] = "";
 
-  if(!isdefined(level.campaign))
+  if(!isDefined(level.campaign))
     level.campaign = "american";
 
   if(string_starts_with(level.script, "pmc_")) {
@@ -257,7 +256,6 @@ give_loadout(character_selected) {
   }
 
   if(level.script == "dcburning") {
-
     level.player giveWeapon("m4m203_eotech");
     level.player giveWeapon("Beretta");
     level.player giveWeapon("fraggrenade");
@@ -273,7 +271,6 @@ give_loadout(character_selected) {
     return;
   }
   if(level.script == "trainer") {
-
     level.player giveWeapon("m4_grunt");
     level.player giveWeapon("deserteagle");
     level.player giveWeapon("fraggrenade");
@@ -485,9 +482,9 @@ give_loadout(character_selected) {
   			if( !character_selected )
   				precacheModel( "weapon_parabolic_knife" );
 
-  			assert( isdefined( level.players ) );
+  			assert( isDefined( level.players ) );
   			assert( level.players.size >= 2 );
-  			for ( i = 0 ; i < level.players.size ; i++ )
+  			for( i = 0 ; i < level.players.size ; i++ )
   			{
   				level.players[ i ] SetModelFunc( ::so_body_player_ranger );
   				level.players[ i ] giveWeapon( "Beretta" );
@@ -631,7 +628,7 @@ give_loadout(character_selected) {
     possible_precache_items[possible_precache_items.size] = "claymore";
 
     // first character
-    if(isdefined(level.coop_player1)) {
+    if(isDefined(level.coop_player1)) {
       if(is_coop())
         level.coop_player1 SetModelFunc(::so_body_player_woodland);
 
@@ -646,7 +643,7 @@ give_loadout(character_selected) {
     }
 
     // second character
-    if(isdefined(level.coop_player2)) {
+    if(isDefined(level.coop_player2)) {
       if(is_coop())
         level.coop_player2 SetModelFunc(::so_body_player_woodland);
 
@@ -941,7 +938,6 @@ give_loadout(character_selected) {
   }
 
   if(level.script == "ambush") {
-
     level.player giveWeapon("colt45");
     level.player giveWeapon("remington700");
     level.player giveWeapon("fraggrenade");
@@ -1451,7 +1447,7 @@ give_loadout(character_selected) {
       precacheModel("weapon_parabolic_knife");
     }
 
-    for (i = 0; i < level.players.size; i++) {
+    for(i = 0; i < level.players.size; i++) {
       if(level.players[i] != level.player)
         level.players[i] SetModelFunc(::so_body_player_seal);
 
@@ -1520,7 +1516,7 @@ give_loadout(character_selected) {
     return; // no weapons
   }
 
-  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
   // level.script is not a single player level. give default weapons.
   println("loadout.gsc: No level listing in _loadout.gsc, giving default guns");
   level.testmap = true;
@@ -1540,7 +1536,7 @@ give_loadout_specialops(character_selected) {
 
     switch_char = char_switcher();
 
-    for (i = 0; i < level.players.size; i++) {
+    for(i = 0; i < level.players.size; i++) {
       so_player_num(i);
       so_player_giveWeapon("fraggrenade");
       so_player_giveWeapon("flash_grenade");
@@ -1571,7 +1567,7 @@ give_loadout_specialops(character_selected) {
 
     switch_char = char_switcher();
 
-    for (i = 0; i < level.players.size; i++) {
+    for(i = 0; i < level.players.size; i++) {
       so_player_num(i);
 
       so_player_giveWeapon("fraggrenade");
@@ -1603,7 +1599,7 @@ give_loadout_specialops(character_selected) {
 
     switch_char = char_switcher();
 
-    for (i = 0; i < level.players.size; i++) {
+    for(i = 0; i < level.players.size; i++) {
       so_player_num(i);
       so_player_giveWeapon("beretta");
       so_player_giveWeapon("scar_h_reflex");
@@ -1629,7 +1625,7 @@ give_loadout_specialops(character_selected) {
 
     switch_char = char_switcher();
 
-    for (i = 0; i < level.players.size; i++) {
+    for(i = 0; i < level.players.size; i++) {
       so_player_num(i);
       so_player_giveWeapon("fraggrenade");
       so_player_giveWeapon("flash_grenade");
@@ -1649,7 +1645,7 @@ give_loadout_specialops(character_selected) {
 
     switch_char = char_switcher();
 
-    for (i = 0; i < level.players.size; i++) {
+    for(i = 0; i < level.players.size; i++) {
       so_player_num(i);
       so_player_giveWeapon("fraggrenade");
       so_player_giveWeapon("flash_grenade");
@@ -1671,7 +1667,7 @@ give_loadout_specialops(character_selected) {
 
     switch_char = char_switcher();
 
-    for (i = 0; i < level.players.size; i++) {
+    for(i = 0; i < level.players.size; i++) {
       so_player_num(i);
       so_player_giveWeapon("aa12_hb_silencer");
       so_player_giveWeapon("usp_silencer");
@@ -1692,7 +1688,7 @@ give_loadout_specialops(character_selected) {
 
     switch_char = char_switcher();
 
-    for (i = 0; i < level.players.size; i++) {
+    for(i = 0; i < level.players.size; i++) {
       so_player_num(i);
       so_player_giveWeapon("fraggrenade");
       so_player_giveWeapon("flash_grenade");
@@ -1716,7 +1712,7 @@ give_loadout_specialops(character_selected) {
 
     switch_char = char_switcher();
 
-    for (i = 0; i < level.players.size; i++) {
+    for(i = 0; i < level.players.size; i++) {
       so_player_num(i);
       so_player_giveWeapon("ranger");
       so_player_giveWeapon("tavor_eotech");
@@ -1737,7 +1733,7 @@ give_loadout_specialops(character_selected) {
 
     switch_char = char_switcher();
 
-    for (i = 0; i < level.players.size; i++) {
+    for(i = 0; i < level.players.size; i++) {
       so_player_num(i);
       so_player_giveWeapon("beretta");
       so_player_giveWeapon("scar_h_reflex");
@@ -1761,7 +1757,7 @@ give_loadout_specialops(character_selected) {
 
     switch_char = char_switcher();
 
-    for (i = 0; i < level.players.size; i++) {
+    for(i = 0; i < level.players.size; i++) {
       so_player_num(i);
       so_player_giveWeapon("beretta");
       so_player_giveWeapon("rpg_player");
@@ -1800,10 +1796,10 @@ give_loadout_specialops(character_selected) {
     if(!character_selected)
       precacheModel("weapon_parabolic_knife");
 
-    assert(isdefined(level.players));
+    assert(isDefined(level.players));
     assert(level.players.size >= 2);
 
-    for (i = 0; i < level.players.size; i++) {
+    for(i = 0; i < level.players.size; i++) {
       so_player_num(i);
       so_player_giveWeapon("scar_h_reflex");
       so_player_giveWeapon("beretta");
@@ -1825,7 +1821,7 @@ give_loadout_specialops(character_selected) {
 
     switch_char = char_switcher();
 
-    for (i = 0; i < level.players.size; i++) {
+    for(i = 0; i < level.players.size; i++) {
       so_player_num(i);
       so_player_giveWeapon("fraggrenade");
       so_player_giveWeapon("flash_grenade");
@@ -1845,312 +1841,314 @@ give_loadout_specialops(character_selected) {
       switch (level.gameskill) {
         case 2:
           player SetWeaponAmmoStock("flash_grenade", 2); //flash count = 2
-          player SetWeaponAmmoStock("m203_m4_reflex_arctic", 4); //m203 count = 5 ( one is in the clip )
-          break;
-        case 3:
-          player SetWeaponAmmoStock("flash_grenade", 1); //flash count = 1 
-          player SetWeaponAmmoStock("m203_m4_reflex_arctic", 1); //m203 count = 2 ( one is in the clip )
+          player SetWeaponAmmoStock("m203_m4_reflex_arctic", 4); //m203 count = 5 ( one is in the clip ) {
           break;
       }
+      case 3:
+        player SetWeaponAmmoStock("flash_grenade", 1); //flash count = 1
+      player SetWeaponAmmoStock("m203_m4_reflex_arctic", 1); //m203 count = 2 ( one is in the clip ) {
+      break;
     }
-
-    return;
   }
+}
 
-  if(level.script == "so_assault_oilrig") {
-    level.so_campaign = "seal";
+return;
+}
 
-    switch_char = char_switcher();
+if(level.script == "so_assault_oilrig") {
+  level.so_campaign = "seal";
 
-    for (i = 0; i < level.players.size; i++) {
-      so_player_num(i);
-      so_player_giveWeapon("fraggrenade");
-      so_player_giveWeapon("flash_grenade");
-      so_player_set_setOffhandSecondaryClass("flash");
-      so_player_giveWeapon("m4m203_reflex");
-      so_player_giveWeapon("m1014");
-      so_player_giveWeapon("claymore");
-      so_player_set_maxammo("claymore");
-      so_player_setactionslot(4, "weapon", "claymore");
-      if(i == 0)
-        so_player_set_switchToWeapon("m4m203_reflex");
-      else
-        so_player_set_switchToWeapon("m4m203_reflex");
-      so_player_setup_body(i);
-    }
+  switch_char = char_switcher();
 
-    so_players_give_loadout();
-    return;
-  }
-
-  if(level.script == "so_killspree_trainer") {
-    level.so_campaign = "ranger";
-
-    switch_char = char_switcher();
-
-    for (i = 0; i < level.players.size; i++) {
-      so_player_num(i);
-      so_player_giveWeapon("m4_grunt");
-      so_player_giveWeapon("usp");
-      if(i == 0)
-        so_player_set_switchToWeapon("m4_grunt");
-      else
-        so_player_set_switchToWeapon("m4_grunt");
-      so_player_setup_body(i);
-    }
-
-    so_players_give_loadout();
-    return;
-  }
-
-  if(level.script == "so_defuse_favela_escape") {
-    level.so_campaign = "desert";
-
-    switch_char = char_switcher();
-
-    for (i = 0; i < level.players.size; i++) {
-      so_player_num(i);
-      so_player_giveWeapon("m1014_eotech");
-      so_player_giveWeapon("fraggrenade");
-      so_player_giveWeapon("flash_grenade");
-      so_player_set_setOffhandSecondaryClass("flash");
-      so_player_setup_body(i);
-    }
-
-    so_players_give_loadout();
-
-    foreach(player in level.players) {
-      player giveWeapon("glock_akimbo", 0, true);
-      player switchToWeapon("glock_akimbo");
-    }
-
-    return;
-  }
-  /*
-  	if( level.script == "so_defense_dcemp" )
-  	{
-  		level.so_campaign = "ranger";
-
-  		switch_char = char_switcher();
-
-  		for ( i = 0; i < level.players.size; i++ )
-  		{
-  			so_player_num( i );
-  			so_player_giveWeapon( "m4m203_eotech" );
-  			so_player_giveWeapon( "Beretta" );
-  			so_player_giveWeapon( "fraggrenade" );
-  			so_player_giveWeapon( "flash_grenade" );
-  			so_player_set_setOffhandSecondaryClass( "flash" );
-  			so_player_set_switchToWeapon( "m4m203_eotech" );
-  			so_player_setup_body( i );
-  		}
-
-  		so_players_give_loadout();
-  		
-  		return;
-  	}
-  */
-  if(level.script == "so_timed_so_quicky") {
-    //		level.so_campaign = "ranger";
-    //		level.so_campaign = "seal";
-    //		level.so_campaign = "arctic";
-    level.so_campaign = "woodland";
-    //		level.so_campaign = "desert";
-    //		level.so_campaign = "ghillie";
-
-    give_default_loadout();
-
-    foreach(player in level.players) {
-      player takeWeapon("mp5");
-      player giveWeapon("m14ebr_thermal");
-      player switchToWeapon("m14ebr_thermal");
-    }
-
-    return;
-  }
-
-  if(level.script == "so_takeover_oilrig") {
-    level.so_campaign = "seal";
-
-    switch_char = char_switcher();
-
-    for (i = 0; i < level.players.size; i++) {
-      so_player_num(i);
-
-      so_player_giveWeapon("m240");
-      so_player_set_maxammo("m240");
-
-      so_player_giveWeapon("m79");
-      so_player_set_maxammo("m79");
-
-      so_player_giveWeapon("fraggrenade");
-      so_player_set_maxammo("fraggrenade");
-
-      so_player_giveWeapon("flash_grenade");
-      so_player_set_maxammo("flash_grenade");
-      so_player_set_setOffhandSecondaryClass("flash");
-
-      so_player_giveWeapon("claymore");
-      so_player_set_maxammo("claymore");
-      so_player_setactionslot(4, "weapon", "claymore");
-
-      so_player_set_switchToWeapon("m240");
-      so_player_setup_body(i);
-    }
-
-    so_players_give_loadout();
-    return;
-  }
-
-  if(level.script == "so_takeover_estate") {
-    level.so_campaign = "woodland";
-    level.so_stealth = true;
-
-    switch_char = char_switcher();
-
-    for (i = 0; i < level.players.size; i++) {
-      so_player_num(i);
-      so_player_giveWeapon("fraggrenade");
-      so_player_giveWeapon("flash_grenade");
-      so_player_set_setOffhandSecondaryClass("flash");
-      so_player_giveWeapon("m4m203_eotech");
-      so_player_giveWeapon("barrett");
-      so_player_giveWeapon("claymore");
-      so_player_set_maxammo("claymore");
-      so_player_setactionslot(4, "weapon", "claymore");
-      so_player_set_switchToWeapon("m4m203_eotech");
-      so_player_setup_body(i);
-    }
-
-    so_players_give_loadout();
-    return;
-  }
-
-  if(level.script == "so_intel_boneyard") {
-    level.so_campaign = "desert";
-
-    switch_char = char_switcher();
-
-    for (i = 0; i < level.players.size; i++) {
-      so_player_num(i);
-      so_player_giveWeapon("fraggrenade");
-      so_player_giveWeapon("flash_grenade");
-      so_player_set_setOffhandSecondaryClass("flash");
-      so_player_giveWeapon("m4m203_reflex");
-      so_player_giveWeapon("cheytac");
+  for(i = 0; i < level.players.size; i++) {
+    so_player_num(i);
+    so_player_giveWeapon("fraggrenade");
+    so_player_giveWeapon("flash_grenade");
+    so_player_set_setOffhandSecondaryClass("flash");
+    so_player_giveWeapon("m4m203_reflex");
+    so_player_giveWeapon("m1014");
+    so_player_giveWeapon("claymore");
+    so_player_set_maxammo("claymore");
+    so_player_setactionslot(4, "weapon", "claymore");
+    if(i == 0)
       so_player_set_switchToWeapon("m4m203_reflex");
-      so_player_setup_body(i);
-    }
-
-    so_players_give_loadout();
-    return;
+    else
+      so_player_set_switchToWeapon("m4m203_reflex");
+    so_player_setup_body(i);
   }
 
-  if(level.script == "so_juggernauts_favela") {
-    level.so_campaign = "desert";
+  so_players_give_loadout();
+  return;
+}
 
-    switch_char = char_switcher();
-
-    for (i = 0; i < level.players.size; i++) {
-      so_player_num(i);
-
-      so_player_giveWeapon("m79");
-      so_player_set_maxammo("m79");
-      so_player_giveWeapon("rpg_player");
-      so_player_set_maxammo("rpg_player");
-
-      so_player_giveWeapon("c4");
-      so_player_set_maxammo("c4");
-      so_player_setactionslot(2, "weapon", "c4");
-
-      so_player_giveWeapon("claymore");
-      so_player_set_maxammo("claymore");
-      so_player_setactionslot(4, "weapon", "claymore");
-
-      so_player_giveWeapon("fraggrenade");
-      so_player_giveWeapon("flash_grenade");
-      so_player_set_setOffhandSecondaryClass("flash");
-      so_player_set_switchToWeapon("m79");
-      so_player_setup_body(i);
-    }
-
-    so_players_give_loadout();
-
-    return;
-  }
-
-  if(level.script == "so_download_arcadia") {
-    level.so_campaign = "ranger";
-
-    switch_char = char_switcher();
-
-    for (i = 0; i < level.players.size; i++) {
-      so_player_num(i);
-
-      so_player_giveWeapon("fraggrenade");
-      so_player_giveWeapon("flash_grenade");
-      so_player_set_setOffhandSecondaryClass("flash");
-
-      so_player_giveWeapon("scar_h_reflex");
-      so_player_giveWeapon("beretta");
-      so_player_set_switchToWeapon("scar_h_reflex");
-
-      so_player_setup_body(i);
-    }
-
-    so_players_give_loadout();
-    return;
-  }
-
-  if(level.script == "so_chopper_invasion") {
-    level.so_campaign = "ranger";
-
-    switch_char = char_switcher();
-
-    for (i = 0; i < level.players.size; i++) {
-      so_player_num(i);
-
-      so_player_giveWeapon("c4");
-      so_player_set_maxammo("c4");
-      so_player_setactionslot(2, "weapon", "c4");
-
-      so_player_giveWeapon("claymore");
-      so_player_set_maxammo("claymore");
-      so_player_setactionslot(4, "weapon", "claymore");
-
-      so_player_giveWeapon("fraggrenade");
-      so_player_giveWeapon("flash_grenade");
-      so_player_set_setOffhandSecondaryClass("flash");
-
-      so_player_giveWeapon("ump45_digital_eotech");
-      so_player_giveWeapon("deserteagle");
-      so_player_set_switchToWeapon("ump45_digital_eotech");
-
-      so_player_setup_body(i);
-    }
-
-    so_players_give_loadout();
-    return;
-  }
-
-  if(level.script == "so_snowrace1_cliffhanger") {
-    level.so_campaign = "arctic";
-    give_default_loadout();
-    return;
-  }
-
-  if(level.script == "so_snowrace2_cliffhanger") {
-    level.so_campaign = "arctic";
-    give_default_loadout();
-    return;
-  }
-
-  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
-  println("loadout.gsc: No level listing in _loadout::give_loadout_specialops(), giving default guns");
-  level.testmap = true;
+if(level.script == "so_killspree_trainer") {
   level.so_campaign = "ranger";
 
+  switch_char = char_switcher();
+
+  for(i = 0; i < level.players.size; i++) {
+    so_player_num(i);
+    so_player_giveWeapon("m4_grunt");
+    so_player_giveWeapon("usp");
+    if(i == 0)
+      so_player_set_switchToWeapon("m4_grunt");
+    else
+      so_player_set_switchToWeapon("m4_grunt");
+    so_player_setup_body(i);
+  }
+
+  so_players_give_loadout();
+  return;
+}
+
+if(level.script == "so_defuse_favela_escape") {
+  level.so_campaign = "desert";
+
+  switch_char = char_switcher();
+
+  for(i = 0; i < level.players.size; i++) {
+    so_player_num(i);
+    so_player_giveWeapon("m1014_eotech");
+    so_player_giveWeapon("fraggrenade");
+    so_player_giveWeapon("flash_grenade");
+    so_player_set_setOffhandSecondaryClass("flash");
+    so_player_setup_body(i);
+  }
+
+  so_players_give_loadout();
+
+  foreach(player in level.players) {
+    player giveWeapon("glock_akimbo", 0, true);
+    player switchToWeapon("glock_akimbo");
+  }
+
+  return;
+}
+/*
+	if( level.script == "so_defense_dcemp" )
+	{
+		level.so_campaign = "ranger";
+
+		switch_char = char_switcher();
+
+		for( i = 0; i < level.players.size; i++ )
+		{
+			so_player_num( i );
+			so_player_giveWeapon( "m4m203_eotech" );
+			so_player_giveWeapon( "Beretta" );
+			so_player_giveWeapon( "fraggrenade" );
+			so_player_giveWeapon( "flash_grenade" );
+			so_player_set_setOffhandSecondaryClass( "flash" );
+			so_player_set_switchToWeapon( "m4m203_eotech" );
+			so_player_setup_body( i );
+		}
+
+		so_players_give_loadout();
+		
+		return;
+	}
+*/
+if(level.script == "so_timed_so_quicky") {
+  //		level.so_campaign = "ranger";
+  //		level.so_campaign = "seal";
+  //		level.so_campaign = "arctic";
+  level.so_campaign = "woodland";
+  //		level.so_campaign = "desert";
+  //		level.so_campaign = "ghillie";
+
   give_default_loadout();
+
+  foreach(player in level.players) {
+    player takeWeapon("mp5");
+    player giveWeapon("m14ebr_thermal");
+    player switchToWeapon("m14ebr_thermal");
+  }
+
+  return;
+}
+
+if(level.script == "so_takeover_oilrig") {
+  level.so_campaign = "seal";
+
+  switch_char = char_switcher();
+
+  for(i = 0; i < level.players.size; i++) {
+    so_player_num(i);
+
+    so_player_giveWeapon("m240");
+    so_player_set_maxammo("m240");
+
+    so_player_giveWeapon("m79");
+    so_player_set_maxammo("m79");
+
+    so_player_giveWeapon("fraggrenade");
+    so_player_set_maxammo("fraggrenade");
+
+    so_player_giveWeapon("flash_grenade");
+    so_player_set_maxammo("flash_grenade");
+    so_player_set_setOffhandSecondaryClass("flash");
+
+    so_player_giveWeapon("claymore");
+    so_player_set_maxammo("claymore");
+    so_player_setactionslot(4, "weapon", "claymore");
+
+    so_player_set_switchToWeapon("m240");
+    so_player_setup_body(i);
+  }
+
+  so_players_give_loadout();
+  return;
+}
+
+if(level.script == "so_takeover_estate") {
+  level.so_campaign = "woodland";
+  level.so_stealth = true;
+
+  switch_char = char_switcher();
+
+  for(i = 0; i < level.players.size; i++) {
+    so_player_num(i);
+    so_player_giveWeapon("fraggrenade");
+    so_player_giveWeapon("flash_grenade");
+    so_player_set_setOffhandSecondaryClass("flash");
+    so_player_giveWeapon("m4m203_eotech");
+    so_player_giveWeapon("barrett");
+    so_player_giveWeapon("claymore");
+    so_player_set_maxammo("claymore");
+    so_player_setactionslot(4, "weapon", "claymore");
+    so_player_set_switchToWeapon("m4m203_eotech");
+    so_player_setup_body(i);
+  }
+
+  so_players_give_loadout();
+  return;
+}
+
+if(level.script == "so_intel_boneyard") {
+  level.so_campaign = "desert";
+
+  switch_char = char_switcher();
+
+  for(i = 0; i < level.players.size; i++) {
+    so_player_num(i);
+    so_player_giveWeapon("fraggrenade");
+    so_player_giveWeapon("flash_grenade");
+    so_player_set_setOffhandSecondaryClass("flash");
+    so_player_giveWeapon("m4m203_reflex");
+    so_player_giveWeapon("cheytac");
+    so_player_set_switchToWeapon("m4m203_reflex");
+    so_player_setup_body(i);
+  }
+
+  so_players_give_loadout();
+  return;
+}
+
+if(level.script == "so_juggernauts_favela") {
+  level.so_campaign = "desert";
+
+  switch_char = char_switcher();
+
+  for(i = 0; i < level.players.size; i++) {
+    so_player_num(i);
+
+    so_player_giveWeapon("m79");
+    so_player_set_maxammo("m79");
+    so_player_giveWeapon("rpg_player");
+    so_player_set_maxammo("rpg_player");
+
+    so_player_giveWeapon("c4");
+    so_player_set_maxammo("c4");
+    so_player_setactionslot(2, "weapon", "c4");
+
+    so_player_giveWeapon("claymore");
+    so_player_set_maxammo("claymore");
+    so_player_setactionslot(4, "weapon", "claymore");
+
+    so_player_giveWeapon("fraggrenade");
+    so_player_giveWeapon("flash_grenade");
+    so_player_set_setOffhandSecondaryClass("flash");
+    so_player_set_switchToWeapon("m79");
+    so_player_setup_body(i);
+  }
+
+  so_players_give_loadout();
+
+  return;
+}
+
+if(level.script == "so_download_arcadia") {
+  level.so_campaign = "ranger";
+
+  switch_char = char_switcher();
+
+  for(i = 0; i < level.players.size; i++) {
+    so_player_num(i);
+
+    so_player_giveWeapon("fraggrenade");
+    so_player_giveWeapon("flash_grenade");
+    so_player_set_setOffhandSecondaryClass("flash");
+
+    so_player_giveWeapon("scar_h_reflex");
+    so_player_giveWeapon("beretta");
+    so_player_set_switchToWeapon("scar_h_reflex");
+
+    so_player_setup_body(i);
+  }
+
+  so_players_give_loadout();
+  return;
+}
+
+if(level.script == "so_chopper_invasion") {
+  level.so_campaign = "ranger";
+
+  switch_char = char_switcher();
+
+  for(i = 0; i < level.players.size; i++) {
+    so_player_num(i);
+
+    so_player_giveWeapon("c4");
+    so_player_set_maxammo("c4");
+    so_player_setactionslot(2, "weapon", "c4");
+
+    so_player_giveWeapon("claymore");
+    so_player_set_maxammo("claymore");
+    so_player_setactionslot(4, "weapon", "claymore");
+
+    so_player_giveWeapon("fraggrenade");
+    so_player_giveWeapon("flash_grenade");
+    so_player_set_setOffhandSecondaryClass("flash");
+
+    so_player_giveWeapon("ump45_digital_eotech");
+    so_player_giveWeapon("deserteagle");
+    so_player_set_switchToWeapon("ump45_digital_eotech");
+
+    so_player_setup_body(i);
+  }
+
+  so_players_give_loadout();
+  return;
+}
+
+if(level.script == "so_snowrace1_cliffhanger") {
+  level.so_campaign = "arctic";
+  give_default_loadout();
+  return;
+}
+
+if(level.script == "so_snowrace2_cliffhanger") {
+  level.so_campaign = "arctic";
+  give_default_loadout();
+  return;
+}
+
+// -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+println("loadout.gsc: No level listing in _loadout::give_loadout_specialops(), giving default guns");
+level.testmap = true;
+level.so_campaign = "ranger";
+
+give_default_loadout();
 }
 
 // To precache possible weapons for alternate character loadout
@@ -2196,18 +2194,18 @@ give_default_loadout_coop(num) {
 
 ///////////////////////////////////////////////
 // SavePlayerWeaponStatePersistent
-// 
+//
 // Saves the player's weapons and ammo state persistently( in the game variable )
 // so that it can be restored in a different map.
 // You can use strings for the slot:
-// 
+//
 // SavePlayerWeaponStatePersistent( "russianCampaign" );
-// 
+//
 // Or you can just use numbers:
-// 
+//
 // SavePlayerWeaponStatePersistent( 0 );
 // SavePlayerWeaponStatePersistent( 1 ); etc.
-// 
+//
 // In a different map, you can restore using RestorePlayerWeaponStatePersistent( slot );
 // Make sure that you always persist the data between map changes.
 
@@ -2216,7 +2214,7 @@ SavePlayerWeaponStatePersistent(slot) {
   if(level.player.health == 0)
     return;
   current = level.player GetCurrentPrimaryWeapon();
-  if((!isdefined(current)) || (current == "none"))
+  if((!isDefined(current)) || (current == "none"))
     assertmsg("Player's current weapon is 'none' or undefined. Make sure 'disableWeapons()' has not been called on the player when trying to save weapon states.");
   game["weaponstates"][slot]["current"] = current;
 
@@ -2225,7 +2223,7 @@ SavePlayerWeaponStatePersistent(slot) {
 
   game["weaponstates"][slot]["list"] = [];
   weapList = array_combine(level.player GetWeaponsListPrimaries(), level.player GetWeaponsListOffhands());
-  for (weapIdx = 0; weapIdx < weapList.size; weapIdx++) {
+  for(weapIdx = 0; weapIdx < weapList.size; weapIdx++) {
     game["weaponstates"][slot]["list"][weapIdx]["name"] = weapList[weapIdx];
 
     // below is only used if we want to NOT give max ammo
@@ -2242,12 +2240,12 @@ RestorePlayerWeaponStatePersistent(slot) {
 
   level.player takeallweapons();
 
-  for (weapIdx = 0; weapIdx < game["weaponstates"][slot]["list"].size; weapIdx++) {
+  for(weapIdx = 0; weapIdx < game["weaponstates"][slot]["list"].size; weapIdx++) {
     weapName = game["weaponstates"][slot]["list"][weapIdx]["name"];
 
-    if(isdefined(level.legit_weapons)) {
+    if(isDefined(level.legit_weapons)) {
       // weapon doesn't exist in this level
-      if(!isdefined(level.legit_weapons[weapName]))
+      if(!isDefined(level.legit_weapons[weapName]))
         continue;
     }
 
@@ -2264,13 +2262,13 @@ RestorePlayerWeaponStatePersistent(slot) {
     // level.player SetWeaponAmmoStock( weapName, game[ "weaponstates" ][ slot ][ "list" ][ weapIdx ][ "stock" ] );
   }
 
-  if(isdefined(level.legit_weapons)) {
+  if(isDefined(level.legit_weapons)) {
     weapname = game["weaponstates"][slot]["offhand"];
-    if(isdefined(level.legit_weapons[weapName]))
+    if(isDefined(level.legit_weapons[weapName]))
       level.player switchtooffhand(weapname);
 
     weapname = game["weaponstates"][slot]["current"];
-    if(isdefined(level.legit_weapons[weapName]))
+    if(isDefined(level.legit_weapons[weapName]))
       level.player SwitchToWeapon(weapname);
   } else {
     level.player switchtooffhand(game["weaponstates"][slot]["offhand"]);
@@ -2404,13 +2402,13 @@ set_legit_weapons_for_dc_whitehouse() {
 
 max_ammo_on_legit_sniper_escape_weapon() {
   heldweapons = level.player GetWeaponsListAll();
-  for (i = 0; i < heldweapons.size; i++) {
+  for(i = 0; i < heldweapons.size; i++) {
     weapon = heldweapons[i];
-    if(!isdefined(level.legit_weapons[weapon]))
+    if(!isDefined(level.legit_weapons[weapon]))
       continue;
-    if(weapon == "rpg")
+    if(weapon == "rpg") {
       continue;
-
+    }
     level.player givemaxammo(weapon);
   }
 }
@@ -2422,10 +2420,10 @@ force_player_to_use_legit_sniper_escape_weapon() {
   held_weapons = [];
   count = 0;
 
-  for (i = 0; i < heldweapons.size; i++) {
+  for(i = 0; i < heldweapons.size; i++) {
     weapon = heldweapons[i];
     held_weapons[weapon] = true;
-    if(isdefined(level.legit_weapons[weapon])) {
+    if(isDefined(level.legit_weapons[weapon])) {
       count++;
       continue;
     }
@@ -2433,9 +2431,9 @@ force_player_to_use_legit_sniper_escape_weapon() {
     level.player takeweapon(weapon);
   }
 
-  if(count == 2)
+  if(count == 2) {
     return;
-
+  }
   if(count == 0) {
     // need to fill in a slot
     level.player giveweapon("ak47");
@@ -2443,7 +2441,7 @@ force_player_to_use_legit_sniper_escape_weapon() {
   }
 
   // does player have a sniper rifle?
-  if(!isdefined(held_weapons[level.sniperescape_main_weapon]) && !isdefined(held_weapons["dragunov"])) {
+  if(!isDefined(held_weapons[level.sniperescape_main_weapon]) && !isDefined(held_weapons["dragunov"])) {
     level.player giveweapon(level.sniperescape_main_weapon);
     level.player switchtoWeapon(level.sniperescape_main_weapon);
   }
@@ -2461,7 +2459,7 @@ coop_gamesetup_menu() {
   foreach(idx, player in level.players)
   player maps\_gameskill::setDifficulty();
 
-  // character selection: 
+  // character selection:
   level.character_switched = false;
   flag_init("character_selected");
 
@@ -2487,7 +2485,7 @@ coop_gamesetup_menu() {
     if(is_coop() && (level_string == level.script)) {
       pilot_num = getdvar("ui_ac130_pilot_num");
 
-      if(isdefined(pilot_num) && pilot_num != "0")
+      if(isDefined(pilot_num) && pilot_num != "0")
         level.character_switched = true;
 
       //reset
@@ -2532,11 +2530,11 @@ character_select_menu()
 	}
 
  	// responses
- 	assert( isdefined( level.response_queue[ 0 ] ) );
+ 	assert( isDefined( level.response_queue[ 0 ] ) );
  	first_player = level.response_queue[ 0 ][ "player" ];
  	first_player_response = level.response_queue[ 0 ][ "response" ];
 
- 	//assert( isdefined( level.response_queue[ 1 ] ) );
+ 	//assert( isDefined( level.response_queue[ 1 ] ) );
  	//second_player = level.response_queue[ 1 ][ "player" ];
  	//second_player_response = level.response_queue[ 1 ][ "response" ];
 
@@ -2567,7 +2565,7 @@ character_select_menu()
 waittill_each_ready( player, ready_flag )
 {
 	response = " ";
-	while ( response != "char1" && response != "char2" )
+	while( response != "char1" && response != "char2" )
 	{
 		player waittill( "menuresponse", menu, response );
 
@@ -2675,7 +2673,7 @@ setup_character_menu()
 =============
 */
 coop_gamesetup_ac130() {
-  assertex(isdefined(level.specops_character_selector), "Failed to select character");
+  assertex(isDefined(level.specops_character_selector), "Failed to select character");
 
   if(level.specops_character_selector == "so_char_host")
     return level.players[0];
@@ -2693,7 +2691,7 @@ coop_gamesetup_ac130() {
   		return level.player;
   		*/
   /*
-  	if( isdefined( level.character_switched ) && level.character_switched )
+  	if( isDefined( level.character_switched ) && level.character_switched )
   		return level.player2;
 
   	return level.player;
@@ -2705,21 +2703,21 @@ so_player_num(num) {
   level.so_player_add_player_giveWeapon[num] = [];
 
   // level vars if this becomes more commmonly used should put the init somewhere above the loadout section.	
-  if(!isdefined(level.so_player_set_maxammo))
+  if(!isDefined(level.so_player_set_maxammo))
     level.so_player_set_maxammo = [];
-  if(!isdefined(level.so_player_set_setViewmodel))
+  if(!isDefined(level.so_player_set_setViewmodel))
     level.so_player_set_setViewmodel = [];
-  if(!isdefined(level.so_player_add_player_giveWeapon))
+  if(!isDefined(level.so_player_add_player_giveWeapon))
     level.so_player_add_player_giveWeapon = [];
-  if(!isdefined(level.so_player_set_setOffhandSecondaryClass))
+  if(!isDefined(level.so_player_set_setOffhandSecondaryClass))
     level.so_player_set_setOffhandSecondaryClass = [];
-  if(!isdefined(level.so_player_set_switchToWeapon))
+  if(!isDefined(level.so_player_set_switchToWeapon))
     level.so_player_set_switchToWeapon = [];
-  if(!isdefined(level.so_player_SetModelFunc))
+  if(!isDefined(level.so_player_SetModelFunc))
     level.so_player_SetModelFunc = [];
-  if(!isdefined(level.so_player_SetModelFunc_precache))
+  if(!isDefined(level.so_player_SetModelFunc_precache))
     level.so_player_SetModelFunc_precache = [];
-  if(!isdefined(level.so_player_SetActionSlot))
+  if(!isDefined(level.so_player_SetActionSlot))
     level.so_player_SetActionSlot = [];
 
   level.so_player_set_maxammo[num] = [];
@@ -2728,7 +2726,7 @@ so_player_num(num) {
 }
 
 so_player_giveWeapon(weapon) {
-  assert(isdefined(level.so_player_num));
+  assert(isDefined(level.so_player_num));
   num = level.so_player_num;
   if(!level.character_selected)
     precacheitem(weapon);
@@ -2736,25 +2734,25 @@ so_player_giveWeapon(weapon) {
 }
 
 so_player_set_maxammo(weapon) {
-  assert(isdefined(level.so_player_num));
+  assert(isDefined(level.so_player_num));
   num = level.so_player_num;
   level.so_player_set_maxammo[num][weapon] = 1;
 }
 
 so_player_set_setOffhandSecondaryClass(weapon) {
-  assert(isdefined(level.so_player_num));
+  assert(isDefined(level.so_player_num));
   num = level.so_player_num;
   level.so_player_set_setOffhandSecondaryClass[num] = weapon;
 }
 
 so_player_set_switchToWeapon(weapon) {
-  assert(isdefined(level.so_player_num));
+  assert(isDefined(level.so_player_num));
   num = level.so_player_num;
   level.so_player_set_switchToWeapon[num] = weapon;
 }
 
 so_player_set_setViewmodel(model) {
-  assert(isdefined(level.so_player_num));
+  assert(isDefined(level.so_player_num));
   num = level.so_player_num;
   if(!level.character_selected)
     precachemodel(model);
@@ -2762,28 +2760,27 @@ so_player_set_setViewmodel(model) {
 }
 
 so_player_SetModelFunc(func, precache_func) {
-  assert(isdefined(level.so_player_num));
+  assert(isDefined(level.so_player_num));
   num = level.so_player_num;
   level.so_player_SetModelFunc[num] = func;
 
-  assert(isdefined(precache_func));
+  assert(isDefined(precache_func));
   if(!level.character_selected)
     [[precache_func]]();
-
 }
 
 so_player_SetActionSlot(slot, parm1, parm2) {
-  assert(isdefined(slot));
-  assert(isdefined(parm1));
-  assert(isdefined(level.so_player_num));
+  assert(isDefined(slot));
+  assert(isDefined(parm1));
+  assert(isDefined(level.so_player_num));
   num = level.so_player_num;
 
-  struct = spawnstruct();
+  struct = spawnStruct();
   struct.slot = slot;
   struct.parm1 = parm1;
-  if(isdefined(parm2))
+  if(isDefined(parm2))
     struct.parm2 = parm2;
-  if(isdefined(level.so_player_SetActionSlot[num]))
+  if(isDefined(level.so_player_SetActionSlot[num]))
     index = level.so_player_SetActionSlot[num].size;
   else
     index = 0;
@@ -2795,7 +2792,7 @@ so_player_SetActionSlot(slot, parm1, parm2) {
 so_player_give_loadout(num) {
   player = self;
 
-  if(isdefined(level.so_player_SetModelFunc[num])) {
+  if(isDefined(level.so_player_SetModelFunc[num])) {
     player setmodelfunc(level.so_player_SetModelFunc[num]);
     player setanim( % code, 1, 0);
   }
@@ -2803,20 +2800,20 @@ so_player_give_loadout(num) {
   weapons = getarraykeys(level.so_player_add_player_giveWeapon[num]);
   foreach(weapon in weapons) {
     player giveweapon(weapon);
-    if(isdefined(level.so_player_set_maxammo[num][weapon]))
+    if(isDefined(level.so_player_set_maxammo[num][weapon]))
       player givemaxammo(weapon);
   }
 
-  if(isdefined(level.so_player_set_setOffhandSecondaryClass[num]))
+  if(isDefined(level.so_player_set_setOffhandSecondaryClass[num]))
     player setOffhandSecondaryClass("flash");
 
-  if(isdefined(level.so_player_SetActionSlot[num]))
+  if(isDefined(level.so_player_SetActionSlot[num]))
     player so_players_give_action(num);
 
-  if(isdefined(level.so_player_set_switchToWeapon[num]))
+  if(isDefined(level.so_player_set_switchToWeapon[num]))
     player switchtoweapon(level.so_player_set_switchToWeapon[num]);
 
-  if(isdefined(level.so_player_set_setViewmodel[num]))
+  if(isDefined(level.so_player_set_setViewmodel[num]))
     player setviewmodel(level.so_player_set_setViewmodel[num]);
 }
 
@@ -2824,7 +2821,7 @@ so_players_give_action(num) {
   player = self;
 
   foreach(struct in level.so_player_SetActionSlot[num]) {
-    if(isdefined(struct.parm2))
+    if(isDefined(struct.parm2))
       player SetActionSlot(struct.slot, struct.parm1, struct.parm2);
     else
       player SetActionSlot(struct.slot, struct.parm1);
@@ -2838,10 +2835,9 @@ so_players_give_loadout() {
 }
 
 UpdateModel(modelFunc) {
-
   self notify("newupdatemodel");
 
-  if(!isdefined(modelFunc)) {
+  if(!isDefined(modelFunc)) {
     self DetachAll();
     self setModel("");
     return;
@@ -2849,20 +2845,18 @@ UpdateModel(modelFunc) {
 
   self.last_modelfunc = modelFunc;
 
-  if(isdefined(self.is_hidden) && self.is_hidden)
+  if(isDefined(self.is_hidden) && self.is_hidden) {
     return;
-
+  }
   self endon("newupdatemodel");
 
-  for (;;) {
+  for(;;) {
     self DetachAll();
 
-    [
-      [modelFunc]
-    ]();
+    [[modelFunc]]();
 
     weapon_model = self GetPlayerWeaponModel();
-    if(isdefined(weapon_model)) {
+    if(isDefined(weapon_model)) {
       switch (weapon_model) {
         case "weapon_riot_shield":
           self attach(weapon_model, "tag_weapon_left", false);
@@ -2880,11 +2874,11 @@ UpdateModel(modelFunc) {
 
     // Figure out what, if anything, to put in the left hand.
     knife_model = self GetPlayerKnifeModel();
-    if(isdefined(knife_model)) {
+    if(isDefined(knife_model)) {
       self attach(knife_model, "tag_inhand", true);
     } else
     if(self isDualWielding()) {
-      if(isdefined(weapon_model))
+      if(isDefined(weapon_model))
         self attach(weapon_model, "tag_weapon_left", true);
     }
 
@@ -2892,7 +2886,7 @@ UpdateModel(modelFunc) {
     // Note: Dual Wielded weapons don't properly hide the extra hand.
     weapon = self GetCurrentWeapon();
     weapon_model = self GetPlayerWeaponModel();
-    if(isdefined(weapon_model)) {
+    if(isDefined(weapon_model)) {
       hide_tag_list = GetWeaponHideTags(weapon);
       if(isDefined(hide_tag_list)) {
         foreach(part in hide_tag_list)

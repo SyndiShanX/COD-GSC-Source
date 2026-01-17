@@ -36,8 +36,8 @@ get_poi_ref_by_index(idx) {
 init() {
   level.rts.networkintruders["axis"] = [];
   level.rts.networkintruders["allies"] = [];
-  level.rts.nointruderzones = getentarray("no_intruder", "targetname");
-  level.rts.intruderplantstring = & "SO_RTS_PLANT_INTRUDER";
+  level.rts.nointruderzones = getEntArray("no_intruder", "targetname");
+  level.rts.intruderplantstring = &"SO_RTS_PLANT_INTRUDER";
   initpois();
 }
 
@@ -50,7 +50,7 @@ poi_populate() {
     if(!isDefined(ref) || ref == "") {
       continue;
     }
-    poi = spawnstruct();
+    poi = spawnStruct();
     poi.idx = i;
     poi.ref = ref;
     poi.model = lookup_value(ref, i, 2);
@@ -229,7 +229,7 @@ add_poi(ref, entity, team, ui, ignore, useenthp, ui_note) {
     poi.angles = poi.entity.angles;
 
     if(isDefined(poi.model) && poi.model != "") {
-      poi.entity setmodel(poi.model);
+      poi.entity setModel(poi.model);
       poi.entity disconnectpaths();
     }
 
@@ -243,7 +243,7 @@ add_poi(ref, entity, team, ui, ignore, useenthp, ui_note) {
       poi.entity.takedamage = 1;
 
       if(isDefined(poi.target)) {
-        targets = getentarray(poi.target, "targetname");
+        targets = getEntArray(poi.target, "targetname");
         poi.fakevehicle = [];
 
         foreach(target in targets) {
@@ -823,8 +823,7 @@ poithink(poi) {
       level thread poi_capturewatch(poi);
     else
       level thread poi_watch(poi);
-  } else {
-  }
+  } else {}
 }
 
 getclosestpoi(myorigin, myteam, threshsq) {

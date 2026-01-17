@@ -20,14 +20,14 @@ main() {
   level.inc = 0;
   awningAnims();
   palmTree_anims();
-  array_levelthread(getentarray("wire", "targetname"), ::wireWander);
-  array_levelthread(getentarray("awning", "targetname"), ::awningWander);
-  array_levelthread(getentarray("palm", "targetname"), ::palmTrees);
-  leftShutters = getentarray("shutter_left", "targetname");
-  addShutters = getentarray("shutter_right_open", "targetname");
+  array_levelthread(getEntArray("wire", "targetname"), ::wireWander);
+  array_levelthread(getEntArray("awning", "targetname"), ::awningWander);
+  array_levelthread(getEntArray("palm", "targetname"), ::palmTrees);
+  leftShutters = getEntArray("shutter_left", "targetname");
+  addShutters = getEntArray("shutter_right_open", "targetname");
   for(i = 0; i < addShutters.size; i++)
     leftShutters[leftShutters.size] = addShutters[i];
-  addShutters = getentarray("shutter_left_closed", "targetname");
+  addShutters = getEntArray("shutter_left_closed", "targetname");
   for(i = 0; i < addShutters.size; i++)
     leftShutters[leftShutters.size] = addShutters[i];
   for(i = 0; i < leftShutters.size; i++) {
@@ -37,11 +37,11 @@ main() {
   wait(0.2);
   for(i = 0; i < leftShutters.size; i++)
     leftShutters[i].startYaw = leftShutters[i].angles[1];
-  rightShutters = getentarray("shutter_right", "targetname");
-  addShutters = getentarray("shutter_left_open", "targetname");
+  rightShutters = getEntArray("shutter_right", "targetname");
+  addShutters = getEntArray("shutter_left_open", "targetname");
   for(i = 0; i < addShutters.size; i++)
     rightShutters[rightShutters.size] = addShutters[i];
-  addShutters = getentarray("shutter_right_closed", "targetname");
+  addShutters = getEntArray("shutter_right_closed", "targetname");
   for(i = 0; i < addShutters.size; i++)
     rightShutters[rightShutters.size] = addShutters[i];
   for(i = 0; i < rightShutters.size; i++)
@@ -126,14 +126,14 @@ shutterWanderRight(shutter, windDirection) {
 shutterSound() {
   for(;;) {
     self waittill("shutterSound");
-    self playsound("shutter_move", "sounddone");
+    self playSound("shutter_move", "sounddone");
     self waittill("sounddone");
     wait(randomfloat(2));
   }
 }
 
 wireWander(wire) {
-  origins = getentarray(wire.target, "targetname");
+  origins = getEntArray(wire.target, "targetname");
   org1 = origins[0].origin;
   org2 = origins[1].origin;
   angles = vectortoangles(org1 - org2);

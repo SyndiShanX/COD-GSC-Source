@@ -267,7 +267,7 @@ do_director_playvox(sound_to_play, waittime, override) {
   }
   if(level.director_is_speaking != 1 || is_true(override)) {
     level.director_is_speaking = 1;
-    self playsound(sound_to_play, "sound_done" + sound_to_play);
+    self playSound(sound_to_play, "sound_done" + sound_to_play);
     self waittill("sound_done" + sound_to_play);
     wait(waittime);
     level.director_is_speaking = 0;
@@ -321,7 +321,7 @@ music_egg() {
   temp_ent playLoopSound("zmb_meteor_loop");
   player = self music_egg_wait();
   temp_ent stopLoopSound(1);
-  player PlaySound("zmb_meteor_activate");
+  player playSound("zmb_meteor_activate");
   player maps\_zombiemode_audio::create_and_play_dialog("eggs", "meteors", undefined, level.meteor_counter);
   level.meteor_counter = level.meteor_counter + 1;
   if(level.meteor_counter == 3) {
@@ -367,7 +367,7 @@ play_music_egg(player) {
 skit_start_reminder(ent) {
   while(!flag("fuse_fun_start")) {
     rand = RandomIntRange(0, 3);
-    ent PlaySound("vox_chr_" + rand + "_egg_response_0");
+    ent playSound("vox_chr_" + rand + "_egg_response_0");
     wait(RandomIntRange(10, 35));
   }
 }
@@ -391,7 +391,7 @@ play_characters_skits_etc(player, ent, a, b, c, d) {
     }
     if(isDefined(b) && isDefined(player)) {
       if(isDefined(level.door_trig) && player IsTouching(level.door_trig)) {
-        ent PlaySound("vox_egg_skit_" + b, "sounddone_skit");
+        ent playSound("vox_egg_skit_" + b, "sounddone_skit");
         ent waittill("sounddone_skit");
       }
     }
@@ -407,7 +407,7 @@ play_characters_skits_etc(player, ent, a, b, c, d) {
         level.door_knock_vox_occurring = false;
         return;
       }
-      ent PlaySound("vox_chr_" + char + "_egg_response_" + d, "sounddone_oneliner");
+      ent playSound("vox_chr_" + char + "_egg_response_" + d, "sounddone_oneliner");
       ent waittill("sounddone_oneliner");
     }
     level.door_knock_vox_occurring = false;
@@ -469,7 +469,7 @@ do_player_playvox_egg(prefix, index, sound_to_play, waittime, category, type, ov
     return;
   if(level.player_is_speaking != 1) {
     level.player_is_speaking = 1;
-    self playsound(prefix + sound_to_play, "sound_done" + sound_to_play);
+    self playSound(prefix + sound_to_play, "sound_done" + sound_to_play);
     self waittill("sound_done" + sound_to_play);
     wait(waittime);
     level.player_is_speaking = 0;

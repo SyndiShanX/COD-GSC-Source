@@ -41,17 +41,17 @@ try_bulletcam(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, v
           fx_player setModel("tag_origin");
           fx_player.angles = VectorToAngles(vector_scale(vDir, -1));
           fx_player LinkTo(self, target_tag);
-          PlayFXOnTag(level._effect["_bulletcam_impact"], fx_player, "tag_origin");
+          playFXOnTag(level._effect["_bulletcam_impact"], fx_player, "tag_origin");
           fx_player thread delete_me_in_a_bit();
         } else if(is_mature()) {
-          PlayFXOnTag(level._effect["_bulletcam_impact"], self, target_tag);
+          playFXOnTag(level._effect["_bulletcam_impact"], self, target_tag);
         }
       } else {
         eAttacker notify("_bulletcam:end");
       }
     } else {
       if(is_mature()) {
-        PlayFX(level._effect["_bulletcam_noncam_impact"], vPoint, vector_scale(vDir, -1), (0, 0, 1));
+        playFX(level._effect["_bulletcam_noncam_impact"], vPoint, vector_scale(vDir, -1), (0, 0, 1));
       }
     }
     if(isDefined(self.bulletcam_nodeath))
@@ -82,7 +82,7 @@ do_bulletcam(player, end_point) {
   self.bulletcam_death = undefined;
   player_ang = player GetPlayerAngles();
   pos = player get_eye();
-  forward = AnglesToForward(player_ang);
+  forward = anglesToForward(player_ang);
   start = pos + forward * BULLET_DIST_FROM_CAMERA;
   bullet = spawn("script_model", start);
   vec_to_end = end_point - start;
@@ -99,7 +99,7 @@ do_bulletcam(player, end_point) {
   fake_bullet UseAnimTree(#animtree);
   fake_bullet SetAnim(BULLET_ANIM_CAM, 1, 0, 3);
   fake_bullet hide();
-  PlayFXOnTag(level._effect["_bulletcam_trail"], bullet, "tag_origin");
+  playFXOnTag(level._effect["_bulletcam_trail"], bullet, "tag_origin");
   player thread move_player(bullet, fake_bullet, player_end_point, player_ang, self);
   self move_bullet(bullet, end_point, player);
   if(isDefined(self) && IsAlive(self)) {

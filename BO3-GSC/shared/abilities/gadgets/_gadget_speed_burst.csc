@@ -16,12 +16,12 @@
 #namespace _gadget_speed_burst;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_speed_burst", & __init__, undefined, undefined);
+  system::register("gadget_speed_burst", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_localplayer_spawned( & on_localplayer_spawned);
-  clientfield::register("toplayer", "speed_burst", 1, 1, "int", & player_speed_changed, 0, 1);
+  callback::on_localplayer_spawned(&on_localplayer_spawned);
+  clientfield::register("toplayer", "speed_burst", 1, 1, "int", &player_speed_changed, 0, 1);
   visionset_mgr::register_visionset_info("speed_burst", 1, 9, undefined, "speed_burst_initialize");
 }
 

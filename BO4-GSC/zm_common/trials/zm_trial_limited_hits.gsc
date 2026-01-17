@@ -9,7 +9,6 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_weapons;
-
 #namespace zm_trial_limited_hits;
 
 autoexec __init__system__() {
@@ -24,7 +23,7 @@ __init__() {
   zm_trial::register_challenge(#"limited_hits", &on_begin, &on_end);
 }
 
-private on_begin(var_85af3be4, var_752d90ad) {
+on_begin(var_85af3be4, var_752d90ad) {
   if(getplayers().size == 1) {
     level.var_b529249b = zm_trial::function_5769f26a(var_752d90ad);
   } else {
@@ -37,7 +36,7 @@ private on_begin(var_85af3be4, var_752d90ad) {
   callback::on_player_damage(&on_player_damage);
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   zm_trial_util::function_f3dbeda7();
   level.var_b529249b = undefined;
   level.var_4b9163d5 = undefined;
@@ -49,7 +48,7 @@ is_active() {
   return isDefined(challenge);
 }
 
-private on_player_damage(params) {
+on_player_damage(params) {
   if(params.idamage >= 0) {
     level.var_4b9163d5++;
     zm_trial_util::function_dace284(level.var_b529249b - level.var_4b9163d5);

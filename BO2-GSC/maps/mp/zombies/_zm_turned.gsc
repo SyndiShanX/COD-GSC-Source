@@ -134,7 +134,7 @@ turn_to_zombie() {
   if(isDefined(level.custom_zombie_player_loadout))
     self[[level.custom_zombie_player_loadout]]();
   else {
-    self setmodel("c_zom_player_zombie_fb");
+    self setModel("c_zom_player_zombie_fb");
     self.voice = "american";
     self.skeleton = "base";
     self setviewmodel("c_zom_zombie_viewhands");
@@ -234,7 +234,7 @@ deletezombiesinradius(origin) {
   foreach(zombie in zombies) {
     if(isDefined(zombie) && isalive(zombie) && !(isDefined(zombie.is_being_used_as_spawner) && zombie.is_being_used_as_spawner)) {
       if(distancesquared(zombie.origin, origin) < maxradius * maxradius) {
-        playfx(level._effect["wood_chunk_destory"], zombie.origin);
+        playFX(level._effect["wood_chunk_destory"], zombie.origin);
         zombie thread silentlyremovezombie();
       }
 

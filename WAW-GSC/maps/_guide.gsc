@@ -7,20 +7,20 @@
 
 main() {
   thread lastshottime();
-  array_thread(getentarray("showpath", "script_noteworthy"), ::showpath);
-  array_thread(getentarray("brush_guide", "targetname"), ::brush_guide);
+  array_thread(getEntArray("showpath", "script_noteworthy"), ::showpath);
+  array_thread(getEntArray("brush_guide", "targetname"), ::brush_guide);
 }
 
 showpath_trigger(path) {
-  while (1) {
+  while(1) {
     self waittill("trigger");
     path notify("showpath");
   }
 }
 
 showpath() {
-  array_thread(getentarray(self.targetname, "target"), ::showpath_trigger, self);
-  while (1) {
+  array_thread(getEntArray(self.targetname, "target"), ::showpath_trigger, self);
+  while(1) {
     self waittill("showpath");
     level notify("newtrigger");
     self thread leadshowstuff();
@@ -30,7 +30,7 @@ showpath() {
 
 leadshowstuff() {
   level endon("newtrigger");
-  while (1) {
+  while(1) {
     waitforrecentfire();
     wait .5;
     thread leadshowstuff_path(self, 1);
@@ -44,7 +44,7 @@ leadshowstuff_path(position, arrowtime) {
   else
     targ = undefined;
   lasttarg = position;
-  while (isDefined(targ)) {
+  while(isDefined(targ)) {
     waitforrecentfire();
     if(isDefined(targ.target))
       targ = getent(targ.target, "targetname");
@@ -60,14 +60,14 @@ leadshowstuff_path(position, arrowtime) {
 }
 
 waitforrecentfire() {
-  while (!level.hasfiredrecently)
+  while(!level.hasfiredrecently)
     wait .05;
 }
 
 lastshottime() {
   level.hasfiredrecently = true;
   lastshottime = 0;
-  while (1) {
+  while(1) {
     players = get_players();
     if(players[0] usebuttonpressed()) {
       lastshottime = 0;
@@ -84,12 +84,12 @@ lastshottime() {
 }
 
 brush_guide() {
-  while (1) {
+  while(1) {
     self hide();
-    while (!level.hasfiredrecently)
+    while(!level.hasfiredrecently)
       wait .05;
     self show();
-    while (level.hasfiredrecently)
+    while(level.hasfiredrecently)
       wait .05;
   }
 }

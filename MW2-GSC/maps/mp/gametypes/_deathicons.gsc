@@ -6,16 +6,16 @@
 #include maps\mp\_utility;
 
 init() {
-  if(!level.teambased)
+  if(!level.teambased) {
     return;
-
+  }
   precacheShader("headicon_dead");
 
   level thread onPlayerConnect();
 }
 
 onPlayerConnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connected", player);
 
     player.selfDeathIcons = []; // icons that other people see which point to this player when he's dead
@@ -28,9 +28,9 @@ updateDeathIconsEnabled() {
 }
 
 addDeathIcon(entity, dyingplayer, team, timeout) {
-  if(!level.teambased)
+  if(!level.teambased) {
     return;
-
+  }
   iconOrg = entity.origin;
 
   dyingplayer endon("spawned_player");
@@ -43,10 +43,10 @@ addDeathIcon(entity, dyingplayer, team, timeout) {
 
   if(getDvar("ui_hud_showdeathicons") == "0")
     return;
-  if(level.hardcoreMode)
+  if(level.hardcoreMode) {
     return;
-
-  if(isdefined(self.lastDeathIcon))
+  }
+  if(isDefined(self.lastDeathIcon))
     self.lastDeathIcon destroy();
 
   newdeathicon = newTeamHudElem(team);

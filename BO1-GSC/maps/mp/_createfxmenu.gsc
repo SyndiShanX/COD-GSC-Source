@@ -115,7 +115,7 @@ menu_fx_creation() {
   count = 0;
   picked_fx = undefined;
   keys = get_level_ambient_fx();
-  for (i = level.effect_list_offset; i < keys.size; i++) {
+  for(i = level.effect_list_offset; i < keys.size; i++) {
     count = count + 1;
     button_to_check = count;
     if(button_to_check == 10) {
@@ -199,15 +199,15 @@ change_effect_to_exploder(ent) {
 }
 change_ent_type(newtype) {
   if(newtype == "oneshotfx") {
-    for (i = 0; i < level.selected_fx_ents.size; i++) {
+    for(i = 0; i < level.selected_fx_ents.size; i++) {
       change_effect_to_oneshot(level.selected_fx_ents[i]);
     }
   } else if(newtype == "loopfx") {
-    for (i = 0; i < level.selected_fx_ents.size; i++) {
+    for(i = 0; i < level.selected_fx_ents.size; i++) {
       change_effect_to_loop(level.selected_fx_ents[i]);
     }
   } else if(newtype == "exploder") {
-    for (i = 0; i < level.selected_fx_ents.size; i++) {
+    for(i = 0; i < level.selected_fx_ents.size; i++) {
       change_effect_to_exploder(level.selected_fx_ents[i]);
     }
   }
@@ -267,7 +267,7 @@ menu_change_selected_fx() {
   count = 0;
   drawnCount = 0;
   ent = get_last_selected_ent();
-  for (i = 0; i < level.createFX_options.size; i++) {
+  for(i = 0; i < level.createFX_options.size; i++) {
     option = level.createFX_options[i];
     if(!isDefined(ent.v[option["name"]])) {
       continue;
@@ -350,7 +350,7 @@ menu_selection() {
   drawnCount = 0;
   option_number = 0;
   ent = level.selected_fx_ents[level.selected_fx_ents.size - 1];
-  for (i = level.effect_list_offset; i < level.createFX_options.size; i++) {
+  for(i = level.effect_list_offset; i < level.createFX_options.size; i++) {
     if(drawnCount > level.effect_list_offset_max) {
       break;
     }
@@ -380,7 +380,7 @@ menu_selection() {
   set_fx_hudElement("(x) Exit >");
 }
 apply_option_to_selected_fx(option, setting) {
-  for (i = 0; i < level.selected_fx_ents.size; i++) {
+  for(i = 0; i < level.selected_fx_ents.size; i++) {
     ent = level.selected_fx_ents[i];
     if(mask(option["mask"], ent.v["type"])) {
       ent.v[option["name"]] = setting;
@@ -390,7 +390,7 @@ apply_option_to_selected_fx(option, setting) {
   clear_settable_fx();
 }
 set_option_index(name) {
-  for (i = 0; i < level.createFX_options.size; i++) {
+  for(i = 0; i < level.createFX_options.size; i++) {
     if(level.createFX_options[i]["name"] != name) {
       continue;
     }
@@ -414,7 +414,7 @@ addOption(type, name, description, defaultSetting, mask) {
   level.createFX_options[level.createFX_options.size] = option;
 }
 get_option(name) {
-  for (i = 0; i < level.createFX_options.size; i++) {
+  for(i = 0; i < level.createFX_options.size; i++) {
     if(level.createFX_options[i]["name"] == name) {
       return level.createFX_options[i];
     }
@@ -434,7 +434,7 @@ display_fx_info(ent) {
     count = 0;
     drawnCount = 0;
     more = false;
-    for (i = 0; i < level.createFX_options.size; i++) {
+    for(i = 0; i < level.createFX_options.size; i++) {
       option = level.createFX_options[i];
       if(!isDefined(ent.v[option["name"]])) {
         continue;
@@ -460,7 +460,7 @@ display_fx_info(ent) {
   } else {
     count = 0;
     more = false;
-    for (i = 0; i < level.createFX_options.size; i++) {
+    for(i = 0; i < level.createFX_options.size; i++) {
       option = level.createFX_options[i];
       if(!isDefined(ent.v[option["name"]])) {
         continue;
@@ -488,7 +488,7 @@ display_fx_add_options(ent) {
   if(level.effect_list_offset >= level.createFX_options.size) {
     level.effect_list_offset = 0;
   }
-  for (i = 0; i < level.createFX_options.size; i++) {
+  for(i = 0; i < level.createFX_options.size; i++) {
     option = level.createFX_options[i];
     if(isDefined(ent.v[option["name"]])) {
       continue;
@@ -524,7 +524,7 @@ display_fx_add_options(ent) {
 }
 add_option_to_selected_entities(option) {
   setting = undefined;
-  for (i = 0; i < level.selected_fx_ents.size; i++) {
+  for(i = 0; i < level.selected_fx_ents.size; i++) {
     ent = level.selected_fx_ents[i];
     if(mask(option["mask"], ent.v["type"])) {
       ent.v[option["name"]] = option["default"];
@@ -550,7 +550,7 @@ draw_effects_list(title) {
   } else if(level.effect_list_offset < 0) {
     level.effect_list_offset = int(floor(keys.size / level.effect_list_offset_max) * level.effect_list_offset_max);
   }
-  for (i = level.effect_list_offset; i < keys.size; i++) {
+  for(i = level.effect_list_offset; i < keys.size; i++) {
     count = count + 1;
     set_fx_hudElement(count + ". " + keys[i]);
     if(count >= level.effect_list_offset_max) {
@@ -574,7 +574,7 @@ jump_to_effect() {
   count = 0;
   picked_fxid = undefined;
   keys = get_level_ambient_fx();
-  for (i = level.effect_list_offset; i < keys.size; i++) {
+  for(i = level.effect_list_offset; i < keys.size; i++) {
     count = count + 1;
     button_to_check = count;
     if(button_to_check == 10) {
@@ -606,7 +606,7 @@ get_level_ambient_fx() {
     keys = getarraykeys(level._effect);
     level._effect_keys = [];
     k = 0;
-    for (i = 0; i < keys.size; i++) {
+    for(i = 0; i < keys.size; i++) {
       if(isSubStr(keys[i], "fx_")) {
         level._effect_keys[k] = keys[i];
         k++;

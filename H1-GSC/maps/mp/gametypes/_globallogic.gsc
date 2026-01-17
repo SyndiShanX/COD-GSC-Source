@@ -31,7 +31,7 @@ init() {
   level.killstreak_kills = 1;
   level.tispawndelay = getdvarint("scr_tispawndelay");
 
-  if(!isdefined(level.tweakablesinitialized))
+  if(!isDefined(level.tweakablesinitialized))
     maps\mp\gametypes\_tweakables::init();
 
   precachestring(&"MP_HALFTIME");
@@ -80,7 +80,7 @@ init() {
 }
 
 init_multiteamdata(var_0) {
-  for (var_1 = 0; var_1 < var_0; var_1++) {
+  for(var_1 = 0; var_1 < var_0; var_1++) {
     var_2 = "team_" + var_1;
     level.placement[var_2] = [];
     level.teamcount[var_2] = 0;
@@ -123,10 +123,10 @@ testmenu() {
   self endon("death");
   self endon("disconnect");
 
-  for (;;) {
+  for(;;) {
     wait 10.0;
-    var_0 = spawnstruct();
-    var_0.titletext = & "MP_CHALLENGE_COMPLETED";
+    var_0 = spawnStruct();
+    var_0.titletext = &"MP_CHALLENGE_COMPLETED";
     var_0.notifytext = "wheee";
     var_0.sound = "mp_challenge_complete";
     thread maps\mp\gametypes\_hud_message::notifymessage(var_0);
@@ -137,11 +137,11 @@ testshock() {
   self endon("death");
   self endon("disconnect");
 
-  for (;;) {
+  for(;;) {
     wait 3.0;
     var_0 = randomint(6);
 
-    for (var_1 = 0; var_1 < var_0; var_1++) {
+    for(var_1 = 0; var_1 < var_0; var_1++) {
       iprintlnbold(var_0);
       self shellshock("frag_grenade_mp", 0.2);
       wait 0.1;
@@ -154,6 +154,6 @@ onxpevent(var_0) {
 }
 
 debugline(var_0, var_1) {
-  for (var_2 = 0; var_2 < 50; var_2++)
+  for(var_2 = 0; var_2 < 50; var_2++)
     wait 0.05;
 }

@@ -5,7 +5,7 @@
 *********************************************************/
 
 main() {
-  self setmodel("body_complete_sp_usmc_ghillie_price");
+  self setModel("body_complete_sp_usmc_ghillie_price");
   self attach("head_usmc_ghillie_price", "", 1);
   self.headmodel = "head_usmc_ghillie_price";
   self.voice = "american";

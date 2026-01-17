@@ -18,9 +18,9 @@ function init_shared() {
 }
 
 function register() {
-  clientfield::register("scriptmover", "firefly_state", 1, 3, "int", & firefly_state_change, 0, 0);
-  clientfield::register("toplayer", "fireflies_attacking", 1, 1, "int", & fireflies_attacking, 0, 1);
-  clientfield::register("toplayer", "fireflies_chasing", 1, 1, "int", & fireflies_chasing, 0, 1);
+  clientfield::register("scriptmover", "firefly_state", 1, 3, "int", &firefly_state_change, 0, 0);
+  clientfield::register("toplayer", "fireflies_attacking", 1, 1, "int", &fireflies_attacking, 0, 1);
+  clientfield::register("toplayer", "fireflies_chasing", 1, 1, "int", &fireflies_chasing, 0, 1);
 }
 
 function getotherteam(team) {
@@ -36,7 +36,7 @@ function getotherteam(team) {
 function fireflies_attacking(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self endon("entityshutdown");
   self util::waittill_dobj(localclientnum);
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   if(newval) {
@@ -53,14 +53,14 @@ function fireflies_attacking(localclientnum, oldval, newval, bnewent, binitialsn
 function fireflies_chasing(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self endon("entityshutdown");
   self util::waittill_dobj(localclientnum);
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   if(newval) {
     self notify("stop_player_fx");
     if(self islocalplayer() && !self getinkillcam(localclientnum)) {
       fx = playfxoncamera(localclientnum, "weapon/fx_ability_firefly_chase_1p", (0, 0, 0), (1, 0, 0), (0, 0, 1));
-      sound = self playloopsound("wpn_gelgun_hive_hunt_lp");
+      sound = self playLoopSound("wpn_gelgun_hive_hunt_lp");
       self playrumblelooponentity(localclientnum, "firefly_chase_rumble_loop");
       self thread watch_player_fx_finished(localclientnum, fx, sound);
     }
@@ -71,13 +71,13 @@ function fireflies_chasing(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function watch_player_fx_finished(localclientnum, fx, sound) {
   self util::waittill_any("entityshutdown", "stop_player_fx");
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     self stoprumble(localclientnum, "firefly_chase_rumble_loop");
   }
-  if(isdefined(fx)) {
+  if(isDefined(fx)) {
     stopfx(localclientnum, fx);
   }
-  if(isdefined(sound) && isdefined(self)) {
+  if(isDefined(sound) && isDefined(self)) {
     self stoploopsound(sound);
   }
 }
@@ -85,10 +85,10 @@ function watch_player_fx_finished(localclientnum, fx, sound) {
 function firefly_state_change(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self endon("entityshutdown");
   self util::waittill_dobj(localclientnum);
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
-  if(!isdefined(self.initied)) {
+  if(!isDefined(self.initied)) {
     self thread firefly_init(localclientnum);
     self.initied = 1;
   }
@@ -116,30 +116,30 @@ function firefly_state_change(localclientnum, oldval, newval, bnewent, binitials
 }
 
 function on_shutdown(localclientnum, ent) {
-  if(isdefined(ent) && isdefined(ent.origin) && self === ent && (!(isdefined(self.no_death_fx) && self.no_death_fx))) {
-    fx = playfx(localclientnum, "weapon/fx_hero_firefly_death", ent.origin, (0, 0, 1));
+  if(isDefined(ent) && isDefined(ent.origin) && self === ent && (!(isDefined(self.no_death_fx) && self.no_death_fx))) {
+    fx = playFX(localclientnum, "weapon/fx_hero_firefly_death", ent.origin, (0, 0, 1));
     setfxteam(localclientnum, fx, ent.team);
   }
 }
 
 function firefly_init(localclientnum) {
-  self callback::on_shutdown( & on_shutdown, self);
+  self callback::on_shutdown(&on_shutdown, self);
 }
 
 function firefly_deploying(localclientnum) {
-  fx = playfx(localclientnum, "weapon/fx_hero_firefly_start", self.origin, anglestoup(self.angles));
+  fx = playFX(localclientnum, "weapon/fx_hero_firefly_start", self.origin, anglestoup(self.angles));
   setfxteam(localclientnum, fx, self.team);
 }
 
 function firefly_hunting(localclientnum) {
-  fx = playfxontag(localclientnum, "weapon/fx_hero_firefly_hunting", self, "tag_origin");
+  fx = playFXOnTag(localclientnum, "weapon/fx_hero_firefly_hunting", self, "tag_origin");
   setfxteam(localclientnum, fx, self.team);
   self thread firefly_watch_fx_finished(localclientnum, fx);
 }
 
 function firefly_watch_fx_finished(localclientnum, fx) {
   self util::waittill_any("entityshutdown", "stop_effects");
-  if(isdefined(fx)) {
+  if(isDefined(fx)) {
     stopfx(localclientnum, fx);
   }
 }
@@ -150,7 +150,7 @@ function firefly_attacking(localclientnum) {
 }
 
 function firefly_link_attacking(localclientnum) {
-  fx = playfx(localclientnum, "weapon/fx_hero_firefly_start_entity", self.origin, anglestoup(self.angles));
+  fx = playFX(localclientnum, "weapon/fx_hero_firefly_start_entity", self.origin, anglestoup(self.angles));
   setfxteam(localclientnum, fx, self.team);
   self notify("stop_effects");
   self.no_death_fx = 1;
@@ -158,8 +158,8 @@ function firefly_link_attacking(localclientnum) {
 
 function gib_fx(localclientnum, fxfilename, gibflag) {
   fxtag = gibclientutils::playergibtag(localclientnum, gibflag);
-  if(isdefined(fxtag)) {
-    fx = playfxontag(localclientnum, fxfilename, self, fxtag);
+  if(isDefined(fxtag)) {
+    fx = playFXOnTag(localclientnum, fxfilename, self, fxtag);
     setfxteam(localclientnum, fx, getotherteam(self.team));
   }
 }
@@ -178,13 +178,13 @@ function watch_for_gib_notetracks(localclientnum) {
   bodytype = self getcharacterbodytype();
   if(bodytype >= 0) {
     bodytypefields = getcharacterfields(bodytype, currentsessionmode());
-    if((isdefined(bodytypefields.digitalblood) ? bodytypefields.digitalblood : 0)) {
+    if((isDefined(bodytypefields.digitalblood) ? bodytypefields.digitalblood : 0)) {
       fxfilename = "weapon/fx_hero_firefly_attack_limb_reaper";
     }
   }
   arm_gib = 0;
   leg_gib = 0;
-  while (true) {
+  while(true) {
     notetrack = self util::waittill_any_return("gib_leftarm", "gib_leftleg", "gib_rightarm", "gib_rightleg", "entityshutdown");
     switch (notetrack) {
       case "gib_rightarm": {

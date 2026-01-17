@@ -36,20 +36,20 @@ precachehelicopter(model, type) {
 }
 
 heli_path_graph() {
-  path_start = getentarray("heli_start", "targetname");
-  path_dest = getentarray("heli_dest", "targetname");
-  loop_start = getentarray("heli_loop_start", "targetname");
-  leave_nodes = getentarray("heli_leave", "targetname");
-  crash_start = getentarray("heli_crash_start", "targetname");
+  path_start = getEntArray("heli_start", "targetname");
+  path_dest = getEntArray("heli_dest", "targetname");
+  loop_start = getEntArray("heli_loop_start", "targetname");
+  leave_nodes = getEntArray("heli_leave", "targetname");
+  crash_start = getEntArray("heli_crash_start", "targetname");
   assertex((isDefined(path_start) && isDefined(path_dest)), "Missing path_start or path_dest");
-  for (i = 0; i < path_dest.size; i++) {
+  for(i = 0; i < path_dest.size; i++) {
     startnode_array = [];
     destnode_pointer = path_dest[i];
     destnode = getent(destnode_pointer.target, "targetname");
-    for (j = 0; j < path_start.size; j++) {
+    for(j = 0; j < path_start.size; j++) {
       toDest = false;
       currentnode = path_start[j];
-      while (isDefined(currentnode.target)) {
+      while(isDefined(currentnode.target)) {
         nextnode = getent(currentnode.target, "targetname");
         if(nextnode.origin == destnode.origin) {
           toDest = true;
@@ -68,15 +68,15 @@ heli_path_graph() {
     assertex((isDefined(startnode_array) && startnode_array.size > 0), "No path(s) to destination");
     level.heli_paths[level.heli_paths.size] = startnode_array;
   }
-  for (i = 0; i < loop_start.size; i++) {
+  for(i = 0; i < loop_start.size; i++) {
     startnode = getent(loop_start[i].target, "targetname");
     level.heli_loop_paths[level.heli_loop_paths.size] = startnode;
   }
   assertex(isDefined(level.heli_loop_paths[0]), "No helicopter loop paths found in map");
-  for (i = 0; i < leave_nodes.size; i++)
+  for(i = 0; i < leave_nodes.size; i++)
     level.heli_leavenodes[level.heli_leavenodes.size] = leave_nodes[i];
   assertex(isDefined(level.heli_leavenodes[0]), "No helicopter leave nodes found in map");
-  for (i = 0; i < crash_start.size; i++) {
+  for(i = 0; i < crash_start.size; i++) {
     crash_start_node = getent(crash_start[i].target, "targetname");
     level.heli_crash_paths[level.heli_crash_paths.size] = crash_start_node;
   }
@@ -84,8 +84,8 @@ heli_path_graph() {
 }
 
 init() {
-  path_start = getentarray("heli_start", "targetname");
-  loop_start = getentarray("heli_loop_start", "targetname");
+  path_start = getEntArray("heli_start", "targetname");
+  loop_start = getEntArray("heli_loop_start", "targetname");
   if(!path_start.size && !loop_start.size) {
     return;
   }
@@ -107,7 +107,7 @@ init() {
 }
 
 heli_update_global_dvars() {
-  for (;;) {
+  for(;;) {
     level.heli_loopmax = heli_get_dvar_int("scr_heli_loopmax", "1");
     level.heli_missile_rof = heli_get_dvar_int("scr_heli_missile_rof", "5");
     level.heli_armor = heli_get_dvar_int("scr_heli_armor", "500");
@@ -203,7 +203,7 @@ heli_missile_regen() {
   self endon("death");
   self endon("crashing");
   self endon("leaving");
-  for (;;) {
+  for(;;) {
     debug_print3d("Missile Ammo: " + self.missile_ammo, (0.5, 0.5, 1), self, (0, 0, -100), 0);
     if(self.missile_ammo >= level.heli_missile_max)
       self waittill("missile fired");
@@ -224,10 +224,10 @@ heli_targeting() {
   self endon("death");
   self endon("crashing");
   self endon("leaving");
-  for (;;) {
+  for(;;) {
     targets = [];
     players = level.players;
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       player = players[i];
       if(canTarget_turret(player)) {
         if(isDefined(player))
@@ -272,7 +272,7 @@ canTarget_turret(player) {
   if(isDefined(player.spawntime) && (gettime() - player.spawntime) / 1000 <= level.heli_target_spawnprotection)
     return false;
   heli_centroid = self.origin + (0, 0, -160);
-  heli_forward_norm = anglestoforward(self.angles);
+  heli_forward_norm = anglesToForward(self.angles);
   heli_turret_point = heli_centroid + 144 * heli_forward_norm;
   if(player sightConeTrace(heli_turret_point, self) < level.heli_target_recognition)
     return false;
@@ -280,21 +280,21 @@ canTarget_turret(player) {
 }
 
 assignTargets(targets) {
-  for (idx = 0; idx < targets.size; idx++)
+  for(idx = 0; idx < targets.size; idx++)
     update_player_threat(targets[idx]);
   assertex(targets.size >= 2, "Not enough targets to assign primary and secondary");
   highest = 0;
   second_highest = 0;
   primaryTarget = undefined;
   secondaryTarget = undefined;
-  for (idx = 0; idx < targets.size; idx++) {
+  for(idx = 0; idx < targets.size; idx++) {
     assertex(isDefined(targets[idx].threatlevel), "Target player does not have threat level");
     if(targets[idx].threatlevel >= highest) {
       highest = targets[idx].threatlevel;
       primaryTarget = targets[idx];
     }
   }
-  for (idx = 0; idx < targets.size; idx++) {
+  for(idx = 0; idx < targets.size; idx++) {
     assertex(isDefined(targets[idx].threatlevel), "Target player does not have threat level");
     if(targets[idx].threatlevel >= second_highest && targets[idx] != primaryTarget) {
       second_highest = targets[idx].threatlevel;
@@ -361,7 +361,7 @@ heli_damage_monitor() {
   self endon("crashing");
   self endon("leaving");
   self.damageTaken = 0;
-  for (;;) {
+  for(;;) {
     self waittill("damage", damage, attacker, direction_vec, P, type);
     if(!isDefined(attacker) || !isplayer(attacker)) {
       continue;
@@ -401,7 +401,7 @@ heli_health() {
   self.currentstate = "ok";
   self.laststate = "ok";
   self setdamagestage(3);
-  for (;;) {
+  for(;;) {
     if(self.health_bulletdamageble > self.health_low) {
       if(self.damageTaken >= self.health_bulletdamageble)
         self.currentstate = "heavy smoke";
@@ -456,7 +456,7 @@ heli_crash() {
   self thread heli_fly(level.heli_crash_paths[0]);
   self thread heli_spin(180);
   self waittill("path start");
-  playfxontag(level.chopper_fx["explode"]["large"], self, "tag_engine_left");
+  playFXOnTag(level.chopper_fx["explode"]["large"], self, "tag_engine_left");
   self playSound(level.heli_sound[self.team]["hitsecondary"]);
   self setdamagestage(0);
   self thread trail_fx(level.chopper_fx["fire"]["trail"]["large"], "tag_engine_left", "stop body fire");
@@ -466,12 +466,12 @@ heli_crash() {
 
 heli_spin(speed) {
   self endon("death");
-  playfxontag(level.chopper_fx["explode"]["medium"], self, "tail_rotor_jnt");
+  playFXOnTag(level.chopper_fx["explode"]["medium"], self, "tail_rotor_jnt");
   self playSound(level.heli_sound[self.team]["hit"]);
   self thread spinSoundShortly();
   self thread trail_fx(level.chopper_fx["smoke"]["trail"], "tail_rotor_jnt", "stop tail smoke");
   self setyawspeed(speed, speed, speed);
-  while (isDefined(self)) {
+  while(isDefined(self)) {
     self settargetyaw(self.angles[1] + (speed * 0.9));
     wait(1);
   }
@@ -491,8 +491,8 @@ trail_fx(trail_fx, trail_tag, stop_notify) {
   self notify(stop_notify);
   self endon(stop_notify);
   self endon("death");
-  for (;;) {
-    playfxontag(trail_fx, self, trail_tag);
+  for(;;) {
+    playFXOnTag(trail_fx, self, trail_tag);
     wait(0.05);
   }
 }
@@ -500,7 +500,7 @@ trail_fx(trail_fx, trail_tag, stop_notify) {
 heli_explode() {
   self notify("death");
   forward = (self.origin + (0, 0, 100)) - self.origin;
-  playfx(level.chopper_fx["explode"]["death"], self.origin, forward);
+  playFX(level.chopper_fx["explode"]["death"], self.origin, forward);
   self playSound(level.heli_sound[self.team]["crash"]);
   level.chopper = undefined;
   self delete();
@@ -529,7 +529,7 @@ heli_fly(currentnode) {
   heli_reset();
   pos = self.origin;
   wait(2);
-  while (isDefined(currentnode.target)) {
+  while(isDefined(currentnode.target)) {
     nextnode = getent(currentnode.target, "targetname");
     assertex(isDefined(nextnode), "Next node in path is undefined, but has targetname");
     pos = nextnode.origin + (0, 0, 30);
@@ -564,7 +564,7 @@ heli_fly(currentnode) {
         heli_wait(nextnode.script_delay);
       }
     }
-    for (index = 0; index < level.heli_loop_paths.size; index++) {
+    for(index = 0; index < level.heli_loop_paths.size; index++) {
       if(level.heli_loop_paths[index].origin == nextnode.origin)
         self.loopcount++;
     }
@@ -608,7 +608,7 @@ fire_missile(sMissileType, iShots, eTarget) {
   assert(isDefined(weaponShootTime));
   self setVehWeapon(weaponName);
   nextMissileTag = -1;
-  for (i = 0; i < iShots; i++) {
+  for(i = 0; i < iShots; i++) {
     nextMissileTag++;
     if(nextMissileTag >= tags.size)
       nextMissileTag = 0;
@@ -639,12 +639,12 @@ attack_secondary() {
   self endon("death");
   self endon("crashing");
   self endon("leaving");
-  for (;;) {
+  for(;;) {
     if(isDefined(self.secondaryTarget)) {
       self.secondaryTarget.antithreat = undefined;
       self.missileTarget = self.secondaryTarget;
       antithreat = 0;
-      while (isDefined(self.missileTarget) && isalive(self.missileTarget)) {
+      while(isDefined(self.missileTarget) && isalive(self.missileTarget)) {
         if(self missile_target_sight_check(self.missileTarget))
           self thread missile_support(self.missileTarget, level.heli_missile_rof, true, undefined);
         else
@@ -666,7 +666,7 @@ attack_secondary() {
 
 missile_target_sight_check(missiletarget) {
   heli2target_normal = vectornormalize(missiletarget.origin - self.origin);
-  heli2forward = anglestoforward(self.angles);
+  heli2forward = anglesToForward(self.angles);
   heli2forward_normal = vectornormalize(heli2forward);
   heli_dot_target = vectordot(heli2target_normal, heli2forward_normal);
   if(heli_dot_target >= level.heli_missile_target_cone) {
@@ -690,7 +690,7 @@ missile_support(target_player, rof, instantfire, endon_notify) {
   }
   if(isDefined(target_player)) {
     if(level.teambased) {
-      for (i = 0; i < level.players.size; i++) {
+      for(i = 0; i < level.players.size; i++) {
         player = level.players[i];
         if(isDefined(player.pers["team"]) && player.pers["team"] == self.team && distance(player.origin, target_player.origin) <= level.heli_missile_friendlycare) {
           debug_print3d_simple("Missile omitted due to nearby friendly", self, (0, 0, -80), 40);
@@ -724,13 +724,13 @@ attack_primary() {
   self endon("death");
   self endon("crashing");
   self endon("leaving");
-  for (;;) {
+  for(;;) {
     if(isDefined(self.primaryTarget)) {
       self.primaryTarget.antithreat = undefined;
       self.turretTarget = self.primaryTarget;
       antithreat = 0;
       last_pos = undefined;
-      while (isDefined(self.turretTarget) && isalive(self.turretTarget)) {
+      while(isDefined(self.turretTarget) && isalive(self.turretTarget)) {
         self setTurretTargetEnt(self.turretTarget, (0, 0, 40));
         if(self missile_target_sight_check(self.turretTarget))
           self thread missile_support(self.turretTarget, 10 / level.heli_rage_missile, false, "turret on target");
@@ -740,7 +740,7 @@ attack_primary() {
         wait(level.heli_turret_spinup_delay);
         weaponShootTime = weaponfiretime("cobra_20mm_mp");
         self setVehWeapon("cobra_20mm_mp");
-        for (i = 0; i < level.heli_turretClipSize; i++) {
+        for(i = 0; i < level.heli_turretClipSize; i++) {
           if(isDefined(self.turretTarget) && isDefined(self.primaryTarget)) {
             if(self.primaryTarget != self.turretTarget)
               self setTurretTargetEnt(self.primaryTarget, (0, 0, 40));
@@ -787,9 +787,9 @@ turret_target_flag(turrettarget) {
   turrettarget endon("disconnect");
   self.targetlost = false;
   self.turret_last_pos = undefined;
-  while (isDefined(turrettarget)) {
+  while(isDefined(turrettarget)) {
     heli_centroid = self.origin + (0, 0, -160);
-    heli_forward_norm = anglestoforward(self.angles);
+    heli_forward_norm = anglesToForward(self.angles);
     heli_turret_point = heli_centroid + 144 * heli_forward_norm;
     sight_rec = turrettarget sightconetrace(heli_turret_point, self);
     if(sight_rec < level.heli_target_recognition) {
@@ -850,12 +850,12 @@ debug_line(from, to, color, frames) {
 
 draw_text(msg, color, ent, offset, frames) {
   if(frames == 0) {
-    while (isDefined(ent)) {
+    while(isDefined(ent)) {
       print3d(ent.origin + offset, msg, color, 0.5, 4);
       wait 0.05;
     }
   } else {
-    for (i = 0; i < frames; i++) {
+    for(i = 0; i < frames; i++) {
       if(!isDefined(ent)) {
         break;
       }
@@ -867,12 +867,12 @@ draw_text(msg, color, ent, offset, frames) {
 
 draw_line(from, to, color, frames) {
   if(isDefined(frames)) {
-    for (i = 0; i < frames; i++) {
+    for(i = 0; i < frames; i++) {
       line(from, to, color);
       wait 0.05;
     }
   } else {
-    for (;;) {
+    for(;;) {
       line(from, to, color);
       wait 0.05;
     }
@@ -881,20 +881,20 @@ draw_line(from, to, color, frames) {
 
 improved_sightconetrace(helicopter) {
   heli_centroid = helicopter.origin + (0, 0, -160);
-  heli_forward_norm = anglestoforward(helicopter.angles);
+  heli_forward_norm = anglesToForward(helicopter.angles);
   heli_turret_point = heli_centroid + 144 * heli_forward_norm;
   draw_line(heli_turret_point, self.origin, (1, 1, 1), 5);
   start = heli_turret_point;
   yes = 0;
   point = [];
-  for (i = 0; i < 5; i++) {
+  for(i = 0; i < 5; i++) {
     if(!isDefined(self)) {
       break;
     }
     half_height = self.origin + (0, 0, 36);
     tovec = start - half_height;
     tovec_angles = vectortoangles(tovec);
-    forward_norm = anglestoforward(tovec_angles);
+    forward_norm = anglesToForward(tovec_angles);
     side_norm = anglestoright(tovec_angles);
     point[point.size] = self.origin + (0, 0, 36);
     point[point.size] = self.origin + side_norm * (15, 15, 0) + (0, 0, 10);

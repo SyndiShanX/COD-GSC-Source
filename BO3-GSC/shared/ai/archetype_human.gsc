@@ -30,8 +30,8 @@
 #namespace archetype_human;
 
 function autoexec init() {
-  spawner::add_archetype_spawn_function("human", & archetypehumanblackboardinit);
-  spawner::add_archetype_spawn_function("human", & archetypehumaninit);
+  spawner::add_archetype_spawn_function("human", &archetypehumanblackboardinit);
+  spawner::add_archetype_spawn_function("human", &archetypehumaninit);
   humaninterface::registerhumaninterfaceattributes();
   clientfield::register("actor", "facial_dial", 1, 1, "int");
   level.__ai_forcegibs = getdvarint("");
@@ -39,12 +39,12 @@ function autoexec init() {
 
 function private archetypehumaninit() {
   entity = self;
-  aiutility::addaioverridedamagecallback(entity, & damageoverride);
-  aiutility::addaioverridekilledcallback(entity, & humangibkilledoverride);
+  aiutility::addaioverridedamagecallback(entity, &damageoverride);
+  aiutility::addaioverridekilledcallback(entity, &humangibkilledoverride);
   locomotiontypes = array("alt1", "alt2", "alt3", "alt4");
   altindex = entity getentitynumber() % locomotiontypes.size;
   blackboard::setblackboardattribute(entity, "_human_locomotion_variation", locomotiontypes[altindex]);
-  if(isdefined(entity.hero) && entity.hero) {
+  if(isDefined(entity.hero) && entity.hero) {
     blackboard::setblackboardattribute(entity, "_human_locomotion_variation", "alt1");
   }
 }
@@ -54,8 +54,8 @@ function private archetypehumanblackboardinit() {
   ai::createinterfaceforentity(self);
   self aiutility::registerutilityblackboardattributes();
   self blackboard::registeractorblackboardattributes();
-  self.___archetypeonanimscriptedcallback = & archetypehumanonanimscriptedcallback;
-  self.___archetypeonbehavecallback = & archetypehumanonbehavecallback;
+  self.___archetypeonanimscriptedcallback = &archetypehumanonanimscriptedcallback;
+  self.___archetypeonbehavecallback = &archetypehumanonbehavecallback;
   self finalizetrackedblackboardattributes();
   self thread gameskill::accuracy_buildup_before_fire(self);
   if(self.accuratefire) {
@@ -71,7 +71,7 @@ function private archetypehumanonbehavecallback(entity) {
     blackboard::setblackboardattribute(entity, "_previous_cover_mode", "cover_alert");
     blackboard::setblackboardattribute(entity, "_cover_mode", "cover_mode_none");
   }
-  grenadethrowinfo = spawnstruct();
+  grenadethrowinfo = spawnStruct();
   grenadethrowinfo.grenadethrower = entity;
   blackboard::addblackboardevent("human_grenade_throw", grenadethrowinfo, randomintrange(3000, 4000));
 }
@@ -89,14 +89,14 @@ function private humangibkilledoverride(inflictor, attacker, damage, meansofdeat
     return damage;
   }
   attackerdistance = 0;
-  if(isdefined(attacker)) {
+  if(isDefined(attacker)) {
     attackerdistance = distancesquared(attacker.origin, entity.origin);
   }
   isexplosive = isinarray(array("MOD_CRUSH", "MOD_GRENADE", "MOD_GRENADE_SPLASH", "MOD_PROJECTILE", "MOD_PROJECTILE_SPLASH", "MOD_EXPLOSIVE"), meansofdeath);
   forcegibbing = 0;
-  if(isdefined(weapon.weapclass) && weapon.weapclass == "turret") {
+  if(isDefined(weapon.weapclass) && weapon.weapclass == "turret") {
     forcegibbing = 1;
-    if(isdefined(inflictor)) {
+    if(isDefined(inflictor)) {
       isdirectexplosive = isinarray(array("MOD_GRENADE", "MOD_GRENADE_SPLASH", "MOD_PROJECTILE", "MOD_PROJECTILE_SPLASH", "MOD_EXPLOSIVE"), meansofdeath);
       iscloseexplosive = distancesquared(inflictor.origin, entity.origin) <= (60 * 60);
       if(isdirectexplosive && iscloseexplosive) {
@@ -104,7 +104,7 @@ function private humangibkilledoverride(inflictor, attacker, damage, meansofdeat
       }
     }
   }
-  if(forcegibbing || isexplosive || (isdefined(level.__ai_forcegibs) && level.__ai_forcegibs) || (weapon.dogibbing && attackerdistance <= (weapon.maxgibdistance * weapon.maxgibdistance))) {
+  if(forcegibbing || isexplosive || (isDefined(level.__ai_forcegibs) && level.__ai_forcegibs) || (weapon.dogibbing && attackerdistance <= (weapon.maxgibdistance * weapon.maxgibdistance))) {
     gibserverutils::togglespawngibs(entity, 1);
     destructserverutils::togglespawngibs(entity, 1);
     trygibbinglimb(entity, damage, hitloc, isexplosive || forcegibbing);
@@ -178,7 +178,7 @@ function private trygibbinglegs(entity, damage, hitloc, isexplosive, attacker) {
 function damageoverride(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime, boneindex, modelindex) {
   entity = self;
   entity destructserverutils::handledamage(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime, boneindex, modelindex);
-  if(isdefined(eattacker) && !isplayer(eattacker) && !isvehicle(eattacker)) {
+  if(isDefined(eattacker) && !isplayer(eattacker) && !isvehicle(eattacker)) {
     dist = distancesquared(entity.origin, eattacker.origin);
     if(dist < 65536) {
       idamage = int(idamage * 10);

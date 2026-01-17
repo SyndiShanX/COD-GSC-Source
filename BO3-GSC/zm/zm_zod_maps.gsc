@@ -18,7 +18,7 @@ function init() {
 function function_ca1a937() {
   level flag::wait_till("all_players_spawned");
   level flag::wait_till("zones_initialized");
-  var_1fb56ce6 = getentarray("map_city", "targetname");
+  var_1fb56ce6 = getEntArray("map_city", "targetname");
   foreach(var_4d3ce43f in var_1fb56ce6) {
     switch (var_4d3ce43f.script_string) {
       case "canal": {
@@ -63,7 +63,7 @@ function function_ca1a937() {
 }
 
 function function_87325d74() {
-  while (true) {
+  while(true) {
     if(level flag::get("memento_detective_found")) {
       self hidepart("tag_memento_badge");
     }

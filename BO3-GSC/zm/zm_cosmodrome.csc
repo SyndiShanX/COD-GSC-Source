@@ -61,11 +61,11 @@ function main() {
   level.var_90e9447c = 0;
   level.intro_done = 0;
   include_weapons();
-  callback::on_localclient_connect( & function_82a94b2c);
+  callback::on_localclient_connect(&function_82a94b2c);
   register_client_fields();
   zm_cosmodrome_fx::main();
   level thread zm_cosmodrome_amb::main();
-  level.setupcustomcharacterexerts = & setup_personality_character_exerts;
+  level.setupcustomcharacterexerts = &setup_personality_character_exerts;
   visionset_mgr::register_visionset_info("zm_cosmodrome_no_power", 21000, 31, undefined, "zombie_cosmodrome_nopower");
   visionset_mgr::register_visionset_info("zm_cosmodrome_power_antic", 21000, 31, undefined, "zombie_cosmodrome_power_antic");
   visionset_mgr::register_visionset_info("zm_cosmodrome_power_flare", 21000, 31, undefined, "zombie_cosmodrome_power_flare");
@@ -89,7 +89,7 @@ function function_82a94b2c(localclientnum) {
 
 function function_85c8e13c(localclientnum) {
   self endon("disconnect");
-  while (true) {
+  while(true) {
     var_f4570d42 = randomint(5);
     switch (var_f4570d42) {
       case 0: {
@@ -252,7 +252,7 @@ function function_c07d3f2c(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_d0429093(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
-    if(isdefined(level.intro_done) && !level.intro_done) {
+    if(isDefined(level.intro_done) && !level.intro_done) {
       level.intro_done = 1;
       player = getlocalplayers()[localclientnum];
       player set_fog("normal");
@@ -266,13 +266,13 @@ function function_d0429093(localclientnum, oldval, newval, bnewent, binitialsnap
 function function_e470dce(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
     level.var_f2fba834 = 1;
-    if(isdefined(level._power_on) && !level._power_on) {
+    if(isDefined(level._power_on) && !level._power_on) {
       level._power_on = 1;
       level thread setup_lander_screens(localclientnum);
     }
     player = getlocalplayers()[localclientnum];
     player earthquake(0.2, 5, player.origin, 20000);
-    playsound(0, "zmb_ape_intro_sonicboom_fnt", (0, 0, 0));
+    playSound(0, "zmb_ape_intro_sonicboom_fnt", (0, 0, 0));
     level._effect["eye_glow"] = level._effect["monkey_eye_glow"];
     e_player = getlocalplayers()[localclientnum];
     e_player set_fog("monkey");
@@ -282,7 +282,7 @@ function function_e470dce(localclientnum, oldval, newval, bnewent, binitialsnap,
 function function_87f08b47(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
     level.var_f2fba834 = 0;
-    if(isdefined(level._power_on) && !level._power_on) {
+    if(isDefined(level._power_on) && !level._power_on) {
       level._power_on = 1;
       level thread setup_lander_screens(localclientnum);
     }
@@ -304,7 +304,7 @@ function function_2f143630(var_54168c72, var_f8308617, n_wait, var_2e141209, var
 }
 
 function function_ea758913() {
-  if(isdefined(level.var_f2fba834) && level.var_f2fba834 && isdefined(level.var_90e9447c) && !level.var_90e9447c) {
+  if(isDefined(level.var_f2fba834) && level.var_f2fba834 && isDefined(level.var_90e9447c) && !level.var_90e9447c) {
     level.var_90e9447c = 1;
     self function_2f143630("_monkey_flare", 0.5, 0.5, "_monkey", 3);
     level.var_90e9447c = 0;
@@ -312,37 +312,37 @@ function function_ea758913() {
 }
 
 function register_client_fields() {
-  clientfield::register("scriptmover", "zombie_has_eyes", 21000, 1, "int", & zm::zombie_eyes_clientfield_cb, 0, 0);
-  clientfield::register("actor", "COSMO_SOULPULL", 21000, 1, "int", & actor_flag_soulpull_handler, 0, 0);
-  clientfield::register("scriptmover", "COSMO_ROCKET_FX", 21000, 1, "int", & rocket_fx, 0, 0);
-  clientfield::register("scriptmover", "COSMO_MONKEY_LANDER_FX", 21000, 1, "int", & monkey_lander_fx, 0, 0);
-  clientfield::register("world", "COSMO_EGG_SAM_ANGRY", 21000, 1, "int", & samantha_is_angry, 0, 0);
-  clientfield::register("scriptmover", "COSMO_LANDER_ENGINE_FX", 21000, 1, "int", & lander_engine_fx, 0, 0);
-  clientfield::register("allplayers", "COSMO_PLAYER_LANDER_FOG", 21000, 1, "int", & player_lander_fog, 0, 0);
-  clientfield::register("scriptmover", "COSMO_LANDER_MOVE_FX", 21000, 1, "int", & lander_move_fx, 0, 0);
-  clientfield::register("scriptmover", "COSMO_LANDER_RUMBLE_AND_QUAKE", 21000, 1, "int", & lander_rumble_and_quake, 0, 0);
-  clientfield::register("world", "COSMO_LANDER_STATUS_LIGHTS", 21000, 2, "int", & function_32db5393, 0, 0);
-  clientfield::register("world", "COSMO_LANDER_STATION", 21000, 3, "int", & function_446c53e5, 0, 0);
-  clientfield::register("world", "COSMO_LANDER_DEST", 21000, 3, "int", & function_f6ffc831, 0, 0);
-  clientfield::register("world", "COSMO_LANDER_CATWALK_BAY", 21000, 3, "int", & function_89e03497, 0, 0);
-  clientfield::register("world", "COSMO_LANDER_BASE_ENTRY_BAY", 21000, 3, "int", & function_429d7872, 0, 0);
-  clientfield::register("world", "COSMO_LANDER_CENTRIFUGE_BAY", 21000, 3, "int", & function_7eaa1812, 0, 0);
-  clientfield::register("world", "COSMO_LANDER_STORAGE_BAY", 21000, 3, "int", & function_686d40af, 0, 0);
-  clientfield::register("scriptmover", "COSMO_LAUNCH_PANEL_CENTRIFUGE_STATUS", 21000, 1, "int", & launch_panel_centrifuge_status, 0, 0);
-  clientfield::register("scriptmover", "COSMO_LAUNCH_PANEL_BASEENTRY_STATUS", 21000, 1, "int", & launch_panel_baseentry_status, 0, 0);
-  clientfield::register("scriptmover", "COSMO_LAUNCH_PANEL_STORAGE_STATUS", 21000, 1, "int", & launch_panel_storage_status, 0, 0);
-  clientfield::register("scriptmover", "COSMO_LAUNCH_PANEL_CATWALK_STATUS", 21000, 1, "int", & launch_panel_catwalk_status, 0, 0);
-  clientfield::register("scriptmover", "COSMO_CENTRIFUGE_RUMBLE", 21000, 1, "int", & centrifuge_rumble_control, 0, 0);
-  clientfield::register("scriptmover", "COSMO_CENTRIFUGE_LIGHTS", 21000, 1, "int", & centrifuge_warning_lights_init, 0, 0);
-  clientfield::register("world", "COSMO_VISIONSET_BEGIN", 21000, 1, "int", & function_c07d3f2c, 0, 0);
-  clientfield::register("world", "COSMO_VISIONSET_NOPOWER", 21000, 1, "int", & function_d0429093, 0, 0);
-  clientfield::register("world", "COSMO_VISIONSET_POWERON", 21000, 1, "int", & function_87f08b47, 0, 0);
-  clientfield::register("world", "COSMO_VISIONSET_MONKEY", 21000, 1, "int", & function_e470dce, 0, 0);
+  clientfield::register("scriptmover", "zombie_has_eyes", 21000, 1, "int", &zm::zombie_eyes_clientfield_cb, 0, 0);
+  clientfield::register("actor", "COSMO_SOULPULL", 21000, 1, "int", &actor_flag_soulpull_handler, 0, 0);
+  clientfield::register("scriptmover", "COSMO_ROCKET_FX", 21000, 1, "int", &rocket_fx, 0, 0);
+  clientfield::register("scriptmover", "COSMO_MONKEY_LANDER_FX", 21000, 1, "int", &monkey_lander_fx, 0, 0);
+  clientfield::register("world", "COSMO_EGG_SAM_ANGRY", 21000, 1, "int", &samantha_is_angry, 0, 0);
+  clientfield::register("scriptmover", "COSMO_LANDER_ENGINE_FX", 21000, 1, "int", &lander_engine_fx, 0, 0);
+  clientfield::register("allplayers", "COSMO_PLAYER_LANDER_FOG", 21000, 1, "int", &player_lander_fog, 0, 0);
+  clientfield::register("scriptmover", "COSMO_LANDER_MOVE_FX", 21000, 1, "int", &lander_move_fx, 0, 0);
+  clientfield::register("scriptmover", "COSMO_LANDER_RUMBLE_AND_QUAKE", 21000, 1, "int", &lander_rumble_and_quake, 0, 0);
+  clientfield::register("world", "COSMO_LANDER_STATUS_LIGHTS", 21000, 2, "int", &function_32db5393, 0, 0);
+  clientfield::register("world", "COSMO_LANDER_STATION", 21000, 3, "int", &function_446c53e5, 0, 0);
+  clientfield::register("world", "COSMO_LANDER_DEST", 21000, 3, "int", &function_f6ffc831, 0, 0);
+  clientfield::register("world", "COSMO_LANDER_CATWALK_BAY", 21000, 3, "int", &function_89e03497, 0, 0);
+  clientfield::register("world", "COSMO_LANDER_BASE_ENTRY_BAY", 21000, 3, "int", &function_429d7872, 0, 0);
+  clientfield::register("world", "COSMO_LANDER_CENTRIFUGE_BAY", 21000, 3, "int", &function_7eaa1812, 0, 0);
+  clientfield::register("world", "COSMO_LANDER_STORAGE_BAY", 21000, 3, "int", &function_686d40af, 0, 0);
+  clientfield::register("scriptmover", "COSMO_LAUNCH_PANEL_CENTRIFUGE_STATUS", 21000, 1, "int", &launch_panel_centrifuge_status, 0, 0);
+  clientfield::register("scriptmover", "COSMO_LAUNCH_PANEL_BASEENTRY_STATUS", 21000, 1, "int", &launch_panel_baseentry_status, 0, 0);
+  clientfield::register("scriptmover", "COSMO_LAUNCH_PANEL_STORAGE_STATUS", 21000, 1, "int", &launch_panel_storage_status, 0, 0);
+  clientfield::register("scriptmover", "COSMO_LAUNCH_PANEL_CATWALK_STATUS", 21000, 1, "int", &launch_panel_catwalk_status, 0, 0);
+  clientfield::register("scriptmover", "COSMO_CENTRIFUGE_RUMBLE", 21000, 1, "int", &centrifuge_rumble_control, 0, 0);
+  clientfield::register("scriptmover", "COSMO_CENTRIFUGE_LIGHTS", 21000, 1, "int", &centrifuge_warning_lights_init, 0, 0);
+  clientfield::register("world", "COSMO_VISIONSET_BEGIN", 21000, 1, "int", &function_c07d3f2c, 0, 0);
+  clientfield::register("world", "COSMO_VISIONSET_NOPOWER", 21000, 1, "int", &function_d0429093, 0, 0);
+  clientfield::register("world", "COSMO_VISIONSET_POWERON", 21000, 1, "int", &function_87f08b47, 0, 0);
+  clientfield::register("world", "COSMO_VISIONSET_MONKEY", 21000, 1, "int", &function_e470dce, 0, 0);
 }
 
 function function_d87a7dcc() {
   var_bd7ba30 = 0;
-  while (true) {
+  while(true) {
     if(!level clientfield::get("zombie_power_on")) {
       if(var_bd7ba30) {
         level notify("power_controlled_light");
@@ -352,7 +352,7 @@ function function_d87a7dcc() {
     level._power_on = 1;
     level notify("power_controlled_light");
     players = getlocalplayers();
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       level thread setup_lander_screens(i);
     }
     level function_2f143630("_powerup", 0.1, 1, "_poweron", 2.5);
@@ -366,9 +366,9 @@ function include_weapons() {
 }
 
 function radar_dish_init() {
-  radar_dish = getentarray(0, "zombie_cosmodrome_radar_dish", "targetname");
-  if(isdefined(radar_dish)) {
-    for (i = 0; i < radar_dish.size; i++) {
+  radar_dish = getEntArray(0, "zombie_cosmodrome_radar_dish", "targetname");
+  if(isDefined(radar_dish)) {
+    for(i = 0; i < radar_dish.size; i++) {
       radar_dish[i] thread radar_dish_rotate();
     }
   }
@@ -376,7 +376,7 @@ function radar_dish_init() {
 
 function radar_dish_rotate() {
   wait(0.1);
-  while (true) {
+  while(true) {
     self rotateyaw(360, 10);
     self waittill("rotatedone");
   }
@@ -385,14 +385,14 @@ function radar_dish_rotate() {
 function perk_wire_fx_client(client_num, done_notify) {
   println("" + client_num);
   targ = struct::get(self.target, "targetname");
-  if(!isdefined(targ)) {
+  if(!isDefined(targ)) {
     return;
   }
   mover = spawn(client_num, targ.origin, "script_model");
-  mover setmodel("tag_origin");
-  fx = playfxontag(client_num, level._effect["wire_spark"], mover, "tag_origin");
-  while (isdefined(targ)) {
-    if(isdefined(targ.target)) {
+  mover setModel("tag_origin");
+  fx = playFXOnTag(client_num, level._effect["wire_spark"], mover, "tag_origin");
+  while(isDefined(targ)) {
+    if(isDefined(targ.target)) {
       println((("" + client_num) + "") + targ.target);
       target = struct::get(targ.target, "targetname");
       mover moveto(target.origin, 0.5);
@@ -409,7 +409,7 @@ function perk_wire_fx_client(client_num, done_notify) {
 
 function tele_spark_audio_mover(fake_ent) {
   level endon("spark_done");
-  while (true) {
+  while(true) {
     wait(0.05);
   }
 }
@@ -423,8 +423,8 @@ function actor_flag_soulpull_handler(localclientnum, oldval, newval, bnewent, bi
 function soul_pull(client_num) {
   println((("" + self.origin) + "") + level.nml_spark_pull.origin);
   mover = spawn(client_num, self.origin, "script_model");
-  mover setmodel("tag_origin");
-  fx = playfxontag(client_num, level._effect["soul_spark"], mover, "tag_origin");
+  mover setModel("tag_origin");
+  fx = playFXOnTag(client_num, level._effect["soul_spark"], mover, "tag_origin");
   wait(1);
   mover moveto(level.nml_spark_pull.origin, 3);
   wait(3);
@@ -445,7 +445,7 @@ function init_cosmodrome_box_screens() {
   level.magic_box_tv_warehouse = array("p7_zm_asc_cam_monitor_screen_warehouse");
   level.magic_box_tv_random = array("p7_zm_asc_cam_monitor_screen_logo");
   level._box_locations = array(level.magic_box_tv_start_1, level.magic_box_tv_roof_connector, level.magic_box_tv_centrifuge, level.magic_box_tv_base_entry, level.magic_box_tv_storage, level.magic_box_tv_catwalks, level.magic_box_tv_north_pass, level.magic_box_tv_warehouse);
-  level._custom_box_monitor = & cosmodrome_screen_switch;
+  level._custom_box_monitor = &cosmodrome_screen_switch;
 }
 
 function cosmodrome_screen_switch(client_num, state, oldstate) {
@@ -465,7 +465,7 @@ function cosmodrome_screen_switch(client_num, state, oldstate) {
     }
   }
   stop_notify = "stop_tv_swap";
-  for (i = 0; i < level.cosmodrome_tvs[client_num].size; i++) {
+  for(i = 0; i < level.cosmodrome_tvs[client_num].size; i++) {
     tele = level.cosmodrome_tvs[client_num][i];
     tele notify(stop_notify);
     wait(0.2);
@@ -475,29 +475,29 @@ function cosmodrome_screen_switch(client_num, state, oldstate) {
 }
 
 function cosmodrome_tv_init(client_num) {
-  if(!isdefined(level.cosmodrome_tvs)) {
+  if(!isDefined(level.cosmodrome_tvs)) {
     level.cosmodrome_tvs = [];
   }
-  if(isdefined(level.cosmodrome_tvs[client_num])) {
+  if(isDefined(level.cosmodrome_tvs[client_num])) {
     return;
   }
-  level.cosmodrome_tvs[client_num] = getentarray(client_num, "model_cosmodrome_box_screens", "targetname");
-  for (i = 0; i < level.cosmodrome_tvs[client_num].size; i++) {
+  level.cosmodrome_tvs[client_num] = getEntArray(client_num, "model_cosmodrome_box_screens", "targetname");
+  for(i = 0; i < level.cosmodrome_tvs[client_num].size; i++) {
     tele = level.cosmodrome_tvs[client_num][i];
-    tele setmodel(level.magic_box_tv_off[0]);
+    tele setModel(level.magic_box_tv_off[0]);
     wait(0.1);
   }
 }
 
 function magic_box_screen_swap(model_array, endon_notify) {
   self endon(endon_notify);
-  while (true) {
-    for (i = 0; i < model_array.size; i++) {
-      self setmodel(model_array[i]);
+  while(true) {
+    for(i = 0; i < model_array.size; i++) {
+      self setModel(model_array[i]);
       wait(3);
     }
-    if(3 > randomint(100) && isdefined(level.magic_box_tv_random)) {
-      self setmodel(level.magic_box_tv_random[randomint(level.magic_box_tv_random.size)]);
+    if(3 > randomint(100) && isDefined(level.magic_box_tv_random)) {
+      self setModel(level.magic_box_tv_random[randomint(level.magic_box_tv_random.size)]);
       wait(2);
     }
     wait(1);
@@ -517,8 +517,8 @@ function play_magic_box_tv_audio(state) {
       self.alias = "amb_tv_static";
     }
   }
-  if(!isdefined(self.alias)) {} else {
-    self playloopsound(self.alias, 0.5);
+  if(!isDefined(self.alias)) {} else {
+    self playLoopSound(self.alias, 0.5);
   }
 }
 
@@ -540,15 +540,15 @@ function function_686d40af(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_18769931(localclientnum, n_state, door_name) {
   sound_count = 0;
-  doors = getentarray(localclientnum, door_name, "targetname");
-  for (i = 0; i < doors.size; i++) {
+  doors = getEntArray(localclientnum, door_name, "targetname");
+  for(i = 0; i < doors.size; i++) {
     var_1f9cab23 = doors[i] function_b2c64ce4(n_state);
     v_move_pos = doors[i] function_b27e98c0(var_1f9cab23);
     b_move = doors[i] function_53c16d30(v_move_pos);
     if(b_move) {
       doors[i] moveto(v_move_pos, 1);
       if(sound_count == 0) {
-        playsound(0, "zmb_lander_door", doors[i].origin);
+        playSound(0, "zmb_lander_door", doors[i].origin);
         sound_count++;
       }
     }
@@ -561,7 +561,7 @@ function function_b2c64ce4(n_state) {
       return true;
     }
     case 2: {
-      if(!isdefined(self.script_noteworthy)) {
+      if(!isDefined(self.script_noteworthy)) {
         return false;
       } else {
         return true;
@@ -571,7 +571,7 @@ function function_b2c64ce4(n_state) {
       return false;
     }
     case 0: {
-      if(!isdefined(self.script_noteworthy)) {
+      if(!isDefined(self.script_noteworthy)) {
         return true;
       } else {
         return false;
@@ -583,7 +583,7 @@ function function_b2c64ce4(n_state) {
 function function_b27e98c0(var_2291984a) {
   open_pos = struct::get(self.target, "targetname");
   start_pos = struct::get(open_pos.target, "targetname");
-  if(!isdefined(self.script_noteworthy)) {
+  if(!isDefined(self.script_noteworthy)) {
     if(var_2291984a) {
       return start_pos.origin;
     }
@@ -604,8 +604,8 @@ function function_53c16d30(v_pos) {
 
 function rocket_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
-    self.var_a13e8509 = playfxontag(localclientnum, level._effect["rocket_blast_trail"], self, "tag_engine");
-  } else if(isdefined(self.var_a13e8509)) {
+    self.var_a13e8509 = playFXOnTag(localclientnum, level._effect["rocket_blast_trail"], self, "tag_engine");
+  } else if(isDefined(self.var_a13e8509)) {
     killfx(localclientnum, self.var_a13e8509);
   }
 }
@@ -613,25 +613,25 @@ function rocket_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldn
 function lander_engine_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   player = getlocalplayers()[localclientnum];
   if(newval) {
-    if(isdefined(player.lander_fx)) {
+    if(isDefined(player.lander_fx)) {
       stopfx(localclientnum, player.lander_fx);
       stopfx(localclientnum, player.lander_fx1);
       stopfx(localclientnum, player.lander_fx2);
       stopfx(localclientnum, player.lander_fx3);
       stopfx(localclientnum, player.lander_fx4);
     }
-    player.lander_fx = playfxontag(localclientnum, level._effect["lunar_lander_thruster_leg"], self, "tag_engine01");
+    player.lander_fx = playFXOnTag(localclientnum, level._effect["lunar_lander_thruster_leg"], self, "tag_engine01");
     setfxignorepause(localclientnum, player.lander_fx, 1);
-    player.lander_fx1 = playfxontag(localclientnum, level._effect["lunar_lander_thruster_leg"], self, "tag_engine02");
+    player.lander_fx1 = playFXOnTag(localclientnum, level._effect["lunar_lander_thruster_leg"], self, "tag_engine02");
     setfxignorepause(localclientnum, player.lander_fx1, 1);
-    player.lander_fx2 = playfxontag(localclientnum, level._effect["lunar_lander_thruster_leg"], self, "tag_engine03");
+    player.lander_fx2 = playFXOnTag(localclientnum, level._effect["lunar_lander_thruster_leg"], self, "tag_engine03");
     setfxignorepause(localclientnum, player.lander_fx2, 1);
-    player.lander_fx3 = playfxontag(localclientnum, level._effect["lunar_lander_thruster_leg"], self, "tag_engine04");
+    player.lander_fx3 = playFXOnTag(localclientnum, level._effect["lunar_lander_thruster_leg"], self, "tag_engine04");
     setfxignorepause(localclientnum, player.lander_fx3, 1);
-    player.lander_fx4 = playfxontag(localclientnum, level._effect["lunar_lander_thruster_bellow"], self, "tag_bellow");
+    player.lander_fx4 = playFXOnTag(localclientnum, level._effect["lunar_lander_thruster_bellow"], self, "tag_bellow");
     setfxignorepause(localclientnum, player.lander_fx4, 1);
     self thread start_ground_sounds();
-  } else if(isdefined(player.lander_fx)) {
+  } else if(isDefined(player.lander_fx)) {
     stopfx(localclientnum, player.lander_fx);
     stopfx(localclientnum, player.lander_fx1);
     stopfx(localclientnum, player.lander_fx2);
@@ -649,10 +649,10 @@ function start_ground_sounds() {
   self.ground_sound_ent = spawn(0, (0, 0, 0), "script_origin");
   self.ground_sound_ent thread function_fb377b79();
   pre_origin = vectorscale((1, 1, 1), 100000);
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     wait(0.15);
-    if(isdefined(self.stop_ground_sounds) && self.stop_ground_sounds) {
-      if(isdefined(self.ground_sound_ent)) {
+    if(isDefined(self.stop_ground_sounds) && self.stop_ground_sounds) {
+      if(isDefined(self.ground_sound_ent)) {
         self.ground_sound_ent stoploopsound(2);
       }
       return;
@@ -661,16 +661,16 @@ function start_ground_sounds() {
       continue;
     }
     pre_origin = self gettagorigin("tag_bellow");
-    trace = bullettrace(self gettagorigin("tag_bellow"), self gettagorigin("tag_bellow") - vectorscale((0, 0, 1), 100000), 0, undefined);
-    if(!isdefined(trace)) {
+    trace = bulletTrace(self gettagorigin("tag_bellow"), self gettagorigin("tag_bellow") - vectorscale((0, 0, 1), 100000), 0, undefined);
+    if(!isDefined(trace)) {
       continue;
     }
-    if(!isdefined(trace["position"])) {
+    if(!isDefined(trace["position"])) {
       self.ground_sound_ent stoploopsound(2);
       continue;
     }
     self.ground_sound_ent.origin = trace["position"] + vectorscale((0, 0, 1), 30);
-    self.ground_sound_ent playloopsound("zmb_lander_ground_sounds", 3);
+    self.ground_sound_ent playLoopSound("zmb_lander_ground_sounds", 3);
   }
 }
 
@@ -684,13 +684,13 @@ function end_ground_sounds() {
   self endon("start_ground_sounds");
   self.stop_ground_sounds = 1;
   wait(3);
-  if(isdefined(self) && isdefined(self.ground_sound_ent)) {
+  if(isDefined(self) && isDefined(self.ground_sound_ent)) {
     self.ground_sound_ent delete();
   }
 }
 
 function get_random_spot_in_player_view(fwd_min, fwd_max, side_min, side_max) {
-  fwd = anglestoforward(self.angles);
+  fwd = anglesToForward(self.angles);
   scale = randomintrange(fwd_min, fwd_max);
   fwd = (fwd[0] * scale, fwd[1] * scale, fwd[2] * scale);
   if(randomint(100) > 50) {
@@ -701,65 +701,65 @@ function get_random_spot_in_player_view(fwd_min, fwd_max, side_min, side_max) {
   scale = randomintrange(side_min, side_max);
   side = (side[0] * scale, side[1] * scale, side[2] * scale);
   point = (self.origin + fwd) + side;
-  trace = bullettrace(point, point + (vectorscale((0, 0, -1), 10000)), 0, undefined);
+  trace = bulletTrace(point, point + (vectorscale((0, 0, -1), 10000)), 0, undefined);
   return trace["position"];
 }
 
 function debris_crash_and_burn(spot, client, player) {
-  playfxontag(client, level._effect["debris_trail"], self, "tag_origin");
+  playFXOnTag(client, level._effect["debris_trail"], self, "tag_origin");
   self moveto(spot, 3.1);
-  for (i = 0; i < 10; i++) {
+  for(i = 0; i < 10; i++) {
     self rotateto((randomint(360), randomint(360), randomint(360)), 0.3);
     wait(0.3);
   }
   wait(3.1);
   player earthquake(0.4, 0.5, self.origin, 1200);
-  playfx(client, level._effect["debris_hit"], self.origin);
+  playFX(client, level._effect["debris_hit"], self.origin);
   wait(1);
   self delete();
 }
 
 function setup_lander_screens(clientnum) {
-  screens = getentarray(clientnum, "lander_screens", "targetname");
-  for (i = 0; i < screens.size; i++) {
-    if(isdefined(screens[i].model)) {
-      screens[i] setmodel("p7_zm_asc_control_panel_lunar");
+  screens = getEntArray(clientnum, "lander_screens", "targetname");
+  for(i = 0; i < screens.size; i++) {
+    if(isDefined(screens[i].model)) {
+      screens[i] setModel("p7_zm_asc_control_panel_lunar");
     }
   }
 }
 
 function lander_at_station(station, clientnum) {
   self util::waittill_dobj(clientnum);
-  if(isdefined(self.panel_fx)) {
+  if(isDefined(self.panel_fx)) {
     stopfx(clientnum, self.panel_fx);
   }
-  if(isdefined(self.lander_fx)) {
+  if(isDefined(self.lander_fx)) {
     stopfx(clientnum, self.lander_fx);
   }
   switch (station) {
     case 3: {
-      self.panel_fx = playfxontag(clientnum, level._effect["panel_green"], self, "tag_location_3");
+      self.panel_fx = playFXOnTag(clientnum, level._effect["panel_green"], self, "tag_location_3");
       self.lander_location = self gettagorigin("tag_location_3");
       self.lander_location_angles = self gettagangles("tag_location_3");
       setfxignorepause(clientnum, self.panel_fx, 1);
       break;
     }
     case 1: {
-      self.panel_fx = playfxontag(clientnum, level._effect["panel_green"], self, "tag_location_1");
+      self.panel_fx = playFXOnTag(clientnum, level._effect["panel_green"], self, "tag_location_1");
       self.lander_location = self gettagorigin("tag_location_1");
       self.lander_location_angles = self gettagangles("tag_location_1");
       setfxignorepause(clientnum, self.panel_fx, 1);
       break;
     }
     case 2: {
-      self.panel_fx = playfxontag(clientnum, level._effect["panel_green"], self, "tag_location_2");
+      self.panel_fx = playFXOnTag(clientnum, level._effect["panel_green"], self, "tag_location_2");
       self.lander_location = self gettagorigin("tag_location_2");
       self.lander_location_angles = self gettagangles("tag_location_2");
       setfxignorepause(clientnum, self.panel_fx, 1);
       break;
     }
     case 4: {
-      self.panel_fx = playfxontag(clientnum, level._effect["panel_green"], self, "tag_home");
+      self.panel_fx = playFXOnTag(clientnum, level._effect["panel_green"], self, "tag_home");
       self.lander_location = self gettagorigin("tag_home");
       self.lander_location_angles = self gettagangles("tag_home");
       setfxignorepause(clientnum, self.panel_fx, 1);
@@ -778,21 +778,21 @@ function lander_move_fx(localclientnum, oldval, newval, bnewent, binitialsnap, f
 function lander_station_move_lander_marker(localclientnum) {
   dest = undefined;
   x = localclientnum;
-  screens = getentarray(x, "lander_screens", "targetname");
-  for (i = 0; i < screens.size; i++) {
+  screens = getEntArray(x, "lander_screens", "targetname");
+  for(i = 0; i < screens.size; i++) {
     screen = screens[i];
-    if(isdefined(screen.lander_fx)) {
+    if(isDefined(screen.lander_fx)) {
       stopfx(x, screen.lander_fx);
     }
-    if(isdefined(screen.panel_fx)) {
+    if(isDefined(screen.panel_fx)) {
       stopfx(x, screen.panel_fx);
     }
-    if(!isdefined(screen.lander_fx_ent)) {
+    if(!isDefined(screen.lander_fx_ent)) {
       screen.lander_fx_ent = spawn(x, screen.lander_location, "script_origin");
-      screen.lander_fx_ent setmodel("tag_origin");
+      screen.lander_fx_ent setModel("tag_origin");
       screen.lander_fx_ent.angles = screen.lander_location_angles;
     }
-    screen.lander_fx = playfxontag(x, level._effect["panel_green"], screen.lander_fx_ent, "tag_origin");
+    screen.lander_fx = playFXOnTag(x, level._effect["panel_green"], screen.lander_fx_ent, "tag_origin");
     setfxignorepause(x, screen.lander_fx, 1);
     switch (level.lander_dest_station) {
       case "base": {
@@ -817,8 +817,8 @@ function lander_station_move_lander_marker(localclientnum) {
 }
 
 function function_446c53e5(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  screens = getentarray(localclientnum, "lander_screens", "targetname");
-  for (i = 0; i < screens.size; i++) {
+  screens = getEntArray(localclientnum, "lander_screens", "targetname");
+  for(i = 0; i < screens.size; i++) {
     screens[i] thread lander_at_station(newval, localclientnum);
   }
 }
@@ -854,16 +854,16 @@ function function_f6ffc831(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function launch_panel_centrifuge_status(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
-    if(isdefined(self.centrifuge_status)) {
+    if(isDefined(self.centrifuge_status)) {
       stopfx(localclientnum, self.centrifuge_status);
     }
-    self.centrifuge_status = playfxontag(localclientnum, level._effect["panel_red"], self, "tag_home");
+    self.centrifuge_status = playFXOnTag(localclientnum, level._effect["panel_red"], self, "tag_home");
     setfxignorepause(localclientnum, self.centrifuge_status, 1);
   } else {
-    if(isdefined(self.centrifuge_status)) {
+    if(isDefined(self.centrifuge_status)) {
       stopfx(localclientnum, self.centrifuge_status);
     }
-    self.centrifuge_status = playfxontag(localclientnum, level._effect["panel_green"], self, "tag_home");
+    self.centrifuge_status = playFXOnTag(localclientnum, level._effect["panel_green"], self, "tag_home");
     setfxignorepause(localclientnum, self.centrifuge_status, 1);
   }
 }
@@ -897,7 +897,7 @@ function launch_panel_catwalk_status(localclientnum, oldval, newval, bnewent, bi
 
 function rocket_launch_display(localclientnum) {
   wait(1);
-  rocket_screens = getentarray(localclientnum, "rocket_launch_sign", "targetname");
+  rocket_screens = getEntArray(localclientnum, "rocket_launch_sign", "targetname");
   model = rocket_screens[0].model;
   switch (level.rocket_num) {
     case 1: {
@@ -913,18 +913,18 @@ function rocket_launch_display(localclientnum) {
       break;
     }
   }
-  array::thread_all(rocket_screens, & update_rocket_display, model);
+  array::thread_all(rocket_screens, &update_rocket_display, model);
 }
 
 function update_rocket_display(on_model) {
   old_model = self.model;
-  for (i = 0; i < 3; i++) {
-    self setmodel(on_model);
+  for(i = 0; i < 3; i++) {
+    self setModel(on_model);
     wait(0.35);
-    self setmodel(old_model);
+    self setModel(old_model);
     wait(0.35);
   }
-  self setmodel(on_model);
+  self setModel(on_model);
 }
 
 function lander_rumble_and_quake(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -942,7 +942,7 @@ function lander_rumble_and_quake(localclientnum, oldval, newval, bnewent, biniti
     self thread end_ground_sounds();
     player earthquake(randomfloatrange(0.3, 0.4), randomfloatrange(0.5, 0.6), self.origin, 150);
     wait(0.6);
-    if(isdefined(player) && isdefined(self)) {
+    if(isDefined(player) && isDefined(self)) {
       player earthquake(randomfloatrange(0.1, 0.2), randomfloatrange(0.2, 0.3), self.origin, 150);
     }
     level notify("stop_lander_rumble");
@@ -954,8 +954,8 @@ function do_lander_rumble_quake(localclientnum) {
   player = getlocalplayers()[localclientnum];
   player endon("entityshutdown");
   player endon("disconnect");
-  while (true) {
-    if(!isdefined(self.origin) || !isdefined(player.origin)) {
+  while(true) {
+    if(!isDefined(self.origin) || !isDefined(player.origin)) {
       wait(0.05);
       continue;
     }
@@ -982,7 +982,7 @@ function centrifuge_rumble_control(local_client_num, oldval, newval, bnewent, bi
   }
   if(newval) {
     players = getlocalplayers();
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       players[i] thread centrifuge_rumble_when_close(self, i);
     }
   } else {
@@ -997,15 +997,15 @@ function centrifuge_rumble_when_close(ent_centrifuge, int_client_num) {
   rumble_range = 360000;
   centrifuge_rumble = "damage_heavy";
   client_num = undefined;
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     distance_to_centrifuge = distancesquared(self.origin, ent_centrifuge.origin);
-    if(distance_to_centrifuge < rumble_range && isdefined(self)) {
-      if(isdefined(int_client_num)) {
+    if(distance_to_centrifuge < rumble_range && isDefined(self)) {
+      if(isDefined(int_client_num)) {
         self playrumbleonentity(int_client_num, centrifuge_rumble);
       }
     }
     if(distance_to_centrifuge > rumble_range) {
-      if(isdefined(int_client_num) && isdefined(self)) {
+      if(isDefined(int_client_num) && isDefined(self)) {
         self stoprumble(int_client_num, centrifuge_rumble);
       }
     }
@@ -1020,19 +1020,19 @@ function centrifuge_clean_rumble(int_client_num) {
 }
 
 function centrifuge_warning_lights_init(local_client_num, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  while (!self hasdobj(local_client_num)) {
+  while(!self hasdobj(local_client_num)) {
     wait(0.1);
   }
   if(local_client_num != 0) {
     return;
   }
   players = getlocalplayers();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     self centrifuge_warning_lights_off(i);
   }
   if(newval) {
     players = getlocalplayers();
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       self centrifuge_fx_spot_init(i);
       self centrifuge_warning_lights_on(i);
     }
@@ -1041,22 +1041,22 @@ function centrifuge_warning_lights_init(local_client_num, oldval, newval, bnewen
 
 function monkey_lander_fx_on() {
   self endon("switch_off_monkey_lander_fx");
-  playsound(0, "zmb_ape_intro_whoosh", self.origin);
+  playSound(0, "zmb_ape_intro_whoosh", self.origin);
   wait(2.5);
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     self.fx = [];
     players = getlocalplayers();
     ent_num = self getentitynumber();
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       player = players[i];
-      if(!isdefined(player._monkey_lander_fx)) {
+      if(!isDefined(player._monkey_lander_fx)) {
         player._monkey_lander_fx = [];
       }
-      if(isdefined(player._monkey_lander_fx[ent_num])) {
+      if(isDefined(player._monkey_lander_fx[ent_num])) {
         deletefx(i, player._monkey_lander_fx[ent_num]);
         player._monkey_lander_fx[ent_num] = undefined;
       }
-      player._monkey_lander_fx[ent_num] = playfxontag(i, level._effect["monkey_trail"], self, "tag_origin");
+      player._monkey_lander_fx[ent_num] = playFXOnTag(i, level._effect["monkey_trail"], self, "tag_origin");
       setfxignorepause(i, player._monkey_lander_fx[ent_num], 1);
     }
   }
@@ -1065,20 +1065,20 @@ function monkey_lander_fx_on() {
 function monkey_lander_fx_off() {
   players = getlocalplayers();
   ent_num = self getentitynumber();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     player = players[i];
-    playfx(i, level._effect["monkey_spawn"], self.origin);
+    playFX(i, level._effect["monkey_spawn"], self.origin);
     playrumbleonposition(i, "explosion_generic", self.origin);
     player earthquake(0.5, 0.5, player.origin, 1000);
   }
-  playsound(0, "zmb_ape_intro_land", self.origin);
+  playSound(0, "zmb_ape_intro_land", self.origin);
 }
 
 function monkey_lander_fx(local_client_num, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(local_client_num != 0) {
     return;
   }
-  while (!self hasdobj(local_client_num)) {
+  while(!self hasdobj(local_client_num)) {
     wait(0.1);
   }
   if(newval) {
@@ -1112,23 +1112,23 @@ function centrifuge_fx_spot_init(int_client_num) {
 }
 
 function centrifuge_warning_lights_on(client_num) {
-  for (i = 0; i < self._centrifuge_lights_[client_num].size; i++) {
+  for(i = 0; i < self._centrifuge_lights_[client_num].size; i++) {
     temp_mdl = spawn(client_num, self gettagorigin(self._centrifuge_lights_[client_num][i]), "script_model");
     temp_mdl.angles = self gettagangles(self._centrifuge_lights_[client_num][i]);
     if(issubstr(self._centrifuge_lights_[client_num][i], "_bttm")) {
       temp_mdl.angles = temp_mdl.angles + vectorscale((1, 0, 0), 180);
     }
-    temp_mdl setmodel("tag_origin");
+    temp_mdl setModel("tag_origin");
     temp_mdl linkto(self, self._centrifuge_lights_[client_num][i]);
-    playfxontag(client_num, level._effect["centrifuge_warning_light"], temp_mdl, "tag_origin");
+    playFXOnTag(client_num, level._effect["centrifuge_warning_light"], temp_mdl, "tag_origin");
     self._centrifuge_light_mdls_[client_num] = array::add(self._centrifuge_light_mdls_[client_num], temp_mdl, 0);
   }
-  for (i = 0; i < self._centrifuge_sparks_[client_num].size; i++) {
+  for(i = 0; i < self._centrifuge_sparks_[client_num].size; i++) {
     temp_mdl = spawn(client_num, self gettagorigin(self._centrifuge_sparks_[client_num][i]), "script_model");
     temp_mdl.angles = self gettagangles(self._centrifuge_sparks_[client_num][i]);
-    temp_mdl setmodel("tag_origin");
+    temp_mdl setModel("tag_origin");
     temp_mdl linkto(self, self._centrifuge_sparks_[client_num][i]);
-    playfxontag(client_num, level._effect["centrifuge_light_spark"], temp_mdl, "tag_origin");
+    playFXOnTag(client_num, level._effect["centrifuge_light_spark"], temp_mdl, "tag_origin");
     self._centrifuge_light_mdls_[client_num] = array::add(self._centrifuge_light_mdls_[client_num], temp_mdl, 0);
   }
   self thread centrifuge_steam_warning(client_num);
@@ -1137,18 +1137,18 @@ function centrifuge_warning_lights_on(client_num) {
 function centrifuge_steam_warning(client_num) {
   self endon("entityshutdown");
   wait(1);
-  for (i = 0; i < self._centrifuge_steams_[client_num].size; i++) {
-    playfxontag(client_num, level._effect["centrifuge_start_steam"], self, self._centrifuge_steams_[client_num][i]);
+  for(i = 0; i < self._centrifuge_steams_[client_num].size; i++) {
+    playFXOnTag(client_num, level._effect["centrifuge_start_steam"], self, self._centrifuge_steams_[client_num][i]);
   }
 }
 
 function centrifuge_warning_lights_off(client_num) {
-  if(!isdefined(self._centrifuge_fx_setup)) {
+  if(!isDefined(self._centrifuge_fx_setup)) {
     return;
   }
   wait(0.2);
-  for (i = 0; i < self._centrifuge_light_mdls_[client_num].size; i++) {
-    if(isdefined(self._centrifuge_light_mdls_[client_num][i])) {
+  for(i = 0; i < self._centrifuge_light_mdls_[client_num].size; i++) {
+    if(isDefined(self._centrifuge_light_mdls_[client_num][i])) {
       self._centrifuge_light_mdls_[client_num][i] unlink();
     }
   }
@@ -1159,16 +1159,16 @@ function centrifuge_warning_lights_off(client_num) {
 function fog_apply(str_fog, int_priority) {
   self endon("death");
   self endon("disconnect");
-  if(!isdefined(self._zombie_fog_list)) {
+  if(!isDefined(self._zombie_fog_list)) {
     self._zombie_fog_list = [];
   }
-  if(!isdefined(str_fog) || !isdefined(int_priority)) {
+  if(!isDefined(str_fog) || !isDefined(int_priority)) {
     return;
   }
   already_in_array = 0;
   if(self._zombie_fog_list.size != 0) {
-    for (i = 0; i < self._zombie_fog_list.size; i++) {
-      if(isdefined(self._zombie_fog_list[i].fog_setting) && self._zombie_fog_list[i].fog_setting == str_fog) {
+    for(i = 0; i < self._zombie_fog_list.size; i++) {
+      if(isDefined(self._zombie_fog_list[i].fog_setting) && self._zombie_fog_list[i].fog_setting == str_fog) {
         already_in_array = 1;
         if(self._zombie_fog_list[i].priority != int_priority) {
           self._zombie_fog_list[i].priority = int_priority;
@@ -1178,7 +1178,7 @@ function fog_apply(str_fog, int_priority) {
     }
   }
   if(!already_in_array) {
-    temp_struct = spawnstruct();
+    temp_struct = spawnStruct();
     temp_struct.fog_setting = str_fog;
     temp_struct.priority = int_priority;
     self._zombie_fog_list = array::add(self._zombie_fog_list, temp_struct, 0);
@@ -1190,20 +1190,20 @@ function fog_apply(str_fog, int_priority) {
 function fog_remove(str_fog) {
   self endon("death");
   self endon("disconnect");
-  if(!isdefined(str_fog)) {
+  if(!isDefined(str_fog)) {
     return;
   }
-  if(!isdefined(self._zombie_fog_list)) {
+  if(!isDefined(self._zombie_fog_list)) {
     self._zombie_fog_list = [];
   }
   temp_struct = undefined;
-  for (i = 0; i < self._zombie_fog_list.size; i++) {
-    if(isdefined(self._zombie_fog_list[i].fog_setting) && self._zombie_fog_list[i].fog_setting == str_fog) {
+  for(i = 0; i < self._zombie_fog_list.size; i++) {
+    if(isDefined(self._zombie_fog_list[i].fog_setting) && self._zombie_fog_list[i].fog_setting == str_fog) {
       temp_struct = self._zombie_fog_list[i];
     }
   }
-  if(isdefined(temp_struct)) {
-    for (i = 0; i < self._zombie_fog_list.size; i++) {
+  if(isDefined(temp_struct)) {
+    for(i = 0; i < self._zombie_fog_list.size; i++) {
       if(self._zombie_fog_list[i] == temp_struct) {
         self._zombie_fog_list[i] = undefined;
       }
@@ -1215,13 +1215,13 @@ function fog_remove(str_fog) {
 }
 
 function get_fog_by_priority() {
-  if(!isdefined(self._zombie_fog_list)) {
+  if(!isDefined(self._zombie_fog_list)) {
     return;
   }
   highest_score = 0;
   highest_score_fog = undefined;
-  for (i = 0; i < self._zombie_fog_list.size; i++) {
-    if(isdefined(self._zombie_fog_list[i].priority) && self._zombie_fog_list[i].priority > highest_score) {
+  for(i = 0; i < self._zombie_fog_list.size; i++) {
+    if(isDefined(self._zombie_fog_list[i].priority) && self._zombie_fog_list[i].priority > highest_score) {
       highest_score = self._zombie_fog_list[i].priority;
       highest_score_fog = self._zombie_fog_list[i].fog_setting;
     }
@@ -1233,14 +1233,14 @@ function setup_fog() {
   util::waitforclient(0);
   wait(1);
   players = getlocalplayers();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i] fog_apply("normal", level._fog_settings_default_priority);
   }
 }
 
 function set_fog(fog_type) {
   util::waitforclient(0);
-  if(!isdefined(fog_type)) {
+  if(!isDefined(fog_type)) {
     return;
   }
   switch (fog_type) {

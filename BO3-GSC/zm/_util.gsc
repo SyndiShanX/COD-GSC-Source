@@ -27,16 +27,16 @@ function warning(msg) {
 
 function brush_delete() {
   num = self.v["exploder"];
-  if(isdefined(self.v["delay"])) {
+  if(isDefined(self.v["delay"])) {
     wait(self.v["delay"]);
   } else {
     wait(0.05);
   }
-  if(!isdefined(self.model)) {
+  if(!isDefined(self.model)) {
     return;
   }
-  assert(isdefined(self.model));
-  if(!isdefined(self.v["fxid"]) || self.v["fxid"] == "No FX") {
+  assert(isDefined(self.model));
+  if(!isDefined(self.v["fxid"]) || self.v["fxid"] == "No FX") {
     self.v["exploder"] = undefined;
   }
   waittillframeend();
@@ -44,23 +44,23 @@ function brush_delete() {
 }
 
 function brush_show() {
-  if(isdefined(self.v["delay"])) {
+  if(isDefined(self.v["delay"])) {
     wait(self.v["delay"]);
   }
-  assert(isdefined(self.model));
+  assert(isDefined(self.model));
   self.model show();
   self.model solid();
 }
 
 function brush_throw() {
-  if(isdefined(self.v["delay"])) {
+  if(isDefined(self.v["delay"])) {
     wait(self.v["delay"]);
   }
   ent = undefined;
-  if(isdefined(self.v["target"])) {
+  if(isDefined(self.v["target"])) {
     ent = getent(self.v["target"], "targetname");
   }
-  if(!isdefined(ent)) {
+  if(!isDefined(ent)) {
     self.model delete();
     return;
   }
@@ -80,21 +80,21 @@ function brush_throw() {
 }
 
 function playsoundonplayers(sound, team) {
-  assert(isdefined(level.players));
+  assert(isDefined(level.players));
   if(level.splitscreen) {
-    if(isdefined(level.players[0])) {
+    if(isDefined(level.players[0])) {
       level.players[0] playlocalsound(sound);
     }
   } else {
-    if(isdefined(team)) {
-      for (i = 0; i < level.players.size; i++) {
+    if(isDefined(team)) {
+      for(i = 0; i < level.players.size; i++) {
         player = level.players[i];
-        if(isdefined(player.pers["team"]) && player.pers["team"] == team) {
+        if(isDefined(player.pers["team"]) && player.pers["team"] == team) {
           player playlocalsound(sound);
         }
       }
     } else {
-      for (i = 0; i < level.players.size; i++) {
+      for(i = 0; i < level.players.size; i++) {
         level.players[i] playlocalsound(sound);
       }
     }
@@ -112,24 +112,24 @@ function isbulletimpactmod(smeansofdeath) {
 function waitrespawnbutton() {
   self endon("disconnect");
   self endon("end_respawn");
-  while (self usebuttonpressed() != 1) {
+  while(self usebuttonpressed() != 1) {
     wait(0.05);
   }
 }
 
 function setlowermessage(text, time, combinemessageandtimer) {
-  if(!isdefined(self.lowermessage)) {
+  if(!isDefined(self.lowermessage)) {
     return;
   }
-  if(isdefined(self.lowermessageoverride) && text != (&"")) {
+  if(isDefined(self.lowermessageoverride) && text != (&"")) {
     text = self.lowermessageoverride;
     time = undefined;
   }
   self notify("lower_message_set");
   self.lowermessage settext(text);
-  if(isdefined(time) && time > 0) {
-    if(!isdefined(combinemessageandtimer) || !combinemessageandtimer) {
-      self.lowertimer.label = & "";
+  if(isDefined(time) && time > 0) {
+    if(!isDefined(combinemessageandtimer) || !combinemessageandtimer) {
+      self.lowertimer.label = &"";
     } else {
       self.lowermessage settext("");
       self.lowertimer.label = text;
@@ -137,7 +137,7 @@ function setlowermessage(text, time, combinemessageandtimer) {
     self.lowertimer settimer(time);
   } else {
     self.lowertimer settext("");
-    self.lowertimer.label = & "";
+    self.lowertimer.label = &"";
   }
   if(self issplitscreen()) {
     self.lowermessage.fontscale = 1.4;
@@ -149,29 +149,29 @@ function setlowermessage(text, time, combinemessageandtimer) {
 }
 
 function setlowermessagevalue(text, value, combinemessage) {
-  if(!isdefined(self.lowermessage)) {
+  if(!isDefined(self.lowermessage)) {
     return;
   }
-  if(isdefined(self.lowermessageoverride) && text != (&"")) {
+  if(isDefined(self.lowermessageoverride) && text != (&"")) {
     text = self.lowermessageoverride;
     time = undefined;
   }
   self notify("lower_message_set");
-  if(!isdefined(combinemessage) || !combinemessage) {
+  if(!isDefined(combinemessage) || !combinemessage) {
     self.lowermessage settext(text);
   } else {
     self.lowermessage settext("");
   }
-  if(isdefined(value) && value > 0) {
-    if(!isdefined(combinemessage) || !combinemessage) {
-      self.lowertimer.label = & "";
+  if(isDefined(value) && value > 0) {
+    if(!isDefined(combinemessage) || !combinemessage) {
+      self.lowertimer.label = &"";
     } else {
       self.lowertimer.label = text;
     }
     self.lowertimer setvalue(value);
   } else {
     self.lowertimer settext("");
-    self.lowertimer.label = & "";
+    self.lowertimer.label = &"";
   }
   if(self issplitscreen()) {
     self.lowermessage.fontscale = 1.4;
@@ -183,11 +183,11 @@ function setlowermessagevalue(text, value, combinemessage) {
 }
 
 function clearlowermessage(fadetime) {
-  if(!isdefined(self.lowermessage)) {
+  if(!isDefined(self.lowermessage)) {
     return;
   }
   self notify("lower_message_set");
-  if(!isdefined(fadetime) || fadetime == 0) {
+  if(!isDefined(fadetime) || fadetime == 0) {
     setlowermessage(&"");
   } else {
     self endon("disconnect");
@@ -202,30 +202,30 @@ function clearlowermessage(fadetime) {
 }
 
 function printonteam(text, team) {
-  assert(isdefined(level.players));
-  for (i = 0; i < level.players.size; i++) {
+  assert(isDefined(level.players));
+  for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
-    if(isdefined(player.pers["team"]) && player.pers["team"] == team) {
+    if(isDefined(player.pers["team"]) && player.pers["team"] == team) {
       player iprintln(text);
     }
   }
 }
 
 function printboldonteam(text, team) {
-  assert(isdefined(level.players));
-  for (i = 0; i < level.players.size; i++) {
+  assert(isDefined(level.players));
+  for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
-    if(isdefined(player.pers["team"]) && player.pers["team"] == team) {
+    if(isDefined(player.pers["team"]) && player.pers["team"] == team) {
       player iprintlnbold(text);
     }
   }
 }
 
 function printboldonteamarg(text, team, arg) {
-  assert(isdefined(level.players));
-  for (i = 0; i < level.players.size; i++) {
+  assert(isDefined(level.players));
+  for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
-    if(isdefined(player.pers["team"]) && player.pers["team"] == team) {
+    if(isDefined(player.pers["team"]) && player.pers["team"] == team) {
       player iprintlnbold(text, arg);
     }
   }
@@ -235,9 +235,9 @@ function printonteamarg(text, team, arg) {}
 
 function printonplayers(text, team) {
   players = level.players;
-  for (i = 0; i < players.size; i++) {
-    if(isdefined(team)) {
-      if(isdefined(players[i].pers["team"]) && players[i].pers["team"] == team) {
+  for(i = 0; i < players.size; i++) {
+    if(isDefined(team)) {
+      if(isDefined(players[i].pers["team"]) && players[i].pers["team"] == team) {
         players[i] iprintln(text);
       }
       continue;
@@ -247,30 +247,30 @@ function printonplayers(text, team) {
 }
 
 function printandsoundoneveryone(team, enemyteam, printfriendly, printenemy, soundfriendly, soundenemy, printarg) {
-  shoulddosounds = isdefined(soundfriendly);
+  shoulddosounds = isDefined(soundfriendly);
   shoulddoenemysounds = 0;
-  if(isdefined(soundenemy)) {
+  if(isDefined(soundenemy)) {
     assert(shoulddosounds);
     shoulddoenemysounds = 1;
   }
-  if(!isdefined(printarg)) {
+  if(!isDefined(printarg)) {
     printarg = "";
   }
   if(level.splitscreen || !shoulddosounds) {
-    for (i = 0; i < level.players.size; i++) {
+    for(i = 0; i < level.players.size; i++) {
       player = level.players[i];
       playerteam = player.pers["team"];
-      if(isdefined(playerteam)) {
-        if(playerteam == team && isdefined(printfriendly) && printfriendly != (&"")) {
+      if(isDefined(playerteam)) {
+        if(playerteam == team && isDefined(printfriendly) && printfriendly != (&"")) {
           player iprintln(printfriendly, printarg);
           continue;
         }
-        if(isdefined(printenemy) && printenemy != (&"")) {
-          if(isdefined(enemyteam) && playerteam == enemyteam) {
+        if(isDefined(printenemy) && printenemy != (&"")) {
+          if(isDefined(enemyteam) && playerteam == enemyteam) {
             player iprintln(printenemy, printarg);
             continue;
           }
-          if(!isdefined(enemyteam) && playerteam != team) {
+          if(!isDefined(enemyteam) && playerteam != team) {
             player iprintln(printenemy, printarg);
           }
         }
@@ -283,19 +283,19 @@ function printandsoundoneveryone(team, enemyteam, printfriendly, printenemy, sou
   } else {
     assert(shoulddosounds);
     if(shoulddoenemysounds) {
-      for (i = 0; i < level.players.size; i++) {
+      for(i = 0; i < level.players.size; i++) {
         player = level.players[i];
         playerteam = player.pers["team"];
-        if(isdefined(playerteam)) {
+        if(isDefined(playerteam)) {
           if(playerteam == team) {
-            if(isdefined(printfriendly) && printfriendly != (&"")) {
+            if(isDefined(printfriendly) && printfriendly != (&"")) {
               player iprintln(printfriendly, printarg);
             }
             player playlocalsound(soundfriendly);
             continue;
           }
-          if(isdefined(enemyteam) && playerteam == enemyteam || (!isdefined(enemyteam) && playerteam != team)) {
-            if(isdefined(printenemy) && printenemy != (&"")) {
+          if(isDefined(enemyteam) && playerteam == enemyteam || (!isDefined(enemyteam) && playerteam != team)) {
+            if(isDefined(printenemy) && printenemy != (&"")) {
               player iprintln(printenemy, printarg);
             }
             player playlocalsound(soundenemy);
@@ -303,23 +303,23 @@ function printandsoundoneveryone(team, enemyteam, printfriendly, printenemy, sou
         }
       }
     } else {
-      for (i = 0; i < level.players.size; i++) {
+      for(i = 0; i < level.players.size; i++) {
         player = level.players[i];
         playerteam = player.pers["team"];
-        if(isdefined(playerteam)) {
+        if(isDefined(playerteam)) {
           if(playerteam == team) {
-            if(isdefined(printfriendly) && printfriendly != (&"")) {
+            if(isDefined(printfriendly) && printfriendly != (&"")) {
               player iprintln(printfriendly, printarg);
             }
             player playlocalsound(soundfriendly);
             continue;
           }
-          if(isdefined(printenemy) && printenemy != (&"")) {
-            if(isdefined(enemyteam) && playerteam == enemyteam) {
+          if(isDefined(printenemy) && printenemy != (&"")) {
+            if(isDefined(enemyteam) && playerteam == enemyteam) {
               player iprintln(printenemy, printarg);
               continue;
             }
-            if(!isdefined(enemyteam) && playerteam != team) {
+            if(!isDefined(enemyteam) && playerteam != team) {
               player iprintln(printenemy, printarg);
             }
           }
@@ -347,7 +347,7 @@ function getotherteam(team) {
 }
 
 function getteammask(team) {
-  if(!level.teambased || !isdefined(team) || !isdefined(level.spawnsystem.ispawn_teammask[team])) {
+  if(!level.teambased || !isDefined(team) || !isDefined(level.spawnsystem.ispawn_teammask[team])) {
     return level.spawnsystem.ispawn_teammask_free;
   }
   return level.spawnsystem.ispawn_teammask[team];
@@ -366,26 +366,26 @@ function getotherteamsmask(skip_team) {
 
 function plot_points(plotpoints, r, g, b, timer) {
   lastpoint = plotpoints[0];
-  if(!isdefined(r)) {
+  if(!isDefined(r)) {
     r = 1;
   }
-  if(!isdefined(g)) {
+  if(!isDefined(g)) {
     g = 1;
   }
-  if(!isdefined(b)) {
+  if(!isDefined(b)) {
     b = 1;
   }
-  if(!isdefined(timer)) {
+  if(!isDefined(timer)) {
     timer = 0.05;
   }
-  for (i = 1; i < plotpoints.size; i++) {
+  for(i = 1; i < plotpoints.size; i++) {
     line(lastpoint, plotpoints[i], (r, g, b), 1, timer);
     lastpoint = plotpoints[i];
   }
 }
 
 function getfx(fx) {
-  assert(isdefined(level._effect[fx]), ("" + fx) + "");
+  assert(isDefined(level._effect[fx]), ("" + fx) + "");
   return level._effect[fx];
 }
 
@@ -417,11 +417,11 @@ function isstrstart(string1, substr) {
 }
 
 function iskillstreaksenabled() {
-  return isdefined(level.killstreaksenabled) && level.killstreaksenabled;
+  return isDefined(level.killstreaksenabled) && level.killstreaksenabled;
 }
 
 function setusingremote(remotename) {
-  if(isdefined(self.carryicon)) {
+  if(isDefined(self.carryicon)) {
     self.carryicon.alpha = 0;
   }
   assert(!self isusingremote());
@@ -501,7 +501,7 @@ function getplayerfromclientnum(clientnum) {
   if(clientnum < 0) {
     return undefined;
   }
-  for (i = 0; i < level.players.size; i++) {
+  for(i = 0; i < level.players.size; i++) {
     if(level.players[i] getentitynumber() == clientnum) {
       return level.players[i];
     }
@@ -511,21 +511,21 @@ function getplayerfromclientnum(clientnum) {
 
 function ispressbuild() {
   buildtype = getdvarstring("buildType");
-  if(isdefined(buildtype) && buildtype == "press") {
+  if(isDefined(buildtype) && buildtype == "press") {
     return true;
   }
   return false;
 }
 
 function isflashbanged() {
-  return isdefined(self.flashendtime) && gettime() < self.flashendtime;
+  return isDefined(self.flashendtime) && gettime() < self.flashendtime;
 }
 
 function domaxdamage(origin, attacker, inflictor, headshot, mod) {
-  if(isdefined(self.damagedtodeath) && self.damagedtodeath) {
+  if(isDefined(self.damagedtodeath) && self.damagedtodeath) {
     return;
   }
-  if(isdefined(self.maxhealth)) {
+  if(isDefined(self.maxhealth)) {
     damage = self.maxhealth + 1;
   } else {
     damage = self.health + 1;
@@ -536,13 +536,13 @@ function domaxdamage(origin, attacker, inflictor, headshot, mod) {
 
 function get_array_of_closest(org, array, excluders = [], max = array.size, maxdist) {
   maxdists2rd = undefined;
-  if(isdefined(maxdist)) {
+  if(isDefined(maxdist)) {
     maxdists2rd = maxdist * maxdist;
   }
   dist = [];
   index = [];
-  for (i = 0; i < array.size; i++) {
-    if(!isdefined(array[i])) {
+  for(i = 0; i < array.size; i++) {
+    if(!isDefined(array[i])) {
       continue;
     }
     if(isinarray(excluders, array[i])) {
@@ -553,15 +553,15 @@ function get_array_of_closest(org, array, excluders = [], max = array.size, maxd
     } else {
       length = distancesquared(org, array[i].origin);
     }
-    if(isdefined(maxdists2rd) && maxdists2rd < length) {
+    if(isDefined(maxdists2rd) && maxdists2rd < length) {
       continue;
     }
     dist[dist.size] = length;
     index[index.size] = i;
   }
-  for (;;) {
+  for(;;) {
     change = 0;
-    for (i = 0; i < (dist.size - 1); i++) {
+    for(i = 0; i < (dist.size - 1); i++) {
       if(dist[i] <= (dist[i + 1])) {
         continue;
       }
@@ -581,7 +581,7 @@ function get_array_of_closest(org, array, excluders = [], max = array.size, maxd
   if(max > dist.size) {
     max = dist.size;
   }
-  for (i = 0; i < max; i++) {
+  for(i = 0; i < max; i++) {
     newarray[i] = array[index[i]];
   }
   return newarray;

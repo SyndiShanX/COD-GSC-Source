@@ -35,17 +35,17 @@ vision_torture() {
 //########################################
 
 movePlayerToStartPoint(sTargetname) {
-  assert(isdefined(sTargetname));
+  assert(isDefined(sTargetname));
   start = getent(sTargetname, "targetname");
   level.player SetOrigin(start.origin);
 
   lookat = undefined;
-  if(isdefined(start.target)) {
+  if(isDefined(start.target)) {
     lookat = getent(start.target, "targetname");
-    assert(isdefined(lookat));
+    assert(isDefined(lookat));
   }
 
-  if(isdefined(lookat))
+  if(isDefined(lookat))
     level.player setPlayerAngles(vectorToAngles(lookat.origin - start.origin));
   else
     level.player setPlayerAngles(start.angles);
@@ -89,16 +89,16 @@ adjustAccuracy() {
 start_traffic_group(delay, targetname1, targetname2, targetname3) {
   level endon("stop_street_traffic");
 
-  assert(isdefined(delay));
-  assert(isdefined(targetname1));
+  assert(isDefined(delay));
+  assert(isDefined(targetname1));
 
   carTargetNames[0] = targetname1;
-  if(isdefined(targetname2))
+  if(isDefined(targetname2))
     carTargetNames[1] = targetname2;
-  if(isdefined(targetname3))
+  if(isDefined(targetname3))
     carTargetNames[2] = targetname3;
 
-  for (;;) {
+  for(;;) {
     thread traffic_car_go(carTargetNames[randomint(carTargetNames.size)]);
     wait delay;
   }
@@ -110,7 +110,7 @@ stop_traffic() {
 }
 
 delete_cars_far_away() {
-  cars = getentarray("script_vehicle", "code_classname");
+  cars = getEntArray("script_vehicle", "code_classname");
   foreach(car in cars) {
     if(!car ent_flag_exist("dont_delete_me"))
       continue;
@@ -121,9 +121,9 @@ delete_cars_far_away() {
 }
 
 traffic_car_go(sTargetname) {
-  assert(isdefined(sTargetname));
+  assert(isDefined(sTargetname));
   car = spawn_vehicle_from_targetname_and_drive(sTargetname);
-  assert(isdefined(car));
+  assert(isDefined(car));
   car ent_flag_init("dont_delete_me");
   car waittill("reached_end_node");
   car delete();
@@ -148,8 +148,8 @@ delete_ai_at_path_end_no_choke() {
 delete_ai_at_goal(ignoreCanSeeChecks) {
   self endon("death");
   self waittill("goal");
-  if(isdefined(ignoreCanSeeChecks) && ignoreCanSeeChecks) {
-    if(isdefined(self.magic_bullet_shield))
+  if(isDefined(ignoreCanSeeChecks) && ignoreCanSeeChecks) {
+    if(isDefined(self.magic_bullet_shield))
       self stop_magic_bullet_shield();
     self delete();
   } else
@@ -159,7 +159,7 @@ delete_ai_at_goal(ignoreCanSeeChecks) {
 dog_seek_player() {
   self endon("death");
 
-  if(isdefined(self.target))
+  if(isDefined(self.target))
     self waittill("goal");
 
   self setgoalentity(level.player);
@@ -169,7 +169,7 @@ dog_seek_player() {
 seek_player() {
   self endon("death");
 
-  if(isdefined(self.target))
+  if(isDefined(self.target))
     self waittill("goal");
 
   self setgoalentity(level.player);
@@ -181,7 +181,7 @@ gag_fence_dog() {
 
   // spawn the dog
   spawner = getent("fence_dog_spawner", "targetname");
-  dog = spawner stalingradSpawn();
+  dog = spawner stalingradspawn();
   spawn_failed(dog);
   dog endon("death");
 
@@ -257,10 +257,10 @@ getWindowNode() {
 }
 
 getWindowParts() {
-  windows = getentarray("window_smash", "targetname");
+  windows = getEntArray("window_smash", "targetname");
   index = get_closest_index(self.origin + (0, 0, 48), windows);
   windowEnt = windows[index];
-  windowParts = getentarray(windowEnt.target, "targetname");
+  windowParts = getEntArray(windowEnt.target, "targetname");
   assert(windowParts.size == 2);
   leftWindow = undefined;
   rightWindow = undefined;
@@ -270,8 +270,8 @@ getWindowParts() {
     else if(part.script_noteworthy == "right")
       rightWindow = part;
   }
-  assert(isdefined(leftWindow));
-  assert(isdefined(rightWindow));
+  assert(isDefined(leftWindow));
+  assert(isDefined(rightWindow));
 
   ents = [];
   ents["left"] = leftWindow;
@@ -280,7 +280,7 @@ getWindowParts() {
 }
 
 open_window(window, delay) {
-  if(isdefined(delay))
+  if(isDefined(delay))
     wait delay;
 
   thread play_sound_in_space("scn_favela_npc_open_shutters", window["left"].origin);
@@ -293,10 +293,10 @@ open_window(window, delay) {
 }
 
 play_sound_trigger() {
-  assert(isdefined(self.script_noteworthy));
-  assert(isdefined(self.target));
+  assert(isDefined(self.script_noteworthy));
+  assert(isDefined(self.target));
   soundEnt = getent(self.target, "targetname");
-  assert(isdefined(soundEnt));
+  assert(isDefined(soundEnt));
 
   self waittill("trigger");
 
@@ -341,8 +341,8 @@ ignore_and_delete_on_goal(ignoreCanSeeChecks) {
 }
 
 faust_spawn_func() {
-  if(isdefined(level.faust)) {
-    if(isdefined(level.faust.magic_bullet_shield)) {
+  if(isDefined(level.faust)) {
+    if(isDefined(level.faust.magic_bullet_shield)) {
       level.faust stop_magic_bullet_shield();
       wait 0.05;
     }
@@ -363,7 +363,7 @@ faust_spawn_func() {
 
   level.faust waittill("reached_path_end");
 
-  if(isdefined(level.faust.magic_bullet_shield))
+  if(isDefined(level.faust.magic_bullet_shield))
     level.faust stop_magic_bullet_shield();
   wait 0.05;
   level.faust delete();
@@ -373,26 +373,26 @@ faust_spawn_func() {
 faust_spills_money() {
   self endon("death");
 
-  for (;;) {
-    playfxontag(getfx("cash_trail"), self, "J_Hip_LE");
+  for(;;) {
+    playFXOnTag(getfx("cash_trail"), self, "J_Hip_LE");
     wait randomfloatrange(0.2, .5);
   }
 }
 
 faust_mission_fail() {
   self endon("reached_path_end");
-  for (;;) {
+  for(;;) {
     self waittill("damage", damage, attacker);
 
-    if(!isdefined(attacker))
+    if(!isDefined(attacker)) {
       continue;
-
-    if(attacker != level.player)
+    }
+    if(attacker != level.player) {
       continue;
-
-    if(damage <= 1)
+    }
+    if(damage <= 1) {
       continue;
-
+    }
     break;
   }
 
@@ -405,18 +405,18 @@ faust_mission_fail() {
 }
 
 trigger_spawn_chance() {
-  spawners = getentarray(self.target, "targetname");
+  spawners = getEntArray(self.target, "targetname");
   assert(spawners.size > 0);
 
   self waittill("trigger");
 
   chance_percent = 25;
-  if(isdefined(self.script_noteworthy))
+  if(isDefined(self.script_noteworthy))
     chance_percent = int(self.script_noteworthy);
 
-  if(randomint(100) > chance_percent)
+  if(randomint(100) > chance_percent) {
     return;
-
+  }
   spawners = array_removeundefined(spawners);
   array_thread(spawners, ::spawn_ai);
 }
@@ -440,16 +440,16 @@ desert_eagle_guy() {
   self thread delayThread(3.0, ::set_goalradius, 300);
   self thread delayThread(3.0, ::set_goal_player);
 
-  self playsound("generic_meleecharge_russian_" + randomintrange(1, 8));
+  self playSound("generic_meleecharge_russian_" + randomintrange(1, 8));
 
-  while (level.player.health > 0) {
+  while(level.player.health > 0) {
     level waittill("an_enemy_shot", guy);
 
-    if(guy != self)
+    if(guy != self) {
       continue;
-
+    }
     num = 1;
-    while (num) {
+    while(num) {
       wait .25;
       self shoot();
       num--;
@@ -468,9 +468,9 @@ set_goal_player() {
 }
 
 process_ai_script_parameters() {
-  if(!isdefined(self.script_parameters))
+  if(!isDefined(self.script_parameters)) {
     return;
-
+  }
   parms = strtok(self.script_parameters, ":;, ");
 
   foreach(parm in parms) {
@@ -485,16 +485,16 @@ try_balcony_death() {
   // always return false in this function because we want the death
   // animscript to continue after this function no matter what
 
-  if(!isdefined(self))
+  if(!isDefined(self))
     return false;
 
   if(self.a.pose == "prone") // allow crouch
     return false;
 
-  if(!isdefined(self.prevnode))
+  if(!isDefined(self.prevnode))
     return false;
 
-  if(!isdefined(self.prevnode.script_balcony))
+  if(!isDefined(self.prevnode.script_balcony))
     return false;
 
   angleAI = self.angles[1];
@@ -507,7 +507,7 @@ try_balcony_death() {
   if(d > 16)
     return false;
 
-  if(!isdefined(level.last_balcony_death))
+  if(!isDefined(level.last_balcony_death))
     level.last_balcony_death = getTime();
   elapsedTime = getTime() - level.last_balcony_death;
 
@@ -576,7 +576,7 @@ get_best_run_speed() {
 }
 
 set_run_speed(targetSpeed) {
-  assert(isdefined(targetSpeed));
+  assert(isDefined(targetSpeed));
   self.moveplaybackrate = targetSpeed;
 }
 
@@ -588,8 +588,8 @@ get_fraction(value, min, max) {
 }
 
 physics_drop() {
-  assert(isdefined(self.target));
-  orgs = getentarray(self.target, "targetname");
+  assert(isDefined(self.target));
+  orgs = getEntArray(self.target, "targetname");
   assert(orgs.size > 0);
 
   self waittill("trigger");
@@ -608,10 +608,10 @@ physics_drop_model() {
 }
 
 forklift_blocker() {
-  forklift_before = getentarray("forklift_before", "targetname");
+  forklift_before = getEntArray("forklift_before", "targetname");
   forklift_before_clip = getent("forklift_before_clip", "targetname");
 
-  forklift_after = getentarray("forklift_after", "targetname");
+  forklift_after = getEntArray("forklift_after", "targetname");
   forklift_after_clip = getent("forklift_after_clip", "targetname");
 
   // hide after
@@ -655,7 +655,7 @@ car_anims() {
 
 car_driver_anims() {
   driver = make_car_driver();
-  assert(isdefined(driver));
+  assert(isDefined(driver));
 
   driver linkTo(self, "tag_driver");
 
@@ -686,10 +686,10 @@ make_car_driver() {
 
   model = spawn("script_model", guy.origin);
   model.angles = guy.angles;
-  model setmodel(guy.model);
+  model setModel(guy.model);
 
   numAttached = guy getattachsize();
-  for (i = 0; i < numAttached; i++) {
+  for(i = 0; i < numAttached; i++) {
     modelname = guy getattachmodelname(i);
     tagname = guy getattachtagname(i);
     model attach(modelname, tagname, true);
@@ -704,8 +704,8 @@ make_car_driver() {
 }
 
 trigger_cleanup() {
-  assert(isdefined(self.target));
-  areas = getentarray(self.target, "targetname");
+  assert(isDefined(self.target));
+  areas = getEntArray(self.target, "targetname");
   assert(areas.size > 0);
 
   self waittill("trigger");
@@ -716,7 +716,7 @@ trigger_cleanup() {
 }
 
 delete_ai_not_bullet_shielded() {
-  if(isdefined(self.magic_bullet_shield))
+  if(isDefined(self.magic_bullet_shield))
     return;
   self delete();
 }
@@ -732,7 +732,7 @@ bike_rider(pathTargetname) {
   rider = spawn("script_model", bike.origin);
   rider useAnimTree(#animtree);
 
-  if(!isdefined(level.spawned_bike_rider)) {
+  if(!isDefined(level.spawned_bike_rider)) {
     level.spawned_bike_rider = true;
     rider character\character_civilian_slum_male_aa::main();
   } else {
@@ -766,11 +766,11 @@ potted_plant() {
   pos = self.origin;
 
   trig = undefined;
-  if(isdefined(self.target))
+  if(isDefined(self.target))
     trig = getent(self.target, "targetname");
 
   self thread potted_plant_damage();
-  if(isdefined(trig))
+  if(isDefined(trig))
     self thread potted_plant_triggered(trig);
 
   self waittill("fall");
@@ -787,7 +787,7 @@ potted_plant() {
       fx = getfx("plant_large_thrower");
       break;
   }
-  assert(isdefined(fx));
+  assert(isDefined(fx));
 
   self delete();
   playFX(fx, pos, forward, up);
@@ -808,13 +808,13 @@ potted_plant_triggered(trig) {
 }
 
 play_fx_trig() {
-  assert(isdefined(self.script_noteworthy));
+  assert(isDefined(self.script_noteworthy));
   fx = self.script_noteworthy;
-  assert(isdefined(level._effect[fx]));
-  assert(isdefined(self.target));
+  assert(isDefined(level._effect[fx]));
+  assert(isDefined(self.target));
   fxEnt = getent(self.target, "targetname");
   fxID = getfx(fx);
-  for (;;) {
+  for(;;) {
     self waittill("trigger");
     playFX(fxID, fxEnt.origin);
     wait 1.0;
@@ -825,15 +825,15 @@ civilian_flee_walla() {
   self endon("death");
 
   // civillians don't do wallas until you're in the favela
-  if(!flag("civilians_walla"))
+  if(!flag("civilians_walla")) {
     return;
-
+  }
   wait 0.05;
 
-  while (self.alertLevelInt <= 1)
+  while(self.alertLevelInt <= 1)
     wait 0.05;
 
-  if(!isdefined(level.nextWallaIndex))
+  if(!isDefined(level.nextWallaIndex))
     level.nextWallaIndex = 0;
 
   elapsedTime = getTime() - level.lastWallaTime;
@@ -856,21 +856,21 @@ ending_car_fx(vehicle) {
   wait 0.1;
 
   exploder("car_crush");
-  playfxontag(getFX("car_crush_glass_med"), vehicle, "tag_window_left_glass_fx");
-  playfxontag(getFX("car_crush_glass_med"), vehicle, "tag_window_right_glass_fx");
-  playfxontag(getFX("car_crush_glass_large"), vehicle, "tag_windshield_back_glass_fx");
-  playfxontag(getFX("car_crush_glass_large"), vehicle, "tag_windshield_front_glass_fx");
+  playFXOnTag(getFX("car_crush_glass_med"), vehicle, "tag_window_left_glass_fx");
+  playFXOnTag(getFX("car_crush_glass_med"), vehicle, "tag_window_right_glass_fx");
+  playFXOnTag(getFX("car_crush_glass_large"), vehicle, "tag_windshield_back_glass_fx");
+  playFXOnTag(getFX("car_crush_glass_large"), vehicle, "tag_windshield_front_glass_fx");
 }
 
 dive_through_glass(guy) {
-  PlayFXOnTag(getFX("glass_dust_trail"), guy, "J_SpineLower");
+  playFXOnTag(getFX("glass_dust_trail"), guy, "J_SpineLower");
   guy thread maps\favela::ending_sequence_slowmo();
 }
 
 delete_ai_during_blackscreen() {
   ai = getAIArray();
   foreach(guy in ai) {
-    if(isdefined(guy.magic_bullet_shield))
+    if(isDefined(guy.magic_bullet_shield))
       guy stop_magic_bullet_shield();
     guy notify("deleted");
   }
@@ -878,21 +878,21 @@ delete_ai_during_blackscreen() {
 }
 
 curtain_pulldown(bWaitForPlayer) {
-  if(!isdefined(bWaitForPlayer))
+  if(!isDefined(bWaitForPlayer))
     bWaitForPlayer = false;
 
-  assert(isdefined(self.target));
+  assert(isDefined(self.target));
   node = self curtain_pulldown_getnode();
-  assert(isdefined(node));
+  assert(isDefined(node));
 
   curtain = spawn_anim_model("curtain");
 
   node thread anim_first_frame_solo(curtain, "pulldown");
 
   self waittill("spawned", guy);
-  if(spawn_failed(guy))
+  if(spawn_failed(guy)) {
     return;
-
+  }
   guy endon("death");
 
   guy.animname = "curtain_pull";
@@ -928,12 +928,12 @@ curtain_pulldown(bWaitForPlayer) {
 
 allow_death_delayed(delay) {
   wait delay;
-  if(isdefined(self))
+  if(isDefined(self))
     self.allowdeath = true;
 }
 
 curtain_pulldown_getnode() {
-  nodes = getentarray(self.target, "targetname");
+  nodes = getEntArray(self.target, "targetname");
   foreach(node in nodes) {
     if(node.classname == "script_origin")
       return node;
@@ -943,13 +943,13 @@ curtain_pulldown_getnode() {
 
 car_screech_node() {
   self waittill("trigger", vehicle);
-  assert(isdefined(vehicle));
+  assert(isDefined(vehicle));
 
   sound[0] = "scn_favela_car_traffic_skid1";
   sound[1] = "scn_favela_car_traffic_skid2";
   sound[2] = "scn_favela_car_traffic_skid3";
 
-  if(!isdefined(level.next_skid_sound))
+  if(!isDefined(level.next_skid_sound))
     level.next_skid_sound = 0;
 
   vehicle playSound(sound[level.next_skid_sound]);
@@ -960,12 +960,12 @@ car_screech_node() {
 }
 
 retreat_trigger() {
-  assert(isdefined(self.target));
+  assert(isDefined(self.target));
   node = getnode(self.target, "targetname");
-  assert(isdefined(node));
-  assert(isdefined(node.radius));
+  assert(isDefined(node));
+  assert(isDefined(node.radius));
   volume = getent(self.target, "targetname");
-  assert(isdefined(volume));
+  assert(isDefined(volume));
 
   self waittill("trigger");
 
@@ -982,7 +982,7 @@ retreat_trigger() {
 timed_favela_autosaves() {
   flag_wait("player_entered_favela");
 
-  while (!flag("cleared_favela")) {
+  while(!flag("cleared_favela")) {
     wait 60;
     if(flag("cleared_favela"))
       return;
@@ -1001,19 +1001,19 @@ faust_assistant_kill_player_monitor() {
   distSq = 400 * 400;
   cos90 = cos(90);
 
-  for (;;) {
+  for(;;) {
     wait 0.05;
 
     // player must be within range of Faust's assistant
     d = DistanceSquared(self.origin, level.player.origin);
-    if(d > distSq)
+    if(d > distSq) {
       continue;
-
+    }
     // player must be in front of Faust's assistant
     FOV = within_fov(self.origin, self.angles, level.player.origin, cos90);
-    if(!FOV)
+    if(!FOV) {
       continue;
-
+    }
     // Faust's assisstant should now kill the player for getting in front of him
     self thread faust_assistant_kill_player();
     return;

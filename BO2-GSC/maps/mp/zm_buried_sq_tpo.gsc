@@ -31,7 +31,7 @@ init() {
   level thread debug_give_piece();
 
   level._effect["sq_tpo_time_bomb_fx"] = loadfx("maps/zombie_buried/fx_buried_ghost_drain");
-  level.sq_tpo = spawnstruct();
+  level.sq_tpo = spawnStruct();
   level thread setup_buildable_switch();
 }
 
@@ -48,7 +48,7 @@ init_stage() {
 stage_vo_max() {
   s_struct = getstruct("sq_gallows", "targetname");
   m_maxis_vo_spot = spawn("script_model", s_struct.origin);
-  m_maxis_vo_spot setmodel("tag_origin");
+  m_maxis_vo_spot setModel("tag_origin");
   maxissay("vox_maxi_sidequest_ctw_5", m_maxis_vo_spot);
   maxissay("vox_maxi_sidequest_ctw_6", m_maxis_vo_spot);
   maxissay("vox_maxi_sidequest_ctw_7", m_maxis_vo_spot);
@@ -105,7 +105,7 @@ stage_logic_richtofen() {
     }
     while(!b_time_bomb_in_valid_location);
 
-    playfxontag(level._effect["sq_tpo_time_bomb_fx"], level.time_bomb_save_data.time_bomb_model, "tag_origin");
+    playFXOnTag(level._effect["sq_tpo_time_bomb_fx"], level.time_bomb_save_data.time_bomb_model, "tag_origin");
     flag_set("sq_tpo_time_bomb_in_valid_location");
     level thread sq_tpo_check_players_in_time_bomb_volume(e_time_bomb_volume);
     wait_for_time_bomb_to_be_detonated_or_thrown_again();
@@ -259,7 +259,7 @@ special_round_end() {
 }
 
 clean_up_special_round() {
-  a_models = getentarray("sq_tpo_corpse_model", "targetname");
+  a_models = getEntArray("sq_tpo_corpse_model", "targetname");
 
   foreach(model in a_models) {
     model _delete_unitrigger();
@@ -290,8 +290,7 @@ start_item_hunt_with_timeout(n_timeout) {
   level waittill("sq_tpo_item_hunt_done");
 }
 
-exit_stage(success) {
-}
+exit_stage(success) {}
 
 debug_give_piece() {
   while(true) {
@@ -332,7 +331,7 @@ promote_to_corpse_model(str_model) {
   v_spawn_point = groundtrace(self.origin + vectorscale((0, 0, 1), 10.0), self.origin + vectorscale((0, 0, -1), 300.0), 0, undefined)["position"];
   self.corpse_model = spawn("script_model", v_spawn_point);
   self.corpse_model.angles = self.angles;
-  self.corpse_model setmodel(str_model);
+  self.corpse_model setModel(str_model);
   self.corpse_model.targetname = "sq_tpo_corpse_model";
   self _pose_corpse();
   self.corpse_model.unitrigger = setup_unitrigger(&"ZM_BURIED_SQ_SCH", ::unitrigger_think);
@@ -399,7 +398,7 @@ setup_unitrigger(str_hint, func_update) {
   script_height = 32;
   script_width = 0;
   script_length = undefined;
-  unitrigger_stub = spawnstruct();
+  unitrigger_stub = spawnStruct();
   unitrigger_stub.origin = self.origin + vectorscale((0, 0, 1), 10.0);
   unitrigger_stub.script_length = 13.5;
   unitrigger_stub.script_width = script_width;
@@ -529,7 +528,7 @@ setup_buildable_switch() {
   s_switch_piece.hint_swap = level.str_buildables_swap_part;
   s_switch_piece manage_multiple_pieces(1);
   s_switch_piece.onspawn = ::onspawn_switch;
-  s_switch = spawnstruct();
+  s_switch = spawnStruct();
   s_switch.name = "buried_sq_tpo_switch";
   s_switch add_buildable_piece(s_switch_piece);
   s_switch.triggerthink = ::triggerthink_switch;
@@ -555,8 +554,7 @@ ondrop_switch(player) {
   maps\mp\zm_buried_buildables::ondrop_common(player);
 }
 
-onspawn_switch(player) {
-}
+onspawn_switch(player) {}
 
 triggerthink_switch() {
   if(isDefined(getent("guillotine_trigger", "targetname"))) {
@@ -578,7 +576,7 @@ guillotine_trigger_reject_func(player) {
 
 time_bomb_saves_wisp_state() {
   if(!isDefined(self.sq_data))
-    self.sq_data = spawnstruct();
+    self.sq_data = spawnStruct();
 
   self.sq_data.wisp_stage_complete = flag("sq_wisp_success");
 }
@@ -598,7 +596,7 @@ sndsidequestnoirmusic() {
   level.music_override = 1;
   level setclientfield("mus_noir_snapshot_loop", 1);
   ent = spawn("script_origin", (0, 0, 0));
-  ent playloopsound("mus_sidequest_noir");
+  ent playLoopSound("mus_sidequest_noir");
   level waittill("sndEndNoirMusic");
   level setclientfield("mus_noir_snapshot_loop", 0);
   level.music_override = 0;

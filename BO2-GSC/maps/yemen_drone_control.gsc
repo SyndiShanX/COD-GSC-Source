@@ -151,7 +151,7 @@ quadrotor_reinforce(str_endon, str_spline_then_ai, str_goal_node_tn) {
     goal_node = getnode(str_goal_node_tn, "targetname");
 
   while(true) {
-    a_vh_quads = getentarray("allied_quadrotor", "targetname");
+    a_vh_quads = getEntArray("allied_quadrotor", "targetname");
 
     if(a_vh_quads.size < 5) {
       vh_quadrotor = maps\_vehicle::spawn_vehicle_from_targetname("allied_quadrotor");
@@ -256,7 +256,7 @@ gauntlet_upper_left_terrorists_trigger(str_level_endon, str_category) {
   level endon(str_level_endon);
   e_trigger = getent("gauntlet_upper_left_terrorists_trigger", "targetname");
   e_trigger waittill("trigger");
-  a_spawners = getentarray("gauntlet_upper_left_terrorists_spawner", "targetname");
+  a_spawners = getEntArray("gauntlet_upper_left_terrorists_spawner", "targetname");
   simple_spawn_script_delay(a_spawners, ::spawn_fn_ai_run_to_target, 1, str_category, 0, 0, 0);
 }
 
@@ -293,7 +293,7 @@ drone_control_cleanup() {
 }
 
 array_delete_veh_from_targetname(targetname) {
-  vehicles = getentarray(targetname, "targetname");
+  vehicles = getEntArray(targetname, "targetname");
 
   foreach(veh in vehicles) {
     veh.delete_on_death = 1;
@@ -308,7 +308,7 @@ drone_control_go() {
   flag_wait("drone_control_alley_entered");
   level activate_drone_control();
   level.player.overrideplayerdamage = ::drone_control_player_damage_callback;
-  a_morals_actors = getentarray("morals_actor", "script_noteworthy");
+  a_morals_actors = getEntArray("morals_actor", "script_noteworthy");
   array_delete(a_morals_actors);
   setup_allied_quadrotors();
   level thread allied_quadrotor_control();
@@ -392,11 +392,10 @@ drone_control_alley_qrotor_start() {
   level.player maps\_fire_direction::init_fire_direction();
 }
 
-drone_control_gauntlet_go() {
-}
+drone_control_gauntlet_go() {}
 
 setup_allied_quadrotors() {
-  a_vh_quads = getentarray("allied_quadrotor", "targetname");
+  a_vh_quads = getEntArray("allied_quadrotor", "targetname");
 
   foreach(vh_quad in a_vh_quads)
   vh_quad setthreatbiasgroup("quadrotors");
@@ -458,7 +457,7 @@ quadrotors_go_spline_then_ai(str_nd_start) {
 allied_quadrotor_control() {
   while(true) {
     v_movepoint = _get_player_look_position();
-    a_qrotors = getentarray("allied_quadrotor", "script_noteworthy");
+    a_qrotors = getEntArray("allied_quadrotor", "script_noteworthy");
 
     foreach(veh_qrotor in a_qrotors) {
       if(!isDefined(veh_qrotor.quadrotor_doing_fire_direction))
@@ -470,11 +469,11 @@ allied_quadrotor_control() {
 }
 
 _get_player_look_position() {
-  v_eye_pos = level.player geteye();
+  v_eye_pos = level.player getEye();
   v_player_eye = level.player getplayerangles();
-  v_player_eye = vectornormalize(anglestoforward(v_player_eye));
+  v_player_eye = vectornormalize(anglesToForward(v_player_eye));
   v_trace_to_point = v_eye_pos + v_player_eye * randomfloatrange(400, 900);
-  a_trace = bullettrace(v_eye_pos, v_trace_to_point, 0, level.player);
+  a_trace = bulletTrace(v_eye_pos, v_trace_to_point, 0, level.player);
   return a_trace["position"];
 }
 
@@ -556,8 +555,7 @@ vo_hint_standing_by_for_targets() {
     wait(randomintrange(10, 16));
 
     if(level.player hasweapon("quadrotor_glove_sp")) {
-      if(flag("fire_direction_shader_on")) {
-      }
+      if(flag("fire_direction_shader_on")) {}
     }
   }
 }
@@ -605,8 +603,7 @@ vo_outskirts() {
   level.player say_dialog("sect_push_all_available_a_0", 0.2);
 }
 
-drone_nag() {
-}
+drone_nag() {}
 
 drone_kill_challenge(str_notify) {
   level waittill("drone_control_started");
@@ -647,10 +644,10 @@ drone_control_quadrotor_sounds() {
 
 drone_cam_pip_sounds() {
   level.sound_pip_ent = spawn("script_origin", level.player.origin);
-  level.player playsound("evt_pnp_on");
-  level.sound_pip_ent playloopsound("evt_pnp_loop", 1);
+  level.player playSound("evt_pnp_on");
+  level.sound_pip_ent playLoopSound("evt_pnp_loop", 1);
   wait 6;
-  level.player playsound("evt_pnp_off");
+  level.player playSound("evt_pnp_off");
   level.sound_pip_ent stoploopsound();
   level.sound_pip_ent delete();
 }

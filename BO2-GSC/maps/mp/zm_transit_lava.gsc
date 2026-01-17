@@ -11,7 +11,7 @@
 
 object_touching_lava() {
   if(!isDefined(level.lava))
-    level.lava = getentarray("lava_damage", "targetname");
+    level.lava = getEntArray("lava_damage", "targetname");
 
   if(!isDefined(level.lava) || level.lava.size < 1)
     return false;
@@ -41,7 +41,7 @@ object_touching_lava() {
 }
 
 lava_damage_init() {
-  lava = getentarray("lava_damage", "targetname");
+  lava = getEntArray("lava_damage", "targetname");
 
   if(!isDefined(lava)) {
     return;
@@ -160,7 +160,7 @@ zombie_burning_fx() {
 
   if(isDefined(level._effect) && isDefined(level._effect["lava_burning"])) {
     if(!self.isdog) {
-      playfxontag(level._effect["lava_burning"], self, "J_SpineLower");
+      playFXOnTag(level._effect["lava_burning"], self, "J_SpineLower");
       self thread zombie_burning_audio();
     }
   }
@@ -175,7 +175,7 @@ zombie_burning_fx() {
       tagarray[2] = "J_Knee_RI";
       tagarray[3] = "J_Knee_LE";
       tagarray = randomize_array(tagarray);
-      playfxontag(level._effect["character_fire_death_sm"], self, tagarray[0]);
+      playFXOnTag(level._effect["character_fire_death_sm"], self, tagarray[0]);
     } else {
       tagarray[0] = "J_Wrist_RI";
       tagarray[1] = "J_Wrist_LE";
@@ -186,13 +186,13 @@ zombie_burning_fx() {
       }
 
       tagarray = randomize_array(tagarray);
-      playfxontag(level._effect["character_fire_death_sm"], self, tagarray[0]);
+      playFXOnTag(level._effect["character_fire_death_sm"], self, tagarray[0]);
     }
   }
 }
 
 zombie_burning_audio() {
-  self playloopsound("zmb_fire_loop");
+  self playLoopSound("zmb_fire_loop");
   self waittill_either("stop_flame_damage", "death");
 
   if(isDefined(self) && isalive(self))
@@ -212,14 +212,14 @@ player_burning_fx() {
   self thread maps\mp\animscripts\zm_death::on_fire_timeout();
 
   if(isDefined(level._effect) && isDefined(level._effect["character_fire_death_sm"]))
-    playfxontag(level._effect["character_fire_death_sm"], self, "J_SpineLower");
+    playFXOnTag(level._effect["character_fire_death_sm"], self, "J_SpineLower");
 }
 
 player_burning_audio() {
   fire_ent = spawn("script_model", self.origin);
   wait_network_frame();
   fire_ent linkto(self);
-  fire_ent playloopsound("evt_plr_fire_loop");
+  fire_ent playLoopSound("evt_plr_fire_loop");
   self waittill_any("stop_flame_damage", "stop_flame_sounds", "death", "discoonect");
   fire_ent delete();
 }
@@ -237,7 +237,7 @@ zombie_lava_damage(trap) {
       if(isDefined(self.animname) && (!isDefined(self.is_on_fire) || !self.is_on_fire)) {
         if(level.burning_zombies.size < 6 && zombie_dmg >= 1) {
           level.burning_zombies[level.burning_zombies.size] = self;
-          self playsound("ignite");
+          self playSound("ignite");
           self thread zombie_burning_fx();
           self thread zombie_burning_watch();
           self thread zombie_burning_dmg();
@@ -277,9 +277,9 @@ zombie_exploding_death(zombie_dmg, trap) {
 
   if(is_mature()) {
     if(isDefined(level._effect["zomb_gib"]))
-      playfx(level._effect["zomb_gib"], self gettagorigin(tag));
+      playFX(level._effect["zomb_gib"], self gettagorigin(tag));
   } else if(isDefined(level._effect["spawn_cloud"]))
-    playfx(level._effect["spawn_cloud"], self gettagorigin(tag));
+    playFX(level._effect["spawn_cloud"], self gettagorigin(tag));
 
   self radiusdamage(self.origin, 128, 30, 15, undefined, "MOD_EXPLOSIVE");
   self ghost();
@@ -296,12 +296,12 @@ zombie_burning_dmg() {
   damage = 2;
 
   while(isDefined(self.is_on_fire) && self.is_on_fire) {
-    eyeorigin = self geteye();
+    eyeorigin = self getEye();
     players = get_players();
 
     for(i = 0; i < players.size; i++) {
       if(is_player_valid(players[i])) {
-        playereye = players[i] geteye();
+        playereye = players[i] getEye();
 
         if(distancesquared(eyeorigin, playereye) < damageradius * damageradius) {
           players[i] dodamage(damage, self.origin, self);

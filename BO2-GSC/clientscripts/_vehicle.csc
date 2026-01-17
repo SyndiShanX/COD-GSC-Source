@@ -133,7 +133,7 @@ wake(localclientnum, tagname) {
           self.wake_fxhandle = undefined;
         }
       } else if(!isDefined(self.wake_fxhandle))
-        self.wake_fxhandle = playfxontag(localclientnum, treadfx, self, tagname);
+        self.wake_fxhandle = playFXOnTag(localclientnum, treadfx, self, tagname);
     } else if(self isvehicleinwater()) {
       newstate = 0;
 
@@ -156,7 +156,7 @@ wake(localclientnum, tagname) {
 
         wakestate = newstate;
         fx = self.wakefx[wakestate];
-        self.wake_fxhandle = playfxontag(localclientnum, fx, self, tagname);
+        self.wake_fxhandle = playFXOnTag(localclientnum, fx, self, tagname);
       }
 
       throttle = self getthrottle();
@@ -167,7 +167,7 @@ wake(localclientnum, tagname) {
         if(isDefined(throttleeffect)) {
           effectorigin = self gettagorigin(tagname);
           fwd = self gettagforwardvector(tagname);
-          playfx(localclientnum, throttleeffect, effectorigin, fwd);
+          playFX(localclientnum, throttleeffect, effectorigin, fwd);
         }
       }
     } else {
@@ -193,11 +193,11 @@ splash(localclientnum) {
   }
   wasinwater = 1;
   offset = vectorscale((0, 0, -1), 10.0);
-  last_water_check_pos = self.origin + anglestoforward(self.angles) * 100 + offset;
+  last_water_check_pos = self.origin + anglesToForward(self.angles) * 100 + offset;
 
   for(;;) {
     wait 0.5;
-    water_check_pos = self.origin + anglestoforward(self.angles) * 100 + offset;
+    water_check_pos = self.origin + anglesToForward(self.angles) * 100 + offset;
     water_height = getwaterheight(water_check_pos);
     isinwater = water_check_pos[2] < water_height;
     vertical_speed = water_check_pos[2] - last_water_check_pos[2];
@@ -209,8 +209,8 @@ splash(localclientnum) {
         splashorigin = self gettagorigin("snd_bow_center");
         effectorigin = self gettagorigin("tag_wake");
         fwd = self gettagforwardvector("tag_wake");
-        playfx(localclientnum, self.splashfx, effectorigin, fwd);
-        id = playsound(0, "veh_boat_splash", splashorigin);
+        playFX(localclientnum, self.splashfx, effectorigin, fwd);
+        id = playSound(0, "veh_boat_splash", splashorigin);
       }
     }
 
@@ -227,9 +227,9 @@ splash_small() {
   wait(randomfloat(0.5));
 
   for(;;) {
-    water_check_pos = self.origin + anglestoforward(self.angles) * 100 + offset;
+    water_check_pos = self.origin + anglesToForward(self.angles) * 100 + offset;
     wait 0.5;
-    water_check_pos_2 = self.origin + anglestoforward(self.angles) * 100 + offset;
+    water_check_pos_2 = self.origin + anglesToForward(self.angles) * 100 + offset;
     water_height = getwaterheight(water_check_pos);
     isinwater = water_check_pos[2] < water_height;
     vertical_speed = water_check_pos[2] - water_check_pos_2[2];
@@ -243,7 +243,7 @@ splash_small() {
         if(!isDefined(splashorigin))
           splashorigin = self gettagorigin("tag_origin");
 
-        id = playsound(0, "veh_boat_splash_small", splashorigin);
+        id = playSound(0, "veh_boat_splash_small", splashorigin);
         wait 1.6;
       }
     }
@@ -287,7 +287,7 @@ tread(localclientnum, tagname, side) {
       }
       effectorigin = self gettagorigin(tagname);
       forwardvec = vectorscale(forwardvec, waittime);
-      playfx(localclientnum, treadfx, effectorigin, (0, 0, 0) - forwardvec);
+      playFX(localclientnum, treadfx, effectorigin, (0, 0, 0) - forwardvec);
     }
   }
 }
@@ -357,7 +357,7 @@ boat_tread(localclientnum, tagname, side) {
       }
       effectorigin = self gettagorigin(tagname);
       forwardvec = vectorscale(forwardvec, waittime);
-      playfx(localclientnum, treadfx, effectorigin, (0, 0, 0) - forwardvec);
+      playFX(localclientnum, treadfx, effectorigin, (0, 0, 0) - forwardvec);
     }
   }
 }
@@ -395,10 +395,10 @@ play_exhaust(localclientnum, tag_left, tag_right) {
 
   if(isDefined(self.exhaust_fx) && isDefined(self.exhaustfxname) && self.exhaustfxname != "") {
     if(isDefined(self) && self isalive() && isDefined(self.exhaust_fx)) {
-      self.exhaust_id_left = playfxontag(localclientnum, self.exhaust_fx, self, tag_left);
+      self.exhaust_id_left = playFXOnTag(localclientnum, self.exhaust_fx, self, tag_left);
 
       if(!isDefined(self.exhaust_id_right) && !self.oneexhaust)
-        self.exhaust_id_right = playfxontag(localclientnum, self.exhaust_fx, self, tag_right);
+        self.exhaust_id_right = playFXOnTag(localclientnum, self.exhaust_fx, self, tag_right);
 
       self thread kill_exhaust_watcher(localclientnum);
     }
@@ -523,7 +523,7 @@ aircraft_dustkick() {
         trace["surfacetype"] = "dirt";
 
       if(isDefined(self.treadfx[trace["surfacetype"]]))
-        playfx(0, self.treadfx[trace["surfacetype"]], trace["position"]);
+        playFX(0, self.treadfx[trace["surfacetype"]], trace["position"]);
       else {
         println("SCRIPT PRINT: Unknown surface type " + trace["surfacetype"] + " for vehicle type " + self.vehicletype);
 
@@ -572,14 +572,14 @@ lights_on(localclientnum) {
       self.light_fx_handles = [];
 
     for(i = 0; i < self.light_fx.size; i++)
-      self.light_fx_handles[i] = playfxontag(localclientnum, self.light_fx[i], self, self.lightfxtagarray[i]);
+      self.light_fx_handles[i] = playFXOnTag(localclientnum, self.light_fx[i], self, self.lightfxtagarray[i]);
   }
 
   if(isDefined(self.team) && self.team == "allies") {
     if(isDefined(self.friendly_light_fx))
-      self.team_light_fx_handle = playfxontag(localclientnum, self.friendly_light_fx, self, self.enemylightfxtag);
+      self.team_light_fx_handle = playFXOnTag(localclientnum, self.friendly_light_fx, self, self.enemylightfxtag);
   } else if(isDefined(self.enemy_light_fx))
-    self.team_light_fx_handle = playfxontag(localclientnum, self.enemy_light_fx, self, self.friendlylightfxtag);
+    self.team_light_fx_handle = playFXOnTag(localclientnum, self.enemy_light_fx, self, self.friendlylightfxtag);
 }
 
 lights_off(localclientnum) {
@@ -605,8 +605,7 @@ vehicle_flag_toggle_sounds(localclientnum, set, newent) {
       self notify("play_heli_sounds");
       self.should_not_play_sounds = 0;
     }
-  } else {
-  }
+  } else {}
 }
 
 vehicle_flag_turn_off_treadfx(localclientnum, set, newent) {
@@ -661,8 +660,7 @@ vehicle_flag_start_use_engine_damage_low_sounds(localclientnum, set, newent) {
 vehicle_flag_3_handler(localclientnum, set, newent) {
   if(self is_helicopter())
     vehicle_flag_start_use_engine_damage_low_sounds(localclientnum, set, newent);
-  else {
-  }
+  else {}
 }
 
 vehicle_flag_start_use_engine_damage_high_sounds(localclientnum, set, newent) {
@@ -678,8 +676,7 @@ vehicle_flag_start_use_engine_damage_high_sounds(localclientnum, set, newent) {
 vehicle_flag_4_handler(localclientnum, set, newent) {
   if(self is_helicopter())
     vehicle_flag_start_use_engine_damage_high_sounds(localclientnum, set, newent);
-  else {
-  }
+  else {}
 }
 
 vehicle_flag_toggle_exhaustfx_handler(localclientnum, set, newent) {

@@ -9,10 +9,8 @@ print3dthreadzip(var_0) {
   self endon("stop_3dprint");
   self endon("death");
 
-  for (;;) {
-    if(isdefined(self)) {
-
-    }
+  for(;;) {
+    if(isDefined(self)) {}
 
     wait 0.05;
   }
@@ -29,7 +27,7 @@ bm21_artillery_think() {
   var_0 = [];
   var_1 = strtok(self.script_linkto, " ");
 
-  for (var_2 = 0; var_2 < var_1.size; var_2++)
+  for(var_2 = 0; var_2 < var_1.size; var_2++)
     var_0[var_0.size] = getent(var_1[var_2], "script_linkname");
 
   var_0 = common_scripts\utility::array_randomize(var_0);
@@ -42,10 +40,10 @@ bm21_artillery_think() {
   var_3["bm21_03"] = 3.4;
   wait(var_3[self.vehicle_spawner.targetname]);
 
-  for (var_2 = 0; var_2 < var_0.size; var_2++) {
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
     var_4 = 5;
 
-    for (var_5 = 0; var_5 < var_4; var_5++) {
+    for(var_5 = 0; var_5 < var_4; var_5++) {
       self setturrettargetent(var_0[var_2]);
       self notify("shoot_target", var_0[var_2]);
       wait 0.45;
@@ -54,7 +52,7 @@ bm21_artillery_think() {
     wait(randomfloatrange(0.3, 0.7));
   }
 
-  for (;;) {
+  for(;;) {
     common_scripts\utility::flag_wait("bm21s_fire");
     bm21_fires_until_flagged(var_0);
   }
@@ -65,7 +63,7 @@ bm21_hill_artillery_think() {
   var_0 = [];
   var_1 = strtok(self.script_linkto, " ");
 
-  for (var_2 = 0; var_2 < var_1.size; var_2++)
+  for(var_2 = 0; var_2 < var_1.size; var_2++)
     var_0[var_0.size] = getent(var_1[var_2], "script_linkname");
 
   common_scripts\utility::flag_wait("bm21_hill_artillery_start");
@@ -75,10 +73,10 @@ bm21_hill_artillery_think() {
   var_3["bm21_03"] = 2;
   wait(var_3[self.vehicle_spawner.targetname]);
 
-  for (var_2 = 0; var_2 < var_0.size; var_2++) {
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
     var_4 = 3;
 
-    for (var_5 = 0; var_5 < var_4; var_5++) {
+    for(var_5 = 0; var_5 < var_4; var_5++) {
       self setturrettargetent(var_0[var_2]);
       self notify("shoot_target", var_0[var_2]);
       wait 0.45;
@@ -93,10 +91,10 @@ bm21_fires_until_flagged(var_0) {
   var_0 = common_scripts\utility::array_randomize(var_0);
   wait(randomfloatrange(2, 3));
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++) {
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_2 = 2 + randomint(2);
 
-    for (var_3 = 0; var_3 < var_2; var_3++) {
+    for(var_3 = 0; var_3 < var_2; var_3++) {
       if(var_3 == 0) {
         self setturrettargetent(var_0[var_1]);
         self waittill("turret_rotate_stopped");
@@ -120,7 +118,7 @@ kill_player() {
   self.baseaccuracy = 10;
   self.goalradius = 256;
 
-  for (;;) {
+  for(;;) {
     self setgoalpos(level.player.origin);
     wait 2;
   }
@@ -134,7 +132,7 @@ second_shack_trigger() {
 }
 
 sleepy_shack() {
-  var_0 = getentarray("shack_guy", "targetname");
+  var_0 = getEntArray("shack_guy", "targetname");
   common_scripts\utility::array_thread(var_0, maps\_utility::spawn_ai);
   var_1 = getent("shack_light", "targetname");
   var_2 = var_1 getlightintensity();
@@ -149,13 +147,13 @@ sleepy_shack() {
   }
   var_4 = getent("shack_lightbulb", "targetname");
 
-  if(isdefined(var_4))
-    var_4 setmodel("dt_light_on_hunted");
+  if(isDefined(var_4))
+    var_4 setModel("dt_light_on_hunted");
 
   var_5 = 2;
   var_5 = var_5 * 20;
 
-  for (var_6 = 0; var_6 < var_5; var_6++) {
+  for(var_6 = 0; var_6 < var_5; var_6++) {
     var_7 = var_2 * (1 / (var_5 - var_6));
     var_7 = var_7 * randomfloatrange(0.3, 1.7);
     var_1 setlightintensity(var_7);
@@ -170,10 +168,10 @@ guy_stops_animating_on_high_alert(var_0, var_1, var_2) {
   level waittill("high_alert");
   var_0 notify("stop_loop");
 
-  if(isdefined(var_2)) {
+  if(isDefined(var_2)) {
     return;
   }
-  if(isdefined(var_1))
+  if(isDefined(var_1))
     maps\_anim::anim_generic(self, var_1);
   else
     self stopanimscripted();
@@ -181,7 +179,7 @@ guy_stops_animating_on_high_alert(var_0, var_1, var_2) {
 
 chess_guys_drop_weapon() {
   var_0 = spawn("script_model", (0, 0, 0));
-  var_0 setmodel("weapon_" + self.weapon);
+  var_0 setModel("weapon_" + self.weapon);
   var_0 linkto(self, "TAG_WEAPON_RIGHT", (0, 0, 0), (0, 0, 0));
   wait 1;
   var_0 unlink();
@@ -240,7 +238,7 @@ wait_to_investigate(var_0) {
 player_got_close() {
   self endon("death");
 
-  for (;;) {
+  for(;;) {
     if(distance(level.player.origin, self.origin) < 46) {
       return;
     }
@@ -251,7 +249,7 @@ player_got_close() {
 chess_guys_investigate() {
   self notify("event_awareness", "explosion");
 
-  if(!isdefined(self.target)) {
+  if(!isDefined(self.target)) {
     return;
   }
   var_0 = getnode(self.target, "targetname");
@@ -272,9 +270,9 @@ chess_guy_init(var_0) {
 }
 
 descriptions() {
-  var_0 = getentarray("description", "targetname");
+  var_0 = getEntArray("description", "targetname");
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++)
     var_0[var_1] thread print3dthreadzip(var_0[var_1].script_noteworthy);
 }
 
@@ -289,7 +287,7 @@ bm21_spawn_and_think() {
   var_0[var_0.size] = "bm21_02";
   var_0[var_0.size] = "bm21_03";
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++)
     thread bm21_think(var_0[var_1]);
 }
 
@@ -392,7 +390,7 @@ hut_tv() {
 
   var_0 = getent("interactive_tv_light", "targetname");
   var_0 thread maps\_lights::television();
-  var_1 = common_scripts\utility::getclosest(var_0.origin, getentarray("interactive_tv", "targetname"), 500);
+  var_1 = common_scripts\utility::getclosest(var_0.origin, getEntArray("interactive_tv", "targetname"), 500);
   var_1 waittill("off");
   var_0 notify("light_off");
   var_0 setlightintensity(0);
@@ -416,8 +414,8 @@ bbc_voice_preh1() {
   var_1[var_1.size] = "blackout_bbc_exacttime";
   var_2 = 0;
 
-  for (;;) {
-    var_0 playsound(var_1[var_2], "done");
+  for(;;) {
+    var_0 playSound(var_1[var_2], "done");
     var_0 waittill("done");
     wait(randomfloatrange(1, 2));
     var_2++;
@@ -442,7 +440,7 @@ bbc_voice() {
   var_3 = 810000;
   var_4 = 0;
 
-  for (;;) {
+  for(;;) {
     var_5 = distancesquared(level.player.origin, self.origin);
 
     if(var_5 > var_3) {
@@ -461,7 +459,7 @@ bbc_voice() {
     switch (var_6) {
       case "play_bbc":
         var_1 = (var_1 + 1) % var_0.size;
-        var_2 playsound(var_0[var_1], "done");
+        var_2 playSound(var_0[var_1], "done");
         break;
       case "done":
         var_2 thread maps\_utility::notify_delay("play_bbc", randomfloatrange(1, 2));
@@ -471,7 +469,7 @@ bbc_voice() {
 }
 
 monitor_bbc_stop(var_0) {
-  for (;;) {
+  for(;;) {
     var_1 = common_scripts\utility::waittill_any_return("off", "death");
 
     switch (var_1) {
@@ -496,13 +494,13 @@ friendly_think() {
   self.maxvisibledist = 480;
   self.ignoreme = 1;
 
-  for (;;) {
+  for(;;) {
     self.ignoreall = 1;
     common_scripts\utility::flag_wait_either("high_alert", "recent_flashed");
     wait 0.5;
     self.ignoreme = 0;
 
-    if(!isdefined(self.force_ignoreall))
+    if(!isDefined(self.force_ignoreall))
       self.ignoreall = 0;
 
     common_scripts\utility::flag_waitopen("high_alert");
@@ -526,7 +524,7 @@ shack_sleeper() {
   }
   common_scripts\utility::flag_wait("high_alert");
   var_0 notify("stop_first_frame");
-  var_0 playsound("scn_relaxed_guard_chair_fall");
+  var_0 playSound("scn_relaxed_guard_chair_fall");
   var_1 thread maps\_anim::anim_single_solo(var_0, "sleep_react");
   wait 2.8721;
 
@@ -546,8 +544,8 @@ outpost_objectives() {
   wait 6;
   var_0 = getent("hut_obj_org", "targetname");
   var_1 = getent("field_org", "targetname");
-  objective_add(1, "active", & "BLACKOUT_MEET_THE_RUSSIAN_LOYALISTS", var_1.origin);
-  objective_add(2, "current", & "BLACKOUT_ELIMINATE_THE_OUTER_GUARD", var_0.origin);
+  objective_add(1, "active", &"BLACKOUT_MEET_THE_RUSSIAN_LOYALISTS", var_1.origin);
+  objective_add(2, "current", &"BLACKOUT_ELIMINATE_THE_OUTER_GUARD", var_0.origin);
   objective_indentlevel(2, 1);
   common_scripts\utility::flag_wait("hut_cleared");
   var_2 = getent("chess_obj_org", "targetname");
@@ -580,7 +578,7 @@ field_russian_think() {
 
   thread maps\_utility::play_sound_on_entity("scn_blackout_reveal_russian_soldier");
 
-  if(isdefined(self.script_linkto)) {
+  if(isDefined(self.script_linkto)) {
     self allowedstances("stand");
     var_0 = getent(self.script_linkto, "script_linkname");
     self.disablearrivals = 1;
@@ -598,8 +596,8 @@ field_russian_think() {
   var_1 = getnodearray("hilltop_delete_node", "targetname");
   var_2 = undefined;
 
-  for (var_3 = 0; var_3 < var_1.size; var_3++) {
-    if(!isdefined(var_1[var_3].taken)) {
+  for(var_3 = 0; var_3 < var_1.size; var_3++) {
+    if(!isDefined(var_1[var_3].taken)) {
       var_2 = var_1[var_3];
       break;
     }
@@ -608,14 +606,14 @@ field_russian_think() {
   var_2.taken = 1;
   go_up_hill_wait();
 
-  if(isdefined(self.script_noteworthy)) {
+  if(isDefined(self.script_noteworthy)) {
     var_4 = getnode(self.script_noteworthy, "targetname");
     self setgoalnode(var_4);
     self.goalradius = 8;
     self.interval = 0;
     self waittill("goal");
 
-    for (;;) {
+    for(;;) {
       if(common_scripts\utility::flag("field_go")) {
         break;
       }
@@ -652,7 +650,7 @@ hill_head_tracking() {
 }
 
 go_up_hill_wait() {
-  if(!isdefined(self.export)) {
+  if(!isDefined(self.export)) {
     return;
   }
   var_0 = 0.0;
@@ -693,7 +691,7 @@ russian_leader_think(var_0) {
   self.drawoncompass = 0;
   self.animname = "kamarov";
 
-  if(isdefined(var_0)) {
+  if(isDefined(var_0)) {
     self setgoalpos(self.origin);
     self.goalradius = 8;
   }
@@ -752,10 +750,10 @@ sas_main_think() {
     maps\_utility::enable_cqbwalk();
     common_scripts\utility::flag_wait("gaz_and_price_go_up_hill");
     maps\_utility::disable_cqbwalk();
-    var_2 = getentarray("hilltop_friendly_org", "targetname");
+    var_2 = getEntArray("hilltop_friendly_org", "targetname");
 
-    for (var_3 = 0; var_3 < var_2.size; var_3++) {
-      if(!isdefined(var_2[var_3].used)) {
+    for(var_3 = 0; var_3 < var_2.size; var_3++) {
+      if(!isDefined(var_2[var_3].used)) {
         var_2[var_3].used = 1;
         self setgoalpos(var_2[var_3].origin);
         self.goalradius = 16;
@@ -892,7 +890,7 @@ sas_main_think() {
         self _meth_8570(1);
         level.scripted_node_burninghouse thread maps\_anim::anim_loop_solo(self, "walk_burning_house_idle", undefined, "stop_loop" + self.animname);
 
-        while (distancesquared(level.player.origin, level.price.origin) > 30000)
+        while(distancesquared(level.player.origin, level.price.origin) > 30000)
           waitframe();
 
         common_scripts\utility::flag_set("h1_burninghouse_price");
@@ -971,7 +969,7 @@ kamarov_wait_burning_house_pathing() {
   self endon("death");
   var_0 = self.origin;
 
-  while (distancesquared(self.origin, var_0) < 5000)
+  while(distancesquared(self.origin, var_0) < 5000)
     waitframe();
 
   common_scripts\utility::flag_set("kamarov_moving_burning_house");
@@ -1003,7 +1001,7 @@ h1_burning_house_kick_door(var_0) {
 delete_binocs() {
   var_0 = level.binocs.origin;
 
-  while (distancesquared(var_0, level.binocs.origin) < 25) {
+  while(distancesquared(var_0, level.binocs.origin) < 25) {
     var_0 = level.binocs.origin;
     wait 0.05;
   }
@@ -1093,7 +1091,7 @@ set_high_alert() {
   level endon("instant_high_alert");
   common_scripts\utility::array_thread(level.deathflags["hut_guys"]["ai"], ::set_high_alert_on_alarm);
 
-  for (;;) {
+  for(;;) {
     level maps\_utility::add_wait(common_scripts\utility::flag_wait, "high_alert");
     level maps\_utility::add_wait(common_scripts\utility::flag_wait, "_stealth_spotted");
     level maps\_utility::add_wait(maps\_utility::_waittillmatch, "event_awareness", "heard_corpse");
@@ -1103,7 +1101,7 @@ set_high_alert() {
     maps\_utility::do_wait_any();
     common_scripts\utility::flag_set("high_alert");
 
-    for (;;) {
+    for(;;) {
       var_0 = getaiarray("axis");
 
       if(!var_0.size) {
@@ -1117,7 +1115,7 @@ set_high_alert() {
 
       var_1 = 0;
 
-      for (var_2 = 0; var_2 < var_0.size; var_2++) {
+      for(var_2 = 0; var_2 < var_0.size; var_2++) {
         if(!isalive(var_0[var_2].enemy)) {
           continue;
         }
@@ -1147,7 +1145,7 @@ street_walker_think() {
   self endon("death");
   overlook_enemy_waits_for_player();
 
-  if(!isdefined(level.street_walker_delay))
+  if(!isDefined(level.street_walker_delay))
     level.street_walker_delay = 0.0;
   else
     level.street_walker_delay = level.street_walker_delay + randomfloatrange(0.2, 0.4);
@@ -1181,7 +1179,7 @@ overlook_enemy_leaves_stealth() {
 breach_first_building() {
   var_0 = maps\_utility::get_guys_with_targetname_from_spawner("breach_spawner");
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++)
     maps\_utility::spawn_failed(var_0[var_1]);
 
   common_scripts\utility::array_thread(var_0, ::pre_breach);
@@ -1207,12 +1205,12 @@ post_breach() {
 spawn_replacement_baddies() {
   level endon("cliff_fighting");
   var_0 = 10;
-  var_1 = getentarray("enemy_reinforce_spawner", "targetname");
+  var_1 = getEntArray("enemy_reinforce_spawner", "targetname");
   var_1 = common_scripts\utility::array_randomize(var_1);
   common_scripts\utility::array_thread(var_1, maps\_utility::add_spawn_function, ::fall_back_to_defensive_position);
   var_2 = 0;
 
-  for (;;) {
+  for(;;) {
     var_3 = getaiarray("axis");
 
     if(var_3.size > 10) {
@@ -1253,10 +1251,10 @@ fall_back_to_defensive_position() {
 teleport_and_take_node_by_targetname(var_0) {
   var_1 = getnodearray(var_0, "targetname");
 
-  for (var_2 = 0; var_2 < var_1.size; var_2++) {
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
     var_3 = var_1[var_2];
 
-    if(isdefined(var_3.taken)) {
+    if(isDefined(var_3.taken)) {
       continue;
     }
     var_3.taken = 1;
@@ -1272,7 +1270,7 @@ set_flag_on_player_damage(var_0) {
   level endon(var_0);
   self endon("death");
 
-  for (;;) {
+  for(;;) {
     self waittill("damage", var_1, var_2, var_3, var_4);
 
     if(!isalive(var_2)) {
@@ -1298,7 +1296,7 @@ ground_allied_forces() {
     common_scripts\utility::flag_wait("breach_complete");
     wait 0.1;
 
-    if(isdefined(self.targetname) && self.targetname == "hilltop_sniper_AI")
+    if(isDefined(self.targetname) && self.targetname == "hilltop_sniper_AI")
       hilltop_sniper_delay();
 
     set_goalpos_and_volume_from_targetname("ally_first_offense");
@@ -1388,7 +1386,7 @@ blackout_guy_leaves_ignore(var_0) {
 }
 
 blackout_guy_animates_once(var_0, var_1, var_2, var_3) {
-  if(!isdefined(level.flag[var_2]))
+  if(!isDefined(level.flag[var_2]))
     common_scripts\utility::flag_init(var_2);
 
   var_4 = maps\_utility::get_guy_with_script_noteworthy_from_spawner(var_0);
@@ -1397,7 +1395,7 @@ blackout_guy_animates_once(var_0, var_1, var_2, var_3) {
   var_4 maps\_utility::set_generic_deathanim(var_1 + "_death");
   var_4.ignoreme = 1;
 
-  if(isdefined(var_4.script_linkto)) {
+  if(isDefined(var_4.script_linkto)) {
     var_6 = var_4 common_scripts\utility::get_linked_ents();
     common_scripts\utility::array_thread(var_6, ::blackout_guy_leaves_ignore, var_4);
   }
@@ -1413,7 +1411,7 @@ blackout_guy_animates_once(var_0, var_1, var_2, var_3) {
 }
 
 blackout_guy_animates(var_0, var_1, var_2, var_3) {
-  if(!isdefined(level.flag[var_2]))
+  if(!isDefined(level.flag[var_2]))
     common_scripts\utility::flag_init(var_2);
 
   var_4 = maps\_utility::get_guy_with_script_noteworthy_from_spawner(var_0);
@@ -1422,7 +1420,7 @@ blackout_guy_animates(var_0, var_1, var_2, var_3) {
   var_4 maps\_utility::set_generic_deathanim(var_1 + "_death");
   var_4.ignoreme = 1;
 
-  if(isdefined(var_4.script_linkto)) {
+  if(isDefined(var_4.script_linkto)) {
     var_6 = var_4 common_scripts\utility::get_linked_ents();
     common_scripts\utility::array_thread(var_6, ::blackout_guy_leaves_ignore, var_4);
   }
@@ -1440,7 +1438,7 @@ blackout_guy_animates(var_0, var_1, var_2, var_3) {
 }
 
 blackout_guy_animates_loop(var_0, var_1, var_2, var_3) {
-  if(!isdefined(level.flag[var_2]))
+  if(!isDefined(level.flag[var_2]))
     common_scripts\utility::flag_init(var_2);
 
   var_4 = maps\_utility::get_guy_with_script_noteworthy_from_spawner(var_0);
@@ -1449,7 +1447,7 @@ blackout_guy_animates_loop(var_0, var_1, var_2, var_3) {
   var_4 maps\_utility::set_generic_deathanim(var_1 + "_death");
   var_4.ignoreme = 1;
 
-  if(isdefined(var_4.script_linkto)) {
+  if(isDefined(var_4.script_linkto)) {
     var_6 = var_4 common_scripts\utility::get_linked_ents();
     common_scripts\utility::array_thread(var_6, ::blackout_guy_leaves_ignore, var_4);
   }
@@ -1457,7 +1455,7 @@ blackout_guy_animates_loop(var_0, var_1, var_2, var_3) {
   var_4.allowdeath = 1;
   var_4.health = 1;
 
-  if(isdefined(var_3)) {
+  if(isDefined(var_3)) {
     var_5 thread maps\_anim::anim_generic_first_frame(var_4, var_1 + "_ff");
     common_scripts\utility::flag_wait(var_3);
   }
@@ -1473,15 +1471,15 @@ price_checks_goal_for_noteworthy() {
   self endon("stop_checking_node_noteworthy");
   var_0 = [];
 
-  for (;;) {
+  for(;;) {
     self waittill("goal");
 
-    while (!isdefined(self.node))
+    while(!isDefined(self.node))
       wait 0.05;
 
     var_1 = self.node;
 
-    if(isdefined(var_0[var_1.origin + ""])) {
+    if(isDefined(var_0[var_1.origin + ""])) {
       continue;
     }
     var_0[var_1.origin + ""] = 1;
@@ -1489,7 +1487,7 @@ price_checks_goal_for_noteworthy() {
     if(distance(var_1.origin, self.origin) > self.goalradius) {
       continue;
     }
-    if(!isdefined(var_1.script_noteworthy)) {
+    if(!isDefined(var_1.script_noteworthy)) {
       continue;
     }
     if(var_1.script_noteworthy == "signal_moveup") {
@@ -1500,7 +1498,7 @@ price_checks_goal_for_noteworthy() {
 }
 
 price_signals_moveup() {
-  while (isalive(level.price.enemy))
+  while(isalive(level.price.enemy))
     wait 0.05;
 
   level.price maps\_utility::handsignal("moveup", 1, "enemy");
@@ -1510,7 +1508,7 @@ price_cqb_aims_at_target(var_0) {
   level notify("price_gets_new_cqb_targ");
   level endon("price_gets_new_cqb_targ");
 
-  for (;;) {
+  for(;;) {
     if(var_0 == "hide") {
       var_1 = getent("hide_target", "targetname");
       level.price maps\_utility::cqb_aim(var_1);
@@ -1532,7 +1530,7 @@ price_cqb_aims_at_target(var_0) {
 }
 
 price_attack_hunt() {
-  for (;;) {
+  for(;;) {
     self.noshoot = 1;
 
     if(!isalive(self.enemy)) {
@@ -1540,11 +1538,9 @@ price_attack_hunt() {
       continue;
     }
 
-    if(!isdefined(self.enemy.dont_hit_me))
+    if(!isDefined(self.enemy.dont_hit_me))
       self.noshoot = undefined;
-    else {
-
-    }
+    else {}
 
     wait 0.05;
   }
@@ -1553,12 +1549,12 @@ price_attack_hunt() {
 spawn_replacement_cliff_baddies() {
   level endon("cliff_complete");
   var_0 = 10;
-  var_1 = getentarray("later_spawner", "targetname");
+  var_1 = getEntArray("later_spawner", "targetname");
   var_1 = common_scripts\utility::array_randomize(var_1);
   common_scripts\utility::array_thread(var_1, maps\_utility::add_spawn_function, ::defend_second_area);
   var_2 = 0;
 
-  for (;;) {
+  for(;;) {
     var_3 = getaiarray("axis");
 
     if(var_3.size > 10) {
@@ -1622,12 +1618,12 @@ swarm_hillside() {
   self endon("death");
   var_0 = 5000;
   var_1 = 0;
-  var_2 = getentarray("power_station_attack_org", "targetname");
+  var_2 = getEntArray("power_station_attack_org", "targetname");
 
-  for (var_3 = 0; var_3 < var_2.size; var_3++) {
+  for(var_3 = 0; var_3 < var_2.size; var_3++) {
     var_4 = var_2[var_3];
 
-    if(!isdefined(var_4.script_count))
+    if(!isDefined(var_4.script_count))
       var_4.script_count = 0;
 
     if(var_4.script_count < var_0) {
@@ -1645,7 +1641,7 @@ swarm_hillside() {
   self setgoalnode(var_5);
   self.goalradius = 2048;
 
-  for (;;) {
+  for(;;) {
     wait(randomfloatrange(7, 10));
     self.goalradius = self.goalradius - 128;
 
@@ -1668,9 +1664,9 @@ overlook_turret_think() {
   self.ignoreme = 1;
   maps\_utility::delaythread(32, maps\_utility::set_ignoreme, 0);
   maps\_utility::delaythread(randomfloatrange(50, 55), maps\_utility::die);
-  var_0 = getentarray("mg_overlook_target", "targetname");
+  var_0 = getEntArray("mg_overlook_target", "targetname");
 
-  for (;;) {
+  for(;;) {
     self setentitytarget(common_scripts\utility::random(var_0));
     wait(randomfloatrange(1, 2));
   }
@@ -1693,15 +1689,15 @@ overlook_player_mortarvision() {
   var_0 = [];
   var_1 = undefined;
 
-  for (var_2 = 0; var_2 < level.createfxent.size; var_2++) {
-    if(!isdefined(level.createfxent[var_2].v["exploder"])) {
+  for(var_2 = 0; var_2 < level.createfxent.size; var_2++) {
+    if(!isDefined(level.createfxent[var_2].v["exploder"])) {
       continue;
     }
     if(level.createfxent[var_2].v["exploder"] != "70") {
       continue;
     }
     var_1 = level.createfxent[var_2];
-    var_3 = spawnstruct();
+    var_3 = spawnStruct();
     var_3.origin = var_1.v["origin"];
     var_0[var_0.size] = var_3;
   }
@@ -1710,10 +1706,10 @@ overlook_player_mortarvision() {
   wait 5;
   var_4 = undefined;
 
-  for (;;) {
+  for(;;) {
     wait_for_player_to_ads_for_time(1.5);
 
-    for (;;) {
+    for(;;) {
       wait 0.5;
 
       if(!player_is_ads()) {
@@ -1721,23 +1717,23 @@ overlook_player_mortarvision() {
       }
 
       var_5 = getaiarray("axis");
-      var_6 = level.player geteye();
+      var_6 = level.player getEye();
       var_7 = level.player getplayerangles();
-      var_8 = anglestoforward(var_7);
+      var_8 = anglesToForward(var_7);
       var_9 = var_6 + maps\_utility::vector_multiply(var_8, 5000);
-      var_10 = bullettrace(var_6, var_9, 1, level.player);
+      var_10 = bulletTrace(var_6, var_9, 1, level.player);
       var_11 = var_10["position"];
       var_12 = common_scripts\utility::getclosest(var_11, var_5, 500);
 
-      if(!isdefined(var_12)) {
+      if(!isDefined(var_12)) {
         continue;
       }
       var_13 = common_scripts\utility::getclosest(var_12.origin, var_0, 500);
 
-      if(!isdefined(var_13)) {
+      if(!isDefined(var_13)) {
         continue;
       }
-      if(isdefined(var_4)) {
+      if(isDefined(var_4)) {
         if(var_13 == var_4)
           continue;
       }
@@ -1755,7 +1751,7 @@ overlook_player_mortarvision() {
 wait_for_player_to_ads_for_time(var_0) {
   var_1 = gettime();
 
-  for (;;) {
+  for(;;) {
     if(player_is_ads()) {
       if(gettime() > var_1 + var_0)
         return;
@@ -1772,15 +1768,15 @@ player_is_ads() {
 
 physics_launch_think() {
   self hide();
-  self setcandamage(1);
+  self setCanDamage(1);
 
-  for (;;) {
+  for(;;) {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6);
 
-    if(!isdefined(var_1)) {
+    if(!isDefined(var_1)) {
       continue;
     }
-    if(!isdefined(var_1.model)) {
+    if(!isDefined(var_1.model)) {
       continue;
     }
     if(!issubstr(var_1.model, "vehicle")) {
@@ -1796,7 +1792,7 @@ physics_launch_think() {
   var_10 = spawn("script_model", (0, 0, 0));
   var_10.angles = self.angles;
   var_10.origin = self.origin;
-  var_10 setmodel(self.model);
+  var_10 setModel(self.model);
   var_10 physicslaunchclient(var_10.origin, var_9);
   self delete();
 }
@@ -1846,8 +1842,8 @@ ally_rappels(var_0, var_1) {
 }
 
 price_swap() {
-  for (;;) {
-    if(maps\_utility::player_looking_at(level.price geteye(), 0.7)) {
+  for(;;) {
+    if(maps\_utility::player_looking_at(level.price getEye(), 0.7)) {
       wait 0.1;
       continue;
     }
@@ -1874,7 +1870,7 @@ price_swap() {
 trigger_monitor_player_lean() {
   self endon("stop_monitor_lean");
 
-  for (;;) {
+  for(;;) {
     if(level.player isleaning())
       common_scripts\utility::trigger_off();
     else
@@ -1900,7 +1896,7 @@ player_rappel_think() {
   var_4 sethintstring(&"BLACKOUT_RAPPEL_HINT");
   var_4 thread trigger_monitor_player_lean();
 
-  for (;;) {
+  for(;;) {
     var_4 waittill("trigger");
     waitframe();
 
@@ -1940,9 +1936,9 @@ player_rappel_think() {
   soundscripts\_snd::snd_message("aud_start_post_rappel_mix");
   common_scripts\_exploder::exploder(300);
   wait 15;
-  var_6 = getentarray("mg_gunner", "script_noteworthy");
+  var_6 = getEntArray("mg_gunner", "script_noteworthy");
 
-  for (var_7 = 0; var_7 < var_6.size; var_7++) {
+  for(var_7 = 0; var_7 < var_6.size; var_7++) {
     if(isalive(var_6[var_7])) {
       continue;
     }
@@ -2023,7 +2019,7 @@ prep_for_rappel_think() {
   create_rope("ally1_rappel_node");
   create_rope("ally2_rappel_node");
 
-  for (;;) {
+  for(;;) {
     self waittill("trigger", var_2);
     soundscripts\_snd::snd_message("start_gaz_kam_fight_mix");
     var_2 thread gaz_and_kamarov_fight();
@@ -2127,7 +2123,7 @@ price_pre_power_station_goal() {
   var_0 = getnode("price_pre_power_station_goal", "targetname");
   self setgoalnode(var_0);
 
-  if(isdefined(var_0.radius))
+  if(isDefined(var_0.radius))
     self.goalradius = var_0.radius;
 
   self waittill("goal");
@@ -2190,7 +2186,7 @@ hut_friendlies_chats_about_russians() {
   thread kill_hut_patrol(var_1);
   var_2 = getaiarray("axis");
 
-  for (var_3 = 0; var_3 < var_2.size; var_3++)
+  for(var_3 = 0; var_3 < var_2.size; var_3++)
     var_2[var_3].no_corpse_caring = 1;
 
   var_1.no_corpse_caring = undefined;
@@ -2272,7 +2268,7 @@ price_tells_player_to_come_over() {
   wait 2;
   level.price waittill("goal");
 
-  for (;;) {
+  for(;;) {
     if(common_scripts\utility::flag("player_near_overlook")) {
       break;
     }
@@ -2327,7 +2323,7 @@ die_if_near(var_0) {
 }
 
 price_finishes_farm() {
-  for (;;) {
+  for(;;) {
     self waittill("trigger", var_0);
 
     if(!isalive(var_0)) {
@@ -2361,7 +2357,7 @@ informant_org() {
 
 vip_death() {
   self waittill("death");
-  setdvar("ui_deadquote", & "BLACKOUT_THE_INFORMANT_WAS_KILLED");
+  setdvar("ui_deadquote", &"BLACKOUT_THE_INFORMANT_WAS_KILLED");
   maps\_utility::missionfailedwrapper();
 }
 
@@ -2383,7 +2379,7 @@ blackout_flashlight_guy() {
   wait 0.1;
   var_3 = spawn("script_model", (-1604.57, -2693.95, 538.5));
   var_3.angles = (294.019, 248.305, -90.0576);
-  var_3 setmodel("weapon_ak74u");
+  var_3 setModel("weapon_ak74u");
   var_1 maps\_utility::gun_remove();
   var_4 = getent("flashlight_spawner", "targetname");
   var_4 maps\_utility::add_spawn_function(::add_to_no_delete_group);
@@ -2439,7 +2435,7 @@ blackout_flashlight_guy() {
   common_scripts\utility::flag_wait("gaz_opens_door");
   level.price waittill("goal");
   var_2 notify("stop_loop");
-  level.vip playsound("blackout_nkd_whoareyou");
+  level.vip playSound("blackout_nkd_whoareyou");
   var_2 thread maps\_anim::anim_single(var_9, "rescue");
   level.vip waittillmatch("single anim", "grab_gun");
   level.vip maps\_utility::gun_recall();
@@ -2458,7 +2454,7 @@ blackout_flashlight_guy() {
 }
 
 vip_rescue_dialogue(var_0) {
-  if(isdefined(level.rescue_dialogue)) {
+  if(isDefined(level.rescue_dialogue)) {
     return;
   }
   level.rescue_dialogue = 1;
@@ -2533,14 +2529,14 @@ blackout_flashlight_kill_player() {
   var_0[var_0.size] = 0.55;
   var_1 = 0;
 
-  for (;;) {
-    if(!bullettracepassed(self gettagorigin("tag_flash"), level.player geteye(), 0, undefined)) {
+  for(;;) {
+    if(!bullettracepassed(self gettagorigin("tag_flash"), level.player getEye(), 0, undefined)) {
       wait 0.05;
       continue;
     }
 
-    magicbullet(self.weapon, self gettagorigin("tag_flash"), level.player geteye());
-    playfxontag(common_scripts\utility::getfx("pistol_muzzleflash"), self, "tag_flash");
+    magicbullet(self.weapon, self gettagorigin("tag_flash"), level.player getEye());
+    playFXOnTag(common_scripts\utility::getfx("pistol_muzzleflash"), self, "tag_flash");
     thread maps\_utility::play_sound_on_entity("weap_m9_fire_npc");
     wait(var_0[var_1]);
     var_1++;
@@ -2554,12 +2550,12 @@ blackout_flashlight_death(var_0, var_1, var_2, var_3) {
   var_1 common_scripts\utility::waittill_either("damage", "doFlashBanged");
   var_1.died = 1;
 
-  if(!isdefined(level.spotlight["spotlight"])) {
+  if(!isDefined(level.spotlight["spotlight"])) {
     level.flashlight maps\_utility::delaythread(0.5, ::spawn_flashlighfx, "spotlight", 8);
     level.flashlight maps\_utility::delaythread(0.5, maps\_utility::play_sound_on_entity, "scn_blackout_flashlight_on");
   }
 
-  if(isdefined(level.spotlight["flashlight"]))
+  if(isDefined(level.spotlight["flashlight"]))
     level.spotlight["flashlight"] delete();
 
   var_4 = getstartorigin(var_0.origin, var_0.angles, var_1 maps\_utility::getanim("fl_death"));
@@ -2583,23 +2579,23 @@ blackout_flashlight_death(var_0, var_1, var_2, var_3) {
 }
 
 spawn_flashlighfx(var_0, var_1) {
-  if(isdefined(level.spotlight[var_0])) {
+  if(isDefined(level.spotlight[var_0])) {
     return;
   }
   var_2 = spawn("script_model", (0, 0, 0));
   level.spotlight[var_0] = var_2;
-  var_2 setmodel("tag_origin");
+  var_2 setModel("tag_origin");
   var_2 linkto(self, "tag_light", (var_1, 0, 0), (0, 0, 0));
-  playfxontag(common_scripts\utility::getfx(var_0), var_2, "tag_origin");
+  playFXOnTag(common_scripts\utility::getfx(var_0), var_2, "tag_origin");
 }
 
 drawanimtime(var_0) {
-  for (;;)
+  for(;;)
     wait 0.05;
 }
 
 compare_animtime(var_0, var_1, var_2) {
-  for (;;) {
+  for(;;) {
     var_3 = var_1 getanimtime(var_1 maps\_utility::getanim(var_0));
     var_4 = var_2 getanimtime(var_2 maps\_utility::getanim(var_0));
     wait 0.05;
@@ -2620,7 +2616,7 @@ blind_guy_gets_flashed() {
 blind_corner_spawner_sound() {
   self endon("death");
   common_scripts\utility::flag_wait("blind_triggerwall_spawner");
-  self playsound(level.scr_sound["generic"]["breathing"]);
+  self playSound(level.scr_sound["generic"]["breathing"]);
 }
 
 blind_guy_think() {
@@ -2650,7 +2646,7 @@ blind_guy_think() {
   var_6 = var_0[self.script_noteworthy] + "_death";
 
   if(self.script_noteworthy == "corner_spawner") {
-    while (!common_scripts\utility::flag_exist("blind_triggerwall_spawner"))
+    while(!common_scripts\utility::flag_exist("blind_triggerwall_spawner"))
       wait 0.05;
 
     thread blind_corner_spawner_sound();
@@ -2710,7 +2706,7 @@ blind_guy_think() {
 }
 
 advances_to_node(var_0) {
-  if(isdefined(var_0.already_advanced)) {
+  if(isDefined(var_0.already_advanced)) {
     return;
   }
   var_0.already_advanced = 1;
@@ -2721,17 +2717,17 @@ advances_to_node(var_0) {
 price_signals_on_arrival() {
   self waittill("price_reaches_signal_node");
 
-  for (;;) {
+  for(;;) {
     level.price maps\_utility::waittill_player_lookat();
     wait 0.5;
 
-    if(!isdefined(level.price.node)) {
+    if(!isDefined(level.price.node)) {
       return;
     }
     if(level.price.node != self) {
       return;
     }
-    var_0 = isdefined(level.price.node.script_noteworthy) && level.price.node.script_noteworthy == "bottom_stairs_node";
+    var_0 = isDefined(level.price.node.script_noteworthy) && level.price.node.script_noteworthy == "bottom_stairs_node";
 
     if(var_0) {
       level.price.aimblendtime = 0.5;
@@ -2751,7 +2747,7 @@ price_signals_on_arrival() {
 node_notifies_on_arrival(var_0) {
   self waittill("goal");
 
-  if(!isdefined(self.node)) {
+  if(!isDefined(self.node)) {
     return;
   }
   if(self.node != var_0) {
@@ -2771,10 +2767,10 @@ blind_guy_dies_soon(var_0) {
 get_linked_trigger() {
   var_0 = common_scripts\utility::get_links();
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++) {
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_2 = getent(var_0[var_1], "script_linkname");
 
-    if(!isdefined(var_2)) {
+    if(!isDefined(var_2)) {
       continue;
     }
     if(issubstr(var_2.classname, "trigger"))
@@ -2785,10 +2781,10 @@ get_linked_trigger() {
 get_linked_node() {
   var_0 = common_scripts\utility::get_links();
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++) {
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_2 = getnode(var_0[var_1], "script_linkname");
 
-    if(!isdefined(var_2)) {
+    if(!isDefined(var_2)) {
       continue;
     }
     return var_2;
@@ -2810,13 +2806,13 @@ blackout_lights_go_out() {
   common_scripts\utility::flag_set("lights_out");
   var_0 = getnode("power_node_switch", "targetname");
   level.gaz setgoalnode(var_0);
-  level.gaz playsound("scn_blackout_breaker_box");
+  level.gaz playSound("scn_blackout_breaker_box");
   wait 2.5;
   common_scripts\utility::flag_set("turn_off_blackout_spotlights");
   var_1 = getent("blackout_spotlight_model", "targetname");
-  var_1 setmodel("ch_street_wall_light_01_off");
+  var_1 setModel("ch_street_wall_light_01_off");
   var_2 = getent("blackout_lamp_model", "targetname");
-  var_2 setmodel("greece_gaslamp");
+  var_2 setModel("greece_gaslamp");
   soundscripts\_snd::snd_message("aud_start_power_off_sfx");
 }
 
@@ -2824,7 +2820,7 @@ blackout_lights_go_out_h1() {
   common_scripts\utility::flag_set("lights_out");
   common_scripts\utility::flag_set("turn_off_blackout_spotlights");
   var_0 = getent("blackout_spotlight_model", "targetname");
-  var_0 setmodel("ch_street_wall_light_01_off");
+  var_0 setModel("ch_street_wall_light_01_off");
   soundscripts\_snd::snd_message("aud_start_power_off_sfx");
 }
 
@@ -2972,9 +2968,9 @@ open_door_trigger(var_0) {
   wait 0.8;
   var_2 = getent(var_0 + "_door_org", "targetname");
   var_3 = getent(var_0 + "_door", "targetname");
-  var_4 = getentarray(var_0 + "_door_extra_model", "targetname");
+  var_4 = getEntArray(var_0 + "_door_extra_model", "targetname");
 
-  if(isdefined(var_4)) {
+  if(isDefined(var_4)) {
     foreach(var_6 in var_4)
     var_6 linkto(var_3);
   }
@@ -2999,12 +2995,12 @@ should_break_grenade_launcher_hint(var_0) {
   var_1 = self getweaponslistall();
   var_2 = [];
 
-  for (var_3 = 0; var_3 < var_1.size; var_3++) {
+  for(var_3 = 0; var_3 < var_1.size; var_3++) {
     var_4 = var_1[var_3];
     var_2[var_4] = self getweaponammoclip(var_4);
   }
 
-  if(!isdefined(var_2["alt_m4m203_silencer_reflex"]))
+  if(!isDefined(var_2["alt_m4m203_silencer_reflex"]))
     return 1;
 
   var_4 = self getcurrentweapon();
@@ -3022,12 +3018,12 @@ should_break_sniper_rifle_hint(var_0) {
   var_1 = self getweaponslistall();
   var_2 = [];
 
-  for (var_3 = 0; var_3 < var_1.size; var_3++) {
+  for(var_3 = 0; var_3 < var_1.size; var_3++) {
     var_4 = var_1[var_3];
     var_2[var_4] = 1;
   }
 
-  if(!isdefined(var_2["m14_scoped_silencer_woodland"]))
+  if(!isDefined(var_2["m14_scoped_silencer_woodland"]))
     return 1;
 
   if(common_scripts\utility::flag("overlook_attack_begins"))
@@ -3040,7 +3036,7 @@ attack_player() {
   self endon("death");
   self.goalradius = 1200;
 
-  for (;;) {
+  for(;;) {
     self.goalradius = self.goalradius - 128;
 
     if(self.goalradius < 750)
@@ -3066,7 +3062,7 @@ swamp_sprint_protection() {
   var_0[var_0.size] = "shack_cleared";
   var_1 = 0;
 
-  for (var_2 = 0; var_2 < var_0.size; var_2++) {
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
     if(!common_scripts\utility::flag(var_0[var_2])) {
       break;
     }
@@ -3077,7 +3073,7 @@ swamp_sprint_protection() {
   if(var_1 == var_0.size) {
     return;
   }
-  var_3 = getentarray("meeting_catchup_org", "targetname");
+  var_3 = getEntArray("meeting_catchup_org", "targetname");
   level.price teleport(var_3[0].origin);
   level.gaz teleport(var_3[1].origin);
   level.price maps\_utility::set_force_color("c");
@@ -3099,9 +3095,9 @@ kill_myself_shortly(var_0) {
 }
 
 price_and_gaz_catchup_to_bridge() {
-  var_0 = getentarray("friendly_catchup_org_1", "targetname");
+  var_0 = getEntArray("friendly_catchup_org_1", "targetname");
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++) {
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     level.gaz teleport(var_0[var_1].origin);
     level.price teleport(var_0[var_1].origin);
   }
@@ -3123,7 +3119,7 @@ play_heli_scripted_sfx() {
 player_jumps_into_heli() {
   level endon("player_gets_on_heli");
 
-  for (;;) {
+  for(;;) {
     level.hud_mantle["text"].alpha = 0;
     common_scripts\utility::flag_wait("player_near_heli");
     detect_player_mantle();
@@ -3133,7 +3129,7 @@ player_jumps_into_heli() {
 detect_player_mantle() {
   level endon("player_gets_on_heli");
 
-  for (;;) {
+  for(;;) {
     if(!common_scripts\utility::flag("player_near_heli")) {
       level.hud_mantle["text"].alpha = 0;
       level.player allowjump(1);
@@ -3221,8 +3217,8 @@ bmp_killer_spawner_think() {
 waittill_on_node(var_0) {
   self waittill("goal");
 
-  for (;;) {
-    if(!isdefined(self.node)) {
+  for(;;) {
+    if(!isDefined(self.node)) {
       wait 0.05;
       continue;
     }
@@ -3268,7 +3264,7 @@ shack_signal(var_0) {
   wait 4;
   level.player thread maps\_utility::display_hint("claymore_plant");
 
-  for (;;) {
+  for(;;) {
     if(level.player should_break_claymores()) {
       break;
     }
@@ -3300,8 +3296,8 @@ price_and_gaz_flash_hut() {
   level.gaz maps\_utility::setflashbangimmunity(1);
   var_0 = getent("price_door_flash", "script_noteworthy");
 
-  for (;;) {
-    if(!isdefined(level.price.node)) {
+  for(;;) {
+    if(!isDefined(level.price.node)) {
       wait 0.05;
       continue;
     }
@@ -3383,7 +3379,7 @@ sniper_remove_trigger() {
 player_has_weapon_substr(var_0) {
   var_1 = level.player getweaponslistall();
 
-  for (var_2 = 0; var_2 < var_1.size; var_2++) {
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
     if(issubstr(var_1[var_2], var_0))
       return 1;
   }
@@ -3392,7 +3388,7 @@ player_has_weapon_substr(var_0) {
 }
 
 add_to_no_delete_group() {
-  if(!isdefined(level.blackout_house_no_delete_group))
+  if(!isDefined(level.blackout_house_no_delete_group))
     level.blackout_house_no_delete_group = [];
 
   level.blackout_house_no_delete_group[level.blackout_house_no_delete_group.size] = self;
@@ -3435,7 +3431,7 @@ get_prop(var_0) {
 
   if(var_0 == "binocs") {
     var_1 = spawn("script_model", (0, 0, 0));
-    var_1 setmodel(level.scr_model["binocs"]);
+    var_1 setModel(level.scr_model["binocs"]);
     var_1 linkto(self, "TAG_INHAND", (0, 0, 0), (0, 0, 0));
   }
 
@@ -3479,19 +3475,19 @@ activate_farmhouse_defenders() {
   wait 4;
   var_0 = getent("farmhouse_defender", "target");
 
-  for (var_1 = 0; var_1 < 20; var_1++) {
+  for(var_1 = 0; var_1 < 20; var_1++) {
     var_0 maps\_utility::activate_trigger();
     wait 2;
   }
 }
 
 set_allowed_stances(var_0, var_1, var_2) {
-  if(isdefined(var_2)) {
+  if(isDefined(var_2)) {
     self allowedstances(var_0, var_1, var_2);
     return;
   }
 
-  if(isdefined(var_1)) {
+  if(isDefined(var_1)) {
     self allowedstances(var_0, var_1);
     return;
   }
@@ -3504,10 +3500,10 @@ field_russians_go_up_hill() {
   var_0 = getent("mortar_setup_1", "targetname");
   var_1 = common_scripts\utility::get_array_of_closest(var_0.origin, level.field_russians);
 
-  for (var_2 = 0; var_2 < var_1.size; var_2++) {
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
     var_1[var_2] notify("go_up_hill");
 
-    if(!isdefined(var_1[var_2].script_noteworthy))
+    if(!isDefined(var_1[var_2].script_noteworthy))
       wait(0.3 + randomfloat(0.1));
   }
 }
@@ -3522,7 +3518,7 @@ hut_runner_think() {
   common_scripts\utility::flag_wait("high_alert");
   var_0 = getent("hut_runner_dest", "targetname");
 
-  for (;;) {
+  for(;;) {
     self notify("_stealth_stop_stealth_behavior");
     self setgoalpos(var_0.origin);
     self.goalradius = 128;
@@ -3560,7 +3556,7 @@ display_sniper_hint() {
 macmillan_proud_hook() {
   self waittill("death", var_0, var_1, var_2);
 
-  if(isdefined(level.mac_proud)) {
+  if(isDefined(level.mac_proud)) {
     return;
   }
   wait 0.35;
@@ -3574,7 +3570,7 @@ macmillan_proud_hook() {
   if(!isplayer(var_0)) {
     return;
   }
-  if(!isdefined(var_2)) {
+  if(!isDefined(var_2)) {
     return;
   }
   if(!issubstr(var_2, "m14")) {
@@ -3684,14 +3680,14 @@ bmp_targets_stuff() {
   self endon("death");
   level.timer = gettime();
   wait 15.2;
-  var_0 = getentarray("cliff_tank_target", "targetname");
+  var_0 = getEntArray("cliff_tank_target", "targetname");
   thread bmp_aims_at_targets();
   wait 1.5;
 
-  for (;;) {
+  for(;;) {
     var_1 = randomintrange(4, 7);
 
-    for (var_2 = 0; var_2 < var_1; var_2++) {
+    for(var_2 = 0; var_2 < var_1; var_2++) {
       self fireweapon();
       wait 0.35;
     }
@@ -3702,10 +3698,10 @@ bmp_targets_stuff() {
 
 bmp_aims_at_targets() {
   self endon("death");
-  var_0 = getentarray("cliff_tank_target", "targetname");
+  var_0 = getEntArray("cliff_tank_target", "targetname");
 
-  for (;;) {
-    for (var_1 = 0; var_1 < var_0.size; var_1++) {
+  for(;;) {
+    for(var_1 = 0; var_1 < var_0.size; var_1++) {
       self setturrettargetent(var_0[var_1]);
       self waittill("turret_on_target");
       wait(randomfloat(1.5));
@@ -3717,7 +3713,7 @@ is_healthy() {
   if(!isalive(self))
     return 0;
 
-  if(isdefined(self.isflashed))
+  if(isDefined(self.isflashed))
     return 0;
 
   return self.health == 50000;
@@ -3752,7 +3748,7 @@ music_control() {
   soundscripts\_snd::snd_message("aud_stop_post_rappel_mix");
   level notify("next_music_track");
   musicstop(4);
-  level.player playsound("blackout_hurry_end");
+  level.player playSound("blackout_hurry_end");
   wait 5.1;
   common_scripts\utility::flag_wait("lights_out");
   thread music_playback("blackout_nightvision", 43, 1);
@@ -3770,14 +3766,14 @@ music_control() {
 music_playback(var_0, var_1, var_2, var_3) {
   level endon("next_music_track");
 
-  if(!isdefined(var_2))
+  if(!isDefined(var_2))
     var_2 = 0;
 
-  if(!isdefined(var_3))
+  if(!isDefined(var_3))
     var_3 = 1;
 
   if(var_2) {
-    for (;;) {
+    for(;;) {
       maps\_utility::musicplaywrapper(var_0);
       wait(var_1);
       musicstop();
@@ -3796,7 +3792,7 @@ cliff_reminder() {
   if(!common_scripts\utility::flag("h1_burninghouse_price"))
     level endon("h1_burninghouse_price");
 
-  for (;;) {
+  for(;;) {
     if(distance(level.player.origin, level.price.origin) > 600)
       over_here();
 
@@ -3834,8 +3830,8 @@ trigger_deletes_children() {
   var_0 = common_scripts\utility::get_linked_ents();
   self waittill("trigger");
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++) {
-    if(isdefined(var_0[var_1]))
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+    if(isDefined(var_0[var_1]))
       var_0[var_1] delete();
   }
 
@@ -3845,7 +3841,7 @@ trigger_deletes_children() {
 price_and_gaz_arrive_at_fight_check() {
   var_0 = getent("price_gaz_cliff_trigger", "targetname");
 
-  for (;;) {
+  for(;;) {
     if(level.price istouching(var_0) && level.gaz istouching(var_0)) {
       break;
     }
@@ -3864,7 +3860,7 @@ commence_attack_on_death() {
 
 overlook_alarm() {
   var_0 = getent("alarm_org", "targetname");
-  var_0 playsound("emt_alarm_base_alert");
+  var_0 playSound("emt_alarm_base_alert");
   wait 15;
   var_0 delete();
 }
@@ -3877,7 +3873,7 @@ instant_high_alert() {
 }
 
 detect_recent_flashed() {
-  for (;;) {
+  for(;;) {
     level maps\_utility::add_wait(maps\_utility::_waittillmatch, "event_awareness", "explode");
     level maps\_utility::add_wait(maps\_utility::_waittillmatch, "event_awareness", "doFlashBanged");
     maps\_utility::do_wait_any();
@@ -3913,23 +3909,23 @@ is_rappel_or_earlier_start() {
 shoot_magic_rocket(var_0) {
   var_1 = getent(var_0, "targetname");
   var_2 = spawn("script_model", (0, 0, 0));
-  var_2 setmodel("tag_origin");
+  var_2 setModel("tag_origin");
   var_2.origin = var_1.origin;
   var_1 maps\_utility::script_delay();
-  playfx(common_scripts\utility::getfx("magic_rocket_launch"), var_2.origin);
-  var_2 playloopsound("h1_scn_se_rocket_trail");
-  playfxontag(common_scripts\utility::getfx("magic_rocket_geo"), var_2, "tag_origin");
+  playFX(common_scripts\utility::getfx("magic_rocket_launch"), var_2.origin);
+  var_2 playLoopSound("h1_scn_se_rocket_trail");
+  playFXOnTag(common_scripts\utility::getfx("magic_rocket_geo"), var_2, "tag_origin");
 
-  if(!isdefined(var_1.speed))
+  if(!isDefined(var_1.speed))
     var_2.units_per_second = 2000;
   else
     var_2.units_per_second = var_1.speed;
 
-  for (;;) {
-    if(isdefined(var_1.script_noteworthy) && isdefined(int(var_1.script_noteworthy)))
+  for(;;) {
+    if(isDefined(var_1.script_noteworthy) && isDefined(int(var_1.script_noteworthy)))
       thread common_scripts\_exploder::exploder(int(var_1.script_noteworthy));
 
-    if(!isdefined(var_1.target)) {
+    if(!isDefined(var_1.target)) {
       break;
     }
 
@@ -3947,7 +3943,7 @@ shoot_magic_rocket(var_0) {
 helicopter_searchlight_setup() {
   self.spotlight = spawnturret("misc_turret", self gettagorigin("tag_barrel"), "heli_spotlight");
   self.spotlight.angles = self gettagangles("tag_barrel");
-  self.spotlight setmodel("com_blackhawk_spotlight_off_mg_setup");
+  self.spotlight setModel("com_blackhawk_spotlight_off_mg_setup");
   self.spotlight linkto(self, "tag_barrel", (0, 0, -16), (0, 0, 0));
   self.spotlight makeunusable();
   self.spotlight setmode("manual");
@@ -3959,50 +3955,50 @@ helicopter_searchlight_setup() {
 }
 
 helicopter_searchlight_on() {
-  if(!isdefined(self.spotlight))
+  if(!isDefined(self.spotlight))
     helicopter_searchlight_setup();
 
   self.spotlight.enabled = 1;
-  self.spotlight setmodel("com_blackhawk_spotlight_on_mg_setup");
+  self.spotlight setModel("com_blackhawk_spotlight_on_mg_setup");
   helicopter_set_spotlight_target(self.spotlight.default_target);
   wait 0.5;
-  playfxontag(level._effect["heli_spotlight"], self.spotlight, "tag_flash");
+  playFXOnTag(level._effect["heli_spotlight"], self.spotlight, "tag_flash");
 }
 
 helicopter_searchlight_off() {
   self.spotlight.enabled = 0;
-  self.spotlight setmodel("com_blackhawk_spotlight_off_mg_setup");
-  stopfxontag(level._effect["heli_spotlight"], self.spotlight, "tag_flash");
+  self.spotlight setModel("com_blackhawk_spotlight_off_mg_setup");
+  stopFXOnTag(level._effect["heli_spotlight"], self.spotlight, "tag_flash");
 }
 
 helicopter_set_spotlight_target(var_0) {
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     var_0 = self.spotlight.default_target;
 
   self.spotlight settargetentity(var_0);
 }
 
 spot_target(var_0, var_1, var_2) {
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     var_1 = (0, 0, 0);
 
-  if(!isdefined(var_2))
+  if(!isDefined(var_2))
     var_2 = 350;
 
   self notify("stop_spot");
   self endon("stop_spot");
 
-  if(!isdefined(self.spot_target_ent))
+  if(!isDefined(self.spot_target_ent))
     self.spot_target_ent = spawn("script_model", self.spotlight.default_target.origin);
 
   helicopter_set_spotlight_target(self.spot_target_ent);
 
-  for (;;) {
+  for(;;) {
     var_3 = distance(var_0.origin, self.spot_target_ent.origin) / var_2 + 0.1;
     self.spot_target_ent moveto(var_0.origin, var_3);
     self.spot_target_ent waittill("movedone");
 
-    if(isdefined(var_0.script_noteworthy)) {
+    if(isDefined(var_0.script_noteworthy)) {
       switch (var_0.script_noteworthy) {
         case "on":
           helicopter_searchlight_on();
@@ -4011,20 +4007,20 @@ spot_target(var_0, var_1, var_2) {
       }
     }
 
-    if(isdefined(var_0.target))
+    if(isDefined(var_0.target))
       var_0 = getent(var_0.target, "targetname");
   }
 }
 
 buring_house_exploder_think(var_0, var_1, var_2) {
-  var_3 = getentarray(var_0, "script_noteworthy");
+  var_3 = getEntArray(var_0, "script_noteworthy");
   common_scripts\utility::array_thread(var_3, maps\_utility::hide_entity);
   common_scripts\utility::flag_wait(var_1);
   common_scripts\utility::array_thread(var_3, maps\_utility::show_entity);
   common_scripts\utility::flag_wait(var_2);
 
   foreach(var_5 in var_3) {
-    if(isdefined(var_5))
+    if(isDefined(var_5))
       var_5 delete();
   }
 }

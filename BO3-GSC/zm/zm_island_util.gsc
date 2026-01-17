@@ -33,7 +33,7 @@ function spawn_trigger_radius(origin, radius, use_trigger = 0, func_per_player_m
 }
 
 function private spawn_unitrigger(origin, angles, radius_or_dims, use_trigger = 0, func_per_player_msg) {
-  trigger_stub = spawnstruct();
+  trigger_stub = spawnStruct();
   trigger_stub.origin = origin;
   str_type = "unitrigger_radius";
   if(isvec(radius_or_dims)) {
@@ -41,7 +41,7 @@ function private spawn_unitrigger(origin, angles, radius_or_dims, use_trigger = 
     trigger_stub.script_width = radius_or_dims[1];
     trigger_stub.script_height = radius_or_dims[2];
     str_type = "unitrigger_box";
-    if(!isdefined(angles)) {
+    if(!isDefined(angles)) {
       angles = (0, 0, 0);
     }
     trigger_stub.angles = angles;
@@ -54,33 +54,33 @@ function private spawn_unitrigger(origin, angles, radius_or_dims, use_trigger = 
   } else {
     trigger_stub.script_unitrigger_type = str_type;
   }
-  if(isdefined(func_per_player_msg)) {
+  if(isDefined(func_per_player_msg)) {
     trigger_stub.func_unitrigger_message = func_per_player_msg;
     zm_unitrigger::unitrigger_force_per_player_triggers(trigger_stub, 1);
   }
-  trigger_stub.prompt_and_visibility_func = & function_5ea427bf;
-  zm_unitrigger::register_unitrigger(trigger_stub, & unitrigger_think);
+  trigger_stub.prompt_and_visibility_func = &function_5ea427bf;
+  zm_unitrigger::register_unitrigger(trigger_stub, &unitrigger_think);
   return trigger_stub;
 }
 
 function function_5ea427bf(player) {
   b_visible = 1;
-  if(isdefined(player.beastmode) && player.beastmode && (!(isdefined(self.allow_beastmode) && self.allow_beastmode))) {
+  if(isDefined(player.beastmode) && player.beastmode && (!(isDefined(self.allow_beastmode) && self.allow_beastmode))) {
     b_visible = 0;
-  } else if(isdefined(self.stub.func_unitrigger_visible)) {
+  } else if(isDefined(self.stub.func_unitrigger_visible)) {
     b_visible = self[[self.stub.func_unitrigger_visible]](player);
   }
-  str_msg = & "";
+  str_msg = &"";
   param1 = undefined;
   if(b_visible) {
-    if(isdefined(self.stub.func_unitrigger_message)) {
+    if(isDefined(self.stub.func_unitrigger_message)) {
       str_msg = self[[self.stub.func_unitrigger_message]](player);
     } else {
       str_msg = self.stub.hint_string;
       param1 = self.stub.hint_parm1;
     }
   }
-  if(isdefined(param1)) {
+  if(isDefined(param1)) {
     self sethintstring(str_msg, param1);
   } else {
     self sethintstring(str_msg);
@@ -91,7 +91,7 @@ function function_5ea427bf(player) {
 function private unitrigger_think() {
   self endon("kill_trigger");
   self.stub thread unitrigger_refresh_message();
-  while (true) {
+  while(true) {
     self waittill("trigger", player);
     self.stub notify("trigger", player);
   }
@@ -109,24 +109,24 @@ function function_acd04dc9() {
 
 function function_7448e472(e_target) {
   self endon("death");
-  if(isdefined(e_target.targetname)) {
+  if(isDefined(e_target.targetname)) {
     var_241c185a = "someone_revealed_" + e_target.targetname;
     self endon(var_241c185a);
   }
   var_c2b47c7a = 0;
   self.var_abd1c759 = e_target;
-  while (isdefined(e_target) && (!(isdefined(var_c2b47c7a) && var_c2b47c7a))) {
+  while(isDefined(e_target) && (!(isDefined(var_c2b47c7a) && var_c2b47c7a))) {
     if(self hasweapon(level.var_c003f5b)) {
       if(self util::ads_button_held()) {
         if(self getcurrentweapon() !== level.var_c003f5b) {
-          while (self adsbuttonpressed()) {
+          while(self adsbuttonpressed()) {
             wait(0.05);
           }
         } else if(self getammocount(level.var_c003f5b)) {
           if(self keeper_skull::function_3f3f64e9(e_target) && self keeper_skull::function_5fa274c1(e_target)) {
             self playrumbleonentity("zm_island_skull_reveal");
             n_count = 0;
-            while (self util::ads_button_held()) {
+            while(self util::ads_button_held()) {
               wait(1);
               n_count++;
               if(n_count >= 2) {
@@ -142,7 +142,7 @@ function function_7448e472(e_target) {
               foreach(player in level.players) {
                 if(e_target === player.var_abd1c759) {
                   player.var_abd1c759 = undefined;
-                  if(isdefined(var_241c185a) && player != self) {
+                  if(isDefined(var_241c185a) && player != self) {
                     player notify(var_241c185a);
                   }
                 }
@@ -170,13 +170,13 @@ function function_4aedb20b() {
 
 function function_925aa63a(var_fedda046, n_delay = 0.1, n_value, b_delete = 1) {
   foreach(var_1c7231df in var_fedda046) {
-    if(isdefined(var_1c7231df)) {
+    if(isDefined(var_1c7231df)) {
       var_1c7231df clientfield::set("do_fade_material", n_value);
       wait(n_delay);
     }
   }
   wait(1);
-  if(isdefined(b_delete) && b_delete) {
+  if(isDefined(b_delete) && b_delete) {
     foreach(var_1c7231df in var_fedda046) {
       var_1c7231df delete();
     }
@@ -199,7 +199,7 @@ function is_facing(target, n_tolerance = 0.707) {
   }
   var_7ef98cb2 = v_target - self.origin;
   var_7ec36342 = vectornormalize(var_7ef98cb2);
-  var_bedf3d47 = anglestoforward(self.angles);
+  var_bedf3d47 = anglesToForward(self.angles);
   var_c67c7281 = vectornormalize(var_bedf3d47);
   n_dot = vectordot(var_7ec36342, var_c67c7281);
   return n_dot >= n_tolerance;
@@ -222,14 +222,14 @@ function function_4bf4ac40(v_loc) {
   a_players = arraycopy(level.activeplayers);
   e_player = undefined;
   do {
-    if(isdefined(v_loc)) {
+    if(isDefined(v_loc)) {
       e_player = arraygetclosest(v_loc, a_players);
     } else {
       e_player = array::random(a_players);
     }
     arrayremovevalue(a_players, e_player);
   }
-  while (!zm_utility::is_player_valid(e_player) && a_players.size > 0);
+  while(!zm_utility::is_player_valid(e_player) && a_players.size > 0);
   return e_player;
 }
 
@@ -276,7 +276,7 @@ function swap_weapon(wpn_new) {
 
 function take_old_weapon_and_give_new(current_weapon, weapon) {
   a_weapons = self getweaponslistprimaries();
-  if(isdefined(a_weapons) && a_weapons.size >= zm_utility::get_player_weapon_limit(self)) {
+  if(isDefined(a_weapons) && a_weapons.size >= zm_utility::get_player_weapon_limit(self)) {
     self takeweapon(current_weapon);
   }
   var_7b9ca68 = self zm_weapons::give_build_kit_weapon(weapon);
@@ -298,26 +298,26 @@ function function_3420bc2f(wpn_new) {
 }
 
 function function_8faf1d24(v_color, var_8882142e, n_scale, str_endon) {
-  if(!isdefined(v_color)) {
+  if(!isDefined(v_color)) {
     v_color = vectorscale((0, 0, 1), 255);
   }
-  if(!isdefined(var_8882142e)) {
+  if(!isDefined(var_8882142e)) {
     var_8882142e = "";
   }
-  if(!isdefined(n_scale)) {
+  if(!isDefined(n_scale)) {
     n_scale = 0.25;
   }
-  if(!isdefined(str_endon)) {
+  if(!isDefined(str_endon)) {
     str_endon = "";
   }
   if(getdvarint("") == 0) {
     return;
   }
-  if(isdefined(str_endon)) {
+  if(isDefined(str_endon)) {
     self endon(str_endon);
   }
   origin = self.origin;
-  while (true) {
+  while(true) {
     print3d(origin, var_8882142e, v_color, n_scale);
     wait(0.1);
   }

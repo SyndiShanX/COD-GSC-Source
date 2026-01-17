@@ -13,35 +13,37 @@ stealth_visibility_system_main() {
   system_init();
 
   thread system_message_loop();
-  array_thread(getentarray("stealth_clipbrush", "targetname"), ::system_handle_clipbrush);
+  array_thread(getEntArray("stealth_clipbrush", "targetname"), ::system_handle_clipbrush);
 }
 
 /************************************************************************************************************/
+
 /*												SYSTEM LOGIC												*/
 /************************************************************************************************************/
+
 system_message_loop() {
   flag = "_stealth_spotted";
 
-  while (1) {
+  while(1) {
     flag_wait("_stealth_enabled");
 
     flag_wait(flag);
 
-    if(!flag("_stealth_enabled"))
+    if(!flag("_stealth_enabled")) {
       continue;
-
+    }
     system_event_change("spotted");
 
     thread system_state_spotted();
 
     flag_waitopen(flag);
 
-    if(!flag("_stealth_enabled"))
+    if(!flag("_stealth_enabled")) {
       continue;
-
+    }
     system_event_change("hidden");
 
-    //make sure everything gets a notify and does what it needs to do 
+    //make sure everything gets a notify and does what it needs to do
     //before possibly being reset within the same frame back to spotted
     waittillframeend;
   }
@@ -62,7 +64,7 @@ system_event_change(name) {
 
 //if system specific settings need to be made for this state...they go there
 system_state_spotted() {
-  while (flag("_stealth_spotted")) {
+  while(flag("_stealth_spotted")) {
     flag_wait("_stealth_enabled");
 
     array = level._stealth.group.groups;
@@ -70,12 +72,12 @@ system_state_spotted() {
     foreach(group_name, group in array) {
       //is this group spotted?
       _flag = group_get_flagname_from_group("_stealth_spotted", group_name);
-      if(!flag(_flag))
+      if(!flag(_flag)) {
         continue;
-
+      }
       thread system_state_try_clear_flag(group_name);
     }
-    //the most the last function will take is 1 second to complete...so lets wait a little longer 
+    //the most the last function will take is 1 second to complete...so lets wait a little longer
     flag_waitopen_or_timeout("_stealth_spotted", 1.25);
   }
 }
@@ -101,9 +103,9 @@ system_state_check_no_enemy(group_name) {
   group = group_get_ai_in_group(group_name);
 
   foreach(key, ai in group) {
-    if(!isalive(ai.enemy))
+    if(!isalive(ai.enemy)) {
       continue;
-
+    }
     return false;
   }
 
@@ -111,8 +113,10 @@ system_state_check_no_enemy(group_name) {
 }
 
 /************************************************************************************************************/
+
 /*												PLAYER LOGIC												*/
 /************************************************************************************************************/
+
 system_save_processes() {
   flag_init("_stealth_player_nade");
   level._stealth.logic.player_nades = 0;
@@ -121,10 +125,10 @@ system_save_processes() {
 }
 
 player_grenade_check() {
-  while (1) {
+  while(1) {
     //this one hit's as soon as the button is pressed - that's why we want
     //to set the flag here and not after the grenade has left the hand
-    //with "grenade fire" 
+    //with "grenade fire"
     self waittill("grenade_pullback");
     flag_set("_stealth_player_nade");
 
@@ -147,22 +151,22 @@ player_grenade_check_dieout(grenade) {
 }
 
 system_init_shadows() {
-  array_thread(getentarray("_stealth_shadow", "targetname"), ::stealth_shadow_volumes);
-  array_thread(getentarray("stealth_shadow", "targetname"), ::stealth_shadow_volumes);
+  array_thread(getEntArray("_stealth_shadow", "targetname"), ::stealth_shadow_volumes);
+  array_thread(getEntArray("stealth_shadow", "targetname"), ::stealth_shadow_volumes);
 }
 
 stealth_shadow_volumes() {
   self endon("death"); // it can be deleted
 
-  while (1) {
+  while(1) {
     self waittill("trigger", other);
 
-    if(!isalive(other))
+    if(!isalive(other)) {
       continue;
-
-    if(other ent_flag("_stealth_in_shadow"))
+    }
+    if(other ent_flag("_stealth_in_shadow")) {
       continue;
-
+    }
     other thread stealth_shadow_ai_in_volume(self);
   }
 }
@@ -172,19 +176,21 @@ stealth_shadow_ai_in_volume(volume) {
 
   self ent_flag_set("_stealth_in_shadow");
 
-  while (self istouching(volume))
+  while(self istouching(volume))
     wait .05;
 
   self ent_flag_clear("_stealth_in_shadow");
 }
 
 /************************************************************************************************************/
+
 /*											CLIP BRUSH LOGIC												*/
 /************************************************************************************************************/
+
 system_handle_clipbrush() {
   self endon("death");
 
-  if(isdefined(self.script_flag_wait))
+  if(isDefined(self.script_flag_wait))
     flag_wait(self.script_flag_wait);
 
   waittillframeend;
@@ -193,7 +199,7 @@ system_handle_clipbrush() {
   corpse_flag = "_stealth_found_corpse";
   event_flag = "_stealth_event";
 
-  if(isdefined(self.script_stealthgroup)) {
+  if(isDefined(self.script_stealthgroup)) {
     group_wait_group_spawned(string(self.script_stealthgroup));
 
     spotted_flag = group_get_flagname_from_group(spotted_flag, self.script_stealthgroup);
@@ -201,7 +207,7 @@ system_handle_clipbrush() {
     event_flag = group_get_flagname_from_group(event_flag, self.script_stealthgroup);
   }
 
-  self setcandamage(true);
+  self setCanDamage(true);
 
   self add_wait(::waittill_msg, "damage");
   level add_wait(::flag_wait, spotted_flag);
@@ -216,22 +222,23 @@ system_handle_clipbrush() {
 }
 
 /************************************************************************************************************/
+
 /*													SETUP													*/
 /************************************************************************************************************/
+
 system_init() {
   flag_init("_stealth_spotted");
   flag_init("_stealth_event");
   flag_init("_stealth_enabled");
   flag_set("_stealth_enabled");
 
-  /#
   thread stealth_flag_debug_print("_stealth_spotted");
-  # /
-    //under stealth we have a logic struct and a behavior struct...the behavior struct is created and
-    //handled in the _stealth_behavior system OR in the designers own script
-    level._stealth = spawnstruct();
-  level._stealth.logic = spawnstruct();
-  level._stealth.group = spawnstruct();
+
+  //under stealth we have a logic struct and a behavior struct...the behavior struct is created and
+  //handled in the _stealth_behavior system OR in the designers own script
+  level._stealth = spawnStruct();
+  level._stealth.logic = spawnStruct();
+  level._stealth.group = spawnStruct();
   level._stealth.group.flags = [];
   level._stealth.group.groups = [];
 
@@ -243,7 +250,7 @@ system_init() {
   system_default_detect_ranges();
 
   //these are event handlers...they're already running in the game normally, but with these numbers we can
-  //tweak how well they AI can detect these events...for stealth gameplay we bring the numbers for 
+  //tweak how well they AI can detect these events...for stealth gameplay we bring the numbers for
   //footsteps, death of a teammate, etc, etc rediculously lower than normal COD gameplay
   level._stealth.logic.ai_event = [];
 
@@ -268,10 +275,12 @@ system_init() {
 }
 
 /************************************************************************************************************/
+
 /*												UTILITIES													*/
 /************************************************************************************************************/
+
 system_default_detect_ranges() {
-  //these values represent the BASE huristic for max visible distance base meaning 
+  //these values represent the BASE huristic for max visible distance base meaning
   //when the character is completely still and not turning or moving
   //HIDDEN is self explanatory
   hidden = [];
@@ -291,11 +300,11 @@ system_default_detect_ranges() {
 }
 
 system_set_detect_ranges(hidden, spotted) {
-  //these values represent the BASE huristic for max visible distance base meaning 
+  //these values represent the BASE huristic for max visible distance base meaning
   //when the character is completely still and not turning or moving
 
   //HIDDEN is self explanatory
-  if(isdefined(hidden)) {
+  if(isDefined(hidden)) {
     level._stealth.logic.detect_range["hidden"]["prone"] = hidden["prone"];
     level._stealth.logic.detect_range["hidden"]["crouch"] = hidden["crouch"];
     level._stealth.logic.detect_range["hidden"]["stand"] = hidden["stand"];
@@ -303,7 +312,7 @@ system_set_detect_ranges(hidden, spotted) {
   //SPOTTED is when they are completely aware and go into NORMAL COD AI mode...however, the
   //distance they can see you is still limited by these numbers because of the assumption that
   //you're wearing a ghillie suit in woodsy areas
-  if(isdefined(spotted)) {
+  if(isDefined(spotted)) {
     level._stealth.logic.detect_range["spotted"]["prone"] = spotted["prone"];
     level._stealth.logic.detect_range["spotted"]["crouch"] = spotted["crouch"];
     level._stealth.logic.detect_range["spotted"]["stand"] = spotted["stand"];

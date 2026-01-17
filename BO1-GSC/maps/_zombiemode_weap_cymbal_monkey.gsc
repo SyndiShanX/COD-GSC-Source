@@ -72,7 +72,7 @@ player_handle_cymbal_monkey() {
         model.origin = grenade.origin;
         model.angles = grenade.angles;
         grenade resetmissiledetonationtime();
-        PlayFxOnTag(level._effect["monkey_glow"], model, "origin_animate_jnt");
+        playFXOnTag(level._effect["monkey_glow"], model, "origin_animate_jnt");
         valid_poi = check_point_in_active_zone(grenade.origin);
         if(!valid_poi) {
           valid_poi = check_point_in_playable_area(grenade.origin);
@@ -108,11 +108,11 @@ monkey_cleanup(parent) {
 do_monkey_sound(model, info) {
   monk_scream_vox = false;
   if(isDefined(level.monk_scream_trig) && self IsTouching(level.monk_scream_trig)) {
-    self playsound("zmb_vox_monkey_scream");
+    self playSound("zmb_vox_monkey_scream");
     monk_scream_vox = true;
   } else if(level.music_override == false) {
     monk_scream_vox = false;
-    self playsound("zmb_monkey_song");
+    self playSound("zmb_monkey_song");
   }
   self thread play_delayed_explode_vox();
   self waittill("explode", position);
@@ -132,7 +132,7 @@ do_monkey_sound(model, info) {
 play_delayed_explode_vox() {
   wait(6.5);
   if(isDefined(self)) {
-    self playsound("zmb_vox_monkey_explode");
+    self playSound("zmb_vox_monkey_explode");
   }
 }
 
@@ -184,7 +184,7 @@ play_zombie_groans() {
   self endon("monkey_blown_up");
   while(1) {
     if(isDefined(self)) {
-      self playsound("zmb_vox_zombie_groan");
+      self playSound("zmb_vox_zombie_groan");
       wait randomfloatrange(2, 3);
     } else {
       return;

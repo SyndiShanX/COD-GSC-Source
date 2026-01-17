@@ -5,19 +5,19 @@
 ********************************/
 
 aud_init(var_0) {
-  if(isdefined(var_0))
+  if(isDefined(var_0))
     aud_set_level_fade_time(var_0);
 
   soundscripts\_snd::snd_init();
 
-  if(!isdefined(level.aud))
-    level.aud = spawnstruct();
+  if(!isDefined(level.aud))
+    level.aud = spawnStruct();
 
-  if(!isdefined(level.script))
+  if(!isDefined(level.script))
     level.script = tolower(getdvar("mapname"));
 
-  if(!isdefined(level._audio))
-    level._audio = spawnstruct();
+  if(!isDefined(level._audio))
+    level._audio = spawnStruct();
 
   level._audio.using_string_tables = 0;
   level._audio.stringtables = [];
@@ -26,7 +26,7 @@ aud_init(var_0) {
   level._audio.progress_maps = [];
   level._audio.vo_duck_active = 0;
   level._audio.sticky_threat = undefined;
-  level._audio.player_state = spawnstruct();
+  level._audio.player_state = spawnStruct();
   level._audio.player_state.locamote = "idle";
   level._audio.player_state.locamote_prev = "idle";
   level.ambient_reverb = [];
@@ -51,14 +51,14 @@ aud_init(var_0) {
 }
 
 aud_set_level_fade_time(var_0) {
-  if(!isdefined(level._audio))
-    level._audio = spawnstruct();
+  if(!isDefined(level._audio))
+    level._audio = spawnStruct();
 
   level._audio.level_fade_time = var_0;
 }
 
 aud_level_fadein() {
-  if(!isdefined(level._audio.level_fade_time))
+  if(!isDefined(level._audio.level_fade_time))
     level._audio.level_fade_time = 1.0;
 
   wait 0.05;
@@ -70,12 +70,12 @@ aud_level_fadein() {
 }
 
 aud_is_specops() {
-  return isdefined(level._audio.specops);
+  return isDefined(level._audio.specops);
 }
 
 audx_set_spec_ops() {
-  if(!isdefined(level._audio))
-    level._audio = spawnstruct();
+  if(!isDefined(level._audio))
+    level._audio = spawnStruct();
 
   level._audio.specops = 1;
 }
@@ -92,12 +92,12 @@ aud_play_line_emitter(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = 0.1;
   var_7 = 0.1;
 
-  if(isdefined(var_4)) {
+  if(isDefined(var_4)) {
     var_6 = max(var_4, 0);
     var_7 = max(var_4, 0);
   }
 
-  if(isdefined(var_5))
+  if(isDefined(var_5))
     var_7 = max(var_5, 0);
 
   var_8 = spawn("script_origin", (0, 0, 0));
@@ -123,7 +123,7 @@ audx_play_line_emitter_internal() {
   var_2 = distance(self.point1, self.point2);
   var_3 = 0.1;
 
-  for (;;) {
+  for(;;) {
     var_4 = level.player.origin - self.point1;
     var_5 = vectordot(var_4, var_1);
     var_5 = clamp(var_5, 0, var_2);
@@ -189,7 +189,7 @@ aud_set_ambi_submix(var_0, var_1) {
 aud_get_music_submix() {
   var_0 = 1.0;
 
-  if(isdefined(level._audio.curr_music_submix))
+  if(isDefined(level._audio.curr_music_submix))
     var_0 = level._audio.curr_music_submix;
 
   return var_0;
@@ -198,75 +198,75 @@ aud_get_music_submix() {
 aud_get_ambi_submix() {
   var_0 = 1.0;
 
-  if(isdefined(level._audio.curr_ambi_submix))
+  if(isDefined(level._audio.curr_ambi_submix))
     var_0 = level._audio.curr_ambi_submix;
 
   return var_0;
 }
 
 trigger_multiple_audio_trigger(var_0) {
-  if(!isdefined(level._audio))
-    level._audio = spawnstruct();
+  if(!isDefined(level._audio))
+    level._audio = spawnStruct();
 
-  if(!isdefined(level._audio.trigger_functions))
+  if(!isDefined(level._audio.trigger_functions))
     level._audio.trigger_functions = [];
 
   var_1 = undefined;
 
-  if(isdefined(var_0) && var_0) {
-    if(isdefined(self.ambient))
+  if(isDefined(var_0) && var_0) {
+    if(isDefined(self.ambient))
       var_1 = strtok(self.ambient, " ");
-  } else if(isdefined(self.script_audio_zones))
+  } else if(isDefined(self.script_audio_zones))
     var_1 = strtok(self.script_audio_zones, " ");
-  else if(isdefined(self.audio_zones))
+  else if(isDefined(self.audio_zones))
     var_1 = strtok(self.audio_zones, " ");
 
-  if(isdefined(var_1) && var_1.size == 2) {} else if(isdefined(var_1) && var_1.size == 1) {
-    for (;;) {
+  if(isDefined(var_1) && var_1.size == 2) {} else if(isDefined(var_1) && var_1.size == 1) {
+    for(;;) {
       self waittill("trigger", var_2);
       soundscripts\_audio_zone_manager::azm_start_zone(var_1[0], self.script_duration);
     }
   }
 
-  if(isdefined(self.script_audio_progress_map)) {
-    if(!isdefined(level._audio.progress_maps[self.script_audio_progress_map])) {
+  if(isDefined(self.script_audio_progress_map)) {
+    if(!isDefined(level._audio.progress_maps[self.script_audio_progress_map])) {
       aud_print_error("Trying to set a progress_map_function without defining the envelope in the level.aud.envs array.");
       self.script_audio_progress_map = undefined;
     }
   }
 
-  if(!isdefined(level._audio.trigger_function_keys))
+  if(!isDefined(level._audio.trigger_function_keys))
     level._audio.trigger_function_keys = [];
 
-  if(isdefined(self.script_audio_enter_func))
+  if(isDefined(self.script_audio_enter_func))
     level._audio.trigger_function_keys[level._audio.trigger_function_keys.size] = self.script_audio_enter_func;
 
-  if(isdefined(self.script_audio_exit_func))
+  if(isDefined(self.script_audio_exit_func))
     level._audio.trigger_function_keys[level._audio.trigger_function_keys.size] = self.script_audio_exit_func;
 
-  if(isdefined(self.script_audio_progress_func))
+  if(isDefined(self.script_audio_progress_func))
     level._audio.trigger_function_keys[level._audio.trigger_function_keys.size] = self.script_audio_progress_func;
 
-  if(isdefined(self.script_audio_point_func))
+  if(isDefined(self.script_audio_point_func))
     level._audio.trigger_function_keys[level._audio.trigger_function_keys.size] = self.script_audio_point_func;
 
-  if(!isdefined(self.script_audio_blend_mode))
+  if(!isDefined(self.script_audio_blend_mode))
     self.script_audio_blend_mode = "blend";
 
   var_3 = undefined;
   var_4 = undefined;
   var_5 = undefined;
 
-  if(isdefined(self.target)) {
-    if(!isdefined(common_scripts\utility::get_target_ent())) {
+  if(isDefined(self.target)) {
+    if(!isDefined(common_scripts\utility::get_target_ent())) {
       aud_print_error("Audo Zone Trigger at " + self.origin + " has defined a target, " + self.target + ", but that target doesn't exist.");
       return;
     }
 
-    if(isdefined(trigger_multiple_audio_get_target_ent_target())) {
+    if(isDefined(trigger_multiple_audio_get_target_ent_target())) {
       var_3 = trigger_multiple_audio_get_target_ent_origin();
 
-      if(!isdefined(trigger_multiple_audio_get_target_ent_target_ent())) {
+      if(!isDefined(trigger_multiple_audio_get_target_ent_target_ent())) {
         aud_print_error("Audo Zone Trigger at " + self.origin + " has defined a target, " + trigger_multiple_audio_get_target_ent_target() + ", but that target doesn't exist.");
         return;
       }
@@ -290,14 +290,14 @@ trigger_multiple_audio_trigger(var_0) {
 
   var_9 = 0;
 
-  for (;;) {
+  for(;;) {
     self waittill("trigger", var_2);
 
     if(aud_is_specops() && var_2 != level.player) {
       continue;
     }
-    if(isdefined(var_3) && isdefined(var_4)) {
-      if(isdefined(var_1) && isdefined(var_1[0]) && isdefined(var_1[1])) {
+    if(isDefined(var_3) && isDefined(var_4)) {
+      if(isDefined(var_1) && isDefined(var_1[0]) && isDefined(var_1[1])) {
         var_10 = soundscripts\_audio_zone_manager::azm_get_current_zone();
 
         if(var_10 == var_1[0])
@@ -314,9 +314,7 @@ trigger_multiple_audio_trigger(var_0) {
             soundscripts\_audio_zone_manager::azm_start_zone(var_1[1]);
             var_9 = 1;
           }
-        } else {
-
-        }
+        } else {}
       } else {
         var_11 = trigger_multiple_audio_progress(var_3, var_4, var_5, var_2.origin);
 
@@ -327,61 +325,61 @@ trigger_multiple_audio_trigger(var_0) {
       }
 
       if(!var_9) {
-        if(isdefined(var_1) && isdefined(var_1[0])) {
-          if(isdefined(level._snd) && isdefined(var_1[1])) {
+        if(isDefined(var_1) && isDefined(var_1[0])) {
+          if(isDefined(level._snd) && isDefined(var_1[1])) {
             var_12 = "enter_" + var_1[1];
             soundscripts\_snd::snd_message("snd_zone_handler", var_12, var_1[0]);
-          } else if(isdefined(self.script_audio_enter_msg))
+          } else if(isDefined(self.script_audio_enter_msg))
             deprecated_aud_send_msg(self.script_audio_enter_msg, var_1[0]);
-        } else if(isdefined(self.script_audio_enter_msg))
+        } else if(isDefined(self.script_audio_enter_msg))
           deprecated_aud_send_msg(self.script_audio_enter_msg, "front");
 
-        if(isdefined(self.script_audio_enter_func)) {
-          if(isdefined(var_1) && isdefined(var_1[0])) {
-            if(isdefined(level._audio.trigger_functions[self.script_audio_enter_func]))
+        if(isDefined(self.script_audio_enter_func)) {
+          if(isDefined(var_1) && isDefined(var_1[0])) {
+            if(isDefined(level._audio.trigger_functions[self.script_audio_enter_func]))
               [[level._audio.trigger_functions[self.script_audio_enter_func]]](var_1[0]);
-          } else if(isdefined(level._audio.trigger_functions[self.script_audio_enter_func]))
+          } else if(isDefined(level._audio.trigger_functions[self.script_audio_enter_func]))
             [[level._audio.trigger_functions[self.script_audio_enter_func]]]("front");
         }
       } else {
-        if(isdefined(var_1) && isdefined(var_1[1])) {
-          if(isdefined(level._snd)) {
+        if(isDefined(var_1) && isDefined(var_1[1])) {
+          if(isDefined(level._snd)) {
             var_12 = "enter_" + var_1[1];
             soundscripts\_snd::snd_message("snd_zone_handler", var_12, var_1[1]);
-          } else if(isdefined(self.script_audio_enter_msg))
+          } else if(isDefined(self.script_audio_enter_msg))
             deprecated_aud_send_msg(self.script_audio_enter_msg, var_1[1]);
-        } else if(isdefined(self.script_audio_enter_msg))
+        } else if(isDefined(self.script_audio_enter_msg))
           deprecated_aud_send_msg(self.script_audio_enter_msg, "back");
 
-        if(isdefined(self.script_audio_enter_func)) {
-          if(isdefined(var_1) && isdefined(var_1[1])) {
-            if(isdefined(level._audio.trigger_functions[self.script_audio_enter_func]))
+        if(isDefined(self.script_audio_enter_func)) {
+          if(isDefined(var_1) && isDefined(var_1[1])) {
+            if(isDefined(level._audio.trigger_functions[self.script_audio_enter_func]))
               [[level._audio.trigger_functions[self.script_audio_enter_func]]](var_1[1]);
-          } else if(isdefined(level._audio.trigger_functions[self.script_audio_enter_func]))
+          } else if(isDefined(level._audio.trigger_functions[self.script_audio_enter_func]))
             [[level._audio.trigger_functions[self.script_audio_enter_func]]]("back");
         }
       }
     } else {
-      if(isdefined(self.script_audio_enter_msg))
+      if(isDefined(self.script_audio_enter_msg))
         deprecated_aud_send_msg(self.script_audio_enter_msg);
 
-      if(isdefined(self.script_audio_enter_func)) {
-        if(isdefined(level._audio.trigger_functions[self.script_audio_enter_func]))
+      if(isDefined(self.script_audio_enter_func)) {
+        if(isDefined(level._audio.trigger_functions[self.script_audio_enter_func]))
           [[level._audio.trigger_functions[self.script_audio_enter_func]]]();
       }
     }
 
     var_13 = undefined;
 
-    if(isdefined(trigger_multiple_audio_get_zone_from(var_1, var_9)) && isdefined(trigger_multiple_audio_get_zone_to(var_1, var_9))) {
+    if(isDefined(trigger_multiple_audio_get_zone_from(var_1, var_9)) && isDefined(trigger_multiple_audio_get_zone_to(var_1, var_9))) {
       var_13 = soundscripts\_audio_zone_manager::azmx_get_blend_args(trigger_multiple_audio_get_zone_from(var_1, var_9), trigger_multiple_audio_get_zone_to(var_1, var_9));
 
-      if(isdefined(var_13))
+      if(isDefined(var_13))
         var_13.mode = self.script_audio_blend_mode;
     }
 
-    if(isdefined(var_13)) {
-      if(isdefined(var_13.filter1) || isdefined(var_13.filter2)) {
+    if(isDefined(var_13)) {
+      if(isDefined(var_13.filter1) || isDefined(var_13.filter2)) {
         if(!level._audio.zone_mgr.overrides.filter_bypass) {
           soundscripts\_snd_filters::snd_clear_filter(0);
           soundscripts\_snd_filters::snd_clear_filter(1);
@@ -392,33 +390,33 @@ trigger_multiple_audio_trigger(var_0) {
     var_14 = -1;
     var_11 = -1;
 
-    while (var_2 istouching(self)) {
-      if(isdefined(self.script_audio_point_func)) {
+    while(var_2 istouching(self)) {
+      if(isDefined(self.script_audio_point_func)) {
         var_15 = trigger_multiple_audio_progress_point(var_3, var_4, var_2.origin);
 
-        if(isdefined(level._audio.trigger_functions[self.script_audio_point_func]))
+        if(isDefined(level._audio.trigger_functions[self.script_audio_point_func]))
           [[level._audio.trigger_functions[self.script_audio_point_func]]](var_15);
       }
 
-      if(isdefined(var_3) && isdefined(var_4)) {
+      if(isDefined(var_3) && isDefined(var_4)) {
         var_11 = trigger_multiple_audio_progress(var_3, var_4, var_5, var_2.origin);
 
-        if(isdefined(self.script_audio_progress_map))
+        if(isDefined(self.script_audio_progress_map))
           var_11 = deprecated_aud_map(var_11, level._audio.progress_maps[self.script_audio_progress_map]);
 
         if(var_11 != var_14) {
-          if(isdefined(trigger_multiple_audio_get_zone_from(var_1, var_9)) && isdefined(trigger_multiple_audio_get_zone_to(var_1, var_9)))
+          if(isDefined(trigger_multiple_audio_get_zone_from(var_1, var_9)) && isDefined(trigger_multiple_audio_get_zone_to(var_1, var_9)))
             soundscripts\_audio_zone_manager::azm_print_enter_blend(trigger_multiple_audio_get_zone_from(var_1, var_9), trigger_multiple_audio_get_zone_to(var_1, var_9), var_11);
 
-          if(isdefined(self.script_audio_progress_msg))
+          if(isDefined(self.script_audio_progress_msg))
             deprecated_aud_send_msg(self.script_audio_progress_msg, var_11);
 
-          if(isdefined(self.script_audio_progress_func)) {
-            if(isdefined(level._audio.trigger_functions[self.script_audio_progress_func]))
+          if(isDefined(self.script_audio_progress_func)) {
+            if(isDefined(level._audio.trigger_functions[self.script_audio_progress_func]))
               [[level._audio.trigger_functions[self.script_audio_progress_func]]](var_11);
           }
 
-          if(isdefined(var_13))
+          if(isDefined(var_13))
             trigger_multiple_audio_blend(var_11, var_13, var_9);
 
           var_14 = var_11;
@@ -426,7 +424,7 @@ trigger_multiple_audio_trigger(var_0) {
         }
       }
 
-      if(isdefined(self.script_audio_update_rate)) {
+      if(isDefined(self.script_audio_update_rate)) {
         wait(self.script_audio_update_rate);
         continue;
       }
@@ -434,64 +432,64 @@ trigger_multiple_audio_trigger(var_0) {
       wait 0.1;
     }
 
-    if(isdefined(var_3) && isdefined(var_4)) {
+    if(isDefined(var_3) && isDefined(var_4)) {
       if(var_11 > 0.5) {
-        if(isdefined(var_1) && isdefined(var_1[1]))
+        if(isDefined(var_1) && isDefined(var_1[1]))
           soundscripts\_audio_zone_manager::azm_set_current_zone(var_1[1]);
 
-        if(isdefined(var_1) && isdefined(var_1[1])) {
-          if(isdefined(level._snd)) {
+        if(isDefined(var_1) && isDefined(var_1[1])) {
+          if(isDefined(level._snd)) {
             var_16 = "exit_" + var_1[1];
             soundscripts\_snd::snd_message("snd_zone_handler", var_16, var_1[1]);
-          } else if(isdefined(self.script_audio_exit_msg))
+          } else if(isDefined(self.script_audio_exit_msg))
             deprecated_aud_send_msg(self.script_audio_exit_msg, var_1[1]);
-        } else if(isdefined(self.script_audio_exit_msg))
+        } else if(isDefined(self.script_audio_exit_msg))
           deprecated_aud_send_msg(self.script_audio_exit_msg, "back");
 
-        if(isdefined(self.script_audio_exit_func)) {
-          if(isdefined(var_1) && isdefined(var_1[1])) {
-            if(isdefined(level._audio.trigger_functions[self.script_audio_exit_func]))
+        if(isDefined(self.script_audio_exit_func)) {
+          if(isDefined(var_1) && isDefined(var_1[1])) {
+            if(isDefined(level._audio.trigger_functions[self.script_audio_exit_func]))
               [[level._audio.trigger_functions[self.script_audio_exit_func]]](var_1[1]);
-          } else if(isdefined(level._audio.trigger_functions[self.script_audio_exit_func]))
+          } else if(isDefined(level._audio.trigger_functions[self.script_audio_exit_func]))
             [[level._audio.trigger_functions[self.script_audio_exit_func]]]("back");
         }
 
         var_11 = 1;
       } else {
-        if(isdefined(var_1) && isdefined(var_1[0]))
+        if(isDefined(var_1) && isDefined(var_1[0]))
           soundscripts\_audio_zone_manager::azm_set_current_zone(var_1[0]);
 
-        if(isdefined(var_1) && isdefined(var_1[0])) {
-          if(isdefined(level._snd)) {
+        if(isDefined(var_1) && isDefined(var_1[0])) {
+          if(isDefined(level._snd)) {
             var_16 = "exit_" + var_1[1];
             soundscripts\_snd::snd_message("snd_zone_handler", var_16, var_1[0]);
-          } else if(isdefined(self.script_audio_exit_msg))
+          } else if(isDefined(self.script_audio_exit_msg))
             deprecated_aud_send_msg(self.script_audio_exit_msg, var_1[0]);
-        } else if(isdefined(self.script_audio_exit_msg))
+        } else if(isDefined(self.script_audio_exit_msg))
           deprecated_aud_send_msg(self.script_audio_exit_msg, "front");
 
-        if(isdefined(self.script_audio_exit_func)) {
-          if(isdefined(var_1) && isdefined(var_1[0])) {
-            if(isdefined(level._audio.trigger_functions[self.script_audio_exit_func]))
+        if(isDefined(self.script_audio_exit_func)) {
+          if(isDefined(var_1) && isDefined(var_1[0])) {
+            if(isDefined(level._audio.trigger_functions[self.script_audio_exit_func]))
               [[level._audio.trigger_functions[self.script_audio_exit_func]]](var_1[0]);
-          } else if(isdefined(level._audio.trigger_functions[self.script_audio_exit_func]))
+          } else if(isDefined(level._audio.trigger_functions[self.script_audio_exit_func]))
             [[level._audio.trigger_functions[self.script_audio_exit_func]]]("front");
         }
 
         var_11 = 0;
       }
 
-      if(isdefined(var_13))
+      if(isDefined(var_13))
         trigger_multiple_audio_blend(var_11, var_13, var_9);
 
       continue;
     }
 
-    if(isdefined(self.script_audio_exit_msg))
+    if(isDefined(self.script_audio_exit_msg))
       deprecated_aud_send_msg(self.script_audio_exit_msg);
 
-    if(isdefined(self.script_audio_exit_func)) {
-      if(isdefined(level._audio.trigger_functions[self.script_audio_exit_func]))
+    if(isDefined(self.script_audio_exit_func)) {
+      if(isDefined(level._audio.trigger_functions[self.script_audio_exit_func]))
         [[level._audio.trigger_functions[self.script_audio_exit_func]]]();
     }
   }
@@ -501,7 +499,7 @@ trigger_multiple_audio_progress(var_0, var_1, var_2, var_3) {
   if(var_2 == 0)
     return 0;
 
-  if(!isdefined(self.script_audio_use_distance_only)) {
+  if(!isDefined(self.script_audio_use_distance_only)) {
     var_4 = vectornormalize(var_1 - var_0);
     var_5 = var_3 - var_0;
     var_6 = vectordot(var_5, var_4);
@@ -540,20 +538,18 @@ trigger_multiple_audio_blend(var_0, var_1, var_2) {
 }
 
 trigger_multiple_audio_register_callback(var_0) {
-  if(!isdefined(level._audio.trigger_functions))
+  if(!isDefined(level._audio.trigger_functions))
     level._audio.trigger_functions = [];
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++) {
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_2 = var_0[var_1];
     var_3 = var_2[0];
     var_4 = var_2[1];
     level._audio.trigger_functions[var_3] = var_4;
   }
 
-  if(isdefined(level._audio.trigger_function_keys)) {
-    foreach(var_3 in level._audio.trigger_function_keys) {
-
-    }
+  if(isDefined(level._audio.trigger_function_keys)) {
+    foreach(var_3 in level._audio.trigger_function_keys) {}
 
     level._audio.trigger_function_keys = undefined;
   }
@@ -580,7 +576,7 @@ trigger_multiple_audio_get_target_ent_target_ent_origin() {
 }
 
 trigger_multiple_audio_get_zone_from(var_0, var_1) {
-  if(!isdefined(var_0) || !isdefined(var_1))
+  if(!isDefined(var_0) || !isDefined(var_1))
     return undefined;
 
   if(var_1)
@@ -590,7 +586,7 @@ trigger_multiple_audio_get_zone_from(var_0, var_1) {
 }
 
 trigger_multiple_audio_get_zone_to(var_0, var_1) {
-  if(!isdefined(var_0) || !isdefined(var_1))
+  if(!isDefined(var_0) || !isDefined(var_1))
     return undefined;
 
   if(var_1)
@@ -603,10 +599,10 @@ aud_play_dynamic_explosion(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = spawn("script_origin", level.player.origin);
   var_7 = spawn("script_origin", var_0);
 
-  if(!isdefined(var_3))
+  if(!isDefined(var_3))
     var_3 = distance(var_7.origin, var_6.origin);
 
-  if(!isdefined(var_4)) {
+  if(!isDefined(var_4)) {
     var_8 = 30;
     var_4 = 36 * var_8;
   }
@@ -616,12 +612,12 @@ aud_play_dynamic_explosion(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_9[1] = (var_9[1][0], var_9[1][1], var_6.origin[2]);
   var_10 = distance(var_7.origin, var_9[0]);
 
-  if(!isdefined(var_5))
+  if(!isDefined(var_5))
     var_5 = 1800;
 
   var_11 = var_10 / var_5;
 
-  if(isdefined(var_9) && var_9.size == 2) {
+  if(isDefined(var_9) && var_9.size == 2) {
     var_12 = spawn("script_origin", var_7.origin);
     var_13 = spawn("script_origin", var_7.origin);
     var_12 soundscripts\_snd_playsound::snd_play(var_1);
@@ -657,7 +653,7 @@ audx_do_dynamic_explosion_math(var_0, var_1, var_2, var_3) {
 aud_get_optional_param(var_0, var_1) {
   var_2 = var_0;
 
-  if(isdefined(var_1))
+  if(isDefined(var_1))
     var_2 = var_1;
 
   return var_2;
@@ -714,14 +710,14 @@ aud_print_zone_small(var_0) {
 }
 
 equal_strings(var_0, var_1) {
-  if(isdefined(var_0) && isdefined(var_1))
+  if(isDefined(var_0) && isDefined(var_1))
     return var_0 == var_1;
   else
-    return !isdefined(var_0) && !isdefined(var_1);
+    return !isDefined(var_0) && !isDefined(var_1);
 }
 
 isundefined(var_0) {
-  return !isdefined(var_0);
+  return !isDefined(var_0);
 }
 
 aud_fade_out_and_delete(var_0, var_1) {
@@ -772,7 +768,7 @@ aud_scale_envelope(var_0, var_1, var_2) {
   var_1 = aud_get_optional_param(1, var_1);
   var_2 = aud_get_optional_param(1, var_2);
 
-  for (var_3 = 0; var_3 < var_0.size; var_3++) {
+  for(var_3 = 0; var_3 < var_0.size; var_3++) {
     var_0[var_3][0] = var_0[var_3][0] * var_1;
     var_0[var_3][1] = var_0[var_3][1] * var_2;
   }
@@ -791,7 +787,7 @@ aud_is_even(var_0) {
 aud_fade_in_music(var_0) {
   var_1 = 10.0;
 
-  if(isdefined(var_0))
+  if(isDefined(var_0))
     var_1 = var_0;
 
   soundscripts\_audio_mix_manager::mm_add_submix("mute_music", 0.1);
@@ -802,12 +798,12 @@ aud_fade_in_music(var_0) {
 aud_check_sound_done() {
   self endon("cleanup");
 
-  if(!isdefined(self.sounddone))
+  if(!isDefined(self.sounddone))
     self.sounddone = 0;
 
   self waittill("sounddone");
 
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     self.sounddone = 1;
     self notify("cleanup");
   }
@@ -818,22 +814,22 @@ aud_in_zone(var_0) {
 }
 
 aud_find_exploder(var_0) {
-  if(isdefined(level.createfxexploders)) {
+  if(isDefined(level.createfxexploders)) {
     var_1 = level.createfxexploders["" + var_0];
 
-    if(isdefined(var_1))
+    if(isDefined(var_1))
       return var_1[0];
   } else {
-    for (var_2 = 0; var_2 < level.createfxent.size; var_2++) {
+    for(var_2 = 0; var_2 < level.createfxent.size; var_2++) {
       var_3 = level.createfxent[var_2];
 
-      if(!isdefined(var_3)) {
+      if(!isDefined(var_3)) {
         continue;
       }
       if(var_3.v["type"] != "exploder") {
         continue;
       }
-      if(!isdefined(var_3.v["exploder"])) {
+      if(!isDefined(var_3.v["exploder"])) {
         continue;
       }
       if(int(var_3.v["exploder"]) != var_0) {
@@ -854,12 +850,12 @@ audx_duck(var_0, var_1, var_2, var_3) {
   var_1 = clamp(var_1, 0, 10);
   var_4 = 1.0;
 
-  if(isdefined(var_2))
+  if(isDefined(var_2))
     var_4 = var_2;
 
   var_5 = var_4;
 
-  if(isdefined(var_3))
+  if(isDefined(var_3))
     var_5 = var_3;
 
   soundscripts\_audio_mix_manager::mm_add_submix(var_0, var_4);
@@ -881,13 +877,11 @@ aud_start_slow_mo_gunshot_callback(var_0, var_1) {
   var_6 = 0;
   var_7 = level.player getcurrentweapon();
 
-  for (;;) {
+  for(;;) {
     if(level.player attackbuttonpressed()) {
       if(!var_6) {
         var_6 = 1;
-        [
-          [var_0]
-        ](var_7);
+        [[var_0]](var_7);
       }
     } else
       var_6 = 0;
@@ -900,10 +894,10 @@ aud_impact_monitor(var_0) {
   level endon("aud_stop_slow_mo_gunshot");
   var_1 = level.player getcurrentweapon();
 
-  for (;;) {
+  for(;;) {
     self waittill("damage", var_2, var_3, var_4, var_5, var_6);
 
-    if(isdefined(var_5))
+    if(isDefined(var_5))
       [[var_0]](var_1, var_2, var_3, var_5, var_6);
   }
 }
@@ -913,10 +907,10 @@ aud_stop_slow_mo_gunshot_callback() {
 }
 
 aud_wait_delay(var_0, var_1, var_2, var_3) {
-  if(isdefined(var_2)) {
+  if(isDefined(var_2)) {
     var_4 = 60;
 
-    if(isdefined(var_3))
+    if(isDefined(var_3))
       var_4 = var_3;
 
     var_5 = floor(var_0);
@@ -926,7 +920,7 @@ aud_wait_delay(var_0, var_1, var_2, var_3) {
 
   var_7 = var_0;
 
-  if(isdefined(var_1) && var_1)
+  if(isDefined(var_1) && var_1)
     aud_slomo_wait(var_7);
   else
     wait(var_7);
@@ -942,7 +936,7 @@ aud_slomo_wait(var_0) {
 audx_slomo_wait(var_0) {
   var_1 = 0;
 
-  while (var_1 < var_0) {
+  while(var_1 < var_0) {
     var_2 = getdvarfloat("com_timescale");
     var_1 = var_1 + 0.05 / var_2;
     wait 0.05;
@@ -952,7 +946,7 @@ audx_slomo_wait(var_0) {
 }
 
 aud_print_3d_on_ent(var_0, var_1, var_2, var_3, var_4) {
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     var_5 = (1, 1, 1);
     var_6 = (1, 0, 0);
     var_7 = (0, 1, 0);
@@ -960,10 +954,10 @@ aud_print_3d_on_ent(var_0, var_1, var_2, var_3, var_4) {
     var_9 = 5;
     var_10 = var_5;
 
-    if(isdefined(var_1))
+    if(isDefined(var_1))
       var_9 = var_1;
 
-    if(isdefined(var_2)) {
+    if(isDefined(var_2)) {
       var_10 = var_2;
 
       switch (var_10) {
@@ -984,16 +978,16 @@ aud_print_3d_on_ent(var_0, var_1, var_2, var_3, var_4) {
       }
     }
 
-    if(isdefined(var_4))
+    if(isDefined(var_4))
       thread audx_print_3d_timer(var_4);
 
     self endon("death");
     self endon("aud_stop_3D_print");
 
-    while (isdefined(self)) {
+    while(isDefined(self)) {
       var_11 = var_0;
 
-      if(isdefined(var_3))
+      if(isDefined(var_3))
         var_11 = var_11 + self[[var_3]]();
 
       wait 0.05;
@@ -1005,7 +999,7 @@ audx_print_3d_timer(var_0) {
   self endon("death");
   wait(var_0);
 
-  if(isdefined(self))
+  if(isDefined(self))
     self notify("aud_stop_3D_print");
 }
 
@@ -1014,12 +1008,12 @@ aud_add_progress_map(var_0, var_1) {
 }
 
 aud_get_progress_map(var_0) {
-  if(isdefined(level._audio.progress_maps[var_0]))
+  if(isDefined(level._audio.progress_maps[var_0]))
     return level._audio.progress_maps[var_0];
 }
 
 is_deathsdoor_audio_enabled() {
-  if(!isdefined(level._audio.deathsdoor_enabled))
+  if(!isDefined(level._audio.deathsdoor_enabled))
     return 1;
   else
     return level._audio.deathsdoor_enabled;
@@ -1036,7 +1030,7 @@ aud_disable_deathsdoor_audio() {
 }
 
 restore_after_deathsdoor() {
-  if(is_deathsdoor_audio_enabled() && isdefined(level._audio.in_deathsdoor)) {
+  if(is_deathsdoor_audio_enabled() && isDefined(level._audio.in_deathsdoor)) {
     level._audio.in_deathsdoor = undefined;
     soundscripts\_audio_mix_manager::mm_clear_submix("deaths_door", 2);
     soundscripts\_snd_common::snd_disable_soundcontextoverride("deathsdoor");
@@ -1049,15 +1043,15 @@ restore_after_deathsdoor() {
 }
 
 init_deathsdoor() {
-  level._audio.deathsdoor = spawnstruct();
+  level._audio.deathsdoor = spawnStruct();
   level._audio.deathsdoor.reverb = undefined;
 }
 
 set_deathsdoor() {
   level._audio.in_deathsdoor = 1;
 
-  if(!isdefined(level._audio.deathsdoor))
-    level._audio.deathsdoor = spawnstruct();
+  if(!isDefined(level._audio.deathsdoor))
+    level._audio.deathsdoor = spawnStruct();
 
   level._audio.deathsdoor.reverb = undefined;
   level._audio.deathsdoor.reverb = level._audio.current_reverb;
@@ -1091,13 +1085,13 @@ aud_set_mission_failed_music(var_0) {
 aud_wait_for_mission_fail_music() {
   wait 0.05;
 
-  while (!common_scripts\utility::flag_exist("missionfailed"))
+  while(!common_scripts\utility::flag_exist("missionfailed"))
     wait 0.05;
 
   var_0 = "shg_mission_failed_stinger";
   common_scripts\utility::flag_wait("missionfailed");
 
-  if(isdefined(level._audio.failed_music_alias))
+  if(isDefined(level._audio.failed_music_alias))
     var_0 = level._audio.failed_music_alias;
 
   if(soundexists(var_0))
@@ -1128,7 +1122,7 @@ set_damb_stringtable(var_0) {
 }
 
 get_damb_stringtable() {
-  if(!isdefined(level._audio.stringtables["damb"]))
+  if(!isDefined(level._audio.stringtables["damb"]))
     return "soundtables\" + level.script + ".csv ";
   else
     return "soundtables\" + level._audio.stringtables["
@@ -1140,7 +1134,7 @@ set_damb_component_stringtable(var_0) {
 }
 
 get_damb_component_stringtable(var_0) {
-  if(!isdefined(level._audio.stringtables["damb_comp"]))
+  if(!isDefined(level._audio.stringtables["damb_comp"]))
     return "soundtables\" + level.script + ".csv ";
   else
     return "soundtables\" + level._audio.stringtables["
@@ -1152,7 +1146,7 @@ set_damb_loops_stringtable(var_0) {
 }
 
 get_damb_loops_stringtable(var_0) {
-  if(!isdefined(level._audio.stringtables["damb_loops"]))
+  if(!isDefined(level._audio.stringtables["damb_loops"]))
     return "soundtables\" + level.script + ".csv ";
   else
     return "soundtables\" + level._audio.stringtables["
@@ -1164,7 +1158,7 @@ set_reverb_stringtable(var_0) {
 }
 
 get_reverb_stringtable() {
-  if(!isdefined(level._audio.stringtables["reverb"]))
+  if(!isDefined(level._audio.stringtables["reverb"]))
     return "soundtables\" + level.script + ".csv ";
   else
     return "soundtables\" + level._audio.stringtables["
@@ -1176,7 +1170,7 @@ set_zone_stringtable(var_0) {
 }
 
 get_zone_stringtable() {
-  if(!isdefined(level._audio.stringtables["zone"]))
+  if(!isDefined(level._audio.stringtables["zone"]))
     return "soundtables\" + level.script + ".csv ";
   else
     return "soundtables\" + level._audio.stringtables["
@@ -1191,20 +1185,20 @@ aud_get_threat_level(var_0, var_1, var_2) {
   var_3 = 0;
   var_4 = aud_get_sticky_threat();
 
-  if(isdefined(var_4))
+  if(isDefined(var_4))
     var_3 = var_4;
   else {
     var_5 = 3;
     var_6 = 10;
     var_7 = 100;
 
-    if(isdefined(var_0))
+    if(isDefined(var_0))
       var_5 = var_0;
 
-    if(isdefined(var_2))
+    if(isDefined(var_2))
       var_7 = var_2;
 
-    if(isdefined(var_2))
+    if(isDefined(var_2))
       var_6 = var_1;
 
     var_8 = 36 * var_7;
@@ -1214,7 +1208,7 @@ aud_get_threat_level(var_0, var_1, var_2) {
     var_12 = 0;
 
     foreach(var_14 in var_10) {
-      if(isdefined(var_14.alertlevelint) && var_14.alertlevelint >= var_5) {
+      if(isDefined(var_14.alertlevelint) && var_14.alertlevelint >= var_5) {
         var_15 = distance(level.player.origin, var_14.origin);
 
         if(var_15 < var_8) {
@@ -1255,7 +1249,7 @@ aud_num_alive_enemies(var_0) {
   var_1 = 0;
   var_2 = 3600;
 
-  if(isdefined(var_0))
+  if(isDefined(var_0))
     var_2 = 36 * var_0;
 
   var_3 = getaiarray("bad_guys");
@@ -1277,7 +1271,7 @@ deprecated_aud_fade_sound_in(var_0, var_1, var_2, var_3, var_4) {
   var_3 = aud_max(0.05, var_3);
   var_5 = 0;
 
-  if(isdefined(var_4))
+  if(isDefined(var_4))
     var_5 = var_4;
 
   if(var_5)
@@ -1322,16 +1316,16 @@ deprecated_audx_dispatch_msg(var_0, var_1, var_2) {
   foreach(var_6 in level._audio.message_handlers) {
     var_4 = self[[var_6]](var_0, var_1);
 
-    if(!var_3 && isdefined(var_4) && var_4 == 1) {
+    if(!var_3 && isDefined(var_4) && var_4 == 1) {
       var_3 = var_4;
       continue;
     }
 
-    if(!var_3 && !isdefined(var_4))
+    if(!var_3 && !isDefined(var_4))
       var_3 = 1;
   }
 
-  if(isdefined(var_2))
+  if(isDefined(var_2))
     self notify(var_2);
 
   if(!var_3)
@@ -1343,7 +1337,7 @@ aud_play_pcap_vo(var_0, var_1, var_2) {
   var_4 = 1;
   var_5 = self;
 
-  if(isdefined(var_2))
+  if(isDefined(var_2))
     deprecated_aud_delay_play_2d_sound(var_0, var_1, var_3, var_4);
   else
     deprecated_aud_delay_play_linked_sound(var_0, var_5, var_1, var_3, var_4);
@@ -1389,8 +1383,8 @@ deprecated_audx_play_linked_sound_internal(var_0, var_1, var_2, var_3, var_4) {
     soundscripts\_snd_playsound::snd_play_loop(var_1);
     level waittill(var_2);
 
-    if(isdefined(self)) {
-      if(isdefined(var_4)) {
+    if(isDefined(self)) {
+      if(isDefined(var_4)) {
         self scalevolume(0, var_4);
         wait(var_4);
       }
@@ -1402,12 +1396,12 @@ deprecated_audx_play_linked_sound_internal(var_0, var_1, var_2, var_3, var_4) {
   } else if(var_0 == "oneshot") {
     soundscripts\_snd_playsound::snd_play(var_1, "sounddone");
 
-    if(isdefined(var_3))
+    if(isDefined(var_3))
       self scalevolume(var_3, 0);
 
     self waittill("sounddone");
 
-    if(isdefined(self))
+    if(isDefined(self))
       self delete();
   }
 }
@@ -1415,13 +1409,13 @@ deprecated_audx_play_linked_sound_internal(var_0, var_1, var_2, var_3, var_4) {
 deprecated_audx_monitor_linked_entity_health(var_0, var_1, var_2) {
   level endon(var_1);
 
-  while (isdefined(self))
+  while(isDefined(self))
     wait 0.1;
 
   level notify(var_1 + "internal");
 
-  if(isdefined(var_0)) {
-    if(isdefined(var_2)) {
+  if(isDefined(var_0)) {
+    if(isDefined(var_2)) {
       var_0 scalevolume(0, var_2);
       wait(var_2);
     }
@@ -1435,17 +1429,17 @@ deprecated_audx_monitor_linked_entity_health(var_0, var_1, var_2) {
 deprecated_aud_play_linked_sound(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   var_8 = "oneshot";
 
-  if(isdefined(var_2))
+  if(isDefined(var_2))
     var_8 = var_2;
 
   var_9 = var_1.origin;
 
-  if(isdefined(var_6))
+  if(isDefined(var_6))
     var_9 = var_6;
 
   var_10 = spawn("script_origin", var_9);
 
-  if(isdefined(var_4))
+  if(isDefined(var_4))
     var_10 linkto(var_1, "tag_origin", var_4, (0, 0, 0));
   else
     var_10 linkto(var_1);
@@ -1460,7 +1454,7 @@ deprecated_aud_play_linked_sound(var_0, var_1, var_2, var_3, var_4, var_5, var_6
 deprecated_aud_play_sound_at_internal(var_0, var_1, var_2) {
   soundscripts\_snd_playsound::snd_play(var_0, "sounddone");
 
-  if(isdefined(var_2)) {
+  if(isDefined(var_2)) {
     wait(var_2);
     self stopsounds();
   } else
@@ -1518,17 +1512,17 @@ deprecated__audio_msg_handler(var_0, var_1) {
       deprecated_aud_play_sound_at(var_1.alias, var_1.pos);
       break;
     case "aud_play_dynamic_explosion":
-      if(isdefined(var_1.spread_width))
+      if(isDefined(var_1.spread_width))
         var_5 = var_1.spread_width;
       else
         var_5 = undefined;
 
-      if(isdefined(var_1.rear_dist))
+      if(isDefined(var_1.rear_dist))
         var_6 = var_1.rear_dist;
       else
         var_6 = undefined;
 
-      if(isdefined(var_1.velocity))
+      if(isDefined(var_1.velocity))
         var_7 = var_1.velocity;
       else
         var_7 = undefined;
@@ -1580,13 +1574,13 @@ deprecated_aud_play_conversation(var_0, var_1) {
   var_2 = var_1;
   var_3 = [];
 
-  for (var_4 = 0; var_4 < var_2.size; var_4++) {
+  for(var_4 = 0; var_4 < var_2.size; var_4++) {
     var_3[var_4] = var_2[var_4].ent.battlechatter;
     var_2[var_4].ent.battlechatter = 0;
   }
 
   foreach(var_6 in var_2) {
-    if(isdefined(var_6.delay))
+    if(isDefined(var_6.delay))
       wait(var_6.delay);
 
     var_7 = spawn("script_origin", (0, 0, 0));
@@ -1597,6 +1591,6 @@ deprecated_aud_play_conversation(var_0, var_1) {
     var_7 delete();
   }
 
-  for (var_4 = 0; var_4 < var_2.size; var_4++)
+  for(var_4 = 0; var_4 < var_2.size; var_4++)
     var_2[var_4].ent.battlechatter = var_3[var_4];
 }

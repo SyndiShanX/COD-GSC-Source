@@ -116,13 +116,13 @@ choose_fate_round() {
   maps\_zombietron_main::move_players_to_start();
   maps\_zombietron_scenes::hide_temple_props("none");
   if(isDefined(level.weatherFx)) {
-    for (i = 0; i < level.weatherFx.size; i++) {
+    for(i = 0; i < level.weatherFx.size; i++) {
       level.weatherFx[i] Delete();
     }
   }
   level.weatherFx = [];
-  fog = getentarray("fog_fx", "targetname");
-  for (i = 0; i < fog.size; i++) {
+  fog = getEntArray("fog_fx", "targetname");
+  for(i = 0; i < fog.size; i++) {
     level.weatherFx[level.weatherFx.size] = SpawnFx(level._effect["fog_amb"], fog[i].origin);
     TriggerFx(level.weatherFx[level.weatherFx.size - 1]);
   }
@@ -132,7 +132,7 @@ choose_fate_round() {
   light = "3";
   exposure = "0.63";
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i] setClientDvars(
       "r_lightTweakSunLight", light,
       "r_lightTweakSunColor", color,
@@ -153,7 +153,7 @@ choose_fate_round() {
   array_thread(the_fates, ::trigger_off);
   array_thread(the_fates, maps\_zombietron_fate::spawnRocks);
   players = GetPlayers();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     target = "fate_player_spawn" + (i + 1);
     moveLoc = GetEnt(target, "targetname");
     players[i].oldLocation = players[i].origin;
@@ -183,7 +183,7 @@ choose_fate_round() {
   timeLeft = GetTime() + (level.zombie_vars["fate_wait"] * 1000);
   msgUp = false;
   diff = timeLeft - GetTime();
-  while (diff > 0) {
+  while(diff > 0) {
     if(diff < 8000 && !msgUp) {
       msgUp = true;
       level.fate_title2 SetText(&"ZOMBIETRON_FATE_HURRY");
@@ -197,7 +197,7 @@ choose_fate_round() {
     diff = timeLeft - GetTime();
     players = GetPlayers();
     allFated = true;
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       if(!isDefined(players[i].fate)) {
         allFated = false;
         break;
@@ -233,7 +233,7 @@ choose_fate_round() {
   DestroyHudElem(level.fate2_msg);
   DestroyHudElem(level.fate3_msg);
   DestroyHudElem(level.fate4_msg);
-  for (i = 0; i < the_fates.size; i++) {
+  for(i = 0; i < the_fates.size; i++) {
     if(isDefined(the_fates[i].rock)) {
       the_fates[i].rock Delete();
     }
@@ -242,18 +242,18 @@ choose_fate_round() {
   level.fates_have_been_chosen = true;
   level.current_arena = lastArena;
   players = GetPlayers();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i] SetOrigin(players[i].oldLocation);
     players[i] SetPlayerAngles(players[i].oldAngles);
   }
 }
 spawnRocks() {
   loc = GetEnt(self.target, "targetname");
-  self.rock = Spawn("script_model", loc.origin);
-  self.rock SetModel("zombie_meteor_chunk_lrg");
+  self.rock = spawn("script_model", loc.origin);
+  self.rock setModel("zombie_meteor_chunk_lrg");
   yaw = RandomInt(360);
   self.rock.angles = (0, yaw, 0);
-  playfxontag(level._effect["rock_glow"], self.rock, "tag_origin");
+  playFXOnTag(level._effect["rock_glow"], self.rock, "tag_origin");
 }
 fate_show_msg(fate) {
   level endon("the_fates_have_been_decided");
@@ -296,12 +296,12 @@ directed_fate_to(player, model, modelscale, fate_cb) {
     modelscale = 1;
   }
   origin = player.origin + (0, 0, 800);
-  object = Spawn("script_model", origin);
+  object = spawn("script_model", origin);
   yaw = RandomInt(360);
   object.angles = (0, yaw, 0);
-  object SetModel(model);
+  object setModel(model);
   object SetScale(modelscale);
-  while (1) {
+  while(1) {
     if(object.origin[2] < player.origin[2]) {
       object.origin = player.origin;
       break;
@@ -310,7 +310,7 @@ directed_fate_to(player, model, modelscale, fate_cb) {
     object.origin = modz;
     wait 0.05;
   }
-  Playfx(level._effect["fate_explode"], object.origin);
+  playFX(level._effect["fate_explode"], object.origin);
   player PlayRumbleOnEntity("artillery_rumble");
   object Delete();
   player[[fate_cb]]();
@@ -326,14 +326,14 @@ fortune_fate() {
 }
 fate_of_fortune() {
   level endon("the_fates_have_been_decided");
-  while (1) {
+  while(1) {
     self waittill("trigger", guy);
     if(isDefined(guy.fate)) {
       continue;
     }
     guy.fate = "fortune";
     level thread directed_fate_to(guy, "zombietron_ruby", 5, ::fortune_fate);
-    Playfx(level._effect["fortune"], self.rock.origin);
+    playFX(level._effect["fortune"], self.rock.origin);
     playsoundatposition("zmb_fate_choose", self.rock.origin);
     level thread fate_show_msg("fortune");
     self.rock Delete();
@@ -351,14 +351,14 @@ firepower_fate() {
 }
 fate_of_firepower() {
   level endon("the_fates_have_been_decided");
-  while (1) {
+  while(1) {
     self waittill("trigger", guy);
     if(isDefined(guy.fate)) {
       continue;
     }
     guy.fate = "firepower";
     level thread directed_fate_to(guy, GetWeaponModel("minigun_zt", 0), 2, ::firepower_fate);
-    Playfx(level._effect["firepower"], self.rock.origin);
+    playFX(level._effect["firepower"], self.rock.origin);
     playsoundatposition("zmb_fate_choose", self.rock.origin);
     level thread fate_show_msg("firepower");
     self.rock Delete();
@@ -372,14 +372,14 @@ friendship_fate() {
 }
 fate_of_friendship() {
   level endon("the_fates_have_been_decided");
-  while (1) {
+  while(1) {
     self waittill("trigger", guy);
     if(isDefined(guy.fate)) {
       continue;
     }
     guy.fate = "friendship";
     level directed_fate_to(guy, "fxanim_zombies_crow_mod", 4, ::friendship_fate);
-    Playfx(level._effect["friendship"], self.rock.origin);
+    playFX(level._effect["friendship"], self.rock.origin);
     playsoundatposition("zmb_fate_choose", self.rock.origin);
     level thread fate_show_msg("friendship");
     self.rock Delete();
@@ -394,7 +394,7 @@ furious_feet_fate() {
 }
 fate_of_furious_feet() {
   level endon("the_fates_have_been_decided");
-  while (1) {
+  while(1) {
     self waittill("trigger", guy);
     if(isDefined(guy.fate)) {
       continue;
@@ -407,7 +407,7 @@ fate_of_furious_feet() {
       guy.boosters = 3;
       guy maps\_zombietron_score::update_hud();
     }
-    Playfx(level._effect["furious_feet"], self.rock.origin);
+    playFX(level._effect["furious_feet"], self.rock.origin);
     playsoundatposition("zmb_fate_choose", self.rock.origin);
     level thread fate_show_msg("furious_feet");
     self.rock Delete();
@@ -422,7 +422,7 @@ open_cleanup() {
 }
 open_exit(trigger, objective_id) {
   trigger thread open_cleanup();
-  objective_add(objective_id, "active", & "EXIT", trigger.origin);
+  objective_add(objective_id, "active", &"EXIT", trigger.origin);
   objective_set3d(objective_id, true, "default", "*");
   objective_current(objective_id);
   trigger waittill("opened");
@@ -430,7 +430,7 @@ open_exit(trigger, objective_id) {
   wait 0.1;
 }
 add_objectives(the_triggers) {
-  for (i = 0; i < the_triggers.size; i++) {
+  for(i = 0; i < the_triggers.size; i++) {
     level thread open_exit(the_triggers[i], i);
     PlaySoundAtPosition("zmb_exit_open", the_triggers[i].origin);
     wait .2;

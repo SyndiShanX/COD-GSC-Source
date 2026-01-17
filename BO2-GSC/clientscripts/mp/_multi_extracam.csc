@@ -6,7 +6,7 @@
 #include clientscripts\mp\_utility;
 
 init(localclientnum) {
-  triggers = getentarray(localclientnum, "multicam_enable", "targetname");
+  triggers = getEntArray(localclientnum, "multicam_enable", "targetname");
   array_thread(triggers, ::multicams_trigger_thread);
 
   for(i = 1; i <= 4; i++) {

@@ -17,7 +17,7 @@ mechz_debug() {
 
     if(isDefined(debug_level) && debug_level) {
       if(debug_level == 1) {
-        mechz_array = getentarray("mechz_zombie_ai");
+        mechz_array = getEntArray("mechz_zombie_ai");
 
         for(i = 0; i < mechz_array.size; i++) {
           if(isDefined(mechz_array[i].goal_pos)) {
@@ -206,25 +206,25 @@ setup_force_behavior() {
   if(!isDefined(level.test_align_struct)) {
     player = get_players()[0];
     pos = player.origin;
-    offset = anglestoforward(player.angles);
+    offset = anglesToForward(player.angles);
     offset = vectornormalize(offset);
     level.test_align_struct = spawn("script_model", pos + 300 * offset);
-    level.test_align_struct setmodel("tag_origin");
+    level.test_align_struct setModel("tag_origin");
     level.test_align_struct.angles = player.angles + vectorscale((0, 1, 0), 180.0);
     level.test_align_struct thread align_test_struct();
     level.test_align_struct.angles = player.angles + vectorscale((0, 1, 0), 180.0);
   }
 
   self linkto(level.test_align_struct, "tag_origin", (0, 0, 0), (0, 0, 0));
-  self.fx_field = self.fx_field & ~64;
-  self.fx_field = self.fx_field & ~128;
-  self.fx_field = self.fx_field & ~256;
+  self.fx_field = self.fx_field &~64;
+  self.fx_field = self.fx_field &~128;
+  self.fx_field = self.fx_field &~256;
 }
 
 align_test_struct() {
   while(true) {
     pos = level.players[0].origin;
-    offset = anglestoforward(level.players[0].angles);
+    offset = anglesToForward(level.players[0].angles);
     offset = vectornormalize(offset);
     dist = getdvarint(#"_id_6DCD047E");
     level.test_align_struct.origin = pos + dist * offset;
@@ -314,12 +314,12 @@ fake_launch_claw() {
   self.m_claw unlink();
   self.m_claw.fx_ent = spawn("script_model", self.m_claw gettagorigin("tag_claw"));
   self.m_claw.fx_ent.angles = self.m_claw gettagangles("tag_claw");
-  self.m_claw.fx_ent setmodel("tag_origin");
+  self.m_claw.fx_ent setModel("tag_origin");
   self.m_claw.fx_ent linkto(self.m_claw, "tag_claw");
   network_safe_play_fx_on_tag("mech_claw", 1, level._effect["mechz_claw"], self.m_claw.fx_ent, "tag_origin");
   self.m_claw clearanim( % root, 0.2);
   self.m_claw setanim( % ai_zombie_mech_grapple_arm_open_idle, 1, 0.2, 1);
-  offset = anglestoforward(self.angles);
+  offset = anglesToForward(self.angles);
   offset = vectornormalize(offset);
   target_pos = self.origin + offset * 500 + vectorscale((0, 0, 1), 36.0);
   n_time = 0.0833333;
@@ -331,7 +331,7 @@ fake_launch_claw() {
   self.m_claw moveto(v_claw_origin, 0.5);
   self.m_claw waittill("movedone");
   self.m_claw.fx_ent delete();
-  self.fx_field = self.fx_field & ~256;
+  self.fx_field = self.fx_field &~256;
   self setclientfield("mechz_fx", self.fx_field);
   v_claw_origin = self gettagorigin("tag_claw");
   v_claw_angles = self gettagangles("tag_claw");
@@ -375,7 +375,7 @@ mechz_force_damage_armor() {
     self.next_armor_piece = 0;
 
     for(i = 0; i < self.armor_state.size; i++) {
-      self.fx_field = self.fx_field & ~(1 << self.armor_state[i].index);
+      self.fx_field = self.fx_field &~(1 << self.armor_state[i].index);
 
       if(isDefined(self.armor_state[i].model))
         self attach(self.armor_state[i].model, self.armor_state[i].tag);
@@ -404,10 +404,10 @@ mechz_force_damage_faceplate() {
     self.has_helmet = 0;
     self detach("c_zom_mech_faceplate", "J_Helmet");
     self.fx_field = self.fx_field | 1024;
-    self.fx_field = self.fx_field & ~2048;
+    self.fx_field = self.fx_field &~2048;
   } else {
     self.has_helmet = 1;
-    self.fx_field = self.fx_field & ~1024;
+    self.fx_field = self.fx_field &~1024;
     self.fx_field = self.fx_field | 2048;
     self attach("c_zom_mech_faceplate", "J_Helmet");
   }

@@ -24,7 +24,7 @@ advancedWindowTraverse(traverseAnim, normalHeight) {
 
   // orient to the Negotiation start node
   startnode = self getnegotiationstartnode();
-  assert(isdefined(startnode));
+  assert(isDefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);
   realHeight = startnode.traverse_height - startnode.origin[2];
 
@@ -41,5 +41,4 @@ advancedWindowTraverse(traverseAnim, normalHeight) {
   self traverseMode("gravity");
 
   self animscripts\shared::DoNoteTracks("traverse");
-
 }

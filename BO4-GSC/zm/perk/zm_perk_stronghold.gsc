@@ -15,7 +15,6 @@
 #include scripts\zm_common\zm_armor;
 #include scripts\zm_common\zm_perks;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_perk_stronghold;
 
 autoexec __init__system__() {
@@ -31,9 +30,9 @@ __main__() {}
 
 enable_stronghold_perk_for_level() {
   if(function_8b1a219a()) {
-    zm_perks::register_perk_basic_info(#"specialty_camper", #"perk_stronghold", 2500, #"hash_cd87686e9c80e75", getweapon("zombie_perk_bottle_stronghold"), getweapon("zombie_perk_totem_stronghold"), #"zmperksstonecold");
+    zm_perks::register_perk_basic_info(#"specialty_camper", # "perk_stronghold", 2500, # "hash_cd87686e9c80e75", getweapon("zombie_perk_bottle_stronghold"), getweapon("zombie_perk_totem_stronghold"), # "zmperksstonecold");
   } else {
-    zm_perks::register_perk_basic_info(#"specialty_camper", #"perk_stronghold", 2500, #"zombie/perk_stronghold", getweapon("zombie_perk_bottle_stronghold"), getweapon("zombie_perk_totem_stronghold"), #"zmperksstonecold");
+    zm_perks::register_perk_basic_info(#"specialty_camper", # "perk_stronghold", 2500, # "zombie/perk_stronghold", getweapon("zombie_perk_bottle_stronghold"), getweapon("zombie_perk_totem_stronghold"), # "zmperksstonecold");
   }
 
   zm_perks::register_perk_precache_func(#"specialty_camper", &function_e03779ee);
@@ -51,15 +50,15 @@ function_e03779ee() {
     return;
   }
 
-  level._effect[#"divetonuke_light"] = #"hash_2225287695ddf9c9";
-  level.machine_assets[#"specialty_camper"] = spawnStruct();
-  level.machine_assets[#"specialty_camper"].weapon = getweapon("zombie_perk_bottle_stronghold");
-  level.machine_assets[#"specialty_camper"].off_model = "p7_zm_vending_nuke";
-  level.machine_assets[#"specialty_camper"].on_model = "p7_zm_vending_nuke";
+  level._effect[# "divetonuke_light"] = # "hash_2225287695ddf9c9";
+  level.machine_assets[# "specialty_camper"] = spawnStruct();
+  level.machine_assets[# "specialty_camper"].weapon = getweapon("zombie_perk_bottle_stronghold");
+  level.machine_assets[# "specialty_camper"].off_model = "p7_zm_vending_nuke";
+  level.machine_assets[# "specialty_camper"].on_model = "p7_zm_vending_nuke";
 }
 
 function_356a31cb() {
-  clientfield::register("toplayer", "" + #"hash_24e322568c9492c5", 1, 1, "int");
+  clientfield::register("toplayer", "" + # "hash_24e322568c9492c5", 1, 1, "int");
 }
 
 function_721cc6dc(state) {}
@@ -87,7 +86,7 @@ function_9a3871b7(b_pause, str_perk, str_result, n_slot) {
 }
 
 function_7424eebb() {
-  self endon(#"specialty_camper" + "_take", #"disconnect");
+  self endon(#"specialty_camper" + "_take", # "disconnect");
 
   while(true) {
     if(!self laststand::player_is_in_laststand() && !self util::is_spectating() && !level flag::get("round_reset")) {
@@ -118,7 +117,7 @@ function_7424eebb() {
 }
 
 function_7b5fc171() {
-  self clientfield::set_to_player("" + #"hash_24e322568c9492c5", 0);
+  self clientfield::set_to_player("" + # "hash_24e322568c9492c5", 0);
   self zm_armor::remove(#"stronghold_armor", 1);
   self.var_3748ec02 = undefined;
   self.var_807f94d7 = undefined;
@@ -132,7 +131,7 @@ function_a84fcb78(var_3a553e99) {
   if(var_3a553e99 == var_cf385861) {
     self.var_7d0e99f3 = 1;
     self.var_3748ec02 = self.origin;
-    self clientfield::set_to_player("" + #"hash_24e322568c9492c5", 1);
+    self clientfield::set_to_player("" + # "hash_24e322568c9492c5", 1);
   }
 
   if(var_3a553e99 % var_cf385861 == 0) {
@@ -142,7 +141,7 @@ function_a84fcb78(var_3a553e99) {
 }
 
 add_armor() {
-  self zm_armor::add(#"stronghold_armor", 5, 50, #"");
+  self zm_armor::add(#"stronghold_armor", 5, 50, # "");
 }
 
 function_c25b980c() {

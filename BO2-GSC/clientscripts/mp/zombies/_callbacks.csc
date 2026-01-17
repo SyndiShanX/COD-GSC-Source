@@ -18,7 +18,7 @@ statechange(clientnum, system, newstate) {
     level._systemstates = [];
 
   if(!isDefined(level._systemstates[system]))
-    level._systemstates[system] = spawnstruct();
+    level._systemstates[system] = spawnStruct();
 
   level._systemstates[system].state = newstate;
 
@@ -74,8 +74,7 @@ playerspawned(localclientnum) {
   self thread clientscripts\mp\_explode::playerspawned(localclientnum);
   self thread clientscripts\mp\zombies\_players::dtp_effects();
 
-  if(!sessionmodeiszombiesgame()) {
-  }
+  if(!sessionmodeiszombiesgame()) {}
 
   if(isDefined(level._faceanimcbfunc))
     self thread[[level._faceanimcbfunc]](localclientnum);
@@ -93,9 +92,7 @@ codecallback_precachegametype() {
 
 codecallback_startgametype() {
   if(isDefined(level.callbackstartgametype) && (!isDefined(level.gametypestarted) || !level.gametypestarted)) {
-    [
-      [level.callbackstartgametype]
-    ]();
+    [[level.callbackstartgametype]]();
     level.gametypestarted = 1;
   }
 }
@@ -175,7 +172,7 @@ airsupport(localclientnum, x, y, z, type, yaw, team, teamfaction, owner, exittyp
       break;
   }
 
-  data = spawnstruct();
+  data = spawnStruct();
   data.team = team;
   data.owner = owner;
   data.bombsite = pos;
@@ -187,8 +184,8 @@ airsupport(localclientnum, x, y, z, type, yaw, team, teamfaction, owner, exittyp
   if(type == "a") {
     planehalfdistance = 12000;
     data.planehalfdistance = planehalfdistance;
-    data.startpoint = pos + vectorscale(anglestoforward(direction), -1 * planehalfdistance);
-    data.endpoint = pos + vectorscale(anglestoforward(direction), planehalfdistance);
+    data.startpoint = pos + vectorscale(anglesToForward(direction), -1 * planehalfdistance);
+    data.endpoint = pos + vectorscale(anglesToForward(direction), planehalfdistance);
     data.planemodel = "t5_veh_air_b52";
     data.flybysound = "null";
     data.washsound = "veh_b52_flyby_wash";
@@ -200,8 +197,8 @@ airsupport(localclientnum, x, y, z, type, yaw, team, teamfaction, owner, exittyp
   } else if(type == "n") {
     planehalfdistance = 24000;
     data.planehalfdistance = planehalfdistance;
-    data.startpoint = pos + vectorscale(anglestoforward(direction), -1 * planehalfdistance);
-    data.endpoint = pos + vectorscale(anglestoforward(direction), planehalfdistance);
+    data.startpoint = pos + vectorscale(anglesToForward(direction), -1 * planehalfdistance);
+    data.endpoint = pos + vectorscale(anglesToForward(direction), planehalfdistance);
     data.flybysound = "null";
     data.washsound = "evt_us_napalm_wash";
     data.apextime = 2362;
@@ -299,8 +296,7 @@ client_flagasval_callback(localclientnum, val) {
 }
 
 codecallback_creatingcorpse(localclientnum, player) {
-  if(self isburning()) {
-  }
+  if(self isburning()) {}
 }
 
 codecallback_playerjump(client_num, player, ground_type, firstperson, quiet, islouder) {

@@ -8,9 +8,9 @@
 main() {}
 
 setup_names() {
-  if(isdefined(level.names))
+  if(isDefined(level.names)) {
     return;
-
+  }
   nationalities = [];
   nationalities[0] = "american";
   nationalities[1] = "seal";
@@ -23,7 +23,7 @@ setup_names() {
   nationalities[8] = "portuguese";
   nationalities[9] = "shadowcompany";
 
-  for (i = 0; i < nationalities.size; i++)
+  for(i = 0; i < nationalities.size; i++)
     level.names[nationalities[i]] = [];
 
   // American names will ideally match 1:1 with names that we've recorded, so the friendlies will more obviously talk to each other
@@ -372,7 +372,7 @@ setup_names() {
 
   init_script_friendnames();
 
-  for (i = 0; i < nationalities.size; i++) {
+  for(i = 0; i < nationalities.size; i++) {
     remove_script_friendnames_from_list(nationalities[i]);
     randomize_name_list(nationalities[i]);
     level.nameIndex[nationalities[i]] = 0;
@@ -380,7 +380,7 @@ setup_names() {
 }
 
 copy_names(copyTo, copyFrom) {
-  ASSERT(IsDefined(level.names[copyFrom]) && level.names[copyFrom].size);
+  ASSERT(isDefined(level.names[copyFrom]) && level.names[copyFrom].size);
 
   level.names[copyTo] = level.names[copyFrom];
 }
@@ -399,14 +399,14 @@ init_script_friendnames() {
   ais = GetAiArray();
 
   foreach(spawner in spawners) {
-    if(IsDefined(spawner.script_friendname) && spawner.script_friendname != "none") {
+    if(isDefined(spawner.script_friendname) && spawner.script_friendname != "none") {
       name = normalize_script_friendname(spawner.script_friendname);
       script_friendnames[script_friendnames.size] = name;
     }
   }
 
   foreach(ai in ais) {
-    if(IsDefined(ai.script_friendname) && ai.script_friendname != "none") {
+    if(isDefined(ai.script_friendname) && ai.script_friendname != "none") {
       name = normalize_script_friendname(ai.script_friendname);
       script_friendnames[script_friendnames.size] = name;
     }
@@ -436,7 +436,7 @@ remove_script_friendnames_from_list(nationality) {
 
 randomize_name_list(nationality) {
   size = level.names[nationality].size;
-  for (i = 0; i < size; i++) {
+  for(i = 0; i < size; i++) {
     switchwith = randomint(size);
     temp = level.names[nationality][i];
     level.names[nationality][i] = level.names[nationality][switchwith];
@@ -445,16 +445,16 @@ randomize_name_list(nationality) {
 }
 
 get_name(override) {
-  if((isdefined(self.team)) && (self.team == "neutral")) {
+  if((isDefined(self.team)) && (self.team == "neutral")) {
     return;
   }
 
-  if(!isdefined(override) && level.script == "credits") {
+  if(!isDefined(override) && level.script == "credits") {
     self.airank = "private";
     return;
   }
 
-  if(isdefined(self.script_friendname)) {
+  if(isDefined(self.script_friendname)) {
     if(self.script_friendname == "none")
       return;
     self.name = self.script_friendname;
@@ -463,7 +463,7 @@ get_name(override) {
     return;
   }
 
-  assert(isdefined(level.names));
+  assert(isDefined(level.names));
 
   get_name_for_nationality(self.voice);
 
@@ -471,7 +471,7 @@ get_name(override) {
 }
 
 get_name_for_nationality(nationality) {
-  assertex(isdefined(level.nameIndex[nationality]), nationality);
+  assertex(isDefined(level.nameIndex[nationality]), nationality);
 
   level.nameIndex[nationality] = (level.nameIndex[nationality] + 1) % level.names[nationality].size;
   lastname = level.names[nationality][level.nameIndex[nationality]];
@@ -503,7 +503,7 @@ get_name_for_nationality(nationality) {
 }
 
 getRankFromName(name) {
-  if(!isdefined(name))
+  if(!isDefined(name))
     self.airank = ("private");
 
   tokens = strtok(name, " ");

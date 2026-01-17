@@ -43,7 +43,7 @@ mason_carry_woods(str_startup_scene) {
   }
 
   level.m_player_spot = spawn("script_model", level.m_player_rig.origin);
-  level.m_player_spot setmodel("tag_origin");
+  level.m_player_spot setModel("tag_origin");
   level.m_player_spot.angles = level.m_player_rig.angles;
   level.m_player_spot thread carry_movement_sounds();
   level.default_mason_carry_crouch_speed = 155;
@@ -58,8 +58,8 @@ carry_movement_sounds() {
 
   while(true) {
     self waittill("sound_run");
-    self playsound("evt_anim_woods_carry_lp", 0.7);
-    self playsound("fly_gear_run_plr");
+    self playSound("evt_anim_woods_carry_lp", 0.7);
+    self playSound("fly_gear_run_plr");
     wait(randomfloatrange(0.45, 0.65));
   }
 }
@@ -196,7 +196,7 @@ mason_movement_translation(m_player_rig) {
       a_normalized_movement = level.player getnormalizedmovement();
       n_movement_strength = length(a_normalized_movement);
       rig_angles = m_player_rig.angles;
-      forward = anglestoforward(rig_angles);
+      forward = anglesToForward(rig_angles);
       right = anglestoright(rig_angles);
       speed_forward = n_speed * a_normalized_movement[0];
       speed_right = n_speed * a_normalized_movement[1];
@@ -245,8 +245,8 @@ mason_movement_translation(m_player_rig) {
             v_movement_perp_inverse = v_movement_perp * -1;
             a_movement_perp_trace = physicstrace(v_forward_trace, v_forward_trace + v_movement_perp * speed_forward);
             a_movement_perp_inverse_trace = physicstrace(v_forward_trace, v_forward_trace + v_movement_perp_inverse * speed_forward);
-            bt_movement_perp_trace = bullettrace(v_forward_trace, v_forward_trace + v_movement_perp * speed_forward, 0, m_player_rig);
-            bt_movement_perp_inverse_trace = bullettrace(v_forward_trace, v_forward_trace + v_movement_perp_inverse * speed_forward, 0, m_player_rig);
+            bt_movement_perp_trace = bulletTrace(v_forward_trace, v_forward_trace + v_movement_perp * speed_forward, 0, m_player_rig);
+            bt_movement_perp_inverse_trace = bulletTrace(v_forward_trace, v_forward_trace + v_movement_perp_inverse * speed_forward, 0, m_player_rig);
             frac0 = calc_frac(v_forward_trace, v_forward_trace + v_movement_perp * speed_forward, a_movement_perp_trace);
             frac1 = calc_frac(v_forward_trace, v_forward_trace + v_movement_perp_inverse * speed_forward, a_movement_perp_inverse_trace);
             a_forward_trace = a_movement_perp_trace;
@@ -345,7 +345,7 @@ mason_movement_rotation(m_player_rig) {
     }
 
     rig_angles = m_player_rig.angles;
-    forward = anglestoforward(rig_angles);
+    forward = anglesToForward(rig_angles);
     right = anglestoright(rig_angles);
     a_normalized_rotation = level.player getnormalizedcameramovement();
 

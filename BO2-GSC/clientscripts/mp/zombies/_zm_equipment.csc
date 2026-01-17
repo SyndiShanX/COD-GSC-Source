@@ -51,32 +51,32 @@ play_fx_for_all_clients(fx, tag, storehandles, forward) {
   if(isDefined(tag)) {
     for(i = 0; i < numlocalplayers; i++) {
       if(storehandles) {
-        self._equipment_activated_fx[i][self._equipment_activated_fx[i].size] = playfxontag(i, fx, self, tag);
+        self._equipment_activated_fx[i][self._equipment_activated_fx[i].size] = playFXOnTag(i, fx, self, tag);
         continue;
       }
 
       self_for_client = getentbynum(i, self getentitynumber());
 
       if(isDefined(self_for_client))
-        playfxontag(i, fx, self_for_client, tag);
+        playFXOnTag(i, fx, self_for_client, tag);
     }
   } else {
     for(i = 0; i < numlocalplayers; i++) {
       if(storehandles) {
         if(isDefined(forward))
-          self._equipment_activated_fx[i][self._equipment_activated_fx[i].size] = playfx(i, fx, self.origin, forward);
+          self._equipment_activated_fx[i][self._equipment_activated_fx[i].size] = playFX(i, fx, self.origin, forward);
         else
-          self._equipment_activated_fx[i][self._equipment_activated_fx[i].size] = playfx(i, fx, self.origin);
+          self._equipment_activated_fx[i][self._equipment_activated_fx[i].size] = playFX(i, fx, self.origin);
 
         continue;
       }
 
       if(isDefined(forward)) {
-        playfx(i, fx, self.origin, forward);
+        playFX(i, fx, self.origin, forward);
         continue;
       }
 
-      playfx(i, fx, self.origin);
+      playFX(i, fx, self.origin);
     }
   }
 }

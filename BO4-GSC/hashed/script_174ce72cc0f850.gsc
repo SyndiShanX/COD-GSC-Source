@@ -8,7 +8,6 @@
 #include scripts\core_common\struct;
 #include scripts\zm\zm_hms_util;
 #include scripts\zm_common\zm_sq_modules;
-
 #namespace namespace_bd74bbd2;
 
 register(id, version, script_noteworthy, var_92f252fd, var_af245552) {
@@ -40,7 +39,7 @@ end(id) {
   }
 }
 
-private is_soul_capture(var_88206a50, ent) {
+is_soul_capture(var_88206a50, ent) {
   if(isDefined(ent)) {
     b_killed_by_player = 0;
 
@@ -60,7 +59,7 @@ private is_soul_capture(var_88206a50, ent) {
   return false;
 }
 
-private soul_captured(var_f0e6c7a2, ent) {
+soul_captured(var_f0e6c7a2, ent) {
   n_souls_required = 12;
 
   if(getplayers().size > 2) {
@@ -75,13 +74,13 @@ private soul_captured(var_f0e6c7a2, ent) {
     var_f0e6c7a2.var_7944be4a = n_souls_required;
   }
 
-    if(var_f0e6c7a2.var_7944be4a >= n_souls_required) {
-      var_f0e6c7a2 thread[[var_f0e6c7a2.var_92f252fd]]();
-    }
+  if(var_f0e6c7a2.var_7944be4a >= n_souls_required) {
+    var_f0e6c7a2 thread[[var_f0e6c7a2.var_92f252fd]]();
+  }
 }
 
-private function_fab8c488() {
-  self endon(#"death", #"event_end");
+function_fab8c488() {
+  self endon(#"death", # "event_end");
 
   while(self zm_hms_util::function_b8a27acc()) {
     wait 0.1;
@@ -91,8 +90,8 @@ private function_fab8c488() {
   self thread function_b1e6482f();
 }
 
-private player_enter_watcher() {
-  self endon(#"death", #"event_end");
+player_enter_watcher() {
+  self endon(#"death", # "event_end");
 
   while(!self zm_hms_util::function_b8a27acc()) {
     wait 0.1;
@@ -102,8 +101,8 @@ private player_enter_watcher() {
   self thread function_fab8c488();
 }
 
-private function_b1e6482f() {
-  self endon(#"death", #"player_enter", #"event_end");
+function_b1e6482f() {
+  self endon(#"death", # "player_enter", # "event_end");
   wait 5;
   level thread[[level.var_345df07[self.id].var_af245552]]();
   end(self.id);

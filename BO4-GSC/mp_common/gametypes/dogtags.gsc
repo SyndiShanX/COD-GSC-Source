@@ -10,7 +10,6 @@
 #include scripts\core_common\scoreevents_shared;
 #include scripts\core_common\spectating;
 #include scripts\core_common\util_shared;
-
 #namespace dogtags;
 
 init() {
@@ -36,7 +35,7 @@ spawn_dog_tag(victim, attacker, on_use_function, objectives_for_attacker_and_vic
     visuals[1] = spawn("script_model", (0, 0, 0));
     visuals[1] setModel(victim getfriendlydogtagmodel());
     trigger = spawn("trigger_radius", (0, 0, 0), 0, 32, 32);
-    level.dogtags[victim.entnum] = gameobjects::create_use_object(victim.team, trigger, visuals, (0, 0, 16), #"conf_dogtags");
+    level.dogtags[victim.entnum] = gameobjects::create_use_object(victim.team, trigger, visuals, (0, 0, 16), # "conf_dogtags");
     level.dogtags[victim.entnum] gameobjects::set_use_time(0);
     level.dogtags[victim.entnum].onuse = &onuse;
     level.dogtags[victim.entnum].custom_onuse = on_use_function;
@@ -130,8 +129,8 @@ onuse(player) {
     }
 
     if(!tacinsertboost) {
-      player.pers[#"killsdenied"]++;
-      player.killsdenied = player.pers[#"killsdenied"];
+      player.pers[# "killsdenied"]++;
+      player.killsdenied = player.pers[# "killsdenied"];
     }
   } else {
     event = "kill_confirmed";
@@ -291,9 +290,9 @@ should_spawn_tags(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, s
 }
 
 onusedogtag(player) {
-  if(player.pers[#"team"] == self.victimteam) {
-    player.pers[#"rescues"]++;
-    player.rescues = player.pers[#"rescues"];
+  if(player.pers[# "team"] == self.victimteam) {
+    player.pers[# "rescues"]++;
+    player.rescues = player.pers[# "rescues"];
 
     if(isDefined(self.victim)) {
       if(!level.gameended) {
@@ -312,7 +311,7 @@ waittillcanspawnclient() {
     wait 0.05;
 
     if(isDefined(self) && (self.sessionstate == "spectator" || !isalive(self))) {
-      self.pers[#"lives"] = 1;
+      self.pers[# "lives"] = 1;
       self thread[[level.spawnclient]]();
       continue;
     }

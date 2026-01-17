@@ -43,13 +43,11 @@ function digger_init_flags() {
   level flag::init("both_tunnels_blocked");
   level flag::init("digger_moving");
   level.diggers = array("teleporter", "hangar", "biodome");
-  if(!isdefined(level.digger_speed_multiplier)) {
+  if(!isDefined(level.digger_speed_multiplier)) {
     level.digger_speed_multiplier = 1;
   }
-  if(isdefined(level.quantum_bomb_register_result_func)) {
-    [
-      [level.quantum_bomb_register_result_func]
-    ]("remove_digger", & quantum_bomb_remove_digger_result, 75, & quantum_bomb_remove_digger_validation);
+  if(isDefined(level.quantum_bomb_register_result_func)) {
+    [[level.quantum_bomb_register_result_func]]("remove_digger", &quantum_bomb_remove_digger_result, 75, &quantum_bomb_remove_digger_validation);
   }
 }
 
@@ -58,21 +56,21 @@ function digger_init() {
 }
 
 function setup_diggers() {
-  level thread digger_think_panel("digger_hangar_blocker", "hangar_digger_switch", "start_hangar_digger", "hangar_digger_hacked", "hangar_digger_hacked_before_breached", "hangar_breached", & digger_think_blocker, "hangar");
-  level thread digger_think_panel("digger_teleporter_blocker", "teleporter_digger_switch", "start_teleporter_digger", "teleporter_digger_hacked", "teleporter_digger_hacked_before_breached", "teleporter_breached", & digger_think_blocker, "teleporter");
-  level thread digger_think_panel(undefined, "biodome_digger_switch", "start_biodome_digger", "biodome_digger_hacked", "biodome_digger_hacked_before_breached", "biodome_breached", & digger_think_biodome, "biodome");
+  level thread digger_think_panel("digger_hangar_blocker", "hangar_digger_switch", "start_hangar_digger", "hangar_digger_hacked", "hangar_digger_hacked_before_breached", "hangar_breached", &digger_think_blocker, "hangar");
+  level thread digger_think_panel("digger_teleporter_blocker", "teleporter_digger_switch", "start_teleporter_digger", "teleporter_digger_hacked", "teleporter_digger_hacked_before_breached", "teleporter_breached", &digger_think_blocker, "teleporter");
+  level thread digger_think_panel(undefined, "biodome_digger_switch", "start_biodome_digger", "biodome_digger_hacked", "biodome_digger_hacked_before_breached", "biodome_breached", &digger_think_biodome, "biodome");
   level thread diggers_think_no_mans_land();
   level thread digger_round_logic();
-  diggers = getentarray("digger_body", "targetname");
+  diggers = getEntArray("digger_body", "targetname");
   level function_c497263d();
-  array::thread_all(diggers, & digger_think_move);
+  array::thread_all(diggers, &digger_think_move);
   level thread waitfor_smash();
   wait(0.5);
   level flag::clear("init_diggers");
 }
 
 function function_c497263d() {
-  for (i = 0; i < 3; i++) {
+  for(i = 0; i < 3; i++) {
     switch (i) {
       case 0: {
         var_794a1037 = "biodome_digger_stopped";
@@ -107,7 +105,7 @@ function function_c497263d() {
     var_beb7660e.var_ebcc585f = var_ebcc585f;
     var_beb7660e.var_575a869f = var_575a869f;
     var_a68e698 = undefined;
-    var_f31f3fa4 = getentarray(var_beb7660e.target, "targetname");
+    var_f31f3fa4 = getEntArray(var_beb7660e.target, "targetname");
     foreach(mdl_target in var_f31f3fa4) {
       if(mdl_target.model == "p7_zm_moo_crane_mining_arm") {
         var_beb7660e.var_26dbb029 = mdl_target;
@@ -115,13 +113,13 @@ function function_c497263d() {
         break;
       }
     }
-    var_d0939dba = getentarray(var_f78a8481, "targetname");
+    var_d0939dba = getEntArray(var_f78a8481, "targetname");
     var_beb7660e.var_d0939dba = var_d0939dba;
     foreach(e_light in var_d0939dba) {
       e_light linkto(var_beb7660e);
     }
-    if(isdefined(var_a68e698)) {
-      var_3b91d0ec = getentarray(var_7dbee661, "targetname");
+    if(isDefined(var_a68e698)) {
+      var_3b91d0ec = getEntArray(var_7dbee661, "targetname");
       var_a68e698.var_3b91d0ec = var_3b91d0ec;
       foreach(e_light in var_3b91d0ec) {
         e_light linkto(var_a68e698);
@@ -142,7 +140,7 @@ function digger_round_logic() {
     first_digger_activated = 1;
   }
   rnd = 0;
-  while (!first_digger_activated) {
+  while(!first_digger_activated) {
     level waittill("between_round_over");
     if(level flag::exists("teleporter_used") && level flag::get("teleporter_used")) {
       continue;
@@ -154,7 +152,7 @@ function digger_round_logic() {
     }
     rnd++;
   }
-  while (true) {
+  while(true) {
     level waittill("between_round_over");
     if(level flag::exists("teleporter_used") && level flag::get("teleporter_used")) {
       continue;
@@ -183,7 +181,7 @@ function digger_round_logic() {
 }
 
 function digger_activate(force_digger) {
-  if(isdefined(force_digger)) {
+  if(isDefined(force_digger)) {
     level flag::set(("start_" + force_digger) + "_digger");
     level thread send_clientnotify(force_digger, 0);
     level thread play_digger_start_vox(force_digger);
@@ -193,7 +191,7 @@ function digger_activate(force_digger) {
     return;
   }
   non_active = [];
-  for (i = 0; i < level.diggers.size; i++) {
+  for(i = 0; i < level.diggers.size; i++) {
     if(!level flag::get(("start_" + level.diggers[i]) + "_digger")) {
       non_active[non_active.size] = level.diggers[i];
     }
@@ -211,7 +209,7 @@ function digger_activate(force_digger) {
 function play_digger_start_vox(digger_name) {
   level thread zm_moon_amb::play_mooncomp_vox("vox_mcomp_digger_start_", digger_name);
   wait(7);
-  if(!(isdefined(level.on_the_moon) && level.on_the_moon)) {
+  if(!(isDefined(level.on_the_moon) && level.on_the_moon)) {
     return;
   }
   players = getplayers();
@@ -248,7 +246,7 @@ function send_clientnotify(digger_name, pause) {
 }
 
 function digger_think_move() {
-  targets = getentarray(self.target, "targetname");
+  targets = getEntArray(self.target, "targetname");
   if(targets[0].model == "p7_zm_moo_crane_mining_body_vista") {
     tracks = targets[0];
     arm = targets[1];
@@ -305,7 +303,7 @@ function digger_think_move() {
   tracks digger_follow_path(self, undefined, arm);
   self endon(self.digger_name + "_digger_hacked");
   self stoploopsound(2);
-  self playsound("evt_dig_move_stop");
+  self playSound("evt_dig_move_stop");
   self unlink();
   level.arm_move_speed = 11;
   level.blade_spin_speed = 80;
@@ -334,7 +332,7 @@ function wait_for_digger_hack_digging(arm, blade_center, tracks) {
 
 function wait_for_digger_hack_moving(arm, blade_center, tracks) {
   self endon("arm_lower");
-  while (true) {
+  while(true) {
     level waittill("digger_hacked", digger_name);
     if(digger_name == self.digger_name) {
       level flag::clear(self.hacked_flag);
@@ -358,7 +356,7 @@ function digger_arm_breach_logic(arm, blade_center, tracks) {
       exploder::exploder("fxexp_101");
       level flag::set("hangar_breached");
       level flag::set("hangar_blocked");
-      if(isdefined(level.tunnel_11_destroyed)) {
+      if(isDefined(level.tunnel_11_destroyed)) {
         level.tunnel_11_destroyed show();
       }
       earthquake(0.5, 3, level.tunnel_11_destroyed.origin, 1500);
@@ -372,7 +370,7 @@ function digger_arm_breach_logic(arm, blade_center, tracks) {
       exploder::exploder("fxexp_111");
       level flag::set("teleporter_breached");
       level flag::set("teleporter_blocked");
-      if(isdefined(level.tunnel_6_destroyed)) {
+      if(isDefined(level.tunnel_6_destroyed)) {
         level.tunnel_6_destroyed show();
       }
       earthquake(0.5, 3, level.tunnel_6_destroyed.origin, 1500);
@@ -395,26 +393,26 @@ function digger_arm_breach_logic(arm, blade_center, tracks) {
     level flag::clear("both_tunnels_blocked");
   }
   arm waittill("rotatedone");
-  arm playsound("evt_dig_arm_stop");
+  arm playSound("evt_dig_arm_stop");
   blade_center unlink();
   switch (self.digger_name) {
     case "hangar": {
-      blade_center playloopsound("evt_dig_wheel_loop1", 1);
+      blade_center playLoopSound("evt_dig_wheel_loop1", 1);
       break;
     }
     case "teleporter": {
-      blade_center playloopsound("evt_dig_wheel_loop1", 1);
+      blade_center playLoopSound("evt_dig_wheel_loop1", 1);
       break;
     }
     case "biodome": {
-      blade_center playloopsound("evt_dig_wheel_loop2", 1);
+      blade_center playLoopSound("evt_dig_wheel_loop2", 1);
       break;
     }
   }
   blade_center clientfield::set("digger_digging", 1);
   blade_center rotatepitch(720, 5, level.blade_spin_up_time, level.blade_spin_up_time);
   smokeangles = (0, arm.angles[1] + 180, arm.angles[2]);
-  forward = anglestoforward(smokeangles);
+  forward = anglesToForward(smokeangles);
   wait(2);
   self.arm_moving = undefined;
 }
@@ -425,32 +423,32 @@ function digger_arm_logic(arm, blade_center, tracks) {
   exploder::exploder(self.var_3d838929);
   exploder::exploder(self.var_575a869f);
   if(!level flag::get(self.hacked_flag)) {
-    if(!(isdefined(self.arm_lowered) && self.arm_lowered)) {
+    if(!(isDefined(self.arm_lowered) && self.arm_lowered)) {
       self notify("arm_lower");
       self.arm_lowered = 1;
       self.arm_moving = 1;
       arm unlink();
-      arm playsound("evt_dig_arm_move");
+      arm playSound("evt_dig_arm_move");
       arm rotatepitch(self.down_angle, level.arm_move_speed, level.arm_move_speed / 4, level.arm_move_speed / 4);
       self thread digger_arm_breach_logic(arm, blade_center, tracks);
     }
-    while (!level flag::get(self.hacked_flag)) {
+    while(!level flag::get(self.hacked_flag)) {
       if(!blade_center islinkedto(arm)) {
         blade_center rotatepitch(360, 3);
       }
       wait(3);
     }
   }
-  while (isdefined(self.arm_moving) && self.arm_moving && !level flag::get(self.hacked_flag)) {
+  while(isDefined(self.arm_moving) && self.arm_moving && !level flag::get(self.hacked_flag)) {
     wait(0.1);
   }
-  if(isdefined(self.arm_lowered) && self.arm_lowered) {
+  if(isDefined(self.arm_lowered) && self.arm_lowered) {
     self.arm_moving = 1;
     self.arm_lowered = 0;
     blade_center stoploopsound(2);
     blade_center clientfield::set("digger_digging", 0);
     blade_center linkto(arm);
-    arm playsound("evt_dig_arm_move");
+    arm playSound("evt_dig_arm_move");
     arm rotatepitch(self.up_angle, level.arm_move_speed, level.arm_move_speed / 4, level.arm_move_speed / 4);
     wait(2);
     level notify("digger_arm_lift", self.digger_name);
@@ -478,14 +476,14 @@ function digger_arm_logic(arm, blade_center, tracks) {
     }
     arm waittill("rotatedone");
     arm linkto(self);
-    arm playsound("evt_dig_arm_stop");
+    arm playSound("evt_dig_arm_stop");
     self.arm_moving = undefined;
     self notify("digger_arm_raised");
   }
 }
 
 function digger_think_panel(blocker_name, trig_name, start_flag, hacked_flag, hacked_before_breached_flag, breached_flag, blocker_func, digger_name) {
-  if(isdefined(blocker_name)) {
+  if(isDefined(blocker_name)) {
     dmg_trig = getent(("digger_" + digger_name) + "_dmg", "targetname");
     blocker = getent(blocker_name, "targetname");
     if(digger_name == "teleporter") {
@@ -494,11 +492,11 @@ function digger_think_panel(blocker_name, trig_name, start_flag, hacked_flag, ha
     }
     level thread[[blocker_func]](blocker, digger_name, dmg_trig);
   }
-  if(!isdefined(blocker_name) && isdefined(blocker_func)) {
+  if(!isDefined(blocker_name) && isDefined(blocker_func)) {
     level thread[[blocker_func]](digger_name);
   }
   trig = getent(trig_name, "targetname");
-  struct = spawnstruct();
+  struct = spawnStruct();
   struct.origin = trig.origin - vectorscale((0, 0, 1), 12);
   struct.script_int = -1000;
   struct.script_float = 5;
@@ -510,7 +508,7 @@ function digger_think_panel(blocker_name, trig_name, start_flag, hacked_flag, ha
   struct.custom_debug_color = vectorscale((1, 0, 0), 255);
   struct.radius = 64;
   struct.height = 64;
-  struct.custom_string = & "ZM_MOON_DISABLE_DIGGER";
+  struct.custom_string = &"ZM_MOON_DISABLE_DIGGER";
   struct.no_bullet_trace = 1;
   struct.no_sight_check = 1;
   trig usetriggerrequirelookat();
@@ -521,14 +519,14 @@ function digger_think_panel(blocker_name, trig_name, start_flag, hacked_flag, ha
 }
 
 function set_hint_on_digger_trig(start_flag, hacked_flag, struct) {
-  while (true) {
+  while(true) {
     if(!level flag::get(start_flag)) {
       zm_equip_hacker::deregister_hackable_struct(struct);
       self sethintstring(&"ZM_MOON_NO_HACK");
     }
     level flag::wait_till(start_flag);
     if(!level flag::get(hacked_flag)) {
-      zm_equip_hacker::register_pooled_hackable_struct(struct, & digger_hack_func, & digger_hack_qualifer);
+      zm_equip_hacker::register_pooled_hackable_struct(struct, &digger_hack_func, &digger_hack_qualifer);
       self sethintstring(&"ZM_MOON_SYSTEM_ONLINE");
       switch (struct.digger_name) {
         case "hangar": {
@@ -576,7 +574,7 @@ function digger_hack_func(hacker) {
     level flag::set(self.hacked_before_breached_flag);
   }
   level notify(self.digger_name + "_vox_timer_stop");
-  while (true) {
+  while(true) {
     level waittill("digger_reached_end", digger_name);
     if(digger_name == self.digger_name) {
       break;
@@ -598,15 +596,15 @@ function digger_hack_qualifer(player) {
 }
 
 function digger_think_biodome(digger_name) {
-  while (true) {
+  while(true) {
     level waittill("digger_arm_smash", name, zones);
     if(name == digger_name) {
       level flag::set("biodome_breached");
       level thread biodome_breach_fx();
-      for (i = 0; i < zones.size; i++) {
+      for(i = 0; i < zones.size; i++) {
         zone = zones[i];
-        _zones = getentarray(zone, "targetname");
-        for (x = 0; x < _zones.size; x++) {
+        _zones = getEntArray(zone, "targetname");
+        for(x = 0; x < _zones.size; x++) {
           _zones[x].script_string = "lowgravity";
         }
         level thread zm_moon_gravity::zone_breached(zone);
@@ -627,7 +625,7 @@ function digger_think_blocker(blocker, digger_name, dmg_trig) {
   dmg_trig triggerenable(0);
   dmg_trig thread digger_damage_player();
   level thread digger_think_blocker_remove(blocker, digger_name, dmg_trig);
-  while (true) {
+  while(true) {
     level waittill("digger_arm_smash", name, zones);
     if(name == digger_name) {
       blocker movez(-512, 0.05, 0.05);
@@ -635,10 +633,10 @@ function digger_think_blocker(blocker, digger_name, dmg_trig) {
       blocker disconnectpaths();
       blocker thread kill_anyone_touching_blocker();
       dmg_trig triggerenable(1);
-      for (i = 0; i < zones.size; i++) {
+      for(i = 0; i < zones.size; i++) {
         zone = zones[i];
-        _zones = getentarray(zone, "targetname");
-        for (x = 0; x < _zones.size; x++) {
+        _zones = getEntArray(zone, "targetname");
+        for(x = 0; x < _zones.size; x++) {
           _zones[x].script_string = "lowgravity";
         }
         level thread zm_moon_gravity::zone_breached(zone);
@@ -648,9 +646,9 @@ function digger_think_blocker(blocker, digger_name, dmg_trig) {
 }
 
 function digger_damage_player() {
-  while (true) {
+  while(true) {
     self waittill("trigger", player);
-    if(!zombie_utility::is_player_valid(player) && (!(isdefined(player._pushed) && player._pushed))) {
+    if(!zombie_utility::is_player_valid(player) && (!(isDefined(player._pushed) && player._pushed))) {
       continue;
     }
     if(!player laststand::player_is_in_laststand()) {
@@ -669,7 +667,7 @@ function digger_push_player(trig, player) {
   foot_org = trig.origin;
   mid_org = trig.origin;
   explode_radius = 50;
-  test_org = player geteye();
+  test_org = player getEye();
   dist = distance(eye_org, test_org);
   scale = 1 - (dist / explode_radius);
   if(scale < 0) {
@@ -689,13 +687,13 @@ function digger_push_player(trig, player) {
 
 function kill_anyone_touching_blocker() {
   self endon("stop_check");
-  while (true) {
-    if(isdefined(self.trigger_off)) {
+  while(true) {
+    if(isDefined(self.trigger_off)) {
       wait(0.05);
       continue;
     }
     players = getplayers();
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       if(players[i] istouching(self)) {
         if(!players[i] laststand::player_is_in_laststand()) {
           players[i] player_digger_instant_kill();
@@ -703,8 +701,8 @@ function kill_anyone_touching_blocker() {
       }
     }
     zombies = getaiarray();
-    for (i = 0; i < zombies.size; i++) {
-      if(isdefined(zombies[i]) && zombies[i] istouching(self)) {
+    for(i = 0; i < zombies.size; i++) {
+      if(isDefined(zombies[i]) && zombies[i] istouching(self)) {
         zombies[i] thread zombie_ragdoll_death();
         util::wait_network_frame();
       }
@@ -719,7 +717,7 @@ function player_digger_instant_kill() {
 
 function zombie_ragdoll_death() {
   self endon("death");
-  fwd = anglestoforward(zm_utility::flat_angle(self.angles));
+  fwd = anglesToForward(zm_utility::flat_angle(self.angles));
   my_velocity = vectorscale(fwd, 200);
   my_velocity_with_lift = (my_velocity[0], my_velocity[1], 20);
   self launchragdoll(my_velocity_with_lift, self.origin);
@@ -728,7 +726,7 @@ function zombie_ragdoll_death() {
 }
 
 function digger_think_blocker_remove(blocker, digger_name, dmg_trig) {
-  while (true) {
+  while(true) {
     level waittill("digger_arm_lift", name);
     if(name == digger_name) {
       blocker connectpaths();
@@ -741,17 +739,17 @@ function digger_think_blocker_remove(blocker, digger_name, dmg_trig) {
 
 function diggers_think_no_mans_land() {
   level endon("intermission");
-  diggers = getentarray("digger_body", "targetname");
-  while (true) {
+  diggers = getEntArray("digger_body", "targetname");
+  while(true) {
     level flag::wait_till("enter_nml");
-    array::thread_all(diggers, & diggers_visible, 0);
+    array::thread_all(diggers, &diggers_visible, 0);
     flag::wait_till_clear("enter_nml");
-    array::thread_all(diggers, & diggers_visible, 1);
+    array::thread_all(diggers, &diggers_visible, 1);
   }
 }
 
 function diggers_visible(visible) {
-  targets = getentarray(self.target, "targetname");
+  targets = getEntArray(self.target, "targetname");
   if(targets[0].model == "p7_zm_moo_crane_mining_body_vista") {
     tracks = targets[0];
     arm = targets[1];
@@ -798,7 +796,7 @@ function play_timer_vox(digger_name) {
   played60sec = 0;
   played30sec = 0;
   digger_start_time = gettime();
-  while (time_left > 0) {
+  while(time_left > 0) {
     curr_time = gettime();
     time_used = (curr_time - digger_start_time) / 1000;
     time_left = level.diggers_global_time - time_used;
@@ -824,14 +822,14 @@ function play_timer_vox(digger_name) {
 
 function get_correct_times(digger) {
   level endon("digger_arm_smash");
-  for (i = 0; i < 500; i++) {
+  for(i = 0; i < 500; i++) {
     iprintlnbold(i);
     wait(1);
   }
 }
 
 function waitfor_smash() {
-  while (true) {
+  while(true) {
     level waittill("digger_arm_smash", digger, zones);
     level thread play_delayed_breach_vox(digger);
     level thread switch_ambient_packages(digger);
@@ -889,11 +887,11 @@ function play_delayed_breach_vox(digger) {
 
 function player_breach_vox(zones) {
   players = getplayers();
-  for (i = 0; i < zones.size; i++) {
+  for(i = 0; i < zones.size; i++) {
     zone = zones[i];
-    _zones = getentarray(zone, "targetname");
-    for (x = 0; x < _zones.size; x++) {
-      for (j = 0; j < players.size; j++) {
+    _zones = getEntArray(zone, "targetname");
+    for(x = 0; x < _zones.size; x++) {
+      for(j = 0; j < players.size; j++) {
         if(zombie_utility::is_player_valid(players[j]) && players[j] istouching(_zones[x])) {
           players[j] thread zm_audio::create_and_play_dialog("digger", "breach");
         }
@@ -907,8 +905,8 @@ function link_vehicle_nodes(start_node) {
   linked_nodes = [];
   linked_nodes[linked_nodes.size] = start_node;
   cur_node = start_node;
-  while (true) {
-    if(isdefined(cur_node.target)) {
+  while(true) {
+    if(isDefined(cur_node.target)) {
       next_node = getvehiclenode(cur_node.target, "targetname");
       previous_node = cur_node;
       cur_node.next_node = next_node;
@@ -923,10 +921,10 @@ function link_vehicle_nodes(start_node) {
 }
 
 function digger_debug_star(origin, color, time) {
-  if(!isdefined(time)) {
+  if(!isDefined(time)) {
     time = 1000;
   }
-  if(!isdefined(color)) {
+  if(!isDefined(color)) {
     color = (1, 1, 1);
   }
   debugstar(origin, time, color);
@@ -937,9 +935,9 @@ function digger_follow_path_calc_speed() {
   number_nodes = 0;
   self.path_length = 0;
   start_node = path_start_node;
-  while (isdefined(start_node.target)) {
+  while(isDefined(start_node.target)) {
     next_node = getvehiclenode(start_node.target, "targetname");
-    if(isdefined(next_node)) {
+    if(isDefined(next_node)) {
       length = length(next_node.origin - start_node.origin);
       self.path_length = self.path_length + length;
       start_node = next_node;
@@ -954,9 +952,9 @@ function digger_follow_path_recalc_speed(path_start_node) {
   number_nodes = 0;
   self.path_length = 0;
   start_node = path_start_node;
-  while (isdefined(start_node.target)) {
+  while(isDefined(start_node.target)) {
     next_node = getvehiclenode(start_node.target, "targetname");
-    if(isdefined(next_node)) {
+    if(isDefined(next_node)) {
       length = length(next_node.origin - start_node.origin);
       self.path_length = self.path_length + length;
       start_node = next_node;
@@ -1002,10 +1000,10 @@ function digger_follow_path(body, reverse, arm) {
     self.origin = path_start_node.origin;
     self.angles = path_start_node.angles;
   }
-  if(isdefined(body.start_flag)) {
+  if(isDefined(body.start_flag)) {
     level flag::wait_till(body.start_flag);
   }
-  if(!isdefined(reverse)) {
+  if(!isDefined(reverse)) {
     current_node = path_start_node;
     next_node = linked_nodes[0].next_node;
     fx_name = "digger_treadfx_fwd";
@@ -1017,12 +1015,12 @@ function digger_follow_path(body, reverse, arm) {
     self.digger_speed = 5;
     level flag::clear("digger_moving");
   }
-  body playsound("evt_dig_move_start");
+  body playSound("evt_dig_move_start");
   self clientfield::set("digger_moving", 1);
   arm clientfield::set("digger_arm_fx", 1);
   exploder::exploder(body.var_3d838929);
   exploder::exploder(body.var_ebcc585f);
-  body playloopsound("evt_dig_move_loop", 0.5);
+  body playLoopSound("evt_dig_move_loop", 0.5);
   if(body.digger_name == "hangar") {
     exploder::exploder("fxexp_102");
   } else if(body.digger_name == "teleporter") {
@@ -1030,7 +1028,7 @@ function digger_follow_path(body, reverse, arm) {
   }
   self.start_time = gettime();
   level thread digger_debugger_counter(level.diggers_global_time);
-  while (!reached_end) {
+  while(!reached_end) {
     if(level flag::get(body.hacked_flag)) {
       direction = "bkwd";
       if(level flag::get("digger_moving")) {
@@ -1043,16 +1041,16 @@ function digger_follow_path(body, reverse, arm) {
       direction = "fwd";
     }
     last_node_dir = (1, 0, 0);
-    if(isdefined(last_node)) {
+    if(isDefined(last_node)) {
       last_node_dir = current_node.origin - last_node.origin;
       last_node_dir = vectornormalize(last_node_dir);
     } else {
-      last_node_dir = anglestoforward(self.angles);
+      last_node_dir = anglesToForward(self.angles);
     }
     curr_node_dir = next_node.origin - current_node.origin;
     curr_node_dir = vectornormalize(curr_node_dir);
     if(direction == "fwd") {
-      if(isdefined(current_node.next_node) && isdefined(current_node.next_node.next_node)) {
+      if(isDefined(current_node.next_node) && isDefined(current_node.next_node.next_node)) {
         next_node_dir = current_node.next_node.next_node.origin - next_node.origin;
       } else {
         end_time = gettime();
@@ -1060,7 +1058,7 @@ function digger_follow_path(body, reverse, arm) {
         reached_end = 1;
       }
     } else {
-      if(isdefined(current_node.previous_node) && isdefined(current_node.previous_node.previous_node)) {
+      if(isDefined(current_node.previous_node) && isDefined(current_node.previous_node.previous_node)) {
         next_node_dir = current_node.previous_node.previous_node.origin - next_node.origin;
       } else {
         end_time = gettime();
@@ -1174,15 +1172,11 @@ function quantum_bomb_remove_digger_result(position) {
   hangar_blocker = getent("digger_hangar_blocker", "targetname");
   if(distancesquared(hangar_blocker.origin, position) < range_squared) {
     level flag::set("hangar_digger_hacked");
-    [
-      [level.quantum_bomb_play_area_effect_func]
-    ](position);
+    [[level.quantum_bomb_play_area_effect_func]](position);
   }
   teleporter_blocker = getent("digger_teleporter_blocker", "targetname");
   if(distancesquared(teleporter_blocker.origin, position) < range_squared) {
     level flag::set("teleporter_digger_hacked");
-    [
-      [level.quantum_bomb_play_area_effect_func]
-    ](position);
+    [[level.quantum_bomb_play_area_effect_func]](position);
   }
 }

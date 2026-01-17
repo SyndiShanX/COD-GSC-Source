@@ -27,13 +27,13 @@ main() {
   station_treasure_chest_init();
   level.enemy_location_override_func = ::enemy_location_override;
   collision = spawn("script_model", (-6896, 4744, 0), 1);
-  collision setmodel("zm_collision_transit_busdepot_survival");
+  collision setModel("zm_collision_transit_busdepot_survival");
   collision disconnectpaths();
   flag_wait("initial_blackscreen_passed");
   level thread maps\mp\zombies\_zm_perks::perk_machine_removal("specialty_quickrevive", "p_glo_tools_chest_tall");
   flag_set("power_on");
   level setclientfield("zombie_power_on", 1);
-  zombie_doors = getentarray("zombie_door", "targetname");
+  zombie_doors = getEntArray("zombie_door", "targetname");
 
   foreach(door in zombie_doors) {
     if(isDefined(door.script_noteworthy) && door.script_noteworthy == "local_electric_door")

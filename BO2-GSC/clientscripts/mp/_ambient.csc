@@ -13,7 +13,7 @@ setup_point_fx(point, fx_id) {
   point.fx_id = fx_id;
 
   if(isDefined(point.angles)) {
-    point.forward = anglestoforward(point.angles);
+    point.forward = anglesToForward(point.angles);
     point.up = anglestoup(point.angles);
   } else {
     point.angles = (0, 0, 0);
@@ -43,7 +43,7 @@ ambient_flak_think(point) {
   for(;;) {
     for(timer = randomfloatrange(min_burst_time, max_burst_time); timer > 0; timer = timer - 0.2) {
       point.is_firing = 1;
-      playfx(0, level._effect[point.fx_id], point.origin, point.forward, point.up);
+      playFX(0, level._effect[point.fx_id], point.origin, point.forward, point.up);
       thread play_sound_in_space(0, "wpn_triple25_fire", point.origin);
       wait 0.2;
     }
@@ -66,7 +66,7 @@ ambient_flak_rotate(point) {
     time = randomfloatrange(0.5, 2);
     steps = time * 10;
     random_angle = (randomintrange(min_pitch, max_pitch) * -1, randomint(360), 0);
-    forward = anglestoforward(random_angle);
+    forward = anglesToForward(random_angle);
     up = anglestoup(random_angle);
     diff_forward = (forward - point.forward) / steps;
     diff_up = (up - point.up) / steps;
@@ -103,10 +103,10 @@ ambient_flak_flash(point, min_burst_time, max_burst_time) {
     }
 
     fxpos = point.origin + vectorscale(point.forward, randomintrange(min_dist, max_dist));
-    playfx(0, level._effect["flak_burst_single"], fxpos);
+    playFX(0, level._effect["flak_burst_single"], fxpos);
 
     if(isDefined(level.timeofday) && (level.timeofday == "evening" || level.timeofday == "night"))
-      playfx(0, level._effect["flak_cloudflash_night"], fxpos);
+      playFX(0, level._effect["flak_cloudflash_night"], fxpos);
 
     wait(randomfloatrange(min_burst_time, max_burst_time));
   }
@@ -258,12 +258,12 @@ ambient_fakefire_think(point) {
 
     for(i = 0; i < burst; i++) {
       tracedist = 10000;
-      target = point.origin + vectorscale(anglestoforward(point.angles + (-3 + randomint(6), -5 + randomint(10), 0)), tracedist);
+      target = point.origin + vectorscale(anglesToForward(point.angles + (-3 + randomint(6), -5 + randomint(10), 0)), tracedist);
 
       if(randomint(100) <= 20)
         bullettracer(point.origin, target);
 
-      playfx(0, level._effect[point.fx_id], point.origin, point.forward);
+      playFX(0, level._effect[point.fx_id], point.origin, point.forward);
       wait(randomfloatrange(betweenshotsmin, betweenshotsmax));
     }
 
@@ -272,7 +272,7 @@ ambient_fakefire_think(point) {
 }
 
 ceiling_fans_init(clientnum) {
-  fan_array = getentarray(clientnum, "ceiling_fan", "targetname");
+  fan_array = getEntArray(clientnum, "ceiling_fan", "targetname");
 
   if(isDefined(fan_array)) {
     println("**********fan array is defined, size: " + fan_array.size);
@@ -329,24 +329,24 @@ clocks_init(clientnum) {
 
   minutes = curr_time[1];
   seconds = curr_time[2];
-  hour_hand = getentarray(clientnum, "hour_hand", "targetname");
+  hour_hand = getEntArray(clientnum, "hour_hand", "targetname");
   hour_values = [];
   hour_values["hand_time"] = hours;
   hour_values["rotate"] = 30;
   hour_values["rotate_bit"] = 0.00833333;
   hour_values["first_rotate"] = (minutes * 60 + seconds) * hour_values["rotate_bit"];
-  minute_hand = getentarray(clientnum, "minute_hand", "targetname");
+  minute_hand = getEntArray(clientnum, "minute_hand", "targetname");
   minute_values = [];
   minute_values["hand_time"] = minutes;
   minute_values["rotate"] = 6;
   minute_values["rotate_bit"] = 0.1;
   minute_values["first_rotate"] = seconds * minute_values["rotate_bit"];
-  second_hand = getentarray(clientnum, "second_hand", "targetname");
+  second_hand = getEntArray(clientnum, "second_hand", "targetname");
   second_values = [];
   second_values["hand_time"] = seconds;
   second_values["rotate"] = 6;
   second_values["rotate_bit"] = 6;
-  hour_hand_array = getentarray(clientnum, "hour_hand", "targetname");
+  hour_hand_array = getEntArray(clientnum, "hour_hand", "targetname");
 
   if(isDefined(hour_hand_array)) {
     println("**********hour_hand_array is defined, size: " + hour_hand_array.size);
@@ -354,7 +354,7 @@ clocks_init(clientnum) {
     array_thread(hour_hand_array, ::clock_run, hour_values);
   }
 
-  minute_hand_array = getentarray(clientnum, "minute_hand", "targetname");
+  minute_hand_array = getEntArray(clientnum, "minute_hand", "targetname");
 
   if(isDefined(minute_hand_array)) {
     println("**********minute_hand_array is defined, size: " + minute_hand_array.size);
@@ -362,7 +362,7 @@ clocks_init(clientnum) {
     array_thread(minute_hand_array, ::clock_run, minute_values);
   }
 
-  second_hand_array = getentarray(clientnum, "second_hand", "targetname");
+  second_hand_array = getEntArray(clientnum, "second_hand", "targetname");
 
   if(isDefined(second_hand_array)) {
     println("**********second_hand_array is defined, size: " + second_hand_array.size);
@@ -455,8 +455,8 @@ clock_run(time_values) {
 }
 
 spin_anemometers(clientnum) {
-  spoon_spinners = getentarray(clientnum, "spinner1", "targetname");
-  flat_spinners = getentarray(clientnum, "spinner2", "targetname");
+  spoon_spinners = getEntArray(clientnum, "spinner1", "targetname");
+  flat_spinners = getEntArray(clientnum, "spinner2", "targetname");
 
   if(isDefined(spoon_spinners)) {
     println("**********spoon_spinners is defined, size: " + spoon_spinners.size);

@@ -8,32 +8,30 @@
 #namespace system;
 
 function register(str_system, func_preinit, func_postinit, reqs = []) {
-  if(isdefined(level.system_funcs) && isdefined(level.system_funcs[str_system])) {
+  if(isDefined(level.system_funcs) && isDefined(level.system_funcs[str_system])) {
     return;
   }
-  if(!isdefined(level.system_funcs)) {
+  if(!isDefined(level.system_funcs)) {
     level.system_funcs = [];
   }
-  level.system_funcs[str_system] = spawnstruct();
+  level.system_funcs[str_system] = spawnStruct();
   level.system_funcs[str_system].prefunc = func_preinit;
   level.system_funcs[str_system].postfunc = func_postinit;
   level.system_funcs[str_system].reqs = reqs;
-  level.system_funcs[str_system].predone = !isdefined(func_preinit);
-  level.system_funcs[str_system].postdone = !isdefined(func_postinit);
+  level.system_funcs[str_system].predone = !isDefined(func_preinit);
+  level.system_funcs[str_system].postdone = !isDefined(func_postinit);
   level.system_funcs[str_system].ignore = 0;
 }
 
 function exec_post_system(req) {
-  if(!isdefined(level.system_funcs[req])) {
+  if(!isDefined(level.system_funcs[req])) {
     assertmsg(("" + req) + "");
   }
   if(level.system_funcs[req].ignore) {
     return;
   }
   if(!level.system_funcs[req].postdone) {
-    [
-      [level.system_funcs[req].postfunc]
-    ]();
+    [[level.system_funcs[req].postfunc]]();
     level.system_funcs[req].postdone = 1;
   }
 }
@@ -57,16 +55,14 @@ function run_post_systems() {
 }
 
 function exec_pre_system(req) {
-  if(!isdefined(level.system_funcs[req])) {
+  if(!isDefined(level.system_funcs[req])) {
     assertmsg(("" + req) + "");
   }
   if(level.system_funcs[req].ignore) {
     return;
   }
   if(!level.system_funcs[req].predone) {
-    [
-      [level.system_funcs[req].prefunc]
-    ]();
+    [[level.system_funcs[req].prefunc]]();
     level.system_funcs[req].predone = 1;
   }
 }
@@ -92,15 +88,15 @@ function wait_till(required_systems) {
 }
 
 function ignore(str_system) {
-  assert(!isdefined(level.gametype), "");
-  if(!isdefined(level.system_funcs) || !isdefined(level.system_funcs[str_system])) {
+  assert(!isDefined(level.gametype), "");
+  if(!isDefined(level.system_funcs) || !isDefined(level.system_funcs[str_system])) {
     register(str_system, undefined, undefined, undefined);
   }
   level.system_funcs[str_system].ignore = 1;
 }
 
 function is_system_running(str_system) {
-  if(!isdefined(level.system_funcs) || !isdefined(level.system_funcs[str_system])) {
+  if(!isDefined(level.system_funcs) || !isDefined(level.system_funcs[str_system])) {
     return 0;
   }
   return level.system_funcs[str_system].postdone;

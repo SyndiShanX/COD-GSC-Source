@@ -27,7 +27,6 @@
 #include scripts\zm_common\zm_score;
 #include scripts\zm_common\zm_spawner;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_ai_nova_crawler;
 
 autoexec __init__system__() {
@@ -48,7 +47,7 @@ __init__() {
 
   zm_devgui::function_c7dd7a17("<dev string:x38>");
 
-    clientfield::register("actor", "nova_crawler_burst_clientfield", 1, 1, "int");
+  clientfield::register("actor", "nova_crawler_burst_clientfield", 1, 1, "int");
   clientfield::register("toplayer", "nova_crawler_burst_postfx_clientfield", 1, 1, "int");
   clientfield::register("toplayer", "nova_crawler_gas_cloud_postfx_clientfield", 1, 1, "int");
 }
@@ -76,15 +75,15 @@ function_1d34f2b6() {
 
   if(!isDefined(self._effect)) {
     self._effect = [];
-    self._effect[#"nova_crawler_aura_fx"] = "zm_ai/fx8_nova_crawler_gas_trail";
+    self._effect[# "nova_crawler_aura_fx"] = "zm_ai/fx8_nova_crawler_gas_trail";
   }
 }
 
-private function_1dc9be26() {
+function_1dc9be26() {
   self thread function_488c1ac2();
 }
 
-private function_edb72673(origin) {
+function_edb72673(origin) {
   goal_pos = getclosestpointonnavmesh(origin, 200, 24);
 
   if(isDefined(goal_pos)) {
@@ -142,7 +141,7 @@ function_29c22852(entity) {
   return true;
 }
 
-private function_33b29495(entity) {
+function_33b29495(entity) {
   var_711090a2 = 0;
   var_b77044e1 = lerpfloat(0.2, 0.8, math::clamp((level.round_number - 1) / 30, 0, 1));
 
@@ -153,7 +152,7 @@ private function_33b29495(entity) {
   return var_711090a2;
 }
 
-private function_27a1a846(entity) {
+function_27a1a846(entity) {
   var_62d41d8f = 0;
 
   if(isDefined(self.killed_enemy_player) && self.killed_enemy_player) {
@@ -164,7 +163,7 @@ private function_27a1a846(entity) {
   return var_62d41d8f;
 }
 
-private function_99ac548f(entity) {
+function_99ac548f(entity) {
   var_75aa8513 = 0;
 
   if(isDefined(entity.enemy) && zm_utility::is_player_valid(entity.enemy)) {
@@ -178,20 +177,20 @@ private function_99ac548f(entity) {
   }
 }
 
-private function_488c1ac2() {
+function_488c1ac2() {
   self endon(#"death");
-  self waittilltimeout(1, #"spawn_complete");
-  zm_net::network_safe_play_fx_on_tag("quad_trail", 2, self._effect[#"nova_crawler_aura_fx"], self, "j_spine4");
+  self waittilltimeout(1, # "spawn_complete");
+  zm_net::network_safe_play_fx_on_tag("quad_trail", 2, self._effect[# "nova_crawler_aura_fx"], self, "j_spine4");
 }
 
-private function_d79b3357(entity, origin) {
+function_d79b3357(entity, origin) {
   playsoundatposition(#"zmb_quad_explo", origin);
   entity clientfield::set("nova_crawler_burst_clientfield", 1);
   players = getplayers();
   zombies = getaiteamarray(level.zombie_team);
 
   for(i = 0; i < zombies.size; i++) {
-    if(zombies[i].archetype != #"nova_crawler" && distance(origin, zombies[i].origin) <= 96) {
+    if(zombies[i].archetype != # "nova_crawler" && distance(origin, zombies[i].origin) <= 96) {
       zombies[i] dodamage(zombies[i].maxhealth * 1.05, origin, entity);
 
       if(zombies[i].health <= 0) {
@@ -211,7 +210,7 @@ private function_d79b3357(entity, origin) {
   }
 }
 
-private function_4632879c(entity) {
+function_4632879c(entity) {
   effectarea = spawn("trigger_radius", entity.origin, 0, 125, 100);
   gas_time = 0;
 
@@ -241,7 +240,7 @@ private function_4632879c(entity) {
   effectarea delete();
 }
 
-private function_272fa9b5(entity) {
+function_272fa9b5(entity) {
   if(isDefined(self.can_explode) && self.can_explode) {
     self thread function_d79b3357(self, self.origin);
 
@@ -254,7 +253,7 @@ private function_272fa9b5(entity) {
 }
 
 function_c5b157a6(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime) {
-  if(self.archetype == #"nova_crawler") {
+  if(self.archetype == # "nova_crawler") {
     self destructserverutils::togglespawngibs(self, 1);
     self destructserverutils::function_629a8d54(self, "tag_weapon_right");
   }

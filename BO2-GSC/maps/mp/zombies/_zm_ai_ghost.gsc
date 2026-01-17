@@ -51,7 +51,7 @@ init() {
   level.zombie_ai_limit_ghost_per_player = 1;
   level.zombie_ghost_count = 0;
   level.ghost_health = 100;
-  level.zombie_ghost_round_states = spawnstruct();
+  level.zombie_ghost_round_states = spawnStruct();
   level.zombie_ghost_round_states.any_player_in_ghost_zone = 0;
   level.zombie_ghost_round_states.active_zombie_locations = [];
   level.is_ghost_round_started = ::is_ghost_round_started;
@@ -89,7 +89,7 @@ init() {
 }
 
 init_ghost_spawners() {
-  level.ghost_spawners = getentarray("ghost_zombie_spawner", "script_noteworthy");
+  level.ghost_spawners = getEntArray("ghost_zombie_spawner", "script_noteworthy");
 
   if(level.ghost_spawners.size == 0)
     return false;
@@ -137,7 +137,7 @@ init_ghost_sounds() {
 
 init_ghost_zone() {
   level.ghost_start_area = getent("ghost_start_area", "targetname");
-  level.ghost_zone_door_clips = getentarray("ghost_zone_door_clip", "targetname");
+  level.ghost_zone_door_clips = getEntArray("ghost_zone_door_clip", "targetname");
   enable_ghost_zone_door_ai_clips();
   level.ghost_zone_start_lower_locations = getstructarray("ghost_zone_start_lower_location", "targetname");
   level.ghost_drop_down_locations = getstructarray("ghost_start_zone_spawners", "targetname");
@@ -150,13 +150,13 @@ init_ghost_zone() {
   level.ghost_entry_room_to_mansion = "ghost_to_maze_zone_1";
   level.ghost_entry_room_to_maze = "ghost_to_maze_zone_5";
   level.ghost_rooms = [];
-  a_rooms = getentarray("ghost_zone", "script_noteworthy");
+  a_rooms = getEntArray("ghost_zone", "script_noteworthy");
 
   foreach(room in a_rooms) {
     str_targetname = room.targetname;
 
     if(!isDefined(level.ghost_rooms[str_targetname])) {
-      level.ghost_rooms[str_targetname] = spawnstruct();
+      level.ghost_rooms[str_targetname] = spawnStruct();
       level.ghost_rooms[str_targetname].ghost_spawn_locations = [];
       level.ghost_rooms[str_targetname].volumes = [];
       level.ghost_rooms[str_targetname].name = str_targetname;
@@ -430,9 +430,7 @@ player_in_ghost_zone(player) {
   result = 0;
 
   if(isDefined(level.is_player_in_ghost_zone))
-    result = [
-      [level.is_player_in_ghost_zone]
-    ](player);
+    result = [[level.is_player_in_ghost_zone]](player);
 
   player.is_in_ghost_zone = result;
   return result;
@@ -630,7 +628,7 @@ ghost_death_func() {
     level.ghost_round_last_ghost_origin = self.origin;
 
   self stoploopsound(1);
-  self playsound("zmb_ai_ghost_death");
+  self playSound("zmb_ai_ghost_death");
   self setclientfield("ghost_impact_fx", 1);
   self setclientfield("ghost_fx", 1);
   self thread prepare_to_die();
@@ -679,8 +677,7 @@ subwoofer_fling_func(weapon, fling_vec) {
   self dodamage(self.health + 666, weapon.origin);
 }
 
-subwoofer_knockdown_func(weapon, gib) {
-}
+subwoofer_knockdown_func(weapon, gib) {}
 
 ghost_think() {
   self endon("death");
@@ -1135,7 +1132,7 @@ evaporate_update() {
 }
 
 is_within_capsule(point, origin, angles, radius, range) {
-  forward_dir = vectornormalize(anglestoforward(angles));
+  forward_dir = vectornormalize(anglesToForward(angles));
   start = origin + forward_dir * radius;
   end = start + forward_dir * range;
   point_intersect = pointonsegmentnearesttopoint(start, end, point);
@@ -1157,7 +1154,7 @@ is_within_view_2d(point, origin, angles, fov_cos) {
 }
 
 get_dot_production_2d(point, origin, angles) {
-  forward_dir = anglestoforward(angles);
+  forward_dir = anglesToForward(angles);
   forward_dir = (forward_dir[0], forward_dir[1], 0);
   forward_dir = vectornormalize(forward_dir);
   to_point_dir = point - origin;
@@ -1549,7 +1546,7 @@ clear_all_active_zombies() {
 
     foreach(zombie in zombies) {
       if(!(isDefined(zombie.is_ghost) && zombie.is_ghost)) {
-        spawn_point = spawnstruct();
+        spawn_point = spawnStruct();
         spawn_point.origin = zombie.origin;
         spawn_point.angles = zombie.angles;
 
@@ -1668,9 +1665,9 @@ sndghostroundmus() {
   level.sndroundwait = 1;
   ent thread sndghostroundmus_end();
   ent endon("sndGhostRoundEnd");
-  ent playsound("mus_ghost_round_start");
+  ent playSound("mus_ghost_round_start");
   wait 11;
-  ent playloopsound("mus_ghost_round_loop", 3);
+  ent playLoopSound("mus_ghost_round_loop", 3);
 }
 
 sndghostroundmus_end() {
@@ -1694,7 +1691,7 @@ sndghostroundready() {
     if(level.zombie_ghost_round_states.next_ghost_round_number == level.round_number) {
       playsoundatposition("zmb_ghost_round_srt", mansion);
       ent = spawn("script_origin", mansion);
-      ent playloopsound("zmb_ghost_round_lp", 3);
+      ent playLoopSound("zmb_ghost_round_lp", 3);
       ent thread sndghostroundready_stoplp();
       break;
     }
@@ -1987,8 +1984,7 @@ can_start_ghost_round_presentation_stage_3() {
 
 get_next_spot_during_ghost_round_presentation() {
   if(isDefined(level.current_ghost_window_index)) {
-    for(standing_location_index = randomint(level.ghost_front_standing_locations.size); standing_location_index == level.current_ghost_window_index; standing_location_index = randomint(level.ghost_front_standing_locations.size)) {
-    }
+    for(standing_location_index = randomint(level.ghost_front_standing_locations.size); standing_location_index == level.current_ghost_window_index; standing_location_index = randomint(level.ghost_front_standing_locations.size)) {}
 
     level.current_ghost_window_index = standing_location_index;
   } else
@@ -2001,7 +1997,7 @@ spawn_ghost_round_presentation_ghost() {
   spawn_point = get_next_spot_during_ghost_round_presentation();
   ghost = spawn("script_model", spawn_point.origin);
   ghost.angles = spawn_point.angles;
-  ghost setmodel("c_zom_zombie_buried_ghost_woman_fb");
+  ghost setModel("c_zom_zombie_buried_ghost_woman_fb");
 
   if(isDefined(ghost)) {
     ghost.spawn_point = spawn_point;
@@ -2045,13 +2041,13 @@ ghost_round_presentation_think() {
 
       if(can_start_ghost_round_presentation_stage_2()) {
         level.zombie_ghost_round_states.presentation_stage_2_started = 1;
-        level.sndmansionent playloopsound("zmb_ghost_round_lp_quiet", 3);
+        level.sndmansionent playLoopSound("zmb_ghost_round_lp_quiet", 3);
         level setclientfield("ghost_round_light_state", 1);
       }
 
       if(can_start_ghost_round_presentation_stage_3()) {
         level.zombie_ghost_round_states.presentation_stage_3_started = 1;
-        level.sndmansionent playloopsound("zmb_ghost_round_lp_loud", 3);
+        level.sndmansionent playLoopSound("zmb_ghost_round_lp_loud", 3);
 
         if(isDefined(level.ghost_round_presentation_ghost))
           level.ghost_round_presentation_ghost thread ghost_round_presentation_sound();
@@ -2230,7 +2226,7 @@ time_bomb_custom_get_enemy_func() {
 }
 
 time_bomb_global_data_save_ghosts() {
-  s_temp = spawnstruct();
+  s_temp = spawnStruct();
   s_temp.ghost_count = level.zombie_ghost_count;
   s_temp.round_started = level.zombie_ghost_round_states.is_started;
   s_temp.round_first_done = level.zombie_ghost_round_states.is_first_ghost_round_finished;
@@ -2301,7 +2297,7 @@ restore_ghost_failsafe() {
 
 _restore_ghost_data(save_struct, n_index) {
   s_data = save_struct.enemies[n_index];
-  playfxontag(level._effect["time_bomb_respawns_enemy"], self, "J_SpineLower");
+  playFXOnTag(level._effect["time_bomb_respawns_enemy"], self, "J_SpineLower");
   self.origin = s_data.origin;
   self.angles = s_data.angles;
   self.is_ghost = s_data.is_ghost;

@@ -29,13 +29,13 @@ set_level_lighting_values() {
 
 setup_spinning_ents() {
   var_0 = common_scripts\utility::spawn_tag_origin();
-  var_1 = getentarray("spinning", "targetname");
+  var_1 = getEntArray("spinning", "targetname");
 
   foreach(var_3 in var_1) {
     var_4 = getent(var_3.script_linkto, "script_linkname");
     wait 1.0;
 
-    if(isdefined(var_4)) {
+    if(isDefined(var_4)) {
       var_3 linkto(var_0);
       var_3 thread maps\_utility::yaw_ent_by_linked(1.0);
       var_4 thread maps\_utility::rotate_ent_with_ent(var_3);
@@ -44,7 +44,7 @@ setup_spinning_ents() {
 }
 
 setup_emissive_pulsing() {
-  var_0 = getentarray("emissive_pulsing", "targetname");
+  var_0 = getEntArray("emissive_pulsing", "targetname");
   common_scripts\utility::array_thread(var_0, ::emissive_pulsing);
 }
 
@@ -54,13 +54,13 @@ emissive_pulsing() {
   var_2 = 0.5;
   var_3 = 1.0;
 
-  if(isdefined(self.script_noteworthy)) {
+  if(isDefined(self.script_noteworthy)) {
     var_4 = strtok(self.script_noteworthy, " ");
 
-    if(isdefined(var_4[0]))
+    if(isDefined(var_4[0]))
       var_2 = float(var_4[0]);
 
-    if(isdefined(var_4[1]))
+    if(isDefined(var_4[1]))
       var_3 = float(var_4[1]);
   }
 
@@ -69,7 +69,7 @@ emissive_pulsing() {
   var_7 = 0.0 - (var_3 - var_2) / (var_0 / var_5);
   var_8 = (var_3 - var_2) / (var_1 / var_5);
 
-  for (;;) {
+  for(;;) {
     var_6 = emissive_ramp(var_0, var_6, var_7, var_2, var_3);
     wait 1;
     var_6 = emissive_ramp(var_1, var_6, var_8, var_2, var_3);
@@ -81,7 +81,7 @@ emissive_ramp(var_0, var_1, var_2, var_3, var_4) {
   var_5 = 0;
   var_6 = 0.05;
 
-  while (var_5 < var_0) {
+  while(var_5 < var_0) {
     var_1 = var_1 + var_2;
     var_1 = clamp(var_1, var_3, var_4);
     self setmaterialscriptparam(var_1, 0.0);

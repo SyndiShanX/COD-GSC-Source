@@ -17,14 +17,14 @@
 #namespace globallogic_audio;
 
 function autoexec __init__sytem__() {
-  system::register("globallogic_audio", & __init__, undefined, undefined);
+  system::register("globallogic_audio", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype( & init);
-  level.playleaderdialogonplayer = & leader_dialog_on_player;
-  level.playequipmentdestroyedonplayer = & play_equipment_destroyed_on_player;
-  level.playequipmenthackedonplayer = & play_equipment_hacked_on_player;
+  callback::on_start_gametype(&init);
+  level.playleaderdialogonplayer = &leader_dialog_on_player;
+  level.playequipmentdestroyedonplayer = &play_equipment_destroyed_on_player;
+  level.playequipmenthackedonplayer = &play_equipment_hacked_on_player;
 }
 
 function init() {
@@ -81,7 +81,7 @@ function init() {
 }
 
 function set_leader_gametype_dialog(startgamedialogkey, starthcgamedialogkey, offenseorderdialogkey, defenseorderdialogkey) {
-  level.leaderdialog = spawnstruct();
+  level.leaderdialog = spawnStruct();
   level.leaderdialog.startgamedialog = startgamedialogkey;
   level.leaderdialog.starthcgamedialog = starthcgamedialogkey;
   level.leaderdialog.offenseorderdialog = offenseorderdialogkey;
@@ -92,10 +92,10 @@ function announce_round_winner(winner, delay) {
   if(delay > 0) {
     wait(delay);
   }
-  if(!isdefined(winner) || isplayer(winner)) {
+  if(!isDefined(winner) || isplayer(winner)) {
     return;
   }
-  if(isdefined(level.teams[winner])) {
+  if(isDefined(level.teams[winner])) {
     leader_dialog("roundEncourageWon", winner);
     leader_dialog_for_other_teams("roundEncourageLost", winner);
   } else {
@@ -112,7 +112,7 @@ function announce_game_winner(winner) {
   }
   wait(battlechatter::mpdialog_value("announceWinnerDelay", 0));
   if(level.teambased) {
-    if(isdefined(level.teams[winner])) {
+    if(isDefined(level.teams[winner])) {
       leader_dialog("gameWon", winner);
       leader_dialog_for_other_teams("gameLost", winner);
     } else {
@@ -138,10 +138,10 @@ function flush_dialog_on_player() {
 }
 
 function flush_killstreak_dialog_on_player(killstreakid) {
-  if(!isdefined(killstreakid)) {
+  if(!isDefined(killstreakid)) {
     return;
   }
-  for (i = self.killstreakdialogqueue.size - 1; i >= 0; i--) {
+  for(i = self.killstreakdialogqueue.size - 1; i >= 0; i--) {
     if(killstreakid === self.killstreakdialogqueue[i].killstreakid) {
       arrayremoveindex(self.killstreakdialogqueue, i);
     }
@@ -149,15 +149,15 @@ function flush_killstreak_dialog_on_player(killstreakid) {
 }
 
 function killstreak_dialog_queued(dialogkey, killstreaktype, killstreakid) {
-  if(!isdefined(dialogkey) || !isdefined(killstreaktype)) {
+  if(!isDefined(dialogkey) || !isDefined(killstreaktype)) {
     return;
   }
-  if(isdefined(self.currentkillstreakdialog)) {
+  if(isDefined(self.currentkillstreakdialog)) {
     if(dialogkey === self.currentkillstreakdialog.dialogkey && killstreaktype === self.currentkillstreakdialog.killstreaktype && killstreakid === self.currentkillstreakdialog.killstreakid) {
       return true;
     }
   }
-  for (i = 0; i < self.killstreakdialogqueue.size; i++) {
+  for(i = 0; i < self.killstreakdialogqueue.size; i++) {
     if(dialogkey === self.killstreakdialogqueue[i].dialogkey && killstreaktype === self.killstreakdialogqueue[i].killstreaktype && killstreaktype === self.killstreakdialogqueue[i].killstreaktype) {
       return true;
     }
@@ -172,10 +172,10 @@ function flush_objective_dialog(objectivekey) {
 }
 
 function flush_objective_dialog_on_player(objectivekey) {
-  if(!isdefined(objectivekey)) {
+  if(!isDefined(objectivekey)) {
     return;
   }
-  for (i = self.leaderdialogqueue.size - 1; i >= 0; i--) {
+  for(i = self.leaderdialogqueue.size - 1; i >= 0; i--) {
     if(objectivekey === self.leaderdialogqueue[i].objectivekey) {
       arrayremoveindex(self.leaderdialogqueue, i);
       break;
@@ -190,10 +190,10 @@ function flush_leader_dialog_key(dialogkey) {
 }
 
 function flush_leader_dialog_key_on_player(dialogkey) {
-  if(!isdefined(dialogkey)) {
+  if(!isDefined(dialogkey)) {
     return;
   }
-  for (i = self.leaderdialogqueue.size - 1; i >= 0; i--) {
+  for(i = self.leaderdialogqueue.size - 1; i >= 0; i--) {
     if(dialogkey === self.leaderdialogqueue[i].dialogkey) {
       arrayremoveindex(self.leaderdialogqueue, i);
     }
@@ -205,7 +205,7 @@ function play_taacom_dialog(dialogkey, killstreaktype, killstreakid) {
 }
 
 function killstreak_dialog_on_player(dialogkey, killstreaktype, killstreakid, pilotindex) {
-  if(!isdefined(dialogkey)) {
+  if(!isDefined(dialogkey)) {
     return;
   }
   if(!level.allowannouncer) {
@@ -214,13 +214,13 @@ function killstreak_dialog_on_player(dialogkey, killstreaktype, killstreakid, pi
   if(level.gameended) {
     return;
   }
-  newdialog = spawnstruct();
+  newdialog = spawnStruct();
   newdialog.dialogkey = dialogkey;
   newdialog.killstreaktype = killstreaktype;
   newdialog.pilotindex = pilotindex;
   newdialog.killstreakid = killstreakid;
   self.killstreakdialogqueue[self.killstreakdialogqueue.size] = newdialog;
-  if(self.killstreakdialogqueue.size > 1 || isdefined(self.currentkillstreakdialog)) {
+  if(self.killstreakdialogqueue.size > 1 || isDefined(self.currentkillstreakdialog)) {
     return;
   }
   if(self.playingdialog === 1 && dialogkey == "arrive") {
@@ -234,7 +234,7 @@ function wait_for_player_dialog() {
   self endon("disconnect");
   self endon("flush_dialog");
   level endon("game_ended");
-  while (self.playingdialog) {
+  while(self.playingdialog) {
     wait(0.5);
   }
   self thread play_next_killstreak_dialog();
@@ -250,24 +250,24 @@ function play_next_killstreak_dialog() {
   }
   nextdialog = self.killstreakdialogqueue[0];
   arrayremoveindex(self.killstreakdialogqueue, 0);
-  if(isdefined(self.pers["mptaacom"])) {
+  if(isDefined(self.pers["mptaacom"])) {
     taacombundle = struct::get_script_bundle("mpdialog_taacom", self.pers["mptaacom"]);
   }
-  if(isdefined(taacombundle)) {
-    if(isdefined(nextdialog.killstreaktype)) {
-      if(isdefined(nextdialog.pilotindex)) {
+  if(isDefined(taacombundle)) {
+    if(isDefined(nextdialog.killstreaktype)) {
+      if(isDefined(nextdialog.pilotindex)) {
         pilotarray = taacombundle.pilotbundles[nextdialog.killstreaktype];
-        if(isdefined(pilotarray) && nextdialog.pilotindex < pilotarray.size) {
+        if(isDefined(pilotarray) && nextdialog.pilotindex < pilotarray.size) {
           killstreakbundle = struct::get_script_bundle("mpdialog_scorestreak", pilotarray[nextdialog.pilotindex]);
-          if(isdefined(killstreakbundle)) {
+          if(isDefined(killstreakbundle)) {
             dialogalias = get_dialog_bundle_alias(killstreakbundle, nextdialog.dialogkey);
           }
         }
-      } else if(isdefined(level.killstreaks[nextdialog.killstreaktype])) {
+      } else if(isDefined(level.killstreaks[nextdialog.killstreaktype])) {
         bundlename = getstructfield(taacombundle, level.killstreaks[nextdialog.killstreaktype].taacomdialogbundlekey);
-        if(isdefined(bundlename)) {
+        if(isDefined(bundlename)) {
           killstreakbundle = struct::get_script_bundle("mpdialog_scorestreak", bundlename);
-          if(isdefined(killstreakbundle)) {
+          if(isDefined(killstreakbundle)) {
             dialogalias = self get_dialog_bundle_alias(killstreakbundle, nextdialog.dialogkey);
           }
         }
@@ -276,7 +276,7 @@ function play_next_killstreak_dialog() {
       dialogalias = self get_dialog_bundle_alias(taacombundle, nextdialog.dialogkey);
     }
   }
-  if(!isdefined(dialogalias)) {
+  if(!isDefined(dialogalias)) {
     self play_next_killstreak_dialog();
     return;
   }
@@ -294,7 +294,7 @@ function wait_next_killstreak_dialog() {
 }
 
 function leader_dialog_for_other_teams(dialogkey, skipteam, objectivekey, killstreakid, dialogbufferkey) {
-  assert(isdefined(skipteam));
+  assert(isDefined(skipteam));
   foreach(team in level.teams) {
     if(team != skipteam) {
       leader_dialog(dialogkey, team, undefined, objectivekey, killstreakid, dialogbufferkey);
@@ -303,15 +303,15 @@ function leader_dialog_for_other_teams(dialogkey, skipteam, objectivekey, killst
 }
 
 function leader_dialog(dialogkey, team, excludelist, objectivekey, killstreakid, dialogbufferkey) {
-  assert(isdefined(level.players));
+  assert(isDefined(level.players));
   foreach(player in level.players) {
-    if(!isdefined(player.pers["team"])) {
+    if(!isDefined(player.pers["team"])) {
       continue;
     }
-    if(isdefined(team) && team != player.pers["team"]) {
+    if(isDefined(team) && team != player.pers["team"]) {
       continue;
     }
-    if(isdefined(excludelist) && globallogic_utils::isexcluded(player, excludelist)) {
+    if(isDefined(excludelist) && globallogic_utils::isexcluded(player, excludelist)) {
       continue;
     }
     player leader_dialog_on_player(dialogkey, objectivekey, killstreakid, dialogbufferkey);
@@ -319,48 +319,48 @@ function leader_dialog(dialogkey, team, excludelist, objectivekey, killstreakid,
 }
 
 function leader_dialog_on_player(dialogkey, objectivekey, killstreakid, dialogbufferkey, introdialog) {
-  if(!isdefined(dialogkey)) {
+  if(!isDefined(dialogkey)) {
     return;
   }
   if(!level.allowannouncer) {
     return;
   }
-  if(!(isdefined(self.playleaderdialog) && self.playleaderdialog) && (!(isdefined(introdialog) && introdialog))) {
+  if(!(isDefined(self.playleaderdialog) && self.playleaderdialog) && (!(isDefined(introdialog) && introdialog))) {
     return;
   }
   self flush_objective_dialog_on_player(objectivekey);
-  if(self.leaderdialogqueue.size == 0 && isdefined(self.currentleaderdialog) && isdefined(objectivekey) && self.currentleaderdialog.objectivekey === objectivekey && self.currentleaderdialog.dialogkey == dialogkey) {
+  if(self.leaderdialogqueue.size == 0 && isDefined(self.currentleaderdialog) && isDefined(objectivekey) && self.currentleaderdialog.objectivekey === objectivekey && self.currentleaderdialog.dialogkey == dialogkey) {
     return;
   }
-  if(isdefined(killstreakid)) {
+  if(isDefined(killstreakid)) {
     foreach(item in self.leaderdialogqueue) {
       if(item.dialogkey == dialogkey) {
         item.killstreakids[item.killstreakids.size] = killstreakid;
         return;
       }
     }
-    if(self.leaderdialogqueue.size == 0 && isdefined(self.currentleaderdialog) && self.currentleaderdialog.dialogkey == dialogkey) {
+    if(self.leaderdialogqueue.size == 0 && isDefined(self.currentleaderdialog) && self.currentleaderdialog.dialogkey == dialogkey) {
       if(self.currentleaderdialog.playmultiple === 1) {
         return;
       }
       playmultiple = 1;
     }
   }
-  newitem = spawnstruct();
+  newitem = spawnStruct();
   newitem.priority = dialogkey_priority(dialogkey);
   newitem.dialogkey = dialogkey;
   newitem.multipledialogkey = level.multipledialogkeys[dialogkey];
   newitem.playmultiple = playmultiple;
   newitem.objectivekey = objectivekey;
-  if(isdefined(killstreakid)) {
+  if(isDefined(killstreakid)) {
     newitem.killstreakids = [];
     newitem.killstreakids[0] = killstreakid;
   }
   newitem.dialogbufferkey = dialogbufferkey;
   iteminserted = 0;
-  if(isdefined(newitem.priority)) {
-    for (i = 0; i < self.leaderdialogqueue.size; i++) {
-      if(isdefined(self.leaderdialogqueue[i].priority) && self.leaderdialogqueue[i].priority <= newitem.priority) {
+  if(isDefined(newitem.priority)) {
+    for(i = 0; i < self.leaderdialogqueue.size; i++) {
+      if(isDefined(self.leaderdialogqueue[i].priority) && self.leaderdialogqueue[i].priority <= newitem.priority) {
         continue;
       }
       arrayinsert(self.leaderdialogqueue, newitem, i);
@@ -371,7 +371,7 @@ function leader_dialog_on_player(dialogkey, objectivekey, killstreakid, dialogbu
   if(!iteminserted) {
     self.leaderdialogqueue[self.leaderdialogqueue.size] = newitem;
   }
-  if(isdefined(self.currentleaderdialog)) {
+  if(isDefined(self.currentleaderdialog)) {
     return;
   }
   self thread play_next_leader_dialog();
@@ -388,10 +388,10 @@ function play_next_leader_dialog() {
   nextdialog = self.leaderdialogqueue[0];
   arrayremoveindex(self.leaderdialogqueue, 0);
   dialogkey = nextdialog.dialogkey;
-  if(isdefined(nextdialog.killstreakids)) {
+  if(isDefined(nextdialog.killstreakids)) {
     triggeredcount = 0;
     foreach(killstreakid in nextdialog.killstreakids) {
-      if(isdefined(level.killstreaks_triggered[killstreakid])) {
+      if(isDefined(level.killstreaks_triggered[killstreakid])) {
         triggeredcount++;
       }
     }
@@ -400,13 +400,13 @@ function play_next_leader_dialog() {
       return;
     }
     if(triggeredcount > 1 || nextdialog.playmultiple === 1) {
-      if(isdefined(level.multipledialogkeys[dialogkey])) {
+      if(isDefined(level.multipledialogkeys[dialogkey])) {
         dialogkey = level.multipledialogkeys[dialogkey];
       }
     }
   }
   dialogalias = self get_commander_dialog_alias(dialogkey);
-  if(!isdefined(dialogalias)) {
+  if(!isDefined(dialogalias)) {
     self thread play_next_leader_dialog();
     return;
   }
@@ -551,7 +551,7 @@ function play_equipment_hacked_on_player() {
 }
 
 function get_commander_dialog_alias(dialogkey) {
-  if(!isdefined(self.pers["mpcommander"])) {
+  if(!isDefined(self.pers["mpcommander"])) {
     return undefined;
   }
   commanderbundle = struct::get_script_bundle("mpdialog_commander", self.pers["mpcommander"]);
@@ -559,15 +559,15 @@ function get_commander_dialog_alias(dialogkey) {
 }
 
 function get_dialog_bundle_alias(dialogbundle, dialogkey) {
-  if(!isdefined(dialogbundle) || !isdefined(dialogkey)) {
+  if(!isDefined(dialogbundle) || !isDefined(dialogkey)) {
     return undefined;
   }
   dialogalias = getstructfield(dialogbundle, dialogkey);
-  if(!isdefined(dialogalias)) {
+  if(!isDefined(dialogalias)) {
     return;
   }
   voiceprefix = getstructfield(dialogbundle, "voiceprefix");
-  if(isdefined(voiceprefix)) {
+  if(isDefined(voiceprefix)) {
     dialogalias = voiceprefix + dialogalias;
   }
   return dialogalias;
@@ -597,10 +597,10 @@ function announce_team_is_winning() {
 }
 
 function play_2d_on_team(alias, team) {
-  assert(isdefined(level.players));
-  for (i = 0; i < level.players.size; i++) {
+  assert(isDefined(level.players));
+  for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
-    if(isdefined(player.pers["team"]) && player.pers["team"] == team) {
+    if(isDefined(player.pers["team"]) && player.pers["team"] == team) {
       player playlocalsound(alias);
     }
   }
@@ -660,7 +660,7 @@ function sndmusicsetrandomizer() {
       game["musicSet"] = "0" + game["musicSet"];
     }
     game["musicSet"] = "_" + game["musicSet"];
-    if(isdefined(level.freerun) && level.freerun) {
+    if(isDefined(level.freerun) && level.freerun) {
       game["musicSet"] = "";
     }
   }
@@ -691,7 +691,7 @@ function sndmusicunlock() {
       break;
     }
   }
-  if(isdefined(unlockname)) {
+  if(isDefined(unlockname)) {
     level thread audio::unlockfrontendmusic(unlockname);
   }
 }
@@ -700,7 +700,7 @@ function sndmusictimesout() {
   level endon("game_ended");
   level endon("musicendingoverride");
   level waittill("match_ending_very_soon");
-  if(isdefined(level.gametype) && (level.gametype == "sd" || level.gametype == "prop")) {
+  if(isDefined(level.gametype) && (level.gametype == "sd" || level.gametype == "prop")) {
     level thread set_music_on_team("timeOutQuiet");
   } else {
     level thread set_music_on_team("timeOut");
@@ -720,11 +720,11 @@ function sndmusictimelimitwatcher() {
   level endon("match_ending_soon");
   level endon("match_ending_very_soon");
   level endon("sndmusichalfway");
-  if(!isdefined(level.timelimit) || level.timelimit == 0) {
+  if(!isDefined(level.timelimit) || level.timelimit == 0) {
     return;
   }
   halfway = (level.timelimit * 60) * 0.5;
-  while (true) {
+  while(true) {
     timeleft = globallogic_utils::gettimeremaining() / 1000;
     if(timeleft <= halfway) {
       level notify("sndmusichalfway");
@@ -735,13 +735,13 @@ function sndmusictimelimitwatcher() {
 }
 
 function set_music_on_team(state, team = "both", wait_time = 0, save_state = 0, return_state = 0) {
-  assert(isdefined(level.players));
+  assert(isDefined(level.players));
   foreach(player in level.players) {
     if(team == "both") {
       player thread set_music_on_player(state, wait_time, save_state, return_state);
       continue;
     }
-    if(isdefined(player.pers["team"]) && player.pers["team"] == team) {
+    if(isDefined(player.pers["team"]) && player.pers["team"] == team) {
       player thread set_music_on_player(state, wait_time, save_state, return_state);
     }
   }
@@ -750,20 +750,20 @@ function set_music_on_team(state, team = "both", wait_time = 0, save_state = 0, 
 function set_music_on_player(state, wait_time = 0, save_state = 0, return_state = 0) {
   self endon("disconnect");
   assert(isplayer(self));
-  if(!isdefined(state)) {
+  if(!isDefined(state)) {
     return;
   }
-  if(!isdefined(game["musicSet"])) {
+  if(!isDefined(game["musicSet"])) {
     return;
   }
   music::setmusicstate(state + game["musicSet"], self);
 }
 
 function set_music_global(state, wait_time = 0, save_state = 0, return_state = 0) {
-  if(!isdefined(state)) {
+  if(!isDefined(state)) {
     return;
   }
-  if(!isdefined(game["musicSet"])) {
+  if(!isDefined(game["musicSet"])) {
     return;
   }
   music::setmusicstate(state + game["musicSet"]);

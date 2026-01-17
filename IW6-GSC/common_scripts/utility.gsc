@@ -2575,11 +2575,7 @@ array_sort_by_handler(array, compare_func) {
 
   for(i = 0; i < array.size - 1; i++) {
     for(j = i + 1; j < array.size; j++) {
-      if(array[j][
-          [compare_func]
-        ]() < array[i][
-          [compare_func]
-        ]()) {
+      if(array[j][[compare_func]]() < array[i][[compare_func]]()) {
         ref = array[j];
         array[j] = array[i];
         array[i] = ref;

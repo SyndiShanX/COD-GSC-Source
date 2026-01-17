@@ -8,7 +8,7 @@
 #namespace zm_net;
 
 function network_choke_init(id, max) {
-  if(!isdefined(level.zombie_network_choke_ids_max)) {
+  if(!isDefined(level.zombie_network_choke_ids_max)) {
     level.zombie_network_choke_ids_max = [];
     level.zombie_network_choke_ids_count = [];
   }
@@ -18,7 +18,7 @@ function network_choke_init(id, max) {
 }
 
 function network_choke_thread(id) {
-  while (true) {
+  while(true) {
     util::wait_network_frame();
     util::wait_network_frame();
     level.zombie_network_choke_ids_count[id] = 0;
@@ -30,38 +30,32 @@ function network_choke_safe(id) {
 }
 
 function network_choke_action(id, choke_action, arg1, arg2, arg3) {
-  assert(isdefined(level.zombie_network_choke_ids_max[id]), ("" + id) + "");
-  while (!network_choke_safe(id)) {
+  assert(isDefined(level.zombie_network_choke_ids_max[id]), ("" + id) + "");
+  while(!network_choke_safe(id)) {
     wait(0.05);
   }
   level.zombie_network_choke_ids_count[id]++;
-  if(!isdefined(arg1)) {
-    return [
-      [choke_action]
-    ]();
+  if(!isDefined(arg1)) {
+    return [[choke_action]]();
   }
-  if(!isdefined(arg2)) {
-    return [
-      [choke_action]
-    ](arg1);
+  if(!isDefined(arg2)) {
+    return [[choke_action]](arg1);
   }
-  if(!isdefined(arg3)) {
-    return [
-      [choke_action]
-    ](arg1, arg2);
+  if(!isDefined(arg3)) {
+    return [[choke_action]](arg1, arg2);
   }
   return [[choke_action]](arg1, arg2, arg3);
 }
 
 function network_entity_valid(entity) {
-  if(!isdefined(entity)) {
+  if(!isDefined(entity)) {
     return false;
   }
   return true;
 }
 
 function network_safe_init(id, max) {
-  if(!isdefined(level.zombie_network_choke_ids_max) || !isdefined(level.zombie_network_choke_ids_max[id])) {
+  if(!isDefined(level.zombie_network_choke_ids_max) || !isDefined(level.zombie_network_choke_ids_max[id])) {
     network_choke_init(id, max);
   }
   assert(max == level.zombie_network_choke_ids_max[id]);
@@ -73,16 +67,16 @@ function _network_safe_spawn(classname, origin) {
 
 function network_safe_spawn(id, max, classname, origin) {
   network_safe_init(id, max);
-  return network_choke_action(id, & _network_safe_spawn, classname, origin);
+  return network_choke_action(id, &_network_safe_spawn, classname, origin);
 }
 
 function _network_safe_play_fx_on_tag(fx, entity, tag) {
   if(network_entity_valid(entity)) {
-    playfxontag(fx, entity, tag);
+    playFXOnTag(fx, entity, tag);
   }
 }
 
 function network_safe_play_fx_on_tag(id, max, fx, entity, tag) {
   network_safe_init(id, max);
-  network_choke_action(id, & _network_safe_play_fx_on_tag, fx, entity, tag);
+  network_choke_action(id, &_network_safe_play_fx_on_tag, fx, entity, tag);
 }

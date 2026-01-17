@@ -207,9 +207,7 @@ create_attackable_ent(blocker_hive) {
   }
 
   if(isDefined(level.create_attackable_ent_override_func))
-    attackable_ent = [
-      [level.create_attackable_ent_override_func]
-    ](attackable_ent);
+    attackable_ent = [[level.create_attackable_ent_override_func]](attackable_ent);
 
   return attackable_ent;
 }

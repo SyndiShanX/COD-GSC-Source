@@ -67,7 +67,7 @@ vision_settings_light_night() {
   newsundirection = (215, -35, 0);
   LerpSunDirection(level.orgsundirection, newsundirection, 60);
   number = 0;
-  while (number < number_of_slices) {
+  while(number < number_of_slices) {
     current_sun_color[0] = current_sun_color[0] + r_fraction;
     current_sun_color[1] = current_sun_color[1] + g_fraction;
     current_sun_color[2] = current_sun_color[2] + b_fraction;
@@ -94,7 +94,7 @@ vision_settings_daylight() {
   newsundirection = (200, -50, 0);
   LerpSunDirection(level.orgsundirection, newsundirection, 60);
   number = 0;
-  while (number < number_of_slices) {
+  while(number < number_of_slices) {
     SetSavedDvar("r_skyTransition", (number / number_of_slices));
     current_sun_color[0] = current_sun_color[0] + r_fraction;
     current_sun_color[1] = current_sun_color[1] + g_fraction;
@@ -255,8 +255,8 @@ water_settings() {
 
 play_flak_field() {}
 play_looping_fx_on_tag(_fx, tag, offset_org, offset_ang, z_value) {
-  fx_marker = Spawn("script_model", self GetTagOrigin(tag));
-  fx_marker SetModel("tag_origin");
+  fx_marker = spawn("script_model", self GetTagOrigin(tag));
+  fx_marker setModel("tag_origin");
   fx_marker.angles = self GetTagAngles(tag);
   if(!isDefined(offset_ang)) {
     offset_ang = (0, 0, 0);
@@ -266,7 +266,7 @@ play_looping_fx_on_tag(_fx, tag, offset_org, offset_ang, z_value) {
   }
   fx_marker LinkTo(self, tag, offset_org, offset_ang);
   fx_marker.parent = self;
-  PlayFXOnTag(_fx, fx_marker, "tag_origin");
+  playFXOnTag(_fx, fx_marker, "tag_origin");
   if(isDefined(z_value)) {
     fx_marker thread fx_watch_z_value(z_value, tag);
   }
@@ -277,7 +277,7 @@ fx_watch_z_value(z_value, tag) {
   self endon("death");
   height_delta = 0;
   ref_point = (0, 0, 0);
-  while (1) {
+  while(1) {
     ref_point = self.parent GetTagOrigin(tag);
     if(ref_point[2] < z_value) {
       self Unlink();
@@ -291,10 +291,10 @@ fx_watch_z_value(z_value, tag) {
 
 play_looping_fx_on_ent(_fx, ent) {
   maps\_utility::ok_to_spawn(60.0);
-  fx_marker = Spawn("script_model", ent.origin);
-  fx_marker SetModel("tag_origin");
+  fx_marker = spawn("script_model", ent.origin);
+  fx_marker setModel("tag_origin");
   fx_marker.angles = ent.angles;
-  PlayFXOnTag(_fx, fx_marker, "tag_origin");
+  playFXOnTag(_fx, fx_marker, "tag_origin");
   return fx_marker;
 }
 
@@ -314,24 +314,24 @@ lightning_flash(event) {
     fx_light = level._effect["lightning_burst_low"];
     lightning_pos = (12326.2, 50384.5, 3727.78);
   }
-  while (1) {
+  while(1) {
     wait(0.05);
-    PlayFX(fx_light, lightning_pos, (270, 0, 0));
-    sound_ent = Spawn("script_origin", lightning_pos);
-    sound_ent PlaySound("pby_thunder");
+    playFX(fx_light, lightning_pos, (270, 0, 0));
+    sound_ent = spawn("script_origin", lightning_pos);
+    sound_ent playSound("pby_thunder");
     setSunLight(1, 1, 1.2);
     angle = level.new_lite_settings + add;
-    vec = anglestoforward(angle);
+    vec = anglesToForward(angle);
     setSunDirection(vec);
     wait(0.05);
     setSunLight(2, 2, 2.5);
     angle = level.new_lite_settings + add;
-    vec = anglestoforward(angle);
+    vec = anglesToForward(angle);
     setSunDirection(vec);
     wait(0.05);
     setSunLight(3, 3, 3.7);
     angle = level.new_lite_settings + add;
-    vec = anglestoforward(angle);
+    vec = anglesToForward(angle);
     setSunDirection(vec);
     wait(0.05);
     normal();
@@ -362,149 +362,149 @@ scripted_lightning_flash(start_notify, end_notify, wait_flash, direction) {
     fx_light = level._effect["lightning_player"];
     lightning_pos = maps\_utility::get_players()[0].origin + (direction * 13000);
     lightning_pos = (lightning_pos[0], lightning_pos[1], 1400);
-    PlayFX(fx_light, lightning_pos);
+    playFX(fx_light, lightning_pos);
   }
   level.orgsuncolor = getMapSunLight();
   add = ((randomfloatrange(20, 30) * -1), (randomfloatrange(20, 25)), 0);
   wait(0.05);
   setSunLight(1, 1, 1.2);
   angle = level.new_lite_settings + add;
-  vec = anglestoforward(angle);
+  vec = anglesToForward(angle);
   setSunDirection(vec);
   wait(0.05);
   setSunLight(2, 2, 2.5);
   angle = level.new_lite_settings + add;
-  vec = anglestoforward(angle);
+  vec = anglesToForward(angle);
   setSunDirection(vec);
   wait(0.05);
   setSunLight(3, 3, 3.7);
   angle = level.new_lite_settings + add;
-  vec = anglestoforward(angle);
+  vec = anglesToForward(angle);
   setSunDirection(vec);
   wait(0.05);
   normal();
 }
 
 sink_big_fx(ship) {
-  PlayFXOnTag(level._effect["sink_break"], ship, "tag_origin");
+  playFXOnTag(level._effect["sink_break"], ship, "tag_origin");
 }
 
 play_waterfx_ptboat_vent2_jnt(boat) {
   fx_origin = boat GetTagOrigin("vent2_jnt");
   fx_origin = (fx_origin[0], fx_origin[1], 63);
-  PlayFX(level._effect["zero_part_splash_small"], fx_origin);
+  playFX(level._effect["zero_part_splash_small"], fx_origin);
 }
 
 play_waterfx_ptboat_vent1_jnt(boat) {
   fx_origin = boat GetTagOrigin("vent1_jnt");
   fx_origin = (fx_origin[0], fx_origin[1], 63);
-  PlayFX(level._effect["zero_part_splash_small"], fx_origin);
+  playFX(level._effect["zero_part_splash_small"], fx_origin);
 }
 
 play_waterfx_ptboat_vent3_jnt(boat) {
   fx_origin = boat GetTagOrigin("vent3_jnt");
   fx_origin = (fx_origin[0], fx_origin[1], 63);
-  PlayFX(level._effect["zero_part_splash_small"], fx_origin);
+  playFX(level._effect["zero_part_splash_small"], fx_origin);
 }
 
 play_waterfx_ptboat_box2_jnt(boat) {
   fx_origin = boat GetTagOrigin("box2_jnt");
   fx_origin = (fx_origin[0], fx_origin[1], 63);
-  PlayFX(level._effect["zero_part_splash"], fx_origin);
+  playFX(level._effect["zero_part_splash"], fx_origin);
 }
 
 play_waterfx_ptboat_tower_jnt(boat) {
   fx_origin = boat GetTagOrigin("tower_jnt");
   fx_origin = (fx_origin[0], fx_origin[1], 63);
-  PlayFX(level._effect["zero_part_splash"], fx_origin);
+  playFX(level._effect["zero_part_splash"], fx_origin);
 }
 
 play_waterfx_ptboat_radar_jnt(boat) {
   fx_origin = boat GetTagOrigin("radar_jnt");
   fx_origin = (fx_origin[0], fx_origin[1], 63);
-  PlayFX(level._effect["zero_part_splash"], fx_origin);
+  playFX(level._effect["zero_part_splash"], fx_origin);
 }
 
 play_waterfx_ptboat_box1_jnt(boat) {
   fx_origin = boat GetTagOrigin("box1_jnt");
   fx_origin = (fx_origin[0], fx_origin[1], 63);
-  PlayFX(level._effect["zero_part_splash"], fx_origin);
+  playFX(level._effect["zero_part_splash"], fx_origin);
 }
 
 play_fuselage_water_hit_0(plane) {
   fx_origin = plane GetTagOrigin("origin_animate_jnt");
   fx_origin = (fx_origin[0], fx_origin[1], 63);
-  fx_forward = AnglesToForward((0, 181.14, 0));
-  PlayFX(level._effect["zero_part_splash"], fx_origin, fx_forward, (0, 0, 1));
+  fx_forward = anglesToForward((0, 181.14, 0));
+  playFX(level._effect["zero_part_splash"], fx_origin, fx_forward, (0, 0, 1));
 }
 
 play_rwing_water_hit_0(plane) {
   fx_origin = plane GetTagOrigin("tag_wing_right_fx4");
   fx_origin = (fx_origin[0], fx_origin[1], 63);
-  fx_forward = AnglesToForward((0, 181.14, 0));
-  PlayFX(level._effect["zero_part_splash"], fx_origin, fx_forward, (0, 0, 1));
+  fx_forward = anglesToForward((0, 181.14, 0));
+  playFX(level._effect["zero_part_splash"], fx_origin, fx_forward, (0, 0, 1));
 }
 
 play_lwing_water_hit_0(plane) {
   fx_origin = plane GetTagOrigin("tag_wing_left_fx4");
   fx_origin = (fx_origin[0], fx_origin[1], 63);
-  fx_forward = AnglesToForward((0, 181.14, 0));
-  PlayFX(level._effect["zero_part_splash"], fx_origin, fx_forward, (0, 0, 1));
+  fx_forward = anglesToForward((0, 181.14, 0));
+  playFX(level._effect["zero_part_splash"], fx_origin, fx_forward, (0, 0, 1));
 }
 
 play_lwing_water_hit_1(plane) {
   fx_origin = plane GetTagOrigin("tag_wing_left_fx4");
   fx_origin = (fx_origin[0], fx_origin[1], 63);
-  fx_forward = AnglesToForward((0, 181.14, 0));
-  PlayFX(level._effect["zero_part_splash"], fx_origin, fx_forward, (0, 0, 1));
+  fx_forward = anglesToForward((0, 181.14, 0));
+  playFX(level._effect["zero_part_splash"], fx_origin, fx_forward, (0, 0, 1));
 }
 
 play_tail_water_hit_0(plane) {
   fx_origin = plane GetTagOrigin("tag_attach_tail");
   fx_origin = (fx_origin[0], fx_origin[1], 63);
-  fx_forward = AnglesToForward((0, 181.14, 0));
-  PlayFX(level._effect["zero_part_splash"], fx_origin, fx_forward, (0, 0, 1));
+  fx_forward = anglesToForward((0, 181.14, 0));
+  playFX(level._effect["zero_part_splash"], fx_origin, fx_forward, (0, 0, 1));
 }
 
 play_fuselage_water_hit_1(plane) {
   fx_origin = plane GetTagOrigin("origin_animate_jnt");
   fx_origin = (fx_origin[0], fx_origin[1], 63);
-  fx_forward = AnglesToForward((0, 181.14, 0));
-  PlayFX(level._effect["zero_part_splash"], fx_origin, fx_forward, (0, 0, 1));
+  fx_forward = anglesToForward((0, 181.14, 0));
+  playFX(level._effect["zero_part_splash"], fx_origin, fx_forward, (0, 0, 1));
 }
 
 play_lwing_water_hit_2(plane) {
   fx_origin = plane GetTagOrigin("tag_wing_left_fx4");
   fx_origin = (fx_origin[0], fx_origin[1], 63);
-  fx_forward = AnglesToForward((0, 181.14, 0));
-  PlayFX(level._effect["zero_part_splash"], fx_origin, fx_forward, (0, 0, 1));
+  fx_forward = anglesToForward((0, 181.14, 0));
+  playFX(level._effect["zero_part_splash"], fx_origin, fx_forward, (0, 0, 1));
 }
 
 play_fuselage_water_hit_2(plane) {
   fx_origin = plane GetTagOrigin("origin_animate_jnt");
   fx_origin = (fx_origin[0], fx_origin[1], 63);
-  fx_forward = AnglesToForward((0, 181.14, 0));
-  PlayFX(level._effect["zero_part_splash"], fx_origin, fx_forward, (0, 0, 1));
+  fx_forward = anglesToForward((0, 181.14, 0));
+  playFX(level._effect["zero_part_splash"], fx_origin, fx_forward, (0, 0, 1));
 }
 
 swim_splash_right() {
-  while (1) {
+  while(1) {
     self waittill("runanim", note);
     if(note == "end") {
       new_origin = self GetTagOrigin("j_wrist_ri");
       new_origin = (new_origin[0], new_origin[1], 63);
-      PlayFX(level._effect["swim_splash"], new_origin);
+      playFX(level._effect["swim_splash"], new_origin);
     }
   }
 }
 
 swim_splash_left() {
-  while (1) {
+  while(1) {
     self waittill("runanim", note);
     if(note == "splash_l") {
       new_origin = self GetTagOrigin("j_wrist_le");
       new_origin = (new_origin[0], new_origin[1], 63);
-      PlayFX(level._effect["swim_splash"], new_origin);
+      playFX(level._effect["swim_splash"], new_origin);
     }
   }
 }
@@ -512,5 +512,5 @@ swim_splash_left() {
 zero_cloud() {
   self waittill("cloud_spawn");
   _struct = maps\_utility::GetStruct("cloud_spawn_struct", "targetname");
-  PlayFX(level._effect["cloud_zero"], _struct.origin);
+  playFX(level._effect["cloud_zero"], _struct.origin);
 }

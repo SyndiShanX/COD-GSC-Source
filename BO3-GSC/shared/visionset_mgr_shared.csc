@@ -12,7 +12,7 @@
 #namespace visionset_mgr;
 
 function autoexec __init__sytem__() {
-  system::register("visionset_mgr", & __init__, undefined, undefined);
+  system::register("visionset_mgr", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -22,11 +22,11 @@ function __init__() {
   level.vsmgr_states_inited = [];
   level.vsmgr_filter_custom_enable = [];
   level.vsmgr_filter_custom_disable = [];
-  level thread register_type("visionset", & visionset_slot_cb, & visionset_lerp_cb, & visionset_update_cb);
+  level thread register_type("visionset", &visionset_slot_cb, &visionset_lerp_cb, &visionset_update_cb);
   register_visionset_info(level.vsmgr_default_info_name, 1, 1, "undefined", "undefined");
-  level thread register_type("overlay", & overlay_slot_cb, & overlay_lerp_cb, & overlay_update_cb);
+  level thread register_type("overlay", &overlay_slot_cb, &overlay_lerp_cb, &overlay_update_cb);
   register_overlay_info_style_none(level.vsmgr_default_info_name, 1, 1);
-  callback::on_finalize_initialization( & finalize_initialization);
+  callback::on_finalize_initialization(&finalize_initialization);
   level thread monitor();
 }
 
@@ -132,7 +132,7 @@ function is_type_currently_default(localclientnum, type) {
 }
 
 function register_type(type, cf_slot_cb, cf_lerp_cb, update_cb) {
-  level.vsmgr[type] = spawnstruct();
+  level.vsmgr[type] = spawnStruct();
   level.vsmgr[type].type = type;
   level.vsmgr[type].in_use = 0;
   level.vsmgr[type].highest_version = 0;
@@ -148,7 +148,7 @@ function register_type(type, cf_slot_cb, cf_lerp_cb, update_cb) {
 
 function finalize_initialization(localclientnum) {
   thread finalize_clientfields();
-  if(!isdefined(level._fv2vs_default_visionset)) {
+  if(!isDefined(level._fv2vs_default_visionset)) {
     init_fog_vol_to_visionset_monitor(getdvarstring("mapname"), 0);
     fog_vol_to_visionset_set_info(0, getdvarstring("mapname"));
   }
@@ -156,7 +156,7 @@ function finalize_initialization(localclientnum) {
 
 function finalize_clientfields() {
   typekeys = getarraykeys(level.vsmgr);
-  for (type_index = 0; type_index < typekeys.size; type_index++) {
+  for(type_index = 0; type_index < typekeys.size; type_index++) {
     level.vsmgr[typekeys[type_index]] thread finalize_type_clientfields();
   }
   level.vsmgr_initializing = 0;
@@ -170,7 +170,7 @@ function finalize_type_clientfields() {
   self.in_use = 1;
   self.cf_slot_bit_count = getminbitcountfornum(self.info.size - 1);
   self.cf_lerp_bit_count = self.info[self.sorted_name_keys[0]].lerp_bit_count;
-  for (i = 0; i < self.sorted_name_keys.size; i++) {
+  for(i = 0; i < self.sorted_name_keys.size; i++) {
     self.info[self.sorted_name_keys[i]].slot_index = i;
     if(self.info[self.sorted_name_keys[i]].lerp_bit_count > self.cf_lerp_bit_count) {
       self.cf_lerp_bit_count = self.info[self.sorted_name_keys[i]].lerp_bit_count;
@@ -185,7 +185,7 @@ function finalize_type_clientfields() {
 
 function validate_info(type, name, version) {
   keys = getarraykeys(level.vsmgr);
-  for (i = 0; i < keys.size; i++) {
+  for(i = 0; i < keys.size; i++) {
     if(type == keys[i]) {
       break;
     }
@@ -194,7 +194,7 @@ function validate_info(type, name, version) {
   if(version > level.vsmgr[type].server_version) {
     return false;
   }
-  if(isdefined(level.vsmgr[type].info[name]) && version < level.vsmgr[type].info[name].version) {
+  if(isDefined(level.vsmgr[type].info[name]) && version < level.vsmgr[type].info[name].version) {
     if(version < level.vsmgr[type].info[name].version) {
       return false;
     }
@@ -204,7 +204,7 @@ function validate_info(type, name, version) {
 }
 
 function add_sorted_name_key(type, name) {
-  for (i = 0; i < level.vsmgr[type].sorted_name_keys.size; i++) {
+  for(i = 0; i < level.vsmgr[type].sorted_name_keys.size; i++) {
     if(name < level.vsmgr[type].sorted_name_keys[i]) {
       break;
     }
@@ -227,7 +227,7 @@ function register_info(type, name, version, lerp_step_count) {
     return false;
   }
   add_sorted_name_key(type, lower_name);
-  level.vsmgr[type].info[lower_name] = spawnstruct();
+  level.vsmgr[type].info[lower_name] = spawnStruct();
   level.vsmgr[type].info[lower_name] add_info(type, lower_name, version, lerp_step_count);
   if(version > level.vsmgr[type].highest_version) {
     level.vsmgr[type].highest_version = version;
@@ -286,19 +286,19 @@ function transition_state() {
 }
 
 function init_states(localclientnum) {
-  if(isdefined(level.vsmgr_states_inited[localclientnum])) {
+  if(isDefined(level.vsmgr_states_inited[localclientnum])) {
     return;
   }
   typekeys = getarraykeys(level.vsmgr);
-  for (type_index = 0; type_index < typekeys.size; type_index++) {
+  for(type_index = 0; type_index < typekeys.size; type_index++) {
     type = typekeys[type_index];
     if(!level.vsmgr[type].in_use) {
       continue;
     }
-    if(!isdefined(level.vsmgr[type].state)) {
+    if(!isDefined(level.vsmgr[type].state)) {
       level.vsmgr[type].state = [];
     }
-    level.vsmgr[type].state[localclientnum] = spawnstruct();
+    level.vsmgr[type].state[localclientnum] = spawnStruct();
     level.vsmgr[type].state[localclientnum].prev_slot = level.vsmgr[type].info[level.vsmgr_default_info_name].slot_index;
     level.vsmgr[type].state[localclientnum].curr_slot = level.vsmgr[type].info[level.vsmgr_default_info_name].slot_index;
     level.vsmgr[type].state[localclientnum].prev_lerp = 1;
@@ -314,9 +314,9 @@ function demo_jump_monitor() {
   }
   typekeys = getarraykeys(level.vsmgr);
   oldlerps = [];
-  while (true) {
+  while(true) {
     level util::waittill_any("demo_jump", "demo_player_switch", "visionset_mgr_reset");
-    for (type_index = 0; type_index < typekeys.size; type_index++) {
+    for(type_index = 0; type_index < typekeys.size; type_index++) {
       type = typekeys[type_index];
       if(!level.vsmgr[type].in_use) {
         continue;
@@ -331,15 +331,15 @@ function demo_spectate_monitor() {
     return;
   }
   typekeys = getarraykeys(level.vsmgr);
-  while (true) {
+  while(true) {
     if(isspectating(0, 0)) {
-      if(!(isdefined(level.vsmgr_is_spectating) && level.vsmgr_is_spectating)) {
+      if(!(isDefined(level.vsmgr_is_spectating) && level.vsmgr_is_spectating)) {
         fog_vol_to_visionset_force_instant_transition(0);
         level notify("visionset_mgr_reset");
       }
       level.vsmgr_is_spectating = 1;
     } else {
-      if(isdefined(level.vsmgr_is_spectating) && level.vsmgr_is_spectating) {
+      if(isDefined(level.vsmgr_is_spectating) && level.vsmgr_is_spectating) {
         level notify("visionset_mgr_reset");
       }
       level.vsmgr_is_spectating = 0;
@@ -349,21 +349,21 @@ function demo_spectate_monitor() {
 }
 
 function monitor() {
-  while (level.vsmgr_initializing) {
+  while(level.vsmgr_initializing) {
     wait(0.016);
   }
-  if(isdefined(level.isdemoplaying) && level.isdemoplaying) {
+  if(isDefined(level.isdemoplaying) && level.isdemoplaying) {
     level thread demo_spectate_monitor();
     level thread demo_jump_monitor();
   }
   typekeys = getarraykeys(level.vsmgr);
-  while (true) {
-    for (type_index = 0; type_index < typekeys.size; type_index++) {
+  while(true) {
+    for(type_index = 0; type_index < typekeys.size; type_index++) {
       type = typekeys[type_index];
       if(!level.vsmgr[type].in_use) {
         continue;
       }
-      for (localclientnum = 0; localclientnum < level.localplayers.size; localclientnum++) {
+      for(localclientnum = 0; localclientnum < level.localplayers.size; localclientnum++) {
         init_states(localclientnum);
         if(level.vsmgr[type].state[localclientnum] should_update_state()) {
           level.vsmgr[type] thread[[level.vsmgr[type].update_cb]](localclientnum, type);
@@ -377,7 +377,7 @@ function monitor() {
 
 function killcam_visionset_vehicle_mismatch(visionset_to, visionset_vehicle, vehicletype) {
   if(visionset_to == visionset_vehicle) {
-    if(isdefined(self.vehicletype) && self.vehicletype != vehicletype) {
+    if(isDefined(self.vehicletype) && self.vehicletype != vehicletype) {
       return true;
     }
   }
@@ -397,7 +397,7 @@ function visionset_update_cb(localclientnum, type) {
   state = get_state(localclientnum, type);
   curr_info = get_info(type, state.curr_slot);
   prev_info = get_info(type, state.prev_slot);
-  if(isdefined(level.isdemoplaying) && level.isdemoplaying && isspectating(localclientnum, 1)) {
+  if(isDefined(level.isdemoplaying) && level.isdemoplaying && isspectating(localclientnum, 1)) {
     visionsetnaked(localclientnum, level._fv2vs_default_visionset, 0);
     return;
   }
@@ -407,7 +407,7 @@ function visionset_update_cb(localclientnum, type) {
   }
   player = getlocalplayer(localclientnum);
   if(player getinkillcam(localclientnum)) {
-    if(isdefined(curr_info.visionset_to)) {
+    if(isDefined(curr_info.visionset_to)) {
       killcament = player getkillcamentity(localclientnum);
       if(curr_info.visionset_to == "mp_vehicles_mothership") {
         if(killcament.type == "vehicle" && !killcament clientfield::get("mothership")) {
@@ -430,7 +430,7 @@ function visionset_update_cb(localclientnum, type) {
       }
     }
   }
-  if(!isdefined(curr_info.visionset_from)) {
+  if(!isDefined(curr_info.visionset_from)) {
     if(curr_info.visionset_type == 6) {
       visionsetlaststandlerp(localclientnum, curr_info.visionset_to, level._fv2vs_prev_visionsets[localclientnum], state.curr_lerp);
     } else {
@@ -478,7 +478,7 @@ function overlay_update_cb(localclientnum, type) {
         break;
       }
       case 2: {
-        if(isdefined(level.vsmgr_filter_custom_disable[curr_info.material_name])) {
+        if(isDefined(level.vsmgr_filter_custom_disable[curr_info.material_name])) {
           player[[level.vsmgr_filter_custom_disable[curr_info.material_name]]](state, prev_info, curr_info);
         } else {
           setfilterpassenabled(localclientnum, prev_info.filter_index, prev_info.pass_index, 0);
@@ -511,7 +511,7 @@ function overlay_update_cb(localclientnum, type) {
       }
     }
   }
-  if(isdefined(level.isdemoplaying) && level.isdemoplaying && isspectating(localclientnum, 0)) {
+  if(isDefined(level.isdemoplaying) && level.isdemoplaying && isspectating(localclientnum, 0)) {
     return;
   }
   switch (curr_info.style) {
@@ -526,12 +526,12 @@ function overlay_update_cb(localclientnum, type) {
     }
     case 2: {
       if(state.force_update || state.prev_slot != state.curr_slot || state.prev_lerp != state.curr_lerp) {
-        if(isdefined(level.vsmgr_filter_custom_enable[curr_info.material_name])) {
+        if(isDefined(level.vsmgr_filter_custom_enable[curr_info.material_name])) {
           player[[level.vsmgr_filter_custom_enable[curr_info.material_name]]](state, prev_info, curr_info);
         } else {
           setfilterpassmaterial(localclientnum, curr_info.filter_index, curr_info.pass_index, level.filter_matid[curr_info.material_name]);
           setfilterpassenabled(localclientnum, curr_info.filter_index, curr_info.pass_index, 1);
-          if(isdefined(curr_info.constant_index)) {
+          if(isDefined(curr_info.constant_index)) {
             setfilterpassconstant(localclientnum, curr_info.filter_index, curr_info.pass_index, curr_info.constant_index, state.curr_lerp);
           }
         }
@@ -570,19 +570,19 @@ function overlay_update_cb(localclientnum, type) {
     }
     case 8: {
       if(state.force_update || state.prev_slot != state.curr_slot || state.prev_lerp <= state.curr_lerp) {
-        if(isdefined(curr_info.should_offset)) {
+        if(isDefined(curr_info.should_offset)) {
           enablespeedblur(localclientnum, curr_info.amount, curr_info.inner_radius, curr_info.outer_radius, curr_info.velocity_should_scale, curr_info.velocity_scale, curr_info.blur_in, curr_info.blur_out, curr_info.should_offset);
         } else {
-          if(isdefined(curr_info.blur_out)) {
+          if(isDefined(curr_info.blur_out)) {
             enablespeedblur(localclientnum, curr_info.amount, curr_info.inner_radius, curr_info.outer_radius, curr_info.velocity_should_scale, curr_info.velocity_scale, curr_info.blur_in, curr_info.blur_out);
           } else {
-            if(isdefined(curr_info.blur_in)) {
+            if(isDefined(curr_info.blur_in)) {
               enablespeedblur(localclientnum, curr_info.amount, curr_info.inner_radius, curr_info.outer_radius, curr_info.velocity_should_scale, curr_info.velocity_scale, curr_info.blur_in);
             } else {
-              if(isdefined(curr_info.velocity_scale)) {
+              if(isDefined(curr_info.velocity_scale)) {
                 enablespeedblur(localclientnum, curr_info.amount, curr_info.inner_radius, curr_info.outer_radius, curr_info.velocity_should_scale, curr_info.velocity_scale);
               } else {
-                if(isdefined(curr_info.velocity_should_scale)) {
+                if(isDefined(curr_info.velocity_should_scale)) {
                   enablespeedblur(localclientnum, curr_info.amount, curr_info.inner_radius, curr_info.outer_radius, curr_info.velocity_should_scale);
                 } else {
                   enablespeedblur(localclientnum, curr_info.amount, curr_info.inner_radius, curr_info.outer_radius);
@@ -612,7 +612,7 @@ function init_fog_vol_to_visionset_monitor(default_visionset, default_trans_in, 
   level._fv2vs_force_instant_transition[1] = 0;
   level._fv2vs_force_instant_transition[2] = 0;
   level._fv2vs_force_instant_transition[3] = 0;
-  if(!isdefined(host_migration_active)) {
+  if(!isDefined(host_migration_active)) {
     level._fv2vs_infos = [];
     fog_vol_to_visionset_set_info(-1, default_visionset, default_trans_in);
   }
@@ -626,13 +626,13 @@ function fog_vol_to_visionset_set_suffix(suffix) {
 }
 
 function fog_vol_to_visionset_set_info(id, visionset, trans_in = level._fv2vs_default_trans_in) {
-  level._fv2vs_infos[id] = spawnstruct();
+  level._fv2vs_infos[id] = spawnStruct();
   level._fv2vs_infos[id].visionset = visionset;
   level._fv2vs_infos[id].trans_in = trans_in;
 }
 
 function fog_vol_to_visionset_force_instant_transition(localclientnum) {
-  if(!(isdefined(level._fv2vs_inited) && level._fv2vs_inited)) {
+  if(!(isDefined(level._fv2vs_inited) && level._fv2vs_inited)) {
     return;
   }
   level._fv2vs_force_instant_transition[localclientnum] = 1;
@@ -641,10 +641,10 @@ function fog_vol_to_visionset_force_instant_transition(localclientnum) {
 function fog_vol_to_visionset_instant_transition_monitor() {
   level endon("hmo");
   level thread fog_vol_to_visionset_hostmigration_monitor();
-  while (true) {
+  while(true) {
     level util::waittill_any("demo_jump", "demo_player_switch");
     players = getlocalplayers();
-    for (localclientnum = 0; localclientnum < players.size; localclientnum++) {
+    for(localclientnum = 0; localclientnum < players.size; localclientnum++) {
       level._fv2vs_force_instant_transition[localclientnum] = 1;
     }
   }
@@ -666,17 +666,17 @@ function fog_vol_to_visionset_monitor() {
   was_not_in_default_type[1] = 0;
   was_not_in_default_type[2] = 0;
   was_not_in_default_type[3] = 0;
-  while (true) {
+  while(true) {
     wait(0.016);
     waittillframeend();
     players = getlocalplayers();
-    for (localclientnum = 0; localclientnum < players.size; localclientnum++) {
+    for(localclientnum = 0; localclientnum < players.size; localclientnum++) {
       if(!is_type_currently_default(localclientnum, "visionset")) {
         was_not_in_default_type[localclientnum] = 1;
         continue;
       }
       id = getworldfogscriptid(localclientnum);
-      if(!isdefined(level._fv2vs_infos[id])) {
+      if(!isDefined(level._fv2vs_infos[id])) {
         id = -1;
       }
       new_visionset = level._fv2vs_infos[id].visionset + level._fv2vs_suffix;
@@ -696,10 +696,10 @@ function fog_vol_to_visionset_monitor() {
 
 function reset_player_fv2vs_infos_on_respawn() {
   level endon("hmo");
-  while (true) {
+  while(true) {
     level waittill("respawn");
     players = getlocalplayers();
-    for (localclientnum = 0; localclientnum < players.size; localclientnum++) {
+    for(localclientnum = 0; localclientnum < players.size; localclientnum++) {
       level._fv2vs_prev_visionsets[localclientnum] = level._fv2vs_unset_visionset;
     }
   }

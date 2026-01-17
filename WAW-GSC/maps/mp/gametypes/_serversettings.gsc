@@ -44,7 +44,7 @@ init() {
   level.mapsize = getdvarFloat("scr_mapsize");
   constrainGameType(getdvar("g_gametype"));
   constrainMapSize(level.mapsize);
-  for (;;) {
+  for(;;) {
     updateServerSettings();
     wait 5;
   }
@@ -79,8 +79,8 @@ updateServerSettings() {
 }
 
 constrainGameType(gametype) {
-  entities = getentarray();
-  for (i = 0; i < entities.size; i++) {
+  entities = getEntArray();
+  for(i = 0; i < entities.size; i++) {
     entity = entities[i];
     if(gametype == "dm") {
       if(isDefined(entity.script_gametype_dm) && entity.script_gametype_dm != "1") {
@@ -111,8 +111,8 @@ constrainGameType(gametype) {
 }
 
 constrainMapSize(mapsize) {
-  entities = getentarray();
-  for (i = 0; i < entities.size; i++) {
+  entities = getEntArray();
+  for(i = 0; i < entities.size; i++) {
     entity = entities[i];
     if(int(mapsize) == 8) {
       if(isDefined(entity.script_mapsize_08) && entity.script_mapsize_08 != "1") {

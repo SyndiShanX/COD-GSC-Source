@@ -13,7 +13,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\core_common\visionset_mgr_shared;
-
 #namespace healthoverlay;
 
 autoexec __init__system__() {
@@ -232,13 +231,13 @@ j_sticks_front1_end_le1() {
   self clientfield::set_to_player("sndCriticalHealth", 0);
 }
 
-private function_2eee85c1() {
+function_2eee85c1() {
   if(self.var_61e6c24d) {
     self j_sticks_front1_end_le1();
   }
 }
 
-private function_df99db2() {
+function_df99db2() {
   player = self;
 
   if(player.health <= 0) {
@@ -256,7 +255,7 @@ private function_df99db2() {
   return true;
 }
 
-private should_heal(var_dc77251f, regen_delay) {
+should_heal(var_dc77251f, regen_delay) {
   if(isDefined(self.disable_health_regen_delay) && self.disable_health_regen_delay) {
     var_dc77251f.var_ba47a7a3 = 1;
   }
@@ -276,7 +275,7 @@ private should_heal(var_dc77251f, regen_delay) {
   return true;
 }
 
-private function_8ca62ae3() {
+function_8ca62ae3() {
   if(self.heal.enabled == 0) {
     return 0;
   }
@@ -317,7 +316,7 @@ private function_8ca62ae3() {
   return regen_rate;
 }
 
-private function_f8139729() {
+function_f8139729() {
   assert(isDefined(self.var_66cb03ad));
   assert(isDefined(self.maxhealth));
   assert(isplayer(self));
@@ -331,7 +330,7 @@ private function_f8139729() {
   return var_bc840360;
 }
 
-private heal(var_dc77251f) {
+heal(var_dc77251f) {
   player = self;
 
   if(!isDefined(player) || !isDefined(player.heal)) {
@@ -409,7 +408,7 @@ private heal(var_dc77251f) {
   }
 }
 
-private check_max_health(var_dc77251f) {
+check_max_health(var_dc77251f) {
   player = self;
   var_66cb03ad = player.var_66cb03ad < 0 ? player.maxhealth : player.var_66cb03ad;
 
@@ -426,7 +425,7 @@ private check_max_health(var_dc77251f) {
   return false;
 }
 
-private function_69e7b01c(ratio) {
+function_69e7b01c(ratio) {
   if(ratio <= level.healthoverlaycutoff) {
     self.atbrinkofdeath = 1;
     self.isneardeath = 1;
@@ -447,22 +446,22 @@ player_health_regen() {
   player.var_4d9b2bc3 = 1;
   player.breathingstoptime = -10000;
   player.var_dc77251f = {
-    #var_ba47a7a3: 0, 
-    #time_now: 0, 
-    #time_elapsed: 0, 
-    #ratio: 0, 
-    #var_ec8863bf: 0, 
-    #var_e65dca8d: 0, 
-    #var_215539de: 0, 
-    #var_dae4d7ea: 0, 
-    #old_health: player.health, 
-    #var_7cb44c56: 0, 
+    #var_ba47a7a3: 0,
+    #time_now: 0,
+    #time_elapsed: 0,
+    #ratio: 0,
+    #var_ec8863bf: 0,
+    #var_e65dca8d: 0,
+    #var_215539de: 0,
+    #var_dae4d7ea: 0,
+    #old_health: player.health,
+    #var_7cb44c56: 0,
     #var_d1e06a5f: gettime()
   };
   player j_sticks_front1_end_le1();
 }
 
-private function_8f2722f6() {
+function_8f2722f6() {
   player = self;
 
   if(!(isDefined(player.var_4d9b2bc3) && player.var_4d9b2bc3)) {
@@ -530,7 +529,7 @@ private function_8f2722f6() {
   var_dc77251f.old_health = player.health;
 }
 
-private function_b506b922() {
+function_b506b922() {
   level endon(#"game_ended");
 
   while(true) {
@@ -538,7 +537,7 @@ private function_b506b922() {
     var_1556c25 = getlevelframenumber();
 
     foreach(player in getplayers()) {
-      if((player getentitynumber() + var_1556c25&1) != 0) {
+      if((player getentitynumber() + var_1556c25 & 1) != 0) {
         continue;
       }
 

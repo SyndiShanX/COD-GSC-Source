@@ -123,7 +123,7 @@ updateriotshieldmodel() {
       self attachriotshield();
 
       if(isDefined(self.shield_ent))
-        self.shield_ent setmodel(level.deployedshieldmodel[self.prev_shield_damage_level]);
+        self.shield_ent setModel(level.deployedshieldmodel[self.prev_shield_damage_level]);
     }
   }
 }
@@ -137,7 +137,7 @@ updatestandaloneriotshieldmodel() {
   }
 
   if(update)
-    self setmodel(level.deployedshieldmodel[self.prev_shield_damage_level]);
+    self setModel(level.deployedshieldmodel[self.prev_shield_damage_level]);
 }
 
 watchshieldlaststand() {
@@ -202,9 +202,7 @@ trackriotshield() {
       self.shield_placement = 1;
       self updateriotshieldmodel();
 
-      if(self.hasriotshield) {
-      } else {
-      }
+      if(self.hasriotshield) {} else {}
 
       self.hasriotshield = 1;
       self.hasriotshieldequipped = 1;
@@ -218,8 +216,7 @@ trackriotshield() {
       assert(self.hasriotshield);
       self.hasriotshield = self hasweapon(level.riotshield_name);
 
-      if(isDefined(self.riotshield_hidden) && self.riotshield_hidden) {
-      } else if(self.hasriotshield)
+      if(isDefined(self.riotshield_hidden) && self.riotshield_hidden) {} else if(self.hasriotshield)
         self.shield_placement = 2;
       else if(isDefined(self.shield_ent))
         assert(self.shield_placement == 3);
@@ -333,7 +330,7 @@ check_plant_position(origin, angles) {
   if(isDefined(level.equipment_safe_to_drop)) {
     ret = 1;
     test_ent = spawn("script_model", origin);
-    test_ent setmodel(level.deployedshieldmodel[0]);
+    test_ent setModel(level.deployedshieldmodel[0]);
     test_ent.angles = angles;
 
     if(!self[[level.equipment_safe_to_drop]](test_ent))
@@ -516,9 +513,7 @@ watchshieldtriggervisibility(trigger) {
       }
 
       if(isDefined(level.cantransferriotshield))
-        pickup = [
-          [level.cantransferriotshield]
-        ](self, player);
+        pickup = [[level.cantransferriotshield]](self, player);
 
       if(!isDefined(trigger)) {
         return;

@@ -14,8 +14,7 @@ init_session_mode_flags() {
   level.language = getdvar(#"language");
 }
 
-empty(a, b, c, d, e) {
-}
+empty(a, b, c, d, e) {}
 
 add_to_array(array, item, allow_dupes) {
   if(!isDefined(item))
@@ -97,7 +96,7 @@ array_wait(array, msg, timeout) {
 
   for(i = 0; i < keys.size; i++) {
     key = keys[i];
-    structs[key] = spawnstruct();
+    structs[key] = spawnStruct();
     structs[key]._array_wait = 1;
     structs[key] thread array_waitlogic1(array[key], msg, timeout);
   }
@@ -120,7 +119,7 @@ array_wait_any(array, msg, timeout) {
 
   for(i = 0; i < keys.size; i++) {
     key = keys[i];
-    structs[key] = spawnstruct();
+    structs[key] = spawnStruct();
     structs[key]._array_wait = 1;
     structs[key] thread array_waitlogic3(array[key], msg, internal_msg, timeout);
   }
@@ -340,7 +339,7 @@ waittill_string(msg, ent) {
 
 waittill_multiple(string1, string2, string3, string4, string5) {
   self endon("death");
-  ent = spawnstruct();
+  ent = spawnStruct();
   ent.threads = 0;
 
   if(isDefined(string1)) {
@@ -378,7 +377,7 @@ waittill_multiple(string1, string2, string3, string4, string5) {
 
 waittill_multiple_ents(ent1, string1, ent2, string2, ent3, string3, ent4, string4) {
   self endon("death");
-  ent = spawnstruct();
+  ent = spawnStruct();
   ent.threads = 0;
 
   if(isDefined(ent1)) {
@@ -417,7 +416,7 @@ waittill_any_return(string1, string2, string3, string4, string5, string6, string
   if((!isDefined(string1) || string1 != "death") && (!isDefined(string2) || string2 != "death") && (!isDefined(string3) || string3 != "death") && (!isDefined(string4) || string4 != "death") && (!isDefined(string5) || string5 != "death") && (!isDefined(string6) || string6 != "death") && (!isDefined(string7) || string7 != "death"))
     self endon("death");
 
-  ent = spawnstruct();
+  ent = spawnStruct();
 
   if(isDefined(string1))
     self thread waittill_string(string1, ent);
@@ -449,7 +448,7 @@ waittill_any_array_return(a_notifies) {
   if(isinarray(a_notifies, "death"))
     self endon("death");
 
-  s_tracker = spawnstruct();
+  s_tracker = spawnStruct();
 
   foreach(str_notify in a_notifies) {
     if(isDefined(str_notify))
@@ -481,7 +480,7 @@ waittill_any_timeout(n_timeout, string1, string2, string3, string4, string5) {
   if((!isDefined(string1) || string1 != "death") && (!isDefined(string2) || string2 != "death") && (!isDefined(string3) || string3 != "death") && (!isDefined(string4) || string4 != "death") && (!isDefined(string5) || string5 != "death"))
     self endon("death");
 
-  ent = spawnstruct();
+  ent = spawnStruct();
 
   if(isDefined(string1))
     self thread waittill_string(string1, ent);
@@ -714,7 +713,7 @@ script_gen_dump_addline(string, signature) {
     if(!isDefined(level.script_gen_dump_preload))
       level.script_gen_dump_preload = [];
 
-    struct = spawnstruct();
+    struct = spawnStruct();
     struct.string = string;
     struct.signature = signature;
     level.script_gen_dump_preload[level.script_gen_dump_preload.size] = struct;
@@ -764,7 +763,7 @@ single_func(entity, func, arg1, arg2, arg3, arg4, arg5, arg6) {
 }
 
 new_func(func, arg1, arg2, arg3, arg4, arg5, arg6) {
-  s_func = spawnstruct();
+  s_func = spawnStruct();
   s_func.func = func;
   s_func.arg1 = arg1;
   s_func.arg2 = arg2;
@@ -862,7 +861,7 @@ trigger_on(name, type) {
     if(!isDefined(type))
       type = "targetname";
 
-    ents = getentarray(name, type);
+    ents = getEntArray(name, type);
     array_thread(ents, ::trigger_on_proc);
   } else
     self trigger_on_proc();
@@ -880,7 +879,7 @@ trigger_off(name, type) {
     if(!isDefined(type))
       type = "targetname";
 
-    ents = getentarray(name, type);
+    ents = getEntArray(name, type);
     array_thread(ents, ::trigger_off_proc);
   } else
     self trigger_off_proc();
@@ -899,14 +898,14 @@ trigger_wait(str_name, str_key, e_entity) {
     str_key = "targetname";
 
   if(isDefined(str_name)) {
-    triggers = getentarray(str_name, str_key);
+    triggers = getEntArray(str_name, str_key);
     assert(triggers.size > 0, "trigger not found: " + str_name + " key: " + str_key);
 
     if(triggers.size == 1) {
       trigger_hit = triggers[0];
       trigger_hit _trigger_wait(e_entity);
     } else {
-      s_tracker = spawnstruct();
+      s_tracker = spawnStruct();
       array_thread(triggers, ::_trigger_wait_think, s_tracker, e_entity);
       s_tracker waittill("trigger", e_other, trigger_hit);
       trigger_hit.who = e_other;
@@ -1267,7 +1266,7 @@ is_false(check) {
 
 has_spawnflag(spawnflags) {
   if(isDefined(self.spawnflags))
-    return (self.spawnflags & spawnflags) == spawnflags;
+    return (self.spawnflags &spawnflags) == spawnflags;
 
   return false;
 }

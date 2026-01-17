@@ -937,5 +937,4 @@ main() {
   ent.v["origin"] = (1655.88, -231.347, -222.549);
   ent.v["angles"] = (270, 0, 0);
   ent.v["soundalias"] = "elm_wind_leafy_whistle";
-
 }

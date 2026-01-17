@@ -34,9 +34,9 @@ playflarefx(localclientnum) {
   level endon("player_switch");
 
   if(friendnotfoe(localclientnum))
-    fx_handle = playfxontag(localclientnum, level._effect["fx_betty_friendly_light"], self, "tag_origin");
+    fx_handle = playFXOnTag(localclientnum, level._effect["fx_betty_friendly_light"], self, "tag_origin");
   else
-    fx_handle = playfxontag(localclientnum, level._effect["fx_betty_enemy_light"], self, "tag_origin");
+    fx_handle = playFXOnTag(localclientnum, level._effect["fx_betty_enemy_light"], self, "tag_origin");
 
   self thread watchbettyshutdown(localclientnum, fx_handle);
   return fx_handle;

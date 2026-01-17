@@ -14,16 +14,16 @@
 #namespace teams;
 
 function autoexec __init__sytem__() {
-  system::register("teams", & __init__, undefined, undefined);
+  system::register("teams", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype( & init);
-  level.getenemyteam = & getenemyteam;
+  callback::on_start_gametype(&init);
+  level.getenemyteam = &getenemyteam;
 }
 
 function init() {
-  game["strings"]["autobalance"] = & "MP_AUTOBALANCE_NOW";
+  game["strings"]["autobalance"] = &"MP_AUTOBALANCE_NOW";
   if(getdvarstring("scr_teambalance") == "") {
     setdvar("scr_teambalance", "0");
   }
@@ -37,14 +37,14 @@ function init() {
   if(level.teambased) {
     level.alliesplayers = [];
     level.axisplayers = [];
-    callback::on_connect( & on_player_connect);
-    callback::on_joined_team( & on_joined_team);
-    callback::on_joined_spectate( & on_joined_spectators);
+    callback::on_connect(&on_player_connect);
+    callback::on_joined_team(&on_joined_team);
+    callback::on_joined_spectate(&on_joined_spectators);
     level thread update_balance_dvar();
     wait(0.15);
     level thread update_player_times();
   } else {
-    callback::on_connect( & on_free_player_connect);
+    callback::on_connect(&on_free_player_connect);
     wait(0.15);
     level thread update_player_times();
   }
@@ -76,15 +76,15 @@ function track_played_time() {
   self.timeplayed["free"] = 0;
   self.timeplayed["other"] = 0;
   self.timeplayed["alive"] = 0;
-  if(!isdefined(self.timeplayed["total"]) || (!(level.gametype == "twar" && 0 < game["roundsplayed"] && 0 < self.timeplayed["total"]))) {
+  if(!isDefined(self.timeplayed["total"]) || (!(level.gametype == "twar" && 0 < game["roundsplayed"] && 0 < self.timeplayed["total"]))) {
     self.timeplayed["total"] = 0;
   }
-  while (level.inprematchperiod) {
+  while(level.inprematchperiod) {
     wait(0.05);
   }
-  for (;;) {
+  for(;;) {
     if(game["state"] == "playing") {
-      if(isdefined(level.teams[self.sessionteam])) {
+      if(isDefined(level.teams[self.sessionteam])) {
         self.timeplayed[self.sessionteam]++;
         self.timeplayed["total"]++;
         if(isalive(self)) {
@@ -101,7 +101,7 @@ function track_played_time() {
 function update_player_times() {
   varwait = 10;
   nexttoupdate = 0;
-  for (;;) {
+  for(;;) {
     varwait = varwait - 1;
     nexttoupdate++;
     if(nexttoupdate >= level.players.size) {
@@ -111,7 +111,7 @@ function update_player_times() {
       }
       varwait = 10;
     }
-    if(isdefined(level.players[nexttoupdate])) {
+    if(isDefined(level.players[nexttoupdate])) {
       level.players[nexttoupdate] update_played_time();
       level.players[nexttoupdate] persistence::check_contract_expirations();
     }
@@ -155,7 +155,7 @@ function update_time() {
 }
 
 function update_balance_dvar() {
-  for (;;) {
+  for(;;) {
     teambalance = getdvarint("scr_teambalance");
     if(level.teambalance != teambalance) {
       level.teambalance = getdvarint("scr_teambalance");
@@ -201,7 +201,7 @@ function count_players() {
       continue;
     }
     team = player.pers["team"];
-    if(isdefined(team) && isdefined(level.teams[team])) {
+    if(isDefined(team) && isDefined(level.teams[team])) {
       playercounts[team]++;
     }
   }
@@ -216,10 +216,10 @@ function track_free_played_time() {
   self.timeplayed["other"] = 0;
   self.timeplayed["total"] = 0;
   self.timeplayed["alive"] = 0;
-  for (;;) {
+  for(;;) {
     if(game["state"] == "playing") {
       team = self.pers["team"];
-      if(isdefined(team) && isdefined(level.teams[team]) && self.sessionteam != "spectator") {
+      if(isDefined(team) && isDefined(level.teams[team]) && self.sessionteam != "spectator") {
         self.timeplayed[team]++;
         self.timeplayed["total"]++;
         if(isalive(self)) {
@@ -241,20 +241,20 @@ function set_player_model(team, weapon) {
 }
 
 function get_flag_model(teamref) {
-  assert(isdefined(game[""]));
-  assert(isdefined(game[""][teamref]));
+  assert(isDefined(game[""]));
+  assert(isDefined(game[""][teamref]));
   return game["flagmodels"][teamref];
 }
 
 function get_flag_carry_model(teamref) {
-  assert(isdefined(game[""]));
-  assert(isdefined(game[""][teamref]));
+  assert(isDefined(game[""]));
+  assert(isDefined(game[""][teamref]));
   return game["carry_flagmodels"][teamref];
 }
 
 function get_flag_icon(teamref) {
-  assert(isdefined(game[""]));
-  assert(isdefined(game[""][teamref]));
+  assert(isDefined(game[""]));
+  assert(isDefined(game[""][teamref]));
   return game["carry_icon"][teamref];
 }
 

@@ -61,7 +61,7 @@ make_machete_mpla(melee_machete) {
 
   self.mpla_melee_weapon = spawn("script_model", self gettagorigin("tag_weapon_right"));
   self.mpla_melee_weapon.angles = self gettagangles("tag_weapon_right");
-  self.mpla_melee_weapon setmodel("t6_wpn_machete_prop");
+  self.mpla_melee_weapon setModel("t6_wpn_machete_prop");
   self.mpla_melee_weapon linkto(self, "tag_weapon_right");
   self.mpla_melee_weapon hide();
   self.meleechargedistsq = 129600;

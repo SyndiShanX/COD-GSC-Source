@@ -15,8 +15,8 @@ init() {
   boxConfig.weaponInfo = "deployable_weapon_crate_marker_mp";
   boxConfig.modelBase = "mp_weapon_crate";
   boxConfig.modelBombSquad = "mp_weapon_crate_bombsquad";
-  boxConfig.hintString = & "KILLSTREAKS_HINTS_DEPLOYABLE_AMMO_USE";
-  boxConfig.capturingString = & "KILLSTREAKS_DEPLOYABLE_AMMO_TAKING";
+  boxConfig.hintString = &"KILLSTREAKS_HINTS_DEPLOYABLE_AMMO_USE";
+  boxConfig.capturingString = &"KILLSTREAKS_DEPLOYABLE_AMMO_TAKING";
   boxConfig.event = "deployable_ammo_taken";
   boxConfig.streakName = BOX_TYPE;
   boxConfig.splashName = "used_deployable_ammo";

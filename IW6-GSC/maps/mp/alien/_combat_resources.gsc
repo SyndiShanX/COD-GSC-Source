@@ -231,9 +231,9 @@ init_combat_resource_overrides() {
   config.modelPlacementFailed = "ims_scorpion_body_iw6_placement_failed";
   config.modelDestroyed = "ims_scorpion_body_iw6";
   config.modelBombSquad = "ims_scorpion_body_iw6_bombsquad";
-  config.hintString = & "ALIEN_COLLECTIBLES_IMS_PICKUP";
-  config.placeString = & "ALIEN_COLLECTIBLES_IMS_PLACE";
-  config.cannotPlaceString = & "ALIEN_COLLECTIBLES_IMS_CANNOT_PLACE";
+  config.hintString = &"ALIEN_COLLECTIBLES_IMS_PICKUP";
+  config.placeString = &"ALIEN_COLLECTIBLES_IMS_PLACE";
+  config.cannotPlaceString = &"ALIEN_COLLECTIBLES_IMS_CANNOT_PLACE";
   config.streakName = "alien_ims";
   config.splashName = "used_ims";
   config.lifeSpan = 600.0;
@@ -266,9 +266,9 @@ init_combat_resource_overrides() {
   config.modelPlacementFailed = "ims_scorpion_body_iw6_placement_failed";
   config.modelDestroyed = "ims_scorpion_body_iw6";
   config.modelBombSquad = "ims_scorpion_body_iw6_bombsquad";
-  config.hintString = & "ALIEN_COLLECTIBLES_IMS_PICKUP";
-  config.placeString = & "ALIEN_COLLECTIBLES_IMS_PLACE";
-  config.cannotPlaceString = & "ALIEN_COLLECTIBLES_IMS_CANNOT_PLACE";
+  config.hintString = &"ALIEN_COLLECTIBLES_IMS_PICKUP";
+  config.placeString = &"ALIEN_COLLECTIBLES_IMS_PLACE";
+  config.cannotPlaceString = &"ALIEN_COLLECTIBLES_IMS_CANNOT_PLACE";
   config.streakName = "alien_ims_1";
   config.splashName = "used_ims";
   config.lifeSpan = 600.0;
@@ -301,9 +301,9 @@ init_combat_resource_overrides() {
   config.modelPlacementFailed = "ims_scorpion_body_iw6_placement_failed";
   config.modelDestroyed = "ims_scorpion_body_iw6";
   config.modelBombSquad = "ims_scorpion_body_iw6_bombsquad";
-  config.hintString = & "ALIEN_COLLECTIBLES_IMS_PICKUP";
-  config.placeString = & "ALIEN_COLLECTIBLES_IMS_PLACE";
-  config.cannotPlaceString = & "ALIEN_COLLECTIBLES_IMS_CANNOT_PLACE";
+  config.hintString = &"ALIEN_COLLECTIBLES_IMS_PICKUP";
+  config.placeString = &"ALIEN_COLLECTIBLES_IMS_PLACE";
+  config.cannotPlaceString = &"ALIEN_COLLECTIBLES_IMS_CANNOT_PLACE";
   config.streakName = "alien_ims_2";
   config.splashName = "used_ims";
   config.lifeSpan = 600.0;
@@ -336,9 +336,9 @@ init_combat_resource_overrides() {
   config.modelPlacementFailed = "ims_scorpion_body_iw6_placement_failed";
   config.modelDestroyed = "ims_scorpion_body_iw6";
   config.modelBombSquad = "ims_scorpion_body_iw6_bombsquad";
-  config.hintString = & "ALIEN_COLLECTIBLES_IMS_PICKUP";
-  config.placeString = & "ALIEN_COLLECTIBLES_IMS_PLACE";
-  config.cannotPlaceString = & "ALIEN_COLLECTIBLES_IMS_CANNOT_PLACE";
+  config.hintString = &"ALIEN_COLLECTIBLES_IMS_PICKUP";
+  config.placeString = &"ALIEN_COLLECTIBLES_IMS_PLACE";
+  config.cannotPlaceString = &"ALIEN_COLLECTIBLES_IMS_CANNOT_PLACE";
   config.streakName = "alien_ims_3";
   config.splashName = "used_ims";
   config.lifeSpan = 600.0;
@@ -371,9 +371,9 @@ init_combat_resource_overrides() {
   config.modelPlacementFailed = "ims_scorpion_body_iw6_placement_failed";
   config.modelDestroyed = "ims_scorpion_body_iw6";
   config.modelBombSquad = "ims_scorpion_body_iw6_bombsquad";
-  config.hintString = & "ALIEN_COLLECTIBLES_IMS_PICKUP";
-  config.placeString = & "ALIEN_COLLECTIBLES_IMS_PLACE";
-  config.cannotPlaceString = & "ALIEN_COLLECTIBLES_IMS_CANNOT_PLACE";
+  config.hintString = &"ALIEN_COLLECTIBLES_IMS_PICKUP";
+  config.placeString = &"ALIEN_COLLECTIBLES_IMS_PLACE";
+  config.cannotPlaceString = &"ALIEN_COLLECTIBLES_IMS_CANNOT_PLACE";
   config.streakName = "alien_ims_4";
   config.splashName = "used_ims";
   config.lifeSpan = 600.0;
@@ -562,17 +562,17 @@ init_combat_resource_overrides() {
   level.ballDroneSettings["alien_ball_drone_4"].fxId_light1["enemy"] = LoadFX("vfx/gameplay/mp/killstreaks/vfx_light_detonator_blink");
   level.ballDroneSettings["alien_ball_drone_4"].fxId_light1["friendly"] = LoadFX("fx/misc/light_mine_blink_friendly");
 
-  level.boxSettings["deployable_vest"].hintString = & "ALIEN_COLLECTIBLES_DEPLOYABLE_VEST_PICKUP";
-  level.boxSettings["deployable_vest"].capturingString = & "ALIEN_COLLECTIBLES_DEPLOYABLE_VEST_GETTING";
-  level.boxSettings["deployable_vest"].eventString = & "ALIEN_COLLECTIBLES_DEPLOYED_VEST";
+  level.boxSettings["deployable_vest"].hintString = &"ALIEN_COLLECTIBLES_DEPLOYABLE_VEST_PICKUP";
+  level.boxSettings["deployable_vest"].capturingString = &"ALIEN_COLLECTIBLES_DEPLOYABLE_VEST_GETTING";
+  level.boxSettings["deployable_vest"].eventString = &"ALIEN_COLLECTIBLES_DEPLOYED_VEST";
 
-  level.boxSettings["deployable_ammo"].hintString = & "ALIEN_COLLECTIBLES_DEPLOYABLE_AMMO_PICKUP";
-  level.boxSettings["deployable_ammo"].capturingString = & "ALIEN_COLLECTIBLES_DEPLOYABLE_AMMO_TAKING";
-  level.boxSettings["deployable_ammo"].eventString = & "ALIEN_COLLECTIBLES_DEPLOYABLE_AMMO_TAKEN";
+  level.boxSettings["deployable_ammo"].hintString = &"ALIEN_COLLECTIBLES_DEPLOYABLE_AMMO_PICKUP";
+  level.boxSettings["deployable_ammo"].capturingString = &"ALIEN_COLLECTIBLES_DEPLOYABLE_AMMO_TAKING";
+  level.boxSettings["deployable_ammo"].eventString = &"ALIEN_COLLECTIBLES_DEPLOYABLE_AMMO_TAKEN";
 
-  level.boxSettings["deployable_juicebox"].hintString = & "ALIEN_COLLECTIBLES_DEPLOYABLE_BOOST_PICKUP";
-  level.boxSettings["deployable_juicebox"].capturingString = & "ALIEN_COLLECTIBLES_DEPLOYABLE_BOOST_TAKING";
-  level.boxSettings["deployable_juicebox"].eventString = & "ALIEN_COLLECTIBLES_DEPLOYABLE_BOOST_TAKEN";
+  level.boxSettings["deployable_juicebox"].hintString = &"ALIEN_COLLECTIBLES_DEPLOYABLE_BOOST_PICKUP";
+  level.boxSettings["deployable_juicebox"].capturingString = &"ALIEN_COLLECTIBLES_DEPLOYABLE_BOOST_TAKING";
+  level.boxSettings["deployable_juicebox"].eventString = &"ALIEN_COLLECTIBLES_DEPLOYABLE_BOOST_TAKEN";
 
   level.boxSettings["deployable_ammo"].deathDamageMax = undefined;
 
@@ -954,7 +954,7 @@ Use_dpad_team_currency(def, rank) {
 
 CanPurchase_dpad_riotshield(def, rank) {
   if(self.hasRiotShield) {
-    self setLowerMessage("riot_shield_equipped", & "ALIEN_COLLECTIBLES_RIOT_SHIELD_EQUIPPED", 3);
+    self setLowerMessage("riot_shield_equipped", &"ALIEN_COLLECTIBLES_RIOT_SHIELD_EQUIPPED", 3);
     return false;
   }
 
@@ -1052,9 +1052,7 @@ TryUse_dpad_sentry(def, rank) {
 
   if(rank == 0) {
     self.last_sentry = "alien_sentry";
-    sentryGunBase = [
-      [level.createsentryforplayer_func]
-    ]("alien_sentry", self);
+    sentryGunBase = [[level.createsentryforplayer_func]]("alien_sentry", self);
     sentryGunBase SetConvergenceTime(1.5, "pitch");
     sentryGunBase SetConvergenceTime(1.5, "yaw");
     self.carriedSentry = sentryGunBase;
@@ -1063,9 +1061,7 @@ TryUse_dpad_sentry(def, rank) {
   }
   if(rank == 1) {
     self.last_sentry = "alien_sentry_1";
-    sentryGun1 = [
-      [level.createsentryforplayer_func]
-    ]("alien_sentry_1", self);
+    sentryGun1 = [[level.createsentryforplayer_func]]("alien_sentry_1", self);
     sentryGun1 SetConvergenceTime(1.0, "pitch");
     sentryGun1 SetConvergenceTime(1.0, "yaw");
     self.carriedSentry = sentryGun1;
@@ -1074,9 +1070,7 @@ TryUse_dpad_sentry(def, rank) {
   }
   if(rank == 2) {
     self.last_sentry = "alien_sentry_2";
-    sentryGun2 = [
-      [level.createsentryforplayer_func]
-    ]("alien_sentry_2", self);
+    sentryGun2 = [[level.createsentryforplayer_func]]("alien_sentry_2", self);
     sentryGun2 SetConvergenceTime(1.0, "pitch");
     sentryGun2 SetConvergenceTime(1.0, "yaw");
     self.carriedSentry = sentryGun2;
@@ -1085,9 +1079,7 @@ TryUse_dpad_sentry(def, rank) {
   }
   if(rank == 3) {
     self.last_sentry = "alien_sentry_3";
-    sentryGun3 = [
-      [level.createsentryforplayer_func]
-    ]("alien_sentry_3", self);
+    sentryGun3 = [[level.createsentryforplayer_func]]("alien_sentry_3", self);
     sentryGun3 SetConvergenceTime(1.0, "pitch");
     sentryGun3 SetConvergenceTime(1.0, "yaw");
     self.carriedSentry = sentryGun3;
@@ -1097,9 +1089,7 @@ TryUse_dpad_sentry(def, rank) {
 
   if(rank == 4) {
     self.last_sentry = "alien_sentry_4";
-    sentryGun4 = [
-      [level.createsentryforplayer_func]
-    ]("alien_sentry_4", self);
+    sentryGun4 = [[level.createsentryforplayer_func]]("alien_sentry_4", self);
     sentryGun4 SetConvergenceTime(1.0, "pitch");
     sentryGun4 SetConvergenceTime(1.0, "yaw");
     self.carriedSentry = sentryGun4;
@@ -1206,36 +1196,28 @@ TryUse_dpad_glsentry(def, rank) {
 
   if(rank == 0) {
     self.last_sentry = "gl_turret";
-    glsentryGunBase = [
-      [level.createsentryforplayer_func]
-    ]("gl_turret", self);
+    glsentryGunBase = [[level.createsentryforplayer_func]]("gl_turret", self);
     self.carriedSentry = glsentryGunBase;
     glsentryGunBase[[level.sentry_setcarried_func]](self);
     self DisableWeapons();
   }
   if(rank == 1) {
     self.last_sentry = "gl_turret_1";
-    glsentryGun1 = [
-      [level.createsentryforplayer_func]
-    ]("gl_turret_1", self);
+    glsentryGun1 = [[level.createsentryforplayer_func]]("gl_turret_1", self);
     self.carriedSentry = glsentryGun1;
     glsentryGun1[[level.sentry_setcarried_func]](self);
     self DisableWeapons();
   }
   if(rank == 2) {
     self.last_sentry = "gl_turret_2";
-    glsentryGun2 = [
-      [level.createsentryforplayer_func]
-    ]("gl_turret_2", self);
+    glsentryGun2 = [[level.createsentryforplayer_func]]("gl_turret_2", self);
     self.carriedSentry = glsentryGun2;
     glsentryGun2[[level.sentry_setcarried_func]](self);
     self DisableWeapons();
   }
   if(rank == 3) {
     self.last_sentry = "gl_turret_3";
-    glsentryGun3 = [
-      [level.createsentryforplayer_func]
-    ]("gl_turret_3", self);
+    glsentryGun3 = [[level.createsentryforplayer_func]]("gl_turret_3", self);
     self.carriedSentry = glsentryGun3;
     glsentryGun3[[level.sentry_setcarried_func]](self);
     self DisableWeapons();
@@ -1243,9 +1225,7 @@ TryUse_dpad_glsentry(def, rank) {
 
   if(rank == 4) {
     self.last_sentry = "gl_turret_4";
-    glsentryGun4 = [
-      [level.createsentryforplayer_func]
-    ]("gl_turret_4", self);
+    glsentryGun4 = [[level.createsentryforplayer_func]]("gl_turret_4", self);
     self.carriedSentry = glsentryGun4;
     glsentryGun4[[level.sentry_setcarried_func]](self);
     self DisableWeapons();
@@ -1352,9 +1332,7 @@ TryUse_dpad_minigun_turret(def, rank) {
   if(rank == 0) {
     self.last_weapon = self GetCurrentWeapon();
     self.last_sentry = "minigun_turret";
-    minigunTurretBase = [
-      [level.createsentryforplayer_func]
-    ]("minigun_turret", self);
+    minigunTurretBase = [[level.createsentryforplayer_func]]("minigun_turret", self);
     self.carriedSentry = minigunTurretBase;
     minigunTurretBase[[level.sentry_setcarried_func]](self);
     self DisableWeapons();
@@ -1362,9 +1340,7 @@ TryUse_dpad_minigun_turret(def, rank) {
   if(rank == 1) {
     self.last_weapon = self GetCurrentWeapon();
     self.last_sentry = "minigun_turret_1";
-    minigunTurret1 = [
-      [level.createsentryforplayer_func]
-    ]("minigun_turret_1", self);
+    minigunTurret1 = [[level.createsentryforplayer_func]]("minigun_turret_1", self);
     self.carriedSentry = minigunTurret1;
     minigunTurret1[[level.sentry_setcarried_func]](self);
     self DisableWeapons();
@@ -1372,9 +1348,7 @@ TryUse_dpad_minigun_turret(def, rank) {
   if(rank == 2) {
     self.last_weapon = self GetCurrentWeapon();
     self.last_sentry = "minigun_turret";
-    minigunTurret2 = [
-      [level.createsentryforplayer_func]
-    ]("minigun_turret_2", self);
+    minigunTurret2 = [[level.createsentryforplayer_func]]("minigun_turret_2", self);
     self.carriedSentry = minigunTurret2;
     minigunTurret2[[level.sentry_setcarried_func]](self);
     self DisableWeapons();
@@ -1382,9 +1356,7 @@ TryUse_dpad_minigun_turret(def, rank) {
   if(rank == 3) {
     self.last_weapon = self GetCurrentWeapon();
     self.last_sentry = "minigun_turret";
-    minigunTurret3 = [
-      [level.createsentryforplayer_func]
-    ]("minigun_turret_3", self);
+    minigunTurret3 = [[level.createsentryforplayer_func]]("minigun_turret_3", self);
     self.carriedSentry = minigunTurret3;
     minigunTurret3[[level.sentry_setcarried_func]](self);
     self DisableWeapons();
@@ -1393,9 +1365,7 @@ TryUse_dpad_minigun_turret(def, rank) {
   if(rank == 4) {
     self.last_weapon = self GetCurrentWeapon();
     self.last_sentry = "minigun_turret";
-    minigunTurret4 = [
-      [level.createsentryforplayer_func]
-    ]("minigun_turret_4", self);
+    minigunTurret4 = [[level.createsentryforplayer_func]]("minigun_turret_4", self);
     self.carriedSentry = minigunTurret4;
     minigunTurret4[[level.sentry_setcarried_func]](self);
     self DisableWeapons();
@@ -2112,9 +2082,7 @@ watch_ammo(weapName) {
 
 TryUse_dpad_predator(def, rank) {
   if(isDefined(level.alternate_trinity_weapon_try_use)) {
-    [
-      [level.alternate_trinity_weapon_try_use]
-    ](def, rank);
+    [[level.alternate_trinity_weapon_try_use]](def, rank);
 
     return true;
   }
@@ -2126,9 +2094,7 @@ TryUse_dpad_predator(def, rank) {
 
 Use_dpad_predator(def, rank) {
   if(isDefined(level.alternate_trinity_weapon_use)) {
-    [
-      [level.alternate_trinity_weapon_use]
-    ](def, rank);
+    [[level.alternate_trinity_weapon_use]](def, rank);
 
     return true;
   }
@@ -2171,9 +2137,7 @@ Use_dpad_predator(def, rank) {
 
 CancelUse_dpad_predator(def, rank) {
   if(isDefined(level.alternate_trinity_weapon_cancel_use)) {
-    [
-      [level.alternate_trinity_weapon_cancel_use]
-    ](def, rank);
+    [[level.alternate_trinity_weapon_cancel_use]](def, rank);
 
     return true;
   }

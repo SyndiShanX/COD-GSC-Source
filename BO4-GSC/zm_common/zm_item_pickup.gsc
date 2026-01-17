@@ -5,13 +5,12 @@
 
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_item_pickup;
 
 create_item_pickup(var_3d455c82, var_4b1985dd, var_b4bbefe4, n_radius = 64, var_c12c30aa = 0) {
   if(zm_utility::is_ee_enabled() || !var_c12c30aa) {
     if(!isDefined(var_4b1985dd)) {
-      var_4b1985dd = zm_utility::function_d6046228(#"hash_388256f1e5a62d7c", #"hash_7693de01f82d93f0");
+      var_4b1985dd = zm_utility::function_d6046228(#"hash_388256f1e5a62d7c", # "hash_7693de01f82d93f0");
     }
 
     s_unitrigger = self zm_unitrigger::create(var_4b1985dd, n_radius, undefined, 1, var_c12c30aa);
@@ -22,7 +21,7 @@ create_item_pickup(var_3d455c82, var_4b1985dd, var_b4bbefe4, n_radius = 64, var_
   }
 }
 
-private item_think() {
+item_think() {
   self endon(#"death");
 
   while(true) {
@@ -53,7 +52,7 @@ item_pickup_init(func_callback, var_c12c30aa = 0) {
   return s_unitrigger;
 }
 
-private function_8769717c() {
+function_8769717c() {
   self endon(#"death");
   waitresult = self waittill(#"trigger");
   s_stub = self.stub;

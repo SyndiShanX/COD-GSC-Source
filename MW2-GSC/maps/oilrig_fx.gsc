@@ -97,15 +97,14 @@ precacheFX() {
     level._effect["spotlight"] = loadfx("misc/spotlight_large");
 
   level._effect["heli_dlight_blue"] = loadfx("misc/aircraft_light_cockpit_blue");
-
 }
 
 submarine01_fx() {
   //for engine exhaust, sounds, etc.
   flag_wait("open_dds_door");
-  //	while ( !flag( "sdv_01_passing" ) )
+  //	while( !flag( "sdv_01_passing" ) )
   //	{
-  //		playfxontag( getfx( "sub_prop_wash_1" ), self, "TAG_PROPELLER" );
+  //		playFXOnTag( getfx( "sub_prop_wash_1" ), self, "TAG_PROPELLER" );
   //		wait( .1 );
   //	}
 }
@@ -115,9 +114,9 @@ submarine02_fx() {
   flag_wait("intro_anim_sequence_starting");
   wait(14);
   self thread play_sound_on_tag("submarine_driveby", "TAG_PROPELLER");
-  //	while ( !flag( "sdv_01_arriving" ) )
+  //	while( !flag( "sdv_01_arriving" ) )
   //	{
-  //		playfxontag( getfx( "sub_prop_wash_1" ), self, "TAG_PROPELLER" );
+  //		playFXOnTag( getfx( "sub_prop_wash_1" ), self, "TAG_PROPELLER" );
   //		wait( .1 );
   //	}
 }
@@ -129,7 +128,7 @@ sdv01_fx() {
   self delaythread(1, ::play_loop_sound_on_tag, "sdv_move_loop_plr", "TAG_PROPELLER", true);
 
   //PLACE FX HERE
-  playfxontag(getfx("oilrig_underwater_ambient_emitter"), self, "TAG_PROPELLER");
+  playFXOnTag(getfx("oilrig_underwater_ambient_emitter"), self, "TAG_PROPELLER");
 
   /*-----------------------
   SDV STOPPING
@@ -152,41 +151,39 @@ sdv02_fx() {
   /*-----------------------
   SDV PROP WASH FX
   -------------------------*/
-  playfxontag(getfx("sdv_prop_wash_1"), self, "TAG_PROPELLER");
+  playFXOnTag(getfx("sdv_prop_wash_1"), self, "TAG_PROPELLER");
 
   /*-----------------------
   SDV STOPPING
   -------------------------*/
   //self waittill( "arriving" );
   self waittill("stopped_moving");
-  stopfxontag(getfx("sdv_contrail"), self, "TAG_PROPELLER");
+  stopFXOnTag(getfx("sdv_contrail"), self, "TAG_PROPELLER");
   self notify("stop sound" + "sdv_move_loop");
   self thread play_sound_on_tag("sdv_stop", "TAG_PROPELLER");
 }
 
 underwater_ambient_fx() {
   self waittill("moving");
-  while (self.moving) {
-    playfxontag(getfx("oilrig_underwater_ambient"), self, "TAG_PROPELLER");
+  while(self.moving) {
+    playFXOnTag(getfx("oilrig_underwater_ambient"), self, "TAG_PROPELLER");
     wait(.1);
   }
 }
 
 underwater_bleedout(guy) {
   //	iprintlnbold( "Blood" );
-  playfxontag(getfx("deathfx_bloodpool_underwater"), guy, "J_NECK");
-
+  playFXOnTag(getfx("deathfx_bloodpool_underwater"), guy, "J_NECK");
 }
 
 knife_blood(playerRig) {
   //	iprintlnbold( "Throat" );
-  playfxontag(getfx("bloodspurt_underwater"), playerRig, "TAG_KNIFE_FX");
-
+  playFXOnTag(getfx("bloodspurt_underwater"), playerRig, "TAG_KNIFE_FX");
 }
 
 underwater_struggle(guy) {
   //	iprintlnbold( "Splash" );
-  playfxontag(getfx("splash_underwater_stealthkill"), guy, "J_SpineUpper");
+  playFXOnTag(getfx("splash_underwater_stealthkill"), guy, "J_SpineUpper");
 }
 
 playerDrips_left(model) {
@@ -196,7 +193,7 @@ playerDrips_left(model) {
   tags_in_arm[tags_in_arm.size] = "J_Thumb_LE_2";
 
   num = 10;
-  for (i = 0; i < num; i++) {
+  for(i = 0; i < num; i++) {
     //iprintlnbold( "left" );
     thread play_drip_fx(tags_in_arm, model);
     wait randomfloatrange(0.05, 0.3);
@@ -211,7 +208,7 @@ playerDrips_right(model) {
   tags_in_arm[tags_in_arm.size] = "J_Elbow_RI";
 
   num = 10;
-  for (i = 0; i < num; i++) {
+  for(i = 0; i < num; i++) {
     //iprintlnbold( "right" );
     thread play_drip_fx(tags_in_arm, model);
     wait randomfloatrange(0.05, 0.3);
@@ -220,12 +217,11 @@ playerDrips_right(model) {
 
 play_drip_fx(tags_in_arm, model) {
   foreach(bone in tags_in_arm) {
-    playfxontag(getfx("drips_player_hand"), model, bone);
+    playFXOnTag(getfx("drips_player_hand"), model, bone);
   }
 }
 
 treadfx_override() {
-
   tread_effects = "treadfx/tread_snow_slush";
   flying_tread_fx = "treadfx/heli_snow_default";
 

@@ -17,7 +17,7 @@ init_animset_flashed() {
 getnextflashanim() {
   var_0 = "soldier";
 
-  if(isdefined(self.animarchetype) && isdefined(anim.flashanimindex[self.animarchetype]))
+  if(isDefined(self.animarchetype) && isDefined(anim.flashanimindex[self.animarchetype]))
     var_0 = self.animarchetype;
 
   anim.flashanimindex[var_0]++;
@@ -47,7 +47,7 @@ main() {
   }
   animscripts\face::saygenericdialogue("flashbang");
 
-  if(isdefined(self.specialflashedfunc)) {
+  if(isDefined(self.specialflashedfunc)) {
     self[[self.specialflashedfunc]]();
     return;
   }

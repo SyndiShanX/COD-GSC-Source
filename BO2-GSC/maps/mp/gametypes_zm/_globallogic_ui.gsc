@@ -415,9 +415,7 @@ menuspectator() {
     if(!level.teambased)
       self.ffateam = "spectator";
 
-    [
-      [level.spawnspectator]
-    ]();
+    [[level.spawnspectator]]();
     self thread maps\mp\gametypes_zm\_globallogic_player::spectate_player_watcher();
     self setclientscriptmainmenu(game["menu_class"]);
     self notify("joined_spectators");

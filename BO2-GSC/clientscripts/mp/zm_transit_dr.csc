@@ -96,15 +96,12 @@ lerp_infog_alpha(up) {
 }
 
 register_client_fields() {
-  if(level.scr_zm_ui_gametype == "zclassic") {
-  }
+  if(level.scr_zm_ui_gametype == "zclassic") {}
 }
 
-register_client_flags() {
-}
+register_client_flags() {}
 
-register_clientflag_callbacks() {
-}
+register_clientflag_callbacks() {}
 
 start_zombie_stuff() {
   level._uses_crossbow = 1;

@@ -15,13 +15,13 @@ soundRandom_Thread(localClientNum, randSound) {
   if(getdvarint("debug_audio") > 0) {
     println("*** Client : SR ( " + randSound.script_wait_min + " - " + randSound.script_wait_max + ")");
   }
-  while (1) {
+  while(1) {
     pause = RandomFloatRange(randSound.script_wait_min, randSound.script_wait_max);
     wait(pause);
     if(!isDefined(randSound.script_sound)) {
       println("ambient sound at " + randSound.origin + " has undefined script_sound");
     } else {
-      playsound(localClientNum, randSound.script_sound, randSound.origin);
+      playSound(localClientNum, randSound.script_sound, randSound.origin);
     }
     if(getdvarint("debug_audio") > 0) {
       print3d(randSound.origin, randSound.script_sound, (0.0, 0.8, 0.0), 1, 3, 45);
@@ -32,7 +32,7 @@ soundRandom_Thread(localClientNum, randSound) {
 soundLoop_Thread(localClientNum, loopSound) {
   clientscripts\mp\_utility::loop_fx_sound(localClientNum, loopSound.script_sound, loopSound.origin);
   if(getdvarint("debug_audio") > 0) {
-    while (1) {
+    while(1) {
       print3d(loopSound.origin, loopSound.script_sound, (0.0, 0.8, 0.0), 1, 3, 30);
       wait(1);
     }
@@ -62,14 +62,14 @@ line_sound_player() {
   if(isDefined(self.script_looping)) {
     self.fake_ent = spawnfakeent(self.localClientNum);
     setfakeentorg(self.localClientNum, self.fake_ent, self.origin);
-    playloopsound(self.localClientNum, self.fake_ent, self.script_sound);
+    playLoopSound(self.localClientNum, self.fake_ent, self.script_sound);
   } else {
-    playsound(self.localClientNum, self.script_sound, self.origin);
+    playSound(self.localClientNum, self.script_sound, self.origin);
   }
 }
 
 debug_line_emitter() {
-  while (1) {
+  while(1) {
     if(getdvarint("debug_audio") > 0) {
       line(self.start, self.end, (0, 1, 0));
       print3d(self.start, "START", (0.0, 0.8, 0.0), 1, 3, 1);
@@ -83,7 +83,7 @@ debug_line_emitter() {
 move_sound_along_line() {
   closest_dist = undefined;
   self thread debug_line_emitter();
-  while (1) {
+  while(1) {
     self closest_point_on_line_to_point(getlocalclientpos(0), self.start, self.end);
     if(isDefined(self.fake_ent)) {
       setfakeentorg(self.localClientNum, self.fake_ent, self.origin);
@@ -110,7 +110,7 @@ lineEmitter_Thread(localClientNum) {
   if(isDefined(self.target))
     endOfLineEntity = getstruct(self.target, "targetname");
   if(isDefined(endOfLineEntity)) {
-    soundMover = spawnstruct();
+    soundMover = spawnStruct();
     soundMover.start = self.origin;
     soundMover.origin = self.origin;
     soundMover.end = endOfLineEntity.origin;
@@ -129,7 +129,7 @@ startSoundRandoms(localClientNum) {
   randoms = GetStructArray("random", "script_label");
   if(isDefined(randoms) && randoms.size > 0) {
     println("*** Client : Initialising random sounds - " + randoms.size + " emitters.");
-    for (i = 0; i < randoms.size; i++) {
+    for(i = 0; i < randoms.size; i++) {
       thread soundRandom_Thread(localClientNum, randoms[i]);
     }
   } else {
@@ -141,7 +141,7 @@ startSoundLoops(localClientNum) {
   loopers = GetStructArray("looper", "script_label");
   if(isDefined(loopers) && loopers.size > 0) {
     println("*** Client : Initialising looper sounds - " + loopers.size + " emitters.");
-    for (i = 0; i < loopers.size; i++) {
+    for(i = 0; i < loopers.size; i++) {
       thread soundLoop_Thread(localClientNum, loopers[i]);
       println("Looper : " + loopers[i].script_sound);
     }
@@ -154,7 +154,7 @@ startLineEmitters(localClientNum) {
   lineEmitters = GetStructArray("line_emitter", "script_label");
   if(isDefined(lineEmitters) && lineEmitters.size > 0) {
     println("*** Client : Initialising line emitter sounds - " + lineEmitters.size + " emitters.");
-    for (i = 0; i < lineEmitters.size; i++) {
+    for(i = 0; i < lineEmitters.size; i++) {
       lineEmitters[i] thread lineEmitter_Thread(localClientNum);
     }
   } else {

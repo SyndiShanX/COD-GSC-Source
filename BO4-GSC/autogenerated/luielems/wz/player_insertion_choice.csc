@@ -4,11 +4,9 @@
 *****************************************************************/
 
 #include scripts\core_common\lui_shared;
-
 #namespace player_insertion_choice;
 
 class cplayer_insertion_choice: cluielem {
-
   function set_state(localclientnum, state_name) {
     if(#"defaultstate" == state_name) {
       set_data(localclientnum, "_state", 0);
@@ -34,12 +32,12 @@ class cplayer_insertion_choice: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, #"player_insertion_choice");
+    cluielem::open(localclientnum, # "player_insertion_choice");
   }
 
   function function_fa582112(localclientnum) {
     cluielem::function_fa582112(localclientnum);
-    set_state(localclientnum, #"defaultstate");
+    set_state(localclientnum, # "defaultstate");
   }
 
   function register_clientside(uid) {

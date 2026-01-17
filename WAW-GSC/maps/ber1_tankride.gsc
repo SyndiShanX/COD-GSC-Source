@@ -26,7 +26,7 @@ main() {
 
 turn_off_tank_hud() {
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i] SetClientDvar("vehInfoHide", "1");
   }
 }
@@ -34,14 +34,14 @@ turn_off_tank_hud() {
 tankride_achievement() {
   tankride_spawners = getspawnerarray();
   if(numremoteclients()) {
-    trigs = getentarray("axis_drone", "targetname");
-    for (i = 0; i < trigs.size; i++) {
+    trigs = getEntArray("axis_drone", "targetname");
+    for(i = 0; i < trigs.size; i++) {
       trigs[i].script_drones_min = int(trigs[i].script_drones_min / 2);
       trigs[i].script_drones_max = int(trigs[i].script_drones_max / 2);
       trigs[i].script_delay = trigs[i].script_delay * 1.2;
     }
   }
-  for (i = 0; i < tankride_spawners.size; i++) {
+  for(i = 0; i < tankride_spawners.size; i++) {
     if(isDefined(tankride_spawners[i].targetname) && issubstr(tankride_spawners[i].targetname, "outro_retreaters_")) {
       tankride_spawners[i] add_spawn_function(::tankride_deathwatch);
     }
@@ -84,7 +84,7 @@ outro_push() {
   autosave_by_name("Ber1 tankride");
   level thread tankride_vo();
   allies = getaiarray("allies");
-  for (i = 0; i < allies.size; i++) {
+  for(i = 0; i < allies.size; i++) {
     if(isDefined(allies[i].script_aigroup) && (allies[i].script_aigroup == "tank1_riders" || allies[i].script_aigroup == "tank2_riders")) {
       continue;
     }
@@ -96,7 +96,7 @@ outro_push() {
   }
   if(NumRemoteClients()) {
     allies = getaiarray("allies");
-    for (i = 0; i < allies.size; i++) {
+    for(i = 0; i < allies.size; i++) {
       if(isDefined(allies[i].script_aigroup) && (allies[i].script_aigroup == "tank1_riders" || allies[i].script_aigroup == "tank2_riders")) {
         continue;
       }
@@ -126,21 +126,21 @@ outro_push() {
 kill_glasshouse_ai() {
   trigger_wait("trig_kill_glasshouse_ai", "script_noteworthy");
   guys_to_kill = get_ai_group_ai("outro_above_glasshouse_ai");
-  for (i = 0; i < guys_to_kill.size; i++) {
+  for(i = 0; i < guys_to_kill.size; i++) {
     guys_to_kill[i] thread bloody_death(true, 3);
   }
 }
 
 tank_riders_ignored() {
   riders = get_ai_group_ai("tank1_riders");
-  for (i = 0; i < riders.size; i++) {
+  for(i = 0; i < riders.size; i++) {
     riders[i].ignoreme = true;
     if(riders[i].script_startingposition == 4) {
       riders[i].delay = randomfloatrange(0.75, 1.25);
     }
   }
   riders = get_ai_group_ai("tank2_riders");
-  for (i = 0; i < riders.size; i++) {
+  for(i = 0; i < riders.size; i++) {
     riders[i].ignoreme = true;
     if(riders[i].script_startingposition == 4) {
       riders[i].delay = randomfloatrange(0.75, 1.25);
@@ -173,20 +173,20 @@ tankride_vo() {
 
 ambient_planes() {
   count = 0;
-  while (!flag("outro_tanks_fire_4") && count < 4) {
+  while(!flag("outro_tanks_fire_4") && count < 4) {
     planes = maps\_vehicle::create_vehicle_from_spawngroup_and_gopath(500);
     wait_network_frame();
     planes = maps\_vehicle::create_vehicle_from_spawngroup_and_gopath(501);
-    planes[0] playsound("fly_by3");
+    planes[0] playSound("fly_by3");
     count++;
     wait(RandomIntRange(13, 16));
   }
   flag_wait("outro_tanks_fire_4");
-  for (i = 0; i < 10; i++) {
+  for(i = 0; i < 10; i++) {
     planes = maps\_vehicle::create_vehicle_from_spawngroup_and_gopath(502);
     wait_network_frame();
     planes = maps\_vehicle::create_vehicle_from_spawngroup_and_gopath(503);
-    planes[0] playsound("fly_by4");
+    planes[0] playSound("fly_by4");
     wait(RandomIntRange(13, 16));
   }
 }
@@ -352,7 +352,7 @@ chain_road_to_reichstag() {
 retreat_away_from_tank_3() {
   wait(3);
   guys = getAIarrayTouchingVolume("axis", "vol_end_retreat");
-  for (i = 0; i < guys.size; i++) {
+  for(i = 0; i < guys.size; i++) {
     guys[i].ignoresuppression = true;
     guys[i] thread retreat_away_from_tank_3_delay(RandomInt(4));
   }
@@ -367,13 +367,13 @@ retreat_away_from_tank_3_delay(delay) {
 tank_1_shoot_strat() {
   flag_wait_all("outro_tanks_fire_1", "asylum_exit");
   targets = getstructarray("tank_1_outro_targets_1", "script_noteworthy");
-  while (!flag("outro_tanks_fire_2")) {
+  while(!flag("outro_tanks_fire_2")) {
     self tank_fire_at_struct(targets[randomint(targets.size)]);
     wait(RandomIntRange(5, 6));
   }
   shots_counter = 0;
   targets = getstructarray("tank_1_outro_targets_2", "script_noteworthy");
-  while (!flag("outro_tank_move_3")) {
+  while(!flag("outro_tank_move_3")) {
     if(shots_counter == 1) {
       struct_targ = getstruct("orig_glass_blowout", "targetname");
       self SetTurretTargetVec(struct_targ.origin);
@@ -381,7 +381,7 @@ tank_1_shoot_strat() {
       wait(1);
       self ClearTurretTarget();
       self fireweapon();
-      playfx(level._effect["large_glass_blowout"], struct_targ.origin, anglestoforward(struct_targ.angles));
+      playFX(level._effect["large_glass_blowout"], struct_targ.origin, anglesToForward(struct_targ.angles));
       wait(RandomIntRange(5, 6));
       if(flag("outro_tank_move_3")) {
         break;
@@ -392,17 +392,17 @@ tank_1_shoot_strat() {
     wait(RandomIntRange(5, 6));
   }
   targets = getstructarray("tank_1_outro_targets_3", "script_noteworthy");
-  while (!flag("outro_tanks_fire_4")) {
+  while(!flag("outro_tanks_fire_4")) {
     self tank_fire_at_struct(targets[randomint(targets.size)]);
     wait(RandomIntRange(5, 6));
   }
   targets = getstructarray("tank_1_outro_targets_4", "script_noteworthy");
-  while (!flag("outro_tanks_fire_5")) {
+  while(!flag("outro_tanks_fire_5")) {
     self tank_fire_at_struct(targets[randomint(targets.size)]);
     wait(RandomIntRange(5, 6));
   }
   targets = getstructarray("tank_1_outro_targets_5", "script_noteworthy");
-  while (1) {
+  while(1) {
     self tank_fire_at_struct(targets[randomint(targets.size)]);
     wait(RandomIntRange(5, 6));
   }
@@ -411,27 +411,27 @@ tank_1_shoot_strat() {
 tank_2_shoot_strat() {
   flag_wait("outro_tanks_fire_1");
   targets = getstructarray("tank_2_outro_targets_1", "script_noteworthy");
-  while (!flag("outro_tanks_fire_2")) {
+  while(!flag("outro_tanks_fire_2")) {
     self tank_fire_at_struct(targets[randomint(targets.size)]);
     wait(RandomIntRange(5, 7));
   }
   targets = getstructarray("tank_2_outro_targets_2", "script_noteworthy");
-  while (!flag("outro_tank_move_3")) {
+  while(!flag("outro_tank_move_3")) {
     self tank_fire_at_struct(targets[randomint(targets.size)]);
     wait(RandomIntRange(5, 6));
   }
   targets = getstructarray("tank_2_outro_targets_3", "script_noteworthy");
-  while (!flag("outro_tanks_fire_4")) {
+  while(!flag("outro_tanks_fire_4")) {
     self tank_fire_at_struct(targets[randomint(targets.size)]);
     wait(RandomIntRange(5, 7));
   }
   targets = getstructarray("tank_2_outro_targets_4", "script_noteworthy");
-  while (!flag("outro_tanks_fire_5")) {
+  while(!flag("outro_tanks_fire_5")) {
     self tank_fire_at_struct(targets[randomint(targets.size)]);
     wait(RandomIntRange(5, 7));
   }
   targets = getstructarray("tank_2_outro_targets_5", "script_noteworthy");
-  while (1) {
+  while(1) {
     self tank_fire_at_struct(targets[randomint(targets.size)]);
     wait(RandomIntRange(5, 7));
   }
@@ -443,7 +443,7 @@ tank_3_shoot_strat() {
   self tank_fire_at_struct(targets[randomint(targets.size)]);
   wait(RandomIntRange(5, 6));
   targets = getstructarray("tank_3_outro_targets_2", "script_noteworthy");
-  while (1) {
+  while(1) {
     self tank_fire_at_struct(targets[randomint(targets.size)]);
     wait(RandomIntRange(5, 7));
   }
@@ -459,14 +459,14 @@ unload_tank(tank_riders_name) {
     level thread delay_unload_message();
   }
   tank_riders = get_ai_group_ai(tank_riders_name);
-  for (i = 0; i < tank_riders.size; i++) {
+  for(i = 0; i < tank_riders.size; i++) {
     tank_riders[i].ignoreme = false;
     tank_riders[i].health = 10;
   }
   flag_wait("outro_tank_move_1");
   flag_wait("outro_tank_riders_safe");
   tank_riders = get_ai_group_ai(tank_riders_name);
-  for (i = 0; i < tank_riders.size; i++) {
+  for(i = 0; i < tank_riders.size; i++) {
     tank_riders[i] set_force_color("b");
     tank_riders[i].baseAccuracy = 0.05;
     tank_riders[i] setthreatbiasgroup("outro_blue_guys");
@@ -482,7 +482,7 @@ delay_unload_message() {
 end_of_level() {
   flag_set("objective_end");
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i] EnableInvulnerability();
   }
   level.bg = NewHudElem();
@@ -506,7 +506,7 @@ cleanupFadeoutHud() {
 
 set_player_shock(var1, var2) {
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i] Shellshock(var1, var2);
   }
 }

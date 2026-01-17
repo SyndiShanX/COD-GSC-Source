@@ -566,9 +566,7 @@ get_name_for_nationality(nationality) {
   assert(isDefined(level.nameindex[nationality]), nationality);
 
   if(isDefined(level._override_name_funcs) && isDefined(level._override_name_funcs[nationality])) {
-    self.name = [
-      [level._override_name_funcs[nationality]]
-    ]();
+    self.name = [[level._override_name_funcs[nationality]]]();
     self.airank = "";
     return;
   }

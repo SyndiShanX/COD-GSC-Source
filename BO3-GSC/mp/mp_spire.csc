@@ -14,11 +14,11 @@
 #namespace mp_spire;
 
 function main() {
-  clientfield::register("world", "mpSpireExteriorBillboard", 1, 2, "int", & exteriorbillboard, 1, 1);
+  clientfield::register("world", "mpSpireExteriorBillboard", 1, 2, "int", &exteriorbillboard, 1, 1);
   level.disablefxaniminsplitscreencount = 3;
   load::main();
-  level.domflagbasefxoverride = & dom_flag_base_fx_override;
-  level.domflagcapfxoverride = & dom_flag_cap_fx_override;
+  level.domflagbasefxoverride = &dom_flag_base_fx_override;
+  level.domflagcapfxoverride = &dom_flag_cap_fx_override;
   mp_spire_fx::main();
   thread mp_spire_amb::main();
   util::waitforclient(0);

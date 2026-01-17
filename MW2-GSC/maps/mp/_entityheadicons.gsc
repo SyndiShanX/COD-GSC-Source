@@ -8,7 +8,7 @@
 #include maps\mp\gametypes\_hud_util;
 
 init() {
-  if(isdefined(level.initedEntityHeadIcons))
+  if(isDefined(level.initedEntityHeadIcons))
     return;
   level.initedEntityHeadIcons = true;
 
@@ -22,8 +22,8 @@ init() {
     return;
 }
 
-// This can show to single players or to teams.Showing to a single player destroys instances of 
-// the icon that are shown to their team.Showing to a team destroys instances of the icon that 
+// This can show to single players or to teams.Showing to a single player destroys instances of
+// the icon that are shown to their team.Showing to a team destroys instances of the icon that
 // are shown to players on that team
 setHeadIcon(showTo, icon, offset, width, height) {
   if(!isDefined(self.entityHeadIcons))
@@ -47,9 +47,9 @@ setHeadIcon(showTo, icon, offset, width, height) {
       self.entityHeadIcons[showTo.guid] = undefined;
     }
 
-    if(icon == "")
+    if(icon == "") {
       return;
-
+    }
     // remove from team or we'd have two icons
     if(isDefined(self.entityHeadIcons[showTo.team])) {
       self.entityHeadIcons[showTo.team] destroy();
@@ -67,13 +67,13 @@ setHeadIcon(showTo, icon, offset, width, height) {
       self.entityHeadIcons[showTo] = undefined;
     }
 
-    if(icon == "")
+    if(icon == "") {
       return;
-
+    }
     foreach(key, hudIcon in self.entityHeadIcons) {
-      if(key == "axis" || key == "allies")
+      if(key == "axis" || key == "allies") {
         continue;
-
+      }
       player = getPlayerForGuid(key);
       if(player.team == showTo) {
         self.entityHeadIcons[key] destroy();
@@ -123,11 +123,11 @@ destroyIconsOnDeath() {
 
   foreach(key, headIcon in self.entityHeadIcons) {
     // TODO: remove and fix properly after ship
-    if(!isDefined(headIcon)) //needed for FFA host migration (when host has active head icons)
+    if(!isDefined(headIcon)) //needed for FFA host migration (when host has active head icons) {
       continue;
-
-    headIcon destroy();
   }
+  headIcon destroy();
+}
 }
 
 keepPositioned(owner, offset) {
@@ -136,7 +136,7 @@ keepPositioned(owner, offset) {
 
   pos = owner.origin;
 
-  for (;;) {
+  for(;;) {
     if(pos != owner.origin) {
       pos = owner.origin;
 
@@ -148,12 +148,11 @@ keepPositioned(owner, offset) {
   }
 }
 
-
 setTeamHeadIcon(team, offset) // "allies", "axis", "all", "none"
 {
-  if(!level.teamBased)
+  if(!level.teamBased) {
     return;
-
+  }
   if(!isDefined(self.entityHeadIconTeam)) {
     self.entityHeadIconTeam = "none";
     self.entityHeadIcon = undefined;
@@ -192,9 +191,9 @@ setTeamHeadIcon(team, offset) // "allies", "axis", "all", "none"
 
 setPlayerHeadIcon(player, offset) // "allies", "axis", "all", "none"
 {
-  if(level.teamBased)
+  if(level.teamBased) {
     return;
-
+  }
   if(!isDefined(self.entityHeadIconTeam)) {
     self.entityHeadIconTeam = "none";
     self.entityHeadIcon = undefined;
@@ -237,7 +236,7 @@ keepIconPositioned() {
   self endon("death");
 
   pos = self.origin;
-  while (1) {
+  while(1) {
     if(pos != self.origin) {
       self updateHeadIconOrigin();
       pos = self.origin;
@@ -251,9 +250,9 @@ destroyHeadIconsOnDeath() {
   self waittill("death");
 
   // TODO: remove and fix properly after ship
-  if(!isDefined(self.entityHeadIcon))
+  if(!isDefined(self.entityHeadIcon)) {
     return;
-
+  }
   self.entityHeadIcon destroy();
 }
 

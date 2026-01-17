@@ -12,12 +12,12 @@
 #namespace menus;
 
 function autoexec __init__sytem__() {
-  system::register("menus", & __init__, undefined, undefined);
+  system::register("menus", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype( & init);
-  callback::on_connect( & on_player_connect);
+  callback::on_start_gametype(&init);
+  callback::on_connect(&on_player_connect);
 }
 
 function init() {
@@ -40,13 +40,13 @@ function on_player_connect() {
 
 function on_menu_response() {
   self endon("disconnect");
-  for (;;) {
+  for(;;) {
     self waittill("menuresponse", menu, response);
     if(response == "back") {
       self closeingamemenu();
       if(level.console) {
         if(menu == game["menu_changeclass"] || menu == game["menu_changeclass_offline"] || menu == game["menu_team"] || menu == game["menu_controls"]) {
-          if(isdefined(level.teams[self.pers["team"]])) {
+          if(isDefined(level.teams[self.pers["team"]])) {
             self openmenu(game["menu_start_menu"]);
           }
         }
@@ -112,7 +112,7 @@ function on_menu_response() {
     }
     if(menu == "spectate") {
       player = util::getplayerfromclientnum(int(response));
-      if(isdefined(player)) {
+      if(isDefined(player)) {
         self setcurrentspectatorclient(player);
       }
     }

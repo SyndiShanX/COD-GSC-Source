@@ -9,7 +9,6 @@
 #include scripts\core_common\vehicle_shared;
 #include scripts\killstreaks\killstreak_bundles;
 #include scripts\killstreaks\killstreaks_shared;
-
 #namespace killstreak_hacking;
 
 enable_hacking(killstreakname, prehackfunction, posthackfunction) {
@@ -53,7 +52,7 @@ hackerloopfx() {
   }
 }
 
-private _hacked_callback(hacker) {
+_hacked_callback(hacker) {
   killstreak = self;
   originalowner = killstreak.owner;
 
@@ -135,7 +134,6 @@ _update_health(hacker) {
   }
 
   hacker iprintlnbold("<dev string:x9b>");
-
 }
 
 killstreak_switch_team_end() {
@@ -146,7 +144,7 @@ killstreak_switch_team_end() {
 killstreak_switch_team(owner) {
   killstreakentity = self;
   killstreakentity notify(#"killstreak_switch_team_singleton");
-  killstreakentity endon(#"killstreak_switch_team_singleton", #"death");
+  killstreakentity endon(#"killstreak_switch_team_singleton", # "death");
   setdvar(#"scr_killstreak_switch_team", "<dev string:xc4>");
 
   while(true) {
@@ -157,15 +155,11 @@ killstreak_switch_team(owner) {
       team = "<dev string:xc7>";
 
       if(isDefined(level.getenemyteam) && isDefined(owner) && isDefined(owner.team)) {
-        team = [
-          [level.getenemyteam]
-        ](owner.team);
+        team = [[level.getenemyteam]](owner.team);
       }
 
       if(isDefined(level.devongetormakebot)) {
-        player = [
-          [level.devongetormakebot]
-        ](team);
+        player = [[level.devongetormakebot]](team);
       }
 
       if(!isDefined(player)) {
@@ -175,10 +169,9 @@ killstreak_switch_team(owner) {
       }
 
       if(!isDefined(killstreakentity.killstreak_hackedcallback)) {
-
         iprintlnbold("<dev string:xf0>");
 
-          return;
+        return;
       }
 
       killstreakentity notify(#"killstreak_hacked", {
@@ -192,4 +185,3 @@ killstreak_switch_team(owner) {
     }
   }
 }
-

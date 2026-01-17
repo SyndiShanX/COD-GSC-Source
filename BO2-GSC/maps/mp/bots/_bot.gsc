@@ -550,8 +550,8 @@ bot_spawn_init() {
   time = gettime();
 
   if(!isDefined(self.bot)) {
-    self.bot = spawnstruct();
-    self.bot.threat = spawnstruct();
+    self.bot = spawnStruct();
+    self.bot.threat = spawnStruct();
   }
 
   self.bot.glass_origin = undefined;
@@ -776,7 +776,7 @@ bot_get_mantle_start() {
   dir = self getlookaheaddir();
 
   if(dist > 0 && isDefined(dir)) {
-    forward = anglestoforward(self.angles);
+    forward = anglesToForward(self.angles);
 
     if(vectordot(dir, forward) < 0) {
       dir = vectorscale(dir, dist);
@@ -909,7 +909,7 @@ bot_update_crouch() {
 
 bot_update_glass() {
   if(isDefined(self.bot.glass_origin)) {
-    forward = anglestoforward(self.angles);
+    forward = anglesToForward(self.angles);
     dir = vectornormalize(self.bot.glass_origin - self.origin);
     dot = vectordot(forward, dir);
 
@@ -1497,7 +1497,7 @@ bot_update_crate() {
   self.bot.update_crate = time + randomintrange(1000, 3000);
   self cancelgoal("care package");
   radius = getdvarfloat(#"player_useRadius");
-  crates = getentarray("care_package", "script_noteworthy");
+  crates = getEntArray("care_package", "script_noteworthy");
 
   foreach(crate in crates) {
     if(distancesquared(self.origin, crate.origin) < radius * radius) {
@@ -1737,7 +1737,7 @@ bot_turret_location(weapon) {
   if(!isDefined(enemy)) {
     return;
   }
-  forward = anglestoforward(self getplayerangles());
+  forward = anglesToForward(self getplayerangles());
   forward = vectornormalize(forward);
   delta = enemy.origin - self.origin;
   delta = vectornormalize(delta);
@@ -1778,7 +1778,7 @@ bot_use_supply_drop(weapon) {
   }
 
   yaw = (0, self.angles[1], 0);
-  dir = anglestoforward(yaw);
+  dir = anglesToForward(yaw);
   dir = vectornormalize(dir);
   drop_point = self.origin + vectorscale(dir, 384);
   end = drop_point + vectorscale((0, 0, 1), 2048.0);
@@ -1909,8 +1909,7 @@ bot_dive_to_prone(exit_stance) {
   }
 }
 
-gametype_void() {
-}
+gametype_void() {}
 
 bot_debug_star(origin, seconds, color) {
   if(!isDefined(seconds))
@@ -2054,15 +2053,14 @@ bot_crosshair_follow() {
     setdvar("bot_ForceStand", "1");
     player = gethostplayerforbots();
     direction = player getplayerangles();
-    direction_vec = anglestoforward(direction);
-    eye = player geteye();
+    direction_vec = anglesToForward(direction);
+    eye = player getEye();
     scale = 8000;
     direction_vec = (direction_vec[0] * scale, direction_vec[1] * scale, direction_vec[2] * scale);
-    trace = bullettrace(eye, eye + direction_vec, 0, undefined);
+    trace = bulletTrace(eye, eye + direction_vec, 0, undefined);
     origin = trace["position"] + (0, 0, 0);
 
-    if(distancesquared(self.origin, origin) > 16384) {
-    }
+    if(distancesquared(self.origin, origin) > 16384) {}
   }
 
 }
@@ -2116,11 +2114,11 @@ devgui_debug_route() {
 devgui_bot_spawn(team) {
   player = gethostplayer();
   direction = player getplayerangles();
-  direction_vec = anglestoforward(direction);
-  eye = player geteye();
+  direction_vec = anglesToForward(direction);
+  eye = player getEye();
   scale = 8000;
   direction_vec = (direction_vec[0] * scale, direction_vec[1] * scale, direction_vec[2] * scale);
-  trace = bullettrace(eye, eye + direction_vec, 0, undefined);
+  trace = bulletTrace(eye, eye + direction_vec, 0, undefined);
   direction_vec = player.origin - trace["position"];
   direction = vectortoangles(direction_vec);
   bot = addtestclient();

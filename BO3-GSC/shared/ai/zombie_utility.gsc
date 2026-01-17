@@ -22,7 +22,7 @@
 
 function zombiespawnsetup() {
   self.zombie_move_speed = "walk";
-  if(!isdefined(self.zombie_arms_position)) {
+  if(!isDefined(self.zombie_arms_position)) {
     if(randomint(2) == 0) {
       self.zombie_arms_position = "up";
     } else {
@@ -40,20 +40,18 @@ function get_closest_valid_player(origin, ignore_player, ignore_laststand_player
   pixbeginevent("get_closest_valid_player");
   valid_player_found = 0;
   targets = getplayers();
-  if(isdefined(level.closest_player_targets_override)) {
-    targets = [
-      [level.closest_player_targets_override]
-    ]();
+  if(isDefined(level.closest_player_targets_override)) {
+    targets = [[level.closest_player_targets_override]]();
   }
-  if(isdefined(ignore_player)) {
-    for (i = 0; i < ignore_player.size; i++) {
+  if(isDefined(ignore_player)) {
+    for(i = 0; i < ignore_player.size; i++) {
       arrayremovevalue(targets, ignore_player[i]);
     }
   }
   done = 1;
-  while (targets.size && !done) {
+  while(targets.size && !done) {
     done = 1;
-    for (i = 0; i < targets.size; i++) {
+    for(i = 0; i < targets.size; i++) {
       target = targets[i];
       if(!is_player_valid(target, 1, ignore_laststand_players)) {
         arrayremovevalue(targets, target);
@@ -66,21 +64,17 @@ function get_closest_valid_player(origin, ignore_player, ignore_laststand_player
     pixendevent();
     return undefined;
   }
-  if(isdefined(self.closest_player_override)) {
-    target = [
-      [self.closest_player_override]
-    ](origin, targets);
-  } else if(isdefined(level.closest_player_override)) {
-    target = [
-      [level.closest_player_override]
-    ](origin, targets);
+  if(isDefined(self.closest_player_override)) {
+    target = [[self.closest_player_override]](origin, targets);
+  } else if(isDefined(level.closest_player_override)) {
+    target = [[level.closest_player_override]](origin, targets);
   }
-  if(isdefined(target)) {
+  if(isDefined(target)) {
     pixendevent();
     return target;
   }
   sortedpotentialtargets = arraysortclosest(targets, self.origin);
-  while (sortedpotentialtargets.size) {
+  while(sortedpotentialtargets.size) {
     if(is_player_valid(sortedpotentialtargets[0], 1, ignore_laststand_players)) {
       pixendevent();
       return sortedpotentialtargets[0];
@@ -92,7 +86,7 @@ function get_closest_valid_player(origin, ignore_player, ignore_laststand_player
 }
 
 function is_player_valid(player, checkignoremeflag, ignore_laststand_players) {
-  if(!isdefined(player)) {
+  if(!isDefined(player)) {
     return 0;
   }
   if(!isalive(player)) {
@@ -101,7 +95,7 @@ function is_player_valid(player, checkignoremeflag, ignore_laststand_players) {
   if(!isplayer(player)) {
     return 0;
   }
-  if(isdefined(player.is_zombie) && player.is_zombie == 1) {
+  if(isDefined(player.is_zombie) && player.is_zombie == 1) {
     return 0;
   }
   if(player.sessionstate == "spectator") {
@@ -110,10 +104,10 @@ function is_player_valid(player, checkignoremeflag, ignore_laststand_players) {
   if(player.sessionstate == "intermission") {
     return 0;
   }
-  if(isdefined(player.intermission) && player.intermission) {
+  if(isDefined(player.intermission) && player.intermission) {
     return 0;
   }
-  if(!(isdefined(ignore_laststand_players) && ignore_laststand_players)) {
+  if(!(isDefined(ignore_laststand_players) && ignore_laststand_players)) {
     if(player laststand::player_is_in_laststand()) {
       return 0;
     }
@@ -121,13 +115,11 @@ function is_player_valid(player, checkignoremeflag, ignore_laststand_players) {
   if(player isnotarget()) {
     return 0;
   }
-  if(isdefined(checkignoremeflag) && checkignoremeflag && player.ignoreme) {
+  if(isDefined(checkignoremeflag) && checkignoremeflag && player.ignoreme) {
     return 0;
   }
-  if(isdefined(level.is_player_valid_override)) {
-    return [
-      [level.is_player_valid_override]
-    ](player);
+  if(isDefined(level.is_player_valid_override)) {
+    return [[level.is_player_valid_override]](player);
   }
   return 1;
 }
@@ -143,7 +135,7 @@ function initanimtree(animscript) {
   if(animscript != "pain" && animscript != "death") {
     self.a.special = "none";
   }
-  assert(isdefined(animscript), "");
+  assert(isDefined(animscript), "");
   self.a.script = animscript;
 }
 
@@ -153,7 +145,7 @@ function updateanimpose() {
 }
 
 function initialize(animscript) {
-  if(isdefined(self.longdeathstarting)) {
+  if(isDefined(self.longdeathstarting)) {
     if(animscript != "pain" && animscript != "death") {
       self dodamage(self.health + 100, self.origin);
     }
@@ -162,15 +154,13 @@ function initialize(animscript) {
       self notify("kill_long_death");
     }
   }
-  if(isdefined(self.a.mayonlydie) && animscript != "death") {
+  if(isDefined(self.a.mayonlydie) && animscript != "death") {
     self dodamage(self.health + 100, self.origin);
   }
-  if(isdefined(self.a.postscriptfunc)) {
+  if(isDefined(self.a.postscriptfunc)) {
     scriptfunc = self.a.postscriptfunc;
     self.a.postscriptfunc = undefined;
-    [
-      [scriptfunc]
-    ](animscript);
+    [[scriptfunc]](animscript);
   }
   if(animscript != "death") {
     self.a.nodeath = 0;
@@ -180,7 +170,7 @@ function initialize(animscript) {
   self.changingcoverpos = 0;
   self.a.scriptstarttime = gettime();
   self.a.atconcealmentnode = 0;
-  if(isdefined(self.node) && (self.node.type == "Conceal Crouch" || self.node.type == "Conceal Stand")) {
+  if(isDefined(self.node) && (self.node.type == "Conceal Crouch" || self.node.type == "Conceal Stand")) {
     self.a.atconcealmentnode = 1;
   }
   initanimtree(animscript);
@@ -188,7 +178,7 @@ function initialize(animscript) {
 }
 
 function getnodeyawtoorigin(pos) {
-  if(isdefined(self.node)) {
+  if(isDefined(self.node)) {
     yaw = self.node.angles[1] - getyaw(pos);
   } else {
     yaw = self.angles[1] - getyaw(pos);
@@ -202,15 +192,15 @@ function getnodeyawtoenemy() {
   if(isvalidenemy(self.enemy)) {
     pos = self.enemy.origin;
   } else {
-    if(isdefined(self.node)) {
-      forward = anglestoforward(self.node.angles);
+    if(isDefined(self.node)) {
+      forward = anglesToForward(self.node.angles);
     } else {
-      forward = anglestoforward(self.angles);
+      forward = anglesToForward(self.angles);
     }
     forward = vectorscale(forward, 150);
     pos = self.origin + forward;
   }
-  if(isdefined(self.node)) {
+  if(isDefined(self.node)) {
     yaw = self.node.angles[1] - getyaw(pos);
   } else {
     yaw = self.angles[1] - getyaw(pos);
@@ -224,7 +214,7 @@ function getcovernodeyawtoenemy() {
   if(isvalidenemy(self.enemy)) {
     pos = self.enemy.origin;
   } else {
-    forward = anglestoforward(self.covernode.angles + self.animarray["angle_step_out"][self.a.cornermode]);
+    forward = anglesToForward(self.covernode.angles + self.animarray["angle_step_out"][self.a.cornermode]);
     forward = vectorscale(forward, 150);
     pos = self.origin + forward;
   }
@@ -245,7 +235,7 @@ function getyawtoenemy() {
   if(isvalidenemy(self.enemy)) {
     pos = self.enemy.origin;
   } else {
-    forward = anglestoforward(self.angles);
+    forward = anglesToForward(self.angles);
     forward = vectorscale(forward, 150);
     pos = self.origin + forward;
   }
@@ -332,7 +322,7 @@ function getcovernodeyawtoorigin(org) {
 }
 
 function isstanceallowedwrapper(stance) {
-  if(isdefined(self.covernode)) {
+  if(isDefined(self.covernode)) {
     return self.covernode doesnodeallowstance(stance);
   }
   return self isstanceallowed(stance);
@@ -340,7 +330,7 @@ function isstanceallowedwrapper(stance) {
 
 function getclaimednode() {
   mynode = self.node;
-  if(isdefined(mynode) && (self nearnode(mynode) || (isdefined(self.covernode) && mynode == self.covernode))) {
+  if(isDefined(mynode) && (self nearnode(mynode) || (isDefined(self.covernode) && mynode == self.covernode))) {
     return mynode;
   }
   return undefined;
@@ -348,7 +338,7 @@ function getclaimednode() {
 
 function getnodetype() {
   mynode = getclaimednode();
-  if(isdefined(mynode)) {
+  if(isDefined(mynode)) {
     return mynode.type;
   }
   return "none";
@@ -356,7 +346,7 @@ function getnodetype() {
 
 function getnodedirection() {
   mynode = getclaimednode();
-  if(isdefined(mynode)) {
+  if(isDefined(mynode)) {
     return mynode.angles[1];
   }
   return self.desiredangle;
@@ -364,15 +354,15 @@ function getnodedirection() {
 
 function getnodeforward() {
   mynode = getclaimednode();
-  if(isdefined(mynode)) {
-    return anglestoforward(mynode.angles);
+  if(isDefined(mynode)) {
+    return anglesToForward(mynode.angles);
   }
-  return anglestoforward(self.angles);
+  return anglesToForward(self.angles);
 }
 
 function getnodeorigin() {
   mynode = getclaimednode();
-  if(isdefined(mynode)) {
+  if(isDefined(mynode)) {
     return mynode.origin;
   }
   return self.origin;
@@ -397,7 +387,7 @@ function quadrantanimweights(yaw) {
   result["right"] = 0;
   result["back"] = 0;
   result["left"] = 0;
-  if(isdefined(self.alwaysrunforward)) {
+  if(isDefined(self.alwaysrunforward)) {
     assert(self.alwaysrunforward);
     result["front"] = 1;
     return result;
@@ -453,7 +443,7 @@ function getquadrant(angle) {
 }
 
 function isinset(input, set) {
-  for (i = set.size - 1; i >= 0; i--) {
+  for(i = set.size - 1; i >= 0; i--) {
     if(input == set[i]) {
       return true;
     }
@@ -470,7 +460,7 @@ function notifyaftertime(notifystring, killmestring, time) {
 
 function drawstringtime(msg, org, color, timer) {
   maxtime = timer * 20;
-  for (i = 0; i < maxtime; i++) {
+  for(i = 0; i < maxtime; i++) {
     print3d(org, msg, color, 1, 1);
     wait(0.05);
   }
@@ -488,9 +478,9 @@ function showlastenemysightpos(string) {
   } else {
     color = (1, 0.7, 0.4);
   }
-  while (true) {
+  while(true) {
     wait(0.05);
-    if(!isdefined(self.lastenemysightpos)) {
+    if(!isDefined(self.lastenemysightpos)) {
       continue;
     }
     print3d(self.lastenemysightpos, string, color, 1, 2.15);
@@ -506,7 +496,7 @@ function debugposinternal(org, string, size) {
   self endon("death");
   self notify("" + org);
   self endon("" + org);
-  ent = spawnstruct();
+  ent = spawnStruct();
   ent thread debugtimeout();
   ent endon("timeout");
   if(self.enemy.team == "") {
@@ -514,7 +504,7 @@ function debugposinternal(org, string, size) {
   } else {
     color = (1, 0.7, 0.4);
   }
-  while (true) {
+  while(true) {
     wait(0.05);
     print3d(org, string, color, 1, size);
   }
@@ -532,7 +522,7 @@ function showdebugproc(frompoint, topoint, color, printtime) {
   self endon("death");
   timer = printtime * 20;
   i = 0;
-  while (i < timer) {
+  while(i < timer) {
     wait(0.05);
     line(frompoint, topoint, color);
     i = i + 1;
@@ -544,7 +534,7 @@ function showdebugline(frompoint, topoint, color, printtime) {
 }
 
 function getnodeoffset(node) {
-  if(isdefined(node.offset)) {
+  if(isDefined(node.offset)) {
     return node.offset;
   }
   cover_left_crouch_offset = (-26, 0.4, 36);
@@ -556,7 +546,7 @@ function getnodeoffset(node) {
   cornernode = 0;
   nodeoffset = (0, 0, 0);
   right = anglestoright(node.angles);
-  forward = anglestoforward(node.angles);
+  forward = anglesToForward(node.angles);
   switch (node.type) {
     case "Cover Left":
     case "Cover Left Wide": {
@@ -600,7 +590,7 @@ function calculatenodeoffset(right, forward, baseoffset) {
 function checkpitchvisibility(frompoint, topoint, atnode) {
   pitch = angleclamp180(vectortoangles(topoint - frompoint)[0]);
   if(abs(pitch) > 45) {
-    if(isdefined(atnode) && atnode.type != "Cover Crouch" && atnode.type != "Conceal Crouch") {
+    if(isDefined(atnode) && atnode.type != "Cover Crouch" && atnode.type != "Conceal Crouch") {
       return false;
     }
     if(pitch > 45 || pitch < (anim.covercrouchleanpitch - 45)) {
@@ -611,7 +601,7 @@ function checkpitchvisibility(frompoint, topoint, atnode) {
 }
 
 function showlines(start, end, end2) {
-  for (;;) {
+  for(;;) {
     line(start, end, (1, 0, 0), 1);
     wait(0.05);
     line(start, end2, (0, 0, 1), 1);
@@ -629,12 +619,12 @@ function anim_array(animarray, animweights) {
   }
   weights = 0;
   total_weight = 0;
-  for (i = 0; i < total_anims; i++) {
+  for(i = 0; i < total_anims; i++) {
     total_weight = total_weight + animweights[i];
   }
   anim_play = randomfloat(total_weight);
   current_weight = 0;
-  for (i = 0; i < total_anims; i++) {
+  for(i = 0; i < total_anims; i++) {
     current_weight = current_weight + animweights[i];
     if(anim_play >= current_weight) {
       continue;
@@ -650,12 +640,12 @@ function notforcedcover() {
 }
 
 function forcedcover(msg) {
-  return isdefined(self.a.forced_cover) && self.a.forced_cover == msg;
+  return isDefined(self.a.forced_cover) && self.a.forced_cover == msg;
 }
 
 function print3dtime(timer, org, msg, color, alpha, scale) {
   newtime = timer / 0.05;
-  for (i = 0; i < newtime; i++) {
+  for(i = 0; i < newtime; i++) {
     print3d(org, msg, color, alpha, scale);
     wait(0.05);
   }
@@ -665,7 +655,7 @@ function print3drise(org, msg, color, alpha, scale) {
   newtime = 100;
   up = 0;
   org = org;
-  for (i = 0; i < newtime; i++) {
+  for(i = 0; i < newtime; i++) {
     up = up + 0.5;
     print3d(org + (0, 0, up), msg, color, alpha, scale);
     wait(0.05);
@@ -704,12 +694,12 @@ function random_weight(array) {
   idleanim = randomint(array.size);
   if(array.size > 1) {
     anim_weight = 0;
-    for (i = 0; i < array.size; i++) {
+    for(i = 0; i < array.size; i++) {
       anim_weight = anim_weight + array[i];
     }
     anim_play = randomfloat(anim_weight);
     anim_weight = 0;
-    for (i = 0; i < array.size; i++) {
+    for(i = 0; i < array.size; i++) {
       anim_weight = anim_weight + array[i];
       if(anim_play < anim_weight) {
         idleanim = i;
@@ -721,21 +711,21 @@ function random_weight(array) {
 }
 
 function setfootstepeffect(name, fx) {
-  assert(isdefined(name), "");
-  assert(isdefined(fx), "");
-  if(!isdefined(anim.optionalstepeffects)) {
+  assert(isDefined(name), "");
+  assert(isDefined(fx), "");
+  if(!isDefined(anim.optionalstepeffects)) {
     anim.optionalstepeffects = [];
   }
   anim.optionalstepeffects[anim.optionalstepeffects.size] = name;
   level._effect["step_" + name] = fx;
-  anim.optionalstepeffectfunction = & zombie_shared::playfootstepeffect;
+  anim.optionalstepeffectfunction = &zombie_shared::playfootstepeffect;
 }
 
 function persistentdebugline(start, end) {
   self endon("death");
   level notify("newdebugline");
   level endon("newdebugline");
-  for (;;) {
+  for(;;) {
     line(start, end, (0.3, 1, 0), 1);
     wait(0.05);
   }
@@ -758,28 +748,28 @@ function doesnodeallowstance(stance) {
 }
 
 function animarray(animname) {
-  assert(isdefined(self.a.array));
-  if(!isdefined(self.a.array[animname])) {
+  assert(isDefined(self.a.array));
+  if(!isDefined(self.a.array[animname])) {
     dumpanimarray();
-    assert(isdefined(self.a.array[animname]), ("" + animname) + "");
+    assert(isDefined(self.a.array[animname]), ("" + animname) + "");
   }
   return self.a.array[animname];
 }
 
 function animarrayanyexist(animname) {
-  assert(isdefined(self.a.array));
-  if(!isdefined(self.a.array[animname])) {
+  assert(isDefined(self.a.array));
+  if(!isDefined(self.a.array[animname])) {
     dumpanimarray();
-    assert(isdefined(self.a.array[animname]), ("" + animname) + "");
+    assert(isDefined(self.a.array[animname]), ("" + animname) + "");
   }
   return self.a.array[animname].size > 0;
 }
 
 function animarraypickrandom(animname) {
-  assert(isdefined(self.a.array));
-  if(!isdefined(self.a.array[animname])) {
+  assert(isDefined(self.a.array));
+  if(!isDefined(self.a.array[animname])) {
     dumpanimarray();
-    assert(isdefined(self.a.array[animname]), ("" + animname) + "");
+    assert(isDefined(self.a.array[animname]), ("" + animname) + "");
   }
   assert(self.a.array[animname].size > 0);
   if(self.a.array[animname].size > 1) {
@@ -793,7 +783,7 @@ function animarraypickrandom(animname) {
 function dumpanimarray() {
   println("");
   keys = getarraykeys(self.a.array);
-  for (i = 0; i < keys.size; i++) {
+  for(i = 0; i < keys.size; i++) {
     if(isarray(self.a.array[keys[i]])) {
       println(((("" + keys[i]) + "") + self.a.array[keys[i]].size) + "");
       continue;
@@ -808,83 +798,83 @@ function getanimendpos(theanim) {
 }
 
 function isvalidenemy(enemy) {
-  if(!isdefined(enemy)) {
+  if(!isDefined(enemy)) {
     return false;
   }
   return true;
 }
 
 function damagelocationisany(a, b, c, d, e, f, g, h, i, j, k, ovr) {
-  if(!isdefined(self.damagelocation)) {
+  if(!isDefined(self.damagelocation)) {
     return false;
   }
-  if(!isdefined(a)) {
+  if(!isDefined(a)) {
     return false;
   }
   if(self.damagelocation == a) {
     return true;
   }
-  if(!isdefined(b)) {
+  if(!isDefined(b)) {
     return false;
   }
   if(self.damagelocation == b) {
     return true;
   }
-  if(!isdefined(c)) {
+  if(!isDefined(c)) {
     return false;
   }
   if(self.damagelocation == c) {
     return true;
   }
-  if(!isdefined(d)) {
+  if(!isDefined(d)) {
     return false;
   }
   if(self.damagelocation == d) {
     return true;
   }
-  if(!isdefined(e)) {
+  if(!isDefined(e)) {
     return false;
   }
   if(self.damagelocation == e) {
     return true;
   }
-  if(!isdefined(f)) {
+  if(!isDefined(f)) {
     return false;
   }
   if(self.damagelocation == f) {
     return true;
   }
-  if(!isdefined(g)) {
+  if(!isDefined(g)) {
     return false;
   }
   if(self.damagelocation == g) {
     return true;
   }
-  if(!isdefined(h)) {
+  if(!isDefined(h)) {
     return false;
   }
   if(self.damagelocation == h) {
     return true;
   }
-  if(!isdefined(i)) {
+  if(!isDefined(i)) {
     return false;
   }
   if(self.damagelocation == i) {
     return true;
   }
-  if(!isdefined(j)) {
+  if(!isDefined(j)) {
     return false;
   }
   if(self.damagelocation == j) {
     return true;
   }
-  if(!isdefined(k)) {
+  if(!isDefined(k)) {
     return false;
   }
   if(self.damagelocation == k) {
     return true;
   }
-  assert(!isdefined(ovr));
+  assert(!isDefined(ovr));
   return false;
 }
 
@@ -892,7 +882,7 @@ function ragdolldeath(moveanim) {
   self endon("killanimscript");
   lastorg = self.origin;
   movevec = (0, 0, 0);
-  for (;;) {
+  for(;;) {
     wait(0.05);
     force = distance(self.origin, lastorg);
     lastorg = self.origin;
@@ -908,7 +898,7 @@ function ragdolldeath(moveanim) {
 }
 
 function iscqbwalking() {
-  return isdefined(self.cqbwalking) && self.cqbwalking;
+  return isDefined(self.cqbwalking) && self.cqbwalking;
 }
 
 function squared(value) {
@@ -926,22 +916,22 @@ function getrandomintfromseed(intseed, intmax) {
 }
 
 function is_banzai() {
-  return isdefined(self.banzai) && self.banzai;
+  return isDefined(self.banzai) && self.banzai;
 }
 
 function is_heavy_machine_gun() {
-  return isdefined(self.heavy_machine_gunner) && self.heavy_machine_gunner;
+  return isDefined(self.heavy_machine_gunner) && self.heavy_machine_gunner;
 }
 
 function is_zombie() {
-  if(isdefined(self.is_zombie) && self.is_zombie) {
+  if(isDefined(self.is_zombie) && self.is_zombie) {
     return true;
   }
   return false;
 }
 
 function is_civilian() {
-  if(isdefined(self.is_civilian) && self.is_civilian) {
+  if(isDefined(self.is_civilian) && self.is_civilian) {
     return true;
   }
   return false;
@@ -955,7 +945,7 @@ function is_skeleton(skeleton) {
 }
 
 function get_skeleton() {
-  if(isdefined(self.skeleton)) {
+  if(isDefined(self.skeleton)) {
     return self.skeleton;
   }
   return "base";
@@ -963,13 +953,13 @@ function get_skeleton() {
 
 function set_orient_mode(mode, val1) {
   if(level.dog_debug_orient == self getentnum()) {
-    if(isdefined(val1)) {
+    if(isDefined(val1)) {
       println((((("" + mode) + "") + val1) + "") + gettime());
     } else {
       println((("" + mode) + "") + gettime());
     }
   }
-  if(isdefined(val1)) {
+  if(isDefined(val1)) {
     self orientmode(mode, val1);
   } else {
     self orientmode(mode);
@@ -977,16 +967,16 @@ function set_orient_mode(mode, val1) {
 }
 
 function debug_anim_print(text) {
-  if(isdefined(level.dog_debug_anims) && level.dog_debug_anims) {
+  if(isDefined(level.dog_debug_anims) && level.dog_debug_anims) {
     println((text + "") + gettime());
   }
-  if(isdefined(level.dog_debug_anims_ent) && level.dog_debug_anims_ent == self getentnum()) {
+  if(isDefined(level.dog_debug_anims_ent) && level.dog_debug_anims_ent == self getentnum()) {
     println((text + "") + gettime());
   }
 }
 
 function debug_turn_print(text, line) {
-  if(isdefined(level.dog_debug_turns) && level.dog_debug_turns == self getentnum()) {
+  if(isDefined(level.dog_debug_turns) && level.dog_debug_turns == self getentnum()) {
     duration = 200;
     currentyawcolor = (1, 1, 1);
     lookaheadyawcolor = (1, 0, 0);
@@ -1009,12 +999,12 @@ function debug_allow_movement() {
 }
 
 function set_zombie_var(zvar, value, is_float = 0, column = 1, is_team_based = 0) {
-  if(!isdefined(level.zombie_vars)) {
+  if(!isDefined(level.zombie_vars)) {
     level.zombie_vars = [];
   }
   if(is_team_based) {
     foreach(team in level.teams) {
-      if(!isdefined(level.zombie_vars[team])) {
+      if(!isDefined(level.zombie_vars[team])) {
         level.zombie_vars[team] = [];
       }
       level.zombie_vars[team][zvar] = value;
@@ -1026,33 +1016,31 @@ function set_zombie_var(zvar, value, is_float = 0, column = 1, is_team_based = 0
 }
 
 function spawn_zombie(spawner, target_name, spawn_point, round_number) {
-  if(!isdefined(spawner)) {
+  if(!isDefined(spawner)) {
     println("");
     return undefined;
   }
-  while (getfreeactorcount() < 1) {
+  while(getfreeactorcount() < 1) {
     wait(0.05);
   }
   spawner.script_moveoverride = 1;
-  if(isdefined(spawner.script_forcespawn) && spawner.script_forcespawn) {
+  if(isDefined(spawner.script_forcespawn) && spawner.script_forcespawn) {
     if(sessionmodeiscampaignzombiesgame()) {
       guy = spawner spawner::spawn(1);
     } else {
-      if(isactorspawner(spawner) && isdefined(level.overridezombiespawn)) {
-        guy = [
-          [level.overridezombiespawn]
-        ]();
+      if(isactorspawner(spawner) && isDefined(level.overridezombiespawn)) {
+        guy = [[level.overridezombiespawn]]();
       } else {
         guy = spawner spawnfromspawner(0, 1);
       }
     }
     if(!zombie_spawn_failed(guy)) {
       guy.spawn_time = gettime();
-      if(isdefined(level.giveextrazombies)) {
+      if(isDefined(level.giveextrazombies)) {
         guy[[level.giveextrazombies]]();
       }
       guy enableaimassist();
-      if(isdefined(round_number)) {
+      if(isDefined(round_number)) {
         guy._starting_round_number = round_number;
       }
       guy.team = level.zombie_team;
@@ -1065,13 +1053,13 @@ function spawn_zombie(spawner, target_name, spawn_point, round_number) {
       }
       guy show();
       spawner.count = 666;
-      if(isdefined(target_name)) {
+      if(isDefined(target_name)) {
         guy.targetname = target_name;
       }
-      if(isdefined(spawn_point) && isdefined(level.move_spawn_func)) {
+      if(isDefined(spawn_point) && isDefined(level.move_spawn_func)) {
         guy thread[[level.move_spawn_func]](spawn_point);
       }
-      if(isdefined(spawner.zm_variant_type)) {
+      if(isDefined(spawner.zm_variant_type)) {
         guy.variant_type = spawner.zm_variant_type;
       }
       return guy;
@@ -1084,7 +1072,7 @@ function spawn_zombie(spawner, target_name, spawn_point, round_number) {
 }
 
 function zombie_spawn_failed(spawn) {
-  if(isdefined(spawn) && isalive(spawn)) {
+  if(isDefined(spawn) && isalive(spawn)) {
     if(isalive(spawn)) {
       return false;
     }
@@ -1093,15 +1081,15 @@ function zombie_spawn_failed(spawn) {
 }
 
 function get_desired_origin() {
-  if(isdefined(self.target)) {
+  if(isDefined(self.target)) {
     ent = getent(self.target, "targetname");
-    if(!isdefined(ent)) {
+    if(!isDefined(ent)) {
       ent = struct::get(self.target, "targetname");
     }
-    if(!isdefined(ent)) {
+    if(!isDefined(ent)) {
       ent = getnode(self.target, "targetname");
     }
-    assert(isdefined(ent), (("" + self.target) + "") + self.origin);
+    assert(isDefined(ent), (("" + self.target) + "") + self.origin);
     return ent.origin;
   }
   return undefined;
@@ -1111,10 +1099,10 @@ function hide_pop() {
   self endon("death");
   self ghost();
   wait(0.5);
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     self show();
     util::wait_network_frame();
-    if(isdefined(self)) {
+    if(isDefined(self)) {
       self.create_eyes = 1;
     }
   }
@@ -1136,13 +1124,13 @@ function finish_rise_notetracks(note, spot) {
 function zombie_rise_death(zombie, spot) {
   zombie.zombie_rise_death_out = 0;
   zombie endon("rise_anim_finished");
-  while (isdefined(zombie) && isdefined(zombie.health) && zombie.health > 1) {
+  while(isDefined(zombie) && isDefined(zombie.health) && zombie.health > 1) {
     zombie waittill("damage", amount);
   }
-  if(isdefined(spot)) {
+  if(isDefined(spot)) {
     spot notify("stop_zombie_rise_fx");
   }
-  if(isdefined(zombie)) {
+  if(isDefined(zombie)) {
     zombie.deathanim = zombie get_rise_death_anim();
     zombie stopanimscripted();
   }
@@ -1158,7 +1146,7 @@ function get_rise_death_anim() {
 }
 
 function reset_attack_spot() {
-  if(isdefined(self.attacking_node)) {
+  if(isDefined(self.attacking_node)) {
     node = self.attacking_node;
     index = self.attacking_spot_index;
     node.attack_spots_taken[index] = 0;
@@ -1175,8 +1163,8 @@ function zombie_gut_explosion() {
 function delayed_zombie_eye_glow() {
   self endon("zombie_delete");
   self endon("death");
-  if(isdefined(self.in_the_ground) && self.in_the_ground || (isdefined(self.in_the_ceiling) && self.in_the_ceiling)) {
-    while (!isdefined(self.create_eyes)) {
+  if(isDefined(self.in_the_ground) && self.in_the_ground || (isDefined(self.in_the_ceiling) && self.in_the_ceiling)) {
+    while(!isDefined(self.create_eyes)) {
       wait(0.1);
     }
   } else {
@@ -1186,19 +1174,19 @@ function delayed_zombie_eye_glow() {
 }
 
 function zombie_eye_glow() {
-  if(!isdefined(self) || !isactor(self)) {
+  if(!isDefined(self) || !isactor(self)) {
     return;
   }
-  if(!isdefined(self.no_eye_glow) || !self.no_eye_glow) {
+  if(!isDefined(self.no_eye_glow) || !self.no_eye_glow) {
     self clientfield::set("zombie_has_eyes", 1);
   }
 }
 
 function zombie_eye_glow_stop() {
-  if(!isdefined(self) || !isactor(self)) {
+  if(!isDefined(self) || !isactor(self)) {
     return;
   }
-  if(!isdefined(self.no_eye_glow) || !self.no_eye_glow) {
+  if(!isDefined(self.no_eye_glow) || !self.no_eye_glow) {
     self clientfield::set("zombie_has_eyes", 0);
   }
 }
@@ -1206,14 +1194,14 @@ function zombie_eye_glow_stop() {
 function round_spawn_failsafe_debug_draw() {
   self endon("death");
   prevorigin = self.origin;
-  while (true) {
-    if(isdefined(level.toggle_keyline_always) && level.toggle_keyline_always) {
+  while(true) {
+    if(isDefined(level.toggle_keyline_always) && level.toggle_keyline_always) {
       self clientfield::set("zombie_keyline_render", 1);
       wait(1);
       continue;
     }
     wait(4);
-    if(isdefined(self.lastchunk_destroy_time)) {
+    if(isDefined(self.lastchunk_destroy_time)) {
       if((gettime() - self.lastchunk_destroy_time) < 8000) {
         continue;
       }
@@ -1229,34 +1217,34 @@ function round_spawn_failsafe_debug_draw() {
 
 function round_spawn_failsafe() {
   self endon("death");
-  if(isdefined(level.debug_keyline_zombies) && level.debug_keyline_zombies) {
+  if(isDefined(level.debug_keyline_zombies) && level.debug_keyline_zombies) {
     self thread round_spawn_failsafe_debug_draw();
   }
   prevorigin = self.origin;
-  while (true) {
+  while(true) {
     if(!level.zombie_vars["zombie_use_failsafe"]) {
       return;
     }
-    if(isdefined(self.ignore_round_spawn_failsafe) && self.ignore_round_spawn_failsafe) {
+    if(isDefined(self.ignore_round_spawn_failsafe) && self.ignore_round_spawn_failsafe) {
       return;
     }
-    if(!isdefined(level.failsafe_waittime)) {
+    if(!isDefined(level.failsafe_waittime)) {
       level.failsafe_waittime = 30;
     }
     wait(level.failsafe_waittime);
     if(self.missinglegs) {
       wait(10);
     }
-    if(isdefined(self.is_inert) && self.is_inert) {
+    if(isDefined(self.is_inert) && self.is_inert) {
       continue;
     }
-    if(isdefined(self.lastchunk_destroy_time)) {
+    if(isDefined(self.lastchunk_destroy_time)) {
       if((gettime() - self.lastchunk_destroy_time) < 8000) {
         continue;
       }
     }
     if(self.origin[2] < level.zombie_vars["below_world_check"]) {
-      if(isdefined(level.put_timed_out_zombies_back_in_queue) && level.put_timed_out_zombies_back_in_queue && !level flag::get("special_round") && (!(isdefined(self.isscreecher) && self.isscreecher))) {
+      if(isDefined(level.put_timed_out_zombies_back_in_queue) && level.put_timed_out_zombies_back_in_queue && !level flag::get("special_round") && (!(isDefined(self.isscreecher) && self.isscreecher))) {
         level.zombie_total++;
         level.zombie_total_subtract++;
       }
@@ -1264,11 +1252,11 @@ function round_spawn_failsafe() {
       break;
     }
     if(distancesquared(self.origin, prevorigin) < 576) {
-      if(isdefined(level.move_failsafe_override)) {
+      if(isDefined(level.move_failsafe_override)) {
         self thread[[level.move_failsafe_override]](prevorigin);
       } else {
-        if(isdefined(level.put_timed_out_zombies_back_in_queue) && level.put_timed_out_zombies_back_in_queue && !level flag::get("special_round")) {
-          if(!self.ignoreall && (!(isdefined(self.nuked) && self.nuked)) && (!(isdefined(self.marked_for_death) && self.marked_for_death)) && (!(isdefined(self.isscreecher) && self.isscreecher)) && !self.missinglegs) {
+        if(isDefined(level.put_timed_out_zombies_back_in_queue) && level.put_timed_out_zombies_back_in_queue && !level flag::get("special_round")) {
+          if(!self.ignoreall && (!(isDefined(self.nuked) && self.nuked)) && (!(isDefined(self.marked_for_death) && self.marked_for_death)) && (!(isDefined(self.isscreecher) && self.isscreecher)) && !self.missinglegs) {
             level.zombie_total++;
             level.zombie_total_subtract++;
           }
@@ -1284,7 +1272,7 @@ function round_spawn_failsafe() {
 
 function ai_calculate_health(round_number) {
   level.zombie_health = level.zombie_vars["zombie_health_start"];
-  for (i = 2; i <= round_number; i++) {
+  for(i = 2; i <= round_number; i++) {
     if(i >= 10) {
       old_health = level.zombie_health;
       level.zombie_health = level.zombie_health + (int(level.zombie_health * level.zombie_vars["zombie_health_increase_multiplier"]));
@@ -1332,15 +1320,15 @@ function zombie_speed_up() {
   level endon("end_of_round");
   level endon("restart_round");
   level endon("kill_round");
-  while (level.zombie_total > 4) {
+  while(level.zombie_total > 4) {
     wait(3);
   }
   a_ai_zombies = get_round_enemy_array();
-  while (a_ai_zombies.size > 0 || level.zombie_total > 0) {
+  while(a_ai_zombies.size > 0 || level.zombie_total > 0) {
     if(a_ai_zombies.size == 1) {
       ai_zombie = a_ai_zombies[0];
       if(isalive(ai_zombie)) {
-        if(isdefined(level.zombie_speed_up)) {
+        if(isDefined(level.zombie_speed_up)) {
           ai_zombie thread[[level.zombie_speed_up]]();
         } else if(!ai_zombie.zombie_move_speed === "sprint") {
           ai_zombie set_zombie_run_cycle("sprint");
@@ -1362,11 +1350,11 @@ function get_round_enemy_array() {
   a_ai_enemies = [];
   a_ai_valid_enemies = [];
   a_ai_enemies = getaiteamarray(level.zombie_team);
-  for (i = 0; i < a_ai_enemies.size; i++) {
-    if(isdefined(a_ai_enemies[i].ignore_enemy_count) && a_ai_enemies[i].ignore_enemy_count) {
+  for(i = 0; i < a_ai_enemies.size; i++) {
+    if(isDefined(a_ai_enemies[i].ignore_enemy_count) && a_ai_enemies[i].ignore_enemy_count) {
       continue;
     }
-    if(!isdefined(a_ai_valid_enemies)) {
+    if(!isDefined(a_ai_valid_enemies)) {
       a_ai_valid_enemies = [];
     } else if(!isarray(a_ai_valid_enemies)) {
       a_ai_valid_enemies = array(a_ai_valid_enemies);
@@ -1380,9 +1368,9 @@ function get_zombie_array() {
   enemies = [];
   valid_enemies = [];
   enemies = getaispeciesarray(level.zombie_team, "all");
-  for (i = 0; i < enemies.size; i++) {
+  for(i = 0; i < enemies.size; i++) {
     if(enemies[i].archetype == "zombie") {
-      if(!isdefined(valid_enemies)) {
+      if(!isDefined(valid_enemies)) {
         valid_enemies = [];
       } else if(!isarray(valid_enemies)) {
         valid_enemies = array(valid_enemies);
@@ -1405,12 +1393,12 @@ function set_zombie_run_cycle_restore_from_override() {
 }
 
 function set_zombie_run_cycle(new_move_speed) {
-  if(isdefined(self.zombie_move_speed_override)) {
+  if(isDefined(self.zombie_move_speed_override)) {
     self.zombie_move_speed_restore = new_move_speed;
     return;
   }
   self.zombie_move_speed_original = self.zombie_move_speed;
-  if(isdefined(new_move_speed)) {
+  if(isDefined(new_move_speed)) {
     self.zombie_move_speed = new_move_speed;
   } else {
     if(level.gamedifficulty == 0) {
@@ -1419,7 +1407,7 @@ function set_zombie_run_cycle(new_move_speed) {
       self set_run_speed();
     }
   }
-  if(isdefined(level.zm_variant_type_max)) {
+  if(isDefined(level.zm_variant_type_max)) {
     if(0) {
       debug_variant_type = getdvarint("", -1);
       if(debug_variant_type != -1) {
@@ -1433,10 +1421,10 @@ function set_zombie_run_cycle(new_move_speed) {
       }
     }
     if(self.archetype === "zombie") {
-      if(isdefined(self.zm_variant_type_max)) {
+      if(isDefined(self.zm_variant_type_max)) {
         self.variant_type = randomint(self.zm_variant_type_max[self.zombie_move_speed][self.zombie_arms_position]);
       } else {
-        if(isdefined(level.zm_variant_type_max[self.zombie_move_speed])) {
+        if(isDefined(level.zm_variant_type_max[self.zombie_move_speed])) {
           self.variant_type = randomint(level.zm_variant_type_max[self.zombie_move_speed][self.zombie_arms_position]);
         } else {
           errormsg("" + self.zombie_move_speed);
@@ -1451,7 +1439,7 @@ function set_zombie_run_cycle(new_move_speed) {
 }
 
 function set_run_speed() {
-  if(isdefined(level.zombie_force_run)) {
+  if(isDefined(level.zombie_force_run)) {
     self.zombie_move_speed = "run";
     level.zombie_force_run--;
     if(level.zombie_force_run <= 0) {
@@ -1484,7 +1472,7 @@ function setup_zombie_knockdown(entity) {
   self.knockdown = 1;
   zombie_to_entity = entity.origin - self.origin;
   zombie_to_entity_2d = vectornormalize((zombie_to_entity[0], zombie_to_entity[1], 0));
-  zombie_forward = anglestoforward(self.angles);
+  zombie_forward = anglesToForward(self.angles);
   zombie_forward_2d = vectornormalize((zombie_forward[0], zombie_forward[1], 0));
   zombie_right = anglestoright(self.angles);
   zombie_right_2d = vectornormalize((zombie_right[0], zombie_right[1], 0));
@@ -1515,8 +1503,8 @@ function setup_zombie_knockdown(entity) {
 
 function clear_all_corpses() {
   corpse_array = getcorpsearray();
-  for (i = 0; i < corpse_array.size; i++) {
-    if(isdefined(corpse_array[i])) {
+  for(i = 0; i < corpse_array.size; i++) {
+    if(isDefined(corpse_array[i])) {
       corpse_array[i] delete();
     }
   }
@@ -1525,7 +1513,7 @@ function clear_all_corpses() {
 function get_current_actor_count() {
   count = 0;
   actors = getaispeciesarray(level.zombie_team, "all");
-  if(isdefined(actors)) {
+  if(isDefined(actors)) {
     count = count + actors.size;
   }
   count = count + get_current_corpse_count();
@@ -1534,16 +1522,16 @@ function get_current_actor_count() {
 
 function get_current_corpse_count() {
   corpse_array = getcorpsearray();
-  if(isdefined(corpse_array)) {
+  if(isDefined(corpse_array)) {
     return corpse_array.size;
   }
   return 0;
 }
 
 function zombie_gib_on_damage() {
-  while (true) {
+  while(true) {
     self waittill("damage", amount, attacker, direction_vec, point, type, tagname, modelname, partname, weapon);
-    if(!isdefined(self)) {
+    if(!isDefined(self)) {
       return;
     }
     if(!self zombie_should_gib(amount, attacker, type)) {
@@ -1553,7 +1541,7 @@ function zombie_gib_on_damage() {
       self zombie_head_gib(attacker, type);
       continue;
     }
-    if(!(isdefined(self.gibbed) && self.gibbed) && isdefined(self.damagelocation)) {
+    if(!(isDefined(self.gibbed) && self.gibbed) && isDefined(self.damagelocation)) {
       if(self damagelocationisany("head", "helmet", "neck")) {
         continue;
       }
@@ -1615,19 +1603,19 @@ function zombie_gib_on_damage() {
           }
         }
       }
-      if(isdefined(self.missinglegs) && self.missinglegs && self.health > 0) {
+      if(isDefined(self.missinglegs) && self.missinglegs && self.health > 0) {
         self allowedstances("crouch");
         self setphysparams(15, 0, 24);
         self allowpitchangle(1);
         self setpitchorient();
         health = self.health;
         health = health * 0.1;
-        if(isdefined(self.crawl_anim_override)) {
+        if(isDefined(self.crawl_anim_override)) {
           self[[self.crawl_anim_override]]();
         }
       }
       if(self.health > 0) {
-        if(isdefined(level.gib_on_damage)) {
+        if(isDefined(level.gib_on_damage)) {
           self thread[[level.gib_on_damage]]();
         }
       }
@@ -1636,10 +1624,10 @@ function zombie_gib_on_damage() {
 }
 
 function add_zombie_gib_weapon_callback(weapon_name, gib_callback, gib_head_callback) {
-  if(!isdefined(level.zombie_gib_weapons)) {
+  if(!isDefined(level.zombie_gib_weapons)) {
     level.zombie_gib_weapons = [];
   }
-  if(!isdefined(level.zombie_gib_head_weapons)) {
+  if(!isDefined(level.zombie_gib_head_weapons)) {
     level.zombie_gib_head_weapons = [];
   }
   level.zombie_gib_weapons[weapon_name] = gib_callback;
@@ -1647,77 +1635,77 @@ function add_zombie_gib_weapon_callback(weapon_name, gib_callback, gib_head_call
 }
 
 function have_zombie_weapon_gib_callback(weapon) {
-  if(!isdefined(level.zombie_gib_weapons)) {
+  if(!isDefined(level.zombie_gib_weapons)) {
     level.zombie_gib_weapons = [];
   }
-  if(!isdefined(level.zombie_gib_head_weapons)) {
+  if(!isDefined(level.zombie_gib_head_weapons)) {
     level.zombie_gib_head_weapons = [];
   }
   if(isweapon(weapon)) {
     weapon = weapon.name;
   }
-  if(isdefined(level.zombie_gib_weapons[weapon])) {
+  if(isDefined(level.zombie_gib_weapons[weapon])) {
     return true;
   }
   return false;
 }
 
 function get_zombie_weapon_gib_callback(weapon, damage_percent) {
-  if(!isdefined(level.zombie_gib_weapons)) {
+  if(!isDefined(level.zombie_gib_weapons)) {
     level.zombie_gib_weapons = [];
   }
-  if(!isdefined(level.zombie_gib_head_weapons)) {
+  if(!isDefined(level.zombie_gib_head_weapons)) {
     level.zombie_gib_head_weapons = [];
   }
   if(isweapon(weapon)) {
     weapon = weapon.name;
   }
-  if(isdefined(level.zombie_gib_weapons[weapon])) {
+  if(isDefined(level.zombie_gib_weapons[weapon])) {
     return self[[level.zombie_gib_weapons[weapon]]](damage_percent);
   }
   return 0;
 }
 
 function have_zombie_weapon_gib_head_callback(weapon) {
-  if(!isdefined(level.zombie_gib_weapons)) {
+  if(!isDefined(level.zombie_gib_weapons)) {
     level.zombie_gib_weapons = [];
   }
-  if(!isdefined(level.zombie_gib_head_weapons)) {
+  if(!isDefined(level.zombie_gib_head_weapons)) {
     level.zombie_gib_head_weapons = [];
   }
   if(isweapon(weapon)) {
     weapon = weapon.name;
   }
-  if(isdefined(level.zombie_gib_head_weapons[weapon])) {
+  if(isDefined(level.zombie_gib_head_weapons[weapon])) {
     return true;
   }
   return false;
 }
 
 function get_zombie_weapon_gib_head_callback(weapon, damage_location) {
-  if(!isdefined(level.zombie_gib_weapons)) {
+  if(!isDefined(level.zombie_gib_weapons)) {
     level.zombie_gib_weapons = [];
   }
-  if(!isdefined(level.zombie_gib_head_weapons)) {
+  if(!isDefined(level.zombie_gib_head_weapons)) {
     level.zombie_gib_head_weapons = [];
   }
   if(isweapon(weapon)) {
     weapon = weapon.name;
   }
-  if(isdefined(level.zombie_gib_head_weapons[weapon])) {
+  if(isDefined(level.zombie_gib_head_weapons[weapon])) {
     return self[[level.zombie_gib_head_weapons[weapon]]](damage_location);
   }
   return 0;
 }
 
 function zombie_should_gib(amount, attacker, type) {
-  if(!isdefined(type)) {
+  if(!isDefined(type)) {
     return false;
   }
-  if(isdefined(self.is_on_fire) && self.is_on_fire) {
+  if(isDefined(self.is_on_fire) && self.is_on_fire) {
     return false;
   }
-  if(isdefined(self.no_gib) && self.no_gib == 1) {
+  if(isDefined(self.no_gib) && self.no_gib == 1) {
     return false;
   }
   prev_health = amount + self.health;
@@ -1726,8 +1714,8 @@ function zombie_should_gib(amount, attacker, type) {
   }
   damage_percent = (amount / prev_health) * 100;
   weapon = undefined;
-  if(isdefined(attacker)) {
-    if(isplayer(attacker) || (isdefined(attacker.can_gib_zombies) && attacker.can_gib_zombies)) {
+  if(isDefined(attacker)) {
+    if(isplayer(attacker) || (isDefined(attacker.can_gib_zombies) && attacker.can_gib_zombies)) {
       if(isplayer(attacker)) {
         weapon = attacker getcurrentweapon();
       } else {
@@ -1755,10 +1743,10 @@ function zombie_should_gib(amount, attacker, type) {
     }
   }
   if(type == "MOD_PISTOL_BULLET" || type == "MOD_RIFLE_BULLET") {
-    if(!isdefined(attacker) || !isplayer(attacker)) {
+    if(!isDefined(attacker) || !isplayer(attacker)) {
       return false;
     }
-    if(weapon == level.weaponnone || (isdefined(level.start_weapon) && weapon == level.start_weapon) || weapon.isgasweapon) {
+    if(weapon == level.weaponnone || (isDefined(level.start_weapon) && weapon == level.start_weapon) || weapon.isgasweapon) {
       return false;
     }
   }
@@ -1769,14 +1757,14 @@ function zombie_should_gib(amount, attacker, type) {
 }
 
 function head_should_gib(attacker, type, point) {
-  if(isdefined(self.head_gibbed) && self.head_gibbed) {
+  if(isDefined(self.head_gibbed) && self.head_gibbed) {
     return false;
   }
-  if(!isdefined(attacker)) {
+  if(!isDefined(attacker)) {
     return false;
   }
   if(!isplayer(attacker)) {
-    if(!(isdefined(attacker.can_gib_zombies) && attacker.can_gib_zombies)) {
+    if(!(isDefined(attacker.can_gib_zombies) && attacker.can_gib_zombies)) {
       return false;
     }
   }
@@ -1811,7 +1799,7 @@ function head_should_gib(attacker, type, point) {
   if(!self damagelocationisany("head", "helmet", "neck")) {
     return false;
   }
-  if(type == "MOD_PISTOL_BULLET" && weapon.weapclass != "smg" && weapon.weapclass != "spread" || weapon == level.weaponnone || (isdefined(level.start_weapon) && weapon == level.start_weapon) || weapon.isgasweapon) {
+  if(type == "MOD_PISTOL_BULLET" && weapon.weapclass != "smg" && weapon.weapclass != "spread" || weapon == level.weaponnone || (isDefined(level.start_weapon) && weapon == level.start_weapon) || weapon.isgasweapon) {
     return false;
   }
   if(sessionmodeiscampaigngame() && (type == "MOD_PISTOL_BULLET" && weapon.weapclass != "smg")) {
@@ -1826,20 +1814,20 @@ function head_should_gib(attacker, type, point) {
 
 function zombie_hat_gib(attacker, means_of_death) {
   self endon("death");
-  if(isdefined(self.hat_gibbed) && self.hat_gibbed) {
+  if(isDefined(self.hat_gibbed) && self.hat_gibbed) {
     return;
   }
-  if(!isdefined(self.gibspawn5) || !isdefined(self.gibspawntag5)) {
+  if(!isDefined(self.gibspawn5) || !isDefined(self.gibspawntag5)) {
     return;
   }
   self.hat_gibbed = 1;
-  if(isdefined(self.hatmodel)) {
+  if(isDefined(self.hatmodel)) {
     self detach(self.hatmodel, "");
   }
   temp_array = [];
   temp_array[0] = level._zombie_gib_piece_index_hat;
   self gib("normal", temp_array);
-  if(isdefined(level.track_gibs)) {
+  if(isDefined(level.track_gibs)) {
     level[[level.track_gibs]](self, temp_array);
   }
 }
@@ -1853,20 +1841,20 @@ function head_gib_damage_over_time(dmg, delay, attacker, means_of_death) {
   if(!isplayer(attacker)) {
     attacker = self;
   }
-  if(!isdefined(means_of_death)) {
+  if(!isDefined(means_of_death)) {
     means_of_death = "MOD_UNKNOWN";
   }
   dot_location = self.damagelocation;
   dot_weapon = self.damageweapon;
-  while (true) {
-    if(isdefined(delay)) {
+  while(true) {
+    if(isDefined(delay)) {
       wait(delay);
     }
-    if(isdefined(self)) {
-      if(isdefined(self.no_gib) && self.no_gib) {
+    if(isDefined(self)) {
+      if(isDefined(self.no_gib) && self.no_gib) {
         return;
       }
-      if(isdefined(attacker)) {
+      if(isDefined(attacker)) {
         self dodamage(dmg, self gettagorigin("j_neck"), attacker, self, dot_location, means_of_death, 0, dot_weapon);
       } else {
         self dodamage(dmg, self gettagorigin("j_neck"));
@@ -1876,12 +1864,12 @@ function head_gib_damage_over_time(dmg, delay, attacker, means_of_death) {
 }
 
 function derive_damage_refs(point) {
-  if(!isdefined(level.gib_tags)) {
+  if(!isDefined(level.gib_tags)) {
     init_gib_tags();
   }
   closesttag = undefined;
-  for (i = 0; i < level.gib_tags.size; i++) {
-    if(!isdefined(closesttag)) {
+  for(i = 0; i < level.gib_tags.size; i++) {
+    if(!isDefined(closesttag)) {
       closesttag = level.gib_tags[i];
       continue;
     }
@@ -1903,7 +1891,7 @@ function derive_damage_refs(point) {
         }
       } else {
         if(closesttag == "J_Hip_LE" || closesttag == "J_Knee_LE" || closesttag == "J_Ankle_LE") {
-          if(isdefined(self.nocrawler) && self.nocrawler) {
+          if(isDefined(self.nocrawler) && self.nocrawler) {
             return;
           }
           gibserverutils::gibleftleg(self);
@@ -1912,7 +1900,7 @@ function derive_damage_refs(point) {
           }
           self.missinglegs = 1;
         } else if(closesttag == "J_Hip_RI" || closesttag == "J_Knee_RI" || closesttag == "J_Ankle_RI") {
-          if(isdefined(self.nocrawler) && self.nocrawler) {
+          if(isDefined(self.nocrawler) && self.nocrawler) {
             return;
           }
           gibserverutils::gibrightleg(self);
@@ -1972,7 +1960,7 @@ function anim_get_dvar(dvar, def) {
 }
 
 function makezombiecrawler(b_both_legs) {
-  if(isdefined(b_both_legs) && b_both_legs) {
+  if(isDefined(b_both_legs) && b_both_legs) {
     val = 100;
   } else {
     val = randomint(100);
@@ -1998,22 +1986,22 @@ function makezombiecrawler(b_both_legs) {
 
 function zombie_head_gib(attacker, means_of_death) {
   self endon("death");
-  if(isdefined(self.head_gibbed) && self.head_gibbed) {
+  if(isDefined(self.head_gibbed) && self.head_gibbed) {
     return;
   }
-  if(isdefined(self.no_gib) && self.no_gib) {
+  if(isDefined(self.no_gib) && self.no_gib) {
     return;
   }
   self.head_gibbed = 1;
   self zombie_eye_glow_stop();
-  if(!(isdefined(self.disable_head_gib) && self.disable_head_gib)) {
+  if(!(isDefined(self.disable_head_gib) && self.disable_head_gib)) {
     gibserverutils::gibhead(self);
   }
   self thread head_gib_damage_over_time(ceil(self.health * 0.2), 1, attacker, means_of_death);
 }
 
 function gib_random_parts() {
-  if(isdefined(self.no_gib) && self.no_gib) {
+  if(isDefined(self.no_gib) && self.no_gib) {
     return;
   }
   val = randomint(100);
@@ -2047,19 +2035,19 @@ function autoexec init_ignore_player_handler() {
 }
 
 function register_ignore_player_handler(archetype, ignore_player_func) {
-  assert(isdefined(archetype), "");
-  assert(!isdefined(level._ignore_player_handler[archetype]), ("" + archetype) + "");
+  assert(isDefined(archetype), "");
+  assert(!isDefined(level._ignore_player_handler[archetype]), ("" + archetype) + "");
   level._ignore_player_handler[archetype] = ignore_player_func;
 }
 
 function run_ignore_player_handler() {
-  if(isdefined(level._ignore_player_handler[self.archetype])) {
+  if(isDefined(level._ignore_player_handler[self.archetype])) {
     self[[level._ignore_player_handler[self.archetype]]]();
   }
 }
 
 function show_hit_marker() {
-  if(isdefined(self) && isdefined(self.hud_damagefeedback)) {
+  if(isDefined(self) && isDefined(self.hud_damagefeedback)) {
     self.hud_damagefeedback setshader("damage_feedback", 24, 48);
     self.hud_damagefeedback.alpha = 1;
     self.hud_damagefeedback fadeovertime(1);

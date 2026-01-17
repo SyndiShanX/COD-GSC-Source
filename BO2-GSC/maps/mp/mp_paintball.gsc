@@ -23,11 +23,11 @@ main() {
   maps\mp\mp_paintball_amb::main();
   maps\mp\_compass::setupminimap("compass_map_mp_paintball");
   setdvar("compassmaxrange", "2100");
-  game["strings"]["war_callsign_a"] = & "MPUI_CALLSIGN_MAPNAME_A";
-  game["strings"]["war_callsign_b"] = & "MPUI_CALLSIGN_MAPNAME_B";
-  game["strings"]["war_callsign_c"] = & "MPUI_CALLSIGN_MAPNAME_C";
-  game["strings"]["war_callsign_d"] = & "MPUI_CALLSIGN_MAPNAME_D";
-  game["strings"]["war_callsign_e"] = & "MPUI_CALLSIGN_MAPNAME_E";
+  game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_MAPNAME_A";
+  game["strings"]["war_callsign_b"] = &"MPUI_CALLSIGN_MAPNAME_B";
+  game["strings"]["war_callsign_c"] = &"MPUI_CALLSIGN_MAPNAME_C";
+  game["strings"]["war_callsign_d"] = &"MPUI_CALLSIGN_MAPNAME_D";
+  game["strings"]["war_callsign_e"] = &"MPUI_CALLSIGN_MAPNAME_E";
   game["strings_menu"]["war_callsign_a"] = "@MPUI_CALLSIGN_MAPNAME_A";
   game["strings_menu"]["war_callsign_b"] = "@MPUI_CALLSIGN_MAPNAME_B";
   game["strings_menu"]["war_callsign_c"] = "@MPUI_CALLSIGN_MAPNAME_C";
@@ -57,7 +57,7 @@ main() {
   spawncollision("collision_physics_wall_64x64x10", "collider", (-598.8, -1383.04, 13.911), (310.532, 83.5658, -1.21727));
   pole1 = spawn("script_model", (385, 572.5, -39));
   pole1.angles = vectorscale((0, 1, 0), 282.6);
-  pole1 setmodel("p6_pai_fence_pole");
+  pole1 setModel("p6_pai_fence_pole");
   maps\mp\gametypes\_spawning::level_use_unified_spawning(1);
   registerclientfield("scriptmover", "police_car_lights", 1, 1, "int");
   level thread destructible_lights();
@@ -75,7 +75,7 @@ levelspawndvars(reset_dvars) {
 
 destructible_lights() {
   wait 0.05;
-  destructibles = getentarray("destructible", "targetname");
+  destructibles = getEntArray("destructible", "targetname");
 
   foreach(destructible in destructibles) {
     if(destructible.destructibledef == "veh_t6_police_car_destructible_mp") {
@@ -98,7 +98,7 @@ glass_node_think() {
 
   if(isDefined(node) && node.type == "Begin") {
     ent = spawn("script_model", node.origin, 1);
-    ent setmodel(level.deployedshieldmodel);
+    ent setModel(level.deployedshieldmodel);
     ent hide();
     ent disconnectpaths();
     ent.origin = ent.origin - vectorscale((0, 0, 1), 64.0);

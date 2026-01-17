@@ -29,8 +29,7 @@ player_teleport_blackscreen_on() {
   }
 }
 
-player_connect_gump() {
-}
+player_connect_gump() {}
 
 player_watch_spectate_change() {
   if(isDefined(level.disable_blackscreen_clientfield) && level.disable_blackscreen_clientfield) {

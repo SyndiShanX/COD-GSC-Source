@@ -19,58 +19,58 @@
 #namespace character_customization;
 
 function autoexec __init__sytem__() {
-  system::register("character_customization", & __init__, undefined, undefined);
+  system::register("character_customization", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  level.extra_cam_render_hero_func_callback = & process_character_extracam_request;
-  level.extra_cam_render_lobby_client_hero_func_callback = & process_lobby_client_character_extracam_request;
-  level.extra_cam_render_current_hero_headshot_func_callback = & process_current_hero_headshot_extracam_request;
-  level.extra_cam_render_outfit_preview_func_callback = & process_outfit_preview_extracam_request;
-  level.extra_cam_render_character_body_item_func_callback = & process_character_body_item_extracam_request;
-  level.extra_cam_render_character_helmet_item_func_callback = & process_character_helmet_item_extracam_request;
-  level.extra_cam_render_character_head_item_func_callback = & process_character_head_item_extracam_request;
+  level.extra_cam_render_hero_func_callback = &process_character_extracam_request;
+  level.extra_cam_render_lobby_client_hero_func_callback = &process_lobby_client_character_extracam_request;
+  level.extra_cam_render_current_hero_headshot_func_callback = &process_current_hero_headshot_extracam_request;
+  level.extra_cam_render_outfit_preview_func_callback = &process_outfit_preview_extracam_request;
+  level.extra_cam_render_character_body_item_func_callback = &process_character_body_item_extracam_request;
+  level.extra_cam_render_character_helmet_item_func_callback = &process_character_helmet_item_extracam_request;
+  level.extra_cam_render_character_head_item_func_callback = &process_character_head_item_extracam_request;
   level.intercom_dialog = associativearray("helmet", "", "head", "");
-  if(!isdefined(level.liveccdata)) {
+  if(!isDefined(level.liveccdata)) {
     level.liveccdata = [];
   }
-  if(!isdefined(level.custom_characters)) {
+  if(!isDefined(level.custom_characters)) {
     level.custom_characters = [];
   }
-  if(!isdefined(level.extra_cam_hero_data)) {
+  if(!isDefined(level.extra_cam_hero_data)) {
     level.extra_cam_hero_data = [];
   }
-  if(!isdefined(level.extra_cam_lobby_client_hero_data)) {
+  if(!isDefined(level.extra_cam_lobby_client_hero_data)) {
     level.extra_cam_lobby_client_hero_data = [];
   }
-  if(!isdefined(level.extra_cam_headshot_hero_data)) {
+  if(!isDefined(level.extra_cam_headshot_hero_data)) {
     level.extra_cam_headshot_hero_data = [];
   }
-  if(!isdefined(level.extra_cam_outfit_preview_data)) {
+  if(!isDefined(level.extra_cam_outfit_preview_data)) {
     level.extra_cam_outfit_preview_data = [];
   }
-  level.charactercustomizationsetup = & localclientconnect;
+  level.charactercustomizationsetup = &localclientconnect;
 }
 
 function localclientconnect(localclientnum) {
   level.liveccdata[localclientnum] = setup_live_character_customization_target(localclientnum);
-  if(isdefined(level.liveccdata[localclientnum])) {
+  if(isDefined(level.liveccdata[localclientnum])) {
     setup_character_streaming(level.liveccdata[localclientnum]);
   }
   level.staticccdata = setup_static_character_customization_target(localclientnum);
 }
 
 function create_character_data_struct(charactermodel, localclientnum, alt_render_mode = 1) {
-  if(!isdefined(charactermodel)) {
+  if(!isDefined(charactermodel)) {
     return undefined;
   }
-  if(!isdefined(level.custom_characters[localclientnum])) {
+  if(!isDefined(level.custom_characters[localclientnum])) {
     level.custom_characters[localclientnum] = [];
   }
-  if(isdefined(level.custom_characters[localclientnum][charactermodel.targetname])) {
+  if(isDefined(level.custom_characters[localclientnum][charactermodel.targetname])) {
     return level.custom_characters[localclientnum][charactermodel.targetname];
   }
-  data_struct = spawnstruct();
+  data_struct = spawnStruct();
   level.custom_characters[localclientnum][charactermodel.targetname] = data_struct;
   data_struct.charactermodel = charactermodel;
   data_struct.attached_model_anims = array();
@@ -101,7 +101,7 @@ function create_character_data_struct(charactermodel, localclientnum, alt_render
   data_struct.force_prologue_body = 0;
   if(sessionmodeiscampaigngame()) {
     highestmapreached = getdstat(localclientnum, "highestMapReached");
-    data_struct.force_prologue_body = !isdefined(highestmapreached) || highestmapreached == 0 && getdvarstring("mapname") == "core_frontend";
+    data_struct.force_prologue_body = !isDefined(highestmapreached) || highestmapreached == 0 && getdvarstring("mapname") == "core_frontend";
   }
   charactermodel sethighdetail(1, data_struct.alt_render_mode);
   return data_struct;
@@ -110,13 +110,13 @@ function create_character_data_struct(charactermodel, localclientnum, alt_render
 function handle_forced_streaming(game_mode) {}
 
 function loadequippedcharacteronmodel(localclientnum, data_struct, characterindex, params) {
-  assert(isdefined(data_struct));
-  data_lcn = (isdefined(data_struct.splitscreenclient) ? data_struct.splitscreenclient : localclientnum);
-  if(!isdefined(characterindex)) {
+  assert(isDefined(data_struct));
+  data_lcn = (isDefined(data_struct.splitscreenclient) ? data_struct.splitscreenclient : localclientnum);
+  if(!isDefined(characterindex)) {
     characterindex = getequippedheroindex(data_lcn, params.sessionmode);
   }
   defaultindex = undefined;
-  if(isdefined(params.isdefaulthero) && params.isdefaulthero) {
+  if(isDefined(params.isdefaulthero) && params.isdefaulthero) {
     defaultindex = 0;
   }
   set_character(data_struct, characterindex);
@@ -130,7 +130,7 @@ function loadequippedcharacteronmodel(localclientnum, data_struct, characterinde
   helmet = get_character_helmet(data_lcn, charactermode, characterindex, params.extracam_data);
   helmetcolors = get_character_helmet_colors(data_lcn, charactermode, data_struct.characterindex, helmet, params.extracam_data);
   set_helmet(data_struct, charactermode, characterindex, helmet, helmetcolors);
-  if(isdefined(data_struct.allow_showcase_weapons) && data_struct.allow_showcase_weapons) {
+  if(isDefined(data_struct.allow_showcase_weapons) && data_struct.allow_showcase_weapons) {
     showcaseweapon = get_character_showcase_weapon(data_lcn, charactermode, characterindex, params.extracam_data);
     set_showcase_weapon(data_struct, charactermode, data_lcn, undefined, characterindex, showcaseweapon.weaponname, showcaseweapon.attachmentinfo, showcaseweapon.weaponrenderoptions, 0, 1);
   }
@@ -138,17 +138,17 @@ function loadequippedcharacteronmodel(localclientnum, data_struct, characterinde
 }
 
 function update_model_attachment(localclientnum, data_struct, attached_model, slot, model_anim, model_intro_anim, force_update) {
-  assert(isdefined(data_struct.attached_models));
-  assert(isdefined(data_struct.attached_model_anims));
-  assert(isdefined(level.intercom_dialog));
+  assert(isDefined(data_struct.attached_models));
+  assert(isDefined(data_struct.attached_model_anims));
+  assert(isDefined(level.intercom_dialog));
   if(force_update || attached_model !== data_struct.attached_models[slot] || model_anim !== data_struct.attached_model_anims[slot]) {
     bone = slot;
-    if(isdefined(level.intercom_dialog[slot])) {
+    if(isDefined(level.intercom_dialog[slot])) {
       bone = level.intercom_dialog[slot];
     }
-    assert(isdefined(bone));
-    if(isdefined(data_struct.attached_models[slot])) {
-      if(isdefined(data_struct.attached_entities[slot])) {
+    assert(isDefined(bone));
+    if(isDefined(data_struct.attached_models[slot])) {
+      if(isDefined(data_struct.attached_entities[slot])) {
         data_struct.attached_entities[slot] unlink();
         data_struct.attached_entities[slot] delete();
         data_struct.attached_entities[slot] = undefined;
@@ -158,12 +158,12 @@ function update_model_attachment(localclientnum, data_struct, attached_model, sl
       data_struct.attached_models[slot] = undefined;
     }
     data_struct.attached_models[slot] = attached_model;
-    if(isdefined(data_struct.attached_models[slot])) {
-      if(isdefined(model_anim)) {
+    if(isDefined(data_struct.attached_models[slot])) {
+      if(isDefined(model_anim)) {
         ent = spawn(localclientnum, data_struct.charactermodel.origin, "script_model");
         ent sethighdetail(1, data_struct.alt_render_mode);
         data_struct.attached_entities[slot] = ent;
-        ent setmodel(data_struct.attached_models[slot]);
+        ent setModel(data_struct.attached_models[slot]);
         if(!ent hasanimtree()) {
           ent useanimtree($generic);
         }
@@ -178,7 +178,7 @@ function update_model_attachment(localclientnum, data_struct, attached_model, sl
       data_struct.attached_model_anims[slot] = model_anim;
     }
   }
-  if(isdefined(data_struct.attached_entities[slot])) {
+  if(isDefined(data_struct.attached_entities[slot])) {
     data_struct.attached_entities[slot] setbodyrenderoptions(data_struct.mode_render_options, data_struct.body_render_options, data_struct.helmet_render_options, data_struct.head_render_options);
   }
 }
@@ -188,23 +188,23 @@ function set_character(data_struct, characterindex) {
 }
 
 function set_character_mode(data_struct, charactermode) {
-  assert(isdefined(charactermode));
+  assert(isDefined(charactermode));
   data_struct.charactermode = charactermode;
   data_struct.mode_render_options = getcharactermoderenderoptions(charactermode);
 }
 
 function set_body(data_struct, mode, characterindex, bodyindex, bodycolors) {
-  assert(isdefined(mode));
+  assert(isDefined(mode));
   assert(mode != 3);
-  if(mode == 2 && (isdefined(data_struct.force_prologue_body) && data_struct.force_prologue_body)) {
+  if(mode == 2 && (isDefined(data_struct.force_prologue_body) && data_struct.force_prologue_body)) {
     bodyindex = 1;
   }
   data_struct.bodyindex = bodyindex;
   data_struct.bodymodel = getcharacterbodymodel(characterindex, bodyindex, mode);
-  if(isdefined(data_struct.bodymodel)) {
-    data_struct.charactermodel setmodel(data_struct.bodymodel);
+  if(isDefined(data_struct.bodymodel)) {
+    data_struct.charactermodel setModel(data_struct.bodymodel);
   }
-  if(isdefined(bodycolors)) {
+  if(isDefined(bodycolors)) {
     set_body_colors(data_struct, mode, bodycolors);
   }
   render_options = getcharacterbodyrenderoptions(data_struct.characterindex, data_struct.bodyindex, data_struct.bodycolors[0], data_struct.bodycolors[1], data_struct.bodycolors[2]);
@@ -212,7 +212,7 @@ function set_body(data_struct, mode, characterindex, bodyindex, bodycolors) {
 }
 
 function set_body_colors(data_struct, mode, bodycolors) {
-  for (i = 0; i < bodycolors.size && i < bodycolors.size; i++) {
+  for(i = 0; i < bodycolors.size && i < bodycolors.size; i++) {
     set_body_color(data_struct, i, bodycolors[i]);
   }
 }
@@ -237,7 +237,7 @@ function set_helmet(data_struct, mode, characterindex, helmetindex, helmetcolors
 }
 
 function set_showcase_weapon(data_struct, mode, localclientnum, xuid, characterindex, showcaseweaponname, showcaseweaponattachmentinfo, weaponrenderoptions, useshowcasepaintjob, uselocalpaintshop) {
-  if(isdefined(xuid)) {
+  if(isDefined(xuid)) {
     setshowcaseweaponpaintshopxuid(localclientnum, xuid);
   } else {
     setshowcaseweaponpaintshopxuid(localclientnum);
@@ -252,13 +252,13 @@ function set_showcase_weapon(data_struct, mode, localclientnum, xuid, characteri
   attachmentindices = [];
   tokenizedattachmentinfo = strtok(showcaseweaponattachmentinfo, ",");
   index = 0;
-  while ((index + 1) < tokenizedattachmentinfo.size) {
+  while((index + 1) < tokenizedattachmentinfo.size) {
     attachmentnames[attachmentnames.size] = tokenizedattachmentinfo[index];
     attachmentindices[attachmentindices.size] = int(tokenizedattachmentinfo[index + 1]);
     index = index + 2;
   }
   index = tokenizedattachmentinfo.size;
-  while ((index + 1) < 16) {
+  while((index + 1) < 16) {
     attachmentnames[attachmentnames.size] = "none";
     attachmentindices[attachmentindices.size] = 0;
     index = index + 2;
@@ -364,13 +364,13 @@ function set_showcase_weapon(data_struct, mode, localclientnum, xuid, characteri
   }
   if(data_struct.charactermode === 0) {
     data_struct.anim_name = "pb_cac_rifle_showcase_cp";
-  } else if(isdefined(associativearray("weapon_smg", "pb_cac_smg_showcase", "weapon_assault", "pb_cac_rifle_showcase", "weapon_cqb", "pb_cac_rifle_showcase", "weapon_lmg", "pb_cac_rifle_showcase", "weapon_sniper", "pb_cac_sniper_showcase", "weapon_pistol", "pb_cac_pistol_showcase", "weapon_pistol_dw", "pb_cac_pistol_dw_showcase", "weapon_launcher", "pb_cac_launcher_showcase", "weapon_launcher_alt", "pb_cac_launcher_alt_showcase", "weapon_knife", "pb_cac_knife_showcase", "weapon_knuckles", "pb_cac_brass_knuckles_showcase", "weapon_wrench", "pb_cac_wrench_showcase", "weapon_improvise", "pb_cac_improvise_showcase", "weapon_sword", "pb_cac_sword_showcase", "weapon_nunchucks", "pb_cac_nunchucks_showcase", "weapon_mace", "pb_cac_sword_showcase", "brawler", "pb_cac_brawler_showcase", "weapon_prosthetic", "pb_cac_prosthetic_arm_showcase", "weapon_chainsaw", "pb_cac_chainsaw_showcase", "weapon_smg_ppsh", "pb_cac_smg_ppsh_showcase", "weapon_knife_ballistic", "pb_cac_b_knife_showcase", "weapon_shotgun_olympia", "pb_cac_shotgun_olympia_showcase")[weapon_group])) {
+  } else if(isDefined(associativearray("weapon_smg", "pb_cac_smg_showcase", "weapon_assault", "pb_cac_rifle_showcase", "weapon_cqb", "pb_cac_rifle_showcase", "weapon_lmg", "pb_cac_rifle_showcase", "weapon_sniper", "pb_cac_sniper_showcase", "weapon_pistol", "pb_cac_pistol_showcase", "weapon_pistol_dw", "pb_cac_pistol_dw_showcase", "weapon_launcher", "pb_cac_launcher_showcase", "weapon_launcher_alt", "pb_cac_launcher_alt_showcase", "weapon_knife", "pb_cac_knife_showcase", "weapon_knuckles", "pb_cac_brass_knuckles_showcase", "weapon_wrench", "pb_cac_wrench_showcase", "weapon_improvise", "pb_cac_improvise_showcase", "weapon_sword", "pb_cac_sword_showcase", "weapon_nunchucks", "pb_cac_nunchucks_showcase", "weapon_mace", "pb_cac_sword_showcase", "brawler", "pb_cac_brawler_showcase", "weapon_prosthetic", "pb_cac_prosthetic_arm_showcase", "weapon_chainsaw", "pb_cac_chainsaw_showcase", "weapon_smg_ppsh", "pb_cac_smg_ppsh_showcase", "weapon_knife_ballistic", "pb_cac_b_knife_showcase", "weapon_shotgun_olympia", "pb_cac_shotgun_olympia_showcase")[weapon_group])) {
     data_struct.anim_name = associativearray("weapon_smg", "pb_cac_smg_showcase", "weapon_assault", "pb_cac_rifle_showcase", "weapon_cqb", "pb_cac_rifle_showcase", "weapon_lmg", "pb_cac_rifle_showcase", "weapon_sniper", "pb_cac_sniper_showcase", "weapon_pistol", "pb_cac_pistol_showcase", "weapon_pistol_dw", "pb_cac_pistol_dw_showcase", "weapon_launcher", "pb_cac_launcher_showcase", "weapon_launcher_alt", "pb_cac_launcher_alt_showcase", "weapon_knife", "pb_cac_knife_showcase", "weapon_knuckles", "pb_cac_brass_knuckles_showcase", "weapon_wrench", "pb_cac_wrench_showcase", "weapon_improvise", "pb_cac_improvise_showcase", "weapon_sword", "pb_cac_sword_showcase", "weapon_nunchucks", "pb_cac_nunchucks_showcase", "weapon_mace", "pb_cac_sword_showcase", "brawler", "pb_cac_brawler_showcase", "weapon_prosthetic", "pb_cac_prosthetic_arm_showcase", "weapon_chainsaw", "pb_cac_chainsaw_showcase", "weapon_smg_ppsh", "pb_cac_smg_ppsh_showcase", "weapon_knife_ballistic", "pb_cac_b_knife_showcase", "weapon_shotgun_olympia", "pb_cac_shotgun_olympia_showcase")[weapon_group];
   }
 }
 
 function set_helmet_colors(data_struct, colors) {
-  for (i = 0; i < colors.size && i < data_struct.helmetcolors.size; i++) {
+  for(i = 0; i < colors.size && i < data_struct.helmetcolors.size; i++) {
     set_helmet_color(data_struct, i, colors[i]);
   }
   render_options = getcharacterhelmetrenderoptions(data_struct.characterindex, data_struct.helmetindex, data_struct.helmetcolors[0], data_struct.helmetcolors[1], data_struct.helmetcolors[2]);
@@ -386,13 +386,13 @@ function set_helmet_color(data_struct, colorslot, colorindex) {
 function update(localclientnum, data_struct, params) {
   data_struct.charactermodel setbodyrenderoptions(data_struct.mode_render_options, data_struct.body_render_options, data_struct.helmet_render_options, data_struct.head_render_options);
   helmet_model = "tag_origin";
-  show_helmet = data_struct.show_helmets && (!isdefined(params) || (!(isdefined(params.hide_helmet) && params.hide_helmet)));
+  show_helmet = data_struct.show_helmets && (!isDefined(params) || (!(isDefined(params.hide_helmet) && params.hide_helmet)));
   if(show_helmet) {
     helmet_model = data_struct.helmetmodel;
   }
   update_model_attachment(localclientnum, data_struct, helmet_model, "helmet", undefined, undefined, 1);
   head_model = data_struct.headmodel;
-  if(show_helmet && isdefined(params) && getcharacterhelmethideshead(data_struct.characterindex, data_struct.helmetindex, (isdefined(params.sessionmode) ? params.sessionmode : data_struct.charactermode))) {
+  if(show_helmet && isDefined(params) && getcharacterhelmethideshead(data_struct.characterindex, data_struct.helmetindex, (isDefined(params.sessionmode) ? params.sessionmode : data_struct.charactermode))) {
     assert(helmet_model != "");
     head_model = "tag_origin";
   }
@@ -408,13 +408,13 @@ function update(localclientnum, data_struct, params) {
 }
 
 function is_character_streamed(data_struct) {
-  if(isdefined(data_struct.charactermodel)) {
+  if(isDefined(data_struct.charactermodel)) {
     if(!data_struct.charactermodel isstreamed()) {
       return false;
     }
   }
   foreach(ent in data_struct.attached_entities) {
-    if(isdefined(ent)) {
+    if(isDefined(ent)) {
       if(!ent isstreamed()) {
         return false;
       }
@@ -424,11 +424,11 @@ function is_character_streamed(data_struct) {
 }
 
 function setup_character_streaming(data_struct) {
-  if(isdefined(data_struct.charactermodel)) {
+  if(isDefined(data_struct.charactermodel)) {
     data_struct.charactermodel sethighdetail(1, data_struct.alt_render_mode);
   }
   foreach(ent in data_struct.attached_entities) {
-    if(isdefined(ent)) {
+    if(isDefined(ent)) {
       ent sethighdetail(1, data_struct.alt_render_mode);
     }
   }
@@ -439,38 +439,38 @@ function get_character_mode(localclientnum) {
 }
 
 function get_character_body(localclientnum, charactermode, characterindex, extracamdata) {
-  assert(isdefined(characterindex));
+  assert(isDefined(characterindex));
   if(charactermode === 2 && sessionmodeiscampaigngame() && getdvarstring("mapname") == "core_frontend") {
     mapindex = getdstat(localclientnum, "highestMapReached");
-    if(isdefined(mapindex) && mapindex < 1) {
+    if(isDefined(mapindex) && mapindex < 1) {
       str_gender = getherogender(getequippedheroindex(localclientnum, 2), "cp");
       n_body_id = getcharacterbodystyleindex(str_gender == "female", "CPUI_OUTFIT_PROLOGUE");
       return n_body_id;
     }
   }
-  if(isdefined(extracamdata) && (isdefined(extracamdata.isdefaulthero) && extracamdata.isdefaulthero)) {
+  if(isDefined(extracamdata) && (isDefined(extracamdata.isdefaulthero) && extracamdata.isdefaulthero)) {
     return 0;
   }
-  if(isdefined(extracamdata) && extracamdata.uselobbyplayers) {
+  if(isDefined(extracamdata) && extracamdata.uselobbyplayers) {
     return getequippedbodyindexforhero(localclientnum, charactermode, extracamdata.jobindex, 1);
   }
-  if(isdefined(extracamdata) && isdefined(extracamdata.usebodyindex)) {
+  if(isDefined(extracamdata) && isDefined(extracamdata.usebodyindex)) {
     return extracamdata.usebodyindex;
   }
-  if(isdefined(extracamdata) && (isdefined(extracamdata.defaultimagerender) && extracamdata.defaultimagerender)) {
+  if(isDefined(extracamdata) && (isDefined(extracamdata.defaultimagerender) && extracamdata.defaultimagerender)) {
     return 0;
   }
   return getequippedbodyindexforhero(localclientnum, charactermode, characterindex);
 }
 
 function get_character_body_color(localclientnum, charactermode, characterindex, bodyindex, colorslot, extracamdata) {
-  if(isdefined(extracamdata) && (isdefined(extracamdata.isdefaulthero) && extracamdata.isdefaulthero)) {
+  if(isDefined(extracamdata) && (isDefined(extracamdata.isdefaulthero) && extracamdata.isdefaulthero)) {
     return 0;
   }
-  if(isdefined(extracamdata) && extracamdata.uselobbyplayers) {
+  if(isDefined(extracamdata) && extracamdata.uselobbyplayers) {
     return getequippedbodyaccentcolorforhero(localclientnum, charactermode, extracamdata.jobindex, bodyindex, colorslot, 1);
   }
-  if(isdefined(extracamdata) && (isdefined(extracamdata.defaultimagerender) && extracamdata.defaultimagerender)) {
+  if(isDefined(extracamdata) && (isDefined(extracamdata.defaultimagerender) && extracamdata.defaultimagerender)) {
     return 0;
   }
   return getequippedbodyaccentcolorforhero(localclientnum, charactermode, characterindex, bodyindex, colorslot);
@@ -479,68 +479,68 @@ function get_character_body_color(localclientnum, charactermode, characterindex,
 function get_character_body_colors(localclientnum, charactermode, characterindex, bodyindex, extracamdata) {
   bodyaccentcolorcount = getbodyaccentcolorcountforhero(localclientnum, charactermode, characterindex, bodyindex);
   colors = [];
-  for (i = 0; i < 3; i++) {
+  for(i = 0; i < 3; i++) {
     colors[i] = 0;
   }
-  for (i = 0; i < bodyaccentcolorcount; i++) {
+  for(i = 0; i < bodyaccentcolorcount; i++) {
     colors[i] = get_character_body_color(localclientnum, charactermode, characterindex, bodyindex, i, extracamdata);
   }
   return colors;
 }
 
 function get_character_head(localclientnum, charactermode, extracamdata) {
-  if(isdefined(extracamdata) && (isdefined(extracamdata.isdefaulthero) && extracamdata.isdefaulthero)) {
+  if(isDefined(extracamdata) && (isDefined(extracamdata.isdefaulthero) && extracamdata.isdefaulthero)) {
     return 0;
   }
-  if(isdefined(extracamdata) && extracamdata.uselobbyplayers) {
+  if(isDefined(extracamdata) && extracamdata.uselobbyplayers) {
     return getequippedheadindexforhero(localclientnum, charactermode, extracamdata.jobindex);
   }
-  if(isdefined(extracamdata) && isdefined(extracamdata.useheadindex)) {
+  if(isDefined(extracamdata) && isDefined(extracamdata.useheadindex)) {
     return extracamdata.useheadindex;
   }
-  if(isdefined(extracamdata) && (isdefined(extracamdata.defaultimagerender) && extracamdata.defaultimagerender)) {
+  if(isDefined(extracamdata) && (isDefined(extracamdata.defaultimagerender) && extracamdata.defaultimagerender)) {
     return 0;
   }
   return getequippedheadindexforhero(localclientnum, charactermode);
 }
 
 function get_character_helmet(localclientnum, charactermode, characterindex, extracamdata) {
-  if(isdefined(extracamdata) && (isdefined(extracamdata.isdefaulthero) && extracamdata.isdefaulthero)) {
+  if(isDefined(extracamdata) && (isDefined(extracamdata.isdefaulthero) && extracamdata.isdefaulthero)) {
     return 0;
   }
-  if(isdefined(extracamdata) && extracamdata.uselobbyplayers) {
+  if(isDefined(extracamdata) && extracamdata.uselobbyplayers) {
     return getequippedhelmetindexforhero(localclientnum, charactermode, extracamdata.jobindex, 1);
   }
-  if(isdefined(extracamdata) && isdefined(extracamdata.usehelmetindex)) {
+  if(isDefined(extracamdata) && isDefined(extracamdata.usehelmetindex)) {
     return extracamdata.usehelmetindex;
   }
-  if(isdefined(extracamdata) && (isdefined(extracamdata.defaultimagerender) && extracamdata.defaultimagerender)) {
+  if(isDefined(extracamdata) && (isDefined(extracamdata.defaultimagerender) && extracamdata.defaultimagerender)) {
     return 0;
   }
   return getequippedhelmetindexforhero(localclientnum, charactermode, characterindex);
 }
 
 function get_character_showcase_weapon(localclientnum, charactermode, characterindex, extracamdata) {
-  if(isdefined(extracamdata) && (isdefined(extracamdata.isdefaulthero) && extracamdata.isdefaulthero)) {
+  if(isDefined(extracamdata) && (isDefined(extracamdata.isdefaulthero) && extracamdata.isdefaulthero)) {
     return undefined;
   }
-  if(isdefined(extracamdata) && extracamdata.uselobbyplayers) {
+  if(isDefined(extracamdata) && extracamdata.uselobbyplayers) {
     return getequippedshowcaseweaponforhero(localclientnum, charactermode, extracamdata.jobindex, 1);
   }
-  if(isdefined(extracamdata) && isdefined(extracamdata.useshowcaseweapon)) {
+  if(isDefined(extracamdata) && isDefined(extracamdata.useshowcaseweapon)) {
     return extracamdata.useshowcaseweapon;
   }
   return getequippedshowcaseweaponforhero(localclientnum, charactermode, characterindex);
 }
 
 function get_character_helmet_color(localclientnum, charactermode, characterindex, helmetindex, colorslot, extracamdata) {
-  if(isdefined(extracamdata) && (isdefined(extracamdata.isdefaulthero) && extracamdata.isdefaulthero)) {
+  if(isDefined(extracamdata) && (isDefined(extracamdata.isdefaulthero) && extracamdata.isdefaulthero)) {
     return 0;
   }
-  if(isdefined(extracamdata) && extracamdata.uselobbyplayers) {
+  if(isDefined(extracamdata) && extracamdata.uselobbyplayers) {
     return getequippedhelmetaccentcolorforhero(localclientnum, charactermode, extracamdata.jobindex, helmetindex, colorslot, 1);
   }
-  if(isdefined(extracamdata) && (isdefined(extracamdata.defaultimagerender) && extracamdata.defaultimagerender)) {
+  if(isDefined(extracamdata) && (isDefined(extracamdata.defaultimagerender) && extracamdata.defaultimagerender)) {
     return 0;
   }
   return getequippedhelmetaccentcolorforhero(localclientnum, charactermode, characterindex, helmetindex, colorslot);
@@ -549,10 +549,10 @@ function get_character_helmet_color(localclientnum, charactermode, characterinde
 function get_character_helmet_colors(localclientnum, charactermode, characterindex, helmetindex, extracamdata) {
   helmetcolorcount = gethelmetaccentcolorcountforhero(localclientnum, charactermode, characterindex, helmetindex);
   colors = [];
-  for (i = 0; i < 3; i++) {
+  for(i = 0; i < 3; i++) {
     colors[i] = 0;
   }
-  for (i = 0; i < helmetcolorcount; i++) {
+  for(i = 0; i < helmetcolorcount; i++) {
     colors[i] = get_character_helmet_color(localclientnum, charactermode, characterindex, helmetindex, i, extracamdata);
   }
   return colors;
@@ -565,7 +565,7 @@ function update_character_animation_tree_for_scene(charactermodel) {
 }
 
 function reaper_body3_hack(params) {
-  if(isdefined(params.weapon_right) && params.weapon_right == "wpn_t7_hero_reaper_minigun_prop" && isdefined(level.mp_lobby_data_struct.charactermodel) && issubstr(level.mp_lobby_data_struct.charactermodel.model, "body3")) {
+  if(isDefined(params.weapon_right) && params.weapon_right == "wpn_t7_hero_reaper_minigun_prop" && isDefined(level.mp_lobby_data_struct.charactermodel) && issubstr(level.mp_lobby_data_struct.charactermodel.model, "body3")) {
     params.weapon_right = "wpn_t7_loot_hero_reaper3_minigun_prop";
     params.weapon = getweapon("hero_minigun_body3");
     return true;
@@ -576,72 +576,72 @@ function reaper_body3_hack(params) {
 function get_current_frozen_moment_params(localclientnum, data_struct, params) {
   fields = getcharacterfields(data_struct.characterindex, data_struct.charactermode);
   if(data_struct.frozenmomentstyle == "weapon") {
-    if(isdefined(fields.weaponfrontendfrozenmomentxanim)) {
+    if(isDefined(fields.weaponfrontendfrozenmomentxanim)) {
       params.anim_name = fields.weaponfrontendfrozenmomentxanim;
     }
     params.scene = undefined;
-    if(isdefined(fields.weaponfrontendfrozenmomentweaponleftmodel)) {
+    if(isDefined(fields.weaponfrontendfrozenmomentweaponleftmodel)) {
       params.weapon_left = fields.weaponfrontendfrozenmomentweaponleftmodel;
     }
-    if(isdefined(fields.weaponfrontendfrozenmomentweaponleftanim)) {
+    if(isDefined(fields.weaponfrontendfrozenmomentweaponleftanim)) {
       params.weapon_left_anim = fields.weaponfrontendfrozenmomentweaponleftanim;
     }
-    if(isdefined(fields.weaponfrontendfrozenmomentweaponrightmodel)) {
+    if(isDefined(fields.weaponfrontendfrozenmomentweaponrightmodel)) {
       params.weapon_right = fields.weaponfrontendfrozenmomentweaponrightmodel;
     }
-    if(isdefined(fields.weaponfrontendfrozenmomentweaponrightanim)) {
+    if(isDefined(fields.weaponfrontendfrozenmomentweaponrightanim)) {
       params.weapon_right_anim = fields.weaponfrontendfrozenmomentweaponrightanim;
     }
-    if(isdefined(fields.weaponfrontendfrozenmomentexploder)) {
+    if(isDefined(fields.weaponfrontendfrozenmomentexploder)) {
       params.exploder_id = fields.weaponfrontendfrozenmomentexploder;
     }
-    if(isdefined(struct::get(fields.weaponfrontendfrozenmomentaligntarget))) {
+    if(isDefined(struct::get(fields.weaponfrontendfrozenmomentaligntarget))) {
       params.align_struct = struct::get(fields.weaponfrontendfrozenmomentaligntarget);
     }
-    if(isdefined(fields.weaponfrontendfrozenmomentxcam)) {
+    if(isDefined(fields.weaponfrontendfrozenmomentxcam)) {
       params.xcam = fields.weaponfrontendfrozenmomentxcam;
     }
-    if(isdefined(fields.weaponfrontendfrozenmomentxcamsubxcam)) {
+    if(isDefined(fields.weaponfrontendfrozenmomentxcamsubxcam)) {
       params.subxcam = fields.weaponfrontendfrozenmomentxcamsubxcam;
     }
-    if(isdefined(fields.weaponfrontendfrozenmomentxcamframe)) {
+    if(isDefined(fields.weaponfrontendfrozenmomentxcamframe)) {
       params.xcamframe = fields.weaponfrontendfrozenmomentxcamframe;
     }
   } else if(data_struct.frozenmomentstyle == "ability") {
-    if(isdefined(fields.abilityfrontendfrozenmomentxanim)) {
+    if(isDefined(fields.abilityfrontendfrozenmomentxanim)) {
       params.anim_name = fields.abilityfrontendfrozenmomentxanim;
     }
     params.scene = undefined;
-    if(isdefined(fields.abilityfrontendfrozenmomentweaponleftmodel)) {
+    if(isDefined(fields.abilityfrontendfrozenmomentweaponleftmodel)) {
       params.weapon_left = fields.abilityfrontendfrozenmomentweaponleftmodel;
     }
-    if(isdefined(fields.abilityfrontendfrozenmomentweaponleftanim)) {
+    if(isDefined(fields.abilityfrontendfrozenmomentweaponleftanim)) {
       params.weapon_left_anim = fields.abilityfrontendfrozenmomentweaponleftanim;
     }
-    if(isdefined(fields.abilityfrontendfrozenmomentweaponrightmodel)) {
+    if(isDefined(fields.abilityfrontendfrozenmomentweaponrightmodel)) {
       params.weapon_right = fields.abilityfrontendfrozenmomentweaponrightmodel;
     }
-    if(isdefined(fields.abilityfrontendfrozenmomentweaponrightanim)) {
+    if(isDefined(fields.abilityfrontendfrozenmomentweaponrightanim)) {
       params.weapon_right_anim = fields.abilityfrontendfrozenmomentweaponrightanim;
     }
-    if(isdefined(fields.abilityfrontendfrozenmomentexploder)) {
+    if(isDefined(fields.abilityfrontendfrozenmomentexploder)) {
       params.exploder_id = fields.abilityfrontendfrozenmomentexploder;
     }
-    if(isdefined(struct::get(fields.abilityfrontendfrozenmomentaligntarget))) {
+    if(isDefined(struct::get(fields.abilityfrontendfrozenmomentaligntarget))) {
       params.align_struct = struct::get(fields.abilityfrontendfrozenmomentaligntarget);
     }
-    if(isdefined(fields.abilityfrontendfrozenmomentxcam)) {
+    if(isDefined(fields.abilityfrontendfrozenmomentxcam)) {
       params.xcam = fields.abilityfrontendfrozenmomentxcam;
     }
-    if(isdefined(fields.abilityfrontendfrozenmomentxcamsubxcam)) {
+    if(isDefined(fields.abilityfrontendfrozenmomentxcamsubxcam)) {
       params.subxcam = fields.abilityfrontendfrozenmomentxcamsubxcam;
     }
-    if(isdefined(fields.abilityfrontendfrozenmomentxcamframe)) {
+    if(isDefined(fields.abilityfrontendfrozenmomentxcamframe)) {
       params.xcamframe = fields.abilityfrontendfrozenmomentxcamframe;
     }
   }
   reaper_body3_hack(params);
-  if(!isdefined(params.align_struct)) {
+  if(!isDefined(params.align_struct)) {
     params.align_struct = data_struct;
   }
 }
@@ -649,15 +649,15 @@ function get_current_frozen_moment_params(localclientnum, data_struct, params) {
 function play_intro_and_animation(intro_anim_name, anim_name, b_keep_link) {
   self notify("stop_vignette_animation");
   self endon("stop_vignette_animation");
-  if(isdefined(intro_anim_name)) {
+  if(isDefined(intro_anim_name)) {
     self animation::play(intro_anim_name, self.chosenorigin, self.chosenangles, 1, 0, 0, 0, b_keep_link);
   }
   self animation::play(anim_name, self.chosenorigin, self.chosenangles, 1, 0, 0, 0, b_keep_link);
 }
 
 function update_character_animation_based_on_showcase_weapon(data_struct, params) {
-  if(!isdefined(params.weapon_right) && !isdefined(params.weapon_left)) {
-    if(isdefined(data_struct.anim_name)) {
+  if(!isDefined(params.weapon_right) && !isDefined(params.weapon_left)) {
+    if(isDefined(data_struct.anim_name)) {
       params.anim_name = data_struct.anim_name;
     }
   }
@@ -665,39 +665,39 @@ function update_character_animation_based_on_showcase_weapon(data_struct, params
 
 function update_character_animation_and_attachments(localclientnum, data_struct, params) {
   changed = 0;
-  if(!isdefined(params)) {
-    params = spawnstruct();
+  if(!isDefined(params)) {
+    params = spawnStruct();
   }
-  if(data_struct.usefrozenmomentanim && isdefined(data_struct.frozenmomentstyle)) {
+  if(data_struct.usefrozenmomentanim && isDefined(data_struct.frozenmomentstyle)) {
     get_current_frozen_moment_params(localclientnum, data_struct, params);
   }
-  if(!isdefined(params.exploder_id)) {
+  if(!isDefined(params.exploder_id)) {
     params.exploder_id = data_struct.default_exploder;
   }
   align_changed = 0;
-  if(!isdefined(params.align_struct)) {
+  if(!isDefined(params.align_struct)) {
     params.align_struct = struct::get(data_struct.align_target);
   }
-  if(!isdefined(params.align_struct)) {
+  if(!isDefined(params.align_struct)) {
     params.align_struct = data_struct;
   }
-  if(isdefined(params.align_struct) && (params.align_struct.origin !== data_struct.charactermodel.chosenorigin || params.align_struct.angles !== data_struct.charactermodel.chosenangles)) {
+  if(isDefined(params.align_struct) && (params.align_struct.origin !== data_struct.charactermodel.chosenorigin || params.align_struct.angles !== data_struct.charactermodel.chosenangles)) {
     data_struct.charactermodel.chosenorigin = params.align_struct.origin;
     data_struct.charactermodel.chosenangles = params.align_struct.angles;
-    params.anim_name = (isdefined(params.anim_name) ? params.anim_name : data_struct.currentanimation);
+    params.anim_name = (isDefined(params.anim_name) ? params.anim_name : data_struct.currentanimation);
     align_changed = 1;
   }
-  if(isdefined(data_struct.allow_showcase_weapons) && data_struct.allow_showcase_weapons) {
+  if(isDefined(data_struct.allow_showcase_weapons) && data_struct.allow_showcase_weapons) {
     update_character_animation_based_on_showcase_weapon(data_struct, params);
   }
   if(reaper_body3_hack(params)) {
     align_changed = 1;
     changed = 1;
   }
-  if(isdefined(params.weapon_right) && params.weapon_right !== data_struct.weapon_right) {
+  if(isDefined(params.weapon_right) && params.weapon_right !== data_struct.weapon_right) {
     align_changed = 1;
   }
-  if(isdefined(params.anim_name) && (params.anim_name !== data_struct.currentanimation || align_changed)) {
+  if(isDefined(params.anim_name) && (params.anim_name !== data_struct.currentanimation || align_changed)) {
     changed = 1;
     end_game_taunts::canceltaunt(localclientnum, data_struct.charactermodel);
     end_game_taunts::cancelgesture(data_struct.charactermodel);
@@ -707,8 +707,8 @@ function update_character_animation_and_attachments(localclientnum, data_struct,
       data_struct.charactermodel useanimtree($all_player);
     }
     data_struct.charactermodel thread play_intro_and_animation(params.anim_intro_name, params.anim_name, 0);
-  } else if(isdefined(params.scene) && params.scene !== data_struct.currentscene) {
-    if(isdefined(data_struct.currentscene)) {
+  } else if(isDefined(params.scene) && params.scene !== data_struct.currentscene) {
+    if(isDefined(data_struct.currentscene)) {
       level scene::stop(data_struct.currentscene, 0);
     }
     update_character_animation_tree_for_scene(data_struct.charactermodel);
@@ -716,22 +716,22 @@ function update_character_animation_and_attachments(localclientnum, data_struct,
     level thread scene::play(params.scene);
   }
   if(data_struct.exploder_id !== params.exploder_id) {
-    if(isdefined(data_struct.exploder_id)) {
+    if(isDefined(data_struct.exploder_id)) {
       killradiantexploder(localclientnum, data_struct.exploder_id);
     }
-    if(isdefined(params.exploder_id)) {
+    if(isDefined(params.exploder_id)) {
       playradiantexploder(localclientnum, params.exploder_id);
     }
     data_struct.exploder_id = params.exploder_id;
   }
-  if(isdefined(params.weapon_right) || isdefined(params.weapon_left)) {
+  if(isDefined(params.weapon_right) || isDefined(params.weapon_left)) {
     update_model_attachment(localclientnum, data_struct, params.weapon_right, "tag_weapon_right", params.weapon_right_anim, params.weapon_right_anim_intro, align_changed);
     update_model_attachment(localclientnum, data_struct, params.weapon_left, "tag_weapon_left", params.weapon_left_anim, params.weapon_left_anim_intro, align_changed);
-  } else if(isdefined(data_struct.showcaseweaponmodel)) {
-    if(isdefined(data_struct.attached_models["tag_weapon_right"]) && data_struct.charactermodel isattached(data_struct.attached_models["tag_weapon_right"], "tag_weapon_right")) {
+  } else if(isDefined(data_struct.showcaseweaponmodel)) {
+    if(isDefined(data_struct.attached_models["tag_weapon_right"]) && data_struct.charactermodel isattached(data_struct.attached_models["tag_weapon_right"], "tag_weapon_right")) {
       data_struct.charactermodel detach(data_struct.attached_models["tag_weapon_right"], "tag_weapon_right");
     }
-    if(isdefined(data_struct.attached_models["tag_weapon_left"]) && data_struct.charactermodel isattached(data_struct.attached_models["tag_weapon_left"], "tag_weapon_left")) {
+    if(isDefined(data_struct.attached_models["tag_weapon_left"]) && data_struct.charactermodel isattached(data_struct.attached_models["tag_weapon_left"], "tag_weapon_left")) {
       data_struct.charactermodel detach(data_struct.attached_models["tag_weapon_left"], "tag_weapon_left");
     }
     data_struct.charactermodel attachweapon(data_struct.showcaseweaponmodel, data_struct.weaponrenderoptions, data_struct.acvi);
@@ -746,7 +746,7 @@ function update_character_animation_and_attachments(localclientnum, data_struct,
 function update_use_frozen_moments(localclientnum, data_struct, usefrozenmoments) {
   if(data_struct.usefrozenmomentanim != usefrozenmoments) {
     data_struct.usefrozenmomentanim = usefrozenmoments;
-    params = spawnstruct();
+    params = spawnStruct();
     if(!data_struct.usefrozenmomentanim) {
       params.align_struct = struct::get("character_customization");
       params.anim_name = "pb_cac_main_lobby_idle";
@@ -762,7 +762,7 @@ function update_use_frozen_moments(localclientnum, data_struct, usefrozenmoments
 function update_show_helmets(localclientnum, data_struct, show_helmets) {
   if(data_struct.show_helmets != show_helmets) {
     data_struct.show_helmets = show_helmets;
-    params = spawnstruct();
+    params = spawnStruct();
     params.weapon_right = data_struct.attached_models["tag_weapon_right"];
     params.weapon_left = data_struct.attached_models["tag_weapon_left"];
     update(localclientnum, data_struct, params);
@@ -772,7 +772,7 @@ function update_show_helmets(localclientnum, data_struct, show_helmets) {
 function set_character_align(localclientnum, data_struct, align_target) {
   if(data_struct.align_target !== align_target) {
     data_struct.align_target = align_target;
-    params = spawnstruct();
+    params = spawnStruct();
     params.weapon_right = data_struct.attached_models["tag_weapon_right"];
     params.weapon_left = data_struct.attached_models["tag_weapon_left"];
     update(localclientnum, data_struct, params);
@@ -781,7 +781,7 @@ function set_character_align(localclientnum, data_struct, align_target) {
 
 function setup_live_character_customization_target(localclientnum) {
   characterent = getent(localclientnum, "character_customization", "targetname");
-  if(isdefined(characterent)) {
+  if(isDefined(characterent)) {
     customization_data_struct = create_character_data_struct(characterent, localclientnum, 1);
     customization_data_struct.default_exploder = "char_customization";
     customization_data_struct.allow_showcase_weapons = 1;
@@ -792,7 +792,7 @@ function setup_live_character_customization_target(localclientnum) {
 }
 
 function update_locked_shader(localclientnum, params) {
-  if(isdefined(params.isitemunlocked) && params.isitemunlocked != 1) {
+  if(isDefined(params.isitemunlocked) && params.isitemunlocked != 1) {
     enablefrontendlockedweaponoverlay(localclientnum, 1);
   } else {
     enablefrontendlockedweaponoverlay(localclientnum, 0);
@@ -800,7 +800,7 @@ function update_locked_shader(localclientnum, params) {
 }
 
 function updateeventthread(localclientnum, data_struct) {
-  while (true) {
+  while(true) {
     level waittill("updateHero" + localclientnum, eventtype, param1, param2, param3, param4);
     switch (eventtype) {
       case "update_lcn": {
@@ -809,24 +809,24 @@ function updateeventthread(localclientnum, data_struct) {
       }
       case "refresh": {
         data_struct.splitscreenclient = param1;
-        params = spawnstruct();
+        params = spawnStruct();
         params.anim_name = "pb_cac_main_lobby_idle";
         params.sessionmode = param2;
         loadequippedcharacteronmodel(localclientnum, data_struct, undefined, params);
-        if(isdefined(param3) && param3 != "") {
+        if(isDefined(param3) && param3 != "") {
           level.mp_lobby_data_struct.playsound = param3;
         }
         break;
       }
       case "changeHero": {
-        params = spawnstruct();
+        params = spawnStruct();
         params.anim_name = "pb_cac_main_lobby_idle";
         params.sessionmode = param2;
         loadequippedcharacteronmodel(localclientnum, data_struct, param1, params);
         break;
       }
       case "changeBody": {
-        params = spawnstruct();
+        params = spawnStruct();
         params.sessionmode = param2;
         params.isitemunlocked = param3;
         set_body(data_struct, param2, data_struct.characterindex, param1, get_character_body_colors(localclientnum, param2, data_struct.characterindex, param1));
@@ -835,7 +835,7 @@ function updateeventthread(localclientnum, data_struct) {
         break;
       }
       case "changeHelmet": {
-        params = spawnstruct();
+        params = spawnStruct();
         params.sessionmode = param2;
         params.isitemunlocked = param3;
         set_helmet(data_struct, param2, data_struct.characterindex, param1, get_character_helmet_colors(localclientnum, param2, data_struct.characterindex, param1));
@@ -844,28 +844,28 @@ function updateeventthread(localclientnum, data_struct) {
         break;
       }
       case "changeShowcaseWeapon": {
-        params = spawnstruct();
+        params = spawnStruct();
         params.sessionmode = param4;
         set_showcase_weapon(data_struct, param4, localclientnum, undefined, data_struct.characterindex, param1, param2, param3, 0, 1);
         update(localclientnum, data_struct, params);
         break;
       }
       case "changeHead": {
-        params = spawnstruct();
+        params = spawnStruct();
         params.sessionmode = param2;
         set_head(data_struct, param2, param1);
         update(localclientnum, data_struct, params);
         break;
       }
       case "changeBodyAccentColor": {
-        params = spawnstruct();
+        params = spawnStruct();
         params.sessionmode = param3;
         set_body_color(data_struct, param1, param2);
         update(localclientnum, data_struct, params);
         break;
       }
       case "changeHelmetAccentColor": {
-        params = spawnstruct();
+        params = spawnStruct();
         params.sessionmode = param3;
         set_helmet_color(data_struct, param1, param2);
         update(localclientnum, data_struct, params);
@@ -897,28 +897,28 @@ function updateeventthread(localclientnum, data_struct) {
 }
 
 function rotation_thread_spawner(localclientnum, data_struct, endonevent) {
-  if(!isdefined(endonevent)) {
+  if(!isDefined(endonevent)) {
     return;
   }
-  assert(isdefined(data_struct.charactermodel));
+  assert(isDefined(data_struct.charactermodel));
   model = data_struct.charactermodel;
   baseangles = model.angles;
   level thread update_model_rotation_for_right_stick(localclientnum, data_struct, endonevent);
   level waittill(endonevent);
-  if(!(isdefined(data_struct.charactermodel.anglesoverride) && data_struct.charactermodel.anglesoverride)) {
+  if(!(isDefined(data_struct.charactermodel.anglesoverride) && data_struct.charactermodel.anglesoverride)) {
     model.angles = baseangles;
   }
 }
 
 function update_model_rotation_for_right_stick(localclientnum, data_struct, endonevent) {
   level endon(endonevent);
-  assert(isdefined(data_struct.charactermodel));
+  assert(isDefined(data_struct.charactermodel));
   model = data_struct.charactermodel;
-  while (true) {
-    data_lcn = (isdefined(data_struct.splitscreenclient) ? data_struct.splitscreenclient : localclientnum);
-    if(localclientactive(data_lcn) && (!(isdefined(data_struct.charactermodel.anglesoverride) && data_struct.charactermodel.anglesoverride))) {
+  while(true) {
+    data_lcn = (isDefined(data_struct.splitscreenclient) ? data_struct.splitscreenclient : localclientnum);
+    if(localclientactive(data_lcn) && (!(isDefined(data_struct.charactermodel.anglesoverride) && data_struct.charactermodel.anglesoverride))) {
       pos = getcontrollerposition(data_lcn);
-      if(isdefined(pos["rightStick"])) {
+      if(isDefined(pos["rightStick"])) {
         model.angles = (model.angles[0], absangleclamp360(model.angles[1] + (pos["rightStick"][0] * 3)), model.angles[2]);
       } else {
         model.angles = (model.angles[0], absangleclamp360(model.angles[1] + (pos["look"][0] * 3)), model.angles[2]);
@@ -938,7 +938,7 @@ function setup_static_character_customization_target(localclientnum) {
   level.extra_cam_lobby_client_hero_data[localclientnum] = setup_character_extracam_struct("ui_cam_char_identity", "cam_bust", "pb_cac_vs_screen_idle_1", 1);
   level.extra_cam_headshot_hero_data[localclientnum] = setup_character_extracam_struct("ui_cam_char_identity", "cam_bust", "pb_cac_vs_screen_idle_1", 0);
   level.extra_cam_outfit_preview_data[localclientnum] = setup_character_extracam_struct("ui_cam_char_identity", "cam_bust", "pb_cac_main_lobby_idle", 0);
-  if(isdefined(characterent)) {
+  if(isDefined(characterent)) {
     customization_data_struct = create_character_data_struct(characterent, localclientnum, 0);
     level thread update_character_extracam(localclientnum, customization_data_struct);
     return customization_data_struct;
@@ -947,7 +947,7 @@ function setup_static_character_customization_target(localclientnum) {
 }
 
 function setup_character_extracam_struct(xcam, subxcam, model_animation, uselobbyplayers) {
-  newstruct = spawnstruct();
+  newstruct = spawnStruct();
   newstruct.xcam = xcam;
   newstruct.subxcam = subxcam;
   newstruct.anim_name = model_animation;
@@ -961,31 +961,31 @@ function wait_for_extracam_close(localclientnum, camera_ent, extracamindex) {
 }
 
 function setup_character_extracam_settings(localclientnum, data_struct, extracam_data_struct) {
-  assert(isdefined(extracam_data_struct.jobindex));
-  if(!isdefined(level.camera_ents)) {
+  assert(isDefined(extracam_data_struct.jobindex));
+  if(!isDefined(level.camera_ents)) {
     level.camera_ents = [];
   }
   initializedextracam = 0;
-  camera_ent = (isdefined(level.camera_ents[localclientnum]) ? level.camera_ents[localclientnum][extracam_data_struct.extracamindex] : undefined);
-  if(!isdefined(camera_ent)) {
+  camera_ent = (isDefined(level.camera_ents[localclientnum]) ? level.camera_ents[localclientnum][extracam_data_struct.extracamindex] : undefined);
+  if(!isDefined(camera_ent)) {
     initializedextracam = 1;
     multi_extracam::extracam_init_index(localclientnum, "character_staging_extracam" + (extracam_data_struct.extracamindex + 1), extracam_data_struct.extracamindex);
     camera_ent = level.camera_ents[localclientnum][extracam_data_struct.extracamindex];
   }
-  assert(isdefined(camera_ent));
+  assert(isDefined(camera_ent));
   camera_ent playextracamxcam(extracam_data_struct.xcam, 0, extracam_data_struct.subxcam);
-  params = spawnstruct();
+  params = spawnStruct();
   params.anim_name = extracam_data_struct.anim_name;
   params.extracam_data = extracam_data_struct;
   params.isdefaulthero = extracam_data_struct.isdefaulthero;
   params.sessionmode = extracam_data_struct.sessionmode;
-  params.hide_helmet = isdefined(extracam_data_struct.hidehelmet) && extracam_data_struct.hidehelmet;
+  params.hide_helmet = isDefined(extracam_data_struct.hidehelmet) && extracam_data_struct.hidehelmet;
   data_struct.alt_render_mode = 0;
   loadequippedcharacteronmodel(localclientnum, data_struct, extracam_data_struct.characterindex, params);
-  while (!is_character_streamed(data_struct)) {
+  while(!is_character_streamed(data_struct)) {
     wait(0.016);
   }
-  if(isdefined(extracam_data_struct.defaultimagerender) && extracam_data_struct.defaultimagerender) {
+  if(isDefined(extracam_data_struct.defaultimagerender) && extracam_data_struct.defaultimagerender) {
     wait(0.5);
   } else {
     wait(0.1);
@@ -999,7 +999,7 @@ function setup_character_extracam_settings(localclientnum, data_struct, extracam
 
 function update_character_extracam(localclientnum, data_struct) {
   level endon("disconnect");
-  while (true) {
+  while(true) {
     level waittill("process_character_extracam" + localclientnum, extracam_data_struct);
     setup_character_extracam_settings(localclientnum, data_struct, extracam_data_struct);
   }

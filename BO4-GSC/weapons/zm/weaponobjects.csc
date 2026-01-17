@@ -10,7 +10,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\weapons\weaponobjects;
-
 #namespace weaponobjects;
 
 autoexec __init__system__() {

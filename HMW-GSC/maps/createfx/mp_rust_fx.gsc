@@ -720,5 +720,4 @@ main() {
   ent.v["angles"] = (0, 304, 0);
   ent.v["fxid"] = "sand_spray_detail_oriented_runner";
   ent.v["delay"] = -15;
-
 }

@@ -36,7 +36,7 @@ slide_across_car_dog() {
 
   // orient to the Negotiation start node
   startnode = self getnegotiationstartnode();
-  assert(isdefined(startnode));
+  assert(isDefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);
 
   self clearanim( % root, 0.1);

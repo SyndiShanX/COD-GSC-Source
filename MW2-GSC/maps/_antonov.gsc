@@ -26,7 +26,6 @@ main(model, type) {
   build_light(model, "wingtip_red", "TAG_RIGHT_WINGTIP", "misc/aircraft_light_wingtip_red", "running", randomStartDelay);
   build_light(model, "tail_red", "TAG_TAIL", "misc/aircraft_light_white_blink", "running", randomStartDelay);
   build_light(model, "white_blink", "TAG_LIGHT_BELLY", "misc/aircraft_light_red_blink", "running", randomStartDelay);
-
 }
 
 init_local() {
@@ -42,17 +41,17 @@ playEngineEffects() {
   self ent_flag_set("engineeffects");
   engineeffects = getfx("engineeffect");
 
-  for (;;) {
+  for(;;) {
     self ent_flag_wait("engineeffects");
-    playfxontag(engineeffects, self, "tag_engine_right");
-    playfxontag(engineeffects, self, "tag_engine_right_2");
-    playfxontag(engineeffects, self, "tag_engine_left");
-    playfxontag(engineeffects, self, "tag_engine_left_2");
+    playFXOnTag(engineeffects, self, "tag_engine_right");
+    playFXOnTag(engineeffects, self, "tag_engine_right_2");
+    playFXOnTag(engineeffects, self, "tag_engine_left");
+    playFXOnTag(engineeffects, self, "tag_engine_left_2");
     self ent_flag_waitopen("engineeffects");
-    StopFXOnTag(engineeffects, self, "tag_engine_left");
-    StopFXOnTag(engineeffects, self, "tag_engine_left_2");
-    StopFXOnTag(engineeffects, self, "tag_engine_right");
-    StopFXOnTag(engineeffects, self, "tag_engine_right_2");
+    stopFXOnTag(engineeffects, self, "tag_engine_left");
+    stopFXOnTag(engineeffects, self, "tag_engine_left_2");
+    stopFXOnTag(engineeffects, self, "tag_engine_right");
+    stopFXOnTag(engineeffects, self, "tag_engine_right_2");
   }
 }
 

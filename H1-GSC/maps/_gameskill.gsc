@@ -5,14 +5,14 @@
 ********************************/
 
 setskill(var_0) {
-  if(!isdefined(level.script))
+  if(!isDefined(level.script))
     level.script = tolower(getdvar("mapname"));
 
-  if(!isdefined(var_0) || var_0 == 0) {
-    if(isdefined(level.gameskill)) {
+  if(!isDefined(var_0) || var_0 == 0) {
+    if(isDefined(level.gameskill)) {
       return;
     }
-    if(!isdefined(level.custom_player_attacker))
+    if(!isDefined(level.custom_player_attacker))
       level.custom_player_attacker = ::return_false;
 
     level.global_damage_func_ads = ::empty_kill_func;
@@ -30,14 +30,14 @@ setskill(var_0) {
       var_2 maps\_utility::ent_flag_init("player_no_auto_blur");
       var_2 maps\_utility::ent_flag_init("near_death_vision_enabled");
       var_2 maps\_utility::ent_flag_clear("near_death_vision_enabled");
-      var_2.gs = spawnstruct();
-      var_2.a = spawnstruct();
+      var_2.gs = spawnStruct();
+      var_2.a = spawnStruct();
       var_2.damage_functions = [];
       var_2 maps\_player_stats::init_stats();
       var_2 maps\_utility::ent_flag_init("global_hint_in_use");
       var_2.pers = [];
 
-      if(!isdefined(var_2.baseignorerandombulletdamage))
+      if(!isDefined(var_2.baseignorerandombulletdamage))
         var_2.baseignorerandombulletdamage = 0;
 
       var_2.disabledweapon = 0;
@@ -49,10 +49,10 @@ setskill(var_0) {
     level.difficultytype[1] = "normal";
     level.difficultytype[2] = "hardened";
     level.difficultytype[3] = "veteran";
-    level.difficultystring["easy"] = & "GAMESKILL_EASY";
-    level.difficultystring["normal"] = & "GAMESKILL_NORMAL";
-    level.difficultystring["hardened"] = & "GAMESKILL_HARDENED";
-    level.difficultystring["veteran"] = & "GAMESKILL_VETERAN";
+    level.difficultystring["easy"] = &"GAMESKILL_EASY";
+    level.difficultystring["normal"] = &"GAMESKILL_NORMAL";
+    level.difficultystring["hardened"] = &"GAMESKILL_HARDENED";
+    level.difficultystring["veteran"] = &"GAMESKILL_VETERAN";
     thread gameskill_change_monitor();
   }
 
@@ -196,7 +196,7 @@ setskill(var_0) {
   level.lastplayersighted = 0;
   setsaveddvar("player_meleeDamageMultiplier", 0.4);
 
-  if(isdefined(level.custom_gameskill_func))
+  if(isDefined(level.custom_gameskill_func))
     [[level.custom_gameskill_func]]();
 
   updategameskill();
@@ -207,7 +207,7 @@ setskill(var_0) {
 updatealldifficulty() {
   setglobaldifficulty();
 
-  for (var_0 = 0; var_0 < level.players.size; var_0++)
+  for(var_0 = 0; var_0 < level.players.size; var_0++)
     level.players[var_0] setdifficulty();
 }
 
@@ -238,7 +238,7 @@ updategameskill() {
   level.gameskill = level.player.gameskill;
   level.specops_reward_gameskill = level.player.gameskill;
 
-  if(isdefined(level.forcedgameskill))
+  if(isDefined(level.forcedgameskill))
     level.gameskill = level.forcedgameskill;
 
   return level.gameskill;
@@ -248,8 +248,8 @@ gameskill_change_monitor() {
   var_0 = level.gameskill;
   var_1 = 0;
 
-  for (;;) {
-    if(!isdefined(var_0)) {
+  for(;;) {
+    if(!isDefined(var_0)) {
       wait 1;
       var_0 = level.gameskill;
       continue;
@@ -390,14 +390,14 @@ set_accuracy_based_on_situation() {
 }
 
 setsniperaccuracy() {
-  if(!isdefined(self.snipershotcount)) {
+  if(!isDefined(self.snipershotcount)) {
     self.snipershotcount = 0;
     self.sniperhitcount = 0;
   }
 
   self.snipershotcount++;
 
-  if((!isdefined(self.lastmissedenemy) || self.enemy != self.lastmissedenemy) && distancesquared(self.origin, self.enemy.origin) > 250000) {
+  if((!isDefined(self.lastmissedenemy) || self.enemy != self.lastmissedenemy) && distancesquared(self.origin, self.enemy.origin) > 250000) {
     self.accuracy = 0;
 
     if(level.gameskill > 0 || self.snipershotcount > 1)
@@ -464,7 +464,7 @@ setmisstime(var_0) {
 playerhurtcheck() {
   self.hurtagain = 0;
 
-  for (;;) {
+  for(;;) {
     self waittill("damage", var_0, var_1, var_2, var_3);
     self.hurtagain = 1;
     self.damagepoint = var_3;
@@ -493,7 +493,7 @@ playerhealthregen() {
   thread playerhurtcheck();
   self.bolthit = 0;
 
-  for (;;) {
+  for(;;) {
     wait 0.05;
     waittillframeend;
 
@@ -636,7 +636,7 @@ reducetakecoverwarnings() {
 }
 
 playerinvul(var_0) {
-  if(isdefined(self.flashendtime) && self.flashendtime > gettime())
+  if(isDefined(self.flashendtime) && self.flashendtime > gettime())
     var_0 = var_0 * getcurrentdifficultysetting("flashbangedInvulFactor");
 
   if(var_0 > 0) {
@@ -755,7 +755,7 @@ healthoverlayalt() {
   var_0.alpha = 0;
   thread healthoverlay_remove(var_0);
 
-  for (;;) {
+  for(;;) {
     var_0 fadeovertime(0.5);
     var_0.alpha = 0;
 
@@ -790,7 +790,7 @@ healthoverlay() {
   var_0.alpha = 0;
   thread healthoverlay_remove(var_0);
 
-  for (;;) {
+  for(;;) {
     var_0 fadeovertime(0.5);
     var_0.alpha = 0;
 
@@ -831,7 +831,7 @@ bloodsplatter() {
   var_3 = 0.05;
   var_4 = 5;
 
-  for (;;) {
+  for(;;) {
     var_5 = clamp(self.health / self.maxhealth, 0, 1);
     var_6 = 1.0 - var_5;
 
@@ -868,7 +868,7 @@ redhitflash() {
   var_0.alpha = 0;
   thread healthoverlay_remove(var_0);
 
-  for (;;) {
+  for(;;) {
     level.player waittillplayerishitagain();
 
     if(!isalive(self)) {
@@ -908,7 +908,7 @@ compasshealthoverlay() {
   var_0.vertalign = "bottom";
   var_0.alpha = 0;
 
-  for (;;) {
+  for(;;) {
     var_0 fadeovertime(0.2);
     var_0.alpha = 0;
 
@@ -937,7 +937,7 @@ compassflashingoverlay(var_0) {
   var_3 = 0.2;
   var_4 = 0.2;
 
-  while (isalive(self)) {
+  while(isalive(self)) {
     var_5 = 1;
 
     if(gettime() > var_1) {
@@ -973,7 +973,7 @@ add_hudelm_position_internal(var_0) {
   self.horzalign = "center";
   self.vertalign = "middle";
 
-  if(!isdefined(self.background)) {
+  if(!isDefined(self.background)) {
     return;
   }
   self.background.x = 0;
@@ -1038,10 +1038,10 @@ destroy_warning_elem(var_0) {
 }
 
 may_change_cover_warning_alpha(var_0) {
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     return 0;
 
-  if(isdefined(var_0.beingdestroyed))
+  if(isDefined(var_0.beingdestroyed))
     return 0;
 
   return 1;
@@ -1072,9 +1072,9 @@ pulseoverlay(var_0) {
   var_10 = max(var_2, var_5);
   var_10 = var_10 + max(var_3, var_8);
   var_11 = "breathing_heartbeat";
-  level.player playsound(var_11);
+  level.player playSound(var_11);
 
-  for (;;) {
+  for(;;) {
     var_0 scaleovertime(var_2, var_0.sourcewidth, var_0.sourceheight);
     var_0 fadeovertime(var_5);
     var_0.alpha = var_7;
@@ -1111,7 +1111,7 @@ fadefunc(var_0, var_1, var_2, var_3, var_4) {
     }
   }
 
-  if(isdefined(var_1))
+  if(isDefined(var_1))
     var_1 thread fontscaler(1.0, var_7);
 
   wait(var_7 + var_8);
@@ -1136,7 +1136,7 @@ fadefunc(var_0, var_1, var_2, var_3, var_4) {
     }
   }
 
-  if(isdefined(var_1))
+  if(isDefined(var_1))
     var_1 thread fontscaler(0.9, var_10);
 
   wait(var_10);
@@ -1144,13 +1144,13 @@ fadefunc(var_0, var_1, var_2, var_3, var_4) {
 }
 
 take_cover_warnings_enabled() {
-  if(isdefined(level.cover_warnings_disabled))
+  if(isDefined(level.cover_warnings_disabled))
     return 0;
 
-  if(isdefined(self.underwater) && self.underwater == 1)
+  if(isDefined(self.underwater) && self.underwater == 1)
     return 0;
 
-  if(isdefined(self.vehicle))
+  if(isDefined(self.vehicle))
     return 0;
 
   return 1;
@@ -1214,7 +1214,7 @@ redflashingoverlayalt(var_0) {
   var_0.alpha = 0;
   maps\_utility::ent_flag_clear("player_has_red_flashing_overlay");
 
-  if(!isdefined(self.disable_breathing_sound) || !self.disable_breathing_sound) {
+  if(!isDefined(self.disable_breathing_sound) || !self.disable_breathing_sound) {
     var_3 = "breathing_better";
 
     if(soundexists(var_3))
@@ -1235,9 +1235,9 @@ redflashingoverlay(var_0) {
 
   var_2 = gettime() + self.gs.longregentime;
   fadefunc(var_0, var_1, 0.8, 0.7, 0);
-  level.player playsound("breathing_heartbeat");
+  level.player playSound("breathing_heartbeat");
 
-  while (gettime() < var_2 && isalive(self) && maps\_utility::ent_flag("player_has_red_flashing_overlay")) {
+  while(gettime() < var_2 && isalive(self) && maps\_utility::ent_flag("player_has_red_flashing_overlay")) {
     fadefunc(var_0, var_1, 0.9, 1, 0);
     var_3 = "breathing_heartbeat";
 
@@ -1255,7 +1255,7 @@ redflashingoverlay(var_0) {
   var_0.alpha = 0;
   maps\_utility::ent_flag_clear("player_has_red_flashing_overlay");
 
-  if(!isdefined(self.disable_breathing_sound) || !self.disable_breathing_sound) {
+  if(!isDefined(self.disable_breathing_sound) || !self.disable_breathing_sound) {
     var_4 = "breathing_better";
 
     if(soundexists(var_4))
@@ -1326,7 +1326,7 @@ aa_init_stats() {
 aa_time_tracking() {
   waittillframeend;
 
-  for (;;)
+  for(;;)
     wait 0.2;
 }
 
@@ -1334,11 +1334,11 @@ aa_player_ads_tracking() {
   level.player endon("death");
   level.player_ads_time = 0;
 
-  for (;;) {
+  for(;;) {
     if(level.player maps\_utility::isads()) {
       level.player_ads_time = gettime();
 
-      while (level.player maps\_utility::isads())
+      while(level.player maps\_utility::isads())
         wait 0.05;
 
       continue;
@@ -1349,7 +1349,7 @@ aa_player_ads_tracking() {
 }
 
 aa_player_health_tracking() {
-  for (;;) {
+  for(;;) {
     level.player waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6);
     aa_add_event("aa_player_damage_taken", var_0);
 
@@ -1361,7 +1361,7 @@ aa_player_health_tracking() {
 }
 
 auto_adjust_new_zone(var_0) {
-  if(!isdefined(level.auto_adjust_flags))
+  if(!isDefined(level.auto_adjust_flags))
     level.auto_adjust_flags = [];
 
   common_scripts\utility::flag_wait("auto_adjust_initialized");
@@ -1454,7 +1454,7 @@ auto_adust_zone_complete(var_0) {
     var_24 = var_24 + (level.script + "\" + var_0);
       var_25 = getarraykeys(var_23);
 
-      for (var_26 = 0; var_26 < var_25.size; var_26++)
+      for(var_26 = 0; var_26 < var_25.size; var_26++)
         var_24 = var_24 + ", " + var_25[var_26] + ": " + var_23[var_25[var_26]];
 
       logstring(var_24);
@@ -1481,15 +1481,13 @@ auto_adust_zone_complete(var_0) {
     }
 
     player_attacker(var_0) {
-      if([
-          [level.custom_player_attacker]
-        ](var_0))
+      if([[level.custom_player_attacker]](var_0))
         return 1;
 
       if(isplayer(var_0))
         return 1;
 
-      if(!isdefined(var_0.car_damage_owner_recorder))
+      if(!isDefined(var_0.car_damage_owner_recorder))
         return 0;
 
       return var_0 player_did_most_damage();
@@ -1504,7 +1502,7 @@ auto_adust_zone_complete(var_0) {
     auto_adjust_enemy_died(var_0, var_1, var_2, var_3) {
       aa_add_event("aa_enemy_deaths", 1);
 
-      if(!isdefined(var_1)) {
+      if(!isDefined(var_1)) {
         return;
       }
       if(!player_attacker(var_1)) {
@@ -1532,16 +1530,12 @@ auto_adust_zone_complete(var_0) {
       aa_add_event("aa_player_damage_dealt", var_0);
 
       if(!level.player maps\_utility::isads()) {
-        [
-          [level.global_damage_func]
-        ](var_1, self.damagelocation, var_2);
+        [[level.global_damage_func]](var_1, self.damagelocation, var_2);
         return 0;
       }
 
       if(!bullet_attack(var_1)) {
-        [
-          [level.global_damage_func]
-        ](var_1, self.damagelocation, var_2);
+        [[level.global_damage_func]](var_1, self.damagelocation, var_2);
         return 0;
       }
 

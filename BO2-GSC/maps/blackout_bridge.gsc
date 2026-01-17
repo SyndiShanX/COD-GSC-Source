@@ -194,8 +194,7 @@ run_mason_catwalk() {
   clean_up_mason_catwalk();
 }
 
-clean_up_mason_catwalk() {
-}
+clean_up_mason_catwalk() {}
 
 scene_salazar_exit() {
   level.salazar change_movemode("cqb_sprint");
@@ -223,7 +222,7 @@ moment_stairfall() {
   m_clip linkto(m_door, "tag_animate");
   t_stairfall = trigger_wait("stairfall_trigger");
   t_stairfall delete();
-  m_door playsound("evt_deck_door_open");
+  m_door playSound("evt_deck_door_open");
   level thread run_scene_and_delete("stairfall");
   scene_wait("stairfall");
   m_clip connectpaths();
@@ -445,7 +444,7 @@ bridge_turret_spawns() {
   self setturrettargetvec(e_target.origin);
   self waittill("turret_entered");
   self clearturrettarget();
-  a_spawn_triggers = getentarray("bridge_turret_trigger", "script_noteworthy");
+  a_spawn_triggers = getEntArray("bridge_turret_trigger", "script_noteworthy");
 
   foreach(trigger in a_spawn_triggers) {
     trigger useby(level.player);
@@ -479,7 +478,7 @@ bridge_send_rushers() {
 }
 
 catwalk_spawn_snipers() {
-  sp_snipers = getentarray("catwalk_sniper_spawn", "targetname");
+  sp_snipers = getEntArray("catwalk_sniper_spawn", "targetname");
   level.catwalk_snipers = simple_spawn(sp_snipers, ::magic_bullet_shield);
   simple_spawn("catwalk_rocket_fodder");
   trigger_wait("double_stairs_mid");
@@ -549,7 +548,7 @@ bridge_turret_bloodbath_setup(ai_guy) {
 
 override_bridge_bloodbath(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, modelindex, psoffsettime, bonename) {
   if(!self.ignoreme)
-    playfx(level._effect["cic_turret_bloodbath"], vpoint, vdir);
+    playFX(level._effect["cic_turret_bloodbath"], vpoint, vdir);
 
   return true;
 }
@@ -794,8 +793,7 @@ ziptie_intro_then_loop(str_scene) {
   end_scene(str_scene + "_loop");
 }
 
-ziptie_enemy_think(ai_guy) {
-}
+ziptie_enemy_think(ai_guy) {}
 
 ziptie_friendly_think(ai_guy) {
   ai_guy attach("t6_wpn_ar_xm8_world", "tag_weapon_right");
@@ -816,7 +814,7 @@ spawn_deck_spec_ops_battle() {
   while(!flag("spec_ops_passed") && !flag("spec_ops_started")) {
     if(player_has_sniper_weapon()) {
       s_snipe_obj = get_struct("struct_spec_op_obj", "targetname");
-      set_objective(level.obj_help_seals, s_snipe_obj.origin, & "BLACKOUT_OBJ_SNIPE");
+      set_objective(level.obj_help_seals, s_snipe_obj.origin, &"BLACKOUT_OBJ_SNIPE");
       flag_set("spec_ops_started");
       level thread spec_ops_killed();
       level thread spec_ops_battle_finish();
@@ -1047,9 +1045,9 @@ start_catwalk_allies() {
 }
 
 cleanup_deck_allies() {
-  a_ai_enemies = getentarray("deck_reveal_enemy_ai", "targetname");
-  a_ai_allies = getentarray("deck_reveal_ally_ai", "targetname");
-  a_ai_balcony_allies = getentarray("catwalk_rocket_fodder_ai", "targetname");
+  a_ai_enemies = getEntArray("deck_reveal_enemy_ai", "targetname");
+  a_ai_allies = getEntArray("deck_reveal_ally_ai", "targetname");
+  a_ai_balcony_allies = getEntArray("catwalk_rocket_fodder_ai", "targetname");
   maps\blackout_util::kill_guys(a_ai_enemies);
   maps\blackout_util::kill_guys(a_ai_allies);
   maps\blackout_util::kill_guys(a_ai_balcony_allies);

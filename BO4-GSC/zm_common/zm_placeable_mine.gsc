@@ -18,20 +18,19 @@
 #include scripts\zm_common\zm_stats;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
-
 #namespace zm_placeable_mine;
 
 autoexec __init__system__() {
   system::register(#"placeable_mine", undefined, &__main__, undefined);
 }
 
-private __main__() {
+__main__() {
   if(isDefined(level.placeable_mines)) {
     level thread replenish_after_rounds();
   }
 }
 
-private init_internal() {
+init_internal() {
   if(isDefined(level.placeable_mines)) {
     return;
   }
@@ -84,13 +83,13 @@ add_planted_callback(fn_planted_cb, wpn_name) {
   level.placeable_mine_planted_callbacks[wpn_name][level.placeable_mine_planted_callbacks[wpn_name].size] = fn_planted_cb;
 }
 
-private run_planted_callbacks(e_planter) {
+run_planted_callbacks(e_planter) {
   foreach(fn in level.placeable_mine_planted_callbacks[self.weapon.name]) {
     self thread[[fn]](e_planter);
   }
 }
 
-private safe_to_plant() {
+safe_to_plant() {
   if(isDefined(level.placeable_mines_max_per_player) && self.owner.placeable_mines.size >= level.placeable_mines_max_per_player) {
     return false;
   }
@@ -98,12 +97,12 @@ private safe_to_plant() {
   return true;
 }
 
-private wait_and_detonate() {
+wait_and_detonate() {
   wait 0.1;
   self detonate(self.owner);
 }
 
-private mine_watch(wpn_type) {
+mine_watch(wpn_type) {
   self endon(#"death");
   self notify(#"mine_watch");
   self endon(#"mine_watch");
@@ -182,7 +181,7 @@ disable_all_prompts_for_player() {
   }
 }
 
-private pickup_placeable_mine() {
+pickup_placeable_mine() {
   player = self.owner;
   wpn_type = self.weapon;
 
@@ -226,16 +225,16 @@ private pickup_placeable_mine() {
   player zm_stats::increment_player_stat(wpn_type.name + "_pickedup");
 }
 
-private pickup_placeable_mine_trigger_listener(trigger, player) {
+pickup_placeable_mine_trigger_listener(trigger, player) {
   self thread pickup_placeable_mine_trigger_listener_enable(trigger, player);
   self thread pickup_placeable_mine_trigger_listener_disable(trigger, player);
 }
 
-private pickup_placeable_mine_trigger_listener_enable(trigger, player) {
-  self endon(#"delete", #"death");
+pickup_placeable_mine_trigger_listener_enable(trigger, player) {
+  self endon(#"delete", # "death");
 
   while(true) {
-    player waittill("zmb_enable_" + self.weapon.name + "_prompt", #"spawned_player");
+    player waittill("zmb_enable_" + self.weapon.name + "_prompt", # "spawned_player");
 
     if(!isDefined(trigger)) {
       return;
@@ -246,8 +245,8 @@ private pickup_placeable_mine_trigger_listener_enable(trigger, player) {
   }
 }
 
-private pickup_placeable_mine_trigger_listener_disable(trigger, player) {
-  self endon(#"delete", #"death");
+pickup_placeable_mine_trigger_listener_disable(trigger, player) {
+  self endon(#"delete", # "death");
 
   while(true) {
     player waittill("zmb_disable_" + self.weapon.name + "_prompt");
@@ -261,7 +260,7 @@ private pickup_placeable_mine_trigger_listener_disable(trigger, player) {
   }
 }
 
-private placeable_mine_damage() {
+placeable_mine_damage() {
   self endon(#"death");
   self setCanDamage(1);
   self.health = 100000;
@@ -285,7 +284,7 @@ private placeable_mine_damage() {
       continue;
     }
 
-    if(isDefined(waitresult.attacker.pers) && isDefined(waitresult.attacker.pers[#"team"]) && waitresult.attacker.pers[#"team"] != level.zombie_team) {
+    if(isDefined(waitresult.attacker.pers) && isDefined(waitresult.attacker.pers[# "team"]) && waitresult.attacker.pers[# "team"] != level.zombie_team) {
       continue;
     }
 
@@ -307,12 +306,12 @@ private placeable_mine_damage() {
   self detonate(waitresult.attacker);
 }
 
-private reset_satchel_explode_this_frame() {
+reset_satchel_explode_this_frame() {
   waitframe(1);
   level.satchelexplodethisframe = 0;
 }
 
-private replenish_after_rounds() {
+replenish_after_rounds() {
   while(true) {
     level waittill(#"between_round_over");
 
@@ -360,7 +359,7 @@ zm_red_challenges_hud_wear(watcher) {
   watcher.ondamage = level.placeable_mines_on_damage;
 }
 
-private on_spawn_retrieve_trigger(watcher, player) {
+on_spawn_retrieve_trigger(watcher, player) {
   self weaponobjects::function_23b0aea9(watcher, player);
 
   if(isDefined(self.pickuptrigger)) {
@@ -368,12 +367,12 @@ private on_spawn_retrieve_trigger(watcher, player) {
   }
 }
 
-private adjust_trigger_origin(origin) {
+adjust_trigger_origin(origin) {
   origin += (0, 0, 20);
   return origin;
 }
 
-private placeable_mine_detonate(attacker, weapon, target) {
+placeable_mine_detonate(attacker, weapon, target) {
   if(weapon.isemp) {
     self delete();
     return;

@@ -90,12 +90,12 @@ function autoexec opt_in() {
 }
 
 function main() {
-  callback::on_localclient_connect( & on_player_connected);
+  callback::on_localclient_connect(&on_player_connected);
   zm_genesis_ffotd::main_start();
   zm_genesis_fx::main();
   zm_genesis_undercroft_low_grav::main();
   level.debug_keyline_zombies = 0;
-  level.setupcustomcharacterexerts = & setup_personality_character_exerts;
+  level.setupcustomcharacterexerts = &setup_personality_character_exerts;
   level._effect["eye_glow"] = "dlc3/stalingrad/fx_glow_eye_red_stal";
   level._uses_sticky_grenades = 1;
   level._uses_taser_knuckles = 1;
@@ -125,12 +125,12 @@ function sun_flame(n_local_client) {
   var_c2a0c80a = getent(n_local_client, "sun_flame", "targetname");
   var_c2a0c80a setscale(6);
   player = getlocalplayer(n_local_client);
-  while (isdefined(player)) {
+  while(isDefined(player)) {
     if(!var_c2a0c80a hasdobj(n_local_client)) {
       var_c2a0c80a util::waittill_dobj(n_local_client);
       wait(0.016);
     }
-    if(!isdefined(player)) {
+    if(!isDefined(player)) {
       player = getlocalplayer(n_local_client);
       wait(0.016);
     }

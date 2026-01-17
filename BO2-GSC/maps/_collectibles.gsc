@@ -11,7 +11,7 @@
 main() {
   flag_wait("level.player");
   init_intel_map();
-  a_collectibles = getentarray("collectible", "targetname");
+  a_collectibles = getEntArray("collectible", "targetname");
 
   if(!isDefined(level.intel_map[level.script])) {
     assert(a_collectibles.size == 0);
@@ -80,7 +80,7 @@ collectibles_level_challenge(str_notify) {
 }
 
 collectibles_level_restore() {
-  map_collectibles = getentarray("collectible", "targetname");
+  map_collectibles = getEntArray("collectible", "targetname");
 
   for(i = 0; i < map_collectibles.size; i++) {
     if(hascollectible(int(map_collectibles[i].script_parameters))) {

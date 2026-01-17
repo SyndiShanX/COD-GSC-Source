@@ -38,7 +38,6 @@
 #include scripts\zm_common\zm_perks;
 #include scripts\zm_common\zm_powerups;
 #include scripts\zm_common\zm_spawner;
-
 #namespace archetype_zod_companion;
 
 autoexec main() {
@@ -49,7 +48,6 @@ autoexec main() {
   zodcompanionbehavior::registerbehaviorscriptfunctions();
 
   zm_devgui::function_c7dd7a17("<dev string:x38>");
-
 }
 
 #namespace zodcompanionbehavior;
@@ -91,17 +89,17 @@ registerbehaviorscriptfunctions() {
   behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionCollisionService", &zodcompanioncollisionservice);
 }
 
-private mocompignorepainfaceenemyinit(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
+mocompignorepainfaceenemyinit(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
   entity.blockingpain = 1;
   entity orientmode("face enemy");
   entity animmode("pos deltas");
 }
 
-private mocompignorepainfaceenemyterminate(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
+mocompignorepainfaceenemyterminate(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
   entity.blockingpain = 0;
 }
 
-private archetypezodcompanionblackboardinit() {
+archetypezodcompanionblackboardinit() {
   entity = self;
   entity.pushable = 1;
   blackboard::createblackboardforentity(entity);
@@ -109,11 +107,11 @@ private archetypezodcompanionblackboardinit() {
   self setblackboardattribute("_locomotion_speed", "locomotion_speed_sprint");
 }
 
-private zodcompaniondelaymovement(entity) {
+zodcompaniondelaymovement(entity) {
   entity pathmode("move delayed", 0, randomfloatrange(1, 2));
 }
 
-private zodcompanionmovement(entity) {
+zodcompanionmovement(entity) {
   if(entity getblackboardattribute("_stance") != "stand") {
     entity setblackboardattribute("_desired_stance", "stand");
   }
@@ -162,24 +160,24 @@ zodcompanioncanpreemptivejuke(entity) {
 
     record3dtext(angledifference, entity.origin + (0, 0, 5), (0, 1, 0), "<dev string:x48>");
 
-      if(angledifference > 135) {
-        enemyangles = entity.enemy getgunangles();
-        toenemy = entity.enemy.origin - entity.origin;
-        forward = anglesToForward(enemyangles);
-        dotproduct = abs(vectordot(vectornormalize(toenemy), forward));
+    if(angledifference > 135) {
+      enemyangles = entity.enemy getgunangles();
+      toenemy = entity.enemy.origin - entity.origin;
+      forward = anglesToForward(enemyangles);
+      dotproduct = abs(vectordot(vectornormalize(toenemy), forward));
 
-        record3dtext(acos(dotproduct), entity.origin + (0, 0, 10), (0, 1, 0), "<dev string:x48>");
+      record3dtext(acos(dotproduct), entity.origin + (0, 0, 10), (0, 1, 0), "<dev string:x48>");
 
-          if(dotproduct > 0.9848) {
-            return zodcompanioncanjuke(entity);
-          }
+      if(dotproduct > 0.9848) {
+        return zodcompanioncanjuke(entity);
       }
+    }
   }
 
   return false;
 }
 
-private _isvalidplayer(player) {
+_isvalidplayer(player) {
   if(!isDefined(player) || !isalive(player) || !isplayer(player) || player.sessionstate == "spectator" || player.sessionstate == "intermission" || player laststand::player_is_in_laststand() || player.ignoreme) {
     return false;
   }
@@ -187,7 +185,7 @@ private _isvalidplayer(player) {
   return true;
 }
 
-private _findclosest(entity, entities) {
+_findclosest(entity, entities) {
   closest = spawnStruct();
 
   if(entities.size > 0) {
@@ -207,7 +205,7 @@ private _findclosest(entity, entities) {
   return closest;
 }
 
-private zodcompaniontargetservice(entity) {
+zodcompaniontargetservice(entity) {
   if(zodcompanionabletoshootcondition(entity)) {
     return 0;
   }
@@ -271,15 +269,15 @@ private zodcompaniontargetservice(entity) {
   entity.favoriteenemy = closestplayer.entity;
 }
 
-private zodcompaniontacticalwalkactionstart(entity) {
+zodcompaniontacticalwalkactionstart(entity) {
   entity orientmode("face enemy");
 }
 
-private zodcompanionabletoshootcondition(entity) {
+zodcompanionabletoshootcondition(entity) {
   return entity.weapon.name != level.weaponnone.name && !gibserverutils::isgibbed(entity, 16);
 }
 
-private zodcompanionshouldtacticalwalk(entity) {
+zodcompanionshouldtacticalwalk(entity) {
   if(!entity haspath()) {
     return false;
   }
@@ -287,7 +285,7 @@ private zodcompanionshouldtacticalwalk(entity) {
   return true;
 }
 
-private zodcompanionjukeinitialize(entity) {
+zodcompanionjukeinitialize(entity) {
   aiutility::choosejukedirection(entity);
   entity clearpath();
   jukeinfo = spawnStruct();
@@ -296,12 +294,12 @@ private zodcompanionjukeinitialize(entity) {
   blackboard::addblackboardevent("robot_juke", jukeinfo, 2000);
 }
 
-private zodcompanionpreemptivejuketerminate(entity) {
+zodcompanionpreemptivejuketerminate(entity) {
   entity.nextpreemptivejuke = gettime() + randomintrange(4000, 6000);
   entity.nextpreemptivejukeads = randomfloatrange(0.5, 0.95);
 }
 
-private zodcompaniontryreacquireservice(entity) {
+zodcompaniontryreacquireservice(entity) {
   if(!isDefined(entity.reacquire_state)) {
     entity.reacquire_state = 0;
   }
@@ -363,7 +361,7 @@ private zodcompaniontryreacquireservice(entity) {
   return false;
 }
 
-private manage_companion_movement(entity) {
+manage_companion_movement(entity) {
   self endon(#"death");
 
   if(isDefined(level.var_1a612d42) && level.var_1a612d42.eligible_leader) {
@@ -475,7 +473,7 @@ private manage_companion_movement(entity) {
   }
 }
 
-private zodcompanioncollisionservice(entity) {
+zodcompanioncollisionservice(entity) {
   if(isDefined(entity.dontpushtime)) {
     if(gettime() < entity.dontpushtime) {
       return true;
@@ -510,14 +508,14 @@ private zodcompanioncollisionservice(entity) {
   return false;
 }
 
-private function_d0371e1e() {
+function_d0371e1e() {
   self endon(#"death");
   self collidewithactors(0);
   wait 2;
   self collidewithactors(1);
 }
 
-private function_a2ba1ce8(target_entity, max_distance) {
+function_a2ba1ce8(target_entity, max_distance) {
   entity = self;
   target_location = target_entity.origin;
 
@@ -541,7 +539,7 @@ private function_a2ba1ce8(target_entity, max_distance) {
   return true;
 }
 
-private function_818f64d1(var_d2a1361a) {
+function_818f64d1(var_d2a1361a) {
   self endon(#"death");
   self.var_8dc43281 = 1;
   self setgoal(var_d2a1361a, 1);
@@ -550,7 +548,7 @@ private function_818f64d1(var_d2a1361a) {
   self.var_8dc43281 = 0;
 }
 
-private function_d5390a05(var_33d955f9) {
+function_d5390a05(var_33d955f9) {
   self endon(#"death");
   self.var_7e56b71c = 1;
   var_cf5caf08 = getnodearray("flinger_traversal", "script_noteworthy");
@@ -561,7 +559,7 @@ private function_d5390a05(var_33d955f9) {
   self.var_7e56b71c = 0;
 }
 
-private pick_new_movement_point() {
+pick_new_movement_point() {
   queryresult = positionquery_source_navigation(self.companion_anchor_point, 96, 256, 256, 20, self);
 
   if(queryresult.data.size) {
@@ -586,14 +584,14 @@ private pick_new_movement_point() {
   self.next_move_time = gettime() + randomintrange(20000, 30000);
 }
 
-private function_bc4cbfe(parasite) {
+function_bc4cbfe(parasite) {
   point = self;
   height_difference = abs(point.origin[2] - parasite.origin[2]);
   var_3b91e18 = 1.5 * height_difference * 1.5 * height_difference;
   return distancesquared(point.origin, parasite.origin) > var_3b91e18;
 }
 
-private zodcompanionsetdesiredstancetostand(behaviortreeentity) {
+zodcompanionsetdesiredstancetostand(behaviortreeentity) {
   currentstance = behaviortreeentity getblackboardattribute("_stance");
 
   if(currentstance == "crouch") {
@@ -602,7 +600,7 @@ private zodcompanionsetdesiredstancetostand(behaviortreeentity) {
 }
 
 zod_companion_revive_player(player) {
-  self endon(#"death", #"revive_terminated", #"end_game");
+  self endon(#"death", # "revive_terminated", # "end_game");
 
   if(!(isDefined(self.reviving_a_player) && self.reviving_a_player)) {
     self.reviving_a_player = 1;
@@ -666,7 +664,7 @@ zod_companion_revive_player(player) {
 }
 
 zod_companion_monitor_revive_attempt(player) {
-  self endon(#"death", #"revive_terminated");
+  self endon(#"death", # "revive_terminated");
 
   while(true) {
     if(!isDefined(player)) {
@@ -700,7 +698,7 @@ zod_companion_revive_cleanup(player) {
   self notify(#"revive_terminated");
 }
 
-private zodcompanionfinishedsprinttransition(behaviortreeentity) {
+zodcompanionfinishedsprinttransition(behaviortreeentity) {
   behaviortreeentity.sprint_transition_happening = 0;
 
   if(behaviortreeentity getblackboardattribute("_locomotion_speed") == "locomotion_speed_walk") {
@@ -713,7 +711,7 @@ private zodcompanionfinishedsprinttransition(behaviortreeentity) {
   behaviortreeentity setblackboardattribute("_locomotion_speed", "locomotion_speed_walk");
 }
 
-private zodcompanionkeepscurrentmovementmode(behaviortreeentity) {
+zodcompanionkeepscurrentmovementmode(behaviortreeentity) {
   var_202e5b5c = 262144;
   var_c351bd17 = 147456;
   dist = distancesquared(behaviortreeentity.origin, behaviortreeentity.companion_anchor_point);
@@ -729,7 +727,7 @@ private zodcompanionkeepscurrentmovementmode(behaviortreeentity) {
   return true;
 }
 
-private zodcompanionsprinttransitioning(behaviortreeentity) {
+zodcompanionsprinttransitioning(behaviortreeentity) {
   if(behaviortreeentity.sprint_transition_happening === 1) {
     return true;
   }
@@ -739,7 +737,7 @@ private zodcompanionsprinttransitioning(behaviortreeentity) {
 
 #namespace zodcompanionserverutils;
 
-private _trygibbinghead(entity, damage, hitloc, isexplosive) {
+_trygibbinghead(entity, damage, hitloc, isexplosive) {
   if(isexplosive && randomfloatrange(0, 1) <= 0.5) {
     gibserverutils::gibhead(entity);
     return;
@@ -755,7 +753,7 @@ private _trygibbinghead(entity, damage, hitloc, isexplosive) {
   }
 }
 
-private _trygibbinglimb(entity, damage, hitloc, isexplosive) {
+_trygibbinglimb(entity, damage, hitloc, isexplosive) {
   if(gibserverutils::isgibbed(entity, 32) || gibserverutils::isgibbed(entity, 16)) {
     return;
   }
@@ -790,7 +788,7 @@ private _trygibbinglimb(entity, damage, hitloc, isexplosive) {
   }
 }
 
-private _trygibbinglegs(entity, damage, hitloc, isexplosive, attacker = entity) {
+_trygibbinglegs(entity, damage, hitloc, isexplosive, attacker = entity) {
   cangiblegs = entity.health - damage <= 0 && entity.allowdeath;
   cangiblegs = cangiblegs || (entity.health - damage) / entity.maxhealth <= 0.25 && distancesquared(entity.origin, attacker.origin) <= 360000 && entity.allowdeath;
 
@@ -828,7 +826,7 @@ private _trygibbinglegs(entity, damage, hitloc, isexplosive, attacker = entity) 
   }
 }
 
-private zodcompaniongibdamageoverride(inflictor, attacker, damage, flags, meansofdeath, weapon, point, dir, hitloc, offsettime, boneindex, modelindex) {
+zodcompaniongibdamageoverride(inflictor, attacker, damage, flags, meansofdeath, weapon, point, dir, hitloc, offsettime, boneindex, modelindex) {
   entity = self;
 
   if((entity.health - damage) / entity.maxhealth > 0.75) {
@@ -843,7 +841,7 @@ private zodcompaniongibdamageoverride(inflictor, attacker, damage, flags, meanso
   return damage;
 }
 
-private zodcompaniondestructdeathoverride(inflictor, attacker, damage, flags, meansofdeath, weapon, point, dir, hitloc, offsettime, boneindex, modelindex) {
+zodcompaniondestructdeathoverride(inflictor, attacker, damage, flags, meansofdeath, weapon, point, dir, hitloc, offsettime, boneindex, modelindex) {
   entity = self;
 
   if(entity.health - damage <= 0) {
@@ -872,7 +870,7 @@ private zodcompaniondestructdeathoverride(inflictor, attacker, damage, flags, me
   return damage;
 }
 
-private zodcompaniondamageoverride(inflictor, attacker, damage, flags, meansofdeath, weapon, point, dir, hitloc, offsettime, boneindex, modelindex) {
+zodcompaniondamageoverride(inflictor, attacker, damage, flags, meansofdeath, weapon, point, dir, hitloc, offsettime, boneindex, modelindex) {
   entity = self;
 
   if(hitloc == "helmet" || hitloc == "head" || hitloc == "neck") {
@@ -882,7 +880,7 @@ private zodcompaniondamageoverride(inflictor, attacker, damage, flags, meansofde
   return damage;
 }
 
-private findclosestnavmeshpositiontoenemy(enemy) {
+findclosestnavmeshpositiontoenemy(enemy) {
   enemypositiononnavmesh = undefined;
 
   for(tolerancelevel = 1; tolerancelevel <= 4; tolerancelevel++) {
@@ -896,7 +894,7 @@ private findclosestnavmeshpositiontoenemy(enemy) {
   return enemypositiononnavmesh;
 }
 
-private zodcompanionsoldierspawnsetup() {
+zodcompanionsoldierspawnsetup() {
   entity = self;
   entity.combatmode = "cover";
   entity.fullhealth = entity.health;

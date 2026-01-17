@@ -54,9 +54,9 @@
 #namespace load;
 
 function main() {
-  /# /
+  /
   #
-  assert(isdefined(level.first_frame), "");
+  assert(isDefined(level.first_frame), "");
   zm::init();
   level._loadstarted = 1;
   register_clientfields();
@@ -71,7 +71,7 @@ function main() {
 }
 
 function footsteps() {
-  if(isdefined(level.fx_exclude_footsteps) && level.fx_exclude_footsteps) {
+  if(isDefined(level.fx_exclude_footsteps) && level.fx_exclude_footsteps) {
     return;
   }
   zombie_utility::setfootstepeffect("asphalt", "_t6/bio/player/fx_footstep_dust");
@@ -97,7 +97,7 @@ function setup_traversals() {}
 
 function start_intro_screen_zm() {
   players = getplayers();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i] lui::screen_fade_out(0, undefined);
     players[i] freezecontrols(1);
   }

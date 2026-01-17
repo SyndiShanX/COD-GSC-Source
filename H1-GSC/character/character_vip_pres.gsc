@@ -5,7 +5,7 @@
 ********************************************/
 
 main() {
-  self setmodel("body_civ_vip_president");
+  self setModel("body_civ_vip_president");
   self attach("head_civ_vip_president", "", 1);
   self.headmodel = "head_civ_vip_president";
   self.voice = "american";

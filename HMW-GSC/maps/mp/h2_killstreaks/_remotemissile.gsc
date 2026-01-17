@@ -36,7 +36,7 @@ h2_remotemissile(rocket) {
   compass_icon delete();
   soundEnt delete();
 
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     var_7 destroy();
     self setClientOmnVar("ui_predator_enabled", 0);
   }
@@ -69,7 +69,7 @@ init() {
 
   //precacheItem( "remotemissile_projectile_mp" );
   precacheShader("ac130_overlay_grain");
-  precacheString( & "MP_CIVILIAN_AIR_TRAFFIC");
+  precacheString(&"MP_CIVILIAN_AIR_TRAFFIC");
   precacheShader("h2_overlays_predator_reticle");
   precacheMinimapIcon("remotemissile_target_friendly");
   precacheMinimapIcon("remotemissile_target_hostile");
@@ -82,8 +82,8 @@ init() {
 }
 
 tryUsePredatorMissile(lifeId) {
-  if(isdefined(level.civilianJetFlyBy)) {
-    self iprintlnbold( & "MP_CIVILIAN_AIR_TRAFFIC");
+  if(isDefined(level.civilianJetFlyBy)) {
+    self iprintlnbold(&"MP_CIVILIAN_AIR_TRAFFIC");
     return false;
   }
 
@@ -111,15 +111,15 @@ getBestSpawnPoint(remoteMissileSpawnPoints) {
   }
 
   foreach(player in level.players) {
-    if(!isReallyAlive(player))
+    if(!isReallyAlive(player)) {
       continue;
-
-    if(player.team == self.team)
+    }
+    if(player.team == self.team) {
       continue;
-
-    if(player.team == "spectator")
+    }
+    if(player.team == "spectator") {
       continue;
-
+    }
     bestDistance = 999999999;
     bestSpawnPoint = undefined;
 
@@ -162,7 +162,7 @@ getBestSpawnPoint(remoteMissileSpawnPoints) {
 
 drawLine(start, end, timeSlice, color) {
   drawTime = int(timeSlice * 20);
-  for (time = 0; time < drawTime; time++) {
+  for(time = 0; time < drawTime; time++) {
     line(start, end, color, false, 1);
     wait(0.05);
   }
@@ -182,11 +182,11 @@ remove_notify_commands() {
 _fire(lifeId, player) {
   player add_notify_commands();
 
-  remote_missile_spawns = getentarray("remoteMissileSpawn", "targetname");
+  remote_missile_spawns = getEntArray("remoteMissileSpawn", "targetname");
   //assertEX( remote_missile_spawns.size > 0 && getMapCustom( "map" ) != "", "No remote missile spawn points found.Contact friendly neighborhood designer" );
 
   foreach(spawn in remote_missile_spawns) {
-    if(isdefined(spawn.target))
+    if(isDefined(spawn.target))
       spawn.targetent = getent(spawn.target, "targetname");
   }
 
@@ -194,7 +194,7 @@ _fire(lifeId, player) {
   if(remote_missile_spawns.size > 0)
     remote_missle_spawn = player getbestspawnpoint(remote_missile_spawns);
 
-  if(isdefined(remote_missle_spawn)) {
+  if(isDefined(remote_missle_spawn)) {
     startPos = remote_missle_spawn.origin;
     targetPos = remote_missle_spawn.targetent.origin;
 
@@ -209,13 +209,13 @@ _fire(lifeId, player) {
     backDist = level.missileRemoteLaunchHorz;
     targetDist = level.missileRemoteLaunchTargetDist;
 
-    forward = AnglesToForward(player.angles);
+    forward = anglesToForward(player.angles);
     startpos = player.origin + upVector + forward * backDist * -1;
     targetPos = player.origin + forward * targetDist;
   }
 
   rocket = magicbullet("remotemissile_projectile_mp", startpos, targetPos, player);
-  if(!isdefined(rocket)) {
+  if(!isDefined(rocket)) {
     player clearusingremote();
     return;
   }
@@ -229,21 +229,20 @@ _fire(lifeId, player) {
   missile_eyes(player, rocket);
 }
 
-/#
 _fire_noplayer(lifeId, player) {
   upVector = (0, 0, level.missileRemoteLaunchVert);
   backDist = level.missileRemoteLaunchHorz;
   targetDist = level.missileRemoteLaunchTargetDist;
 
-  forward = AnglesToForward(player.angles);
+  forward = anglesToForward(player.angles);
   startpos = player.origin + upVector + forward * backDist * -1;
   targetPos = player.origin + forward * targetDist;
 
   rocket = MagicBullet("remotemissile_projectile_mp", startpos, targetPos, player);
 
-  if(!IsDefined(rocket))
+  if(!isDefined(rocket)) {
     return;
-
+  }
   rocket thread handleDamage();
 
   rocket.lifeId = lifeId;
@@ -259,23 +258,22 @@ _fire_noplayer(lifeId, player) {
   player ControlsUnlink();
   player CameraUnlink();
 }
-# /
 
-  handleDamage() {
-    self endon("death");
-    self endon("deleted");
+handleDamage() {
+  self endon("death");
+  self endon("deleted");
 
-    self setCanDamage(true);
+  self setCanDamage(true);
 
-    /*
-    for ( ;; )
-    {
-    self waittill( "damage" );
+  /*
+  for( ;; )
+  {
+  self waittill( "damage" );
 
-    println ( "projectile damaged!" );
-    }
-    */
+  println ( "projectile damaged!" );
   }
+  */
+}
 
 monitor_rocket_boosting(rocket) {
   self endon("disconnect");
@@ -379,7 +377,6 @@ staticEffect(duration) {
   staticBG destroy();
 }
 
-
 Player_CleanupOnTeamChange(rocket) {
   rocket endon("death");
   self endon("disconnect");
@@ -400,7 +397,6 @@ Player_CleanupOnTeamChange(rocket) {
   level.remoteMissileInProgress = undefined;
 }
 
-
 Rocket_CleanupOnDeath() {
   entityNumber = self getEntityNumber();
   level.rockets[entityNumber] = self;
@@ -408,7 +404,6 @@ Rocket_CleanupOnDeath() {
 
   level.rockets[entityNumber] = undefined;
 }
-
 
 Player_CleanupOnGameEnded(rocket) {
   rocket endon("death");

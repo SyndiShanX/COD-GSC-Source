@@ -15,7 +15,6 @@
 #include scripts\zm_common\zm_stats;
 #include scripts\zm_common\zm_talisman;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_talisman_extra_semtex;
 
 autoexec __init__system__() {
@@ -41,7 +40,7 @@ function_4d97e9ce() {
 
   level flagsys::wait_till(#"all_players_spawned");
 
-  if(self.slot_weapons[#"lethal_grenade"] === getweapon(#"eq_acid_bomb")) {
+  if(self.slot_weapons[# "lethal_grenade"] === getweapon(#"eq_acid_bomb")) {
     self takeweapon(getweapon(#"eq_acid_bomb"));
     self giveweapon(getweapon(#"eq_acid_bomb_extra"));
   }

@@ -16,7 +16,7 @@ precache() {
 }
 
 set_player_model() {
-  self setmodel("c_usa_mp_fbi_smg_fb");
+  self setModel("c_usa_mp_fbi_smg_fb");
   self setviewmodel("c_usa_mp_fbi_shortsleeve_viewhands");
   heads = [];
 }

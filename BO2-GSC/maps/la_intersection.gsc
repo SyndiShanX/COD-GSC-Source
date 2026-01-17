@@ -20,7 +20,7 @@ autoexec init() {
   add_spawn_function_ai_group("g20_attackers", ::spawn_func_g20_attackers);
   add_spawn_function_veh("intersection_last_truck", ::intersection_last_truck);
   add_spawn_function_veh_by_type("civ_pickup_red_wturret_light", ::manage_vehicles_low_road);
-  a_dest = getentarray("destructible", "targetname");
+  a_dest = getEntArray("destructible", "targetname");
 
   foreach(dest in a_dest) {
     if(!isDefined(dest.script_string) && !isDefined("explosion_car1") || isDefined(dest.script_string) && isDefined("explosion_car1") && dest.script_string == "explosion_car1")
@@ -143,7 +143,7 @@ intersection_backtrack_fail() {
 
 init_vehicles() {
   a_vehicles = getvehiclearray();
-  a_destructibles = getentarray("destructible", "targetname");
+  a_destructibles = getEntArray("destructible", "targetname");
   a_vehicles = arraycombine(a_vehicles, a_destructibles, 1, 0);
 
   foreach(veh in a_vehicles) {
@@ -172,7 +172,7 @@ set_aerial_vehicles() {
 
 line_manager() {
   flag_wait("player_reached_intersection");
-  a_volumes = getentarray("goal_volume_intersection", "targetname");
+  a_volumes = getEntArray("goal_volume_intersection", "targetname");
   a_volumes = sort_by_script_int(a_volumes, 1);
   add_spawn_function_group("sp_intersection1", "targetname", ::spawn_func_intersection_fallback_ai);
 
@@ -303,7 +303,7 @@ sam_cougar() {
   e_target = spawn_model("tag_origin");
 
   while(true) {
-    e_target.origin = vh_sam.origin + vectorscale((0, 0, 1), 5000.0) + vectornormalize(anglestoforward(vh_sam.angles)) * 7000 + random_vector(2000);
+    e_target.origin = vh_sam.origin + vectorscale((0, 0, 1), 5000.0) + vectornormalize(anglesToForward(vh_sam.angles)) * 7000 + random_vector(2000);
     vh_sam set_turret_target(e_target, (0, 0, 0), 2);
     vh_sam fire_turret_for_time(2, 2);
     wait 6;
@@ -347,7 +347,7 @@ building_collapse() {
   battlechatter_off("axis");
   level thread harper_knocked_down();
   level.player thread player_knocked_down();
-  level.player playsound("evt_bldg_collapse_end");
+  level.player playSound("evt_bldg_collapse_end");
   setmusicstate("LA_1B_BUILDING_COLLAPSE");
   level.player magic_bullet_shield();
   level notify("stop_sam_cougar");

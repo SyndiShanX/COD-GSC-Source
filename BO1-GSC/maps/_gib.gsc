@@ -220,10 +220,10 @@ gib_player(iDamage, sMeansOfDeath, sWeapon, sHitLoc, vDamageDir, vAttackerOrigin
       if(limb_data["spawn_tags"][i] == "") {
         continue;
       }
-      PlayFxOnTag(level._effect[limb_data["fx"]], self, limb_data["spawn_tags"][i]);
+      playFXOnTag(level._effect[limb_data["fx"]], self, limb_data["spawn_tags"][i]);
     }
   }
-  self PlaySound("chr_death_gibs");
+  self playSound("chr_death_gibs");
   self thread throw_gib(limb_data["spawn_models"], limb_data["spawn_tags"], velocities);
   self setModel(limb_data["body_model"]);
   self Attach(limb_data["legs_model"]);

@@ -16,13 +16,13 @@ enemy_animation_attack(type) {
   //->took out this assert because in rare cases, an enemy is so far away or in such complex geo
   //like af_caves that we can actually lose our enemy in the short time it takes to between getting
   //the "attack" logic and hitting this function....we can just assume, that this guy can do a long animation
-  //assert( isdefined( self.enemy ) );
+  //assert( isDefined( self.enemy ) );
 
   //arbitrary number to say the enemy is far away - if we have one we'll get a real number
   //if we don't, then we can assume he's far away
   dist = 600;
 
-  if(IsDefined(self.enemy))
+  if(isDefined(self.enemy))
     dist = distance(self.enemy.origin, self.origin);
 
   if(dist < 512)
@@ -51,19 +51,20 @@ enemy_animation_generic(type) {
   self.allowdeath = true;
 
   target = level.player;
-  if(isdefined(self.enemy))
+  if(isDefined(self.enemy))
     target = self.enemy;
-  else if(isdefined(self.favoriteenemy))
+  else if(isDefined(self.favoriteenemy))
     target = self.favoriteenemy;
 
   dist = (distance(self.origin, target.origin));
   max = 4;
   range = 1024;
 
-  for (i = 1; i < max; i++) {
+  for(i = 1; i < max; i++) {
     test = range * (i / max);
-    if(dist < test)
+    if(dist < test) {
       break;
+    }
   }
 
   anime = "_stealth_behavior_generic" + i;
@@ -77,9 +78,9 @@ dog_animation_generic(type) {
   anime = undefined;
 
   // check if dog is in melee sequence with player
-  if(isdefined(self.meleeingPlayer)) {
+  if(isDefined(self.meleeingPlayer)) {
     player = self.meleeingPlayer;
-    if(isdefined(player.player_view) && isdefined(player.player_view.dog) && self == player.player_view.dog)
+    if(isDefined(player.player_view) && isDefined(player.player_view.dog) && self == player.player_view.dog)
       return;
   }
 
@@ -151,9 +152,9 @@ dog_animation_howl(type) {
 enemy_animation_foundcorpse(type) {
   self endon("enemy");
 
-  if(isdefined(self.enemy))
+  if(isDefined(self.enemy)) {
     return;
-
+  }
   self.allowdeath = true;
 
   if(self.a.movement == "stop")
@@ -167,9 +168,9 @@ enemy_animation_foundcorpse(type) {
 dog_animation_foundcorpse(type) {
   self endon("enemy");
 
-  if(isdefined(self.enemy))
+  if(isDefined(self.enemy)) {
     return;
-
+  }
   self.allowdeath = true;
 
   anime = "_stealth_dog_find";

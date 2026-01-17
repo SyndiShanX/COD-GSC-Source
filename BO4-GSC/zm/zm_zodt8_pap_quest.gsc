@@ -20,7 +20,6 @@
 #include scripts\zm_common\zm_ui_inventory;
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
-
 #namespace zodt8_pap_quest;
 
 init() {
@@ -206,7 +205,7 @@ function_5c299a0f(player) {
 
   if(level.s_pap_quest.var_be6e6f65 < level.s_pap_quest.var_ac28fc4d) {
     if(isalive(player)) {
-      player util::delay(0.5, "death", &zm_audio::create_and_play_dialog, #"altar", #"activate_generic");
+      player util::delay(0.5, "death", &zm_audio::create_and_play_dialog, # "altar", # "activate_generic");
     }
   } else {
     self.pap_machine function_214cd6b3();
@@ -214,7 +213,7 @@ function_5c299a0f(player) {
     level flag::set("pap_quest_complete");
 
     if(isalive(player)) {
-      player util::delay(2.25, "death", &zm_audio::create_and_play_dialog, #"pap", #"activate");
+      player util::delay(2.25, "death", &zm_audio::create_and_play_dialog, # "pap", # "activate");
     }
 
     return;
@@ -258,16 +257,16 @@ function_668e3f89(e_player) {
     self sethintstring(#"hash_73bbee9df5d3c2b1");
   } else {
     switch (level.s_pap_quest.a_s_locations[level.s_pap_quest.var_4ee2e2ab].prefabname) {
-      case #"stairs_pap_location":
+      case # "stairs_pap_location":
         self sethintstring(#"hash_15783325b3eeefd5");
         break;
-      case #"poop_deck_pap_location":
+      case # "poop_deck_pap_location":
         self sethintstring(#"hash_250613266b9a4223");
         break;
-      case #"engine_room_pap_location":
+      case # "engine_room_pap_location":
         self sethintstring(#"hash_4c5f8e23d8258199");
         break;
-      case #"cargo_pap_location":
+      case # "cargo_pap_location":
         self sethintstring(#"hash_1deb745365a6cfdd");
         break;
       default:
@@ -283,16 +282,16 @@ function_afab6169(e_player) {
   b_result = 0;
 
   if(!(isDefined(e_player zombie_utility::is_player_valid(e_player)) && e_player zombie_utility::is_player_valid(e_player))) {
-    self.hint_string = #"";
+    self.hint_string = # "";
   } else if(isDefined(self.stub.b_used) && self.stub.b_used) {
-    self.hint_string = #"";
+    self.hint_string = # "";
   } else if(level flag::get("pap_quest_complete")) {
-    self.hint_string = #"";
+    self.hint_string = # "";
   } else {
     if(function_8b1a219a()) {
-      self.hint_string = #"hash_36ba40b9e876f572";
+      self.hint_string = # "hash_36ba40b9e876f572";
     } else {
-      self.hint_string = #"hash_15494c7927282ad6";
+      self.hint_string = # "hash_15494c7927282ad6";
     }
 
     b_result = 1;
@@ -326,17 +325,17 @@ function_61748fa3() {
 
   iprintlnbold("<dev string:x38>");
 
-    while(true) {
-      level waittill(#"end_of_round");
+  while(true) {
+    level waittill(#"end_of_round");
 
-      if(zm_utility::is_trials() && level flag::get("round_reset")) {
-        continue;
-      }
-
-      if(level.round_number >= level.var_25e38adf && !zm_utility::is_standard()) {
-        function_306b4f35();
-      }
+    if(zm_utility::is_trials() && level flag::get("round_reset")) {
+      continue;
     }
+
+    if(level.round_number >= level.var_25e38adf && !zm_utility::is_standard()) {
+      function_306b4f35();
+    }
+  }
 }
 
 function_306b4f35(b_initial = 0) {
@@ -462,16 +461,16 @@ function_f7dc54d8() {
 
 pap_chunk_big_rune_on() {
   switch (self.prefabname) {
-    case #"engine_room_pap_location":
+    case # "engine_room_pap_location":
       var_81731c8e = 4;
       break;
-    case #"stairs_pap_location":
+    case # "stairs_pap_location":
       var_81731c8e = 2;
       break;
-    case #"cargo_pap_location":
+    case # "cargo_pap_location":
       var_81731c8e = 5;
       break;
-    case #"poop_deck_pap_location":
+    case # "poop_deck_pap_location":
       var_81731c8e = 3;
       break;
   }
@@ -484,16 +483,16 @@ function_a48b2870() {
     foreach(s_loc in level.s_pap_quest.a_s_locations) {
       if(isDefined(s_loc.unitrigger_stub.pap_machine.var_4a7b80c6) && s_loc.unitrigger_stub.pap_machine.var_4a7b80c6) {
         switch (s_loc.prefabname) {
-          case #"engine_room_pap_location":
+          case # "engine_room_pap_location":
             var_e636ead7 = 1;
             break;
-          case #"stairs_pap_location":
+          case # "stairs_pap_location":
             var_942e881a = 1;
             break;
-          case #"cargo_pap_location":
+          case # "cargo_pap_location":
             var_6a69b27 = 1;
             break;
-          case #"poop_deck_pap_location":
+          case # "poop_deck_pap_location":
             var_2380391d = 1;
             break;
         }
@@ -549,16 +548,16 @@ function_a48b2870() {
     }
   } else if(isDefined(level.pap_machine) && !(isDefined(level.var_a5340531) && level.var_a5340531) && !(isDefined(level.var_a8626e72) && level.var_a8626e72)) {
     switch (level.pap_machine.prefabname) {
-      case #"engine_room_pap_location":
+      case # "engine_room_pap_location":
         var_81731c8e = 13;
         break;
-      case #"stairs_pap_location":
+      case # "stairs_pap_location":
         var_81731c8e = 2;
         break;
-      case #"cargo_pap_location":
+      case # "cargo_pap_location":
         var_81731c8e = 15;
         break;
-      case #"poop_deck_pap_location":
+      case # "poop_deck_pap_location":
         var_81731c8e = 9;
         break;
     }
@@ -573,16 +572,16 @@ function_a48b2870() {
 
 pap_machine_rune_on() {
   switch (self.prefabname) {
-    case #"engine_room_pap_location":
+    case # "engine_room_pap_location":
       var_81731c8e = 4;
       break;
-    case #"stairs_pap_location":
+    case # "stairs_pap_location":
       var_81731c8e = 2;
       break;
-    case #"cargo_pap_location":
+    case # "cargo_pap_location":
       var_81731c8e = 5;
       break;
-    case #"poop_deck_pap_location":
+    case # "poop_deck_pap_location":
       var_81731c8e = 3;
       break;
   }
@@ -653,4 +652,3 @@ function_4944c76f() {
     waitframe(1);
   }
 }
-

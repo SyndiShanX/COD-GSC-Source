@@ -14,7 +14,7 @@
 #namespace antipersonnel_guidance;
 
 function autoexec __init__sytem__() {
-  system::register("antipersonnel_guidance", & __init__, undefined, undefined);
+  system::register("antipersonnel_guidance", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -31,9 +31,9 @@ function player_init() {
 }
 
 function watch_lockon(localclientnum) {
-  while (true) {
+  while(true) {
     self waittill("lockon_changed", state, target);
-    if(isdefined(self.replay_lock) && (!isdefined(target) || self.replay_lock != target)) {
+    if(isDefined(self.replay_lock) && (!isDefined(target) || self.replay_lock != target)) {
       self.ap_lock duplicate_render::change_dr_flags(localclientnum, undefined, "ap_locked");
       self.ap_lock = undefined;
     }

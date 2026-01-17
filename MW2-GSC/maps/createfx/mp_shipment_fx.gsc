@@ -126,5 +126,4 @@ main() {
   ent.v["angles"] = (270, 0, 0);
   ent.v["fxid"] = "mist_hunted_fav";
   ent.v["delay"] = -15;
-
 }

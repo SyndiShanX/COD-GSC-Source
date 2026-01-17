@@ -35,9 +35,9 @@ playflarefx(localclientnum) {
   level endon("player_switch");
 
   if(friendnotfoe(localclientnum))
-    fx_handle = playfxontag(localclientnum, level._effect["satchel_charge_friendly_light"], self, "tag_origin");
+    fx_handle = playFXOnTag(localclientnum, level._effect["satchel_charge_friendly_light"], self, "tag_origin");
   else
-    fx_handle = playfxontag(localclientnum, level._effect["satchel_charge_enemy_light"], self, "tag_origin");
+    fx_handle = playFXOnTag(localclientnum, level._effect["satchel_charge_enemy_light"], self, "tag_origin");
 
   self thread watchsatchelchargeshutdown(localclientnum, fx_handle);
   return fx_handle;

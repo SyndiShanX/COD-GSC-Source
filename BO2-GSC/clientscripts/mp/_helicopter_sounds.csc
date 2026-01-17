@@ -52,7 +52,7 @@ init_heli_sound_values(heli_type, part_type, max_speed_vol, min_vol, max_vol, ma
     level.helisoundvalues[heli_type] = [];
 
   if(!isDefined(level.helisoundvalues[heli_type][part_type]))
-    level.helisoundvalues[heli_type][part_type] = spawnstruct();
+    level.helisoundvalues[heli_type][part_type] = spawnStruct();
 
   level.helisoundvalues[heli_type][part_type].speedvolumemax = max_speed_vol;
   level.helisoundvalues[heli_type][part_type].speedpitchmax = max_speed_pitch;
@@ -207,7 +207,7 @@ sound_linkto(parent, tag) {
 }
 
 setup_heli_sounds(bone_location, type, tag, run, dmg1, dmg2, dmg3) {
-  self.heli[bone_location] = spawnstruct();
+  self.heli[bone_location] = spawnStruct();
   self.heli[bone_location].sound_type = type;
   self.heli[bone_location].run = spawn(0, self.origin, "script_origin");
   self.heli[bone_location].run sound_linkto(self, tag);
@@ -342,7 +342,7 @@ heli_linkto_sound_ents_delete(localclientnum, entity) {
 heli_sound_play(heli_bone) {
   switch (heli_bone.sound_type) {
     case "engine":
-      heli_bone.run playloopsound(heli_bone.run.alias, 2);
+      heli_bone.run playLoopSound(heli_bone.run.alias, 2);
       break;
     case "wind":
       break;
@@ -400,7 +400,7 @@ play_heli_guard_sounds() {
 heli_idle_run_transition(heli_type, heli_part, wait_time, updown) {
   self endon("entityshutdown");
   heli_bone = self.heli[heli_part];
-  run_id = heli_bone.run playloopsound(heli_bone.run.alias, 0.5);
+  run_id = heli_bone.run playLoopSound(heli_bone.run.alias, 0.5);
 
   if(!isDefined(wait_time))
     wait_time = 0.5;
@@ -506,7 +506,7 @@ terrain_trace_brass() {
         continue;
       }
       pre_trace_real_ent stoploopsound(0.5);
-      trace_real_ent playloopsound(trace_real_ent.alias, 0.75);
+      trace_real_ent playLoopSound(trace_real_ent.alias, 0.75);
     }
   }
 }
@@ -564,7 +564,7 @@ terrain_trace() {
         continue;
       }
       pre_trace_real_ent stoploopsound(0.5);
-      trace_real_ent playloopsound(trace_real_ent.alias, 0.5);
+      trace_real_ent playLoopSound(trace_real_ent.alias, 0.5);
     }
   }
 }
@@ -605,7 +605,7 @@ aircraft_dustkick(localclientnum) {
 
     if(dotracethisframe <= 0) {
       dotracethisframe = numframespertrace;
-      trace = bullettrace(trace_ent.origin, trace_ent.origin - vectorscale((0, 0, 1), 100000.0), 0, trace_ent);
+      trace = bulletTrace(trace_ent.origin, trace_ent.origin - vectorscale((0, 0, 1), 100000.0), 0, trace_ent);
       d = distance(trace_ent.origin, trace["position"]);
       repeatrate = (d - minheight) / (maxheight - minheight) * (slowestrepeatwait - fastestrepeatwait) + fastestrepeatwait;
     }
@@ -643,7 +643,7 @@ aircraft_dustkick(localclientnum) {
     }
 
     if(isDefined(self.treadfx[trace["surfacetype"]]))
-      playfx(localclientnum, self.treadfx[trace["surfacetype"]], trace["position"]);
+      playFX(localclientnum, self.treadfx[trace["surfacetype"]], trace["position"]);
   }
 }
 
@@ -651,7 +651,7 @@ play_targeting_sound(play, sound, handle) {
   sound_ent = get_lock_sound_ent();
 
   if(play)
-    return sound_ent playloopsound(sound);
+    return sound_ent playLoopSound(sound);
   else if(isDefined(handle)) {
     sound_ent stoploopsound(0.1);
     return undefined;
@@ -674,7 +674,7 @@ play_leaving_battlefield_alarm(play) {
   sound_ent = get_leaving_sound_ent();
 
   if(play)
-    self.leavingbattlefieldsound = sound_ent playloopsound("veh_helicopter_alarm");
+    self.leavingbattlefieldsound = sound_ent playLoopSound("veh_helicopter_alarm");
   else if(isDefined(self.leavingbattlefieldsound) && self.leavingbattlefieldsound)
     sound_ent stoploopsound(0.1);
 }
@@ -720,11 +720,11 @@ drone_up_down_transition() {
   qr_ent_down thread qr_ent_cleanup(self);
   qr_ent_either thread qr_ent_cleanup(self);
   self.qrdrone_z_difference = 0;
-  down = qr_ent_down playloopsound("veh_qrdrone_move_down");
+  down = qr_ent_down playLoopSound("veh_qrdrone_move_down");
   qr_ent_down setloopstate("veh_qrdrone_move_down", 0, 0);
-  up = qr_ent_up playloopsound("veh_qrdrone_move_up");
+  up = qr_ent_up playLoopSound("veh_qrdrone_move_up");
   qr_ent_up setloopstate("veh_qrdrone_move_up", 0, 0);
-  either = qr_ent_either playloopsound("veh_qrdrone_vertical");
+  either = qr_ent_either playLoopSound("veh_qrdrone_vertical");
   qr_ent_either setloopstate("veh_qrdrone_vertical", 0, 0);
   tag = "tag_body";
   qr_ent_up linkto(self, tag);
@@ -769,7 +769,7 @@ drone_rotate_angle(heli_type, heli_part) {
   volumerate = 2.5;
   qr_ent_angle = spawn(0, self.origin, "script_origin");
   qr_ent_angle thread qr_ent_cleanup(self);
-  angle = qr_ent_angle playloopsound("veh_qrdrone_idle_rotate");
+  angle = qr_ent_angle playLoopSound("veh_qrdrone_idle_rotate");
   setsoundvolume(angle, 0);
   tag = "tag_body";
   qr_ent_angle linkto(self, tag);
@@ -792,7 +792,7 @@ drone_button_watch() {
 
   while(true) {
     if(abs(self.qrdrone_z_difference) > 5 && return_to_zero) {
-      self playsound(0, "veh_qrdrone_move_start");
+      self playSound(0, "veh_qrdrone_move_start");
       return_to_zero = 0;
     } else if(abs(self.qrdrone_z_difference) < 5 && !return_to_zero)
       return_to_zero = 1;

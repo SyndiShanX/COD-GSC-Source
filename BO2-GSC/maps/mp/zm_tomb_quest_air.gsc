@@ -32,7 +32,7 @@ main() {
 }
 
 air_puzzle_1_init() {
-  level.a_ceiling_rings = getentarray("ceiling_ring", "script_noteworthy");
+  level.a_ceiling_rings = getEntArray("ceiling_ring", "script_noteworthy");
 
   foreach(e_ring in level.a_ceiling_rings)
   e_ring ceiling_ring_init();
@@ -75,7 +75,7 @@ ceiling_ring_randomize() {
 ceiling_ring_update_position() {
   new_angles = (self.angles[0], self.position * 90, self.angles[2]);
   self rotateto(new_angles, 0.5, 0.2, 0.2);
-  self playsound("zmb_squest_wind_ring_turn");
+  self playSound("zmb_squest_wind_ring_turn");
   self waittill("rotatedone");
 }
 
@@ -100,7 +100,7 @@ ceiling_ring_init() {
 
 ceiling_ring_run() {
   level endon("air_puzzle_1_complete");
-  self setcandamage(1);
+  self setCanDamage(1);
   self.position = 0;
   ceiling_ring_randomize();
   n_rotations = 0;
@@ -165,10 +165,10 @@ air_puzzle_2_run() {
 air_puzzle_smoke() {
   self.e_fx = spawn("script_model", self.origin);
   self.e_fx.angles = self.angles;
-  self.e_fx setmodel("tag_origin");
-  self.e_fx playloopsound("zmb_squest_wind_incense_loop", 2);
+  self.e_fx setModel("tag_origin");
+  self.e_fx playLoopSound("zmb_squest_wind_incense_loop", 2);
   s_dest = getstruct("puzzle_smoke_dest", "targetname");
-  playfxontag(level._effect["air_puzzle_smoke"], self.e_fx, "tag_origin");
+  playFXOnTag(level._effect["air_puzzle_smoke"], self.e_fx, "tag_origin");
   self thread air_puzzle_run_smoke_direction();
   flag_wait("air_puzzle_2_complete");
   self.e_fx movez(-1000, 1.0, 0.1, 0.1);
@@ -185,7 +185,7 @@ air_puzzle_run_smoke_direction() {
   v_to_dest = vectornormalize(s_dest.origin - self.origin);
   f_min_dot = cos(self.script_int);
   self.solved = 0;
-  self.detector_brush setcandamage(1);
+  self.detector_brush setCanDamage(1);
   direction_failures = 0;
 
   while(true) {

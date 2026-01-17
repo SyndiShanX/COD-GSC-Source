@@ -15,16 +15,16 @@
 #namespace _gadget_hero_weapon;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_hero_weapon", & __init__, undefined, undefined);
+  system::register("gadget_hero_weapon", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  ability_player::register_gadget_activation_callbacks(14, & gadget_hero_weapon_on_activate, & gadget_hero_weapon_on_off);
-  ability_player::register_gadget_possession_callbacks(14, & gadget_hero_weapon_on_give, & gadget_hero_weapon_on_take);
-  ability_player::register_gadget_flicker_callbacks(14, & gadget_hero_weapon_on_flicker);
-  ability_player::register_gadget_is_inuse_callbacks(14, & gadget_hero_weapon_is_inuse);
-  ability_player::register_gadget_is_flickering_callbacks(14, & gadget_hero_weapon_is_flickering);
-  ability_player::register_gadget_ready_callbacks(14, & gadget_hero_weapon_ready);
+  ability_player::register_gadget_activation_callbacks(14, &gadget_hero_weapon_on_activate, &gadget_hero_weapon_on_off);
+  ability_player::register_gadget_possession_callbacks(14, &gadget_hero_weapon_on_give, &gadget_hero_weapon_on_take);
+  ability_player::register_gadget_flicker_callbacks(14, &gadget_hero_weapon_on_flicker);
+  ability_player::register_gadget_is_inuse_callbacks(14, &gadget_hero_weapon_is_inuse);
+  ability_player::register_gadget_is_flickering_callbacks(14, &gadget_hero_weapon_is_flickering);
+  ability_player::register_gadget_ready_callbacks(14, &gadget_hero_weapon_ready);
 }
 
 function gadget_hero_weapon_is_inuse(slot) {
@@ -38,10 +38,10 @@ function gadget_hero_weapon_is_flickering(slot) {
 function gadget_hero_weapon_on_flicker(slot, weapon) {}
 
 function gadget_hero_weapon_on_give(slot, weapon) {
-  if(!isdefined(self.pers["held_hero_weapon_ammo_count"])) {
+  if(!isDefined(self.pers["held_hero_weapon_ammo_count"])) {
     self.pers["held_hero_weapon_ammo_count"] = [];
   }
-  if(weapon.gadget_power_consume_on_ammo_use || !isdefined(self.pers["held_hero_weapon_ammo_count"][weapon])) {
+  if(weapon.gadget_power_consume_on_ammo_use || !isDefined(self.pers["held_hero_weapon_ammo_count"][weapon])) {
     self.pers["held_hero_weapon_ammo_count"][weapon] = 0;
   }
   self setweaponammoclip(weapon, self.pers["held_hero_weapon_ammo_count"][weapon]);
@@ -123,7 +123,7 @@ function hero_wait_for_out_of_ammo(slot, weapon) {
   self endon("death");
   self notify("hero_noammo");
   self endon("hero_noammo");
-  while (true) {
+  while(true) {
     wait(0.1);
     n_ammo = self getammocount(weapon);
     if(n_ammo == 0) {
@@ -136,7 +136,7 @@ function hero_wait_for_out_of_ammo(slot, weapon) {
 
 function set_gadget_hero_weapon_status(weapon, status, time) {
   timestr = "";
-  if(isdefined(time)) {
+  if(isDefined(time)) {
     timestr = (("^3") + ", time: ") + time;
   }
   if(getdvarint("scr_cpower_debug_prints") > 0) {

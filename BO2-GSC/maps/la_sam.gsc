@@ -221,7 +221,7 @@ on_hillary_death(m_hillary) {
     level.hillary stop_magic_bullet_shield();
     level.sam stop_magic_bullet_shield();
     wait 1.0;
-    playfx(level._effect["sam_drone_explode"], level.player.origin - vectorscale((0, 0, 1), 3.0), (0, 0, 1));
+    playFX(level._effect["sam_drone_explode"], level.player.origin - vectorscale((0, 0, 1), 3.0), (0, 0, 1));
     playsoundatposition("exp_mortar", level.player.origin);
     wait 0.5;
 
@@ -306,8 +306,7 @@ play_explosion_on_cougar_climb() {
   earthquake(0.5, 2, sam_explosion_struct.origin, 1000);
 }
 
-play_stylized_impact_audio() {
-}
+play_stylized_impact_audio() {}
 
 drone_explode_impact(m_fxanim_drone) {
   earthquake(0.8, 0.8, level.player.origin, 200);
@@ -383,15 +382,15 @@ cougar_crawl_squibs() {
   squib_orgs = get_struct_array("cougar_crawl_squib_structs");
 
   foreach(s_squib in squib_orgs) {
-    v_fx_org = s_squib.origin + -1 * anglestoforward(s_squib.angles) * 800;
+    v_fx_org = s_squib.origin + -1 * anglesToForward(s_squib.angles) * 800;
     s_squib.m_fx_tag = spawn_model("tag_origin", v_fx_org, s_squib.angles);
   }
 
   while(true) {
     s_squib = random(squib_orgs);
     fx = getfx("squibs_" + s_squib.script_string);
-    playfxontag(fx, s_squib.m_fx_tag, "tag_origin");
-    s_squib.m_fx_tag playsound("prj_squib_impact_" + s_squib.script_string);
+    playFXOnTag(fx, s_squib.m_fx_tag, "tag_origin");
+    s_squib.m_fx_tag playSound("prj_squib_impact_" + s_squib.script_string);
     wait(randomfloatrange(0.2, 1));
   }
 }
@@ -400,7 +399,7 @@ triggered_cougar_crawl_squib_structs() {
   squib_orgs = get_struct_array("triggered_cougar_crawl_squib_structs", "script_noteworthy");
 
   foreach(s_squib in squib_orgs) {
-    v_fx_org = s_squib.origin + -1 * anglestoforward(s_squib.angles) * 800;
+    v_fx_org = s_squib.origin + -1 * anglesToForward(s_squib.angles) * 800;
     s_squib.m_fx_tag = spawn_model("tag_origin", v_fx_org, s_squib.angles);
     s_squib thread do_triggered_cougar_crawl_squib_struct();
   }
@@ -409,8 +408,8 @@ triggered_cougar_crawl_squib_structs() {
 do_triggered_cougar_crawl_squib_struct() {
   trigger_wait(self.targetname, "target");
   fx = getfx("squibs_" + self.script_string);
-  playfxontag(fx, self.m_fx_tag, "tag_origin");
-  self.m_fx_tag playsound("prj_squib_impact_" + self.script_string);
+  playFXOnTag(fx, self.m_fx_tag, "tag_origin");
+  self.m_fx_tag playSound("prj_squib_impact_" + self.script_string);
 }
 
 after_attack_explosion_launch_drone_1() {
@@ -482,7 +481,7 @@ get_on_sam() {
 }
 
 sam_turret_instructions() {
-  screen_message_create(&"LA_SHARED_SAM_TURRET_LOCK", & "LA_SHARED_SAM_TURRET_FIRE");
+  screen_message_create(&"LA_SHARED_SAM_TURRET_LOCK", &"LA_SHARED_SAM_TURRET_FIRE");
   level._screen_message_1.hidewheninmenu = 0;
   level._screen_message_2.hidewheninmenu = 0;
   wait 4;
@@ -765,7 +764,7 @@ sam_nag_vo(str_ender) {
     a_nag_offscreen = array("come_around_90_deg_009", "watch_your_flank_008");
 
     while(true) {
-      a_drones = getentarray("sam_drone", "targetname");
+      a_drones = getEntArray("sam_drone", "targetname");
 
       if(level.player.missileturrettargetlist.size) {
         a_nag_fire = array_randomize(a_nag_fire);
@@ -814,7 +813,7 @@ drone_sam_attack() {
     random(a_drones) thread debug_speed();
 
     if(i == 6) {
-      a_drones = getentarray("sam_drone", "targetname");
+      a_drones = getEntArray("sam_drone", "targetname");
       array_wait(a_drones, "death");
     } else
       array_wait(a_drones, "death", 8.5);
@@ -822,7 +821,7 @@ drone_sam_attack() {
     if(level.n_drone_wave == 5)
       flag_set("start_sam_end_vo");
 
-    playfx(level._effect["sam_drone_explode_shockwave"], level.player.origin, anglestoforward(flat_angle(level.sam_cougar gettagangles("tag_gunner_barrel2"))), (0, 0, 1));
+    playFX(level._effect["sam_drone_explode_shockwave"], level.player.origin, anglesToForward(flat_angle(level.sam_cougar gettagangles("tag_gunner_barrel2"))), (0, 0, 1));
     level notify("good_shot");
     level thread delete_sam_drone_corpses(a_drones);
   }
@@ -918,7 +917,7 @@ sam_wave_vo(v_player_angle, n_spawn_yaw) {
 
 get_sam_forward() {
   v_angles = self gettagangles("tag_gunner_barrel2");
-  v_forward = anglestoforward(flat_angle(v_angles));
+  v_forward = anglesToForward(flat_angle(v_angles));
   return v_forward;
 }
 
@@ -979,7 +978,7 @@ drone_evade() {
   yaw = angleclamp180(angles[1]);
   pitch = pitch + randomintrange(-15, 15);
   yaw = yaw + randomintrange(-5, 5);
-  dir = anglestoforward((pitch, yaw, 0));
+  dir = anglesToForward((pitch, yaw, 0));
   goal_pos = self.origin + dir * 5000;
   self setvehgoalpos(goal_pos, 0);
 }
@@ -991,7 +990,7 @@ plane_fire_weapons() {
   while(!facing_player) {
     vec_to_target = level.player.origin - self.origin;
     vec_to_target = vectornormalize(vec_to_target);
-    forward = anglestoforward(self.angles);
+    forward = anglesToForward(self.angles);
 
     if(vectordot(forward, vec_to_target) > 0.9)
       facing_player = 1;
@@ -1017,6 +1016,6 @@ sam_fired_listener() {
   while(!flag("sam_complete")) {
     self waittill("missileTurret_fired");
     level.n_sam_missiles_fired++;
-    level.player playsound("wpn_sam_turret_reload");
+    level.player playSound("wpn_sam_turret_reload");
   }
 }

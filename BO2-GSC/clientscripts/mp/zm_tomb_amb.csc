@@ -98,7 +98,7 @@ sndupdateambienttrigger(name, is_default, reverb, context, inorout) {
 }
 
 sndweathersetup() {
-  level.sndweather = spawnstruct();
+  level.sndweather = spawnStruct();
   level.sndweather.israin = 0;
   level.sndweather.issnow = 0;
 }
@@ -118,7 +118,7 @@ sndambientcontextonplayer(room, player) {
 }
 
 sndcapturezonetrigs() {
-  trigs = getentarray(0, "sndCaptureZone", "targetname");
+  trigs = getEntArray(0, "sndCaptureZone", "targetname");
 
   if(isDefined(trigs)) {
     foreach(trig in trigs) {
@@ -163,12 +163,12 @@ sndcapturezonetrig_player(player) {
 }
 
 sndcapturezonetrig_activate() {
-  playsound(0, "zmb_zone_plate_down", self.origin);
-  self playloopsound("zmb_zone_plate_loop", 2);
+  playSound(0, "zmb_zone_plate_down", self.origin);
+  self playLoopSound("zmb_zone_plate_loop", 2);
   self waittill("zone_deactivate");
   self.active = 0;
   self stoploopsound(1);
-  playsound(0, "zmb_zone_plate_up", self.origin);
+  playSound(0, "zmb_zone_plate_up", self.origin);
 }
 
 sndcapturezonetrig_deactivate() {
@@ -227,7 +227,7 @@ snd_start_autofx_audio() {
 
 flyovers() {
   while(true) {
-    playsound(0, "amb_flyover", (0, 0, 0));
+    playSound(0, "amb_flyover", (0, 0, 0));
     wait(randomintrange(2, 8));
   }
 }
@@ -250,7 +250,7 @@ sndactivatemudloop() {
     self.sndwadeent linkto(self, "tag_origin");
   }
 
-  self.sndwadeent playloopsound("zmb_tomb_slowed_movement_loop", 1);
+  self.sndwadeent playLoopSound("zmb_tomb_slowed_movement_loop", 1);
 
   while(true) {
     if(!isDefined(self)) {
@@ -286,7 +286,7 @@ init_heli_sound_values(heli_type, part_type, max_speed_vol, min_vol, max_vol, ma
     level.helisoundvalues[heli_type] = [];
 
   if(!isDefined(level.helisoundvalues[heli_type][part_type]))
-    level.helisoundvalues[heli_type][part_type] = spawnstruct();
+    level.helisoundvalues[heli_type][part_type] = spawnStruct();
 
   level.helisoundvalues[heli_type][part_type].speedvolumemax = max_speed_vol;
   level.helisoundvalues[heli_type][part_type].speedpitchmax = max_speed_pitch;
@@ -401,7 +401,7 @@ sound_linkto(parent, tag) {
 }
 
 setup_heli_sounds(bone_location, type, tag, run, dmg1, dmg2, dmg3) {
-  self.heli[bone_location] = spawnstruct();
+  self.heli[bone_location] = spawnStruct();
   self.heli[bone_location].sound_type = type;
   self.heli[bone_location].run = spawn(0, self.origin, "script_origin");
   self.heli[bone_location].run sound_linkto(self, tag);
@@ -458,7 +458,7 @@ heli_linkto_sound_ents_delete(localclientnum, entity) {
 heli_sound_play(heli_bone) {
   switch (heli_bone.sound_type) {
     case "engine":
-      heli_bone.run playloopsound(heli_bone.run.alias, 2);
+      heli_bone.run playLoopSound(heli_bone.run.alias, 2);
       break;
     case "wind":
       break;
@@ -480,7 +480,7 @@ play_player_drone_sounds() {
 heli_idle_run_transition(heli_type, heli_part, wait_time, updown) {
   self endon("entityshutdown");
   heli_bone = self.heli[heli_part];
-  run_id = heli_bone.run playloopsound(heli_bone.run.alias, 0.5);
+  run_id = heli_bone.run playLoopSound(heli_bone.run.alias, 0.5);
 
   if(!isDefined(wait_time))
     wait_time = 0.5;
@@ -568,11 +568,11 @@ drone_up_down_transition() {
   qr_ent_down thread qr_ent_cleanup(self);
   qr_ent_either thread qr_ent_cleanup(self);
   self.qrdrone_z_difference = 0;
-  down = qr_ent_down playloopsound("veh_qrdrone_move_down");
+  down = qr_ent_down playLoopSound("veh_qrdrone_move_down");
   qr_ent_down setloopstate("veh_qrdrone_move_down", 0, 0);
-  up = qr_ent_up playloopsound("veh_qrdrone_move_up");
+  up = qr_ent_up playLoopSound("veh_qrdrone_move_up");
   qr_ent_up setloopstate("veh_qrdrone_move_up", 0, 0);
-  either = qr_ent_either playloopsound("veh_qrdrone_vertical");
+  either = qr_ent_either playLoopSound("veh_qrdrone_vertical");
   qr_ent_either setloopstate("veh_qrdrone_vertical", 0, 0);
   tag = "tag_body";
   qr_ent_up linkto(self, tag);
@@ -617,7 +617,7 @@ drone_rotate_angle(heli_type, heli_part) {
   volumerate = 2.5;
   qr_ent_angle = spawn(0, self.origin, "script_origin");
   qr_ent_angle thread qr_ent_cleanup(self);
-  angle = qr_ent_angle playloopsound("veh_qrdrone_idle_rotate");
+  angle = qr_ent_angle playLoopSound("veh_qrdrone_idle_rotate");
   setsoundvolume(angle, 0);
   tag = "tag_body";
   qr_ent_angle linkto(self, tag);
@@ -640,7 +640,7 @@ drone_button_watch() {
 
   while(true) {
     if(abs(self.qrdrone_z_difference) > 5 && return_to_zero) {
-      self playsound(0, "veh_qrdrone_move_start");
+      self playSound(0, "veh_qrdrone_move_start");
       return_to_zero = 0;
     } else if(abs(self.qrdrone_z_difference) < 5 && !return_to_zero)
       return_to_zero = 1;
@@ -650,117 +650,117 @@ drone_button_watch() {
 }
 
 snd_shake_hvy() {
-  playsound(0, "amb_interior_shake_hvy", (2725, 5338, -244));
+  playSound(0, "amb_interior_shake_hvy", (2725, 5338, -244));
   wait 0.05;
-  playsound(0, "amb_interior_shake_hvy", (1756, 4124, -244));
+  playSound(0, "amb_interior_shake_hvy", (1756, 4124, -244));
   wait 0.05;
-  playsound(0, "amb_interior_shake_hvy", (1262, 3917, -213));
+  playSound(0, "amb_interior_shake_hvy", (1262, 3917, -213));
   wait 0.05;
-  playsound(0, "amb_interior_shake_hvy", (-262, 4168, -250));
+  playSound(0, "amb_interior_shake_hvy", (-262, 4168, -250));
   wait 0.05;
-  playsound(0, "amb_interior_shake_hvy", (1078, 4207, -224));
+  playSound(0, "amb_interior_shake_hvy", (1078, 4207, -224));
   wait 0.05;
-  playsound(0, "amb_interior_shake_hvy", (1309, 2871, -114));
+  playSound(0, "amb_interior_shake_hvy", (1309, 2871, -114));
   wait 0.05;
-  playsound(0, "amb_interior_shake_hvy", (452, 3472, -194));
+  playSound(0, "amb_interior_shake_hvy", (452, 3472, -194));
   wait 0.05;
-  playsound(0, "amb_interior_shake_hvy", (-686, 3432, -181));
+  playSound(0, "amb_interior_shake_hvy", (-686, 3432, -181));
   wait 0.05;
-  playsound(0, "amb_interior_shake_hvy", (-944, 2939, -142));
+  playSound(0, "amb_interior_shake_hvy", (-944, 2939, -142));
   wait 0.05;
-  playsound(0, "amb_interior_shake_hvy", (-416, 2967, -140));
+  playSound(0, "amb_interior_shake_hvy", (-416, 2967, -140));
   wait 0.05;
-  playsound(0, "amb_interior_shake_hvy", (-477, 2452, -143));
+  playSound(0, "amb_interior_shake_hvy", (-477, 2452, -143));
   wait 0.05;
-  playsound(0, "amb_interior_shake_hvy", (-906, 2391, -141));
+  playSound(0, "amb_interior_shake_hvy", (-906, 2391, -141));
   wait 0.05;
-  playsound(0, "amb_interior_shake_hvy", (-751, 2668, -8));
+  playSound(0, "amb_interior_shake_hvy", (-751, 2668, -8));
   wait 0.05;
-  playsound(0, "amb_interior_shake_hvy", (-1, 23, 300));
+  playSound(0, "amb_interior_shake_hvy", (-1, 23, 300));
   wait 0.05;
-  playsound(0, "amb_interior_shake_hvy", (701, 2693, -142));
+  playSound(0, "amb_interior_shake_hvy", (701, 2693, -142));
   wait 0.05;
-  playsound(0, "amb_interior_shake_hvy", (2181, 4785, -182));
+  playSound(0, "amb_interior_shake_hvy", (2181, 4785, -182));
   wait 0.05;
-  playsound(0, "amb_interior_shake_hvy", (1701, 3312, -163));
+  playSound(0, "amb_interior_shake_hvy", (1701, 3312, -163));
   wait 0.05;
-  playsound(0, "amb_interior_shake_hvy", (-2575, 165, 214));
+  playSound(0, "amb_interior_shake_hvy", (-2575, 165, 214));
 }
 
 snd_shake_med() {
-  playsound(0, "amb_interior_shake_med", (2725, 5338, -244));
+  playSound(0, "amb_interior_shake_med", (2725, 5338, -244));
   wait 0.05;
-  playsound(0, "amb_interior_shake_med", (1756, 4124, -244));
+  playSound(0, "amb_interior_shake_med", (1756, 4124, -244));
   wait 0.05;
-  playsound(0, "amb_interior_shake_med", (1262, 3917, -213));
+  playSound(0, "amb_interior_shake_med", (1262, 3917, -213));
   wait 0.05;
-  playsound(0, "amb_interior_shake_med", (-262, 4168, -250));
+  playSound(0, "amb_interior_shake_med", (-262, 4168, -250));
   wait 0.05;
-  playsound(0, "amb_interior_shake_med", (1078, 4207, -224));
+  playSound(0, "amb_interior_shake_med", (1078, 4207, -224));
   wait 0.05;
-  playsound(0, "amb_interior_shake_med", (1309, 2871, -114));
+  playSound(0, "amb_interior_shake_med", (1309, 2871, -114));
   wait 0.05;
-  playsound(0, "amb_interior_shake_med", (452, 3472, -194));
+  playSound(0, "amb_interior_shake_med", (452, 3472, -194));
   wait 0.05;
-  playsound(0, "amb_interior_shake_med", (-686, 3432, -181));
+  playSound(0, "amb_interior_shake_med", (-686, 3432, -181));
   wait 0.05;
-  playsound(0, "amb_interior_shake_med", (-944, 2939, -142));
+  playSound(0, "amb_interior_shake_med", (-944, 2939, -142));
   wait 0.05;
-  playsound(0, "amb_interior_shake_med", (-416, 2967, -140));
+  playSound(0, "amb_interior_shake_med", (-416, 2967, -140));
   wait 0.05;
-  playsound(0, "amb_interior_shake_med", (-477, 2452, -143));
+  playSound(0, "amb_interior_shake_med", (-477, 2452, -143));
   wait 0.05;
-  playsound(0, "amb_interior_shake_med", (-906, 2391, -141));
+  playSound(0, "amb_interior_shake_med", (-906, 2391, -141));
   wait 0.05;
-  playsound(0, "amb_interior_shake_med", (-751, 2668, -8));
+  playSound(0, "amb_interior_shake_med", (-751, 2668, -8));
   wait 0.05;
-  playsound(0, "amb_interior_shake_med", (-1, 23, 300));
+  playSound(0, "amb_interior_shake_med", (-1, 23, 300));
   wait 0.05;
-  playsound(0, "amb_interior_shake_med", (701, 2693, -142));
+  playSound(0, "amb_interior_shake_med", (701, 2693, -142));
   wait 0.05;
-  playsound(0, "amb_interior_shake_med", (2181, 4785, -182));
+  playSound(0, "amb_interior_shake_med", (2181, 4785, -182));
   wait 0.05;
-  playsound(0, "amb_interior_shake_med", (1701, 3312, -163));
+  playSound(0, "amb_interior_shake_med", (1701, 3312, -163));
   wait 0.05;
-  playsound(0, "amb_interior_shake_med", (-2575, 165, 214));
+  playSound(0, "amb_interior_shake_med", (-2575, 165, 214));
 }
 
 snd_shake_lgt() {
-  playsound(0, "amb_interior_shake_lgt", (2725, 5338, -244));
+  playSound(0, "amb_interior_shake_lgt", (2725, 5338, -244));
   wait 0.05;
-  playsound(0, "amb_interior_shake_lgt", (1756, 4124, -244));
+  playSound(0, "amb_interior_shake_lgt", (1756, 4124, -244));
   wait 0.05;
-  playsound(0, "amb_interior_shake_lgt", (1262, 3917, -213));
+  playSound(0, "amb_interior_shake_lgt", (1262, 3917, -213));
   wait 0.05;
-  playsound(0, "amb_interior_shake_lgt", (-262, 4168, -250));
+  playSound(0, "amb_interior_shake_lgt", (-262, 4168, -250));
   wait 0.05;
-  playsound(0, "amb_interior_shake_lgt", (1078, 4207, -224));
+  playSound(0, "amb_interior_shake_lgt", (1078, 4207, -224));
   wait 0.05;
-  playsound(0, "amb_interior_shake_lgt", (1309, 2871, -114));
+  playSound(0, "amb_interior_shake_lgt", (1309, 2871, -114));
   wait 0.05;
-  playsound(0, "amb_interior_shake_lgt", (452, 3472, -194));
+  playSound(0, "amb_interior_shake_lgt", (452, 3472, -194));
   wait 0.05;
-  playsound(0, "amb_interior_shake_lgt", (-686, 3432, -181));
+  playSound(0, "amb_interior_shake_lgt", (-686, 3432, -181));
   wait 0.05;
-  playsound(0, "amb_interior_shake_lgt", (-944, 2939, -142));
+  playSound(0, "amb_interior_shake_lgt", (-944, 2939, -142));
   wait 0.05;
-  playsound(0, "amb_interior_shake_lgt", (-416, 2967, -140));
+  playSound(0, "amb_interior_shake_lgt", (-416, 2967, -140));
   wait 0.05;
-  playsound(0, "amb_interior_shake_lgt", (-477, 2452, -143));
+  playSound(0, "amb_interior_shake_lgt", (-477, 2452, -143));
   wait 0.05;
-  playsound(0, "amb_interior_shake_lgt", (-906, 2391, -141));
+  playSound(0, "amb_interior_shake_lgt", (-906, 2391, -141));
   wait 0.05;
-  playsound(0, "amb_interior_shake_lgt", (-751, 2668, -8));
+  playSound(0, "amb_interior_shake_lgt", (-751, 2668, -8));
   wait 0.05;
-  playsound(0, "amb_interior_shake_lgt", (-1, 23, 300));
+  playSound(0, "amb_interior_shake_lgt", (-1, 23, 300));
   wait 0.05;
-  playsound(0, "amb_interior_shake_lgt", (701, 2693, -142));
+  playSound(0, "amb_interior_shake_lgt", (701, 2693, -142));
   wait 0.05;
-  playsound(0, "amb_interior_shake_lgt", (2181, 4785, -182));
+  playSound(0, "amb_interior_shake_lgt", (2181, 4785, -182));
   wait 0.05;
-  playsound(0, "amb_interior_shake_lgt", (1701, 3312, -163));
+  playSound(0, "amb_interior_shake_lgt", (1701, 3312, -163));
   wait 0.05;
-  playsound(0, "amb_interior_shake_lgt", (-2575, 165, 214));
+  playSound(0, "amb_interior_shake_lgt", (-2575, 165, 214));
 }
 
 snd_play_loopers() {
@@ -825,8 +825,8 @@ sndchargeshot(localclientnum, weaponname, chargeshotlevel) {
     else if(weaponname == "staff_air_upgraded_zm")
       alias = "wpn_airstaff_charge_";
 
-    self.sndchargeloopent playloopsound(alias + "loop", 1.5);
-    playsound(localclientnum, alias + self.sndcurrentcharge, (0, 0, 0));
+    self.sndchargeloopent playLoopSound(alias + "loop", 1.5);
+    playSound(localclientnum, alias + self.sndcurrentcharge, (0, 0, 0));
     self.sndlastcharge = self.sndcurrentcharge;
   }
 }
@@ -841,7 +841,7 @@ sndstoploopent() {
 
 sndtombbgsetup() {
   waitforclient(0);
-  trigs = getentarray(0, "sndBG", "targetname");
+  trigs = getEntArray(0, "sndBG", "targetname");
 
   foreach(trig in trigs)
   trig thread sndtombbgtriggers(0);
@@ -902,7 +902,7 @@ sndtombbgmusic(alias) {
   self endon("death");
   self stoploopsound(2);
   wait 2;
-  self playloopsound(alias, 2);
+  self playLoopSound(alias, 2);
 }
 
 sndmaelstrom(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -916,7 +916,7 @@ sndmaelstrom(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, b
 
     if(fn == fieldname) {
       if(newval == 1) {
-        level.sndmaelstrom playloopsound("amb_maelstrom", 3);
+        level.sndmaelstrom playLoopSound("amb_maelstrom", 3);
         continue;
       }
 

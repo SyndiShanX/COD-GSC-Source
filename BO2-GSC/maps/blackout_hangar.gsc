@@ -278,11 +278,11 @@ elevator_rumble() {
 elevator_audio() {
   playsoundatposition("evt_elev_alarm", (815, -2177, -400));
   wait 1;
-  self playsound("evt_elev_start");
+  self playSound("evt_elev_start");
   wait 1;
-  self playloopsound("evt_elev_loop", 2);
+  self playLoopSound("evt_elev_loop", 2);
   self waittill("movedone");
-  self playsound("evt_elev_stop");
+  self playSound("evt_elev_stop");
   wait 0.5;
   self stoploopsound(0.3);
 }
@@ -358,10 +358,10 @@ fxanim_debris_fx() {
   wait 0.05;
   earthquake(0.3, 1.5, level.player.origin, 128);
   fxanim_model = getent("black_elevator_debris", "targetname");
-  playfxontag(getfx("fx_com_elev_fa38_debri_trail_3"), fxanim_model, "link_cockpit_debris_jnt");
-  playfxontag(getfx("fx_com_elev_fa38_debri_trail_2"), fxanim_model, "link_wing_l_debris_jnt");
-  playfxontag(getfx("fx_com_elev_fa38_debri_trail_2"), fxanim_model, "link_wing_r_debris_jnt");
-  playfxontag(getfx("fx_com_elev_fa38_debri_trail"), fxanim_model, "link_engine_debris_jnt");
+  playFXOnTag(getfx("fx_com_elev_fa38_debri_trail_3"), fxanim_model, "link_cockpit_debris_jnt");
+  playFXOnTag(getfx("fx_com_elev_fa38_debri_trail_2"), fxanim_model, "link_wing_l_debris_jnt");
+  playFXOnTag(getfx("fx_com_elev_fa38_debri_trail_2"), fxanim_model, "link_wing_r_debris_jnt");
+  playFXOnTag(getfx("fx_com_elev_fa38_debri_trail"), fxanim_model, "link_engine_debris_jnt");
   wait 2;
   earthquake(0.3, 1.5, level.player.origin, 128);
   trigger_use("color_trigger_hangar");
@@ -389,7 +389,7 @@ ambient_fire_on_deck() {
 }
 
 delete_and_create_runway_jets() {
-  runway_array = getentarray("runway_jet_delete", "targetname");
+  runway_array = getEntArray("runway_jet_delete", "targetname");
   array_delete(runway_array);
   spawn_vehicle_from_targetname("defend_f38_1");
   spawn_vehicle_from_targetname("defend_f38_2");
@@ -518,11 +518,11 @@ notetrack_harper_shoots_salazar(m_origin) {
   exploder(1028);
   v_start = m_origin gettagorigin("origin_animate_jnt");
   v_angles = m_origin gettagangles("origin_animate_jnt");
-  v_end = v_start + anglestoforward(v_angles) * 200;
+  v_end = v_start + anglesToForward(v_angles) * 200;
   magicbullet("fiveseven_sp", v_start, v_end);
-  playfxontag(level._effect["super_kill_muzzle_flash"], m_origin, "origin_animate_jnt");
+  playFXOnTag(level._effect["super_kill_muzzle_flash"], m_origin, "origin_animate_jnt");
   ai_salazar = get_ent("salazar_ai", "targetname", 1);
-  playfxontag(level._effect["harper_shoots_salazar"], ai_salazar, "J_Head");
+  playFXOnTag(level._effect["harper_shoots_salazar"], ai_salazar, "J_Head");
 }
 
 mason_hangar_ambience() {

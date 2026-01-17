@@ -10,7 +10,7 @@ create_state_machine(name, owner, change_notify) {
   if(!isDefined(change_notify))
     change_notify = "change_state";
 
-  state_machine = spawnstruct();
+  state_machine = spawnStruct();
   state_machine.name = name;
   state_machine.states = [];
   state_machine.current_state = undefined;
@@ -30,7 +30,7 @@ create_state_machine(name, owner, change_notify) {
 }
 
 add_state(name, enter_func, exit_func, update_func, can_enter_func, can_exit_func) {
-  state = spawnstruct();
+  state = spawnStruct();
   state.name = name;
   state.enter_func = enter_func;
   state.exit_func = exit_func;
@@ -43,7 +43,7 @@ add_state(name, enter_func, exit_func, update_func, can_enter_func, can_exit_fun
 }
 
 add_connection(name, to_state, priority, check_func, param1, param2) {
-  connection = spawnstruct();
+  connection = spawnStruct();
   connection.to_state = to_state;
   connection.check_func = check_func;
   connection.param1 = param1;
@@ -53,7 +53,7 @@ add_connection(name, to_state, priority, check_func, param1, param2) {
 }
 
 add_connection_by_type(to_state, priority, type, compare_type, param1) {
-  connection = spawnstruct();
+  connection = spawnStruct();
   connection.to_state = to_state;
   connection.priority = priority;
   connection.type = type;
@@ -266,7 +266,7 @@ connection_enemy_angle(check_angle, compare_type) {
   if(!isDefined(self.enemy))
     return false;
 
-  forward = anglestoforward(self.angles);
+  forward = anglesToForward(self.angles);
   vec_to_enemy = vectornormalize(self.enemy.origin - self.origin);
   dot = vectordot(forward, vec_to_enemy);
   angle = acos(dot);

@@ -10,7 +10,6 @@
 #include scripts\zm_common\zm_round_logic;
 #include scripts\zm_common\zm_spawner;
 #include scripts\zm_common\zm_trial;
-
 #namespace zm_trial_no_powerups;
 
 autoexec __init__system__() {
@@ -25,7 +24,7 @@ __init__() {
   zm_trial::register_challenge(#"no_powerups", &on_begin, &on_end);
 }
 
-private on_begin() {
+on_begin() {
   self.active = 1;
   self.enemies_killed = 0;
   zombie_utility::set_zombie_var(#"zombie_powerup_drop_max_per_round", 80);
@@ -37,7 +36,7 @@ private on_begin() {
   }
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   self.active = 0;
   zombie_utility::set_zombie_var(#"zombie_powerup_drop_max_per_round", 4);
   level.var_1dce56cc = level.n_total_kills + randomintrangeinclusive(15, 25);
@@ -59,7 +58,7 @@ function_2fc5f13() {
   return modifier;
 }
 
-private function_138aec8e(attacker) {
+function_138aec8e(attacker) {
   if(!isplayer(attacker) && !(isDefined(self.nuked) && self.nuked)) {
     return;
   }

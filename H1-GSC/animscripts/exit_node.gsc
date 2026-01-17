@@ -5,7 +5,7 @@
 ********************************/
 
 startmovetransition() {
-  if(isdefined(self.custommovetransition)) {
+  if(isDefined(self.custommovetransition)) {
     custommovetransition();
     return;
   }
@@ -21,23 +21,23 @@ startmovetransition() {
   var_3 = 0;
   var_4 = getexitnode();
 
-  if(isdefined(self.exittypefunc))
+  if(isDefined(self.exittypefunc))
     var_2 = self[[self.exittypefunc]](var_4);
-  else if(isdefined(var_4)) {
+  else if(isDefined(var_4)) {
     var_5 = determinenodeexittype(var_4);
 
-    if(isdefined(var_5)) {
+    if(isDefined(var_5)) {
       var_2 = var_5;
       var_3 = 1;
 
-      if(isdefined(self.heat))
+      if(isDefined(self.heat))
         var_2 = determineheatcoverexittype(var_4, var_2);
 
-      if(!isdefined(anim.exposedtransition[var_2]) && var_2 != "stand_unstable" && var_2 != "stand_unstable_run" && var_2 != "stand_saw" && var_2 != "crouch_saw") {
+      if(!isDefined(anim.exposedtransition[var_2]) && var_2 != "stand_unstable" && var_2 != "stand_unstable_run" && var_2 != "stand_saw" && var_2 != "crouch_saw") {
         var_6 = animscripts\utility::absangleclamp180(self.angles[1] - animscripts\utility::getnodeforwardyaw(var_4));
 
         if(var_6 < 5) {
-          if(!isdefined(self.heat))
+          if(!isDefined(self.heat))
             var_0 = var_4.origin;
 
           var_1 = animscripts\utility::getnodeforwardyaw(var_4);
@@ -46,22 +46,22 @@ startmovetransition() {
     }
   }
 
-  if(isdefined(self.exitconditioncheckfunc)) {
+  if(isDefined(self.exitconditioncheckfunc)) {
     if(!self[[self.exitconditioncheckfunc]](var_4))
       return;
   } else if(!checktransitionconditions(var_2, var_4)) {
     return;
   }
-  var_7 = isdefined(anim.exposedtransition[var_2]);
+  var_7 = isDefined(anim.exposedtransition[var_2]);
 
-  if(!var_3 && !isdefined(self.exittypefunc))
+  if(!var_3 && !isDefined(self.exittypefunc))
     var_2 = determinenonnodeexittype();
 
   var_8 = (-1 * self.lookaheaddir[0], -1 * self.lookaheaddir[1], 0);
   var_9 = getmaxdirectionsandexcludedirfromapproachtype(var_4);
   var_10 = var_9.maxdirections;
   var_11 = var_9.excludedir;
-  var_12 = spawnstruct();
+  var_12 = spawnStruct();
   calculatenodetransitionangles(var_12, var_2, 0, var_1, var_8, var_10, var_11);
   sortnodetransitionangles(var_12, var_10);
   var_13 = -1;
@@ -70,7 +70,7 @@ startmovetransition() {
   if(var_7)
     var_14 = 1;
 
-  for (var_15 = 1; var_15 <= var_14; var_15++) {
+  for(var_15 = 1; var_15 <= var_14; var_15++) {
     var_13 = var_12.transindex[var_15];
 
     if(checknodeexitpos(var_0, var_1, var_2, var_7, var_13)) {
@@ -103,15 +103,15 @@ determinenodeexittype(var_0) {
       return "prone_saw";
   }
 
-  if(!isdefined(anim.approach_types[var_0.type])) {
+  if(!isDefined(anim.approach_types[var_0.type])) {
     return;
   }
-  if(isdefined(anim.requiredexitstance[var_0.type]) && anim.requiredexitstance[var_0.type] != self.a.pose) {
+  if(isDefined(anim.requiredexitstance[var_0.type]) && anim.requiredexitstance[var_0.type] != self.a.pose) {
     return;
   }
   var_1 = self.a.pose;
 
-  if(var_1 == "prone" && !isdefined(self.enableproneexitnode))
+  if(var_1 == "prone" && !isDefined(self.enableproneexitnode))
     var_1 = "crouch";
 
   var_2 = anim.approach_types[var_0.type][var_1];
@@ -140,7 +140,7 @@ determinenodeexittype(var_0) {
   if(animscripts\utility::shouldcqb()) {
     var_3 = var_2 + "_cqb";
 
-    if(isdefined(anim.archetypes["soldier"]["cover_exit"][var_3]))
+    if(isDefined(anim.archetypes["soldier"]["cover_exit"][var_3]))
       var_2 = var_3;
   }
 
@@ -148,25 +148,25 @@ determinenodeexittype(var_0) {
 }
 
 checktransitionpreconditions() {
-  if(!isdefined(self.pathgoalpos))
+  if(!isDefined(self.pathgoalpos))
     return 0;
 
-  if(isdefined(self.disableexits) && self.disableexits)
+  if(isDefined(self.disableexits) && self.disableexits)
     return 0;
 
-  if(isdefined(self.exitconditioncheckfunc))
+  if(isDefined(self.exitconditioncheckfunc))
     return 1;
 
   if(!self shouldfacemotion())
     return 0;
 
-  if(self.a.pose == "prone" && !isdefined(self.enableproneexitnode))
+  if(self.a.pose == "prone" && !isDefined(self.enableproneexitnode))
     return 0;
 
   if(self.stairsstate != "none")
     return 0;
 
-  if(!self isstanceallowed("stand") && !isdefined(self.heat) && !isdefined(self.enableproneexitnode))
+  if(!self isstanceallowed("stand") && !isDefined(self.heat) && !isDefined(self.enableproneexitnode))
     return 0;
 
   if(!self _meth_8572(100))
@@ -176,10 +176,10 @@ checktransitionpreconditions() {
 }
 
 checktransitionconditions(var_0, var_1) {
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     return 0;
 
-  if(var_0 == "exposed" || isdefined(self.heat)) {
+  if(var_0 == "exposed" || isDefined(self.heat)) {
     if(self.a.pose != "stand" && self.a.pose != "crouch")
       return 0;
 
@@ -187,7 +187,7 @@ checktransitionconditions(var_0, var_1) {
       return 0;
   }
 
-  if(!isdefined(self.heat) && isdefined(self.enemy) && vectordot(self.lookaheaddir, self.enemy.origin - self.origin) < 0) {
+  if(!isDefined(self.heat) && isDefined(self.enemy) && vectordot(self.lookaheaddir, self.enemy.origin - self.origin) < 0) {
     if(animscripts\utility::canseeenemyfromexposed() && distancesquared(self.origin, self.enemy.origin) < 90000)
       return 0;
   }
@@ -215,16 +215,16 @@ determinenonnodeexittype(var_0) {
 
   if(animscripts\utility::shouldcqb())
     var_0 = var_0 + "_cqb";
-  else if(isdefined(self.heat))
+  else if(isDefined(self.heat))
     var_0 = "heat";
 
   return var_0;
 }
 
 getmaxdirectionsandexcludedirfromapproachtype(var_0) {
-  var_1 = spawnstruct();
+  var_1 = spawnStruct();
 
-  if(isdefined(var_0) && isdefined(anim.maxdirections[var_0.type])) {
+  if(isDefined(var_0) && isDefined(anim.maxdirections[var_0.type])) {
     var_1.maxdirections = anim.maxdirections[var_0.type];
     var_1.excludedir = anim.excludedir[var_0.type];
   } else {
@@ -252,26 +252,26 @@ calculatenodetransitionangles(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_9 = 180;
   }
 
-  for (var_10 = 1; var_10 <= var_5; var_10++) {
+  for(var_10 = 1; var_10 <= var_5; var_10++) {
     var_0.transindex[var_10] = var_10;
 
-    if(var_10 == 5 || var_10 == var_6 || !isdefined(var_7[var_10])) {
+    if(var_10 == 5 || var_10 == var_6 || !isDefined(var_7[var_10])) {
       var_0.transitions[var_10] = -1.0003;
       continue;
     }
 
     var_11 = (0, var_3 + var_8 * var_7[var_10] + var_9, 0);
-    var_12 = vectornormalize(anglestoforward(var_11));
+    var_12 = vectornormalize(anglesToForward(var_11));
     var_0.transitions[var_10] = vectordot(var_4, var_12);
   }
 }
 
 sortnodetransitionangles(var_0, var_1) {
-  for (var_2 = 2; var_2 <= var_1; var_2++) {
+  for(var_2 = 2; var_2 <= var_1; var_2++) {
     var_3 = var_0.transitions[var_0.transindex[var_2]];
     var_4 = var_0.transindex[var_2];
 
-    for (var_5 = var_2 - 1; var_5 >= 1; var_5--) {
+    for(var_5 = var_2 - 1; var_5 >= 1; var_5--) {
       if(var_3 < var_0.transitions[var_0.transindex[var_5]]) {
         break;
       }
@@ -285,7 +285,7 @@ sortnodetransitionangles(var_0, var_1) {
 
 checknodeexitpos(var_0, var_1, var_2, var_3, var_4) {
   var_5 = (0, var_1, 0);
-  var_6 = anglestoforward(var_5);
+  var_6 = anglesToForward(var_5);
   var_7 = anglestoright(var_5);
   var_8 = animscripts\utility::lookuptransitionanim("cover_exit_dist", var_2, var_4);
   var_9 = var_6 * var_8[0];
@@ -313,7 +313,7 @@ checknodeexitpos(var_0, var_1, var_2, var_3, var_4) {
 donodeexitanimation(var_0, var_1) {
   var_2 = animscripts\utility::lookuptransitionanim("cover_exit", var_0, var_1);
 
-  if(self.a.pose == "prone" && !isdefined(self.enableproneexitnode)) {
+  if(self.a.pose == "prone" && !isDefined(self.enableproneexitnode)) {
     return;
   }
   donodeexitanimation_impl(var_2);
@@ -345,7 +345,7 @@ donodeexitanimation_impl(var_0) {
   self notify("StartListeningForCoverApproach");
   self notify("killThreadCheckStairsTransition");
 
-  if(!isdefined(self.enableproneexitnode) || self.a.pose != "prone")
+  if(!isDefined(self.enableproneexitnode) || self.a.pose != "prone")
     self.a.pose = "stand";
 
   self.a.movement = "run";
@@ -380,7 +380,7 @@ determineheatcoverexittype(var_0, var_1) {
 getexitnode() {
   var_0 = undefined;
 
-  if(!isdefined(self.heat))
+  if(!isDefined(self.heat))
     var_1 = 400;
   else
     var_1 = 4096;
@@ -388,12 +388,12 @@ getexitnode() {
   if(animscripts\utility::isspaceai())
     var_1 = 1024;
 
-  if(isdefined(self.node) && distancesquared(self.origin, self.node.origin) < var_1)
+  if(isDefined(self.node) && distancesquared(self.origin, self.node.origin) < var_1)
     var_0 = self.node;
-  else if(isdefined(self.prevnode) && distancesquared(self.origin, self.prevnode.origin) < var_1)
+  else if(isDefined(self.prevnode) && distancesquared(self.origin, self.prevnode.origin) < var_1)
     var_0 = self.prevnode;
 
-  if(isdefined(var_0) && isdefined(self.heat) && animscripts\utility::absangleclamp180(self.angles[1] - var_0.angles[1]) > 30)
+  if(isDefined(var_0) && isDefined(self.heat) && animscripts\utility::absangleclamp180(self.angles[1] - var_0.angles[1]) > 30)
     return undefined;
 
   return var_0;
@@ -402,15 +402,15 @@ getexitnode() {
 custommovetransition() {
   var_0 = self.custommovetransition;
 
-  if(!isdefined(self.permanentcustommovetransition))
+  if(!isDefined(self.permanentcustommovetransition))
     self.custommovetransition = undefined;
 
   var_1 = [[var_0]]();
 
-  if(!isdefined(self.permanentcustommovetransition))
+  if(!isDefined(self.permanentcustommovetransition))
     self.startmovetransitionanim = undefined;
 
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     var_1 = 0.2;
 
   self clearanim( % animscript_root, var_1);

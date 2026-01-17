@@ -5,7 +5,7 @@
 ********************************/
 
 main() {
-  var_0 = getentarray("leaking", "targetname");
+  var_0 = getEntArray("leaking", "targetname");
 
   if(!var_0.size) {
     return;
@@ -55,11 +55,11 @@ leak_barrel_setup() {
 }
 
 leak_think() {
-  self setcandamage(1);
-  self.canspawnpool = isdefined(level._effect["leak_interactive_pool"]) && isdefined(level._effect["leak_interactive_pool"][self.script_noteworthy]);
+  self setCanDamage(1);
+  self.canspawnpool = isDefined(level._effect["leak_interactive_pool"]) && isDefined(level._effect["leak_interactive_pool"][self.script_noteworthy]);
   self endon("drained");
 
-  for (;;) {
+  for(;;) {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4);
 
     if(var_4 == "MOD_MELEE" || var_4 == "MOD_IMPACT") {
@@ -67,7 +67,7 @@ leak_think() {
     }
     var_3 = self[[level._leak_methods[var_4]]](var_3, var_4);
 
-    if(!isdefined(var_3)) {
+    if(!isDefined(var_3)) {
       continue;
     }
     thread leak_drain(var_3);
@@ -98,13 +98,13 @@ leak_drain(var_0) {
 
     thread common_scripts\utility::play_sound_in_space(level._sound["leak_interactive_leak"][self.script_noteworthy], var_0);
 
-    while (self.curvol > var_4) {
-      playfx(level._effect["leak_interactive_leak"][self.script_noteworthy], var_0, var_2);
+    while(self.curvol > var_4) {
+      playFX(level._effect["leak_interactive_leak"][self.script_noteworthy], var_0, var_2);
       self.curvol = self.curvol - 100;
       wait 0.1;
     }
 
-    playfx(level._effect["leak_interactive_drain"][self.script_noteworthy], var_0, var_2);
+    playFX(level._effect["leak_interactive_drain"][self.script_noteworthy], var_0, var_2);
   }
 
   if(self.curvol / self.volume <= 0.05)
@@ -113,7 +113,7 @@ leak_drain(var_0) {
 
 leak_pool(var_0, var_1) {
   self.canspawnpool = 0;
-  playfx(level._effect["leak_interactive_pool"][self.script_noteworthy], var_0, var_1);
+  playFX(level._effect["leak_interactive_pool"][self.script_noteworthy], var_0, var_1);
   wait 0.5;
   self.canspawnpool = 1;
 }
@@ -156,7 +156,7 @@ leak_calc_nofx(var_0, var_1) {
 leak_calc_assert(var_0, var_1) {}
 
 precachefx() {
-  for (var_0 = 0; var_0 < self.size; var_0++) {
+  for(var_0 = 0; var_0 < self.size; var_0++) {
     if(self[var_0].script_noteworthy != "barrel_oil") {
       continue;
     }
@@ -167,7 +167,7 @@ precachefx() {
     break;
   }
 
-  for (var_0 = 0; var_0 < self.size; var_0++) {
+  for(var_0 = 0; var_0 < self.size; var_0++) {
     if(self[var_0].script_noteworthy != "barrel_acid") {
       continue;
     }
@@ -178,7 +178,7 @@ precachefx() {
     break;
   }
 
-  for (var_0 = 0; var_0 < self.size; var_0++) {
+  for(var_0 = 0; var_0 < self.size; var_0++) {
     if(self[var_0].script_noteworthy != "barrel_water") {
       continue;
     }
@@ -189,7 +189,7 @@ precachefx() {
     break;
   }
 
-  for (var_0 = 0; var_0 < self.size; var_0++) {
+  for(var_0 = 0; var_0 < self.size; var_0++) {
     if(self[var_0].script_noteworthy != "barrel_sludge") {
       continue;
     }

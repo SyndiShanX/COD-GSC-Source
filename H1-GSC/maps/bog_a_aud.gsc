@@ -29,7 +29,7 @@ init_globals() {
 }
 
 launch_threads() {
-  common_scripts\utility::array_thread(getentarray("trigger_sound_emitter", "script_noteworthy"), ::trigger_sound_emitter);
+  common_scripts\utility::array_thread(getEntArray("trigger_sound_emitter", "script_noteworthy"), ::trigger_sound_emitter);
 }
 
 launch_loops() {}
@@ -159,11 +159,11 @@ start_shanty_open_audio() {
 play_chain_link_fence_sfx() {
   var_0 = getent("trig_metal_fence_sfx", "targetname");
 
-  for (;;) {
+  for(;;) {
     var_0 waittill("trigger", var_1);
     thread common_scripts\utility::play_sound_in_space("scn_chainlink_fence_rattle", var_1.origin);
 
-    while (var_1 istouching(var_0))
+    while(var_1 istouching(var_0))
       wait 0.05;
   }
 }
@@ -180,7 +180,7 @@ play_scripted_pass_by_sfx(var_0) {
 }
 
 trigger_sound_emitter() {
-  if(isdefined(self.script_parameters) && isdefined(self.target)) {
+  if(isDefined(self.script_parameters) && isDefined(self.target)) {
     self waittill("trigger", var_0);
     var_1 = getent(self.target, "targetname");
     var_1 maps\_utility::play_sound_on_entity(self.script_parameters);
@@ -208,7 +208,7 @@ monitor_stop_bog_combat_emitter() {
 }
 
 handle_cobra_waypoint_audio(var_0) {
-  if(isdefined(var_0.targetname)) {
+  if(isDefined(var_0.targetname)) {
     switch (var_0.targetname) {
       case "maverick_waypoint1":
         thread maps\_utility::play_sound_on_entity("scn_cobra_support_arrival_01");

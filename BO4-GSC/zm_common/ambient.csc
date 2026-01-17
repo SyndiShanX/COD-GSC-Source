@@ -8,7 +8,6 @@
 #include scripts\core_common\sound_shared;
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
-
 #namespace ambient;
 
 autoexec __init__system__() {
@@ -131,10 +130,10 @@ ambient_flak_flash(point, min_burst_time, max_burst_time) {
     }
 
     fxpos = point.origin + vectorscale(point.forward, randomintrange(min_dist, max_dist));
-    playFX(0, level._effect[#"flak_burst_single"], fxpos);
+    playFX(0, level._effect[# "flak_burst_single"], fxpos);
 
     if(isDefined(level.timeofday) && (level.timeofday == "evening" || level.timeofday == "night")) {
-      playFX(0, level._effect[#"flak_cloudflash_night"], fxpos);
+      playFX(0, level._effect[# "flak_cloudflash_night"], fxpos);
     }
 
     wait randomfloatrange(min_burst_time, max_burst_time);
@@ -157,7 +156,7 @@ ambient_fakefire_think(point) {
   }
 
   switch (point.weaponinfo) {
-    case #"allies_assault":
+    case # "allies_assault":
       if(isDefined(level.allies_team) && level.allies_team == "marines") {
         firesound = "weap_bar_fire";
       } else {
@@ -173,7 +172,7 @@ ambient_fakefire_think(point) {
       soundchance = 75;
       weaptype = "assault";
       break;
-    case #"axis_assault":
+    case # "axis_assault":
       if(isDefined(level.axis_team) && level.axis_team == "german") {
         firesound = "weap_mp44_fire";
       } else {
@@ -189,7 +188,7 @@ ambient_fakefire_think(point) {
       soundchance = 75;
       weaptype = "assault";
       break;
-    case #"allies_rifle":
+    case # "allies_rifle":
       if(isDefined(level.allies_team) && level.allies_team == "marines") {
         firesound = "weap_m1garand_fire";
       } else {
@@ -205,7 +204,7 @@ ambient_fakefire_think(point) {
       soundchance = 95;
       weaptype = "rifle";
       break;
-    case #"axis_rifle":
+    case # "axis_rifle":
       if(isDefined(level.axis_team) && level.axis_team == "german") {
         firesound = "weap_kar98k_fire";
       } else {
@@ -221,7 +220,7 @@ ambient_fakefire_think(point) {
       soundchance = 95;
       weaptype = "rifle";
       break;
-    case #"allies_smg":
+    case # "allies_smg":
       if(isDefined(level.allies_team) && level.allies_team == "marines") {
         firesound = "weap_thompson_fire";
       } else {
@@ -237,7 +236,7 @@ ambient_fakefire_think(point) {
       soundchance = 75;
       weaptype = "smg";
       break;
-    case #"axis_smg":
+    case # "axis_smg":
       if(isDefined(level.axis_team) && level.axis_team == "german") {
         firesound = "weap_mp40_fire";
       } else {
@@ -253,7 +252,7 @@ ambient_fakefire_think(point) {
       soundchance = 75;
       weaptype = "smg";
       break;
-    case #"allies_turret":
+    case # "allies_turret":
       if(isDefined(level.allies_team) && level.allies_team == "marines") {
         firesound = "weap_30cal_fire";
       } else {
@@ -269,7 +268,7 @@ ambient_fakefire_think(point) {
       soundchance = 95;
       weaptype = "turret";
       break;
-    case #"axis_turret":
+    case # "axis_turret":
       if(isDefined(level.axis_team) && level.axis_team == "german") {
         firesound = "weap_bar_fire";
       } else {
@@ -370,21 +369,21 @@ clocks_init(clientnum) {
   seconds = curr_time[2];
   hour_hand = getEntArray(clientnum, "hour_hand", "targetname");
   hour_values = [];
-  hour_values[#"hand_time"] = hours;
-  hour_values[#"rotate"] = 30;
-  hour_values[#"rotate_bit"] = 0.00833333;
-  hour_values[#"first_rotate"] = (minutes * 60 + seconds) * hour_values[#"rotate_bit"];
+  hour_values[# "hand_time"] = hours;
+  hour_values[# "rotate"] = 30;
+  hour_values[# "rotate_bit"] = 0.00833333;
+  hour_values[# "first_rotate"] = (minutes * 60 + seconds) * hour_values[# "rotate_bit"];
   minute_hand = getEntArray(clientnum, "minute_hand", "targetname");
   minute_values = [];
-  minute_values[#"hand_time"] = minutes;
-  minute_values[#"rotate"] = 6;
-  minute_values[#"rotate_bit"] = 0.1;
-  minute_values[#"first_rotate"] = seconds * minute_values[#"rotate_bit"];
+  minute_values[# "hand_time"] = minutes;
+  minute_values[# "rotate"] = 6;
+  minute_values[# "rotate_bit"] = 0.1;
+  minute_values[# "first_rotate"] = seconds * minute_values[# "rotate_bit"];
   second_hand = getEntArray(clientnum, "second_hand", "targetname");
   second_values = [];
-  second_values[#"hand_time"] = seconds;
-  second_values[#"rotate"] = 6;
-  second_values[#"rotate_bit"] = 6;
+  second_values[# "hand_time"] = seconds;
+  second_values[# "rotate"] = 6;
+  second_values[# "rotate_bit"] = 6;
   hour_hand_array = getEntArray(clientnum, "hour_hand", "targetname");
 
   if(isDefined(hour_hand_array)) {
@@ -408,50 +407,50 @@ clock_run(time_values) {
   self endon(#"death");
 
   if(isDefined(self.script_noteworthy)) {
-    hour = time_values[#"hand_time"];
+    hour = time_values[# "hand_time"];
     curr_time = getsystemtime(1);
 
     switch (tolower(self.script_noteworthy)) {
-      case #"honolulu":
+      case # "honolulu":
         hour = curr_time[0] - 10;
         break;
-      case #"alaska":
+      case # "alaska":
         hour = curr_time[0] - 9;
         break;
-      case #"hash_2facbe04e87432ac":
+      case # "hash_2facbe04e87432ac":
         hour = curr_time[0] - 8;
         break;
-      case #"denver":
+      case # "denver":
         hour = curr_time[0] - 7;
         break;
-      case #"chicago":
+      case # "chicago":
         hour = curr_time[0] - 6;
         break;
-      case #"hash_2361ce1f22a20d88":
+      case # "hash_2361ce1f22a20d88":
         hour = curr_time[0] - 5;
         break;
-      case #"halifax":
+      case # "halifax":
         hour = curr_time[0] - 4;
         break;
-      case #"greenland":
+      case # "greenland":
         hour = curr_time[0] - 3;
         break;
-      case #"london":
+      case # "london":
         hour = curr_time[0];
         break;
-      case #"paris":
+      case # "paris":
         hour = curr_time[0] + 1;
         break;
-      case #"helsinki":
+      case # "helsinki":
         hour = curr_time[0] + 2;
         break;
-      case #"moscow":
+      case # "moscow":
         hour = curr_time[0] + 3;
         break;
-      case #"vietnam":
+      case # "vietnam":
         hour = curr_time[0] + 7;
         break;
-      case #"china":
+      case # "china":
         hour = curr_time[0] + 8;
         break;
     }
@@ -464,14 +463,14 @@ clock_run(time_values) {
       hour -= 12;
     }
 
-    time_values[#"hand_time"] = hour;
+    time_values[# "hand_time"] = hour;
   }
 
-  self rotatepitch(time_values[#"hand_time"] * time_values[#"rotate"], 0.05);
+  self rotatepitch(time_values[# "hand_time"] * time_values[# "rotate"], 0.05);
   self waittill(#"rotatedone");
 
-  if(isDefined(time_values[#"first_rotate"])) {
-    self rotatepitch(time_values[#"first_rotate"], 0.05);
+  if(isDefined(time_values[# "first_rotate"])) {
+    self rotatepitch(time_values[# "first_rotate"], 0.05);
     self waittill(#"rotatedone");
   }
 
@@ -481,7 +480,7 @@ clock_run(time_values) {
     curr_time = getsystemtime();
 
     if(prev_time != curr_time) {
-      self rotatepitch(time_values[#"rotate_bit"], 0.05);
+      self rotatepitch(time_values[# "rotate_bit"], 0.05);
       prev_time = curr_time;
     }
 

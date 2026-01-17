@@ -71,9 +71,9 @@ section_flag_init() {
 }
 
 section_hint_string_init() {
-  maps\_utility::add_hint_string("ally_struggle_fail", & "PLATFORM_ODIN_STRUGGLE_FAIL", ::odin_struggle_fail_hint);
-  maps\_utility::add_hint_string("ally_struggle_fail_alt", & "PLATFORM_ODIN_STRUGGLE_FAIL_ALT", ::odin_struggle_fail_hint);
-  maps\_utility::add_hint_string("ally_struggle_fail_PC", & "ODIN_STRUGGLE_FAIL_PC", ::odin_struggle_fail_hint);
+  maps\_utility::add_hint_string("ally_struggle_fail", &"PLATFORM_ODIN_STRUGGLE_FAIL", ::odin_struggle_fail_hint);
+  maps\_utility::add_hint_string("ally_struggle_fail_alt", &"PLATFORM_ODIN_STRUGGLE_FAIL_ALT", ::odin_struggle_fail_hint);
+  maps\_utility::add_hint_string("ally_struggle_fail_PC", &"ODIN_STRUGGLE_FAIL_PC", ::odin_struggle_fail_hint);
 }
 
 odin_struggle_fail_hint() {

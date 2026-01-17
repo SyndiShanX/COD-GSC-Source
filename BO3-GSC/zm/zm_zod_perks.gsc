@@ -50,7 +50,7 @@ function function_9a03e439() {
   thread function_4a2261fa();
   thread function_6753e7bb();
   thread function_55b919e6();
-  var_58b16a23 = getentarray("random_perk_machine", "script_notify");
+  var_58b16a23 = getEntArray("random_perk_machine", "script_notify");
   a_s_random_perk_locs = struct::get_array("perk_random_machine_location", "targetname");
   foreach(var_5bca5a82 in var_58b16a23) {
     str_zone = zm_zonemgr::get_zone_from_position(var_5bca5a82.origin, 1);

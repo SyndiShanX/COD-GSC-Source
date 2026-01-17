@@ -6,7 +6,7 @@
 #namespace character;
 
 function setmodelfromarray(a) {
-  self setmodel(a[randomint(a.size)]);
+  self setModel(a[randomint(a.size)]);
 }
 
 function randomelement(a) {
@@ -20,7 +20,7 @@ function attachfromarray(a) {
 function newcharacter() {
   self detachall();
   oldgunhand = self.anim_gunhand;
-  if(!isdefined(oldgunhand)) {
+  if(!isDefined(oldgunhand)) {
     return;
   }
   self.anim_gunhand = "none";
@@ -33,14 +33,14 @@ function save() {
   info["model"] = self.model;
   info["hatModel"] = self.hatmodel;
   info["gearModel"] = self.gearmodel;
-  if(isdefined(self.name)) {
+  if(isDefined(self.name)) {
     info["name"] = self.name;
     println("", self.name);
   } else {
     println("");
   }
   attachsize = self getattachsize();
-  for (i = 0; i < attachsize; i++) {
+  for(i = 0; i < attachsize; i++) {
     info["attach"][i]["model"] = self getattachmodelname(i);
     info["attach"][i]["tag"] = self getattachtagname(i);
   }
@@ -51,10 +51,10 @@ function load(info) {
   self detachall();
   self.anim_gunhand = info["gunHand"];
   self.anim_guninhand = info["gunInHand"];
-  self setmodel(info["model"]);
+  self setModel(info["model"]);
   self.hatmodel = info["hatModel"];
   self.gearmodel = info["gearModel"];
-  if(isdefined(info["name"])) {
+  if(isDefined(info["name"])) {
     self.name = info["name"];
     println("", self.name);
   } else {
@@ -62,7 +62,7 @@ function load(info) {
   }
   attachinfo = info["attach"];
   attachsize = attachinfo.size;
-  for (i = 0; i < attachsize; i++) {
+  for(i = 0; i < attachsize; i++) {
     self attach(attachinfo[i]["model"], attachinfo[i]["tag"]);
   }
 }
@@ -75,29 +75,29 @@ function get_random_character(amount) {
   group = "auto";
   index = undefined;
   prefix = self_info[2];
-  if(isdefined(self.script_char_index)) {
+  if(isDefined(self.script_char_index)) {
     index = self.script_char_index;
   }
-  if(isdefined(self.script_char_group)) {
+  if(isDefined(self.script_char_group)) {
     type = "grouped";
     group = "group_" + self.script_char_group;
   }
-  if(!isdefined(level.character_index_cache)) {
+  if(!isDefined(level.character_index_cache)) {
     level.character_index_cache = [];
   }
-  if(!isdefined(level.character_index_cache[prefix])) {
+  if(!isDefined(level.character_index_cache[prefix])) {
     level.character_index_cache[prefix] = [];
   }
-  if(!isdefined(level.character_index_cache[prefix][group])) {
+  if(!isDefined(level.character_index_cache[prefix][group])) {
     initialize_character_group(prefix, group, amount);
   }
-  if(!isdefined(index)) {
+  if(!isDefined(index)) {
     index = get_least_used_index(prefix, group);
-    if(!isdefined(index)) {
+    if(!isDefined(index)) {
       index = randomint(5000);
     }
   }
-  while (index >= amount) {
+  while(index >= amount) {
     index = index - amount;
   }
   level.character_index_cache[prefix][group][index]++;
@@ -108,7 +108,7 @@ function get_least_used_index(prefix, group) {
   lowest_indices = [];
   lowest_use = level.character_index_cache[prefix][group][0];
   lowest_indices[0] = 0;
-  for (i = 1; i < level.character_index_cache[prefix][group].size; i++) {
+  for(i = 1; i < level.character_index_cache[prefix][group].size; i++) {
     if(level.character_index_cache[prefix][group][i] > lowest_use) {
       continue;
     }
@@ -123,7 +123,7 @@ function get_least_used_index(prefix, group) {
 }
 
 function initialize_character_group(prefix, group, amount) {
-  for (i = 0; i < amount; i++) {
+  for(i = 0; i < amount; i++) {
     level.character_index_cache[prefix][group][i] = 0;
   }
 }

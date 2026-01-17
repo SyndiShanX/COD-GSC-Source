@@ -23,7 +23,7 @@ end_last_stand(clientNum) {
   }
   realwait(0.7);
   println("Gasp.");
-  playsound(clientNum, "revive_gasp");
+  playSound(clientNum, "revive_gasp");
 }
 
 last_stand_thread(clientNum) {
@@ -44,7 +44,7 @@ last_stand_thread(clientNum) {
   pause = startPause;
   vol = startVol;
   while(1) {
-    id = playsound(clientNum, "chr_heart_beat");
+    id = playSound(clientNum, "chr_heart_beat");
     setSoundVolume(id, vol);
     realWait(pause);
     if(pause < maxPause) {

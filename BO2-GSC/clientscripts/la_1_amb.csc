@@ -138,7 +138,7 @@ drone_listener() {
 
 play_heartbeat_drone() {
   wait 1.5;
-  playsound(0, "evt_drone_heartbeat", (0, 0, 0));
+  playSound(0, "evt_drone_heartbeat", (0, 0, 0));
 }
 
 tv_sounds() {
@@ -182,7 +182,7 @@ temp_remove_timer() {
 play_cougar_heartbeat() {
   level waittill("over_black");
   loop_ent_1 = spawn(0, (0, 0, 0), "script_origin");
-  loop_ent_1 playloopsound("evt_la_1_intro_crawl_heartbeat", 1);
+  loop_ent_1 playLoopSound("evt_la_1_intro_crawl_heartbeat", 1);
   level waittill("snd_ECRWL");
   loop_ent_1 stoploopsound();
   loop_ent_1 delete();
@@ -211,11 +211,11 @@ sonar_vision() {
 
   while(true) {
     level waittill("sonar_on");
-    playsound(0, "evt_sonar_engage", (0, 0, 0));
-    sonarent playloopsound("evt_sonar_loop", 1);
+    playSound(0, "evt_sonar_engage", (0, 0, 0));
+    sonarent playLoopSound("evt_sonar_loop", 1);
     level waittill("sonar_off");
     sonarent stoploopsound();
-    playsound(0, "evt_sonar_disengage", (0, 0, 0));
+    playSound(0, "evt_sonar_disengage", (0, 0, 0));
   }
 }
 
@@ -238,19 +238,19 @@ setup_ambient_fx_sounds() {
 
 play_siren_on_cop_car() {
   copsiren1 = spawn(0, (8032, -46336, -48), "script_origin");
-  copsiren1 playloopsound("amb_police_siren_stationary");
+  copsiren1 playLoopSound("amb_police_siren_stationary");
 }
 
 play_siren_on_cop_car_2() {
   copsiren2 = spawn(0, (8391, -39665, 372), "script_origin");
-  copsiren2 playloopsound("amb_police_siren_stationary");
+  copsiren2 playLoopSound("amb_police_siren_stationary");
 }
 
 play_siren2_after_freeway() {
   copsiren1 = spawn(0, (14388, -17338, 148), "script_origin");
   copsiren2 = spawn(0, (14971, -17016, 163), "script_origin");
-  copsiren1 playloopsound("amb_police_siren_stationary_2");
-  copsiren2 playloopsound("amb_police_siren_stationary_2");
+  copsiren1 playLoopSound("amb_police_siren_stationary_2");
+  copsiren2 playLoopSound("amb_police_siren_stationary_2");
 }
 
 air_raid_sirens() {
@@ -268,7 +268,7 @@ cougar_radio_chatter() {
   level waittill("cougar_chatter");
   waitforclient(0);
   loop_ent_1 = spawn(0, (0, 0, 0), "script_origin");
-  loop_ent_1 playloopsound("amb_radio_chatter_cougar_loop", 2);
+  loop_ent_1 playLoopSound("amb_radio_chatter_cougar_loop", 2);
   loop_ent_1 thread cougar_radio_chatter_cleanup();
 }
 
@@ -292,7 +292,7 @@ big_battle_ambience() {
   snd_play_auto_fx("fx_la_overpass_debris_area_xlg", "evt_freeway_debris_drivethru", 0, 0, -300, 1, 100, 2, "evt_freeway_debris_drivethru");
   snd_play_auto_fx("fx_la_overpass_debris_area_lg_os", "evt_freeway_debris_drivethru", 0, 0, -300, 1, 100, 2, "evt_freeway_debris_drivethru");
   origin = spawn(0, (14993, -8519, 503), "script_origin");
-  level.big_battle_loop_id = origin playloopsound("amb_big_battle_loop", 1);
+  level.big_battle_loop_id = origin playLoopSound("amb_big_battle_loop", 1);
   setsoundvolume(level.big_battle_loop_id, 0.5);
   level thread waitfor_volume_increase("bbvi1", 0.5, 1, 2);
 }
@@ -313,7 +313,7 @@ waitfor_volume_increase(time_notify, old_volume, new_volume, time) {
 play_distant_battle_bg_until_jump() {
   level waittill("sdlbg");
   origin = spawn(0, (7833, -52918, 796), "script_origin");
-  origin playloopsound("amb_la_big_battle_loop", 1);
+  origin playLoopSound("amb_la_big_battle_loop", 1);
   level waittill("scjs");
   origin stoploopsound(2);
   wait 2;
@@ -322,7 +322,7 @@ play_distant_battle_bg_until_jump() {
 
 freeway_barrier_suspension_audio() {
   wait 2;
-  array_thread(getentarray(0, "audio_freeway_barrier", "targetname"), ::play_suspension_audio);
+  array_thread(getEntArray(0, "audio_freeway_barrier", "targetname"), ::play_suspension_audio);
 }
 
 play_suspension_audio() {
@@ -330,7 +330,7 @@ play_suspension_audio() {
     return;
   }
   self waittill("trigger");
-  playsound(0, "evt_cougar_suspension_oneshot", (0, 0, 0));
+  playSound(0, "evt_cougar_suspension_oneshot", (0, 0, 0));
 }
 
 cougar_jump_duck() {
@@ -359,7 +359,7 @@ cougar_rattle_scaling() {
   player = getlocalplayers()[0];
   rattle_ent = spawn(0, player.origin, "script_origin");
   rattle_ent linkto(player, "tag_origin");
-  rattle_id = rattle_ent playloopsound("veh_cougar_int_rattle");
+  rattle_id = rattle_ent playLoopSound("veh_cougar_int_rattle");
   setsoundvolume(rattle_id, 0);
 
   while(true) {

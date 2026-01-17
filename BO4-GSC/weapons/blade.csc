@@ -6,7 +6,6 @@
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace blade;
 
 autoexec __init__system__() {
@@ -27,7 +26,7 @@ on_weapon_change(params) {
   localclientnum = params.localclientnum;
   weapon = self function_d2c2b168();
 
-  if(weapon.name == #"sig_blade") {
+  if(weapon.name == # "sig_blade") {
     localplayer = function_5c10bd79(localclientnum);
 
     if(self == localplayer) {
@@ -74,7 +73,7 @@ melee_event(eventstruct) {
     return;
   }
 
-  if(eventstruct.weapon.name != #"sig_blade") {
+  if(eventstruct.weapon.name != # "sig_blade") {
     return;
   }
 
@@ -93,13 +92,13 @@ melee_event(eventstruct) {
   self play_blood(eventstruct.localclientnum);
 }
 
-private function_e79ccfd8(localclientnum) {
+function_e79ccfd8(localclientnum) {
   stop_postfx(localclientnum);
 }
 
 stop_postfx(localclientnum) {
-  if(function_148ccc79(localclientnum, #"hash_4bc228d5f3bcffe5")) {
-    codestoppostfxbundlelocal(localclientnum, #"hash_4bc228d5f3bcffe5");
+  if(function_148ccc79(localclientnum, # "hash_4bc228d5f3bcffe5")) {
+    codestoppostfxbundlelocal(localclientnum, # "hash_4bc228d5f3bcffe5");
   }
 }
 
@@ -107,11 +106,11 @@ play_blood(localclientnum) {
   if(!isDefined(self.var_2ba49f48)) {
     self.var_2ba49f48 = spawnStruct();
     self.var_2ba49f48.var_dcb0fc42 = 0;
-    function_a837926b(localclientnum, #"hash_4bc228d5f3bcffe5");
-    function_4238734d(localclientnum, #"hash_4bc228d5f3bcffe5", "Screen Radius Inner", 256);
-    function_4238734d(localclientnum, #"hash_4bc228d5f3bcffe5", "Screen Radius Outer", 512);
-    function_4238734d(localclientnum, #"hash_4bc228d5f3bcffe5", "Seed Offset", 0);
-    function_4238734d(localclientnum, #"hash_4bc228d5f3bcffe5", "Opacity", 1);
+    function_a837926b(localclientnum, # "hash_4bc228d5f3bcffe5");
+    function_4238734d(localclientnum, # "hash_4bc228d5f3bcffe5", "Screen Radius Inner", 256);
+    function_4238734d(localclientnum, # "hash_4bc228d5f3bcffe5", "Screen Radius Outer", 512);
+    function_4238734d(localclientnum, # "hash_4bc228d5f3bcffe5", "Seed Offset", 0);
+    function_4238734d(localclientnum, # "hash_4bc228d5f3bcffe5", "Opacity", 1);
   } else if(isDefined(self.var_2ba49f48.blendout) && self.var_2ba49f48.blendout) {
     return;
   }
@@ -121,7 +120,7 @@ play_blood(localclientnum) {
   }
 
   var_61187e1e = 1 - self.var_2ba49f48.var_dcb0fc42 * 0.05;
-  function_4238734d(localclientnum, #"hash_4bc228d5f3bcffe5", "Sprite Count Squash", var_61187e1e);
+  function_4238734d(localclientnum, # "hash_4bc228d5f3bcffe5", "Sprite Count Squash", var_61187e1e);
   self thread watch_timeout(localclientnum);
 }
 
@@ -143,5 +142,5 @@ function_2789edf8(currenttime, elapsedtime, localclientnum, duration) {
     percent = 1 - elapsedtime / duration;
   }
 
-  function_4238734d(localclientnum, #"hash_4bc228d5f3bcffe5", "Opacity", percent);
+  function_4238734d(localclientnum, # "hash_4bc228d5f3bcffe5", "Opacity", percent);
 }

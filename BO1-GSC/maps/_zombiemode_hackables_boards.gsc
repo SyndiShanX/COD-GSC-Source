@@ -11,7 +11,7 @@ hack_boards() {
   windows = getstructarray("exterior_goal", "targetname");
   for(i = 0; i < windows.size; i++) {
     window = windows[i];
-    struct = SpawnStruct();
+    struct = spawnStruct();
     spot = window;
     if(isDefined(window.trigger_location)) {
       spot = window.trigger_location;

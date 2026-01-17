@@ -73,13 +73,13 @@ function main() {
   zm_moon_fx::main();
   level.override_board_repair_sound = "evt_vent_slat_repair";
   level.override_board_teardown_sound = "evt_vent_slat_remove";
-  level.wallbuy_callback_hack_override = & function_36f98292;
+  level.wallbuy_callback_hack_override = &function_36f98292;
   level thread zm_moon_amb::main();
   register_clientfields();
   zm_moon_sq::init_clientfields();
   level._visionset_black_hole_bomb = "zombie_moon_black_hole";
-  level.setupcustomcharacterexerts = & setup_personality_character_exerts;
-  callback::on_localclient_connect( & jump_pad_activate);
+  level.setupcustomcharacterexerts = &setup_personality_character_exerts;
+  callback::on_localclient_connect(&jump_pad_activate);
   load::main();
   util::waitforclient(0);
   level thread zm_moon_digger::main();
@@ -105,26 +105,26 @@ function function_73cc64f1(localclientnum) {
   foreach(player in getplayers(localclientnum)) {
     player thread function_c06d0a4e(localclientnum);
   }
-  callback::on_spawned( & function_c06d0a4e);
+  callback::on_spawned(&function_c06d0a4e);
 }
 
 function function_c06d0a4e(localclientnum) {
   self endon("entityshutdown");
   self util::waittill_dobj(localclientnum);
-  while (isdefined(self) && !isdefined(self.player_exert_id)) {
+  while(isDefined(self) && !isDefined(self.player_exert_id)) {
     wait(1);
   }
-  if(isdefined(self) && isdefined(self.player_exert_id)) {
+  if(isDefined(self) && isDefined(self.player_exert_id)) {
     lock_model(level.var_98cd8f08[self.player_exert_id]);
   }
 }
 
 function lock_model(model) {
-  if(isdefined(model)) {
-    if(!isdefined(level.model_locks)) {
+  if(isDefined(model)) {
+    if(!isDefined(level.model_locks)) {
       level.model_locks = [];
     }
-    if(!isdefined(level.model_locks[model])) {
+    if(!isDefined(level.model_locks[model])) {
       level.model_locks[model] = 0;
     }
     if(level.model_locks[model] < 1) {
@@ -135,11 +135,11 @@ function lock_model(model) {
 }
 
 function unlock_model(model) {
-  if(isdefined(model)) {
-    if(!isdefined(level.model_locks)) {
+  if(isDefined(model)) {
+    if(!isDefined(level.model_locks)) {
       level.model_locks = [];
     }
-    if(!isdefined(level.model_locks[model])) {
+    if(!isDefined(level.model_locks[model])) {
       level.model_locks[model] = 0;
     }
     level.model_locks[model]--;
@@ -158,58 +158,58 @@ function include_weapons() {
 }
 
 function register_clientfields() {
-  clientfield::register("scriptmover", "digger_moving", 21000, 1, "int", & zm_moon_digger::digger_moving_earthquake_rumble, 0, 0);
-  clientfield::register("scriptmover", "digger_digging", 21000, 1, "int", & zm_moon_digger::digger_digging_earthquake_rumble, 0, 0);
-  clientfield::register("scriptmover", "digger_arm_fx", 21000, 1, "int", & zm_moon_digger::digger_arm_fx, 0, 0);
-  clientfield::register("scriptmover", "dome_malfunction_pad", 21000, 1, "int", & dome_malfunction_pad, 0, 0);
-  clientfield::register("toplayer", "player_sky_transition", 21000, 1, "int", & moon_nml_transition, 0, 0);
-  clientfield::register("toplayer", "soul_swap", 21000, 1, "int", & zm_moon_sq::soul_swap, 0, 0);
-  clientfield::register("toplayer", "gasp_rumble", 21000, 1, "int", & player_gasp_rumble, 0, 0);
-  clientfield::register("toplayer", "biodome_exploder", 21000, 1, "int", & function_947f06dd, 0, 0);
-  clientfield::register("toplayer", "snd_lowgravity", 21000, 1, "int", & zm_moon_gravity::function_20286238, 0, 0);
-  clientfield::register("actor", "low_gravity", 21000, 1, "int", & zm_moon_gravity::zombie_low_gravity, 0, 0);
-  clientfield::register("actor", "ctt", 21000, 1, "int", & zm_moon_sq::zombie_release_soul, 0, 0);
-  clientfield::register("actor", "sd", 21000, 1, "int", & zm_moon_sq::function_38a2773c, 0, 0);
-  clientfield::register("world", "jump_pad_pulse", 21000, 3, "counter", & function_1cd5e7c6, 0, 0);
-  clientfield::register("toplayer", "gas_mask_buy", 21000, 1, "counter", & function_7c00de2d, 0, 0);
-  clientfield::register("toplayer", "gas_mask_on", 21000, 1, "counter", & function_29c0676c, 0, 0);
-  clientfield::register("world", "show_earth", 21000, 1, "counter", & show_earth, 0, 0);
-  clientfield::register("world", "show_destroyed_earth", 21000, 1, "counter", & show_destroyed_earth, 0, 0);
-  clientfield::register("world", "hide_earth", 21000, 1, "counter", & hide_earth, 0, 0);
+  clientfield::register("scriptmover", "digger_moving", 21000, 1, "int", &zm_moon_digger::digger_moving_earthquake_rumble, 0, 0);
+  clientfield::register("scriptmover", "digger_digging", 21000, 1, "int", &zm_moon_digger::digger_digging_earthquake_rumble, 0, 0);
+  clientfield::register("scriptmover", "digger_arm_fx", 21000, 1, "int", &zm_moon_digger::digger_arm_fx, 0, 0);
+  clientfield::register("scriptmover", "dome_malfunction_pad", 21000, 1, "int", &dome_malfunction_pad, 0, 0);
+  clientfield::register("toplayer", "player_sky_transition", 21000, 1, "int", &moon_nml_transition, 0, 0);
+  clientfield::register("toplayer", "soul_swap", 21000, 1, "int", &zm_moon_sq::soul_swap, 0, 0);
+  clientfield::register("toplayer", "gasp_rumble", 21000, 1, "int", &player_gasp_rumble, 0, 0);
+  clientfield::register("toplayer", "biodome_exploder", 21000, 1, "int", &function_947f06dd, 0, 0);
+  clientfield::register("toplayer", "snd_lowgravity", 21000, 1, "int", &zm_moon_gravity::function_20286238, 0, 0);
+  clientfield::register("actor", "low_gravity", 21000, 1, "int", &zm_moon_gravity::zombie_low_gravity, 0, 0);
+  clientfield::register("actor", "ctt", 21000, 1, "int", &zm_moon_sq::zombie_release_soul, 0, 0);
+  clientfield::register("actor", "sd", 21000, 1, "int", &zm_moon_sq::function_38a2773c, 0, 0);
+  clientfield::register("world", "jump_pad_pulse", 21000, 3, "counter", &function_1cd5e7c6, 0, 0);
+  clientfield::register("toplayer", "gas_mask_buy", 21000, 1, "counter", &function_7c00de2d, 0, 0);
+  clientfield::register("toplayer", "gas_mask_on", 21000, 1, "counter", &function_29c0676c, 0, 0);
+  clientfield::register("world", "show_earth", 21000, 1, "counter", &show_earth, 0, 0);
+  clientfield::register("world", "show_destroyed_earth", 21000, 1, "counter", &show_destroyed_earth, 0, 0);
+  clientfield::register("world", "hide_earth", 21000, 1, "counter", &hide_earth, 0, 0);
   var_6225e4bb = tablelookuprowcount("gamedata/tables/zm/zm_astro_names.csv");
-  if(isdefined(var_6225e4bb) && var_6225e4bb > 0) {
-    clientfield::register("actor", "astro_name_index", 21000, getminbitcountfornum(var_6225e4bb + 1), "int", & function_ff7d3b7, 0, 0);
+  if(isDefined(var_6225e4bb) && var_6225e4bb > 0) {
+    clientfield::register("actor", "astro_name_index", 21000, getminbitcountfornum(var_6225e4bb + 1), "int", &function_ff7d3b7, 0, 0);
   }
-  clientfield::register("scriptmover", "zombie_has_eyes", 21000, 1, "int", & zm::zombie_eyes_clientfield_cb, 0, 0);
+  clientfield::register("scriptmover", "zombie_has_eyes", 21000, 1, "int", &zm::zombie_eyes_clientfield_cb, 0, 0);
   clientfield::register("clientuimodel", "hudItems.showDpadDown_HackTool", 21000, 1, "int", undefined, 0, 0);
-  for (i = 0; i < 4; i++) {
-    registerclientfield("world", ("player" + i) + "wearableItem", 21000, 1, "int", & zm_utility::setsharedinventoryuimodels, 0);
+  for(i = 0; i < 4; i++) {
+    registerclientfield("world", ("player" + i) + "wearableItem", 21000, 1, "int", &zm_utility::setsharedinventoryuimodels, 0);
   }
 }
 
 function function_20c21740() {
-  clientfield::register("world", "BIO", 21000, 1, "int", & zm_moon_digger::function_a0cf54a0, 0, 0);
-  clientfield::register("world", "DH", 21000, 1, "int", & zm_moon_digger::function_245b13ce, 0, 0);
-  clientfield::register("world", "TCA", 21000, 1, "int", & zm_moon_digger::function_774edb15, 0, 0);
-  clientfield::register("world", "HCA", 21000, 1, "int", & zm_moon_digger::function_774edb15, 0, 0);
-  clientfield::register("world", "BCA", 21000, 1, "int", & zm_moon_digger::function_774edb15, 0, 0);
-  clientfield::register("world", "Az1", 21000, 1, "counter", & zm_moon_amb::function_6ce4d731, 0, 0);
-  clientfield::register("world", "Az2a", 21000, 1, "counter", & zm_moon_amb::function_6ce4d731, 0, 0);
-  clientfield::register("world", "Az2b", 21000, 1, "counter", & zm_moon_amb::function_6ce4d731, 0, 0);
-  clientfield::register("world", "Az3a", 21000, 1, "counter", & zm_moon_amb::function_6ce4d731, 0, 0);
-  clientfield::register("world", "Az3b", 21000, 1, "counter", & zm_moon_amb::function_6ce4d731, 0, 0);
-  clientfield::register("world", "Az3c", 21000, 1, "counter", & zm_moon_amb::function_6ce4d731, 0, 0);
-  clientfield::register("world", "Az4a", 21000, 1, "counter", & zm_moon_amb::function_6ce4d731, 0, 0);
-  clientfield::register("world", "Az4b", 21000, 1, "counter", & zm_moon_amb::function_6ce4d731, 0, 0);
-  clientfield::register("world", "Az5", 21000, 1, "counter", & zm_moon_amb::function_6ce4d731, 0, 0);
+  clientfield::register("world", "BIO", 21000, 1, "int", &zm_moon_digger::function_a0cf54a0, 0, 0);
+  clientfield::register("world", "DH", 21000, 1, "int", &zm_moon_digger::function_245b13ce, 0, 0);
+  clientfield::register("world", "TCA", 21000, 1, "int", &zm_moon_digger::function_774edb15, 0, 0);
+  clientfield::register("world", "HCA", 21000, 1, "int", &zm_moon_digger::function_774edb15, 0, 0);
+  clientfield::register("world", "BCA", 21000, 1, "int", &zm_moon_digger::function_774edb15, 0, 0);
+  clientfield::register("world", "Az1", 21000, 1, "counter", &zm_moon_amb::function_6ce4d731, 0, 0);
+  clientfield::register("world", "Az2a", 21000, 1, "counter", &zm_moon_amb::function_6ce4d731, 0, 0);
+  clientfield::register("world", "Az2b", 21000, 1, "counter", &zm_moon_amb::function_6ce4d731, 0, 0);
+  clientfield::register("world", "Az3a", 21000, 1, "counter", &zm_moon_amb::function_6ce4d731, 0, 0);
+  clientfield::register("world", "Az3b", 21000, 1, "counter", &zm_moon_amb::function_6ce4d731, 0, 0);
+  clientfield::register("world", "Az3c", 21000, 1, "counter", &zm_moon_amb::function_6ce4d731, 0, 0);
+  clientfield::register("world", "Az4a", 21000, 1, "counter", &zm_moon_amb::function_6ce4d731, 0, 0);
+  clientfield::register("world", "Az4b", 21000, 1, "counter", &zm_moon_amb::function_6ce4d731, 0, 0);
+  clientfield::register("world", "Az5", 21000, 1, "counter", &zm_moon_amb::function_6ce4d731, 0, 0);
 }
 
 function disable_deadshot(i_local_client_num) {
-  while (!self hasdobj(i_local_client_num)) {
+  while(!self hasdobj(i_local_client_num)) {
     wait(0.05);
   }
   players = getlocalplayers();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(self == players[i]) {
       self clearalternateaimparams();
     }
@@ -217,9 +217,9 @@ function disable_deadshot(i_local_client_num) {
 }
 
 function radar_dish_init() {
-  radar_dish = getentarray(0, "zombie_cosmodrome_radar_dish", "targetname");
-  if(isdefined(radar_dish)) {
-    for (i = 0; i < radar_dish.size; i++) {
+  radar_dish = getEntArray(0, "zombie_cosmodrome_radar_dish", "targetname");
+  if(isDefined(radar_dish)) {
+    for(i = 0; i < radar_dish.size; i++) {
       radar_dish[i] thread radar_dish_rotate();
     }
   }
@@ -227,7 +227,7 @@ function radar_dish_init() {
 
 function radar_dish_rotate() {
   wait(0.1);
-  while (true) {
+  while(true) {
     self rotateyaw(360, randomfloatrange(60, 120));
     self waittill("rotatedone");
   }
@@ -236,7 +236,7 @@ function radar_dish_rotate() {
 function receiving_bay_doors_init() {
   util::waitforallclients();
   players = getlocalplayers();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i] thread receiving_bay_doors(i);
     players[i] thread computer_screens_power(i);
   }
@@ -244,11 +244,11 @@ function receiving_bay_doors_init() {
 
 function receiving_bay_doors(localclientnum) {
   level waittill("power_on");
-  doors = getentarray(localclientnum, "receiving_bay_doors", "targetname");
-  for (i = 0; i < doors.size; i++) {
-    if(isdefined(doors[i].script_vector)) {
-      doors[i] playsound(0, "evt_loading_door_start");
-      doors[i] playloopsound("evt_loading_door_loop", 0.5);
+  doors = getEntArray(localclientnum, "receiving_bay_doors", "targetname");
+  for(i = 0; i < doors.size; i++) {
+    if(isDefined(doors[i].script_vector)) {
+      doors[i] playSound(0, "evt_loading_door_start");
+      doors[i] playLoopSound("evt_loading_door_loop", 0.5);
       doors[i] moveto(doors[i].origin + doors[i].script_vector, 3);
       doors[i] thread stop_loop_play_end();
     }
@@ -258,16 +258,16 @@ function receiving_bay_doors(localclientnum) {
 function stop_loop_play_end() {
   wait(2.6);
   self stoploopsound(0.5);
-  self playsound(0, "evt_loading_door_end");
+  self playSound(0, "evt_loading_door_end");
 }
 
 function computer_screens_power(localclientnum) {
-  screens = getentarray(localclientnum, "moon_comp_screens", "targetname");
-  for (i = 0; i < screens.size; i++) {
+  screens = getEntArray(localclientnum, "moon_comp_screens", "targetname");
+  for(i = 0; i < screens.size; i++) {
     screens[i] hide();
   }
   level waittill("power_on");
-  for (i = 0; i < screens.size; i++) {
+  for(i = 0; i < screens.size; i++) {
     screens[i] show();
   }
 }
@@ -283,12 +283,12 @@ function jump_pad_activate(clientnum) {
 
 function function_c00b8efb(clientnum) {
   player = getlocalplayers()[clientnum];
-  if(!isdefined(player)) {
+  if(!isDefined(player)) {
     return;
   }
-  var_e3a2cc12 = getentarray(clientnum, "jump_pads", "targetname");
+  var_e3a2cc12 = getEntArray(clientnum, "jump_pads", "targetname");
   foreach(var_f5f4e9cc in var_e3a2cc12) {
-    if(isdefined(var_f5f4e9cc.script_noteworthy)) {
+    if(isDefined(var_f5f4e9cc.script_noteworthy)) {
       var_f5f4e9cc util::waittill_dobj(clientnum);
       var_f5f4e9cc useanimtree($generic);
       var_f5f4e9cc animscripted("jump_pad", var_f5f4e9cc.origin, var_f5f4e9cc.angles, "p7_fxanim_zmhd_moon_jump_pad_lrg_anim");
@@ -297,32 +297,32 @@ function function_c00b8efb(clientnum) {
 }
 
 function function_1cd5e7c6(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  var_e3a2cc12 = getentarray(localclientnum, "jump_pads", "targetname");
+  var_e3a2cc12 = getEntArray(localclientnum, "jump_pads", "targetname");
   foreach(var_f5f4e9cc in var_e3a2cc12) {
     if(var_f5f4e9cc.script_int == newval) {
       var_f5f4e9cc util::waittill_dobj(localclientnum);
-      playfxontag(localclientnum, level._effect["jump_pad_jump"], var_f5f4e9cc, "tag_origin");
+      playFXOnTag(localclientnum, level._effect["jump_pad_jump"], var_f5f4e9cc, "tag_origin");
     }
   }
 }
 
 function function_7c00de2d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  playsound(localclientnum, "evt_gasmask_suit_on", self.origin);
+  playSound(localclientnum, "evt_gasmask_suit_on", self.origin);
 }
 
 function function_29c0676c(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  playsound(localclientnum, "evt_gasmask_on_v2", self.origin);
+  playSound(localclientnum, "evt_gasmask_on_v2", self.origin);
 }
 
 function jump_pad_start_fx(int_local_player_num) {
   player = getlocalplayers()[int_local_player_num];
-  if(!isdefined(player)) {
+  if(!isDefined(player)) {
     return;
   }
-  moon_jump_pads = getentarray(int_local_player_num, "jump_pads", "targetname");
-  if(isdefined(moon_jump_pads) && moon_jump_pads.size > 0) {
-    for (i = 0; i < moon_jump_pads.size; i++) {
-      moon_jump_pads[i]._glow = playfxontag(int_local_player_num, level._effect["jump_pad_active"], moon_jump_pads[i], "tag_origin");
+  moon_jump_pads = getEntArray(int_local_player_num, "jump_pads", "targetname");
+  if(isDefined(moon_jump_pads) && moon_jump_pads.size > 0) {
+    for(i = 0; i < moon_jump_pads.size; i++) {
+      moon_jump_pads[i]._glow = playFXOnTag(int_local_player_num, level._effect["jump_pad_active"], moon_jump_pads[i], "tag_origin");
     }
   }
 }
@@ -333,14 +333,14 @@ function dome_malfunction_pad(localclientnum, oldval, newval, bnewent, binitials
   }
   if(newval) {
     player = getlocalplayers()[localclientnum];
-    if(!isdefined(player)) {
+    if(!isDefined(player)) {
       return;
     }
-    for (x = 0; x < level.localplayers.size; x++) {
+    for(x = 0; x < level.localplayers.size; x++) {
       mal_pad = undefined;
       closest = 999999;
-      jump_pads = getentarray(x, "jump_pads", "targetname");
-      for (i = 0; i < jump_pads.size; i++) {
+      jump_pads = getEntArray(x, "jump_pads", "targetname");
+      for(i = 0; i < jump_pads.size; i++) {
         pad = jump_pads[i];
         dist = distance2d(self.origin, pad.origin);
         if(dist < closest) {
@@ -348,13 +348,13 @@ function dome_malfunction_pad(localclientnum, oldval, newval, bnewent, binitials
           closest = dist;
         }
       }
-      if(isdefined(mal_pad._glow)) {
+      if(isDefined(mal_pad._glow)) {
         rand = randomintrange(4, 7);
-        for (i = 0; i < rand; i++) {
+        for(i = 0; i < rand; i++) {
           stopfx(x, mal_pad._glow);
           wait(randomfloatrange(0.05, 0.15));
-          mal_pad playsound(0, "evt_electrical_surge");
-          mal_pad._glow = playfxontag(x, level._effect["jump_pad_active"], mal_pad, "tag_origin");
+          mal_pad playSound(0, "evt_electrical_surge");
+          mal_pad._glow = playFXOnTag(x, level._effect["jump_pad_active"], mal_pad, "tag_origin");
           wait(randomfloatrange(0.05, 0.15));
         }
         stopfx(x, mal_pad._glow);
@@ -362,14 +362,14 @@ function dome_malfunction_pad(localclientnum, oldval, newval, bnewent, binitials
     }
   } else {
     player = getlocalplayers()[localclientnum];
-    if(!isdefined(player)) {
+    if(!isDefined(player)) {
       return;
     }
-    for (x = 0; x < level.localplayers.size; x++) {
+    for(x = 0; x < level.localplayers.size; x++) {
       mal_pad = undefined;
       closest = 999999;
-      jump_pads = getentarray(x, "jump_pads", "targetname");
-      for (i = 0; i < jump_pads.size; i++) {
+      jump_pads = getEntArray(x, "jump_pads", "targetname");
+      for(i = 0; i < jump_pads.size; i++) {
         pad = jump_pads[i];
         dist = distance2d(self.origin, pad.origin);
         if(dist < closest) {
@@ -377,16 +377,16 @@ function dome_malfunction_pad(localclientnum, oldval, newval, bnewent, binitials
           closest = dist;
         }
       }
-      if(isdefined(mal_pad._glow)) {
+      if(isDefined(mal_pad._glow)) {
         rand = randomintrange(4, 7);
-        for (i = 0; i < rand; i++) {
-          mal_pad playsound(0, "evt_electrical_surge");
-          mal_pad._glow = playfxontag(x, level._effect["jump_pad_active"], mal_pad, "tag_origin");
+        for(i = 0; i < rand; i++) {
+          mal_pad playSound(0, "evt_electrical_surge");
+          mal_pad._glow = playFXOnTag(x, level._effect["jump_pad_active"], mal_pad, "tag_origin");
           wait(randomfloatrange(0.05, 0.15));
           stopfx(x, mal_pad._glow);
           wait(randomfloatrange(0.05, 0.15));
         }
-        mal_pad._glow = playfxontag(x, level._effect["jump_pad_active"], mal_pad, "tag_origin");
+        mal_pad._glow = playFXOnTag(x, level._effect["jump_pad_active"], mal_pad, "tag_origin");
       }
     }
   }
@@ -396,7 +396,7 @@ function player_gasp_rumble(localclientnum, oldval, newval, bnewent, binitialsna
   if(!self islocalplayer()) {
     return;
   }
-  if(!isdefined(self getlocalclientnumber())) {
+  if(!isDefined(self getlocalclientnumber())) {
     return;
   }
   if(newval) {
@@ -409,58 +409,58 @@ function player_gasp_rumble(localclientnum, oldval, newval, bnewent, binitialsna
 }
 
 function show_earth(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  for (i = 0; i < level.localplayers.size; i++) {
+  for(i = 0; i < level.localplayers.size; i++) {
     player = getlocalplayers()[i];
-    if(!isdefined(player)) {
+    if(!isDefined(player)) {
       continue;
     }
-    if(!isdefined(player._earth)) {
+    if(!isDefined(player._earth)) {
       player._earth = spawn(i, (-22060.8, -121800, 34463.4), "script_model", 1);
       player._earth.angles = (18, 78, 22);
-      player._earth setmodel("p7_zm_moo_earth");
+      player._earth setModel("p7_zm_moo_earth");
     }
     player._earth show();
   }
 }
 
 function hide_earth(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  for (i = 0; i < level.localplayers.size; i++) {
+  for(i = 0; i < level.localplayers.size; i++) {
     player = getlocalplayers()[i];
-    if(!isdefined(player)) {
+    if(!isDefined(player)) {
       continue;
     }
-    if(isdefined(player._earth)) {
+    if(isDefined(player._earth)) {
       player._earth hide();
     }
   }
 }
 
 function show_destroyed_earth(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  for (i = 0; i < level.localplayers.size; i++) {
+  for(i = 0; i < level.localplayers.size; i++) {
     player = getlocalplayers()[i];
-    if(!isdefined(player)) {
+    if(!isDefined(player)) {
       continue;
     }
-    if(isdefined(player._earth)) {
-      player._earth setmodel("p7_zm_moo_earth_dest");
+    if(isDefined(player._earth)) {
+      player._earth setModel("p7_zm_moo_earth_dest");
     }
   }
 }
 
 function hide_destroyed_earth() {
-  while (true) {
+  while(true) {
     level waittill("hde");
     level thread do_hide_destroyed_earth();
   }
 }
 
 function do_hide_destroyed_earth() {
-  for (i = 0; i < level.localplayers.size; i++) {
+  for(i = 0; i < level.localplayers.size; i++) {
     player = getlocalplayers()[i];
-    if(!isdefined(player)) {
+    if(!isDefined(player)) {
       continue;
     }
-    if(isdefined(player._earth)) {
+    if(isDefined(player._earth)) {
       player._earth delete();
     }
   }
@@ -468,7 +468,7 @@ function do_hide_destroyed_earth() {
 
 function function_d87a7dcc() {
   var_bd7ba30 = 0;
-  while (true) {
+  while(true) {
     if(!level clientfield::get("zombie_power_on")) {
       if(var_bd7ba30) {
         level notify("power_controlled_light");
@@ -493,11 +493,11 @@ function moon_nml_transition(localclientnum, oldval, newval, bnewent, binitialsn
   if(!self islocalplayer()) {
     return;
   }
-  if(!isdefined(self getlocalclientnumber())) {
+  if(!isDefined(self getlocalclientnumber())) {
     return;
   }
   if(newval) {
-    if(isdefined(level._dte_done)) {
+    if(isDefined(level._dte_done)) {
       visionset_mgr::fog_vol_to_visionset_set_suffix("_on");
       level thread function_fbf77a74(localclientnum);
     } else {
@@ -512,7 +512,7 @@ function moon_nml_transition(localclientnum, oldval, newval, bnewent, binitialsn
 
 function function_fbf77a74(localclientnum) {
   self endon("hash_d2b77ba2");
-  while (true) {
+  while(true) {
     var_f4570d42 = randomint(5);
     switch (var_f4570d42) {
       case 0: {

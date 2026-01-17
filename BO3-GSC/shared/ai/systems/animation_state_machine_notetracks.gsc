@@ -12,20 +12,18 @@ function autoexec initnotetrackhandler() {
 
 function private runnotetrackhandler(entity, notetracks) {
   assert(isarray(notetracks));
-  for (index = 0; index < notetracks.size; index++) {
+  for(index = 0; index < notetracks.size; index++) {
     handlenotetrack(entity, notetracks[index]);
   }
 }
 
 function private handlenotetrack(entity, notetrack) {
   notetrackhandler = level._notetrack_handler[notetrack];
-  if(!isdefined(notetrackhandler)) {
+  if(!isDefined(notetrackhandler)) {
     return;
   }
   if(isfunctionptr(notetrackhandler)) {
-    [
-      [notetrackhandler]
-    ](entity);
+    [[notetrackhandler]](entity);
   } else {
     blackboard::setblackboardattribute(entity, notetrackhandler.blackboardattributename, notetrackhandler.blackboardvalue);
   }
@@ -34,12 +32,12 @@ function private handlenotetrack(entity, notetrack) {
 function registernotetrackhandlerfunction(notetrackname, notetrackfuncptr) {
   assert(isstring(notetrackname), "");
   assert(isfunctionptr(notetrackfuncptr), "");
-  assert(!isdefined(level._notetrack_handler[notetrackname]), ("" + notetrackname) + "");
+  assert(!isDefined(level._notetrack_handler[notetrackname]), ("" + notetrackname) + "");
   level._notetrack_handler[notetrackname] = notetrackfuncptr;
 }
 
 function registerblackboardnotetrackhandler(notetrackname, blackboardattributename, blackboardvalue) {
-  notetrackhandler = spawnstruct();
+  notetrackhandler = spawnStruct();
   notetrackhandler.blackboardattributename = blackboardattributename;
   notetrackhandler.blackboardvalue = blackboardvalue;
   level._notetrack_handler[notetrackname] = notetrackhandler;

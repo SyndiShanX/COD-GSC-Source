@@ -290,9 +290,7 @@ dof_process_ads() {
   }
 
   if(isDefined(level.custom_dof_trace)) {
-    [
-      [level.custom_dof_trace]
-    ]();
+    [[level.custom_dof_trace]]();
     return;
   }
 
@@ -319,9 +317,7 @@ dof_process_ads() {
   var_16 = self getcurrentweapon();
 
   if(isDefined(level.special_weapon_dof_funcs[var_16])) {
-    [
-      [level.special_weapon_dof_funcs[var_16]]
-    ](var_14, var_15, var_10, var_13, var_0);
+    [[level.special_weapon_dof_funcs[var_16]]](var_14, var_15, var_10, var_13, var_0);
     return;
   }
 

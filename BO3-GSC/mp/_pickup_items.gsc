@@ -16,11 +16,11 @@
 #namespace pickup_items;
 
 function autoexec __init__sytem__() {
-  system::register("pickup_items", & __init__, undefined, undefined);
+  system::register("pickup_items", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype( & start_gametype);
+  callback::on_start_gametype(&start_gametype);
   level.nullprimaryoffhand = getweapon("null_offhand_primary");
   level.nullsecondaryoffhand = getweapon("null_offhand_secondary");
   level.pickup_items = [];
@@ -33,18 +33,18 @@ function on_player_spawned() {
 }
 
 function start_gametype() {
-  callback::on_spawned( & on_player_spawned);
-  pickup_triggers = getentarray("pickup_item", "targetname");
-  pickup_models = getentarray("pickup_model", "targetname");
+  callback::on_spawned(&on_player_spawned);
+  pickup_triggers = getEntArray("pickup_item", "targetname");
+  pickup_models = getEntArray("pickup_model", "targetname");
   visuals = [];
   foreach(trigger in pickup_triggers) {
     visuals[0] = get_visual_for_trigger(trigger, pickup_models);
-    assert(isdefined(visuals[0]));
+    assert(isDefined(visuals[0]));
     visuals[0] pickup_item_init();
     pickup_item_object = gameobjects::create_use_object("neutral", trigger, visuals, vectorscale((0, 0, 1), 32), istring("pickup_item"));
     pickup_item_object gameobjects::allow_use("any");
     pickup_item_object gameobjects::set_use_time(0);
-    pickup_item_object.onuse = & on_touch;
+    pickup_item_object.onuse = &on_touch;
     level.pickup_items[level.pickup_items.size] = pickup_item_object;
   }
 }
@@ -79,13 +79,13 @@ function get_item_for_pickup() {
 
 function cycle_item() {
   self.current_item = self get_item_for_pickup();
-  if(isdefined(self.current_item.model)) {
-    self setmodel(self.current_item.model);
+  if(isDefined(self.current_item.model)) {
+    self setModel(self.current_item.model);
   }
 }
 
 function get_item_from_string_ammo(perks_string) {
-  item_struct = spawnstruct();
+  item_struct = spawnStruct();
   item_struct.name = "ammo";
   item_struct.weapon = getweapon("scavenger_item");
   item_struct.model = item_struct.weapon.worldmodel;
@@ -95,7 +95,7 @@ function get_item_from_string_ammo(perks_string) {
 }
 
 function get_item_from_string_damage(perks_string) {
-  item_struct = spawnstruct();
+  item_struct = spawnStruct();
   item_struct.name = "damage";
   item_struct.damage_scale = float(perks_string);
   item_struct.model = "wpn_t7_igc_bullet_prop";
@@ -105,7 +105,7 @@ function get_item_from_string_damage(perks_string) {
 }
 
 function get_item_from_string_health(perks_string) {
-  item_struct = spawnstruct();
+  item_struct = spawnStruct();
   item_struct.name = "health";
   item_struct.extra_health = int(perks_string);
   item_struct.model = "p7_medical_surgical_tools_syringe";
@@ -115,8 +115,8 @@ function get_item_from_string_health(perks_string) {
 }
 
 function get_item_from_string_perk(perks_string) {
-  item_struct = spawnstruct();
-  if(!isdefined(level.perkspecialties[perks_string])) {
+  item_struct = spawnStruct();
+  if(!isDefined(level.perkspecialties[perks_string])) {
     util::error((("" + perks_string) + "") + self.origin);
     return;
   }
@@ -128,7 +128,7 @@ function get_item_from_string_perk(perks_string) {
 }
 
 function get_item_from_string_weapon(weapon_and_attachments_string) {
-  item_struct = spawnstruct();
+  item_struct = spawnStruct();
   weapon_and_attachments = strtok(weapon_and_attachments_string, "+");
   weapon_name = getsubstr(weapon_and_attachments[0], 0, weapon_and_attachments[0].size);
   attachments = array::remove_index(weapon_and_attachments, 0);
@@ -267,7 +267,7 @@ function on_touch(player) {
       break;
     }
   }
-  pickup_item playsound(pickup_item.sound_pickup);
+  pickup_item playSound(pickup_item.sound_pickup);
   self gameobjects::set_model_visibility(0);
   self gameobjects::allow_use("none");
   if(level.pickupitemrespawn) {
@@ -279,7 +279,7 @@ function on_touch(player) {
 function respawn_pickup() {
   self notify("respawned");
   pickup_item = self.visuals[0];
-  pickup_item playsound(pickup_item.sound_respawn);
+  pickup_item playSound(pickup_item.sound_respawn);
   pickup_item cycle_item();
   self gameobjects::set_model_visibility(1);
   self gameobjects::allow_use("any");
@@ -384,7 +384,7 @@ function on_touch_weapon(player) {
   if(!player hasweapon(weapon)) {
     return false;
   }
-  if(isdefined(self.script_ammo_clip) && isdefined(self.script_ammo_extra)) {
+  if(isDefined(self.script_ammo_clip) && isDefined(self.script_ammo_extra)) {
     if(had_weapon) {
       player setweaponammostock(weapon, (ammo_in_reserve + self.script_ammo_clip) + self.script_ammo_extra);
     } else {

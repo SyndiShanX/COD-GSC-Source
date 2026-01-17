@@ -70,7 +70,7 @@ init() {
   spawned_bots = 0;
   equipment_weights = array(0, 1, 1, 2, 2, 2, 2, 3, 3, 4);
   can_use_equipment = random(equipment_weights);
-  while (spawned_bots < bot_num_enemy) {
+  while(spawned_bots < bot_num_enemy) {
     wait(0.25);
     bot = AddTestClient();
     if(!isDefined(bot)) {
@@ -87,7 +87,7 @@ init() {
   }
   spawned_bots = 0;
   can_use_equipment = random(equipment_weights);
-  while (spawned_bots < bot_num_friendly) {
+  while(spawned_bots < bot_num_friendly) {
     wait(0.25);
     bot = AddTestClient();
     if(!isDefined(bot)) {
@@ -162,20 +162,20 @@ basic_training_auto_assign() {
 }
 bot_wait_for_host() {
   host = GetHostPlayer();
-  while (!isDefined(host)) {
+  while(!isDefined(host)) {
     wait(0.05);
     host = GetHostPlayer();
   }
-  while (!isDefined(host.pers["team"])) {
+  while(!isDefined(host.pers["team"])) {
     wait(0.05);
   }
-  while (host.pers["team"] != "allies" && host.pers["team"] != "axis") {
+  while(host.pers["team"] != "allies" && host.pers["team"] != "axis") {
     wait(0.05);
   }
 }
 bot_spawn_think(team) {
   self endon("disconnect");
-  while (!isDefined(self.pers["team"])) {
+  while(!isDefined(self.pers["team"])) {
     wait .05;
   }
   if(level.teambased) {
@@ -183,14 +183,14 @@ bot_spawn_think(team) {
     wait 0.5;
   }
   self bot_set_rank();
-  while (1) {
+  while(1) {
     self notify("menuresponse", "changeclass", "smg_mp");
     self waittill("spawned_player");
     wait(0.10);
   }
 }
 bot_kick_think() {
-  for (;;) {
+  for(;;) {
     level waittill("bot_kicked", team);
     level thread bot_reconnect_bot(team);
   }
@@ -216,7 +216,7 @@ bot_set_rank() {
   if(!isDefined(self.bot)) {
     self.bot = [];
   }
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(players[i] == self)
       continue;
     if(players[i] is_bot() && isDefined(players[i].bot) && isDefined(players[i].bot["rank"])) {
@@ -228,7 +228,7 @@ bot_set_rank() {
   if(!human_ranks.size)
     human_ranks[human_ranks.size] = 10;
   human_avg = array_average(human_ranks);
-  while (bot_ranks.size + human_ranks.size < 5) {
+  while(bot_ranks.size + human_ranks.size < 5) {
     rank = human_avg + RandomIntRange(-10, 10);
     human_ranks[human_ranks.size] = rank;
   }
@@ -471,7 +471,7 @@ bot_setKillstreaks() {
     allowed_killstreaks[11] = "killstreak_rcbomb";
   }
   used_levels = [];
-  for (i = 0; i < 3; i++) {
+  for(i = 0; i < 3; i++) {
     killstreak = random(allowed_killstreaks);
     allowed_killstreaks = array_remove(allowed_killstreaks, killstreak);
     ks_level = maps\mp\gametypes\_hardpoints::GetKillstreakLevel(i, killstreak);
@@ -484,7 +484,7 @@ bot_setKillstreaks() {
   }
 }
 bot_killstreak_level_is_used(ks_level, used_levels) {
-  for (used = 0; used < used_levels.size; used++) {
+  for(used = 0; used < used_levels.size; used++) {
     if(ks_level == used_levels[used]) {
       return true;
     }
@@ -500,7 +500,7 @@ bot_give_random_weapon(slot, weaponOptions) {
   if(!isDefined(level.bot_weapon_ids[slot])) {
     level.bot_weapon_ids[slot] = [];
     keys = GetArrayKeys(level.tbl_weaponIDs);
-    for (i = 0; i < keys.size; i++) {
+    for(i = 0; i < keys.size; i++) {
       key = keys[i];
       id = level.tbl_weaponIDs[key];
       if(id["reference"] == "weapon_null")
@@ -512,7 +512,7 @@ bot_give_random_weapon(slot, weaponOptions) {
       }
     }
   }
-  for (tries = 0;; tries++) {
+  for(tries = 0;; tries++) {
     id = random(level.bot_weapon_ids[slot]);
     if(id["classified"] != 0) {
       if(!bot_weapon_classified_unlocked(id, rank)) {
@@ -583,7 +583,7 @@ bot_weapon_dual_wield_unlocked(dw_weapon, rank) {
     return false;
   }
   unlock = 999;
-  for (i = 0; i < level.tbl_weaponIDs.size; i++) {
+  for(i = 0; i < level.tbl_weaponIDs.size; i++) {
     id = level.tbl_weaponIDs[i];
     if(!isDefined(id)) {
       continue;
@@ -646,7 +646,7 @@ bot_give_random_armor() {
     keys = GetArrayKeys(level.cac_functions["set_body_model"]);
     self.cac_body_type = random(keys);
     if(game["cac_faction_allies"] == "cub_rebels" && self.pers["team"] == "allies") {
-      while (self.cac_body_type == "hardened_mp") {
+      while(self.cac_body_type == "hardened_mp") {
         self.cac_body_type = random(keys);
       }
     }
@@ -657,7 +657,7 @@ bot_give_random_armor() {
   self bot_give_body_perk();
 }
 bot_give_random_perk(slot) {
-  for (;;) {
+  for(;;) {
     id = random(level.allowedPerks[0]);
     id = level.tbl_PerkData[id];
     if(id["reference"] == "specialty_null")
@@ -670,7 +670,7 @@ bot_give_random_perk(slot) {
     self.bot["cod_points"] = self.bot["cod_points"] - cost;
     self.bot[slot] = id["reference_full"];
     perks = StrTok(id["reference"], "|");
-    for (i = 0; i < perks.size; i++) {
+    for(i = 0; i < perks.size; i++) {
       self SetPerk(perks[i]);
     }
     return;
@@ -707,13 +707,13 @@ bot_give_body_perk() {
   }
   self.bot["specialty1"] = id["reference_full"];
   perks = StrTok(id["reference"], "|");
-  for (i = 0; i < perks.size; i++) {
+  for(i = 0; i < perks.size; i++) {
     self SetPerk(perks[i]);
   }
 }
 bot_perk_from_reference_full(reference_full) {
   keys = GetArrayKeys(level.tbl_PerkData);
-  for (i = keys.size - 1; i >= 0; i--) {
+  for(i = keys.size - 1; i >= 0; i--) {
     key = keys[i];
     if(level.tbl_PerkData[key]["reference_full"] == reference_full) {
       return level.tbl_PerkData[key];
@@ -724,7 +724,7 @@ bot_perk_from_reference_full(reference_full) {
 bot_weapon_reference_from_weapon(weapon) {
   toks = StrTok(weapon, "_");
   reference = toks[0];
-  for (i = 1; i < toks.size - 1; i++) {
+  for(i = 1; i < toks.size - 1; i++) {
     reference = reference + "_" + toks[i];
   }
   return reference;
@@ -736,7 +736,7 @@ bot_get_cod_points() {
   }
   players = get_players();
   total_points = [];
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(players[i] is_bot()) {
       continue;
     }
@@ -846,7 +846,7 @@ bot_cry_for_help(attacker) {
   self.help_time = GetTime();
   players = get_players();
   dist = GetDvarInt(#"scr_help_dist");
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     player = players[i];
     if(!player is_bot()) {
       continue;
@@ -903,10 +903,10 @@ bot_revive_think() {
   if(!level.teamBased) {
     return;
   }
-  for (;;) {
+  for(;;) {
     wait(randomintrange(3, 5));
     players = get_players();
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       player = players[i];
       if(player == self) {
         continue;
@@ -946,12 +946,12 @@ bot_crate_think() {
   self endon("disconnect");
   level endon("game_ended");
   myteam = self.pers["team"];
-  for (;;) {
+  for(;;) {
     self wait_endon(randomintrange(3, 5), "my_crate_landed");
     if(!self bot_is_idle()) {
       continue;
     }
-    crates = GetEntArray("care_package", "script_noteworthy");
+    crates = getEntArray("care_package", "script_noteworthy");
     if(crates.size == 0) {
       continue;
     }
@@ -1024,7 +1024,7 @@ crate_touch_monitor(crate) {
   self endon("bad_path");
   self endon("goal");
   radius = GetDvarFloat(#"player_useRadius");
-  for (;;) {
+  for(;;) {
     wait(0.5);
     if(DistanceSquared(self.origin, crate.origin) < radius * radius) {
       self notify("goal");
@@ -1036,7 +1036,7 @@ bot_crate_touch_think() {
   self endon("death");
   self endon("disconnect");
   radius = GetDvarFloat(#"player_useRadius");
-  for (;;) {
+  for(;;) {
     wait(3);
     if(isDefined(self GetThreat())) {
       continue;
@@ -1044,8 +1044,8 @@ bot_crate_touch_think() {
     if(self UseButtonPressed()) {
       continue;
     }
-    crates = GetEntArray("care_package", "script_noteworthy");
-    for (i = 0; i < crates.size; i++) {
+    crates = getEntArray("care_package", "script_noteworthy");
+    for(i = 0; i < crates.size; i++) {
       crate = crates[i];
       if(DistanceSquared(self.origin, crate.origin) < radius * radius) {
         if(crate.owner == self) {
@@ -1065,9 +1065,9 @@ bot_turret_think() {
   if(GetDvar(#"bot_difficulty") == "easy") {
     return;
   }
-  for (;;) {
+  for(;;) {
     wait(1);
-    turrets = GetEntArray("auto_turret", "classname");
+    turrets = getEntArray("auto_turret", "classname");
     if(turrets.size == 0 || isDefined(self GetThreat())) {
       wait(randomintrange(3, 5));
       continue;
@@ -1091,7 +1091,7 @@ bot_turret_think() {
     if(turret.bots >= 2) {
       continue;
     }
-    forward = AnglesToForward(turret.angles);
+    forward = anglesToForward(turret.angles);
     forward = VectorNormalize(forward);
     delta = self.origin - turret.origin;
     delta = VectorNormalize(delta);
@@ -1148,7 +1148,7 @@ bot_killstreak_think() {
   level endon("game_ended");
   myteam = self.pers["team"];
   wait(1);
-  for (;;) {
+  for(;;) {
     wait(RandomIntRange(3, 5));
     if(self IsRemoteControlling()) {
       continue;
@@ -1230,13 +1230,13 @@ bot_rccar_think() {
   level endon("game_ended");
   wait(2);
   self thread bot_rccar_kill();
-  for (;;) {
+  for(;;) {
     wait(0.5);
     if(!isDefined(self.rcbomb)) {
       return;
     }
     players = get_players();
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       player = players[i];
       if(player == self) {
         continue;
@@ -1263,7 +1263,7 @@ bot_rccar_kill() {
   self endon("weapon_object_destroyed");
   level endon("game_ended");
   og_origin = self.origin;
-  for (;;) {
+  for(;;) {
     wait(1);
     if(!isDefined(self.rcbomb)) {
       return;
@@ -1281,7 +1281,7 @@ bot_rccar_kill() {
   }
 }
 bot_turret_location(weapon) {
-  for (;;) {
+  for(;;) {
     wait(0.5);
     if(!self bot_is_idle()) {
       continue;
@@ -1302,7 +1302,7 @@ bot_turret_location(weapon) {
       continue;
     }
     yaw = (0, self.angles[1], 0);
-    dir = AnglesToForward(yaw);
+    dir = anglesToForward(yaw);
     dir = VectorNormalize(dir);
     goal = self.origin + vector_scale(dir, 32);
     if(weapon == "autoturret_mp" && GetDvar(#"bot_difficulty") != "easy") {
@@ -1331,7 +1331,7 @@ bot_turret_location(weapon) {
 }
 bot_use_supply_drop(weapon) {
   wait_time = 1;
-  for (;;) {
+  for(;;) {
     wait(wait_time);
     wait_time = 1;
     if(!self HasWeapon(weapon)) {
@@ -1356,7 +1356,7 @@ bot_use_supply_drop(weapon) {
       continue;
     }
     yaw = (0, self.angles[1], 0);
-    dir = AnglesToForward(yaw);
+    dir = anglesToForward(yaw);
     dir = VectorNormalize(dir);
     drop_point = self.origin + vector_scale(dir, 384);
     end = drop_point + (0, 0, 2048);
@@ -1392,7 +1392,7 @@ bot_killstreak_location(num, weapon) {
   self waittill("weapon_change");
   self freeze_player_controls(true);
   wait_time = 1;
-  while (!isDefined(self.selectingLocation) || self.selectingLocation == false) {
+  while(!isDefined(self.selectingLocation) || self.selectingLocation == false) {
     wait(0.05);
     wait_time -= 0.05;
     if(wait_time <= 0) {
@@ -1403,7 +1403,7 @@ bot_killstreak_location(num, weapon) {
   }
   wait(2);
   myteam = self.pers["team"];
-  for (i = 0; i < num; i++) {
+  for(i = 0; i < num; i++) {
     wait(0.05);
     player = Random(get_players());
     if(player.sessionstate != "playing") {
@@ -1438,12 +1438,12 @@ bot_dogs_think() {
   if(level.no_dogs) {
     return;
   }
-  for (;;) {
+  for(;;) {
     wait(1);
     if(!isDefined(level.dogs) || level.dogs.size <= 0) {
       level waittill("called_in_the_dogs");
     }
-    for (i = 0; i < level.dogs.size; i++) {
+    for(i = 0; i < level.dogs.size; i++) {
       dog = level.dogs[i];
       if(!isDefined(dog)) {
         continue;
@@ -1474,9 +1474,9 @@ bot_vehicle_think() {
     return;
   }
   myteam = self.pers["team"];
-  for (;;) {
+  for(;;) {
     wait(1);
-    airborne_enemies = GetEntArray("script_vehicle", "classname");
+    airborne_enemies = getEntArray("script_vehicle", "classname");
     if(!isDefined(airborne_enemies) || airborne_enemies.size <= 0) {
       wait(RandomIntRange(3, 5));
       continue;
@@ -1484,7 +1484,7 @@ bot_vehicle_think() {
     if(!self bot_is_idle()) {
       continue;
     }
-    for (i = 0; i < airborne_enemies.size; i++) {
+    for(i = 0; i < airborne_enemies.size; i++) {
       enemy = airborne_enemies[i];
       if(!isDefined(enemy)) {
         continue;
@@ -1517,7 +1517,7 @@ bot_vehicle_think() {
 }
 bot_vehicle_attack(enemy) {
   wait_time = RandomIntRange(7, 10);
-  for (i = 0; i < wait_time; i++) {
+  for(i = 0; i < wait_time; i++) {
     wait(1);
     if(!isDefined(enemy)) {
       return;
@@ -1542,7 +1542,7 @@ bot_vehicle_weapon() {
   weapons[2] = "m202_flash_mp";
   weapons[3] = "minigun_mp";
   weapons[4] = "rpg_mp";
-  for (i = 0; i < weapons.size; i++) {
+  for(i = 0; i < weapons.size; i++) {
     if(self HasWeapon(weapons[i]) && self bot_vehicle_weapon_ammo(weapons[i]) > 0) {
       return true;
     }
@@ -1572,13 +1572,13 @@ bot_wager_think() {
   if(!level.wagerMatch) {
     return;
   }
-  for (;;) {
+  for(;;) {
     wait(RandomIntRange(3, 5));
     if(isDefined(self.hasSpyplane) && self.hasSpyplane == true) {
       players = get_players();
       players = array_randomize(players);
       player = undefined;
-      for (i = 0; i < players.size; i++) {
+      for(i = 0; i < players.size; i++) {
         if(!isDefined(players[i]) || !IsAlive(players[i])) {
           continue;
         }
@@ -1602,7 +1602,7 @@ bot_wager_think() {
 bot_use_item(weapon) {
   self PressAttackButton();
   wait(0.5);
-  for (i = 0; i < 5; i++) {
+  for(i = 0; i < 5; i++) {
     if(self GetCurrentWeapon() == weapon || self GetCurrentWeapon() == "none") {
       self PressAttackButton();
     }
@@ -1617,7 +1617,7 @@ bot_equipment_think(weapon) {
     return;
   }
   weapon = weapon + "_mp";
-  for (;;) {
+  for(;;) {
     wait(RandomIntRange(1, 3));
     if(!self HasWeapon(weapon)) {
       return;
@@ -1649,7 +1649,7 @@ bot_equipment_think(weapon) {
     if(abs(dir[1] - self.angles[1]) > 5) {
       continue;
     }
-    dir = VectorNormalize(AnglesToForward(self.angles));
+    dir = VectorNormalize(anglesToForward(self.angles));
     dir = vector_scale(dir, 32);
     goal = self.origin + dir;
     self SetScriptGoal(goal, 128);
@@ -1679,7 +1679,7 @@ bot_equipment_kill_think() {
     return;
   }
   myteam = self.pers["team"];
-  for (;;) {
+  for(;;) {
     if(self HasPerk("specialty_showenemyequipment")) {
       wait(RandomIntRange(2, 5));
     } else {
@@ -1688,9 +1688,9 @@ bot_equipment_kill_think() {
     if(!self bot_is_idle()) {
       continue;
     }
-    grenades = GetEntArray("grenade", "classname");
+    grenades = getEntArray("grenade", "classname");
     target = undefined;
-    for (i = 0; i < grenades.size; i++) {
+    for(i = 0; i < grenades.size; i++) {
       item = grenades[i];
       if(!isDefined(item.name)) {
         continue;
@@ -1735,8 +1735,8 @@ bot_equipment_kill_think() {
   }
 }
 equipment_nearby(origin) {
-  grenades = GetEntArray("grenade", "classname");
-  for (i = 0; i < grenades.size; i++) {
+  grenades = getEntArray("grenade", "classname");
+  for(i = 0; i < grenades.size; i++) {
     item = grenades[i];
     if(!isDefined(item.name)) {
       continue;
@@ -1773,7 +1773,7 @@ bot_radiation_think() {
   origins = [];
   origins[0] = (813, 5, 267);
   origins[1] = (-811, 30, 363);
-  for (;;) {
+  for(;;) {
     wait(RandomIntRange(5, 10));
     origin = random(origins);
     if(DistanceSquared(self.origin, origin) < 256 * 256) {
@@ -1810,7 +1810,7 @@ bot_spawner_Once() {
 bot_spawner_think() {
   level endon("game_ended");
   wait(0.5);
-  for (;;) {
+  for(;;) {
     wait 10.0;
     if(game["state"] == "postgame")
       return;
@@ -1818,7 +1818,7 @@ bot_spawner_think() {
       continue;
     humans = 0;
     players = level.players;
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       player = players[i];
       if(player is_bot() || player isdemoclient())
         continue;
@@ -1841,7 +1841,7 @@ bot_spawner_think() {
     }
     if(!humans) {
       players = level.players;
-      for (i = 0; i < players.size; i++) {
+      for(i = 0; i < players.size; i++) {
         player = players[i];
         if(!isDefined(player.pers["isBot"]))
           continue;
@@ -1856,7 +1856,7 @@ bot_spawner_think() {
     }
     if(differenceAxis < 0) {
       players = level.players;
-      for (i = 0; i < players.size; i++) {
+      for(i = 0; i < players.size; i++) {
         if(differenceAxis >= 0) {
           break;
         }
@@ -1870,7 +1870,7 @@ bot_spawner_think() {
         }
       }
     } else {
-      for (; differenceAxis > 0; differenceAxis = differenceAxis - 1) {
+      for(; differenceAxis > 0; differenceAxis = differenceAxis - 1) {
         wait(0.25);
         bot = AddTestClient();
         if(!isDefined(bot)) {
@@ -1883,7 +1883,7 @@ bot_spawner_think() {
     }
     if(differenceAllies < 0) {
       players = level.players;
-      for (i = 0; i < players.size; i++) {
+      for(i = 0; i < players.size; i++) {
         if(differenceAllies >= 0) {
           break;
         }
@@ -1897,7 +1897,7 @@ bot_spawner_think() {
         }
       }
     } else {
-      for (; differenceAllies > 0; differenceAllies = differenceAllies - 1) {
+      for(; differenceAllies > 0; differenceAllies = differenceAllies - 1) {
         wait(0.25);
         bot = AddTestClient();
         if(!isDefined(bot)) {

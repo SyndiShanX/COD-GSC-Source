@@ -219,7 +219,6 @@ uaz_override_vehicle(positions) {
 }
 
 truck_vehicle_overrides(positions) {
-
   positions[0].vehicle_getoutanim = % door_pickup_driver_climb_out;
   positions[1].vehicle_getoutanim = % door_pickup_passenger_climb_out;
   positions[2].vehicle_getoutanim = % door_pickup_passenger_RR_climb_out;
@@ -237,7 +236,6 @@ truck_vehicle_overrides(positions) {
   //positions[ 2 ].vehicle_getinanim = %door_pickup_driver_climb_in;
   //positions[ 3 ].vehicle_getinanim = %door_pickup_passenger_climb_in;
   return positions;
-
 }
 
 ride_vehicle_anims() {
@@ -276,5 +274,4 @@ angel_flare_rig_anims() {
   level.scr_anim["angel_flare_rig"]["ac130_angel_flares"][0] = % ac130_angel_flares01;
   level.scr_anim["angel_flare_rig"]["ac130_angel_flares"][1] = % ac130_angel_flares02;
   level.scr_anim["angel_flare_rig"]["ac130_angel_flares"][2] = % ac130_angel_flares03;
-
 }

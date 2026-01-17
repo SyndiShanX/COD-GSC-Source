@@ -82,13 +82,13 @@ fire_spread_shots(str_weapon) {
   v_fwd = self getweaponforwarddir();
   fire_angles = vectortoangles(v_fwd);
   fire_origin = self getweaponmuzzlepoint();
-  trace = bullettrace(fire_origin, fire_origin + v_fwd * 100.0, 0, undefined);
+  trace = bulletTrace(fire_origin, fire_origin + v_fwd * 100.0, 0, undefined);
 
   if(trace["fraction"] != 1) {
     return;
   }
   v_left_angles = (fire_angles[0], fire_angles[1] - 15, fire_angles[2]);
-  v_left = anglestoforward(v_left_angles);
+  v_left = anglesToForward(v_left_angles);
   e_proj = magicbullet(str_weapon, fire_origin + v_fwd * 50.0, fire_origin + v_left * 100.0, self);
   e_proj.additional_shot = 1;
   wait_network_frame();
@@ -97,7 +97,7 @@ fire_spread_shots(str_weapon) {
   fire_angles = vectortoangles(v_fwd);
   fire_origin = self getweaponmuzzlepoint();
   v_right_angles = (fire_angles[0], fire_angles[1] + 15, fire_angles[2]);
-  v_right = anglestoforward(v_right_angles);
+  v_right = anglesToForward(v_right_angles);
   e_proj = magicbullet(str_weapon, fire_origin + v_fwd * 50.0, fire_origin + v_right * 100.0, self);
   e_proj.additional_shot = 1;
 }
@@ -105,7 +105,7 @@ fire_spread_shots(str_weapon) {
 fire_staff_area_of_effect(e_attacker, str_weapon) {
   self waittill("explode", v_pos);
   ent = spawn("script_origin", v_pos);
-  ent playloopsound("wpn_firestaff_grenade_loop", 1);
+  ent playLoopSound("wpn_firestaff_grenade_loop", 1);
 
   level thread puzzle_debug_position("X", vectorscale((1, 0, 0), 255.0), v_pos, undefined, 5.0);
 
@@ -134,7 +134,7 @@ fire_staff_area_of_effect(e_attacker, str_weapon) {
     }
   }
 
-  ent playsound("wpn_firestaff_proj_impact");
+  ent playSound("wpn_firestaff_proj_impact");
   ent delete();
 }
 
@@ -176,7 +176,7 @@ fire_additional_shots(str_weapon) {
       n_player_yaw = v_player_angles[1] + randomfloatrange(-15.0, 15.0);
       v_shot_angles = (n_player_pitch, n_player_yaw, v_player_angles[2]);
       v_shot_start = self getweaponmuzzlepoint();
-      v_shot_end = v_shot_start + anglestoforward(v_shot_angles);
+      v_shot_end = v_shot_start + anglesToForward(v_shot_angles);
       e_proj = magicbullet(str_weapon, v_shot_start, v_shot_end, self);
       e_proj.additional_shot = 1;
       e_proj thread fire_staff_update_grenade_fuse();

@@ -20,10 +20,10 @@
 #namespace zm_temple_powerups;
 
 function init() {
-  level._zombiemode_special_powerup_setup = & temple_special_powerup_setup;
-  level._zombiemode_powerup_grab = & temple_powerup_grab;
-  zm_powerups::add_zombie_powerup("monkey_swarm", "zombie_pickup_monkey", & "ZOMBIE_POWERUP_MONKEY_SWARM");
-  level.playable_area = getentarray("player_volume", "script_noteworthy");
+  level._zombiemode_special_powerup_setup = &temple_special_powerup_setup;
+  level._zombiemode_powerup_grab = &temple_powerup_grab;
+  zm_powerups::add_zombie_powerup("monkey_swarm", "zombie_pickup_monkey", &"ZOMBIE_POWERUP_MONKEY_SWARM");
+  level.playable_area = getEntArray("player_volume", "script_noteworthy");
   level._effect["zombie_kill"] = "impacts/fx_flesh_hit_body_fatal_lg_exit_mp";
 }
 
@@ -32,7 +32,7 @@ function temple_special_powerup_setup(powerup) {
 }
 
 function temple_powerup_grab(powerup) {
-  if(!isdefined(powerup)) {
+  if(!isDefined(powerup)) {
     return;
   }
   switch (powerup.powerup_name) {
@@ -51,42 +51,42 @@ function monkey_swarm(powerup) {
   level flag::clear("spawn_zombies");
   players = getplayers();
   level.monkeys_left_to_spawn = players.size * monkey_count_per_player;
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i] thread player_monkey_think(monkey_count_per_player);
   }
-  while (level.monkeys_left_to_spawn > 0) {
+  while(level.monkeys_left_to_spawn > 0) {
     util::wait_network_frame();
   }
   level flag::set("spawn_zombies");
 }
 
 function player_monkey_think(nummonkeys) {
-  spawns = getentarray("monkey_zombie_spawner", "targetname");
+  spawns = getEntArray("monkey_zombie_spawner", "targetname");
   if(spawns.size == 0) {
     level.monkeys_left_to_spawn = level.monkeys_left_to_spawn - nummonkeys;
     return;
   }
   spawnradius = 10;
   zoneoverride = undefined;
-  if(isdefined(self.is_on_waterslide) && self.is_on_waterslide) {
+  if(isDefined(self.is_on_waterslide) && self.is_on_waterslide) {
     zoneoverride = "caves1_zone";
-  } else if(isdefined(self.is_on_minecart) && self.is_on_minecart) {
+  } else if(isDefined(self.is_on_minecart) && self.is_on_minecart) {
     zoneoverride = "waterfall_lower_zone";
   }
   barriers = self zm_temple_ai_monkey::ent_gathervalidbarriers(zoneoverride);
   println("" + nummonkeys);
-  for (i = 0; i < nummonkeys; i++) {
+  for(i = 0; i < nummonkeys; i++) {
     wait(randomfloatrange(1, 2));
     zombie = self _ent_getbestzombie(300);
-    if(!isdefined(zombie)) {
+    if(!isDefined(zombie)) {
       zombie = self _ent_getbestzombie();
     }
     bloodfx = 0;
     angles = (0, randomfloat(360), 0);
-    forward = anglestoforward(angles);
+    forward = anglesToForward(angles);
     spawnloc = self.origin + (spawnradius * forward);
     spawnangles = self.angles;
-    if(isdefined(zombie)) {
+    if(isDefined(zombie)) {
       spawnloc = zombie.origin + vectorscale((0, 0, 1), 50);
       spawnangles = zombie.angles;
       zombie delete();
@@ -95,10 +95,10 @@ function player_monkey_think(nummonkeys) {
     } else if(barriers.size > 0) {
       best = undefined;
       bestdist = 0;
-      for (b = 0; b < barriers.size; b++) {
+      for(b = 0; b < barriers.size; b++) {
         barrier = barriers[b];
         dist2 = distancesquared(barrier.origin, self.origin);
-        if(!isdefined(best) || dist2 < bestdist) {
+        if(!isDefined(best) || dist2 < bestdist) {
           best = barrier;
           bestdist = dist2;
         }
@@ -121,9 +121,9 @@ function player_monkey_think(nummonkeys) {
     monkey zm_ai_monkey::monkey_prespawn();
     monkey forceteleport(spawnloc, spawnangles);
     if(bloodfx) {
-      playfx(level._effect["zombie_kill"], spawnloc);
+      playFX(level._effect["zombie_kill"], spawnloc);
     }
-    playfx(level._effect["monkey_death"], spawnloc);
+    playFX(level._effect["monkey_death"], spawnloc);
     playsoundatposition("zmb_bolt", spawnloc);
     monkey util::magic_bullet_shield();
     monkey.allowpain = 0;
@@ -136,13 +136,13 @@ function player_monkey_think(nummonkeys) {
 function monkey_powerup_timeout() {
   wait(60);
   self.timeout = 1;
-  while (self.attacking_zombie) {
+  while(self.attacking_zombie) {
     wait(0.1);
   }
-  if(isdefined(self.zombie)) {
+  if(isDefined(self.zombie)) {
     self.zombie.monkey_claimed = 0;
   }
-  playfx(level._effect["monkey_death"], self.origin);
+  playFX(level._effect["monkey_death"], self.origin);
   playsoundatposition("zmb_bolt", self.origin);
   self notify("timeout");
   self delete();
@@ -151,15 +151,15 @@ function monkey_powerup_timeout() {
 function monkey_protect_player(player) {
   self endon("timeout");
   wait(0.5);
-  while (true) {
-    if(isdefined(self.timeout) && self.timeout) {
+  while(true) {
+    if(isDefined(self.timeout) && self.timeout) {
       self waittill("forever");
     }
     zombie = player _ent_getbestzombie();
-    if(isdefined(zombie)) {
+    if(isDefined(zombie)) {
       self thread monkey_attack_zombie(zombie);
       self util::waittill_any("bad_path", "zombie_killed");
-      if(isdefined(zombie)) {
+      if(isDefined(zombie)) {
         zombie.monkey_claimed = 0;
       }
     } else {
@@ -185,8 +185,8 @@ function monkey_attack_zombie(zombie) {
   self.goalradius = 32;
   self setgoalpos(zombie.origin);
   checkdist2 = self.goalradius * self.goalradius;
-  while (true) {
-    if(!isdefined(zombie) || !isalive(zombie)) {
+  while(true) {
+    if(!isDefined(zombie) || !isalive(zombie)) {
       self notify("zombie_killed");
       return;
     }
@@ -199,14 +199,14 @@ function monkey_attack_zombie(zombie) {
   }
   self.attacking_zombie = 1;
   zombie notify("stop_find_flesh");
-  forward = anglestoforward(zombie.angles);
+  forward = anglesToForward(zombie.angles);
   self.attacking_zombie = 0;
-  if(isdefined(zombie)) {
+  if(isDefined(zombie)) {
     zombie.no_powerups = 1;
     zombie.a.gib_ref = "head";
     zombie dodamage(zombie.health + 666, zombie.origin);
     players = getplayers();
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       players[i] zm_score::player_add_points("nuke_powerup", 20);
     }
   }
@@ -218,17 +218,17 @@ function _ent_getbestzombie(mindist) {
   bestzombie = undefined;
   bestdist = 0;
   zombies = getaispeciesarray("axis", "all");
-  if(isdefined(mindist)) {
+  if(isDefined(mindist)) {
     bestdist = mindist * mindist;
   } else {
     bestdist = 1E+08;
   }
-  for (i = 0; i < zombies.size; i++) {
+  for(i = 0; i < zombies.size; i++) {
     z = zombies[i];
-    if(isdefined(z.monkey_claimed) && z.monkey_claimed) {
+    if(isDefined(z.monkey_claimed) && z.monkey_claimed) {
       continue;
     }
-    if(isdefined(z.animname) && z.animname == "monkey_zombie") {
+    if(isDefined(z.animname) && z.animname == "monkey_zombie") {
       continue;
     }
     if(z.classname == "actor_zombie_napalm" || z.classname == "actor_zombie_sonic") {
@@ -247,7 +247,7 @@ function _ent_getbestzombie(mindist) {
 }
 
 function _ent_inplayablearea() {
-  for (i = 0; i < level.playable_area.size; i++) {
+  for(i = 0; i < level.playable_area.size; i++) {
     if(self istouching(level.playable_area[i])) {
       return true;
     }

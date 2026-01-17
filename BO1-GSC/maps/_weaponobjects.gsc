@@ -48,9 +48,9 @@ onPlayerSpawned() {
 }
 
 setup_retrievable_hint_strings() {
-  create_retrievable_hint("hatchet", & "WEAPON_HATCHET_PICKUP");
-  create_retrievable_hint("satchel_charge", & "WEAPON_SATCHEL_CHARGE_PICKUP");
-  create_retrievable_hint("claymore", & "WEAPON_CLAYMORE_PICKUP");
+  create_retrievable_hint("hatchet", &"WEAPON_HATCHET_PICKUP");
+  create_retrievable_hint("satchel_charge", &"WEAPON_SATCHEL_CHARGE_PICKUP");
+  create_retrievable_hint("claymore", &"WEAPON_CLAYMORE_PICKUP");
 }
 
 create_retrievable_hint(name, hint) {
@@ -171,7 +171,7 @@ create_weapon_object_watcher(name, weapon, ownerTeam) {
   }
   weaponObjectWatcher = get_weapon_object_watcher(name);
   if(!isDefined(weaponObjectWatcher)) {
-    weaponObjectWatcher = SpawnStruct();
+    weaponObjectWatcher = spawnStruct();
     self.weaponObjectWatcherArray[self.weaponObjectWatcherArray.size] = weaponObjectWatcher;
   }
   if(getDvar(#"scr_deleteexplosivesonspawn") == "")
@@ -294,7 +294,7 @@ delete_weapon_objects_on_disconnect() {
     return;
   watchers = [];
   for(watcher = 0; watcher < self.weaponObjectWatcherArray.size; watcher++) {
-    weaponObjectWatcher = SpawnStruct();
+    weaponObjectWatcher = spawnStruct();
     watchers[watchers.size] = weaponObjectWatcher;
     weaponObjectWatcher.objectArray = [];
     if(isDefined(self.weaponObjectWatcherArray[watcher].objectArray)) {
@@ -449,7 +449,7 @@ watch_shutdown(player) {
 
 weapon_object_damage(watcher) {
   self endon("death");
-  self setcandamage(true);
+  self setCanDamage(true);
   self.health = 100000;
   attacker = undefined;
   while(1) {
@@ -476,7 +476,7 @@ weapon_object_damage(watcher) {
   thread reset_weapon_object_explode_this_frame();
   if(isDefined(type) && (IsSubStr(type, "MOD_GRENADE_SPLASH") || IsSubStr(type, "MOD_GRENADE") || IsSubStr(type, "MOD_EXPLOSIVE")))
     self.wasChained = true;
-  if(isDefined(iDFlags) && (iDFlags & level.iDFLAGS_PENETRATION))
+  if(isDefined(iDFlags) && (iDFlags &level.iDFLAGS_PENETRATION))
     self.wasDamagedFromBulletPenetration = true;
   self.wasDamaged = true;
   watcher thread wait_and_detonate(self, 0.0, attacker);

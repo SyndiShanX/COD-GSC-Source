@@ -411,8 +411,8 @@ butchdance_combat() {
   wait 0.5;
   var_6 = maps\_utility::obj("defendsnipe");
   objective_onentity(var_6, level.allies[0], (0, 0, 0));
-  objective_add(var_6, "current", & "ENEMY_HQ_PROTECT_MERRICK_AND_KEEGAN");
-  objective_setpointertextoverride(var_6, & "ENEMY_HQ_PROTECT");
+  objective_add(var_6, "current", &"ENEMY_HQ_PROTECT_MERRICK_AND_KEEGAN");
+  objective_setpointertextoverride(var_6, &"ENEMY_HQ_PROTECT");
   maps\enemyhq_code::safe_activate_trigger_with_targetname("butchdance1");
   var_4 = maps\enemyhq_code::array_spawn_targetname_allow_fail("ghost_exfil_wave1", 1);
   thread maps\enemyhq_code::ai_array_killcount_flag_set(var_4, var_4.size - 1, "ghosts_exfil2");
@@ -436,7 +436,7 @@ butchdance_combat() {
     magicbullet("m27", var_10.origin, level.allies[0].origin);
     magicbullet("m27", var_10.origin, level.allies[1].origin);
     wait 0.5;
-    setdvar("ui_deadquote", & "ENEMY_HQ_MERRICK_AND_KEEGAN_WERE");
+    setdvar("ui_deadquote", &"ENEMY_HQ_MERRICK_AND_KEEGAN_WERE");
     maps\_utility::missionfailedwrapper();
     return;
   } else
@@ -542,9 +542,9 @@ butchdance_combat() {
   wait 2;
   maps\_utility::delaythread(2, ::finale_explosions);
   var_20 = maps\_utility::obj("finale_defend");
-  objective_add(var_20, "current", & "ENEMY_HQ_DESTROY_VEHICLE_MOUNTED");
+  objective_add(var_20, "current", &"ENEMY_HQ_DESTROY_VEHICLE_MOUNTED");
   objective_onentity(var_20, level.finale_chopper, (0, 0, 0));
-  objective_setpointertextoverride(var_20, & "ENEMY_HQ_PROTECT");
+  objective_setpointertextoverride(var_20, &"ENEMY_HQ_PROTECT");
 
   if(1) {
     common_scripts\utility::flag_set("stop_drones");
@@ -649,7 +649,7 @@ handle_flyaway_fail() {
 
 truck_turret_fail() {
   wait 4;
-  setdvar("ui_deadquote", & "ENEMY_HQ_YOU_WERE_SHOT_DOWN_BY");
+  setdvar("ui_deadquote", &"ENEMY_HQ_YOU_WERE_SHOT_DOWN_BY");
   maps\_utility::missionfailedwrapper();
 }
 
@@ -842,7 +842,7 @@ player_fail_finale() {
 
     while(common_scripts\utility::flag("player_left_finale_area")) {
       if(var_1 > var_0.size - 1) {
-        setdvar("ui_deadquote", & "ENEMY_HQ_YOU_LEFT_YOUR_TEAM_BEHIND");
+        setdvar("ui_deadquote", &"ENEMY_HQ_YOU_LEFT_YOUR_TEAM_BEHIND");
         maps\_utility::missionfailedwrapper();
         break;
       }
@@ -857,6 +857,6 @@ player_fail_finale() {
 player_fail_finale_instakill() {
   level.player endon("death");
   common_scripts\utility::flag_wait("player_left_finale_area_instakill");
-  setdvar("ui_deadquote", & "ENEMY_HQ_YOU_LEFT_YOUR_TEAM_BEHIND");
+  setdvar("ui_deadquote", &"ENEMY_HQ_YOU_LEFT_YOUR_TEAM_BEHIND");
   maps\_utility::missionfailedwrapper();
 }

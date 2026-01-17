@@ -73,7 +73,7 @@ init() {
   level.grenade_array = [];
   level.inventory_array = [];
   max_weapon_num = 99;
-  for (i = 0; i < max_weapon_num; i++) {
+  for(i = 0; i < max_weapon_num; i++) {
     if(!isDefined(level.tbl_weaponIDs[i]) || level.tbl_weaponIDs[i]["group"] == "")
       continue;
     if(!isDefined(level.tbl_weaponIDs[i]) || level.tbl_weaponIDs[i]["reference"] == "")
@@ -88,7 +88,7 @@ init() {
         if(attachment_tokens.size == 0)
           weapon_class_register(weapon + "_" + attachment + "_mp", weapon_type);
         else {
-          for (k = 0; k < attachment_tokens.size; k++)
+          for(k = 0; k < attachment_tokens.size; k++)
             weapon_class_register(weapon + "_" + attachment_tokens[k] + "_mp", weapon_type);
         }
       }
@@ -101,20 +101,20 @@ init() {
 create_class_exclusion_list() {
   currentDvar = 0;
   level.itemExclusions = [];
-  while (GetDvarInt("item_exclusion_" + currentDvar)) {
+  while(GetDvarInt("item_exclusion_" + currentDvar)) {
     level.itemExclusions[currentDvar] = GetDvarInt("item_exclusion_" + currentDvar);
     currentDvar++;
   }
   level.attachmentExclusions = [];
   currentDvar = 0;
-  while (GetDvar("attachment_exclusion_" + currentDvar) != "") {
+  while(GetDvar("attachment_exclusion_" + currentDvar) != "") {
     level.attachmentExclusions[currentDvar] = GetDvar("attachment_exclusion_" + currentDvar);
     currentDvar++;
   }
 }
 is_item_excluded(itemIndex) {
   numExclusions = level.itemExclusions.size;
-  for (exclusionIndex = 0; exclusionIndex < numExclusions; exclusionIndex++) {
+  for(exclusionIndex = 0; exclusionIndex < numExclusions; exclusionIndex++) {
     if(itemIndex == level.itemExclusions[exclusionIndex]) {
       return true;
     }
@@ -123,7 +123,7 @@ is_item_excluded(itemIndex) {
 }
 is_attachment_excluded(attachment) {
   numExclusions = level.attachmentExclusions.size;
-  for (exclusionIndex = 0; exclusionIndex < numExclusions; exclusionIndex++) {
+  for(exclusionIndex = 0; exclusionIndex < numExclusions; exclusionIndex++) {
     if(attachment == level.attachmentExclusions[exclusionIndex]) {
       return true;
     }
@@ -164,7 +164,7 @@ load_default_loadout_raw(team, class, stat_num) {
   level.default_perk[class] = [];
   if(GetDvarInt(#"scr_game_perks")) {
     currentSpecialty = 0;
-    for (numSpecialties = 0; numSpecialties < 3; numSpecialties++) {
+    for(numSpecialties = 0; numSpecialties < 3; numSpecialties++) {
       perkRef = getDefaultClassSlotWithExclusions(class, "specialty" + (numSpecialties + 1));
       if(perkRef == "weapon_null") {
         level.default_perk[class][currentSpecialty] = "specialty_null";
@@ -220,11 +220,11 @@ cac_init() {
   level.cac_cost = 12;
   level.cac_slot = 13;
   level.cac_classified = 15;
-  for (i = 0; i < 13; i++) {
+  for(i = 0; i < 13; i++) {
     level.tbl_WeaponAttachment[i]["reference"] = tableLookup("mp/attachmentTable.csv", 9, i, 4);
   }
   level.tbl_weaponIDs = [];
-  for (i = 0; i < level.cac_max_item; i++) {
+  for(i = 0; i < level.cac_max_item; i++) {
     itemRow = tableLookupRowNum("mp/statsTable.csv", level.cac_numbering, i);
     if(itemRow > -1) {
       group_s = tableLookupColumnForRow("mp/statsTable.csv", itemRow, level.cac_cgroup);
@@ -243,7 +243,7 @@ cac_init() {
       }
     }
   }
-  for (i = 0; i < level.cac_max_item; i++) {
+  for(i = 0; i < level.cac_max_item; i++) {
     itemRow = tableLookupRowNum("mp/statsTable.csv", level.cac_numbering, i);
     if(itemRow > -1) {
       group_s = tableLookupColumnForRow("mp/statsTable.csv", itemRow, level.cac_cgroup);
@@ -269,7 +269,7 @@ cac_init() {
   level.allowedPerks[1] = [];
   level.allowedPerks[2] = [];
   level.allowedPerks[3] = [];
-  for (i = 0; i < level.cac_max_item; i++) {
+  for(i = 0; i < level.cac_max_item; i++) {
     itemRow = tableLookupRowNum("mp/statsTable.csv", level.cac_numbering, i);
     if(itemRow > -1) {
       group_s = tableLookupColumnForRow("mp/statsTable.csv", itemRow, level.cac_cgroup);
@@ -312,13 +312,13 @@ cac_init() {
   level.allowedKillStreak[2] = [];
   level.allowedKillStreak[3] = [];
   level.allowedKillStreak[4] = [];
-  for (i = 0; i < 5; i++) {
+  for(i = 0; i < 5; i++) {
     level.allowedKillStreak[i][0] = level.killStreakBaseValue;
   }
   j = 1;
   level.killStreakBaseValue = undefined;
   level.totalKillStreaks = 0;
-  for (i = 0; i < level.cac_max_item; i++) {
+  for(i = 0; i < level.cac_max_item; i++) {
     itemRow = tableLookupRowNum("mp/statsTable.csv", level.cac_numbering, i);
     if(itemRow > -1) {
       group_s = tableLookupColumnForRow("mp/statsTable.csv", itemRow, level.cac_cgroup);
@@ -472,7 +472,7 @@ is_warlord_perk(itemIndex) {
   }
 }
 getCacDataGroup(cacRange, numClasses) {
-  for (i = cacRange; i < numClasses; i++) {
+  for(i = cacRange; i < numClasses; i++) {
     primary_grenade = getLoadoutItemFromDDLStats(i, "primarygrenade");
     primary_num = getLoadoutItemFromDDLStats(i, "primary");
     specialty = [];
@@ -496,7 +496,7 @@ getCacDataGroup(cacRange, numClasses) {
     self.custom_class[i]["equipment_slot"] = level.tbl_weaponIDs[equipment]["reference"] + "_mp";
     self.custom_class[i]["equipment_slot_count"] = level.tbl_weaponIDs[equipment]["count"];
     attachmentsDisabled = false;
-    for (j = 0; j < specialty.size; j++) {
+    for(j = 0; j < specialty.size; j++) {
       if(is_warlord_perk(specialty[j]) && is_item_excluded(specialty[j])) {
         attachmentsDisabled = true;
         specialty[j] = 0;
@@ -514,7 +514,7 @@ getCacDataGroup(cacRange, numClasses) {
         iprintln("^1Warning: (" + self.name + ") special grenade " + special_grenade + " is invalid. Setting to concussion grenade.");
         special_grenade = specialIndex;
       }
-      for (j = 0; j < specialty.size; j++) {
+      for(j = 0; j < specialty.size; j++) {
         if(specialGrenadeType == "smoke_grenade" && level.tbl_PerkData[specialty[j]]["reference_full"] == "specialty_specialgrenade") {
           iprintln("^1Warning: (" + self.name + ") smoke grenade may not be used with extra special grenades. Setting to concussion grenade.");
           special_grenade = specialIndex;
@@ -524,7 +524,7 @@ getCacDataGroup(cacRange, numClasses) {
     self.custom_class[i]["primary"] = getFullWeaponName(i, "primary", attachmentsDisabled);
     self.custom_class[i]["secondary"] = getFullWeaponName(i, "secondary", attachmentsDisabled);
     self.custom_class[i]["specialties"] = [];
-    for (j = 0; j < specialty.size; j++) {
+    for(j = 0; j < specialty.size; j++) {
       storeSpecialtyData(self, i, specialty[j]);
     }
     self.custom_class[i]["classbonus"] = classbonus;
@@ -544,7 +544,7 @@ storeDefaultSpecialtyData(className, specialty) {
     specialty = [];
     specialty[0] = t;
   }
-  for (i = 0; i < specialty.size; i++) {
+  for(i = 0; i < specialty.size; i++) {
     index = level.default_perk[className].size;
     if(IsString(specialty[i])) {
       level.default_perk[className][index] = specialty[i];
@@ -559,9 +559,9 @@ storeSpecialtyData(player, class_index, specialty) {
     specialty = [];
     specialty[0] = t;
   }
-  for (i = 0; i < specialty.size; i++) {
+  for(i = 0; i < specialty.size; i++) {
     index = player.custom_class[class_index]["specialties"].size;
-    player.custom_class[class_index]["specialties"][index] = SpawnStruct();
+    player.custom_class[class_index]["specialties"][index] = spawnStruct();
     if(IsString(specialty[i])) {
       player.custom_class[class_index]["specialties"][index].name = specialty[i];
       player.custom_class[class_index]["specialties"][index].weaponref = undefined;
@@ -579,8 +579,8 @@ isPerkGroup(perkName) {
   return (isDefined(perkName) && IsString(perkName));
 }
 getSlotForPerk(perkIndex) {
-  for (i = 0; i < level.allowedPerks.size; i++) {
-    for (j = 0; j < level.allowedPerks[i].size; j++) {
+  for(i = 0; i < level.allowedPerks.size; i++) {
+    for(j = 0; j < level.allowedPerks[i].size; j++) {
       if(isDefined(level.allowedPerks[i][j]) && level.allowedPerks[i][j] == perkIndex) {
         return i;
       }
@@ -602,7 +602,7 @@ validatePerkGroup(perkGroup, perkIndex, classNum) {
     level.specialtyToPerkIndex = [];
   }
   if((isDefined(level.tbl_PerkData[perkIndex]["count"])) && (level.tbl_PerkData[perkIndex]["count"] == 0)) {
-    for (i = 0; i < perks.size; i++) {
+    for(i = 0; i < perks.size; i++) {
       if(!isDefined(level.specialtyToPerkIndex[perks[i]])) {
         level.specialtyToPerkIndex[perks[i]] = perkIndex;
       } else {
@@ -635,7 +635,7 @@ validatePerk(perkIndex, perkSlotIndex, classNum, group) {
   return perks;
 }
 validateKillStreak(killStreakIndex, killStreakSlotIndex) {
-  for (i = 0; i < level.allowedKillStreak[killStreakSlotIndex].size; i++) {
+  for(i = 0; i < level.allowedKillStreak[killStreakSlotIndex].size; i++) {
     if(killStreakIndex == level.allowedKillStreak[killStreakSlotIndex][i])
       return (killStreakIndex);
   }
@@ -645,7 +645,7 @@ logClassChoice(class, primaryWeapon, specialType, perks) {
   if(class == self.lastClass)
     return;
   self logstring("choseclass: " + class + " weapon: " + primaryWeapon + " special: " + specialType);
-  for (i = 0; i < perks.size; i++)
+  for(i = 0; i < perks.size; i++)
     self logstring("perk" + i + ": " + perks[i]);
   self.lastClass = class;
 }
@@ -687,11 +687,11 @@ blackboxClassChoice(primary, secondary, grenades, specialgrenades, equipment) {
     specialgrenades,
     equipment
   );
-  for (i = 0; i < self.killstreak.size; i++) {
+  for(i = 0; i < self.killstreak.size; i++) {
     bbPrint("mpkillstreaks: spawnid %d name %s", spawnid, self.killstreak[i]);
   }
   perks = self GetPerks();
-  for (i = 0; i < perks.size; i++) {
+  for(i = 0; i < perks.size; i++) {
     bbPrint("mpspecialties: spawnid %d name %s", spawnid, perks[i]);
   }
 }
@@ -757,7 +757,7 @@ loadCustomGameModeClasses(team, class) {
     }
   }
   assert(class_num >= 0 && class_num < 10);
-  for (i = 0; i < 10; i++) {
+  for(i = 0; i < 10; i++) {
     primary_grenade = getCustomClassLoadoutItem(i, "primarygrenade");
     primary_num = getCustomClassLoadoutItem(i, "primary");
     specialty = [];
@@ -779,7 +779,7 @@ loadCustomGameModeClasses(team, class) {
     self.custom_class[i]["primary_grenades_count"] = 1;
     self.custom_class[i]["equipment_slot"] = level.tbl_weaponIDs[equipment]["reference"] + "_mp";
     self.custom_class[i]["equipment_slot_count"] = level.tbl_weaponIDs[equipment]["count"];
-    for (j = 0; j < specialty.size; j++) {
+    for(j = 0; j < specialty.size; j++) {
       specialty[j] = validatePerk(specialty[j], j, i);
     }
     classbonus = getCustomClassLoadoutItem(i, "classbonus");
@@ -793,7 +793,7 @@ loadCustomGameModeClasses(team, class) {
         iprintln("^1Warning: (" + self.name + ") special grenade " + special_grenade + " is invalid. Setting to concussion grenade.");
         special_grenade = specialIndex;
       }
-      for (j = 0; j < specialty.size; j++) {
+      for(j = 0; j < specialty.size; j++) {
         if(specialGrenadeType == "smoke_grenade" && level.tbl_PerkData[specialty[j]]["reference_full"] == "specialty_specialgrenade") {
           iprintln("^1Warning: (" + self.name + ") smoke grenade may not be used with extra special grenades. Setting to concussion grenade.");
           special_grenade = specialIndex;
@@ -803,7 +803,7 @@ loadCustomGameModeClasses(team, class) {
     self.custom_class[i]["primary"] = getFullCustomWeaponName(i, "primary");
     self.custom_class[i]["secondary"] = getFullCustomWeaponName(i, "secondary");
     self.custom_class[i]["specialties"] = [];
-    for (j = 0; j < specialty.size; j++) {
+    for(j = 0; j < specialty.size; j++) {
       storeSpecialtyData(self, i, specialty[j]);
     }
     self.custom_class[i]["classbonus"] = classbonus;
@@ -832,7 +832,7 @@ applyCustomClassModifiers() {
 }
 getRandomValidCustomClass(team, class) {
   classList = [];
-  for (i = 0; i < 10; i++) {
+  for(i = 0; i < 10; i++) {
     classTeam = getcustomclassmodifier(i, "team");
     active = getcustomclassmodifier(i, "active");
     if(active > 0 && (classTeam == 1 || (classTeam == 2 && team == "axis") || (classTeam == 3 && team == "allies"))) {
@@ -858,7 +858,7 @@ listWeaponAttachments(weaponName, player) {
   numSubStrings = subStrings.size;
   numAttachments = 0;
   attachments = [];
-  for (currString = 0; currString < numSubStrings; currString++) {
+  for(currString = 0; currString < numSubStrings; currString++) {
     attachPoint = tableLookup("mp/attachmenttable.csv", 4, subStrings[currString], 1);
     if(attachPoint == "") {
       continue;
@@ -935,14 +935,14 @@ giveLoadout(team, class) {
     self.custom_class[class_num]["specialgrenades_count"] = self.custom_class[class_num]["special_grenade_count"];
     self.custom_class[class_num]["equipment"] = self.custom_class[class_num]["equipment_slot"];
     self.custom_class[class_num]["equipment_count"] = self.custom_class[class_num]["equipment_slot_count"];
-    for (i = 0; i < self.custom_class[class_num]["specialties"].size; i++) {
+    for(i = 0; i < self.custom_class[class_num]["specialties"].size; i++) {
       self get_specialtydata(class_num, self.custom_class[class_num]["specialties"][i], i);
     }
     self register_perks();
     giveKillStreaks();
     classbonus_data = tableLookup("mp/classBonusTable.csv", 0, self.custom_class[class_num]["classbonus"], 1);
     specialties = StrTok(classbonus_data, "|");
-    for (i = 0; i < specialties.size; i++) {
+    for(i = 0; i < specialties.size; i++) {
       self SetPerk(specialties[i]);
     }
     if(isDefined(self.pers["weapon"]) && self.pers["weapon"] != "none")
@@ -1035,7 +1035,7 @@ giveLoadout(team, class) {
     assertex(isDefined(self.pers["class"]), "Player during spawn and loadout got no class!");
     selected_class = self.pers["class"];
     specialty_size = level.default_perk[selected_class].size;
-    for (i = 0; i < specialty_size; i++) {
+    for(i = 0; i < specialty_size; i++) {
       if(isDefined(level.default_perk[selected_class][i]) && level.default_perk[selected_class][i] != "")
         self.specialty[self.specialty.size] = level.default_perk[selected_class][i];
     }
@@ -1125,7 +1125,7 @@ setWeaponAmmoOverall(weaponname, amount) {
   }
 }
 onPlayerConnecting() {
-  for (;;) {
+  for(;;) {
     level waittill("connecting", player);
     if(!level.oldschool) {
       if(!isDefined(player.pers["class"])) {
@@ -1162,7 +1162,7 @@ cac_selector() {
   self thread maps\mp\_tacticalinsertion::postLoadout();
   perks = self.specialty;
   self.detectExplosives = false;
-  for (i = 0; i < perks.size; i++) {
+  for(i = 0; i < perks.size; i++) {
     perk = perks[i];
     if(perk == "specialty_detectexplosive")
       self.detectExplosives = true;
@@ -1174,7 +1174,7 @@ cac_selector() {
 register_perks() {
   perks = self.specialty;
   self clearPerks();
-  for (i = 0; i < perks.size; i++) {
+  for(i = 0; i < perks.size; i++) {
     perk = perks[i];
     if(perk == "specialty_null" || isSubStr(perk, "specialty_weapon_") || perk == "weapon_null")
       continue;

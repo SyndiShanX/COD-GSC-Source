@@ -27,7 +27,7 @@ skipto_warehouse() {
   level.vh_player_drone play_fx("drone_spotlight_cheap", level.vh_player_drone gettagorigin("tag_spotlight"), level.vh_player_drone gettagangles("tag_spotlight"), "remove_fx_cheap", 1, "tag_spotlight");
   level.vh_player_soct play_fx("soct_spotlight", level.vh_player_soct gettagorigin("tag_headlights"), level.vh_player_soct gettagangles("tag_headlights"), "remove_fx", 1, "tag_headlights");
   level.vh_player_soct thread watch_for_boost();
-  a_ai_targets = getentarray("ai_target", "script_noteworthy");
+  a_ai_targets = getEntArray("ai_target", "script_noteworthy");
   array_thread(a_ai_targets, ::add_spawn_function, ::set_lock_on_target, vectorscale((0, 0, 1), 45.0));
   add_spawn_function_veh("boss_apache", ::apache_setup);
   level.vh_apache = spawn_vehicle_from_targetname("boss_apache");
@@ -171,8 +171,8 @@ player_drone_crashes_with_boss_chopper_update() {
       level.vh_player_drone delete();
   }
 
-  playfx(level._effect["blockade_explosion"], e_heli.origin);
-  e_heli playsound("exp_veh_large");
+  playFX(level._effect["blockade_explosion"], e_heli.origin);
+  e_heli playSound("exp_veh_large");
   e_heli.delete_on_death = 1;
   e_heli notify("death");
 
@@ -206,7 +206,7 @@ chopper_crashes_into_pipes_anim(str_scene) {
   e_chopper = getent("heli_factory_exit_boss_anim_crash_spawner", "targetname");
 
   if(isDefined(e_chopper))
-    playfxontag(level._effect["ending_helicopter_explosion"], e_chopper, "tag_origin");
+    playFXOnTag(level._effect["ending_helicopter_explosion"], e_chopper, "tag_origin");
 }
 
 get_collision_chopper_in_position(str_target_struct) {
@@ -230,7 +230,7 @@ get_collision_chopper_in_position(str_target_struct) {
 player_soct_collision_ending_check() {
   level thread pak3_timescale(1.25, 2.25);
   wait 2.0;
-  level.player playsound("exp_veh_large");
+  level.player playSound("exp_veh_large");
   earthquake(0.65, 1.0, level.vh_player_drone.origin, 512);
   level notify("player_drone_fatal_collision");
 }
@@ -242,9 +242,9 @@ chopper_crash_scene_starts_chain_reaction(str_chopper_crash_scene, wait_time) {
   e_heli = getent("heli_factory_exit_boss_anim_crash_spawner", "targetname");
 
   if(isDefined(e_heli)) {
-    playfx(level._effect["blockade_explosion"], e_heli.origin);
+    playFX(level._effect["blockade_explosion"], e_heli.origin);
     earthquake(0.65, 1.2, e_heli.origin, 2048);
-    e_heli playsound("exp_veh_large");
+    e_heli playSound("exp_veh_large");
   }
 
   delete_scene(str_chopper_crash_scene);
@@ -432,7 +432,7 @@ pak3_new_ending() {
 
   for(i = 0; i < a_ents.size; i++) {
     e_ent = a_ents[i];
-    v_dir = anglestoforward(e_ent.angles);
+    v_dir = anglesToForward(e_ent.angles);
     v_new_pos = e_ent.origin - v_dir * 500;
     time = 1;
     e_ent moveto(v_new_pos, time);

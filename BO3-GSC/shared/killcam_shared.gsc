@@ -7,13 +7,13 @@
 
 function get_killcam_entity_start_time(killcamentity) {
   killcamentitystarttime = 0;
-  if(isdefined(killcamentity)) {
-    if(isdefined(killcamentity.starttime)) {
+  if(isDefined(killcamentity)) {
+    if(isDefined(killcamentity.starttime)) {
       killcamentitystarttime = killcamentity.starttime;
     } else {
       killcamentitystarttime = killcamentity.birthtime;
     }
-    if(!isdefined(killcamentitystarttime)) {
+    if(!isDefined(killcamentitystarttime)) {
       killcamentitystarttime = 0;
     }
   }
@@ -21,7 +21,7 @@ function get_killcam_entity_start_time(killcamentity) {
 }
 
 function store_killcam_entity_on_entity(killcam_entity) {
-  assert(isdefined(killcam_entity));
+  assert(isDefined(killcam_entity));
   self.killcamentitystarttime = get_killcam_entity_start_time(killcam_entity);
   self.killcamentityindex = killcam_entity getentitynumber();
 }

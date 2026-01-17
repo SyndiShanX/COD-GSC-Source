@@ -134,7 +134,7 @@ starting_snapshot() {
 
 song_player() {
   wait 2;
-  playsound(0, "amb_song", (24019, -19919, 89));
+  playSound(0, "amb_song", (24019, -19919, 89));
 }
 
 setup_ambient_fx_sounds() {
@@ -214,7 +214,7 @@ play_woman_crying() {
   level endon("kill_cry");
 
   while(true) {
-    playsound(0, "amb_crying_woman", (24226, 35097, 606));
+    playSound(0, "amb_crying_woman", (24226, 35097, 606));
     wait(randomintrange(4, 8));
   }
 }

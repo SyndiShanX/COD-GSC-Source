@@ -30,7 +30,7 @@
 #namespace zm_genesis_undercroft_low_grav;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_undercroft_low_grav", & __init__, & __main__, undefined);
+  system::register("zm_genesis_undercroft_low_grav", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -65,7 +65,7 @@ function __main__() {
 
 function function_3fa7f11a() {
   level endon("pressure_pads_activated");
-  var_15ed352b = getentarray("grav_pad_trigger", "targetname");
+  var_15ed352b = getEntArray("grav_pad_trigger", "targetname");
   level.var_4a455ac4 = 0;
   level.var_eca8388c = [];
   foreach(var_3b9a12e0 in var_15ed352b) {
@@ -74,7 +74,7 @@ function function_3fa7f11a() {
     var_e3260cf = getent(var_4de8678a.target, "targetname");
     array::add(level.var_eca8388c, var_e3260cf);
   }
-  while (level.var_4a455ac4 < var_15ed352b.size) {
+  while(level.var_4a455ac4 < var_15ed352b.size) {
     wait(0.05);
   }
   foreach(var_3b9a12e0 in var_15ed352b) {
@@ -100,7 +100,7 @@ function function_e49e9c09() {
   var_e3260cf linkto(var_4de8678a);
   var_2e8e2853 = var_4de8678a.origin - vectorscale((0, 0, 1), 2);
   var_93f2a402 = var_4de8678a.origin;
-  while (true) {
+  while(true) {
     self waittill("trigger", e_who);
     var_4de8678a moveto(var_2e8e2853, 0.5);
     playsoundatposition("evt_stone_plate_down", var_4de8678a.origin);
@@ -108,7 +108,7 @@ function function_e49e9c09() {
     var_e3260cf clientfield::set("undercroft_emissives", 1);
     n_start_time = gettime();
     n_end_time = n_start_time + 3000;
-    while (e_who istouching(self)) {
+    while(e_who istouching(self)) {
       n_time = gettime();
       if(n_time >= n_end_time) {
         level.var_4a455ac4++;
@@ -139,26 +139,26 @@ function function_efcb9832() {
 
 function function_5f1fa8cd(n_duration = 50) {
   level endon("hash_9c3be857");
-  var_e31d98a1 = getentarray("lowgrav_glow", "targetname");
-  var_8ff7104f = getentarray("pyramid", "targetname");
+  var_e31d98a1 = getEntArray("lowgrav_glow", "targetname");
+  var_8ff7104f = getEntArray("pyramid", "targetname");
   var_e31d98a1 = arraycombine(var_8ff7104f, var_e31d98a1, 0, 0);
   level thread function_ba48ca38();
-  while (true) {
+  while(true) {
     level flag::set("low_grav_on");
     exploder::exploder("lgt_low_gravity_on");
-    if(!(isdefined(level.var_513683a6) && level.var_513683a6)) {
+    if(!(isDefined(level.var_513683a6) && level.var_513683a6)) {
       exploder::exploder("fxexp_117");
     }
     level clientfield::set("snd_low_gravity_state", 1);
-    array::thread_all(var_e31d98a1, & clientfield::set, "undercroft_emissives", 1);
-    array::thread_all(level.var_eca8388c, & clientfield::set, "floor_panel_emissives_glow", 1);
+    array::thread_all(var_e31d98a1, &clientfield::set, "undercroft_emissives", 1);
+    array::thread_all(level.var_eca8388c, &clientfield::set, "floor_panel_emissives_glow", 1);
     wait(n_duration - 10);
     level function_e1998cb5();
     level flag::clear("low_grav_on");
     exploder::stop_exploder("lgt_low_gravity_on");
     level clientfield::set("snd_low_gravity_state", 0);
-    array::thread_all(var_e31d98a1, & clientfield::set, "undercroft_emissives", 0);
-    array::thread_all(level.var_eca8388c, & clientfield::set, "floor_panel_emissives_glow", 0);
+    array::thread_all(var_e31d98a1, &clientfield::set, "undercroft_emissives", 0);
+    array::thread_all(level.var_eca8388c, &clientfield::set, "floor_panel_emissives_glow", 0);
     level flag::wait_till_clear("grav_off_for_ee");
     wait(60);
   }
@@ -179,7 +179,7 @@ function function_e1998cb5() {
 
 function function_3ccd9604() {
   self endon("death");
-  while (true) {
+  while(true) {
     if(self istouching(level.var_e3f239e5) && level flag::get("low_grav_on") && self.low_gravity == 0) {
       self zm_genesis_zombie::set_gravity("low");
       self.low_gravity = 1;
@@ -193,8 +193,8 @@ function function_3ccd9604() {
 
 function function_f4766f6() {
   self endon("death");
-  while (true) {
-    if(self istouching(level.var_e3f239e5) && level flag::get("low_grav_on") && (!(isdefined(self.low_gravity) && self.low_gravity))) {
+  while(true) {
+    if(self istouching(level.var_e3f239e5) && level flag::get("low_grav_on") && (!(isDefined(self.low_gravity) && self.low_gravity))) {
       self ai::set_behavior_attribute("gravity", "low");
       self.low_gravity = 1;
     } else if(!self istouching(level.var_e3f239e5) || !level flag::get("low_grav_on")) {
@@ -210,9 +210,9 @@ function function_c3f6aa22() {
   self endon("disconnect");
   level flag::wait_till("low_grav_on");
   self.var_6921c563 = 0;
-  while (true) {
-    while (self istouching(level.var_e3f239e5)) {
-      while (level flag::get("low_grav_on") && self istouching(level.var_e3f239e5)) {
+  while(true) {
+    while(self istouching(level.var_e3f239e5)) {
+      while(level flag::get("low_grav_on") && self istouching(level.var_e3f239e5)) {
         if(self.var_6921c563 == 0) {
           self allowwallrun(1);
           self allowdoublejump(1);
@@ -247,7 +247,7 @@ function function_e997f73a() {
   self endon("death");
   self endon("disconnect");
   self endon("hash_eb16fe00");
-  while (true) {
+  while(true) {
     if(self isonground() || self iswallrunning()) {
       self setdoublejumpenergy(200);
     }
@@ -258,14 +258,14 @@ function function_e997f73a() {
 function function_573a448e() {
   self endon("death");
   self endon("disconnect");
-  while (self.var_6921c563 == 1) {
+  while(self.var_6921c563 == 1) {
     self waittill("jump_begin");
     var_5ed20759 = spawn("script_model", self.origin);
-    var_5ed20759 setmodel("tag_origin");
+    var_5ed20759 setModel("tag_origin");
     var_5ed20759 enablelinkto();
     var_5ed20759 linkto(self, "j_spineupper");
-    playfxontag(level._effect["low_grav_player_jump"], var_5ed20759, "tag_origin");
-    while (!self isonground() || self iswallrunning() && level flag::get("low_grav_on")) {
+    playFXOnTag(level._effect["low_grav_player_jump"], var_5ed20759, "tag_origin");
+    while(!self isonground() || self iswallrunning() && level flag::get("low_grav_on")) {
       wait(0.5);
     }
     var_5ed20759 delete();
@@ -275,9 +275,9 @@ function function_573a448e() {
 
 function function_ba48ca38() {
   e_trig = getent("low_grav_tp_return", "targetname");
-  while (true) {
+  while(true) {
     e_trig waittill("trigger", e_who);
-    if(!isdefined(e_who.var_ee422cb0)) {
+    if(!isDefined(e_who.var_ee422cb0)) {
       e_who thread function_23f211e9();
     }
   }
@@ -294,7 +294,7 @@ function function_23f211e9() {
 
 function function_c3e8e4a4() {
   s_loc = struct::get("perk_powerup_loc", "targetname");
-  level._powerup_timeout_override = & function_e4e4f426;
+  level._powerup_timeout_override = &function_e4e4f426;
   foreach(e_player in level.players) {
     var_6e4b5e90 = level thread zm_powerups::specific_powerup_drop("free_perk", s_loc.origin, undefined, undefined, undefined, e_player);
   }
@@ -310,7 +310,7 @@ function function_e4e4f426() {
 }
 
 function detect_reentry() {
-  if(isdefined(self.var_8665ab89)) {
+  if(isDefined(self.var_8665ab89)) {
     if(self.var_8665ab89 == gettime()) {
       return true;
     }
@@ -322,7 +322,7 @@ function detect_reentry() {
 function function_ab786717() {
   level flagsys::wait_till("");
   wait(1);
-  zm_devgui::add_custom_devgui_callback( & function_e41a2453);
+  zm_devgui::add_custom_devgui_callback(&function_e41a2453);
   adddebugcommand("");
 }
 

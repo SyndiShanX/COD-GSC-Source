@@ -8,7 +8,6 @@
 #include scripts\core_common\math_shared;
 #include scripts\core_common\player_insertion;
 #include scripts\core_common\system_shared;
-
 #namespace bot_insertion;
 
 autoexec __init__system__() {
@@ -19,7 +18,7 @@ __init__() {
   callback::add_callback(#"freefall", &function_c9a18304);
 }
 
-private function_b7de760d() {
+function_b7de760d() {
   foreach(insertion in level.insertions) {
     player_insertion::function_a5fd9aa8(insertion);
 
@@ -33,7 +32,7 @@ private function_b7de760d() {
   return false;
 }
 
-private function_58a44f22() {
+function_58a44f22() {
   teammates = getplayers(self.team);
 
   foreach(player in teammates) {
@@ -45,7 +44,7 @@ private function_58a44f22() {
   return false;
 }
 
-private function_9ea8f9d6() {
+function_9ea8f9d6() {
   teammates = getplayers(self.team);
 
   foreach(player in teammates) {
@@ -58,29 +57,29 @@ private function_9ea8f9d6() {
 }
 
 function_a4f516ef() {
-  self endon(#"death", #"disconnect");
+  self endon(#"death", # "disconnect");
 
   if(getdvarint(#"scr_disable_infiltration", 0)) {
     return;
   }
 
   if(!self flagsys::get(#"hash_287397edba8966f9")) {
-    var_f9664338 = [#"hash_287397edba8966f9", #"hash_224cb97b8f682317"];
+    var_f9664338 = [# "hash_287397edba8966f9", # "hash_224cb97b8f682317"];
     self flagsys::wait_till_any(var_f9664338);
   }
 
   if(function_58a44f22()) {
-    waitresult = self waittill(#"hash_3a41cbe85bdb81e1", #"hash_224cb97b8f682317");
+    waitresult = self waittill(#"hash_3a41cbe85bdb81e1", # "hash_224cb97b8f682317");
 
-    if(waitresult._notify != #"hash_224cb97b8f682317") {
-      self flagsys::wait_till_timeout(function_8ed212d(), #"hash_224cb97b8f682317");
+    if(waitresult._notify != # "hash_224cb97b8f682317") {
+      self flagsys::wait_till_timeout(function_8ed212d(), # "hash_224cb97b8f682317");
     }
 
     return;
   }
 
   assert(isDefined(self.var_33a2e995));
-  self flagsys::wait_till_timeout(self.var_33a2e995, #"hash_224cb97b8f682317");
+  self flagsys::wait_till_timeout(self.var_33a2e995, # "hash_224cb97b8f682317");
 }
 
 function_2ed2a1bb(max) {
@@ -144,7 +143,7 @@ function_9699dc95() {
 
 function_39c5371e() {}
 
-private function_8f2f3bcd() {
+function_8f2f3bcd() {
   center = (0, 0, 0);
   radius = 0;
 
@@ -213,7 +212,7 @@ function_c9a18304(params) {
   if(params.freefall === 1) {
     self notify("262092a28e60152c");
     self endon("262092a28e60152c");
-    self endon(#"death", #"disconnect");
+    self endon(#"death", # "disconnect");
     waitframe(1);
     self botsetmovemagnitude(1);
     target_point = function_8f2f3bcd();
@@ -252,7 +251,7 @@ function_c9a18304(params) {
   self botsetmovemagnitude(0);
 }
 
-private function_dac81c9a(angle_delta) {
+function_dac81c9a(angle_delta) {
   max_delta = getdvarint(#"hash_11e45cd7d81b76c", 30);
 
   if(angle_delta > 0) {

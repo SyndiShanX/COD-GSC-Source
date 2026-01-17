@@ -49,8 +49,7 @@ init_flags() {
   flag_init("end_execution");
 }
 
-init_spawn_functions() {
-}
+init_spawn_functions() {}
 
 main() {
   init_flags();
@@ -68,7 +67,7 @@ main() {
 }
 
 menendez_chickens_setup() {
-  a_chickens = getentarray("menendez_chicken", "targetname");
+  a_chickens = getEntArray("menendez_chicken", "targetname");
 
   foreach(m_chicken in a_chickens)
   m_chicken thread chicken_anim_loop();
@@ -84,23 +83,23 @@ menendez_execution_intro_vo() {
   level endon("execution_start");
   level endon("end_execution");
   trigger_wait("objective_middle_village_trigger", "script_noteworthy");
-  a_executioners = getentarray("village_executioner", "script_noteworthy");
+  a_executioners = getEntArray("village_executioner", "script_noteworthy");
   ai_pdf = get_closest_living(level.player.origin, a_executioners);
   ai_pdf say_dialog("pdf1_get_on_your_knees_0");
   wait 1;
-  a_execution_civs = getentarray("execution_villagers", "script_noteworthy");
+  a_execution_civs = getEntArray("execution_villagers", "script_noteworthy");
   ai_civ = get_closest_living(level.player.origin, a_execution_civs);
   ai_civ say_dialog("cf6_please_let_us_go_w_0");
   wait 1;
-  a_executioners = getentarray("village_executioner", "script_noteworthy");
+  a_executioners = getEntArray("village_executioner", "script_noteworthy");
   ai_pdf = get_closest_living(level.player.origin, a_executioners);
   ai_pdf say_dialog("pdf1_liar_you_are_part_0");
   wait 1;
-  a_execution_civs = getentarray("execution_villagers", "script_noteworthy");
+  a_execution_civs = getEntArray("execution_villagers", "script_noteworthy");
   ai_civ = get_closest_living(level.player.origin, a_execution_civs);
   ai_civ say_dialog("cf7_i_beg_you_have_mer_0");
   wait 1;
-  a_executioners = getentarray("village_executioner", "script_noteworthy");
+  a_executioners = getEntArray("village_executioner", "script_noteworthy");
   ai_pdf = get_closest_living(level.player.origin, a_executioners);
   ai_pdf say_dialog("pdf1_ready_men_beat_f_0");
 }
@@ -152,7 +151,7 @@ close_shed_door() {
   wait 0.15;
   m_door disconnectpaths();
   load_gump("nicaragua_gump_menendez");
-  a_menendez_hill_ents = getentarray("menendez_hill", "script_noteworthy");
+  a_menendez_hill_ents = getEntArray("menendez_hill", "script_noteworthy");
 
   foreach(e_menendez_hill in a_menendez_hill_ents)
   e_menendez_hill delete();

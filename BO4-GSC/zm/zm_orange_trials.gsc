@@ -45,12 +45,11 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_weapons;
-
 #namespace zm_orange_trials;
 
 preload() {
-  clientfield::register("scriptmover", "" + #"hash_71906a124221219", 24000, 1, "int");
-  clientfield::register("scriptmover", "" + #"trials_lighthouse_beam", 24000, 1, "int");
+  clientfield::register("scriptmover", "" + # "hash_71906a124221219", 24000, 1, "int");
+  clientfield::register("scriptmover", "" + # "trials_lighthouse_beam", 24000, 1, "int");
   level flag::init(#"hash_4466889733a90df2");
   level flag::init(#"hash_198bc172b5af7f25");
   level.var_43216bdf = &function_ff59ba7a;
@@ -114,7 +113,7 @@ main() {
       wait 0.2;
 
       foreach(player in getplayers()) {
-        player clientfield::set_to_player("" + #"hash_78b8d89d34b32241", 0);
+        player clientfield::set_to_player("" + # "hash_78b8d89d34b32241", 0);
       }
 
       level flag::clear(#"hash_4466889733a90df2");
@@ -125,8 +124,8 @@ main() {
       }
 
       setlightingstate(0);
-      level clientfield::set("" + #"lava_control", 0);
-      level clientfield::set("" + #"hash_5e69ee96304ec40b", 0);
+      level clientfield::set("" + # "lava_control", 0);
+      level clientfield::set("" + # "hash_5e69ee96304ec40b", 0);
       level.var_71435e8 = 0;
       level flag::clear(#"hash_198bc172b5af7f25");
       level flag::clear(#"hash_69a9d00e65ee6c40");
@@ -142,18 +141,18 @@ main() {
         player notify(#"hash_53bfad7081c69dee");
         player.var_7dc2d507 = 0;
         player zm_orange_water::function_46c3bbf7();
-        player clientfield::set("" + #"hash_55543319943057f1", 0);
-        player clientfield::set_to_player("" + #"hash_5160727729fd57a2", 0);
-        player clientfield::set_to_player("" + #"hash_603fc9d210bdbc4d", 1);
+        player clientfield::set("" + # "hash_55543319943057f1", 0);
+        player clientfield::set_to_player("" + # "hash_5160727729fd57a2", 0);
+        player clientfield::set_to_player("" + # "hash_603fc9d210bdbc4d", 1);
         waitframe(2);
-        player clientfield::set_to_player("" + #"hash_603fc9d210bdbc4d", 0);
+        player clientfield::set_to_player("" + # "hash_603fc9d210bdbc4d", 0);
 
         if(isDefined(player.t_ice)) {
           player.t_ice delete();
           player.t_ice = undefined;
         }
 
-        player clientfield::set_to_player("" + #"hash_13f1aaee7ebf9986", 0);
+        player clientfield::set_to_player("" + # "hash_13f1aaee7ebf9986", 0);
         waitframe(2);
         player thread zm_orange_water::function_ea0c7ed8();
       }
@@ -290,13 +289,13 @@ function_b4bd25ef() {
 }
 
 function_ff0b7907() {
-  level clientfield::set("" + #"hash_72b5b0359ca48427", 1);
+  level clientfield::set("" + # "hash_72b5b0359ca48427", 1);
   playsoundatposition(#"hash_431cadb65b1777ce", (0, 0, 0));
   level thread lui::screen_flash(0.2, 0.5, 1, 0.8, "white");
   wait 0.2;
   setlightingstate(1);
-  level clientfield::set("" + #"lava_control", 1);
-  level clientfield::set("" + #"hash_5e69ee96304ec40b", 1);
+  level clientfield::set("" + # "lava_control", 1);
+  level clientfield::set("" + # "hash_5e69ee96304ec40b", 1);
 
   if(!level flag::get(#"hash_4466889733a90df2")) {
     level flag::set(#"hash_4466889733a90df2");
@@ -322,34 +321,34 @@ function_ff0b7907() {
 
 function_7206d28() {
   self.var_36a93d1 = 0;
-  self clientfield::set_to_player("" + #"hash_13f1aaee7ebf9986", 0);
+  self clientfield::set_to_player("" + # "hash_13f1aaee7ebf9986", 0);
 
   if(self.var_7dc2d507 === 1) {
     self notify(#"hash_53bfad7081c69dee");
     self.var_7dc2d507 = 0;
     self zm_orange_water::function_46c3bbf7();
-    self clientfield::set("" + #"hash_55543319943057f1", 0);
-    self clientfield::set_to_player("" + #"hash_5160727729fd57a2", 0);
-    self clientfield::set_to_player("" + #"hash_603fc9d210bdbc4d", 1);
+    self clientfield::set("" + # "hash_55543319943057f1", 0);
+    self clientfield::set_to_player("" + # "hash_5160727729fd57a2", 0);
+    self clientfield::set_to_player("" + # "hash_603fc9d210bdbc4d", 1);
     waitframe(2);
-    self clientfield::set_to_player("" + #"hash_603fc9d210bdbc4d", 0);
+    self clientfield::set_to_player("" + # "hash_603fc9d210bdbc4d", 0);
 
     if(isDefined(self.t_ice)) {
       self.t_ice delete();
       self.t_ice = undefined;
     }
 
-    self clientfield::set_to_player("" + #"hash_13f1aaee7ebf9986", 0);
+    self clientfield::set_to_player("" + # "hash_13f1aaee7ebf9986", 0);
   }
 
-  self clientfield::set_to_player("" + #"hash_78b8d89d34b32241", 1);
+  self clientfield::set_to_player("" + # "hash_78b8d89d34b32241", 1);
 }
 
 function_b93ad88d() {
   level endon(#"trials_round_end");
-  level.zones[#"ice_floe"].is_enabled = 0;
+  level.zones[# "ice_floe"].is_enabled = 0;
   wait 1;
-  level.zones[#"ice_floe"].is_enabled = 1;
+  level.zones[# "ice_floe"].is_enabled = 1;
 }
 
 function_53a1ecb9() {
@@ -369,7 +368,7 @@ blood_buff() {
   self val::set(#"bludy", "allowdeath", 0);
   level.e_bludy = self;
   self.var_e1cad99d = 3;
-  self.team = #"team3";
+  self.team = # "team3";
   self.var_d45ca662 = 1;
   self.b_ignore_cleanup = 1;
   self.ignoreme = 1;
@@ -400,17 +399,17 @@ function_8532d13f() {
   self endon(#"death");
 
   if(isDefined(level.var_4adebdfc)) {
-    level.var_4adebdfc clientfield::set("" + #"hash_10906b9ce905bda8", 0);
+    level.var_4adebdfc clientfield::set("" + # "hash_10906b9ce905bda8", 0);
   }
 
   wait 3;
   origin = self gettagorigin("j_spine4");
   level.var_4adebdfc.origin = origin;
   level.var_4adebdfc linkto(self, "j_spine4");
-  level.var_4adebdfc clientfield::set("" + #"hash_10906b9ce905bda8", level.var_9e3c632e);
+  level.var_4adebdfc clientfield::set("" + # "hash_10906b9ce905bda8", level.var_9e3c632e);
 }
 
-private function_dcebc908(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime) {
+function_dcebc908(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime) {
   if(isDefined(eattacker) && isDefined(eattacker.var_e1cad99d) && eattacker.var_e1cad99d) {
     return int(ceil(idamage * eattacker.var_e1cad99d));
   }

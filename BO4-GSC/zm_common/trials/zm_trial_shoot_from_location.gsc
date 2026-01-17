@@ -9,7 +9,6 @@
 #include scripts\zm_common\zm_loadout;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
-
 #namespace zm_trial_shoot_from_location;
 
 autoexec __init__system__() {
@@ -24,7 +23,7 @@ __init__() {
   zm_trial::register_challenge(#"shoot_from_location", &on_begin, &on_end);
 }
 
-private on_begin() {
+on_begin() {
   if(util::get_map_name() == "zm_office") {
     elevator1 = getent("elevator1", "targetname");
     elevator2 = getent("elevator2", "targetname");
@@ -46,7 +45,7 @@ private on_begin() {
   }
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   callback::function_824d206(&function_33f0ddd3);
 
   if(util::get_map_name() == "zm_office") {
@@ -67,7 +66,7 @@ private on_end(round_reset) {
   level.var_7f31a12d = undefined;
 }
 
-private function_3658663() {
+function_3658663() {
   self endon(#"disconnect");
   level endon(#"hash_7646638df88a3656");
   var_407eb07 = 0;
@@ -94,7 +93,7 @@ private function_3658663() {
   }
 }
 
-private function_33f0ddd3(s_event) {
+function_33f0ddd3(s_event) {
   if(s_event.event === "give_weapon") {
     var_f2b6fe6e = 0;
 

@@ -4,7 +4,7 @@
 ***************************************************/
 
 main() {
-  self setmodel("c_usa_milcas_mcknight_fb");
+  self setModel("c_usa_milcas_mcknight_fb");
   self.voice = "american";
   self.skeleton = "base";
 }

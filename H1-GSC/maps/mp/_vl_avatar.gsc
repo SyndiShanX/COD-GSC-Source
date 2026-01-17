@@ -15,7 +15,7 @@ init_avatar_pool() {
   var_1 = level.maxavatars + var_0;
   level.vlavatarpool = [];
 
-  for (var_2 = 0; var_2 < var_1; var_2++) {
+  for(var_2 = 0; var_2 < var_1; var_2++) {
     var_3 = maps\mp\agents\_agent_utility::getfreeagent();
     level.vlavatarpool[var_2] = var_3;
     var_3 spawnagent((0, 0, 0), (0, 0, 0));
@@ -58,7 +58,7 @@ set_agent_values(var_0, var_1) {
 }
 
 alloc_avatar() {
-  if(!isdefined(level.vlavatarpool))
+  if(!isDefined(level.vlavatarpool))
     init_avatar_pool();
 
   foreach(var_1 in level.vlavatarpool) {
@@ -87,9 +87,9 @@ teleport_avatar(var_0, var_1, var_2) {
 teleport_avatar_stick(var_0, var_1, var_2) {
   var_0 unlink();
 
-  if(!isdefined(var_0.teleportlinker)) {
+  if(!isDefined(var_0.teleportlinker)) {
     var_0.teleportlinker = spawn("script_model", var_1.origin);
-    var_0.teleportlinker setmodel("tag_origin");
+    var_0.teleportlinker setModel("tag_origin");
   }
 
   var_0.origin = var_1.origin;
@@ -108,7 +108,7 @@ teleport_avatar_stick(var_0, var_1, var_2) {
 }
 
 dontinterpolatewrapper() {
-  if(!isdefined(self.lastinterpolatetime))
+  if(!isDefined(self.lastinterpolatetime))
     self.lastinterpolatetime = 0;
 
   var_0 = gettime();
@@ -121,10 +121,10 @@ dontinterpolatewrapper() {
 }
 
 spawn_an_avatar(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
-  if(!isdefined(var_8))
+  if(!isDefined(var_8))
     var_8 = 0;
 
-  if(!isdefined(var_7))
+  if(!isDefined(var_7))
     var_7 = 1;
 
   var_11 = "allies";
@@ -148,12 +148,12 @@ spawn_an_avatar(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, v
   var_13 motionblurhqenable();
   var_13 maps\mp\gametypes\_spawnlogic::addtocharactersarray();
 
-  if(isdefined(var_9)) {
+  if(isDefined(var_9)) {
     var_13 detachall();
-    var_13 setmodel(var_9);
+    var_13 setModel(var_9);
     var_13.bodymodel = var_9;
 
-    if(isdefined(var_10)) {
+    if(isDefined(var_10)) {
       var_13 attach(var_10);
       var_13.head = var_10;
     }
@@ -187,7 +187,7 @@ spawn_an_avatar(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, v
 
 wait_load_costume_show(var_0) {
   if(isalive(var_0)) {
-    var_1 = isdefined(level.cac_weap);
+    var_1 = isDefined(level.cac_weap);
 
     if(!var_1)
       show_avatar(var_0);
@@ -210,7 +210,7 @@ wait_load_costume(var_0, var_1) {
   var_0 endon("wait_load_costume");
   var_0 endon("death");
 
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     var_1 = 1;
 
   hide_avatar(var_0);
@@ -220,14 +220,14 @@ wait_load_costume(var_0, var_1) {
 
   var_2 = "none";
 
-  if(isdefined(var_0.primaryweapon))
+  if(isDefined(var_0.primaryweapon))
     var_2 = var_0.primaryweapon;
 
   var_3 = maps\mp\_vl_cac::getfactionteam();
   var_4 = maps\mp\_vl_cac::getfactionenvironment();
   var_0.costumeloaded = 0;
 
-  for (var_5 = self loadcostumemodels(var_0.costume, var_0.team, var_2, var_4); !var_5; var_5 = self loadcostumemodels(var_0.costume, var_0.team, var_2, var_4))
+  for(var_5 = self loadcostumemodels(var_0.costume, var_0.team, var_2, var_4); !var_5; var_5 = self loadcostumemodels(var_0.costume, var_0.team, var_2, var_4))
     waitframe();
 
   var_0.costumeloaded = 1;
@@ -248,7 +248,7 @@ allcostumesloaded() {
 }
 
 getnewlobbyavatarownerid(var_0) {
-  for (var_1 = 0; isdefined(level.vlavatars[var_1]); var_1++) {}
+  for(var_1 = 0; isDefined(level.vlavatars[var_1]); var_1++) {}
 
   maps\mp\_vl_base::vlprint("Adding new xuid " + var_0 + " with ownerId=" + var_1 + "\n");
   return var_1;
@@ -266,7 +266,7 @@ showavataronly(var_0, var_1) {
 }
 
 hide_avatar(var_0) {
-  if(isdefined(var_0)) {
+  if(isDefined(var_0)) {
     var_0 notify("hide_avatar");
     var_0 hide();
     var_0 hideallparts();
@@ -278,7 +278,7 @@ show_avatar(var_0, var_1) {
   var_0 show();
   var_0 showallparts();
 
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     var_1 = 1;
 
   if(var_1) {
@@ -288,10 +288,10 @@ show_avatar(var_0, var_1) {
 }
 
 show_avatar_primary_weapon(var_0) {
-  if(isdefined(var_0.primaryweaponent)) {
+  if(isDefined(var_0.primaryweaponent)) {
     var_0.primaryweaponent show();
     var_0.primaryweaponent showallparts();
-  } else if(isdefined(var_0.heldweapon) && !var_0 hasweapon(var_0.heldweapon))
+  } else if(isDefined(var_0.heldweapon) && !var_0 hasweapon(var_0.heldweapon))
     var_0 thread avatargiveheldweapon();
 }
 
@@ -310,11 +310,11 @@ avatargiveheldweapon() {
 }
 
 hide_avatar_primary_weapon(var_0) {
-  if(isdefined(var_0.primaryweaponent)) {
+  if(isDefined(var_0.primaryweaponent)) {
     var_0 notify("hide_primary_weapon");
     var_0.primaryweaponent hide();
     var_0.primaryweaponent hideallparts();
-  } else if(isdefined(var_0.heldweapon) && var_0 hasweapon(var_0.heldweapon))
+  } else if(isDefined(var_0.heldweapon) && var_0 hasweapon(var_0.heldweapon))
     var_0 takeweapon(var_0.heldweapon);
 
   var_0 notify("heldWeaponGone");
@@ -337,10 +337,10 @@ show_avatars() {
 }
 
 get_xuid_for_avatar(var_0) {
-  if(isdefined(var_0.xuid))
+  if(isDefined(var_0.xuid))
     return var_0.xuid;
 
-  if(isdefined(var_0.loadout))
+  if(isDefined(var_0.loadout))
     return var_0.loadout.xuid;
 
   return "";
@@ -348,10 +348,10 @@ get_xuid_for_avatar(var_0) {
 
 get_avatar_for_xuid(var_0) {
   foreach(var_2 in level.vlavatars) {
-    if(isdefined(var_2.xuid) && var_2.xuid == var_0)
+    if(isDefined(var_2.xuid) && var_2.xuid == var_0)
       return var_2;
 
-    if(isdefined(var_2.loadout) && var_2.loadout.xuid == var_0)
+    if(isDefined(var_2.loadout) && var_2.loadout.xuid == var_0)
       return var_2;
   }
 
@@ -387,10 +387,10 @@ removelobbyavatar(var_0) {
   var_0.headmodel = undefined;
   var_0 hideallparts();
 
-  if(isdefined(var_0.avatar_spawnpoint.spawned_avatar))
+  if(isDefined(var_0.avatar_spawnpoint.spawned_avatar))
     var_0.avatar_spawnpoint.spawned_avatar = undefined;
 
-  if(isdefined(var_0.primaryweaponent)) {
+  if(isDefined(var_0.primaryweaponent)) {
     var_0.primaryweaponent delete();
     var_0.primaryweaponent = undefined;
   }
@@ -410,23 +410,23 @@ removelobbyavatar(var_0) {
 }
 
 vl_avatar_costume(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(isdefined(var_2))
+  if(isDefined(var_2))
     var_1.costume = var_2;
 
   var_1 maps\mp\gametypes\_teams::applycostume(var_3, var_4, var_5);
 }
 
 vl_avatar_loadout(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  if(!isdefined(var_5))
+  if(!isDefined(var_5))
     var_5 = level.vlavatars[var_1];
 
   var_7 = maps\mp\_vl_cac::getfactionteam();
   var_8 = maps\mp\_vl_cac::getfactionenvironment();
 
-  if(isdefined(var_6)) {
+  if(isDefined(var_6)) {
     var_7 = level.vl_factions[var_6].team;
     var_8 = level.vl_factions[var_6]._id_3338;
-  } else if(isdefined(var_5.loadout) && isdefined(var_5.loadout._id_A7E7)) {
+  } else if(isDefined(var_5.loadout) && isDefined(var_5.loadout._id_A7E7)) {
     var_7 = level.vl_factions[var_5.loadout._id_A7E7].team;
     var_8 = level.vl_factions[var_5.loadout._id_A7E7]._id_3338;
   }
@@ -443,7 +443,7 @@ vl_avatar_loadout(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 }
 
 vl_give_weapons(var_0) {
-  if(!isdefined(var_0.primaryweapon)) {
+  if(!isDefined(var_0.primaryweapon)) {
     return;
   }
   if(var_0.primaryweapon != "" && var_0.primaryweapon != "none" && var_0.primaryweapon != "specialty_null")
@@ -454,7 +454,7 @@ vl_give_weapons(var_0) {
 
 avatarattachprimaryweapons() {
   if(getdvarint("scr_vl_link_primary_weap", 0) != 0) {
-    if(isdefined(self.heldweapon)) {
+    if(isDefined(self.heldweapon)) {
       if(self hasweapon(self.heldweapon))
         self takeweapon(self.heldweapon);
 
@@ -462,7 +462,7 @@ avatarattachprimaryweapons() {
       self notify("heldWeaponGone");
     }
 
-    if(!isdefined(self.primaryweaponent)) {
+    if(!isDefined(self.primaryweaponent)) {
       var_0 = spawn("weapon_" + self.primaryweapon, (0, 0, 0));
       var_1 = get_xuid_for_avatar(self);
       self.primaryweaponent = var_0;
@@ -475,17 +475,17 @@ avatarattachprimaryweapons() {
       self.primaryweaponent setpickupweapon(self.primaryweapon);
     }
 
-    if(isdefined(self.primaryweaponent))
+    if(isDefined(self.primaryweaponent))
       thread attachprimaryweapon(self);
   } else {
-    if(isdefined(self.primaryweaponent)) {
+    if(isDefined(self.primaryweaponent)) {
       var_1 = get_xuid_for_avatar(self);
       self.primaryweaponent delete();
       self.primaryweaponent = undefined;
     }
 
-    if(!isdefined(self.heldweapon) || self.heldweapon != self.primaryweapon || !maps\mp\_utility::is_true(self.hideweapons) && !self hasweapon(self.heldweapon)) {
-      if(isdefined(self.heldweapon))
+    if(!isDefined(self.heldweapon) || self.heldweapon != self.primaryweapon || !maps\mp\_utility::is_true(self.hideweapons) && !self hasweapon(self.heldweapon)) {
+      if(isDefined(self.heldweapon))
         self takeweapon(self.heldweapon);
 
       self.heldweapon = self.primaryweapon;
@@ -497,7 +497,7 @@ avatarattachprimaryweapons() {
 attachprimaryweapon(var_0) {
   var_1 = undefined;
 
-  if(isdefined(var_0.player))
+  if(isDefined(var_0.player))
     var_1 = var_0.player;
 
   var_2 = "tag_weapon_right";
@@ -559,7 +559,7 @@ agentplaylobbyanim(var_0, var_1, var_2) {
   var_5 = getlobbyidleanimalias(var_1);
   var_6 = var_4 + var_5;
 
-  if(!isdefined(self.lastanim) || self.lastanim != var_6) {
+  if(!isDefined(self.lastanim) || self.lastanim != var_6) {
     var_7 = 0.0;
 
     if(maps\mp\_utility::is_true(var_2))
@@ -580,15 +580,15 @@ debugnode(var_0) {
   var_0 notify("debugNode");
   var_0 endon("debugNode");
 
-  for (;;) {
+  for(;;) {
     var_1 = var_0.origin;
     var_2 = var_0 gettagorigin("j_prop_1");
     var_3 = var_0 gettagangles("j_prop_1");
-    var_4 = anglestoforward(var_3);
+    var_4 = anglesToForward(var_3);
     var_5 = var_2 + var_4 * 5;
     var_6 = var_0 gettagorigin("j_prop_2");
     var_7 = var_0 gettagangles("j_prop_2");
-    var_8 = anglestoforward(var_7);
+    var_8 = anglesToForward(var_7);
     var_9 = var_6 + var_8 * 5;
     waitframe();
   }
@@ -599,7 +599,7 @@ agentplaycacanim() {
   var_1 = "cao_01";
   var_2 = var_0 + var_1;
 
-  if(!isdefined(self.lastanim) || self.lastanim != var_2) {
+  if(!isDefined(self.lastanim) || self.lastanim != var_2) {
     self setanimclass("vlobby_animclass");
     self scragentsetscripted(0);
     self scragentsetorientmode("face angle abs", self.spawn_angles);
@@ -617,7 +617,7 @@ animateallweaponrooms() {
     var_3 = "character" + var_2;
     var_4 = common_scripts\utility::getstruct(var_3, "targetname");
     var_4.scenenode = spawn("script_model", var_4.origin);
-    var_4.scenenode setmodel("genericprop_x5");
+    var_4.scenenode setModel("genericprop_x5");
     var_4.scenenode.location = var_2;
     var_4.scenenode.characterstruct = var_4;
     animateweaponroomscenenode(var_4.scenenode, var_4, var_2);
@@ -638,13 +638,13 @@ startweaponroompropanimations(var_0, var_1, var_2) {
   var_3 = getent("mk19", "targetname");
 
   if(var_2 == "LMG") {
-    if(isdefined(var_3)) {
+    if(isDefined(var_3)) {
       if(!var_3 islinked())
         var_3 linktosynchronizedparent(var_0, "J_prop_3", (0, 0, 0), (0, 0, 0));
 
       var_3 show();
       var_3 scriptmodelplayanimdeltamotionfrompos("h1_lobby_mk19_idle", var_1.origin, var_1.angles, "mk19_anim");
     }
-  } else if(isdefined(var_3))
+  } else if(isDefined(var_3))
     var_3 hide();
 }

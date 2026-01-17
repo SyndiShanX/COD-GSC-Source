@@ -214,7 +214,7 @@ global_inits() {
 
   thread glass_elevator_setup();
 
-  array_thread(GetEntArray("glass_delete", "targetname"), ::delete_glass);
+  array_thread(getEntArray("glass_delete", "targetname"), ::delete_glass);
 
   PreCacheModel("projectile_us_smoke_grenade");
   PreCacheModel("com_cellphone_on");
@@ -239,25 +239,27 @@ global_inits() {
   PreCacheMenu("offensive_skip");
 
   thread jet_engine_death_print();
-  array_thread(GetEntArray("jet_engine", "targetname"), ::jet_engine);
+  array_thread(getEntArray("jet_engine", "targetname"), ::jet_engine);
 
   level.default_goalheight = 128;
 
   // Press^3 [{+actionslot 3}] ^7to use\nthe M203 Grenade Launcher.
-  add_hint_string("grenade_launcher", & "SCRIPT_LEARN_GRENADE_LAUNCHER", ::should_break_m203_hint);
+  add_hint_string("grenade_launcher", &"SCRIPT_LEARN_GRENADE_LAUNCHER", ::should_break_m203_hint);
 }
 
 /************************************************************************************************************/
+
 /*													INTRO													*/
 /************************************************************************************************************/
+
 intro_main() {
   flag_waitopen("friendly_fire_warning");
   level endon("friendly_fire_warning");
 
-  array_thread(GetEntArray("intro_security_run_die", "targetname"), ::add_spawn_function, ::intro_security_run_die);
-  array_thread(GetEntArray("lobby_to_stairs_flow", "targetname"), ::add_spawn_function, ::lobby_to_stairs_flow);
-  array_thread(GetEntArray("lobby_to_stairs_flow", "targetname"), ::lobby_to_stairs_flow_spawner);
-  array_thread(GetEntArray("intro_security_lobby", "targetname"), ::add_spawn_function, ::lobby_security_intro);
+  array_thread(getEntArray("intro_security_run_die", "targetname"), ::add_spawn_function, ::intro_security_run_die);
+  array_thread(getEntArray("lobby_to_stairs_flow", "targetname"), ::add_spawn_function, ::lobby_to_stairs_flow);
+  array_thread(getEntArray("lobby_to_stairs_flow", "targetname"), ::lobby_to_stairs_flow_spawner);
+  array_thread(getEntArray("intro_security_lobby", "targetname"), ::add_spawn_function, ::lobby_security_intro);
 
   activate_trigger("intro_security_lobby", "target");
 
@@ -308,15 +310,15 @@ skip_airport_popup() {
   thread skip_airport_listener();
 
   // ui_offensive_skip is temp until code provides us with profile variable
-  if(level.player GetLocalPlayerProfileData("canSkipOffensiveMissions") != 1)
+  if(level.player GetLocalPlayerProfileData("canSkipOffensiveMissions") != 1) {
     return;
-
+  }
   level.player openpopupMenu("offensive_skip"); // this menu pauses the script
 }
 
 skip_airport_listener() {
   setdvar("ui_skip_airport", "");
-  while (true) {
+  while(true) {
     wait 1;
     if(getdvar("ui_skip_airport") == "1") {
       nextmission();
@@ -367,7 +369,7 @@ intro_dead_bodies() {
 
 #using_animtree("generic_human");
 intro_setup_dead_bodies() {
-  models = GetEntArray("upperdeck_dead_body", "targetname");
+  models = getEntArray("upperdeck_dead_body", "targetname");
 
   array = [];
   foreach(key, model in models)
@@ -395,19 +397,19 @@ intro_civilians() {
   rope Delete();
   blood Hide();
 
-  for (i = 1; i <= 14; i++) {
+  for(i = 1; i <= 14; i++) {
     node = getstruct("intro_lobby_anim_group_" + i, "targetname");
-    if(isdefined(node))
+    if(isDefined(node))
       node thread lobby_people_create(data);
   }
 
-  drones = GetEntArray("intro_lobby_crowd_2", "targetname");
+  drones = getEntArray("intro_lobby_crowd_2", "targetname");
 
   foreach(drone in drones)
   delayThread(1, ::dronespawn, drone);
 
-  array_thread(GetEntArray("lobby_people", "targetname"), ::add_spawn_function, ::lobby_ai_logic);
-  array_thread(GetEntArray("intro_lobby_crowd_2", "targetname"), ::add_spawn_function, ::lobby_drone_logic);
+  array_thread(getEntArray("lobby_people", "targetname"), ::add_spawn_function, ::lobby_ai_logic);
+  array_thread(getEntArray("intro_lobby_crowd_2", "targetname"), ::add_spawn_function, ::lobby_drone_logic);
 
   delayThread(1, ::activate_trigger, "lobby_people_spawner", "targetname");
 
@@ -429,7 +431,7 @@ intro_civilians() {
   level.player add_call(::Kill);
   thread do_wait();
 
-  array_thread(GetEntArray("intro_bank_poll", "targetname"), ::intro_phys_push);
+  array_thread(getEntArray("intro_bank_poll", "targetname"), ::intro_phys_push);
   blood delayCall(4, ::Show);
   wait 1;
 }
@@ -474,7 +476,7 @@ lobby_scene() {
   actor.ignoreall = false;
 
   origin = GetEnt("snd_origin_intro_crowd", "targetname");
-  origin PlaySound("scn_airport_crowd_opening_terror");
+  origin playSound("scn_airport_crowd_opening_terror");
 
   node = getstruct("lobby_scream_track", "targetname");
   thread scream_track(node, "scn_airport_crowd_opening_running", 150);
@@ -492,29 +494,31 @@ lobby_scene() {
 }
 
 /************************************************************************************************************/
+
 /*												UPPERDECK													*/
 /************************************************************************************************************/
+
 stairs_main() {
   flag_waitopen("friendly_fire_warning");
   level endon("friendly_fire_warning");
 
   //	flag_wait( "player_set_speed_lobby" );
 
-  //array_thread( GetEntArray( "upperdeck_civ", "script_noteworthy" ), ::add_spawn_function, ::upperdeck_civ );
+  //array_thread( getEntArray( "upperdeck_civ", "script_noteworthy" ), ::add_spawn_function, ::upperdeck_civ );
 
-  array_thread(GetEntArray("upperdeck_crawler", "script_noteworthy"), ::add_spawn_function, ::upperdeck_crawler);
-  array_thread(GetEntArray("upperdeck_crawlers_1", "script_noteworthy"), ::add_spawn_function, ::upperdeck_crawler);
-  array_thread(GetEntArray("upperdeck_crawlers2", "script_noteworthy"), ::add_spawn_function, ::upperdeck_crawler);
-  array_thread(GetEntArray("upperdeck_crawlers_wait", "script_noteworthy"), ::add_spawn_function, ::upperdeck_crawler);
+  array_thread(getEntArray("upperdeck_crawler", "script_noteworthy"), ::add_spawn_function, ::upperdeck_crawler);
+  array_thread(getEntArray("upperdeck_crawlers_1", "script_noteworthy"), ::add_spawn_function, ::upperdeck_crawler);
+  array_thread(getEntArray("upperdeck_crawlers2", "script_noteworthy"), ::add_spawn_function, ::upperdeck_crawler);
+  array_thread(getEntArray("upperdeck_crawlers_wait", "script_noteworthy"), ::add_spawn_function, ::upperdeck_crawler);
 
-  array_thread(GetEntArray("upperdeck_initial_runners", "script_noteworthy"), ::add_spawn_function, ::upperdeck_initial_runners);
-  array_thread(GetEntArray("upperdeck_runners4", "script_noteworthy"), ::add_spawn_function, ::upperdeck_runners_more, "upperdeck_flow4");
-  array_thread(GetEntArray("upperdeck_runners3", "script_noteworthy"), ::add_spawn_function, ::upperdeck_runners3);
-  array_thread(GetEntArray("upperdeck_runners2", "script_noteworthy"), ::add_spawn_function, ::upperdeck_runners_more, "upperdeck_flow2");
-  array_thread(GetEntArray("upperdeck_runners1b", "script_noteworthy"), ::add_spawn_function, ::upperdeck_runners_more, "upperdeck_flow1b");
-  array_thread(GetEntArray("upperdeck_runners1c", "script_noteworthy"), ::add_spawn_function, ::upperdeck_runners_more, "upperdeck_flow1c");
-  array_thread(GetEntArray("upperdeck_canned_deaths", "targetname"), ::upperdeck_canned_deaths_setup, "stairs_top_open_fire");
-  array_thread(GetEntArray("upperdeck_fakesound", "targetname"), ::upperdeck_fakesound);
+  array_thread(getEntArray("upperdeck_initial_runners", "script_noteworthy"), ::add_spawn_function, ::upperdeck_initial_runners);
+  array_thread(getEntArray("upperdeck_runners4", "script_noteworthy"), ::add_spawn_function, ::upperdeck_runners_more, "upperdeck_flow4");
+  array_thread(getEntArray("upperdeck_runners3", "script_noteworthy"), ::add_spawn_function, ::upperdeck_runners3);
+  array_thread(getEntArray("upperdeck_runners2", "script_noteworthy"), ::add_spawn_function, ::upperdeck_runners_more, "upperdeck_flow2");
+  array_thread(getEntArray("upperdeck_runners1b", "script_noteworthy"), ::add_spawn_function, ::upperdeck_runners_more, "upperdeck_flow1b");
+  array_thread(getEntArray("upperdeck_runners1c", "script_noteworthy"), ::add_spawn_function, ::upperdeck_runners_more, "upperdeck_flow1c");
+  array_thread(getEntArray("upperdeck_canned_deaths", "targetname"), ::upperdeck_canned_deaths_setup, "stairs_top_open_fire");
+  array_thread(getEntArray("upperdeck_fakesound", "targetname"), ::upperdeck_fakesound);
   array_thread(getstructarray("upperdeck_turn_on_arrival", "script_noteworthy"), ::upperdeck_turn_on_arrival);
 
   GetEnt("stairs_cop", "targetname") add_spawn_function(::stairs_cop);
@@ -604,8 +608,10 @@ stairs_saves() {
     thread autosave_by_name("stair_top");
 }
 /************************************************************************************************************/
+
 /*													MASSACRE												*/
 /************************************************************************************************************/
+
 massacre_main() {
   flag_waitopen("friendly_fire_warning");
   level endon("friendly_fire_warning");
@@ -619,31 +625,31 @@ massacre_main() {
   trigger = GetEnt("massacre_rentacop_rush_guy", "target");
   trigger.origin += (0, 0, -10000);
 
-  array_thread(GetEntArray("massacre_dummy", "targetname"), ::massacre_civ_setup);
+  array_thread(getEntArray("massacre_dummy", "targetname"), ::massacre_civ_setup);
   GetEnt("massacre_snd", "targetname") thread massacre_play_sounds();
-  array_thread(GetEntArray("massacre_rentacop_stop", "script_noteworthy"), ::add_spawn_function, ::massacre_rentacop_stop);
-  array_thread(GetEntArray("massacre_rentacop_rush_guy", "targetname"), ::add_spawn_function, ::massacre_rentacop_rush_guy);
-  array_thread(GetEntArray("massacre_rentacop_runaway_guy", "script_noteworthy"), ::add_spawn_function, ::massacre_rentacop_runaway_guy);
-  array_thread(GetEntArray("massacre_rentacop_row1_runner", "script_noteworthy"), ::add_spawn_function, ::massacre_rentacop_row1_runner);
-  array_thread(GetEntArray("massacre_rentacop_row1_fighter", "script_noteworthy"), ::add_spawn_function, ::massacre_rentacop_row1_fighter);
-  array_thread(GetEntArray("massacre_rentacop_row1_defender", "script_noteworthy"), ::add_spawn_function, ::massacre_rentacop_row1_defender);
-  array_thread(GetEntArray("massacre_rentacops_rambo", "script_noteworthy"), ::add_spawn_function, ::massacre_rentacops_rambo);
-  array_thread(GetEntArray("massacre_rentacops_rear", "targetname"), ::add_spawn_function, ::massacre_rentacops_rear);
-  array_thread(GetEntArray("massacre_rentacops_stairs", "targetname"), ::add_spawn_function, ::massacre_rentacops_stairs);
+  array_thread(getEntArray("massacre_rentacop_stop", "script_noteworthy"), ::add_spawn_function, ::massacre_rentacop_stop);
+  array_thread(getEntArray("massacre_rentacop_rush_guy", "targetname"), ::add_spawn_function, ::massacre_rentacop_rush_guy);
+  array_thread(getEntArray("massacre_rentacop_runaway_guy", "script_noteworthy"), ::add_spawn_function, ::massacre_rentacop_runaway_guy);
+  array_thread(getEntArray("massacre_rentacop_row1_runner", "script_noteworthy"), ::add_spawn_function, ::massacre_rentacop_row1_runner);
+  array_thread(getEntArray("massacre_rentacop_row1_fighter", "script_noteworthy"), ::add_spawn_function, ::massacre_rentacop_row1_fighter);
+  array_thread(getEntArray("massacre_rentacop_row1_defender", "script_noteworthy"), ::add_spawn_function, ::massacre_rentacop_row1_defender);
+  array_thread(getEntArray("massacre_rentacops_rambo", "script_noteworthy"), ::add_spawn_function, ::massacre_rentacops_rambo);
+  array_thread(getEntArray("massacre_rentacops_rear", "targetname"), ::add_spawn_function, ::massacre_rentacops_rear);
+  array_thread(getEntArray("massacre_rentacops_stairs", "targetname"), ::add_spawn_function, ::massacre_rentacops_stairs);
 
-  array_thread(GetEntArray("massacre_runners1", "script_noteworthy"), ::add_spawn_function, ::massacre_runners1);
-  array_thread(GetEntArray("massacre_runners2", "script_noteworthy"), ::add_spawn_function, ::massacre_runners2, "scn_airport_running_screams1");
-  array_thread(GetEntArray("massacre_runners3", "script_noteworthy"), ::add_spawn_function, ::massacre_runners2, "scn_airport_running_screams2");
-  array_thread(GetEntArray("massacre_crawler", "script_noteworthy"), ::add_spawn_function, ::massacre_crawler);
+  array_thread(getEntArray("massacre_runners1", "script_noteworthy"), ::add_spawn_function, ::massacre_runners1);
+  array_thread(getEntArray("massacre_runners2", "script_noteworthy"), ::add_spawn_function, ::massacre_runners2, "scn_airport_running_screams1");
+  array_thread(getEntArray("massacre_runners3", "script_noteworthy"), ::add_spawn_function, ::massacre_runners2, "scn_airport_running_screams2");
+  array_thread(getEntArray("massacre_crawler", "script_noteworthy"), ::add_spawn_function, ::massacre_crawler);
 
   //gate stuff
-  array_thread(GetEntArray("tarmac_littlebird_sniper", "script_noteworthy"), ::add_spawn_function, ::tarmac_littlebird_sniper);
-  array_thread(GetEntArray("tarmac_littlebird_sniper2", "script_noteworthy"), ::add_spawn_function, ::tarmac_littlebird_sniper);
-  array_thread(GetEntArray("tarmac_littlebird_pilot", "script_noteworthy"), ::add_spawn_function, ::set_ignoreme, true);
+  array_thread(getEntArray("tarmac_littlebird_sniper", "script_noteworthy"), ::add_spawn_function, ::tarmac_littlebird_sniper);
+  array_thread(getEntArray("tarmac_littlebird_sniper2", "script_noteworthy"), ::add_spawn_function, ::tarmac_littlebird_sniper);
+  array_thread(getEntArray("tarmac_littlebird_pilot", "script_noteworthy"), ::add_spawn_function, ::set_ignoreme, true);
 
-  array_thread(GetEntArray("tarmac_littlebird_sniper", "script_noteworthy"), ::add_spawn_function, ::tarmac_heli_bc_off);
-  array_thread(GetEntArray("tarmac_littlebird_sniper2", "script_noteworthy"), ::add_spawn_function, ::tarmac_heli_bc_off);
-  array_thread(GetEntArray("tarmac_littlebird_pilot", "script_noteworthy"), ::add_spawn_function, ::tarmac_heli_bc_off);
+  array_thread(getEntArray("tarmac_littlebird_sniper", "script_noteworthy"), ::add_spawn_function, ::tarmac_heli_bc_off);
+  array_thread(getEntArray("tarmac_littlebird_sniper2", "script_noteworthy"), ::add_spawn_function, ::tarmac_heli_bc_off);
+  array_thread(getEntArray("tarmac_littlebird_pilot", "script_noteworthy"), ::add_spawn_function, ::tarmac_heli_bc_off);
 
   thread massacre_handle_player_speed();
   thread massacre_elevator();
@@ -653,18 +659,18 @@ massacre_main() {
   thread massacre_handle_death_flag("massacre_runners2", "massacre_runners2_dead");
   thread massacre_handle_death_flag("massacre_runners3", "massacre_runners3_dead");
 
-  foreach(trigger in GetEntArray("massacre_rentacop_stop_trigs", "targetname")) {
+  foreach(trigger in getEntArray("massacre_rentacop_stop_trigs", "targetname")) {
     trigger add_wait(::waittill_msg, "trigger");
     add_func(::trigger_off, "massacre_rentacop_stop_trigs", "targetname");
     thread do_wait();
   }
-  foreach(trigger in GetEntArray("massacre_rentacops_rambo_trigs", "targetname")) {
+  foreach(trigger in getEntArray("massacre_rentacops_rambo_trigs", "targetname")) {
     trigger add_wait(::waittill_msg, "trigger");
     add_func(::trigger_off, "massacre_rentacops_rambo_trigs", "targetname");
     thread do_wait();
   }
 
-  spawners = GetEntArray("massacre_rentacop_extras", "targetname");
+  spawners = getEntArray("massacre_rentacop_extras", "targetname");
   level add_wait(::flag_wait, "massacre_rentacop_rush");
   add_func(::array_thread, spawners, ::spawn_ai, true);
   thread do_wait();
@@ -746,16 +752,18 @@ massacre_handle_player_speed() {
 massacre_play_sounds() {
   flag_wait("massacre_play_sounds");
 
-  self PlayLoopSound("scn_airport_crowd_terminal_loop");
+  self playLoopSound("scn_airport_crowd_terminal_loop");
   flag_wait("massacre_civ_animate");
 
   self StopLoopSound();
-  self PlaySound("scn_airport_crowd_terminal_end");
+  self playSound("scn_airport_crowd_terminal_end");
 }
 
 /************************************************************************************************************/
+
 /*													GATE													*/
 /************************************************************************************************************/
+
 gate_main() {
   add_wait(::flag_wait, "gate_main");
   add_func(::blend_movespeedscale_custom, CONST_TARMAC, 2);
@@ -777,21 +785,21 @@ gate_main() {
   foreach(node in nodes)
   level.team[node.script_noteworthy] thread gate_moveout(node);
 
-  array_thread(GetEntArray("gate_canned_deaths", "targetname"), ::upperdeck_canned_deaths_setup, "gate_canned_deaths");
-  array_thread(GetEntArray("gate_crawler", "targetname"), ::add_spawn_function, ::gate_crawler);
-  array_thread(GetEntArray("gate_runners1", "script_noteworthy"), ::add_spawn_function, ::gate_runners1);
-  array_thread(GetEntArray("gate_sliders", "script_noteworthy"), ::add_spawn_function, ::gate_sliders);
+  array_thread(getEntArray("gate_canned_deaths", "targetname"), ::upperdeck_canned_deaths_setup, "gate_canned_deaths");
+  array_thread(getEntArray("gate_crawler", "targetname"), ::add_spawn_function, ::gate_crawler);
+  array_thread(getEntArray("gate_runners1", "script_noteworthy"), ::add_spawn_function, ::gate_runners1);
+  array_thread(getEntArray("gate_sliders", "script_noteworthy"), ::add_spawn_function, ::gate_sliders);
 
   //moved from tarmac
-  array_thread(GetEntArray("tarmac_van_guys", "targetname"), ::add_spawn_function, ::tarmac_van_guys, "tarmac_van_guys_spawn");
-  array_thread(GetEntArray("tarmac_van_guys2", "targetname"), ::add_spawn_function, ::tarmac_van_guys, "tarmac_van_guys2_spawn");
+  array_thread(getEntArray("tarmac_van_guys", "targetname"), ::add_spawn_function, ::tarmac_van_guys, "tarmac_van_guys_spawn");
+  array_thread(getEntArray("tarmac_van_guys2", "targetname"), ::add_spawn_function, ::tarmac_van_guys, "tarmac_van_guys2_spawn");
   GetEnt("tarmac_swat_van", "targetname") add_spawn_function(::tarmac_van_logic);
   GetEnt("tarmac_swat_van", "targetname") add_spawn_function(::tarmac_van_stuff, "scn_airport_police_van_arrive1", "tarmac_swat_van");
   GetEnt("tarmac_swat_van2", "targetname") add_spawn_function(::tarmac_van_stuff, "scn_airport_police_van_arrive2", "tarmac_swat_van2");
   GetEnt("tarmac_swat_van", "targetname") thread tarmac_van_fake("tarmac_swat_van");
   GetEnt("tarmac_swat_van2", "targetname") thread tarmac_van_fake("tarmac_swat_van2");
 
-  array_thread(GetEntArray("gate_convoy_delete", "script_noteworthy"), ::add_spawn_function, ::gate_convoy_delete);
+  array_thread(getEntArray("gate_convoy_delete", "script_noteworthy"), ::add_spawn_function, ::gate_convoy_delete);
 
   //klaxon and gate
   thread gate_events();
@@ -809,7 +817,7 @@ gate_main() {
 }
 
 gate_events() {
-  array_thread(GetEntArray("gate_emerg_lights", "targetname"), ::gate_klaxon_rotate);
+  array_thread(getEntArray("gate_emerg_lights", "targetname"), ::gate_klaxon_rotate);
   gate_open_gate();
 
   flag_wait("gate_close_gate");
@@ -824,16 +832,18 @@ gate_events() {
 }
 
 /************************************************************************************************************/
+
 /*												BASEMENT													*/
 /************************************************************************************************************/
+
 basement_main() {
   light = GetEnt("basement_door_light", "targetname");
   lightintensity = light GetLightIntensity();
   light SetLightIntensity(0);
 
-  array_thread(GetEntArray("gate_drop_chop_guys", "script_noteworthy"), ::add_spawn_function, ::basement_drop_chop_guys);
-  array_thread(GetEntArray("basement_sec_runner", "targetname"), ::add_spawn_function, ::basement_sec_runner);
-  array_thread(GetEntArray("basement_flicker_light", "targetname"), ::basement_flicker_light);
+  array_thread(getEntArray("gate_drop_chop_guys", "script_noteworthy"), ::add_spawn_function, ::basement_drop_chop_guys);
+  array_thread(getEntArray("basement_sec_runner", "targetname"), ::add_spawn_function, ::basement_sec_runner);
+  array_thread(getEntArray("basement_flicker_light", "targetname"), ::basement_flicker_light);
 
   foreach(member in level.team)
   member thread basement_pre_moveout();
@@ -892,8 +902,10 @@ basement_ammo_stuff() {
 }
 
 /************************************************************************************************************/
+
 /*													TARMAC													*/
 /************************************************************************************************************/
+
 #using_animtree("generic_human");
 tarmac_main() {
   flag_waitopen("friendly_fire_warning");
@@ -903,18 +915,18 @@ tarmac_main() {
   //remove_global_spawn_function( "axis", ::disable_blood_pool );
   //remove_global_spawn_function( "neutral", ::disable_blood_pool );
 
-  array_thread(GetEntArray("tarmac_enemies_wave1", "targetname"), ::add_spawn_function, ::tarmac_enemies_wave1);
-  array_thread(GetEntArray("tarmac_enemies_wave2", "targetname"), ::add_spawn_function, ::enable_teamflashbangImmunity);
-  array_thread(GetEntArray("tarmac_enemies_wave2", "script_noteworthy"), ::add_spawn_function, ::tarmac_enemies_wave2);
-  array_thread(GetEntArray("tarmac_enemies_runners", "targetname"), ::add_spawn_function, ::tarmac_enemies_runners);
-  array_thread(GetEntArray("tarmac_enemies_2ndfloor", "targetname"), ::add_spawn_function, ::tarmac_enemies_2ndfloor);
+  array_thread(getEntArray("tarmac_enemies_wave1", "targetname"), ::add_spawn_function, ::tarmac_enemies_wave1);
+  array_thread(getEntArray("tarmac_enemies_wave2", "targetname"), ::add_spawn_function, ::enable_teamflashbangImmunity);
+  array_thread(getEntArray("tarmac_enemies_wave2", "script_noteworthy"), ::add_spawn_function, ::tarmac_enemies_wave2);
+  array_thread(getEntArray("tarmac_enemies_runners", "targetname"), ::add_spawn_function, ::tarmac_enemies_runners);
+  array_thread(getEntArray("tarmac_enemies_2ndfloor", "targetname"), ::add_spawn_function, ::tarmac_enemies_2ndfloor);
 
-  array_thread(GetEntArray("riotshield_group_1", "script_noteworthy"), ::add_spawn_function, ::tarmac_move_through_smoke);
-  array_thread(GetEntArray("riotshield_group_2", "script_noteworthy"), ::add_spawn_function, ::tarmac_move_through_smoke);
-  array_thread(GetEntArray("tarmac_wave1_moveoverride", "script_noteworthy"), ::add_spawn_function, ::tarmac_move_through_smoke);
+  array_thread(getEntArray("riotshield_group_1", "script_noteworthy"), ::add_spawn_function, ::tarmac_move_through_smoke);
+  array_thread(getEntArray("riotshield_group_2", "script_noteworthy"), ::add_spawn_function, ::tarmac_move_through_smoke);
+  array_thread(getEntArray("tarmac_wave1_moveoverride", "script_noteworthy"), ::add_spawn_function, ::tarmac_move_through_smoke);
 
-  array_thread(GetEntArray("tarmac_security", "targetname"), ::add_spawn_function, ::tarmac_security);
-  array_thread(GetEntArray("tarmac_security_backup", "script_noteworthy"), ::tarmac_security_backup);
+  array_thread(getEntArray("tarmac_security", "targetname"), ::add_spawn_function, ::tarmac_security);
+  array_thread(getEntArray("tarmac_security_backup", "script_noteworthy"), ::tarmac_security_backup);
 
   thread tarmac_handle_player_too_far();
   thread airport_vision_exterior();
@@ -978,7 +990,7 @@ tarmac_main() {
   flag_wait("tarmac_heat_fight");
 
   array_thread(level.team, ::GrenadeDangerbsc);
-  array_thread(getentarray("tarmac_bcs_enemy", "targetname"), ::tarmac_bcs_enemy);
+  array_thread(getEntArray("tarmac_bcs_enemy", "targetname"), ::tarmac_bcs_enemy);
   thread handle_flags_to_advance();
   thread handle_kill_advance();
   thread handle_advance_retreat();
@@ -998,7 +1010,7 @@ tarmac_2ndfloor_group_think() {
 }
 
 handle_flags_to_advance() {
-  for (i = 1; i <= 10; i++) {
+  for(i = 1; i <= 10; i++) {
     name = "tarmac_advance" + i + "_flag";
     trigger = GetEnt(name, "targetname");
     trigger = GetEnt(trigger.target, "targetname");
@@ -1006,7 +1018,7 @@ handle_flags_to_advance() {
     flag_wait(name);
 
     //retreat trigger for other team
-    if(IsDefined(trigger.target))
+    if(isDefined(trigger.target))
       activate_trigger_with_targetname(trigger.target);
 
     volume = trigger get_color_volume_from_trigger();
@@ -1106,9 +1118,9 @@ tarmac_bcs_van() {
 
 tarmac_bsc_move1() {
   flag_waitopen_or_timeout("tarmac_bcs", level.CONST_WAIT_TARMAC_BSC);
-  if(flag("tarmac_bcs"))
+  if(flag("tarmac_bcs")) {
     return;
-
+  }
   makarov = level.makarov;
   victor = level.team["m4"];
 
@@ -1120,9 +1132,9 @@ tarmac_bsc_move1() {
 
 tarmac_bsc_move2() {
   flag_waitopen_or_timeout("tarmac_bcs", level.CONST_WAIT_TARMAC_BSC);
-  if(flag("tarmac_bcs"))
+  if(flag("tarmac_bcs")) {
     return;
-
+  }
   makarov = level.makarov;
   victor = level.team["m4"];
 
@@ -1135,9 +1147,9 @@ tarmac_bsc_move2() {
 
 tarmac_bsc_move3() {
   flag_waitopen_or_timeout("tarmac_bcs", level.CONST_WAIT_TARMAC_BSC);
-  if(flag("tarmac_bcs"))
+  if(flag("tarmac_bcs")) {
     return;
-
+  }
   makarov = level.makarov;
   victor = level.team["m4"];
 
@@ -1150,9 +1162,9 @@ tarmac_bsc_move3() {
 
 tarmac_bsc_move3b() {
   flag_waitopen_or_timeout("tarmac_bcs", level.CONST_WAIT_TARMAC_BSC);
-  if(flag("tarmac_bcs"))
+  if(flag("tarmac_bcs")) {
     return;
-
+  }
   makarov = level.makarov;
   victor = level.team["m4"];
 
@@ -1168,9 +1180,9 @@ tarmac_bsc_move3b() {
 
 tarmac_bsc_move4() {
   flag_waitopen_or_timeout("tarmac_bcs", level.CONST_WAIT_TARMAC_BSC);
-  if(flag("tarmac_bcs"))
+  if(flag("tarmac_bcs")) {
     return;
-
+  }
   makarov = level.makarov;
   victor = level.team["m4"];
 
@@ -1182,9 +1194,9 @@ tarmac_bsc_move4() {
 
 tarmac_bsc_move5() {
   flag_waitopen_or_timeout("tarmac_bcs", level.CONST_WAIT_TARMAC_BSC);
-  if(flag("tarmac_bcs"))
+  if(flag("tarmac_bcs")) {
     return;
-
+  }
   makarov = level.makarov;
   victor = level.team["m4"];
 
@@ -1211,9 +1223,9 @@ tarmac_bsc_move5b() {
 
 tarmac_bsc_move6() {
   flag_waitopen_or_timeout("tarmac_bcs", level.CONST_WAIT_TARMAC_BSC);
-  if(flag("tarmac_bcs"))
+  if(flag("tarmac_bcs")) {
     return;
-
+  }
   makarov = level.makarov;
   victor = level.team["m4"];
 
@@ -1348,9 +1360,9 @@ handle_advance_retreat() {
 
 tarmac_retreat_dialogue(alias) {
   array = tarmac_get_enemies();
-  if(!array.size)
+  if(!array.size) {
     return;
-
+  }
   guy = random(array);
   guy.animname = "generic";
   guy thread dialogue_queue(alias);
@@ -1381,8 +1393,10 @@ tarmac_team_settings() {
 }
 
 /************************************************************************************************************/
+
 /*													ESCAPE													*/
 /************************************************************************************************************/
+
 escape_main() {
   flag_waitopen("friendly_fire_warning");
   level endon("friendly_fire_warning");
@@ -1391,9 +1405,9 @@ escape_main() {
   GetEnt("escape_van_driver", "script_noteworthy") add_spawn_function(::escape_van_driver);
   GetEnt("escape_van_mate", "script_noteworthy") add_spawn_function(::escape_van_mate);
 
-  array_thread(GetEntArray("escape_final_guys", "targetname"), ::add_spawn_function, ::escape_final_guys);
-  array_thread(GetEntArray("escape_final_guys2", "targetname"), ::add_spawn_function, ::escape_final_guys2);
-  array_thread(GetEntArray("escape_police_car_guys", "script_noteworthy"), ::add_spawn_function, ::escape_police_car_guys);
+  array_thread(getEntArray("escape_final_guys", "targetname"), ::add_spawn_function, ::escape_final_guys);
+  array_thread(getEntArray("escape_final_guys2", "targetname"), ::add_spawn_function, ::escape_final_guys2);
+  array_thread(getEntArray("escape_police_car_guys", "script_noteworthy"), ::add_spawn_function, ::escape_police_car_guys);
 
   trigger_off("escape_get_in_trig", "targetname");
 
@@ -1475,12 +1489,9 @@ escape_main() {
   node = GetNode("escape_moveup_1b", "targetname");
   level.makarov follow_path(node, 260);
 
-
   array_thread(level.team, ::enable_cqbwalk);
   array_thread(level.team, ::delaythread, 4, ::disable_cqbwalk);
   level.makarov delaythread(3.5, ::dialogue_queue, "airport_mkv_hallway");
-
-
 
   escape_end_sequence();
 
@@ -1501,10 +1512,10 @@ escape_main() {
 escape_palm_style_door_open(soundalias) {
   /*wait( 1.35 );
 
-  if( IsDefined( soundalias ) )
-  	self PlaySound( soundalias );
+  if( isDefined( soundalias ) )
+  	self playSound( soundalias );
   else
-  	self PlaySound( "door_wood_slow_open" );
+  	self playSound( "door_wood_slow_open" );
 
   self RotateTo( self.angles + ( 0, 70, 0 ), 2, .5, 0 );
   self ConnectPaths();
@@ -1512,10 +1523,10 @@ escape_palm_style_door_open(soundalias) {
   self RotateTo( self.angles + ( 0, 30, 0 ), 1.5, 0, 1.5 );*/
   wait(1.35);
 
-  if(IsDefined(soundalias))
-    self PlaySound(soundalias);
+  if(isDefined(soundalias))
+    self playSound(soundalias);
   else
-    self PlaySound("door_wood_slow_open");
+    self playSound("door_wood_slow_open");
 
   self RotateTo(self.angles + (0, 70, 0), 2, .5, 0);
   self ConnectPaths();
@@ -1663,10 +1674,10 @@ escape_slow_mo() {
 
 end_vanmate_dialogue() {
   self waittillmatch("single anim", "dialog");
-  self playsound("airport_vt_madeit");
+  self playSound("airport_vt_madeit");
 
   self waittillmatch("single anim", "dialog");
-  self playsound("airport_vt_beenough");
+  self playSound("airport_vt_beenough");
 }
 
 escape_van_drive_away(node) {
@@ -1683,9 +1694,9 @@ escape_van_drive_away(node) {
 escape_kill_player(guy) {
   if(level.start_point == "grigs")
     return;
-  if(flag("escape_player_shot"))
+  if(flag("escape_player_shot")) {
     return;
-
+  }
   flag_set("escape_player_shot");
 
   time_hit_ground = .5;
@@ -1727,6 +1738,7 @@ escape_set_end_vision(guy) {
 }
 
 /************************************************************************************************************/
+
 /*												INITIALIZATIONS												*/
 /************************************************************************************************************/
 
@@ -1816,7 +1828,7 @@ start_massacre() {
   trigger_off("upperdeck_runners4", "target");
   trigger_off("upperdeck_runners1b", "target");
   trigger_off("upperdeck_runners1c", "target");
-  array_thread(GetEntArray("upperdeck_runners3", "script_noteworthy"), ::add_spawn_function, ::upperdeck_runners3);
+  array_thread(getEntArray("upperdeck_runners3", "script_noteworthy"), ::add_spawn_function, ::upperdeck_runners3);
 
   thread battlechatter_off("allies");
 
@@ -1870,19 +1882,19 @@ start_basement() {
   start_common_airport();
   thread battlechatter_off("allies");
 
-  array_thread(GetEntArray("tarmac_littlebird_sniper", "script_noteworthy"), ::add_spawn_function, ::tarmac_littlebird_sniper);
-  array_thread(GetEntArray("tarmac_littlebird_sniper2", "script_noteworthy"), ::add_spawn_function, ::tarmac_littlebird_sniper);
-  array_thread(GetEntArray("tarmac_littlebird_pilot", "script_noteworthy"), ::add_spawn_function, ::set_ignoreme, true);
+  array_thread(getEntArray("tarmac_littlebird_sniper", "script_noteworthy"), ::add_spawn_function, ::tarmac_littlebird_sniper);
+  array_thread(getEntArray("tarmac_littlebird_sniper2", "script_noteworthy"), ::add_spawn_function, ::tarmac_littlebird_sniper);
+  array_thread(getEntArray("tarmac_littlebird_pilot", "script_noteworthy"), ::add_spawn_function, ::set_ignoreme, true);
 
-  array_thread(GetEntArray("tarmac_littlebird_sniper", "script_noteworthy"), ::add_spawn_function, ::tarmac_heli_bc_off);
-  array_thread(GetEntArray("tarmac_littlebird_sniper2", "script_noteworthy"), ::add_spawn_function, ::tarmac_heli_bc_off);
-  array_thread(GetEntArray("tarmac_littlebird_pilot", "script_noteworthy"), ::add_spawn_function, ::tarmac_heli_bc_off);
+  array_thread(getEntArray("tarmac_littlebird_sniper", "script_noteworthy"), ::add_spawn_function, ::tarmac_heli_bc_off);
+  array_thread(getEntArray("tarmac_littlebird_sniper2", "script_noteworthy"), ::add_spawn_function, ::tarmac_heli_bc_off);
+  array_thread(getEntArray("tarmac_littlebird_pilot", "script_noteworthy"), ::add_spawn_function, ::tarmac_heli_bc_off);
 
-  array_thread(GetEntArray("gate_convoy_delete", "script_noteworthy"), ::add_spawn_function, ::gate_convoy_delete);
+  array_thread(getEntArray("gate_convoy_delete", "script_noteworthy"), ::add_spawn_function, ::gate_convoy_delete);
 
   //moved from tarmac
-  array_thread(GetEntArray("tarmac_van_guys", "targetname"), ::add_spawn_function, ::tarmac_van_guys, "tarmac_van_guys_spawn");
-  array_thread(GetEntArray("tarmac_van_guys2", "targetname"), ::add_spawn_function, ::tarmac_van_guys, "tarmac_van_guys2_spawn");
+  array_thread(getEntArray("tarmac_van_guys", "targetname"), ::add_spawn_function, ::tarmac_van_guys, "tarmac_van_guys_spawn");
+  array_thread(getEntArray("tarmac_van_guys2", "targetname"), ::add_spawn_function, ::tarmac_van_guys, "tarmac_van_guys2_spawn");
   GetEnt("tarmac_swat_van", "targetname") add_spawn_function(::tarmac_van_logic);
   GetEnt("tarmac_swat_van", "targetname") add_spawn_function(::tarmac_van_stuff, "scn_airport_police_van_arrive1", "tarmac_swat_van");
   GetEnt("tarmac_swat_van2", "targetname") add_spawn_function(::tarmac_van_stuff, "scn_airport_police_van_arrive2", "tarmac_swat_van2");
@@ -1932,17 +1944,17 @@ start_tarmac() {
   intro_setup_dead_bodies();
   thread battlechatter_off("allies");
 
-  array_thread(GetEntArray("tarmac_littlebird_sniper", "script_noteworthy"), ::add_spawn_function, ::tarmac_littlebird_sniper);
-  array_thread(GetEntArray("tarmac_littlebird_sniper2", "script_noteworthy"), ::add_spawn_function, ::tarmac_littlebird_sniper);
-  array_thread(GetEntArray("tarmac_littlebird_pilot", "script_noteworthy"), ::add_spawn_function, ::set_ignoreme, true);
+  array_thread(getEntArray("tarmac_littlebird_sniper", "script_noteworthy"), ::add_spawn_function, ::tarmac_littlebird_sniper);
+  array_thread(getEntArray("tarmac_littlebird_sniper2", "script_noteworthy"), ::add_spawn_function, ::tarmac_littlebird_sniper);
+  array_thread(getEntArray("tarmac_littlebird_pilot", "script_noteworthy"), ::add_spawn_function, ::set_ignoreme, true);
 
-  array_thread(GetEntArray("tarmac_littlebird_sniper", "script_noteworthy"), ::add_spawn_function, ::tarmac_heli_bc_off);
-  array_thread(GetEntArray("tarmac_littlebird_sniper2", "script_noteworthy"), ::add_spawn_function, ::tarmac_heli_bc_off);
-  array_thread(GetEntArray("tarmac_littlebird_pilot", "script_noteworthy"), ::add_spawn_function, ::tarmac_heli_bc_off);
+  array_thread(getEntArray("tarmac_littlebird_sniper", "script_noteworthy"), ::add_spawn_function, ::tarmac_heli_bc_off);
+  array_thread(getEntArray("tarmac_littlebird_sniper2", "script_noteworthy"), ::add_spawn_function, ::tarmac_heli_bc_off);
+  array_thread(getEntArray("tarmac_littlebird_pilot", "script_noteworthy"), ::add_spawn_function, ::tarmac_heli_bc_off);
 
   //moved from tarmac
-  array_thread(GetEntArray("tarmac_van_guys", "targetname"), ::add_spawn_function, ::tarmac_van_guys, "tarmac_van_guys_spawn");
-  array_thread(GetEntArray("tarmac_van_guys2", "targetname"), ::add_spawn_function, ::tarmac_van_guys, "tarmac_van_guys2_spawn");
+  array_thread(getEntArray("tarmac_van_guys", "targetname"), ::add_spawn_function, ::tarmac_van_guys, "tarmac_van_guys_spawn");
+  array_thread(getEntArray("tarmac_van_guys2", "targetname"), ::add_spawn_function, ::tarmac_van_guys, "tarmac_van_guys2_spawn");
   GetEnt("tarmac_swat_van", "targetname") add_spawn_function(::tarmac_van_logic);
   GetEnt("tarmac_swat_van", "targetname") add_spawn_function(::tarmac_van_stuff, "scn_airport_police_van_arrive1", "tarmac_swat_van");
   GetEnt("tarmac_swat_van2", "targetname") add_spawn_function(::tarmac_van_stuff, "scn_airport_police_van_arrive2", "tarmac_swat_van2");
@@ -1966,7 +1978,6 @@ start_tarmac() {
 
   activate_trigger_with_targetname("tarmac_van_dummy_spawn_trig");
   delayThread(.2, ::activate_trigger, "tarmac_security", "target");
-
 }
 
 start_escape() {
@@ -2031,9 +2042,9 @@ grigs_test() {
   list[list.size] = "striker";
 
   node = getstruct("escape_ending_node", "targetname");
-  level.escape_van_dummy = Spawn("script_model", node.origin);
+  level.escape_van_dummy = spawn("script_model", node.origin);
   level.escape_van_dummy.angles = node.angles;
-  level.escape_van_dummy SetModel("vehicle_ambulance_swat");
+  level.escape_van_dummy setModel("vehicle_ambulance_swat");
   level.vanmate = level.team["saw"];
   level.vanmate.animname = "van_mate";
   level.comrad = level.team["m4"];
@@ -2041,7 +2052,7 @@ grigs_test() {
 
   level.player enablePlayerWeapons(false);
 
-  while (1) {
+  while(1) {
     foreach(weapon in list) {
       store_current_weapon(weapon);
       escape_animate_player_death();
@@ -2056,7 +2067,7 @@ start_common_airport() {
   //	add_global_spawn_function( "axis", ::disable_blood_pool );
   //	add_global_spawn_function( "neutral", ::disable_blood_pool );
 
-  array_thread(GetEntArray("team", "targetname"), ::add_spawn_function, ::team_init);
+  array_thread(getEntArray("team", "targetname"), ::add_spawn_function, ::team_init);
   activate_trigger("team", "target");
   thread flag_set_delayed("team_initialized", .05);
 
@@ -2071,18 +2082,18 @@ start_common_airport() {
 
   thread battlechatter_off("axis");
 
-  array = GetEntArray("massacre_dummy", "targetname");
+  array = getEntArray("massacre_dummy", "targetname");
   foreach(obj in array)
   obj Hide();
 
-  array = GetEntArray("gate_canned_deaths", "targetname");
+  array = getEntArray("gate_canned_deaths", "targetname");
   foreach(obj in array)
   obj Hide();
 
-  array = GetEntArray("upperdeck_canned_deaths", "targetname");
+  array = getEntArray("upperdeck_canned_deaths", "targetname");
   foreach(obj in array) {
     obj Hide();
-    if(IsDefined(obj.target)) {
+    if(isDefined(obj.target)) {
       temp = GetEnt(obj.target, "targetname");
       temp Hide();
     }
@@ -2092,7 +2103,7 @@ start_common_airport() {
   thread friendly_fire();
 
   flag_init("trigger_kill_player");
-  trigs = getentarray("kill_player", "targetname");
+  trigs = getEntArray("kill_player", "targetname");
 
   foreach(trig in trigs)
   thread set_flag_on_trigger(trig, "trigger_kill_player");
@@ -2114,20 +2125,20 @@ start_common_airport() {
 
 objective() {
   // Don't blow your cover.
-  level.strings["OBJ_COVER"] = & "AIRPORT_OBJ_COVER";
+  level.strings["OBJ_COVER"] = &"AIRPORT_OBJ_COVER";
   // Don't blow your cover... at any cost.
-  level.strings["OBJ_COVER_COST"] = & "AIRPORT_OBJ_COVER_COST";
+  level.strings["OBJ_COVER_COST"] = &"AIRPORT_OBJ_COVER_COST";
   // Don't blow your cover and earn Makarov's trust.
-  level.strings["OBJ_COVER_TRUST"] = & "AIRPORT_OBJ_COVER_TRUST";
+  level.strings["OBJ_COVER_TRUST"] = &"AIRPORT_OBJ_COVER_TRUST";
   // Earn Makarov's trust.
-  level.strings["OBJ_TRUST"] = & "AIRPORT_OBJ_TRUST";
+  level.strings["OBJ_TRUST"] = &"AIRPORT_OBJ_TRUST";
   // Follow Makarov's lead.
-  level.strings["OBJ_TRUST_COST"] = & "AIRPORT_OBJ_TRUST_COST";
+  level.strings["OBJ_TRUST_COST"] = &"AIRPORT_OBJ_TRUST_COST";
   // Get in the van.
-  level.strings["OBJ_GET_IN_VAN"] = & "AIRPORT_OBJ_GET_IN_VAN";
+  level.strings["OBJ_GET_IN_VAN"] = &"AIRPORT_OBJ_GET_IN_VAN";
 
-  // Press ^3[{+gostand}]^7 to 
-  level.strings["mantle"] = & "SCRIPT_MANTLE";
+  // Press ^3[{+gostand}]^7 to
+  level.strings["mantle"] = &"SCRIPT_MANTLE";
 
   foreach(string in level.strings)
   PreCacheString(string);
@@ -2172,36 +2183,34 @@ airport_music() {
     case "massacre":
       flag_wait("airport_alternate");
       music_loop("airport_alternate", 212);
-      /#
+
       println(" *** MUSIC: airport_alternate *** ");
-      # /
-        case "gate":
-        case "basement":
-        case "tarmac":
-        flag_wait("airport_anticipation");
+
+    case "gate":
+    case "basement":
+    case "tarmac":
+      flag_wait("airport_anticipation");
       thread music_stop(1);
       thread music_sfx_to_music("airport_anticipation", 308, undefined, 306);
-      /#
-      println(" *** MUSIC: airport_anticipation *** ");
-      # /
-        case "escape":
-        flag_wait("airport_escape");
-      music_loop("airport_escape", 150);
-      /#
-      println(" *** MUSIC: airport_escape *** ");
-      # /
 
-        flag_wait("escape_hold_your_fire");
+      println(" *** MUSIC: airport_anticipation *** ");
+
+    case "escape":
+      flag_wait("airport_escape");
+      music_loop("airport_escape", 150);
+
+      println(" *** MUSIC: airport_escape *** ");
+
+      flag_wait("escape_hold_your_fire");
       thread music_stop(2);
 
       snd = spawn("script_origin", level.player.origin);
       snd linkto(level.player);
-      snd playsound("airport_doublecross_sfx");
-      /#
-      println(" *** MUSIC: airport_doublecross *** ");
-      # /
+      snd playSound("airport_doublecross_sfx");
 
-        break;
+      println(" *** MUSIC: airport_doublecross *** ");
+
+      break;
 
     default:
       AssertMsg("Unhandled start point " + level.start_point);

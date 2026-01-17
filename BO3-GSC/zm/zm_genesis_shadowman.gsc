@@ -31,7 +31,7 @@
 #namespace zm_genesis_shadowman;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_shadowman", & __init__, & __main__, undefined);
+  system::register("zm_genesis_shadowman", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -56,9 +56,9 @@ function function_8888a532(var_5b35973a = 1, var_d250bd20 = 0, var_2c1a0d8f = 0,
     }
   }
   if(var_5b35973a) {
-    self.var_94d7beef setcandamage(1);
+    self.var_94d7beef setCanDamage(1);
   } else {
-    self.var_94d7beef setcandamage(0);
+    self.var_94d7beef setCanDamage(0);
   }
   if(var_2c1a0d8f) {
     self.var_94d7beef setinvisibletoall();

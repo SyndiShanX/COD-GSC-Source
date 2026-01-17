@@ -4,7 +4,6 @@
 ***********************************************/
 
 #include scripts\core_common\array_shared;
-
 #namespace namespace_81245006;
 
 initweakpoints(entity, var_97e1b97d) {
@@ -131,24 +130,23 @@ function_37e3f011(entity, bone, weakpointstate) {
   }
 
   if(isDefined(bonename) && isDefined(entity.var_5ace757d)) {
-
     if(getdvarint(#"scr_weakpoint_debug", 0) > 0) {
       if(!isstring(bone)) {
         iprintlnbold("<dev string:x38>" + bonename);
       }
     }
 
-      foreach(var_dd54fdb1 in entity.var_5ace757d) {
-        if(isDefined(weakpointstate) && var_dd54fdb1.currstate !== weakpointstate) {
-          continue;
-        }
+    foreach(var_dd54fdb1 in entity.var_5ace757d) {
+      if(isDefined(weakpointstate) && var_dd54fdb1.currstate !== weakpointstate) {
+        continue;
+      }
 
-        foreach(hittag in var_dd54fdb1.hittags) {
-          if(hittag == bonename) {
-            return var_dd54fdb1;
-          }
+      foreach(hittag in var_dd54fdb1.hittags) {
+        if(hittag == bonename) {
+          return var_dd54fdb1;
         }
       }
+    }
   }
 
   return undefined;

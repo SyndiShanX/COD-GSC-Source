@@ -106,7 +106,7 @@ create_fx_menu() {
     return;
   }
 
-  if(isdefined(level._createfx.menus[level.create_fx_menu]))
+  if(isDefined(level._createfx.menus[level.create_fx_menu]))
     [[level._createfx.menus[level.create_fx_menu]]]();
 }
 
@@ -168,7 +168,7 @@ menu_none() {
   if(entities_are_selected()) {
     var_0 = get_last_selected_ent();
 
-    if(!isdefined(level.last_displayed_ent) || var_0 != level.last_displayed_ent || level._createfx.justconvertedoneshot == 1) {
+    if(!isDefined(level.last_displayed_ent) || var_0 != level.last_displayed_ent || level._createfx.justconvertedoneshot == 1) {
       display_fx_info(var_0);
       level.last_displayed_ent = var_0;
       level._createfx.justconvertedoneshot = 0;
@@ -228,7 +228,7 @@ menu_fx_creation() {
   var_1 = undefined;
   var_2 = common_scripts\_createfx::func_get_level_fx();
 
-  for (var_3 = level.effect_list_offset; var_3 < var_2.size; var_3++) {
+  for(var_3 = level.effect_list_offset; var_3 < var_2.size; var_3++) {
     var_0 = var_0 + 1;
     var_4 = var_0;
 
@@ -245,7 +245,7 @@ menu_fx_creation() {
     }
   }
 
-  if(!isdefined(var_1)) {
+  if(!isDefined(var_1)) {
     return;
   }
   if(menu("change_fxid")) {
@@ -292,10 +292,10 @@ menu_change_selected_fx() {
   var_1 = 0;
   var_2 = get_last_selected_ent();
 
-  for (var_3 = 0; var_3 < level._createfx.options.size; var_3++) {
+  for(var_3 = 0; var_3 < level._createfx.options.size; var_3++) {
     var_4 = level._createfx.options[var_3];
 
-    if(!isdefined(var_2.v[var_4["name"]])) {
+    if(!isDefined(var_2.v[var_4["name"]])) {
       continue;
     }
     var_0++;
@@ -331,7 +331,7 @@ prepare_option_for_change(var_0, var_1) {
   level.createfx_inputlocked = 1;
   level._createfx.hudelems[var_1 + 1][0].color = (1, 1, 0);
 
-  if(isdefined(var_0["input_func"]))
+  if(isDefined(var_0["input_func"]))
     thread[[var_0["input_func"]]](var_1 + 1);
   else
     common_scripts\_createfx::createfx_centerprint("To set " + var_0["description"] + ", type \fx newvalue. To remove " + var_0["description"] + ", type \fx del");
@@ -362,7 +362,7 @@ menu_fx_option_set() {
     if(var_0["type"] == "vector")
       var_1 = getdvarvector("fx");
 
-    if(isdefined(var_1)) {
+    if(isDefined(var_1)) {
       apply_option_to_selected_fx(var_0, var_1);
       return;
     }
@@ -374,7 +374,7 @@ menu_fx_option_set() {
 apply_option_to_selected_fx(var_0, var_1) {
   common_scripts\_createfx::save_undo_buffer();
 
-  for (var_2 = 0; var_2 < level._createfx.selected_fx_ents.size; var_2++) {
+  for(var_2 = 0; var_2 < level._createfx.selected_fx_ents.size; var_2++) {
     var_3 = level._createfx.selected_fx_ents[var_2];
 
     if(mask(var_0["mask"], var_3.v["type"]))
@@ -397,7 +397,7 @@ apply_option_to_selected_fx(var_0, var_1) {
 }
 
 set_option_index(var_0) {
-  for (var_1 = 0; var_1 < level._createfx.options.size; var_1++) {
+  for(var_1 = 0; var_1 < level._createfx.options.size; var_1++) {
     if(level._createfx.options[var_1]["name"] != var_0) {
       continue;
     }
@@ -411,7 +411,7 @@ get_selected_option() {
 }
 
 mask(var_0, var_1) {
-  return isdefined(level.createfxmasks[var_0][var_1]);
+  return isDefined(level.createfxmasks[var_0][var_1]);
 }
 
 addoption(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
@@ -422,26 +422,26 @@ addoption(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7["default"] = var_3;
   var_7["mask"] = var_4;
 
-  if(isdefined(var_5) && var_5)
+  if(isDefined(var_5) && var_5)
     var_7["nowrite"] = 1;
   else
     var_7["nowrite"] = 0;
 
-  if(isdefined(var_6))
+  if(isDefined(var_6))
     var_7["input_func"] = var_6;
 
   level._createfx.options[level._createfx.options.size] = var_7;
 }
 
 get_option(var_0) {
-  for (var_1 = 0; var_1 < level._createfx.options.size; var_1++) {
+  for(var_1 = 0; var_1 < level._createfx.options.size; var_1++) {
     if(level._createfx.options[var_1]["name"] == var_0)
       return level._createfx.options[var_1];
   }
 }
 
 input_reactive_radius(var_0) {
-  for (;;) {
+  for(;;) {
     wait 0.05;
 
     if(level.player buttonpressed("escape") || level.player buttonpressed("x")) {
@@ -457,7 +457,7 @@ input_reactive_radius(var_0) {
 
     if(var_1 != 0) {
       foreach(var_3 in level._createfx.selected_fx_ents) {
-        if(isdefined(var_3.v["reactive_radius"])) {
+        if(isDefined(var_3.v["reactive_radius"])) {
           var_3.v["reactive_radius"] = var_3.v["reactive_radius"] + var_1;
           var_3.v["reactive_radius"] = clamp(var_3.v["reactive_radius"], 10, 1000);
         }
@@ -484,10 +484,10 @@ display_fx_add_options(var_0) {
   if(level.effect_list_offset >= level._createfx.options.size)
     level.effect_list_offset = 0;
 
-  for (var_4 = 0; var_4 < level._createfx.options.size; var_4++) {
+  for(var_4 = 0; var_4 < level._createfx.options.size; var_4++) {
     var_5 = level._createfx.options[var_4];
 
-    if(isdefined(var_0.v[var_5["name"]])) {
+    if(isDefined(var_0.v[var_5["name"]])) {
       continue;
     }
     if(!mask(var_5["mask"], var_0.v["type"])) {
@@ -528,7 +528,7 @@ display_fx_add_options(var_0) {
 add_option_to_selected_entities(var_0) {
   var_1 = undefined;
 
-  for (var_2 = 0; var_2 < level._createfx.selected_fx_ents.size; var_2++) {
+  for(var_2 = 0; var_2 < level._createfx.selected_fx_ents.size; var_2++) {
     var_3 = level._createfx.selected_fx_ents[var_2];
 
     if(mask(var_0["mask"], var_3.v["type"]))
@@ -558,10 +558,10 @@ display_fx_info(var_0) {
     var_2 = 0;
     var_3 = 0;
 
-    for (var_4 = 0; var_4 < level._createfx.options.size; var_4++) {
+    for(var_4 = 0; var_4 < level._createfx.options.size; var_4++) {
       var_5 = level._createfx.options[var_4];
 
-      if(!isdefined(var_0.v[var_5["name"]])) {
+      if(!isDefined(var_0.v[var_5["name"]])) {
         continue;
       }
       var_1++;
@@ -589,10 +589,10 @@ display_fx_info(var_0) {
     var_1 = 0;
     var_3 = 0;
 
-    for (var_4 = 0; var_4 < level._createfx.options.size; var_4++) {
+    for(var_4 = 0; var_4 < level._createfx.options.size; var_4++) {
       var_5 = level._createfx.options[var_4];
 
-      if(!isdefined(var_0.v[var_5["name"]])) {
+      if(!isDefined(var_0.v[var_5["name"]])) {
         continue;
       }
       var_1++;
@@ -608,7 +608,7 @@ display_fx_info(var_0) {
 display_current_translation() {
   var_0 = get_last_selected_ent();
 
-  if(isdefined(var_0))
+  if(isDefined(var_0))
     display_fx_info(var_0);
 }
 
@@ -619,12 +619,12 @@ draw_effects_list(var_0) {
   var_3 = common_scripts\_createfx::func_get_level_fx();
   level.effect_list_current_size = var_3.size;
 
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     var_0 = "Pick an effect";
 
   common_scripts\_createfx::set_fx_hudelement(var_0 + " [" + level.effect_list_offset + " - " + var_3.size + "]:");
 
-  for (var_4 = level.effect_list_offset; var_4 < var_3.size; var_4++) {
+  for(var_4 = level.effect_list_offset; var_4 < var_3.size; var_4++) {
     var_1 = var_1 + 1;
     common_scripts\_createfx::set_fx_hudelement(var_1 + ". " + var_3[var_4]);
 
@@ -663,12 +663,12 @@ draw_help_list(var_0) {
   var_1 = 0;
   var_2 = level.createfx_help_keys;
 
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     var_0 = "Help";
 
   common_scripts\_createfx::set_fx_hudelement("[" + var_0 + "]");
 
-  for (var_3 = level.help_list_offset; var_3 < var_2.size; var_3++) {
+  for(var_3 = level.help_list_offset; var_3 < var_2.size; var_3++) {
     var_1 = var_1 + 1;
     common_scripts\_createfx::set_fx_hudelement(var_2[var_3]);
 
@@ -704,7 +704,7 @@ decrement_help_list_offset() {
 }
 
 help_navigation_buttons() {
-  while (level.createfx_help_active == 1) {
+  while(level.createfx_help_active == 1) {
     if(next_button()) {
       increment_help_list_offset();
       draw_help_list();
@@ -728,7 +728,7 @@ select_by_name() {
   var_1 = undefined;
   var_2 = common_scripts\_createfx::func_get_level_fx();
 
-  for (var_3 = level.effect_list_offset; var_3 < var_2.size; var_3++) {
+  for(var_3 = level.effect_list_offset; var_3 < var_2.size; var_3++) {
     var_0 = var_0 + 1;
     var_4 = var_0;
 
@@ -745,7 +745,7 @@ select_by_name() {
     }
   }
 
-  if(!isdefined(var_1)) {
+  if(!isDefined(var_1)) {
     return;
   }
   var_5 = [];

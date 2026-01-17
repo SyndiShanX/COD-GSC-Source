@@ -416,7 +416,7 @@ setup_rockets() {
 
 add_rocket_pod(entity, tag, num_rockets) {
   if(!isDefined(self._rocket_pods)) {
-    self._rocket_pods = SpawnStruct();
+    self._rocket_pods = spawnStruct();
     self._rocket_pods.arm_time = .6;
     self._rocket_pods.fire_wait = .15;
     self._rocket_pods.total_rockets = 0;
@@ -430,12 +430,12 @@ add_rocket_pod(entity, tag, num_rockets) {
     self._rocket_pods.pods = [];
   }
   pod_index = self._rocket_pods.pods.size;
-  self._rocket_pods.pods[pod_index] = SpawnStruct();
+  self._rocket_pods.pods[pod_index] = spawnStruct();
   self._rocket_pods.pods[pod_index].ent = entity;
   self._rocket_pods.pods[pod_index].tag = tag;
   rockets = [];
   for(i = 0; i < num_rockets; i++) {
-    rockets[i] = SpawnStruct();
+    rockets[i] = spawnStruct();
     rockets[i].pod_index = pod_index;
     rockets[i].is_armed = false;
   }
@@ -543,12 +543,12 @@ get_rocket_pod_fire_pos(pod_index) {
 fire_rocket(rocket) {
   trace_origin = self GetTagOrigin("tag_flash");
   trace_angles = self GetTagAngles("tag_flash");
-  forward = AnglesToForward(trace_angles);
+  forward = anglesToForward(trace_angles);
   start_origin = get_rocket_pod_fire_pos(rocket.pod_index);
   trace_origin = self GetTagOrigin("tag_flash");
   trace_direction = self GetTagAngles("tag_barrel");
-  trace_direction = AnglesToForward(trace_direction) * 5000;
-  trace = BulletTrace(trace_origin, trace_origin + trace_direction, false, self);
+  trace_direction = anglesToForward(trace_direction) * 5000;
+  trace = bulletTrace(trace_origin, trace_origin + trace_direction, false, self);
   trace_dist_sq = distanceSquared(trace_origin, trace["position"]);
   if(trace_dist_sq < 5000 * 5000 && trace_dist_sq > 500 * 500) {
     end_origin = trace["position"];
@@ -823,7 +823,7 @@ minigun_sound() {
       player playLoopSound("wpn_hind_pilot_fire_loop_plr");
     }
     player stopLoopSound();
-    player playsound("wpn_hind_pilot_stop_plr");
+    player playSound("wpn_hind_pilot_stop_plr");
   }
 }
 
@@ -852,7 +852,7 @@ hud_minigun_think() {
     self.minigun_hud["gun"] fadeOverTime(0.05);
     self.minigun_hud["gun"].alpha = 0.55;
     player stopLoopSound();
-    player playsound("wpn_hind_pilot_stop_plr");
+    player playSound("wpn_hind_pilot_stop_plr");
   }
 }
 
@@ -962,7 +962,7 @@ player_exit_animation(player) {
   player_body Delete();
   trace_start = player.origin + (0, 0, 200);
   trace_end = player.origin + (0, 0, -100);
-  player_trace = BulletTrace(trace_start, trace_end, false, self);
+  player_trace = bulletTrace(trace_start, trace_end, false, self);
   player SetOrigin(player_trace["position"]);
 }
 

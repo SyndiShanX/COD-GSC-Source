@@ -20,7 +20,7 @@
 #namespace zm_weap_staff_lightning;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_staff_lightning", & __init__, undefined, undefined);
+  system::register("zm_weap_staff_lightning", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -32,9 +32,9 @@ function __init__() {
   clientfield::register("scriptmover", "lightning_miss_fx", 21000, 1, "int");
   clientfield::register("actor", "lightning_arc_fx", 21000, 1, "int");
   zombie_utility::set_zombie_var("tesla_head_gib_chance", 50);
-  callback::on_spawned( & onplayerspawned);
-  zm_spawner::register_zombie_damage_callback( & staff_lightning_zombie_damage_response);
-  zm_spawner::register_zombie_death_event_callback( & staff_lightning_death_event);
+  callback::on_spawned(&onplayerspawned);
+  zm_spawner::register_zombie_damage_callback(&staff_lightning_zombie_damage_response);
+  zm_spawner::register_zombie_death_event_callback(&staff_lightning_death_event);
 }
 
 function onplayerspawned() {
@@ -45,7 +45,7 @@ function onplayerspawned() {
 
 function watch_staff_lightning_fired() {
   self endon("disconnect");
-  while (true) {
+  while(true) {
     self waittill("missile_fire", e_projectile, str_weapon);
     if(str_weapon.name == "staff_lightning_upgraded2" || str_weapon.name == "staff_lightning_upgraded3") {
       fire_angles = vectortoangles(self getweaponforwarddir());
@@ -65,19 +65,19 @@ function lightning_ball_wait(n_lifetime_after_move) {
 function staff_lightning_position_source(v_detonate, v_angles, str_weapon) {
   self endon("disconnect");
   level notify("lightning_ball_created");
-  if(!isdefined(v_angles)) {
+  if(!isDefined(v_angles)) {
     v_angles = (0, 0, 0);
   }
-  e_ball_fx = spawn("script_model", v_detonate + (anglestoforward(v_angles) * 100));
+  e_ball_fx = spawn("script_model", v_detonate + (anglesToForward(v_angles) * 100));
   e_ball_fx.angles = v_angles;
   e_ball_fx.str_weapon = str_weapon;
-  e_ball_fx setmodel("tag_origin");
+  e_ball_fx setModel("tag_origin");
   e_ball_fx.n_range = get_lightning_blast_range(self.chargeshotlevel);
   e_ball_fx.n_damage_per_sec = get_lightning_ball_damage_per_sec(self.chargeshotlevel);
   e_ball_fx clientfield::set("lightning_miss_fx", 1);
   n_shot_range = staff_lightning_get_shot_range(self.chargeshotlevel);
-  v_end = v_detonate + (anglestoforward(v_angles) * n_shot_range);
-  trace = bullettrace(v_detonate, v_end, 0, self);
+  v_end = v_detonate + (anglesToForward(v_angles) * n_shot_range);
+  trace = bulletTrace(v_detonate, v_end, 0, self);
   if(trace["fraction"] != 1) {
     v_end = trace["position"];
   }
@@ -92,10 +92,10 @@ function staff_lightning_position_source(v_detonate, v_angles, str_weapon) {
   finished_playing = e_ball_fx lightning_ball_wait(n_leftover_time);
   e_ball_fx notify("stop_killing");
   e_ball_fx notify("stop_debug_position");
-  if(isdefined(finished_playing) && finished_playing) {
+  if(isDefined(finished_playing) && finished_playing) {
     wait(3);
   }
-  if(isdefined(e_ball_fx)) {
+  if(isDefined(e_ball_fx)) {
     e_ball_fx delete();
   }
 }
@@ -103,9 +103,9 @@ function staff_lightning_position_source(v_detonate, v_angles, str_weapon) {
 function staff_lightning_ball_kill_zombies(e_attacker) {
   self endon("death");
   self endon("stop_killing");
-  while (true) {
+  while(true) {
     a_zombies = staff_lightning_get_valid_targets(e_attacker, self.origin);
-    if(isdefined(a_zombies)) {
+    if(isDefined(a_zombies)) {
       foreach(zombie in a_zombies) {
         if(staff_lightning_is_target_valid(zombie)) {
           e_attacker thread staff_lightning_arc_fx(self, zombie);
@@ -122,7 +122,7 @@ function staff_lightning_get_valid_targets(player, v_source) {
   a_enemies = [];
   a_zombies = getaiarray();
   a_zombies = util::get_array_of_closest(v_source, a_zombies, undefined, undefined, self.n_range);
-  if(isdefined(a_zombies)) {
+  if(isDefined(a_zombies)) {
     foreach(ai_zombie in a_zombies) {
       if(staff_lightning_is_target_valid(ai_zombie)) {
         a_enemies[a_enemies.size] = ai_zombie;
@@ -163,7 +163,7 @@ function get_lightning_blast_range(n_charge) {
 }
 
 function get_lightning_ball_damage_per_sec(n_charge) {
-  if(!isdefined(n_charge)) {
+  if(!isDefined(n_charge)) {
     return 2500;
   }
   switch (n_charge) {
@@ -177,13 +177,13 @@ function get_lightning_ball_damage_per_sec(n_charge) {
 }
 
 function staff_lightning_is_target_valid(ai_zombie) {
-  if(!isdefined(ai_zombie)) {
+  if(!isDefined(ai_zombie)) {
     return false;
   }
-  if(isdefined(ai_zombie.is_being_zapped) && ai_zombie.is_being_zapped) {
+  if(isDefined(ai_zombie.is_being_zapped) && ai_zombie.is_being_zapped) {
     return false;
   }
-  if(isdefined(ai_zombie.is_mechz) && ai_zombie.is_mechz) {
+  if(isDefined(ai_zombie.is_mechz) && ai_zombie.is_mechz) {
     return false;
   }
   return true;
@@ -196,23 +196,23 @@ function staff_lightning_ball_damage_over_time(e_source, e_target, e_attacker) {
   e_target.is_being_zapped = 1;
   e_target clientfield::set("lightning_arc_fx", 1);
   wait(0.5);
-  if(isdefined(e_source)) {
-    if(!isdefined(e_source.n_damage_per_sec)) {
+  if(isDefined(e_source)) {
+    if(!isDefined(e_source.n_damage_per_sec)) {
       e_source.n_damage_per_sec = get_lightning_ball_damage_per_sec(e_attacker.chargeshotlevel);
     }
     n_damage_per_pulse = e_source.n_damage_per_sec * 1;
   }
-  while (isdefined(e_source) && isalive(e_target)) {
+  while(isDefined(e_source) && isalive(e_target)) {
     e_target thread stun_zombie();
     wait(1);
-    if(!isdefined(e_source) || !isalive(e_target)) {
+    if(!isDefined(e_source) || !isalive(e_target)) {
       break;
     }
     n_dist_sq = distancesquared(e_source.origin, e_target.origin);
     if(n_dist_sq > n_range_sq) {
       break;
     }
-    if(isalive(e_target) && isdefined(e_source)) {
+    if(isalive(e_target) && isDefined(e_source)) {
       instakill_on = e_attacker zm_powerups::is_insta_kill_active();
       if(n_damage_per_pulse < e_target.health && !instakill_on) {
         e_target zm_tomb_utility::do_damage_network_safe(e_attacker, n_damage_per_pulse, e_source.str_weapon, "MOD_RIFLE_BULLET");
@@ -223,7 +223,7 @@ function staff_lightning_ball_damage_over_time(e_source, e_target, e_attacker) {
       }
     }
   }
-  if(isdefined(e_target)) {
+  if(isDefined(e_target)) {
     e_target.is_being_zapped = 0;
     e_target clientfield::set("lightning_arc_fx", 0);
   }
@@ -231,13 +231,13 @@ function staff_lightning_ball_damage_over_time(e_source, e_target, e_attacker) {
 
 function staff_lightning_arc_fx(e_source, ai_zombie) {
   self endon("disconnect");
-  if(!isdefined(ai_zombie)) {
+  if(!isDefined(ai_zombie)) {
     return;
   }
   if(!zm_tomb_utility::bullet_trace_throttled(e_source.origin, ai_zombie.origin + vectorscale((0, 0, 1), 20), ai_zombie)) {
     return;
   }
-  if(isdefined(e_source) && isdefined(ai_zombie) && isalive(ai_zombie)) {
+  if(isDefined(e_source) && isDefined(ai_zombie) && isalive(ai_zombie)) {
     level thread staff_lightning_ball_damage_over_time(e_source, ai_zombie, self);
   }
 }
@@ -253,7 +253,7 @@ function staff_lightning_kill_zombie(player, str_weapon) {
 }
 
 function staff_lightning_death_fx() {
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     self clientfield::set("lightning_impact_fx", 1);
     self thread zombie_shock_eyes();
   }
@@ -261,21 +261,21 @@ function staff_lightning_death_fx() {
 
 function zombie_shock_eyes_network_safe(fx, entity, tag) {
   if(zm_net::network_entity_valid(entity)) {
-    if(!(isdefined(self.head_gibbed) && self.head_gibbed)) {
-      playfxontag(fx, entity, tag);
+    if(!(isDefined(self.head_gibbed) && self.head_gibbed)) {
+      playFXOnTag(fx, entity, tag);
     }
   }
 }
 
 function zombie_shock_eyes() {
-  if(isdefined(self.head_gibbed) && self.head_gibbed) {
+  if(isDefined(self.head_gibbed) && self.head_gibbed) {
     return;
   }
-  if(isdefined(self.is_mechz) && self.is_mechz) {
+  if(isDefined(self.is_mechz) && self.is_mechz) {
     return;
   }
   zm_net::network_safe_init("shock_eyes", 2);
-  zm_net::network_choke_action("shock_eyes", & zombie_shock_eyes_network_safe, level._effect["tesla_shock_eyes"], self, "j_eyeball_le");
+  zm_net::network_choke_action("shock_eyes", &zombie_shock_eyes_network_safe, level._effect["tesla_shock_eyes"], self, "j_eyeball_le");
 }
 
 function staff_lightning_zombie_damage_response(mod, hit_location, hit_origin, player, amount, weapon, direction_vec, tagname, modelname, partname, dflags, inflictor, chargelevel) {
@@ -286,12 +286,12 @@ function staff_lightning_zombie_damage_response(mod, hit_location, hit_origin, p
 }
 
 function is_staff_lightning_damage(weapon) {
-  return isdefined(weapon) && (weapon.name == "staff_lightning" || weapon.name == "staff_lightning_upgraded") && (!(isdefined(self.set_beacon_damage) && self.set_beacon_damage));
+  return isDefined(weapon) && (weapon.name == "staff_lightning" || weapon.name == "staff_lightning_upgraded") && (!(isDefined(self.set_beacon_damage) && self.set_beacon_damage));
 }
 
 function staff_lightning_death_event(attacker) {
   if(is_staff_lightning_damage(self.damageweapon) && self.damagemod != "MOD_MELEE") {
-    if(isdefined(self.is_mechz) && self.is_mechz) {
+    if(isDefined(self.is_mechz) && self.is_mechz) {
       return;
     }
     self thread zombie_utility::zombie_eye_glow_stop();
@@ -299,7 +299,7 @@ function staff_lightning_death_event(attacker) {
     tag = "J_SpineUpper";
     self clientfield::set("lightning_impact_fx", 1);
     self thread zombie_shock_eyes();
-    if(isdefined(self.deathanim)) {
+    if(isDefined(self.deathanim)) {
       self waittillmatch("death_anim");
     }
     self zm_tomb_utility::do_damage_network_safe(self.attacker, self.health, self.damageweapon, "MOD_RIFLE_BULLET");
@@ -308,13 +308,13 @@ function staff_lightning_death_event(attacker) {
 
 function stun_zombie() {
   self endon("death");
-  if(isdefined(self.is_mechz) && self.is_mechz) {
+  if(isDefined(self.is_mechz) && self.is_mechz) {
     return;
   }
-  if(isdefined(self.is_electrocuted) && self.is_electrocuted) {
+  if(isDefined(self.is_electrocuted) && self.is_electrocuted) {
     return;
   }
-  if(!(isdefined(self.completed_emerging_into_playable_area) && self.completed_emerging_into_playable_area)) {
+  if(!(isDefined(self.completed_emerging_into_playable_area) && self.completed_emerging_into_playable_area)) {
     return;
   }
   self.forcemovementscriptstate = 1;
@@ -322,7 +322,7 @@ function stun_zombie() {
   self.is_electrocuted = 1;
   tag = "J_SpineUpper";
   self clientfield::set("lightning_impact_fx", 1);
-  if(!(isdefined(self.missinglegs) && self.missinglegs)) {
+  if(!(isDefined(self.missinglegs) && self.missinglegs)) {
     self.var_b52ab77a = 1;
   }
   self zombie_shared::donotetracks("stunned");

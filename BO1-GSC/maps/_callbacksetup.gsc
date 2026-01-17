@@ -8,9 +8,7 @@
 
 CodeCallback_StartGameType() {
   if(!isDefined(level.gametypestarted) || !level.gametypestarted) {
-    [
-      [level.callbackStartGameType]
-    ]();
+    [[level.callbackStartGameType]]();
     level.gametypestarted = true;
   }
 }

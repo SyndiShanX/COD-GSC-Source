@@ -144,7 +144,7 @@ claymore_detonation() {
     if(isDefined(ent.pers) && isDefined(ent.pers["team"]) && ent.pers["team"] != playerTeamToAllow)
       continue;
     if(ent damageConeTrace(self.origin, self) > 0) {
-      self playsound("claymore_activated_SP");
+      self playSound("claymore_activated_SP");
       wait 0.4;
       if(isDefined(self.owner))
         self detonate(self.owner);
@@ -190,7 +190,7 @@ wait_and_detonate(delay) {
 
 satchel_damage() {
   self.health = 100;
-  self setcandamage(true);
+  self setCanDamage(true);
   self.maxhealth = 100000;
   self.health = self.maxhealth;
   attacker = undefined;
@@ -226,7 +226,7 @@ saydamaged(orig, amount) {
 play_claymore_effects() {
   self endon("death");
   self waittill_not_moving();
-  PlayFXOnTag(level._effect["claymore_laser"], self, "tag_fx");
+  playFXOnTag(level._effect["claymore_laser"], self, "tag_fx");
 }
 
 getDamageableEnts(pos, radius, doLOS, startRadius) {
@@ -242,7 +242,7 @@ getDamageableEnts(pos, radius, doLOS, startRadius) {
     playerpos = players[i].origin + (0, 0, 32);
     dist = distance(pos, playerpos);
     if(dist < radius && (!doLOS || weaponDamageTracePassed(pos, playerpos, startRadius, undefined))) {
-      newent = spawnstruct();
+      newent = spawnStruct();
       newent.isPlayer = true;
       newent.isADestructable = false;
       newent.entity = players[i];
@@ -250,12 +250,12 @@ getDamageableEnts(pos, radius, doLOS, startRadius) {
       ents[ents.size] = newent;
     }
   }
-  grenades = getentarray("grenade", "classname");
+  grenades = getEntArray("grenade", "classname");
   for(i = 0; i < grenades.size; i++) {
     entpos = grenades[i].origin;
     dist = distance(pos, entpos);
     if(dist < radius && (!doLOS || weaponDamageTracePassed(pos, entpos, startRadius, grenades[i]))) {
-      newent = spawnstruct();
+      newent = spawnStruct();
       newent.isPlayer = false;
       newent.isADestructable = false;
       newent.entity = grenades[i];
@@ -263,12 +263,12 @@ getDamageableEnts(pos, radius, doLOS, startRadius) {
       ents[ents.size] = newent;
     }
   }
-  destructables = getentarray("destructable", "targetname");
+  destructables = getEntArray("destructable", "targetname");
   for(i = 0; i < destructables.size; i++) {
     entpos = destructables[i].origin;
     dist = distance(pos, entpos);
     if(dist < radius && (!doLOS || weaponDamageTracePassed(pos, entpos, startRadius, destructables[i]))) {
-      newent = spawnstruct();
+      newent = spawnStruct();
       newent.isPlayer = false;
       newent.isADestructable = true;
       newent.entity = destructables[i];
@@ -286,7 +286,7 @@ weaponDamageTracePassed(from, to, startRadius, ignore) {
     midpos = to;
   dir = vectornormalize(diff);
   midpos = from + (dir[0] * startRadius, dir[1] * startRadius, dir[2] * startRadius);
-  trace = bullettrace(midpos, to, false, ignore);
+  trace = bulletTrace(midpos, to, false, ignore);
   if(GetDvarInt(#"scr_damage_debug") != 0) {
     if(trace["fraction"] == 1) {
       thread debugline(midpos, to, (1, 1, 1));

@@ -391,7 +391,7 @@ handle_horizontal_board_clientside_fx(localclientnum, set, newent) {
     snd_played = 0;
 
     for(i = 0; i < localplayers.size; i++) {
-      playfx(i, level._effect["wood_chunk_destory"], self.origin + vectorscale((0, 0, 1), 30.0));
+      playFX(i, level._effect["wood_chunk_destory"], self.origin + vectorscale((0, 0, 1), 30.0));
       wait(randomfloatrange(0.3, 0.6));
 
       if(!snd_played) {
@@ -399,20 +399,20 @@ handle_horizontal_board_clientside_fx(localclientnum, set, newent) {
         snd_played = 1;
       }
 
-      playfx(i, level._effect["wood_chunk_destory"], self.origin + vectorscale((0, 0, -1), 30.0));
+      playFX(i, level._effect["wood_chunk_destory"], self.origin + vectorscale((0, 0, -1), 30.0));
     }
   } else {
-    playsound(0, "zmb_repair_boards", self.origin);
+    playSound(0, "zmb_repair_boards", self.origin);
     localplayers = level.localplayers;
     snd_played = 0;
     wait 0.3;
-    playsound(0, "zmb_board_slam", self.origin);
+    playSound(0, "zmb_board_slam", self.origin);
 
     for(i = 0; i < localplayers.size; i++) {
       localplayers[i] earthquake(randomfloatrange(0.3, 0.4), randomfloatrange(0.2, 0.4), self.origin, 150);
-      playfx(i, level._effect["wood_chunk_destory"], self.origin + vectorscale((0, 0, 1), 30.0));
+      playFX(i, level._effect["wood_chunk_destory"], self.origin + vectorscale((0, 0, 1), 30.0));
       wait(randomfloatrange(0.3, 0.6));
-      playfx(i, level._effect["wood_chunk_destory"], self.origin + vectorscale((0, 0, -1), 30.0));
+      playFX(i, level._effect["wood_chunk_destory"], self.origin + vectorscale((0, 0, -1), 30.0));
     }
   }
 }
@@ -426,7 +426,7 @@ handle_vertical_board_clientside_fx(localclientnum, set, newent) {
     snd_played = 0;
 
     for(i = 0; i < localplayers.size; i++) {
-      playfx(i, level._effect["wood_chunk_destory"], self.origin + vectorscale((1, 0, 0), 30.0));
+      playFX(i, level._effect["wood_chunk_destory"], self.origin + vectorscale((1, 0, 0), 30.0));
       wait(randomfloatrange(0.3, 0.6));
 
       if(!snd_played) {
@@ -434,20 +434,20 @@ handle_vertical_board_clientside_fx(localclientnum, set, newent) {
         snd_played = 1;
       }
 
-      playfx(i, level._effect["wood_chunk_destory"], self.origin + vectorscale((-1, 0, 0), 30.0));
+      playFX(i, level._effect["wood_chunk_destory"], self.origin + vectorscale((-1, 0, 0), 30.0));
     }
   } else {
     localplayers = level.localplayers;
     snd_played = 0;
-    playsound(0, "zmb_repair_boards", self.origin);
+    playSound(0, "zmb_repair_boards", self.origin);
     wait 0.3;
-    playsound(0, "zmb_board_slam", self.origin);
+    playSound(0, "zmb_board_slam", self.origin);
 
     for(i = 0; i < localplayers.size; i++) {
       localplayers[i] earthquake(randomfloatrange(0.3, 0.4), randomfloatrange(0.2, 0.4), self.origin, 150);
-      playfx(i, level._effect["wood_chunk_destory"], self.origin + vectorscale((1, 0, 0), 30.0));
+      playFX(i, level._effect["wood_chunk_destory"], self.origin + vectorscale((1, 0, 0), 30.0));
       wait(randomfloatrange(0.3, 0.6));
-      playfx(i, level._effect["wood_chunk_destory"], self.origin + vectorscale((-1, 0, 0), 30.0));
+      playFX(i, level._effect["wood_chunk_destory"], self.origin + vectorscale((-1, 0, 0), 30.0));
     }
   }
 }
@@ -461,7 +461,7 @@ handle_rock_clientside_fx(localclientnum, set, newent) {
     snd_played = 0;
 
     for(i = 0; i < localplayers.size; i++) {
-      playfx(i, level._effect["wood_chunk_destory"], self.origin + vectorscale((1, 0, 0), 30.0));
+      playFX(i, level._effect["wood_chunk_destory"], self.origin + vectorscale((1, 0, 0), 30.0));
       wait(randomfloatrange(0.3, 0.6));
 
       if(!snd_played) {
@@ -469,25 +469,25 @@ handle_rock_clientside_fx(localclientnum, set, newent) {
         snd_played = 1;
       }
 
-      playfx(i, level._effect["wood_chunk_destory"], self.origin + vectorscale((-1, 0, 0), 30.0));
+      playFX(i, level._effect["wood_chunk_destory"], self.origin + vectorscale((-1, 0, 0), 30.0));
     }
   } else {
     localplayers = level.localplayers;
     snd_played = 0;
-    playsound(0, "zmb_repair_boards", self.origin);
-    playsound(0, "zmb_cha_ching", self.origin);
+    playSound(0, "zmb_repair_boards", self.origin);
+    playSound(0, "zmb_cha_ching", self.origin);
 
     for(i = 0; i < localplayers.size; i++) {
       localplayers[i] earthquake(randomfloatrange(0.3, 0.4), randomfloatrange(0.2, 0.4), self.origin, 150);
-      playfx(i, level._effect["wood_chunk_destory"], self.origin + vectorscale((1, 0, 0), 30.0));
+      playFX(i, level._effect["wood_chunk_destory"], self.origin + vectorscale((1, 0, 0), 30.0));
       wait(randomfloatrange(0.3, 0.6));
 
       if(!snd_played) {
-        playsound(0, "zmb_break_rock_barrier_fix", self.origin);
+        playSound(0, "zmb_break_rock_barrier_fix", self.origin);
         snd_played = 1;
       }
 
-      playfx(i, level._effect["wood_chunk_destory"], self.origin + vectorscale((-1, 0, 0), 30.0));
+      playFX(i, level._effect["wood_chunk_destory"], self.origin + vectorscale((-1, 0, 0), 30.0));
     }
   }
 }
@@ -495,14 +495,14 @@ handle_rock_clientside_fx(localclientnum, set, newent) {
 do_teardown_sound(type) {
   switch (type) {
     case "rock":
-      playsound(0, "zmb_break_rock_barrier_fix", self.origin);
+      playSound(0, "zmb_break_rock_barrier_fix", self.origin);
       wait(randomfloatrange(0.3, 0.6));
-      playsound(0, "zmb_break_rock_barrier_fix", self.origin);
+      playSound(0, "zmb_break_rock_barrier_fix", self.origin);
       break;
     case "plank":
-      playsound(0, "zmb_break_boards", self.origin);
+      playSound(0, "zmb_break_boards", self.origin);
       wait(randomfloatrange(0.3, 0.6));
-      playsound(0, "zmb_break_boards", self.origin);
+      playSound(0, "zmb_break_boards", self.origin);
       break;
   }
 }
@@ -569,7 +569,7 @@ createzombieeyesinternal(localclientnum) {
     if(isDefined(self._eyeglow_tag_override))
       linktag = self._eyeglow_tag_override;
 
-    self._eyearray[localclientnum] = playfxontag(localclientnum, effect, self, linktag);
+    self._eyearray[localclientnum] = playFXOnTag(localclientnum, effect, self, linktag);
   }
 }
 
@@ -722,7 +722,7 @@ zombie_gut_explosion_cb(localclientnum, oldval, newval, bnewent, binitialsnap, f
       org = self gettagorigin("J_SpineLower");
 
       if(isDefined(org))
-        playfx(localclientnum, level._effect["zombie_guts_explosion"], org);
+        playFX(localclientnum, level._effect["zombie_guts_explosion"], org);
     }
   }
 }
@@ -751,7 +751,7 @@ zombie_wait_explode(localclientnum) {
   }
 
   if(isDefined(level._effect["zombie_guts_explosion"]) && is_mature())
-    playfx(localclientnum, level._effect["zombie_guts_explosion"], where);
+    playFX(localclientnum, level._effect["zombie_guts_explosion"], where);
 }
 
 init_perk_machines_fx() {
@@ -759,7 +759,7 @@ init_perk_machines_fx() {
     return;
   }
   wait 0.1;
-  vending_triggers = getentarray(0, "zombie_vending", "targetname");
+  vending_triggers = getEntArray(0, "zombie_vending", "targetname");
 
   if(vending_triggers.size < 1) {
     return;
@@ -830,8 +830,8 @@ vending_machine_flicker_light(fx_light, duration) {
 
 play_perk_fx_on_client(client_num, fx_light, duration) {
   fxobj = spawn(client_num, self.origin + vectorscale((0, 0, -1), 50.0), "script_model");
-  fxobj setmodel("tag_origin");
-  playfxontag(client_num, level._effect[fx_light], fxobj, "tag_origin");
+  fxobj setModel("tag_origin");
+  playFXOnTag(client_num, level._effect[fx_light], fxobj, "tag_origin");
   waitrealtime(duration);
   fxobj delete();
 }
@@ -859,22 +859,22 @@ do_headshot_gib_fx() {
   fxtag = "j_neck";
   fxorigin = self gettagorigin(fxtag);
   upvec = anglestoup(self gettagangles(fxtag));
-  forwardvec = anglestoforward(self gettagangles(fxtag));
+  forwardvec = anglesToForward(self gettagangles(fxtag));
   players = level.localplayers;
 
   for(i = 0; i < players.size; i++) {
-    playfx(i, level._effect["headshot"], fxorigin, forwardvec, upvec);
-    playfx(i, level._effect["headshot_nochunks"], fxorigin, forwardvec, upvec);
+    playFX(i, level._effect["headshot"], fxorigin, forwardvec, upvec);
+    playFX(i, level._effect["headshot_nochunks"], fxorigin, forwardvec, upvec);
   }
 
-  playsound(0, "zombie_head_gib", fxorigin);
+  playSound(0, "zombie_head_gib", fxorigin);
   wait 0.3;
 
   if(isDefined(self)) {
     players = level.localplayers;
 
     for(i = 0; i < players.size; i++)
-      playfxontag(i, level._effect["bloodspurt"], self, fxtag);
+      playFXOnTag(i, level._effect["bloodspurt"], self, fxtag);
   }
 }
 
@@ -882,9 +882,9 @@ do_gib_fx(tag) {
   players = level.localplayers;
 
   for(i = 0; i < players.size; i++)
-    playfxontag(i, level._effect["animscript_gib_fx"], self, tag);
+    playFXOnTag(i, level._effect["animscript_gib_fx"], self, tag);
 
-  playsound(0, "zmb_death_gibs", self gettagorigin(tag));
+  playSound(0, "zmb_death_gibs", self gettagorigin(tag));
 }
 
 do_gib(model, tag) {
@@ -895,7 +895,7 @@ do_gib(model, tag) {
   angles = undefined;
 
   if(!isDefined(self)) {
-    end_pos = start_pos + anglestoforward(start_angles) * 10;
+    end_pos = start_pos + anglesToForward(start_angles) * 10;
     angles = start_angles;
   } else {
     end_pos = self gettagorigin(tag);
@@ -916,7 +916,7 @@ do_gib(model, tag) {
   if(isDefined(self))
     self do_gib_fx(tag);
   else
-    playsound(0, "zmb_death_gibs", end_pos);
+    playSound(0, "zmb_death_gibs", end_pos);
 }
 
 do_hat_gib(model, tag) {
@@ -998,11 +998,9 @@ on_gib_event(localclientnum, type, locations) {
         if(isDefined(self._gib_def.gibspawn1) && isDefined(self._gib_def.gibspawntag1))
           self thread do_gib(self._gib_def.gibspawn1, self._gib_def.gibspawntag1);
         else {
-          if(!isDefined(self._gib_def.gibspawn1)) {
-          }
+          if(!isDefined(self._gib_def.gibspawn1)) {}
 
-          if(!isDefined(self._gib_def.gibspawntag1)) {
-          }
+          if(!isDefined(self._gib_def.gibspawntag1)) {}
         }
 
         mark_piece_gibbed(level._zombie_gib_piece_index_right_arm);
@@ -1011,11 +1009,9 @@ on_gib_event(localclientnum, type, locations) {
         if(isDefined(self._gib_def.gibspawn2) && isDefined(self._gib_def.gibspawntag2))
           self thread do_gib(self._gib_def.gibspawn2, self._gib_def.gibspawntag2);
         else {
-          if(!isDefined(self._gib_def.gibspawn2)) {
-          }
+          if(!isDefined(self._gib_def.gibspawn2)) {}
 
-          if(!isDefined(self._gib_def.gibspawntag2)) {
-          }
+          if(!isDefined(self._gib_def.gibspawntag2)) {}
         }
 
         mark_piece_gibbed(level._zombie_gib_piece_index_left_arm);
@@ -1088,7 +1084,7 @@ zombie_vision_set_apply(str_visionset, int_priority, flt_transition_time, int_cl
   }
 
   if(!already_in_array) {
-    temp_struct = spawnstruct();
+    temp_struct = spawnStruct();
     temp_struct.vision_set = str_visionset;
     temp_struct.priority = int_priority;
     self._zombie_visionset_list = add_to_array(self._zombie_visionset_list, temp_struct, 0);
@@ -1164,7 +1160,7 @@ handle_zombie_risers_foliage(localclientnum, oldval, newval, bnewent, binitialsn
 
   if(!oldval && newval) {
     localplayers = level.localplayers;
-    playsound(0, "zmb_zombie_spawn", self.origin);
+    playSound(0, "zmb_zombie_spawn", self.origin);
     burst_fx = level._effect["rise_burst_foliage"];
     billow_fx = level._effect["rise_billow_foliage"];
     type = "foliage";
@@ -1180,7 +1176,7 @@ handle_zombie_risers_water(localclientnum, oldval, newval, bnewent, binitialsnap
 
   if(!oldval && newval) {
     localplayers = level.localplayers;
-    playsound(0, "zmb_zombie_spawn_water", self.origin);
+    playSound(0, "zmb_zombie_spawn_water", self.origin);
     burst_fx = level._effect["rise_burst_water"];
     billow_fx = level._effect["rise_billow_water"];
     type = "water";
@@ -1208,7 +1204,7 @@ handle_zombie_risers(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
       type = "snow";
     }
 
-    playsound(0, sound, self.origin);
+    playSound(0, sound, self.origin);
 
     for(i = 0; i < localplayers.size; i++)
       self thread rise_dust_fx(i, type, billow_fx, burst_fx);
@@ -1233,7 +1229,7 @@ handle_zombie_risers_lowg(localclientnum, oldval, newval, bnewent, binitialsnap,
       type = "snow";
     }
 
-    playsound(0, sound, self.origin);
+    playSound(0, sound, self.origin);
 
     for(i = 0; i < localplayers.size; i++)
       self thread rise_dust_fx(i, type, billow_fx, burst_fx);
@@ -1261,12 +1257,12 @@ rise_dust_fx(clientnum, type, billow_fx, burst_fx) {
   }
 
   if(isDefined(burst_fx))
-    playfx(clientnum, burst_fx, self.origin + (0, 0, randomintrange(5, 10)));
+    playFX(clientnum, burst_fx, self.origin + (0, 0, randomintrange(5, 10)));
 
   wait 0.25;
 
   if(isDefined(billow_fx))
-    playfx(clientnum, billow_fx, self.origin + (randomintrange(-10, 10), randomintrange(-10, 10), randomintrange(5, 10)));
+    playFX(clientnum, billow_fx, self.origin + (randomintrange(-10, 10), randomintrange(-10, 10), randomintrange(5, 10)));
 
   wait 2;
   dust_time = 5.5;
@@ -1284,7 +1280,7 @@ rise_dust_fx(clientnum, type, billow_fx, burst_fx) {
     return;
   }
   for(t = 0; t < dust_time; t = t + dust_interval) {
-    playfxontag(clientnum, effect, self, dust_tag);
+    playFXOnTag(clientnum, effect, self, dust_tag);
     wait(dust_interval);
   }
 }
@@ -1298,7 +1294,7 @@ end_last_stand(clientnum) {
 
   println("Gasp.");
 
-  playsound(clientnum, "revive_gasp");
+  playSound(clientnum, "revive_gasp");
 }
 
 last_stand_thread(clientnum) {
@@ -1311,7 +1307,7 @@ last_stand_thread(clientnum) {
   vol = 0.5;
 
   while(true) {
-    id = playsound(clientnum, "chr_heart_beat");
+    id = playSound(clientnum, "chr_heart_beat");
     setsoundvolume(id, vol);
     waitrealtime(pause);
 
@@ -1346,14 +1342,14 @@ last_stand_monitor(clientnum, state, oldstate) {
       player thread last_stand_thread(clientnum);
 
       if(players.size <= 1)
-        level.lslooper playloopsound("evt_laststand_loop", 0.3);
+        level.lslooper playLoopSound("evt_laststand_loop", 0.3);
 
       level._laststand[clientnum] = 1;
     }
   } else if(level._laststand[clientnum]) {
     if(isDefined(level.lslooper)) {
       level.lslooper stoploopsound(0.7);
-      playsound(0, "evt_laststand_in", (0, 0, 0));
+      playSound(0, "evt_laststand_in", (0, 0, 0));
     }
 
     player notify("lastStandEnd");

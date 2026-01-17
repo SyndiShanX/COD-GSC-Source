@@ -34,7 +34,7 @@ set_objective(n_objective, ent_or_pos, str_obj_type, n_targets, b_show_message, 
     if(!isDefined(b_show_message))
       b_show_message = 1;
 
-    s_info = spawnstruct();
+    s_info = spawnStruct();
     s_info.n_objective = n_objective;
     s_info.objective_pos = ent_or_pos;
     s_info.str_objective_type = str_obj_type;
@@ -94,7 +94,7 @@ _objective_perk_volume(n_objective) {
   while(true) {
     while(isDefined(b_touching) && !b_touching) {
       if(level.player istouching(self)) {
-        objective_set3d(n_objective, 1, "white", & "SP_OBJECTIVES_INTERACT");
+        objective_set3d(n_objective, 1, "white", &"SP_OBJECTIVES_INTERACT");
         b_touching = 1;
       }
 
@@ -161,7 +161,7 @@ objectives() {
       } else if(isDefined(level.objective_pos))
         objective_position(n_objective, level.objective_pos);
 
-      if(level.a_objectives[n_objective] != & "")
+      if(level.a_objectives[n_objective] != &"")
         objective_string(n_objective, level.a_objectives[n_objective], level.n_objective_targets);
     } else if(n_current_obj != n_objective || !is_objective_pos_the_same(level.objective_pos, pos)) {
       if(isDefined(level.objective_pos) && (!isstring(level.str_objective_type) || level.str_objective_type != "remove" && level.str_objective_type != "active")) {
@@ -225,7 +225,7 @@ objectives() {
 }
 
 set_vectarget_id(v_obj_pos, n_target_id) {
-  level.a_obj_structs[level.a_obj_structs.size] = spawnstruct();
+  level.a_obj_structs[level.a_obj_structs.size] = spawnStruct();
   level.a_obj_structs[level.a_obj_structs.size].origin = v_obj_pos;
   level.a_obj_structs[level.a_obj_structs.size].target_id = n_target_id;
 }
@@ -280,16 +280,16 @@ objective_type(n_timer) {
 
       break;
     case "interact":
-      objective_set3d_prethink(n_objective, 1, "white", & "SP_OBJECTIVES_INTERACT", n_timer);
+      objective_set3d_prethink(n_objective, 1, "white", &"SP_OBJECTIVES_INTERACT", n_timer);
       setsaveddvar("cg_objectiveIndicatorPerkFarFadeDist", 1024);
       objective_setflag(n_objective, "perk", 1);
       break;
     case "defend":
-      objective_set3d_prethink(n_objective, 1, "default", & "SP_OBJECTIVES_DEFEND", n_timer);
+      objective_set3d_prethink(n_objective, 1, "default", &"SP_OBJECTIVES_DEFEND", n_timer);
       objective_setflag(n_objective, "fadeoutonscreen", 1);
       break;
     case "follow":
-      objective_set3d_prethink(n_objective, 1, "default", & "SP_OBJECTIVES_FOLLOW", n_timer);
+      objective_set3d_prethink(n_objective, 1, "default", &"SP_OBJECTIVES_FOLLOW", n_timer);
       objective_setflag(n_objective, "fadeoutonscreen", 1);
       break;
     case "*":
@@ -369,7 +369,7 @@ objective_breadcrumb(n_obj_index, str_trig_targetname) {
 objective_breadcrumb_area(n_obj_index, str_area_name, str_endon) {
   level endon(str_endon);
   assert(self != level, "objective_breadcrumb_area:: self needs to be the entity to check against, such as the player or a vehicle");
-  a_e_areas = getentarray(str_area_name, "targetname");
+  a_e_areas = getEntArray(str_area_name, "targetname");
   assert(a_e_areas.size > 1, "objective_breadcrumb_area:: there should be at least 2 areas to use this function");
   e_curr_area = undefined;
   e_last_area = undefined;

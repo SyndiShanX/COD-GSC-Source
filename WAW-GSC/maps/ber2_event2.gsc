@@ -19,11 +19,11 @@ event2_start() {
   if(level.coopOptimize) {
     numToSpawn = 2;
     spawner = getent_safe("spawner_street_extraguy", "targetname");
-    for (i = 0; i < numToSpawn; i++) {
+    for(i = 0; i < numToSpawn; i++) {
       spawner.count++;
       extra = undefined;
-      while (!isDefined(extra)) {
-        while (!OkToSpawn()) {
+      while(!isDefined(extra)) {
+        while(!OkTospawn()) {
           wait(0.05);
         }
         extra = spawn_guy(spawner);
@@ -68,8 +68,8 @@ event2_setup() {
   thread event2_action_dialogue();
   thread metro_ai_wetness_change();
   SetClientSysState("levelNotify", "start_lights");
-  sound_subway_lights = getentarray("light_subway_flicker", "targetname");
-  for (i = 0; i < sound_subway_lights.size; i++) {
+  sound_subway_lights = getEntArray("light_subway_flicker", "targetname");
+  for(i = 0; i < sound_subway_lights.size; i++) {
     sound_subway_lights[i] transmittargetname();
   }
 }
@@ -80,7 +80,7 @@ metro_ai_wetness_change() {
 }
 
 event2_friends_setup() {
-  for (i = 0; i < level.friends.size; i++) {
+  for(i = 0; i < level.friends.size; i++) {
     guy = level.friends[i];
     guy.maxSightDistSqrd = 574 * 574;
     if(guy != level.sarge && guy != level.hero1) {
@@ -92,7 +92,7 @@ event2_friends_setup() {
 event2_reset_squad_colors() {
   trigger_wait("trig_script_color_allies_b31", "targetname");
   flag_wait("lights_back_on");
-  for (i = 0; i < level.friends.size; i++) {
+  for(i = 0; i < level.friends.size; i++) {
     level.friends[i].og_forcecolor = "b";
     level.friends[i] set_force_color("b");
   }
@@ -214,15 +214,15 @@ event2_exitgate_action() {
   set_color_chain("trig_script_color_allies_b42");
   trig = GetEnt("trig_subway_exitGateArea", "targetname");
   trig waittill("trigger");
-  spawners = GetEntArray("spawner_subway_exitDefenders", "targetname");
+  spawners = getEntArray("spawner_subway_exitDefenders", "targetname");
   ASSERTEX(isDefined(spawners) && spawners.size > 0, "Can't find any spawners for the subway exit defenders!");
-  for (i = 0; i < spawners.size; i++) {
+  for(i = 0; i < spawners.size; i++) {
     spawners[i].count = 100;
   }
   maps\_spawner::flood_spawner_scripted(spawners);
   level notify("subway_exitgate_startDefenders");
   opener = level.sarge;
-  while (!opener IsTouching(trig)) {
+  while(!opener IsTouching(trig)) {
     wait(0.5);
   }
   waittill_all_players_touching(trig);
@@ -234,7 +234,7 @@ event2_exitgate_action() {
   }
   thread metrowave(opener, quickWave);
   level waittill("subway_exitgate_startRunners");
-  spawners = GetEntArray("spawner_subway_exitRunners", "targetname");
+  spawners = getEntArray("spawner_subway_exitRunners", "targetname");
   ASSERTEX(isDefined(spawners) && spawners.size > 0, "Can't find any spawners for the subway exit runners!");
   maps\_spawner::flood_spawner_scripted(spawners);
   wave_trigger_wait("struct_metrowave_nearEnemyLine");
@@ -311,7 +311,7 @@ metrowave_approach_quake(wave) {
   bigscale = 0.45;
   duration = 0.5;
   radius = 5000;
-  while (!flag("metrowave_blackout")) {
+  while(!flag("metrowave_blackout")) {
     quakeScale = scale;
     if(flag("wave_near_players")) {
       scale = bigscale;
@@ -325,7 +325,7 @@ metrowave_approach_rumble(wave) {
   self endon("death");
   self endon("disconnect");
   self PlayRumbleLoopOnEntity("tank_rumble");
-  while (!flag("metrowave_blackout")) {
+  while(!flag("metrowave_blackout")) {
     wait(0.05);
   }
   self StopRumble("tank_rumble");
@@ -335,8 +335,8 @@ wave_trigger_wait(spotTN) {
   level endon("wave_finished");
   waveCollisionTrig = getent_safe("trig_metrowave_collision", "targetname");
   spot = getstruct_safe(spotTN, "targetname");
-  org = Spawn("script_origin", spot.origin);
-  while (!waveCollisionTrig IsTouching(org)) {
+  org = spawn("script_origin", spot.origin);
+  while(!waveCollisionTrig IsTouching(org)) {
     wait(0.05);
   }
   org Delete();
@@ -409,7 +409,7 @@ metrowave_rats() {
   }
   level.rats = [];
   thread metrowave_rats_notify();
-  while (1) {
+  while(1) {
     if(level.rats.size > level.ratsMax) {
       level thread delete_oldest_rat();
     }
@@ -424,8 +424,8 @@ metrowave_rats_notify() {
 }
 
 metrowave_rat_init() {
-  rat = Spawn("script_model", self.origin);
-  rat SetModel("sewer_rat");
+  rat = spawn("script_model", self.origin);
+  rat setModel("sewer_rat");
   rat.angles = self.angles;
   rat.pathstart = self;
   level.rats[level.rats.size] = rat;
@@ -436,7 +436,7 @@ metrowave_rat_runpath() {
   self endon("rat_delete");
   self thread metrowave_rat_anims();
   pathpoint = self.pathstart;
-  while (isDefined(pathpoint)) {
+  while(isDefined(pathpoint)) {
     if(isDefined(pathpoint.target)) {
       targets = GetStructArray(pathpoint.target, "targetname");
       nextpoint = get_random(targets);
@@ -500,7 +500,7 @@ metrowave_move(wave, waveCollisionTrig, waveCollisionTrig_aggressive) {
   wavePath = [];
   pathpoint = pathStart;
   arraycount = 0;
-  while (isDefined(pathpoint)) {
+  while(isDefined(pathpoint)) {
     wavePath[arraycount] = pathpoint;
     arraycount++;
     if(isDefined(pathpoint.target)) {
@@ -514,9 +514,9 @@ metrowave_move(wave, waveCollisionTrig, waveCollisionTrig_aggressive) {
   waveCollisionTrig LinkTo(wave);
   waveCollisionTrig_aggressive EnableLinkTo();
   waveCollisionTrig_aggressive LinkTo(wave);
-  PlayFxOnTag(level._effect["metrowave_base"], wave, "tag_origin");
+  playFXOnTag(level._effect["metrowave_base"], wave, "tag_origin");
   waveSpeed = 625;
-  for (i = 0; i < wavePath.size; i++) {
+  for(i = 0; i < wavePath.size; i++) {
     org = wavePath[i];
     nextOrg = undefined;
     newAngles = undefined;
@@ -544,12 +544,12 @@ rotate_over_time(newAngles, rotateTime, anglesOffset) {
 
 metrowave_impact_ais(waveCollisionTrig) {
   level endon("wave_finished");
-  while (1) {
+  while(1) {
     enemies = get_ai_group_ai("ai_metrowave_enemies");
     friends = get_friends();
     guys = array_combine(enemies, friends);
     if(isDefined(guys) && guys.size > 0) {
-      for (i = 0; i < guys.size; i++) {
+      for(i = 0; i < guys.size; i++) {
         guy = guys[i];
         if(is_active_ai(guy) && waveCollisionTrig IsTouching(guy)) {
           if(!isDefined(guy.waveImpact)) {
@@ -568,7 +568,7 @@ metrowave_impact_ai() {
   if(isDefined(self.magic_bullet_shield) && self.magic_bullet_shield) {
     self thread stop_magic_bullet_shield();
   }
-  animSpot = SpawnStruct();
+  animSpot = spawnStruct();
   animSpot.origin = self.origin;
   animSpot.angles = (0, 325, 0);
   self.animname = "metrowave_casualty";
@@ -594,14 +594,14 @@ metrowave_force_camera() {
   reqDot = 0.77;
   viewLerpTime = 0.3;
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i] EnableInvulnerability(true);
     normal = VectorNormalize(lookTarget.origin - players[i].origin);
     player_angles = players[i] GetPlayerAngles();
-    player_forward = AnglesToForward(player_angles);
+    player_forward = anglesToForward(player_angles);
     dot = VectorDot(player_forward, normal);
     if(dot < reqDot) {
-      anglesToLookOrigin = VectorToAngles(lookTarget.origin - players[i] GetEye());
+      anglesToLookOrigin = VectorToAngles(lookTarget.origin - players[i] getEye());
       players[i] SetStance("stand");
       players[i] thread lerp_player_view_to_position(players[i].origin, anglesToLookOrigin, viewLerpTime, 1, 0, 0, 0, 0);
     }
@@ -622,14 +622,14 @@ metrowave_init_lights() {
   lightGroups[2] = getstruct_safe("floodlight_3", "targetname");
   lightGroups[3] = getstruct_safe("floodlight_4", "targetname");
   lightGroups[4] = getstruct_safe("floodlight_5", "targetname");
-  for (i = 0; i < lightGroups.size; i++) {
+  for(i = 0; i < lightGroups.size; i++) {
     lightGroup = lightGroups[i];
     lightGroup.light = getent_safe(lightGroup.target, "targetname");
     lightGroup.light SetLightIntensity(5.5);
-    lightGroup.particleLight = Spawn("script_model", lightGroup.origin);
+    lightGroup.particleLight = spawn("script_model", lightGroup.origin);
     lightGroup.particleLight.angles = lightGroup.angles;
-    lightGroup.particleLight SetModel("tag_origin");
-    PlayFxOnTag(level._effect["metro_light_filler_high"], lightGroup.particleLight, "tag_origin");
+    lightGroup.particleLight setModel("tag_origin");
+    playFXOnTag(level._effect["metro_light_filler_high"], lightGroup.particleLight, "tag_origin");
   }
   level.metrowaveLightGroups = lightGroups;
 }
@@ -641,13 +641,13 @@ metrowave_turnoff_lights(waveCollisionTrig) {
 metrowave_turnoff_lightgroup(waveCollisionTrig) {
   level endon("wave_finished");
   lightGroup = self;
-  org = Spawn("script_origin", lightGroup.light.origin);
+  org = spawn("script_origin", lightGroup.light.origin);
   org.angles = (0, 325, 0);
-  while (!waveCollisionTrig IsTouching(org)) {
+  while(!waveCollisionTrig IsTouching(org)) {
     wait(0.05);
   }
-  org playsound("bulb_break");
-  PlayFX(level._effect["light_explode"], org.origin, org.angles);
+  org playSound("bulb_break");
+  playFX(level._effect["light_explode"], org.origin, org.angles);
   lightGroup.light light_setintensity(0, 0.05);
   if(isDefined(lightGroup.particleLight)) {
     lightGroup.particleLight Delete();
@@ -657,10 +657,10 @@ metrowave_turnoff_lightgroup(waveCollisionTrig) {
 }
 
 metrowave_blackout(waveCollisionTrig) {
-  while (1) {
+  while(1) {
     players = get_players();
     waveTouch = false;
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       player = players[i];
       if(waveCollisionTrig IsTouching(player)) {
         waveTouch = true;
@@ -678,11 +678,11 @@ metrowave_blackout(waveCollisionTrig) {
   level notify("stop_wave_sound");
   SetClientSysState("levelNotify", "set_wave_bus");
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i] DisableWeapons();
     players[i] SetClientDvar("compass", "0");
     players[i] SetClientDvar("miniscoreboardhide", "1");
-    players[i].lock = Spawn("script_origin", players[i].origin);
+    players[i].lock = spawn("script_origin", players[i].origin);
     players[i].lock.angles = players[i].angles;
     players[i] PlayerLinkTo(players[i].lock, "", 1, 25, 25, 25, 25);
   }
@@ -700,7 +700,7 @@ metrowave_blackout(waveCollisionTrig) {
   playerone.lock.origin = (-3654, 3871, -514);
   playerone.lock.angles = (336, 64, -40);
   if(players.size > 1) {
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       players[i] thread player_prevent_bleedout();
       players[i] Hide();
       if(players[i] != playerone) {
@@ -712,7 +712,7 @@ metrowave_blackout(waveCollisionTrig) {
   wait(2);
   level notify("water_scream");
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i] VisionSetNaked("sniper", 0.05);
   }
   tscale = 0.5;
@@ -745,7 +745,7 @@ metrowave_kill_all_axis() {
   if(!array_validate(axis)) {
     return;
   }
-  for (i = 0; i < axis.size; i++) {
+  for(i = 0; i < axis.size; i++) {
     axis[i].health = 1;
     axis[i] delayThread(RandomFloatRange(2, 5), ::bloody_death, true, 2);
   }
@@ -754,7 +754,7 @@ metrowave_kill_all_axis() {
 player_prevent_bleedout() {
   self endon("death");
   self endon("disconnect");
-  while (1) {
+  while(1) {
     self.bleedout_time = 100000;
     wait(0.5);
   }
@@ -764,18 +764,18 @@ metrowave_player_bubbles() {
   self endon("death");
   self endon("disconnect");
   deleteit = 0;
-  for (i = 0; i < 10; i++) {
+  for(i = 0; i < 10; i++) {
     offset1 = (randomint(20), randomint(20), -1 * randomint(5));
     offset2 = (-1 * randomint(20), -1 * randomint(20), -1 * randomint(5));
     offset = offset1 + offset2;
-    spot1 = spawn("script_model", (self geteye()) + (offset));
-    spot1 setmodel("tag_origin");
-    spot2 = spawn("script_model", (self geteye()) + (offset));
-    spot2 setmodel("tag_origin");
+    spot1 = spawn("script_model", (self getEye()) + (offset));
+    spot1 setModel("tag_origin");
+    spot2 = spawn("script_model", (self getEye()) + (offset));
+    spot2 setModel("tag_origin");
     spot1 linkto(self);
     spot2 linkto(self);
-    playfxontag(level._effect["limb_bubbles"], spot1, "tag_origin");
-    playfxontag(level._effect["torso_bubbles"], spot2, "tag_origin");
+    playFXOnTag(level._effect["limb_bubbles"], spot1, "tag_origin");
+    playFXOnTag(level._effect["torso_bubbles"], spot2, "tag_origin");
     if(deleteit == 0) {
       deleteit = 1;
       level thread wait_and_trigoff(spot1, randomfloat(2.3, 3));
@@ -864,7 +864,7 @@ epd_demo_outro() {
   wait(5);
   endTime = GetTime() + (15 * 1000);
   host = get_players()[0];
-  while (GetTime() < endTime) {
+  while(GetTime() < endTime) {
     if(host UseButtonPressed()) {
       break;
     } else {
@@ -901,7 +901,7 @@ event2_arty() {
   quakeRadius = 500;
   fxMaxDist = 650;
   isFirstShake = true;
-  while (1) {
+  while(1) {
     if(!isFirstShake) {
       wait(RandomFloatRange(minWait, maxWait));
       thread arty_normalshake_friendly_dialogue();
@@ -977,7 +977,7 @@ event2_arty_shake(emitters, lights, darkTimeMin, darkTimeMax, maxDist, quakeScal
   fx_chunks = level._effect["metro_arty_dust_chunks"];
   event2_arty_fx_reset(emitters);
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     player = players[i];
     player thread generic_rumble_loop(quakeDuration * 0.9);
     Earthquake(RandomFloatRange(quakeScaleMin, quakeScaleMax), quakeDuration, player.origin, quakeRadius);
@@ -986,17 +986,17 @@ event2_arty_shake(emitters, lights, darkTimeMin, darkTimeMax, maxDist, quakeScal
       array_thread(lights, maps\ber2_fx::light_arty_flicker, darkTimeMin, darkTimeMax);
       thread darkness_think(lights);
       SetClientSysState("levelNotify", "arty_light_hit");
-      player playsound("subway_debris1");
+      player playSound("subway_debris1");
     }
-    for (i = 0; i < emitters.size; i++) {
+    for(i = 0; i < emitters.size; i++) {
       emitter = emitters[i];
       if(Distance(player.origin, emitter.origin) <= maxDist) {
         if(!isDefined(emitter.arty_isEmitting) || !emitter.arty_isEmitting) {
           emitter.arty_isEmitting = true;
           if(RandomInt(100) < 30) {
-            PlayFx(fx_chunks, emitter.origin);
+            playFX(fx_chunks, emitter.origin);
           } else {
-            PlayFx(fx_dust, emitter.origin);
+            playFX(fx_dust, emitter.origin);
           }
         }
       }
@@ -1005,7 +1005,7 @@ event2_arty_shake(emitters, lights, darkTimeMin, darkTimeMax, maxDist, quakeScal
 }
 
 event2_arty_fx_reset(emitters) {
-  for (i = 0; i < emitters.size; i++) {
+  for(i = 0; i < emitters.size; i++) {
     emitters[i].arty_isEmitting = false;
   }
 }
@@ -1023,7 +1023,7 @@ darkness_ai_setup() {
   ais = GetAIArray();
   array_thread(ais, ::darkness_ai_think);
   spawners = GetSpawnerArray();
-  for (i = 0; i < spawners.size; i++) {
+  for(i = 0; i < spawners.size; i++) {
     spawners[i] thread darkness_ai_spawnerthread();
   }
 }
@@ -1039,7 +1039,7 @@ darkness_battlechatter() {
 
 darkness_ai_spawnerthread() {
   level endon("lights_back_on");
-  while (1) {
+  while(1) {
     self waittill("spawned", spawn);
     if(maps\_utility::spawn_failed(spawn)) {
       continue;
@@ -1084,7 +1084,7 @@ darkness_proxcheck() {
   self endon("death");
   alertDist = 500;
   alertDist *= alertDist;
-  while (1) {
+  while(1) {
     enemies = undefined;
     if(self.team == "axis") {
       enemies = GetAIArray("allies");
@@ -1093,7 +1093,7 @@ darkness_proxcheck() {
       enemies = GetAIArray("axis");
     }
     enemy = undefined;
-    for (i = 0; i < enemies.size; i++) {
+    for(i = 0; i < enemies.size; i++) {
       if(DistanceSquared(enemies[i].origin, self.origin) < alertDist) {
         self.ignoreall = false;
         enemy = enemies[i];
@@ -1137,7 +1137,7 @@ darkness_randomfire() {
   self endon("enemy_found_in_the_dark");
   waitMin = 1;
   waitMax = 4;
-  while (1) {
+  while(1) {
     wait(RandomFloatRange(waitMin, waitMax));
     if(self.ignoreall) {
       self.ignoreall = false;
@@ -1153,7 +1153,7 @@ darkness_ai_player_nearby() {
   alertDist *= alertDist;
   players = get_players();
   foundOne = false;
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(DistanceSquared(players[i].origin, self.origin) < alertDist) {
       foundOne = true;
       break;
@@ -1176,9 +1176,9 @@ dark_playerkill_wait() {
 
 tally_dark_kills() {
   level endon("lights_back_on");
-  while (1) {
+  while(1) {
     players = get_players();
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       if(!isDefined(players[i].ber2_dark_kills)) {
         continue;
       }
@@ -1196,7 +1196,7 @@ tally_dark_kills() {
 
 darkness_stop_wait(numLights) {
   onFrac = 0.65;
-  while (level.arty_flickerlights_on < (numLights * onFrac)) {
+  while(level.arty_flickerlights_on < (numLights * onFrac)) {
     wait(0.1);
   }
   flag_set("lights_back_on");
@@ -1228,7 +1228,7 @@ metrowave_rat_anims(movetime) {
   hopChance = 65;
   anime = animHop;
   runTime = 2;
-  while (1) {
+  while(1) {
     if(!isDefined(self)) {
       break;
     }
@@ -1242,10 +1242,10 @@ metrowave_rat_anims(movetime) {
     } else {
       anime = animRun;
       endTime = GetTime() + (RandomFloatRange(0.5, 1.5) * 1000);
-      while (GetTime() < endTime) {
+      while(GetTime() < endTime) {
         if(!level.coopOptimize) {
           if(RandomInt(100) < 25) {
-            PlayFX(fx_splash, (self.origin[0], self.origin[1], waterHeight));
+            playFX(fx_splash, (self.origin[0], self.origin[1], waterHeight));
           }
         }
         self SetFlaggedAnimKnob("rat_anim", anime, 1.0, 0.2, 1.0);
@@ -1257,9 +1257,9 @@ metrowave_rat_anims(movetime) {
 
 metrowave_rat_anim_splash(fx_splash, waterHeight) {
   wait(0.1);
-  PlayFX(fx_splash, (self.origin[0], self.origin[1], waterHeight));
+  playFX(fx_splash, (self.origin[0], self.origin[1], waterHeight));
   wait(0.4);
-  PlayFX(fx_splash, (self.origin[0], self.origin[1], waterHeight));
+  playFX(fx_splash, (self.origin[0], self.origin[1], waterHeight));
 }
 
 #using_animtree("ber2_metro_exit_door");
@@ -1282,8 +1282,8 @@ metro_exitdoor_anim(animeName) {
     default:
       ASSERTMSG("metro_exitdoor_anim(): door animation type '" + animeName + "' not recognized.");
   }
-  org = Spawn("script_model", self.origin);
-  org SetModel("tag_origin_animate");
+  org = spawn("script_model", self.origin);
+  org setModel("tag_origin_animate");
   self LinkTo(org, "origin_animate_jnt");
   org UseAnimTree(#animtree);
   org SetFlaggedAnimKnob("metrodoor_anim", anime, 1.0, 0.2, 1.0);

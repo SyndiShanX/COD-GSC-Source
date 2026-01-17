@@ -8,8 +8,7 @@
 #include clientscripts\mp\_fx;
 #include clientscripts\mp\_fxanim_dlc;
 
-precache_scripted_fx() {
-}
+precache_scripted_fx() {}
 
 precache_createfx_fx() {
   level._effect["fx_mp_vertigo_tube_cloud"] = loadfx("maps/mp_maps/fx_mp_vertigo_tube_cloud");
@@ -96,7 +95,7 @@ fxanim_init(localclientnum) {
     }
   }
 
-  fxanims = getentarray(localclientnum, "fxanim_level", "targetname");
+  fxanims = getEntArray(localclientnum, "fxanim_level", "targetname");
 
   foreach(fxanim in fxanims) {
     if(isDefined(fxanim.fxanim_scene_1) && fxanim.fxanim_scene_1 == "blinds_impact")

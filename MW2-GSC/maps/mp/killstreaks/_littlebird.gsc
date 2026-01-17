@@ -6,7 +6,7 @@
 #include maps\mp\_utility;
 #include common_scripts\utility;
 
-/******************************************************************* 
+/*******************************************************************
 //						_littleBird.gsc
 //	
 //	Holds all the littlebird specific functions
@@ -19,8 +19,8 @@ init() {
   precacheString(&"MP_AIR_SPACE_TOO_CROWDED");
 
   return;
-  //precacheString( &"MP_WAR_AIRSTRIKE_INBOUND_NEAR_YOUR_POSITION" );
-  //precacheString( &"MP_WAR_AIRSTRIKE_INBOUND" );
+  //precacheString(&"MP_WAR_AIRSTRIKE_INBOUND_NEAR_YOUR_POSITION" );
+  //precacheString(&"MP_WAR_AIRSTRIKE_INBOUND" );
 
   //precacheTurret( "minigun_littlebird_mp" );
   //precacheModel( "vehicle_little_bird_minigun_left" );
@@ -57,14 +57,14 @@ tryUseLbStrike(lifeId) {
 }
 
 startLBStrike(lifeId, origin, owner, team, yawDir) {
-  while (isDefined(level.airstrikeInProgress)) {
+  while(isDefined(level.airstrikeInProgress)) {
     level waittill("begin_airstrike");
   }
 
   level.airstrikeInProgress = true;
 
   num = 17 + randomint(3);
-  trace = bullettrace(origin, origin + (0, 0, -1000000), false, undefined);
+  trace = bulletTrace(origin, origin + (0, 0, -1000000), false, undefined);
   targetpos = trace["position"];
 
   //yaw = getBestLbDirection( targetpos );
@@ -75,10 +75,10 @@ startLBStrike(lifeId, origin, owner, team, yawDir) {
   if(level.teambased) {
     players = level.players;
 
-    for (i = 0; i < level.players.size; i++) {
+    for(i = 0; i < level.players.size; i++) {
       player = level.players[i];
       playerteam = player.pers["team"];
-      if(isdefined(playerteam)) {
+      if(isDefined(playerteam)) {
         if(playerteam == team)
           player iprintln(&"MP_WAR_AIRSTRIKE_INBOUND", owner);
       }
@@ -91,9 +91,9 @@ startLBStrike(lifeId, origin, owner, team, yawDir) {
   owner notify("begin_airstrike");
   level notify("begin_airstrike");
 
-  if(!isDefined(owner))
+  if(!isDefined(owner)) {
     return;
-
+  }
   callStrike(lifeId, owner, targetpos, yaw);
 }
 
@@ -108,9 +108,9 @@ clearProgress(delay) {
 doLbStrike(lifeId, owner, requiredDeathCount, coord, startPoint, endPoint, direction) {
   self endon("death");
 
-  if(!isDefined(owner))
+  if(!isDefined(owner)) {
     return;
-
+  }
   lb = spawnAttackLittleBird(owner, startPoint, endPoint, coord);
   lb.lifeId = lifeId;
 
@@ -129,7 +129,7 @@ doLbStrike(lifeId, owner, requiredDeathCount, coord, startPoint, endPoint, direc
   lb setVehGoalPos(endPoint, 1);
   wait(midTime - 1);
 
-  //slowing down and firing 
+  //slowing down and firing
   lb Vehicle_SetSpeed(45, 60);
   wait(1);
   lb SetMaxPitchRoll(200, 200);
@@ -160,7 +160,6 @@ doLbStrike(lifeId, owner, requiredDeathCount, coord, startPoint, endPoint, direc
   lb waittill("goal");
   lb notify("gone");
   lb delete();
-
 }
 
 waitTillGone() {
@@ -170,7 +169,6 @@ waitTillGone() {
 
 // spawn helicopter at a start node and monitors it
 spawnAttackLittleBird(owner, pathStart, pathGoal, coord) {
-
   forward = vectorToAngles(pathGoal - pathStart);
   lb = spawnHelicopter(owner, pathStart, forward, "littlebird_mp", "vehicle_little_bird_armed");
 
@@ -222,7 +220,7 @@ startLbFiring() {
 
   i = 0;
 
-  for (;;) {
+  for(;;) {
     self.mgTurret1 ShootTurret();
     self.mgTurret2 ShootTurret();
     wait(0.05);
@@ -244,14 +242,14 @@ getBestLbDirection(hitpos) {
 
   fullTraceResults = [];
 
-  for (i = 0; i < numChecks; i++) {
+  for(i = 0; i < numChecks; i++) {
     yaw = ((i * 1.0 + randomfloat(1)) / numChecks) * 360.0;
     angle = (checkPitch, yaw + 180, 0);
     dir = anglesToForward(angle);
 
     endpos = startpos + dir * 1500;
 
-    trace = bullettrace(startpos, endpos, false, undefined);
+    trace = bulletTrace(startpos, endpos, false, undefined);
 
     if(trace["fraction"] > bestanglefrac) {
       bestanglefrac = trace["fraction"];
@@ -278,13 +276,13 @@ callStrike(lifeId, owner, coord, yaw) {
   planeFlyHeight = 850;
   planeFlySpeed = 7000;
 
-  if(isdefined(level.airstrikeHeightScale))
+  if(isDefined(level.airstrikeHeightScale))
     planeFlyHeight *= level.airstrikeHeightScale;
 
-  startPoint = coord + vector_multiply(anglestoforward(direction), -1 * planeHalfDistance);
+  startPoint = coord + vector_multiply(anglesToForward(direction), -1 * planeHalfDistance);
   startPoint += (0, 0, planeFlyHeight);
 
-  endPoint = coord + vector_multiply(anglestoforward(direction), planeHalfDistance);
+  endPoint = coord + vector_multiply(anglesToForward(direction), planeHalfDistance);
   endPoint += (0, 0, planeFlyHeight);
 
   owner endon("disconnect");
@@ -292,7 +290,6 @@ callStrike(lifeId, owner, coord, yaw) {
   requiredDeathCount = owner.lifeId;
 
   level thread doLbStrike(lifeId, owner, requiredDeathCount, coord, startPoint, endPoint, direction);
-
 }
 
 waitForLbStrikeCancel() {
@@ -356,16 +353,16 @@ stopLbStrikeLocationSelection(disconnected) {
 
 useLbStrike(lifeId, pos, yawDir) {
   // find underside of top of skybox
-  trace = bullettrace(level.mapCenter + (0, 0, 1000000), level.mapCenter, false, undefined);
+  trace = bulletTrace(level.mapCenter + (0, 0, 1000000), level.mapCenter, false, undefined);
   pos = (pos[0], pos[1], trace["position"][2] - 514);
 
   thread startLBStrike(lifeId, pos, self, self.pers["team"], yawDir);
 }
 
 Callback_VehicleDamage(inflictor, attacker, damage, dFlags, meansOfDeath, weapon, point, dir, hitLoc, timeOffset, modelIndex, partName) {
-  if((attacker == self || (isDefined(attacker.pers) && attacker.pers["team"] == self.team)) && (attacker != self.owner || meansOfDeath == "MOD_MELEE"))
+  if((attacker == self || (isDefined(attacker.pers) && attacker.pers["team"] == self.team)) && (attacker != self.owner || meansOfDeath == "MOD_MELEE")) {
     return;
-
+  }
   self Vehicle_FinishDamage(inflictor, attacker, damage, dFlags, meansOfDeath, weapon, point, dir, hitLoc, timeOffset, modelIndex, partName);
 }
 
@@ -384,9 +381,9 @@ watchDeath() {
 heliDestroyed() {
   self endon("gone");
 
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
-
+  }
   //self trimActiveBirdList();
   self Vehicle_SetSpeed(25, 5);
   self thread lbSpin(RandomIntRange(180, 220));
@@ -398,10 +395,10 @@ heliDestroyed() {
 
 lbExplode() {
   forward = (self.origin + (0, 0, 1)) - self.origin;
-  playfx(level.chopper_fx["explode"]["air_death"], self.origin, forward);
+  playFX(level.chopper_fx["explode"]["air_death"], self.origin, forward);
 
   deathAngles = self getTagAngles("tag_deathfx");
-  playFx(level.chopper_fx["explode"]["air_death"]["littlebird"], self getTagOrigin("tag_deathfx"), anglesToForward(deathAngles), anglesToUp(deathAngles));
+  playFX(level.chopper_fx["explode"]["air_death"]["littlebird"], self getTagOrigin("tag_deathfx"), anglesToForward(deathAngles), anglesToUp(deathAngles));
 
   self playSound("cobra_helicopter_crash");
   self notify("explode");
@@ -421,11 +418,11 @@ lbSpin(speed) {
   self endon("explode");
 
   // tail explosion that caused the spinning
-  playfxontag(level.chopper_fx["explode"]["medium"], self, "tail_rotor_jnt");
+  playFXOnTag(level.chopper_fx["explode"]["medium"], self, "tail_rotor_jnt");
   self thread trail_fx(level.chopper_fx["smoke"]["trail"], "tail_rotor_jnt", "stop tail smoke");
 
   self setyawspeed(speed, speed, speed);
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     self settargetyaw(self.angles[1] + (speed * 0.9));
     wait(1);
   }
@@ -437,8 +434,8 @@ trail_fx(trail_fx, trail_tag, stop_notify) {
   self endon(stop_notify);
   self endon("death");
 
-  for (;;) {
-    playfxontag(trail_fx, self, trail_tag);
+  for(;;) {
+    playFXOnTag(trail_fx, self, trail_tag);
     wait(0.05);
   }
 }

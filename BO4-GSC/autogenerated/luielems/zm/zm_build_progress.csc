@@ -4,17 +4,15 @@
 ***********************************************************/
 
 #include scripts\core_common\lui_shared;
-
 #namespace zm_build_progress;
 
 class czm_build_progress: cluielem {
-
   function set_progress(localclientnum, value) {
     set_data(localclientnum, "progress", value);
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, #"zm_build_progress");
+    cluielem::open(localclientnum, # "zm_build_progress");
   }
 
   function function_fa582112(localclientnum) {

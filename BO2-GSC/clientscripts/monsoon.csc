@@ -42,7 +42,7 @@ main() {
 
 swing_trail_fx(localclientnum, set, newent) {
   if(set)
-    self.trailfx = playfxontag(localclientnum, level._effect["harper_swing_trail"], self, "j_spineupper");
+    self.trailfx = playFXOnTag(localclientnum, level._effect["harper_swing_trail"], self, "j_spineupper");
   else if(isDefined(self.trailfx)) {
     stopfx(localclientnum, self.trailfx);
     self.trailfx = undefined;

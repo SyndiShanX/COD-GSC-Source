@@ -26,8 +26,7 @@ init_flags() {
   flag_init("karma_killed");
 }
 
-init_spawn_funcs() {
-}
+init_spawn_funcs() {}
 
 skipto_confrontation() {
   skipto_teleport("skipto_the_end");
@@ -117,7 +116,7 @@ defalco_death() {
   screen_fade_out(1.5);
   wait 2;
   ent = spawn("script_origin", (-306, 7410, -2767));
-  ent playloopsound("veh_end_osp_steady", 2);
+  ent playLoopSound("veh_end_osp_steady", 2);
   level.player thread maps\createart\karma_2_art::vision_set_change("sp_karma2_defalco_walk");
   level thread run_scene("defalco_dead_ending");
   wait 0.2;
@@ -143,7 +142,7 @@ player_detected() {
   self endon("death");
 
   while(true) {
-    if(abs(level.player.origin[2] - self.origin[2]) < 2 && self sightconetrace(level.player geteye(), level.player) > 0.9) {
+    if(abs(level.player.origin[2] - self.origin[2]) < 2 && self sightconetrace(level.player getEye(), level.player) > 0.9) {
       n_dist = distance2d(level.player.origin, self.origin);
 
       if(n_dist < 300)
@@ -162,7 +161,7 @@ player_detected() {
 defalco_reaches_end() {
   level endon("escape_ending_started");
   flag_wait("defalco_reached_end");
-  v_eye = level.player geteye();
+  v_eye = level.player getEye();
 
   foreach(ent in array(level.ai_defalco, level.ai_karma)) {
     if(isalive(ent) && ent sightconetrace(v_eye, level.player) > 0.1) {
@@ -177,7 +176,7 @@ defalco_reaches_end() {
     if(!flag("cancel_helipad_pip"))
       level thread defalco_helipad_pip();
 
-    set_objective(level.obj_stop_defalco, level.ai_defalco, & "KARMA_2_OBJ_3D_DEFALCO", undefined, 0, 0.05);
+    set_objective(level.obj_stop_defalco, level.ai_defalco, &"KARMA_2_OBJ_3D_DEFALCO", undefined, 0, 0.05);
     exploder(2);
   }
 }
@@ -197,7 +196,7 @@ defalco_escape_defalco() {
   self.moveplaybackrate = 1.8;
   self.a.movement = "run";
   self thread follow_path("defalco_end_path", 1);
-  set_objective(level.obj_stop_defalco, self, & "KARMA_2_OBJ_3D_DEFALCO", undefined, 1, 40);
+  set_objective(level.obj_stop_defalco, self, &"KARMA_2_OBJ_3D_DEFALCO", undefined, 1, 40);
   self waittill_any_array_endon(array("damage", "player_detected"), level, "defalco_stopped");
   flag_set("defalco_stopped");
   self waittill("player_detected");
@@ -207,7 +206,7 @@ defalco_escape_defalco() {
     level thread defalco_zoom(self);
 
   level notify("stop_naglines");
-  set_objective(level.obj_stop_defalco, self, & "KARMA_2_OBJ_3D_DEFALCO", undefined, 1, 0.05);
+  set_objective(level.obj_stop_defalco, self, &"KARMA_2_OBJ_3D_DEFALCO", undefined, 1, 0.05);
   self.has_ir = 1;
   self.moveplaybackrate = 1;
   self.anim_defalco_react = % ch_karma_11_ending_defalco_reaction;
@@ -240,7 +239,7 @@ defalco_zoom(ai_defalco) {
   self.bulletcam_death = 0;
   level.player.ignoreme = 1;
   level.player.v_player_before_zoom_ang = level.player getplayerangles();
-  level.player.v_player_before_zoom_eye = level.player geteye();
+  level.player.v_player_before_zoom_eye = level.player getEye();
   level.player.v_player_before_zoom_org = level.player.origin;
   level.player_pos_ent = spawn("script_origin", level.player.v_player_before_zoom_eye);
   level.player hideviewmodel();
@@ -252,7 +251,7 @@ defalco_zoom(ai_defalco) {
   e_cam = spawn_model("p_glo_bullet_tip", level.player.v_player_before_zoom_eye, level.player.angles);
   e_cam hide();
   sndent = spawn("script_origin", (0, 0, 0));
-  sndent playloopsound("evt_timeslow_loop", 0.25);
+  sndent playLoopSound("evt_timeslow_loop", 0.25);
   level.player disableclientlinkto();
   level.player playerlinktoabsolute(e_cam, "tag_origin");
   e_cam zoom_in(1, 0.5, 0.2, 0.3);
@@ -389,7 +388,7 @@ escort_react() {
   disable_react();
   disable_pain();
   v_to_player = level.player.origin - self.origin;
-  n_dot_to_player = vectordot(vectornormalize(v_to_player), anglestoforward(self.angles));
+  n_dot_to_player = vectordot(vectornormalize(v_to_player), anglesToForward(self.angles));
 
   if(n_dot_to_player < -0.3) {
     v_goal_angles = vectortoangles(v_to_player * -1);
@@ -565,7 +564,7 @@ defalco_helipad_pip(str_structname, str_scene_name) {
 
 set_objective_on_vtol() {
   level.ai_defalco waittill("death");
-  set_objective(level.obj_stop_defalco, level.vh_vtol, & "KARMA_2_OBJ_3D_DEFALCO", undefined, 0, 0.05);
+  set_objective(level.obj_stop_defalco, level.vh_vtol, &"KARMA_2_OBJ_3D_DEFALCO", undefined, 0, 0.05);
 }
 
 defalco_escape_vehicle_callback(einflictor, eattacker, idamage, idflags, type, sweapon, vpoint, vdir, shitloc, psoffsettime, damagefromunderneath, modelindex, partname) {
@@ -594,7 +593,7 @@ setup_cagelight_fx(str_light_targetname) {
 
 delay_cagelight_fx() {
   self script_delay();
-  playfxontag(level._effect["light_caution_red_flash"], self, "tag_origin");
+  playFXOnTag(level._effect["light_caution_red_flash"], self, "tag_origin");
 }
 
 setup_vtol_escape_amb() {
@@ -605,7 +604,7 @@ setup_vtol_escape_amb() {
       vtol = maps\_vehicle::spawn_vehicle_from_targetname("e10_vtol_escape_spawner");
       vtol thread go_path(nd_v_start_array[i]);
       vtol thread delete_on_end_node();
-      playfxontag(level._effect["vtol_exhaust"], vtol, "tag_origin");
+      playFXOnTag(level._effect["vtol_exhaust"], vtol, "tag_origin");
       wait(randomintrange(2, 5));
     }
 

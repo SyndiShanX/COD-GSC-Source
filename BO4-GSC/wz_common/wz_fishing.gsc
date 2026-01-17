@@ -14,7 +14,6 @@
 #include scripts\core_common\values_shared;
 #include scripts\mp_common\item_world;
 #include scripts\mp_common\laststand_warzone;
-
 #namespace wz_fishing;
 
 autoexec __init__system__() {
@@ -120,8 +119,8 @@ function_e1cd5954(v_origin) {
   self endon("58ed1cc25dba79a1");
   trace = bulletTrace(v_origin + (0, 0, 40), v_origin + (0, 0, -150), 0, undefined);
 
-  if(trace[#"fraction"] < 1) {
-    v_origin = trace[#"position"];
+  if(trace[# "fraction"] < 1) {
+    v_origin = trace[# "position"];
   }
 
   return v_origin + (0, 0, 3);
@@ -232,7 +231,7 @@ function_4cfd3896(activator, laststate, state) {
 }
 
 function_ee4ce537(dynent) {
-  self endon(#"death", #"hash_21d06dbd3684fc31");
+  self endon(#"death", # "hash_21d06dbd3684fc31");
 
   while(true) {
     if(isDefined(dynent.isfishing) && dynent.isfishing) {
@@ -250,7 +249,7 @@ function_ee4ce537(dynent) {
 function_6c71782a(dynent) {
   self notify("48d65f5f22c36da2");
   self endon("48d65f5f22c36da2");
-  self endon(#"death", #"hash_61bb9580151c93d5", #"hash_667fd08050e0942b");
+  self endon(#"death", # "hash_61bb9580151c93d5", # "hash_667fd08050e0942b");
 
   if(!isplayer(self)) {
     return;
@@ -300,7 +299,7 @@ function_6c71782a(dynent) {
 function_8e8c4fef(time, pos) {
   self notify("230f045151c08d1e");
   self endon("230f045151c08d1e");
-  self endon(#"death", #"fishing_done");
+  self endon(#"death", # "fishing_done");
   wait time;
   self.origin = pos;
 }
@@ -322,7 +321,7 @@ function_b828bd39(player, dynent) {
   }
 
   self endon(#"fishing_done");
-  player endon(#"death", #"hash_61bb9580151c93d5");
+  player endon(#"death", # "hash_61bb9580151c93d5");
   dynent.var_3fa8a746 = 0;
   self.origin = dynent.var_be4b82e0;
 
@@ -346,7 +345,7 @@ function_b828bd39(player, dynent) {
 function_16e4e507(dynent) {
   self notify("651631a8d4cdd907");
   self endon("651631a8d4cdd907");
-  self endoncallback(&function_73532e4f, #"death", #"hash_61bb9580151c93d5");
+  self endoncallback(&function_73532e4f, # "death", # "hash_61bb9580151c93d5");
 
   if(!isplayer(self)) {
     return;
@@ -408,7 +407,7 @@ function_176e516(dynent) {
     return;
   }
 
-  self endoncallback(&function_73532e4f, #"death", #"hash_61bb9580151c93d5");
+  self endoncallback(&function_73532e4f, # "death", # "hash_61bb9580151c93d5");
 
   while(dynent.var_fb09ad1c != 3) {
     if(dynent.var_fb09ad1c != 3 && (self jumpbuttonpressed() || self stancebuttonpressed())) {

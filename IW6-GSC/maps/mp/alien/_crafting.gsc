@@ -20,9 +20,7 @@ setup_recipes() {
   var_0 = ["tesla", "grenade", "trap", "weapon", "sticky"];
 
   if(isDefined(level.recipe_setup_func))
-    var_0 = [
-      [level.recipe_setup_func]
-    ]();
+    var_0 = [[level.recipe_setup_func]]();
 
   var_1 = getEntArray("crafting_recipe_table", "targetname");
 
@@ -130,7 +128,7 @@ check_for_player_near_crafting_table() {
       if(distancesquared(var_3.origin, self.origin) < var_0) {
         if(isDefined(self.current_crafting_recipe) && self.craftingitems.size > 0) {
           if(!isDefined(self.new_schematic))
-            maps\mp\_utility::setlowermessage("crafting_warn", & "ALIEN_CRAFTING_WARNING_LOSEITEMS", undefined, 10);
+            maps\mp\_utility::setlowermessage("crafting_warn", &"ALIEN_CRAFTING_WARNING_LOSEITEMS", undefined, 10);
 
           while(player_should_see_craft_warning(var_3, var_0, 0))
             wait 0.05;
@@ -173,12 +171,12 @@ wait_for_recipe_use() {
     var_1 = undefined;
 
     if(var_0 maps\mp\alien\_prestige::prestige_getnodeployables() == 1.0) {
-      var_0 maps\mp\_utility::setlowermessage("cant_buy", & "ALIENS_PRESTIGE_NO_DEPLOYABLES_PICKUP", 3);
+      var_0 maps\mp\_utility::setlowermessage("cant_buy", &"ALIENS_PRESTIGE_NO_DEPLOYABLES_PICKUP", 3);
       continue;
     }
 
     if((self.recipe_name == "weapon" || self.recipe_name == "cortexweapon") && var_0 maps\mp\alien\_prestige::prestige_getpistolsonly() == 1) {
-      var_0 maps\mp\_utility::setlowermessage("cant_buy", & "ALIEN_COLLECTIBLES_PLAYER_NERFED", 3);
+      var_0 maps\mp\_utility::setlowermessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_NERFED", 3);
       continue;
     }
 
@@ -186,7 +184,7 @@ wait_for_recipe_use() {
       var_0.current_crafting_recipe = self.recipe_name;
       var_0 setclientomnvar("ui_alien_craft_recipe", get_index_for_recipe(self.recipe_name));
     } else if(var_0.current_crafting_recipe == self.recipe_name) {
-      var_0 maps\mp\_utility::setlowermessage("cant_buy", & "ALIEN_CRAFTING_ALREADY_HAVE", 3);
+      var_0 maps\mp\_utility::setlowermessage("cant_buy", &"ALIEN_CRAFTING_ALREADY_HAVE", 3);
       continue;
     } else {
       var_1 = var_0.craftingitems;
@@ -424,7 +422,7 @@ onbegincarrying(var_0, var_1, var_2) {
       var_1 oncancel(var_0, var_3 == "force_cancel_placement" && !isDefined(var_1.firstplacement), "canceled");
       return 0;
     } else if(var_3 == "tryaction") {
-      maps\mp\_utility::setlowermessage("cant_buy", & "ALIEN_COLLECTIBLES_PLAYER_HOLDING", 3);
+      maps\mp\_utility::setlowermessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_HOLDING", 3);
       continue;
     } else if(var_1.canbeplaced) {
       var_1 thread onplaced(var_0);
@@ -847,7 +845,7 @@ crafting_menu_monitor() {
 
     if(maps\mp\alien\_utility::is_true(self.iscarrying) || isDefined(level.drill_carrier) && self == level.drill_carrier || maps\mp\alien\_utility::has_special_weapon() || self isusingturret() || maps\mp\_utility::isusingremote() || self.is_holding_deployable) {
       self playlocalsound("ui_craft_fail");
-      maps\mp\_utility::setlowermessage("no_items", & "ALIEN_CRAFTING_CANT_CRAFT", 4);
+      maps\mp\_utility::setlowermessage("no_items", &"ALIEN_CRAFTING_CANT_CRAFT", 4);
       continue;
     }
 
@@ -859,7 +857,7 @@ crafting_menu_monitor() {
         self playlocalsound("extinction_item_pickup");
         take_crafting_items();
         self setclientomnvar("ui_alien_hudcraftinginfo", -1);
-        maps\mp\_utility::setlowermessage("crafted", & "ALIEN_CRAFTING_CRAFT_SUCCESS", 4);
+        maps\mp\_utility::setlowermessage("crafted", &"ALIEN_CRAFTING_CRAFT_SUCCESS", 4);
         self playlocalsound("ui_craft_success");
 
         if(isDefined(level.update_achievement_craft_items_func))
@@ -872,7 +870,7 @@ crafting_menu_monitor() {
             if(maps\mp\alien\_crafting_traps::can_craft_pipe_bomb())
               var_2 = 1;
             else {
-              maps\mp\_utility::setlowermessage("no_items", & "ALIEN_CRAFTING_NO_CRAFT_EXPLOSIVE", 3);
+              maps\mp\_utility::setlowermessage("no_items", &"ALIEN_CRAFTING_NO_CRAFT_EXPLOSIVE", 3);
               self playlocalsound("ui_craft_deny");
             }
 
@@ -881,7 +879,7 @@ crafting_menu_monitor() {
             if(maps\mp\alien\_crafting_traps::can_craft_sticky_flare())
               var_2 = 1;
             else {
-              maps\mp\_utility::setlowermessage("no_items", & "ALIEN_CRAFTING_NO_CRAFT_TACTICAL", 3);
+              maps\mp\_utility::setlowermessage("no_items", &"ALIEN_CRAFTING_NO_CRAFT_TACTICAL", 3);
               self playlocalsound("ui_craft_deny");
             }
 
@@ -893,7 +891,7 @@ crafting_menu_monitor() {
             if(maps\mp\alien\_crafting_traps::can_craft_venom_grenade())
               var_2 = 1;
             else {
-              maps\mp\_utility::setlowermessage("no_items", & "ALIEN_CRAFTING_NO_CRAFT_EXPLOSIVE", 3);
+              maps\mp\_utility::setlowermessage("no_items", &"ALIEN_CRAFTING_NO_CRAFT_EXPLOSIVE", 3);
               self playlocalsound("ui_craft_deny");
             }
 
@@ -902,7 +900,7 @@ crafting_menu_monitor() {
             if(maps\mp\alien\_crafting_traps::can_craft_cortex_grenade())
               var_2 = 1;
             else {
-              maps\mp\_utility::setlowermessage("no_items", & "ALIEN_CRAFTING_NO_CRAFT_EXPLOSIVE", 3);
+              maps\mp\_utility::setlowermessage("no_items", &"ALIEN_CRAFTING_NO_CRAFT_EXPLOSIVE", 3);
               self playlocalsound("ui_craft_deny");
             }
 
@@ -926,7 +924,7 @@ crafting_menu_monitor() {
           self playlocalsound("extinction_item_pickup");
           take_crafting_items();
           take_crafting_recipe();
-          maps\mp\_utility::setlowermessage("no_items", & "ALIEN_CRAFTING_CRAFT_SUCCESS", 4);
+          maps\mp\_utility::setlowermessage("no_items", &"ALIEN_CRAFTING_CRAFT_SUCCESS", 4);
           self playlocalsound("ui_craft_success");
 
           if(should_calculate_crafting_score())
@@ -937,7 +935,7 @@ crafting_menu_monitor() {
         }
       }
     } else
-      maps\mp\_utility::setlowermessage("no_items", & "ALIEN_CRAFTING_ALREADY_HAVE", 3);
+      maps\mp\_utility::setlowermessage("no_items", &"ALIEN_CRAFTING_ALREADY_HAVE", 3);
 
     wait 1;
   }
@@ -1013,7 +1011,7 @@ give_cortex_weapon(var_0) {
 }
 
 show_cortex_hint() {
-  maps\mp\_utility::setlowermessage("nx1_hint", & "MP_ALIEN_LAST_NX1_HINT", 4);
+  maps\mp\_utility::setlowermessage("nx1_hint", &"MP_ALIEN_LAST_NX1_HINT", 4);
 }
 
 is_placeable_item(var_0) {

@@ -51,10 +51,10 @@ createExploder(fxid) {
 }
 set_forward_and_up_vectors() {
   self.v["up"] = anglestoup(self.v["angles"]);
-  self.v["forward"] = anglestoforward(self.v["angles"]);
+  self.v["forward"] = anglesToForward(self.v["angles"]);
 }
 create_triggerfx(clientNum) {
-  self.looperFX = playFx(clientNum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"], self.v["delay"]);
+  self.looperFX = playFX(clientNum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"], self.v["delay"]);
   create_loopsound(clientNum);
 }
 create_looper(clientNum) {
@@ -62,15 +62,15 @@ create_looper(clientNum) {
   create_loopsound(clientNum);
 }
 loopfx(clientNum) {
-  self.looperFX = playFx(clientNum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"], self.v["delay"]);
-  while (1) {
+  self.looperFX = playFX(clientNum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"], self.v["delay"]);
+  while(1) {
     if(isDefined(self.v["delay"])) {
       if(!serverwait(clientNum, self.v["delay"], 0.25))
         continue;
     }
-    while (isfxplaying(clientNum, self.looperFX))
+    while(isfxplaying(clientNum, self.looperFX))
       wait 0.25;
-    self.looperFX = playFx(clientNum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
+    self.looperFX = playFX(clientNum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
   }
 }
 loopfxStop(clientNum, timeout) {
@@ -85,7 +85,7 @@ loopfxStop(clientNum, timeout) {
 loopfxthread(clientNum) {
   if(isDefined(self.fxStart))
     level waittill("start fx" + self.fxStart);
-  while (1) {
+  while(1) {
     create_looper(clientNum);
     if(isDefined(self.timeout))
       thread loopfxStop(clientNum, self.timeout);
@@ -108,7 +108,7 @@ oneshotfxthread(clientNum) {
 }
 exploder(clientNum, num) {
   num = int(num);
-  for (i = 0; i < level.createFXent.size; i++) {
+  for(i = 0; i < level.createFXent.size; i++) {
     ent = level.createFXent[i];
     if(!isDefined(ent))
       continue;
@@ -118,7 +118,7 @@ exploder(clientNum, num) {
       continue;
     if(ent.v["exploder"] != num)
       continue;
-    playfx(clientNum, level._effect[ent.v["fxid"]], ent.v["origin"], ent.v["forward"], ent.v["up"]);
+    playFX(clientNum, level._effect[ent.v["fxid"]], ent.v["origin"], ent.v["forward"], ent.v["up"]);
   }
 }
 create_loopsound(clientNum) {
@@ -142,7 +142,7 @@ fx_init(clientNum) {
   fxanim_init(clientNum);
   if(!isDefined(level.createFXent))
     return;
-  for (i = 0; i < level.createFXent.size; i++) {
+  for(i = 0; i < level.createFXent.size; i++) {
     ent = level.createFXent[i];
     if(!isDefined(level._createfxforwardandupset)) {
       ent set_forward_and_up_vectors();
@@ -171,7 +171,7 @@ fxanim_init(localClientNum) {
   level.fxanims["fxanim_gp_streamer01_anim"] = % fxanim_gp_streamer01_anim;
   level.fxanims["fxanim_gp_streamer02_anim"] = % fxanim_gp_streamer02_anim;
   level.fxanims["fxanim_gp_fence_tarp_01_anim"] = % fxanim_gp_fence_tarp_01_anim;
-  fxanims = GetEntArray(localClientNum, "fxanim", "targetname");
+  fxanims = getEntArray(localClientNum, "fxanim", "targetname");
   array_thread(fxanims, ::fxanim_think);
 }
 fxanim_think() {
@@ -200,15 +200,15 @@ blinky_light(localClientNum, tagName, friendlyfx, enemyfx) {
   self endon("stop_blinky_light");
   self.lightTagName = tagName;
   self waittill_dobj(localClientNum);
-  while (true) {
+  while(true) {
     if(isDefined(self.stunned) && self.stunned) {
       wait(0.1);
       continue;
     }
     if(friendNotFoe(localClientNum)) {
-      self.blinkyLightFx = PlayFXOnTag(localClientNum, friendlyfx, self, self.lightTagName);
+      self.blinkyLightFx = playFXOnTag(localClientNum, friendlyfx, self, self.lightTagName);
     } else {
-      self.blinkyLightFx = PlayFXOnTag(localClientNum, enemyfx, self, self.lightTagName);
+      self.blinkyLightFx = playFXOnTag(localClientNum, enemyfx, self, self.lightTagName);
     }
     serverWait(localClientNum, 0.5, 0.01);
   }

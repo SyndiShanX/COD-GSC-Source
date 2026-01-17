@@ -21,9 +21,7 @@ main() {
 
   if(isUsingMatchRulesData()) {
     level.initializeMatchRules = ::initializeMatchRules;
-    [
-      [level.initializeMatchRules]
-    ]();
+    [[level.initializeMatchRules]]();
     level thread reInitializeMatchRulesOnMigration();
   } else {
     registerScoreLimitDvar(level.gameType, BLITZ_SCORE_LIMIT);
@@ -85,18 +83,18 @@ initEffects() {
 }
 
 onStartGameType() {
-  setObjectiveText("allies", & "OBJECTIVES_BLITZ");
-  setObjectiveText("axis", & "OBJECTIVES_BLITZ");
+  setObjectiveText("allies", &"OBJECTIVES_BLITZ");
+  setObjectiveText("axis", &"OBJECTIVES_BLITZ");
 
   if(level.splitscreen) {
-    setObjectiveScoreText("allies", & "OBJECTIVES_BLITZ");
-    setObjectiveScoreText("axis", & "OBJECTIVES_BLITZ");
+    setObjectiveScoreText("allies", &"OBJECTIVES_BLITZ");
+    setObjectiveScoreText("axis", &"OBJECTIVES_BLITZ");
   } else {
-    setObjectiveScoreText("allies", & "OBJECTIVES_BLITZ_ATTACKER_SCORE");
-    setObjectiveScoreText("axis", & "OBJECTIVES_BLITZ_ATTACKER_SCORE");
+    setObjectiveScoreText("allies", &"OBJECTIVES_BLITZ_ATTACKER_SCORE");
+    setObjectiveScoreText("axis", &"OBJECTIVES_BLITZ_ATTACKER_SCORE");
   }
-  setObjectiveHintText("allies", & "OBJECTIVES_BLITZ_HINT");
-  setObjectiveHintText("axis", & "OBJECTIVES_BLITZ_HINT");
+  setObjectiveHintText("allies", &"OBJECTIVES_BLITZ_HINT");
+  setObjectiveHintText("axis", &"OBJECTIVES_BLITZ_HINT");
 
   setClientNameMode("auto_change");
 
@@ -195,9 +193,7 @@ createPortal(trigger, team) {
 
     stateValue = ter_op(team == "allies", 0, 1);
 
-    [
-      [level.matchRecording_logEvent]
-    ](game["blitzPortalLogIDs"][team], undefined, "PORTAL", portal.origin[0], portal.origin[1], GetTime(), stateValue);
+    [[level.matchRecording_logEvent]](game["blitzPortalLogIDs"][team], undefined, "PORTAL", portal.origin[0], portal.origin[1], GetTime(), stateValue);
   }
 
   return portal;

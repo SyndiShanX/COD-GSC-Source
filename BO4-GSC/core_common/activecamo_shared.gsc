@@ -9,7 +9,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\core_common\weapons_shared;
-
 #namespace activecamo;
 
 autoexec __init__system__() {
@@ -44,11 +43,11 @@ on_player_death(params) {
 }
 
 function_27779784() {
-  if(!isDefined(self) || !isDefined(self.pers) || !isDefined(self.pers[#"activecamo"])) {
+  if(!isDefined(self) || !isDefined(self.pers) || !isDefined(self.pers[# "activecamo"])) {
     return;
   }
 
-  foreach(activecamo in self.pers[#"activecamo"]) {
+  foreach(activecamo in self.pers[# "activecamo"]) {
     foreach(var_dd54a13b in activecamo.var_dd54a13b) {
       activecamo.weapon = var_dd54a13b.weapon;
       activecamo.baseweapon = function_c14cb514(activecamo.weapon);
@@ -77,15 +76,15 @@ function_8d3b94ea(weapon, owned, b_has_weapon) {
 
 init_activecamo(weapon, activecamoinfo, owned) {
   if(isDefined(activecamoinfo) && isDefined(activecamoinfo.name)) {
-    if(!isDefined(self.pers[#"activecamo"])) {
-      self.pers[#"activecamo"] = [];
+    if(!isDefined(self.pers[# "activecamo"])) {
+      self.pers[# "activecamo"] = [];
     }
 
-    if(!isDefined(self.pers[#"activecamo"][activecamoinfo.name])) {
-      self.pers[#"activecamo"][activecamoinfo.name] = {};
+    if(!isDefined(self.pers[# "activecamo"][activecamoinfo.name])) {
+      self.pers[# "activecamo"][activecamoinfo.name] = {};
     }
 
-    activecamo = self.pers[#"activecamo"][activecamoinfo.name];
+    activecamo = self.pers[# "activecamo"][activecamoinfo.name];
     activecamo.info = function_3aa81e0e(activecamoinfo);
     assert(isDefined(activecamo.info));
     activecamo.weapon = weapon;
@@ -119,7 +118,7 @@ function_b008f9e9(weapon) {
 
   if(self getcurrentweapon() != weapon) {
     self switchtoweapon(weapon);
-    self waittilltimeout(2, #"weapon_change");
+    self waittilltimeout(2, # "weapon_change");
   }
 
   foreach(info in level.activecamoinfo) {
@@ -181,7 +180,7 @@ function_3aa81e0e(activecamoinfo) {
           activecamoname = getactivecamo(stage.var_19b6044e);
           var_31567a86 = undefined;
 
-          if(isDefined(activecamoname) && activecamoname != #"") {
+          if(isDefined(activecamoname) && activecamoname != # "") {
             var_31567a86 = getscriptbundle(activecamoname);
           }
 
@@ -227,7 +226,7 @@ weapon_get_activecamo(weapon, b_has_weapon = 1) {
   camoindex = getcamoindex(weaponoptions);
   activecamoname = getactivecamo(camoindex);
 
-  if(isDefined(activecamoname) && activecamoname != #"") {
+  if(isDefined(activecamoname) && activecamoname != # "") {
     activecamoinfo = getscriptbundle(activecamoname);
   }
 
@@ -386,27 +385,27 @@ init_stages(activecamo, var_3a8a1e00, isdeath) {
 
 function_c0fa0ecb(weapon) {
   switch (weapon.statname) {
-    case #"tr_midburst_t8":
-    case #"sniper_powersemi_t8":
-    case #"ar_damage_t8":
-    case #"ar_accurate_t8":
-    case #"smg_capacity_t8":
-    case #"sniper_powerbolt_t8":
-    case #"ar_fastfire_t8":
-    case #"sniper_quickscope_t8":
-    case #"lmg_heavy_t8":
-    case #"ar_stealth_t8":
-    case #"tr_longburst_t8":
-    case #"smg_standard_t8":
-    case #"lmg_spray_t8":
-    case #"smg_accurate_t8":
-    case #"ar_modular_t8":
-    case #"smg_fastfire_t8":
-    case #"lmg_standard_t8":
-    case #"sniper_fastrechamber_t8":
-    case #"tr_powersemi_t8":
-    case #"smg_handling_t8":
-      self stats::function_eec52333(weapon, #"hash_4e43a25a3e77ab5f", 1, self.class_num);
+    case # "tr_midburst_t8":
+    case # "sniper_powersemi_t8":
+    case # "ar_damage_t8":
+    case # "ar_accurate_t8":
+    case # "smg_capacity_t8":
+    case # "sniper_powerbolt_t8":
+    case # "ar_fastfire_t8":
+    case # "sniper_quickscope_t8":
+    case # "lmg_heavy_t8":
+    case # "ar_stealth_t8":
+    case # "tr_longburst_t8":
+    case # "smg_standard_t8":
+    case # "lmg_spray_t8":
+    case # "smg_accurate_t8":
+    case # "ar_modular_t8":
+    case # "smg_fastfire_t8":
+    case # "lmg_standard_t8":
+    case # "sniper_fastrechamber_t8":
+    case # "tr_powersemi_t8":
+    case # "smg_handling_t8":
+      self stats::function_eec52333(weapon, # "hash_4e43a25a3e77ab5f", 1, self.class_num);
       break;
     default:
       break;
@@ -415,20 +414,20 @@ function_c0fa0ecb(weapon) {
 
 function_c1f96c48(weapon) {
   switch (weapon.statname) {
-    case #"ar_accurate_t8":
-      return #"hash_3d392c6f96aa2ac1";
-    case #"ar_fastfire_t8":
-      return #"hash_9da725fe15aa048";
-    case #"lmg_standard_t8":
-      return #"hash_5cf945d7954a39e0";
-    case #"pistol_standard_t8":
-      return #"hash_1ffb9d5647330a52";
-    case #"shotgun_semiauto_t8":
-      return #"hash_6ed19b98000fb441";
-    case #"smg_accurate_t8":
-      return #"hash_4b703056e870752e";
-    case #"smg_standard_t8":
-      return #"hash_207f20afd71816c";
+    case # "ar_accurate_t8":
+      return # "hash_3d392c6f96aa2ac1";
+    case # "ar_fastfire_t8":
+      return # "hash_9da725fe15aa048";
+    case # "lmg_standard_t8":
+      return # "hash_5cf945d7954a39e0";
+    case # "pistol_standard_t8":
+      return # "hash_1ffb9d5647330a52";
+    case # "shotgun_semiauto_t8":
+      return # "hash_6ed19b98000fb441";
+    case # "smg_accurate_t8":
+      return # "hash_4b703056e870752e";
+    case # "smg_standard_t8":
+      return # "hash_207f20afd71816c";
     default:
       break;
   }
@@ -440,26 +439,26 @@ function_938534a8(permanentstatname) {
   var_19ef0b8d = undefined;
 
   switch (permanentstatname) {
-    case #"hash_3d392c6f96aa2ac1":
-      var_19ef0b8d = #"camo_active_ar_accurate_base";
+    case # "hash_3d392c6f96aa2ac1":
+      var_19ef0b8d = # "camo_active_ar_accurate_base";
       break;
-    case #"hash_9da725fe15aa048":
-      var_19ef0b8d = #"camo_active_ar_fastfire_base";
+    case # "hash_9da725fe15aa048":
+      var_19ef0b8d = # "camo_active_ar_fastfire_base";
       break;
-    case #"hash_5cf945d7954a39e0":
-      var_19ef0b8d = #"camo_active_lmg_standard_base";
+    case # "hash_5cf945d7954a39e0":
+      var_19ef0b8d = # "camo_active_lmg_standard_base";
       break;
-    case #"hash_1ffb9d5647330a52":
-      var_19ef0b8d = #"camo_active_pistol_standard_base";
+    case # "hash_1ffb9d5647330a52":
+      var_19ef0b8d = # "camo_active_pistol_standard_base";
       break;
-    case #"hash_6ed19b98000fb441":
-      var_19ef0b8d = #"camo_active_shotgun_semiauto_base";
+    case # "hash_6ed19b98000fb441":
+      var_19ef0b8d = # "camo_active_shotgun_semiauto_base";
       break;
-    case #"hash_4b703056e870752e":
-      var_19ef0b8d = #"camo_active_smg_accurate_base";
+    case # "hash_4b703056e870752e":
+      var_19ef0b8d = # "camo_active_smg_accurate_base";
       break;
-    case #"hash_207f20afd71816c":
-      var_19ef0b8d = #"camo_active_smg_standard_base";
+    case # "hash_207f20afd71816c":
+      var_19ef0b8d = # "camo_active_smg_standard_base";
       break;
     default:
       break;
@@ -484,7 +483,7 @@ function_1af985ba(weapon) {
   var_dfcb2df3 = isDefined(stats::function_af5584ca(var_19bbfaaf)) ? stats::function_af5584ca(var_19bbfaaf) : 0;
 
   if(var_dfcb2df3 > 0) {
-    self stats::function_e24eec31(weapon, #"hash_19fbe2645c7f53a7", 1);
+    self stats::function_e24eec31(weapon, # "hash_19fbe2645c7f53a7", 1);
     self function_938534a8(var_19bbfaaf);
   }
 }
@@ -503,7 +502,7 @@ function_cd9deb9e(weapon) {
   var_dfcb2df3 = isDefined(stats::function_af5584ca(var_19bbfaaf)) ? stats::function_af5584ca(var_19bbfaaf) : 0;
 
   if(var_dfcb2df3 > 0) {
-    self stats::function_e24eec31(weapon, #"hash_19fbe2645c7f53a7", 1);
+    self stats::function_e24eec31(weapon, # "hash_19fbe2645c7f53a7", 1);
     self function_938534a8(var_19bbfaaf);
   }
 }
@@ -535,7 +534,7 @@ function_896ac347(oweapon, statname, value) {
     return;
   }
 
-  if(!isDefined(self.pers) || !isDefined(self.pers[#"activecamo"])) {
+  if(!isDefined(self.pers) || !isDefined(self.pers[# "activecamo"])) {
     return;
   }
 
@@ -554,7 +553,7 @@ function_896ac347(oweapon, statname, value) {
   activecamoinfo = weapon_get_activecamo(weapon);
 
   if(isDefined(activecamoinfo)) {
-    activecamo = self.pers[#"activecamo"][activecamoinfo.name];
+    activecamo = self.pers[# "activecamo"][activecamoinfo.name];
 
     if(isDefined(activecamo)) {
       activecamo.weapon = weapon;
@@ -620,13 +619,13 @@ function_896ac347(oweapon, statname, value) {
             }
 
             if(sessionmodeismultiplayergame()) {
-              if(activecamoinfo.name == #"activecamoinfo_t8_darkmatter") {
+              if(activecamoinfo.name == # "activecamoinfo_t8_darkmatter") {
                 if(stagenum == 1 && stage.var_dd54a13b[activecamo.baseweapon].statvalue == 5) {
                   self stats::function_dad108fa(#"hash_51eff59939399dc9", 1);
                 } else if(stagenum == 5 && stage.var_dd54a13b[activecamo.baseweapon].statvalue == 5) {
                   self function_c0fa0ecb(weapon);
                 }
-              } else if(activecamoinfo.name == #"activecamoinfo_t8_gold") {
+              } else if(activecamoinfo.name == # "activecamoinfo_t8_gold") {
                 if(stagenum == 1 && stage.var_dd54a13b[activecamo.baseweapon].statvalue == 1) {
                   self stats::function_dad108fa(#"hash_354bfe5c140365bf", 1);
                 }
@@ -649,7 +648,7 @@ function_896ac347(oweapon, statname, value) {
         }
       }
 
-      if(statname == #"kills") {
+      if(statname == # "kills") {
         self function_36feaf9e(activecamo, value, activecamo.weapon);
       }
     }
@@ -879,7 +878,7 @@ set_stage_activecamo(activecamo, stagenum) {
 function_a80cb651(activecamo, stagenum) {
   self notify("4be8cd84d8f00caa");
   self endon("4be8cd84d8f00caa");
-  self endon(#"new_stage", #"death");
+  self endon(#"new_stage", # "death");
   stage = activecamo.stages[stagenum];
 
   if(stage.info.resettimer == 0 && !isDefined(stage.info.resetnotify)) {
@@ -1084,28 +1083,28 @@ devgui_think() {
       case 0:
         reset = 0;
         break;
-      case #"debugprints":
+      case # "debugprints":
         setdvar(#"activecamo_debug", !getdvarint(#"activecamo_debug", 0));
         break;
-      case #"reset":
+      case # "reset":
         function_cc5baf7f(&function_58719455);
         break;
-      case #"impulse":
+      case # "impulse":
         function_cc5baf7f(&function_382462ff);
         break;
-      case #"stage_next":
+      case # "stage_next":
         function_cc5baf7f(&function_3ac4d286, 0);
         break;
-      case #"stage_prev":
+      case # "stage_prev":
         function_cc5baf7f(&function_3ac4d286, 1);
         break;
-      case #"set_camo":
+      case # "set_camo":
         function_cc5baf7f(&function_9c361e56, getdvarstring(#"hash_3fe8dd280c325e8"));
         break;
-      case #"give_weapon":
+      case # "give_weapon":
         function_cc5baf7f(&function_cc486b05, getdvarstring(#"hash_3fe8dd280c325e8"));
         break;
-      case #"set_stage":
+      case # "set_stage":
         function_cc5baf7f(&function_779a9561, getdvarstring(#"hash_3fe8dd280c325e8"));
         break;
     }
@@ -1159,7 +1158,7 @@ function_779a9561(stagenum) {
   activecamoinfo = weapon_get_activecamo(weapon);
 
   if(isDefined(activecamoinfo)) {
-    activecamo = self.pers[#"activecamo"][activecamoinfo.name];
+    activecamo = self.pers[# "activecamo"][activecamoinfo.name];
 
     if(isDefined(activecamo) && isDefined(activecamo.stages) && stagenum < activecamo.stages.size) {
       activecamo.weapon = weapon;
@@ -1239,7 +1238,7 @@ function_633fbf17(weapon, back) {
     activecamoinfo = weapon_get_activecamo(weapon);
 
     if(isDefined(activecamoinfo)) {
-      activecamo = self.pers[#"activecamo"][activecamoinfo.name];
+      activecamo = self.pers[# "activecamo"][activecamoinfo.name];
 
       if(isDefined(activecamo)) {
         if(isDefined(activecamo.stages)) {
@@ -1272,7 +1271,7 @@ function_3d928fb4(weapon) {
     activecamoinfo = weapon_get_activecamo(weapon);
 
     if(isDefined(activecamoinfo)) {
-      activecamo = self.pers[#"activecamo"][activecamoinfo.name];
+      activecamo = self.pers[# "activecamo"][activecamoinfo.name];
 
       if(isDefined(activecamo)) {
         activecamo.weapon = weapon;
@@ -1320,7 +1319,7 @@ function_14a9eb5b(weapon) {
     activecamoinfo = weapon_get_activecamo(weapon);
 
     if(isDefined(activecamoinfo)) {
-      activecamo = self.pers[#"activecamo"][activecamoinfo.name];
+      activecamo = self.pers[# "activecamo"][activecamoinfo.name];
 
       if(isDefined(activecamo)) {
         activecamo.weapon = weapon;
@@ -1330,4 +1329,3 @@ function_14a9eb5b(weapon) {
     }
   }
 }
-

@@ -31,7 +31,7 @@ master_ninja_enemy_spawned() {
   level endon("master_ninja_illegal_kill");
   self waittill("death", var_0, var_1);
 
-  if(isdefined(var_0) && var_0 == level.player) {
+  if(isDefined(var_0) && var_0 == level.player) {
     if(var_1 == "MOD_MELEE")
       common_scripts\utility::flag_set("master_ninja_melee_kill");
     else
@@ -53,7 +53,7 @@ retro_shooter_init() {
   level endon("retro_shooter_player_reloaded");
   level thread retro_shooter_mission_complete();
 
-  for (;;) {
+  for(;;) {
     level.player waittill("reload");
     level notify("retro_shooter_player_reloaded");
   }
@@ -91,7 +91,7 @@ parse_weapon_name(var_0) {
   var_1 = tolower(var_0);
   var_2 = get_base_weapon_list();
 
-  for (var_3 = 0; var_3 < var_2.size; var_3++) {
+  for(var_3 = 0; var_3 < var_2.size; var_3++) {
     if(issubstr(var_1, var_2[var_3]))
       return var_2[var_3];
   }
@@ -102,7 +102,7 @@ parse_weapon_name(var_0) {
 weapon_master_enemy_spawned() {
   self waittill("death", var_0, var_1, var_2);
 
-  if(isdefined(var_0) && var_0 == level.player && isdefined(var_2) && var_1 != "MOD_MELEE")
+  if(isDefined(var_0) && var_0 == level.player && isDefined(var_2) && var_1 != "MOD_MELEE")
     weapon_master_register_kill(var_2);
 }
 
@@ -111,7 +111,7 @@ weapon_master_vehicle_damaged() {
   level.weapon_master_timestamp = 0;
   level.weapon_master_vehicle_id = "unknown";
 
-  for (;;) {
+  for(;;) {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6);
     var_7 = "unknown";
     var_4 = tolower(var_4);
@@ -141,7 +141,7 @@ weapon_master_vehicle_spawned() {
   thread weapon_master_vehicle_damaged();
   self waittill("death", var_1, var_2, var_3);
 
-  if(isdefined(var_1) && var_1 == level.player && isdefined(var_3) && var_2 != "MOD_MELEE")
+  if(isDefined(var_1) && var_1 == level.player && isDefined(var_3) && var_2 != "MOD_MELEE")
     weapon_master_register_kill(var_3);
   else {
     wait 0.25;
@@ -158,7 +158,7 @@ weapon_master_register_kill(var_0) {
   var_0 = parse_weapon_name(var_0);
   var_1 = common_scripts\utility::array_find(get_base_weapon_list(), var_0);
 
-  if(!isdefined(var_1)) {
+  if(!isDefined(var_1)) {
     return;
   }
   if(common_scripts\utility::flag("has_cheated") || maps\_cheat::is_cheating()) {
@@ -176,7 +176,7 @@ weapon_master_check_success() {
   var_1 = [];
   var_2 = 0;
 
-  for (var_3 = 0; var_3 < var_0.size; var_3++) {
+  for(var_3 = 0; var_3 < var_0.size; var_3++) {
     var_4 = level.player getlocalplayerprofiledata("sp_weaponMaster", var_3);
     var_1[var_0[var_3]] = var_4;
 
@@ -194,7 +194,7 @@ i_hate_dogs_init() {
 }
 
 i_hate_dogs_enemy_spawned() {
-  if(!isdefined(self.classname)) {
+  if(!isDefined(self.classname)) {
     return;
   }
   if(self.classname != "actor_enemy_dog") {
@@ -202,7 +202,7 @@ i_hate_dogs_enemy_spawned() {
   }
   self waittill("death", var_0, var_1);
 
-  if(isdefined(var_0) && var_0 == level.player && var_1 == "MOD_MELEE") {
+  if(isDefined(var_0) && var_0 == level.player && var_1 == "MOD_MELEE") {
     if(common_scripts\utility::flag("has_cheated") || maps\_cheat::is_cheating()) {
       return;
     }

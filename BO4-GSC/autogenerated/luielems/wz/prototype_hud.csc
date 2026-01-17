@@ -4,11 +4,9 @@
 *******************************************************/
 
 #include scripts\core_common\lui_shared;
-
 #namespace prototype_hud;
 
 class cprototype_hud: cluielem {
-
   function set_deploy_prompt_visibility(localclientnum, value) {
     set_data(localclientnum, "deploy_prompt_visibility", value);
   }
@@ -74,7 +72,7 @@ class cprototype_hud: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, #"prototype_hud");
+    cluielem::open(localclientnum, # "prototype_hud");
   }
 
   function function_fa582112(localclientnum) {
@@ -84,10 +82,10 @@ class cprototype_hud: cluielem {
     set_data(localclientnum, "defense_resource_count", 0);
     set_data(localclientnum, "resource_count_visibility", 0);
     set_data(localclientnum, "craft_progress", 0);
-    set_data(localclientnum, "active_objective_string", #"");
-    set_data(localclientnum, "objective1_string", #"");
-    set_data(localclientnum, "objective2_string", #"");
-    set_data(localclientnum, "objective3_string", #"");
+    set_data(localclientnum, "active_objective_string", # "");
+    set_data(localclientnum, "objective1_string", # "");
+    set_data(localclientnum, "objective2_string", # "");
+    set_data(localclientnum, "objective3_string", # "");
     set_data(localclientnum, "objective_prompt_visibility", 0);
     set_data(localclientnum, "objective1_strike", 0);
     set_data(localclientnum, "objective2_strike", 0);

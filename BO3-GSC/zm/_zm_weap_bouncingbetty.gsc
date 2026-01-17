@@ -14,13 +14,13 @@
 #namespace bouncingbetty;
 
 function autoexec __init__sytem__() {
-  system::register("bouncingbetty", & __init__, undefined, undefined);
+  system::register("bouncingbetty", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  level._proximityweaponobjectdetonation_override = & proximityweaponobjectdetonation_override;
+  level._proximityweaponobjectdetonation_override = &proximityweaponobjectdetonation_override;
   init_shared();
-  zm_placeable_mine::add_mine_type("bouncingbetty", & "MP_BOUNCINGBETTY_PICKUP");
+  zm_placeable_mine::add_mine_type("bouncingbetty", &"MP_BOUNCINGBETTY_PICKUP");
   level.bettyjumpheight = 55;
   level.bettydamagemax = 1000;
   level.bettydamagemin = 800;
@@ -38,10 +38,10 @@ function proximityweaponobjectdetonation_override(watcher) {
   damagearea = weaponobjects::proximityweaponobject_createdamagearea(watcher);
   up = anglestoup(self.angles);
   traceorigin = self.origin + up;
-  if(isdefined(level._bouncingbettywatchfortrigger)) {
+  if(isDefined(level._bouncingbettywatchfortrigger)) {
     self thread[[level._bouncingbettywatchfortrigger]](watcher);
   }
-  while (true) {
+  while(true) {
     damagearea waittill("trigger", ent);
     if(!weaponobjects::proximityweaponobject_validtriggerentity(watcher, ent)) {
       continue;

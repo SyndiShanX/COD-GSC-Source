@@ -149,7 +149,7 @@ zone_init(zone_name) {
   }
   println("ZM >> zone_init (1) = " + zone_name);
 
-  level.zones[zone_name] = spawnstruct();
+  level.zones[zone_name] = spawnStruct();
   zone = level.zones[zone_name];
   zone.is_enabled = 0;
   zone.is_occupied = 0;
@@ -157,7 +157,7 @@ zone_init(zone_name) {
   zone.adjacent_zones = [];
   zone.is_spawning_allowed = 0;
   zone.volumes = [];
-  volumes = getentarray(zone_name, "targetname");
+  volumes = getEntArray(zone_name, "targetname");
 
   println("ZM >> zone_init (2) = " + volumes.size);
 
@@ -267,7 +267,7 @@ zone_init(zone_name) {
     }
 
     for(i = 0; i < barricades.size; i++) {
-      targets = getentarray(barricades[i].target, "targetname");
+      targets = getEntArray(barricades[i].target, "targetname");
 
       for(j = 0; j < targets.size; j++) {
         if(targets[j] iszbarrier() && isDefined(targets[j].script_string) && targets[j].script_string == zone_name)
@@ -394,7 +394,7 @@ make_zone_adjacent(main_zone_name, adj_zone_name, flag_name) {
   main_zone = level.zones[main_zone_name];
 
   if(!isDefined(main_zone.adjacent_zones[adj_zone_name])) {
-    main_zone.adjacent_zones[adj_zone_name] = spawnstruct();
+    main_zone.adjacent_zones[adj_zone_name] = spawnStruct();
     adj_zone = main_zone.adjacent_zones[adj_zone_name];
     adj_zone.is_connected = 0;
     adj_zone.flags_do_or_check = 0;
@@ -546,13 +546,13 @@ connect_zones(zone_name_a, zone_name_b, one_way) {
   enable_zone(zone_name_b);
 
   if(!isDefined(level.zones[zone_name_a].adjacent_zones[zone_name_b])) {
-    level.zones[zone_name_a].adjacent_zones[zone_name_b] = spawnstruct();
+    level.zones[zone_name_a].adjacent_zones[zone_name_b] = spawnStruct();
     level.zones[zone_name_a].adjacent_zones[zone_name_b].is_connected = 1;
   }
 
   if(!one_way) {
     if(!isDefined(level.zones[zone_name_b].adjacent_zones[zone_name_a])) {
-      level.zones[zone_name_b].adjacent_zones[zone_name_a] = spawnstruct();
+      level.zones[zone_name_b].adjacent_zones[zone_name_a] = spawnStruct();
       level.zones[zone_name_b].adjacent_zones[zone_name_a].is_connected = 1;
     }
   }
@@ -594,7 +594,7 @@ manage_zones(initial_zone) {
   level.newzones = [];
 
   for(z = 0; z < zkeys.size; z++)
-    level.newzones[zkeys[z]] = spawnstruct();
+    level.newzones[zkeys[z]] = spawnStruct();
 
   oldzone = undefined;
   flag_set("zones_initialized");
@@ -620,9 +620,7 @@ manage_zones(initial_zone) {
         continue;
       }
       if(isDefined(level.zone_occupied_func))
-        newzone.is_occupied = [
-          [level.zone_occupied_func]
-        ](zkeys[z]);
+        newzone.is_occupied = [[level.zone_occupied_func]](zkeys[z]);
       else
         newzone.is_occupied = player_in_zone(zkeys[z]);
 
@@ -677,9 +675,7 @@ manage_zones(initial_zone) {
       }
     }
 
-    [
-      [level.create_spawner_list_func]
-    ](zkeys);
+    [[level.create_spawner_list_func]](zkeys);
 
     debug_show_spawn_locations();
 
@@ -758,9 +754,7 @@ old_manage_zones(initial_zone) {
         continue;
       }
       if(isDefined(level.zone_occupied_func))
-        zone.is_occupied = [
-          [level.zone_occupied_func]
-        ](zkeys[z]);
+        zone.is_occupied = [[level.zone_occupied_func]](zkeys[z]);
       else
         zone.is_occupied = player_in_zone(zkeys[z]);
 
@@ -796,9 +790,7 @@ old_manage_zones(initial_zone) {
       }
     }
 
-    [
-      [level.create_spawner_list_func]
-    ](zkeys);
+    [[level.create_spawner_list_func]](zkeys);
     level.active_zone_names = maps\mp\zombies\_zm_zonemgr::get_active_zone_names();
     wait 1;
   }

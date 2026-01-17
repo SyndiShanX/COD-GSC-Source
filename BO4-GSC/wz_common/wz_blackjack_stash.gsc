@@ -5,7 +5,6 @@
 
 #include scripts\core_common\system_shared;
 #include scripts\mp_common\item_world;
-
 #namespace wz_stash_blackjack;
 
 autoexec __init__system__() {
@@ -21,7 +20,7 @@ __init__() {
   }
 }
 
-private function_e973becc() {
+function_e973becc() {
   item_world::function_4de3ca98();
   var_14957968 = getdynentarray(#"wz_stash_blackjack");
 

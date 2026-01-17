@@ -15,7 +15,6 @@
 #include scripts\zm_common\zm;
 #include scripts\zm_common\zm_player;
 #include scripts\zm_common\zm_utility;
-
 #namespace hostmigration;
 
 debug_script_structs() {
@@ -40,20 +39,20 @@ debug_script_structs() {
   println("<dev string:x61>");
 }
 
-  function updatetimerpausedness() {
-    shouldbestopped = isDefined(level.hostmigrationtimer);
+function updatetimerpausedness() {
+  shouldbestopped = isDefined(level.hostmigrationtimer);
 
-    if(!level.timerstopped && shouldbestopped) {
-      level.timerstopped = 1;
-      level.timerpausetime = gettime();
-      return;
-    }
-
-    if(level.timerstopped && !shouldbestopped) {
-      level.timerstopped = 0;
-      level.discardtime += gettime() - level.timerpausetime;
-    }
+  if(!level.timerstopped && shouldbestopped) {
+    level.timerstopped = 1;
+    level.timerpausetime = gettime();
+    return;
   }
+
+  if(level.timerstopped && !shouldbestopped) {
+    level.timerstopped = 0;
+    level.discardtime += gettime() - level.timerpausetime;
+  }
+}
 
 callback_hostmigrationsave() {}
 
@@ -66,9 +65,9 @@ callback_prehostmigrationsave() {
 
   for(i = 0; i < level.players.size; i++) {
     level.players[i] val::set(#"host_migration", "takedamage", 0);
-    level.players[i] stats::set_stat(#"afteractionreportstats", #"lobbypopup", #"summary");
+    level.players[i] stats::set_stat(#"afteractionreportstats", # "lobbypopup", # "summary");
     clientnum = level.players[i] getentitynumber();
-    level.players[i] stats::set_stat(#"afteractionreportstats", #"clientnum", clientnum);
+    level.players[i] stats::set_stat(#"afteractionreportstats", # "clientnum", clientnum);
   }
 }
 
@@ -81,7 +80,7 @@ resumetimer() {
 }
 
 locktimer() {
-  level endon(#"host_migration_begin", #"host_migration_end");
+  level endon(#"host_migration_begin", # "host_migration_end");
 
   for(;;) {
     currtime = gettime();
@@ -110,9 +109,7 @@ callback_hostmigration() {
   for(i = 0; i < level.players.size; i++) {
     if(isDefined(level.hostmigration_link_entity_callback)) {
       if(!isDefined(level.players[i]._host_migration_link_entity)) {
-        level.players[i]._host_migration_link_entity = level.players[i][
-          [level.hostmigration_link_entity_callback]
-        ]();
+        level.players[i]._host_migration_link_entity = level.players[i][[level.hostmigration_link_entity_callback]]();
       }
     }
 
@@ -212,7 +209,7 @@ callback_hostmigration() {
 
   for(i = 0; i < level.players.size; i++) {
     clientnum = level.players[i] getentitynumber();
-    level.players[i] stats::set_stat(#"afteractionreportstats", #"clientnum", clientnum);
+    level.players[i] stats::set_stat(#"afteractionreportstats", # "clientnum", clientnum);
   }
 
   callback::function_daed27e8(#"on_host_migration_end");
@@ -292,7 +289,7 @@ hostmigrationwaitforplayers() {
 }
 
 hostmigrationtimerthink_internal() {
-  level endon(#"host_migration_begin", #"host_migration_end");
+  level endon(#"host_migration_begin", # "host_migration_end");
   self.hostmigrationcontrolsfrozen = 0;
 
   while(!isalive(self)) {
@@ -407,11 +404,11 @@ waitlongdurationwithgameendtimeupdate(duration) {
     println("<dev string:x151>" + gettime() + "<dev string:x170>" + endtime);
   }
 
-    while(isDefined(level.hostmigrationtimer)) {
-      endtime += 1000;
-      setgameendtime(int(endtime));
-      wait 1;
-    }
+  while(isDefined(level.hostmigrationtimer)) {
+    endtime += 1000;
+    setgameendtime(int(endtime));
+    wait 1;
+  }
 
   return gettime() - starttime;
 }
@@ -439,7 +436,7 @@ find_alternate_player_place(v_origin, min_radius, max_radius, max_height, ignore
           v_end = (n_node.origin[0], n_node.origin[1], n_node.origin[2] - 30);
           trace = bulletTrace(v_start, v_end, 0, undefined);
 
-          if(trace[#"fraction"] < 1) {
+          if(trace[# "fraction"] < 1) {
             override_abort = 0;
 
             if(isDefined(level._whoswho_reject_node_override_func)) {

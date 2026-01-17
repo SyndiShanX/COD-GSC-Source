@@ -42,4 +42,3 @@ fill(n_length, str_fill) {
 
   return str_return;
 }
-

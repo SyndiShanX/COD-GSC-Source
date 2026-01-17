@@ -125,7 +125,7 @@ Player_BreadCrumb_Reset(position, angles) {
     for(i = 0; i < 4; i++) {
       level._player_breadcrumbs[i] = [];
       for(j = 0; j < 4; j++) {
-        level._player_breadcrumbs[i][j] = spawnstruct();
+        level._player_breadcrumbs[i][j] = spawnStruct();
       }
     }
   }
@@ -180,7 +180,7 @@ SetPlayerSpawnPos() {
   players = get_players();
   player = players[0];
   if(!isDefined(level._player_breadcrumbs)) {
-    spawnpoints = getentarray("info_player_deathmatch", "classname");
+    spawnpoints = getEntArray("info_player_deathmatch", "classname");
     if(player.origin == (0, 0, 0) && isDefined(spawnpoints) && spawnpoints.size > 0) {
       Player_BreadCrumb_Reset(spawnpoints[0].origin, spawnpoints[0].angles);
     } else {
@@ -216,10 +216,10 @@ Callback_PlayerConnect() {
   self thread maps\_load_common::player_special_death_hint();
   self thread maps\_flashgrenades::monitorFlash();
   if(getDvar(#"zombiemode") == "0") {
-    info_player_spawn = getentarray("info_player_deathmatch", "classname");
+    info_player_spawn = getEntArray("info_player_deathmatch", "classname");
     if(isDefined(info_player_spawn) && info_player_spawn.size > 0) {
       players = get_players("all");
-      if(Isdefined(players) && (players.size != 0)) {
+      if(isDefined(players) && (players.size != 0)) {
         if(players[0] == self) {
           println("2:Setting player origin to info_player_start " + info_player_spawn[0].origin);
           self setOrigin(info_player_spawn[0].origin);
@@ -316,7 +316,7 @@ Callback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sW
     if(sMeansOfDeath == "MOD_GRENADE_SPLASH") {
       dist = Distance2d(vPoint, self.origin);
       if(dist > 32) {
-        dot_product = vectordot(AnglesToForward(self.angles), vDir);
+        dot_product = vectordot(anglesToForward(self.angles), vDir);
         if(dot_product > 0) {
           iDamage = int(iDamage * 0.5);
         }
@@ -694,7 +694,7 @@ default_onPostSpawnPlayer() {}
 default_onSpawnSpectator() {}
 default_onSpawnIntermission() {
   spawnpointname = "info_intermission";
-  spawnpoints = getentarray(spawnpointname, "classname");
+  spawnpoints = getEntArray(spawnpointname, "classname");
   if(spawnpoints.size < 1) {
     println("NO " + spawnpointname + " SPAWNPOINTS IN MAP");
     return;

@@ -7,14 +7,13 @@
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\system_shared;
-
 #namespace aat;
 
 autoexec __init__system__() {
   system::register(#"aat", &__init__, undefined, undefined);
 }
 
-private __init__() {
+__init__() {
   level.aat_initializing = 1;
   level.aat_default_info_name = "none";
   level.aat_default_info_icon = "blacktransparent";

@@ -87,7 +87,7 @@ cic_turret_off(angles) {
   if(!isDefined(angles))
     angles = self gettagangles("tag_flash");
 
-  target_vec = self.origin + anglestoforward((0, angles[1], 0)) * 1000;
+  target_vec = self.origin + anglesToForward((0, angles[1], 0)) * 1000;
   target_vec = target_vec + vectorscale((0, 0, -1), 1700.0);
   self settargetorigin(target_vec);
   self.off = 1;
@@ -97,7 +97,7 @@ cic_turret_off(angles) {
 }
 
 cic_turret_on() {
-  self playsound("veh_cic_turret_boot");
+  self playSound("veh_cic_turret_boot");
   self lights_on();
   self enableaimassist();
   self vehicle_toggle_sounds(1);
@@ -118,7 +118,7 @@ bootup() {
 
   if(!isDefined(self.player)) {
     angles = self gettagangles("tag_flash");
-    target_vec = self.origin + anglestoforward((self.default_pitch, angles[1], 0)) * 1000;
+    target_vec = self.origin + anglesToForward((self.default_pitch, angles[1], 0)) * 1000;
     self.turretrotscale = 0.3;
     self settargetorigin(target_vec);
     wait 1;
@@ -143,8 +143,8 @@ cic_turret_fireupdate() {
   cant_see_enemy_count = 0;
   wait 0.2;
   origin = self gettagorigin("tag_barrel");
-  left_look_at_pt = origin + anglestoforward(self.angles + (self.default_pitch, self.scanning_arc, 0)) * 1000;
-  right_look_at_pt = origin + anglestoforward(self.angles + (self.default_pitch, self.scanning_arc * -1, 0)) * 1000;
+  left_look_at_pt = origin + anglesToForward(self.angles + (self.default_pitch, self.scanning_arc, 0)) * 1000;
+  right_look_at_pt = origin + anglesToForward(self.angles + (self.default_pitch, self.scanning_arc * -1, 0)) * 1000;
   self thread cic_turret_on_target_thread();
 
   while(true) {
@@ -252,15 +252,15 @@ cic_turret_play_single_fx_on_tag(effect, tag) {
     return;
   }
   ent = spawn("script_model", (0, 0, 0));
-  ent setmodel("tag_origin");
+  ent setModel("tag_origin");
   ent.origin = self gettagorigin(tag);
   ent.angles = self gettagangles(tag);
   ent notsolid();
   ent hide();
   ent linkto(self, tag);
   ent.effect = effect;
-  playfxontag(effect, ent, "tag_origin");
-  ent playsound("veh_cic_turret_sparks");
+  playFXOnTag(effect, ent, "tag_origin");
+  ent playSound("veh_cic_turret_sparks");
   self.damage_fx_ent = ent;
 }
 
@@ -332,20 +332,20 @@ cic_turret_death() {
 }
 
 death_fx() {
-  playfxontag(self.deathfx, self, self.deathfxtag);
-  self playsound("veh_cic_turret_sparks");
+  playFXOnTag(self.deathfx, self, self.deathfxtag);
+  self playSound("veh_cic_turret_sparks");
   fire_ent = spawn("script_origin", self.origin);
-  fire_ent playloopsound("veh_cic_turret_dmg_fire_loop", 0.5);
+  fire_ent playLoopSound("veh_cic_turret_dmg_fire_loop", 0.5);
 }
 
 cic_turret_death_movement(attacker, hitdir) {
   self endon("crash_done");
   self endon("death");
-  self playsound("veh_cic_turret_dmg_hit");
+  self playSound("veh_cic_turret_dmg_hit");
   wait 0.1;
   self.turretrotscale = 0.5;
   tag_angles = self gettagangles("tag_flash");
-  target_pos = self.origin + anglestoforward((0, tag_angles[1], 0)) * 1000 + vectorscale((0, 0, -1), 1800.0);
+  target_pos = self.origin + anglesToForward((0, tag_angles[1], 0)) * 1000 + vectorscale((0, 0, -1), 1800.0);
   self setturrettargetvec(target_pos);
   wait 4;
   self notify("crash_done");
@@ -392,7 +392,7 @@ cic_turret_fire_for_time(totalfiretime) {
 }
 
 cic_turret_alert_sound() {
-  self playsound("veh_turret_alert");
+  self playSound("veh_turret_alert");
 }
 
 cic_turret_set_team(team) {
@@ -420,13 +420,13 @@ cic_turret_emped() {
 
   if(!isDefined(self.stun_fx)) {
     self.stun_fx = spawn("script_model", self.origin);
-    self.stun_fx setmodel("tag_origin");
+    self.stun_fx setModel("tag_origin");
     self.stun_fx linkto(self, "tag_fx", (0, 0, 0), (0, 0, 0));
 
     if(issubstr(self.vehicletype, "turret_sentry"))
-      playfxontag(level._effect["sentry_turret_stun"], self.stun_fx, "tag_origin");
+      playFXOnTag(level._effect["sentry_turret_stun"], self.stun_fx, "tag_origin");
     else
-      playfxontag(level._effect["cic_turret_stun"], self.stun_fx, "tag_origin");
+      playFXOnTag(level._effect["cic_turret_stun"], self.stun_fx, "tag_origin");
   }
 
   wait(randomfloatrange(6, 10));

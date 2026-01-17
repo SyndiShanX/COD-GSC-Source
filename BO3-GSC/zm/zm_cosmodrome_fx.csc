@@ -14,7 +14,7 @@ function main() {
   level thread trap_fx_monitor("rocket_trap_group1", "r1", "fire");
   level thread trap_fx_monitor("rocket_trap_group2", "r2", "fire");
   disablefx = getdvarint("disable_fx");
-  if(!isdefined(disablefx) || disablefx <= 0) {
+  if(!isDefined(disablefx) || disablefx <= 0) {
     precache_scripted_fx();
   }
 }
@@ -102,14 +102,14 @@ function precache_createfx_fx() {
 function trap_fx_monitor(name, loc, trap_type) {
   structs = struct::get_array(name, "targetname");
   points = [];
-  for (i = 0; i < structs.size; i++) {
-    if(!isdefined(structs[i].model)) {
+  for(i = 0; i < structs.size; i++) {
+    if(!isDefined(structs[i].model)) {
       points[points.size] = structs[i];
     }
   }
-  while (true) {
+  while(true) {
     level waittill(loc + "1");
-    for (i = 0; i < points.size; i++) {
+    for(i = 0; i < points.size; i++) {
       points[i] thread trap_play_fx(loc, trap_type);
     }
   }
@@ -117,19 +117,19 @@ function trap_fx_monitor(name, loc, trap_type) {
 
 function trap_play_fx(loc, trap_type) {
   ang = self.angles;
-  forward = anglestoforward(ang);
+  forward = anglesToForward(ang);
   up = anglestoup(ang);
-  if(isdefined(self.loopfx)) {
-    for (i = 0; i < self.loopfx.size; i++) {
+  if(isDefined(self.loopfx)) {
+    for(i = 0; i < self.loopfx.size; i++) {
       self.loopfx[i] delete();
     }
     self.loopfx = [];
   }
-  if(!isdefined(self.loopfx)) {
+  if(!isDefined(self.loopfx)) {
     self.loopfx = [];
   }
   fx_name = "";
-  if(isdefined(self.script_string)) {
+  if(isDefined(self.script_string)) {
     fx_name = self.script_string;
   } else {
     switch (trap_type) {
@@ -145,12 +145,12 @@ function trap_play_fx(loc, trap_type) {
     }
   }
   players = getlocalplayers();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     self.loopfx[i] = spawnfx(i, level._effect[fx_name], self.origin, 0, forward, up);
     triggerfx(self.loopfx[i]);
   }
   level waittill(loc + "0");
-  for (i = 0; i < self.loopfx.size; i++) {
+  for(i = 0; i < self.loopfx.size; i++) {
     self.loopfx[i] delete();
   }
   self.loopfx = [];
@@ -163,27 +163,27 @@ function toggle_lander_lights(color, localclientnum) {
     right_fx = level._effect["lander_red_right"];
     left_fx = level._effect["lander_red_left"];
   }
-  var_1e2c44d5 = getentarray(localclientnum, "centrifuge_zip_door", "targetname");
-  var_442ebf3e = getentarray(localclientnum, "base_entry_zip_door", "targetname");
-  var_6a3139a7 = getentarray(localclientnum, "storage_zip_door", "targetname");
-  var_601fe0c8 = getentarray(localclientnum, "catwalk_zip_door", "targetname");
+  var_1e2c44d5 = getEntArray(localclientnum, "centrifuge_zip_door", "targetname");
+  var_442ebf3e = getEntArray(localclientnum, "base_entry_zip_door", "targetname");
+  var_6a3139a7 = getEntArray(localclientnum, "storage_zip_door", "targetname");
+  var_601fe0c8 = getEntArray(localclientnum, "catwalk_zip_door", "targetname");
   doorsa = arraycombine(var_1e2c44d5, var_442ebf3e, 0, 1);
   doorsb = arraycombine(var_6a3139a7, var_601fe0c8, 0, 1);
   all_doors = arraycombine(doorsa, doorsb, 0, 1);
-  for (i = 0; i < all_doors.size; i++) {
+  for(i = 0; i < all_doors.size; i++) {
     if(all_doors[i].model == "p7_zm_asc_door_lander_lunar_rt") {
-      if(isdefined(all_doors[i].fx)) {
+      if(isDefined(all_doors[i].fx)) {
         stopfx(localclientnum, all_doors[i].fx);
       }
       all_doors[i] util::waittill_dobj(localclientnum);
-      all_doors[i].fx = playfxontag(localclientnum, right_fx, all_doors[i], "tag_origin");
+      all_doors[i].fx = playFXOnTag(localclientnum, right_fx, all_doors[i], "tag_origin");
       continue;
     }
     if(all_doors[i].model == "p7_zm_asc_door_lander_lunar_lft") {
-      if(isdefined(all_doors[i].fx)) {
+      if(isDefined(all_doors[i].fx)) {
         stopfx(localclientnum, all_doors[i].fx);
       }
-      all_doors[i].fx = playfxontag(localclientnum, left_fx, all_doors[i], "tag_origin");
+      all_doors[i].fx = playFXOnTag(localclientnum, left_fx, all_doors[i], "tag_origin");
     }
   }
 }

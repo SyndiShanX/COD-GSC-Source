@@ -46,7 +46,7 @@ queue_pipes_drop() {
 snd_pipe_shake(num, origin) {
   level waittill("fxanim_pipes_break_loop_0" + num + "_start");
   ent = spawn("script_origin", origin);
-  ent playloopsound("evt_pipe_rattle_" + num);
+  ent playLoopSound("evt_pipe_rattle_" + num);
   level waittill("fxanim_pipes_break_burst_0" + num + "_start");
   ent delete();
 }
@@ -54,7 +54,7 @@ snd_pipe_shake(num, origin) {
 snd_pipe_steam(num, origin) {
   level waittill("fxanim_pipes_break_loop_0" + num + "_start");
   ent = spawn("script_origin", origin);
-  ent playloopsound("evt_pipe_damage_" + num);
+  ent playLoopSound("evt_pipe_damage_" + num);
   level waittill("fxanim_pipes_break_burst_0" + num + "_start");
   wait 1;
   ent delete();
@@ -63,7 +63,7 @@ snd_pipe_steam(num, origin) {
 snd_pipe_steam_lrg(num, origin) {
   level waittill("fxanim_pipes_block_start");
   ent = spawn("script_origin", origin);
-  ent playloopsound("evt_pipe_damage_lrg");
+  ent playLoopSound("evt_pipe_damage_lrg");
   wait 15;
   ent delete();
 }
@@ -71,7 +71,7 @@ snd_pipe_steam_lrg(num, origin) {
 snd_pipe_steam_lrg_2(num, origin) {
   level waittill("fxanim_pipes_break_burst_0" + num + "_start");
   ent = spawn("script_origin", origin);
-  ent playloopsound("evt_pipe_damage_lrg");
+  ent playLoopSound("evt_pipe_damage_lrg");
   wait 15;
   ent delete();
 }

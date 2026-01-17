@@ -28,10 +28,10 @@ function unhackable_powerup(name) {
 }
 
 function hack_powerups() {
-  while (true) {
+  while(true) {
     level waittill("powerup_dropped", powerup);
     if(!unhackable_powerup(powerup.powerup_name)) {
-      struct = spawnstruct();
+      struct = spawnStruct();
       struct.origin = powerup.origin;
       struct.radius = 65;
       struct.height = 72;
@@ -39,7 +39,7 @@ function hack_powerups() {
       struct.script_int = 5000;
       struct.powerup = powerup;
       powerup thread powerup_pickup_watcher(struct);
-      zm_equip_hacker::register_pooled_hackable_struct(struct, & powerup_hack);
+      zm_equip_hacker::register_pooled_hackable_struct(struct, &powerup_hack);
     }
   }
 }
@@ -52,12 +52,12 @@ function powerup_pickup_watcher(powerup_struct) {
 
 function powerup_hack(hacker) {
   self.powerup notify("hacked");
-  if(isdefined(self.powerup.zombie_grabbable) && self.powerup.zombie_grabbable) {
+  if(isDefined(self.powerup.zombie_grabbable) && self.powerup.zombie_grabbable) {
     self.powerup notify("powerup_timedout");
     origin = self.powerup.origin;
     self.powerup delete();
     self.powerup = zm_net::network_safe_spawn("powerup", 1, "script_model", origin);
-    if(isdefined(self.powerup)) {
+    if(isDefined(self.powerup)) {
       self.powerup zm_powerups::powerup_setup("full_ammo");
       self.powerup thread zm_powerups::powerup_timeout();
       self.powerup thread zm_powerups::powerup_wobble();

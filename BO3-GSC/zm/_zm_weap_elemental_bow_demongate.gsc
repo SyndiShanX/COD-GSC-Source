@@ -28,7 +28,7 @@
 #namespace _zm_weap_elemental_bow_demongate;
 
 function autoexec __init__sytem__() {
-  system::register("_zm_weap_elemental_bow_demongate", & __init__, & __main__, undefined);
+  system::register("_zm_weap_elemental_bow_demongate", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -47,13 +47,13 @@ function __init__() {
 }
 
 function __main__() {
-  callback::on_connect( & function_71c07c9d);
+  callback::on_connect(&function_71c07c9d);
 }
 
 function function_71c07c9d() {
   self thread zm_weap_elemental_bow::function_982419bb("elemental_bow_demongate");
   self thread zm_weap_elemental_bow::function_ececa597("elemental_bow_demongate", "elemental_bow_demongate4");
-  self thread zm_weap_elemental_bow::function_7bc6b9d("elemental_bow_demongate", "elemental_bow_demongate4", & function_7e0efd7);
+  self thread zm_weap_elemental_bow::function_7bc6b9d("elemental_bow_demongate", "elemental_bow_demongate4", &function_7e0efd7);
 }
 
 function function_7e0efd7(weapon, position, radius, attacker, normal) {
@@ -68,11 +68,11 @@ function function_7e0efd7(weapon, position, radius, attacker, normal) {
 function function_95ad1040(var_be00572f, var_c211b5bb) {
   if(abs(var_c211b5bb[2]) < 0.2) {
     var_be00572f = var_be00572f + (var_c211b5bb * 16);
-    a_trace = bullettrace(var_be00572f, var_be00572f + vectorscale((0, 0, 1), 64), 0, undefined);
+    a_trace = bulletTrace(var_be00572f, var_be00572f + vectorscale((0, 0, 1), 64), 0, undefined);
     if(a_trace["fraction"] < 1) {
       var_be00572f = a_trace["position"] - vectorscale((0, 0, 1), 64);
     }
-    a_trace = bullettrace(var_be00572f, var_be00572f - vectorscale((0, 0, 1), 64), 0, undefined);
+    a_trace = bulletTrace(var_be00572f, var_be00572f - vectorscale((0, 0, 1), 64), 0, undefined);
     if(a_trace["fraction"] < 1) {
       var_be00572f = a_trace["position"] + vectorscale((0, 0, 1), 64);
     }
@@ -110,7 +110,7 @@ function function_19575106(weapon, position, attacker, normal) {
     }
   }
   var_c93049d7 = 0;
-  for (i = 0; i < var_33efb6fa; i++) {
+  for(i = 0; i < var_33efb6fa; i++) {
     var_963441bd[i] = function_a9eddc64(position, var_884470ed - vectorscale((0, 1, 0), 90), i);
     var_963441bd[i] thread function_a3e439a5(self, position);
     n_wait_time = 0.1;
@@ -131,9 +131,9 @@ function function_19575106(weapon, position, attacker, normal) {
 
 function function_292e5297() {
   self endon("hash_d6e52217");
-  while (true) {
+  while(true) {
     foreach(e_player in level.activeplayers) {
-      if(isdefined(e_player) && (!(isdefined(e_player.var_fbdab725) && e_player.var_fbdab725))) {
+      if(isDefined(e_player) && (!(isDefined(e_player.var_fbdab725) && e_player.var_fbdab725))) {
         if(distancesquared(e_player.origin, self.origin) < 9216) {
           e_player thread function_3f55c7ab(self);
         }
@@ -148,7 +148,7 @@ function function_3f55c7ab(var_e1784c2b) {
   self endon("bled_out");
   self.var_fbdab725 = 1;
   self clientfield::set_to_player("demongate_portal_rumble", 1);
-  while (distancesquared(self.origin, var_e1784c2b.origin) < 9216 && (isdefined(var_e1784c2b.var_a5e3922a) && var_e1784c2b.var_a5e3922a)) {
+  while(distancesquared(self.origin, var_e1784c2b.origin) < 9216 && (isDefined(var_e1784c2b.var_a5e3922a) && var_e1784c2b.var_a5e3922a)) {
     wait(0.05);
   }
   self.var_fbdab725 = 0;
@@ -156,7 +156,7 @@ function function_3f55c7ab(var_e1784c2b) {
 }
 
 function function_ee626351(position, attacker) {
-  v_angles = anglestoforward(attacker.angles) * -1;
+  v_angles = anglesToForward(attacker.angles) * -1;
   var_7119a95d = function_a9eddc64(position, v_angles);
   wait(0.1);
   var_7119a95d thread function_ab77890b(self);
@@ -179,7 +179,7 @@ function function_a9eddc64(position, v_angles, n_count = 1) {
   var_5f2cce52 = level.var_ecd0c077.size - 12;
   if(var_5f2cce52 > 0) {
     foreach(var_c7cc4fbd in level.var_ecd0c077) {
-      if(!var_c7cc4fbd flag::get("chomper_attacking") && (!(isdefined(var_c7cc4fbd.var_e3146903) && var_c7cc4fbd.var_e3146903))) {
+      if(!var_c7cc4fbd flag::get("chomper_attacking") && (!(isDefined(var_c7cc4fbd.var_e3146903) && var_c7cc4fbd.var_e3146903))) {
         var_c7cc4fbd.n_timer = 3;
         var_b194ff34++;
         if(var_b194ff34 > var_5f2cce52) {
@@ -188,7 +188,7 @@ function function_a9eddc64(position, v_angles, n_count = 1) {
       }
     }
   }
-  if(!isdefined(level.var_ecd0c077)) {
+  if(!isDefined(level.var_ecd0c077)) {
     level.var_ecd0c077 = [];
   } else if(!isarray(level.var_ecd0c077)) {
     level.var_ecd0c077 = array(level.var_ecd0c077);
@@ -199,9 +199,9 @@ function function_a9eddc64(position, v_angles, n_count = 1) {
 
 function function_308e6c6f() {
   self flag::set("demongate_chomper_despawning");
-  if(!(isdefined(self.var_dd49270d) && self.var_dd49270d)) {
+  if(!(isDefined(self.var_dd49270d) && self.var_dd49270d)) {
     self.var_dd49270d = 1;
-    if(!isdefined(level.var_a9ac7b97)) {
+    if(!isDefined(level.var_a9ac7b97)) {
       level.var_a9ac7b97 = gettime();
     } else if(level.var_a9ac7b97 == gettime()) {
       wait(randomfloatrange(0.1, 0.2));
@@ -222,13 +222,13 @@ function function_308e6c6f() {
 function function_1d3c583d() {
   self endon("demongate_chomper_despawning");
   self.n_timer = 0;
-  while (self.n_timer < 3) {
-    if(!self flag::get("chomper_attacking") && (!(isdefined(self.var_e3146903) && self.var_e3146903))) {
+  while(self.n_timer < 3) {
+    if(!self flag::get("chomper_attacking") && (!(isDefined(self.var_e3146903) && self.var_e3146903))) {
       self.n_timer = self.n_timer + 0.05;
     }
     wait(0.05);
   }
-  while (self flag::get("chomper_attacking")) {
+  while(self flag::get("chomper_attacking")) {
     wait(0.1);
   }
   self thread function_308e6c6f();
@@ -238,7 +238,7 @@ function function_a3e439a5(e_player, var_67eb721b) {
   self.var_e3146903 = 1;
   self.origin = self.origin + (0, 0, randomintrange(int(-51.2), int(51.2)));
   self.angles = (self.angles[0] + (randomintrange(-30, 30)), self.angles[1] + (randomintrange(-45, 45)), self.angles[2]);
-  var_69a783ad = self.origin + (anglestoforward(self.angles) * 96);
+  var_69a783ad = self.origin + (anglesToForward(self.angles) * 96);
   self.angles = (0, self.angles[1], 0);
   self moveto(var_69a783ad, 0.4);
   wait(0.4);
@@ -248,7 +248,7 @@ function function_a3e439a5(e_player, var_67eb721b) {
 
 function function_ab77890b(e_player) {
   self function_99d2c8aa(e_player);
-  if(isdefined(self.target_enemy)) {
+  if(isDefined(self.target_enemy)) {
     self function_b6e7ec91(e_player);
   } else {
     self thread function_9fcea3e8(e_player);
@@ -258,7 +258,7 @@ function function_ab77890b(e_player) {
 function function_9fcea3e8(e_player) {
   self endon("demongate_chomper_despawning");
   self endon("death");
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   if(self flag::get("demongate_chomper_despawning")) {
@@ -274,20 +274,20 @@ function function_9fcea3e8(e_player) {
   var_6003485e = (randomint(100) < 50 ? var_6003485e : var_6003485e * -1);
   if(zm_utility::is_player_valid(e_player)) {
     var_6073ac1c = e_player.angles;
-    var_150aaea = e_player geteye();
+    var_150aaea = e_player getEye();
   } else {
     var_6073ac1c = self.angles;
     var_150aaea = self.origin;
   }
   var_9ef67615 = (var_6073ac1c[0] + var_13fe538c, var_6073ac1c[1] + var_3a00cdf5, var_6073ac1c[2] + var_6003485e);
-  var_962558f1 = vectornormalize(anglestoforward(var_9ef67615));
+  var_962558f1 = vectornormalize(anglesToForward(var_9ef67615));
   a_trace = physicstraceex(var_150aaea, var_150aaea + (var_962558f1 * 512), vectorscale((-1, -1, -1), 16), vectorscale((1, 1, 1), 16));
   var_69a783ad = a_trace["position"] + (var_962558f1 * -32);
   n_dist = distance(self.origin, var_69a783ad);
   n_time = n_dist / 48;
   v_rotate = var_69a783ad - self.origin;
   v_rotate = (0, v_rotate[1], 0);
-  if(!isdefined(level.var_a9ac7b97)) {
+  if(!isDefined(level.var_a9ac7b97)) {
     level.var_a9ac7b97 = gettime();
   } else if(level.var_a9ac7b97 == gettime()) {
     wait(randomfloatrange(0.1, 0.2));
@@ -297,7 +297,7 @@ function function_9fcea3e8(e_player) {
   self rotateto(vectortoangles(v_rotate), n_time * 0.5);
   self thread function_f9dd2ee2(e_player);
   self util::waittill_any_timeout(n_time * 2, "movedone", "demongate_chomper_found_target", "demongate_chomper_despawning", "death");
-  if(isdefined(self.target_enemy)) {
+  if(isDefined(self.target_enemy)) {
     self clientfield::set("demongate_wander_locomotion_anim", 0);
     self function_b6e7ec91(e_player);
   } else {
@@ -310,7 +310,7 @@ function function_f9dd2ee2(e_player) {
   self endon("demongate_chomper_found_target");
   self endon("movedone");
   self endon("death");
-  while (!isdefined(self.target_enemy)) {
+  while(!isDefined(self.target_enemy)) {
     wait(0.2);
     self thread function_99d2c8aa(e_player);
   }
@@ -328,7 +328,7 @@ function function_b6e7ec91(e_player) {
     self thread function_3c03253d(var_aad66aa4, var_7364b0dd);
     self thread function_3a5a56c7();
     self thread function_67903a83(e_player);
-    if(isdefined(self.target_enemy.isdog) && self.target_enemy.isdog || isvehicle(self.target_enemy)) {
+    if(isDefined(self.target_enemy.isdog) && self.target_enemy.isdog || isvehicle(self.target_enemy)) {
       n_wait_time = 0.8;
     } else {
       if(self.target_enemy.archetype === "mechz") {
@@ -346,7 +346,7 @@ function function_b6e7ec91(e_player) {
       self thread function_308e6c6f();
       return;
     }
-  } else if(isdefined(self.target_enemy)) {
+  } else if(isDefined(self.target_enemy)) {
     self.target_enemy.var_bc9b5fbd = 0;
   }
   self flag::clear("chomper_attacking");
@@ -357,12 +357,12 @@ function function_3a5a56c7() {
   self endon("death");
   self endon("hash_368634cd");
   if(self.target_enemy.archetype === "mechz") {
-    while (true) {
+    while(true) {
       self clientfield::increment("demongate_chomper_bite_fx", 1);
       wait(1);
     }
   } else {
-    while (true) {
+    while(true) {
       self waittill("hash_48e4a902");
       self clientfield::increment("demongate_chomper_bite_fx", 1);
     }
@@ -371,7 +371,7 @@ function function_3a5a56c7() {
 
 function function_3c03253d(var_aad66aa4, var_7364b0dd) {
   self.target_enemy endon("death");
-  if(isdefined(self.target_enemy.isdog) && self.target_enemy.isdog) {
+  if(isDefined(self.target_enemy.isdog) && self.target_enemy.isdog) {
     self.target_enemy ai::set_ignoreall(1);
   } else {
     if(self.target_enemy.archetype === "mechz") {
@@ -380,7 +380,7 @@ function function_3c03253d(var_aad66aa4, var_7364b0dd) {
       if(isvehicle(self.target_enemy)) {
         self.target_enemy.ignoreall = 1;
       } else {
-        if(isdefined(var_7364b0dd) && var_7364b0dd) {
+        if(isDefined(var_7364b0dd) && var_7364b0dd) {
           self.target_enemy scene::play("ai_zm_dlc1_zombie_demongate_chomper_attack_crawler", array(self.target_enemy, self));
         } else {
           self.target_enemy scene::init("ai_zm_dlc1_zombie_demongate_chomper_attack_0" + var_aad66aa4, array(self.target_enemy, self));
@@ -396,9 +396,9 @@ function function_c5e710f7() {
   self endon("death");
   self endon("hash_368634cd");
   var_f1d8a1fc endon("death");
-  while (true) {
-    var_e388672 = isdefined(var_f1d8a1fc.has_faceplate) && (var_f1d8a1fc.has_faceplate ? 6 : 1);
-    var_85b50675 = anglestoforward(self.target_enemy.angles) * var_e388672;
+  while(true) {
+    var_e388672 = isDefined(var_f1d8a1fc.has_faceplate) && (var_f1d8a1fc.has_faceplate ? 6 : 1);
+    var_85b50675 = anglesToForward(self.target_enemy.angles) * var_e388672;
     self.origin = self.target_enemy gettagorigin("j_faceplate") + var_85b50675;
     self.angles = vectortoangles(var_85b50675 * -1);
     wait(0.05);
@@ -406,18 +406,18 @@ function function_c5e710f7() {
 }
 
 function function_43415734(var_aad66aa4, var_7364b0dd) {
-  if(isdefined(self.target_enemy) && self.target_enemy.archetype === "mechz") {
+  if(isDefined(self.target_enemy) && self.target_enemy.archetype === "mechz") {
     self.target_enemy thread function_aa5b14d0();
     return;
   }
-  if(isdefined(self.target_enemy) && (!(isdefined(self.target_enemy.isdog) && self.target_enemy.isdog))) {
-    if(isdefined(var_7364b0dd) && var_7364b0dd) {
+  if(isDefined(self.target_enemy) && (!(isDefined(self.target_enemy.isdog) && self.target_enemy.isdog))) {
+    if(isDefined(var_7364b0dd) && var_7364b0dd) {
       self.target_enemy thread scene::stop("ai_zm_dlc1_zombie_demongate_chomper_attack_crawler");
     } else {
       self.target_enemy thread scene::stop("ai_zm_dlc1_zombie_demongate_chomper_attack_0" + var_aad66aa4);
     }
   }
-  if(isdefined(var_7364b0dd) && var_7364b0dd) {
+  if(isDefined(var_7364b0dd) && var_7364b0dd) {
     self thread scene::stop("ai_zm_dlc1_zombie_demongate_chomper_attack_crawler");
   } else {
     self thread scene::stop("ai_zm_dlc1_zombie_demongate_chomper_attack_0" + var_aad66aa4);
@@ -433,13 +433,13 @@ function function_aa5b14d0() {
 
 function function_5dee133f() {
   self flag::set("chomper_attacking");
-  var_b710c4e5 = self.target_enemy geteye();
+  var_b710c4e5 = self.target_enemy getEye();
   n_dist = distance(self.origin, var_b710c4e5);
   n_loop_count = 1;
   var_4e26e12a = (math::cointoss() ? 1 : -1);
   self clientfield::set("demongate_attack_locomotion_anim", 1);
-  while (n_dist > 32 && isdefined(self.target_enemy) && isalive(self.target_enemy)) {
-    var_b710c4e5 = self.target_enemy geteye();
+  while(n_dist > 32 && isDefined(self.target_enemy) && isalive(self.target_enemy)) {
+    var_b710c4e5 = self.target_enemy getEye();
     n_time = n_dist / 640;
     var_5d76b65c = 1 / n_loop_count;
     var_ef096040 = vectorscale((0, 0, 1), 160) * var_5d76b65c;
@@ -449,7 +449,7 @@ function function_5dee133f() {
     var_74490e48 = (var_b710c4e5 + var_c5a0d28e) + var_ef096040;
     v_rotate = var_74490e48 - self.origin;
     v_rotate = (0, v_rotate[1], 0);
-    if(!isdefined(level.var_a9ac7b97)) {
+    if(!isDefined(level.var_a9ac7b97)) {
       level.var_a9ac7b97 = gettime();
     } else if(level.var_a9ac7b97 == gettime()) {
       wait(randomfloatrange(0.1, 0.2));
@@ -464,7 +464,7 @@ function function_5dee133f() {
     n_dist = distance(self.origin, var_b710c4e5);
   }
   self clientfield::set("demongate_attack_locomotion_anim", 0);
-  if(isdefined(self.target_enemy) && isalive(self.target_enemy)) {
+  if(isDefined(self.target_enemy) && isalive(self.target_enemy)) {
     self.origin = var_b710c4e5;
   }
 }
@@ -494,7 +494,7 @@ function function_3f57ba41(e_player) {
   e_target = self.target_enemy;
   e_target endon("death");
   var_3bb42832 = level.mechz_health;
-  if(isdefined(level.var_f4dc2834)) {
+  if(isDefined(level.var_f4dc2834)) {
     var_3bb42832 = math::clamp(var_3bb42832, 0, level.var_f4dc2834);
   }
   n_damage = (var_3bb42832 * 0.2) / 0.2;
@@ -516,7 +516,7 @@ function function_99d2c8aa(e_player) {
   self.target_enemy = undefined;
   var_51b6a540 = self.origin;
   var_6f3820ea = 1024;
-  if(isdefined(self.var_603f1f19) && self.var_603f1f19) {
+  if(isDefined(self.var_603f1f19) && self.var_603f1f19) {
     if(zm_utility::is_player_valid(e_player)) {
       var_51b6a540 = e_player.origin;
     }
@@ -524,8 +524,8 @@ function function_99d2c8aa(e_player) {
   }
   a_ai_enemies = getaiteamarray(level.zombie_team);
   var_237d778f = arraysortclosest(a_ai_enemies, var_51b6a540, a_ai_enemies.size, 0, var_6f3820ea);
-  var_237d778f = array::filter(var_237d778f, 0, & zm_weap_elemental_bow::function_5aec3adc);
-  var_237d778f = array::filter(var_237d778f, 0, & function_c994aef0, self);
+  var_237d778f = array::filter(var_237d778f, 0, &zm_weap_elemental_bow::function_5aec3adc);
+  var_237d778f = array::filter(var_237d778f, 0, &function_c994aef0, self);
   if(var_237d778f.size) {
     var_9183256c = var_237d778f[0];
     var_9183256c.var_bc9b5fbd = 1;
@@ -535,5 +535,5 @@ function function_99d2c8aa(e_player) {
 }
 
 function function_c994aef0(var_9183256c, var_7119a95d) {
-  return !(isdefined(var_9183256c.var_bc9b5fbd) && var_9183256c.var_bc9b5fbd) && (isdefined(var_9183256c.completed_emerging_into_playable_area) && var_9183256c.completed_emerging_into_playable_area || !isdefined(var_9183256c.completed_emerging_into_playable_area)) && (var_9183256c.archetype === "zombie" && (isdefined(var_9183256c.completed_emerging_into_playable_area) && var_9183256c.completed_emerging_into_playable_area) || var_9183256c.archetype !== "zombie") && bullettracepassed(var_9183256c geteye(), var_7119a95d.origin, 0, var_7119a95d);
+  return !(isDefined(var_9183256c.var_bc9b5fbd) && var_9183256c.var_bc9b5fbd) && (isDefined(var_9183256c.completed_emerging_into_playable_area) && var_9183256c.completed_emerging_into_playable_area || !isDefined(var_9183256c.completed_emerging_into_playable_area)) && (var_9183256c.archetype === "zombie" && (isDefined(var_9183256c.completed_emerging_into_playable_area) && var_9183256c.completed_emerging_into_playable_area) || var_9183256c.archetype !== "zombie") && bullettracepassed(var_9183256c getEye(), var_7119a95d.origin, 0, var_7119a95d);
 }

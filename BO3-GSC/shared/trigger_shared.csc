@@ -11,29 +11,25 @@ function function_d1278be0(ent, on_enter_payload, on_exit_payload) {
     return;
   }
   add_to_ent(ent, self);
-  if(isdefined(on_enter_payload)) {
-    [
-      [on_enter_payload]
-    ](ent);
+  if(isDefined(on_enter_payload)) {
+    [[on_enter_payload]](ent);
   }
-  while (isdefined(ent) && ent istouching(self)) {
+  while(isDefined(ent) && ent istouching(self)) {
     wait(0.016);
   }
-  if(isdefined(ent) && isdefined(on_exit_payload)) {
-    [
-      [on_exit_payload]
-    ](ent);
+  if(isDefined(ent) && isDefined(on_exit_payload)) {
+    [[on_exit_payload]](ent);
   }
-  if(isdefined(ent)) {
+  if(isDefined(ent)) {
     remove_from_ent(ent, self);
   }
 }
 
 function ent_already_in(trig) {
-  if(!isdefined(self._triggers)) {
+  if(!isDefined(self._triggers)) {
     return false;
   }
-  if(!isdefined(self._triggers[trig getentitynumber()])) {
+  if(!isDefined(self._triggers[trig getentitynumber()])) {
     return false;
   }
   if(!self._triggers[trig getentitynumber()]) {
@@ -43,17 +39,17 @@ function ent_already_in(trig) {
 }
 
 function add_to_ent(ent, trig) {
-  if(!isdefined(ent._triggers)) {
+  if(!isDefined(ent._triggers)) {
     ent._triggers = [];
   }
   ent._triggers[trig getentitynumber()] = 1;
 }
 
 function remove_from_ent(ent, trig) {
-  if(!isdefined(ent._triggers)) {
+  if(!isDefined(ent._triggers)) {
     return;
   }
-  if(!isdefined(ent._triggers[trig getentitynumber()])) {
+  if(!isDefined(ent._triggers[trig getentitynumber()])) {
     return;
   }
   ent._triggers[trig getentitynumber()] = 0;

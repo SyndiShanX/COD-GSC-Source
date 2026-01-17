@@ -40,9 +40,7 @@ ai_getgrenadetype(team) {
     return "frag_grenade_sp";
 
   if(isDefined(level.rts.custom_ai_getgrenadecb)) {
-    grenade = [
-      [level.rts.custom_ai_getgrenadecb]
-    ](team);
+    grenade = [[level.rts.custom_ai_getgrenadecb]](team);
 
     if(!isDefined(grenade))
       return undefined;
@@ -140,7 +138,7 @@ ai_type_populate() {
     if(!isDefined(ref) || ref == "") {
       continue;
     }
-    ai = spawnstruct();
+    ai = spawnStruct();
     ai.idx = i;
     ai.ref = ref;
     ai.equipment = lookup_value(ref, i, 2);
@@ -375,9 +373,7 @@ ai_deathwatch(einflictor, eattacker, idamage, meansofdeath) {
     return 0;
 
   if(isDefined(level.rts.ai_damage_cb))
-    idamage = [
-      [level.rts.ai_damage_cb]
-    ](einflictor, eattacker, idamage, meansofdeath);
+    idamage = [[level.rts.ai_damage_cb]](einflictor, eattacker, idamage, meansofdeath);
 
   if(meansofdeath == "MOD_UNKNOWN")
     i = 1;
@@ -456,9 +452,7 @@ veh_deathwatch(einflictor, eattacker, idamage, n_dflags, str_means_of_death, str
     idamage = 0;
 
   if(isDefined(self.overridevehicledamageorig) && self.overridevehicledamageorig != ::veh_deathwatch)
-    idamage = [
-      [self.overridevehicledamageorig]
-    ](einflictor, eattacker, idamage, n_dflags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, psoffsettime, b_damage_from_underneath, n_model_index, str_part_name);
+    idamage = [[self.overridevehicledamageorig]](einflictor, eattacker, idamage, n_dflags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, psoffsettime, b_damage_from_underneath, n_model_index, str_part_name);
 
   return self ai_deathwatch(einflictor, eattacker, idamage, str_means_of_death);
 }
@@ -474,9 +468,7 @@ set_actor_damage_override() {
 
 actor_deathwatch(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, modelindex, psoffsettime, bonename) {
   if(isDefined(self.overrideactordamageorig) && self.overrideactordamageorig != ::actor_deathwatch)
-    idamage = [
-      [self.overrideactordamageorig]
-    ](einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, modelindex, psoffsettime, bonename);
+    idamage = [[self.overrideactordamageorig]](einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, modelindex, psoffsettime, bonename);
 
   return self ai_deathwatch(einflictor, eattacker, idamage, smeansofdeath);
 }
@@ -561,7 +553,7 @@ ai_claymore_plantwatch() {
 
     if(is_true(self.at_goal)) {
       if(!isDefined(self.enemy)) {
-        claymore_locs = maps\_so_rts_support::sortarraybyclosest(self.goalpos, getentarray("claymore_loc", "targetname"), self.goalradius * self.goalradius);
+        claymore_locs = maps\_so_rts_support::sortarraybyclosest(self.goalpos, getEntArray("claymore_loc", "targetname"), self.goalradius * self.goalradius);
 
         if(claymore_locs.size > 0) {
           self thread ai_claymore_abortwatch(self.goalradius, self.goalpos);
@@ -805,7 +797,7 @@ spawn_ai_package_standard(pkg_ref, team, callback, searchpoint, findinitnode, ma
 
       if(is_true(findinitnode)) {
         if(!isDefined(nodes[i])) {
-          ai.initnode = spawnstruct();
+          ai.initnode = spawnStruct();
           ai.initnode.origin = searchpoint;
           ai.initnode.angles = (0, 0, 0);
         } else {
@@ -973,7 +965,7 @@ chopper_unload_cargo_quad(pkg_ref, team, squadid, cb) {
 
   assert(isDefined(level.rts.quad_thrower_model));
   guy = spawn("script_model", self.origin);
-  guy setmodel(level.rts.quad_thrower_model);
+  guy setModel(level.rts.quad_thrower_model);
   guy useanimtree(#animtree);
 
   if(isDefined(level.rts.quad_thrower_headmodel))
@@ -1041,7 +1033,7 @@ chopper_unload_cargo_metalstorm(pkg_ref, team, squadid) {
   animrig.angles = tagangles;
   animrig linkto(self, "tag_body");
   animrig useanimtree(#animtree);
-  animrig setmodel("fxanim_gp_vtol_drop_asd_drone_mod");
+  animrig setModel("fxanim_gp_vtol_drop_asd_drone_mod");
   unit = pkg_ref.units[0];
   ai_ref = level.rts.ai[unit];
   assert(isDefined(ai_ref));
@@ -1088,7 +1080,7 @@ chopper_unload_cargo_claw(pkg_ref, team, squadid) {
     animrig.angles = tagangles;
     animrig linkto(self, "tag_body");
     animrig useanimtree(#animtree);
-    animrig setmodel("fxanim_gp_vtol_drop_claw_mod");
+    animrig setModel("fxanim_gp_vtol_drop_claw_mod");
     claw setteam(team);
     claw forceteleport(animrig gettagorigin("claw_attach_jnt"), animrig gettagangles("claw_attach_jnt"));
     claw linkto(animrig, "claw_attach_jnt");
@@ -1287,7 +1279,7 @@ restorereplacement() {
 }
 
 takeoverselectedinfantry(entity) {
-  self.ally = spawnstruct();
+  self.ally = spawnStruct();
   self.ally.ai_ref = entity.ai_ref;
   self.ally.pkg_ref = entity.pkg_ref;
   self.ally.health = entity.health > 0 ? entity.health : 1;
@@ -1452,7 +1444,7 @@ takeoverselectedvehicle(entity) {
     vehicle = maps\_vehicle::spawn_vehicle_from_targetname(entity.ai_ref.swap_spawner);
 
     if(isDefined(vehicle)) {
-      self.ally = spawnstruct();
+      self.ally = spawnStruct();
       self.ally.ai_ref = entity.ai_ref;
       self.ally.pkg_ref = entity.pkg_ref;
       self.ally.health = entity.health > 0 ? entity.health : 1;
@@ -1514,7 +1506,7 @@ takeoverselectedvehicle(entity) {
     entity.vehdontejectoccupantsondeath = 1;
     self.ignoreme = 1;
     self enableinvulnerability();
-    self.ally = spawnstruct();
+    self.ally = spawnStruct();
     self.ally.ai_ref = entity.ai_ref;
     self.ally.pkg_ref = entity.pkg_ref;
     self.ally.vehicle = entity;
@@ -1600,10 +1592,10 @@ spider_initialize() {
 bigdog_initialize() {
   if(isai(self)) {
     if(self.team == "allies")
-      self setmodel("veh_t6_drone_claw_mk2");
+      self setModel("veh_t6_drone_claw_mk2");
     else {
-      self setmodel("veh_t6_drone_claw_mk2_alt");
-      self.turret setmodel("veh_t6_drone_claw_mk2_turret_alt");
+      self setModel("veh_t6_drone_claw_mk2_alt");
+      self.turret setModel("veh_t6_drone_claw_mk2_turret_alt");
     }
   }
 

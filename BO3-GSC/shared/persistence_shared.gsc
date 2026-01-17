@@ -12,12 +12,12 @@
 #namespace persistence;
 
 function autoexec __init__sytem__() {
-  system::register("persistence", & __init__, undefined, undefined);
+  system::register("persistence", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype( & init);
-  callback::on_connect( & on_player_connect);
+  callback::on_start_gametype(&init);
+  callback::on_connect(&on_player_connect);
 }
 
 function init() {
@@ -95,8 +95,8 @@ function upload_global_stat_counters() {
   switch (level.gametype) {
     case "dem": {
       bombzonesleft = 0;
-      for (index = 0; index < level.bombzones.size; index++) {
-        if(!isdefined(level.bombzones[index].bombexploded) || !level.bombzones[index].bombexploded) {
+      for(index = 0; index < level.bombzones.size; index++) {
+        if(!isDefined(level.bombzones[index].bombexploded) || !level.bombzones[index].bombexploded) {
           level.globaldembombsprotected++;
           continue;
         }
@@ -112,9 +112,9 @@ function upload_global_stat_counters() {
     }
   }
   players = getplayers();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     player = players[i];
-    if(isdefined(player.timeplayed) && isdefined(player.timeplayed["total"])) {
+    if(isDefined(player.timeplayed) && isDefined(player.timeplayed["total"])) {
       totaltimeplayed = totaltimeplayed + min(player.timeplayed["total"], level.timeplayedcap);
     }
   }
@@ -123,7 +123,7 @@ function upload_global_stat_counters() {
   }
   wait(0.05);
   players = getplayers();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     player = players[i];
     totalkills = totalkills + player.kills;
     totaldeaths = totaldeaths + player.deaths;
@@ -131,7 +131,7 @@ function upload_global_stat_counters() {
     totalheadshots = totalheadshots + player.headshots;
     totalsuicides = totalsuicides + player.suicides;
     totalhumiliations = totalhumiliations + player.humiliated;
-    if(isdefined(player.timeplayed) && isdefined(player.timeplayed["alive"])) {
+    if(isDefined(player.timeplayed) && isDefined(player.timeplayed["alive"])) {
       totaltimeplayed = totaltimeplayed + int(min(player.timeplayed["alive"], level.timeplayedcap));
     }
     switch (level.gametype) {
@@ -151,7 +151,7 @@ function upload_global_stat_counters() {
         break;
       }
       case "sab": {
-        if(isdefined(player.team) && isdefined(level.teams[player.team])) {
+        if(isDefined(player.team) && isDefined(level.teams[player.team])) {
           totalsabdestroyedbyteam[player.team] = totalsabdestroyedbyteam[player.team] + player.destructions;
         }
         break;
@@ -161,7 +161,7 @@ function upload_global_stat_counters() {
 }
 
 function stat_get_with_gametype(dataname) {
-  if(isdefined(level.nopersistence) && level.nopersistence) {
+  if(isDefined(level.nopersistence) && level.nopersistence) {
     return 0;
   }
   if(!level.onlinegame) {
@@ -171,8 +171,8 @@ function stat_get_with_gametype(dataname) {
 }
 
 function get_gametype_name() {
-  if(!isdefined(level.fullgametypename)) {
-    if(isdefined(level.hardcoremode) && level.hardcoremode && is_party_gamemode() == 0) {
+  if(!isDefined(level.fullgametypename)) {
+    if(isDefined(level.hardcoremode) && level.hardcoremode && is_party_gamemode() == 0) {
       prefix = "HC";
     } else {
       prefix = "";
@@ -200,7 +200,7 @@ function is_stat_modifiable(dataname) {
 }
 
 function stat_set_with_gametype(dataname, value, incvalue) {
-  if(isdefined(level.nopersistence) && level.nopersistence) {
+  if(isDefined(level.nopersistence) && level.nopersistence) {
     return false;
   }
   if(!is_stat_modifiable(dataname)) {
@@ -237,7 +237,7 @@ function set_recent_stat(isglobal, index, statname, value) {
       return;
     }
   }
-  if(isdefined(level.nopersistence) && level.nopersistence) {
+  if(isDefined(level.nopersistence) && level.nopersistence) {
     return;
   }
   if(!level.onlinegame) {
@@ -259,7 +259,7 @@ function set_recent_stat(isglobal, index, statname, value) {
 }
 
 function add_recent_stat(isglobal, index, statname, value) {
-  if(isdefined(level.nopersistence) && level.nopersistence) {
+  if(isDefined(level.nopersistence) && level.nopersistence) {
     return;
   }
   if(!level.onlinegame) {
@@ -291,7 +291,7 @@ function add_match_history_stat(statname, value) {
 }
 
 function initialize_match_stats() {
-  if(isdefined(level.nopersistence) && level.nopersistence) {
+  if(isDefined(level.nopersistence) && level.nopersistence) {
     return;
   }
   if(!level.onlinegame) {
@@ -333,7 +333,7 @@ function set_after_action_report_stat(statname, value, index) {
     return;
   }
   if(can_set_aar_stat()) {
-    if(isdefined(index)) {
+    if(isDefined(index)) {
       self setaarstat(statname, index, value);
     } else {
       self setaarstat(statname, value);
@@ -342,7 +342,7 @@ function set_after_action_report_stat(statname, value, index) {
 }
 
 function codecallback_challengecomplete(rewardxp, maxval, row, tablenumber, challengetype, itemindex, challengeindex) {
-  params = spawnstruct();
+  params = spawnStruct();
   params.rewardxp = rewardxp;
   params.maxval = maxval;
   params.row = row;
@@ -351,7 +351,7 @@ function codecallback_challengecomplete(rewardxp, maxval, row, tablenumber, chal
   params.itemindex = itemindex;
   params.challengeindex = challengeindex;
   if(sessionmodeiscampaigngame()) {
-    if(isdefined(self.challenge_callback_cp)) {
+    if(isDefined(self.challenge_callback_cp)) {
       [
         [self.challenge_callback_cp]
       ](rewardxp, maxval, row, tablenumber, challengetype, itemindex, challengeindex);

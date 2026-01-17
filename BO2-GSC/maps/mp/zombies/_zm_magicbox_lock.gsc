@@ -14,7 +14,7 @@ init() {
   precachemodel("p6_anim_zm_al_magic_box_lock_red");
   level.locked_magic_box_cost = 2000;
   level.custom_magicbox_state_handler = maps\mp\zombies\_zm_magicbox_lock::set_locked_magicbox_state;
-  add_zombie_hint("locked_magic_box_cost", & "ZOMBIE_LOCKED_COST_2000");
+  add_zombie_hint("locked_magic_box_cost", &"ZOMBIE_LOCKED_COST_2000");
 }
 
 watch_for_lock() {
@@ -53,7 +53,7 @@ clean_up_locked_box() {
 magic_box_locks() {
   self.owner.is_locked = 1;
   self.owner notify("box_locked");
-  self playsound("zmb_hellbox_lock");
+  self playSound("zmb_hellbox_lock");
   self setclientfield("magicbox_open_fx", 0);
   self setclientfield("magicbox_amb_fx", 2);
   self setzbarrierpiecestate(5, "closing");
@@ -66,7 +66,7 @@ magic_box_locks() {
 
 magic_box_unlocks() {
   maps\mp\zombies\_zm_unitrigger::unregister_unitrigger(self.owner.unitrigger_stub);
-  self playsound("zmb_hellbox_unlock");
+  self playSound("zmb_hellbox_unlock");
   self setzbarrierpiecestate(5, "opening");
 
   while(self getzbarrierpiecestate(5) == "opening")

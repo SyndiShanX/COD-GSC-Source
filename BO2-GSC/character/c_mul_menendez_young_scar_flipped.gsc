@@ -4,7 +4,7 @@
 *****************************************************************/
 
 main() {
-  self setmodel("c_mul_menendez_young_scar_flipped_fb");
+  self setModel("c_mul_menendez_young_scar_flipped_fb");
   self.voice = "american";
   self.skeleton = "base";
 }

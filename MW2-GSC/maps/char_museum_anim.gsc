@@ -151,7 +151,6 @@ generic_human() {
   level.scr_anim["generic"]["foley_talk"][1] = % training_intro_foley_idle_talk_2;
   level.scr_anim["generic"]["foley_talk"][2] = % training_intro_foley_turnaround_2;
   level.scr_anim["generic"]["foley_talk"][3] = % training_intro_foley_turnaround_3;
-
 }
 
 civilian_walk_loops() {
@@ -193,7 +192,6 @@ civilian_walk_loops() {
 
   level.scr_anim["generic"]["civilian_cool_walk"][0] = % civilian_briefcase_walk;
   level.scr_anim["generic"]["civilian_walk"][0] = % civilian_walk_cool;
-
 }
 
 civilian_stand_loops() {

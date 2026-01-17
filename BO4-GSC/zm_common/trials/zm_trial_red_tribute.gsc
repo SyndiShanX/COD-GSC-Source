@@ -11,7 +11,6 @@
 #include scripts\zm_common\zm_score;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
-
 #namespace zm_trial_red_tribute;
 
 autoexec __init__system__() {
@@ -26,7 +25,7 @@ __init__() {
   zm_trial::register_challenge(#"red_tribute", &on_begin, &on_end);
 }
 
-private on_begin() {
+on_begin() {
   foreach(player in getplayers()) {
     player thread function_29bcf2f8();
   }
@@ -37,7 +36,7 @@ private on_begin() {
   level thread function_6fa5c86();
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   if(!round_reset) {
     var_ef7fbb73 = [];
 
@@ -69,7 +68,7 @@ private on_end(round_reset) {
   callback::remove_on_ai_killed(&on_ai_killed);
 }
 
-private function_29bcf2f8() {
+function_29bcf2f8() {
   self endon(#"disconnect");
   level endon(#"hash_7646638df88a3656");
   self.var_bfc22435 = 0;
@@ -90,7 +89,7 @@ private function_29bcf2f8() {
   self notify(#"spew_reward_picked_up");
 
   if(isDefined(self.s_tribute_bowl) && isDefined(self.s_tribute_bowl.var_9d32404)) {
-    self.s_tribute_bowl.var_9d32404 clientfield::set("" + #"hash_21f5fab6a3d22093", 0);
+    self.s_tribute_bowl.var_9d32404 clientfield::set("" + # "hash_21f5fab6a3d22093", 0);
   }
 
   self zm_red_challenges_rewards::set_tribute(0);
@@ -108,7 +107,7 @@ private function_29bcf2f8() {
   }
 }
 
-private function_6fa5c86() {
+function_6fa5c86() {
   level endon(#"hash_7646638df88a3656");
   level flag::set("infinite_round_spawning");
 
@@ -135,7 +134,7 @@ on_ai_spawned() {
   self thread track_spawns();
 }
 
-private track_spawns() {
+track_spawns() {
   self endon(#"death");
   level endon(#"hash_7646638df88a3656");
   wait 1;

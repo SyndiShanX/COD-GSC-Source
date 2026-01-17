@@ -25,19 +25,19 @@ spawned(localClientNum, play_sound, bool_monkey_bolt) {
     if(play_sound) {
       self thread loop_local_sound(localClientNum, "wpn_crossbow_alert", 0.3, level._effect["crossbow_enemy_light"]);
     } else {
-      PlayFXOnTag(localClientNum, level._effect["crossbow_enemy_light"], self, self.fxTagName);
+      playFXOnTag(localClientNum, level._effect["crossbow_enemy_light"], self, self.fxTagName);
     }
   } else if(bool_monkey_bolt == true) {
     if(play_sound) {
       self thread loop_local_sound(localClientNum, "wpn_crossbow_alert", 0.3, level._effect["crossbow_enemy_light"]);
     } else {
-      PlayFXOnTag(localClientNum, level._effect["crossbow_enemy_light"], self, self.fxTagName);
+      playFXOnTag(localClientNum, level._effect["crossbow_enemy_light"], self, self.fxTagName);
     }
   } else {
     if(play_sound) {
       self thread loop_local_sound(localClientNum, "wpn_crossbow_alert", 0.3, level._effect["crossbow_friendly_light"]);
     } else {
-      PlayFXOnTag(localClientNum, level._effect["crossbow_friendly_light"], self, self.fxTagName);
+      playFXOnTag(localClientNum, level._effect["crossbow_friendly_light"], self, self.fxTagName);
     }
   }
 }
@@ -45,8 +45,8 @@ spawned(localClientNum, play_sound, bool_monkey_bolt) {
 loop_local_sound(localClientNum, alias, interval, fx) {
   self endon("entityshutdown");
   while(1) {
-    self PlaySound(localClientNum, alias);
-    PlayFXOnTag(localClientNum, fx, self, self.fxTagName);
+    self playSound(localClientNum, alias);
+    playFXOnTag(localClientNum, fx, self, self.fxTagName);
     wait(interval);
     interval = (interval / 1.2);
     if(interval < .1) {

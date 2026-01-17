@@ -20,11 +20,10 @@
 #include scripts\mp_common\player\player_damage;
 #include scripts\wz_common\wz_ai_utils;
 #include scripts\wz_common\wz_ai_zombie;
-
 #namespace wz_ai_avogadro;
 
 autoexec __init__system__() {
-  system::register(#"wz_ai_avogadro", &__init__, &__main__, #"archetype_avogadro");
+  system::register(#"wz_ai_avogadro", &__init__, &__main__, # "archetype_avogadro");
 }
 
 __init__() {
@@ -40,7 +39,7 @@ __init__() {
 
 __main__() {}
 
-private function_f34df3c() {
+function_f34df3c() {
   blackboard::createblackboardforentity(self);
   ai::createinterfaceforentity(self);
   self.cant_move_cb = &wz_ai_zombie::function_9c573bc6;
@@ -74,10 +73,9 @@ private function_f34df3c() {
   }
 
   self.var_6c408220 = &function_c698f66b;
-
 }
 
-private function_c41e67c() {
+function_c41e67c() {
   if(math::cointoss()) {
     self.var_15aa1ae0 = 0;
   }
@@ -90,10 +88,10 @@ private function_c41e67c() {
 
 function_5ff730c7() {
   self.var_2cee3556 = [];
-  self.var_2cee3556[#"avogadro_base_itemlist_all"] = 15;
+  self.var_2cee3556[# "avogadro_base_itemlist_all"] = 15;
 }
 
-private function_745e91e8(entity) {
+function_745e91e8(entity) {
   entity.fovcosine = 0.5;
   entity.maxsightdistsqrd = 900 * 900;
 }
@@ -108,7 +106,7 @@ function_905d3c1a(entity) {
   timeout = getanimlength("ai_t8_zm_avogadro_arrival");
   new_origin = (entity.origin[0], entity.origin[1], entity.origin[2] - delta[2]);
   entity animscripted("avogadro_arrival_finished", new_origin, (0, entity.angles[1], 0), "ai_t8_zm_avogadro_arrival", "normal", "root", 1, 0);
-  entity waittilltimeout(timeout, #"avogadro_arrival_finished");
+  entity waittilltimeout(timeout, # "avogadro_arrival_finished");
 }
 
 avogadrodespawn(entity) {
@@ -122,11 +120,11 @@ onallcracks(entity) {
   entity pathmode("dont move", 1);
   timeout = getanimlength("ai_t8_zm_avogadro_exit");
   entity animscripted("avogadro_exit_finished", self.origin, self.angles, "ai_t8_zm_avogadro_exit", "normal", "root", 1, 0);
-  waitresult = entity waittilltimeout(timeout, #"avogadro_exit_finished");
+  waitresult = entity waittilltimeout(timeout, # "avogadro_exit_finished");
   entity ghost();
   entity notsolid();
   entity val::set(#"avogadro_despawn", "ignoreall", 1);
-  entity clientfield::set("" + #"avogadro_health_fx", 0);
+  entity clientfield::set("" + # "avogadro_health_fx", 0);
   entity notify(#"is_underground");
 }
 
@@ -208,7 +206,7 @@ function_ac94df05(entity) {
     return (entity.aistate === 3 && (entity.var_9bff71aa < 2 || gettime() - entity.var_7fde19e8 > 1000));
   }
 
-  return isDefined(entity.current_state) && entity.current_state.name === #"chase" && (entity.var_9bff71aa < 2 || gettime() - entity.var_7fde19e8 > 1000);
+  return isDefined(entity.current_state) && entity.current_state.name === # "chase" && (entity.var_9bff71aa < 2 || gettime() - entity.var_7fde19e8 > 1000);
 }
 
 function_7d5cf0e4(entity) {
@@ -216,7 +214,7 @@ function_7d5cf0e4(entity) {
     return (entity.aistate === 3);
   }
 
-  return isDefined(entity.current_state) && entity.current_state.name == #"chase";
+  return isDefined(entity.current_state) && entity.current_state.name == # "chase";
 }
 
 function_c698f66b() {
@@ -229,4 +227,3 @@ function_c698f66b() {
     print3d(self.origin, "<dev string:x38>", (1, 0.5, 0), 1, 1);
   }
 }
-

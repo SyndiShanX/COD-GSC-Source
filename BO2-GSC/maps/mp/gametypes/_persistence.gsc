@@ -376,14 +376,11 @@ codecallback_gunchallengecomplete(rewardxp, attachmentindex, itemindex, rankid) 
   self luinotifyeventtospectators(&"gun_level_complete", 4, rankid, itemindex, attachmentindex, rewardxp);
 }
 
-checkcontractexpirations() {
-}
+checkcontractexpirations() {}
 
-incrementcontracttimes(timeinc) {
-}
+incrementcontracttimes(timeinc) {}
 
-addcontracttoqueue(index, passed) {
-}
+addcontracttoqueue(index, passed) {}
 
 uploadstatssoon() {
   self notify("upload_stats_soon");
@@ -393,11 +390,8 @@ uploadstatssoon() {
   uploadstats(self);
 }
 
-codecallback_onaddplayerstat(dataname, value) {
-}
+codecallback_onaddplayerstat(dataname, value) {}
 
-codecallback_onaddweaponstat(weapname, dataname, value) {
-}
+codecallback_onaddweaponstat(weapname, dataname, value) {}
 
-processcontractsonaddstat(stattype, dataname, value, weapname) {
-}
+processcontractsonaddstat(stattype, dataname, value, weapname) {}

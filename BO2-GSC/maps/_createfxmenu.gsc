@@ -753,5 +753,5 @@ get_level_ambient_fx() {
 
 get_distance_from_ent(ent) {
   player = get_players()[0];
-  return distance(player geteye(), ent.v["origin"]);
+  return distance(player getEye(), ent.v["origin"]);
 }

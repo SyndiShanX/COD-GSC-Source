@@ -57,20 +57,20 @@ init() {
   level thread onPlayerConnect();
 }
 onPlayerConnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connected", player);
     player.entnum = player getEntityNumber();
     level.activeUAVs[player.entnum] = 0;
     level.activeCounterUAVs[player.entnum] = 0;
     level.activeSatellites[player.entnum] = 0;
     if(level.teambased == false) {
-      player thread watchFFASpawn();
+      player thread watchFFAspawn();
     }
   }
 }
-watchFFASpawn() {
+watchFFAspawn() {
   self endon("disconnect");
-  for (;;) {
+  for(;;) {
     self waittill("spawned_player");
     level notify("uav_update");
   }
@@ -79,7 +79,7 @@ rotateUAVRig(clockwise) {
   turn = 360;
   if(clockwise)
     turn = -360;
-  for (;;) {
+  for(;;) {
     self rotateyaw(turn, 60);
     wait(60);
   }
@@ -114,7 +114,7 @@ callspyplane(type, displayMessage) {
 }
 callsatellite(type, displayMessage) {
   timeInAir = self maps\mp\_radar::useRadarItem(type, self.team, displayMessage);
-  satellite = Spawn("script_model", level.mapcenter + ((0 - level.satelliteFlyDistance), 0, level.satelliteHeight));
+  satellite = spawn("script_model", level.mapcenter + ((0 - level.satelliteFlyDistance), 0, level.satelliteHeight));
   satellite setModel("tag_origin");
   satellite moveto(level.mapcenter + (level.satelliteFlyDistance, 0, level.satelliteHeight), timeInAir);
   satellite.owner = self;
@@ -221,12 +221,12 @@ removeActiveSatellite() {
 }
 playSpyplaneFX() {
   wait(0.1);
-  PlayFXOnTag(level.fx_spyplane_afterburner, self, "tag_origin");
+  playFXOnTag(level.fx_spyplane_afterburner, self, "tag_origin");
 }
 playSatelliteFX() {
   wait(0.1);
-  PlayFXOnTag(level.fx_sr71_trail, self, "tag_origin");
-  PlayFXOnTag(level.fx_sr71_glint, self, "tag_origin");
+  playFXOnTag(level.fx_sr71_trail, self, "tag_origin");
+  playFXOnTag(level.fx_sr71_glint, self, "tag_origin");
 }
 generatePlane(owner, timeInAir, isCounter) {
   UAVRig = level.UAVRig;
@@ -265,7 +265,7 @@ generatePlane(owner, timeInAir, isCounter) {
 }
 updateVisibility() {
   self endon("death");
-  for (;;) {
+  for(;;) {
     if(level.teambased) {
       self SetVisibleToTeam(self.otherteam);
     } else {
@@ -279,9 +279,9 @@ plane_damage_monitor(isSpyPlane) {
   self endon("death");
   self endon("crashing");
   self endon("delete");
-  self SetCanDamage(true);
+  self setCanDamage(true);
   self.damageTaken = 0;
-  for (;;) {
+  for(;;) {
     self waittill("damage", damage, attacker, direction, point, type, tagName, modelName, partname, weapon);
     if(!isDefined(attacker) || !isplayer(attacker))
       continue;
@@ -352,7 +352,7 @@ plane_health() {
   self endon("crashing");
   self.currentstate = "ok";
   self.laststate = "ok";
-  while (self.currentstate != "leaving") {
+  while(self.currentstate != "leaving") {
     if(self.damageTaken >= self.health_low)
       self.currentstate = "damaged";
     if(self.currentstate == "damaged" && self.laststate != "damaged") {
@@ -365,14 +365,14 @@ plane_health() {
 playDamageFX() {
   self endon("death");
   self endon("crashing");
-  while (1) {
-    playfxontag(level.fx_u2_damage_trail, self, "tag_origin");
+  while(1) {
+    playFXOnTag(level.fx_u2_damage_trail, self, "tag_origin");
     wait(10);
   }
 }
 u2_crash() {
   self notify("crashing");
-  playfxontag(level.fx_u2_explode, self, "tag_origin");
+  playFXOnTag(level.fx_u2_explode, self, "tag_origin");
   wait(0.1);
   self setModel("tag_origin");
   wait(0.2);
@@ -447,7 +447,7 @@ plane_leave() {
   self thread playSpyplaneFX();
   self.currentstate = "leaving";
   mult = getDvarIntDefault(#"scr_spymult", 20000);
-  exitVector = vector_multiply(anglestoforward(self.angles), 20000);
+  exitVector = vector_multiply(anglesToForward(self.angles), 20000);
   exitPoint = (self.origin[0] + exitVector[0], self.origin[1] + exitVector[1], self.origin[2] - 2500);
   exitPoint = self.origin + exitVector;
   self.angles = (self.angles[0], self.angles[1], 0);
@@ -457,7 +457,7 @@ plane_leave() {
 handleIncomingMissile() {
   level endon("game_ended");
   self endon("death");
-  for (;;) {
+  for(;;) {
     level waittill("missile_fired", player, missile, lockTarget, fullyAquired);
     if(!isDefined(lockTarget) || (lockTarget != self) || !fullyAquired)
       continue;
@@ -477,7 +477,7 @@ missileProximityDetonate(targetEnt, player) {
   targetEnt endon("crashing");
   minDist = distance(self.origin, targetEnt.origin);
   lastCenter = targetEnt.origin;
-  for (;;) {
+  for(;;) {
     if(!isDefined(targetEnt))
       center = lastCenter;
     else
@@ -496,7 +496,7 @@ missileProximityDetonate(targetEnt, player) {
 }
 UAVTracker() {
   level endon("game_ended");
-  for (;;) {
+  for(;;) {
     level waittill("uav_update");
     if(level.teamBased) {
       updateTeamUAVStatus("allies");
@@ -525,7 +525,7 @@ updateTeamUAVStatus(team) {
   maps\mp\_radar::setTeamSpyplaneWrapper(team, radarMode);
 }
 updatePlayersUAVStatus() {
-  for (i = 0; i < level.players.size; i++) {
+  for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
     assert(isDefined(player.entnum));
     if(!isDefined(player.entnum))
@@ -552,4 +552,3 @@ updatePlayersUAVStatus() {
     player.hasSpyplane = spyplaneUpdateSpeed;
   }
 }
-

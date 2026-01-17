@@ -30,12 +30,12 @@ function init_shared() {
   level.lightninggun_arc_fx_min_range = 1;
   level.lightninggun_arc_fx_min_range_sq = level.lightninggun_arc_fx_min_range * level.lightninggun_arc_fx_min_range;
   level._effect["lightninggun_arc"] = "weapon/fx_lightninggun_arc";
-  callback::add_weapon_damage(level.weaponlightninggun, & on_damage_lightninggun);
+  callback::add_weapon_damage(level.weaponlightninggun, &on_damage_lightninggun);
   level thread update_dvars();
 }
 
 function update_dvars() {
-  while (true) {
+  while(true) {
     wait(1);
     level.weaponlightninggunkillcamtime = getdvarfloat("", 0.35);
     level.weaponlightninggunkillcamdecelpercent = getdvarfloat("", 0.25);
@@ -63,7 +63,7 @@ function lightninggun_arc_killcam(arc_source_pos, arc_target, arc_target_pos, or
 }
 
 function lightninggun_arc_fx(arc_source_pos, arc_target, arc_target_pos, distancesq, original_killcam_ent) {
-  if(!isdefined(arc_target) || !isdefined(original_killcam_ent)) {
+  if(!isDefined(arc_target) || !isDefined(original_killcam_ent)) {
     return;
   }
   waittime = 0.25;
@@ -72,20 +72,20 @@ function lightninggun_arc_fx(arc_source_pos, arc_target, arc_target_pos, distanc
   }
   lightninggun_arc_killcam(arc_source_pos, arc_target, arc_target_pos, original_killcam_ent, waittime);
   killcamentity = arc_target.killcamkilledbyent;
-  if(!isdefined(arc_target) || !isdefined(original_killcam_ent)) {
+  if(!isDefined(arc_target) || !isDefined(original_killcam_ent)) {
     return;
   }
   if(distancesq < level.lightninggun_arc_fx_min_range_sq) {
     wait(waittime);
     killcamentity delete();
-    if(isdefined(arc_target)) {
+    if(isDefined(arc_target)) {
       arc_target.killcamkilledbyent = undefined;
     }
     return;
   }
   fxorg = spawn("script_model", arc_source_pos);
-  fxorg setmodel("tag_origin");
-  fx = playfxontag(level._effect["lightninggun_arc"], fxorg, "tag_origin");
+  fxorg setModel("tag_origin");
+  fx = playFXOnTag(level._effect["lightninggun_arc"], fxorg, "tag_origin");
   playsoundatposition("wpn_lightning_gun_bounce", fxorg.origin);
   fxorg moveto(arc_target_pos, waittime);
   fxorg waittill("movedone");
@@ -94,7 +94,7 @@ function lightninggun_arc_fx(arc_source_pos, arc_target, arc_target_pos, distanc
   util::wait_network_frame();
   fxorg delete();
   killcamentity delete();
-  if(isdefined(arc_target)) {
+  if(isDefined(arc_target)) {
     arc_target.killcamkilledbyent = undefined;
   }
 }
@@ -102,7 +102,7 @@ function lightninggun_arc_fx(arc_source_pos, arc_target, arc_target_pos, distanc
 function lightninggun_arc(delay, eattacker, arc_source, arc_source_origin, arc_source_pos, arc_target, arc_target_pos, distancesq) {
   if(delay) {
     wait(delay);
-    if(!isdefined(arc_target) || !isalive(arc_target)) {
+    if(!isDefined(arc_target) || !isalive(arc_target)) {
       return;
     }
     distancesq = distancesquared(arc_target.origin, arc_source_origin);
@@ -110,10 +110,10 @@ function lightninggun_arc(delay, eattacker, arc_source, arc_source_origin, arc_s
       return;
     }
   }
-  if(!isdefined(arc_source)) {
+  if(!isDefined(arc_source)) {
     return;
   }
-  if(!isdefined(arc_source.killcamkilledbyent)) {
+  if(!isDefined(arc_source.killcamkilledbyent)) {
     return;
   }
   level thread lightninggun_arc_fx(arc_source_pos, arc_target, arc_target_pos, distancesq, arc_source.killcamkilledbyent);
@@ -123,13 +123,13 @@ function lightninggun_arc(delay, eattacker, arc_source, arc_source_origin, arc_s
 
 function lightninggun_find_arc_targets(eattacker, arc_source, arc_source_origin, arc_source_pos) {
   delay = 0.05;
-  if(!isdefined(eattacker)) {
+  if(!isDefined(eattacker)) {
     return;
   }
   allenemyaliveplayers = util::get_other_teams_alive_players_s(eattacker.team);
   closestplayers = arraysort(allenemyaliveplayers.a, arc_source_origin, 1);
   foreach(player in closestplayers) {
-    if(isdefined(arc_source) && player == arc_source) {
+    if(isDefined(arc_source) && player == arc_source) {
       continue;
     }
     if(player player::is_spawn_protected()) {
@@ -140,7 +140,7 @@ function lightninggun_find_arc_targets(eattacker, arc_source, arc_source_origin,
       break;
     }
     if(eattacker != player && weaponobjects::friendlyfirecheck(eattacker, player)) {
-      if(isdefined(self) && !player damageconetrace(arc_source_pos, self)) {
+      if(isDefined(self) && !player damageconetrace(arc_source_pos, self)) {
         continue;
       }
       level thread lightninggun_arc(delay, eattacker, arc_source, arc_source_origin, arc_source_pos, player, player gettagorigin("j_spineupper"), distancesq);
@@ -151,7 +151,7 @@ function lightninggun_find_arc_targets(eattacker, arc_source, arc_source_origin,
 
 function create_killcam_entity(origin, angles, weapon) {
   killcamkilledbyent = spawn("script_model", origin);
-  killcamkilledbyent setmodel("tag_origin");
+  killcamkilledbyent setModel("tag_origin");
   killcamkilledbyent.angles = angles;
   killcamkilledbyent setweapon(weapon);
   return killcamkilledbyent;
@@ -186,18 +186,18 @@ function lightninggun_damage_response(eattacker, einflictor, weapon, meansofdeat
   killcamentity = arc_source.killcamkilledbyent;
   self thread lightninggun_start_damage_effects(eattacker);
   wait(2);
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     self thread lightninggun_find_arc_targets(eattacker, undefined, arc_source_origin, arc_source_pos);
     return;
   }
-  if(isdefined(self.body)) {
+  if(isDefined(self.body)) {
     arc_source_origin = self.body.origin;
     arc_source_pos = self.body gettagorigin("j_spineupper");
   }
   self thread lightninggun_find_arc_targets(eattacker, arc_source, arc_source_origin, arc_source_pos);
   wait(0.45);
   killcamentity delete();
-  if(isdefined(arc_source)) {
+  if(isDefined(arc_source)) {
     arc_source.killcamkilledbyent = undefined;
   }
 }

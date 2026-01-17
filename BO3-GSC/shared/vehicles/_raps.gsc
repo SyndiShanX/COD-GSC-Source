@@ -18,14 +18,14 @@
 #namespace raps;
 
 function autoexec __init__sytem__() {
-  system::register("raps", & __init__, undefined, undefined);
+  system::register("raps", &__init__, undefined, undefined);
 }
 
 function __init__() {
   clientfield::register("vehicle", "raps_side_deathfx", 1, 1, "int");
-  vehicle::add_main_callback("raps", & raps_initialize);
-  slow_triggers = getentarray("raps_slow", "targetname");
-  array::thread_all(slow_triggers, & slow_raps_trigger);
+  vehicle::add_main_callback("raps", &raps_initialize);
+  slow_triggers = getEntArray("raps_slow", "targetname");
+  array::thread_all(slow_triggers, &slow_raps_trigger);
 }
 
 function raps_initialize() {
@@ -36,7 +36,7 @@ function raps_initialize() {
   self.last_jump_chance_time = 0;
   self useanimtree($generic);
   self vehicle::friendly_fire_shield();
-  assert(isdefined(self.scriptbundlesettings));
+  assert(isDefined(self.scriptbundlesettings));
   self.settings = struct::get_script_bundle("vehiclecustomsettings", self.scriptbundlesettings);
   if(self.settings.aim_assist) {
     self enableaimassist();
@@ -45,25 +45,23 @@ function raps_initialize() {
   self.goalradius = 999999;
   self.goalheight = 999999;
   self setgoal(self.origin, 0, self.goalradius, self.goalheight);
-  self.overridevehicledamage = & raps_callback_damage;
-  self.allowfriendlyfiredamageoverride = & raps_allowfriendlyfiredamage;
-  self.do_death_fx = & do_death_fx;
+  self.overridevehicledamage = &raps_callback_damage;
+  self.allowfriendlyfiredamageoverride = &raps_allowfriendlyfiredamage;
+  self.do_death_fx = &do_death_fx;
   self thread vehicle_ai::nudge_collision();
   self thread sndfunctions();
-  if(isdefined(level.vehicle_initializer_cb)) {
-    [
-      [level.vehicle_initializer_cb]
-    ](self);
+  if(isDefined(level.vehicle_initializer_cb)) {
+    [[level.vehicle_initializer_cb]](self);
   }
   defaultrole();
 }
 
 function defaultrole() {
   self vehicle_ai::init_state_machine_for_role("default");
-  self vehicle_ai::get_state_callbacks("combat").update_func = & state_combat_update;
-  self vehicle_ai::get_state_callbacks("driving").update_func = & state_scripted_update;
-  self vehicle_ai::get_state_callbacks("death").update_func = & state_death_update;
-  self vehicle_ai::get_state_callbacks("emped").update_func = & state_emped_update;
+  self vehicle_ai::get_state_callbacks("combat").update_func = &state_combat_update;
+  self vehicle_ai::get_state_callbacks("driving").update_func = &state_scripted_update;
+  self vehicle_ai::get_state_callbacks("death").update_func = &state_death_update;
+  self vehicle_ai::get_state_callbacks("emped").update_func = &state_emped_update;
   self vehicle_ai::call_custom_add_state_callbacks();
   vehicle_ai::startinitialstate("combat");
 }
@@ -82,17 +80,17 @@ function state_scripted_update(params) {
 function state_death_update(params) {
   self endon("death");
   attacker = params.inflictor;
-  if(!isdefined(attacker)) {
+  if(!isDefined(attacker)) {
     attacker = params.attacker;
   }
-  if(attacker !== self && (!isdefined(self.owner) || self.owner !== attacker) && (isai(attacker) || isplayer(attacker))) {
+  if(attacker !== self && (!isDefined(self.owner) || self.owner !== attacker) && (isai(attacker) || isplayer(attacker))) {
     self.damage_on_death = 0;
     wait(0.05);
     attacker = params.inflictor;
-    if(!isdefined(attacker)) {
+    if(!isDefined(attacker)) {
       attacker = params.attacker;
     }
-    if(isdefined(attacker) && !isdefined(self.detonate_sides_disabled)) {
+    if(isDefined(attacker) && !isDefined(self.detonate_sides_disabled)) {
       self detonate_sides(attacker);
     } else {
       self.damage_on_death = 1;
@@ -125,13 +123,13 @@ function state_combat_update(params) {
   self thread prevent_stuck();
   self thread detonation_monitor();
   self thread nudge_collision();
-  for (;;) {
-    if(isdefined(self.inpain) && self.inpain) {
+  for(;;) {
+    if(isDefined(self.inpain) && self.inpain) {
       wait(0.1);
       continue;
     }
-    if(!isdefined(self.enemy) || (isdefined(self.raps_force_patrol_behavior) && self.raps_force_patrol_behavior)) {
-      if(isdefined(self.settings.all_knowing)) {
+    if(!isDefined(self.enemy) || (isDefined(self.raps_force_patrol_behavior) && self.raps_force_patrol_behavior)) {
+      if(isDefined(self.settings.all_knowing)) {
         self force_get_enemies();
       }
       self setspeed(self.settings.defaultmovespeed * 0.35);
@@ -144,27 +142,27 @@ function state_combat_update(params) {
       best_point = undefined;
       best_score = -999999;
       foreach(point in queryresult.data) {
-        if(!isdefined(point._scoredebug)) {
+        if(!isDefined(point._scoredebug)) {
           point._scoredebug = [];
         }
         point._scoredebug[""] = mapfloat(0, 200, 0, 100, point.disttoorigin2d);
         point.score = point.score + mapfloat(0, 200, 0, 100, point.disttoorigin2d);
         if(point.inclaimedlocation) {
-          if(!isdefined(point._scoredebug)) {
+          if(!isDefined(point._scoredebug)) {
             point._scoredebug = [];
           }
           point._scoredebug[""] = -500;
           point.score = point.score + -500;
         }
-        if(!isdefined(point._scoredebug)) {
+        if(!isDefined(point._scoredebug)) {
           point._scoredebug = [];
         }
         point._scoredebug[""] = randomfloatrange(0, 50);
         point.score = point.score + randomfloatrange(0, 50);
-        if(isdefined(self.prevmovedir)) {
+        if(isDefined(self.prevmovedir)) {
           movedir = vectornormalize(point.origin - self.origin);
           if(vectordot(movedir, self.prevmovedir) > 0.64) {
-            if(!isdefined(point._scoredebug)) {
+            if(!isDefined(point._scoredebug)) {
               point._scoredebug = [];
             }
             point._scoredebug[""] = randomfloatrange(50, 150);
@@ -178,7 +176,7 @@ function state_combat_update(params) {
       }
       self vehicle_ai::positionquery_debugscores(queryresult);
       foundpath = 0;
-      if(isdefined(best_point)) {
+      if(isDefined(best_point)) {
         foundpath = self setvehgoalpos(best_point.origin, 0, 1);
       } else {
         wait(1);
@@ -201,7 +199,7 @@ function state_combat_update(params) {
     }
     foundpath = 0;
     targetpos = raps_get_target_position();
-    if(isdefined(targetpos)) {
+    if(isDefined(targetpos)) {
       if(distancesquared(self.origin, targetpos) > (400 * 400) && self isposinclaimedlocation(targetpos)) {
         pixbeginevent("_raps::state_combat_update 2");
         queryresult = positionquery_source_navigation(targetpos, 0, self.settings.max_move_dist, self.settings.max_move_dist, self.radius, self);
@@ -210,18 +208,18 @@ function state_combat_update(params) {
         best_point = undefined;
         best_score = -999999;
         foreach(point in queryresult.data) {
-          if(!isdefined(point._scoredebug)) {
+          if(!isDefined(point._scoredebug)) {
             point._scoredebug = [];
           }
           point._scoredebug[""] = mapfloat(0, 200, 0, -200, distance(point.origin, queryresult.origin));
           point.score = point.score + (mapfloat(0, 200, 0, -200, distance(point.origin, queryresult.origin)));
-          if(!isdefined(point._scoredebug)) {
+          if(!isDefined(point._scoredebug)) {
             point._scoredebug = [];
           }
           point._scoredebug[""] = mapfloat(50, 200, 0, -200, abs(point.origin[2] - queryresult.origin[2]));
           point.score = point.score + (mapfloat(50, 200, 0, -200, abs(point.origin[2] - queryresult.origin[2])));
           if(point.inclaimedlocation === 1) {
-            if(!isdefined(point._scoredebug)) {
+            if(!isDefined(point._scoredebug)) {
               point._scoredebug = [];
             }
             point._scoredebug[""] = -500;
@@ -233,7 +231,7 @@ function state_combat_update(params) {
           }
         }
         self vehicle_ai::positionquery_debugscores(queryresult);
-        if(isdefined(best_point)) {
+        if(isDefined(best_point)) {
           targetpos = best_point.origin;
         }
       }
@@ -253,7 +251,7 @@ function state_combat_update(params) {
     if(!foundpath) {
       pathfailcount++;
       if(pathfailcount > 2) {
-        if(isdefined(self.enemy)) {
+        if(isDefined(self.enemy)) {
           self setpersonalthreatbias(self.enemy, -2000, 5);
         }
         if(pathfailcount > self.settings.max_path_fail_count) {
@@ -285,8 +283,8 @@ function prevent_stuck() {
   wait(2);
   count = 0;
   previous_origin = undefined;
-  while (true) {
-    if(isdefined(previous_origin) && distancesquared(previous_origin, self.origin) < (0.1 * 0.1) && (!(isdefined(level.bzm_worldpaused) && level.bzm_worldpaused))) {
+  while(true) {
+    if(isDefined(previous_origin) && distancesquared(previous_origin, self.origin) < (0.1 * 0.1) && (!(isDefined(level.bzm_worldpaused) && level.bzm_worldpaused))) {
       count++;
     } else {
       previous_origin = self.origin;
@@ -300,8 +298,8 @@ function prevent_stuck() {
 }
 
 function check_detonation_dist(origin, enemy) {
-  if(isdefined(enemy) && isalive(enemy)) {
-    enemy_look_dir_offst = anglestoforward(enemy.angles) * 30;
+  if(isDefined(enemy) && isalive(enemy)) {
+    enemy_look_dir_offst = anglesToForward(enemy.angles) * 30;
     targetpoint = enemy.origin + enemy_look_dir_offst;
     if(distance2dsquared(targetpoint, origin) < (self.settings.detonation_distance * self.settings.detonation_distance) && ((abs(targetpoint[2] - origin[2])) < self.settings.detonation_distance || (abs((targetpoint[2] - 20) - origin[2])) < self.settings.detonation_distance)) {
       return true;
@@ -311,14 +309,14 @@ function check_detonation_dist(origin, enemy) {
 }
 
 function jump_detonate() {
-  if(isdefined(self.sndalias["jump_up"])) {
-    self playsound(self.sndalias["jump_up"]);
+  if(isDefined(self.sndalias["jump_up"])) {
+    self playSound(self.sndalias["jump_up"]);
   }
   self launchvehicle((0, 0, 1) * self.jumpforce, (0, 0, 0), 1);
   self.is_jumping = 1;
   wait(0.4);
   time_to_land = 0.6;
-  while (time_to_land > 0) {
+  while(time_to_land > 0) {
     if(check_detonation_dist(self.origin, self.enemy)) {
       self detonate();
     }
@@ -332,7 +330,7 @@ function jump_detonate() {
     if(trace["fraction"] < 1) {
       pos = trace["position"];
       pos_on_navmesh = getclosestpointonnavmesh(pos, 100, self.radius, 16777183);
-      if(isdefined(pos_on_navmesh)) {
+      if(isDefined(pos_on_navmesh)) {
         willfall = 0;
       }
     }
@@ -356,36 +354,36 @@ function detonation_monitor() {
   self endon("death");
   self endon("change_state");
   lastenemy = undefined;
-  while (true) {
+  while(true) {
     try_detonate();
     wait(0.2);
-    if(isdefined(self.enemy) && isplayer(self.enemy)) {
+    if(isDefined(self.enemy) && isplayer(self.enemy)) {
       if(lastenemy !== self.enemy) {
         lastdisttoenemysquared = 1E+08;
         lastenemy = self.enemy;
       }
-      if(!isdefined(self.looping_targeting_sound)) {
-        if(isdefined(self.sndalias["vehRapsAlarm"])) {
+      if(!isDefined(self.looping_targeting_sound)) {
+        if(isDefined(self.sndalias["vehRapsAlarm"])) {
           self.looping_targeting_sound = spawn("script_origin", self.origin);
           self.looping_targeting_sound linkto(self);
           self.looping_targeting_sound setinvisibletoall();
           self.looping_targeting_sound setvisibletoplayer(self.enemy);
-          self.looping_targeting_sound playloopsound(self.sndalias["vehRapsAlarm"]);
+          self.looping_targeting_sound playLoopSound(self.sndalias["vehRapsAlarm"]);
           self.looping_targeting_sound thread raps_audio_cleanup(self);
         }
       }
       disttoenemysquared = distancesquared(self.origin, self.enemy.origin);
       if(disttoenemysquared < (250 * 250)) {
-        if(lastdisttoenemysquared > (250 * 250) && (!(isdefined(self.servershortout) && self.servershortout)) && isdefined(self.sndalias["vehRapsClose250"])) {
+        if(lastdisttoenemysquared > (250 * 250) && (!(isDefined(self.servershortout) && self.servershortout)) && isDefined(self.sndalias["vehRapsClose250"])) {
           self playsoundtoplayer(self.sndalias["vehRapsClose250"], self.enemy);
         }
       } else {
         if(disttoenemysquared < (750 * 750)) {
-          if(lastdisttoenemysquared > (750 * 750) && (!(isdefined(self.servershortout) && self.servershortout)) && isdefined(self.sndalias["vehRapsTargeting"])) {
+          if(lastdisttoenemysquared > (750 * 750) && (!(isDefined(self.servershortout) && self.servershortout)) && isDefined(self.sndalias["vehRapsTargeting"])) {
             self playsoundtoplayer(self.sndalias["vehRapsTargeting"], self.enemy);
           }
         } else if(disttoenemysquared < (1500 * 1500)) {
-          if(lastdisttoenemysquared > (1500 * 1500) && (!(isdefined(self.servershortout) && self.servershortout)) && isdefined(self.sndalias["vehRapsClose1500"])) {
+          if(lastdisttoenemysquared > (1500 * 1500) && (!(isDefined(self.servershortout) && self.servershortout)) && isDefined(self.sndalias["vehRapsClose1500"])) {
             self playsoundtoplayer(self.sndalias["vehRapsClose1500"], self.enemy);
           }
         }
@@ -400,17 +398,17 @@ function detonation_monitor() {
 
 function raps_audio_cleanup(owner) {
   owner waittill("death");
-  if(isdefined(owner)) {
+  if(isDefined(owner)) {
     owner stopsounds();
   }
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     self stoploopsound();
     self delete();
   }
 }
 
 function try_detonate() {
-  if(isdefined(self.disableautodetonation) && self.disableautodetonation) {
+  if(isDefined(self.disableautodetonation) && self.disableautodetonation) {
     return;
   }
   jump_time = 0.5;
@@ -419,9 +417,9 @@ function try_detonate() {
   if(can_jump) {
     predicted_origin = self.origin + (self getvelocity() * jump_time);
   }
-  if(isdefined(predicted_origin) && check_detonation_dist(predicted_origin, self.enemy)) {
-    trace = bullettrace(predicted_origin + (0, 0, self.radius), self.enemy.origin + (0, 0, self.radius), 1, self);
-    if(trace["fraction"] === 1 || isdefined(trace["entity"])) {
+  if(isDefined(predicted_origin) && check_detonation_dist(predicted_origin, self.enemy)) {
+    trace = bulletTrace(predicted_origin + (0, 0, self.radius), self.enemy.origin + (0, 0, self.radius), 1, self);
+    if(trace["fraction"] === 1 || isDefined(trace["entity"])) {
       self.last_jump_chance_time = cur_time;
       jump_chance = self.settings.jump_chance;
       if((self.enemy.origin[2] - 20) > predicted_origin[2]) {
@@ -432,14 +430,14 @@ function try_detonate() {
       }
     }
   } else if(check_detonation_dist(self.origin, self.enemy)) {
-    trace = bullettrace(self.origin + (0, 0, self.radius), self.enemy.origin + (0, 0, self.radius), 1, self);
-    if(trace["fraction"] === 1 || isdefined(trace["entity"])) {
+    trace = bulletTrace(self.origin + (0, 0, self.radius), self.enemy.origin + (0, 0, self.radius), 1, self);
+    if(trace["fraction"] === 1 || isDefined(trace["entity"])) {
       self detonate();
     }
   }
-  if(isdefined(self.owner)) {
+  if(isDefined(self.owner)) {
     foreach(player in level.players) {
-      if(self.owner util::isenemyplayer(player) && (!isdefined(self.enemy) || player != self.enemy)) {
+      if(self.owner util::isenemyplayer(player) && (!isDefined(self.enemy) || player != self.enemy)) {
         if(player isnotarget() || !isalive(player)) {
           continue;
         }
@@ -450,8 +448,8 @@ function try_detonate() {
           continue;
         }
         if(distancesquared(player.origin, self.origin) < (self.settings.detonation_distance * self.settings.detonation_distance)) {
-          trace = bullettrace(self.origin + (0, 0, self.radius), player.origin + (0, 0, self.radius), 1, self);
-          if(trace["fraction"] === 1 || isdefined(trace["entity"])) {
+          trace = bulletTrace(self.origin + (0, 0, self.radius), player.origin + (0, 0, self.radius), 1, self);
+          if(trace["fraction"] === 1 || isDefined(trace["entity"])) {
             self detonate();
           }
         }
@@ -461,37 +459,37 @@ function try_detonate() {
 }
 
 function raps_get_target_position() {
-  if(isdefined(self.settings.all_knowing)) {
-    if(isdefined(self.enemy)) {
+  if(isDefined(self.settings.all_knowing)) {
+    if(isDefined(self.enemy)) {
       target_pos = self.enemy.origin;
     }
   } else {
     target_pos = vehicle_ai::gettargetpos(vehicle_ai::getenemytarget());
   }
   enemy = self.enemy;
-  if(isdefined(target_pos)) {
+  if(isDefined(target_pos)) {
     target_pos_onnavmesh = getclosestpointonnavmesh(target_pos, self.settings.detonation_distance * 1.5, self.radius, 16777183);
   }
-  if(!isdefined(target_pos_onnavmesh)) {
-    if(isdefined(self.enemy)) {
+  if(!isDefined(target_pos_onnavmesh)) {
+    if(isDefined(self.enemy)) {
       self setpersonalthreatbias(self.enemy, -2000, 5);
     }
-    if(isdefined(self.current_pathto_pos)) {
+    if(isDefined(self.current_pathto_pos)) {
       target_pos_onnavmesh = getclosestpointonnavmesh(self.current_pathto_pos, self.settings.detonation_distance * 2, self.settings.detonation_distance * 1.5, 16777183);
     }
-    if(isdefined(target_pos_onnavmesh)) {
+    if(isDefined(target_pos_onnavmesh)) {
       return target_pos_onnavmesh;
     }
     return self.current_pathto_pos;
   }
-  if(isdefined(self.enemy)) {
+  if(isDefined(self.enemy)) {
     if(distancesquared(target_pos, target_pos_onnavmesh) > (self.settings.detonation_distance * 0.9) * (self.settings.detonation_distance * 0.9)) {
       self setpersonalthreatbias(self.enemy, -2000, 5);
     }
   }
-  if(isdefined(enemy) && isplayer(enemy)) {
+  if(isDefined(enemy) && isplayer(enemy)) {
     enemy_vel_offset = enemy getvelocity() * 0.5;
-    enemy_look_dir_offset = anglestoforward(enemy.angles);
+    enemy_look_dir_offset = anglesToForward(enemy.angles);
     if(distance2dsquared(self.origin, enemy.origin) > (500 * 500)) {
       enemy_look_dir_offset = enemy_look_dir_offset * 110;
     } else {
@@ -518,14 +516,14 @@ function path_update_interrupt() {
   self notify("clear_interrupt_threads");
   self endon("clear_interrupt_threads");
   wait(0.1);
-  while (true) {
-    if(isdefined(self.current_pathto_pos)) {
+  while(true) {
+    if(isDefined(self.current_pathto_pos)) {
       if(distance2dsquared(self.current_pathto_pos, self.goalpos) > (self.goalradius * self.goalradius)) {
         wait(0.5);
         self notify("near_goal");
       }
       targetpos = raps_get_target_position();
-      if(isdefined(targetpos)) {
+      if(isDefined(targetpos)) {
         if(distancesquared(self.origin, targetpos) > (400 * 400)) {
           repath_range = self.settings.repath_range * 2;
           wait(0.1);
@@ -533,17 +531,17 @@ function path_update_interrupt() {
           repath_range = self.settings.repath_range;
         }
         if(distance2dsquared(self.current_pathto_pos, targetpos) > (repath_range * repath_range)) {
-          if(isdefined(self.sndalias) && isdefined(self.sndalias["direction"])) {
-            self playsound(self.sndalias["direction"]);
+          if(isDefined(self.sndalias) && isDefined(self.sndalias["direction"])) {
+            self playSound(self.sndalias["direction"]);
           }
           self notify("near_goal");
         }
       }
-      if(isdefined(self.enemy) && isplayer(self.enemy) && !isdefined(self.slow_trigger)) {
-        forward = anglestoforward(self.enemy getplayerangles());
+      if(isDefined(self.enemy) && isplayer(self.enemy) && !isDefined(self.slow_trigger)) {
+        forward = anglesToForward(self.enemy getplayerangles());
         dir_to_raps = self.origin - self.enemy.origin;
         speedtouse = self.settings.defaultmovespeed;
-        if(isdefined(self._override_raps_combat_speed)) {
+        if(isDefined(self._override_raps_combat_speed)) {
           speedtouse = self._override_raps_combat_speed;
         }
         if(vectordot(forward, dir_to_raps) > 0) {
@@ -553,7 +551,7 @@ function path_update_interrupt() {
         }
       } else {
         speedtouse = self.settings.defaultmovespeed;
-        if(isdefined(self._override_raps_combat_speed)) {
+        if(isDefined(self._override_raps_combat_speed)) {
           speedtouse = self._override_raps_combat_speed;
         }
         self setspeed(speedtouse);
@@ -568,8 +566,8 @@ function path_update_interrupt() {
 function collision_fx(normal) {
   tilted = normal[2] < 0.6;
   fx_origin = self.origin - (normal * (tilted ? 28 : 10));
-  if(isdefined(self.sndalias["vehRapsCollision"])) {
-    self playsound(self.sndalias["vehRapsCollision"]);
+  if(isDefined(self.sndalias["vehRapsCollision"])) {
+    self playSound(self.sndalias["vehRapsCollision"]);
   }
 }
 
@@ -578,7 +576,7 @@ function nudge_collision() {
   self endon("change_state");
   self notify("end_nudge_collision");
   self endon("end_nudge_collision");
-  while (true) {
+  while(true) {
     self waittill("veh_collision", velocity, normal);
     ang_vel = self getangularvelocity() * 0.8;
     self setangularvelocity(ang_vel);
@@ -590,17 +588,17 @@ function nudge_collision() {
 }
 
 function raps_allowfriendlyfiredamage(einflictor, eattacker, smeansofdeath, weapon) {
-  if(isdefined(self.owner) && eattacker == self.owner && isdefined(self.settings.friendly_fire) && int(self.settings.friendly_fire) && !weapon.isemp) {
+  if(isDefined(self.owner) && eattacker == self.owner && isDefined(self.settings.friendly_fire) && int(self.settings.friendly_fire) && !weapon.isemp) {
     return true;
   }
-  if(isdefined(eattacker) && isdefined(eattacker.archetype) && isdefined(smeansofdeath) && eattacker.archetype == "raps" && smeansofdeath == "MOD_EXPLOSIVE") {
+  if(isDefined(eattacker) && isDefined(eattacker.archetype) && isDefined(smeansofdeath) && eattacker.archetype == "raps" && smeansofdeath == "MOD_EXPLOSIVE") {
     return true;
   }
   return false;
 }
 
 function detonate_sides(einflictor) {
-  forward_direction = anglestoforward(self.angles);
+  forward_direction = anglesToForward(self.angles);
   up_direction = anglestoup(self.angles);
   origin = self.origin + vectorscale(up_direction, 15);
   right_direction = vectorcross(forward_direction, up_direction);
@@ -612,11 +610,11 @@ function detonate_sides(einflictor) {
 }
 
 function raps_callback_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, damagefromunderneath, modelindex, partname, vsurfacenormal) {
-  if(self.drop_deploying === 1 && smeansofdeath == "MOD_TRIGGER_HURT" && (!isdefined(self.hurt_trigger_immune_end_time) || gettime() < self.hurt_trigger_immune_end_time)) {
+  if(self.drop_deploying === 1 && smeansofdeath == "MOD_TRIGGER_HURT" && (!isDefined(self.hurt_trigger_immune_end_time) || gettime() < self.hurt_trigger_immune_end_time)) {
     return 0;
   }
-  if(isdefined(eattacker) && isdefined(eattacker.archetype) && isdefined(smeansofdeath) && eattacker.archetype == "raps" && smeansofdeath == "MOD_EXPLOSIVE") {
-    if(eattacker != self && isdefined(vdir) && lengthsquared(vdir) > 0.1 && (!isdefined(eattacker) || eattacker.team === self.team) && (!isdefined(einflictor) || einflictor.team === self.team)) {
+  if(isDefined(eattacker) && isDefined(eattacker.archetype) && isDefined(smeansofdeath) && eattacker.archetype == "raps" && smeansofdeath == "MOD_EXPLOSIVE") {
+    if(eattacker != self && isDefined(vdir) && lengthsquared(vdir) > 0.1 && (!isDefined(eattacker) || eattacker.team === self.team) && (!isDefined(einflictor) || einflictor.team === self.team)) {
       self setvehvelocity(self.velocity + (vectornormalize(vdir) * 300));
       return 1;
     }
@@ -634,9 +632,9 @@ function raps_callback_damage(einflictor, eattacker, idamage, idflags, smeansofd
 
 function slow_raps_trigger() {
   self endon("death");
-  while (true) {
+  while(true) {
     self waittill("trigger", other);
-    if(isvehicle(other) && isdefined(other.archetype) && other.archetype == "raps") {
+    if(isvehicle(other) && isDefined(other.archetype) && other.archetype == "raps") {
       other thread slow_raps(self);
     }
     wait(0.1);
@@ -648,14 +646,14 @@ function slow_raps(trigger) {
   self endon("slow_raps");
   self endon("death");
   self.slow_trigger = 1;
-  if(isdefined(trigger.script_int)) {
-    if(isdefined(self._override_raps_combat_speed) && self._override_raps_combat_speed < trigger.script_int) {
+  if(isDefined(trigger.script_int)) {
+    if(isDefined(self._override_raps_combat_speed) && self._override_raps_combat_speed < trigger.script_int) {
       self setspeedimmediate(self._override_raps_combat_speed);
     } else {
       self setspeedimmediate(trigger.script_int, 200, 200);
     }
   } else {
-    if(isdefined(self._override_raps_combat_speed) && self._override_raps_combat_speed < (0.5 * self.settings.defaultmovespeed)) {
+    if(isDefined(self._override_raps_combat_speed) && self._override_raps_combat_speed < (0.5 * self.settings.defaultmovespeed)) {
       self setspeed(self._override_raps_combat_speed);
     } else {
       self setspeed(0.5 * self.settings.defaultmovespeed);
@@ -667,7 +665,7 @@ function slow_raps(trigger) {
 }
 
 function force_get_enemies() {
-  if(isdefined(level.raps_force_get_enemies)) {
+  if(isDefined(level.raps_force_get_enemies)) {
     return self[[level.raps_force_get_enemies]]();
   }
   foreach(player in level.players) {
@@ -690,7 +688,7 @@ function sndfunctions() {
   self.sndalias["vehRapsTargeting"] = "veh_raps_targeting";
   self.sndalias["vehRapsAlarm"] = "evt_raps_alarm";
   self.sndalias["vehRapsCollision"] = "veh_wasp_wall_imp";
-  if(isdefined(self.vehicletype) && (self.vehicletype == "spawner_enemy_zombie_vehicle_raps_suicide" || self.vehicletype == "spawner_zombietron_veh_meatball" || self.vehicletype == "spawner_zombietron_veh_meatball_med" || self.vehicletype == "spawner_zombietron_veh_meatball_small")) {
+  if(isDefined(self.vehicletype) && (self.vehicletype == "spawner_enemy_zombie_vehicle_raps_suicide" || self.vehicletype == "spawner_zombietron_veh_meatball" || self.vehicletype == "spawner_zombietron_veh_meatball_med" || self.vehicletype == "spawner_zombietron_veh_meatball_small")) {
     self.sndalias["inAir"] = "zmb_meatball_in_air";
     self.sndalias["land"] = "zmb_meatball_land";
     self.sndalias["spawn"] = undefined;
@@ -714,10 +712,10 @@ function sndfunctions() {
 
 function drivablerapsinair() {
   self endon("death");
-  while (true) {
+  while(true) {
     self waittill("veh_landed");
-    if(isdefined(self.sndalias["land"])) {
-      self playsound(self.sndalias["land"]);
+    if(isDefined(self.sndalias["land"])) {
+      self playSound(self.sndalias["land"]);
     }
   }
 }
@@ -727,14 +725,14 @@ function raps_in_air_audio() {
   if(!sessionmodeiscampaigngame() && !sessionmodeiszombiesgame()) {
     self waittill("veh_landed");
   }
-  while (true) {
+  while(true) {
     self waittill("veh_inair");
-    if(isdefined(self.sndalias["inAir"])) {
-      self playsound(self.sndalias["inAir"]);
+    if(isDefined(self.sndalias["inAir"])) {
+      self playSound(self.sndalias["inAir"]);
     }
     self waittill("veh_landed");
-    if(isdefined(self.sndalias["land"])) {
-      self playsound(self.sndalias["land"]);
+    if(isDefined(self.sndalias["land"])) {
+      self playSound(self.sndalias["land"]);
     }
   }
 }
@@ -742,14 +740,14 @@ function raps_in_air_audio() {
 function raps_spawn_audio() {
   self endon("death");
   wait(randomfloatrange(0.25, 1.5));
-  if(isdefined(self.sndalias["spawn"])) {
-    self playsound(self.sndalias["spawn"]);
+  if(isDefined(self.sndalias["spawn"])) {
+    self playSound(self.sndalias["spawn"]);
   }
 }
 
 function isdrivableplayervehicle() {
   str_vehicletype = self.vehicletype;
-  if(isdefined(str_vehicletype) && strendswith(str_vehicletype, "_player")) {
+  if(isDefined(str_vehicletype) && strendswith(str_vehicletype, "_player")) {
     return true;
   }
   return false;
@@ -757,7 +755,7 @@ function isdrivableplayervehicle() {
 
 function do_death_fx() {
   self vehicle::do_death_dynents();
-  if(isdefined(self.bsidedetonation)) {
+  if(isDefined(self.bsidedetonation)) {
     self clientfield::set("raps_side_deathfx", 1);
   } else {
     self clientfield::set("deathfx", 1);

@@ -15,11 +15,11 @@
 #namespace multilockap_guidance;
 
 function autoexec __init__sytem__() {
-  system::register("multilockap_guidance", & __init__, undefined, undefined);
+  system::register("multilockap_guidance", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_spawned( & on_player_spawned);
+  callback::on_spawned(&on_player_spawned);
   setdvar("scr_max_simLocks", 3);
 }
 
@@ -31,13 +31,13 @@ function on_player_spawned() {
 }
 
 function clearaptarget(weapon, whom) {
-  if(!isdefined(self.multilocklist)) {
+  if(!isDefined(self.multilocklist)) {
     self.multilocklist = [];
   }
-  if(isdefined(whom)) {
-    for (i = 0; i < self.multilocklist.size; i++) {
+  if(isDefined(whom)) {
+    for(i = 0; i < self.multilocklist.size; i++) {
       if(whom.aptarget == self.multilocklist[i].aptarget) {
-        if(isdefined(self.multilocklist[i].aptarget)) {
+        if(isDefined(self.multilocklist[i].aptarget)) {
           self.multilocklist[i].aptarget notify("missile_unlocked");
         }
         self notify("stop_sound" + whom.apsoundid);
@@ -47,7 +47,7 @@ function clearaptarget(weapon, whom) {
       }
     }
   } else {
-    for (i = 0; i < self.multilocklist.size; i++) {
+    for(i = 0; i < self.multilocklist.size; i++) {
       self.multilocklist[i].aptarget notify("missile_unlocked");
       self notify("stop_sound" + self.multilocklist[i].apsoundid);
     }
@@ -56,11 +56,11 @@ function clearaptarget(weapon, whom) {
   if(self.multilocklist.size == 0) {
     self stoprumble("stinger_lock_rumble");
     self weaponlockremoveslot(-1);
-    if(isdefined(weapon)) {
-      if(isdefined(weapon.lockonseekersearchsound)) {
+    if(isDefined(weapon)) {
+      if(isDefined(weapon.lockonseekersearchsound)) {
         self stoplocalsound(weapon.lockonseekersearchsound);
       }
-      if(isdefined(weapon.lockonseekerlockedsound)) {
+      if(isDefined(weapon.lockonseekerlockedsound)) {
         self stoplocalsound(weapon.lockonseekerlockedsound);
       }
     }
@@ -71,11 +71,11 @@ function clearaptarget(weapon, whom) {
 function apfirednotify() {
   self endon("disconnect");
   self endon("death");
-  while (true) {
+  while(true) {
     self waittill("missile_fire", missile, weapon);
     if(weapon.lockontype == "AP Multi") {
       foreach(target in self.multilocklist) {
-        if(isdefined(target.aptarget) && target.aplockfinalized) {
+        if(isDefined(target.aptarget) && target.aplockfinalized) {
           target.aptarget notify("stinger_fired_at_me", missile, weapon, self);
         }
       }
@@ -86,11 +86,11 @@ function apfirednotify() {
 function aptoggleloop() {
   self endon("disconnect");
   self endon("death");
-  for (;;) {
+  for(;;) {
     self waittill("weapon_change", weapon);
-    while (weapon.lockontype == "AP Multi") {
+    while(weapon.lockontype == "AP Multi") {
       abort = 0;
-      while (!self playerads() == 1) {
+      while(!self playerads() == 1) {
         wait(0.05);
         currentweapon = self getcurrentweapon();
         if(currentweapon.lockontype != "AP Multi") {
@@ -102,7 +102,7 @@ function aptoggleloop() {
         break;
       }
       self thread aplockloop(weapon);
-      while (self playerads() == 1) {
+      while(self playerads() == 1) {
         wait(0.05);
       }
       self notify("ap_off");
@@ -118,7 +118,7 @@ function aplockloop(weapon) {
   self endon("ap_off");
   locklength = self getlockonspeed();
   self.multilocklist = [];
-  for (;;) {
+  for(;;) {
     wait(0.05);
     do {
       done = 1;
@@ -132,11 +132,11 @@ function aplockloop(weapon) {
         }
       }
     }
-    while (!done);
+    while(!done);
     inlockingstate = 0;
     do {
       done = 1;
-      for (i = 0; i < self.multilocklist.size; i++) {
+      for(i = 0; i < self.multilocklist.size; i++) {
         target = self.multilocklist[i];
         if(target.aplocking) {
           if(!isstillvalidtarget(weapon, target.aptarget)) {
@@ -149,7 +149,7 @@ function aplockloop(weapon) {
           if(timepassed < locklength) {
             continue;
           }
-          assert(isdefined(target.aptarget));
+          assert(isDefined(target.aptarget));
           target.aplockfinalized = 1;
           target.aplocking = 0;
           target.aplockpending = 0;
@@ -159,11 +159,11 @@ function aplockloop(weapon) {
         }
       }
     }
-    while (!done);
+    while(!done);
     if(!inlockingstate) {
       do {
         done = 1;
-        for (i = 0; i < self.multilocklist.size; i++) {
+        for(i = 0; i < self.multilocklist.size; i++) {
           target = self.multilocklist[i];
           if(target.aplockpending) {
             if(!isstillvalidtarget(weapon, target.aptarget)) {
@@ -181,17 +181,17 @@ function aplockloop(weapon) {
           }
         }
       }
-      while (!done);
+      while(!done);
     }
     if(self.multilocklist.size >= getdvarint("scr_max_simLocks") || self.multilocklist.size >= self getweaponammoclip(weapon)) {
       continue;
     }
     besttarget = self getbesttarget(weapon);
-    if(!isdefined(besttarget) && self.multilocklist.size == 0) {
+    if(!isDefined(besttarget) && self.multilocklist.size == 0) {
       self destroylockoncanceledmessage();
       continue;
     }
-    if(isdefined(besttarget) && self.multilocklist.size < getdvarint("scr_max_simLocks") && self.multilocklist.size < self getweaponammoclip(weapon)) {
+    if(isDefined(besttarget) && self.multilocklist.size < getdvarint("scr_max_simLocks") && self.multilocklist.size < self getweaponammoclip(weapon)) {
       self weaponlockstart(besttarget.aptarget, self.multilocklist.size);
       self.multilocklist[self.multilocklist.size] = besttarget;
     }
@@ -199,13 +199,13 @@ function aplockloop(weapon) {
 }
 
 function destroylockoncanceledmessage() {
-  if(isdefined(self.lockoncanceledmessage)) {
+  if(isDefined(self.lockoncanceledmessage)) {
     self.lockoncanceledmessage destroy();
   }
 }
 
 function displaylockoncanceledmessage() {
-  if(isdefined(self.lockoncanceledmessage)) {
+  if(isDefined(self.lockoncanceledmessage)) {
     return;
   }
   self.lockoncanceledmessage = newclienthudelem(self);
@@ -231,9 +231,9 @@ function getbesttarget(weapon) {
   targetsall = arraycombine(targetsall, playertargets, 0, 0);
   targetsall = arraycombine(targetsall, vehicletargets, 0, 0);
   targetsvalid = [];
-  for (idx = 0; idx < targetsall.size; idx++) {
+  for(idx = 0; idx < targetsall.size; idx++) {
     if(level.teambased) {
-      if(isdefined(targetsall[idx].team) && targetsall[idx].team != self.team) {
+      if(isDefined(targetsall[idx].team) && targetsall[idx].team != self.team) {
         if(self insideapreticlenolock(targetsall[idx])) {
           if(self locksighttest(targetsall[idx])) {
             targetsvalid[targetsvalid.size] = targetsall[idx];
@@ -243,7 +243,7 @@ function getbesttarget(weapon) {
       continue;
     }
     if(self insideapreticlenolock(targetsall[idx])) {
-      if(isdefined(targetsall[idx].owner) && self != targetsall[idx].owner) {
+      if(isDefined(targetsall[idx].owner) && self != targetsall[idx].owner) {
         if(self locksighttest(targetsall[idx])) {
           targetsvalid[targetsvalid.size] = targetsall[idx];
         }
@@ -253,13 +253,13 @@ function getbesttarget(weapon) {
   if(targetsvalid.size == 0) {
     return undefined;
   }
-  playerforward = anglestoforward(self getplayerangles());
+  playerforward = anglesToForward(self getplayerangles());
   dots = [];
-  for (i = 0; i < targetsvalid.size; i++) {
-    newitem = spawnstruct();
+  for(i = 0; i < targetsvalid.size; i++) {
+    newitem = spawnStruct();
     newitem.index = i;
     newitem.dot = vectordot(playerforward, vectornormalize(targetsvalid[i].origin - self.origin));
-    array::insertion_sort(dots, & targetinsertionsortcompare, newitem);
+    array::insertion_sort(dots, &targetinsertionsortcompare, newitem);
   }
   index = 0;
   foreach(dot in dots) {
@@ -272,7 +272,7 @@ function getbesttarget(weapon) {
     if(found) {
       continue;
     }
-    newentry = spawnstruct();
+    newentry = spawnStruct();
     newentry.aptarget = targetsvalid[dot.index];
     newentry.aplockstarttime = gettime();
     newentry.aplockpending = 1;
@@ -306,7 +306,7 @@ function insideapreticlelocked(target) {
 }
 
 function isstillvalidtarget(weapon, ent) {
-  if(!isdefined(ent)) {
+  if(!isDefined(ent)) {
     return false;
   }
   if(!insideapreticlelocked(ent)) {
@@ -326,35 +326,35 @@ function seekersound(alias, looping, id) {
   self endon("stop_sound" + id);
   self endon("disconnect");
   self endon("death");
-  if(isdefined(alias)) {
+  if(isDefined(alias)) {
     self playrumbleonentity("stinger_lock_rumble");
     time = soundgetplaybacktime(alias) * 0.001;
     do {
       self playlocalsound(alias);
       wait(time);
     }
-    while (looping);
+    while(looping);
     self stoprumble("stinger_lock_rumble");
   }
 }
 
 function locksighttest(target) {
-  eyepos = self geteye();
-  if(!isdefined(target)) {
+  eyepos = self getEye();
+  if(!isDefined(target)) {
     return false;
   }
   if(!isalive(target)) {
     return false;
   }
   pos = target getshootatpos();
-  if(isdefined(pos)) {
+  if(isDefined(pos)) {
     passed = bullettracepassed(eyepos, pos, 0, target, undefined, 1, 1);
     if(passed) {
       return true;
     }
   }
   pos = target getcentroid();
-  if(isdefined(pos)) {
+  if(isDefined(pos)) {
     passed = bullettracepassed(eyepos, pos, 0, target, undefined, 1, 1);
     if(passed) {
       return true;

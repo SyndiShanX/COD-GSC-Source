@@ -20,7 +20,7 @@ spawned(localclientnum) {
       continue;
     }
 
-    self.claymorelaserfxid = playfxontag(localclientnum, level._effect["fx_claymore_laser"], self, "tag_fx");
+    self.claymorelaserfxid = playFXOnTag(localclientnum, level._effect["fx_claymore_laser"], self, "tag_fx");
     self waittill("stunned");
     stopfx(localclientnum, self.claymorelaserfxid);
   }

@@ -50,7 +50,6 @@ class czmtrain {
   var origin;
   var angles;
 
-
   constructor() {
     m_vh_train = undefined;
     m_s_trigger = undefined;
@@ -70,10 +69,10 @@ class czmtrain {
     a_names = array("tag_enter_back_top", "tag_enter_front_top", "tag_enter_left_top", "tag_enter_right_top");
     a_anims = array("ai_zombie_zod_train_win_trav_from_roof_b", "ai_zombie_zod_train_win_trav_from_roof_f", "ai_zombie_zod_train_win_trav_from_roof_l", "ai_zombie_zod_train_win_trav_from_roof_r");
     assert(a_names.size == a_anims.size);
-    for (i = 0; i < a_names.size; i++) {
+    for(i = 0; i < a_names.size; i++) {
       str_name = a_names[i];
       str_anim = a_anims[i];
-      m_a_jumptags[str_name] = spawnstruct();
+      m_a_jumptags[str_name] = spawnStruct();
       s_entrance = m_a_jumptags[str_name];
       s_entrance.str_tag = str_name;
       s_entrance.str_anim = str_anim;
@@ -81,13 +80,11 @@ class czmtrain {
     }
   }
 
-
   destructor() {}
 
-
   function function_876255() {
-    a_e_train_maps = getentarray("map_train", "targetname");
-    while (true) {
+    a_e_train_maps = getEntArray("map_train", "targetname");
+    while(true) {
       str_station = get_current_station();
       switch (str_station) {
         case "slums": {
@@ -114,11 +111,9 @@ class czmtrain {
     }
   }
 
-
   function get_origin() {
     return m_vh_train.origin;
   }
-
 
   function get_available_jumptag() {
     a_valid_tags = [];
@@ -126,7 +121,7 @@ class czmtrain {
       if(tag.occupied) {
         continue;
       }
-      if(!isdefined(a_valid_tags)) {
+      if(!isDefined(a_valid_tags)) {
         a_valid_tags = [];
       } else if(!isarray(a_valid_tags)) {
         a_valid_tags = array(a_valid_tags);
@@ -140,7 +135,7 @@ class czmtrain {
     if(n_roll < 80 && a_players.size > 0) {
       foreach(s_tag in a_valid_tags) {
         if(any_player_facing_tag(s_tag.str_tag)) {
-          if(!isdefined(a_forward_tags)) {
+          if(!isDefined(a_forward_tags)) {
             a_forward_tags = [];
           } else if(!isarray(a_forward_tags)) {
             a_forward_tags = array(a_forward_tags);
@@ -158,11 +153,10 @@ class czmtrain {
     return array::random(a_valid_tags);
   }
 
-
   function private any_player_facing_tag(str_tag) {
     foreach(e_player in level.players) {
       v_pos = m_vh_train gettagorigin(str_tag);
-      v_fwd = anglestoforward(e_player.angles);
+      v_fwd = anglesToForward(e_player.angles);
       v_to_tag = vectornormalize(v_pos - e_player.origin);
       if(vectordot(v_fwd, v_to_tag) > 0) {
         return true;
@@ -171,26 +165,21 @@ class czmtrain {
     return false;
   }
 
-
   function is_offline() {
     return self flag::get("offline");
   }
-
 
   function is_cooling_down() {
     return self flag::get("cooldown");
   }
 
-
   function function_3e62f527() {
     return var_9e0dc993;
   }
 
-
   function is_moving() {
     return self flag::get("moving");
   }
-
 
   function get_junction_origin() {
     v_origin = (0, 0, 0);
@@ -200,7 +189,6 @@ class czmtrain {
     v_origin = v_origin / float(m_a_s_stations.size);
     return v_origin;
   }
-
 
   function jump_into_train(ai, str_tag) {
     self endon("death");
@@ -220,26 +208,21 @@ class czmtrain {
     }
   }
 
-
   function mark_jumper_time() {
     m_n_last_jumper_time = gettime();
   }
-
 
   function get_time_since_last_jumper() {
     return (float(gettime() - m_n_last_jumper_time)) / 1000;
   }
 
-
   function get_zombies_locked_in() {
     return m_a_zombies_locked_in;
   }
 
-
   function locked_in_list_remove_undefined() {
     m_a_zombies_locked_in = array::remove_undefined(m_a_zombies_locked_in);
   }
-
 
   function remove_zombie_locked_in(ai_zombie) {
     ai_zombie.locked_in_train = 0;
@@ -247,13 +230,11 @@ class czmtrain {
     ai_zombie notify("released_from_train");
   }
 
-
   function add_zombie_locked_in(ai_zombie) {
     ai_zombie.locked_in_train = 1;
     array::add(m_a_zombies_locked_in, ai_zombie, 0);
     thread watch_zombie_fall_off(ai_zombie);
   }
-
 
   function get_players_on_train(b_valid_targets_only = 0) {
     a_players = [];
@@ -262,7 +243,7 @@ class czmtrain {
         continue;
       }
       if(e_player.on_train) {
-        if(!isdefined(a_players)) {
+        if(!isDefined(a_players)) {
           a_players = [];
         } else if(!isarray(a_players)) {
           a_players = array(a_players);
@@ -273,40 +254,35 @@ class czmtrain {
     return a_players;
   }
 
-
   function is_touching_train_volume(ent) {
     return ent istouching(m_e_volume);
   }
-
 
   function watch_zombie_fall_off(ai) {
     ai endon("death");
     ai endon("released_from_train");
     zm_net::network_safe_init("train_fall_check", 1);
-    while (self zm_net::network_choke_action("train_fall_check", & is_touching_train, ai)) {
+    while(self zm_net::network_choke_action("train_fall_check", &is_touching_train, ai)) {
       wait(2);
     }
     remove_zombie_locked_in(ai);
   }
 
-
   function is_touching_train(e_ent) {
     return e_ent istouching(m_e_volume);
   }
 
-
   function watch_players_on_train() {
     foreach(e_player in level.players) {
-      assert(isdefined(e_player.on_train));
+      assert(isDefined(e_player.on_train));
     }
-    while (true) {
+    while(true) {
       foreach(e_player in level.players) {
         e_player.on_train = is_touching_train(e_player);
       }
       wait(0.5);
     }
   }
-
 
   function function_ccd778ab() {
     foreach(e_player in level.players) {
@@ -316,7 +292,6 @@ class czmtrain {
     }
     return true;
   }
-
 
   function function_ca899bfc() {
     if(m_str_destination == "slums") {
@@ -339,7 +314,6 @@ class czmtrain {
     }
   }
 
-
   function function_de6e1f4f(m_t_switch) {
     m_vh_train endon("hash_51689c0f");
     if(!flag::get("switches_enabled")) {
@@ -350,9 +324,8 @@ class czmtrain {
     m_t_switch.player_used = 1;
   }
 
-
   function run_switch() {
-    while (true) {
+    while(true) {
       function_de6e1f4f(m_t_switch);
       str_prev_dest = m_str_destination;
       if(m_t_switch.player_used) {
@@ -379,17 +352,15 @@ class czmtrain {
     }
   }
 
-
   function send_train() {
-    if(isdefined(m_s_trigger)) {
+    if(isDefined(m_s_trigger)) {
       m_b_free = 1;
       m_s_trigger notify("trigger");
     }
   }
 
-
   function update_use_trigger() {
-    if(!isdefined(m_s_trigger)) {
+    if(!isDefined(m_s_trigger)) {
       return;
     }
     if(m_b_free) {
@@ -407,12 +378,11 @@ class czmtrain {
     }
   }
 
-
   function recalc_zombies_locked_in_train() {
     zombies = getaiteamarray(level.zombie_team);
     n_counter = 0;
     foreach(zombie in zombies) {
-      if(!isdefined(zombie) || !isalive(zombie)) {
+      if(!isDefined(zombie) || !isalive(zombie)) {
         continue;
       }
       if(is_touching_train_volume(zombie)) {
@@ -425,7 +395,6 @@ class czmtrain {
     }
   }
 
-
   function function_285f0f0b() {
     if(var_901503d0) {
       self scene::play("p7_fxanim_zm_zod_train_door_rt_close_bundle", self);
@@ -436,7 +405,6 @@ class czmtrain {
       var_619deb2d = 0;
     }
   }
-
 
   function function_9211290c() {
     foreach(e_door in m_a_mdl_doors) {
@@ -456,7 +424,6 @@ class czmtrain {
       e_door.e_clip linkto(m_vh_train);
     }
   }
-
 
   function close_doors() {
     m_vh_train function_285f0f0b();
@@ -479,7 +446,6 @@ class czmtrain {
     thread recalc_zombies_locked_in_train();
   }
 
-
   function function_59722edc(str_side) {
     if(str_side == "right") {
       if(!var_901503d0) {
@@ -492,17 +458,16 @@ class czmtrain {
     }
   }
 
-
   function open_doors(str_side = get_open_side()) {
     m_vh_train function_59722edc(str_side);
     var_7631d55c = vectorscale((0, 0, 1), 300);
     a_doors_moved = [];
     foreach(e_door in m_a_mdl_doors) {
-      if(!isdefined(str_side) || (str_side == "left" && e_door.script_string == "train_rear_door") || (str_side == "right" && e_door.script_string == "train_front_door")) {
+      if(!isDefined(str_side) || (str_side == "left" && e_door.script_string == "train_rear_door") || (str_side == "right" && e_door.script_string == "train_front_door")) {
         v_pos = get_door_open_pos(e_door);
         e_door unlink();
         e_door moveto(v_pos, 0.3);
-        if(!isdefined(a_doors_moved)) {
+        if(!isDefined(a_doors_moved)) {
           a_doors_moved = [];
         } else if(!isarray(a_doors_moved)) {
           a_doors_moved = array(a_doors_moved);
@@ -524,15 +489,14 @@ class czmtrain {
       e_door linkto(m_vh_train);
       e_door.e_clip linkto(m_vh_train);
     }
-    for (i = m_a_zombies_locked_in.size - 1; i >= 0; i--) {
+    for(i = m_a_zombies_locked_in.size - 1; i >= 0; i--) {
       ai = m_a_zombies_locked_in[i];
-      if(isdefined(ai)) {
+      if(isDefined(ai)) {
         remove_zombie_locked_in(ai);
       }
     }
     m_a_zombies_locked_in = [];
   }
-
 
   function is_door_open(e_door) {
     str_side = get_open_side();
@@ -541,7 +505,6 @@ class czmtrain {
     }
     return 0;
   }
-
 
   function get_open_side() {
     str_side = m_a_s_stations[m_str_station].door_side;
@@ -556,29 +519,26 @@ class czmtrain {
     return str_side;
   }
 
-
   function get_door_closed_pos(e_door) {
     return e_door.script_origin.origin;
   }
 
-
   function get_door_open_pos(e_door) {
     if(e_door.script_string == "front_door") {
-      return e_door.script_origin.origin - (anglestoforward(e_door.script_origin.angles) * 100);
+      return e_door.script_origin.origin - (anglesToForward(e_door.script_origin.angles) * 100);
     }
-    return e_door.script_origin.origin + (anglestoforward(e_door.script_origin.angles) * 100);
+    return e_door.script_origin.origin + (anglesToForward(e_door.script_origin.angles) * 100);
   }
-
 
   function run_gate(e_gate, a_jump_nodes) {
     nd_start = m_a_s_stations[e_gate.script_string].start_node;
     v_open = e_gate.origin;
-    v_closed = v_open + (anglestoforward(nd_start.angles) * 96);
+    v_closed = v_open + (anglesToForward(nd_start.angles) * 96);
     if(m_a_s_stations[e_gate.script_string].door_side == "right") {
-      v_closed = v_open - (anglestoforward(nd_start.angles) * 96);
+      v_closed = v_open - (anglesToForward(nd_start.angles) * 96);
     }
     b_open = 1;
-    while (true) {
+    while(true) {
       if(b_open) {
         var_9e0dc993 = 0;
         e_gate moveto(v_closed, 1);
@@ -605,19 +565,18 @@ class czmtrain {
     }
   }
 
-
   function run_callbox(str_callbox) {
-    assert(isdefined(m_str_station));
+    assert(isDefined(m_str_station));
     e_lever = m_a_s_stations[str_callbox].callbox;
     t_use = zm_zod_util::spawn_trigger_radius(e_lever.origin, 60, 1);
     thread run_callbox_hintstring(str_callbox, t_use, getent(e_lever.target, "targetname"));
-    while (true) {
+    while(true) {
       t_use waittill("trigger", e_who);
       if(!e_who zm_score::can_player_purchase(500)) {
         e_who zm_audio::create_and_play_dialog("general", "transport_deny");
         continue;
       }
-      if(m_str_station != str_callbox && isdefined(m_s_trigger)) {
+      if(m_str_station != str_callbox && isDefined(m_s_trigger)) {
         m_b_free = 0;
         if(str_callbox != m_str_destination) {
           level flag::set("callbox");
@@ -635,9 +594,8 @@ class czmtrain {
     }
   }
 
-
   function run_callbox_hintstring(str_callbox, t_use, e_light) {
-    while (true) {
+    while(true) {
       if(m_str_station == str_callbox) {
         e_light clientfield::set("train_callbox_light", 0);
         t_use zm_zod_util::set_unitrigger_hint_string(&"");
@@ -666,15 +624,13 @@ class czmtrain {
     }
   }
 
-
   function function_b0af9dac() {
-    while (true) {
+    while(true) {
       level waittill("between_round_over");
       level.var_33c4ee76 = 0;
       wait(0.05);
     }
   }
-
 
   function function_955e57a7() {
     level flag::wait_till("ee_boss_defeated");
@@ -682,7 +638,6 @@ class czmtrain {
     self flag::clear("offline");
     update_use_trigger();
   }
-
 
   function function_312bb6e1() {
     level endon("hash_12be7dbb");
@@ -699,7 +654,6 @@ class czmtrain {
     self flag::clear("offline");
     wait(0.05);
   }
-
 
   function function_a377ba46() {
     if(flag::get("moving")) {
@@ -729,7 +683,6 @@ class czmtrain {
     }
   }
 
-
   function main() {
     a_path_names = getarraykeys(m_a_s_stations);
     a_path_names = array::randomize(a_path_names);
@@ -745,14 +698,14 @@ class czmtrain {
     wait(1);
     v_front = m_vh_train gettagorigin("tag_button_front");
     m_s_trigger = zm_zod_util::spawn_trigger_radius(v_front, 60, 1);
-    m_vh_train playloopsound("evt_train_idle_loop", 4);
+    m_vh_train playLoopSound("evt_train_idle_loop", 4);
     open_doors();
     thread run_switch();
-    while (true) {
+    while(true) {
       update_use_trigger();
       enable_train_switches(1);
       level thread function_b0af9dac();
-      while (true) {
+      while(true) {
         m_vh_train clientfield::set("train_switch_light", 1);
         m_s_trigger waittill("trigger", e_who);
         m_vh_train clientfield::set("train_switch_light", 0);
@@ -776,8 +729,8 @@ class czmtrain {
       zm_unitrigger::unregister_unitrigger(m_s_trigger);
       m_s_trigger = undefined;
       close_doors();
-      m_vh_train playsound("evt_train_start");
-      m_vh_train playloopsound("evt_train_loop", 4);
+      m_vh_train playSound("evt_train_start");
+      m_vh_train playLoopSound("evt_train_loop", 4);
       var_8d722bd4 = function_ccd778ab();
       if(var_8d722bd4 || b_first_run) {
         m_vh_train setspeed(32);
@@ -786,7 +739,7 @@ class czmtrain {
         thread function_a9acf9e2();
       }
       move();
-      m_vh_train playloopsound("evt_train_idle_loop", 4);
+      m_vh_train playLoopSound("evt_train_idle_loop", 4);
       a_riders = get_players_on_train(0);
       if(a_riders.size > 0) {
         level flag::set(m_a_s_stations[m_str_station].str_zone_flag);
@@ -829,9 +782,8 @@ class czmtrain {
     }
   }
 
-
   function function_6f6ab7a4() {
-    for (i = 0; i < m_a_mdl_doors.size; i++) {
+    for(i = 0; i < m_a_mdl_doors.size; i++) {
       e_door = m_a_mdl_doors[i];
       e_door hide();
       if(e_door.script_string == "train_front_door") {
@@ -839,7 +791,7 @@ class czmtrain {
       } else if(e_door.script_string == "train_rear_door") {
         e_door.e_clip = getent("train_rear_clip", "script_string");
       }
-      if(isdefined(e_door.e_clip)) {
+      if(isDefined(e_door.e_clip)) {
         e_origin = spawn("script_origin", e_door.e_clip.origin);
         e_origin.angles = m_vh_train.angles;
         e_origin linkto(m_vh_train);
@@ -848,9 +800,8 @@ class czmtrain {
     }
   }
 
-
   function initialize(e_train) {
-    assert(isdefined(e_train));
+    assert(isDefined(e_train));
     m_vh_train = e_train;
     m_vh_train.var_619deb2d = 0;
     m_vh_train.var_901503d0 = 0;
@@ -873,22 +824,22 @@ class czmtrain {
     initialize_stations();
     thread debug_draw_paths();
     thread debug_draw_doors();
-    a_e_children = getentarray(m_vh_train.target, "targetname");
+    a_e_children = getEntArray(m_vh_train.target, "targetname");
     foreach(e_ent in a_e_children) {
-      if(isdefined(e_ent.script_string)) {
+      if(isDefined(e_ent.script_string)) {
         if(e_ent.script_string == "train_volume") {
-          if(!isdefined(m_e_volume)) {
-            assert(!isdefined(m_e_volume));
+          if(!isDefined(m_e_volume)) {
+            assert(!isDefined(m_e_volume));
             e_ent enablelinkto();
             m_e_volume = e_ent;
           }
         } else if(e_ent.script_string == "train_rear_door" || e_ent.script_string == "train_front_door") {
-          if(!isdefined(e_ent.script_origin)) {
+          if(!isDefined(e_ent.script_origin)) {
             e_ent.script_origin = spawn("script_origin", e_ent.origin);
             e_ent.script_origin.angles = m_vh_train.angles;
             e_ent.script_origin linkto(m_vh_train);
           }
-          if(!isdefined(m_a_mdl_doors)) {
+          if(!isDefined(m_a_mdl_doors)) {
             m_a_mdl_doors = [];
           } else if(!isarray(m_a_mdl_doors)) {
             m_a_mdl_doors = array(m_a_mdl_doors);
@@ -901,7 +852,7 @@ class czmtrain {
       iprintlnbold(("" + zm_zod_util::vec_to_string(e_ent.origin)) + "");
     }
     function_6f6ab7a4();
-    if(!isdefined(m_e_volume)) {
+    if(!isDefined(m_e_volume)) {
       assertmsg(("" + zm_zod_util::vec_to_string(m_vh_train.origin)) + "");
     }
     m_vh_train function_a8e2d7ff();
@@ -914,17 +865,17 @@ class czmtrain {
     m_t_switch linkto(m_vh_train);
     m_t_switch.player_used = 0;
     thread main();
-    a_callboxes = getentarray("train_call_lever", "targetname");
+    a_callboxes = getEntArray("train_call_lever", "targetname");
     foreach(e_callbox in a_callboxes) {
       thread run_callbox(e_callbox.script_string);
     }
-    a_gates = getentarray("train_gate", "targetname");
+    a_gates = getEntArray("train_gate", "targetname");
     foreach(gate in a_gates) {
       station = m_a_s_stations[gate.script_string];
-      if(!isdefined(station.gates)) {
+      if(!isDefined(station.gates)) {
         station.gates = [];
       }
-      if(!isdefined(station.gates)) {
+      if(!isDefined(station.gates)) {
         station.gates = [];
       } else if(!isarray(station.gates)) {
         station.gates = array(station.gates);
@@ -935,13 +886,12 @@ class czmtrain {
     }
   }
 
-
   function initialize_stations() {
     m_a_s_stations = [];
     a_path_nodes = getnodearray("train_pathnode", "targetname");
     foreach(nd in a_path_nodes) {
       str_station = nd.script_string;
-      m_a_s_stations[str_station] = spawnstruct();
+      m_a_s_stations[str_station] = spawnStruct();
       m_a_s_stations[str_station].path_node = nd;
       m_a_s_stations[str_station].origin = nd.origin;
       m_a_s_stations[str_station].angles = nd.angles;
@@ -974,23 +924,23 @@ class czmtrain {
     m_a_s_stations["canal"].start_node = getvehiclenode("c1", "targetname");
     level.var_98f27ad = array("vox_tanc_board_canal_0", "vox_tanc_board_slums_0", "vox_tanc_board_theater_0", "vox_tanc_depart_canal_0", "vox_tanc_depart_slums_0", "vox_tanc_depart_theater_0", "vox_tanc_divert_canal_0", "vox_tanc_divert_slums_0", "vox_tanc_divert_theater_0");
     a_keys = getarraykeys(m_a_s_stations);
-    for (i = 0; i < a_keys.size; i++) {
+    for(i = 0; i < a_keys.size; i++) {
       str_key = a_keys[i];
       nd_next = m_a_s_stations[str_key].start_node;
       nd_prev = undefined;
       m_a_s_stations[str_key].nodes = [];
-      while (isdefined(nd_next)) {
-        if(isdefined(nd_prev)) {
+      while(isDefined(nd_next)) {
+        if(isDefined(nd_prev)) {
           nd_next.target2 = nd_prev.targetname;
         }
-        if(!isdefined(m_a_s_stations[str_key].nodes)) {
+        if(!isDefined(m_a_s_stations[str_key].nodes)) {
           m_a_s_stations[str_key].nodes = [];
         } else if(!isarray(m_a_s_stations[str_key].nodes)) {
           m_a_s_stations[str_key].nodes = array(m_a_s_stations[str_key].nodes);
         }
         m_a_s_stations[str_key].nodes[m_a_s_stations[str_key].nodes.size] = nd_next;
         nd_prev = nd_next;
-        if(!isdefined(nd_next.target)) {
+        if(!isDefined(nd_next.target)) {
           break;
         } else {
           nd_next = getvehiclenode(nd_next.target, "targetname");
@@ -1000,20 +950,18 @@ class czmtrain {
       m_a_s_stations[str_key].junction_node = m_a_s_stations[str_key].nodes[num_nodes - 1];
       m_a_s_stations[str_key].path_toward_junction = 1;
     }
-    a_callboxes = getentarray("train_call_lever", "targetname");
+    a_callboxes = getEntArray("train_call_lever", "targetname");
     foreach(e_callbox in a_callboxes) {
       e_station_closest = arraygetclosest(e_callbox.origin, m_a_s_stations);
-      assert(isdefined(e_station_closest));
+      assert(isDefined(e_station_closest));
       e_callbox.script_string = e_station_closest.station_id;
       e_station_closest.callbox = e_callbox;
     }
   }
 
-
   function function_dda9a9d2() {
     m_b_facing_forward = !m_b_facing_forward;
   }
-
 
   function function_a9acf9e2() {
     var_e19f73fe = [];
@@ -1026,7 +974,7 @@ class czmtrain {
           continue;
         }
         e_player.train_board_time = gettime();
-        if(!isdefined(var_e19f73fe)) {
+        if(!isDefined(var_e19f73fe)) {
           var_e19f73fe = [];
         } else if(!isarray(var_e19f73fe)) {
           var_e19f73fe = array(var_e19f73fe);
@@ -1044,10 +992,10 @@ class czmtrain {
       if(!zm_utility::is_player_valid(e_player, 1, 0)) {
         continue;
       }
-      if(!isdefined(e_player.train_board_time)) {
+      if(!isDefined(e_player.train_board_time)) {
         continue;
       }
-      if(isdefined(e_player.last_bleed_out_time) && e_player.last_bleed_out_time > e_player.train_board_time) {
+      if(isDefined(e_player.last_bleed_out_time) && e_player.last_bleed_out_time > e_player.train_board_time) {
         continue;
       }
       if(!is_touching_train(e_player)) {
@@ -1079,12 +1027,11 @@ class czmtrain {
           }
           var_10b9b744++;
         }
-        while (!fatal && !function_eb9ee200(spawnpos));
+        while(!fatal && !function_eb9ee200(spawnpos));
         e_player setorigin(spawnpos);
       }
     }
   }
-
 
   function function_eb9ee200(spawnpos) {
     foreach(e_player in level.players) {
@@ -1103,7 +1050,6 @@ class czmtrain {
     }
     return true;
   }
-
 
   function move() {
     m_b_incoming = 0;
@@ -1130,7 +1076,7 @@ class czmtrain {
     m_vh_train recalcsplinepaths();
     m_vh_train attachpath(m_a_s_stations[str_start].start_node);
     m_vh_train startpath();
-    while (distance2dsquared(m_vh_train.origin, m_a_s_stations[str_start].junction_node.origin) > 122500) {
+    while(distance2dsquared(m_vh_train.origin, m_a_s_stations[str_start].junction_node.origin) > 122500) {
       util::wait_network_frame();
     }
     enable_train_switches(0);
@@ -1154,25 +1100,23 @@ class czmtrain {
     m_vh_train playsoundontag(level.var_98f27ad[sndnum - 1], "tag_support_arm_01");
   }
 
-
   function function_7eb2583b() {
     timeout = 15;
-    while (timeout > 0 && self flag::get("moving")) {
+    while(timeout > 0 && self flag::get("moving")) {
       timeout = timeout - 1;
       wait(1);
     }
   }
 
-
   function watch_node_parameters() {
     m_vh_train endon("docked_in_station");
-    while (true) {
+    while(true) {
       m_vh_train waittill("reached_node", nd);
-      if(isdefined(nd.script_parameters)) {
+      if(isDefined(nd.script_parameters)) {
         switch (nd.script_parameters) {
           case "arrival_brakes": {
             if(m_b_incoming) {
-              m_vh_train playsound("evt_train_stop");
+              m_vh_train playSound("evt_train_stop");
               m_vh_train stoploopsound(3);
             }
             break;
@@ -1180,7 +1124,7 @@ class czmtrain {
           case "arrival_bell": {
             if(m_b_incoming) {
               e_callbox = m_a_s_stations[m_str_destination].callbox;
-              e_callbox playsound("evt_train_station_bell");
+              e_callbox playSound("evt_train_station_bell");
             }
             break;
           }
@@ -1193,7 +1137,6 @@ class czmtrain {
     }
   }
 
-
   function get_current_destination() {
     if(m_a_s_stations[m_str_station].b_left_path_active) {
       return m_a_s_stations[m_str_station].left_path;
@@ -1201,18 +1144,16 @@ class czmtrain {
     return m_a_s_stations[m_str_station].right_path;
   }
 
-
   function get_current_station() {
     return m_str_station;
   }
 
-
   function function_a8e2d7ff() {
     var_aed9540e = [];
-    var_aed9540e["moving"] = getentarray("lgt_train_lightrig_veh_placement", "targetname");
-    var_aed9540e["canals"] = getentarray("lgt_train_lightrig_canals_debug", "targetname");
-    var_aed9540e["slums"] = getentarray("lgt_train_lightrig_slums_debug", "targetname");
-    var_aed9540e["theater"] = getentarray("lgt_train_lightrig_theater_debug", "targetname");
+    var_aed9540e["moving"] = getEntArray("lgt_train_lightrig_veh_placement", "targetname");
+    var_aed9540e["canals"] = getEntArray("lgt_train_lightrig_canals_debug", "targetname");
+    var_aed9540e["slums"] = getEntArray("lgt_train_lightrig_slums_debug", "targetname");
+    var_aed9540e["theater"] = getEntArray("lgt_train_lightrig_theater_debug", "targetname");
     var_105cc375 = vectorscale((0, 1, 0), 45);
     self enablelinkto();
     foreach(var_83e6406e in var_aed9540e) {
@@ -1224,11 +1165,9 @@ class czmtrain {
     }
   }
 
-
   function get_train_vehicle() {
     return m_vh_train;
   }
-
 
   function enable_train_switches(b_enabled) {
     if(b_enabled) {
@@ -1242,9 +1181,8 @@ class czmtrain {
     }
   }
 
-
   function switch_path_direction(all_nodes, direction) {
-    for (i = 0; i < all_nodes.size; i++) {
+    for(i = 0; i < all_nodes.size; i++) {
       prev_target = all_nodes[i].target;
       all_nodes[i].target = all_nodes[i].target2;
       all_nodes[i].target2 = prev_target;
@@ -1252,20 +1190,19 @@ class czmtrain {
     return !direction;
   }
 
-
   function debug_draw_doors() {
     do {
       n_debug = getdvarint("train_debug_doors");
       wait(1);
     }
-    while (!isdefined(n_debug) || n_debug <= 0);
-    while (true) {
+    while(!isDefined(n_debug) || n_debug <= 0);
+    while(true) {
       duration = 1;
       var_6ffe9d93 = 240;
       var_4dc5a359 = 12;
       origin = m_vh_train.origin;
       origin = origin + (vectorscale((0, 0, -1), 90));
-      forward = anglestoforward(m_vh_train.angles);
+      forward = anglesToForward(m_vh_train.angles);
       right = anglestoright(m_vh_train.angles);
       if(!m_b_facing_forward) {
         forward = -1 * forward;
@@ -1287,29 +1224,28 @@ class czmtrain {
     }
   }
 
-
   function debug_draw_paths() {
     do {
       n_debug = getdvarint("");
       wait(1);
     }
-    while (!isdefined(n_debug) || n_debug <= 0);
-    while (true) {
+    while(!isDefined(n_debug) || n_debug <= 0);
+    while(true) {
       a_keys = getarraykeys(m_a_s_stations);
-      for (key_num = 0; key_num < m_a_s_stations.size; key_num++) {
+      for(key_num = 0; key_num < m_a_s_stations.size; key_num++) {
         j = a_keys[key_num];
         node_set = m_a_s_stations[j].nodes;
-        for (i = 0; i < node_set.size; i++) {
+        for(i = 0; i < node_set.size; i++) {
           node = node_set[i];
           node_pos = node.origin + (vectorscale((0, 0, -1), 95));
           debugstar(node_pos, 1, (1, 0, 0));
-          if(isdefined(node.target)) {
+          if(isDefined(node.target)) {
             node_target = getvehiclenode(node.target, "");
             node_target_pos = node_target.origin + (vectorscale((0, 0, -1), 70));
             line(node_pos, node_target_pos, (0, 1, 0), 0, 1);
             debugstar(node_target_pos, 1, (0, 1, 0));
           }
-          if(isdefined(node.target2)) {
+          if(isDefined(node.target2)) {
             node_target2 = getvehiclenode(node.target2, "");
             node_target2_pos = node_target2.origin + (vectorscale((0, 0, -1), 120));
             line(node_pos, node_target2_pos, (0, 0, 1), 0, 1);
@@ -1319,7 +1255,7 @@ class czmtrain {
       }
       a_zombies = getaiteamarray(level.zombie_team);
       foreach(ai in a_zombies) {
-        if(isdefined(ai.locked_in_train) && ai.locked_in_train) {
+        if(isDefined(ai.locked_in_train) && ai.locked_in_train) {
           print3d(ai.origin + vectorscale((0, 0, 1), 100), ("" + m_a_zombies_locked_in.size) + "", vectorscale((0, 1, 0), 255), 1);
         }
       }
@@ -1332,7 +1268,7 @@ class czmtrain {
 #namespace zm_train;
 
 function autoexec __init__sytem__() {
-  system::register("zm_train", & __init__, undefined, undefined);
+  system::register("zm_train", &__init__, undefined, undefined);
 }
 
 function onplayerconnect() {
@@ -1340,16 +1276,16 @@ function onplayerconnect() {
 }
 
 function __init__() {
-  callback::on_connect( & onplayerconnect);
-  callback::on_spawned( & player_on_spawned);
-  zm_zod_util::on_zombie_killed( & remove_dead_zombie);
-  zm_zod_util::add_zod_zombie_spawn_func( & zombie_init);
+  callback::on_connect(&onplayerconnect);
+  callback::on_spawned(&player_on_spawned);
+  zm_zod_util::on_zombie_killed(&remove_dead_zombie);
+  zm_zod_util::add_zod_zombie_spawn_func(&zombie_init);
   clientfield::register("vehicle", "train_switch_light", 1, 2, "int");
   clientfield::register("scriptmover", "train_callbox_light", 1, 2, "int");
   clientfield::register("scriptmover", "train_map_light", 1, 2, "int");
   clientfield::register("vehicle", "train_rain_fx_occluder", 1, 1, "int");
   clientfield::register("world", "sndTrainVox", 1, 4, "int");
-  level.player_intemission_spawn_callback = & player_intemission_spawn_callback;
+  level.player_intemission_spawn_callback = &player_intemission_spawn_callback;
   thread initialize_train();
   thread function_eb0db7bc();
   thread train_devgui();
@@ -1358,32 +1294,24 @@ function __init__() {
 function function_eb0db7bc() {
   level flag::wait_till("all_players_spawned");
   level flag::wait_till("zones_initialized");
-  while (true) {
+  while(true) {
     level waittill("host_migration_end");
-    [
-      [level.o_zod_train]
-    ] - > initialize_stations();
-    [
-      [level.o_zod_train]
-    ] - > function_7eb2583b();
-    [
-      [level.o_zod_train]
-    ] - > function_dda9a9d2();
-    [
-      [level.o_zod_train]
-    ] - > send_train();
+    [[level.o_zod_train]] - > initialize_stations();
+    [[level.o_zod_train]] - > function_7eb2583b();
+    [[level.o_zod_train]] - > function_dda9a9d2();
+    [[level.o_zod_train]] - > send_train();
   }
 }
 
 function player_intemission_spawn_callback(origin, angles) {
   ride_vehicle = undefined;
   self.ground_ent = self getgroundent();
-  if(isdefined(self.ground_ent)) {
+  if(isDefined(self.ground_ent)) {
     if(isvehicle(self.ground_ent) && !level.zombie_team === self.ground_ent) {
       ride_vehicle = self.ground_ent;
     }
   }
-  if(isdefined(ride_vehicle)) {
+  if(isDefined(ride_vehicle)) {
     self spawn(origin, angles);
   }
 }
@@ -1402,7 +1330,7 @@ function initialize_train() {
 }
 
 function function_f37aa349(sn) {
-  ents = getentarray();
+  ents = getEntArray();
   foreach(ent in ents) {
     if(ent.script_noteworthy === sn) {
       return ent;
@@ -1412,7 +1340,7 @@ function function_f37aa349(sn) {
 }
 
 function function_7465f87() {
-  trigs = getentarray("train_buyable_weapon", "script_noteworthy");
+  trigs = getEntArray("train_buyable_weapon", "script_noteworthy");
   foreach(trig in trigs) {
     trig enablelinkto();
     trig linkto(self, "", self worldtolocalcoords(trig.origin), (0, 0, 0));
@@ -1420,7 +1348,7 @@ function function_7465f87() {
     trig setcursorhint("HINT_WEAPON", trig.weapon);
     trig.cost = zm_weapons::get_weapon_cost(trig.weapon);
     trig.hint_string = zm_weapons::get_weapon_hint(trig.weapon);
-    if(isdefined(level.weapon_cost_client_filled) && level.weapon_cost_client_filled) {
+    if(isDefined(level.weapon_cost_client_filled) && level.weapon_cost_client_filled) {
       trig sethintstring(trig.hint_string);
     } else {
       trig.hint_parm1 = trig.cost;
@@ -1451,8 +1379,8 @@ function function_69c89e00() {
   wallbuy = level.o_zod_train.m_vh_train.buyable_weapon;
   self notify("zm_bgb_secret_shopper", wallbuy);
   self.var_316060b3 = 0;
-  while (isdefined(self)) {
-    if(isdefined(self.on_train) && self.on_train) {
+  while(isDefined(self)) {
+    if(isDefined(self.on_train) && self.on_train) {
       if(!self.var_316060b3) {
         self notify("zm_bgb_secret_shopper", wallbuy);
       }
@@ -1467,9 +1395,9 @@ function function_69c89e00() {
 
 function function_2e9b7fc1(player, weapon = self.weapon) {
   player_has_weapon = player zm_weapons::has_weapon_or_upgrade(weapon);
-  if(!player_has_weapon && (isdefined(level.weapons_using_ammo_sharing) && level.weapons_using_ammo_sharing)) {
+  if(!player_has_weapon && (isDefined(level.weapons_using_ammo_sharing) && level.weapons_using_ammo_sharing)) {
     shared_ammo_weapon = player zm_weapons::get_shared_ammo_weapon(self.zombie_weapon_upgrade);
-    if(isdefined(shared_ammo_weapon)) {
+    if(isDefined(shared_ammo_weapon)) {
       weapon = shared_ammo_weapon;
       player_has_weapon = 1;
     }
@@ -1477,21 +1405,21 @@ function function_2e9b7fc1(player, weapon = self.weapon) {
   if(!player_has_weapon) {
     cursor_hint = "HINT_WEAPON";
     cost = zm_weapons::get_weapon_cost(weapon);
-    if(isdefined(level.weapon_cost_client_filled) && level.weapon_cost_client_filled) {
+    if(isDefined(level.weapon_cost_client_filled) && level.weapon_cost_client_filled) {
       if(player bgb::is_enabled("zm_bgb_secret_shopper") && !zm_weapons::is_wonder_weapon(player.currentweapon)) {
-        hint_string = & "ZOMBIE_WEAPONCOSTONLY_CFILL_BGB_SECRET_SHOPPER";
+        hint_string = &"ZOMBIE_WEAPONCOSTONLY_CFILL_BGB_SECRET_SHOPPER";
         self sethintstringforplayer(player, hint_string);
       } else {
-        hint_string = & "ZOMBIE_WEAPONCOSTONLY_CFILL";
+        hint_string = &"ZOMBIE_WEAPONCOSTONLY_CFILL";
         self sethintstringforplayer(player, hint_string);
       }
     } else {
       if(player bgb::is_enabled("zm_bgb_secret_shopper") && !zm_weapons::is_wonder_weapon(player.currentweapon)) {
-        hint_string = & "ZOMBIE_WEAPONCOSTONLYFILL_BGB_SECRET_SHOPPER";
+        hint_string = &"ZOMBIE_WEAPONCOSTONLYFILL_BGB_SECRET_SHOPPER";
         n_bgb_cost = player zm_weapons::get_ammo_cost_for_weapon(player.currentweapon);
         self sethintstringforplayer(player, hint_string, cost, n_bgb_cost);
       } else {
-        hint_string = & "ZOMBIE_WEAPONCOSTONLYFILL";
+        hint_string = &"ZOMBIE_WEAPONCOSTONLYFILL";
         self sethintstringforplayer(player, hint_string, cost);
       }
     }
@@ -1505,21 +1433,21 @@ function function_2e9b7fc1(player, weapon = self.weapon) {
         ammo_cost = zm_weapons::get_ammo_cost(weapon);
       }
     }
-    if(isdefined(level.weapon_cost_client_filled) && level.weapon_cost_client_filled) {
+    if(isDefined(level.weapon_cost_client_filled) && level.weapon_cost_client_filled) {
       if(player bgb::is_enabled("zm_bgb_secret_shopper") && !zm_weapons::is_wonder_weapon(player.currentweapon)) {
-        hint_string = & "ZOMBIE_WEAPONAMMOONLY_CFILL_BGB_SECRET_SHOPPER";
+        hint_string = &"ZOMBIE_WEAPONAMMOONLY_CFILL_BGB_SECRET_SHOPPER";
         self sethintstringforplayer(player, hint_string);
       } else {
-        hint_string = & "ZOMBIE_WEAPONAMMOONLY_CFILL";
+        hint_string = &"ZOMBIE_WEAPONAMMOONLY_CFILL";
         self sethintstringforplayer(player, hint_string);
       }
     } else {
       if(player bgb::is_enabled("zm_bgb_secret_shopper") && !zm_weapons::is_wonder_weapon(player.currentweapon)) {
-        hint_string = & "ZOMBIE_WEAPONAMMOONLY_BGB_SECRET_SHOPPER";
+        hint_string = &"ZOMBIE_WEAPONAMMOONLY_BGB_SECRET_SHOPPER";
         n_bgb_cost = player zm_weapons::get_ammo_cost_for_weapon(player.currentweapon);
         self sethintstringforplayer(player, hint_string, ammo_cost, n_bgb_cost);
       } else {
-        hint_string = & "ZOMBIE_WEAPONAMMOONLY";
+        hint_string = &"ZOMBIE_WEAPONAMMOONLY";
         self sethintstringforplayer(player, hint_string, ammo_cost);
       }
     }
@@ -1532,9 +1460,9 @@ function function_2e9b7fc1(player, weapon = self.weapon) {
 
 function function_d7993b3d(trigger) {
   self.var_5823efe0 = self.model;
-  self setmodel("wpn_t7_none_world");
+  self setModel("wpn_t7_none_world");
   trigger waittill("trigger");
-  self setmodel(self.var_5823efe0);
+  self setModel(self.var_5823efe0);
 }
 
 function zombie_init() {
@@ -1558,7 +1486,7 @@ function get_players_on_train(b_valid_targets_only = 0) {
 }
 
 function is_moving() {
-  if(!isdefined(level.o_zod_train)) {
+  if(!isDefined(level.o_zod_train)) {
     return 0;
   }
   return [[level.o_zod_train]] - > is_moving();
@@ -1567,16 +1495,14 @@ function is_moving() {
 function zombie_jump_onto_moving_train(ai) {
   [[level.o_zod_train]] - > mark_jumper_time();
   spot = [[level.o_zod_train]] - > get_available_jumptag();
-  if(isdefined(spot)) {
+  if(isDefined(spot)) {
     ai.str_train_tag = spot.str_tag;
-    [
-      [level.o_zod_train]
-    ] - > jump_into_train(ai, spot.str_tag);
+    [[level.o_zod_train]] - > jump_into_train(ai, spot.str_tag);
   }
 }
 
 function remove_dead_zombie(e_attacker, str_means_of_death, weapon) {
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     b_on_train = 0;
     if(is_moving()) {
       if(self.locked_in_train) {
@@ -1588,8 +1514,8 @@ function remove_dead_zombie(e_attacker, str_means_of_death, weapon) {
       self ghost();
     }
   }
-  if(isdefined(level.o_zod_train)) {
-    if(isdefined(self) && self.locked_in_train) {
+  if(isDefined(level.o_zod_train)) {
+    if(isDefined(self) && self.locked_in_train) {
       [
         [level.o_zod_train]
       ] - > remove_zombie_locked_in(self);
@@ -1616,10 +1542,10 @@ function is_ready_for_jumper() {
 
 function debug_go_to_train() {
   train = getent("", "");
-  if(isdefined(train)) {
+  if(isDefined(train)) {
     train_origin = train getorigin();
     player = level.players[0];
-    if(isdefined(player) && isdefined(train_origin)) {
+    if(isDefined(player) && isDefined(train_origin)) {
       train_origin = (train_origin[0], train_origin[1], train_origin[2] - 100);
       player setorigin(train_origin);
     }
@@ -1636,7 +1562,7 @@ function train_devgui() {
   adddebugcommand("");
   adddebugcommand("");
   adddebugcommand("");
-  while (true) {
+  while(true) {
     cmd = getdvarstring("");
     if(cmd != "") {
       switch (cmd) {

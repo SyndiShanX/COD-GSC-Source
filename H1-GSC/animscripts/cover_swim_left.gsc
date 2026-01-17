@@ -11,7 +11,7 @@ main() {
   self endon("killanimscript");
   animscripts\utility::initialize("cover_swim_left");
 
-  if(!isdefined(self.approachtype) || self.approachtype != "cover_corner_l")
+  if(!isDefined(self.approachtype) || self.approachtype != "cover_corner_l")
     self.approachtype = "cover_corner_l";
 
   var_0 = anim.archetypes["soldier"]["swim"]["arrival_cover_corner_l_angleDelta"][4][4];

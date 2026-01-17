@@ -21,11 +21,11 @@ init_clientfaceanim() {
   level._faceAnimCBFunc = clientscripts\_clientfaceanim::doFace;
 }
 doFace(localClientNum) {
-  while (true) {
+  while(true) {
     if(self IsPlayer()) {
       doFace_player(localClientNum);
       self waittill("respawn");
-      while (!isDefined(self)) {
+      while(!isDefined(self)) {
         wait(0.05);
       }
       self.face_death = false;

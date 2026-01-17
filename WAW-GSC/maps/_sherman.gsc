@@ -27,7 +27,7 @@ main(model, type) {
   build_compassicon();
   build_aianims(::setanims, ::set_vehicle_anims);
   build_frontarmor(.33);
-  level.vehicletypefancy["sherman"] = & "VEHICLENAME_SHERMAN_TANK";
+  level.vehicletypefancy["sherman"] = &"VEHICLENAME_SHERMAN_TANK";
 }
 
 init_local() {}
@@ -41,8 +41,8 @@ set_vehicle_anims(positions) {
 
 setanims() {
   positions = [];
-  for (i = 0; i < 10; i++)
-    positions[i] = spawnstruct();
+  for(i = 0; i < 10; i++)
+    positions[i] = spawnStruct();
   positions[0].sittag = "tag_driver";
   positions[1].sittag = "tag_passenger";
   positions[2].sittag = "tag_passenger2";

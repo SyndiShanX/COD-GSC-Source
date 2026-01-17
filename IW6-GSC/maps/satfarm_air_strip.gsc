@@ -5,9 +5,9 @@
 
 air_strip_init() {
   level.start_point = "air_strip";
-  objective_add(maps\_utility::obj("rendesvouz"), "invisible", & "SATFARM_OBJ_RENDESVOUZ");
+  objective_add(maps\_utility::obj("rendesvouz"), "invisible", &"SATFARM_OBJ_RENDESVOUZ");
   objective_state_nomessage(maps\_utility::obj("rendesvouz"), "done");
-  objective_add(maps\_utility::obj("reach_air_strip"), "current", & "SATFARM_OBJ_REACH_AIR_STRIP");
+  objective_add(maps\_utility::obj("reach_air_strip"), "current", &"SATFARM_OBJ_REACH_AIR_STRIP");
   thread maps\satfarm_code::follow_icon_manager();
   thread maps\satfarm_m880::setup_ambient_missile_launches("ambient_missile_launch_spot", "base_array_end");
   maps\satfarm_code::kill_spawners_per_checkpoint("air_strip");
@@ -26,7 +26,7 @@ air_strip_main() {
   level.herotanks[0] thread maps\satfarm_code::tank_relative_speed("air_strip_end_relative_speed", "stop_air_strip_relative_speed", 200, 15, 2);
   level.herotanks[1] thread maps\satfarm_code::tank_relative_speed("air_strip_end_relative_speed", "stop_air_strip_relative_speed", 250, 13.5, 1.5);
   objective_onentity(maps\_utility::obj("reach_air_strip"), level.herotanks[1], (0, 0, 60));
-  objective_setpointertextoverride(maps\_utility::obj("reach_air_strip"), & "SATFARM_FOLLOW");
+  objective_setpointertextoverride(maps\_utility::obj("reach_air_strip"), &"SATFARM_FOLLOW");
   thread air_strip_begin();
   thread satfarm_transient_sync();
   common_scripts\utility::flag_wait("air_strip_end");
@@ -93,20 +93,20 @@ air_strip_trucks_static_setup() {
 
 air_strip_temp_dialog() {
   common_scripts\utility::flag_wait("1_air_strip_bunker_destroyed");
-  objective_string(maps\_utility::obj("air_strip_defenses"), & "SATFARM_OBJ_DESTROY_AIR_STRIP_DEFENSES_REMAINING", 3);
+  objective_string(maps\_utility::obj("air_strip_defenses"), &"SATFARM_OBJ_DESTROY_AIR_STRIP_DEFENSES_REMAINING", 3);
   thread maps\satfarm_code::radio_dialog_add_and_go("satfarm_bgr_onedowntwoto");
   level.playertank thread maps\satfarm_code::tank_save("1_air_strip_bunker_destroyed");
   common_scripts\utility::flag_wait("2_air_strip_bunkers_destroyed");
   thread maps\satfarm_code::radio_dialog_add_and_go("satfarm_bgr_goodshootingonemore");
-  objective_string(maps\_utility::obj("air_strip_defenses"), & "SATFARM_OBJ_DESTROY_AIR_STRIP_DEFENSES_REMAINING", 2);
+  objective_string(maps\_utility::obj("air_strip_defenses"), &"SATFARM_OBJ_DESTROY_AIR_STRIP_DEFENSES_REMAINING", 2);
   level.playertank thread maps\satfarm_code::tank_save("2_air_strip_bunker_destroyed");
   common_scripts\utility::flag_wait("3_air_strip_bunkers_destroyed");
   thread maps\satfarm_code::radio_dialog_add_and_go("satfarm_td1_thatsahitone");
-  objective_string(maps\_utility::obj("air_strip_defenses"), & "SATFARM_OBJ_DESTROY_AIR_STRIP_DEFENSES_REMAINING", 1);
+  objective_string(maps\_utility::obj("air_strip_defenses"), &"SATFARM_OBJ_DESTROY_AIR_STRIP_DEFENSES_REMAINING", 1);
   level.playertank thread maps\satfarm_code::tank_save("3_air_strip_bunker_destroyed");
   common_scripts\utility::flag_wait("4_air_strip_bunkers_destroyed");
   common_scripts\utility::flag_set("air_strip_end");
-  objective_string(maps\_utility::obj("air_strip_defenses"), & "SATFARM_OBJ_DESTROY_AIR_STRIP_DEFENSES_REMAINING", 0);
+  objective_string(maps\_utility::obj("air_strip_defenses"), &"SATFARM_OBJ_DESTROY_AIR_STRIP_DEFENSES_REMAINING", 0);
   maps\satfarm_code::radio_dialog_add_and_go("satfarm_bgr_boom");
   thread maps\satfarm_code::radio_dialog_add_and_go("satfarm_bgr_allenemybunkersdestroyed");
   maps\_utility::objective_complete(maps\_utility::obj("air_strip_defenses"));
@@ -252,8 +252,8 @@ air_strip_obj_markers() {
   common_scripts\utility::flag_wait("air_strip_take_off_mig_01_go");
   maps\satfarm_code::radio_dialog_add_and_go("satfarm_bgr_wevegottatakeout");
   maps\_utility::objective_complete(maps\_utility::obj("reach_air_strip"));
-  objective_add(maps\_utility::obj("air_strip_defenses"), "current", & "SATFARM_OBJ_DESTROY_AIR_STRIP_DEFENSES");
-  objective_string_nomessage(maps\_utility::obj("air_strip_defenses"), & "SATFARM_OBJ_DESTROY_AIR_STRIP_DEFENSES_REMAINING", 4 - level.air_strip_m880_death_count);
+  objective_add(maps\_utility::obj("air_strip_defenses"), "current", &"SATFARM_OBJ_DESTROY_AIR_STRIP_DEFENSES");
+  objective_string_nomessage(maps\_utility::obj("air_strip_defenses"), &"SATFARM_OBJ_DESTROY_AIR_STRIP_DEFENSES_REMAINING", 4 - level.air_strip_m880_death_count);
 }
 
 fennce_smash_setup() {

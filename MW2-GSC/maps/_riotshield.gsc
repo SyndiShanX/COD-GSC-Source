@@ -13,9 +13,9 @@ RIOTSHIELD_PATH_ENEMY_DIST = 400;
 
 // must be called before maps::\_load::main()
 init_riotshield() {
-  if(isdefined(level.riotshield_initialized))
+  if(isDefined(level.riotshield_initialized)) {
     return;
-
+  }
   level.riotshield_initialized = true;
 
   if(is_specialop()) {
@@ -26,7 +26,7 @@ init_riotshield() {
     maps\_specialops::so_include_deadquote_array(quotes);
   }
 
-  if(!isdefined(level.subclass_spawn_functions))
+  if(!isDefined(level.subclass_spawn_functions))
     level.subclass_spawn_functions = [];
 
   level.subclass_spawn_functions["riotshield"] = ::subclass_riotshield;
@@ -117,9 +117,9 @@ riotshield_fastwalk_off() {
 riotshield_flee() {
   assert(self.subclass == "riotshield");
 
-  if(self.subclass != "riotshield")
+  if(self.subclass != "riotshield") {
     return;
-
+  }
   self.combatMode = "cover";
   self.goalradius = 2048;
 
@@ -127,7 +127,7 @@ riotshield_flee() {
 
   node = self FindBestCoverNode();
 
-  if(isdefined(node))
+  if(isDefined(node))
     self UseCoverNode(node);
 }
 
@@ -153,11 +153,11 @@ group_create(ai_array, forward, spacing) {
       continue; //means they lost their shield or were never a riotshield guy
     newarray[newarray.size] = member;
   }
-  group = spawnstruct();
+  group = spawnStruct();
 
   //remove guys out of a previous group and set their group to this one
   foreach(member in newarray) {
-    if(isdefined(member.group) && isdefined(member.group.ai_array))
+    if(isDefined(member.group) && isDefined(member.group.ai_array))
       member.group.ai_array = array_remove(member.group.ai_array, member);
     member.group = group;
   }
@@ -183,13 +183,13 @@ group_create(ai_array, forward, spacing) {
 =============
 */
 group_initialize_formation(forward, spacing) {
-  assert(isdefined(self.ai_array));
+  assert(isDefined(self.ai_array));
 
   self.ai_array = array_removedead(self.ai_array);
 
   self.forward = forward;
 
-  if(isdefined(spacing))
+  if(isDefined(spacing))
     self.spacing = spacing;
 
   foreach(ai in self.ai_array) {
@@ -205,14 +205,14 @@ group_initialize_formation(forward, spacing) {
 }
 
 group_resort_on_deaths() {
-  assert(isdefined(self.ai_array));
+  assert(isDefined(self.ai_array));
 
   self endon("break_group");
 
-  if(self.ai_array.size == 0)
+  if(self.ai_array.size == 0) {
     return;
-
-  while (self.ai_array.size) {
+  }
+  while(self.ai_array.size) {
     waittill_dead(self.ai_array, 1);
 
     if(self.group_move_mode != "stopped")
@@ -236,12 +236,12 @@ group_resort_on_deaths() {
 =============
 */
 group_sort_by_closest_match(dir) {
-  assert(isdefined(self.ai_array));
+  assert(isDefined(self.ai_array));
 
-  if(self.ai_array.size == 0)
+  if(self.ai_array.size == 0) {
     return;
-
-  if(isdefined(dir))
+  }
+  if(isDefined(dir))
     self.forward = dir;
   else
     dir = self.forward;
@@ -253,21 +253,22 @@ group_sort_by_closest_match(dir) {
 
   // array of projected distance to phalanx line
   dist_array = [];
-  for (i = 0; i < self.ai_array.size; i++) {
-    if(isdefined(self.ai_array[i]))
+  for(i = 0; i < self.ai_array.size; i++) {
+    if(isDefined(self.ai_array[i]))
       dist_array[i] = vectordot(pos - self.ai_array[i].origin, right);
     else
       dist_array[i] = 0;
   }
 
   // sort	
-  for (i = 1; i < dist_array.size; i++) {
+  for(i = 1; i < dist_array.size; i++) {
     curDist = dist_array[i];
     curAI = self.ai_array[i];
 
-    for (j = i - 1; j >= 0; j--) {
-      if(curDist < dist_array[j])
+    for(j = i - 1; j >= 0; j--) {
+      if(curDist < dist_array[j]) {
         break;
+      }
 
       dist_array[j + 1] = dist_array[j];
       self.ai_array[j + 1] = self.ai_array[j];
@@ -280,7 +281,7 @@ group_sort_by_closest_match(dir) {
 
 // poll for now, should get group notify from code
 group_check_deaths() {
-  while (1) {
+  while(1) {
     if(self.fleeThreshold > 0) {
       self.ai_array = array_removedead(self.ai_array);
 
@@ -314,14 +315,14 @@ group_left_corner(center, offset) {
 =============
 */
 group_move(group_center, dir) {
-  assert(isdefined(self.ai_array));
-  assert(isdefined(self.forward));
-  assert(isdefined(group_center));
+  assert(isDefined(self.ai_array));
+  assert(isDefined(self.forward));
+  assert(isDefined(group_center));
 
   self notify("new_goal_set");
   self.group_move_mode = "moving";
 
-  if(isdefined(dir))
+  if(isDefined(dir))
     self.forward = dir;
   else
     dir = self.forward;
@@ -330,10 +331,10 @@ group_move(group_center, dir) {
   offset = right * self.spacing;
   pos = self group_left_corner(group_center, offset);
 
-  for (i = 0; i < self.ai_array.size; i++) {
+  for(i = 0; i < self.ai_array.size; i++) {
     ai = self.ai_array[i];
 
-    if(isdefined(ai))
+    if(isDefined(ai))
       ai setgoalpos(pos);
 
     pos = pos + offset;
@@ -348,21 +349,21 @@ MIN_AT_GOAL_RADIUS = 45;
 check_group_at_goal() {
   self endon("new_goal_set");
 
-  while (1) {
+  while(1) {
     //self waittill( "ai_at_goal" );
     wait 0.5;
 
     alive_count = 0;
     foreach(ai in self.ai_array) {
-      if(isdefined(ai) && isalive(ai))
+      if(isDefined(ai) && isalive(ai))
         alive_count++;
     }
 
     at_goal_count = 0;
-    for (i = 0; i < self.ai_array.size; i++) {
+    for(i = 0; i < self.ai_array.size; i++) {
       ai = self.ai_array[i];
 
-      if(isdefined(ai)) {
+      if(isDefined(ai)) {
         check_radius = max(MIN_AT_GOAL_RADIUS, ai.goalradius);
         if(distanceSquared(ai.origin, ai.goalpos) < squared(check_radius))
           at_goal_count++;
@@ -379,22 +380,22 @@ check_group_at_goal() {
 check_group_facing_forward() {
   self endon("break_group");
 
-  while (1) {
+  while(1) {
     wait 0.5;
 
     alive_count = 0;
     foreach(ai in self.ai_array) {
-      if(isdefined(ai) && isalive(ai))
+      if(isDefined(ai) && isalive(ai))
         alive_count++;
     }
 
     at_goal_count = 0;
     group_yaw = vectorToYaw(self.forward);
 
-    for (i = 0; i < self.ai_array.size; i++) {
+    for(i = 0; i < self.ai_array.size; i++) {
       ai = self.ai_array[i];
 
-      if(isdefined(ai)) {
+      if(isDefined(ai)) {
         if(abs(ai.angles[1] - group_yaw) < 45)
           at_goal_count++;
       }
@@ -494,12 +495,12 @@ group_lock_angles(dir) {
   yaw = vectorToYaw(dir);
 
   foreach(ai in self.ai_array) {
-    if(!isdefined(ai))
+    if(!isDefined(ai)) {
       continue;
-
-    if(isdefined(ai.enemy) && distanceSquared(ai.origin, ai.enemy.origin) < squared(ai.pathEnemyFightDist))
+    }
+    if(isDefined(ai.enemy) && distanceSquared(ai.origin, ai.enemy.origin) < squared(ai.pathEnemyFightDist)) {
       continue;
-
+    }
     ai orientmode("face angle", yaw);
     ai.lockOrientation = true;
   }
@@ -521,9 +522,9 @@ group_lock_angles(dir) {
 */
 group_unlock_angles() {
   foreach(ai in self.ai_array) {
-    if(!isdefined(ai))
+    if(!isDefined(ai)) {
       continue;
-
+    }
     ai orientmode("face default");
     ai.lockOrientation = false;
   }
@@ -545,9 +546,9 @@ group_free_combat() {
   self group_unlock_angles();
 
   foreach(ai in self.ai_array) {
-    if(!isdefined(ai))
+    if(!isDefined(ai)) {
       continue;
-
+    }
     ai.goalradius = 2048;
     ai.pathEnemyFightDist = RIOTSHIELD_PATH_ENEMY_DIST;
     ai.pathEnemyLookahead = RIOTSHIELD_PATH_ENEMY_DIST;
@@ -570,7 +571,7 @@ group_center() {
   center = (0, 0, 0);
   alive_count = 0;
   foreach(ai in self.ai_array) {
-    if(isdefined(ai)) {
+    if(isDefined(ai)) {
       center = center + ai.origin;
       alive_count++;
     }

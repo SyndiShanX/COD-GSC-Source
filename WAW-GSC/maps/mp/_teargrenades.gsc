@@ -30,15 +30,15 @@ monitorTearUsage() {
     return;
   }
   prevammo = self getammocount("tear_grenade_mp");
-  while (1) {
+  while(1) {
     ammo = self getammocount("tear_grenade_mp");
     if(ammo < prevammo) {
       num = prevammo - ammo;
-      for (i = 0; i < num; i++) {
+      for(i = 0; i < num; i++) {
         grenades = getEntArray("grenade", "classname");
         bestdist = undefined;
         bestg = undefined;
-        for (g = 0; g < grenades.size; g++) {
+        for(g = 0; g < grenades.size; g++) {
           if(!isDefined(grenades[g].teargrenade)) {
             dist = distance(grenades[g].origin, self.origin + (0, 0, 48));
             if(!isDefined(bestdist) || dist < bestdist) {
@@ -60,7 +60,7 @@ monitorTearUsage() {
 
 tearGrenade_think(team) {
   wait level.teargrenadetimer;
-  ent = spawnstruct();
+  ent = spawnStruct();
   ent thread tear(self.origin);
 }
 
@@ -69,7 +69,7 @@ tear(pos) {
   starttime = gettime();
   self thread teartimer();
   self endon("tear_timeout");
-  while (1) {
+  while(1) {
     trig waittill("trigger", player);
     if(player.sessionstate != "playing") {
       continue;
@@ -104,7 +104,7 @@ teargassuffering() {
   self endon("disconnect");
   self.teargassuffering = true;
   self shellshock("teargas", 60);
-  while (1) {
+  while(1) {
     if(gettime() - self.teargasstarttime > level.tearsufferingduration * 1000) {
       break;
     }
@@ -116,14 +116,14 @@ teargassuffering() {
 
 drawcylinder(pos, rad, height) {
   time = 0;
-  while (1) {
+  while(1) {
     currad = rad;
     curheight = height;
     if(time < level.teargasfillduration) {
       currad = currad * (time / level.teargasfillduration);
       curheight = curheight * (time / level.teargasfillduration);
     }
-    for (r = 0; r < 20; r++) {
+    for(r = 0; r < 20; r++) {
       theta = r / 20 * 360;
       theta2 = (r + 1) / 20 * 360;
       line(pos + (cos(theta) * currad, sin(theta) * currad, 0), pos + (cos(theta2) * currad, sin(theta2) * currad, 0));

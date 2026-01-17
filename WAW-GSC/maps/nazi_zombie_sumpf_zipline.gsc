@@ -8,23 +8,23 @@
 #include maps\_zombiemode_utility;
 
 initZipline() {
-  zipBuyTrigger = getentarray("zipline_buy_trigger", "targetname");
+  zipBuyTrigger = getEntArray("zipline_buy_trigger", "targetname");
   nonstatictrig = undefined;
   statictrig = undefined;
   level.direction = undefined;
   level.znodes = [];
   level.zrnodes = [];
   level.zipinuse = false;
-  for (i = 0; i < zipBuyTrigger.size; i++) {
+  for(i = 0; i < zipBuyTrigger.size; i++) {
     zipBuyTrigger[i].zip = getent(zipBuyTrigger[i].target, "targetname");
-    zipBuyTrigger[i].attachspot = getentarray((zipBuyTrigger[i].zip).target, "targetname");
+    zipBuyTrigger[i].attachspot = getEntArray((zipBuyTrigger[i].zip).target, "targetname");
     zipBuyTrigger[i].blocker = getent("zipline_blocker", "targetname");
     zipBuyTrigger[i].aiblocker = getent("zipline_ai_blocker", "targetname");
-    zipBuyTrigger[i].tempclip = getentarray("zip_temp_clip", "targetname");
+    zipBuyTrigger[i].tempclip = getEntArray("zip_temp_clip", "targetname");
     zipBuyTrigger[i].handle = getent("zip_handle", "targetname");
     zipBuyTrigger[i].handlebox = getent("zip_handle_box", "targetname");
     zipBuyTrigger[i].lever = getent("zip_lever", "targetname");
-    for (p = 0; p < (zipBuyTrigger[i].attachspot).size; p++) {
+    for(p = 0; p < (zipBuyTrigger[i].attachspot).size; p++) {
       if(isDefined((zipBuyTrigger[i].attachspot[p]).script_noteworthy) && (zipBuyTrigger[i].attachspot[p]).script_noteworthy == "main_spot") {
         zipBuyTrigger[i].volume = getent((zipBuyTrigger[i].attachspot[p]).target, "targetname");
         zipBuyTrigger[i].zipDamageTrigger = getent((zipBuyTrigger[i].volume).target, "targetname");
@@ -37,7 +37,7 @@ initZipline() {
     } else if(isDefined(zipBuyTrigger[i].script_noteworthy) && zipBuyTrigger[i].script_noteworthy == "static") {
       statictrig = zipBuyTrigger[i];
     }
-    level.znodes = getentarray("zipline_nodes", "script_noteworthy");
+    level.znodes = getEntArray("zipline_nodes", "script_noteworthy");
     level.zrnodes = [];
     zipBuyTrigger[i] SetCursorHint("HINT_NOICON");
   }
@@ -50,10 +50,10 @@ initZipline() {
   zipBuyTrigger[0].zipDamageTrigger LinkTo(zipBuyTrigger[0].zip);
   zipBuyTrigger[0].zipDamageVolume EnableLinkTo();
   zipBuyTrigger[0].zipDamageVolume LinkTo(zipBuyTrigger[0].zip);
-  for (i = 0; i < (zipBuyTrigger[0].attachspot).size; i++) {
+  for(i = 0; i < (zipBuyTrigger[0].attachspot).size; i++) {
     zipBuyTrigger[0].attachspot[i] LinkTo(zipBuyTrigger[0].zip);
   }
-  for (i = 0; i < (zipBuyTrigger[0].tempclip).size; i++) {
+  for(i = 0; i < (zipBuyTrigger[0].tempclip).size; i++) {
     zipBuyTrigger[0].tempclip[i] LinkTo(zipBuyTrigger[0].zip);
   }
   zipBuyTrigger[0].handlebox LinkTo(zipBuyTrigger[0].zip);
@@ -71,7 +71,7 @@ initZipline() {
   zipPowerTrigger delete();
   statictrig thread activateZip(undefined);
   statictrig waittill("zipDone");
-  statictrig playsound("platform_bang");
+  statictrig playSound("platform_bang");
   zipBuyTrigger[0].blocker connectpaths();
   zipBuyTrigger[0].blocker notsolid();
   play_sound_at_pos("door_rotate_open", (zipBuyTrigger[0].blocker).origin);
@@ -89,8 +89,8 @@ initZipline() {
 }
 
 zip_rope_audio() {
-  zip_rope = getentarray("zip_line_rope", "targetname");
-  for (i = 0; i < zip_rope.size; i++) {
+  zip_rope = getEntArray("zip_line_rope", "targetname");
+  for(i = 0; i < zip_rope.size; i++) {
     if(isDefined(zip_rope[i].script_sound)) {
       zip_rope[i] thread rope_sounds();
     }
@@ -99,13 +99,13 @@ zip_rope_audio() {
 
 zip_line_audio() {
   level thread zip_rope_audio();
-  zip_audio = getentarray("zip_line_wheel", "targetname");
-  for (i = 0; i < zip_audio.size; i++) {
+  zip_audio = getEntArray("zip_line_wheel", "targetname");
+  for(i = 0; i < zip_audio.size; i++) {
     if(isDefined(zip_audio[i].script_label)) {
-      zip_audio[i] playsound(zip_audio[i].script_label);
+      zip_audio[i] playSound(zip_audio[i].script_label);
     }
     if(isDefined(zip_audio[i].script_sound)) {
-      zip_audio[i] playloopsound(zip_audio[i].script_sound, 1);
+      zip_audio[i] playLoopSound(zip_audio[i].script_sound, 1);
     }
     zip_audio[i] thread zip_line_stopsound();
   }
@@ -113,9 +113,9 @@ zip_line_audio() {
 
 rope_sounds() {
   level endon("machine_off");
-  while (1) {
+  while(1) {
     wait(randomfloatrange(0.3, 0.8));
-    self playsound(self.script_sound);
+    self playSound(self.script_sound);
   }
 }
 
@@ -123,7 +123,7 @@ zip_line_stopsound() {
   level waittill("machine_off");
   self stoploopsound(0.1);
   if(isDefined(self.script_label)) {
-    self playsound("motor_stop_left");
+    self playSound("motor_stop_left");
   }
 }
 
@@ -134,7 +134,7 @@ play_zipline_dialog() {
   if(!isDefined(self.vox_zipline)) {
     num_variants = maps\_zombiemode_spawner::get_number_variants(player_index + "vox_zipline");
     self.vox_zipline = [];
-    for (i = 0; i < num_variants; i++) {
+    for(i = 0; i < num_variants; i++) {
       self.vox_zipline[self.vox_zipline.size] = "vox_zipline_" + i;
     }
     self.vox_zipline_available = self.vox_zipline;
@@ -152,7 +152,7 @@ recallZipSwitch(dir) {
   org = getent("zip_line_switch", "targetname");
   if(isDefined(org)) {
     playsoundatposition("purchase", org.origin);
-    org playsound("switch");
+    org playSound("switch");
   }
   self.lever waittill("rotatedone");
   self notify("recallLeverDone");
@@ -162,13 +162,13 @@ zipThink() {
   self sethintstring(&"ZOMBIE_ZIPLINE_USE");
   self SetCursorHint("HINT_NOICON");
   self.zombie_cost = 1500;
-  zipBuyTrigger = getentarray("zipline_buy_trigger", "targetname");
+  zipBuyTrigger = getEntArray("zipline_buy_trigger", "targetname");
   if(isDefined(self.script_noteworthy) && self.script_noteworthy == "nonstatic") {
     self.triggeron = true;
     self unlink();
     self thread monitorZipHint();
   }
-  while (1) {
+  while(1) {
     self waittill("trigger", who);
     if(who in_revive_trigger()) {
       continue;
@@ -179,7 +179,7 @@ zipThink() {
           if(isDefined(self.script_noteworthy) && self.script_noteworthy == "nonstatic" && who IsTouching(self.volume) ||
             isDefined(self.script_noteworthy) && self.script_noteworthy == "static") {
             level.zipinuse = true;
-            for (i = 0; i < zipBuyTrigger.size; i++) {
+            for(i = 0; i < zipBuyTrigger.size; i++) {
               if(isDefined(zipBuyTrigger[i].script_noteworthy) && zipBuyTrigger[i].script_noteworthy == "nonstatic") {
                 zipBuyTrigger[i] notify("stopstringmonitor");
                 zipBuyTrigger[i] LinkTo(zipBuyTrigger[i].zip);
@@ -212,7 +212,7 @@ zipThink() {
               self thread recallZipSwitch(-180);
               self waittill("recallLeverDone");
             }
-            for (i = 0; i < zipBuyTrigger.size; i++) {
+            for(i = 0; i < zipBuyTrigger.size; i++) {
               if(isDefined(zipBuyTrigger[i].script_noteworthy) && zipBuyTrigger[i].script_noteworthy == "nonstatic") {
                 zipBuyTrigger[i] sethintstring(&"ZOMBIE_ZIPLINE_USE");
                 zipBuyTrigger[i] triggerOn();
@@ -245,20 +245,20 @@ triggerOff() {
 
 monitorZipHint() {
   self endon("stopstringmonitor");
-  while (1) {
+  while(1) {
     players = get_players();
     downedplayers = [];
     aliveplayers = [];
     stoptrigger = false;
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       if(players[i] maps\_laststand::player_is_in_laststand() && players[i] IsTouching(self.volume))
         downedplayers = array_add(downedplayers, players[i]);
       else if(isDefined(players[i]) && IsAlive(players[i]))
         aliveplayers = array_add(aliveplayers, players[i]);
     }
     if(aliveplayers.size > 0 && downedplayers.size > 0) {
-      for (i = 0; i < aliveplayers.size; i++) {
-        for (p = 0; p < downedplayers.size; p++) {
+      for(i = 0; i < aliveplayers.size; i++) {
+        for(p = 0; p < downedplayers.size; p++) {
           if(aliveplayers[i] IsTouching(downedplayers[p].revivetrigger)) {
             stoptrigger = true;
             break;
@@ -281,7 +281,7 @@ activateZip(rider) {
   zombs = getaispeciesarray("axis");
   self.riders = [];
   self.canshock = false;
-  for (i = 0; i < zombs.size; i++) {
+  for(i = 0; i < zombs.size; i++) {
     if(isDefined(zombs[i]) && IsAlive(zombs[i]) && zombs[i] IsTouching(self.zipDamageVolume)) {
       if(zombs[i] enemy_is_dog())
         zombs[i].a.nodeath = true;
@@ -291,9 +291,9 @@ activateZip(rider) {
     }
   }
   level thread zip_line_audio();
-  attachspot = getentarray((self.zip).target, "targetname");
+  attachspot = getEntArray((self.zip).target, "targetname");
   peeps = get_players();
-  for (i = 0; i < peeps.size; i++) {
+  for(i = 0; i < peeps.size; i++) {
     if(is_player_valid(peeps[i]) && ((peeps[i] IsTouching(self.volume) || (isDefined(rider) && peeps[i] == rider)))) {
       self.riders = array_add(self.riders, peeps[i]);
       peeps[i] thread magic_bullet_shield(100000000, 0);
@@ -304,7 +304,7 @@ activateZip(rider) {
       prevdist = undefined;
       playerspot = undefined;
       playerOrg = peeps[i] GetOrigin();
-      for (p = 0; p < attachspot.size; p++) {
+      for(p = 0; p < attachspot.size; p++) {
         attachOrg = attachspot[p] GetOrigin();
         dist = distance2d(playerOrg, attachOrg);
         if(!isDefined(prevdist)) {
@@ -321,11 +321,11 @@ activateZip(rider) {
       attachspot = array_remove(attachspot, playerspot);
     }
   }
-  for (i = 0; i < (self.tempclip).size; i++) {
+  for(i = 0; i < (self.tempclip).size; i++) {
     self.tempclip[i] notify("stopmonitorsolid");
   }
   wait(0.1);
-  for (i = 0; i < (self.tempclip).size; i++) {
+  for(i = 0; i < (self.tempclip).size; i++) {
     self.tempclip[i] notsolid();
   }
   self.handle notify("stopmonitorsolid");
@@ -344,13 +344,13 @@ activateZip(rider) {
   if((!(isDefined(level.direction)))) {
     self.aiblocker solid();
     self.aiblocker disconnectpaths();
-    for (i = 0; i < (self.riders).size; i++) {
+    for(i = 0; i < (self.riders).size; i++) {
       self.riders[i] thread maps\_zombiemode::store_crumb((11216, 2883, -648));
     }
     curnode = self.spline;
     level.zrnodes[(((level.znodes).size) - 1)] = curnode;
     my_time = .3;
-    for (i = 0; i < ((level.znodes).size - 1); i++) {
+    for(i = 0; i < ((level.znodes).size - 1); i++) {
       curnode = getent(curnode.target, "targetname");
       level.zrnodes[((((level.znodes).size) - (i + 2)))] = curnode;
       self.zip moveto(curnode.origin, my_time);
@@ -371,11 +371,11 @@ activateZip(rider) {
     level notify("machine_done");
     level.direction = "back";
   } else {
-    for (i = 0; i < (self.riders).size; i++) {
+    for(i = 0; i < (self.riders).size; i++) {
       self.riders[i] thread maps\_zombiemode::store_crumb((10750, 1516, -501));
     }
     my_time = .3;
-    for (i = 1; i < ((level.zrnodes).size); i++) {
+    for(i = 1; i < ((level.zrnodes).size); i++) {
       curnode = level.zrnodes[i];
       self.zip moveto(curnode.origin, my_time);
       if(i == 4) {
@@ -396,17 +396,17 @@ activateZip(rider) {
     self.aiblocker notsolid();
     level.direction = undefined;
   }
-  for (i = 0; i < (self.tempclip).size; i++) {
+  for(i = 0; i < (self.tempclip).size; i++) {
     if((!(isDefined(level.direction))) && isDefined((self.tempclip[i]).script_noteworthy) && (self.tempclip[i]).script_noteworthy == "zip_base")
       self.tempclip[i] solid();
     else
       self.tempclip[i] thread objectSolid();
   }
   level notify("machine_off");
-  self playsound("platform_bang");
+  self playSound("platform_bang");
   self.zipActive = false;
   wait(0.1);
-  for (i = 0; i < (self.riders).size; i++) {
+  for(i = 0; i < (self.riders).size; i++) {
     self.riders[i] unlink();
     self.riders[i] stop_magic_bullet_shield();
     self.riders[i] thread maps\_zombiemode::store_crumb(self.origin);
@@ -424,7 +424,7 @@ activateZip(rider) {
 }
 
 zipDamage(parent) {
-  while (1) {
+  while(1) {
     self waittill("trigger", ent);
     if(parent.zipActive == true && isDefined(ent) && IsAlive(ent)) {
       if(isplayer(ent)) {
@@ -440,7 +440,7 @@ playerZipDamage(parent) {
   self endon("death");
   self endon("disconnect");
   players = get_players();
-  for (i = 0; i < (parent.riders).size; i++) {
+  for(i = 0; i < (parent.riders).size; i++) {
     if(self == parent.riders[i]) {
       return;
     }
@@ -464,10 +464,10 @@ zombieZipDamage() {
 
 objectSolid() {
   self endon("stopmonitorsolid");
-  while (1) {
+  while(1) {
     players = get_players();
     player_touching = false;
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       if(players[i] IsTouching(self)) {
         player_touching = true;
         break;
@@ -482,8 +482,8 @@ objectSolid() {
 }
 
 spinZipPulleys() {
-  pulleys = getentarray("zip_pulley", "targetname");
-  for (i = 0; i < pulleys.size; i++) {
+  pulleys = getEntArray("zip_pulley", "targetname");
+  for(i = 0; i < pulleys.size; i++) {
     pulleys[i] rotateyaw(1800, 4.8);
   }
 }
@@ -495,7 +495,7 @@ player_collision_fix() {
     return;
   }
   base = undefined;
-  for (i = 0; i < self.tempclip.size; i++) {
+  for(i = 0; i < self.tempclip.size; i++) {
     clip = self.tempclip[i];
     if(isDefined(clip.script_noteworthy) && clip.script_noteworthy == "zip_base") {
       base = clip;
@@ -505,7 +505,7 @@ player_collision_fix() {
   assert(isDefined(base));
   z = base.origin[2];
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     player = players[i];
     if(!is_player_valid(player)) {
       continue;

@@ -79,11 +79,10 @@ main(painter_spmp) {
   level.dummyguy_index_max = 0;
   level.dummyguy = [];
 
-
   if(spawners.size) {
     spawner = spawners[0];
     spawner maps\_spawner::dronespawner_init();
-    for (i = 0; i < 20; i++) {
+    for(i = 0; i < 20; i++) {
       level.dummyguy[i] = maps\_spawner::spawner_dronespawn(spawner);
       level.dummyguy[i] notsolid();
       level.dummyguy[i] hide();
@@ -98,12 +97,12 @@ main(painter_spmp) {
   level.dummyguy_index = 0;
   init(); // _anim
 
-  ents = getentarray();
+  ents = getEntArray();
   foreach(ent in ents) {
-    if(isdefined(ent.classname) && ent.classname == "player" || isdefined(ent.dontdonotetracks) || isdefined(ent.dummynode))
+    if(isDefined(ent.classname) && ent.classname == "player" || isDefined(ent.dontdonotetracks) || isDefined(ent.dummynode)) {
       continue;
-
-    if(isdefined(ent))
+    }
+    if(isDefined(ent))
       ent delete();
   }
   ents = undefined;
@@ -137,7 +136,7 @@ main(painter_spmp) {
   flag_wait("user_hud_active");
   thread draw_selected_node_name();
   thread manage_nearnodes();
-  while (1) {
+  while(1) {
     wait .05;
     level.player_view_trace = player_view_trace();
     //draw_placement_circle();
@@ -148,7 +147,7 @@ main(painter_spmp) {
 hack_start() {
   //copied from _painter probably doesn't need all of this		
   flag_init("user_alive");
-  while (!isdefined(get_mp_player()))
+  while(!isDefined(get_mp_player()))
     wait .05;
 
   wait .05;
@@ -164,17 +163,15 @@ hack_start() {
 }
 
 noder_init() {
-
   level.preview_node = spawn("script_model", (0, 0, 0));
   precachemodel("node_preview");
-  level.preview_node setmodel("node_preview");
+  level.preview_node setModel("node_preview");
   level.preview_node notsolid();
   level.selector_model = spawn("script_model", (0, 0, 0));
-  level.selector_model setmodel("node_select");
+  level.selector_model setModel("node_select");
   level.selector_model notsolid();
   level.selector_model hide();
   level.selected_node = undefined;
-
 
   setcurrentgroup(level.painter_startgroup);
   level.painter_startgroup = undefined;
@@ -206,7 +203,7 @@ controler_hud_add(identifier, inc, initial_text, initial_description_text, initi
   denradoffset = 20;
   descriptionscale = 1.4;
 
-  if(!isdefined(level.hud_noder) || !isdefined(level.hud_noder[identifier])) {
+  if(!isDefined(level.hud_noder) || !isDefined(level.hud_noder[identifier])) {
     level.hud_noder[identifier] = _newhudelem();
     description = _newhudelem();
   } else
@@ -232,12 +229,11 @@ controler_hud_add(identifier, inc, initial_text, initial_description_text, initi
   description.alpha = basealpha;
   description.x = startx + denradoffset;
   description.y = starty + (inc * space);
-  if(isdefined(initial_value))
+  if(isDefined(initial_value))
     description setvalue(initial_value);
-  if(isdefined(initial_description_text))
+  if(isDefined(initial_description_text))
     description _settext(initial_description_text);
   level.hud_noder[identifier].description = description;
-
 }
 
 hud_init() {
@@ -253,7 +249,7 @@ hud_init() {
   alphainc = .7 / div;
   alpha = alphainc;
 
-  for (i = 0; i < listsize; i++) {
+  for(i = 0; i < listsize; i++) {
     hudelems[i] = _newhudelem();
     hudelems[i].location = 0;
     hudelems[i].alignX = "left";
@@ -378,29 +374,29 @@ setcurrentgroup(group) {
 
   index = 0;
   div = int(level.group_hudelems.size / 2);
-  for (i = 0; i < keys.size; i++)
+  for(i = 0; i < keys.size; i++)
     if(keys[i] == group) {
       index = i;
       break;
     }
 
-  for (i = 0; i < level.group_hudelems.size; i++)
+  for(i = 0; i < level.group_hudelems.size; i++)
     level.group_hudelems[i] clearalltextafterhudelem();
 
   level.group_hudelems[div] _settext("^3" + gettext_nonode(keys[index]));
 
-  for (i = 1; i < level.group_hudelems.size - div; i++) {
+  for(i = 1; i < level.group_hudelems.size - div; i++) {
     if(index - i < 0) {
-      //-- -- 
+      //-- --
       level.group_hudelems[div + i] _settext("-- --");
       continue;
     }
     level.group_hudelems[div + i] _settext(gettext_nonode(keys[index - i]));
   }
 
-  for (i = 1; i < level.group_hudelems.size - div; i++) {
+  for(i = 1; i < level.group_hudelems.size - div; i++) {
     if(index + i > keys.size - 1) {
-      //-- -- 
+      //-- --
       level.group_hudelems[div - i] _settext("-- --");
       continue;
     }
@@ -410,13 +406,12 @@ setcurrentgroup(group) {
   group = getcurrent_groupstruct();
   level.node_grid = group.grid_size;
   hud_update_gridsize();
-
 }
 
 setgroup_up() {
   index = undefined;
   keys = getarraykeys(level.place_node_group);
-  for (i = 0; i < keys.size; i++)
+  for(i = 0; i < keys.size; i++)
     if(keys[i] == level.place_node_current_group) {
       index = i + 1;
       break;
@@ -429,7 +424,7 @@ setgroup_up() {
 setgroup_down() {
   index = undefined;
   keys = getarraykeys(level.place_node_group);
-  for (i = 0; i < keys.size; i++)
+  for(i = 0; i < keys.size; i++)
     if(keys[i] == level.place_node_current_group) {
       index = i - 1;
       break;
@@ -440,16 +435,16 @@ setgroup_down() {
 }
 
 add_node_type(type, wall_snap_direction, grid_size) {
-  //may farther complicate with corner nodes using different 
-  if(!isdefined(wall_snap_direction))
+  //may farther complicate with corner nodes using different
+  if(!isDefined(wall_snap_direction))
     wall_snap_direction = 0;
 
-  if(!isdefined(grid_size))
+  if(!isDefined(grid_size))
     grid_size = 0;
 
   precachemodel(type); // assumes model is same name as type
-  if(!isdefined(level.place_node_group[type])) {
-    struct = spawnstruct();
+  if(!isDefined(level.place_node_group[type])) {
+    struct = spawnStruct();
     struct.wall_snap_direction = wall_snap_direction;
     struct.grid_size = grid_size;
     level.place_node_group[type] = struct;
@@ -470,19 +465,18 @@ playerInit() {
 
   set_button_funcs_main();
   add_button_modifier_func(::set_button_funcs_quick_select, ::set_button_funcs_quick_select_release, "BUTTON_LSTICK");
-
 }
 
 button_modifier() {
-  while (1) {
+  while(1) {
     foreach(button, blah in level.button_modifier_func)
     if(self buttonpressed(button)) {
       [
         [level.button_modifier_func[button]]
       ]();
-      while (self buttonpressed(button))
+      while(self buttonpressed(button))
         wait .05;
-      assert(isdefined(level.button_modifier_release_func));
+      assert(isDefined(level.button_modifier_release_func));
       [
         [level.button_modifier_release_func[button]]
       ]();
@@ -494,15 +488,13 @@ button_modifier() {
 }
 
 button_monitor() {
-  while (1) {
+  while(1) {
     foreach(button, lalala in level.button_func) {
       if(self buttonpressed(button)) {
-        [
-          [level.button_func[button]]
-        ]();
+        [[level.button_func[button]]]();
 
         if(!level.button_func_isflow[button])
-          while (self buttonpressed(button))
+          while(self buttonpressed(button))
             wait .05;
         break;
       }
@@ -513,13 +505,13 @@ button_monitor() {
 
 add_button_func(func, flow, button) {
   buttons = [];
-  assert(isdefined(button));
+  assert(isDefined(button));
   level.button_func[button] = func;
   level.button_func_isflow[button] = flow;
 }
 
 add_button_modifier_func(func, releasefunc, button) {
-  assert(isdefined(button));
+  assert(isDefined(button));
   level.button_modifier_func[button] = func;
   level.button_modifier_release_func[button] = releasefunc;
 }
@@ -540,7 +532,7 @@ get_wall_offset(angles) {
   dest_point = point + offset;
 
   corner_snap_origin = find_corner_snap(dest_point, angles);
-  if(isdefined(corner_snap_origin))
+  if(isDefined(corner_snap_origin))
     dest_point = corner_snap_origin;
   return groundpos_loc(dest_point) + level.noder_heightoffset;
 }
@@ -549,9 +541,9 @@ find_corner_snap(dest_point, angles) {
   group = getcurrent_groupstruct();
   dir = group.wall_snap_direction;
 
-  if(dir == 0)
+  if(dir == 0) {
     return;
-
+  }
   start_dest = dest_point;
   org_start_dest = start_dest;
 
@@ -561,7 +553,7 @@ find_corner_snap(dest_point, angles) {
 
   half_right_vec = 16 * dir * vectornormalize(anglestoright(angles));
 
-  for (i = 1; i < 15; i++) {
+  for(i = 1; i < 15; i++) {
     start_dest = org_start_dest;
     dest_point = start_dest;
     rightvec = i * sidevecinc * dir * vectornormalize(anglestoright(angles));
@@ -574,7 +566,7 @@ find_corner_snap(dest_point, angles) {
       line(start_dest, dest_point, (0, 1, 0));
 
     start_dest = dest_point;
-    forwardvec = 32 * vectornormalize(anglestoforward(angles));
+    forwardvec = 32 * vectornormalize(anglesToForward(angles));
     trace = bullettrace_but_not_nodes(dest_point, dest_point + (forwardvec), 0);
 
     back_frac = trace["fraction"];
@@ -615,11 +607,10 @@ find_corner_snap(dest_point, angles) {
     return position;
   }
   return undefined;
-
 }
 
 place_node_place(bpreview) {
-  if(!isdefined(bpreview))
+  if(!isDefined(bpreview))
     bpreview = false;
   trace = level.player_view_trace;
   angles = flat_angle(level.player getplayerangles());
@@ -654,7 +645,6 @@ place_node_place(bpreview) {
   draw_lines_to_connectible_nodes(origin);
 
   place_node_here(origin, angles, bpreview);
-
 }
 
 place_node_here(origin, angles, bpreview) {
@@ -665,9 +655,9 @@ place_node_here(origin, angles, bpreview) {
   } else
     node = spawn("script_model", origin);
   node notsolid();
-  assert(isdefined(group.model));
+  assert(isDefined(group.model));
   if(!bpreview)
-    node setmodel(group.model);
+    node setModel(group.model);
   node.angles = angles;
   if(group.model == "node_pathnode")
     node.angles = (0, 0, 0);
@@ -676,40 +666,39 @@ place_node_here(origin, angles, bpreview) {
     level.placed_nodes[level.placed_nodes.size] = node;
   }
   hud_update_placed_model_count();
-
 }
 
 place_node_place_at_feet() {
   angles = flat_angle(level.noder_player getplayerangles());
   origin = groundpos_loc(level.noder_player.origin + (0, 0, 16)) + level.noder_heightoffset;
 
-  if(node_is_invalid(origin))
+  if(node_is_invalid(origin)) {
     return;
-
+  }
   place_node_here(origin, angles, false);
   hud_update_placed_model_count();
 }
 
 get_mp_player() {
-  return getentarray("player", "classname")[0];
+  return getEntArray("player", "classname")[0];
 }
 
 place_node_erase() {
   node = undefined;
-  if(isdefined(level.selected_node)) {
+  if(isDefined(level.selected_node)) {
     node = level.selected_node;
   }
-  if(isdefined(level.player_view_trace["entity"])) {
+  if(isDefined(level.player_view_trace["entity"])) {
     node = level.player_view_trace["entity"];
     if(!issubstr(node.model, "node_"))
       node = undefined;
   }
-  if(!isdefined(node))
+  if(!isDefined(node)) {
     return;
-
+  }
   level.near_nodes = array_remove(level.near_nodes, node);
   level.placed_nodes = array_remove(level.placed_nodes, node);
-  if(isdefined(node.has_dummy_guy)) {
+  if(isDefined(node.has_dummy_guy)) {
     node.has_dummy_guy hide();
     node.has_dummy_guy.is_hidden = true;
 
@@ -720,17 +709,16 @@ place_node_erase() {
 }
 
 dump_nodes() {
-  /#
-  if(!level.placed_nodes.size)
+  if(!level.placed_nodes.size) {
     return;
-
+  }
   level notify("dump_nodes");
   level.near_nodes = [];
 
   fileprint_launcher_start_file();
   fileprint_map_start();
 
-  for (i = 0; i < level.placed_nodes.size; i++) {
+  for(i = 0; i < level.placed_nodes.size; i++) {
     origin = fileprint_radiant_vec(level.placed_nodes[i].origin); // convert these vectors to mapfile keypair format
     angles = fileprint_radiant_vec(level.placed_nodes[i].angles);
 
@@ -752,25 +740,24 @@ dump_nodes() {
     hud_update_placed_model_count();
   }
   thread manage_nearnodes();
-  # /
 
 }
 
 player_view_trace() {
   maxdist = 2000;
-  traceorg = level.noder_player geteye();
-  return bullettrace(traceorg, traceorg + (anglestoforward(level.noder_player getplayerangles()) * maxdist), 0, level.preview_node);
+  traceorg = level.noder_player getEye();
+  return bulletTrace(traceorg, traceorg + (anglesToForward(level.noder_player getplayerangles()) * maxdist), 0, level.preview_node);
 }
 
 is_player_looking_at_a_wall() {
-  if(!isdefined(level.player_view_trace["normal"]))
+  if(!isDefined(level.player_view_trace["normal"]))
     return false;
 
   if(traces_hitting_node(level.player_view_trace))
     return false;
   normal_angle = vectortoangles(level.player_view_trace["normal"]);
   flat_normal_angle = flat_angle(normal_angle);
-  if(VectorDot(anglestoforward(flat_normal_angle), anglestoforward(normal_angle)) == 1)
+  if(VectorDot(anglesToForward(flat_normal_angle), anglesToForward(normal_angle)) == 1)
     return true;
   else
     return false;
@@ -778,25 +765,24 @@ is_player_looking_at_a_wall() {
 
 gettext_nonode(txt) {
   newtext = "";
-  for (i = 5; i < txt.size; i++)
+  for(i = 5; i < txt.size; i++)
     newtext += txt[i];
   return newtext;
-
 }
 
 bullettrace_but_not_nodes(traceorg, traceorg2, other, ignoreent) {
-  trace = bullettrace(traceorg, traceorg2, other, ignoreent);
+  trace = bulletTrace(traceorg, traceorg2, other, ignoreent);
   if(traces_hitting_node(trace))
-    trace = bullettrace(traceorg, traceorg2, other, trace["entity"]);
+    trace = bulletTrace(traceorg, traceorg2, other, trace["entity"]);
   return trace;
 }
 
 traces_hitting_node(trace) {
-  return isdefined(trace["entity"]) && isdefined(trace["entity"].model) && IsSubStr(trace["entity"].model, "node_");
+  return isDefined(trace["entity"]) && isDefined(trace["entity"].model) && IsSubStr(trace["entity"].model, "node_");
 }
 
 groundpos_loc(origin, maxtest) {
-  if(!isdefined(maxtest))
+  if(!isDefined(maxtest))
     maxtest = -100000;
   return bullettrace_but_not_nodes(origin, (origin + (0, 0, maxtest)), 0, self)["position"];
 }
@@ -825,8 +811,8 @@ draw_grid(origin, bpreview) {
 
   origin = groundpos_loc(origin);
   offsetorigin = origin + (0, 0, level.node_grid);
-  for (x = gridlines * -1; x < gridlines + 1; x++) {
-    for (y = gridlines * -1; y < gridlines + 1; y++) {
+  for(x = gridlines * -1; x < gridlines + 1; x++) {
+    for(y = gridlines * -1; y < gridlines + 1; y++) {
       if(x != gridlines) {
         Line(origin + (x * level.node_grid, y * level.node_grid, 0), origin + ((x + 1) * level.node_grid, y * level.node_grid, 0), gridcolor, true);
         //				groundpos_line( offsetorigin + ( x * level.node_grid, y * level.node_grid, 0 ), offsetorigin + ( ( x + 1 ) * level.node_grid, y * level.node_grid, 0 ), gridcolor, true );
@@ -861,7 +847,7 @@ node_is_invalid(origin) {
         selector_node = node;
     }
   }
-  if(!isdefined(selector_node))
+  if(!isDefined(selector_node))
     return false;
   level.coliding_node = selector_node;
   if(count >= 2)
@@ -912,13 +898,13 @@ grid_toggle() {
 }
 
 select_traced_node(trace) {
-  assert(isdefined(trace["entity"]));
-  assert(isdefined(trace["entity"].model));
+  assert(isDefined(trace["entity"]));
+  assert(isDefined(trace["entity"].model));
   select_node(trace["entity"]);
 }
 
 select_node(node) {
-  if(level.node_select_locked && isdefined(level.selected_node))
+  if(level.node_select_locked && isDefined(level.selected_node))
     return;
   place_new_dummy_guy_and_animate_at_node(node);
 
@@ -930,10 +916,10 @@ select_node(node) {
 }
 
 place_new_dummy_guy_and_animate_at_node(node) {
-  if(!level.dummyguy.size || isdefined(node.has_dummy_guy) || !node_has_animations(node))
+  if(!level.dummyguy.size || isDefined(node.has_dummy_guy) || !node_has_animations(node))
     return;
   dummyguy = fifo_dummyguy();
-  if(isdefined(dummyguy.lastnode))
+  if(isDefined(dummyguy.lastnode))
     dummyguy.lastnode.has_dummy_guy = undefined;
   dummyguy thread animate_dummyguy_at_node(node);
 }
@@ -943,15 +929,15 @@ select_coliding_node() {
 }
 
 unselect_node() {
-  if(level.node_select_locked && isdefined(level.selected_node))
+  if(level.node_select_locked && isDefined(level.selected_node))
     return;
   level.selector_model hide();
   level.selected_node = undefined;
 }
 
 draw_selected_node_name() {
-  while (1) {
-    if(!isdefined(level.selected_node)) {
+  while(1) {
+    if(!isDefined(level.selected_node)) {
       wait .05;
       continue;
     }
@@ -1072,7 +1058,6 @@ set_button_funcs_quick_select() {
   clear_all_button_funcs();
   set_button_funcs_quickselect();
   hint_buttons_quick_modifier();
-
 }
 
 set_button_funcs_quick_select_release() {
@@ -1081,7 +1066,7 @@ set_button_funcs_quick_select_release() {
 }
 
 _newhudelem() {
-  if(!isdefined(level.noder_elems))
+  if(!isDefined(level.noder_elems))
     level.noder_elems = [];
   elem = newhudelem();
   level.noder_elems[level.noder_elems.size] = elem;
@@ -1091,13 +1076,12 @@ _newhudelem() {
 _settext(text) {
   self.realtext = text;
   foreach(elem in level.noder_elems) {
-    if(isdefined(elem.realtext))
+    if(isDefined(elem.realtext))
       elem settext(elem.realtext);
   }
 }
 
 animate_dummyguy_at_node(node) {
-
   origin = node.origin + (0, 0, -32);
   angles = node.angles + level.node_offset[node.model];
   node.has_dummy_guy = self;
@@ -1122,7 +1106,7 @@ fifo_dummyguy() {
 }
 
 node_has_animations(node) {
-  if(isdefined(level.scr_anim["generic"][node.model]))
+  if(isDefined(level.scr_anim["generic"][node.model]))
     return true;
   return false;
 }
@@ -1141,21 +1125,21 @@ toggle_animation_preview() {
 
 hide_all_dummyguys() {
   foreach(guy in level.dummyguy) {
-    if(!isdefined(guy.is_hidden) || !guy.is_hidden)
+    if(!isDefined(guy.is_hidden) || !guy.is_hidden)
       guy hide();
   }
 }
 
 show_all_dummyguys() {
   foreach(guy in level.dummyguy) {
-    if(!isdefined(guy.is_hidden) || !guy.is_hidden)
+    if(!isDefined(guy.is_hidden) || !guy.is_hidden)
       guy show();
   }
 }
 
 draw_lines_to_connectible_nodes(org) {
   foreach(node in level.near_nodes) {
-    if(!isdefined(Node.classname))
+    if(!isDefined(Node.classname))
       line(org, node.origin + (0, 0, 16), (0, .7, .7), true);
     else
       Line(org, node.origin, (0, 1, 0), true);
@@ -1174,17 +1158,17 @@ manage_nearnodes() {
 
   //ledgibilty be damned. trying not to use a bazillion script calls to speed this up.
 
-  while (1) {
+  while(1) {
     //faster than array_combine
     all_nodes = nodes;
     foreach(node in level.placed_nodes) {
-      assert(isdefined(node));
+      assert(isDefined(node));
       all_nodes[all_nodes.size] = node;
     }
     size = level.placed_nodes.size;
 
     foreach(node in all_nodes) {
-      assert(isdefined(node));
+      assert(isDefined(node));
       array[array.size] = node;
       count++;
 

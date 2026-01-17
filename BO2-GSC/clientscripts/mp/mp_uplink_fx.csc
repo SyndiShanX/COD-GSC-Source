@@ -8,8 +8,7 @@
 #include clientscripts\mp\createfx\mp_uplink_fx;
 #include clientscripts\mp\_fx;
 
-precache_scripted_fx() {
-}
+precache_scripted_fx() {}
 
 precache_createfx_fx() {
   level._effect["fx_mp_uplink_rain_med_fast_os"] = loadfx("weather/fx_mp_uplink_rain_med_fast_os");
@@ -133,10 +132,10 @@ fxanim_radar_think(localclientnum) {
   self waittill_dobj(localclientnum);
   self useanimtree(#animtree);
   anim_index = 1;
-  playfxontag(localclientnum, level._effect["fx_light_beacon_red_blink_fst"], self, "fx_link_01_jnt");
-  playfxontag(localclientnum, level._effect["fx_light_beacon_red_blink_fst"], self, "fx_link_02_jnt");
-  playfxontag(localclientnum, level._effect["fx_light_beacon_red_blink_fst"], self, "fx_link_03_jnt");
-  playfxontag(localclientnum, level._effect["fx_light_beacon_red_blink_fst"], self, "fx_link_04_jnt");
+  playFXOnTag(localclientnum, level._effect["fx_light_beacon_red_blink_fst"], self, "fx_link_01_jnt");
+  playFXOnTag(localclientnum, level._effect["fx_light_beacon_red_blink_fst"], self, "fx_link_02_jnt");
+  playFXOnTag(localclientnum, level._effect["fx_light_beacon_red_blink_fst"], self, "fx_link_03_jnt");
+  playFXOnTag(localclientnum, level._effect["fx_light_beacon_red_blink_fst"], self, "fx_link_04_jnt");
 
   for(;;) {
     self setflaggedanimrestart("radar_done" + anim_index, level.scr_anim["fxanim_props_dlc3"]["radar0" + anim_index], 1.0, 0.0, 1.0);

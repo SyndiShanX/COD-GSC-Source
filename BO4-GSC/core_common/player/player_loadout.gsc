@@ -4,7 +4,6 @@
 *************************************************/
 
 #include scripts\core_common\util_shared;
-
 #namespace loadout;
 
 function_87bcb1b() {
@@ -16,8 +15,8 @@ function_87bcb1b() {
 }
 
 function_c67222df() {
-  if(!isDefined(self.pers[#"loadout"])) {
-    self.pers[#"loadout"] = spawnStruct();
+  if(!isDefined(self.pers[# "loadout"])) {
+    self.pers[# "loadout"] = spawnStruct();
   }
 
   self init_loadout_slot("primary");
@@ -29,25 +28,25 @@ function_c67222df() {
 }
 
 init_loadout_slot(slot_index) {
-  self.pers[#"loadout"].slots[slot_index] = {
-    #slot: slot_index, 
-    #weapon: level.weaponnone, 
-    #var_4cfdfa9b: level.weaponnone, 
-    #count: 0, 
+  self.pers[# "loadout"].slots[slot_index] = {
+    #slot: slot_index,
+    #weapon: level.weaponnone,
+    #var_4cfdfa9b: level.weaponnone,
+    #count: 0,
     #killed: 0
   };
 }
 
 get_loadout_slot(slot_index) {
-  if(isDefined(self.pers[#"loadout"])) {
-    return self.pers[#"loadout"].slots[slot_index];
+  if(isDefined(self.pers[# "loadout"])) {
+    return self.pers[# "loadout"].slots[slot_index];
   }
 
   return undefined;
 }
 
 function_8435f729(weapon) {
-  foreach(slot, slot_index in self.pers[#"loadout"].slots) {
+  foreach(slot, slot_index in self.pers[# "loadout"].slots) {
     if(slot.weapon == weapon) {
       return slot_index;
     }
@@ -57,8 +56,8 @@ function_8435f729(weapon) {
 }
 
 find_loadout_slot(weapon) {
-  if(isDefined(self.pers[#"loadout"])) {
-    foreach(slot in self.pers[#"loadout"].slots) {
+  if(isDefined(self.pers[# "loadout"])) {
+    foreach(slot in self.pers[# "loadout"].slots) {
       if(slot.weapon == weapon) {
         return slot;
       }
@@ -69,19 +68,19 @@ find_loadout_slot(weapon) {
 }
 
 function_18a77b37(slot_index) {
-  if(function_87bcb1b() && isDefined(self) && isDefined(self.pers) && isDefined(self.pers[#"loadout"])) {
-    assert(isDefined(self.pers[#"loadout"].slots[slot_index]));
-    return self.pers[#"loadout"].slots[slot_index].weapon;
+  if(function_87bcb1b() && isDefined(self) && isDefined(self.pers) && isDefined(self.pers[# "loadout"])) {
+    assert(isDefined(self.pers[# "loadout"].slots[slot_index]));
+    return self.pers[# "loadout"].slots[slot_index].weapon;
   }
 
   return undefined;
 }
 
 function_442539(slot_index, weapon) {
-  assert(isDefined(self.pers[#"loadout"].slots[slot_index]));
+  assert(isDefined(self.pers[# "loadout"].slots[slot_index]));
   assert(isplayer(self));
   assert(isDefined(weapon));
-  self.pers[#"loadout"].slots[slot_index].weapon = weapon;
+  self.pers[# "loadout"].slots[slot_index].weapon = weapon;
 }
 
 gadget_is_in_use(slot_index) {

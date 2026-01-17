@@ -16,7 +16,7 @@ main() {
 }
 
 collectibles_level_restore() {
-  map_collectibles = getentarray("collectible", "targetname");
+  map_collectibles = getEntArray("collectible", "targetname");
   for(i = 0; i < map_collectibles.size; i++) {
     if(HasCollectible(int(map_collectibles[i].script_parameters))) {
       collectible_remove_found(map_collectibles[i]);
@@ -29,7 +29,7 @@ collectible_init() {
   collectibles = [];
   items = 0;
   radius = 64;
-  map_collectibles = getentarray("collectible", "targetname");
+  map_collectibles = getEntArray("collectible", "targetname");
   start_num = 0;
   switch (level.script) {
     case "cuba":
@@ -144,7 +144,7 @@ collectible_achievement_unlock() {
 
 collectibleNotify(Unlock, num_found) {
   notifyData = spawnStruct();
-  notifyData.notifyText = & "SCRIPT_COLLECTIBLE";
+  notifyData.notifyText = &"SCRIPT_COLLECTIBLE";
   notifyData.sound = undefined;
   self maps\_hud_message::notifyMessage(notifyData);
 }

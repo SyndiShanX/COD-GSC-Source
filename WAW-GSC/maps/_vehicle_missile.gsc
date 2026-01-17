@@ -44,7 +44,7 @@ turret_think() {
   self.attackRadius *= difficultyScaler;
   if(getdvar("cobrapilot_debug") == "1")
     iprintln("surface-to-air missile range difficultyScaler = " + difficultyScaler);
-  for (;;) {
+  for(;;) {
     wait(2 + randomfloat(1));
     eTarget = undefined;
     if(!isDefined(eTarget)) {
@@ -102,7 +102,7 @@ within_attack_range(targetEnt) {
 
 fireMissile() {
   self endon("death");
-  for (;;) {
+  for(;;) {
     self waittill("shoot_target", targetEnt);
     assert(isDefined(targetEnt));
     assert(isDefined(self.missileTags[self.missileLaunchNextTag]));
@@ -129,7 +129,7 @@ fireMissile() {
 
 draw_missile_target_line(eMissile, targetEnt, offset) {
   eMissile endon("death");
-  for (;;) {
+  for(;;) {
     line(eMissile.origin, targetEnt.origin + offset);
     wait 0.05;
   }
@@ -143,7 +143,7 @@ tryReload() {
   if(self.missileAmmo > 0) {
     return;
   }
-  for (i = 0; i < self.missileTags.size; i++)
+  for(i = 0; i < self.missileTags.size; i++)
     self attach(self.missileModel, self.missileTags[i]);
   self.missileAmmo = self.missileTags.size;
   self.missileLaunchNextTag = 0;

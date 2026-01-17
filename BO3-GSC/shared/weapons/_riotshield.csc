@@ -11,7 +11,7 @@
 #namespace riotshield;
 
 function init_shared() {
-  clientfield::register("scriptmover", "riotshield_state", 1, 2, "int", & shield_state_change, 0, 0);
+  clientfield::register("scriptmover", "riotshield_state", 1, 2, "int", &shield_state_change, 0, 0);
   level._effect["riotshield_light"] = "_t6/weapon/riotshield/fx_riotshield_depoly_lights";
   level._effect["riotshield_dust"] = "_t6/weapon/riotshield/fx_riotshield_depoly_dust";
 }
@@ -40,17 +40,17 @@ function riotshield_deploy_anim(localclientnum, instant) {
     self setanimtime( % mp_riotshield::o_riot_stand_deploy, 1);
   } else {
     self setanim( % mp_riotshield::o_riot_stand_deploy, 1, 0, 1);
-    playfxontag(localclientnum, level._effect["riotshield_dust"], self, "tag_origin");
+    playFXOnTag(localclientnum, level._effect["riotshield_dust"], self, "tag_origin");
   }
   if(!instant) {
     wait(0.8);
   }
-  self.shieldlightfx = playfxontag(localclientnum, level._effect["riotshield_light"], self, "tag_fx");
+  self.shieldlightfx = playFXOnTag(localclientnum, level._effect["riotshield_light"], self, "tag_fx");
 }
 
 function watch_riotshield_damage() {
   self endon("entityshutdown");
-  while (true) {
+  while(true) {
     self waittill("damage", damage_loc, damage_type);
     self useanimtree($mp_riotshield);
     if(damage_type == "MOD_MELEE" || damage_type == "MOD_MELEE_WEAPON_BUTT" || damage_type == "MOD_MELEE_ASSASSINATE") {
@@ -63,11 +63,11 @@ function watch_riotshield_damage() {
 
 function riotshield_destroy_anim(localclientnum) {
   self endon("entityshutdown");
-  if(isdefined(self.shieldlightfx)) {
+  if(isDefined(self.shieldlightfx)) {
     stopfx(localclientnum, self.shieldlightfx);
   }
   wait(0.05);
-  self playsound(localclientnum, "wpn_shield_destroy");
+  self playSound(localclientnum, "wpn_shield_destroy");
   self useanimtree($mp_riotshield);
   self setanim( % mp_riotshield::o_riot_stand_destroyed, 1, 0, 1);
   wait(1);

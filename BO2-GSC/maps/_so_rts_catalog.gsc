@@ -43,7 +43,7 @@ get_pkg_ref_by_index(idx) {
 init() {
   level.rts.packages_avail = package_generateavailable("allies");
   assert(isDefined(level.rts.rules), "rules must be initialized first");
-  level.rts.transport = spawnstruct();
+  level.rts.transport = spawnStruct();
   level.rts.transport.helo = [];
   level.rts.transport.vtol = [];
   level.rts.enemy_notification = 0;
@@ -52,7 +52,7 @@ init() {
 
   for(i = 0; i < level.rts.game_rules.player_helo; i++) {
     unith = level.rts.transport.helo.size;
-    level.rts.transport.helo[unith] = spawnstruct();
+    level.rts.transport.helo[unith] = spawnStruct();
     level.rts.transport.helo[unith].state = 0;
     level.rts.transport.helo[unith].type = "helo";
     level.rts.transport.helo[unith].num = unith;
@@ -62,7 +62,7 @@ init() {
 
   for(i = 0; i < level.rts.game_rules.enemy_helo; i++) {
     unith = level.rts.transport.helo.size;
-    level.rts.transport.helo[unith] = spawnstruct();
+    level.rts.transport.helo[unith] = spawnStruct();
     level.rts.transport.helo[unith].state = 0;
     level.rts.transport.helo[unith].type = "helo";
     level.rts.transport.helo[unith].num = unith;
@@ -72,7 +72,7 @@ init() {
 
   for(i = 0; i < level.rts.game_rules.player_vtol; i++) {
     unitv = level.rts.transport.vtol.size;
-    level.rts.transport.vtol[unitv] = spawnstruct();
+    level.rts.transport.vtol[unitv] = spawnStruct();
     level.rts.transport.vtol[unitv].state = 0;
     level.rts.transport.vtol[unitv].type = "vtol";
     level.rts.transport.vtol[unitv].num = unitv;
@@ -82,7 +82,7 @@ init() {
 
   for(i = 0; i < level.rts.game_rules.enemy_vtol; i++) {
     unitv = level.rts.transport.vtol.size;
-    level.rts.transport.vtol[unitv] = spawnstruct();
+    level.rts.transport.vtol[unitv] = spawnStruct();
     level.rts.transport.vtol[unitv].state = 0;
     level.rts.transport.vtol[unitv].type = "vtol";
     level.rts.transport.vtol[unitv].num = unitv;
@@ -102,7 +102,7 @@ package_populate() {
     if(!isDefined(ref) || ref == "") {
       continue;
     }
-    pkg = spawnstruct();
+    pkg = spawnStruct();
     pkg.idx = i;
     pkg.ref = ref;
     pkg.name = lookup_value(ref, i, 2);
@@ -264,8 +264,8 @@ package_commandunitfps(squadid) {
   } else
     eye = level.rts.player.origin + vectorscale((0, 0, 1), 60.0);
 
-  direction_vec = anglestoforward(direction);
-  trace = bullettrace(eye, eye + vectorscale(direction_vec, 100000), 1, level.rts.player);
+  direction_vec = anglesToForward(direction);
+  trace = bulletTrace(eye, eye + vectorscale(direction_vec, 100000), 1, level.rts.player);
   hitent = trace["entity"];
   tracepoint = trace["position"];
 
@@ -335,7 +335,7 @@ package_commandunitfps(squadid) {
       }
     }
 
-    groundpos = bullettrace(tracepoint + vectorscale(trace["normal"], 36), tracepoint + vectorscale(trace["normal"], 36) + vectorscale((0, 0, -1), 100000.0), 0, level.rts.player)["position"] + vectorscale((0, 0, 1), 6.0);
+    groundpos = bulletTrace(tracepoint + vectorscale(trace["normal"], 36), tracepoint + vectorscale(trace["normal"], 36) + vectorscale((0, 0, -1), 100000.0), 0, level.rts.player)["position"] + vectorscale((0, 0, 1), 6.0);
     level notify("squad_moved", groundpos, squad.id);
     level thread maps\_so_rts_squad::rts_move_squadstocursor(squad.id, groundpos);
   }
@@ -520,9 +520,9 @@ package_takeoverunitpressed(pkg_ref) {
       thread maps\_so_rts_main::player_in_control();
     } else {
       direction = maps\_so_rts_support::get_player_angles();
-      direction_vec = anglestoforward(direction);
-      eye = level.rts.player geteye();
-      trace = bullettrace(eye, eye + vectorscale(direction_vec, 10000), 1, level.rts.player);
+      direction_vec = anglesToForward(direction);
+      eye = level.rts.player getEye();
+      trace = bulletTrace(eye, eye + vectorscale(direction_vec, 10000), 1, level.rts.player);
       hitent = trace["entity"];
 
       if(isDefined(hitent) && isDefined(hitent.squadid) && hitent.squadid == squad.id)
@@ -812,9 +812,7 @@ spawn_package(package_name, team, initial, callback) {
 
 spawn_package_code(pkg_ref, team, callback) {
   if(isDefined(level.rts.codespawncb)) {
-    squadid = [
-      [level.rts.codespawncb]
-    ](pkg_ref, team, callback);
+    squadid = [[level.rts.codespawncb]](pkg_ref, team, callback);
     assert(isDefined(squadid), "Custom Code must return squadID");
     return squadid;
   }
@@ -1015,8 +1013,7 @@ allocatetransport(team, type, pkg_ref, cb, paramcb) {
 
       println("**** transport - timeTo: (" + timeto + ") timeBack: (" + timeback + ")");
 
-      if(team == "allies" && isDefined(pkg_ref.hot_key_takeover)) {
-      }
+      if(team == "allies" && isDefined(pkg_ref.hot_key_takeover)) {}
     }
   }
 

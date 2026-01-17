@@ -9,7 +9,6 @@
 #include scripts\core_common\dev_shared;
 #include scripts\core_common\scoreevents_shared;
 #include scripts\core_common\util_shared;
-
 #namespace heatseekingmissile;
 
 init_shared() {
@@ -19,7 +18,6 @@ init_shared() {
   level.fx_flare = "killstreaks/fx8_atkchpr_chaff";
 
   setdvar(#"scr_freelock", 0);
-
 }
 
 on_player_spawned() {
@@ -42,7 +40,7 @@ clearirtarget() {
     self.stingertarget notify(#"missile_unlocked");
     clientnum = self getentitynumber();
 
-    if((self.stingertarget.locked_on&1 << clientnum) != 0) {
+    if((self.stingertarget.locked_on & 1 << clientnum) != 0) {
       self notify(#"hash_41e93a518427847c");
     }
 
@@ -59,12 +57,11 @@ clearirtarget() {
   self stoplocalsound(game.locked_on_sound);
 
   self destroylockoncanceledmessage();
-
 }
 
 function_5e6cd0ab(weapon, attacker) {
   params = {
-    #weapon: weapon, 
+    #weapon: weapon,
     #attacker: attacker
   };
   self notify(#"missile_lock", params);
@@ -73,8 +70,8 @@ function_5e6cd0ab(weapon, attacker) {
 
 function_a439ae56(missile, weapon, attacker) {
   params = {
-    #projectile: missile, 
-    #weapon: weapon, 
+    #projectile: missile,
+    #weapon: weapon,
     #attacker: attacker
   };
   self notify(#"stinger_fired_at_me", params);
@@ -88,16 +85,16 @@ event_handler[missile_fire] function_a3d258b6(eventstruct) {
 
   thread debug_missile(missile);
 
-    if(weapon.lockontype == "Legacy Single") {
-      if(isplayer(self) && isDefined(self.stingertarget) && self.stingerlockfinalized) {
-        self.stingertarget function_a439ae56(missile, weapon, self);
-        return;
-      }
-
-      if(isDefined(target)) {
-        target function_a439ae56(missile, weapon, self);
-      }
+  if(weapon.lockontype == "Legacy Single") {
+    if(isplayer(self) && isDefined(self.stingertarget) && self.stingerlockfinalized) {
+      self.stingertarget function_a439ae56(missile, weapon, self);
+      return;
     }
+
+    if(isDefined(target)) {
+      target function_a439ae56(missile, weapon, self);
+    }
+  }
 }
 
 debug_missile(missile) {
@@ -135,24 +132,24 @@ debug_missile(missile) {
   }
 }
 
-  function getappropriateplayerweapon(currentweapon) {
-    appropriateweapon = currentweapon;
+function getappropriateplayerweapon(currentweapon) {
+  appropriateweapon = currentweapon;
 
-    if(self.usingvehicle) {
-      vehicleseatposition = isDefined(self.vehicleposition) ? self.vehicleposition : 0;
-      vehicleentity = self.viewlockedentity;
+  if(self.usingvehicle) {
+    vehicleseatposition = isDefined(self.vehicleposition) ? self.vehicleposition : 0;
+    vehicleentity = self.viewlockedentity;
 
-      if(isDefined(vehicleentity) && isvehicle(vehicleentity)) {
-        appropriateweapon = vehicleentity seatgetweapon(vehicleseatposition);
+    if(isDefined(vehicleentity) && isvehicle(vehicleentity)) {
+      appropriateweapon = vehicleentity seatgetweapon(vehicleseatposition);
 
-        if(!isDefined(appropriateweapon)) {
-          appropriateweapon = currentweapon;
-        }
+      if(!isDefined(appropriateweapon)) {
+        appropriateweapon = currentweapon;
       }
     }
-
-    return appropriateweapon;
   }
+
+  return appropriateweapon;
+}
 
 stingerwaitforads() {
   while(!self playerstingerads()) {
@@ -169,7 +166,7 @@ stingerwaitforads() {
 }
 
 on_weapon_change(params) {
-  self endon(#"death", #"disconnect");
+  self endon(#"death", # "disconnect");
   weapon = self getappropriateplayerweapon(params.weapon);
 
   while(weapon.lockontype == "Legacy Single") {
@@ -206,7 +203,7 @@ on_weapon_change(params) {
 }
 
 stingerirtloop(weapon) {
-  self endon(#"disconnect", #"death", #"stinger_irt_off");
+  self endon(#"disconnect", # "death", # "stinger_irt_off");
   locklength = self getlockonspeed();
 
   if(!isDefined(self.stingerlockfinalized)) {
@@ -300,64 +297,59 @@ stingerirtloop(weapon) {
     }
 
     result = self getbeststingertarget(weapon);
-    besttarget = result[#"target"];
-    bestsubtarget = result[#"subtarget"];
+    besttarget = result[# "target"];
+    bestsubtarget = result[# "subtarget"];
 
     if(!isDefined(besttarget) || isDefined(self.stingertarget) && self.stingertarget != besttarget) {
-
       self destroylockoncanceledmessage();
 
-        if(self.stingerlockdetected == 1) {
-          self weaponlockfree();
-          self.stingerlockdetected = 0;
-        }
+      if(self.stingerlockdetected == 1) {
+        self weaponlockfree();
+        self.stingerlockdetected = 0;
+      }
 
       continue;
     }
 
     if(!self locksighttest(besttarget)) {
-
       self destroylockoncanceledmessage();
 
-        continue;
+      continue;
     }
 
     if(isDefined(besttarget.lockondelay) && besttarget.lockondelay) {
-
       self displaylockoncanceledmessage();
 
-        continue;
+      continue;
     }
 
     if(!targetwithinrangeofplayspace(besttarget)) {
-
       self displaylockoncanceledmessage();
 
-        continue;
+      continue;
     }
 
     if(!function_1b76fb42(besttarget, weapon)) {
-
       self displaylockoncanceledmessage();
 
-        continue;
+      continue;
     }
 
     self destroylockoncanceledmessage();
 
-      if(self insidestingerreticlelocked(besttarget, bestsubtarget, weapon) == 0) {
-        if(self.stingerlockdetected == 0) {
-          self weaponlockdetect(besttarget, 0, bestsubtarget);
-        }
-
-        self.stingerlockdetected = 1;
-
-        if(isDefined(weapon)) {
-          setfriendlyflags(weapon, besttarget);
-        }
-
-        continue;
+    if(self insidestingerreticlelocked(besttarget, bestsubtarget, weapon) == 0) {
+      if(self.stingerlockdetected == 0) {
+        self weaponlockdetect(besttarget, 0, bestsubtarget);
       }
+
+      self.stingerlockdetected = 1;
+
+      if(isDefined(weapon)) {
+        setfriendlyflags(weapon, besttarget);
+      }
+
+      continue;
+    }
 
     self.stingerlockdetected = 0;
     initlockfield(besttarget);
@@ -372,7 +364,6 @@ stingerirtloop(weapon) {
 }
 
 targetwithinrangeofplayspace(target) {
-
   if(getdvarint(#"scr_missilelock_playspace_extra_radius_override_enabled", 0) > 0) {
     extraradiusdvar = getdvarint(#"scr_missilelock_playspace_extra_radius", 5000);
 
@@ -382,23 +373,23 @@ targetwithinrangeofplayspace(target) {
     }
   }
 
-    if(level.missilelockplayspacecheckenabled === 1) {
-      if(!isDefined(target)) {
-        return false;
-      }
-
-      if(!isDefined(level.playspacecenter)) {
-        level.playspacecenter = util::getplayspacecenter();
-      }
-
-      if(!isDefined(level.missilelockplayspacecheckradiussqr)) {
-        level.missilelockplayspacecheckradiussqr = (util::getplayspacemaxwidth() * 0.5 + level.missilelockplayspacecheckextraradius) * (util::getplayspacemaxwidth() * 0.5 + level.missilelockplayspacecheckextraradius);
-      }
-
-      if(distance2dsquared(target.origin, level.playspacecenter) > level.missilelockplayspacecheckradiussqr) {
-        return false;
-      }
+  if(level.missilelockplayspacecheckenabled === 1) {
+    if(!isDefined(target)) {
+      return false;
     }
+
+    if(!isDefined(level.playspacecenter)) {
+      level.playspacecenter = util::getplayspacecenter();
+    }
+
+    if(!isDefined(level.missilelockplayspacecheckradiussqr)) {
+      level.missilelockplayspacecheckradiussqr = (util::getplayspacemaxwidth() * 0.5 + level.missilelockplayspacecheckextraradius) * (util::getplayspacemaxwidth() * 0.5 + level.missilelockplayspacecheckextraradius);
+    }
+
+    if(distance2dsquared(target.origin, level.playspacecenter) > level.missilelockplayspacecheckradiussqr) {
+      return false;
+    }
+  }
 
   return true;
 }
@@ -429,27 +420,27 @@ displaylockoncanceledmessage() {
   self.lockoncanceledmessage settext(#"hash_31537402e7b1c369");
 }
 
-  function private function_d656e945(team) {
-    if(!isDefined(self.team)) {
-      return false;
-    }
-
-    vehicle_team = self.team;
-
-    if(vehicle_team == #"neutral") {
-      driver = self getseatoccupant(0);
-
-      if(isDefined(driver)) {
-        vehicle_team = driver.team;
-      }
-    }
-
-    if(util::function_fbce7263(vehicle_team, team)) {
-      return true;
-    }
-
+function private function_d656e945(team) {
+  if(!isDefined(self.team)) {
     return false;
   }
+
+  vehicle_team = self.team;
+
+  if(vehicle_team == # "neutral") {
+    driver = self getseatoccupant(0);
+
+    if(isDefined(driver)) {
+      vehicle_team = driver.team;
+    }
+  }
+
+  if(util::function_fbce7263(vehicle_team, team)) {
+    return true;
+  }
+
+  return false;
+}
 
 getbeststingertarget(weapon) {
   result = [];
@@ -465,7 +456,6 @@ getbeststingertarget(weapon) {
   subtargetsvalid = [];
 
   for(idx = 0; idx < targetsall.size; idx++) {
-
     if(getdvarint(#"scr_freelock", 0) == 1) {
       if(self insidestingerreticlenolock(targetsall[idx], undefined, weapon)) {
         targetsvalid[targetsvalid.size] = targetsall[idx];
@@ -474,7 +464,7 @@ getbeststingertarget(weapon) {
       continue;
     }
 
-      target = targetsall[idx];
+    target = targetsall[idx];
 
     if(!isDefined(target)) {
       continue;
@@ -539,8 +529,8 @@ getbeststingertarget(weapon) {
     }
   }
 
-  result[#"target"] = besttarget;
-  result[#"subtarget"] = bestsubtarget;
+  result[# "target"] = besttarget;
+  result[# "subtarget"] = bestsubtarget;
   return result;
 }
 
@@ -651,7 +641,7 @@ playerstingerads() {
 }
 
 looplocalseeksound(alias, interval) {
-  self endon(#"stop_lockon_sound", #"disconnect", #"death", #"enter_vehicle", #"exit_vehicle");
+  self endon(#"stop_lockon_sound", # "disconnect", # "death", # "enter_vehicle", # "exit_vehicle");
 
   for(;;) {
     self playsoundforlocalplayer(alias);
@@ -675,7 +665,7 @@ playsoundforlocalplayer(alias) {
 }
 
 looplocallocksound(alias, interval) {
-  self endon(#"stop_locked_sound", #"disconnect", #"death", #"enter_vehicle", #"exit_vehicle");
+  self endon(#"stop_locked_sound", # "disconnect", # "death", # "enter_vehicle", # "exit_vehicle");
 
   if(isDefined(self.stingerlocksound)) {
     return;
@@ -786,7 +776,7 @@ lockingon(target, lock) {
   clientnum = self getentitynumber();
 
   if(lock) {
-    if((target.locking_on&1 << clientnum) == 0) {
+    if((target.locking_on & 1 << clientnum) == 0) {
       target notify(#"locking on");
       target.locking_on |= 1 << clientnum;
       self thread watchclearlockingon(target, clientnum);
@@ -806,7 +796,7 @@ lockingon(target, lock) {
 watchclearlockingon(target, clientnum) {
   target endon(#"death");
   self endon(#"locking_on_cleared");
-  self waittill(#"death", #"disconnect");
+  self waittill(#"death", # "disconnect");
   target.locking_on &= ~(1 << clientnum);
 }
 
@@ -815,7 +805,7 @@ lockedon(target, lock) {
   clientnum = self getentitynumber();
 
   if(lock) {
-    if((target.locked_on&1 << clientnum) == 0) {
+    if((target.locked_on & 1 << clientnum) == 0) {
       target.locked_on |= 1 << clientnum;
       self notify(#"lock_on_acquired");
       self thread watchclearlockedon(target, clientnum);
@@ -846,7 +836,7 @@ targetinghacking(target, lock) {
 watchclearhacking(target, clientnum) {
   target endon(#"death");
   self endon(#"locking_on_hacking_cleared");
-  self waittill(#"death", #"disconnect");
+  self waittill(#"death", # "disconnect");
   target.locking_on_hacking &= ~(1 << clientnum);
 }
 
@@ -998,7 +988,7 @@ setfriendlytargetlocked(weapon, target) {
 
 watchclearlockedon(target, clientnum) {
   self endon(#"locked_on_cleared");
-  self waittill(#"death", #"disconnect");
+  self waittill(#"death", # "disconnect");
 
   if(isDefined(target)) {
     target.locked_on &= ~(1 << clientnum);
@@ -1299,7 +1289,7 @@ missiletarget_deployflares(origin, angles) {
 
   self thread debug_tracker(flareobject);
 
-    return flareobject;
+  return flareobject;
 }
 
 debug_tracker(target) {
@@ -1310,4 +1300,3 @@ debug_tracker(target) {
     waitframe(1);
   }
 }
-

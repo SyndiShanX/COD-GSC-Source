@@ -41,7 +41,7 @@ stage_logic_2() {
   org = level._be.origin;
   angles = level._be.angles;
   exploder(405);
-  level._be playsound("evt_be_insert");
+  level._be playSound("evt_be_insert");
   level._be StopAnimScripted();
   level._be Unlink();
   level._be DontInterpolate();
@@ -113,9 +113,9 @@ teleport_target(grenade, model) {
   model stopLoopSound(1);
   wait(0.5);
   for(i = 0; i < teleport_targets.size; i++) {
-    PlayFX(level._effect["black_hole_bomb_event_horizon"], teleport_targets[i].origin + (0, 0, 2500));
+    playFX(level._effect["black_hole_bomb_event_horizon"], teleport_targets[i].origin + (0, 0, 2500));
   }
-  model PlaySound("zmb_gersh_teleporter_go");
+  model playSound("zmb_gersh_teleporter_go");
   wait(2.0);
   level notify("be2_tp_done");
 }
@@ -137,7 +137,7 @@ init_stage_1() {
 
 stage_logic_1() {
   flag_wait("complete_be_1");
-  level._be playsound("evt_be_insert");
+  level._be playSound("evt_be_insert");
   exploder(405);
   level thread play_vox_on_closest_player(6);
   stage_completed("be", "stage_one");
@@ -187,7 +187,7 @@ moon_be_activate() {
     d_trig waittill("damage", amount, attacker, direction, point, dmg_type, modelName, tagName);
     if(IsPlayer(attacker) && moon_be_move(road_start.script_string)) {
       if(moon_be_move(dmg_type)) {
-        level._be playsound("evt_sq_blackegg_activate");
+        level._be playSound("evt_sq_blackegg_activate");
         attacker thread play_be_hit_vox(1);
         start = true;
       }
@@ -208,14 +208,14 @@ moon_be_think() {
   while(isDefined(self)) {
     self waittill("reached_node", node);
     if(isDefined(node.script_sound)) {
-      level._be playsound(node.script_sound);
+      level._be playSound(node.script_sound);
     }
     if(isDefined(node.script_flag)) {
       flag_set(node.script_flag);
     }
     if(isDefined(node.script_string)) {
       self SetSpeedImmediate(0);
-      level._be playsound("evt_sq_blackegg_stop");
+      level._be playSound("evt_sq_blackegg_stop");
       self thread moon_be_stop_anim();
       d_trig = spawn("trigger_damage", self.origin, 0, 32, 72);
       motivation = false;
@@ -239,7 +239,7 @@ moon_be_think() {
         vox_dude thread play_be_hit_vox(vox_num);
         vox_num++;
       }
-      level._be playsound("evt_sq_blackegg_activate");
+      level._be playSound("evt_sq_blackegg_activate");
       d_trig Delete();
       self NotSolid();
       self SetSpeed(level._my_speed);
@@ -261,14 +261,14 @@ moon_be_think() {
       }
       if(!level._sliding_doors[door_index]._door_open) {
         level thread play_vox_on_closest_player(5);
-        level._be playsound("evt_sq_blackegg_wait");
+        level._be playSound("evt_sq_blackegg_wait");
         level._be.stopped = true;
       }
       while(!level._sliding_doors[door_index]._door_open) {
         wait(0.05);
       }
       if(is_true(level._be.stopped)) {
-        level._be playsound("evt_sq_blackegg_accel");
+        level._be playSound("evt_sq_blackegg_accel");
         level._be.stopped = false;
       }
       self SetSpeed(level._my_speed);
@@ -293,7 +293,7 @@ moon_be_think() {
       }
       self maps\_vehicle::vehicle_pathdetach();
       self SetSpeedImmediate(0);
-      level._be playsound("evt_sq_blackegg_stop");
+      level._be playSound("evt_sq_blackegg_stop");
       self thread moon_be_stop_anim();
       self maps\_vehicle::getonpath(next_chain_start);
       if(isDefined(next_chain_start.script_string)) {
@@ -320,7 +320,7 @@ moon_be_think() {
         vox_dude thread play_be_hit_vox(vox_num);
         vox_num++;
       }
-      level._be playsound("evt_sq_blackegg_activate");
+      level._be playSound("evt_sq_blackegg_activate");
       self SetSpeed(level._my_speed);
       self thread maps\_vehicle::gopath();
       self thread moon_be_resume_anim();

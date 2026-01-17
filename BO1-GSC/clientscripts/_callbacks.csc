@@ -13,13 +13,11 @@ statechange(clientNum, system, newState) {
     level._systemStates = [];
   }
   if(!isDefined(level._systemStates[system])) {
-    level._systemStates[system] = spawnstruct();
+    level._systemStates[system] = spawnStruct();
   }
   level._systemStates[system].state = newState;
   if(isDefined(level._systemStates[system].callback)) {
-    [
-      [level._systemStates[system].callback]
-    ](clientNum, newState);
+    [[level._systemStates[system].callback]](clientNum, newState);
   } else {
     println("*** Unhandled client system state change - " + system + " - has no registered callback function.");
   }
@@ -213,9 +211,7 @@ entityspawned(localClientNum) {
 
 entityshutdown_callback(localClientNum, entity) {
   if(isDefined(level._entityShutDownCBFunc)) {
-    [
-      [level._entityShutDownCBFunc]
-    ](localClientNum, entity);
+    [[level._entityShutDownCBFunc]](localClientNum, entity);
   }
 }
 
@@ -356,7 +352,7 @@ level_notify(notify_name, param1, param2) {
 
 sound_notify(client_num, entity, note) {
   if(note == "sound_dogstep_run_default") {
-    entity playsound(client_num, "fly_dog_step_run_default");
+    entity playSound(client_num, "fly_dog_step_run_default");
     return true;
   }
   prefix = getsubstr(note, 0, 5);
@@ -370,9 +366,9 @@ dog_sound_print(message) {}
 play_dog_sound(localClientNum, sound, position) {
   dog_sound_print("SOUND " + sound);
   if(isDefined(position)) {
-    return self playsound(localClientNum, sound, position);
+    return self playSound(localClientNum, sound, position);
   }
-  return self playsound(localClientNum, sound);
+  return self playSound(localClientNum, sound);
 }
 
 client_flag_callback(localClientNum, flag, set, newEnt) {

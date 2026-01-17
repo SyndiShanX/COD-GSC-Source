@@ -49,7 +49,7 @@ main() {
   level thread maps\karma_civilians::civ_init();
   maps\_civilians::init_civilians();
   level thread maps\createart\karma_art::main();
-  a_m_clips = getentarray("compile_paths_clips", "targetname");
+  a_m_clips = getEntArray("compile_paths_clips", "targetname");
 
   foreach(m_clip in a_m_clips)
   m_clip delete();
@@ -158,7 +158,7 @@ spawn_func_harper() {
   flag_wait("level.player");
 
   if(level.player get_story_stat("HARPER_SCARRED"))
-    self setmodel("c_usa_unioninsp_harper_scar_cin_fb");
+    self setModel("c_usa_unioninsp_harper_scar_cin_fb");
 }
 
 spawn_func_salazar() {

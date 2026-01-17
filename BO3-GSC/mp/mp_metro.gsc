@@ -35,7 +35,7 @@ function precache() {}
 
 function devgui_metro() {
   setdvar("", "");
-  for (;;) {
+  for(;;) {
     wait(0.5);
     devgui_string = getdvarstring("");
     switch (devgui_string) {

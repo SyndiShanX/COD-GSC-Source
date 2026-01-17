@@ -31,9 +31,9 @@ init() {
   precacheitem("slip_bolt_upgraded_zm");
 
   if(is_true(level.slipgun_as_equipment)) {
-    maps\mp\zombies\_zm_equipment::register_equipment("slipgun_zm", & "ZM_HIGHRISE_EQUIP_SLIPGUN_PICKUP_HINT_STRING", & "ZM_HIGHRISE_EQUIP_SLIPGUN_HOWTO", "jetgun_zm_icon", "slipgun", ::slipgun_activation_watcher_thread, ::transferslipgun, ::dropslipgun, ::pickupslipgun);
+    maps\mp\zombies\_zm_equipment::register_equipment("slipgun_zm", &"ZM_HIGHRISE_EQUIP_SLIPGUN_PICKUP_HINT_STRING", &"ZM_HIGHRISE_EQUIP_SLIPGUN_HOWTO", "jetgun_zm_icon", "slipgun", ::slipgun_activation_watcher_thread, ::transferslipgun, ::dropslipgun, ::pickupslipgun);
     maps\mp\zombies\_zm_equipment::enemies_ignore_equipment("slipgun_zm");
-    maps\mp\gametypes_zm\_weaponobjects::createretrievablehint("slipgun", & "ZM_HIGHRISE_EQUIP_SLIPGUN_PICKUP_HINT_STRING");
+    maps\mp\gametypes_zm\_weaponobjects::createretrievablehint("slipgun", &"ZM_HIGHRISE_EQUIP_SLIPGUN_PICKUP_HINT_STRING");
   }
 
   set_zombie_var_once("slipgun_reslip_max_spots", 8);
@@ -199,7 +199,7 @@ canzombieongoofall() {
     if(dot < 0.9)
       return false;
 
-    trace_origin = self.origin + vectorscale(anglestoforward(self.angles), 200);
+    trace_origin = self.origin + vectorscale(anglesToForward(self.angles), 200);
     trace = groundtrace(trace_origin + vectorscale((0, 0, 1), 5.0), self.origin + vectorscale((0, 0, -1), 300.0), 0, undefined);
     origin = trace["position"];
     groundnormal = trace["normal"];
@@ -233,7 +233,7 @@ zombiemoveongoo() {
   self notify("zombie_acquire_enemy");
   self.goo_last_vel = self getvelocity();
   self.goo_last_pos = self.origin;
-  slide_direction = anglestoforward(self.angles);
+  slide_direction = anglesToForward(self.angles);
   self animmode("slide");
   self orientmode("face enemy");
   self.forcemovementscriptstate = 1;
@@ -406,7 +406,7 @@ add_slippery_spot(origin, duration, startpos) {
   hit_norm = vectornormalize(startpos - origin);
   hit_from = 6 * hit_norm;
   trace_height = 120;
-  trace = bullettrace(origin + hit_from, origin + hit_from + (0, 0, trace_height * -1), 0, undefined);
+  trace = bulletTrace(origin + hit_from, origin + hit_from + (0, 0, trace_height * -1), 0, undefined);
 
   if(isDefined(trace["entity"])) {
     parent = trace["entity"];
@@ -568,7 +568,7 @@ pool_of_goo(origin, duration) {
   }
 
   if(isDefined(level._effect["slipgun_splatter"]))
-    playfx(level._effect["slipgun_splatter"], origin);
+    playFX(level._effect["slipgun_splatter"], origin);
 
   wait(duration);
 }
@@ -583,10 +583,10 @@ explode_into_goo(player, chain_depth) {
     tag = "tag_origin";
 
   self.guts_explosion = 1;
-  self playsound("wpn_slipgun_zombie_explode");
+  self playSound("wpn_slipgun_zombie_explode");
 
   if(isDefined(level._effect["slipgun_explode"]))
-    playfx(level._effect["slipgun_explode"], self gettagorigin(tag));
+    playFX(level._effect["slipgun_explode"], self gettagorigin(tag));
 
   if(!is_true(self.isdog))
     wait 0.1;
@@ -617,10 +617,10 @@ explode_to_near_zombies(player, origin, radius, chain_depth) {
 
     for(enemy = enemies[index]; distancesquared(enemy.origin, origin) < rsquared; enemy = enemies[index]) {
       if(isalive(enemy) && !is_true(enemy.guts_explosion) && !is_true(enemy.nuked) && !isDefined(enemy.slipgun_sizzle)) {
-        trace = bullettrace(origin + vectorscale((0, 0, 1), 50.0), enemy.origin + vectorscale((0, 0, 1), 50.0), 0, undefined, 1);
+        trace = bulletTrace(origin + vectorscale((0, 0, 1), 50.0), enemy.origin + vectorscale((0, 0, 1), 50.0), 0, undefined, 1);
 
         if(isDefined(trace["fraction"]) && trace["fraction"] == 1) {
-          enemy.slipgun_sizzle = playfxontag(level._effect["slipgun_simmer"], enemy, tag);
+          enemy.slipgun_sizzle = playFXOnTag(level._effect["slipgun_simmer"], enemy, tag);
           marked_zombies[marked_zombies.size] = enemy;
         }
       }
@@ -688,7 +688,7 @@ slipgun_zombie_hit_response_internal(mod, damageweapon, player) {
   if(!self is_slipgun_damage(mod, damageweapon) && !is_slipgun_explosive_damage(mod, damageweapon))
     return false;
 
-  self playsound("wpn_slipgun_zombie_impact");
+  self playSound("wpn_slipgun_zombie_impact");
   upgraded = damageweapon == "slipgun_upgraded_zm";
   self thread slipgun_zombie_1st_hit_response(upgraded, player);
 

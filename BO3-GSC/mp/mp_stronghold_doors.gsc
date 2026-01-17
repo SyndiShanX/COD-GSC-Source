@@ -18,12 +18,12 @@
 #namespace mp_stronghold_doors;
 
 function init() {
-  doors = getentarray("mp_stronghold_security_door_lower", "targetname");
-  if(!isdefined(doors) || doors.size == 0) {
+  doors = getEntArray("mp_stronghold_security_door_lower", "targetname");
+  if(!isDefined(doors) || doors.size == 0) {
     return;
   }
-  uppers = getentarray("mp_stronghold_security_door_upper", "targetname");
-  killtriggers = getentarray("mp_stronghold_killbrush", "targetname");
+  uppers = getEntArray("mp_stronghold_security_door_upper", "targetname");
+  killtriggers = getEntArray("mp_stronghold_killbrush", "targetname");
   assert(uppers.size == doors.size);
   assert(killtriggers.size == killtriggers.size);
   foreach(door in doors) {
@@ -37,7 +37,7 @@ function init() {
 function setup_doors(door, upper, trigger) {
   door.upper = upper;
   door.kill_trigger = trigger;
-  assert(isdefined(door.kill_trigger));
+  assert(isDefined(door.kill_trigger));
   door.kill_trigger enablelinkto();
   door.kill_trigger linkto(door);
   door.opened = 1;
@@ -49,7 +49,7 @@ function setup_doors(door, upper, trigger) {
 }
 
 function door_use_trigger() {
-  use_triggers = getentarray("mp_stronghold_usetrigger", "targetname");
+  use_triggers = getEntArray("mp_stronghold_usetrigger", "targetname");
   foreach(use_trigger in use_triggers) {
     use_trigger thread watchtriggerusage();
     use_trigger thread watchtriggerenabledisable();
@@ -57,7 +57,7 @@ function door_use_trigger() {
 }
 
 function watchtriggerusage() {
-  for (;;) {
+  for(;;) {
     self waittill("trigger", e_player);
     level notify("mp_stronghold_trigger_use");
   }
@@ -65,7 +65,7 @@ function watchtriggerusage() {
 
 function watchtriggerenabledisable() {
   hintstring = "";
-  for (;;) {
+  for(;;) {
     returnvar = level util::waittill_any_return("mp_stronghold_trigger_enable", "mp_stronghold_trigger_disable", "mp_stronghold_trigger_cooldown");
     switch (returnvar) {
       case "mp_stronghold_trigger_enable": {
@@ -86,7 +86,7 @@ function watchtriggerenabledisable() {
 }
 
 function door_think() {
-  for (;;) {
+  for(;;) {
     exploder::exploder("fx_switch_red");
     exploder::kill_exploder("fx_switch_green");
     wait(20);
@@ -146,7 +146,7 @@ function security_door_drop_think(killplayers) {
   self.disablefinalkillcam = 1;
   door = self;
   corpse_delay = 0;
-  for (;;) {
+  for(;;) {
     wait(0.2);
     entities = getdamageableentarray(self.origin, 200);
     foreach(entity in entities) {
@@ -156,7 +156,7 @@ function security_door_drop_think(killplayers) {
       if(!isalive(entity)) {
         continue;
       }
-      if(isdefined(entity.targetname)) {
+      if(isDefined(entity.targetname)) {
         if(entity.targetname == "talon") {
           entity notify("death");
           continue;
@@ -165,16 +165,16 @@ function security_door_drop_think(killplayers) {
           continue;
         }
       }
-      if(isdefined(entity.helitype) && entity.helitype == "qrdrone") {
+      if(isDefined(entity.helitype) && entity.helitype == "qrdrone") {
         watcher = entity.owner weaponobjects::getweaponobjectwatcher("qrdrone");
         watcher thread weaponobjects::waitanddetonate(entity, 0, undefined);
         continue;
       }
       if(entity.classname == "grenade") {
-        if(!isdefined(entity.name)) {
+        if(!isDefined(entity.name)) {
           continue;
         }
-        if(!isdefined(entity.owner)) {
+        if(!isDefined(entity.owner)) {
           continue;
         }
         if(entity.name == "proximity_grenade_mp") {
@@ -186,14 +186,14 @@ function security_door_drop_think(killplayers) {
           continue;
         }
         watcher = entity.owner weaponobjects::getwatcherforweapon(entity.name);
-        if(!isdefined(watcher)) {
+        if(!isDefined(watcher)) {
           continue;
         }
         watcher thread weaponobjects::waitanddetonate(entity, 0, undefined, "script_mover_mp");
         continue;
       }
       if(entity.classname == "auto_turret") {
-        if(!isdefined(entity.damagedtodeath) || !entity.damagedtodeath) {
+        if(!isDefined(entity.damagedtodeath) || !entity.damagedtodeath) {
           entity util::domaxdamage(self.origin + (0, 0, 1), self, self, 0, "MOD_CRUSH");
         }
         continue;
@@ -227,11 +227,11 @@ function security_door_drop_think(killplayers) {
 }
 
 function destroy_supply_crates() {
-  crates = getentarray("care_package", "script_noteworthy");
+  crates = getEntArray("care_package", "script_noteworthy");
   foreach(crate in crates) {
     if(distancesquared(crate.origin, self.origin) < 40000) {
       if(crate istouching(self)) {
-        playfx(level._supply_drop_explosion_fx, crate.origin);
+        playFX(level._supply_drop_explosion_fx, crate.origin);
         playsoundatposition("wpn_grenade_explode", crate.origin);
         wait(0.1);
         crate supplydrop::cratedelete();
@@ -242,7 +242,7 @@ function destroy_supply_crates() {
 
 function destroy_corpses() {
   corpses = getcorpsearray();
-  for (i = 0; i < corpses.size; i++) {
+  for(i = 0; i < corpses.size; i++) {
     if(distancesquared(corpses[i].origin, self.origin) < 40000) {
       corpses[i] delete();
     }
@@ -256,7 +256,7 @@ function get_closest(org, array) {
     return;
   }
   index = undefined;
-  for (i = 0; i < array.size; i++) {
+  for(i = 0; i < array.size; i++) {
     newdistsq = distancesquared(array[i].origin, org);
     if(newdistsq >= distsq) {
       continue;

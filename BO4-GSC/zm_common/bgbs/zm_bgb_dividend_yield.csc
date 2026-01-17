@@ -7,11 +7,10 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm_bgb;
-
 #namespace zm_bgb_dividend_yield;
 
 autoexec __init__system__() {
-  system::register(#"zm_bgb_dividend_yield", &__init__, undefined, #"bgb");
+  system::register(#"zm_bgb_dividend_yield", &__init__, undefined, # "bgb");
 }
 
 __init__() {
@@ -19,8 +18,8 @@ __init__() {
     return;
   }
 
-  clientfield::register("allplayers", "" + #"hash_11a25fb3db96fc2d", 1, 1, "int", &function_441dc042, 0, 0);
-  clientfield::register("toplayer", "" + #"hash_31b61c511ced94d7", 1, 1, "int", &function_1e792793, 0, 1);
+  clientfield::register("allplayers", "" + # "hash_11a25fb3db96fc2d", 1, 1, "int", &function_441dc042, 0, 0);
+  clientfield::register("toplayer", "" + # "hash_31b61c511ced94d7", 1, 1, "int", &function_1e792793, 0, 1);
   bgb::register(#"zm_bgb_dividend_yield", "time");
   level.var_b28c30ba = [];
 }

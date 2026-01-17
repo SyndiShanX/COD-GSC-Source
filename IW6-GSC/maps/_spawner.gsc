@@ -1068,24 +1068,16 @@ deathfunctions() {
 
     switch (var_6["params"]) {
       case 0:
-        [
-          [var_6["func"]]
-        ](var_0);
+        [[var_6["func"]]](var_0);
         break;
       case 1:
-        [
-          [var_6["func"]]
-        ](var_0, var_6["param1"]);
+        [[var_6["func"]]](var_0, var_6["param1"]);
         break;
       case 2:
-        [
-          [var_6["func"]]
-        ](var_0, var_6["param1"], var_6["param2"]);
+        [[var_6["func"]]](var_0, var_6["param1"], var_6["param2"]);
         break;
       case 3:
-        [
-          [var_6["func"]]
-        ](var_0, var_6["param1"], var_6["param2"], var_6["param3"]);
+        [[var_6["func"]]](var_0, var_6["param1"], var_6["param2"], var_6["param3"]);
         break;
     }
   }
@@ -1658,9 +1650,7 @@ go_to_node_using_funcs(var_0, var_1, var_2, var_3, var_4, var_5) {
     else
       self.goalheight = level.default_goalheight;
 
-    [
-      [var_2]
-    ](var_0);
+    [[var_2]](var_0);
 
     if(maps\_utility::ent_flag_exist("_stealth_override_goalpos")) {
       for(;;) {
@@ -1721,9 +1711,7 @@ go_to_node_using_funcs(var_0, var_1, var_2, var_3, var_4, var_5) {
       break;
     }
 
-    var_7 = [
-      [var_1]
-    ](var_0.target);
+    var_7 = [[var_1]](var_0.target);
 
     if(!var_7.size) {
       break;
@@ -1752,9 +1740,7 @@ go_to_node_wait_for_player(var_0, var_1, var_2) {
   var_6 = anglesToForward(self.angles);
 
   if(isDefined(var_0.target)) {
-    var_7 = [
-      [var_1]
-    ](var_0.target);
+    var_7 = [[var_1]](var_0.target);
 
     if(var_7.size == 1)
       var_6 = vectornormalize(var_7[0].origin - var_0.origin);
@@ -1854,9 +1840,7 @@ crawl_target_and_init_flags(var_0, var_1) {
       }
 
       if(isDefined(var_0.target)) {
-        var_5 = [
-          [var_1]
-        ](var_0.target);
+        var_5 = [[var_1]](var_0.target);
         var_3 = common_scripts\utility::add_to_array(var_3, var_5);
       }
     }

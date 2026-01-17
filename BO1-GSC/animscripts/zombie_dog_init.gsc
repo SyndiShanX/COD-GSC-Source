@@ -21,7 +21,7 @@ main() {
   self thread setMeleeAttackDist();
   level.dogRunTurnSpeed = 20;
   level.dogRunPainSpeed = 20;
-  self.a = SpawnStruct();
+  self.a = spawnStruct();
   self.a.pose = "stand";
   self.a.nextStandingHitDying = false;
   self.a.movement = "walk";
@@ -89,7 +89,7 @@ calcAnimLengthVariables(animset) {
 }
 
 initZombieDogAnimations() {
-  anim.dogAnims["zombie"] = spawnstruct();
+  anim.dogAnims["zombie"] = spawnStruct();
   anim.dogAnims["zombie"].lookKnob[2] = % zombie_dog_look_2;
   anim.dogAnims["zombie"].lookKnob[4] = % zombie_dog_look_4;
   anim.dogAnims["zombie"].lookKnob[6] = % zombie_dog_look_6;

@@ -14,5 +14,4 @@ init_animsounds() {
   waittillframeend;
   addOnStart_animSound("sdv02_pilot", "stealth_kill", "scn_oilrig_npc_waterkill");
   addOnStart_animSound("player_rig", "player_stealth_kill", "scn_oilrig_plr_waterkill");
-
 }

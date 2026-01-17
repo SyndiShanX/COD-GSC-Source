@@ -10,7 +10,7 @@
 CONST_JUGG_TYPE = "juggernaut_predator";
 CONST_AIRDROP_TYPE = "airdrop_" + CONST_JUGG_TYPE;
 CONST_JUGG_CRATE_WEIGHT = 85;
-CONST_JUGG_CRATE_STRING = & "MP_JUGG_PREDATOR_PICKUP";
+CONST_JUGG_CRATE_STRING = &"MP_JUGG_PREDATOR_PICKUP";
 
 CONST_CANNON_WEAPON = "iw6_predatorcannon_mp";
 CONST_PREDATOR_COMPUTER = "iw6_predatorwristcpu_mp";
@@ -992,9 +992,7 @@ Callback_PlayerLastStandPredator(eInflictor, attacker, iDamage, sMeansOfDeath, s
     self notify("predator_lastStand");
 
   } else if(isDefined(level.previousLastStandCallback)) {
-    [
-      [level.previousLastStandCallback]
-    ](eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime, deathAnimDuration);
+    [[level.previousLastStandCallback]](eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime, deathAnimDuration);
   }
 }
 

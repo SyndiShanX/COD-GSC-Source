@@ -8,7 +8,6 @@
 #include scripts\core_common\math_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace sensor_dart;
 
 autoexec __init__system__() {
@@ -30,7 +29,7 @@ player_init(localclientnum) {
   self thread on_game_ended(localclientnum);
 }
 
-private function_73021afc(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+function_73021afc(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self endon(#"death");
   starttime = gettime();
 
@@ -61,7 +60,7 @@ private function_73021afc(localclientnum, oldval, newval, bnewent, binitialsnap,
   }
 }
 
-private function_a252eaf0(localclientnum) {
+function_a252eaf0(localclientnum) {
   var_9cf4b61c = self getentitynumber();
   self waittill(#"death");
 
@@ -72,7 +71,7 @@ private function_a252eaf0(localclientnum) {
   disablevisioncirclebyentnum(localclientnum, var_9cf4b61c);
 }
 
-private function_e3a084cd(localclientnum) {
+function_e3a084cd(localclientnum) {
   self setcompassicon("minimap_sensor_dart_flying");
   self function_8e04481f();
   self function_a5edb367(#"neutral");
@@ -146,7 +145,7 @@ private function_e3a084cd(localclientnum) {
   self thread function_e140ca2b(localclientnum);
 }
 
-private on_game_ended(localclientnum) {
+on_game_ended(localclientnum) {
   level waittill(#"game_ended");
   disableallvisioncircles(localclientnum);
 }

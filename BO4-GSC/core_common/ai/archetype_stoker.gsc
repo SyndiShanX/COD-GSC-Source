@@ -7,7 +7,6 @@
 #include scripts\core_common\ai\systems\ai_interface;
 #include scripts\core_common\ai\systems\blackboard;
 #include scripts\core_common\spawner_shared;
-
 #namespace archetype_stoker;
 
 autoexec init_shared() {
@@ -21,15 +20,15 @@ autoexec init_shared() {
   stokerinterface::registerstokerinterfaceattributes();
 }
 
-private function_3f70d4b7() {}
+function_3f70d4b7() {}
 
-private function_d30d1f3() {
+function_d30d1f3() {
   blackboard::createblackboardforentity(self);
   ai::createinterfaceforentity(self);
   self.___archetypeonanimscriptedcallback = &function_236d6de;
 }
 
-private function_236d6de(entity) {
+function_236d6de(entity) {
   entity.__blackboard = undefined;
   entity function_d30d1f3();
 }

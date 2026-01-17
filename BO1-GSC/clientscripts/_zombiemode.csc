@@ -123,16 +123,16 @@ handle_horizontal_board_clientside_fx(localClientNum, set, newEnt) {
     localPlayers = getLocalPlayers();
     snd_played = 0;
     for(i = 0; i < localPlayers.size; i++) {
-      PlayFx(i, level._effect["wood_chunk_destory"], self.origin + (0, 0, 30));
+      playFX(i, level._effect["wood_chunk_destory"], self.origin + (0, 0, 30));
       wait(randomfloat(0.3, 0.6));
       if(!snd_played) {
         self thread do_teardown_sound("plank");
         snd_played = true;
       }
-      PlayFx(i, level._effect["wood_chunk_destory"], self.origin + (0, 0, -30));
+      playFX(i, level._effect["wood_chunk_destory"], self.origin + (0, 0, -30));
     }
   } else {
-    playsound(0, "zmb_repair_boards", self.origin);
+    playSound(0, "zmb_repair_boards", self.origin);
     localPlayers = getLocalPlayers();
     snd_played = 0;
     if(isDefined(level.override_board_repair_sound)) {
@@ -140,14 +140,14 @@ handle_horizontal_board_clientside_fx(localClientNum, set, newEnt) {
     } else {
       sound = "zmb_repair_boards";
     }
-    playsound(0, sound, self.origin);
+    playSound(0, sound, self.origin);
     wait(.3);
-    PlaySound(0, "zmb_board_slam", self.origin);
+    playSound(0, "zmb_board_slam", self.origin);
     for(i = 0; i < localPlayers.size; i++) {
       localPlayers[i] EarthQuake(RandomFloatRange(0.3, 0.4), RandomFloatRange(0.2, 0.4), self.origin, 150);
-      PlayFx(i, level._effect["wood_chunk_destory"], self.origin + (0, 0, 30));
+      playFX(i, level._effect["wood_chunk_destory"], self.origin + (0, 0, 30));
       wait(randomfloat(0.3, 0.6));
-      PlayFx(i, level._effect["wood_chunk_destory"], self.origin + (0, 0, -30));
+      playFX(i, level._effect["wood_chunk_destory"], self.origin + (0, 0, -30));
     }
   }
 }
@@ -160,13 +160,13 @@ handle_vertical_board_clientside_fx(localClientNum, set, newEnt) {
     localPlayers = getLocalPlayers();
     snd_played = 0;
     for(i = 0; i < localPlayers.size; i++) {
-      PlayFx(i, level._effect["wood_chunk_destory"], self.origin + (30, 0, 0));
+      playFX(i, level._effect["wood_chunk_destory"], self.origin + (30, 0, 0));
       wait(randomfloat(0.3, 0.6));
       if(!snd_played) {
         self thread do_teardown_sound("plank");
         snd_played = true;
       }
-      PlayFx(i, level._effect["wood_chunk_destory"], self.origin + (-30, 0, 0));
+      playFX(i, level._effect["wood_chunk_destory"], self.origin + (-30, 0, 0));
     }
   } else {
     localPlayers = getLocalPlayers();
@@ -176,14 +176,14 @@ handle_vertical_board_clientside_fx(localClientNum, set, newEnt) {
     } else {
       sound = "zmb_repair_boards";
     }
-    playsound(0, sound, self.origin);
+    playSound(0, sound, self.origin);
     wait(.3);
-    PlaySound(0, "zmb_board_slam", self.origin);
+    playSound(0, "zmb_board_slam", self.origin);
     for(i = 0; i < localPlayers.size; i++) {
       localPlayers[i] EarthQuake(RandomFloatRange(0.3, 0.4), RandomFloatRange(0.2, 0.4), self.origin, 150);
-      PlayFx(i, level._effect["wood_chunk_destory"], self.origin + (30, 0, 0));
+      playFX(i, level._effect["wood_chunk_destory"], self.origin + (30, 0, 0));
       wait(randomfloat(0.3, 0.6));
-      PlayFx(i, level._effect["wood_chunk_destory"], self.origin + (-30, 0, 0));
+      playFX(i, level._effect["wood_chunk_destory"], self.origin + (-30, 0, 0));
     }
   }
 }
@@ -196,27 +196,27 @@ handle_rock_clientside_fx(localClientNum, set, newEnt) {
     localPlayers = getLocalPlayers();
     snd_played = 0;
     for(i = 0; i < localPlayers.size; i++) {
-      PlayFx(i, level._effect["wood_chunk_destory"], self.origin + (30, 0, 0));
+      playFX(i, level._effect["wood_chunk_destory"], self.origin + (30, 0, 0));
       wait(randomfloat(0.3, 0.6));
       if(!snd_played) {
         self thread do_teardown_sound("rock");
         snd_played = true;
       }
-      PlayFx(i, level._effect["wood_chunk_destory"], self.origin + (-30, 0, 0));
+      playFX(i, level._effect["wood_chunk_destory"], self.origin + (-30, 0, 0));
     }
   } else {
     localPlayers = getLocalPlayers();
     snd_played = 0;
-    playsound(0, "zmb_repair_boards", self.origin);
+    playSound(0, "zmb_repair_boards", self.origin);
     for(i = 0; i < localPlayers.size; i++) {
       localPlayers[i] EarthQuake(RandomFloatRange(0.3, 0.4), RandomFloatRange(0.2, 0.4), self.origin, 150);
-      PlayFx(i, level._effect["wood_chunk_destory"], self.origin + (30, 0, 0));
+      playFX(i, level._effect["wood_chunk_destory"], self.origin + (30, 0, 0));
       wait(randomfloat(0.3, 0.6));
       if(!snd_played) {
-        PlaySound(0, "zmb_break_rock_barrier_fix", self.origin);
+        playSound(0, "zmb_break_rock_barrier_fix", self.origin);
         snd_played = true;
       }
-      PlayFx(i, level._effect["wood_chunk_destory"], self.origin + (-30, 0, 0));
+      playFX(i, level._effect["wood_chunk_destory"], self.origin + (-30, 0, 0));
     }
   }
 }
@@ -224,9 +224,9 @@ handle_rock_clientside_fx(localClientNum, set, newEnt) {
 do_teardown_sound(type) {
   switch (type) {
     case "rock":
-      PlaySound(0, "zmb_break_rock_barrier", self.origin);
+      playSound(0, "zmb_break_rock_barrier", self.origin);
       wait(randomfloat(0.3, 0.6));
-      PlaySound(0, "zmb_break_rock_barrier", self.origin);
+      playSound(0, "zmb_break_rock_barrier", self.origin);
       break;
     case "plank":
       if(isDefined(level.override_board_teardown_sound)) {
@@ -234,18 +234,16 @@ do_teardown_sound(type) {
       } else {
         sound = "zmb_break_boards";
       }
-      PlaySound(0, sound, self.origin);
+      playSound(0, sound, self.origin);
       wait(randomfloat(0.3, 0.6));
-      PlaySound(0, sound, self.origin);
+      playSound(0, sound, self.origin);
       break;
   }
 }
 
 box_monitor(clientNum, state, oldState) {
   if(isDefined(level._custom_box_monitor)) {
-    [
-      [level._custom_box_monitor]
-    ](clientNum, state, oldState);
+    [[level._custom_box_monitor]](clientNum, state, oldState);
   }
 }
 
@@ -290,7 +288,7 @@ createZombieEyes(localClientNum) {
       if(isDefined(level._override_eye_fx)) {
         fx_name = level._override_eye_fx;
       }
-      self._eyeArray[localClientNum] = PlayFxOnTag(localClientNum, level._effect[fx_name], self, linkTag);
+      self._eyeArray[localClientNum] = playFXOnTag(localClientNum, level._effect[fx_name], self, linkTag);
     }
   }
 }
@@ -402,7 +400,7 @@ vending_machine_flicker_light(fx_light, duration) {
 play_perk_fx_on_client(client_num, fx_light, duration) {
   fxObj = spawn(client_num, self.origin + (0, 0, -50), "script_model");
   fxobj setModel("tag_origin");
-  playfxontag(client_num, level._effect[fx_light], fxObj, "tag_origin");
+  playFXOnTag(client_num, level._effect[fx_light], fxObj, "tag_origin");
   realwait(duration);
   fxobj delete();
 }
@@ -461,17 +459,17 @@ do_headshot_gib_fx() {
   fxTag = "j_neck";
   fxOrigin = self GetTagOrigin(fxTag);
   upVec = AnglesToUp(self GetTagAngles(fxTag));
-  forwardVec = AnglesToForward(self GetTagAngles(fxTag));
+  forwardVec = anglesToForward(self GetTagAngles(fxTag));
   players = getLocalPlayers();
   for(i = 0; i < players.size; i++) {
-    PlayFX(i, level._effect["headshot"], fxOrigin, forwardVec, upVec);
-    PlayFX(i, level._effect["headshot_nochunks"], fxOrigin, forwardVec, upVec);
+    playFX(i, level._effect["headshot"], fxOrigin, forwardVec, upVec);
+    playFX(i, level._effect["headshot_nochunks"], fxOrigin, forwardVec, upVec);
   }
   wait(0.3);
   if(isDefined(self)) {
     players = getLocalPlayers();
     for(i = 0; i < players.size; i++) {
-      PlayFxOnTag(i, level._effect["bloodspurt"], self, fxTag);
+      playFXOnTag(i, level._effect["bloodspurt"], self, fxTag);
     }
   }
 }
@@ -479,9 +477,9 @@ do_headshot_gib_fx() {
 do_gib_fx(tag) {
   players = getLocalPlayers();
   for(i = 0; i < players.size; i++) {
-    PlayFxOnTag(i, level._effect["animscript_gib_fx"], self, tag);
+    playFXOnTag(i, level._effect["animscript_gib_fx"], self, tag);
   }
-  PlaySound(0, "zmb_death_gibs", self gettagorigin(tag));
+  playSound(0, "zmb_death_gibs", self gettagorigin(tag));
 }
 
 do_gib(model, tag) {
@@ -491,7 +489,7 @@ do_gib(model, tag) {
   end_pos = undefined;
   angles = undefined;
   if(!isDefined(self)) {
-    end_pos = start_pos + (AnglesToForward(start_angles) * 10);
+    end_pos = start_pos + (anglesToForward(start_angles) * 10);
     angles = start_angles;
   } else {
     end_pos = self gettagorigin(tag);
@@ -509,7 +507,7 @@ do_gib(model, tag) {
   if(isDefined(self)) {
     self do_gib_fx(tag);
   } else {
-    PlaySound(0, "zmb_death_gibs", end_pos);
+    playSound(0, "zmb_death_gibs", end_pos);
   }
 }
 
@@ -744,12 +742,12 @@ handle_zombie_risers_water(localClientNum, set, newEnt) {
     snd_played = 0;
     for(i = 0; i < localPlayers.size; i++) {
       if(!snd_played) {
-        playsound(0, "zmb_zombie_spawn_water", self.origin);
+        playSound(0, "zmb_zombie_spawn_water", self.origin);
         snd_played = 1;
       }
-      playfx(i, level._effect["rise_burst_water"], self.origin + (0, 0, randomintrange(5, 10)));
+      playFX(i, level._effect["rise_burst_water"], self.origin + (0, 0, randomintrange(5, 10)));
       wait(.25);
-      playfx(i, level._effect["rise_billow_water"], self.origin + (randomintrange(-10, 10), randomintrange(-10, 10), randomintrange(5, 10)));
+      playFX(i, level._effect["rise_billow_water"], self.origin + (randomintrange(-10, 10), randomintrange(-10, 10), randomintrange(5, 10)));
       self thread rise_dust_fx(i, "water");
     }
   }
@@ -765,12 +763,12 @@ handle_zombie_lowg_risers(localClientNum, set, newEnt) {
     snd_played = 0;
     for(i = 0; i < localPlayers.size; i++) {
       if(!snd_played) {
-        playsound(0, "zmb_zombie_spawn", self.origin);
+        playSound(0, "zmb_zombie_spawn", self.origin);
         snd_played = 1;
       }
-      playfx(i, level._effect["rise_burst_lg"], self.origin + (0, 0, randomintrange(5, 10)));
+      playFX(i, level._effect["rise_burst_lg"], self.origin + (0, 0, randomintrange(5, 10)));
       wait(.25);
-      playfx(i, level._effect["rise_billow_lg"], self.origin + (randomintrange(-10, 10), randomintrange(-10, 10), randomintrange(5, 10)));
+      playFX(i, level._effect["rise_billow_lg"], self.origin + (randomintrange(-10, 10), randomintrange(-10, 10), randomintrange(5, 10)));
       self thread rise_dust_fx(i, "lowg");
     }
   }
@@ -796,12 +794,12 @@ handle_zombie_risers(localClientNum, set, newEnt) {
     }
     for(i = 0; i < localPlayers.size; i++) {
       if(!snd_played) {
-        playsound(0, sound, self.origin);
+        playSound(0, sound, self.origin);
         snd_played = 1;
       }
-      playfx(i, burst_fx, self.origin + (0, 0, randomintrange(5, 10)));
+      playFX(i, burst_fx, self.origin + (0, 0, randomintrange(5, 10)));
       wait(.25);
-      playfx(i, billow_fx, self.origin + (randomintrange(-10, 10), randomintrange(-10, 10), randomintrange(5, 10)));
+      playFX(i, billow_fx, self.origin + (randomintrange(-10, 10), randomintrange(-10, 10), randomintrange(5, 10)));
       self thread rise_dust_fx(i, type);
     }
   }
@@ -831,7 +829,7 @@ rise_dust_fx(clientNum, type) {
     if(!isDefined(self)) {
       return;
     }
-    PlayfxOnTag(clientNum, effect, self, dust_tag);
+    playFXOnTag(clientNum, effect, self, dust_tag);
     wait dust_interval;
   }
 }

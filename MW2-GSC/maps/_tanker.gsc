@@ -17,7 +17,6 @@ main(model, type) {
   build_team("allies");
   build_aianims(::setanims, ::set_vehicle_anims);
   build_compassicon("", false);
-
 }
 
 init_local() {}
@@ -31,8 +30,8 @@ set_vehicle_anims(positions) {
 setanims() {
   positions = [];
 
-  for (i = 0; i < 1; i++)
-    positions[i] = spawnstruct();
+  for(i = 0; i < 1; i++)
+    positions[i] = spawnStruct();
   positions[0].sittag = "tag_driver";
   positions[0].idle = % luxurysedan_driver_idle;
 

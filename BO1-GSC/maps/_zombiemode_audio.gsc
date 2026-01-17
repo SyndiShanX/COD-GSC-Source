@@ -493,10 +493,10 @@ do_zombies_playvocals(alias_type, zombie_type) {
   }
   alias = level.zmb_vox["prefix"] + level.zmb_vox[zombie_type][alias_type];
   if(alias_type == "attack" || alias_type == "behind" || alias_type == "death" || alias_type == "anger" || alias_type == "steal") {
-    self PlaySound(alias);
+    self playSound(alias);
   } else if(!self.talking) {
     self.talking = true;
-    self PlaySound(alias, "sounddone");
+    self playSound(alias, "sounddone");
     self waittill("sounddone");
     self.talking = false;
   }
@@ -584,7 +584,7 @@ do_player_playvox(prefix, index, sound_to_play, waittime, category, type, overri
     return;
   if(level.player_is_speaking != 1) {
     level.player_is_speaking = 1;
-    self playsound(prefix + sound_to_play, "sound_done" + sound_to_play);
+    self playSound(prefix + sound_to_play, "sound_done" + sound_to_play);
     self waittill("sound_done" + sound_to_play);
     wait(waittime);
     level.player_is_speaking = 0;
@@ -909,7 +909,7 @@ play_jingle_or_stinger(perksacola) {
   if(isDefined(perksacola)) {
     if(self.jingle_is_playing == 0 && level.music_override == false) {
       self.jingle_is_playing = 1;
-      self playsound(perksacola, "sound_done");
+      self playSound(perksacola, "sound_done");
       self waittill("sound_done");
       self.jingle_is_playing = 0;
     }
@@ -1047,10 +1047,10 @@ weapon_toggle_vox(alias, weapon) {
   self StopSounds();
   wait(.05);
   if(isDefined(type)) {
-    self PlaySound(prefix + "weapon_" + type, "sounddone");
+    self playSound(prefix + "weapon_" + type, "sounddone");
     self waittill("sounddone");
   }
-  self PlaySound(sound_to_play + "_0");
+  self playSound(sound_to_play + "_0");
 }
 
 get_weapon_num(weapon) {

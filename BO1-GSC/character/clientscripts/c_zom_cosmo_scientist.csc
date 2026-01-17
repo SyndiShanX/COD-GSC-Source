@@ -13,7 +13,7 @@ register_gibs() {
   if(!isDefined(level._gibbing_actor_models)) {
     level._gibbing_actor_models = [];
   }
-  gib_spawn = spawnstruct();
+  gib_spawn = spawnStruct();
   gib_spawn.matches_me = ::matches_me;
   gib_spawn.gibSpawn1 = "char_ger_honorgd_body1_g_rarmspawn";
   gib_spawn.gibSpawnTag1 = "J_Elbow_RI";

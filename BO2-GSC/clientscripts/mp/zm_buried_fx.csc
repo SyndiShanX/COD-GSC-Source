@@ -9,8 +9,7 @@
 #include clientscripts\mp\_fx;
 #include clientscripts\mp\zm_buried_amb;
 
-precache_util_fx() {
-}
+precache_util_fx() {}
 
 precache_scripted_fx() {
   level._effect["eye_glow"] = loadfx("maps/zombie/fx_zombie_eye_single_blue");
@@ -182,7 +181,7 @@ play_fx_prop_anims(localclientnum) {
   while(!clienthassnapshot(localclientnum))
     wait 0.05;
 
-  fxanim_prop_candidates = getentarray(localclientnum, "fxanim_dlc3", "targetname");
+  fxanim_prop_candidates = getEntArray(localclientnum, "fxanim_dlc3", "targetname");
 
   if(getlocalplayers().size > 2) {
     ss_fxanim_props = [];
@@ -269,10 +268,10 @@ fxanim_fx_init(localclientnum) {
     self waittill("buried_fxanim", note);
 
     if(note == "bar_01_spark")
-      playfxontag(localclientnum, level._effect["crusher_sparks"], self, "bar_01_fx_jnt");
+      playFXOnTag(localclientnum, level._effect["crusher_sparks"], self, "bar_01_fx_jnt");
 
     if(note == "pivot_a_spark")
-      playfxontag(localclientnum, level._effect["crusher_sparks"], self, "pivot_a_fx_jnt");
+      playFXOnTag(localclientnum, level._effect["crusher_sparks"], self, "pivot_a_fx_jnt");
   }
 }
 

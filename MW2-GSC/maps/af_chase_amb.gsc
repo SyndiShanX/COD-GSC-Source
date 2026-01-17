@@ -7,7 +7,6 @@
 #include common_scripts\utility;
 
 main() {
-
   level.ambient_track["af_chase_caves"] = "ambient_af_chase_caves_int0";
 
   level.ambient_track["af_chase_exit"] = "ambient_af_chase_lake";
@@ -41,5 +40,4 @@ main() {
   ambientDelay("af_chase_ext", 15.0, 25.0); // Trackname, min and max delay between ambient events
   ambientEvent("af_chase_ext", "elm_windgust1", 0.1);
   ambientEvent("af_chase_ext", "null", 1.0);
-
 }

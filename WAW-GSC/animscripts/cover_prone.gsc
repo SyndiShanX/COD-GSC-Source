@@ -46,7 +46,7 @@ main() {
 idleThread() {
   self endon("killanimscript");
   self endon("kill_idle_thread");
-  for (;;) {
+  for(;;) {
     idleAnim = animArrayPickRandom("prone_idle");
     self setflaggedanimlimited("idle", idleAnim);
     self waittillmatch("idle", "end");
@@ -65,7 +65,7 @@ proneCombatMainLoop() {
   self thread animscripts\shoot_behavior::decideWhatAndHowToShoot("normal");
   nextShootTime = 0;
   desynched = (gettime() > 2500);
-  for (;;) {
+  for(;;) {
     self animscripts\utility::IsInCombat();
     self UpdateProneWrapper(0.05);
     if(!desynched) {
@@ -165,7 +165,7 @@ tryThrowingGrenade(throwAt, safe) {
 considerThrowGrenade() {
   if(isDefined(anim.throwGrenadeAtPlayerASAP)) {
     players = GetPlayers();
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       if(isAlive(players[i])) {
         if(tryThrowingGrenade(players[i], 200))
           return true;

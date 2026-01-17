@@ -13,16 +13,16 @@ init() {
 
 playerjump(client_num, player, ground_type, firstperson, quiet) {
   sound_alias = buildmovementsoundaliasname("step_run", ground_type, firstperson, quiet);
-  player playsound(client_num, sound_alias);
+  player playSound(client_num, sound_alias);
 }
 
 playerland(client_num, player, ground_type, firstperson, quiet, damageplayer) {
   sound_alias = buildmovementsoundaliasname("land", ground_type, firstperson, quiet);
-  player playsound(client_num, sound_alias);
+  player playSound(client_num, sound_alias);
 
   if(isDefined(player.step_sound) && !quiet && player.step_sound != "none") {
     volume = clientscripts\_audio::get_vol_from_speed(player);
-    player playsound(client_num, player.step_sound, player.origin, volume);
+    player playSound(client_num, player.step_sound, player.origin, volume);
   }
 
   if(damageplayer) {
@@ -30,7 +30,7 @@ playerland(client_num, player, ground_type, firstperson, quiet, damageplayer) {
 
     if(firstperson) {
       sound_alias = "fly_land_damage_plr";
-      player playsound(client_num, sound_alias);
+      player playSound(client_num, sound_alias);
     }
   }
 }
@@ -41,7 +41,7 @@ playerfoliage(client_num, player, firstperson, quiet) {
   if(firstperson)
     sound_alias = "fly_movement_foliage_plr";
 
-  player playsound(client_num, sound_alias);
+  player playSound(client_num, sound_alias);
 }
 
 setaifootstepprepend(prepend) {
@@ -103,7 +103,7 @@ bigdogfootstepcbfunc(client_num, pos, surface, notetrack, bone) {
     sound_alias = "fly_step_run_bigdog_" + surface;
 
   if(isDefined(sound_alias))
-    playsound(client_num, sound_alias, pos);
+    playSound(client_num, sound_alias, pos);
 
   footstepdofootstepfx();
 }
@@ -129,14 +129,14 @@ playscrapeforframes(client_num, effect, tag, frames) {
   self endon("death");
   offsetvec = vectorscale((0, 0, 1), 30.0);
   prevorigin = self.origin;
-  forward = anglestoforward(self.angles);
+  forward = anglesToForward(self.angles);
   forward = vectorscale(forward, -1);
 
   for(i = 0; isDefined(self) && i < frames; i++) {
     boneorigin = self gettagorigin(tag);
     surfacetrace = tracepoint(boneorigin, boneorigin - offsetvec);
     groundpos = surfacetrace["position"];
-    playfx(client_num, effect, groundpos, forward, (0, 0, 1));
+    playFX(client_num, effect, groundpos, forward, (0, 0, 1));
     wait 0.01;
 
     if(isDefined(self) && distancesquared(self.origin, prevorigin) > 1) {
@@ -188,7 +188,7 @@ do_foot_effect(client_num, ground_type, foot_pos, on_fire) {
       effect = level._effect["human"][effectname];
 
     if(isDefined(effect))
-      playfx(client_num, effect, foot_pos, foot_pos + vectorscale((0, 0, 1), 100.0));
+      playFX(client_num, effect, foot_pos, foot_pos + vectorscale((0, 0, 1), 100.0));
   }
 }
 

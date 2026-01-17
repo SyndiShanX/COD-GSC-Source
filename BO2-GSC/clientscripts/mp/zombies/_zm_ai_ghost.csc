@@ -50,7 +50,7 @@ play_impact_fx_internal(localclientnum, newval) {
   effect = level.ghost_impact_effects[newval];
 
   if(isDefined(effect))
-    playfx(localclientnum, effect, self.origin + vectorscale((0, 0, 1), 36.0));
+    playFX(localclientnum, effect, self.origin + vectorscale((0, 0, 1), 36.0));
 }
 
 play_fx_clientfield_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -87,9 +87,9 @@ play_fx_internal(localclientnum, newval) {
     self notify("sndDeath");
 
   if(newval == 1 || newval == 5)
-    self._fx_array[localclientnum] = playfx(localclientnum, effect, self.origin);
+    self._fx_array[localclientnum] = playFX(localclientnum, effect, self.origin);
   else
-    self._fx_array[localclientnum] = playfxontag(localclientnum, effect, self, linktag);
+    self._fx_array[localclientnum] = playFXOnTag(localclientnum, effect, self, linktag);
 }
 
 ghost_round_presentation_light_state_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -115,11 +115,11 @@ sndghostaudio(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, 
   }
 
   if(newval == 1) {
-    self playsound(0, "zmb_ai_ghost_apparate");
-    self.sndent playloopsound("zmb_ai_ghost_loop", 1);
+    self playSound(0, "zmb_ai_ghost_apparate");
+    self.sndent playLoopSound("zmb_ai_ghost_loop", 1);
   } else {
-    self playsound(0, "zmb_ai_ghost_disapparate");
-    self.sndent playloopsound("zmb_ai_ghost_loop", 1);
+    self playSound(0, "zmb_ai_ghost_disapparate");
+    self.sndent playLoopSound("zmb_ai_ghost_loop", 1);
   }
 }
 
@@ -135,7 +135,7 @@ sndghostattackaudio() {
     self thread sndghostattackaudiodeleteent(self.sndattackent);
   }
 
-  self.sndattackent playloopsound("zmb_ai_ghost_attack_loop", 0.1);
+  self.sndattackent playLoopSound("zmb_ai_ghost_attack_loop", 0.1);
 }
 
 sndghostattackaudiodeleteent(ent) {

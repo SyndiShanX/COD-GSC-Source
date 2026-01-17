@@ -20,8 +20,10 @@ stealth_color_friendly_main() {
 }
 
 /************************************************************************************************************/
+
 /*												FRIENDLY LOGIC												*/
 /************************************************************************************************************/
+
 friendly_color_hidden() {
   self disable_ai_color();
   self.fixednode = false;
@@ -32,11 +34,12 @@ friendly_color_spotted() {
 }
 
 /************************************************************************************************************/
+
 /*													SETUP													*/
 /************************************************************************************************************/
 
 friendly_init() {
-  assertEX(isdefined(self._stealth), "There is no self._stealth struct.You ran stealth behavior before running the detection logic.Run _stealth_logic::friendly_init() on this AI first");
+  assertEX(isDefined(self._stealth), "There is no self._stealth struct.You ran stealth behavior before running the detection logic.Run _stealth_logic::friendly_init() on this AI first");
 
   self friendly_default_color_behavior();
 

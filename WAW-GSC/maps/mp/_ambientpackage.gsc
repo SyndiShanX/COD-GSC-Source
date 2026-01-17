@@ -11,9 +11,9 @@ init() {
 }
 
 tidyup_triggers(client_num) {
-  amb_triggers = GetEntArray("ambient_package", "targetname");
+  amb_triggers = getEntArray("ambient_package", "targetname");
   if(isDefined(amb_triggers) && amb_triggers.size > 0) {
-    for (i = 0; i < amb_triggers.size; i++) {
+    for(i = 0; i < amb_triggers.size; i++) {
       trig = amb_triggers[i];
       if(isDefined(trig.in_volume) && isDefined(trig.in_volume[client_num])) {
         trig.in_volume[client_num] = 0;
@@ -24,7 +24,7 @@ tidyup_triggers(client_num) {
 
 monitor_for_player_leave_trigger(trigPlayer, useAmbientRoom, useAmbientPackage) {
   trigPlayer endon("disconnect");
-  while (trigPlayer isTouching(self)) {
+  while(trigPlayer isTouching(self)) {
     wait 0.1;
   }
   self.in_volume[trigPlayer getentitynumber()] = 0;
@@ -60,7 +60,7 @@ ambientPackageTrigger() {
     self.script_ambientpriority = 1;
   }
   self.in_volume = [];
-  for (;;) {
+  for(;;) {
     self waittill("trigger", trigPlayer);
     self player_entered_trigger(trigPlayer, useAmbientRoom, useAmbientPackage);
     wait(0.01);

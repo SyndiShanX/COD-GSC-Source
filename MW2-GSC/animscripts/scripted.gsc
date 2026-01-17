@@ -3,12 +3,12 @@
  * Script: animscripts\scripted.gsc
 ********************************************************/
 
-// Note that this script is called from the level script command animscripted, only for AI.If animscripted 
+// Note that this script is called from the level script command animscripted, only for AI.If animscripted
 // is done on a script model, this script is not called - startscriptedanim is called directly.
 
 #using_animtree("generic_human");
 main() {
-  //thread [[anim.println]]("Entering animscripts\\scripted. anim: ",self.codeScripted["anim"],",notify: ",self.codeScripted["notifyName"],", dialogue: ",self.scripted_dialogue,", facial: ",self.facial_animation, "root: ", self.codeScripted["root"]);#/
+  //thread [[anim.println]]("Entering animscripts\\scripted. anim: ",self.codeScripted["anim"],",notify: ",self.codeScripted["notifyName"],", dialogue: ",self.scripted_dialogue,", facial: ",self.facial_animation, "root: ", self.codeScripted["root"]);
   self endon("death");
 
   //	wait (0);
@@ -29,13 +29,13 @@ main() {
   //		self SetFlaggedAnimRestart("scripted_anim_facedone", self.facial_animation, 1, .1, 1);
   //		self.facial_animation = undefined;
   //	}
-  if(isdefined(self.scripted_dialogue) || isdefined(self.facial_animation)) {
+  if(isDefined(self.scripted_dialogue) || isDefined(self.facial_animation)) {
     self animscripts\face::SaySpecificDialogue(self.facial_animation, self.scripted_dialogue, 0.9, "scripted_anim_facedone");
     self.facial_animation = undefined;
     self.scripted_dialogue = undefined;
   }
 
-  if(isdefined(self.deathstring_passed))
+  if(isDefined(self.deathstring_passed))
     self.deathstring = self.deathstring_passed;
 
   self waittill("killanimscript");
@@ -64,6 +64,6 @@ DebugPrintEndSequence()
 {
 	self endon ("death");
 	self waittill ("end_sequence");
-	/#thread [[anim.println]]("scripted.gsc: \"end_sequence\" was notified.Time: ",GetTime(),".");#/
+	/#thread [[anim.println]]("scripted.gsc: \"end_sequence\" was notified.Time: ",GetTime(),".");
 }
 */

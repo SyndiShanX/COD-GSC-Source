@@ -15,7 +15,7 @@ node_connect_to_path() {
   a_near_nodes = getanynodearray(self.origin, 240);
 
   if(isDefined(a_near_nodes)) {
-    v_forward = anglestoforward(self.angles);
+    v_forward = anglesToForward(self.angles);
 
     for(nn = 0; nn < a_near_nodes.size; nn++) {
       nd_test = a_near_nodes[nn];
@@ -25,7 +25,7 @@ node_connect_to_path() {
         dot = vectordot(v_forward, v_dir);
 
         if(dot >= 0.3) {
-          trace = bullettrace((self.origin[0], self.origin[1], self.origin[2] + 42), (nd_test.origin[0], nd_test.origin[1], nd_test.origin[2] + 42), 0, undefined, 1, 1);
+          trace = bulletTrace((self.origin[0], self.origin[1], self.origin[2] + 42), (nd_test.origin[0], nd_test.origin[1], nd_test.origin[2] + 42), 0, undefined, 1, 1);
 
           if(trace["fraction"] >= 1)
             a_connection_nodes[a_connection_nodes.size] = nd_test;
@@ -122,7 +122,7 @@ entity_connect_nodes() {
         reject = 1;
 
       if(!reject) {
-        v_forward = anglestoforward(nd_dynamic.angles);
+        v_forward = anglesToForward(nd_dynamic.angles);
         v_dir = vectornormalize(nd_test.origin - nd_dynamic.origin);
         dot = vectordot(v_forward, v_dir);
 
@@ -131,7 +131,7 @@ entity_connect_nodes() {
       }
 
       if(!reject) {
-        trace = bullettrace(nd_dynamic.origin, nd_test.origin, 0, undefined, 1, 1);
+        trace = bulletTrace(nd_dynamic.origin, nd_test.origin, 0, undefined, 1, 1);
 
         if(trace["fraction"] < 1)
           reject = 1;

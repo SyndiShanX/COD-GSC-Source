@@ -155,9 +155,7 @@ friendly_fire_think(var_0) {
       }
 
       if(isDefined(level.friendly_fire_fail_check)) {
-        [
-          [level.friendly_fire_fail_check]
-        ](var_0, var_1, var_2, var_3, var_4, var_5, var_6);
+        [[level.friendly_fire_fail_check]](var_0, var_1, var_2, var_3, var_4, var_5, var_6);
         continue;
       }
 

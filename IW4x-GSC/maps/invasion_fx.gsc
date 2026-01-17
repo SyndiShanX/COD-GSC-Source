@@ -26,11 +26,11 @@ main() {
   //level._effect[ "horizon_explosion_distant" ]			 		 = LoadFX( "explosions/default_explosion" );
   //level._effect[ "horizon_explosion_more_distant" ]				 = LoadFX( "explosions/default_explosion" );
 
-  //intro 
+  //intro
   level._effect["humvee_explosion"] = LoadFX("explosions/small_vehicle_explosion");
   level._effect["pillar_explosion_brick"] = LoadFX("explosions/pillar_explosion_brick_invasion");
 
-  // nates_restaurant prefab exploder id's 138-151 
+  // nates_restaurant prefab exploder id's 138-151
   // just replace below with LoadFX( "misc/no_effect" ) to empty out the effect and do it yourself in createfx
   // we'll cleanup the entities when you're done making it pretty.
   level._effect["nates_roof_balcony_blaster"] = LoadFX("explosions/default_explosion");

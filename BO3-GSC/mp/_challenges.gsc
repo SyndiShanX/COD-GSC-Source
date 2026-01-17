@@ -20,30 +20,30 @@
 #namespace challenges;
 
 function autoexec __init__sytem__() {
-  system::register("challenges", & __init__, undefined, undefined);
+  system::register("challenges", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype( & start_gametype);
-  callback::on_spawned( & on_player_spawn);
-  level.heroabilityactivateneardeath = & heroabilityactivateneardeath;
-  level.callbackendherospecialistemp = & callbackendherospecialistemp;
-  level.capturedobjectivefunction = & capturedobjectivefunction;
+  callback::on_start_gametype(&start_gametype);
+  callback::on_spawned(&on_player_spawn);
+  level.heroabilityactivateneardeath = &heroabilityactivateneardeath;
+  level.callbackendherospecialistemp = &callbackendherospecialistemp;
+  level.capturedobjectivefunction = &capturedobjectivefunction;
 }
 
 function start_gametype() {
-  if(!isdefined(level.challengescallbacks)) {
+  if(!isDefined(level.challengescallbacks)) {
     level.challengescallbacks = [];
   }
   waittillframeend();
-  if(isdefined(level.scoreeventgameendcallback)) {
+  if(isDefined(level.scoreeventgameendcallback)) {
     registerchallengescallback("gameEnd", level.scoreeventgameendcallback);
   }
   if(canprocesschallenges()) {
-    registerchallengescallback("playerKilled", & challengekills);
-    registerchallengescallback("gameEnd", & challengegameendmp);
+    registerchallengescallback("playerKilled", &challengekills);
+    registerchallengescallback("gameEnd", &challengegameendmp);
   }
-  callback::on_connect( & on_player_connect);
+  callback::on_connect(&on_player_connect);
 }
 
 function on_player_connect() {
@@ -68,7 +68,7 @@ function initchallengedata() {
 }
 
 function addspecialistusedstatonconnect() {
-  if(!isdefined(self.pers["challenge_heroweaponkills"])) {
+  if(!isDefined(self.pers["challenge_heroweaponkills"])) {
     heroweaponname = self getloadoutitemref(0, "heroWeapon");
     heroweapon = getweapon(heroweaponname);
     if(heroweapon == level.weaponnone) {
@@ -101,7 +101,7 @@ function spawnwatcher() {
   self.challenge_objectiveoffensive = undefined;
   self.challenge_lastsurvivewithflakfrom = undefined;
   self.explosiveinfo = [];
-  for (;;) {
+  for(;;) {
     self waittill("spawned_player");
     self.weaponkillsthisspawn = [];
     self.attachmentkillsthisspawn = [];
@@ -125,7 +125,7 @@ function watchscavengelethal() {
   self endon("death");
   self endon("disconnect");
   self.challenge_scavengedcount = 0;
-  for (;;) {
+  for(;;) {
     self waittill("scavenged_primary_grenade");
     self.challenge_scavengedcount++;
   }
@@ -136,7 +136,7 @@ function watchdoublejump() {
   self endon("disconnect");
   self.challenge_doublejump_begin = 0;
   self.challenge_doublejump_end = 0;
-  for (;;) {
+  for(;;) {
     ret = util::waittill_any_return("doublejump_begin", "doublejump_end", "disconnect");
     switch (ret) {
       case "doublejump_begin": {
@@ -156,7 +156,7 @@ function watchjump() {
   self endon("disconnect");
   self.challenge_jump_begin = 0;
   self.challenge_jump_end = 0;
-  for (;;) {
+  for(;;) {
     ret = util::waittill_any_return("jump_begin", "jump_end", "disconnect");
     switch (ret) {
       case "jump_begin": {
@@ -176,7 +176,7 @@ function watchswimming() {
   self endon("disconnect");
   self.challenge_swimming_begin = 0;
   self.challenge_swimming_end = 0;
-  for (;;) {
+  for(;;) {
     ret = util::waittill_any_return("swimming_begin", "swimming_end", "disconnect");
     switch (ret) {
       case "swimming_begin": {
@@ -196,7 +196,7 @@ function watchwallrun() {
   self endon("disconnect");
   self.challenge_wallrun_begin = 0;
   self.challenge_wallrun_end = 0;
-  for (;;) {
+  for(;;) {
     ret = util::waittill_any_return("wallrun_begin", "wallrun_end", "disconnect");
     switch (ret) {
       case "wallrun_begin": {
@@ -216,7 +216,7 @@ function watchslide() {
   self endon("disconnect");
   self.challenge_slide_begin = 0;
   self.challenge_slide_end = 0;
-  for (;;) {
+  for(;;) {
     ret = util::waittill_any_return("slide_begin", "slide_end", "disconnect");
     switch (ret) {
       case "slide_begin": {
@@ -236,7 +236,7 @@ function watchsprint() {
   self endon("disconnect");
   self.challenge_sprint_begin = 0;
   self.challenge_sprint_end = 0;
-  for (;;) {
+  for(;;) {
     ret = util::waittill_any_return("sprint_begin", "sprint_end", "disconnect");
     switch (ret) {
       case "sprint_begin": {
@@ -344,10 +344,10 @@ function challengekills(data) {
   inflictorownerwassprinting = data.inflictorownerwassprinting;
   inflictorplayerhasengineerperk = data.inflictorplayerhasengineerperk;
   inflictor = data.einflictor;
-  if(!isdefined(data.weapon)) {
+  if(!isDefined(data.weapon)) {
     return;
   }
-  if(!isdefined(player) || !isplayer(player) || weapon == level.weaponnone) {
+  if(!isDefined(player) || !isplayer(player) || weapon == level.weaponnone) {
     return;
   }
   weaponclass = util::getweaponclass(weapon);
@@ -373,7 +373,7 @@ function challengekills(data) {
     return;
   }
   killstreak = killstreaks::get_from_weapon(data.weapon);
-  if(!isdefined(killstreak)) {
+  if(!isDefined(killstreak)) {
     player processspecialistchallenge("kills");
     if(weapon.isheroweapon == 1) {
       player processspecialistchallenge("kills_weapon");
@@ -388,12 +388,12 @@ function challengekills(data) {
   if(bulletkill) {
     if(weaponpurchased) {
       if(weaponclass == "weapon_sniper") {
-        if(isdefined(victim.firsttimedamaged) && victim.firsttimedamaged == time) {
+        if(isDefined(victim.firsttimedamaged) && victim.firsttimedamaged == time) {
           player addplayerstat("kill_enemy_one_bullet_sniper", 1);
           player addweaponstat(weapon, "kill_enemy_one_bullet_sniper", 1);
         }
       } else if(weaponclass == "weapon_cqb") {
-        if(isdefined(victim.firsttimedamaged) && victim.firsttimedamaged == time) {
+        if(isDefined(victim.firsttimedamaged) && victim.firsttimedamaged == time) {
           player addplayerstat("kill_enemy_one_bullet_shotgun", 1);
           player addweaponstat(weapon, "kill_enemy_one_bullet_shotgun", 1);
         }
@@ -411,7 +411,7 @@ function challengekills(data) {
       }
     }
     if(player isbonuscardactive(2, player.class_num) && player isitempurchased(getitemindexfromref("bonuscard_primary_gunfighter_3"))) {
-      if(isdefined(weapon.attachments) && weapon.attachments.size == 6) {
+      if(isDefined(weapon.attachments) && weapon.attachments.size == 6) {
         player addplayerstat("kill_with_gunfighter", 1);
       }
     }
@@ -419,13 +419,13 @@ function challengekills(data) {
     if(weapon.isdualwield && weaponpurchased) {
       checkdualwield(baseweapon, player, attacker, time, attackerwassprinting, attacker_sprint_end);
     }
-    if(isdefined(weapon.attachments) && weapon.attachments.size > 0) {
+    if(isDefined(weapon.attachments) && weapon.attachments.size > 0) {
       attachmentname = player getweaponoptic(weapon);
-      if(isdefined(attachmentname) && attachmentname != "" && player weaponhasattachmentandunlocked(weapon, attachmentname)) {
-        if(weapon.attachments.size > 5 && player allweaponattachmentsunlocked(weapon) && !isdefined(attacker.tookweaponfrom[weapon])) {
+      if(isDefined(attachmentname) && attachmentname != "" && player weaponhasattachmentandunlocked(weapon, attachmentname)) {
+        if(weapon.attachments.size > 5 && player allweaponattachmentsunlocked(weapon) && !isDefined(attacker.tookweaponfrom[weapon])) {
           player addplayerstat("kill_optic_5_attachments", 1);
         }
-        if(isdefined(player.attachmentkillsthisspawn[attachmentname])) {
+        if(isDefined(player.attachmentkillsthisspawn[attachmentname])) {
           player.attachmentkillsthisspawn[attachmentname]++;
           if(player.attachmentkillsthisspawn[attachmentname] == 5) {
             player addweaponstat(weapon, "killstreak_5_attachment", 1);
@@ -445,7 +445,7 @@ function challengekills(data) {
         }
       }
       if(player playerads() == 1) {
-        if(isdefined(player.smokegrenadetime) && isdefined(player.smokegrenadeposition)) {
+        if(isDefined(player.smokegrenadetime) && isDefined(player.smokegrenadeposition)) {
           if((player.smokegrenadetime + 14000) > time) {
             if(player util::is_looking_at(player.smokegrenadeposition) || distancesquared(player.origin, player.smokegrenadeposition) < 40000) {
               if(player weaponhasattachmentandunlocked(weapon, "ir")) {
@@ -493,7 +493,7 @@ function challengekills(data) {
     if(victim_was_drowning && attacker_was_drowning) {
       player addplayerstat("dr_lung", 1);
     }
-    if(isdefined(attackerlastfastreloadtime) && (time - attackerlastfastreloadtime) <= 5000 && player weaponhasattachmentandunlocked(weapon, "fastreload")) {
+    if(isDefined(attackerlastfastreloadtime) && (time - attackerlastfastreloadtime) <= 5000 && player weaponhasattachmentandunlocked(weapon, "fastreload")) {
       player addplayerstat("kills_after_reload_fastreload", 1);
     }
     if(victim.idflagstime == time) {
@@ -508,7 +508,7 @@ function challengekills(data) {
       player addplayerstat("kill_while_wallrunning_2_walls", 1);
     }
   } else {
-    if(weapon_utils::ismeleemod(meansofdeath) && !isdefined(killstreak)) {
+    if(weapon_utils::ismeleemod(meansofdeath) && !isDefined(killstreak)) {
       player addplayerstat("melee", 1);
       if(weapon_utils::ispunch(weapon)) {
         player addplayerstat("kill_enemy_with_fists", 1);
@@ -526,7 +526,7 @@ function challengekills(data) {
             player.challenge_scavengedcount--;
           }
         }
-        if(isdefined(inflictoriscooked)) {
+        if(isDefined(inflictoriscooked)) {
           if(inflictoriscooked == 1 && weapon.rootweapon.name != "hatchet") {
             player addplayerstat("kill_with_cooked_grenade", 1);
           }
@@ -542,7 +542,7 @@ function challengekills(data) {
           }
         }
         if(baseweapon == level.weaponshotgunenergy) {
-          if(isdefined(victim.firsttimedamaged) && victim.firsttimedamaged == time) {
+          if(isDefined(victim.firsttimedamaged) && victim.firsttimedamaged == time) {
             player addplayerstat("kill_enemy_one_bullet_shotgun", 1);
             player addweaponstat(weapon, "kill_enemy_one_bullet_shotgun", 1);
           }
@@ -553,8 +553,8 @@ function challengekills(data) {
       }
     }
   }
-  if(isdefined(attacker.tookweaponfrom[weapon]) && isdefined(attacker.tookweaponfrom[weapon].previousowner)) {
-    if(!isdefined(attacker.tookweaponfrom[weapon].previousowner.team) || attacker.tookweaponfrom[weapon].previousowner.team != player.team) {
+  if(isDefined(attacker.tookweaponfrom[weapon]) && isDefined(attacker.tookweaponfrom[weapon].previousowner)) {
+    if(!isDefined(attacker.tookweaponfrom[weapon].previousowner.team) || attacker.tookweaponfrom[weapon].previousowner.team != player.team) {
       player addplayerstat("kill_with_pickup", 1);
     }
   }
@@ -566,14 +566,14 @@ function challengekills(data) {
       awarded_kill_enemy_that_blinded_you = 1;
     }
   }
-  if(!awarded_kill_enemy_that_blinded_you && isdefined(attackerlaststunnedtime) && (attackerlaststunnedtime + 5000) > time) {
+  if(!awarded_kill_enemy_that_blinded_you && isDefined(attackerlaststunnedtime) && (attackerlaststunnedtime + 5000) > time) {
     if(attackerlaststunnedby === victim && !playerhastacticalmask) {
       player addplayerstat("kill_enemy_that_blinded_you", 1);
       awarded_kill_enemy_that_blinded_you = 1;
     }
   }
   killedstunnedvictim = 0;
-  if(isdefined(victim.lastconcussedby) && victim.lastconcussedby == attacker) {
+  if(isDefined(victim.lastconcussedby) && victim.lastconcussedby == attacker) {
     if(victim.concussionendtime > time) {
       if(player util::is_item_purchased("concussion_grenade")) {
         player addplayerstat("kill_concussed_enemy", 1);
@@ -582,7 +582,7 @@ function challengekills(data) {
       player addweaponstat(getweapon("concussion_grenade"), "CombatRecordStat", 1);
     }
   }
-  if(isdefined(victim.lastshockedby) && victim.lastshockedby == attacker) {
+  if(isDefined(victim.lastshockedby) && victim.lastshockedby == attacker) {
     if(victim.shockendtime > time) {
       if(player util::is_item_purchased("proximity_grenade")) {
         player addplayerstat("kill_shocked_enemy", 1);
@@ -595,7 +595,7 @@ function challengekills(data) {
     }
   }
   if(victim util::isflashbanged()) {
-    if(isdefined(victim.lastflashedby) && victim.lastflashedby == player) {
+    if(isDefined(victim.lastflashedby) && victim.lastflashedby == player) {
       killedstunnedvictim = 1;
       if(player util::is_item_purchased("flash_grenade")) {
         player addplayerstat("kill_flashed_enemy", 1);
@@ -604,15 +604,15 @@ function challengekills(data) {
     }
   }
   if(level.teambased) {
-    if(!isdefined(player.pers["kill_every_enemy_with_specialist"]) && (level.playercount[victim.pers["team"]] > 3 && player.pers["killed_players_with_specialist"].size >= level.playercount[victim.pers["team"]])) {
+    if(!isDefined(player.pers["kill_every_enemy_with_specialist"]) && (level.playercount[victim.pers["team"]] > 3 && player.pers["killed_players_with_specialist"].size >= level.playercount[victim.pers["team"]])) {
       player addplayerstat("kill_every_enemy", 1);
       player.pers["kill_every_enemy_with_specialist"] = 1;
     }
-    if(isdefined(victimattackersthisspawn) && isarray(victimattackersthisspawn)) {
+    if(isDefined(victimattackersthisspawn) && isarray(victimattackersthisspawn)) {
       if(victimattackersthisspawn.size > 5) {
         attackercount = 0;
         foreach(attacking_player in victimattackersthisspawn) {
-          if(!isdefined(attacking_player)) {
+          if(!isDefined(attacking_player)) {
             continue;
           }
           if(attacking_player == attacker) {
@@ -629,15 +629,15 @@ function challengekills(data) {
       }
     }
   }
-  if(isdefined(killstreak)) {
+  if(isDefined(killstreak)) {
     if(killstreak == "rcbomb" || killstreak == "inventory_rcbomb") {
       if(!victimwasonground || victimwaswallrunning) {
         player addplayerstat("kill_wallrunner_or_air_with_rcbomb", 1);
       }
     }
     if(killstreak == "autoturret" || killstreak == "inventory_autoturret") {
-      if(isdefined(inflictor) && player util::is_item_purchased("killstreak_auto_turret")) {
-        if(!isdefined(inflictor.challenge_killcount)) {
+      if(isDefined(inflictor) && player util::is_item_purchased("killstreak_auto_turret")) {
+        if(!isDefined(inflictor.challenge_killcount)) {
           inflictor.challenge_killcount = 0;
         }
         inflictor.challenge_killcount++;
@@ -647,8 +647,8 @@ function challengekills(data) {
       }
     }
   }
-  if(isdefined(victim.challenge_combatrobotattackclientid[player.clientid])) {
-    if(!isdefined(inflictor) || !isdefined(inflictor.killstreaktype) || !isstring(inflictor.killstreaktype) || inflictor.killstreaktype != "combat_robot") {
+  if(isDefined(victim.challenge_combatrobotattackclientid[player.clientid])) {
+    if(!isDefined(inflictor) || !isDefined(inflictor.killstreaktype) || !isstring(inflictor.killstreaktype) || inflictor.killstreaktype != "combat_robot") {
       player addplayerstat("kill_enemy_who_damaged_robot", 1);
     }
   }
@@ -664,7 +664,7 @@ function challengekills(data) {
     }
   }
   player trackkillstreaksupportkills(victim);
-  if(!isdefined(killstreak)) {
+  if(!isDefined(killstreak)) {
     if(attackerwasunderwater) {
       player addplayerstat("kill_while_underwater", 1);
     }
@@ -726,18 +726,18 @@ function challengekills(data) {
       }
     }
     if(player util::has_purchased_perk_equipped("specialty_flakjacket")) {
-      if(isdefined(player.challenge_lastsurvivewithflakfrom) && player.challenge_lastsurvivewithflakfrom == victim) {
+      if(isDefined(player.challenge_lastsurvivewithflakfrom) && player.challenge_lastsurvivewithflakfrom == victim) {
         player addplayerstat("kill_enemy_survive_flak", 1);
       }
       if(player util::has_tactical_mask_purchased_and_equipped()) {
         recentlysurvivedflak = 0;
-        if(isdefined(player.challenge_lastsurvivewithflaktime)) {
+        if(isDefined(player.challenge_lastsurvivewithflaktime)) {
           if((player.challenge_lastsurvivewithflaktime + 3000) > time) {
             recentlysurvivedflak = 1;
           }
         }
         recentlystunned = 0;
-        if(isdefined(player.laststunnedtime)) {
+        if(isDefined(player.laststunnedtime)) {
           if((player.laststunnedtime + 2000) > time) {
             recentlystunned = 1;
           }
@@ -784,7 +784,7 @@ function challengekills(data) {
         }
       }
       if(weaponclass == "weapon_grenade") {
-        if(isdefined(inflictorownerwassprinting) && inflictorownerwassprinting == 1) {
+        if(isDefined(inflictorownerwassprinting) && inflictorownerwassprinting == 1) {
           killedplayerwithgungho = 1;
           player addplayerstat("kill_hip_gung_ho", 1);
         }
@@ -841,23 +841,23 @@ function challengekills(data) {
     gunfighteroverkillactive = 0;
     if(player isbonuscardactive(4, player.class_num) && player util::is_item_purchased("bonuscard_overkill")) {
       primaryattachmentstotal = 0;
-      if(isdefined(player.primaryloadoutweapon)) {
+      if(isDefined(player.primaryloadoutweapon)) {
         primaryattachmentstotal = player.primaryloadoutweapon.attachments.size;
       }
       secondaryattachmentstotal = 0;
-      if(isdefined(player.secondaryloadoutweapon)) {
+      if(isDefined(player.secondaryloadoutweapon)) {
         secondaryattachmentstotal = player.secondaryloadoutweapon.attachments.size;
       }
       if((primaryattachmentstotal + secondaryattachmentstotal) >= 5) {
         gunfighteroverkillactive = 1;
       }
     }
-    if(isdefined(player.primaryloadoutweapon) && weapon == player.primaryloadoutweapon || (isdefined(player.primaryloadoutaltweapon) && weapon == player.primaryloadoutaltweapon)) {
+    if(isDefined(player.primaryloadoutweapon) && weapon == player.primaryloadoutweapon || (isDefined(player.primaryloadoutaltweapon) && weapon == player.primaryloadoutaltweapon)) {
       if(player isbonuscardactive(0, player.class_num) && player util::is_item_purchased("bonuscard_primary_gunfighter")) {
         player addbonuscardstat(0, "kills", 1, player.class_num);
         player addplayerstat("kill_with_loadout_weapon_with_3_attachments", 1);
       }
-      if(isdefined(player.secondaryweaponkill) && player.secondaryweaponkill == 1) {
+      if(isDefined(player.secondaryweaponkill) && player.secondaryweaponkill == 1) {
         player.primaryweaponkill = 0;
         player.secondaryweaponkill = 0;
         if(player isbonuscardactive(4, player.class_num) && player util::is_item_purchased("bonuscard_overkill")) {
@@ -870,11 +870,11 @@ function challengekills(data) {
       } else {
         player.primaryweaponkill = 1;
       }
-    } else if(isdefined(player.secondaryloadoutweapon) && weapon == player.secondaryloadoutweapon || (isdefined(player.secondaryloadoutaltweapon) && weapon == player.secondaryloadoutaltweapon)) {
+    } else if(isDefined(player.secondaryloadoutweapon) && weapon == player.secondaryloadoutweapon || (isDefined(player.secondaryloadoutaltweapon) && weapon == player.secondaryloadoutaltweapon)) {
       if(player isbonuscardactive(3, player.class_num) && player util::is_item_purchased("bonuscard_secondary_gunfighter")) {
         player addbonuscardstat(3, "kills", 1, player.class_num);
       }
-      if(isdefined(player.primaryweaponkill) && player.primaryweaponkill == 1) {
+      if(isDefined(player.primaryweaponkill) && player.primaryweaponkill == 1) {
         player.primaryweaponkill = 0;
         player.secondaryweaponkill = 0;
         if(player isbonuscardactive(4, player.class_num) && player util::is_item_purchased("bonuscard_overkill")) {
@@ -890,9 +890,9 @@ function challengekills(data) {
     }
     if(player util::has_hacker_perk_purchased_and_equipped() && player util::has_hard_wired_perk_purchased_and_equipped()) {
       should_award_kill_near_plant_engineer_hardwired = 0;
-      if(isdefined(victimactivebouncingbetties)) {
+      if(isDefined(victimactivebouncingbetties)) {
         foreach(bouncingbettyinfo in victimactivebouncingbetties) {
-          if(!isdefined(bouncingbettyinfo) || !isdefined(bouncingbettyinfo.origin)) {
+          if(!isDefined(bouncingbettyinfo) || !isDefined(bouncingbettyinfo.origin)) {
             continue;
           }
           if(distancesquared(bouncingbettyinfo.origin, victimorigin) < (400 * 400)) {
@@ -901,9 +901,9 @@ function challengekills(data) {
           }
         }
       }
-      if(isdefined(victimactiveproximitygrenades) && should_award_kill_near_plant_engineer_hardwired == 0) {
+      if(isDefined(victimactiveproximitygrenades) && should_award_kill_near_plant_engineer_hardwired == 0) {
         foreach(proximitygrenadeinfo in victimactiveproximitygrenades) {
-          if(!isdefined(proximitygrenadeinfo) || !isdefined(proximitygrenadeinfo.origin)) {
+          if(!isDefined(proximitygrenadeinfo) || !isDefined(proximitygrenadeinfo.origin)) {
             continue;
           }
           if(distancesquared(proximitygrenadeinfo.origin, victimorigin) < (400 * 400)) {
@@ -917,11 +917,11 @@ function challengekills(data) {
       }
     }
   } else if(weapon.name == "supplydrop") {
-    if(isdefined(inflictorplayerhasengineerperk)) {
+    if(isDefined(inflictorplayerhasengineerperk)) {
       player addplayerstat("kill_booby_trap_engineer", 1);
     }
   }
-  if(weapon.isheroweapon == 1 || attackerheroabilityactive || isdefined(killstreak)) {
+  if(weapon.isheroweapon == 1 || attackerheroabilityactive || isDefined(killstreak)) {
     if(player util::has_purchased_perk_equipped("specialty_overcharge") && player util::has_purchased_perk_equipped("specialty_anteup")) {
       player addplayerstat("kill_anteup_overclock_scorestreak_specialist", 1);
     }
@@ -949,7 +949,7 @@ function get_challenge_group_stat(group_name, stat_name) {
 
 function fix_challenge_stats_on_spawn() {
   player = self;
-  if(!isdefined(player)) {
+  if(!isDefined(player)) {
     return;
   }
   if(player.fix_challenge_stats_performed === 1) {
@@ -1058,7 +1058,7 @@ function str_strip_lh_or_dw(str) {
 }
 
 function checkkillstreak5(baseweapon, player) {
-  if(isdefined(player.weaponkillsthisspawn[baseweapon])) {
+  if(isDefined(player.weaponkillsthisspawn[baseweapon])) {
     player.weaponkillsthisspawn[baseweapon]++;
     if((player.weaponkillsthisspawn[baseweapon] % 5) == 0) {
       player addweaponstat(baseweapon, "killstreak_5", 1);
@@ -1079,7 +1079,7 @@ function checkdualwield(baseweapon, player, attacker, time, attackerwassprinting
 function challengegameendmp(data) {
   player = data.player;
   winner = data.winner;
-  if(!isdefined(player)) {
+  if(!isDefined(player)) {
     return;
   }
   if(endedearly(winner)) {
@@ -1090,7 +1090,7 @@ function challengegameendmp(data) {
     loserscore = getlosersteamscores(winner);
   }
   mostkillsleastdeaths = 1;
-  for (index = 0; index < level.placement["all"].size; index++) {
+  for(index = 0; index < level.placement["all"].size; index++) {
     if(level.placement["all"][index].deaths < player.deaths) {
       mostkillsleastdeaths = 0;
     }
@@ -1114,13 +1114,13 @@ function killedbaseoffender(objective, weapon) {
   self endon("disconnect");
   self addplayerstatwithgametype("defends", 1);
   self.challenge_offenderkillcount++;
-  if(!isdefined(self.challenge_objectiveoffensive) || self.challenge_objectiveoffensive != objective) {
+  if(!isDefined(self.challenge_objectiveoffensive) || self.challenge_objectiveoffensive != objective) {
     self.challenge_objectiveoffensivekillcount = 0;
   }
   self.challenge_objectiveoffensivekillcount++;
   self.challenge_objectiveoffensive = objective;
   killstreak = killstreaks::get_from_weapon(weapon);
-  if(isdefined(killstreak)) {
+  if(isDefined(killstreak)) {
     switch (killstreak) {
       case "drone_strike":
       case "inventory_drone_strike":
@@ -1175,7 +1175,7 @@ function killedbaseoffender(objective, weapon) {
 function killedbasedefender(objective) {
   self endon("disconnect");
   self addplayerstatwithgametype("offends", 1);
-  if(!isdefined(self.challenge_objectivedefensive) || self.challenge_objectivedefensive != objective) {
+  if(!isDefined(self.challenge_objectivedefensive) || self.challenge_objectivedefensive != objective) {
     self.challenge_objectivedefensivekillcount = 0;
   }
   self.challenge_objectivedefensivekillcount++;
@@ -1201,7 +1201,7 @@ function killstreak_30_noscorestreaks() {
 }
 
 function heroabilityactivateneardeath() {
-  if(isdefined(self.heroability) && self.pers["canSetSpecialistStat"]) {
+  if(isDefined(self.heroability) && self.pers["canSetSpecialistStat"]) {
     switch (self.heroability.name) {
       case "gadget_armor":
       case "gadget_camo":
@@ -1226,12 +1226,12 @@ function checkforherosurvival() {
 
 function callbackendherospecialistemp() {
   empowner = self emp::enemyempowner();
-  if(isdefined(empowner) && isplayer(empowner)) {
+  if(isDefined(empowner) && isplayer(empowner)) {
     empowner addplayerstat("end_enemy_specialist_ability_with_emp", 1);
     return;
   }
-  if(isdefined(self.empstarttime) && self.empstarttime > (gettime() - 100)) {
-    if(isdefined(self.empedby) && isplayer(self.empedby)) {
+  if(isDefined(self.empstarttime) && self.empstarttime > (gettime() - 100)) {
+    if(isDefined(self.empedby) && isplayer(self.empedby)) {
       self.empedby addplayerstat("end_enemy_specialist_ability_with_emp", 1);
       return;
     }
@@ -1243,8 +1243,8 @@ function calledincomlinkchopper() {
 }
 
 function combat_robot_damage(eattacker, combatrobotowner) {
-  if(!isdefined(eattacker.challenge_combatrobotattackclientid[combatrobotowner.clientid])) {
-    eattacker.challenge_combatrobotattackclientid[combatrobotowner.clientid] = spawnstruct();
+  if(!isDefined(eattacker.challenge_combatrobotattackclientid[combatrobotowner.clientid])) {
+    eattacker.challenge_combatrobotattackclientid[combatrobotowner.clientid] = spawnStruct();
   }
 }
 
@@ -1252,7 +1252,7 @@ function trackkillstreaksupportkills(victim) {
   if(level.activeplayeremps[self.entnum] > 0) {
     self addweaponstat(getweapon("emp"), "kills_while_active", 1);
   }
-  if(level.activeplayeruavs[self.entnum] > 0 && (!isdefined(level.forceradar) || level.forceradar == 0)) {
+  if(level.activeplayeruavs[self.entnum] > 0 && (!isDefined(level.forceradar) || level.forceradar == 0)) {
     self addweaponstat(getweapon("uav"), "kills_while_active", 1);
   }
   if(level.activeplayersatellites[self.entnum] > 0) {
@@ -1261,7 +1261,7 @@ function trackkillstreaksupportkills(victim) {
   if(level.activeplayercounteruavs[self.entnum] > 0) {
     self addweaponstat(getweapon("counteruav"), "kills_while_active", 1);
   }
-  if(isdefined(victim.lastmicrowavedby) && victim.lastmicrowavedby == self) {
+  if(isDefined(victim.lastmicrowavedby) && victim.lastmicrowavedby == self) {
     self addweaponstat(getweapon("microwave_turret"), "kills_while_active", 1);
   }
 }
@@ -1269,7 +1269,7 @@ function trackkillstreaksupportkills(victim) {
 function monitorreloads() {
   self endon("disconnect");
   self endon("killmonitorreloads");
-  while (true) {
+  while(true) {
     self waittill("reload");
     currentweapon = self getcurrentweapon();
     if(currentweapon == level.weaponnone) {
@@ -1287,9 +1287,9 @@ function monitorgrenadefire() {
   self notify("grenadetrackingstart");
   self endon("grenadetrackingstart");
   self endon("disconnect");
-  for (;;) {
+  for(;;) {
     self waittill("grenade_fire", grenade, weapon);
-    if(!isdefined(grenade)) {
+    if(!isDefined(grenade)) {
       continue;
     }
     if(weapon.rootweapon.name == "hatchet") {
@@ -1307,7 +1307,7 @@ function watchweaponchangecomplete() {
   self endon("disconnect");
   self endon("joined_team");
   self endon("joined_spectators");
-  while (true) {
+  while(true) {
     self.heroweaponkillsthisactivation = 0;
     self waittill("weapon_change_complete");
   }
@@ -1335,7 +1335,7 @@ function watchwallruntwooppositewallsnoground() {
   player endon("joined_team");
   player endon("joined_spectators");
   self.wallrantwooppositewallsnoground = 0;
-  while (true) {
+  while(true) {
     if(!player iswallrunning()) {
       self.wallrantwooppositewallsnoground = 0;
       player waittill("wallrun_begin");
@@ -1356,14 +1356,14 @@ function watchwallruntwooppositewallsnoground() {
       continue;
     }
     player.wallrantwooppositewallsnoground = 1;
-    while (player iswallrunning()) {
+    while(player iswallrunning()) {
       ret = player util::waittill_any_return("jump_end", "wallrun_end", "disconnect", "joined_team", "joined_spectators");
       if(ret == "wallrun_end") {
         break;
       }
     }
     wait(0.05);
-    while (!player isonground()) {
+    while(!player isonground()) {
       wait(0.05);
     }
   }

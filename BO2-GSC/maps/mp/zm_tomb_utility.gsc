@@ -446,7 +446,7 @@ dug_zombie_entered_playable() {
   self endon("death");
 
   if(!isDefined(level.playable_areas))
-    level.playable_areas = getentarray("player_volume", "script_noteworthy");
+    level.playable_areas = getEntArray("player_volume", "script_noteworthy");
 
   while(true) {
     foreach(area in level.playable_areas) {
@@ -512,7 +512,7 @@ dug_zombie_rise(spot, func_rise_fx) {
     substate = 3;
 
   self orientmode("face default");
-  self playsound("zmb_vocals_capzomb_spawn");
+  self playSound("zmb_vocals_capzomb_spawn");
   self animscripted(self.origin, spot.angles, "zm_dug_rise");
   self maps\mp\animscripts\zm_shared::donotetracks("rise_anim", ::handle_rise_notetracks, spot);
   self.no_eye_glow = 0;
@@ -729,7 +729,7 @@ tomb_spawn_trigger_radius(origin, radius, use_trigger, func_per_player_msg) {
   if(!isDefined(use_trigger))
     use_trigger = 0;
 
-  trigger_stub = spawnstruct();
+  trigger_stub = spawnStruct();
   trigger_stub.origin = origin;
   trigger_stub.radius = radius;
 
@@ -792,8 +792,8 @@ zombie_gib_guts() {
   v_origin = self gettagorigin("J_SpineLower");
 
   if(isDefined(v_origin)) {
-    v_forward = anglestoforward((0, randomint(360), 0));
-    playfx(level._effect["zombie_guts_explosion"], v_origin, v_forward);
+    v_forward = anglesToForward((0, randomint(360), 0));
+    playFX(level._effect["zombie_guts_explosion"], v_origin, v_forward);
   }
 
   wait_network_frame();
@@ -923,7 +923,7 @@ play_puzzle_stinger_on_all_players() {
   players = getplayers();
 
   foreach(player in players)
-  player playsound("zmb_squest_step2_finished");
+  player playSound("zmb_squest_step2_finished");
 }
 
 puzzle_orb_move(v_to_pos) {
@@ -965,9 +965,9 @@ puzzle_orb_follow_return_path(s_start, n_element) {
 
   v_start = a_path[a_path.size - 1].origin + vectorscale((0, 0, 1), 1000.0);
   e_model = spawn("script_model", v_start);
-  e_model setmodel(s_start.model);
+  e_model setModel(s_start.model);
   e_model setclientfield("element_glow_fx", n_element);
-  playfxontag(level._effect["puzzle_orb_trail"], e_model, "tag_origin");
+  playFXOnTag(level._effect["puzzle_orb_trail"], e_model, "tag_origin");
 
   for(i = a_path.size - 1; i >= 0; i--)
     e_model puzzle_orb_move(a_path[i].origin);
@@ -987,7 +987,7 @@ puzzle_orb_pillar_show() {
   s_pillar.e_model = spawn("script_model", s_pillar.origin);
   s_pillar.e_model endon("death");
   s_pillar.e_model ghost();
-  s_pillar.e_model setmodel("fxuse_sky_pillar_new");
+  s_pillar.e_model setModel("fxuse_sky_pillar_new");
   s_pillar.e_model setclientfield("sky_pillar", 1);
   wait_network_frame();
   s_pillar.e_model show();
@@ -1005,7 +1005,7 @@ any_player_looking_at_plinth(min_lookat_dot, n_near_dist_sq) {
     dist_sq = distance2dsquared(player.origin, self.origin);
 
     if(dist_sq < n_near_dist_sq) {
-      fvec = anglestoforward(player.angles);
+      fvec = anglesToForward(player.angles);
       to_self = self.origin - player.origin;
       to_self = vectornormalize(to_self);
       dot_to_self = vectordot(to_self, fvec);
@@ -1035,12 +1035,12 @@ puzzle_orb_chamber_to_crypt(str_start_point, e_gem_pos) {
   flag_wait(a_puzzle_flags[0]);
   s_start = getstruct(str_start_point, "targetname");
   e_model = spawn("script_model", s_start.origin);
-  e_model setmodel(s_start.model);
+  e_model setModel(s_start.model);
   e_model.script_int = e_gem_pos.script_int;
   wait_network_frame();
-  e_model playsound("zmb_squest_crystal_leave");
+  e_model playSound("zmb_squest_crystal_leave");
   wait_network_frame();
-  e_model playloopsound("zmb_squest_crystal_loop", 1);
+  e_model playLoopSound("zmb_squest_crystal_loop", 1);
   str_zone = maps\mp\zombies\_zm_zonemgr::get_zone_from_position(s_start.origin, 1);
   time_looking_at_orb = 0.0;
   min_lookat_dot = cos(30);
@@ -1056,7 +1056,7 @@ puzzle_orb_chamber_to_crypt(str_start_point, e_gem_pos) {
   }
 
   wait_network_frame();
-  playfxontag(level._effect["puzzle_orb_trail"], e_model, "tag_origin");
+  playFXOnTag(level._effect["puzzle_orb_trail"], e_model, "tag_origin");
   wait_network_frame();
   s_next_pos = getstruct(s_start.target, "targetname");
   e_model puzzle_orb_follow_path(s_next_pos);
@@ -1075,13 +1075,13 @@ puzzle_orb_chamber_to_crypt(str_start_point, e_gem_pos) {
   flag_set("disc_rotation_active");
   e_model puzzle_orb_move(e_gem_pos.origin);
   e_model_nofx = spawn("script_model", e_model.origin);
-  e_model_nofx setmodel(e_model.model);
+  e_model_nofx setModel(e_model.model);
   e_model_nofx.script_int = e_gem_pos.script_int;
   e_model delete();
   wait_network_frame();
-  e_model_nofx playsound("zmb_squest_crystal_arrive");
+  e_model_nofx playSound("zmb_squest_crystal_arrive");
   wait_network_frame();
-  e_model_nofx playloopsound("zmb_squest_crystal_loop", 1);
+  e_model_nofx playLoopSound("zmb_squest_crystal_loop", 1);
   flag_clear("disc_rotation_active");
   return e_model_nofx;
 }
@@ -1267,7 +1267,7 @@ whirlwind_rumble_nearby_players(str_active_flag) {
 }
 
 clean_up_bunker_doors() {
-  a_door_models = getentarray("bunker_door", "script_noteworthy");
+  a_door_models = getEntArray("bunker_door", "script_noteworthy");
   array_thread(a_door_models, ::bunker_door_clean_up);
 }
 
@@ -1278,9 +1278,9 @@ bunker_door_clean_up() {
 
 adjustments_for_solo() {
   if(isDefined(level.is_forever_solo_game) && level.is_forever_solo_game) {
-    a_door_buys = getentarray("zombie_door", "targetname");
+    a_door_buys = getEntArray("zombie_door", "targetname");
     array_thread(a_door_buys, ::door_price_reduction_for_solo);
-    a_debris_buys = getentarray("zombie_debris", "targetname");
+    a_debris_buys = getEntArray("zombie_debris", "targetname");
     array_thread(a_debris_buys, ::door_price_reduction_for_solo);
     change_weapon_cost("beretta93r_zm", 750);
     change_weapon_cost("870mcs_zm", 750);
@@ -1511,9 +1511,7 @@ update_staff_accessories(n_element_index) {
 
 get_round_enemy_array_wrapper() {
   if(isDefined(level.custom_get_round_enemy_array_func))
-    a_enemies = [
-      [level.custom_get_round_enemy_array_func]
-    ]();
+    a_enemies = [[level.custom_get_round_enemy_array_func]]();
   else
     a_enemies = get_round_enemy_array();
 

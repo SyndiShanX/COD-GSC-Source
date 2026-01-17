@@ -90,11 +90,11 @@ function function_6ac83719() {
 }
 
 function function_d87a7dcc() {
-  if(isdefined(level.createfx_enabled) && level.createfx_enabled) {
+  if(isDefined(level.createfx_enabled) && level.createfx_enabled) {
     return;
   }
   var_bd7ba30 = 0;
-  while (true) {
+  while(true) {
     if(!level clientfield::get("zombie_power_on")) {
       level.power_on = 0;
       if(var_bd7ba30) {
@@ -113,20 +113,20 @@ function include_weapons() {
 }
 
 function init_theater_box_indicator() {
-  level._custom_box_monitor = & theater_box_monitor;
+  level._custom_box_monitor = &theater_box_monitor;
   level._box_locations = array("start_chest_loc", "foyer_chest_loc", "crematorium_chest_loc", "alleyway_chest_loc", "control_chest_loc", "stage_chest_loc", "dressing_chest_loc", "dining_chest_loc", "theater_chest_loc");
-  callback::on_localclient_connect( & init_board_lights);
+  callback::on_localclient_connect(&init_board_lights);
 }
 
 function init_board_lights(clientnum) {
   structs = struct::get_array("magic_box_loc_light", "targetname");
-  for (j = 0; j < structs.size; j++) {
+  for(j = 0; j < structs.size; j++) {
     s = structs[j];
-    if(!isdefined(s.lights)) {
+    if(!isDefined(s.lights)) {
       s.lights = [];
     }
-    if(isdefined(s.lights[clientnum])) {
-      if(isdefined(s.lights[clientnum].fx)) {
+    if(isDefined(s.lights[clientnum])) {
+      if(isDefined(s.lights[clientnum].fx)) {
         s.lights[clientnum].fx delete();
         s.lights[clientnum].fx = undefined;
       }
@@ -140,7 +140,7 @@ function init_board_lights(clientnum) {
 function get_lights(clientnum, name) {
   structs = struct::get_array(name, "script_noteworthy");
   lights = [];
-  for (i = 0; i < structs.size; i++) {
+  for(i = 0; i < structs.size; i++) {
     lights[lights.size] = structs[i].lights[clientnum];
     if(structs[i].script_string === "move_fx") {
       lights[lights.size - 1].script_string = structs[i].script_string;
@@ -151,7 +151,7 @@ function get_lights(clientnum, name) {
 
 function turn_off_all_box_lights(clientnum) {
   level notify("kill_box_light_threads_" + clientnum);
-  for (i = 0; i < level._box_locations.size; i++) {
+  for(i = 0; i < level._box_locations.size; i++) {
     turn_off_light(clientnum, i);
   }
 }
@@ -159,13 +159,13 @@ function turn_off_all_box_lights(clientnum) {
 function flash_lights(clientnum, period) {
   level notify("kill_box_light_threads_" + clientnum);
   level endon("kill_box_light_threads_" + clientnum);
-  while (true) {
+  while(true) {
     wait(period);
-    for (i = 0; i < level._box_locations.size; i++) {
+    for(i = 0; i < level._box_locations.size; i++) {
       turn_light_green(clientnum, i);
     }
     wait(period);
-    for (i = 0; i < level._box_locations.size; i++) {
+    for(i = 0; i < level._box_locations.size; i++) {
       turn_off_light(clientnum, i, 1);
     }
   }
@@ -180,7 +180,7 @@ function turn_light_green(clientnum, light_num, play_fx = 0) {
 }
 
 function turn_off_light(clientnum, light_num, dont_kill_threads) {
-  if(!isdefined(dont_kill_threads)) {
+  if(!isDefined(dont_kill_threads)) {
     level notify("kill_box_light_threads_" + clientnum);
   }
   if(light_num == level._box_indicator_no_lights) {
@@ -220,10 +220,10 @@ function theatre_zpo_listener() {
   if(!level clientfield::get("zombie_power_on")) {
     level waittill("zpo");
   }
-  while (true) {
+  while(true) {
     level._power_on = 1;
     if(level._box_indicator != level._box_indicator_no_lights) {
-      for (i = 0; i < getlocalplayers().size; i++) {
+      for(i = 0; i < getlocalplayers().size; i++) {
         theater_box_monitor(i, level._box_indicator);
       }
     }
@@ -236,10 +236,10 @@ function theatre_zpo_listener() {
 function theater_light_model_swap_init() {
   wait(0.016);
   players = getlocalplayers();
-  for (i = 0; i < players.size; i++) {
-    theater_light_models = getentarray(i, "model_lights_on", "targetname");
-    if(isdefined(theater_light_models) && theater_light_models.size > 0) {
-      array::thread_all(theater_light_models, & theater_light_model_swap);
+  for(i = 0; i < players.size; i++) {
+    theater_light_models = getEntArray(i, "model_lights_on", "targetname");
+    if(isDefined(theater_light_models) && theater_light_models.size > 0) {
+      array::thread_all(theater_light_models, &theater_light_model_swap);
     }
   }
 }
@@ -250,16 +250,16 @@ function theater_light_model_swap() {
     level waittill("zpo");
   }
   if(self.model == "lights_hang_single") {
-    self setmodel("lights_hang_single_on_nonflkr");
+    self setModel("lights_hang_single_on_nonflkr");
   } else if(self.model == "zombie_zapper_cagelight") {
-    self setmodel("zombie_zapper_cagelight_on");
+    self setModel("zombie_zapper_cagelight_on");
   }
 }
 
 function register_clientfields() {
-  clientfield::register("world", "zm_theater_screen_in_place", 21000, 1, "int", & function_17e9c62f, 0, 0);
-  clientfield::register("scriptmover", "zombie_has_eyes", 21000, 1, "int", & zm::zombie_eyes_clientfield_cb, 0, 0);
-  clientfield::register("world", "zm_theater_movie_reel_playing", 21000, 2, "int", & zm_theater_fx::function_e4b3e1ca, 0, 0);
+  clientfield::register("world", "zm_theater_screen_in_place", 21000, 1, "int", &function_17e9c62f, 0, 0);
+  clientfield::register("scriptmover", "zombie_has_eyes", 21000, 1, "int", &zm::zombie_eyes_clientfield_cb, 0, 0);
+  clientfield::register("world", "zm_theater_movie_reel_playing", 21000, 2, "int", &zm_theater_fx::function_e4b3e1ca, 0, 0);
   zm_sidequests::register_sidequest_icon("movieReel", 21000);
 }
 
@@ -269,12 +269,12 @@ function function_17e9c62f(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_d19cb2f8() {
   loopers = struct::get_array("exterior_goal", "targetname");
-  if(isdefined(loopers) && loopers.size > 0) {
+  if(isDefined(loopers) && loopers.size > 0) {
     delay = 0;
     if(getdvarint("") > 0) {
       println(("" + loopers.size) + "");
     }
-    for (i = 0; i < loopers.size; i++) {
+    for(i = 0; i < loopers.size; i++) {
       loopers[i] thread soundloopthink();
       delay = delay + 1;
       if((delay % 20) == 0) {
@@ -288,27 +288,27 @@ function function_d19cb2f8() {
 }
 
 function soundloopthink() {
-  if(!isdefined(self.origin)) {
+  if(!isDefined(self.origin)) {
     return;
   }
-  if(!isdefined(self.script_sound)) {
+  if(!isDefined(self.script_sound)) {
     self.script_sound = "zmb_spawn_walla";
   }
   notifyname = "";
-  assert(isdefined(notifyname));
-  if(isdefined(self.script_string)) {
+  assert(isDefined(notifyname));
+  if(isDefined(self.script_string)) {
     notifyname = self.script_string;
   }
-  assert(isdefined(notifyname));
+  assert(isDefined(notifyname));
   started = 1;
-  if(isdefined(self.script_int)) {
+  if(isDefined(self.script_int)) {
     started = self.script_int != 0;
   }
   if(started) {
     soundloopemitter(self.script_sound, self.origin);
   }
   if(notifyname != "") {
-    for (;;) {
+    for(;;) {
       level waittill(notifyname);
       if(started) {
         soundstoploopemitter(self.script_sound, self.origin);

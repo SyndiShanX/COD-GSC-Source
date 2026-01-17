@@ -12,7 +12,7 @@ randomize_vending_machines() {
     return;
   }
   vending_machines = [];
-  vending_machines = getentarray("zombie_vending", "targetname");
+  vending_machines = getEntArray("zombie_vending", "targetname");
   for(i = 0; i < vending_machines.size; i++) {
     if(vending_machines[i].script_noteworthy == "specialty_additionalprimaryweapon") {
       vending_machines = array_remove(vending_machines, vending_machines[i]);
@@ -113,7 +113,7 @@ play_vending_vo(machine, origin) {
   players = get_array_of_closest(origin, players, undefined, undefined, 512);
   player = undefined;
   for(i = 0; i < players.size; i++) {
-    if(SightTracePassed(players[i] GetEye(), origin, false, undefined)) {
+    if(SightTracePassed(players[i] getEye(), origin, false, undefined)) {
       player = players[i];
     }
   }
@@ -140,7 +140,7 @@ vending_randomization_effect(index) {
   if(level.mutators["mutator_noPerks"]) {
     return;
   }
-  vending_triggers = getentarray("zombie_vending", "targetname");
+  vending_triggers = getEntArray("zombie_vending", "targetname");
   machines = [];
   for(j = 0; j < vending_triggers.size; j++) {
     machine_array = getEntArray(vending_triggers[j].target, "targetname");
@@ -198,10 +198,10 @@ vending_randomization_effect(index) {
   playsoundatposition("rando_start", machines[j].origin);
   origin = machines[j].origin;
   if(level.vending_model_info.size > 1) {
-    PlayFxOnTag(level._effect["zombie_perk_start"], machines[j], "tag_origin");
+    playFXOnTag(level._effect["zombie_perk_start"], machines[j], "tag_origin");
     playsoundatposition("rando_perk", machines[j].origin);
   } else {
-    PlayFxOnTag(level._effect["zombie_perk_4th"], machines[j], "tag_origin");
+    playFXOnTag(level._effect["zombie_perk_4th"], machines[j], "tag_origin");
     playsoundatposition("rando_perk", machines[j].origin);
   }
   true_model = machines[j].model;
@@ -226,7 +226,7 @@ vending_randomization_effect(index) {
       }
       modelname = level.vending_model_info[modelindex];
       machines[j] setModel(modelname);
-      PlayFxOnTag(level._effect["zombie_perk_flash"], tag_fx, "tag_origin");
+      playFXOnTag(level._effect["zombie_perk_flash"], tag_fx, "tag_origin");
       modelindex++;
       if(modelindex == 4) {
         modelindex = 0;
@@ -236,7 +236,7 @@ vending_randomization_effect(index) {
   modelname = true_model;
   machines[j] setModel(modelname);
   machines[j] moveTo(origin, 0.3, 0.3, 0);
-  PlayFxOnTag(level._effect["zombie_perk_end"], machines[j], "tag_origin");
+  playFXOnTag(level._effect["zombie_perk_end"], machines[j], "tag_origin");
   playsoundatposition("perks_rattle", machines[j].origin);
   maps\zombie_cod5_sumpf_perks::activate_vending_machine(true_model, origin, machines[j]);
   for(i = 0; i < machines.size; i++) {

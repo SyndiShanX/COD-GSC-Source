@@ -13,18 +13,18 @@
 #namespace ball;
 
 function autoexec __init__sytem__() {
-  system::register("ball", & __init__, undefined, undefined);
+  system::register("ball", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("allplayers", "ballcarrier", 15000, 1, "int", & player_ballcarrier_changed, 0, 1);
-  clientfield::register("allplayers", "passoption", 15000, 1, "int", & player_passoption_changed, 0, 0);
-  clientfield::register("world", "ball_away", 15000, 1, "int", & world_ball_away_changed, 0, 1);
-  clientfield::register("world", "ball_score_allies", 15000, 1, "int", & world_ball_score_allies, 0, 1);
-  clientfield::register("world", "ball_score_axis", 15000, 1, "int", & world_ball_score_axis, 0, 1);
-  clientfield::register("scriptmover", "ball_on_ground_fx", 15000, 1, "int", & ball_on_ground_fx, 0, 0);
-  callback::on_localclient_connect( & on_localclient_connect);
-  callback::on_spawned( & on_player_spawned);
+  clientfield::register("allplayers", "ballcarrier", 15000, 1, "int", &player_ballcarrier_changed, 0, 1);
+  clientfield::register("allplayers", "passoption", 15000, 1, "int", &player_passoption_changed, 0, 0);
+  clientfield::register("world", "ball_away", 15000, 1, "int", &world_ball_away_changed, 0, 1);
+  clientfield::register("world", "ball_score_allies", 15000, 1, "int", &world_ball_score_allies, 0, 1);
+  clientfield::register("world", "ball_score_axis", 15000, 1, "int", &world_ball_score_axis, 0, 1);
+  clientfield::register("scriptmover", "ball_on_ground_fx", 15000, 1, "int", &ball_on_ground_fx, 0, 0);
+  callback::on_localclient_connect(&on_localclient_connect);
+  callback::on_spawned(&on_player_spawned);
   level.effect_scriptbundles = [];
   level.effect_scriptbundles["goal"] = struct::get_script_bundle("teamcolorfx", "teamcolorfx_uplink_goal");
   level.effect_scriptbundles["goal_score"] = struct::get_script_bundle("teamcolorfx", "teamcolorfx_uplink_goal_score");
@@ -35,13 +35,13 @@ function __init__() {
 
 function on_localclient_connect(localclientnum) {
   objective_ids = [];
-  while (!isdefined(objective_ids["allies"])) {
+  while(!isDefined(objective_ids["allies"])) {
     objective_ids["allies"] = serverobjective_getobjective(localclientnum, "ball_goal_allies");
     objective_ids["axis"] = serverobjective_getobjective(localclientnum, "ball_goal_axis");
     wait(0.05);
   }
   foreach(key, objective in objective_ids) {
-    level.goals[key] = spawnstruct();
+    level.goals[key] = spawnStruct();
     level.goals[key].objectiveid = objective;
     setup_goal(localclientnum, level.goals[key]);
   }
@@ -60,17 +60,17 @@ function on_player_spawned(localclientnum) {
 function setup_goal(localclientnum, goal) {
   goal.origin = serverobjective_getobjectiveorigin(localclientnum, goal.objectiveid);
   goal_entity = serverobjective_getobjectiveentity(localclientnum, goal.objectiveid);
-  if(isdefined(goal_entity)) {
+  if(isDefined(goal_entity)) {
     goal.origin = goal_entity.origin;
   }
   goal.team = serverobjective_getobjectiveteam(localclientnum, goal.objectiveid);
 }
 
 function setup_goal_fx(localclientnum, goal, effects) {
-  if(isdefined(goal.base_fx)) {
+  if(isDefined(goal.base_fx)) {
     stopfx(localclientnum, goal.base_fx);
   }
-  goal.base_fx = playfx(localclientnum, effects[goal.team], goal.origin);
+  goal.base_fx = playFX(localclientnum, effects[goal.team], goal.origin);
   setfxteam(localclientnum, goal.base_fx, goal.team);
 }
 
@@ -86,7 +86,7 @@ function play_score_fx(localclientnum, goal) {
   effects = [];
   effects["allies"] = "ui/fx_uplink_goal_marker_flash";
   effects["axis"] = "ui/fx_uplink_goal_marker_flash";
-  fx_handle = playfx(localclientnum, effects[goal.team], goal.origin);
+  fx_handle = playFX(localclientnum, effects[goal.team], goal.origin);
   setfxteam(localclientnum, fx_handle, goal.team);
 }
 
@@ -119,7 +119,7 @@ function player_ballcarrier_changed(localclientnum, oldval, newval, bnewent, bin
   } else {
     self set_player_ball_carrier_dr(localclientnum, 0);
   }
-  if(isdefined(level.ball_carrier) && level.ball_carrier != self) {
+  if(isDefined(level.ball_carrier) && level.ball_carrier != self) {
     return;
   }
   level notify("watch_for_death");
@@ -131,12 +131,12 @@ function player_ballcarrier_changed(localclientnum, oldval, newval, bnewent, bin
 function set_hud(localclientnum) {
   level.ball_carrier = self;
   friendly = self isfriendly(localclientnum);
-  if(isdefined(self.name)) {
+  if(isDefined(self.name)) {
     setuimodelvalue(createuimodel(getuimodelforcontroller(localclientnum), "ballGametype.ballStatusText"), self.name);
   } else {
     setuimodelvalue(createuimodel(getuimodelforcontroller(localclientnum), "ballGametype.ballStatusText"), "");
   }
-  if(isdefined(friendly)) {
+  if(isDefined(friendly)) {
     setuimodelvalue(createuimodel(getuimodelforcontroller(localclientnum), "ballGametype.ballHeldByFriendly"), friendly);
     setuimodelvalue(createuimodel(getuimodelforcontroller(localclientnum), "ballGametype.ballHeldByEnemy"), !friendly);
   } else {
@@ -149,7 +149,7 @@ function clear_hud(localclientnum) {
   level.ball_carrier = undefined;
   setuimodelvalue(createuimodel(getuimodelforcontroller(localclientnum), "ballGametype.ballHeldByEnemy"), 0);
   setuimodelvalue(createuimodel(getuimodelforcontroller(localclientnum), "ballGametype.ballHeldByFriendly"), 0);
-  setuimodelvalue(createuimodel(getuimodelforcontroller(localclientnum), "ballGametype.ballStatusText"), & "MPUI_BALL_AWAY");
+  setuimodelvalue(createuimodel(getuimodelforcontroller(localclientnum), "ballGametype.ballStatusText"), &"MPUI_BALL_AWAY");
 }
 
 function watch_for_death(localclientnum) {
@@ -160,7 +160,7 @@ function watch_for_death(localclientnum) {
 function player_passoption_changed(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   localplayer = getlocalplayer(localclientnum);
   if(localplayer != self && self isfriendly(localclientnum)) {
-    if(isdefined(localplayer._hasball) && localplayer._hasball) {
+    if(isDefined(localplayer._hasball) && localplayer._hasball) {
       setuimodelvalue(createuimodel(getuimodelforcontroller(localclientnum), "ballGametype.passOption"), newval);
     }
   }
@@ -179,7 +179,7 @@ function set_player_pass_option_dr(localclientnum, on_off) {
 }
 
 function resetondemojump(localclientnum, goal, effects) {
-  for (;;) {
+  for(;;) {
     level waittill("demo_jump" + localclientnum);
     setup_goal_fx(localclientnum, goal, effects);
   }
@@ -194,25 +194,25 @@ function watch_for_team_change(localclientnum) {
 
 function ball_on_ground_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    if(!isdefined(self.var_ff242ed4)) {
-      self.var_ff242ed4 = playfx(localclientnum, level._effect["ball_on_ground"], self.origin + vectorscale((0, 0, 1), 72), (0, 0, 1), (1, 0, 0));
+    if(!isDefined(self.var_ff242ed4)) {
+      self.var_ff242ed4 = playFX(localclientnum, level._effect["ball_on_ground"], self.origin + vectorscale((0, 0, 1), 72), (0, 0, 1), (1, 0, 0));
     }
-    if(!isdefined(self.var_cd030ed9)) {
-      self.var_cd030ed9 = playfx(localclientnum, level._effect["balllight_fx"], self.origin + vectorscale((0, 0, 1), 72), (0, 0, 1), (1, 0, 0));
+    if(!isDefined(self.var_cd030ed9)) {
+      self.var_cd030ed9 = playFX(localclientnum, level._effect["balllight_fx"], self.origin + vectorscale((0, 0, 1), 72), (0, 0, 1), (1, 0, 0));
     }
-    if(!isdefined(self.var_2e7f5bfb)) {
-      self.var_2e7f5bfb = playfx(localclientnum, level._effect["lght_marker"], self.origin + vectorscale((0, 0, 1), 72), (0, 0, 1), (1, 0, 0));
+    if(!isDefined(self.var_2e7f5bfb)) {
+      self.var_2e7f5bfb = playFX(localclientnum, level._effect["lght_marker"], self.origin + vectorscale((0, 0, 1), 72), (0, 0, 1), (1, 0, 0));
     }
   } else {
-    if(isdefined(self.var_ff242ed4)) {
+    if(isDefined(self.var_ff242ed4)) {
       stopfx(localclientnum, self.var_ff242ed4);
       self.var_ff242ed4 = undefined;
     }
-    if(isdefined(self.var_cd030ed9)) {
+    if(isDefined(self.var_cd030ed9)) {
       stopfx(localclientnum, self.var_cd030ed9);
       self.var_cd030ed9 = undefined;
     }
-    if(isdefined(self.var_2e7f5bfb)) {
+    if(isDefined(self.var_2e7f5bfb)) {
       stopfx(localclientnum, self.var_2e7f5bfb);
       self.var_2e7f5bfb = undefined;
     }

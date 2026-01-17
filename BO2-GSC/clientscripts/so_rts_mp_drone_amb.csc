@@ -178,13 +178,12 @@ scanner_alert() {
 }
 
 trig_enter_alarm(trigplayer) {
-  self playsound(0, "amb_scanner_detect");
+  self playSound(0, "amb_scanner_detect");
   wait 0.25;
-  playsound(0, "amb_scanner_alarm", (-460, -809, -438));
+  playSound(0, "amb_scanner_alarm", (-460, -809, -438));
 }
 
-trig_leave_alarm(trigplayer) {
-}
+trig_leave_alarm(trigplayer) {}
 
 setpoialarms(set, location) {
   origin = undefined;

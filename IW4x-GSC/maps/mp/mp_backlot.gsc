@@ -23,5 +23,4 @@ main() {
   setdvar("r_glowbloomintensity1", ".25");
   setdvar("r_glowskybleedintensity0", ".3");
   setdvar("compassmaxrange", "1800");
-
 }

@@ -7,7 +7,6 @@
 #include maps\_utility;
 #include maps\_anim;
 #include animscripts\shared;
-
 #using_animtree("generic_human");
 
 main() {
@@ -28,7 +27,7 @@ civilian_init() {
   self pushplayer(false);
   self.a.reactToBulletChance = 1;
 
-  if(!isdefined(level.initialized_civilian_animations)) {
+  if(!isDefined(level.initialized_civilian_animations)) {
     level.initialized_civilian_animations = true;
 
     level.scr_anim["default_civilian"]["run_combat"][0] = % civilian_run_upright;
@@ -72,7 +71,7 @@ civilian_init() {
 
   // set the civilians animname to use defaults, or specific group if specified in radiant
   animName = undefined;
-  if(isdefined(self.civilian_walk_animation)) {
+  if(isDefined(self.civilian_walk_animation)) {
     self.animname = self.civilian_walk_animation;
     self attachProps(self.civilian_walk_animation);
     self.alertLevel = "noncombat";
@@ -86,7 +85,7 @@ civilian_init() {
   self thread checkCombatState();
 
   // Make sure all required anims exist for this civilian, or set some defaults if they weren't specified
-  assert(isdefined(level.scr_anim[self.animname]["run_noncombat"]));
+  assert(isDefined(level.scr_anim[self.animname]["run_noncombat"]));
 
   self.dropWeapon = false;
   self DropAIWeapon();
@@ -94,30 +93,30 @@ civilian_init() {
 }
 
 attachProps(anime) {
-  if(isdefined(self.hasAttachedProps))
+  if(isDefined(self.hasAttachedProps)) {
     return;
-
+  }
   initCivilianProps();
 
   prop_model = anim.civilianProps[anime];
 
-  if(isdefined(prop_model)) {
+  if(isDefined(prop_model)) {
     self attach(prop_model, "tag_inhand", true);
     self.hasAttachedProps = true;
   }
 }
 
 detachProps(anime) {
-  if(isdefined(self.hasAttachedProps)) {
+  if(isDefined(self.hasAttachedProps)) {
     self.hasAttachedProps = undefined;
     self detach(anim.civilianProps[anime], "tag_inhand");
   }
 }
 
 initCivilianProps() {
-  if(isdefined(anim.civilianProps))
+  if(isDefined(anim.civilianProps)) {
     return;
-
+  }
   anim.civilianProps = [];
   anim.civilianProps["civilian_briefcase_walk"] = "com_metal_briefcase";
   anim.civilianProps["civilian_crazy_walk"] = "electronics_pda";
@@ -139,22 +138,22 @@ startNonCombat() {
   self.turnRate = 0.2;
 
   // dodge animations
-  if(isdefined(self.civilian_walk_animation)) {
+  if(isDefined(self.civilian_walk_animation)) {
     dodgeLeft = % civilian_briefcase_walk_dodge_L;
     dodgeRight = % civilian_briefcase_walk_dodge_R;
 
-    if(isdefined(level.scr_anim[self.animname]["dodge_left"]))
+    if(isDefined(level.scr_anim[self.animname]["dodge_left"]))
       dodgeLeft = level.scr_anim[self.animname]["dodge_left"];
 
-    if(isdefined(level.scr_anim[self.animname]["dodge_right"]))
+    if(isDefined(level.scr_anim[self.animname]["dodge_right"]))
       dodgeRight = level.scr_anim[self.animname]["dodge_right"];
 
     self animscripts\move::setDodgeAnims(dodgeLeft, dodgeRight);
   }
 
   // move turn animations
-  if(isdefined(level.scr_anim[self.animname]["turn_left_90"])) {
-    assert(isdefined(level.scr_anim[self.animname]["turn_right_90"]));
+  if(isDefined(level.scr_anim[self.animname]["turn_left_90"])) {
+    assert(isDefined(level.scr_anim[self.animname]["turn_right_90"]));
     self.pathTurnAnimOverrideFunc = animscripts\civilian\civilian_move::civilian_nonCombatMoveTurn;
     self.pathTurnAnimBlendTime = 0.1;
     self enable_turnAnims();
@@ -184,10 +183,10 @@ startCombat() {
   self.turnRate = 0.3;
 
   standing_run = randomint(3) < 1;
-  if(isdefined(self.force_civilian_stand_run)) {
+  if(isDefined(self.force_civilian_stand_run)) {
     standing_run = true;
   } else
-  if(isdefined(self.force_civilian_hunched_run)) {
+  if(isDefined(self.force_civilian_hunched_run)) {
     standing_run = false;
   }
 
@@ -217,7 +216,7 @@ checkCombatState() {
 
   wasInCombat = (self.alertLevelInt > 1);
 
-  while (1) {
+  while(1) {
     isInCombat = (self.alertLevelInt > 1);
 
     if(wasInCombat && !isInCombat)

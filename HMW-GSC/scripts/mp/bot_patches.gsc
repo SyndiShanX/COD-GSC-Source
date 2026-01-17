@@ -17,14 +17,14 @@ bot_in_combat_stub(var_0) {
   var_1 = gettime() - self.last_enemy_sight_time;
   var_2 = level.bot_out_of_combat_time;
 
-  if(isdefined(var_0))
+  if(isDefined(var_0))
     var_2 = var_0;
 
   return var_1 < var_2;
 }
 
 bot_killstreak_setup_stub() {
-  if(!isdefined(level.killstreak_botfunc)) {
+  if(!isDefined(level.killstreak_botfunc)) {
     bot_register_killstreak_func("radar_mp", maps\mp\bots\_bots_ks::bot_killstreak_simple_use, maps\mp\bots\_bots_ks::bot_can_use_uav);
     bot_register_killstreak_func("airstrike_mp", ::bot_killstreak_choose_loc_enemies, maps\mp\bots\_bots_ks::bot_can_use_airstrike);
     bot_register_killstreak_func("helicopter_mp", maps\mp\bots\_bots_ks::bot_killstreak_simple_use, maps\mp\bots\_bots_ks::bot_can_use_helicopter);
@@ -43,24 +43,24 @@ bot_killstreak_setup_stub() {
 }
 
 bot_register_killstreak_func(var_0, var_1, var_2, var_3) {
-  if(!isdefined(level.killstreak_botfunc))
+  if(!isDefined(level.killstreak_botfunc))
     level.killstreak_botfunc = [];
 
   level.killstreak_botfunc[var_0] = var_1;
 
-  if(!isdefined(level.killstreak_botcanuse))
+  if(!isDefined(level.killstreak_botcanuse))
     level.killstreak_botcanuse = [];
 
   level.killstreak_botcanuse[var_0] = var_2;
 
-  if(!isdefined(level.killstreak_botparm))
+  if(!isDefined(level.killstreak_botparm))
     level.killstreak_botparm = [];
 
   // add isdefined check here
-  if(isdefined(var_3))
+  if(isDefined(var_3))
     level.killstreak_botparm[var_0] = var_3;
 
-  if(!isdefined(level.bot_supported_killstreaks))
+  if(!isDefined(level.bot_supported_killstreaks))
     level.bot_supported_killstreaks = [];
 
   level.bot_supported_killstreaks[level.bot_supported_killstreaks.size] = var_0;
@@ -73,41 +73,39 @@ bot_think_killstreak_stub() {
   self endon("disconnect");
   level endon("game_ended");
 
-  while (!isdefined(level.killstreak_botfunc))
+  while(!isDefined(level.killstreak_botfunc))
     wait 0.05;
 
-  for (;;) {
+  for(;;) {
     wait(randomfloatrange(2.0, 4.0));
 
     if(maps\mp\bots\_bots_util::bot_allowed_to_use_killstreaks()) {
       var_0 = self.pers["killstreaks"];
 
       // TODO: is this bandaid fix okay? this is technically CptPrice changes here that im patching
-      if(isdefined(var_0) && var_0.size > 1) {
+      if(isDefined(var_0) && var_0.size > 1) {
         var_0 = var_0[0].streakName;
 
-        if(isdefined(self.bot_killstreak_wait) && isdefined(self.bot_killstreak_wait[var_0]) && gettime() < self.bot_killstreak_wait[var_0])
+        if(isDefined(self.bot_killstreak_wait) && isDefined(self.bot_killstreak_wait[var_0]) && gettime() < self.bot_killstreak_wait[var_0]) {
           continue;
-
+        }
         var_1 = level.killstreak_botcanuse[var_0];
 
-        if(isdefined(var_1) && !self[[var_1]](var_0))
+        if(isDefined(var_1) && !self[[var_1]](var_0)) {
           continue;
-
+        }
         var_2 = level.killstreak_botfunc[var_0];
 
-        if(isdefined(var_2)) {
+        if(isDefined(var_2)) {
           var_3 = self[[var_2]](var_0, var_1);
 
-          if(!isdefined(var_3) || var_3 == 0) {
-            if(!isdefined(self.bot_killstreak_wait))
+          if(!isDefined(var_3) || var_3 == 0) {
+            if(!isDefined(self.bot_killstreak_wait))
               self.bot_killstreak_wait = [];
 
             self.bot_killstreak_wait[var_0] = gettime() + 5000;
           }
-        } else {
-
-        }
+        } else {}
       }
     }
   }
@@ -116,17 +114,17 @@ bot_think_killstreak_stub() {
 bot_killstreak_choose_loc_enemies(var_0, var_1) {
   wait(randomintrange(3, 5));
 
-  if(!maps\mp\bots\_bots_util::bot_allowed_to_use_killstreaks())
+  if(!maps\mp\bots\_bots_util::bot_allowed_to_use_killstreaks()) {
     return;
-
-  if(isdefined(var_1) && !self[[var_1]](var_0))
+  }
+  if(isDefined(var_1) && !self[[var_1]](var_0))
     return 0;
 
   self botsetflag("disable_movement", 1);
   maps\mp\bots\_bots_ks::bot_switch_to_killstreak_weapon(var_0);
   wait 2.0;
 
-  if(!isdefined(self.selectinglocation)) {
+  if(!isDefined(self.selectinglocation)) {
     self botsetflag("disable_movement", 0);
     return;
   }
@@ -139,11 +137,11 @@ bot_killstreak_choose_loc_enemies(var_0, var_1) {
   }
 
   random_target = targets[randomint(targets.size)];
-  if(!isdefined(random_target))
+  if(!isDefined(random_target))
     random_target = self;
 
   heightEnt = getent("airstrikeheight", "targetname");
-  if(isdefined(heightEnt) || isdefined(level.airstrikeHeightScale))
+  if(isDefined(heightEnt) || isDefined(level.airstrikeHeightScale))
     height = maps\mp\h2_killstreaks\_airdrop::getFlyHeightOffset(random_target.origin);
   else
     height = level.heli_leave_nodes[randomInt(level.heli_leave_nodes.size)].origin[2];
@@ -158,7 +156,7 @@ bot_killstreak_choose_loc_enemies(var_0, var_1) {
 
 // custom streaks
 bot_can_use_ac130(var_0) {
-  return (isdefined(level.ac130inuse) && !level.ac130inuse);
+  return (isDefined(level.ac130inuse) && !level.ac130inuse);
 }
 
 bot_killstreak_do_use(var_0) {
@@ -210,7 +208,7 @@ bot_remote_use(vehicle) {
 
   wait 3;
 
-  while (self maps\mp\_utility::isUsingRemote()) {
+  while(self maps\mp\_utility::isUsingRemote()) {
     wait 0.05;
 
     self.aimAt = undefined;
@@ -235,18 +233,18 @@ bot_remote_use(vehicle) {
     }
 
     foreach(player in level.players) {
-      if(player == self)
+      if(player == self) {
         continue;
-
-      if(!maps\mp\_utility::isReallyAlive(player))
+      }
+      if(!maps\mp\_utility::isReallyAlive(player)) {
         continue;
-
-      if(level.teamBased && self.pers["team"] == player.pers["team"])
+      }
+      if(level.teamBased && self.pers["team"] == player.pers["team"]) {
         continue;
-
-      if(!bulletTracePassed(eyePos, player getTagOrigin("tag_eye"), false, self))
+      }
+      if(!bulletTracePassed(eyePos, player getTagOrigin("tag_eye"), false, self)) {
         continue;
-
+      }
       if(isDefined(self.aimAt)) {
         if(closer(eyePos, player getTagOrigin("j_mainroot"), self.aimAt getTagOrigin("j_mainroot")))
           self.aimAt = player;
@@ -299,7 +297,7 @@ _setPlayerAngles(Angle) {
   }
 
   if((X < PStepAngle && X > NStepAngle) && (Y < PStepAngle && Y > NStepAngle)) {
-    for (i = 1; i < Steps; i++) {
+    for(i = 1; i < Steps; i++) {
       newAngle = (myAngle[0] + X, myAngle[1] + Y, 0);
       self setPlayerAngles(newAngle);
       myAngle = self getPlayerAngles();

@@ -12,7 +12,7 @@ moverun() {
       if(animscripts\setposemovement::standrun_begin()) {
         return;
       }
-      if(isdefined(self.run_overrideanim)) {
+      if(isDefined(self.run_overrideanim)) {
         animscripts\move::movestand_moveoverride(self.run_overrideanim, self.run_override_weights);
         return;
       }
@@ -35,7 +35,7 @@ moverun() {
       if(animscripts\setposemovement::crouchrun_begin()) {
         return;
       }
-      if(isdefined(self.crouchrun_combatanim))
+      if(isDefined(self.crouchrun_combatanim))
         crouchrun_runoverride();
       else
         crouchrun_runnormal();
@@ -51,7 +51,7 @@ moverun() {
 }
 
 getrunanim() {
-  if(!isdefined(self.a.moveanimset)) {
+  if(!isDefined(self.a.moveanimset)) {
     var_0 = animscripts\utility::lookupanim("run", "straight");
     return var_0;
   }
@@ -76,17 +76,17 @@ getrunanim() {
     return var_0;
   }
 
-  if(animscripts\utility::isincombat() || isdefined(self.noruntwitch) && self.noruntwitch || isdefined(self.a.bdisablemovetwitch) && self.a.bdisablemovetwitch) {
+  if(animscripts\utility::isincombat() || isDefined(self.noruntwitch) && self.noruntwitch || isDefined(self.a.bdisablemovetwitch) && self.a.bdisablemovetwitch) {
     var_0 = animscripts\utility::getmoveanim("straight");
     return var_0;
   }
 
-  if(!isdefined(self.a.runloopcount))
+  if(!isDefined(self.a.runloopcount))
     return animscripts\utility::getmoveanim("straight");
 
   var_4 = animscripts\utility::getmoveanim("straight_twitch");
 
-  if(!isdefined(var_4) || var_4.size == 0) {
+  if(!isDefined(var_4) || var_4.size == 0) {
     var_0 = animscripts\utility::getmoveanim("straight");
     return var_0;
   }
@@ -103,7 +103,7 @@ getrunanim() {
 }
 
 getcrouchrunanim() {
-  if(!isdefined(self.a.moveanimset)) {
+  if(!isDefined(self.a.moveanimset)) {
     if(animscripts\utility::usingsmg())
       return animscripts\utility::lookupanim("smg_crouch_run", "crouch");
     else
@@ -123,7 +123,7 @@ pronecrawl() {
 #using_animtree("generic_human");
 
 initrunngun() {
-  if(!isdefined(self.runngun)) {
+  if(!isDefined(self.runngun)) {
     self notify("stop_move_anim_update");
     self.update_move_anim_type = undefined;
     self clearanim( % combatrun_backward, 0.2);
@@ -138,7 +138,7 @@ initrunngun() {
 }
 
 stoprunngun() {
-  if(isdefined(self.runngun)) {
+  if(isDefined(self.runngun)) {
     self clearanim( % run_n_gun, 0.2);
     self.runngun = undefined;
   }
@@ -212,7 +212,7 @@ runngun_animate(var_0, var_1) {
     self.laststairrunngunanimplayed = var_6;
     self setflaggedanimknob("runanim", var_6, 1, var_8, 1, 1);
   } else {
-    if(isdefined(self.laststairrunngunanimplayed)) {
+    if(isDefined(self.laststairrunngunanimplayed)) {
       self clearanim(self.laststairrunngunanimplayed, 0.1);
       self.laststairrunngunanimplayed = undefined;
     }
@@ -266,14 +266,14 @@ runngun_backward() {
 reacttobulletsinterruptcheck() {
   self endon("killanimscript");
 
-  for (;;) {
+  for(;;) {
     wait 0.2;
 
-    if(!isdefined(self.reactingtobullet)) {
+    if(!isDefined(self.reactingtobullet)) {
       break;
     }
 
-    if(!isdefined(self.pathgoalpos) || distancesquared(self.pathgoalpos, self.origin) < squared(80)) {
+    if(!isDefined(self.pathgoalpos) || distancesquared(self.pathgoalpos, self.origin) < squared(80)) {
       endrunningreacttobullets();
       self notify("interrupt_react_to_bullet");
       break;
@@ -288,7 +288,7 @@ endrunningreacttobullets() {
 }
 
 runningreacttobullets() {
-  if(isdefined(self.mech) && self.mech) {
+  if(isDefined(self.mech) && self.mech) {
     return;
   }
   endfaceenemyaimtracking();
@@ -326,27 +326,27 @@ customrunningreacttobullets() {
 getsprintanim() {
   var_0 = undefined;
 
-  if(isdefined(self.grenade))
+  if(isDefined(self.grenade))
     var_0 = animscripts\utility::getmoveanim("sprint_short");
 
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     var_0 = animscripts\utility::getmoveanim("sprint");
 
   return var_0;
 }
 
 shouldsprint() {
-  if(isdefined(self.sprint))
+  if(isDefined(self.sprint))
     return 1;
 
-  if(isdefined(self.grenade) && isdefined(self.enemy) && self.frontshieldanglecos == 1)
+  if(isDefined(self.grenade) && isDefined(self.enemy) && self.frontshieldanglecos == 1)
     return distancesquared(self.origin, self.enemy.origin) > 90000;
 
   return 0;
 }
 
 shouldsprintforvariation() {
-  if(isdefined(self.neversprintforvariation))
+  if(isDefined(self.neversprintforvariation))
     return 0;
 
   if(!self.facemotion || animscripts\stairs_utility::isonstairs())
@@ -354,7 +354,7 @@ shouldsprintforvariation() {
 
   var_0 = gettime();
 
-  if(isdefined(self.dangersprinttime)) {
+  if(isDefined(self.dangersprinttime)) {
     if(var_0 < self.dangersprinttime)
       return 1;
 
@@ -362,7 +362,7 @@ shouldsprintforvariation() {
       return 0;
   }
 
-  if(!isdefined(self.enemy) || !issentient(self.enemy))
+  if(!isDefined(self.enemy) || !issentient(self.enemy))
     return 0;
 
   if(randomint(100) < 25 && self lastknowntime(self.enemy) + 2000 > var_0) {
@@ -383,7 +383,7 @@ getmoveplaybackrate() {
 }
 
 recentlydisabledcqb() {
-  if(isdefined(self.cqbdisabledtime)) {
+  if(isDefined(self.cqbdisabledtime)) {
     var_0 = gettime() - self.cqbdisabledtime;
     return var_0 < 500;
   }
@@ -399,7 +399,7 @@ standrun_combatnormal() {
     self setanimknob( % combatrun, 1.0, 0.5, var_0);
 
   var_2 = 0;
-  var_3 = !var_1 && isdefined(self.requestreacttobullet) && gettime() - self.requestreacttobullet < 100;
+  var_3 = !var_1 && isDefined(self.requestreacttobullet) && gettime() - self.requestreacttobullet < 100;
   var_4 = animscripts\utility::getreacttobulletchance();
 
   if(var_3 && randomfloat(1) < var_4) {
@@ -415,12 +415,12 @@ standrun_combatnormal() {
     run_playfacialanim(var_5);
     setshootwhilemoving(0);
     var_2 = 1;
-  } else if(isdefined(self.enemy) && animscripts\move::mayshootwhilemoving()) {
+  } else if(isDefined(self.enemy) && animscripts\move::mayshootwhilemoving()) {
     setshootwhilemoving(1);
 
     if(!var_1 && !self.facemotion)
       thread faceenemyaimtracking();
-    else if(self.shootstyle != "none" && !isdefined(self.norunngun)) {
+    else if(self.shootstyle != "none" && !isDefined(self.norunngun)) {
       endfaceenemyaimtracking();
 
       if(canshootwhilerunningforward())
@@ -429,9 +429,9 @@ standrun_combatnormal() {
         runngun_backward();
         return;
       }
-    } else if(isdefined(self.runngunweight) && self.runngunweight != 0)
+    } else if(isDefined(self.runngunweight) && self.runngunweight != 0)
       var_2 = runngun(0);
-  } else if(isdefined(self.runngunweight) && self.runngunweight != 0) {
+  } else if(isDefined(self.runngunweight) && self.runngunweight != 0) {
     setshootwhilemoving(0);
     var_2 = runngun(0);
   } else
@@ -479,7 +479,7 @@ standrun_combatnormal_animate(var_0, var_1) {
 }
 
 getstairstransitionanim(var_0, var_1, var_2) {
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     var_0 = "none";
 
   if(var_0 == var_1)
@@ -507,21 +507,21 @@ getstairstransitionanim(var_0, var_1, var_2) {
       break;
   }
 
-  var_4 = isdefined(self.enemy) && animscripts\utility::isincombat() && !isdefined(self.norunngun) && canshootwhilerunningforward() && isdefined(self.shootstyle) && self.shootstyle != "none";
+  var_4 = isDefined(self.enemy) && animscripts\utility::isincombat() && !isDefined(self.norunngun) && canshootwhilerunningforward() && isDefined(self.shootstyle) && self.shootstyle != "none";
   var_3 = var_3 + "_" + var_2;
 
   if(animscripts\utility::shouldcqb())
     return animscripts\utility::lookupanim("cqb", var_3);
   else if(var_4)
     return animscripts\utility::lookupanim("run_n_gun", var_3);
-  else if(isdefined(self.a.moveanimset))
+  else if(isDefined(self.a.moveanimset))
     return animscripts\utility::getmoveanim(var_3);
   else
     return animscripts\utility::lookupanim("run", var_3);
 }
 
 faceenemyaimtracking() {
-  if(isdefined(self.aim_while_moving_thread)) {
+  if(isDefined(self.aim_while_moving_thread)) {
     return;
   }
   self.aim_while_moving_thread = 1;
@@ -530,7 +530,7 @@ faceenemyaimtracking() {
   self setdefaultaimlimits();
   var_0 = undefined;
 
-  if(isdefined(self.combatstandanims) && isdefined(self.combatstandanims["walk_aims"])) {
+  if(isDefined(self.combatstandanims) && isDefined(self.combatstandanims["walk_aims"])) {
     self setanimlimited(self.combatstandanims["walk_aims"]["walk_aim_2"]);
     self setanimlimited(self.combatstandanims["walk_aims"]["walk_aim_4"]);
     self setanimlimited(self.combatstandanims["walk_aims"]["walk_aim_6"]);
@@ -538,7 +538,7 @@ faceenemyaimtracking() {
   } else {
     var_1 = "walk";
 
-    if(animscripts\utility::shouldcqb() && isdefined(animscripts\utility::lookupanim("cqb", "aim_2")))
+    if(animscripts\utility::shouldcqb() && isDefined(animscripts\utility::lookupanim("cqb", "aim_2")))
       var_1 = "cqb";
 
     var_2 = animscripts\utility::lookupanimarray(var_1);
@@ -547,7 +547,7 @@ faceenemyaimtracking() {
     self setanimlimited(var_2["aim_6"]);
     self setanimlimited(var_2["aim_8"]);
 
-    if(isdefined(var_2["aim_5"])) {
+    if(isDefined(var_2["aim_5"])) {
       self setanimlimited(var_2["aim_5"]);
       var_0 = % w_aim_5;
     }
@@ -562,7 +562,7 @@ endfaceenemyaimtracking() {
 }
 
 setshootwhilemoving(var_0) {
-  var_1 = isdefined(self.bshootwhilemoving);
+  var_1 = isDefined(self.bshootwhilemoving);
 
   if(var_0) {
     self.bshootwhilemoving = var_0;
@@ -612,7 +612,7 @@ aimedsomewhatatenemy() {
 }
 
 canshootwhilerunningforward() {
-  if((!isdefined(self.runngunweight) || self.runngunweight == 0) && abs(self getmotionangle()) > self.maxrunngunangle)
+  if((!isDefined(self.runngunweight) || self.runngunweight == 0) && abs(self getmotionangle()) > self.maxrunngunangle)
     return 0;
 
   return 1;
@@ -631,7 +631,7 @@ canshootwhilerunningbackward() {
 }
 
 canshootwhilerunning() {
-  return animscripts\move::mayshootwhilemoving() && isdefined(self.enemy) && (canshootwhilerunningforward() || canshootwhilerunningbackward());
+  return animscripts\move::mayshootwhilemoving() && isDefined(self.enemy) && (canshootwhilerunningforward() || canshootwhilerunningbackward());
 }
 
 getpredictedyawtoenemy(var_0) {
@@ -647,20 +647,20 @@ move_checkstairstransition() {
   if(!animscripts\stairs_utility::using_h1_stairs_system())
     return 0;
 
-  if(isdefined(self.turntime) && self.turntime == gettime())
+  if(isDefined(self.turntime) && self.turntime == gettime())
     return 0;
 
   var_0 = animscripts\move::getexpectedcurrentmoveanim();
   self.stairstransition = undefined;
   var_1 = animscripts\stairs_utility::getstairstransition(var_0["anim"], 1, var_0["updateTime"]);
 
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     return 0;
 
   animscripts\stairs_utility::preparedetectedstairstransition();
   var_2 = var_1["transitionAnim"];
 
-  if(!isdefined(var_2))
+  if(!isDefined(var_2))
     return 0;
 
   self notify("stop_move_anim_update");
@@ -670,7 +670,7 @@ move_checkstairstransition() {
   var_4 = getnotetracktimes(var_2, "stair_edge");
   var_5 = getanimlength(var_2);
 
-  if(isdefined(self.stairstransition["startTime"]))
+  if(isDefined(self.stairstransition["startTime"]))
     var_6 = var_4[0] - self.stairstransition["startTime"];
   else
     var_6 = var_4[0] * var_5 / var_3;
@@ -687,10 +687,10 @@ move_checkstairstransition() {
   self setflaggedanimknoballrestart("runanim", var_2, % body, 1, var_8, var_3);
   run_playfacialanim(var_2);
 
-  if(isdefined(self.stairstransition["startTime"]))
+  if(isDefined(self.stairstransition["startTime"]))
     self setanimtime(var_2, self.stairstransition["startTime"]);
 
-  var_9 = isdefined(var_1["inStairTransitionIn"]) && var_1["inStairTransitionIn"];
+  var_9 = isDefined(var_1["inStairTransitionIn"]) && var_1["inStairTransitionIn"];
   var_10 = 0.05 * var_3 / var_5;
   childthread animscripts\stairs_utility::stairupdatepos(var_2, self.origin, self.stairstransition, var_4[0], var_9, var_10);
   thread animscripts\stairs_utility::waitforstairedge(var_2, var_4[0]);
@@ -787,8 +787,8 @@ crouchrun_runnormal() {
 }
 
 standrun_checkreload() {
-  var_0 = isdefined(self.a.allowedpartialreloadontheruntime) && self.a.allowedpartialreloadontheruntime > gettime();
-  var_0 = var_0 || isdefined(self.enemy) && distancesquared(self.origin, self.enemy.origin) < 65536;
+  var_0 = isDefined(self.a.allowedpartialreloadontheruntime) && self.a.allowedpartialreloadontheruntime > gettime();
+  var_0 = var_0 || isDefined(self.enemy) && distancesquared(self.origin, self.enemy.origin) < 65536;
 
   if(var_0) {
     if(!animscripts\combat_utility::needtoreload(0))
@@ -796,19 +796,19 @@ standrun_checkreload() {
   } else if(!animscripts\combat_utility::needtoreload(0.5))
     return 0;
 
-  if(isdefined(self.grenade))
+  if(isDefined(self.grenade))
     return 0;
 
   if(!self.facemotion || animscripts\stairs_utility::isonstairs())
     return 0;
 
-  if(isdefined(self.dontshootwhilemoving) || isdefined(self.norunreload))
+  if(isDefined(self.dontshootwhilemoving) || isDefined(self.norunreload))
     return 0;
 
   if(canshootwhilerunning() && !animscripts\combat_utility::needtoreload(0))
     return 0;
 
-  if(!isdefined(self.pathgoalpos) || distancesquared(self.origin, self.pathgoalpos) < 65536)
+  if(!isDefined(self.pathgoalpos) || distancesquared(self.origin, self.pathgoalpos) < 65536)
     return 0;
 
   var_1 = getdvarfloat("ai_runReload_minLookahead", 320);
@@ -878,7 +878,7 @@ runloopisnearbeginning() {
 }
 
 setmovenonforwardanims(var_0, var_1, var_2, var_3) {
-  if(!isdefined(var_3))
+  if(!isDefined(var_3))
     var_3 = 1;
 
   self setanimknoblimited(var_0, 1, 0.1, var_3, 1);
@@ -891,7 +891,7 @@ setcombatstandmoveanimweights(var_0) {
 }
 
 updatemoveanimweights(var_0, var_1, var_2, var_3, var_4) {
-  if(isdefined(self.update_move_anim_type) && self.update_move_anim_type == var_0) {
+  if(isDefined(self.update_move_anim_type) && self.update_move_anim_type == var_0) {
     return;
   }
   self notify("stop_move_anim_update");
@@ -901,7 +901,7 @@ updatemoveanimweights(var_0, var_1, var_2, var_3, var_4) {
   self endon("move_interrupt");
   self endon("stop_move_anim_update");
 
-  for (;;) {
+  for(;;) {
     updaterunweightsonce(var_1, var_2, var_3, var_4);
     wait 0.05;
     waittillframeend;
@@ -909,12 +909,12 @@ updatemoveanimweights(var_0, var_1, var_2, var_3, var_4) {
 }
 
 updaterunweightsonce(var_0, var_1, var_2, var_3) {
-  if(self.facemotion && !animscripts\utility::shouldcqb() && !isdefined(self.update_move_front_bias) && !(isdefined(self.mech) && self.mech)) {
-    if(!isdefined(self.wasfacingmotion)) {
+  if(self.facemotion && !animscripts\utility::shouldcqb() && !isDefined(self.update_move_front_bias) && !(isDefined(self.mech) && self.mech)) {
+    if(!isDefined(self.wasfacingmotion)) {
       self.wasfacingmotion = 1;
       var_4 = 0.2;
 
-      if(isdefined(self.strafeblendtimes))
+      if(isDefined(self.strafeblendtimes))
         var_4 = self.strafeblendtimes;
 
       self setanim(var_0, 1, var_4, 1, 1);
@@ -926,7 +926,7 @@ updaterunweightsonce(var_0, var_1, var_2, var_3) {
     self.wasfacingmotion = undefined;
     var_5 = animscripts\utility::quadrantanimweights(self getmotionangle());
 
-    if(isdefined(self.update_move_front_bias)) {
+    if(isDefined(self.update_move_front_bias)) {
       var_5["back"] = 0.0;
 
       if(var_5["front"] < 0.2)
@@ -935,7 +935,7 @@ updaterunweightsonce(var_0, var_1, var_2, var_3) {
 
     var_4 = 0.2;
 
-    if(isdefined(self.strafeblendtimes))
+    if(isDefined(self.strafeblendtimes))
       var_4 = self.strafeblendtimes;
 
     var_6 = var_5["front"];
@@ -951,7 +951,7 @@ updaterunweightsonce(var_0, var_1, var_2, var_3) {
 }
 
 standrun_checkchangeweapon() {
-  var_0 = isdefined(self.wantshotgun) && self.wantshotgun;
+  var_0 = isDefined(self.wantshotgun) && self.wantshotgun;
   var_1 = animscripts\utility::isshotgun(self.weapon);
 
   if(var_0 == var_1)
@@ -960,7 +960,7 @@ standrun_checkchangeweapon() {
   if(animscripts\stairs_utility::isonstairs())
     return 0;
 
-  if(!isdefined(self.pathgoalpos) || distancesquared(self.origin, self.pathgoalpos) < 65536)
+  if(!isDefined(self.pathgoalpos) || distancesquared(self.origin, self.pathgoalpos) < 65536)
     return 0;
 
   if(animscripts\utility::usingsidearm())

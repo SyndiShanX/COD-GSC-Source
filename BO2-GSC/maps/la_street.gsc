@@ -186,7 +186,7 @@ street_kill_extra_enemies() {
   if(isalive(ai_stair_sniper))
     ai_stair_sniper bloody_death();
 
-  a_generic_ai = getentarray("street_generic_ai", "targetname");
+  a_generic_ai = getEntArray("street_generic_ai", "targetname");
 
   foreach(ai_generic in a_generic_ai) {
     if(isalive(ai_generic))
@@ -476,17 +476,17 @@ street_cart_vo() {
 }
 
 street_ai_spawn_funcs() {
-  a_street_truck_guys = getentarray("street_truck_guy", "targetname");
+  a_street_truck_guys = getEntArray("street_truck_guy", "targetname");
   array_thread(a_street_truck_guys, ::add_spawn_function, ::force_goal, undefined, 16);
-  a_street_cross_1 = getentarray("sm_street_cross_1", "targetname");
+  a_street_cross_1 = getEntArray("sm_street_cross_1", "targetname");
   array_thread(a_street_cross_1, ::add_spawn_function, ::force_goal, undefined, 16);
-  a_street_inside = getentarray("street_inside", "targetname");
+  a_street_inside = getEntArray("street_inside", "targetname");
   array_thread(a_street_inside, ::add_spawn_function, ::force_goal, undefined, 16);
-  a_street_back = getentarray("street_back", "targetname");
+  a_street_back = getEntArray("street_back", "targetname");
   array_thread(a_street_back, ::add_spawn_function, ::force_goal, undefined, 16);
-  a_street_train_inside = getentarray("street_train_inside", "targetname");
+  a_street_train_inside = getEntArray("street_train_inside", "targetname");
   array_thread(a_street_train_inside, ::add_spawn_function, ::force_goal, undefined, 16);
-  a_street_cross_inside = getentarray("street_cross_inside", "targetname");
+  a_street_cross_inside = getEntArray("street_cross_inside", "targetname");
   array_thread(a_street_cross_inside, ::add_spawn_function, ::force_goal, undefined, 16, 0);
   trigger_use("sm_street_ambush_outside");
 }
@@ -609,7 +609,7 @@ do_pip1() {
 
 cougar_exit_player() {
   level notify("radio_start_wakeup");
-  level.player playsound("evt_cougar_exit");
+  level.player playSound("evt_cougar_exit");
   level thread run_scene("cougar_exit_player");
   flag_wait("cougar_exit_player_started");
   m_18_wheeler_clip = getent("street_truck_collision", "targetname");
@@ -630,8 +630,8 @@ cougar_exit_cop_car() {
   m_ce_cop_car play_fx("ce_dest_cop_car_fx", m_ce_cop_car.origin, m_ce_cop_car.angles, 4.5, 1, "body_animate_jnt");
   run_scene("ce_fxanim_cop_car");
   level thread run_scene("ce_fxanim_cop_car_explode");
-  m_ce_cop_car setmodel("veh_t6_police_car_destroyed");
-  playfxontag(getfx("car_explosion"), m_ce_cop_car, "tag_origin");
+  m_ce_cop_car setModel("veh_t6_police_car_destroyed");
+  playFXOnTag(getfx("car_explosion"), m_ce_cop_car, "tag_origin");
   m_ce_cop_car notify("death");
 }
 
@@ -735,7 +735,7 @@ cougar_exit_everything_else() {
 }
 
 harper_fire_sniperstorm(ai_harper) {
-  playfxontag(getfx("ce_harper_muzflash"), ai_harper, "tag_weapon_left");
+  playFXOnTag(getfx("ce_harper_muzflash"), ai_harper, "tag_weapon_left");
 }
 
 intersection_osprey() {
@@ -798,7 +798,7 @@ brute_force_use() {
   level endon("brute_force_fail");
   run_scene_first_frame("brute_force_cougar");
   m_bruteforce_cougar = getent("bruteforce_cougar", "targetname");
-  m_bruteforce_cougar setmodel("veh_t6_mil_cougar_low_dead");
+  m_bruteforce_cougar setModel("veh_t6_mil_cougar_low_dead");
   trigger_off("t_brute_force_use", "targetname");
   level.player waittill_player_has_brute_force_perk();
   t_perk_use = getent("t_brute_force_use", "targetname");
@@ -821,12 +821,12 @@ brute_force_fail() {
   remove_objective_perk(level.obj_brute_perk);
   trigger_off("t_brute_force_use", "targetname");
   m_brute_force_cougar = getent("bruteforce_cougar", "targetname");
-  m_brute_force_cougar playsound("exp_armor_vehicle");
-  playfxontag(level._effect["brute_force_explosion"], m_brute_force_cougar, "tag_origin");
+  m_brute_force_cougar playSound("exp_armor_vehicle");
+  playFXOnTag(level._effect["brute_force_explosion"], m_brute_force_cougar, "tag_origin");
 }
 
 semi_ammo_cache_think() {
-  a_semi_caches = getentarray("semi_ammo_cache", "script_noteworthy");
+  a_semi_caches = getEntArray("semi_ammo_cache", "script_noteworthy");
 
   foreach(m_cache in a_semi_caches)
   m_cache hide();
@@ -848,7 +848,7 @@ street_spawn_bdog_middle(delay_s) {
 street_veh_unload() {
   self endon("death");
   self waittill_notify_or_timeout("brake", 6);
-  self playsound("evt_van_incoming");
+  self playSound("evt_van_incoming");
   level notify("white_truck");
 
   while(self getspeedmph() > 0)
@@ -1158,11 +1158,9 @@ street_shellshock_and_visionset() {
   visionsetnaked(current_vision_set, 10);
 }
 
-intruder_gatecrash(m_player) {
-}
+intruder_gatecrash(m_player) {}
 
-intruder_zap(m_player) {
-}
+intruder_zap(m_player) {}
 
 intruder_zap_start(m_cutter) {
   m_cutter play_fx("laser_cutter_sparking", undefined, undefined, "stop_fx", 1, "tag_fx");
@@ -1197,7 +1195,7 @@ autoexec init_attackdrones() {
   run_scene_and_delete("intruder");
   level.la_fire_direction_inited = 1;
   level.player maps\_fire_direction::init_fire_direction();
-  level.player playsound("veh_qrdrone_boot_qr");
+  level.player playSound("veh_qrdrone_boot_qr");
   level thread turn_on_quad_sounds();
   nd_exit_path = getvehiclenode("quad_rotors_exit_path", "targetname");
 
@@ -1236,7 +1234,7 @@ follow_player(follow_close) {
   self endon("stop_follow");
 
   while(true) {
-    v_goal = level.player.origin + vectornormalize(anglestoforward(level.player.angles)) * 300;
+    v_goal = level.player.origin + vectornormalize(anglesToForward(level.player.angles)) * 300;
     self defend(v_goal, 300);
 
     if(follow_close)
@@ -1249,7 +1247,7 @@ follow_player(follow_close) {
 street_quadrotors() {
   trigger_wait("fxanim_debris_2");
   a_press_drones = spawn_vehicles_from_targetname("press_demo_drone");
-  a_press_drones = getentarray("press_demo_drone", "targetname");
+  a_press_drones = getEntArray("press_demo_drone", "targetname");
   nd_exit_path = getvehiclenode("street_quads_start", "targetname");
 
   foreach(vh_drone in a_press_drones) {

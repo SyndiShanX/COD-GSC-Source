@@ -920,5 +920,4 @@ main() {
   ent.v["angles"] = (326.863, 49.5046, -71.7174);
   ent.v["fxid"] = "light_shaft_motes_quarry";
   ent.v["delay"] = -15;
-
 }

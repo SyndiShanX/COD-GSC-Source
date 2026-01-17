@@ -29,10 +29,8 @@ main() {
   var_0 addlevel("jeepride", 0, undefined, 1, "THE_FOURTH_HORSEMAN", undefined);
   var_0 addlevel("airplane", 0, undefined, 1, "MILE_HIGH_CLUB", undefined);
 
-  if(isdefined(level.endmission_main_func)) {
-    [
-      [level.endmission_main_func]
-    ]();
+  if(isDefined(level.endmission_main_func)) {
+    [[level.endmission_main_func]]();
     level.endmission_main_func = undefined;
   }
 
@@ -43,7 +41,7 @@ main() {
 debug_test_next_mission() {
   wait 10;
 
-  while (getdvarint("test_next_mission") < 1)
+  while(getdvarint("test_next_mission") < 1)
     wait 3;
 
   _nextmission();
@@ -76,7 +74,7 @@ _nextmission() {
   maps\_gameskill::auto_adust_zone_complete("aa_main_" + level.script);
   var_0 = level.missionsettings getlevelindex(level.script);
 
-  if(!isdefined(var_0)) {
+  if(!isDefined(var_0)) {
     return;
   }
   if(level.script != "jeepride" && level.script != "airplane") {
@@ -196,7 +194,7 @@ getstat_progression(var_0) {
   var_3 = [];
   var_4 = 0;
 
-  for (var_5 = 0; var_5 < level.missionsettings.levels.size; var_5++) {
+  for(var_5 = 0; var_5 < level.missionsettings.levels.size; var_5++) {
     if(int(var_1[var_5]) >= var_0)
       var_2++;
   }
@@ -247,7 +245,7 @@ setlevelcompleted(var_0) {
   if(level.script == "killhouse" || level.script == "coup" || level.script == "aftermath")
     var_3 = 3;
 
-  for (var_4 = 0; var_4 < var_1.size; var_4++) {
+  for(var_4 = 0; var_4 < var_1.size; var_4++) {
     if(var_4 != var_0) {
       var_2 = var_2 + var_1[var_4];
       continue;
@@ -263,7 +261,7 @@ setlevelcompleted(var_0) {
 
   var_5 = 0;
 
-  for (var_6 = 0; var_6 < var_2.size; var_6++) {
+  for(var_6 = 0; var_6 < var_2.size; var_6++) {
     if(int(var_2[var_6]) > 0)
       var_5 = var_6;
   }
@@ -308,7 +306,7 @@ getlowestskill() {
   var_0 = level.player getlocalplayerprofiledata("missionHighestDifficulty");
   var_1 = 4;
 
-  for (var_2 = 0; var_2 < self.levels.size; var_2++) {
+  for(var_2 = 0; var_2 < self.levels.size; var_2++) {
     if(int(var_0[var_2]) < var_1)
       var_1 = int(var_0[var_2]);
   }
@@ -319,7 +317,7 @@ getlowestskill() {
 isallmisioncompleted() {
   var_0 = level.player getlocalplayerprofiledata("missionHighestDifficulty");
 
-  for (var_1 = 0; var_1 < self.levels.size; var_1++) {
+  for(var_1 = 0; var_1 < self.levels.size; var_1++) {
     if(int(var_0[var_1]) == 0)
       return 0;
   }
@@ -332,7 +330,7 @@ checkcampaigncompleted() {
   var_1 = 1;
   var_2 = 1;
 
-  for (var_3 = 0; var_3 < self.levels.size - 1; var_3++) {
+  for(var_3 = 0; var_3 < self.levels.size - 1; var_3++) {
     if(int(var_0[var_3]) == 0)
       var_1 = 0;
 
@@ -348,7 +346,7 @@ checkcampaigncompleted() {
 }
 
 createmission(var_0) {
-  var_1 = spawnstruct();
+  var_1 = spawnStruct();
   var_1.levels = [];
   var_1.prereqs = [];
   var_1.hardenedaward = var_0;
@@ -357,14 +355,14 @@ createmission(var_0) {
 
 addlevel(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7 = self.levels.size;
-  self.levels[var_7] = spawnstruct();
+  self.levels[var_7] = spawnStruct();
   self.levels[var_7].name = var_0;
   self.levels[var_7].keepweapons = var_1;
   self.levels[var_7].achievement = var_2;
   self.levels[var_7].skipssuccess = var_3;
   self.levels[var_7].veteran_achievement = var_4;
 
-  if(isdefined(var_5))
+  if(isDefined(var_5))
     self.levels[var_7].fade_time = var_5;
 }
 
@@ -399,28 +397,28 @@ getlevelveteranaward(var_0) {
 }
 
 getfadetime(var_0) {
-  if(!isdefined(self.levels[var_0].fade_time))
+  if(!isDefined(self.levels[var_0].fade_time))
     return undefined;
 
   return self.levels[var_0].fade_time;
 }
 
 haslevelveteranaward(var_0) {
-  if(isdefined(self.levels[var_0].veteran_achievement))
+  if(isDefined(self.levels[var_0].veteran_achievement))
     return 1;
   else
     return 0;
 }
 
 hasachievement(var_0) {
-  if(isdefined(self.levels[var_0].achievement))
+  if(isDefined(self.levels[var_0].achievement))
     return 1;
   else
     return 0;
 }
 
 check_other_haslevelveteranachievement(var_0) {
-  for (var_1 = 0; var_1 < self.levels.size; var_1++) {
+  for(var_1 = 0; var_1 < self.levels.size; var_1++) {
     if(var_1 == var_0) {
       continue;
     }
@@ -437,7 +435,7 @@ check_other_haslevelveteranachievement(var_0) {
 }
 
 skipssuccess(var_0) {
-  if(!isdefined(self.levels[var_0].skipssuccess))
+  if(!isDefined(self.levels[var_0].skipssuccess))
     return 0;
 
   return self.levels[var_0].skipssuccess;
@@ -448,14 +446,14 @@ gethardenedaward() {
 }
 
 hasmissionhardenedaward() {
-  if(isdefined(self.hardenedaward))
+  if(isDefined(self.hardenedaward))
     return 1;
   else
     return 0;
 }
 
 getnextlevelindex() {
-  for (var_0 = 0; var_0 < self.levels.size; var_0++) {
+  for(var_0 = 0; var_0 < self.levels.size; var_0++) {
     if(!getlevelskill(var_0))
       return var_0;
   }
@@ -467,7 +465,7 @@ force_all_complete() {
   var_0 = level.player getlocalplayerprofiledata("missionHighestDifficulty");
   var_1 = "";
 
-  for (var_2 = 0; var_2 < var_0.size; var_2++) {
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
     if(var_2 < 20) {
       var_1 = var_1 + 2;
       continue;
@@ -490,7 +488,7 @@ credits_end() {
 }
 
 end_mission_fade_audio_and_video(var_0) {
-  if(!isdefined(var_0) || var_0 == 0) {
+  if(!isDefined(var_0) || var_0 == 0) {
     return;
   }
   soundscripts\_snd::snd_message("finish_mission_fade", var_0);

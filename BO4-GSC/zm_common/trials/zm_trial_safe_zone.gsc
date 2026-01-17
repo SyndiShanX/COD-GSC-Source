@@ -8,7 +8,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_loadout;
 #include scripts\zm_common\zm_trial;
-
 #namespace zm_trial_safe_zone;
 
 autoexec __init__system__() {
@@ -23,7 +22,7 @@ __init__() {
   zm_trial::register_challenge(#"safe_zone", &on_begin, &on_end);
 }
 
-private on_begin(var_e84d35d1, var_16e6b8ea) {
+on_begin(var_e84d35d1, var_16e6b8ea) {
   var_e9433d0 = struct::get_array(var_e84d35d1);
   assert(var_e9433d0.size, "<dev string:x38>");
   var_64e17761 = [];
@@ -41,7 +40,7 @@ private on_begin(var_e84d35d1, var_16e6b8ea) {
   }
 }
 
-private on_end(round_reset) {}
+on_end(round_reset) {}
 
 function_68b149a2(var_64e17761, var_16e6b8ea) {
   level endon(#"hash_7646638df88a3656");

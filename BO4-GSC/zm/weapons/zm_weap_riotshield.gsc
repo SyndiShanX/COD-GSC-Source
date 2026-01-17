@@ -30,7 +30,6 @@
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
-
 #namespace riotshield;
 
 autoexec __init__system__() {
@@ -289,7 +288,7 @@ player_damage_shield(idamage, bheld, fromcode = 0, smod = "MOD_UNKNOWN", var_4e0
     }
 
     self clientfield::increment_to_player("zm_shield_break_rumble");
-    self thread zm_audio::create_and_play_dialog(#"shield", #"destroy");
+    self thread zm_audio::create_and_play_dialog(#"shield", # "destroy");
     self thread player_take_riotshield();
   } else {
     if(var_4e0da269) {
@@ -391,7 +390,7 @@ riotshield_knockdown_zombie(player, gib, weapon) {
     return;
   }
 
-  if(self.archetype === #"brutus") {
+  if(self.archetype === # "brutus") {
     self ai::stun();
   } else {
     self zombie_utility::setup_zombie_knockdown(player);
@@ -465,98 +464,73 @@ riotshield_get_enemies_in_range(riotshield_knockdown_range, riotshield_gib_range
     circle(end_pos, riotshield_cylinder_radius, (1, 0, 0), 0, 0, 300);
   }
 
-    foreach(e_target in a_e_targets) {
-      if(!isalive(e_target) || !isDefined(e_target.zm_ai_category)) {
-        continue;
-      }
+  foreach(e_target in a_e_targets) {
+    if(!isalive(e_target) || !isDefined(e_target.zm_ai_category)) {
+      continue;
+    }
 
-      test_origin = e_target getcentroid();
-      test_range_squared = distancesquared(view_pos, test_origin);
+    test_origin = e_target getcentroid();
+    test_range_squared = distancesquared(view_pos, test_origin);
 
-      if(test_range_squared > knockdown_range_squared) {
-        return;
-      }
+    if(test_range_squared > knockdown_range_squared) {
+      return;
+    }
 
-      normal = vectornormalize(test_origin - view_pos);
-      dot = vectordot(forward_view_angles, normal);
+    normal = vectornormalize(test_origin - view_pos);
+    dot = vectordot(forward_view_angles, normal);
 
-      if(0 > dot) {
-        continue;
-      }
+    if(0 > dot) {
+      continue;
+    }
 
-      radial_origin = pointonsegmentnearesttopoint(view_pos, end_pos, test_origin);
+    radial_origin = pointonsegmentnearesttopoint(view_pos, end_pos, test_origin);
 
-      if(distancesquared(test_origin, radial_origin) > var_8f9e26e4) {
-        continue;
-      }
+    if(distancesquared(test_origin, radial_origin) > var_8f9e26e4) {
+      continue;
+    }
 
-      if(0 == e_target damageconetrace(view_pos, self)) {
-        continue;
-      }
+    if(0 == e_target damageconetrace(view_pos, self)) {
+      continue;
+    }
 
-      switch (e_target.zm_ai_category) {
-        case #"basic":
-        case #"enhanced":
-          if(test_range_squared < fling_range_squared) {
-            if(distancesquared(test_origin, radial_origin) > cylinder_radius_squared) {
-              break;
-            }
-
-            level.riotshield_fling_enemies[level.riotshield_fling_enemies.size] = e_target;
-            dist_mult = (fling_range_squared - test_range_squared) / fling_range_squared;
-            fling_vec = vectornormalize(test_origin - view_pos);
-
-            if(5000 < test_range_squared) {
-              fling_vec += vectornormalize(test_origin - radial_origin);
-            }
-
-            fling_vec = (fling_vec[0], fling_vec[1], fling_force_v * abs(fling_vec[2]));
-            fling_vec = vectorscale(fling_vec, fling_force + fling_force * dist_mult);
-            level.riotshield_fling_vecs[level.riotshield_fling_vecs.size] = fling_vec;
-          } else if(var_606a8462 && test_range_squared < knockdown_range_squared) {
-            if(distancesquared(test_origin, radial_origin) > var_8f9e26e4) {
-              break;
-            }
-
-            level.riotshield_knockdown_enemies[level.riotshield_knockdown_enemies.size] = e_target;
-
-            if(var_606a8462 && test_range_squared < gib_range_squared) {
-              level.riotshield_knockdown_gib[level.riotshield_knockdown_gib.size] = 1;
-            }
+    switch (e_target.zm_ai_category) {
+      case # "basic":
+      case # "enhanced":
+        if(test_range_squared < fling_range_squared) {
+          if(distancesquared(test_origin, radial_origin) > cylinder_radius_squared) {
+            break;
           }
 
-          break;
-        case #"heavy":
-        case #"miniboss":
-          if(self hasperk(#"specialty_mod_shield")) {
-            level.riotshield_knockdown_enemies[level.riotshield_knockdown_enemies.size] = e_target;
-            level.riotshield_knockdown_gib[level.riotshield_knockdown_gib.size] = 0;
-          } else {
-            if(!isDefined(level.var_21ffc192)) {
-              level.var_21ffc192 = [];
-            } else if(!isarray(level.var_21ffc192)) {
-              level.var_21ffc192 = array(level.var_21ffc192);
-            }
+          level.riotshield_fling_enemies[level.riotshield_fling_enemies.size] = e_target;
+          dist_mult = (fling_range_squared - test_range_squared) / fling_range_squared;
+          fling_vec = vectornormalize(test_origin - view_pos);
 
-            level.var_21ffc192[level.var_21ffc192.size] = e_target;
-            e_target dodamage(3000, self.origin, self, self, "", "MOD_IMPACT");
+          if(5000 < test_range_squared) {
+            fling_vec += vectornormalize(test_origin - radial_origin);
           }
 
-          break;
-        case #"popcorn":
-          if(test_range_squared < fling_range_squared) {
-            if(!isDefined(level.var_21ffc192)) {
-              level.var_21ffc192 = [];
-            } else if(!isarray(level.var_21ffc192)) {
-              level.var_21ffc192 = array(level.var_21ffc192);
-            }
-
-            level.var_21ffc192[level.var_21ffc192.size] = e_target;
-            e_target dodamage(e_target.health + 100, self.origin, self, self, "", "MOD_IMPACT");
+          fling_vec = (fling_vec[0], fling_vec[1], fling_force_v * abs(fling_vec[2]));
+          fling_vec = vectorscale(fling_vec, fling_force + fling_force * dist_mult);
+          level.riotshield_fling_vecs[level.riotshield_fling_vecs.size] = fling_vec;
+        } else if(var_606a8462 && test_range_squared < knockdown_range_squared) {
+          if(distancesquared(test_origin, radial_origin) > var_8f9e26e4) {
+            break;
           }
 
-          break;
-        default:
+          level.riotshield_knockdown_enemies[level.riotshield_knockdown_enemies.size] = e_target;
+
+          if(var_606a8462 && test_range_squared < gib_range_squared) {
+            level.riotshield_knockdown_gib[level.riotshield_knockdown_gib.size] = 1;
+          }
+        }
+
+        break;
+      case # "heavy":
+      case # "miniboss":
+        if(self hasperk(#"specialty_mod_shield")) {
+          level.riotshield_knockdown_enemies[level.riotshield_knockdown_enemies.size] = e_target;
+          level.riotshield_knockdown_gib[level.riotshield_knockdown_gib.size] = 0;
+        } else {
           if(!isDefined(level.var_21ffc192)) {
             level.var_21ffc192 = [];
           } else if(!isarray(level.var_21ffc192)) {
@@ -565,9 +539,34 @@ riotshield_get_enemies_in_range(riotshield_knockdown_range, riotshield_gib_range
 
           level.var_21ffc192[level.var_21ffc192.size] = e_target;
           e_target dodamage(3000, self.origin, self, self, "", "MOD_IMPACT");
-          break;
-      }
+        }
+
+        break;
+      case # "popcorn":
+        if(test_range_squared < fling_range_squared) {
+          if(!isDefined(level.var_21ffc192)) {
+            level.var_21ffc192 = [];
+          } else if(!isarray(level.var_21ffc192)) {
+            level.var_21ffc192 = array(level.var_21ffc192);
+          }
+
+          level.var_21ffc192[level.var_21ffc192.size] = e_target;
+          e_target dodamage(e_target.health + 100, self.origin, self, self, "", "MOD_IMPACT");
+        }
+
+        break;
+      default:
+        if(!isDefined(level.var_21ffc192)) {
+          level.var_21ffc192 = [];
+        } else if(!isarray(level.var_21ffc192)) {
+          level.var_21ffc192 = array(level.var_21ffc192);
+        }
+
+        level.var_21ffc192[level.var_21ffc192.size] = e_target;
+        e_target dodamage(3000, self.origin, self, self, "", "MOD_IMPACT");
+        break;
     }
+  }
 }
 
 riotshield_melee(weapon, riotshield_knockdown_range, riotshield_gib_range, riotshield_fling_range, var_1c3d89, riotshield_cylinder_radius, riotshield_fling_force_melee) {
@@ -610,9 +609,9 @@ riotshield_melee(weapon, riotshield_knockdown_range, riotshield_gib_range, riots
 
   foreach(ai_enemy in level.var_21ffc192) {
     switch (ai_enemy.zm_ai_category) {
-      case #"heavy":
-      case #"miniboss":
-      case #"boss":
+      case # "heavy":
+      case # "miniboss":
+      case # "boss":
         var_d3f92d4d = zombie_utility::get_zombie_var(#"hash_bfdf728041b626a");
         break;
       default:

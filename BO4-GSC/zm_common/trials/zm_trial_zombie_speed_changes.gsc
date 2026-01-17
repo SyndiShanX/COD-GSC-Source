@@ -12,7 +12,6 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_trial_zombie_speed_changes;
 
 autoexec __init__system__() {
@@ -28,14 +27,14 @@ __init__() {
   namespace_9ff9f642::register_slowdown(#"zm_trial_zombie_speed_changes", 1.5);
 }
 
-private on_begin() {
+on_begin() {
   level thread function_4458377c();
   level thread zm_utility::play_sound_2d("zmb_trial_horror_round_start");
 }
 
-private on_end(round_reset) {}
+on_end(round_reset) {}
 
-private function_4458377c() {
+function_4458377c() {
   level endon(#"hash_7646638df88a3656");
 
   while(true) {
@@ -66,7 +65,7 @@ function_fe65f5a6(var_b7358df3, e_player, n_timeout = 1) {
   self endon(#"death");
   self.var_cda2fa8 = 1;
 
-  if(!(isDefined(self.completed_emerging_into_playable_area) && self.completed_emerging_into_playable_area) && self.archetype !== #"zombie_dog") {
+  if(!(isDefined(self.completed_emerging_into_playable_area) && self.completed_emerging_into_playable_area) && self.archetype !== # "zombie_dog") {
     self waittill(#"completed_emerging_into_playable_area");
   }
 

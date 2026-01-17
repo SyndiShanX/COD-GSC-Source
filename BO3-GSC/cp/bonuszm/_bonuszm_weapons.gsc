@@ -9,10 +9,7 @@
 #using scripts\shared\weapons\_weapons;
 
 class class_a17e6f03 {
-
-
   constructor() {}
-
 
   destructor() {}
 
@@ -33,20 +30,20 @@ function autoexec function_58d5283a() {
   level.var_24893e7 ghost();
   level.var_a432d965 = struct::get_script_bundle("bonuszmdata", mapname);
   var_6a173bd1 = getstructfield(level.var_a432d965, "weaponsTable");
-  assert(isdefined(var_6a173bd1));
+  assert(isDefined(var_6a173bd1));
   function_549c28ac(("gamedata/tables/cpzm/") + var_6a173bd1);
 }
 
 function function_549c28ac(var_6a173bd1) {
   noneweapon = getweapon("none");
   var_adeb478a = tablelookuprowcount(var_6a173bd1);
-  for (i = 0; i < var_adeb478a; i++) {
+  for(i = 0; i < var_adeb478a; i++) {
     var_279890e8 = new class_a17e6f03();
     var_279890e8.weaponname = tablelookupcolumnforrow(var_6a173bd1, i, 0);
     var_279890e8.var_bc6ce097 = int(tablelookupcolumnforrow(var_6a173bd1, i, 1));
     var_279890e8.var_2b758e89 = int(tablelookupcolumnforrow(var_6a173bd1, i, 2));
     var_279890e8.var_83fbee4b = tablelookupcolumnforrow(var_6a173bd1, i, 3);
-    if(!isdefined(var_279890e8.weaponname) || getweapon(var_279890e8.weaponname) == noneweapon) {
+    if(!isDefined(var_279890e8.weaponname) || getweapon(var_279890e8.weaponname) == noneweapon) {
       continue;
     }
     if(var_279890e8.var_83fbee4b == "") {
@@ -63,22 +60,22 @@ function function_549c28ac(var_6a173bd1) {
 }
 
 function function_1e2e0936(var_1010f96a = 0) {
-  if(isdefined(level.var_fd21e404)) {
+  if(isDefined(level.var_fd21e404)) {
     weaponinfo = level.var_fd21e404;
   }
   level.var_fd21e404 = function_53200e4d(var_1010f96a);
   level.var_24893e7 useweaponmodel(level.var_fd21e404[0], level.var_fd21e404[0].worldmodel);
   level.var_24893e7 setweaponrenderoptions(level.var_fd21e404[2], 0, 0, 0, 0);
-  if(isdefined(weaponinfo)) {
+  if(isDefined(weaponinfo)) {
     return weaponinfo;
   }
   return function_53200e4d(var_1010f96a);
 }
 
 function function_53200e4d(var_1010f96a) {
-  assert(isdefined(level.var_acba406b));
-  assert(isdefined(level.var_ed11f8b7));
-  assert(isdefined(level.var_a9e78bf7[""]));
+  assert(isDefined(level.var_acba406b));
+  assert(isDefined(level.var_ed11f8b7));
+  assert(isDefined(level.var_a9e78bf7[""]));
   var_82d771df = undefined;
   var_d9cb0358 = [];
   if(var_1010f96a && level.var_5e3f3853 < level.var_a9e78bf7["maxmagicboxonlyweapons"] && randomint(100) < level.var_a9e78bf7["magicboxonlyweaponchance"] && level.var_ed11f8b7.size) {
@@ -97,9 +94,9 @@ function function_53200e4d(var_1010f96a) {
   }
   acvi = undefined;
   var_2106259a = 0;
-  if(isdefined(var_d9cb0358) && isarray(var_d9cb0358) && var_d9cb0358.size) {
+  if(isDefined(var_d9cb0358) && isarray(var_d9cb0358) && var_d9cb0358.size) {
     var_82d771df = getweapon(var_279890e8.weaponname, var_d9cb0358);
-    if(isdefined(var_82d771df)) {
+    if(isDefined(var_82d771df)) {
       var_2106259a = 1;
       switch (var_d9cb0358.size) {
         case 8: {
@@ -153,11 +150,11 @@ function function_53200e4d(var_1010f96a) {
 }
 
 function function_43128d49(weaponinfo, var_fe7b5ca3 = 1) {
-  assert(isdefined(weaponinfo));
+  assert(isDefined(weaponinfo));
   randomweapon = weaponinfo[0];
   var_d6c5d457 = weaponinfo[1];
   var_54a70e6e = weaponinfo[2];
-  if(!isdefined(randomweapon)) {
+  if(!isDefined(randomweapon)) {
     return;
   }
   if(randomweapon == level.weaponnone) {
@@ -166,8 +163,8 @@ function function_43128d49(weaponinfo, var_fe7b5ca3 = 1) {
   a_weaponlist = self getweaponslist();
   a_heroweapons = [];
   foreach(weapon in a_weaponlist) {
-    if(isdefined(weapon.isheroweapon) && weapon.isheroweapon) {
-      if(!isdefined(a_heroweapons)) {
+    if(isDefined(weapon.isheroweapon) && weapon.isheroweapon) {
+      if(!isDefined(a_heroweapons)) {
         a_heroweapons = [];
       } else if(!isarray(a_heroweapons)) {
         a_heroweapons = array(a_heroweapons);
@@ -184,7 +181,7 @@ function function_43128d49(weaponinfo, var_fe7b5ca3 = 1) {
     self function_132d9eee(weapon);
   }
   var_a817a92d = self calcweaponoptions(var_54a70e6e, 0, 0, 0);
-  if(isdefined(var_d6c5d457)) {
+  if(isDefined(var_d6c5d457)) {
     self giveweapon(randomweapon, var_a817a92d, var_d6c5d457);
   } else {
     self giveweapon(randomweapon, var_a817a92d);
@@ -207,7 +204,7 @@ function function_43128d49(weaponinfo, var_fe7b5ca3 = 1) {
 
 function function_7e774306() {
   level.var_3d2f81f1 = getweapon("ar_standard");
-  while (true) {
+  while(true) {
     level waittill("scene_sequence_started");
     foreach(player in level.activeplayers) {
       player function_be94c003();
@@ -230,10 +227,10 @@ function function_be94c003() {
 }
 
 function function_d5efb07f() {
-  if(!(isdefined(self.var_7a5a5490) && self.var_7a5a5490)) {
+  if(!(isDefined(self.var_7a5a5490) && self.var_7a5a5490)) {
     self takeweapon(level.var_3d2f81f1);
   }
-  if(isdefined(self.var_c74b20c1) && self hasweapon(self.var_c74b20c1)) {
+  if(isDefined(self.var_c74b20c1) && self hasweapon(self.var_c74b20c1)) {
     self switchtoweapon(self.var_c74b20c1);
   }
 }
@@ -246,7 +243,7 @@ function function_132d9eee(weapon) {
     stockammo = stockmax;
   }
   item = self dropitem(weapon, "tag_origin");
-  if(!isdefined(item)) {
+  if(!isDefined(item)) {
     iprintlnbold(("" + weapon.name) + "");
     return;
   }

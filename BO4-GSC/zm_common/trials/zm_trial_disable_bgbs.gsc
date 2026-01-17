@@ -7,7 +7,6 @@
 #include scripts\zm_common\zm_bgb;
 #include scripts\zm_common\zm_bgb_pack;
 #include scripts\zm_common\zm_trial;
-
 #namespace zm_trial_disable_bgbs;
 
 autoexec __init__system__() {
@@ -22,7 +21,7 @@ __init__() {
   zm_trial::register_challenge(#"disable_bgbs", &on_begin, &on_end);
 }
 
-private on_begin() {
+on_begin() {
   level zm_trial::function_2b3a3307(1);
   level zm_trial::function_19a1098f(1);
 
@@ -32,7 +31,7 @@ private on_begin() {
   }
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   level zm_trial::function_2b3a3307(0);
   level zm_trial::function_19a1098f(0);
 

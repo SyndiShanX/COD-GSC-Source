@@ -101,9 +101,7 @@ create_fx_menu() {
   }
 
   if(isDefined(level._createfx.menus[level.create_fx_menu])) {
-    [
-      [level._createfx.menus[level.create_fx_menu]]
-    ]();
+    [[level._createfx.menus[level.create_fx_menu]]]();
   }
 }
 

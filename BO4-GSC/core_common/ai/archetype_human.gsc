@@ -15,7 +15,6 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\math_shared;
 #include scripts\core_common\spawner_shared;
-
 #namespace archetype_human;
 
 autoexec init() {
@@ -27,7 +26,7 @@ autoexec init() {
   level.__ai_forcegibs = getdvarint(#"ai_forcegibs", 0);
 }
 
-private archetypehumaninit() {
+archetypehumaninit() {
   entity = self;
   aiutility::addaioverridedamagecallback(entity, &damageoverride);
   aiutility::addaioverridekilledcallback(entity, &humangibkilledoverride);
@@ -40,7 +39,7 @@ private archetypehumaninit() {
   }
 }
 
-private archetypehumanblackboardinit() {
+archetypehumanblackboardinit() {
   blackboard::createblackboardforentity(self);
   ai::createinterfaceforentity(self);
   self.___archetypeonanimscriptedcallback = &archetypehumanonanimscriptedcallback;
@@ -55,7 +54,7 @@ private archetypehumanblackboardinit() {
   gibserverutils::togglespawngibs(self, 1);
 }
 
-private archetypehumanonbehavecallback(entity) {
+archetypehumanonbehavecallback(entity) {
   if(btapi_isatcovercondition(entity)) {
     entity setblackboardattribute("_previous_cover_mode", "cover_alert");
     entity setblackboardattribute("_cover_mode", "cover_mode_none");
@@ -66,14 +65,14 @@ private archetypehumanonbehavecallback(entity) {
   blackboard::addblackboardevent("human_grenade_throw", grenadethrowinfo, randomintrange(3000, 4000));
 }
 
-private archetypehumanonanimscriptedcallback(entity) {
+archetypehumanonanimscriptedcallback(entity) {
   entity.__blackboard = undefined;
   entity archetypehumanblackboardinit();
   vignettemode = ai::getaiattribute(entity, "vignette_mode");
   humansoldierserverutils::vignettemodecallback(entity, "vignette_mode", vignettemode, vignettemode);
 }
 
-private humangibkilledoverride(inflictor, attacker, damage, meansofdeath, weapon, dir, hitloc, offsettime) {
+humangibkilledoverride(inflictor, attacker, damage, meansofdeath, weapon, dir, hitloc, offsettime) {
   entity = self;
 
   if(math::cointoss()) {
@@ -112,7 +111,7 @@ private humangibkilledoverride(inflictor, attacker, damage, meansofdeath, weapon
   return damage;
 }
 
-private trygibbinghead(entity, damage, hitloc, isexplosive) {
+trygibbinghead(entity, damage, hitloc, isexplosive) {
   if(isexplosive) {
     gibserverutils::gibhead(entity);
     return;
@@ -123,7 +122,7 @@ private trygibbinghead(entity, damage, hitloc, isexplosive) {
   }
 }
 
-private trygibbinglimb(entity, damage, hitloc, isexplosive) {
+trygibbinglimb(entity, damage, hitloc, isexplosive) {
   if(isexplosive) {
     randomchance = randomfloatrange(0, 1);
 
@@ -156,7 +155,7 @@ private trygibbinglimb(entity, damage, hitloc, isexplosive) {
   }
 }
 
-private trygibbinglegs(entity, damage, hitloc, isexplosive, attacker) {
+trygibbinglegs(entity, damage, hitloc, isexplosive, attacker) {
   if(isexplosive) {
     randomchance = randomfloatrange(0, 1);
 
@@ -240,9 +239,9 @@ movemodeattributecallback(entity, attribute, oldvalue, value) {
   entity.ignorepathenemyfightdist = 0;
 
   switch (value) {
-    case #"normal":
+    case # "normal":
       break;
-    case #"rambo":
+    case # "rambo":
       entity.ignorepathenemyfightdist = 1;
       break;
   }
@@ -277,21 +276,21 @@ forcesprintcallback(entity, attribute, oldvalue, value) {
 
 vignettemodecallback(entity, attribute, oldvalue, value) {
   switch (value) {
-    case #"off":
+    case # "off":
       entity.pushable = 1;
       entity collidewithactors(0);
       entity pushplayer(0);
       entity setavoidancemask("avoid all");
       entity setsteeringmode("normal steering");
       break;
-    case #"slow":
+    case # "slow":
       entity.pushable = 0;
       entity collidewithactors(0);
       entity pushplayer(1);
       entity setavoidancemask("avoid ai");
       entity setsteeringmode("vignette steering");
       break;
-    case #"fast":
+    case # "fast":
       entity.pushable = 0;
       entity collidewithactors(1);
       entity pushplayer(1);

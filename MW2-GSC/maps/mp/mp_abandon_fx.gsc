@@ -4,7 +4,6 @@
 ********************************************************/
 
 main() {
-
   level._effect["firelp_large_pm"] = loadfx("fire/firelp_large_pm");
   level._effect["firelp_med_pm"] = loadfx("fire/firelp_med_pm");
   level._effect["firelp_small_pm"] = loadfx("fire/firelp_small_pm");
@@ -26,9 +25,7 @@ main() {
   level._effect["hallway_smoke_light"] = loadfx("smoke/hallway_smoke_light");
   level._effect["room_smoke_200"] = loadfx("smoke/room_smoke_200");
 
-  /#
   if(getdvar("clientSideEffects") != "1")
     maps\createfx\mp_abandon_fx::main();
-  # /
 
 }

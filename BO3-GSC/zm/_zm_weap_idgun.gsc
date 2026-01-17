@@ -27,28 +27,28 @@
 #namespace idgun;
 
 function autoexec __init__sytem__() {
-  system::register("idgun", & init, & main, undefined);
+  system::register("idgun", &init, &main, undefined);
 }
 
 function init() {
-  callback::on_connect( & function_2bd571b9);
-  zm::register_player_damage_callback( & function_b618ee82);
+  callback::on_connect(&function_2bd571b9);
+  zm::register_player_damage_callback(&function_b618ee82);
 }
 
 function main() {
-  if(!isdefined(level.idgun_weapons)) {
-    if(!isdefined(level.idgun_weapons)) {
+  if(!isDefined(level.idgun_weapons)) {
+    if(!isDefined(level.idgun_weapons)) {
       level.idgun_weapons = [];
     } else if(!isarray(level.idgun_weapons)) {
       level.idgun_weapons = array(level.idgun_weapons);
     }
     level.idgun_weapons[level.idgun_weapons.size] = getweapon("idgun");
   }
-  level zm::register_vehicle_damage_callback( & idgun_apply_vehicle_damage);
+  level zm::register_vehicle_damage_callback(&idgun_apply_vehicle_damage);
 }
 
 function is_idgun_damage(weapon) {
-  if(isdefined(level.idgun_weapons)) {
+  if(isDefined(level.idgun_weapons)) {
     if(isinarray(level.idgun_weapons, weapon)) {
       return true;
     }
@@ -65,7 +65,7 @@ function function_9b7ac6a9(weapon) {
 
 function function_6fbe2b2c(v_vortex_origin) {
   v_nearest_navmesh_point = getclosestpointonnavmesh(v_vortex_origin, 36, 15);
-  if(isdefined(v_nearest_navmesh_point)) {
+  if(isDefined(v_nearest_navmesh_point)) {
     f_distance = distance(v_vortex_origin, v_nearest_navmesh_point);
     if(f_distance < 41) {
       v_vortex_origin = v_vortex_origin + vectorscale((0, 0, 1), 36);
@@ -76,7 +76,7 @@ function function_6fbe2b2c(v_vortex_origin) {
 
 function function_2bd571b9() {
   self endon("disconnect");
-  while (true) {
+  while(true) {
     self waittill("projectile_impact", weapon, position, radius, attacker, normal);
     position = function_6fbe2b2c(position + (normal * 20));
     if(is_idgun_damage(weapon)) {
@@ -100,8 +100,8 @@ function function_b618ee82(einflictor, eattacker, idamage, idflags, smeansofdeat
 }
 
 function idgun_apply_vehicle_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, damagefromunderneath, modelindex, partname, vsurfacenormal) {
-  if(isdefined(weapon)) {
-    if(is_idgun_damage(weapon) && (!(isdefined(self.veh_idgun_allow_damage) && self.veh_idgun_allow_damage))) {
+  if(isDefined(weapon)) {
+    if(is_idgun_damage(weapon) && (!(isDefined(self.veh_idgun_allow_damage) && self.veh_idgun_allow_damage))) {
       idamage = 0;
     }
   }

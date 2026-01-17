@@ -70,7 +70,7 @@ demo_monitor(gump_trigs) {
     return;
   }
   test_ent = spawn(0, (0, 0, 0), "script_model");
-  test_ent setmodel("tag_origin");
+  test_ent setModel("tag_origin");
   test_ent hide();
   spectatecolor = vectorscale((1, 1, 1), 0.1);
   localclientnum = 0;
@@ -78,11 +78,11 @@ demo_monitor(gump_trigs) {
   level.gump_view_index_camera_movie = 101;
   level.gump_view_index_camera_edit = 102;
   level.gump_view_index_camera_dolly = 103;
-  prev_gump_info = spawnstruct();
+  prev_gump_info = spawnStruct();
   prev_gump_info.gump = "";
   prev_gump_info.view = -1;
   prev_gump_info thread gump_demo_jump_listener();
-  curr_gump_info = spawnstruct();
+  curr_gump_info = spawnStruct();
   curr_gump_info.gump = "";
   curr_gump_info.view = -1;
 

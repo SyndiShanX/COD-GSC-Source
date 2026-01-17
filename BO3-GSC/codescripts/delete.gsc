@@ -6,10 +6,10 @@
 #namespace delete;
 
 function main() {
-  assert(isdefined(self));
+  assert(isDefined(self));
   wait(0);
-  if(isdefined(self)) {
-    if(isdefined(self.classname)) {
+  if(isDefined(self)) {
+    if(isDefined(self.classname)) {
       if(self.classname == "" || self.classname == "" || self.classname == "") {
         println("");
         println((("" + self getentitynumber()) + "") + self.origin);

@@ -150,15 +150,15 @@ patrol_search_for_player() {
 
     if(dist_to_player < level.player.stealth_visible_distance) {
       str_message = "Player Behind Me: " + dist_to_player;
-      v_ai_forward = anglestoforward(self.angles);
+      v_ai_forward = anglesToForward(self.angles);
       v_dir_to_player = vectornormalize(level.player.origin - self.origin);
       dot = vectordot(v_ai_forward, v_dir_to_player);
 
       if(dot > level.player.stealth_visible_dot) {
         up = anglestoup(vectorscale((0, 1, 0), 90.0));
         v_start = self.origin + up * 60;
-        v_end = level.player geteye();
-        trace = bullettrace(v_start, v_end, 0, self);
+        v_end = level.player getEye();
+        trace = bulletTrace(v_start, v_end, 0, self);
 
         if(trace["fraction"] == 1) {
           str_message = "Looking at Player: " + dist_to_player;
@@ -177,8 +177,7 @@ patrol_search_for_player() {
       self.can_see_player_start_time = undefined;
     }
 
-    if(isDefined(str_message)) {
-    }
+    if(isDefined(str_message)) {}
 
     if(isDefined(self.can_see_player_start_time)) {
       time = gettime();
@@ -296,7 +295,7 @@ setup_stealth_event(str_save_name, str_patrol_spawner_targetname, str_category, 
   level notify("reset_patrol");
   level thread player_start_stealth_event(str_save_name);
   wait 0.01;
-  a_spawners = getentarray(str_patrol_spawner_targetname, "targetname");
+  a_spawners = getEntArray(str_patrol_spawner_targetname, "targetname");
 
   if(isDefined(a_spawners))
     simple_spawn_script_delay(a_spawners, maps\angola_stealth::spawn_fn_ai_jungle_patrol, 0, str_category, 0, 1, kill_guy_if_path_ends);

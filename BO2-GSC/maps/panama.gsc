@@ -43,12 +43,12 @@ main() {
   level thread setup_objectives();
   level thread maps\_objectives::objectives();
   level thread maps\panama_house::panama_wind_settings();
-  add_hint_string("open_grate", & "PANAMA_OPEN_GRATE");
-  add_hint_string("contextual_kill", & "PANAMA_CONTEXTUAL_KILL");
-  add_hint_string("street_warning", & "PANAMA_STREET_WARNING");
-  add_hint_string("hangar_warning", & "PANAMA_HANGAR_WARNING");
-  add_hint_string("player_jump_hint", & "PANAMA_PLAYER_JUMP_PROMPT");
-  add_hint_string("docks_warning", & "PANAMA_DOCKS_WARNING");
+  add_hint_string("open_grate", &"PANAMA_OPEN_GRATE");
+  add_hint_string("contextual_kill", &"PANAMA_CONTEXTUAL_KILL");
+  add_hint_string("street_warning", &"PANAMA_STREET_WARNING");
+  add_hint_string("hangar_warning", &"PANAMA_HANGAR_WARNING");
+  add_hint_string("player_jump_hint", &"PANAMA_PLAYER_JUMP_PROMPT");
+  add_hint_string("docks_warning", &"PANAMA_DOCKS_WARNING");
   setsaveddvar("vehicle_selfCollision", 0);
 }
 

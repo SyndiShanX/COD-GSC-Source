@@ -11,7 +11,7 @@
 
 function spawn_player_clone(player, origin = player.origin, forceweapon, forcemodel) {
   primaryweapons = player getweaponslistprimaries();
-  if(isdefined(forceweapon)) {
+  if(isDefined(forceweapon)) {
     weapon = forceweapon;
   } else {
     if(primaryweapons.size) {
@@ -22,7 +22,7 @@ function spawn_player_clone(player, origin = player.origin, forceweapon, forcemo
   }
   weaponmodel = weapon.worldmodel;
   spawner = getent("fake_player_spawner", "targetname");
-  if(isdefined(spawner)) {
+  if(isDefined(spawner)) {
     clone = spawner spawnfromspawner();
     clone.origin = origin;
     clone.isactor = 1;
@@ -30,11 +30,11 @@ function spawn_player_clone(player, origin = player.origin, forceweapon, forcemo
     clone = spawn("script_model", origin);
     clone.isactor = 0;
   }
-  if(isdefined(forcemodel)) {
-    clone setmodel(forcemodel);
+  if(isDefined(forcemodel)) {
+    clone setModel(forcemodel);
   } else {
     mdl_body = player getcharacterbodymodel();
-    clone setmodel(mdl_body);
+    clone setModel(mdl_body);
     bodyrenderoptions = player getcharacterbodyrenderoptions();
     clone setbodyrenderoptions(bodyrenderoptions, bodyrenderoptions, bodyrenderoptions);
   }
@@ -45,7 +45,7 @@ function spawn_player_clone(player, origin = player.origin, forceweapon, forcemo
   clone.is_inert = 1;
   clone.zombie_move_speed = "walk";
   clone.script_noteworthy = "corpse_clone";
-  clone.actor_damage_func = & clone_damage_func;
+  clone.actor_damage_func = &clone_damage_func;
   return clone;
 }
 

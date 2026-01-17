@@ -41,15 +41,15 @@ custom_joker_movement() {
   v_origin = self.weapon_model.origin - vectorscale((0, 0, 1), 5.0);
   self.weapon_model delete();
   m_lock = spawn("script_model", v_origin);
-  m_lock setmodel(level.chest_joker_model);
+  m_lock setModel(level.chest_joker_model);
   m_lock.angles = self.angles + vectorscale((0, 1, 0), 270.0);
-  m_lock playsound("zmb_hellbox_bear");
+  m_lock playSound("zmb_hellbox_bear");
   wait 0.5;
   level notify("weapon_fly_away_start");
   wait 1;
   m_lock rotateyaw(3000, 4, 4);
   wait 3;
-  v_angles = anglestoforward(self.angles - vectorscale((0, 1, 0), 90.0));
+  v_angles = anglesToForward(self.angles - vectorscale((0, 1, 0), 90.0));
   m_lock moveto(m_lock.origin + 20 * v_angles, 0.5, 0.5);
   m_lock waittill("movedone");
   m_lock moveto(m_lock.origin + -100 * v_angles, 0.5, 0.5);
@@ -62,7 +62,7 @@ custom_joker_movement() {
 custom_magic_box_timer_til_despawn(magic_box) {
   self endon("kill_weapon_movement");
   putbacktime = 12;
-  v_float = anglestoforward(magic_box.angles - vectorscale((0, 1, 0), 90.0)) * 40;
+  v_float = anglesToForward(magic_box.angles - vectorscale((0, 1, 0), 90.0)) * 40;
   self moveto(self.origin - v_float * 0.25, putbacktime, putbacktime * 0.5);
   wait(putbacktime);
 
@@ -161,7 +161,7 @@ magic_box_leaves() {
   self setclientfield("magicbox_leaving_fx", 1);
   self setclientfield("magicbox_open_fx", 0);
   self setzbarrierpiecestate(1, "closing");
-  self playsound("zmb_hellbox_rise");
+  self playSound("zmb_hellbox_rise");
 
   while(self getzbarrierpiecestate(1) == "closing")
     wait 0.1;
@@ -183,7 +183,7 @@ magic_box_leaves() {
 magic_box_opens() {
   self setclientfield("magicbox_open_fx", 1);
   self setzbarrierpiecestate(2, "opening");
-  self playsound("zmb_hellbox_open");
+  self playSound("zmb_hellbox_open");
 
   while(self getzbarrierpiecestate(2) == "opening")
     wait 0.1;
@@ -210,7 +210,7 @@ magic_box_closes() {
   self hidezbarrierpiece(5);
   self showzbarrierpiece(2);
   self setzbarrierpiecestate(2, "closing");
-  self playsound("zmb_hellbox_close");
+  self playSound("zmb_hellbox_close");
   self setclientfield("magicbox_open_fx", 0);
 
   while(self getzbarrierpiecestate(2) == "closing")

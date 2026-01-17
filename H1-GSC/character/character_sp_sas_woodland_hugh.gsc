@@ -5,7 +5,7 @@
 ********************************************************/
 
 main() {
-  self setmodel("body_sp_sas_woodland_support_a");
+  self setModel("body_sp_sas_woodland_support_a");
   self attach("head_sp_sas_woodland_hugh", "", 1);
   self.headmodel = "head_sp_sas_woodland_hugh";
   self.voice = "british";

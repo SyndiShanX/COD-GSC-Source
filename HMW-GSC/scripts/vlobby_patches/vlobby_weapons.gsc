@@ -12,7 +12,7 @@ positionweaponavatar_stub(var_0, var_1) {
   }
   var_3 = var_0;
 
-  if(isdefined(var_0.linker))
+  if(isDefined(var_0.linker))
     var_3 = var_0.linker;
 
   var_3 unlink();
@@ -65,7 +65,7 @@ agentplaylobbyanimakimbo(var_0, var_2) {
   var_5 = "idle";
   var_6 = "lobby_shotgun" + var_5;
 
-  if(!isdefined(self.lastanim) || self.lastanim != var_6) {
+  if(!isDefined(self.lastanim) || self.lastanim != var_6) {
     var_7 = 0.0;
 
     if(maps\mp\_utility::is_true(var_2))
@@ -85,7 +85,7 @@ agentplaylobbyanimakimbo(var_0, var_2) {
 monitorweaponammo_stub(player) {
   player endon("enter_vlobby");
 
-  for (;;) {
+  for(;;) {
     var_1 = player getweaponslistall();
 
     foreach(var_3 in var_1) {
@@ -101,7 +101,7 @@ monitor_weapon_ammo_count(player) {
   self endon("enter_lobby");
   self endon("applyLoadout");
 
-  while (level.in_firingrange) {
+  while(level.in_firingrange) {
     var_1 = self getfractionmaxammo(player);
 
     if(var_1 <= 0.25) {

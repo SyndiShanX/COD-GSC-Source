@@ -7,7 +7,7 @@
 // Decompiled by https://github.com/xensik/gsc-tool
 
 main() {
-  self setmodel("mp_body_ally_pmc_sniper");
+  self setModel("mp_body_ally_pmc_sniper");
   self setviewmodel("viewhands_pmc");
   self.voice = "taskforce";
 }

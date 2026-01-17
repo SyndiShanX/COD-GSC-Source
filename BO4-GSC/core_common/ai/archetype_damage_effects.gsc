@@ -6,7 +6,6 @@
 #include scripts\core_common\ai\archetype_damage_utility;
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\clientfield_shared;
-
 #namespace archetype_damage_effects;
 
 autoexec main() {
@@ -24,7 +23,7 @@ onactorkilledcallback(params) {
   onactorkilled();
 }
 
-private function_6fedb40d() {
+function_6fedb40d() {
   self endon(#"death");
 
   if(isDefined(self.var_73c36602) && self.var_73c36602) {
@@ -38,7 +37,7 @@ private function_6fedb40d() {
   self.var_73c36602 = 0;
 }
 
-private function_6eb1fbde() {
+function_6eb1fbde() {
   if(self.var_40543c03 === "fire") {
     self thread function_6fedb40d();
   }

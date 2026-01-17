@@ -24,7 +24,7 @@ monitorDamage() {
   if(!getDvarInt("scr_damagefeedback")) {
     return;
   }
-  for (;;) {
+  for(;;) {
     self waittill("damage", amount, attacker);
     if(IsPlayer(attacker))
       attacker updateDamageFeedback();

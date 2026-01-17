@@ -10,7 +10,6 @@
 #include scripts\zm_common\trials\zm_trial_restrict_loadout;
 #include scripts\zm_common\zm_perks;
 #include scripts\zm_common\zm_spawner;
-
 #namespace zm_perk_tortoise;
 
 autoexec __init__system__() {
@@ -25,9 +24,9 @@ __main__() {}
 
 enable_tortoise_perk_for_level() {
   if(function_8b1a219a()) {
-    zm_perks::register_perk_basic_info(#"specialty_shield", #"perk_tortoise", 2500, #"hash_61f2a9db3bdc745a", getweapon("zombie_perk_bottle_tortoise"), getweapon("zombie_perk_totem_tortoise"), #"zmperksvictorious");
+    zm_perks::register_perk_basic_info(#"specialty_shield", # "perk_tortoise", 2500, # "hash_61f2a9db3bdc745a", getweapon("zombie_perk_bottle_tortoise"), getweapon("zombie_perk_totem_tortoise"), # "zmperksvictorious");
   } else {
-    zm_perks::register_perk_basic_info(#"specialty_shield", #"perk_tortoise", 2500, #"zombie/perk_tortoise", getweapon("zombie_perk_bottle_tortoise"), getweapon("zombie_perk_totem_tortoise"), #"zmperksvictorious");
+    zm_perks::register_perk_basic_info(#"specialty_shield", # "perk_tortoise", 2500, # "zombie/perk_tortoise", getweapon("zombie_perk_bottle_tortoise"), getweapon("zombie_perk_totem_tortoise"), # "zmperksvictorious");
   }
 
   zm_perks::register_perk_precache_func(#"specialty_shield", &function_1441654f);
@@ -40,10 +39,10 @@ enable_tortoise_perk_for_level() {
 function_3cc019d7() {}
 
 function_1441654f() {
-  level.machine_assets[#"specialty_shield"] = spawnStruct();
-  level.machine_assets[#"specialty_shield"].weapon = getweapon("zombie_perk_bottle_tortoise");
-  level.machine_assets[#"specialty_shield"].off_model = "p7_zm_vending_nuke";
-  level.machine_assets[#"specialty_shield"].on_model = "p7_zm_vending_nuke";
+  level.machine_assets[# "specialty_shield"] = spawnStruct();
+  level.machine_assets[# "specialty_shield"].weapon = getweapon("zombie_perk_bottle_tortoise");
+  level.machine_assets[# "specialty_shield"].off_model = "p7_zm_vending_nuke";
+  level.machine_assets[# "specialty_shield"].on_model = "p7_zm_vending_nuke";
 }
 
 function_2ebeec84() {
@@ -100,14 +99,14 @@ function_81058b09(var_d92ac80e) {
     ai dodamage(1200, v_explosion_origin, self, self, "none", "MOD_EXPLOSIVE", 0, var_d92ac80e);
 
     if(isalive(ai)) {
-      if(ai.zm_ai_category === #"heavy" || ai.zm_ai_category === #"miniboss") {
+      if(ai.zm_ai_category === # "heavy" || ai.zm_ai_category === # "miniboss") {
         if(!(isDefined(ai.knockdown) && ai.knockdown)) {
           ai ai::stun();
         }
       } else {
         ai zombie_utility::setup_zombie_knockdown(v_explosion_origin);
       }
-    } else if(isDefined(ai) && (ai.zm_ai_category === #"basic" || ai.zm_ai_category === #"enhanced")) {
+    } else if(isDefined(ai) && (ai.zm_ai_category === # "basic" || ai.zm_ai_category === # "enhanced")) {
       ai zm_spawner::zombie_explodes_intopieces(0);
     }
 

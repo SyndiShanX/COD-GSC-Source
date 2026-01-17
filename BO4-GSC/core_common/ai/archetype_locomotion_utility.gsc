@@ -9,7 +9,6 @@
 #include scripts\core_common\ai\systems\behavior_state_machine;
 #include scripts\core_common\ai\systems\behavior_tree_utility;
 #include scripts\core_common\math_shared;
-
 #namespace aiutility;
 
 autoexec registerbehaviorscriptfunctions() {
@@ -111,7 +110,7 @@ autoexec registerbehaviorscriptfunctions() {
   behaviorstatemachine::registerbsmscriptapiinternal(#"delaymovement", &delaymovement);
 }
 
-private locomotionisonstairs(behaviortreeentity) {
+locomotionisonstairs(behaviortreeentity) {
   startnode = behaviortreeentity.traversestartnode;
 
   if(isDefined(startnode) && behaviortreeentity shouldstarttraversal()) {
@@ -123,7 +122,7 @@ private locomotionisonstairs(behaviortreeentity) {
   return false;
 }
 
-private locomotionshouldskipstairs(behaviortreeentity) {
+locomotionshouldskipstairs(behaviortreeentity) {
   assert(isDefined(behaviortreeentity._stairsstartnode) && isDefined(behaviortreeentity._stairsendnode));
   numtotalsteps = behaviortreeentity getblackboardattribute("_staircase_num_total_steps");
   stepssofar = behaviortreeentity getblackboardattribute("_staircase_num_steps");
@@ -149,7 +148,7 @@ private locomotionshouldskipstairs(behaviortreeentity) {
   return false;
 }
 
-private locomotionshouldlooponstairs(behaviortreeentity) {
+locomotionshouldlooponstairs(behaviortreeentity) {
   assert(isDefined(behaviortreeentity._stairsstartnode) && isDefined(behaviortreeentity._stairsendnode));
   numtotalsteps = behaviortreeentity getblackboardattribute("_staircase_num_total_steps");
   stepssofar = behaviortreeentity getblackboardattribute("_staircase_num_steps");
@@ -159,12 +158,12 @@ private locomotionshouldlooponstairs(behaviortreeentity) {
 
   if(direction == "staircase_up") {
     switch (exittype) {
-      case #"staircase_up_exit_l_3_stairs":
-      case #"staircase_up_exit_r_3_stairs":
+      case # "staircase_up_exit_l_3_stairs":
+      case # "staircase_up_exit_r_3_stairs":
         numoutsteps = 3;
         break;
-      case #"staircase_up_exit_r_4_stairs":
-      case #"staircase_up_exit_l_4_stairs":
+      case # "staircase_up_exit_r_4_stairs":
+      case # "staircase_up_exit_l_4_stairs":
         numoutsteps = 4;
         break;
     }
@@ -178,14 +177,14 @@ private locomotionshouldlooponstairs(behaviortreeentity) {
   return true;
 }
 
-private locomotionstairsstart(behaviortreeentity) {
+locomotionstairsstart(behaviortreeentity) {
   startnode = behaviortreeentity.traversestartnode;
   endnode = behaviortreeentity.traverseendnode;
   assert(isDefined(startnode) && isDefined(endnode));
   behaviortreeentity._stairsstartnode = startnode;
   behaviortreeentity._stairsendnode = endnode;
 
-  if(startnode.type == #"begin") {
+  if(startnode.type == # "begin") {
     direction = "staircase_down";
   } else {
     direction = "staircase_up";
@@ -237,17 +236,17 @@ private locomotionstairsstart(behaviortreeentity) {
   return true;
 }
 
-private locomotionstairloopstart(behaviortreeentity) {
+locomotionstairloopstart(behaviortreeentity) {
   assert(isDefined(behaviortreeentity._stairsstartnode) && isDefined(behaviortreeentity._stairsendnode));
   behaviortreeentity setblackboardattribute("_staircase_state", "staircase_loop");
 }
 
-private locomotionstairsend(behaviortreeentity) {
+locomotionstairsend(behaviortreeentity) {
   behaviortreeentity setblackboardattribute("_staircase_state", undefined);
   behaviortreeentity setblackboardattribute("_staircase_direction", undefined);
 }
 
-private locomotionpainbehaviorcondition(entity) {
+locomotionpainbehaviorcondition(entity) {
   return entity haspath() && entity hasvalidinterrupt("pain");
 }
 
@@ -255,7 +254,7 @@ clearpathfromscript(behaviortreeentity) {
   behaviortreeentity clearpath();
 }
 
-private noncombatlocomotioncondition(behaviortreeentity) {
+noncombatlocomotioncondition(behaviortreeentity) {
   if(!behaviortreeentity haspath()) {
     return false;
   }
@@ -271,7 +270,7 @@ private noncombatlocomotioncondition(behaviortreeentity) {
   return true;
 }
 
-private combatlocomotioncondition(behaviortreeentity) {
+combatlocomotioncondition(behaviortreeentity) {
   if(!behaviortreeentity haspath()) {
     return false;
   }
@@ -287,13 +286,13 @@ private combatlocomotioncondition(behaviortreeentity) {
   return false;
 }
 
-private setdesiredstanceformovement(behaviortreeentity) {
+setdesiredstanceformovement(behaviortreeentity) {
   if(behaviortreeentity getblackboardattribute("_stance") != "stand") {
     behaviortreeentity setblackboardattribute("_desired_stance", "stand");
   }
 }
 
-private locomotionshouldtraverse(behaviortreeentity) {
+locomotionshouldtraverse(behaviortreeentity) {
   startnode = behaviortreeentity.traversestartnode;
 
   if(isDefined(startnode) && behaviortreeentity shouldstarttraversal()) {
@@ -305,7 +304,7 @@ private locomotionshouldtraverse(behaviortreeentity) {
   return false;
 }
 
-private locomotionshouldparametrictraverse(entity) {
+locomotionshouldparametrictraverse(entity) {
   startnode = entity.traversestartnode;
 
   if(isDefined(startnode) && entity shouldstarttraversal()) {
@@ -319,7 +318,7 @@ private locomotionshouldparametrictraverse(entity) {
   return false;
 }
 
-private function_5ef5b35a(behaviortreeentity) {
+function_5ef5b35a(behaviortreeentity) {
   startnode = behaviortreeentity.traversestartnode;
 
   if(isDefined(startnode) && behaviortreeentity function_420d1e6b()) {
@@ -331,7 +330,7 @@ private function_5ef5b35a(behaviortreeentity) {
   return false;
 }
 
-private function_8a8c5d44(entity) {
+function_8a8c5d44(entity) {
   startnode = entity.traversestartnode;
 
   if(isDefined(startnode) && entity function_420d1e6b()) {
@@ -345,7 +344,7 @@ private function_8a8c5d44(entity) {
   return false;
 }
 
-private traversesetup(behaviortreeentity) {
+traversesetup(behaviortreeentity) {
   behaviortreeentity setblackboardattribute("_stance", "stand");
   behaviortreeentity setblackboardattribute("_traversal_type", behaviortreeentity.traversestartnode.animscript);
   return true;
@@ -365,10 +364,10 @@ traverseactionstart(behaviortreeentity, asmstatename) {
 
   result = behaviortreeentity astsearch(asmstatename);
 
-  if(!isDefined(result[#"animation"])) {
+  if(!isDefined(result[# "animation"])) {
     record3dtext("<dev string:x6e>", self.origin + (0, 0, 16), (1, 0, 0), "<dev string:x4d>");
   } else {
-    record3dtext("<dev string:xa6>" + (ishash(result[#"animation"]) ? function_9e72a96(result[#"animation"]) : result[#"animation"]), self.origin + (0, 0, 16), (1, 0, 0), "<dev string:x4d>");
+    record3dtext("<dev string:xa6>" + (ishash(result[# "animation"]) ? function_9e72a96(result[# "animation"]) : result[# "animation"]), self.origin + (0, 0, 16), (1, 0, 0), "<dev string:x4d>");
   }
 
   animationstatenetworkutility::requeststate(behaviortreeentity, asmstatename);
@@ -387,11 +386,11 @@ wpn_debug_bot_joinleave(behaviortreeentity, asmstatename) {
   return 4;
 }
 
-private disablerepath(entity) {
+disablerepath(entity) {
   entity.disablerepath = 1;
 }
 
-private enablerepath(entity) {
+enablerepath(entity) {
   entity.disablerepath = 0;
 }
 
@@ -416,7 +415,7 @@ delaymovement(entity) {
   return true;
 }
 
-private shouldadjuststanceattacticalwalk(behaviortreeentity) {
+shouldadjuststanceattacticalwalk(behaviortreeentity) {
   stance = behaviortreeentity getblackboardattribute("_stance");
 
   if(stance != "stand") {
@@ -426,18 +425,18 @@ private shouldadjuststanceattacticalwalk(behaviortreeentity) {
   return false;
 }
 
-private adjuststancetofaceenemyinitialize(behaviortreeentity) {
+adjuststancetofaceenemyinitialize(behaviortreeentity) {
   behaviortreeentity.newenemyreaction = 0;
   behaviortreeentity setblackboardattribute("_desired_stance", "stand");
   behaviortreeentity orientmode("face enemy");
   return true;
 }
 
-private adjuststancetofaceenemyterminate(behaviortreeentity) {
+adjuststancetofaceenemyterminate(behaviortreeentity) {
   behaviortreeentity setblackboardattribute("_stance", "stand");
 }
 
-private tacticalwalkactionstart(behaviortreeentity) {
+tacticalwalkactionstart(behaviortreeentity) {
   cleararrivalpos(behaviortreeentity);
   resetcoverparameters(behaviortreeentity);
   setcanbeflanked(behaviortreeentity, 0);
@@ -446,7 +445,7 @@ private tacticalwalkactionstart(behaviortreeentity) {
   return true;
 }
 
-private validjukedirection(entity, entitynavmeshposition, forwardoffset, lateraloffset) {
+validjukedirection(entity, entitynavmeshposition, forwardoffset, lateraloffset) {
   jukenavmeshthreshold = 6;
   forwardposition = entity.origin + lateraloffset + forwardoffset;
   backwardposition = entity.origin + lateraloffset - forwardoffset;
@@ -507,7 +506,7 @@ calculatejukedirection(entity, entityradius, jukedistance) {
   return defaultdirection;
 }
 
-private calculatedefaultjukedirection(entity) {
+calculatedefaultjukedirection(entity) {
   jukedistance = 30;
   entityradius = 15;
 

@@ -43,19 +43,17 @@ main() {
   footstep_effects();
   treadfx_override();
   maps\createfx\trainer_fx::main();
-
 }
 
 hummer_steam() {
   hummer_steam = getent("hummer_steam", "targetname");
-  playfx(getfx("humvee_radiator_steam"), hummer_steam.origin);
+  playFX(getfx("humvee_radiator_steam"), hummer_steam.origin);
   hummer_steam thread play_sound_in_space("scn_trainer_radiator_start");
   wait(2);
   hummer_steam thread play_loop_sound_on_entity("scn_trainer_radiator_loop");
 }
 
 footstep_effects() {
-
   //Regular footstep fx
   animscripts\utility::setFootstepEffect("wood", loadfx("impacts/footstep_dust"));
   animscripts\utility::setFootstepEffect("sand", loadfx("impacts/footstep_dust"));
@@ -105,11 +103,9 @@ footstep_effects() {
   animscripts\utility::setNotetrackEffect("knee fx right", "J_Knee_RI", "concrete", loadfx("impacts/footstep_dust"));
   animscripts\utility::setNotetrackEffect("knee fx right", "J_Knee_RI", "rock", loadfx("impacts/footstep_dust"));
   animscripts\utility::setNotetrackEffect("knee fx right", "J_Knee_RI", "mud", loadfx("impacts/footstep_mud"));
-
 }
 
 treadfx_override() {
-
   maps\_treadfx::setvehiclefx("pavelow", "brick", "treadfx/heli_sand_large");
   maps\_treadfx::setvehiclefx("pavelow", "bark", "treadfx/heli_sand_large");
   maps\_treadfx::setvehiclefx("pavelow", "carpet", "treadfx/heli_sand_large");
@@ -264,5 +260,4 @@ treadfx_override() {
   maps\_treadfx::setvehiclefx("apache", "painted metal", "treadfx/heli_sand_default");
   maps\_treadfx::setvehiclefx("apache", "default", "treadfx/heli_sand_default");
   maps\_treadfx::setvehiclefx("apache", "none", "treadfx/heli_sand_default");
-
 }

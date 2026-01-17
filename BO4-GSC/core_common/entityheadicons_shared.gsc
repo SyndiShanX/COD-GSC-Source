@@ -6,7 +6,6 @@
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\gameobjects_shared;
 #include scripts\core_common\util_shared;
-
 #namespace entityheadicons;
 
 init_shared() {
@@ -29,7 +28,7 @@ setentityheadicon(team, owner, objective) {
   }
 
   if(!isDefined(self.entityheadiconteam)) {
-    self.entityheadiconteam = #"none";
+    self.entityheadiconteam = # "none";
     self.entityheadobjectives = [];
   }
 
@@ -53,13 +52,13 @@ setentityheadicon(team, owner, objective) {
       }
 
       if(isDefined(objective)) {
-        if(team !== #"none") {
+        if(team !== # "none") {
           owner updateentityheadteamobjective(self, team, objective);
         } else {
           owner updateentityheadclientobjective(self, objective);
         }
       }
-    } else if(isDefined(owner) && team != #"none") {
+    } else if(isDefined(owner) && team != # "none") {
       if(isDefined(objective)) {
         owner updateentityheadteamobjective(self, team, objective);
       }
@@ -88,7 +87,7 @@ updateentityheadclientobjective(entity, objective) {
 destroyheadiconsondeath() {
   self notify(#"destroyheadiconsondeath_singleton");
   self endon(#"destroyheadiconsondeath_singleton");
-  self waittill(#"death", #"hacked");
+  self waittill(#"death", # "hacked");
   destroyentityheadicons();
 }
 

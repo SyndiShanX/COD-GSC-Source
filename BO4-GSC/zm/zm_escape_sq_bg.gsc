@@ -19,7 +19,6 @@
 #include scripts\zm_common\zm_customgame;
 #include scripts\zm_common\zm_net;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_escape_sq_bg;
 
 autoexec __init__system__() {
@@ -28,7 +27,7 @@ autoexec __init__system__() {
 
 __init__() {
   level flag::init(#"warden_blundergat_obtained");
-  level._effect[#"ee_skull_shot"] = #"electric/fx_elec_sparks_burst_sm_omni_blue_os";
+  level._effect[# "ee_skull_shot"] = # "electric/fx_elec_sparks_burst_sm_omni_blue_os";
 }
 
 __main__() {
@@ -96,7 +95,7 @@ sq_bg_macguffin_think() {
     s_result = self waittill(#"damage");
 
     if(isplayer(s_result.attacker) && (s_result.weapon == getweapon(#"tomahawk_t8") || s_result.weapon == getweapon(#"tomahawk_t8_upgraded"))) {
-      playFX(level._effect[#"ee_skull_shot"], self.origin);
+      playFX(level._effect[# "ee_skull_shot"], self.origin);
       self thread wait_and_hide_sq_bg_macguffin();
     }
   }
@@ -104,7 +103,7 @@ sq_bg_macguffin_think() {
 
 wait_and_hide_sq_bg_macguffin() {
   self notify(#"restart_show_timer");
-  self endon(#"restart_show_timer", #"caught_by_tomahawk", #"sq_bg_macguffin_received_by_player", #"death");
+  self endon(#"restart_show_timer", # "caught_by_tomahawk", # "sq_bg_macguffin_received_by_player", # "death");
   wait 1.6;
 
   if(isDefined(self)) {
@@ -133,7 +132,7 @@ tomahawk_the_macguffin(e_grenade, n_grenade_charge_power) {
       mdl_skull notify(#"caught_by_tomahawk");
       mdl_skull.origin = e_grenade.origin;
       mdl_skull linkto(mdl_tomahawk);
-      mdl_skull clientfield::set("" + #"afterlife_entity_visibility", 2);
+      mdl_skull clientfield::set("" + # "afterlife_entity_visibility", 2);
       self thread zm_weap_tomahawk::tomahawk_return_player(mdl_tomahawk, undefined, 800);
       self thread give_player_macguffin_upon_receipt(mdl_tomahawk, mdl_skull);
       return true;
@@ -195,7 +194,7 @@ give_sq_bg_reward(var_dd7441ab) {
   t_near = spawn("trigger_radius", var_dd7441ab.origin, 0, 196, 64);
   t_near thread sq_bg_spawn_rumble();
   mdl_reward = zm_utility::spawn_weapon_model(getweapon(#"ww_blundergat_t8"), undefined, var_dd7441ab.origin + (0, 0, 6), var_dd7441ab.angles);
-  mdl_reward clientfield::set("" + #"bg_spawn_fx", 1);
+  mdl_reward clientfield::set("" + # "bg_spawn_fx", 1);
   mdl_reward thread scene::play(#"p8_fxanim_zm_esc_blundergat_fireplace_hover_bundle", mdl_reward);
 
   while(isDefined(self)) {
@@ -204,7 +203,7 @@ give_sq_bg_reward(var_dd7441ab) {
 
     if(zm_utility::can_use(e_player, 1) && e_player.currentweapon.name != "none") {
       if(e_player hasweapon(getweapon(#"ww_blundergat_t8")) || e_player hasweapon(getweapon(#"ww_blundergat_t8_upgraded")) || e_player hasweapon(getweapon(#"ww_blundergat_acid_t8")) || e_player hasweapon(getweapon(#"ww_blundergat_acid_t8_upgraded")) || e_player hasweapon(getweapon(#"ww_blundergat_fire_t8")) || e_player hasweapon(getweapon(#"ww_blundergat_fire_t8_upgraded")) || e_player hasweapon(getweapon(#"ww_blundergat_fire_t8_unfinished"))) {
-        self sethintstringforplayer(e_player, #"hash_e8fb80933bfb033");
+        self sethintstringforplayer(e_player, # "hash_e8fb80933bfb033");
 
         foreach(e_active_player in level.activeplayers) {
           if(e_active_player != e_player) {
@@ -218,11 +217,11 @@ give_sq_bg_reward(var_dd7441ab) {
           self setvisibletoplayer(e_active_player);
 
           if(function_8b1a219a()) {
-            self sethintstringforplayer(e_player, #"hash_13148440ddb20104");
+            self sethintstringforplayer(e_player, # "hash_13148440ddb20104");
             continue;
           }
 
-          self sethintstringforplayer(e_player, #"hash_3d510922bc950f08");
+          self sethintstringforplayer(e_player, # "hash_3d510922bc950f08");
         }
 
         continue;
@@ -237,8 +236,8 @@ give_sq_bg_reward(var_dd7441ab) {
   t_near delete();
 }
 
-private function_d61275a7() {
-  self clientfield::set("" + #"bg_spawn_fx", 0);
+function_d61275a7() {
+  self clientfield::set("" + # "bg_spawn_fx", 0);
   self ghost();
   wait 5;
   self delete();
@@ -267,5 +266,5 @@ take_old_weapon_and_give_reward() {
   self giveweapon(getweapon(#"ww_blundergat_t8"));
   self switchtoweapon(getweapon(#"ww_blundergat_t8"));
   level flag::set(#"warden_blundergat_obtained");
-  self thread zm_audio::create_and_play_dialog(#"magicbox", #"wonder");
+  self thread zm_audio::create_and_play_dialog(#"magicbox", # "wonder");
 }

@@ -39,7 +39,6 @@
 #include scripts\mp_common\player\player_damage;
 #include scripts\wz_common\wz_ai_utils;
 #include scripts\wz_common\wz_ai_zombie;
-
 #namespace wz_ai_brutus;
 
 autoexec __init__system__() {
@@ -58,16 +57,16 @@ __init__() {
 
 __main__() {}
 
-private function_517fd069() {
+function_517fd069() {
   blackboard::createblackboardforentity(self);
   ai::createinterfaceforentity(self);
   self.___archetypeonanimscriptedcallback = &function_666b2409;
   self.___archetypeonbehavecallback = &function_3cdbfffd;
 }
 
-private function_3cdbfffd(entity) {}
+function_3cdbfffd(entity) {}
 
-private function_666b2409(entity) {
+function_666b2409(entity) {
   self.__blackboard = undefined;
   self function_517fd069();
 }
@@ -116,7 +115,7 @@ function_6a482c74(params) {
 
 function_bad305c7() {
   self.var_2cee3556 = [];
-  self.var_2cee3556[#"brutus_base_itemlist_all"] = 15;
+  self.var_2cee3556[# "brutus_base_itemlist_all"] = 15;
 }
 
 function_6090f71a() {
@@ -132,7 +131,7 @@ function_6090f71a() {
   self clientfield::set("brutus_spawn_clientfield", 1);
   var_7dd9d338 = "c_t8_zmb_mob_brutus_baton";
 
-  if(self.subarchetype === #"brutus_special") {
+  if(self.subarchetype === # "brutus_special") {
     var_7dd9d338 = "c_t8_zmb_mob_brutus_boss_baton";
   }
 
@@ -160,7 +159,7 @@ on_brutus_killed(params) {
   self destructserverutils::function_629a8d54(self, "tag_weapon_right");
 }
 
-private registerbehaviorscriptfunctions() {
+registerbehaviorscriptfunctions() {
   assert(isscriptfunctionptr(&function_3006441d));
   behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_df1d28cebbb75f6", &function_3006441d);
   assert(isscriptfunctionptr(&function_3bda3c55));
@@ -180,18 +179,18 @@ private registerbehaviorscriptfunctions() {
   animationstatenetwork::registernotetrackhandlerfunction("hit_ground", &function_85e8940a);
 }
 
-private function_5ca455a0(entity) {
+function_5ca455a0(entity) {
   entity val::set(#"brutus_cleanup", "blockingpain", 1);
   entity.var_8a96267d = undefined;
   entity.var_bc0e449a = 1;
 }
 
-private function_d996f07c(entity) {
+function_d996f07c(entity) {
   entity notify(#"is_underground");
   entity.var_bc0e449a = undefined;
 }
 
-private function_9d76e96c(entity) {
+function_9d76e96c(entity) {
   entity val::set(#"brutus_cleanup", "allowoffnavmesh", 0);
   entity val::reset(#"brutus_cleanup", "blockingpain");
   entity ghost();
@@ -201,12 +200,12 @@ private function_9d76e96c(entity) {
   entity clientfield::set("brutus_spawn_clientfield", 0);
 }
 
-private function_e2ab1df7(entity) {
+function_e2ab1df7(entity) {
   entity solid();
   entity.var_8ba6ede3 = undefined;
 }
 
-private function_1bd1ebe7(entity) {
+function_1bd1ebe7(entity) {
   entity val::reset(#"brutus_cleanup", "allowoffnavmesh");
   entity show();
   entity clientfield::set("brutus_spawn_clientfield", 1);
@@ -214,7 +213,7 @@ private function_1bd1ebe7(entity) {
   entity notify(#"not_underground");
 }
 
-private function_3006441d(entity) {
+function_3006441d(entity) {
   if(!isDefined(entity.var_722a34a3) || !isDefined(entity.var_52e3b294) || distancesquared(entity.var_52e3b294, entity.origin) > 10 * 10) {
     return false;
   }
@@ -222,15 +221,15 @@ private function_3006441d(entity) {
   return true;
 }
 
-private function_4ec678fe(entity) {
+function_4ec678fe(entity) {
   if(!isDefined(entity.var_722a34a3)) {
     return;
   }
 
   monkeybomb = entity.var_722a34a3;
   level notify(#"hash_79c0225ea09cd215", {
-    #brutus: self, 
-    #var_cee6bd0b: monkeybomb.origin, 
+    #brutus: self,
+    #var_cee6bd0b: monkeybomb.origin,
     #var_569d804d: monkeybomb.angles
   });
 
@@ -241,7 +240,7 @@ private function_4ec678fe(entity) {
   monkeybomb delete();
 }
 
-private function_3bda3c55(entity) {
+function_3bda3c55(entity) {
   if(entity.var_96b5e3f1 > gettime()) {
     return false;
   }
@@ -269,11 +268,11 @@ private function_3bda3c55(entity) {
   return true;
 }
 
-private function_f4a61e6a(entity) {
+function_f4a61e6a(entity) {
   entity.var_96b5e3f1 = gettime() + int(entity ai::function_9139c839().var_d5427206 * 1000);
 }
 
-private function_85e8940a(entity) {
+function_85e8940a(entity) {
   if(isDefined(entity.var_bc0e449a) && entity.var_bc0e449a) {
     function_9d76e96c(entity);
     return;
@@ -309,7 +308,7 @@ private function_85e8940a(entity) {
   }
 }
 
-private function_97f51aa3(v_org) {
+function_97f51aa3(v_org) {
   grenade = self magicgrenadetype(getweapon(#"willy_pete"), v_org, (0, 0, 0), 0.4);
   grenade.owner = self;
 }
@@ -322,7 +321,7 @@ function_530c54e3() {
   if(isalive(self)) {}
 }
 
-private function_55bb9c72(attacker, damage, weapon, var_81dcad68, damagemultiplier) {
+function_55bb9c72(attacker, damage, weapon, var_81dcad68, damagemultiplier) {
   if(!(isDefined(self.hashelmet) && self.hashelmet)) {
     return (damage * var_81dcad68);
   }
@@ -336,7 +335,7 @@ private function_55bb9c72(attacker, damage, weapon, var_81dcad68, damagemultipli
   return damage * damagemultiplier;
 }
 
-private function_83a6d3ae(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, poffsettime, boneindex) {
+function_83a6d3ae(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, poffsettime, boneindex) {
   var_9000ab2 = isDefined(level.brutus_damage_percent) ? level.brutus_damage_percent : 0.5;
   var_81dcad68 = 1.5;
 
@@ -398,10 +397,10 @@ private function_83a6d3ae(inflictor, attacker, damage, flags, meansofdeath, weap
     final_damage = self.health + 1;
   }
 
-    return final_damage;
+  return final_damage;
 }
 
-private getclosestnode(entity, nodes) {
+getclosestnode(entity, nodes) {
   if(nodes.size > 16) {
     filtered_nodes = arraysortclosest(nodes, entity.origin, 16);
   } else {
@@ -432,7 +431,7 @@ private getclosestnode(entity, nodes) {
 
 function_b510a832() {
   level endon(#"game_ended");
-  self endon(#"death", #"state_changed");
+  self endon(#"death", # "state_changed");
   start_node = getclosestnode(self, self.patrol_path.path);
   start_index = 0;
 
@@ -454,7 +453,7 @@ function_b510a832() {
 
       self.var_80780af2 = next_goal;
       self.var_9a79d89d = next_goal;
-      waitresult = self waittilltimeout(30, #"goal");
+      waitresult = self waittilltimeout(30, # "goal");
 
       if(isDefined(self.var_50826790) && self.var_50826790) {
         self.var_ef59b90 = 5;

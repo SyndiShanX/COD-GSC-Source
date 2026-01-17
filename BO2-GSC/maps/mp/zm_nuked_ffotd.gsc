@@ -20,23 +20,23 @@ main_start() {
 main_end() {
   setdvar("zombiemode_path_minz_bias", 28);
   collision7 = spawn("script_model", (-490, 963, 63));
-  collision7 setmodel("collision_player_256x256x10");
+  collision7 setModel("collision_player_256x256x10");
   collision7.angles = (0, 25.2, -90);
   collision7 ghost();
   collision9 = spawn("script_model", (-1349, 1016, 0));
-  collision9 setmodel("collision_wall_128x128x10_standard");
+  collision9 setModel("collision_wall_128x128x10_standard");
   collision9.angles = vectorscale((0, 1, 0), 339.8);
   collision9 ghost();
   collision11 = spawn("script_model", (1074, 584, 126));
-  collision11 setmodel("collision_wall_64x64x10_standard");
+  collision11 setModel("collision_wall_64x64x10_standard");
   collision11.angles = vectorscale((0, 1, 0), 15.0);
   collision11 ghost();
   collision12 = spawn("script_model", (380, -112, 150));
-  collision12 setmodel("collision_wall_128x128x10_standard");
+  collision12 setModel("collision_wall_128x128x10_standard");
   collision12.angles = vectorscale((0, 1, 0), 275.0);
   collision12 ghost();
   collision13 = spawn("script_model", (501, 212, 64));
-  collision13 setmodel("collision_wall_64x64x10_standard");
+  collision13 setModel("collision_wall_64x64x10_standard");
   collision13.angles = (0, 10.8, 90);
   collision13 ghost();
   level thread prone_under_garage_door_exploit();

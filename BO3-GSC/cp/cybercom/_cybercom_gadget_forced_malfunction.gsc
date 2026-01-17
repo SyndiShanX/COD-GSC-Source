@@ -27,15 +27,15 @@ function init() {
 
 function main() {
   cybercom_gadget::registerability(1, 2);
-  level.cybercom.forced_malfunction = spawnstruct();
-  level.cybercom.forced_malfunction._is_flickering = & _is_flickering;
-  level.cybercom.forced_malfunction._on_flicker = & _on_flicker;
-  level.cybercom.forced_malfunction._on_give = & _on_give;
-  level.cybercom.forced_malfunction._on_take = & _on_take;
-  level.cybercom.forced_malfunction._on_connect = & _on_connect;
-  level.cybercom.forced_malfunction._on = & _on;
-  level.cybercom.forced_malfunction._off = & _off;
-  level.cybercom.forced_malfunction._is_primed = & _is_primed;
+  level.cybercom.forced_malfunction = spawnStruct();
+  level.cybercom.forced_malfunction._is_flickering = &_is_flickering;
+  level.cybercom.forced_malfunction._on_flicker = &_on_flicker;
+  level.cybercom.forced_malfunction._on_give = &_on_give;
+  level.cybercom.forced_malfunction._on_take = &_on_take;
+  level.cybercom.forced_malfunction._on_connect = &_on_connect;
+  level.cybercom.forced_malfunction._on = &_on;
+  level.cybercom.forced_malfunction._off = &_off;
+  level.cybercom.forced_malfunction._is_primed = &_is_primed;
 }
 
 function _is_flickering(slot) {}
@@ -47,8 +47,8 @@ function _on_give(slot, weapon) {
   if(self hascybercomability("cybercom_forcedmalfunction") == 2) {
     self.cybercom.var_110c156a = getdvarint("scr_forced_malfunction_upgraded_count", 4);
   }
-  self.cybercom.targetlockcb = & _get_valid_targets;
-  self.cybercom.targetlockrequirementcb = & _lock_requirement;
+  self.cybercom.targetlockcb = &_get_valid_targets;
+  self.cybercom.targetlockrequirementcb = &_lock_requirement;
   self thread cybercom::function_b5f4e597(weapon);
   self cybercom::function_8257bcb3("base_rifle", 5);
   self cybercom::function_8257bcb3("fem_rifle", 3);
@@ -74,7 +74,7 @@ function _off(slot, weapon) {
 }
 
 function _is_primed(slot, weapon) {
-  if(!(isdefined(self.cybercom.is_primed) && self.cybercom.is_primed)) {
+  if(!(isDefined(self.cybercom.is_primed) && self.cybercom.is_primed)) {
     assert(self.cybercom.activecybercomweapon == weapon);
     self thread cybercom::weaponlockwatcher(slot, weapon, self.cybercom.var_110c156a);
     self.cybercom.is_primed = 1;
@@ -86,11 +86,11 @@ function private _lock_requirement(target) {
     self cybercom::function_29bf9dee(target, 2);
     return false;
   }
-  if(isdefined(target.hijacked) && target.hijacked) {
+  if(isDefined(target.hijacked) && target.hijacked) {
     self cybercom::function_29bf9dee(target, 4);
     return false;
   }
-  if(isdefined(target.is_disabled) && target.is_disabled) {
+  if(isDefined(target.is_disabled) && target.is_disabled) {
     self cybercom::function_29bf9dee(target, 6);
     return false;
   }
@@ -98,7 +98,7 @@ function private _lock_requirement(target) {
     self cybercom::function_29bf9dee(target, 2);
     return false;
   }
-  if(isactor(target) && isdefined(target.archetype) && (target.archetype == "zombie" || target.archetype == "direwolf")) {
+  if(isactor(target) && isDefined(target.archetype) && (target.archetype == "zombie" || target.archetype == "direwolf")) {
     self cybercom::function_29bf9dee(target, 2);
     return false;
   }
@@ -108,7 +108,7 @@ function private _lock_requirement(target) {
   if(isactor(target) && !target isonground() && !target cybercom::function_421746e0()) {
     return false;
   }
-  if(isactor(target) && isdefined(target.weapon) && target.weapon.name == "none") {
+  if(isactor(target) && isDefined(target.weapon) && target.weapon.name == "none") {
     self cybercom::function_29bf9dee(target, 2);
     return false;
   }
@@ -123,7 +123,7 @@ function private _activate_forced_malfunction(slot, weapon) {
   aborted = 0;
   fired = 0;
   foreach(item in self.cybercom.lock_targets) {
-    if(isdefined(item.target) && (isdefined(item.inrange) && item.inrange)) {
+    if(isDefined(item.target) && (isDefined(item.inrange) && item.inrange)) {
       if(item.inrange == 1) {
         if(!cybercom::targetisvalid(item.target, weapon)) {
           continue;
@@ -144,7 +144,7 @@ function private _activate_forced_malfunction(slot, weapon) {
   }
   if(fired && isplayer(self)) {
     itemindex = getitemindexfromref("cybercom_forcedmalfunction");
-    if(isdefined(itemindex)) {
+    if(isDefined(itemindex)) {
       self adddstat("ItemStats", itemindex, "stats", "assists", "statValue", fired);
       self adddstat("ItemStats", itemindex, "stats", "used", "statValue", 1);
     }
@@ -156,7 +156,7 @@ function private function_586fec95(attacker, disablefor, weapon) {
   self endon("death");
   self clientfield::set("forced_malfunction", 1);
   self.is_disabled = 1;
-  self dodamage(5, self.origin, (isdefined(attacker) ? attacker : undefined), undefined, "none", "MOD_UNKNOWN", 0, weapon, -1, 1);
+  self dodamage(5, self.origin, (isDefined(attacker) ? attacker : undefined), undefined, "none", "MOD_UNKNOWN", 0, weapon, -1, 1);
   self waittillmatch("bhtn_action_terminate");
   self.is_disabled = 0;
   self clientfield::set("forced_malfunction", 0);
@@ -165,16 +165,16 @@ function private function_586fec95(attacker, disablefor, weapon) {
 function private function_609fcb0a(attacker, disablefor, weapon) {
   self endon("death");
   if(!cybercom::function_76e3026d(self)) {
-    self kill(self.origin, (isdefined(attacker) ? attacker : undefined));
+    self kill(self.origin, (isDefined(attacker) ? attacker : undefined));
     return;
   }
   self clientfield::set("forced_malfunction", 1);
   self.is_disabled = 1;
   miss = 100;
-  while (isalive(self) && gettime() < disablefor) {
+  while(isalive(self) && gettime() < disablefor) {
     if((getdvarint("scr_malfunction_rate_of_failure", 25) + miss) > randomint(100)) {
       miss = 0;
-      self dodamage(5, self.origin, (isdefined(attacker) ? attacker : undefined), undefined, "none", "MOD_UNKNOWN", 0, weapon, -1, 1);
+      self dodamage(5, self.origin, (isDefined(attacker) ? attacker : undefined), undefined, "none", "MOD_UNKNOWN", 0, weapon, -1, 1);
       self waittillmatch("bhtn_action_terminate");
     } else {
       miss = miss + 10;
@@ -189,7 +189,7 @@ function private _force_malfunction(attacker, disabletimemsec) {
   self endon("death");
   weapon = getweapon("gadget_forced_malfunction");
   self notify("hash_f8c5dd60", weapon, attacker);
-  if(isdefined(disabletimemsec)) {
+  if(isDefined(disabletimemsec)) {
     disabletime = disabletimemsec;
   } else {
     disabletime = getdvarint("scr_malfunction_duration", 15) * 1000;
@@ -198,7 +198,7 @@ function private _force_malfunction(attacker, disabletimemsec) {
     return;
   }
   if(self cybercom::function_421746e0()) {
-    self kill(self.origin, (isdefined(attacker) ? attacker : undefined), undefined, weapon);
+    self kill(self.origin, (isDefined(attacker) ? attacker : undefined), undefined, weapon);
     return;
   }
   disablefor = (gettime() + disabletime) + randomint(4000);
@@ -218,7 +218,7 @@ function private _force_malfunction(attacker, disabletimemsec) {
   self.goalradius = 32;
   if(self isactorshooting()) {
     base = "base_rifle";
-    if(isdefined(self.voiceprefix) && getsubstr(self.voiceprefix, 7) == "f") {
+    if(isDefined(self.voiceprefix) && getsubstr(self.voiceprefix, 7) == "f") {
       base = "fem_rifle";
     } else if(self.archetype == "human_riotshield") {
       base = "riotshield";
@@ -231,7 +231,7 @@ function private _force_malfunction(attacker, disabletimemsec) {
     self waittillmatch("malfunction_intro_anim");
   }
   var_ac712236 = 0;
-  while (isalive(self) && gettime() < disablefor) {
+  while(isalive(self) && gettime() < disablefor) {
     if(gettime() > var_ac712236) {
       var_ac712236 = gettime() + (randomfloatrange(getdvarfloat("scr_malfunction_duration_min_wait", 2), getdvarfloat("scr_malfunction_duration_max_wait", 3.25)) * 1000);
       if(getdvarint("scr_malfunction_rate_of_failure", 90) > randomint(100)) {
@@ -250,7 +250,7 @@ function private _force_malfunction(attacker, disabletimemsec) {
 }
 
 function ai_activateforcedmalfuncton(target, var_9bc2efcb = 1) {
-  if(!isdefined(target)) {
+  if(!isDefined(target)) {
     return;
   }
   if(self.archetype != "human") {
@@ -270,7 +270,7 @@ function ai_activateforcedmalfuncton(target, var_9bc2efcb = 1) {
     }
     validtargets[validtargets.size] = target;
   }
-  if(isdefined(var_9bc2efcb) && var_9bc2efcb) {
+  if(isDefined(var_9bc2efcb) && var_9bc2efcb) {
     type = self cybercom::function_5e3d3aa();
     self animscripted("ai_cybercom_anim", self.origin, self.angles, ("ai_base_rifle_" + type) + "_exposed_cybercom_activate");
     self waittillmatch("ai_cybercom_anim");

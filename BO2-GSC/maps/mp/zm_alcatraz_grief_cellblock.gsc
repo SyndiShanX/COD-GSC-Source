@@ -104,7 +104,7 @@ give_team_characters() {
   switch (self.characterindex) {
     case 0:
     case 2:
-      self setmodel("c_zom_player_grief_inmate_fb");
+      self setModel("c_zom_player_grief_inmate_fb");
       self.voice = "american";
       self.skeleton = "base";
       self setviewmodel("c_zom_oleary_shortsleeve_viewhands");
@@ -112,7 +112,7 @@ give_team_characters() {
       break;
     case 1:
     case 3:
-      self setmodel("c_zom_player_grief_guard_fb");
+      self setModel("c_zom_player_grief_guard_fb");
       self.voice = "american";
       self.skeleton = "base";
       self setviewmodel("c_zom_grief_guard_viewhands");
@@ -149,7 +149,7 @@ main() {
   maps\mp\zombies\_zm_ai_brutus::init();
   level.enemy_location_override_func = ::enemy_location_override;
   level._effect["butterflies"] = loadfx("maps/zombie_alcatraz/fx_alcatraz_skull_elec");
-  a_t_door_triggers = getentarray("zombie_door", "targetname");
+  a_t_door_triggers = getEntArray("zombie_door", "targetname");
 
   foreach(trigger in a_t_door_triggers) {
     if(isDefined(trigger.script_flag)) {
@@ -163,7 +163,7 @@ main() {
       else {
         if(isDefined(trigger.target)) {
           str_target = trigger.target;
-          a_door_and_clip = getentarray(str_target, "targetname");
+          a_door_and_clip = getEntArray(str_target, "targetname");
 
           foreach(ent in a_door_and_clip)
           ent delete();
@@ -174,7 +174,7 @@ main() {
     }
   }
 
-  a_t_doors = getentarray("zombie_door", "targetname");
+  a_t_doors = getEntArray("zombie_door", "targetname");
 
   foreach(t_door in a_t_doors) {
     if(isDefined(t_door.script_flag)) {
@@ -225,32 +225,32 @@ main() {
   e_model delete();
   e_brush = getent("tower_shockbox_door", "targetname");
   e_brush delete();
-  a_t_travel_triggers = getentarray("travel_trigger", "script_noteworthy");
+  a_t_travel_triggers = getEntArray("travel_trigger", "script_noteworthy");
 
   foreach(trigger in a_t_travel_triggers)
   trigger delete();
 
-  a_e_gondola_lights = getentarray("gondola_state_light", "targetname");
+  a_e_gondola_lights = getEntArray("gondola_state_light", "targetname");
 
   foreach(light in a_e_gondola_lights)
   light delete();
 
-  a_e_gondola_landing_gates = getentarray("gondola_landing_gates", "targetname");
+  a_e_gondola_landing_gates = getEntArray("gondola_landing_gates", "targetname");
 
   foreach(model in a_e_gondola_landing_gates)
   model delete();
 
-  a_e_gondola_landing_doors = getentarray("gondola_landing_doors", "targetname");
+  a_e_gondola_landing_doors = getEntArray("gondola_landing_doors", "targetname");
 
   foreach(model in a_e_gondola_landing_doors)
   model delete();
 
-  a_e_gondola_gates = getentarray("gondola_gates", "targetname");
+  a_e_gondola_gates = getEntArray("gondola_gates", "targetname");
 
   foreach(model in a_e_gondola_gates)
   model delete();
 
-  a_e_gondola_doors = getentarray("gondola_doors", "targetname");
+  a_e_gondola_doors = getEntArray("gondola_doors", "targetname");
 
   foreach(model in a_e_gondola_doors)
   model delete();
@@ -259,21 +259,21 @@ main() {
   m_gondola delete();
   t_ride_trigger = getent("gondola_ride_trigger", "targetname");
   t_ride_trigger delete();
-  a_classic_clips = getentarray("classic_clips", "targetname");
+  a_classic_clips = getEntArray("classic_clips", "targetname");
 
   foreach(clip in a_classic_clips) {
     clip connectpaths();
     clip delete();
   }
 
-  a_afterlife_props = getentarray("afterlife_show", "targetname");
+  a_afterlife_props = getEntArray("afterlife_show", "targetname");
 
   foreach(m_prop in a_afterlife_props)
   m_prop delete();
 
   spork_portal = getent("afterlife_show_spork", "targetname");
   spork_portal delete();
-  a_audio = getentarray("at_headphones", "script_noteworthy");
+  a_audio = getEntArray("at_headphones", "script_noteworthy");
 
   foreach(model in a_audio)
   model delete();
@@ -282,7 +282,7 @@ main() {
   m_spoon_pickup delete();
   t_sq_bg = getent("sq_bg_reward_pickup", "targetname");
   t_sq_bg delete();
-  t_crafting_table = getentarray("open_craftable_trigger", "targetname");
+  t_crafting_table = getEntArray("open_craftable_trigger", "targetname");
 
   foreach(trigger in t_crafting_table)
   trigger delete();
@@ -337,7 +337,7 @@ main() {
     m_generator delete();
   }
 
-  a_m_generator_core = getentarray("generator_core", "targetname");
+  a_m_generator_core = getEntArray("generator_core", "targetname");
 
   foreach(generator in a_m_generator_core)
   generator delete();
@@ -352,7 +352,7 @@ main() {
     m_chair delete();
   }
 
-  a_afterlife_interact = getentarray("afterlife_interact", "targetname");
+  a_afterlife_interact = getEntArray("afterlife_interact", "targetname");
 
   foreach(model in a_afterlife_interact) {
     model turn_afterlife_interact_on();
@@ -441,7 +441,7 @@ turn_afterlife_interact_on() {
 
     if(issubstr(self.model, "p6_zm_al_shock_box")) {
       self useanimtree(#animtree);
-      self setmodel("p6_zm_al_shock_box_on");
+      self setModel("p6_zm_al_shock_box_on");
       self setanim(level.shockbox_anim["on"]);
     }
   } else

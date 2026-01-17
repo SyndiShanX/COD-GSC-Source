@@ -14,14 +14,14 @@ init() {
   thread onPlayerConnect();
 }
 onPlayerConnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connecting", player);
     player thread onPlayerSpawned();
   }
 }
 onPlayerSpawned() {
   self endon("disconnect");
-  for (;;) {
+  for(;;) {
     self waittill("spawned_player");
     self ClearIRTarget();
     thread StingerToggleLoop();
@@ -52,7 +52,7 @@ ClearIRTarget() {
 StingerFiredNotify() {
   self endon("disconnect");
   self endon("death");
-  while (true) {
+  while(true) {
     self waittill("missile_fire", missile, weap);
     switch (weap) {
       case "strela_mp":
@@ -71,11 +71,11 @@ StingerFiredNotify() {
 StingerToggleLoop() {
   self endon("disconnect");
   self endon("death");
-  for (;;) {
-    while (!self PlayerStingerAds())
+  for(;;) {
+    while(!self PlayerStingerAds())
       wait 0.05;
     self thread StingerIRTLoop();
-    while (self PlayerStingerAds())
+    while(self PlayerStingerAds())
       wait 0.05;
     self notify("stinger_IRT_off");
     self ClearIRTarget();
@@ -86,7 +86,7 @@ StingerIRTLoop() {
   self endon("death");
   self endon("stinger_IRT_off");
   lockLength = self getLockOnSpeed();
-  for (;;) {
+  for(;;) {
     wait 0.05;
     if(self.stingerLockFinalized) {
       passed = SoftSightTest();
@@ -170,7 +170,7 @@ DisplayLockOnCanceledMessage() {
 GetBestStingerTarget() {
   targetsAll = target_getArray();
   targetsValid = [];
-  for (idx = 0; idx < targetsAll.size; idx++) {
+  for(idx = 0; idx < targetsAll.size; idx++) {
     if(level.teamBased) {
       if(isDefined(targetsAll[idx].team) && targetsAll[idx].team != self.team) {
         if(self InsideStingerReticleNoLock(targetsAll[idx])) {
@@ -226,7 +226,7 @@ LoopLocalSeekSound(alias, interval) {
   self endon("stop_lockon_sound");
   self endon("disconnect");
   self endon("death");
-  for (;;) {
+  for(;;) {
     self playLocalSound(alias);
     self PlayRumbleOnEntity("stinger_lock_rumble");
     wait interval;
@@ -239,7 +239,7 @@ LoopLocalLockSound(alias, interval) {
   if(isDefined(self.stingerlocksound))
     return;
   self.stingerlocksound = true;
-  for (;;) {
+  for(;;) {
     self playLocalSound(alias);
     self PlayRumbleOnEntity("stinger_lock_rumble");
     wait interval / 3;
@@ -254,7 +254,7 @@ LoopLocalLockSound(alias, interval) {
   self.stingerlocksound = undefined;
 }
 LockSightTest(target) {
-  eyePos = self GetEye();
+  eyePos = self getEye();
   if(!isDefined(target))
     return false;
   passed = BulletTracePassed(eyePos, target.origin, false, target);

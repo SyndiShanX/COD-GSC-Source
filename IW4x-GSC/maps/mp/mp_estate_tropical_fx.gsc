@@ -20,5 +20,4 @@ main() {
 
   if(getdvar("clientSideEffects") != "1")
     maps\createfx\mp_estate_tropical_fx::main();
-
 }

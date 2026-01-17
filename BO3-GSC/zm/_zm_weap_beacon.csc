@@ -16,11 +16,11 @@ function init() {
   level._effect["beacon_launch_fx"] = "dlc5/tomb/fx_tomb_beacon_launch";
   level._effect["beacon_shell_explosion"] = "dlc5/tomb/fx_tomb_beacon_exp";
   level._effect["beacon_shell_trail"] = "dlc5/tomb/fx_tomb_beacon_trail";
-  clientfield::register("world", "play_launch_artillery_fx_robot_0", 21000, 1, "int", & function_59491961, 0, 0);
-  clientfield::register("world", "play_launch_artillery_fx_robot_1", 21000, 1, "int", & function_59491961, 0, 0);
-  clientfield::register("world", "play_launch_artillery_fx_robot_2", 21000, 1, "int", & function_59491961, 0, 0);
-  clientfield::register("scriptmover", "play_beacon_fx", 21000, 1, "int", & function_dc4ed336, 0, 0);
-  clientfield::register("scriptmover", "play_artillery_barrage", 21000, 2, "int", & play_artillery_barrage, 0, 0);
+  clientfield::register("world", "play_launch_artillery_fx_robot_0", 21000, 1, "int", &function_59491961, 0, 0);
+  clientfield::register("world", "play_launch_artillery_fx_robot_1", 21000, 1, "int", &function_59491961, 0, 0);
+  clientfield::register("world", "play_launch_artillery_fx_robot_2", 21000, 1, "int", &function_59491961, 0, 0);
+  clientfield::register("scriptmover", "play_beacon_fx", 21000, 1, "int", &function_dc4ed336, 0, 0);
+  clientfield::register("scriptmover", "play_artillery_barrage", 21000, 2, "int", &play_artillery_barrage, 0, 0);
 }
 
 function function_59491961(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -34,24 +34,24 @@ function function_59491961(localclientnum, oldval, newval, bnewent, binitialsnap
     }
   }
   if(newval == 1) {
-    playfx(localclientnum, level._effect["beacon_launch_fx"], ai_robot gettagorigin("tag_rocketpod"));
+    playFX(localclientnum, level._effect["beacon_launch_fx"], ai_robot gettagorigin("tag_rocketpod"));
     level thread function_d391c94e(ai_robot gettagorigin("tag_rocketpod"));
   }
 }
 
 function function_d391c94e(origin) {
-  playsound(0, "zmb_homingbeacon_missiile_alarm", origin);
-  for (i = 0; i < 5; i++) {
-    playsound(0, "zmb_homingbeacon_missile_fire", origin);
+  playSound(0, "zmb_homingbeacon_missiile_alarm", origin);
+  for(i = 0; i < 5; i++) {
+    playSound(0, "zmb_homingbeacon_missile_fire", origin);
     wait(0.15);
   }
 }
 
 function function_dc4ed336(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   self endon("hash_962e0148");
-  while (isdefined(self)) {
-    playsound(0, "evt_beacon_beep", self.origin);
-    playfxontag(localclientnum, level._effect["beacon_glow"], self, "origin_animate_jnt");
+  while(isDefined(self)) {
+    playSound(0, "evt_beacon_beep", self.origin);
+    playFXOnTag(localclientnum, level._effect["beacon_glow"], self, "origin_animate_jnt");
     wait(1.5);
   }
 }
@@ -61,44 +61,44 @@ function play_artillery_barrage(localclientnum, oldval, newval, bnewent, binitia
     return;
   }
   if(newval == 1) {
-    if(!isdefined(self.a_v_land_offsets)) {
+    if(!isDefined(self.a_v_land_offsets)) {
       self.a_v_land_offsets = [];
     }
-    if(!isdefined(self.a_v_land_offsets[localclientnum])) {
+    if(!isDefined(self.a_v_land_offsets[localclientnum])) {
       self.a_v_land_offsets[localclientnum] = self build_weap_beacon_landing_offsets();
     }
-    if(!isdefined(self.a_v_start_offsets)) {
+    if(!isDefined(self.a_v_start_offsets)) {
       self.a_v_start_offsets = [];
     }
-    if(!isdefined(self.a_v_start_offsets[localclientnum])) {
+    if(!isDefined(self.a_v_start_offsets[localclientnum])) {
       self.a_v_start_offsets[localclientnum] = self build_weap_beacon_start_offsets();
     }
   }
   if(newval == 2) {
-    if(!isdefined(self.a_v_land_offsets)) {
+    if(!isDefined(self.a_v_land_offsets)) {
       self.a_v_land_offsets = [];
     }
-    if(!isdefined(self.a_v_land_offsets[localclientnum])) {
+    if(!isDefined(self.a_v_land_offsets[localclientnum])) {
       self.a_v_land_offsets[localclientnum] = self build_weap_beacon_landing_offsets_ee();
     }
-    if(!isdefined(self.a_v_start_offsets)) {
+    if(!isDefined(self.a_v_start_offsets)) {
       self.a_v_start_offsets = [];
     }
-    if(!isdefined(self.a_v_start_offsets[localclientnum])) {
+    if(!isDefined(self.a_v_start_offsets[localclientnum])) {
       self.a_v_start_offsets[localclientnum] = self build_weap_beacon_start_offsets_ee();
     }
   }
-  if(!isdefined(self.var_f510f618)) {
+  if(!isDefined(self.var_f510f618)) {
     self.var_f510f618 = [];
   }
-  if(!isdefined(self.var_f510f618[localclientnum])) {
+  if(!isDefined(self.var_f510f618[localclientnum])) {
     self.var_f510f618[localclientnum] = 0;
   }
   n_index = self.var_f510f618[localclientnum];
   v_start = self.origin + self.a_v_start_offsets[localclientnum][n_index];
   shell = spawn(localclientnum, v_start, "script_model");
   shell.angles = vectorscale((-1, 0, 0), 90);
-  shell setmodel("tag_origin");
+  shell setModel("tag_origin");
   shell thread function_3700164e(self, n_index, v_start, localclientnum);
   self.var_f510f618[localclientnum]++;
 }
@@ -166,22 +166,22 @@ function build_weap_beacon_start_offsets_ee() {
 function function_3700164e(model, index, v_start, localclientnum) {
   var_89ea469b = model.origin + model.a_v_land_offsets[localclientnum][index];
   v_start_trace = v_start - vectorscale((0, 0, 1), 5000);
-  trace = bullettrace(v_start_trace, var_89ea469b, 0, undefined);
+  trace = bulletTrace(v_start_trace, var_89ea469b, 0, undefined);
   var_89ea469b = trace["position"];
   self moveto(var_89ea469b, 3);
-  playfxontag(localclientnum, level._effect["beacon_shell_trail"], self, "tag_origin");
-  self playsound(0, "zmb_homingbeacon_missile_boom");
+  playFXOnTag(localclientnum, level._effect["beacon_shell_trail"], self, "tag_origin");
+  self playSound(0, "zmb_homingbeacon_missile_boom");
   self thread function_42cb41ec(var_89ea469b);
   self waittill("movedone");
   if(index == 1) {
     model notify("hash_962e0148");
   }
-  playfx(localclientnum, level._effect["beacon_shell_explosion"], self.origin);
-  playsound(0, "wpn_rocket_explode", self.origin);
+  playFX(localclientnum, level._effect["beacon_shell_explosion"], self.origin);
+  playSound(0, "wpn_rocket_explode", self.origin);
   self delete();
 }
 
 function function_42cb41ec(origin) {
   wait(2);
-  playsound(0, "zmb_homingbeacon_missile_incoming", origin);
+  playSound(0, "zmb_homingbeacon_missile_incoming", origin);
 }

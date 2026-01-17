@@ -7,7 +7,7 @@
 main(var_0) {
   self.couldntseeenemypos = self.origin;
   var_1 = gettime();
-  var_2 = spawnstruct();
+  var_2 = spawnStruct();
   var_2.nextallowedlooktime = var_1 - 1;
   var_2.nextallowedsuppresstime = var_1 - 1;
   resetlookforbettercovertime();
@@ -20,8 +20,8 @@ main(var_0) {
   thread watchsuppression();
   var_3 = gettime() > 2500;
 
-  for (;;) {
-    if(isdefined(self.cover) && isdefined(self.cover.fnoverlord)) {
+  for(;;) {
+    if(isDefined(self.cover) && isDefined(self.cover.fnoverlord)) {
       var_4 = gettime();
       thread endidleatframeend();
       [
@@ -39,10 +39,10 @@ main(var_0) {
       }
     }
 
-    if(isdefined(var_0.mainloopstart))
+    if(isDefined(var_0.mainloopstart))
       calloptionalbehaviorcallback(var_0.mainloopstart, "mainLoopStart");
 
-    if(isdefined(var_0.movetonearbycover)) {
+    if(isDefined(var_0.movetonearbycover)) {
       if(calloptionalbehaviorcallback(var_0.movetonearbycover, "moveToNearByCover"))
         continue;
     }
@@ -61,7 +61,7 @@ main(var_0) {
     if(dononattackcoverbehavior(var_0)) {
       continue;
     }
-    if(isdefined(anim.throwgrenadeatplayerasap) && isalive(level.player)) {
+    if(isDefined(anim.throwgrenadeatplayerasap) && isalive(level.player)) {
       if(trythrowinggrenade(var_0, level.player))
         continue;
     }
@@ -87,7 +87,7 @@ main(var_0) {
       continue;
     }
 
-    if(isdefined(self.aggressivemode) || enemyishiding()) {
+    if(isDefined(self.aggressivemode) || enemyishiding()) {
       if(advanceonhidingenemy())
         return;
     }
@@ -108,7 +108,7 @@ end_script(var_0) {
   self.turntomatchnode = undefined;
   self.a.prevattack = undefined;
 
-  if(isdefined(self.meleecoverchargemintime) && self.meleecoverchargemintime <= gettime()) {
+  if(isDefined(self.meleecoverchargemintime) && self.meleecoverchargemintime <= gettime()) {
     self.meleecoverchargegraceendtime = gettime() + 5000;
     self.meleecoverchargemintime = undefined;
   }
@@ -196,7 +196,7 @@ attacknothingtodo(var_0, var_1) {
   if(coverreload(var_0, 0.1))
     return 0;
 
-  if(isdefined(self.enemy)) {
+  if(isDefined(self.enemy)) {
     if(trythrowinggrenade(var_0, self.enemy))
       return 0;
   }
@@ -213,7 +213,7 @@ attacknothingtodo(var_0, var_1) {
       return 1;
   }
 
-  if(self.doingambush || gettime() >= var_1.nextallowedsuppresstime && isdefined(self.enemy)) {
+  if(self.doingambush || gettime() >= var_1.nextallowedsuppresstime && isDefined(self.enemy)) {
     if(leavecoverandshoot(var_0, "ambush")) {
       if(isenemyvisiblefromexposed())
         resetseekoutenemytime();
@@ -229,7 +229,7 @@ attacknothingtodo(var_0, var_1) {
 }
 
 isenemyvisiblefromexposed() {
-  if(!isdefined(self.enemy))
+  if(!isDefined(self.enemy))
     return 0;
 
   if(distancesquared(self.enemy.origin, self.couldntseeenemypos) < 256)
@@ -245,12 +245,12 @@ suppressedbehavior(var_0) {
   var_1 = gettime();
   var_2 = 1;
 
-  while (animscripts\utility::issuppressedwrapper()) {
+  while(animscripts\utility::issuppressedwrapper()) {
     var_2 = 0;
     self safeteleport(self.covernode.origin);
     var_3 = 1;
 
-    if(isdefined(self.favor_blindfire))
+    if(isDefined(self.favor_blindfire))
       var_3 = common_scripts\utility::cointoss();
 
     if(var_3) {
@@ -265,7 +265,7 @@ suppressedbehavior(var_0) {
 
     var_4 = isenemyvisiblefromexposed() || animscripts\utility::cansuppressenemyfromexposed();
 
-    if(var_4 && isdefined(anim.throwgrenadeatplayerasap) && isalive(level.player)) {
+    if(var_4 && isDefined(anim.throwgrenadeatplayerasap) && isalive(level.player)) {
       if(trythrowinggrenade(var_0, level.player))
         continue;
     }
@@ -277,7 +277,7 @@ suppressedbehavior(var_0) {
       if(blindfire(var_0)) {
         var_1 = gettime();
 
-        if(!isdefined(self.favor_blindfire))
+        if(!isDefined(self.favor_blindfire))
           var_1 = var_1 + randomintrange(3000, 12000);
 
         continue;
@@ -310,10 +310,10 @@ getpermutation(var_0) {
     var_1[0] = randomint(2);
     var_1[1] = 1 - var_1[0];
   } else {
-    for (var_2 = 0; var_2 < var_0; var_2++)
+    for(var_2 = 0; var_2 < var_0; var_2++)
       var_1[var_2] = var_2;
 
-    for (var_2 = 0; var_2 < var_0; var_2++) {
+    for(var_2 = 0; var_2 < var_0; var_2++) {
       var_3 = var_2 + randomint(var_0 - var_2);
       var_4 = var_1[var_3];
       var_1[var_3] = var_1[var_2];
@@ -325,29 +325,21 @@ getpermutation(var_0) {
 }
 
 calloptionalbehaviorcallback(var_0, var_1, var_2, var_3, var_4) {
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     return 0;
 
   thread endidleatframeend();
   var_5 = gettime();
   var_6 = undefined;
 
-  if(isdefined(var_4))
-    var_6 = [
-      [var_0]
-    ](var_2, var_3, var_4);
-  else if(isdefined(var_3))
-    var_6 = [
-      [var_0]
-    ](var_2, var_3);
-  else if(isdefined(var_2))
-    var_6 = [
-      [var_0]
-    ](var_2);
+  if(isDefined(var_4))
+    var_6 = [[var_0]](var_2, var_3, var_4);
+  else if(isDefined(var_3))
+    var_6 = [[var_0]](var_2, var_3);
+  else if(isDefined(var_2))
+    var_6 = [[var_0]](var_2);
   else
-    var_6 = [
-      [var_0]
-    ]();
+    var_6 = [[var_0]]();
 
   if(!var_6)
     self notify("dont_end_idle");
@@ -361,7 +353,7 @@ watchsuppression() {
   self.lastsuppressiontime = gettime() - 100000;
   self.suppressionstart = self.lastsuppressiontime;
 
-  for (;;) {
+  for(;;) {
     self waittill("suppression");
     var_0 = gettime();
 
@@ -421,7 +413,7 @@ lookfast(var_0) {
 idle(var_0, var_1) {
   self.flinching = 0;
 
-  if(isdefined(var_0.flinch)) {
+  if(isDefined(var_0.flinch)) {
     if(!self.a.idlingatcover && gettime() - self.suppressionstart < 600) {
       if(calloptionalbehaviorcallback(var_0.flinch, "flinch"))
         return 1;
@@ -434,7 +426,7 @@ idle(var_0, var_1) {
     self.a.idlingatcover = 1;
   }
 
-  if(isdefined(var_1))
+  if(isDefined(var_1))
     idlewait(var_1);
   else
     idlewaitabit();
@@ -467,7 +459,7 @@ flinchwhensuppressed(var_0) {
   self endon("stop_waiting_to_flinch");
   var_1 = self.lastsuppressiontime;
 
-  for (;;) {
+  for(;;) {
     self waittill("suppression");
     var_2 = gettime();
 
@@ -489,7 +481,7 @@ endidleatframeend() {
   self endon("dont_end_idle");
   waittillframeend;
 
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   self notify("end_idle");
@@ -497,7 +489,7 @@ endidleatframeend() {
 }
 
 trythrowinggrenade(var_0, var_1) {
-  var_2 = anglestoforward(self.angles);
+  var_2 = anglesToForward(self.angles);
   var_3 = vectornormalize(var_1.origin - self.origin);
 
   if(vectordot(var_2, var_3) < 0)
@@ -523,13 +515,13 @@ breakoutofshootingifwanttomoveup() {
   self endon("killanimscript");
   self endon("stop_deciding_how_to_shoot");
 
-  for (;;) {
+  for(;;) {
     if(self.fixednode || self.doingambush) {
       return;
     }
     wait(0.5 + randomfloat(0.75));
 
-    if(!isdefined(self.enemy)) {
+    if(!isDefined(self.enemy)) {
       continue;
     }
     if(enemyishiding()) {
@@ -547,19 +539,19 @@ breakoutofshootingifwanttomoveup() {
 }
 
 enemyishiding() {
-  if(!isdefined(self.enemy))
+  if(!isDefined(self.enemy))
     return 0;
 
   if(self.enemy common_scripts\utility::isflashed())
     return 1;
 
   if(isplayer(self.enemy)) {
-    if(isdefined(self.enemy.health) && self.enemy.health < self.enemy.maxhealth)
+    if(isDefined(self.enemy.health) && self.enemy.health < self.enemy.maxhealth)
       return 1;
   } else if(isai(self.enemy) && self.enemy animscripts\utility::issuppressedwrapper())
     return 1;
 
-  if(isdefined(self.enemy.isreloading) && self.enemy.isreloading)
+  if(isDefined(self.enemy.isreloading) && self.enemy.isreloading)
     return 1;
 
   return 0;
@@ -572,9 +564,9 @@ resetrespondtodeathtime() {
 resetlookforbettercovertime() {
   var_0 = gettime();
 
-  if(isdefined(self.didshufflemove) && var_0 > self.a.getboredofthisnodetime)
+  if(isDefined(self.didshufflemove) && var_0 > self.a.getboredofthisnodetime)
     self.a.getboredofthisnodetime = var_0 + randomintrange(2000, 5000);
-  else if(isdefined(self.enemy)) {
+  else if(isDefined(self.enemy)) {
     var_1 = distance2d(self.origin, self.enemy.origin);
 
     if(var_1 < self.engagemindist) {
@@ -595,7 +587,7 @@ resetlookforbettercovertime() {
 }
 
 resetseekoutenemytime() {
-  if(isdefined(self.aggressivemode))
+  if(isDefined(self.aggressivemode))
     self.seekoutenemytime = gettime() + randomintrange(500, 1000);
   else
     self.seekoutenemytime = gettime() + randomintrange(3000, 5000);
@@ -609,15 +601,15 @@ advanceonhidingenemy() {
   if(self.fixednode || self.doingambush)
     return 0;
 
-  if(isdefined(self.aggressivemode) && gettime() >= self.seekoutenemytime)
+  if(isDefined(self.aggressivemode) && gettime() >= self.seekoutenemytime)
     return animscripts\combat_utility::tryrunningtoenemy(0);
 
   var_0 = 0;
 
-  if(!isdefined(self.enemy) || !self.enemy common_scripts\utility::isflashed())
+  if(!isDefined(self.enemy) || !self.enemy common_scripts\utility::isflashed())
     var_0 = animscripts\combat_utility::lookforbettercover();
 
-  if(!var_0 && isdefined(self.enemy) && !animscripts\utility::canseeenemyfromexposed()) {
+  if(!var_0 && isDefined(self.enemy) && !animscripts\utility::canseeenemyfromexposed()) {
     if(gettime() >= self.seekoutenemytime)
       return animscripts\combat_utility::tryrunningtoenemy(0);
   }
@@ -626,7 +618,7 @@ advanceonhidingenemy() {
 }
 
 trytogetoutofdangeroussituation(var_0) {
-  if(isdefined(var_0.movetonearbycover)) {
+  if(isDefined(var_0.movetonearbycover)) {
     if(calloptionalbehaviorcallback(var_0.movetonearbycover, "moveToNearByCover"))
       return 1;
   }
@@ -673,7 +665,7 @@ set_swimming_turns() {
 }
 
 turntomatchnodedirection(var_0) {
-  if(isdefined(self.node)) {
+  if(isDefined(self.node)) {
     var_1 = self.node;
     var_2 = abs(angleclamp180(self.angles[1] - (var_1.angles[1] + var_0)));
 
@@ -686,7 +678,7 @@ turntomatchnodedirection(var_0) {
       var_3 = 1.5;
       var_4 = % exposed_stand_2_crouch;
 
-      if(isdefined(self.animarchetype) && self.animarchetype == "s1_soldier")
+      if(isDefined(self.animarchetype) && self.animarchetype == "s1_soldier")
         var_4 = % s1_exposed_stand_2_crouch;
 
       var_5 = getnotetracktimes(var_4, "anim_pose = \"crouch\"")[0];
@@ -709,15 +701,15 @@ turntomatchnodedirection(var_0) {
       if(self.swimmer)
         set_swimming_turns();
       else if(self.a.pose == "stand") {
-        if(isdefined(self.animarchetype) && self.animarchetype == "s1_soldier") {
-          if(isdefined(self.covertype)) {
+        if(isDefined(self.animarchetype) && self.animarchetype == "s1_soldier") {
+          if(isDefined(self.covertype)) {
             if(self.covertype == "stand")
               set_standing_cover_turns();
             else
               set_standing_turns();
           } else
             set_standing_turns();
-        } else if(isdefined(self.cqbwalking) && self.cqbwalking)
+        } else if(isDefined(self.cqbwalking) && self.cqbwalking)
           set_cqb_standing_turns();
         else if(animscripts\utility::is_in_casual_standing_stance())
           set_casual_standing_turns();
@@ -738,15 +730,15 @@ movetonearbycover() {
   if(self isbadguy())
     return 0;
 
-  if(!isdefined(self.enemy))
+  if(!isDefined(self.enemy))
     return 0;
 
-  if(isdefined(self.didshufflemove)) {
+  if(isDefined(self.didshufflemove)) {
     self.didshufflemove = undefined;
     return 0;
   }
 
-  if(!isdefined(self.node))
+  if(!isDefined(self.node))
     return 0;
 
   if(animscripts\utility::isnodecover3d(self.node))
@@ -763,7 +755,7 @@ movetonearbycover() {
 
   var_0 = self findshufflecovernode();
 
-  if(isdefined(var_0) && var_0 != self.node && self usecovernode(var_0)) {
+  if(isDefined(var_0) && var_0 != self.node && self usecovernode(var_0)) {
     self.shufflemove = 1;
     self.shufflenode = var_0;
     self.didshufflemove = 1;

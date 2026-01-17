@@ -23,22 +23,22 @@ function autoexec init() {
     return;
   }
   namespace_c1b94c1e::init_voice();
-  level.bzm_ramsesdialogue1callback = & function_dfa3a625;
-  level.bzm_ramsesdialogue2callback = & function_5a6208e;
-  level.bzm_ramsesdialogue3callback = & function_2ba89af7;
-  level.bzm_ramsesdialogue3_1callback = & function_9c47b97f;
-  level.bzm_ramsesdialogue3_2callback = & function_2a404a44;
-  level.bzm_ramsesdialogue5callback = & function_4799bc81;
-  level.bzm_ramsesdialogue5_1callback = & function_9a51f005;
-  level.bzm_ramsesdialogue6callback = & function_6d9c36ea;
-  level.bzm_ramsesdialogue7callback = & function_939eb153;
-  level.bzm_ramsesdialogue7_1callback = & function_4d3f4c83;
-  level.bzm_ramsesdialogue8callback = & function_898d5874;
+  level.bzm_ramsesdialogue1callback = &function_dfa3a625;
+  level.bzm_ramsesdialogue2callback = &function_5a6208e;
+  level.bzm_ramsesdialogue3callback = &function_2ba89af7;
+  level.bzm_ramsesdialogue3_1callback = &function_9c47b97f;
+  level.bzm_ramsesdialogue3_2callback = &function_2a404a44;
+  level.bzm_ramsesdialogue5callback = &function_4799bc81;
+  level.bzm_ramsesdialogue5_1callback = &function_9a51f005;
+  level.bzm_ramsesdialogue6callback = &function_6d9c36ea;
+  level.bzm_ramsesdialogue7callback = &function_939eb153;
+  level.bzm_ramsesdialogue7_1callback = &function_4d3f4c83;
+  level.bzm_ramsesdialogue8callback = &function_898d5874;
   function_77e3cb91();
 }
 
 function private function_77e3cb91() {
-  callback::on_spawned( & function_3e52c274);
+  callback::on_spawned(&function_3e52c274);
 }
 
 function function_3e52c274() {}

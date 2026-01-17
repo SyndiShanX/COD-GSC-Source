@@ -16,7 +16,7 @@
 #namespace vehicle;
 
 function autoexec __init__sytem__() {
-  system::register("vehicleriders", & __init__, undefined, undefined);
+  system::register("vehicleriders", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -35,7 +35,7 @@ function __init__() {
     }
   }
   foreach(str_clientfield in a_registered_fields) {
-    clientfield::register("vehicle", str_clientfield, 1, 1, "counter", & play_vehicle_anim, 0, 0);
+    clientfield::register("vehicle", str_clientfield, 1, 1, "counter", &play_vehicle_anim, 0, 0);
   }
 }
 
@@ -75,7 +75,7 @@ function play_vehicle_anim(localclientnum, oldval, newval, bnewent, binitialsnap
       break;
     }
   }
-  if(isdefined(str_vh_anim)) {
+  if(isDefined(str_vh_anim)) {
     self setanimrestart(str_vh_anim);
   }
 }

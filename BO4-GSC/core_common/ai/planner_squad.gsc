@@ -7,14 +7,13 @@
 #include scripts\core_common\ai\systems\planner;
 #include scripts\core_common\ai\systems\planner_blackboard;
 #include scripts\core_common\bots\bot;
-
 #namespace plannersquad;
 
-private function_bf7acc22(squad) {
+function_bf7acc22(squad) {
   botentries = plannersquadutility::getblackboardattribute(squad, "doppelbots");
 
   foreach(botinfo in botentries) {
-    bot = botinfo[#"__unsafe__"][#"bot"];
+    bot = botinfo[# "__unsafe__"][# "bot"];
 
     if(isDefined(bot) && isDefined(bot.bot)) {
       bot bot::clear_interact();
@@ -22,7 +21,7 @@ private function_bf7acc22(squad) {
   }
 }
 
-private _debugsquad(squad) {
+_debugsquad(squad) {
   if(!isDefined(level.__plannersquaddebug)) {
     level.__plannersquaddebug = [];
   }
@@ -40,11 +39,11 @@ private _debugsquad(squad) {
     var_deb0d0ec = 0;
     squadid = getdvarint(#"ai_debugsquad", 0);
 
-    if(isDefined(squad.blackboard) && isDefined(squad.blackboard.values[#"doppelbots"])) {
-      doppelbots = squad.blackboard.values[#"doppelbots"];
+    if(isDefined(squad.blackboard) && isDefined(squad.blackboard.values[# "doppelbots"])) {
+      doppelbots = squad.blackboard.values[# "doppelbots"];
 
       foreach(doppelbot in doppelbots) {
-        if(doppelbot[#"entnum"] == squadid) {
+        if(doppelbot[# "entnum"] == squadid) {
           var_deb0d0ec = 1;
           break;
         }
@@ -60,7 +59,7 @@ private _debugsquad(squad) {
       bottext = "<dev string:x45>";
 
       foreach(botentry in bots) {
-        bot = botentry[#"__unsafe__"][#"bot"];
+        bot = botentry[# "__unsafe__"][# "bot"];
 
         if(strategiccommandutility::isvalidbot(bot)) {
           bottext += "<dev string:x48>" + bot getentitynumber() + "<dev string:x48>" + bot.name;
@@ -78,7 +77,7 @@ private _debugsquad(squad) {
       target = plannersquadutility::getblackboardattribute(squad, "<dev string:x85>");
 
       if(isDefined(target)) {
-        var_3d879b56 = target[#"strategy"];
+        var_3d879b56 = target[# "strategy"];
 
         if(isDefined(var_3d879b56)) {
           if(isDefined(var_3d879b56.sdebug)) {
@@ -95,12 +94,12 @@ private _debugsquad(squad) {
           targetpos = undefined;
           targettrigger = undefined;
 
-          if(target[#"type"] == "<dev string:x204>") {
-            entity = target[#"__unsafe__"][#"entity"];
+          if(target[# "type"] == "<dev string:x204>") {
+            entity = target[# "__unsafe__"][# "entity"];
 
             if(isDefined(entity)) {
               targetpos = entity.origin;
-              object = target[#"__unsafe__"][#"object"];
+              object = target[# "__unsafe__"][# "object"];
 
               if(isDefined(object)) {
                 if(isDefined(object)) {
@@ -108,10 +107,10 @@ private _debugsquad(squad) {
                 }
               }
             }
-          } else if(target[#"type"] == "<dev string:x211>" || target[#"type"] == "<dev string:x21b>") {
-            missioncomponent = target[#"__unsafe__"][#"mission_component"];
+          } else if(target[# "type"] == "<dev string:x211>" || target[# "type"] == "<dev string:x21b>") {
+            missioncomponent = target[# "__unsafe__"][# "mission_component"];
             targetpos = missioncomponent.origin;
-            component = target[#"__unsafe__"][#"component"];
+            component = target[# "__unsafe__"][# "component"];
             targettrigger = component.var_2956bff4;
 
             if(isDefined(component.var_6bc907c4)) {
@@ -119,27 +118,27 @@ private _debugsquad(squad) {
               recordline(targetpos, component.var_6bc907c4.origin, (1, 0, 1), "<dev string:x53>");
               record3dtext("<dev string:x224>", component.var_6bc907c4.origin, (1, 0, 1), "<dev string:x53>", textscale);
             }
-          } else if(target[#"type"] == "<dev string:x231>") {
-            missioncomponent = target[#"__unsafe__"][#"mission_component"];
+          } else if(target[# "type"] == "<dev string:x231>") {
+            missioncomponent = target[# "__unsafe__"][# "mission_component"];
             targetpos = missioncomponent.origin;
-            component = target[#"__unsafe__"][#"component"];
+            component = target[# "__unsafe__"][# "component"];
             targettrigger = component.var_cc67d976;
-          } else if(target[#"type"] == "<dev string:x23f>") {
-            missioncomponent = target[#"__unsafe__"][#"mission_component"];
+          } else if(target[# "type"] == "<dev string:x23f>") {
+            missioncomponent = target[# "__unsafe__"][# "mission_component"];
             targetpos = missioncomponent.origin;
-            component = target[#"__unsafe__"][#"component"];
+            component = target[# "__unsafe__"][# "component"];
             targettrigger = component.var_c68dc48c;
-          } else if(target[#"type"] == "<dev string:x246>") {
-            bundle = target[#"__unsafe__"][#"bundle"];
+          } else if(target[# "type"] == "<dev string:x246>") {
+            bundle = target[# "__unsafe__"][# "bundle"];
             targetpos = bundle.var_27726d51.origin;
           } else {
             yoffset += 13;
-            recordtext("<dev string:x254>" + target[#"type"], position + (xoffset, yoffset, 0), (1, 0, 0), "<dev string:x53>", textscale);
+            recordtext("<dev string:x254>" + target[# "type"], position + (xoffset, yoffset, 0), (1, 0, 0), "<dev string:x53>", textscale);
           }
 
           if(isDefined(targetpos)) {
             recordsphere(targetpos, 20, (1, 0, 1));
-            record3dtext("<dev string:x280>" + target[#"type"], targetpos + (0, 0, 21), (1, 0, 1), "<dev string:x53>", textscale);
+            record3dtext("<dev string:x280>" + target[# "type"], targetpos + (0, 0, 21), (1, 0, 1), "<dev string:x53>", textscale);
 
             if(isDefined(targettrigger)) {
               function_f301de44(targettrigger, (1, 0, 1), "<dev string:x53>");
@@ -170,7 +169,7 @@ private _debugsquad(squad) {
   }
 }
 
-private function_101999aa(strategy, header, fieldlist, position, color, channel, textscale) {
+function_101999aa(strategy, header, fieldlist, position, color, channel, textscale) {
   xoffset = 0;
   yoffset = 0;
   recordtext(header, position, color, channel, textscale);
@@ -185,7 +184,7 @@ private function_101999aa(strategy, header, fieldlist, position, color, channel,
   return yoffset;
 }
 
-private function_f301de44(trigger, color, channel) {
+function_f301de44(trigger, color, channel) {
   maxs = trigger getmaxs();
   mins = trigger getmins();
 
@@ -202,7 +201,7 @@ private function_f301de44(trigger, color, channel) {
   recordbox(trigger.origin, mins, maxs, trigger.angles[0], color, channel);
 }
 
-private _executeplan(squad) {
+_executeplan(squad) {
   assert(isDefined(squad));
   assert(isDefined(squad.plan), "<dev string:x2d6>");
   assert(isDefined(squad.plan.size), "<dev string:x307>");
@@ -227,9 +226,9 @@ private _executeplan(squad) {
   functions = plannerutility::getplanneractionfunctions(action.name);
 
   if(!isDefined(squad.actionstatus)) {
-    if(isDefined(functions[#"initialize"])) {
+    if(isDefined(functions[# "initialize"])) {
       squad.actionstatus = [
-        [functions[#"initialize"]]
+        [functions[# "initialize"]]
       ](squad.planner, action.params);
     } else {
       squad.actionstatus = 1;
@@ -237,23 +236,23 @@ private _executeplan(squad) {
   }
 
   if(squad.actionstatus === 1 || squad.actionstatus === 3) {
-    if(isDefined(functions[#"update"])) {
+    if(isDefined(functions[# "update"])) {
       squad.actionstatus = [
-        [functions[#"update"]]
+        [functions[# "update"]]
       ](squad.planner, action.params);
     }
   }
 
   if(squad.actionstatus === 1) {
-    if(isDefined(functions[#"terminate"])) {
+    if(isDefined(functions[# "terminate"])) {
       squad.actionstatus = [
-        [functions[#"terminate"]]
+        [functions[# "terminate"]]
       ](squad.planner, action.params);
     }
   }
 }
 
-private function_9de03b3f(squad) {
+function_9de03b3f(squad) {
   botentries = plannersquadutility::getblackboardattribute(squad, "doppelbots");
 
   if(!isDefined(botentries)) {
@@ -261,7 +260,7 @@ private function_9de03b3f(squad) {
   }
 
   foreach(botinfo in botentries) {
-    if(isDefined(botinfo[#"__unsafe__"][#"bot"])) {
+    if(isDefined(botinfo[# "__unsafe__"][# "bot"])) {
       return true;
     }
   }
@@ -269,14 +268,14 @@ private function_9de03b3f(squad) {
   return false;
 }
 
-private _plan(squad) {
+_plan(squad) {
   planstarttime = gettime();
   squad.plan = planner::plan(squad.planner, squad.blackboard.values, squad.maxplannerframetime);
   squad.planstarttime = planstarttime;
   squad.planfinishtime = gettime();
 }
 
-private _strategize(squad) {
+_strategize(squad) {
   assert(isDefined(squad));
   assert(isDefined(squad.planner));
   squad.planning = 1;
@@ -294,7 +293,7 @@ private _strategize(squad) {
   squad.planning = 0;
 }
 
-private _updateplanner(squad) {
+_updateplanner(squad) {
   assert(isDefined(squad));
 
   while(isDefined(squad) && !squad.shutdown) {

@@ -97,5 +97,4 @@ main() {
   level._effect["ceiling_dust_default"] = loadfx("dust/ceiling_dust_default");
   level._effect["commerce_window_shatter"] = loadfx("props/car_glass_large");
   maps\createfx\dcburning_fx::main();
-
 }

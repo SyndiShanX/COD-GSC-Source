@@ -8,7 +8,7 @@
 #include maps\_utility;
 
 dds_init() {
-  level.dds = spawnstruct();
+  level.dds = spawnStruct();
   level.dds.heartbeat = 0.25;
   level.dds.variant_limit = 18;
   level.dds.category_backoff_limit = 6;
@@ -46,7 +46,7 @@ init_dds_countryIDs(voice, dds_label) {
 }
 
 add_dds_countryID(voice, dds_label, max_voices) {
-  level.dds.countryIDs[voice] = SpawnStruct();
+  level.dds.countryIDs[voice] = spawnStruct();
   level.dds.countryIDs[voice].label = dds_label;
   level.dds.countryIDs[voice].count = 0;
   level.dds.countryIDs[voice].max_voices = max_voices;
@@ -949,7 +949,7 @@ dds_notify(category_name, isAlliesLine) {
   }
   assertEx(isDefined(level.dds), "dds not init.");
   assertEx(isDefined(isAlliesLine), "isAlliesLine is not defined.");
-  event = spawnstruct();
+  event = spawnStruct();
   event.category_name = category_name;
   event.ent = self;
   event.ent_origin = self.origin;

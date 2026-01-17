@@ -24,7 +24,7 @@ vehicle_wait(startinvehicle) {
   }
   self endon("death");
   self endon("stop_vehicle_wait");
-  while (self.health > 0) {
+  while(self.health > 0) {
     if(!(startinvehicle))
       self waittill("trigger");
     else {
@@ -98,7 +98,7 @@ Protect_Player() {
   level endon("player exited vehicle");
   self endon("death");
   playerCurrentHealth = players[0].health;
-  while (isalive(players[0])) {
+  while(isalive(players[0])) {
     players[0] waittill("damage", ammount);
     if(self.health <= 0) {
       players[0] DoDamage(players[0].health + 50, (0, 0, 0));
@@ -140,18 +140,18 @@ vehicle_ridehandle() {
       break;
   }
   if(self.vehicletype == "crusader_player") {
-    self setmodel("vehicle_crusader2_viewmodel");
+    self setModel("vehicle_crusader2_viewmodel");
   }
   regentimer = gettime();
   if(getdvar("debug_vehiclegod") != "off") {
-    while (1) {
+    while(1) {
       self waittill("damage");
       self.health = self.maxhealth;
     }
   }
   thread vehicle_damageset();
   regeninctimer = gettime();
-  while (1) {
+  while(1) {
     if(self.damaged) {
       if(getdvar("debug_vehicleplayerhealth") != "off")
         iprintlnbold("playervehicles health: ", self.health - self.healthbuffer);
@@ -178,7 +178,7 @@ vehicle_kill_player_ondeath() {
   driver = self getvehicleowner();
   if(isDefined(driver) && isplayer(driver)) {
     driver enablehealthshield(false);
-    while (driver.health > 0) {
+    while(driver.health > 0) {
       driver DoDamage(driver.health + 500, driver.origin);
       wait .1;
     }
@@ -190,7 +190,7 @@ vehicle_kill_player_ondeath() {
 vehicle_damageset() {
   self.damaged = false;
   self endon("death");
-  while (1) {
+  while(1) {
     self waittill("damage", ammount);
     println("damage ", ammount);
     self.damaged = true;
@@ -198,10 +198,10 @@ vehicle_damageset() {
 }
 
 vehicle_reloadsound() {
-  while (1) {
+  while(1) {
     self waittill("turret_fire");
     wait .5;
-    self playsound("tank_reload");
+    self playSound("tank_reload");
   }
 }
 
@@ -224,7 +224,7 @@ vehicle_hud_tank_fireicon() {
   level.VehicleFireIcon setShader("tank_shell", 64, 64);
   icon = true;
   level.VehicleFireIcon.alpha = icon;
-  while (1) {
+  while(1) {
     if(icon) {
       if(!self isTurretReady()) {
         icon = false;
@@ -254,7 +254,7 @@ healthOverlay() {
   maxHealth = self.health - self.healthbuffer;
   hurt = false;
   bonus = 0.3;
-  for (;;) {
+  for(;;) {
     healthRatio = (self.health - self.healthbuffer) / maxHealth;
     pulseTime = 0.5 + (0.5 * healthRatio);
     if(healthRatio < 0.75 || hurt) {

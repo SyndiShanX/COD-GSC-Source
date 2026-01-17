@@ -7,7 +7,7 @@
 init() {}
 
 updatedamagefeedback(var_0, var_1) {
-  if(!isplayer(self) || !isdefined(var_0)) {
+  if(!isplayer(self) || !isDefined(var_0)) {
     return;
   }
   switch (var_0) {
@@ -25,17 +25,17 @@ updatedamagefeedback(var_0, var_1) {
       self setclientomnvar("damage_feedback", var_0);
       break;
     case "mp_solar":
-      if(!isdefined(self.shouldloopdamagefeedback)) {
-        if(isdefined(level.mapkillstreakdamagefeedbacksound))
+      if(!isDefined(self.shouldloopdamagefeedback)) {
+        if(isDefined(level.mapkillstreakdamagefeedbacksound))
           self thread[[level.mapkillstreakdamagefeedbacksound]]();
       } else
         self.damagefeedbacktimer = 10;
 
       break;
     case "laser":
-      if(isdefined(level.sentrygun)) {
-        if(!isdefined(self.shouldloopdamagefeedback)) {
-          if(isdefined(level.mapkillstreakdamagefeedbacksound))
+      if(isDefined(level.sentrygun)) {
+        if(!isDefined(self.shouldloopdamagefeedback)) {
+          if(isDefined(level.mapkillstreakdamagefeedbacksound))
             self thread[[level.mapkillstreakdamagefeedbacksound]](level.sentrygun);
         }
       }

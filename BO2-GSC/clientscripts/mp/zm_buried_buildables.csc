@@ -58,7 +58,7 @@ include_buildables(buildablesenabledlist) {
 buildable_setup_glint(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval == 1) {
     offset = buildable_setup_glint_offset();
-    self.buildable_glint = playfx(localclientnum, level._effect["fx_buried_key_glint"], self.origin + offset);
+    self.buildable_glint = playFX(localclientnum, level._effect["fx_buried_key_glint"], self.origin + offset);
   } else if(isDefined(self.buildable_glint))
     stopfx(localclientnum, self.buildable_glint);
 }

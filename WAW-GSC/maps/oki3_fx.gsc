@@ -146,14 +146,14 @@ tunnel_light() {
   lght setlightintensity(2.1);
   mdl = spawn("script_model", lantern.origin);
   mdl.angles = (90, 0, 0);
-  mdl setmodel("tag_origin");
+  mdl setModel("tag_origin");
   mdl linkto(lantern);
-  playfxontag(level._effect["tunnel_light_fx"], mdl, "tag_origin");
+  playFXOnTag(level._effect["tunnel_light_fx"], mdl, "tag_origin");
   lantern thread monitor_lantern_dmg(mdl, lght);
-  while (!isDefined(level.mortars_falling)) {
+  while(!isDefined(level.mortars_falling)) {
     wait 1;
   }
-  while (level.mortars_falling) {
+  while(level.mortars_falling) {
     level waittill("explosion");
     if(randomint(100) < 15) {
       lantern physicslaunch(lantern.origin, (randomintrange(-20, 20), randomintrange(-20, 20), randomintrange(-20, 20)));
@@ -163,11 +163,11 @@ tunnel_light() {
 }
 
 monitor_lantern_dmg(mdl, lght) {
-  self setcandamage(true);
+  self setCanDamage(true);
   candamage = true;
   dmg = 0;
   damaged = false;
-  while (candamage) {
+  while(candamage) {
     self waittill("damage", amount, attacker);
     if(isPlayer(attacker)) {
       if(!isDefined(level.tunnel_guys_alerted)) {
@@ -182,11 +182,11 @@ monitor_lantern_dmg(mdl, lght) {
       if(dmg > 15 && !damaged) {
         damaged = true;
         lght setlightintensity(0.01);
-        self setmodel("lights_tinhatlamp_off");
+        self setModel("lights_tinhatlamp_off");
         mdl delete();
         mdl2 = spawn("script_model", self.origin);
         mdl2 linkto(self);
-        mdl2 setmodel("tag_origin");
+        mdl2 setModel("tag_origin");
         self thread light_zort(mdl2);
         maps\_utility::arcademode_assignpoints("arcademode_score_generic250", attacker);
       }
@@ -196,9 +196,9 @@ monitor_lantern_dmg(mdl, lght) {
 
 light_zort(mdl) {
   x = 0;
-  while (x < 10) {
-    playfxontag(level._effect["zort"], mdl, "tag_origin");
-    self playsound("radio_destroyed");
+  while(x < 10) {
+    playFXOnTag(level._effect["zort"], mdl, "tag_origin");
+    self playSound("radio_destroyed");
     wait(randomfloatrange(.9, 2.5));
     x++;
   }
@@ -207,8 +207,8 @@ light_zort(mdl) {
 
 mortarpits_fake_launch() {
   ents = getstructarray("fake_mortar", "targetname");
-  while (!flag("stop_fake_mortar")) {
-    for (i = 0; i < ents.size; i++) {
+  while(!flag("stop_fake_mortar")) {
+    for(i = 0; i < ents.size; i++) {
       thread fake_launch(ents[i]);
       wait(randomfloat(2));
     }
@@ -219,10 +219,10 @@ mortarpits_fake_launch() {
 fake_launch(org) {
   targs = getstructarray("dirt_mortar", "targetname");
   playsoundatposition(level.scr_sound["mortar_flash"], org.origin);
-  playfx(level._effect["mortar_flash"], org.origin, anglestoforward(org.angles));
+  playFX(level._effect["mortar_flash"], org.origin, anglesToForward(org.angles));
   wait(randomintrange(4, 7));
   targ = targs[randomint(targs.size)];
   playsoundatposition("mortar_dirt", targ.origin);
-  playfx(level._effect["dirt_mortar"], targ.origin);
+  playFX(level._effect["dirt_mortar"], targ.origin);
   earthquake(0.15, 2.5, targ.origin, 3000);
 }

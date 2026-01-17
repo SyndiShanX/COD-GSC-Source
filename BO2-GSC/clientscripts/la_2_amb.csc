@@ -95,10 +95,10 @@ jet_transistion_watcher() {
     player = getlocalplayers()[0];
     level waittill("snd_jet_start");
     level.sndvtolmode = 0;
-    player playsound(0, "veh_vtol_engage_c");
+    player playSound(0, "veh_vtol_engage_c");
     level waittill("snd_vtol_start");
     level.sndvtolmode = 1;
-    player playsound(0, "veh_vtol_disengage_c");
+    player playSound(0, "veh_vtol_disengage_c");
   }
 }
 
@@ -109,9 +109,9 @@ jet_boost_watcher() {
   while(true) {
     player = getlocalplayers()[0];
     level waittill("snd_boost_start");
-    player playsound(0, "veh_f35_boost");
-    boost_ent playloopsound("veh_f35_boost_lp", 1);
-    boost_lfe playloopsound("veh_f35_boost_lp_lfe", 1);
+    player playSound(0, "veh_f35_boost");
+    boost_ent playLoopSound("veh_f35_boost_lp", 1);
+    boost_lfe playLoopSound("veh_f35_boost_lp_lfe", 1);
     level waittill("snd_boost_end");
     boost_ent stoploopsound(0.5);
     boost_lfe stoploopsound(0.5);
@@ -131,7 +131,7 @@ radio_chatter() {
 
   while(true) {
     wait(randomintrange(5, 15));
-    self playsound(0, "blk_f35_radio_chatter");
+    self playSound(0, "blk_f35_radio_chatter");
   }
 }
 

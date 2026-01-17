@@ -43,7 +43,7 @@ player_init() {
 
 death_monitor() {
   setDvars_based_on_varibles();
-  while (1) {
+  while(1) {
     if(issaverecentlyloaded())
       setDvars_based_on_varibles();
     wait .1;
@@ -51,7 +51,7 @@ death_monitor() {
 }
 
 setDvars_based_on_varibles() {
-  for (index = 0; index < level.cheatDvars.size; index++)
+  for(index = 0; index < level.cheatDvars.size; index++)
     setDvar(level.cheatDvars[index], level.cheatStates[level.cheatDvars[index]]);
   if(!isDefined(level.credits_active) || !level.credits_active) {
     setdvar("credits_active", "0");
@@ -88,8 +88,8 @@ specialFeaturesMenu() {
   addCheat("sf_use_clustergrenade", ::clustergrenadeMode);
   addCheat("sf_use_tire_explosion", ::tire_explosionMode);
   level.cheatDvars = getArrayKeys(level.cheatStates);
-  for (;;) {
-    for (index = 0; index < level.cheatDvars.size; index++)
+  for(;;) {
+    for(index = 0; index < level.cheatDvars.size; index++)
       checkCheatChanged(level.cheatDvars[index]);
     wait 0.5;
   }
@@ -112,7 +112,7 @@ clustergrenadeMode(cheatValue) {
 
 wait_for_grenades() {
   level endon("end_cluster_grenades");
-  while (1) {
+  while(1) {
     self waittill("grenade_fire", grenade, weapname);
     if(weapname != "fraggrenade") {
       continue;
@@ -123,7 +123,7 @@ wait_for_grenades() {
 
 create_clusterGrenade() {
   prevorigin = self.origin;
-  while (1) {
+  while(1) {
     if(!isDefined(self)) {
       break;
     }
@@ -137,7 +137,7 @@ create_clusterGrenade() {
     return;
   }
   ai = undefined;
-  for (i = 0; i < aiarray.size; i++) {
+  for(i = 0; i < aiarray.size; i++) {
     if(aiarray[i].team == "allies") {
       ai = aiarray[i];
       break;
@@ -147,7 +147,7 @@ create_clusterGrenade() {
     ai = aiarray[0];
   oldweapon = ai.grenadeweapon;
   ai.grenadeweapon = "fraggrenade";
-  for (i = 0; i < numSecondaries; i++) {
+  for(i = 0; i < numSecondaries; i++) {
     velocity = getClusterGrenadeVelocity();
     timer = 1.5 + i / 6 + randomfloat(0.1);
     ai magicGrenadeManual(prevorigin, velocity, timer);
@@ -226,7 +226,7 @@ applyVisionSets() {
 
 slowmo_system_init() {
   if(!isDefined(level.slowmo)) {
-    level.slowmo = spawnstruct();
+    level.slowmo = spawnStruct();
     slowmo_system_defaults();
     level.slowmo.speed_current = level.slowmo.speed_norm;
     level.slowmo.lerp_interval = .05;
@@ -269,7 +269,7 @@ slowmo_hintprint() {
   myHintString setPoint("TOP", undefined, 0, 110);
   myHintString.sort = 0.5;
   myHintString setText(&"SCRIPT_PLATFORM_CHEAT_USETOSLOWMO");
-  for (cycles = 0; cycles < 100; cycles++) {
+  for(cycles = 0; cycles < 100; cycles++) {
     if(level.cheatShowSlowMoHint != 1) {
       break;
     }
@@ -299,7 +299,7 @@ slowmoMode(cheatValue) {
 gamespeed_proc() {
   level endon("disable_slowmo");
   self thread gamespeed_reset_on_death();
-  while (1) {
+  while(1) {
     self waittill("action_notify_melee");
     level.cheatShowSlowMoHint = 0;
     if(!flag("disable_slowmo_cheat")) {
@@ -335,7 +335,7 @@ gamespeed_set(speed, refspeed, lerp_time) {
     cycles = 1;
   increment = (actual_range / cycles);
   self.lerping = time;
-  while (cycles) {
+  while(cycles) {
     self.speed_current += increment;
     settimescale(self.speed_current);
     cycles--;
@@ -436,7 +436,7 @@ chaplin_titlecard(textLine) {
 
 chaplin_proc() {
   level endon("disable_chaplin");
-  while (1) {
+  while(1) {
     self Shellshock("chaplincheat", 60, true);
     MusicPlay("cheat_chaplin_music", 0, true);
     wait 0.5;
@@ -450,10 +450,10 @@ chaplin_proc() {
 }
 
 chaplin_grain_start() {
-  self.cheatGrainLooper = spawn("script_model", self geteye());
-  self.cheatGrainLooper setmodel("tag_origin");
+  self.cheatGrainLooper = spawn("script_model", self getEye());
+  self.cheatGrainLooper setModel("tag_origin");
   self.cheatGrainLooper hide();
-  PlayFXOnTag(level._effect["grain_test"], self.cheatGrainLooper, "tag_origin");
+  playFXOnTag(level._effect["grain_test"], self.cheatGrainLooper, "tag_origin");
   self thread chaplin_grain_proc();
 }
 
@@ -465,14 +465,14 @@ chaplin_grain_end() {
 
 chaplin_grain_proc() {
   level endon("disable_chaplin_grain");
-  while (1) {
-    self.cheatGrainLooper.origin = self GetEye() + (vector_multiply(AnglesToForward(self GetPlayerAngles()), 50));
+  while(1) {
+    self.cheatGrainLooper.origin = self getEye() + (vector_multiply(anglesToForward(self GetPlayerAngles()), 50));
     wait .01;
   }
 }
 
 is_cheating() {
-  for (i = 0; i < level.cheatDvars.size; i++)
+  for(i = 0; i < level.cheatDvars.size; i++)
     if(level.cheatStates[level.cheatDvars[i]])
       return true;
   return false;

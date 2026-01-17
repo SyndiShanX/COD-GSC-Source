@@ -22,8 +22,7 @@ spawned(localclientnum) {
   self thread proxygrenadefx(localclientnum);
 }
 
-updateplayertazered(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-}
+updateplayertazered(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {}
 
 proxygrenadefx(localclientnum) {
   self endon("entityshutdown");
@@ -41,9 +40,9 @@ playflarefx(localclientnum) {
   level endon("player_switch");
 
   if(friendnotfoe(localclientnum))
-    fx_handle = playfxontag(localclientnum, level._effect["prox_grenade_friendly_default"], self, "tag_fx");
+    fx_handle = playFXOnTag(localclientnum, level._effect["prox_grenade_friendly_default"], self, "tag_fx");
   else
-    fx_handle = playfxontag(localclientnum, level._effect["prox_grenade_enemy_default"], self, "tag_fx");
+    fx_handle = playFXOnTag(localclientnum, level._effect["prox_grenade_enemy_default"], self, "tag_fx");
 
   self thread watchproxyshutdown(localclientnum, fx_handle);
   return fx_handle;
@@ -77,7 +76,7 @@ taserhudfx(localclientnum, position) {
   if(self isremotecontrolling()) {
     return;
   }
-  trace = bullettrace(getlocalclienteyepos(localclientnum), position, 0, self);
+  trace = bulletTrace(getlocalclienteyepos(localclientnum), position, 0, self);
 
   if(trace["fraction"] >= 1) {
     if(self hasperk(localclientnum, "specialty_proximityprotection"))
@@ -92,7 +91,7 @@ taserhudfx(localclientnum, position) {
         for(j = 0; j < cycles; j++) {
           if(getclientfieldtoplayer("tazered") == 1) {
             menuname = "fullscreen_proximity";
-            forwardvec = vectornormalize(anglestoforward(self.angles));
+            forwardvec = vectornormalize(anglesToForward(self.angles));
             rightvec = vectornormalize(anglestoright(self.angles));
             explosionvec = vectornormalize(position - self.origin);
             fdot = vectordot(explosionvec, forwardvec);
@@ -127,8 +126,8 @@ reducedshock(localclientnum, position) {
   level endon("respawn");
   menuname = "fullscreen_proximity";
   self thread flickervisionset(localclientnum, 0.03, 0.15, 0.0);
-  self playsound(0, "wpn_taser_mine_tacmask");
-  forwardvec = vectornormalize(anglestoforward(self.angles));
+  self playSound(0, "wpn_taser_mine_tacmask");
+  forwardvec = vectornormalize(anglesToForward(self.angles));
   rightvec = vectornormalize(anglestoright(self.angles));
   explosionvec = vectornormalize(position - self.origin);
   fdot = vectordot(explosionvec, forwardvec);

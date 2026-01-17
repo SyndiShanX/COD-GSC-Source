@@ -13,20 +13,20 @@
 #namespace zm_bgb_alchemical_antithesis;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_alchemical_antithesis", & __init__, undefined, "bgb");
+  system::register("zm_bgb_alchemical_antithesis", &__init__, undefined, "bgb");
 }
 
 function __init__() {
-  if(!(isdefined(level.bgb_in_use) && level.bgb_in_use)) {
+  if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
-  bgb::register("zm_bgb_alchemical_antithesis", "activated", 2, undefined, undefined, & validation, & activation);
+  bgb::register("zm_bgb_alchemical_antithesis", "activated", 2, undefined, undefined, &validation, &activation);
   bgb::function_336ffc4e("zm_bgb_alchemical_antithesis");
-  bgb::function_ff4b2998("zm_bgb_alchemical_antithesis", & add_to_player_score_override, 0);
+  bgb::function_ff4b2998("zm_bgb_alchemical_antithesis", &add_to_player_score_override, 0);
 }
 
 function validation() {
-  return !(isdefined(self bgb::get_active()) && self bgb::get_active());
+  return !(isDefined(self bgb::get_active()) && self bgb::get_active());
 }
 
 function activation() {
@@ -36,7 +36,7 @@ function activation() {
 }
 
 function add_to_player_score_override(points, str_awarded_by, var_1ed9bd9b) {
-  if(!(isdefined(self.bgb_active) && self.bgb_active)) {
+  if(!(isDefined(self.bgb_active) && self.bgb_active)) {
     return points;
   }
   var_4375ef8a = int(points / 10);
@@ -44,7 +44,7 @@ function add_to_player_score_override(points, str_awarded_by, var_1ed9bd9b) {
   if(zm_utility::is_offhand_weapon(current_weapon)) {
     return points;
   }
-  if(isdefined(self.is_drinking) && self.is_drinking) {
+  if(isDefined(self.is_drinking) && self.is_drinking) {
     return points;
   }
   if(current_weapon == level.weaponrevivetool) {
@@ -59,14 +59,14 @@ function add_to_player_score_override(points, str_awarded_by, var_1ed9bd9b) {
 }
 
 function function_a6bf711f() {
-  if(!isdefined(self.var_82764e33)) {
+  if(!isDefined(self.var_82764e33)) {
     self.var_82764e33 = 0;
   }
   if(!self.var_82764e33) {
     self.var_82764e33 = 1;
     self playsoundtoplayer("zmb_bgb_alchemical_ammoget", self);
     wait(0.5);
-    if(isdefined(self)) {
+    if(isDefined(self)) {
       self.var_82764e33 = 0;
     }
   }

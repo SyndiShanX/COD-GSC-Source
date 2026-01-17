@@ -23,11 +23,11 @@ init_animset_combat() {
 }
 
 main() {
-  if(isdefined(self.no_ai)) {
+  if(isDefined(self.no_ai)) {
     return;
   }
-  if(isdefined(self.custom_animscript)) {
-    if(isdefined(self.custom_animscript["combat"])) {
+  if(isDefined(self.custom_animscript)) {
+    if(isDefined(self.custom_animscript["combat"])) {
       [
         [self.custom_animscript["combat"]]
       ]();
@@ -40,13 +40,13 @@ main() {
   animscripts\utility::initialize("combat");
   self.a.arrivaltype = undefined;
 
-  if(isdefined(self.node) && self.node.type == "Ambush" && self nearnode(self.node))
+  if(isDefined(self.node) && self.node.type == "Ambush" && self nearnode(self.node))
     self.ambushnode = self.node;
 
   transitiontocombat();
   dofriendlyfirereaction();
 
-  if(isdefined(self.specialidleanim))
+  if(isDefined(self.specialidleanim))
     animscripts\stop::specialidleloop();
 
   setup();
@@ -63,19 +63,19 @@ dofriendlyfirereaction() {
   if(self.team != "allies") {
     return;
   }
-  if(self ismovesuppressed() && self.prevscript == "move" && self.a.pose == "stand" && !isdefined(self.disablefriendlyfirereaction)) {
-    if(isdefined(self.enemy) && distancesquared(self.origin, self.enemy.origin) < squared(128)) {
+  if(self ismovesuppressed() && self.prevscript == "move" && self.a.pose == "stand" && !isDefined(self.disablefriendlyfirereaction)) {
+    if(isDefined(self.enemy) && distancesquared(self.origin, self.enemy.origin) < squared(128)) {
       return;
     }
-    if(!isdefined(self.a.array)) {
+    if(!isDefined(self.a.array)) {
       return;
     }
-    if(isdefined(self.a.array["surprise_stop"]))
+    if(isDefined(self.a.array["surprise_stop"]))
       var_0 = animscripts\utility::animarray("surprise_stop");
     else if(self.swimmer) {
       var_0 = animscripts\swim::getswimanim("surprise_stop");
 
-      if(!isdefined(var_0))
+      if(!isDefined(var_0))
         return;
     } else
       var_0 = animscripts\utility::lookupanim("combat", "surprise_stop");
@@ -100,7 +100,7 @@ transitionfromcoverstand() {
       var_1 = "trans_from_corner_standl";
     }
 
-    if(isdefined(var_0)) {
+    if(isDefined(var_0)) {
       var_2 = 0;
 
       foreach(var_4 in var_0) {
@@ -122,7 +122,7 @@ transitionfromcoverstand() {
 }
 
 transitionfrompronemove() {
-  if(isdefined(self.enablepronetocombattransition) && self.a.pose == "prone") {
+  if(isDefined(self.enablepronetocombattransition) && self.a.pose == "prone") {
     var_0 = undefined;
     var_1 = undefined;
 
@@ -137,11 +137,11 @@ transitionfrompronemove() {
 }
 
 transitiontocombat() {
-  if(isdefined(self.specialidleanim) || isdefined(self.customidleanimset)) {
+  if(isDefined(self.specialidleanim) || isDefined(self.customidleanimset)) {
     return;
   }
-  if(isdefined(self.animarchetype) && self.animarchetype == "s1_soldier") {
-    if(!isdefined(self.enemy)) {
+  if(isDefined(self.animarchetype) && self.animarchetype == "s1_soldier") {
+    if(!isDefined(self.enemy)) {
       return;
     }
     if(self.a.pose == "crouch") {
@@ -164,7 +164,7 @@ transitiontocombat() {
   transitionfromcoverstand();
   transitionfrompronemove();
 
-  if(isdefined(self.enemy) && distancesquared(self.origin, self.enemy.origin) < 262144) {
+  if(isDefined(self.enemy) && distancesquared(self.origin, self.enemy.origin) < 262144) {
     return;
   }
   if(self.prevscript == "stop" && !animscripts\utility::iscqbwalking() && self.a.pose == "stand" && !self getisforcedincombat()) {
@@ -203,7 +203,7 @@ setup() {
   self clearanim( % animscript_root, 0.2);
   var_0 = 0.2;
 
-  if(isdefined(self.aimsetupblendtime))
+  if(isDefined(self.aimsetupblendtime))
     var_0 = self.aimsetupblendtime;
 
   animscripts\combat_utility::setupaim(var_0);
@@ -236,7 +236,7 @@ set_default_swimmer_aim_limits() {
 }
 
 set_default_aim_limits(var_0) {
-  if(isdefined(var_0))
+  if(isDefined(var_0))
     self setdefaultaimlimits(var_0);
   else
     self setdefaultaimlimits();
@@ -262,7 +262,7 @@ setupexposedcombatloop() {
   thread watchshootentvelocity();
   resetgiveuponenemytime();
 
-  if(isdefined(self.a.magicreloadwhenreachenemy)) {
+  if(isDefined(self.a.magicreloadwhenreachenemy)) {
     animscripts\weaponlist::refillclip();
     self.a.magicreloadwhenreachenemy = undefined;
   }
@@ -301,8 +301,8 @@ exposedcombatcheckstance(var_0) {
       return 1;
   }
 
-  if(var_0 > 262144 && self.a.pose != "crouch" && self isstanceallowed("crouch") && !self.swimmer && !animscripts\utility::usingsidearm() && !isdefined(self.heat) && gettime() >= self.a.dontcrouchtime && lengthsquared(self.shootentvelocity) < 10000) {
-    if(!isdefined(self.shootpos) || sighttracepassed(self.origin + (0, 0, 36), self.shootpos, 0, undefined)) {
+  if(var_0 > 262144 && self.a.pose != "crouch" && self isstanceallowed("crouch") && !self.swimmer && !animscripts\utility::usingsidearm() && !isDefined(self.heat) && gettime() >= self.a.dontcrouchtime && lengthsquared(self.shootentvelocity) < 10000) {
+    if(!isDefined(self.shootpos) || sighttracepassed(self.origin + (0, 0, 36), self.shootpos, 0, undefined)) {
       transitionto("crouch");
       return 1;
     }
@@ -313,7 +313,7 @@ exposedcombatcheckstance(var_0) {
 
 exposedcombatcheckreloadorusepistol(var_0) {
   if(!animscripts\utility::usingsidearm()) {
-    if(isdefined(self.forcesidearm) && self.a.pose == "stand") {
+    if(isDefined(self.forcesidearm) && self.a.pose == "stand") {
       if(tryusingsidearm())
         return 1;
     }
@@ -343,14 +343,14 @@ exposedcombatcheckreloadorusepistol(var_0) {
 }
 
 exposedcombatcheckputawaypistol(var_0) {
-  if(animscripts\utility::usingsidearm() && self.a.pose == "stand" && !isdefined(self.forcesidearm)) {
-    if(var_0 > 262144 || self.combatmode == "ambush_nodes_only" && (!isdefined(self.enemy) || !self cansee(self.enemy)))
+  if(animscripts\utility::usingsidearm() && self.a.pose == "stand" && !isDefined(self.forcesidearm)) {
+    if(var_0 > 262144 || self.combatmode == "ambush_nodes_only" && (!isDefined(self.enemy) || !self cansee(self.enemy)))
       switchtolastweapon(animscripts\utility::lookupanim("combat", "pistol_to_primary"));
   }
 }
 
 exposedcombatpositionadjust() {
-  if(isdefined(self.heat) && self nearclaimnodeandangle())
+  if(isDefined(self.heat) && self nearclaimnodeandangle())
     self safeteleport(self.nodeoffsetpos, self.node.angles);
 }
 
@@ -358,7 +358,7 @@ exposedcombatneedtoturn() {
   if(needtoturn()) {
     var_0 = 0.25;
 
-    if(isdefined(self.shootent) && !issentient(self.shootent))
+    if(isDefined(self.shootent) && !issentient(self.shootent))
       var_0 = 1.5;
 
     var_1 = animscripts\shared::getpredictedaimyawtoshootentorpos(var_0);
@@ -381,7 +381,7 @@ exposedcombatmainloop() {
   } else
     self orientmode("face angle", self.angles[1]);
 
-  for (;;) {
+  for(;;) {
     if(animscripts\utility::usingrocketlauncher())
       self.deathfunction = undefined;
 
@@ -393,7 +393,7 @@ exposedcombatmainloop() {
     trymelee();
     exposedcombatpositionadjust();
 
-    if(!isdefined(self.shootpos)) {
+    if(!isDefined(self.shootpos)) {
       cantseeenemybehavior();
       continue;
     }
@@ -436,7 +436,7 @@ exposedcombatmainloop() {
 }
 
 exposedwait() {
-  if(!isdefined(self.enemy) || !self cansee(self.enemy)) {
+  if(!isDefined(self.enemy) || !self cansee(self.enemy)) {
     self endon("enemy");
     self endon("shoot_behavior_change");
     wait(0.2 + randomfloat(0.1));
@@ -446,7 +446,7 @@ exposedwait() {
 }
 
 standifmakesenemyvisible() {
-  if(isdefined(self.enemy) && (!self cansee(self.enemy) || !self canshootenemy()) && sighttracepassed(self.origin + (0, 0, 64), self.enemy getshootatpos(), 0, undefined)) {
+  if(isDefined(self.enemy) && (!self cansee(self.enemy) || !self canshootenemy()) && sighttracepassed(self.origin + (0, 0, 64), self.enemy getshootatpos(), 0, undefined)) {
     self.a.dontcrouchtime = gettime() + 3000;
     transitionto("stand");
     return 1;
@@ -458,7 +458,7 @@ standifmakesenemyvisible() {
 needtoturn() {
   var_0 = self.shootpos;
 
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     return 0;
 
   var_1 = self.angles[1] - vectortoyaw(var_0 - self.origin);
@@ -477,12 +477,12 @@ needtoturn() {
 waitforstancechange() {
   var_0 = self.a.pose;
 
-  if(isdefined(self.a.onback)) {
+  if(isDefined(self.a.onback)) {
     wait 0.1;
     return 1;
   }
 
-  if(var_0 == "stand" && isdefined(self.heat))
+  if(var_0 == "stand" && isDefined(self.heat))
     return 0;
 
   if(!self isstanceallowed(var_0)) {
@@ -510,9 +510,7 @@ waitforstancechange() {
 
       transitionto(var_2);
       return 1;
-    } else {
-
-    }
+    } else {}
   }
 
   return 0;
@@ -525,34 +523,34 @@ cantseeenemybehavior() {
   var_0 = gettime();
   self.a.dontcrouchtime = var_0 + 1500;
 
-  if(isdefined(self.group) && isdefined(self.group.forward)) {
+  if(isDefined(self.group) && isDefined(self.group.forward)) {
     var_1 = angleclamp180(self.angles[1] - vectortoyaw(self.group.forward));
 
     if(turntofacerelativeyaw(var_1))
       return 1;
   }
 
-  if(isdefined(self.node) && isdefined(anim.iscombatscriptnode[self.node.type])) {
+  if(isDefined(self.node) && isDefined(anim.iscombatscriptnode[self.node.type])) {
     var_1 = angleclamp180(self.angles[1] - self.node.angles[1]);
 
     if(turntofacerelativeyaw(var_1))
       return 1;
-  } else if(isdefined(self.enemy) && self seerecently(self.enemy, 2) || var_0 > self.a.scriptstarttime + 1200) {
+  } else if(isDefined(self.enemy) && self seerecently(self.enemy, 2) || var_0 > self.a.scriptstarttime + 1200) {
     var_1 = undefined;
     var_2 = self getanglestolikelyenemypath();
 
-    if(isdefined(var_2))
+    if(isDefined(var_2))
       var_1 = angleclamp180(self.angles[1] - var_2[1]);
-    else if(isdefined(self.node))
+    else if(isDefined(self.node))
       var_1 = angleclamp180(self.angles[1] - self.node.angles[1]);
-    else if(isdefined(self.enemy)) {
+    else if(isDefined(self.enemy)) {
       var_2 = vectortoangles(self lastknownpos(self.enemy) - self.origin);
       var_1 = angleclamp180(self.angles[1] - var_2[1]);
     }
 
-    if(isdefined(var_1) && turntofacerelativeyaw(var_1))
+    if(isDefined(var_1) && turntofacerelativeyaw(var_1))
       return 1;
-  } else if(isdefined(self.heat) && self nearclaimnode()) {
+  } else if(isDefined(self.heat) && self nearclaimnode()) {
     var_1 = angleclamp180(self.angles[1] - self.node.angles[1]);
 
     if(turntofacerelativeyaw(var_1))
@@ -613,13 +611,13 @@ watchshootentvelocity() {
   var_1 = self.origin;
   var_2 = 0.15;
 
-  for (;;) {
-    if(isdefined(self.shootent) && isdefined(var_0) && self.shootent == var_0) {
+  for(;;) {
+    if(isDefined(self.shootent) && isDefined(var_0) && self.shootent == var_0) {
       var_3 = self.shootent.origin;
       self.shootentvelocity = (var_3 - var_1) * (1 / var_2);
       var_1 = var_3;
     } else {
-      if(isdefined(self.shootent))
+      if(isDefined(self.shootent))
         var_1 = self.shootent.origin;
       else
         var_1 = self.origin;
@@ -647,7 +645,7 @@ faceenemyimmediately() {
   self endon("facing_enemy_immediately");
   var_0 = 5;
 
-  for (;;) {
+  for(;;) {
     var_1 = 0 - animscripts\utility::getyawtoenemy();
 
     if(abs(var_1) < 2) {
@@ -678,10 +676,10 @@ isanimdeltaingoal(var_0) {
 }
 
 doturn(var_0, var_1) {
-  var_2 = isdefined(self.shootpos);
+  var_2 = isDefined(self.shootpos);
   var_3 = 1;
   var_4 = 0.2;
-  var_5 = isdefined(self.enemy) && !isdefined(self.turntomatchnode) && self seerecently(self.enemy, 2) && distancesquared(self.enemy.origin, self.origin) < 262144;
+  var_5 = isDefined(self.enemy) && !isDefined(self.turntomatchnode) && self seerecently(self.enemy, 2) && distancesquared(self.enemy.origin, self.origin) < 262144;
 
   if(self.a.scriptstarttime + 500 > gettime()) {
     var_4 = 0.25;
@@ -714,9 +712,9 @@ doturn(var_0, var_1) {
   var_8 = "turn_" + var_0 + "_" + var_7;
   var_9 = animscripts\utility::animarray(var_8);
 
-  if(isdefined(self.turntomatchnode))
+  if(isDefined(self.turntomatchnode))
     self animmode("angle deltas", 0);
-  else if(isdefined(self.node) && isdefined(anim.iscombatpathnode[self.node.type]) && distancesquared(self.origin, self.node.origin) < 256)
+  else if(isDefined(self.node) && isDefined(anim.iscombatpathnode[self.node.type]) && distancesquared(self.origin, self.node.origin) < 256)
     self animmode("angle deltas", 0);
   else if(isanimdeltaingoal(var_9))
     resetanimmode();
@@ -725,36 +723,36 @@ doturn(var_0, var_1) {
 
   self setanimknoball( % exposed_aiming, % body, 1, var_4);
 
-  if(!isdefined(self.turntomatchnode))
+  if(!isDefined(self.turntomatchnode))
     turningaimingon(var_4);
 
   self setanimlimited( % turn, 1, var_4);
 
-  if(isdefined(self.heat))
+  if(isDefined(self.heat))
     var_3 = min(1.0, var_3);
-  else if(isdefined(self.turntomatchnode))
+  else if(isDefined(self.turntomatchnode))
     var_3 = max(1.5, var_3);
 
   self setflaggedanimknoblimitedrestart("turn", var_9, 1, var_4, var_3);
   combat_playfacialanim(var_9, "aim");
   self notify("turning");
 
-  if(var_2 && !isdefined(self.turntomatchnode) && !isdefined(self.heat))
+  if(var_2 && !isDefined(self.turntomatchnode) && !isDefined(self.heat))
     thread shootwhileturning();
 
   doturnnotetracks();
   self setanimlimited( % turn, 0, 0.2);
 
-  if(!isdefined(self.turntomatchnode))
+  if(!isDefined(self.turntomatchnode))
     turningaimingoff(0.2);
 
-  if(!isdefined(self.turntomatchnode)) {
+  if(!isDefined(self.turntomatchnode)) {
     self clearanim( % turn, 0.2);
     self setanimknob( % exposed_aiming, 1, 0.2, 1);
   } else
     self clearanim( % exposed_modern, 0.3);
 
-  if(isdefined(self.turnlastresort)) {
+  if(isDefined(self.turnlastresort)) {
     self.turnlastresort = undefined;
     thread faceenemyimmediately();
   }
@@ -818,7 +816,7 @@ watchforneedtoturnortimeout() {
   self endon("stop_watching_for_need_to_turn");
   var_0 = gettime() + 4000 + randomint(2000);
 
-  for (;;) {
+  for(;;) {
     if(gettime() > var_0 || needtoturn()) {
       self notify("need_to_turn");
       break;
@@ -837,12 +835,12 @@ considerthrowgrenade() {
   if(self.grenadeammo <= 0)
     return 0;
 
-  if(isdefined(anim.throwgrenadeatplayerasap) && isalive(level.player)) {
+  if(isDefined(anim.throwgrenadeatplayerasap) && isalive(level.player)) {
     if(tryexposedthrowgrenade(level.player, 200))
       return 1;
   }
 
-  if(isdefined(self.enemy) && tryexposedthrowgrenade(self.enemy, self.minexposedgrenadedist))
+  if(isDefined(self.enemy) && tryexposedthrowgrenade(self.enemy, self.minexposedgrenadedist))
     return 1;
 
   return 0;
@@ -851,16 +849,16 @@ considerthrowgrenade() {
 tryexposedthrowgrenade(var_0, var_1) {
   var_2 = 0;
 
-  if(isdefined(self.dontevershoot) || isdefined(var_0.dontattackme))
+  if(isDefined(self.dontevershoot) || isDefined(var_0.dontattackme))
     return 0;
 
-  if(!isdefined(self.a.array["exposed_grenade"]))
+  if(!isDefined(self.a.array["exposed_grenade"]))
     return 0;
 
   var_3 = var_0.origin;
 
   if(!self cansee(var_0)) {
-    if(isdefined(self.enemy) && var_0 == self.enemy && isdefined(self.shootpos))
+    if(isDefined(self.enemy) && var_0 == self.enemy && isDefined(self.shootpos))
       var_3 = self.shootpos;
   }
 
@@ -907,12 +905,12 @@ transitionto(var_0) {
   }
   var_1 = self.a.pose + "_2_" + var_0;
 
-  if(!isdefined(self.a.array)) {
+  if(!isDefined(self.a.array)) {
     return;
   }
   var_2 = self.a.array[var_1];
 
-  if(!isdefined(var_2)) {
+  if(!isDefined(var_2)) {
     return;
   }
   self clearanim( % animscript_root, 0.3);
@@ -947,10 +945,10 @@ keeptryingtomelee() {
   self endon("need_to_turn");
   self endon("shoot_behavior_change");
 
-  for (;;) {
+  for(;;) {
     wait(0.2 + randomfloat(0.3));
 
-    if(isdefined(self.enemy)) {
+    if(isDefined(self.enemy)) {
       if(isplayer(self.enemy))
         var_0 = 40000;
       else
@@ -967,7 +965,7 @@ trymelee() {
 }
 
 delaystandardmelee() {
-  if(isdefined(self.nomeleechargedelay)) {
+  if(isDefined(self.nomeleechargedelay)) {
     return;
   }
   if(isplayer(self.enemy)) {
@@ -982,7 +980,7 @@ exposedreload(var_0) {
     animscripts\combat_utility::endfireandanimidlethread();
     var_1 = undefined;
 
-    if(isdefined(self.specialreloadanimfunc)) {
+    if(isDefined(self.specialreloadanimfunc)) {
       var_1 = self[[self.specialreloadanimfunc]]();
       self.keepclaimednode = 1;
     } else {
@@ -1026,7 +1024,7 @@ doreloadanim(var_0, var_1) {
 
   var_2 = 1;
 
-  if(!animscripts\utility::usingsidearm() && !animscripts\utility::isshotgun(self.weapon) && isdefined(self.enemy) && self cansee(self.enemy) && distancesquared(self.enemy.origin, self.origin) < 1048576)
+  if(!animscripts\utility::usingsidearm() && !animscripts\utility::isshotgun(self.weapon) && isDefined(self.enemy) && self cansee(self.enemy) && distancesquared(self.enemy.origin, self.origin) < 1048576)
     var_2 = 1.2;
 
   var_3 = "reload_" + animscripts\combat_utility::getuniqueflagnameindex();
@@ -1043,8 +1041,8 @@ abortreloadwhencanshoot() {
   self endon("abort_reload");
   self endon("killanimscript");
 
-  for (;;) {
-    if(isdefined(self.shootent) && self cansee(self.shootent)) {
+  for(;;) {
+    if(isDefined(self.shootent) && self cansee(self.shootent)) {
       break;
     }
 
@@ -1079,10 +1077,10 @@ exception_exposed_mg42_portable() {
 }
 
 tryusingsidearm() {
-  if(isdefined(self.secondaryweapon) && animscripts\utility::isshotgun(self.secondaryweapon))
+  if(isDefined(self.secondaryweapon) && animscripts\utility::isshotgun(self.secondaryweapon))
     return 0;
 
-  if(isdefined(self.no_pistol_switch))
+  if(isDefined(self.no_pistol_switch))
     return 0;
 
   self.a.pose = "stand";
@@ -1139,7 +1137,7 @@ handlepickup(var_0) {
 switchtolastweapon(var_0, var_1) {
   self endon("killanimscript");
 
-  if(animscripts\utility::isshotgun(self.primaryweapon) && (isdefined(self.wantshotgun) && !self.wantshotgun) && self.lastweapon == animscripts\utility::getaiprimaryweapon())
+  if(animscripts\utility::isshotgun(self.primaryweapon) && (isDefined(self.wantshotgun) && !self.wantshotgun) && self.lastweapon == animscripts\utility::getaiprimaryweapon())
     return 0;
 
   thread removeswapanimonkillanimscript("switched_to_lastweapon");
@@ -1148,7 +1146,7 @@ switchtolastweapon(var_0, var_1) {
   self setflaggedanimknoballrestart("weapon swap", var_0, % body, 1, 0.1, 1);
   combat_playfacialanim(var_0, "run");
 
-  if(isdefined(var_1))
+  if(isDefined(var_1))
     donotetrackspostcallbackwithendon("weapon swap", ::handlecleanupputaway, "end_weapon_swap");
   else
     donotetrackspostcallbackwithendon("weapon swap", ::handleputaway, "end_weapon_swap");
@@ -1200,10 +1198,10 @@ reacquirewhennecessary() {
   self endon("killanimscript");
   self.a.exposedreloading = 0;
 
-  for (;;) {
+  for(;;) {
     wait 0.2;
 
-    if(isdefined(self.enemy) && !self seerecently(self.enemy, 2)) {
+    if(isDefined(self.enemy) && !self seerecently(self.enemy, 2)) {
       if(self.combatmode == "ambush" || self.combatmode == "ambush_nodes_only")
         continue;
     }
@@ -1216,12 +1214,12 @@ tryexposedreacquire() {
   if(self.fixednode) {
     return;
   }
-  if(!isdefined(self.enemy)) {
+  if(!isDefined(self.enemy)) {
     self.reacquire_state = 0;
     return;
   }
 
-  if(isdefined(self.prevenemy) && self.prevenemy != self.enemy) {
+  if(isDefined(self.prevenemy) && self.prevenemy != self.enemy) {
     self.reacquire_state = 0;
     self.prevenemy = undefined;
     return;
@@ -1230,20 +1228,20 @@ tryexposedreacquire() {
   self.prevenemy = self.enemy;
 
   if(self cansee(self.enemy)) {
-    if(self canshootenemy() || isdefined(self.swapanim)) {
+    if(self canshootenemy() || isDefined(self.swapanim)) {
       self.reacquire_state = 0;
       return;
     }
   }
 
-  if(isdefined(self.finishedreload) && !self.finishedreload) {
+  if(isDefined(self.finishedreload) && !self.finishedreload) {
     self.reacquire_state = 0;
     return;
   }
 
-  if(!isdefined(self.reacquire_without_facing) || !self.reacquire_without_facing) {
+  if(!isDefined(self.reacquire_without_facing) || !self.reacquire_without_facing) {
     var_0 = vectornormalize(self.enemy.origin - self.origin);
-    var_1 = anglestoforward(self.angles);
+    var_1 = anglesToForward(self.angles);
 
     if(vectordot(var_0, var_1) < 0.5) {
       self.reacquire_state = 0;
@@ -1306,7 +1304,7 @@ tryexposedreacquire() {
 resetanimmode(var_0) {
   var_1 = var_0;
 
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     var_1 = 1;
 
   if(self.swimmer)

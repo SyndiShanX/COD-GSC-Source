@@ -38,7 +38,7 @@ function init_shared() {
   level.bettybombletcount = 4;
   level thread register();
   level thread bouncingbettydvarupdate();
-  callback::add_weapon_watcher( & createbouncingbettywatcher);
+  callback::add_weapon_watcher(&createbouncingbettywatcher);
 }
 
 function register() {
@@ -47,7 +47,7 @@ function register() {
 }
 
 function bouncingbettydvarupdate() {
-  for (;;) {
+  for(;;) {
     level.bettyradius = getdvarint("", level.bettyradius);
     level.bettyactivationdelay = getdvarfloat("", level.bettyactivationdelay);
     level.bettygraceperiod = getdvarfloat("", level.bettygraceperiod);
@@ -66,9 +66,9 @@ function bouncingbettydvarupdate() {
 
 function createbouncingbettywatcher() {
   watcher = self weaponobjects::createproximityweaponobjectwatcher("bouncingbetty", self.team);
-  watcher.onspawn = & onspawnbouncingbetty;
+  watcher.onspawn = &onspawnbouncingbetty;
   watcher.watchforfire = 1;
-  watcher.ondetonatecallback = & bouncingbettydetonate;
+  watcher.ondetonatecallback = &bouncingbettydetonate;
   watcher.activatesound = "wpn_betty_alert";
   watcher.hackable = 1;
   watcher.hackertoolradius = level.equipmenthackertoolradius;
@@ -80,15 +80,15 @@ function createbouncingbettywatcher() {
   watcher.detectionmindist = level.bettymindist;
   watcher.detectiongraceperiod = level.bettygraceperiod;
   watcher.detonateradius = level.bettyradius;
-  watcher.onfizzleout = & onbouncingbettyfizzleout;
-  watcher.stun = & weaponobjects::weaponstun;
+  watcher.onfizzleout = &onbouncingbettyfizzleout;
+  watcher.stun = &weaponobjects::weaponstun;
   watcher.stuntime = level.bettystuntime;
   watcher.activationdelay = level.bettyactivationdelay;
 }
 
 function onbouncingbettyfizzleout() {
-  if(isdefined(self.minemover)) {
-    if(isdefined(self.minemover.killcament)) {
+  if(isDefined(self.minemover)) {
+    if(isDefined(self.minemover.killcament)) {
       self.minemover.killcament delete();
     }
     self.minemover delete();
@@ -110,7 +110,7 @@ function trackusedstatondeath() {
   self endon("do_not_track_used");
   self waittill("death");
   waittillframeend();
-  if(isdefined(self.owner)) {
+  if(isDefined(self.owner)) {
     self.owner trackbouncingbettyasused();
   }
   self notify("end_donotrackusedonpickup");
@@ -138,10 +138,10 @@ function trackbouncingbettyasused() {
 
 function trackonowner(owner) {
   if(level.trackbouncingbettiesonowner === 1) {
-    if(!isdefined(owner)) {
+    if(!isDefined(owner)) {
       return;
     }
-    if(!isdefined(owner.activebouncingbetties)) {
+    if(!isDefined(owner.activebouncingbetties)) {
       owner.activebouncingbetties = [];
     } else {
       arrayremovevalue(owner.activebouncingbetties, undefined);
@@ -158,7 +158,7 @@ function spawnminemover() {
   self setanim( % bouncing_betty::o_spider_mine_deploy, 1, 0, 1);
   minemover = spawn("script_model", self.origin);
   minemover.angles = self.angles;
-  minemover setmodel("tag_origin");
+  minemover setModel("tag_origin");
   minemover.owner = self.owner;
   mineup = anglestoup(minemover.angles);
   z_offset = getdvarfloat("scr_bouncing_betty_killcam_offset", 18);
@@ -166,10 +166,10 @@ function spawnminemover() {
   minemover linkto(self);
   minemover.killcamoffset = vectorscale(mineup, z_offset);
   minemover.weapon = self.weapon;
-  minemover playsound("wpn_betty_arm");
+  minemover playSound("wpn_betty_arm");
   killcament = spawn("script_model", minemover.origin + minemover.killcamoffset);
   killcament.angles = (0, 0, 0);
-  killcament setmodel("tag_origin");
+  killcament setModel("tag_origin");
   killcament setweapon(self.weapon);
   minemover.killcament = killcament;
   self.minemover = minemover;
@@ -183,8 +183,8 @@ function killminemoveronpickup() {
 }
 
 function killminemover() {
-  if(isdefined(self.minemover)) {
-    if(isdefined(self.minemover.killcament)) {
+  if(isDefined(self.minemover)) {
+    if(isDefined(self.minemover.killcament)) {
       self.minemover.killcament delete();
     }
     self.minemover delete();
@@ -192,9 +192,9 @@ function killminemover() {
 }
 
 function bouncingbettydetonate(attacker, weapon, target) {
-  if(isdefined(weapon) && weapon.isvalid) {
+  if(isDefined(weapon) && weapon.isvalid) {
     self.destroyedby = attacker;
-    if(isdefined(attacker)) {
+    if(isDefined(attacker)) {
       if(self.owner util::isenemyplayer(attacker)) {
         attacker challenges::destroyedexplosive(weapon);
         scoreevents::processscoreevent("destroyed_bouncingbetty", attacker, self.owner, weapon);
@@ -202,9 +202,9 @@ function bouncingbettydetonate(attacker, weapon, target) {
     }
     self bouncingbettydestroyed();
   } else {
-    if(isdefined(self.minemover)) {
+    if(isDefined(self.minemover)) {
       self.minemover.ignore_team_kills = 1;
-      self.minemover setmodel(self.model);
+      self.minemover setModel(self.model);
       self.minemover thread bouncingbettyjumpandexplode();
       self delete();
     } else {
@@ -214,9 +214,9 @@ function bouncingbettydetonate(attacker, weapon, target) {
 }
 
 function bouncingbettydestroyed() {
-  playfx(level.bettydestroyedfx, self.origin);
+  playFX(level.bettydestroyedfx, self.origin);
   playsoundatposition("dst_equipment_destroy", self.origin);
-  if(isdefined(self.trigger)) {
+  if(isDefined(self.trigger)) {
     self.trigger delete();
   }
   self killminemover();
@@ -239,22 +239,22 @@ function bouncingbettyjumpandexplode() {
 }
 
 function mineexplode(explosiondir, explodepos) {
-  if(!isdefined(self) || !isdefined(self.owner)) {
+  if(!isDefined(self) || !isDefined(self.owner)) {
     return;
   }
-  self playsound("wpn_betty_explo");
+  self playSound("wpn_betty_explo");
   self clientfield::set("sndRattle", 1);
   wait(0.05);
-  if(!isdefined(self) || !isdefined(self.owner)) {
+  if(!isDefined(self) || !isDefined(self.owner)) {
     return;
   }
   self cylinderdamage(explosiondir * level.bettydamageheight, explodepos, level.bettydamageradius, level.bettydamageradius, level.bettydamagemax, level.bettydamagemin, self.owner, "MOD_EXPLOSIVE", self.weapon);
   self ghost();
   wait(0.1);
-  if(!isdefined(self) || !isdefined(self.owner)) {
+  if(!isDefined(self) || !isDefined(self.owner)) {
     return;
   }
-  if(isdefined(self.trigger)) {
+  if(isDefined(self.trigger)) {
     self.trigger delete();
   }
   self.killcament delete();

@@ -22,11 +22,11 @@
 #namespace cp_mi_cairo_ramses;
 
 function main() {
-  util::set_streamer_hint_function( & force_streamer, 3);
+  util::set_streamer_hint_function(&force_streamer, 3);
   init_clientfields();
   cp_mi_cairo_ramses_fx::main();
   cp_mi_cairo_ramses_sound::main();
-  callback::on_localclient_connect( & on_player_spawned);
+  callback::on_localclient_connect(&on_player_spawned);
   load::main();
   util::waitforclient(0);
   level.var_7ab81734 = findstaticmodelindexarray("station_shells");
@@ -40,15 +40,15 @@ function on_player_spawned(localclientnum) {
 }
 
 function init_clientfields() {
-  clientfield::register("world", "hide_station_miscmodels", 1, 1, "int", & show_hide_staiton_props, 0, 0);
-  clientfield::register("world", "turn_on_rotating_fxanim_fans", 1, 1, "int", & turn_on_rotating_fxanim_fans, 0, 0);
-  clientfield::register("world", "turn_on_rotating_fxanim_lights", 1, 1, "int", & turn_on_rotating_fxanim_lights, 0, 0);
-  clientfield::register("world", "delete_fxanim_fans", 1, 1, "int", & delete_fxanim_fans, 0, 0);
-  clientfield::register("toplayer", "nasser_interview_extra_cam", 1, 1, "int", & function_6aab1d81, 0, 0);
-  clientfield::register("world", "ramses_station_lamps", 1, 1, "int", & ramses_station_lamps, 0, 0);
-  clientfield::register("toplayer", "rap_blood_on_player", 1, 1, "counter", & player_rap_blood_postfx, 0, 0);
-  clientfield::register("world", "staging_area_intro", 1, 1, "int", & staging_area_intro, 0, 0);
-  clientfield::register("toplayer", "filter_ev_interference_toggle", 1, 1, "int", & filter_ev_interference_toggle, 0, 0);
+  clientfield::register("world", "hide_station_miscmodels", 1, 1, "int", &show_hide_staiton_props, 0, 0);
+  clientfield::register("world", "turn_on_rotating_fxanim_fans", 1, 1, "int", &turn_on_rotating_fxanim_fans, 0, 0);
+  clientfield::register("world", "turn_on_rotating_fxanim_lights", 1, 1, "int", &turn_on_rotating_fxanim_lights, 0, 0);
+  clientfield::register("world", "delete_fxanim_fans", 1, 1, "int", &delete_fxanim_fans, 0, 0);
+  clientfield::register("toplayer", "nasser_interview_extra_cam", 1, 1, "int", &function_6aab1d81, 0, 0);
+  clientfield::register("world", "ramses_station_lamps", 1, 1, "int", &ramses_station_lamps, 0, 0);
+  clientfield::register("toplayer", "rap_blood_on_player", 1, 1, "counter", &player_rap_blood_postfx, 0, 0);
+  clientfield::register("world", "staging_area_intro", 1, 1, "int", &staging_area_intro, 0, 0);
+  clientfield::register("toplayer", "filter_ev_interference_toggle", 1, 1, "int", &filter_ev_interference_toggle, 0, 0);
 }
 
 function force_streamer(n_zone) {
@@ -111,19 +111,19 @@ function attach_camera_to_train(localclientnum, oldval, newval, bnewent, binitia
     self.e_extracam.angles = s_org.angles;
     self.e_extracam linkto(self);
     level.e_train_extra_cam = self.e_extracam;
-  } else if(isdefined(self.e_extracam)) {
+  } else if(isDefined(self.e_extracam)) {
     self.e_extracam delete();
   }
 }
 
 function intro_reflection_extracam(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
-    assert(isdefined(level.e_train_extra_cam), "");
+    assert(isDefined(level.e_train_extra_cam), "");
     level.e_train_extra_cam setextracam(0);
     setdvar("r_extracam_custom_aspectratio", 0.769);
   } else {
     setdvar("r_extracam_custom_aspectratio", -1);
-    if(isdefined(level.e_train_extra_cam)) {
+    if(isDefined(level.e_train_extra_cam)) {
       level.e_train_extra_cam delete();
     }
   }
@@ -132,10 +132,10 @@ function intro_reflection_extracam(localclientnum, oldval, newval, bnewent, bini
 function function_6aab1d81(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   e_extra_cam = getent(localclientnum, "interview_extra_cam", "targetname");
   if(newval == 1) {
-    if(isdefined(e_extra_cam)) {
+    if(isDefined(e_extra_cam)) {
       e_extra_cam setextracam(0);
     }
-  } else if(isdefined(e_extra_cam)) {
+  } else if(isDefined(e_extra_cam)) {
     e_extra_cam clearextracam();
   }
 }
@@ -150,7 +150,7 @@ function player_rap_blood_postfx(localclientnum, oldval, newval, bnewent, biniti
 }
 
 function show_hide_staiton_props(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  assert(isdefined(level.var_7ab81734), "");
+  assert(isDefined(level.var_7ab81734), "");
   if(newval == 1) {
     foreach(i, model in level.var_7ab81734) {
       hidestaticmodel(model);

@@ -30,10 +30,10 @@ main() {
 }
 
 trap_fx_monitor(name, side) {
-  while (1) {
+  while(1) {
     level waittill(name);
     fire_points = getstructarray(name, "targetname");
-    for (i = 0; i < fire_points.size; i++) {
+    for(i = 0; i < fire_points.size; i++) {
       fire_points[i] thread electric_trap_fx(name, side);
     }
   }
@@ -41,10 +41,10 @@ trap_fx_monitor(name, side) {
 
 electric_trap_fx(name, side) {
   ang = self.angles;
-  forward = anglestoforward(ang);
+  forward = anglesToForward(ang);
   up = anglestoup(ang);
   if(isDefined(self.loopFX)) {
-    for (i = 0; i < self.loopFX.size; i++) {
+    for(i = 0; i < self.loopFX.size; i++) {
       self.loopFX[i] delete();
     }
     self.loopFX = [];
@@ -53,12 +53,12 @@ electric_trap_fx(name, side) {
     self.loopFX = [];
   }
   players = getlocalplayers();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     self.loopFX[i] = SpawnFx(i, level._effect["zapper"], self.origin, 0, forward, up);
     triggerfx(self.loopFX[i]);
   }
   level waittill(side + "off");
-  for (i = 0; i < self.loopFX.size; i++) {
+  for(i = 0; i < self.loopFX.size; i++) {
     self.loopFX[i] delete();
   }
   self.loopFX = [];
@@ -67,14 +67,14 @@ electric_trap_fx(name, side) {
 zapper_switch_fx(ent) {
   switchfx = getstruct("zapper_switch_fx_" + ent, "targetname");
   zapperfx = getstruct("zapper_fx_" + ent, "targetname");
-  switch_forward = anglestoforward(switchfx.angles);
+  switch_forward = anglesToForward(switchfx.angles);
   switch_up = anglestoup(switchfx.angles);
-  zapper_forward = anglestoforward(zapperfx.angles);
+  zapper_forward = anglesToForward(zapperfx.angles);
   zapper_up = anglestoup(zapperfx.angles);
-  while (1) {
+  while(1) {
     level waittill(ent);
     if(isDefined(switchfx.loopFX)) {
-      for (i = 0; i < switchfx.loopFX.size; i++) {
+      for(i = 0; i < switchfx.loopFX.size; i++) {
         switchfx.loopFX[i] delete();
         zapperfx.loopFX[i] delete();
       }
@@ -86,14 +86,14 @@ zapper_switch_fx(ent) {
       zapperfx.loopFX = [];
     }
     players = getlocalplayers();
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       switchfx.loopFX[i] = SpawnFx(i, level._effect["zapper_wall"], switchfx.origin, 0, switch_forward, switch_up);
       triggerfx(switchfx.loopFX[i]);
       zapperfx.loopFX[i] = SpawnFx(i, level._effect["zapper_fx"], zapperfx.origin, 0, zapper_forward, zapper_up);
       triggerfx(zapperfx.loopFX[i]);
     }
     realwait(30);
-    for (i = 0; i < switchfx.loopFX.size; i++) {
+    for(i = 0; i < switchfx.loopFX.size; i++) {
       switchfx.loopFX[i] delete();
       zapperfx.loopFX[i] delete();
     }
@@ -105,10 +105,10 @@ zapper_switch_fx(ent) {
 perk_wire_fx(notify_wait, init_targetname) {
   level waittill(notify_wait);
   targ = getstruct(init_targetname, "targetname");
-  while (isDefined(targ)) {
+  while(isDefined(targ)) {
     players = getlocalplayers();
-    for (i = 0; i < players.size; i++) {
-      playfx(i, level._effect["electric_short_oneshot"], targ.origin);
+    for(i = 0; i < players.size; i++) {
+      playFX(i, level._effect["electric_short_oneshot"], targ.origin);
     }
     realwait(0.075);
     if(isDefined(targ.target)) {
@@ -120,18 +120,18 @@ perk_wire_fx(notify_wait, init_targetname) {
 }
 
 electric_trap_wire_sparks(side) {
-  while (1) {
+  while(1) {
     level waittill(side);
     ent = getstruct("trap_wire_sparks_" + side, "targetname");
     ent.fx = 1;
     ent thread electric_trap_wire_sparks_stop();
-    while (isDefined(ent.fx)) {
+    while(isDefined(ent.fx)) {
       targ = getstruct(ent.target, "targetname");
-      while (isDefined(targ)) {
+      while(isDefined(targ)) {
         players = getlocalplayers();
-        for (i = 0; i < players.size; i++) {
+        for(i = 0; i < players.size; i++) {
           if(randomint(100) > 50) {
-            playfx(i, level._effect["electric_short_oneshot"], targ.origin);
+            playFX(i, level._effect["electric_short_oneshot"], targ.origin);
           }
         }
         realwait(0.075);

@@ -68,7 +68,6 @@ parachute_detach_endidle
 parachute_detach_death
 */
 
-
 #using_animtree("script_model");
 script_models() {
   level.scr_animtree["tangled_chute_parachute"] = #animtree;
@@ -85,7 +84,6 @@ script_models() {
   level.scr_animtree["roof_landing_parachute"] = #animtree;
   level.scr_anim["roof_landing_parachute"]["roof_landing_parachute"] = % invasion_paratrooper_roof_landing_parachute;
   level.scr_model["roof_landing_parachute"] = "parachute_roof";
-
 
   level.scr_animtree["distant_parachute_guy"] = #animtree;
   level.scr_anim["distant_parachute_guy"]["distant_parachute_guy_left1"] = % paratrooper_jump_leftA_chute;
@@ -119,7 +117,6 @@ vehicles() {
   level.scr_animtree["btr_squashedcar"] = #animtree;
   level.scr_anim["btr_squashedcar"]["btr_squashedcar"] = % invasion_btr_crash_squashedcar;
   level.scr_model["btr_squashedcar"] = "vehicle_80s_sedan1_tankcrush";
-
 
   level.scr_animtree["bmp_paradrop"] = #animtree;
   level.scr_anim["bmp_paradrop"]["bmp_paradrop"] = % paradrop_cargo_vehicle;
@@ -169,7 +166,7 @@ anims() {
   /*
   addNotetrack_flag( "generic", "explosion_react1", "explosion_react1", "invasion_humvee_exit_v1_guy1_react" );
   addNotetrack_flag( "generic", "explosion_react2", "explosion_react2", "invasion_humvee_exit_v1_guy1_react" );
-	
+  	
   addNotetrack_flag( "generic", "explosion_react1", "explosion_react1", "invasion_humvee_exit_v1_passenger_react" );
   addNotetrack_flag( "generic", "explosion_react2", "explosion_react2", "invasion_humvee_exit_v1_passenger_react" );
   */
@@ -271,8 +268,6 @@ notetrack_supplydrop(guy) {
   flag_set("notetrack_supplydrop");
 }
 
-
-
 tangled_parachute_guy() {
   self.ignoreme = true;
   self thread magic_bullet_shield();
@@ -286,7 +281,7 @@ tangled_parachute_guy() {
 
   node thread anim_generic_loop(self, "invasion_parachute_ground_detach_idle", "stop_tangled_guy_idle");
 
-  while (!players_looking_at(self GetEye()))
+  while(!players_looking_at(self getEye()))
     wait .05;
 
   self.allowdeath = true;
@@ -332,7 +327,6 @@ spawn_pizza_rushers() {
   wait 3;
   activate_trigger_with_targetname("pizza_rushers_trigger");
 }
-
 
 animate_burning_tree() {
   wait 3;
@@ -381,11 +375,11 @@ setup_roof_parachute_guy(humvee_guy) {
   	addNotetrack_customFunction( "generic", "crawl_death_start", 	::notetrack_crawl_death_start, "roof_landing_parachute" );
   	addNotetrack_customFunction( "generic", "crawl_death", 			::notetrack_crawl_death, "roof_landing_parachute" );
 
-  	So, if the guy gets shot before roll_death notetrack ----à play invasion_paratrooper_roof_landing_rolldeath 
+  	So, if the guy gets shot before roll_death notetrack ----à play invasion_paratrooper_roof_landing_rolldeath
   	upon roll_death notetrack
   	It uses the same script node as the landing
 
-  	And if he gets shot between crawl_death_start and crawl_death notetrack ---à play 
+  	And if he gets shot between crawl_death_start and crawl_death notetrack ---à play
   	invasion_paratrooper_roof_landing_crawldeath
   	It’s a regular delta anim with no scipt node.
 
@@ -397,7 +391,7 @@ setup_roof_parachute_guy(humvee_guy) {
   */
   self.allowdeath = false;
   self.noragdoll = true;
-  if(isdefined(humvee_guy))
+  if(isDefined(humvee_guy))
     self.humvee_guy = true;
   //self.deathanim = %invasion_paratrooper_roof_landing_rolldeath;
 
@@ -414,9 +408,9 @@ setup_roof_parachute_guy(humvee_guy) {
 }
 
 notetrack_roll_death(guy) {
-  if(isdefined(guy.humvee_guy))
+  if(isDefined(guy.humvee_guy)) {
     return;
-
+  }
   //level notify( "roll_death" );
   //if( guy.delayedDeath ) //he has been shot
   {
@@ -430,9 +424,9 @@ notetrack_roll_death(guy) {
 }
 
 notetrack_crawl_death_start(guy) {
-  if(isdefined(guy.humvee_guy))
+  if(isDefined(guy.humvee_guy)) {
     return;
-
+  }
   //guy.deathanim = %invasion_paratrooper_roof_landing_crawldeath;
 
   //if( guy.delayedDeath ) //he has been shot
@@ -464,8 +458,6 @@ notetrack_crawl_death(guy) {
 }
 
 dialog() {
-
-
   //LOCAL
   //Seal Six-One:	We got a BMP! Get out, get out!	
   level.scr_sound["raptor"]["inv_six_gotbmp"] = "inv_six_gotbmp";
@@ -647,8 +639,6 @@ dialog() {
   //Seal Six-One:	Taco, Roach! Clear the Burgertown roof asap!	
   level.scr_radio["inv_six_clearbtroof"] = "inv_six_clearbtroof";
 
-
-
   //Seal Six-One:	Alright, stay on the roof and cover us! We got the President and we're movin' out now.	
   level.scr_radio["inv_six_gotpresident"] = "inv_six_gotpresident";
 
@@ -691,7 +681,6 @@ dialog() {
 
   //Radio HQ Voice 1: 	Overlord copies all. Good job. Out.	
   level.scr_radio["inv_hqr_goodjob"] = "inv_hqr_goodjob";
-
 
   //NEWEST
   //Team the crashed heli at 12 o'clock is our objective. 	***
@@ -778,8 +767,6 @@ dialog() {
   //Team, we got contacts to the north.	
   level.scr_radio["inv_six_contactsn"] = "inv_six_contactsn";
 
-
-
   //
   //They're layin' down a smokescreen to the north.	
   level.scr_radio["inv_tco_smokescrnth"] = "inv_tco_smokescrnth";
@@ -841,7 +828,6 @@ dialog() {
   //Friendly convoy is oscar mike.	
   level.scr_radio["inv_six_friedlyconvoy"] = "inv_six_friedlyconvoy";
 
-
   ///////////////////////////////NOT IN
   //Hostile paratrooper on the roof. 	
   level.scr_sound["raptor"]["inv_six_paratrooper"] = "inv_six_paratrooper";
@@ -867,7 +853,6 @@ dialog() {
   //Got an enemy smokescreen to the west.	
   level.scr_radio["inv_tco_smokescrwest"] = "inv_tco_smokescrwest";
 
-
   // vvvvvvvvvvvNEW BT ROOF vvvvvvvvvvvvvvvvvv
   //Taco, get on the roof of Burger Town and provide overwatch! Roach, regroup on me! We're gonna move the package!	
   level.scr_radio["inv_six_overwatch"] = "inv_six_overwatch";
@@ -880,7 +865,6 @@ dialog() {
 
   //Roach, Taco's got the roof covered! We need you back here! Move!		
   level.scr_radio["inv_six_backhere"] = "inv_six_backhere";
-
 
   // BT DEFEND
   //Roach, use the UAV on the infantry!	
@@ -924,9 +908,7 @@ dialog() {
   //Overlord copies all. Good luck. Out.	
   level.scr_sound["raptor"]["inv_hqr_goodluck"] = "inv_hqr_goodluck";
 
-
   //////////////////////// NEW FEB 11
-
 
   //The convoy's here! Everyone on me! We're getting the hell outta here! Let's go, let's go!!	
   level.scr_radio["inv_six_convoyshere"] = "inv_six_convoyshere";
@@ -946,8 +928,6 @@ dialog() {
   //Ramirez, destroy that BMP with Semtex!
   level.scr_sound["raptor"]["inv_six_destroy"] = "inv_six_destroy";
 
-
-
   //INTRO
   //Hunter Two-One this is Overlord. We got a visual on an enemy attack helicopter headed for your area, over.	
   level.scr_radio["inv_hqr_enemyhelo"] = "inv_hqr_enemyhelo";
@@ -957,8 +937,6 @@ dialog() {
 
   //Solid copy Overlord. Ramirez! Take down that helicopter! Go!	
   level.scr_radio["inv_six_takedown"] = "inv_six_takedown";
-
-
 
   //HELP
   //Ramirez! I saw a couple Stingers on the roof of Nate's! Use 'em to take down that sonofabitch! Go!	
@@ -973,7 +951,6 @@ dialog() {
   //Ramirez! There's Stinger missiles in that stockpile to the west, inside the diner! Move! I got ya covered!	
   level.scr_radio["inv_tco_insidediner"] = "inv_tco_insidediner";
 
-
   //SECOND
   //Hunter Two-One, relay from Goliath One: you got an enemy helicopter loaded for bear, approaching your area, over.	
   level.scr_radio["inv_hqr_relaygol1"] = "inv_hqr_relaygol1";
@@ -983,7 +960,6 @@ dialog() {
 
   //Roger Overlord, Hunter copies all. Ramirez, we've got another enemy helo, take it out!!	
   level.scr_radio["inv_six_anotherhelo"] = "inv_six_anotherhelo";
-
 
   //NAGS
 
@@ -1003,9 +979,6 @@ dialog() {
   //Be advised, the UAV is offline I repeat, the UAV is offline!! <Garble!>	
   level.scr_radio["inv_tco_uavoffline"] = "inv_tco_uavoffline";
 
-
-
-
   /////////////IN:
 
   //Hunter Two-One this is Overlord Actual, we're seeing enemy reinforcements to your north, over.	
@@ -1017,7 +990,6 @@ dialog() {
   //Hunter Two-One, be advised, enemy foot-mobiles approaching north of your location, over.	
   level.scr_radio["inv_hqr_footmobiles"] = "inv_hqr_footmobiles";
 
-
   //Hunter Two-One, Overlord. Enemy foot-mobiles approaching you from the southeast, over.	
   level.scr_radio["inv_hqr_southeast"] = "inv_hqr_southeast";
 
@@ -1027,7 +999,6 @@ dialog() {
   //Hunter Two-One, be advised, enemy foot-mobiles have been sighted near the taco joint, over.	
   level.scr_radio["inv_hqr_tacojoint"] = "inv_hqr_tacojoint";
 
-
   //Hunter Two-One, Hunter Four has a visual on hostiles near the Nova gas station, over.	
   level.scr_radio["inv_hqr_novagasstation"] = "inv_hqr_novagasstation";
 
@@ -1036,8 +1007,6 @@ dialog() {
 
   //Hunter Two-One, tangos approaching near the diner to the west, over.	
   level.scr_radio["inv_hqr_dinerwest"] = "inv_hqr_dinerwest";
-
-
 
   //Additional ground support is en route to your position but has encountered heavy resistance, over.
   level.scr_sound["raptor"]["inv_hqr_engaged2"] = "inv_hqr_engaged2";
@@ -1069,8 +1038,6 @@ dialog() {
   //Ramirez, use the UAV! We got incoming infantry!
   level.scr_radio["inv_six_theinfantry2"] = "inv_six_theinfantry2";
 
-
-
   //Use 'em to take down that sonofabitch! Go!	
   level.scr_radio["inv_tco_roofofnates2"] = "inv_tco_roofofnates2";
   //Use 'em to kill that helo! Go! Go!	
@@ -1086,7 +1053,7 @@ dialog() {
 
   //Ramirez! Next to the gas station to the west is a diner! Check there for a Stinger missile!	
   level.scr_radio["inv_tco_nexttostation"] = "inv_tco_nexttostation";
-  //Ramirez! I saw a Stinger missile in the diner where we got the UAV control rig! 
+  //Ramirez! I saw a Stinger missile in the diner where we got the UAV control rig!
   level.scr_radio["inv_tco_dineruav"] = "inv_tco_dineruav";
 
   ///in
@@ -1168,7 +1135,6 @@ dialog() {
   level.scr_radio["uav_down_variant"][2] = "inv_hqr_hellfireoffline";
   level.scr_radio["uav_down_variant"][3] = "inv_hqr_predatoroffline2";
 
-
   //That looks to be at least five no, ten kills, hunter two one. Keep it up.	
   level.scr_radio["inv_hqr_fivenotenkills"] = "inv_hqr_fivenotenkills";
   //Oh man. Thats at least ten more confirms hunter two one. Good shooting.	
@@ -1197,21 +1163,9 @@ dialog() {
 
   //Squad, we still got 2,000 civvies in Arcadia! If you got family there it's your lucky day - we're gonna go save their lives!
   level.scr_radio["inv_fly_2kcivvies"] = "inv_fly_2kcivvies";
-
-
 }
 
-
-
 //need go to diner nags
-
-
-
-
-
-
-
-
 
 //level.raptor anim_single_queue( level.raptor, "inv_six_getbackfromapc" );
 //radio_dialogue( soundAlias, timeout );

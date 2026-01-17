@@ -9,7 +9,6 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_trial_white_population_control;
 
 autoexec __init__system__() {
@@ -24,7 +23,7 @@ __init__() {
   zm_trial::register_challenge(#"population_control", &on_begin, &on_end);
 }
 
-private on_begin(var_80bd7996, var_49d28bc1, var_5b932f42, var_a53dc296, var_60bdad5f) {
+on_begin(var_80bd7996, var_49d28bc1, var_5b932f42, var_a53dc296, var_60bdad5f) {
   zm_trial_util::function_7d32b7d0(0);
   n_base = 99;
   level.population_count = n_base;
@@ -52,7 +51,7 @@ private on_begin(var_80bd7996, var_49d28bc1, var_5b932f42, var_a53dc296, var_60b
   level thread function_8e69c85();
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   zm_trial_util::function_f3dbeda7();
   level flag::clear(#"infinite_round_spawning");
   level.var_382a24b0 = 0;
@@ -68,19 +67,19 @@ private on_end(round_reset) {
   }
 }
 
-private function_8e69c85() {
+function_8e69c85() {
   level endon(#"hash_7646638df88a3656");
   level.var_d76270a8 = spawn("trigger_damage_new", (-208, 530, -24), 1048576 | 2097152 | 8388608, 16, 16);
   level.var_d76270a8 thread function_75f0aac6();
 }
 
-private function_75f0aac6() {
+function_75f0aac6() {
   self endon(#"death");
 
   while(true) {
     waitresult = self waittill(#"damage");
 
-    if(waitresult.weapon.name === #"galvaknuckles_t8" && level.population_count === 0) {
+    if(waitresult.weapon.name === # "galvaknuckles_t8" && level.population_count === 0) {
       level.var_5cf4858b = 1;
       zm_trial_util::function_7d32b7d0(1);
       level flag::clear(#"infinite_round_spawning");
@@ -193,7 +192,7 @@ set_dvar_float_if_unset(dvar, value, reset = 0) {
   return getdvarfloat(dvar, 0);
 }
 
-private function_a4adaedb() {
+function_a4adaedb() {
   level endon(#"hash_7646638df88a3656");
   level.var_382a24b0 = 1;
   n_threshold = level.total_zombies_killed + level.zombie_total;

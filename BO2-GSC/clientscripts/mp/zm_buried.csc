@@ -151,24 +151,24 @@ player_flashlight_flicker_update(life_left_frac) {
   }
 
   if(wait_full > 0) {
-    self.sndlightent playloopsound("zmb_lantern_plr_loop_1", 0.05);
+    self.sndlightent playLoopSound("zmb_lantern_plr_loop_1", 0.05);
     setdvar("r_flashLightFlickerAmount", full_flicker);
     wait(wait_full);
   }
 
   if(wait_flicker1 > 0) {
-    self.sndlightent playloopsound("zmb_lantern_plr_loop_2", 0.05);
+    self.sndlightent playLoopSound("zmb_lantern_plr_loop_2", 0.05);
     setdvar("r_flashLightFlickerAmount", flicker1);
     wait(wait_flicker1);
   }
 
   if(wait_flicker2 > 0) {
-    self.sndlightent playloopsound("zmb_lantern_plr_loop_3", 0.05);
+    self.sndlightent playLoopSound("zmb_lantern_plr_loop_3", 0.05);
     setdvar("r_flashLightFlickerAmount", flicker2);
     wait(wait_flicker2);
   }
 
-  self.sndlightent playloopsound("zmb_lantern_plr_loop_4", 0.05);
+  self.sndlightent playLoopSound("zmb_lantern_plr_loop_4", 0.05);
   setdvar("r_flashLightFlickerAmount", flicker3);
   wait(wait_flicker3);
 }
@@ -186,7 +186,7 @@ flashlight_toggle(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
         self equipflashlight();
         self player_flashlight_flicker_update(newval);
       } else {
-        playsound(localclientnum, "zmb_lantern_die", self.origin);
+        playSound(localclientnum, "zmb_lantern_die", self.origin);
         self notify("player_remove_flashlight");
         self removeflashlight();
       }
@@ -275,7 +275,7 @@ set_flashlight_fx(localclientnum, flashlight_fx) {
     level.flashlight_fx[sgen] = undefined;
   }
 
-  level.flashlight_fx[sgen] = playfxontag(localclientnum, flashlight_fx, self, "tag_weapon_right");
+  level.flashlight_fx[sgen] = playFXOnTag(localclientnum, flashlight_fx, self, "tag_weapon_right");
 }
 
 grab_generator_light_array() {
@@ -472,11 +472,9 @@ start_zombie_stuff() {
   }
 }
 
-init_clientflag_variables() {
-}
+init_clientflag_variables() {}
 
-register_clientflag_callbacks() {
-}
+register_clientflag_callbacks() {}
 
 init_level_specific_wall_buy_fx() {
   if(getdvar(#"createfx") != "") {
@@ -575,8 +573,7 @@ include_powerups() {
   include_powerup("random_weapon");
 }
 
-include_equipment_for_level() {
-}
+include_equipment_for_level() {}
 
 setup_personality_character_exerts() {
   level.exert_sounds[1]["playerbreathinsound"][0] = "vox_plr_0_exert_inhale_0";
@@ -756,21 +753,21 @@ sndlightsfx(num) {
   if(num == 0) {
     foreach(light in level.generator_lights_array) {
       stoploopat("zmb_lantern_world_flicker", light.origin);
-      playsound(0, "zmb_lantern_world_off", light.origin);
+      playSound(0, "zmb_lantern_world_off", light.origin);
       wait 0.05;
     }
 
     stoploopat("zmb_generator_loop_2", generator_origin);
-    playsound(0, "zmb_generator_off", generator_origin);
+    playSound(0, "zmb_generator_off", generator_origin);
   } else if(num == 1) {
     foreach(light in level.generator_lights_array) {
       playloopat("zmb_lantern_world_loop", light.origin);
-      playsound(0, "zmb_lantern_world_on", light.origin);
+      playSound(0, "zmb_lantern_world_on", light.origin);
       wait 0.05;
     }
 
     playloopat("zmb_generator_loop_1", generator_origin);
-    playsound(0, "zmb_generator_on", generator_origin);
+    playSound(0, "zmb_generator_on", generator_origin);
   } else {
     foreach(light in level.generator_lights_array) {
       stoploopat("zmb_lantern_world_loop", light.origin);
@@ -831,9 +828,9 @@ buried_sq_richtofen_player_eyes_stuhlinger(localclientnum, oldval, newval, bnewe
 
 buried_phd_flopper_effects(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
-    playfx(localclientnum, level._effect["divetonuke_groundhit"], self.origin);
+    playFX(localclientnum, level._effect["divetonuke_groundhit"], self.origin);
 
     if(localclientnum == 0)
-      self playsound(localclientnum, "zmb_phdflop_explo");
+      self playSound(localclientnum, "zmb_phdflop_explo");
   }
 }

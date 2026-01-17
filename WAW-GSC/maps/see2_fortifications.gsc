@@ -13,7 +13,7 @@
 
 do_bunker_group(bunker_name, new_bunker_name, event, groupid) {
   if(isDefined(groupid)) {
-    spawners = GetEntArray(groupid, "targetname");
+    spawners = getEntArray(groupid, "targetname");
     array_thread(spawners, ::add_spawn_function, maps\see2::setup_bunker_infantry);
     trigger = getEnt(groupid, "target");
     if(isDefined(trigger)) {
@@ -27,7 +27,7 @@ do_bunker_group(bunker_name, new_bunker_name, event, groupid) {
   smokeNodes = getEntArray(bunker_name + " smoke", "script_noteworthy");
   tankTrigger = getEnt(bunker_name + " tank trigger", "script_noteworthy");
   truck = getEnt(bunker_name + " truck", "script_noteworthy");
-  for (i = 0; i < group.size; i++) {
+  for(i = 0; i < group.size; i++) {
     if(isDefined(group[i]) && group[i].classname == "actor_axis_ger_ber_wehr_reg_panzerschrek") {
       group[i].maxsightdistsqrd = 3000 * 3000;
     }
@@ -40,9 +40,9 @@ do_bunker_group(bunker_name, new_bunker_name, event, groupid) {
     tankTrigger thread maps\see2::inform_on_touch_trigger("retreat " + bunker_name);
   }
   level waittill("retreat " + bunker_name);
-  for (i = 0; i < smokeNodes.size; i++) {
+  for(i = 0; i < smokeNodes.size; i++) {
     if(isDefined(group[i])) {
-      playfx(level._effect["retreat_smoke"], smokeNodes[i].origin);
+      playFX(level._effect["retreat_smoke"], smokeNodes[i].origin);
       wait(randomfloat(0.5, 0.75));
     }
   }
@@ -51,16 +51,16 @@ do_bunker_group(bunker_name, new_bunker_name, event, groupid) {
     movetrigger notify("trigger");
   }
   group = get_living_ai_array(bunker_name + " guard", "script_noteworthy");
-  possible_tanks = GetEntArray("script_vehicle", "classname");
+  possible_tanks = getEntArray("script_vehicle", "classname");
   player_tanks = [];
-  for (i = 0; i < possible_tanks.size; i++) {
+  for(i = 0; i < possible_tanks.size; i++) {
     tank_owner = possible_tanks[i] GetVehicleOwner();
     if(IsPlayer(tank_owner)) {
       player_tanks[player_tanks.size] = possible_tanks[i];
     }
   }
   notified = false;
-  for (i = 0; i < group.size && i < goalNodes.size; i++) {
+  for(i = 0; i < group.size && i < goalNodes.size; i++) {
     if(isDefined(group[i])) {
       if(notified == false) {
         level notify("retreaters", group[i]);
@@ -89,7 +89,7 @@ watch_for_grenade_throw_done(player_tanks, goal_node) {
   random_wait = RandomFloatRange(0.2, 1.5);
   wait(random_wait);
   my_target = player_tanks[0];
-  for (j = 0; j < player_tanks.size; j++) {
+  for(j = 0; j < player_tanks.size; j++) {
     if(DistanceSquared(self.origin, my_target.origin) < DistanceSquared(self.origin, player_tanks[j].origin)) {
       my_target = player_tanks[j];
     }
@@ -100,7 +100,7 @@ watch_for_grenade_throw_done(player_tanks, goal_node) {
 }
 
 debug_line_on_damage() {
-  while (1) {
+  while(1) {
     self waittill("damage", amount, attacker, direction, point, mod);
     if(mod == "MOD_PROJECTILE") {
       Print3d(point, "***", (1, 0, 0), 1, 3, 3000);
@@ -113,7 +113,7 @@ debug_line_on_damage() {
 
 do_panzerschreck_retreat() {
   self endon("death");
-  while (1) {
+  while(1) {
     self.ignoreall = true;
     wait(randomintrange(6, 8));
     self.ignoreall = false;
@@ -122,8 +122,8 @@ do_panzerschreck_retreat() {
 }
 
 wait_for_guard_tower_sploders() {
-  damage_triggers = GetEntArray("guard tower damage trigger", "script_noteworthy");
-  for (i = 0; i < damage_triggers.size; i++) {
+  damage_triggers = getEntArray("guard tower damage trigger", "script_noteworthy");
+  for(i = 0; i < damage_triggers.size; i++) {
     drone_struct = getStruct(damage_triggers[i].target, "targetname");
     drone = maps\_drone::drone_scripted_spawn("actor_axis_ger_ber_wehr_reg_kar98k", drone_struct);
     damage_triggers[i].myDrone = drone;
@@ -154,7 +154,7 @@ wait_for_single_sploder() {
 
 do_fake_schrecks() {
   tower_triggers = getEntArray("guard tower damage trigger", "script_noteworthy");
-  for (i = 0; i < tower_triggers.size; i++) {
+  for(i = 0; i < tower_triggers.size; i++) {
     tower_triggers[i] thread do_fake_schreck();
   }
 }
@@ -163,13 +163,13 @@ do_fake_schreck() {
   self endon("stop firing");
   self thread wait_for_my_sploder();
   schrecks = getStructArray(self.target, "targetname");
-  while (1) {
+  while(1) {
     if(!isDefined(level.player_tanks)) {
       wait(0.05);
       continue;
     }
     best_target = self maps\_vehicle::get_nearest_target(level.player_tanks);
-    for (i = 0; i < schrecks.size; i++) {
+    for(i = 0; i < schrecks.size; i++) {
       if(!check_in_arc(schrecks[i], best_target, 30)) {
         continue;
       }
@@ -177,7 +177,7 @@ do_fake_schreck() {
         continue;
       }
       current_target = self maps\see2::request_target(best_target);
-      trace = bullettrace(schrecks[i].origin, current_target.origin, false, undefined);
+      trace = bulletTrace(schrecks[i].origin, current_target.origin, false, undefined);
       if(trace["fraction"] < 0.95) {
         continue;
       }
@@ -205,20 +205,20 @@ check_in_arc(targeter, target, arc) {
 }
 
 fire_schreck_at_pos(spawn_struct, target_pos, time) {
-  while (!OkToSpawn()) {
+  while(!OkTospawn()) {
     wait(0.1);
   }
   shreck = spawn("script_model", spawn_struct.origin);
   shreck.angles = vectortoangles(target_pos - spawn_struct.origin);
-  shreck setmodel("weapon_ger_panzershreck_rocket");
+  shreck setModel("weapon_ger_panzershreck_rocket");
   shreck_damage_ent = spawn("script_model", spawn_struct.origin);
   dest = target_pos;
   shreck moveTo(dest, time);
-  playFxOnTag(level._effect["rocket_trail"], shreck, "tag_fx");
-  shreck playloopsound("rpg_rocket");
+  playFXOnTag(level._effect["rocket_trail"], shreck, "tag_fx");
+  shreck playLoopSound("rpg_rocket");
   wait time;
   shreck hide();
-  playfx(level._effect["shreck_explode"], shreck.origin);
+  playFX(level._effect["shreck_explode"], shreck.origin);
   shreck stoploopsound();
   playSoundAtPosition("rpg_impact_boom", shreck.origin);
   radiusdamage(shreck.origin, 256, 250, 250, shreck_damage_ent);
@@ -247,14 +247,14 @@ do_flame_bunker(bunker_name, event, front_death, side_death, rear_death, kill_dr
     curr_anim = level.scr_anim["flame_bunker"]["front_death"][index];
     newOrigin = GetStartOrigin(anim_node.origin, anim_node.angles, curr_anim);
     newAngles = GetStartAngles(anim_node.origin, anim_node.angles, curr_anim);
-    spawn_origin = spawnstruct();
+    spawn_origin = spawnStruct();
     spawn_origin.origin = newOrigin;
     spawn_origin.angles = newAngles;
     trigger.front_guard = maps\_drone::drone_scripted_spawn("actor_axis_ger_ber_wehr_reg_kar98k", spawn_origin);
     trigger.front_guard.flame_anim = curr_anim;
     trigger.front_guard thread maps\_drone::drone_idle();
     tank_trigger.front_guard = trigger.front_guard;
-    trigger.front_guard SetCanDamage(true);
+    trigger.front_guard setCanDamage(true);
     if(isDefined(kill_drones_at_spawn) && kill_drones_at_spawn) {
       trigger.front_guard DoDamage(trigger.front_guard.health * 2, trigger.front_guard.origin, get_players()[0]);
     }
@@ -264,14 +264,14 @@ do_flame_bunker(bunker_name, event, front_death, side_death, rear_death, kill_dr
     curr_anim = level.scr_anim["flame_bunker"]["side_death"][index];
     newOrigin = GetStartOrigin(anim_node.origin, anim_node.angles, curr_anim);
     newAngles = GetStartAngles(anim_node.origin, anim_node.angles, curr_anim);
-    spawn_origin = spawnstruct();
+    spawn_origin = spawnStruct();
     spawn_origin.origin = newOrigin;
     spawn_origin.angles = newAngles;
     trigger.side_guard = maps\_drone::drone_scripted_spawn("actor_axis_ger_ber_wehr_reg_kar98k", spawn_origin);
     trigger.side_guard.flame_anim = curr_anim;
     trigger.side_guard thread maps\_drone::drone_idle();
     tank_trigger.side_guard = trigger.side_guard;
-    trigger.side_guard SetCanDamage(true);
+    trigger.side_guard setCanDamage(true);
     if(isDefined(kill_drones_at_spawn) && kill_drones_at_spawn) {
       trigger.side_guard DoDamage(trigger.side_guard.health * 2, trigger.side_guard.origin, get_players()[0]);
     }
@@ -281,14 +281,14 @@ do_flame_bunker(bunker_name, event, front_death, side_death, rear_death, kill_dr
     curr_anim = level.scr_anim["flame_bunker"]["rear_death"][index];
     newOrigin = GetStartOrigin(anim_node.origin, anim_node.angles, curr_anim);
     newAngles = GetStartAngles(anim_node.origin, anim_node.angles, curr_anim);
-    spawn_origin = spawnstruct();
+    spawn_origin = spawnStruct();
     spawn_origin.origin = newOrigin;
     spawn_origin.angles = newAngles;
     trigger.rear_guard = maps\_drone::drone_scripted_spawn("actor_axis_ger_ber_wehr_reg_kar98k", spawn_origin);
     trigger.rear_guard.flame_anim = curr_anim;
     trigger.rear_guard thread maps\_drone::drone_idle();
     tank_trigger.rear_guard = trigger.rear_guard;
-    trigger.rear_guard SetCanDamage(true);
+    trigger.rear_guard setCanDamage(true);
     if(isDefined(kill_drones_at_spawn) && kill_drones_at_spawn) {
       trigger.rear_guard DoDamage(trigger.rear_guard.health * 2, trigger.rear_guard.origin, get_players()[0]);
     }
@@ -305,7 +305,7 @@ do_flame_bunker_tank_damage(bunker_name) {
   trigger = self;
   bunker_hit_max = 3;
   bunker_hit_counter = 0;
-  while (1) {
+  while(1) {
     trigger waittill("damage", damage, other, direction, origin, damage_type);
     if(damage_type == "MOD_PROJECTILE") {
       bunker_hit_counter++;
@@ -320,7 +320,7 @@ do_flame_bunker_tank_damage(bunker_name) {
 do_flame_bunker_flame_damage(bunker_name) {
   level endon(bunker_name + "destroyed");
   trigger = self;
-  while (1) {
+  while(1) {
     trigger waittill("damage", damage, other, direction, origin, damage_type);
     if(damage_type == "MOD_BURNED") {
       break;
@@ -345,7 +345,7 @@ do_flame_bunker_flame_damage(bunker_name) {
       trigger.rear_guard notify("bunker flamed");
       trigger.rear_gaurd DoDamage(trigger.rear_guard.health * 2, trigger.rear_guard.origin, get_players()[0]);
     }
-    while (flame_time < flame_time_threshold) {
+    while(flame_time < flame_time_threshold) {
       trigger waittill("damage");
       flame_time++;
       wait(0.05);
@@ -356,9 +356,9 @@ do_flame_bunker_flame_damage(bunker_name) {
 }
 
 cleanup_drones() {
-  while (1) {
+  while(1) {
     visible = false;
-    for (i = 0; i < get_players().size; i++) {
+    for(i = 0; i < get_players().size; i++) {
       myOrg = self.origin;
       myOrg = (myOrg[0], myOrg[1], 0);
       theirOrg = get_players()[i].origin;
@@ -381,18 +381,18 @@ do_fake_fb_schrecks(bunker_name) {
   self endon("trigger");
   level endon(bunker_name + "end_schrecks");
   schreck_nodes = getStructArray(self.target, "targetname");
-  while (1) {
+  while(1) {
     current_target = undefined;
     target_array = get_players();
     dist = 999999;
     fire_node = -1;
-    for (i = 0; i < schreck_nodes.size; i++) {
-      for (j = 0; j < target_array.size; j++) {
+    for(i = 0; i < schreck_nodes.size; i++) {
+      for(j = 0; j < target_array.size; j++) {
         dist = distanceSquared(schreck_nodes[i].origin, target_array[j].origin);
         if(dist > (3500 * 3500)) {
           continue;
         }
-        trace = bullettrace(schreck_nodes[i].origin, target_array[j].origin + (0, 0, 30), false, undefined);
+        trace = bulletTrace(schreck_nodes[i].origin, target_array[j].origin + (0, 0, 30), false, undefined);
         if(trace["fraction"] > 0.95) {
           current_target = target_array[j];
           fire_node = i;
@@ -417,19 +417,19 @@ do_fb_effects() {
   self.no_damage_timer = 0;
   self.shutoff_time = 5;
   exit_points = getStructArray(self.target, "targetname");
-  while (1) {
+  while(1) {
     self waittill("damage", damage, other, direction, origin, damage_type);
     if(damage_type != "MOD_BURNED") {
       continue;
     }
     self thread do_timer_resets();
     self thread increment_damage_timer();
-    for (i = 0; i < exit_points.size; i++) {
-      playfx(level._effect["bunker_fire_start"], exit_points[i].origin, anglestoforward(exit_points[i].angles));
+    for(i = 0; i < exit_points.size; i++) {
+      playFX(level._effect["bunker_fire_start"], exit_points[i].origin, anglesToForward(exit_points[i].angles));
     }
-    while (self.no_damage_timer < self.shutoff_time) {
-      for (i = 0; i < exit_points.size; i++) {
-        playfx(level._effect["bunker_fire_out"], exit_points[i].origin, anglestoforward(exit_points[i].angles));
+    while(self.no_damage_timer < self.shutoff_time) {
+      for(i = 0; i < exit_points.size; i++) {
+        playFX(level._effect["bunker_fire_out"], exit_points[i].origin, anglesToForward(exit_points[i].angles));
       }
       wait(4.95);
     }
@@ -449,14 +449,14 @@ do_secondary_fb_effects(bunker_name, tank_kill, attacker) {
       self.rear_guard Delete();
     }
   }
-  playfx(level._effect["bunker_secondary_flash"], self.origin, anglestoforward(self.angles));
+  playFX(level._effect["bunker_secondary_flash"], self.origin, anglesToForward(self.angles));
   wait(1);
   exploder_trigger = getEnt(bunker_name + " damage trigger exploder", "script_noteworthy");
   exploder_trigger notify("trigger");
   damage_trigger = GetEnt(bunker_name + " damage trigger", "script_noteworthy");
   exit_points = getStructArray(damage_trigger.target, "targetname");
-  for (i = 0; i < exit_points.size; i++) {
-    playfx(level._effect["bunker_secondary_window"], exit_points[i].origin, anglestoforward(exit_points[i].angles));
+  for(i = 0; i < exit_points.size; i++) {
+    playFX(level._effect["bunker_secondary_window"], exit_points[i].origin, anglesToForward(exit_points[i].angles));
   }
   wait(0.1);
   if(isDefined(damage_trigger.swap_trigger)) {
@@ -479,7 +479,7 @@ do_secondary_fb_effects(bunker_name, tank_kill, attacker) {
 }
 
 increment_damage_timer() {
-  while (1) {
+  while(1) {
     self.no_damage_timer += 0.05;
     if(self.no_damage_timer > self.shutoff_time) {
       return;
@@ -490,7 +490,7 @@ increment_damage_timer() {
 
 do_timer_resets() {
   self endon("kill fx");
-  while (1) {
+  while(1) {
     self waittill("damage", damage, other, direction, origin, damage_type);
     if(damage_type == "MOD_BURNED") {
       self.no_damage_timer = 0;
@@ -508,13 +508,13 @@ setup_flame_bunker_guard() {
 }
 
 do_fortification_spawn(groupNum) {
-  damage_triggers = GetEntArray("guardtower group " + groupNum, "targetname");
+  damage_triggers = getEntArray("guardtower group " + groupNum, "targetname");
   if(damage_triggers.size == 0) {
     return;
   }
-  for (i = 0; i < damage_triggers.size; i++) {
+  for(i = 0; i < damage_triggers.size; i++) {
     drone_struct = getStruct(damage_triggers[i].target, "targetname");
-    while (!OkToSpawn()) {
+    while(!OkTospawn()) {
       wait(0.05);
     }
     drone = maps\_drone::drone_scripted_spawn("actor_axis_ger_ber_wehr_reg_kar98k", drone_struct);

@@ -181,7 +181,7 @@ socotra_orangeobjectivewatch() {
   }
   level.orange_outro_obj = spawn("script_model", spot.origin);
   level.orange_outro_obj.angles = isDefined(spot.angles) ? spot.angles : (0, 0, 0);
-  level.orange_outro_obj setmodel("p6_socotra_evac_objective");
+  level.orange_outro_obj setModel("p6_socotra_evac_objective");
   level.orange_outro_obj ignorecheapentityflag(1);
   level.orange_outro_obj maps\_so_rts_support::set_gpr(maps\_so_rts_support::make_gpr_opcode(3) + 0);
 
@@ -199,7 +199,7 @@ socotra_orangeobjectivewatch() {
 }
 
 socotra_floorwatch() {
-  level.rts_floors = getentarray("overwatch_floor", "targetname");
+  level.rts_floors = getEntArray("overwatch_floor", "targetname");
   level.rts.trace_ents = level.rts_floors;
 
   while(true) {
@@ -225,20 +225,20 @@ socotrasafehousehighlightwatch() {
       spot = level.rts.safehouses[0];
       spot.bldg = spawn("script_model", spot.site.origin);
       spot.bldg.angles = isDefined(spot.site.angles) ? spot.site.angles : (0, 0, 0);
-      spot.bldg setmodel(spot.modelname);
+      spot.bldg setModel(spot.modelname);
       spot.bldg maps\_so_rts_support::set_gpr(maps\_so_rts_support::make_gpr_opcode(3) + 1);
       spot.bldg ignorecheapentityflag(1);
     } else if(isDefined(level.rts.karma_poi) && (isDefined(level.rts.karma_poi.discovered) && level.rts.karma_poi.discovered)) {
       level.rts.karma_poi.bldg = spawn("script_model", level.rts.karma_poi.site.origin);
       level.rts.karma_poi.bldg.angles = isDefined(level.rts.karma_poi.site.angles) ? level.rts.karma_poi.site.angles : (0, 0, 0);
-      level.rts.karma_poi.bldg setmodel(level.rts.karma_poi.modelname);
+      level.rts.karma_poi.bldg setModel(level.rts.karma_poi.modelname);
       level.rts.karma_poi.bldg maps\_so_rts_support::set_gpr(maps\_so_rts_support::make_gpr_opcode(3) + 1);
       level.rts.karma_poi.bldg ignorecheapentityflag(1);
     } else {
       foreach(spot in level.rts.safehouses) {
         spot.bldg = spawn("script_model", spot.site.origin);
         spot.bldg.angles = isDefined(spot.site.angles) ? spot.site.angles : (0, 0, 0);
-        spot.bldg setmodel(spot.modelname);
+        spot.bldg setModel(spot.modelname);
         spot.bldg maps\_so_rts_support::set_gpr(maps\_so_rts_support::make_gpr_opcode(3) + 0);
         spot.bldg ignorecheapentityflag(1);
       }
@@ -261,7 +261,7 @@ socotrasafehousehighlightwatch() {
 socotra_player_oobwatch() {
   level endon("karma_outro_begin");
   level endon("socotra_mission_complete");
-  kill_trigs = getentarray("kill_me", "targetname");
+  kill_trigs = getEntArray("kill_me", "targetname");
 
   while(true) {
     foreach(trig in kill_trigs) {
@@ -445,7 +445,7 @@ intro_fog_town(bomb) {
 gas_canister_attach_trail(bomb) {
   canister = level.rts.canisters[level.rts.canisterindex];
   canister setforcenocull();
-  playfxontag(level._effect["gas_canister_trail"], canister, "tag_fx");
+  playFXOnTag(level._effect["gas_canister_trail"], canister, "tag_fx");
   level.rts.canisterindex++;
 }
 
@@ -477,7 +477,7 @@ socotra_climbup_intro() {
 
   for(i = 0; i < 3; i++) {
     c = spawn("script_model", (0, 0, 0));
-    c setmodel("projectile_hellfire_missile");
+    c setModel("projectile_hellfire_missile");
     c.animname = "bomb" + (i + 1);
     level.rts.canisters[i] = c;
   }
@@ -582,7 +582,7 @@ enemyspawninit() {
     }
   }
 
-  level.rts.enemyspawnlocs = getentarray("enemy_spawn_loc", "targetname");
+  level.rts.enemyspawnlocs = getEntArray("enemy_spawn_loc", "targetname");
 
   foreach(loc in level.rts.enemyspawnlocs)
   loc.timestamp = 0;
@@ -723,7 +723,7 @@ circletarget(squad) {
       continue;
     }
 
-    offset = anglestoforward((0, yaw, 0));
+    offset = anglesToForward((0, yaw, 0));
 
     if(isDefined(squad.target)) {
       goal = squad.target.origin;
@@ -851,7 +851,7 @@ socotraairsuperiorityplayermove() {
     angles = (0, angles[1], angles[2]);
     angles = (angles[0], angleclamp180(angles[1]), angles[2]);
     angles = (angles[0], angles[1], 0);
-    forward = anglestoforward(angles);
+    forward = anglesToForward(angles);
     right = anglestoright(angles);
 
     if(length(controller) > 0.1) {
@@ -1135,13 +1135,13 @@ socoatra_ai_takeover_trigger(oob) {
 
 socotra_ai_takeover_off() {
   level endon("rts_terminated");
-  triggers = getentarray("rts_takeover_OFF", "targetname");
+  triggers = getEntArray("rts_takeover_OFF", "targetname");
   array_thread(triggers, ::socoatra_ai_takeover_trigger, 1);
 }
 
 socotra_ai_takeover_on() {
   level endon("rts_terminated");
-  triggers = getentarray("rts_takeover_ON", "targetname");
+  triggers = getEntArray("rts_takeover_ON", "targetname");
   array_thread(triggers, ::socoatra_ai_takeover_trigger, 0);
 }
 
@@ -1389,7 +1389,7 @@ socotra_karama_bodyguardspawn(squadid) {
     if(nodes.size) {
       guy1node = undefined;
       guy2node = undefined;
-      forward = anglestoforward(level.rts.player.angles);
+      forward = anglesToForward(level.rts.player.angles);
 
       foreach(node in nodes) {
         dir = vectornormalize(node.origin - level.rts.player.origin);
@@ -1488,13 +1488,13 @@ socotra_karma_spawn() {
   animalignnode.targetname = "karma_loc";
   level thread run_scene("karma_rescue_karma_idle");
   level.rts.karma thread karma_helpme(level.rts.karma.origin, 200);
-  level thread maps\_so_rts_support::trigger_use(level.rts.karma_poi.karma_trigger, & "SO_RTS_MP_SOCOTRA_FREE_KARMA", "socotra_karma_rescued");
+  level thread maps\_so_rts_support::trigger_use(level.rts.karma_poi.karma_trigger, &"SO_RTS_MP_SOCOTRA_FREE_KARMA", "socotra_karma_rescued");
   level waittill("socotra_karma_rescued");
   level thread karma_sayswhoareyou();
   level.rts.karma_poi.karma_trigger delete();
   flag_set("found_hvt");
   set_objective(level.obj_search, undefined, "done");
-  enemydefensespots = getentarray("enemy_rally_loc", "targetname");
+  enemydefensespots = getEntArray("enemy_rally_loc", "targetname");
 
   while(level.rts.enemy_units.size) {
     if(randomint(100) < 30)
@@ -1712,7 +1712,7 @@ karma_helpme(origin, radius) {
       spot = level.rts.karma_poi;
       spot.bldg = spawn("script_model", spot.site.origin);
       spot.bldg.angles = isDefined(spot.site.angles) ? spot.site.angles : (0, 0, 0);
-      spot.bldg setmodel(spot.modelname);
+      spot.bldg setModel(spot.modelname);
       spot.bldg maps\_so_rts_support::set_gpr(maps\_so_rts_support::make_gpr_opcode(3) + 1);
       spot.bldg ignorecheapentityflag(1);
     } else
@@ -1746,7 +1746,7 @@ socotra_rooftopcleanup() {
 }
 
 socotra_rooftopdeath() {
-  forward = anglestoforward(self.angles);
+  forward = anglesToForward(self.angles);
   self startragdoll();
   self launchragdoll(vectorscale(forward, randomintrange(25, 35)), "tag_eye");
   self ragdoll_death();
@@ -1765,8 +1765,8 @@ socotra_rooftopinit() {
   while(flag("rts_mode"))
     wait 0.05;
 
-  rallypoints = getentarray("enemy_rally_loc", "targetname");
-  rooftoplocs = array_randomize(getentarray("roofTopLoc", "targetname"));
+  rallypoints = getEntArray("enemy_rally_loc", "targetname");
+  rooftoplocs = array_randomize(getEntArray("roofTopLoc", "targetname"));
   enemycount = getaiarray("axis");
   tospawn = 0;
   locs = [];
@@ -2057,12 +2057,11 @@ populate_dead_bodies() {
   }
 }
 
-socotra_level_scenario_one_registerevents() {
-}
+socotra_level_scenario_one_registerevents() {}
 
 socotra_pick_safehouses() {
   level.rts.max_poi_infantry = 3;
-  safehouses = array_randomize(arraycombine(getentarray("safe_house_a", "targetname"), getentarray("safe_house_b", "targetname"), 0, 0));
+  safehouses = array_randomize(arraycombine(getEntArray("safe_house_a", "targetname"), getEntArray("safe_house_b", "targetname"), 0, 0));
   poinames = array_randomize(array("rts_poi_search1", "rts_poi_search2", "rts_poi_search3", "rts_poi_search4", "rts_poi_search5"));
   safeloc1 = safehouses[0];
   safeloc2 = safehouses[1];
@@ -2100,11 +2099,11 @@ socotra_pick_safehouses() {
   safehouse5.bldgid = safeloc5.script_parameters;
   safehouse5.trig = getent(safeloc5.target, "targetname");
   level.rts.safehouses = array(safehouse1, safehouse2, safehouse3, safehouse4, safehouse5);
-  maps\_so_rts_poi::add_poi(poinames[0], safehouse1, "axis", 1, 1, 0, & "rts_search_poi");
-  maps\_so_rts_poi::add_poi(poinames[1], safehouse2, "axis", 1, 1, 0, & "rts_search_poi");
-  maps\_so_rts_poi::add_poi(poinames[2], safehouse3, "axis", 1, 1, 0, & "rts_search_poi");
-  maps\_so_rts_poi::add_poi(poinames[3], safehouse4, "axis", 1, 1, 0, & "rts_search_poi");
-  maps\_so_rts_poi::add_poi(poinames[4], safehouse5, "axis", 1, 1, 0, & "rts_search_poi");
+  maps\_so_rts_poi::add_poi(poinames[0], safehouse1, "axis", 1, 1, 0, &"rts_search_poi");
+  maps\_so_rts_poi::add_poi(poinames[1], safehouse2, "axis", 1, 1, 0, &"rts_search_poi");
+  maps\_so_rts_poi::add_poi(poinames[2], safehouse3, "axis", 1, 1, 0, &"rts_search_poi");
+  maps\_so_rts_poi::add_poi(poinames[3], safehouse4, "axis", 1, 1, 0, &"rts_search_poi");
+  maps\_so_rts_poi::add_poi(poinames[4], safehouse5, "axis", 1, 1, 0, &"rts_search_poi");
 
   foreach(spot in level.rts.safehouses) {
     target = "mp_socotra_bldg_0" + spot.bldgid;
@@ -2253,7 +2252,7 @@ socotra_outro_fail(alignnode) {
 
 create_anim_model(pos, model_name, animname) {
   model = spawn("script_model", pos);
-  model setmodel(model_name);
+  model setModel(model_name);
   model.animname = animname;
   model hide();
   return model;
@@ -2435,7 +2434,7 @@ setup_challenges() {
   self thread maps\_so_rts_support::track_unit_type_usage();
   add_spawn_function_veh_by_type("heli_quadrotor_rts", ::watch_quad_death);
   level.callbackactorkilled = maps\_so_rts_challenges::global_actor_killed_challenges_callback;
-  level.rts.kill_stats = spawnstruct();
+  level.rts.kill_stats = spawnStruct();
   level.rts.kill_stats.total_kills = 0;
   level.rts.kill_stats.explosive_kills = 0;
   level.rts.kill_stats.headshot_kills = 0;

@@ -10,9 +10,8 @@
 #include maps\_hud_util;
 #include common_scripts\utility;
 
-
 become_soap() {
-  AssertEx(!isdefined(level.soap), "Too much soap!");
+  AssertEx(!isDefined(level.soap), "Too much soap!");
   level.soap = self;
   self.animname = "soap";
   //self thread magic_bullet_shield();
@@ -42,7 +41,7 @@ become_price() {
   	//maps\_utility::missionFailedWrapper();
   	return;
   }
-	
+  	
   */
   self notify("saved");
 
@@ -79,9 +78,9 @@ moderate_ai_moveplaybackrate() {
   range_sprint = max_sprint - min_sprint;
   range_sprint_dist = max_sprint_dist - min_sprint_dist;
 
-  if(flag("match_up_for_final_room"))
+  if(flag("match_up_for_final_room")) {
     return;
-
+  }
   level endon("match_up_for_final_room");
 
   max_speed_dif = 0.45; // the maximum difference in speed adjustment between the lead and last ai
@@ -93,7 +92,7 @@ moderate_ai_moveplaybackrate() {
   distance_mods["redshirt"] = -40;
   distance_mods["price"] = -10;
 
-  for (;;) {
+  for(;;) {
     ai = [];
     ai["soap"] = level.soap;
     ai["price"] = level.price;
@@ -149,8 +148,8 @@ moderate_ai_moveplaybackrate() {
       current_speed_dif = max_speed_dif;
 
     //		0 of 200
-    //		- half the range = 
-    //		-100 
+    //		- half the range =
+    //		-100
     //
     half_range = highest * 0.5;
 
@@ -234,8 +233,6 @@ moderate_ai_moveplaybackrate() {
 // myrange
 //range_dist	range_playback
 
-
-
 adjust_be_behind(guy) {
   desired_dist = level.cafe_run_distances[self.animname][guy.animname];
   dist = distance(self.origin, guy.origin);
@@ -247,7 +244,6 @@ adjust_be_behind(guy) {
     // he should be in front of me, slow down
     speed_change = -0.15;
   } else {
-
     dist_dif = desired_dist - dist;
     dist_offset = 50;
     speed_offset = 0.15;
@@ -275,7 +271,7 @@ adjust_be_behind(guy) {
   num1 = int(num1 * 100) * 0.01;
   num2 = int(num2 * 100) * 0.01;
 
-  Print3d(self geteye(), num1 + " (" + num2 + ")", (1, 1, 1), 1, 0.7);
+  Print3d(self getEye(), num1 + " (" + num2 + ")", (1, 1, 1), 1, 0.7);
 }
 
 adjust_be_ahead_of(guy) {
@@ -314,13 +310,13 @@ adjust_be_ahead_of(guy) {
   num1 = int(num1 * 100) * 0.01;
   num2 = int(num2 * 100) * 0.01;
 
-  Print3d(self geteye(), num1 + " (" + num2 + ")", (1, 1, 1), 1, 1);
+  Print3d(self getEye(), num1 + " (" + num2 + ")", (1, 1, 1), 1, 1);
 }
 
 my_color_trail(color) {
   self endon("death");
   org = self.origin;
-  for (;;) {
+  for(;;) {
     Line(self.origin, org, color, 1, 1, 50);
     org = self.origin;
     wait(0.05);
@@ -341,7 +337,7 @@ minor_earthquakes() {
   dif_phys = max_phys - min_phys;
   first = true;
 
-  for (;;) {
+  for(;;) {
     scale = randomfloat(1);
     if(first) {
       first = false;
@@ -355,7 +351,7 @@ minor_earthquakes() {
 
     quake(eq, 3 + scale * 2, level.player.origin + randomvector(1000), 5000);
     angles = level.player getplayerangles();
-    forward = anglestoforward(angles);
+    forward = anglesToForward(angles);
     org = level.player.origin + forward * 180;
     org = set_z(org, level.player.origin[2] + 64);
     //PhysicsJitter( org, 350, 250, 0.05, 0.2 );
@@ -385,7 +381,6 @@ gulag_player_loadout() {
   //level.player GiveMaxAmmo( "claymore" );
 
   level.player SwitchToWeapon("m14_scoped_arctic");
-
 }
 
 stumble_trigger_think() {
@@ -456,7 +451,6 @@ stumble_trigger_think() {
   }
 
   if(!flag("big_earthquake_hits")) {
-
     flag_wait("big_earthquake_hits"); // this is actually the second big earthquake
     trigger = getentwithflag("big_earthquake_hits");
     eq_view_roller = getent(trigger.target, "targetname");
@@ -499,7 +493,7 @@ stumble_trigger_think() {
 
   player_ent linkto(eq_view_roller);
 
-  forward = anglestoforward(eq_view_roller.angles);
+  forward = anglesToForward(eq_view_roller.angles);
   right = anglestoright(eq_view_roller.angles);
   above_player = level.player.origin + (0, 0, 100) + forward * 50;
 
@@ -520,7 +514,7 @@ stumble_trigger_think() {
 
   /*
 
-  for ( i = 0; i < 3; i++ )
+  for( i = 0; i < 3; i++ )
   {
   	ent addyaw( 250 );
   	ent addpitch( 18 );
@@ -536,14 +530,12 @@ stumble_trigger_think() {
   //	Line( fx_org, fx_org + (0,0,-32), (1,0,0), 1, 0, 500 );
   //	Line( fx_org, level.player.origin, (1,0,1), 1, 0, 500 );
 
-
   /*
   level.player delaycall( 0.05, ::setstance, "prone" );
   level.player delaycall( 0.5, ::allowcrouch, false );
   level.player delaycall( 0.5, ::allowstand, false );
   level.player delaycall( 0.5, ::ShellShock, "gulag_attack", 5, false );
   */
-
 
   ent addyaw(20);
   ent addpitch(35);
@@ -586,8 +578,6 @@ stumble_trigger_think() {
 
   //	level.player Shellshock( "nosound", 1, false );
 
-
-
   /*
   	level.player delaycall( 0.05, ::setstance, "prone" );
   	level.player delaycall( 0.05, ::allowcrouch, false );
@@ -603,7 +593,6 @@ stumble_trigger_think() {
 
   //	timer = 0.3;
   //	eq_view_roller RotateTo( start_angles, timer, timer * 0.5, timer * 0.5 );
-
 }
 
 player_blur_manager() {
@@ -615,7 +604,7 @@ player_blur_manager() {
   very_blur = 7;
   blur_time = 1;
 
-  for (;;) {
+  for(;;) {
     level.player SetBlurForPlayer(clear_blur, clear_time);
     wait(clear_time);
     level.player SetBlurForPlayer(very_blur, blur_time);
@@ -625,25 +614,24 @@ player_blur_manager() {
 }
 
 fx_fall_around_player(angles) {
-  forward = anglestoforward(angles);
+  forward = anglesToForward(angles);
   right = anglestoright(angles);
   above_player = level.player.origin + (0, 0, 100) + forward * 50;
 
-
   fx_org = level.player.origin + forward * 35 + right * -10 + (0, 0, 32);
   /*
-	fx = getfx( "0_ceiling_rock_explosion" );
-//	thread player_ending_cavein();
-	//thread player_dies_to_cavein( 2 );
-	noself_delaycall( 0.05, ::PlayFX, fx, fx_org );
-	noself_delaycall( 0.05, ::PlayFX, fx, fx_org );
-	noself_delaycall( 0.05, ::PlayFX, fx, fx_org );
-	noself_delaycall( 0.05, ::PlayFX, fx, fx_org );
-	*/
+  	fx = getfx( "0_ceiling_rock_explosion" );
+  //	thread player_ending_cavein();
+  	//thread player_dies_to_cavein( 2 );
+  	noself_delaycall( 0.05, ::PlayFX, fx, fx_org );
+  	noself_delaycall( 0.05, ::PlayFX, fx, fx_org );
+  	noself_delaycall( 0.05, ::PlayFX, fx, fx_org );
+  	noself_delaycall( 0.05, ::PlayFX, fx, fx_org );
+  	*/
 
   //	fx = getfx( "0_ceiling_rock" );
   fx = getfx("hallway_collapsing_huge");
-  for (i = 0; i < 10; i++) {
+  for(i = 0; i < 10; i++) {
     fx_org = level.player.origin + forward * 35 + right * -10 + (0, 0, 180);
     noself_delaycall(0.05, ::PlayFX, fx, fx_org);
     wait(randomfloatrange(0.1, 0.25));
@@ -658,7 +646,7 @@ fx_fall_around_player(angles) {
 	fx[ fx.size ] = "0_ceiling_collapse_huge";
 
 	index = start_index;
-	if( !isdefined( index ) )
+	if( !isDefined( index ) )
 		index = 0;
 	
 	counts = [];
@@ -670,21 +658,21 @@ fx_fall_around_player(angles) {
 	thread black_death();
 
 	last_org = level.player.origin;
-	for ( ;; )
+	for( ;; )
 	{
-		for ( i = 0; i < counts[ index ]; i++ )
+		for( i = 0; i < counts[ index ]; i++ )
 		{
 			angles = level.player getplayerangles();
-			forward = anglestoforward( angles );
+			forward = anglesToForward( angles );
 			vec = level.player.origin - last_org;
 						
 			
 			org = level.player.origin + forward * 100 + vec * 10;
 			org = set_z( org, level.player.origin[2] );
 			
-			trace = BulletTrace( org, org + (0,0,3000), false, undefined );
+			trace = bulletTrace( org, org + (0,0,3000), false, undefined );
 			current_fx = getfx( fx[ index ] );
-			PlayFX( current_fx, trace[ "position" ] );
+			playFX( current_fx, trace[ "position" ] );
 			last_org = level.player.origin;
 			
 			if( randomint( 100 ) > 40 )
@@ -738,7 +726,6 @@ wait( 1 );
 eq_view_roller RotateRoll( -10, 1, 0.5, 0.5 );
 */
 
-
 /*
 	
 // each guy that hits the trigger does a unique stumble
@@ -750,15 +737,15 @@ ducks[ ducks.size ] = "run_flinch";
 ducks[ ducks.size ] = "run_stumble";
 	
 index = 0;
-ent = spawnstruct();
+ent = spawnStruct();
 ent.eq = false;
 	
-for ( ;; )
+for( ;; )
 {
 	self waittill( "trigger", guy );
 	if( !isalive( guy ) )
 		return;
-	if( isdefined( doing_anim[ guy.unique_id ] ) )
+	if( isDefined( doing_anim[ guy.unique_id ] ) )
 		continue;
 	
 	doing_anim[ guy.unique_id ] = true;
@@ -779,9 +766,10 @@ stumble_anim(animation) {
 
   run_root = getgenericanim("run_root");
   old_time = 0;
-  for (;;) {
-    if(self getAnimTime(run_root) < old_time)
+  for(;;) {
+    if(self getAnimTime(run_root) < old_time) {
       break;
+    }
     old_time = self getAnimTime(run_root);
 
     wait(0.05);
@@ -802,13 +790,13 @@ turnaround_trigger_think() {
   index = 0;
   eq = false;
 
-  for (;;) {
+  for(;;) {
     self waittill("trigger", guy);
     if(!isalive(guy))
       return;
-    if(isdefined(doing_anim[guy.unique_id]))
+    if(isDefined(doing_anim[guy.unique_id])) {
       continue;
-
+    }
     doing_anim[guy.unique_id] = true;
     animation = ducks[index];
     index++;
@@ -820,7 +808,7 @@ turnaround_trigger_think() {
 }
 
 guy_animates(animation) {
-  orgs = getentarray("friendly_changedirection_org", "targetname");
+  orgs = getEntArray("friendly_changedirection_org", "targetname");
   orgs = array_index_by_parameters(orgs);
   self thread maps\_spawner::go_to_node(orgs[self.animname], "struct");
   self anim_generic(self, animation);
@@ -837,15 +825,16 @@ guy_ducks(animation, ent) {
   run_root = getgenericanim("run_root");
 
   old_time = self getAnimTime(run_root);
-  for (;;) {
-    if(self getAnimTime(run_root) < old_time)
+  for(;;) {
+    if(self getAnimTime(run_root) < old_time) {
       break;
+    }
     old_time = self getAnimTime(run_root);
 
     wait(0.05);
   }
 
-  if(isdefined(ent) && !ent.eq) {
+  if(isDefined(ent) && !ent.eq) {
     ent.eq = true;
     quake(0.25, 4, self.origin, 5000);
   }
@@ -853,9 +842,10 @@ guy_ducks(animation, ent) {
   self.run_overrideanim = getgenericanim(animation);
 
   old_time = self getAnimTime(run_root);
-  for (;;) {
-    if(self getAnimTime(run_root) < old_time)
+  for(;;) {
+    if(self getAnimTime(run_root) < old_time) {
       break;
+    }
     old_time = self getAnimTime(run_root);
 
     wait(0.05);
@@ -876,58 +866,58 @@ hallway_flicker_light() {
   intensity = light getLightIntensity();
 
   /*
-  for ( ;; )
+  for( ;; )
   {
   	off_count = randomint( 3 ) + 1;
-  	for ( p = 0; p < off_count; p++ )
+  	for( p = 0; p < off_count; p++ )
   	{
   		count = randomint( 4 ) + 2;
-  		for ( i = 0; i < count; i++ )
+  		for( i = 0; i < count; i++ )
   		{
   			light setLightIntensity( 0 );
-  			model setmodel( off );
+  			model setModel( off );
   			wait( 0.05 );
   			light setLightIntensity( intensity );
-  			model setmodel( on );
+  			model setModel( on );
   			wait( 0.05 );
   		}
   		light setLightIntensity( 0 );
-  		model setmodel( off );
+  		model setModel( off );
   		wait( randomfloatrange( 0.2, 0.3 ) );
   	}
 
   	count = randomint( 4 ) + 2;
-  	for ( i = 0; i < count; i++ )
+  	for( i = 0; i < count; i++ )
   	{
   		light setLightIntensity( 0 );
-  		model setmodel( off );
+  		model setModel( off );
   		wait( 0.05 );
   		light setLightIntensity( intensity );
-  		model setmodel( on );
+  		model setModel( on );
   		wait( 0.05 );
   	}
 
   	light setLightIntensity( intensity );
-  	model setmodel( on );
+  	model setModel( on );
   	wait( randomfloatrange( 0.35, 0.45 ) );
   	if( flag( "exit_collapses" ) )
   		break;
   }
   */
 
-  for (;;) {
+  for(;;) {
     count = randomint(3) + 2;
-    for (i = 0; i < count; i++) {
+    for(i = 0; i < count; i++) {
       light setLightIntensity(0);
-      model setmodel(off);
+      model setModel(off);
       wait(randomfloatrange(0.05, 0.1));
       light setLightIntensity(intensity);
-      model setmodel(on);
+      model setModel(on);
       wait(0.05);
     }
 
     light setLightIntensity(intensity);
-    model setmodel(on);
+    model setModel(on);
     wait(randomfloatrange(1.2, 2));
   }
 }
@@ -940,9 +930,9 @@ ending_window_littlebird() {
 }
 
 ptest() {
-  for (;;) {
+  for(;;) {
     angles = level.player getplayerangles();
-    forward = anglestoforward(angles);
+    forward = anglesToForward(angles);
     org = level.player.origin + forward * 180;
     org = set_z(org, level.player.origin[2] + 64);
     //PhysicsJitter( org, 350, 250, 0.05, 0.2 );
@@ -965,12 +955,12 @@ stumble_baddie() {
   spawner = getent("stumble_baddie_spawner", "targetname");
 
   // don't do it if the player is looking this way
-  if(within_fov_of_players(spawner.origin, 0.7))
+  if(within_fov_of_players(spawner.origin, 0.7)) {
     return;
-
-  if(distance(spawner.origin, level.player.origin) < 500)
+  }
+  if(distance(spawner.origin, level.player.origin) < 500) {
     return;
-
+  }
   thread first_hallway_collapse(spawner.origin);
   guy = spawner stalingradspawn();
   guy.animname = "stumble_baddie";
@@ -995,7 +985,7 @@ trash_sound_think() {
 }
 
 file_cabinet_show() {
-  models = getentarray("file_cabinet_anim", "targetname");
+  models = getEntArray("file_cabinet_anim", "targetname");
   array_thread(models, ::path_anim_setup);
 
   models = array_index_by_parameters(models);
@@ -1020,12 +1010,12 @@ path_anim_setup() {
 
 path_anim(time, time_in, time_out) {
   path = self.paths[self.path_index];
-  if(!isdefined(path))
+  if(!isDefined(path)) {
     return;
-
+  }
   self.path_index++;
 
-  if(isdefined(time_in)) {
+  if(isDefined(time_in)) {
     self moveto(path["origin"], time, time_in, time_out);
     self rotateto(path["angles"], time, time_in, time_out);
   } else {
@@ -1035,7 +1025,7 @@ path_anim(time, time_in, time_out) {
 }
 
 pillar_anim_show() {
-  models = getentarray("pillar_anim", "targetname");
+  models = getEntArray("pillar_anim", "targetname");
   models = array_index_by_parameters(models);
 
   model1targ = getent(models["1"].target, "targetname");
@@ -1075,8 +1065,7 @@ pillar_anim_show() {
   pillar_rotater moveto(pillar_targ.origin, timer);
   wait(timer);
 
-
-  targets = getentarray(pillar_targ.target, "targetname");
+  targets = getEntArray(pillar_targ.target, "targetname");
   targets = array_index_by_classname(targets);
 
   models["2"] linkto(model2targ);
@@ -1096,13 +1085,13 @@ pillar_anim_show() {
   model2targ moveto(targets["script_origin_pillar2"].origin, timer, 0, timer);
 
   /*
-  models = getentarray( "pillar_anim", "targetname" );
+  models = getEntArray( "pillar_anim", "targetname" );
   array_thread( models, ::path_anim_setup );
-	
+  	
   models = array_index_by_parameters( models );
   //flag_wait( "reach_mound" );
   wait( 1 );
-	
+  	
   ents = [];
   foreach ( model in models )
   {
@@ -1121,7 +1110,7 @@ pillar_anim_show() {
   //fakeseys on the first one
   ents[ "1" ] path_anim( 0.1 );
   ents[ "2" ] path_anim( 0.1 );
-	
+  	
   // first grind in
   ents[ "1" ] path_anim( 2, 0.2, 0.2 );
   ents[ "2" ] path_anim( 2, 0.2, 0.2 );
@@ -1136,7 +1125,7 @@ pillar_anim_show() {
   ents[ "1" ] path_anim( 0.25 );
   ents[ "2" ] path_anim( 0.25 );
   wait( 0.25 );
-	
+  	
   // falling
   ents[ "1" ] path_anim( 0.25 );
   ents[ "2" ] path_anim( 0.25 );
@@ -1151,9 +1140,10 @@ pillar_anim_show() {
 delete_tree_think() {
   // this ent is just for ref, delete all links
   ent = self;
-  for (;;) {
-    if(!isdefined(ent.target))
+  for(;;) {
+    if(!isDefined(ent.target)) {
       break;
+    }
     newent = getent(ent.target, "targetname");
     ent delete();
     ent = newent;
@@ -1205,12 +1195,12 @@ eqtest() {
   db = -25;
   freq = 1100;
   a = 5;
-	
+  	
   foreach ( channel, _ in channels )
   {
   	level.player seteqbands( channel, mix_track, "highshelf", db, freq, 1, "lowshelf", 2, freq, 1 );
   }
-	
+  	
   */
 
   AmbientStop(0.5);
@@ -1221,12 +1211,11 @@ eqtest() {
   maps\_ambient::blend_to_eq_track(level.eq_mix_track, 2);
 }
 
-
 player_dies_to_cavein(start_index) {
   // buried
-  if(flag("player_died_to_cave_in"))
+  if(flag("player_died_to_cave_in")) {
     return;
-
+  }
   level.player PlayRumbleLoopOnEntity("damage_light");
   flag_set("player_died_to_cave_in");
   level.player enabledeathshield(false);
@@ -1238,7 +1227,7 @@ player_dies_to_cavein(start_index) {
   fx[fx.size] = "hallway_collapsing_huge";
 
   index = start_index;
-  if(!isdefined(index))
+  if(!isDefined(index))
     index = 0;
 
   counts = [];
@@ -1253,18 +1242,18 @@ player_dies_to_cavein(start_index) {
   thread black_death();
 
   last_org = level.player.origin;
-  for (;;) {
-    for (i = 0; i < counts[index]; i++) {
+  for(;;) {
+    for(i = 0; i < counts[index]; i++) {
       angles = level.player getplayerangles();
-      forward = anglestoforward(angles);
+      forward = anglesToForward(angles);
       vec = level.player.origin - last_org;
 
       org = level.player.origin + forward * 100 + vec * 10;
       org = set_z(org, level.player.origin[2]);
 
-      trace = BulletTrace(org, org + (0, 0, 3000), false, undefined);
+      trace = bulletTrace(org, org + (0, 0, 3000), false, undefined);
       current_fx = getfx(fx[index]);
-      PlayFX(current_fx, trace["position"]);
+      playFX(current_fx, trace["position"]);
       last_org = level.player.origin;
 
       if(randomint(100) > 40) {
@@ -1283,8 +1272,9 @@ player_dies_to_cavein(start_index) {
     }
 
     index++;
-    if(index >= fx.size)
+    if(index >= fx.size) {
       break;
+    }
   }
 }
 
@@ -1296,16 +1286,16 @@ player_ending_cavein() {
   tag_origin = spawn_tag_origin();
   tag_origin.origin = level.player.origin + (0,0,60);
   tag_origin linkto( level.player );
-  PlayFXOnTag( fx, tag_origin, "tag_origin" );
+  playFXOnTag( fx, tag_origin, "tag_origin" );
   */
 
   //	thread black_death();
 
   //	wait( 1.2 );
   delay = 1.5;
-  for (;;) {
+  for(;;) {
     wait(delay);
-    PlayFX(fx, level.player.origin + (0, 0, 60));
+    playFX(fx, level.player.origin + (0, 0, 60));
     delay -= 0.75;
     if(delay <= 0.2)
       delay = 0.2;
@@ -1318,7 +1308,7 @@ player_ending_cavein() {
   fx[ fx.size ] = "hallway_collapsing_huge";
 
   index = 0;
-	
+  	
   counts = [];
   counts[ 0 ] = 4;
   counts[ 1 ] = 80;
@@ -1327,21 +1317,21 @@ player_ending_cavein() {
   thread black_death();
 
   last_org = level.player.origin;
-  for ( ;; )
+  for( ;; )
   {
-  	for ( i = 0; i < counts[ index ]; i++ )
+  	for( i = 0; i < counts[ index ]; i++ )
   	{
   		angles = level.player getplayerangles();
-  		forward = anglestoforward( angles );
+  		forward = anglesToForward( angles );
   		vec = level.player.origin - last_org;
   					
   		
   		org = level.player.origin + forward * 100 + vec * 10;
   		org = set_z( org, level.player.origin[2] );
   		
-  		trace = BulletTrace( org, org + (0,0,3000), false, undefined );
+  		trace = bulletTrace( org, org + (0,0,3000), false, undefined );
   		current_fx = getfx( fx[ index ] );
-  		PlayFX( current_fx, trace[ "position" ] );
+  		playFX( current_fx, trace[ "position" ] );
   		last_org = level.player.origin;
   		
   		wait( 0.1 );
@@ -1383,7 +1373,7 @@ chase_player_dies_if_goes_wrong_way() {
   time = 5;
   frames = time * 20;
 
-  for (i = 0; i < frames; i++) {
+  for(i = 0; i < frames; i++) {
     if(level.player istouching(volume)) {
       thread player_dies_to_cavein(2);
       return;
@@ -1395,7 +1385,7 @@ chase_player_dies_if_goes_wrong_way() {
 
 chase_train_chases(dist, starter) {
   level endon("stop_chase_fx");
-  min_speed = 6.0; // 8.0; 
+  min_speed = 6.0; // 8.0;
   max_speed = 16; // 20;
   min_dist = dist;
   max_dist = dist + 75;
@@ -1405,7 +1395,7 @@ chase_train_chases(dist, starter) {
 
   level.chasers[starter] = [];
 
-  for (;;) {
+  for(;;) {
     ai = getaiarray("allies");
     guy = getClosest(self.origin, ai);
     dist = distance(self.origin, guy.origin);
@@ -1433,7 +1423,7 @@ chase_train_chases(dist, starter) {
 chase_brush_accellerates_to_max_speed(chase_vehicle, time, max_speed) {
   frames = time * 20;
 
-  for (i = 0; i <= frames; i++) {
+  for(i = 0; i <= frames; i++) {
     scale = i / frames;
     speed = max_speed * scale;
     if(speed <= 0)
@@ -1498,16 +1488,16 @@ chase_train_fx() {
   ent linkto(self, "tag_origin", (0, 0, 0), (0, 0, -90));
   //ent thread maps\_debug::drawtagforever( "tag_origin" );
   count = 5;
-  for (;;) {
+  for(;;) {
     angles = self.angles;
-    forward = anglestoforward(angles);
+    forward = anglesToForward(angles);
     count--;
     if(count <= 0) {
       vec = randomvector(0.125);
       PhysicsJolt(level.player.origin + forward * 250, 250, 250, vec);
       count = randomint(10);
     }
-    PlayFXOnTag(fx, ent, "tag_origin");
+    playFXOnTag(fx, ent, "tag_origin");
     wait(0.1);
   }
 }
@@ -1521,7 +1511,7 @@ chase_train_kills_player_if_it_gets_close() {
   min_black = 700;
   black_range = abs(max_black - min_black);
 
-  for (;;) {
+  for(;;) {
     org1 = level.player.origin;
     org1 = set_z(org1, 0);
 
@@ -1552,7 +1542,7 @@ chase_train_kills_player_if_it_gets_close() {
 }
 
 black_screen(_) {
-  if(isdefined(level.black_overlay)) {
+  if(isDefined(level.black_overlay)) {
     level.black_overlay destroy();
     return;
   }
@@ -1614,36 +1604,37 @@ ending_run_fx() {
     ent.last_occurred_time = 0;
   }
 
-  for (;;) {
+  for(;;) {
     exit_flag = flag("exit_collapses");
 
     rocks = array_randomize(rocks);
     origin = flat_origin(level.player.origin);
     angles = level.player.angles;
-    forward = anglestoforward(angles);
+    forward = anglesToForward(angles);
     origin += forward * -350;
 
     array = [];
     foreach(ent in rocks) {
-      if(!exit_flag && ent.v["fxid"] == "ceiling_collapse_dirt1")
+      if(!exit_flag && ent.v["fxid"] == "ceiling_collapse_dirt1") {
         continue;
-
+      }
       if(ent.last_occurred_time > gettime() - 1000)
         continue;
       dist = distance(ent.flat_origin, origin);
       if(dist < level.ending_fx_min_dist)
         continue;
-      if(dist < level.ending_fx_max_dist)
+      if(dist < level.ending_fx_max_dist) {
         continue;
-
+      }
       normal = vectorNormalize(ent.flat_origin - origin);
       dot = vectorDot(forward, normal);
-      if(dot < level.ending_fx_dot)
+      if(dot < level.ending_fx_dot) {
         continue;
-
+      }
       array[array.size] = ent;
-      if(array.size >= level.max_rocks)
+      if(array.size >= level.max_rocks) {
         break;
+      }
     }
 
     foreach(ent in array) {
@@ -1662,7 +1653,7 @@ cafe_fx() {
   rocks = get_exploder_array("cafe_rock");
   level.fx_fall_time = 0.07;
 
-  for (;;) {
+  for(;;) {
     rocks = array_randomize(rocks);
     foreach(ent in rocks) {
       ent activate_individual_exploder();
@@ -1679,7 +1670,7 @@ ceiling_collapse_begins() {
   target = getstruct(org.target, "targetname");
   angles = vectortoangles(target.origin - org.origin);
   dist = distance(org.origin, target.origin);
-  forward = anglestoforward(angles);
+  forward = anglesToForward(angles);
 
   fx = [];
   fx[fx.size] = "hallway_collapsing";
@@ -1695,15 +1686,15 @@ ceiling_collapse_begins() {
 
 playfx_collapse(origin, forward, dist, fx_msg, time) {
   level endon("collapse_fx_stop");
-  ent = spawnstruct();
+  ent = spawnStruct();
   ent endon("stop");
   ent delaythread(time, ::send_notify, "stop");
 
   fx = getfx(fx_msg);
   wait_time = 0.5;
-  for (;;) {
+  for(;;) {
     org = origin + forward * randomfloat(dist);
-    PlayFX(fx, org);
+    playFX(fx, org);
     wait(wait_time);
     wait_time -= 0.35;
     if(wait_time < 0.5)
@@ -1715,9 +1706,10 @@ get_anim_paths() {
   path = self;
 
   paths = [];
-  for (;;) {
-    if(!isdefined(path.target))
+  for(;;) {
+    if(!isDefined(path.target)) {
       break;
+    }
 
     path = getent(path.target, "targetname");
 
@@ -1740,14 +1732,15 @@ friendly_car_slide_trigger() {
   targ thread price_slide_box_topples();
   flag_wait("exit_collapses");
 
-  for (;;) {
+  for(;;) {
     self waittill("trigger", other);
 
-    if(!isalive(other))
+    if(!isalive(other)) {
       continue;
-
-    if(other == level.redshirt)
+    }
+    if(other == level.redshirt) {
       break;
+    }
   }
 
   if(flag("do_not_flip_box")) {
@@ -1764,7 +1757,7 @@ friendly_car_slide_trigger() {
 }
 
 price_slide_box_topples() {
-  targets = getentarray(self.target, "targetname");
+  targets = getEntArray(self.target, "targetname");
   models = [];
 
   foreach(target in targets) {
@@ -1791,7 +1784,7 @@ price_slide_box_topples() {
 kill_player_on_touch() {
   level.touchkill = self; // for debugging
   self endon("stop_killing");
-  for (;;) {
+  for(;;) {
     if(level.player istouching(self)) {
       level.player kill();
       return;
@@ -1812,7 +1805,7 @@ price_hurdles() {
 }
 
 ambient_flicker_light_think() {
-  ent = spawnstruct();
+  ent = spawnStruct();
   light = getent(self.target, "targetname");
 
   turn_on["ch_street_wall_light_01_on"] = "ch_street_wall_light_01_on";
@@ -1836,16 +1829,16 @@ ambient_flicker_light_think() {
 
   ent.intensity = light getLightIntensity();
 
-  if(!isdefined(self.script_parameters))
+  if(!isDefined(self.script_parameters))
     thread flicker_default(ent);
   else
     thread[[flicker_funcs[self.script_parameters]]](ent);
 }
 
 flicker_default(ent) {
-  for (;;) {
+  for(;;) {
     count = randomint(5) + 2;
-    for (i = 0; i < count; i++) {
+    for(i = 0; i < count; i++) {
       ent.light setLightIntensity(0);
       self setModel(ent.turn_off[self.model]);
       wait(0.05);
@@ -1859,7 +1852,7 @@ flicker_default(ent) {
     wait(randomfloatrange(0.2, 0.3));
 
     count = randomint(5) + 2;
-    for (i = 0; i < count; i++) {
+    for(i = 0; i < count; i++) {
       ent.light setLightIntensity(0);
       self setModel(ent.turn_off[self.model]);
       wait(0.05);
@@ -1875,9 +1868,9 @@ flicker_default(ent) {
 }
 
 flicker_slow(ent) {
-  for (;;) {
+  for(;;) {
     count = randomint(5) + 2;
-    for (i = 0; i < count; i++) {
+    for(i = 0; i < count; i++) {
       ent.light setLightIntensity(0);
       self setModel(ent.turn_off[self.model]);
       wait(0.1);
@@ -1895,9 +1888,9 @@ flicker_slow(ent) {
 cafe_table_org_think() {
   // these ents are associated by distance because a set of ents are in a prefab
   index = get_closest_index(self.origin, level.cafe_tables, 32);
-  if(!isdefined(index))
+  if(!isDefined(index)) {
     return;
-
+  }
   table = level.cafe_tables[index];
   level.cafe_tables[index] = undefined;
 
@@ -1917,7 +1910,7 @@ cafe_table_org_think() {
 
   frames = timer * 20;
   org = ent.origin + (0, 0, 32);
-  for (i = 0; i < frames; i++) {
+  for(i = 0; i < frames; i++) {
     PhysicsJolt(org, 350, 250, randomvector(0.05));
     wait(0.05);
   }
@@ -1929,10 +1922,10 @@ cafe_table_think() {
 }
 
 cafe_table_eq_org_think() {
-  for (;;) {
+  for(;;) {
     wait(randomfloatrange(3, 17));
     count = randomintrange(4, 8);
-    for (i = 0; i < count; i++) {
+    for(i = 0; i < count; i++) {
       vec = randomvector(0.18);
       if(vec[2] < 0) {
         vec = set_z(vec, vec[2] * -1);
@@ -1956,7 +1949,7 @@ swing_light_think() {
   range = 25;
   self SetLightFovRange(50, 25);
 
-  for (;;) {
+  for(;;) {
     ref_ent.angles = old_angles;
     pitch = randomfloatrange(range * -1, range);
     ref_ent addpitch(pitch);
@@ -1965,7 +1958,7 @@ swing_light_think() {
     ref_ent addyaw(yaw);
 
     self rotateto(ref_ent.angles, 1, 0.3, 0.3);
-    forward = anglestoforward(ref_ent.angles);
+    forward = anglesToForward(ref_ent.angles);
     //		Line( self.origin, self.origin + forward * 100, (1,1,1), 1, 0, 20 );
 
     wait(1);
@@ -2089,8 +2082,6 @@ player_gets_knocked_out_by_price(player_rig) {
   level notify("breach_concludes");
   level.player DoDamage(50 / level.player.damageMultiplier, level.price.origin);
 
-
-
   // slow mo for a bit
   wait_for_buffer_time_to_pass(queue, 6.7);
 
@@ -2129,7 +2120,7 @@ spawn_ak47() {
   //	hide_parts[ "tag_heartbeat" ] = true;
   //	hide_parts[ "tag_heartbeat" ] = true;
 
-  ak47 setmodel("gulag_price_ak47");
+  ak47 setModel("gulag_price_ak47");
   foreach(part, _ in hide_parts) {
     //ak47 hidepart( part );
   }
@@ -2151,15 +2142,15 @@ spawn_ak47() {
 
 calculate_cafe_run_distances() {
   // grab the required distances from placed ents
-  cafe_distance_trackersA = getentarray("cafe_distance_tracker", "targetname");
+  cafe_distance_trackersA = getEntArray("cafe_distance_tracker", "targetname");
   cafe_distance_trackersB = cafe_distance_trackersA;
   dists = [];
 
   foreach(dist1 in cafe_distance_trackersA) {
     foreach(dist2 in cafe_distance_trackersB) {
-      if(dist1 == dist2)
+      if(dist1 == dist2) {
         continue;
-
+      }
       name1 = dist1.script_parameters;
       name2 = dist2.script_parameters;
       dist = distance(dist1.origin, dist2.origin);
@@ -2178,7 +2169,7 @@ cavein_spawner_think() {
   self endon("death");
   flag_wait("enemy_cavein"); // exploder
   wait(0.5);
-  for (;;) {
+  for(;;) {
     RadiusDamage(self.origin, 35, 10, 10);
     wait(0.05);
   }
@@ -2231,7 +2222,7 @@ endlog_friendly_runout_settings() {
 
 ramp_interval(num, time) {
   frames = time * 20;
-  for (i = 0; i < frames; i++) {
+  for(i = 0; i < frames; i++) {
     dif = i / frames;
     self.interval = num * dif;
     wait(0.05);
@@ -2250,18 +2241,18 @@ gulag_glass_shatter() {
   index = 0;
 
   struct = getstruct("glass_shatter_struct", "targetname");
-  for (;;) {
+  for(;;) {
     RadiusDamage(struct.origin, 64, 350, 250);
     delay = delays[index];
     index++;
 
-    if(!isdefined(delay)) {
+    if(!isDefined(delay)) {
       delay = randomfloatrange(0.3, 1.5);
     }
 
     wait(delay);
 
-    if(!isdefined(struct.target))
+    if(!isDefined(struct.target))
       return;
     struct = getstruct(struct.target, "targetname");
   }
@@ -2277,21 +2268,21 @@ evac_slowmo() {
 
   /*
   //wait( 8 );
-	
+  	
   //wait( 1.75 );
   wait( 1.1 );
 
   slowmo_setspeed_slow( 0.8 );
   slowmo_setlerptime_in( 0.05 );
   slowmo_lerp_in();
-	
+  	
   wait( 0.5 );
   //wait( 3 );
 
   slowmo_setspeed_slow( 0.4 );
   slowmo_setlerptime_in( 0.05 );
   slowmo_lerp_in();
-	
+  	
   wait ( 3 - 1.6 );
   */
   wait(3);
@@ -2340,7 +2331,6 @@ evac_dof() {
 
   level waittill("blend_out_dof", outblend);
   thread blend_dof(dof_see_soap, start, outblend);
-
 }
 
 die_soon() {
@@ -2354,13 +2344,13 @@ soap_talks_to_heli() {
   /*
   // Viper Six-Four, this is Bravo Six Actual! We're trapped in the mess hall at the northeast corner of the gulag, depth 100 meters!!! I need a four-point SPIE rig for emergency extraction over!	
   level.soap anim_single_solo( level.soap, "gulag_cmt_depth100" );
-	
+  	
   // Roger on the SPIE rig - we're on the way, give us fifteen seconds.	
   radio_dialogue( "gulag_plp_15secs" );
   	
   // We'll be dead in five!!! Move your arse man!!!	
   level.soap dialogue_queue( "gulag_cmt_deadinfive" );
-	
+  	
   level waittill( "more_soap_dialogue" );	
   */
   wait(0.5);
@@ -2414,9 +2404,9 @@ earthquake_buildup() {
 }
 
 quake_rumble() {
-  if(flag("controlled_player_rumble"))
+  if(flag("controlled_player_rumble")) {
     return;
-
+  }
   level.player endon("death");
 
   rumbles = [];
@@ -2451,7 +2441,7 @@ quake(mag, duration, org, range) {
 
   // artillery sound
   angles = (randomint(360), randomint(360), randomint(360));
-  forward = anglestoforward(angles);
+  forward = anglesToForward(angles);
   range = randomfloatrange(500, 1000);
   location = level.player.origin + forward * range;
   thread play_sound_in_space("exp_artillery_underground", location);
@@ -2465,7 +2455,7 @@ fx_become_more_intense() {
 
   frames = time * 20;
 
-  for (i = 0; i < frames; i++) {
+  for(i = 0; i < frames; i++) {
     dif = i / frames;
     dif = 1 - dif;
     level.fx_fall_time = min + range * dif;
@@ -2475,7 +2465,7 @@ fx_become_more_intense() {
 
 cafe_lights_explode() {
   wait(3);
-  light_destructibles = getentarray("light_destructible", "script_noteworthy");
+  light_destructibles = getEntArray("light_destructible", "script_noteworthy");
   array_thread(light_destructibles, ::light_destructible_think);
 }
 
@@ -2484,7 +2474,7 @@ player_pushes_slab() {
     return;
   level endon("time_to_evac");
 
-  for (;;) {
+  for(;;) {
     flag_wait("player_pushes_slab");
     level.player disableweapons();
     flag_waitopen("player_pushes_slab");
@@ -2493,9 +2483,9 @@ player_pushes_slab() {
 }
 
 rubble_think() {
-  if(level.start_point == "evac")
+  if(level.start_point == "evac") {
     return;
-
+  }
   offset = 240;
   self connectpaths();
   self.origin += (0, 0, offset * -1);
@@ -2517,12 +2507,11 @@ rubble_think() {
   level notify("stop_chase_fx");
   chase_brush delete();
   self disconnectpaths();
-
 }
 
 player_touch_kill() {
   level endon("stop_chase_fx");
-  for (;;) {
+  for(;;) {
     if(level.player istouching(self))
       RadiusDamage(level.player.origin, 35, 10, 5);
     wait(0.05);
@@ -2534,7 +2523,7 @@ hunted_hanging_light() {
   tag_origin = spawn_tag_origin();
 
   tag_origin LinkTo(self.lamp, "j_hanging_light_04", (0, 0, -32), (0, 0, 0));
-  PlayFXOnTag(fx, tag_origin, "tag_origin");
+  playFXOnTag(fx, tag_origin, "tag_origin");
 
   flag_wait("time_to_evac");
   stopFXOnTag(fx, tag_origin, "tag_origin");
@@ -2564,7 +2553,7 @@ lamp_animates(root) {
 
   thread lamp_rotates_yaw();
 
-  for (;;) {
+  for(;;) {
     level waittill("swing", mag);
     animation = anims[odd];
     off = !odd;
@@ -2576,7 +2565,7 @@ lamp_animates(root) {
 lamp_rotates_yaw() {
   ent = spawn_tag_origin();
 
-  for (;;) {
+  for(;;) {
     yaw = randomfloatrange(-30, 30);
     ent addyaw(yaw);
     time = randomfloatrange(0.5, 1.5);
@@ -2607,7 +2596,6 @@ orient_player_to_rig(player_rig) {
 }
 
 map_spawners_to_starts(orgs) {
-
   spawner = GetEnt("price_spawner", "targetname");
   spawner.origin = orgs["price"].origin;
   spawner.angles = orgs["price"].angles;
@@ -2618,26 +2606,24 @@ map_spawners_to_starts(orgs) {
   spawner.angles = orgs["soap"].angles;
   spawner spawn_ai();
 
-  spawner = getentarray("endlog_redshirt_spawner", "targetname")[0];
+  spawner = getEntArray("endlog_redshirt_spawner", "targetname")[0];
   spawner.origin = orgs["redshirt"].origin;
   spawner.angles = orgs["redshirt"].angles;
   spawner spawn_ai();
 }
 
 set_cafeteria_spotlight_dvars() {
-
   setsaveddvar("r_spotlightbrightness", "1.2");
   setsaveddvar("r_spotlightendradius", "1200");
   setsaveddvar("r_spotlightstartradius", "50");
   setsaveddvar("r_spotlightfovinnerfraction", "0.8");
   setsaveddvar("r_spotlightexponent", "2");
-
 }
 
 player_gets_hit_by_rock() {
-  if(flag("time_to_evac"))
+  if(flag("time_to_evac")) {
     return;
-
+  }
   vec = randomvector(16);
   vec = set_z(vec, 80);
   if(level.player.health > 80)
@@ -2648,7 +2634,7 @@ blend_in_player_movespeed() {
   time = 2.5;
   dif = time / 20;
 
-  for (i = 0; i <= 1; i += dif) {
+  for(i = 0; i <= 1; i += dif) {
     level.player SetMoveSpeedScale(i);
     wait(0.05);
   }

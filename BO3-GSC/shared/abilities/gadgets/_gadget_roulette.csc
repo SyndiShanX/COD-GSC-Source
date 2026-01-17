@@ -11,12 +11,12 @@
 #namespace gadget_roulette;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_roulette", & __init__, undefined, undefined);
+  system::register("gadget_roulette", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("toplayer", "roulette_state", 11000, 2, "int", & roulette_clientfield_cb, 0, 0);
-  callback::on_localplayer_spawned( & on_localplayer_spawned);
+  clientfield::register("toplayer", "roulette_state", 11000, 2, "int", &roulette_clientfield_cb, 0, 0);
+  callback::on_localplayer_spawned(&on_localplayer_spawned);
 }
 
 function roulette_clientfield_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -25,9 +25,9 @@ function roulette_clientfield_cb(localclientnum, oldval, newval, bnewent, biniti
 
 function update_roulette(localclientnum, newval) {
   controllermodel = getuimodelforcontroller(localclientnum);
-  if(isdefined(controllermodel)) {
+  if(isDefined(controllermodel)) {
     roulettestatusmodel = getuimodel(controllermodel, "playerAbilities.playerGadget3.rouletteStatus");
-    if(isdefined(roulettestatusmodel)) {
+    if(isDefined(roulettestatusmodel)) {
       setuimodelvalue(roulettestatusmodel, newval);
     }
   }

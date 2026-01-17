@@ -493,7 +493,7 @@ toggle_usablity_on_distance() {
         var_6 = 0;
 
       if(distancesquared(var_5.origin, self.pillage_trigger.origin) < var_2 && should_display_already_found_message(var_5)) {
-        var_5 maps\mp\_utility::setlowermessage("already_have_intel", & "ALIEN_PILLAGE_INTEL_ALREADY_HAVE_INTEL", 2);
+        var_5 maps\mp\_utility::setlowermessage("already_have_intel", &"ALIEN_PILLAGE_INTEL_ALREADY_HAVE_INTEL", 2);
         common_scripts\utility::waitframe();
         continue;
       }

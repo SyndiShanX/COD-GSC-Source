@@ -90,7 +90,7 @@ holo_table_render_pois() {
   self endon("stop_holo_table");
 
   while(true) {
-    fvec = anglestoforward(self.display.angles);
+    fvec = anglesToForward(self.display.angles);
     rvec = anglestoright(self.display.angles);
 
     if(isDefined(self.cur_poi_index)) {
@@ -129,7 +129,7 @@ holo_table_change_poi(n_index_change, move_time_s, display_level_name) {
 
   s_poi = self.poi_list[self.cur_poi_index];
   v_poi_offset = s_poi.offset;
-  fvec = anglestoforward(self.display.angles);
+  fvec = anglesToForward(self.display.angles);
   rvec = anglestoright(self.display.angles);
   world_offset = rvec * v_poi_offset[0] + fvec * v_poi_offset[1];
   world_rotate_pos = self.e_origin.origin - world_offset;
@@ -144,7 +144,7 @@ holo_table_get_table(str_hologram) {
 }
 
 holo_table_initialize(str_hologram, str_map_center_origin) {
-  holo_table = spawnstruct();
+  holo_table = spawnStruct();
   display = getent(str_hologram, "targetname");
   display.v_start_org = display.origin;
   display.v_start_ang = display.angles;
@@ -158,7 +158,7 @@ holo_table_initialize(str_hologram, str_map_center_origin) {
     s_poi_list = getstructarray(holo_table.e_origin.target);
 
     foreach(s_poi in s_poi_list) {
-      fvec = anglestoforward(holo_table.display.angles);
+      fvec = anglesToForward(holo_table.display.angles);
       rvec = anglestoright(holo_table.display.angles);
       x_val = vectordot(s_poi.origin - holo_table.display.origin, rvec);
       y_val = vectordot(s_poi.origin - holo_table.display.origin, fvec);
@@ -166,7 +166,7 @@ holo_table_initialize(str_hologram, str_map_center_origin) {
       arrayinsert(holo_table.poi_list, s_poi, 0);
     }
   } else {
-    holo_table.poi_list[0] = spawnstruct();
+    holo_table.poi_list[0] = spawnStruct();
     holo_table.poi_list[0].origin = (0, 0, 0);
   }
 

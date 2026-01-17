@@ -15,7 +15,7 @@ hack_boards() {
 
   for(i = 0; i < windows.size; i++) {
     window = windows[i];
-    struct = spawnstruct();
+    struct = spawnStruct();
     spot = window;
 
     if(isDefined(window.trigger_location))

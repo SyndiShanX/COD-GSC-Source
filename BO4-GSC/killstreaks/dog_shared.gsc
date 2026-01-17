@@ -21,7 +21,6 @@
 #include scripts\killstreaks\killstreak_bundles;
 #include scripts\killstreaks\killstreakrules_shared;
 #include scripts\killstreaks\killstreaks_shared;
-
 #namespace dog;
 
 init_shared() {
@@ -40,7 +39,7 @@ function_8d543b98() {
   corpses = getcorpsearray();
 
   foreach(corpse in corpses) {
-    if(isactorcorpse(corpse) && corpse.archetype === #"mp_dog") {
+    if(isactorcorpse(corpse) && corpse.archetype === # "mp_dog") {
       corpse delete();
     }
   }
@@ -49,8 +48,8 @@ function_8d543b98() {
 deployed_off(slot, weapon) {
   self gadgetpowerset(slot, 0);
 
-  if(isDefined(self.pers[#"held_gadgets_power"]) && isDefined(self._gadgets_player[slot]) && isDefined(self.pers[#"held_gadgets_power"][self._gadgets_player[slot]])) {
-    self.pers[#"held_gadgets_power"][self._gadgets_player[slot]] = 0;
+  if(isDefined(self.pers[# "held_gadgets_power"]) && isDefined(self._gadgets_player[slot]) && isDefined(self.pers[# "held_gadgets_power"][self._gadgets_player[slot]])) {
+    self.pers[# "held_gadgets_power"][self._gadgets_player[slot]] = 0;
   }
 }
 
@@ -122,7 +121,7 @@ function_4670789f(tacpoint) {
   return false;
 }
 
-private function_9cb166cd(tacpoints) {
+function_9cb166cd(tacpoints) {
   assert(isDefined(tacpoints) && tacpoints.size);
   filteredpoints = [];
 
@@ -135,7 +134,7 @@ private function_9cb166cd(tacpoints) {
   return filteredpoints;
 }
 
-private function_fb11cc0f(owner) {
+function_fb11cc0f(owner) {
   cylinder = ai::t_cylinder(owner.origin, 800, 150);
   angles = owner getplayerangles();
   forwarddir = anglesToForward(angles);
@@ -149,7 +148,7 @@ private function_fb11cc0f(owner) {
     if(tacpoints.size) {
       tacpoint = array::random(tacpoints);
       return {
-        #origin: tacpoint.origin, 
+        #origin: tacpoint.origin,
         #angles: owner.angles
       };
     }
@@ -163,7 +162,7 @@ private function_fb11cc0f(owner) {
     if(tacpoints.size) {
       tacpoint = array::random(tacpoints);
       return {
-        #origin: tacpoint.origin, 
+        #origin: tacpoint.origin,
         #angles: owner.angles
       };
     }
@@ -177,7 +176,7 @@ private function_fb11cc0f(owner) {
     if(tacpoints.size) {
       tacpoint = array::random(tacpoints);
       return {
-        #origin: tacpoint.origin, 
+        #origin: tacpoint.origin,
         #angles: owner.angles
       };
     }
@@ -187,7 +186,7 @@ private function_fb11cc0f(owner) {
 
   if(isDefined(closest)) {
     return {
-      #origin: closest, 
+      #origin: closest,
       #angles: owner.angles
     };
   }
@@ -252,7 +251,7 @@ spawn_dog(bundle, owner) {
 
   owner.killstreak_dog = dog;
 
-    return dog;
+  return dog;
 }
 
 set_state(state, var_deeb4ee7) {
@@ -363,7 +362,7 @@ function_441cdbb6() {
   self set_state(2, 0);
 }
 
-private function_e74b21de(owner) {
+function_e74b21de(owner) {
   if(isDefined(owner) && distancesquared(owner.origin, self.origin) < 256 * 256) {
     origin = owner.origin;
     angles = owner getplayerangles();
@@ -390,7 +389,7 @@ private function_e74b21de(owner) {
     if(tacpoints.size) {
       tacpoint = array::random(tacpoints);
       return {
-        #origin: tacpoint.origin, 
+        #origin: tacpoint.origin,
         #angles: angles
       };
     }
@@ -408,7 +407,7 @@ private function_e74b21de(owner) {
     if(tacpoints.size) {
       tacpoint = array::random(tacpoints);
       return {
-        #origin: tacpoint.origin, 
+        #origin: tacpoint.origin,
         #angles: angles
       };
     }
@@ -419,13 +418,13 @@ private function_e74b21de(owner) {
   if(isDefined(var_ead7a19) && var_ead7a19.size) {
     leavepoint = array::random(var_ead7a19);
     return {
-      #origin: leavepoint, 
+      #origin: leavepoint,
       #angles: self.angles
     };
   }
 
   return {
-    #origin: self.origin, 
+    #origin: self.origin,
     #angles: self.angles
   };
 }
@@ -455,7 +454,7 @@ function_2f6f43cf(dog, weapon) {
   self ability_player::function_f2250880(weapon, 0);
 }
 
-private function_d86da2e8(params) {
+function_d86da2e8(params) {
   if(!isDefined(self) || !isDefined(params)) {
     return;
   }

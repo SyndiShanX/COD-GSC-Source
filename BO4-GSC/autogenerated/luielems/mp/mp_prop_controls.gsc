@@ -5,11 +5,9 @@
 
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\lui_shared;
-
 #namespace mp_prop_controls;
 
 class cmp_prop_controls: cluielem {
-
   function close(player) {
     cluielem::close_luielem(player);
   }

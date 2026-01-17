@@ -26,7 +26,6 @@
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
-
 #namespace zm_trial_friendly_fire;
 
 autoexec __init__system__() {
@@ -58,7 +57,7 @@ register_bot_weapons() {
   bot_action::register_bulletweapon(#"tr_powersemi_t8_upgraded");
 }
 
-private on_begin(var_9e0a2a85 = 1) {
+on_begin(var_9e0a2a85 = 1) {
   level endon(#"hash_7646638df88a3656");
 
   if(ishash(var_9e0a2a85)) {
@@ -70,7 +69,7 @@ private on_begin(var_9e0a2a85 = 1) {
   callback::on_player_damage(&on_player_damage);
   level.var_edae191d = 1;
   var_6a94fd5e = 4 - getplayers().size;
-  var_be33ceec = #"allies";
+  var_be33ceec = # "allies";
   level notify(#"hash_d3e36871aa6829f");
 
   for(i = 0; i < var_6a94fd5e; i++) {
@@ -99,7 +98,7 @@ private on_begin(var_9e0a2a85 = 1) {
   zm::register_actor_damage_callback(&function_c4e6367a);
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   zm_custom::function_928be07c(level.var_3c2226ce);
   level.var_3c2226ce = undefined;
   callback::remove_on_player_damage(&on_player_damage);
@@ -126,7 +125,7 @@ private on_end(round_reset) {
   level.var_cd0fc105 = undefined;
 }
 
-private on_player_damage(params) {
+on_player_damage(params) {
   if(isplayer(params.eattacker) && !isbot(params.eattacker) && params.idamage >= self.health && params.eattacker != self) {
     zm_trial::fail(#"hash_6e2a00b7d2d6e510", array(params.eattacker));
     return;
@@ -138,7 +137,7 @@ private on_player_damage(params) {
   }
 }
 
-private function_e2c5e34c() {
+function_e2c5e34c() {
   self endon(#"disconnect");
   level endon(#"hash_7646638df88a3656");
 
@@ -154,7 +153,7 @@ private function_e2c5e34c() {
   }
 }
 
-private function_e1378d07() {
+function_e1378d07() {
   foreach(player in getplayers()) {
     if(isalive(player) && !isbot(player) && !player laststand::player_is_in_laststand()) {
       return true;
@@ -164,7 +163,7 @@ private function_e1378d07() {
   return false;
 }
 
-private function_c4e6367a(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {
+function_c4e6367a(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {
   if(isplayer(attacker) && isbot(attacker) && level.round_number <= 20) {
     damage = int(damage * 0.5);
   }
@@ -176,21 +175,21 @@ function_6aa8dd73() {
   self endon(#"disconnect");
 
   if(self laststand::player_is_in_laststand() || !isalive(self) || self util::is_spectating()) {
-    self waittill(#"player_revived", #"spawned");
+    self waittill(#"player_revived", # "spawned");
   }
 
   if(level.round_number >= 20) {
     self zm_hero_weapon::function_1bb7f7b1(3);
-    var_98cb6e9 = array::randomize(array(#"ar_accurate_t8_upgraded", #"ar_fastfire_t8_upgraded", #"ar_stealth_t8_upgraded", #"ar_modular_t8_upgraded", #"smg_capacity_t8_upgraded", #"tr_powersemi_t8_upgraded"));
+    var_98cb6e9 = array::randomize(array(#"ar_accurate_t8_upgraded", # "ar_fastfire_t8_upgraded", # "ar_stealth_t8_upgraded", # "ar_modular_t8_upgraded", # "smg_capacity_t8_upgraded", # "tr_powersemi_t8_upgraded"));
     n_repacks = 4;
     self zm_perks::function_cc24f525();
   } else if(level.round_number >= 10) {
     self zm_hero_weapon::function_1bb7f7b1(2);
-    var_98cb6e9 = array::randomize(array(#"ar_accurate_t8_upgraded", #"ar_fastfire_t8_upgraded", #"ar_stealth_t8_upgraded", #"ar_modular_t8_upgraded", #"smg_capacity_t8_upgraded", #"tr_powersemi_t8_upgraded"));
+    var_98cb6e9 = array::randomize(array(#"ar_accurate_t8_upgraded", # "ar_fastfire_t8_upgraded", # "ar_stealth_t8_upgraded", # "ar_modular_t8_upgraded", # "smg_capacity_t8_upgraded", # "tr_powersemi_t8_upgraded"));
     n_repacks = 2;
   } else {
     self zm_hero_weapon::function_1bb7f7b1(1);
-    var_98cb6e9 = array::randomize(array(#"ar_accurate_t8", #"ar_fastfire_t8", #"ar_stealth_t8", #"ar_modular_t8", #"smg_capacity_t8", #"tr_powersemi_t8"));
+    var_98cb6e9 = array::randomize(array(#"ar_accurate_t8", # "ar_fastfire_t8", # "ar_stealth_t8", # "ar_modular_t8", # "smg_capacity_t8", # "tr_powersemi_t8"));
   }
 
   foreach(w_primary in self getweaponslistprimaries()) {

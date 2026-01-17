@@ -21,10 +21,10 @@ init() {
   level thread zombie_director_aggro();
 }
 zombie_director_aggro() {
-  while (1) {
+  while(1) {
     level waittill("ZDA");
     players = GetLocalPlayers();
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       player = players[i];
       PlayRumbleOnPosition(i, "explosion_generic", player.origin);
       player Earthquake(0.4, 1.7, player.origin, 1000);
@@ -72,12 +72,12 @@ zombie_director_light_update(local_client_num, set, newEnt) {
     }
   }
   players = GetLocalPlayers();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(isDefined(self._zombie_director_light_fx[i])) {
       DeleteFx(i, self._zombie_director_light_fx[i]);
       self._zombie_director_light_fx[i] = undefined;
     }
-    self._zombie_director_light_fx[i] = PlayFXOnTag(i, level._effect[self.health_fx], self, "tag_light");
+    self._zombie_director_light_fx[i] = playFXOnTag(i, level._effect[self.health_fx], self, "tag_light");
   }
 }
 zombie_director_death(local_client_num, set, newEnt) {
@@ -88,7 +88,7 @@ zombie_director_death(local_client_num, set, newEnt) {
   }
   players = GetLocalPlayers();
   if(set) {
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       player = players[i];
       if(isDefined(player.zombie_director_impact_humangun)) {
         DeleteFx(i, player.zombie_director_impact_humangun);
@@ -98,11 +98,11 @@ zombie_director_death(local_client_num, set, newEnt) {
         DeleteFx(i, player._zombie_director_death_torso_fx);
         player._zombie_director_death_torso_fx = undefined;
       }
-      player.zombie_director_impact_humangun = PlayFXOnTag(i, level._effect["director_death_head"], self, "j_neck");
-      player._zombie_director_death_torso_fx = PlayFXOnTag(i, level._effect["director_death_torso"], self, "J_SpineLower");
+      player.zombie_director_impact_humangun = playFXOnTag(i, level._effect["director_death_head"], self, "j_neck");
+      player._zombie_director_death_torso_fx = playFXOnTag(i, level._effect["director_death_torso"], self, "J_SpineLower");
     }
   } else {
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       player = players[i];
       if(isDefined(player.zombie_director_impact_humangun)) {
         DeleteFx(i, player.zombie_director_impact_humangun);
@@ -122,7 +122,7 @@ humangun_director_hit_response(local_client_num, set, newEnt, upgraded) {
     return;
   }
   players = GetLocalPlayers();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     player = players[i];
     if(isDefined(player._zombie_director_impact_humangun_fx)) {
       DeleteFx(i, player._zombie_director_impact_humangun_fx);
@@ -132,7 +132,6 @@ humangun_director_hit_response(local_client_num, set, newEnt, upgraded) {
     if(upgraded) {
       impact_fx = level._effect["director_impact_humangun_upgraded"];
     }
-    player._zombie_director_impact_humangun_fx = PlayFXOnTag(i, impact_fx, self, "J_SpineLower");
+    player._zombie_director_impact_humangun_fx = playFXOnTag(i, impact_fx, self, "J_SpineLower");
   }
 }
-

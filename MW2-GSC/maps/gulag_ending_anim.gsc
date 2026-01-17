@@ -47,7 +47,6 @@ endlog_run_anims() {
 
   level.scr_sound["price"]["price_rescue"] = "scn_gulag_price_rescue_b_dx";
 
-
   level.scr_anim["old_soap"]["price_rescue"] = % gulag_rescueB_soldier1_reshoot;
 
   level.scr_anim["price"]["price_rescue_intro"] = % gulag_rescueB_Price_intro;
@@ -64,7 +63,6 @@ endlog_run_anims() {
   level.scr_anim["redshirt"]["cafe_entrance"] = % gulag_cafeteria_soldier;
 
   addNotetrack_dialogue("soap", "dialog", "cafe_entrance", "gulag_cmt_whereareyou");
-
 
   level.scr_anim["price"]["gate"] = % gulag_end_run2gate_price;
   level.scr_anim["redshirt"]["gate"] = % gulag_end_run2gate_soldier;
@@ -99,13 +97,13 @@ soap_fires_flare(soap) {
   tag_origin = spawn_taG_origin();
   tag_origin.origin = soap gettagorigin("tag_laser");
   tag_origin.angles = soap gettagangles("tag_laser");
-  forward = anglestoforward(tag_origin.angles);
+  forward = anglesToForward(tag_origin.angles);
 
   start = getfx("flare_start_gulag");
-  PlayFXOnTag(start, tag_origin, "tag_origin");
+  playFXOnTag(start, tag_origin, "tag_origin");
 
   burn = getfx("flare_gulag");
-  PlayFXOnTag(burn, tag_origin, "tag_origin");
+  playFXOnTag(burn, tag_origin, "tag_origin");
 
   tag_origin MoveTo(tag_origin.origin + (0, 0, 2000), 3, 0, 0);
   wait(4);
@@ -121,14 +119,14 @@ got_player_notetrack(soap) {
 
   flag_set("player_evac");
 
-  if(flag("player_uses_rig"))
+  if(flag("player_uses_rig")) {
     return;
-
+  }
   wait(2);
   thread maps\gulag_ending_code::player_dies_to_cavein(0);
   scale = 0.4;
   time = 0.1;
-  for (;;) {
+  for(;;) {
     Earthquake(scale, time, level.player.origin, 5000);
     wait(time);
     scale += 0.2 / 5;
@@ -185,7 +183,6 @@ endlog_scrip_model_animations() {
   level.scr_animtree["1911"] = #animtree;
   level.scr_model["1911"] = "weapon_colt1911_black";
   level.scr_anim["1911"]["price_rescue"] = % gulag_rescueB_pistol_reshootB;
-
 }
 
 #using_animtree("vehicles");

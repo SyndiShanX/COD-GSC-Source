@@ -13,7 +13,6 @@
 #include maps\_slowmo_breach;
 
 main() {
-
   if(getdvar("r_reflectionProbeGenerate") == "1")
     return;
   SetDvar("breach_debug", "0");
@@ -49,9 +48,9 @@ main() {
   level.cosine["45"] = cos(45);
   level.cosine["60"] = cos(60);
   level.stealthDistanceSquared = 512 * 512;
-  trigs = getentarray("trigger_multiple", "classname");
+  trigs = getEntArray("trigger_multiple", "classname");
   foreach(trigger in trigs) {
-    if((isdefined(trigger.script_noteworthy)) && (getsubstr(trigger.script_noteworthy, 0, 10) == "colornodes"))
+    if((isDefined(trigger.script_noteworthy)) && (getsubstr(trigger.script_noteworthy, 0, 10) == "colornodes"))
       level.aColornodeTriggers = array_add(level.aColornodeTriggers, trigger);
   }
 
@@ -227,8 +226,8 @@ main() {
   /*-----------------------
   GLOBAL THREADS
   -------------------------*/
-  array_thread(getentarray("redshirt_trigger", "targetname"), ::redshirt_trigger_think);
-  array_thread(getentarray("compassTriggers", "targetname"), ::compass_triggers_think);
+  array_thread(getEntArray("redshirt_trigger", "targetname"), ::redshirt_trigger_think);
+  array_thread(getEntArray("compassTriggers", "targetname"), ::compass_triggers_think);
   setSavedDvar("r_specularColorScale", "1.4");
   thread init_air_vehicle_flags();
   level.playerCQBSpeed = 0.8;
@@ -258,11 +257,11 @@ main() {
   /*-----------------------
   SPAWNER THREADS
   -------------------------*/
-  array_thread(getentarray("hostiles_ambush", "targetname"), ::add_spawn_function, ::ambush_patroller_think);
-  //array_thread( getentarray( "seeker", "script_noteworthy" ), ::add_spawn_function, ::ai_seekers_think );
-  array_thread(getentarray("patroller", "script_noteworthy"), ::add_spawn_function, ::ai_patroller_think);
-  array_thread(getentarray("rappel", "script_noteworthy"), ::add_spawn_function, ::ai_rappel_think);
-  array_thread(getentarray("army", "script_noteworthy"), ::add_spawn_function, ::AI_army_think);
+  array_thread(getEntArray("hostiles_ambush", "targetname"), ::add_spawn_function, ::ambush_patroller_think);
+  //array_thread( getEntArray( "seeker", "script_noteworthy" ), ::add_spawn_function, ::ai_seekers_think );
+  array_thread(getEntArray("patroller", "script_noteworthy"), ::add_spawn_function, ::ai_patroller_think);
+  array_thread(getEntArray("rappel", "script_noteworthy"), ::add_spawn_function, ::ai_rappel_think);
+  array_thread(getEntArray("army", "script_noteworthy"), ::add_spawn_function, ::AI_army_think);
   array_spawn_function_noteworthy("turret_guys", ::AI_turret_guys_think);
 
   array_spawn_function_noteworthy("left_deck3_dudes", ::AI_left_deck3_dudes_think);
@@ -271,12 +270,12 @@ main() {
   thread player_death();
 
   if(is_specialop()) {
-    DDS = getentarray("sub_dds_01", "targetname");
-    DoorDDS = getentarray("dds_door_01", "targetname");
+    DDS = getEntArray("sub_dds_01", "targetname");
+    DoorDDS = getEntArray("dds_door_01", "targetname");
     array_thread(DDS, ::hide_entity);
     array_thread(DoorDDS, ::hide_entity);
-    DDS = getentarray("sub_dds_02", "targetname");
-    DoorDDS = getentarray("dds_door_02", "targetname");
+    DDS = getEntArray("sub_dds_02", "targetname");
+    DoorDDS = getEntArray("dds_door_02", "targetname");
     array_thread(DDS, ::hide_entity);
     array_thread(DoorDDS, ::hide_entity);
   }
@@ -284,10 +283,10 @@ main() {
 
 player_death() {
   level.player waittill("death", attacker);
-  if((isdefined(attacker)) && (attacker.code_classname == "misc_turret")) {
+  if((isDefined(attacker)) && (attacker.code_classname == "misc_turret")) {
     if(isSubStr(attacker.model, "little_bird")) {
       level notify("new_quote_string");
-      setDvar("ui_deadquote", & "OILRIG_MISSIONFAIL_HELI_DEATH");
+      setDvar("ui_deadquote", &"OILRIG_MISSIONFAIL_HELI_DEATH");
     }
   }
 }
@@ -295,6 +294,7 @@ player_death() {
 /****************************************************************************
 START FUNCTIONS
 ****************************************************************************/
+
 start_default() {
   //AA_intro_init();
   //start_debug();
@@ -350,14 +350,13 @@ start_surface() {
   wait(0.05);
   underwater_friendly_setup();
   thread AA_surface_init();
-
 }
 
 start_surface_notifies() {
   wait(1);
   i = 0;
   aArray = array_merge(level.sdvSquad01, level.sdvSquad02);
-  while (1 < 100) {
+  while(1 < 100) {
     wait(0.05);
     foreach(guy in aArray)
     guy notify("finished_swim_animation");
@@ -367,7 +366,6 @@ start_surface_notifies() {
 }
 
 start_rig(bDontSpawnFriendlies) {
-
   initFriendlies("Rig", bDontSpawnFriendlies);
   thread music_surface_to_first_breach();
   flag_set("player_slitting_throat");
@@ -447,7 +445,6 @@ start_deck3() {
 }
 
 start_escape() {
-
   thread maps\_slowmo_breach::delete_breach(0);
   thread maps\_slowmo_breach::delete_breach(1);
   thread maps\_slowmo_breach::delete_breach(2);
@@ -465,7 +462,6 @@ start_escape() {
   thread c4_barrels();
   wait(.5);
   level notify("A door in breach group 300 has been activated.");
-
 }
 
 above_water_art_and_ambient_setup() {
@@ -490,7 +486,7 @@ below_water_art_and_ambient_setup(bUseRigApproachFog) {
   Ambientstop();
   thread maps\_utility::set_ambient("amb_underwater_test1v1");
 
-  if(isdefined(bUseRigApproachFog)) {
+  if(isDefined(bUseRigApproachFog)) {
     vision_set_fog_changes("oilrig_underwater", 0);
     thread underwater_fog_approaching_rig(0);
   } else {
@@ -512,6 +508,7 @@ below_water_art_and_ambient_setup(bUseRigApproachFog) {
 /****************************************************************************
 UNDERWATER INTRO
 ****************************************************************************/
+
 AA_intro_init() {
   enableforcedsunshadows();
   thread maps\_utility::set_ambient("amb_underwater_test1v1");
@@ -536,7 +533,7 @@ underwater_sequence() {
   underwater_box = getent("underwater_box", "targetname");
   underwater_box show();
   eNodeIntro = getent("org_stealth_kill", "targetname");
-  assert(isdefined(eNodeIntro));
+  assert(isDefined(eNodeIntro));
 
   //wait(.5);
   //SetSavedDvar( "hud_gasMaskOverlay", 1 );
@@ -552,7 +549,7 @@ underwater_sequence() {
   below_water_art_and_ambient_setup();
 
   /*-----------------------
-  SETUP SUBS & SDVS
+  SETUP SUBS &SDVS
   -------------------------*/
   eSub_01 = submarine_spawn("01", eNodeIntro);
   eSub_02 = submarine_spawn("02", eNodeIntro);
@@ -657,7 +654,7 @@ underwater_sequence() {
 
 underwater_slowview() {
   level endon("player_breaks_surface");
-  while (!flag("player_breaks_surface")) {
+  while(!flag("player_breaks_surface")) {
     level.player shellshock("slowview", .1);
     wait(.1);
   }
@@ -702,7 +699,6 @@ underwater_friendly_setup() {
 
   array_thread(level.sdvSquad02, maps\_underwater::friendly_bubbles_stop);
   array_thread(level.sdvSquad01, maps\_underwater::friendly_bubbles_stop);
-
 }
 
 grate_enemies_setup() {
@@ -725,7 +721,7 @@ grate_enemies_setup() {
 delete_on_flag(flag) {
   self endon("death");
   flag_wait(flag);
-  if(isdefined(self))
+  if(isDefined(self))
     self delete();
 }
 
@@ -744,7 +740,6 @@ heli_patrol() {
   eHeli delete();
 }
 
-
 DDS_water_rise() {
   wait(1);
   movetime = 10;
@@ -757,14 +752,12 @@ submarine_rumble() {
   self endon("death");
   org = spawn("script_origin", self.origin + (0, -900, -1800));
   org linkto(self);
-  while (!flag("player_ready_to_be_helped_from_water")) {
+  while(!flag("player_ready_to_be_helped_from_water")) {
     org PlayRumbleOnEntity("mig_rumble");
     wait(.4);
   }
   org delete();
 }
-
-
 
 dialogue_underwater() {
   wait(8);
@@ -805,7 +798,6 @@ dialogue_underwater() {
   //"Sub Officer: Hotel-Six depth 20 meters."
   radio_dialogue("oilrig_sbo_depth20");
 
-
   flag_wait("sdv_02_arriving");
   flag_set("start_surface_sequences");
   //wait( 12 );
@@ -822,7 +814,6 @@ dialogue_underwater() {
   flag_wait("sdv_01_stopping");
 
   wait(5);
-
 }
 
 player_sdv_think(eSDV, eNodeIntro) {
@@ -883,10 +874,10 @@ player_sdv_think(eSDV, eNodeIntro) {
 
 player_breaks_surface() {
   eNodeIntro = getent("org_stealth_kill", "targetname");
-  assert(isdefined(eNodeIntro));
+  assert(isDefined(eNodeIntro));
 
   grate_blocker = getent("grate_blocker", "targetname");
-  assert(isdefined(grate_blocker));
+  assert(isDefined(grate_blocker));
   grate_blocker hide();
   grate_blocker notsolid();
 
@@ -920,7 +911,7 @@ water_bob() {
   org_view_bob.angles = org_water_level.angles;
 
   waterMoveModel = spawn("script_model", org_view_bob.origin);
-  waterMoveModel setmodel("tag_origin");
+  waterMoveModel setModel("tag_origin");
   waterMoveModel.origin = org_view_bob.origin;
   waterMoveModel.angles = org_view_bob.angles;
 
@@ -940,7 +931,6 @@ water_bob() {
   waterMoveModel lerp_player_view_to_tag_oldstyle(level.player, "tag_origin", timer, 1, 90, 90, 50, 4);
   //level.player PlayerLinkToBlend( waterMoveModel, "tag_origin", timer, timer * 0.2, timer * 0.2 );
   delaythread(0, ::open_up_player_fov, waterMoveModel, "tag_origin");
-
 }
 
 open_up_player_fov(view_arms, tag) {
@@ -957,8 +947,7 @@ view_bob() {
   self moveTo(self.origin + (0, 0, moveDist / 2), movetime, 1, 1);
   wait(movetime);
 
-  while (isdefined(self)) {
-
+  while(isDefined(self)) {
     self moveTo(self.origin + (0, 0, moveDist * (-1)), movetime, 1, 1);
     wait(movetime);
     self moveTo(self.origin + (0, 0, moveDist), movetime, 1, 1);
@@ -974,8 +963,7 @@ view_rotate() {
   self rotateRoll(rotaterollangle / 2, rotateTime, rotateTime / 2, rotateTime / 2);
   wait(rotateTime);
 
-  while (isdefined(self)) {
-
+  while(isDefined(self)) {
     self rotateRoll(rotaterollangle * (-1), rotateTime, rotateTime / 2, rotateTime / 2);
     wait(rotateTime);
     self rotateRoll(rotaterollangle, rotateTime, rotateTime / 2, rotateTime / 2);
@@ -1004,7 +992,7 @@ water_movement(org_view_bob) {
 
   //Get the player's normalized movement vector. Returns [-1,1] for X(forward) and Y(right) based on player's input.
   //getnormalizedMovement - add this value times the dvar "moverate" or something
-  while (!flag("player_ready_to_be_helped_from_water")) {
+  while(!flag("player_ready_to_be_helped_from_water")) {
     wait(updateTime);
     movement = level.player GetNormalizedMovement();
     //iprintlnbold( movement[ 0 ] + " : " + movement[ 1 ] );
@@ -1027,9 +1015,9 @@ water_movement(org_view_bob) {
     self moveto(newLocation, updateTime, 0, 0);
 
   }
-  if(isdefined(org_view_bob))
+  if(isDefined(org_view_bob))
     org_view_bob delete();
-  if(isdefined(self))
+  if(isDefined(self))
     self delete();
 }
 
@@ -1041,7 +1029,7 @@ underwater_player_flags() {
   //flag_set( "player_is_surfacing" );
 
   /*-----------------------
-  PLAYER ENDS SWIMMING 
+  PLAYER ENDS SWIMMING
   -------------------------*/
   self waittillmatch("single anim", "end");
   flag_set("player_is_done_swimming");
@@ -1058,10 +1046,7 @@ friendly_sdv_think(eSDV, eNodeIntro) {
   eSDV thread anim_single_solo(self, "sdv_ride_in", "origin_animate_jnt");
   self waittillmatch("single anim", "end");
   self notify("finished_swim_animation");
-
 }
-
-
 
 /****************************************************************************
 SURFACE START
@@ -1088,13 +1073,13 @@ AA_surface_init() {
 water_monitor() {
   level endon("obj_stealthkill_complete");
   org_water_level = getent("org_water_level", "targetname");
-  assert(isdefined(org_water_level));
+  assert(isDefined(org_water_level));
   water_level = org_water_level.origin[2];
 
   flag_wait("player_starting_stealth_kill");
   thread water_vision_management();
 
-  while (true) {
+  while(true) {
     wait(0.05);
     playerEye = level.player getEye();
     if(playerEye[2] < water_level)
@@ -1107,7 +1092,7 @@ water_monitor() {
 
 water_vision_management() {
   level endon("obj_stealthkill_complete");
-  while (true) {
+  while(true) {
     level waittill("player_is_below_water");
     below_water_art_and_ambient_setup(true);
     //thread player_surface_blur();
@@ -1133,7 +1118,7 @@ water_streaks() {
 
 friendlies_help_player_from_water() {
   eNodeIntro = getent("org_stealth_kill", "targetname");
-  assert(isdefined(eNodeIntro));
+  assert(isDefined(eNodeIntro));
   aWaterHelpers = [];
   aWaterHelpers[0] = get_AI_with_script_noteworthy("allies", "water_helper_01");
   aWaterHelpers[1] = get_AI_with_script_noteworthy("allies", "water_helper_02");
@@ -1182,7 +1167,7 @@ enemy_dialogue() {
   //MERC 1 (in German): This sea air makes me sick. Prefered the last job. Private security in a limo all day.
   level.hostile_stealthkill_friendly dialogue_execute("oilrig_mrc1_limoallday");
 
-  //MERC 2 (in German): You complain too much. 
+  //MERC 2 (in German): You complain too much.
   level.hostile_stealthkill_player dialogue_execute("oilrig_mrc2_complain");
 
   //MERC 1 (in German): yeah, well, not as much as the Italians. Who hired those lazy fucks anyways? Did you see that one guy the other day? Didn't even know how to clean his gun.
@@ -1238,11 +1223,11 @@ dialogue_stealth_kill() {
 
 player_grate_sequence_think() {
   org_water_exit = getent("org_water_exit", "targetname");
-  assert(isdefined(org_water_exit));
+  assert(isDefined(org_water_exit));
   org_water_exit.origin = org_water_exit.origin + (0, 0, 10);
 
   eNodeIntro = getent("org_stealth_kill", "targetname");
-  assert(isdefined(eNodeIntro));
+  assert(isDefined(eNodeIntro));
   flag_wait("player_is_done_swimming");
 
   //SetDvar( "old_compass", "1" );
@@ -1266,7 +1251,7 @@ player_grate_sequence_think() {
   -------------------------*/
   //	level.hostile_stealthkill_player.useable = true;
   //	level.hostile_stealthkill_player SetCursorHint( "HINT_NOICON" );
-  //	level.hostile_stealthkill_player sethintstring( &"SCRIPT_PLATFORM_OILRIG_HINT_STEALTH_KILL" );
+  //	level.hostile_stealthkill_player sethintstring(&"SCRIPT_PLATFORM_OILRIG_HINT_STEALTH_KILL" );
   //	level.hostile_stealthkill_player waittill( "trigger" );
 
   thread grate_enemy_hint();
@@ -1337,7 +1322,7 @@ player_grate_sequence_think() {
   TURN ON BRUSH FOR PLAYER TO STAND AND MANTLE FROM
   -------------------------*/
   mantle_platform = getent("mantle_platform", "targetname");
-  assert(isdefined(mantle_platform));
+  assert(isDefined(mantle_platform));
   mantle_platform show();
   mantle_platform solid();
 
@@ -1350,10 +1335,10 @@ player_looking_at_grate_guard_logic() {
   bInFOV = undefined;
   trig_player_near_grate_guard = getent("trig_player_near_grate_guard", "script_noteworthy");
   org = getent(trig_player_near_grate_guard.target, "targetname");
-  while (true) {
+  while(true) {
     wait(0.05);
     if(flag("player_near_grate_guard")) {
-      bInFOV = within_fov(level.player geteye(), level.player getPlayerAngles(), org.origin, level.cosine["25"]);
+      bInFOV = within_fov(level.player getEye(), level.player getPlayerAngles(), org.origin, level.cosine["25"]);
       if(bInFOV)
         flag_set("player_looking_at_grate_guard");
       else
@@ -1365,14 +1350,14 @@ player_looking_at_grate_guard_logic() {
 
 grate_enemy_hint() {
   level endon("player_starting_stealth_kill");
-  sHint = & "SCRIPT_PLATFORM_OILRIG_HINT_STEALTH_KILL";
+  sHint = &"SCRIPT_PLATFORM_OILRIG_HINT_STEALTH_KILL";
   thread grate_enemy_hint_cleanup();
-  while (!flag("player_starting_stealth_kill")) {
+  while(!flag("player_starting_stealth_kill")) {
     flag_wait("player_looking_at_grate_guard");
     thread hint(sHint);
     flag_set("player_in_position_for_stealth_kill");
 
-    while (flag("player_looking_at_grate_guard"))
+    while(flag("player_looking_at_grate_guard"))
       wait(0.05);
 
     flag_clear("player_in_position_for_stealth_kill");
@@ -1387,10 +1372,11 @@ grate_enemy_hint_cleanup() {
 }
 
 waittill_player_triggers_stealth_kill() {
-  while (!flag("player_starting_stealth_kill")) {
+  while(!flag("player_starting_stealth_kill")) {
     wait(0.05);
-    if((flag("player_looking_at_grate_guard")) && (level.player MeleeButtonPressed()))
+    if((flag("player_looking_at_grate_guard")) && (level.player MeleeButtonPressed())) {
       break;
+    }
   }
 }
 
@@ -1416,7 +1402,7 @@ player_in_water_monitor() {
   WAIT FOR PLAYER TO GET OUT
   -------------------------*/
   trig_out_of_water = getent("trig_out_of_water", "targetname");
-  assert(isdefined(trig_out_of_water));
+  assert(isDefined(trig_out_of_water));
   trig_out_of_water waittill("trigger");
 
   /*-----------------------
@@ -1434,8 +1420,8 @@ player_in_water_monitor() {
   -------------------------*/
   //wait for player to not be touching the water trigger
   trig_in_water = getent("trig_in_water", "targetname");
-  assert(isdefined(trig_in_water));
-  while (level.player isTouching(trig_in_water))
+  assert(isDefined(trig_in_water));
+  while(level.player isTouching(trig_in_water))
     wait(0.05);
   thread player_out_of_water_monitor();
 }
@@ -1446,7 +1432,7 @@ player_out_of_water_monitor() {
   level endon("lower_decks_closed_off");
   thread killtrigger_ocean_on();
   trig_in_water = getent("trig_in_water", "targetname");
-  assert(isdefined(trig_in_water));
+  assert(isDefined(trig_in_water));
   trig_in_water waittill("trigger");
 
   level.player thread play_sound_in_space("splash_player_water_enter");
@@ -1461,9 +1447,8 @@ player_kill_fx() {
 }
 
 friendly_surface_think() {
-
   eNodeIntro = getent("org_stealth_kill", "targetname");
-  assert(isdefined(eNodeIntro));
+  assert(isDefined(eNodeIntro));
 
   /*-----------------------
   WAIT TO FINISH SWIM UP ANIM
@@ -1507,7 +1492,7 @@ friendly_gear_takeoff() {
 
   mask_remove_guy = undefined;
   foreach(guy in level.team2) {
-    if((isdefined(guy.script_noteworthy)) && (guy.script_noteworthy == "mask_remove_guy")) {
+    if((isDefined(guy.script_noteworthy)) && (guy.script_noteworthy == "mask_remove_guy")) {
       mask_remove_guy = guy;
       break;
     }
@@ -1564,16 +1549,15 @@ friendly_gear_takeoff() {
   flag_wait("lower_room_breached");
   mask_remove_guy thread AI_delete();
   tempNode delete();
-
 }
 
 player_looking_at_gear_friendlies(eGearNode) {
   level endon("player_approaching_gear_friendlies");
   level endon("player_looking_at_gear_friendlies");
   bInFOV = undefined;
-  while (true) {
+  while(true) {
     wait(0.05);
-    bInFOV = within_fov(level.player geteye(), level.player getPlayerAngles(), eGearNode.origin, level.cosine["25"]);
+    bInFOV = within_fov(level.player getEye(), level.player getPlayerAngles(), eGearNode.origin, level.cosine["25"]);
     if(bInFOV)
       flag_set("player_looking_at_gear_friendlies");
   }
@@ -1606,19 +1590,19 @@ underwater_stealth_kill() {
   //	if( self.animname == "sdv02_pilot" )
   //	{
   //		self waittillmatch( "single anim", "end" );
-  //		if( isdefined( self.magic_bullet_shield ) )
+  //		if( isDefined( self.magic_bullet_shield ) )
   //			self stop_magic_bullet_shield();
   //		self delete();
   //	}
 
   self waittillmatch("single anim", "end");
-  if(isdefined(self.magic_bullet_shield))
+  if(isDefined(self.magic_bullet_shield))
     self stop_magic_bullet_shield();
   self delete();
 
   fin_remove_guy = undefined;
   foreach(guy in level.team2) {
-    if((isdefined(guy.script_noteworthy)) && (guy.script_noteworthy == "fin_remove_guy")) {
+    if((isDefined(guy.script_noteworthy)) && (guy.script_noteworthy == "fin_remove_guy")) {
       fin_remove_guy = guy;
       break;
     }
@@ -1635,12 +1619,12 @@ underwater_stealth_kill() {
 
   flag_wait("lower_room_breached");
   fin_remove_guy thread AI_delete();
-
 }
 
 /****************************************************************************
 RIG START
 ****************************************************************************/
+
 AA_rig_init() {
   level.slomoBasevision = "oilrig_interior";
   triggersEnable("colornodes_rig", "script_noteworthy", true);
@@ -1678,7 +1662,7 @@ door_to_deck1_think() {
   //	
   //	eNode = getnode( "node_deck1_door", "targetname" );
   //	level.teamleader disable_ai_color();
-  //	if( ( !level.teamleader istouching( volume_first_room ) )&& ( !isdefined( level.teamleader.breaching ) ) )
+  //	if( ( !level.teamleader istouching( volume_first_room ) )&& ( !isDefined( level.teamleader.breaching ) ) )
   //	{
   //		level.teamleader teleport_when_out_of_sight( eNode );
   //	}
@@ -1711,12 +1695,13 @@ door_to_deck1_think() {
 }
 
 teleport_when_out_of_sight(eNode) {
-  while (true) {
+  while(true) {
     wait(0.05);
-    while (within_fov(level.player getEye(), level.player getPlayerAngles(), self.origin, level.cosine["45"]))
+    while(within_fov(level.player getEye(), level.player getPlayerAngles(), self.origin, level.cosine["45"]))
       wait(0.1);
-    if(distance(self.origin, level.player.origin) > 512)
+    if(distance(self.origin, level.player.origin) > 512) {
       break;
+    }
   }
 
   self forceTeleport(eNode.origin, eNode.angles);
@@ -1731,7 +1716,7 @@ first_breach_ambient_guys() {
   -------------------------*/
   sound_org = getent("origin_breach1_dialogue", "targetname");
   sound_org thread play_loop_sound_on_entity("oilrig_muffled_breach_voices");
-  aSpawners = getentarray("hostiles_ambient_breach1", "targetname");
+  aSpawners = getEntArray("hostiles_ambient_breach1", "targetname");
   aHostiles = array_spawn(aSpawners);
   array_thread(aHostiles, ::premature_kill_missionfail, sound_org);
   level waittill("A door in breach group 100 has been activated.");
@@ -1748,19 +1733,19 @@ dialogue_get_amped_on_stairway() {
   level endon("player_at_lower_breach");
 
   wait(randomfloatrange(4, 6));
-  while (flag("player_dealing_with_rail"))
+  while(flag("player_dealing_with_rail"))
     wait(.5);
   //Keep it tight people.
   radio_dialogue("oilrig_nsl_keepittight");
 
   wait(randomfloatrange(6, 8));
-  while (flag("player_dealing_with_rail"))
+  while(flag("player_dealing_with_rail"))
     wait(.5);
   //Ready weapons.	
   radio_dialogue("oilrig_nsl_readyweapons");
 
   wait(randomfloatrange(6, 8));
-  while (flag("player_dealing_with_rail"))
+  while(flag("player_dealing_with_rail"))
     wait(.5);
   //Move up
   radio_dialogue("oilrig_nsl_moveup2");
@@ -1787,7 +1772,6 @@ dialogue_rig_to_first_breach() {
 
   //"Ghost: We're clear."
   radio_dialogue("oilrig_roomclear_ghost_03");
-
 
   flag_wait("player_at_lower_breach");
 
@@ -1832,8 +1816,7 @@ dialogue_nag_to_deck1() {
   flag_wait("start_nagging_to_go_to_deck1");
 
   volume_first_room = getent("volume_first_room", "script_noteworthy");
-  while (!flag("upper_room_breached")) {
-
+  while(!flag("upper_room_breached")) {
     if(level.player istouching(volume_first_room))
       dialogue_random_manhandler_nag_to_deck1();
     wait(randomfloatrange(8, 14));
@@ -1880,7 +1863,7 @@ is_player_looking_at_railing() {
   level endon("player_looking_at_railing");
 
   railing_org = getent("railing_org", "targetname");
-  while (true) {
+  while(true) {
     wait(.25);
     if(self adsbuttonpressed()) {
       playerEye = self getEye();
@@ -1893,7 +1876,7 @@ is_player_looking_at_railing() {
 railing_patroller() {
   level endon("stealth_broken");
 
-  aSpawners = getentarray("hostile_railing", "targetname");
+  aSpawners = getEntArray("hostile_railing", "targetname");
   eSpawner = aSpawners[randomintrange(0, 2)];
   ePatroller = eSpawner spawn_ai();
   ePatroller.ignoreme = true;
@@ -1936,14 +1919,14 @@ railing_patroller_player_detect() {
 }
 
 move_breach_safe_volumes() {
-  first_breach_safe_volumes = getentarray("first_breach_safe_volumes", "targetname");
+  first_breach_safe_volumes = getEntArray("first_breach_safe_volumes", "targetname");
   foreach(volume in first_breach_safe_volumes) {
     volume.origin = volume.origin + (0, 0, 20000);
   }
 }
 
 railing_patroller_react(eNode) {
-  if(!isdefined(self))
+  if(!isDefined(self))
     return;
   level endon("railing_patroller_dead");
   level waittill("stealth_broken");
@@ -1952,7 +1935,6 @@ railing_patroller_react(eNode) {
   self anim_stopanimscripted();
   battlechatter_on("axis");
   ignoreme_off_squad_and_player();
-
 }
 
 body_splash() {
@@ -1960,7 +1942,7 @@ body_splash() {
   self waittill("damage");
   self waittillmatch("single anim", "splash");
   org_splash.origin = self.origin;
-  playfx(getfx("body_splash_railing"), org_splash.origin);
+  playFX(getfx("body_splash_railing"), org_splash.origin);
   org_splash play_sound_on_entity("scn_body_splash");
   wait(10);
   org_splash delete();
@@ -2015,7 +1997,7 @@ friendly_aims_at_railing_guy(ePatroller) {
   FRIENDLY GETS INTO POSITION TO KILL RAILING DUDE
   -------------------------*/
   eNode = getnode("node_railing_friendly", "targetname");
-  assert(isdefined(eNode));
+  assert(isDefined(eNode));
   level.teamleader disable_ai_color();
   level.teamleader pushplayer(true);
   level.teamleader setgoalnode(eNode);
@@ -2025,7 +2007,6 @@ friendly_aims_at_railing_guy(ePatroller) {
   flag_wait_either("player_alerted_railing", "player_broke_stealth");
 
   level.teamleader thread friendly_executes_railing_guy(ePatroller, eNode);
-
 }
 
 friendly_executes_railing_guy(ePatroller, eNode) {
@@ -2046,8 +2027,7 @@ friendly_executes_railing_guy(ePatroller, eNode) {
 ****************************************************************************/
 
 AA_deck1_init() {
-
-  array_thread(getentarray("triggers_deck1_hall", "targetname"), ::trigger_on);
+  array_thread(getEntArray("triggers_deck1_hall", "targetname"), ::trigger_on);
   thread friendlies_shielded_during_breach("upper_room_breached", "upper_room_cleared");
   thread friendly_speed_adjustment_breach_02();
   thread glowing_c4_think();
@@ -2085,7 +2065,7 @@ deck1_breach_ambient_guys() {
   -------------------------*/
   sound_org = getent("origin_ambush_discovery_dialogue", "targetname");
   sound_org thread play_loop_sound_on_entity("oilrig_muffled_breach_voices");
-  aSpawners = getentarray("hostiles_ambient_deckbreach", "targetname");
+  aSpawners = getEntArray("hostiles_ambient_deckbreach", "targetname");
   aHostiles = array_spawn(aSpawners);
   array_thread(aHostiles, ::premature_kill_missionfail, sound_org);
   level waittill("A door in breach group 200 has been activated.");
@@ -2104,7 +2084,7 @@ delete_first_breach_room_ai() {
   aAI_to_delete = volume_first_room get_ai_touching_volume();
   if(aAI_to_delete.size) {
     foreach(guy in aAI_to_delete) {
-      if(isdefined(guy.magic_bullet_shield))
+      if(isDefined(guy.magic_bullet_shield))
         guy stop_magic_bullet_shield();
       guy delete();
     }
@@ -2123,7 +2103,6 @@ heli_flyby() {
   eHeli waittill("reached_dynamic_path_end");
   eHeli delete();
 }
-
 
 dialogue_to_deck1() {
   level endon("mission failed");
@@ -2158,7 +2137,6 @@ dialogue_heli_patrol_deck_1() {
   //"Seal Leader: All clear, move up."
   if(!flag("player_at_last_breach_building"))
     dialogue_random_heli_all_clear();
-
 }
 
 balls_out_player_speed() {
@@ -2173,12 +2151,11 @@ upper_room_setup() {
   activate_trigger_with_noteworthy("colornodes_upper_room_setup");
 
   //do some radius damage on desk if an AI slides over it
-  breach_upper_desk_triggers = getentarray("breach_upper_desk", "targetname");
+  breach_upper_desk_triggers = getEntArray("breach_upper_desk", "targetname");
   array_thread(breach_upper_desk_triggers, ::breach_upper_desk_triggers_think);
 
-  ambush_damage_triggers = getentarray("ambush_damage_triggers", "targetname");
+  ambush_damage_triggers = getEntArray("ambush_damage_triggers", "targetname");
   array_thread(ambush_damage_triggers, ::ambush_damage_triggers_think);
-
 }
 
 ambush_damage_triggers_think() {
@@ -2190,9 +2167,9 @@ ambush_damage_triggers_think() {
 breach_upper_desk_triggers_think() {
   //do some radius damage on desk if an AI slides over it
   level endon("upper_room_cleared");
-  while (!flag("upper_room_cleared")) {
+  while(!flag("upper_room_cleared")) {
     self waittill("trigger", other);
-    if((isdefined(other.team)) && (other.team == "axis")) {
+    if((isDefined(other.team)) && (other.team == "axis")) {
       RadiusDamage(self.origin, self.radius, 500, 500);
       break;
     }
@@ -2265,14 +2242,14 @@ ambush_sequence() {
   door_deck1_opposite = getent("door_deck1_opposite", "targetname");
   door_deck1_opposite close_door_deck1_opposite();
 
-  bottom_deck_destructibles = getentarray("bottom_deck_destructibles", "script_noteworthy");
+  bottom_deck_destructibles = getEntArray("bottom_deck_destructibles", "script_noteworthy");
   array_thread(bottom_deck_destructibles, ::destructible_cleanup);
 
   /*-----------------------
   TELEPORT 2 TEAM2 MEMBERS TO EVAC HOSTAGES
   -------------------------*/
   aNodes = getnodearray("node_team2_scaffolding", "targetname");
-  level.team2 = array_spawn(getentarray("team2_escort", "targetname"), true);
+  level.team2 = array_spawn(getEntArray("team2_escort", "targetname"), true);
   level.team2[0] thread teleport_ai(aNodes[0]);
   level.team2[1] thread teleport_ai(aNodes[1]);
 
@@ -2417,9 +2394,10 @@ switch_player_weapons_to_loud_versions() {
   level.player endon("death");
   swapped_thermal = false;
   swapped_m4 = false;
-  while (true) {
-    if((swapped_thermal == true) && (swapped_m4 == true))
+  while(true) {
+    if((swapped_thermal == true) && (swapped_m4 == true)) {
       break;
+    }
     wait(1);
     weaponList = level.player GetWeaponsListPrimaries();
     currentWeapon = level.player getCurrentWeapon();
@@ -2442,15 +2420,15 @@ switch_player_weapons_to_loud_versions() {
 //delete_upper_room_guns_if_near_c4()
 //{
 //	
-//	if( !isdefined( self ) )
+//	if( !isDefined( self ) )
 //		return;
-//	if( !isdefined( self.weapon ) )
+//	if( !isDefined( self.weapon ) )
 //		return;
 //	weapon_classname_to_delete = self.weapon;
 //	
 //	flag_wait( "upper_room_cleared" );
 //	
-//	weapons_to_check = getentarray( "weapon_" + weapon_classname_to_delete, "classname" );
+//	weapons_to_check = getEntArray( "weapon_" + weapon_classname_to_delete, "classname" );
 //	
 //	foreach( weapon in weapons_to_check )
 //	{
@@ -2504,7 +2482,7 @@ hostage_manhandle_sequence() {
   -------------------------*/
   flag_wait("player_has_started_planting_c4");
 
-  while (within_fov(level.player getEye(), level.player getPlayerAngles(), aHostagesForSequence[0].origin, level.cosine["45"]))
+  while(within_fov(level.player getEye(), level.player getPlayerAngles(), aHostagesForSequence[0].origin, level.cosine["45"]))
     wait(.1);
 
   foreach(hostage in aHostagesForSequence)
@@ -2513,9 +2491,9 @@ hostage_manhandle_sequence() {
   /*-----------------------
   GET ACTORS READY WHEN PLAYER NOT LOOKING
   -------------------------*/
-  if(isdefined(level.manhandler)) {
+  if(isDefined(level.manhandler)) {
     if(level.manhandler istouching(volume_ambush_room)) {
-      if(isdefined(level.manhandler.magic_bullet_shield))
+      if(isDefined(level.manhandler.magic_bullet_shield))
         level.manhandler stop_magic_bullet_shield();
       level.manhandler delete();
     }
@@ -2539,7 +2517,6 @@ hostage_manhandle_sequence() {
 
   array_thread(aWalkActors, ::play_anim_and_delete, walkReference, "prisoner_manhandle_walk");
   array_thread(aRunActors, ::play_anim_and_delete, runReference, "prisoner_manhandle_run");
-
 }
 
 play_anim_and_delete(eAnimNode, sAnim) {
@@ -2547,7 +2524,7 @@ play_anim_and_delete(eAnimNode, sAnim) {
     return;
   self endon("death");
   eAnimNode anim_single_solo(self, sAnim);
-  if(isdefined(self.magic_bullet_shield))
+  if(isDefined(self.magic_bullet_shield))
     self stop_magic_bullet_shield();
   self delete();
 }
@@ -2560,7 +2537,6 @@ trig_prisoner_sequence_failsafe() {
 
 friendlies_go_loud() {
   self endon("death");
-
 }
 
 friendly_plant_c4(eAnimOrg, eNode) {
@@ -2568,9 +2544,9 @@ friendly_plant_c4(eAnimOrg, eNode) {
   level.player endon("death");
   level.player endon("death");
   c4 = getent(eAnimOrg.target, "targetname");
-  assert(isdefined(c4));
+  assert(isDefined(c4));
   safeVolume = getent(c4.target, "targetname");
-  assert(isdefined(safeVolume));
+  assert(isDefined(safeVolume));
   /*-----------------------
   CHILL OUT AND GUARD WHILE PLAYER PLANTS C4
   -------------------------*/
@@ -2585,7 +2561,7 @@ friendly_plant_c4(eAnimOrg, eNode) {
   -------------------------*/
   eAnimOrg anim_generic_reach(self, "C4_plant_start");
   self setgoalpos(self.origin);
-  while (level.player isTouching(safeVolume))
+  while(level.player isTouching(safeVolume))
     wait(0.05);
 
   eAnimOrg thread anim_generic(self, "C4_plant");
@@ -2611,7 +2587,7 @@ c4_ambush_hints() {
   eTrig = getent("ambush_area", "targetname");
   bC4hint = false;
   bAmbushHint = false;
-  while (true) {
+  while(true) {
     wait(0.05);
     if((level.player GetCurrentWeapon() != "c4") && (bC4hint == false) && (!flag("player_on_ladder"))) {
       wait(0.5);
@@ -2628,7 +2604,7 @@ c4_ambush_hints() {
     if((!level.player istouching(eTrig)) && (bAmbushHint == false) && (bC4hint == false)) {
       hint_fade();
       // Take cover in the scaffolding and ambush the enemy
-      //thread hint( &"OILRIG_HINT_AMBUSH_COVER" );
+      //thread hint(&"OILRIG_HINT_AMBUSH_COVER" );
       bAmbushHint = true;
       bC4hint = false;
     }
@@ -2672,12 +2648,12 @@ teamleader_ambush_think() {
   aNodes = getnodearray("friendlyStartHeli", "targetname");
   eNode = undefined;
   foreach(node in aNodes) {
-    if((isdefined(node.script_noteworthy)) && (node.script_noteworthy == "nodePrice")) {
+    if((isDefined(node.script_noteworthy)) && (node.script_noteworthy == "nodePrice")) {
       eNode = node;
       break;
     }
   }
-  assert(isdefined(eNode));
+  assert(isDefined(eNode));
   eTrig = getent("ambush_area", "targetname");
   eTrig waittill("trigger");
   //self.fixednodesaferadius = 0;
@@ -2687,7 +2663,6 @@ teamleader_ambush_think() {
     eNode = getnode("node_guard_scaffolding", "targetname");
   self.goalradius = 182;
   self setgoalnode(eNode);
-
 }
 
 c4_nag(volume_ambush_room) {
@@ -2725,7 +2700,7 @@ c4_nag(volume_ambush_room) {
 mission_fail_c4_not_planted() {
   // Mission failed. You didn't plant c4 in time
   flag_set("oilrig_mission_failed");
-  setDvar("ui_deadquote", & "OILRIG_MISSIONFAIL_EXPLOSIVES_NOTPLANTED");
+  setDvar("ui_deadquote", &"OILRIG_MISSIONFAIL_EXPLOSIVES_NOTPLANTED");
   level notify("mission failed");
   maps\_utility::missionFailedWrapper();
 }
@@ -2752,13 +2727,12 @@ glowing_c4_think(volume_ambush_room) {
   /*-----------------------
   SPAWN THE DYING DUDES WITH THE C4
   -------------------------*/
-  c4_hostiles = getentarray("c4_hostiles", "targetname");
-  c4_hostiles2 = getentarray("c4_hostiles2", "targetname");
+  c4_hostiles = getEntArray("c4_hostiles", "targetname");
+  c4_hostiles2 = getEntArray("c4_hostiles2", "targetname");
   c4_hostile_spawner = getfarthest(level.player.origin, c4_hostiles);
   c4_hostile_spawner2 = getfarthest(level.player.origin, c4_hostiles2);
   c4_hostile_spawner thread c4_drone_think("execution_slamwall_hostage_death");
   c4_hostile_spawner2 thread c4_drone_think("run_death_roll");
-
 }
 
 c4_drone_think(deathanim) {
@@ -2798,8 +2772,8 @@ c4_drone_think(deathanim) {
 //{
 //	volume_c4_plant_safezone_01 = getent( "volume_c4_plant_safezone_01", "targetname" );
 //	volume_c4_plant_safezone_02 = getent( "volume_c4_plant_safezone_02", "targetname" );
-//	assert( isdefined( volume_c4_plant_safezone_01 ) );
-//	assert( isdefined( volume_c4_plant_safezone_02 ) );
+//	assert( isDefined( volume_c4_plant_safezone_01 ) );
+//	assert( isDefined( volume_c4_plant_safezone_02 ) );
 //	volume_ambush_room waittill( "breached" );
 //	wait( .5 );
 //	aEnemies = volume_ambush_room get_ai_touching_volume( "axis" );
@@ -2832,12 +2806,12 @@ c4_drone_think(deathanim) {
 //
 //	if( SightTracePassed( sightOrg.origin, org_c4.origin, false, level.player ) )
 //	{
-//		if( ( org_c4 istouching( volume_c4_plant_safezone_01 ) ) && ( !isdefined( volume_c4_plant_safezone_01.boobytrapped ) ) )
+//		if( ( org_c4 istouching( volume_c4_plant_safezone_01 ) ) && ( !isDefined( volume_c4_plant_safezone_01.boobytrapped ) ) )
 //		{
 //			volume_c4_plant_safezone_01.boobytrapped = true;
 //			thread c4_think( org_c4 );
 //		}
-//		else if( ( org_c4 istouching( volume_c4_plant_safezone_02 ) ) && ( !isdefined( volume_c4_plant_safezone_02.boobytrapped ) ) )
+//		else if( ( org_c4 istouching( volume_c4_plant_safezone_02 ) ) && ( !isDefined( volume_c4_plant_safezone_02.boobytrapped ) ) )
 //		{
 //			volume_c4_plant_safezone_02.boobytrapped = true;
 //			thread c4_think( org_c4 );
@@ -2885,7 +2859,7 @@ ambush_c4_triggered() {
   level.player PlayRumbleOnEntity("damage_heavy");
   exploder(1);
   if(level.player istouching(volume_ambush_room)) {
-    playfx(getfx("player_death_explosion"), level.player.origin);
+    playFX(getfx("player_death_explosion"), level.player.origin);
     level.player kill();
   }
 
@@ -2893,7 +2867,7 @@ ambush_c4_triggered() {
 
   aAi = volume_ambush_room get_ai_touching_volume();
   foreach(guy in aAi) {
-    if(isdefined(guy.magic_bullet_shield))
+    if(isDefined(guy.magic_bullet_shield))
       guy stop_magic_bullet_shield();
 
     if(guy is_in_array(level.squad, guy)) {
@@ -2905,7 +2879,7 @@ ambush_c4_triggered() {
   }
   aAi = volume_c4_ambush get_ai_touching_volume();
   foreach(guy in aAi) {
-    if((isdefined(guy)) && (isalive(guy))) {
+    if((isDefined(guy)) && (isalive(guy))) {
       guy.flashingteam = "allies";
       guy flashBangStart(5);
     }
@@ -2927,7 +2901,7 @@ ambush_room_aftermath() {
   light_ambush_room = getent("light_ambush_room", "targetname");
   light_ambush_room.lit_model = getent("light_ambush_room_model", "targetname");
   light_ambush_room.unlit_model = spawn("script_model", (0, 0, 0));
-  light_ambush_room.unlit_model setmodel("com_floodlight");
+  light_ambush_room.unlit_model setModel("com_floodlight");
   light_ambush_room.unlit_model.origin = light_ambush_room.lit_model.origin;
   light_ambush_room.unlit_model.angles = light_ambush_room.lit_model.angles;
   light_ambush_room.linked_models = true;
@@ -2936,14 +2910,14 @@ ambush_room_aftermath() {
 
   //destroy leftover stuff in the room
   wait(2);
-  breach_room_2_destructible_triggers = getentarray("breach_room_2_destructible_triggers", "script_noteworthy");
+  breach_room_2_destructible_triggers = getEntArray("breach_room_2_destructible_triggers", "script_noteworthy");
   array_thread(breach_room_2_destructible_triggers, ::cause_damage_in_radius_trigger);
 
   //volume_ambush_room = getent( "volume_ambush_room", "targetname" );
 }
 
 cause_damage_in_radius_trigger() {
-  if(!isdefined(self))
+  if(!isDefined(self))
     return;
   if(level.player istouching(self))
     return;
@@ -2952,7 +2926,7 @@ cause_damage_in_radius_trigger() {
 }
 
 fluorescentFlicker() {
-  for (;;) {
+  for(;;) {
     wait(randomfloatrange(.05, .1));
     self setLightIntensity(randomfloatrange(.25, 1));
   }
@@ -2963,7 +2937,7 @@ enemies_approach_ambush() {
   flag_wait_or_timeout("player_in_ambush_position", 8);
   wait(5);
   thread open_gate();
-  aSpawners = getentarray("hostiles_ambush", "targetname");
+  aSpawners = getEntArray("hostiles_ambush", "targetname");
   aHostilesAmbush = array_spawn(aSpawners);
   flag_set("ambush_enemies_spawned");
   level endon("ambush_enemies_alerted_prematurely");
@@ -3026,7 +3000,6 @@ ambush_dialogue() {
   radio_dialogue("oilrig_nsl_doit");
 
   flag_set("ambush_enemies_alerted");
-
 }
 
 enemy_discovers_body_dialogue() {
@@ -3045,7 +3018,7 @@ enemy_breach_dialogue(org, iRoomNumber) {
   sSound = "oilrig_mrc_killhostages_room_" + iRoomNumber + "_0" + iDialogueNumber;
   wait(.5);
   eEnemy = get_closest_ai(level.player.origin, "axis");
-  if(isdefined(eEnemy))
+  if(isDefined(eEnemy))
     eEnemy thread play_sound_on_tag_endon_death(level.scr_sound[sSound], "tag_origin");
 }
 
@@ -3056,7 +3029,7 @@ enemies_alerted() {
   wait(1.5);
   flag_set("obj_ambush_complete");
   alarm_org = getent("origin_alarm", "targetname");
-  alarm_org playloopsound("emt_oilrig_alarm_alert");
+  alarm_org playLoopSound("emt_oilrig_alarm_alert");
   wait(20);
   alarm_org stopLoopSound("emt_oilrig_alarm_alert");
   alarm_org delete();
@@ -3075,6 +3048,7 @@ guy_blown_out_door() {
 /****************************************************************************
  	HELI FIGHT START
 ****************************************************************************/
+
 AA_heli_init() {
   thread obj_explosives_locate();
   thread helicopter_dialogue();
@@ -3087,7 +3061,7 @@ AA_heli_init() {
 
 deck1_firefight() {
   triggersEnable("colornodes_deck1_postbreach", "script_noteworthy", true);
-  //	aSpawners = getentarray( "hostiles_rappel_deck1", "targetname" );
+  //	aSpawners = getEntArray( "hostiles_rappel_deck1", "targetname" );
   //	flag_wait( "player_approach_ambush_gate" );
   //
   //	aHostiles = spawn_group_staggered( aSpawners );
@@ -3118,7 +3092,7 @@ helicopter_dialogue() {
   //"Seal Leader: Control, this is Hotel Six, all hostages secured, but our cover is blown."
   radio_dialogue("oilrig_nsl_coverblown");
 
-  //"Sub Command: Copy that, intel still indicates hostages and possible explosives on the top deck. 
+  //"Sub Command: Copy that, intel still indicates hostages and possible explosives on the top deck.
   radio_dialogue("oilrig_sbc_possibleexpl");
 
   //Sub Command Your team needs to secure that location before we can send in reinforcements to handle the SAM sites, over.	
@@ -3131,7 +3105,6 @@ helicopter_dialogue() {
 
   //Cpt. MacTavish CentCom needs us to take the top deck ASAP so they can send in the Marines. Move.
   thread radio_dialogue("oilrig_nsl_centcom");
-
 
   spawn_trigger_dummy("dummy_spawner_ballsout");
 
@@ -3146,9 +3119,7 @@ helicopter_dialogue() {
   //"Seal Leader: Move."
   wait(3);
   radio_dialogue("oilrig_nsl_move2");
-
 }
-
 
 //helicopter_harass()
 //{
@@ -3181,13 +3152,11 @@ helicopter_dialogue() {
 //	thread dialogue_random_helicongats();
 //}
 
-
 heli_ramp_up_damage(eHeli) {
-
   //heli does full damage if playing on hardened or veteran
-  if(level.gameskill > 1)
+  if(level.gameskill > 1) {
     return;
-
+  }
   /*-----------------------
   MAKE DAMAGE FROM HELI GUNS RAMP UP
   -------------------------*/
@@ -3201,13 +3170,15 @@ heli_ramp_up_damage(eHeli) {
 
   i = 0;
 
-  while ((isdefined(eHeli)) && (i < heli_damage_ramp_loops)) {
+  while((isDefined(eHeli)) && (i < heli_damage_ramp_loops)) {
     level.player waittill("damage", amount, attacker);
-    if(!isdefined(eHeli))
+    if(!isDefined(eHeli)) {
       break;
-    if(!isdefined(eHeli.mgturret))
+    }
+    if(!isDefined(eHeli.mgturret)) {
       break;
-    if((isdefined(attacker)) && (isdefined(eHeli.mgturret)) && (is_in_array(eHeli.mgturret, attacker))) {
+    }
+    if((isDefined(attacker)) && (isDefined(eHeli.mgturret)) && (is_in_array(eHeli.mgturret, attacker))) {
       level.player enableInvulnerability();
       wait(heli_damage_delay);
       i++;
@@ -3233,32 +3204,34 @@ heli_kill_nag(eHeli, sEndFlag) {
   iDialogueNumber = 1;
   iLastDialogueNumber = 1;
 
-  while (!flag(sEndFlag)) {
+  while(!flag(sEndFlag)) {
     wait(randomfloatrange(15, 25));
 
-    if((isdefined(eHeli)) && (isdefined(eHeli.firingguns)) && (eHeli.firingguns == true)) {
-      while ((isdefined(eHeli.firingguns)) && (eHeli.firingguns == true))
+    if((isDefined(eHeli)) && (isDefined(eHeli.firingguns)) && (eHeli.firingguns == true)) {
+      while((isDefined(eHeli.firingguns)) && (eHeli.firingguns == true))
         wait(.5);
     }
 
     if(!level.player player_using_missile()) {
-      while (iDialogueNumberNoRocket == iLastDialogueNumberNoRocket) {
+      while(iDialogueNumberNoRocket == iLastDialogueNumberNoRocket) {
         wait(0.05);
         iDialogueNumberNoRocket = randomint(5);
 
       }
-      if(flag(sEndFlag))
+      if(flag(sEndFlag)) {
         break;
+      }
       radio_dialogue("oilrig_nsl_takeoutbird_0" + iDialogueNumberNoRocket);
       iLastDialogueNumberNoRocket = iDialogueNumberNoRocket;
     } else {
-      while (iDialogueNumber == iLastDialogueNumber) {
+      while(iDialogueNumber == iLastDialogueNumber) {
         wait(0.05);
         iDialogueNumber = randomint(4);
 
       }
-      if(flag(sEndFlag))
+      if(flag(sEndFlag)) {
         break;
+      }
       radio_dialogue("oilrig_nsl_takeoutbird_withrocket_0" + iDialogueNumber);
       iLastDialogueNumber = iDialogueNumber;
     }
@@ -3317,25 +3290,22 @@ dialogue_deck2() {
   wait(2);
   if(!flag("player_on_right_top_deck"))
     radio_dialogue("oilrig_nsl_moveup");
-
 }
 
 zodiacs_evac() {
   flag_wait("player_at_stairs_to_deck_2");
   aZodiacs = spawn_vehicles_from_targetname_and_drive("zodiacs_evac");
-  zodiacs_grate = getentarray("zodiacs_grate", "targetname");
+  zodiacs_grate = getEntArray("zodiacs_grate", "targetname");
   array_call(zodiacs_grate, ::delete);
   array_thread(aZodiacs, ::zodiac_think);
 }
 
 zodiac_think() {
-  playfxontag(getfx("zodiac_wake_geotrail_oilrig"), self, "tag_origin");
-
+  playFXOnTag(getfx("zodiac_wake_geotrail_oilrig"), self, "tag_origin");
 }
 
-
 rappel_firefight() {
-  aSpawners = getentarray("hostiles_rappel_deck2", "targetname");
+  aSpawners = getEntArray("hostiles_rappel_deck2", "targetname");
   flag_wait("player_approaching_deck_2");
   triggersEnable("colornodes_deck2", "script_noteworthy", true);
   flag_wait("player_at_deck_2");
@@ -3424,7 +3394,7 @@ heli_kill_failsafe(eHeli) {
   level endon("heli_deck2_shot_down");
   flag_wait("top_deck_room_breached");
   flag_set("heli_not_killed_in_time");
-  if(isdefined(eHeli))
+  if(isDefined(eHeli))
     eHeli delete();
   wait(.5);
   flag_set("heli_deck2_shot_down");
@@ -3438,11 +3408,11 @@ heli_intimidates_player() {
 track_if_player_is_shooting_at_intimidating_heli(eHeli) {
   level endon("deck_2_heli_is_finished_intimidating");
   level endon("player_shoots_or_aims_rocket_at_intimidating_heli");
-  for (;;) {
+  for(;;) {
     // this damage is done to self.health which isnt used to determine the helicopter's health, damageTaken is.
     eHeli waittill("damage", damage, attacker, direction_vec, P, type);
 
-    if(!isdefined(attacker) || !isplayer(attacker))
+    if(!isDefined(attacker) || !isplayer(attacker))
       continue;
     else {
       flag_set("player_shoots_or_aims_rocket_at_intimidating_heli");
@@ -3455,18 +3425,19 @@ track_if_player_is_shooting_at_intimidating_heli(eHeli) {
 smoke_throw(aSmokeOrgs) {
   flag1 = "derrick_room_getting_breached";
   flag2 = "stop_smoke";
-  //volumes_enemy_hardpoint_deck3 = getentarray( "volumes_enemy_hardpoint_deck3", "targetname" );
-  while (true) {
+  //volumes_enemy_hardpoint_deck3 = getEntArray( "volumes_enemy_hardpoint_deck3", "targetname" );
+  while(true) {
     smokeTarget = undefined;
     foreach(org in aSmokeOrgs) {
       //MagicGrenade( "smoke_grenade_american_no_visblock", org.origin, org.origin + ( 0, 0, 1), randomfloat( 1.1 ) );
-      playfx(getfx("smokescreen"), org.origin);
+      playFX(getfx("smokescreen"), org.origin);
       org thread play_sound_in_space("smokegrenade_explode_default");
       wait(randomfloatrange(.1, .3));
     }
     wait(28);
-    if((flag(flag1)) || (flag(flag2)))
+    if((flag(flag1)) || (flag(flag2))) {
       break;
+    }
     //if( all_ai_dead_in_volumes( volumes_enemy_hardpoint_deck3 ) )
     //	break;
   }
@@ -3476,6 +3447,7 @@ smoke_throw(aSmokeOrgs) {
 /****************************************************************************
 TOP DECK (DECK 3)
 ****************************************************************************/
+
 AA_deck3_init() {
   flag_set("need_to_check_axis_death");
   level.slomoBasevision = "oilrig_interior2";
@@ -3498,7 +3470,7 @@ AA_deck3_init() {
 
 deck3_breach_autosaves() {
   flag_wait("player_at_stairs_to_top_deck");
-  breach_save_deck3_triggers = getentarray("breach_save_deck3", "targetname");
+  breach_save_deck3_triggers = getEntArray("breach_save_deck3", "targetname");
   array_thread(breach_save_deck3_triggers, ::breach_save_deck3_triggers_think);
 }
 
@@ -3508,7 +3480,7 @@ breach_save_deck3_triggers_think() {
   aEnemies = undefined;
   volumeAbove = getent(self.script_linkto, "script_linkname");
   enemiesDeleted = false;
-  while (true) {
+  while(true) {
     self waittill("trigger");
     enemiesPresent = false;
     if(enemiesDeleted == false) {
@@ -3537,7 +3509,7 @@ breach_save_deck3_triggers_think() {
 
 samsites() {
   flag_wait("player_at_stairs_to_top_deck");
-  samsite_turrets = getentarray("samsite_turret", "script_noteworthy");
+  samsite_turrets = getEntArray("samsite_turret", "script_noteworthy");
   array_thread(samsite_turrets, ::samsite_turret_think);
 }
 
@@ -3560,13 +3532,14 @@ samsite_turret_think() {
 
   wait(randomfloatrange(0, 1.5));
   targetOrg = getent(self.target, "targetname");
-  while (!flag("top_deck_room_breached")) {
+  while(!flag("top_deck_room_breached")) {
     self detach("projectile_slamraam_missile", self.missileTags[0]);
     earthquake(.3, .5, self.origin, 1600);
     magicBullet("slamraam_missile_dcburning", self gettagorigin(self.missileTags[0]), targetOrg.origin);
     self.missileTags = array_remove(self.missileTags, self.missileTags[0]);
-    if(self.missileTags.size < 1)
+    if(self.missileTags.size < 1) {
       break;
+    }
     self rotateyaw(45, time, time / 2, time / 2);
     wait(time);
     wait(randomfloatrange(0, 2));
@@ -3586,7 +3559,7 @@ friendly_speed_adjustment_breach_03() {
 deck3_autosaves() {
   //give an autosave for every 6 enemies killed
   enemiesKilled = 0;
-  while (true) {
+  while(true) {
     level waittill("player_killed_an_enemy");
     enemiesKilled++;
     if(flag("player_got_deck3_autosave")) {
@@ -3610,7 +3583,7 @@ deck3_firefight() {
 
   if(!is_specialop()) {
     foreach(dude in level.squad) {
-      if(!isdefined(dude))
+      if(!isDefined(dude))
         continue;
       dude.disableDamageShieldPain = true;
     }
@@ -3625,7 +3598,7 @@ deck3_firefight() {
   SMOKE GAMEPLAY
   -------------------------*/
   flag_wait("player_on_right_top_deck");
-  aSmokeOrgs = getentarray("smoke_deck3", "targetname");
+  aSmokeOrgs = getEntArray("smoke_deck3", "targetname");
   thread smoke_throw(aSmokeOrgs);
   wait(1);
   flag_set("smoke_thrown");
@@ -3633,7 +3606,7 @@ deck3_firefight() {
 
   if(!is_specialop()) {
     foreach(dude in level.squad) {
-      if(!isdefined(dude))
+      if(!isDefined(dude))
         continue;
       dude.disableDamageShieldPain = undefined;
     }
@@ -3687,7 +3660,6 @@ deck3_firefight() {
 
   level waittill("breach_explosion");
   flag_set("top_deck_room_breached");
-
 }
 
 dialogue_smoke_and_first_thermal_hint() {
@@ -3714,19 +3686,19 @@ dialogue_last_room() {
 }
 
 delete_ai_if_alive() {
-  if(!isdefined(self))
+  if(!isDefined(self)) {
     return;
-
-  if(isdefined(self.script_slowmo_breach))
+  }
+  if(isDefined(self.script_slowmo_breach)) {
     return;
-
+  }
   if(!is_specialop()) {
     if(is_in_array(level.squad, self))
       return;
   }
 
-  if(isdefined(self)) {
-    if(isdefined(self.magic_bullet_shield))
+  if(isDefined(self)) {
+    if(isDefined(self.magic_bullet_shield))
       self stop_magic_bullet_shield();
     self delete();
   }
@@ -3745,17 +3717,15 @@ activate_all_deck3_killspawners() {
 
 colornodes_deck3() {
   triggersEnable("colornodes_deck3", "script_noteworthy", true);
-
 }
 
 c4_barrels() {
-  c4_barrels = getentarray("c4_barrel", "script_noteworthy");
+  c4_barrels = getEntArray("c4_barrel", "script_noteworthy");
   array_thread(c4_barrels, ::c4_barrels_think);
-  c4barrelPacks = getentarray("c4barrelPacks", "script_noteworthy");
+  c4barrelPacks = getEntArray("c4barrelPacks", "script_noteworthy");
   array_thread(c4barrelPacks, ::c4_packs_think);
   level waittill("A door in breach group 300 has been activated.");
   flag_set("derrick_room_getting_breached");
-
 }
 
 c4_barrels_think() {
@@ -3767,7 +3737,7 @@ c4_barrels_think() {
   level endon("missionfailed");
   level endon("player_detonated_explosives");
   eDamageTrigger = self;
-  eDamageTrigger setcandamage(true);
+  eDamageTrigger setCanDamage(true);
   //determine barrel hitpoints based on difficulty
   eDamageTrigger.hitpoints = undefined;
   switch (level.gameSkill) {
@@ -3786,20 +3756,22 @@ c4_barrels_think() {
   }
 
   flag_wait("derrick_room_getting_breached");
-  while (!flag("player_detonated_explosives")) {
+  while(!flag("player_detonated_explosives")) {
     eDamageTrigger waittill("damage", damage, attacker, direction_vec, point, type, modelName, tagName, partName, idFlags);
-    if((isdefined(attacker)) && (isplayer(attacker))) {
+    if((isDefined(attacker)) && (isplayer(attacker))) {
       if(idFlags & 8) // bullet penetration occurred
         continue;
       //remove all hitpoints if it was a grenade, etc
-      if(isDefined(type) && (isSubStr(type, "MOD_GRENADE") || isSubStr(type, "MOD_EXPLOSIVE") || isSubStr(type, "MOD_PROJECTILE")))
+      if(isDefined(type) && (isSubStr(type, "MOD_GRENADE") || isSubStr(type, "MOD_EXPLOSIVE") || isSubStr(type, "MOD_PROJECTILE"))) {
         break;
+      }
       //knock hitpoints down one
       if(eDamageTrigger.hitpoints > 0)
         eDamageTrigger.hitpoints -= 1;
       //blow up the barrel if hitpoints is zero
-      if(eDamageTrigger.hitpoints == 0)
+      if(eDamageTrigger.hitpoints == 0) {
         break;
+      }
     }
   }
 
@@ -3811,12 +3783,12 @@ c4_barrel_explode() {
   level notify("c4_barrels_exploding");
   level endon("c4_barrels_exploding");
   level.player playLocalSound("oilrig_ambush_explosion");
-  playfx(getfx("player_death_explosion"), level.player.origin);
+  playFX(getfx("player_death_explosion"), level.player.origin);
   earthquake(1, 1, level.player.origin, 100);
   if(is_specialop())
     maps\_specialops::so_force_deadquote("@OILRIG_MISSIONFAIL_EXPLOSIVES");
   else
-    setDvar("ui_deadquote", & "OILRIG_MISSIONFAIL_EXPLOSIVES");
+    setDvar("ui_deadquote", &"OILRIG_MISSIONFAIL_EXPLOSIVES");
   level notify("mission failed");
   maps\_utility::missionFailedWrapper();
 }
@@ -3836,6 +3808,7 @@ c4_packs_think() {
 /****************************************************************************
 ESCAPE TO CHOPPER
 ****************************************************************************/
+
 AA_escape_init() {
   battlechatter_on("allies");
   thread music_escape();
@@ -3942,8 +3915,8 @@ escape_sequence() {
   /*-----------------------
   SPAWN LITTLEBIRD AND RIDERS TO NODES
   -------------------------*/
-  aRoof_riders_left = array_spawn(getentarray("littlebird_riders_left", "targetname"));
-  aRoof_riders_right = array_spawn(getentarray("littlebird_riders_right", "targetname"));
+  aRoof_riders_left = array_spawn(getEntArray("littlebird_riders_left", "targetname"));
+  aRoof_riders_right = array_spawn(getEntArray("littlebird_riders_right", "targetname"));
 
   //make McTavish one of the riders
   aRoof_riders_right = array_add(aRoof_riders_right, level.teamleader);
@@ -3968,9 +3941,8 @@ escape_sequence() {
   -------------------------*/
   aRiders = array_merge(aRoof_riders_left, aRoof_riders_right);
   foreach(guy in aRiders) {
-
     //guy thread debug_message( guy.script_startingposition, guy.origin, 9999, guy );
-    assertex(isdefined(guy.script_startingposition), "One of the littlebird escape riders doesnt have a .script_startingposition. Export " + guy.export);
+    assertex(isDefined(guy.script_startingposition), "One of the littlebird escape riders doesnt have a .script_startingposition. Export " + guy.export);
     if(guy.script_startingposition == 2) {
       guy hide();
       guy setcontents(0);
@@ -3980,7 +3952,7 @@ escape_sequence() {
 
   foreach(guy in aRiders) {
     guy disable_ai_color();
-    if(!isdefined(guy.magic_bullet_shield))
+    if(!isDefined(guy.magic_bullet_shield))
       guy thread magic_bullet_shield();
     guy setFlashbangImmunity(true);
     guy.ignoreme = true;
@@ -4015,7 +3987,7 @@ escape_sequence() {
   level.littlebird_escape thread load_side("left", aRoof_riders_left);
   level.littlebird_escape thread load_side("right", aRoof_riders_right);
 
-  while (level.littlebird_escape.riders.size < 8)
+  while(level.littlebird_escape.riders.size < 8)
     wait(.1);
 
   /*-----------------------
@@ -4067,7 +4039,7 @@ escape_sequence() {
   MAIN DECK BLACKHAWK
   -------------------------*/
   flag_wait("heli_escape_path_03");
-  friendlies_deck3_stairs = array_spawn(getentarray("friendlies_deck3_stairs", "targetname"));
+  friendlies_deck3_stairs = array_spawn(getEntArray("friendlies_deck3_stairs", "targetname"));
 
   /*-----------------------
   LITTLEBIRD WINGMEN
@@ -4117,7 +4089,6 @@ escape_sequence() {
 
   wait(4.5);
   level_end();
-
 }
 
 helipad_jets() {
@@ -4130,9 +4101,9 @@ helipad_jets() {
 sub_through_ice() {
   eSub = undefined;
   eProp = undefined;
-  aSubmarineParts = getentarray("submarine_03", "targetname");
+  aSubmarineParts = getEntArray("submarine_03", "targetname");
   foreach(part in aSubmarineParts) {
-    if((isdefined(part.script_parameters)) && (part.script_parameters == "sub"))
+    if((isDefined(part.script_parameters)) && (part.script_parameters == "sub"))
       eSub = part;
     else
       eProp = part;
@@ -4157,7 +4128,7 @@ sub_through_ice() {
 }
 
 liner(blah) {
-  for (;;) {
+  for(;;) {
     line(self.origin, blah.origin);
     wait(0.05);
   }
@@ -4218,7 +4189,6 @@ player_gets_on_littlebird(sPlayerRideTag) {
   level.player enableWeapons();
   //level.player LerpViewAngleClamp( 1, 0.25, 0.25, arcRight, arcLeft, arcTop, arcBottom );
   flag_set("player_on_board_littlebird");
-
 }
 
 //player_gets_on_littlebird( sPlayerRideTag )
@@ -4303,17 +4273,16 @@ samsite_01_destroy() {
   guy = getClosest(level.player.origin, aFriendlies);
   //Marine 1	I want these SAMs secure in five! Let's go! Move move!
   guy thread play_sound_on_entity("oilrig_gm1_samssecure");
-
 }
 
 samsite_02_destroy() {
   flag_wait("littlebird_escape_lifted_off");
-  friendlies_samsite_02 = array_spawn(getentarray("friendlies_samsite_02", "targetname"));
+  friendlies_samsite_02 = array_spawn(getEntArray("friendlies_samsite_02", "targetname"));
 }
 
 samsite_03_destroy() {
   flag_wait("littlebird_escape_lifted_off");
-  friendlies_samsite_03 = array_spawn(getentarray("friendlies_samsite_03", "targetname"));
+  friendlies_samsite_03 = array_spawn(getEntArray("friendlies_samsite_03", "targetname"));
 }
 
 level_end() {
@@ -4335,7 +4304,7 @@ obj_stealthkill() {
   obj_position = level.hostile_stealthkill_player;
 
   // Take up ambush positions near the scaffolding
-  objective_add(objective_number, "active", & "OILRIG_OBJ_STEALTHKILL", obj_position.origin);
+  objective_add(objective_number, "active", &"OILRIG_OBJ_STEALTHKILL", obj_position.origin);
   objective_current(objective_number);
 
   flag_wait("obj_stealthkill_complete");
@@ -4344,32 +4313,32 @@ obj_stealthkill() {
 }
 
 obj_hostages_secure() {
-  obj_positions = getentarray("obj_breach1", "targetname");
+  obj_positions = getEntArray("obj_breach1", "targetname");
   objective_number = 2;
 
   flag_wait("obj_hostages_secure_given");
 
-  // Secure hostages ( &&1 remaining )
-  objective_add(objective_number, "invisible", & "OILRIG_OBJ_HOSTAGES_SECURE");
+  // Secure hostages ( && 1 remaining )
+  objective_add(objective_number, "invisible", &"OILRIG_OBJ_HOSTAGES_SECURE");
   Objective_OnEntity(objective_number, level.teamleader);
   objective_state(objective_number, "current");
-  Objective_String(objective_number, & "OILRIG_OBJ_HOSTAGES_SECURE", level.totalHostages);
+  Objective_String(objective_number, &"OILRIG_OBJ_HOSTAGES_SECURE", level.totalHostages);
 
   flag_wait("player_at_lower_breach");
   flag_wait("railing_patroller_dead");
 
   maps\_slowmo_breach::objective_breach(objective_number, 0, 1);
 
-  // Secure hostages ( &&1 remaining )
-  Objective_String(objective_number, & "OILRIG_OBJ_HOSTAGES_SECURE", level.totalHostages);
+  // Secure hostages ( && 1 remaining )
+  Objective_String(objective_number, &"OILRIG_OBJ_HOSTAGES_SECURE", level.totalHostages);
 
   flag_wait("lower_room_breached");
   objective_clearAdditionalPositions(objective_number);
   Objective_SetPointerTextOverride(objective_number); // kill the breach text
 
   flag_wait("lower_room_cleared");
-  // Secure hostages ( &&1 remaining )
-  Objective_String(objective_number, & "OILRIG_OBJ_HOSTAGES_SECURE", level.totalHostages - 4);
+  // Secure hostages ( && 1 remaining )
+  Objective_String(objective_number, &"OILRIG_OBJ_HOSTAGES_SECURE", level.totalHostages - 4);
   Objective_OnEntity(objective_number, level.friendly02);
 
   flag_wait("player_at_last_breach_building");
@@ -4383,22 +4352,22 @@ obj_hostages_secure() {
   flag_wait("obj_hostages_secure_complete");
 
   objective_state(objective_number, "done");
-  Objective_String(objective_number, & "OILRIG_OBJ_HOSTAGES_SECURE_DONE");
+  Objective_String(objective_number, &"OILRIG_OBJ_HOSTAGES_SECURE_DONE");
 }
 
 obj_c4_ambush_plant() {
   flag_wait("obj_c4_ambush_plant_given");
   objective_number = 3;
-  // Plant C4 on the dead bodies ( &&1 remaining )
-  objective_add(objective_number, "invisible", & "OILRIG_OBJ_C4_AMBUSH_PLANT");
+  // Plant C4 on the dead bodies ( && 1 remaining )
+  objective_add(objective_number, "invisible", &"OILRIG_OBJ_C4_AMBUSH_PLANT");
   //objective_state( objective_number, "active" );
 
   objective_state(objective_number, "current");
   //"empty", "active", "invisible", "done", "current" and "failed"
 
-  // Plant C4 on the dead bodies ( &&1 remaining )
+  // Plant C4 on the dead bodies ( && 1 remaining )
   //Objective_String( objective_number, &"OILRIG_OBJ_C4_AMBUSH_PLANT", level.C4locations.size );
-  Objective_String(objective_number, & "OILRIG_OBJ_C4_AMBUSH_PLANT");
+  Objective_String(objective_number, &"OILRIG_OBJ_C4_AMBUSH_PLANT");
   objective_current(objective_number);
 
   flag_wait("obj_c4_ambush_plant_complete");
@@ -4410,8 +4379,8 @@ obj_c4_ambush_think() {
   level.C4locationsIndex++;
   index = level.C4locationsIndex;
   level.C4locations[level.C4locations.size] = self;
-  // Plant C4 on the dead bodies ( &&1 remaining )
-  Objective_String(3, & "OILRIG_OBJ_C4_AMBUSH_PLANT");
+  // Plant C4 on the dead bodies ( && 1 remaining )
+  Objective_String(3, &"OILRIG_OBJ_C4_AMBUSH_PLANT");
 
   //	if( level.c4first == false )
   //	{
@@ -4423,8 +4392,8 @@ obj_c4_ambush_think() {
 
   objective_additionalposition(3, index, self.origin);
 
-  // Plant C4 on the dead bodies ( &&1 remaining )
-  Objective_String(3, & "OILRIG_OBJ_C4_AMBUSH_PLANT");
+  // Plant C4 on the dead bodies ( && 1 remaining )
+  Objective_String(3, &"OILRIG_OBJ_C4_AMBUSH_PLANT");
 
   self waittill("c4_planted");
   if(!flag("player_has_started_planting_c4"))
@@ -4437,8 +4406,8 @@ obj_c4_ambush_think() {
     flag_set("obj_c4_ambush_plant_complete");
     //objective_state( 3, "invisible" );
   }
-  // Plant C4 on the dead bodies ( &&1 remaining )
-  Objective_String(3, & "OILRIG_OBJ_C4_AMBUSH_PLANT");
+  // Plant C4 on the dead bodies ( && 1 remaining )
+  Objective_String(3, &"OILRIG_OBJ_C4_AMBUSH_PLANT");
 }
 
 obj_ambush() {
@@ -4447,7 +4416,7 @@ obj_ambush() {
 
   //obj_position = getent( "obj_ambush", "targetname" );
   // Take up ambush positions near the scaffolding
-  objective_add(objective_number, "active", & "OILRIG_OBJ_AMBUSH");
+  objective_add(objective_number, "active", &"OILRIG_OBJ_AMBUSH");
   objective_current(objective_number);
   Objective_OnEntity(objective_number, level.teamleader);
   flag_wait("obj_ambush_complete");
@@ -4461,7 +4430,7 @@ obj_explosives_locate() {
 
   //obj_position = getent( "obj_explosives_locate_01", "targetname" );
   // Locate explosives in the upper deck crew quarters
-  objective_add(objective_number, "active", & "OILRIG_OBJ_EXPLOSIVES_LOCATE");
+  objective_add(objective_number, "active", &"OILRIG_OBJ_EXPLOSIVES_LOCATE");
   objective_current(objective_number);
   Objective_OnEntity(objective_number, level.teamleader);
 
@@ -4475,7 +4444,7 @@ obj_explosives_locate() {
 
   flag_wait("player_on_right_top_deck");
   objective_position(objective_number, (0, 0, 0));
-  obj_positions = getentarray("obj_breach3", "targetname");
+  obj_positions = getEntArray("obj_breach3", "targetname");
 
   maps\_slowmo_breach::objective_breach(objective_number, 4, 5);
 
@@ -4492,7 +4461,7 @@ obj_escape() {
   flag_wait("obj_escape_given");
   objective_number = 6;
 
-  objective_add(objective_number, "active", & "OILRIG_OBJ_ESCAPE");
+  objective_add(objective_number, "active", &"OILRIG_OBJ_ESCAPE");
   objective_current(objective_number);
   Objective_OnEntity(objective_number, level.teamleader);
 
@@ -4513,9 +4482,8 @@ obj_escape() {
 /****************************************************************************
 MUSIC
 ****************************************************************************/
-AA_music_init() {
 
-}
+AA_music_init() {}
 
 music_underwater() {
   flag_wait("player_approaching_oilrig_legs");
@@ -4528,7 +4496,7 @@ music_surface_to_first_breach() {
   flag_wait("player_slitting_throat");
   musicstop();
   time = musicLength("oilrig_sneak_music");
-  while (!flag("lower_room_breached")) {
+  while(!flag("lower_room_breached")) {
     MusicPlayWrapper("oilrig_sneak_music");
     wait(time);
     //wait( 124 );
@@ -4544,7 +4512,7 @@ music_lower_room_to_upper_room() {
   musicstop();
   flag_wait("lower_room_cleared");
   time = musicLength("oilrig_suspense_01_music_alt");
-  while (!flag("upper_room_breached")) {
+  while(!flag("upper_room_breached")) {
     MusicPlayWrapper("oilrig_suspense_01_music_alt");
     wait(time);
     //wait( 175 );
@@ -4566,7 +4534,7 @@ music_ambush_to_deck_2() {
   wait(0.05);
 
   time = musicLength("oilrig_fight_music_01");
-  while (!flag("player_at_stairs_to_deck_2")) {
+  while(!flag("player_at_stairs_to_deck_2")) {
     MusicPlayWrapper("oilrig_fight_music_01");
     wait(time);
     //wait( 204 );
@@ -4583,7 +4551,7 @@ music_deck2_to_deck3() {
   level endon("smoke_thrown");
 
   time = musicLength("oilrig_fight_music_01");
-  while (!flag("smoke_thrown")) {
+  while(!flag("smoke_thrown")) {
     MusicPlayWrapper("oilrig_fight_music_01");
     wait(time);
     //wait( 204 );
@@ -4598,7 +4566,7 @@ deck3_music() {
   music_stop(4);
   wait(4.1);
   time = musicLength("oilrig_top_deck_music_01");
-  while (!flag("top_deck_room_breached")) {
+  while(!flag("top_deck_room_breached")) {
     MusicPlayWrapper("oilrig_top_deck_music_01");
     wait(time);
     //wait( 150 );
@@ -4622,28 +4590,24 @@ music_escape() {
 /****************************************************************************
 UTILITY FUNCTIONS
 ****************************************************************************/
-AA_utility() {
 
-}
+AA_utility() {}
 
 AI_army_think() {
   self set_battlechatter(false);
 }
 
 AI_think(guy) {
-
   if(guy.team == "axis")
     guy thread AI_axis_think();
 
   if(guy.team == "allies")
     guy thread AI_allies_think();
-
 }
 
 AI_allies_think() {
   flag_wait("player_ready_to_be_helped_from_water");
   self thread animscripts\utility::PersonalColdBreath();
-
 }
 
 AI_axis_think() {
@@ -4678,7 +4642,7 @@ AI_axis_think() {
   //self.aggressivemode = true;	//dont linger at cover when you cant see your enemy
   self.baseaccuracy = self.baseaccuracy * baseaccuracyFactor;
 
-  while (!isdefined(self.doorFlashChance))
+  while(!isDefined(self.doorFlashChance))
     wait(0.05);
 
   self.doorFlashChance = self.doorFlashChance * doorFlashChanceFactor;
@@ -4690,7 +4654,7 @@ AI_axis_think() {
 
 AI_axis_death_think() {
   self waittill("death", attacker);
-  if((isdefined(attacker)) && (isplayer(attacker)))
+  if((isDefined(attacker)) && (isplayer(attacker)))
     level notify("player_killed_an_enemy");
 }
 
@@ -4723,7 +4687,7 @@ ai_rappel_think() {
   }
 
   eRope = spawn("script_model", eRopeOrg.origin);
-  eRope setmodel(ropeModel);
+  eRope setModel(ropeModel);
   //eRope hide();
   eRope.animname = "rope";
   eRope assign_animtree();
@@ -4745,15 +4709,15 @@ rope_anim(eRope, sRopeAnim) {
   //eRope show();
   self anim_single_solo(eRope, sRopeAnim);
   flag_wait("player_at_stairs_to_top_deck");
-  if(isdefined(self))
+  if(isDefined(self))
     self delete();
-  if(isdefined(eRope))
+  if(isDefined(eRope))
     eRope delete();
 }
 
 ai_rappel_death() {
   self endon("over_solid_ground");
-  if(!isdefined(self))
+  if(!isDefined(self))
     return;
   self set_deathanim("fastrope_fall");
   self waittill("death");
@@ -4773,12 +4737,11 @@ ai_rappel_reset_death_anim(guy) {
 
 stealth_hostage_monitor() {
   level endon("obj_hostages_secure_complete");
-
 }
 
 heli_patrol_think() {
   self endon("death");
-  if(isdefined(self.riders)) {
+  if(isDefined(self.riders)) {
     foreach(guy in self.riders) {
       guy.ignoreme = true;
       guy setthreatbiasgroup("oblivious");
@@ -4813,13 +4776,14 @@ vehicle_heli_think(sTargetname) {
 turret_rains_down_shells() {
   self endon("death");
   fx = getfx("minigun_shell_eject");
-  for (;;) {
+  for(;;) {
     if(self IsFiringTurret()) {
-      for (;;) {
-        if(!self IsFiringTurret())
+      for(;;) {
+        if(!self IsFiringTurret()) {
           break;
+        }
 
-        PlayFXOnTag(fx, self, "tag_flash");
+        playFXOnTag(fx, self, "tag_flash");
         wait(0.05);
       }
     }
@@ -4832,7 +4796,7 @@ turret_rains_down_shells() {
 //	self endon( "death" );
 //	level endon( "attack_heli_destroyed" );
 //	
-//	assertEx( isdefined( level.EnemyHeli ), "Friendly with export + " + self.export + " is running heli_think behavior even though there is no level.EnemyHeli defined" );
+//	assertEx( isDefined( level.EnemyHeli ), "Friendly with export + " + self.export + " is running heli_think behavior even though there is no level.EnemyHeli defined" );
 //	
 //	self waittill_entity_in_range( level.EnemyHeli, 2048 );
 //
@@ -4859,16 +4823,15 @@ turret_rains_down_shells() {
 //}
 
 level_think() {
-
   /*-----------------------
   MOVING DERRICK DRILL THING
   -------------------------*/
   eDerrick_thing = getent("derrick_thing", "targetname");
   eDerrick_thing.origin = eDerrick_thing.origin + (0, 0, -2816);
-  assert(isdefined(eDerrick_thing));
+  assert(isDefined(eDerrick_thing));
   time = 2;
   speed = 300;
-  while (true) {
+  while(true) {
     eDerrick_thing rotatevelocity((0, speed, 0), time);
     wait(time);
   }
@@ -4877,13 +4840,13 @@ level_think() {
 
 //triggers_zone_management_think()
 //{
-//	assert( isdefined( self.script_noteworthy ) );
+//	assert( isDefined( self.script_noteworthy ) );
 //	aLinkedVolumes = self get_linked_ents();
 //	assertex( aLinkedVolumes.size > 0, "need to have at least one volume with targetname 'heli_safe_zone_" + self.script_noteworthy + "' linked to from trigger with script_noteworthy: " + self.script_noteworthy );
 //	self.linkedVolumes = aLinkedVolumes;
 //
 //	flag_wait( "heli_safezones_setup" );
-//	while ( true )
+//	while( true )
 //	{
 //		self waittill( "trigger" );
 //		level.HeliSafezones = aLinkedVolumes;
@@ -4917,10 +4880,10 @@ player_stealth_monitor() {
 hostage_evac_think() {
   level endon("mission failed");
 
-  while (!isdefined(self.breachfinished))
+  while(!isDefined(self.breachfinished))
     wait(.1);
 
-  while (self.breachfinished == false)
+  while(self.breachfinished == false)
     wait(.1);
 
   wait(randomfloatrange(1, 2));
@@ -4968,7 +4931,6 @@ dialogue_random_gratekill() {
   //In position...on your go.	
   iRand = randomint(4);
   radio_dialogue("oilrig_nsl_outtogether_0" + iRand);
-
 }
 
 //dialogue_random_shoot_the_tanks()
@@ -5018,11 +4980,11 @@ dialogue_random_thermal_hint() {
   if(level.player player_has_thermal()) {
     iRand = randomint(2);
     radio_dialogue("oilrig_use_thermal_0" + iRand);
-    //thread hint( &"OILRIG_HINT_THERMAL_WEAPON_USE" );
+    //thread hint(&"OILRIG_HINT_THERMAL_WEAPON_USE" );
   } else {
     iRand = randomint(2);
     radio_dialogue("oilrig_find_thermal_0" + iRand);
-    //thread hint( &"OILRIG_HINT_THERMAL_WEAPON_FIND" );
+    //thread hint(&"OILRIG_HINT_THERMAL_WEAPON_FIND" );
   }
 
   waittill_using_thermal_scope_or_timeout_func(7);
@@ -5033,12 +4995,13 @@ waittill_using_thermal_scope_or_timeout_func(time) {
   level endon("oilrig_timeout_func");
   level endon("player_approaching_topdeck_building");
   thread timeout_func(time);
-  while (true) {
+  while(true) {
     wait(0.1);
-    while (!level.player player_has_thermal())
+    while(!level.player player_has_thermal())
       wait(.5);
-    if(level.player adsbuttonpressed())
+    if(level.player adsbuttonpressed()) {
       break;
+    }
   }
 
 }
@@ -5093,8 +5056,7 @@ dialogue_breach_nag(iBreachGroup) {
 
   iNagNumber = 0;
 
-  while (true) {
-
+  while(true) {
     if(iBreachGroup == 300) {
       wait(randomfloatrange(5, 8)); //wait shorter time if on top deck
     } else {
@@ -5102,7 +5064,7 @@ dialogue_breach_nag(iBreachGroup) {
     }
     if(iBreachGroup == 300) {
       //don't nag if there are enemies that still need to be cleared, or if all enemies have not spawned yet
-      breach_safe_volumes = getentarray("breach_safe_volume", "targetname");
+      breach_safe_volumes = getEntArray("breach_safe_volume", "targetname");
       if((!volumes_clear_of_enemies(breach_safe_volumes)) || (!flag("left_deck3_dudes_spawned"))) {
         wait(3);
         continue;
@@ -5138,7 +5100,7 @@ init_difficulty() {
       break;
   }
 
-  easyWeapons = getentarray("easy", "script_noteworthy");
+  easyWeapons = getEntArray("easy", "script_noteworthy");
   if(level.gameskill > 0) {
     array_call(easyWeapons, ::delete);
   }
@@ -5155,13 +5117,13 @@ init_difficulty() {
 //}
 
 spawn_trigger_dummy(sDummyTargetname) {
-  //triggers a spawner trig through convoluted means 
+  //triggers a spawner trig through convoluted means
   //since I can't use a unique targetname or script_noteworthy
   ent = getent(sDummyTargetname, "targetname");
-  assert(isdefined(ent));
-  assert(isdefined(ent.script_linkTo));
+  assert(isDefined(ent));
+  assert(isDefined(ent.script_linkTo));
   trig = getent(ent.script_linkTo, "script_linkname");
-  assert(isdefined(trig));
+  assert(isDefined(trig));
   trig notify("trigger", level.player);
 }
 
@@ -5170,15 +5132,14 @@ disable_color_trigs() {
 }
 
 open_gate(bImmediately, bDontWaitForFlags) {
-
   eGate = getent("gate_01", "targetname");
-  assert(isdefined(eGate));
+  assert(isDefined(eGate));
   eGate connectpaths();
 
-  if(isdefined(bImmediately))
+  if(isDefined(bImmediately))
     eGate moveto((eGate.origin - (0, -170, 0)), 1);
   else {
-    if(!isdefined(bDontWaitForFlags))
+    if(!isDefined(bDontWaitForFlags))
       flag_wait_either("ambush_enemies_approaching", "ambush_enemies_alerted_prematurely");
     eGate thread play_sound_on_entity("scn_oilrig_fence_open");
     eGate moveto((eGate.origin - (0, -170, 0)), 8, 3, 3);
@@ -5210,7 +5171,6 @@ initPrecache() {
   precacheItem("scar_h_thermal");
   precacheItem("mp5_reflex");
 
-
   precacheModel("weapon_rpd_MG_Setup");
   precacheModel("furniture_chair_metal01");
   precacheModel("com_restaurantchair_2");
@@ -5233,9 +5193,9 @@ initPrecache() {
   precachestring(&"SCRIPT_DEBUG_LEVEL_END");
   // Take out the guard quietly
   precachestring(&"OILRIG_OBJ_STEALTHKILL");
-  // Secure hostages ( &&1 remaining )
+  // Secure hostages ( && 1 remaining )
   precachestring(&"OILRIG_OBJ_HOSTAGES_SECURE");
-  // Plant C4 on the dead bodies ( &&1 remaining )
+  // Plant C4 on the dead bodies ( && 1 remaining )
   precachestring(&"OILRIG_OBJ_C4_AMBUSH_PLANT");
   // Take up ambush positions near the scaffolding
   precachestring(&"OILRIG_OBJ_AMBUSH");
@@ -5254,22 +5214,21 @@ initPrecache() {
   precachestring(&"OILRIG_HINT_THERMAL_WEAPON_FIND");
 }
 
-
 initFriendlies(sStartPoint, bDontSpawnFriendlies, bWarpPlayer) {
-  if(!isdefined(bWarpPlayer))
+  if(!isDefined(bWarpPlayer))
     bWarpPlayer = true;
 
-  if(!isdefined(bDontSpawnFriendlies))
+  if(!isDefined(bDontSpawnFriendlies))
     bDontSpawnFriendlies = false;
 
   waittillframeend;
-  assert(isdefined(sStartPoint));
+  assert(isDefined(sStartPoint));
 
   /*-----------------------																								
   SPAWN KEY FRIENDLIES
   -------------------------*/
-  if((isdefined(bDontSpawnFriendlies)) && (bDontSpawnFriendlies != true)) {
-    aSpawners = getentarray("team2", "targetname");
+  if((isDefined(bDontSpawnFriendlies)) && (bDontSpawnFriendlies != true)) {
+    aSpawners = getEntArray("team2", "targetname");
     level.team2 = array_spawn(aSpawners);
     array_thread(level.team2, ::team2_think);
     level.squad = [];
@@ -5291,19 +5250,19 @@ initFriendlies(sStartPoint, bDontSpawnFriendlies, bWarpPlayer) {
   //level.attackHeliExcluders = level.squad;
   //level.attackHeliExcluders = array_merge( level.attackHeliExcluders, level.team2 );
 
-  if(is_default_start())
+  if(is_default_start()) {
     return;
-
+  }
   /*-----------------------
   TELEPORT FRIENDLIES
   -------------------------*/
   aFriendlies = level.squad;
   warpNodes = getnodearray("friendlyStart" + sStartPoint, "targetname");
   assertEx(warpNodes.size == 3, "Need exactly 3 nodes with targetname: nodeStart" + sStartPoint);
-  while (aFriendlies.size > 0) {
+  while(aFriendlies.size > 0) {
     wait(0.05);
-    for (i = 0; i < warpNodes.size; i++) {
-      if(isdefined(warpNodes[i].script_noteworthy)) {
+    for(i = 0; i < warpNodes.size; i++) {
+      if(isDefined(warpNodes[i].script_noteworthy)) {
         switch (warpNodes[i].script_noteworthy) {
           case "nodePrice":
             level.teamleader teleport_ai(warpNodes[i]);
@@ -5331,7 +5290,7 @@ initFriendlies(sStartPoint, bDontSpawnFriendlies, bWarpPlayer) {
   /*-----------------------
   TELEPORT PLAYERS
   -------------------------*/
-  if((isdefined(bWarpPlayer)) && (bWarpPlayer == true)) {
+  if((isDefined(bWarpPlayer)) && (bWarpPlayer == true)) {
     aPlayerNodes = getnodearray("playerStart" + sStartPoint, "targetname");
     teleport_players(aPlayerNodes);
   }
@@ -5369,7 +5328,7 @@ ambush_patroller_think() {
   self endon("death");
 
   //body discover guy should not use chokepoints
-  if(isdefined(self.script_noteworthy) && self.script_noteworthy == "body_discover")
+  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "body_discover")
     self.usechokepoints = false;
 
   self.ignoreme = true;
@@ -5408,24 +5367,24 @@ ai_patroller_think() {
   //	self set_walkdist( 1000 );
   //	self.disablearrivals = true;
   //	type = self.script_noteworthy;
-  //	assert( isdefined( type ) );
+  //	assert( isDefined( type ) );
   //	sAnimReach = undefined;
   //	sAnimIdle = undefined;
   //	sAnimReact = undefined;
   //	switch ( type )
   //	{
   //		case "patrol_smoke":
-  //			sAnimReach = "smoking_reach"; 
+  //			sAnimReach = "smoking_reach";
   //			sAnimIdle = "smoking";
   //			sAnimReact = "smoking_react";
   //			break;
   //		case "patrol_bored":
-  //			sAnimReach = "bored_idle_reach"; 
+  //			sAnimReach = "bored_idle_reach";
   //			sAnimIdle = "bored_idle";
   //			sAnimReact = "bored_alert";
   //			break;
   //		case "patrol_cellphone":
-  //			sAnimReach = "bored_idle_reach"; 
+  //			sAnimReach = "bored_idle_reach";
   //			sAnimIdle = "bored_cell_loop";
   //			sAnimReact = "bored_alert";
   //			break;
@@ -5434,7 +5393,7 @@ ai_patroller_think() {
   //			break;
   //	}
   //	targ = getnode( self.target, "targetname" );
-  //	assert( isdefined( targ ) );
+  //	assert( isDefined( targ ) );
   //	self thread maps\_patrol::patrol();
 
   //self waittill ( "enemy" );
@@ -5446,7 +5405,7 @@ ai_patroller_think() {
 
 premature_kill_missionfail(soundOrg) {
   level endon("breach_explosion");
-  while (true) {
+  while(true) {
     self waittill("damage", amount, attacker);
     if(isplayer(attacker)) {
       thread mission_fail_generic(soundOrg);
@@ -5465,18 +5424,18 @@ mission_fail_generic(soundOrg) {
   //soundOrg thread play_sound_in_space( "oilrig_mrc3_killhostages" );
   wait(.5);
   thread premature_hostage_death_fx();
-  if(isdefined(soundOrg))
+  if(isDefined(soundOrg))
     soundOrg thread play_sound_in_space("weap_deserteagle_fire_npc");
   wait(.25);
   level.player thread play_loop_sound_on_entity("emt_oilrig_alarm_alert");
-  if(isdefined(soundOrg))
+  if(isDefined(soundOrg))
     soundOrg thread play_sound_in_space("weap_deserteagle_fire_npc");
   wait(.5);
   thread mission_fail_hostage_executed();
 }
 
 premature_hostage_death_fx() {
-  aBloodSpatters = getentarray("blood_spatters", "targetname");
+  aBloodSpatters = getEntArray("blood_spatters", "targetname");
   //foreach ( splatter in aBloodSpatters)
   //splatter show();
 }
@@ -5484,7 +5443,7 @@ premature_hostage_death_fx() {
 mission_fail_hostage_executed() {
   // Mission failed. A hostage was executed.
   flag_set("oilrig_mission_failed");
-  setDvar("ui_deadquote", & "OILRIG_MISSIONFAIL_ENEMIES_ALERTED_HOSTAGES_KILLED");
+  setDvar("ui_deadquote", &"OILRIG_MISSIONFAIL_ENEMIES_ALERTED_HOSTAGES_KILLED");
   level notify("mission failed");
   maps\_utility::missionFailedWrapper();
 }
@@ -5503,18 +5462,17 @@ player_in_exposed_ambush_spot() {
   level endon("ambush_enemies_alerted");
   level endon("ambush_enemies_alerted_prematurely");
   trigger_exposed_ambush_spot = getent("exposed_ambush_spot", "targetname");
-  while (true) {
+  while(true) {
     wait(1.5);
     if(self istouching(trigger_exposed_ambush_spot)) {
-      if(flag("player_in_exposed_ambush_spot"))
+      if(flag("player_in_exposed_ambush_spot")) {
         break;
+      }
     }
   }
 
   flag_set("ambush_enemies_alerted_prematurely");
 }
-
-
 
 spawn_group_staggered(aSpawners) {
   assertEx((aSpawners.size > 0), "The array passed to array_spawn function is empty");
@@ -5563,24 +5521,23 @@ close_door_deck1_opposite() {
 }
 
 ai_cleanup(dist) {
-  if(!isdefined(dist))
+  if(!isDefined(dist))
     dist = 1024;
   aAI_to_delete = getaiarray("axis");
   thread AI_delete_when_out_of_sight(aAI_to_delete, dist);
 }
 
 submarine_spawn(sSubNumber, eNode) {
-
   eSub = spawn("script_model", eNode.origin + (0, 0, 0));
-  eSub setmodel("vehicle_submarine_nuclear");
+  eSub setModel("vehicle_submarine_nuclear");
   eSub.origin = eNode.origin;
   eSub.angles = eNode.angles;
 
   eSub.body = undefined;
   eSub.prop = undefined;
-  aSubmarineParts = getentarray("submarine_" + sSubNumber, "targetname");
+  aSubmarineParts = getEntArray("submarine_" + sSubNumber, "targetname");
   foreach(part in aSubmarineParts) {
-    if((isdefined(part.script_parameters)) && (part.script_parameters == "sub"))
+    if((isDefined(part.script_parameters)) && (part.script_parameters == "sub"))
       eSub.body = part;
     else
       eSub.prop = part;
@@ -5589,9 +5546,9 @@ submarine_spawn(sSubNumber, eNode) {
   eSub.DDS = undefined;
   eSub.aDDSparts = undefined;
   if(sSubNumber == "01") {
-    eSub.aDDSparts = getentarray("sub_dds_01", "targetname");
+    eSub.aDDSparts = getEntArray("sub_dds_01", "targetname");
     foreach(part in eSub.aDDSparts) {
-      if((isdefined(part.script_noteworthy)) && (part.script_noteworthy == "body")) {
+      if((isDefined(part.script_noteworthy)) && (part.script_noteworthy == "body")) {
         eSub.DDS = spawn("script_origin", part.origin);
         eSub.DDS.angles = part.angles;
         eSub.DDS.angles = part.angles;
@@ -5602,12 +5559,12 @@ submarine_spawn(sSubNumber, eNode) {
       part linkto(eSub.DDS);
       //			if( getdvar( "oilrig_debug" ) == "0" )
       //			{
-      //				if( ( isdefined( part.script_noteworthy ) ) && ( part.script_noteworthy == "ribs" ) )
+      //				if( ( isDefined( part.script_noteworthy ) ) && ( part.script_noteworthy == "ribs" ) )
       //					part hide();
       //			}
       //			else
       //			{
-      //				if( ( isdefined( part.script_noteworthy ) ) && ( part.script_noteworthy == "old_body" ) )
+      //				if( ( isDefined( part.script_noteworthy ) ) && ( part.script_noteworthy == "old_body" ) )
       //					part hide();
       //			}
     }
@@ -5620,11 +5577,11 @@ submarine_spawn(sSubNumber, eNode) {
     eSub.DoorDDS.eDoorSeal = getent("dds_door_01_seal", "targetname");
     eSub.DoorDDS.eDoorSeal linkTo(eSub.DoorDDS);
   }
-  assert(isdefined(eSub));
-  assert(isdefined(eSub.body));
-  assert(isdefined(eSub.prop));
-  assert(isdefined(eSub.DDS));
-  assert(isdefined(eSub.DoorDDS));
+  assert(isDefined(eSub));
+  assert(isDefined(eSub.body));
+  assert(isDefined(eSub.prop));
+  assert(isDefined(eSub.DDS));
+  assert(isDefined(eSub.DoorDDS));
   eSub.body.origin = eSub.origin;
   eSub.body.angles = eSub.angles;
   eSub.animname = "submarine_" + sSubNumber;
@@ -5652,16 +5609,15 @@ submarine_spawn(sSubNumber, eNode) {
   eSub HidePart("origin_animate_jnt");
   eSub thread submarine_think();
   return eSub;
-
 }
 
 SDV_spawn(sSDVNumber, eNode) {
   eSDV = spawn("script_model", eNode.origin + (0, 0, 0));
-  eSDV setmodel("vehicle_submarine_sdv");
+  eSDV setModel("vehicle_submarine_sdv");
   eSDV.origin = eNode.origin;
   eSDV.angles = eNode.angles;
 
-  assert(isdefined(eSDV));
+  assert(isDefined(eSDV));
   eSDV.animname = "sdv_" + sSDVNumber;
   eSDV assign_animtree();
   eSDV thread sdv_think();
@@ -5709,33 +5665,32 @@ submarine_think() {
   //self waittillmatch( "single anim", "end" );
 }
 
-
 dds_door_open() {
   self rotateto(self.angles + (0, -90, 0), 12, 2, 2);
-  self playsound("hatch_and_bubbles");
+  self playSound("hatch_and_bubbles");
 }
 
 killtrigger_ocean_off() {
   killtrigger_ocean = getent("killtrigger_ocean", "targetname");
-  assert(isdefined(killtrigger_ocean));
+  assert(isDefined(killtrigger_ocean));
   killtrigger_ocean notify("turn_off");
 }
 
 killtrigger_ocean_on() {
   killtrigger_ocean = getent("killtrigger_ocean", "targetname");
-  assert(isdefined(killtrigger_ocean));
+  assert(isDefined(killtrigger_ocean));
   killtrigger_ocean notify("turn_off");
   killtrigger_ocean endon("turn_off");
-  while (true) {
+  while(true) {
     killtrigger_ocean waittill("trigger", other);
-    if((isdefined(other)) && (isPlayer(other))) {
+    if((isDefined(other)) && (isPlayer(other))) {
       dummy = spawn_tag_origin();
       dummy.origin = other.origin;
       dummy.angles = other.angles;
       other PlayerLinkToBlend(dummy, "tag_origin", .05);
       other kill();
       if(is_specialop()) {
-        setDvar("ui_deadquote", & "OILRIG_MISSIONFAIL_WATER_DEATH");
+        setDvar("ui_deadquote", &"OILRIG_MISSIONFAIL_WATER_DEATH");
         level notify("mission failed");
         maps\_utility::missionFailedWrapper();
       }
@@ -5745,12 +5700,12 @@ killtrigger_ocean_on() {
 }
 
 get_AI_with_script_noteworthy(sTeam, sNoteworthy) {
-  assert(isdefined(sTeam));
-  assert(isdefined(sNoteworthy));
+  assert(isDefined(sTeam));
+  assert(isDefined(sNoteworthy));
   aTeamArray = getaiarray("allies");
   aAI = [];
   foreach(guy in aTeamArray) {
-    if((isdefined(guy.script_noteworthy)) && (guy.script_noteworthy == sNoteworthy))
+    if((isDefined(guy.script_noteworthy)) && (guy.script_noteworthy == sNoteworthy))
       aAI = array_add(aAI, guy);
   }
   assertex(aAI.size < 2, "There is more than one AI with script_noteworthy of + " + sNoteworthy);
@@ -5765,8 +5720,6 @@ set_speed(speed) {
   self SetMoveSpeedScale(speed);
 }
 
-
-
 friendlies_shoot_heli_with_rockets(eHeli) {
   eHeli endon("death");
   zOffset = 32;
@@ -5775,7 +5728,7 @@ friendlies_shoot_heli_with_rockets(eHeli) {
   guy = undefined;
   //wait( 10 );
 
-  while (isdefined(eHeli)) {
+  while(isDefined(eHeli)) {
     wait(randomfloatrange(15, 25));
 
     /*-----------------------
@@ -5784,11 +5737,11 @@ friendlies_shoot_heli_with_rockets(eHeli) {
     eFriendly = undefined;
     level.squad = remove_dead_from_array(level.squad);
     aFriendlies = get_array_of_farthest(level.player.origin, level.squad);
-    while (!isdefined(eFriendly)) {
+    while(!isDefined(eFriendly)) {
       wait(1.5);
       aFriendlies = remove_dead_from_array(aFriendlies);
       foreach(guy in aFriendlies) {
-        if(!isdefined(guy))
+        if(!isDefined(guy))
           continue;
         //friendly in view, skip him
         playerEye = level.player getEye();
@@ -5813,8 +5766,8 @@ friendlies_shoot_heli_with_rockets(eHeli) {
     /*-----------------------
     SHOOT THE FAKE HELI TARGET
     -------------------------*/
-    if((isdefined(eHeliTarget)) && (bullettracepassed(eFriendly gettagorigin("tag_flash") + (0, 0, zOffset), eHeliTarget.origin, true, eFriendly))) {
-      if(!isdefined(eFriendly))
+    if((isDefined(eHeliTarget)) && (bullettracepassed(eFriendly gettagorigin("tag_flash") + (0, 0, zOffset), eHeliTarget.origin, true, eFriendly))) {
+      if(!isDefined(eFriendly))
         continue;
       MagicBullet("rpg_nodamage", eFriendly gettagorigin("tag_flash") + (0, 0, zOffset), eHeliTarget.origin);
       eHeliTarget delete();
@@ -5826,8 +5779,6 @@ friendlies_shoot_heli_with_rockets(eHeli) {
   }
 }
 
-
-
 oilrig_stealth_monitor_on(bMissionFail) {
   level endon("oilrig_stealth_monitor_off");
   level.oilrigStealth = true;
@@ -5838,14 +5789,13 @@ oilrig_stealth_monitor_on(bMissionFail) {
   //thread damage_triggers_stealth_monitor();
   level waittill("stealth_broken");
 
-  if(isdefined(bMissionFail))
+  if(isDefined(bMissionFail))
     thread mission_fail_generic();
-
 }
 
 AI_stealth_monitor() {
   self endon("death");
-  if((isdefined(self.script_noteworthy)) && (self.script_noteworthy == "not_alerted"))
+  if((isDefined(self.script_noteworthy)) && (self.script_noteworthy == "not_alerted"))
     return;
   self notify("running_stealth_monitor_on_me");
   self endon("running_stealth_monitor_on_me");
@@ -5859,10 +5809,11 @@ AI_stealth_monitor() {
   self addAIEventListener("projectile_impact");
 
   wait(.5);
-  while (isalive(self)) {
+  while(isalive(self)) {
     self waittill("ai_event", eventtype);
-    if((eventtype == "grenade danger") || (eventtype == "damage") || (eventtype == "gunshot") || (eventtype == "bulletwhizby") || (eventtype == "projectile_impact") || (eventtype == "explode"))
+    if((eventtype == "grenade danger") || (eventtype == "damage") || (eventtype == "gunshot") || (eventtype == "bulletwhizby") || (eventtype == "projectile_impact") || (eventtype == "explode")) {
       break;
+    }
   }
   wait(1);
   if(isalive(self))
@@ -5870,7 +5821,7 @@ AI_stealth_monitor() {
 }
 
 AI_become_alerted() {
-  if((isdefined(self)) && (isalive(self)) && (!isdefined(self.scriptedDying))) {
+  if((isDefined(self)) && (isalive(self)) && (!isDefined(self.scriptedDying))) {
     level notify("stealth_broken");
     self anim_stopanimscripted();
     self notify("alerted");
@@ -5900,17 +5851,17 @@ AI_player_distance_monitor() {
   self endon("death");
   level endon("oilrig_stealth_monitor_off");
 
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     wait(1);
     if(!within_fov(self.origin, self.angles, level.player.origin + (0, 0, 32), level.cosine["45"]))
       continue;
     if(!sighttracepassed(self.origin + (0, 0, 32), level.player.origin + (0, 0, 32), false, self))
       continue;
-    if(distancesquared(self.origin, level.player.origin) < level.stealthDistanceSquared)
+    if(distancesquared(self.origin, level.player.origin) < level.stealthDistanceSquared) {
       break;
+    }
   }
   self thread AI_become_alerted();
-
 }
 
 oilrig_destructible_monitor() {
@@ -5922,7 +5873,7 @@ oilrig_destructible_monitor() {
 ignoreme_on_squad_and_player() {
   level.player.ignoreme = true;
   foreach(guy in level.squad) {
-    if(!isdefined(guy))
+    if(!isDefined(guy))
       continue;
     guy.ignoreme = true;
     guy setthreatbiasgroup("oblivious");
@@ -5932,7 +5883,7 @@ ignoreme_on_squad_and_player() {
 ignoreme_off_squad_and_player() {
   level.player.ignoreme = false;
   foreach(guy in level.squad) {
-    if(!isdefined(guy))
+    if(!isDefined(guy))
       continue;
     guy.ignoreme = false;
     guy setthreatbiasgroup("allies");
@@ -5955,13 +5906,13 @@ vehicle_heli_land(eNode) {
 }
 
 init_air_vehicle_flags() {
-  array1 = getentarray("script_origin", "classname");
+  array1 = getEntArray("script_origin", "classname");
   aAirNodes = array_merge(array1, level.struct);
   array_thread(aAirNodes, ::air_nodes_think);
 }
 
 air_nodes_think() {
-  if(!isdefined(self.script_flag))
+  if(!isDefined(self.script_flag))
     return;
   flag_init(self.script_flag);
   if(getdvar("oilrig_debug") == "1")
@@ -5978,7 +5929,7 @@ friendly_speed_adjustment_on() {
 
 friendly_speed_adjustment_off() {
   foreach(guy in level.squad) {
-    if(!isdefined(guy))
+    if(!isDefined(guy))
       continue;
     guy notify("stop_adjust_movement_speed");
     guy.moveplaybackrate = 1.0;
@@ -5986,16 +5937,16 @@ friendly_speed_adjustment_off() {
 }
 
 friendly_adjust_movement_speed() {
-  if(!isdefined(self))
+  if(!isDefined(self))
     return;
   self notify("stop_adjust_movement_speed");
   self endon("death");
   self endon("stop_adjust_movement_speed");
 
-  for (;;) {
+  for(;;) {
     wait randomfloatrange(.5, 1.5);
 
-    while (friendly_should_speed_up()) {
+    while(friendly_should_speed_up()) {
       //iPrintLnBold( "friendlies speeding up" );
       self.moveplaybackrate = 2.5;
       wait 0.05;
@@ -6006,13 +5957,13 @@ friendly_adjust_movement_speed() {
 }
 
 friendly_should_speed_up() {
-  if(!isdefined(self))
+  if(!isDefined(self))
     return;
   self endon("death");
 
   prof_begin("friendly_movement_rate_math");
 
-  if(!isdefined(self.goalpos)) {
+  if(!isDefined(self.goalpos)) {
     prof_end("friendly_movement_rate_math");
     return false;
   }
@@ -6054,7 +6005,7 @@ fx_management() {
   CATALOG ALL FX BY VOLUME
   -------------------------*/
   dummy = spawn("script_origin", (0, 0, 0));
-  for (i = 0; i < level.createfxent.size; i++) {
+  for(i = 0; i < level.createfxent.size; i++) {
     EntFx = level.createfxent[i];
     dummy.origin = EntFx.v["origin"];
     if(dummy istouching(effects_underwater)) {
@@ -6078,8 +6029,8 @@ fx_management() {
 }
 
 compass_triggers_think() {
-  assertex(isdefined(self.script_noteworthy), "compassTrigger at " + self.origin + " needs to have a script_noteworthy with the name of the minimap to use");
-  while (true) {
+  assertex(isDefined(self.script_noteworthy), "compassTrigger at " + self.origin + " needs to have a script_noteworthy with the name of the minimap to use");
+  while(true) {
     wait(1);
     self waittill("trigger");
     setsaveddvar("ui_hidemap", 0);
@@ -6092,7 +6043,7 @@ compass_triggers_think() {
 //	level endon( "oilrig_stealth_monitor_off" );
 //	//level endon( "breaching" );
 //	//level endon( "mission failed" );
-//	damage_alert_triggers = getentarray( "damage_alert", "targetname" );
+//	damage_alert_triggers = getEntArray( "damage_alert", "targetname" );
 //	assert( damage_alert_triggers.size > 0 );
 //	array_thread( damage_alert_triggers,::damage_alert_triggers_think );
 //
@@ -6135,7 +6086,7 @@ friendlies_shielded_during_breach(sFlagToStart, sFlagToEnd) {
 }
 
 redshirt_trigger_think() {
-  while (true) {
+  while(true) {
     self waittill("trigger");
     level.breachfriendlies = remove_dead_from_array(level.breachfriendlies);
     iRedshirtsToSpawn = undefined;
@@ -6143,12 +6094,12 @@ redshirt_trigger_think() {
     level.squad = remove_dead_from_array(level.squad);
     guy = undefined;
     if(level.squad.size < level.squadsize) {
-      aSpawners = getentarray(self.target, "targetname");
+      aSpawners = getEntArray(self.target, "targetname");
       assertex(aSpawners.size > 0, "Redshirt_trigger at " + self.origin + " needs to target at least 1 spawner");
       iRedshirtsToSpawn = (level.squadsize - level.squad.size);
-      for (i = 0; i < iRedshirtsToSpawn; i++) {
+      for(i = 0; i < iRedshirtsToSpawn; i++) {
         guy = aSpawners[i] spawn_ai(true);
-        if(isdefined(guy)) {
+        if(isDefined(guy)) {
           guy set_force_color("r");
           level.squad = array_add(level.squad, guy);
           guy thread friendly_redshirt_think();
@@ -6167,22 +6118,22 @@ friendly_redshirt_think() {
 }
 
 destructible_cleanup() {
-  if(!isdefined(self))
+  if(!isDefined(self))
     return;
   self common_scripts\_destructible::cleanupVars();
-  if(isdefined(self))
+  if(isDefined(self))
     self delete();
 }
 
 AI_delete(excluders) {
   self endon("death");
-  if(!isdefined(self))
+  if(!isDefined(self))
     return;
-  if((isdefined(excluders)) && (excluders.size > 0)) {
+  if((isDefined(excluders)) && (excluders.size > 0)) {
     if(is_in_array(excluders, self))
       return;
   }
-  if(isdefined(self.magic_bullet_shield))
+  if(isDefined(self.magic_bullet_shield))
     self stop_magic_bullet_shield();
   if(!isSentient(self)) {
     //		self notify( "death" );
@@ -6206,10 +6157,10 @@ all_ai_dead_in_volumes(aVolumes) {
 }
 
 force_weapon_when_player_not_looking(weaponName) {
-  if(!isdefined(self))
+  if(!isDefined(self))
     return;
   self endon("death");
-  while (within_fov(level.player.origin, level.player getplayerangles(), self.origin, level.cosine["45"])) {
+  while(within_fov(level.player.origin, level.player getplayerangles(), self.origin, level.cosine["45"])) {
     wait 1;
   }
   self forceUseWeapon(weaponName, "primary");
@@ -6221,7 +6172,7 @@ AI_left_deck3_dudes_think() {
 }
 
 AI_turret_guys_think() {
-  if(!isdefined(self))
+  if(!isDefined(self))
     return;
   self endon("death");
   waittillframeend;

@@ -14,12 +14,12 @@ function init(localclientnum) {
 function spawned(localclientnum) {
   self endon("entityshutdown");
   self util::waittill_dobj(localclientnum);
-  while (true) {
-    if(isdefined(self.stunned) && self.stunned) {
+  while(true) {
+    if(isDefined(self.stunned) && self.stunned) {
       wait(0.1);
       continue;
     }
-    self.claymorelaserfxid = playfxontag(localclientnum, level._effect["fx_claymore_laser"], self, "tag_fx");
+    self.claymorelaserfxid = playFXOnTag(localclientnum, level._effect["fx_claymore_laser"], self, "tag_fx");
     self waittill("stunned");
     stopfx(localclientnum, self.claymorelaserfxid);
   }

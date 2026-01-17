@@ -36,14 +36,14 @@ init() {
   if(!isDefined(level.leapers_per_player))
     level.leapers_per_player = 2;
 
-  level.no_jump_triggers = getentarray("leaper_no_jump_trigger", "targetname");
+  level.no_jump_triggers = getEntArray("leaper_no_jump_trigger", "targetname");
 }
 
 leaper_calc_anim_offsets() {
   leaper = spawn_zombie(level.leaper_spawners[0]);
 
   if(isDefined(leaper)) {
-    level.leaper_anim = spawnstruct();
+    level.leaper_anim = spawnStruct();
     asd = "zm_wall_up";
     anim_id = leaper getanimfromasd(asd, 0);
     level.leaper_anim.up_mid = getmovedelta(anim_id, 0, 0.488) + vectorscale((0, 0, 1), 6.0);
@@ -73,7 +73,7 @@ leaper_calc_anim_offsets() {
 }
 
 leaper_spawner_init() {
-  level.leaper_spawners = getentarray("leaper_zombie_spawner", "script_noteworthy");
+  level.leaper_spawners = getEntArray("leaper_zombie_spawner", "script_noteworthy");
 
   if(level.leaper_spawners.size == 0) {
     return;
@@ -135,7 +135,7 @@ leaper_init() {
     self forceteleport(spot.origin, spot.angles);
   }
 
-  self playsound("zmb_vocals_leaper_spawn");
+  self playSound("zmb_vocals_leaper_spawn");
   self set_zombie_run_cycle("run");
   self.state = "init";
   self thread leaper_think();
@@ -173,9 +173,8 @@ play_ambient_leaper_vocals() {
 
   while(true) {
     if(isDefined(self)) {
-      if(isDefined(self.favoriteenemy) && distance(self.origin, self.favoriteenemy.origin) <= 150) {
-      } else
-        self playsound("zmb_vocals_leaper_ambience");
+      if(isDefined(self.favoriteenemy) && distance(self.origin, self.favoriteenemy.origin) <= 150) {} else
+        self playSound("zmb_vocals_leaper_ambience");
     }
 
     wait(randomfloatrange(1, 1.5));
@@ -186,8 +185,8 @@ leaper_death() {
   self endon("leaper_cleanup");
   self waittill("death");
   self leaper_stop_trail_fx();
-  self playsound("zmb_vocals_leaper_death");
-  playfx(level._effect["leaper_death"], self.origin);
+  self playSound("zmb_vocals_leaper_death");
+  playFX(level._effect["leaper_death"], self.origin);
 
   if(get_current_zombie_count() == 0 && level.zombie_total == 0) {
     level.last_leaper_origin = self.origin;
@@ -235,7 +234,7 @@ leaper_can_use_anim(local_mid, local_end, dir) {
   forward_org = (temp_org[0], temp_org[1], real_mid[2]);
   end_top = end + vectorscale((0, 0, 1), 24.0);
   end_bottom = end + vectorscale((0, 0, -1), 60.0);
-  trace = bullettrace(start, mid, 1, self);
+  trace = bulletTrace(start, mid, 1, self);
 
   if(isDefined(trace["entity"]))
     return false;
@@ -259,7 +258,7 @@ leaper_can_use_anim(local_mid, local_end, dir) {
       line(start, mid, (0, 1, 0), 1, 0, 100);
 
     if(dir != "up") {
-      trace = bullettrace(forward_org, real_mid, 1, self);
+      trace = bulletTrace(forward_org, real_mid, 1, self);
 
       if(isDefined(trace["entity"]))
         return false;
@@ -282,7 +281,7 @@ leaper_can_use_anim(local_mid, local_end, dir) {
     return false;
   }
 
-  trace = bullettrace(mid, end, 1, self);
+  trace = bulletTrace(mid, end, 1, self);
 
   if(isDefined(trace["fraction"]) && trace["fraction"] < 1) {
     if(getdvarint(#"_id_5B4FE0B3") == 1)
@@ -295,7 +294,7 @@ leaper_can_use_anim(local_mid, local_end, dir) {
 
   }
 
-  trace = bullettrace(end_top, end_bottom, 1, self);
+  trace = bulletTrace(end_top, end_bottom, 1, self);
 
   if(isDefined(trace["fraction"]) && trace["fraction"] >= 1) {
     if(getdvarint(#"_id_5B4FE0B3") == 1)
@@ -421,10 +420,10 @@ leaper_start_trail_fx() {
   self endon("death");
   self leaper_stop_trail_fx();
   self.trail_fx = spawn("script_model", self.origin);
-  self.trail_fx setmodel("tag_origin");
+  self.trail_fx setModel("tag_origin");
   self.trail_fx linkto(self);
   wait 0.1;
-  playfxontag(level._effect["leaper_trail"], self.trail_fx, "tag_origin");
+  playFXOnTag(level._effect["leaper_trail"], self.trail_fx, "tag_origin");
 }
 
 leaper_stop_trail_fx() {
@@ -448,7 +447,7 @@ leaper_handle_fx_notetracks(animname) {
 
   if(isDefined(self.leap_anim) && self getanimhasnotetrackfromasd("wallhit")) {
     self waittillmatch(animname, "wallhit");
-    playfx(level._effect["leaper_wall_impact"], self.origin);
+    playFX(level._effect["leaper_wall_impact"], self.origin);
   }
 }
 
@@ -734,7 +733,7 @@ leaper_spawn_logic(leaper_array, favorite_enemy) {
     a_spawn_points_in_view = [];
 
     for(i = 0; i < a_leaper_spawn_points.size; i++) {
-      player_vec = vectornormalize(anglestoforward(player.angles));
+      player_vec = vectornormalize(anglesToForward(player.angles));
       player_spawn = vectornormalize(a_leaper_spawn_points[i].origin - player.origin);
       dot = vectordot(player_vec, player_spawn);
 
@@ -808,7 +807,7 @@ leaper_spawn_fx(ai, ent) {
     v_fx_origin = ai gettagorigin("J_SpineLower");
   }
 
-  playfx(level._effect["leaper_spawn"], v_fx_origin);
+  playFX(level._effect["leaper_spawn"], v_fx_origin);
   playsoundatposition("zmb_leaper_spawn_fx", v_fx_origin);
 }
 
@@ -872,7 +871,7 @@ leaper_traverse_watcher() {
       if(is_true(self maps\mp\zm_highrise_elevators::object_is_on_elevator())) {
         if(isDefined(self.elevator_parent)) {
           if(is_true(self.elevator_parent.is_moving)) {
-            playfx(level._effect["zomb_gib"], self.origin);
+            playFX(level._effect["zomb_gib"], self.origin);
             self leaper_cleanup();
             self delete();
             return;
@@ -888,7 +887,7 @@ leaper_traverse_watcher() {
 leaper_playable_area_failsafe() {
   self endon("death");
   self.leaper_failsafe_start_time = gettime();
-  playable_area = getentarray("player_volume", "script_noteworthy");
+  playable_area = getEntArray("player_volume", "script_noteworthy");
   b_outside_playable_space_this_frame = 0;
   self.leaper_outside_playable_space_time = -2;
 
@@ -1047,7 +1046,7 @@ wait_for_player_to_see_leaper() {
     leapers = getaiarray(level.zombie_team);
 
     foreach(leaper in leapers) {
-      player_vec = vectornormalize(anglestoforward(self.angles));
+      player_vec = vectornormalize(anglesToForward(self.angles));
       player_leaper = vectornormalize(leaper.origin - self.origin);
       dot = vectordot(player_vec, player_leaper);
 

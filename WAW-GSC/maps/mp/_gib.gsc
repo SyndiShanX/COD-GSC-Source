@@ -216,18 +216,18 @@ gib_player(iDamage, sMeansOfDeath, sWeapon, sHitLoc, vDamageDir, vAttackerOrigin
   }
   if(limb_data["spawn_tags"][0] != "") {
     if(isDefined(self.gib_vel)) {
-      for (i = 0; i < limb_data["spawn_tags"].size; i++) {
+      for(i = 0; i < limb_data["spawn_tags"].size; i++) {
         velocities[i] = self.gib_vel;
       }
     } else {
-      for (i = 0; i < limb_data["spawn_tags"].size; i++) {
+      for(i = 0; i < limb_data["spawn_tags"].size; i++) {
         pos1[pos1.size] = self GetTagOrigin(limb_data["spawn_tags"][i]);
       }
       wait(0.05);
-      for (i = 0; i < limb_data["spawn_tags"].size; i++) {
+      for(i = 0; i < limb_data["spawn_tags"].size; i++) {
         pos2[pos2.size] = self GetTagOrigin(limb_data["spawn_tags"][i]);
       }
-      for (i = 0; i < pos1.size; i++) {
+      for(i = 0; i < pos1.size; i++) {
         forward = VectorNormalize(pos2[i] - pos1[i]);
         velocities[i] = forward * RandomIntRange(600, 1000);
         velocities[i] = velocities[i] + (0, 0, RandomIntRange(400, 700));
@@ -235,16 +235,16 @@ gib_player(iDamage, sMeansOfDeath, sWeapon, sHitLoc, vDamageDir, vAttackerOrigin
     }
   }
   if(isDefined(limb_data["fx"])) {
-    for (i = 0; i < limb_data["spawn_tags"].size; i++) {
+    for(i = 0; i < limb_data["spawn_tags"].size; i++) {
       if(limb_data["spawn_tags"][i] == "") {
         continue;
       }
-      PlayFxOnTag(level._effect[limb_data["fx"]], self, limb_data["spawn_tags"][i]);
+      playFXOnTag(level._effect[limb_data["fx"]], self, limb_data["spawn_tags"][i]);
     }
   }
-  self PlaySound("death_gibs");
+  self playSound("death_gibs");
   self thread throw_gib(limb_data["spawn_models"], limb_data["spawn_tags"], velocities);
-  self SetModel(limb_data["body_model"]);
+  self setModel(limb_data["body_model"]);
   self Attach(limb_data["legs_model"]);
   if(gib_ref == "no_legs")
     return true;
@@ -339,7 +339,7 @@ throw_gib(spawn_models, spawn_tags, velocities) {
   if(velocities.size < 1) {
     return;
   }
-  for (i = 0; i < spawn_models.size; i++) {
+  for(i = 0; i < spawn_models.size; i++) {
     origin = self GetTagOrigin(spawn_tags[i]);
     angles = self GetTagAngles(spawn_tags[i]);
     CreateDynEntAndLaunch(spawn_models[i], origin, angles, origin, velocities[i], level._effect["animscript_gibtrail_fx"]);

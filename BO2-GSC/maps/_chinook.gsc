@@ -19,7 +19,7 @@ setanims() {
   positions = [];
 
   for(i = 0; i < 9; i++)
-    positions[i] = spawnstruct();
+    positions[i] = spawnStruct();
 
   return positions;
 }

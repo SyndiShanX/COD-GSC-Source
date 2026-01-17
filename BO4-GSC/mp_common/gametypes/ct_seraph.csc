@@ -7,7 +7,6 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\struct;
 #include scripts\mp_common\gametypes\ct_core;
-
 #namespace ct_seraph;
 
 event_handler[gametype_init] main(eventstruct) {
@@ -27,6 +26,6 @@ function_649c09ac(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     s_loc = struct::get("s_vase_loc", "targetname");
     v_angles = (0, 0, 0);
     v_velocity = (0, 0, 0);
-    dynent = createdynentandlaunch(localclientnum, #"p7_vase_clay_egyptian_01", s_loc.origin, v_angles, (0, 0, 0), v_velocity);
+    dynent = createdynentandlaunch(localclientnum, # "p7_vase_clay_egyptian_01", s_loc.origin, v_angles, (0, 0, 0), v_velocity);
   }
 }

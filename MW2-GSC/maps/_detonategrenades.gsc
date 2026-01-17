@@ -10,7 +10,7 @@ init() {
   level._effect["c4_light_blink"] = loadfx("misc/light_c4_blink");
   level._effect["claymore_laser"] = loadfx("misc/claymore_laser");
 
-  for (i = 0; i < level.players.size; i++) {
+  for(i = 0; i < level.players.size; i++) {
     level.players[i] thread watchGrenadeUsage();
   }
 }
@@ -27,7 +27,7 @@ watchGrenadeUsage() {
   thread watchClaymores();
   thread begin_semtex_grenade_tracking();
 
-  for (;;) {
+  for(;;) {
     self waittill("grenade_pullback", weaponName);
     self.throwingGrenade = true;
 
@@ -44,7 +44,7 @@ watchGrenadeUsage() {
 
 beginsmokegrenadetracking() {
   self waittill("grenade_fire", grenade, weaponName);
-  if(!isdefined(level.smokegrenades))
+  if(!isDefined(level.smokegrenades))
     level.smokegrenades = 0;
   if(level.smokegrenades > 2 && getdvar("player_sustainAmmo") != "0")
     grenade delete();
@@ -53,7 +53,7 @@ beginsmokegrenadetracking() {
 }
 
 begin_semtex_grenade_tracking() {
-  while (1) {
+  while(1) {
     self waittill("grenade_fire", grenade, weaponName);
     if(weaponName == "semtex_grenade") {
       thread track_semtex_grenade(grenade);
@@ -65,7 +65,7 @@ begin_semtex_grenade_tracking() {
 track_semtex_grenade(grenade) {
   self.throwingGrenade = false;
 
-  if(!isdefined(level.thrown_semtex_grenades))
+  if(!isDefined(level.thrown_semtex_grenades))
     level.thrown_semtex_grenades = 1;
   else
     level.thrown_semtex_grenades++;
@@ -79,18 +79,18 @@ track_semtex_grenade(grenade) {
 semtex_sticky_handle(attacker) {
   self waittill("missile_stuck", entity);
 
-  if(!isdefined(entity))
+  if(!isDefined(entity)) {
     return;
-
-  // just handling vehicles for now. 
-  if(entity.code_classname != "script_vehicle")
+  }
+  // just handling vehicles for now.
+  if(entity.code_classname != "script_vehicle") {
     return;
-
+  }
   entity.has_semtex_on_it = true;
 
   self waittill("explode");
 
-  if(!isdefined(entity) || !isalive(entity))
+  if(!isDefined(entity) || !isalive(entity))
     return; // possible it could be dead at this point
 
   if(
@@ -102,7 +102,6 @@ semtex_sticky_handle(attacker) {
   }
 
   entity kill(entity.origin, attacker);
-
 }
 
 smoke_grenade_death() {
@@ -131,7 +130,7 @@ beginC4Tracking() {
 watchC4() {
   //maxc4 = 2;
 
-  while (1) {
+  while(1) {
     self waittill("grenade_fire", c4, weapname);
     if(weapname == "c4") {
       if(!self.c4array.size)
@@ -140,18 +139,18 @@ watchC4() {
       /*if( self.c4array.size >= maxc4 )
       {
       	newarray = [];
-      	for ( i = 0; i < self.c4array.size; i++ )
+      	for( i = 0; i < self.c4array.size; i++ )
       	{
-      		if( isdefined(self.c4array[i]) )
+      		if( isDefined(self.c4array[i]) )
       			newarray[newarray.size] = self.c4array[i];
       	}
       	self.c4array = newarray;
-      	for ( i = 0; i < self.c4array.size - maxc4 + 1; i++ )
+      	for( i = 0; i < self.c4array.size - maxc4 + 1; i++ )
       	{
       		self.c4array[i] delete();
       	}
       	newarray = [];
-      	for ( i = 0; i < maxc4 - 1; i++ )
+      	for( i = 0; i < maxc4 - 1; i++ )
       	{
       		newarray[i] = self.c4array[self.c4array.size - maxc4 + 1 + i];
       	}
@@ -180,7 +179,7 @@ watchClaymores() {
   self endon("spawned_player");
   self endon("disconnect");
 
-  while (1) {
+  while(1) {
     self waittill("grenade_fire", claymore, weapname);
     if(weapname == "claymore" || weapname == "claymore_mp") {
       claymore.owner = self;
@@ -215,7 +214,7 @@ claymoreDetonation() {
 
   self thread deleteOnDeath(damagearea);
 
-  if(!isdefined(level.claymores))
+  if(!isDefined(level.claymores))
     level.claymores = [];
   level.claymores = array_add(level.claymores, self);
 
@@ -224,19 +223,19 @@ claymoreDetonation() {
     level.claymores[0] delete();
   }
 
-  while (1) {
+  while(1) {
     damagearea waittill("trigger", ent);
 
-    if(isdefined(self.owner) && ent == self.owner)
+    if(isDefined(self.owner) && ent == self.owner) {
       continue;
-
+    }
     if(isplayer(ent))
       continue; // no enemy claymores in SP.
 
     if(ent damageConeTrace(self.origin, self) > 0) {
-      self playsound("claymore_activated_SP");
+      self playSound("claymore_activated_SP");
       wait 0.4;
-      if(isdefined(self.owner))
+      if(isDefined(self.owner))
         self detonate(self.owner);
       else
         self detonate(undefined);
@@ -251,18 +250,18 @@ deleteOnDeath(ent) {
   // stupid getarraykeys in array_remove reversing the order - nate
   level.claymores = array_remove_nokeys(level.claymores, self);
   wait .05;
-  if(isdefined(ent))
+  if(isDefined(ent))
     ent delete();
 }
 
 watchC4Detonation() {
   self endon("death");
-  while (1) {
+  while(1) {
     self waittill("detonate");
     weap = self getCurrentWeapon();
     if(weap == "c4") {
-      for (i = 0; i < self.c4array.size; i++) {
-        if(isdefined(self.c4array[i]))
+      for(i = 0; i < self.c4array.size; i++) {
+        if(isDefined(self.c4array[i]))
           self.c4array[i] thread waitAndDetonate(0.1);
       }
       self.c4array = [];
@@ -274,14 +273,14 @@ watchC4AltDetonation() {
   self endon("death");
   self endon("disconnect");
 
-  while (1) {
+  while(1) {
     self waittill("alt_detonate");
     weap = self getCurrentWeapon();
     if(weap != "c4") {
       newarray = [];
-      for (i = 0; i < self.c4array.size; i++) {
+      for(i = 0; i < self.c4array.size; i++) {
         c4 = self.c4array[i];
-        if(isdefined(self.c4array[i]))
+        if(isDefined(self.c4array[i]))
           c4 thread waitAndDetonate(0.1);
       }
       self.c4array = newarray;
@@ -301,13 +300,13 @@ c4Damage() {
   //	self endon( "death" );
 
   self.health = 100;
-  self setcandamage(true);
+  self setCanDamage(true);
   self.maxhealth = 100000;
   self.health = self.maxhealth;
 
   attacker = undefined;
 
-  while (1) {
+  while(1) {
     self waittill("damage", amount, attacker);
 
     // don't allow people to destroy C4 on their team if FF is off
@@ -317,16 +316,16 @@ c4Damage() {
     break;
   }
 
-  self playsound("claymore_activated_SP");
+  self playSound("claymore_activated_SP");
 
   if(level.c4explodethisframe)
     wait .1 + randomfloat(.4);
   else
     wait .05;
 
-  if(!isdefined(self))
+  if(!isDefined(self)) {
     return;
-
+  }
   level.c4explodethisframe = true;
 
   thread resetC4ExplodeThisFrame();
@@ -344,7 +343,7 @@ resetC4ExplodeThisFrame() {
 }
 
 saydamaged(orig, amount) {
-  for (i = 0; i < 60; i++) {
+  for(i = 0; i < 60; i++) {
     print3d(orig, "damaged! " + amount);
     wait .05;
   }
@@ -355,7 +354,7 @@ playC4Effects() {
 
   self waittill("missile_stuck");
 
-  PlayFXOnTag(getfx("c4_light_blink"), self, "tag_fx");
+  playFXOnTag(getfx("c4_light_blink"), self, "tag_fx");
 }
 
 playClaymoreEffects() {
@@ -363,14 +362,13 @@ playClaymoreEffects() {
 
   self waittill("missile_stuck");
 
-  PlayFXOnTag(getfx("claymore_laser"), self, "tag_fx");
+  playFXOnTag(getfx("claymore_laser"), self, "tag_fx");
 }
 
 clearFXOnDeath(fx) {
   self waittill("death");
   fx delete();
 }
-
 
 // these functions are used with scripted weapons (like c4, claymores, artillery)
 // returns an array of objects representing damageable entities (including players) within a given sphere.
@@ -380,21 +378,21 @@ clearFXOnDeath(fx) {
 getDamageableEnts(pos, radius, doLOS, startRadius) {
   ents = [];
 
-  if(!isdefined(doLOS))
+  if(!isDefined(doLOS))
     doLOS = false;
 
-  if(!isdefined(startRadius))
+  if(!isDefined(startRadius))
     startRadius = 0;
 
   // players
-  for (i = 0; i < level.players.size; i++) {
-    if(!isalive(level.players[i]) || level.players[i].sessionstate != "playing")
+  for(i = 0; i < level.players.size; i++) {
+    if(!isalive(level.players[i]) || level.players[i].sessionstate != "playing") {
       continue;
-
+    }
     playerpos = level.players[i].origin + (0, 0, 32);
     dist = distance(pos, playerpos);
     if(dist < radius && (!doLOS || weaponDamageTracePassed(pos, playerpos, startRadius, undefined))) {
-      newent = spawnstruct();
+      newent = spawnStruct();
       newent.isPlayer = true;
       newent.isADestructable = false;
       newent.entity = level.players[i];
@@ -404,12 +402,12 @@ getDamageableEnts(pos, radius, doLOS, startRadius) {
   }
 
   // grenades
-  grenades = getentarray("grenade", "classname");
-  for (i = 0; i < grenades.size; i++) {
+  grenades = getEntArray("grenade", "classname");
+  for(i = 0; i < grenades.size; i++) {
     entpos = grenades[i].origin;
     dist = distance(pos, entpos);
     if(dist < radius && (!doLOS || weaponDamageTracePassed(pos, entpos, startRadius, grenades[i]))) {
-      newent = spawnstruct();
+      newent = spawnStruct();
       newent.isPlayer = false;
       newent.isADestructable = false;
       newent.entity = grenades[i];
@@ -418,12 +416,12 @@ getDamageableEnts(pos, radius, doLOS, startRadius) {
     }
   }
 
-  destructables = getentarray("destructable", "targetname");
-  for (i = 0; i < destructables.size; i++) {
+  destructables = getEntArray("destructable", "targetname");
+  for(i = 0; i < destructables.size; i++) {
     entpos = destructables[i].origin;
     dist = distance(pos, entpos);
     if(dist < radius && (!doLOS || weaponDamageTracePassed(pos, entpos, startRadius, destructables[i]))) {
-      newent = spawnstruct();
+      newent = spawnStruct();
       newent.isPlayer = false;
       newent.isADestructable = true;
       newent.entity = destructables[i];
@@ -444,7 +442,7 @@ weaponDamageTracePassed(from, to, startRadius, ignore) {
   dir = vectornormalize(diff);
   midpos = from + (dir[0] * startRadius, dir[1] * startRadius, dir[2] * startRadius);
 
-  trace = bullettrace(midpos, to, false, ignore);
+  trace = bulletTrace(midpos, to, false, ignore);
 
   if(getdvarint("scr_damage_debug") != 0) {
     if(trace["fraction"] == 1) {
@@ -482,15 +480,15 @@ damageEnt(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, damagepos, dam
     );
   } else {
     // destructable walls and such can only be damaged in certain ways.
-    if(self.isADestructable && (sWeapon == "artillery_mp" || sWeapon == "claymore_mp"))
+    if(self.isADestructable && (sWeapon == "artillery_mp" || sWeapon == "claymore_mp")) {
       return;
-
+    }
     self.entity notify("damage", iDamage, eAttacker);
   }
 }
 
 debugline(a, b, color) {
-  for (i = 0; i < 30 * 20; i++) {
+  for(i = 0; i < 30 * 20; i++) {
     line(a, b, color);
     wait .05;
   }
@@ -525,31 +523,31 @@ watchC4AltDetonate() {
   level endon("game_ended");
 
   buttonTime = 0;
-  for (;;) {
+  for(;;) {
     if(self UseButtonPressed()) {
       buttonTime = 0;
-      while (self UseButtonPressed()) {
+      while(self UseButtonPressed()) {
         buttonTime += 0.05;
         wait(0.05);
       }
 
       println("pressTime1: " + buttonTime);
-      if(buttonTime >= 0.5)
+      if(buttonTime >= 0.5) {
         continue;
-
+      }
       buttonTime = 0;
-      while (!self UseButtonPressed() && buttonTime < 0.5) {
+      while(!self UseButtonPressed() && buttonTime < 0.5) {
         buttonTime += 0.05;
         wait(0.05);
       }
 
       println("delayTime: " + buttonTime);
-      if(buttonTime >= 0.5)
+      if(buttonTime >= 0.5) {
         continue;
-
-      if(!self.c4Array.size)
+      }
+      if(!self.c4Array.size) {
         return;
-
+      }
       self notify("alt_detonate");
     }
     wait(0.05);

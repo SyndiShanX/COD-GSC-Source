@@ -40,8 +40,8 @@ set_vehicle_anims(positions) {
 
 setanims() {
   positions = [];
-  for (i = 0; i < 6; i++)
-    positions[i] = spawnstruct();
+  for(i = 0; i < 6; i++)
+    positions[i] = spawnStruct();
 
   positions[0].idle[0] = % SeaKnight_Pilot_idle;
   positions[0].idle[1] = % SeaKnight_Pilot_switches;
@@ -89,7 +89,6 @@ setanims() {
   positions[4].getin = % ch46_load_4;
 
   return positions;
-
 }
 
 unload_groups() {
@@ -103,9 +102,7 @@ unload_groups() {
   return unload_groups;
 }
 
-set_attached_models() {
-
-}
+set_attached_models() {}
 
 /*QUAKED script_vehicle_pavelow (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 

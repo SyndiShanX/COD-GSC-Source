@@ -225,7 +225,7 @@ TraverseRagdollDeathSimple() {
   deathAnim = animscripts\zombie_death::get_death_anim();
   self SetFlaggedAnimKnobAllRestart("deathanim", deathAnim, % body, 1, .1);
   if(AnimHasNotetrack(deathAnim, "death_neckgrab_spurt")) {
-    PlayFXOnTag(level._effects["death_neckgrab_spurt"], self, "j_neck");
+    playFXOnTag(level._effects["death_neckgrab_spurt"], self, "j_neck");
   }
   wait 0.5;
   return true;
@@ -257,7 +257,7 @@ TraverseRagdollDeath(traverseAnim) {
     self.deathFunction = ::postTraverseDeathAnim;
     self.exception["move"] = ::doNothingFunc;
     self animscripts\zombie_death::PlayDeathSound();
-    behindMe = self.origin + (0, 0, 30) - AnglesToForward(self.angles) * 20;
+    behindMe = self.origin + (0, 0, 30) - anglesToForward(self.angles) * 20;
     self startRagdoll();
     thread physExplosionForRagdoll(behindMe);
     self.a.triedTraverseRagdoll = true;
@@ -277,7 +277,7 @@ postTraverseDeathAnim() {
   deathAnim = animscripts\zombie_death::get_death_anim();
   self SetFlaggedAnimKnobAllRestart("deathanim", deathAnim, % body, 1, .1);
   if(animHasNoteTrack(deathAnim, "death_neckgrab_spurt")) {
-    PlayFXOnTag(level._effects["death_neckgrab_spurt"], self, "j_neck");
+    playFXOnTag(level._effects["death_neckgrab_spurt"], self, "j_neck");
   }
 }
 

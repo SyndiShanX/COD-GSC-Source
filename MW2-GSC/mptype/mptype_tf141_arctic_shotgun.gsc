@@ -4,7 +4,6 @@
 ********************************************************/
 
 main() {
-
   character\mp_character_tf_141_arctic_shotgun::main();
 }
 

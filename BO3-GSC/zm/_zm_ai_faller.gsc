@@ -20,17 +20,17 @@
 
 function autoexec init() {
   initfallerbehaviorsandasm();
-  animationstatenetwork::registernotetrackhandlerfunction("faller_melee", & handle_fall_notetracks);
-  animationstatenetwork::registernotetrackhandlerfunction("deathout", & handle_fall_death_notetracks);
+  animationstatenetwork::registernotetrackhandlerfunction("faller_melee", &handle_fall_notetracks);
+  animationstatenetwork::registernotetrackhandlerfunction("deathout", &handle_fall_death_notetracks);
 }
 
 function private initfallerbehaviorsandasm() {
-  behaviortreenetworkutility::registerbehaviortreeaction("fallerDropAction", & fallerdropaction, & fallerdropactionupdate, & fallerdropactionterminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldFallerDrop", & shouldfallerdrop);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("isFallerInCeiling", & isfallerinceiling);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("fallerCeilingDeath", & fallerceilingdeath);
-  animationstatenetwork::registeranimationmocomp("mocomp_drop@faller", & mocompfallerdrop, undefined, undefined);
-  animationstatenetwork::registeranimationmocomp("mocomp_ceiling_death@faller", & mocompceilingdeath, undefined, undefined);
+  behaviortreenetworkutility::registerbehaviortreeaction("fallerDropAction", &fallerdropaction, &fallerdropactionupdate, &fallerdropactionterminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldFallerDrop", &shouldfallerdrop);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("isFallerInCeiling", &isfallerinceiling);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("fallerCeilingDeath", &fallerceilingdeath);
+  animationstatenetwork::registeranimationmocomp("mocomp_drop@faller", &mocompfallerdrop, undefined, undefined);
+  animationstatenetwork::registeranimationmocomp("mocomp_ceiling_death@faller", &mocompceilingdeath, undefined, undefined);
 }
 
 function fallerdropaction(entity, asmstatename) {
@@ -52,14 +52,14 @@ function fallerdropactionterminate(entity, asmstatename) {
 }
 
 function shouldfallerdrop(entity) {
-  if(isdefined(entity.faller_drop) && entity.faller_drop) {
+  if(isDefined(entity.faller_drop) && entity.faller_drop) {
     return true;
   }
   return false;
 }
 
 function isfallerinceiling(entity) {
-  if(isdefined(entity.in_the_ceiling) && entity.in_the_ceiling && (!(isdefined(entity.normal_death) && entity.normal_death))) {
+  if(isDefined(entity.in_the_ceiling) && entity.in_the_ceiling && (!(isDefined(entity.normal_death) && entity.normal_death))) {
     return true;
   }
   return false;
@@ -78,7 +78,7 @@ function private mocompceilingdeath(entity, mocompanim, mocompanimblendouttime, 
 function zombie_faller_delete() {
   level.zombie_total++;
   self zombie_utility::reset_attack_spot();
-  if(isdefined(self.zombie_faller_location)) {
+  if(isDefined(self.zombie_faller_location)) {
     self.zombie_faller_location.is_enabled = 1;
     self.zombie_faller_location = undefined;
   }
@@ -86,10 +86,10 @@ function zombie_faller_delete() {
 }
 
 function faller_script_parameters() {
-  if(isdefined(self.script_parameters)) {
+  if(isDefined(self.script_parameters)) {
     parms = strtok(self.script_parameters, ";");
-    if(isdefined(parms) && parms.size > 0) {
-      for (i = 0; i < parms.size; i++) {
+    if(isDefined(parms) && parms.size > 0) {
+      for(i = 0; i < parms.size; i++) {
         if(parms[i] == "drop_now") {
           self.drop_now = 1;
         }
@@ -109,23 +109,23 @@ function faller_script_parameters() {
 
 function setup_deathfunc(func_name) {
   self endon("death");
-  while (!(isdefined(self.zombie_init_done) && self.zombie_init_done)) {
+  while(!(isDefined(self.zombie_init_done) && self.zombie_init_done)) {
     util::wait_network_frame();
   }
-  if(isdefined(func_name)) {
+  if(isDefined(func_name)) {
     self.deathfunction = func_name;
   } else {
-    if(isdefined(level.custom_faller_death)) {
+    if(isDefined(level.custom_faller_death)) {
       self.deathfunction = level.custom_faller_death;
     } else {
-      self.deathfunction = & zombie_fall_death_func;
+      self.deathfunction = &zombie_fall_death_func;
     }
   }
 }
 
 function do_zombie_fall(spot) {
   self endon("death");
-  if(!(isdefined(level.faller_init) && level.faller_init)) {
+  if(!(isDefined(level.faller_init) && level.faller_init)) {
     level.faller_init = 1;
     faller_anim = self animmappingsearch(istring("anim_faller_emerge"));
     level.faller_emerge_time = getanimlength(faller_anim);
@@ -139,7 +139,7 @@ function do_zombie_fall(spot) {
   self.zombie_faller_location = spot;
   self.zombie_faller_location.is_enabled = 0;
   self.zombie_faller_location faller_script_parameters();
-  if(isdefined(self.zombie_faller_location.emerge_bottom) && self.zombie_faller_location.emerge_bottom || (isdefined(self.zombie_faller_location.emerge_top) && self.zombie_faller_location.emerge_top)) {
+  if(isDefined(self.zombie_faller_location.emerge_bottom) && self.zombie_faller_location.emerge_bottom || (isDefined(self.zombie_faller_location.emerge_top) && self.zombie_faller_location.emerge_top)) {
     self do_zombie_emerge(spot);
     return;
   }
@@ -149,7 +149,7 @@ function do_zombie_fall(spot) {
   self.anchor = spawn("script_origin", self.origin);
   self.anchor.angles = self.angles;
   self linkto(self.anchor);
-  if(!isdefined(spot.angles)) {
+  if(!isDefined(spot.angles)) {
     spot.angles = (0, 0, 0);
   }
   anim_org = spot.origin;
@@ -158,13 +158,13 @@ function do_zombie_fall(spot) {
   self.anchor moveto(anim_org, 0.05);
   self.anchor waittill("movedone");
   target_org = zombie_utility::get_desired_origin();
-  if(isdefined(target_org)) {
+  if(isDefined(target_org)) {
     anim_ang = vectortoangles(target_org - self.origin);
     self.anchor rotateto((0, anim_ang[1], 0), 0.05);
     self.anchor waittill("rotatedone");
   }
   self unlink();
-  if(isdefined(self.anchor)) {
+  if(isDefined(self.anchor)) {
     self.anchor delete();
   }
   self thread zombie_utility::hide_pop();
@@ -184,7 +184,7 @@ function zombie_faller_do_fall() {
   self.zombie_faller_should_drop = 0;
   self thread zombie_fall_wait();
   self thread zombie_faller_watch_all_players();
-  while (!self.zombie_faller_should_drop) {
+  while(!self.zombie_faller_should_drop) {
     if(self zombie_fall_should_attack(self.zombie_faller_location)) {
       if(math::cointoss()) {
         self animscripted("fall_anim", self.origin, self.zombie_faller_location.angles, "ai_zm_dlc5_zombie_ceiling_attack_01");
@@ -226,7 +226,7 @@ function zombie_faller_do_fall() {
   self zombie_faller_enable_location();
   self animscripted("fall_anim", self.origin, spot.angles, "ai_zm_dlc5_zombie_ceiling_dropdown_01");
   wait(level.faller_fall_time);
-  self.deathfunction = & zm_spawner::zombie_death_animscript;
+  self.deathfunction = &zm_spawner::zombie_death_animscript;
   self.normal_death = 1;
   self notify("fall_anim_finished");
   spot notify("stop_zombie_fall_fx");
@@ -246,7 +246,7 @@ function zombie_faller_do_fall() {
 function zombie_fall_loop() {
   self endon("death");
   self setanimstatefromasd("zm_faller_fall_loop");
-  while (true) {
+  while(true) {
     ground_pos = zm_utility::groundpos_ignore_water_new(self.origin);
     if((self.origin[2] - ground_pos[2]) < 20) {
       self notify("faller_on_ground");
@@ -263,15 +263,15 @@ function zombie_land() {
 }
 
 function zombie_faller_always_drop() {
-  if(isdefined(self.zombie_faller_location.drop_now) && self.zombie_faller_location.drop_now) {
+  if(isDefined(self.zombie_faller_location.drop_now) && self.zombie_faller_location.drop_now) {
     return true;
   }
   return false;
 }
 
 function zombie_faller_drop_not_occupied() {
-  if(isdefined(self.zombie_faller_location.drop_not_occupied) && self.zombie_faller_location.drop_not_occupied) {
-    if(isdefined(self.zone_name) && isdefined(level.zones[self.zone_name])) {
+  if(isDefined(self.zombie_faller_location.drop_not_occupied) && self.zombie_faller_location.drop_not_occupied) {
+    if(isDefined(self.zone_name) && isDefined(level.zones[self.zone_name])) {
       return !level.zones[self.zone_name].is_occupied;
     }
   }
@@ -280,7 +280,7 @@ function zombie_faller_drop_not_occupied() {
 
 function zombie_faller_watch_all_players() {
   players = getplayers();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     self thread zombie_faller_watch_player(players[i]);
   }
 }
@@ -298,7 +298,7 @@ function zombie_faller_watch_player(player) {
   closerangesqr = closerange * closerange;
   dirtoplayerenter = (0, 0, 0);
   incloserange = 0;
-  while (true) {
+  while(true) {
     distsqr = distance2dsquared(self.origin, player.origin);
     if(distsqr < rangesqr) {
       if(inrange) {
@@ -339,10 +339,10 @@ function zombie_faller_watch_player(player) {
 function zombie_fall_wait() {
   self endon("falling");
   self endon("death");
-  if(isdefined(self.zone_name)) {
-    if(isdefined(level.zones) && isdefined(level.zones[self.zone_name])) {
+  if(isDefined(self.zone_name)) {
+    if(isDefined(level.zones) && isDefined(level.zones[self.zone_name])) {
       zone = level.zones[self.zone_name];
-      while (true) {
+      while(true) {
         if(!zone.is_enabled || !zone.is_active) {
           if(!self potentially_visible(2250000)) {
             if(self.health != level.zombie_health) {
@@ -370,7 +370,7 @@ function zombie_fall_get_vicitims(spot) {
   players = getplayers();
   checkdist2 = 40;
   checkdist2 = checkdist2 * checkdist2;
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     player = players[i];
     if(player laststand::player_is_in_laststand()) {
       continue;
@@ -396,7 +396,7 @@ function get_fall_anim(spot) {
 }
 
 function zombie_faller_enable_location() {
-  if(isdefined(self.zombie_faller_location)) {
+  if(isDefined(self.zombie_faller_location)) {
     self.zombie_faller_location.is_enabled = 1;
     self.zombie_faller_location = undefined;
   }
@@ -404,7 +404,7 @@ function zombie_faller_enable_location() {
 
 function zombie_faller_death_wait(endon_notify) {
   self endon("falling");
-  if(isdefined(endon_notify)) {
+  if(isDefined(endon_notify)) {
     self endon(endon_notify);
   }
   self waittill("death");
@@ -419,7 +419,7 @@ function zombie_fall_death_func(einflictor, attacker, idamage, smeansofdeath, we
 
 function zombie_fall_death(spot) {
   self endon("fall_anim_finished");
-  while (self.health > 1) {
+  while(self.health > 1) {
     self waittill("damage", amount, attacker, dir, p, type);
   }
   self stopanimscripted();
@@ -432,7 +432,7 @@ function _damage_mod_to_damage_type(type) {
     return type;
   }
   returnstr = toks[1];
-  for (i = 2; i < toks.size; i++) {
+  for(i = 2; i < toks.size; i++) {
     returnstr = returnstr + toks[i];
   }
   returnstr = tolower(returnstr);
@@ -454,9 +454,9 @@ function zombie_fall_fx(spot) {
 function zombie_fall_burst_fx() {
   self endon("stop_zombie_fall_fx");
   self endon("fall_anim_finished");
-  playfx(level._effect["rise_burst"], self.origin + (0, 0, randomintrange(5, 10)));
+  playFX(level._effect["rise_burst"], self.origin + (0, 0, randomintrange(5, 10)));
   wait(0.25);
-  playfx(level._effect["rise_billow"], self.origin + (randomintrange(-10, 10), randomintrange(-10, 10), randomintrange(5, 10)));
+  playFX(level._effect["rise_billow"], self.origin + (randomintrange(-10, 10), randomintrange(-10, 10), randomintrange(5, 10)));
 }
 
 function zombie_fall_dust_fx(zombie) {
@@ -466,8 +466,8 @@ function zombie_fall_dust_fx(zombie) {
   dust_time = 4.5;
   dust_interval = 0.3;
   t = 0;
-  while (t < dust_time) {
-    playfxontag(level._effect["rise_dust"], zombie, dust_tag);
+  while(t < dust_time) {
+    playFXOnTag(level._effect["rise_dust"], zombie, dust_tag);
     wait(dust_interval);
     t = t + dust_interval;
   }
@@ -484,7 +484,7 @@ function handle_fall_death_notetracks(entity) {
 
 function handle_fall_notetracks(entity) {
   victims = zombie_fall_get_vicitims(entity.zombie_faller_location);
-  for (i = 0; i < victims.size; i++) {
+  for(i = 0; i < victims.size; i++) {
     victims[i] dodamage(entity.meleedamage, entity.origin, self, self, "none", "MOD_MELEE");
     entity.zombie_faller_should_drop = 1;
   }
@@ -498,7 +498,7 @@ function faller_death_ragdoll(einflictor, attacker, idamage, smeansofdeath, weap
 
 function in_player_fov(player) {
   playerangles = player getplayerangles();
-  playerforwardvec = anglestoforward(playerangles);
+  playerforwardvec = anglesToForward(playerangles);
   playerunitforwardvec = vectornormalize(playerforwardvec);
   banzaipos = self.origin;
   playerpos = player getorigin();
@@ -518,7 +518,7 @@ function in_player_fov(player) {
 function potentially_visible(how_close = 1000000) {
   potentiallyvisible = 0;
   players = getplayers();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     dist = distancesquared(self.origin, players[i].origin);
     if(dist < how_close) {
       inplayerfov = self in_player_fov(players[i]);
@@ -533,14 +533,14 @@ function potentially_visible(how_close = 1000000) {
 
 function do_zombie_emerge(spot) {
   self endon("death");
-  self thread setup_deathfunc( & faller_death_ragdoll);
+  self thread setup_deathfunc(&faller_death_ragdoll);
   self.no_powerups = 1;
   self.in_the_ceiling = 1;
   anim_org = spot.origin;
   anim_ang = spot.angles;
   self thread zombie_emerge_fx(spot);
   self thread zombie_faller_death_wait("risen");
-  if(isdefined(level.custom_faller_entrance_logic)) {
+  if(isDefined(level.custom_faller_entrance_logic)) {
     self thread[[level.custom_faller_entrance_logic]]();
   }
   self zombie_faller_emerge(spot);
@@ -552,13 +552,13 @@ function do_zombie_emerge(spot) {
 
 function zombie_faller_emerge(spot) {
   self endon("death");
-  if(isdefined(self.zombie_faller_location.emerge_bottom) && self.zombie_faller_location.emerge_bottom) {
+  if(isDefined(self.zombie_faller_location.emerge_bottom) && self.zombie_faller_location.emerge_bottom) {
     self animscripted("fall_anim", self.zombie_faller_location.origin, self.zombie_faller_location.angles, "zombie_riser_elevator_from_floor");
   } else {
     self animscripted("fall_anim", self.zombie_faller_location.origin, self.zombie_faller_location.angles, "zombie_riser_elevator_from_ceiling");
   }
   self zombie_shared::donotetracks("rise_anim");
-  self.deathfunction = & zm_spawner::zombie_death_animscript;
+  self.deathfunction = &zm_spawner::zombie_death_animscript;
   self.in_the_ceiling = 0;
   self.no_powerups = 0;
 }
@@ -578,8 +578,8 @@ function zombie_emerge_dust_fx(zombie) {
   dust_time = 3.5;
   dust_interval = 0.5;
   t = 0;
-  while (t < dust_time) {
-    playfxontag(level._effect["rise_dust"], zombie, dust_tag);
+  while(t < dust_time) {
+    playFXOnTag(level._effect["rise_dust"], zombie, dust_tag);
     wait(dust_interval);
     t = t + dust_interval;
   }

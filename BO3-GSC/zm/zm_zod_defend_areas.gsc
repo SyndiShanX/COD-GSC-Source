@@ -59,12 +59,9 @@ class careadefend {
   var m_n_rumble_radius_sq;
   var m_str_area_defend_in_progress;
 
-
   constructor() {}
 
-
   destructor() {}
-
 
   function function_a5e2032d() {
     var_7591ca03 = zm_zonemgr::get_zone_from_position(m_s_centerpoint.origin);
@@ -88,7 +85,7 @@ class careadefend {
     var_b5a606c0 = [];
     foreach(str_zone_name in level.active_zone_names) {
       if(issubstr(str_zone_name, var_b42fba6b)) {
-        if(!isdefined(var_b5a606c0)) {
+        if(!isDefined(var_b5a606c0)) {
           var_b5a606c0 = [];
         } else if(!isarray(var_b5a606c0)) {
           var_b5a606c0 = array(var_b5a606c0);
@@ -99,7 +96,7 @@ class careadefend {
     a_ai_zombies = getaiteamarray(level.zombie_team);
     a_ai_zombies = arraysort(a_ai_zombies, m_s_centerpoint.origin);
     i = 0;
-    while (i < a_ai_zombies.size) {
+    while(i < a_ai_zombies.size) {
       var_31a4faf3 = 0;
       foreach(var_7da234a9 in var_b5a606c0) {
         if(a_ai_zombies[i] zm_zonemgr::entity_in_zone(var_7da234a9)) {
@@ -115,20 +112,19 @@ class careadefend {
     return a_ai_zombies;
   }
 
-
   function ritual_nuke() {
     level lui::screen_flash(0.2, 0.5, 1, 0.8, "white");
     wait(0.2);
     a_ai_zombies = function_a5e2032d();
     var_6b1085eb = [];
     foreach(ai_zombie in a_ai_zombies) {
-      if(isdefined(ai_zombie.ignore_nuke) && ai_zombie.ignore_nuke) {
+      if(isDefined(ai_zombie.ignore_nuke) && ai_zombie.ignore_nuke) {
         continue;
       }
-      if(isdefined(ai_zombie.marked_for_death) && ai_zombie.marked_for_death) {
+      if(isDefined(ai_zombie.marked_for_death) && ai_zombie.marked_for_death) {
         continue;
       }
-      if(isdefined(ai_zombie.nuke_damage_func)) {
+      if(isDefined(ai_zombie.nuke_damage_func)) {
         ai_zombie thread[[ai_zombie.nuke_damage_func]]();
         continue;
       }
@@ -140,17 +136,17 @@ class careadefend {
       var_6b1085eb[var_6b1085eb.size] = ai_zombie;
     }
     foreach(i, var_f92b3d80 in var_6b1085eb) {
-      if(!isdefined(var_f92b3d80)) {
+      if(!isDefined(var_f92b3d80)) {
         continue;
       }
       if(zm_utility::is_magic_bullet_shield_enabled(var_f92b3d80)) {
         continue;
       }
-      if(i < 5 && (!(isdefined(var_f92b3d80.isdog) && var_f92b3d80.isdog))) {
+      if(i < 5 && (!(isDefined(var_f92b3d80.isdog) && var_f92b3d80.isdog))) {
         var_f92b3d80 thread zombie_death::flame_death_fx();
       }
-      if(!(isdefined(var_f92b3d80.isdog) && var_f92b3d80.isdog)) {
-        if(!(isdefined(var_f92b3d80.no_gib) && var_f92b3d80.no_gib)) {
+      if(!(isDefined(var_f92b3d80.isdog) && var_f92b3d80.isdog)) {
+        if(!(isDefined(var_f92b3d80.no_gib) && var_f92b3d80.no_gib)) {
           var_f92b3d80 zombie_utility::zombie_head_gib();
         }
       }
@@ -165,49 +161,44 @@ class careadefend {
     }
   }
 
-
   function reset_hud(player) {
-    if(isdefined(player) && player.sessionstate === "spectator") {
+    if(isDefined(player) && player.sessionstate === "spectator") {
       return;
     }
-    if(isdefined(player) && isdefined(player.defend_area_luimenu_status)) {
+    if(isDefined(player) && isDefined(player.defend_area_luimenu_status)) {
       progress_menu_status = player getluimenu(m_str_luimenu_progress);
       return_menu_status = player getluimenu(m_str_luimenu_return);
-      if(isdefined(progress_menu_status) || isdefined(return_menu_status)) {
+      if(isDefined(progress_menu_status) || isDefined(return_menu_status)) {
         player closeluimenu(player.defend_area_luimenu_status);
         player.defend_area_luimenu_status = undefined;
       }
     }
   }
 
-
   function defend_failed_hud(player) {
     self reset_hud(player);
-    if(isdefined(player) && player.sessionstate === "spectator") {
+    if(isDefined(player) && player.sessionstate === "spectator") {
       return;
     }
     wait(3);
     self reset_hud(player);
   }
-
 
   function defend_succeeded_hud(player) {
     self reset_hud(player);
-    if(isdefined(player) && isdefined(player.sessionstate) && player.sessionstate == "spectator") {
+    if(isDefined(player) && isDefined(player.sessionstate) && player.sessionstate == "spectator") {
       return;
     }
     wait(3);
     self reset_hud(player);
   }
-
 
   function get_current_progress() {
     return m_n_defend_current_progress / 100;
   }
 
-
   function is_player_in_defend_area(player) {
-    if(isdefined(m_e_defend_volume)) {
+    if(isDefined(m_e_defend_volume)) {
       if(zm_utility::is_player_valid(player, 1, 1) && player istouching(m_e_defend_volume)) {
         return true;
       }
@@ -219,7 +210,6 @@ class careadefend {
     return false;
   }
 
-
   function get_players_in_defend_area() {
     a_players_in_defend_area = [];
     foreach(player in level.activeplayers) {
@@ -230,26 +220,22 @@ class careadefend {
     return a_players_in_defend_area;
   }
 
-
   function get_state() {
     return m_n_state;
   }
-
 
   function get_progress_rate(n_players_in_defend_area, n_players_total) {
     n_current_update_rate = (n_players_in_defend_area / n_players_total) * m_n_defend_progress_per_update_interval;
     return n_current_update_rate;
   }
 
-
   function kill_all_defend_event_zombies() {
     foreach(zombie in m_a_defend_event_zombies) {
-      if(isalive(zombie) && (isdefined(zombie.allowdeath) && zombie.allowdeath)) {
+      if(isalive(zombie) && (isDefined(zombie.allowdeath) && zombie.allowdeath)) {
         zombie kill();
       }
     }
   }
-
 
   function defend_failed() {
     println("");
@@ -259,7 +245,7 @@ class careadefend {
     m_e_spawn_points = [];
     self thread populate_spawn_points();
     foreach(player in m_a_players_involved) {
-        if(!isdefined(player)) {
+        if(!isDefined(player)) {
           continue;
         }
         player thread zm_zod_util::set_rumble_to_player(0);
@@ -270,7 +256,6 @@ class careadefend {
         [m_func_fail]
       ](m_arg1);
   }
-
 
   function defend_succeeded() {
     println("");
@@ -284,7 +269,7 @@ class careadefend {
     zm_unitrigger::unregister_unitrigger(m_t_use);
     m_t_use = undefined;
     foreach(player in m_a_players_involved) {
-        if(!isdefined(player)) {
+        if(!isDefined(player)) {
           continue;
         }
         player thread zm_zod_util::set_rumble_to_player(6);
@@ -298,13 +283,12 @@ class careadefend {
     self notify("area_defend_completed");
   }
 
-
   function get_unused_spawn_point() {
     a_valid_spawn_points = [];
     b_all_points_used = 0;
-    while (!a_valid_spawn_points.size) {
+    while(!a_valid_spawn_points.size) {
       foreach(s_spawn_point in m_e_spawn_points) {
-        if(!isdefined(s_spawn_point.spawned_zombie) || b_all_points_used) {
+        if(!isDefined(s_spawn_point.spawned_zombie) || b_all_points_used) {
           s_spawn_point.spawned_zombie = 0;
         }
         if(!s_spawn_point.spawned_zombie) {
@@ -320,14 +304,13 @@ class careadefend {
     return s_spawn_point;
   }
 
-
   function function_877a7365() {
     self endon("death");
-    while (true) {
+    while(true) {
       var_c7ca004c = [];
       foreach(player in level.activeplayers) {
-        if(zm_utility::is_player_valid(player) && (isdefined(player.is_in_defend_area) && player.is_in_defend_area)) {
-          if(!isdefined(var_c7ca004c)) {
+        if(zm_utility::is_player_valid(player) && (isDefined(player.is_in_defend_area) && player.is_in_defend_area)) {
+          if(!isDefined(var_c7ca004c)) {
             var_c7ca004c = [];
           } else if(!isarray(var_c7ca004c)) {
             var_c7ca004c = array(var_c7ca004c);
@@ -336,7 +319,7 @@ class careadefend {
         }
       }
       e_target_player = array::random(var_c7ca004c);
-      while (isalive(e_target_player) && (!(isdefined(e_target_player.beastmode) && e_target_player.beastmode)) && !e_target_player laststand::player_is_in_laststand()) {
+      while(isalive(e_target_player) && (!(isDefined(e_target_player.beastmode) && e_target_player.beastmode)) && !e_target_player laststand::player_is_in_laststand()) {
         self setgoal(e_target_player);
         self waittill("goal");
       }
@@ -344,16 +327,14 @@ class careadefend {
     }
   }
 
-
   function function_df5ae14e(ai_zombie) {
     ai_zombie waittill("death");
     ai_zombie clientfield::set("keeper_fx", 0);
   }
 
-
   function monitor_defend_event_zombies() {
     m_a_defend_event_zombies = [];
-    while (m_n_state == 2) {
+    while(m_n_state == 2) {
       m_a_defend_event_zombies = array::remove_dead(m_a_defend_event_zombies, 0);
       n_defend_event_zombie_limit = 4;
       if(level.round_number < 4) {
@@ -364,7 +345,7 @@ class careadefend {
       if(m_a_defend_event_zombies.size < n_defend_event_zombie_limit) {
         s_spawn_point = get_unused_spawn_point();
         ai = zombie_utility::spawn_zombie(m_a_e_zombie_spawners[0], "defend_event_zombie", s_spawn_point);
-        if(!isdefined(ai)) {
+        if(!isDefined(ai)) {
           println("");
           continue;
         }
@@ -376,7 +357,6 @@ class careadefend {
       wait(level.zombie_vars["zombie_spawn_delay"]);
     }
   }
-
 
   function function_d9a5609b(n_players_total, n_players_in_defend_area) {
     if(n_players_total == 1) {
@@ -412,7 +392,6 @@ class careadefend {
     return 30;
   }
 
-
   function progress_think() {
     println("");
     m_n_defend_current_progress = 0;
@@ -423,7 +402,7 @@ class careadefend {
     n_players_in_defend_area = a_players_in_defend_area.size;
     m_n_defend_duration = function_d9a5609b(var_db69778c, n_players_in_defend_area);
     m_n_defend_progress_per_update_interval = (100 / m_n_defend_duration) * 0.1;
-    while (m_n_defend_current_progress < 100 && m_n_defend_grace_remaining > 0) {
+    while(m_n_defend_current_progress < 100 && m_n_defend_grace_remaining > 0) {
       a_players_in_defend_area = get_players_in_defend_area();
       n_players_in_defend_area = a_players_in_defend_area.size;
       foreach(player in level.activeplayers) {
@@ -431,7 +410,7 @@ class careadefend {
           continue;
         }
         if(is_player_in_defend_area(player)) {
-          if(!isdefined(player.is_in_defend_area)) {
+          if(!isDefined(player.is_in_defend_area)) {
             player thread zm_zod_util::set_rumble_to_player(5);
             array::add(m_a_players_involved, player, 0);
             player.is_in_defend_area = 1;
@@ -444,7 +423,7 @@ class careadefend {
           continue;
         }
         if(zm_utility::is_player_valid(player, 1, 1)) {
-          if(isdefined(player.is_in_defend_area) && player.is_in_defend_area) {
+          if(isDefined(player.is_in_defend_area) && player.is_in_defend_area) {
             player thread zm_zod_util::set_rumble_to_player(0);
             player.is_in_defend_area = 0;
             self reset_hud(player);
@@ -469,10 +448,9 @@ class careadefend {
     }
   }
 
-
   function usetrigger_think() {
     self endon("area_defend_completed");
-    while (true) {
+    while(true) {
       m_t_use waittill("trigger", e_triggerer);
       if(e_triggerer zm_utility::in_revive_trigger()) {
         continue;
@@ -483,9 +461,7 @@ class careadefend {
       if(m_n_state != 1) {
         continue;
       }
-      if(isdefined(m_func_prereq) && [
-          [m_func_prereq]
-        ](m_arg1) == 0) {
+      if(isDefined(m_func_prereq) && [[m_func_prereq]](m_arg1) == 0) {
         continue;
       }
       m_n_state = 2;
@@ -496,23 +472,21 @@ class careadefend {
       ](m_arg1, m_triggerer);
       self thread progress_think();
       self thread monitor_defend_event_zombies();
-      while (m_n_state != 1) {
+      while(m_n_state != 1) {
         wait(1);
       }
     }
   }
 
-
   function update_usetrigger_hintstring() {
-    if(isdefined(m_t_use)) {
+    if(isDefined(m_t_use)) {
       m_t_use zm_unitrigger::run_visibility_function_for_all_triggers();
     }
   }
 
-
   function function_4e035595(player) {
     self endon("disconnect");
-    if(isdefined(player.var_b999c630) && player.var_b999c630 || !level flag::get("ritual_in_progress")) {
+    if(isDefined(player.var_b999c630) && player.var_b999c630 || !level flag::get("ritual_in_progress")) {
       return;
     }
     player.var_b999c630 = 1;
@@ -524,11 +498,8 @@ class careadefend {
     player.var_b999c630 = 0;
   }
 
-
   function ritual_start_prompt_and_visibility(player) {
-    b_is_visible = [
-      [stub.o_defend_area]
-    ] - > ritual_start_visible_internal(player);
+    b_is_visible = [[stub.o_defend_area]] - > ritual_start_visible_internal(player);
     if(b_is_visible) {
       str_msg = [
         [stub.o_defend_area]
@@ -541,12 +512,11 @@ class careadefend {
     return b_is_visible;
   }
 
-
   function ritual_start_visible_internal(player) {
-    if(isdefined(player.beastmode) && player.beastmode) {
+    if(isDefined(player.beastmode) && player.beastmode) {
       return false;
     }
-    if(isdefined(level.var_522a1f61) && level.var_522a1f61) {
+    if(isDefined(level.var_522a1f61) && level.var_522a1f61) {
       return false;
     }
     if(m_b_started) {
@@ -563,10 +533,9 @@ class careadefend {
     return false;
   }
 
-
   function ritual_start_message_internal(player) {
     if(!m_b_started) {
-      return & "";
+      return &"";
     }
     switch (m_n_state) {
       case 0: {
@@ -576,11 +545,10 @@ class careadefend {
         return m_str_area_defend_available;
       }
       default: {
-        return & "";
+        return &"";
       }
     }
   }
-
 
   function set_availability(b_is_available) {
     if(b_is_available && m_n_state == 0) {
@@ -590,7 +558,6 @@ class careadefend {
     }
     update_usetrigger_hintstring();
   }
-
 
   function start() {
     ritual_start_dims = (110, 110, 128);
@@ -602,20 +569,17 @@ class careadefend {
     self thread usetrigger_think();
   }
 
-
   function set_duration(n_duration) {
     m_n_defend_duration = n_duration;
     m_n_defend_progress_per_update_interval = (100 / m_n_defend_duration) * 0.1;
   }
 
-
   function set_volumes(str_defend_volume, str_rumble_volume) {
     m_e_defend_volume = getent(str_defend_volume, "targetname");
     m_e_rumble_volume = getent(str_rumble_volume, "targetname");
-    assert(isdefined(m_e_defend_volume), "");
-    assert(isdefined(m_e_rumble_volume), "");
+    assert(isDefined(m_e_defend_volume), "");
+    assert(isDefined(m_e_rumble_volume), "");
   }
-
 
   function set_luimenus(str_luimenu_progress, str_luimenu_return, str_luimenu_succeeded, str_luimenu_failed) {
     m_str_luimenu_progress = str_luimenu_progress;
@@ -623,7 +587,6 @@ class careadefend {
     m_str_luimenu_succeeded = str_luimenu_succeeded;
     m_str_luimenu_failed = str_luimenu_failed;
   }
-
 
   function set_external_functions(func_prereq, func_start, func_succeed, func_fail, arg1) {
     m_func_prereq = func_prereq;
@@ -633,21 +596,19 @@ class careadefend {
     m_arg1 = arg1;
   }
 
-
   function set_trigger_visibility_function(func_trigger_visibility) {
     m_func_trigger_visibility = func_trigger_visibility;
   }
 
-
   function populate_spawn_points() {
-    m_a_e_zombie_spawners = getentarray("ritual_zombie_spawner", "targetname");
+    m_a_e_zombie_spawners = getEntArray("ritual_zombie_spawner", "targetname");
     a_s_spawn_points = struct::get_array(m_str_spawn, "targetname");
     foreach(s_spawn_point in a_s_spawn_points) {
       e_deletable_spawn_point = spawn("script_model", s_spawn_point.origin);
-      e_deletable_spawn_point setmodel("tag_origin");
+      e_deletable_spawn_point setModel("tag_origin");
       e_deletable_spawn_point.origin = s_spawn_point.origin;
       e_deletable_spawn_point.angles = s_spawn_point.angles;
-      if(!isdefined(m_e_spawn_points)) {
+      if(!isDefined(m_e_spawn_points)) {
         m_e_spawn_points = [];
       } else if(!isarray(m_e_spawn_points)) {
         m_e_spawn_points = array(m_e_spawn_points);
@@ -655,7 +616,6 @@ class careadefend {
       m_e_spawn_points[m_e_spawn_points.size] = e_deletable_spawn_point;
     }
   }
-
 
   function init(str_centerpoint, str_spawn) {
     m_s_centerpoint = struct::get(str_centerpoint, "targetname");
@@ -669,11 +629,11 @@ class careadefend {
     m_n_defend_radius_sq = m_n_defend_radius * m_n_defend_radius;
     m_n_rumble_radius = m_n_defend_radius;
     m_n_rumble_radius_sq = m_n_rumble_radius * m_n_rumble_radius;
-    m_str_area_defend_unavailable = & "ZM_ZOD_DEFEND_AREA_UNAVAILABLE";
-    m_str_area_defend_available = & "ZM_ZOD_DEFEND_AREA_AVAILABLE";
-    m_str_area_defend_in_progress = & "ZM_ZOD_DEFEND_AREA_IN_PROGRESS";
-    m_func_trigger_visibility = & ritual_start_prompt_and_visibility;
-    m_func_trigger_thread = & usetrigger_think;
+    m_str_area_defend_unavailable = &"ZM_ZOD_DEFEND_AREA_UNAVAILABLE";
+    m_str_area_defend_available = &"ZM_ZOD_DEFEND_AREA_AVAILABLE";
+    m_str_area_defend_in_progress = &"ZM_ZOD_DEFEND_AREA_IN_PROGRESS";
+    m_func_trigger_visibility = &ritual_start_prompt_and_visibility;
+    m_func_trigger_thread = &usetrigger_think;
     populate_spawn_points();
     m_n_state = 0;
     m_b_started = 0;

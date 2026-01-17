@@ -24,7 +24,7 @@ main() {
 weather_changes() {
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     fog_set_changes("cliffhanger_blizzard_med");
 
     wait FOG_TRAMSITION_DELAY;
@@ -592,10 +592,10 @@ define_cliffhanger_fog() {
 }
 
 create_vision_set_fog(var_0) {
-  if(!isdefined(level.vision_set_fog))
+  if(!isDefined(level.vision_set_fog))
     level.vision_set_fog = [];
 
-  var_1 = spawnstruct();
+  var_1 = spawnStruct();
   var_1.name = var_0;
   var_1.skyfogintensity = 0;
   var_1.skyfogminangle = 0;
@@ -613,7 +613,7 @@ create_vision_set_fog(var_0) {
 }
 
 fog_set_changes(var_0) {
-  level.fog_transition_ent = spawnstruct();
+  level.fog_transition_ent = spawnStruct();
   level.fog_transition_ent.fogset = "";
   level.fog_transition_ent.time = 0;
   level.fog_set = [];

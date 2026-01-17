@@ -446,5 +446,4 @@ main() {
   ent.v["angles"] = (344.111, 268.224, -2.13021);
   ent.v["fxid"] = "fx_mp_nuked_hose_spray";
   ent.v["delay"] = -15;
-
 }

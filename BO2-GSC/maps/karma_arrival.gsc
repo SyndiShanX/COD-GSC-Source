@@ -31,8 +31,7 @@ init_spawn_funcs() {
   add_spawn_function_veh("player_vtol", ::player_vtol_start);
 }
 
-skipto_arrival() {
-}
+skipto_arrival() {}
 
 arrival() {
   iprintln("Arrival");
@@ -146,7 +145,7 @@ run_landing_squad_lighting_scene() {
 }
 
 init_ambient_boats() {
-  a_boats = getentarray("tiny_boat", "targetname");
+  a_boats = getEntArray("tiny_boat", "targetname");
 
   for(i = 0; i < 20; i++) {
     n_index = randomint(a_boats.size);
@@ -156,10 +155,10 @@ init_ambient_boats() {
 
   flag_wait("trig_player_blocker_2");
 
-  foreach(e_boat in getentarray("tiny_boat", "targetname"))
+  foreach(e_boat in getEntArray("tiny_boat", "targetname"))
   e_boat delete();
 
-  foreach(e_boat in getentarray("karma_life_boat", "targetname"))
+  foreach(e_boat in getEntArray("karma_life_boat", "targetname"))
   e_boat delete();
 }
 
@@ -192,7 +191,7 @@ setup_vtol(str_vtol_name, str_wait_flag) {
 
   foreach(vh_vtol in a_vh_vtols) {
     if(vh_vtol.vehicletype == "heli_vtol")
-      playfxontag(level._effect["flight_lights_3p"], vh_vtol, "tag_origin");
+      playFXOnTag(level._effect["flight_lights_3p"], vh_vtol, "tag_origin");
 
     vh_vtol add_cleanup_ent("cleanup_tower");
 
@@ -213,14 +212,14 @@ setup_vtol(str_vtol_name, str_wait_flag) {
 }
 
 setup_asds() {
-  foreach(m_asd in getentarray("arrival_metalstorm", "targetname")) {
+  foreach(m_asd in getEntArray("arrival_metalstorm", "targetname")) {
     m_asd thread play_fx("eye_light_friendly", undefined, undefined, "metalstorm_off", 1, "tag_scanner");
     m_asd thread landing_pad_asd_idle_think();
   }
 }
 
 setup_tarmac_fx() {
-  a_m_hazard_lights = getentarray("hazard_light", "targetname");
+  a_m_hazard_lights = getEntArray("hazard_light", "targetname");
 
   foreach(m_light in a_m_hazard_lights) {
     m_light thread delay_fx();
@@ -232,11 +231,11 @@ delay_fx() {
   if(isDefined(self.script_delay))
     wait(self.script_delay);
 
-  playfxontag(level._effect["light_caution_orange_flash"], self, "tag_origin");
+  playFXOnTag(level._effect["light_caution_orange_flash"], self, "tag_origin");
 }
 
 setup_cagelight_fx(light) {
-  a_m_cagelights = getentarray(light, "targetname");
+  a_m_cagelights = getEntArray(light, "targetname");
 
   foreach(m_light in a_m_cagelights) {
     m_light thread delay_cagelight_fx();
@@ -248,7 +247,7 @@ delay_cagelight_fx() {
   if(isDefined(self.script_delay))
     wait(self.script_delay);
 
-  playfxontag(level._effect["light_caution_red_flash"], self, "tag_origin");
+  playFXOnTag(level._effect["light_caution_red_flash"], self, "tag_origin");
 }
 
 vtol_fly(str_vtol_name, str_wait_flag) {
@@ -263,8 +262,8 @@ vtol_fly(str_vtol_name, str_wait_flag) {
 
   switch (self.vehicletype) {
     case "heli_vtol":
-      playfxontag(level._effect["vtol_exhaust"], self, "tag_origin");
-      self playsound("evt_vtol_takeoff");
+      playFXOnTag(level._effect["vtol_exhaust"], self, "tag_origin");
+      self playSound("evt_vtol_takeoff");
       break;
     case "heli_hip":
       break;

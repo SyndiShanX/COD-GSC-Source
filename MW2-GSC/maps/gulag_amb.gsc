@@ -32,5 +32,4 @@ main() {
   //	ambientEvent( "gulag_exit", "amb_rock_rubble", 				1.2 );
   //	ambientEvent( "gulag_exit", "amb_ceiling_debris", 	1 );
   ambientEvent("gulag_exit", "elm_quake_sub_rumble", 1);
-
 }

@@ -12,14 +12,14 @@
 CONST_MPHCONVERSION = 17.6;
 
 main() {
-  assert(isdefined(self.ridingvehicle));
+  assert(isDefined(self.ridingvehicle));
 
   self.current_event = "none";
   self.shoot_while_driving_thread = undefined;
 
   self snowmobile_geton();
 
-  if(isdefined(self.drivingvehicle))
+  if(isDefined(self.drivingvehicle))
     main_driver();
   else
     main_passenger();
@@ -44,7 +44,6 @@ snowmobile_getoff() {
   self.a.specialShootBehavior = undefined;
   self.disableBulletWhizbyReaction = undefined;
 }
-
 
 main_driver() {
   driver_shooting = self.ridingvehicle.driver_shooting || self.ridingvehicle.riders.size == 1;
@@ -101,7 +100,7 @@ snowmobile_loop_driver() {
   self setanimknob(animarray(current_anim), 1, 0);
   self setanimtime(animarray(current_anim), 0.5);
 
-  for (;;) {
+  for(;;) {
     if(self.ridingvehicle.steering_enable) {
       steering = 0.5 * (1 + maps\_vehicle::update_steering(self.ridingvehicle));
 
@@ -139,7 +138,7 @@ snowmobile_loop_passenger() {
   self setanimknoball(animarray("hide"), % body, 1, 0);
   self setanimknob(animarray("drive"), 1, 0);
 
-  for (;;) {
+  for(;;) {
     steering = maps\_vehicle::update_steering(self.ridingvehicle);
     self setanimlimited( % sm_lean, abs(steering), 0.05);
     if(steering >= 0) {
@@ -162,7 +161,7 @@ snowmobile_loop_driver_shooting() {
   self setanimknoball( % sm_aiming, % body, 1, 0);
   self setanimknob(animarray("idle"), 1, 0);
 
-  for (;;) {
+  for(;;) {
     if(self.current_event != "none") {
       self waittill("snowmobile_event_finished");
       continue;
@@ -208,15 +207,15 @@ snowmobile_loop_passenger_shooting() {
   self setanimknoball( % sm_aiming, % body, 1, 0);
   self setanimknob(animarray("idle"), 1, 0);
 
-  for (;;) {
+  for(;;) {
     if(self.current_event != "none") {
       self waittill("snowmobile_event_finished");
       continue;
     }
 
-    if(snowmobile_reload())
+    if(snowmobile_reload()) {
       continue;
-
+    }
     steering = maps\_vehicle::update_steering(self.ridingvehicle);
     center_steering = 1 - abs(steering);
     left_steering = max(0, 0 - steering);
@@ -270,7 +269,7 @@ snowmobile_handle_events(rider) {
 
   snowmobile = self.ridingvehicle;
 
-  for (;;) {
+  for(;;) {
     if(snowmobile.event["jump"][rider]) {
       snowmobile.event["jump"][rider] = false;
       self notify("snowmobile_event_occurred");
@@ -316,7 +315,7 @@ snowmobile_start_shooting() {
 
   self setAnim( % sm_add_fire, 1, 0.2);
 
-  if(isdefined(self.shoot_while_driving_thread))
+  if(isDefined(self.shoot_while_driving_thread))
     return;
   self.shoot_while_driving_thread = true;
 
@@ -354,7 +353,7 @@ snowmobile_decide_shoot_internal() {
 }
 
 snowmobileShootBehavior() {
-  if(!isdefined(self.enemy)) {
+  if(!isDefined(self.enemy)) {
     self.shootent = undefined;
     self.shootpos = undefined;
     self.shootstyle = "none";
@@ -372,14 +371,14 @@ snowmobileShootBehavior() {
   else
     self.shootstyle = "single";
 
-  if(isdefined(self.enemy.vehicle)) {
+  if(isDefined(self.enemy.vehicle)) {
     shoot_ahead_speed_multiplier = 0.5;
     //shoot_ahead_random_spread = 50;
 
     vehicle = self.shootent.vehicle;
     snowmobile = self.ridingvehicle;
     delta = snowmobile.origin - vehicle.origin;
-    forward = anglestoforward(vehicle.angles);
+    forward = anglesToForward(vehicle.angles);
     right = anglestoright(vehicle.angles);
     dot = vectordot(delta, forward);
     if(dot < 0) {
@@ -415,7 +414,7 @@ snowmobile_shoot() {
   self notify("doing_shootWhileDriving");
   self endon("doing_shootWhileDriving");
 
-  for (;;) {
+  for(;;) {
     if(!self.bulletsInClip) {
       wait 0.5;
       continue;
@@ -467,7 +466,7 @@ snowmobile_reload_internal() {
   self clearAnim( % sm_reload, 0.1);
   self setanim( % sm_aiming, 1, 0.1);
 
-  if(isdefined(self.gun_up_for_reload)) {
+  if(isDefined(self.gun_up_for_reload)) {
     self.gun_up_for_reload = undefined;
     DoNoteTracks("gun_up", ::snowmobile_waitfor_end);
     self clearAnim(animarray("gun_up"), 0);
@@ -493,13 +492,11 @@ snowmobile_trackshootentorpos_driver() {
   self endon("killanimscript");
   self endon("stop tracking");
 
-  /#
-  assert(!isdefined(self.trackLoopThread));
+  assert(!isDefined(self.trackLoopThread));
   self.trackLoopThread = thisthread;
   self.trackLoopThreadType = "snowmobile_trackshootentorpos_driver";
-  # /
 
-    aimblendtime = .05;
+  aimblendtime = .05;
 
   maxyawdeltachange = 8; // max change in yaw in 1 frame
   prevyawdelta = 0;
@@ -507,21 +504,21 @@ snowmobile_trackshootentorpos_driver() {
 
   firstframe = true;
 
-  for (;;) {
+  for(;;) {
     incranimaimweight();
 
-    selfshootatpos = (self.origin[0], self.origin[1], self geteye()[2]);
+    selfshootatpos = (self.origin[0], self.origin[1], self getEye()[2]);
 
     shootpos = self.shootpos;
-    if(isdefined(self.shootent))
+    if(isDefined(self.shootent))
       shootpos = self.shootent getshootatpos();
 
-    if(!isdefined(shootpos)) {
-      assert(!isdefined(self.shootent));
+    if(!isDefined(shootpos)) {
+      assert(!isDefined(self.shootent));
 
       yawdelta = 0;
       likelyenemydir = self getanglestolikelyenemypath();
-      if(isdefined(likelyenemydir)) {
+      if(isDefined(likelyenemydir)) {
         yawdelta = angleclamp180(self.angles[1] - likelyenemydir[1]);
       }
     } else {
@@ -562,13 +559,11 @@ snowmobile_trackshootentorpos_passenger() {
   self endon("killanimscript");
   self endon("stop tracking");
 
-  /#
-  assert(!isdefined(self.trackLoopThread));
+  assert(!isDefined(self.trackLoopThread));
   self.trackLoopThread = thisthread;
   self.trackLoopThreadType = "snowmobile_trackshootentorpos_passenger";
-  # /
 
-    aimblendtime = .05;
+  aimblendtime = .05;
 
   maxyawdeltachange_default = 5; // max change in yaw in 1 frame
   maxyawdeltachange_fast = 20;
@@ -581,21 +576,21 @@ snowmobile_trackshootentorpos_passenger() {
 
   firstframe = true;
 
-  for (;;) {
+  for(;;) {
     incranimaimweight();
 
-    selfshootatpos = (self.origin[0], self.origin[1], self geteye()[2]);
+    selfshootatpos = (self.origin[0], self.origin[1], self getEye()[2]);
 
     shootpos = self.shootpos;
-    if(isdefined(self.shootent))
+    if(isDefined(self.shootent))
       shootpos = self.shootent getshootatpos();
 
-    if(!isdefined(shootpos)) {
-      assert(!isdefined(self.shootent));
+    if(!isDefined(shootpos)) {
+      assert(!isDefined(self.shootent));
 
       yawdelta = 0;
       likelyenemydir = self getanglestolikelyenemypath();
-      if(isdefined(likelyenemydir)) {
+      if(isDefined(likelyenemydir)) {
         yawdelta = angleclamp180(self.angles[1] - likelyenemydir[1]);
       }
     } else {
@@ -610,7 +605,7 @@ snowmobile_trackshootentorpos_passenger() {
 
     assert(self.diraimlimit == 1 || self.diraimlimit == -1);
 
-    if(isdefined(self.stop_aiming_for_reload) || (yawdelta > 0 && (yawdelta - self.rightaimlimit) * self.diraimlimit > 0) || (yawdelta < 0 && (yawdelta - self.leftaimlimit) * self.diraimlimit < 0))
+    if(isDefined(self.stop_aiming_for_reload) || (yawdelta > 0 && (yawdelta - self.rightaimlimit) * self.diraimlimit > 0) || (yawdelta < 0 && (yawdelta - self.leftaimlimit) * self.diraimlimit < 0))
       yawdelta = 0;
 
     if(firstframe) {
@@ -624,7 +619,7 @@ snowmobile_trackshootentorpos_passenger() {
       yawdeltachange = yawdelta - prevyawdelta;
 
       maxyawdeltachange = (maxyawdeltachange_fast - maxyawdeltachange_default) * abs(yawdeltachange) / 180 + maxyawdeltachange_default;
-      if(isdefined(self.stop_aiming_for_reload)) {
+      if(isDefined(self.stop_aiming_for_reload)) {
         maxyawdeltachange = maxyawdeltachange_reload;
         if(abs(prevyawdelta) < 45)
           self notify("start_blending_reload");
@@ -656,19 +651,19 @@ snowmobile_get_death_anim(deathAnims, deathAnimDirs, goalDir) {
   bestDeathAnim = undefined;
   secondBestDeathAnim = undefined;
   bestDeathAnimDiff = 0;
-  for (i = 0; i < deathAnims.size; i++) {
+  for(i = 0; i < deathAnims.size; i++) {
     diff = AbsAngleClamp180(goalDir - deathAnimDirs[i]);
-    if(!isdefined(bestDeathAnim) || diff < bestDeathAnimDiff) {
+    if(!isDefined(bestDeathAnim) || diff < bestDeathAnimDiff) {
       secondBestDeathAnim = bestDeathAnim;
 
       bestDeathAnim = deathAnims[i];
       bestDeathAnimDiff = diff;
-    } else if(!isdefined(secondBestDeathAnim)) {
+    } else if(!isDefined(secondBestDeathAnim)) {
       secondBestDeathAnim = deathAnims[i];
     }
   }
-  assert(isdefined(bestDeathAnim));
-  assert(isdefined(secondBestDeathAnim));
+  assert(isDefined(bestDeathAnim));
+  assert(isDefined(secondBestDeathAnim));
 
   deathAnim = bestDeathAnim;
   if(isDefined(anim.prevSnowmobileDeath) && deathAnim == anim.prevSnowmobileDeath && gettime() - anim.prevSnowmobileDeathTime < 500)
@@ -681,7 +676,7 @@ snowmobile_get_death_anim(deathAnims, deathAnimDirs, goalDir) {
 
 snowmobile_death_launchslide() {
   snowmobile = self.ridingvehicle;
-  assert(isdefined(snowmobile));
+  assert(isDefined(snowmobile));
 
   velocity = snowmobile.prevFrameVelocity;
   velocity = (velocity[0], velocity[1], randomfloatrange(200, 400)) * .75;
@@ -716,7 +711,7 @@ snowmobile_normal_death() {
 
 snowmobile_collide_death() {
   snowmobile = self.ridingvehicle;
-  if(!isdefined(snowmobile))
+  if(!isDefined(snowmobile))
     return snowmobile_normal_death();
 
   velocity = snowmobile.prevFrameVelocity;
@@ -745,13 +740,13 @@ snowmobile_collide_death() {
 
 deleteShortly() {
   prevorg = self.origin;
-  for (i = 0; i < 60; i++) {
+  for(i = 0; i < 60; i++) {
     wait .05;
     line(self.origin, prevorg);
     prevorg = self.origin;
   }
   wait 3;
-  if(isdefined(self))
+  if(isDefined(self))
     self delete();
 }
 

@@ -53,5 +53,4 @@ precache() {
   character\character_civilian_worker_a::precache();
   character\character_civilian_worker_b::precache();
   character\character_civilian_worker_c::precache();
-
 }

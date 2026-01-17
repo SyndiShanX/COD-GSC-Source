@@ -260,9 +260,9 @@ intel_feedback(var_0) {
     var_7 = 0;
 
     if(var_0 == var_5 && var_5 getplayerintelisfound(self.num))
-      var_6.label = & "SCRIPT_RORKEFILE_PREV_FOUND";
+      var_6.label = &"SCRIPT_RORKEFILE_PREV_FOUND";
     else {
-      var_6.label = & "SCRIPT_INTELLIGENCE_OF_EIGHTEEN";
+      var_6.label = &"SCRIPT_INTELLIGENCE_OF_EIGHTEEN";
       var_5 give_point();
       var_7 = var_5 getlocalplayerprofiledata("cheatPoints");
       var_6 setvalue(var_7);

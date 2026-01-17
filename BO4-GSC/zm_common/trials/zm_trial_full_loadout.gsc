@@ -7,7 +7,6 @@
 #include scripts\zm_common\zm_loadout;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
-
 #namespace zm_trial_full_loadout;
 
 autoexec __init__system__() {
@@ -22,13 +21,13 @@ __init__() {
   zm_trial::register_challenge(#"full_loadout", &on_begin, &on_end);
 }
 
-private on_begin() {
+on_begin() {
   foreach(player in getplayers()) {
     player thread monitor_loadout();
   }
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   if(!round_reset) {
     var_696c3b4 = [];
 
@@ -55,9 +54,9 @@ private on_end(round_reset) {
   }
 }
 
-private monitor_loadout() {
+monitor_loadout() {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656", #"end_game");
+  level endon(#"hash_7646638df88a3656", # "end_game");
   self.var_53531c80 = 0;
   self zm_trial_util::function_63060af4(0);
 

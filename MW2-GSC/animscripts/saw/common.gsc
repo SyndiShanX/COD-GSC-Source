@@ -6,15 +6,15 @@
 main(turret) {
   self endon("killanimscript"); // code
 
-  assert(isdefined(turret));
+  assert(isDefined(turret));
 
   animscripts\utility::initialize("saw");
 
   // when we ran our postscriptfunc we may have decided to stop using our turret,
   // in which case it's gone now
-  if(!isdefined(turret))
+  if(!isDefined(turret)) {
     return;
-
+  }
   self.a.special = "saw";
 
   if(isDefined(turret.script_delay_min))
@@ -66,7 +66,7 @@ main(turret) {
   turret setAnimKnobLimitedRestart(turret.additiveTurretFire);
 
   turret endon("death");
-  for (;;) {
+  for(;;) {
     if(turret.doFiring) {
       thread DoShoot(turret);
 
@@ -94,8 +94,8 @@ fireController(turret) {
 
   fovdot = cos(15);
 
-  for (;;) {
-    while (isDefined(self.enemy)) {
+  for(;;) {
+    while(isDefined(self.enemy)) {
       enemypos = self.enemy.origin;
       //if( isSentient( enemypos ) )
       //	enemypos += (0,0,32);
@@ -124,9 +124,9 @@ fireController(turret) {
 }
 
 turretTimer(duration, turret) {
-  if(duration <= 0)
+  if(duration <= 0) {
     return;
-
+  }
   self endon("killanimscript"); // code
   turret endon("turretstatechange"); // code
 
@@ -139,8 +139,8 @@ stopUsingTurretWhenNodeLost() {
 
   // sometimes someone else will come and steal our node. when that happens,
   // we should leave so we don't try to use the same MG at once.
-  while (1) {
-    if(!isdefined(self.node) || distancesquared(self.origin, self.node.origin) > 64 * 64)
+  while(1) {
+    if(!isDefined(self.node) || distancesquared(self.origin, self.node.origin) > 64 * 64)
       self stopUseTurret();
     wait .25;
   }
@@ -148,7 +148,7 @@ stopUsingTurretWhenNodeLost() {
 
 postScriptFunc(animscript) {
   if(animscript == "pain") {
-    if(isdefined(self.node) && distancesquared(self.origin, self.node.origin) < 64 * 64) {
+    if(isDefined(self.node) && distancesquared(self.origin, self.node.origin) < 64 * 64) {
       self.a.usingTurret hide();
       self animscripts\shared::placeWeaponOn(self.weapon, "right");
       self.a.postScriptFunc = ::postPainFunc;
@@ -176,14 +176,14 @@ postPainFunc(animscript) {
   assert(isDefined(self.a.usingTurret));
   assert(self.a.usingTurret.aiOwner == self);
 
-  if(!isdefined(self.node) || distancesquared(self.origin, self.node.origin) > 64 * 64) {
+  if(!isDefined(self.node) || distancesquared(self.origin, self.node.origin) > 64 * 64) {
     self stopUseTurret();
 
     self.a.usingTurret delete();
     self.a.usingTurret = undefined;
 
     // we may have gone into long death, in which case our weapon is gone
-    if(isdefined(self.weapon) && self.weapon != "none") {
+    if(isDefined(self.weapon) && self.weapon != "none") {
       self animscripts\shared::placeWeaponOn(self.weapon, "right");
     }
   } else if(animscript != "saw") {
@@ -197,7 +197,7 @@ preplacedPostScriptFunc(animscript) {
 
 within_fov(start_origin, start_angles, end_origin, fov) {
   normal = vectorNormalize(end_origin - start_origin);
-  forward = anglestoforward(start_angles);
+  forward = anglesToForward(start_angles);
   dot = vectorDot(forward, normal);
 
   return dot >= fov;
@@ -230,7 +230,7 @@ TurretDoShoot(turret) {
   self endon("killanimscript");
   turret endon("turretstatechange"); // code or script
 
-  for (;;) {
+  for(;;) {
     turret ShootTurret();
     wait 0.1;
   }

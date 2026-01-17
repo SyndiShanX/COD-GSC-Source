@@ -17,14 +17,14 @@
 #namespace zm_bgb_unbearable;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_unbearable", & __init__, undefined, "bgb");
+  system::register("zm_bgb_unbearable", &__init__, undefined, "bgb");
 }
 
 function __init__() {
-  if(!(isdefined(level.bgb_in_use) && level.bgb_in_use)) {
+  if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
-  bgb::register("zm_bgb_unbearable", "event", & event, undefined, undefined, undefined);
+  bgb::register("zm_bgb_unbearable", "event", &event, undefined, undefined, undefined);
   clientfield::register("zbarrier", "zm_bgb_unbearable", 1, 1, "counter");
 }
 
@@ -42,7 +42,7 @@ function function_7a5dc39b(player) {
   self.zbarrier clientfield::increment("zm_bgb_unbearable");
   self.no_fly_away = 1;
   self.zbarrier notify("box_hacked_respin");
-  self.zbarrier playsound("zmb_bgb_powerup_respin");
+  self.zbarrier playSound("zmb_bgb_powerup_respin");
   self thread zm_unitrigger::unregister_unitrigger(self.unitrigger_stub);
   zm_utility::play_sound_at_pos("open_chest", self.zbarrier.origin);
   zm_utility::play_sound_at_pos("music_chest", self.zbarrier.origin);
@@ -52,7 +52,7 @@ function function_7a5dc39b(player) {
   if(!level flag::get("moving_chest_now")) {
     self.grab_weapon_hint = 1;
     self.grab_weapon = self.zbarrier.weapon;
-    self thread zm_unitrigger::register_static_unitrigger(self.unitrigger_stub, & zm_magicbox::magicbox_unitrigger_think);
+    self thread zm_unitrigger::register_static_unitrigger(self.unitrigger_stub, &zm_magicbox::magicbox_unitrigger_think);
     self thread zm_magicbox::treasure_chest_timeout();
   }
 }
@@ -61,7 +61,7 @@ function function_a612a2b3() {
   v_origin = self.weapon_model.origin;
   self.weapon_model delete();
   self.weapon_model = util::spawn_model(level.chest_joker_model, v_origin, self.angles + vectorscale((0, 1, 0), 180));
-  self.weapon_model playsound("zmb_bgb_unbearable_activate");
+  self.weapon_model playSound("zmb_bgb_unbearable_activate");
   wait(0.35);
   self.weapon_model moveto(self.origin, 1, 0.5);
   self.weapon_model waittill("movedone");

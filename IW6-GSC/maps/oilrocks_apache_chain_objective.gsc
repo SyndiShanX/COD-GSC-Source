@@ -5,7 +5,7 @@
 
 objectives(var_0, var_1, var_2, var_3) {
   if(!isDefined(var_3))
-    var_3 = & "OILROCKS_OBJ_APACHE_ANTIAIR";
+    var_3 = &"OILROCKS_OBJ_APACHE_ANTIAIR";
 
   var_4 = maps\_utility::obj(var_0);
   objective_add(var_4, "current", var_3);

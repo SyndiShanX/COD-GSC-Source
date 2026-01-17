@@ -17,8 +17,8 @@ init() {
 }
 
 clearirtarget() {
-  if(!isdefined(self.stinger))
-    self.stinger = spawnstruct();
+  if(!isDefined(self.stinger))
+    self.stinger = spawnStruct();
 
   self.stinger.stingerlockstarttime = 0;
   self.stinger.stingerlockstarted = 0;
@@ -37,7 +37,7 @@ clearirtarget() {
 }
 
 stingerfirednotify() {
-  for (;;) {
+  for(;;) {
     self waittill("weapon_fired");
     var_0 = self getcurrentweapon();
 
@@ -51,13 +51,13 @@ stingerfirednotify() {
 stingertoggleloop() {
   self endon("death");
 
-  for (;;) {
-    while (!playerstingerads())
+  for(;;) {
+    while(!playerstingerads())
       wait 0.05;
 
     thread stingerirtloop();
 
-    while (playerstingerads())
+    while(playerstingerads())
       wait 0.05;
 
     self notify("stinger_IRT_off");
@@ -70,7 +70,7 @@ stingerirtloop() {
   self endon("stinger_IRT_off");
   var_0 = 2000;
 
-  for (;;) {
+  for(;;) {
     wait 0.05;
 
     if(self.stinger.stingerlockfinalized) {
@@ -106,7 +106,7 @@ stingerirtloop() {
 
     var_2 = getbeststingertarget();
 
-    if(!isdefined(var_2)) {
+    if(!isDefined(var_2)) {
       continue;
     }
     self.stinger.stingertarget = var_2;
@@ -120,7 +120,7 @@ getbeststingertarget() {
   var_0 = target_getarray();
   var_1 = [];
 
-  for (var_2 = 0; var_2 < var_0.size; var_2++) {
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
     if(insidestingerreticlenolock(var_0[var_2]))
       var_1[var_1.size] = var_0[var_2];
   }
@@ -144,7 +144,7 @@ insidestingerreticlelocked(var_0) {
 }
 
 isstillvalidtarget(var_0) {
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     return 0;
 
   if(!target_istarget(var_0))
@@ -187,26 +187,22 @@ setnoclearance() {
     var_6 = 0;
 
   var_7 = self getplayerangles();
-  var_8 = anglestoforward(var_7);
+  var_8 = anglesToForward(var_7);
   var_9 = anglestoright(var_7);
   var_10 = anglestoup(var_7);
   var_11 = self.origin + (0, 0, var_0) + var_9 * var_1;
   var_12 = 0;
 
-  for (var_13 = 0; var_13 < var_5.size; var_13++) {
+  for(var_13 = 0; var_13 < var_5.size; var_13++) {
     var_14 = var_11 + var_8 * var_2 + var_10 * var_5[var_13][2] + var_9 * var_5[var_13][0];
-    var_15 = bullettrace(var_11, var_14, 0, undefined);
+    var_15 = bulletTrace(var_11, var_14, 0, undefined);
 
     if(var_15["fraction"] < 1) {
       var_12 = 1;
 
-      if(var_6) {
-
-      } else
+      if(var_6) {} else
         break;
-    } else if(var_6) {
-
-    }
+    } else if(var_6) {}
   }
 
   self weaponlocknoclearance(var_12);
@@ -215,7 +211,7 @@ setnoclearance() {
 settargettooclose(var_0) {
   var_1 = 1000;
 
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     return 0;
 
   var_2 = distance2d(self.origin, var_0.origin);
@@ -233,7 +229,7 @@ looplocalseeksound(var_0, var_1) {
   self endon("stop_lockon_sound");
   self endon("death");
 
-  for (;;) {
+  for(;;) {
     self playlocalsound(var_0);
     self playrumbleonentity("stinger_lock_rumble");
     wait(var_1);
@@ -244,12 +240,12 @@ looplocallocksound(var_0, var_1) {
   self endon("stop_locked_sound");
   self endon("death");
 
-  if(isdefined(self.stinger.stingerlocksound)) {
+  if(isDefined(self.stinger.stingerlocksound)) {
     return;
   }
   self.stinger.stingerlocksound = 1;
 
-  for (;;) {
+  for(;;) {
     self playlocalsound(var_0);
     self playrumbleonentity("stinger_lock_rumble");
     wait(var_1 / 3);

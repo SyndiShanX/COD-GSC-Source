@@ -63,7 +63,7 @@ oxygen_mask_crack() {
 helmet_crack_sound() {
   while(true) {
     level waittill("h_crk");
-    playsound(0, "veh_jetwing_helmet_crack");
+    playSound(0, "veh_jetwing_helmet_crack");
   }
 }
 
@@ -224,7 +224,7 @@ lerp_fov_overtime(time, dest) {
 }
 
 screen_flash() {
-  playsound(0, "evt_smashcut_flash", (0, 0, 0));
+  playSound(0, "evt_smashcut_flash", (0, 0, 0));
   screen_flash_visionset();
 }
 

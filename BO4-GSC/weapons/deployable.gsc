@@ -8,7 +8,6 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\oob;
 #include scripts\core_common\system_shared;
-
 #namespace deployable;
 
 autoexec __init__system__() {
@@ -28,7 +27,6 @@ __init__() {
 
   level.var_160dcfef.var_193db709 = [];
   setdvar(#"hash_8d4e58d73e3f876", 0);
-
 }
 
 register_deployable(weapon, var_c0064c29, var_94b4fa08 = undefined, placehintstr = undefined, var_a39cb3db = undefined, var_fe12c0d9 = undefined) {
@@ -64,10 +62,10 @@ function_84fa8d39(weapon) {
   println("<dev string:x40>");
 }
 
-  function function_cf538621(weapon) {
-    println("<dev string:x4f>");
-    self clientfield::set_to_player("gameplay_allows_deploy", 1);
-  }
+function function_cf538621(weapon) {
+  println("<dev string:x4f>");
+  self clientfield::set_to_player("gameplay_allows_deploy", 1);
+}
 
 function_d60e5a06(center, radius) {
   var_5795c216 = spawnStruct();
@@ -166,7 +164,7 @@ function_b3d993e9(deployable_weapon, sethintstring = 0) {
   return player.var_7a3f3edf;
 }
 
-private function_ab25be55(weapon, sethintstring) {
+function_ab25be55(weapon, sethintstring) {
   if(self isplayerswimming() && !(isDefined(weapon.canuseunderwater) ? weapon.canuseunderwater : 0)) {
     self sethintstring(#"hash_37605398dce96965");
     return false;
@@ -179,7 +177,7 @@ private function_ab25be55(weapon, sethintstring) {
   return true;
 }
 
-private function_831707e8(player, deployable_weapon) {
+function_831707e8(player, deployable_weapon) {
   if(!(isDefined(deployable_weapon.var_dbbd4cec) && deployable_weapon.var_dbbd4cec)) {
     return false;
   }
@@ -206,8 +204,8 @@ private function_831707e8(player, deployable_weapon) {
 
   traceresults = bulletTrace(player.origin + (0, 0, 10), player.origin + (0, 0, -10), 0, player);
 
-  if(isDefined(traceresults[#"entity"])) {
-    entity = traceresults[#"entity"];
+  if(isDefined(traceresults[# "entity"])) {
+    entity = traceresults[# "entity"];
 
     if(!function_db9eb027(entity)) {
       return false;
@@ -217,7 +215,7 @@ private function_831707e8(player, deployable_weapon) {
   return true;
 }
 
-private function_867664f6(player) {
+function_867664f6(player) {
   var_8a074131 = worldentnumber();
   groundent = player getgroundent();
 
@@ -228,7 +226,7 @@ private function_867664f6(player) {
   return var_8a074131 == groundent getentitynumber();
 }
 
-private function_27476e09(deployable_weapon, sethintstring = 0) {
+function_27476e09(deployable_weapon, sethintstring = 0) {
   var_ac12dd4b = level._deployable_weapons[deployable_weapon.statindex].var_1463c9a8;
 
   if(!isDefined(var_ac12dd4b)) {
@@ -272,7 +270,7 @@ private function_27476e09(deployable_weapon, sethintstring = 0) {
   return results;
 }
 
-private function_d6ac81c7(deployable_weapon, player, origin, angles) {
+function_d6ac81c7(deployable_weapon, player, origin, angles) {
   var_9f2c21ea = level._deployable_weapons[deployable_weapon.statindex].var_9f2c21ea;
 
   if(!isDefined(var_9f2c21ea)) {
@@ -282,7 +280,7 @@ private function_d6ac81c7(deployable_weapon, player, origin, angles) {
   return [[var_9f2c21ea]](origin, angles, player);
 }
 
-private function_6654310c(weapon) {
+function_6654310c(weapon) {
   player = self;
 
   if(level.time == player.var_3abd9b54) {
@@ -317,7 +315,7 @@ on_player_spawned() {
   self callback::on_weapon_change(&on_weapon_change);
 }
 
-private function_aab01e08() {
+function_aab01e08() {
   weapon = undefined;
 
   if(self isusingoffhand()) {
@@ -333,11 +331,11 @@ private function_aab01e08() {
   return weapon;
 }
 
-private function_f0adf9c() {
+function_f0adf9c() {
   self notify("3bd5bdfdc5aacef9");
   self endon("3bd5bdfdc5aacef9");
   player = self;
-  player endon(#"death", #"disconnect");
+  player endon(#"death", # "disconnect");
   deployable_weapon = player function_aab01e08();
 
   if(!isDefined(deployable_weapon)) {
@@ -364,7 +362,7 @@ private function_f0adf9c() {
 }
 
 function_765a2e96() {
-  self endon(#"death", #"disconnect");
+  self endon(#"death", # "disconnect");
   wait 1.5;
   self sethintstring("");
 }
@@ -414,11 +412,11 @@ function_54d27855(client_pos, client_angles, var_36baa3f1, previs_weapon, ignore
   hitent = undefined;
   var_d22ba639 = 0;
 
-  if(trace_result[#"fraction"] < 1) {
-    hit_location = trace_result[#"position"];
-    hit_normal = trace_result[#"normal"];
+  if(trace_result[# "fraction"] < 1) {
+    hit_location = trace_result[# "position"];
+    hit_normal = trace_result[# "normal"];
     var_6165e0de = hit_normal[2] < 0.7;
-    hit_distance = trace_result[#"fraction"] * trace_distance;
+    hit_distance = trace_result[# "fraction"] * trace_distance;
 
     if(distance2dsquared(client_pos, hit_location) < previs_weapon.var_f7e67f28 * previs_weapon.var_f7e67f28) {
       var_caa96e8a = 1;
@@ -442,7 +440,7 @@ function_54d27855(client_pos, client_angles, var_36baa3f1, previs_weapon, ignore
         var_d22ba639 = 1;
       }
 
-      hitent = trace_result[#"entity"];
+      hitent = trace_result[# "entity"];
     } else {
       if(height_offset <= previs_weapon.var_227c90e1 && height_offset >= previs_weapon.var_849af6b4) {
         var_a7bfb = 1;
@@ -455,7 +453,7 @@ function_54d27855(client_pos, client_angles, var_36baa3f1, previs_weapon, ignore
       }
 
       if(!var_def28dc4 && var_6165e0de) {
-        hit_location = client_pos + (forward_vector[0], forward_vector[1], 0) * trace_result[#"fraction"];
+        hit_location = client_pos + (forward_vector[0], forward_vector[1], 0) * trace_result[# "fraction"];
         hit_normal = (0, 0, 1);
         var_ae7d780d = 1;
         var_d22ba639 = 0;
@@ -475,23 +473,23 @@ function_54d27855(client_pos, client_angles, var_36baa3f1, previs_weapon, ignore
     var_1a606e14 = var_75e7a61 + forward2d * var_f7e67f28;
     var_b6085963 = bulletTrace(var_75e7a61, var_1a606e14, 0, ignore_entity);
 
-    if(var_b6085963[#"fraction"] > 0) {
-      var_f7e67f28 = previs_weapon.var_f7e67f28 * var_b6085963[#"fraction"] - var_f94d59f8;
+    if(var_b6085963[# "fraction"] > 0) {
+      var_f7e67f28 = previs_weapon.var_f7e67f28 * var_b6085963[# "fraction"] - var_f94d59f8;
       ground_trace_start = client_pos + forward2d * var_f7e67f28 + (0, 0, previs_weapon.var_227c90e1);
       ground_trace_end = ground_trace_start - (0, 0, previs_weapon.var_227c90e1 - previs_weapon.var_849af6b4);
       var_4bc118b9 = groundtrace(ground_trace_start, ground_trace_end, 0, ignore_entity);
-      hitent = var_4bc118b9[#"entity"];
+      hitent = var_4bc118b9[# "entity"];
 
-      if(var_4bc118b9[#"fraction"] > 0.01 && var_4bc118b9[#"fraction"] < 1 && var_4bc118b9[#"normal"][2] > 0.9) {
-        hit_location = var_4bc118b9[#"position"];
-        hit_normal = var_4bc118b9[#"normal"];
-        hit_distance = var_4bc118b9[#"fraction"] * var_f7e67f28;
+      if(var_4bc118b9[# "fraction"] > 0.01 && var_4bc118b9[# "fraction"] < 1 && var_4bc118b9[# "normal"][2] > 0.9) {
+        hit_location = var_4bc118b9[# "position"];
+        hit_normal = var_4bc118b9[# "normal"];
+        hit_distance = var_4bc118b9[# "fraction"] * var_f7e67f28;
         var_caa96e8a = 1;
         var_a7bfb = 1;
 
-        if(isDefined(var_4bc118b9[#"waterdepth"])) {
-          water_depth = var_4bc118b9[#"waterdepth"];
-          water_bottom = var_4bc118b9[#"waterbottom"];
+        if(isDefined(var_4bc118b9[# "waterdepth"])) {
+          water_depth = var_4bc118b9[# "waterdepth"];
+          water_bottom = var_4bc118b9[# "waterbottom"];
         }
       }
     }
@@ -523,7 +521,7 @@ function_54d27855(client_pos, client_angles, var_36baa3f1, previs_weapon, ignore
   if(var_5130f5dd && !(isDefined(previs_weapon.var_33d50507) && previs_weapon.var_33d50507)) {
     var_e3c2e9c6 = var_5adff8ce + (0, 0, 1) * 30;
     var_cc9ea9b = physicstrace(var_36baa3f1, var_e3c2e9c6, (-16, -16, -16), (16, 16, 16), ignore_entity);
-    var_5130f5dd = var_cc9ea9b[#"fraction"] == 1;
+    var_5130f5dd = var_cc9ea9b[# "fraction"] == 1;
   }
 
   results.isvalid = var_5130f5dd;
@@ -535,7 +533,7 @@ function_54d27855(client_pos, client_angles, var_36baa3f1, previs_weapon, ignore
   return results;
 }
 
-private on_weapon_change(params) {
+on_weapon_change(params) {
   self setplacementhint(1);
   self clientfield::set_to_player("gameplay_allows_deploy", 1);
   self thread function_f0adf9c();

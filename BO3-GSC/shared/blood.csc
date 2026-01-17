@@ -11,7 +11,7 @@
 #namespace blood;
 
 function autoexec __init__sytem__() {
-  system::register("blood", & __init__, undefined, undefined);
+  system::register("blood", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -19,7 +19,7 @@ function __init__() {
   level.bloodstage2 = getdvarfloat("cg_t7HealthOverlay_Threshold2", 0.8);
   level.bloodstage1 = getdvarfloat("cg_t7HealthOverlay_Threshold1", 0.99);
   level.use_digital_blood_enabled = getdvarfloat("scr_use_digital_blood_enabled", 1);
-  callback::on_localplayer_spawned( & localplayer_spawned);
+  callback::on_localplayer_spawned(&localplayer_spawned);
 }
 
 function localplayer_spawned(localclientnum) {
@@ -31,7 +31,7 @@ function localplayer_spawned(localclientnum) {
   bodytype = self getcharacterbodytype();
   if(level.use_digital_blood_enabled && bodytype >= 0) {
     bodytypefields = getcharacterfields(bodytype, currentsessionmode());
-    self.use_digital_blood = (isdefined(bodytypefields.digitalblood) ? bodytypefields.digitalblood : 0);
+    self.use_digital_blood = (isDefined(bodytypefields.digitalblood) ? bodytypefields.digitalblood : 0);
   }
   self thread player_watch_blood(localclientnum);
   self thread player_watch_blood_shutdown(localclientnum);
@@ -53,12 +53,12 @@ function enable_blood(localclientnum) {
 }
 
 function disable_blood(localclientnum) {
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     self.blood_enabled = 0;
   }
   filter::disable_filter_feedback_blood(localclientnum, 2, 2);
   filter::disable_filter_sprite_blood(localclientnum, 2, 1);
-  if(!(isdefined(self.nobloodlightbarchange) && self.nobloodlightbarchange)) {
+  if(!(isDefined(self.nobloodlightbarchange) && self.nobloodlightbarchange)) {
     setcontrollerlightbarcolor(localclientnum);
   }
 }
@@ -130,8 +130,8 @@ function player_watch_blood(localclientnum) {
   self.lastbloodupdate = 0;
   priorplayerhealth = renderhealthoverlayhealth(localclientnum);
   self blood_in(localclientnum, priorplayerhealth);
-  while (true) {
-    if(renderhealthoverlay(localclientnum) && (!(isdefined(self.nobloodoverlay) && self.nobloodoverlay))) {
+  while(true) {
+    if(renderhealthoverlay(localclientnum) && (!(isDefined(self.nobloodoverlay) && self.nobloodoverlay))) {
       shouldenabledoverlay = 0;
       playerhealth = renderhealthoverlayhealth(localclientnum);
       if(playerhealth < priorplayerhealth) {
@@ -145,16 +145,16 @@ function player_watch_blood(localclientnum) {
           if(self.stage2amount > 0 || self.stage3amount > 0) {
             shouldenabledoverlay = 1;
             self blood_out(localclientnum);
-          } else if(isdefined(self.blood_enabled) && self.blood_enabled) {
+          } else if(isDefined(self.blood_enabled) && self.blood_enabled) {
             self disable_blood(localclientnum);
           }
         }
       }
       priorplayerhealth = playerhealth;
-      if(!(isdefined(self.blood_enabled) && self.blood_enabled) && shouldenabledoverlay) {
+      if(!(isDefined(self.blood_enabled) && self.blood_enabled) && shouldenabledoverlay) {
         self enable_blood(localclientnum);
       }
-      if(!(isdefined(self.nobloodlightbarchange) && self.nobloodlightbarchange)) {
+      if(!(isDefined(self.nobloodlightbarchange) && self.nobloodlightbarchange)) {
         if(self.stage3amount > 0) {
           setcontrollerlightbarcolorpulsing(localclientnum, (1, 0, 0), 600);
         } else {
@@ -164,7 +164,7 @@ function player_watch_blood(localclientnum) {
             if(getgadgetpower(localclientnum) == 1 && (!sessionmodeiscampaigngame() || codegetuimodelclientfield(self, "playerAbilities.inRange"))) {
               setcontrollerlightbarcolorpulsing(localclientnum, (1, 1, 0), 2000);
             } else {
-              if(isdefined(self.controllercolor)) {
+              if(isDefined(self.controllercolor)) {
                 setcontrollerlightbarcolor(localclientnum, self.controllercolor);
               } else {
                 setcontrollerlightbarcolor(localclientnum);
@@ -173,7 +173,7 @@ function player_watch_blood(localclientnum) {
           }
         }
       }
-    } else if(isdefined(self.blood_enabled) && self.blood_enabled) {
+    } else if(isDefined(self.blood_enabled) && self.blood_enabled) {
       self disable_blood(localclientnum);
     }
     wait(0.016);

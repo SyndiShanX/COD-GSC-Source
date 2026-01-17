@@ -8,7 +8,6 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\struct;
 #include scripts\core_common\throttle_shared;
-
 #namespace gib;
 
 autoexec main() {
@@ -24,7 +23,7 @@ autoexec main() {
 
 #namespace gibserverutils;
 
-private function_3aa023f1(name, entity) {
+function_3aa023f1(name, entity) {
   if(!isDefined(name)) {
     return undefined;
   }
@@ -73,18 +72,18 @@ private function_3aa023f1(name, entity) {
   return gibpieces;
 }
 
-private function_69db754(name, gibflag, entity) {
+function_69db754(name, gibflag, entity) {
   gibpieces = function_3aa023f1(name, entity);
   return gibpieces[gibflag];
 }
 
-private _annihilate(entity) {
+_annihilate(entity) {
   if(isDefined(entity)) {
     entity notsolid();
   }
 }
 
-private _getgibextramodel(entity, gibflag) {
+_getgibextramodel(entity, gibflag) {
   if(gibflag == 4) {
     return (isDefined(entity.gib_data) ? entity.gib_data.hatmodel : entity.hatmodel);
   }
@@ -96,7 +95,7 @@ private _getgibextramodel(entity, gibflag) {
   assertmsg("<dev string:x8a>");
 }
 
-private _gibextra(entity, gibflag) {
+_gibextra(entity, gibflag) {
   if(isgibbed(entity, gibflag)) {
     return false;
   }
@@ -109,7 +108,7 @@ private _gibextra(entity, gibflag) {
   return true;
 }
 
-private _gibextrainternal(entity, gibflag) {
+_gibextrainternal(entity, gibflag) {
   if(entity.gib_time !== gettime()) {
     [[level.gib_throttle]] - > waitinqueue(entity);
   }
@@ -143,7 +142,7 @@ private _gibextrainternal(entity, gibflag) {
   reapplyhiddengibpieces(entity);
 }
 
-private _gibentity(entity, gibflag) {
+_gibentity(entity, gibflag) {
   if(isgibbed(entity, gibflag) || !_hasgibpieces(entity, gibflag)) {
     return false;
   }
@@ -156,7 +155,7 @@ private _gibentity(entity, gibflag) {
   return true;
 }
 
-private _gibentityinternal(entity, gibflag) {
+_gibentityinternal(entity, gibflag) {
   if(entity.gib_time !== gettime()) {
     [[level.gib_throttle]] - > waitinqueue(entity);
   }
@@ -186,10 +185,10 @@ private _gibentityinternal(entity, gibflag) {
   reapplyhiddengibpieces(entity);
 }
 
-private _getgibbedlegmodel(entity) {
+_getgibbedlegmodel(entity) {
   gibstate = _getgibbedstate(entity);
-  rightleggibbed = gibstate&128;
-  leftleggibbed = gibstate&256;
+  rightleggibbed = gibstate & 128;
+  leftleggibbed = gibstate & 256;
 
   if(rightleggibbed && leftleggibbed) {
     return (isDefined(entity.gib_data) ? entity.gib_data.legdmg4 : entity.legdmg4);
@@ -202,7 +201,7 @@ private _getgibbedlegmodel(entity) {
   return isDefined(entity.gib_data) ? entity.gib_data.legdmg1 : entity.legdmg1;
 }
 
-private _getgibbedstate(entity) {
+_getgibbedstate(entity) {
   if(isDefined(entity.gib_state)) {
     return entity.gib_state;
   }
@@ -210,10 +209,10 @@ private _getgibbedstate(entity) {
   return 0;
 }
 
-private _getgibbedtorsomodel(entity) {
+_getgibbedtorsomodel(entity) {
   gibstate = _getgibbedstate(entity);
-  rightarmgibbed = gibstate&16;
-  leftarmgibbed = gibstate&32;
+  rightarmgibbed = gibstate & 16;
+  leftarmgibbed = gibstate & 32;
 
   if(rightarmgibbed && leftarmgibbed) {
     return (isDefined(entity.gib_data) ? entity.gib_data.torsodmg2 : entity.torsodmg2);
@@ -226,14 +225,14 @@ private _getgibbedtorsomodel(entity) {
   return isDefined(entity.gib_data) ? entity.gib_data.torsodmg1 : entity.torsodmg1;
 }
 
-private _hasgibdef(entity) {
+_hasgibdef(entity) {
   return isDefined(entity.gibdef);
 }
 
-private _hasgibpieces(entity, gibflag) {
+_hasgibpieces(entity, gibflag) {
   hasgibpieces = 0;
   gibstate = _getgibbedstate(entity);
-  entity.gib_state = gibstate | gibflag&512 - 1;
+  entity.gib_state = gibstate | gibflag & 512 - 1;
 
   if(isDefined(_getgibbedtorsomodel(entity)) && isDefined(_getgibbedlegmodel(entity))) {
     hasgibpieces = 1;
@@ -243,14 +242,14 @@ private _hasgibpieces(entity, gibflag) {
   return hasgibpieces;
 }
 
-private _setgibbed(entity, gibflag, gibdir) {
+_setgibbed(entity, gibflag, gibdir) {
   if(isDefined(gibdir)) {
     angles = vectortoangles(gibdir);
     yaw = angles[1];
     yaw_bits = getbitsforangle(yaw, 3);
-    entity.gib_state = (_getgibbedstate(entity) | gibflag&512 - 1) + (yaw_bits << 9);
+    entity.gib_state = (_getgibbedstate(entity) | gibflag & 512 - 1) + (yaw_bits << 9);
   } else {
-    entity.gib_state = _getgibbedstate(entity) | gibflag&512 - 1;
+    entity.gib_state = _getgibbedstate(entity) | gibflag & 512 - 1;
   }
 
   entity.gibbed = 1;
@@ -282,7 +281,7 @@ copygibstate(originalentity, newentity) {
 }
 
 isgibbed(entity, gibflag) {
-  return _getgibbedstate(entity)&gibflag;
+  return _getgibbedstate(entity) &gibflag;
 }
 
 gibhat(entity) {
@@ -292,8 +291,8 @@ gibhat(entity) {
 gibhead(entity) {
   gibhat(entity);
   level notify(#"gib", {
-    #entity: entity, 
-    #attacker: self.attacker, 
+    #entity: entity,
+    #attacker: self.attacker,
     #area: "head"
   });
   return _gibextra(entity, 8);
@@ -307,8 +306,8 @@ gibleftarm(entity) {
   if(_gibentity(entity, 32)) {
     destructserverutils::destructleftarmpieces(entity);
     level notify(#"gib", {
-      #entity: entity, 
-      #attacker: self.attacker, 
+      #entity: entity,
+      #attacker: self.attacker,
       #area: "left_arm"
     });
     return true;
@@ -326,8 +325,8 @@ gibrightarm(entity) {
     destructserverutils::destructrightarmpieces(entity);
     entity thread shared::dropaiweapon();
     level notify(#"gib", {
-      #entity: entity, 
-      #attacker: self.attacker, 
+      #entity: entity,
+      #attacker: self.attacker,
       #area: "right_arm"
     });
     return true;
@@ -340,8 +339,8 @@ gibleftleg(entity) {
   if(_gibentity(entity, 256)) {
     destructserverutils::destructleftlegpieces(entity);
     level notify(#"gib", {
-      #entity: entity, 
-      #attacker: self.attacker, 
+      #entity: entity,
+      #attacker: self.attacker,
       #area: "left_leg"
     });
     return true;
@@ -354,8 +353,8 @@ gibrightleg(entity) {
   if(_gibentity(entity, 128)) {
     destructserverutils::destructrightlegpieces(entity);
     level notify(#"gib", {
-      #entity: entity, 
-      #attacker: self.attacker, 
+      #entity: entity,
+      #attacker: self.attacker,
       #area: "right_leg"
     });
     return true;
@@ -369,8 +368,8 @@ giblegs(entity) {
     destructserverutils::destructrightlegpieces(entity);
     destructserverutils::destructleftlegpieces(entity);
     level notify(#"gib", {
-      #entity: entity, 
-      #attacker: self.attacker, 
+      #entity: entity,
+      #attacker: self.attacker,
       #area: "both_legs"
     });
     return true;
@@ -492,7 +491,7 @@ togglespawngibs(entity, shouldspawngibs) {
   if(!shouldspawngibs) {
     entity.gib_state = _getgibbedstate(entity) | 1;
   } else {
-    entity.gib_state = _getgibbedstate(entity)&-2;
+    entity.gib_state = _getgibbedstate(entity) &-2;
   }
 
   entity clientfield::set("gib_state", entity.gib_state);

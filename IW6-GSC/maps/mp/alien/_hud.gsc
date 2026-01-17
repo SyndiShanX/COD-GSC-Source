@@ -220,7 +220,7 @@ create_hud_laststand_count(xpos, ypos, scale) {
   hud_score.sort = 1;
   hud_score.hideWhenInMenu = true;
   hud_score.archived = true;
-  hud_score.label = & "";
+  hud_score.label = &"";
   hud_score setValue(0);
 
   if(getDvarInt("debug_alien_laststand_hud", 0) == 1)
@@ -238,7 +238,7 @@ update_hud_laststand_count() {
 
 createSpendHintHUD(resource, rank, message) {
   if(!isDefined(message))
-    self setLowerMessage("spend_hint", & "ALIEN_COLLECTIBLES_PULL_TO_SPEND");
+    self setLowerMessage("spend_hint", &"ALIEN_COLLECTIBLES_PULL_TO_SPEND");
   else
     self setLowerMessage("spend_hint", message);
   self thread hideSpendHintIcon();

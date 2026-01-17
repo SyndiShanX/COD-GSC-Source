@@ -17,14 +17,10 @@ class cscriptbundleobjectbase {
 
   function error(condition, str_msg) {
     if(condition) {
-      if([
-          [_o_scene]
-        ] - > is_testing()) {
+      if([[_o_scene]] - > is_testing()) {
         scriptbundle::error_on_screen(str_msg);
       } else {
-        assertmsg([
-          [_o_scene]
-        ] - > get_type() + "<dev string:x58>" + function_9e72a96(_o_scene._str_name) + "<dev string:x5c>" + (isDefined("<dev string:x65>") ? "<dev string:x62>" + "<dev string:x65>" : isDefined(_s.name) ? "<dev string:x62>" + _s.name : "<dev string:x62>") + "<dev string:x6f>" + str_msg);
+        assertmsg([[_o_scene]] - > get_type() + "<dev string:x58>" + function_9e72a96(_o_scene._str_name) + "<dev string:x5c>" + (isDefined("<dev string:x65>") ? "<dev string:x62>" + "<dev string:x65>" : isDefined(_s.name) ? "<dev string:x62>" + _s.name : "<dev string:x62>") + "<dev string:x6f>" + str_msg);
       }
 
       thread[[_o_scene]] - > on_error();
@@ -130,14 +126,14 @@ error_on_screen(str_msg) {
   if(str_msg != "") {
     if(!isDefined(level.scene_error_hud)) {
       level.scene_error_hud = createluimenu(0, "HudElementText");
-      setluimenudata(0, level.scene_error_hud, #"alignment", 1);
-      setluimenudata(0, level.scene_error_hud, #"x", 0);
-      setluimenudata(0, level.scene_error_hud, #"y", 10);
-      setluimenudata(0, level.scene_error_hud, #"width", 1920);
+      setluimenudata(0, level.scene_error_hud, # "alignment", 1);
+      setluimenudata(0, level.scene_error_hud, # "x", 0);
+      setluimenudata(0, level.scene_error_hud, # "y", 10);
+      setluimenudata(0, level.scene_error_hud, # "width", 1920);
       openluimenu(0, level.scene_error_hud);
     }
 
-    setluimenudata(0, level.scene_error_hud, #"text", str_msg);
+    setluimenudata(0, level.scene_error_hud, # "text", str_msg);
     self thread _destroy_error_on_screen();
   }
 }
@@ -145,7 +141,7 @@ error_on_screen(str_msg) {
 _destroy_error_on_screen() {
   level notify(#"_destroy_error_on_screen");
   level endon(#"_destroy_error_on_screen");
-  self waittilltimeout(5, #"stopped");
+  self waittilltimeout(5, # "stopped");
   closeluimenu(0, level.scene_error_hud);
   level.scene_error_hud = undefined;
 }

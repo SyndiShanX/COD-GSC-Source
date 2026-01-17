@@ -43,12 +43,12 @@ main() {
   precacheshader("h1_hud_timer_border");
   precacheshader("h1_timer_on_flare");
   precacheshader("h1_timer_warning_flare");
-  maps\_utility::add_start("warehouse", ::start_warehouse, & "STARTS_WAREHOUSE");
-  maps\_utility::add_start("launchtubes", ::start_launchtubes, & "STARTS_LAUNCHTUBES");
-  maps\_utility::add_start("vaultdoors", ::start_vaultdoors, & "STARTS_VAULTDOORS");
-  maps\_utility::add_start("controlroom", ::start_controlroom, & "STARTS_CONTROLROOM");
-  maps\_utility::add_start("escape", ::start_escape, & "STARTS_ESCAPE1");
-  maps\_utility::add_start("elevator", ::start_elevator, & "STARTS_ELEVATOR");
+  maps\_utility::add_start("warehouse", ::start_warehouse, &"STARTS_WAREHOUSE");
+  maps\_utility::add_start("launchtubes", ::start_launchtubes, &"STARTS_LAUNCHTUBES");
+  maps\_utility::add_start("vaultdoors", ::start_vaultdoors, &"STARTS_VAULTDOORS");
+  maps\_utility::add_start("controlroom", ::start_controlroom, &"STARTS_CONTROLROOM");
+  maps\_utility::add_start("escape", ::start_escape, &"STARTS_ESCAPE1");
+  maps\_utility::add_start("elevator", ::start_elevator, &"STARTS_ELEVATOR");
   maps\_utility::default_start(::start_default);
   level thread maps\createart\launchfacility_b_art::main();
   level thread maps\launchfacility_b_fx::main();
@@ -97,7 +97,7 @@ main() {
   level.secondaryprogressbartexty = 55;
   level.secondaryprogressbarfontsize = 1;
   level.usetimer = 1;
-  level.missionfailedquote = & "LAUNCHFACILITY_B_BOMBS_GO_BOOM";
+  level.missionfailedquote = &"LAUNCHFACILITY_B_BOMBS_GO_BOOM";
   level.c4 = getent("c4", "targetname");
   level.keyboard = getent("keyboard", "targetname");
   level.elevator_upper = getent("elevator_upper", "targetname");
@@ -108,15 +108,15 @@ main() {
   var_1 maps\_utility::add_spawn_function(::grigsby_think);
   var_2 = getent("team1", "script_noteworthy");
   var_2 maps\_utility::add_spawn_function(::team1_think);
-  var_3 = getentarray("vent_friendlies_group1", "script_noteworthy");
+  var_3 = getEntArray("vent_friendlies_group1", "script_noteworthy");
   common_scripts\utility::array_thread(var_3, maps\_utility::add_spawn_function, ::vent_friendlies_group1_spawner_think);
-  var_4 = getentarray("vent_enemies_group1", "script_noteworthy");
+  var_4 = getEntArray("vent_enemies_group1", "script_noteworthy");
   common_scripts\utility::array_thread(var_4, maps\_utility::add_spawn_function, ::vent_enemies_group1_spawner_think);
-  var_5 = getentarray("vent_friendlies_group2", "script_noteworthy");
+  var_5 = getEntArray("vent_friendlies_group2", "script_noteworthy");
   common_scripts\utility::array_thread(var_5, maps\_utility::add_spawn_function, ::vent_friendlies_group2_spawner_think);
-  var_6 = getentarray("vent_enemies_group2", "script_noteworthy");
+  var_6 = getEntArray("vent_enemies_group2", "script_noteworthy");
   common_scripts\utility::array_thread(var_6, maps\_utility::add_spawn_function, ::vent_enemies_group2_spawner_think);
-  var_7 = getentarray("gassed_runners", "script_noteworthy");
+  var_7 = getEntArray("gassed_runners", "script_noteworthy");
   common_scripts\utility::array_thread(var_7, maps\_utility::add_spawn_function, ::warehouse_retreating_enemies_think);
   common_scripts\utility::flag_init("aa_countdown_started");
   common_scripts\utility::flag_init("aa_first_floor");
@@ -229,9 +229,9 @@ main() {
   level thread hide_triggers("escape");
   level thread vehical_depot();
   level thread end_of_level();
-  var_8 = getentarray("autosave", "targetname");
+  var_8 = getEntArray("autosave", "targetname");
 
-  for (var_9 = 0; var_9 < var_8.size; var_9++)
+  for(var_9 = 0; var_9 < var_8.size; var_9++)
     var_8[var_9] thread my_autosave();
 }
 
@@ -323,7 +323,7 @@ start_controlroom() {
   maps\_utility::activate_trigger_with_targetname("protect_the_c4");
   common_scripts\utility::flag_set("update_objectives");
   thread plant_the_c4();
-  var_3 = getentarray("team2", "script_noteworthy");
+  var_3 = getEntArray("team2", "script_noteworthy");
   common_scripts\utility::array_thread(var_3, maps\_utility::spawn_ai);
   maps\_utility::activate_trigger_with_targetname("control_room_friendlies_attack");
   wait 1;
@@ -366,7 +366,7 @@ start_escape() {
   level.player setplayerangles(var_7.angles);
   common_scripts\utility::flag_set("walk");
   common_scripts\utility::flag_set("move_faster");
-  var_8 = getentarray("team2", "script_noteworthy");
+  var_8 = getEntArray("team2", "script_noteworthy");
   common_scripts\utility::array_thread(var_8, maps\_utility::spawn_ai);
   maps\_utility::activate_trigger_with_targetname("control_room_friendlies_attack");
   level thread show_triggers("escape");
@@ -410,7 +410,7 @@ get_remaining_seconds() {
 }
 
 autosave_by_name_wraper(var_0, var_1) {
-  if(isdefined(level.timer_start_time)) {
+  if(isDefined(level.timer_start_time)) {
     var_2 = gettime();
     var_3 = (var_2 - level.timer_start_time) / 1000 / 60;
     var_4 = level.stopwatch - var_3;
@@ -440,7 +440,7 @@ grigsby_think() {
 }
 
 team1_think() {
-  if(!isdefined(level.team1))
+  if(!isDefined(level.team1))
     level.team1 = [];
 
   self.animname = "steve";
@@ -461,7 +461,7 @@ vent_trigger_air_raid_siren() {
   var_0 = getent("trigger_air_raid", "targetname");
   var_0 waittill("trigger");
   var_1 = getent("air_raid", "targetname");
-  var_1 playloopsound("emt_alarm_missile_siren");
+  var_1 playLoopSound("emt_alarm_missile_siren");
 }
 
 vent_dialogue1() {
@@ -513,7 +513,7 @@ obj_control_room() {
   var_0 = 0;
   var_1 = getent("origin_obj_stairs", "targetname");
   wait 6;
-  objective_add(var_0, "active", & "LAUNCHFACILITY_B_GET_TO_THE_TELEMETRY", var_1.origin);
+  objective_add(var_0, "active", &"LAUNCHFACILITY_B_GET_TO_THE_TELEMETRY", var_1.origin);
   objective_current(var_0);
   common_scripts\utility::flag_wait("location_change_stairs");
   var_1 = getent("origin_obj_breach_telemetry_room", "targetname");
@@ -540,14 +540,14 @@ obj_plant_the_c4() {
   common_scripts\utility::flag_wait("update_objectives");
   var_0 = 1;
   var_1 = getent("wall_explosives", "targetname");
-  objective_add(var_0, "active", & "LAUNCHFACILITY_B_PLANT_THE_C4", var_1.origin);
+  objective_add(var_0, "active", &"LAUNCHFACILITY_B_PLANT_THE_C4", var_1.origin);
   objective_indentlevel(var_0, 1);
   objective_current(var_0);
   common_scripts\utility::flag_wait("wall_destroyed");
   wait 1;
   objective_state(var_0, "done");
   var_0 = 2;
-  objective_add(var_0, "active", & "LAUNCHFACILITY_B_CLEAR_ROOM", var_1.origin);
+  objective_add(var_0, "active", &"LAUNCHFACILITY_B_CLEAR_ROOM", var_1.origin);
   objective_indentlevel(var_0, 1);
   objective_current(var_0);
   maps\_utility::waittill_aigroupcleared("control_room");
@@ -559,7 +559,7 @@ obj_upload_the_abort_codes() {
   soundscripts\_snd::snd_message("start_code_input_mix");
   var_0 = getent("control_room_friendlies_group", "targetname");
 
-  if(isdefined(var_0))
+  if(isDefined(var_0))
     var_0 maps\_utility::activate_trigger();
 
   hide_triggers("control_room_friendlies_group");
@@ -574,7 +574,7 @@ obj_upload_the_abort_codes() {
     var_2 = var_3.origin;
   }
 
-  objective_add(var_1, "active", & "LAUNCHFACILITY_B_UPLOAD_THE_ABORT_CODES", var_2);
+  objective_add(var_1, "active", &"LAUNCHFACILITY_B_UPLOAD_THE_ABORT_CODES", var_2);
   objective_current(var_1);
   common_scripts\utility::flag_wait("codes_uploaded");
   var_4 = "Codes uploaded with " + get_remaining_seconds() + " seconds remaining on gameskill " + level.gameskill;
@@ -590,7 +590,7 @@ obj_upload_the_abort_codes() {
 obj_follow_price() {
   var_0 = 4;
   var_1 = level.price.origin;
-  objective_add(var_0, "active", & "LAUNCHFACILITY_B_FOLLOW_PRICE", var_1);
+  objective_add(var_0, "active", &"LAUNCHFACILITY_B_FOLLOW_PRICE", var_1);
   objective_current(var_0);
   level.price thread lock_obj_location(var_0);
   common_scripts\utility::flag_wait("at_the_jeep");
@@ -602,7 +602,7 @@ obj_follow_price() {
 lock_obj_location(var_0) {
   level endon("unlock_obj");
 
-  for (;;) {
+  for(;;) {
     objective_position(var_0, self.origin + (0, 0, 48));
     wait 0.5;
   }
@@ -690,7 +690,7 @@ starttimer() {
   level.hudtimerindex = 20;
   level.timer = maps\_hud_util::get_countdown_hud(undefined, undefined, undefined, undefined, level.stopwatch * 60);
   level.timer setpulsefx(30, 900000, 700);
-  level.timer.text.label = & "LAUNCHFACILITY_B_TIME_TILL_ICBM_IMPACT";
+  level.timer.text.label = &"LAUNCHFACILITY_B_TIME_TILL_ICBM_IMPACT";
   level.timer settenthstimer(level.stopwatch * 60);
   wait(level.stopwatch * 60);
   common_scripts\utility::flag_set("timer_expired");
@@ -710,7 +710,7 @@ mission_failed_out_of_time() {
 killtimer() {
   level notify("kill_timer");
 
-  if(isdefined(level.timer))
+  if(isDefined(level.timer))
     maps\_hud_util::destroy_countdown_hud(level.timer);
 }
 
@@ -863,19 +863,19 @@ warehouse_kill_all_enemy() {
   var_0 = getent("killer_warehouse", "targetname");
   var_1 = getaiarray("axis");
 
-  for (var_2 = 0; var_2 < var_1.size; var_2++) {
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
     if(var_1[var_2] istouching(var_0))
       var_1[var_2] dodamage(var_1[var_2].health + 1000, var_1[var_2].origin);
   }
 }
 
 play_sound_on_speaker(var_0, var_1) {
-  var_2 = getentarray("speaker", "targetname");
+  var_2 = getEntArray("speaker", "targetname");
 
-  if(isdefined(var_1)) {
+  if(isDefined(var_1)) {
     level notify("speaker_interrupt");
 
-    for (var_3 = 0; var_3 < var_2.size; var_3++)
+    for(var_3 = 0; var_3 < var_2.size; var_3++)
       var_2[var_3] stopsounds();
 
     wait 0.5;
@@ -885,8 +885,8 @@ play_sound_on_speaker(var_0, var_1) {
   level endon("speaker_interrupt");
   common_scripts\utility::flag_set("speakers_active");
   var_2 = common_scripts\utility::get_array_of_closest(level.player.origin, var_2, undefined, 2);
-  var_2[0] playsound(var_0, "sounddone", 1);
-  var_2[1] playsound(var_0);
+  var_2[0] playSound(var_0, "sounddone", 1);
+  var_2[1] playSound(var_0);
   var_2[0] waittill("sounddone");
   common_scripts\utility::flag_clear("speakers_active");
 }
@@ -911,7 +911,7 @@ rocket_powering_up() {
   soundscripts\_snd::snd_message("start_missile_silo_mix");
   wait(randomfloatrange(0.2, 1.2));
 
-  while (!common_scripts\utility::flag("blast_door_player_clip_off")) {
+  while(!common_scripts\utility::flag("blast_door_player_clip_off")) {
     earthquake(0.05, 1, level.player.origin, 1024);
     wait 0.2;
   }
@@ -952,7 +952,7 @@ launchtubes_clear() {
   var_0 = getent("kill_hallway_enemies", "targetname");
   var_1 = getaiarray("axis");
 
-  for (var_2 = 0; var_2 < var_1.size; var_2++) {
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
     if(var_1[var_2] istouching(var_0))
       var_1[var_2] dodamage(var_1[var_2].health + 1000, var_1[var_2].origin);
   }
@@ -982,18 +982,18 @@ rocket_powering_up_dialogue() {
 launchtubes_missile_alarm() {
   common_scripts\utility::flag_wait("start_missile_alarm");
   var_0 = getent("alarm_missile_warning", "targetname");
-  var_0 playsound("emt_alarm_missile_warning");
+  var_0 playSound("emt_alarm_missile_warning");
 }
 
 in_volume() {
   var_0 = getent("shut_blast_door", "targetname");
 
-  for (;;) {
+  for(;;) {
     var_0 waittill("trigger");
     var_1 = getaiarray("allies");
     var_2 = 0;
 
-    for (var_3 = 0; var_3 < var_1.size; var_3++) {
+    for(var_3 = 0; var_3 < var_1.size; var_3++) {
       if(var_1[var_3] istouching(var_0))
         var_2++;
     }
@@ -1059,19 +1059,19 @@ price_warning() {
 
 launchtubes_hatch_close_sound() {
   wait 0.5;
-  level.price playsound("scn_door_launchb_hatch_close");
-  level.player playsound("scn_launchb_missile_launch");
+  level.price playSound("scn_door_launchb_hatch_close");
+  level.player playSound("scn_launchb_missile_launch");
   common_scripts\_exploder::exploder(2);
   maps\_utility::stop_exploder(1);
   var_0 = getent("inc_fireball_sfx", "targetname");
-  var_0 playsound("h1_launchtube_fireball");
+  var_0 playSound("h1_launchtube_fireball");
   level thread fireballdlight();
   level thread kill_launchtube_steam_fx();
   thread rockets_launch();
 }
 
 rockets_launch() {
-  for (var_0 = 0.15; var_0 > 0; var_0 = var_0 - 0.001) {
+  for(var_0 = 0.15; var_0 > 0; var_0 = var_0 - 0.001) {
     earthquake(var_0, 0.1, level.player.origin, 256);
     wait 0.1;
   }
@@ -1080,8 +1080,8 @@ rockets_launch() {
 fireballdlight() {
   var_0 = 2;
   var_1 = spawn("script_model", (395.177, 2955.42, -300.614));
-  var_1 setmodel("tag_origin");
-  playfxontag(level._effect["launchtube_fire_light"], var_1, "tag_origin");
+  var_1 setModel("tag_origin");
+  playFXOnTag(level._effect["launchtube_fire_light"], var_1, "tag_origin");
   var_1 moveto((-524, 3898, -292), var_0, 0, 1);
   wait(var_0);
   var_1 delete();
@@ -1091,7 +1091,7 @@ kill_player_in_tubes() {
   var_0 = getent("kill_player_tubes", "targetname");
 
   if(level.player istouching(var_0)) {
-    level.player playsound("scn_launchb_missile_launch");
+    level.player playSound("scn_launchb_missile_launch");
     level.player enablehealthshield(0);
     level.player thread player_death_effect();
     wait 1;
@@ -1101,7 +1101,7 @@ kill_player_in_tubes() {
 
 player_death_effect() {
   var_0 = getent("player", "classname");
-  playfx(level._effect["player_death_explosion"], var_0.origin);
+  playFX(level._effect["player_death_explosion"], var_0.origin);
   earthquake(1, 1, level.player.origin, 100);
 }
 
@@ -1110,7 +1110,7 @@ kill_launchtube_steam_fx() {
   var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::getfxarraybyid("hallway_steam_loop"));
   var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::getfxarraybyid("steam_jet_med_loop_rand"));
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++)
     var_0[var_1] common_scripts\utility::pauseeffect();
 }
 
@@ -1127,7 +1127,7 @@ kill_enemy_in_tubes() {
   var_0 = getent("killer_tubes", "targetname");
   var_1 = getaiarray("axis");
 
-  for (var_2 = 0; var_2 < var_1.size; var_2++) {
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
     if(var_1[var_2] istouching(var_0))
       var_1[var_2] dodamage(var_1[var_2].health + 1000, var_1[var_2].origin);
   }
@@ -1164,7 +1164,7 @@ guard_the_vaultdoors_grigsby() {
   common_scripts\utility::flag_init("vaultdoors_grigs_approach_done");
   level.grigsby thread guard_the_vaultdoors_grigsby_wait_for_approach(var_0);
 
-  while (level.grigsby.script == "cover_arrival")
+  while(level.grigsby.script == "cover_arrival")
     wait 0.05;
 
   level.grigsby.a.dontstartaim = undefined;
@@ -1233,20 +1233,20 @@ vault_doors_open() {
   var_1 = getent(var_0.target, "targetname");
   var_1 linkto(var_0);
   var_2 = getent("vault_door_sfx", "targetname");
-  var_2 playsound("scn_vault_door_open");
+  var_2 playSound("scn_vault_door_open");
   var_3 = getent("vault_door_right", "targetname");
   var_4 = getent(var_3.target, "targetname");
   var_4 linkto(var_3);
   wait 1;
   var_0 rotateyaw(-0.3, 0.05);
   var_3 rotateyaw(0.3, 0.05);
-  var_0 playsound("mtl_steam_pipe_burst");
-  var_3 playsound("expl_steam_pipe_body");
+  var_0 playSound("mtl_steam_pipe_burst");
+  var_3 playSound("expl_steam_pipe_body");
   wait 1;
-  var_0 playsound("expl_steam_pipe_body");
+  var_0 playSound("expl_steam_pipe_body");
   wait 2;
-  var_3 playsound("expl_steam_pipe_body");
-  var_0 playsound("gate_open");
+  var_3 playSound("expl_steam_pipe_body");
+  var_0 playSound("gate_open");
   var_0 rotateyaw(-50, 40, 0, 40);
   var_3 rotateyaw(50, 40, 0, 40);
   wait 20;
@@ -1269,7 +1269,7 @@ vault_doors_team_ready() {
 
 spawn_utility_enemies() {
   common_scripts\utility::flag_wait("vault_door_opened");
-  var_0 = getentarray("utility_enemies", "script_noteworthy");
+  var_0 = getEntArray("utility_enemies", "script_noteworthy");
   common_scripts\utility::array_thread(var_0, maps\_utility::spawn_ai);
   thread blow_the_wall_dialogue();
 }
@@ -1328,7 +1328,7 @@ griggs_c4_take_cover_path() {
   level.grigsby.disable_tight_turn = 1;
   var_1 = getnode(var_0.target, "targetname");
 
-  for (;;) {
+  for(;;) {
     if(distancesquared(level.grigsby.origin, var_1.origin) > 90000) {
       break;
     }
@@ -1344,7 +1344,7 @@ blow_the_wall() {
   var_0 connectpaths();
   common_scripts\_exploder::exploder(100);
   var_1 = getent("wall_explosives", "targetname");
-  playfx(level.wallexplosionsmall_fx, var_1.origin);
+  playFX(level.wallexplosionsmall_fx, var_1.origin);
   thread common_scripts\utility::play_sound_in_space("h1_c4_explosion_main", var_1.origin);
   radiusdamage(var_1.origin, 256, 200, 50);
   earthquake(0.4, 1, var_1.origin, 1000);
@@ -1360,12 +1360,12 @@ blow_the_wall() {
 
 spawn_telemetry_enemies() {
   common_scripts\utility::flag_wait("wall_destroyed");
-  var_0 = getentarray("telemetry_enemies", "script_noteworthy");
+  var_0 = getEntArray("telemetry_enemies", "script_noteworthy");
   common_scripts\utility::array_thread(var_0, maps\_utility::spawn_ai);
 }
 
 spawn_telemetry_friendlies() {
-  var_0 = getentarray("team2", "script_noteworthy");
+  var_0 = getEntArray("team2", "script_noteworthy");
   common_scripts\utility::array_thread(var_0, maps\_utility::add_spawn_function, ::telemetry_friendlies_think);
   common_scripts\utility::flag_wait("wall_destroyed");
   common_scripts\utility::array_thread(var_0, maps\_utility::spawn_ai);
@@ -1386,21 +1386,21 @@ upload_codes_h1() {
   var_1 = getent("keyboard_use_trigger_h1", "targetname");
   var_2 = spawn("script_model", level.keyboard.origin);
   var_2.angles = (0, 315, 0);
-  var_2 setmodel("com_computer_keyboard");
+  var_2 setModel("com_computer_keyboard");
   maps\_utility::waittill_aigroupcleared("control_room");
   var_3 = 0.05;
   var_4 = 0;
   var_5 = 3;
   var_6 = spawn("script_model", level.keyboard.origin);
   var_6.angles = (0, 315, 0);
-  var_6 setmodel("com_computer_keyboard_obj");
+  var_6 setModel("com_computer_keyboard_obj");
   var_7 = spawn("script_origin", (-2662, 4452, -387));
   var_7.angles = (0, 138, 0);
   var_8 = (-2647, 4430, -391);
   var_9 = (0, 138, 0);
   var_10 = cos(30);
 
-  for (;;) {
+  for(;;) {
     var_11 = level.player getvieworigin();
     var_12 = level.player getplayerangles();
 
@@ -1428,14 +1428,14 @@ upload_codes_h1() {
     var_7 maps\_anim::anim_first_frame_solo(var_13, "typing_abort_codes");
     var_13 maps\_utility::lerp_player_view_to_tag_smoothly("tag_player", 0.5, 1, 0, 0, 0, 0);
     var_13 show();
-    level.player playsound("scn_enter_code_typing");
+    level.player playSound("scn_enter_code_typing");
     var_7 thread maps\_anim::anim_single_solo(var_13, "typing_abort_codes");
     level.player startprogressbar(var_5);
     level.player.progresstext settext(&"LAUNCHFACILITY_B_UPLOADING_CODES");
     var_14 = 0;
     level thread h1_typing_dof_start();
 
-    for (;;) {
+    for(;;) {
       if(!level.player usebuttonpressed()) {
         break;
       }
@@ -1470,7 +1470,7 @@ upload_codes_h1() {
     waitframe();
   }
 
-  level.player playsound("h1_scn_enter_press");
+  level.player playSound("h1_scn_enter_press");
   soundscripts\_snd::snd_message("start_missile_stopped_mix");
   var_0 delete();
   var_6 delete();
@@ -1493,19 +1493,19 @@ upload_codes() {
   var_0 usetriggerrequirelookat();
   var_4 = spawn("script_model", level.keyboard.origin);
   var_4.angles = (0, 315, 0);
-  var_4 setmodel("com_computer_keyboard_obj");
+  var_4 setModel("com_computer_keyboard_obj");
 
-  for (;;) {
+  for(;;) {
     var_0 waittill("trigger");
     level.player disableweapons();
     level.player freezecontrols(1);
-    level.player playsound("scn_enter_code_typing");
+    level.player playSound("scn_enter_code_typing");
     var_0 common_scripts\utility::trigger_off();
     level.player startprogressbar(var_3);
     level.player.progresstext settext(&"LAUNCHFACILITY_B_UPLOADING_CODES");
     var_5 = 0;
 
-    for (;;) {
+    for(;;) {
       if(!level.player usebuttonpressed()) {
         break;
       }
@@ -1536,13 +1536,13 @@ upload_codes() {
   level.player enableweapons();
   level.player freezecontrols(0);
   level.player stopsounds("scn_enter_code_typing");
-  level.player playsound("h1_scn_enter_press");
+  level.player playSound("h1_scn_enter_press");
   soundscripts\_snd::snd_message("start_missile_stopped_mix");
   var_0 delete();
   var_4 delete();
   var_6 = spawn("script_model", level.keyboard.origin);
   var_6.angles = (0, 315, 0);
-  var_6 setmodel("com_computer_keyboard");
+  var_6 setModel("com_computer_keyboard");
   common_scripts\utility::flag_set("codes_uploaded");
   common_scripts\utility::flag_clear("aa_countdown_started");
   common_scripts\utility::flag_clear("aa_upload_them_codes");
@@ -1634,7 +1634,7 @@ control_room_screen_h1() {
   maps\_utility::delaythread(24.25, ::play_display_change_sfx);
   maps\_utility::delaythread(28.25, ::play_display_change_sfx);
 
-  while (iscinematicplaying())
+  while(iscinematicplaying())
     wait 0.05;
 
   cinematicingameloop("h1_icbm_norad_screen_abort");
@@ -1649,7 +1649,7 @@ play_display_change_sfx() {
 update_keyboard_monitor_screen(var_0, var_1) {
   level endon("stop_update_monitor_material");
 
-  if(isdefined(var_1))
+  if(isDefined(var_1))
     level endon(var_1);
 
   level waittill("wall_c4_planted");
@@ -1675,7 +1675,7 @@ update_keyboard_monitor_screen(var_0, var_1) {
       break;
   }
 
-  for (;;) {
+  for(;;) {
     var_2 overridematerial("mtl_h1_mwr_ch_icbm_consolemonitor5", var_4[var_3]);
     var_3++;
 
@@ -1691,7 +1691,7 @@ telemetry_doors_open() {
   var_0 waittill("trigger");
   var_1 = getent("telemetry_room_door", "targetname");
   var_1 rotateyaw(-70, 1, 1, 0);
-  var_1 playsound("gate_open");
+  var_1 playSound("gate_open");
   var_1 connectpaths();
 }
 
@@ -1807,7 +1807,7 @@ griggs_to_elevator(var_0) {
 check_elevator() {
   var_0 = getent("standing_in_elevator", "targetname");
 
-  for (;;) {
+  for(;;) {
     wait 0.05;
 
     if(level.player istouching(var_0)) {
@@ -1840,7 +1840,7 @@ ai_to_elevator(var_0) {
 in_the_elevator() {
   var_0 = getent("standing_in_elevator", "targetname");
 
-  for (;;) {
+  for(;;) {
     var_0 waittill("trigger");
 
     if(level.price istouching(var_0) && level.grigsby istouching(var_0))
@@ -1855,16 +1855,16 @@ linkto_elevator(var_0) {
 elevator_think() {
   common_scripts\utility::flag_set("elevator_player_clip_on");
   var_0 = getent("elevator", "targetname");
-  var_1 = getentarray("elevator_lights", "targetname");
+  var_1 = getEntArray("elevator_lights", "targetname");
   common_scripts\utility::array_thread(var_1, ::linkto_elevator, var_0);
-  var_2 = getentarray("elevator_detail", "targetname");
+  var_2 = getEntArray("elevator_detail", "targetname");
   common_scripts\utility::array_thread(var_2, ::linkto_elevator, var_0);
   level.elevator_door_inner_top = getent("elevator_door_inner_top", "targetname");
   level.elevator_door_inner_top linkto(var_0);
   level.elevator_door_inner_bottom = getent("elevator_door_inner_bottom", "targetname");
   var_3 = getent("elevator_door_inner_bottom", "targetname");
   var_3 movez(-102, 2, 1, 1);
-  var_3 playsound("scn_elevator_door_close");
+  var_3 playSound("scn_elevator_door_close");
   var_3 maps\_utility::play_sound_on_entity("scn_launchb_elevator_sequence");
   var_3 waittill("movedone");
   level.elevator_door_inner_bottom linkto(var_0);
@@ -1876,7 +1876,7 @@ elevator_think() {
   var_6 moveto(var_5.origin, 2, 1, 1);
   var_4 waittill("movedone");
   var_0 moveto(level.elevator_upper.origin, 15, 0.5, 0.1);
-  var_0 playsound("scn_elevator_move");
+  var_0 playSound("scn_elevator_move");
   common_scripts\utility::flag_set("elevator_dialogue");
   var_0 waittill("movedone");
   maps\_utility::autosave_by_name("On our way");
@@ -1887,7 +1887,7 @@ elevator_think() {
   var_7 = getent("elevator_door_inner_top", "targetname");
   var_7 movez(102, 2, 1, 1);
   var_7 connectpaths();
-  var_7 playsound("scn_elevator_door_open");
+  var_7 playSound("scn_elevator_door_open");
   var_7 waittill("movedone");
   var_8 = getent("elevator_door_outside1_top", "targetname");
   var_5 = getent(var_8.target, "targetname");
@@ -1942,7 +1942,7 @@ compass_maps() {
 }
 
 map_change(var_0) {
-  for (;;) {
+  for(;;) {
     self waittill("trigger");
     maps\_compass::setupminimap(var_0);
   }
@@ -1957,7 +1957,7 @@ airduct_fan_large() {
 }
 
 airduct_fan_medium() {
-  var_0 = getentarray("airduct_fan_medium", "targetname");
+  var_0 = getEntArray("airduct_fan_medium", "targetname");
   common_scripts\utility::array_thread(var_0, ::medium_fans_think);
 }
 
@@ -1967,7 +1967,7 @@ medium_fans_think() {
 }
 
 airduct_fan_small() {
-  var_0 = getentarray("airduct_fan_small", "targetname");
+  var_0 = getEntArray("airduct_fan_small", "targetname");
   common_scripts\utility::array_thread(var_0, ::small_fans_think);
 }
 
@@ -1977,21 +1977,21 @@ small_fans_think() {
 }
 
 redlights() {
-  var_0 = getentarray("redlight", "targetname");
+  var_0 = getEntArray("redlight", "targetname");
   common_scripts\utility::array_thread(var_0, ::redlights_think);
 }
 
 redlights_think() {
   var_0 = 5000;
 
-  for (;;) {
+  for(;;) {
     self rotatevelocity((0, 360, 0), var_0);
     wait(var_0);
   }
 }
 
 redlight_spinner() {
-  var_0 = getentarray("horizonal_spinner", "targetname");
+  var_0 = getEntArray("horizonal_spinner", "targetname");
   common_scripts\utility::array_thread(var_0, ::horizonal_spinners_think);
 }
 
@@ -2001,21 +2001,21 @@ horizonal_spinners_think() {
 }
 
 wall_lights() {
-  var_0 = getentarray("wall_light", "targetname");
+  var_0 = getEntArray("wall_light", "targetname");
   common_scripts\utility::array_thread(var_0, ::wall_lights_think);
 }
 
 wall_lights_think() {
   var_0 = 5000;
 
-  for (;;) {
+  for(;;) {
     self rotatevelocity((360, 0, 0), var_0);
     wait(var_0);
   }
 }
 
 wall_light_spinner() {
-  var_0 = getentarray("vertical_spinner", "targetname");
+  var_0 = getEntArray("vertical_spinner", "targetname");
   common_scripts\utility::array_thread(var_0, ::vertical_spinners_think);
 }
 
@@ -2040,7 +2040,7 @@ music() {
   musicstop(1);
   wait 1.1;
 
-  for (;;) {
+  for(;;) {
     maps\_utility::musicplaywrapper("tension_maintheme_groove");
     wait 46;
     musicstop(1);
@@ -2051,7 +2051,7 @@ music() {
 music_vents() {
   level endon("music_start_countdown");
 
-  for (;;) {
+  for(;;) {
     maps\_utility::musicplaywrapper("tension_maintheme_groove");
     wait 46;
     musicstop(1);
@@ -2063,7 +2063,7 @@ music_countdown(var_0) {
   level endon("codes_uploaded");
 
   if(var_0 == 0) {
-    for (var_1 = 0; var_1 < 2; var_1++) {
+    for(var_1 = 0; var_1 < 2; var_1++) {
       maps\_utility::musicplaywrapper("launch_b_count_01");
       wait 36;
       musicstop(1);
@@ -2145,16 +2145,16 @@ music_countdown(var_0) {
 }
 
 hide_triggers(var_0) {
-  var_1 = getentarray(var_0, "script_noteworthy");
+  var_1 = getEntArray(var_0, "script_noteworthy");
 
-  for (var_2 = 0; var_2 < var_1.size; var_2++)
+  for(var_2 = 0; var_2 < var_1.size; var_2++)
     var_1[var_2] common_scripts\utility::trigger_off();
 }
 
 show_triggers(var_0) {
-  var_1 = getentarray(var_0, "script_noteworthy");
+  var_1 = getEntArray(var_0, "script_noteworthy");
 
-  for (var_2 = 0; var_2 < var_1.size; var_2++)
+  for(var_2 = 0; var_2 < var_1.size; var_2++)
     var_1[var_2] common_scripts\utility::trigger_on();
 }
 

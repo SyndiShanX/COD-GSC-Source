@@ -115,7 +115,7 @@ add_flyover_audio_entry(source, vehicle_type, sound_alias1, sound_alias2, time) 
   if(!isDefined(level._flyover_audio_table[source][vehicle_type]))
     level._flyover_audio_table[source][vehicle_type] = [];
 
-  entry = spawnstruct();
+  entry = spawnStruct();
   entry.sound_alias1 = sound_alias1;
   entry.sound_alias2 = sound_alias2;
   entry.time = time;
@@ -208,10 +208,10 @@ update_flyby_audio(source, p1, p2, velocity) {
       self.flyby_audio_start_delay[source] = self.flyby_audio_start_delay[source] - 50;
 
       if(self.flyby_audio_start_delay[source] < 0) {
-        self playsound(self.flyby_audio_entry[source].sound_alias1);
+        self playSound(self.flyby_audio_entry[source].sound_alias1);
 
         if(isDefined(self.flyby_audio_entry[source].sound_alias2) && self.flyby_audio_entry[source].sound_alias2 != "null")
-          self playsound(self.flyby_audio_entry[source].sound_alias2);
+          self playSound(self.flyby_audio_entry[source].sound_alias2);
 
         self.flyby_timeout[source] = self.flyby_audio_entry[source].time;
         self.flyby_audio_entry[source] = undefined;
@@ -288,10 +288,10 @@ plane_position_updater(miliseconds, soundalias_1, soundalias_2) {
         assert(isDefined(time));
 
         if(time < apex) {
-          self playsound(self.soundalias_1);
+          self playSound(self.soundalias_1);
 
           if(self.soundalias_2 != "null")
-            self playsound(self.soundalias_2);
+            self playSound(self.soundalias_2);
 
           start_time = gettime();
           break;

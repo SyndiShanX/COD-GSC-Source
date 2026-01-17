@@ -10,12 +10,12 @@
 main() {
   flag_init("no_ai_tv_damage");
   qbarrels = 0;
-  barrels = getentarray("explodable_barrel", "targetname");
+  barrels = getEntArray("explodable_barrel", "targetname");
 
   if(isDefined(barrels) && barrels.size > 0)
     qbarrels = 1;
 
-  barrels = getentarray("explodable_barrel", "script_noteworthy");
+  barrels = getEntArray("explodable_barrel", "script_noteworthy");
 
   if(isDefined(barrels) && barrels.size > 0)
     qbarrels = 1;
@@ -28,12 +28,12 @@ main() {
   }
 
   qcrates = 0;
-  crates = getentarray("flammable_crate", "targetname");
+  crates = getEntArray("flammable_crate", "targetname");
 
   if(isDefined(crates) && crates.size > 0)
     qcrates = 1;
 
-  crates = getentarray("flammable_crate", "script_noteworthy");
+  crates = getEntArray("flammable_crate", "script_noteworthy");
 
   if(isDefined(crates) && crates.size > 0)
     qcrates = 1;
@@ -42,12 +42,12 @@ main() {
     level.breakables_fx["ammo_crate"]["explode"] = loadfx("destructibles/fx_ammoboxExp");
 
   qtarpcrate = 0;
-  tarpcrates = getentarray("explodable_tarpcrate", "targetname");
+  tarpcrates = getEntArray("explodable_tarpcrate", "targetname");
 
   if(isDefined(tarpcrates) && tarpcrates.size > 0)
     qtarpcrate = 1;
 
-  tarpcrates = getentarray("explodable_tarpcrate", "script_noteworthy");
+  tarpcrates = getEntArray("explodable_tarpcrate", "script_noteworthy");
 
   if(isDefined(tarpcrates) && tarpcrates.size > 0)
     qtarpcrate = 1;
@@ -58,35 +58,35 @@ main() {
     level.breakables_fx["tarpcrate"]["burn"] = loadfx("destructibles/fx_barrel_fire_top");
   }
 
-  oilspill = getentarray("oil_spill", "targetname");
+  oilspill = getEntArray("oil_spill", "targetname");
 
   if(isDefined(oilspill) && oilspill.size > 0) {
     level.breakables_fx["oilspill"]["burn"] = loadfx("destructibles/fx_barrel_fire");
     level.breakables_fx["oilspill"]["spark"] = loadfx("impacts/fx_small_metalhit");
   }
 
-  tincans = getentarray("tincan", "targetname");
+  tincans = getEntArray("tincan", "targetname");
 
   if(isDefined(tincans) && tincans.size > 0)
     level.breakables_fx["tincan"] = loadfx("destructibles/fx_tincan_bounce");
 
   qbreakables = 0;
-  breakables = getentarray("breakable", "targetname");
+  breakables = getEntArray("breakable", "targetname");
 
   if(isDefined(breakables) && breakables.size > 0)
     qbreakables = 1;
 
-  breakables = getentarray("breakable_vase", "targetname");
+  breakables = getEntArray("breakable_vase", "targetname");
 
   if(isDefined(breakables) && breakables.size > 0)
     qbreakables = 1;
 
-  breakables = getentarray("breakable box", "targetname");
+  breakables = getEntArray("breakable box", "targetname");
 
   if(isDefined(barrels) && barrels.size > 0)
     qbreakables = 1;
 
-  breakables = getentarray("breakable box", "script_noteworthy");
+  breakables = getEntArray("breakable box", "script_noteworthy");
 
   if(isDefined(barrels) && barrels.size > 0)
     qbreakables = 1;
@@ -100,8 +100,8 @@ main() {
     level.breakables_fx["box"][3] = loadfx("destructibles/fx_exp_crate_ammo");
   }
 
-  glassarray = getentarray("glass", "targetname");
-  glassarray = arraycombine(glassarray, getentarray("glass", "script_noteworthy"), 1, 0);
+  glassarray = getEntArray("glass", "targetname");
+  glassarray = arraycombine(glassarray, getEntArray("glass", "script_noteworthy"), 1, 0);
 
   if(isDefined(glassarray) && glassarray.size > 0) {
     level._glass_info = [];
@@ -126,10 +126,10 @@ main() {
   level.precachemodeltype = [];
   level.barrelexplodingthisframe = 0;
   level.breakables_clip = [];
-  level.breakables_clip = getentarray("vase_break_remove", "targetname");
+  level.breakables_clip = getEntArray("vase_break_remove", "targetname");
   level.console_auto_aim = [];
-  level.console_auto_aim = getentarray("xenon_auto_aim", "targetname");
-  level.console_auto_aim_2nd = getentarray("xenon_auto_aim_secondary", "targetname");
+  level.console_auto_aim = getEntArray("xenon_auto_aim", "targetname");
+  level.console_auto_aim_2nd = getEntArray("xenon_auto_aim_secondary", "targetname");
 
   for(i = 0; i < level.console_auto_aim.size; i++)
     level.console_auto_aim[i] notsolid();
@@ -144,7 +144,7 @@ main() {
     level.console_auto_aim_2nd = undefined;
   }
 
-  temp = getentarray("breakable clip", "targetname");
+  temp = getEntArray("breakable clip", "targetname");
 
   for(i = 0; i < temp.size; i++)
     level.breakables_clip[level.breakables_clip.size] = temp[i];
@@ -152,21 +152,21 @@ main() {
   level._breakable_utility_modelarray = [];
   level._breakable_utility_modelindex = 0;
   level._breakable_utility_maxnum = 25;
-  array_thread(getentarray("tincan", "targetname"), ::tincan_think);
-  array_thread(getentarray("helmet_pop", "targetname"), ::helmet_pop);
-  array_thread(getentarray("explodable_barrel", "targetname"), ::explodable_barrel_think);
-  array_thread(getentarray("explodable_barrel", "script_noteworthy"), ::explodable_barrel_think);
-  array_thread(getentarray("shuddering_entity", "targetname"), ::shuddering_entity_think);
-  array_thread(getentarray("breakable box", "targetname"), ::breakable_think);
-  array_thread(getentarray("breakable box", "script_noteworthy"), ::breakable_think);
-  array_thread(getentarray("breakable", "targetname"), ::breakable_think);
-  array_thread(getentarray("breakable_vase", "targetname"), ::breakable_think);
-  array_thread(getentarray("oil_spill", "targetname"), ::oil_spill_think);
-  array_thread(getentarray("glass", "targetname"), ::glass_logic);
-  array_thread(getentarray("flammable_crate", "targetname"), ::flammable_crate_think);
-  array_thread(getentarray("flammable_crate", "script_noteworthy"), ::flammable_crate_think);
-  array_thread(getentarray("explodable_tarpcrate", "targetname"), ::explodable_tarpcrate_think);
-  array_thread(getentarray("explodable_tarpcrate", "script_noteworthy"), ::explodable_tarpcrate_think);
+  array_thread(getEntArray("tincan", "targetname"), ::tincan_think);
+  array_thread(getEntArray("helmet_pop", "targetname"), ::helmet_pop);
+  array_thread(getEntArray("explodable_barrel", "targetname"), ::explodable_barrel_think);
+  array_thread(getEntArray("explodable_barrel", "script_noteworthy"), ::explodable_barrel_think);
+  array_thread(getEntArray("shuddering_entity", "targetname"), ::shuddering_entity_think);
+  array_thread(getEntArray("breakable box", "targetname"), ::breakable_think);
+  array_thread(getEntArray("breakable box", "script_noteworthy"), ::breakable_think);
+  array_thread(getEntArray("breakable", "targetname"), ::breakable_think);
+  array_thread(getEntArray("breakable_vase", "targetname"), ::breakable_think);
+  array_thread(getEntArray("oil_spill", "targetname"), ::oil_spill_think);
+  array_thread(getEntArray("glass", "targetname"), ::glass_logic);
+  array_thread(getEntArray("flammable_crate", "targetname"), ::flammable_crate_think);
+  array_thread(getEntArray("flammable_crate", "script_noteworthy"), ::flammable_crate_think);
+  array_thread(getEntArray("explodable_tarpcrate", "targetname"), ::explodable_tarpcrate_think);
+  array_thread(getEntArray("explodable_tarpcrate", "script_noteworthy"), ::explodable_tarpcrate_think);
 }
 
 glass_logic() {
@@ -217,7 +217,7 @@ glass_logic() {
   else
     glasshealth = 250;
 
-  self setcandamage(1);
+  self setCanDamage(1);
 
   while(glasshealth > 0) {
     self waittill("damage", damage, attacker, direction_vec, point, damagetype);
@@ -241,7 +241,7 @@ glass_logic() {
 
   if(isDefined(cracked)) {
     cracked show();
-    cracked setcandamage(1);
+    cracked setCanDamage(1);
     glasshealth = 200 - prevdamage;
     cracked setcontents(crackedcontents);
 
@@ -271,14 +271,14 @@ glass_logic() {
 
 glass_play_break_fx(origin, info, direction_vec) {
   thread play_sound_in_space(level._glass_info[info]["breaksnd"], origin);
-  playfx(level._glass_info[info]["breakfx"], origin, direction_vec);
+  playFX(level._glass_info[info]["breakfx"], origin, direction_vec);
   level notify("glass_shatter");
 }
 
 oil_spill_think() {
   self.end = getstruct(self.target, "targetname");
   self.start = getstruct(self.end.target, "targetname");
-  self.barrel = getclosestent(self.start.origin, getentarray("explodable_barrel", "targetname"));
+  self.barrel = getclosestent(self.start.origin, getEntArray("explodable_barrel", "targetname"));
 
   if(isDefined(self.barrel)) {
     self.barrel.oilspill = 1;
@@ -286,7 +286,7 @@ oil_spill_think() {
   }
 
   self.extra = getent(self.target, "targetname");
-  self setcandamage(1);
+  self setCanDamage(1);
 
   while(true) {
     self waittill("damage", amount, attacker, direction_vec, p, type);
@@ -302,7 +302,7 @@ oil_spill_think() {
     else
       self.damageowner = attacker;
 
-    playfx(level.breakables_fx["oilspill"]["spark"], p, direction_vec);
+    playFX(level.breakables_fx["oilspill"]["spark"], p, direction_vec);
     p = pointonsegmentnearesttopoint(self.start.origin, self.end.origin, p);
     thread oil_spill_burn_section(p);
     self thread oil_spill_burn(p, self.start.origin);
@@ -346,7 +346,7 @@ oil_spill_burn(p, dest) {
   interval = vectorscale(forward, 8);
   angle = vectortoangles(forward);
   right = anglestoright(angle);
-  barrels = getentarray("explodable_barrel", "targetname");
+  barrels = getEntArray("explodable_barrel", "targetname");
   test = spawn("script_origin", p);
   num = 0;
 
@@ -395,7 +395,7 @@ oil_spill_burn(p, dest) {
 }
 
 oil_spill_burn_section(p) {
-  playfx(level.breakables_fx["oilspill"]["burn"], p);
+  playFX(level.breakables_fx["oilspill"]["burn"], p);
 }
 
 explodable_barrel_think() {
@@ -411,7 +411,7 @@ explodable_barrel_think() {
   self breakable_clip();
   self xenon_auto_aim();
   self.damagetaken = 0;
-  self setcandamage(1);
+  self setCanDamage(1);
 
   for(;;) {
     self waittill("damage", amount, attacker, direction_vec, p, type);
@@ -455,7 +455,7 @@ explodable_barrel_burn() {
 
   while(self.damagetaken < level.barrelhealth) {
     if(!startedfx) {
-      playfx(level.breakables_fx["barrel"]["burn_start"], self.origin + offset1);
+      playFX(level.breakables_fx["barrel"]["burn_start"], self.origin + offset1);
       level thread play_sound_in_space(level.barrelingsound, self.origin);
       startedfx = 1;
     }
@@ -466,8 +466,8 @@ explodable_barrel_burn() {
     if(count == 0) {
       self.damagetaken = self.damagetaken + (10 + randomfloat(10));
       badplace_cylinder("", 1, self.origin, 128, 250);
-      self playsound("exp_barrel_fuse");
-      playfx(level.breakables_fx["barrel"]["burn"], self.origin + offset2);
+      self playSound("exp_barrel_fuse");
+      playFX(level.breakables_fx["barrel"]["burn"], self.origin + offset2);
     }
 
     count++;
@@ -493,7 +493,7 @@ explodable_barrel_explode() {
 
   offset = offset + vectorscale((0, 0, 1), 4.0);
   level thread play_sound_in_space(level.barrelexpsound, self.origin);
-  playfx(level.breakables_fx["barrel"]["explode"], self.origin + offset);
+  playFX(level.breakables_fx["barrel"]["explode"], self.origin + offset);
   physicsexplosionsphere(self.origin + offset, 100, 80, 1);
   playrumbleonposition("barrel_explosion", self.origin + vectorscale((0, 0, 1), 32.0));
   level.barrelexplodingthisframe = 1;
@@ -523,9 +523,9 @@ explodable_barrel_explode() {
   self radiusdamage(self.origin + vectorscale((0, 0, 1), 30.0), blastradius, maxdamage, 1, attacker);
 
   if(randomint(2) == 0)
-    self setmodel("global_explosive_barrel_d");
+    self setModel("global_explosive_barrel_d");
   else
-    self setmodel("global_explosive_barrel_d");
+    self setModel("global_explosive_barrel_d");
 
   if(dot < 0.5) {
     start = self.origin + vectorscale(up, 22);
@@ -551,7 +551,7 @@ explodable_tarpcrate_think() {
   self breakable_clip();
   self xenon_auto_aim();
   self.damagetaken = 0;
-  self setcandamage(1);
+  self setCanDamage(1);
 
   for(;;) {
     self waittill("damage", amount, attacker, direction_vec, p, type);
@@ -630,7 +630,7 @@ explodable_tarpcrate_explode() {
 
   offset = offset + vectorscale((0, 0, 1), 4.0);
   level thread play_sound_in_space(level.tarpcrateexpsound, self.origin);
-  playfx(level.breakables_fx["tarpcrate"]["explode"], self.origin + offset);
+  playFX(level.breakables_fx["tarpcrate"]["explode"], self.origin + offset);
   physicsexplosionsphere(self.origin + offset, 100, 80, 1);
   level.barrelexplodingthisframe = 1;
 
@@ -654,9 +654,9 @@ explodable_tarpcrate_explode() {
   self radiusdamage(self.origin + vectorscale((0, 0, 1), 30.0), blastradius, 100, 50, attacker);
 
   if(randomint(2) == 0)
-    self setmodel("static_peleliu_crate_tarp_d");
+    self setModel("static_peleliu_crate_tarp_d");
   else
-    self setmodel("static_peleliu_crate_tarp_d");
+    self setModel("static_peleliu_crate_tarp_d");
 
   if(dot < 0.5) {
     start = self.origin + vectorscale(up, 22);
@@ -687,7 +687,7 @@ flammable_crate_think() {
   self breakable_clip();
   self xenon_auto_aim();
   self.damagetaken = 0;
-  self setcandamage(1);
+  self setCanDamage(1);
 
   for(;;) {
     self waittill("damage", amount, attacker, direction_vec, p, type);
@@ -764,7 +764,7 @@ flammable_crate_explode() {
 
   offset = offset + vectorscale((0, 0, 1), 4.0);
   level thread play_sound_in_space(level.crateexpsound, self.origin);
-  playfx(level.breakables_fx["ammo_crate"]["explode"], self.origin);
+  playFX(level.breakables_fx["ammo_crate"]["explode"], self.origin);
   physicsexplosionsphere(self.origin + offset, 100, 80, 1);
   level.barrelexplodingthisframe = 1;
 
@@ -786,9 +786,9 @@ flammable_crate_explode() {
   self radiusdamage(self.origin + vectorscale((0, 0, 1), 30.0), blastradius, 250, 1, attacker);
 
   if(randomint(2) == 0)
-    self setmodel("global_flammable_crate_jap_piece01_d");
+    self setModel("global_flammable_crate_jap_piece01_d");
   else
-    self setmodel("global_flammable_crate_jap_piece01_d");
+    self setModel("global_flammable_crate_jap_piece01_d");
 
   if(dot < 0.5) {
     start = self.origin + vectorscale(up, 22);
@@ -808,7 +808,7 @@ shuddering_entity_think() {
   if(self.model == "prop_helmet_german_normandy")
     helmet = 1;
 
-  self setcandamage(1);
+  self setCanDamage(1);
 
   for(;;) {
     self waittill("damage", other, damage, direction_vec, point);
@@ -826,18 +826,18 @@ tincan_think() {
   if(self.classname != "script_model") {
     return;
   }
-  self setcandamage(1);
+  self setCanDamage(1);
   self waittill("damage", damage, ent);
 
   if(issentient(ent))
-    direction_org = ent geteye() - (0, 0, randomint(50) + 50);
+    direction_org = ent getEye() - (0, 0, randomint(50) + 50);
   else
     direction_org = ent.origin;
 
   direction_vec = vectornormalize(self.origin - direction_org);
   direction_vec = vectorscale(direction_vec, 0.5 + randomfloat(1));
   self notify("death");
-  playfx(level.breakables_fx["tincan"], self.origin, direction_vec);
+  playFX(level.breakables_fx["tincan"], self.origin, direction_vec);
   self delete();
 }
 
@@ -846,7 +846,7 @@ helmet_pop() {
     return;
   }
   self xenon_auto_aim();
-  self setcandamage(1);
+  self setCanDamage(1);
   self thread helmet_logic();
 }
 
@@ -854,7 +854,7 @@ helmet_logic() {
   self waittill("damage", damage, ent);
 
   if(issentient(ent))
-    direction_org = ent geteye();
+    direction_org = ent getEye();
   else
     direction_org = ent.origin;
 
@@ -869,7 +869,7 @@ helmet_logic() {
   self hide();
   model = spawn("script_model", self.origin + vectorscale((0, 0, 1), 5.0));
   model.angles = self.angles;
-  model setmodel(self.model);
+  model setModel(self.model);
   model thread animscripts\death::helmetlaunch(direction_vec);
   self.dontremove = 0;
   self notify("ok_remove");
@@ -1053,7 +1053,7 @@ breakable_think() {
       trig thread breakable_think_triggered(self);
   }
 
-  self setcandamage(1);
+  self setCanDamage(1);
   self thread breakable_logic(type);
 }
 
@@ -1114,10 +1114,10 @@ breakable_logic(type) {
   self thread make_broken_peices(self, type);
 
   if(isDefined(fx))
-    playfx(fx, self.origin);
+    playFX(fx, self.origin);
 
   if(hasdependant) {
-    others = getentarray("breakable", "targetname");
+    others = getEntArray("breakable", "targetname");
 
     for(i = 0; i < others.size; i++) {
       other = others[i];
@@ -1259,7 +1259,7 @@ getclosestent(org, array) {
 
 make_broken_peices(wholepiece, type) {
   rt = anglestoright(wholepiece.angles);
-  fw = anglestoforward(wholepiece.angles);
+  fw = anglesToForward(wholepiece.angles);
   up = anglestoup(wholepiece.angles);
   piece = [];
 
@@ -1482,7 +1482,7 @@ pieces_move(origin) {
 pieces_collision(height) {
   self endon("death");
   wait 0.1;
-  trace = bullettrace(self.origin, self.origin - vectorscale((0, 0, 1), 50000.0), 0, undefined);
+  trace = bulletTrace(self.origin, self.origin - vectorscale((0, 0, 1), 50000.0), 0, undefined);
   vec = trace["position"];
 
   while(self.origin[2] > vec[2])
@@ -1503,7 +1503,7 @@ addpiece(rt, fw, up, xs, ys, zs, wholepiece, angles, model) {
   z = vectorscale(z, zs * 1);
   origin = wholepiece.origin + x + y + z;
   part = spawn("script_model", origin);
-  part setmodel(model);
+  part setModel(model);
   part.modelscale = 1;
   part.angles = wholepiece.angles + angles;
   list_add(part);

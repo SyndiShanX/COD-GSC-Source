@@ -25,14 +25,14 @@
 #namespace zm_genesis_ai_spawning;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_ai_spawning", & __init__, undefined, undefined);
+  system::register("zm_genesis_ai_spawning", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("toplayer", "chaos_postfx_set", 15000, 1, "int", & chaos_postfx_set, 0, 0);
-  clientfield::register("world", "chaos_fog_bank_switch", 15000, 1, "int", & chaos_fog_bank_switch, 0, 0);
+  clientfield::register("toplayer", "chaos_postfx_set", 15000, 1, "int", &chaos_postfx_set, 0, 0);
+  clientfield::register("world", "chaos_fog_bank_switch", 15000, 1, "int", &chaos_fog_bank_switch, 0, 0);
   visionset_mgr::register_visionset_info("zm_chaos_organge", 15000, 1, undefined, "zm_chaos_organge");
-  ai::add_archetype_spawn_function("keeper", & function_5ea6033e);
+  ai::add_archetype_spawn_function("keeper", &function_5ea6033e);
   level._effect["chaos_1p_light"] = "zombie/fx_bmode_tent_light_zod_zmb";
   level._effect["keeper_glow"] = "zombie/fx_keeper_ambient_torso_zod_zmb";
   level._effect["keeper_mouth"] = "zombie/fx_keeper_glow_mouth_zod_zmb";
@@ -46,7 +46,7 @@ function chaos_postfx_set(localclientnum, oldval, newval, bnewent, binitialsnap,
     self.var_d8f5e78d = playfxoncamera(localclientnum, level._effect["chaos_1p_light"]);
     function_3c75e14b(localclientnum, 1);
   } else {
-    if(isdefined(self.var_d8f5e78d)) {
+    if(isDefined(self.var_d8f5e78d)) {
       stopfx(localclientnum, self.var_d8f5e78d);
       self.var_d8f5e78d = undefined;
     }
@@ -74,7 +74,7 @@ function function_3c75e14b(localclientnum, onoff) {
 function chaos_fog_bank_switch(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
     level.var_b7572a82 = 1;
-    for (localclientnum = 0; localclientnum < level.localplayers.size; localclientnum++) {
+    for(localclientnum = 0; localclientnum < level.localplayers.size; localclientnum++) {
       if(level.var_e8af7a2f) {
         setworldfogactivebank(localclientnum, 8);
         continue;
@@ -82,7 +82,7 @@ function chaos_fog_bank_switch(localclientnum, oldval, newval, bnewent, binitial
       setworldfogactivebank(localclientnum, 2);
     }
   } else {
-    for (localclientnum = 0; localclientnum < level.localplayers.size; localclientnum++) {
+    for(localclientnum = 0; localclientnum < level.localplayers.size; localclientnum++) {
       if(level.var_e8af7a2f) {
         setworldfogactivebank(localclientnum, 4);
         continue;
@@ -94,33 +94,33 @@ function chaos_fog_bank_switch(localclientnum, oldval, newval, bnewent, binitial
 }
 
 function function_5ea6033e(localclientnum) {
-  self.var_341f7209 = playfxontag(localclientnum, level._effect["keeper_glow"], self, "j_spineupper");
-  self.var_c5e3cf4b = playfxontag(localclientnum, level._effect["keeper_mouth"], self, "j_head");
-  self.var_2d3cc156 = playfxontag(localclientnum, level._effect["keeper_trail"], self, "j_robe_front_03");
-  if(!isdefined(self.sndlooper)) {
-    self.sndlooper = self playloopsound("zmb_keeper_looper");
+  self.var_341f7209 = playFXOnTag(localclientnum, level._effect["keeper_glow"], self, "j_spineupper");
+  self.var_c5e3cf4b = playFXOnTag(localclientnum, level._effect["keeper_mouth"], self, "j_head");
+  self.var_2d3cc156 = playFXOnTag(localclientnum, level._effect["keeper_trail"], self, "j_robe_front_03");
+  if(!isDefined(self.sndlooper)) {
+    self.sndlooper = self playLoopSound("zmb_keeper_looper");
   }
-  self callback::on_shutdown( & function_4dc56cc7);
+  self callback::on_shutdown(&function_4dc56cc7);
 }
 
 function function_4dc56cc7(localclientnum) {
-  if(isdefined(self.var_341f7209)) {
+  if(isDefined(self.var_341f7209)) {
     stopfx(localclientnum, self.var_341f7209);
     self.var_341f7209 = undefined;
   }
-  if(isdefined(self.var_c5e3cf4b)) {
+  if(isDefined(self.var_c5e3cf4b)) {
     stopfx(localclientnum, self.var_c5e3cf4b);
     self.var_c5e3cf4b = undefined;
   }
-  if(isdefined(self.var_2d3cc156)) {
+  if(isDefined(self.var_2d3cc156)) {
     stopfx(localclientnum, self.var_2d3cc156);
     self.var_2d3cc156 = undefined;
   }
   v_origin = self gettagorigin("j_spineupper");
   v_angles = self gettagangles("j_spineupper");
-  if(isdefined(v_origin) && isdefined(v_angles)) {
-    playfx(localclientnum, level._effect["keeper_death"], v_origin, v_angles);
+  if(isDefined(v_origin) && isDefined(v_angles)) {
+    playFX(localclientnum, level._effect["keeper_death"], v_origin, v_angles);
   }
   self stopallloopsounds();
-  self playsound(0, "zmb_keeper_death_explo");
+  self playSound(0, "zmb_keeper_death_explo");
 }

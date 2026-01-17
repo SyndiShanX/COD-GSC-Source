@@ -79,14 +79,14 @@ function pack_a_punch_open_door() {
   upper_door_model moveto(upper_door_model.origin + upper_door_model.script_vector, 1.5);
   level.pack_a_punch_door moveto(level.pack_a_punch_door.origin + level.pack_a_punch_door.script_vector, 1.5);
   level.pack_a_punch_door.clip notsolid();
-  upper_door_model playsound("zmb_heavy_door_open");
-  level.pack_a_punch_door.clip playsound("zmb_heavy_door_open");
+  upper_door_model playSound("zmb_heavy_door_open");
+  level.pack_a_punch_door.clip playSound("zmb_heavy_door_open");
   level.pack_a_punch_door waittill("movedone");
   level.pack_a_punch_door.clip connectpaths();
 }
 
 function pack_print(str) {
-  if(isdefined(level.pack_debug) && level.pack_debug) {
+  if(isDefined(level.pack_debug) && level.pack_debug) {
     iprintln(str);
   }
 }
@@ -100,10 +100,10 @@ function launch_rocket() {
   self sethintstring(&"ZM_COSMODROME_WAITING_AUTHORIZATION");
   level flag::wait_till("launch_activated");
   self sethintstring(&"ZM_COSMODROME_LAUNCH_AVAILABLE");
-  panel setmodel("p7_zm_asc_console_launch_key_full_green");
+  panel setModel("p7_zm_asc_console_launch_key_full_green");
   self thread zm_cosmodrome::function_620401c0(self.origin, "", "");
   self waittill("trigger", who);
-  panel playsound("zmb_comp_activate");
+  panel playSound("zmb_comp_activate");
   level thread zm_cosmodrome_amb::play_cosmo_announcer_vox("vox_ann_launch_button");
   level thread do_launch_countdown();
   self delete();
@@ -112,12 +112,12 @@ function launch_rocket() {
 function play_launch_loopers() {
   level endon("rocket_dmg");
   level.rocket_base_looper = getent("rocket_base_engine", "script_noteworthy");
-  level.rocket_base_looper playloopsound("zmb_rocket_launch", 0.1);
+  level.rocket_base_looper playLoopSound("zmb_rocket_launch", 0.1);
   wait(2);
   level.var_4ba14d27 = spawn("script_origin", (0, 0, 0));
   level.var_d999ddec = spawn("script_origin", (0, 0, 0));
-  level.var_4ba14d27 playloopsound("zmb_rocket_air_distf", 0.1);
-  level.var_d999ddec playloopsound("zmb_rocket_air_distr", 0.1);
+  level.var_4ba14d27 playLoopSound("zmb_rocket_air_distf", 0.1);
+  level.var_d999ddec playLoopSound("zmb_rocket_air_distr", 0.1);
   wait(22);
   level.rocket_base_looper stoploopsound(1);
   wait(46);
@@ -128,10 +128,10 @@ function play_launch_loopers() {
 
 function delete_rocket_sound_ents() {
   wait(5);
-  if(isdefined(level.var_4ba14d27)) {
+  if(isDefined(level.var_4ba14d27)) {
     level.var_4ba14d27 delete();
   }
-  if(isdefined(level.var_d999ddec)) {
+  if(isDefined(level.var_d999ddec)) {
     level.var_d999ddec delete();
   }
 }
@@ -139,15 +139,15 @@ function delete_rocket_sound_ents() {
 function do_launch_countdown() {
   level.gantry_r rotateyaw(60, 6);
   level.gantry_l rotateyaw(-60, 6);
-  level.gantry_l playsound("zmb_rocket_disengage");
-  level.gantry_l playsound("zmb_rocket_start");
+  level.gantry_l playSound("zmb_rocket_disengage");
+  level.gantry_l playSound("zmb_rocket_start");
   wait(3);
   rocket_base = getent("rocket_base_engine", "script_noteworthy");
   level thread play_launch_loopers();
   zm_cosmodrome_traps::claw_attach(level.claw_arm_l, "claw_l");
   zm_cosmodrome_traps::claw_attach(level.claw_arm_r, "claw_r");
   wait(2);
-  for (i = 5; i > 0; i--) {
+  for(i = 5; i > 0; i--) {
     level thread zm_cosmodrome_amb::play_cosmo_announcer_vox("vox_ann_launch_countdown_" + i, 1, 1);
     wait(1);
     if(i == 4) {
@@ -160,8 +160,8 @@ function do_launch_countdown() {
 }
 
 function rocket_liftoff() {
-  rocket_pieces = getentarray(level.rocket.target, "targetname");
-  for (i = 0; i < rocket_pieces.size; i++) {
+  rocket_pieces = getEntArray(level.rocket.target, "targetname");
+  for(i = 0; i < rocket_pieces.size; i++) {
     rocket_pieces[i] linkto(level.rocket);
   }
   level endon("rocket_dmg");
@@ -184,8 +184,8 @@ function rocket_liftoff() {
   wait(20);
   level notify("stop_rumble");
   level.rocket waittill("movedone");
-  rocket_pieces = getentarray(level.rocket.target, "targetname");
-  for (i = 0; i < rocket_pieces.size; i++) {
+  rocket_pieces = getEntArray(level.rocket.target, "targetname");
+  for(i = 0; i < rocket_pieces.size; i++) {
     rocket_pieces[i] delete();
   }
   level.rocket delete();
@@ -194,10 +194,10 @@ function rocket_liftoff() {
 function launch_rumble_and_quake() {
   level endon("stop_rumble");
   level endon("stop_rumble_dmg");
-  while (isdefined(level.rocket)) {
+  while(isDefined(level.rocket)) {
     players = getplayers();
     players_in_range = [];
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       if(distancesquared(players[i].origin, level.rocket.origin) < 30250000) {
         players_in_range[players_in_range.size] = players[i];
       }
@@ -208,7 +208,7 @@ function launch_rumble_and_quake() {
     }
     earthquake(randomfloatrange(0.15, 0.35), randomfloatrange(0.25, 0.5), level.rocket.origin, 5500);
     rumble = "slide_rumble";
-    for (i = 0; i < players_in_range.size; i++) {
+    for(i = 0; i < players_in_range.size; i++) {
       players_in_range[i] playrumbleonentity(rumble);
     }
     wait(0.1);
@@ -217,8 +217,8 @@ function launch_rumble_and_quake() {
 
 function rocket_monitor_for_damage() {
   level endon("stop_rumble");
-  rocket_pieces = getentarray(level.rocket.target, "targetname");
-  array::thread_all(rocket_pieces, & rocket_piece_monitor_for_damage);
+  rocket_pieces = getEntArray(level.rocket.target, "targetname");
+  array::thread_all(rocket_pieces, &rocket_piece_monitor_for_damage);
   level.rocket thread rocket_piece_monitor_for_damage();
   level waittill("rocket_dmg");
   playsoundatposition("zmb_rocket_destroyed", (0, 0, 0));
@@ -230,7 +230,7 @@ function rocket_monitor_for_damage() {
   level.var_be9553f1 thread scene::play("p7_fxanim_zm_asc_rocket_explode_debris_bundle", level.var_be9553f1);
   var_8094093b = getent("rocket_base_engine", "script_noteworthy");
   var_8094093b clientfield::set("COSMO_ROCKET_FX", 0);
-  for (i = 0; i < rocket_pieces.size; i++) {
+  for(i = 0; i < rocket_pieces.size; i++) {
     rocket_pieces[i] thread function_24d5fd7f();
   }
   wait(2);
@@ -247,21 +247,21 @@ function function_24d5fd7f() {
 }
 
 function piece_crash_down(num) {
-  trace = bullettrace(self.origin, self.origin + (randomintrange(-100, 100), randomintrange(-100, 100), -20000), 0, self);
+  trace = bulletTrace(self.origin, self.origin + (randomintrange(-100, 100), randomintrange(-100, 100), -20000), 0, self);
   ground_pos = trace["position"] + vectorscale((0, 0, 1), 1.5);
   self moveto(ground_pos, 3);
   self rotateto((randomintrange(-360, 360), randomintrange(-360, 360), randomintrange(-360, 360)), 3.9);
   wait(3.9);
   earthquake(randomfloatrange(0.25, 0.45), randomfloatrange(0.65, 0.75), self.origin, 5500);
-  if(isdefined(num)) {
+  if(isDefined(num)) {
     if(num == 0) {
-      self playsound("zmb_rocket_top_crash");
+      self playSound("zmb_rocket_top_crash");
     } else if(num == 1) {
-      self playsound("zmb_rocket_bottom_crash");
+      self playSound("zmb_rocket_bottom_crash");
     }
   }
   if(self == level.rocket) {
-    playfxontag(level._effect["rocket_exp_2"], self, "tag_origin");
+    playFXOnTag(level._effect["rocket_exp_2"], self, "tag_origin");
   }
   wait(1);
   self hide();
@@ -271,7 +271,7 @@ function piece_crash_down(num) {
 
 function rocket_piece_monitor_for_damage() {
   level endon("no_rocket_damage");
-  self setcandamage(1);
+  self setCanDamage(1);
   self waittill("damage", dmg_amount, attacker, dir, point, dmg_type);
   if(isplayer(attacker) && (dmg_type == "MOD_PROJECTILE" || dmg_type == "MOD_PROJECTILE_SPLASH" || dmg_type == "MOD_EXPLOSIVE" || dmg_type == "MOD_EXPLOSIVE_SPLASH" || dmg_type == "MOD_GRENADE" || dmg_type == "MOD_GRENADE_SPLASH")) {
     level notify("rocket_dmg");
@@ -283,8 +283,8 @@ function rocket_piece_monitor_for_damage() {
 }
 
 function rocket_explode() {
-  playfxontag(level._effect["rocket_exp_1"], self, "tag_origin");
-  self playsound("zmb_rocket_stage_1_exp");
+  playFXOnTag(level._effect["rocket_exp_1"], self, "tag_origin");
+  self playSound("zmb_rocket_stage_1_exp");
   wait(2);
   var_6d564cb6 = struct::get("pressure_pad", "targetname");
   zm_powerups::specific_powerup_drop("double_points", var_6d564cb6.origin);

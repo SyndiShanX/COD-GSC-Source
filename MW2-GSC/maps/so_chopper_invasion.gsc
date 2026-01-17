@@ -21,7 +21,7 @@ main() {
   so_chopper_invasion_init_flags();
   so_chopper_invasion_precache();
 
-  add_hint_string("ads_slowdown", & "SO_CHOPPER_INVASION_HINT_ADS_SLOWDOWN", ::so_ads_slowdown_hint);
+  add_hint_string("ads_slowdown", &"SO_CHOPPER_INVASION_HINT_ADS_SLOWDOWN", ::so_ads_slowdown_hint);
 
   so_delete_all_by_type(::type_spawn_trigger, ::type_spawners, ::type_killspawner_trigger, ::type_goalvolume, ::custom_flag_trigger);
   delete_turrets();
@@ -64,7 +64,6 @@ main() {
   //thread maps\_debug::debug_character_count();
 
   thread so_level_cleanup();
-
 }
 
 precache_strings() {
@@ -75,8 +74,8 @@ precache_strings() {
   PrecacheString(&"SO_CHOPPER_INVASION_DEADQUOTE_HINT2");
 
   quotes = [];
-  quotes[quotes.size] = & "SO_CHOPPER_INVASION_DEADQUOTE_HINT1";
-  quotes[quotes.size] = & "SO_CHOPPER_INVASION_DEADQUOTE_HINT2";
+  quotes[quotes.size] = &"SO_CHOPPER_INVASION_DEADQUOTE_HINT1";
+  quotes[quotes.size] = &"SO_CHOPPER_INVASION_DEADQUOTE_HINT2";
   so_include_deadquote_array(quotes);
 }
 
@@ -104,7 +103,7 @@ so_fx_handler() {
 }
 
 custom_flag_trigger() {
-  if(IsDefined(self.script_specialops) || !IsDefined(self.classname)) {
+  if(isDefined(self.script_specialops) || !isDefined(self.classname)) {
     return false;
   }
 
@@ -115,7 +114,7 @@ custom_flag_trigger() {
   array["trigger_multiple_flag_looking"] = 1;
   array["trigger_multiple_flag_lookat"] = 1;
 
-  return IsDefined(array[self.classname]);
+  return isDefined(array[self.classname]);
 }
 
 // Clean up the level
@@ -155,7 +154,7 @@ so_player_selection() {
     level.specops_character_selector = GetDvar("coop_start");
   }
 
-  ///#
+  //
   //	// Map Restart support. Restores the start dvar on map_restart since it gets reused.
   //	if( GetDvar( "start_backup" ) != "" )
   //	{
@@ -174,19 +173,19 @@ so_player_selection() {
   //	{
   //		SetDvar( "debug_follow", "0" );
   //	}
-  //#/
+  //
 
 }
 
 delete_turrets() {
-  foreach(turret in GetEntArray("misc_turret", "classname")) {
+  foreach(turret in getEntArray("misc_turret", "classname")) {
     turret Delete();
   }
 }
 
 so_chopper_invasion_spawner_functions() {
   add_global_spawn_function("axis", ::ai_post_spawn);
-  array_thread(GetEntArray("so_rpg_guys", "targetname"), ::add_spawn_function, ::so_rpg_post_spawn);
+  array_thread(getEntArray("so_rpg_guys", "targetname"), ::add_spawn_function, ::so_rpg_post_spawn);
 }
 
 so_chopper_invasion_init_flags() {
@@ -266,15 +265,15 @@ so_chopper_invasion_moments() {
 }
 
 so_init_players() {
-  AssertEx(IsDefined(level.specops_character_selector), "Failed to select character");
+  AssertEx(isDefined(level.specops_character_selector), "Failed to select character");
 
   // test_chopper is intended to be used when in SP and testing only the CHOPPER
   if(level.specops_character_selector == "test_chopper") {
     level.chopperplayer = level.player;
-    level.groundplayer = Spawn("script_model", (0, 0, 0));
-    level.groundplayer SetModel("tag_origin");
+    level.groundplayer = spawn("script_model", (0, 0, 0));
+    level.groundplayer setModel("tag_origin");
   } else {
-    AssertEx(IsDefined(level.players[1]), "Second player does not exist, this level requires two players");
+    AssertEx(isDefined(level.players[1]), "Second player does not exist, this level requires two players");
 
     if(level.specops_character_selector == "so_char_host") {
       level.chopperplayer = level.players[0];
@@ -306,7 +305,7 @@ so_init_players() {
 so_chopper_invasion_objectives() {
   ref = getstruct("so_end_of_level", "targetname");
   // Link up with your partner at the extraction point.
-  Objective_Add(0, "current", & "SO_CHOPPER_INVASION_OBJ_REGULAR", groundpos(ref.origin));
+  Objective_Add(0, "current", &"SO_CHOPPER_INVASION_OBJ_REGULAR", groundpos(ref.origin));
 }
 
 empty() {}
@@ -412,7 +411,7 @@ chopper_less_roll() {
 }
 
 chopper_driveby_rpg_guys() {
-  array_spawn(GetEntArray("so_rpg_guys", "targetname"), true);
+  array_spawn(getEntArray("so_rpg_guys", "targetname"), true);
 }
 
 chopper_driveby_guys_in_buildings() {
@@ -422,7 +421,7 @@ chopper_driveby_guys_in_buildings() {
     return;
   }
 
-  thread array_spawn(GetEntArray("so_guys_in_buildings", "targetname"), true);
+  thread array_spawn(getEntArray("so_guys_in_buildings", "targetname"), true);
 }
 
 chopper_guns_guns_guns() {
@@ -481,7 +480,7 @@ parkinglot_trucks() {
 
   // Make sure they are removed
   foreach(ai in killed_guys) {
-    if(IsDefined(ai)) {
+    if(isDefined(ai)) {
       ai Delete();
     }
   }
@@ -496,7 +495,7 @@ parkinglot_trucks() {
 
   wait(0.5);
   // Guys behind Taco Togo
-  thread array_spawn(GetEntArray("so_post_gas_station_guys", "targetname"));
+  thread array_spawn(getEntArray("so_post_gas_station_guys", "targetname"));
 
   wait(3.5);
   spawn_truck("so_parklinglot_truck4");
@@ -525,7 +524,7 @@ end() {
   point = getstruct("so_chopper_end_path", "targetname");
   dist = DistanceSquared(level.chopper.origin, point.origin);
   closest = point;
-  while (IsDefined(point.target)) {
+  while(isDefined(point.target)) {
     new_point = getstruct(point.target, "targetname");
     new_dist = DistanceSquared(level.chopper.origin, new_point.origin);
 
@@ -534,7 +533,7 @@ end() {
       closest = new_point;
     }
 
-    if(IsDefined(new_point.script_noteworthy) && new_point.script_noteworthy == "so_end_lookat") {
+    if(isDefined(new_point.script_noteworthy) && new_point.script_noteworthy == "so_end_lookat") {
       break;
     }
 
@@ -542,7 +541,7 @@ end() {
   }
 
   // Now get the next on on the chain and make that the goal
-  if(IsDefined(closest.script_noteworthy) && closest.script_noteworthy == "so_end_lookat") {
+  if(isDefined(closest.script_noteworthy) && closest.script_noteworthy == "so_end_lookat") {
     point = getstruct(closest.targetname, "targetname");
   } else // The last point on the chain got selected
   {
@@ -560,7 +559,7 @@ end() {
 end_spawners() {
   //	trigger_wait_targetname( "so_roof" );
   flag_wait("so_roof");
-  level thread maps\_spawner::flood_spawner_scripted(GetEntArray("so_end_spawners", "targetname"));
+  level thread maps\_spawner::flood_spawner_scripted(getEntArray("so_end_spawners", "targetname"));
 
   // Wait for the guys_in_buildings to spawn in, then set their goals.
   wait(0.1);
@@ -578,7 +577,7 @@ end_reminder() {
   wait(3);
 
   trigger = GetEnt("so_roof_check", "targetname");
-  while (1) {
+  while(1) {
     if(level.groundplayer IsTouching(trigger)) {
       chopper_dialog("end_reminder");
     }
@@ -591,7 +590,7 @@ end_go_to_diner() {
   // Tell everyone to go into the nate's diner
   ais = GetAiArray("axis");
   foreach(ai in ais) {
-    if(!IsDefined(ai)) {
+    if(!isDefined(ai)) {
       continue;
     }
 
@@ -599,11 +598,11 @@ end_go_to_diner() {
       continue;
     }
 
-    if(IsDefined(ai.script_noteworthy) && ai.script_noteworthy == "so_post_gas_station_guy") {
+    if(isDefined(ai.script_noteworthy) && ai.script_noteworthy == "so_post_gas_station_guy") {
       continue;
     }
 
-    if(IsDefined(ai.a.special) && ai.a.special != "none") {
+    if(isDefined(ai.a.special) && ai.a.special != "none") {
       continue;
     }
 
@@ -636,7 +635,7 @@ end_go_to_diner_thread() {
 
 end_lookat() {
   level.chopper chopper_default_pitch_roll();
-  Objective_String(0, & "SO_CHOPPER_INVASION_OBJ_FINAL");
+  Objective_String(0, &"SO_CHOPPER_INVASION_OBJ_FINAL");
   Objective_OnEntity(0, level.chopper);
 
   // This is done when put on the path
@@ -653,7 +652,7 @@ end_pickup() {
   level.chopper thread chopper_fake_hover(struct.origin, 10, true);
 
   trigger = GetEnt("so_end_jump_trigger", "targetname");
-  while (!level.groundplayer IsTouching(trigger)) {
+  while(!level.groundplayer IsTouching(trigger)) {
     wait(0.05);
   }
 
@@ -671,17 +670,17 @@ end_pickup() {
     player EnableInvulnerability();
   }
 
-  temp_tag = Spawn("script_model", (0, 0, 0));
-  temp_tag SetModel("tag_origin");
+  temp_tag = spawn("script_model", (0, 0, 0));
+  temp_tag setModel("tag_origin");
 
   //	// Fake Jump
   //	tag_org = self GetTagOrigin( "tag_player" );
   //	tag_angles = self GetTagAngles( "tag_origin" );
-  //	forward = AnglesToForward( tag_angles );
+  //	forward = anglesToForward( tag_angles );
   //	tag_org = tag_org + vector_multiply( forward, 40 );
   //
   //	angles = VectorToAngles( tag_org - level.groundplayer.origin );
-  //	forward = AnglesToForward( angles );
+  //	forward = anglesToForward( angles );
   //	dist = Distance( tag_org, level.groundplayer.origin );
   //	step_dist = dist / 5;
   //	z = [];
@@ -695,10 +694,10 @@ end_pickup() {
   //
   //	temp_tag.origin = level.groundplayer.origin;
   //	level.groundplayer PlayerLinkTo( temp_tag, "tag_origin", 1 );
-  //	time = Distance( level.groundplayer.origin, tag_org ) / speed; 
+  //	time = Distance( level.groundplayer.origin, tag_org ) / speed;
   //	temp_tag RotateTo( self GetTagAngles( "tag_player" ) + ( 0, -90, 0 ), time );
   //
-  //	for ( i = 0; i < 4; i++ )
+  //	for( i = 0; i < 4; i++ )
   //	{
   //		vec = level.groundplayer.origin + vector_multiply( forward, step_dist );
   //		vec = ( vec[ 0 ], vec[ 1 ], z[ i ] );
@@ -711,7 +710,7 @@ end_pickup() {
   //
   //	tag_org = self GetTagOrigin( "tag_player" );
   //	tag_angles = self GetTagAngles( "tag_origin" );
-  //	forward = AnglesToForward( tag_angles );
+  //	forward = anglesToForward( tag_angles );
   //
   //	tag_org = tag_org + vector_multiply( forward, 40 );
   //	time = Distance( tag_org, level.groundplayer.origin ) / speed;
@@ -725,7 +724,7 @@ end_pickup() {
   //	temp_tag lerp_player_view_to_tag( level.groundplayer, "tag_origin", time, 1, 45, 45, 30, 30 );
   tag_org = self GetTagOrigin("tag_player");
   tag_angles = self GetTagAngles("tag_origin");
-  forward = AnglesToForward(tag_angles);
+  forward = anglesToForward(tag_angles);
 
   tag_org = tag_org + vector_multiply(forward, 40);
   temp_tag.origin = tag_org;
@@ -744,7 +743,7 @@ end_pickup() {
 end_ai_monitor() {
   trigger = GetEnt("so_roof_check", "targetname");
 
-  while (1) {
+  while(1) {
     wait(0.5);
     ais = GetAiArray("axis");
 
@@ -754,7 +753,7 @@ end_ai_monitor() {
         continue;
       }
 
-      if(IsDefined(ai.a.special) && ai.a.special == "dying_crawl") {
+      if(isDefined(ai.a.special) && ai.a.special == "dying_crawl") {
         continue;
       }
 
@@ -794,7 +793,7 @@ end_challenge(finish_now) {
   flag_set("challenge_end");
   objective_complete(0);
 
-  if(IsDefined(finish_now)) {
+  if(isDefined(finish_now)) {
     end_fade();
   }
 }

@@ -46,8 +46,8 @@ main() {
 
 misc_rotate_fans() {
   precachempanim("rotate_Z_L");
-  common_scripts\utility::array_thread(getentarray("com_wall_fan_blade_rotate_custom", "targetname"), ::fan_blade_rotate_custom);
-  common_scripts\utility::array_thread(getentarray("com_wall_fan_blade_rotate", "targetname"), ::fan_blade_rotate);
+  common_scripts\utility::array_thread(getEntArray("com_wall_fan_blade_rotate_custom", "targetname"), ::fan_blade_rotate_custom);
+  common_scripts\utility::array_thread(getEntArray("com_wall_fan_blade_rotate", "targetname"), ::fan_blade_rotate);
 }
 
 fan_blade_rotate_custom() {
@@ -57,7 +57,7 @@ fan_blade_rotate_custom() {
 fan_blade_rotate() {
   var_0 = 600;
 
-  for (;;) {
+  for(;;) {
     self rotatevelocity((0, 150, 0), var_0);
     wait(var_0);
   }
@@ -76,7 +76,7 @@ animated_boats_precache() {
   precachempanim("h1_mp_lifeboat_idle_1");
   precachempanim("h1_mp_lifeboat_idle_2");
   precachempanim("h1_mp_lifeboat_idle_3");
-  var_0 = getentarray("animated_boat", "targetname");
+  var_0 = getEntArray("animated_boat", "targetname");
   common_scripts\utility::array_thread(var_0, ::animated_boats);
 }
 
@@ -92,7 +92,7 @@ animated_boats() {
   var_0[2] = "h1_mp_lifeboat_idle_3";
   var_1[2] = % h1_mp_lifeboat_idle_3;
 
-  for (;;) {
+  for(;;) {
     var_2 = randomint(3);
     self scriptmodelplayanimdeltamotion(var_0[var_2]);
     wait(getanimlength(var_1[var_2]));

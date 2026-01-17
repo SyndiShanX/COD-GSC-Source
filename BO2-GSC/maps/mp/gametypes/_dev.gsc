@@ -91,7 +91,7 @@ init() {
     extra_spawns[3] = "mp_dem_spawn_defender_b";
 
     for(i = 0; i < extra_spawns.size; i++) {
-      points = getentarray(extra_spawns[i], "classname");
+      points = getEntArray(extra_spawns[i], "classname");
 
       if(isDefined(points) && points.size > 0)
         level.dem_spawns = arraycombine(level.dem_spawns, points, 1, 0);
@@ -153,10 +153,10 @@ warpalltohost(team) {
   nodes = getnodesinradius(origin, 128, 32, 128, "Path");
   angles = host getplayerangles();
   yaw = (0.0, angles[1], 0.0);
-  forward = anglestoforward(yaw);
+  forward = anglesToForward(yaw);
   spawn_origin = origin + forward * 128 + vectorscale((0, 0, 1), 16.0);
 
-  if(!bullettracepassed(host geteye(), spawn_origin, 0, host))
+  if(!bullettracepassed(host getEye(), spawn_origin, 0, host))
     spawn_origin = undefined;
 
   for(i = 0; i < players.size; i++) {
@@ -606,7 +606,7 @@ updatedevsettings() {
   if(getdvar(#"scr_forceevent") != "") {
     event = getdvar(#"scr_forceevent");
     player = gethostplayer();
-    forward = anglestoforward(player.angles);
+    forward = anglesToForward(player.angles);
     right = anglestoright(player.angles);
 
     if(event == "painfront")
@@ -686,7 +686,7 @@ updatedevsettings() {
   }
 
   if(getdvar(#"_id_4F1284FA") != "") {
-    ents = getentarray();
+    ents = getEntArray();
     level.entarray = [];
     level.entcounts = [];
     level.entgroups = [];
@@ -856,7 +856,7 @@ devgui_increase_momentum(score) {
     if(player.sessionstate != "playing") {
       continue;
     }
-    player maps\mp\gametypes\_globallogic_score::giveplayermomentumnotification(score, & "testPlayerScoreForTan", "PLAYER_SCORE", 0);
+    player maps\mp\gametypes\_globallogic_score::giveplayermomentumnotification(score, &"testPlayerScoreForTan", "PLAYER_SCORE", 0);
   }
 
 }
@@ -954,7 +954,7 @@ updateminimapsetting() {
 
       if(players.size > 0) {
         player = gethostplayer();
-        corners = getentarray("minimap_corner", "targetname");
+        corners = getEntArray("minimap_corner", "targetname");
 
         if(corners.size == 2) {
           viewpos = corners[0].origin + corners[1].origin;
@@ -1421,7 +1421,7 @@ showonespawnpoint(spawn_point, color, notification, height, print) {
     print = spawn_point.classname;
 
   center = spawn_point.origin;
-  forward = anglestoforward(spawn_point.angles);
+  forward = anglesToForward(spawn_point.angles);
   right = anglestoright(spawn_point.angles);
   forward = vectorscale(forward, 16);
   right = vectorscale(right, 16);
@@ -1446,8 +1446,8 @@ showonespawnpoint(spawn_point, color, notification, height, print) {
   thread lineuntilnotified(c, d, color, 0, notification);
   thread lineuntilnotified(d, a, color, 0, notification);
   center = center + (0, 0, height / 2);
-  arrow_forward = anglestoforward(spawn_point.angles);
-  arrowhead_forward = anglestoforward(spawn_point.angles);
+  arrow_forward = anglesToForward(spawn_point.angles);
+  arrowhead_forward = anglesToForward(spawn_point.angles);
   arrowhead_right = anglestoright(spawn_point.angles);
   arrow_forward = vectorscale(arrow_forward, 32);
   arrowhead_forward = vectorscale(arrowhead_forward, 24);
@@ -1624,42 +1624,42 @@ engage_dist_debug_hud_destroy(hudarray, killnotify) {
 
 weapon_engage_dists_init() {
   level.engagedists = [];
-  genericpistol = spawnstruct();
+  genericpistol = spawnStruct();
   genericpistol.engagedistmin = 125;
   genericpistol.engagedistoptimal = 225;
   genericpistol.engagedistmulligan = 50;
   genericpistol.engagedistmax = 400;
-  shotty = spawnstruct();
+  shotty = spawnStruct();
   shotty.engagedistmin = 50;
   shotty.engagedistoptimal = 200;
   shotty.engagedistmulligan = 75;
   shotty.engagedistmax = 350;
-  genericsmg = spawnstruct();
+  genericsmg = spawnStruct();
   genericsmg.engagedistmin = 100;
   genericsmg.engagedistoptimal = 275;
   genericsmg.engagedistmulligan = 100;
   genericsmg.engagedistmax = 500;
-  genericlmg = spawnstruct();
+  genericlmg = spawnStruct();
   genericlmg.engagedistmin = 325;
   genericlmg.engagedistoptimal = 550;
   genericlmg.engagedistmulligan = 150;
   genericlmg.engagedistmax = 850;
-  genericriflesa = spawnstruct();
+  genericriflesa = spawnStruct();
   genericriflesa.engagedistmin = 325;
   genericriflesa.engagedistoptimal = 550;
   genericriflesa.engagedistmulligan = 150;
   genericriflesa.engagedistmax = 850;
-  genericriflebolt = spawnstruct();
+  genericriflebolt = spawnStruct();
   genericriflebolt.engagedistmin = 350;
   genericriflebolt.engagedistoptimal = 600;
   genericriflebolt.engagedistmulligan = 150;
   genericriflebolt.engagedistmax = 900;
-  generichmg = spawnstruct();
+  generichmg = spawnStruct();
   generichmg.engagedistmin = 390;
   generichmg.engagedistoptimal = 600;
   generichmg.engagedistmulligan = 100;
   generichmg.engagedistmax = 900;
-  genericsniper = spawnstruct();
+  genericsniper = spawnStruct();
   genericsniper.engagedistmin = 950;
   genericsniper.engagedistoptimal = 1700;
   genericsniper.engagedistmulligan = 300;
@@ -1765,10 +1765,10 @@ debug_realtime_engage_dist() {
   while(true) {
     lasttracepos = (0, 0, 0);
     direction = player getplayerangles();
-    direction_vec = anglestoforward(direction);
-    eye = player geteye();
+    direction_vec = anglesToForward(direction);
+    eye = player getEye();
     eye = (eye[0], eye[1], eye[2] + 20);
-    trace = bullettrace(eye, eye + vectorscale(direction_vec, 10000), 1, player);
+    trace = bulletTrace(eye, eye + vectorscale(direction_vec, 10000), 1, player);
     tracepoint = trace["position"];
     tracenormal = trace["normal"];
     tracedist = int(distance(eye, tracepoint));
@@ -1878,7 +1878,7 @@ plot_circle_fortime(radius1, radius2, time, color, origin, normal) {
     angletoplayer = vectortoangles(normal);
 
     for(i = 0; i < circleres; i++) {
-      plotpoints[plotpoints.size] = origin + vectorscale(anglestoforward(angletoplayer + (rad, 90, 0)), radius);
+      plotpoints[plotpoints.size] = origin + vectorscale(anglesToForward(angletoplayer + (rad, 90, 0)), radius);
       rad = rad + circleinc;
     }
 
@@ -1893,7 +1893,7 @@ larry_thread() {
   setdvar("bot_AllowMovement", "0");
   setdvar("bot_PressAttackBtn", "0");
   setdvar("bot_PressMeleeBtn", "0");
-  level.larry = spawnstruct();
+  level.larry = spawnStruct();
   player = gethostplayer();
   player thread larry_init(level.larry);
   level waittill("kill_larry");
@@ -1914,7 +1914,7 @@ larry_init(larry) {
   level endon("kill_larry");
   larry_hud_init(larry);
   larry.model = spawn("script_model", (0, 0, 0));
-  larry.model setmodel("defaultactor");
+  larry.model setModel("defaultactor");
   larry.ai = [];
   wait 0.1;
 
@@ -1927,9 +1927,9 @@ larry_init(larry) {
     }
 
     direction = self getplayerangles();
-    direction_vec = anglestoforward(direction);
-    eye = self geteye();
-    trace = bullettrace(eye, eye + vectorscale(direction_vec, 8000), 0, undefined);
+    direction_vec = anglesToForward(direction);
+    eye = self getEye();
+    trace = bulletTrace(eye, eye + vectorscale(direction_vec, 8000), 0, undefined);
     dist = distance(eye, trace["position"]);
     position = eye + vectorscale(direction_vec, dist - 64);
     larry.model.origin = position;
@@ -1990,7 +1990,7 @@ larry_ai_damage(larry) {
     if(attacker != player) {
       continue;
     }
-    eye = player geteye();
+    eye = player getEye();
     range = int(distance(eye, point));
     larry.menu[larry.menu_health] setvalue(self.health);
     larry.menu[larry.menu_damage] setvalue(damage);
@@ -2348,9 +2348,9 @@ force_grenade_throw(weapon) {
 
   angles = host getplayerangles();
   angles = (0, angles[1], 0);
-  dir = anglestoforward(angles);
+  dir = anglesToForward(angles);
   dir = vectornormalize(dir);
-  origin = host geteye() + vectorscale(dir, 256);
+  origin = host getEye() + vectorscale(dir, 256);
   velocity = vectorscale(dir, -1024);
   grenade = bot magicgrenade(weapon, origin, velocity);
   grenade setteam(bot.team);
@@ -2579,7 +2579,7 @@ devhelipathdebugdraw() {
 
   while(true) {
     if(getdvarint(#"scr_devHeliPathsDebugDraw") > 0) {
-      script_origins = getentarray("script_origin", "classname");
+      script_origins = getEntArray("script_origin", "classname");
 
       foreach(ent in script_origins) {
         if(isDefined(ent.targetname)) {
@@ -2643,7 +2643,7 @@ draworiginlines() {
   red = (1, 0, 0);
   green = (0, 1, 0);
   blue = (0, 0, 1);
-  line(self.origin, self.origin + anglestoforward(self.angles) * 10, red);
+  line(self.origin, self.origin + anglesToForward(self.angles) * 10, red);
   line(self.origin, self.origin + anglestoright(self.angles) * 10, green);
   line(self.origin, self.origin + anglestoup(self.angles) * 10, blue);
 }
@@ -2716,10 +2716,10 @@ drawpathsegment(enttarget, linecolor, textcolor, textalpha, textscale, textoffse
 
 get_lookat_origin(player) {
   angles = player getplayerangles();
-  forward = anglestoforward(angles);
+  forward = anglesToForward(angles);
   dir = vectorscale(forward, 8000);
-  eye = player geteye();
-  trace = bullettrace(eye, eye + dir, 0, undefined);
+  eye = player getEye();
+  trace = bulletTrace(eye, eye + dir, 0, undefined);
   return trace["position"];
 }
 

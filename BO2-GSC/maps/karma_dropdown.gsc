@@ -57,7 +57,7 @@ main() {
   level thread run_scene_and_delete("elevator_encounter1");
   level thread run_scene_and_delete("elevator_encounter2");
 
-  foreach(guy in getentarray("dropdown_patrol_ai", "targetname")) {
+  foreach(guy in getEntArray("dropdown_patrol_ai", "targetname")) {
     if(guy.animname == "dropdown_guard1")
       level.dropdown_guy = guy;
   }
@@ -93,7 +93,7 @@ main() {
   level thread run_scene_and_delete("tower_elevator_close");
   getent("duffle_bag", "targetname") delete();
   flag_set("setup_spiderbot");
-  level.player playsound("evt_spiderbot_intro");
+  level.player playSound("evt_spiderbot_intro");
   level thread run_scene_and_delete("set_spiderbot_player");
   wait 1.0;
   level thread run_scene_and_delete("set_spiderbot_salazar");

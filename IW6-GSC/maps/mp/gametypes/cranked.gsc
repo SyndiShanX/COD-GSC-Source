@@ -18,9 +18,7 @@ main() {
 
   if(isUsingMatchRulesData()) {
     level.initializeMatchRules = ::initializeMatchRules;
-    [
-      [level.initializeMatchRules]
-    ]();
+    [[level.initializeMatchRules]]();
     level thread reInitializeMatchRulesOnMigration();
   } else {
     registerRoundSwitchDvar(level.gameType, 0, 0, 9);
@@ -66,7 +64,7 @@ main() {
   game["dialog"]["begin_cranked"] = "crnk_cranked";
   game["dialog"]["five_seconds_left"] = "crnk_det";
 
-  game["strings"]["overtime_hint"] = & "MP_FIRST_BLOOD";
+  game["strings"]["overtime_hint"] = &"MP_FIRST_BLOOD";
 
   level thread onPlayerConnect();
 }
@@ -114,13 +112,13 @@ onStartGameType() {
     game["defenders"] = oldAttackers;
   }
 
-  obj_text = & "OBJECTIVES_WAR";
-  obj_score_text = & "OBJECTIVES_WAR_SCORE";
-  obj_hint_text = & "OBJECTIVES_WAR_HINT";
+  obj_text = &"OBJECTIVES_WAR";
+  obj_score_text = &"OBJECTIVES_WAR_SCORE";
+  obj_hint_text = &"OBJECTIVES_WAR_HINT";
   if(!level.teamBased) {
-    obj_text = & "OBJECTIVES_DM";
-    obj_score_text = & "OBJECTIVES_DM_SCORE";
-    obj_hint_text = & "OBJECTIVES_DM_HINT";
+    obj_text = &"OBJECTIVES_DM";
+    obj_score_text = &"OBJECTIVES_DM_SCORE";
+    obj_hint_text = &"OBJECTIVES_DM_HINT";
   }
 
   setObjectiveText("allies", obj_text);

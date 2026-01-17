@@ -170,7 +170,7 @@ rifleshoot() {
         if(isDefined(self.enemy))
           dist = distance(self.origin, self.enemy.origin);
 
-        newshootpos = self geteye() + anglestoforward(likelyenemydir) * dist;
+        newshootpos = self getEye() + anglesToForward(likelyenemydir) * dist;
 
         if(!isDefined(self.shootpos) || distancesquared(newshootpos, self.shootpos) > 25)
           self.shootpos = newshootpos;
@@ -506,8 +506,7 @@ setshootstyle(style, fastburst) {
 }
 
 shoulddosemiforvariety() {
-  if(self.weaponclass != "rifle") {
-  }
+  if(self.weaponclass != "rifle") {}
 
   return 0;
 
@@ -554,5 +553,5 @@ showsniperglint() {
     return;
   }
   if(distancesquared(self.origin, self.enemy.origin) > 65536)
-    playfxontag(level._effect["sniper_glint"], self, "tag_flash");
+    playFXOnTag(level._effect["sniper_glint"], self, "tag_flash");
 }

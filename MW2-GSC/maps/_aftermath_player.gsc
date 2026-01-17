@@ -42,23 +42,22 @@ aftermath_style_walking() {
   level.ground_ref_ent = spawn("script_model", (0, 0, 0));
   level.player playerSetGroundReferenceEnt(level.ground_ref_ent);
 
-
   //	level childthread slowview();
 
   set_vision_set("aftermath_walking", 0);
 
-  if(flag("aftermath_dont_do_wakeup"))
+  if(flag("aftermath_dont_do_wakeup")) {
     return;
-
+  }
   player_wakeup();
 
   //	level.player childthread player_jump_punishment();
 }
 
 slowview() {
-  while (true) {
+  while(true) {
     level waittill("slowview", wait_time);
-    if(isdefined(wait_time))
+    if(isDefined(wait_time))
       wait(wait_time);
     childthread restart_slowview();
     //level.player shellshock( "slowview", 15 );
@@ -78,12 +77,10 @@ player_heartbeat() {
   level endon("stop_heart");
 
   //	wait 3;
-  while (true) {
+  while(true) {
     if(!flag("fall")) {
-      if(isdefined(level.heartbeat_blood_func)) {
-        [
-          [level.heartbeat_blood_func]
-        ]();
+      if(isDefined(level.heartbeat_blood_func)) {
+        [[level.heartbeat_blood_func]]();
       }
 
       if(flag("player_heartbeat_sound")) {
@@ -102,9 +99,7 @@ player_heartbeat() {
   }
 }
 
-get_player_speed() {
-
-}
+get_player_speed() {}
 
 player_wakeup() {
   level.player play_sound_on_entity("sprint_gasp");
@@ -122,7 +117,7 @@ adjust_angles_to_player(stumble_angles) {
   ra = stumble_angles[2];
 
   rv = anglestoright(level.player.angles);
-  fv = anglestoforward(level.player.angles);
+  fv = anglesToForward(level.player.angles);
 
   rva = (rv[0], 0, rv[1] * -1);
   fva = (fv[0], 0, fv[1] * -1);
@@ -142,7 +137,7 @@ adjust_swivel_over_time(ent) {
 
   original_range = 7; // 25;
 
-  for (;;) {
+  for(;;) {
     range = original_range * level.unsteady_scale;
     yaw = randomfloatrange(range * 0.5, range);
 
@@ -164,10 +159,11 @@ adjust_swivel_over_time(ent) {
     wait time;
 
     wait_for_buffer_time_to_pass(start_time, 0.6);
-    for (;;) {
+    for(;;) {
       player_speed = distance((0, 0, 0), level.player getvelocity());
-      if(player_speed >= 80)
+      if(player_speed >= 80) {
         break;
+      }
       wait 0.05;
     }
 
@@ -204,7 +200,7 @@ swivel() {
 
   time = 0.1;
   last_angles = level.player getplayerangles()[1];
-  for (;;) {
+  for(;;) {
     new_angles = level.player getplayerangles()[1];
     dif = new_angles - last_angles;
     //angles = level.player getplayerangles();
@@ -270,7 +266,7 @@ SetSlowMotion_overtime() {
   range = 0.15;
   time = 4;
   wait 3;
-  for (;;) {
+  for(;;) {
     SetSlowMotion(timescale, 0.89, time);
     wait time;
     SetSlowMotion(timescale, 1.06, time);
@@ -286,18 +282,18 @@ adjust_roll_ent(roll_ent) {
   struct = getstruct("limp_yaw_ent", "targetname");
   targ = getstruct(struct.target, "targetname");
   angles = vectortoangles(targ.origin - struct.origin);
-  forward = anglestoforward(angles);
+  forward = anglesToForward(angles);
 
   limped = false;
 
-  for (;;) {
+  for(;;) {
     player_speed = distance((0, 0, 0), level.player getvelocity());
 
     //limp_yaw_ent			
     fast_enough = player_speed > 80;
 
     player_angles = level.player getplayerangles();
-    player_forward = anglestoforward(player_angles);
+    player_forward = anglesToForward(player_angles);
 
     correct_limp_direction = vectordot(player_forward, forward) >= 0.8;
 
@@ -305,7 +301,6 @@ adjust_roll_ent(roll_ent) {
       walking_count += 2;
     else
       walking_count -= 1;
-
 
     walking_count = clamp(walking_count, 0, cap);
     if(walking_count < cap) {
@@ -322,10 +317,11 @@ adjust_roll_ent(roll_ent) {
       ent = spawn_tag_origin();
       ent.origin = (level.unsteady_scale, 0, 0);
       ent moveto((1, 0, 0), time, time * 0.5, time * 0.5);
-      for (;;) {
+      for(;;) {
         level.unsteady_scale = ent.origin[0];
-        if(level.unsteady_scale == 1)
+        if(level.unsteady_scale == 1) {
           break;
+        }
         wait 0.05;
       }
       ent delete();
@@ -347,13 +343,11 @@ adjust_roll_ent(roll_ent) {
   }
 }
 
-
-
 limp_thread() {
   level notify("kill_limp");
   level endon("kill_limp");
 
-  while (true) {
+  while(true) {
     player_speed = distance((0, 0, 0), level.player getvelocity());
 
     if(player_speed < 80) {
@@ -386,7 +380,7 @@ limp_old() {
   stumble = 0;
   alt = 0;
 
-  while (true) {
+  while(true) {
     timer = randomfloatrange(2, 4);
     wait timer;
 
@@ -436,11 +430,11 @@ player_random_blur() {
   level endon("dying");
   level endon("not_random_blur");
 
-  while (true) {
+  while(true) {
     wait 0.05;
-    if(randomint(100) > 10)
+    if(randomint(100) > 10) {
       continue;
-
+    }
     blur = randomint(3) + 2;
     blur_time = randomfloatrange(0.3, 0.7);
     recovery_time = randomfloatrange(0.3, 1);
@@ -455,20 +449,21 @@ player_random_blur() {
 player_jump_punishment() {
   wait(2);
 
-  for (;;) {
-    if(level.player isonground())
+  for(;;) {
+    if(level.player isonground()) {
       break;
+    }
     wait(0.05);
   }
 
-  while (true) {
+  while(true) {
     wait 0.05;
     if(level.player isonground())
       continue;
     wait 0.2;
-    if(level.player isonground())
+    if(level.player isonground()) {
       continue;
-
+    }
     level notify("stop_stumble");
     wait 0.2;
     //		if( !flag( "force_limp" ) )
@@ -501,7 +496,7 @@ fall()
 	level.player shellshock( "aftermath_fall", 3 );
 	level notify( "slowview", 3.5 );
 	
- 
+
 //	level.player PlayRumbleloopOnEntity( "damage_heavy" );
 
 	wait 1.5;
@@ -528,9 +523,9 @@ fall()
 stumble(stumble_angles, stumble_time, recover_time, no_notify) {
   level endon("stop_stumble");
 
-  if(flag("collapse"))
+  if(flag("collapse")) {
     return;
-
+  }
   stumble_angles = adjust_angles_to_player(stumble_angles);
 
   level.ground_ref_ent rotateto(stumble_angles, stumble_time, (stumble_time / 4 * 3), (stumble_time / 4));
@@ -545,7 +540,7 @@ stumble(stumble_angles, stumble_time, recover_time, no_notify) {
   level.ground_ref_ent rotateto(base_angles, recover_time, 0, recover_time / 2);
   level.ground_ref_ent waittill("rotatedone");
 
-  if(!isdefined(no_notify))
+  if(!isDefined(no_notify))
     level notify("recovered");
 }
 

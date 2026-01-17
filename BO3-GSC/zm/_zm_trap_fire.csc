@@ -11,13 +11,13 @@
 #namespace zm_trap_fire;
 
 function autoexec __init__sytem__() {
-  system::register("zm_trap_fire", & __init__, undefined, undefined);
+  system::register("zm_trap_fire", &__init__, undefined, undefined);
 }
 
 function __init__() {
   a_traps = struct::get_array("trap_fire", "targetname");
   foreach(trap in a_traps) {
-    clientfield::register("world", trap.script_noteworthy, 21000, 1, "int", & trap_fx_monitor, 0, 0);
+    clientfield::register("world", trap.script_noteworthy, 21000, 1, "int", &trap_fx_monitor, 0, 0);
   }
 }
 
@@ -30,7 +30,7 @@ function trap_fx_monitor(localclientnum, oldval, newval, bnewent, binitialsnap, 
   }
   fire_points = struct::get_array(fieldname, "targetname");
   foreach(point in fire_points) {
-    if(!isdefined(point.script_noteworthy)) {
+    if(!isDefined(point.script_noteworthy)) {
       if(newval) {
         point thread fire_trap_fx();
         continue;
@@ -42,24 +42,24 @@ function trap_fx_monitor(localclientnum, oldval, newval, bnewent, binitialsnap, 
 
 function fire_trap_fx() {
   ang = self.angles;
-  forward = anglestoforward(ang);
+  forward = anglesToForward(ang);
   up = anglestoup(ang);
-  if(isdefined(self.loopfx) && self.loopfx.size) {
+  if(isDefined(self.loopfx) && self.loopfx.size) {
     stop_trap_fx();
   }
-  if(!isdefined(self.loopfx)) {
+  if(!isDefined(self.loopfx)) {
     self.loopfx = [];
   }
   players = getlocalplayers();
-  for (i = 0; i < players.size; i++) {
-    self.loopfx[i] = playfx(i, level._effect["fire_trap"], self.origin, forward, up, 0);
+  for(i = 0; i < players.size; i++) {
+    self.loopfx[i] = playFX(i, level._effect["fire_trap"], self.origin, forward, up, 0);
   }
 }
 
 function stop_trap_fx() {
   players = getlocalplayers();
-  for (i = 0; i < players.size; i++) {
-    if(isdefined(self.loopfx[i])) {
+  for(i = 0; i < players.size; i++) {
+    if(isDefined(self.loopfx[i])) {
       stopfx(i, self.loopfx[i]);
     }
   }

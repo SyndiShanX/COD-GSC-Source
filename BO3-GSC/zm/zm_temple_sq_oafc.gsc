@@ -15,11 +15,11 @@
 #namespace zm_temple_sq_oafc;
 
 function init() {
-  zm_sidequests::declare_sidequest_stage("sq", "OaFC", & init_stage, & stage_logic, & exit_stage);
+  zm_sidequests::declare_sidequest_stage("sq", "OaFC", &init_stage, &stage_logic, &exit_stage);
   zm_sidequests::set_stage_time_limit("sq", "OaFC", 300);
-  zm_sidequests::declare_stage_asset_from_struct("sq", "OaFC", "sq_oafc_switch", & oafc_switch);
-  zm_sidequests::declare_stage_asset_from_struct("sq", "OaFC", "sq_oafc_tileset1", & function_34a397d8, & zm_sidequests::radius_trigger_thread);
-  zm_sidequests::declare_stage_asset_from_struct("sq", "OaFC", "sq_oafc_tileset2", & function_a6ab0713, & zm_sidequests::radius_trigger_thread);
+  zm_sidequests::declare_stage_asset_from_struct("sq", "OaFC", "sq_oafc_switch", &oafc_switch);
+  zm_sidequests::declare_stage_asset_from_struct("sq", "OaFC", "sq_oafc_tileset1", &function_34a397d8, &zm_sidequests::radius_trigger_thread);
+  zm_sidequests::declare_stage_asset_from_struct("sq", "OaFC", "sq_oafc_tileset2", &function_a6ab0713, &zm_sidequests::radius_trigger_thread);
   level flag::init("oafc_switch_pressed");
   level flag::init("oafc_plot_vo_done");
 }
@@ -44,10 +44,10 @@ function oafc_switch() {
   self.off_pos = self.on_pos - (anglestoup(self.angles) * 5.5);
   self.trigger triggerignoreteam();
   self waittill("triggered", who);
-  if(isdefined(who)) {
+  if(isDefined(who)) {
     level._player_who_pressed_the_switch = who;
   }
-  self playsound("evt_sq_gen_button");
+  self playSound("evt_sq_gen_button");
   self moveto(self.off_pos, 0.25);
   self waittill("movedone");
   level flag::set("oafc_switch_pressed");
@@ -57,10 +57,10 @@ function oafc_switch() {
 function knocking_audio() {
   level endon("sq_oafc_over");
   struct = struct::get("sq_location_oafc", "targetname");
-  if(!isdefined(struct)) {
+  if(!isDefined(struct)) {
     return;
   }
-  while (!level flag::get("oafc_switch_pressed")) {
+  while(!level flag::get("oafc_switch_pressed")) {
     playsoundatposition("evt_sq_oafc_knock", struct.origin);
     wait(randomfloatrange(1.5, 4));
   }
@@ -79,7 +79,7 @@ function function_a6ab0713() {
 function tile_cheat() {
   level endon("reset_tiles");
   level endon("sq_oafc_over");
-  while (isdefined(self.matched) && !self.matched) {
+  while(isDefined(self.matched) && !self.matched) {
     print3d(self.origin, self.tile, vectorscale((0, 1, 0), 255));
     wait(0.1);
   }
@@ -87,7 +87,7 @@ function tile_cheat() {
 
 function tile_debug() {
   level endon("sq_oafc_over");
-  if(!isdefined(level._debug_tiles)) {
+  if(!isDefined(level._debug_tiles)) {
     level._debug_tiles = 1;
     level.var_e38ebc06 = newdebughudelem();
     level.var_e38ebc06.location = 0;
@@ -165,18 +165,18 @@ function tile_debug() {
     level.num_matched_text.alpha = 1;
     level.num_matched_text settext("");
   }
-  while (true) {
-    if(isdefined(level.var_66c77de0)) {
+  while(true) {
+    if(isDefined(level.var_66c77de0)) {
       level.var_e38ebc06 settext(level.var_66c77de0.tile);
     } else {
       level.var_e38ebc06 settext("");
     }
-    if(isdefined(level.var_d8ceed1b)) {
+    if(isDefined(level.var_d8ceed1b)) {
       level.var_bd8c419d settext(level.var_d8ceed1b.tile);
     } else {
       level.var_bd8c419d settext("");
     }
-    if(isdefined(level._num_matched_tiles)) {
+    if(isDefined(level._num_matched_tiles)) {
       level.num_matched settext(level._num_matched_tiles);
     }
     wait(0.05);
@@ -208,15 +208,15 @@ function delayed_start_skit() {
 function tile_moves_up(delay) {
   level endon("sq_oafc_over");
   level flag::wait_till("oafc_switch_pressed");
-  for (i = 0; i < delay; i++) {
+  for(i = 0; i < delay; i++) {
     util::wait_network_frame();
   }
   self moveto(self.original_origin, 0.25);
 }
 
 function set_tile_models(tiles, models) {
-  for (i = 0; i < tiles.size; i++) {
-    tiles[i] setmodel("p7_zm_sha_glyph_stone_blank");
+  for(i = 0; i < tiles.size; i++) {
+    tiles[i] setModel("p7_zm_sha_glyph_stone_blank");
     tiles[i].tile = models[i];
     tiles[i].matched = 0;
     tiles[i].origin = tiles[i].original_origin - vectorscale((0, 0, 1), 24);
@@ -226,7 +226,7 @@ function set_tile_models(tiles, models) {
 
 function player_in_trigger() {
   players = getplayers();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(players[i].sessionstate != "spectator" && self istouching(players[i])) {
       return players[i];
     }
@@ -238,11 +238,11 @@ function function_1667d8eb(tile) {
   level endon("hash_2687e434");
   var_b7081a33 = [];
   if(tile.targetname == "sq_oafc_tileset1") {
-    var_b7081a33 = getentarray("sq_oafc_tileset2", "targetname");
+    var_b7081a33 = getEntArray("sq_oafc_tileset2", "targetname");
     level notify("hash_e177c495");
     level endon("hash_e177c495");
   } else {
-    var_b7081a33 = getentarray("sq_oafc_tileset1", "targetname");
+    var_b7081a33 = getEntArray("sq_oafc_tileset1", "targetname");
     level notify("hash_77a3efe");
     level endon("hash_77a3efe");
   }
@@ -252,7 +252,7 @@ function function_1667d8eb(tile) {
       var_ad717133 = var_8bf17d58;
     }
   }
-  while (isdefined(var_ad717133)) {
+  while(isDefined(var_ad717133)) {
     print3d(var_ad717133.origin + vectorscale((0, 0, 1), 32), "", vectorscale((1, 0, 0), 255), 1);
     util::wait_network_frame();
   }
@@ -264,18 +264,18 @@ function oafc_trigger_thread(tiles, set) {
   self triggerenable(0);
   level flag::wait_till("oafc_switch_pressed");
   self triggerenable(1);
-  while (true) {
-    for (i = 0; i < tiles.size; i++) {
+  while(true) {
+    for(i = 0; i < tiles.size; i++) {
       tile = tiles[i];
-      if(isdefined(tile) && !tile.matched) {
+      if(isDefined(tile) && !tile.matched) {
         self.origin = tiles[i].origin;
         touched_player = self player_in_trigger();
-        if(isdefined(touched_player)) {
+        if(isDefined(touched_player)) {
           if(set == 1) {
             println("" + i);
           }
-          tile setmodel(tile.tile);
-          tile playsound("evt_sq_oafc_glyph_activate");
+          tile setModel(tile.tile);
+          tile playSound("evt_sq_oafc_glyph_activate");
           level thread function_1667d8eb(tile);
           matched = 0;
           if(set == 1) {
@@ -283,13 +283,13 @@ function oafc_trigger_thread(tiles, set) {
           } else {
             level.var_d8ceed1b = tile;
           }
-          while (isdefined(touched_player) && self istouching(touched_player) && touched_player.sessionstate != "spectator" && !tile.matched) {
+          while(isDefined(touched_player) && self istouching(touched_player) && touched_player.sessionstate != "spectator" && !tile.matched) {
             self.touched_player = touched_player;
             if(set == 1) {
-              if(isdefined(level.var_66c77de0) && isdefined(level.var_d8ceed1b)) {
+              if(isDefined(level.var_66c77de0) && isDefined(level.var_d8ceed1b)) {
                 if(level.var_66c77de0.tile == level.var_d8ceed1b.tile) {
-                  level.var_66c77de0 playsound("evt_sq_oafc_glyph_correct");
-                  level.var_d8ceed1b playsound("evt_sq_oafc_glyph_correct");
+                  level.var_66c77de0 playSound("evt_sq_oafc_glyph_correct");
+                  level.var_d8ceed1b playSound("evt_sq_oafc_glyph_correct");
                   level notify("hash_2687e434");
                   matched = 1;
                   level.var_66c77de0.matched = 1;
@@ -302,16 +302,16 @@ function oafc_trigger_thread(tiles, set) {
                   level._num_matched_tiles++;
                   if(level._num_matched_tiles < level._num_tiles_to_match) {
                     rand = randomintrange(0, 2);
-                    if(isdefined(touched_player) && rand == 0) {
+                    if(isDefined(touched_player) && rand == 0) {
                       touched_player thread zm_audio::create_and_play_dialog("eggs", "quest1", randomintrange(5, 8));
-                    } else if(isdefined(level.var_ca8e74be.touched_player)) {
+                    } else if(isDefined(level.var_ca8e74be.touched_player)) {
                       level.var_ca8e74be.touched_player thread zm_audio::create_and_play_dialog("eggs", "quest1", randomintrange(5, 8));
                     }
                   }
                   if(level._num_matched_tiles == level._num_tiles_to_match) {
                     println("");
                     struct = struct::get("sq_location_oafc", "targetname");
-                    if(isdefined(struct)) {
+                    if(isDefined(struct)) {
                       playsoundatposition("evt_sq_oafc_glyph_complete", struct.origin);
                       playsoundatposition("evt_sq_oafc_kachunk", struct.origin);
                     }
@@ -326,15 +326,15 @@ function oafc_trigger_thread(tiles, set) {
                   println("");
                   break;
                 } else {
-                  level.var_66c77de0 playsound("evt_sq_oafc_glyph_wrong");
-                  level.var_d8ceed1b playsound("evt_sq_oafc_glyph_wrong");
+                  level.var_66c77de0 playSound("evt_sq_oafc_glyph_wrong");
+                  level.var_d8ceed1b playSound("evt_sq_oafc_glyph_wrong");
                   rand = randomintrange(0, 2);
-                  if(isdefined(touched_player) && rand == 0) {
+                  if(isDefined(touched_player) && rand == 0) {
                     touched_player thread zm_audio::create_and_play_dialog("eggs", "quest1", randomintrange(2, 5));
-                  } else if(isdefined(level.var_ca8e74be.touched_player)) {
+                  } else if(isDefined(level.var_ca8e74be.touched_player)) {
                     level.var_ca8e74be.touched_player thread zm_audio::create_and_play_dialog("eggs", "quest1", randomintrange(2, 5));
                   }
-                  while (isdefined(touched_player) && self istouching(touched_player) && isdefined(level.var_d8ceed1b)) {
+                  while(isDefined(touched_player) && self istouching(touched_player) && isDefined(level.var_d8ceed1b)) {
                     wait(0.05);
                   }
                   println("");
@@ -345,13 +345,13 @@ function oafc_trigger_thread(tiles, set) {
             }
             wait(0.05);
           }
-          tile playsound("evt_sq_oafc_glyph_clear");
+          tile playSound("evt_sq_oafc_glyph_clear");
           if(set == 1) {
             level.var_66c77de0 = undefined;
           } else {
             level.var_d8ceed1b = undefined;
           }
-          tile setmodel("p7_zm_sha_glyph_stone_blank");
+          tile setModel("p7_zm_sha_glyph_stone_blank");
         }
       }
     }
@@ -365,7 +365,7 @@ function oafc_trigger_thread(tiles, set) {
 function reset_tiles() {
   tile_models = array("p7_zm_sha_glyph_stone_01", "p7_zm_sha_glyph_stone_02", "p7_zm_sha_glyph_stone_03", "p7_zm_sha_glyph_stone_04", "p7_zm_sha_glyph_stone_05", "p7_zm_sha_glyph_stone_06", "p7_zm_sha_glyph_stone_07", "p7_zm_sha_glyph_stone_08", "p7_zm_sha_glyph_stone_09", "p7_zm_sha_glyph_stone_10", "p7_zm_sha_glyph_stone_11", "p7_zm_sha_glyph_stone_12");
   level notify("reset_tiles");
-  if(!isdefined(level.var_a48bfa55)) {
+  if(!isDefined(level.var_a48bfa55)) {
     level.var_a48bfa55 = spawn("trigger_radius", (0, 0, 0), 0, 22, 72);
     level.var_ca8e74be = spawn("trigger_radius", (0, 0, 0), 0, 22, 72);
     level.var_a48bfa55 thread wait_for_first_stepon();
@@ -375,12 +375,12 @@ function reset_tiles() {
   level.var_66c77de0 = undefined;
   level.var_d8ceed1b = undefined;
   tile_models = array::randomize(tile_models);
-  var_34a397d8 = getentarray("sq_oafc_tileset1", "targetname");
+  var_34a397d8 = getEntArray("sq_oafc_tileset1", "targetname");
   level._num_tiles_to_match = var_34a397d8.size;
   set_tile_models(var_34a397d8, tile_models);
   level.var_a48bfa55 thread oafc_trigger_thread(var_34a397d8, 1);
   tile_models = array::randomize(tile_models);
-  var_a6ab0713 = getentarray("sq_oafc_tileset2", "targetname");
+  var_a6ab0713 = getEntArray("sq_oafc_tileset2", "targetname");
   set_tile_models(var_a6ab0713, tile_models);
   level.var_ca8e74be thread oafc_trigger_thread(var_a6ab0713, 2);
 }
@@ -388,9 +388,9 @@ function reset_tiles() {
 function wait_for_first_stepon() {
   self endon("death");
   level endon("hash_be6d0796");
-  while (true) {
+  while(true) {
     self waittill("trigger", who);
-    if(isdefined(who) && isplayer(who)) {
+    if(isDefined(who) && isplayer(who)) {
       who thread zm_audio::create_and_play_dialog("eggs", "quest1", 1);
       break;
     }
@@ -399,7 +399,7 @@ function wait_for_first_stepon() {
 }
 
 function exit_stage(success) {
-  if(isdefined(level._debug_tiles)) {
+  if(isDefined(level._debug_tiles)) {
     level._debug_tiles = undefined;
     level.var_e38ebc06 destroy();
     level.var_e38ebc06 = undefined;
@@ -415,14 +415,14 @@ function exit_stage(success) {
     level.num_matched_text = undefined;
   }
   if(success) {
-    zm_temple_sq_brock::create_radio(2, & zm_temple_sq_brock::radio2_override);
+    zm_temple_sq_brock::create_radio(2, &zm_temple_sq_brock::radio2_override);
   } else {
     zm_temple_sq_brock::create_radio(1);
     level thread zm_temple_sq_skits::fail_skit(1);
   }
   level.var_a48bfa55 delete();
   level.var_ca8e74be delete();
-  if(isdefined(level._oafc_sound_ent)) {
+  if(isDefined(level._oafc_sound_ent)) {
     level._oafc_sound_ent delete();
     level._oafc_sound_ent = undefined;
   }
@@ -432,13 +432,13 @@ function exit_stage(success) {
 function oafc_story_vox() {
   level endon("sq_oafc_over");
   struct = struct::get("sq_location_oafc", "targetname");
-  if(!isdefined(struct)) {
+  if(!isDefined(struct)) {
     return;
   }
   level._oafc_sound_ent = spawn("script_origin", struct.origin);
   level._oafc_sound_ent playsoundwithnotify("vox_egg_story_1_0", "sounddone");
   level._oafc_sound_ent waittill("sounddone");
-  if(isdefined(level._player_who_pressed_the_switch)) {
+  if(isDefined(level._player_who_pressed_the_switch)) {
     who = level._player_who_pressed_the_switch;
     level.skit_vox_override = 1;
     who playsoundwithnotify("vox_egg_story_1_1" + zm_temple_sq::function_26186755(who.characterindex), "vox_egg_sounddone");
@@ -447,17 +447,17 @@ function oafc_story_vox() {
   }
   level._oafc_sound_ent playsoundwithnotify("vox_egg_story_1_2", "sounddone");
   level._oafc_sound_ent waittill("sounddone");
-  while (level._num_matched_tiles < 1) {
+  while(level._num_matched_tiles < 1) {
     wait(0.1);
   }
   level._oafc_sound_ent playsoundwithnotify("vox_egg_story_1_3", "sounddone");
   level._oafc_sound_ent waittill("sounddone");
-  while (level._num_matched_tiles != level._num_tiles_to_match) {
+  while(level._num_matched_tiles != level._num_tiles_to_match) {
     wait(0.1);
   }
   level._oafc_sound_ent playsoundwithnotify("vox_egg_story_1_4", "sounddone");
   level._oafc_sound_ent waittill("sounddone");
-  if(isdefined(level._player_who_pressed_the_switch)) {
+  if(isDefined(level._player_who_pressed_the_switch)) {
     who = level._player_who_pressed_the_switch;
     level.skit_vox_override = 1;
     who playsoundwithnotify("vox_egg_story_1_5" + zm_temple_sq::function_26186755(who.characterindex), "vox_egg_sounddone");

@@ -24,5 +24,4 @@ main() {
   setdvar("r_lightGridIntensity", 1.25);
   setdvar("r_lightGridContrast", .5);
   setdvar("compassmaxrange", "2500");
-
 }

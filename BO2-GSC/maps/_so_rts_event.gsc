@@ -201,7 +201,7 @@ event_process() {
 }
 
 make_event_param(type, param1, param2, param3) {
-  dataparam = spawnstruct();
+  dataparam = spawnStruct();
   dataparam.type = type;
   dataparam.param1 = param1;
   dataparam.param2 = param2;
@@ -217,7 +217,7 @@ register_event(ref, dataparam, cooldown, latency, trignotify, onetimeonly, prior
     unique = 0;
 
   assert(!isDefined(level.rts.events[ref]), "Event with this ref name already exists");
-  event = spawnstruct();
+  event = spawnStruct();
   event.ref = ref;
   event.cooldown = cooldown;
   event.latency = latency;
@@ -280,7 +280,7 @@ add_event_to_trigger(event_ref, param) {
     return true;
   }
 
-  event = spawnstruct();
+  event = spawnStruct();
   event.def = event_ref;
   event.data = event_ref.data;
   event.timestamp = timestamp;
@@ -326,11 +326,11 @@ event_notesendondeath(note) {
   level notify(note + "done");
 }
 
-event_playsound(alias, note, guy) {
+event_playSound(alias, note, guy) {
   level.rts.events_dialogchannellock = guy getentitynumber();
 
   guy thread event_notesendondeath(note);
-  guy playsound(alias, note);
+  guy playSound(alias, note);
   guy waittill(note);
   level.rts.events_dialogchannellock = undefined;
   level notify(note + "_done");
@@ -355,7 +355,7 @@ event_trigger(event) {
       }
 
       if(isDefined(target) && (target == level.rts.player || isDefined(target.rts_unloaded)))
-        thread event_playsound(alias, event.def.ref, target);
+        thread event_playSound(alias, event.def.ref, target);
       else {
         target = event.data.param3;
         assert(target == "allies" || target == "axis" || target == "dparam", "Unexpected data passed to event_trigger Type:" + event.data.type + " Ref:" + event.def.ref);
@@ -379,7 +379,7 @@ event_trigger(event) {
         }
 
         event.dynamic_alias = alias;
-        thread event_playsound(alias, event.def.ref, guy);
+        thread event_playSound(alias, event.def.ref, guy);
       }
 
       return 1;
@@ -403,7 +403,7 @@ event_trigger(event) {
         entity = event.dparam;
 
       if(isDefined(entity))
-        entity playsound(alias);
+        entity playSound(alias);
       else if(isDefined(position))
         playsoundatposition(alias, position);
       else
@@ -428,7 +428,7 @@ event_trigger(event) {
           entity = getent(event.data.param2, "targetname");
 
         assert(isDefined(entity), "Unexpected data passed to event_trigger Type:" + event.data.type + " Ref:" + event.def.ref);
-        playfxontag(level._effect[alias], entity, tag);
+        playFXOnTag(level._effect[alias], entity, tag);
       } else {
         if(isDefined(event.dparam))
           position = event.dparam;
@@ -443,7 +443,7 @@ event_trigger(event) {
         }
 
         assert(isDefined(position), "Unexpected data passed to event_trigger Type:" + event.data.type + " Ref:" + event.def.ref);
-        playfx(level._effect[alias], position);
+        playFX(level._effect[alias], position);
       }
 
       return 1;
@@ -463,9 +463,7 @@ allocvoxid(param) {
     return;
   }
   if(isDefined(level.rts.customvoxallocid))
-    return [
-      [level.rts.customvoxallocid]
-    ](param);
+    return [[level.rts.customvoxallocid]](param);
 
   for(i = 0; i <= 5; i++) {
     voxid = "so" + i;
@@ -488,9 +486,7 @@ voxdeallocatewatch() {
 
 getvalidvoxlist(team, dparam) {
   if(isDefined(level.rts.customvoxlist))
-    return [
-      [level.rts.customvoxlist]
-    ](team, dparam);
+    return [[level.rts.customvoxlist]](team, dparam);
 
   guys = [];
 

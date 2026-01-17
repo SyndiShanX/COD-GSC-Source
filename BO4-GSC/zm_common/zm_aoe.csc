@@ -10,7 +10,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\load;
-
 #namespace zm_aoe;
 
 class class_698343df {}
@@ -24,7 +23,7 @@ __init__() {
   clientfield::register("scriptmover", "aoe_id", 1, getminbitcountfornum(8), "int", &function_6bcf2a61, 0, 0);
 }
 
-private __main__() {
+__main__() {
   function_15dea507(1, "zm_aoe_spear", "zm_aoe_spear");
   function_15dea507(2, "zm_aoe_spear_small", "zm_aoe_spear_small");
   function_15dea507(3, "zm_aoe_spear_big", "zm_aoe_spear_big");
@@ -34,7 +33,7 @@ private __main__() {
   function_15dea507(7, "zm_aoe_chaos_bolt_annihilate", "zm_aoe_chaos_bolt_annihilate");
 }
 
-private function_e969e75(aoeid) {
+function_e969e75(aoeid) {
   assert(isDefined(level.var_400ae143));
 
   if(!isDefined(level.var_400ae143)) {
@@ -83,7 +82,7 @@ function_15dea507(aoeid, type, var_5ff737c1) {
   var_46f1b5eb.aoeid = aoeid;
 }
 
-private function_dcc24343(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+function_dcc24343(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self endon(#"death");
 
   if(!isDefined(self.aoeid)) {
@@ -159,6 +158,6 @@ private function_dcc24343(localclientnum, oldval, newval, bnewent, binitialsnap,
   }
 }
 
-private function_6bcf2a61(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+function_6bcf2a61(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self.aoeid = newval;
 }

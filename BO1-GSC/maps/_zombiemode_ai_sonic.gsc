@@ -243,7 +243,7 @@ sonic_zombie_spawn(animname_set) {
   self Unlink();
   anchor Delete();
   self thread maps\_zombiemode_spawner::hide_pop();
-  self playsound("evt_sonic_spawn");
+  self playSound("evt_sonic_spawn");
   players = get_players();
   players[randomintrange(0, players.size)] thread maps\_zombiemode_audio::create_and_play_dialog("general", "sonic_spawn");
   speed = "sprint";
@@ -253,8 +253,8 @@ sonic_zombie_spawn(animname_set) {
   self animscripted("sonic_spawn", self.origin, self.angles, spawn_anim, "normal", % root, speedUp);
   fxWait = 0.3;
   wait(fxWait);
-  self PlaySound("zmb_vocals_sonic_scream");
-  PlayFX(level._effect["sonic_spawn"], self.origin, (0, 0, 1));
+  self playSound("zmb_vocals_sonic_scream");
+  playFX(level._effect["sonic_spawn"], self.origin, (0, 0, 1));
   wait(Max(0, time / speedUp - fxWait));
   self.rising = false;
   self stop_magic_bullet_shield();
@@ -371,7 +371,7 @@ _zombie_screamAttack(delay) {
   self endon("death");
   self endon("scream_attack_done");
   wait(delay);
-  self PlaySound("zmb_vocals_sonic_scream");
+  self playSound("zmb_vocals_sonic_scream");
   self thread _zombie_playscreamfx();
   players = GetPlayers();
   array_thread(players, ::_player_ScreamAttackWatch, self);
@@ -397,7 +397,7 @@ _zombie_playScreamFX() {
   self.screamFX setModel("tag_origin");
   self.screamFX.angles = self GetTagAngles(tag);
   self.screamFX LinkTo(self, tag);
-  PlayFXOnTag(level._effect["sonic_attack"], self.screamFX, "tag_origin");
+  playFXOnTag(level._effect["sonic_attack"], self.screamFX, "tag_origin");
   self waittill_any("death", "scream_attack_done", "shrink");
   self.screamFX Delete();
 }
@@ -427,7 +427,7 @@ _player_in_blur_area(sonic_zombie) {
   }
   dirToPlayer = self.origin - sonic_zombie.origin;
   dirToPlayer = vectornormalize(dirToPlayer);
-  sonicDir = anglestoforward(sonic_zombie.angles);
+  sonicDir = anglesToForward(sonic_zombie.angles);
   dot = vectordot(dirToPlayer, sonicDir);
   if(dot < .4) {
     return false;
@@ -499,14 +499,14 @@ _zombie_SetupFXOnJoint(jointName, fxName) {
   effectEnt setModel("tag_origin");
   effectEnt.angles = self GetTagAngles(jointName);
   effectEnt LinkTo(self, jointName);
-  PlayFXOnTag(level._effect[fxName], effectEnt, "tag_origin");
+  playFXOnTag(level._effect[fxName], effectEnt, "tag_origin");
   return effectEnt;
 }
 
 sonic_zombie_death() {
-  self playsound("evt_sonic_explode");
+  self playSound("evt_sonic_explode");
   if(isDefined(level._effect["sonic_explosion"])) {
-    PlayFxOnTag(level._effect["sonic_explosion"], self, "J_SpineLower");
+    playFXOnTag(level._effect["sonic_explosion"], self, "J_SpineLower");
   }
   if(isDefined(self.attacker) && isPlayer(self.attacker)) {
     self.attacker thread maps\_zombiemode_audio::create_and_play_dialog("kill", "sonic");
@@ -529,7 +529,7 @@ zombie_sonic_scream_death(attacker) {
   }
   self.no_powerups = true;
   self maps\_zombiemode_spawner::zombie_eye_glow_stop();
-  self playsound("evt_zombies_head_explode");
+  self playSound("evt_zombies_head_explode");
   self maps\_zombiemode_spawner::zombie_head_gib();
   self dodamage(self.health + 666, self.origin, attacker);
 }

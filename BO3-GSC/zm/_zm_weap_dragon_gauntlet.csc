@@ -12,11 +12,11 @@
 #namespace zm_weap_dragon_gauntlet;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_dragon_gauntlet", & __init__, undefined, undefined);
+  system::register("zm_weap_dragon_gauntlet", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_localplayer_spawned( & player_on_spawned);
+  callback::on_localplayer_spawned(&player_on_spawned);
 }
 
 function player_on_spawned(localclientnum) {
@@ -28,7 +28,7 @@ function watch_weapon_changes(localclientnum) {
   self endon("entityshutdown");
   self.dragon_gauntlet = getweapon("dragon_gauntlet_flamethrower");
   self.var_dd5c3be0 = getweapon("dragon_gauntlet");
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     self waittill("weapon_change", weapon);
     if(weapon === self.dragon_gauntlet) {
       self thread function_7645efdb(localclientnum);
@@ -52,7 +52,7 @@ function function_6c7c9327(localclientnum) {
   self endon("disconnect");
   self util::waittill_any_timeout(0.5, "weapon_change_complete", "disconnect");
   if(getcurrentweapon(localclientnum) === getweapon("dragon_gauntlet_flamethrower")) {
-    if(!isdefined(self.var_11d5152b)) {
+    if(!isDefined(self.var_11d5152b)) {
       self.var_11d5152b = [];
     }
     self.var_11d5152b[self.var_11d5152b.size] = playviewmodelfx(localclientnum, "dlc3/stalingrad/fx_dragon_gauntlet_glove_orange_glow1", "tag_fx_7");
@@ -66,7 +66,7 @@ function function_a8ac2d1d(localclientnum) {
   self endon("disconnect");
   self util::waittill_any_timeout(0.5, "weapon_change_complete", "disconnect");
   if(getcurrentweapon(localclientnum) === getweapon("dragon_gauntlet")) {
-    if(!isdefined(self.var_a7abd31)) {
+    if(!isDefined(self.var_a7abd31)) {
       self.var_a7abd31 = [];
     }
     self.var_a7abd31[self.var_a7abd31.size] = playviewmodelfx(localclientnum, "dlc3/stalingrad/fx_dragon_gauntlet_glove_blue_glow1", "tag_fx_7");
@@ -83,7 +83,7 @@ function function_a8ac2d1d(localclientnum) {
 }
 
 function function_99aba1a5(localclientnum) {
-  if(isdefined(self.var_11d5152b) && self.var_11d5152b.size > 0) {
+  if(isDefined(self.var_11d5152b) && self.var_11d5152b.size > 0) {
     foreach(fx in self.var_11d5152b) {
       stopfx(localclientnum, fx);
     }
@@ -91,7 +91,7 @@ function function_99aba1a5(localclientnum) {
 }
 
 function function_7645efdb(localclientnum) {
-  if(isdefined(self.var_a7abd31) && self.var_a7abd31.size > 0) {
+  if(isDefined(self.var_a7abd31) && self.var_a7abd31.size > 0) {
     foreach(fx in self.var_a7abd31) {
       stopfx(localclientnum, fx);
     }
@@ -105,10 +105,10 @@ function function_3011ccf6(localclientnum) {
   self endon("hash_7c243ce8");
   self notify("hash_8d98e9db");
   self endon("hash_8d98e9db");
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     self waittill("notetrack", note);
     if(note === "dragon_gauntlet_115_punch_fx_start") {
-      if(!isdefined(self.var_4d73e75b)) {
+      if(!isDefined(self.var_4d73e75b)) {
         self.var_4d73e75b = [];
       }
       self.var_4d73e75b[self.var_4d73e75b.size] = playviewmodelfx(localclientnum, "dlc3/stalingrad/fx_dragon_gauntlet_glove_blue_glow_finger3", "tag_fx_1");
@@ -121,7 +121,7 @@ function function_3011ccf6(localclientnum) {
       self.var_4d73e75b[self.var_4d73e75b.size] = playviewmodelfx(localclientnum, "dlc3/stalingrad/fx_dragon_gauntlet_glove_blue_tube2", "tag_gauntlet_tube_04");
     }
     if(note === "dragon_gauntlet_115_punch_fx_stop") {
-      if(isdefined(self.var_4d73e75b) && self.var_4d73e75b.size > 0) {
+      if(isDefined(self.var_4d73e75b) && self.var_4d73e75b.size > 0) {
         foreach(fx in self.var_4d73e75b) {
           stopfx(localclientnum, fx);
         }

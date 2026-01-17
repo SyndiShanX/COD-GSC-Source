@@ -24,8 +24,7 @@ onplayerconnect() {
   }
 }
 
-updatedeathiconsenabled() {
-}
+updatedeathiconsenabled() {}
 
 adddeathicon(entity, dyingplayer, team, timeout) {
   if(!level.teambased) {

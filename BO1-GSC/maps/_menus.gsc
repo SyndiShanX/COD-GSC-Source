@@ -28,79 +28,79 @@ init() {
   levelMenu = createMenu("levels");
   action = setupAction(::loadMap, "cqb_1");
   description = spawnStruct();
-  description.display = & "MENU_1ST_PASS";
+  description.display = &"MENU_1ST_PASS";
   description.xPos = 240;
   description.yPos = 100;
   levelMenu addItem(&"MENU_CQB_TEST", action, "loadmap", description);
   action = setupAction(::loadMap, "descent");
   description = spawnStruct();
-  description.display = & "MENU_1ST_PASS";
+  description.display = &"MENU_1ST_PASS";
   description.xPos = 240;
   description.yPos = 100;
   levelMenu addItem(&"MENU_BUNKER", action, "loadmap", description);
   action = setupAction(::loadMap, "aftermath");
   description = spawnStruct();
-  description.display = & "MENU_100_INITIAL_GEO";
+  description.display = &"MENU_100_INITIAL_GEO";
   description.xPos = 240;
   description.yPos = 100;
   levelMenu addItem(&"MENU_AFTERMATH", action, "loadmap", description);
   action = setupAction(::loadMap, "chechnya_escape");
   description = spawnStruct();
-  description.display = & "MENU_40_INITIAL_GEO";
+  description.display = &"MENU_40_INITIAL_GEO";
   description.xPos = 240;
   description.yPos = 100;
   levelMenu addItem(&"MENU_CHECHNYA_ESCAPE", action, "loadmap", description);
   action = setupAction(::loadMap, "marksman");
   description = spawnStruct();
-  description.display = & "MENU_25_SCRIPTED";
+  description.display = &"MENU_25_SCRIPTED";
   description.xPos = 240;
   description.yPos = 100;
   levelMenu addItem(&"MENU_MARKSMAN", action, "loadmap", description);
   action = setupAction(::loadMap, "seaknight_defend");
   description = spawnStruct();
-  description.display = & "MENU_PROTOTYPE_LEVEL_30_SCRIPTED";
+  description.display = &"MENU_PROTOTYPE_LEVEL_30_SCRIPTED";
   description.xPos = 240;
   description.yPos = 100;
   levelMenu addItem(&"MENU_SEAKNIGHT_DEFEND", action, "loadmap", description);
   action = setupAction(::loadMap, "wetwork");
   description = spawnStruct();
-  description.display = & "MENU_100_INITIAL_GEO";
+  description.display = &"MENU_100_INITIAL_GEO";
   description.xPos = 240;
   description.yPos = 100;
   levelMenu addItem(&"MENU_WETWORK", action, "loadmap", description);
   action = setupAction(::loadMap, "cargoship");
   description = spawnStruct();
-  description.display = & "MENU_10_SCRIPTED";
+  description.display = &"MENU_10_SCRIPTED";
   description.xPos = 240;
   description.yPos = 100;
   levelMenu addItem(&"MENU_CARGOSHIP", action, "loadmap", description);
   action = setupAction(::loadMap, "bog");
   description = spawnStruct();
-  description.display = & "MENU_35_INITIAL_GEO";
+  description.display = &"MENU_35_INITIAL_GEO";
   description.xPos = 240;
   description.yPos = 100;
   levelMenu addItem(&"MENU_BOG", action, "loadmap", description);
   action = setupAction(::loadMap, "training");
   description = spawnStruct();
-  description.display = & "MENU_5_SCRIPTED";
+  description.display = &"MENU_5_SCRIPTED";
   description.xPos = 240;
   description.yPos = 100;
   levelMenu addItem(&"MENU_TRAINING1", action, "loadmap", description);
   action = setupAction(::loadMap, "ac130");
   description = spawnStruct();
-  description.display = & "MENU_30";
+  description.display = &"MENU_30";
   description.xPos = 240;
   description.yPos = 100;
   levelMenu addItem(&"MENU_AC130", action, "loadmap", description);
   action = setupAction(::loadMap, "seaknight_assault");
   description = spawnStruct();
-  description.display = & "MENU_INITIAL_GEO_IN_PROGRESS";
+  description.display = &"MENU_INITIAL_GEO_IN_PROGRESS";
   description.xPos = 240;
   description.yPos = 100;
   levelMenu addItem(&"MENU_SEAKNIGHT_ASSAULT", action, "loadmap", description);
   action = setupAction(::loadMap, "pilotcobra");
   description = spawnStruct();
-  description.display = & "MENU_INITIAL_GEO_IN_PROGRESS";
+  description.display = &"MENU_INITIAL_GEO_IN_PROGRESS";
   description.xPos = 240;
   description.yPos = 100;
   levelMenu addItem(&"MENU_PILOT_COBRA", action, "loadmap", description);
@@ -168,7 +168,7 @@ init() {
   mainMenu = createMenu("main");
   action = setupAction(::pushMenu, levelMenu);
   mainMenu addItem(&"MENU_SELECT_LEVEL", action, "openmenu_levels");
-  subMenu = mainMenu addSubMenu("options", & "MENU_OPTIONS");
+  subMenu = mainMenu addSubMenu("options", &"MENU_OPTIONS");
   action = setupAction(::pushMenu, controlsMenu);
   subMenu addItem(&"MENU_CONTROLS", action);
   subMenu addItem(&"MENU_SUBTITLES");
@@ -201,7 +201,7 @@ pushMenu(menuDef) {
   } else {
     menuDef thread expandMenu(0.2);
   }
-  level.player playsound("mouse_click");
+  level.player playSound("mouse_click");
 }
 
 popMenu() {
@@ -218,7 +218,7 @@ popMenu() {
     level.curMenu thread showMenu(0.2, false);
     level notify("close_menu", level.menuStack.size);
   }
-  level.player playsound("mouse_click");
+  level.player playSound("mouse_click");
 }
 
 createMenu(name) {
@@ -561,7 +561,7 @@ onDPadUp() {
   if(self.selectedIndex < 0)
     self.selectedIndex = self.itemDefs.size - 1;
   self updateMenu(0.1, false);
-  level.player playsound("mouse_over");
+  level.player playSound("mouse_over");
 }
 
 onDPadDown() {
@@ -569,7 +569,7 @@ onDPadDown() {
   if(self.selectedIndex >= self.itemDefs.size)
     self.selectedIndex = 0;
   self updateMenu(0.1, false);
-  level.player playsound("mouse_over");
+  level.player playSound("mouse_over");
 }
 
 onButtonB() {
@@ -601,7 +601,7 @@ onDPadLeft() {
         setdvar(focusedItem.setting.dvar, dvarValues[indexNew]);
         focusedItem updateDisplayValue();
         println("Setting: " + focusedItem.setting.dvar + " to " + dvarValues[indexNew]);
-        level.player playsound("mouse_over");
+        level.player playSound("mouse_over");
       }
       break;
     }
@@ -623,7 +623,7 @@ onDPadRight() {
         focusedItem.setting.index = indexNew;
         setdvar(focusedItem.setting.dvar, dvarValues[indexNew]);
         focusedItem updateDisplayValue();
-        level.player playsound("mouse_over");
+        level.player playSound("mouse_over");
         println("Setting: " + focusedItem.setting.dvar + " to " + dvarValues[indexNew]);
       }
       break;

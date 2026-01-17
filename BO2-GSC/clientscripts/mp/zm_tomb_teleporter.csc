@@ -18,7 +18,7 @@ teleporter_fx_play(localclientnum, oldval, newval, bnewent, binitialsnap, fieldn
 
   if(newval == 1) {
     if(!isDefined(self.fx_teleport))
-      self.fx_teleport = playfxontag(localclientnum, level._effect["teleport_1p"], self, "tag_origin");
+      self.fx_teleport = playFXOnTag(localclientnum, level._effect["teleport_1p"], self, "tag_origin");
   } else if(isDefined(self.fx_teleport)) {
     stopfx(localclientnum, self.fx_teleport);
     self.fx_teleport = undefined;

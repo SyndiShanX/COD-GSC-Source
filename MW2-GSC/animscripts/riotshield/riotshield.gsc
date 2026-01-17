@@ -42,14 +42,14 @@ init_riotshield_AI_anims() {
   riotshieldTransTypes[0] = "riotshield";
   riotshieldTransTypes[1] = "riotshield_crouch";
 
-  for (j = 0; j < riotshieldTransTypes.size; j++) {
+  for(j = 0; j < riotshieldTransTypes.size; j++) {
     trans = riotshieldTransTypes[j];
 
-    for (i = 1; i <= 9; i++) {
-      if(i == 5)
+    for(i = 1; i <= 9; i++) {
+      if(i == 5) {
         continue;
-
-      if(isdefined(anim.coverTrans[trans][i])) {
+      }
+      if(isDefined(anim.coverTrans[trans][i])) {
         anim.coverTransDist[trans][i] = getMoveDelta(anim.coverTrans[trans][i], 0, 1);
       }
     }
@@ -178,8 +178,8 @@ riotshield_charge() {
   sampleTime = 0.1;
   firstTry = true;
 
-  while (1) {
-    assert(isdefined(self.melee.target));
+  while(1) {
+    assert(isDefined(self.melee.target));
 
     // now that we moved a bit, see if our target moved before we check for valid melee
     // it's possible something happened in the meantime that makes meleeing impossible.
@@ -198,8 +198,9 @@ riotshield_charge() {
     enemyDistanceSq = distanceSquared(self.origin, self.melee.target.origin);
 
     // if we're done raising our gun, and starting a melee now will hit the guy, our preparation is finished
-    if(enemyDistanceSq < rangeSq)
+    if(enemyDistanceSq < rangeSq) {
       break;
+    }
 
     // don't keep charging if we've been doing this for too long.
     if(gettime() >= self.melee.giveUpTime)
@@ -214,7 +215,7 @@ riotshield_melee_standard() {
 
   animscripts\melee::Melee_Standard_ResetGiveUpTime();
 
-  while (true) {
+  while(true) {
     if(!riotshield_charge()) {
       // if we couldn't get in place to melee, don't try to charge for a little while and abort
       self.nextMeleeChargeTime = getTime() + 1500;
@@ -233,7 +234,7 @@ riotshield_melee_standard() {
 
     // If the attack loop returns false, we need to stop this melee
     if(!animscripts\melee::Melee_Standard_PlayAttackLoop()) {
-      // Since getting here means that we've done a melee but our attack is no longer valid, delay before we can do a standard attack again. 
+      // Since getting here means that we've done a melee but our attack is no longer valid, delay before we can do a standard attack again.
       animscripts\melee::Melee_Standard_DelayStandardCharge(self.melee.target);
       break;
     }
@@ -293,14 +294,14 @@ riotshield_melee_AIvsAI() {
 }
 
 riotshield_startMoveTransition() {
-  if(isdefined(self.disableExits))
+  if(isDefined(self.disableExits)) {
     return;
-
+  }
   self orientmode("face angle", self.angles[1]);
   self animmode("zonly_physics", false);
 
   if(self.a.pose == "crouch") {
-    if(isdefined(self.sprint) || isdefined(self.fastwalk))
+    if(isDefined(self.sprint) || isDefined(self.fastwalk))
       transAnim = % riotshield_crouch2stand;
     else
       transAnim = % riotshield_crouch2walk;
@@ -311,7 +312,7 @@ riotshield_startMoveTransition() {
     self clearanim( % riotshield_crouch2walk, 0.5);
   }
 
-  if(isdefined(self.sprint) || isdefined(self.fastwalk)) {
+  if(isDefined(self.sprint) || isDefined(self.fastwalk)) {
     self allowedStances("stand", "crouch");
     self.a.pose = "stand";
   }
@@ -346,7 +347,7 @@ riotshield_startCombat() {
 riotshield_bullet_hit_shield() {
   self endon("killanimscript");
 
-  while (1) {
+  while(1) {
     self waittill("bullet_hitshield");
 
     time = gettime();
@@ -385,11 +386,11 @@ riotshield_grenadeCower() {
     self animscripts\shared::DoNoteTracks("trans");
   }
 
-  if(isdefined(self.grenade)) {
+  if(isDefined(self.grenade)) {
     faceGrenade = true;
     dirToGrenade = self.grenade.origin - self.origin;
 
-    if(isdefined(self.enemy)) {
+    if(isDefined(self.enemy)) {
       dirToEnemy = self.enemy.origin - self.origin;
       if(vectorDot(dirToGrenade, dirToEnemy) < 0)
         faceGrenade = false;
@@ -398,15 +399,16 @@ riotshield_grenadeCower() {
     if(faceGrenade) {
       relYaw = AngleClamp180(self.angles[1] - vectorToYaw(dirToGrenade));
 
-      if(!isdefined(self.turnThreshold))
+      if(!isDefined(self.turnThreshold))
         self.turnThreshold = 55;
 
-      while (abs(relYaw) > self.turnThreshold) {
-        if(!isdefined(self.a.array))
+      while(abs(relYaw) > self.turnThreshold) {
+        if(!isDefined(self.a.array))
           animscripts\combat::setup_anim_array();
 
-        if(!self animscripts\combat::TurnToFaceRelativeYaw(relYaw))
+        if(!self animscripts\combat::TurnToFaceRelativeYaw(relYaw)) {
           break;
+        }
 
         relYaw = AngleClamp180(self.angles[1] - vectorToYaw(dirToGrenade));
       }
@@ -421,7 +423,7 @@ riotshield_grenadeCower() {
 riotshield_flashbang() {
   self notify("flashed");
 
-  if(!isdefined(self.a.onback)) {
+  if(!isDefined(self.a.onback)) {
     rate = randomfloatrange(0.9, 1.1);
     self.frontShieldAngleCos = 1;
 
@@ -448,7 +450,7 @@ riotshield_pain() {
   if(usingSideArm())
     forceUseWeapon(self.primaryweapon, "primary");
 
-  if(!isdefined(self.a.onback)) {
+  if(!isDefined(self.a.onback)) {
     rate = randomfloatrange(0.8, 1.15);
     self.frontShieldAngleCos = 1;
     if((self.damageYaw < -120 || self.damageYaw > 120) && isExplosiveDamageMOD(self.damageMOD)) {
@@ -471,7 +473,7 @@ riotshield_pain() {
 }
 
 riotshield_death() {
-  if(isdefined(self.a.onback) && self.a.pose == "crouch") {
+  if(isDefined(self.a.onback) && self.a.pose == "crouch") {
     deathArray = [];
     deathArray[0] = % dying_back_death_v2;
     deathArray[1] = % dying_back_death_v3;
@@ -592,7 +594,7 @@ init_riotshield_animsets() {
 }
 
 riotshield_choose_pose(preferredPose) {
-  if(isdefined(self.grenade))
+  if(isDefined(self.grenade))
     return "stand";
 
   return self animscripts\utility::choosePose(preferredPose);
@@ -651,7 +653,7 @@ riotshield_flee_and_drop_shield() {
   self animmode("zonly_physics", false);
   self orientmode("face current");
 
-  if(!isdefined(self.dropShieldInPlace) && isdefined(self.enemy) && vectordot(self.lookaheadDir, anglesToForward(self.angles)) < 0)
+  if(!isDefined(self.dropShieldInPlace) && isDefined(self.enemy) && vectordot(self.lookaheadDir, anglesToForward(self.angles)) < 0)
     fleeAnim = % riotshield_crouch2walk_2flee;
   else
     fleeAnim = % riotshield_crouch2stand_shield_drop;

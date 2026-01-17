@@ -113,22 +113,22 @@ announceHelicopterInbound(hardpointType) {
   }
 }
 heli_path_graph() {
-  path_start = getentarray("heli_start", "targetname");
-  path_dest = getentarray("heli_dest", "targetname");
-  loop_start = getentarray("heli_loop_start", "targetname");
-  gunner_loop_start = getentarray("heli_gunner_loop_start", "targetname");
-  leave_nodes = getentarray("heli_leave", "targetname");
-  crash_start = getentarray("heli_crash_start", "targetname");
+  path_start = getEntArray("heli_start", "targetname");
+  path_dest = getEntArray("heli_dest", "targetname");
+  loop_start = getEntArray("heli_loop_start", "targetname");
+  gunner_loop_start = getEntArray("heli_gunner_loop_start", "targetname");
+  leave_nodes = getEntArray("heli_leave", "targetname");
+  crash_start = getEntArray("heli_crash_start", "targetname");
   assertex((isDefined(path_start) && isDefined(path_dest)), "Missing path_start or path_dest");
-  for (i = 0; i < path_dest.size; i++) {
+  for(i = 0; i < path_dest.size; i++) {
     startnode_array = [];
     isPrimaryDest = false;
     destnode_pointer = path_dest[i];
     destnode = getent(destnode_pointer.target, "targetname");
-    for (j = 0; j < path_start.size; j++) {
+    for(j = 0; j < path_start.size; j++) {
       toDest = false;
       currentnode = path_start[j];
-      while (isDefined(currentnode.target)) {
+      while(isDefined(currentnode.target)) {
         nextnode = getent(currentnode.target, "targetname");
         if(nextnode.origin == destnode.origin) {
           toDest = true;
@@ -153,28 +153,28 @@ heli_path_graph() {
     else
       level.heli_paths[level.heli_paths.size] = startnode_array;
   }
-  for (i = 0; i < loop_start.size; i++) {
+  for(i = 0; i < loop_start.size; i++) {
     startnode = getent(loop_start[i].target, "targetname");
     level.heli_loop_paths[level.heli_loop_paths.size] = startnode;
   }
   assertex(isDefined(level.heli_loop_paths[0]), "No helicopter loop paths found in map");
-  for (i = 0; i < gunner_loop_start.size; i++) {
+  for(i = 0; i < gunner_loop_start.size; i++) {
     startnode = getent(gunner_loop_start[i].target, "targetname");
     startnode.isGunnerPath = true;
     level.heli_loop_paths[level.heli_loop_paths.size] = startnode;
   }
-  for (i = 0; i < leave_nodes.size; i++)
+  for(i = 0; i < leave_nodes.size; i++)
     level.heli_leavenodes[level.heli_leavenodes.size] = leave_nodes[i];
   assertex(isDefined(level.heli_leavenodes[0]), "No helicopter leave nodes found in map");
-  for (i = 0; i < crash_start.size; i++) {
+  for(i = 0; i < crash_start.size; i++) {
     crash_start_node = getent(crash_start[i].target, "targetname");
     level.heli_crash_paths[level.heli_crash_paths.size] = crash_start_node;
   }
   assertex(isDefined(level.heli_crash_paths[0]), "No helicopter crash paths found in map");
 }
 init() {
-  path_start = getentarray("heli_start", "targetname");
-  loop_start = getentarray("heli_loop_start", "targetname");
+  path_start = getEntArray("heli_start", "targetname");
+  loop_start = getEntArray("heli_loop_start", "targetname");
   thread heli_update_global_dvars();
   if(!path_start.size && !loop_start.size)
     return;
@@ -205,14 +205,14 @@ init() {
   precacheLocationSelector("compass_objpoint_helicopter");
   if(maps\mp\gametypes\_tweakables::getTweakableValue("killstreak", "allowhelicopter_comlink")) {
     maps\mp\gametypes\_hardpoints::registerKillstreak("helicopter_comlink_mp", "helicopter_comlink_mp", "killstreak_helicopter_comlink", "helicopter_used", ::useKillstreakHelicopter, true);
-    maps\mp\gametypes\_hardpoints::registerKillstreakStrings("helicopter_comlink_mp", & "KILLSTREAK_EARNED_HELICOPTER_COMLINK", & "KILLSTREAK_HELICOPTER_COMLINK_NOT_AVAILABLE", & "KILLSTREAK_HELICOPTER_COMLINK_INBOUND");
+    maps\mp\gametypes\_hardpoints::registerKillstreakStrings("helicopter_comlink_mp", &"KILLSTREAK_EARNED_HELICOPTER_COMLINK", &"KILLSTREAK_HELICOPTER_COMLINK_NOT_AVAILABLE", &"KILLSTREAK_HELICOPTER_COMLINK_INBOUND");
     maps\mp\gametypes\_hardpoints::registerKillstreakDialog("helicopter_comlink_mp", "mpl_killstreak_heli", "kls_cobra_used", "", "kls_cobra_enemy", "", "kls_cobra_ready");
     maps\mp\gametypes\_hardpoints::registerKillstreakDevDvar("helicopter_comlink_mp", "scr_givehelicopter_comlink");
     maps\mp\gametypes\_hardpoints::registerKillstreakAltWeapon("helicopter_comlink_mp", "cobra_20mm_comlink_mp");
   }
 }
 heli_update_global_dvars() {
-  for (;;) {
+  for(;;) {
     level.heli_loopmax = heli_get_dvar_int("scr_heli_loopmax", "2");
     level.heli_missile_rof = heli_get_dvar_int("scr_heli_missile_rof", "2");
     level.heli_armor = heli_get_dvar_int("scr_heli_armor", "500");
@@ -275,7 +275,7 @@ spawn_helicopter(owner, origin, angles, model, targetname, target_offset, hardpo
 explodeOnContact(hardpointtype) {
   self endon("death");
   wait(10);
-  for (;;) {
+  for(;;) {
     self waittill("touch");
     self thread heli_explode();
   }
@@ -284,7 +284,7 @@ getValidProtectLocationStart(random_path, protectLocation, destination) {
   startnode = level.heli_paths[destination][random_path];
   path_index = (random_path + 1) % level.heli_paths[destination].size;
   noFlyZone = crossesNoFlyZone(startnode.origin, protectLocation);
-  while (isDefined(noFlyZone) && path_index != random_path) {
+  while(isDefined(noFlyZone) && path_index != random_path) {
     startnode = level.heli_paths[destination][path_index];
     noFlyZone = crossesNoFlyZone(startnode.origin, protectLocation);
     path_index = (path_index + 1) % level.heli_paths[destination].size;
@@ -296,7 +296,7 @@ getValidRandomLeaveNode(start) {
   leavenode = level.heli_leavenodes[random_leave_node];
   path_index = (random_leave_node + 1) % level.heli_leavenodes.size;
   noFlyZone = crossesNoFlyZone(leavenode.origin, start);
-  while (isDefined(noFlyZone) && path_index != random_leave_node) {
+  while(isDefined(noFlyZone) && path_index != random_leave_node) {
     leavenode = level.heli_leavenodes[path_index];
     noFlyZone = crossesNoFlyZone(leavenode.origin, start);
     path_index = (path_index + 1) % level.heli_leavenodes.size;
@@ -308,7 +308,7 @@ getValidRandomCrashNode(start) {
   leavenode = level.heli_crash_paths[random_leave_node];
   path_index = (random_leave_node + 1) % level.heli_crash_paths.size;
   noFlyZone = crossesNoFlyZone(leavenode.origin, start);
-  while (isDefined(noFlyZone) && path_index != random_leave_node) {
+  while(isDefined(noFlyZone) && path_index != random_leave_node) {
     leavenode = level.heli_crash_paths[path_index];
     noFlyZone = crossesNoFlyZone(leavenode.origin, start);
     path_index = (path_index + 1) % level.heli_crash_paths.size;
@@ -341,7 +341,7 @@ heli_think(owner, startnode, heli_team, missilesEnabled, protectLocation, hardpo
   rearRotor linkto(chopper, "tail_rotor_jnt", (0, 0, 0), (0, 0, 0));
   chopper.rearRotor = rearRotor;
   rearRotor SetClientFlag(level.const_flag_copterrotor);
-  minigun_snd_ent = Spawn("script_origin", chopper GetTagOrigin("tag_flash"));
+  minigun_snd_ent = spawn("script_origin", chopper GetTagOrigin("tag_flash"));
   minigun_snd_ent LinkTo(chopper, "tag_flash", (0, 0, 0), (0, 0, 0));
   chopper.minigun_snd_ent = minigun_snd_ent;
   minigun_snd_ent thread AutoStopSound();
@@ -401,7 +401,7 @@ heli_missile_regen() {
   self endon("death");
   self endon("crashing");
   self endon("leaving");
-  for (;;) {
+  for(;;) {
     debug_print3d("Missile Ammo: " + self.missile_ammo, (0.5, 0.5, 1), self, (0, 0, -100), 0);
     if(self.missile_ammo >= level.heli_missile_max)
       self waittill("missile fired");
@@ -421,11 +421,11 @@ heli_targeting(missilesEnabled, hardpointType) {
   self endon("death");
   self endon("crashing");
   self endon("leaving");
-  for (;;) {
+  for(;;) {
     targets = [];
     targetsMissile = [];
     players = level.players;
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       player = players[i];
       if(self canTargetPlayer_turret(player, hardpointType)) {
         if(isDefined(player))
@@ -438,7 +438,7 @@ heli_targeting(missilesEnabled, hardpointType) {
         continue;
     }
     if(isDefined(level.dogs)) {
-      for (i = 0; i < level.dogs.size; i++) {
+      for(i = 0; i < level.dogs.size; i++) {
         dog = level.dogs[i];
         if(self canTargetDog_turret(dog)) {
           if(isDefined(dog))
@@ -506,7 +506,7 @@ canTargetPlayer_turret(player, hardpointType) {
   if(isDefined(player.spawntime) && (gettime() - player.spawntime) / 1000 <= level.heli_target_spawnprotection)
     return false;
   heli_centroid = self.origin + (0, 0, -160);
-  heli_forward_norm = anglestoforward(self.angles);
+  heli_forward_norm = anglesToForward(self.angles);
   heli_turret_point = heli_centroid + 144 * heli_forward_norm;
   visible_amount = player sightConeTrace(heli_turret_point, self);
   if(visible_amount < level.heli_target_recognition)
@@ -549,7 +549,7 @@ canTargetPlayer_missile(player, hardpointType) {
   if(self target_cone_check(player, level.heli_missile_target_cone) == false)
     return false;
   heli_centroid = self.origin + (0, 0, -160);
-  heli_forward_norm = anglestoforward(self.angles);
+  heli_forward_norm = anglesToForward(self.angles);
   heli_turret_point = heli_centroid + 144 * heli_forward_norm;
   if(!isDefined(player.lastHit))
     player.lastHit = 0;
@@ -571,7 +571,7 @@ canTargetDog_turret(dog) {
   if(isDefined(dog.script_owner) && self.owner == dog.script_owner)
     return false;
   heli_centroid = self.origin + (0, 0, -160);
-  heli_forward_norm = anglestoforward(self.angles);
+  heli_forward_norm = anglesToForward(self.angles);
   heli_turret_point = heli_centroid + 144 * heli_forward_norm;
   if(!isDefined(dog.lastHit))
     dog.lastHit = 0;
@@ -593,7 +593,7 @@ canTargetDog_missile(dog) {
   if(isDefined(dog.script_owner) && self.owner == dog.script_owner)
     return false;
   heli_centroid = self.origin + (0, 0, -160);
-  heli_forward_norm = anglestoforward(self.angles);
+  heli_forward_norm = anglesToForward(self.angles);
   heli_turret_point = heli_centroid + 144 * heli_forward_norm;
   if(!isDefined(dog.lastHit))
     dog.lastHit = 0;
@@ -603,7 +603,7 @@ canTargetDog_missile(dog) {
   return canTarget;
 }
 assignPrimaryTargets(targets) {
-  for (idx = 0; idx < targets.size; idx++) {
+  for(idx = 0; idx < targets.size; idx++) {
     if(isDefined(targets[idx].type) && targets[idx].type == "dog") {
       update_dog_threat(targets[idx]);
     } else {
@@ -614,7 +614,7 @@ assignPrimaryTargets(targets) {
   highest = 0;
   second_highest = 0;
   primaryTarget = undefined;
-  for (idx = 0; idx < targets.size; idx++) {
+  for(idx = 0; idx < targets.size; idx++) {
     assertex(isDefined(targets[idx].threatlevel), "Target player does not have threat level");
     if(targets[idx].threatlevel >= highest) {
       highest = targets[idx].threatlevel;
@@ -626,7 +626,7 @@ assignPrimaryTargets(targets) {
   self notify("primary acquired");
 }
 assignSecondaryTargets(targets) {
-  for (idx = 0; idx < targets.size; idx++) {
+  for(idx = 0; idx < targets.size; idx++) {
     if(!isDefined(targets[idx].type) || targets[idx].type != "dog") {
       self update_missile_player_threat(targets[idx]);
     } else if(targets[idx].type == "dog") {
@@ -638,7 +638,7 @@ assignSecondaryTargets(targets) {
   second_highest = 0;
   primaryTarget = undefined;
   secondaryTarget = undefined;
-  for (idx = 0; idx < targets.size; idx++) {
+  for(idx = 0; idx < targets.size; idx++) {
     assertex(isDefined(targets[idx].missilethreatlevel), "Target player does not have threat level");
     if(targets[idx].missilethreatlevel >= highest) {
       highest = targets[idx].missilethreatlevel;
@@ -718,7 +718,7 @@ heli_missile_incoming() {
   self endon("death");
   self endon("crashing");
   self endon("leaving");
-  for (;;) {
+  for(;;) {
     self waittill("stinger_fired_at_me", missile, weap, attacker);
     _incomingMissile(missile);
     self heli_fire_chaff(missile, attacker);
@@ -747,7 +747,7 @@ isMissileIncoming() {
 }
 debug_tracker(target) {
   target endon("death");
-  while (1) {
+  while(1) {
     debug_sphere(target.origin, 10, (1, 0, 0), 1, 1);
     wait(0.05);
   }
@@ -767,7 +767,7 @@ heli_fire_chaff(missile, attacker) {
     vec_toRight = AnglesToRight(self.angles);
     self.chaff_fx = spawn("script_model", self.origin);
     self.chaff_fx.angles = (0, 180, 0);
-    self.chaff_fx SetModel("tag_origin");
+    self.chaff_fx setModel("tag_origin");
     self.chaff_fx LinkTo(self, "tag_origin", self.chaff_offset, (0, 0, 0));
     delta = self.origin - missile.origin;
     dot = VectorDot(delta, vec_toRight);
@@ -778,16 +778,16 @@ heli_fire_chaff(missile, attacker) {
     velocity = vector_scale(chaff_dir, RandomIntRange(400, 600));
     velocity = (velocity[0], velocity[1], velocity[2] - RandomIntRange(10, 100));
     self.chaff_target = spawn("script_model", self.chaff_fx.origin);
-    self.chaff_target SetModel("tag_origin");
+    self.chaff_target setModel("tag_origin");
     self.chaff_target MoveGravity(velocity, 5.0);
     self thread debug_tracker(self.chaff_target);
     self.chaff_fx thread deleteAfterTime(5.0);
     wait(0.1);
-    PlayFXOnTag(level.fx_heli_chaff, self.chaff_fx, "tag_origin");
+    playFXOnTag(level.fx_heli_chaff, self.chaff_fx, "tag_origin");
     if(isDefined(self.owner)) {
       self playsoundtoplayer("veh_huey_chaff_drop_plr", self.owner);
     }
-    self PlaySound("veh_huey_chaff_explo_npc");
+    self playSound("veh_huey_chaff_explo_npc");
     missile Missile_SetTarget(self.chaff_target);
     wait(0.5);
     if(isDefined(self.chaff_target))
@@ -806,7 +806,7 @@ heli_kill_monitor(hardpointtype) {
   self.damageTaken = 0;
   last_kill_vo = 0;
   kill_vo_spacing = 2000;
-  for (;;) {
+  for(;;) {
     self waittill("killed", victim);
     PrintLn("got killed notify");
     if(!isDefined(self.owner))
@@ -829,7 +829,7 @@ heli_damage_monitor(hardpointtype) {
   self.damageTaken = 0;
   last_hit_vo = 0;
   hit_vo_spacing = 6000;
-  for (;;) {
+  for(;;) {
     self waittill("damage", damage, attacker, direction, point, type, tagName, modelName, partname, weapon);
     if(!isDefined(attacker) || !isplayer(attacker))
       continue;
@@ -928,11 +928,11 @@ heli_damage_monitor(hardpointtype) {
         level.globalKillstreaksDestroyed++;
         attacker maps\mp\gametypes\_globallogic_score::incItemStatByReference(killstreakReference, 1, "destroyed");
       }
-      for (i = 0; i < level.players.size; i++) {
+      for(i = 0; i < level.players.size; i++) {
         level.players[i] DisplayTeamMessage(&"KILLSTREAK_DESTROYED_HELICOPTER", attacker, "uin_alert_slideout");
       }
       if(isDefined(self.attackers)) {
-        for (j = 0; j < self.attackers.size; j++) {
+        for(j = 0; j < self.attackers.size; j++) {
           player = self.attackers[j];
           if(!isDefined(player))
             continue;
@@ -972,7 +972,7 @@ heli_health(hardpointType, player, playerNotify) {
   self.laststate = "ok";
   self setdamagestage(3);
   damageState = 3;
-  for (;;) {
+  for(;;) {
     if(self.damageTaken > self.maxhealth) {
       damageState = 0;
       self setDamageStage(damageState);
@@ -1003,7 +1003,7 @@ heli_evasive(hardpointType) {
   gunnerPathFound = true;
   if(hardpointType == "helicopter_gunner_mp") {
     gunnerPathFound = false;
-    for (i = 0; i < level.heli_loop_paths.size; i++) {
+    for(i = 0; i < level.heli_loop_paths.size; i++) {
       if(isDefined(level.heli_loop_paths[i].isGunnerPath) && level.heli_loop_paths[i].isGunnerPath) {
         loop_startnode = level.heli_loop_paths[i];
         gunnerPathFound = true;
@@ -1113,7 +1113,7 @@ waitThenExplode(time) {
 crashOnNearestCrashPath(hardpointType) {
   crashPathDistance = -1;
   crashPath = level.heli_crash_paths[0];
-  for (i = 0; i < level.heli_crash_paths.size; i++) {
+  for(i = 0; i < level.heli_crash_paths.size; i++) {
     currentDistance = distance(self.origin, level.heli_crash_paths[i].origin);
     if(crashPathDistance == -1 || crashPathDistance > currentDistance) {
       crashPathDistance = currentDistance;
@@ -1133,7 +1133,7 @@ crashOnNearestCrashPath(hardpointType) {
 }
 heli_secondary_explosions() {
   self endon("death");
-  playFxOnTag(level.chopper_fx["explode"]["large"], self, "tag_engine_left");
+  playFXOnTag(level.chopper_fx["explode"]["large"], self, "tag_engine_left");
   self playSound(level.heli_sound[self.team]["hit"]);
   self thread trail_fx(level.chopper_fx["smoke"]["trail"], "tail_rotor_jnt", "stop tail smoke");
   self setdamagestage(0);
@@ -1141,14 +1141,14 @@ heli_secondary_explosions() {
   wait(3.0);
   if(!isDefined(self))
     return;
-  playFxOnTag(level.chopper_fx["explode"]["large"], self, "tag_engine_left");
+  playFXOnTag(level.chopper_fx["explode"]["large"], self, "tag_engine_left");
   self playSound(level.heli_sound[self.team]["hitsecondary"]);
 }
 heli_spin(speed) {
   self endon("death");
   self thread spinSoundShortly();
   self setyawspeed(speed, speed / 3, speed / 3);
-  while (isDefined(self)) {
+  while(isDefined(self)) {
     self settargetyaw(self.angles[1] + (speed * 0.9));
     wait(1);
   }
@@ -1164,7 +1164,7 @@ spinSoundShortly() {
 }
 trail_fx(trail_fx, trail_tag, stop_notify) {
   {
-    playfxontag(trail_fx, self, trail_tag);
+    playFXOnTag(trail_fx, self, trail_tag);
   }
 }
 destroyHelicopter() {
@@ -1193,8 +1193,8 @@ destroyHelicopter() {
 heli_explode() {
   self death_notify_wrapper();
   forward = (self.origin + (0, 0, 100)) - self.origin;
-  playfx(level.chopper_fx["explode"]["death"], self.origin, forward);
-  self PlaySound(level.heli_sound[self.team]["crash"]);
+  playFX(level.chopper_fx["explode"]["death"], self.origin, forward);
+  self playSound(level.heli_sound[self.team]["crash"]);
   wait(0.1);
   assert(isDefined(self.destroyFunc));
   self[[self.destroyFunc]]();
@@ -1235,7 +1235,7 @@ heli_fly(currentnode, startwait, hardpointType) {
   heli_reset();
   pos = self.origin;
   wait(startwait);
-  while (isDefined(currentnode.target)) {
+  while(isDefined(currentnode.target)) {
     nextnode = getent(currentnode.target, "targetname");
     assertex(isDefined(nextnode), "Next node in path is undefined, but has targetname");
     pos = nextnode.origin + (0, 0, 30);
@@ -1274,7 +1274,7 @@ heli_fly(currentnode, startwait, hardpointType) {
         heli_wait(nextnode.script_delay);
       }
     }
-    for (index = 0; index < level.heli_loop_paths.size; index++) {
+    for(index = 0; index < level.heli_loop_paths.size; index++) {
       if(level.heli_loop_paths[index].origin == nextnode.origin)
         self.loopcount++;
     }
@@ -1306,7 +1306,7 @@ heli_get_protect_spot(protectDest, nodeHeight) {
   protect_spot = heli_random_point_in_radius(protectDest, nodeHeight);
   tries = 3;
   noFlyZone = crossesNoFlyZone(protectDest, protect_spot);
-  while (tries != 0 && isDefined(noFlyZone)) {
+  while(tries != 0 && isDefined(noFlyZone)) {
     protect_spot = heli_random_point_in_radius(protectDest, nodeHeight);
     tries--;
     noFlyZone = crossesNoFlyZone(protectDest, protect_spot);
@@ -1358,7 +1358,7 @@ heli_protect(startNode, protectDest, hardpointType, heli_team) {
   currentDest = protectDest;
   nodeHeight = protectDest[2];
   nextnode = startNode;
-  while (isDefined(nextnode.target)) {
+  while(isDefined(nextnode.target)) {
     currentnode = nextnode;
     nextnode = getent(currentnode.target, "targetname");
     if(nodeHeight < nextnode.origin[2])
@@ -1377,7 +1377,7 @@ heli_protect(startNode, protectDest, hardpointType, heli_team) {
   heli_speed = 30 + randomInt(20);
   heli_accel = 10 + randomInt(5);
   self thread updateTargetYaw();
-  while (getTime() < endTime) {
+  while(getTime() < endTime) {
     stop = 1;
     self updateSpeed();
     self setvehgoalpos((currentDest), stop);
@@ -1425,7 +1425,7 @@ updateTargetYaw() {
   self endon("crashing");
   self endon("leaving");
   self endon("endTargetYawUpdate");
-  for (;;) {
+  for(;;) {
     if(isDefined(self.primaryTarget)) {
       yaw = get2DYaw(self.origin, self.primaryTarget.origin);
       self setTargetYaw(yaw);
@@ -1455,7 +1455,7 @@ fire_missile(sMissileType, iShots, eTarget) {
   assert(isDefined(weaponShootTime));
   self setVehWeapon(weaponName);
   nextMissileTag = -1;
-  for (i = 0; i < iShots; i++) {
+  for(i = 0; i < iShots; i++) {
     nextMissileTag++;
     if(nextMissileTag >= tags.size)
       nextMissileTag = 0;
@@ -1485,12 +1485,12 @@ attack_secondary(hardpointType) {
   self endon("death");
   self endon("crashing");
   self endon("leaving");
-  for (;;) {
+  for(;;) {
     if(isDefined(self.secondaryTarget)) {
       self.secondaryTarget.antithreat = undefined;
       self.missileTarget = self.secondaryTarget;
       antithreat = 0;
-      while (isDefined(self.missileTarget) && isalive(self.missileTarget)) {
+      while(isDefined(self.missileTarget) && isalive(self.missileTarget)) {
         if(self target_cone_check(self.missileTarget, level.heli_missile_target_cone))
           self thread missile_support(self.missileTarget, level.heli_missile_rof, true, undefined);
         else
@@ -1526,7 +1526,7 @@ turret_target_check(turretTarget, attackAngle) {
 }
 target_cone_check(target, coneCosine) {
   heli2target_normal = vectornormalize(target.origin - self.origin);
-  heli2forward = anglestoforward(self.angles);
+  heli2forward = anglesToForward(self.angles);
   heli2forward_normal = vectornormalize(heli2forward);
   heli_dot_target = vectordot(heli2target_normal, heli2forward_normal);
   if(heli_dot_target >= coneCosine) {
@@ -1537,7 +1537,7 @@ target_cone_check(target, coneCosine) {
 }
 missile_valid_target_check(missiletarget) {
   heli2target_normal = vectornormalize(missiletarget.origin - self.origin);
-  heli2forward = anglestoforward(self.angles);
+  heli2forward = anglesToForward(self.angles);
   heli2forward_normal = vectornormalize(heli2forward);
   heli_dot_target = vectordot(heli2target_normal, heli2forward_normal);
   if(heli_dot_target >= level.heli_valid_target_cone) {
@@ -1559,7 +1559,7 @@ missile_support(target_player, rof, instantfire, endon_notify) {
   }
   if(isDefined(target_player)) {
     if(level.teambased) {
-      for (i = 0; i < level.players.size; i++) {
+      for(i = 0; i < level.players.size; i++) {
         player = level.players[i];
         if(isDefined(player.team) && player.team == self.team && distance(player.origin, target_player.origin) <= level.heli_missile_friendlycare) {
           debug_print3d_simple("Missile omitted due to nearby friendly", self, (0, 0, -80), 40);
@@ -1593,15 +1593,15 @@ attack_primary(hardpointType) {
   self endon("crashing");
   self endon("leaving");
   level endon("game_ended");
-  for (;;) {
+  for(;;) {
     if(isDefined(self.primaryTarget)) {
       self.primaryTarget.antithreat = undefined;
       self.turretTarget = self.primaryTarget;
       antithreat = 0;
       last_pos = undefined;
-      while (isDefined(self.turretTarget) && isalive(self.turretTarget)) {
+      while(isDefined(self.turretTarget) && isalive(self.turretTarget)) {
         helicopterTurretMaxAngle = heli_get_dvar_int("scr_helicopterTurretMaxAngle", level.helicopterTurretMaxAngle);
-        while (self turret_target_check(self.turretTarget, helicopterTurretMaxAngle) == false && isDefined(self.turretTarget) && isalive(self.turretTarget))
+        while(self turret_target_check(self.turretTarget, helicopterTurretMaxAngle) == false && isDefined(self.turretTarget) && isalive(self.turretTarget))
           wait(0.1);
         if(!isDefined(self.turretTarget) || !isalive(self.turretTarget)) {
           break;
@@ -1614,7 +1614,7 @@ attack_primary(hardpointType) {
         wait(level.heli_turret_spinup_delay);
         weaponShootTime = weaponfiretime(self.defaultWeapon);
         self setVehWeapon(self.defaultWeapon);
-        for (i = 0; i < level.heli_turretClipSize; i++) {
+        for(i = 0; i < level.heli_turretClipSize; i++) {
           if(isDefined(self.turretTarget) && isDefined(self.primaryTarget)) {
             if(self.primaryTarget != self.turretTarget)
               self setTurretTargetEnt(self.primaryTarget, (0, 0, 40));
@@ -1628,7 +1628,7 @@ attack_primary(hardpointType) {
           if(gettime() != self.lastRocketFireTime) {
             self setVehWeapon(self.defaultWeapon);
             miniGun = self fireWeapon("tag_flash");
-            self.minigun_snd_ent PlayLoopSound("wpn_hind_pilot_fire_loop_npc");
+            self.minigun_snd_ent playLoopSound("wpn_hind_pilot_fire_loop_npc");
           }
           if(i < level.heli_turretClipSize - 1)
             wait weaponShootTime;
@@ -1662,9 +1662,9 @@ turret_target_flag(turrettarget) {
   turrettarget endon("disconnect");
   self.targetlost = false;
   self.turret_last_pos = undefined;
-  while (isDefined(turrettarget)) {
+  while(isDefined(turrettarget)) {
     heli_centroid = self.origin + (0, 0, -160);
-    heli_forward_norm = anglestoforward(self.angles);
+    heli_forward_norm = anglesToForward(self.angles);
     heli_turret_point = heli_centroid + 144 * heli_forward_norm;
     sight_rec = turrettarget sightconetrace(heli_turret_point, self);
     if(sight_rec < level.heli_target_recognition) {
@@ -1710,20 +1710,20 @@ debug_print_target() {
 }
 improved_sightconetrace(helicopter) {
   heli_centroid = helicopter.origin + (0, 0, -160);
-  heli_forward_norm = anglestoforward(helicopter.angles);
+  heli_forward_norm = anglesToForward(helicopter.angles);
   heli_turret_point = heli_centroid + 144 * heli_forward_norm;
   debug_line(heli_turret_point, self.origin, (1, 1, 1), 5);
   start = heli_turret_point;
   yes = 0;
   point = [];
-  for (i = 0; i < 5; i++) {
+  for(i = 0; i < 5; i++) {
     if(!isDefined(self)) {
       break;
     }
     half_height = self.origin + (0, 0, 36);
     tovec = start - half_height;
     tovec_angles = vectortoangles(tovec);
-    forward_norm = anglestoforward(tovec_angles);
+    forward_norm = anglesToForward(tovec_angles);
     side_norm = anglestoright(tovec_angles);
     point[point.size] = self.origin + (0, 0, 36);
     point[point.size] = self.origin + side_norm * (15, 15, 0) + (0, 0, 10);

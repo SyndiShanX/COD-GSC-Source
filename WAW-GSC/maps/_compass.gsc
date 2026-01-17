@@ -7,7 +7,7 @@ setupMiniMap(material) {
   if(getdebugdvar("replay_debug") == "1")
     println("File: _compass.gsc. Function: setupMiniMap()\n");
   requiredMapAspectRatio = getdvarfloat("scr_requiredMapAspectRatio");
-  corners = getentarray("minimap_corner", "targetname");
+  corners = getEntArray("minimap_corner", "targetname");
   if(corners.size != 2) {
     println("^1Error: There are not exactly two \"minimap_corner\" entities in the map. Could not set up minimap.");
     return;

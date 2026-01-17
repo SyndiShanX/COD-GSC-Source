@@ -8,12 +8,12 @@
 #include maps\_music;
 
 main() {
-  array_thread(getentarray("advertisement", "targetname"), ::advertisements);
+  array_thread(getEntArray("advertisement", "targetname"), ::advertisements);
 }
 
 advertisements() {
-  self playloopsound("amb_" + self.script_noteworthy + "_ad");
+  self playLoopSound("amb_" + self.script_noteworthy + "_ad");
   self waittill("damage");
   self stoploopsound();
-  self playloopsound("amb_" + self.script_noteworthy + "_damaged_ad");
+  self playLoopSound("amb_" + self.script_noteworthy + "_damaged_ad");
 }

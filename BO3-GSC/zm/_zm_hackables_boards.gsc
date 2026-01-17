@@ -15,20 +15,20 @@
 
 function hack_boards() {
   windows = struct::get_array("exterior_goal", "targetname");
-  for (i = 0; i < windows.size; i++) {
+  for(i = 0; i < windows.size; i++) {
     window = windows[i];
-    struct = spawnstruct();
+    struct = spawnStruct();
     spot = window;
-    if(isdefined(window.trigger_location)) {
+    if(isDefined(window.trigger_location)) {
       spot = window.trigger_location;
     }
     org = zm_utility::groundpos(spot.origin) + vectorscale((0, 0, 1), 4);
     r = 96;
     h = 96;
-    if(isdefined(spot.radius)) {
+    if(isDefined(spot.radius)) {
       r = spot.radius;
     }
-    if(isdefined(spot.height)) {
+    if(isDefined(spot.height)) {
       h = spot.height;
     }
     struct.origin = org + vectorscale((0, 0, 1), 48);
@@ -43,7 +43,7 @@ function hack_boards() {
     struct.no_touch_check = 1;
     struct.last_hacked_round = 0;
     struct.num_hacks = 0;
-    zm_equip_hacker::register_pooled_hackable_struct(struct, & board_hack, & board_qualifier);
+    zm_equip_hacker::register_pooled_hackable_struct(struct, &board_hack, &board_qualifier);
   }
 }
 
@@ -64,17 +64,17 @@ function board_hack(hacker) {
       hacker zm_score::minus_to_player_score(cost);
     }
   }
-  while (true) {
+  while(true) {
     if(zm_utility::all_chunks_intact(self.window, self.window.barrier_chunks)) {
       break;
     }
     chunk = zm_utility::get_random_destroyed_chunk(self.window, self.window.barrier_chunks);
-    if(!isdefined(chunk)) {
+    if(!isDefined(chunk)) {
       break;
     }
     self.window thread zm_blockers::replace_chunk(self.window, chunk, undefined, 0, 1);
     last_repaired_chunk = chunk;
-    if(isdefined(self.clip)) {
+    if(isDefined(self.clip)) {
       self.window.clip triggerenable(1);
       self.window.clip disconnectpaths();
     } else {
@@ -86,18 +86,18 @@ function board_hack(hacker) {
       break;
     }
   }
-  if(isdefined(self.window.zbarrier)) {
-    if(isdefined(last_repaired_chunk)) {
-      while (self.window.zbarrier getzbarrierpiecestate(last_repaired_chunk) == "closing") {
+  if(isDefined(self.window.zbarrier)) {
+    if(isDefined(last_repaired_chunk)) {
+      while(self.window.zbarrier getzbarrierpiecestate(last_repaired_chunk) == "closing") {
         wait(0.05);
       }
     }
   } else {
-    while (isdefined(last_repaired_chunk) && last_repaired_chunk.state == "mid_repair") {
+    while(isDefined(last_repaired_chunk) && last_repaired_chunk.state == "mid_repair") {
       wait(0.05);
     }
   }
-  zm_equip_hacker::register_pooled_hackable_struct(self, & board_hack, & board_qualifier);
+  zm_equip_hacker::register_pooled_hackable_struct(self, &board_hack, &board_qualifier);
   self.window notify("blocker_hacked");
   self.window notify("hash_46d36511");
 }

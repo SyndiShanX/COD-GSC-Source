@@ -4,11 +4,9 @@
 ****************************************************************/
 
 #include scripts\core_common\lui_shared;
-
 #namespace spectrerisingindicator;
 
 class cspectrerisingindicator: cluielem {
-
   function set_isalive(localclientnum, value) {
     set_data(localclientnum, "isAlive", value);
   }
@@ -18,7 +16,7 @@ class cspectrerisingindicator: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, #"spectrerisingindicator");
+    cluielem::open(localclientnum, # "spectrerisingindicator");
   }
 
   function function_fa582112(localclientnum) {

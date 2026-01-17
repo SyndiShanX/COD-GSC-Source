@@ -26,7 +26,6 @@
 #include scripts\zm_common\zm_pack_a_punch;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
-
 #namespace zm_pap_util;
 
 function_a81f02e5() {
@@ -112,7 +111,7 @@ update_hint_string(player) {
   if(pap_machine flag::get("pap_in_retrigger_delay") || !player player_use_can_pack_now(pap_machine) || player bgb::is_active(#"zm_bgb_ephemeral_enhancement")) {
     if(zm_utility::is_standard()) {
       if(!zm_custom::function_901b751c(#"zmsuperpapenabled") || !b_weapon_supports_aat) {
-        self sethintstringforplayer(player, #"hash_fea06394ae21371");
+        self sethintstringforplayer(player, # "hash_fea06394ae21371");
         return true;
       } else if(isDefined(player.var_486c9d59) && player.var_486c9d59) {
         return true;
@@ -262,7 +261,7 @@ function_873e8824(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoi
   return damage;
 }
 
-private can_pack_weapon(weapon, pap_machine) {
+can_pack_weapon(weapon, pap_machine) {
   if(weapon.isriotshield) {
     return false;
   }
@@ -290,7 +289,7 @@ private can_pack_weapon(weapon, pap_machine) {
   return true;
 }
 
-private player_use_can_pack_now(pap_machine) {
+player_use_can_pack_now(pap_machine) {
   if(self laststand::player_is_in_laststand() || isDefined(self.intermission) && self.intermission || self isthrowinggrenade()) {
     return false;
   }
@@ -336,7 +335,7 @@ repack_weapon(weapon, n_repacks) {
   }
 
   if(self.var_2843d3cc[weapon] == 4) {
-    self activecamo::function_896ac347(w_original, #"pap_weapon_double_packed", 1);
+    self activecamo::function_896ac347(w_original, # "pap_weapon_double_packed", 1);
   }
 }
 
@@ -391,7 +390,7 @@ function_6d45375a(weapon) {
   return n_multiplier;
 }
 
-private function_33f0ddd3(s_event) {
+function_33f0ddd3(s_event) {
   if(s_event.event === "take_weapon" && isDefined(s_event.weapon)) {
     self function_c01d9f22(s_event.weapon);
   }

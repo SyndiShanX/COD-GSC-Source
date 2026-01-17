@@ -14,9 +14,7 @@ main() {
 
   if(isusingmatchrulesdata()) {
     level.initializematchrules = ::initializematchrules;
-    [
-      [level.initializematchrules]
-    ]();
+    [[level.initializematchrules]]();
     level thread maps\mp\_utility::reinitializematchrulesonmigration();
   } else {
     maps\mp\_utility::registerroundswitchdvar(level.gametype, 1, 0, 9);
@@ -82,7 +80,7 @@ onstartgametype() {
   if(game["roundsPlayed"] == 2)
     game["status"] = "overtime";
 
-  if(!isdefined(game["switchedsides"]))
+  if(!isDefined(game["switchedsides"]))
     game["switchedsides"] = 0;
 
   if(game["switchedsides"]) {
@@ -99,23 +97,23 @@ onstartgametype() {
     game["dialog"]["defense_obj"] = "obj_destroy";
 
   maps\mp\gametypes\common_bomb_gameobject::loadbombfx();
-  maps\mp\_utility::setobjectivetext(game["attackers"], & "OBJECTIVES_DD_ATTACKER");
-  maps\mp\_utility::setobjectivetext(game["defenders"], & "OBJECTIVES_DD_DEFENDER");
+  maps\mp\_utility::setobjectivetext(game["attackers"], &"OBJECTIVES_DD_ATTACKER");
+  maps\mp\_utility::setobjectivetext(game["defenders"], &"OBJECTIVES_DD_DEFENDER");
 
   if(level.splitscreen) {
-    maps\mp\_utility::setobjectivescoretext(game["attackers"], & "OBJECTIVES_DD_ATTACKER");
-    maps\mp\_utility::setobjectivescoretext(game["defenders"], & "OBJECTIVES_DD_DEFENDER");
+    maps\mp\_utility::setobjectivescoretext(game["attackers"], &"OBJECTIVES_DD_ATTACKER");
+    maps\mp\_utility::setobjectivescoretext(game["defenders"], &"OBJECTIVES_DD_DEFENDER");
   } else {
-    maps\mp\_utility::setobjectivescoretext(game["attackers"], & "OBJECTIVES_DD_ATTACKER_SCORE");
-    maps\mp\_utility::setobjectivescoretext(game["defenders"], & "OBJECTIVES_DD_DEFENDER_SCORE");
+    maps\mp\_utility::setobjectivescoretext(game["attackers"], &"OBJECTIVES_DD_ATTACKER_SCORE");
+    maps\mp\_utility::setobjectivescoretext(game["defenders"], &"OBJECTIVES_DD_DEFENDER_SCORE");
   }
 
   if(maps\mp\_utility::inovertime()) {
-    maps\mp\_utility::setobjectivehinttext(game["attackers"], & "OBJECTIVES_DD_OVERTIME_HINT");
-    maps\mp\_utility::setobjectivehinttext(game["defenders"], & "OBJECTIVES_DD_OVERTIME_HINT");
+    maps\mp\_utility::setobjectivehinttext(game["attackers"], &"OBJECTIVES_DD_OVERTIME_HINT");
+    maps\mp\_utility::setobjectivehinttext(game["defenders"], &"OBJECTIVES_DD_OVERTIME_HINT");
   } else {
-    maps\mp\_utility::setobjectivehinttext(game["attackers"], & "OBJECTIVES_DD_ATTACKER_HINT");
-    maps\mp\_utility::setobjectivehinttext(game["defenders"], & "OBJECTIVES_DD_DEFENDER_HINT");
+    maps\mp\_utility::setobjectivehinttext(game["attackers"], &"OBJECTIVES_DD_ATTACKER_HINT");
+    maps\mp\_utility::setobjectivehinttext(game["defenders"], &"OBJECTIVES_DD_DEFENDER_HINT");
   }
 
   initspawns();
@@ -149,7 +147,7 @@ initspawns() {
   var_0 = maps\mp\gametypes\_spawnlogic::getspawnpointarray("mp_dd_spawn");
 
   foreach(var_2 in var_0) {
-    if(!isdefined(var_2.script_noteworthy)) {
+    if(!isDefined(var_2.script_noteworthy)) {
       spawnpointerror(var_2);
       continue;
     }
@@ -206,7 +204,7 @@ spawnpointerror(var_0) {}
 waittoprocess() {
   level endon("game_end");
 
-  for (;;) {
+  for(;;) {
     if(level.ingraceperiod == 0) {
       break;
     }
@@ -270,12 +268,12 @@ onspawnplayer() {
   self setclientomnvar("ui_carrying_bomb", self.isbombcarrier);
   maps\mp\_utility::setextrascore0(0);
 
-  if(isdefined(self.pers["plants"]))
+  if(isDefined(self.pers["plants"]))
     maps\mp\_utility::setextrascore0(self.pers["plants"]);
 
   maps\mp\_utility::setextrascore1(0);
 
-  if(isdefined(self.pers["defuses"]))
+  if(isDefined(self.pers["defuses"]))
     maps\mp\_utility::setextrascore1(self.pers["defuses"]);
 
   level notify("spawned_player");
@@ -384,12 +382,12 @@ bombs() {
   level.bombdefused = 0;
   level.bombexploded = 0;
   level.bombzones = [];
-  var_0 = getentarray("dd_bombzone", "targetname");
+  var_0 = getEntArray("dd_bombzone", "targetname");
   verifybombzones(var_0);
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++) {
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_2 = var_0[var_1];
-    var_3 = getentarray(var_2.target, "targetname");
+    var_3 = getEntArray(var_2.target, "targetname");
     var_4 = getent(var_3[0].target, "targetname");
     var_5 = var_2.script_label;
     var_6 = getent("dd_bombzone_clip" + var_5, "targetname");
@@ -468,9 +466,9 @@ getclosestbombmodel() {
   var_0 = 9000000;
   var_1 = undefined;
 
-  if(isdefined(level.ddbombmodel)) {
+  if(isDefined(level.ddbombmodel)) {
     foreach(var_3 in level.ddbombmodel) {
-      if(!isdefined(var_3)) {
+      if(!isDefined(var_3)) {
         continue;
       }
       var_4 = distancesquared(self.origin, var_3.origin);
@@ -486,7 +484,7 @@ getclosestbombmodel() {
 }
 
 onenduse(var_0, var_1, var_2) {
-  var_3 = isdefined(var_1) && var_1.isdefusing && !var_2;
+  var_3 = isDefined(var_1) && var_1.isdefusing && !var_2;
   maps\mp\gametypes\common_bomb_gameobject::onendusebomb(var_1, var_3);
 }
 
@@ -578,14 +576,14 @@ setbombtimerdvar() {
 }
 
 dropbombmodel(var_0, var_1) {
-  var_2 = bullettrace(var_0.origin + (0, 0, 20), var_0.origin - (0, 0, 2000), 0, var_0);
+  var_2 = bulletTrace(var_0.origin + (0, 0, 20), var_0.origin - (0, 0, 2000), 0, var_0);
   var_3 = randomfloat(360);
   var_4 = (cos(var_3), sin(var_3), 0);
   var_4 = vectornormalize(var_4 - var_2["normal"] * vectordot(var_4, var_2["normal"]));
   var_5 = vectortoangles(var_4);
   level.ddbombmodel[var_1] = spawn("script_model", var_2["position"]);
   level.ddbombmodel[var_1].angles = var_5;
-  level.ddbombmodel[var_1] setmodel("wpn_h1_briefcase_bomb_npc");
+  level.ddbombmodel[var_1] setModel("wpn_h1_briefcase_bomb_npc");
 }
 
 restarttimer() {
@@ -607,7 +605,7 @@ bombtimerwait(var_0) {
 
   level thread update_ui_timers(var_0);
 
-  while (var_0.waittime >= 0) {
+  while(var_0.waittime >= 0) {
     var_0.waittime--;
 
     if(var_0.waittime >= 0)

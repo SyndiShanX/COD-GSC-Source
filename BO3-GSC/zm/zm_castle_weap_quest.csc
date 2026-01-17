@@ -18,16 +18,16 @@
 #namespace zm_castle_weap_quest;
 
 function autoexec __init__sytem__() {
-  system::register("zm_castle_weap_quest", & __init__, undefined, undefined);
+  system::register("zm_castle_weap_quest", &__init__, undefined, undefined);
 }
 
 function __init__() {
   level.var_f302359b = struct::get_array("dragon_position", "targetname");
-  clientfield::register("actor", "make_client_clone", 5000, 4, "int", & function_90c151e6, 0, 0);
-  for (i = 0; i < level.var_f302359b.size; i++) {
-    clientfield::register("world", level.var_f302359b[i].script_parameters, 5000, 3, "int", & function_cda3a15d, 0, 0);
+  clientfield::register("actor", "make_client_clone", 5000, 4, "int", &function_90c151e6, 0, 0);
+  for(i = 0; i < level.var_f302359b.size; i++) {
+    clientfield::register("world", level.var_f302359b[i].script_parameters, 5000, 3, "int", &function_cda3a15d, 0, 0);
   }
-  clientfield::register("toplayer", "bow_pickup_fx", 5000, 1, "int", & function_4e75b7c1, 0, 0);
+  clientfield::register("toplayer", "bow_pickup_fx", 5000, 1, "int", &function_4e75b7c1, 0, 0);
 }
 
 function main() {
@@ -60,9 +60,9 @@ function main() {
   level.var_93ad1521[1] = "cin_t7_ai_zm_dlc1_dragonhead_idle_b";
   level.var_16db17aa = [];
   level.var_16db17aa[0] = "cin_t7_ai_zm_dlc1_dragonhead_idle_twitch_roar";
-  scene::add_scene_func(level.var_93ad1521[0], & function_8cce2397);
-  scene::add_scene_func(level.var_93ad1521[1], & function_8cce2397);
-  scene::add_scene_func(level.var_16db17aa[0], & function_def5820e);
+  scene::add_scene_func(level.var_93ad1521[0], &function_8cce2397);
+  scene::add_scene_func(level.var_93ad1521[1], &function_8cce2397);
+  scene::add_scene_func(level.var_16db17aa[0], &function_def5820e);
   level.var_f41bc81e = % zm_castle::ai_zm_dlc1_dragonhead_zombie_impact;
   function_46c9cb0();
   util::waitforallclients();
@@ -71,11 +71,11 @@ function main() {
   level.var_3cc6503b = [];
   level.var_abd9e961 = [];
   players = getlocalplayers();
-  for (j = 0; j < players.size; j++) {
+  for(j = 0; j < players.size; j++) {
     level.var_792780c0[j] = [];
     level.var_3cc6503b[j] = [];
     level.var_abd9e961[j] = [];
-    for (i = 0; i < level.var_f302359b.size; i++) {
+    for(i = 0; i < level.var_f302359b.size; i++) {
       level.var_792780c0[j][level.var_f302359b[i].script_parameters] = getent(j, level.var_f302359b[i].script_label, "targetname");
       level.var_792780c0[j][level.var_f302359b[i].script_parameters] useanimtree($zm_castle);
       level.var_792780c0[j][level.var_f302359b[i].script_parameters] flag::init("dragon_far_right");
@@ -86,23 +86,23 @@ function main() {
       level.var_3cc6503b[j][level.var_f302359b[i].script_parameters] useanimtree($zm_castle);
       level.var_abd9e961[j][level.var_f302359b[i].script_parameters] = getent(j, level.var_f302359b[i].script_label + "_mini", "targetname");
     }
-    array::run_all(level.var_abd9e961[j], & function_c9ca8c4b, j);
+    array::run_all(level.var_abd9e961[j], &function_c9ca8c4b, j);
   }
   level.var_ab74f2fa = 1;
 }
 
 function function_cda3a15d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  while (!isdefined(level.var_ab74f2fa)) {
+  while(!isDefined(level.var_ab74f2fa)) {
     wait(0.05);
   }
   if(newval == 7) {
-    if(isdefined(level.var_792780c0[localclientnum][fieldname])) {
+    if(isDefined(level.var_792780c0[localclientnum][fieldname])) {
       level.var_792780c0[localclientnum][fieldname] thread function_a5ee5367(localclientnum);
     }
   } else {
     if(newval == 1) {
       level.var_3cc6503b[localclientnum][fieldname] hide();
-      if(isdefined(level.var_792780c0[localclientnum][fieldname])) {
+      if(isDefined(level.var_792780c0[localclientnum][fieldname])) {
         level.var_792780c0[localclientnum][fieldname] show();
         level.var_792780c0[localclientnum][fieldname] thread function_2731927f(localclientnum);
         level.var_792780c0[localclientnum][fieldname] scene::play(level.var_dd277883, level.var_792780c0[localclientnum][fieldname]);
@@ -110,19 +110,19 @@ function function_cda3a15d(localclientnum, oldval, newval, bnewent, binitialsnap
     } else {
       if(newval == 2) {
         level.var_3cc6503b[localclientnum][fieldname] hide();
-        if(isdefined(level.var_3cc6503b[localclientnum][fieldname].head)) {
-          if(isdefined(level.var_3cc6503b[localclientnum][fieldname].head.hat)) {
+        if(isDefined(level.var_3cc6503b[localclientnum][fieldname].head)) {
+          if(isDefined(level.var_3cc6503b[localclientnum][fieldname].head.hat)) {
             level.var_3cc6503b[localclientnum][fieldname].head.hat hide();
           }
           level.var_3cc6503b[localclientnum][fieldname].head hide();
         }
-        if(isdefined(level.var_792780c0[localclientnum][fieldname])) {
+        if(isDefined(level.var_792780c0[localclientnum][fieldname])) {
           level.var_792780c0[localclientnum][fieldname] show();
           level.var_792780c0[localclientnum][fieldname] thread function_979d2797(localclientnum);
         }
       } else {
         if(newval == 3 || newval == 5 || newval == 4) {
-          if(isdefined(level.var_792780c0[localclientnum][fieldname])) {
+          if(isDefined(level.var_792780c0[localclientnum][fieldname])) {
             level.var_792780c0[localclientnum][fieldname] show();
             if(newval == 3) {
               level.var_792780c0[localclientnum][fieldname] thread function_4ae89880(level.var_3cc6503b[localclientnum][fieldname], localclientnum, "front");
@@ -137,13 +137,13 @@ function function_cda3a15d(localclientnum, oldval, newval, bnewent, binitialsnap
         } else {
           if(newval == 6) {
             level.var_3cc6503b[localclientnum][fieldname] hide();
-            if(isdefined(level.var_3cc6503b[localclientnum][fieldname].head)) {
-              if(isdefined(level.var_3cc6503b[localclientnum][fieldname].head.hat)) {
+            if(isDefined(level.var_3cc6503b[localclientnum][fieldname].head)) {
+              if(isDefined(level.var_3cc6503b[localclientnum][fieldname].head.hat)) {
                 level.var_3cc6503b[localclientnum][fieldname].head.hat hide();
               }
               level.var_3cc6503b[localclientnum][fieldname].head hide();
             }
-            if(isdefined(level.var_792780c0[localclientnum][fieldname])) {
+            if(isDefined(level.var_792780c0[localclientnum][fieldname])) {
               level.var_792780c0[localclientnum][fieldname] show();
               level.var_792780c0[localclientnum][fieldname] thread function_aba7532b(localclientnum, level.var_3cc6503b[localclientnum][fieldname], level.var_abd9e961[localclientnum][fieldname]);
             }
@@ -159,7 +159,7 @@ function function_cda3a15d(localclientnum, oldval, newval, bnewent, binitialsnap
 function function_2731927f(localclientnum) {
   forcestreamxmodel("c_zom_dragonhead_e");
   self function_c54660fa(localclientnum);
-  self setmodel("c_zom_dragonhead_e");
+  self setModel("c_zom_dragonhead_e");
   stopforcestreamingxmodel("c_zom_dragonhead_e");
   self thread function_aa74062f(localclientnum);
 }
@@ -169,7 +169,7 @@ function function_c54660fa(localclientnum) {
   n_end_time = n_start_time + (3.6 * 1000);
   var_2f4dbfb7 = n_start_time + (0.5 * 1000);
   b_is_updating = 1;
-  while (b_is_updating) {
+  while(b_is_updating) {
     n_time = gettime();
     if(n_time >= n_end_time) {
       n_shader_value = mapfloat(n_start_time, n_end_time, 1, 0, n_end_time);
@@ -192,7 +192,7 @@ function function_2ea674b8(localclientnum) {
   n_start_time = gettime();
   n_end_time = n_start_time + (7 * 1000);
   b_is_updating = 1;
-  while (b_is_updating && isdefined(self)) {
+  while(b_is_updating && isDefined(self)) {
     n_time = gettime();
     if(n_time >= n_end_time) {
       n_shader_value = mapfloat(n_start_time, n_end_time, 0, 1, n_end_time);
@@ -210,7 +210,7 @@ function function_aa74062f(localclientnum) {
   n_start_time = gettime();
   n_end_time = n_start_time + (5 * 1000);
   b_is_updating = 1;
-  while (b_is_updating) {
+  while(b_is_updating) {
     n_time = gettime();
     if(n_time >= n_end_time) {
       n_shader_value = mapfloat(n_start_time, n_end_time, 0, 2, n_end_time);
@@ -232,11 +232,11 @@ function function_979d2797(localclientnum) {
   self endon("hash_4b8a9b1");
   self endon("hash_4846b79f");
   self notify("hash_8c17cec");
-  if(isdefined(self.var_d90397ef) && self.var_d90397ef) {
+  if(isDefined(self.var_d90397ef) && self.var_d90397ef) {
     return;
   }
   self.var_d90397ef = 1;
-  while (true) {
+  while(true) {
     var_68e7aa53 = array::random(level.var_93ad1521);
     self scene::play(var_68e7aa53, self);
     var_c5577e8a = array::random(level.var_16db17aa);
@@ -250,16 +250,16 @@ function function_90c151e6(localclientnum, oldval, newval, bnewent, binitialsnap
     self util::waittill_dobj(localclientnum);
     wait(0.016);
   }
-  while (!isdefined(level.var_ab74f2fa)) {
+  while(!isDefined(level.var_ab74f2fa)) {
     wait(0.05);
   }
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   s_closest = array::get_all_closest(self.origin, level.var_f302359b);
   fieldname = s_closest[0].script_parameters;
   m_body = level.var_3cc6503b[localclientnum][fieldname];
-  if(isdefined(m_body)) {
+  if(isDefined(m_body)) {
     m_body delete();
     m_body = gibclientutils::createscriptmodelofentity(localclientnum, self);
     if(issubstr(m_body.model, "skeleton")) {
@@ -298,7 +298,7 @@ function function_8cce2397(a_ents) {
   self endon("hash_7291a140");
   self endon("hash_4b8a9b1");
   self endon("hash_4846b79f");
-  while (true) {
+  while(true) {
     self waittillmatch("_anim_notify_");
     self flag::set("dragon_far_right");
     self waittillmatch("_anim_notify_");
@@ -315,7 +315,7 @@ function function_def5820e(a_ents) {
   self endon("hash_7291a140");
   self endon("hash_4b8a9b1");
   self endon("hash_4846b79f");
-  while (true) {
+  while(true) {
     self waittillmatch("_anim_notify_");
     self flag::set("dragon_far_left");
     self waittillmatch("_anim_notify_");
@@ -328,9 +328,9 @@ function function_def5820e(a_ents) {
 }
 
 function function_939ae9de(var_e88629ec, localclientnum, direction, var_3c6f5c75) {
-  if(!isdefined(self.var_bbb1ef87)) {
+  if(!isDefined(self.var_bbb1ef87)) {
     self.var_bbb1ef87 = spawn(localclientnum, self gettagorigin("J_SpineLower"), "script_model");
-    self.var_bbb1ef87 setmodel("tag_origin");
+    self.var_bbb1ef87 setModel("tag_origin");
   }
   self clearanim( % zm_castle::root, 0.2);
   self setanimrestart("ai_zm_dlc1_dragonhead_zombie_rise");
@@ -339,7 +339,7 @@ function function_939ae9de(var_e88629ec, localclientnum, direction, var_3c6f5c75
   self.var_bbb1ef87.angles = vectortoangles(var_1d199979);
   self.var_bbb1ef87 linkto(self);
   wait(0.3);
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   animlength = getanimlength(var_3c6f5c75);
@@ -355,10 +355,10 @@ function function_939ae9de(var_e88629ec, localclientnum, direction, var_3c6f5c75
   var_6b61dff7 = var_e88629ec gettagorigin("tag_attach");
   self moveto(var_6b61dff7, animlength, animlength, 0);
   self waittill("movedone");
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
-  if(isdefined(self.var_bbb1ef87)) {
+  if(isDefined(self.var_bbb1ef87)) {
     self.var_bbb1ef87 unlink();
     self.var_bbb1ef87 delete();
     self.var_bbb1ef87 = undefined;
@@ -375,47 +375,47 @@ function function_4ae89880(body, localclientnum, direction) {
   m_body = level.var_3cc6503b[localclientnum][fieldname];
   var_e88629ec = level.var_792780c0[localclientnum][fieldname];
   level function_4bdc99a(m_body, var_e88629ec, localclientnum, direction);
-  if(!isdefined(var_e88629ec) || !isdefined(m_body)) {
+  if(!isDefined(var_e88629ec) || !isDefined(m_body)) {
     return;
   }
   m_body.animname = "zombie";
   var_e88629ec.animname = "dragon";
   self thread function_badc23de(localclientnum);
   self scene::play(level.var_977975d2[direction], array(m_body, var_e88629ec));
-  if(!isdefined(var_e88629ec) || !isdefined(m_body)) {
+  if(!isDefined(var_e88629ec) || !isDefined(m_body)) {
     return;
   }
   m_body.animname = "";
   var_e88629ec.animname = "";
-  playsound(0, "zmb_weap_wall", var_e88629ec.origin);
+  playSound(0, "zmb_weap_wall", var_e88629ec.origin);
   var_e88629ec thread function_979d2797(localclientnum);
 }
 
 function function_badc23de(localclientnum) {
-  while (true) {
+  while(true) {
     self waittill("bite", note);
     if(note == "blood") {} else {}
   }
 }
 
 function function_aba7532b(localclientnum, body, mini) {
-  if(isdefined(self.var_7d382bfa) && self.var_7d382bfa) {
+  if(isDefined(self.var_7d382bfa) && self.var_7d382bfa) {
     self notify("hash_4846b79f");
     self.var_7d382bfa = undefined;
     var_1656bbd4 = level.var_a79e1598[self.targetname];
     self.var_d90397ef = 0;
     forcestreambundle(level.var_a79e1598[self.targetname]);
-    self setmodel("c_zom_dragonhead");
+    self setModel("c_zom_dragonhead");
     self thread function_2ea674b8(localclientnum);
     self scene::play(level.var_160f7e80, self);
     mini thread function_63f39fc0(localclientnum);
     self thread scene::play(var_1656bbd4);
-    if(isdefined(self)) {
+    if(isDefined(self)) {
       self hide();
     }
     stopforcestreamingxmodel("p7_fxanim_zm_castle_dragon_chunks_mod");
     stopforcestreamingxmodel("c_zom_dragonhead");
-  } else if(isdefined(self)) {
+  } else if(isDefined(self)) {
     self hide();
   }
 }
@@ -427,13 +427,13 @@ function function_c9ca8c4b(localclientnum) {
 function function_63f39fc0(localclientnum) {
   forcestreamxmodel("c_zom_dragonhead_small_e");
   self function_c54660fa(localclientnum);
-  self setmodel("c_zom_dragonhead_small_e");
+  self setModel("c_zom_dragonhead_small_e");
   stopforcestreamingxmodel("c_zom_dragonhead_small_e");
   self function_aa74062f(localclientnum);
-  playfxontag(localclientnum, level._effect["mini_dragon_eye"], self, "tag_eye_left_fx");
-  while (true) {
+  playFXOnTag(localclientnum, level._effect["mini_dragon_eye"], self, "tag_eye_left_fx");
+  while(true) {
     wait(randomintrange(20, 40));
-    playfxontag(localclientnum, level._effect["mini_dragon_fire"], self, "tag_throat_fx");
+    playFXOnTag(localclientnum, level._effect["mini_dragon_fire"], self, "tag_throat_fx");
     wait(randomintrange(3, 5));
   }
 }
@@ -457,7 +457,7 @@ function function_4e75b7c1(localclientnum, oldval, newval, bnewent, binitialsnap
     exploder::stop_exploder("lgt_bow_family");
   }
   var_14ea0734 = struct::get("base_bow_pickup_struct", "targetname");
-  if(isdefined(var_14ea0734)) {
-    playfx(localclientnum, level._effect["bow_spawn_fx"], var_14ea0734.origin);
+  if(isDefined(var_14ea0734)) {
+    playFX(localclientnum, level._effect["bow_spawn_fx"], var_14ea0734.origin);
   }
 }

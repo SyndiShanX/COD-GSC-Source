@@ -161,8 +161,8 @@ activatewwaudio() {
   if(!isDefined(level.sndwwent))
     level.sndwwent = spawn(0, (0, 0, 0), "script_origin");
 
-  playsound(0, "evt_ww_activate", (0, 0, 0));
-  level.sndwwent playloopsound("evt_ww_looper", 3);
+  playSound(0, "evt_ww_activate", (0, 0, 0));
+  level.sndwwent playLoopSound("evt_ww_looper", 3);
   snd_set_snapshot("zmb_duck_ww");
 }
 
@@ -172,6 +172,6 @@ deactivatewwaudio() {
     level.sndwwent = undefined;
   }
 
-  playsound(0, "evt_ww_deactivate", (0, 0, 0));
+  playSound(0, "evt_ww_deactivate", (0, 0, 0));
   snd_set_snapshot("default");
 }

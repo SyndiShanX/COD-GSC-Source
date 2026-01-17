@@ -20,8 +20,7 @@ init_flags() {
   flag_init("exit_club_cleanup");
 }
 
-init_spawn_funcs() {
-}
+init_spawn_funcs() {}
 
 skipto_club_exit() {
   level.ai_harper = init_hero_startstruct("harper", "e7_harper_start");
@@ -273,8 +272,7 @@ single_civ_approach_window_anim() {
   delete_scene("scene_e7_single_approach_window_part2_loop");
 }
 
-spawn_funcs() {
-}
+spawn_funcs() {}
 
 titanic_event_animations() {
   str_scene1_name = "scene_e7_titanic_moment_docka_loop";
@@ -331,9 +329,9 @@ spawn_lift_boat(str_drone_pos, n_move_time) {
   foreach(s_drone_pos in a_drone_pos) {
     m_drone = spawn("script_model", s_drone_pos.origin);
     m_drone.angles = vectorscale((0, -1, 0), 90.0);
-    m_drone setmodel("p6_boat_small_closed");
+    m_drone setModel("p6_boat_small_closed");
     s_drone_target = getstruct(s_drone_pos.target, "targetname");
-    playfxontag(level._effect["fx_kar_boat_wake1"], m_drone, "tag_origin");
+    playFXOnTag(level._effect["fx_kar_boat_wake1"], m_drone, "tag_origin");
     m_drone moveto(s_drone_target.origin, n_move_time);
     m_drone waittill("movedone");
     m_drone delete();
@@ -352,7 +350,7 @@ intruder_perk() {
   t_intruder_use = getent("t_intruder_use", "targetname");
   t_intruder_use trigger_off();
   run_scene_first_frame("intruder_knuckles");
-  a_weapons = getentarray("intruder_weapons", "targetname");
+  a_weapons = getEntArray("intruder_weapons", "targetname");
 
   foreach(weapon in a_weapons)
   weapon makeunusable();
@@ -413,7 +411,7 @@ e8_flanking_helicopters() {
 setup_heli(v_heli_name, str_node) {
   e_heli = maps\_vehicle::spawn_vehicle_from_targetname(v_heli_name);
   e_heli thread follow_path(str_node);
-  e_heli playsound("evt_club_heli_flyby", "sound_done");
+  e_heli playSound("evt_club_heli_flyby", "sound_done");
 }
 
 karma2_hide_tower_and_shell() {

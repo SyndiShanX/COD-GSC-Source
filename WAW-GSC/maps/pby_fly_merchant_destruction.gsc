@@ -54,7 +54,7 @@ setup_merchant_ship_chain_destruction() {
 
 damage_when_piece_breaks(break_notify, forward, right, up, rad, min_damage, max_damage, tag_offset, flame) {
   level endon("stop merchant ship damage");
-  for (;;) {
+  for(;;) {
     self waittill("broken", recieved_notify);
     if(recieved_notify == break_notify) {
       if(rad >= 115) {
@@ -65,7 +65,7 @@ damage_when_piece_breaks(break_notify, forward, right, up, rad, min_damage, max_
       } else {
         dmg_origin = self GetTagOrigin(tag_offset);
       }
-      dmg_origin = dmg_origin + (AnglesToForward(self.angles) * forward);
+      dmg_origin = dmg_origin + (anglesToForward(self.angles) * forward);
       dmg_origin = dmg_origin + (AnglesToRight(self.angles) * right);
       dmg_origin = dmg_origin + (AnglesToUp(self.angles) * up);
       if(isDefined(flame)) {
@@ -93,9 +93,9 @@ damage_when_piece_breaks(break_notify, forward, right, up, rad, min_damage, max_
 
 setup_drones_for_burn(dmg_origin, dmg_radius) {
   drones = [];
-  drones = GetEntArray("drone", "targetname");
+  drones = getEntArray("drone", "targetname");
   random_num = 0;
-  for (i = 0; i < drones.size; i++) {
+  for(i = 0; i < drones.size; i++) {
     if(DistanceSquared(dmg_origin, drones[i].origin) < (dmg_radius * dmg_radius) * 0.75) {
       random_num = RandomIntRange(0, 10);
       if(random_num < 4) {

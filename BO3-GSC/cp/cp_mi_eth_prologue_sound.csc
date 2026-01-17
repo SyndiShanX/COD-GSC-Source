@@ -63,7 +63,7 @@ function function_9806d032() {
   location2 = (15248, -749, 463);
   location3 = (15807, -1927, 478);
   count = 0;
-  while (true) {
+  while(true) {
     level thread function_ab91e7b9(location1);
     if(count > 5) {
       level thread function_ab91e7b9(location2);
@@ -78,7 +78,7 @@ function function_9806d032() {
 
 function function_ab91e7b9(location) {
   wait(randomfloatrange(0.25, 2));
-  playsound(0, "evt_garage_robot_hit", location);
+  playSound(0, "evt_garage_robot_hit", location);
 }
 
 function function_c943c5e5() {

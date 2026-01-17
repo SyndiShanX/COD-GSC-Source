@@ -4,17 +4,17 @@
 *****************************************************/
 
 minefields() {
-  minefields = getentarray("minefield", "targetname");
+  minefields = getEntArray("minefield", "targetname");
   if(minefields.size > 0) {
     level._effect["mine_explosion"] = loadfx("explosions/grenadeExp_dirt");
   }
-  for (i = 0; i < minefields.size; i++) {
+  for(i = 0; i < minefields.size; i++) {
     minefields[i] thread minefield_think();
   }
 }
 
 minefield_think() {
-  while (1) {
+  while(1) {
     self waittill("trigger", other);
     if(isPlayer(other))
       other thread minefield_kill(self);
@@ -26,7 +26,7 @@ minefield_kill(trigger) {
     return;
   }
   self.minefield = true;
-  self playsound("minefield_click");
+  self playSound("minefield_click");
   wait(.5);
   wait(randomFloat(.5));
   if(isDefined(self) && self istouching(trigger)) {
@@ -34,8 +34,8 @@ minefield_kill(trigger) {
     range = 300;
     maxdamage = 2000;
     mindamage = 50;
-    self playsound("explo_mine");
-    playfx(level._effect["mine_explosion"], origin);
+    self playSound("explo_mine");
+    playFX(level._effect["mine_explosion"], origin);
     radiusDamage(origin, range, maxdamage, mindamage);
   }
   self.minefield = undefined;

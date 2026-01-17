@@ -7,7 +7,7 @@
 main() {}
 
 setup_names() {
-  if(isdefined(level.names)) {
+  if(isDefined(level.names)) {
     return;
   }
   var_0 = [];
@@ -34,7 +34,7 @@ setup_names() {
   var_0[var_0.size] = "squad";
   var_0[var_0.size] = "northkorea";
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++)
     level.names[var_0[var_1]] = [];
 
   add_name("american", "Abrahamsson");
@@ -505,7 +505,7 @@ setup_names() {
   add_name("pmc", "######InvalidName######");
   init_script_friendnames();
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++) {
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     remove_script_friendnames_from_list(var_0[var_1]);
     randomize_name_list(var_0[var_1]);
     level.nameindex[var_0[var_1]] = 0;
@@ -530,14 +530,14 @@ init_script_friendnames() {
   var_2 = getaiarray();
 
   foreach(var_4 in var_1) {
-    if(isdefined(var_4.script_friendname) && var_4.script_friendname != "none") {
+    if(isDefined(var_4.script_friendname) && var_4.script_friendname != "none") {
       var_5 = normalize_script_friendname(var_4.script_friendname);
       var_0[var_0.size] = var_5;
     }
   }
 
   foreach(var_8 in var_2) {
-    if(isdefined(var_8.script_friendname) && var_8.script_friendname != "none") {
+    if(isDefined(var_8.script_friendname) && var_8.script_friendname != "none") {
       var_5 = normalize_script_friendname(var_8.script_friendname);
       var_0[var_0.size] = var_5;
     }
@@ -567,7 +567,7 @@ remove_script_friendnames_from_list(var_0) {
 randomize_name_list(var_0) {
   var_1 = level.names[var_0].size;
 
-  for (var_2 = 0; var_2 < var_1; var_2++) {
+  for(var_2 = 0; var_2 < var_1; var_2++) {
     var_3 = randomint(var_1);
     var_4 = level.names[var_0][var_2];
     level.names[var_0][var_2] = level.names[var_0][var_3];
@@ -576,10 +576,10 @@ randomize_name_list(var_0) {
 }
 
 get_name(var_0) {
-  if(isdefined(self.team) && self.team == "neutral") {
+  if(isDefined(self.team) && self.team == "neutral") {
     return;
   }
-  if(isdefined(self.script_friendname)) {
+  if(isDefined(self.script_friendname)) {
     if(self.script_friendname == "none") {
       return;
     }
@@ -627,7 +627,7 @@ get_name_for_nationality(var_0) {
 }
 
 getrankfromname(var_0) {
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     self.airank = "private";
 
   var_1 = strtok(var_0, " ");
@@ -677,5 +677,5 @@ nationalityusescallsigns(var_0) {
 }
 
 nationalityusessurnames(var_0) {
-  return isdefined(level.names[var_0 + "_surnames"]);
+  return isDefined(level.names[var_0 + "_surnames"]);
 }

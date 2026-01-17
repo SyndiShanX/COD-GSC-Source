@@ -29,7 +29,6 @@
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
-
 #namespace zm_weap_scepter;
 
 autoexec __init__system__() {
@@ -37,20 +36,20 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  clientfield::register("allplayers", "" + #"zombie_scepter_melee_impact", 1, 1, "counter");
-  clientfield::register("allplayers", "" + #"zombie_scepter_melee", 1, 1, "counter");
-  clientfield::register("allplayers", "" + #"zombie_scepter_heal", 1, 1, "counter");
-  clientfield::register("actor", "" + #"zombie_scepter_stun", 1, 1, "int");
-  clientfield::register("vehicle", "" + #"zombie_scepter_stun", 1, 1, "int");
-  clientfield::register("scriptmover", "" + #"beacon_fx", 1, 1, "int");
-  clientfield::register("allplayers", "" + #"skull_turret_beam_fire", 1, 2, "int");
-  clientfield::register("allplayers", "" + #"scepter_beam_flash", 1, 2, "int");
-  clientfield::register("toplayer", "" + #"hero_scepter_vigor_postfx", 1, 1, "counter");
-  clientfield::register("allplayers", "" + #"zombie_scepter_revive", 1, 1, "int");
-  clientfield::register("toplayer", "" + #"scepter_rumble", 1, 3, "counter");
-  level.hero_weapon[#"scepter"][0] = getweapon(#"hero_scepter_lv1");
-  level.hero_weapon[#"scepter"][1] = getweapon(#"hero_scepter_lv2");
-  level.hero_weapon[#"scepter"][2] = getweapon(#"hero_scepter_lv3");
+  clientfield::register("allplayers", "" + # "zombie_scepter_melee_impact", 1, 1, "counter");
+  clientfield::register("allplayers", "" + # "zombie_scepter_melee", 1, 1, "counter");
+  clientfield::register("allplayers", "" + # "zombie_scepter_heal", 1, 1, "counter");
+  clientfield::register("actor", "" + # "zombie_scepter_stun", 1, 1, "int");
+  clientfield::register("vehicle", "" + # "zombie_scepter_stun", 1, 1, "int");
+  clientfield::register("scriptmover", "" + # "beacon_fx", 1, 1, "int");
+  clientfield::register("allplayers", "" + # "skull_turret_beam_fire", 1, 2, "int");
+  clientfield::register("allplayers", "" + # "scepter_beam_flash", 1, 2, "int");
+  clientfield::register("toplayer", "" + # "hero_scepter_vigor_postfx", 1, 1, "counter");
+  clientfield::register("allplayers", "" + # "zombie_scepter_revive", 1, 1, "int");
+  clientfield::register("toplayer", "" + # "scepter_rumble", 1, 3, "counter");
+  level.hero_weapon[# "scepter"][0] = getweapon(#"hero_scepter_lv1");
+  level.hero_weapon[# "scepter"][1] = getweapon(#"hero_scepter_lv2");
+  level.hero_weapon[# "scepter"][2] = getweapon(#"hero_scepter_lv3");
   zm_loadout::register_hero_weapon_for_level(#"hero_scepter_lv1");
   zm_loadout::register_hero_weapon_for_level(#"hero_scepter_lv2");
   zm_loadout::register_hero_weapon_for_level(#"hero_scepter_lv3");
@@ -80,7 +79,7 @@ on_connect() {
   self thread function_63e57124();
 }
 
-private function_63e57124() {
+function_63e57124() {
   self endon(#"disconnect");
 
   while(true) {
@@ -88,30 +87,30 @@ private function_63e57124() {
     wpn_cur = waitresult.weapon;
     wpn_prev = waitresult.last_weapon;
 
-    if(wpn_prev == level.hero_weapon[#"scepter"][0] || wpn_prev == level.hero_weapon[#"scepter"][1] || wpn_prev == level.hero_weapon[#"scepter"][2]) {
+    if(wpn_prev == level.hero_weapon[# "scepter"][0] || wpn_prev == level.hero_weapon[# "scepter"][1] || wpn_prev == level.hero_weapon[# "scepter"][2]) {
       self thread scepter_rumble(1);
-      self clientfield::set("" + #"skull_turret_beam_fire", 0);
-      self clientfield::set("" + #"scepter_beam_flash", 0);
+      self clientfield::set("" + # "skull_turret_beam_fire", 0);
+      self clientfield::set("" + # "scepter_beam_flash", 0);
       self notify(#"stop_damage");
 
-      if(wpn_prev == level.hero_weapon[#"scepter"][1]) {
+      if(wpn_prev == level.hero_weapon[# "scepter"][1]) {
         self thread function_89fc5431();
-      } else if(wpn_prev == level.hero_weapon[#"scepter"][2]) {
+      } else if(wpn_prev == level.hero_weapon[# "scepter"][2]) {
         self thread function_89fc5431();
         level scene::function_f81475ae(#"p8_fxanim_zm_zod_staff_ra_bundle");
       }
     }
 
-    if(wpn_cur == level.hero_weapon[#"scepter"][0]) {
-      zm_hero_weapon::show_hint(wpn_cur, #"hash_7ebea2becf0c1aee");
+    if(wpn_cur == level.hero_weapon[# "scepter"][0]) {
+      zm_hero_weapon::show_hint(wpn_cur, # "hash_7ebea2becf0c1aee");
       self thread function_4521ac7e(wpn_cur, 1);
       self thread function_4493c71b(wpn_cur, 1);
       playrumbleonposition("grenade_rumble", self.origin);
       continue;
     }
 
-    if(wpn_cur == level.hero_weapon[#"scepter"][1]) {
-      zm_hero_weapon::show_hint(wpn_cur, #"hash_7ebea2becf0c1aee");
+    if(wpn_cur == level.hero_weapon[# "scepter"][1]) {
+      zm_hero_weapon::show_hint(wpn_cur, # "hash_7ebea2becf0c1aee");
       self thread function_4521ac7e(wpn_cur, 2);
       self thread function_4493c71b(wpn_cur, 2);
       playrumbleonposition("grenade_rumble", self.origin);
@@ -119,11 +118,11 @@ private function_63e57124() {
       continue;
     }
 
-    if(wpn_cur == level.hero_weapon[#"scepter"][2]) {
+    if(wpn_cur == level.hero_weapon[# "scepter"][2]) {
       if(!self gamepadusedlast()) {
-        self zm_hero_weapon::show_hint(wpn_cur, #"hash_5ba4f6bd62a74330");
+        self zm_hero_weapon::show_hint(wpn_cur, # "hash_5ba4f6bd62a74330");
       } else {
-        self zm_hero_weapon::show_hint(wpn_cur, #"hash_57c3251d6df56d4");
+        self zm_hero_weapon::show_hint(wpn_cur, # "hash_57c3251d6df56d4");
       }
 
       self.var_7e973e30 = wpn_prev;
@@ -137,17 +136,17 @@ private function_63e57124() {
   }
 }
 
-private function_304a3c9b(var_c34665fc) {
+function_304a3c9b(var_c34665fc) {
   if(var_c34665fc === "hero_weapon_power_off" || var_c34665fc === "player_downed") {
-    self clientfield::set("" + #"skull_turret_beam_fire", 0);
-    self clientfield::set("" + #"scepter_beam_flash", 0);
+    self clientfield::set("" + # "skull_turret_beam_fire", 0);
+    self clientfield::set("" + # "scepter_beam_flash", 0);
     self.var_1de56cc8 = undefined;
     self notify(#"stop_damage");
   }
 }
 
-private function_4521ac7e(w_curr, n_lvl) {
-  self endoncallback(&function_304a3c9b, #"hero_weapon_change", #"player_downed", #"disconnect", #"hero_weapon_power_off");
+function_4521ac7e(w_curr, n_lvl) {
+  self endoncallback(&function_304a3c9b, # "hero_weapon_change", # "player_downed", # "disconnect", # "hero_weapon_power_off");
 
   while(true) {
     s_result = self waittill(#"weapon_melee_power");
@@ -166,8 +165,8 @@ private function_4521ac7e(w_curr, n_lvl) {
       continue;
     }
 
-    self clientfield::set("" + #"skull_turret_beam_fire", n_lvl);
-    self clientfield::set("" + #"scepter_beam_flash", n_lvl);
+    self clientfield::set("" + # "skull_turret_beam_fire", n_lvl);
+    self clientfield::set("" + # "scepter_beam_flash", n_lvl);
     self.var_1de56cc8 = 1;
     self thread function_be8ae52f(w_curr);
     self notify(#"ammo_reduction", {
@@ -189,19 +188,19 @@ private function_4521ac7e(w_curr, n_lvl) {
     }
     while(zm_utility::is_player_valid(self) && self attackbuttonpressed() && !self fragbuttonpressed());
 
-    self clientfield::set("" + #"skull_turret_beam_fire", 0);
-    self clientfield::set("" + #"scepter_beam_flash", 0);
+    self clientfield::set("" + # "skull_turret_beam_fire", 0);
+    self clientfield::set("" + # "scepter_beam_flash", 0);
     self.var_1de56cc8 = undefined;
     self notify(#"stop_damage");
   }
 }
 
-private function_4493c71b(weapon, n_lvl = 1) {
-  self endon(#"hero_weapon_change", #"bled_out", #"disconnect");
+function_4493c71b(weapon, n_lvl = 1) {
+  self endon(#"hero_weapon_change", # "bled_out", # "disconnect");
 
   while(true) {
     if(n_lvl < 3) {
-      self waittill(#"weapon_melee_power_left", #"weapon_melee");
+      self waittill(#"weapon_melee_power_left", # "weapon_melee");
     } else {
       self waittill(#"weapon_melee_power_left");
     }
@@ -214,16 +213,16 @@ private function_4493c71b(weapon, n_lvl = 1) {
   }
 }
 
-private function_eae0296b(str_level, b_postfx = 0) {
+function_eae0296b(str_level, b_postfx = 0) {
   if(b_postfx) {
-    self clientfield::increment_to_player("" + #"hero_scepter_vigor_postfx");
+    self clientfield::increment_to_player("" + # "hero_scepter_vigor_postfx");
   }
 
   self.var_a0a1475c = 1;
   self notify(#"hash_11d4cfae418fcfe1");
 
   switch (str_level) {
-    case #"hero_scepter_lv3":
+    case # "hero_scepter_lv3":
       self.var_5762241e = 35;
       break;
     default:
@@ -232,13 +231,13 @@ private function_eae0296b(str_level, b_postfx = 0) {
   }
 }
 
-private function_89fc5431() {
+function_89fc5431() {
   self.var_5762241e = undefined;
   self.var_a0a1475c = undefined;
 }
 
-private function_e874c3e1(weapon) {
-  self endon(#"hero_weapon_change", #"death");
+function_e874c3e1(weapon) {
+  self endon(#"hero_weapon_change", # "death");
 
   while(true) {
     s_result = self waittill(#"weapon_melee");
@@ -253,7 +252,7 @@ private function_e874c3e1(weapon) {
   }
 }
 
-private blood_death_fx(var_14ef0a6c) {
+blood_death_fx(var_14ef0a6c) {
   if(self.archetype == "zombie") {}
 }
 
@@ -267,7 +266,7 @@ function_fe3f086c(e_target, weapon = level.weaponnone) {
 }
 
 chop_actor(e_target, weapon = level.weaponnone) {
-  self endon(#"hero_weapon_change", #"bled_out", #"disconnect");
+  self endon(#"hero_weapon_change", # "bled_out", # "disconnect");
 
   if(!isalive(e_target)) {
     return;
@@ -278,18 +277,18 @@ chop_actor(e_target, weapon = level.weaponnone) {
   }
 
   switch (e_target.zm_ai_category) {
-    case #"popcorn":
-    case #"basic":
-    case #"enhanced":
+    case # "popcorn":
+    case # "basic":
+    case # "enhanced":
       n_damage = e_target.health;
       break;
-    case #"heavy":
+    case # "heavy":
       n_damage = int(e_target.maxhealth * 0.25);
       break;
-    case #"miniboss":
+    case # "miniboss":
       n_damage = int(e_target.maxhealth * 0.15);
       break;
-    case #"boss":
+    case # "boss":
       n_damage = 3000;
       break;
   }
@@ -319,7 +318,7 @@ melee_zombies(weapon = level.weaponnone) {
   view_pos = self getweaponmuzzlepoint();
   forward_view_angles = self getweaponforwarddir();
   var_537e767d = 130 * 130;
-  self clientfield::increment("" + #"zombie_scepter_melee");
+  self clientfield::increment("" + # "zombie_scepter_melee");
   a_e_targets = zm_hero_weapon::function_7c3681f7();
   var_f3edb3a6 = 0;
 
@@ -350,7 +349,7 @@ melee_zombies(weapon = level.weaponnone) {
     e_target.chopped = 1;
 
     if(!var_f3edb3a6) {
-      self clientfield::increment("" + #"zombie_scepter_melee_impact");
+      self clientfield::increment("" + # "zombie_scepter_melee_impact");
       var_f3edb3a6 = 1;
     }
 
@@ -377,14 +376,14 @@ reflect_shot(d, n) {
 }
 
 function_be8ae52f(w_curr) {
-  self endon(#"death", #"stop_damage");
+  self endon(#"death", # "stop_damage");
 
   switch (w_curr.name) {
-    case #"hero_scepter_lv2":
+    case # "hero_scepter_lv2":
       n_base_damage = 150;
       var_c4d00e65 = 0.07;
       break;
-    case #"hero_scepter_lv3":
+    case # "hero_scepter_lv3":
       n_base_damage = 200;
       var_c4d00e65 = 0.1;
       break;
@@ -407,71 +406,70 @@ function_be8ae52f(w_curr) {
       a_trace = beamtrace(v_position, v_position + v_forward * 20000, 1, self);
     }
 
-    var_1c218ece = a_trace[#"position"];
+    var_1c218ece = a_trace[# "position"];
 
     function_7067b673(v_position, var_1c218ece, (1, 1, 0));
     render_debug_sphere(v_position, (1, 1, 0));
     render_debug_sphere(var_1c218ece, (1, 0, 0));
 
-      if(isDefined(a_trace[#"entity"])) {
-        e_last_target = a_trace[#"entity"];
+    if(isDefined(a_trace[# "entity"])) {
+      e_last_target = a_trace[# "entity"];
 
-        if(isDefined(e_last_target.zm_ai_category) && e_last_target.team !== #"allies") {
-          if(zm_trial_restrict_loadout::is_active(1)) {
-            self zm_trial_util::function_97444b02();
-            return;
-          }
-
-          if(!isDefined(e_last_target.maxhealth)) {
-            e_last_target.maxhealth = e_last_target.health;
-          }
-
-          switch (e_last_target.zm_ai_category) {
-            case #"heavy":
-            case #"miniboss":
-              if(isalive(e_last_target)&!(isDefined(e_last_target.var_25cb9682) && e_last_target.var_25cb9682)) {
-                if(!isDefined(e_last_target.var_1b6dab30)) {
-                  e_last_target.var_1b6dab30 = self;
-                }
-
-                e_last_target thread function_97429d68(3);
-              }
-
-              n_damage = e_last_target.maxhealth * 0.02;
-              break;
-            case #"boss":
-              n_damage = 100;
-              break;
-            case #"popcorn":
-              n_damage = e_last_target.health + 100;
-              break;
-            default:
-              n_percent_health = var_c4d00e65 * e_last_target.health;
-              n_damage = max(n_percent_health, n_base_damage);
-
-              if(isactor(e_last_target) && !(isDefined(e_last_target.var_61435d9) && e_last_target.var_61435d9) && !zm_trial_restrict_loadout::is_active(1)) {
-                e_last_target.var_4857363e = 1;
-                e_last_target thread function_75e6e51c(5, self);
-              }
-
-              break;
-          }
-
-          self scepter_rumble(6);
-          self thread function_b67b2aff(e_last_target, n_damage, var_1c218ece, w_curr);
-        } else if(isplayer(e_last_target)) {
-          e_last_target thread function_1f6199f0(self);
+      if(isDefined(e_last_target.zm_ai_category) && e_last_target.team !== # "allies") {
+        if(zm_trial_restrict_loadout::is_active(1)) {
+          self zm_trial_util::function_97444b02();
+          return;
         }
+
+        if(!isDefined(e_last_target.maxhealth)) {
+          e_last_target.maxhealth = e_last_target.health;
+        }
+
+        switch (e_last_target.zm_ai_category) {
+          case # "heavy":
+          case # "miniboss":
+            if(isalive(e_last_target) &!(isDefined(e_last_target.var_25cb9682) && e_last_target.var_25cb9682)) {
+              if(!isDefined(e_last_target.var_1b6dab30)) {
+                e_last_target.var_1b6dab30 = self;
+              }
+
+              e_last_target thread function_97429d68(3);
+            }
+
+            n_damage = e_last_target.maxhealth * 0.02;
+            break;
+          case # "boss":
+            n_damage = 100;
+            break;
+          case # "popcorn":
+            n_damage = e_last_target.health + 100;
+            break;
+          default:
+            n_percent_health = var_c4d00e65 * e_last_target.health;
+            n_damage = max(n_percent_health, n_base_damage);
+
+            if(isactor(e_last_target) && !(isDefined(e_last_target.var_61435d9) && e_last_target.var_61435d9) && !zm_trial_restrict_loadout::is_active(1)) {
+              e_last_target.var_4857363e = 1;
+              e_last_target thread function_75e6e51c(5, self);
+            }
+
+            break;
+        }
+
+        self scepter_rumble(6);
+        self thread function_b67b2aff(e_last_target, n_damage, var_1c218ece, w_curr);
+      } else if(isplayer(e_last_target)) {
+        e_last_target thread function_1f6199f0(self);
       }
-    else {
+    } else {
       var_24bae834 = 0;
 
-      switch (a_trace[#"surfacetype"]) {
-        case #"glasscar":
-        case #"rock":
-        case #"metal":
-        case #"metalcar":
-        case #"glass":
+      switch (a_trace[# "surfacetype"]) {
+        case # "glasscar":
+        case # "rock":
+        case # "metal":
+        case # "metalcar":
+        case # "glass":
           var_24bae834 = 1;
           var_7a585212 = "reflective_geo";
           break;
@@ -487,16 +485,16 @@ function_be8ae52f(w_curr) {
 
     if(isDefined(level.var_2e32e0bb)) {
       level notify(#"hero_weapon_hit", {
-        #player: self, 
-        #e_entity: a_trace[#"entity"], 
-        #var_80e17549: self.currentweapon, 
-        #v_position: a_trace[#"position"]
+        #player: self,
+        #e_entity: a_trace[# "entity"],
+        #var_80e17549: self.currentweapon,
+        #v_position: a_trace[# "position"]
       });
     }
   }
 }
 
-private function_b67b2aff(e_target, n_damage, v_target_pos, w_hero, b_launched = 0, var_9a119ceb = 0) {
+function_b67b2aff(e_target, n_damage, v_target_pos, w_hero, b_launched = 0, var_9a119ceb = 0) {
   e_target endon(#"death");
   self endon(#"disconnect");
 
@@ -504,7 +502,7 @@ private function_b67b2aff(e_target, n_damage, v_target_pos, w_hero, b_launched =
     [[level.var_cfeea502]] - > waitinqueue(e_target);
   }
 
-  if(e_target.archetype === #"zombie") {
+  if(e_target.archetype === # "zombie") {
     str_hitloc = "torso_lower";
     str_tag = e_target get_closest_tag(v_target_pos);
 
@@ -523,7 +521,7 @@ private function_b67b2aff(e_target, n_damage, v_target_pos, w_hero, b_launched =
     e_target dodamage(int(n_damage), v_target_pos, self, self, str_hitloc, "MOD_BURNED", 0, w_hero);
   }
 
-  if(b_launched && (e_target.zm_ai_category === #"basic" || e_target.zm_ai_category === #"enhanced")) {
+  if(b_launched && (e_target.zm_ai_category === # "basic" || e_target.zm_ai_category === # "enhanced")) {
     n_random_x = randomfloatrange(-3, 3);
     n_random_y = randomfloatrange(-3, 3);
     v_fling = 200 * vectornormalize(e_target.origin - v_target_pos + (n_random_x, n_random_y, 100));
@@ -531,7 +529,7 @@ private function_b67b2aff(e_target, n_damage, v_target_pos, w_hero, b_launched =
   }
 }
 
-private get_closest_tag(v_pos) {
+get_closest_tag(v_pos) {
   if(!isDefined(level.gib_tags)) {
     zombie_utility::init_gib_tags();
   }
@@ -571,7 +569,7 @@ private get_closest_tag(v_pos) {
 }
 
 function_254a7556() {
-  self endon(#"disconnect", #"laststand", #"stop_damage");
+  self endon(#"disconnect", # "laststand", # "stop_damage");
 
   while(true) {
     self thread scepter_rumble(5);
@@ -611,9 +609,9 @@ reset_override(s_params) {
     wait 0.2;
     e_revivee.var_fbc66a96 = undefined;
 
-    if(e_revivee clientfield::get("" + #"zombie_scepter_revive")) {
+    if(e_revivee clientfield::get("" + # "zombie_scepter_revive")) {
       if(isDefined(e_revivee)) {
-        e_revivee clientfield::set("" + #"zombie_scepter_revive", 0);
+        e_revivee clientfield::set("" + # "zombie_scepter_revive", 0);
       }
     }
   }
@@ -625,10 +623,10 @@ function_37946a1d(s_params) {
       continue;
     }
 
-    player.n_level = player clientfield::get("" + #"scepter_beam_flash");
+    player.n_level = player clientfield::get("" + # "scepter_beam_flash");
 
     if(player.n_level) {
-      player clientfield::set("" + #"scepter_beam_flash", 0);
+      player clientfield::set("" + # "scepter_beam_flash", 0);
     }
   }
 
@@ -636,7 +634,7 @@ function_37946a1d(s_params) {
 
   foreach(player in level.players) {
     if(zm_utility::is_player_valid(player) && isDefined(player.var_1de56cc8) && player.var_1de56cc8 && isDefined(player.n_level)) {
-      player clientfield::set("" + #"scepter_beam_flash", player.n_level);
+      player clientfield::set("" + # "scepter_beam_flash", player.n_level);
     }
   }
 }
@@ -702,7 +700,7 @@ function_1f6199f0(e_reviver) {
     if(self.health < self.var_66cb03ad) {
       n_health_regen = int(self.health + 5);
       self.health = math::clamp(n_health_regen, 1, self.var_66cb03ad);
-      self clientfield::increment("" + #"zombie_scepter_heal", 1);
+      self clientfield::increment("" + # "zombie_scepter_heal", 1);
       e_reviver.var_ec334996 += 1;
     }
   }
@@ -722,7 +720,7 @@ function_fa095da6(e_reviver) {
     self.var_84280a99 = e_reviver;
     self.var_4fc8bf2a = 1;
     self.var_fbc66a96 = 1;
-    self clientfield::set("" + #"zombie_scepter_revive", 1);
+    self clientfield::set("" + # "zombie_scepter_revive", 1);
   }
 }
 
@@ -750,22 +748,22 @@ function_97429d68(n_time = 5) {
   self.var_25cb9682 = 1;
 
   if(n_time == 5) {
-    if(self.zm_ai_category === #"heavy" || self.zm_ai_category === #"miniboss") {
+    if(self.zm_ai_category === # "heavy" || self.zm_ai_category === # "miniboss") {
       self thread namespace_9ff9f642::slowdown(#"hash_1cc2b03094ad09bd");
     } else {
       self thread namespace_9ff9f642::slowdown(#"hash_6c580f93aa40248d");
     }
-  } else if(self.zm_ai_category === #"heavy" || self.zm_ai_category === #"miniboss") {
+  } else if(self.zm_ai_category === # "heavy" || self.zm_ai_category === # "miniboss") {
     self thread namespace_9ff9f642::slowdown(#"hash_449bc314b0c3da73");
   } else {
     self thread namespace_9ff9f642::slowdown(#"hash_6c580993aa401a5b");
   }
 
-  self clientfield::set("" + #"zombie_scepter_stun", 1);
+  self clientfield::set("" + # "zombie_scepter_stun", 1);
   wait n_time;
 
   if(!(isDefined(self.var_693f4e69) && self.var_693f4e69)) {
-    self clientfield::set("" + #"zombie_scepter_stun", 0);
+    self clientfield::set("" + # "zombie_scepter_stun", 0);
   }
 
   self.var_25cb9682 = 0;
@@ -773,7 +771,7 @@ function_97429d68(n_time = 5) {
 }
 
 function_75e6e51c(n_time = 5, e_attacker) {
-  self endon(#"hash_6b85fa3a80afb815", #"death");
+  self endon(#"hash_6b85fa3a80afb815", # "death");
 
   if(isDefined(self.aat_turned) && self.aat_turned) {
     return;
@@ -792,7 +790,7 @@ function_75e6e51c(n_time = 5, e_attacker) {
     self thread namespace_9ff9f642::slowdown(#"hash_6c580993aa401a5b");
   }
 
-  self clientfield::set("" + #"zombie_scepter_stun", 1);
+  self clientfield::set("" + # "zombie_scepter_stun", 1);
 
   for(x = 0; x < n_time / 0.5; x++) {
     wait 0.5;
@@ -800,12 +798,12 @@ function_75e6e51c(n_time = 5, e_attacker) {
     self dodamage(n_damage, self.origin, e_attacker, e_attacker);
   }
 
-  self clientfield::set("" + #"zombie_scepter_stun", 0);
+  self clientfield::set("" + # "zombie_scepter_stun", 0);
   self.var_61435d9 = 0;
 }
 
-private function_717a1af2() {
-  self endon(#"bled_out", #"death", #"beacon_expired");
+function_717a1af2() {
+  self endon(#"bled_out", # "death", # "beacon_expired");
   w_beacon = getweapon(#"hero_scepter_lv3");
   self function_1728db6f(0);
   self.var_d6fe2916 = 0;
@@ -874,7 +872,7 @@ reset_after_bleeding_out() {
       self.var_3d89e839 = undefined;
     }
 
-    self.var_4831c9c9[#"hero_scepter_lv3"] = self getweaponammoclip(w_beacon);
+    self.var_4831c9c9[# "hero_scepter_lv3"] = self getweaponammoclip(w_beacon);
   }
 
   if(isDefined(self.var_b4e3db6c)) {
@@ -897,7 +895,7 @@ function_22bebb6b() {
 }
 
 function_b603ab34(w_beacon) {
-  self endoncallback(&function_d14a3750, #"disconnect");
+  self endoncallback(&function_d14a3750, # "disconnect");
   level scene::function_27f5972e(#"p8_fxanim_zm_zod_staff_ra_bundle");
   waitframe(14);
   self thread scepter_rumble(4);
@@ -912,7 +910,7 @@ function_b603ab34(w_beacon) {
     v_forward = anglesToForward(self.angles);
     v_spawn_pos = self.origin + (0, 0, 32);
     a_trace = physicstraceex(v_spawn_pos, v_spawn_pos + v_forward * 24, (-16, -16, -16), (16, 16, 16), self);
-    v_spawn_pos += v_forward * a_trace[#"fraction"] * 24;
+    v_spawn_pos += v_forward * a_trace[# "fraction"] * 24;
     var_4eaa1f4c = util::ground_position(v_spawn_pos, 1000, 12);
   } else {
     var_4eaa1f4c = self.origin + (0, 0, 12);
@@ -930,7 +928,7 @@ function_b603ab34(w_beacon) {
   if(var_1c136516 > 5) {
     self thread function_d3dc001e(w_beacon);
     zm_utility::function_3e549e65();
-    self waittill(#"beacon_off", #"beacon_retrieved", #"death", #"destroy_beacon");
+    self waittill(#"beacon_off", # "beacon_retrieved", # "death", # "destroy_beacon");
     zm_utility::function_b7e5029f();
   }
 
@@ -952,7 +950,7 @@ function_d14a3750(var_c34665fc) {
 }
 
 function_d3dc001e(w_beacon) {
-  self endoncallback(&function_e7e5d6f5, #"beacon_retrieved", #"death");
+  self endoncallback(&function_e7e5d6f5, # "beacon_retrieved", # "death");
   self.var_80612bea = 1;
 
   while(true) {
@@ -1007,14 +1005,14 @@ beacon_smash(player) {
 
     if(isDefined(zombie.zm_ai_category)) {
       switch (zombie.zm_ai_category) {
-        case #"popcorn":
-        case #"basic":
-        case #"enhanced":
-          player thread function_b67b2aff(zombie, zombie.health, self.origin, level.hero_weapon[#"scepter"][2], launch);
+        case # "popcorn":
+        case # "basic":
+        case # "enhanced":
+          player thread function_b67b2aff(zombie, zombie.health, self.origin, level.hero_weapon[# "scepter"][2], launch);
           break;
-        case #"heavy":
-        case #"miniboss":
-          if(isalive(zombie)&!(isDefined(zombie.var_25cb9682) && zombie.var_25cb9682)) {
+        case # "heavy":
+        case # "miniboss":
+          if(isalive(zombie) &!(isDefined(zombie.var_25cb9682) && zombie.var_25cb9682)) {
             if(!isDefined(zombie.var_1b6dab30)) {
               zombie.var_1b6dab30 = player;
             }
@@ -1029,18 +1027,18 @@ beacon_smash(player) {
 }
 
 beacon_fx_on() {
-  self.mdl_beacon clientfield::set("" + #"beacon_fx", 1);
+  self.mdl_beacon clientfield::set("" + # "beacon_fx", 1);
   self thread beacon_rumble();
 }
 
 beacon_fx_off() {
   if(isDefined(self)) {
-    self clientfield::set("" + #"beacon_fx", 0);
+    self clientfield::set("" + # "beacon_fx", 0);
   }
 }
 
 beacon_rumble() {
-  self endon(#"disconnect", #"beacon_fx_off");
+  self endon(#"disconnect", # "beacon_fx_off");
 
   while(isDefined(self.mdl_beacon)) {
     self.mdl_beacon playrumbleonentity(#"zm_weap_scepter_planted_idle_rumble");
@@ -1077,7 +1075,7 @@ function_f168b337() {
 }
 
 beacon_loop(w_beacon, var_4eaa1f4c) {
-  self endon(#"beacon_retrieved", #"death", #"bled_out", #"disconnect");
+  self endon(#"beacon_retrieved", # "death", # "bled_out", # "disconnect");
 
   while(true) {
     slot = self gadgetgetslot(w_beacon);
@@ -1134,18 +1132,18 @@ function_15c2525e(var_a7e57ef9, n_loop_time) {
 }
 
 beacon_check(e_player, var_a7e57ef9, n_loop_time) {
-  e_player endon(#"beacon_retrieved", #"bled_out", #"death", #"disconnect");
+  e_player endon(#"beacon_retrieved", # "bled_out", # "death", # "disconnect");
 
   if(isalive(self) && isDefined(self.zm_ai_category)) {
     switch (self.zm_ai_category) {
-      case #"heavy":
-      case #"miniboss":
+      case # "heavy":
+      case # "miniboss":
         n_damage = self.maxhealth * 0.08 * n_loop_time;
         break;
-      case #"boss":
+      case # "boss":
         n_damage = 100;
         break;
-      case #"popcorn":
+      case # "popcorn":
         n_damage = self.health + 100;
         break;
       default:
@@ -1155,10 +1153,10 @@ beacon_check(e_player, var_a7e57ef9, n_loop_time) {
     }
 
     if(!isDefined(self.var_1b6dab30) || self.var_1b6dab30 == e_player) {
-      e_player thread function_b67b2aff(self, n_damage, var_a7e57ef9, level.hero_weapon[#"scepter"][2]);
+      e_player thread function_b67b2aff(self, n_damage, var_a7e57ef9, level.hero_weapon[# "scepter"][2]);
     }
 
-    if((self.zm_ai_category === #"basic" || self.zm_ai_category === #"enhanced") && isalive(self) && isactor(self) && !(isDefined(self.var_25cb9682) && self.var_25cb9682) && !self function_dd070839()) {
+    if((self.zm_ai_category === # "basic" || self.zm_ai_category === # "enhanced") && isalive(self) && isactor(self) && !(isDefined(self.var_25cb9682) && self.var_25cb9682) && !self function_dd070839()) {
       if(!isDefined(self.var_1b6dab30)) {
         self.var_1b6dab30 = e_player;
       }
@@ -1183,7 +1181,7 @@ check_for_range_and_los(v_attack_source, n_allowed_z_diff, n_radius_sq) {
 }
 
 function_888d5bd9(e_player) {
-  e_player endon(#"beacon_retrieved", #"bled_out", #"death");
+  e_player endon(#"beacon_retrieved", # "bled_out", # "death");
   assert(isDefined(e_player));
   var_2a0066d5 = 57600;
   var_a7e57ef9 = e_player.mdl_beacon.origin;
@@ -1229,7 +1227,7 @@ function_cd010531(e_reviver, var_84280a99) {
     return 1;
   }
 
-  if(self clientfield::get("" + #"zombie_scepter_revive")) {
+  if(self clientfield::get("" + # "zombie_scepter_revive")) {
     return 1;
   }
 
@@ -1250,8 +1248,8 @@ function_cc91b3fe(e_attacker) {
     return;
   }
 
-  if(self clientfield::get("" + #"zombie_scepter_stun")) {
-    self clientfield::set("" + #"zombie_scepter_stun", 0);
+  if(self clientfield::get("" + # "zombie_scepter_stun")) {
+    self clientfield::set("" + # "zombie_scepter_stun", 0);
   }
 }
 
@@ -1269,7 +1267,6 @@ function_6dfa3b7a() {
 
 render_debug_sphere(origin, color) {
   if(getdvarint(#"turret_debug_server", 0)) {
-
     sphere(origin, 2, color, 0.75, 1, 10, 100);
 
   }
@@ -1277,7 +1274,6 @@ render_debug_sphere(origin, color) {
 
 function_7067b673(origin1, origin2, color) {
   if(getdvarint(#"turret_debug_server", 0)) {
-
     line(origin1, origin2, color, 0.75, 1, 100);
 
   }
@@ -1290,7 +1286,7 @@ scepter_rumble(var_b2e05bae) {
         self playrumbleonentity("zm_weap_special_activate_rumble");
         break;
       case 2:
-        self clientfield::increment_to_player("" + #"scepter_rumble", 2);
+        self clientfield::increment_to_player("" + # "scepter_rumble", 2);
         break;
       case 3:
         self playrumbleonentity("zm_weap_scepter_melee_hit_rumble");
@@ -1299,20 +1295,20 @@ scepter_rumble(var_b2e05bae) {
         playrumbleonposition("zm_weap_scepter_plant_rumble", self.origin);
         break;
       case 5:
-        self clientfield::increment_to_player("" + #"scepter_rumble", 5);
+        self clientfield::increment_to_player("" + # "scepter_rumble", 5);
         break;
       case 6:
-        self clientfield::increment_to_player("" + #"scepter_rumble", 6);
+        self clientfield::increment_to_player("" + # "scepter_rumble", 6);
         break;
     }
   }
 }
 
 function_68ff89f7(w_scepter) {
-  self endon(#"hero_weapon_change", #"disconnect", #"bled_out");
+  self endon(#"hero_weapon_change", # "disconnect", # "bled_out");
   s_result = self waittill(#"weapon_melee");
 
   if(s_result.weapon == w_scepter) {
-    self thread zm_audio::create_and_play_dialog(#"hero_level_3", #"scepter");
+    self thread zm_audio::create_and_play_dialog(#"hero_level_3", # "scepter");
   }
 }

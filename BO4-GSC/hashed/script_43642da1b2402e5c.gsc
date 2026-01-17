@@ -13,7 +13,6 @@
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
-
 #namespace namespace_a9e73d8d;
 
 autoexec __init__system__() {
@@ -28,7 +27,7 @@ __init__() {
   zm_trial::register_challenge(#"hash_3ad5e71a03ad70c1", &on_begin, &on_end);
 }
 
-private on_begin() {
+on_begin() {
   level.var_375482b5 = 1;
   callback::on_ai_killed(&on_ai_killed);
   callback::function_33f0ddd3(&function_33f0ddd3);
@@ -44,7 +43,7 @@ private on_begin() {
   level zm_trial::function_25ee130(1);
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   level.var_375482b5 = undefined;
   callback::remove_on_ai_killed(&on_ai_killed);
   callback::function_824d206(&function_33f0ddd3);
@@ -53,7 +52,7 @@ private on_end(round_reset) {
   level thread refill_ammo();
 }
 
-private refill_ammo() {
+refill_ammo() {
   self notify("416a437667c7c600");
   self endon("416a437667c7c600");
 
@@ -79,7 +78,7 @@ private refill_ammo() {
   }
 }
 
-private lock_shield() {
+lock_shield() {
   foreach(weapon in zm_loadout::function_5a5a742a("tactical_grenade")) {
     self lockweapon(weapon, 1, 1);
 
@@ -93,7 +92,7 @@ private lock_shield() {
   }
 }
 
-private function_33f0ddd3(s_event) {
+function_33f0ddd3(s_event) {
   if(s_event.event === "give_weapon") {
     if(s_event.weapon.inventorytype === "item") {
       return;
@@ -118,14 +117,14 @@ private function_33f0ddd3(s_event) {
   }
 }
 
-private function_29ee24dd() {
+function_29ee24dd() {
   self endon(#"disconnect");
   level endon(#"hash_7646638df88a3656");
   a_w_weapons = self getweaponslist(0);
   self reset_ammo(1);
 
   while(true) {
-    s_waitresult = self waittill(#"zmb_max_ammo", #"hash_278526d0bbdb4ce7", #"melee_reload", #"wallbuy_done");
+    s_waitresult = self waittill(#"zmb_max_ammo", # "hash_278526d0bbdb4ce7", # "melee_reload", # "wallbuy_done");
     w_current = self getcurrentweapon();
 
     if(s_waitresult._notify == "melee_reload") {
@@ -148,13 +147,13 @@ is_active() {
   return isDefined(s_challenge);
 }
 
-private on_ai_killed(params) {
+on_ai_killed(params) {
   if(isplayer(params.eattacker) && params.smeansofdeath === "MOD_MELEE") {
     params.eattacker notify(#"melee_reload");
   }
 }
 
-private reset_ammo(var_f2c84b6b) {
+reset_ammo(var_f2c84b6b) {
   self notify("70d94e798e24bb1e");
   self endon("70d94e798e24bb1e");
   self endon(#"disconnect");

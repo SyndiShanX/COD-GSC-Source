@@ -15,13 +15,13 @@
 #namespace zm_castle_perks;
 
 function init() {
-  clientfield::register("world", "perk_light_doubletap", 5000, 1, "int", & perk_light_doubletap, 0, 0);
-  clientfield::register("world", "perk_light_juggernaut", 5000, 1, "int", & perk_light_juggernaut, 0, 0);
-  clientfield::register("world", "perk_light_mule_kick", 1, 1, "int", & perk_light_mule_kick, 0, 0);
-  clientfield::register("world", "perk_light_quick_revive", 5000, 1, "int", & perk_light_quick_revive, 0, 0);
-  clientfield::register("world", "perk_light_speed_cola", 5000, 1, "int", & perk_light_speed_cola, 0, 0);
-  clientfield::register("world", "perk_light_staminup", 5000, 1, "int", & perk_light_staminup, 0, 0);
-  clientfield::register("world", "perk_light_widows_wine", 5000, 1, "int", & perk_light_widows_wine, 0, 0);
+  clientfield::register("world", "perk_light_doubletap", 5000, 1, "int", &perk_light_doubletap, 0, 0);
+  clientfield::register("world", "perk_light_juggernaut", 5000, 1, "int", &perk_light_juggernaut, 0, 0);
+  clientfield::register("world", "perk_light_mule_kick", 1, 1, "int", &perk_light_mule_kick, 0, 0);
+  clientfield::register("world", "perk_light_quick_revive", 5000, 1, "int", &perk_light_quick_revive, 0, 0);
+  clientfield::register("world", "perk_light_speed_cola", 5000, 1, "int", &perk_light_speed_cola, 0, 0);
+  clientfield::register("world", "perk_light_staminup", 5000, 1, "int", &perk_light_staminup, 0, 0);
+  clientfield::register("world", "perk_light_widows_wine", 5000, 1, "int", &perk_light_widows_wine, 0, 0);
 }
 
 function perk_light_speed_cola(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

@@ -11,17 +11,17 @@
 #namespace zm_perk_juggernaut;
 
 function autoexec __init__sytem__() {
-  system::register("zm_perk_juggernaut", & __init__, undefined, undefined);
+  system::register("zm_perk_juggernaut", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  zm_perks::register_perk_clientfields("specialty_armorvest", & juggernaut_client_field_func, & juggernaut_code_callback_func);
+  zm_perks::register_perk_clientfields("specialty_armorvest", &juggernaut_client_field_func, &juggernaut_code_callback_func);
   zm_perks::register_perk_effects("specialty_armorvest", "jugger_light");
-  zm_perks::register_perk_init_thread("specialty_armorvest", & init_juggernaut);
+  zm_perks::register_perk_init_thread("specialty_armorvest", &init_juggernaut);
 }
 
 function init_juggernaut() {
-  if(isdefined(level.enable_magic) && level.enable_magic) {
+  if(isDefined(level.enable_magic) && level.enable_magic) {
     level._effect["jugger_light"] = "zombie/fx_perk_juggernaut_zmb";
   }
 }

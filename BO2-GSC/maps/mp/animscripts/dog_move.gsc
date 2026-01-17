@@ -8,8 +8,8 @@
 #include maps\mp\animscripts\dog_stop;
 
 setup_sound_variables() {
-  level.dog_sounds["far"] = spawnstruct();
-  level.dog_sounds["close"] = spawnstruct();
+  level.dog_sounds["far"] = spawnStruct();
+  level.dog_sounds["close"] = spawnStruct();
   level.dog_sounds["close"].minrange = 0;
   level.dog_sounds["close"].maxrange = 500;
   level.dog_sounds["close"].sound = "aml_dog_bark_close";

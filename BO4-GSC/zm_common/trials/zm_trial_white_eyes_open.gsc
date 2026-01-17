@@ -14,7 +14,6 @@
 #include scripts\zm_common\bgbs\zm_bgb_anywhere_but_here;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_trial_white_eyes_open;
 
 autoexec __init__system__() {
@@ -29,7 +28,7 @@ __init__() {
   zm_trial::register_challenge(#"eyes_open", &on_begin, &on_end);
 }
 
-private on_begin() {
+on_begin() {
   spawner = getent("weeping_spawner", "script_noteworthy");
   level.disable_nuke_delay_spawning = 1;
   level flag::clear("spawn_zombies");
@@ -54,7 +53,7 @@ private on_begin() {
     player.e_weeper.favoriteenemy = player;
     player.e_weeper val::set(#"mee_2", "takedamage", 0);
     player.e_weeper val::set(#"mee_2", "ignoreme", 1);
-    player.e_weeper.team = #"team3";
+    player.e_weeper.team = # "team3";
     wait 0.1;
   }
 
@@ -62,7 +61,7 @@ private on_begin() {
   level.e_weeper.var_72411ccf = &function_660c908;
   level.e_weeper val::set(#"mee_2", "takedamage", 0);
   level.e_weeper val::set(#"mee_2", "ignoreme", 1);
-  level.e_weeper.team = #"team3";
+  level.e_weeper.team = # "team3";
   wait 1.5;
   level.disable_nuke_delay_spawning = 0;
   level flag::set("spawn_zombies");
@@ -80,12 +79,12 @@ private on_begin() {
   level.e_weeper thread zm_white_mee::function_d10bf985();
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   foreach(player in getplayers()) {
     player callback::remove_on_player_damage(&on_player_damage);
     player.e_weeper val::reset(#"mee_2", "takedamage");
     player.e_weeper val::reset(#"mee_2", "ignoreme");
-    player.e_weeper.team = #"axis";
+    player.e_weeper.team = # "axis";
 
     if(isDefined(player.e_weeper.kill_brush)) {
       player.e_weeper.kill_brush delete();
@@ -96,7 +95,7 @@ private on_end(round_reset) {
 
   level.e_weeper val::reset(#"mee_2", "takedamage");
   level.e_weeper val::reset(#"mee_2", "ignoreme");
-  level.e_weeper.team = #"axis";
+  level.e_weeper.team = # "axis";
 
   if(isDefined(level.e_weeper.kill_brush)) {
     level.e_weeper.kill_brush delete();
@@ -115,14 +114,14 @@ teleport_player() {
   }
 }
 
-private on_player_damage(params) {
-  if((isai(params.eattacker) || isai(params.einflictor)) && (params.idamage > 0 || isDefined(self.armor) && self.armor > 0) && params.eattacker.archetype === #"weeping_angel") {
+on_player_damage(params) {
+  if((isai(params.eattacker) || isai(params.einflictor)) && (params.idamage > 0 || isDefined(self.armor) && self.armor > 0) && params.eattacker.archetype === # "weeping_angel") {
     var_57807cdc = [];
     array::add(var_57807cdc, self, 0);
     zm_trial::fail(#"hash_41122a695bc6065d", var_57807cdc);
   }
 }
 
-private function_660c908(behaviortreeentity) {
+function_660c908(behaviortreeentity) {
   behaviortreeentity setgoal(behaviortreeentity.origin);
 }

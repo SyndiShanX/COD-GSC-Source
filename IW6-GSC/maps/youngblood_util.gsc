@@ -1085,7 +1085,7 @@ neighborhood_fail_if_too_far() {
     }
     if(distance2d(level.player.origin, level.hesh.origin) > 800) {
       level notify("new_quote_string");
-      setdvar("ui_deadquote", & "YOUNGBLOOD_LEFTBEHIND");
+      setdvar("ui_deadquote", &"YOUNGBLOOD_LEFTBEHIND");
       maps\_utility::missionfailedwrapper();
       break;
     } else if(distance2d(level.player.origin, level.hesh.origin) > 500) {
@@ -1156,7 +1156,7 @@ chaos_checkpoint(var_0) {
 
   earthquake(0.5, 0.7, level.player.origin, 512);
   level notify("new_quote_string");
-  setdvar("ui_deadquote", & "YOUNGBLOOD_LEFTBEHIND");
+  setdvar("ui_deadquote", &"YOUNGBLOOD_LEFTBEHIND");
   chaos_player_kill();
 }
 

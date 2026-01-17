@@ -5,7 +5,7 @@
 
 #namespace tracking;
 
-private function_605bb988() {
+function_605bb988() {
   if(!isalive(self)) {
     return false;
   }
@@ -13,7 +13,7 @@ private function_605bb988() {
   return true;
 }
 
-private function_8240e8b4() {
+function_8240e8b4() {
   if(function_605bb988()) {
     if(level.time >= self.tracking.breadcrumbs[self.tracking.current_crumb].time + self.tracking.time_step) {
       return;
@@ -21,7 +21,7 @@ private function_8240e8b4() {
 
     self.tracking.current_crumb = (self.tracking.current_crumb + 1) % 20;
     self.tracking.breadcrumbs[self.tracking.current_crumb] = {
-      #point: self.origin, 
+      #point: self.origin,
       #time: level.time
     };
   }
@@ -29,16 +29,16 @@ private function_8240e8b4() {
 
 init_tracking(window) {
   self.tracking = {
-    #breadcrumbs: [], 
-    #current_crumb: 0, 
-    #var_712fc53e: 0, 
-    #velocity: (0, 0, 0), 
-    #speed: 0, 
-    #window: window, 
+    #breadcrumbs: [],
+    #current_crumb: 0,
+    #var_712fc53e: 0,
+    #velocity: (0, 0, 0),
+    #speed: 0,
+    #window: window,
     #time_step: int(window * 1000) / 20
   };
   crumb = {
-    #point: self.origin, 
+    #point: self.origin,
     #time: level.time
   };
 
@@ -51,7 +51,7 @@ init_tracking(window) {
   self.tracking.breadcrumbs[self.tracking.breadcrumbs.size] = crumb;
 }
 
-private track_points() {
+track_points() {
   self endon(#"disconnect");
 
   while(true) {
@@ -117,4 +117,3 @@ debug_tracking() {
     waitframe(1);
   }
 }
-

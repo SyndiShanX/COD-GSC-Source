@@ -9,7 +9,6 @@
 #include scripts\core_common\ai\systems\gib;
 #include scripts\core_common\ai\systems\shared;
 #include scripts\core_common\ai_shared;
-
 #namespace animationstatenetwork;
 
 autoexec registerdefaultnotetrackhandlerfunctions() {
@@ -50,25 +49,25 @@ autoexec registerdefaultnotetrackhandlerfunctions() {
   registerblackboardnotetrackhandler("anim_pose = prone_back", "_stance", "prone_back");
 }
 
-private notetrackanimmovementstop(entity) {
+notetrackanimmovementstop(entity) {
   if(entity haspath()) {
     entity pathmode("move delayed", 1, randomfloatrange(2, 4));
   }
 }
 
-private notetrackstaircasestep1(entity) {
+notetrackstaircasestep1(entity) {
   numsteps = entity getblackboardattribute("_staircase_num_steps");
   numsteps++;
   entity setblackboardattribute("_staircase_num_steps", numsteps);
 }
 
-private notetrackstaircasestep2(entity) {
+notetrackstaircasestep2(entity) {
   numsteps = entity getblackboardattribute("_staircase_num_steps");
   numsteps += 2;
   entity setblackboardattribute("_staircase_num_steps", numsteps);
 }
 
-private notetrackdropguninternal(entity) {
+notetrackdropguninternal(entity) {
   if(!isDefined(entity.weapon) || entity.weapon === level.weaponnone) {
     return;
   }
@@ -85,37 +84,37 @@ private notetrackdropguninternal(entity) {
   entity thread shared::dropaiweapon();
 }
 
-private notetrackattachknife(entity) {
+notetrackattachknife(entity) {
   if(!(isDefined(entity._ai_melee_attachedknife) && entity._ai_melee_attachedknife)) {
     entity attach(#"wpn_t7_knife_combat_prop", "TAG_WEAPON_LEFT");
     entity._ai_melee_attachedknife = 1;
   }
 }
 
-private notetrackdetachknife(entity) {
+notetrackdetachknife(entity) {
   if(isDefined(entity._ai_melee_attachedknife) && entity._ai_melee_attachedknife) {
     entity detach(#"wpn_t7_knife_combat_prop", "TAG_WEAPON_LEFT");
     entity._ai_melee_attachedknife = 0;
   }
 }
 
-private notetrackhideweapon(entity) {
+notetrackhideweapon(entity) {
   entity ai::gun_remove();
 }
 
-private notetrackshowweapon(entity) {
+notetrackshowweapon(entity) {
   entity ai::gun_recall();
 }
 
-private notetrackhideai(entity) {
+notetrackhideai(entity) {
   entity hide();
 }
 
-private notetrackshowai(entity) {
+notetrackshowai(entity) {
   entity show();
 }
 
-private notetrackstartragdoll(entity) {
+notetrackstartragdoll(entity) {
   if(isactor(entity) && entity isinscriptedstate()) {
     entity.overrideactordamage = undefined;
     entity.allowdeath = 1;
@@ -143,7 +142,7 @@ notetrackstartragdollnodeath(entity) {
   entity thread _delayedragdoll(entity);
 }
 
-private notetrackfirebullet(animationentity) {
+notetrackfirebullet(animationentity) {
   if(isactor(animationentity) && animationentity isinscriptedstate()) {
     if(animationentity.weapon != level.weaponnone) {
       animationentity notify(#"about_to_shoot");
@@ -162,15 +161,15 @@ private notetrackfirebullet(animationentity) {
   }
 }
 
-private notetrackdropgun(animationentity) {
+notetrackdropgun(animationentity) {
   notetrackdropguninternal(animationentity);
 }
 
-private notetrackdropshield(animationentity) {
+notetrackdropshield(animationentity) {
   aiutility::dropriotshield(animationentity);
 }
 
-private notetrackgrenadethrow(animationentity) {
+notetrackgrenadethrow(animationentity) {
   if(archetype_human_cover::shouldthrowgrenadeatcovercondition(animationentity, 1)) {
     animationentity grenadethrow();
     return;
@@ -186,7 +185,7 @@ private notetrackgrenadethrow(animationentity) {
   }
 }
 
-private notetrackmeleeunsync(animationentity) {
+notetrackmeleeunsync(animationentity) {
   if(isDefined(animationentity) && isDefined(animationentity.enemy)) {
     if(isDefined(animationentity.enemy._ai_melee_markeddead) && animationentity.enemy._ai_melee_markeddead) {
       animationentity unlink();
@@ -194,7 +193,7 @@ private notetrackmeleeunsync(animationentity) {
   }
 }
 
-private notetrackgibdisable(animationentity) {
+notetrackgibdisable(animationentity) {
   if(animationentity ai::has_behavior_attribute("can_gib")) {
     animationentity ai::set_behavior_attribute("can_gib", 0);
   }

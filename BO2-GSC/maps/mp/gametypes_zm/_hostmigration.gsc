@@ -41,8 +41,7 @@ updatetimerpausedness() {
   }
 }
 
-callback_hostmigrationsave() {
-}
+callback_hostmigrationsave() {}
 
 callback_prehostmigrationsave() {
   undo_link_changes();
@@ -94,9 +93,7 @@ callback_hostmigration() {
   for(i = 0; i < level.players.size; i++) {
     if(isDefined(level.hostmigration_link_entity_callback)) {
       if(!isDefined(level.players[i]._host_migration_link_entity))
-        level.players[i]._host_migration_link_entity = level.players[i][
-          [level.hostmigration_link_entity_callback]
-        ]();
+        level.players[i]._host_migration_link_entity = level.players[i][[level.hostmigration_link_entity_callback]]();
     }
 
     level.players[i] thread hostmigrationtimerthink();
@@ -213,8 +210,7 @@ matchstarttimerconsole(type, duration) {
 
   if(counttime >= 2)
     matchstarttimerconsole_internal(counttime, matchstarttimer);
-  else {
-  }
+  else {}
 
   matchstarttimer destroyelem();
   matchstarttext destroyelem();
@@ -364,7 +360,7 @@ find_alternate_player_place(v_origin, min_radius, max_radius, max_height, ignore
   a_nodes = getnodesinradiussorted(v_origin, max_radius, min_radius, max_height, "pathnodes");
 
   if(isDefined(a_nodes) && a_nodes.size > 0) {
-    a_player_volumes = getentarray("player_volume", "script_noteworthy");
+    a_player_volumes = getEntArray("player_volume", "script_noteworthy");
     index = a_nodes.size - 1;
 
     for(i = index; i >= 0; i--) {
@@ -379,7 +375,7 @@ find_alternate_player_place(v_origin, min_radius, max_radius, max_height, ignore
         if(maps\mp\zombies\_zm_utility::check_point_in_enabled_zone(n_node.origin, 1, a_player_volumes)) {
           v_start = (n_node.origin[0], n_node.origin[1], n_node.origin[2] + 30);
           v_end = (n_node.origin[0], n_node.origin[1], n_node.origin[2] - 30);
-          trace = bullettrace(v_start, v_end, 0, undefined);
+          trace = bulletTrace(v_start, v_end, 0, undefined);
 
           if(trace["fraction"] < 1) {
             override_abort = 0;

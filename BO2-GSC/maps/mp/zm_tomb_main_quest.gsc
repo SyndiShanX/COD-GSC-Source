@@ -159,12 +159,11 @@ main_quest_init() {
   level thread maps\mp\zm_tomb_vo::watch_one_shot_samantha_clue("vox_sam_fire_staff_clue_2", "sam_clue_zonecap", "staff_piece_capture_complete");
   level thread maps\mp\zm_tomb_vo::watch_one_shot_samantha_clue("vox_sam_lightning_staff_clue_0", "sam_clue_tank", "elemental_staff_lightning_all_pieces_found");
   level thread maps\mp\zm_tomb_vo::watch_one_shot_samantha_clue("vox_sam_wind_staff_clue_0", "sam_clue_giant", "elemental_staff_air_all_pieces_found");
-  level.dig_spawners = getentarray("zombie_spawner_dig", "script_noteworthy");
+  level.dig_spawners = getEntArray("zombie_spawner_dig", "script_noteworthy");
   array_thread(level.dig_spawners, ::add_spawn_function, ::dug_zombie_spawn_init);
 }
 
-onplayerconnect() {
-}
+onplayerconnect() {}
 
 player_disconnect_callback(player) {
   n_player = player getentitynumber() + 1;
@@ -179,10 +178,10 @@ place_staffs_encasement() {
 
 chambers_init() {
   flag_init("gramophone_placed");
-  array_thread(getentarray("trigger_death_floor", "targetname"), ::monitor_chamber_death_trigs);
+  array_thread(getEntArray("trigger_death_floor", "targetname"), ::monitor_chamber_death_trigs);
   a_stargate_gramophones = getstructarray("stargate_gramophone_pos", "targetname");
   array_thread(a_stargate_gramophones, ::run_gramophone_teleporter);
-  a_door_main = getentarray("chamber_entrance", "targetname");
+  a_door_main = getEntArray("chamber_entrance", "targetname");
   array_thread(a_door_main, ::run_gramophone_door, "vinyl_master");
 }
 
@@ -265,13 +264,13 @@ run_gramophone_teleporter(str_vinyl_record) {
       if(!flag("gramophone_placed")) {
         self.gramophone_model = spawn("script_model", self.origin);
         self.gramophone_model.angles = self.angles;
-        self.gramophone_model setmodel("p6_zm_tm_gramophone");
+        self.gramophone_model setModel("p6_zm_tm_gramophone");
         level setclientfield("piece_record_zm_player", 0);
         flag_set("gramophone_placed");
         t_gramophone set_unitrigger_hint_string("");
         t_gramophone trigger_off();
         str_song_id = self get_gramophone_song();
-        self.gramophone_model playsound(str_song_id);
+        self.gramophone_model playSound(str_song_id);
         player thread maps\mp\zm_tomb_vo::play_gramophone_place_vo();
         maps\mp\zm_tomb_teleporter::stargate_teleport_enable(self.script_int);
         flag_wait("teleporter_building_" + self.script_int);
@@ -286,7 +285,7 @@ run_gramophone_teleporter(str_vinyl_record) {
     } else {
       self.gramophone_model delete();
       self.gramophone_model = undefined;
-      player playsound("zmb_craftable_pickup");
+      player playSound("zmb_craftable_pickup");
       flag_clear("gramophone_placed");
       level setclientfield("piece_record_zm_player", 1);
       maps\mp\zm_tomb_teleporter::stargate_teleport_disable(self.script_int);
@@ -332,7 +331,7 @@ run_gramophone_door(str_vinyl_record) {
         if(!(isDefined(level.b_open_all_gramophone_doors) && level.b_open_all_gramophone_doors)) {
           trig_position.gramophone_model = spawn("script_model", trig_position.origin);
           trig_position.gramophone_model.angles = trig_position.angles;
-          trig_position.gramophone_model setmodel("p6_zm_tm_gramophone");
+          trig_position.gramophone_model setModel("p6_zm_tm_gramophone");
           flag_set("gramophone_placed");
           level setclientfield("piece_record_zm_player", 0);
         }
@@ -340,7 +339,7 @@ run_gramophone_door(str_vinyl_record) {
         t_door trigger_off();
         str_song = trig_position get_gramophone_song();
         playsoundatposition(str_song, self.origin);
-        self playsound("zmb_crypt_stairs");
+        self playSound("zmb_crypt_stairs");
         wait 6.0;
         chamber_blocker();
         flag_set(self.targetname + "_opened");
@@ -365,7 +364,7 @@ run_gramophone_door(str_vinyl_record) {
       trig_position.gramophone_model delete();
       trig_position.gramophone_model = undefined;
       flag_clear("gramophone_placed");
-      player playsound("zmb_craftable_pickup");
+      player playSound("zmb_craftable_pickup");
       level setclientfield("piece_record_zm_player", 1);
       break;
     }
@@ -376,7 +375,7 @@ run_gramophone_door(str_vinyl_record) {
 }
 
 chamber_blocker() {
-  a_blockers = getentarray("junk_nml_chamber", "targetname");
+  a_blockers = getEntArray("junk_nml_chamber", "targetname");
   m_blocker = getent("junk_nml_chamber", "targetname");
   s_blocker_end = getstruct(m_blocker.script_linkto, "script_linkname");
   m_blocker thread maps\mp\zombies\_zm_blockers::debris_move(s_blocker_end);
@@ -398,24 +397,24 @@ staff_upgrade_watch() {
 
 staff_get_pickup_message() {
   if(self.element == "air")
-    return & "ZM_TOMB_PUAS";
+    return &"ZM_TOMB_PUAS";
   else if(self.element == "fire")
-    return & "ZM_TOMB_PUFS";
+    return &"ZM_TOMB_PUFS";
   else if(self.element == "lightning")
-    return & "ZM_TOMB_PULS";
+    return &"ZM_TOMB_PULS";
   else
-    return & "ZM_TOMB_PUIS";
+    return &"ZM_TOMB_PUIS";
 }
 
 staff_get_insert_message() {
   if(self.element == "air")
-    return & "ZM_TOMB_INAS";
+    return &"ZM_TOMB_INAS";
   else if(self.element == "fire")
-    return & "ZM_TOMB_INFS";
+    return &"ZM_TOMB_INFS";
   else if(self.element == "lightning")
-    return & "ZM_TOMB_INLS";
+    return &"ZM_TOMB_INLS";
   else
-    return & "ZM_TOMB_INWS";
+    return &"ZM_TOMB_INWS";
 }
 
 player_has_staff() {
@@ -551,7 +550,7 @@ staff_crystal_wait_for_teleport(n_element_enum) {
     self.piecespawn.model show();
     self.piecespawn.model thread rotate_forever();
     self.piecespawn.model movez(15, 2.0);
-    self.piecespawn.model playloopsound("zmb_squest_crystal_loop", 4.25);
+    self.piecespawn.model playLoopSound("zmb_squest_crystal_loop", 4.25);
   }
 
   flag_wait("charger_ready_" + n_element_enum);
@@ -567,10 +566,10 @@ staff_crystal_wait_for_teleport(n_element_enum) {
 sndmoveplinth(time) {
   self notify("sndMovePlinth");
   self endon("sndMovePlinth");
-  self playloopsound("zmb_chamber_plinth_move", 0.25);
+  self playLoopSound("zmb_chamber_plinth_move", 0.25);
   wait(time);
   self stoploopsound(0.1);
-  self playsound("zmb_chamber_plinth_stop");
+  self playSound("zmb_chamber_plinth_stop");
 }
 
 staff_mechz_drop_pieces(s_piece) {
@@ -663,23 +662,23 @@ staff_biplane_drop_pieces(a_staff_pieces) {
   e_fx_tag waittill("movedone");
   e_fx_tag linkto(vh_biplane, "tag_origin");
   vh_biplane.health = 10000;
-  vh_biplane setcandamage(1);
+  vh_biplane setCanDamage(1);
   vh_biplane setforcenocull();
   vh_biplane attachpath(getvehiclenode("biplane_start", "targetname"));
   vh_biplane startpath();
   s_biplane_pos structdelete();
   e_fx_tag setclientfield("element_glow_fx", 1);
   vh_biplane ent_flag_wait("biplane_down");
-  vh_biplane playsound("zmb_zombieblood_3rd_plane_explode");
+  vh_biplane playSound("zmb_zombieblood_3rd_plane_explode");
 
   foreach(staff_piece in a_staff_pieces) {
     staff_piece.e_fx = spawn("script_model", e_fx_tag.origin);
-    staff_piece.e_fx setmodel("tag_origin");
+    staff_piece.e_fx setModel("tag_origin");
     staff_piece.e_fx setclientfield("element_glow_fx", 1);
     staff_piece.e_fx moveto(staff_piece.origin, 5.0);
   }
 
-  playfx(level._effect["biplane_explode"], vh_biplane.origin);
+  playFX(level._effect["biplane_explode"], vh_biplane.origin);
   vh_biplane delete();
   e_fx_tag delete();
   a_staff_pieces[0].e_fx waittill("movedone");
@@ -753,7 +752,7 @@ staff_unlock_with_zone_capture(s_staff_piece) {
 reward_staff_piece(player, s_stat) {
   m_piece = spawn("script_model", self.origin);
   m_piece.angles = self.angles + vectorscale((0, 1, 0), 180.0);
-  m_piece setmodel("t6_wpn_zmb_staff_tip_fire_world");
+  m_piece setModel("t6_wpn_zmb_staff_tip_fire_world");
   m_piece.origin = self.origin;
   m_piece.angles = self.angles + vectorscale((0, 1, 0), 90.0);
   m_piece setclientfield("element_glow_fx", 1);
@@ -810,8 +809,8 @@ show_ice_staff_piece(origin) {
   self.piecespawn.model showindemo();
   self.piecespawn.model show();
   self.piecespawn.model notify("staff_piece_glow");
-  self.piecespawn.model playsound("evt_staff_digup");
-  self.piecespawn.model playloopsound("evt_staff_digup_lp");
+  self.piecespawn.model playSound("evt_staff_digup");
+  self.piecespawn.model playLoopSound("evt_staff_digup_lp");
 }
 
 staff_ice_dig_pieces(a_staff_pieces) {
@@ -851,7 +850,7 @@ crystal_play_glow_fx(s_crystal) {
 watch_for_crystal_pickup(s_crystal, n_enum) {
   s_crystal.piecespawn.model setclientfield("element_glow_fx", n_enum);
   s_crystal.piecespawn waittill("pickup");
-  self playsound("evt_crystal");
+  self playSound("evt_crystal");
   level.n_crystals_pickedup++;
 }
 
@@ -941,7 +940,7 @@ waittill_staff_inserted() {
       self setclientfield("staff_charger", self.enum);
       self.charger.full = 0;
       self show();
-      self playsound("zmb_squest_charge_place_staff");
+      self playSound("zmb_squest_charge_place_staff");
       return;
     }
   }
@@ -986,8 +985,7 @@ zombie_killed_override(einflictor, attacker, idamage, smeansofdeath, sweapon, vd
     }
 
     if(isDefined(s_nearest_staff)) {
-      if(s_nearest_staff.charger.is_charged) {
-      } else {
+      if(s_nearest_staff.charger.is_charged) {} else {
         s_nearest_staff.charger.charges_received++;
         s_nearest_staff.charger thread zombie_soul_to_charger(self, s_nearest_staff.enum);
       }
@@ -1032,8 +1030,8 @@ staff_charger_check() {
 
 staff_sound() {
   self thread sndstaffupgradedstinger();
-  self playsound("zmb_squest_charge_soul_full");
-  self playloopsound("zmb_squest_charge_soul_full_loop", 0.1);
+  self playSound("zmb_squest_charge_soul_full");
+  self playLoopSound("zmb_squest_charge_soul_full_loop", 0.1);
   level waittill("stop_staff_sound");
   self stoploopsound(0.1);
 }
@@ -1071,7 +1069,7 @@ spawn_upgraded_staff_triggers(n_index) {
   e_staff_standard_upgraded waittill("movedone");
   e_staff_standard_upgraded show();
   e_fx = spawn("script_model", e_staff_standard_upgraded.origin + vectorscale((0, 0, 1), 8.0));
-  e_fx setmodel("tag_origin");
+  e_fx setModel("tag_origin");
   wait 0.6;
   e_fx setclientfield("element_glow_fx", e_staff_standard.enum);
   e_staff_standard_upgraded watch_for_player_pickup_staff();

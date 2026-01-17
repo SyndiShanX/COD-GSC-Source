@@ -12,38 +12,38 @@
 #namespace aiutility;
 
 function autoexec registerbehaviorscriptfunctions() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("isAtCrouchNode", & isatcrouchnode);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("isAtCoverCondition", & isatcovercondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("isAtCoverStrictCondition", & isatcoverstrictcondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("isAtCoverModeOver", & isatcovermodeover);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("isAtCoverModeNone", & isatcovermodenone);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("isExposedAtCoverCondition", & isexposedatcovercondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("keepClaimedNodeAndChooseCoverDirection", & keepclaimednodeandchoosecoverdirection);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("resetCoverParameters", & resetcoverparameters);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("cleanupCoverMode", & cleanupcovermode);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("canBeFlankedService", & canbeflankedservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldCoverIdleOnly", & shouldcoveridleonly);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("isSuppressedAtCoverCondition", & issuppressedatcovercondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("coverIdleInitialize", & coveridleinitialize);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("coverIdleUpdate", & coveridleupdate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("coverIdleTerminate", & coveridleterminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("isFlankedByEnemyAtCover", & isflankedbyenemyatcover);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("coverFlankedActionStart", & coverflankedinitialize);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("coverFlankedActionTerminate", & coverflankedactionterminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("supportsOverCoverCondition", & supportsovercovercondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldOverAtCoverCondition", & shouldoveratcovercondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("coverOverInitialize", & coveroverinitialize);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("coverOverTerminate", & coveroverterminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("supportsLeanCoverCondition", & supportsleancovercondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldLeanAtCoverCondition", & shouldleanatcovercondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("continueLeaningAtCoverCondition", & continueleaningatcovercondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("coverLeanInitialize", & coverleaninitialize);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("coverLeanTerminate", & coverleanterminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("supportsPeekCoverCondition", & supportspeekcovercondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("coverPeekInitialize", & coverpeekinitialize);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("coverPeekTerminate", & coverpeekterminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("coverReloadInitialize", & coverreloadinitialize);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("refillAmmoAndCleanupCoverMode", & refillammoandcleanupcovermode);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("isAtCrouchNode", &isatcrouchnode);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("isAtCoverCondition", &isatcovercondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("isAtCoverStrictCondition", &isatcoverstrictcondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("isAtCoverModeOver", &isatcovermodeover);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("isAtCoverModeNone", &isatcovermodenone);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("isExposedAtCoverCondition", &isexposedatcovercondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("keepClaimedNodeAndChooseCoverDirection", &keepclaimednodeandchoosecoverdirection);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("resetCoverParameters", &resetcoverparameters);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("cleanupCoverMode", &cleanupcovermode);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("canBeFlankedService", &canbeflankedservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldCoverIdleOnly", &shouldcoveridleonly);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("isSuppressedAtCoverCondition", &issuppressedatcovercondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("coverIdleInitialize", &coveridleinitialize);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("coverIdleUpdate", &coveridleupdate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("coverIdleTerminate", &coveridleterminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("isFlankedByEnemyAtCover", &isflankedbyenemyatcover);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("coverFlankedActionStart", &coverflankedinitialize);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("coverFlankedActionTerminate", &coverflankedactionterminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("supportsOverCoverCondition", &supportsovercovercondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldOverAtCoverCondition", &shouldoveratcovercondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("coverOverInitialize", &coveroverinitialize);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("coverOverTerminate", &coveroverterminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("supportsLeanCoverCondition", &supportsleancovercondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldLeanAtCoverCondition", &shouldleanatcovercondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("continueLeaningAtCoverCondition", &continueleaningatcovercondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("coverLeanInitialize", &coverleaninitialize);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("coverLeanTerminate", &coverleanterminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("supportsPeekCoverCondition", &supportspeekcovercondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("coverPeekInitialize", &coverpeekinitialize);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("coverPeekTerminate", &coverpeekterminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("coverReloadInitialize", &coverreloadinitialize);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("refillAmmoAndCleanupCoverMode", &refillammoandcleanupcovermode);
 }
 
 function private coverreloadinitialize(behaviortreeentity) {
@@ -59,7 +59,7 @@ function refillammoandcleanupcovermode(behaviortreeentity) {
 }
 
 function private supportspeekcovercondition(behaviortreeentity) {
-  return isdefined(behaviortreeentity.node);
+  return isDefined(behaviortreeentity.node);
 }
 
 function private coverpeekinitialize(behaviortreeentity) {
@@ -74,12 +74,12 @@ function private coverpeekterminate(behaviortreeentity) {
 }
 
 function private supportsleancovercondition(behaviortreeentity) {
-  if(isdefined(behaviortreeentity.node)) {
+  if(isDefined(behaviortreeentity.node)) {
     if(behaviortreeentity.node.type == "Cover Left" || behaviortreeentity.node.type == "Cover Right") {
       return true;
     }
     if(behaviortreeentity.node.type == "Cover Pillar") {
-      if(!(isdefined(behaviortreeentity.node.spawnflags) && (behaviortreeentity.node.spawnflags & 1024) == 1024) || (!(isdefined(behaviortreeentity.node.spawnflags) && (behaviortreeentity.node.spawnflags & 2048) == 2048))) {
+      if(!(isDefined(behaviortreeentity.node.spawnflags) && (behaviortreeentity.node.spawnflags & 1024) == 1024) || (!(isDefined(behaviortreeentity.node.spawnflags) && (behaviortreeentity.node.spawnflags & 2048) == 2048))) {
         return true;
       }
     }
@@ -88,7 +88,7 @@ function private supportsleancovercondition(behaviortreeentity) {
 }
 
 function private shouldleanatcovercondition(behaviortreeentity) {
-  if(!isdefined(behaviortreeentity.node) || !isdefined(behaviortreeentity.node.type) || !isdefined(behaviortreeentity.enemy) || !isdefined(behaviortreeentity.enemy.origin)) {
+  if(!isDefined(behaviortreeentity.node) || !isDefined(behaviortreeentity.node.type) || !isDefined(behaviortreeentity.enemy) || !isDefined(behaviortreeentity.enemy.origin)) {
     return 0;
   }
   yawtoenemyposition = getaimyawtoenemyfromnode(behaviortreeentity, behaviortreeentity.node, behaviortreeentity.enemy);
@@ -102,8 +102,8 @@ function private shouldleanatcovercondition(behaviortreeentity) {
       legalaimyaw = yawtoenemyposition >= (aimlimitsforcover["aim_right"] - 10) && yawtoenemyposition <= 10;
     } else if(behaviortreeentity.node.type == "Cover Pillar") {
       aimlimitsforcover = behaviortreeentity getaimlimitsfromentry("cover");
-      supportsleft = !(isdefined(behaviortreeentity.node.spawnflags) && (behaviortreeentity.node.spawnflags & 1024) == 1024);
-      supportsright = !(isdefined(behaviortreeentity.node.spawnflags) && (behaviortreeentity.node.spawnflags & 2048) == 2048);
+      supportsleft = !(isDefined(behaviortreeentity.node.spawnflags) && (behaviortreeentity.node.spawnflags & 1024) == 1024);
+      supportsright = !(isDefined(behaviortreeentity.node.spawnflags) && (behaviortreeentity.node.spawnflags & 2048) == 2048);
       angleleeway = 10;
       if(supportsright && supportsleft) {
         angleleeway = 0;
@@ -141,7 +141,7 @@ function private coverleanterminate(behaviortreeentity) {
 
 function private supportsovercovercondition(behaviortreeentity) {
   stance = blackboard::getblackboardattribute(behaviortreeentity, "_stance");
-  if(isdefined(behaviortreeentity.node)) {
+  if(isDefined(behaviortreeentity.node)) {
     if(!isinarray(getvalidcoverpeekouts(behaviortreeentity.node), "over")) {
       return false;
     }
@@ -159,7 +159,7 @@ function private supportsovercovercondition(behaviortreeentity) {
 }
 
 function private shouldoveratcovercondition(entity) {
-  if(!isdefined(entity.node) || !isdefined(entity.node.type) || !isdefined(entity.enemy) || !isdefined(entity.enemy.origin)) {
+  if(!isDefined(entity.node) || !isDefined(entity.node.type) || !isDefined(entity.enemy) || !isDefined(entity.enemy.origin)) {
     return false;
   }
   aimtable = (iscoverconcealed(entity.node) ? "cover_concealed_over" : "cover_over");
@@ -213,7 +213,7 @@ function private canbeflankedservice(behaviortreeentity) {
 }
 
 function private coverflankedinitialize(behaviortreeentity) {
-  if(isdefined(behaviortreeentity.enemy)) {
+  if(isDefined(behaviortreeentity.enemy)) {
     behaviortreeentity getperfectinfo(behaviortreeentity.enemy);
     behaviortreeentity pathmode("move delayed", 0, 2);
   }
@@ -229,7 +229,7 @@ function private coverflankedactionterminate(behaviortreeentity) {
 }
 
 function isatcrouchnode(behaviortreeentity) {
-  if(isdefined(behaviortreeentity.node) && (behaviortreeentity.node.type == "Exposed" || behaviortreeentity.node.type == "Guard" || behaviortreeentity.node.type == "Path")) {
+  if(isDefined(behaviortreeentity.node) && (behaviortreeentity.node.type == "Exposed" || behaviortreeentity.node.type == "Guard" || behaviortreeentity.node.type == "Path")) {
     if(distancesquared(behaviortreeentity.origin, behaviortreeentity.node.origin) <= (24 * 24)) {
       return !isstanceallowedatnode("stand", behaviortreeentity.node) && isstanceallowedatnode("crouch", behaviortreeentity.node);
     }
@@ -263,7 +263,7 @@ function shouldcoveridleonly(behaviortreeentity) {
   if(behaviortreeentity ai::get_behavior_attribute("coverIdleOnly")) {
     return true;
   }
-  if(isdefined(behaviortreeentity.node.script_onlyidle) && behaviortreeentity.node.script_onlyidle) {
+  if(isDefined(behaviortreeentity.node.script_onlyidle) && behaviortreeentity.node.script_onlyidle) {
     return true;
   }
   return false;
@@ -285,7 +285,7 @@ function resetcoverparameters(behaviortreeentity) {
 }
 
 function choosecoverdirection(behaviortreeentity, stepout) {
-  if(!isdefined(behaviortreeentity.node)) {
+  if(!isDefined(behaviortreeentity.node)) {
     return;
   }
   coverdirection = blackboard::getblackboardattribute(behaviortreeentity, "_cover_direction");
@@ -294,29 +294,29 @@ function choosecoverdirection(behaviortreeentity, stepout) {
 }
 
 function calculatecoverdirection(behaviortreeentity, stepout) {
-  if(isdefined(behaviortreeentity.treatallcoversasgeneric)) {
-    if(!isdefined(stepout)) {
+  if(isDefined(behaviortreeentity.treatallcoversasgeneric)) {
+    if(!isDefined(stepout)) {
       stepout = 0;
     }
     coverdirection = "cover_front_direction";
     if(behaviortreeentity.node.type == "Cover Left") {
-      if(isdefined(behaviortreeentity.node.spawnflags) && (behaviortreeentity.node.spawnflags & 4) == 4 || math::cointoss() || stepout) {
+      if(isDefined(behaviortreeentity.node.spawnflags) && (behaviortreeentity.node.spawnflags & 4) == 4 || math::cointoss() || stepout) {
         coverdirection = "cover_left_direction";
       }
     } else {
       if(behaviortreeentity.node.type == "Cover Right") {
-        if(isdefined(behaviortreeentity.node.spawnflags) && (behaviortreeentity.node.spawnflags & 4) == 4 || math::cointoss() || stepout) {
+        if(isDefined(behaviortreeentity.node.spawnflags) && (behaviortreeentity.node.spawnflags & 4) == 4 || math::cointoss() || stepout) {
           coverdirection = "cover_right_direction";
         }
       } else if(behaviortreeentity.node.type == "Cover Pillar") {
-        if(isdefined(behaviortreeentity.node.spawnflags) && (behaviortreeentity.node.spawnflags & 1024) == 1024) {
+        if(isDefined(behaviortreeentity.node.spawnflags) && (behaviortreeentity.node.spawnflags & 1024) == 1024) {
           return "cover_right_direction";
         }
-        if(isdefined(behaviortreeentity.node.spawnflags) && (behaviortreeentity.node.spawnflags & 2048) == 2048) {
+        if(isDefined(behaviortreeentity.node.spawnflags) && (behaviortreeentity.node.spawnflags & 2048) == 2048) {
           return "cover_left_direction";
         }
         coverdirection = "cover_left_direction";
-        if(isdefined(behaviortreeentity.enemy)) {
+        if(isDefined(behaviortreeentity.enemy)) {
           yawtoenemyposition = getaimyawtoenemyfromnode(behaviortreeentity, behaviortreeentity.node, behaviortreeentity.enemy);
           aimlimitsfordirectionright = behaviortreeentity getaimlimitsfromentry("pillar_right_lean");
           legalrightdirectionyaw = yawtoenemyposition >= (aimlimitsfordirectionright["aim_right"] - 10) && yawtoenemyposition <= 0;
@@ -330,14 +330,14 @@ function calculatecoverdirection(behaviortreeentity, stepout) {
   }
   coverdirection = "cover_front_direction";
   if(behaviortreeentity.node.type == "Cover Pillar") {
-    if(isdefined(behaviortreeentity.node.spawnflags) && (behaviortreeentity.node.spawnflags & 1024) == 1024) {
+    if(isDefined(behaviortreeentity.node.spawnflags) && (behaviortreeentity.node.spawnflags & 1024) == 1024) {
       return "cover_right_direction";
     }
-    if(isdefined(behaviortreeentity.node.spawnflags) && (behaviortreeentity.node.spawnflags & 2048) == 2048) {
+    if(isDefined(behaviortreeentity.node.spawnflags) && (behaviortreeentity.node.spawnflags & 2048) == 2048) {
       return "cover_left_direction";
     }
     coverdirection = "cover_left_direction";
-    if(isdefined(behaviortreeentity.enemy)) {
+    if(isDefined(behaviortreeentity.enemy)) {
       yawtoenemyposition = getaimyawtoenemyfromnode(behaviortreeentity, behaviortreeentity.node, behaviortreeentity.enemy);
       aimlimitsfordirectionright = behaviortreeentity getaimlimitsfromentry("pillar_right_lean");
       legalrightdirectionyaw = yawtoenemyposition >= (aimlimitsfordirectionright["aim_right"] - 10) && yawtoenemyposition <= 0;
@@ -358,7 +358,7 @@ function setcovershootstarttime(behaviortreeentity) {
 }
 
 function canbeflanked(behaviortreeentity) {
-  return isdefined(behaviortreeentity.canbeflanked) && behaviortreeentity.canbeflanked;
+  return isDefined(behaviortreeentity.canbeflanked) && behaviortreeentity.canbeflanked;
 }
 
 function setcanbeflanked(behaviortreeentity, canbeflanked) {

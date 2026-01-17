@@ -8,7 +8,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
-
 #namespace zm_trial_acquire_perks;
 
 autoexec __init__system__() {
@@ -23,7 +22,7 @@ __init__() {
   zm_trial::register_challenge(#"acquire_perks", &on_begin, &on_end);
 }
 
-private on_begin(perk_count) {
+on_begin(perk_count) {
   assert(isDefined(level.var_b8be892e));
   self.var_851a4ca6 = zm_trial::function_5769f26a(perk_count);
 
@@ -32,7 +31,7 @@ private on_begin(perk_count) {
   }
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   foreach(player in getplayers()) {
     player zm_trial_util::function_f3aacffb();
   }
@@ -61,7 +60,7 @@ private on_end(round_reset) {
   }
 }
 
-private function_c9934172() {
+function_c9934172() {
   if(self.sessionstate != "spectator") {
     self.var_a53b9221 = 0;
 
@@ -73,7 +72,7 @@ private function_c9934172() {
   }
 }
 
-private function_2a5b280f(challenge) {
+function_2a5b280f(challenge) {
   self endon(#"disconnect");
   level endon(#"hash_7646638df88a3656");
   self.var_a53b9221 = 0;

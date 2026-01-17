@@ -7,8 +7,7 @@
 #include maps\_createfx;
 #include common_scripts\utility;
 
-oneshotfx(fxid, fxpos, waittime, fxpos2) {
-}
+oneshotfx(fxid, fxpos, waittime, fxpos2) {}
 
 oneshotfxthread() {
   wait 0.05;
@@ -103,7 +102,7 @@ loopsound(sound, pos, waittime) {
 loopsoundthread(sound, pos, waittime) {
   org = spawn("script_origin", pos);
   org.origin = pos;
-  org playloopsound(sound);
+  org playLoopSound(sound);
 }
 
 setup_fx() {
@@ -144,7 +143,7 @@ setup_fx() {
 soundfx(fxid, fxpos, endonnotify) {
   org = spawn("script_origin", (0, 0, 0));
   org.origin = fxpos;
-  org playloopsound(fxid);
+  org playLoopSound(fxid);
 
   if(isDefined(endonnotify))
     org thread soundfxdelete(endonnotify);

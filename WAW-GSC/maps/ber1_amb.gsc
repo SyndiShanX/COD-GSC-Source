@@ -47,58 +47,58 @@ main() {
 wall_fire() {
   level waittill("first_player_ready");
   wait 5;
-  wall_fire = Spawn("script_origin", (3400, 4400, -72));
-  wall_fire playloopsound("wall_fire", 1);
+  wall_fire = spawn("script_origin", (3400, 4400, -72));
+  wall_fire playLoopSound("wall_fire", 1);
 }
 
 play_bell_toll_sound() {
   level endon("ber1_clock_shot");
   level waittill("ber1_bell_toll");
   toll1 = getent("clock", "targetname");
-  toll1 playsound("bell_toll1", "sound_done");
+  toll1 playSound("bell_toll1", "sound_done");
   toll1 waittill("sound_done");
   toll2 = getent("clock", "targetname");
-  toll2 playsound("bell_toll2", "sound_done");
+  toll2 playSound("bell_toll2", "sound_done");
   toll2 waittill("sound_done");
   toll3 = getent("clock", "targetname");
-  toll3 playsound("bell_toll3", "sound_done");
+  toll3 playSound("bell_toll3", "sound_done");
   toll3 waittill("sound_done");
   toll4 = getent("clock", "targetname");
-  toll4 playsound("bell_toll4", "sound_done");
+  toll4 playSound("bell_toll4", "sound_done");
   toll4 waittill("sound_done");
   toll5 = getent("clock", "targetname");
-  toll5 playsound("bell_toll5", "sound_done");
+  toll5 playSound("bell_toll5", "sound_done");
   toll5 waittill("sound_done");
   toll_end = getent("clock", "targetname");
-  toll_end playsound("bell_toll_end", "sound_done");
+  toll_end playSound("bell_toll_end", "sound_done");
   toll_end waittill("sound_done");
 }
 
 play_music_box() {
   level waittill("music_box_on");
   music_box = getent("music_box", "targetname");
-  music_box playloopsound("music_box");
+  music_box playLoopSound("music_box");
   level waittill("music_box_off");
   music_box stoploopsound(.5);
-  music_box playsound("music_box_close");
+  music_box playSound("music_box_close");
   wait 1;
-  music_box playsound("insane_laugh");
+  music_box playSound("insane_laugh");
 }
 
 play_children_chant() {
   level waittill("music_box_on");
   chant = getent("chant", "targetname");
-  chant playloopsound("child_chant");
+  chant playLoopSound("child_chant");
   level waittill("boy_scream_off");
   chant stoploopsound(.5);
   wait 1;
-  chant playsound("child_scream");
+  chant playSound("child_scream");
 }
 
 playground() {
   level waittill("playground_on");
   playground = getent("playground", "targetname");
-  playground playloopsound("playground");
+  playground playLoopSound("playground");
   level waittill("playground_off");
   playground stoploopsound(.5);
 }
@@ -106,13 +106,13 @@ playground() {
 play_insane_scream() {
   level waittill("insane_scream");
   insane_scream = getent("insane_scream", "targetname");
-  insane_scream playsound("insane_scream");
+  insane_scream playSound("insane_scream");
 }
 
 play_arty_sound() {
   level waittill("ber2_earthquake");
   ber2_earthquake = getent("music_box", "targetname");
-  ber2_earthquake playsound("art_int", "sound_done");
+  ber2_earthquake playSound("art_int", "sound_done");
 }
 
 /*

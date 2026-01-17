@@ -58,7 +58,7 @@ detachAllWeaponModels() {
   positions[positions.size] = "left";
   positions[positions.size] = "chest";
   positions[positions.size] = "back";
-  for (index = 0; index < positions.size; index++) {
+  for(index = 0; index < positions.size; index++) {
     weapon = self.a.weaponPos[positions[index]];
     if(weapon == "none") {
       continue;
@@ -76,7 +76,7 @@ updateAttachedWeaponModels() {
   positions[positions.size] = "left";
   positions[positions.size] = "chest";
   positions[positions.size] = "back";
-  for (index = 0; index < positions.size; index++) {
+  for(index = 0; index < positions.size; index++) {
     weapon = self.a.weaponPos[positions[index]];
     if(weapon == "none") {
       continue;
@@ -148,7 +148,7 @@ DropAllAIWeapons() {
     self.weapon = "none";
     return;
   }
-  for (index = 0; index < positions.size; index++) {
+  for(index = 0; index < positions.size; index++) {
     weapon = self.a.weaponPos[positions[index]];
     if(weapon == "none") {
       continue;
@@ -243,14 +243,14 @@ showNoteTrack(note) {
     color = (.25, .4, .5);
   else if(note == "undefined")
     color = (1, .5, .5);
-  for (i = 0; i < duration; i++) {
+  for(i = 0; i < duration; i++) {
     if(duration - i <= anim.showNotetrackDuration)
       amnt = 1.0 * (i - (duration - anim.showNotetrackDuration)) / anim.showNotetrackDuration;
     else
       amnt = 0.0;
     time = 1.0 * i / 20;
     alpha = 1.0 - amnt * amnt;
-    pos = self geteye() + (0, 0, 20 + anim.showNotetrackSpeed * time - thisoffset);
+    pos = self getEye() + (0, 0, 20 + anim.showNotetrackSpeed * time - thisoffset);
     print3d(pos, note, color, alpha);
     wait .05;
   }
@@ -258,7 +258,7 @@ showNoteTrack(note) {
 
 reduceShowNotetrackOffset() {
   self endon("death");
-  while (self.a.shownotetrackoffset > 0) {
+  while(self.a.shownotetrackoffset > 0) {
     wait .05;
     self.a.shownotetrackoffset -= anim.showNotetrackSpeed * .05;
   }
@@ -273,7 +273,7 @@ HandleDogSoundNoteTracks(note) {
     return true;
   }
   if(note == "sound_dogstep_run_default" || issubstr(note, "dogstep")) {
-    self playsound("dogstep_run_default");
+    self playSound("dogstep_run_default");
     return true;
   }
   prefix = getsubstr(note, 0, 5);
@@ -522,9 +522,9 @@ noteTrackBodyFall(note, flagName) {
   else
     groundType = "dirt";
   if(isSubStr(note, "large"))
-    self playsound("bodyfall_" + groundType + "_large");
+    self playSound("bodyfall_" + groundType + "_large");
   else if(isSubStr(note, "small"))
-    self playsound("bodyfall_" + groundType + "_small");
+    self playSound("bodyfall_" + groundType + "_small");
 }
 
 noteTrackFootStep(note, flagName) {
@@ -542,7 +542,7 @@ noteTrackFootScrape(note, flagName) {
     groundType = self.groundType;
   else
     groundType = "dirt";
-  self playsound("step_scrape_" + groundType);
+  self playSound("step_scrape_" + groundType);
 }
 
 noteTrackLand(note, flagName) {
@@ -550,7 +550,7 @@ noteTrackLand(note, flagName) {
     groundType = self.groundType;
   else
     groundType = "dirt";
-  self playsound("land_" + groundType);
+  self playSound("land_" + groundType);
 }
 
 HandleNoteTrack(note, flagName, customFunction, var1) {
@@ -561,9 +561,7 @@ HandleNoteTrack(note, flagName, customFunction, var1) {
     }
   notetrackFunc = anim.notetracks[note];
   if(isDefined(notetrackFunc)) {
-    return [
-      [notetrackFunc]
-    ](note, flagName);
+    return [[notetrackFunc]](note, flagName);
   }
   switch (note) {
     case "end":
@@ -631,7 +629,7 @@ HandleNoteTrack(note, flagName, customFunction, var1) {
 }
 
 DoNoteTracks(flagName, customFunction, debugIdentifier, var1) {
-  for (;;) {
+  for(;;) {
     self waittill(flagName, note);
     if(!isDefined(note))
       note = "undefined";
@@ -643,13 +641,11 @@ DoNoteTracks(flagName, customFunction, debugIdentifier, var1) {
 
 DoNoteTracksIntercept(flagName, interceptFunction, debugIdentifier) {
   assert(isDefined(interceptFunction));
-  for (;;) {
+  for(;;) {
     self waittill(flagName, note);
     if(!isDefined(note))
       note = "undefined";
-    intercepted = [
-      [interceptFunction]
-    ](note);
+    intercepted = [[interceptFunction]](note);
     if(isDefined(intercepted) && intercepted) {
       continue;
     }
@@ -661,14 +657,12 @@ DoNoteTracksIntercept(flagName, interceptFunction, debugIdentifier) {
 
 DoNoteTracksPostCallback(flagName, postFunction) {
   assert(isDefined(postFunction));
-  for (;;) {
+  for(;;) {
     self waittill(flagName, note);
     if(!isDefined(note))
       note = "undefined";
     val = self HandleNoteTrack(note, flagName);
-    [
-      [postFunction]
-    ](note);
+    [[postFunction]](note);
     if(isDefined(val))
       return val;
   }
@@ -688,11 +682,9 @@ DoNoteTracksForeverProc(notetracksFunc, flagName, killString, customFunction, de
   self endon("killanimscript");
   if(!isDefined(debugIdentifier))
     debugIdentifier = "undefined";
-  for (;;) {
+  for(;;) {
     time = GetTime();
-    returnedNote = [
-      [notetracksFunc]
-    ](flagName, customFunction, debugIdentifier);
+    returnedNote = [[notetracksFunc]](flagName, customFunction, debugIdentifier);
     timetaken = GetTime() - time;
     if(timetaken < 0.05) {
       time = GetTime();
@@ -709,13 +701,13 @@ DoNoteTracksForeverProc(notetracksFunc, flagName, killString, customFunction, de
 }
 
 DoNoteTracksForTime(time, flagName, customFunction, debugIdentifier) {
-  ent = spawnstruct();
+  ent = spawnStruct();
   ent thread doNoteTracksForTimeEndNotify(time);
   DoNoteTracksForTimeProc(::DoNoteTracksForever, time, flagName, customFunction, debugIdentifier, ent);
 }
 
 DoNoteTracksForTimeIntercept(time, flagName, interceptFunction, debugIdentifier) {
-  ent = spawnstruct();
+  ent = spawnStruct();
   ent thread doNoteTracksForTimeEndNotify(time);
   DoNoteTracksForTimeProc(::DoNoteTracksForeverIntercept, time, flagName, interceptFunction, debugIdentifier, ent);
 }
@@ -733,7 +725,7 @@ doNoteTracksForTimeEndNotify(time) {
 playFootStep(foot) {
   if(!level.clientScripts) {
     if(!isAI(self)) {
-      self playsound("step_run_dirt");
+      self playSound("step_run_dirt");
       return;
     }
   }
@@ -741,7 +733,7 @@ playFootStep(foot) {
   if(!isDefined(self.groundtype)) {
     if(!isDefined(self.lastGroundtype)) {
       if(!level.clientScripts) {
-        self playsound("step_run_dirt");
+        self playSound("step_run_dirt");
       }
       return;
     }
@@ -751,7 +743,7 @@ playFootStep(foot) {
     self.lastGroundtype = self.groundType;
   }
   if(!level.clientScripts) {
-    self playsound("step_run_" + groundType);
+    self playSound("step_run_" + groundType);
   }
   [[anim.optionalStepEffectFunction]](foot, groundType);
 }
@@ -760,14 +752,14 @@ playFootStepEffect(foot, groundType) {
   if(level.clientScripts) {
     return;
   }
-  for (i = 0; i < anim.optionalStepEffects.size; i++) {
+  for(i = 0; i < anim.optionalStepEffects.size; i++) {
     if(isDefined(self.fire_footsteps) && self.fire_footsteps) {
       groundType = "fire";
     }
     if(groundType != anim.optionalStepEffects[i])
       continue;
     org = self gettagorigin(foot);
-    playfx(level._effect["step_" + anim.optionalStepEffects[i]], org, org + (0, 0, 100));
+    playFX(level._effect["step_" + anim.optionalStepEffects[i]], org, org + (0, 0, 100));
     return;
   }
 }
@@ -793,7 +785,7 @@ fire_straight() {
     return;
   }
   weaporig = self gettagorigin("tag_weapon");
-  dir = anglestoforward(self gettagangles("tag_weapon"));
+  dir = anglesToForward(self gettagangles("tag_weapon"));
   pos = weaporig + vectorScale(dir, 1000);
   self.a.lastShootTime = gettime();
   self shoot(1, pos);
@@ -805,10 +797,10 @@ noteTrackFireSpray(note, flagName) {
     return;
   }
   weaporig = self gettagorigin("tag_weapon");
-  dir = anglestoforward(self gettagangles("tag_weapon"));
+  dir = anglesToForward(self gettagangles("tag_weapon"));
   hitenemy = false;
   if(issentient(self.enemy) && isalive(self.enemy) && self canShoot(self.enemy getShootAtPos())) {
-    enemydir = vectornormalize(self.enemy geteye() - weaporig);
+    enemydir = vectornormalize(self.enemy getEye() - weaporig);
     if(vectordot(dir, enemydir) > cos(10)) {
       hitenemy = true;
     }
@@ -902,7 +894,7 @@ trackLoop(aim2, aim4, aim6, aim8) {
   yawDelta = 0;
   pitchDelta = 0;
   firstFrame = true;
-  for (;;) {
+  for(;;) {
     incrAnimAimWeight();
     selfShootAtPos = (self.origin[0], self.origin[1], self geteyeapprox()[2]);
     shootPos = self.shootPos;
@@ -1070,18 +1062,18 @@ handleDropClip(flagName) {
   }
   if(self.weaponInfo[self.weapon].hasClip) {
     if(weaponAnims() == "pistol")
-      self playsound("weap_reload_pistol_clipout_npc");
+      self playSound("weap_reload_pistol_clipout_npc");
     else
-      self playsound("weap_reload_smg_clipout_npc");
+      self playSound("weap_reload_smg_clipout_npc");
     if(isDefined(clipModel)) {
       self hidepart("tag_clip");
       assert(isDefined(anim._effect[clipModel]));
-      playFxOnTag(anim._effect[clipModel], self, "tag_clip");
+      playFXOnTag(anim._effect[clipModel], self, "tag_clip");
       self.weaponInfo[self.weapon].hasClip = false;
       self thread resetClipOnAbort(clipModel);
     }
   }
-  for (;;) {
+  for(;;) {
     self waittill(flagName, noteTrack);
     switch (noteTrack) {
       case "attach clip left":
@@ -1102,9 +1094,9 @@ handleDropClip(flagName) {
           self.weaponInfo[self.weapon].hasClip = true;
         }
         if(weaponAnims() == "pistol")
-          self playsound("weap_reload_pistol_clipin_npc");
+          self playSound("weap_reload_pistol_clipin_npc");
         else
-          self playsound("weap_reload_smg_clipin_npc");
+          self playSound("weap_reload_smg_clipin_npc");
         return;
     }
   }
@@ -1124,7 +1116,7 @@ resetClipOnAbort(clipModel, currentTag) {
     self.weaponInfo[self.weapon].hasClip = true;
   } else {
     if(isDefined(currentTag) && isDefined(anim._effect[clipModel]))
-      playFxOnTag(anim._effect[clipModel], self, currentTag);
+      playFXOnTag(anim._effect[clipModel], self, currentTag);
   }
 }
 
@@ -1138,7 +1130,7 @@ moveToOriginOverTime(origin, time) {
   offset = self.origin - origin;
   frames = int(time * 20);
   offsetreduction = vectorScale(offset, 1.0 / frames);
-  for (i = 0; i < frames; i++) {
+  for(i = 0; i < frames; i++) {
     offset -= offsetreduction;
     self teleport(origin + offset);
     wait .05;
@@ -1153,11 +1145,9 @@ returnTrue() {
 playLookAnimation(lookAnim, lookTime, canStopCallback) {
   if(!isDefined(canStopCallback))
     canStopCallback = ::returnTrue;
-  for (i = 0; i < lookTime * 10; i++) {
+  for(i = 0; i < lookTime * 10; i++) {
     if(isalive(self.enemy)) {
-      if(self canSeeEnemy() && [
-          [canStopCallback]
-        ]())
+      if(self canSeeEnemy() && [[canStopCallback]]())
         return;
     }
     if(self isSuppressedWrapper() && [
@@ -1175,7 +1165,7 @@ throwDownWeapon(swapAnim) {
   self animMode("angle deltas");
   self setFlaggedAnimKnobAllRestart("weapon swap", swapAnim, % body, 1, .1, 1);
   note = "";
-  while (note != "end") {
+  while(note != "end") {
     self waittill("weapon swap", note);
     if(note == "dropgun" || note == "gun drop")
       DropAIWeapon();

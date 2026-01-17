@@ -1,5 +1,5 @@
 init() {
-  precachestring( & "MP_CHALLENGE_COMPLETED");
+  precachestring(&"MP_CHALLENGE_COMPLETED");
 
   if(!mayprocesschallenges()) {
     return;
@@ -21,13 +21,13 @@ mayprocesschallenges() {
 
 onplayerconnect() {
   level endon("game_ended");
-  for (;;) {
+  for(;;) {
     level waittill("connected", var_0);
 
     if(isbot(var_0)) {
       continue;
     }
-    if(!isdefined(var_0.pers["postGameChallenges"]))
+    if(!isDefined(var_0.pers["postGameChallenges"]))
       var_0.pers["postGameChallenges"] = 0;
 
     var_0 thread onplayerspawned();
@@ -58,7 +58,7 @@ onplayerspawned() {
   self endon("disconnect");
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     self waittill("spawned_player");
     thread onplayerdeath();
     thread monitorsprintdistance();
@@ -69,7 +69,7 @@ onplayerdeath() {
   self endon("disconnect");
   self waittill("death");
 
-  if(isdefined(self.hasscavengedammothislife))
+  if(isDefined(self.hasscavengedammothislife))
     self.hasscavengedammothislife = 0;
 }
 
@@ -77,7 +77,7 @@ monitorscavengerpickup() {
   self endon("disconnect");
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     self waittill("scavenger_pickup");
 
     if(self isitemunlocked("specialty_scavenger") && maps\mp\_utility::_hasperk("specialty_scavenger") && !maps\mp\_utility::isjuggernaut())
@@ -99,14 +99,14 @@ initmissiondata() {
 }
 
 registermissioncallback(var_0, var_1) {
-  if(!isdefined(level.missioncallbacks[var_0]))
+  if(!isDefined(level.missioncallbacks[var_0]))
     level.missioncallbacks[var_0] = [];
 
   level.missioncallbacks[var_0][level.missioncallbacks[var_0].size] = var_1;
 }
 
 getchallengestatus(var_0) {
-  if(isdefined(self.challengedata[var_0]))
+  if(isDefined(self.challengedata[var_0]))
     return self.challengedata[var_0];
   else
     return 0;
@@ -117,9 +117,7 @@ ch_assists(var_0) {
   var_1 processchallenge("ch_assists");
 }
 
-ch_streak_kill(var_0) {
-
-}
+ch_streak_kill(var_0) {}
 
 ch_hardpoints(var_0) {
   if(isbot(var_0.player)) {
@@ -197,7 +195,7 @@ ch_hardpoints(var_0) {
 }
 
 ch_vehicle_kills(var_0) {
-  if(!isdefined(var_0.attacker) || !isplayer(var_0.attacker)) {
+  if(!isDefined(var_0.attacker) || !isplayer(var_0.attacker)) {
     return;
   }
   if(!maps\mp\_utility::iskillstreakweapon(var_0.sweapon)) {
@@ -205,10 +203,10 @@ ch_vehicle_kills(var_0) {
   }
   var_1 = var_0.attacker;
 
-  if(isdefined(var_0.einflictor) && isdefined(level.chopper) && var_0.einflictor == level.chopper)
+  if(isDefined(var_0.einflictor) && isDefined(level.chopper) && var_0.einflictor == level.chopper)
     var_1 processchallenge("ch_choppervet");
 
-  if(!isdefined(var_1.pers[var_0.sweapon + "_streak"]) || isdefined(var_1.pers[var_0.sweapon + "_streakTime"]) && gettime() - var_1.pers[var_0.sweapon + "_streakTime"] > 7000) {
+  if(!isDefined(var_1.pers[var_0.sweapon + "_streak"]) || isDefined(var_1.pers[var_0.sweapon + "_streakTime"]) && gettime() - var_1.pers[var_0.sweapon + "_streakTime"] > 7000) {
     var_1.pers[var_0.sweapon + "_streak"] = 0;
     var_1.pers[var_0.sweapon + "_streakTime"] = gettime();
   }
@@ -255,7 +253,7 @@ ch_vehicle_kills(var_0) {
 }
 
 ch_vehicle_killed(var_0) {
-  if(!isdefined(var_0.attacker) || !isplayer(var_0.attacker)) {
+  if(!isDefined(var_0.attacker) || !isplayer(var_0.attacker)) {
     return;
   }
   var_1 = var_0.attacker;
@@ -281,11 +279,11 @@ clearidshortly(var_0) {
 mgkill() {
   var_0 = self;
 
-  if(!isdefined(var_0.pers["MGStreak"])) {
+  if(!isDefined(var_0.pers["MGStreak"])) {
     var_0.pers["MGStreak"] = 0;
     var_0 thread endmgstreakwhenleavemg();
 
-    if(!isdefined(var_0.pers["MGStreak"]))
+    if(!isDefined(var_0.pers["MGStreak"]))
       return;
   }
 
@@ -299,7 +297,7 @@ endmgstreakwhenleavemg() {
   self endon("disconnect");
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     if(!isalive(self) || self usebuttonpressed()) {
       self.pers["MGStreak"] = undefined;
       break;
@@ -314,7 +312,7 @@ endmgstreak() {
 }
 
 killedbestenemyplayer(var_0) {
-  if(!isdefined(self.pers["countermvp_streak"]) || !var_0)
+  if(!isDefined(self.pers["countermvp_streak"]) || !var_0)
     self.pers["countermvp_streak"] = 0;
 
   self.pers["countermvp_streak"]++;
@@ -326,7 +324,7 @@ killedbestenemyplayer(var_0) {
 }
 
 ishighestscoringplayer(var_0) {
-  if(!isdefined(var_0.score) || var_0.score < 1)
+  if(!isDefined(var_0.score) || var_0.score < 1)
     return 0;
 
   var_1 = level.players;
@@ -338,8 +336,8 @@ ishighestscoringplayer(var_0) {
 
   var_3 = var_0.score;
 
-  for (var_4 = 0; var_4 < var_1.size; var_4++) {
-    if(!isdefined(var_1[var_4].score)) {
+  for(var_4 = 0; var_4 < var_1.size; var_4++) {
+    if(!isDefined(var_1[var_4].score)) {
       continue;
     }
     if(var_1[var_4].score < 1) {
@@ -358,7 +356,7 @@ ishighestscoringplayer(var_0) {
 ch_kills(var_0) {
   var_0.victim playerdied();
 
-  if(!isdefined(var_0.attacker) || !isplayer(var_0.attacker))
+  if(!isDefined(var_0.attacker) || !isplayer(var_0.attacker))
     return;
   else
     var_1 = var_0.attacker;
@@ -377,7 +375,7 @@ ch_kills(var_0) {
   var_10 = var_0.time;
   var_11 = 0;
 
-  if(isdefined(var_1.pickedupweaponfrom[var_0.sweapon]) && !maps\mp\_utility::ismeleemod(var_9))
+  if(isDefined(var_1.pickedupweaponfrom[var_0.sweapon]) && !maps\mp\_utility::ismeleemod(var_9))
     var_11++;
 
   var_12 = maps\mp\_utility::iskillstreakweapon(var_0.sweapon);
@@ -390,7 +388,7 @@ ch_kills(var_0) {
   var_15 = 0;
   var_16 = 0;
 
-  if(isdefined(var_0.modifiers["longshot"])) {
+  if(isDefined(var_0.modifiers["longshot"])) {
     var_15 = 1;
     var_16++;
   }
@@ -408,7 +406,7 @@ ch_kills(var_0) {
 
   var_20 = "";
 
-  if(isdefined(var_0.attackerstance))
+  if(isDefined(var_0.attackerstance))
     var_20 = var_0.attackerstance;
 
   var_21 = 0;
@@ -445,13 +443,13 @@ ch_kills(var_0) {
     if(maps\mp\_utility::iscacsecondaryweapon(var_28.sweapon) && !maps\mp\_utility::ismeleemod(var_28.smeansofdeath))
       var_3++;
 
-    if(isdefined(var_28.modifiers["longshot"]))
+    if(isDefined(var_28.modifiers["longshot"]))
       var_16++;
 
-    if(!isdefined(var_1.farsightchallengecounter))
+    if(!isDefined(var_1.farsightchallengecounter))
       var_1.farsightchallengecounter = 0;
 
-    if(!isdefined(var_1.humiliationfinderscounter))
+    if(!isDefined(var_1.humiliationfinderscounter))
       var_1.humiliationfinderscounter = [];
 
     if(var_16 == var_1.farsightchallengecounter * 3 + 3 && var_15) {
@@ -465,8 +463,8 @@ ch_kills(var_0) {
     if(var_10 - var_28.time < 10000)
       var_4++;
 
-    if(isdefined(var_1.pickedupweaponfrom[var_28.sweapon]) && !maps\mp\_utility::ismeleemod(var_28.smeansofdeath)) {
-      if(!isdefined(var_1.humiliationfinderscounter[var_28.sweapon]))
+    if(isDefined(var_1.pickedupweaponfrom[var_28.sweapon]) && !maps\mp\_utility::ismeleemod(var_28.smeansofdeath)) {
+      if(!isDefined(var_1.humiliationfinderscounter[var_28.sweapon]))
         var_1.humiliationfinderscounter[var_28.sweapon] = 0;
 
       var_11++;
@@ -478,18 +476,18 @@ ch_kills(var_0) {
     }
 
     if(maps\mp\_utility::iskillstreakweapon(var_28.sweapon)) {
-      if(!isdefined(var_8[var_28.sweapon]))
+      if(!isDefined(var_8[var_28.sweapon]))
         var_8[var_28.sweapon] = 0;
 
       var_8[var_28.sweapon]++;
       continue;
     }
 
-    if(isdefined(level.onelefttime[var_1.team]) && var_28.time > level.onelefttime[var_1.team])
+    if(isDefined(level.onelefttime[var_1.team]) && var_28.time > level.onelefttime[var_1.team])
       var_2++;
 
-    if(isdefined(var_28.victim)) {
-      if(!isdefined(var_5[var_28.victim.name]) && !isdefined(var_6[var_28.sweapon]) && !maps\mp\_utility::iskillstreakweapon(var_28.sweapon))
+    if(isDefined(var_28.victim)) {
+      if(!isDefined(var_5[var_28.victim.name]) && !isDefined(var_6[var_28.sweapon]) && !maps\mp\_utility::iskillstreakweapon(var_28.sweapon))
         var_7++;
 
       var_5[var_28.victim.name] = var_28.victim.name;
@@ -524,7 +522,7 @@ ch_kills(var_0) {
     }
   }
 
-  if(isdefined(var_1.finalkill))
+  if(isDefined(var_1.finalkill))
     var_1 processchallenge("ch_theedge");
 
   if(var_1.pers["cur_kill_streak"] == 10) {
@@ -538,7 +536,7 @@ ch_kills(var_0) {
     if(level.teambased) {
       var_33 = var_0.victim.pers["team"];
 
-      if(isdefined(var_33) && var_33 != var_1.pers["team"]) {
+      if(isDefined(var_33) && var_33 != var_1.pers["team"]) {
         if(ishighestscoringplayer(var_0.victim) && level.players.size >= 6)
           var_1 killedbestenemyplayer(1);
         else
@@ -559,7 +557,7 @@ ch_kills(var_0) {
   else if(var_34 == "mp_bog_summer")
     var_1 processchallenge("ch_summer_kills");
 
-  if(isdefined(var_1.pickedupweaponfrom[var_0.sweapon])) {
+  if(isDefined(var_1.pickedupweaponfrom[var_0.sweapon])) {
     if(!maps\mp\_utility::ismeleemod(var_9))
       var_1 processchallenge("ch_kills_stolen");
   }
@@ -611,20 +609,20 @@ ch_kills(var_0) {
         var_1 notify("increment_ar_headshots");
     }
 
-    if(isdefined(level.challengeinfo["ch_marksman_" + var_30]) && var_1 getchallengestatus("ch_marksman_" + var_30) > 0)
+    if(isDefined(level.challengeinfo["ch_marksman_" + var_30]) && var_1 getchallengestatus("ch_marksman_" + var_30) > 0)
       var_1 processchallenge("ch_marksman_" + var_30);
 
-    if(isdefined(level.challengeinfo["ch_marksman_" + var_30 + "_2"]) && var_1 getchallengestatus("ch_marksman_" + var_30 + "_2") > 0)
+    if(isDefined(level.challengeinfo["ch_marksman_" + var_30 + "_2"]) && var_1 getchallengestatus("ch_marksman_" + var_30 + "_2") > 0)
       var_1 processchallenge("ch_marksman_" + var_30 + "_2");
 
-    if(isdefined(level.challengeinfo["ch_marksman_" + var_30 + "_3"]) && var_1 getchallengestatus("ch_marksman_" + var_30 + "_3") > 0)
+    if(isDefined(level.challengeinfo["ch_marksman_" + var_30 + "_3"]) && var_1 getchallengestatus("ch_marksman_" + var_30 + "_3") > 0)
       var_1 processchallenge("ch_marksman_" + var_30 + "_3");
 
-    if(isdefined(level.challengeinfo["ch_marksman_" + var_30 + "_4"]) && var_1 getchallengestatus("ch_marksman_" + var_30 + "_4") > 0)
+    if(isDefined(level.challengeinfo["ch_marksman_" + var_30 + "_4"]) && var_1 getchallengestatus("ch_marksman_" + var_30 + "_4") > 0)
       var_1 processchallenge("ch_marksman_" + var_30 + "_4");
 
     if(var_14) {
-      if(isdefined(level.challengeinfo["ch_expert_" + var_30]) && var_1 getchallengestatus("ch_expert_" + var_30) > 0)
+      if(isDefined(level.challengeinfo["ch_expert_" + var_30]) && var_1 getchallengestatus("ch_expert_" + var_30) > 0)
         var_1 processchallenge("ch_expert_" + var_30);
     }
   }
@@ -634,16 +632,16 @@ ch_kills(var_0) {
     // add a check for processing marksman challenges for melee mod kills?
     challenge = "ch_marksman_" + var_30;
 
-    if(isdefined(level.challengeinfo["ch_marksman_" + var_30]) && var_1 getchallengestatus("ch_marksman_" + var_30) > 0)
+    if(isDefined(level.challengeinfo["ch_marksman_" + var_30]) && var_1 getchallengestatus("ch_marksman_" + var_30) > 0)
       var_1 processchallenge("ch_marksman_" + var_30);
 
-    if(isdefined(level.challengeinfo["ch_marksman_" + var_30 + "_2"]) && var_1 getchallengestatus("ch_marksman_" + var_30 + "_2") > 0)
+    if(isDefined(level.challengeinfo["ch_marksman_" + var_30 + "_2"]) && var_1 getchallengestatus("ch_marksman_" + var_30 + "_2") > 0)
       var_1 processchallenge("ch_marksman_" + var_30 + "_2");
 
-    if(isdefined(level.challengeinfo["ch_marksman_" + var_30 + "_3"]) && var_1 getchallengestatus("ch_marksman_" + var_30 + "_3") > 0)
+    if(isDefined(level.challengeinfo["ch_marksman_" + var_30 + "_3"]) && var_1 getchallengestatus("ch_marksman_" + var_30 + "_3") > 0)
       var_1 processchallenge("ch_marksman_" + var_30 + "_3");
 
-    if(isdefined(level.challengeinfo["ch_marksman_" + var_30 + "_4"]) && var_1 getchallengestatus("ch_marksman_" + var_30 + "_4") > 0)
+    if(isDefined(level.challengeinfo["ch_marksman_" + var_30 + "_4"]) && var_1 getchallengestatus("ch_marksman_" + var_30 + "_4") > 0)
       var_1 processchallenge("ch_marksman_" + var_30 + "_4");
   }
 
@@ -705,13 +703,13 @@ ch_kills(var_0) {
   }
 
   if(issubstr(var_9, "MOD_GRENADE") || issubstr(var_9, "MOD_PROJECTILE") || issubstr(var_9, "MOD_EXPLOSIVE") && !var_13 && !var_12) {
-    if(isdefined(var_0.victim.explosiveinfo["damageTime"])) {
+    if(isDefined(var_0.victim.explosiveinfo["damageTime"])) {
       if(var_0.sweapon == "none")
         var_0.sweapon = var_0.victim.explosiveinfo["weapon"];
 
       var_42 = var_10 + "_" + var_0.victim.explosiveinfo["damageId"];
 
-      if(!isdefined(var_1.explosivekills[var_42]))
+      if(!isDefined(var_1.explosivekills[var_42]))
         var_1.explosivekills[var_42] = 0;
 
       var_1 thread clearidshortly(var_42);
@@ -783,7 +781,7 @@ ch_kills(var_0) {
       }
     }
 
-    if(isdefined(var_0.einflictor.classname) && var_0.einflictor.classname == "scriptable")
+    if(isDefined(var_0.einflictor.classname) && var_0.einflictor.classname == "scriptable")
       var_1 processchallenge("ch_kills_vandalism");
   }
 
@@ -843,22 +841,22 @@ ch_kills(var_0) {
   if(level.gametype == "gun")
     var_1 processchallenge("ch_ggkills");
 
-  if(isdefined(var_0.victim.isplanting) && var_0.victim.isplanting)
+  if(isDefined(var_0.victim.isplanting) && var_0.victim.isplanting)
     var_1 processchallenge("ch_bombplanter");
 
-  if(isdefined(var_0.victim.isdefusing) && var_0.victim.isdefusing)
+  if(isDefined(var_0.victim.isdefusing) && var_0.victim.isdefusing)
     var_1 processchallenge("ch_bombdefender");
 
-  if(isdefined(var_0.victim.isbombcarrier) && var_0.victim.isbombcarrier)
+  if(isDefined(var_0.victim.isbombcarrier) && var_0.victim.isbombcarrier)
     var_1 processchallenge("ch_bombdown");
 
-  if(isdefined(var_1.inlaststand) && var_1.inlaststand)
+  if(isDefined(var_1.inlaststand) && var_1.inlaststand)
     var_1 processchallenge("ch_laststandvet");
 
-  if(isdefined(var_1.pers["killed_players"][var_0.victim.guid]) && var_1.pers["killed_players"][var_0.victim.guid] == 5)
+  if(isDefined(var_1.pers["killed_players"][var_0.victim.guid]) && var_1.pers["killed_players"][var_0.victim.guid] == 5)
     var_1 processchallenge("ch_rival");
 
-  if(isdefined(var_1.tookweaponfrom[var_0.sweapon])) {
+  if(isDefined(var_1.tookweaponfrom[var_0.sweapon])) {
     if(var_1.tookweaponfrom[var_0.sweapon] == var_0.victim && !maps\mp\_utility::ismeleemod(var_0.smeansofdeath))
       var_1 processchallenge("ch_cruelty");
   }
@@ -870,7 +868,7 @@ ch_kills(var_0) {
       var_1 processchallenge("ch_thebrink");
   }
 
-  if(isdefined(var_1.patient_zero)) {
+  if(isDefined(var_1.patient_zero)) {
     var_1.patient_zero++;
 
     if(var_1.patient_zero == 3)
@@ -881,7 +879,7 @@ ch_kills(var_0) {
 get_challenge_weapon_class(var_0, var_1) {
   var_2 = maps\mp\_utility::getweaponclass(var_0);
 
-  if(!isdefined(var_1)) {
+  if(!isDefined(var_1)) {
     var_1 = maps\mp\_utility::getbaseweaponname(var_0);
 
     if(maps\mp\_utility::islootweapon(var_1))
@@ -933,12 +931,12 @@ ch_bulletdamagecommon(var_0, var_1, var_2, var_3) {
     var_1 processchallenge("ch_slowbutsure");
 
   if(var_1.pers["bulletStreak"] == 2) {
-    if(isdefined(var_0.modifiers["headshot"])) {
+    if(isDefined(var_0.modifiers["headshot"])) {
       foreach(var_5 in var_1.killsthislife) {
         if(var_5.time != var_2) {
           continue;
         }
-        if(!isdefined(var_0.modifiers["headshot"])) {
+        if(!isDefined(var_0.modifiers["headshot"])) {
           continue;
         }
         var_1 processchallenge("ch_allpro");
@@ -954,13 +952,13 @@ ch_bulletdamagecommon(var_0, var_1, var_2, var_3) {
   }
 
   if(var_3 == "weapon_pistol") {
-    if(isdefined(var_0.victim.attackerdata) && isdefined(var_0.victim.attackerdata[var_1.guid])) {
-      if(isdefined(var_0.victim.attackerdata[var_1.guid].isprimary))
+    if(isDefined(var_0.victim.attackerdata) && isDefined(var_0.victim.attackerdata[var_1.guid])) {
+      if(isDefined(var_0.victim.attackerdata[var_1.guid].isprimary))
         var_1 processchallenge("ch_fastswap");
     }
   }
 
-  if(!isdefined(var_1.infinalstand) || !var_1.infinalstand) {
+  if(!isDefined(var_1.infinalstand) || !var_1.infinalstand) {
     var_7 = maps\mp\_utility::getbaseweaponname(var_0.sweapon);
 
     if(var_0.attackerstance == "crouch") {
@@ -1065,12 +1063,12 @@ playerdamaged(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
   self endon("disconnect");
 
-  if(isdefined(var_1))
+  if(isDefined(var_1))
     var_1 endon("disconnect");
 
   wait 0.05;
   maps\mp\_utility::waittillslowprocessallowed();
-  var_6 = spawnstruct();
+  var_6 = spawnStruct();
   var_6.victim = self;
   var_6.einflictor = var_0;
   var_6.attacker = var_1;
@@ -1081,7 +1079,7 @@ playerdamaged(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6.victimonground = var_6.victim isonground();
 
   if(isplayer(var_1)) {
-    var_6.attackerinlaststand = isdefined(var_6.attacker.laststand);
+    var_6.attackerinlaststand = isDefined(var_6.attacker.laststand);
     var_6.attackeronground = var_6.attacker isonground();
     var_6.attackerstance = var_6.attacker getstance();
   } else {
@@ -1096,11 +1094,11 @@ playerdamaged(var_0, var_1, var_2, var_3, var_4, var_5) {
 playerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   self.anglesondeath = self getplayerangles();
 
-  if(isdefined(var_1))
+  if(isDefined(var_1))
     var_1.anglesonkill = var_1 getplayerangles();
 
   self endon("disconnect");
-  var_9 = spawnstruct();
+  var_9 = spawnStruct();
   var_9.victim = self;
   var_9.einflictor = var_0;
   var_9.attacker = var_1;
@@ -1115,7 +1113,7 @@ playerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   var_9.victimonground = var_9.victim isonground();
 
   if(isplayer(var_1)) {
-    var_9.attackerinlaststand = isdefined(var_9.attacker.laststand);
+    var_9.attackerinlaststand = isDefined(var_9.attacker.laststand);
     var_9.attackeronground = var_9.attacker isonground();
     var_9.attackerstance = var_9.attacker getstance();
   } else {
@@ -1126,9 +1124,9 @@ playerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
 
   var_10 = 0;
 
-  if(isdefined(var_9.einflictor) && isdefined(var_9.einflictor.firedads))
+  if(isDefined(var_9.einflictor) && isDefined(var_9.einflictor.firedads))
     var_10 = var_9.einflictor.firedads;
-  else if(isdefined(var_1) && isplayer(var_1))
+  else if(isDefined(var_1) && isplayer(var_1))
     var_10 = var_1 playerads();
 
   var_9.was_ads = 0;
@@ -1138,14 +1136,14 @@ playerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
 
   waitandprocessplayerkilledcallback(var_9);
 
-  if(isdefined(var_1) && maps\mp\_utility::isreallyalive(var_1))
+  if(isDefined(var_1) && maps\mp\_utility::isreallyalive(var_1))
     var_1.killsthislife[var_1.killsthislife.size] = var_9;
 
   var_9.attacker notify("playerKilledChallengesProcessed");
 }
 
 vehiclekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  var_7 = spawnstruct();
+  var_7 = spawnStruct();
   var_7.vehicle = var_1;
   var_7.victim = var_0;
   var_7.einflictor = var_2;
@@ -1158,12 +1156,12 @@ vehiclekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 }
 
 waitandprocessplayerkilledcallback(var_0) {
-  if(isdefined(var_0.attacker))
+  if(isDefined(var_0.attacker))
     var_0.attacker endon("disconnect");
 
   self.processingkilledchallenges = 1;
 
-  if(!isdefined(var_0.duetodisconnect) || !var_0.duetodisconnect) {
+  if(!isDefined(var_0.duetodisconnect) || !var_0.duetodisconnect) {
     wait 0.05;
     maps\mp\_utility::waittillslowprocessallowed();
   }
@@ -1173,7 +1171,7 @@ waitandprocessplayerkilledcallback(var_0) {
 }
 
 playerassist() {
-  var_0 = spawnstruct();
+  var_0 = spawnStruct();
   var_0.player = self;
   domissioncallback("playerAssist", var_0);
 }
@@ -1182,7 +1180,7 @@ usehardpoint(var_0) {
   self endon("disconnect");
   wait 0.05;
   maps\mp\_utility::waittillslowprocessallowed();
-  var_1 = spawnstruct();
+  var_1 = spawnStruct();
   var_1.player = self;
   var_1.hardpointtype = var_0;
   domissioncallback("playerHardpoint", var_1);
@@ -1193,12 +1191,12 @@ roundbegin() {
 }
 
 roundend(var_0) {
-  var_1 = spawnstruct();
+  var_1 = spawnStruct();
 
   if(level.teambased) {
     var_2 = "allies";
 
-    for (var_3 = 0; var_3 < level.placement[var_2].size; var_3++) {
+    for(var_3 = 0; var_3 < level.placement[var_2].size; var_3++) {
       var_1.player = level.placement[var_2][var_3];
       var_1.winner = var_2 == var_0;
       var_1.place = var_3;
@@ -1207,16 +1205,16 @@ roundend(var_0) {
 
     var_2 = "axis";
 
-    for (var_3 = 0; var_3 < level.placement[var_2].size; var_3++) {
+    for(var_3 = 0; var_3 < level.placement[var_2].size; var_3++) {
       var_1.player = level.placement[var_2][var_3];
       var_1.winner = var_2 == var_0;
       var_1.place = var_3;
       domissioncallback("roundEnd", var_1);
     }
   } else {
-    for (var_3 = 0; var_3 < level.placement["all"].size; var_3++) {
+    for(var_3 = 0; var_3 < level.placement["all"].size; var_3++) {
       var_1.player = level.placement["all"][var_3];
-      var_1.winner = isdefined(var_0) && isplayer(var_0) && var_1.player == var_0;
+      var_1.winner = isDefined(var_0) && isplayer(var_0) && var_1.player == var_0;
       var_1.place = var_3;
       domissioncallback("roundEnd", var_1);
     }
@@ -1230,14 +1228,14 @@ domissioncallback(callback, data) {
   if(getdvarint("disable_challenges") > 0) {
     return;
   }
-  if(!isdefined(level.missioncallbacks[callback])) {
+  if(!isDefined(level.missioncallbacks[callback])) {
     return;
   }
-  if(isdefined(data)) {
-    for (i = 0; i < level.missioncallbacks[callback].size; i++)
+  if(isDefined(data)) {
+    for(i = 0; i < level.missioncallbacks[callback].size; i++)
       thread[[level.missioncallbacks[callback][i]]](data);
   } else {
-    for (i = 0; i < level.missioncallbacks[callback].size; i++)
+    for(i = 0; i < level.missioncallbacks[callback].size; i++)
       thread[[level.missioncallbacks[callback][i]]]();
   }
 }
@@ -1248,10 +1246,10 @@ monitorsprintdistance() {
   self endon("death");
   self endon("disconnect");
 
-  if(!isdefined(self.pers["totalGameSprintDist"]))
+  if(!isDefined(self.pers["totalGameSprintDist"]))
     self.pers["totalGameSprintDist"] = 0;
 
-  for (;;) {
+  for(;;) {
     self waittill("sprint_begin");
     self.sprintdistthissprint = 0;
     monitorsinglesprintdistance();
@@ -1279,7 +1277,7 @@ monitorsinglesprintdistance() {
   self endon("sprint_end");
   var_0 = self.origin;
 
-  for (;;) {
+  for(;;) {
     wait 0.1;
     self.sprintdistthissprint += distance(self.origin, var_0);
     var_0 = self.origin;
@@ -1292,7 +1290,7 @@ monitorfalldistance() {
 
   self.pers["midairStreak"] = 0;
 
-  for (;;) {
+  for(;;) {
     if(!isalive(self)) {
       self waittill("spawned_player");
       continue;
@@ -1302,7 +1300,7 @@ monitorfalldistance() {
       self.pers["midairStreak"] = 0;
       var_0 = self.origin[2];
 
-      while (!self isonground()) {
+      while(!self isonground()) {
         if(self.origin[2] > var_0)
           var_0 = self.origin[2];
 
@@ -1330,7 +1328,7 @@ remove_tracking_on_disconnect(var_0) {
   level endon("game_ended");
   self waittill("disconnect");
 
-  if(isdefined(game[var_0][self.guid]))
+  if(isDefined(game[var_0][self.guid]))
     game[var_0][self.guid] = undefined;
 }
 
@@ -1351,10 +1349,10 @@ monitorbombuse() {
   self endon("disconnect");
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     var_0 = common_scripts\utility::waittill_any_return("bomb_planted", "bomb_defused");
 
-    if(!isdefined(var_0)) {
+    if(!isDefined(var_0)) {
       continue;
     }
     if(var_0 == "bomb_defused")
@@ -1365,7 +1363,7 @@ monitorbombuse() {
 monitorlivetime() {
   self endon("disconnect");
   level endon("game_ended");
-  for (;;) {
+  for(;;) {
     self waittill("spawned_player");
     thread survivalistchallenge();
   }
@@ -1376,7 +1374,7 @@ survivalistchallenge() {
   self endon("disconnect");
   wait 300;
 
-  if(isdefined(self))
+  if(isDefined(self))
     processchallenge("ch_survivalist");
 }
 
@@ -1389,7 +1387,7 @@ monitorstreaks() {
   self.pers["shieldKillStreak"] = 0;
   thread monitormisc();
 
-  for (;;) {
+  for(;;) {
     self waittill("death");
     self.pers["airstrikeStreak"] = 0;
     self.pers["meleeKillStreak"] = 0;
@@ -1401,7 +1399,7 @@ monitormisc() {
   self endon("disconnect");
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     var_0 = common_scripts\utility::waittill_any_return_no_endon_death("destroyed_explosive", "begin_airstrike", "destroyed_helicopter", "destroyed_car", "crushed_enemy");
     monitormisccallback(var_0);
   }
@@ -1438,7 +1436,7 @@ healthregenerated() {
   }
   thread resetbrinkofdeathkillstreakshortly();
 
-  if(isdefined(self.lastdamagewasfromenemy) && self.lastdamagewasfromenemy) {
+  if(isDefined(self.lastdamagewasfromenemy) && self.lastdamagewasfromenemy) {
     self.healthregenerationstreak++;
 
     if(self.healthregenerationstreak >= 5) {
@@ -1482,7 +1480,7 @@ processchallenge(baseName, progressInc, forceSetProgress) {
   if(!maps\mp\_utility::rankingenabled()) {
     return;
   }
-  if(!isdefined(progressInc))
+  if(!isDefined(progressInc))
     progressInc = 1;
 
   missionStatus = getchallengestatus(baseName);
@@ -1495,7 +1493,7 @@ processchallenge(baseName, progressInc, forceSetProgress) {
   }
   currentProgress = maps\mp\gametypes\_hud_util::ch_getprogress(baseName);
 
-  if(isdefined(forceSetProgress) && forceSetProgress) {
+  if(isDefined(forceSetProgress) && forceSetProgress) {
     newProgress = progressInc;
     assertex(newProgress >= currentProgress, "Attempted progress regression (forceSet) for challenge '" + baseName + "' - from " + currentProgress + " to " + newProgress + " for player " + self.name);
   } else if(maps\mp\gametypes\_hud_util::isweaponclasschallenge(baseName)) {
@@ -1508,7 +1506,7 @@ processchallenge(baseName, progressInc, forceSetProgress) {
 
   var_7 = 0;
 
-  for (var_8 = level.challengeinfo[baseName]["targetval"][missionStatus]; isdefined(var_8) && newProgress >= var_8; var_8 = level.challengeinfo[baseName]["targetval"][missionStatus + var_7])
+  for(var_8 = level.challengeinfo[baseName]["targetval"][missionStatus]; isDefined(var_8) && newProgress >= var_8; var_8 = level.challengeinfo[baseName]["targetval"][missionStatus + var_7])
     var_7++;
 
   if(currentProgress < newProgress)
@@ -1517,14 +1515,14 @@ processchallenge(baseName, progressInc, forceSetProgress) {
   if(var_7 > 0) {
     var_9 = missionStatus;
 
-    while (var_7) {
+    while(var_7) {
       thread giverankxpafterwait(baseName, missionStatus);
       var_10 = getchallengeid(baseName, missionStatus);
       self challengenotification(var_10);
       var_11 = common_scripts\utility::tostring(var_10);
       var_12 = int(getsubstr(var_11, 0, var_11.size - 2));
 
-      if(!isdefined(game["challengeStruct"]["challengesCompleted"][self.guid]))
+      if(!isDefined(game["challengeStruct"]["challengesCompleted"][self.guid]))
         game["challengeStruct"]["challengesCompleted"][self.guid] = [];
 
       var_13 = 0;
@@ -1566,7 +1564,7 @@ getmarksmanunlockattachment(var_0, var_1) {
 getlastchallengetier(var_0) {
   var_1 = 0;
 
-  if(isdefined(level.challengeinfo[var_0]) && isdefined(level.challengeinfo[var_0]["targetval"].size))
+  if(isDefined(level.challengeinfo[var_0]) && isDefined(level.challengeinfo[var_0]["targetval"].size))
     var_1 = level.challengeinfo[var_0]["targetval"].size;
 
   return var_1;
@@ -1586,7 +1584,7 @@ getchallengetiernumber(var_0) {
 ischallengeresetafterprestige(var_0, var_1) {
   var_2 = tablelookupbyrow("mp/allChallengesTable.csv", var_0, 45);
 
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     var_1 = tablelookupbyrow("mp/allChallengesTable.csv", var_0, 6);
 
   if(var_2 != "" && int(var_2) && int(var_1) != 4)
@@ -1663,16 +1661,16 @@ ischallengeunlocked(var_0, var_1) {
 updatechallenges() {
   self.challengedata = [];
 
-  if(!isdefined(self.ch_unique_earned_streaks))
+  if(!isDefined(self.ch_unique_earned_streaks))
     self.ch_unique_earned_streaks = [];
 
-  if(!isdefined(game["challengeStruct"]))
+  if(!isDefined(game["challengeStruct"]))
     game["challengeStruct"] = [];
 
-  if(!isdefined(game["challengeStruct"]["limitedChallengesReset"]))
+  if(!isDefined(game["challengeStruct"]["limitedChallengesReset"]))
     game["challengeStruct"]["limitedChallengesReset"] = [];
 
-  if(!isdefined(game["challengeStruct"]["challengesCompleted"]))
+  if(!isDefined(game["challengeStruct"]["challengesCompleted"]))
     game["challengeStruct"]["challengesCompleted"] = [];
 
   self endon("disconnect");
@@ -1699,7 +1697,7 @@ updatechallenges() {
     }
     var_4 = maps\mp\gametypes\_hud_util::ch_getstate(var_5);
 
-    if(maps\mp\gametypes\_hud_util::istimelimitedchallenge(var_5) && !isdefined(game["challengeStruct"]["limitedChallengesReset"][self.guid])) {
+    if(maps\mp\gametypes\_hud_util::istimelimitedchallenge(var_5) && !isDefined(game["challengeStruct"]["limitedChallengesReset"][self.guid])) {
       maps\mp\gametypes\_hud_util::ch_setprogress(var_5, 0);
       var_4 = 0;
     }
@@ -1732,17 +1730,17 @@ gettierfromtable(var_0, var_1) {
 }
 
 isweaponchallenge(var_0) {
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     return 0;
 
   var_1 = getchallengefilter(var_0);
 
-  if(isdefined(var_1) && var_1 == "riotshield")
+  if(isDefined(var_1) && var_1 == "riotshield")
     return 1;
 
   var_2 = maps\mp\_utility::getweaponnametokens(var_0);
 
-  for (var_3 = 0; var_3 < var_2.size; var_3++) {
+  for(var_3 = 0; var_3 < var_2.size; var_3++) {
     var_4 = var_2[var_3];
 
     if(var_4 == "iw5" || var_4 == "iw6" || var_4 == "h1" || var_4 == "h2")
@@ -1795,19 +1793,19 @@ getweaponattachmentfromchallenge(var_0) {
   var_3 = maps\mp\_utility::getweaponnametokens(var_2);
   var_4 = undefined;
 
-  if(isdefined(var_3[2]) && maps\mp\_utility::isattachment(var_3[2]))
+  if(isDefined(var_3[2]) && maps\mp\_utility::isattachment(var_3[2]))
     var_4 = var_3[2];
 
   return var_4;
 }
 
 iskillstreakchallenge(var_0) {
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     return 0;
 
   var_1 = getchallengefilter(var_0);
 
-  if(isdefined(var_1) && (var_1 == "killstreaks_assault" || var_1 == "killstreaks_support"))
+  if(isDefined(var_1) && (var_1 == "killstreaks_assault" || var_1 == "killstreaks_support"))
     return 1;
 
   return 0;
@@ -1836,7 +1834,7 @@ challenge_rewardval(var_0, var_1, var_2) {
 challenge_parentchallenge(var_0, var_1) {
   var_2 = tablelookup(var_0, 0, var_1, 43);
 
-  if(!isdefined(var_2))
+  if(!isDefined(var_2))
     var_2 = "";
 
   return var_2;
@@ -1846,7 +1844,7 @@ buildchallengetableinfo(var_0, var_1) {
   var_2 = 0;
   var_3 = 0;
 
-  for (;;) {
+  for(;;) {
     var_3++;
     var_4 = tablelookupbyrow(var_0, var_3, 0);
 
@@ -1870,19 +1868,19 @@ buildchallengetableinfo(var_0, var_1) {
       var_6 = getweaponfromchallenge(var_4);
       var_7 = getweaponattachmentfromchallenge(var_4);
 
-      if(isdefined(var_6))
+      if(isDefined(var_6))
         level.challengeinfo[var_4]["weapon"] = var_6;
 
-      if(isdefined(var_7))
+      if(isDefined(var_7))
         level.challengeinfo[var_4]["attachment"] = var_7;
     } else if(iskillstreakchallenge(var_4)) {
       var_8 = getkillstreakfromchallenge(var_4);
 
-      if(isdefined(var_8))
+      if(isDefined(var_8))
         level.challengeinfo[var_4]["killstreak"] = var_8;
     }
 
-    for (var_9 = 1; var_9 < 10; var_9++) {
+    for(var_9 = 1; var_9 < 10; var_9++) {
       var_10 = challenge_targetval(var_0, var_4, var_9);
       var_11 = challenge_rewardval(var_0, var_4, var_9);
 
@@ -1915,7 +1913,7 @@ monitorprocesschallenge() {
   self endon("disconnect");
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     if(!mayprocesschallenges()) {
       return;
     }
@@ -1928,10 +1926,10 @@ monitorkillstreakprogress() {
   self endon("disconnect");
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     self waittill("got_killstreak", var_0);
 
-    if(!isdefined(var_0))
+    if(!isDefined(var_0))
       continue;
   }
 }
@@ -1949,7 +1947,7 @@ playerhasammo() {
 
     var_3 = weaponaltweaponname(var_2);
 
-    if(!isdefined(var_3) || var_3 == "none") {
+    if(!isDefined(var_3) || var_3 == "none") {
       continue;
     }
     if(self getweaponammoclip(var_3))
@@ -1965,7 +1963,7 @@ monitoradstime() {
 
   self.adstime = 0.0;
 
-  for (;;) {
+  for(;;) {
     if(self playerads() == 1)
       self.adstime += 0.05;
     else
@@ -1981,7 +1979,7 @@ monitorpronetime() {
   self.pronetime = undefined;
   var_0 = 0;
 
-  for (;;) {
+  for(;;) {
     var_1 = self getstance();
 
     if(var_1 == "prone" && var_0 == 0) {
@@ -2002,7 +2000,7 @@ monitorholdbreath() {
 
   self.holdingbreath = 0;
 
-  for (;;) {
+  for(;;) {
     self waittill("hold_breath");
     self.holdingbreath = 1;
     self waittill("release_breath");
@@ -2016,7 +2014,7 @@ monitormantle() {
 
   self.mantling = 0;
 
-  for (;;) {
+  for(;;) {
     self waittill("jumped");
     var_0 = self getcurrentweapon();
     common_scripts\utility::waittill_notify_or_timeout("weapon_change", 1);
@@ -2043,7 +2041,7 @@ monitorweaponswap() {
 
   var_0 = self getcurrentweapon();
 
-  for (;;) {
+  for(;;) {
     self waittill("weapon_change", var_1);
 
     if(var_1 == "none") {
@@ -2071,10 +2069,10 @@ monitorflashbang() {
   self endon("disconnect");
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     self waittill("flashbang", var_0, var_1, var_2, var_3);
 
-    if(isdefined(var_3) && self == var_3) {
+    if(isDefined(var_3) && self == var_3) {
       continue;
     }
     self.lastflashedtime = gettime();
@@ -2085,7 +2083,7 @@ monitorconcussion() {
   self endon("disconnect");
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     self waittill("concussed", var_0);
 
     if(self == var_0) {
@@ -2096,7 +2094,7 @@ monitorconcussion() {
 }
 
 is_lethal_equipment(var_0) {
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     return 0;
 
   switch (var_0) {

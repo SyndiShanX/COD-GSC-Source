@@ -28,7 +28,7 @@ init() {
   level.fx_airstrike_bomb = loadfx("vehicle/exhaust/fx_exhaust_b52_bomber");
   if(maps\mp\gametypes\_tweakables::getTweakableValue("killstreak", "allowairstrike")) {
     maps\mp\gametypes\_hardpoints::registerKillstreak("airstrike_mp", "airstrike_mp", "killstreak_airstrike", "airstrike_used", ::useKillstreakAirstrike, true);
-    maps\mp\gametypes\_hardpoints::registerKillstreakStrings("airstrike_mp", & "KILLSTREAK_EARNED_AIRSTRIKE", & "KILLSTREAK_AIRSTRIKE_NOT_AVAILABLE", & "KILLSTREAK_AIRSTRIKE_INBOUND", & "KILLSTREAK_AIRSTRIKE_INBOUND_NEAR_YOUR_POSITION");
+    maps\mp\gametypes\_hardpoints::registerKillstreakStrings("airstrike_mp", &"KILLSTREAK_EARNED_AIRSTRIKE", &"KILLSTREAK_AIRSTRIKE_NOT_AVAILABLE", &"KILLSTREAK_AIRSTRIKE_INBOUND", &"KILLSTREAK_AIRSTRIKE_INBOUND_NEAR_YOUR_POSITION");
     maps\mp\gametypes\_hardpoints::registerKillstreakDialog("airstrike_mp", "mpl_killstreak_air", "kls_airstrike_used", "", "kls_airstrike_enemy", "", "kls_airstrike_ready");
     maps\mp\gametypes\_hardpoints::registerKillstreakDevDvar("airstrike_mp", "scr_giveairstrike");
   }
@@ -59,7 +59,7 @@ selectAirstrikeLocation(hardpointType) {
 useAirstrike(pos, yaw) {
   if(self maps\mp\_killstreakrules::killstreakStart("airstrike_mp", self.team) == false)
     return false;
-  trace = bullettrace(self.origin + (0, 0, 10000), self.origin, false, undefined);
+  trace = bulletTrace(self.origin + (0, 0, 10000), self.origin, false, undefined);
   pos = (pos[0], pos[1], trace["position"][2] - 514);
   if(maps\mp\gametypes\_tweakables::getTweakableValue("team", "allowHardpointStreakAfterDeath")) {
     ownerDeathCount = self.deathCount;
@@ -98,7 +98,7 @@ getBestPlaneDirection() {
 createKillcams(plane, startPoint, destPoint, flyTime) {
   killcamEntities = [];
   killCamCount = 12;
-  for (i = 0; i < killCamCount; i++) {
+  for(i = 0; i < killCamCount; i++) {
     killcamEntities[killcamEntities.size] = bombrun_killCam(plane, destPoint, flyTime);
   }
   velocity = (destPoint - startPoint) / flyTime;
@@ -106,7 +106,7 @@ createKillcams(plane, startPoint, destPoint, flyTime) {
   return killcamEntities;
 }
 bombrun_killCam(plane, pathEnd, flyTime) {
-  planedir = AnglesToForward(plane.angles);
+  planedir = anglesToForward(plane.angles);
   planeRight = AnglesToRight(plane.angles);
   offset = (0, 0, 50) - (planedir * 400) - (planeRight * 50);
   origin = plane.origin + offset;
@@ -121,7 +121,7 @@ bombrun_killCam(plane, pathEnd, flyTime) {
 dropKillcams(plane, velocity, killcamEntities, killCamCount) {
   plane endon("death");
   count = 0;
-  while (1) {
+  while(1) {
     plane waittill("drop_killcam", height);
     killcamEntities[count] thread dropKillcam(velocity, height);
     count++;
@@ -142,18 +142,18 @@ callStrike_bombEffect(plane, bombsite, pathEnd, flyTime, launchTime, owner, requ
   wait(bombWait - (level.airstrikeBombCount / 2 * bombReleaseWait));
   planedir = anglesToForward(plane.angles);
   scaledBy = getDvarIntDefault(#"scr_airstrikeSpeedScale", planeFlySpeed * bombSpeedScale);
-  velocity = vector_scale(anglestoforward(plane.angles), scaledBy);
+  velocity = vector_scale(anglesToForward(plane.angles), scaledBy);
   thread bomberDropBombs(plane, bombsite, owner);
 }
 bomberDropBombs(plane, bombSite, owner) {
-  while (!targetIsClose(plane, bombsite, 5000))
+  while(!targetIsClose(plane, bombsite, 5000))
     wait(0.05);
   showFx = true;
   sonicBoom = false;
   plane notify("start_bombing");
   count = 0;
   plane SetClientFlag(level.const_flag_bombing);
-  for (dist = targetGetDist(plane, bombsite); dist < 5000; dist = targetGetDist(plane, bombsite)) {
+  for(dist = targetGetDist(plane, bombsite); dist < 5000; dist = targetGetDist(plane, bombsite)) {
     count++;
     bombPoint = getBombPoint(plane.origin);
     bombHeight = distance(plane.origin, bombPoint);
@@ -169,7 +169,7 @@ bomberDropBombs(plane, bombSite, owner) {
 getBombPoint(coord) {
   accuracyRadius = 250;
   randVec = (0, randomint(360), 0);
-  bombPoint = coord + vector_multiply(anglestoforward(randVec), randomFloat(accuracyRadius));
+  bombPoint = coord + vector_multiply(anglesToForward(randVec), randomFloat(accuracyRadius));
   trace = bulletTrace(bombPoint, bombPoint + (0, 0, -10000), false, undefined);
   return trace["position"];
 }
@@ -194,7 +194,7 @@ doPlaneStrike(owner, requiredDeathCount, bombsite, pathStart, pathEnd, bombTime,
   plane.angles = direction;
   wait(0.2);
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i] PlayRumbleOnEntity("rolling_thunder_rumble");
   }
   plane setModel(level.airstrikeModel);
@@ -208,7 +208,7 @@ doPlaneStrike(owner, requiredDeathCount, bombsite, pathStart, pathEnd, bombTime,
   plane delete();
 }
 causeRumble() {
-  while (isDefined(self)) {
+  while(isDefined(self)) {
     position = (self.origin[0], self.origin[1], 0);
     PlayRumbleOnPosition("artillery_rumble", position);
     wait(0.1);
@@ -217,7 +217,7 @@ causeRumble() {
 airstrikeDamageEntsThread(sWeapon) {
   self notify("airstrikeDamageEntsThread");
   self endon("airstrikeDamageEntsThread");
-  for (; level.airstrikeDamagedEntsIndex < level.airstrikeDamagedEntsCount; level.airstrikeDamagedEntsIndex++) {
+  for(; level.airstrikeDamagedEntsIndex < level.airstrikeDamagedEntsCount; level.airstrikeDamagedEntsIndex++) {
     if(!isDefined(level.airstrikeDamagedEnts[level.airstrikeDamagedEntsIndex]))
       continue;
     ent = level.airstrikeDamagedEnts[level.airstrikeDamagedEntsIndex];
@@ -247,7 +247,7 @@ airstrikeLOSRadiusDamage(pos, radius, max, min, owner, eInflictor, sWeapon, brea
   self thread checkPlayersTinitus(pos);
   debugstar(pos + (0, 0, 100), 20 * 100, (1, 0.2, 0.2));
   dist = (100 - max) * radius / (min - max);
-  for (i = 0; i < ents.size; i++) {
+  for(i = 0; i < ents.size; i++) {
     if(ents[i].entity == self)
       continue;
     if(entLOSRadiusDamage(ents[i], pos, radius, max, min, owner, eInflictor)) {
@@ -260,7 +260,7 @@ airstrikeLOSRadiusDamage(pos, radius, max, min, owner, eInflictor, sWeapon, brea
 doAirstrike(origin, owner, team, yaw, height) {
   xOffset = sin(yaw) * -1000;
   yOffset = cos(yaw) * 1000;
-  trace = bullettrace(origin, origin + (0, 0, -4000), false, undefined);
+  trace = bulletTrace(origin, origin + (0, 0, -4000), false, undefined);
   targetpos = trace["position"];
   maxs = level.spawnMaxs[2] + 200;
   mins = level.spawnMins[2] - 200;
@@ -273,8 +273,8 @@ doAirstrike(origin, owner, team, yaw, height) {
   heightIncrease = getDvarIntDefault(#"scr_airstrike_height_increase", 200);
   planeFlyHeight = int(maps\mp\_airsupport::getMinimumFlyHeight()) + heightIncrease;
   planeHalfDistance = 12000;
-  startPoint = origin + vector_scale(anglestoforward(direction), -1 * planeHalfDistance);
-  endPoint = origin + vector_scale(anglestoforward(direction), planeHalfDistance);
+  startPoint = origin + vector_scale(anglesToForward(direction), -1 * planeHalfDistance);
+  endPoint = origin + vector_scale(anglesToForward(direction), planeHalfDistance);
   planeFlyHeight = int(getNoFlyZoneHeightCrossed(startPoint, endPoint, planeFlyHeight));
   startPoint = (startPoint[0], startPoint[1], planeFlyHeight);
   endPoint = (endPoint[0], endPoint[1], planeFlyHeight);
@@ -308,7 +308,7 @@ targetisclose(other, target, closeDist) {
   else
     dir = -1;
   a = flat_origin(other.origin);
-  b = a + vector_multiply(anglestoforward(flat_angle(other.angles)), (dir * 100000));
+  b = a + vector_multiply(anglesToForward(flat_angle(other.angles)), (dir * 100000));
   point = pointOnSegmentNearestToPoint(a, b, target);
   dist = distance(a, point);
   if(dist < closeDist)
@@ -317,7 +317,7 @@ targetisclose(other, target, closeDist) {
     return false;
 }
 targetisinfront(other, target) {
-  forwardvec = anglestoforward(flat_angle(other.angles));
+  forwardvec = anglesToForward(flat_angle(other.angles));
   normalvec = vectorNormalize(flat_origin(target) - other.origin);
   dot = vectordot(forwardvec, normalvec);
   if(dot > 0)
@@ -340,14 +340,14 @@ targetGetDist(other, target) {
   else
     dir = -1;
   a = flat_origin(other.origin);
-  b = a + vector_multiply(anglestoforward(flat_angle(other.angles)), (dir * 100000));
+  b = a + vector_multiply(anglesToForward(flat_angle(other.angles)), (dir * 100000));
   point = pointOnSegmentNearestToPoint(a, b, target);
   dist = distance(a, point);
   return dist;
 }
 checkPlayersTinitus(bomsite) {
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     area = 1000 * 1000;
     if(isDefined(bomsite)) {
       if(DistanceSquared(bomsite, players[i].origin) < area) {

@@ -11,7 +11,7 @@ debug_script_structs() {
   if(isDefined(level.struct)) {
     println("*** Num structs " + level.struct.size);
     println("");
-    for (i = 0; i < level.struct.size; i++) {
+    for(i = 0; i < level.struct.size; i++) {
       struct = level.struct[i];
       if(isDefined(struct.targetname))
         println("---" + i + " : " + struct.targetname);
@@ -42,7 +42,7 @@ resumeTimer() {
 lockTimer() {
   level endon("host_migration_begin");
   level endon("host_migration_end");
-  for (;;) {
+  for(;;) {
     currTime = gettime();
     wait(0.05);
     if(!level.timerStopped && isDefined(level.discardTime))
@@ -65,7 +65,7 @@ Callback_HostMigration() {
   level notify("host_migration_begin");
   thread lockTimer();
   players = level.players;
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     player = players[i];
     player thread hostMigrationTimerThink();
   }
@@ -80,7 +80,7 @@ matchStartTimerConsole_Internal(countTime, matchStartTimer) {
   waittillframeend;
   visionSetNaked("mpIntro", 0);
   level endon("match_start_timer_beginning");
-  while (countTime > 0 && !level.gameEnded) {
+  while(countTime > 0 && !level.gameEnded) {
     matchStartTimer thread maps\mp\gametypes\_hud::fontPulse(level);
     wait(matchStartTimer.inFrames * 0.05);
     matchStartTimer setValue(countTime);
@@ -135,7 +135,7 @@ hostMigrationTimerThink_Internal() {
   level endon("host_migration_begin");
   level endon("host_migration_end");
   self.hostMigrationControlsFrozen = false;
-  while (!isAlive(self)) {
+  while(!isAlive(self)) {
     self waittill("spawned");
   }
   self.hostMigrationControlsFrozen = true;
@@ -168,7 +168,7 @@ waitLongDurationWithHostMigrationPause(duration) {
   assert(duration > 0);
   starttime = gettime();
   endtime = gettime() + duration * 1000;
-  while (gettime() < endtime) {
+  while(gettime() < endtime) {
     waitTillHostMigrationStarts((endtime - gettime()) / 1000);
     if(isDefined(level.hostMigrationTimer)) {
       timePassed = waitTillHostMigrationDone();
@@ -186,9 +186,9 @@ waitLongDurationWithGameEndTimeUpdate(duration) {
   assert(duration > 0);
   starttime = gettime();
   endtime = gettime() + duration * 1000;
-  while (gettime() < endtime) {
+  while(gettime() < endtime) {
     waitTillHostMigrationStarts((endtime - gettime()) / 1000);
-    while (isDefined(level.hostMigrationTimer)) {
+    while(isDefined(level.hostMigrationTimer)) {
       endTime += 1000;
       setGameEndTime(int(endTime));
       wait 1;
@@ -196,11 +196,10 @@ waitLongDurationWithGameEndTimeUpdate(duration) {
   }
   if(gettime() != endtime)
     println("SCRIPT WARNING: gettime() = " + gettime() + " NOT EQUAL TO endtime = " + endtime);
-  while (isDefined(level.hostMigrationTimer)) {
+  while(isDefined(level.hostMigrationTimer)) {
     endTime += 1000;
     setGameEndTime(int(endTime));
     wait 1;
   }
   return gettime() - starttime;
 }
-

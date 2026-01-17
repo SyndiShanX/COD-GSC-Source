@@ -8,7 +8,7 @@
 #include maps\_zombiemode_utility;
 
 init() {
-  trigs = getentarray("betty_purchase", "targetname");
+  trigs = getEntArray("betty_purchase", "targetname");
   for(i = 0; i < trigs.size; i++) {
     model = getEnt(trigs[i].target, "targetname");
     model hide();
@@ -41,7 +41,7 @@ buy_bouncing_betties() {
             model thread maps\_zombiemode_weapons::weapon_show(who);
             self.betties_triggered = true;
           }
-          trigs = getentarray("betty_purchase", "targetname");
+          trigs = getEntArray("betty_purchase", "targetname");
           for(i = 0; i < trigs.size; i++) {
             trigs[i] SetInvisibleToPlayer(who);
           }
@@ -53,7 +53,7 @@ buy_bouncing_betties() {
 
 set_betty_visible() {
   players = getplayers();
-  trigs = getentarray("betty_purchase", "targetname");
+  trigs = getEntArray("betty_purchase", "targetname");
   while(1) {
     for(j = 0; j < players.size; j++) {
       if(!players[j] is_player_placeable_mine("mine_bouncing_betty")) {
@@ -100,7 +100,7 @@ betty_think() {
   trigger = spawn("trigger_radius", self.origin, 9, 80, 64);
   trigger waittill("trigger");
   trigger = trigger;
-  self playsound("betty_activated");
+  self playSound("betty_activated");
   wait(.1);
   fake_model = spawn("script_model", self.origin);
   fake_model setModel(self.model);
@@ -108,10 +108,10 @@ betty_think() {
   tag_origin = spawn("script_model", self.origin);
   tag_origin setModel("tag_origin");
   tag_origin linkto(fake_model);
-  playfxontag(level._effect["betty_trail"], tag_origin, "tag_origin");
+  playFXOnTag(level._effect["betty_trail"], tag_origin, "tag_origin");
   fake_model moveTo(fake_model.origin + (0, 0, 32), .2);
   fake_model waittill("movedone");
-  playfx(level._effect["betty_explode"], fake_model.origin);
+  playFX(level._effect["betty_explode"], fake_model.origin);
   earthquake(1, .4, fake_model.origin, 512);
   if(isDefined(self.owner)) {
     self detonate(self.owner);
@@ -135,7 +135,7 @@ betty_think() {
 betty_smoke_trail() {
   self.tag_origin = spawn("script_model", self.origin);
   self.tag_origin setModel("tag_origin");
-  playfxontag(level._effect["betty_trail"], self.tag_origin, "tag_origin");
+  playFXOnTag(level._effect["betty_trail"], self.tag_origin, "tag_origin");
   self.tag_origin moveTo(self.tag_origin.origin + (0, 0, 100), .15);
 }
 
@@ -179,9 +179,9 @@ show_betty_hint(string) {
   self endon("death");
   self endon("disconnect");
   if(string == "betty_purchased")
-    text = & "ZOMBIE_BETTY_HOWTO";
+    text = &"ZOMBIE_BETTY_HOWTO";
   else
-    text = & "ZOMBIE_BETTY_ALREADY_PURCHASED";
+    text = &"ZOMBIE_BETTY_ALREADY_PURCHASED";
   self setup_client_hintelem();
   self.hintelem setText(text);
   wait(3.5);

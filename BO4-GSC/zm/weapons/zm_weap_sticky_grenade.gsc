@@ -7,7 +7,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm;
 #include scripts\zm_common\zm_equipment;
-
 #namespace sticky_grenade;
 
 autoexec __init__system__() {

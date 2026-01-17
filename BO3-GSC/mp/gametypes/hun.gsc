@@ -24,8 +24,8 @@ function main() {
   globallogic::registerfriendlyfiredelay(level.gametype, 0, 0, 1440);
   level.scoreroundwinbased = 1;
   level.resetplayerscoreeveryround = 1;
-  level.onstartgametype = & onstartgametype;
-  level.givecustomloadout = & givecustomloadout;
+  level.onstartgametype = &onstartgametype;
+  level.givecustomloadout = &givecustomloadout;
   level.helitime = getgametypesetting("objectiveSpawnTime");
   gameobjects::register_allowed_gameobject("dm");
   game["dialog"]["gametype"] = "ffa_start";
@@ -37,17 +37,17 @@ function main() {
 
 function onstartgametype() {
   setclientnamemode("auto_change");
-  util::setobjectivetext("allies", & "OBJECTIVES_DM");
-  util::setobjectivetext("axis", & "OBJECTIVES_DM");
+  util::setobjectivetext("allies", &"OBJECTIVES_DM");
+  util::setobjectivetext("axis", &"OBJECTIVES_DM");
   if(level.splitscreen) {
-    util::setobjectivescoretext("allies", & "OBJECTIVES_DM");
-    util::setobjectivescoretext("axis", & "OBJECTIVES_DM");
+    util::setobjectivescoretext("allies", &"OBJECTIVES_DM");
+    util::setobjectivescoretext("axis", &"OBJECTIVES_DM");
   } else {
-    util::setobjectivescoretext("allies", & "OBJECTIVES_DM_SCORE");
-    util::setobjectivescoretext("axis", & "OBJECTIVES_DM_SCORE");
+    util::setobjectivescoretext("allies", &"OBJECTIVES_DM_SCORE");
+    util::setobjectivescoretext("axis", &"OBJECTIVES_DM_SCORE");
   }
-  util::setobjectivehinttext("allies", & "OBJECTIVES_DM_HINT");
-  util::setobjectivehinttext("axis", & "OBJECTIVES_DM_HINT");
+  util::setobjectivehinttext("allies", &"OBJECTIVES_DM_HINT");
+  util::setobjectivehinttext("axis", &"OBJECTIVES_DM_HINT");
   spawning::create_map_placed_influencers();
   level.spawnmins = (0, 0, 0);
   level.spawnmaxs = (0, 0, 0);
@@ -71,10 +71,8 @@ function onstartgametype() {
 }
 
 function onendgame(winningplayer) {
-  if(isdefined(winningplayer) && isplayer(winningplayer)) {
-    [
-      [level._setplayerscore]
-    ](winningplayer, winningplayer[[level._getplayerscore]]() + 1);
+  if(isDefined(winningplayer) && isplayer(winningplayer)) {
+    [[level._setplayerscore]](winningplayer, winningplayer[[level._getplayerscore]]() + 1);
   }
 }
 
@@ -97,10 +95,10 @@ function givecustomloadout() {
 }
 
 function onscoreclosemusic() {
-  while (!level.gameended) {
+  while(!level.gameended) {
     scorelimit = level.scorelimit;
     scorethreshold = scorelimit * 0.9;
-    for (i = 0; i < level.players.size; i++) {
+    for(i = 0; i < level.players.size; i++) {
       scorecheck = [
         [level._getplayerscore]
       ](level.players[i]);
@@ -147,18 +145,18 @@ function initdroplocations() {
 }
 
 function registercrates() {
-  supplydrop::registercratetype("hunted", "weapon", "smg_standard", 1, & "WEAPON_SMG_STANDARD", undefined, & givehuntedweapon, & huntedcratelandoverride);
-  supplydrop::registercratetype("hunted", "weapon", "ar_standard", 1, & "WEAPON_AR_STANDARD", undefined, & givehuntedweapon, & huntedcratelandoverride);
-  supplydrop::registercratetype("hunted", "weapon", "lmg_light", 1, & "WEAPON_LMG_LIGHT", undefined, & givehuntedweapon, & huntedcratelandoverride);
-  supplydrop::registercratetype("hunted", "weapon", "shotgun_pump", 1, & "WEAPON_SHOTGUN_PUMP", undefined, & givehuntedweapon, & huntedcratelandoverride);
-  supplydrop::registercratetype("hunted", "weapon", "pistol_standard", 1, & "WEAPON_PISTOL_STANDARD", undefined, & givehuntedweapon, & huntedcratelandoverride);
+  supplydrop::registercratetype("hunted", "weapon", "smg_standard", 1, &"WEAPON_SMG_STANDARD", undefined, &givehuntedweapon, &huntedcratelandoverride);
+  supplydrop::registercratetype("hunted", "weapon", "ar_standard", 1, &"WEAPON_AR_STANDARD", undefined, &givehuntedweapon, &huntedcratelandoverride);
+  supplydrop::registercratetype("hunted", "weapon", "lmg_light", 1, &"WEAPON_LMG_LIGHT", undefined, &givehuntedweapon, &huntedcratelandoverride);
+  supplydrop::registercratetype("hunted", "weapon", "shotgun_pump", 1, &"WEAPON_SHOTGUN_PUMP", undefined, &givehuntedweapon, &huntedcratelandoverride);
+  supplydrop::registercratetype("hunted", "weapon", "pistol_standard", 1, &"WEAPON_PISTOL_STANDARD", undefined, &givehuntedweapon, &huntedcratelandoverride);
   supplydrop::setcategorytypeweight("hunted", "weapon", 4);
   supplydrop::setcategorytypeweight("hunted", "killstreak", 1);
   supplydrop::advancedfinalizecratecategory("hunted");
 }
 
 function givehuntedweapon(weapon) {
-  if(isdefined(self.primaryweapon)) {
+  if(isDefined(self.primaryweapon)) {
     self takeweapon(self.primaryweapon);
   }
   self.primaryweapon = weapon;
@@ -173,7 +171,7 @@ function givehuntedlethalgrenade(weapon) {
     self setweaponammostock(weapon, currstock + 1);
     return;
   }
-  if(isdefined(self.lethalgrenade)) {
+  if(isDefined(self.lethalgrenade)) {
     self takeweapon(self.lethalgrenade);
   }
   self.lethalgrenade = weapon;
@@ -187,7 +185,7 @@ function givehuntedtacticalgrenade(weapon) {
     self setweaponammostock(weapon, currstock + 1);
     return;
   }
-  if(isdefined(self.tacticalgrenade)) {
+  if(isDefined(self.tacticalgrenade)) {
     self takeweapon(self.tacticalgrenade);
   }
   self.tacticalgrenade = weapon;
@@ -206,9 +204,9 @@ function huntedcratelandoverride(crate, category, owner, team) {
 function getcratedroporigin() {
   node = undefined;
   time = 10000;
-  while (!isdefined(node)) {
+  while(!isDefined(node)) {
     random_index = randomint(level.dropnodes.size);
-    if(!isdefined(level.dropnodes[random_index])) {
+    if(!isDefined(level.dropnodes[random_index])) {
       continue;
     }
     node_origin = level.dropnodes[random_index].origin;
@@ -225,7 +223,7 @@ function getcratedroporigin() {
 function cratedropper() {
   wait_time = level.helitime;
   time = 10000;
-  while (true) {
+  while(true) {
     wait(wait_time);
     origin = getcratedroporigin();
     self thread supplydrop::helidelivercrate(origin, "hunted", level.heliowner, "free", 0, 0);

@@ -16,7 +16,7 @@ main() {
   level.script_mover_defaults["delay_time"] = 0;
   level.script_mover_defaults["usable"] = 0;
   level.script_mover_defaults["hintstring"] = "activate";
-  script_mover_add_hintstring("activate", & "MP_ACTIVATE_MOVER");
+  script_mover_add_hintstring("activate", &"MP_ACTIVATE_MOVER");
   script_mover_add_parameters("none", "");
   level.script_mover_named_goals = [];
   level.script_mover_animations = [];
@@ -25,7 +25,7 @@ main() {
   var_1 = script_mover_classnames();
 
   foreach(var_3 in var_1)
-  var_0 = common_scripts\utility::array_combine(var_0, getentarray(var_3, "classname"));
+  var_0 = common_scripts\utility::array_combine(var_0, getEntArray(var_3, "classname"));
 
   common_scripts\utility::array_thread(var_0, ::script_mover_init);
 }
@@ -35,7 +35,7 @@ script_mover_classnames() {
 }
 
 script_mover_is_script_mover() {
-  if(isdefined(self.script_mover))
+  if(isDefined(self.script_mover))
     return self.script_mover;
 
   var_0 = script_mover_classnames();
@@ -51,30 +51,30 @@ script_mover_is_script_mover() {
 }
 
 script_mover_add_hintstring(var_0, var_1) {
-  if(!isdefined(level.script_mover_hintstrings))
+  if(!isDefined(level.script_mover_hintstrings))
     level.script_mover_hintstrings = [];
 
   level.script_mover_hintstrings[var_0] = var_1;
 }
 
 script_mover_add_parameters(var_0, var_1) {
-  if(!isdefined(level.script_mover_parameters))
+  if(!isDefined(level.script_mover_parameters))
     level.script_mover_parameters = [];
 
   level.script_mover_parameters[var_0] = var_1;
 }
 
 script_mover_add_animation(var_0, var_1, var_2, var_3) {
-  if(!isdefined(level.script_mover_animations))
+  if(!isDefined(level.script_mover_animations))
     level.script_mover_animations = [];
 
-  if(!isdefined(var_3))
+  if(!isDefined(var_3))
     var_3 = "default";
 
-  if(!isdefined(level.script_mover_animations[var_0]))
+  if(!isDefined(level.script_mover_animations[var_0]))
     level.script_mover_animations[var_0] = [];
 
-  var_4 = spawnstruct();
+  var_4 = spawnStruct();
   var_4.animname = var_1;
   var_4.animref = var_2;
   level.script_mover_animations[var_0][var_3] = var_4;
@@ -88,26 +88,26 @@ script_mover_init() {
   self.linked_ents = [];
   var_0 = [];
 
-  if(isdefined(self.target))
+  if(isDefined(self.target))
     var_0 = common_scripts\utility::getstructarray(self.target, "targetname");
 
   foreach(var_2 in var_0) {
-    if(!isdefined(var_2.script_noteworthy)) {
+    if(!isDefined(var_2.script_noteworthy)) {
       continue;
     }
     switch (var_2.script_noteworthy) {
       case "origin":
-        if(!isdefined(var_2.angles))
+        if(!isDefined(var_2.angles))
           var_2.angles = (0, 0, 0);
 
         self.origin_ent = spawn("script_model", var_2.origin);
         self.origin_ent.angles = var_2.angles;
-        self.origin_ent setmodel("tag_origin");
+        self.origin_ent setModel("tag_origin");
         self.origin_ent linkto(self);
         break;
       case "scene_node":
       case "scripted_node":
-        if(!isdefined(var_2.angles))
+        if(!isDefined(var_2.angles))
           var_2.angles = (0, 0, 0);
 
         self.scripted_node = var_2;
@@ -119,11 +119,11 @@ script_mover_init() {
 
   var_4 = [];
 
-  if(isdefined(self.target))
-    var_4 = getentarray(self.target, "targetname");
+  if(isDefined(self.target))
+    var_4 = getEntArray(self.target, "targetname");
 
   foreach(var_2 in var_4) {
-    if(!isdefined(var_2.script_noteworthy)) {
+    if(!isDefined(var_2.script_noteworthy)) {
       continue;
     }
     var_6 = strtok(var_2.script_noteworthy, ";");
@@ -191,7 +191,7 @@ script_mover_reset(var_0) {
 script_mover_use_trigger(var_0) {
   self endon("death");
 
-  for (;;) {
+  for(;;) {
     var_0 waittill("trigger");
 
     if(var_0.goals.size > 0) {
@@ -205,7 +205,7 @@ script_mover_use_trigger(var_0) {
 }
 
 script_mover_move_to_named_goal(var_0) {
-  if(isdefined(level.script_mover_named_goals[var_0])) {
+  if(isDefined(level.script_mover_named_goals[var_0])) {
     self notify("new_path");
     self.goals = level.script_mover_named_goals[var_0];
     thread script_mover_move_to_target();
@@ -217,7 +217,7 @@ anglesclamp180(var_0) {
 }
 
 script_mover_parse_targets() {
-  if(isdefined(self.parsed) && self.parsed) {
+  if(isDefined(self.parsed) && self.parsed) {
     return;
   }
   self.parsed = 1;
@@ -226,20 +226,20 @@ script_mover_parse_targets() {
   var_0 = [];
   var_1 = [];
 
-  if(isdefined(self.target)) {
+  if(isDefined(self.target)) {
     var_0 = common_scripts\utility::getstructarray(self.target, "targetname");
-    var_1 = getentarray(self.target, "targetname");
+    var_1 = getEntArray(self.target, "targetname");
   }
 
-  for (var_2 = 0; var_2 < var_0.size; var_2++) {
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
     var_3 = var_0[var_2];
 
-    if(!isdefined(var_3.script_noteworthy))
+    if(!isDefined(var_3.script_noteworthy))
       var_3.script_noteworthy = "goal";
 
     switch (var_3.script_noteworthy) {
       case "ignore":
-        if(isdefined(var_3.target)) {
+        if(isDefined(var_3.target)) {
           var_4 = common_scripts\utility::getstructarray(var_3.target, "targetname");
 
           foreach(var_6 in var_4)
@@ -252,8 +252,8 @@ script_mover_parse_targets() {
         var_3 script_mover_parse_targets();
         self.goals[self.goals.size] = var_3;
 
-        if(isdefined(var_3.params["name"])) {
-          if(!isdefined(level.script_mover_named_goals[var_3.params["name"]]))
+        if(isDefined(var_3.params["name"])) {
+          if(!isDefined(level.script_mover_named_goals[var_3.params["name"]]))
             level.script_mover_named_goals[var_3.params["name"]] = [];
 
           var_8 = level.script_mover_named_goals[var_3.params["name"]].size;
@@ -275,10 +275,10 @@ script_mover_parse_targets() {
 }
 
 script_mover_parse_ent(var_0) {
-  if(!isdefined(var_0.script_noteworthy)) {
+  if(!isDefined(var_0.script_noteworthy)) {
     return;
   }
-  if(var_0 script_mover_is_script_mover() && !isdefined(var_0.script_mover_init))
+  if(var_0 script_mover_is_script_mover() && !isDefined(var_0.script_mover_init))
     var_0 waittill("script_mover_init");
 
   var_1 = strtok(var_0.script_noteworthy, ";");
@@ -292,7 +292,7 @@ script_mover_parse_ent(var_0) {
     var_5 = tolower(var_4[0]);
     var_6 = var_4[2];
 
-    for (var_7 = 3; var_7 < var_4.size; var_7++)
+    for(var_7 = 3; var_7 < var_4.size; var_7++)
       var_6 = var_6 + "_" + var_4[var_7];
 
     switch (var_5) {
@@ -389,11 +389,11 @@ script_mover_func_on_notify(var_0, var_1, var_2, var_3) {
   self endon("death");
   var_0 endon("death");
 
-  for (;;) {
+  for(;;) {
     self waittill(var_1, var_4);
     var_0[[var_2]](var_4);
 
-    if(isdefined(var_3) && isdefined(var_4)) {
+    if(isDefined(var_3) && isDefined(var_4)) {
       var_4 script_mover_watch_for_reset(var_0, var_3);
       continue;
     }
@@ -416,7 +416,7 @@ script_mover_update_paths() {
   if(var_0.size == 0) {
     return;
   }
-  for (;;) {
+  for(;;) {
     foreach(var_5 in var_0)
     var_5 script_mover_disconnectpaths();
 
@@ -433,7 +433,7 @@ script_mover_animate() {
   childthread script_mover_update_paths();
   var_0 = self.params["animation"];
 
-  if(isdefined(level.script_mover_animations[var_0]["idle"]))
+  if(isDefined(level.script_mover_animations[var_0]["idle"]))
     script_mover_play_animation(level.script_mover_animations[var_0]["idle"], 0);
 
   script_mover_delay();
@@ -441,7 +441,7 @@ script_mover_animate() {
   self notify("start", self);
   var_1 = level.script_mover_animations[var_0]["default"];
 
-  if(isdefined(var_1)) {
+  if(isDefined(var_1)) {
     script_mover_play_animation(var_1, 1);
     self waittill("end");
   }
@@ -455,7 +455,7 @@ script_mover_play_animation(var_0, var_1) {
   if(var_1)
     thread script_mover_handle_notetracks();
 
-  if(isdefined(self.scripted_node))
+  if(isDefined(self.scripted_node))
     self scriptmodelplayanimdeltamotionfrompos(var_0.animname, self.scripted_node.origin, self.scripted_node.angles, "script_mover_anim");
   else
     self scriptmodelplayanimdeltamotion(var_0.animname, "script_mover_anim");
@@ -465,17 +465,17 @@ script_mover_handle_notetracks() {
   self endon("play_animation");
   self endon("mover_reset");
 
-  for (;;) {
+  for(;;) {
     self waittill("script_mover_anim", var_0);
     self notify(var_0, self);
   }
 }
 
 script_mover_delay() {
-  if(isdefined(self.params["delay_till"]))
+  if(isDefined(self.params["delay_till"]))
     level waittill(self.params["delay_till"]);
 
-  if(isdefined(self.params["delay_till_trigger"]) && self.params["delay_till_trigger"])
+  if(isDefined(self.params["delay_till_trigger"]) && self.params["delay_till_trigger"])
     self waittill("trigger");
 
   if(self.params["delay_time"] > 0)
@@ -487,10 +487,10 @@ script_mover_move_to_target(var_0) {
   self endon("new_path");
   childthread script_mover_update_paths();
 
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     var_0 = self;
 
-  while (var_0.goals.size != 0) {
+  while(var_0.goals.size != 0) {
     var_1 = common_scripts\utility::random(var_0.goals);
     var_2 = self;
     var_2 script_mover_apply_move_parameters(var_1);
@@ -503,15 +503,15 @@ script_mover_move_to_target(var_0) {
     var_8 = transformmove(var_1.origin, var_1.angles, self.origin_ent.origin, self.origin_ent.angles, self.origin, self.angles);
 
     if(var_2.origin != var_1.origin) {
-      if(isdefined(var_2.params["move_speed"])) {
+      if(isDefined(var_2.params["move_speed"])) {
         var_9 = distance(var_2.origin, var_1.origin);
         var_3 = var_9 / var_2.params["move_speed"];
       }
 
-      if(isdefined(var_2.params["accel_frac"]))
+      if(isDefined(var_2.params["accel_frac"]))
         var_4 = var_2.params["accel_frac"] * var_3;
 
-      if(isdefined(var_2.params["decel_frac"]))
+      if(isDefined(var_2.params["decel_frac"]))
         var_5 = var_2.params["decel_frac"] * var_3;
 
       if(var_3 <= 0) {
@@ -541,7 +541,7 @@ script_mover_move_to_target(var_0) {
     var_2 notify("move_start");
     var_0 notify("depart", var_2);
 
-    if(isdefined(var_2.params["name"])) {
+    if(isDefined(var_2.params["name"])) {
       var_13 = "mover_depart_" + var_2.params["name"];
       var_2 notify(var_13);
       level notify(var_13, var_2);
@@ -549,9 +549,7 @@ script_mover_move_to_target(var_0) {
 
     var_2 script_mover_allow_usable(0);
 
-    if(var_3 <= 0) {
-
-    } else if(var_6)
+    if(var_3 <= 0) {} else if(var_6)
       var_2 waittill("movedone");
     else if(var_7)
       var_2 waittill("rotatedone");
@@ -561,13 +559,13 @@ script_mover_move_to_target(var_0) {
     var_2 notify("move_end");
     var_1 notify("arrive", var_2);
 
-    if(isdefined(var_2.params["name"])) {
+    if(isDefined(var_2.params["name"])) {
       var_13 = "mover_arrive_" + var_2.params["name"];
       var_2 notify(var_13);
       level notify(var_13, var_2);
     }
 
-    if(isdefined(var_2.params["solid"])) {
+    if(isDefined(var_2.params["solid"])) {
       if(var_2.params["solid"])
         var_2 solid();
       else
@@ -579,7 +577,7 @@ script_mover_move_to_target(var_0) {
       script_mover_watch_for_reset(var_11, ::script_mover_reset);
     }
 
-    if(isdefined(var_2.params["wait_till"]))
+    if(isDefined(var_2.params["wait_till"]))
       level waittill(var_2.params["wait_till"]);
 
     if(var_2.params["wait_time"] > 0)
@@ -597,7 +595,7 @@ script_mover_watch_for_reset(var_0, var_1) {
 script_mover_init_move_parameters() {
   self.params = [];
 
-  if(!isdefined(self.angles))
+  if(!isDefined(self.angles))
     self.angles = (0, 0, 0);
 
   self.angles = anglesclamp180(self.angles);
@@ -605,7 +603,7 @@ script_mover_init_move_parameters() {
 }
 
 script_mover_parse_move_parameters(var_0) {
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     var_0 = "";
 
   var_1 = strtok(var_0, ";");
@@ -648,7 +646,7 @@ script_mover_parse_move_parameters(var_0) {
         var_5 = var_4[1];
         var_6 = level.script_mover_parameters[var_5];
 
-        if(isdefined(var_6))
+        if(isDefined(var_6))
           script_mover_parse_move_parameters(var_6);
 
         break;
@@ -685,13 +683,13 @@ script_mover_apply_move_parameters(var_0) {
 }
 
 script_mover_set_param(var_0, var_1) {
-  if(!isdefined(var_0)) {
+  if(!isDefined(var_0)) {
     return;
   }
-  if(var_0 == "usable" && isdefined(var_1))
+  if(var_0 == "usable" && isDefined(var_1))
     script_mover_set_usable(self, var_1);
 
-  if(isdefined(var_1) && isstring(var_1) && var_1 == "<undefined>")
+  if(isDefined(var_1) && isstring(var_1) && var_1 == "<undefined>")
     var_1 = undefined;
 
   self.params[var_0] = var_1;
@@ -722,25 +720,25 @@ script_mover_save_default_move_parameters() {
 }
 
 script_mover_set_defaults() {
-  if(isdefined(self.params_default)) {
+  if(isDefined(self.params_default)) {
     foreach(var_2, var_1 in self.params_default) {
-      if(!isdefined(self.params[var_2]))
+      if(!isDefined(self.params[var_2]))
         script_mover_set_param(var_2, var_1);
     }
   }
 
   foreach(var_2, var_1 in level.script_mover_defaults) {
-    if(!isdefined(self.params[var_2]))
+    if(!isDefined(self.params[var_2]))
       script_mover_set_param(var_2, var_1);
   }
 }
 
 script_mover_is_dynamic_path() {
-  return isdefined(self.spawnflags) && self.spawnflags & 1;
+  return isDefined(self.spawnflags) && self.spawnflags & 1;
 }
 
 script_mover_is_animated() {
-  return isdefined(self.params["animation"]);
+  return isDefined(self.params["animation"]);
 }
 
 init() {
@@ -749,14 +747,14 @@ init() {
 }
 
 script_mover_connect_watch() {
-  for (;;) {
+  for(;;) {
     level waittill("connected", var_0);
     var_0 thread player_unresolved_collision_watch();
   }
 }
 
 script_mover_agent_spawn_watch() {
-  for (;;) {
+  for(;;) {
     level waittill("spawned_agent", var_0);
     var_0 thread player_unresolved_collision_watch();
   }
@@ -770,10 +768,10 @@ player_unresolved_collision_watch() {
 
   self.unresolved_collision_count = 0;
 
-  for (;;) {
+  for(;;) {
     self waittill("unresolved_collision", var_0);
 
-    if(isagent(self) && isdefined(self.animclass)) {
+    if(isagent(self) && isDefined(self.animclass)) {
       if(self scragentgetphysicsmode() == "noclip")
         continue;
     }
@@ -782,14 +780,14 @@ player_unresolved_collision_watch() {
     thread clear_unresolved_collision_count_next_frame();
     var_1 = 3;
 
-    if(isdefined(var_0) && isdefined(var_0.unresolved_collision_notify_min))
+    if(isDefined(var_0) && isDefined(var_0.unresolved_collision_notify_min))
       var_1 = var_0.unresolved_collision_notify_min;
 
     if(self.unresolved_collision_count >= var_1) {
-      if(isdefined(var_0)) {
-        if(isdefined(var_0.unresolved_collision_func))
+      if(isDefined(var_0)) {
+        if(isDefined(var_0.unresolved_collision_func))
           var_0[[var_0.unresolved_collision_func]](self);
-        else if(isdefined(var_0.unresolved_collision_kill) && var_0.unresolved_collision_kill)
+        else if(isDefined(var_0.unresolved_collision_kill) && var_0.unresolved_collision_kill)
           var_0 unresolved_collision_owner_damage(self);
         else
           var_0 unresolved_collision_nearest_node(self);
@@ -805,14 +803,14 @@ clear_unresolved_collision_count_next_frame() {
   self endon("unresolved_collision");
   waitframe();
 
-  if(isdefined(self))
+  if(isDefined(self))
     self.unresolved_collision_count = 0;
 }
 
 unresolved_collision_owner_damage(var_0) {
   var_1 = self;
 
-  if(!isdefined(var_1.owner)) {
+  if(!isDefined(var_1.owner)) {
     var_0 mover_suicide();
     return;
   }
@@ -820,7 +818,7 @@ unresolved_collision_owner_damage(var_0) {
   var_2 = 0;
 
   if(level.teambased) {
-    if(isdefined(var_1.owner.team) && var_1.owner.team != var_0.team)
+    if(isDefined(var_1.owner.team) && var_1.owner.team != var_0.team)
       var_2 = 1;
   } else if(var_0 != var_1.owner)
     var_2 = 1;
@@ -832,7 +830,7 @@ unresolved_collision_owner_damage(var_0) {
 
   var_3 = 1000;
 
-  if(isdefined(var_1.unresolved_collision_damage))
+  if(isDefined(var_1.unresolved_collision_damage))
     var_3 = var_1.unresolved_collision_damage;
 
   var_0 dodamage(var_3, var_1.origin, var_1.owner, var_1, "MOD_CRUSH");
@@ -841,7 +839,7 @@ unresolved_collision_owner_damage(var_0) {
 unresolved_collision_nearest_node(var_0, var_1) {
   var_2 = self.unresolved_collision_nodes;
 
-  if(isdefined(var_2))
+  if(isDefined(var_2))
     var_2 = sortbydistance(var_2, var_0.origin);
   else {
     var_2 = getnodesinradius(var_0.origin, 300, 0, 200);
@@ -853,7 +851,7 @@ unresolved_collision_nearest_node(var_0, var_1) {
   var_0 dontinterpolate();
   var_0 setorigin(var_0.origin + var_3);
 
-  for (var_4 = 0; var_4 < var_2.size; var_4++) {
+  for(var_4 = 0; var_4 < var_2.size; var_4++) {
     var_5 = var_2[var_4];
     var_6 = var_5.origin;
 
@@ -872,7 +870,7 @@ unresolved_collision_nearest_node(var_0, var_1) {
 
   var_0 setorigin(var_0.origin - var_3);
 
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     var_1 = 1;
 
   if(var_1)
@@ -882,7 +880,7 @@ unresolved_collision_nearest_node(var_0, var_1) {
 unresolved_collision_void(var_0) {}
 
 mover_suicide() {
-  if(isdefined(level.ishorde) && !isagent(self)) {
+  if(isDefined(level.ishorde) && !isagent(self)) {
     return;
   }
   maps\mp\_utility::_suicide();
@@ -892,7 +890,7 @@ player_pushed_kill(var_0) {
   self endon("death");
   self endon("stop_player_pushed_kill");
 
-  for (;;) {
+  for(;;) {
     self waittill("player_pushed", var_1, var_2);
 
     if(isplayer(var_1) || isagent(var_1)) {
@@ -911,11 +909,11 @@ stop_player_pushed_kill() {
 notify_moving_platform_invalid() {
   var_0 = self getlinkedchildren(0);
 
-  if(!isdefined(var_0)) {
+  if(!isDefined(var_0)) {
     return;
   }
   foreach(var_2 in var_0) {
-    if(isdefined(var_2.no_moving_platfrom_unlink) && var_2.no_moving_platfrom_unlink) {
+    if(isDefined(var_2.no_moving_platfrom_unlink) && var_2.no_moving_platfrom_unlink) {
       continue;
     }
     var_2 unlink();
@@ -924,26 +922,26 @@ notify_moving_platform_invalid() {
 }
 
 process_moving_platform_death(var_0, var_1) {
-  if(isdefined(var_1) && isdefined(var_1.no_moving_platfrom_death) && var_1.no_moving_platfrom_death) {
+  if(isDefined(var_1) && isDefined(var_1.no_moving_platfrom_death) && var_1.no_moving_platfrom_death) {
     return;
   }
-  if(isdefined(var_0.playdeathfx))
-    playfx(common_scripts\utility::getfx("airdrop_crate_destroy"), self.origin);
+  if(isDefined(var_0.playdeathfx))
+    playFX(common_scripts\utility::getfx("airdrop_crate_destroy"), self.origin);
 
-  if(isdefined(var_0.deathoverridecallback))
+  if(isDefined(var_0.deathoverridecallback))
     self thread[[var_0.deathoverridecallback]](var_0);
   else
     self delete();
 }
 
 handle_moving_platform_touch(var_0) {
-  for (;;) {
+  for(;;) {
     self waittill("touching_platform", var_1);
 
-    if(isdefined(var_0.touchingplatformvalid) && !self[[var_0.touchingplatformvalid]](var_1)) {
+    if(isDefined(var_0.touchingplatformvalid) && !self[[var_0.touchingplatformvalid]](var_1)) {
       continue;
     }
-    if(isdefined(var_0.validateaccuratetouching) && var_0.validateaccuratetouching) {
+    if(isDefined(var_0.validateaccuratetouching) && var_0.validateaccuratetouching) {
       if(!self istouching(var_1)) {
         wait 0.05;
         continue;
@@ -958,7 +956,7 @@ handle_moving_platform_touch(var_0) {
 handle_moving_platform_invalid(var_0) {
   self waittill("invalid_parent", var_1);
 
-  if(isdefined(var_0.invalidparentoverridecallback))
+  if(isDefined(var_0.invalidparentoverridecallback))
     self thread[[var_0.invalidparentoverridecallback]](var_0);
   else
     thread process_moving_platform_death(var_0, var_1);
@@ -971,13 +969,13 @@ handle_moving_platforms(var_0) {
   self endon("death");
   self endon("stop_handling_moving_platforms");
 
-  if(!isdefined(var_0))
-    var_0 = spawnstruct();
+  if(!isDefined(var_0))
+    var_0 = spawnStruct();
 
-  if(isdefined(var_0.endonstring))
+  if(isDefined(var_0.endonstring))
     self endon(var_0.endonstring);
 
-  if(isdefined(var_0.linkparent))
+  if(isDefined(var_0.linkparent))
     self linkto(var_0.linkparent);
 
   childthread handle_moving_platform_touch(var_0);

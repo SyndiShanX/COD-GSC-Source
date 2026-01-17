@@ -9,7 +9,6 @@
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm_score;
 #include scripts\zm_common\zm_trial;
-
 #namespace zm_trial_damage_drains_points;
 
 autoexec __init__system__() {
@@ -24,7 +23,7 @@ __init__() {
   zm_trial::register_challenge(#"damage_drains_points", &on_begin, &on_end);
 }
 
-private on_begin(var_66fe7443, var_ec90b685) {
+on_begin(var_66fe7443, var_ec90b685) {
   if(isDefined(var_ec90b685)) {
     self.var_ec90b685 = 1;
     callback::on_ai_killed(&function_8e0401ab);
@@ -37,7 +36,7 @@ private on_begin(var_66fe7443, var_ec90b685) {
   level.var_a2d8b7eb = var_620e7dea;
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   if(isDefined(self.var_ec90b685) && self.var_ec90b685) {
     callback::remove_on_ai_killed(&function_8e0401ab);
     level.var_a58dc99e = undefined;
@@ -63,7 +62,7 @@ is_active(var_a32bbdd = 0) {
   return isDefined(s_challenge);
 }
 
-private function_8e0401ab(params) {
+function_8e0401ab(params) {
   if(isDefined(self.nuked) && self.nuked) {
     a_players = util::get_active_players();
     var_fc97ca4d = array::random(a_players);

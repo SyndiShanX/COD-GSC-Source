@@ -10,7 +10,7 @@ player_head_tracking() {
   self.player_head_tracking = 1;
   self.head_track_debug = self.name;
 
-  for (;;) {
+  for(;;) {
     wait 0.2;
 
     if(distance(self.origin, level.player.origin) <= 200 && maps\_utility::player_looking_at(self.origin)) {
@@ -26,9 +26,9 @@ player_head_tracking() {
 head_tracking_end(var_0, var_1) {
   self notify("head_tracking_end");
   self.player_head_tracking = 0;
-  var_2 = isdefined(var_1) && var_1;
+  var_2 = isDefined(var_1) && var_1;
 
-  if(isdefined(var_0) && var_0)
+  if(isDefined(var_0) && var_0)
     self setlookatentity();
   else
     self setlookatyawlimits(1, var_2);

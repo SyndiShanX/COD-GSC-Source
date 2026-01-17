@@ -52,9 +52,9 @@ function gunfireloopfxthread(fxid, fxpos, shotsmin, shotsmax, shotdelaymin, shot
   shotsbase = shotsmin;
   shotsrange = shotsmax - shotsmin;
   fxent = spawnfx(level._effect[fxid], fxpos);
-  for (;;) {
+  for(;;) {
     shotnum = shotsbase + randomint(shotsrange);
-    for (i = 0; i < shotnum; i++) {
+    for(i = 0; i < shotnum; i++) {
       triggerfx(fxent);
       wait(shotdelaybase + randomfloat(shotdelayrange));
     }
@@ -92,9 +92,9 @@ function gunfireloopfxvecthread(fxid, fxpos, fxpos2, shotsmin, shotsmax, shotdel
   shotsrange = shotsmax - shotsmin;
   fxpos2 = vectornormalize(fxpos2 - fxpos);
   fxent = spawnfx(level._effect[fxid], fxpos, fxpos2);
-  for (;;) {
+  for(;;) {
     shotnum = shotsbase + randomint(shotsrange);
-    for (i = 0; i < (int(shotnum / level.fxfireloopmod)); i++) {
+    for(i = 0; i < (int(shotnum / level.fxfireloopmod)); i++) {
       triggerfx(fxent);
       delay = (shotdelaybase + randomfloat(shotdelayrange)) * level.fxfireloopmod;
       if(delay < 0.05) {
@@ -108,6 +108,6 @@ function gunfireloopfxvecthread(fxid, fxpos, fxpos2, shotsmin, shotsmax, shotdel
 }
 
 function grenadeexplosionfx(pos) {
-  playfx(level._effect["mechanical explosion"], pos);
+  playFX(level._effect["mechanical explosion"], pos);
   earthquake(0.15, 0.5, pos, 250);
 }

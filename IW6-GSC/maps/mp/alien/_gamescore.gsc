@@ -172,9 +172,7 @@ calculate_players_total_end_game_score() {
 
 get_partial_hive_score_component_list() {
   if(isDefined(level.partial_hive_score_component_list_func))
-    return [
-      [level.partial_hive_score_component_list_func]
-    ]();
+    return [[level.partial_hive_score_component_list_func]]();
 
   return [CONST_NAME_REF_CHALLENGE, CONST_NAME_REF_TEAM];
 }
@@ -206,9 +204,7 @@ calculate_player_encounter_scores(player, score_component_name_list) {
     AssertEx(isDefined(level.encounter_score_components[score_component_name]), "'" + score_component_name + "' is not a initialized score component");
     score_component_struct = level.encounter_score_components[score_component_name];
 
-    encounter_score = [
-      [score_component_struct.calculate_func]
-    ](player, score_component_struct);
+    encounter_score = [[score_component_struct.calculate_func]](player, score_component_struct);
     encounter_score *= level.cycle_score_scalar;
     encounter_score = int(encounter_score);
     player.end_game_score[score_component_struct.end_game_score_component_ref] += encounter_score;

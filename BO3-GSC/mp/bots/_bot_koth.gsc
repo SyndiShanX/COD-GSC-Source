@@ -13,9 +13,9 @@
 #namespace bot_koth;
 
 function init() {
-  level.onbotspawned = & on_bot_spawned;
-  level.botupdatethreatgoal = & bot_update_threat_goal;
-  level.botidle = & bot_idle;
+  level.onbotspawned = &on_bot_spawned;
+  level.botupdatethreatgoal = &bot_update_threat_goal;
+  level.botidle = &bot_idle;
 }
 
 function on_bot_spawned() {
@@ -26,7 +26,7 @@ function on_bot_spawned() {
 function wait_zone_moved() {
   self endon("death");
   level endon("game_ended");
-  while (true) {
+  while(true) {
     level waittill("zone_moved");
     if(!self bot_combat::has_threat() && self botgoalset()) {
       self botsetgoal(self.origin);
@@ -35,7 +35,7 @@ function wait_zone_moved() {
 }
 
 function bot_update_threat_goal() {
-  if(isdefined(level.zone) && self istouching(level.zone.gameobject.trigger)) {
+  if(isDefined(level.zone) && self istouching(level.zone.gameobject.trigger)) {
     if(self botgoalreached()) {
       self bot::path_to_point_in_trigger(level.zone.gameobject.trigger);
     }
@@ -45,7 +45,7 @@ function bot_update_threat_goal() {
 }
 
 function bot_idle() {
-  if(isdefined(level.zone)) {
+  if(isDefined(level.zone)) {
     if(self istouching(level.zone.gameobject.trigger)) {
       self bot::path_to_point_in_trigger(level.zone.gameobject.trigger);
     } else {

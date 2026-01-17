@@ -212,23 +212,23 @@ include_weapons() {
   maps\_zombiemode_weapons::add_limited_weapon("knife_ballistic_zm", 1);
   precacheItem("explosive_bolt_zm");
   precacheItem("explosive_bolt_upgraded_zm");
-  maps\_zombiemode_weapons::add_zombie_weapon("zombie_kar98k", "zombie_kar98k_upgraded", & "WAW_ZOMBIE_WEAPON_KAR98K_200", 200, "rifle");
-  maps\_zombiemode_weapons::add_zombie_weapon("zombie_type99_rifle", "", & "WAW_ZOMBIE_WEAPON_TYPE99_200", 200, "rifle");
-  maps\_zombiemode_weapons::add_zombie_weapon("zombie_gewehr43", "zombie_gewehr43_upgraded", & "WAW_ZOMBIE_WEAPON_GEWEHR43_600", 600, "rifle");
-  maps\_zombiemode_weapons::add_zombie_weapon("zombie_m1carbine", "zombie_m1carbine_upgraded", & "WAW_ZOMBIE_WEAPON_M1CARBINE_600", 600, "rifle");
-  maps\_zombiemode_weapons::add_zombie_weapon("zombie_m1garand", "zombie_m1garand_upgraded", & "WAW_ZOMBIE_WEAPON_M1GARAND_600", 600, "rifle");
-  maps\_zombiemode_weapons::add_zombie_weapon("stielhandgranate", "", & "WAW_ZOMBIE_WEAPON_STIELHANDGRANATE_250", 250, "grenade", "", 250);
-  maps\_zombiemode_weapons::add_zombie_weapon("mine_bouncing_betty", "", & "WAW_ZOMBIE_WEAPON_SATCHEL_2000", 2000);
-  maps\_zombiemode_weapons::add_zombie_weapon("kar98k_scoped_zombie", "", & "WAW_ZOMBIE_WEAPON_KAR98K_S_750", 750, "sniper");
-  maps\_zombiemode_weapons::add_zombie_weapon("zombie_stg44", "zombie_stg44_upgraded", & "WAW_ZOMBIE_WEAPON_STG44_1200", 1200, "mg");
-  maps\_zombiemode_weapons::add_zombie_weapon("zombie_thompson", "zombie_thompson_upgraded", & "WAW_ZOMBIE_WEAPON_THOMPSON_1200", 1200, "mg");
-  maps\_zombiemode_weapons::add_zombie_weapon("zombie_type100_smg", "zombie_type100_smg_upgraded", & "WAW_ZOMBIE_WEAPON_TYPE100_1000", 1000, "mg");
-  maps\_zombiemode_weapons::add_zombie_weapon("zombie_fg42", "zombie_fg42_upgraded", & "WAW_ZOMBIE_WEAPON_FG42_1500", 1500, "mg");
-  maps\_zombiemode_weapons::add_zombie_weapon("zombie_doublebarrel", "zombie_doublebarrel_upgraded", & "WAW_ZOMBIE_WEAPON_DOUBLEBARREL_1200", 1200, "shotgun");
-  maps\_zombiemode_weapons::add_zombie_weapon("zombie_doublebarrel_sawed", "", & "WAW_ZOMBIE_WEAPON_DOUBLEBARREL_SAWED_1200", 1200, "shotgun");
-  maps\_zombiemode_weapons::add_zombie_weapon("zombie_shotgun", "zombie_shotgun_upgraded", & "WAW_ZOMBIE_WEAPON_SHOTGUN_1500", 1500, "shotgun");
-  maps\_zombiemode_weapons::add_zombie_weapon("zombie_bar", "zombie_bar_upgraded", & "WAW_ZOMBIE_WEAPON_BAR_1800", 1800, "mg");
-  maps\_zombiemode_weapons::add_zombie_weapon("zombie_bar_bipod", "", & "WAW_ZOMBIE_WEAPON_BAR_BIPOD_2500", 2500, "mg");
+  maps\_zombiemode_weapons::add_zombie_weapon("zombie_kar98k", "zombie_kar98k_upgraded", &"WAW_ZOMBIE_WEAPON_KAR98K_200", 200, "rifle");
+  maps\_zombiemode_weapons::add_zombie_weapon("zombie_type99_rifle", "", &"WAW_ZOMBIE_WEAPON_TYPE99_200", 200, "rifle");
+  maps\_zombiemode_weapons::add_zombie_weapon("zombie_gewehr43", "zombie_gewehr43_upgraded", &"WAW_ZOMBIE_WEAPON_GEWEHR43_600", 600, "rifle");
+  maps\_zombiemode_weapons::add_zombie_weapon("zombie_m1carbine", "zombie_m1carbine_upgraded", &"WAW_ZOMBIE_WEAPON_M1CARBINE_600", 600, "rifle");
+  maps\_zombiemode_weapons::add_zombie_weapon("zombie_m1garand", "zombie_m1garand_upgraded", &"WAW_ZOMBIE_WEAPON_M1GARAND_600", 600, "rifle");
+  maps\_zombiemode_weapons::add_zombie_weapon("stielhandgranate", "", &"WAW_ZOMBIE_WEAPON_STIELHANDGRANATE_250", 250, "grenade", "", 250);
+  maps\_zombiemode_weapons::add_zombie_weapon("mine_bouncing_betty", "", &"WAW_ZOMBIE_WEAPON_SATCHEL_2000", 2000);
+  maps\_zombiemode_weapons::add_zombie_weapon("kar98k_scoped_zombie", "", &"WAW_ZOMBIE_WEAPON_KAR98K_S_750", 750, "sniper");
+  maps\_zombiemode_weapons::add_zombie_weapon("zombie_stg44", "zombie_stg44_upgraded", &"WAW_ZOMBIE_WEAPON_STG44_1200", 1200, "mg");
+  maps\_zombiemode_weapons::add_zombie_weapon("zombie_thompson", "zombie_thompson_upgraded", &"WAW_ZOMBIE_WEAPON_THOMPSON_1200", 1200, "mg");
+  maps\_zombiemode_weapons::add_zombie_weapon("zombie_type100_smg", "zombie_type100_smg_upgraded", &"WAW_ZOMBIE_WEAPON_TYPE100_1000", 1000, "mg");
+  maps\_zombiemode_weapons::add_zombie_weapon("zombie_fg42", "zombie_fg42_upgraded", &"WAW_ZOMBIE_WEAPON_FG42_1500", 1500, "mg");
+  maps\_zombiemode_weapons::add_zombie_weapon("zombie_doublebarrel", "zombie_doublebarrel_upgraded", &"WAW_ZOMBIE_WEAPON_DOUBLEBARREL_1200", 1200, "shotgun");
+  maps\_zombiemode_weapons::add_zombie_weapon("zombie_doublebarrel_sawed", "", &"WAW_ZOMBIE_WEAPON_DOUBLEBARREL_SAWED_1200", 1200, "shotgun");
+  maps\_zombiemode_weapons::add_zombie_weapon("zombie_shotgun", "zombie_shotgun_upgraded", &"WAW_ZOMBIE_WEAPON_SHOTGUN_1500", 1500, "shotgun");
+  maps\_zombiemode_weapons::add_zombie_weapon("zombie_bar", "zombie_bar_upgraded", &"WAW_ZOMBIE_WEAPON_BAR_1800", 1800, "mg");
+  maps\_zombiemode_weapons::add_zombie_weapon("zombie_bar_bipod", "", &"WAW_ZOMBIE_WEAPON_BAR_BIPOD_2500", 2500, "mg");
 }
 
 include_powerups() {
@@ -245,7 +245,7 @@ init_zombie_sumpf() {
   zipHintDeactivated = getEnt("zipline_deactivated_hint_trigger", "targetname");
   zipHintDeactivated sethintstring(&"WAW_ZOMBIE_ZIPLINE_DEACTIVATED");
   zipHintDeactivated SetCursorHint("HINT_NOICON");
-  penBuyTrigger = getentarray("pendulum_buy_trigger", "targetname");
+  penBuyTrigger = getEntArray("pendulum_buy_trigger", "targetname");
   if(!level.mutators["mutator_noTraps"]) {
     for(i = 0; i < penBuyTrigger.size; i++) {
       penBuyTrigger[i] sethintstring(&"WAW_ZOMBIE_CLEAR_DEBRIS");
@@ -256,7 +256,7 @@ init_zombie_sumpf() {
 }
 
 turnLightGreen(name) {
-  zapper_lights = getentarray(name, "targetname");
+  zapper_lights = getEntArray(name, "targetname");
   for(i = 0; i < zapper_lights.size; i++) {
     zapper_lights[i] setModel("zombie_zapper_cagelight_green");
     if(isDefined(zapper_lights[i].target)) {
@@ -267,13 +267,13 @@ turnLightGreen(name) {
       light_effect.targetname = "effect_" + name + i;
       old_light_effect delete();
       zapper_lights[i].target = light_effect.targetname;
-      playfxontag(level._effect["zapper_light_ready"], light_effect, "tag_origin");
+      playFXOnTag(level._effect["zapper_light_ready"], light_effect, "tag_origin");
     }
   }
 }
 
 turnLightRed(name) {
-  zapper_lights = getentarray(name, "targetname");
+  zapper_lights = getEntArray(name, "targetname");
   for(i = 0; i < zapper_lights.size; i++) {
     zapper_lights[i] setModel("zombie_zapper_cagelight_red");
     if(isDefined(zapper_lights[i].target)) {
@@ -284,7 +284,7 @@ turnLightRed(name) {
       light_effect.targetname = "effect_" + name + i;
       old_light_effect delete();
       zapper_lights[i].target = light_effect.targetname;
-      playfxontag(level._effect["zapper_light_notready"], light_effect, "tag_origin");
+      playFXOnTag(level._effect["zapper_light_notready"], light_effect, "tag_origin");
     }
   }
 }
@@ -299,10 +299,10 @@ book_useage() {
     maniac_r = getEnt("maniac_r", "targetname");
     book_trig waittill("trigger", player);
     if(isDefined(maniac_l)) {
-      maniac_l playsound("maniac_l");
+      maniac_l playSound("maniac_l");
     }
     if(isDefined(maniac_r)) {
-      maniac_r playsound("maniac_r");
+      maniac_r playSound("maniac_r");
     }
   }
 }
@@ -322,19 +322,19 @@ toilet_useage() {
   wait(0.5);
   toilet_trig waittill("trigger", player);
   toilet_trig stopLoopSound(0.5);
-  toilet_trig playsound("dial_9", "sound_done");
+  toilet_trig playSound("dial_9", "sound_done");
   toilet_trig waittill("sound_done");
   toilet_trig waittill("trigger", player);
-  toilet_trig playsound("dial_1", "sound_done");
+  toilet_trig playSound("dial_1", "sound_done");
   toilet_trig waittill("sound_done");
   toilet_trig waittill("trigger", player);
-  toilet_trig playsound("dial_1");
+  toilet_trig playSound("dial_1");
   wait(0.5);
-  toilet_trig playsound("riiing");
+  toilet_trig playSound("riiing");
   wait(1);
-  toilet_trig playsound("riiing");
+  toilet_trig playSound("riiing");
   wait(1);
-  toilet_trig playsound("toilet_flush", "sound_done");
+  toilet_trig playSound("toilet_flush", "sound_done");
   toilet_trig waittill("sound_done");
   playsoundatposition("zmb_cha_ching", toilet_trig.origin);
   level thread play_music_easter_egg(player);
@@ -361,11 +361,11 @@ play_radio_sounds() {
   radio_two stopLoopSound(2);
   radio_three stopLoopSound(2);
   wait(0.05);
-  pa_system playsound("secret_message", "message_complete");
+  pa_system playSound("secret_message", "message_complete");
   pa_system waittill("message_complete");
-  radio_one playsound("static");
-  radio_two playsound("static");
-  radio_three playsound("static");
+  radio_one playSound("static");
+  radio_two playSound("static");
+  radio_three playSound("static");
 }
 
 radio_eggs() {
@@ -426,11 +426,11 @@ play_super_egg_radio_pa_sounds() {
   superegg_radio_two stopLoopSound(2);
   superegg_radio_three stopLoopSound(2);
   wait(0.05);
-  pa_system playsound("superegg_secret_message", "message_complete");
+  pa_system playSound("superegg_secret_message", "message_complete");
   pa_system waittill("message_complete");
-  superegg_radio_one playsound("static");
-  superegg_radio_two playsound("static");
-  superegg_radio_three playsound("static");
+  superegg_radio_one playSound("static");
+  superegg_radio_two playSound("static");
+  superegg_radio_three playSound("static");
 }
 
 super_egg() {
@@ -452,7 +452,7 @@ battle_radio() {
   battle_radio_trig SetCursorHint("HINT_NOICON");
   battle_radio_origin = getEnt("battle_radio_origin", "targetname");
   battle_radio_trig waittill("trigger", player);
-  battle_radio_origin playsound("battle_message");
+  battle_radio_origin playSound("battle_message");
 }
 
 whisper_radio() {
@@ -464,7 +464,7 @@ whisper_radio() {
   whisper_radio_trig SetCursorHint("HINT_NOICON");
   whisper_radio_origin = getEnt("whisper_radio_origin", "targetname");
   whisper_radio_trig waittill("trigger");
-  whisper_radio_origin playsound("whisper_message");
+  whisper_radio_origin playSound("whisper_message");
 }
 
 radio_one() {

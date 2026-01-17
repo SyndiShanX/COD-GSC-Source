@@ -8,7 +8,7 @@
 #include maps\_hud_util;
 
 linetime_proc(start, end, color, timer) {
-  for (i = 0; i < timer * 20; i++) {
+  for(i = 0; i < timer * 20; i++) {
     line(start, end, color);
     wait(0.05);
   }
@@ -35,7 +35,7 @@ waitSpread_code(start, end) {
   }
   allotment[0] = start;
   allotment[allotment.size] = end;
-  for (i = 1; i < level.wait_spreaders - 1; i++) {
+  for(i = 1; i < level.wait_spreaders - 1; i++) {
     allotment = waitSpread_insert(allotment);
   }
   level.wait_spreader_allotment = array_randomize(allotment);
@@ -45,7 +45,7 @@ waitSpread_code(start, end) {
 waitSpread_insert(allotment) {
   gapIndex = -1;
   gap = 0;
-  for (p = 0; p < allotment.size - 1; p++) {
+  for(p = 0; p < allotment.size - 1; p++) {
     newgap = allotment[p + 1] - allotment[p];
     if(newgap <= gap) {
       continue;
@@ -55,7 +55,7 @@ waitSpread_insert(allotment) {
   }
   assert(gap > 0);
   newAllotment = [];
-  for (i = 0; i < allotment.size; i++) {
+  for(i = 0; i < allotment.size; i++) {
     if(gapIndex == i - 1) {
       newAllotment[newAllotment.size] = randomfloatrange(allotment[gapIndex], allotment[gapIndex + 1]);
     }
@@ -65,7 +65,7 @@ waitSpread_insert(allotment) {
 }
 
 waittill_objective_event_proc(requireTrigger) {
-  while (level.deathSpawner[self.script_deathChain] > 0)
+  while(level.deathSpawner[self.script_deathChain] > 0)
     level waittill("spawner_expired" + self.script_deathChain);
   if(requireTrigger)
     self waittill("trigger");
@@ -75,7 +75,7 @@ waittill_objective_event_proc(requireTrigger) {
 
 wait_until_done_speaking() {
   self endon("death");
-  while (self.isSpeaking) {
+  while(self.isSpeaking) {
     wait(0.05);
   }
 }
@@ -88,8 +88,8 @@ wait_for_trigger_think(ent) {
 }
 
 wait_for_trigger(msg, type) {
-  triggers = getentarray(msg, type);
-  ent = spawnstruct();
+  triggers = getEntArray(msg, type);
+  ent = spawnStruct();
   array_thread(triggers, ::wait_for_trigger_think, ent);
   ent waittill("trigger");
 }
@@ -156,7 +156,7 @@ new_color_being_set(color) {
 
 radio_queue_thread(msg) {
   queueTime = gettime();
-  for (;;) {
+  for(;;) {
     if(!isDefined(self._radio_queue)) {
       break;
     }
@@ -212,7 +212,7 @@ HintPrintWait(length, breakfunc) {
     return;
   }
   timer = length * 20;
-  for (i = 0; i < timer; i++) {
+  for(i = 0; i < timer; i++) {
     if([
         [breakfunc]
       ]()) {
@@ -245,26 +245,22 @@ HintPrint(string, breakfunc) {
   Hint.alpha = MYALPHAHIGH;
   HintPrintWait(MYFADEINTIME);
   if(isDefined(breakfunc)) {
-    for (;;) {
+    for(;;) {
       Hint FadeOverTime(MYFLASHTIME);
       Hint.alpha = MYALPHALOW;
       HintPrintWait(MYFLASHTIME, breakfunc);
-      if([
-          [breakfunc]
-        ]()) {
+      if([[breakfunc]]()) {
         break;
       }
       Hint FadeOverTime(MYFLASHTIME);
       Hint.alpha = MYALPHAHIGH;
       HintPrintWait(MYFLASHTIME);
-      if([
-          [breakfunc]
-        ]()) {
+      if([[breakfunc]]()) {
         break;
       }
     }
   } else {
-    for (i = 0; i < 5; i++) {
+    for(i = 0; i < 5; i++) {
       Hint FadeOverTime(MYFLASHTIME);
       Hint.alpha = MYALPHALOW;
       HintPrintWait(MYFLASHTIME);
@@ -354,7 +350,7 @@ function_stack_proc(caller, func, param1, param2, param3, param4) {
 function_stack_caller_waits_for_turn(caller) {
   caller endon("death");
   self endon("death");
-  while (caller.function_stack[0] != self)
+  while(caller.function_stack[0] != self)
     caller waittill("level_function_stack_ready");
 }
 
@@ -454,7 +450,7 @@ is_later_in_alphabet(string1, string2) {
   count = string1.size;
   if(count >= string2.size)
     count = string2.size;
-  for (i = 0; i < count; i++) {
+  for(i = 0; i < count; i++) {
     val = alphabet_compare(string1[i], string2[i]);
     if(val == "1st")
       return true;
@@ -488,8 +484,8 @@ effect_soundalias() {
 
 cannon_effect() {
   if(isDefined(self.v["repeat"])) {
-    for (i = 0; i < self.v["repeat"]; i++) {
-      playfx(level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
+    for(i = 0; i < self.v["repeat"]; i++) {
+      playFX(level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
       self exploder_delay();
     }
     return;
@@ -550,7 +546,7 @@ fire_effect() {
   self exploder_delay();
   if(isDefined(firefxSound))
     level thread loop_fx_sound(firefxSound, origin, ender, timeout);
-  playfx(level._effect[firefx], self.v["origin"], forward, up);
+  playFX(level._effect[firefx], self.v["origin"], forward, up);
 }
 
 trail_effect() {
@@ -560,18 +556,18 @@ trail_effect() {
   }
   temp_ent = undefined;
   if(self.v["trailfxtag"] == "tag_origin") {
-    PlayFxOnTag(level._effect[self.v["trailfx"]], self.model, self.v["trailfxtag"]);
+    playFXOnTag(level._effect[self.v["trailfx"]], self.model, self.v["trailfxtag"]);
   } else {
-    temp_ent = Spawn("script_model", self.model.origin);
-    temp_ent SetModel("tag_origin");
+    temp_ent = spawn("script_model", self.model.origin);
+    temp_ent setModel("tag_origin");
     temp_ent LinkTo(self.model);
-    PlayFxOnTag(level._effect[self.v["trailfx"]], temp_ent, self.v["trailfxtag"]);
+    playFXOnTag(level._effect[self.v["trailfx"]], temp_ent, self.v["trailfxtag"]);
   }
   if(isDefined(self.v["trailfxsound"])) {
     if(!isDefined(temp_ent)) {
-      self.model PlayLoopSound(self.v["trailfxsound"]);
+      self.model playLoopSound(self.v["trailfxsound"]);
     } else {
-      temp_ent PlayLoopSound(self.v["trailfxsound"]);
+      temp_ent playLoopSound(self.v["trailfxsound"]);
     }
   }
   if(isDefined(self.v["ender"])) {}
@@ -613,7 +609,7 @@ array_waitlogic2(ent, msg, timeout) {
 }
 
 exec_func(func, endons) {
-  for (i = 0; i < endons.size; i++) {
+  for(i = 0; i < endons.size; i++) {
     endons[i].caller endon(endons[i].ender);
   }
   if(func.parms.size == 0) {

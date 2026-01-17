@@ -4,7 +4,7 @@
 *********************************************/
 
 main() {
-  self setmodel("c_usa_angola_hudson_fb");
+  self setModel("c_usa_angola_hudson_fb");
   self.hatmodel = "c_usa_angola_hudson_glasses";
   self attach(self.hatmodel);
   self.gearmodel = "c_usa_angola_hudson_hat";

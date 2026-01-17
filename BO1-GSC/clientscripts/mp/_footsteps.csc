@@ -14,11 +14,11 @@ playerFootstep(client_num, player, movementtype, ground_type, firstperson, quiet
   sound_alias = buildMovementSoundAliasName(full_movement_type, ground_type, firstperson, quiet, player);
   player.movementtype = movementtype;
   if(getdvarint(#"debug_footsteps") > 0) {}
-  player playsound(client_num, sound_alias);
+  player playSound(client_num, sound_alias);
   if(isDefined(player.step_sound) && (!quiet) && (player.step_sound) != "none") {
     volume = clientscripts\mp\_audio::get_vol_from_speed(player);
     if(getdvarint(#"debug_audio") > 0 && (firstperson)) {}
-    player playsound(client_num, player.step_sound, player.origin, volume);
+    player playSound(client_num, player.step_sound, player.origin, volume);
   }
 }
 playerJump(client_num, player, ground_type, firstperson, quiet) {
@@ -26,23 +26,23 @@ playerJump(client_num, player, ground_type, firstperson, quiet) {
     return;
   }
   sound_alias = buildMovementSoundAliasName("step_run", ground_type, firstperson, quiet, player);
-  player playsound(client_num, sound_alias);
+  player playSound(client_num, sound_alias);
 }
 playerLand(client_num, player, ground_type, firstperson, quiet, damagePlayer) {
   if(player HasPerk("specialty_quieter")) {
     return;
   }
   sound_alias = buildMovementSoundAliasName("land", ground_type, firstperson, quiet, player);
-  player playsound(client_num, sound_alias);
+  player playSound(client_num, sound_alias);
   if(isDefined(player.step_sound) && (!quiet) && (player.step_sound) != "none") {
     volume = clientscripts\mp\_audio::get_vol_from_speed(player);
-    player playsound(client_num, player.step_sound, player.origin, volume);
+    player playSound(client_num, player.step_sound, player.origin, volume);
   }
   if(damagePlayer) {
     sound_alias = "fly_land_damage_npc";
     if(firstperson) {
       sound_alias = "fly_land_damage_plr";
-      player playsound(client_num, sound_alias);
+      player playSound(client_num, sound_alias);
     }
   }
 }
@@ -55,7 +55,7 @@ playerFoliage(client_num, player, firstperson, quiet) {
     sound_alias = "fly_movement_foliage_plr";
   }
   volume = clientscripts\mp\_audio::get_vol_from_speed(player);
-  player playsound(client_num, sound_alias, player.origin, volume);
+  player playSound(client_num, sound_alias, player.origin, volume);
 }
 buildMovementSoundAliasName(movementtype, ground_type, firstperson, quiet, player) {
   sound_alias = "fly_";
@@ -77,11 +77,11 @@ do_foot_effect(client_num, ground_type, foot_pos, on_fire) {
   if(on_fire) {
     ground_type = "fire";
   }
-  for (i = 0; i < level._optionalStepEffects.size; i++) {
+  for(i = 0; i < level._optionalStepEffects.size; i++) {
     if(level._optionalStepEffects[i] == ground_type) {
       effect = "fly_step_" + ground_type;
       if(isDefined(level._effect[effect])) {
-        playfx(client_num, level._effect[effect], foot_pos, foot_pos + (0, 0, 100));
+        playFX(client_num, level._effect[effect], foot_pos, foot_pos + (0, 0, 100));
         return;
       }
     }

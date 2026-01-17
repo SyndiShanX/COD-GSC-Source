@@ -74,9 +74,7 @@ initialize(animscript) {
   if(isDefined(self.a.postscriptfunc)) {
     scriptfunc = self.a.postscriptfunc;
     self.a.postscriptfunc = undefined;
-    [
-      [scriptfunc]
-    ](animscript);
+    [[scriptfunc]](animscript);
   }
 
   if((animscript == "move" || animscript == "combat") && self.weapon == self.sidearm && (!isDefined(self.forcesidearm) || !self.forcesidearm))
@@ -196,9 +194,9 @@ getnodeyawtoenemy() {
     pos = self.enemy.origin;
   else {
     if(isDefined(self.node))
-      forward = anglestoforward(self.node.angles);
+      forward = anglesToForward(self.node.angles);
     else
-      forward = anglestoforward(self.angles);
+      forward = anglesToForward(self.angles);
 
     forward = vectorscale(forward, 150);
     pos = self.origin + forward;
@@ -226,7 +224,7 @@ getyawtoenemy() {
   if(isvalidenemy(self.enemy))
     pos = self.enemy.origin;
   else {
-    forward = anglestoforward(self.angles);
+    forward = anglesToForward(self.angles);
     forward = vectorscale(forward, 150);
     pos = self.origin + forward;
   }
@@ -427,9 +425,7 @@ shootenemywrapper() {
   if(weaponisgasweapon(self.weapon))
     [[anim.shootflamethrowerwrapper_func]]();
   else
-    [
-      [anim.shootenemywrapper_func]
-    ]();
+    [[anim.shootenemywrapper_func]]();
 }
 
 getnodedirection() {
@@ -513,7 +509,7 @@ personalcoldbreath() {
 
   for(;;) {
     if(self.a.movement != "run") {
-      playfxontag(level._effect["cold_breath"], self, tag);
+      playFXOnTag(level._effect["cold_breath"], self, tag);
       wait(2.5 + randomfloat(3));
       continue;
     }
@@ -585,7 +581,7 @@ canseeenemy() {
   if(!isvalidenemy(self.enemy))
     return false;
 
-  if(self cansee(self.enemy) && checkpitchvisibility(self geteye(), self.enemy getshootatpos()) || isDefined(self.cansee_override) && self.cansee_override) {
+  if(self cansee(self.enemy) && checkpitchvisibility(self getEye(), self.enemy getshootatpos()) || isDefined(self.cansee_override) && self.cansee_override) {
     self.goodshootposvalid = 1;
     self.goodshootpos = getenemyeyepos();
     dontgiveuponsuppressionyet();
@@ -627,7 +623,7 @@ getnodeoffset(node) {
   cover_stand_offset = (-3.7, -22, 63);
   nodeoffset = (0, 0, 0);
   right = anglestoright(node.angles);
-  forward = anglestoforward(node.angles);
+  forward = anglesToForward(node.angles);
 
   switch (node.type) {
     case "Cover Left":
@@ -798,7 +794,7 @@ aisuppressai() {
     return false;
 
   if(self.a.script == "combat") {
-    if(!sighttracepassed(self geteye(), self gettagorigin("tag_flash"), 0, undefined))
+    if(!sighttracepassed(self getEye(), self gettagorigin("tag_flash"), 0, undefined))
       return false;
   }
 
@@ -903,7 +899,7 @@ findgoodsuppressspot(startoffset) {
   self.lastenemysightposselforigin = self.origin;
   self.lastenemysightposold = self.lastenemysightpos;
   currentenemypos = getenemyeyepos();
-  trace = bullettrace(self.lastenemysightpos, currentenemypos, 0, undefined);
+  trace = bulletTrace(self.lastenemysightpos, currentenemypos, 0, undefined);
   starttracesat = trace["position"];
   percievedmovementvector = self.lastenemysightpos - starttracesat;
   lookvector = vectornormalize(self.lastenemysightpos - startoffset);
@@ -1197,7 +1193,7 @@ do_ragdoll_death() {
     }
 
     self.allowdeath = 1;
-    self setcandamage(1);
+    self setCanDamage(1);
     self dodamage(self.health + 100, self.origin, self.attacker);
   }
 }
@@ -1214,7 +1210,7 @@ become_corpse() {
     self animscripts\shared::dropallaiweapons();
   }
 
-  self setcandamage(1);
+  self setCanDamage(1);
   self.do_ragdoll_death = 0;
   self dodamage(self.health + 100, self.origin);
 }
@@ -1257,7 +1253,7 @@ isoktolookatentity() {
 }
 
 entityinfront(origin) {
-  forward = anglestoforward(self.angles);
+  forward = anglesToForward(self.angles);
   dot = vectordot(forward, vectornormalize(origin - self.origin));
   return dot > 0.3;
 }
@@ -1399,7 +1395,7 @@ badplacer(time, org, radius) {
   for(i = 0; i < time * 20; i++) {
     for(p = 0; p < 10; p++) {
       angles = (0, randomint(360), 0);
-      forward = anglestoforward(angles);
+      forward = anglesToForward(angles);
       scale = vectorscale(forward, radius);
       line(org, org + scale, (1, 0.3, 0.3));
     }
@@ -1439,7 +1435,7 @@ debugposinternal(org, string, size) {
   self endon("death");
   self notify("stop debug " + org);
   self endon("stop debug " + org);
-  ent = spawnstruct();
+  ent = spawnStruct();
   ent thread debugtimeout();
   ent endon("timeout");
 

@@ -7,7 +7,7 @@
 #include common_scripts\utility;
 
 main() {
-  leaks = getentarray("leaking", "targetname");
+  leaks = getEntArray("leaking", "targetname");
   if(!leaks.size) {
     return;
   }
@@ -57,9 +57,9 @@ leak_barrel_setup() {
 }
 
 leak_think() {
-  self setcandamage(true);
+  self setCanDamage(true);
   self endon("drained");
-  while (1) {
+  while(1) {
     self waittill("damage", damage, other, direction_vec, P, type);
     if(type == "MOD_MELEE" || type == "MOD_IMPACT") {
       continue;
@@ -86,12 +86,12 @@ leak_drain(P) {
     depth = 0;
   ratio = (depth / (self.highZ - self.lowZ)) * self.volume;
   if(self.curvol > ratio) {
-    while (self.curvol > ratio) {
-      playfx(level._effect["leak_interactive_leak"][self.script_noteworthy], P, vec);
+    while(self.curvol > ratio) {
+      playFX(level._effect["leak_interactive_leak"][self.script_noteworthy], P, vec);
       self.curvol -= 100;
       wait .1;
     }
-    playfx(level._effect["leak_interactive_drain"][self.script_noteworthy], P, vec);
+    playFX(level._effect["leak_interactive_drain"][self.script_noteworthy], P, vec);
   }
   if((self.curvol / self.volume) <= .05)
     self notify("drained");
@@ -136,7 +136,7 @@ leak_calc_assert(P, type) {
 }
 
 precacheFX() {
-  for (i = 0; i < self.size; i++) {
+  for(i = 0; i < self.size; i++) {
     if(self[i].script_noteworthy != "barrel_oil") {
       continue;
     }
@@ -144,21 +144,21 @@ precacheFX() {
     level._effect["leak_interactive_drain"][self[i].script_noteworthy] = loadfx("impacts/barrel_drain");
     break;
   }
-  for (i = 0; i < self.size; i++) {
+  for(i = 0; i < self.size; i++) {
     if(self[i].script_noteworthy != "barrel_acid")
       continue;
     level._effect["leak_interactive_leak"][self[i].script_noteworthy] = loadfx("impacts/barrel_leak");
     level._effect["leak_interactive_drain"][self[i].script_noteworthy] = loadfx("impacts/barrel_drain");
     break;
   }
-  for (i = 0; i < self.size; i++) {
+  for(i = 0; i < self.size; i++) {
     if(self[i].script_noteworthy != "barrel_water")
       continue;
     level._effect["leak_interactive_leak"][self[i].script_noteworthy] = loadfx("impacts/barrel_leak");
     level._effect["leak_interactive_drain"][self[i].script_noteworthy] = loadfx("impacts/barrel_drain");
     break;
   }
-  for (i = 0; i < self.size; i++) {
+  for(i = 0; i < self.size; i++) {
     if(self[i].script_noteworthy != "barrel_sludge")
       continue;
     level._effect["leak_interactive_leak"][self[i].script_noteworthy] = loadfx("impacts/barrel_leak");

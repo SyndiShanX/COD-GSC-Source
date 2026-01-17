@@ -4,7 +4,7 @@
 ***************************************************/
 
 main() {
-  self setmodel("german_shepherd_vest");
+  self setModel("german_shepherd_vest");
   self.voice = "american";
   self.skeleton = "base";
 }

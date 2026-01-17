@@ -69,7 +69,7 @@ main() {
   level.enemy_location_override_func = maps\mp\zm_transit_bus::enemy_location_override;
   level.adjust_enemyoverride_func = maps\mp\zm_transit_bus::adjust_enemyoverride;
   level.closest_player_override = ::closest_player_transit;
-  door_triggers = getentarray("electric_door", "script_noteworthy");
+  door_triggers = getEntArray("electric_door", "script_noteworthy");
 
   foreach(trigger in door_triggers) {
     if(isDefined(trigger.script_flag) && trigger.script_flag == "OnPowDoorWH") {
@@ -78,7 +78,7 @@ main() {
     trigger.power_door_ignore_flag_wait = 1;
   }
 
-  door_triggers = getentarray("local_electric_door", "script_noteworthy");
+  door_triggers = getEntArray("local_electric_door", "script_noteworthy");
 
   foreach(trigger in door_triggers) {
     if(isDefined(trigger.script_flag) && trigger.script_flag == "OnPowDoorWH") {
@@ -117,8 +117,7 @@ main() {
   level.zombie_vars["zombie_intermission_time"] = 12;
 }
 
-zm_traversal_override_ignores() {
-}
+zm_traversal_override_ignores() {}
 
 zm_traversal_override(traversealias) {
   suffix = "";
@@ -185,7 +184,7 @@ closest_player_transit(origin, players) {
 }
 
 transit_vault_breach_init() {
-  vault_doors = getentarray("town_bunker_door", "targetname");
+  vault_doors = getEntArray("town_bunker_door", "targetname");
   array_thread(vault_doors, ::transit_vault_breach);
 }
 
@@ -207,10 +206,10 @@ transit_vault_breach() {
 vault_breach_think() {
   level endon("intermission");
   self.health = 99999;
-  self setcandamage(1);
+  self setCanDamage(1);
   self.damage_state = 0;
   self.clip.health = 99999;
-  self.clip setcandamage(1);
+  self.clip setCanDamage(1);
 
   while(true) {
     self thread track_clip_damage();
@@ -226,8 +225,8 @@ vault_breach_think() {
       if(self.damage_state == 0)
         self.damage_state = 1;
 
-      playfxontag(level._effect["def_explosion"], self, "tag_origin");
-      self playsound("exp_vault_explode");
+      playFXOnTag(level._effect["def_explosion"], self, "tag_origin");
+      self playSound("exp_vault_explode");
       self bunkerdoorrotate(1);
 
       if(isDefined(self.script_flag))
@@ -272,13 +271,13 @@ collapsing_bridge_init() {
   if(!isDefined(trig)) {
     return;
   }
-  bridge = getentarray(trig.target, "targetname");
+  bridge = getEntArray(trig.target, "targetname");
 
   if(!isDefined(bridge)) {
     return;
   }
   trig waittill("trigger", who);
-  trig playsound("evt_bridge_collapse_start");
+  trig playSound("evt_bridge_collapse_start");
   trig thread play_delayed_sound(time);
 
   for(i = 0; i < bridge.size; i++) {
@@ -302,24 +301,24 @@ collapsing_bridge_init() {
 
 play_delayed_sound(time) {
   wait(time);
-  self playsound("evt_bridge_collapse_end");
+  self playSound("evt_bridge_collapse_end");
 }
 
 banking_and_weapon_locker_main() {
   flag_wait("start_zombie_round_logic");
-  weapon_locker = spawnstruct();
+  weapon_locker = spawnStruct();
   weapon_locker.origin = (8236, -6844, 144);
   weapon_locker.angles = vectorscale((0, 1, 0), 30.0);
   weapon_locker.script_length = 16;
   weapon_locker.script_width = 32;
   weapon_locker.script_height = 64;
-  deposit_spot = spawnstruct();
+  deposit_spot = spawnStruct();
   deposit_spot.origin = (588, 402, 6);
   deposit_spot.angles = (0, 0, 0);
   deposit_spot.targetname = "bank_deposit";
   deposit_spot.script_unitrigger_type = "unitrigger_radius_use";
   deposit_spot.radius = 32;
-  withdraw_spot = spawnstruct();
+  withdraw_spot = spawnStruct();
   withdraw_spot.origin = (588, 496, 6);
   withdraw_spot.angles = (0, 0, 0);
   withdraw_spot.targetname = "bank_withdraw";
@@ -333,7 +332,7 @@ banking_and_weapon_locker_main() {
 }
 
 bus_roof_damage_init() {
-  trigs = getentarray("bus_knock_off", "targetname");
+  trigs = getEntArray("bus_knock_off", "targetname");
   array_thread(trigs, ::bus_roof_damage);
 }
 
@@ -397,7 +396,7 @@ spawn_inert_zombies() {
 }
 
 sparking_power_lines() {
-  lines = getentarray("power_line_sparking", "targetname");
+  lines = getEntArray("power_line_sparking", "targetname");
 }
 
 callback_spectator_respawn_custom_score() {

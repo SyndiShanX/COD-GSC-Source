@@ -16,7 +16,7 @@ function main() {
   level.teargasduration = 23;
   level.tearsufferingduration = 3;
   level.teargrenadetimer = 4;
-  fgmonitor = perplayer::init("tear_grenade_monitor", & startmonitoringtearusage, & stopmonitoringtearusage);
+  fgmonitor = perplayer::init("tear_grenade_monitor", &startmonitoringtearusage, &stopmonitoringtearusage);
   perplayer::enable(fgmonitor);
 }
 
@@ -36,24 +36,24 @@ function monitortearusage() {
     return;
   }
   prevammo = self getammocount(weapon);
-  while (true) {
+  while(true) {
     ammo = self getammocount(weapon);
     if(ammo < prevammo) {
       num = prevammo - ammo;
-      for (i = 0; i < num; i++) {
-        grenades = getentarray("grenade", "classname");
+      for(i = 0; i < num; i++) {
+        grenades = getEntArray("grenade", "classname");
         bestdist = undefined;
         bestg = undefined;
-        for (g = 0; g < grenades.size; g++) {
-          if(!isdefined(grenades[g].teargrenade)) {
+        for(g = 0; g < grenades.size; g++) {
+          if(!isDefined(grenades[g].teargrenade)) {
             dist = distance(grenades[g].origin, self.origin + vectorscale((0, 0, 1), 48));
-            if(!isdefined(bestdist) || dist < bestdist) {
+            if(!isDefined(bestdist) || dist < bestdist) {
               bestdist = dist;
               bestg = g;
             }
           }
         }
-        if(isdefined(bestdist)) {
+        if(isDefined(bestdist)) {
           grenades[bestg].teargrenade = 1;
           grenades[bestg] thread teargrenade_think(self.team);
         }
@@ -66,7 +66,7 @@ function monitortearusage() {
 
 function teargrenade_think(team) {
   wait(level.teargrenadetimer);
-  ent = spawnstruct();
+  ent = spawnStruct();
   ent thread tear(self.origin);
 }
 
@@ -75,7 +75,7 @@ function tear(pos) {
   starttime = gettime();
   self thread teartimer();
   self endon("tear_timeout");
-  while (true) {
+  while(true) {
     trig waittill("trigger", player);
     if(player.sessionstate != "playing") {
       continue;
@@ -96,7 +96,7 @@ function tear(pos) {
       continue;
     }
     player.teargasstarttime = gettime();
-    if(!isdefined(player.teargassuffering)) {
+    if(!isDefined(player.teargassuffering)) {
       player thread teargassuffering();
     }
   }
@@ -114,7 +114,7 @@ function teargassuffering() {
   if(self util::mayapplyscreeneffect()) {
     self shellshock("teargas", 60);
   }
-  while (true) {
+  while(true) {
     if((gettime() - self.teargasstarttime) > (level.tearsufferingduration * 1000)) {
       break;
     }
@@ -128,14 +128,14 @@ function teargassuffering() {
 
 function drawcylinder(pos, rad, height) {
   time = 0;
-  while (true) {
+  while(true) {
     currad = rad;
     curheight = height;
     if(time < level.teargasfillduration) {
       currad = currad * (time / level.teargasfillduration);
       curheight = curheight * (time / level.teargasfillduration);
     }
-    for (r = 0; r < 20; r++) {
+    for(r = 0; r < 20; r++) {
       theta = (r / 20) * 360;
       theta2 = ((r + 1) / 20) * 360;
       line(pos + (cos(theta) * currad, sin(theta) * currad, 0), pos + (cos(theta2) * currad, sin(theta2) * currad, 0));

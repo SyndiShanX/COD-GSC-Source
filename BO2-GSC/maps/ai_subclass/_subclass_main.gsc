@@ -43,5 +43,4 @@ subclass_regular_allies() {
   self.maxfaceenemydist = 350;
 }
 
-subclass_regular_axis() {
-}
+subclass_regular_axis() {}

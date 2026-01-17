@@ -9,11 +9,11 @@
 #include maps\_specialops_code;
 
 specialops_init() {
-  if(!isdefined(level.so_override))
+  if(!isDefined(level.so_override))
     level.so_override = [];
 
   // Be sure to enable the friendlyfire warnings for all SO maps, unless already specified not to.
-  if(!IsDefined(level.friendlyfire_warnings)) {
+  if(!isDefined(level.friendlyfire_warnings)) {
     level.friendlyfire_warnings = true;
   }
 
@@ -48,7 +48,7 @@ specialops_init() {
   // Default friendly fire scaler.
   setsaveddvar("g_friendlyfireDamageScale", 2);
 
-  if(isdefined(level.so_compass_zoom)) {
+  if(isDefined(level.so_compass_zoom)) {
     compass_dist = 0;
     switch (level.so_compass_zoom) {
       case "close":
@@ -144,10 +144,10 @@ so_standard_wait() {
 }
 
 specialops_remove_unused() {
-  entarray = getentarray();
-  if(!isdefined(entarray))
+  entarray = getEntArray();
+  if(!isDefined(entarray)) {
     return;
-
+  }
   special_op_state = is_specialop();
   foreach(ent in entarray) {
     if(ent specialops_remove_entity_check(special_op_state))
@@ -174,7 +174,7 @@ enable_triggered_start(challenge_id_start) {
   level endon("challenge_timer_expired");
 
   trigger_ent = getent(challenge_id_start, "script_noteworthy");
-  AssertEx(isdefined(trigger_ent), "challenge_id (" + challenge_id_start + ") was unable to match with a valid trigger.");
+  AssertEx(isDefined(trigger_ent), "challenge_id (" + challenge_id_start + ") was unable to match with a valid trigger.");
 
   trigger_ent waittill("trigger");
   flag_set(challenge_id_start);
@@ -199,11 +199,11 @@ enable_triggered_complete(challenge_id, challenge_id_complete, touch_style) {
 
   flag_set(challenge_id);
 
-  if(!isdefined(touch_style))
+  if(!isDefined(touch_style))
     touch_style = "freeze";
 
   trigger_ent = getent(challenge_id, "script_noteworthy");
-  AssertEx(isdefined(trigger_ent), "challenge_id (" + challenge_id + ") was unable to match with a valid trigger.");
+  AssertEx(isDefined(trigger_ent), "challenge_id (" + challenge_id + ") was unable to match with a valid trigger.");
   thread disable_mission_end_trigger(trigger_ent);
 
   switch (touch_style) {
@@ -236,11 +236,11 @@ enable_triggered_complete(challenge_id, challenge_id_complete, touch_style) {
 =============
 */
 fade_challenge_in(wait_time, doDialogue) {
-  if(!isdefined(wait_time))
+  if(!isDefined(wait_time))
     wait_time = 0.5;
 
   alpha = 1;
-  if(isdefined(level.so_waiting_for_players_alpha))
+  if(isDefined(level.so_waiting_for_players_alpha))
     alpha = level.so_waiting_for_players_alpha;
   screen_fade = create_client_overlay("black", alpha);
 
@@ -249,7 +249,7 @@ fade_challenge_in(wait_time, doDialogue) {
   screen_fade thread fade_over_time(0, 1);
   wait 0.75;
 
-  if(!IsDefined(doDialogue) || (IsDefined(doDialogue) && doDialogue)) {
+  if(!isDefined(doDialogue) || (isDefined(doDialogue) && doDialogue)) {
     thread so_dialog_ready_up();
   }
 }
@@ -267,10 +267,10 @@ fade_challenge_in(wait_time, doDialogue) {
 =============
 */
 fade_challenge_out(challenge_id, skipDialog) {
-  if(!isdefined(skipDialog))
+  if(!isDefined(skipDialog))
     skipDialog = false;
 
-  if(isdefined(challenge_id))
+  if(isDefined(challenge_id))
     flag_wait(challenge_id);
 
   if(!skipDialog)
@@ -302,8 +302,8 @@ fade_challenge_out(challenge_id, skipDialog) {
 enable_countdown_timer(time_wait, set_start_time, message, timer_draw_delay) {
   level endon("special_op_terminated");
 
-  if(!isdefined(message))
-    message = & "SPECIAL_OPS_STARTING_IN";
+  if(!isDefined(message))
+    message = &"SPECIAL_OPS_STARTING_IN";
 
   hudelem = so_create_hud_item(0, so_hud_ypos(), message);
   hudelem SetPulseFX(50, time_wait * 1000, 500);
@@ -312,9 +312,9 @@ enable_countdown_timer(time_wait, set_start_time, message, timer_draw_delay) {
   hudelem_timer thread show_countdown_timer_time(time_wait, timer_draw_delay);
 
   wait time_wait;
-  level.player PlaySound("arcademode_zerodeaths");
+  level.player playSound("arcademode_zerodeaths");
 
-  if(isdefined(set_start_time) && set_start_time)
+  if(isDefined(set_start_time) && set_start_time)
     level.challenge_start_time = gettime();
 
   thread destroy_countdown_timer(hudelem, hudelem_timer);
@@ -331,7 +331,7 @@ show_countdown_timer_time(time_wait, delay) {
   self settenthstimer(time_wait);
   self.alpha = 0;
 
-  if(!isdefined(delay))
+  if(!isDefined(delay))
     delay = 0.625;
   wait delay;
   time_wait = int((time_wait - delay) * 1000);
@@ -355,24 +355,24 @@ show_countdown_timer_time(time_wait, delay) {
 =============
 */
 enable_challenge_timer(start_flag, passed_flag, message) {
-  assertex(isdefined(passed_flag), "display_challenge_timer_down() needs a valid passed_flag.");
+  assertex(isDefined(passed_flag), "display_challenge_timer_down() needs a valid passed_flag.");
 
-  if(isdefined(start_flag)) {
+  if(isDefined(start_flag)) {
     if(!flag_exist(start_flag))
       flag_init(start_flag);
     level.start_flag = start_flag;
   }
 
-  if(isdefined(passed_flag)) {
+  if(isDefined(passed_flag)) {
     if(!flag_exist(passed_flag))
       flag_init(passed_flag);
     level.passed_flag = passed_flag;
   }
 
-  if(!isdefined(message))
-    message = & "SPECIAL_OPS_TIME";
+  if(!isDefined(message))
+    message = &"SPECIAL_OPS_TIME";
 
-  if(!isdefined(level.challenge_time_beep_start))
+  if(!isDefined(level.challenge_time_beep_start))
     level.challenge_time_beep_start = level.challenge_time_hurry;
   level.so_challenge_time_beep = level.challenge_time_beep_start + 1;
 
@@ -393,12 +393,12 @@ enable_challenge_timer(start_flag, passed_flag, message) {
 */
 so_wait_for_players_ready() {
   // Disabled entirely for now.
-  if(!isdefined(level.so_enable_wait_for_players))
+  if(!isDefined(level.so_enable_wait_for_players)) {
     return;
-
-  if(!is_coop() || issplitscreen())
+  }
+  if(!is_coop() || issplitscreen()) {
     return;
-
+  }
   level.so_waiting_for_players = true;
   level.so_waiting_for_players_alpha = 0.85;
 
@@ -408,7 +408,7 @@ so_wait_for_players_ready() {
   screen_hold = create_client_overlay("black", 1);
   screen_hold fade_over_time(level.so_waiting_for_players_alpha, 1);
 
-  while (!flag("special_op_p1ready") || !flag("special_op_p2ready"))
+  while(!flag("special_op_p1ready") || !flag("special_op_p2ready"))
     wait 0.05;
 
   hold_time = 1;
@@ -428,11 +428,11 @@ so_wait_for_player_ready(my_flag, y_line) {
   self freezecontrols(true);
   self disableweapons();
 
-  self.waiting_to_start_hud = so_create_hud_item(0, 0, & "SPECIAL_OPS_PRESS_TO_START", self, true);
+  self.waiting_to_start_hud = so_create_hud_item(0, 0, &"SPECIAL_OPS_PRESS_TO_START", self, true);
   self.waiting_to_start_hud.alignx = "center";
   self.waiting_to_start_hud.horzAlign = "center";
 
-  self.ready_indication_hud = so_create_hud_item(y_line, 0, & "SPECIAL_OPS_PLAYER_IS_NOT_READY", undefined, true);
+  self.ready_indication_hud = so_create_hud_item(y_line, 0, &"SPECIAL_OPS_PLAYER_IS_NOT_READY", undefined, true);
   self.ready_indication_hud.alignx = "center";
   self.ready_indication_hud.horzAlign = "center";
   self.ready_indication_hud settext(self.playername);
@@ -445,17 +445,17 @@ so_wait_for_player_ready(my_flag, y_line) {
   NotifyOnCommand(self.unique_id + "_is_ready", "+gostand");
   NotifyOnCommand(self.unique_id + "_is_not_ready", "+stance");
 
-  while (1) {
+  while(1) {
     self waittill(self.unique_id + "_is_ready");
     flag_set(my_flag);
-    self PlaySound("so_player_is_ready");
-    self.waiting_to_start_hud.label = & "SPECIAL_OPS_PRESS_TO_CANCEL";
+    self playSound("so_player_is_ready");
+    self.waiting_to_start_hud.label = &"SPECIAL_OPS_PRESS_TO_CANCEL";
     self.ready_indication_hud so_hud_pulse_success(&"SPECIAL_OPS_PLAYER_IS_READY");
 
     self waittill(self.unique_id + "_is_not_ready");
     flag_clear(my_flag);
-    self PlaySound("so_player_not_ready");
-    self.waiting_to_start_hud.label = & "SPECIAL_OPS_PRESS_TO_START";
+    self playSound("so_player_not_ready");
+    self.waiting_to_start_hud.label = &"SPECIAL_OPS_PRESS_TO_START";
     self.ready_indication_hud so_hud_pulse_warning(&"SPECIAL_OPS_PLAYER_IS_NOT_READY");
   }
 }
@@ -485,7 +485,7 @@ so_wait_for_player_ready_cleanup(hold_time) {
 =============
 */
 attacker_is_p1(attacker) {
-  if(!isdefined(attacker))
+  if(!isDefined(attacker))
     return false;
 
   return attacker == level.player;
@@ -507,7 +507,7 @@ attacker_is_p2(attacker) {
   if(!is_coop())
     return false;
 
-  if(!isdefined(attacker))
+  if(!isDefined(attacker))
     return false;
 
   return attacker == level.player2;
@@ -527,22 +527,22 @@ attacker_is_p2(attacker) {
 enable_escape_warning() {
   level endon("special_op_terminated");
 
-  level.escape_warning_triggers = getentarray("player_trying_to_escape", "script_noteworthy");
+  level.escape_warning_triggers = getEntArray("player_trying_to_escape", "script_noteworthy");
   assertex(level.escape_warning_triggers.size > 0, "enable_escape_warning() requires at least one trigger with script_noteworthy = player_trying_to_escape");
 
-  add_hint_string("player_escape_warning", & "SPECIAL_OPS_EMPTY", ::disable_escape_warning);
-  while (true) {
+  add_hint_string("player_escape_warning", &"SPECIAL_OPS_EMPTY", ::disable_escape_warning);
+  while(true) {
     wait 0.05;
     foreach(trigger in level.escape_warning_triggers) {
       foreach(player in level.players) {
-        if(!isdefined(player.escape_hint_active)) {
+        if(!isDefined(player.escape_hint_active)) {
           if(player istouching(trigger)) {
             player.escape_hint_active = true;
             player thread ping_escape_warning();
             player display_hint_timeout("player_escape_warning");
           }
         } else {
-          if(!isdefined(player.ping_escape_splash))
+          if(!isDefined(player.ping_escape_splash))
             player thread ping_escape_warning();
         }
       }
@@ -585,32 +585,32 @@ enable_escape_failure() {
 */
 // type definition function is called on the entity, it must return boolean without sleep
 so_delete_all_by_type(type1_def_func, type2_def_func, type3_def_func, type4_def_func, type5_def_func) {
-  all_ents = getentarray();
+  all_ents = getEntArray();
   foreach(ent in all_ents) {
-    if(!isdefined(ent.code_classname))
+    if(!isDefined(ent.code_classname)) {
       continue;
-
-    isSpecialOpEnt = (isdefined(ent.script_specialops) && ent.script_specialops == 1);
+    }
+    isSpecialOpEnt = (isDefined(ent.script_specialops) && ent.script_specialops == 1);
     if(isSpecialOpEnt)
       continue;
     //intel items are handled by the _intelligence script...they need to do more than just delete the trigger.
-    isIntelItem = (isdefined(ent.targetname) && ent.targetname == "intelligence_item");
-    if(isIntelItem)
+    isIntelItem = (isDefined(ent.targetname) && ent.targetname == "intelligence_item");
+    if(isIntelItem) {
       continue;
-
+    }
     if(ent[[type1_def_func]]())
       ent delete();
 
-    if(isdefined(type2_def_func) && ent[[type2_def_func]]())
+    if(isDefined(type2_def_func) && ent[[type2_def_func]]())
       ent delete();
 
-    if(isdefined(type3_def_func) && ent[[type3_def_func]]())
+    if(isDefined(type3_def_func) && ent[[type3_def_func]]())
       ent delete();
 
-    if(isdefined(type4_def_func) && ent[[type4_def_func]]())
+    if(isDefined(type4_def_func) && ent[[type4_def_func]]())
       ent delete();
 
-    if(isdefined(type5_def_func) && ent[[type5_def_func]]())
+    if(isDefined(type5_def_func) && ent[[type5_def_func]]())
       ent delete();
   }
 }
@@ -618,21 +618,21 @@ so_delete_all_by_type(type1_def_func, type2_def_func, type3_def_func, type4_def_
 //============= some entity type function definitions ================
 // ENTITY TYPE DEFINITION FUNCTIONS RETURN BOOLEAN TEST ON SELF
 type_spawners() {
-  if(!isdefined(self.code_classname))
+  if(!isDefined(self.code_classname))
     return false;
 
   return isSubStr(self.code_classname, "actor_");
 }
 
 type_vehicle() {
-  if(!isdefined(self.code_classname))
+  if(!isDefined(self.code_classname))
     return false;
 
   return isSubStr(self.code_classname, "script_vehicle");
 }
 
 type_spawn_trigger() {
-  if(!isdefined(self.classname))
+  if(!isDefined(self.classname))
     return false;
 
   if(self.classname == "trigger_multiple_spawn")
@@ -644,20 +644,20 @@ type_spawn_trigger() {
   if(self.classname == "trigger_multiple_friendly_respawn")
     return true;
 
-  if(isdefined(self.targetname) && self.targetname == "flood_spawner")
+  if(isDefined(self.targetname) && self.targetname == "flood_spawner")
     return true;
 
-  if(isdefined(self.targetname) && self.targetname == "friendly_respawn_trigger")
+  if(isDefined(self.targetname) && self.targetname == "friendly_respawn_trigger")
     return true;
 
-  if(isdefined(self.spawnflags) && self.spawnflags & 32)
+  if(isDefined(self.spawnflags) && self.spawnflags & 32)
     return true;
 
   return false;
 }
 
 type_trigger() {
-  if(!isdefined(self.code_classname))
+  if(!isDefined(self.code_classname))
     return false;
 
   array = [];
@@ -669,11 +669,11 @@ type_trigger() {
   array["trigger_disk"] = 1;
   array["trigger_damage"] = 1;
 
-  return isdefined(array[self.code_classname]);
+  return isDefined(array[self.code_classname]);
 }
 
 type_flag_trigger() {
-  if(!IsDefined(self.classname)) {
+  if(!isDefined(self.classname)) {
     return false;
   }
 
@@ -684,7 +684,7 @@ type_flag_trigger() {
   array["trigger_multiple_flag_looking"] = 1;
   array["trigger_multiple_flag_lookat"] = 1;
 
-  return IsDefined(array[self.classname]);
+  return isDefined(array[self.classname]);
 }
 
 type_killspawner_trigger() {
@@ -692,7 +692,7 @@ type_killspawner_trigger() {
     return false;
   }
 
-  if(IsDefined(self.script_killspawner)) {
+  if(isDefined(self.script_killspawner)) {
     return true;
   }
 
@@ -700,11 +700,11 @@ type_killspawner_trigger() {
 }
 
 type_goalvolume() {
-  if(!IsDefined(self.classname)) {
+  if(!isDefined(self.classname)) {
     return false;
   }
 
-  if(self.classname == "info_volume" && IsDefined(self.script_goalvolume)) {
+  if(self.classname == "info_volume" && isDefined(self.script_goalvolume)) {
     return true;
   }
 
@@ -768,7 +768,7 @@ so_delete_all_spawners() {
 }
 
 so_delete_breach_ents() {
-  breach_solids = getentarray("breach_solid", "targetname");
+  breach_solids = getEntArray("breach_solid", "targetname");
   foreach(ent in breach_solids) {
     ent connectPaths();
     ent delete();
@@ -782,13 +782,13 @@ so_delete_breach_ents() {
 "Summary: Utility function to easily force the game to use a specific Special Ops deadquote."
 "Module: Utility"
 "MandatoryArg: <quote>: Message you want displayed on the Mission Failed summary."
-"Example: so_force_deadquote( &"SPECIAL_OPS_YOU_SUCK" );"
+"Example: so_force_deadquote(&"SPECIAL_OPS_YOU_SUCK" );"
 "SPMP: singleplayer"
 ///ScriptDocEnd
 =============
 */
 so_force_deadquote(quote, icon_dvar) {
-  assertex(isdefined(quote), "so_force_deadquote() requires a valid quote to be passed in.");
+  assertex(isDefined(quote), "so_force_deadquote() requires a valid quote to be passed in.");
 
   level.so_deadquotes = [];
   level.so_deadquotes[0] = quote;
@@ -810,7 +810,7 @@ so_force_deadquote(quote, icon_dvar) {
 =============
 */
 so_force_deadquote_array(quotes, icon_dvar) {
-  assertex(isdefined(quotes), "so_force_deadquote_array() requires a valid quote array to be passed in.");
+  assertex(isDefined(quotes), "so_force_deadquote_array() requires a valid quote array to be passed in.");
 
   level.so_deadquotes = quotes;
   level.so_deadquotes_chance = 1.0;
@@ -831,9 +831,9 @@ so_force_deadquote_array(quotes, icon_dvar) {
 =============
 */
 so_include_deadquote_array(quotes) {
-  assertex(isdefined(quotes), "so_include_deadquote_array() requires a valid quote array to be passed in.");
+  assertex(isDefined(quotes), "so_include_deadquote_array() requires a valid quote array to be passed in.");
 
-  if(!isdefined(level.so_deadquotes))
+  if(!isDefined(level.so_deadquotes))
     level.so_deadquotes = [];
   level.so_deadquotes = array_merge(level.so_deadquotes, quotes);
 }
@@ -855,19 +855,19 @@ so_include_deadquote_array(quotes) {
 =============
 */
 so_create_hud_item(yLine, xOffset, message, player, always_draw) {
-  if(isdefined(player))
+  if(isDefined(player))
     assertex(isplayer(player), "so_create_hud_item() received a value for player that did not pass the isplayer() check.");
 
-  if(!isdefined(yLine))
+  if(!isDefined(yLine))
     yLine = 0;
-  if(!isdefined(xOffset))
+  if(!isDefined(xOffset))
     xOffset = 0;
 
   // This is to globally shift all the SOs down by two lines to help with overlap with the objective and help text.
   yLine += 2;
 
   hudelem = undefined;
-  if(isdefined(player))
+  if(isDefined(player))
     hudelem = newClientHudElem(player);
   else
     hudelem = newHudElem();
@@ -884,11 +884,11 @@ so_create_hud_item(yLine, xOffset, message, player, always_draw) {
   hudelem.sort = 2;
   hudelem set_hud_white();
 
-  if(isdefined(message))
+  if(isDefined(message))
     hudelem.label = message;
 
-  if(!isdefined(always_draw) || !always_draw) {
-    if(isdefined(player)) {
+  if(!isDefined(always_draw) || !always_draw) {
+    if(isDefined(player)) {
       if(!player so_hud_can_show())
         player thread so_create_hud_item_delay_draw(hudelem);
     }
@@ -911,21 +911,21 @@ so_create_hud_item(yLine, xOffset, message, player, always_draw) {
 =============
 */
 so_hud_pulse_create(new_value) {
-  if(!so_hud_pulse_init())
+  if(!so_hud_pulse_init()) {
     return;
-
+  }
   self notify("update_hud_pulse");
   self endon("update_hud_pulse");
   self endon("destroying");
 
   // Need to update this script to support SetValue AND SetText AND updating the label.
-  if(isdefined(new_value))
+  if(isDefined(new_value))
     self.label = new_value;
 
-  if(isdefined(self.pulse_sound))
-    level.player PlaySound(self.pulse_sound);
+  if(isDefined(self.pulse_sound))
+    level.player playSound(self.pulse_sound);
 
-  if(isdefined(self.pulse_loop) && self.pulse_loop)
+  if(isDefined(self.pulse_loop) && self.pulse_loop)
     so_hud_pulse_loop();
   else
     so_hud_pulse_single(self.pulse_scale_big, self.pulse_scale_normal, self.pulse_time);
@@ -945,14 +945,14 @@ so_hud_pulse_create(new_value) {
 =============
 */
 so_hud_pulse_stop(new_value) {
-  if(!so_hud_pulse_init())
+  if(!so_hud_pulse_init()) {
     return;
-
+  }
   self notify("update_hud_pulse");
   self endon("update_hud_pulse");
   self endon("destroying");
 
-  if(isdefined(new_value))
+  if(isDefined(new_value))
     self.label = new_value;
 
   self.pulse_loop = false;
@@ -1110,7 +1110,7 @@ so_hud_ypos() {
 =============
 */
 so_remove_hud_item(destroy_immediately, decay_immediately) {
-  if(isdefined(destroy_immediately) && destroy_immediately) {
+  if(isDefined(destroy_immediately) && destroy_immediately) {
     self notify("destroying");
     self Destroy();
     return;
@@ -1118,7 +1118,7 @@ so_remove_hud_item(destroy_immediately, decay_immediately) {
 
   self thread so_hud_pulse_stop();
 
-  if(isdefined(decay_immediately) && decay_immediately) {
+  if(isDefined(decay_immediately) && decay_immediately) {
     self SetPulseFX(0, 0, 500);
     wait(0.5);
   } else {
@@ -1144,7 +1144,7 @@ so_remove_hud_item(destroy_immediately, decay_immediately) {
 =============
 */
 set_hud_white(new_alpha) {
-  if(isdefined(new_alpha)) {
+  if(isDefined(new_alpha)) {
     self.alpha = new_alpha;
     self.glowAlpha = new_alpha;
   }
@@ -1167,7 +1167,7 @@ set_hud_white(new_alpha) {
 =============
 */
 set_hud_blue(new_alpha) {
-  if(isdefined(new_alpha)) {
+  if(isDefined(new_alpha)) {
     self.alpha = new_alpha;
     self.glowAlpha = new_alpha;
   }
@@ -1190,7 +1190,7 @@ set_hud_blue(new_alpha) {
 =============
 */
 set_hud_green(new_alpha) {
-  if(isdefined(new_alpha)) {
+  if(isDefined(new_alpha)) {
     self.alpha = new_alpha;
     self.glowAlpha = new_alpha;
   }
@@ -1213,7 +1213,7 @@ set_hud_green(new_alpha) {
 =============
 */
 set_hud_yellow(new_alpha) {
-  if(isdefined(new_alpha)) {
+  if(isDefined(new_alpha)) {
     self.alpha = new_alpha;
     self.glowAlpha = new_alpha;
   }
@@ -1236,7 +1236,7 @@ set_hud_yellow(new_alpha) {
 =============
 */
 set_hud_red(new_alpha) {
-  if(isdefined(new_alpha)) {
+  if(isDefined(new_alpha)) {
     self.alpha = new_alpha;
     self.glowAlpha = new_alpha;
   }
@@ -1262,14 +1262,14 @@ info_hud_wait_for_player(endon_notify) {
   assertex(isplayer(self), "info_hud_wait_for_player() must be called on a player.");
 
   // Prevent thread from being initiated multiple times.
-  if(isdefined(self.so_infohud_toggle_state))
+  if(isDefined(self.so_infohud_toggle_state)) {
     return;
-
+  }
   level endon("challenge_timer_expired");
   level endon("challenge_timer_passed");
   level endon("special_op_terminated");
   self endon("death");
-  if(isdefined(endon_notify))
+  if(isDefined(endon_notify))
     level endon(endon_notify);
 
   self setWeaponHudIconOverride("actionslot1", "hud_show_timer");
@@ -1282,7 +1282,7 @@ info_hud_wait_for_player(endon_notify) {
   }
 
   self notify("so_hud_toggle_available");
-  while (1) {
+  while(1) {
     self waittill("toggle_challenge_timer");
     switch (self.so_infohud_toggle_state) {
       case "on":
@@ -1314,10 +1314,10 @@ info_hud_start_state() {
     return "on";
   }
 
-  if(isdefined(level.challenge_time_limit))
+  if(isDefined(level.challenge_time_limit))
     return "on";
 
-  if(isdefined(level.challenge_time_force_on) && level.challenge_time_force_on)
+  if(isDefined(level.challenge_time_force_on) && level.challenge_time_force_on)
     return "on";
 
   return "off";
@@ -1339,14 +1339,14 @@ info_hud_start_state() {
 */
 info_hud_handle_fade(hudelem, endon_notify) {
   assertex(isplayer(self), "info_hud_handle_fade() must be called on a player.");
-  assertex(isdefined(hudelem), "info_hud_handle_fade() requires a valid hudelem to be passed in.");
+  assertex(isDefined(hudelem), "info_hud_handle_fade() requires a valid hudelem to be passed in.");
 
   level endon("new_challenge_timer");
   level endon("challenge_timer_expired");
   level endon("challenge_timer_passed");
   level endon("special_op_terminated");
   self endon("death");
-  if(isdefined(endon_notify))
+  if(isDefined(endon_notify))
     level endon(endon_notify);
 
   hudelem.so_can_toggle = true;
@@ -1354,7 +1354,7 @@ info_hud_handle_fade(hudelem, endon_notify) {
   self ent_flag_wait("so_hud_can_toggle");
   info_hud_update_alpha(hudelem);
 
-  while (1) {
+  while(1) {
     self waittill("update_challenge_timer");
     hudelem FadeOverTime(0.25);
     info_hud_update_alpha(hudelem);
@@ -1385,7 +1385,7 @@ info_hud_update_alpha(hudelem) {
 =============
 */
 info_hud_decrement_timer(time) {
-  if(!IsDefined(level.challenge_time_limit)) {
+  if(!isDefined(level.challenge_time_limit)) {
     return;
   }
 
@@ -1457,7 +1457,7 @@ has_been_played() {
   foreach(player in level.players) {
     current_best_time = player GetLocalPlayerProfileData(best_time_name);
 
-    if(!isdefined(current_best_time))
+    if(!isDefined(current_best_time))
       continue; // non local player
 
     if(current_best_time != 0)
@@ -1468,17 +1468,17 @@ has_been_played() {
 }
 
 is_best_time(time_start, time_current, time_frac) {
-  if(!isdefined(time_start)) {
-    if(isdefined(level.challenge_start_time))
+  if(!isDefined(time_start)) {
+    if(isDefined(level.challenge_start_time))
       time_start = level.challenge_start_time;
     else
       time_start = 300; // Frame time that script actually starts on.
   }
 
-  if(!isdefined(time_current))
+  if(!isDefined(time_current))
     time_current = gettime();
 
-  if(!isdefined(time_frac))
+  if(!isDefined(time_frac))
     time_frac = 0.0;
 
   // Check for best time.
@@ -1491,13 +1491,13 @@ is_best_time(time_start, time_current, time_frac) {
   foreach(player in level.players) {
     current_best_time = player GetLocalPlayerProfileData(best_time_name);
 
-    if(!isdefined(current_best_time))
+    if(!isDefined(current_best_time))
       continue; // non local player
 
     never_played = (current_best_time == 0);
-    if(never_played)
+    if(never_played) {
       continue;
-
+    }
     current_best_time -= (current_best_time * time_frac);
     if(m_seconds < current_best_time)
       return true;
@@ -1507,17 +1507,17 @@ is_best_time(time_start, time_current, time_frac) {
 }
 
 is_poor_time(time_start, time_current, time_frac) {
-  if(!isdefined(time_start)) {
-    if(isdefined(level.challenge_start_time))
+  if(!isDefined(time_start)) {
+    if(isDefined(level.challenge_start_time))
       time_start = level.challenge_start_time;
     else
       time_start = 300; // Frame time that script actually starts on.
   }
 
-  if(!isdefined(time_current))
+  if(!isDefined(time_current))
     time_current = gettime();
 
-  if(!isdefined(time_frac))
+  if(!isDefined(time_frac))
     time_frac = 0.0;
 
   m_seconds = (time_current - time_start);
@@ -1566,10 +1566,10 @@ so_dialog_mission_success() {
 */
 so_dialog_mission_failed(sound_alias) {
   // This is designed to prevent multiple failed messages from playing. Only the first one gets played.
-  assertex(isdefined(sound_alias), "so_dialog_mission_failed() requires a valid sound_alias.");
-  if(isdefined(level.failed_dialog_played) && level.failed_dialog_played)
+  assertex(isDefined(sound_alias), "so_dialog_mission_failed() requires a valid sound_alias.");
+  if(isDefined(level.failed_dialog_played) && level.failed_dialog_played) {
     return;
-
+  }
   level.failed_dialog_played = true;
   so_dialog_play(sound_alias, 0.5, true);
 }
@@ -1598,9 +1598,9 @@ so_dialog_time_low_hurry() {
 }
 
 so_dialog_killing_civilians() {
-  if(!isdefined(level.civilian_warning_time)) {
+  if(!isDefined(level.civilian_warning_time)) {
     level.civilian_warning_time = gettime();
-    if(!isdefined(level.civilian_warning_throttle))
+    if(!isDefined(level.civilian_warning_throttle))
       level.civilian_warning_throttle = 5000;
   } else {
     if((gettime() - level.civilian_warning_time) < level.civilian_warning_throttle)
@@ -1614,13 +1614,13 @@ so_dialog_killing_civilians() {
 
 // Note this doesn't account for any mission which might go "backwards" in regards to current_value.
 so_dialog_progress_update(current_value, current_goal) {
-  if(!isdefined(current_value))
+  if(!isDefined(current_value)) {
     return;
-
-  if(!isdefined(current_goal))
+  }
+  if(!isDefined(current_goal)) {
     return;
-
-  if(!isdefined(level.so_progress_goal_status))
+  }
+  if(!isDefined(level.so_progress_goal_status))
     level.so_progress_goal_status = "none";
 
   time_frac = undefined;
@@ -1639,9 +1639,9 @@ so_dialog_progress_update(current_value, current_goal) {
   }
 
   test_goal = current_goal * time_frac;
-  if(current_value > test_goal)
+  if(current_value > test_goal) {
     return;
-
+  }
   time_dialog = undefined;
   switch (level.so_progress_goal_status) {
     case "none":
@@ -1664,7 +1664,7 @@ so_dialog_progress_update(current_value, current_goal) {
 
 so_dialog_progress_update_time_quality(time_frac) {
   // Even if this is their best time so far, always warn about running late first.
-  if(isdefined(level.challenge_time_limit)) {
+  if(isDefined(level.challenge_time_limit)) {
     if(is_poor_time(level.challenge_start_time, gettime(), time_frac)) {
       so_dialog_play("so_tf_1_time_status_late", 0.2);
       return;
@@ -1677,21 +1677,21 @@ so_dialog_progress_update_time_quality(time_frac) {
 
 so_dialog_counter_update(current_count, current_goal, countdown_divide) {
   // Prevent overlaps happening quickly.
-  if(!isdefined(level.so_counter_dialog_time))
+  if(!isDefined(level.so_counter_dialog_time))
     level.so_counter_dialog_time = 0;
-  if(gettime() < level.so_counter_dialog_time)
+  if(gettime() < level.so_counter_dialog_time) {
     return;
-
-  if(!isdefined(current_count))
+  }
+  if(!isDefined(current_count)) {
     return;
-
-  if(!isdefined(countdown_divide))
+  }
+  if(!isDefined(countdown_divide))
     countdown_divide = 1;
   adjusted_count = int(current_count / countdown_divide);
 
   // No callouts for anything over 5.
   if(adjusted_count > 5) {
-    if(!isdefined(level.challenge_progress_manual_update) || !level.challenge_progress_manual_update) {
+    if(!isDefined(level.challenge_progress_manual_update) || !level.challenge_progress_manual_update) {
       thread so_dialog_progress_update(current_count, current_goal);
       level.so_counter_dialog_time = gettime() + 800;
     }
@@ -1722,14 +1722,14 @@ so_dialog_counter_update(current_count, current_goal, countdown_divide) {
 // ---------------------------------------------------------------------------------
 
 so_crush_player(player, mod) {
-  assert(isdefined(self));
-  assert(isdefined(player));
+  assert(isDefined(self));
+  assert(isDefined(player));
 
-  if(!IsDefined(player.coop_death_reason)) {
+  if(!isDefined(player.coop_death_reason)) {
     player.coop_death_reason = [];
   }
 
-  if(!IsDefined(mod)) {
+  if(!isDefined(mod)) {
     mod = "MOD_EXPLOSIVE";
   }
 

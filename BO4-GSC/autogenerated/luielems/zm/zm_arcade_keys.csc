@@ -4,17 +4,15 @@
 ********************************************************/
 
 #include scripts\core_common\lui_shared;
-
 #namespace zm_arcade_keys;
 
 class czm_arcade_keys: cluielem {
-
   function set_key_count(localclientnum, value) {
     set_data(localclientnum, "key_count", value);
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, #"zm_arcade_keys");
+    cluielem::open(localclientnum, # "zm_arcade_keys");
   }
 
   function function_fa582112(localclientnum) {

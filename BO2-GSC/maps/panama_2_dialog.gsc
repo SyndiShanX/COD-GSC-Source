@@ -17,8 +17,7 @@ play_woods_ambulence_dialog() {
   level.player say_dialog("wood_come_on_you_sick_fu_0");
 }
 
-dialog_intro_to_slums() {
-}
+dialog_intro_to_slums() {}
 
 slum_vo_ambulance() {
   flag_wait("ambulance_complete");
@@ -125,7 +124,7 @@ dialog_church() {
 }
 
 personal_pdf_battle_dialog() {
-  vo_triggers = getentarray("dialog_triggers", "targetname");
+  vo_triggers = getEntArray("dialog_triggers", "targetname");
 
   for(i = 0; i < vo_triggers.size; i++)
     vo_triggers[i] thread parse_vo_and_play_them();

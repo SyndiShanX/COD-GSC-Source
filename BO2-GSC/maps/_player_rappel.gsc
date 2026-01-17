@@ -55,7 +55,7 @@ rappel_init_1h() {
 }
 
 rappel_init_2h() {
-  self._rappel = spawnstruct();
+  self._rappel = spawnStruct();
   _rappel_setup_default_anims_2h();
   self._rappel _rappel_init_controls();
   self._rappel _rappel_init_anims();
@@ -327,7 +327,7 @@ _rappel_setup_default_anims_1h() {
 }
 
 _rappel_init_strings() {
-  self.strings = spawnstruct();
+  self.strings = spawnStruct();
   self.strings.rappel_1h_grab = "Press [{+speed_throw}] to grab rappel rope";
   self.strings.rappel_hint = "Charge and release [{+speed_throw}] to rappel";
   self.strings.brake_hint = "Hold [{+attack}] to brake";
@@ -335,7 +335,7 @@ _rappel_init_strings() {
 }
 
 _rappel_init_difficulty() {
-  self.difficulty = spawnstruct();
+  self.difficulty = spawnStruct();
   self.difficulty.can_fail = 1;
 }
 
@@ -343,7 +343,7 @@ _rappel_init_status(s_aligned) {
   if(isDefined(self.status))
     self.status = undefined;
 
-  self.status = spawnstruct();
+  self.status = spawnStruct();
   self.status.is_rotating = 0;
   self.status.is_descending = 0;
   self.status.is_near_ground = 0;
@@ -360,7 +360,7 @@ _rappel_init_status(s_aligned) {
 }
 
 _rappel_init_controls() {
-  self.controls = spawnstruct();
+  self.controls = spawnStruct();
   self.controls.rappel_button = ::_check_rappel_button;
   self.controls.rappel_brake_button = ::_check_rappel_brake_button;
   self.controls.allow_weapons = 0;
@@ -369,7 +369,7 @@ _rappel_init_controls() {
 }
 
 _rappel_init_anims() {
-  self.anims = spawnstruct();
+  self.anims = spawnStruct();
   self.anims.anim_tag = "tag_player";
   self.anims.body_model = "player_body";
   self.anims.rappel_start = "rappel_hookup";
@@ -388,7 +388,7 @@ _rappel_init_anims() {
 }
 
 _rappel_init_depth_of_field() {
-  self.depth_of_field = spawnstruct();
+  self.depth_of_field = spawnStruct();
   self.depth_of_field.near_start = 5;
   self.depth_of_field.near_end = 33;
   self.depth_of_field.far_start = 0;
@@ -404,7 +404,7 @@ _rappel_set_depth_of_field(e_player) {
 }
 
 _rappel_get_depth_of_field_old() {
-  self._rappel.depth_of_field_old = spawnstruct();
+  self._rappel.depth_of_field_old = spawnStruct();
   self._rappel.depth_of_field_old.near_start = self getdepthoffield_nearstart();
   self._rappel.depth_of_field_old.near_end = self getdepthoffield_nearend();
   self._rappel.depth_of_field_old.near_blur = self getdepthoffield_nearblur();
@@ -414,7 +414,7 @@ _rappel_get_depth_of_field_old() {
 }
 
 _rappel_init_viewcone() {
-  self.viewcone = spawnstruct();
+  self.viewcone = spawnStruct();
   self.viewcone.link_tag = "tag_player";
   self.viewcone.percentage = 0;
   self.viewcone.right_arc = 0;
@@ -427,7 +427,7 @@ _rappel_init_viewcone() {
 }
 
 _rappel_init_movement() {
-  self.movement = spawnstruct();
+  self.movement = spawnStruct();
   self.movement.rotate_speed = 10;
   self.movement.threshold_to_ground = 55;
   self.movement.enable_rotation = 0;
@@ -476,7 +476,7 @@ _is_pressing_rappel_button() {
 
 _rappel_hook_up(s_aligned) {
   self disableweapons();
-  self playsound("evt_rappel_hookup");
+  self playSound("evt_rappel_hookup");
   self.body = spawn_anim_model(self._rappel.anims.body_model, self.origin);
   self.body.angles = self.angles;
   self.body hide();
@@ -577,9 +577,9 @@ _rappel_control_start(s_aligned) {
 
     if(self._rappel.movement.enable_rotation) {
       v_angles_player_forward = self.angles;
-      v_angles_player_forward = anglestoforward(v_angles_player_forward);
+      v_angles_player_forward = anglesToForward(v_angles_player_forward);
       v_angles_player_forward = _rappel_vector_remove_z(v_angles_player_forward);
-      v_angles_body_forward = anglestoforward(self.body.angles);
+      v_angles_body_forward = anglesToForward(self.body.angles);
       v_angles_body_forward = _rappel_vector_remove_z(v_angles_body_forward);
       v_angles_body_right = anglestoright(self.body.angles);
       n_dot_forward_view = vectordot(v_angles_body_forward, v_angles_player_forward);
@@ -636,7 +636,7 @@ _rappel_switch_to_sidearm() {
 _rappel_landing() {
   screen_message_delete();
   level.player stoploopsound(0.25);
-  level.player playsound("fly_land_plr_default");
+  level.player playSound("fly_land_plr_default");
 
   if(!self._rappel.status.falling_to_death) {
     self notify("_rappel_safe_landing");
@@ -670,7 +670,7 @@ decend_sound() {
   self endon("_rappel_safe_landing");
 
   if(self._rappel.status.is_descending == 1)
-    level.player playloopsound("evt_rappel_slide");
+    level.player playLoopSound("evt_rappel_slide");
   else
     level.player stoploopsound(0.25);
 }
@@ -846,7 +846,7 @@ _is_point_above_ground(v_next_position, v_ground_position) {
 }
 
 _rappel_do_falling_death() {
-  self playsound("evt_rappel_fail");
+  self playSound("evt_rappel_fail");
   screen_message_delete();
   self disableweapons();
   self notify("_rappel_falling_death");
@@ -991,7 +991,7 @@ _is_freefalling() {
 _rappel_get_wall_vector() {
   v_normal = self _rappel_get_wall_normal();
   v_scaled = v_normal * 999999;
-  a_trace = bullettrace(self.origin, v_scaled, 0, undefined);
+  a_trace = bulletTrace(self.origin, v_scaled, 0, undefined);
   v_hit = a_trace["position"];
   v_to_wall = v_hit - self.origin;
   v_from_wall = self.origin - v_hit;
@@ -1003,14 +1003,14 @@ _rappel_get_wall_vector() {
 
 _rappel_get_wall_normal() {
   assert(isDefined(self._rappel.status.reference_node), "missing reference node for _rappel_get_wall_normal");
-  v_node_normal = anglestoforward(self._rappel.status.reference_node.angles);
+  v_node_normal = anglesToForward(self._rappel.status.reference_node.angles);
   return v_node_normal;
 }
 
 _rappel_get_distance_to_ground() {
   assert(isDefined(self._rappel), "rappel struct not set up on player attempting to use _rappel_get_distance_to_ground!");
   v_ground_line = self.origin - (0, 0, 999999);
-  a_trace = bullettrace(self.origin, v_ground_line, 0, undefined);
+  a_trace = bulletTrace(self.origin, v_ground_line, 0, undefined);
   v_trace_hit = a_trace["position"];
   n_height = distance(v_trace_hit, self.origin);
   return n_height;
@@ -1018,7 +1018,7 @@ _rappel_get_distance_to_ground() {
 
 _rappel_get_ground_trace_position() {
   v_ground_line = self.origin - (0, 0, 999999);
-  a_trace = bullettrace(self.origin, v_ground_line, 0, undefined);
+  a_trace = bulletTrace(self.origin, v_ground_line, 0, undefined);
   v_trace_hit = a_trace["position"];
   return v_trace_hit;
 }

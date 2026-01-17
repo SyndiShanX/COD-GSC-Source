@@ -39,7 +39,7 @@ init_turret_info() {
   self.turret_ai_array = [];
 
   for(i = 0; i < 4; i++) {
-    self.turret_ai_array[i] = spawnstruct();
+    self.turret_ai_array[i] = spawnStruct();
     self.turret_ai_array[i].enabled = 0;
     self.turret_ai_array[i].target_ent = undefined;
     fire_angles = undefined;
@@ -86,7 +86,7 @@ fire_turret_for_time(turret_index, time) {
       else
         alias = "wpn_gaz_quad50_turret_loop_npc";
 
-      self.sound_ent playloopsound(alias);
+      self.sound_ent playLoopSound(alias);
     }
 
     wait(firetime);
@@ -97,7 +97,7 @@ fire_turret_for_time(turret_index, time) {
     self notify("stop_audio_delete");
 
     if(isDefined(alias2))
-      self playsound(alias2);
+      self playSound(alias2);
   }
 }
 
@@ -258,7 +258,7 @@ burst_fire(turret_index, bullet_count, interval) {
 burst_fire_rebirthbtr(turret_index, bullet_count, interval) {
   for(i = 0; i < bullet_count; i++) {
     self firegunnerweapon(turret_index);
-    self playsound("wpn_china_lake_fire_npc");
+    self playSound("wpn_china_lake_fire_npc");
     wait(interval);
   }
 }

@@ -9,7 +9,7 @@
 pulseSingleBullet(localClientNum) {
   lastPlayer = GetLocalPlayer(localClientNum);
   lastAmmoCount = 0;
-  while (1) {
+  while(1) {
     wait 0.05;
     waitforallclients();
     player = GetLocalPlayer(localClientNum);
@@ -51,7 +51,7 @@ on_connect(localclientnum) {
 }
 dtp_effects() {
   self endon("entityshutdown");
-  while (true) {
+  while(true) {
     self waittill("dtp_land", localClientNum);
     localPlayer = GetLocalPlayer(localClientNum);
     if(!IsSplitscreen() && isDefined(localPlayer) && localPlayer == self) {

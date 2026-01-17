@@ -18,11 +18,11 @@ main() {
   maps\mp\_compass::setupminimap("compass_map_mp_studio");
   maps\mp\mp_studio_amb::main();
   setdvar("compassmaxrange", "2100");
-  game["strings"]["war_callsign_a"] = & "MPUI_CALLSIGN_MAPNAME_A";
-  game["strings"]["war_callsign_b"] = & "MPUI_CALLSIGN_MAPNAME_B";
-  game["strings"]["war_callsign_c"] = & "MPUI_CALLSIGN_MAPNAME_C";
-  game["strings"]["war_callsign_d"] = & "MPUI_CALLSIGN_MAPNAME_D";
-  game["strings"]["war_callsign_e"] = & "MPUI_CALLSIGN_MAPNAME_E";
+  game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_MAPNAME_A";
+  game["strings"]["war_callsign_b"] = &"MPUI_CALLSIGN_MAPNAME_B";
+  game["strings"]["war_callsign_c"] = &"MPUI_CALLSIGN_MAPNAME_C";
+  game["strings"]["war_callsign_d"] = &"MPUI_CALLSIGN_MAPNAME_D";
+  game["strings"]["war_callsign_e"] = &"MPUI_CALLSIGN_MAPNAME_E";
   game["strings_menu"]["war_callsign_a"] = "@MPUI_CALLSIGN_MAPNAME_A";
   game["strings_menu"]["war_callsign_b"] = "@MPUI_CALLSIGN_MAPNAME_B";
   game["strings_menu"]["war_callsign_c"] = "@MPUI_CALLSIGN_MAPNAME_C";
@@ -44,8 +44,8 @@ main() {
   speaker2 = getent("loudspeaker2", "targetname");
   targetlight1_on hide();
   targetlight2_on hide();
-  target8 setcandamage(1);
-  target9 setcandamage(1);
+  target8 setCanDamage(1);
+  target9 setCanDamage(1);
   target8 thread damagetarget(2);
   target9 thread damagetarget(2);
   target7 thread movetarget(7, (57, 23, 0), 3);
@@ -94,7 +94,7 @@ damagetarget(dir) {
         wait 0.2;
         self rotateroll(self.angles[1] - 90, 0.1);
         wait 0.2;
-        self playsound("amb_target_flip");
+        self playSound("amb_target_flip");
         break;
       case 2:
         rotation = 1;
@@ -107,7 +107,7 @@ damagetarget(dir) {
         }
 
         self rotateyaw(self.angles[2] + 180 * rotation, 0.3);
-        self playsound("amb_target_twirl");
+        self playSound("amb_target_twirl");
         self waittill("rotatedone");
         break;
       case 3:
@@ -115,21 +115,21 @@ damagetarget(dir) {
         wait 0.2;
         self rotatepitch(self.angles[1] - 90, 0.1);
         wait 0.2;
-        self playsound("amb_target_flip");
+        self playSound("amb_target_flip");
         break;
       case 4:
         self rotateroll(self.angles[1] - 90, 0.1);
         wait 0.2;
         self rotateroll(self.angles[1] + 90, 0.1);
         wait 0.2;
-        self playsound("amb_target_flip");
+        self playSound("amb_target_flip");
         break;
       case 5:
         self rotatepitch(self.angles[1] - 90, 0.1);
         wait 0.2;
         self rotatepitch(self.angles[1] + 90, 0.1);
         wait 0.2;
-        self playsound("amb_target_flip");
+        self playSound("amb_target_flip");
         break;
     }
   }
@@ -140,7 +140,7 @@ damagetargetlights(light_on, light_off, speaker, alias, exploderhandle) {
 
   while(true) {
     self waittill("damage");
-    speaker playsound(alias);
+    speaker playSound(alias);
     exploder(exploderhandle);
     light_off hide();
     light_on show();
@@ -159,7 +159,7 @@ movetarget(dir, dis, speed) {
   farpos = self.origin;
   sound = spawn("script_origin", self.origin);
   sound linkto(self);
-  sound playloopsound("amb_target_chain");
+  sound playLoopSound("amb_target_chain");
 
   switch (dir) {
     case 1:
@@ -201,7 +201,7 @@ movetarget(dir, dis, speed) {
 
     self moveto(nextpos, speed);
     self waittill_either("movedone", "targetStopMoving");
-    self playsound("amb_target_stop");
+    self playSound("amb_target_stop");
   }
 }
 
@@ -212,42 +212,42 @@ rotatetarget(dir, deg, speed, pausetime) {
     switch (dir) {
       case 1:
         self rotateyaw(self.angles[2] + deg, speed);
-        self playsound("amb_target_rotate");
+        self playSound("amb_target_rotate");
         wait(pausetime);
         self rotateyaw(self.angles[2] - deg, speed);
-        self playsound("amb_target_rotate");
+        self playSound("amb_target_rotate");
         wait(pausetime);
         break;
       case 2:
         self rotateyaw(self.angles[2] - deg, speed);
-        self playsound("amb_target_rotate");
+        self playSound("amb_target_rotate");
         wait(pausetime);
         self rotateyaw(self.angles[2] + deg, speed);
-        self playsound("amb_target_rotate");
+        self playSound("amb_target_rotate");
         wait(pausetime);
         break;
       case 3:
         self rotateroll(self.angles[0] + deg, speed);
-        self playsound("amb_target_rotate");
+        self playSound("amb_target_rotate");
         wait(pausetime);
         self rotateroll(self.angles[0] - deg, speed);
-        self playsound("amb_target_rotate");
+        self playSound("amb_target_rotate");
         wait(pausetime);
         break;
       case 4:
         self rotateroll(self.angles[0] - deg, speed);
-        self playsound("amb_target_rotate");
+        self playSound("amb_target_rotate");
         wait(pausetime);
         self rotateroll(self.angles[0] + deg, speed);
-        self playsound("amb_target_rotate");
+        self playSound("amb_target_rotate");
         wait(pausetime);
         break;
       case 5:
         self rotateroll(self.angles[1] + deg, speed);
-        self playsound("amb_target_rotate");
+        self playSound("amb_target_rotate");
         wait(pausetime);
         self rotateroll(self.angles[1] - deg, speed);
-        self playsound("amb_target_rotate");
+        self playSound("amb_target_rotate");
         wait(pausetime);
         break;
       case 6:
@@ -332,7 +332,7 @@ getwatcherforweapon(weapname) {
 }
 
 death_streamer_think(notifytype, attacker) {
-  streamers = getentarray("airconditioner_streamer", "targetname");
+  streamers = getEntArray("airconditioner_streamer", "targetname");
 
   for(i = 0; i < streamers.size; i++) {
     streamer = streamers[i];

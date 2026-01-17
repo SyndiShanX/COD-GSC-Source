@@ -6,7 +6,6 @@
 #include scripts\core_common\lui_shared;
 #include scripts\core_common\math_shared;
 #include scripts\core_common\util_shared;
-
 #namespace util;
 
 within_fov(start_origin, start_angles, end_origin, fov) {
@@ -25,7 +24,7 @@ isbulletimpactmod(smeansofdeath) {
 }
 
 waitrespawnbutton() {
-  self endon(#"disconnect", #"end_respawn");
+  self endon(#"disconnect", # "end_respawn");
 
   while(self usebuttonpressed() != 1) {
     waitframe(1);
@@ -38,7 +37,7 @@ printonteam(text, team) {
   for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
 
-    if(isDefined(player.pers[#"team"]) && player.pers[#"team"] == team) {
+    if(isDefined(player.pers[# "team"]) && player.pers[# "team"] == team) {
       player iprintln(text);
     }
   }
@@ -50,7 +49,7 @@ printboldonteam(text, team) {
   for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
 
-    if(isDefined(player.pers[#"team"]) && player.pers[#"team"] == team) {
+    if(isDefined(player.pers[# "team"]) && player.pers[# "team"] == team) {
       player iprintlnbold(text);
     }
   }
@@ -62,7 +61,7 @@ printboldonteamarg(text, team, arg) {
   for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
 
-    if(isDefined(player.pers[#"team"]) && player.pers[#"team"] == team) {
+    if(isDefined(player.pers[# "team"]) && player.pers[# "team"] == team) {
       player iprintlnbold(text, arg);
     }
   }
@@ -75,7 +74,7 @@ printonplayers(text, team) {
 
   for(i = 0; i < players.size; i++) {
     if(isDefined(team)) {
-      if(isDefined(players[i].pers[#"team"]) && players[i].pers[#"team"] == team) {
+      if(isDefined(players[i].pers[# "team"]) && players[i].pers[# "team"] == team) {
         players[i] iprintln(text);
       }
 
@@ -102,15 +101,15 @@ printandsoundoneveryone(team, enemyteam, printfriendly, printenemy, soundfriendl
   if(level.splitscreen || !shoulddosounds) {
     for(i = 0; i < level.players.size; i++) {
       player = level.players[i];
-      playerteam = player.pers[#"team"];
+      playerteam = player.pers[# "team"];
 
       if(isDefined(playerteam)) {
-        if(playerteam == team && isDefined(printfriendly) && printfriendly != #"") {
+        if(playerteam == team && isDefined(printfriendly) && printfriendly != # "") {
           player iprintln(printfriendly, printarg);
           continue;
         }
 
-        if(isDefined(printenemy) && printenemy != #"") {
+        if(isDefined(printenemy) && printenemy != # "") {
           if(isDefined(enemyteam) && playerteam == enemyteam) {
             player iprintln(printenemy, printarg);
             continue;
@@ -136,11 +135,11 @@ printandsoundoneveryone(team, enemyteam, printfriendly, printenemy, soundfriendl
   if(shoulddoenemysounds) {
     for(i = 0; i < level.players.size; i++) {
       player = level.players[i];
-      playerteam = player.pers[#"team"];
+      playerteam = player.pers[# "team"];
 
       if(isDefined(playerteam)) {
         if(playerteam == team) {
-          if(isDefined(printfriendly) && printfriendly != #"") {
+          if(isDefined(printfriendly) && printfriendly != # "") {
             player iprintln(printfriendly, printarg);
           }
 
@@ -149,7 +148,7 @@ printandsoundoneveryone(team, enemyteam, printfriendly, printenemy, soundfriendl
         }
 
         if(isDefined(enemyteam) && playerteam == enemyteam || !isDefined(enemyteam) && playerteam != team) {
-          if(isDefined(printenemy) && printenemy != #"") {
+          if(isDefined(printenemy) && printenemy != # "") {
             player iprintln(printenemy, printarg);
           }
 
@@ -163,11 +162,11 @@ printandsoundoneveryone(team, enemyteam, printfriendly, printenemy, soundfriendl
 
   for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
-    playerteam = player.pers[#"team"];
+    playerteam = player.pers[# "team"];
 
     if(isDefined(playerteam)) {
       if(playerteam == team) {
-        if(isDefined(printfriendly) && printfriendly != #"") {
+        if(isDefined(printfriendly) && printfriendly != # "") {
           player iprintln(printfriendly, printarg);
         }
 
@@ -175,7 +174,7 @@ printandsoundoneveryone(team, enemyteam, printfriendly, printenemy, soundfriendl
         continue;
       }
 
-      if(isDefined(printenemy) && printenemy != #"") {
+      if(isDefined(printenemy) && printenemy != # "") {
         if(isDefined(enemyteam) && playerteam == enemyteam) {
           player iprintln(printenemy, printarg);
           continue;
@@ -198,21 +197,21 @@ _playlocalsound(soundalias) {
 }
 
 getotherteam(team) {
-  if(team == #"allies") {
-    return #"axis";
-  } else if(team == #"axis") {
-    return #"allies";
+  if(team == # "allies") {
+    return # "axis";
+  } else if(team == # "axis") {
+    return # "allies";
   } else {
-    return #"allies";
+    return # "allies";
   }
 
   assertmsg("<dev string:x38>" + team);
 }
 
 getteamenum(team) {
-  if(team == #"allies") {
+  if(team == # "allies") {
     return 1;
-  } else if(team == #"axis") {
+  } else if(team == # "axis") {
     return 2;
   }
 
@@ -352,7 +351,7 @@ iskillstreaksenabled() {
   return isDefined(level.killstreaksenabled) && level.killstreaksenabled;
 }
 
-private function_78e3e07b(team, index, objective_strings) {
+function_78e3e07b(team, index, objective_strings) {
   setobjectivetext(team, objective_strings.text);
 
   if(level.splitscreen) {
@@ -472,7 +471,7 @@ registertimelimit(minvalue, maxvalue) {
 
   override_gts_timelimit();
 
-    level.timelimitmin = minvalue;
+  level.timelimitmin = minvalue;
   level.timelimitmax = maxvalue;
 }
 
@@ -546,14 +545,14 @@ waittill_use_button_pressed() {
 }
 
 show_hint_text(str_text_to_show, b_should_blink = 0, str_turn_off_notify = "notify_turn_off_hint_text", n_display_time = 4) {
-  self endon(#"notify_turn_off_hint_text", #"hint_text_removed");
+  self endon(#"notify_turn_off_hint_text", # "hint_text_removed");
 
   if(isDefined(self.hint_menu_handle)) {
     hide_hint_text(0);
   }
 
   self.hint_menu_handle = self openluimenu("MPHintText");
-  self setluimenudata(self.hint_menu_handle, #"hint_text_line", str_text_to_show);
+  self setluimenudata(self.hint_menu_handle, # "hint_text_line", str_text_to_show);
 
   if(b_should_blink) {
     lui::play_animation(self.hint_menu_handle, "blinking");
@@ -573,7 +572,7 @@ hide_hint_text(b_fade_before_hiding = 1) {
   if(isDefined(self.hint_menu_handle)) {
     if(b_fade_before_hiding) {
       lui::play_animation(self.hint_menu_handle, "fadeout");
-      self waittilltimeout(0.75, #"kill_hint_text", #"death", #"hint_text_removed");
+      self waittilltimeout(0.75, # "kill_hint_text", # "death", # "hint_text_removed");
     }
 
     self closeluimenu(self.hint_menu_handle);
@@ -584,35 +583,35 @@ hide_hint_text(b_fade_before_hiding = 1) {
 }
 
 fade_hint_text_after_time(n_display_time, str_turn_off_notify) {
-  self endon(#"hint_text_removed", #"death", #"kill_hint_text");
-  self waittilltimeout(n_display_time - 0.75, str_turn_off_notify, #"hint_text_removed", #"kill_hint_text");
+  self endon(#"hint_text_removed", # "death", # "kill_hint_text");
+  self waittilltimeout(n_display_time - 0.75, str_turn_off_notify, # "hint_text_removed", # "kill_hint_text");
   hide_hint_text(1);
 }
 
 hide_hint_text_listener(n_time) {
-  self endon(#"hint_text_removed", #"disconnect");
-  self waittilltimeout(n_time, #"kill_hint_text", #"death", #"hint_text_removed", #"disconnect");
+  self endon(#"hint_text_removed", # "disconnect");
+  self waittilltimeout(n_time, # "kill_hint_text", # "death", # "hint_text_removed", # "disconnect");
   hide_hint_text(0);
 }
 
 set_team_radar(team, value) {
-  if(team == #"allies") {
+  if(team == # "allies") {
     setmatchflag("radar_allies", value);
     return;
   }
 
-  if(team == #"axis") {
+  if(team == # "axis") {
     setmatchflag("radar_axis", value);
   }
 }
 
 is_objective_game(game_type) {
   switch (game_type) {
-    case #"dm":
-    case #"conf":
-    case #"gun":
-    case #"tdm":
-    case #"clean":
+    case # "dm":
+    case # "conf":
+    case # "gun":
+    case # "tdm":
+    case # "clean":
       return 0;
     default:
       return 1;
@@ -624,7 +623,7 @@ isprophuntgametype() {
 }
 
 isprop() {
-  return isDefined(self.pers[#"team"]) && self.pers[#"team"] == game.defenders;
+  return isDefined(self.pers[# "team"]) && self.pers[# "team"] == game.defenders;
 }
 
 function_6f4ff113(team) {
@@ -649,7 +648,7 @@ function_ff74bf7(team) {
   for(i = 0; i < players.size; i++) {
     player = players[i];
 
-    if(isDefined(player.pers[#"team"]) && player.pers[#"team"] == team && isDefined(player.pers[#"class"])) {
+    if(isDefined(player.pers[# "team"]) && player.pers[# "team"] == team && isDefined(player.pers[# "class"])) {
       if(player.sessionstate == "playing" && !player.afk) {
         return i;
       }
@@ -665,10 +664,10 @@ function_5a68c330(var_e0dd85aa, s_team, n_clientnum, extradata = 0) {
   }
 
   switch (s_team) {
-    case #"axis":
+    case # "axis":
       var_dfc4aab4 = 2;
       break;
-    case #"allies":
+    case # "allies":
       var_dfc4aab4 = 1;
       break;
     default:
@@ -750,4 +749,3 @@ enable_art_fps() {
   setdvar(#"cg_drawfps", 0);
   setdvar(#"cg_drawartfps", 1);
 }
-

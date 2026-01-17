@@ -11,7 +11,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\throttle_shared;
 #include scripts\core_common\util_shared;
-
 #namespace bot_position;
 
 autoexec __init__system__() {
@@ -127,13 +126,13 @@ update(tacbundle) {
   self.bot.var_18fa994c = bot::function_7aeb27f1(self.bot.tacbundle.var_1f8a6a2, self.bot.tacbundle.var_2fc77943);
 }
 
-private function_e027100a() {
+function_e027100a() {
   self notify(#"hash_2747b8ce1136a8ae");
   [[level.var_d1a4558d]] - > leavequeue(self);
 }
 
 handle_goal() {
-  self endon(#"death", #"hash_6cefc75b9a427c7d");
+  self endon(#"death", # "hash_6cefc75b9a427c7d");
   level endon(#"game_ended");
 
   while(isDefined(self.bot)) {
@@ -146,7 +145,7 @@ handle_goal() {
 }
 
 handle_goal_changed() {
-  self endon(#"death", #"hash_6cefc75b9a427c7d");
+  self endon(#"death", # "hash_6cefc75b9a427c7d");
   level endon(#"game_ended");
 
   while(isDefined(self.bot)) {
@@ -168,7 +167,7 @@ handle_goal_changed() {
 }
 
 handle_path_success() {
-  self endon(#"death", #"hash_6cefc75b9a427c7d");
+  self endon(#"death", # "hash_6cefc75b9a427c7d");
   level endon(#"game_ended");
 
   while(isDefined(self.bot)) {
@@ -179,7 +178,7 @@ handle_path_success() {
 }
 
 handle_path_failed() {
-  self endon(#"death", #"hash_6cefc75b9a427c7d");
+  self endon(#"death", # "hash_6cefc75b9a427c7d");
   level endon(#"game_ended");
 
   while(isDefined(self.bot)) {
@@ -296,7 +295,7 @@ can_teleport() {
 }
 
 function_2bcdf566() {
-  self endon(#"death", #"hash_6cefc75b9a427c7d");
+  self endon(#"death", # "hash_6cefc75b9a427c7d");
   level endon(#"game_ended");
 
   while(isDefined(self.bot)) {
@@ -352,7 +351,7 @@ function_aa8c6854(name, func) {
 }
 
 function_7beea81f(tacbundle) {
-  self endoncallback(&function_7f65a721, #"death", #"hash_2747b8ce1136a8ae");
+  self endoncallback(&function_7f65a721, # "death", # "hash_2747b8ce1136a8ae");
 
   if(!isDefined(tacbundle.positionhandlerlist)) {
     self bot::record_text("<dev string:xfb>", (1, 0, 0), "<dev string:x4e>");
@@ -887,8 +886,8 @@ function_f29e63ea(node) {
     return undefined;
   }
 
-  var_208965cf = node.spawnflags&262144;
-  var_a26a51ba = node.spawnflags&524288;
+  var_208965cf = node.spawnflags & 262144;
+  var_a26a51ba = node.spawnflags & 524288;
 
   if(!var_208965cf && !var_a26a51ba) {
     return undefined;

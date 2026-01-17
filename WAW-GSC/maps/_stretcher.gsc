@@ -81,7 +81,7 @@ drone_anim_weight(angle, max_angle, direction, step_time) {
 }
 
 draw_guy(guy_origin, guy_angles, show_time) {
-  vector = anglestoforward(guy_angles);
+  vector = anglesToForward(guy_angles);
   head_origin = guy_origin + vector_multiply(vector, 32);
   thread drawline(guy_origin, guy_origin + (0, 0, 72), (.7, .3, .3), show_time);
   thread drawline(guy_origin + (0, 0, 64), head_origin + (0, 0, 64), (.9, .5, .5), show_time);
@@ -99,9 +99,9 @@ follow_path(start_struct) {
   start_struct notify("trigger");
   original_origin = start_struct.origin;
   rear_data = [];
-  while (true) {
+  while(true) {
     data_struct = path_math(current_angles, current_point, next_struct.origin);
-    rear_struct = spawnstruct();
+    rear_struct = spawnStruct();
     rear_struct = data_struct;
     rear_data = array_add(rear_data, rear_struct);
     rear_point = undefined;
@@ -109,7 +109,7 @@ follow_path(start_struct) {
     current_angles = data_struct.next_angles;
     dist = 0;
     index = rear_data.size;
-    while (true) {
+    while(true) {
       index--;
       if((dist + rear_data[index].dist) > level.rear_distance || index == 0) {
         vector = rear_data[index].vector;
@@ -145,15 +145,15 @@ draw_path(start_struct, line_color, knot_color) {
   start_struct notify("trigger");
   original_origin = start_struct.origin;
   rear_data = [];
-  while (true) {
+  while(true) {
     data_struct = path_math(current_angles, current_point, next_struct.origin);
-    rear_struct = spawnstruct();
+    rear_struct = spawnStruct();
     rear_struct = data_struct;
     rear_data = array_add(rear_data, rear_struct);
     rear_point = undefined;
     dist = 0;
     index = rear_data.size;
-    while (true) {
+    while(true) {
       index--;
       if((dist + rear_data[index].dist) > level.rear_distance || index == 0) {
         vector = rear_data[index].vector;
@@ -182,7 +182,7 @@ draw_path(start_struct, line_color, knot_color) {
 }
 
 path_math(current_angles, current_point, next_point, main_dist) {
-  data_struct = spawnstruct();
+  data_struct = spawnStruct();
   data_struct.goal = false;
   data_struct.previous_angles = current_angles;
   curve_speed = .65;
@@ -200,7 +200,7 @@ path_math(current_angles, current_point, next_point, main_dist) {
     data_struct.goal = true;
     angle_add = angle_dif * fraction;
     next_angles = current_angles + (0, angle_add, 0);
-    vector = anglestoforward(next_angles);
+    vector = anglesToForward(next_angles);
     dist = distance(current_point, next_point) * fraction;
     dist = dist * curve_speed;
     if(dist > level.step_dist)
@@ -256,7 +256,7 @@ adjust_angle(angle) {
 
 moving_badpath() {
   self endon("stop_badplace");
-  while (true) {
+  while(true) {
     badplace_cylinder("", .5, self.origin, 96, 72, "allies", "axis");
     wait .5;
   }
@@ -264,7 +264,7 @@ moving_badpath() {
 
 array_remove_first(array) {
   new_array = [];
-  for (i = 1; i < array.size; i++) {
+  for(i = 1; i < array.size; i++) {
     new_array[new_array.size] = array[i];
   }
   return new_array;
@@ -278,7 +278,7 @@ spawn_stretcher(point, start_angles) {
   anim_ent = spawn("script_origin", ground - (44, 0, 0));
   anim_ent.angles = (0, 0, 0);
   model = spawn("script_model", ground - (44, 0, 0));
-  model setmodel("vehicle_stretcher");
+  model setModel("vehicle_stretcher");
   model UseAnimTree(#animtree);
   model.animname = "stretcher";
   stretcher_clip = getent("stretcher_clip", "targetname");
@@ -299,7 +299,7 @@ create_drone(ai, animname) {
   name = ai.name;
   weapon = ai.weapon;
   drone = spawn("script_model", ai.origin);
-  drone setmodel(model);
+  drone setModel(model);
   drone hide();
   drone.angles = flat_angle(ai.angles);
   drone.animname = animname;
@@ -399,7 +399,7 @@ freeze(ai) {
   ai endon("thaw");
   ai hide();
   ai linkto(self);
-  while (true) {
+  while(true) {
     ai animscripted("frozen", ai.origin, ai.angles, % standunarmed_idle_loop);
     ai waittillmatch("frozen", "end");
   }
@@ -413,7 +413,7 @@ thaw(ai) {
 }
 
 draw_structs(struct) {
-  while (true) {
+  while(true) {
     level thread drawline(struct.origin, struct.origin + (0, 0, -32), (1, 0, 0));
     if(!isDefined(struct.target)) {
       break;
@@ -426,7 +426,7 @@ drawline(p1, p2, color, show_time) {
   if(!isDefined(show_time))
     show_time = 100;
   show_time = gettime() + (show_time * 1000);
-  while (gettime() < show_time) {
+  while(gettime() < show_time) {
     line(p1, p2, color);
     wait 0.05;
   }
@@ -440,7 +440,7 @@ print3Dmessage(info_origin, message, show_time, color, offset, scale) {
   if(!isDefined(scale))
     scale = 6;
   show_time = gettime() + (show_time * 1000);
-  while (gettime() < show_time) {
+  while(gettime() < show_time) {
     print3d(info_origin + offset, message, color, 1, scale);
     wait(0.05);
   }

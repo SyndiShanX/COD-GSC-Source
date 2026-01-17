@@ -92,14 +92,14 @@ precacheClipFx() {
     spawnedAITypes = [];
     level.weapons_list = [];
     spawners = getSpawnerArray();
-    for (i = 0; i < spawners.size; i++) {
+    for(i = 0; i < spawners.size; i++) {
       spawner = spawners[i];
       if(isDefined(spawnedAITypes[spawner.classname]))
         continue;
       spawnedAITypes[spawner.classname] = true;
       oldCount = spawner.count;
       spawner.count = 1;
-      fakeai = spawner stalingradSpawn();
+      fakeai = spawner stalingradspawn();
       if(!isDefined(fakeai)) {
         spawner.count = oldCount;
         continue;
@@ -114,7 +114,7 @@ precacheClipFx() {
       spawner.count = oldCount;
     }
     ai = getAiArray();
-    for (i = 0; i < ai.size; i++) {
+    for(i = 0; i < ai.size; i++) {
       if(isDefined(ai[i].primaryWeapon))
         level.weapons_list[ai[i].primaryWeapon] = true;
       if(isDefined(ai[i].secondaryWeapon))
@@ -124,14 +124,14 @@ precacheClipFx() {
     }
     weapons = getarraykeys(level.weapons_list);
     println("The following is a list of weapons in the level: ");
-    for (i = 0; i < weapons.size; i++) {
+    for(i = 0; i < weapons.size; i++) {
       println(weapons[i]);
     }
     println("\n\n^1Put the following array definition before your call to maps\_load::main():");
     println("\n\n^1level.weaponClipModels = [];");
     printIndex = 0;
     printedModel = [];
-    for (i = 0; i < weapons.size; i++) {
+    for(i = 0; i < weapons.size; i++) {
       weapon = weapons[i];
       model = getWeaponClipModel(weapon);
       if(model == "")
@@ -145,7 +145,7 @@ precacheClipFx() {
     println("\n\n^1Put the following in your fastfile:\n");
     printIndex = 0;
     printedModel = [];
-    for (i = 0; i < weapons.size; i++) {
+    for(i = 0; i < weapons.size; i++) {
       weapon = weapons[i];
       model = getWeaponClipModel(weapon);
       if(model == "")
@@ -164,7 +164,7 @@ precacheClipFx() {
   if(!isDefined(anim._effect))
     anim._effect = [];
   if(isDefined(level.weaponClipModels)) {
-    for (i = 0; i < level.weaponClipModels.size; i++) {
+    for(i = 0; i < level.weaponClipModels.size; i++) {
       model = level.weaponClipModels[i];
       assert(isDefined(model));
       assert(isDefined(clipEffects[model]));
@@ -184,7 +184,7 @@ bugLDAboutClipModels() {
     return;
   }
   waittime = 1;
-  while (1) {
+  while(1) {
     println("^1No weaponClipModels in this map!");
     println("^1Set dvar scr_generateClipModels to 1 and map_restart, then follow instructions in console.");
     waittime += 1;

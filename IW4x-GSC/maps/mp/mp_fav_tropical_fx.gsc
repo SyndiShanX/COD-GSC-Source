@@ -19,5 +19,4 @@ main() {
 
   if(getdvar("clientSideEffects") != "1")
     maps\createfx\mp_fav_tropical_fx::main();
-
 }

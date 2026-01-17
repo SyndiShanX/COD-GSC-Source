@@ -31,7 +31,7 @@ anims() {
 setWounded(eNode) {
   assert(isAI(self));
   assert(isAlive(self));
-  assert(isdefined(eNode));
+  assert(isDefined(eNode));
 
   self animscripts\shared::DropAIWeapon();
 
@@ -57,14 +57,14 @@ goto_and_pickup_wounded(wounded, eNode) {
   // use move_president_to_node()
   //##############################
 
-  assert(isdefined(self));
+  assert(isDefined(self));
   assert(isAI(self));
   assert(isAlive(self));
-  assert(isdefined(wounded));
+  assert(isDefined(wounded));
   assert(isAI(wounded));
   assert(isAlive(wounded));
-  assert(isdefined(eNode));
-  assert(isdefined(wounded.woundedNode));
+  assert(isDefined(eNode));
+  assert(isDefined(wounded.woundedNode));
 
   // get the carrier to the president
   wounded.woundedNode anim_generic_reach(self, "pickup_carrier");
@@ -97,13 +97,13 @@ carry_to_and_putdown_wounded(wounded, eNode) {
   // use move_president_to_node()
   //##############################
 
-  assert(isdefined(self));
+  assert(isDefined(self));
   assert(isAI(self));
   assert(isAlive(self));
-  assert(isdefined(wounded));
+  assert(isDefined(wounded));
   assert(isAI(wounded));
   assert(isAlive(wounded));
-  assert(isdefined(eNode));
+  assert(isDefined(eNode));
 
   wounded.being_carried = true;
 
@@ -134,11 +134,11 @@ carry_to_and_putdown_wounded(wounded, eNode) {
 
   self thread link_wounded(wounded);
 
-  while (isdefined(eNode.target)) {
+  while(isDefined(eNode.target)) {
     self.ignoresuppression = true;
     self.disablearrivals = true;
     goal = getent(eNode.target, "targetname");
-    if(!isdefined(goal.target)) {
+    if(!isDefined(goal.target)) {
       eNode = goal;
       break;
     }

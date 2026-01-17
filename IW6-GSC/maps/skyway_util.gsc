@@ -2253,7 +2253,7 @@ spawn_tag_origin_from_tag(var_0, var_1) {
 death_watcher() {
   common_scripts\utility::flag_wait_either("flag_kill_plane", "flag_death_crush");
   level.player enableinvulnerability();
-  var_0 = & "SKYWAY_FAIL_KILL_PLANE";
+  var_0 = &"SKYWAY_FAIL_KILL_PLANE";
   var_1 = level.player.origin;
   wait 0.05;
   var_2 = level.player.origin;

@@ -40,16 +40,16 @@ spawn_zombie_blood_plane() {
   vh_biplane = spawnvehicle("veh_t6_dlc_zm_biplane", "zombie_blood_biplane", "biplane_zm", (0, 0, 0), (0, 0, 0));
   vh_biplane ent_flag_init("biplane_down", 0);
   vh_biplane maps\mp\zombies\_zm_powerup_zombie_blood::make_zombie_blood_entity();
-  vh_biplane playloopsound("zmb_zombieblood_3rd_plane_loop", 1);
+  vh_biplane playLoopSound("zmb_zombieblood_3rd_plane_loop", 1);
   vh_biplane.health = 10000;
-  vh_biplane setcandamage(1);
+  vh_biplane setCanDamage(1);
   vh_biplane setforcenocull();
   vh_biplane attachpath(getvehiclenode("biplane_start", "targetname"));
   vh_biplane startpath();
   vh_biplane setclientfield("ee_plane_fx", 1);
   vh_biplane ent_flag_wait("biplane_down");
-  vh_biplane playsound("zmb_zombieblood_3rd_plane_explode");
-  e_special_zombie = getentarray("zombie_spawner_dig", "script_noteworthy")[0];
+  vh_biplane playSound("zmb_zombieblood_3rd_plane_explode");
+  e_special_zombie = getEntArray("zombie_spawner_dig", "script_noteworthy")[0];
   ai_pilot = spawn_zombie(e_special_zombie, "zombie_blood_pilot");
   ai_pilot magic_bullet_shield();
   ai_pilot.ignore_enemy_count = 1;
@@ -58,12 +58,12 @@ spawn_zombie_blood_plane() {
   ai_pilot.sndname = "capzomb";
   ai_pilot.ignore_nuke = 1;
   ai_pilot.b_zombie_blood_damage_only = 1;
-  playfx(level._effect["biplane_explode"], vh_biplane.origin);
+  playFX(level._effect["biplane_explode"], vh_biplane.origin);
   vh_biplane delete();
   a_start_pos = getstructarray("pilot_goal", "script_noteworthy");
   a_start_pos = get_array_of_closest(ai_pilot.origin, a_start_pos);
   linker = spawn("script_model", ai_pilot.origin);
-  linker setmodel("tag_origin");
+  linker setModel("tag_origin");
   ai_pilot linkto(linker);
   linker moveto(a_start_pos[0].origin, 3);
   linker waittill("movedone");
@@ -80,7 +80,7 @@ spawn_zombie_blood_plane() {
 
 zombie_pilot_sound(ai_pilot) {
   sndent = spawn("script_origin", ai_pilot.origin);
-  sndent playloopsound("zmb_zombieblood_3rd_loop_other");
+  sndent playLoopSound("zmb_zombieblood_3rd_loop_other");
 
   while(isDefined(ai_pilot) && isalive(ai_pilot)) {
     sndent.origin = ai_pilot.origin;
@@ -113,14 +113,14 @@ ee_plane_vehicledamage(e_inflictor, e_attacker, n_damage, n_dflags, str_means_of
 spawn_quadrotor_pickup(v_origin, v_angles) {
   m_quadrotor = spawn("script_model", v_origin + vectorscale((0, 0, 1), 30.0));
   m_quadrotor.angles = v_angles;
-  m_quadrotor setmodel("veh_t6_dlc_zm_quadrotor");
+  m_quadrotor setModel("veh_t6_dlc_zm_quadrotor");
   m_quadrotor.targetname = "quadrotor_pickup";
-  unitrigger_stub = spawnstruct();
+  unitrigger_stub = spawnStruct();
   unitrigger_stub.origin = v_origin;
   unitrigger_stub.radius = 36;
   unitrigger_stub.height = 256;
   unitrigger_stub.script_unitrigger_type = "unitrigger_radius_use";
-  unitrigger_stub.hint_string = & "ZM_TOMB_DIHS";
+  unitrigger_stub.hint_string = &"ZM_TOMB_DIHS";
   unitrigger_stub.cursor_hint = "HINT_NOICON";
   unitrigger_stub.require_look_at = 1;
   maps\mp\zombies\_zm_unitrigger::register_static_unitrigger(unitrigger_stub, ::quadrotor_pickup_think);
@@ -134,7 +134,7 @@ quadrotor_pickup_think() {
 
   while(true) {
     self waittill("trigger", player);
-    player playsound("vox_maxi_drone_upgraded_0");
+    player playSound("vox_maxi_drone_upgraded_0");
     flag_clear("ee_quadrotor_disabled");
     flag_set("ee_maxis_drone_retrieved");
     m_quadrotor delete();

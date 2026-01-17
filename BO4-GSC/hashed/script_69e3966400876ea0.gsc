@@ -11,7 +11,6 @@
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
-
 #namespace namespace_bd742265;
 
 autoexec __init__system__() {
@@ -26,13 +25,13 @@ __init__() {
   zm_trial::register_challenge(#"hash_479148f4e9b409d5", &on_begin, &on_end);
 }
 
-private on_begin(var_a84ac7c8) {
+on_begin(var_a84ac7c8) {
   self.var_a84ac7c8 = var_a84ac7c8;
   zm_towers_pap_quest::pap_quest_restart();
   self thread function_8cd2421c();
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   zm_trial_util::function_f3dbeda7();
   self notify(#"hash_16943eddd89aa5b8");
 
@@ -43,7 +42,7 @@ private on_end(round_reset) {
   }
 }
 
-private function_8cd2421c() {
+function_8cd2421c() {
   zm_trial_util::function_2976fa44(4);
   zm_trial_util::function_dace284(0);
   self.var_cd6e44b6 = 0;
@@ -53,7 +52,7 @@ private function_8cd2421c() {
   self thread function_199e5524(#"hash_45b6b1ee5d5038b4");
 }
 
-private function_199e5524(str_flag) {
+function_199e5524(str_flag) {
   self endon(#"hash_16943eddd89aa5b8");
   level flag::wait_till(str_flag);
   self.var_cd6e44b6++;

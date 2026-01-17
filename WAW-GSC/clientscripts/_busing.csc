@@ -14,7 +14,7 @@ busInit() {
 }
 
 busSaveWait() {
-  for (;;) {
+  for(;;) {
     level waittill("save_restore");
     if(level.nextBusState == "")
       level.nextBusState = level.activeBusState;
@@ -52,7 +52,7 @@ updateBus(forcefade) {
     busStateDeactivate();
     busStateActivate("slow_on");
   }
-  while (1) {
+  while(1) {
     if(level.activeBusState == level.nextBusState) {
       level waittill("new_bus");
     }
@@ -82,7 +82,7 @@ busStateActivate(name) {
   setBusFadeTime(state.time);
   keys = getArrayKeys(state.levels);
   assert(isDefined(keys));
-  for (i = 0; i < keys.size; i++) {
+  for(i = 0; i < keys.size; i++) {
     setBusVolume(keys[i], state.levels[keys[i]]);
   }
 }
@@ -90,7 +90,7 @@ busStateActivate(name) {
 busStateDeactivate() {
   println("deactivating bus ");
   setBusFadeTime(.5);
-  for (i = 0; i < GetBusCount(); i++) {
+  for(i = 0; i < GetBusCount(); i++) {
     setBusVolume(GetBusName(i), 1.0);
   }
 }
@@ -117,7 +117,7 @@ busFadeTime(time) {
 }
 
 busIsIn(bus, names) {
-  for (j = 0; j < names.size; j++) {
+  for(j = 0; j < names.size; j++) {
     if(bus == names[j]) {
       return true;
     }
@@ -126,13 +126,13 @@ busIsIn(bus, names) {
 }
 
 busVolumes(names, value) {
-  for (j = 0; j < names.size; j++) {
+  for(j = 0; j < names.size; j++) {
     busVolume(names[j], value);
   }
 }
 
 busVolumeAll(value) {
-  for (i = 0; i < GetBusCount(); i++) {
+  for(i = 0; i < GetBusCount(); i++) {
     busVolume(GetBusName(i), value);
   }
 }
@@ -164,9 +164,9 @@ busVolumesExcept(a, b, c, d, e, f, g, h, i) {
   args = argsAsDict(a, b, c, d, e, f, g, h, i);
   value = args[args.size - 1];
   names = [];
-  for (i = 0; i < args.size - 1; i++)
+  for(i = 0; i < args.size - 1; i++)
     names[i] = args[i];
-  for (i = 0; i < GetBusCount(); i++) {
+  for(i = 0; i < GetBusCount(); i++) {
     name = GetBusName(i);
     if(!busIsIn(GetBusName(i), names)) {
       busVolume(name, value);

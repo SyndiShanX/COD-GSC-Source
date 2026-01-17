@@ -5,18 +5,17 @@
 
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\system_shared;
-
 #namespace dynamic_loadout;
 
 autoexec __init__system__() {
-  system::register(#"dynamic_loadout", &__init__, undefined, #"weapons");
+  system::register(#"dynamic_loadout", &__init__, undefined, # "weapons");
 }
 
-private __init__() {
+__init__() {
   registerclientfields();
 }
 
-private registerclientfields() {
+registerclientfields() {
   packagelist = getscriptbundlelist("bounty_hunter_package_list");
 
   if(isDefined(packagelist)) {
@@ -48,7 +47,7 @@ private registerclientfields() {
   }
 }
 
-private function_a6d394a9(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+function_a6d394a9(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   parent = getuimodelforcontroller(localclientnum);
   var_b58165cc = getuimodel(parent, "luielement.BountyHunterLoadout.money");
 
@@ -59,7 +58,7 @@ private function_a6d394a9(localclientnum, oldval, newval, bnewent, binitialsnap,
   setuimodelvalue(var_b58165cc, newval);
 }
 
-private function_c25afb06(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+function_c25afb06(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   parent = getuimodelforcontroller(localclientnum);
   var_d4d4591d = getuimodel(parent, "hudItems.bountyBagMoney");
 

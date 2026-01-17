@@ -25,7 +25,7 @@ bot_conf_think() {
 
 conf_get_tag_in_sight() {
   angles = self getplayerangles();
-  forward = anglestoforward(angles);
+  forward = anglesToForward(angles);
   forward = vectornormalize(forward);
   closest = 999999;
 

@@ -25,7 +25,7 @@
 #namespace zm_ai_napalm;
 
 function autoexec __init__sytem__() {
-  system::register("zm_ai_napalm", & __init__, & __main__, undefined);
+  system::register("zm_ai_napalm", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -50,20 +50,20 @@ function __main__() {
   level.napalmhealthmultiplier = 4;
   level.var_57ecc1a3 = 0;
   level.var_4e4c9791 = [];
-  level.napalm_zombie_spawners = getentarray("napalm_zombie_spawner", "script_noteworthy");
+  level.napalm_zombie_spawners = getEntArray("napalm_zombie_spawner", "script_noteworthy");
   level flag::init("zombie_napalm_force_spawn");
-  array::thread_all(level.napalm_zombie_spawners, & spawner::add_spawn_function, & napalm_zombie_spawn);
-  array::thread_all(level.napalm_zombie_spawners, & spawner::add_spawn_function, & zombie_utility::round_spawn_failsafe);
+  array::thread_all(level.napalm_zombie_spawners, &spawner::add_spawn_function, &napalm_zombie_spawn);
+  array::thread_all(level.napalm_zombie_spawners, &spawner::add_spawn_function, &zombie_utility::round_spawn_failsafe);
   _napalm_initsounds();
-  zm_spawner::register_zombie_damage_callback( & _napalm_damage_callback);
+  zm_spawner::register_zombie_damage_callback(&_napalm_damage_callback);
   level thread function_7cce5d95();
   println("" + level.nextnapalmspawnround);
 }
 
 function registerbehaviorscriptfunctions() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("napalmExplodeInitialize", & napalmexplodeinitialize);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("napalmExplodeTerminate", & napalmexplodeterminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("napalmCanExplode", & napalmcanexplode);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("napalmExplodeInitialize", &napalmexplodeinitialize);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("napalmExplodeTerminate", &napalmexplodeterminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("napalmCanExplode", &napalmcanexplode);
 }
 
 function get_napalm_spawners() {
@@ -76,10 +76,10 @@ function get_napalm_locations() {
 
 function napalm_spawn_check() {
   forcespawn = level flag::get("zombie_napalm_force_spawn");
-  if(!isdefined(level.napalmzombiesenabled) || level.napalmzombiesenabled == 0 || level.napalm_zombie_spawners.size == 0 || level.zm_loc_types["napalm_location"].size == 0) {
+  if(!isDefined(level.napalmzombiesenabled) || level.napalmzombiesenabled == 0 || level.napalm_zombie_spawners.size == 0 || level.zm_loc_types["napalm_location"].size == 0) {
     return 0;
   }
-  if(isdefined(level.napalmzombiecount) && level.napalmzombiecount > 0) {
+  if(isDefined(level.napalmzombiecount) && level.napalmzombiecount > 0) {
     return 0;
   }
   if(getdvarint("") != 0) {
@@ -102,14 +102,14 @@ function napalm_spawn_check() {
 
 function function_7cce5d95() {
   level waittill("start_of_round");
-  while (true) {
+  while(true) {
     if(napalm_spawn_check()) {
       spawner_list = get_napalm_spawners();
       location_list = get_napalm_locations();
       spawner = array::random(spawner_list);
       location = array::random(location_list);
       ai = zombie_utility::spawn_zombie(spawner, spawner.targetname, location);
-      if(isdefined(ai)) {
+      if(isDefined(ai)) {
         ai.spawn_point_override = location;
       }
     }
@@ -121,13 +121,13 @@ function function_8f86441a() {
   self endon("death");
   spot = self.spawn_point_override;
   self.spawn_point = spot;
-  if(isdefined(spot.target)) {
+  if(isDefined(spot.target)) {
     self.target = spot.target;
   }
-  if(isdefined(spot.zone_name)) {
+  if(isDefined(spot.zone_name)) {
     self.zone_name = spot.zone_name;
   }
-  if(isdefined(spot.script_parameters)) {
+  if(isDefined(spot.script_parameters)) {
     self.script_parameters = spot.script_parameters;
   }
   self thread zm_spawner::do_zombie_rise(spot);
@@ -153,7 +153,7 @@ function _napalm_initsounds() {
 }
 
 function _entity_in_zone(zone) {
-  for (i = 0; i < zone.volumes.size; i++) {
+  for(i = 0; i < zone.volumes.size; i++) {
     if(self istouching(zone.volumes[i])) {
       return true;
     }
@@ -176,7 +176,7 @@ function init_napalm_fx() {
 }
 
 function napalm_zombie_spawn(animname_set) {
-  self.custom_location = & function_8f86441a;
+  self.custom_location = &function_8f86441a;
   zm_spawner::zombie_spawn_init(animname_set);
   println("");
   setdvar("", 0);
@@ -191,15 +191,15 @@ function napalm_zombie_spawn(animname_set) {
   self.no_damage_points = 1;
   self.explosive_volume = 0;
   self.ignore_enemy_count = 1;
-  self.deathfunction = & napalm_zombie_death;
-  self.actor_full_damage_func = & _napalm_zombie_damage;
-  self.nuke_damage_func = & _napalm_nuke_damage;
+  self.deathfunction = &napalm_zombie_death;
+  self.actor_full_damage_func = &_napalm_zombie_damage;
+  self.nuke_damage_func = &_napalm_nuke_damage;
   self.instakill_func = undefined;
-  self._zombie_shrink_callback = & _napalm_shrink;
-  self._zombie_unshrink_callback = & _napalm_unshrink;
-  self.water_trigger_func = & napalm_enter_water_trigger;
-  self.custom_damage_func = & napalm_custom_damage;
-  self.monkey_bolt_taunts = & napalm_monkey_bolt_taunts;
+  self._zombie_shrink_callback = &_napalm_shrink;
+  self._zombie_unshrink_callback = &_napalm_unshrink;
+  self.water_trigger_func = &napalm_enter_water_trigger;
+  self.custom_damage_func = &napalm_custom_damage;
+  self.monkey_bolt_taunts = &napalm_monkey_bolt_taunts;
   self.canexplodetime = gettime() + 2000;
   self thread _zombie_watchstopeffects();
   self thread napalm_watch_for_sliding();
@@ -207,7 +207,7 @@ function napalm_zombie_spawn(animname_set) {
   self.zombie_move_speed = "walk";
   self.zombie_arms_position = "up";
   self.variant_type = randomint(3);
-  self playsound("evt_napalm_zombie_spawn");
+  self playSound("evt_napalm_zombie_spawn");
 }
 
 function napalm_zombie_client_flag() {
@@ -223,7 +223,7 @@ function _napalm_instakill_func() {}
 
 function napalm_custom_damage(player) {
   damage = self.meleedamage;
-  if(isdefined(self.overridedeathdamage)) {
+  if(isDefined(self.overridedeathdamage)) {
     damage = int(self.overridedeathdamage);
   }
   return damage;
@@ -239,7 +239,7 @@ function _zombie_runexplosionwindupeffects() {
   offsets["J_SpineLower"] = vectorscale((0, 1, 0), 10);
   watch = [];
   keys = getarraykeys(fx);
-  for (i = 0; i < keys.size; i++) {
+  for(i = 0; i < keys.size; i++) {
     jointname = keys[i];
     fxname = fx[jointname];
     offset = offsets[jointname];
@@ -247,10 +247,10 @@ function _zombie_runexplosionwindupeffects() {
     watch[i] = effectent;
   }
   self waittill("stop_fx");
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
-  for (i = 0; i < watch.size; i++) {
+  for(i = 0; i < watch.size; i++) {
     watch[i] delete();
   }
 }
@@ -274,27 +274,27 @@ function private napalmcanexplode(entity) {
   napalmplayerwarningradius = level.napalmexplodedamageradius;
   napalmplayerwarningradiussqr = napalmplayerwarningradius * napalmplayerwarningradius;
   players = getplayers();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     player = players[i];
     if(!zombie_utility::is_player_valid(player)) {
       continue;
     }
     if(distance2dsquared(player.origin, entity.origin) < napalmplayerwarningradiussqr) {
-      if(!isdefined(player.napalmradiuswarningtime) || player.napalmradiuswarningtime <= (gettime() - 0.1)) {
+      if(!isDefined(player.napalmradiuswarningtime) || player.napalmradiuswarningtime <= (gettime() - 0.1)) {
         player clientfield::set_to_player("napalm_pstfx_burn", 1);
-        player playloopsound("chr_burning_loop", 1);
+        player playLoopSound("chr_burning_loop", 1);
         player.napalmradiuswarningtime = gettime() + 10000;
       }
     } else {
-      if(isdefined(player.napalmradiuswarningtime) && player.napalmradiuswarningtime > gettime()) {
+      if(isDefined(player.napalmradiuswarningtime) && player.napalmradiuswarningtime > gettime()) {
         player exit_napalm_radius();
       }
       continue;
     }
-    if(!isdefined(entity.favoriteenemy) || !isplayer(entity.favoriteenemy)) {
+    if(!isDefined(entity.favoriteenemy) || !isplayer(entity.favoriteenemy)) {
       continue;
     }
-    if(isdefined(entity.in_the_ground) && entity.in_the_ground) {
+    if(isDefined(entity.in_the_ground) && entity.in_the_ground) {
       continue;
     }
     if(entity.canexplodetime > gettime()) {
@@ -316,7 +316,7 @@ function private napalmexplodeinitialize(entity, asmstatename) {
     entity setignorepauseworld(1);
   }
   entity clientfield::set("napalmexplode", 1);
-  entity playsound("evt_napalm_zombie_charge");
+  entity playSound("evt_napalm_zombie_charge");
 }
 
 function private napalmexplodeterminate(entity, asmstatename) {
@@ -329,11 +329,11 @@ function napalm_zombie_death(einflictor, attacker, idamage, smeansofdeath, weapo
   zombies_axis = array::get_all_closest(self.origin, getaispeciesarray("axis", "all"), undefined, undefined, level.napalmzombiedamageradius);
   dogs = array::get_all_closest(self.origin, getaispeciesarray("allies", "zombie_dog"), undefined, undefined, level.napalmzombiedamageradius);
   zombies = arraycombine(zombies_axis, dogs, 0, 0);
-  if(isdefined(level._effect["napalm_explosion"])) {
-    playfxontag(level._effect["napalm_explosion"], self, "J_SpineLower");
+  if(isDefined(level._effect["napalm_explosion"])) {
+    playFXOnTag(level._effect["napalm_explosion"], self, "J_SpineLower");
   }
-  self playsound("evt_napalm_zombie_explo");
-  if(isdefined(self.attacker) && isplayer(self.attacker)) {
+  self playSound("evt_napalm_zombie_explo");
+  if(isDefined(self.attacker) && isplayer(self.attacker)) {
     self.attacker thread zm_audio::create_and_play_dialog("kill", "napalm");
   }
   level notify("napalm_death", self.explosive_volume);
@@ -344,9 +344,9 @@ function napalm_zombie_death(einflictor, attacker, idamage, smeansofdeath, weapo
   self thread _napalm_damage_zombies(zombies);
   napalm_clear_radius_fx_all_players();
   self _napalm_damage_players();
-  if(isdefined(self.attacker) && isplayer(self.attacker) && (!(isdefined(self.killed_self) && self.killed_self)) && (!(isdefined(self.shrinked) && self.shrinked))) {
+  if(isDefined(self.attacker) && isplayer(self.attacker) && (!(isDefined(self.killed_self) && self.killed_self)) && (!(isDefined(self.shrinked) && self.shrinked))) {
     players = level.players;
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       player = players[i];
       if(zombie_utility::is_player_valid(player)) {
         player zm_score::player_add_points("thundergun_fling", 300, (0, 0, 0), 0);
@@ -365,20 +365,20 @@ function napalm_delay_delete() {
 }
 
 function _napalm_damage_zombies(zombies) {
-  eyeorigin = self geteye();
-  if(!isdefined(zombies)) {
+  eyeorigin = self getEye();
+  if(!isDefined(zombies)) {
     return;
   }
   damageorigin = self.origin;
   standinginwater = self napalm_standing_in_water();
-  for (i = 0; i < zombies.size; i++) {
-    if(!isdefined(zombies[i])) {
+  for(i = 0; i < zombies.size; i++) {
+    if(!isDefined(zombies[i])) {
       continue;
     }
     if(zm_utility::is_magic_bullet_shield_enabled(zombies[i])) {
       continue;
     }
-    test_origin = zombies[i] geteye();
+    test_origin = zombies[i] getEye();
     if(!bullettracepassed(eyeorigin, test_origin, 0, undefined)) {
       continue;
     }
@@ -405,18 +405,18 @@ function _napalm_damage_zombies(zombies) {
 }
 
 function _napalm_damage_players() {
-  eyeorigin = self geteye();
+  eyeorigin = self getEye();
   footorigin = self.origin + vectorscale((0, 0, 1), 8);
   midorigin = (footorigin[0], footorigin[1], (footorigin[2] + eyeorigin[2]) / 2);
   players_damaged_by_explosion = 0;
   players = getplayers();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(!zombie_utility::is_player_valid(players[i])) {
       continue;
     }
-    test_origin = players[i] geteye();
+    test_origin = players[i] getEye();
     damageradius = level.napalmexplodedamageradius;
-    if(isdefined(self.wet) && self.wet) {
+    if(isDefined(self.wet) && self.wet) {
       damageradius = level.napalmexplodedamageradiuswet;
     }
     if(distancesquared(eyeorigin, test_origin) > (damageradius * damageradius)) {
@@ -432,8 +432,8 @@ function _napalm_damage_players() {
       }
     }
     players_damaged_by_explosion = 1;
-    if(isdefined(level._effect["player_fire_death_napalm"])) {
-      playfxontag(level._effect["player_fire_death_napalm"], players[i], "J_SpineLower");
+    if(isDefined(level._effect["player_fire_death_napalm"])) {
+      playFXOnTag(level._effect["player_fire_death_napalm"], players[i], "J_SpineLower");
     }
     dist = distance(eyeorigin, test_origin);
     killplayerdamage = 100;
@@ -453,11 +453,11 @@ function _napalm_damage_players() {
         damage = (scale * (killplayerdamage - level.napalmexplodedamagemin)) + level.napalmexplodedamagemin;
       }
     }
-    if(isdefined(self.shrinked) && self.shrinked) {
+    if(isDefined(self.shrinked) && self.shrinked) {
       damage = damage * 0.25;
       shellshocktime = shellshocktime * 0.25;
     }
-    if(isdefined(self.wet) && self.wet) {
+    if(isDefined(self.wet) && self.wet) {
       damage = damage * 0.25;
       shellshocktime = shellshocktime * 0.25;
     }
@@ -479,7 +479,7 @@ function napalm_fire_trigger(ai, radius, time, spawnfire) {
   spawnflags = 1;
   trigger = spawn("trigger_radius", ai.origin, spawnflags, radius, 70);
   sound_ent = undefined;
-  if(!isdefined(trigger)) {
+  if(!isDefined(trigger)) {
     return;
   }
   if(aiisnapalm) {
@@ -489,10 +489,10 @@ function napalm_fire_trigger(ai, radius, time, spawnfire) {
       trigger.napalm_fire_damage = 40;
     }
     trigger.napalm_fire_damage_type = "burned";
-    if(!spawnfire && isdefined(level._effect["napalm_fire_trigger"])) {
+    if(!spawnfire && isDefined(level._effect["napalm_fire_trigger"])) {
       sound_ent = spawn("script_origin", ai.origin);
-      sound_ent playloopsound("evt_napalm_fire", 1);
-      playfx(level._effect["napalm_fire_trigger"], ai.origin);
+      sound_ent playLoopSound("evt_napalm_fire", 1);
+      playFX(level._effect["napalm_fire_trigger"], ai.origin);
     }
   } else {
     trigger.napalm_fire_damage = 10;
@@ -505,7 +505,7 @@ function napalm_fire_trigger(ai, radius, time, spawnfire) {
   wait(time);
   trigger notify("end_fire_effect");
   trigger delete();
-  if(isdefined(sound_ent)) {
+  if(isDefined(sound_ent)) {
     sound_ent stoploopsound(1);
     wait(1);
     sound_ent delete();
@@ -514,12 +514,12 @@ function napalm_fire_trigger(ai, radius, time, spawnfire) {
 
 function triggerdamage() {
   self endon("end_fire_effect");
-  while (true) {
+  while(true) {
     self waittill("trigger", guy);
     if(isplayer(guy)) {
       if(zombie_utility::is_player_valid(guy)) {
         debounce = 500;
-        if(!isdefined(guy.last_napalm_fire_damage)) {
+        if(!isDefined(guy.last_napalm_fire_damage)) {
           guy.last_napalm_fire_damage = -1 * debounce;
         }
         if((guy.last_napalm_fire_damage + debounce) < gettime()) {
@@ -535,18 +535,18 @@ function triggerdamage() {
 
 function kill_with_fire(damagetype) {
   self endon("death");
-  if(isdefined(self.marked_for_death)) {
+  if(isDefined(self.marked_for_death)) {
     return;
   }
   self.marked_for_death = 1;
   if(self.animname == "monkey_zombie") {} else {
-    if(!isdefined(level.burning_zombies)) {
+    if(!isDefined(level.burning_zombies)) {
       level.burning_zombies = [];
     }
     if(level.burning_zombies.size < 6) {
       level.burning_zombies[level.burning_zombies.size] = self;
       self thread zombie_flame_watch();
-      self playsound("evt_zombie_ignite");
+      self playSound("evt_zombie_ignite");
       self thread zombie_death::flame_death_fx();
       wait(randomfloat(1.25));
     }
@@ -555,11 +555,11 @@ function kill_with_fire(damagetype) {
 }
 
 function zombie_flame_watch() {
-  if(isdefined(level.mutators) && level.mutators["mutator_noTraps"]) {
+  if(isDefined(level.mutators) && level.mutators["mutator_noTraps"]) {
     return;
   }
   self waittill("death");
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     self stoploopsound();
     arrayremovevalue(level.burning_zombies, self);
   } else {
@@ -568,13 +568,13 @@ function zombie_flame_watch() {
 }
 
 function array_remove(array, object) {
-  if(!isdefined(array) && !isdefined(object)) {
+  if(!isDefined(array) && !isDefined(object)) {
     return;
   }
   new_array = [];
   foreach(item in array) {
     if(item != object) {
-      if(!isdefined(new_array)) {
+      if(!isDefined(new_array)) {
         new_array = [];
       } else if(!isarray(new_array)) {
         new_array = array(new_array);
@@ -588,13 +588,13 @@ function array_remove(array, object) {
 function _zombie_setupfxonjoint(jointname, fxname, offset) {
   origin = self gettagorigin(jointname);
   effectent = spawn("script_model", origin);
-  effectent setmodel("tag_origin");
+  effectent setModel("tag_origin");
   effectent.angles = self gettagangles(jointname);
-  if(!isdefined(offset)) {
+  if(!isDefined(offset)) {
     offset = (0, 0, 0);
   }
   effectent linkto(self, jointname, offset);
-  playfxontag(level._effect[fxname], effectent, "tag_origin");
+  playFXOnTag(level._effect[fxname], effectent, "tag_origin");
   return effectent;
 }
 
@@ -613,7 +613,7 @@ function _napalm_zombie_damage(inflictor, attacker, damage, flags, meansofdeath,
   if(level.zombie_vars["zombie_insta_kill"]) {
     damage = damage * 2;
   }
-  if(isdefined(self.wet) && self.wet) {
+  if(isDefined(self.wet) && self.wet) {
     damage = damage * 5;
   } else if(self napalm_standing_in_water()) {
     damage = damage * 2;
@@ -628,7 +628,7 @@ function _napalm_zombie_damage(inflictor, attacker, damage, flags, meansofdeath,
 }
 
 function napalm_zombie_count_watch() {
-  if(!isdefined(level.napalmzombiecount)) {
+  if(!isDefined(level.napalmzombiecount)) {
     level.napalmzombiecount = 0;
   }
   level.napalmzombiecount++;
@@ -636,7 +636,7 @@ function napalm_zombie_count_watch() {
   self waittill("death");
   level.napalmzombiecount--;
   arrayremovevalue(level.var_4e4c9791, self, 0);
-  if(isdefined(self.shrinked) && self.shrinked) {
+  if(isDefined(self.shrinked) && self.shrinked) {
     level.nextnapalmspawnround = level.round_number + 1;
   } else {
     level.nextnapalmspawnround = level.round_number + (randomintrange(level.napalmzombieminroundwait, level.napalmzombiemaxroundwait + 1));
@@ -646,9 +646,9 @@ function napalm_zombie_count_watch() {
 
 function napalm_clear_radius_fx_all_players() {
   players = getplayers();
-  for (j = 0; j < players.size; j++) {
+  for(j = 0; j < players.size; j++) {
     player_to_clear = players[j];
-    if(!isdefined(player_to_clear)) {
+    if(!isDefined(player_to_clear)) {
       continue;
     }
     player_to_clear exit_napalm_radius();
@@ -677,12 +677,12 @@ function napalm_add_wet_time(time) {
   self endon("death");
   wettime = time * 1000;
   self.wet_time = gettime() + wettime;
-  if(isdefined(self.wet) && self.wet) {
+  if(isDefined(self.wet) && self.wet) {
     return;
   }
   self.wet = 1;
   self thread napalm_start_wet_fx();
-  while (self.wet_time > gettime()) {
+  while(self.wet_time > gettime()) {
     wait(0.1);
   }
   self thread napalm_end_wet_fx();
@@ -691,8 +691,8 @@ function napalm_add_wet_time(time) {
 
 function napalm_watch_for_sliding() {
   self endon("death");
-  while (true) {
-    if(isdefined(self.sliding) && self.sliding) {
+  while(true) {
+    if(isDefined(self.sliding) && self.sliding) {
       self thread napalm_add_wet_time(4);
     }
     wait(1);
@@ -708,9 +708,9 @@ function napalm_end_wet_fx() {
 }
 
 function napalm_standing_in_water(forcecheck) {
-  dotrace = !isdefined(self.standing_in_water_debounce);
+  dotrace = !isDefined(self.standing_in_water_debounce);
   dotrace = dotrace || self.standing_in_water_debounce < gettime();
-  dotrace = dotrace || (isdefined(forcecheck) && forcecheck);
+  dotrace = dotrace || (isDefined(forcecheck) && forcecheck);
   if(dotrace) {
     self.standing_in_water_debounce = gettime() + 500;
     waterheight = getwaterheight(self.origin);

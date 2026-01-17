@@ -27,7 +27,7 @@ on_spawn(watcher, player) {
 
   if(isDefined(endpos)) {
     retrievable_model = spawn("script_model", endpos);
-    retrievable_model setmodel("t5_weapon_ballistic_knife_blade_retrieve");
+    retrievable_model setModel("t5_weapon_ballistic_knife_blade_retrieve");
     retrievable_model setowner(player);
     retrievable_model.owner = player;
     retrievable_model.angles = angles;
@@ -68,7 +68,7 @@ wait_to_show_glowing_model(prey) {
   level endon("game_ended");
   self endon("death");
   wait 2;
-  self setmodel("t5_weapon_ballistic_knife_blade_retrieve");
+  self setModel("t5_weapon_ballistic_knife_blade_retrieve");
 }
 
 on_spawn_retrieve_trigger(watcher, player) {
@@ -103,7 +103,7 @@ on_spawn_retrieve_trigger(watcher, player) {
 
   pickup_trigger.owner = player;
   retrievable_model.retrievabletrigger = pickup_trigger;
-  hint_string = & "WEAPON_BALLISTIC_KNIFE_PICKUP";
+  hint_string = &"WEAPON_BALLISTIC_KNIFE_PICKUP";
 
   if(isDefined(hint_string))
     pickup_trigger sethintstring(hint_string);
@@ -175,7 +175,7 @@ watch_use_trigger(trigger, model, callback, weapon, playersoundonuse, npcsoundon
         player playlocalsound(playersoundonuse);
 
       if(isDefined(npcsoundonuse))
-        player playsound(npcsoundonuse);
+        player playSound(npcsoundonuse);
 
       player thread[[callback]](weapon, model, trigger);
       break;

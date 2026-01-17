@@ -11,7 +11,7 @@
 #namespace zm_tomb_ee_lights;
 
 function main() {
-  clientfield::register("world", "light_show", 21000, 2, "int", & function_b6f5f7f5, 0, 0);
+  clientfield::register("world", "light_show", 21000, 2, "int", &function_b6f5f7f5, 0, 0);
 }
 
 function function_b6f5f7f5(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

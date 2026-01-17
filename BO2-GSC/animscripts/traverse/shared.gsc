@@ -420,7 +420,7 @@ posttraversedeathanim() {
   self setflaggedanimknoballrestart("deathanim", deathanim, % body, 1, 0.1);
 
   if(animhasnotetrack(deathanim, "death_neckgrab_spurt"))
-    playfxontag(level._effects["death_neckgrab_spurt"], self, "j_neck");
+    playFXOnTag(level._effects["death_neckgrab_spurt"], self, "j_neck");
 }
 
 #using_animtree("dog");

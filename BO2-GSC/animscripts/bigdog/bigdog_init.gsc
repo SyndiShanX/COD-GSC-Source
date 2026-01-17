@@ -37,7 +37,7 @@ main() {
   anim._effect["bigdog_emped"] = loadfx("electrical/fx_elec_sp_emp_stun_claw");
 
   if(!isDefined(anim.bigdog_globals)) {
-    anim.bigdog_globals = spawnstruct();
+    anim.bigdog_globals = spawnStruct();
     anim.bigdog_globals.bonemap = [];
     anim.bigdog_globals.bonemap["jnt_f_l_balljoint"] = "FL";
     anim.bigdog_globals.bonemap["jnt_f_l_knee_upper"] = "FL";
@@ -85,7 +85,7 @@ main() {
     level.difficultysettings["bigdog_axis_burst_scale"]["veteran"] = 1.5;
   }
 
-  self.a = spawnstruct();
+  self.a = spawnStruct();
   self.moveplaybackrate = 1;
   self.usecombatscriptatcover = 1;
   self.combatmode = "any_exposed_nodes_only";
@@ -186,7 +186,7 @@ handle_badplaces() {
   badplace_cylinder(badplace_name + "1", -1, self.origin, radius, height, "all");
 
   if(bigdogusebiggerbadplace) {
-    origin = self.origin + vectorscale(anglestoforward(self.angles), 100);
+    origin = self.origin + vectorscale(anglesToForward(self.angles), 100);
     badplace_cylinder(badplace_name + "2", -1, origin, radius, height, "all");
   }
 
@@ -205,7 +205,7 @@ handle_badplaces() {
       badplace_cylinder(badplace_name, -1, self.origin, radius, height, "all");
 
       if(bigdogusebiggerbadplace) {
-        origin = self.origin + vectorscale(anglestoforward(self.angles), 100);
+        origin = self.origin + vectorscale(anglesToForward(self.angles), 100);
         badplace_cylinder(badplace_name + "2", -1, origin, radius, height, "all");
       }
     }
@@ -470,7 +470,7 @@ bigdog_add_fx(bonename, effect, sound, useangles, playonself) {
     self.fx_ents = [];
 
   if(isDefined(playonself) && playonself)
-    playfxontag(effect, self, bonename);
+    playFXOnTag(effect, self, bonename);
   else {
     fxorigin = self gettagorigin(bonename);
     tempent = spawn("script_model", fxorigin);
@@ -478,15 +478,15 @@ bigdog_add_fx(bonename, effect, sound, useangles, playonself) {
     if(isDefined(useangles) && useangles)
       tempent.angles = self gettagangles(bonename);
 
-    tempent setmodel("tag_origin");
+    tempent setModel("tag_origin");
     tempent linkto(self, bonename);
-    playfxontag(effect, tempent, "tag_origin");
+    playFXOnTag(effect, tempent, "tag_origin");
     self.fx_ents[self.fx_ents.size] = tempent;
     return tempent;
   }
 
   if(isDefined(sound))
-    self playsound(sound);
+    self playSound(sound);
 }
 
 bigdog_kill_all_fx_on_death() {
@@ -505,12 +505,12 @@ bigdog_emped_behavior() {
   self.turret laseroff();
   self thread bigdog_emped_lights_blinking();
   bigdog_add_fx("tag_body_animate", anim._effect["bigdog_emped"], undefined, 1);
-  self playsound("veh_hunker_down_flinch_b");
+  self playSound("veh_hunker_down_flinch_b");
   self thread stopturretfortime(7.5);
   self.a.empedendtime = gettime() + 7500.0;
   self animcustom(::bigdog_emp_anim);
   wait 7.5;
-  self playsound("veh_qrdrone_boot_bdog");
+  self playSound("veh_qrdrone_boot_bdog");
   wait 1;
   self notify("bigdog_emped_done");
   bigdog_lights_on();
@@ -867,13 +867,13 @@ bigdog_damage_leg(attacker, damage, meansofdeath, weapon, vpoint, vdir, leg, bon
       bigdog_add_fx("jnt_r_r_knee_upper", anim._effect["bigdog_leg_knee_spark_right"]);
     }
   } else if(self.damageleg == "FL")
-    playfxontag(anim._effect["bigdog_leg_knee_hit_spark"], self, "jnt_r_r_knee_upper");
+    playFXOnTag(anim._effect["bigdog_leg_knee_hit_spark"], self, "jnt_r_r_knee_upper");
   else if(self.damageleg == "FR")
-    playfxontag(anim._effect["bigdog_leg_knee_hit_spark"], self, "jnt_f_r_knee_upper");
+    playFXOnTag(anim._effect["bigdog_leg_knee_hit_spark"], self, "jnt_f_r_knee_upper");
   else if(self.damageleg == "RL")
-    playfxontag(anim._effect["bigdog_leg_knee_hit_spark"], self, "jnt_r_l_knee_upper");
+    playFXOnTag(anim._effect["bigdog_leg_knee_hit_spark"], self, "jnt_r_l_knee_upper");
   else if(self.damageleg == "RR")
-    playfxontag(anim._effect["bigdog_leg_knee_hit_spark"], self, "jnt_r_r_knee_upper");
+    playFXOnTag(anim._effect["bigdog_leg_knee_hit_spark"], self, "jnt_r_r_knee_upper");
 
   increase_hit_count(leg);
   return false;
@@ -900,7 +900,7 @@ trytobreakoffleg(leg) {
     self showpart(anim.bigdog_globals.legdamagedmap[leg]);
     bonename = anim.bigdog_globals.leghierarchy[leg][1];
     bigdog_add_fx(bonename, anim._effect["bigdog_spark_big"], "wpn_bigdog_damaged");
-    playfxontag(anim._effect["bigdog_leg_explosion"], self, bonename);
+    playFXOnTag(anim._effect["bigdog_leg_explosion"], self, bonename);
     playsoundatposition("wpn_bigdog_explode", self.origin);
     self.missinglegs[leg] = "bottom";
     return true;
@@ -988,7 +988,7 @@ playneardeathbodydamagefx() {
     boneindex = randomint(anim.bigdog_globals.bodydamagetags.size);
     tag = anim.bigdog_globals.bodydamagetags[boneindex];
     playsoundatposition("wpn_bigdog_damaged", self.origin);
-    playfxontag(anim._effect["bigdog_panel_explosion_large"], self, tag);
+    playFXOnTag(anim._effect["bigdog_panel_explosion_large"], self, tag);
 
     if(smokestacks < 1) {
       bigdog_add_fx(tag, anim._effect["bigdog_smoke"]);
@@ -1004,7 +1004,7 @@ playbodydamagefx() {
   boneindex = randomint(anim.bigdog_globals.bodydamagetags.size);
   tag = anim.bigdog_globals.bodydamagetags[boneindex];
   playsoundatposition("wpn_bigdog_damaged", self.origin);
-  playfxontag(anim._effect["bigdog_panel_explosion_small"], self, tag);
+  playFXOnTag(anim._effect["bigdog_panel_explosion_small"], self, tag);
 }
 
 increase_hit_count(bodypart) {
@@ -1035,7 +1035,7 @@ bigdog_targeting_audio() {
     self.turret waittill("fire_on_target");
 
     if(self.audio_is_targeting) {
-      self.turret playsound("wpn_bigdog_turret_lockon_npc");
+      self.turret playSound("wpn_bigdog_turret_lockon_npc");
       wait 1;
     }
   }
@@ -1044,7 +1044,7 @@ bigdog_targeting_audio() {
 walking_loop_audio() {
   self endon("death");
   self thread stop_sounds_on_death();
-  self playloopsound("blk_bigdog_loop", 0.1);
+  self playLoopSound("blk_bigdog_loop", 0.1);
 
   while(true) {
     if(self.a.wounded == 1) {
@@ -1067,20 +1067,18 @@ damaged_walking_audio() {
   self endon("death");
   self stoploopsound(0.1);
   wait 0.2;
-  self playloopsound("blk_bigdog_vuln_loop", 0.1);
-  self playsound("");
+  self playLoopSound("blk_bigdog_vuln_loop", 0.1);
+  self playSound("");
 }
 
 play_spawn_alarm() {
   self endon("death");
   wait 0.5;
   wait(randomintrange(1, 6));
-  self playsound("veh_claw_alert");
+  self playSound("veh_claw_alert");
   wait 4;
 
-  if(level.is_player_inside_arena == 0) {
-  } else {
-  }
+  if(level.is_player_inside_arena == 0) {} else {}
 }
 
 play_speech_warning() {
@@ -1089,9 +1087,9 @@ play_speech_warning() {
 
   if(level.bigdog_speak == 0) {
     level.bigdog_speak = 1;
-    self playsound("veh_claw_speak_alert", "sound_complete");
+    self playSound("veh_claw_speak_alert", "sound_complete");
     self waittill("sound_complete");
-    self playsound("veh_claw_vo", "sound_complete");
+    self playSound("veh_claw_vo", "sound_complete");
     self waittill("sound_complete");
     level.bigdog_speak = 0;
   }

@@ -4,7 +4,7 @@
 **********************************************/
 
 main() {
-  self setmodel("c_usa_seal80s_body");
+  self setModel("c_usa_seal80s_body");
   self.headmodel = "c_usa_seal80s_head1";
   self attach(self.headmodel, "", 1);
   self.gearmodel = "c_usa_seal80s_gear_medium";

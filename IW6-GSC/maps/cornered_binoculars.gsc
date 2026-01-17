@@ -485,13 +485,13 @@ binocular_status_update(var_0, var_1) {
     for(;;) {
       switch (var_2) {
         case 1:
-          var_0 = & "CORNERED_SCANNING_DOT";
+          var_0 = &"CORNERED_SCANNING_DOT";
           break;
         case 2:
-          var_0 = & "CORNERED_SCANNING_DOT_DOT";
+          var_0 = &"CORNERED_SCANNING_DOT_DOT";
           break;
         case 3:
-          var_0 = & "CORNERED_SCANNING_DOT_DOT_DOT";
+          var_0 = &"CORNERED_SCANNING_DOT_DOT_DOT";
           break;
       }
 

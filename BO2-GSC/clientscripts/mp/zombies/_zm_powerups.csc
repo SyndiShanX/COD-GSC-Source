@@ -45,7 +45,7 @@ add_zombie_powerup(powerup_name, client_field_name, clientfield_version) {
   if(isDefined(level.zombie_include_powerups) && !isDefined(level.zombie_include_powerups[powerup_name])) {
     return;
   }
-  struct = spawnstruct();
+  struct = spawnStruct();
 
   if(!isDefined(level.zombie_powerups))
     level.zombie_powerups = [];
@@ -102,5 +102,5 @@ powerup_fx_callback(localclientnum, oldval, newval, bnewent, binitialsnap, field
       return;
   }
 
-  playfxontag(localclientnum, fx, self, "tag_origin");
+  playFXOnTag(localclientnum, fx, self, "tag_origin");
 }

@@ -18,13 +18,13 @@ setup_bot_hp() {
   maps\mp\bots\_bots_util::bot_waittill_bots_enabled();
   var_0 = 0;
 
-  for (var_1 = 0; var_1 < level.all_hp_zones.size; var_1++) {
+  for(var_1 = 0; var_1 < level.all_hp_zones.size; var_1++) {
     var_2 = level.all_hp_zones[var_1];
     var_2.script_label = "zone_" + var_1;
     var_2 thread maps\mp\bots\_bots_gametype_common::monitor_zone_control();
     var_3 = 0;
 
-    if(isdefined(var_2.trig.trigger_off) && var_2.trig.trigger_off) {
+    if(isDefined(var_2.trig.trigger_off) && var_2.trig.trigger_off) {
       var_2.trig common_scripts\utility::trigger_on();
       var_3 = 1;
     }
@@ -41,7 +41,7 @@ setup_bot_hp() {
     level.bot_hp_allow_predictive_capping = 1;
     var_4 = level.zone;
 
-    if(!isdefined(var_4))
+    if(!isDefined(var_4))
       var_4 = common_scripts\utility::random(level.all_hp_zones);
 
     maps\mp\bots\_bots_gametype_common::bot_cache_entrances_to_zones([var_4]);
@@ -52,11 +52,11 @@ setup_bot_hp() {
 }
 
 bot_cache_entrances_to_other_zones(var_0) {
-  for (var_1 = common_scripts\utility::array_remove(level.all_hp_zones, var_0); var_1.size > 0; var_1 = common_scripts\utility::array_remove(var_1, var_2)) {
+  for(var_1 = common_scripts\utility::array_remove(level.all_hp_zones, var_0); var_1.size > 0; var_1 = common_scripts\utility::array_remove(var_1, var_2)) {
     var_2 = undefined;
     var_3 = level.zone;
 
-    if(isdefined(var_3) && common_scripts\utility::array_contains(var_1, var_3))
+    if(isDefined(var_3) && common_scripts\utility::array_contains(var_1, var_3))
       var_2 = var_3;
     else
       var_2 = common_scripts\utility::random(var_1);
@@ -73,7 +73,7 @@ bot_hp_think() {
   self endon("disconnect");
   level endon("game_ended");
 
-  while (!isdefined(level.bot_gametype_precaching_done))
+  while(!isDefined(level.bot_gametype_precaching_done))
     wait 0.05;
 
   self botsetflag("separation", 0);
@@ -81,13 +81,13 @@ bot_hp_think() {
   var_0 = undefined;
   var_1 = level.zone;
 
-  for (;;) {
+  for(;;) {
     wait 0.05;
 
     if(self.health <= 0) {
       continue;
     }
-    if(!isdefined(level.zone) || !isdefined(level.bot_gametype_zones_precached[level.zone getentitynumber()])) {
+    if(!isDefined(level.zone) || !isDefined(level.bot_gametype_zones_precached[level.zone getentitynumber()])) {
       if(maps\mp\bots\_bots_util::bot_is_defending())
         maps\mp\bots\_bots_strategy::bot_defend_stop();
 
@@ -101,7 +101,7 @@ bot_hp_think() {
       var_1 = level.zone;
     }
 
-    if(isdefined(level.zonemovetime) && !isdefined(var_0) && level.randomzonespawn == 0 && level.bot_hp_allow_predictive_capping) {
+    if(isDefined(level.zonemovetime) && !isDefined(var_0) && level.randomzonespawn == 0 && level.bot_hp_allow_predictive_capping) {
       var_2 = level.zonemovetime - gettime();
 
       if(var_2 > 0 && var_2 < 10000) {
@@ -134,7 +134,7 @@ bot_hp_think() {
 
     var_9 = level.zone;
 
-    if(isdefined(var_0) && var_0)
+    if(isDefined(var_0) && var_0)
       var_9 = level.zones[(level.prevzoneindex + 1) % level.zones.size];
 
     if(!bot_is_capturing_zone(var_9))

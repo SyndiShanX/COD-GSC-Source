@@ -7,8 +7,7 @@
 #include clientscripts\mp\createfx\mp_raid_fx;
 #include clientscripts\mp\_fx;
 
-precache_scripted_fx() {
-}
+precache_scripted_fx() {}
 
 precache_createfx_fx() {
   level._effect["fx_mp_light_dust_motes_md"] = loadfx("maps/mp_maps/fx_mp_light_dust_motes_md");

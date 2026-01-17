@@ -25,7 +25,7 @@ score_cf_register_info(name, version, max_count) {
   if(level.createfx_enabled) {
     return;
   }
-  info = spawnstruct();
+  info = spawnStruct();
   info.name = name;
   info.cf_field = "score_cf_" + name;
   info.version = version;

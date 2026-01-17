@@ -11,7 +11,6 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_weapons;
-
 #namespace zm_trial_reset_loadout;
 
 autoexec __init__system__() {
@@ -26,7 +25,7 @@ __init__() {
   zm_trial::register_challenge(#"reset_loadout", &on_begin, &on_end);
 }
 
-private on_begin(var_30dbb2e5, var_f2c84b6b) {
+on_begin(var_30dbb2e5, var_f2c84b6b) {
   self.var_f2c84b6b = var_f2c84b6b;
   self.var_30dbb2e5 = var_30dbb2e5;
 
@@ -63,7 +62,7 @@ is_active(var_61ee083c = 0) {
   return isDefined(s_challenge);
 }
 
-private reset_ammo(var_f2c84b6b) {
+reset_ammo(var_f2c84b6b) {
   self notify("31521b89b82403a5");
   self endon("31521b89b82403a5");
   self endon(#"disconnect");
@@ -118,7 +117,7 @@ private reset_ammo(var_f2c84b6b) {
   }
 }
 
-private reset_loadout(var_96288bc8 = 0) {
+reset_loadout(var_96288bc8 = 0) {
   self notify("48ec1afa4e1f3b29");
   self endon("48ec1afa4e1f3b29");
   self endon(#"disconnect");
@@ -143,7 +142,7 @@ private reset_loadout(var_96288bc8 = 0) {
     self zm_weapons::weapon_give(level.weaponzmfists, 1);
 
     if(isDefined(level.var_7f7fd2ac)) {
-      level waittill(#"enable_equipment", #"hash_7646638df88a3656");
+      level waittill(#"enable_equipment", # "hash_7646638df88a3656");
     }
   }
 
@@ -157,14 +156,14 @@ private reset_loadout(var_96288bc8 = 0) {
   }
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   if(self.var_30dbb2e5 === "zombie_fists") {
     function_59d771f7();
   }
 }
 
-private function_d1dabace(n_time = 30) {
-  level endon(#"hash_7646638df88a3656", #"end_game");
+function_d1dabace(n_time = 30) {
+  level endon(#"hash_7646638df88a3656", # "end_game");
   level.var_236b9f7a = &function_37fe3e07;
   level.func_override_wallbuy_prompt = &function_3d4fea64;
   level.func_magicbox_update_prompt_use_override = &function_bf591b5a;
@@ -181,7 +180,7 @@ private function_d1dabace(n_time = 30) {
   function_59d771f7();
 }
 
-private function_59d771f7() {
+function_59d771f7() {
   level notify(#"enable_equipment");
   level.var_236b9f7a = undefined;
   level.func_override_wallbuy_prompt = undefined;

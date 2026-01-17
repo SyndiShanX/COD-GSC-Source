@@ -14,8 +14,8 @@
 #namespace zm_tomb_teleporter;
 
 function init() {
-  clientfield::register("allplayers", "teleport_arrival_departure_fx", 21000, 1, "counter", & function_dadd24b7, 0, 0);
-  clientfield::register("vehicle", "teleport_arrival_departure_fx", 21000, 1, "counter", & function_dadd24b7, 0, 0);
+  clientfield::register("allplayers", "teleport_arrival_departure_fx", 21000, 1, "counter", &function_dadd24b7, 0, 0);
+  clientfield::register("vehicle", "teleport_arrival_departure_fx", 21000, 1, "counter", &function_dadd24b7, 0, 0);
 }
 
 function main() {
@@ -25,19 +25,19 @@ function main() {
 function function_a8255fab(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   self endon("disconnect");
   if(newval == 1) {
-    if(!isdefined(self.var_1e8e073f)) {
-      self.var_1e8e073f = playfxontag(localclientnum, level._effect["teleport_1p"], self, "tag_origin");
+    if(!isDefined(self.var_1e8e073f)) {
+      self.var_1e8e073f = playFXOnTag(localclientnum, level._effect["teleport_1p"], self, "tag_origin");
       setfxignorepause(localclientnum, self.var_1e8e073f, 1);
     }
-  } else if(isdefined(self.var_1e8e073f)) {
+  } else if(isDefined(self.var_1e8e073f)) {
     stopfx(localclientnum, self.var_1e8e073f);
     self.var_1e8e073f = undefined;
   }
 }
 
 function function_ffedfe48(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  var_b162502d = !(isdefined(self.var_76534568) && self.var_76534568);
-  if(!(isdefined(self.var_76534568) && self.var_76534568)) {
+  var_b162502d = !(isDefined(self.var_76534568) && self.var_76534568);
+  if(!(isDefined(self.var_76534568) && self.var_76534568)) {
     self useanimtree($generic);
     self.var_76534568 = 1;
   }
@@ -57,7 +57,7 @@ function function_dadd24b7(localclientnum, oldval, newval, bnewent, binitialsnap
   }
   a_e_players = getlocalplayers();
   foreach(e_player in a_e_players) {
-    self.var_16ab725 = playfxontag(e_player.localclientnum, level._effect["teleport_arrive_player"], self, str_tag_name);
+    self.var_16ab725 = playFXOnTag(e_player.localclientnum, level._effect["teleport_arrive_player"], self, str_tag_name);
     setfxignorepause(e_player.localclientnum, self.var_16ab725, 1);
   }
 }

@@ -28,17 +28,17 @@
 #namespace zm_island_zones;
 
 function autoexec __init__sytem__() {
-  system::register("zm_island_zones", & __init__, undefined, undefined);
+  system::register("zm_island_zones", &__init__, undefined, undefined);
 }
 
 function __init__() {
   clientfield::register("scriptmover", "vine_door_play_fx", 9000, 1, "int");
-  scene::add_scene_func("p7_fxanim_zm_island_vine_gate_bundle", & function_6ed87461, "init");
+  scene::add_scene_func("p7_fxanim_zm_island_vine_gate_bundle", &function_6ed87461, "init");
 }
 
 function main() {
   level.zones = [];
-  level.zone_manager_init_func = & function_45a8888c;
+  level.zone_manager_init_func = &function_45a8888c;
   init_zones[0] = "zone_start_water";
   level thread zm_zonemgr::manage_zones(init_zones);
 }
@@ -95,14 +95,14 @@ function function_45a8888c() {
   level thread function_cd881f16();
   level thread function_2043d032();
   level thread function_87fe8382();
-  a_t_doors = getentarray("zombie_door", "targetname");
+  a_t_doors = getEntArray("zombie_door", "targetname");
   foreach(t_door in a_t_doors) {
     if(t_door.script_noteworthy === "vine_door") {
       t_door thread function_feb4ddde();
     }
   }
-  var_7be3ca60 = getentarray("delete_door_model_when_finished", "script_noteworthy");
-  array::thread_all(var_7be3ca60, & function_afc937e7);
+  var_7be3ca60 = getEntArray("delete_door_model_when_finished", "script_noteworthy");
+  array::thread_all(var_7be3ca60, &function_afc937e7);
   level thread function_8b7501aa();
 }
 
@@ -139,7 +139,7 @@ function function_feb4ddde() {
   var_593fa92c = struct::get_array(var_4c616d31 + "_fx", "targetname");
   var_9649126c = struct::get_array(var_4c616d31, "targetname");
   foreach(s_scene in var_9649126c) {
-    if(isdefined(s_scene) && isdefined(s_scene.var_4165e349)) {
+    if(isDefined(s_scene) && isDefined(s_scene.var_4165e349)) {
       s_scene.var_4165e349 clientfield::set("vine_door_play_fx", 1);
       wait(0.25);
       s_scene thread scene::play();

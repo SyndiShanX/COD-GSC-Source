@@ -9,13 +9,13 @@
 #namespace objpoints;
 
 function autoexec __init__sytem__() {
-  system::register("objpoints", & __init__, undefined, undefined);
+  system::register("objpoints", &__init__, undefined, undefined);
 }
 
 function __init__() {
   level.objpointnames = [];
   level.objpoints = [];
-  if(isdefined(level.splitscreen) && level.splitscreen) {
+  if(isDefined(level.splitscreen) && level.splitscreen) {
     level.objpointsize = 15;
   } else {
     level.objpointsize = 8;
@@ -25,15 +25,15 @@ function __init__() {
 }
 
 function create(name, origin, team, shader, alpha, scale) {
-  assert(isdefined(level.teams[team]) || team == "");
+  assert(isDefined(level.teams[team]) || team == "");
   objpoint = get_by_name(name);
-  if(isdefined(objpoint)) {
+  if(isDefined(objpoint)) {
     delete(objpoint);
   }
-  if(!isdefined(shader)) {
+  if(!isDefined(shader)) {
     shader = "objpoint_default";
   }
-  if(!isdefined(scale)) {
+  if(!isDefined(scale)) {
     scale = 1;
   }
   if(team != "all") {
@@ -52,7 +52,7 @@ function create(name, origin, team, shader, alpha, scale) {
   objpoint.archived = 0;
   objpoint setshader(shader, level.objpointsize, level.objpointsize);
   objpoint setwaypoint(1);
-  if(isdefined(alpha)) {
+  if(isDefined(alpha)) {
     objpoint.alpha = alpha;
   } else {
     objpoint.alpha = level.objpoint_alpha_default;
@@ -68,7 +68,7 @@ function delete(oldobjpoint) {
   assert(level.objpoints.size == level.objpointnames.size);
   if(level.objpoints.size == 1) {
     assert(level.objpointnames[0] == oldobjpoint.name);
-    assert(isdefined(level.objpoints[oldobjpoint.name]));
+    assert(isDefined(level.objpoints[oldobjpoint.name]));
     level.objpoints = [];
     level.objpointnames = [];
     oldobjpoint destroy();
@@ -102,14 +102,14 @@ function set_origin_by_name(name, origin) {
 }
 
 function get_by_name(name) {
-  if(isdefined(level.objpoints[name])) {
+  if(isDefined(level.objpoints[name])) {
     return level.objpoints[name];
   }
   return undefined;
 }
 
 function get_by_index(index) {
-  if(isdefined(level.objpointnames[index])) {
+  if(isDefined(level.objpointnames[index])) {
     return level.objpoints[level.objpointnames[index]];
   }
   return undefined;
@@ -121,7 +121,7 @@ function start_flashing() {
     return;
   }
   self.isflashing = 1;
-  while (self.isflashing) {
+  while(self.isflashing) {
     self fadeovertime(0.75);
     self.alpha = 0.35 * self.basealpha;
     wait(0.75);

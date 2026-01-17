@@ -60,7 +60,7 @@ setanims() {
   num_positions = issubstr(self.vehicletype, "heli_v78") ? 7 : 6;
 
   for(i = 0; i < num_positions; i++)
-    positions[i] = spawnstruct();
+    positions[i] = spawnStruct();
 
   positions[0].bhasgunwhileriding = 0;
   positions[1].bhasgunwhileriding = 0;
@@ -135,7 +135,7 @@ unload_groups() {
 
 set_attached_models() {
   array = [];
-  array["rope_test_ri"] = spawnstruct();
+  array["rope_test_ri"] = spawnStruct();
   array["rope_test_ri"].model = "rope_test_ri";
   array["rope_test_ri"].tag = "TAG_FastRope_RI";
   array["rope_test_ri"].idleanim = % o_vtol_rope_idle_ri;

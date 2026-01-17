@@ -10,7 +10,6 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\struct;
 #include scripts\zm_common\zm_powerups;
-
 #namespace zstandard;
 
 event_handler[gametype_init] main(eventstruct) {
@@ -31,7 +30,7 @@ event_handler[gametype_init] main(eventstruct) {
   }
 }
 
-private finalize_clientfields(localclientnum) {
+finalize_clientfields(localclientnum) {
   clientfield::register("toplayer", "zm_trials_timer", 1, getminbitcountfornum(540), "int", &function_bb753058, 0, 1);
   clientfield::register("worlduimodel", "ZMHudGlobal.trials.gameStartTime", 1, 31, "int", undefined, 0, 0);
 }
@@ -40,17 +39,17 @@ onprecachegametype() {}
 
 onstartgametype() {}
 
-private on_localplayer_connect(localclientnum) {
+on_localplayer_connect(localclientnum) {
   timer_model = function_c8b7588d(localclientnum);
   setuimodelvalue(timer_model, 0);
 }
 
-private function_c8b7588d(localclientnum) {
+function_c8b7588d(localclientnum) {
   controller_model = getuimodelforcontroller(localclientnum);
   return createuimodel(controller_model, "ZMHud.trialsTimer");
 }
 
-private function_bb753058(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+function_bb753058(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(!function_65b9eb0f(localclientnum)) {
     timer_model = function_c8b7588d(localclientnum);
     duration_msec = newval * 1000;

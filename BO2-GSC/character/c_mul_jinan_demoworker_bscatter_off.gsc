@@ -4,7 +4,7 @@
 *********************************************************************/
 
 main() {
-  self setmodel("c_mul_jinan_demoworker_bscatter_off_fb");
+  self setModel("c_mul_jinan_demoworker_bscatter_off_fb");
   self.voice = "american";
   self.skeleton = "base";
 }

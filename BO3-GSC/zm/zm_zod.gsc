@@ -126,8 +126,8 @@ function main() {
   level flag::init("idgun_up_for_grabs");
   level flag::init("pod_miasma");
   register_clientfields();
-  callback::on_spawned( & on_player_spawned);
-  callback::on_spawned( & function_f7d81bd5);
+  callback::on_spawned(&on_player_spawned);
+  callback::on_spawned(&function_f7d81bd5);
   level._uses_sticky_grenades = 1;
   level._uses_taser_knuckles = 1;
   level._no_vending_machine_auto_collision = 1;
@@ -146,37 +146,37 @@ function main() {
   level._effect["switch_sparks"] = "electric/fx_elec_sparks_directional_orange";
   level.default_start_location = "start_room";
   level.default_game_mode = "zclassic";
-  level.precachecustomcharacters = & precachecustomcharacters;
-  level.givecustomcharacters = & givecustomcharacters;
+  level.precachecustomcharacters = &precachecustomcharacters;
+  level.givecustomcharacters = &givecustomcharacters;
   level thread setup_personality_character_exerts();
   initcharacterstartindex();
-  level.register_offhand_weapons_for_level_defaults_override = & offhand_weapon_overrride;
-  level.zombiemode_offhand_weapon_give_override = & offhand_weapon_give_override;
-  level._zombie_custom_add_weapons = & custom_add_weapons;
+  level.register_offhand_weapons_for_level_defaults_override = &offhand_weapon_overrride;
+  level.zombiemode_offhand_weapon_give_override = &offhand_weapon_give_override;
+  level._zombie_custom_add_weapons = &custom_add_weapons;
   level thread custom_add_vox();
   level._allow_melee_weapon_switching = 1;
   level.zombiemode_reusing_pack_a_punch = 1;
   level.do_randomized_zigzag_path = 1;
-  level.enemy_location_override_func = & enemy_location_override;
-  level.no_target_override = & no_target_override;
-  level.player_out_of_playable_area_override = & player_out_of_playable_area_override;
-  level.zm_custom_spawn_location_selection = & function_2c092767;
-  level.zm_custom_get_next_wasp_round = & function_612012aa;
-  level.zm_custom_get_next_raps_round = & function_612012aa;
-  level.zm_wasp_spawn_callback = & function_f88e4c70;
-  level.var_9cef605e = & function_89b7689f;
-  level.var_2300a8ad = & function_42cc727b;
-  level.var_2d0e5eb6 = & function_2d0e5eb6;
-  level.var_2c12d9a6 = & function_533186ee;
-  level.check_end_solo_game_override = & check_end_solo_game_override;
-  level._game_module_game_end_check = & function_63f29efd;
-  level.powerup_grab_get_players_override = & powerup_grab_get_players_override;
-  level.zm_override_ai_aftermath_powerup_drop = & zm_override_ai_aftermath_powerup_drop;
-  level.can_revive_game_module = & function_80ba9218;
+  level.enemy_location_override_func = &enemy_location_override;
+  level.no_target_override = &no_target_override;
+  level.player_out_of_playable_area_override = &player_out_of_playable_area_override;
+  level.zm_custom_spawn_location_selection = &function_2c092767;
+  level.zm_custom_get_next_wasp_round = &function_612012aa;
+  level.zm_custom_get_next_raps_round = &function_612012aa;
+  level.zm_wasp_spawn_callback = &function_f88e4c70;
+  level.var_9cef605e = &function_89b7689f;
+  level.var_2300a8ad = &function_42cc727b;
+  level.var_2d0e5eb6 = &function_2d0e5eb6;
+  level.var_2c12d9a6 = &function_533186ee;
+  level.check_end_solo_game_override = &check_end_solo_game_override;
+  level._game_module_game_end_check = &function_63f29efd;
+  level.powerup_grab_get_players_override = &powerup_grab_get_players_override;
+  level.zm_override_ai_aftermath_powerup_drop = &zm_override_ai_aftermath_powerup_drop;
+  level.can_revive_game_module = &function_80ba9218;
   include_weapons();
   magic_box_init();
   level.using_solo_revive = zod_use_solo_revive();
-  level._custom_perks["specialty_quickrevive"].cost = & revive_cost_override;
+  level._custom_perks["specialty_quickrevive"].cost = &revive_cost_override;
   zm_zod_perks::init();
   zm_craftables::init();
   zm_zod_craftables::randomize_craftable_spawns();
@@ -189,27 +189,27 @@ function main() {
   level thread function_4df9f4ad();
   setdvar("ai_threatUpdateInterval", 50);
   _zm_weap_tesla::init();
-  level.customrandomweaponweights = & zod_custom_weapon_weights;
-  level.special_weapon_magicbox_check = & zod_special_weapon_magicbox_check;
-  level._round_start_func = & zm::round_start;
-  level.fn_custom_round_ai_spawn = & function_33aa4940;
+  level.customrandomweaponweights = &zod_custom_weapon_weights;
+  level.special_weapon_magicbox_check = &zod_special_weapon_magicbox_check;
+  level._round_start_func = &zm::round_start;
+  level.fn_custom_round_ai_spawn = &function_33aa4940;
   level thread function_631e737d();
-  level.fn_custom_zombie_spawner_selection = & function_b05d27ad;
+  level.fn_custom_zombie_spawner_selection = &function_b05d27ad;
   level thread function_48fda59a();
   level.fn_custom_wasp_favourate_enemy = undefined;
-  level.func_get_zombie_spawn_delay = & function_59804866;
-  level.func_get_delay_between_rounds = & function_5ee4c46c;
-  level._zombiemode_post_respawn_callback = & function_afdf4111;
+  level.func_get_zombie_spawn_delay = &function_59804866;
+  level.func_get_delay_between_rounds = &function_5ee4c46c;
+  level._zombiemode_post_respawn_callback = &function_afdf4111;
   init_sounds();
   zm_ai_raps::enable_raps_rounds();
   zm_ai_wasp::enable_wasp_rounds();
   zm_zod_margwa::function_5e93cd08();
-  level._wasp_death_cb = & zm_zod_idgun_quest::function_14e2eca6;
-  level._margwa_damage_cb = & zm_zod_ee::function_37dc5568;
-  level.var_7cef68dc = & zm_zod_idgun_quest::function_c3ffc175;
-  level.player_intersection_tracker_override = & function_d034d8ff;
+  level._wasp_death_cb = &zm_zod_idgun_quest::function_14e2eca6;
+  level._margwa_damage_cb = &zm_zod_ee::function_37dc5568;
+  level.var_7cef68dc = &zm_zod_idgun_quest::function_c3ffc175;
+  level.player_intersection_tracker_override = &function_d034d8ff;
   level.zones = [];
-  level.zone_manager_init_func = & zm_zod_zone_init;
+  level.zone_manager_init_func = &zm_zod_zone_init;
   init_zones[0] = "zone_start";
   level thread zm_zonemgr::manage_zones(init_zones);
   level.zombie_ai_limit = 24;
@@ -224,7 +224,7 @@ function main() {
   level thread zm_zod_quest::start_zod_quest();
   level thread zm_zod_maps::init();
   level thread setupmusic();
-  level._powerup_grab_check = & powerup_can_player_grab;
+  level._powerup_grab_check = &powerup_can_player_grab;
   zm_powerups::powerup_remove_from_regular_drops("bonus_points_team");
   level thread beast_mode();
   zombie_utility::set_zombie_var("zombie_powerup_drop_max_per_round", 2);
@@ -248,7 +248,7 @@ function main() {
 }
 
 function function_47f0c5f1() {
-  zombie_doors = getentarray("zombie_door", "targetname");
+  zombie_doors = getEntArray("zombie_door", "targetname");
   foreach(door in zombie_doors) {
     if(door.script_flag == "connect_start_to_junction") {
       door.zombie_cost = 500;
@@ -258,24 +258,24 @@ function function_47f0c5f1() {
 }
 
 function function_d034d8ff(other_player) {
-  if(isdefined(self.on_train) && self.on_train) {
+  if(isDefined(self.on_train) && self.on_train) {
     return true;
   }
-  if(isdefined(other_player.on_train) && other_player.on_train) {
+  if(isDefined(other_player.on_train) && other_player.on_train) {
     return true;
   }
   return false;
 }
 
 function check_end_solo_game_override() {
-  if(isdefined(level.ai_robot)) {
+  if(isDefined(level.ai_robot)) {
     return true;
   }
   return false;
 }
 
 function function_63f29efd() {
-  if(isdefined(level.var_46040f3e) && level.var_46040f3e == 1) {
+  if(isDefined(level.var_46040f3e) && level.var_46040f3e == 1) {
     return false;
   }
   return true;
@@ -283,18 +283,18 @@ function function_63f29efd() {
 
 function powerup_grab_get_players_override() {
   players = getplayers();
-  if(isdefined(level.ai_robot)) {
+  if(isDefined(level.ai_robot)) {
     players[players.size] = level.ai_robot;
   }
   return players;
 }
 
 function private findclosest(origin, entities) {
-  closest = spawnstruct();
+  closest = spawnStruct();
   if(entities.size > 0) {
     closest.distancesquared = distancesquared(origin, entities[0].origin);
     closest.entity = entities[0];
-    for (index = 1; index < entities.size; index++) {
+    for(index = 1; index < entities.size; index++) {
       distancesquared = distancesquared(origin, entities[index].origin);
       if(distancesquared < closest.distancesquared) {
         closest.distancesquared = distancesquared;
@@ -327,7 +327,7 @@ function function_2d0e5eb6() {
   var_5cf494cb = getarraykeys(level.zombie_powerups);
   var_b4442b55 = array("bonus_points_team", "shield_charge", "ww_grenade");
   powerup_keys = [];
-  for (i = 0; i < var_5cf494cb.size; i++) {
+  for(i = 0; i < var_5cf494cb.size; i++) {
     var_77917a61 = 0;
     foreach(var_68de493a in var_b4442b55) {
       if(var_5cf494cb[i] == var_68de493a) {
@@ -349,7 +349,7 @@ function function_533186ee() {
   if(var_5f66b0c7 == 1) {
     var_18bac0f0 = array((2544, -3432, -368), (2708, -3432, -368), (2544, -3624, -368), (2708, -3624, -368));
     v_spawn = array::random(var_18bac0f0);
-    s_spawnpoint = spawnstruct();
+    s_spawnpoint = spawnStruct();
     s_spawnpoint.origin = v_spawn;
     return s_spawnpoint;
   }
@@ -361,13 +361,13 @@ function wait_for_revive_machine_to_be_turned_on() {
   if(!level flag::exists("solo_revive")) {
     level flag::init("solo_revive");
   }
-  level.override_use_solo_revive = & zod_use_solo_revive;
+  level.override_use_solo_revive = &zod_use_solo_revive;
 }
 
 function zod_use_solo_revive() {
   players = getplayers();
   solo_mode = 0;
-  if(players.size == 1 || (isdefined(level.force_solo_quick_revive) && level.force_solo_quick_revive)) {
+  if(players.size == 1 || (isDefined(level.force_solo_quick_revive) && level.force_solo_quick_revive)) {
     solo_mode = 1;
   }
   level.using_solo_revive = solo_mode;
@@ -385,7 +385,7 @@ function revive_cost_override() {
 function use_solo_revive_price() {
   players = getplayers();
   solo_mode = 0;
-  if(players.size == 1 || (isdefined(level.force_solo_quick_revive) && level.force_solo_quick_revive)) {
+  if(players.size == 1 || (isDefined(level.force_solo_quick_revive) && level.force_solo_quick_revive)) {
     solo_mode = 1;
   }
   level.using_solo_revive_price = solo_mode;
@@ -434,16 +434,16 @@ function player_rain_fx() {
 }
 
 function weather_setup() {
-  a_trig_rain_outdoor = getentarray("trig_rain_indoor", "targetname");
+  a_trig_rain_outdoor = getEntArray("trig_rain_indoor", "targetname");
   foreach(e_trig in a_trig_rain_outdoor) {
     e_trig thread monitor_outdoor_rain_doorways();
   }
 }
 
 function monitor_outdoor_rain_doorways() {
-  while (true) {
+  while(true) {
     self waittill("trigger", e_player);
-    if(isdefined(e_player.b_rain_on) && e_player.b_rain_on) {
+    if(isDefined(e_player.b_rain_on) && e_player.b_rain_on) {
       e_player thread pause_rain_overlay(self);
     }
   }
@@ -464,18 +464,18 @@ function powerup_can_player_grab(player) {
 
 function beast_mode() {
   beast_mode_highlights();
-  level.player_out_of_playable_area_monitor_callback = & player_out_of_playable_area_monitor_callback;
+  level.player_out_of_playable_area_monitor_callback = &player_out_of_playable_area_monitor_callback;
 }
 
 function player_out_of_playable_area_monitor_callback() {
-  if(isdefined(self.beastmode) && self.beastmode && !self zm::in_kill_brush()) {
+  if(isDefined(self.beastmode) && self.beastmode && !self zm::in_kill_brush()) {
     return false;
   }
   return true;
 }
 
 function beast_mode_highlights() {
-  things = getentarray("grapple_target", "targetname");
+  things = getEntArray("grapple_target", "targetname");
   foreach(thing in things) {
     thing clientfield::set("bminteract", 3);
     thing notsolid();
@@ -497,8 +497,8 @@ function placed_powerups() {
 }
 
 function spawn_infinite_powerup_drop(v_origin, str_type) {
-  level._powerup_timeout_override = & powerup_infinite_time;
-  if(isdefined(str_type)) {
+  level._powerup_timeout_override = &powerup_infinite_time;
+  if(isDefined(str_type)) {
     intro_powerup = zm_powerups::specific_powerup_drop(str_type, v_origin);
   } else {
     intro_powerup = zm_powerups::powerup_drop(v_origin);
@@ -533,7 +533,7 @@ function offhand_weapon_overrride() {
 
 function offhand_weapon_give_override(str_weapon) {
   self endon("death");
-  if(zm_utility::is_tactical_grenade(str_weapon) && isdefined(self zm_utility::get_player_tactical_grenade()) && !self zm_utility::is_player_tactical_grenade(str_weapon)) {
+  if(zm_utility::is_tactical_grenade(str_weapon) && isDefined(self zm_utility::get_player_tactical_grenade()) && !self zm_utility::is_player_tactical_grenade(str_weapon)) {
     self setweaponammoclip(self zm_utility::get_player_tactical_grenade(), 0);
     self takeweapon(self zm_utility::get_player_tactical_grenade());
   }
@@ -541,17 +541,17 @@ function offhand_weapon_give_override(str_weapon) {
 }
 
 function zm_zod_beastpath(triggername, platformname) {
-  beast_connect_triggers = getentarray(triggername, "targetname");
-  array::thread_all(beast_connect_triggers, & activate_beast_platforms, platformname);
+  beast_connect_triggers = getEntArray(triggername, "targetname");
+  array::thread_all(beast_connect_triggers, &activate_beast_platforms, platformname);
 }
 
 function activate_beast_platforms(platformname) {
-  beast_connect_platforms = getentarray(platformname, "targetname");
-  for (i = 0; i < beast_connect_platforms.size; i++) {
+  beast_connect_platforms = getEntArray(platformname, "targetname");
+  for(i = 0; i < beast_connect_platforms.size; i++) {
     beast_connect_platforms[i] hide();
   }
   self waittill("trigger");
-  for (i = 0; i < beast_connect_platforms.size; i++) {
+  for(i = 0; i < beast_connect_platforms.size; i++) {
     beast_connect_platforms[i] show();
     beast_connect_platforms[i] connectpaths();
     beast_connect_platforms[i] setmovingplatformenabled(1);
@@ -751,9 +751,9 @@ function zm_zod_zone_init() {
 function function_8462bb2e() {
   level flag::wait_till("zones_initialized");
   level.var_37e8a32e = [];
-  var_ddd4dbb4 = getentarray("district_area", "targetname");
+  var_ddd4dbb4 = getEntArray("district_area", "targetname");
   foreach(var_17d18e45 in var_ddd4dbb4) {
-    if(!isdefined(level.var_37e8a32e[var_17d18e45.script_noteworthy])) {
+    if(!isDefined(level.var_37e8a32e[var_17d18e45.script_noteworthy])) {
       level.var_37e8a32e[var_17d18e45.script_noteworthy] = var_17d18e45;
     }
   }
@@ -807,7 +807,7 @@ function assign_lowest_unused_character_index() {
     return charindexarray[0];
   }
   foreach(player in players) {
-    if(isdefined(player.characterindex)) {
+    if(isDefined(player.characterindex)) {
       arrayremovevalue(charindexarray, player.characterindex, 0);
     }
   }
@@ -819,13 +819,11 @@ function assign_lowest_unused_character_index() {
 }
 
 function givecustomcharacters() {
-  if(isdefined(level.hotjoin_player_setup) && [
-      [level.hotjoin_player_setup]
-    ]("c_zom_farmgirl_viewhands")) {
+  if(isDefined(level.hotjoin_player_setup) && [[level.hotjoin_player_setup]]("c_zom_farmgirl_viewhands")) {
     return;
   }
   self detachall();
-  if(!isdefined(self.characterindex)) {
+  if(!isDefined(self.characterindex)) {
     self.characterindex = assign_lowest_unused_character_index();
   }
   self.favorite_wall_weapons_list = [];
@@ -981,7 +979,7 @@ function custom_add_vox() {
 }
 
 function function_c257bc23() {
-  for (i = 1; i <= 4; i++) {
+  for(i = 1; i <= 4; i++) {
     zm_zod_ee::function_93ea4183(i, 0);
   }
 }
@@ -1053,23 +1051,21 @@ function zod_special_weapon_magicbox_check(weapon) {
 
 function enemy_location_override(zombie, enemy) {
   aiprofile_beginentry("zod-enemy_location_override");
-  if(isdefined(enemy.on_train) && enemy.on_train) {
+  if(isDefined(enemy.on_train) && enemy.on_train) {
     var_d3443466 = 0;
-    if(isdefined(level.o_zod_train)) {
+    if(isDefined(level.o_zod_train)) {
       var_d3443466 = [
         [level.o_zod_train]
       ] - > function_3e62f527();
     }
-    if(!(isdefined(self.locked_in_train) && self.locked_in_train) && (!(isdefined(var_d3443466) && var_d3443466))) {
+    if(!(isDefined(self.locked_in_train) && self.locked_in_train) && (!(isDefined(var_d3443466) && var_d3443466))) {
       touching = 0;
-      if(isdefined(level.o_zod_train)) {
-        touching = [
-          [level.o_zod_train]
-        ] - > is_touching_train_volume(zombie);
+      if(isDefined(level.o_zod_train)) {
+        touching = [[level.o_zod_train]] - > is_touching_train_volume(zombie);
       }
       if(!touching) {
         escape_position = zombie zod_cleanup::get_escape_position_in_current_zone();
-        if(isdefined(escape_position)) {
+        if(isDefined(escape_position)) {
           aiprofile_endentry();
           return escape_position.origin;
         }
@@ -1078,7 +1074,7 @@ function enemy_location_override(zombie, enemy) {
       }
     }
   }
-  if(isdefined(level.zombie_pathing_validation)) {
+  if(isDefined(level.zombie_pathing_validation)) {
     var_9667df3a = (1536, -9296, 544);
     var_9667df3a = getclosestpointonnavmesh(var_9667df3a, 100, 30);
     return var_9667df3a;
@@ -1088,9 +1084,9 @@ function enemy_location_override(zombie, enemy) {
 }
 
 function validate_and_set_no_target_position(position) {
-  if(isdefined(position)) {
+  if(isDefined(position)) {
     goal_point = getclosestpointonnavmesh(position.origin, 100);
-    if(isdefined(goal_point)) {
+    if(isDefined(goal_point)) {
       self setgoal(goal_point);
       self.has_exit_point = 1;
       return true;
@@ -1100,16 +1096,16 @@ function validate_and_set_no_target_position(position) {
 }
 
 function no_target_override(zombie) {
-  if(isdefined(zombie.has_exit_point)) {
+  if(isDefined(zombie.has_exit_point)) {
     return;
   }
   players = level.players;
   dist_zombie = 0;
   dist_player = 0;
   dest = 0;
-  if(isdefined(level.zm_loc_types["wait_location"])) {
+  if(isDefined(level.zm_loc_types["wait_location"])) {
     locs = array::randomize(level.zm_loc_types["wait_location"]);
-    for (i = 0; i < locs.size; i++) {
+    for(i = 0; i < locs.size; i++) {
       found_point = 0;
       foreach(player in players) {
         if(player laststand::player_is_in_laststand()) {
@@ -1151,7 +1147,7 @@ function zombie_is_target_reachable(player) {
   if(var_cfd1da70 === player_zone) {
     return 1;
   }
-  if(!isdefined(var_cfd1da70) || !isdefined(player_zone)) {
+  if(!isDefined(var_cfd1da70) || !isDefined(player_zone)) {
     return 0;
   }
   var_9165799c = level.zones[self.zone_name].district;
@@ -1252,16 +1248,14 @@ function evaluate_zone_path_override(player) {
 }
 
 function player_out_of_playable_area_override() {
-  if(isdefined(level.o_zod_train)) {
-    var_4843dc70 = [
-      [level.o_zod_train]
-    ] - > get_train_vehicle();
-    if(isdefined(var_4843dc70)) {
-      if(!isdefined(level.var_72c68d94)) {
+  if(isDefined(level.o_zod_train)) {
+    var_4843dc70 = [[level.o_zod_train]] - > get_train_vehicle();
+    if(isDefined(var_4843dc70)) {
+      if(!isDefined(level.var_72c68d94)) {
         level.var_72c68d94 = [];
         trigger = spawn("trigger_box", (5764, -3400, 560), 45, 186.5, 693, 160);
         trigger.angles = vectorscale((0, 1, 0), 45);
-        if(!isdefined(level.var_72c68d94)) {
+        if(!isDefined(level.var_72c68d94)) {
           level.var_72c68d94 = [];
         } else if(!isarray(level.var_72c68d94)) {
           level.var_72c68d94 = array(level.var_72c68d94);
@@ -1287,8 +1281,8 @@ function function_8535c602() {
 function function_e33614b9() {
   self endon("disconnect");
   util::wait_network_frame();
-  while (true) {
-    if(isdefined(self) && isplayer(self)) {
+  while(true) {
+    if(isDefined(self) && isplayer(self)) {
       self notify("lightning_strike");
       self clientfield::increment_to_player("devgui_lightning_test", 1);
     }
@@ -1297,21 +1291,21 @@ function function_e33614b9() {
 }
 
 function function_c9e2531c() {
-  level thread zm_zod_util::setup_devgui_func("ZM/Zod/Lighting/Slums Lightning Test", "zod_lightning_test", 1, & function_5abd3b41);
+  level thread zm_zod_util::setup_devgui_func("ZM/Zod/Lighting/Slums Lightning Test", "zod_lightning_test", 1, &function_5abd3b41);
 }
 
 function function_5abd3b41(n_index) {
   level notify("devgui_lightning_test");
   level endon("devgui_lightning_test");
   player = getplayers()[0];
-  while (true) {
+  while(true) {
     player clientfield::increment_to_player("devgui_lightning_test", n_index);
     wait(12);
   }
 }
 
 function function_c876231d() {
-  level thread zm_zod_util::setup_devgui_func("ZM/Zod/Ghost test", "zod_ghost_test", 1, & zod_ghost_test);
+  level thread zm_zod_util::setup_devgui_func("ZM/Zod/Ghost test", "zod_ghost_test", 1, &zod_ghost_test);
 }
 
 function zod_ghost_test(n_index) {
@@ -1319,7 +1313,7 @@ function zod_ghost_test(n_index) {
   level endon("zod_ghost_test");
   player = getplayers()[0];
   var_8cfd368 = 1;
-  while (true) {
+  while(true) {
     foreach(zombie in getaiteamarray(level.zombie_team)) {
       zombie clientfield::set("ghost_actor", var_8cfd368);
     }
@@ -1334,7 +1328,7 @@ function setup_devgui() {
   setdvar("", 0);
   setdvar("", 0);
   execdevgui("");
-  level.custom_devgui = & function_4173fe95;
+  level.custom_devgui = &function_4173fe95;
 }
 
 function function_4173fe95(cmd) {
@@ -1367,13 +1361,13 @@ function function_4173fe95(cmd) {
 }
 
 function zombie_devgui_wasp_round(num_wasp) {
-  if(!isdefined(level.wasp_enabled) || !level.wasp_enabled) {
+  if(!isDefined(level.wasp_enabled) || !level.wasp_enabled) {
     return;
   }
-  if(!isdefined(level.wasp_rounds_enabled) || !level.wasp_rounds_enabled) {
+  if(!isDefined(level.wasp_rounds_enabled) || !level.wasp_rounds_enabled) {
     return;
   }
-  if(!isdefined(level.wasp_spawners) || level.wasp_spawners.size < 1) {
+  if(!isDefined(level.wasp_spawners) || level.wasp_spawners.size < 1) {
     return;
   }
   function_4d732a77(num_wasp);
@@ -1381,13 +1375,13 @@ function zombie_devgui_wasp_round(num_wasp) {
 }
 
 function zombie_devgui_raps_round(num_raps) {
-  if(!isdefined(level.raps_enabled) || !level.raps_enabled) {
+  if(!isDefined(level.raps_enabled) || !level.raps_enabled) {
     return;
   }
-  if(!isdefined(level.raps_rounds_enabled) || !level.raps_rounds_enabled) {
+  if(!isDefined(level.raps_rounds_enabled) || !level.raps_rounds_enabled) {
     return;
   }
-  if(!isdefined(level.raps_spawners) || level.raps_spawners.size < 1) {
+  if(!isDefined(level.raps_spawners) || level.raps_spawners.size < 1) {
     return;
   }
   function_205a2511(num_raps);
@@ -1395,21 +1389,21 @@ function zombie_devgui_raps_round(num_raps) {
 }
 
 function zombie_devgui_wasp_round_skip(num_wasp) {
-  if(isdefined(level.next_wasp_round)) {
+  if(isDefined(level.next_wasp_round)) {
     function_4d732a77(num_wasp);
     zm_devgui::zombie_devgui_goto_round(level.next_wasp_round);
   }
 }
 
 function zombie_devgui_raps_round_skip(num_raps) {
-  if(isdefined(level.n_next_raps_round)) {
+  if(isDefined(level.n_next_raps_round)) {
     function_205a2511(num_raps);
     zm_devgui::zombie_devgui_goto_round(level.n_next_raps_round);
   }
 }
 
 function function_4d732a77(num_wasp) {
-  if(isdefined(num_wasp) && num_wasp > 0) {
+  if(isDefined(num_wasp) && num_wasp > 0) {
     setdvar("", num_wasp);
   } else {
     setdvar("", "");
@@ -1417,7 +1411,7 @@ function function_4d732a77(num_wasp) {
 }
 
 function function_205a2511(num_raps) {
-  if(isdefined(num_raps) && num_raps > 0) {
+  if(isDefined(num_raps) && num_raps > 0) {
     setdvar("", num_raps);
   } else {
     setdvar("", "");
@@ -1425,7 +1419,7 @@ function function_205a2511(num_raps) {
 }
 
 function function_30018788() {
-  if(isdefined(level.n_next_raps_round)) {
+  if(isDefined(level.n_next_raps_round)) {
     if(level.n_next_raps_round <= 15) {
       level.n_next_raps_round = 15;
     }
@@ -1438,12 +1432,12 @@ function function_33aa4940() {
   if(level.round_number <= 11) {
     return 0;
   }
-  if(isdefined(level.a_zombie_respawn_health["parasite"]) && level.a_zombie_respawn_health["parasite"].size > 0) {
+  if(isDefined(level.a_zombie_respawn_health["parasite"]) && level.a_zombie_respawn_health["parasite"].size > 0) {
     zm_ai_wasp::special_wasp_spawn(1);
     level.zombie_total--;
     return 1;
   }
-  if(isdefined(level.a_zombie_respawn_health["raps"]) && level.a_zombie_respawn_health["raps"].size > 0) {
+  if(isDefined(level.a_zombie_respawn_health["raps"]) && level.a_zombie_respawn_health["raps"].size > 0) {
     zm_ai_raps::special_raps_spawn(1);
     level.zombie_total--;
     return 1;
@@ -1485,7 +1479,7 @@ function function_33aa4940() {
 }
 
 function function_80ba9218(revivee) {
-  if(isdefined(revivee.being_revived_by_robot) && revivee.being_revived_by_robot == 1) {
+  if(isDefined(revivee.being_revived_by_robot) && revivee.being_revived_by_robot == 1) {
     return false;
   }
   return true;
@@ -1520,7 +1514,7 @@ function function_59804866(n_round) {
       break;
     }
   }
-  for (i = 1; i < n_round; i++) {
+  for(i = 1; i < n_round; i++) {
     n_delay = n_delay * n_multiplier;
     if(n_delay <= 0.1) {
       n_delay = 0.1;
@@ -1538,12 +1532,12 @@ function function_5ee4c46c() {
 }
 
 function function_b05d27ad() {
-  if(!isdefined(level.var_5b9dbdff)) {
+  if(!isDefined(level.var_5b9dbdff)) {
     level.var_5b9dbdff = [];
     level.var_a7c80058 = [];
     foreach(e_spawner in level.zombie_spawners) {
-      if(isdefined(e_spawner.script_string) && e_spawner.script_string == "male") {
-        if(!isdefined(level.var_5b9dbdff)) {
+      if(isDefined(e_spawner.script_string) && e_spawner.script_string == "male") {
+        if(!isDefined(level.var_5b9dbdff)) {
           level.var_5b9dbdff = [];
         } else if(!isarray(level.var_5b9dbdff)) {
           level.var_5b9dbdff = array(level.var_5b9dbdff);
@@ -1551,8 +1545,8 @@ function function_b05d27ad() {
         level.var_5b9dbdff[level.var_5b9dbdff.size] = e_spawner;
         continue;
       }
-      if(isdefined(e_spawner.script_string) && e_spawner.script_string == "female") {
-        if(!isdefined(level.var_a7c80058)) {
+      if(isDefined(e_spawner.script_string) && e_spawner.script_string == "female") {
+        if(!isDefined(level.var_a7c80058)) {
           level.var_a7c80058 = [];
         } else if(!isarray(level.var_a7c80058)) {
           level.var_a7c80058 = array(level.var_a7c80058);
@@ -1588,7 +1582,7 @@ function function_b05d27ad() {
 
 function function_eda7de97() {
   a_players = getplayers();
-  if(!isdefined(level.var_c4acfdc0)) {
+  if(!isDefined(level.var_c4acfdc0)) {
     level.var_c4acfdc0 = randomint(a_players.size);
   }
   level.var_c4acfdc0++;
@@ -1600,8 +1594,8 @@ function function_eda7de97() {
 
 function function_631e737d() {
   level waittill("raps_round_ending");
-  level.zm_mixed_wasp_raps_spawning = & function_243d0df6;
-  level.zm_ai_round_over = & function_68990a1c;
+  level.zm_mixed_wasp_raps_spawning = &function_243d0df6;
+  level.zm_ai_round_over = &function_68990a1c;
 }
 
 function function_243d0df6() {
@@ -1634,9 +1628,9 @@ function function_68990a1c() {
 }
 
 function zm_override_ai_aftermath_powerup_drop(e_enemy, v_pos) {
-  if(isdefined(e_enemy) && isdefined(e_enemy.archetype) && e_enemy.archetype == "parasite") {
+  if(isDefined(e_enemy) && isDefined(e_enemy.archetype) && e_enemy.archetype == "parasite") {
     e_ent = e_enemy.favoriteenemy;
-    if(!isdefined(e_ent)) {
+    if(!isDefined(e_ent)) {
       e_ent = array::random(level.players);
     }
     e_ent zm_ai_wasp::parasite_drop_item(v_pos);
@@ -1644,14 +1638,14 @@ function zm_override_ai_aftermath_powerup_drop(e_enemy, v_pos) {
     power_up_origin = v_pos;
     trace = groundtrace(power_up_origin + vectorscale((0, 0, 1), 100), power_up_origin + (vectorscale((0, 0, -1), 1000)), 0, undefined);
     power_up_origin = trace["position"];
-    if(isdefined(power_up_origin)) {
+    if(isDefined(power_up_origin)) {
       level thread zm_powerups::specific_powerup_drop("full_ammo", power_up_origin);
     }
   }
 }
 
 function function_afdf4111() {
-  if(isdefined(self.var_abe77dc0) && self.var_abe77dc0) {
+  if(isDefined(self.var_abe77dc0) && self.var_abe77dc0) {
     self clientfield::set_to_player("pod_sprayer_held", 1);
   } else {
     self clientfield::set_to_player("pod_sprayer_held", 0);
@@ -1660,7 +1654,7 @@ function function_afdf4111() {
 
 function function_2c092767(a_spots) {
   if(level.zombie_respawns > 0) {
-    if(!isdefined(level.n_player_spawn_selection_index)) {
+    if(!isDefined(level.n_player_spawn_selection_index)) {
       level.n_player_spawn_selection_index = 0;
     }
     a_players = getplayers();
@@ -1671,8 +1665,8 @@ function function_2c092767(a_spots) {
     e_player = a_players[level.n_player_spawn_selection_index];
     arraysortclosest(a_spots, e_player.origin);
     a_candidates = [];
-    v_player_dir = anglestoforward(e_player.angles);
-    for (i = 0; i < a_spots.size; i++) {
+    v_player_dir = anglesToForward(e_player.angles);
+    for(i = 0; i < a_spots.size; i++) {
       v_dir = a_spots[i].origin - e_player.origin;
       dp = vectordot(v_player_dir, v_dir);
       if(dp >= 0) {
@@ -1694,7 +1688,7 @@ function function_2c092767(a_spots) {
 }
 
 function function_612012aa() {
-  if(!isdefined(level.var_1300aaeb)) {
+  if(!isDefined(level.var_1300aaeb)) {
     level.var_1300aaeb = level.next_wasp_round;
     if(level.n_next_raps_round > level.var_1300aaeb) {
       level.var_1300aaeb = level.n_next_raps_round;
@@ -1709,11 +1703,11 @@ function function_612012aa() {
 function function_48fda59a() {
   var_6a6d5f3e = 0;
   n_start_time = undefined;
-  while (true) {
+  while(true) {
     if(!var_6a6d5f3e && level.zombie_total <= 0) {
       var_565450eb = zombie_utility::get_current_zombie_count();
       if(var_565450eb == 1) {
-        if(!isdefined(n_start_time)) {
+        if(!isDefined(n_start_time)) {
           n_start_time = gettime();
         }
         n_time = gettime();
@@ -1749,11 +1743,11 @@ function function_f7d81bd5() {
   level endon("stop_suicide_trigger");
   e_volume = getent("into_disable_prone", "targetname");
   var_d8d76cd3 = 0;
-  while (!(isdefined(level.intermission) && level.intermission)) {
+  while(!(isDefined(level.intermission) && level.intermission)) {
     if(self laststand::player_is_in_laststand()) {
       self allowprone(1);
       var_d8d76cd3 = 0;
-    } else if(!(isdefined(self.beastmode) && self.beastmode)) {
+    } else if(!(isDefined(self.beastmode) && self.beastmode)) {
       if(self istouching(e_volume)) {
         if(!var_d8d76cd3) {
           if(!self function_af2b349c()) {
@@ -1778,7 +1772,7 @@ function function_22eef972() {
 }
 
 function function_aab1d0bd() {
-  while (true) {
+  while(true) {
     level waittill("start_of_round");
     if(level.round_number < 12) {
       setdvar("r_maxSpotShadowUpdates", "12");
@@ -1790,7 +1784,7 @@ function function_aab1d0bd() {
 
 function function_a988e9bb() {
   level flag::wait_till("all_players_connected");
-  array::thread_all(getplayers(), & player_noire_ee);
+  array::thread_all(getplayers(), &player_noire_ee);
 }
 
 function player_noire_ee() {
@@ -1799,7 +1793,7 @@ function player_noire_ee() {
   s_start = struct::get("s_noire_ee_start", "targetname");
   s_end = struct::get("s_noire_ee_end", "targetname");
   var_3acf33ec = 0;
-  while (!var_3acf33ec) {
+  while(!var_3acf33ec) {
     if(self getstance() == "crouch") {
       if(self reloadbuttonpressed()) {
         n_dist = distance(self.origin, s_start.origin);
@@ -1819,18 +1813,18 @@ function player_noire_ee() {
 }
 
 function function_89b7689f() {
-  if(isdefined(self.altbody) && self.altbody) {
+  if(isDefined(self.altbody) && self.altbody) {
     return false;
   }
   return true;
 }
 
 function function_42cc727b() {
-  if(isdefined(self.train_board_time)) {
+  if(isDefined(self.train_board_time)) {
     self.train_board_time = undefined;
   }
   var_4126c532 = self zm_zod_quest::function_b62ad2c();
-  if(isdefined(var_4126c532)) {
+  if(isDefined(var_4126c532)) {
     array::add(var_4126c532.m_a_players_involved, self, 0);
     self.is_in_defend_area = 1;
   } else {
@@ -1843,23 +1837,23 @@ function function_bef9943a() {
   exploder::exploder("fx_exploder_lightning_junction");
   wait(20);
   exploder::stop_exploder("fx_exploder_lightning_junction");
-  while (level.round_number < 5) {
+  while(level.round_number < 5) {
     n_round_number = level.round_number;
-    while (zombie_utility::get_current_zombie_count() == 0) {
+    while(zombie_utility::get_current_zombie_count() == 0) {
       wait(0.1);
     }
-    while (true) {
+    while(true) {
       if(level.zombie_total == 0 && zombie_utility::get_current_zombie_count() <= 2) {
         break;
       }
       wait(0.1);
     }
     exploder::exploder("fx_exploder_lightning_junction");
-    while (zombie_utility::get_current_zombie_count() > 0) {
+    while(zombie_utility::get_current_zombie_count() > 0) {
       wait(0.1);
     }
     exploder::stop_exploder("fx_exploder_lightning_junction");
-    while (level.round_number == n_round_number) {
+    while(level.round_number == n_round_number) {
       wait(0.1);
     }
   }
@@ -1872,10 +1866,10 @@ function function_f88e4c70() {
 function function_35c958af() {
   self endon("death");
   var_f1af2991 = 0;
-  while (true) {
+  while(true) {
     n_delay = randomfloatrange(0.9, 1.4);
     wait(n_delay);
-    if(isdefined(level.bzm_worldpaused) && level.bzm_worldpaused) {
+    if(isDefined(level.bzm_worldpaused) && level.bzm_worldpaused) {
       continue;
     }
     v_trace_end = (self.origin[0], self.origin[1], self.origin[2] - 500);
@@ -1899,7 +1893,7 @@ function function_4df9f4ad() {
   level endon("end_game");
   level notify("hash_a3369c1f");
   level endon("hash_a3369c1f");
-  while (true) {
+  while(true) {
     level waittill("host_migration_end");
     setdvar("doublejump_enabled", 1);
     setdvar("playerEnergy_enabled", 1);

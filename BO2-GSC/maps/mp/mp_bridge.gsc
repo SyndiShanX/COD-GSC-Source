@@ -25,11 +25,11 @@ main() {
   maps\mp\mp_bridge_amb::main();
   maps\mp\_compass::setupminimap("compass_map_mp_bridge");
   setdvar("compassmaxrange", "2100");
-  game["strings"]["war_callsign_a"] = & "MPUI_CALLSIGN_MAPNAME_A";
-  game["strings"]["war_callsign_b"] = & "MPUI_CALLSIGN_MAPNAME_B";
-  game["strings"]["war_callsign_c"] = & "MPUI_CALLSIGN_MAPNAME_C";
-  game["strings"]["war_callsign_d"] = & "MPUI_CALLSIGN_MAPNAME_D";
-  game["strings"]["war_callsign_e"] = & "MPUI_CALLSIGN_MAPNAME_E";
+  game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_MAPNAME_A";
+  game["strings"]["war_callsign_b"] = &"MPUI_CALLSIGN_MAPNAME_B";
+  game["strings"]["war_callsign_c"] = &"MPUI_CALLSIGN_MAPNAME_C";
+  game["strings"]["war_callsign_d"] = &"MPUI_CALLSIGN_MAPNAME_D";
+  game["strings"]["war_callsign_e"] = &"MPUI_CALLSIGN_MAPNAME_E";
   game["strings_menu"]["war_callsign_a"] = "@MPUI_CALLSIGN_MAPNAME_A";
   game["strings_menu"]["war_callsign_b"] = "@MPUI_CALLSIGN_MAPNAME_B";
   game["strings_menu"]["war_callsign_c"] = "@MPUI_CALLSIGN_MAPNAME_C";
@@ -38,7 +38,7 @@ main() {
   spawncollision("collision_physics_128x128x10", "collider", (-1190, -876, -76), (342, 2.63, -90));
   barricade1 = spawn("script_model", (850.5, -812.5, 0));
   barricade1.angles = vectorscale((0, 1, 0), 90.0);
-  barricade1 setmodel("p6_bri_construction_tarp");
+  barricade1 setModel("p6_bri_construction_tarp");
   spawncollision("collision_missile_128x128x10", "collider", (-2182, -185.5, -142), vectorscale((0, 0, 1), 90.0));
   spawncollision("collision_missile_128x128x10", "collider", (-2310, -185.5, -142), vectorscale((0, 0, 1), 90.0));
   spawncollision("collision_missile_128x128x10", "collider", (-2438, -185.5, -142), vectorscale((0, 0, 1), 90.0));
@@ -86,7 +86,7 @@ levelspawndvars(reset_dvars) {
 
 destructible_lights() {
   wait 0.05;
-  destructibles = getentarray("destructible", "targetname");
+  destructibles = getEntArray("destructible", "targetname");
 
   foreach(destructible in destructibles) {
     if(destructible.destructibledef == "veh_t6_dlc_police_car_destructible") {
@@ -138,8 +138,8 @@ water_spash() {
 
     bone = self gettagorigin("j_spinelower");
     origin = (bone[0], bone[1], trace["position"][2] + 2.5);
-    self playsound("mpl_splash_death");
-    playfx(level._effect["water_splash"], origin);
+    self playSound("mpl_splash_death");
+    playFX(level._effect["water_splash"], origin);
   }
 }
 
@@ -155,7 +155,7 @@ useintermissionpointsonwavespawn() {
 }
 
 isinwater() {
-  triggers = getentarray("trigger_hurt", "classname");
+  triggers = getEntArray("trigger_hurt", "classname");
 
   foreach(trigger in triggers) {
     if(trigger.origin[2] > level.mapcenter[2]) {
@@ -177,7 +177,7 @@ pathing_fix() {
 
 disconnect_node(node) {
   ent = spawn("script_model", node.origin, 1);
-  ent setmodel(level.deployedshieldmodel);
+  ent setModel(level.deployedshieldmodel);
   ent hide();
   ent disconnectpaths();
   ent.origin = ent.origin - vectorscale((0, 0, 1), 64.0);

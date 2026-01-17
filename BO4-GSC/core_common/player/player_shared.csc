@@ -6,7 +6,6 @@
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\system_shared;
-
 #namespace player;
 
 autoexec __init__system__() {
@@ -68,7 +67,7 @@ function_f22aa227(localclientnum) {
   self function_8656d7d1(localclientnum);
 }
 
-private function_8656d7d1(localclientnum) {
+function_8656d7d1(localclientnum) {
   player = self;
 
   if(!isDefined(player)) {
@@ -109,7 +108,7 @@ function_c98e67ae(localclientnum) {
   }
 }
 
-private function_9f517895(localclientnum) {
+function_9f517895(localclientnum) {
   player = self;
 
   if(!isDefined(player)) {
@@ -131,7 +130,7 @@ private function_9f517895(localclientnum) {
   player function_f71119e0(0);
 }
 
-private function_e2d964e8() {
+function_e2d964e8() {
   if(self.visionpulsereveal === 1) {
     return;
   }
@@ -159,7 +158,7 @@ function_f2ba057() {
   function_f71119e0(1);
 }
 
-private function_f71119e0(var_c8db7193) {
+function_f71119e0(var_c8db7193) {
   if(self.visionpulsereveal === 1) {
     return;
   }
@@ -183,13 +182,13 @@ disable_rob(var_6560376a) {
   }
 }
 
-private function_bd70f43d() {
+function_bd70f43d() {
   if(!self function_d2503806(#"rob_sonar_set_enemy")) {
     self playrenderoverridebundle(#"rob_sonar_set_enemy");
   }
 }
 
-private function_994b4121() {
+function_994b4121() {
   if(self function_d2503806(#"rob_sonar_set_enemy")) {
     self stoprenderoverridebundle(#"rob_sonar_set_enemy");
   }

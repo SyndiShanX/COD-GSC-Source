@@ -13,9 +13,9 @@ PLAYER_SPRINT_SCALE = 1.4;
 
 main() {
   // ammo crates are for SO only so remove them
-  array_call(getentarray("ammo_crate_part", "targetname"), ::delete);
-  array_call(getentarray("ammo_crate_clip", "targetname"), ::delete);
-  array_call(getentarray("ammo_cache", "targetname"), ::delete);
+  array_call(getEntArray("ammo_crate_part", "targetname"), ::delete);
+  array_call(getEntArray("ammo_crate_clip", "targetname"), ::delete);
+  array_call(getEntArray("ammo_cache", "targetname"), ::delete);
 
   setDvarIfUninitialized("favela_trailer", "0");
 
@@ -102,22 +102,22 @@ main() {
   all_axis_spawners = getspawnerteamarray("axis");
   script_parameter_spawners = [];
   foreach(spawner in all_axis_spawners) {
-    if(!isdefined(spawner.script_parameters))
+    if(!isDefined(spawner.script_parameters))
       continue;
     script_parameter_spawners[script_parameter_spawners.size] = spawner;
   }
   array_spawn_function(script_parameter_spawners, ::process_ai_script_parameters);
   array_spawn_function(getSpawnerTeamArray("neutral"), ::civilian_flee_walla);
 
-  array_thread(getentarray("play_sound", "targetname"), ::play_sound_trigger);
-  array_thread(getentarray("trigger_chance", "targetname"), ::trigger_spawn_chance);
-  array_thread(getentarray("physics_drop", "targetname"), ::physics_drop);
-  array_thread(getentarray("trigger_cleanup", "targetname"), ::trigger_cleanup);
-  array_thread(getentarray("potted_plant", "targetname"), ::potted_plant);
-  array_thread(getentarray("play_fx_trig", "targetname"), ::play_fx_trig);
-  array_thread(getentarray("retreat_trigger", "targetname"), ::retreat_trigger);
-  array_thread(getentarray("curtain_pulldown", "script_noteworthy"), ::curtain_pulldown);
-  array_thread(getentarray("curtain_pulldown_playerwait", "script_noteworthy"), ::curtain_pulldown, true);
+  array_thread(getEntArray("play_sound", "targetname"), ::play_sound_trigger);
+  array_thread(getEntArray("trigger_chance", "targetname"), ::trigger_spawn_chance);
+  array_thread(getEntArray("physics_drop", "targetname"), ::physics_drop);
+  array_thread(getEntArray("trigger_cleanup", "targetname"), ::trigger_cleanup);
+  array_thread(getEntArray("potted_plant", "targetname"), ::potted_plant);
+  array_thread(getEntArray("play_fx_trig", "targetname"), ::play_fx_trig);
+  array_thread(getEntArray("retreat_trigger", "targetname"), ::retreat_trigger);
+  array_thread(getEntArray("curtain_pulldown", "script_noteworthy"), ::curtain_pulldown);
+  array_thread(getEntArray("curtain_pulldown_playerwait", "script_noteworthy"), ::curtain_pulldown, true);
   array_thread(getvehiclenodearray("car_screech_node", "script_noteworthy"), ::car_screech_node);
   add_global_spawn_function("axis", ::adjustAccuracy);
 
@@ -191,7 +191,7 @@ startStreet() {
   thread start_traffic_group(5.0, "traffic_car_groupB_1", "traffic_car_groupB_2");
 
   // spawn street civilians
-  array_thread(getentarray("street_civilian", "targetname"), ::spawn_ai, true);
+  array_thread(getEntArray("street_civilian", "targetname"), ::spawn_ai, true);
   delayThread(8.0, ::bike_rider, "bike_path_1");
   delayThread(13.0, ::bike_rider, "bike_path_2");
 
@@ -242,7 +242,7 @@ startFavela() {
   // delete any AI ( dead or alive ) that might be left over from before
   thread delete_ai_during_blackscreen();
   array_call(getCorpseArray(), ::delete);
-  if(isdefined(level.runner))
+  if(isDefined(level.runner))
     level.runner delete();
 
   flag_set("visionset_torture");
@@ -262,7 +262,7 @@ startFavela() {
 
   setSavedDvar("player_sprintUnlimited", "0");
   setSavedDvar("player_sprintSpeedScale", 1.5);
-  assert(isdefined(level.ai_friendlyFireBlockDuration));
+  assert(isDefined(level.ai_friendlyFireBlockDuration));
   setSavedDvar("ai_friendlyFireBlockDuration", level.ai_friendlyFireBlockDuration);
 
   flag_clear("player_near_stairs");
@@ -304,7 +304,7 @@ startFavela() {
 
 startSoccer() {
   add_top_of_hill_objective();
-  array_call(getentarray("delete_for_start_soccer", "script_noteworthy"), ::delete);
+  array_call(getEntArray("delete_for_start_soccer", "script_noteworthy"), ::delete);
   movePlayerToStartPoint("playerstart_soccer");
   activate_trigger("vision_shanty", "script_noteworthy");
   flag_set("civilians_walla");
@@ -336,13 +336,13 @@ trailer_talkers_3() {
 }
 
 spawn_talkers(targetname) {
-  spawners = getentarray(targetname, "targetname");
+  spawners = getEntArray(targetname, "targetname");
   foreach(spawner in spawners) {
     guy = spawner spawn_ai(true);
     guy set_ignoreall(true);
     guy.goalradius = 16;
     guy setGoalPos(guy.origin);
-    if(!isdefined(spawner.animation))
+    if(!isDefined(spawner.animation))
       continue;
     guy.animname = "trailer";
     guy thread anim_loop_solo(guy, spawner.animation);
@@ -435,7 +435,7 @@ torture_sequence_door(door) {
 
   flag_wait("drop_door");
 
-  door playsound("scn_favela_garage_door");
+  door playSound("scn_favela_garage_door");
   door moveTo(finalDoorPos, 1.3, 0.1, 0.0);
 }
 
@@ -445,7 +445,7 @@ opening_scene() {
 
   // spawn player vehicle and put player inside
   player_vehicle = spawn_vehicle_from_targetname_and_drive("player_vehicle");
-  assert(isdefined(player_vehicle));
+  assert(isDefined(player_vehicle));
   player_vehicle hidepart("TAG_GLASS_FRONT_D");
   player_vehicle hidepart("TAG_BLOOD");
   player_vehicle thread car_anims();
@@ -455,7 +455,7 @@ opening_scene() {
 
   // spawn van
   van = spawn_vehicle_from_targetname_and_drive("van");
-  assert(isdefined(van));
+  assert(isDefined(van));
   van godon();
   van thread van_skid_sound();
   van.animname = "van";
@@ -594,7 +594,7 @@ player_rides_vehicle(vehicle) {
   notifyOnCommand("go_stand", "+moveup");
   notifyOnCommand("go_stand", "+gostand");
 
-  for (;;) {
+  for(;;) {
     level.player waittill("go_crouch");
     flag_set("player_is_ducking");
     level.player enableInvulnerability();
@@ -631,7 +631,7 @@ player_exits_vehicle(vehicle) {
 
   dummy = spawn("script_model", level.player.origin);
   dummy.angles = level.player.angles;
-  dummy setmodel("tag_origin");
+  dummy setModel("tag_origin");
   level.player playerLinkTo(dummy, "tag_player", 1.0, 45, 45, 45, 20);
 
   MOVETIME = 1.5;
@@ -730,7 +730,7 @@ chase() {
   level.soap thread magic_bullet_shield();
 
   chase_objective_location = getent("chase_objective_location", "targetname");
-  objective_add(1, "current", & "FAVELA_OBJ_CATCH_RUNNER", chase_objective_location.origin);
+  objective_add(1, "current", &"FAVELA_OBJ_CATCH_RUNNER", chase_objective_location.origin);
 
   waveNode = getnode("soap_start_node", "targetname");
   waveNode anim_teleport_solo(level.soap, "run_and_wave");
@@ -780,7 +780,7 @@ makarov_check_player_distance() {
   SPEED_MIN = 1.0;
   SPEED_MAX = 1.6;
 
-  for (;;) {
+  for(;;) {
     d = distance(level.player.origin, self.origin);
 
     if(d > MAX_DIST) {
@@ -850,9 +850,9 @@ teleport_runner_for_takedown_1() {
   trig waittill("trigger");
 
   // Only teleport him if he's gone around the corner out of sight
-  if(!flag("runner_in_alley"))
+  if(!flag("runner_in_alley")) {
     return;
-
+  }
   self forceTeleport(teleportLoc.origin, teleportLoc.angles);
 }
 
@@ -865,9 +865,9 @@ teleport_runner_for_takedown_2() {
   trig waittill("trigger");
 
   // Only teleport him if he's gone around the corner out of sight
-  if(!flag("runner_in_alley2"))
+  if(!flag("runner_in_alley2")) {
     return;
-
+  }
   self forceTeleport(teleportLoc.origin, teleportLoc.angles);
 }
 
@@ -877,21 +877,21 @@ makarov_alley_fall() {
 
   self set_generic_deathanim("alley_death_fall");
 
-  for (;;) {
+  for(;;) {
     self waittill("damage", damage, attacker, direction_vec, point, type);
 
     // Only Soap and the player can damage him
-    if(!isdefined(attacker))
+    if(!isDefined(attacker))
       continue;
-    if(attacker != level.player && attacker != level.soap)
+    if(attacker != level.player && attacker != level.soap) {
       continue;
-
+    }
     // If damage is only 1 ignore it. This happens when flashbangs and other things bounce off him
-    if(damage <= 1)
+    if(damage <= 1) {
       continue;
-
+    }
     // If player uses grenades you fail
-    if(!isdefined(type))
+    if(!isDefined(type))
       continue;
     if(issubstr(type, "GRENADE")) {
       self thread makarov_alley_killed(point);
@@ -909,12 +909,12 @@ makarov_alley_fall() {
 }
 
 was_shot_in_lethal_area() {
-  assert(isdefined(self));
+  assert(isDefined(self));
 
-  if(isdefined(self.disableLethalCheck))
+  if(isDefined(self.disableLethalCheck))
     return false;
 
-  if(!isdefined(self.damagelocation))
+  if(!isDefined(self.damagelocation))
     return true;
 
   switch (self.damagelocation) {
@@ -1001,12 +1001,12 @@ stop_sounds_during_black() {
   // Total hack to get sounds to stop playing. No good way to do this
 
   X_LINE = -50;
-  ents = getentarray();
+  ents = getEntArray();
   foreach(ent in ents) {
-    if(ent.origin[0] < X_LINE)
+    if(ent.origin[0] < X_LINE) {
       continue;
-
-    if(!isdefined(ent.code_classname))
+    }
+    if(!isDefined(ent.code_classname))
       continue;
     switch (ent.classname) {
       case "script_vehicle":
@@ -1070,7 +1070,7 @@ hotel_doors() {
   rotationAmount = 110;
   left = getent("hotel_door_left", "targetname");
   right = getent("hotel_door_right", "targetname");
-  knobs = getentarray("hotel_knob", "targetname");
+  knobs = getEntArray("hotel_knob", "targetname");
 
   // Doors open
   left rotateYaw(rotationAmount * -1, 0.05);
@@ -1091,24 +1091,23 @@ break_windshield(vehicle) {
 
   // break windshield on player vehicle
   vehicle thread play_sound_on_tag("scn_favela_car_glass_shatter", "TAG_GLASS_FRONT_D");
-  playfxontag(getfx("car_glass_interior"), vehicle, "TAG_GLASS_FRONT_FX");
+  playFXOnTag(getfx("car_glass_interior"), vehicle, "TAG_GLASS_FRONT_FX");
   vehicle showpart("TAG_GLASS_FRONT_D");
   vehicle showpart("TAG_BLOOD");
   vehicle hidepart("TAG_GLASS_FRONT");
 
-  if(!isdefined(level.hula_girl))
+  if(!isDefined(level.hula_girl)) {
     return;
-
+  }
   level.hula_girl unlink();
   force = 150;
   level.hula_girl physicsLaunchClient(level.hula_girl.origin + (0, 0, 5), (0, force, 0));
 }
 
 driver_shot_in_head(driver) {
-
   //blood yessss!!!
-  playfxontag(getfx("blood"), driver, "J_Head");
-  playfxontag(getfx("blood_dashboard_splatter"), driver, "J_Head");
+  playFXOnTag(getfx("blood"), driver, "J_Head");
+  playFXOnTag(getfx("blood_dashboard_splatter"), driver, "J_Head");
 
   wait 0.1;
 
@@ -1124,23 +1123,23 @@ driver_falls_on_horn(driver) {
 
 blood_gunner1() {
   wait 6.6;
-  playfxontag(getfx("blood"), self, "J_Hip_RI");
+  playFXOnTag(getfx("blood"), self, "J_Hip_RI");
   wait 0.1;
-  playfxontag(getfx("blood"), self, "J_SpineLower");
+  playFXOnTag(getfx("blood"), self, "J_SpineLower");
 }
 
 blood_gunner2() {
   wait 7.1;
-  playfxontag(getfx("blood"), self, "J_Hip_RI");
+  playFXOnTag(getfx("blood"), self, "J_Hip_RI");
   wait 0.2;
-  playfxontag(getfx("blood"), self, "J_SpineLower");
+  playFXOnTag(getfx("blood"), self, "J_SpineLower");
   wait 1.2;
-  playfxontag(getfx("blood"), self, "J_Head");
+  playFXOnTag(getfx("blood"), self, "J_Head");
 }
 
 blood_driver() {
   wait 9.5;
-  playfxontag(getfx("blood"), self, "J_Shoulder_RI");
+  playFXOnTag(getfx("blood"), self, "J_Shoulder_RI");
 }
 
 makarov_shoot_player(vehicle) {
@@ -1174,7 +1173,7 @@ makarov_shoot_player(vehicle) {
   flag_set("car_getting_shot");
 
   shootPoints = [];
-  for (i = 0; i < shots; i++) {
+  for(i = 0; i < shots; i++) {
     rand_horizontal_offset = randomfloatrange(width * -1, width);
     rand_vertical_offset = randomfloatrange(height * -1, height);
     point = center;
@@ -1186,7 +1185,7 @@ makarov_shoot_player(vehicle) {
     shootPoints[shootPoints.size] = point;
   }
 
-  for (i = 0; i < shots; i++) {
+  for(i = 0; i < shots; i++) {
     self shoot(100.0, shootPoints[i]);
 
     fxOrigin = shootPoints[i];
@@ -1231,7 +1230,7 @@ opening_death() {
 
 add_top_of_hill_objective() {
   originEnt = getent("mission_objective_location", "targetname");
-  objective_add(2, "current", & "FAVELA_OBJ_REACH_TOP", originEnt.origin);
+  objective_add(2, "current", &"FAVELA_OBJ_REACH_TOP", originEnt.origin);
 }
 
 favela_friendlies() {
@@ -1246,7 +1245,7 @@ favela_friendlies() {
 
 favela_opening_civilians() {
   trigger_wait("favela_opening_civilians_spawn", "targetname");
-  spawners = getentarray("favela_opening_civilian_spawner", "targetname");
+  spawners = getEntArray("favela_opening_civilian_spawner", "targetname");
 
   array_thread(spawners, ::favela_opening_civilians_think);
   thread favela_civilians_scream();
@@ -1259,7 +1258,7 @@ favela_opening_civilians_think() {
   civilian = self spawn_ai(true);
   civilian endon("death");
 
-  if(!isdefined(level.favelaCivilians))
+  if(!isDefined(level.favelaCivilians))
     level.favelaCivilians = [];
   level.favelaCivilians[level.favelaCivilians.size] = civilian;
 
@@ -1267,7 +1266,7 @@ favela_opening_civilians_think() {
   civilian.alertlevel = "noncombat";
 
   // Make walkers walk instead of do idle animations
-  if(!isdefined(self.animation)) {
+  if(!isDefined(self.animation)) {
     civilian thread delete_ai_at_path_end();
     civilian.useChokePoints = false;
     return;
@@ -1275,13 +1274,13 @@ favela_opening_civilians_think() {
 
   // make a node
   eNode = undefined;
-  if(isdefined(self.script_linkto)) {
+  if(isDefined(self.script_linkto)) {
     eNode = get_linked_ent();
   } else {
     eNode = spawn("script_origin", self.origin);
     eNode.angles = self.angles;
   }
-  assert(isdefined(eNode));
+  assert(isDefined(eNode));
 
   // do idle as specified in editor
   animScene = self.animation;
@@ -1325,8 +1324,7 @@ favela_music() {
   alias = "favela_tension";
   time = musicLength(alias);
 
-
-  while (flag("favela_music")) {
+  while(flag("favela_music")) {
     thread music_play(alias);
     wait time;
   }
@@ -1347,7 +1345,7 @@ upper_village_music() {
   alias = "favela_uppervillage_start";
   time = musicLength(alias);
 
-  while (!flag("faust_appearance_1")) {
+  while(!flag("faust_appearance_1")) {
     thread music_play(alias, 2.0);
     wait time;
   }
@@ -1361,7 +1359,7 @@ faust_music() {
   alias = "favela_moneyrun";
   time = musicLength(alias);
 
-  while (flag("faust_music")) {
+  while(flag("faust_music")) {
     thread music_play(alias);
     wait time;
   }
@@ -1374,16 +1372,16 @@ faust_music_stop() {
 
 random_favela_background_runners() {
   level endon("cleared_favela");
-  spawners = getentarray("random_favela_background_runner", "targetname");
+  spawners = getEntArray("random_favela_background_runner", "targetname");
 
   flag_wait("favela_enemies_spawned");
 
-  for (;;) {
+  for(;;) {
     spawners = array_randomize(spawners);
     foreach(spawner in spawners) {
-      if(flag("cleared_favela"))
+      if(flag("cleared_favela")) {
         return;
-
+      }
       spawner.count = 1;
       spawner thread spawn_ai(true);
 
@@ -1416,7 +1414,7 @@ objective_on_faust() {
 
   // put the objective marker on Faust
   objective_onentity(2, self, (0, 0, 70));
-  objective_setpointertextoverride(2, & "FAVELA_OBJ_CAPTURE");
+  objective_setpointertextoverride(2, &"FAVELA_OBJ_CAPTURE");
   setsaveddvar("objectiveFadeTooFar", 0.1);
 
   // wait until we delete Faust
@@ -1432,7 +1430,7 @@ faust_appearance_1_dialog() {
   // Roach! I've spotted Faust, he's making a run for it! He's headed your way!
   radio_dialogue("favela_cmt_spottedfaust");
 
-  // And don't shoot him! We need him alive and unharmed! 
+  // And don't shoot him! We need him alive and unharmed!
   radio_dialogue("favela_cmt_unharmed");
 
   wait 5.0;
@@ -1460,12 +1458,12 @@ faust_appearance_3() {
 faust_appearance_3_dialog() {
   level endon("ending_sequence_dialog");
 
-  // We've got eyes on Faust - wait! Shite! he's headed back towards you! 
+  // We've got eyes on Faust - wait! Shite! he's headed back towards you!
   radio_dialogue("favela_cmt_backtowards");
 
-  if(flag("ending_sequence_dialog"))
+  if(flag("ending_sequence_dialog")) {
     return;
-
+  }
   // Roach, keep pushing him up the hill! Don't let him double back!
   radio_dialogue("favela_cmt_doubleback");
 }
@@ -1556,7 +1554,7 @@ street_scene_destruction() {
 
 street_scene_gunshots(org) {
   shots = randomintrange(5, 10);
-  for (i = 0; i < shots; i++) {
+  for(i = 0; i < shots; i++) {
     thread play_sound_in_space("weap_deserteagle_fire_npc", org);
     wait randomfloatrange(0.1, 0.3);
   }
@@ -1636,7 +1634,7 @@ alert_favela_civilians() {
   wait 1.5;
 
   foreach(civilian in level.favelaCivilians) {
-    if(isdefined(civilian))
+    if(isDefined(civilian))
       civilian.alertlevel = "alert";
   }
 }
@@ -1732,7 +1730,7 @@ royce_dies_dialog() {
   self waittill("death");
 
   withinView = false;
-  if(isdefined(self) && isdefined(self.origin))
+  if(isDefined(self) && isDefined(self.origin))
     withinView = level.player player_looking_at(self.origin, cos(45));
 
   if(!withinView)
@@ -1920,7 +1918,7 @@ ending_sequence() {
 
   wait 5.2;
 
-  assert(isdefined(level.ghost));
+  assert(isDefined(level.ghost));
   level.ghost anim_single_solo(level.ghost, "favela_gst_sendchopper");
   wait 0.8;
   level.ghost anim_single_solo(level.ghost, "favela_gst_skiesareclear");
@@ -1983,9 +1981,9 @@ ending_sequence_dialog() {
 ending_sequence_slowmo() {
   wait 0.15;
 
-  if(!player_looking_at(self.origin, undefined, true))
+  if(!player_looking_at(self.origin, undefined, true)) {
     return;
-
+  }
   slomoLerpTime_in = 0.5;
   slomoLerpTime_out = 0.65;
   slomobreachplayerspeed = 0.1;

@@ -17,7 +17,7 @@ init() {
   if(!isDefined(level.claymores_max_per_player))
     level.claymores_max_per_player = 12;
 
-  trigs = getentarray("claymore_purchase", "targetname");
+  trigs = getEntArray("claymore_purchase", "targetname");
 
   for(i = 0; i < trigs.size; i++) {
     model = getent(trigs[i].target, "targetname");
@@ -87,7 +87,7 @@ buy_claymores() {
               self.stub.claymores_triggered = 1;
           }
 
-          trigs = getentarray("claymore_purchase", "targetname");
+          trigs = getEntArray("claymore_purchase", "targetname");
 
           for(i = 0; i < trigs.size; i++)
             trigs[i] setinvisibletoplayer(who);
@@ -115,7 +115,7 @@ claymore_unitrigger_update_prompt(player) {
 
 set_claymore_visible() {
   players = get_players();
-  trigs = getentarray("claymore_purchase", "targetname");
+  trigs = getEntArray("claymore_purchase", "targetname");
 
   while(true) {
     for(j = 0; j < players.size; j++) {
@@ -265,7 +265,7 @@ pickup_claymores_trigger_listener_disable(trigger, player) {
 shouldaffectweaponobject(object) {
   pos = self.origin + vectorscale((0, 0, 1), 32.0);
   dirtopos = pos - object.origin;
-  objectforward = anglestoforward(object.angles);
+  objectforward = anglesToForward(object.angles);
   dist = vectordot(dirtopos, objectforward);
 
   if(dist < level.claymore_detectionmindist)
@@ -308,7 +308,7 @@ claymore_detonation() {
       continue;
     }
     if(ent damageconetrace(self.origin, self) > 0) {
-      self playsound("wpn_claymore_alert");
+      self playSound("wpn_claymore_alert");
       wait 0.4;
 
       if(isDefined(self.owner))
@@ -335,7 +335,7 @@ delete_claymores_on_death(player, ent) {
 
 satchel_damage() {
   self endon("death");
-  self setcandamage(1);
+  self setCanDamage(1);
   self.health = 100000;
   self.maxhealth = self.health;
   attacker = undefined;
@@ -381,7 +381,7 @@ reset_satchel_explode_this_frame() {
 play_claymore_effects() {
   self endon("death");
   self waittill_not_moving();
-  playfxontag(level._effect["claymore_laser"], self, "tag_fx");
+  playFXOnTag(level._effect["claymore_laser"], self, "tag_fx");
 }
 
 give_claymores_after_rounds() {
@@ -408,9 +408,9 @@ show_claymore_hint(string) {
   self endon("disconnect");
 
   if(string == "claymore_purchased")
-    text = & "ZOMBIE_CLAYMORE_HOWTO";
+    text = &"ZOMBIE_CLAYMORE_HOWTO";
   else
-    text = & "ZOMBIE_CLAYMORE_ALREADY_PURCHASED";
+    text = &"ZOMBIE_CLAYMORE_ALREADY_PURCHASED";
 
   show_equipment_hint_text(text);
 }

@@ -21,8 +21,8 @@ init() {
   flag_init("end_target_confirm");
   level.auto_turret_settings = [];
   level.auto_turret_settings["sentry"] = spawnStruct();
-  level.auto_turret_settings["sentry"].hintString = & "KILLSTREAK_SENTRY_TURRET_PICKUP";
-  level.auto_turret_settings["sentry"].hackerHintString = & "KILLSTREAK_TURRET_HACKING";
+  level.auto_turret_settings["sentry"].hintString = &"KILLSTREAK_SENTRY_TURRET_PICKUP";
+  level.auto_turret_settings["sentry"].hackerHintString = &"KILLSTREAK_TURRET_HACKING";
   level.auto_turret_settings["sentry"].hintIcon = "hud_ks_auto_turret";
   level.auto_turret_settings["sentry"].modelBase = "t5_weapon_minigun_turret";
   level.auto_turret_settings["sentry"].modelGoodPlacement = "t5_weapon_minigun_turret_yellow";
@@ -32,8 +32,8 @@ init() {
   level.auto_turret_settings["sentry"].stunFXFrequencyMax = 0.75;
   level.auto_turret_settings["sentry"].turretInitDelay = 1.0;
   level.auto_turret_settings["tow"] = spawnStruct();
-  level.auto_turret_settings["tow"].hintString = & "KILLSTREAK_TOW_TURRET_PICKUP";
-  level.auto_turret_settings["tow"].hackerHintString = & "KILLSTREAK_TURRET_HACKING";
+  level.auto_turret_settings["tow"].hintString = &"KILLSTREAK_TOW_TURRET_PICKUP";
+  level.auto_turret_settings["tow"].hackerHintString = &"KILLSTREAK_TURRET_HACKING";
   level.auto_turret_settings["tow"].hintIcon = "hud_ks_sam_turret";
   level.auto_turret_settings["tow"].modelBase = "t5_weapon_sam_turret";
   level.auto_turret_settings["tow"].modelGoodPlacement = "t5_weapon_sam_turret_yellow";
@@ -44,32 +44,32 @@ init() {
   level.auto_turret_settings["tow"].turretInitDelay = 1.0;
   level.auto_turret_settings["tow"].turretFireDelay = 5.0;
   level._turret_explode_fx = loadfx("explosions/fx_exp_equipment_lg");
-  minefields = GetEntarray("minefield", "targetname");
-  hurt_triggers = GetEntArray("trigger_hurt", "classname");
+  minefields = getEntArray("minefield", "targetname");
+  hurt_triggers = getEntArray("trigger_hurt", "classname");
   level.fatal_triggers = array_combine(minefields, hurt_triggers);
   level.noTurretPlacementTriggers = getEntArray("no_turret_placement", "targetname");
   if(maps\mp\gametypes\_tweakables::getTweakableValue("killstreak", "allowauto_turret")) {
     maps\mp\gametypes\_hardpoints::registerKillstreak("autoturret_mp", "autoturret_mp", "killstreak_auto_turret", "auto_turret_used", ::useSentryTurretKillstreak);
     maps\mp\gametypes\_hardpoints::registerKillstreakAltWeapon("autoturret_mp", "auto_gun_turret_mp");
-    maps\mp\gametypes\_hardpoints::registerKillstreakStrings("autoturret_mp", & "KILLSTREAK_EARNED_AUTO_TURRET", & "KILLSTREAK_AUTO_TURRET_NOT_AVAILABLE");
+    maps\mp\gametypes\_hardpoints::registerKillstreakStrings("autoturret_mp", &"KILLSTREAK_EARNED_AUTO_TURRET", &"KILLSTREAK_AUTO_TURRET_NOT_AVAILABLE");
     maps\mp\gametypes\_hardpoints::registerKillstreakDialog("autoturret_mp", "mpl_killstreak_auto_turret", "kls_turret_used", "", "kls_turret_enemy", "", "kls_turret_drop");
     maps\mp\gametypes\_hardpoints::registerKillstreakDevDvar("autoturret_mp", "scr_giveautoturret");
     maps\mp\gametypes\_hardpoints::registerKillstreak("turret_drop_mp", "turret_drop_mp", "killstreak_auto_turret_drop", "auto_turret_used", ::useKillstreakTurretDrop, undefined, true);
-    maps\mp\gametypes\_hardpoints::registerKillstreakStrings("turret_drop_mp", & "KILLSTREAK_EARNED_AUTO_TURRET", & "KILLSTREAK_AIRSPACE_FULL");
+    maps\mp\gametypes\_hardpoints::registerKillstreakStrings("turret_drop_mp", &"KILLSTREAK_EARNED_AUTO_TURRET", &"KILLSTREAK_AIRSPACE_FULL");
     maps\mp\gametypes\_hardpoints::registerKillstreakDialog("turret_drop_mp", "mpl_killstreak_turret", "kls_turret_used", "", "kls_turret_enemy", "", "kls_turret_ready");
     maps\mp\gametypes\_hardpoints::registerKillstreakDevDvar("turret_drop_mp", "scr_giveautoturretdrop");
-    maps\mp\gametypes\_supplydrop::registerCrateType("turret_drop_mp", "killstreak", "autoturret_mp", 1, & "KILLSTREAK_AUTO_TURRET_CRATE", undefined, "MEDAL_SHARE_PACKAGE_AUTO_TURRET", maps\mp\gametypes\_supplydrop::giveCrateKillstreak);
+    maps\mp\gametypes\_supplydrop::registerCrateType("turret_drop_mp", "killstreak", "autoturret_mp", 1, &"KILLSTREAK_AUTO_TURRET_CRATE", undefined, "MEDAL_SHARE_PACKAGE_AUTO_TURRET", maps\mp\gametypes\_supplydrop::giveCrateKillstreak);
     level.killStreakIcons["autoturret_mp"] = "hud_ks_auto_turret";
     maps\mp\gametypes\_hardpoints::registerKillstreak("auto_tow_mp", "auto_tow_mp", "killstreak_tow_turret", "tow_turret_used", ::useTowTurretKillstreak);
     maps\mp\gametypes\_hardpoints::registerKillstreakAltWeapon("auto_tow_mp", "tow_turret_mp");
-    maps\mp\gametypes\_hardpoints::registerKillstreakStrings("auto_tow_mp", & "KILLSTREAK_EARNED_TOW_TURRET", & "KILLSTREAK_TOW_TURRET_NOT_AVAILABLE");
+    maps\mp\gametypes\_hardpoints::registerKillstreakStrings("auto_tow_mp", &"KILLSTREAK_EARNED_TOW_TURRET", &"KILLSTREAK_TOW_TURRET_NOT_AVAILABLE");
     maps\mp\gametypes\_hardpoints::registerKillstreakDialog("auto_tow_mp", "mpl_killstreak_auto_turret", "kls_tow_used", "", "kls_tow_enemy", "", "kls_tow_drop");
     maps\mp\gametypes\_hardpoints::registerKillstreakDevDvar("auto_tow_mp", "scr_giveautotowturret");
     maps\mp\gametypes\_hardpoints::registerKillstreak("tow_turret_drop_mp", "tow_turret_drop_mp", "killstreak_tow_turret_drop", "tow_turret_used", ::useKillstreakTurretDrop, undefined, true);
-    maps\mp\gametypes\_hardpoints::registerKillstreakStrings("tow_turret_drop_mp", & "KILLSTREAK_EARNED_TOW_TURRET", & "KILLSTREAK_AIRSPACE_FULL");
+    maps\mp\gametypes\_hardpoints::registerKillstreakStrings("tow_turret_drop_mp", &"KILLSTREAK_EARNED_TOW_TURRET", &"KILLSTREAK_AIRSPACE_FULL");
     maps\mp\gametypes\_hardpoints::registerKillstreakDialog("tow_turret_drop_mp", "mpl_killstreak_auto_turret", "kls_tow_used", "", "kls_tow_enemy", "", "kls_tow_ready");
     maps\mp\gametypes\_hardpoints::registerKillstreakDevDvar("tow_turret_drop_mp", "scr_giveautotowturretdrop");
-    maps\mp\gametypes\_supplydrop::registerCrateType("tow_turret_drop_mp", "killstreak", "auto_tow_mp", 1, & "KILLSTREAK_TOW_TURRET_CRATE", undefined, "MEDAL_SHARE_PACKAGE_TOW_TURRET", maps\mp\gametypes\_supplydrop::giveCrateKillstreak);
+    maps\mp\gametypes\_supplydrop::registerCrateType("tow_turret_drop_mp", "killstreak", "auto_tow_mp", 1, &"KILLSTREAK_TOW_TURRET_CRATE", undefined, "MEDAL_SHARE_PACKAGE_TOW_TURRET", maps\mp\gametypes\_supplydrop::giveCrateKillstreak);
     level.killStreakIcons["auto_tow_mp"] = "hud_ks_sam_turret";
   }
   level.turrets_headicon_offset = [];
@@ -115,7 +115,7 @@ useSentryTurret(hardpointType) {
   turret = spawnTurret("auto_turret", self.origin, "auto_gun_turret_mp");
   turret.turretType = "sentry";
   turret SetTurretType(turret.turretType);
-  turret SetModel(level.auto_turret_settings[turret.turretType].modelGoodPlacement);
+  turret setModel(level.auto_turret_settings[turret.turretType].modelGoodPlacement);
   turret.angles = self.angles;
   turret.hardPointWeapon = hardpointType;
   turret.hasBeenPlanted = false;
@@ -150,7 +150,7 @@ useTowTurret(hardpointType) {
   turret = spawnTurret("auto_turret", self.origin, "tow_turret_mp");
   turret.turretType = "tow";
   turret SetTurretType(turret.turretType);
-  turret SetModel(level.auto_turret_settings[turret.turretType].modelGoodPlacement);
+  turret setModel(level.auto_turret_settings[turret.turretType].modelGoodPlacement);
   turret.angles = self.angles;
   turret.hardPointWeapon = hardpointType;
   turret.hasBeenPlanted = false;
@@ -224,7 +224,7 @@ watchOwnerLastStand(turret) {
   turret endon("turret_placed");
   turret endon("destroy_turret");
   turret endon("hacked");
-  while (1) {
+  while(1) {
     self waittill("entering_last_stand");
     if(!turret.hasBeenPlanted) {
       maps\mp\gametypes\_hardpoints::giveKillstreak(turret.hardPointWeapon, undefined, undefined, true);
@@ -283,18 +283,18 @@ updateTurretPlacement(turret) {
   turret endon("turret_deactivated");
   lastPlacedTurret = -1;
   turret.canBePlaced = false;
-  while (1) {
+  while(1) {
     placement = self canPlayerPlaceTurret();
     turret.origin = placement["origin"];
     turret.angles = placement["angles"];
-    good_spot_check = placement["result"] & !(turret turretInHurtTrigger());
-    good_spot_check = placement["result"] & !(turret turretInNoTurretPlacementTrigger());
+    good_spot_check = placement["result"] &!(turret turretInHurtTrigger());
+    good_spot_check = placement["result"] &!(turret turretInNoTurretPlacementTrigger());
     turret.canBePlaced = good_spot_check;
     if(turret.canBePlaced != lastPlacedTurret) {
       if(good_spot_check)
-        turret SetModel(level.auto_turret_settings[turret.turretType].modelGoodPlacement);
+        turret setModel(level.auto_turret_settings[turret.turretType].modelGoodPlacement);
       else
-        turret SetModel(level.auto_turret_settings[turret.turretType].modelBadPlacement);
+        turret setModel(level.auto_turret_settings[turret.turretType].modelBadPlacement);
       lastPlacedTurret = turret.canBePlaced;
     }
     self SetTurretHint(turret.canBePlaced);
@@ -302,7 +302,7 @@ updateTurretPlacement(turret) {
   }
 }
 turretInHurtTrigger() {
-  for (i = 0; i < level.fatal_triggers.size; i++) {
+  for(i = 0; i < level.fatal_triggers.size; i++) {
     if(self IsTouching(level.fatal_triggers[i])) {
       return true;
     }
@@ -310,7 +310,7 @@ turretInHurtTrigger() {
   return false;
 }
 turretInNoTurretPlacementTrigger() {
-  for (i = 0; i < level.noTurretPlacementTriggers.size; i++) {
+  for(i = 0; i < level.noTurretPlacementTriggers.size; i++) {
     if(self IsTouching(level.noTurretPlacementTriggers[i])) {
       return true;
     }
@@ -323,7 +323,7 @@ watchTurretPlacement(turret) {
   self endon("entering_last_stand");
   turret endon("turret_placed");
   turret endon("turret_deactivated");
-  while (1) {
+  while(1) {
     if(!turret.hasBeenPlanted && self actionSlotFourButtonPressed()) {
       maps\mp\gametypes\_hardpoints::giveKillstreak(turret.hardPointWeapon, undefined, undefined, true);
       turret setTurretCarried(false);
@@ -365,9 +365,9 @@ placeTurret(turret) {
 }
 initTurret(turret) {
   maps\mp\_mgturret::turret_set_difficulty(turret, "fu");
-  turret SetModel(level.auto_turret_settings[turret.turretType].modelBase);
+  turret setModel(level.auto_turret_settings[turret.turretType].modelBase);
   turret SetForceNoCull();
-  turret PlaySound("mpl_turret_startup");
+  turret playSound("mpl_turret_startup");
   if(level.teambased) {
     offset = level.turrets_headicon_offset["default"];
     if(isDefined(level.turrets_headicon_offset[turret.turretType])) {
@@ -399,7 +399,7 @@ watchDamage() {
   self endon("turret_deactivated");
   medalGiven = false;
   self.damageTaken = 0;
-  for (;;) {
+  for(;;) {
     self waittill("damage", damage, attacker, direction, point, type, tagName, modelName, partname, weaponName);
     if(!isDefined(attacker) || !isplayer(attacker))
       continue;
@@ -468,7 +468,7 @@ watchDamage() {
 watchTurretLifespan() {
   self endon("turret_deactivated");
   self endon("death");
-  while (1) {
+  while(1) {
     if(self.curr_time > level.auto_turret_timeout) {
       break;
     }
@@ -486,7 +486,7 @@ watchTurretLifespan() {
 }
 checkForStunDamage() {
   self endon("turret_deactivated");
-  while (1) {
+  while(1) {
     self waittill("damage_caused_by", weapon);
     if(isStunWeapon(weapon) && !self.stunnedByTacticalGrenade) {
       self thread stunTurretTacticalGrenade(self.stunDuration);
@@ -503,7 +503,7 @@ stunTurretTacticalGrenade(duration) {
   self.stunnedByTacticalGrenade = true;
   self thread stunTurretFx();
   if(self.stunnedByTacticalGrenade) {
-    while (1) {
+    while(1) {
       if(self.stunTime >= duration) {
         break;
       }
@@ -554,12 +554,12 @@ stunTurretFx() {
     return;
   }
   origin = self GetTagOrigin("TAG_aim");
-  self.stun_fx = Spawn("script_model", origin);
-  self.stun_fx SetModel("tag_origin");
+  self.stun_fx = spawn("script_model", origin);
+  self.stun_fx setModel("tag_origin");
   self thread stunFxThink(self.stun_fx);
   wait(0.1);
-  PlayFXOnTag(level.auto_turret_settings[self.turretType].stunFX, self.stun_fx, "tag_origin");
-  self.stun_fx PlaySound("dst_disable_spark");
+  playFXOnTag(level.auto_turret_settings[self.turretType].stunFX, self.stun_fx, "tag_origin");
+  self.stun_fx playSound("dst_disable_spark");
 }
 isStunWeapon(weapon) {
   switch (weapon) {
@@ -589,7 +589,7 @@ watchScramble() {
   if(self maps\mp\_scrambler::checkScramblerStun()) {
     self thread scramblerStun(true);
   }
-  for (;;) {
+  for(;;) {
     level waittill_any("scrambler_spawn", "scrambler_death", "hacked", "turret_stun_ended");
     wait(0.05);
     if(self maps\mp\_scrambler::checkScramblerStun()) {
@@ -612,7 +612,7 @@ destroyTurret() {
   self notify("turret_deactivated");
   self DeleteTurretUseTrigger();
   if(isDefined(playDeathAnim) && playDeathAnim && !self.carried) {
-    self playsound("dst_equipment_destroy");
+    self playSound("dst_equipment_destroy");
     self stunTurret(self.stunDuration);
   }
   level notify("drop_objects_to_ground", self.origin, 80);
@@ -621,8 +621,8 @@ destroyTurret() {
   wait(0.1);
   if(isDefined(self)) {
     if(self.hasBeenPlanted) {
-      PlayFX(level._turret_explode_fx, self.origin + (0, 0, 20));
-      self playsound("mpl_turret_exp");
+      playFX(level._turret_explode_fx, self.origin + (0, 0, 20));
+      self playSound("mpl_turret_exp");
     }
     if(self.carried && isDefined(self.owner)) {
       self.owner _enableWeapon();
@@ -661,7 +661,7 @@ watchTurretUse(trigger) {
   self endon("delete");
   self endon("turret_deactivated");
   self endon("turret_carried");
-  while (true) {
+  while(true) {
     trigger waittill("trigger", player);
     if(!isAlive(player))
       continue;
@@ -673,7 +673,7 @@ watchTurretUse(trigger) {
       continue;
     if(player useButtonPressed() && !player.throwingGrenade && !player meleeButtonPressed() && !player attackButtonPressed() && !player.carryingTurret) {
       player PlayRumbleOnEntity("damage_heavy");
-      self PlaySound("mpl_turret_down");
+      self playSound("mpl_turret_down");
       self DeleteTurretUseTrigger();
       player thread startCarryTurret(self);
       self DeleteTurretUseTrigger();
@@ -693,10 +693,10 @@ turret_tow_think(player) {
   turretState = "started";
   self thread missile_fired_notify();
   wait(level.auto_turret_settings[self.turretType].turretInitDelay);
-  while (1) {
+  while(1) {
     if(self IsFiringTurret() && turretState != "firing") {
       turretState = "firing";
-      self playsound("mpl_turret_alert");
+      self playSound("mpl_turret_alert");
       self thread do_tow_shoot(player);
     } else {
       self notify("target_lost");
@@ -712,7 +712,7 @@ do_tow_shoot(player) {
   player endon("disconnect");
   self endon("target_lost");
   level endon("game_ended");
-  while (1) {
+  while(1) {
     if(self.fireTime < level.auto_turret_settings["tow"].turretFireDelay) {
       wait(0.1);
       self.fireTime += 0.1;
@@ -729,7 +729,7 @@ missile_fired_notify() {
   if(isDefined(self.owner)) {
     self.owner endon("disconnect");
   }
-  while (true) {
+  while(true) {
     self waittill("missile_fire", missile, weap, target);
     if(isDefined(target)) {
       target notify("stinger_fired_at_me", missile, weap, self.owner);
@@ -739,7 +739,7 @@ missile_fired_notify() {
 }
 spawnTurretHackerTrigger(player) {
   triggerOrigin = self.origin + (0, 0, 10);
-  self.hackerTrigger = Spawn("trigger_radius_use", triggerOrigin, level.weaponobjects_hacker_trigger_width, level.weaponobjects_hacker_trigger_height);
+  self.hackerTrigger = spawn("trigger_radius_use", triggerOrigin, level.weaponobjects_hacker_trigger_width, level.weaponobjects_hacker_trigger_height);
   if(self.turretType == "sentry")
     self.hackerTrigger SetCursorHint("HINT_NOICON", "auto_gun_turret_mp");
   else
@@ -752,7 +752,7 @@ spawnTurretHackerTrigger(player) {
 }
 hackerThink(trigger, owner) {
   self endon("death");
-  for (;;) {
+  for(;;) {
     trigger waittill("trigger", player);
     if(!trigger maps\mp\gametypes\_weaponobjects::hackerResult(player, owner)) {
       continue;
@@ -802,18 +802,18 @@ TurretScanStartWaiter() {
   turret_scan_start_sound_ent linkto(self, "tag_origin", (0, 0, 0), (0, 0, 0));
   self thread TurretScanStopWaiter(turret_scan_start_sound_ent);
   self thread TurretScanStopWaiterCleanup(turret_scan_start_sound_ent);
-  while (1) {
+  while(1) {
     self waittill("turret_scan_start");
-    turret_scan_start_sound_ent playloopsound("mpl_turret_servo", 2);
+    turret_scan_start_sound_ent playLoopSound("mpl_turret_servo", 2);
     wait(0.5);
   }
 }
 TurretScanStopWaiter(ent) {
   self endon("turret_sound_cleanup");
   level endon("game_ended");
-  while (1) {
+  while(1) {
     self waittill("turret_scan_stop");
-    ent playsound("mpl_turret_servo_stop");
+    ent playSound("mpl_turret_servo_stop");
     ent StopLoopSound(0.5);
     wait(0.5);
   }

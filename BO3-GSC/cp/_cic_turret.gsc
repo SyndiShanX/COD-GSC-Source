@@ -17,16 +17,16 @@
 #namespace cic_turret;
 
 function autoexec __init__sytem__() {
-  system::register("cic_turret", & __init__, undefined, undefined);
+  system::register("cic_turret", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  vehicle::add_main_callback("turret_cic", & cic_turret_think);
-  vehicle::add_main_callback("turret_cic_world", & cic_turret_think);
-  vehicle::add_main_callback("turret_sentry", & cic_turret_think);
-  vehicle::add_main_callback("turret_sentry_world", & cic_turret_think);
-  vehicle::add_main_callback("turret_sentry_cic", & cic_turret_think);
-  vehicle::add_main_callback("turret_sentry_rts", & cic_turret_think);
+  vehicle::add_main_callback("turret_cic", &cic_turret_think);
+  vehicle::add_main_callback("turret_cic_world", &cic_turret_think);
+  vehicle::add_main_callback("turret_sentry", &cic_turret_think);
+  vehicle::add_main_callback("turret_sentry_world", &cic_turret_think);
+  vehicle::add_main_callback("turret_sentry_cic", &cic_turret_think);
+  vehicle::add_main_callback("turret_sentry_rts", &cic_turret_think);
   level._effect["cic_turret_damage01"] = "destruct/fx_dest_turret_1";
   level._effect["cic_turret_damage02"] = "destruct/fx_dest_turret_2";
   level._effect["sentry_turret_damage01"] = "destruct/fx_dest_turret_1";
@@ -46,8 +46,8 @@ function cic_turret_think() {
     self.default_pitch = 0;
   }
   self.state_machine = statemachine::create("brain", self);
-  main = self.state_machine statemachine::add_state("main", undefined, & cic_turret_main, undefined);
-  scripted = self.state_machine statemachine::add_state("scripted", undefined, & cic_turret_scripted, undefined);
+  main = self.state_machine statemachine::add_state("main", undefined, &cic_turret_main, undefined);
+  scripted = self.state_machine statemachine::add_state("scripted", undefined, &cic_turret_scripted, undefined);
   vehicle_ai::set_role("brain");
   vehicle_ai::add_interrupt_connection("main", "scripted", "enter_vehicle");
   vehicle_ai::add_interrupt_connection("main", "scripted", "scripted");
@@ -57,8 +57,8 @@ function cic_turret_think() {
   self thread cic_turret_death();
   self thread cic_turret_damage();
   self thread turret::track_lens_flare();
-  self.overridevehicledamage = & cicturretcallback_vehicledamage;
-  if(isdefined(self.script_startstate)) {
+  self.overridevehicledamage = &cicturretcallback_vehicledamage;
+  if(isDefined(self.script_startstate)) {
     if(self.script_startstate == "off") {
       self cic_turret_off(self.angles);
     } else {
@@ -91,14 +91,14 @@ function cic_turret_off(angles) {
   self laseroff();
   self vehicle::toggle_sounds(0);
   self vehicle::toggle_exhaust_fx(0);
-  if(!isdefined(angles)) {
+  if(!isDefined(angles)) {
     angles = self gettagangles("tag_flash");
   }
-  target_vec = self.origin + (anglestoforward((0, angles[1], 0)) * 1000);
+  target_vec = self.origin + (anglesToForward((0, angles[1], 0)) * 1000);
   target_vec = target_vec + (vectorscale((0, 0, -1), 1700));
   self settargetorigin(target_vec);
   self.off = 1;
-  if(!isdefined(self.emped)) {
+  if(!isDefined(self.emped)) {
     self disableaimassist();
   }
   self.ignoreme = 1;
@@ -106,7 +106,7 @@ function cic_turret_off(angles) {
 
 function cic_turret_on() {
   self endon("death");
-  self playsound("veh_cic_turret_boot");
+  self playSound("veh_cic_turret_boot");
   self vehicle::lights_on();
   self enableaimassist();
   self vehicle::toggle_sounds(1);
@@ -119,15 +119,15 @@ function cic_turret_on() {
 }
 
 function bootup() {
-  for (i = 0; i < 6; i++) {
+  for(i = 0; i < 6; i++) {
     wait(0.1);
     vehicle::lights_off();
     wait(0.1);
     vehicle::lights_on();
   }
-  if(!isdefined(self.player)) {
+  if(!isDefined(self.player)) {
     angles = self gettagangles("tag_flash");
-    target_vec = self.origin + (anglestoforward((self.default_pitch, angles[1], 0)) * 1000);
+    target_vec = self.origin + (anglesToForward((self.default_pitch, angles[1], 0)) * 1000);
     self.turretrotscale = 0.3;
     self settargetorigin(target_vec);
     wait(1);
@@ -141,31 +141,31 @@ function cic_turret_fireupdate() {
   cant_see_enemy_count = 0;
   wait(0.2);
   origin = self gettagorigin("tag_barrel");
-  left_look_at_pt = origin + ((anglestoforward(self.angles + (self.default_pitch, self.scanning_arc, 0))) * 1000);
-  right_look_at_pt = origin + ((anglestoforward(self.angles + (self.default_pitch, self.scanning_arc * -1, 0))) * 1000);
-  while (true) {
-    if(isdefined(self.enemy) && self vehcansee(self.enemy)) {
+  left_look_at_pt = origin + ((anglesToForward(self.angles + (self.default_pitch, self.scanning_arc, 0))) * 1000);
+  right_look_at_pt = origin + ((anglesToForward(self.angles + (self.default_pitch, self.scanning_arc * -1, 0))) * 1000);
+  while(true) {
+    if(isDefined(self.enemy) && self vehcansee(self.enemy)) {
       self.turretrotscale = 1;
       if(cant_see_enemy_count > 0 && isplayer(self.enemy)) {
         cic_turret_alert_sound();
         wait(0.5);
       }
       cant_see_enemy_count = 0;
-      for (i = 0; i < 3; i++) {
-        if(isdefined(self.enemy) && isalive(self.enemy) && self vehcansee(self.enemy)) {
+      for(i = 0; i < 3; i++) {
+        if(isDefined(self.enemy) && isalive(self.enemy) && self vehcansee(self.enemy)) {
           self setturrettargetent(self.enemy);
           wait(0.1);
           self cic_turret_fire_for_time(randomfloatrange(0.4, 1.5));
         } else {
           self cleartargetentity();
         }
-        if(isdefined(self.enemy) && isplayer(self.enemy)) {
+        if(isDefined(self.enemy) && isplayer(self.enemy)) {
           wait(randomfloatrange(0.3, 0.6));
           continue;
         }
         wait(randomfloatrange(0.3, 0.6) * 2);
       }
-      if(isdefined(self.enemy) && isalive(self.enemy) && self vehcansee(self.enemy)) {
+      if(isDefined(self.enemy) && isalive(self.enemy) && self vehcansee(self.enemy)) {
         if(isplayer(self.enemy)) {
           wait(randomfloatrange(0.5, 1.3));
         } else {
@@ -178,7 +178,7 @@ function cic_turret_fireupdate() {
       wait(1);
       if(cant_see_enemy_count > 1) {
         self.turret_state = 0;
-        while (!isdefined(self.enemy) || !self vehcansee(self.enemy)) {
+        while(!isDefined(self.enemy) || !self vehcansee(self.enemy)) {
           if(self.turretontarget) {
             self.turret_state++;
             if(self.turret_state > 1) {
@@ -202,7 +202,7 @@ function cic_turret_fireupdate() {
 
 function cic_turret_scripted(params) {
   driver = self getseatoccupant(0);
-  if(isdefined(driver)) {
+  if(isDefined(driver)) {
     self.turretrotscale = 1;
     self disableaimassist();
     if(driver == level.players[0]) {
@@ -227,31 +227,31 @@ function cic_turret_get_damage_effect(health_pct) {
 }
 
 function cic_turret_play_single_fx_on_tag(effect, tag) {
-  if(isdefined(self.damage_fx_ent)) {
+  if(isDefined(self.damage_fx_ent)) {
     if(self.damage_fx_ent.effect == effect) {
       return;
     }
     self.damage_fx_ent delete();
   }
-  if(!isdefined(self gettagangles(tag))) {
+  if(!isDefined(self gettagangles(tag))) {
     return;
   }
   ent = spawn("script_model", (0, 0, 0));
-  ent setmodel("tag_origin");
+  ent setModel("tag_origin");
   ent.origin = self gettagorigin(tag);
   ent.angles = self gettagangles(tag);
   ent notsolid();
   ent hide();
   ent linkto(self, tag);
   ent.effect = effect;
-  playfxontag(effect, ent, "tag_origin");
-  ent playsound("veh_cic_turret_sparks");
+  playFXOnTag(effect, ent, "tag_origin");
+  ent playSound("veh_cic_turret_sparks");
   self.damage_fx_ent = ent;
 }
 
 function cic_turret_damage() {
   self endon("crash_done");
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     self waittill("damage");
     if(self.health > 0) {
       effect = self cic_turret_get_damage_effect(self.health / self.healthdefault);
@@ -266,14 +266,14 @@ function cic_turret_death() {
   wait(0.1);
   self notify("nodeath_thread");
   self waittill("death", attacker, damagefromunderneath, weapon, point, dir);
-  if(isdefined(self.delete_on_death)) {
-    if(isdefined(self.damage_fx_ent)) {
+  if(isDefined(self.delete_on_death)) {
+    if(isDefined(self.damage_fx_ent)) {
       self.damage_fx_ent delete();
     }
     self delete();
     return;
   }
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   self vehicle_death::death_cleanup_level_variables();
@@ -288,7 +288,7 @@ function cic_turret_death() {
   self thread vehicle_death::set_death_model(self.deathmodel, self.modelswapdelay);
   self vehicle::toggle_sounds(0);
   self thread cic_turret_death_movement(attacker, dir);
-  if(isdefined(self.damage_fx_ent)) {
+  if(isDefined(self.damage_fx_ent)) {
     self.damage_fx_ent delete();
   }
   self.ignoreme = 1;
@@ -298,9 +298,9 @@ function cic_turret_death() {
 
 function death_fx() {
   self vehicle::do_death_fx();
-  self playsound("veh_cic_turret_sparks");
+  self playSound("veh_cic_turret_sparks");
   fire_ent = spawn("script_origin", self.origin);
-  fire_ent playloopsound("veh_cic_turret_dmg_fire_loop", 0.5);
+  fire_ent playLoopSound("veh_cic_turret_dmg_fire_loop", 0.5);
   wait(2);
   fire_ent delete();
 }
@@ -308,11 +308,11 @@ function death_fx() {
 function cic_turret_death_movement(attacker, hitdir) {
   self endon("crash_done");
   self endon("death");
-  self playsound("veh_cic_turret_dmg_hit");
+  self playSound("veh_cic_turret_dmg_hit");
   wait(0.1);
   self.turretrotscale = 0.5;
   tag_angles = self gettagangles("tag_flash");
-  target_pos = (self.origin + (anglestoforward((0, tag_angles[1], 0)) * 1000)) + (vectorscale((0, 0, -1), 1800));
+  target_pos = (self.origin + (anglesToForward((0, tag_angles[1], 0)) * 1000)) + (vectorscale((0, 0, -1), 1800));
   self setturrettargetvec(target_pos);
   wait(4);
   self notify("crash_done");
@@ -333,12 +333,12 @@ function cic_turret_fire_for_time(totalfiretime) {
     wait(0.5);
   }
   firechance = 2;
-  if(isdefined(self.enemy) && isplayer(self.enemy)) {
+  if(isDefined(self.enemy) && isplayer(self.enemy)) {
     firechance = 1;
   }
   firecount = 1;
-  while (time < totalfiretime) {
-    if(isdefined(self.enemy) && isdefined(self.enemy.attackeraccuracy) && self.enemy.attackeraccuracy == 0) {
+  while(time < totalfiretime) {
+    if(isDefined(self.enemy) && isDefined(self.enemy.attackeraccuracy) && self.enemy.attackeraccuracy == 0) {
       self fireweapon();
     } else {
       if(firechance > 1) {
@@ -357,12 +357,12 @@ function cic_turret_fire_for_time(totalfiretime) {
 }
 
 function cic_turret_alert_sound() {
-  self playsound("veh_turret_alert");
+  self playSound("veh_turret_alert");
 }
 
 function cic_turret_set_team(team) {
   self.team = team;
-  if(!isdefined(self.off)) {
+  if(!isDefined(self.off)) {
     cic_turret_blink_lights();
   }
 }
@@ -382,14 +382,14 @@ function cic_turret_emped() {
   playsoundatposition("veh_cic_turret_emp_down", self.origin);
   self.turretrotscale = 0.2;
   self cic_turret_off();
-  if(!isdefined(self.stun_fx)) {
+  if(!isDefined(self.stun_fx)) {
     self.stun_fx = spawn("script_model", self.origin);
-    self.stun_fx setmodel("tag_origin");
+    self.stun_fx setModel("tag_origin");
     self.stun_fx linkto(self, "tag_fx", (0, 0, 0), (0, 0, 0));
     if(issubstr(self.vehicletype, "turret_sentry")) {
-      playfxontag(level._effect["sentry_turret_stun"], self.stun_fx, "tag_origin");
+      playFXOnTag(level._effect["sentry_turret_stun"], self.stun_fx, "tag_origin");
     } else {
-      playfxontag(level._effect["cic_turret_stun"], self.stun_fx, "tag_origin");
+      playFXOnTag(level._effect["cic_turret_stun"], self.stun_fx, "tag_origin");
     }
   }
   wait(randomfloatrange(6, 10));
@@ -401,7 +401,7 @@ function cic_turret_emped() {
 function cicturretcallback_vehicledamage(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, damagefromunderneath, modelindex, partname) {
   if(weapon.isemp && smeansofdeath != "MOD_IMPACT") {
     driver = self getseatoccupant(0);
-    if(!isdefined(driver)) {
+    if(!isDefined(driver)) {
       self thread cic_turret_emped();
     }
   }
@@ -421,8 +421,8 @@ function cic_overheat_hud(turret) {
   level endon("player_using_turret");
   heat = 0;
   overheat = 0;
-  while (true) {
-    if(isdefined(self.viewlockedentity)) {
+  while(true) {
+    if(isDefined(self.viewlockedentity)) {
       old_heat = heat;
       heat = self.viewlockedentity getturretheatvalue(0);
       old_overheat = overheat;
@@ -442,15 +442,15 @@ function cic_turret_stunned() {
   self.stunned = 1;
   self.turretrotscale = 0.2;
   self cic_turret_off();
-  if(!isdefined(self.stun_fx)) {
+  if(!isDefined(self.stun_fx)) {
     playsoundatposition("veh_cic_turret_emp_down", self.origin);
     self.stun_fx = spawn("script_model", self.origin);
-    self.stun_fx setmodel("tag_origin");
+    self.stun_fx setModel("tag_origin");
     self.stun_fx linkto(self, "tag_fx", (0, 0, 0), (0, 0, 0));
     if(issubstr(self.vehicletype, "turret_sentry")) {
-      playfxontag(level._effect["sentry_turret_stun"], self.stun_fx, "tag_origin");
+      playFXOnTag(level._effect["sentry_turret_stun"], self.stun_fx, "tag_origin");
     } else {
-      playfxontag(level._effect["cic_turret_stun"], self.stun_fx, "tag_origin");
+      playFXOnTag(level._effect["cic_turret_stun"], self.stun_fx, "tag_origin");
     }
   }
   wait(randomfloatrange(3, 5));

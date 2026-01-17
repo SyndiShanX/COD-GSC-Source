@@ -23,7 +23,7 @@ function init() {
   if(dvar == "zcleansed") {
     level.weaponzmturnedmelee = getweapon("zombiemelee");
     level.weaponzmturnedmeleedw = getweapon("zombiemelee_dw");
-    if(!isdefined(level.vsmgr_prio_visionset_zombie_turned)) {
+    if(!isDefined(level.vsmgr_prio_visionset_zombie_turned)) {
       level.vsmgr_prio_visionset_zombie_turned = 123;
     }
     visionset_mgr::register_info("visionset", "zombie_turned", 1, level.vsmgr_prio_visionset_zombie_turned, 1, 1);
@@ -50,13 +50,13 @@ function delay_turning_on_eyes() {
 }
 
 function turn_to_zombie() {
-  if(self.sessionstate == "playing" && (isdefined(self.is_zombie) && self.is_zombie) && (!(isdefined(self.laststand) && self.laststand))) {
+  if(self.sessionstate == "playing" && (isDefined(self.is_zombie) && self.is_zombie) && (!(isDefined(self.laststand) && self.laststand))) {
     return;
   }
-  if(isdefined(self.is_in_process_of_zombify) && self.is_in_process_of_zombify) {
+  if(isDefined(self.is_in_process_of_zombify) && self.is_in_process_of_zombify) {
     return;
   }
-  while (isdefined(self.is_in_process_of_humanify) && self.is_in_process_of_humanify) {
+  while(isDefined(self.is_in_process_of_humanify) && self.is_in_process_of_humanify) {
     wait(0.1);
   }
   if(!level flag::get("pregame")) {
@@ -81,11 +81,11 @@ function turn_to_zombie() {
   self freezecontrols(1);
   self.is_zombie = 1;
   self setburn(0);
-  if(isdefined(self.turned_visionset) && self.turned_visionset) {
+  if(isDefined(self.turned_visionset) && self.turned_visionset) {
     visionset_mgr::deactivate("visionset", "zombie_turned", self);
     util::wait_network_frame();
     util::wait_network_frame();
-    if(!isdefined(self)) {
+    if(!isDefined(self)) {
       return;
     }
   }
@@ -95,7 +95,7 @@ function turn_to_zombie() {
   self zm_audio::setexertvoice(1);
   self.laststand = undefined;
   util::wait_network_frame();
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   self enableweapons();
@@ -125,31 +125,31 @@ function turn_to_zombie() {
   self.health = 256;
   self.meleedamage = 1000;
   self detachall();
-  if(isdefined(level.custom_zombie_player_loadout)) {
+  if(isDefined(level.custom_zombie_player_loadout)) {
     self[[level.custom_zombie_player_loadout]]();
   } else {
-    self setmodel("c_zom_player_zombie_fb");
+    self setModel("c_zom_player_zombie_fb");
     self.voice = "american";
     self.skeleton = "base";
   }
   self.shock_onpain = 0;
   self disableinvulnerability();
-  if(isdefined(level.player_movement_suppressed)) {
+  if(isDefined(level.player_movement_suppressed)) {
     self freezecontrols(level.player_movement_suppressed);
-  } else if(!(isdefined(self.hostmigrationcontrolsfrozen) && self.hostmigrationcontrolsfrozen)) {
+  } else if(!(isDefined(self.hostmigrationcontrolsfrozen) && self.hostmigrationcontrolsfrozen)) {
     self freezecontrols(0);
   }
   self.is_in_process_of_zombify = 0;
 }
 
 function turn_to_human() {
-  if(self.sessionstate == "playing" && (!(isdefined(self.is_zombie) && self.is_zombie)) && (!(isdefined(self.laststand) && self.laststand))) {
+  if(self.sessionstate == "playing" && (!(isDefined(self.is_zombie) && self.is_zombie)) && (!(isDefined(self.laststand) && self.laststand))) {
     return;
   }
-  if(isdefined(self.is_in_process_of_humanify) && self.is_in_process_of_humanify) {
+  if(isDefined(self.is_in_process_of_humanify) && self.is_in_process_of_humanify) {
     return;
   }
-  while (isdefined(self.is_in_process_of_zombify) && self.is_in_process_of_zombify) {
+  while(isDefined(self.is_in_process_of_zombify) && self.is_in_process_of_zombify) {
     wait(0.1);
   }
   self playsoundtoplayer("evt_spawn", self);
@@ -200,13 +200,13 @@ function turn_to_human() {
     self giveweapon(level.weaponbasemelee);
   }
   util::wait_network_frame();
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   self disableinvulnerability();
-  if(isdefined(level.player_movement_suppressed)) {
+  if(isDefined(level.player_movement_suppressed)) {
     self freezecontrols(level.player_movement_suppressed);
-  } else if(!(isdefined(self.hostmigrationcontrolsfrozen) && self.hostmigrationcontrolsfrozen)) {
+  } else if(!(isDefined(self.hostmigrationcontrolsfrozen) && self.hostmigrationcontrolsfrozen)) {
     self freezecontrols(0);
   }
   self show();
@@ -218,9 +218,9 @@ function deletezombiesinradius(origin) {
   zombies = zombie_utility::get_round_enemy_array();
   maxradius = 128;
   foreach(zombie in zombies) {
-    if(isdefined(zombie) && isalive(zombie) && (!(isdefined(zombie.is_being_used_as_spawner) && zombie.is_being_used_as_spawner))) {
+    if(isDefined(zombie) && isalive(zombie) && (!(isDefined(zombie.is_being_used_as_spawner) && zombie.is_being_used_as_spawner))) {
       if(distancesquared(zombie.origin, origin) < (maxradius * maxradius)) {
-        playfx(level._effect["wood_chunk_destory"], zombie.origin);
+        playFX(level._effect["wood_chunk_destory"], zombie.origin);
         zombie thread silentlyremovezombie();
       }
       wait(0.05);
@@ -229,10 +229,10 @@ function deletezombiesinradius(origin) {
 }
 
 function turned_give_melee_weapon() {
-  assert(isdefined(self.weaponzmturnedmelee));
+  assert(isDefined(self.weaponzmturnedmelee));
   assert(self.weaponzmturnedmelee != level.weaponnone);
   self.turned_had_knife = self hasweapon(level.weaponbasemelee);
-  if(isdefined(self.turned_had_knife) && self.turned_had_knife) {
+  if(isDefined(self.turned_had_knife) && self.turned_had_knife) {
     self takeweapon(level.weaponbasemelee);
   }
   self giveweapon(self.weaponzmturnedmeleedw);
@@ -247,23 +247,23 @@ function turned_player_buttons() {
   self endon("disconnect");
   self endon("humanify");
   level endon("end_game");
-  while (isdefined(self.is_zombie) && self.is_zombie) {
+  while(isDefined(self.is_zombie) && self.is_zombie) {
     if(self attackbuttonpressed() || self adsbuttonpressed() || self meleebuttonpressed()) {
       if(math::cointoss()) {
         self notify("bhtn_action_notify", "attack");
       }
-      while (self attackbuttonpressed() || self adsbuttonpressed() || self meleebuttonpressed()) {
+      while(self attackbuttonpressed() || self adsbuttonpressed() || self meleebuttonpressed()) {
         wait(0.05);
       }
     }
     if(self usebuttonpressed()) {
       self notify("bhtn_action_notify", "taunt");
-      while (self usebuttonpressed()) {
+      while(self usebuttonpressed()) {
         wait(0.05);
       }
     }
     if(self issprinting()) {
-      while (self issprinting()) {
+      while(self issprinting()) {
         self notify("bhtn_action_notify", "sprint");
         wait(0.05);
       }
@@ -273,7 +273,7 @@ function turned_player_buttons() {
 }
 
 function turned_disable_player_weapons() {
-  if(isdefined(self.is_zombie) && self.is_zombie) {
+  if(isDefined(self.is_zombie) && self.is_zombie) {
     return;
   }
   weaponinventory = self getweaponslist();
@@ -281,10 +281,10 @@ function turned_disable_player_weapons() {
   self setlaststandprevweap(self.lastactiveweapon);
   self.laststandpistol = undefined;
   self.hadpistol = 0;
-  if(!isdefined(self.weaponzmturnedmelee)) {
+  if(!isDefined(self.weaponzmturnedmelee)) {
     self.weaponzmturnedmelee = level.weaponzmturnedmelee;
   }
-  if(!isdefined(self.weaponzmturnedmeleedw)) {
+  if(!isDefined(self.weaponzmturnedmeleedw)) {
     self.weaponzmturnedmeleedw = level.weaponzmturnedmeleedw;
   }
   self takeallweapons();
@@ -297,7 +297,7 @@ function turned_enable_player_weapons() {
   self enableoffhandweapons();
   self.turned_had_knife = undefined;
   rottweil_weapon = getweapon("rottweil72");
-  if(isdefined(level.humanify_custom_loadout)) {
+  if(isDefined(level.humanify_custom_loadout)) {
     self thread[[level.humanify_custom_loadout]]();
     return;
   }
@@ -305,7 +305,7 @@ function turned_enable_player_weapons() {
     self giveweapon(rottweil_weapon);
     self switchtoweapon(rottweil_weapon);
   }
-  if(!(isdefined(self.is_zombie) && self.is_zombie) && !self hasweapon(level.start_weapon)) {
+  if(!(isDefined(self.is_zombie) && self.is_zombie) && !self hasweapon(level.start_weapon)) {
     if(!self hasweapon(level.weaponbasemelee)) {
       self giveweapon(level.weaponbasemelee);
     }
@@ -327,11 +327,11 @@ function turned_enable_player_weapons() {
 }
 
 function get_farthest_available_zombie(player) {
-  while (true) {
+  while(true) {
     zombies = array::get_all_closest(player.origin, getaiteamarray(level.zombie_team));
-    for (x = 0; x < zombies.size; x++) {
+    for(x = 0; x < zombies.size; x++) {
       zombie = zombies[x];
-      if(isdefined(zombie) && isalive(zombie) && (!(isdefined(zombie.in_the_ground) && zombie.in_the_ground)) && (!(isdefined(zombie.gibbed) && zombie.gibbed)) && (!(isdefined(zombie.head_gibbed) && zombie.head_gibbed)) && (!(isdefined(zombie.is_being_used_as_spawnpoint) && zombie.is_being_used_as_spawnpoint)) && zombie zm_utility::in_playable_area()) {
+      if(isDefined(zombie) && isalive(zombie) && (!(isDefined(zombie.in_the_ground) && zombie.in_the_ground)) && (!(isDefined(zombie.gibbed) && zombie.gibbed)) && (!(isDefined(zombie.head_gibbed) && zombie.head_gibbed)) && (!(isDefined(zombie.is_being_used_as_spawnpoint) && zombie.is_being_used_as_spawnpoint)) && zombie zm_utility::in_playable_area()) {
         zombie.is_being_used_as_spawnpoint = 1;
         return zombie;
       }
@@ -343,7 +343,7 @@ function get_farthest_available_zombie(player) {
 function get_available_human() {
   players = getplayers();
   foreach(player in players) {
-    if(!(isdefined(player.is_zombie) && player.is_zombie)) {
+    if(!(isDefined(player.is_zombie) && player.is_zombie)) {
       return player;
     }
   }

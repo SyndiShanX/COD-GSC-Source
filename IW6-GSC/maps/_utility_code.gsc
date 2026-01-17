@@ -348,9 +348,7 @@ hintprint(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
           ](var_2)) {
           break;
         }
-      } else if([
-          [level.hint_breakfunc]
-        ]()) {
+      } else if([[level.hint_breakfunc]]()) {
         break;
       }
 
@@ -380,9 +378,7 @@ hintprint(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
           ](var_2)) {
           break;
         }
-      } else if([
-          [level.hint_breakfunc]
-        ]()) {
+      } else if([[level.hint_breakfunc]]()) {
         break;
       }
     }
@@ -1343,9 +1339,7 @@ comparesizesfx(var_0, var_1, var_2, var_3) {
     for(var_6 = 0; var_6 < var_5.size; var_6++) {
       var_7 = distance(var_1[var_5[var_6]].v["origin"], var_0);
 
-      if([
-          [var_3]
-        ](var_7, var_2)) {
+      if([[var_3]](var_7, var_2)) {
         continue;
       }
       var_2 = var_7;

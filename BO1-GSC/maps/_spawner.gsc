@@ -222,7 +222,7 @@ trigger_spawner(trigger) {
   assertEx(isDefined(trigger.target), "Triggers with flag TRIGGER_SPAWN at " + trigger.origin + " must target at least one spawner.");
   trigger endon("death");
   trigger waittill("trigger");
-  spawners = getentarray(trigger.target, "targetname");
+  spawners = getEntArray(trigger.target, "targetname");
   for(i = 0; i < spawners.size; i++) {
     spawners[i].script_trigger = trigger;
   }
@@ -385,7 +385,7 @@ dronespawn_setstruct_from_guy(guy) {
   if(dronespawn_check()) {
     return;
   }
-  struct = spawnstruct();
+  struct = spawnStruct();
   size = guy getattachsize();
   struct.attachedmodels = [];
   for(i = 0; i < size; i++) {
@@ -429,9 +429,7 @@ spawn_prethink() {
   for(;;) {
     prof_begin("spawn_prethink");
     self waittill("spawned", spawn);
-    [
-      [deathflag_func]
-    ]();
+    [[deathflag_func]]();
     if(!IsAlive(spawn)) {
       continue;
     }
@@ -742,7 +740,7 @@ set_goal_volume() {
 }
 
 get_target_ents(target) {
-  return getentarray(target, "targetname");
+  return getEntArray(target, "targetname");
 }
 
 get_target_nodes(target) {
@@ -902,13 +900,9 @@ go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, optional_arri
     } else {
       self.goalheight = level.default_goalheight;
     }
-    [
-      [set_goal_func_quits]
-    ](node);
+    [[set_goal_func_quits]](node);
     self waittill("goal");
-    [
-      [optional_arrived_at_node_func]
-    ](node);
+    [[optional_arrived_at_node_func]](node);
     if(isDefined(node.script_flag_set)) {
       flag_set(node.script_flag_set);
     }
@@ -973,9 +967,7 @@ go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, optional_arri
     if(!isDefined(node.target)) {
       break;
     }
-    nextNode_array = [
-      [get_target_func]
-    ](node.target);
+    nextNode_array = [[get_target_func]](node.target);
     if(!nextNode_array.size) {
       break;
     }
@@ -996,17 +988,15 @@ go_to_node_wait_for_player(node, get_target_func, dist) {
     if(distancesquared(player.origin, node.origin) < distancesquared(self.origin, node.origin))
       return true;
   }
-  vec = anglestoforward(self.angles);
+  vec = anglesToForward(self.angles);
   if(isDefined(node.target)) {
-    temp = [
-      [get_target_func]
-    ](node.target);
+    temp = [[get_target_func]](node.target);
     if(temp.size == 1)
       vec = vectornormalize(temp[0].origin - node.origin);
     else if(isDefined(node.angles))
-      vec = anglestoforward(node.angles);
+      vec = anglesToForward(node.angles);
   } else if(isDefined(node.angles))
-    vec = anglestoforward(node.angles);
+    vec = anglesToForward(node.angles);
   vec2 = [];
   for(i = 0; i < players.size; i++) {
     player = players[i];
@@ -1038,7 +1028,7 @@ targets_and_uses_turret(node) {
   if(!isDefined(node.target)) {
     return false;
   }
-  turrets = getentarray(node.target, "targetname");
+  turrets = getEntArray(node.target, "targetname");
   if(!turrets.size) {
     return false;
   }
@@ -1076,9 +1066,7 @@ crawl_target_and_init_flags(ent, get_func) {
         }
       }
       if(isDefined(ent.target)) {
-        new_targets = [
-          [get_func]
-        ](ent.target);
+        new_targets = [[get_func]](ent.target);
         targets = add_to_array(targets, new_targets);
       }
     }
@@ -1104,7 +1092,7 @@ get_node_funcs_based_on_target(node, goal_type) {
   if(isDefined(node)) {
     array["node"][0] = node;
   } else {
-    node = getentarray(self.target, "targetname");
+    node = getEntArray(self.target, "targetname");
     if(node.size > 0) {
       goal_type = "origin";
     }
@@ -1692,10 +1680,10 @@ tanksquish() {
     force = vector_scale(force, 50000);
     force = (force[0], force[1], abs(force[2]));
     if(isDefined(level._effect) && isDefined(level._effect["tanksquish"])) {
-      PlayFX(level._effect["tanksquish"], self.origin + (0, 0, 30));
+      playFX(level._effect["tanksquish"], self.origin + (0, 0, 30));
     }
     self startRagdoll();
-    self playsound("chr_crunch");
+    self playSound("chr_crunch");
     return;
   }
 }
@@ -1726,7 +1714,7 @@ goalVolumes() {
 
 aigroup_init(aigroup, spawner) {
   if(!isDefined(level._ai_group[aigroup])) {
-    level._ai_group[aigroup] = SpawnStruct();
+    level._ai_group[aigroup] = spawnStruct();
     level._ai_group[aigroup].aigroup = aigroup;
     level._ai_group[aigroup].aicount = 0;
     level._ai_group[aigroup].spawnercount = 0;
@@ -1912,7 +1900,7 @@ player_saw_kill(guy, attacker) {
   if(isDefined(closest_player) && distance(guy.origin, closest_player.origin) < 200) {
     return true;
   }
-  return bulletTracePassed(closest_player geteye(), guy geteye(), false, undefined);
+  return bulletTracePassed(closest_player getEye(), guy getEye(), false, undefined);
 }
 
 show_bad_path() {}

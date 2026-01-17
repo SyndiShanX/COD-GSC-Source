@@ -60,7 +60,7 @@ playerjump(client_num, player, surfacetype, firstperson, quiet, islouder) {
   }
 
   sound_alias = level.playerfootsounds["step_run"][surfacetype][firstperson][islouder];
-  player playsound(client_num, sound_alias);
+  player playSound(client_num, sound_alias);
 }
 
 playerland(client_num, player, surfacetype, firstperson, quiet, damageplayer, islouder) {
@@ -72,11 +72,11 @@ playerland(client_num, player, surfacetype, firstperson, quiet, damageplayer, is
   }
 
   sound_alias = level.playerfootsounds["land"][surfacetype][firstperson][islouder];
-  player playsound(client_num, sound_alias);
+  player playSound(client_num, sound_alias);
 
   if(isDefined(player.step_sound) && !quiet && player.step_sound != "none") {
     volume = clientscripts\mp\_audio::get_vol_from_speed(player);
-    player playsound(client_num, player.step_sound, player.origin, volume);
+    player playSound(client_num, player.step_sound, player.origin, volume);
   }
 
   if(damageplayer) {
@@ -87,7 +87,7 @@ playerland(client_num, player, surfacetype, firstperson, quiet, damageplayer, is
 
       if(firstperson) {
         sound_alias = "fly_land_damage_plr";
-        player playsound(client_num, sound_alias);
+        player playSound(client_num, sound_alias);
       }
     }
   }
@@ -100,7 +100,7 @@ playerfoliage(client_num, player, firstperson, quiet) {
     sound_alias = "fly_movement_foliage_plr";
 
   volume = clientscripts\mp\_audio::get_vol_from_speed(player);
-  player playsound(client_num, sound_alias, player.origin, volume);
+  player playSound(client_num, sound_alias, player.origin, volume);
 }
 
 createsoundaliasslot(movementtype, surfacetype, firstperson, islouder) {
@@ -144,7 +144,7 @@ do_foot_effect(client_num, ground_type, foot_pos, on_fire) {
       effect = "fly_step_" + ground_type;
 
       if(isDefined(level._effect[effect])) {
-        playfx(client_num, level._effect[effect], foot_pos, foot_pos + vectorscale((0, 0, 1), 100.0));
+        playFX(client_num, level._effect[effect], foot_pos, foot_pos + vectorscale((0, 0, 1), 100.0));
         return;
       }
     }

@@ -32,7 +32,6 @@ generic_human() {
   level.scr_anim["generic"]["casual_killer_flinch"] = % casual_killer_flinch;
   level.scr_anim["generic"]["casual_killer_weapon_swap"] = % casual_killer_walk_F_weapon_swap;
 
-
   // SIGNALS
   level.scr_anim["generic"]["stand_exposed_wave_move_out"] = % stand_exposed_wave_move_out;
   level.scr_anim["generic"]["stand_exposed_wave_halt_v2"] = % stand_exposed_wave_halt_v2;
@@ -415,14 +414,10 @@ generic_human() {
   level.scr_anim["makarov"]["end_player_shot"] = % airport_ending_mid_makarov;
   addNotetrack_attach("makarov", "pistol_pickup", getWeaponModel("beretta"), "TAG_INHAND", "end_player_shot");
 
-
-
-
   level.scr_anim["van_mate"]["end_player_shot"] = % airport_ending_mid_soldierB;
   //addNotetrack_dialogue( "van_mate", "dialog", "end_player_shot", "airport_vt_beenough" );
   level.scr_anim["makarov"]["end_drive_away"] = % airport_ending_end_makarov;
   addNotetrack_customFunction("makarov", "lookat off", ::lookat_off, "end_drive_away");
-
 
   level.scr_anim["generic"]["van_end_ride_in"][0] = % airport_ending_start_soldierB;
   level.scr_anim["generic"]["com_end_get_in"] = % airport_ending_climbin_soldierA;
@@ -590,10 +585,6 @@ linebook() {
   level.scr_sound["makarov"]["airport_mkv_haventweall"] = "airport_mkv_haventweall";
   level.scr_sound["makarov"]["airport_mkv_haventweall2"] = "airport_mkv_haventweall2";
 
-
-
-
-
   //TARMAC
   //Go! Go! Go!
   level.scr_sound["makarov"]["airport_mkv_gogogo"] = "airport_mkv_gogogo";
@@ -727,8 +718,6 @@ linebook() {
   //Go! Go! Go!			
   //	level.scr_sound[ "makarov" ][ "go1" ] 				= "airport_mkv_gogogo";
 
-
-
   level.scr_radio["airport_at1_scream"] = "airport_at1_scream";
 
   //ESCAPE
@@ -767,7 +756,7 @@ makarov_aim_player(guy) {
   self setAnimLimited( % airport_ending_aim4_makarov, 1, 0);
   self setAnimLimited( % airport_ending_aim6_makarov, 1, 0);
 
-  while (1) {
+  while(1) {
     angleYaw = VectorToAngles(level.player.origin - self.origin)[1];
     angleYaw = AngleClamp180(self.angles[1] - angleYaw);
     angleYaw = clamp(angleYaw, -60, 60);
@@ -802,7 +791,7 @@ gun_fx(guy) {
 gun_off(guy) {
   guy gun_remove();
   wait .25;
-  guy playsound("scn_airport_weapon_catch");
+  guy playSound("scn_airport_weapon_catch");
 }
 
 lookat_on(guy) {
@@ -817,7 +806,7 @@ doorkick_basement(guy) {
   door = getent("basement_door", "targetname");
   door connectpaths();
 
-  door playsound("wood_door_kick");
+  door playSound("wood_door_kick");
   door rotateyaw(95, .25, 0, .25);
   door waittill("rotatedone");
   door rotateyaw(-20, 2, 0, 2);
@@ -826,7 +815,7 @@ doorkick_basement(guy) {
 doorkick_escape(guy) {
   door = getent("escape_door", "targetname");
   door connectpaths();
-  door playsound("wood_door_kick");
+  door playSound("wood_door_kick");
   door rotateyaw(-95, .25, 0, .25);
   door waittill("rotatedone");
   door rotateyaw(20, 2, 0, 2);
@@ -847,7 +836,7 @@ _ignoreme_off(guy) {
 
 nadethrow_elev(guy) {
   guy.grenadeAmmo++;
-  vec = anglestoforward(guy.angles);
+  vec = anglesToForward(guy.angles);
   ri = anglestoright(guy.angles);
   ri = vector_multiply(ri, -.25);
   end = guy.origin + vector_multiply(vec, 50);
@@ -867,7 +856,7 @@ nadethrow_elev(guy) {
 
 nadethrow_mak(guy) {
   guy.grenadeAmmo++;
-  vec = anglestoforward(guy.angles);
+  vec = anglesToForward(guy.angles);
   ri = anglestoright(guy.angles);
   ri = vector_multiply(ri, 4);
   end = guy.origin + vector_multiply(vec, 50);
@@ -883,7 +872,7 @@ nadethrow(guy) {
   oldGrenadeWeapon = guy.grenadeWeapon;
   guy.grenadeWeapon = "flash_grenade";
   guy.grenadeAmmo++;
-  vec = anglestoforward(guy.angles);
+  vec = anglesToForward(guy.angles);
   end = guy.origin + vector_multiply(vec, 50);
   end = end + (0, 0, 5);
   dmg = end + (0, 0, 30);
@@ -896,7 +885,7 @@ nadethrow(guy) {
   wait .1;
   //make the glass break
   //model = spawn( "script_model", dmg );
-  //model setmodel( "weapon_us_smoke_grenade" );
+  //model setModel( "weapon_us_smoke_grenade" );
   radiusdamage(dmg, 64, 5000, 5000);
 }
 
@@ -933,7 +922,7 @@ slide_death(guy) {
   vec = vectornormalize(enemy.origin - origin);
   vec2 = vector_multiply(vec, 10);
 
-  PlayFX(getfx("killshot"), origin + vec2, vec);
+  playFX(getfx("killshot"), origin + vec2, vec);
 
   guy thread anim_generic(guy, "slide_across_car_death");
   wait 1;

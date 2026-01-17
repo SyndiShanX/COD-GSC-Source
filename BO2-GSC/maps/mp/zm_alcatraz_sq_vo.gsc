@@ -514,7 +514,7 @@ escape_flight_vo() {
 
     foreach(player in players) {
       if(isDefined(player) && player.character_name == character_name)
-        player playsound("vox_plr_" + player.characterindex + "_plane_flight_0");
+        player playSound("vox_plr_" + player.characterindex + "_plane_flight_0");
     }
   }
 
@@ -527,7 +527,7 @@ escape_flight_vo() {
 
     foreach(player in players) {
       if(isDefined(player) && player.character_name == character_name)
-        player playsound("vox_plr_" + player.characterindex + "_plane_crash_0");
+        player playSound("vox_plr_" + player.characterindex + "_plane_crash_0");
     }
   }
 
@@ -561,7 +561,7 @@ sndhitelectrifiedpulley(str_master_key_location) {
 
   while(true) {
     self waittill("trigger", e_triggerer);
-    self playsound("fly_elec_sparks_key");
+    self playSound("fly_elec_sparks_key");
     wait 1;
   }
 }

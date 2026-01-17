@@ -8,7 +8,6 @@
 #include scripts\core_common\math_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace shroud;
 
 autoexec __init__system__() {
@@ -25,7 +24,7 @@ arrow_spawned(localclientnum) {
   self.var_44dad7e8 = 1;
 }
 
-private function_37bf13ad(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+function_37bf13ad(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self endon(#"death");
   starttime = gettime();
 
@@ -52,7 +51,7 @@ private function_37bf13ad(localclientnum, oldval, newval, bnewent, binitialsnap,
   }
 }
 
-private function_90fc4e4c() {
+function_90fc4e4c() {
   if(isDefined(self.var_981be9e8)) {
     if(!isDefined(level.var_effa221)) {
       level.var_effa221 = [];
@@ -84,7 +83,7 @@ private function_90fc4e4c() {
   }
 }
 
-private function_a252eaf0(localclientnum, entnum, team) {
+function_a252eaf0(localclientnum, entnum, team) {
   self waittill(#"death");
 
   if(isDefined(self.iconent)) {
@@ -104,17 +103,17 @@ private function_a252eaf0(localclientnum, entnum, team) {
   }
 }
 
-private function_27e74bc4() {
+function_27e74bc4() {
   self notify("7fcaa52d398d10a6");
   self endon("7fcaa52d398d10a6");
-  self waittill(#"death", #"disconnect");
+  self waittill(#"death", # "disconnect");
 
   if(isDefined(self.var_981be9e8)) {
     self.var_981be9e8 delete();
   }
 }
 
-private function_e3a084cd(localclientnum, bwastimejump) {
+function_e3a084cd(localclientnum, bwastimejump) {
   localplayer = function_5c10bd79(localclientnum);
 
   if(bwastimejump === 1) {
@@ -177,7 +176,7 @@ private function_e3a084cd(localclientnum, bwastimejump) {
   }
 }
 
-private function_99c31219(localclientnum) {
+function_99c31219(localclientnum) {
   players = getplayers(localclientnum);
 
   foreach(player in players) {
@@ -192,7 +191,7 @@ private function_99c31219(localclientnum) {
   }
 }
 
-private function_25f0bf77(localclientnum) {
+function_25f0bf77(localclientnum) {
   self endon(#"death");
   function_99c31219(localclientnum);
   var_e74c7608 = 10;

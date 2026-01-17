@@ -35,7 +35,7 @@ init() {
 endonRemoveAnimActive(endonString, guyPackets) {
   self endon("newAnimActive");
   self waittill(endonString);
-  for (i = 0; i < guyPackets.size; i++) {
+  for(i = 0; i < guyPackets.size; i++) {
     guy = guyPackets[i]["guy"];
     if(!isDefined(guy)) {
       continue;
@@ -95,7 +95,7 @@ anim_custom_animmode(guys, custom_animmode, anime, tag) {
   array = get_anim_position(tag);
   org = array["origin"];
   angles = array["angles"];
-  for (i = 0; i < guys.size; i++) {
+  for(i = 0; i < guys.size; i++) {
     thread anim_custom_animmode_on_guy(guys[i], custom_animmode, anime, org, angles);
   }
   assertex(isDefined(guys[0]), "anim_custom_animmode called without a guy in the array");
@@ -155,14 +155,14 @@ assert_existance_of_anim(anime, animname) {
     if(has_anim) {
       array = getarraykeys(level.scr_anim[animname]);
       println("Legal anime scenes for " + animname + ":");
-      for (i = 0; i < array.size; i++) {
+      for(i = 0; i < array.size; i++) {
         println(array[i]);
       }
     }
     if(has_sound) {
       array = getarraykeys(level.scr_sound[animname]);
       println("Legal scr_sound scenes for " + animname + ":");
-      for (i = 0; i < array.size; i++) {
+      for(i = 0; i < array.size; i++) {
         println(array[i]);
       }
     }
@@ -172,7 +172,7 @@ assert_existance_of_anim(anime, animname) {
   }
   keys = getarraykeys(level.scr_anim);
   keys = array_combine(keys, getarraykeys(level.scr_sound));
-  for (i = 0; i < keys.size; i++) {
+  for(i = 0; i < keys.size; i++) {
     println(keys[i]);
   }
   assertmsg("Animname " + animname + " is not setup to do animations. See above for list of legal animnames.");
@@ -214,7 +214,7 @@ anim_custom_animmode_on_guy(guy, custom_animmode, anime, org, angles, animname_o
 
 anim_loop(guys, anime, tag, ender, entity) {
   guyPackets = [];
-  for (i = 0; i < guys.size; i++) {
+  for(i = 0; i < guys.size; i++) {
     packet = [];
     packet["guy"] = guys[i];
     packet["entity"] = entity;
@@ -231,7 +231,7 @@ anim_loop_packet_solo(singleGuyPacket, anime, ender) {
 }
 
 anim_loop_packet(guyPackets, anime, ender, animname_override) {
-  for (i = 0; i < guyPackets.size; i++) {
+  for(i = 0; i < guyPackets.size; i++) {
     guy = guyPackets[i]["guy"];
     if(!isDefined(guy)) {
       continue;
@@ -259,15 +259,15 @@ anim_loop_packet(guyPackets, anime, ender, animname_override) {
     base_animname = baseGuy.animname;
   idleanim = 0;
   lastIdleanim = 0;
-  while (1) {
+  while(1) {
     idleanim = anim_weight(base_animname, anime);
-    while ((idleanim == lastIdleanim) && (idleanim != 0))
+    while((idleanim == lastIdleanim) && (idleanim != 0))
       idleanim = anim_weight(base_animname, anime);
     lastIdleanim = idleanim;
     scriptedAnimationIndex = -1;
     scriptedAnimationTime = 999999;
     scriptedSoundIndex = -1;
-    for (i = 0; i < guyPackets.size; i++) {
+    for(i = 0; i < guyPackets.size; i++) {
       guy = guyPackets[i]["guy"];
       pos = get_anim_position(guyPackets[i]["tag"], guyPackets[i]["entity"]);
       org = pos["origin"];
@@ -307,7 +307,7 @@ anim_loop_packet(guyPackets, anime, ender, animname_override) {
       }
       if(isDefined(level.scr_animSound[animname]) &&
         isDefined(level.scr_animSound[animname][idleanim + anime])) {
-        guy playsound(level.scr_animSound[animname][idleanim + anime]);
+        guy playSound(level.scr_animSound[animname][idleanim + anime]);
       }
       if(getdebugdvar("animsound") == "on") {
         guy thread animsound_start_tracker_loop(anime, idleanim, animname);
@@ -379,14 +379,14 @@ anim_single_failsafeOnGuy(owner, anime) {
 }
 
 anim_single_failsafe(guy, anime) {
-  for (i = 0; i < guy.size; i++)
+  for(i = 0; i < guy.size; i++)
     guy[i] thread anim_single_failsafeOnGuy(self, anime);
 }
 
 anim_single(guys, anime, tag, node, tag_entity, animname_override) {
   entity = convert_tagent_to_ent(node, tag_entity);
   thread anim_single_failsafe(guys, anime);
-  for (i = 0; i < guys.size; i++) {
+  for(i = 0; i < guys.size; i++) {
     if(!isDefined(guys[i]))
       continue;
     if(!isDefined(guys[i]._animActive))
@@ -401,7 +401,7 @@ anim_single(guys, anime, tag, node, tag_entity, animname_override) {
   scriptedSoundIndex = -1;
   scriptedFaceIndex = -1;
   anim_string = "single anim";
-  for (i = 0; i < guys.size; i++) {
+  for(i = 0; i < guys.size; i++) {
     guy = guys[i];
     doFacialanim = false;
     doDialogue = false;
@@ -438,7 +438,7 @@ anim_single(guys, anime, tag, node, tag_entity, animname_override) {
       doLook = true;
     if(isDefined(level.scr_animSound[animname]) &&
       isDefined(level.scr_animSound[animname][anime])) {
-      guy playsound(level.scr_animSound[animname][anime]);
+      guy playSound(level.scr_animSound[animname][anime]);
     }
     if(getdebugdvar("animsound") == "on") {
       guy thread animsound_start_tracker(anime, animname);
@@ -497,24 +497,24 @@ anim_single(guys, anime, tag, node, tag_entity, animname_override) {
     }
   }
   if(scriptedAnimationIndex != -1) {
-    ent = spawnstruct();
+    ent = spawnStruct();
     ent thread anim_deathNotify(guys[scriptedAnimationIndex], anime);
     ent thread anim_animationEndNotify(guys[scriptedAnimationIndex], anime);
     ent waittill(anime);
   } else
   if(scriptedFaceIndex != -1) {
-    ent = spawnstruct();
+    ent = spawnStruct();
     ent thread anim_deathNotify(guys[scriptedFaceIndex], anime);
     ent thread anim_facialEndNotify(guys[scriptedFaceIndex], anime);
     ent waittill(anime);
   } else
   if(scriptedSoundIndex != -1) {
-    ent = spawnstruct();
+    ent = spawnStruct();
     ent thread anim_deathNotify(guys[scriptedSoundIndex], anime);
     ent thread anim_dialogueEndNotify(guys[scriptedSoundIndex], anime);
     ent waittill(anime);
   }
-  for (i = 0; i < guys.size; i++) {
+  for(i = 0; i < guys.size; i++) {
     if(!isDefined(guys[i]))
       continue;
     guys[i]._animActive--;
@@ -555,7 +555,7 @@ animscriptDoNoteTracksThread(guy, animstring, anime) {
 }
 
 add_animsound(newSound) {
-  for (i = 0; i < level.animsound_hudlimit; i++) {
+  for(i = 0; i < level.animsound_hudlimit; i++) {
     if(isDefined(self.animsounds[i])) {
       continue;
     }
@@ -565,7 +565,7 @@ add_animsound(newSound) {
   keys = getarraykeys(self.animsounds);
   index = keys[0];
   timer = self.animsounds[index].end_time;
-  for (i = 1; i < keys.size; i++) {
+  for(i = 1; i < keys.size; i++) {
     key = keys[i];
     if(self.animsounds[key].end_time < timer) {
       timer = self.animsounds[key].end_time;
@@ -577,7 +577,7 @@ add_animsound(newSound) {
 
 animSound_exists(anime, notetrack) {
   keys = getarraykeys(self.animSounds);
-  for (i = 0; i < keys.size; i++) {
+  for(i = 0; i < keys.size; i++) {
     key = keys[i];
     if(self.animSounds[key].anime != anime)
       continue;
@@ -648,13 +648,13 @@ notetrack_wait(guy, msg, tag_entity, anime, animname_override) {
   dialogue_array = [];
   has_scripted_notetracks = isDefined(level.scr_notetrack[animname]);
   if(has_scripted_notetracks) {
-    for (i = 0; i < level.scr_notetrack[animname].size; i++) {
+    for(i = 0; i < level.scr_notetrack[animname].size; i++) {
       scr_notetrack = level.scr_notetrack[animname][i];
       if(isDefined(scr_notetrack["dialog"]))
         dialogue_array[scr_notetrack["dialog"]] = true;
     }
   }
-  while (1) {
+  while(1) {
     dialogueNotetrack = false;
     guy waittill(msg, notetrack);
     if(getdebugdvar("animsound") == "on") {
@@ -664,7 +664,7 @@ notetrack_wait(guy, msg, tag_entity, anime, animname_override) {
       return;
     }
     if(has_scripted_notetracks) {
-      for (i = 0; i < level.scr_notetrack[animname].size; i++) {
+      for(i = 0; i < level.scr_notetrack[animname].size; i++) {
         scr_notetrack = level.scr_notetrack[animname][i];
         if(notetrack == ToLower(scr_notetrack["notetrack"])) {
           if(scr_notetrack["anime"] != "any" && scr_notetrack["anime"] != anime) {
@@ -722,20 +722,20 @@ notetrack_wait(guy, msg, tag_entity, anime, animname_override) {
             anim_removeModel(guy, scr_notetrack);
           if((isDefined(scr_notetrack["selftag"])) &&
             (isDefined(scr_notetrack["effect"]))) {
-            playfxOnTag(
+            playFXOnTag(
               level._effect[scr_notetrack["effect"]], guy,
               scr_notetrack["selftag"]);
           }
           if(isDefined(scr_notetrack["tag"]) && isDefined(scr_notetrack["effect"])) {
-            playfxOnTag(level._effect[scr_notetrack["effect"]], tag_owner, scr_notetrack["tag"]);
+            playFXOnTag(level._effect[scr_notetrack["effect"]], tag_owner, scr_notetrack["tag"]);
           }
           if(isDefined(level.scr_special_notetrack[animname])) {
             tag = random(level.scr_special_notetrack[animname]);
             if(isDefined(tag["tag"]))
-              playfxOnTag(level._effect[tag["effect"]], tag_owner, tag["tag"]);
+              playFXOnTag(level._effect[tag["effect"]], tag_owner, tag["tag"]);
             else
             if(isDefined(tag["selftag"]))
-              playfxOnTag(level._effect[tag["effect"]], self, tag["tag"]);
+              playFXOnTag(level._effect[tag["effect"]], self, tag["tag"]);
           }
         }
       }
@@ -753,7 +753,7 @@ anim_addModel(guy, array) {
     guy.ScriptModel = [];
   index = guy.ScriptModel.size;
   guy.ScriptModel[index] = spawn("script_model", (0, 0, 0));
-  guy.ScriptModel[index] setmodel(array["create model"]);
+  guy.ScriptModel[index] setModel(array["create model"]);
   guy.ScriptModel[index].origin = guy gettagOrigin(array["selftag"]);
   guy.ScriptModel[index].angles = guy gettagAngles(array["selftag"]);
 }
@@ -761,12 +761,12 @@ anim_addModel(guy, array) {
 anim_removeModel(guy, array) {
   if(!isDefined(guy.ScriptModel))
     assertMsg("Tried to remove a model with delete model before it was create model'd on guy: " + guy.animname);
-  for (i = 0; i < guy.ScriptModel.size; i++) {
+  for(i = 0; i < guy.ScriptModel.size; i++) {
     if(isDefined(array["explosion"])) {
       forward = anglesToForward(guy.scriptModel[i].angles);
       forward = vectorScale(forward, 120);
       forward += guy.scriptModel[i].origin;
-      playfx(level._effect[array["explosion"]], guy.scriptModel[i].origin);
+      playFX(level._effect[array["explosion"]], guy.scriptModel[i].origin);
       radiusDamage(guy.scriptModel[i].origin, 350, 700, 50);
     }
     guy.scriptModel[i] delete();
@@ -808,9 +808,9 @@ gun_leave_behind(scr_notetrack) {
   if(isDefined(self.gun_on_ground)) {
     return;
   }
-  gun = Spawn("script_model", (0, 0, 0));
+  gun = spawn("script_model", (0, 0, 0));
   model = GetWeaponModel(self.weapon);
-  gun SetModel(model);
+  gun setModel(model);
   self.gun_on_ground = gun;
   gun.origin = self GetTagOrigin(scr_notetrack["tag"]);
   gun.angles = self GetTagAngles(scr_notetrack["tag"]);
@@ -830,7 +830,7 @@ anim_weight(animname, anime) {
   if(total_anims > 1) {
     weights = 0;
     anim_weight = 0;
-    for (i = 0; i < total_anims; i++) {
+    for(i = 0; i < total_anims; i++) {
       if(isDefined(level.scr_anim[animname][anime + "weight"])) {
         if(isDefined(level.scr_anim[animname][anime + "weight"][i])) {
           weights++;
@@ -841,7 +841,7 @@ anim_weight(animname, anime) {
     if(weights == total_anims) {
       anim_play = randomfloat(anim_weight);
       anim_weight = 0;
-      for (i = 0; i < total_anims; i++) {
+      for(i = 0; i < total_anims; i++) {
         anim_weight += level.scr_anim[animname][anime + "weight"][i];
         if(anim_play < anim_weight) {
           idleanim = i;
@@ -863,13 +863,13 @@ convert_tagent_to_ent(node, tag_entity) {
 anim_reach_and_idle(guy, anime, anime_idle, ender, tag, node, tag_entity) {
   entity = convert_tagent_to_ent(node, tag_entity);
   thread anim_reach(guy, anime, tag, entity);
-  ent = spawnstruct();
+  ent = spawnStruct();
   ent.reachers = 0;
-  for (i = 0; i < guy.size; i++) {
+  for(i = 0; i < guy.size; i++) {
     ent.reachers++;
     thread idle_on_reach(guy[i], anime_idle, ender, tag, entity, ent);
   }
-  for (;;) {
+  for(;;) {
     ent waittill("reached_position");
     if(ent.reachers <= 0)
       return;
@@ -923,11 +923,11 @@ anim_reach_with_funcs(guys, anime, tag, node, tag_entity, animname_override, sta
   array = get_anim_position(tag, entity);
   org = array["origin"];
   angles = array["angles"];
-  ent = spawnstruct();
+  ent = spawnStruct();
   debugStartpos = false;
   debugStartpos = getdebugdvar("debug_animreach") == "on";
   threads = 0;
-  for (i = 0; i < guys.size; i++) {
+  for(i = 0; i < guys.size; i++) {
     guy = guys[i];
     if(isDefined(animname_override))
       animname = animname_override;
@@ -943,13 +943,13 @@ anim_reach_with_funcs(guys, anime, tag, node, tag_entity, animname_override, sta
     threads++;
     guy thread begin_anim_reach(ent, startOrg, start_func, end_func);
   }
-  while (threads) {
+  while(threads) {
     ent waittill("reach_notify");
     threads--;
   }
   if(debugStartpos)
     level notify("x" + "clearAnimDebug");
-  for (i = 0; i < guys.size; i++) {
+  for(i = 0; i < guys.size; i++) {
     if(isalive(guys[i]))
       guys[i].goalradius = guys[i].oldgoalradius;
   }
@@ -960,8 +960,8 @@ anim_teleport(guy, anime, tag, node, tag_entity) {
   pos = get_anim_position(tag, entity);
   org = pos["origin"];
   angles = pos["angles"];
-  ent = spawnstruct();
-  for (i = 0; i < guy.size; i++) {
+  ent = spawnStruct();
+  for(i = 0; i < guy.size; i++) {
     startorg = getstartOrigin(org, angles, level.scr_anim[guy[i].animname][anime]);
     if(isSentient(guy[i]))
       guy[i] teleport(startorg);
@@ -975,8 +975,8 @@ anim_spawner_teleport(guy, anime, tag, node, tag_entity) {
   pos = get_anim_position(tag, entity);
   org = pos["origin"];
   angles = pos["angles"];
-  ent = spawnstruct();
-  for (i = 0; i < guy.size; i++) {
+  ent = spawnStruct();
+  for(i = 0; i < guy.size; i++) {
     startorg = getstartOrigin(org, angles, level.scr_anim[guy[i].animname][anime]);
     guy[i].origin = startorg;
   }
@@ -1056,7 +1056,7 @@ looping_anim_ender(guy, ender) {
 }
 
 get_animtree(guy) {
-  for (i = 0; i < guy.size; i++)
+  for(i = 0; i < guy.size; i++)
     guy[i] UseAnimTree(level.scr_animtree[guy[i].animname]);
 }
 SetAnimTree() {
@@ -1133,7 +1133,7 @@ anim_loop_debug(guy, anime, tag, ender, node, tag_entity) {
   println("Node: ", node);
   println("Tag_entity: ", tag_entity);
   println("Entity calling loop: ", self, ", classname: ", self.classname);
-  for (i = 0; i < guy.size; i++) {
+  for(i = 0; i < guy.size; i++) {
     if(isDefined(guy[i])) {
       continue;
     }
@@ -1166,7 +1166,7 @@ anim_single_debug(guy, anime, tag, node, tag_entity) {
   println("Node: ", node);
   println("Tag_entity: ", tag_entity);
   println("Entity calling loop: ", self, ", classname: ", self.classname);
-  for (i = 0; i < guy.size; i++) {
+  for(i = 0; i < guy.size; i++) {
     if(isDefined(guy[i])) {
       continue;
     }
@@ -1200,7 +1200,7 @@ add_animation(animname, anime) {
     if(!isDefined(level.completedAnims[animname]))
       level.completedAnims[animname][0] = anime;
     else {
-      for (i = 0; i < level.completedAnims[animname].size; i++) {
+      for(i = 0; i < level.completedAnims[animname].size; i++) {
         if(level.completedAnims[animname][i] == anime)
           return;
       }
@@ -1221,7 +1221,7 @@ anim_single_queue(guy, anime, tag, node, tag_entity) {
 anim_single_queue_thread(guy, anime, tag, node, tag_entity) {
   guy endon("death");
   queueTime = gettime();
-  while (1) {
+  while(1) {
     if(!isDefined(self._anim_solo_queue)) {
       break;
     }
@@ -1239,13 +1239,13 @@ anim_single_queue_thread(guy, anime, tag, node, tag_entity) {
 }
 
 anim_dontPushPlayer(guy) {
-  for (i = 0; i < guy.size; i++) {
+  for(i = 0; i < guy.size; i++) {
     guy[i] pushPlayer(false);
   }
 }
 
 anim_pushPlayer(guy) {
-  for (i = 0; i < guy.size; i++) {
+  for(i = 0; i < guy.size; i++) {
     guy[i] pushPlayer(true);
   }
 }
@@ -1263,7 +1263,7 @@ addNotetrack_dialogue(animname, notetrack, anime, soundalias, pg_soundalias) {
 removeNotetrack_dialogue(animname, notetrack, anime, soundalias) {
   assertex(isDefined(level.scr_notetrack[animname]), "Animname not found in scr_notetrack.");
   tmp_array = [];
-  for (i = 0; i < level.scr_notetrack[animname].size; i++) {
+  for(i = 0; i < level.scr_notetrack[animname].size; i++) {
     if(level.scr_notetrack[animname][i]["notetrack"] == notetrack) {
       dialog = level.scr_notetrack[animname][i]["dialog"];
       if(!isDefined(dialog))
@@ -1359,7 +1359,7 @@ addNotetrack_customFunction(animname, notetrack, function, anime) {
 notetrack_customfunction_exists(animname, notetrack, function, anime) {
   if(isDefined(level.scr_notetrack) && isDefined(level.scr_notetrack[animname])) {
     keys = GetArraykeys(level.scr_notetrack[animname]);
-    for (i = 0; i < keys.size; i++) {
+    for(i = 0; i < keys.size; i++) {
       if(isDefined(level.scr_notetrack[animname][keys[i]]) &&
         isDefined(level.scr_notetrack[animname][keys[i]]["notetrack"]) &&
         isDefined(level.scr_notetrack[animname][keys[i]]["anime"]) &&
@@ -1439,13 +1439,13 @@ anim_ents(ents, anime, tag, node, tag_entity, animname) {
   }
   assertEx(isDefined(animname), "_anim::anim_ents() - Animname is not defined");
   if(isDefined(level.scr_model[animname])) {
-    parent_model = Spawn("script_model", origin);
+    parent_model = spawn("script_model", origin);
     parent_model.angles = angles;
     parent_model.animname = animname;
     parent_model SetAnimTree();
-    parent_model SetModel(level.scr_model[animname]);
+    parent_model setModel(level.scr_model[animname]);
   }
-  for (i = 0; i < ents.size; i++) {
+  for(i = 0; i < ents.size; i++) {
     ents[i].animname = animname;
     if(isDefined(parent_model)) {
       assertEx(isDefined(ents[i].script_linkto), "_anim::anim_ents() - Entity at " + ents[i].origin + " does not have a script_linkto Key/Value");
@@ -1465,7 +1465,7 @@ anim_ents(ents, anime, tag, node, tag_entity, animname) {
 }
 
 set_animname(ents, animname) {
-  for (i = 0; i < ents.size; i++) {
+  for(i = 0; i < ents.size; i++) {
     ents[i].animname = animname;
   }
 }
@@ -1482,7 +1482,7 @@ anim_look(guy, anime, array) {
   guy setanimknobrestart(array["right"], 1, 0.2, 1);
   guy setanim( % scripted, 0.01, 0.3, 1);
   closeToZero = 0.01;
-  for (;;) {
+  for(;;) {
     destYaw = guy GetYawToOrigin(level.player.origin);
     if(destYaw <= array["left_angle"]) {
       animWeights["left"] = 1;
@@ -1541,7 +1541,7 @@ anim_facialFiller(msg, lookTarget) {
 
 set_talker_until_msg(msg, talkanim) {
   self endon(msg);
-  for (;;) {
+  for(;;) {
     self setanimknob(talkAnim, 1, 0, 1);
     self setanim( % scripted_talking, 1, 0.1);
     wait(0.05);
@@ -1579,7 +1579,7 @@ chatAtTarget(msg, lookTarget) {
   org = looktarget.origin;
   moveRange = 2.0;
   changeTime = 0.3;
-  for (;;) {
+  for(;;) {
     if(isalive(looktarget))
       org = looktarget.origin;
     if(getdebugdvar("debug_chatlook") == "on")
@@ -1635,18 +1635,18 @@ lookLine(org, msg) {
   self endon("lookline");
   self endon(msg);
   self endon("death");
-  for (;;) {
-    line(self geteye(), org + (0, 0, 60), (1, 1, 0), 1);
+  for(;;) {
+    line(self getEye(), org + (0, 0, 60), (1, 1, 0), 1);
     wait(0.05);
   }
 }
 
 anim_reach_idle(guy, anime, idle) {
-  ent = spawnstruct();
+  ent = spawnStruct();
   ent.count = guy.size;
-  for (i = 0; i < guy.size; i++)
+  for(i = 0; i < guy.size; i++)
     thread reachIdle(guy[i], anime, idle, ent);
-  while (ent.count)
+  while(ent.count)
     ent waittill("reached_goal");
   self notify("stopReachIdle");
 }
@@ -1691,13 +1691,13 @@ queue_anim(anime, node, tag, tag_entity) {
 
 queue_anim_single_solo_with_reach(guy, anime, tag, node, tag_entity) {
   entity = convert_tagent_to_ent(node, tag_entity);
-  animePacket = spawnstruct();
+  animePacket = spawnStruct();
   animePacket.reach = true;
   animePacket process_queue_packet(guy, anime, tag, entity);
 }
 
 queue_anim_single_solo(guy, anime) {
-  animePacket = spawnstruct();
+  animePacket = spawnStruct();
   animePacket.reach = false;
   animePacket process_queue_packet(guy, anime);
 }
@@ -1714,7 +1714,7 @@ process_queue_packet(guy, anime, tag, entity) {
   if(!isDefined(guy.anime_queue))
     guy.anime_queue = [];
   guy.anime_queue[guy.anime_queue.size] = self;
-  for (;;) {
+  for(;;) {
     if(guy.anime_queue[0] != self) {
       guy waittill("finished_queued_animation");
       continue;
@@ -1727,7 +1727,7 @@ process_queue_packet(guy, anime, tag, entity) {
     packet.anime_base anim_single_solo(packet.guy, packet.anime, packet.tag, packet.entity);
     packet.guy set_battleChatter(lastBattleChatter);
     newQueue = [];
-    for (i = 1; i < guy.anime_queue.size; i++) {
+    for(i = 1; i < guy.anime_queue.size; i++) {
       newQueue[newQueue.size] = guy.anime_queue[i];
     }
     guy.anime_queue = newQueue;
@@ -1747,7 +1747,7 @@ waittill_empty_queue() {
   if(!isDefined(self.anim_queue)) {
     return;
   }
-  for (;;) {
+  for(;;) {
     if(self.anime_queue.size <= 0) {
       return;
     }
@@ -1803,7 +1803,7 @@ add_to_animsound() {
     self.animSounds = [];
   }
   isInArray = false;
-  for (i = 0; i < level.animSounds.size; i++) {
+  for(i = 0; i < level.animSounds.size; i++) {
     if(self == level.animSounds[i]) {
       isInArray = true;
       break;
@@ -1894,7 +1894,7 @@ anim_single_solo_earlyout(guy, anime, tag, node, tag_entity, animname_override, 
 }
 
 anim_single_earlyout(guys, anime, tag, node, tag_entity, animname_override, time) {
-  for (i = 0; i < guys.size; i++) {
+  for(i = 0; i < guys.size; i++) {
     self thread earlyout_animscripted(guys[i], anime, time);
   }
   self anim_single(guys, anime, tag, node, tag_entity, animname_override);

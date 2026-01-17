@@ -14,7 +14,7 @@ main() {
   var_4 = (0, 0, var_2 / var_3);
   self traversemode("noclip");
 
-  for (var_5 = 0; var_5 < var_3; var_5++) {
+  for(var_5 = 0; var_5 < var_3; var_5++) {
     self teleport(self.origin + var_4);
     wait 0.05;
   }

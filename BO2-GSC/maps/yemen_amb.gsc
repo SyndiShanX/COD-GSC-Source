@@ -44,7 +44,7 @@ play_drone_control_tones_single() {
     return;
   }
   drone = drones[randomintrange(0, drones.size)];
-  drone playsound("veh_qr_tones_activate");
+  drone playSound("veh_qr_tones_activate");
   wait 4;
   drones = get_vehicle_array("veh_t6_drone_quad_rotor_sp", "model");
 
@@ -58,5 +58,5 @@ play_drone_reply() {
   wait(randomfloatrange(0.1, 0.85));
 
   if(isDefined(self))
-    self playsound("veh_qr_tones_activate_reply");
+    self playSound("veh_qr_tones_activate_reply");
 }

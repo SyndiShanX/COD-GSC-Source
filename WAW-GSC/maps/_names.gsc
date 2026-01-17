@@ -12,7 +12,7 @@ setup_names() {
   nationalities[2] = "russian";
   nationalities[3] = "german";
   nationalities[4] = "japanese";
-  for (i = 0; i < nationalities.size; i++) {
+  for(i = 0; i < nationalities.size; i++) {
     level.names[nationalities[i]] = [];
   }
   american_names();
@@ -20,7 +20,7 @@ setup_names() {
   russian_names();
   japanese_names();
   german_names();
-  for (i = 0; i < nationalities.size; i++) {
+  for(i = 0; i < nationalities.size; i++) {
     randomize_name_list(nationalities[i]);
     level.nameIndex[nationalities[i]] = 0;
   }
@@ -391,7 +391,7 @@ add_name(nationality, thename) {
 
 randomize_name_list(nationality) {
   size = level.names[nationality].size;
-  for (i = 0; i < size; i++) {
+  for(i = 0; i < size; i++) {
     switchwith = RandomInt(size);
     temp = level.names[nationality][i];
     level.names[nationality][i] = level.names[nationality][switchwith];

@@ -13,7 +13,6 @@
 #include scripts\core_common\postfx_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace player_free_fall;
 
 autoexec __init__system__() {
@@ -21,21 +20,21 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  level._effect[#"hash_2d7e36f50e763c4a"] = #"hash_3cb3a6fc9eb00337";
-  level._effect[#"hash_71f4fac26bef1997"] = #"hash_3919b64dc762cab2";
+  level._effect[# "hash_2d7e36f50e763c4a"] = # "hash_3cb3a6fc9eb00337";
+  level._effect[# "hash_71f4fac26bef1997"] = # "hash_3919b64dc762cab2";
   callback::add_callback(#"freefall", &function_c9a18304);
   callback::add_callback(#"parachute", &function_26d46af3);
   animation::add_notetrack_func("player_free_fall::parachute_detach", &parachute_detach);
   level.add_trails = isDefined(getgametypesetting(#"hash_6cf5f53d1fbb1066")) && getgametypesetting(#"hash_6cf5f53d1fbb1066");
 }
 
-private function_6aac1790(var_dbb94a) {
+function_6aac1790(var_dbb94a) {
   if(isDefined(var_dbb94a) && !self isattached(var_dbb94a, "tag_weapon_right")) {
     self attach(var_dbb94a, "tag_weapon_right", 1);
   }
 }
 
-private function_a43054a8() {
+function_a43054a8() {
   parachute = self namespace_eb06e24d::get_parachute();
   var_dbb94a = parachute.("parachuteLit");
 
@@ -44,7 +43,7 @@ private function_a43054a8() {
   }
 }
 
-private function_1c10540b() {
+function_1c10540b() {
   parachute = self namespace_eb06e24d::get_parachute();
   var_dbb94a = parachute.("parachuteLit");
 
@@ -53,14 +52,14 @@ private function_1c10540b() {
   }
 }
 
-private function_40635b9a(var_dbb94a) {
+function_40635b9a(var_dbb94a) {
   if(isDefined(var_dbb94a) && self isattached(var_dbb94a, "tag_weapon_right")) {
     self detach(var_dbb94a, "tag_weapon_right");
     self util::unlock_model(var_dbb94a);
   }
 }
 
-private function_26d46af3(eventstruct) {
+function_26d46af3(eventstruct) {
   if(!(isplayer(self) || self isplayercorpse())) {
     return;
   }
@@ -106,7 +105,7 @@ private function_26d46af3(eventstruct) {
   self callback::function_52ac9652(#"death", &cleanup_player);
 }
 
-private function_c9a18304(eventstruct) {
+function_c9a18304(eventstruct) {
   if(!(isplayer(self) || self isplayercorpse())) {
     return;
   }
@@ -128,7 +127,7 @@ private function_c9a18304(eventstruct) {
 function_3f6dfc34(localclientnum) {
   self notify("62720c265d658b90");
   self endon("62720c265d658b90");
-  self endon(#"death", #"disconnect", #"freefallend");
+  self endon(#"death", # "disconnect", # "freefallend");
 
   while(true) {
     waitframe(1);
@@ -138,11 +137,11 @@ function_3f6dfc34(localclientnum) {
     }
 
     blur = function_e81eebd5(localclientnum);
-    self function_116b95e5("pstfx_speedblur_wz", #"blur", blur.blur);
-    self function_116b95e5("pstfx_speedblur_wz", #"inner mask", blur.innermask);
-    self function_116b95e5("pstfx_speedblur_wz", #"outer mask", blur.outermask);
-    self function_116b95e5("pstfx_speedblur_wz", #"x offset", blur.xoffset);
-    self function_116b95e5("pstfx_speedblur_wz", #"y offset", blur.yoffset);
+    self function_116b95e5("pstfx_speedblur_wz", # "blur", blur.blur);
+    self function_116b95e5("pstfx_speedblur_wz", # "inner mask", blur.innermask);
+    self function_116b95e5("pstfx_speedblur_wz", # "outer mask", blur.outermask);
+    self function_116b95e5("pstfx_speedblur_wz", # "x offset", blur.xoffset);
+    self function_116b95e5("pstfx_speedblur_wz", # "y offset", blur.yoffset);
   }
 }
 
@@ -151,7 +150,7 @@ function_cc5ed6ff(pitch, min_pitch, max_pitch, var_2ff50798, var_9988e8ec) {
 }
 
 printspeed(viewpitch) {
-  self endon(#"death", #"disconnect", #"freefallend");
+  self endon(#"death", # "disconnect", # "freefallend");
 
   while(true) {
     vel = self getvelocity();
@@ -161,19 +160,19 @@ printspeed(viewpitch) {
   }
 }
 
-  function function_ec3388e3(localclientnum, var_695a7111) {
-    if(self function_21c0fa55()) {
-      self callback::add_entity_callback(#"oob", &on_oob);
-      self thread function_3f6dfc34(localclientnum);
-      self thread function_3a56fe1b(localclientnum);
-      self thread function_2bdd64a4(localclientnum);
-    }
-
-    println(self.name + "<dev string:xca>" + var_695a7111);
-    self callback::add_entity_callback(#"death", &cleanup_player);
-    self thread function_e8a9e948(localclientnum, var_695a7111);
-    self function_975ebf4d(localclientnum, var_695a7111);
+function function_ec3388e3(localclientnum, var_695a7111) {
+  if(self function_21c0fa55()) {
+    self callback::add_entity_callback(#"oob", &on_oob);
+    self thread function_3f6dfc34(localclientnum);
+    self thread function_3a56fe1b(localclientnum);
+    self thread function_2bdd64a4(localclientnum);
   }
+
+  println(self.name + "<dev string:xca>" + var_695a7111);
+  self callback::add_entity_callback(#"death", &cleanup_player);
+  self thread function_e8a9e948(localclientnum, var_695a7111);
+  self function_975ebf4d(localclientnum, var_695a7111);
+}
 
 cleanup_player(params) {
   function_1c6573a4();
@@ -207,7 +206,7 @@ function_7c653916(timesec) {
 
 function_e8a9e948(localclientnum, var_695a7111) {
   if(self function_21c0fa55()) {
-    self endoncallback(&function_1c6573a4, #"death", #"freefallend");
+    self endoncallback(&function_1c6573a4, # "death", # "freefallend");
 
     while(true) {
       vel = self getvelocity();
@@ -279,7 +278,7 @@ function_a993866(localclientnum, var_9a17b15c) {
   }
 
   if(var_9a17b15c > 0) {
-    self endon(#"death", #"freefallend", #"disconnect");
+    self endon(#"death", # "freefallend", # "disconnect");
     wait var_9a17b15c;
   }
 
@@ -334,7 +333,7 @@ function_1c6573a4(notifyhash) {
 }
 
 function_ba7365ff(localclientnum, height, fxid) {
-  self endon(#"death", #"freefallend");
+  self endon(#"death", # "freefallend");
 
   while(true) {
     if(self.origin[2] < height) {
@@ -348,12 +347,12 @@ function_ba7365ff(localclientnum, height, fxid) {
 
 function_3a56fe1b(localclientnum) {
   if(!isDefined(self.var_1c0f821e)) {
-    self.var_1c0f821e = play_fx_on_tag(localclientnum, level._effect[#"hash_2d7e36f50e763c4a"], "tag_origin");
+    self.var_1c0f821e = play_fx_on_tag(localclientnum, level._effect[# "hash_2d7e36f50e763c4a"], "tag_origin");
     self thread function_ba7365ff(localclientnum, 6000, self.var_1c0f821e);
   }
 
   if(!isDefined(self.var_3e64d3fb)) {
-    self.var_3e64d3fb = play_fx_on_tag(localclientnum, level._effect[#"hash_71f4fac26bef1997"], "tag_origin");
+    self.var_3e64d3fb = play_fx_on_tag(localclientnum, level._effect[# "hash_71f4fac26bef1997"], "tag_origin");
     self thread function_ba7365ff(localclientnum, 25000, self.var_3e64d3fb);
   }
 }
@@ -380,7 +379,7 @@ function_2bdd64a4(localclientnum) {
   self.var_b7756d91 = self playLoopSound("evt_skydive_wind_heavy", 1);
 
   if(self.origin[2] > 30000) {
-    self playSound(localclientnum, #"hash_214da797e3f63ec5");
+    self playSound(localclientnum, # "hash_214da797e3f63ec5");
   }
 }
 

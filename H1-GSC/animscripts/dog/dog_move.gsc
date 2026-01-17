@@ -11,7 +11,7 @@ main() {
   self clearanim( % root, 0.2);
   self clearanim( % german_shepherd_run_stop, 0);
 
-  if(!isdefined(self.traversecomplete) && !isdefined(self.skipstartmove) && self.a.movement == "run" && (!isdefined(self.disableexits) || self.disableexits == 0))
+  if(!isDefined(self.traversecomplete) && !isDefined(self.skipstartmove) && self.a.movement == "run" && (!isDefined(self.disableexits) || self.disableexits == 0))
     startmove();
 
   thread randomsoundduringrunloop();
@@ -31,7 +31,7 @@ main() {
 
   thread animscripts\dog\dog_stop::lookattarget("normal");
 
-  for (;;) {
+  for(;;) {
     moveloop();
 
     if(self.a.movement == "run") {
@@ -49,18 +49,18 @@ moveloop() {
   self endon("stop_soon");
   self.moveloopcleanupfunc = undefined;
 
-  for (;;) {
+  for(;;) {
     if(self.disablearrivals)
       self.stopanimdistsq = 0;
     else
       self.stopanimdistsq = anim.dogstoppingdistsq;
 
-    if(isdefined(self.moveloopcleanupfunc)) {
+    if(isDefined(self.moveloopcleanupfunc)) {
       self[[self.moveloopcleanupfunc]]();
       self.moveloopcleanupfunc = undefined;
     }
 
-    if(isdefined(self.moveloopoverridefunc)) {
+    if(isDefined(self.moveloopoverridefunc)) {
       self[[self.moveloopoverridefunc]]();
       continue;
     }
@@ -91,10 +91,10 @@ pathchangecheck() {
   self endon("killanimscript");
   self.ignorepathchange = undefined;
 
-  for (;;) {
+  for(;;) {
     self waittill("path_changed", var_0, var_1);
 
-    if(isdefined(self.ignorepathchange) || isdefined(self.noturnanims)) {
+    if(isDefined(self.ignorepathchange) || isDefined(self.noturnanims)) {
       continue;
     }
     if(self.a.movement != "run") {
@@ -103,7 +103,7 @@ pathchangecheck() {
     var_2 = angleclamp180(self.angles[1] - vectortoyaw(var_1));
     var_3 = pathchange_getdogturnanim(var_2);
 
-    if(isdefined(var_3)) {
+    if(isDefined(var_3)) {
       self.turnanim = var_3;
       self.turntime = gettime();
       self.moveloopoverridefunc = ::pathchange_dodogturnanim;
@@ -116,13 +116,13 @@ pathchangecheck2() {
   self endon("killanimscript");
   self.ignorepathchange = undefined;
 
-  for (;;) {
-    if(self.lookaheaddist > 40 && !isdefined(self.moveloopoverridefunc) && !isdefined(self.ignorepathchange) && !isdefined(self.noturnanims) && self.a.movement == "run") {
+  for(;;) {
+    if(self.lookaheaddist > 40 && !isDefined(self.moveloopoverridefunc) && !isDefined(self.ignorepathchange) && !isDefined(self.noturnanims) && self.a.movement == "run") {
       var_0 = vectortoyaw(self.lookaheaddir);
       var_1 = angleclamp180(self.angles[1] - var_0);
       var_2 = pathchange_getdogturnanim(var_1);
 
-      if(isdefined(var_2)) {
+      if(isDefined(var_2)) {
         self.turnanim = var_2;
         self.turntime = gettime();
         self.moveloopoverridefunc = ::pathchange_dodogturnanim;
@@ -184,7 +184,7 @@ pathchange_cleanupdogturnanim() {
 startmovetracklookahead() {
   self endon("killanimscript");
 
-  for (var_0 = 0; var_0 < 2; var_0++) {
+  for(var_0 = 0; var_0 < 2; var_0++) {
     var_1 = vectortoangles(self.lookaheaddir);
     self orientmode("face angle", var_1);
   }
@@ -259,8 +259,8 @@ playmovestartanim() {
 }
 
 startmove() {
-  if(isdefined(self.pathgoalpos)) {
-    if(isdefined(self.pathgoalpos)) {
+  if(isDefined(self.pathgoalpos)) {
+    if(isDefined(self.pathgoalpos)) {
       playmovestartanim();
       self clearanim( % root, 0.2);
       return;
@@ -293,15 +293,15 @@ randomsoundduringrunloop() {
   self endon("killanimscript");
   wait 0.2;
 
-  for (;;) {
+  for(;;) {
     var_0 = undefined;
 
-    if(isdefined(self.script_growl))
+    if(isDefined(self.script_growl))
       var_0 = "anml_dog_growl";
-    else if(!isdefined(self.script_nobark))
+    else if(!isDefined(self.script_nobark))
       var_0 = "anml_dog_bark";
 
-    if(!isdefined(var_0)) {
+    if(!isDefined(var_0)) {
       break;
     }
 

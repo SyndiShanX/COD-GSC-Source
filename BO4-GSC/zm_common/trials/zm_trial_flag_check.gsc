@@ -8,7 +8,6 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_trial_flag_check;
 
 autoexec __init__system__() {
@@ -23,14 +22,14 @@ __init__() {
   zm_trial::register_challenge(#"flag_check", &on_begin, &on_end);
 }
 
-private on_begin(str_flag, var_60bdad5f) {
+on_begin(str_flag, var_60bdad5f) {
   zm_trial_util::function_7d32b7d0(0);
   level.var_5fccce01 = str_flag;
   level.var_4ce2a315 = var_60bdad5f;
   level thread monitor_flag(str_flag);
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   zm_trial_util::function_f3dbeda7();
 
   if(!round_reset) {
@@ -40,7 +39,7 @@ private on_end(round_reset) {
   }
 }
 
-private monitor_flag(str_flag) {
+monitor_flag(str_flag) {
   level endon(#"hash_7646638df88a3656");
 
   while(true) {

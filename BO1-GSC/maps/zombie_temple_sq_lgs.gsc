@@ -46,7 +46,7 @@ play_nikolai_farting() {
   players = get_players();
   for(i = 0; i < players.size; i++) {
     if(players[i] getEntityNumber() == 1) {
-      players[i] playsound("evt_sq_lgs_fart");
+      players[i] playSound("evt_sq_lgs_fart");
       return;
     }
   }
@@ -171,7 +171,7 @@ lgs_crystal() {
   self waittill("triggered");
   self.trigger notify("first_damage_done");
   stop_exploder(602);
-  self playsound("evt_sq_lgs_crystal_pry");
+  self playSound("evt_sq_lgs_crystal_pry");
   target = self.target;
   while(isDefined(target)) {
     struct = getstruct(target, "targetname");
@@ -181,10 +181,10 @@ lgs_crystal() {
     }
     self moveTo(struct.origin, time, time / 10);
     self waittill("movedone");
-    self playsound("evt_sq_lgs_crystal_hit1");
+    self playSound("evt_sq_lgs_crystal_hit1");
     target = struct.target;
   }
-  self playsound("evt_sq_lgs_crystal_land");
+  self playSound("evt_sq_lgs_crystal_land");
   self.trigger.origin = self.origin;
   self.trigger thread report_melee_early();
   maps\_zombiemode_weap_shrink_ray::add_shrinkable_object(self);
@@ -196,7 +196,7 @@ lgs_crystal() {
       players[i] thread maps\_zombiemode_audio::create_and_play_dialog("eggs", "quest3", undefined, 4);
     }
   }
-  self playsound("evt_sq_lgs_crystal_shrink");
+  self playSound("evt_sq_lgs_crystal_shrink");
   self setModel("fxanim_zom_ztem_crystal_small_mod");
   vn = getvehiclenode("sq_lgs_node_start", "targetname");
   self.origin = vn.origin;
@@ -204,7 +204,7 @@ lgs_crystal() {
   maps\_zombiemode_weap_shrink_ray::remove_shrinkable_object(self);
   self.trigger thread wait_for_melee();
   self waittill("triggered");
-  self playsound("evt_sq_lgs_crystal_knife");
+  self playSound("evt_sq_lgs_crystal_knife");
   self playLoopSound("evt_sq_lgs_crystal_roll", 2);
   self.trigger trigger_off();
   self NotSolid();
@@ -249,7 +249,7 @@ lgs_crystal() {
   self moveTo((holder.origin[0], holder.origin[1], holder.origin[2] + 134), 2);
   self waittill("movedone");
   self stopLoopSound(1);
-  self playsound("evt_sq_lgs_crystal_landinholder");
+  self playSound("evt_sq_lgs_crystal_landinholder");
   players = get_players();
   players[randomintrange(0, players.size)] thread maps\_zombiemode_audio::create_and_play_dialog("eggs", "quest3", undefined, 8);
   level notify("crystal_dropped");

@@ -5,7 +5,7 @@
 ***************************************************/
 
 main() {
-  self setmodel("body_sas_ct_assault_price");
+  self setModel("body_sas_ct_assault_price");
   self attach("head_sas_ct_assault_price_mask_down", "", 1);
   self.headmodel = "head_sas_ct_assault_price_mask_down";
   self.voice = "british";

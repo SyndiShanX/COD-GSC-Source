@@ -48,9 +48,7 @@ main() {
   trywoundedanimset(ratio);
 
   if(isDefined(self.painoverridefunc)) {
-    [
-      [self.painoverridefunc]
-    ]();
+    [[self.painoverridefunc]]();
     return;
   }
 
@@ -72,7 +70,7 @@ main() {
 
 paingloabalsinit() {
   if(!isDefined(anim.painglobals)) {
-    anim.painglobals = spawnstruct();
+    anim.painglobals = spawnStruct();
     anim.painglobals.numdeathsuntilcrawlingpain = randomintrange(0, 15);
     anim.painglobals.nextcrawlingpaintime = gettime() + randomintrange(0, 20000);
     anim.painglobals.nextcrawlingpaintimefromlegdamage = gettime() + randomintrange(0, 10000);
@@ -86,7 +84,7 @@ paingloabalsinit() {
 painhelmetpop() {
   if(self.damagelocation == "helmet") {
     self animscripts\death::helmetpop();
-    self playsound("prj_bullet_impact_headshot_helmet_nodie");
+    self playSound("prj_bullet_impact_headshot_helmet_nodie");
   } else if(self wasdamagedbyexplosive() && randomint(2) == 0)
     self animscripts\death::helmetpop();
 }
@@ -337,7 +335,7 @@ shouldkeepcrawling() {
 }
 
 shouldstayalive() {
-  if(!enemyisingeneraldirection(anglestoforward(self.angles)))
+  if(!enemyisingeneraldirection(anglesToForward(self.angles)))
     return false;
 
   return gettime() < self.desiredtimeofdeath;
@@ -374,7 +372,7 @@ dyingcrawl() {
     self animscripts\shared::donotetracks("crawling");
   }
 
-  if(enemyisingeneraldirection(anglestoforward(self.angles) * -1))
+  if(enemyisingeneraldirection(anglesToForward(self.angles) * -1))
     return true;
 
   self.a.nodeath = 1;
@@ -472,7 +470,7 @@ enemyisingeneraldirection(dir) {
   if(!isvalidenemy(self.enemy))
     return false;
 
-  toenemy = vectornormalize(self.enemy getshootatpos() - self geteye());
+  toenemy = vectornormalize(self.enemy getshootatpos() - self getEye());
   return vectordot(toenemy, dir) > 0.5;
 }
 
@@ -818,7 +816,7 @@ get_flamethrower_stand_pain() {
   anim_num = randomint(painarray.size);
 
   if(self.team == "axis" && isDefined(level._effect["character_fire_pain_sm"]))
-    playfxontag(level._effect["character_fire_pain_sm"], self, tagarray[anim_num]);
+    playFXOnTag(level._effect["character_fire_pain_sm"], self, tagarray[anim_num]);
   else {
     println("^3ANIMSCRIPT WARNING: You are missing level._effect[\"character_fire_pain_sm\"], please set it in your levelname_fx.gsc. Use \"env/fire/fx_fire_player_sm\"");
 
@@ -844,7 +842,7 @@ get_flamethrower_crouch_pain() {
   anim_num = randomint(painarray.size);
 
   if(self.team == "axis" && isDefined(level._effect["character_fire_pain_sm"]))
-    playfxontag(level._effect["character_fire_pain_sm"], self, tagarray[anim_num]);
+    playFXOnTag(level._effect["character_fire_pain_sm"], self, tagarray[anim_num]);
   else {
     println("^3ANIMSCRIPT WARNING: You are missing level._effect[\"character_fire_pain_sm\"], please set it in your levelname_fx.gsc. Use \"env/fire/fx_fire_player_sm\"");
 

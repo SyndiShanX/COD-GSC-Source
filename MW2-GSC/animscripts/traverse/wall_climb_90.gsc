@@ -23,7 +23,7 @@ advancedTraverse2(traverseAnim, normalHeight) {
 
   // orient to the Negotiation start node
   startnode = self getnegotiationstartnode();
-  assert(isdefined(startnode));
+  assert(isDefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);
   realHeight = startnode.traverse_height - startnode.origin[2];
 
@@ -52,9 +52,9 @@ advancedTraverse2(traverseAnim, normalHeight) {
 handle_death(note) {
   println(note);
 
-  if(note != "traverse_death")
+  if(note != "traverse_death") {
     return;
-
+  }
   self endon("killanimscript");
 
   if(self.health == 1) {

@@ -9,7 +9,7 @@
 #namespace dem;
 
 function main() {
-  callback::on_spawned( & on_player_spawned);
+  callback::on_spawned(&on_player_spawned);
   if(getgametypesetting("silentPlant") != 0) {
     setsoundcontext("bomb_plant", "silent");
   }

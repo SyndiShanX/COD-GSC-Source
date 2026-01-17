@@ -13,7 +13,6 @@
 #include maps\cliffhanger_stealth;
 
 global_inits() {
-
   level.weaponClipModels = [];
   level.weaponClipModels[0] = "weapon_m14_clip";
   level.weaponClipModels[1] = "weapon_kriss_clip";
@@ -65,7 +64,7 @@ global_inits() {
   maps\cliffhanger_fx::main();
   maps\createfx\cliffhanger_audio::main();
 
-  destructible_trees = GetEntArray("destructible_tree", "targetname");
+  destructible_trees = getEntArray("destructible_tree", "targetname");
   array_thread(destructible_trees, ::destructible_tree_think);
 
   maps\_empty::main("tag_origin");
@@ -75,7 +74,7 @@ global_inits() {
   maps\_compass::setupMiniMap("compass_map_cliffhanger");
 
   // Press^3 [{+actionslot 3}] ^7to activate heartbeat sensor.
-  add_hint_string("hint_heartbeat_sensor", & "CLIFFHANGER_SWITCH_HEARTBEAT", ::should_break_activate_heartbeat);
+  add_hint_string("hint_heartbeat_sensor", &"CLIFFHANGER_SWITCH_HEARTBEAT", ::should_break_activate_heartbeat);
 
   //must be after _load.gsc
 
@@ -110,70 +109,70 @@ global_inits() {
   level.firegroups = [];
 
   thread init_cliff_deaths();
-  cliff_death_spawners = GetEntArray("cliff_death_spawner", "script_noteworthy");
+  cliff_death_spawners = getEntArray("cliff_death_spawner", "script_noteworthy");
   array_thread(cliff_death_spawners, ::add_spawn_function, maps\cliffhanger_snowmobile_code::cliff_attacker_think);
 
-  high_threat_spawners = GetEntArray("high_threat_spawner", "targetname");
+  high_threat_spawners = getEntArray("high_threat_spawner", "targetname");
   array_thread(high_threat_spawners, ::high_threat_spawner_think);
 
   level.icepick_snowmobiles = [];
-  tarmac_snowmobiles = GetEntArray("tarmac_snowmobile", "script_noteworthy");
+  tarmac_snowmobiles = getEntArray("tarmac_snowmobile", "script_noteworthy");
   array_thread(tarmac_snowmobiles, ::tarmac_snowmobile_think);
 
-  wind_blown_flags = GetEntArray("wind_blown_flag", "targetname");
+  wind_blown_flags = getEntArray("wind_blown_flag", "targetname");
   array_thread(wind_blown_flags, ::wind_blown_flag_think);
 
-  end_camp_spawners = GetEntArray("end_camp_spawner", "targetname");
+  end_camp_spawners = getEntArray("end_camp_spawner", "targetname");
   array_thread(end_camp_spawners, ::add_spawn_function, ::end_camp_spawner_think);
 
-  speedy_littlebird_spawners = GetEntArray("speedy_littlebird_spawner", "script_noteworthy");
+  speedy_littlebird_spawners = getEntArray("speedy_littlebird_spawner", "script_noteworthy");
   array_thread(speedy_littlebird_spawners, ::add_spawn_function, ::speedy_littlebird_spawner_think);
 
   ending_heli = GetEnt("ending_heli", "script_noteworthy");
   ending_heli add_spawn_function(::ending_heli_think);
 
   // these guys are magic bullet shield because price needs to ride their snowmobile
-  magic_bullet_spawners = GetEntArray("magic_bullet_spawner", "script_noteworthy");
+  magic_bullet_spawners = getEntArray("magic_bullet_spawner", "script_noteworthy");
   array_thread(magic_bullet_spawners, ::magic_bullet_spawner_think);
-  god_vehicle_spawners = GetEntArray("god_vehicle_spawner", "script_noteworthy");
+  god_vehicle_spawners = getEntArray("god_vehicle_spawner", "script_noteworthy");
   array_thread(god_vehicle_spawners, ::god_vehicle_spawner_think);
 
-  array_thread(GetEntArray("start_crate_patroller", "script_noteworthy"), ::add_spawn_function, ::tent_1_patrollers);
-  array_thread(GetEntArray("start_crate_patroller", "script_noteworthy"), ::add_spawn_function, ::tent_1_crate_patroller);
-  array_thread(GetEntArray("start_quonset_patroller", "script_noteworthy"), ::add_spawn_function, ::tent_1_patrollers);
-  array_thread(GetEntArray("right_side_start_guy", "script_noteworthy"), ::add_spawn_function, ::right_side_start_patroller);
+  array_thread(getEntArray("start_crate_patroller", "script_noteworthy"), ::add_spawn_function, ::tent_1_patrollers);
+  array_thread(getEntArray("start_crate_patroller", "script_noteworthy"), ::add_spawn_function, ::tent_1_crate_patroller);
+  array_thread(getEntArray("start_quonset_patroller", "script_noteworthy"), ::add_spawn_function, ::tent_1_patrollers);
+  array_thread(getEntArray("right_side_start_guy", "script_noteworthy"), ::add_spawn_function, ::right_side_start_patroller);
 
-  array_thread(GetEntArray("2story_leaner", "script_noteworthy"), ::add_spawn_function, ::camp_leaner);
-  array_thread(GetEntArray("2story_sitter", "script_noteworthy"), ::add_spawn_function, ::twostory_sitter);
-  array_thread(GetEntArray("container_leaner", "script_noteworthy"), ::add_spawn_function, ::camp_leaner);
+  array_thread(getEntArray("2story_leaner", "script_noteworthy"), ::add_spawn_function, ::camp_leaner);
+  array_thread(getEntArray("2story_sitter", "script_noteworthy"), ::add_spawn_function, ::twostory_sitter);
+  array_thread(getEntArray("container_leaner", "script_noteworthy"), ::add_spawn_function, ::camp_leaner);
 
-  array_thread(GetEntArray("fence_walker", "script_noteworthy"), ::add_spawn_function, ::dialog_hes_mine);
-  array_thread(GetEntArray("satbuilding_patroller", "script_noteworthy"), ::add_spawn_function, ::dialog_hes_mine);
-  array_thread(GetEntArray("ridge_patroler", "script_noteworthy"), ::add_spawn_function, ::dialog_hes_mine);
-  array_thread(GetEntArray("start_crate_patroller", "script_noteworthy"), ::add_spawn_function, ::dialog_hes_mine);
+  array_thread(getEntArray("fence_walker", "script_noteworthy"), ::add_spawn_function, ::dialog_hes_mine);
+  array_thread(getEntArray("satbuilding_patroller", "script_noteworthy"), ::add_spawn_function, ::dialog_hes_mine);
+  array_thread(getEntArray("ridge_patroler", "script_noteworthy"), ::add_spawn_function, ::dialog_hes_mine);
+  array_thread(getEntArray("start_crate_patroller", "script_noteworthy"), ::add_spawn_function, ::dialog_hes_mine);
 
-  ridge_guy_left = GetEntArray("ridge_guy_left", "script_noteworthy");
+  ridge_guy_left = getEntArray("ridge_guy_left", "script_noteworthy");
   array_thread(ridge_guy_left, ::add_spawn_function, ::dialog_hes_mine);
   array_thread(ridge_guy_left, ::add_spawn_function, ::set_first_alert_patrol, "ridge_guy_left_first_alert");
 
-  ridge_guy_right = GetEntArray("ridge_guy_right", "script_noteworthy");
+  ridge_guy_right = getEntArray("ridge_guy_right", "script_noteworthy");
   array_thread(ridge_guy_right, ::add_spawn_function, ::set_first_alert_patrol, "ridge_guy_right_first_alert");
 
   array_thread(getstructarray("price_target_start", "script_noteworthy"), ::price_target_start);
   array_thread(getstructarray("price_target_stop", "script_noteworthy"), ::price_target_stop);
 
-  array_thread(GetEntArray("blue_building_smoker", "script_noteworthy"), ::add_spawn_function, ::reduce_footstep_detect_dist);
-  array_thread(GetEntArray("blue_building_loader", "script_noteworthy"), ::add_spawn_function, ::reduce_footstep_detect_dist);
-  array_thread(GetEntArray("blue_building_smoker", "script_noteworthy"), ::add_spawn_function, ::increase_fov_when_player_is_near);
-  array_thread(GetEntArray("blue_building_loader", "script_noteworthy"), ::add_spawn_function, ::increase_fov_when_player_is_near);
+  array_thread(getEntArray("blue_building_smoker", "script_noteworthy"), ::add_spawn_function, ::reduce_footstep_detect_dist);
+  array_thread(getEntArray("blue_building_loader", "script_noteworthy"), ::add_spawn_function, ::reduce_footstep_detect_dist);
+  array_thread(getEntArray("blue_building_smoker", "script_noteworthy"), ::add_spawn_function, ::increase_fov_when_player_is_near);
+  array_thread(getEntArray("blue_building_loader", "script_noteworthy"), ::add_spawn_function, ::increase_fov_when_player_is_near);
 
-  array_thread(GetEntArray("fence_walker", "script_noteworthy"), ::add_spawn_function, ::cliffhanger_set_flag_on_dead, "fence_walker_dead");
-  array_thread(GetEntArray("satbuilding_smoker", "script_noteworthy"), ::add_spawn_function, ::cliffhanger_set_flag_on_dead, "satbuilding_smoker_dead");
-  array_thread(GetEntArray("southeast_patroller", "script_noteworthy"), ::add_spawn_function, ::cliffhanger_set_flag_on_dead, "southeast_patroller_dead");
-  array_thread(GetEntArray("satbuilding_patroller", "script_noteworthy"), ::add_spawn_function, ::cliffhanger_set_flag_on_dead, "satbuilding_patroller_dead");
+  array_thread(getEntArray("fence_walker", "script_noteworthy"), ::add_spawn_function, ::cliffhanger_set_flag_on_dead, "fence_walker_dead");
+  array_thread(getEntArray("satbuilding_smoker", "script_noteworthy"), ::add_spawn_function, ::cliffhanger_set_flag_on_dead, "satbuilding_smoker_dead");
+  array_thread(getEntArray("southeast_patroller", "script_noteworthy"), ::add_spawn_function, ::cliffhanger_set_flag_on_dead, "southeast_patroller_dead");
+  array_thread(getEntArray("satbuilding_patroller", "script_noteworthy"), ::add_spawn_function, ::cliffhanger_set_flag_on_dead, "satbuilding_patroller_dead");
 
   //Enable landing Lights on Migs
-  mig_spawners = GetEntArray("script_vehicle_mig29", "classname");
+  mig_spawners = getEntArray("script_vehicle_mig29", "classname");
   array_thread(mig_spawners, ::add_spawn_function, ::miglights);
 
   init_slope_trees();
@@ -201,15 +200,15 @@ global_inits() {
   thread setup_welders();
 
   level.radioForcedTransmissionQueue = [];
-  level.player_radio = Spawn("script_origin", level.player.origin);
+  level.player_radio = spawn("script_origin", level.player.origin);
   level.player_radio LinkTo(level.player);
-  level.player_radio_interupt = Spawn("script_origin", level.player.origin);
+  level.player_radio_interupt = spawn("script_origin", level.player.origin);
   level.player_radio_interupt LinkTo(level.player);
 
   ending_heli_fly_off_triggers = GetEnt("ending_heli_fly_off_trigger", "targetname");
   ending_heli_fly_off_triggers thread ending_heli_fly_off_trigger_think();
 
-  triggers = GetEntArray("end_heli_trigger", "targetname");
+  triggers = getEntArray("end_heli_trigger", "targetname");
   //array_thread( triggers, ::activate_trigger );
   //thread base_sound_remove();
 
@@ -227,7 +226,7 @@ base_loud_speakers() {
 
   flag_wait("dialog_take_point");
 
-  speakers = GetEntArray("base_loudspeaker", "targetname");
+  speakers = getEntArray("base_loudspeaker", "targetname");
 
   loudspeaker = [];
   loudspeaker[loudspeaker.size] = "cliff_ru2_stolesandwich";
@@ -249,7 +248,7 @@ base_loud_speakers() {
 
   current_alert = 0;
 
-  while (1) {
+  while(1) {
     if(flag("_stealth_spotted")) {
       dialog = loudspeaker[current_alert];
       current_alert++;
@@ -263,7 +262,7 @@ base_loud_speakers() {
     }
 
     foreach(speaker in speakers)
-    speaker PlaySound(dialog);
+    speaker playSound(dialog);
 
     wait(RandomIntRange(12, 16));
   }
@@ -307,19 +306,18 @@ bmp_blizzard_setup() {
 
 bmp_headlights() {
   //headlights
-  PlayFXOnTag(level._effect["lighthaze_snow_headlights"], self, "tag_front_light_left");
-  PlayFXOnTag(level._effect["lighthaze_snow_headlights"], self, "tag_front_light_right");
-  PlayFXOnTag(level._effect["lighthaze_snow_spotlight"], self, "tag_turret_light");
+  playFXOnTag(level._effect["lighthaze_snow_headlights"], self, "tag_front_light_left");
+  playFXOnTag(level._effect["lighthaze_snow_headlights"], self, "tag_front_light_right");
+  playFXOnTag(level._effect["lighthaze_snow_spotlight"], self, "tag_turret_light");
 
   self waittill("death");
 
   /*
-	StopFXOnTag( level._effect[ "lighthaze_snow_headlights" ], self, "tag_front_light_left" );
-	StopFXOnTag( level._effect[ "lighthaze_snow_headlights" ], self, "tag_front_light_right" );
- 	StopFXOnTag( level._effect[ "lighthaze_snow_spotlight" ], self, "tag_turret_light" );
-*/
+  	stopFXOnTag( level._effect[ "lighthaze_snow_headlights" ], self, "tag_front_light_left" );
+  	stopFXOnTag( level._effect[ "lighthaze_snow_headlights" ], self, "tag_front_light_right" );
+   	stopFXOnTag( level._effect[ "lighthaze_snow_spotlight" ], self, "tag_turret_light" );
+  */
 }
-
 
 bmp_shoots_player() {
   self endon("death");
@@ -332,16 +330,16 @@ bmp_shoots_player() {
 
   self waittill_entity_in_range(level.player, 600);
 
-  for (;;) {
+  for(;;) {
     shots = RandomIntRange(4, 7);
-    for (i = 0; i < shots; i++) {
+    for(i = 0; i < shots; i++) {
       self FireWeapon();
       wait(0.35);
     }
     wait(RandomFloatRange(.2, .5));
 
     shots = RandomIntRange(4, 7);
-    for (i = 0; i < shots; i++) {
+    for(i = 0; i < shots; i++) {
       self FireWeapon();
       wait(0.35);
     }
@@ -353,9 +351,9 @@ bmp_shoots_player() {
 bmp_aims_at_targets() {
   self endon("death");
   self endon("bmp_aim_at_player");
-  targets = GetEntArray("bmp_blizzard_target", "targetname");
-  for (;;) {
-    for (i = 0; i < targets.size; i++) {
+  targets = getEntArray("bmp_blizzard_target", "targetname");
+  for(;;) {
+    for(i = 0; i < targets.size; i++) {
       self SetTurretTargetEnt(targets[i]);
       self waittill("turret_on_target");
       wait(RandomFloatRange(10, 15));
@@ -364,18 +362,18 @@ bmp_aims_at_targets() {
 }
 
 price_kills_me_if_too_close() {
-  if(IsDefined(self.script_noteworthy))
+  if(isDefined(self.script_noteworthy))
     if(self.script_noteworthy == "truck_guys")
       return;
-  if(!isdefined(self.script_stealth))
+  if(!isDefined(self.script_stealth))
     return;
   self endon("death");
 
   level.price waittill_entity_in_range(self, 300);
 
-  if(flag("_stealth_spotted"))
+  if(flag("_stealth_spotted")) {
     return;
-
+  }
   thread price_kills_me_do_the_killing();
 }
 
@@ -393,7 +391,7 @@ price_kills_me_do_the_killing() {
   level.price.goalradius = 8;
   self.dontattackme = undefined;
 
-  if(!isdefined(level.price.stargets))
+  if(!isDefined(level.price.stargets))
     level.price.stargets = 1;
   else
     level.price.stargets++;
@@ -409,7 +407,7 @@ price_kills_me_do_the_killing() {
 }
 
 return_spawning() {
-  to_be_respawned[3] = SpawnStruct();
+  to_be_respawned[3] = spawnStruct();
   to_be_respawned[3].triggername = "west_base_guys_trigger";
   to_be_respawned[3].dead_flag = "ridge_patroler_dead";
 
@@ -435,7 +433,7 @@ return_spawning() {
 
   foreach(noteworthy_name in to_be_spawned) {
     guy = GetEnt(noteworthy_name, "script_noteworthy");
-    if(IsDefined(guy)) {
+    if(isDefined(guy)) {
       guy.count = 1;
       guy = guy spawn_ai();
     }
@@ -462,11 +460,11 @@ variable_blizzard(first_trans_time) {
   flag_set("blizzard_start");
   first = true;
 
-  while (1) {
+  while(1) {
     t = RandomFloatRange(1, 3);
     if(first) {
       first = !first;
-      if(IsDefined(first_trans_time))
+      if(isDefined(first_trans_time))
         t = first_trans_time;
     }
     maps\_blizzard::blizzard_level_transition_hard(t);
@@ -493,7 +491,6 @@ variable_blizzard(first_trans_time) {
     }
   }
 }
-
 
 //1000 units
 //c4_plant_price_teleport
@@ -606,7 +603,7 @@ snowmobile_music() {
   alias = "cliffhanger_snowmobile";
   time = musicLength(alias);
 
-  while (1) {
+  while(1) {
     MusicPlayWrapper(alias);
     wait time;
   }
@@ -618,7 +615,7 @@ escape_music() {
   alias = "cliffhanger_escape";
   time = musicLength(alias);
 
-  while (1) {
+  while(1) {
     MusicPlayWrapper(alias);
     wait time;
   }
@@ -630,7 +627,7 @@ satellite_music_loop() {
   alias = "cliffhanger_satellite";
   time = musicLength(alias);
 
-  while (1) {
+  while(1) {
     MusicPlayWrapper(alias);
     wait time;
   }
@@ -645,7 +642,7 @@ stealth_music_control() {
 
   flag_wait("first_two_guys_in_sight");
 
-  while (1) {
+  while(1) {
     thread stealth_music_hidden_loop();
 
     flag_wait("_stealth_spotted");
@@ -668,7 +665,7 @@ stealth_music_hidden_loop() {
   alias = "cliffhanger_stealth";
   time = musicLength(alias);
 
-  while (1) {
+  while(1) {
     MusicPlayWrapper(alias);
     wait time;
   }
@@ -681,7 +678,7 @@ stealth_music_busted_loop() {
   alias = "cliffhanger_stealth_busted";
   time = musicLength(alias);
 
-  while (1) {
+  while(1) {
     MusicPlayWrapper(alias);
     wait time;
   }
@@ -760,12 +757,12 @@ flashing_welding_fx_only(welder, tag) {
   max_flickerless_time = 1.5;
   num = 0;
 
-  for (;;) {
+  for(;;) {
     num = RandomIntRange(1, 10);
-    while (num) {
+    while(num) {
       wait(RandomFloatRange(.05, .1));
-      PlayFXOnTag(level._effect["welding_runner"], welder, tag);
-      welder PlaySound("elec_spark_welding_bursts");
+      playFXOnTag(level._effect["welding_runner"], welder, tag);
+      welder playSound("elec_spark_welding_bursts");
       num--;
 
       wait(RandomFloatRange(.05, .1));
@@ -795,12 +792,12 @@ flashing_welding(welder, tag) {
   unlit_model = undefined;
   linked_models = false;
 
-  for (;;) {
+  for(;;) {
     num = RandomIntRange(1, 10);
-    while (num) {
+    while(num) {
       wait(RandomFloatRange(.05, .1));
-      PlayFXOnTag(level._effect["welding_runner"], welder, tag);
-      welder PlaySound("elec_spark_welding_bursts");
+      playFXOnTag(level._effect["welding_runner"], welder, tag);
+      welder playSound("elec_spark_welding_bursts");
       if(linked_models) {
         lit_model Show();
       }
@@ -837,7 +834,6 @@ mig_landing1() {
 }
 
 flags() {
-
   flag_init("found_fueling_station");
   flag_init("brought_friends");
   flag_init("script_attack_override");
@@ -959,7 +955,6 @@ flags() {
 
   flag_init("bad_heli_missile_killed");
   flag_init("player_boards");
-
 }
 
 tent_1_patrollers() {
@@ -980,7 +975,7 @@ tent_1_crate_patroller() {
 
   nearDoorStruct = getstruct("struct_crate_patroller_enterhut", "targetname");
 
-  while (1) {
+  while(1) {
     nearDoorStruct waittill("trigger", other);
 
     if(other == self) {
@@ -1009,7 +1004,7 @@ increase_fov_when_player_is_near() {
   self endon("death");
   self endon("enemy");
 
-  while (1) {
+  while(1) {
     if(DistanceSquared(self.origin, level.player.origin) < squared(self.footstepDetectDistSprint)) {
       self.fovcosine = 0.01;
       return;
@@ -1026,8 +1021,10 @@ reduce_footstep_detect_dist() {
 }
 
 /************************************************************************************************************/
+
 /*												CLIFFTOP													*/
 /************************************************************************************************************/
+
 /*
 clifftop_aim_thread()
 {
@@ -1080,7 +1077,7 @@ clifftop_aim_thread()
 
 	guy.ref_node thread anim_generic_loop( guy, "crouch_aim" );
 
-	if( IsDefined( self.script_delay ) )
+	if( isDefined( self.script_delay ) )
 		self.script_delay = self.script_delay - .5;
 
 	self script_delay();
@@ -1103,7 +1100,7 @@ clifftop_aim_thread()
 
 flag_if_player_kill() {
   self waittill("death", attacker);
-  if(!isdefined(attacker))
+  if(!isDefined(attacker))
     return;
   if(IsPlayer(attacker))
     flag_set("player_killed_one_first_two_encounters");
@@ -1121,7 +1118,7 @@ clifftop_patroller1_logic() {
   waittillframeend;
   self ent_flag_wait("_stealth_normal");
 
-  if(IsDefined(level.clifftop_patroller1_moveout))
+  if(isDefined(level.clifftop_patroller1_moveout))
     wait 1;
   level.clifftop_patroller1_moveout = 1;
 
@@ -1215,7 +1212,7 @@ script_chatgroups() {
 
   level.current_conversation_point = RandomInt(level.chatter_aliases.size);
 
-  while (!flag("done_with_stealth_camp")) {
+  while(!flag("done_with_stealth_camp")) {
     flag_waitopen("_stealth_spotted");
 
     closest_talker = undefined;
@@ -1224,20 +1221,20 @@ script_chatgroups() {
     //sort from closest to furthest
     closest_enemies = get_array_of_closest(getAveragePlayerOrigin(), enemies);
 
-    for (i = 0; i < closest_enemies.size; i++) {
-      if(IsDefined(closest_enemies[i].script_chatgroup)) {
+    for(i = 0; i < closest_enemies.size; i++) {
+      if(isDefined(closest_enemies[i].script_chatgroup)) {
         closest_chat_group = closest_enemies[i].script_chatgroup;
         closest_talker = closest_enemies[i];
         if(closest_talker ent_flag_exist("_stealth_normal"))
-          if(!closest_talker ent_flag("_stealth_normal"))
+          if(!closest_talker ent_flag("_stealth_normal")) {
             continue;
-
+          }
         //find next closest member of same chat group
         next_closest = find_next_member(closest_enemies, i, closest_chat_group);
 
         //if has no buddy or is too far from buddy or buddy is alert find another
 
-        if(!isdefined(next_closest))
+        if(!isDefined(next_closest))
           continue;
         if(next_closest ent_flag_exist("_stealth_normal"))
           if(!next_closest ent_flag("_stealth_normal"))
@@ -1251,9 +1248,9 @@ script_chatgroups() {
       }
     }
     //we have a group, say something
-    if(IsDefined(next_closest)) {
+    if(isDefined(next_closest)) {
       //check if closest guy is our last talker, if so use second closest
-      if(IsDefined(level.last_talker)) {
+      if(isDefined(level.last_talker)) {
         if(level.last_talker == closest_talker)
           talker = next_closest;
         else
@@ -1275,9 +1272,9 @@ script_chatgroups() {
 }
 
 setup_chatter() {
-  if(!isdefined(self.script_chatgroup))
+  if(!isDefined(self.script_chatgroup)) {
     return;
-
+  }
   self endon("death");
 
   self ent_flag_init("mission_dialogue_kill");
@@ -1294,10 +1291,10 @@ setup_chatter_kill_wait() {
 }
 
 chatter_play_sound(alias) {
-  if(is_dead_sentient())
+  if(is_dead_sentient()) {
     return;
-
-  org = Spawn("script_origin", (0, 0, 0));
+  }
+  org = spawn("script_origin", (0, 0, 0));
   org endon("death");
   thread maps\_utility::delete_on_death_wait_sound(org, "sounddone");
 
@@ -1305,7 +1302,7 @@ chatter_play_sound(alias) {
   org.angles = self.angles;
   org LinkTo(self);
 
-  org PlaySound(alias, "sounddone");
+  org playSound(alias, "sounddone");
   //println( "script_chatter alias = " + alias );
 
   self chatter_play_sound_wait(org);
@@ -1325,8 +1322,8 @@ chatter_play_sound_wait(org) {
 }
 
 find_next_member(closest_enemies, closest, closest_chat_group) {
-  for (i = closest + 1; i < closest_enemies.size; i++) {
-    if(IsDefined(closest_enemies[i].script_chatgroup)) {
+  for(i = closest + 1; i < closest_enemies.size; i++) {
+    if(isDefined(closest_enemies[i].script_chatgroup)) {
       if(closest_enemies[i].script_chatgroup == closest_chat_group)
         return closest_enemies[i];
     }
@@ -1335,8 +1332,10 @@ find_next_member(closest_enemies, closest, closest_chat_group) {
 }
 
 /************************************************************************************************************/
+
 /*													CAMP													*/
 /************************************************************************************************************/
+
 camp_smartstance_settings() {
   looking_away = [];
   looking_away["stand"] = 0;
@@ -1355,7 +1354,6 @@ camp_smartstance_settings() {
 
   self stealth_friendly_stance_handler_distances_set(looking_away, neutral, looking_towards);
 }
-
 
 camp_leaner() {
   node = getstruct(self.target, "targetname");
@@ -1407,7 +1405,7 @@ mission_fail(string) {
 }
 
 c4_player_obj() {
-  if(!isdefined(level.basec4num))
+  if(!isDefined(level.basec4num))
     level.basec4num = 0;
 
   level.basec4num++;
@@ -1454,35 +1452,35 @@ c4_player_obj() {
   flag_wait("player_detonate");
 
   //self Delete();	
-  possible_c4_models = GetEntArray("possible_c4_models", "targetname");
+  possible_c4_models = getEntArray("possible_c4_models", "targetname");
   foreach(model in possible_c4_models) {
     model Delete();
   }
 }
 
 show_closest_c4() {
-  possible_c4_models = GetEntArray("possible_c4_models", "targetname");
+  possible_c4_models = getEntArray("possible_c4_models", "targetname");
   foreach(model in possible_c4_models)
   model Hide();
   current_c4 = getClosest(level.player.origin, possible_c4_models);
   current_c4 Show();
-  current_c4 SetModel("weapon_c4_obj");
+  current_c4 setModel("weapon_c4_obj");
   self.origin = current_c4.origin;
 
   closest_c4 = undefined;
-  while (!flag("mig_c4_planted")) {
+  while(!flag("mig_c4_planted")) {
     closest_c4 = getClosest(level.player.origin, possible_c4_models);
     if(current_c4 != closest_c4) {
       current_c4 Hide();
       closest_c4 Show();
-      closest_c4 SetModel("weapon_c4_obj");
+      closest_c4 setModel("weapon_c4_obj");
       self.origin = closest_c4.origin;
     }
 
     wait .05;
     current_c4 = closest_c4;
   }
-  closest_c4 SetModel("weapon_c4");
+  closest_c4 setModel("weapon_c4");
   closest_c4 thread maps\_c4::playC4Effects();
 }
 
@@ -1493,7 +1491,7 @@ follow_player(radius) {
 
   self.goalradius = radius * .9;
 
-  while (1) {
+  while(1) {
     flag_waitopen("_stealth_spotted");
 
     if(Distance(level.player.origin, self.origin) > radius)
@@ -1504,16 +1502,16 @@ follow_player(radius) {
 }
 
 ch_teleport_player(name) {
-  if(!isdefined(name))
+  if(!isDefined(name))
     name = level.start_point;
 
   array = getstructarray("start_point", "targetname");
 
   nodes = [];
   foreach(ent in array) {
-    if(ent.script_noteworthy != name)
+    if(ent.script_noteworthy != name) {
       continue;
-
+    }
     nodes[nodes.size] = ent;
   }
 
@@ -1523,12 +1521,13 @@ ch_teleport_player(name) {
 }
 
 /************************************************************************************************************/
+
 /*													OBJECTIVES												*/
 /************************************************************************************************************/
 
 objective_follow_price() {
   // Follow Captain MacTavish.
-  registerObjective("obj_follow_price", & "CLIFFHANGER_OBJ_FOLLOW", (0, 0, 0));
+  registerObjective("obj_follow_price", &"CLIFFHANGER_OBJ_FOLLOW", (0, 0, 0));
   setObjectiveState("obj_follow_price", "current");
 
   //this is where compass 1 dvar is turned on.
@@ -1537,7 +1536,7 @@ objective_follow_price() {
   setObjectiveOnEntity("obj_follow_price", level.price, (0, 0, 60));
 
   flag_wait("price_go_to_climb_ridge");
-  //while ( !flag( "price_go_to_climb_ridge" ) )
+  //while( !flag( "price_go_to_climb_ridge" ) )
   //{
   //	wait( 0.05 );
   //}
@@ -1553,7 +1552,7 @@ objective_enter_camp() {
   origin = flagEnt.origin;
 
   // Find a way into the base.
-  registerObjective("obj_enter", & "CLIFFHANGER_OBJ_BASE", origin);
+  registerObjective("obj_enter", &"CLIFFHANGER_OBJ_BASE", origin);
   setObjectiveState("obj_enter", "current");
 
   flag_wait("give_c4_obj");
@@ -1569,7 +1568,7 @@ objective_c4_both() {
   origin = fuel_tank_c4.origin;
 
   // Plant explosives on the fuel tanks.
-  registerObjective("obj_fuel", & "CLIFFHANGER_OBJ_C4", origin);
+  registerObjective("obj_fuel", &"CLIFFHANGER_OBJ_C4", origin);
   setObjectiveState("obj_fuel", "current");
 
   // Plant explosives on the MiG-29 Jet Fighter.
@@ -1579,7 +1578,7 @@ objective_c4_both() {
   origin = mig_c4.origin;
 
   // Plant explosives on the MiG-29 Jet Fighter.
-  registerObjective("obj_mig", & "CLIFFHANGER_OBJ_C4_MIG", origin);
+  registerObjective("obj_mig", &"CLIFFHANGER_OBJ_C4_MIG", origin);
 
   //Objective_AdditionalPosition( level.objectives["obj_fuel"].id, 1, mig_c4.origin );
   //objective_current( level.objectives["obj_fuel"].id, level.objectives["obj_mig"].id );
@@ -1604,7 +1603,7 @@ objective_c4_fuel_tanks() {
   origin = fuel_tank_c4.origin;
 
   // Plant explosives on the fuel tanks.
-  registerObjective("obj_fuel", & "CLIFFHANGER_OBJ_C4", origin);
+  registerObjective("obj_fuel", &"CLIFFHANGER_OBJ_C4", origin);
   setObjectiveState("obj_fuel", "current");
 
   flag_wait("fuel_c4_planted");
@@ -1620,7 +1619,7 @@ objective_c4_mig() {
   origin = mig_c4.origin;
 
   // Plant explosives on the MiG-29 Jet Fighter.
-  registerObjective("obj_mig", & "CLIFFHANGER_OBJ_C4_MIG", origin);
+  registerObjective("obj_mig", &"CLIFFHANGER_OBJ_C4_MIG", origin);
 
   if(!flag("mig_c4_planted"))
     setObjectiveState("obj_mig", "current");
@@ -1638,7 +1637,7 @@ objective_c4_fuel_station() {
   origin = mig_c4.origin;
 
   // Plant explosives on the fueling station.
-  registerObjective("obj_mig", & "CLIFFHANGER_OBJ_FUEL_STATION", origin);
+  registerObjective("obj_mig", &"CLIFFHANGER_OBJ_FUEL_STATION", origin);
 
   if(!flag("mig_c4_planted"))
     setObjectiveState("obj_mig", "current");
@@ -1657,7 +1656,7 @@ objective_goto_hanger() {
   origin = flagEnt.origin;
 
   // Get to the satellite.
-  registerObjective("obj_goto_hanger", & "CLIFFHANGER_OBJ_GOTO_HANGER", origin);
+  registerObjective("obj_goto_hanger", &"CLIFFHANGER_OBJ_GOTO_HANGER", origin);
   setObjectiveState("obj_goto_hanger", "current");
 
   flag_wait("at_hanger_entrance");
@@ -1669,7 +1668,7 @@ objective_satellite() {
   flag_wait("player_on_backdoor_path");
 
   // Retrieve the ACS module.
-  registerObjective("obj_satellite", & "CLIFFHANGER_OBJ_COMPUTER", (0, 0, 0));
+  registerObjective("obj_satellite", &"CLIFFHANGER_OBJ_COMPUTER", (0, 0, 0));
   setObjectiveState("obj_satellite", "current");
   setObjectiveOnEntity("obj_satellite", level.price);
 
@@ -1694,7 +1693,7 @@ objective_exfiltrate() {
   //	level.snowmobile_objective_origin = (-12357.9, -32374.2, 397.2);
 
   // Escape with Captain MacTavish.
-  registerObjective("obj_exfiltrate", & "CLIFFHANGER_OBJ_EVACUATE", (0, 0, 0));
+  registerObjective("obj_exfiltrate", &"CLIFFHANGER_OBJ_EVACUATE", (0, 0, 0));
   setObjectiveOnEntity("obj_exfiltrate", level.price);
 
   setObjectiveState("obj_exfiltrate", "current");
@@ -1710,11 +1709,11 @@ objective_exfiltrate() {
 }
 
 objective_snowmobile() {
-  if(!isalive(level.price))
+  if(!isalive(level.price)) {
     return;
-
+  }
   // Obtain a snowmobile.
-  registerObjective("obj_snowmobile", & "CLIFFHANGER_OBJ_SNOWMOBILE", level.player_snowmobile.origin + (0, 0, 48));
+  registerObjective("obj_snowmobile", &"CLIFFHANGER_OBJ_SNOWMOBILE", level.player_snowmobile.origin + (0, 0, 48));
   setObjectiveState("obj_snowmobile", "current");
 
   flag_wait("player_rides_snowmobile");
@@ -1722,10 +1721,10 @@ objective_snowmobile() {
   setObjectiveState("obj_snowmobile", "done");
 
   objective_end_org = GetEnt("objective_end_org", "targetname");
-  ent = Spawn("script_origin", (0, 0, 0));
+  ent = spawn("script_origin", (0, 0, 0));
   ent thread objective_ent_leads_player();
   // Get to the extraction point.
-  Objective_Add(9, "current", & "CLIFFHANGER_OBJ_EXTRACT", (0, 0, 0));
+  Objective_Add(9, "current", &"CLIFFHANGER_OBJ_EXTRACT", (0, 0, 0));
   Objective_Current(9);
 
   //Objective_OnEntity( 9, ent );
@@ -1755,12 +1754,12 @@ objective_snowmobile() {
   //org = level.price.origin;
   //
   //dif = 0.95;
-  //for ( ;; )
+  //for( ;; )
   //{
   //	if( !isalive( level.price ) )
   //		break;
   //	angles = level.price.angles;
-  //	forward = AnglesToForward( angles );
+  //	forward = anglesToForward( angles );
   //	new_org = level.price.origin + forward * 2000;
   //	objective_org = org * dif + new_org * ( 1 - dif );
   //	setObjectiveLocation( "obj_final_escape", objective_org );
@@ -1775,12 +1774,11 @@ objective_snowmobile() {
   //setObjectiveState( "obj_final_escape", "done" );
 }
 
-
 registerObjective(objName, objText, objOrigin) {
   flag_init(objName);
   objID = obj(objName);
 
-  newObjective = SpawnStruct();
+  newObjective = spawnStruct();
   newObjective.name = objName;
   newObjective.id = objID;
   newObjective.state = "invisible";
@@ -1794,7 +1792,7 @@ registerObjective(objName, objText, objOrigin) {
 }
 
 setObjectiveState(objName, objState) {
-  Assert(IsDefined(level.objectives[objName]));
+  Assert(isDefined(level.objectives[objName]));
 
   objective = level.objectives[objName];
   objective.state = objState;
@@ -1832,7 +1830,7 @@ setObjective_pointerText(objName, text) {
 }
 
 setObjectiveRemaining(objName, objString, objRemaining) {
-  Assert(IsDefined(level.objectives[objName]));
+  Assert(isDefined(level.objectives[objName]));
 
   objective = level.objectives[objName];
 
@@ -1845,7 +1843,7 @@ setObjectiveRemaining(objName, objString, objRemaining) {
 setObjectiveOnEntity(objName, ent, offset) {
   objID = obj(objName);
   //objective = level.objectives[ objName ];
-  if(IsDefined(offset))
+  if(isDefined(offset))
     Objective_OnEntity(objID, ent, offset);
   else
     Objective_OnEntity(objID, ent);
@@ -1853,7 +1851,7 @@ setObjectiveOnEntity(objName, ent, offset) {
 
 //objective_stealth()
 //{
-//	while ( 1 )
+//	while( 1 )
 //	{
 //		flag_wait( "_stealth_spotted" );
 //			Objective_String( level.curr_obj, level.strings[ "obj_stealth" ] );
@@ -1864,11 +1862,11 @@ setObjectiveOnEntity(objName, ent, offset) {
 //}
 
 /************************************************************************************************************/
+
 /*												INITIALIZATIONS												*/
 /************************************************************************************************************/
 
 dynamic_run_dialogue_init() {
-
   return undefined;
 }
 
@@ -1879,35 +1877,35 @@ misc_precache() {
   // Get the thing from the satelite
 
   // Plant explosives on the fueling station.
-  level.strings["fuel_station_obj"] = & "CLIFFHANGER_OBJ_FUEL_STATION";
+  level.strings["fuel_station_obj"] = &"CLIFFHANGER_OBJ_FUEL_STATION";
   // Extract the Data Storage Module from the Satellite.
-  level.strings["use_satelite_obj"] = & "CLIFFHANGER_OBJ_USE_SATELITE";
+  level.strings["use_satelite_obj"] = &"CLIFFHANGER_OBJ_USE_SATELITE";
   // Get to the satellite.
-  level.strings["goto_hanger_obj"] = & "CLIFFHANGER_OBJ_GOTO_HANGER";
+  level.strings["goto_hanger_obj"] = &"CLIFFHANGER_OBJ_GOTO_HANGER";
   // Retrieve the 'package'.
-  level.strings["obj_package"] = & "CLIFFHANGER_OBJ_PACKAGE";
+  level.strings["obj_package"] = &"CLIFFHANGER_OBJ_PACKAGE";
   // Find a way into the base.
-  level.strings["obj_base"] = & "CLIFFHANGER_OBJ_BASE";
+  level.strings["obj_base"] = &"CLIFFHANGER_OBJ_BASE";
   // Plant explosives on the fuel tanks.
-  level.strings["obj_c4"] = & "CLIFFHANGER_OBJ_C4";
+  level.strings["obj_c4"] = &"CLIFFHANGER_OBJ_C4";
   // Find the fuel tankers.
-  level.strings["obj_fuel"] = & "CLIFFHANGER_OBJ_FIND_FUEL";
+  level.strings["obj_fuel"] = &"CLIFFHANGER_OBJ_FIND_FUEL";
 
   // Plant explosives on the MiG-29 Jet Fighter.
-  level.strings["obj_c4_mig"] = & "CLIFFHANGER_OBJ_C4_MIG";
+  level.strings["obj_c4_mig"] = &"CLIFFHANGER_OBJ_C4_MIG";
 
-  // Press and hold &&1 to plant the explosives.
-  level.strings["hint_c4_plant"] = & "SCRIPT_PLATFORM_HINTSTR_PLANTEXPLOSIVES";
+  // Press and hold && 1 to plant the explosives.
+  level.strings["hint_c4_plant"] = &"SCRIPT_PLATFORM_HINTSTR_PLANTEXPLOSIVES";
 
   // Escape with Captain MacTavish.
-  level.strings["obj_snowmobile"] = & "CLIFFHANGER_OBJ_EVACUATE";
+  level.strings["obj_snowmobile"] = &"CLIFFHANGER_OBJ_EVACUATE";
 
   foreach(string in level.strings)
   PreCacheString(string);
 }
 
 model_initializations() {
-  c4s = GetEntArray("base_c4_models", "targetname");
+  c4s = getEntArray("base_c4_models", "targetname");
   foreach(c4 in c4s)
   c4 Hide();
 }
@@ -1959,11 +1957,11 @@ do_nothing() {}
 price_bullet_sheild() {
   level endon("stop_price_shield");
 
-  while (1) {
+  while(1) {
     if(Distance(level.player.origin, self.origin) > 1300) {
       self stop_magic_bullet_shield();
 
-      while (Distance(level.player.origin, self.origin) > 1300)
+      while(Distance(level.player.origin, self.origin) > 1300)
         wait .1;
 
       self thread magic_bullet_shield();
@@ -1982,7 +1980,7 @@ price_handle_death() {
 ShootEnemyWrapper_price() {
   self endon("death");
 
-  while (1) {
+  while(1) {
     self waittill("animscript_shot");
 
     if(flag("_stealth_spotted"))
@@ -2074,7 +2072,7 @@ climbing_test_init() {
 
   climbing_ref anim_first_frame(guys, "climbing_test_scene");
 
-  while (1) {
+  while(1) {
     climbing_ref anim_single_solo(level.price_jump, "climbing_test_jump1");
     wait 3;
     climbing_ref anim_single_solo(level.price_jump, "climbing_test_jump2");
@@ -2091,9 +2089,9 @@ climbing_test_init() {
 }
 
 /************************************************************************************************************/
+
 /*												DIALOG												*/
 /************************************************************************************************************/
-
 
 dialog_stealth_failure() // in
 {
@@ -2119,7 +2117,7 @@ dialog_stealth_failure() // in
   //The rest of them have given up looking for you and are returning to their original positions. 	
   second_line[second_line.size] = "cliff_pri_resthavegivenup";
 
-  while (1) {
+  while(1) {
     flag_wait("_stealth_spotted");
     wait 1;
     flag_waitopen("_stealth_spotted");
@@ -2152,7 +2150,7 @@ dialog_stealth_spotted() {
   failure = array_randomize(failure);
   line = 0;
 
-  while (1) {
+  while(1) {
     flag_wait("_stealth_spotted");
 
     play_Radio_Interupt(failure[line]);
@@ -2196,11 +2194,11 @@ dialog_price_battlechatter() {
   min_time_between_each_direction = 5 * 1000;
 
   level endon("price_moving_to_hanger");
-  while ((!flag("done_with_stealth_camp")) && (!flag("price_moving_to_hanger"))) {
+  while((!flag("done_with_stealth_camp")) && (!flag("price_moving_to_hanger"))) {
     //flag_wait( "_stealth_spotted" );
 
     //while( flag( "_stealth_spotted" ) )//only when stealth broken
-    while (1) {
+    while(1) {
       wait .5;
 
       enemies = GetAIArray("axis");
@@ -2208,18 +2206,18 @@ dialog_price_battlechatter() {
       if(enemies.size == 0)
         continue;
       foreach(enemy in enemies) {
-        if(!(enemy CanSee(level.player)))
+        if(!(enemy CanSee(level.player))) {
           continue;
-
-        if(enemy doingLongDeath())
+        }
+        if(enemy doingLongDeath()) {
           continue;
-
+        }
         start_origin = level.player.origin;
         start_angles = level.player.angles;
         end_origin = enemy.origin;
 
         normal = VectorNormalize(end_origin - start_origin);
-        forward = AnglesToForward(start_angles);
+        forward = anglesToForward(start_angles);
         dot = VectorDot(forward, normal);
 
         if(dot >= 0.77)
@@ -2269,12 +2267,10 @@ dialog_price_battlechatter() {
   }
 }
 
-
 dialog_player_kill() {
-
   self waittill("death", killer, method);
 
-  if(!isdefined(killer))
+  if(!isDefined(killer))
     return;
   if(IsPlayer(killer))
     flag_set("player_killed_someone");
@@ -2285,14 +2281,14 @@ dialog_player_kill() {
     return;
   if(!stealth_is_everything_normal())
     return;
-  if(flag("price_moving_to_hanger"))
+  if(flag("price_moving_to_hanger")) {
     return;
-
+  }
   if(IsPlayer(killer)) {
     wait 1;
     if(!stealth_is_everything_normal())
       return;
-    if(!isdefined(level.player_kill_time)) {
+    if(!isDefined(level.player_kill_time)) {
       level.player_kill_time = GetTime();
     } else {
       if(GetTime() < (level.player_kill_time + (15 * 1000)))
@@ -2324,15 +2320,15 @@ dialog_hes_mine() {
   self endon("death");
   self endon("target_stop");
 
-  while (1) {
+  while(1) {
     self waittill_entity_in_range(level.player, 650);
     PrintLn("price target in range");
     self waittill_player_lookat_for_time(0.4);
     PrintLn("price target looked at");
 
-    if(flag("_stealth_spotted"))
+    if(flag("_stealth_spotted")) {
       return;
-
+    }
     // price should not shoot at me if I have buddies nearby
     if(self price_should_snipe_me()) {
       //I'll take this one.	
@@ -2343,7 +2339,7 @@ dialog_hes_mine() {
       //if( !self ent_flag( "_stealth_normal" ) )
       //	return;
       /*
-      if( !isdefined( level.price_kill_time ) )
+      if( !isDefined( level.price_kill_time ) )
       {
       	level.price_kill_time = GetTime();
       }
@@ -2354,7 +2350,7 @@ dialog_hes_mine() {
       }
       level.price_kill_time = GetTime();
       */
-      if(!isdefined(level.price_snipe_dialog))
+      if(!isDefined(level.price_snipe_dialog))
         level.price_snipe_dialog = 0;
 
       thread dialog_hes_mine_think();
@@ -2375,9 +2371,9 @@ dialog_hes_mine_think() {
   dialog[dialog.size] = "cliff_pri_illtakehim";
 
   can_speak = play_Sound_Over_Radio(dialog[level.price_snipe_dialog]);
-  if(!can_speak)
+  if(!can_speak) {
     return;
-
+  }
   //wait .5;
 
   level.price_snipe_dialog++;
@@ -2385,7 +2381,7 @@ dialog_hes_mine_think() {
     level.price_snipe_dialog = 0;
 
   if(IsAlive(self)) {
-    aim_spot = self GetEye();
+    aim_spot = self getEye();
     vec = VectorNormalize(level.price.origin - aim_spot); // vec towards price
     vec *= 20; // bullet starts 20 units from head
     start_spot = aim_spot + vec;
@@ -2407,9 +2403,9 @@ dialog_price_kill() {
 
   self waittill("death", killer);
 
-  if(!isdefined(killer))
+  if(!isDefined(killer)) {
     return;
-
+  }
   if(level.price == killer)
     play_Sound_Over_Radio("UK_pri_inform_killfirm_generic_s");
 }
@@ -2433,7 +2429,7 @@ dialog_found_a_body() {
   level endon("price_moving_to_hanger");
   current_line = 0;
 
-  while (!flag("done_with_stealth_camp")) {
+  while(!flag("done_with_stealth_camp")) {
     flag_wait("_stealth_found_corpse");
 
     if(!flag("_stealth_spotted")) {
@@ -2476,17 +2472,15 @@ dialog_theyre_looking_for_you() {
   //PRICE: Stay out of sight - you've been spotted!
   //dialog[ dialog.size ] = "cliff_pri_sightbeenspotted";
 
-
-
   self endon("death");
-  //if( IsDefined( self.script_noteworthy ) && ( self.script_noteworthy == "truck_guys" ) )
+  //if( isDefined( self.script_noteworthy ) && ( self.script_noteworthy == "truck_guys" ) )
   //	return;
 
   self ent_flag_waitopen("_stealth_normal");
 
-  if(flag("someone_became_alert"))
+  if(flag("someone_became_alert")) {
     return;
-
+  }
   flag_set("someone_became_alert");
 
   self endon("jumpedout"); // dont play this on truck guys
@@ -2496,13 +2490,13 @@ dialog_theyre_looking_for_you() {
   thread do_wait();
 
   level endon("_stealth_spotted");
-  if(flag("_stealth_spotted"))
+  if(flag("_stealth_spotted")) {
     return;
-
+  }
   wait 2; // was 3
 
   /*
-  if( !isdefined( level.stay_hidden_dialog ) )
+  if( !isDefined( level.stay_hidden_dialog ) )
   {
   	level.stay_hidden_dialog = GetTime();
   }
@@ -2514,9 +2508,9 @@ dialog_theyre_looking_for_you() {
   level.stay_hidden_dialog = GetTime();
   */
 
-  if(flag("price_moving_to_hanger"))
+  if(flag("price_moving_to_hanger")) {
     return;
-
+  }
   dialog_line = dialog[RandomInt(dialog.size)];
   PrintLn(dialog_line);
   radio_clear_queue();
@@ -2525,7 +2519,7 @@ dialog_theyre_looking_for_you() {
 }
 
 wait_till_every_thing_stealth_normal_for(time) {
-  while (1) {
+  while(1) {
     if(stealth_is_everything_normal()) {
       wait time;
       if(stealth_is_everything_normal())
@@ -2559,7 +2553,7 @@ dialog_plant_c4_nag() {
   //obj_origin = GetEnt( "base_c4_models", "targetname" ).origin;
   //last_dist = Distance( level.player.origin, obj_origin );
 
-  while (1) {
+  while(1) {
     wait 50;
     if(flag("_stealth_spotted")) {
       flag_waitopen("_stealth_spotted");
@@ -2598,7 +2592,7 @@ dialog_goto_hanger_nag() {
   //obj_origin = GetEnt( "price_hanger_start", "targetname" ).origin;
   //last_dist = Distance( level.player.origin, obj_origin );
 
-  while (1) {
+  while(1) {
     wait 40;
     if(flag("_stealth_spotted")) {
       flag_waitopen("_stealth_spotted");
@@ -2622,8 +2616,6 @@ dialog_goto_hanger_nag() {
   }
 }
 
-
-
 dialog_truck_coming() {
   self endon("driver dead");
   level endon("jeep_stopped");
@@ -2636,7 +2628,7 @@ dialog_truck_coming() {
   wait 15;
 
   //self waittill_entity_out_of_range( level.player, 650 );
-  while (1) {
+  while(1) {
     self waittill_entity_in_range(level.player, 1200);
     truck_coming = within_fov(self.origin, self.angles, level.player.origin, Cos(45));
     if(truck_coming) {
@@ -2656,9 +2648,9 @@ dialog_truck_coming() {
 //STAY AWAY FROM BMP		-------------in
 dialog_stay_away_from_bmp() {
   flag_wait("stay_away_from_bmp");
-  if(flag("done_with_stealth_camp"))
+  if(flag("done_with_stealth_camp")) {
     return;
-
+  }
   //Picking up large heat signatures near the tower, could be BMPs. I'd avoid that area.
   play_Sound_Over_Radio("cliff_pri_avoidarea", true);
 }
@@ -2719,14 +2711,13 @@ dialog_goto_hanger() {
   }
 }
 
-
 dialog_unsilenced_weapons() {
   flag_wait("first_two_guys_in_sight");
   //level endon ( "start_big_explosion" );
   level endon("done_with_stealth_camp");
   level.player endon("death");
 
-  while (1) {
+  while(1) {
     wait 1;
     weap = level.player GetCurrentWeapon();
     if((weap != level.motiontrackergun_off) &&
@@ -2736,8 +2727,8 @@ dialog_unsilenced_weapons() {
       break;
   }
 
-  if(IsDefined(level.price.function_stack)) {
-    while (level.price.function_stack.size > 0) // price is speaking using anim_single_queue
+  if(isDefined(level.price.function_stack)) {
+    while(level.price.function_stack.size > 0) // price is speaking using anim_single_queue
       wait .5;
   }
 
@@ -2751,7 +2742,7 @@ dialog_unsilenced_weapons() {
   //{
   //	wait 1;
   //	weap = level.player GetCurrentWeapon();
-  //	if( ( weap != level.motiontrackergun_off ) 
+  //	if( ( weap != level.motiontrackergun_off )
   //		&& ( weap != level.motiontrackergun_on )
   //		&& ( weap != level.silenced_sidearm )
   //		&& ( weap != "none" ) )//ladders etc
@@ -2763,7 +2754,7 @@ dialog_unsilenced_weapons() {
 }
 
 dialog_pretty_sneaky() {
-  //No kills, no alerts. Impressive Soap." 
+  //No kills, no alerts. Impressive Soap."
   level endon("player_killed_someone");
   level endon("_stealth_spotted");
   level endon("someone_became_alert");
@@ -2791,16 +2782,16 @@ dialog_jeep_stopped() {
   level endon("price_moving_to_hanger");
   self waittill("unloading");
 
-  if(flag("_stealth_spotted"))
+  if(flag("_stealth_spotted")) {
     return;
-
+  }
   //Heads up, the truck just stopped.	
   play_Sound_Over_Radio("cliff_pri_headsup", true);
 
-  if(flag("_stealth_spotted"))
+  if(flag("_stealth_spotted")) {
     return;
-
-  truck_guys = getentarray("truck_guys", "script_noteworthy");
+  }
+  truck_guys = getEntArray("truck_guys", "script_noteworthy");
   alive = 0;
   foreach(guy in truck_guys) {
     if(isalive(guy))
@@ -2813,26 +2804,26 @@ dialog_jeep_stopped() {
 }
 
 play_Sound_Over_Radio_use_que(soundAlias, timeout) {
-  if(flag("tarmac_escape"))
+  if(flag("tarmac_escape")) {
     return;
-
+  }
   return radio_dialogue(soundAlias, timeout);
 }
 
 play_Sound_Over_Radio(soundAlias, force_transmit_on_turn, timeout) {
-  if(flag("tarmac_escape"))
+  if(flag("tarmac_escape")) {
     return;
-
-  if(IsDefined(force_transmit_on_turn) && force_transmit_on_turn == true)
+  }
+  if(isDefined(force_transmit_on_turn) && force_transmit_on_turn == true)
     return radio_dialogue(soundAlias, timeout);
   else
     return radio_dialogue_safe(soundAlias);
 }
 
 play_Radio_Interupt(soundAlias, clear_the_que) {
-  if(flag("tarmac_escape"))
+  if(flag("tarmac_escape")) {
     return;
-
+  }
   radio_dialogue_stop();
   radio_dialogue(soundAlias);
 }
@@ -2842,6 +2833,7 @@ radio_clear_queue() {
 }
 
 /************************************************************************************************************/
+
 /*												SLIDE TEST													*/
 /************************************************************************************************************/
 
@@ -2849,18 +2841,17 @@ slidetest() {
   wait .05;
   // creates a trigger on the hill you're supposed to slide down.
   // this should be made into a real trigger to avoid walking around it. =)
-  trigger = Spawn("trigger_radius", (-12266, -31591, 400), 0, 410, 700);
+  trigger = spawn("trigger_radius", (-12266, -31591, 400), 0, 410, 700);
   thread maps\_load::trigger_slide(trigger);
 }
 
 player_dies_if_he_moves() {
-  /#
   flag_assert("start_big_explosion");
-  # /
-    level endon("start_big_explosion");
+
+  level endon("start_big_explosion");
 
   org = level.player.origin;
-  for (;;) {
+  for(;;) {
     if(Distance(org, level.player.origin) > 64) {
       break;
     }
@@ -2875,11 +2866,11 @@ player_dies_if_he_moves() {
     guy delayThread(timer, ::guy_starts_shooting);
   }
   wait(2);
-  /#
-  if(IsGodMode(level.player))
+
+  if(IsGodMode(level.player)) {
     return;
-  # /
-    level.player Kill();
+  }
+  level.player Kill();
 }
 
 guy_starts_shooting() {
@@ -2920,7 +2911,7 @@ price_move_speed_think(pushdist, sprintdist, stopdist, jogdist, crouchdist) {
   if(self ent_flag_exist("_stealth_custom_anim"))
     self ent_flag_waitopen("_stealth_custom_anim");
 
-  if(!isdefined(self.ent_flag["dynamic_run_speed_stopped"])) {
+  if(!isDefined(self.ent_flag["dynamic_run_speed_stopped"])) {
     self ent_flag_init("dynamic_run_speed_stopped");
     self ent_flag_init("dynamic_run_speed_stopping");
   } else {
@@ -2938,7 +2929,7 @@ price_move_speed_think(pushdist, sprintdist, stopdist, jogdist, crouchdist) {
   //stopdist2rd 	 = stopdist * stopdist;
   //jogdist2rd		 = jogdist * jogdist;
 
-  while (1) {
+  while(1) {
     wait .2;
 
     player = level.players[0];
@@ -2947,14 +2938,14 @@ price_move_speed_think(pushdist, sprintdist, stopdist, jogdist, crouchdist) {
         player = value;
     }
 
-    vec = AnglesToForward(self.angles);
+    vec = anglesToForward(self.angles);
     vec2 = VectorNormalize((player.origin - self.origin));
     vecdot = VectorDot(vec, vec2);
 
     //how far is the player
     dist2rd = DistanceSquared(self.origin, player.origin);
 
-    if(IsDefined(self.cqbwalking) && self.cqbwalking)
+    if(isDefined(self.cqbwalking) && self.cqbwalking)
       self.moveplaybackrate = 1;
 
     //	if( dist2rd < sprintdist2rd || vecdot > - .25 )
@@ -2998,14 +2989,14 @@ stop_dynamic_price_speed() {
 }
 
 dynamic_price_run_set(speed) {
-  if(self.run_speed_state == speed)
+  if(self.run_speed_state == speed) {
     return;
-
+  }
   self.run_speed_state = speed;
 
   switch (speed) {
     case "sprint":
-      if(IsDefined(self.cqbwalking) && self.cqbwalking)
+      if(isDefined(self.cqbwalking) && self.cqbwalking)
         self.moveplaybackrate = 1;
       else
         self.moveplaybackrate = 1.15;
@@ -3065,16 +3056,15 @@ spawn_cliffjump_clouds() {
 }
 
 hide_extra_migs() {
-  /#
   if(level.start_point == "snowmobile")
     return;
   if(level.start_point == "icepick")
     return;
-  if(level.start_point == "avalanche")
+  if(level.start_point == "avalanche") {
     return;
-  # /
-    extra_tarmac_migs = GetEntArray("extra_tarmac_migs", "script_noteworthy");
-  extra_tarmac_mig_delayed = GetEntArray("extra_tarmac_mig_delayed", "script_noteworthy");
+  }
+  extra_tarmac_migs = getEntArray("extra_tarmac_migs", "script_noteworthy");
+  extra_tarmac_mig_delayed = getEntArray("extra_tarmac_mig_delayed", "script_noteworthy");
   migs_turn_on_and_off = extra_tarmac_migs;
   migs_turn_on_and_off = array_combine(migs_turn_on_and_off, extra_tarmac_mig_delayed);
 
@@ -3100,7 +3090,7 @@ hide_extra_migs() {
   flag_wait("jet_defenders_die");
 
   foreach(mig in extra_tarmac_mig_delayed) {
-    if(!isdefined(mig))
+    if(!isDefined(mig))
       continue;
     if(mig.code_classname == "script_model")
       mig thread destructible_force_explosion();
@@ -3114,14 +3104,14 @@ hide_extra_migs() {
 }
 
 set_off_destructible_with_noteworthy(noteworthy) {
-  destructibles = GetEntArray(noteworthy, "script_noteworthy");
+  destructibles = getEntArray(noteworthy, "script_noteworthy");
   foreach(ent in destructibles) {
-    if(!isdefined(ent))
+    if(!isDefined(ent)) {
       continue;
-
-    if(ent.code_classname != "script_model")
+    }
+    if(ent.code_classname != "script_model") {
       continue;
-
+    }
     ent destructible_force_explosion();
     wait(RandomFloatRange(0.15, 0.25));
   }
@@ -3129,7 +3119,7 @@ set_off_destructible_with_noteworthy(noteworthy) {
 
 more_reinforcements_spawn() {
   wait(3);
-  hanger_late_spawners = GetEntArray("hanger_late_spawner", "targetname");
+  hanger_late_spawners = getEntArray("hanger_late_spawner", "targetname");
   array_thread(hanger_late_spawners, ::spawn_ai);
 }
 
@@ -3147,7 +3137,6 @@ tarmac_snowmobile_think() {
   vehicle thread force_unload();
   vehicle waittill("unloading");
   level notify("tarmac_snowmobile_unload");
-
 }
 
 force_unload() {
@@ -3174,7 +3163,7 @@ vehicle_tumble_in_avalanche() {
   direction = VectorNormalize(targ.origin - avalanche_progress_org.origin);
   delayThread(13, ::self_delete);
 
-  for (;;) {
+  for(;;) {
     self waittill("driver_died", other);
     speed = level.player_ride Vehicle_GetSpeed();
     velocity = direction * speed;
@@ -3189,7 +3178,7 @@ new_captain_price_spawns() {
 
   spawner = level.price_spawner;
   spawner.count = 1;
-  price = spawner StalingradSpawn();
+  price = spawner Stalingradspawn();
   level.price = price;
   spawn_failed(price);
   price.animname = "price";
@@ -3201,14 +3190,14 @@ new_captain_price_spawns() {
 }
 
 kill_snowmobiles_that_touch_me(damage, attacker, direction_vec, point, type, modelName, tagName) {
-  if(!isdefined(attacker))
+  if(!isDefined(attacker))
     return;
   classname = attacker.classname;
-  if(!isdefined(classname))
+  if(!isDefined(classname))
     return;
-  if(classname != "script_vehicle_snowmobile")
+  if(classname != "script_vehicle_snowmobile") {
     return;
-
+  }
   foreach(rider in attacker.riders) {
     if(!isalive(rider))
       continue;
@@ -3218,7 +3207,7 @@ kill_snowmobiles_that_touch_me(damage, attacker, direction_vec, point, type, mod
 
 wind_blown_flag_think() {
   animname = "flag_square";
-  if(IsDefined(self.script_noteworthy))
+  if(isDefined(self.script_noteworthy))
     animname = self.script_noteworthy;
   waving_flag = spawn_anim_model(animname);
   waving_flag.origin = self.origin;
@@ -3226,7 +3215,7 @@ wind_blown_flag_think() {
   self Delete();
 
   angles = VectorToAngles(waving_flag.angles);
-  forward = AnglesToForward(angles);
+  forward = anglesToForward(angles);
   //waving_flag.origin += forward * 8;
   waving_flag thread flag_waves();
 }
@@ -3235,8 +3224,8 @@ flag_waves() {
   animation = self getanim("flag_waves");
   self SetAnim(animation, 1, 0, 1);
   //Print3d( self.origin, "x", (1,1,1), 1, 1, 50000 );
-  for (;;) {
-    if(!isdefined(self))
+  for(;;) {
+    if(!isDefined(self))
       return;
     flap_rate = RandomFloatRange(0.8, 1.2);
     self SetAnim(animation, 1, 0, flap_rate);
@@ -3246,26 +3235,26 @@ flag_waves() {
 
 base_sound_remove() {
   flag_wait("player_slides_down_hill");
-  for (i = 0; i < level.createFXent.size; i++) {
+  for(i = 0; i < level.createFXent.size; i++) {
     ent = level.createFXent[i];
 
-    if(IsDefined(ent.v["soundalias"])) {
+    if(isDefined(ent.v["soundalias"])) {
       if(ent.v["soundalias"] == "velocity_whitenoise_loop")
         continue;
     }
-    if(IsDefined(ent.looper))
+    if(isDefined(ent.looper))
       ent.looper Delete();
   }
 
-  models = GetEntArray("script_model", "code_classname");
+  models = getEntArray("script_model", "code_classname");
   foreach(model in models) {
     model Delete();
   }
 
   foreach(tree in level.destructible_tree_models) {
-    model = Spawn("script_model", tree["origin"]);
+    model = spawn("script_model", tree["origin"]);
     model.angles = tree["angles"];
-    model SetModel(tree["model"]);
+    model setModel(tree["model"]);
     tree["owner"].tree = model;
     //		tree[ "owner" ] thread tree_think();
   }
@@ -3273,7 +3262,7 @@ base_sound_remove() {
 
 destructible_tree_think() {
   brush = undefined;
-  targets = GetEntArray(self.target, "targetname");
+  targets = getEntArray(self.target, "targetname");
   model = undefined;
   foreach(target in targets) {
     if(target.code_classname == "script_brushmodel") {
@@ -3288,7 +3277,7 @@ destructible_tree_think() {
   self waittill("damage");
 
   brush Delete();
-  if(IsDefined(self.tree)) {
+  if(isDefined(self.tree)) {
     vector = randomvector(100);
     vector = set_z(vector, abs(vector[2]));
     model PhysicsLaunchClient(model.origin, vector + (0, 0, 50));
@@ -3300,7 +3289,7 @@ keyboard_nag() {
   flag_waitopen("keyboard_used");
   level endon("keyboard_used");
 
-  for (;;) {
+  for(;;) {
     wait(18);
     // “Soap, get upstairs and download the files.”	
     level.price dialogue_queue("downloadfiles");
@@ -3308,7 +3297,7 @@ keyboard_nag() {
 }
 
 init_slope_trees() {
-  slope_trees = GetEntArray("slope_tree", "targetname");
+  slope_trees = getEntArray("slope_tree", "targetname");
   top_of_hill = getstruct("top_of_hill", "targetname");
 
   slope_trees = get_array_of_closest(top_of_hill.origin, slope_trees);
@@ -3320,9 +3309,9 @@ init_slope_trees() {
     slope_trees = array_delete_evenly(slope_trees, 1, 2);
   }
 
-  slope_tree_clip = GetEntArray("slope_tree_clip", "targetname");
+  slope_tree_clip = getEntArray("slope_tree_clip", "targetname");
   foreach(index, slope_tree in slope_trees) {
-    AssertEx(IsDefined(slope_tree_clip[index]), "Not enough slope_tree_clip placed in the map");
+    AssertEx(isDefined(slope_tree_clip[index]), "Not enough slope_tree_clip placed in the map");
     slope_tree.clip = slope_tree_clip[index];
     slope_tree_clip[index] = undefined;
   }
@@ -3346,7 +3335,7 @@ run_in_and_shout() {
   level waittill("kill_price");
   self StopAnimScripted();
   self.ignoreall = false;
-  for (;;) {
+  for(;;) {
     self Shoot();
     wait(RandomFloatRange(0.1, 0.2));
   }
@@ -3376,7 +3365,7 @@ random_yelling(enemies) {
   start_time = GetTime();
   onethird_time = start_time + (4 * 1000);
   twothird_time = start_time + (8 * 1000);
-  while (!flag("start_big_explosion")) {
+  while(!flag("start_big_explosion")) {
     current_time = GetTime();
     w = 1;
     if(current_time > onethird_time)
@@ -3422,10 +3411,9 @@ brawl_interupted(price, guy) {
 }
 
 cliffhanger_locker_brawl() {
-
   //get rid of all enemies to make room for new stealth free gameplay
   kill_all_enemies();
-  if(IsDefined(level.truck_patrol)) {
+  if(isDefined(level.truck_patrol)) {
     level.truck_patrol delete_truck_headlights();
     level.truck_patrol Delete();
   }
@@ -3440,9 +3428,9 @@ cliffhanger_locker_brawl() {
   level.price.cutoff_brawl = true;
 
   guy = locker_brawl_spawner spawn_ai();
-  if(spawn_failed(guy))
+  if(spawn_failed(guy)) {
     return;
-
+  }
   guy set_battlechatter(false);
 
   level.price.cutoff_brawl = undefined;
@@ -3465,7 +3453,6 @@ cliffhanger_locker_brawl() {
 
   locker_brawl thread anim_single(guys, "locker_brawl");
   level.price waittillmatch("single anim", "end");
-
 }
 
 price_anims_satellite() {
@@ -3506,15 +3493,14 @@ price_puts_his_hands_up() {
   level.price disable_cqbwalk();
 }
 
-
 price_goes_to_satellite() {
-  if(flag("keyboard_used"))
+  if(flag("keyboard_used")) {
     return;
-
+  }
   level endon("keyboard_used");
 
   satelite_sequence_node = GetEnt("satelite_sequence", "targetname");
-  if(IsDefined(level.price.cutoff_brawl))
+  if(isDefined(level.price.cutoff_brawl))
     satelite_sequence_node anim_reach_solo(level.price, "enter");
 
   //delayThread( 2, ::autosave_by_name, "price_to_satellite" );
@@ -3536,7 +3522,6 @@ miglights() {
   lights_on("landing");
 }
 
-
 /*
 create_price_target()
 {
@@ -3545,13 +3530,11 @@ create_price_target()
 }
 */
 
-
-
 price_starts_moving() {
   flag_wait("price_starts_moving");
 
   level.price.moveplaybackrate = 1;
-  if(IsDefined(level.price.node) && abs(level.price.node.angles[1] - level.price.angles[1]) < 5) {
+  if(isDefined(level.price.node) && abs(level.price.node.angles[1] - level.price.angles[1]) < 5) {
     level.price OrientMode("face current");
     set_custom_move_start_transition(level.price, "casual_crouch_exit");
   }
@@ -3581,7 +3564,6 @@ price_starts_moving() {
 
 //HEART BEAT SETUP
 dialog_setup_heartbeat() {
-
   flag_wait("check_heart_beat_sensor");
 
   level.price SetLookAtEntity(level.player);
@@ -3599,7 +3581,7 @@ dialog_setup_heartbeat() {
 
   level endon("first_two_guys_in_sight");
 
-  while (level.player GetCurrentWeapon() != level.motiontrackergun_on) {
+  while(level.player GetCurrentWeapon() != level.motiontrackergun_on) {
     //flag_wait( "player_activated_sensor" );
     wait .5;
   }
@@ -3636,9 +3618,9 @@ explain_dpad_hint() {
   level.iconElem3.color = (1, 1, 0);
   level.iconElem3.alpha = .7;
 
-  while (!(level.player should_break_activate_heartbeat()))
+  while(!(level.player should_break_activate_heartbeat()))
     wait .5;
-  //while ( level.player GetCurrentWeapon() != level.motiontrackergun_on )
+  //while( level.player GetCurrentWeapon() != level.motiontrackergun_on )
   //	wait .5;
 
   level.iconElem setPoint("CENTER", "BOTTOM", 320, -20, 2);
@@ -3682,7 +3664,7 @@ dialog_first_encounter() {
   //Soap, these muppets have no idea we’re here. Let’s take this nice and slow.
   level.price dialogue_queue("cliff_pri_noidea");
 
-  //You take the one on the left. 
+  //You take the one on the left.
   level.price dialogue_queue("cliff_pri_youtakeleft");
 
   thread price_stops_during_dialog();
@@ -3690,19 +3672,19 @@ dialog_first_encounter() {
   //level.price disable_ai_color();//dont start moving to a new node
 
   // – “On three.”
-  level.price PlaySound("Cliff_pri_onthree");
+  level.price playSound("Cliff_pri_onthree");
   wait 1;
 
   // – “One…”
-  level.price PlaySound("Cliff_pri_one");
+  level.price playSound("Cliff_pri_one");
   wait 1;
 
   // – “Two…”
-  level.price PlaySound("Cliff_pri_two");
+  level.price playSound("Cliff_pri_two");
   wait 1;
 
   // – “Three.”
-  level.price PlaySound("Cliff_pri_three");
+  level.price playSound("Cliff_pri_three");
   wait .2;
 
   flag_set("first_encounter_dialog_finished");
@@ -3719,12 +3701,10 @@ dialog_first_encounter() {
   }
 }
 
-
-
 price_climbs_ledge() {
   flag_wait("price_go_to_climb_ridge");
 
-  price_ledgeclimb = GetEntArray("price_ledgeclimb", "targetname");
+  price_ledgeclimb = getEntArray("price_ledgeclimb", "targetname");
   price_ledgeclimb[0] anim_reach_solo(level.price, "ledge_climb");
   price_ledgeclimb[0] anim_single_solo(level.price, "ledge_climb");
 
@@ -3846,23 +3826,23 @@ dialog_second_encounter() {
     //Same plan.
     level.price dialogue_queue("cliff_pri_sameplan");
   else
-    //You take the one on the left. 
+    //You take the one on the left.
     level.price dialogue_queue("cliff_pri_youtakeleft");
 
   // – “On three.”
-  level.price PlaySound("Cliff_pri_onthree");
+  level.price playSound("Cliff_pri_onthree");
   wait 1;
 
   // – “One…”
-  level.price PlaySound("Cliff_pri_one");
+  level.price playSound("Cliff_pri_one");
   wait 1;
 
   // – “Two…”
-  level.price PlaySound("Cliff_pri_two");
+  level.price playSound("Cliff_pri_two");
   wait 1;
 
   // – “Three.”
-  level.price PlaySound("Cliff_pri_three");
+  level.price playSound("Cliff_pri_three");
   wait .2;
 
   flag_set("second_encounter_dialog_finished");
@@ -3910,7 +3890,7 @@ dialog_second_encounter_success() {
   wait .5;
 
   if(!flag("player_killed_one_first_two_encounters")) {
-    if(IsDefined(level.said_i_do_everything)) {
+    if(isDefined(level.said_i_do_everything)) {
       //This is easier when you do some of the work.	
       level.price dialogue_queue("cliff_pri_somework");
     } else {
@@ -3987,9 +3967,9 @@ dialog_go_do_the_work() {
   flag_wait("said_storm_brewing");
 
   //flag_set( "conversation_active" );
-  if(flag("someone_became_alert") || flag("_stealth_spotted"))
+  if(flag("someone_became_alert") || flag("_stealth_spotted")) {
     return;
-
+  }
   level endon("someone_became_alert");
 
   //Let’s split up. I'll use the thermal scope and provide overwatch from this ridge.	
@@ -4018,9 +3998,9 @@ dialog_your_in() {
   flag_wait("give_c4_obj");
 
   //flag_waitopen( "_stealth_spotted" );
-  if(flag("someone_became_alert") || flag("_stealth_spotted"))
+  if(flag("someone_became_alert") || flag("_stealth_spotted")) {
     return;
-
+  }
   //All right, I've tapped into their comms.	
   thread play_Sound_Over_Radio_use_que("cliff_pri_tappedcomms");
 
@@ -4029,9 +4009,7 @@ dialog_your_in() {
 
   //We may need to go to ‘Plan B’ if things go south.	
   thread play_Sound_Over_Radio_use_que("cliff_pri_yourein_3");
-
 }
-
 
 //enemy_lives()
 //{
@@ -4055,12 +4033,12 @@ dialog_your_in() {
 //	enemies = GetAIArray( "axis" );
 //	foreach ( enemy in enemies )
 //	{
-//		if( IsDefined( enemy.script_noteworthy ) )
+//		if( isDefined( enemy.script_noteworthy ) )
 //		{
 //			if( ( enemy.script_noteworthy == "welder_wing" ) || ( enemy.script_noteworthy == "welder_engine" ) )
 //				continue;
 //		}
-//		if( isdefined( enemy.ridingvehicle ) )
+//		if( isDefined( enemy.ridingvehicle ) )
 //			enemy delete();
 //
 //		if( enemy enemy_lives() )
@@ -4081,7 +4059,7 @@ dialog_your_in() {
 //		}
 //	}
 //
-//	while ( level.hanger_path_attackers > 0 )
+//	while( level.hanger_path_attackers > 0 )
 //		wait 1;
 //}
 //
@@ -4095,7 +4073,7 @@ dialog_your_in() {
 //{
 //	self endon( "death" );
 //	level endon( "brought_friends" );
-//	while ( 1 )
+//	while( 1 )
 //	{
 //		if( self CanSee( level.price ) )
 //			break;
@@ -4120,11 +4098,10 @@ turn_off_blizzard() {
   sight_ranges_long();
 }
 
-
 setup_stealth_enemy_cleanup() {
   self.pathrandompercent = 200;
   self thread disable_cqbwalk();
-  if(isdefined(self.script_stealthgroup))
+  if(isDefined(self.script_stealthgroup))
     self thread maps\_stealth_shared_utilities::enemy_announce_spotted(self.origin);
 
   self.goalradius = 400;
@@ -4144,7 +4121,7 @@ setup_stealth_enemy_cleanup() {
 //
 //
 //	//end idle
-//	for ( ;; )
+//	for( ;; )
 //	{
 //		if( Distance( level.player.origin, level.price.origin ) < 350 )
 //			break;
@@ -4184,7 +4161,7 @@ price_died_you_lose() {
   wait(2.5);
 
   // Captain MacTavish was executed.
-  SetDvar("ui_deadquote", & "CLIFFHANGER_PRICE_DIED");
+  SetDvar("ui_deadquote", &"CLIFFHANGER_PRICE_DIED");
   missionFailedWrapper();
   level.player waittill("detonate");
 }
@@ -4198,7 +4175,7 @@ detect_player_shot() {
   wait(0.1); // for the start point to get the player to the right spot
   last_weapon = "";
   last_ammo = 0;
-  for (;;) {
+  for(;;) {
     if(flag("player_steps_into_view") || level.player IsThrowingGrenade()) {
       level.player delayThread(1, ::send_notify, "player_shot");
       return;
@@ -4263,7 +4240,7 @@ price_talks_about_compromised() {
   level.petrov = GetEnt("petrov_org", "targetname");
   level.petrov.animname = "price";
 
-  // "Soap, I've been compromised! Keep a low profile and hold your fire." 
+  // "Soap, I've been compromised! Keep a low profile and hold your fire."
   level.price dialogue_queue("compromised");
 
   // "This is major petrov! Come out with your hands up!
@@ -4326,9 +4303,9 @@ price_tells_you_plan_b() {
 }
 
 petrov_optional_encouragement_lines() {
-  if(flag("player_can_see_capture"))
+  if(flag("player_can_see_capture")) {
     return;
-
+  }
   level endon("player_can_see_capture");
 
   // To enemy infiltrators, we have captured one of your comrades!	
@@ -4352,7 +4329,6 @@ check_player_detonate() {
   flag_set("player_detonate");
 }
 
-
 soap_opens_hanger_door() {
   //* Let’s go.	
   level.price dialogue_queue("letsgo");
@@ -4375,20 +4351,18 @@ soap_opens_hanger_door() {
   locker_brawl anim_first_frame(level.lockers, "locker_brawl");
 
   door = GetEnt("hanger_entrance_door", "targetname");
-  attachments = GetEntArray(door.target, "targetname");
-  for (i = 0; i < attachments.size; i++) {
+  attachments = getEntArray(door.target, "targetname");
+  for(i = 0; i < attachments.size; i++) {
     attachments[i] LinkTo(door);
   }
   door hunted_style_door_open();
 
-  for (i = 0; i < attachments.size; i++) {
+  for(i = 0; i < attachments.size; i++) {
     if(attachments[i].classname == "script_brushmodel")
       attachments[i] ConnectPaths();
   }
   level.price disable_cqbwalk();
 }
-
-
 
 guards_run_in() {
   guard1 = get_guy_with_script_noteworthy_from_spawner("hanger_capture_enemy1");
@@ -4432,7 +4406,7 @@ capture_guy_think() {
 }
 
 more_guards() {
-  enemies = GetEntArray("hanger_capture_enemies", "targetname");
+  enemies = getEntArray("hanger_capture_enemies", "targetname");
   array_thread(enemies, ::add_spawn_function, ::capture_guy_think);
   array_thread(enemies, ::spawn_ai);
 }
@@ -4456,7 +4430,7 @@ capture_shouting() {
 
 explosion_reaction() {
   self endon("death");
-  //added 5 reaction animations for cliffhanger capture sequence. 
+  //added 5 reaction animations for cliffhanger capture sequence.
   reaction = [];
   reaction[reaction.size] = "explosion_reactA";
   reaction[reaction.size] = "explosion_reactB";
@@ -4471,9 +4445,7 @@ explosion_reaction() {
   self.health = 1;
   self.a.pose = "stand";
   self anim_generic(self, reaction[RandomInt(reaction.size)]);
-
 }
-
 
 open_hanger_doors() {
   hangar_leftdoor_goal = GetEnt("hangar_leftdoor_goal", "targetname");
@@ -4484,9 +4456,9 @@ open_hanger_doors() {
   hangar_rightdoor = GetEnt("hangar_rightdoor", "targetname");
   hangar_rightdoor thread door_slides_open(hangar_rightdoor_goal);
 
-  hangar_leftdoor PlaySound("door_hanger_metal_open");
+  hangar_leftdoor playSound("door_hanger_metal_open");
   wait(0.3);
-  //	hangar_rightdoor PlaySound( "door_hanger_metal_open" );
+  //	hangar_rightdoor playSound( "door_hanger_metal_open" );
 }
 
 door_slides_open(door_goal) {
@@ -4494,7 +4466,7 @@ door_slides_open(door_goal) {
   fraction_door_goal = self.origin * dif + door_goal.origin * (1 - dif);
   self MoveTo(fraction_door_goal, 1.15, 0.4, 0.7);
   self ConnectPaths();
-  self PlaySound("door_hanger_metal_open");
+  self playSound("door_hanger_metal_open");
 
   wait(1.5);
   dif = 0.15;
@@ -4554,7 +4526,7 @@ player_slow_mo(parameter1, parameter2) {
   weapon = level.player_weapon;
   if(!level.player HasWeapon(weapon)) {
     weapon = level.player GetWeaponsListPrimaries()[0];
-    if(!isdefined(weapon)) {
+    if(!isDefined(weapon)) {
       weapon = level.player GetWeaponsListAll()[0];
     }
   }
@@ -4611,19 +4583,19 @@ tarmac_base_Accuracy() {
 
 explosion_chain_reaction(parameter1, parameter2) {
   exploder(8);
-  //fuel_tanks = GetEntArray( "fuel_tank", "script_noteworthy" );
+  //fuel_tanks = getEntArray( "fuel_tank", "script_noteworthy" );
   //array_thread( fuel_tanks, ::destructible_force_explosion );
 
   wait .2;
   exploder(12);
   //fuel_truck1 = GetEnt( "fuel_truck1", "script_noteworthy" );
-  //playfx( level._effect[ "fuel_truck_explosion" ], fuel_truck1.origin );
+  //playFX( level._effect[ "fuel_truck_explosion" ], fuel_truck1.origin );
 
   wait .1;
 
   exploder(10);
   //fuel_truck2 = GetEnt( "fuel_truck2", "script_noteworthy" );
-  //playfx( level._effect[ "fuel_truck_explosion" ], fuel_truck2.origin );
+  //playFX( level._effect[ "fuel_truck_explosion" ], fuel_truck2.origin );
 
   wait .2;
 
@@ -4639,12 +4611,12 @@ explosion_chain_reaction(parameter1, parameter2) {
 
   wait .5;
 
-  if(IsDefined(level.explosion_enemies)) {
+  if(isDefined(level.explosion_enemies)) {
     // kill the farther away enemies.	
     enemies = level.explosion_enemies;
     enemies = remove_dead_from_array(enemies);
     enemies = get_array_of_closest(level.player.origin, enemies);
-    for (i = 6; i < enemies.size; i++) {
+    for(i = 6; i < enemies.size; i++) {
       org = randomvector(10);
       org = (org[0], org[1], abs(org[2]));
       org += enemies[i].origin;
@@ -4665,7 +4637,7 @@ waittill_reload() {
   	if( ( level.player GetWeaponAmmoClip( level.gunPrimary ) ) < level.gunPrimaryClipAmmo )
   	{
   		thread keyHint( "reload" );
-  		while ( ( level.player GetWeaponAmmoClip( level.gunPrimary ) ) < level.gunPrimaryClipAmmo )
+  		while( ( level.player GetWeaponAmmoClip( level.gunPrimary ) ) < level.gunPrimaryClipAmmo )
   			wait .1;
   		clear_hints();
   		wait 1;
@@ -4723,7 +4695,7 @@ is_e3_start() {
   //	starts[ "tarmac" ] = true;
   //	starts[ "jump" ] = true;
 
-  return IsDefined(starts[level.start_point]);
+  return isDefined(starts[level.start_point]);
 }
 
 stealth_achievement() {
@@ -4735,14 +4707,14 @@ stealth_achievement() {
 
 save_game_if_safe(saveID) {
   wait 3;
-  if(!isalive(level.price))
+  if(!isalive(level.price)) {
     return;
-
-  if(!level.price.damageshield)
+  }
+  if(!level.price.damageshield) {
     return;
-
-  if(!maps\_autosave::autosavecheck())
+  }
+  if(!maps\_autosave::autosavecheck()) {
     return;
-
+  }
   CommitSave(saveID);
 }

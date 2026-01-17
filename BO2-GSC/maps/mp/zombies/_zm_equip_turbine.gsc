@@ -14,10 +14,10 @@
 
 init(hint, howto) {
   if(!isDefined(hint))
-    hint = & "ZOMBIE_EQUIP_TURBINE_PICKUP_HINT_STRING";
+    hint = &"ZOMBIE_EQUIP_TURBINE_PICKUP_HINT_STRING";
 
   if(!isDefined(howto))
-    howto = & "ZOMBIE_EQUIP_TURBINE_HOWTO";
+    howto = &"ZOMBIE_EQUIP_TURBINE_HOWTO";
 
   if(!maps\mp\zombies\_zm_equipment::is_equipment_included("equip_turbine_zm")) {
     return;
@@ -358,7 +358,7 @@ turbinepoweron(origin, powerradius) {
 
   if(!(isDefined(self.turbine_power_is_on) && self.turbine_power_is_on) && !(isDefined(self.turbine_is_powering_on) && self.turbine_is_powering_on) && !(isDefined(self.buildableturbine.dying) && self.buildableturbine.dying)) {
     self.turbine_is_powering_on = 1;
-    self.buildableturbine playloopsound("zmb_turbine_loop", 2);
+    self.buildableturbine playLoopSound("zmb_turbine_loop", 2);
     self turbinewarmup();
 
     if(isDefined(self.localpower))
@@ -399,7 +399,7 @@ turbine_disappear_fx(origin, waittime) {
   if(isDefined(waittime) && waittime > 0)
     wait(waittime);
 
-  playfx(level._turbine_disappear_fx, origin);
+  playFX(level._turbine_disappear_fx, origin);
 
   if(isDefined(self.buildableturbine))
     playsoundatposition("zmb_turbine_explo", self.buildableturbine.origin);
@@ -455,7 +455,7 @@ turbineaudio() {
     return;
   }
 
-  self.buildableturbine playloopsound("zmb_turbine_loop", 2);
+  self.buildableturbine playLoopSound("zmb_turbine_loop", 2);
 }
 
 #using_animtree("zombie_turbine");

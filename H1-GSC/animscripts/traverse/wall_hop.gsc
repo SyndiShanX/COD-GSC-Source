@@ -17,7 +17,7 @@ wall_hop_human() {
   var_0 = [];
   var_0["traverseAnim"] = % traverse_window_quick;
   var_0["traverseHeight"] = 40.0;
-  var_1 = isdefined(level.disallowlegswingwallhop) && level.disallowlegswingwallhop == 1;
+  var_1 = isDefined(level.disallowlegswingwallhop) && level.disallowlegswingwallhop == 1;
 
   if(var_1 || randomint(100) < 30)
     var_0["traverseAnim"] = % traverse_wallhop_3;

@@ -18,9 +18,9 @@ track_infinite_ammo_time() {
 
   flag_wait("so_demoman_start");
 
-  while (!flag("special_op_terminated")) {
+  while(!flag("special_op_terminated")) {
     wait 0.05;
-    if(!isdefined(level.infinite_ammo) || !level.infinite_ammo)
+    if(!isDefined(level.infinite_ammo) || !level.infinite_ammo)
       level.normal_time += 0.05;
     else
       level.infinite_time += 0.05;
@@ -30,7 +30,7 @@ track_infinite_ammo_time() {
 // ---------------------------------------------------------------------------------
 
 register_bridge_enemy() {
-  if(!isdefined(level.bridge_enemies)) {
+  if(!isDefined(level.bridge_enemies)) {
     level.bridge_enemies = 0;
     level.enemy_list = [];
   }
@@ -54,25 +54,25 @@ register_bridge_enemy() {
 player_refill_ammo() {
   level endon("special_op_terminated");
 
-  while (true) {
+  while(true) {
     wait 0.05;
     if(!player_can_refill()) {
-      if(isdefined(self.maintain_stock))
+      if(isDefined(self.maintain_stock))
         self.maintain_stock = [];
       continue;
     }
 
-    if(!isdefined(self.maintain_stock))
+    if(!isDefined(self.maintain_stock))
       self.maintain_stock = [];
 
     weapons = self getweaponslistall();
     foreach(weapon in weapons) {
       if(weapon == "claymore")
         continue;
-      if(weapon == "c4")
+      if(weapon == "c4") {
         continue;
-
-      if(!isdefined(self.maintain_stock[weapon]))
+      }
+      if(!isDefined(self.maintain_stock[weapon]))
         self.maintain_stock[weapon] = self getweaponammostock(weapon);
 
       self setweaponammostock(weapon, self.maintain_stock[weapon]);
@@ -81,7 +81,7 @@ player_refill_ammo() {
 }
 
 player_can_refill() {
-  if(!isdefined(level.infinite_ammo) || !level.infinite_ammo)
+  if(!isDefined(level.infinite_ammo) || !level.infinite_ammo)
     return false;
 
   return true;
@@ -93,20 +93,20 @@ player_wait_for_fire() {
   notifyoncommand("player_fired", "+frag");
   notifyoncommand("player_fired", "+smoke");
 
-  while (true) {
+  while(true) {
     self waittill("player_fired");
 
     // Placing sentry is ok.
-    if(isdefined(self.placingSentry))
+    if(isDefined(self.placingSentry)) {
       continue;
-
+    }
     // Certain weapons are allowed...
     weapon = self getcurrentweapon();
-    if(weapon == "claymore")
+    if(weapon == "claymore") {
       continue;
-
+    }
     if(weapon == "c4") {
-      if(!isdefined(self.c4array) || (self.c4array.size <= 0))
+      if(!isDefined(self.c4array) || (self.c4array.size <= 0))
         continue;
     }
 
@@ -128,7 +128,7 @@ player_wait_for_fire() {
 vehicle_alive_think() {
   level endon("special_op_terminated");
 
-  if(!isdefined(level.vehicles_alive))
+  if(!isDefined(level.vehicles_alive))
     level.vehicles_alive = 0;
 
   level.vehicles_alive++;
@@ -143,7 +143,7 @@ vehicle_alive_think() {
   level.vehicles_alive--;
   level.vehicle_list = array_remove(level.vehicle_list, self);
 
-  if(isdefined(attacker) && IsPlayer(attacker)) {
+  if(isDefined(attacker) && IsPlayer(attacker)) {
     attacker.target_reminder_time = gettime();
   } else {
     foreach(player in level.players)
@@ -160,7 +160,7 @@ vehicle_track_damage() {
   level endon("special_op_terminated");
   self endon("exploded");
 
-  while (1) {
+  while(1) {
     self waittill("damage", damage, attacker);
 
     if(!vehicle_attacker_is_player(attacker)) {
@@ -178,7 +178,7 @@ vehicle_track_damage() {
 
 vehicle_attacker_is_player(attacker) {
   // No attacker...
-  if(!isdefined(attacker))
+  if(!isDefined(attacker))
     return false;
 
   // Player attacker...
@@ -186,11 +186,11 @@ vehicle_attacker_is_player(attacker) {
     return true;
 
   // Player's turret attacker
-  if(!isdefined(attacker.targetname))
+  if(!isDefined(attacker.targetname))
     return false;
   if(attacker.targetname != "sentry_minigun")
     return false;
-  if(!isdefined(attacker.owner))
+  if(!isDefined(attacker.owner))
     return false;
   if(!isplayer(attacker.owner))
     return false;
@@ -199,7 +199,7 @@ vehicle_attacker_is_player(attacker) {
 }
 
 vehicle_get_slide_car(car_id) {
-  slide_cars = getentarray(car_id, "script_noteworthy");
+  slide_cars = getEntArray(car_id, "script_noteworthy");
   foreach(ent in slide_cars) {
     if(ent.classname == "script_model")
       return ent;
@@ -220,14 +220,14 @@ hud_display_cars_hint() {
   thread hud_display_car_locations();
   //	thread hud_display_car_objectives();
 
-  while (!flag("so_demoman_complete")) {
-    while (hud_disable_cars_hint()) {
+  while(!flag("so_demoman_complete")) {
+    while(hud_disable_cars_hint()) {
       wait 1;
       continue;
     }
     self notify("show_vehicle_locs");
 
-    while (!hud_disable_cars_hint()) {
+    while(!hud_disable_cars_hint()) {
       wait 1;
       continue;
     }
@@ -239,7 +239,7 @@ hud_disable_cars_hint() {
   if(!flag("so_demoman_start"))
     return true;
 
-  if(isdefined(level.bridge_enemies) && (level.bridge_enemies > 0)) {
+  if(isDefined(level.bridge_enemies) && (level.bridge_enemies > 0)) {
     close_enemies = get_array_of_closest(self.origin, level.enemy_list, undefined, undefined, 4096, 0);
     if(close_enemies.size > 0)
       return true;
@@ -254,7 +254,7 @@ hud_disable_cars_hint() {
 hud_display_car_locations() {
   level endon("special_op_terminated");
 
-  while (!flag("so_demoman_complete")) {
+  while(!flag("so_demoman_complete")) {
     self waittill("show_vehicle_locs");
 
     thread hud_refresh_car_locations();
@@ -267,7 +267,7 @@ hud_refresh_car_locations() {
   level endon("special_op_terminated");
   self endon("hide_vehicle_locs");
 
-  while (1) {
+  while(1) {
     self notify("refresh_vehicle_locs");
     close_vehicles = get_array_of_closest(self.origin, level.vehicle_list, undefined, 3);
     foreach(vehicle in close_vehicles)
@@ -277,7 +277,7 @@ hud_refresh_car_locations() {
 }
 
 hud_show_target_icon(vehicle) {
-  assertex(isdefined(vehicle), "hud_show_target_icon() requires a valid vehicle entity to place an icon over.");
+  assertex(isDefined(vehicle), "hud_show_target_icon() requires a valid vehicle entity to place an icon over.");
 
   icon = NewClientHudElem(self);
   icon SetShader("waypoint_targetneutral", 1, 1);
@@ -301,9 +301,9 @@ hud_show_target_icon(vehicle) {
 hud_display_car_objectives() {
   level endon("special_op_terminated");
 
-  Objective_SetPointerTextOverride(1, & "SO_DEMO_SO_BRIDGE_OBJ_DESTROY");
+  Objective_SetPointerTextOverride(1, &"SO_DEMO_SO_BRIDGE_OBJ_DESTROY");
 
-  while (!flag("so_demoman_complete")) {
+  while(!flag("so_demoman_complete")) {
     self waittill("show_vehicle_locs");
 
     thread hud_refresh_car_objectives();
@@ -318,7 +318,7 @@ hud_refresh_car_objectives() {
   level endon("special_op_terminated");
   self endon("hide_vehicle_locs");
 
-  while (1) {
+  while(1) {
     close_vehicles = get_array_of_closest(self.origin, level.vehicle_list, undefined, 3);
     i = 0;
     foreach(vehicle in close_vehicles) {
@@ -330,7 +330,7 @@ hud_refresh_car_objectives() {
 }
 
 hud_show_target_objective(vehicle, index) {
-  assertex(isdefined(vehicle), "hud_show_target_icon() requires a valid vehicle entity to place an icon over.");
+  assertex(isDefined(vehicle), "hud_show_target_icon() requires a valid vehicle entity to place an icon over.");
 
   if(index == 0)
     Objective_Position(1, vehicle.origin + (0, 0, 48));
@@ -339,7 +339,7 @@ hud_show_target_objective(vehicle, index) {
 }
 
 hud_hide_car_objectives() {
-  for (i = 0; i < 3; i++) {
+  for(i = 0; i < 3; i++) {
     if(i == 0)
       Objective_Position(1, (0, 0, 0));
     else
@@ -350,16 +350,17 @@ hud_hide_car_objectives() {
 // ---------------------------------------------------------------------------------
 
 hud_display_cars_remaining() {
-  self.car_title = so_create_hud_item(3, so_hud_ypos(), & "SO_DEMO_SO_BRIDGE_VEHICLES", self);
+  self.car_title = so_create_hud_item(3, so_hud_ypos(), &"SO_DEMO_SO_BRIDGE_VEHICLES", self);
   self.car_count = so_create_hud_item(3, so_hud_ypos(), undefined, self);
   self.car_count.alignx = "left";
   self.car_count SetValue(level.vehicles_alive);
   level.vehicles_max = level.vehicles_alive;
 
-  while (true) {
+  while(true) {
     level waittill("vehicle_destroyed");
-    if(level.vehicles_alive <= 0)
+    if(level.vehicles_alive <= 0) {
       break;
+    }
 
     self.car_count SetValue(level.vehicles_alive);
     if(level.vehicles_alive <= 5) {
@@ -369,7 +370,7 @@ hud_display_cars_remaining() {
   }
 
   self.car_count so_remove_hud_item(true);
-  self.car_count = so_create_hud_item(3, so_hud_ypos(), & "SPECIAL_OPS_DASHDASH", self);
+  self.car_count = so_create_hud_item(3, so_hud_ypos(), &"SPECIAL_OPS_DASHDASH", self);
   self.car_count.alignx = "left";
 
   self.car_title thread so_hud_pulse_success();
@@ -380,17 +381,18 @@ hud_display_cars_remaining() {
 }
 
 hud_display_wreckage_count() {
-  self.bonus_title = so_create_hud_item(4, so_hud_ypos(), & "SO_DEMO_SO_BRIDGE_WRECKAGE_IN", self);
+  self.bonus_title = so_create_hud_item(4, so_hud_ypos(), &"SO_DEMO_SO_BRIDGE_WRECKAGE_IN", self);
   self hud_create_bonus_count();
   self.bonus_count_current = level.bonus_count_goal;
   self.bonus_count SetValue(level.bonus_count_goal);
 
-  while (1) {
+  while(1) {
     level waittill("vehicle_destroyed");
     self.bonus_count_current--;
     if(self.bonus_count_current <= 0) {
-      if(level.vehicles_alive < level.bonus_count_goal)
+      if(level.vehicles_alive < level.bonus_count_goal) {
         break;
+      }
 
       self.bonus_count_current = level.bonus_count_goal;
       thread hud_rebuild_time_bonus(level.bonus_time_amount);
@@ -416,7 +418,7 @@ hud_display_wreckage_count() {
 }
 
 hud_create_bonus_count(label) {
-  if(isdefined(self.bonus_count))
+  if(isDefined(self.bonus_count))
     self.bonus_count so_remove_hud_item(true);
 
   self.bonus_count = so_create_hud_item(4, so_hud_ypos(), label, self);
@@ -430,21 +432,21 @@ hud_rebuild_time_bonus(timer) {
   self notify("rebuild_time_bonus");
   self endon("rebuild_time_bonus");
 
-  if(level.vehicles_alive <= 0)
+  if(level.vehicles_alive <= 0) {
     return;
-
+  }
   // Otherwise build, and wait for the timer to expire then rebuild.
   if(self == level.player) {
-    if(!isdefined(level.infinite_ammo) || !level.infinite_ammo) {
+    if(!isDefined(level.infinite_ammo) || !level.infinite_ammo) {
       level.infinite_ammo = true;
       foreach(player in level.players)
       player.infinite_ammo_time = 0;
     }
   }
 
-  if(!isdefined(self.time_bonus)) {
-    self.time_title = so_create_hud_item(5, so_hud_ypos(), & "SO_DEMO_SO_BRIDGE_INFINITE_AMMO", self);
-    self.time_bonus = so_create_hud_item(5, so_hud_ypos(), & "SPECIAL_OPS_TIME_NULL", self);
+  if(!isDefined(self.time_bonus)) {
+    self.time_title = so_create_hud_item(5, so_hud_ypos(), &"SO_DEMO_SO_BRIDGE_INFINITE_AMMO", self);
+    self.time_bonus = so_create_hud_item(5, so_hud_ypos(), &"SPECIAL_OPS_TIME_NULL", self);
     self.time_bonus.alignx = "left";
     self.time_bonus.pulse_sound = "infinite_ammo_on";
     self.time_title.pulse_scale = 1.33;
@@ -482,35 +484,35 @@ hud_rebuild_time_bonus(timer) {
     level.infinite_ammo_time = undefined;
     level.infinite_ammo = undefined;
     level.infinite_ammo_update = undefined;
-    self PlaySound("infinite_ammo_off");
+    self playSound("infinite_ammo_off");
   }
 }
 
 hud_time_splash(timer) {
   level endon("special_op_terminated");
 
-  if(!isdefined(self.splash_count))
+  if(!isDefined(self.splash_count))
     self.splash_count = 0;
 
   // Only allow one splash active at a time.	
   self.splash_count++;
-  if(self.splash_count > 1)
+  if(self.splash_count > 1) {
     return;
-
-  if(!isdefined(self.time_splash)) {
-    self.time_msg = hud_create_splash(0, & "SO_DEMO_SO_BRIDGE_WRECKAGE_ACTIVE");
+  }
+  if(!isDefined(self.time_splash)) {
+    self.time_msg = hud_create_splash(0, &"SO_DEMO_SO_BRIDGE_WRECKAGE_ACTIVE");
     self.time_msg_x = self.time_msg.x;
     self.time_msg_y = self.time_msg.y;
 
-    self.time_splash = hud_create_splash(1, & "SO_DEMO_SO_BRIDGE_INFINITE_AMMO_AMOUNT");
+    self.time_splash = hud_create_splash(1, &"SO_DEMO_SO_BRIDGE_INFINITE_AMMO_AMOUNT");
     self.time_splash SetValue(level.bonus_time_amount);
     self.time_splash_x = self.time_splash.x;
     self.time_splash_y = self.time_splash.y;
   }
 
-  while (self.splash_count > 0) {
+  while(self.splash_count > 0) {
     if(self == level.player)
-      level.player PlaySound("arcademode_kill_streak_won");
+      level.player playSound("arcademode_kill_streak_won");
 
     self.time_msg hud_boom_in_splash(self.time_msg_x, self.time_msg_y);
     self.time_splash hud_boom_in_splash(self.time_splash_x, self.time_splash_y);
@@ -572,7 +574,7 @@ hud_absorb_splash(ypos) {
 hud_time_bonus_wait(stop_time) {
   level endon("special_op_terminated");
 
-  while ((self.splash_count > 0) || (self.infinite_ammo_time > stop_time)) {
+  while((self.splash_count > 0) || (self.infinite_ammo_time > stop_time)) {
     wait 0.05;
     self.infinite_ammo_time -= 0.05;
   }

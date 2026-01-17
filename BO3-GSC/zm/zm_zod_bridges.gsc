@@ -26,18 +26,14 @@ class cbridge {
   var m_e_clip_blocker;
   var m_b_discovered;
 
-
   constructor() {}
 
-
   destructor() {}
-
 
   function move_blocker() {
     self moveto(origin - vectorscale((0, 0, 1), 10000), 0.05);
     wait(0.05);
   }
-
 
   function unlock_zones() {
     str_zonename = m_str_areaname + "_district_zone_high";
@@ -47,7 +43,6 @@ class cbridge {
     }
     zm_zonemgr::add_adjacent_zone(m_str_areaname + "_district_zone_B", str_zonename, ("enter_" + m_str_areaname) + "_district_high_from_B");
   }
-
 
   function bridge_connect(t_trigger_a, t_trigger_b) {
     util::waittill_any_ents_two(t_trigger_a, "trigger", t_trigger_b, "trigger");
@@ -66,32 +61,30 @@ class cbridge {
     unlock_zones();
   }
 
-
   function filter_areaname(e_entity, str_areaname) {
-    if(!isdefined(e_entity.script_string) || e_entity.script_string != str_areaname) {
+    if(!isDefined(e_entity.script_string) || e_entity.script_string != str_areaname) {
       return false;
     }
     return true;
   }
-
 
   function init_bridge(str_areaname) {
     m_str_areaname = str_areaname;
     m_n_state = 0;
     m_n_pause_between_steps = 0.1;
     door_name = str_areaname + "_bridge_door";
-    m_door_array = getentarray(door_name, "script_noteworthy");
-    m_a_e_blockers = getentarray("bridge_blocker", "targetname");
-    a_e_clip_blockers = getentarray("bridge_clip_blocker", "targetname");
-    a_e_walkway = getentarray("bridge_walkway", "targetname");
-    a_t_pull_trigger = getentarray("bridge_pull_trigger", "targetname");
-    a_e_pull_target = getentarray("bridge_pull_target", "targetname");
-    m_a_e_blockers = array::filter(m_a_e_blockers, 0, & filter_areaname, str_areaname);
-    a_e_clip_blockers = array::filter(a_e_clip_blockers, 0, & filter_areaname, str_areaname);
+    m_door_array = getEntArray(door_name, "script_noteworthy");
+    m_a_e_blockers = getEntArray("bridge_blocker", "targetname");
+    a_e_clip_blockers = getEntArray("bridge_clip_blocker", "targetname");
+    a_e_walkway = getEntArray("bridge_walkway", "targetname");
+    a_t_pull_trigger = getEntArray("bridge_pull_trigger", "targetname");
+    a_e_pull_target = getEntArray("bridge_pull_target", "targetname");
+    m_a_e_blockers = array::filter(m_a_e_blockers, 0, &filter_areaname, str_areaname);
+    a_e_clip_blockers = array::filter(a_e_clip_blockers, 0, &filter_areaname, str_areaname);
     m_e_clip_blocker = a_e_clip_blockers[0];
-    a_e_walkway = array::filter(a_e_walkway, 0, & filter_areaname, str_areaname);
+    a_e_walkway = array::filter(a_e_walkway, 0, &filter_areaname, str_areaname);
     m_e_walkway = a_e_walkway[0];
-    a_e_pull_target = array::filter(a_e_pull_target, 0, & filter_areaname, str_areaname);
+    a_e_pull_target = array::filter(a_e_pull_target, 0, &filter_areaname, str_areaname);
     m_e_pull_target = a_e_pull_target[0];
     m_b_discovered = 0;
     m_e_walkway setinvisibletoall();
@@ -110,7 +103,7 @@ class cbridge {
 #namespace zm_zod_bridges;
 
 function autoexec __init__sytem__() {
-  system::register("zm_zod_bridges", undefined, & __main__, undefined);
+  system::register("zm_zod_bridges", undefined, &__main__, undefined);
 }
 
 function __main__() {
@@ -118,10 +111,10 @@ function __main__() {
 }
 
 function init_bridges() {
-  if(!isdefined(level.beast_mode_targets)) {
+  if(!isDefined(level.beast_mode_targets)) {
     level.beast_mode_targets = [];
   }
-  if(!isdefined(level.a_o_bridge)) {
+  if(!isDefined(level.a_o_bridge)) {
     level.a_o_bridge = [];
     init_bridge("slums", 1);
     init_bridge("canal", 2);

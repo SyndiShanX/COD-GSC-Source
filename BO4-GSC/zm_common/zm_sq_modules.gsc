@@ -6,7 +6,6 @@
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\struct;
-
 #namespace zm_sq_modules;
 
 function_d8383812(id, version, var_a1261809, var_3f541f5f, var_9a323ebf, var_b8d19839 = 0) {
@@ -27,12 +26,12 @@ function_d8383812(id, version, var_a1261809, var_3f541f5f, var_9a323ebf, var_b8d
   }
 
   var_1d81ef2d = {
-    #id: id, 
-    #capture_point: capture_point, 
-    #origin: capture_point.origin, 
-    #active: 0, 
-    #var_62f0c1c: var_3f541f5f, 
-    #var_32edfed: var_9a323ebf, 
+    #id: id,
+    #capture_point: capture_point,
+    #origin: capture_point.origin,
+    #active: 0,
+    #var_62f0c1c: var_3f541f5f,
+    #var_32edfed: var_9a323ebf,
     #var_b8d19839: var_b8d19839
   };
   level.var_d2540500[id] = var_1d81ef2d;
@@ -64,7 +63,7 @@ function_2a94055d(id) {
   var_1d81ef2d.active = 0;
 }
 
-private function_88cb5e47(params) {
+function_88cb5e47(params) {
   if(self.is_exploding !== 1 && isDefined(params.eattacker) && params.eattacker.classname === "worldspawn") {
     return;
   }

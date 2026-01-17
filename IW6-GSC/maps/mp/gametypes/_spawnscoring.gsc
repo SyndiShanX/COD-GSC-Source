@@ -49,9 +49,7 @@ scoreSpawns_NearTeam(spawnPoints) {
 
 checkDynamicSpawns(spawnPoints) {
   if(isDefined(level.dynamicSpawns)) {
-    spawnPoints = [
-      [level.dynamicSpawns]
-    ](spawnPoints);
+    spawnPoints = [[level.dynamicSpawns]](spawnPoints);
   }
 
   return spawnPoints;
@@ -885,8 +883,6 @@ logBadspawn(typeString) {
   println("^1 Spawn Error: Bad spawn used. " + typeString + "\n");
 
   if(isDefined(level.matchRecording_logEventMsg)) {
-    [
-      [level.matchRecording_logEventMsg]
-    ]("LOG_BAD_SPAWN", GetTime(), typeString);
+    [[level.matchRecording_logEventMsg]]("LOG_BAD_SPAWN", GetTime(), typeString);
   }
 }

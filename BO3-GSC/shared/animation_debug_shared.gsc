@@ -11,7 +11,7 @@
 function autoexec __init__() {
   setdvar("", 0);
   setdvar("", 0);
-  while (true) {
+  while(true) {
     anim_debug = getdvarint("", 0) || getdvarint("", 0);
     level flagsys::set_val("", anim_debug);
     if(!anim_debug) {
@@ -30,7 +30,7 @@ function anim_info_render_thread(animation, v_origin_or_ent, v_angles_or_tag, n_
     v_origin_or_ent endon("death");
   }
   recordent(self);
-  while (true) {
+  while(true) {
     level flagsys::wait_till("");
     b_anim_debug_on = 1;
     _init_frame();
@@ -49,9 +49,9 @@ function anim_info_render_thread(animation, v_origin_or_ent, v_angles_or_tag, n_
     recordsphere(s_pos.origin, 2, vectorscale((1, 1, 1), 0.3), "");
     if(!isvec(v_origin_or_ent) && (v_origin_or_ent != self && v_origin_or_ent != level)) {
       str_name = "";
-      if(isdefined(v_origin_or_ent.animname)) {
+      if(isDefined(v_origin_or_ent.animname)) {
         str_name = v_origin_or_ent.animname;
-      } else if(isdefined(v_origin_or_ent.targetname)) {
+      } else if(isDefined(v_origin_or_ent.targetname)) {
         str_name = v_origin_or_ent.targetname;
       }
       if(b_anim_debug_on) {
@@ -61,12 +61,12 @@ function anim_info_render_thread(animation, v_origin_or_ent, v_angles_or_tag, n_
     }
     self anim_origin_render(self.origin, self.angles, undefined, undefined, !b_anim_debug_on);
     str_name = "";
-    if(isdefined(self.anim_debug_name)) {
+    if(isDefined(self.anim_debug_name)) {
       str_name = self.anim_debug_name;
     } else {
-      if(isdefined(self.animname)) {
+      if(isDefined(self.animname)) {
         str_name = self.animname;
-      } else if(isdefined(self.targetname)) {
+      } else if(isDefined(self.targetname)) {
         str_name = self.targetname;
       }
     }
@@ -106,14 +106,14 @@ function _reset_frame() {
 }
 
 function render_tag(str_tag, str_label, b_recorder_only) {
-  if(!isdefined(str_label)) {
+  if(!isDefined(str_label)) {
     str_label = str_tag;
   }
-  if(!isdefined(self.v_centroid)) {
+  if(!isDefined(self.v_centroid)) {
     self.v_centroid = self getcentroid();
   }
   v_tag_org = self gettagorigin(str_tag);
-  if(isdefined(v_tag_org)) {
+  if(isDefined(v_tag_org)) {
     v_tag_ang = self gettagangles(str_tag);
     anim_origin_render(v_tag_org, v_tag_ang, 2, str_label, b_recorder_only);
     if(!b_recorder_only) {
@@ -124,11 +124,11 @@ function render_tag(str_tag, str_label, b_recorder_only) {
 }
 
 function anim_origin_render(org, angles, line_length, str_label, b_recorder_only) {
-  if(!isdefined(line_length)) {
+  if(!isDefined(line_length)) {
     line_length = 6;
   }
-  if(isdefined(org) && isdefined(angles)) {
-    originendpoint = org + vectorscale(anglestoforward(angles), line_length);
+  if(isDefined(org) && isDefined(angles)) {
+    originendpoint = org + vectorscale(anglesToForward(angles), line_length);
     originrightpoint = org + (vectorscale(anglestoright(angles), -1 * line_length));
     originuppoint = org + vectorscale(anglestoup(angles), line_length);
     if(!b_recorder_only) {
@@ -139,7 +139,7 @@ function anim_origin_render(org, angles, line_length, str_label, b_recorder_only
     recordline(org, originendpoint, (1, 0, 0), "");
     recordline(org, originrightpoint, (0, 1, 0), "");
     recordline(org, originuppoint, (0, 0, 1), "");
-    if(isdefined(str_label)) {
+    if(isDefined(str_label)) {
       if(!b_recorder_only) {
         print3d(org, str_label, (1, 0.7529412, 0.7960784), 1, 0.05);
       }

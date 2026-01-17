@@ -29,18 +29,18 @@
 #namespace castle_rocketshield;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_castle_rocketshield", & __init__, & __main__, undefined);
+  system::register("zm_weap_castle_rocketshield", &__init__, &__main__, undefined);
 }
 
 function __init__() {
   zm_craft_shield::init("craft_shield_zm", "castle_riotshield", "wpn_t7_zmb_zod_rocket_shield_world");
   clientfield::register("allplayers", "rs_ammo", 1, 1, "int");
-  callback::on_connect( & on_player_connect);
-  callback::on_spawned( & on_player_spawned);
+  callback::on_connect(&on_player_connect);
+  callback::on_spawned(&on_player_spawned);
   level.weaponriotshield = getweapon("castle_riotshield");
-  zm_equipment::register("castle_riotshield", & "ZOMBIE_EQUIP_RIOTSHIELD_PICKUP_HINT_STRING", & "ZOMBIE_EQUIP_RIOTSHIELD_HOWTO", undefined, "riotshield");
+  zm_equipment::register("castle_riotshield", &"ZOMBIE_EQUIP_RIOTSHIELD_PICKUP_HINT_STRING", &"ZOMBIE_EQUIP_RIOTSHIELD_HOWTO", undefined, "riotshield");
   level.weaponriotshieldupgraded = getweapon("castle_riotshield_upgraded");
-  zm_equipment::register("castle_riotshield_upgraded", & "ZOMBIE_EQUIP_RIOTSHIELD_PICKUP_HINT_STRING", & "ZOMBIE_EQUIP_RIOTSHIELD_HOWTO", undefined, "riotshield");
+  zm_equipment::register("castle_riotshield_upgraded", &"ZOMBIE_EQUIP_RIOTSHIELD_PICKUP_HINT_STRING", &"ZOMBIE_EQUIP_RIOTSHIELD_HOWTO", undefined, "riotshield");
 }
 
 function __main__() {
@@ -70,7 +70,7 @@ function on_player_connect() {
 
 function function_e8141489() {
   self endon("disconnect");
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     self waittill("weapon_change", w_weapon);
     if(w_weapon.isriotshield) {
       break;
@@ -82,7 +82,7 @@ function function_e8141489() {
 
 function function_bbf98b84() {
   self endon("disconnect");
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     level waittill("shield_built", e_who);
     if(e_who === self) {
       self playrumbleonentity("zm_castle_interact_rumble");
@@ -99,7 +99,7 @@ function on_player_spawned() {
 function player_watch_ammo_change() {
   self notify("player_watch_ammo_change");
   self endon("player_watch_ammo_change");
-  for (;;) {
+  for(;;) {
     self waittill("equipment_ammo_changed", equipment);
     if(isstring(equipment)) {
       equipment = getweapon(equipment);
@@ -113,10 +113,10 @@ function player_watch_ammo_change() {
 function player_watch_max_ammo() {
   self notify("player_watch_max_ammo");
   self endon("player_watch_max_ammo");
-  for (;;) {
+  for(;;) {
     self waittill("zmb_max_ammo");
     wait(0.05);
-    if(isdefined(self.hasriotshield) && self.hasriotshield) {
+    if(isDefined(self.hasriotshield) && self.hasriotshield) {
       self thread check_weapon_ammo(self.weaponriotshield);
     }
   }
@@ -124,7 +124,7 @@ function player_watch_max_ammo() {
 
 function check_weapon_ammo(weapon) {
   wait(0.05);
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     ammo = self getweaponammoclip(weapon);
     self clientfield::set("rs_ammo", ammo);
   }
@@ -133,13 +133,13 @@ function check_weapon_ammo(weapon) {
 function player_watch_shield_juke() {
   self notify("player_watch_shield_juke");
   self endon("player_watch_shield_juke");
-  for (;;) {
+  for(;;) {
     self waittill("weapon_melee_juke", weapon);
     if(weapon.isriotshield) {
       self disableoffhandweapons();
-      self playsound("zmb_rocketshield_start");
+      self playSound("zmb_rocketshield_start");
       self riotshield_melee_juke(weapon);
-      self playsound("zmb_rocketshield_end");
+      self playSound("zmb_rocketshield_end");
       self enableoffhandweapons();
       self thread check_weapon_ammo(weapon);
       self notify("shield_juke_done");
@@ -153,30 +153,30 @@ function riotshield_melee_juke(weapon) {
   self endon("weapon_melee_charge");
   var_27e95375 = 0;
   start_time = gettime();
-  if(!isdefined(level.riotshield_knockdown_enemies)) {
+  if(!isDefined(level.riotshield_knockdown_enemies)) {
     level.riotshield_knockdown_enemies = [];
   }
-  if(!isdefined(level.riotshield_knockdown_gib)) {
+  if(!isDefined(level.riotshield_knockdown_gib)) {
     level.riotshield_knockdown_gib = [];
   }
-  if(!isdefined(level.riotshield_fling_enemies)) {
+  if(!isDefined(level.riotshield_fling_enemies)) {
     level.riotshield_fling_enemies = [];
   }
-  if(!isdefined(level.riotshield_fling_vecs)) {
+  if(!isDefined(level.riotshield_fling_vecs)) {
     level.riotshield_fling_vecs = [];
   }
-  while ((start_time + 3000) > gettime()) {
+  while((start_time + 3000) > gettime()) {
     self playrumbleonentity("zod_shield_juke");
-    forward = anglestoforward(self getplayerangles());
+    forward = anglesToForward(self getplayerangles());
     shield_damage = 0;
     enemies = riotshield_get_juke_enemies_in_range();
-    if(isdefined(level.riotshield_melee_juke_callback) && isfunctionptr(level.riotshield_melee_juke_callback)) {
+    if(isDefined(level.riotshield_melee_juke_callback) && isfunctionptr(level.riotshield_melee_juke_callback)) {
       [
         [level.riotshield_melee_juke_callback]
       ](enemies);
     }
     foreach(zombie in enemies) {
-      self playsound("zmb_rocketshield_imp");
+      self playSound("zmb_rocketshield_imp");
       zombie thread riotshield::riotshield_fling_zombie(self, zombie.fling_vec, 0);
       shield_damage = shield_damage + level.zombie_vars["riotshield_juke_damage_shield"];
       if(!var_27e95375) {
@@ -198,10 +198,10 @@ function riotshield_melee_juke(weapon) {
 function function_92debe0a() {
   level waittill("start_of_round");
   foreach(player in getplayers()) {}
-  while (true) {
+  while(true) {
     level waittill("start_of_round");
     foreach(player in getplayers()) {
-      if(isdefined(player.hasriotshield) && player.hasriotshield) {
+      if(isDefined(player.hasriotshield) && player.hasriotshield) {
         player givestartammo(player.weaponriotshield);
       }
     }
@@ -211,10 +211,10 @@ function function_92debe0a() {
 function riotshield_get_juke_enemies_in_range() {
   view_pos = self.origin;
   zombies = array::get_all_closest(view_pos, getaiteamarray(level.zombie_team), undefined, undefined, 120);
-  if(!isdefined(zombies)) {
+  if(!isDefined(zombies)) {
     return;
   }
-  forward = anglestoforward(self getplayerangles());
+  forward = anglesToForward(self getplayerangles());
   up = anglestoup(self getplayerangles());
   segment_start = view_pos + (36 * forward);
   segment_end = segment_start + ((120 - 36) * forward);
@@ -222,8 +222,8 @@ function riotshield_get_juke_enemies_in_range() {
   fling_force_vlo = fling_force * 0.5;
   fling_force_vhi = fling_force * 0.6;
   enemies = [];
-  for (i = 0; i < zombies.size; i++) {
-    if(!isdefined(zombies[i]) || !isalive(zombies[i])) {
+  for(i = 0; i < zombies.size; i++) {
+    if(!isDefined(zombies[i]) || !isalive(zombies[i])) {
       continue;
     }
     if(zombies[i].archetype == "margwa") {
@@ -254,13 +254,13 @@ function spawn_recharge_tanks() {
   a_e_spawnpoints = array::randomize(struct::get_array("castle_shield_charge"));
   level thread function_fc8bb1d(a_e_spawnpoints);
   foreach(e_spawnpoint in a_e_spawnpoints) {
-    if(isdefined(e_spawnpoint.spawned) && e_spawnpoint.spawned) {
+    if(isDefined(e_spawnpoint.spawned) && e_spawnpoint.spawned) {
       n_spawned++;
     }
   }
   foreach(e_spawnpoint in a_e_spawnpoints) {
     if(n_spawned < n_charges) {
-      if(!(isdefined(e_spawnpoint.spawned) && e_spawnpoint.spawned)) {
+      if(!(isDefined(e_spawnpoint.spawned) && e_spawnpoint.spawned)) {
         e_spawnpoint thread create_bottle_unitrigger(e_spawnpoint.origin, e_spawnpoint.angles);
         n_spawned++;
       }
@@ -275,14 +275,14 @@ function spawn_recharge_tanks() {
 function create_bottle_unitrigger(v_origin, v_angles) {
   s_struct = self;
   if(self == level) {
-    s_struct = spawnstruct();
+    s_struct = spawnStruct();
     s_struct.origin = v_origin;
     s_struct.angles = v_angles;
   }
   width = 128;
   height = 128;
   length = 128;
-  unitrigger_stub = spawnstruct();
+  unitrigger_stub = spawnStruct();
   unitrigger_stub.origin = v_origin;
   unitrigger_stub.angles = v_angles;
   unitrigger_stub.script_unitrigger_type = "unitrigger_box_use";
@@ -293,27 +293,27 @@ function create_bottle_unitrigger(v_origin, v_angles) {
   unitrigger_stub.require_look_at = 0;
   unitrigger_stub.mdl_shield_recharge = spawn("script_model", v_origin);
   modelname = "p7_zm_zod_nitrous_tank";
-  if(isdefined(s_struct.model) && isstring(s_struct.model)) {
+  if(isDefined(s_struct.model) && isstring(s_struct.model)) {
     modelname = s_struct.model;
   }
-  unitrigger_stub.mdl_shield_recharge setmodel(modelname);
+  unitrigger_stub.mdl_shield_recharge setModel(modelname);
   unitrigger_stub.mdl_shield_recharge.angles = v_angles;
   s_struct.spawned = 1;
   unitrigger_stub.shield_recharge_spawnpoint = s_struct;
-  unitrigger_stub.prompt_and_visibility_func = & bottle_trigger_visibility;
-  zm_unitrigger::register_static_unitrigger(unitrigger_stub, & shield_recharge_trigger_think);
+  unitrigger_stub.prompt_and_visibility_func = &bottle_trigger_visibility;
+  zm_unitrigger::register_static_unitrigger(unitrigger_stub, &shield_recharge_trigger_think);
   return unitrigger_stub;
 }
 
 function function_fc8bb1d(a_spawnpoints) {
   level notify("hash_afd0dfa9");
   level endon("hash_afd0dfa9");
-  while (true) {
+  while(true) {
     n_debug = getdvarint("", 0);
     if(n_debug > 0) {
       foreach(spawnpoint in a_spawnpoints) {
         v_color = (1, 1, 1);
-        if(isdefined(spawnpoint.spawned) && spawnpoint.spawned) {
+        if(isDefined(spawnpoint.spawned) && spawnpoint.spawned) {
           v_color = (0, 1, 0);
         }
         sphere(spawnpoint.origin, 25, v_color, 0.1, 0, 25, 10);
@@ -325,7 +325,7 @@ function function_fc8bb1d(a_spawnpoints) {
 
 function bottle_trigger_visibility(player) {
   self sethintstring(&"ZM_CASTLE_PICKUP_BOTTLE");
-  if(!(isdefined(player.hasriotshield) && player.hasriotshield) || player getammocount(player.weaponriotshield) == player.weaponriotshield.maxammo) {
+  if(!(isDefined(player.hasriotshield) && player.hasriotshield) || player getammocount(player.weaponriotshield) == player.weaponriotshield.maxammo) {
     b_is_invis = 1;
   } else {
     b_is_invis = 0;
@@ -335,7 +335,7 @@ function bottle_trigger_visibility(player) {
 }
 
 function shield_recharge_trigger_think() {
-  while (true) {
+  while(true) {
     self waittill("trigger", player);
     if(player zm_utility::in_revive_trigger()) {
       continue;
@@ -353,7 +353,7 @@ function shield_recharge_trigger_think() {
 
 function bottle_trigger_activate(trig_stub, player) {
   trig_stub notify("bottle_collected");
-  if(isdefined(player.hasriotshield) && player.hasriotshield) {
+  if(isDefined(player.hasriotshield) && player.hasriotshield) {
     player zm_equipment::change_ammo(player.weaponriotshield, 1);
   }
   v_origin = trig_stub.mdl_shield_recharge.origin;
@@ -366,11 +366,11 @@ function bottle_trigger_activate(trig_stub, player) {
 function function_3f94d6cf() {
   level flagsys::wait_till("");
   wait(1);
-  zm_devgui::add_custom_devgui_callback( & function_e2f5a93);
+  zm_devgui::add_custom_devgui_callback(&function_e2f5a93);
   adddebugcommand("");
   adddebugcommand("");
   players = getplayers();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     ip1 = i + 1;
   }
 }
@@ -380,12 +380,12 @@ function function_e2f5a93(cmd) {
   retval = 0;
   switch (cmd) {
     case "": {
-      array::thread_all(players, & zm_devgui::zombie_devgui_equipment_give, "");
+      array::thread_all(players, &zm_devgui::zombie_devgui_equipment_give, "");
       retval = 1;
       break;
     }
     case "": {
-      array::thread_all(players, & function_3796f8bc);
+      array::thread_all(players, &function_3796f8bc);
       retval = 1;
       break;
     }
@@ -394,7 +394,7 @@ function function_e2f5a93(cmd) {
 }
 
 function detect_reentry() {
-  if(isdefined(self.devgui_preserve_time)) {
+  if(isDefined(self.devgui_preserve_time)) {
     if(self.devgui_preserve_time == gettime()) {
       return true;
     }
@@ -410,11 +410,11 @@ function function_3796f8bc() {
   self notify("hash_3796f8bc");
   self endon("hash_3796f8bc");
   level flagsys::wait_till("");
-  self.var_3796f8bc = !(isdefined(self.var_3796f8bc) && self.var_3796f8bc);
+  self.var_3796f8bc = !(isDefined(self.var_3796f8bc) && self.var_3796f8bc);
   if(self.var_3796f8bc) {
-    while (isdefined(self)) {
+    while(isDefined(self)) {
       damagemax = level.weaponriotshield.weaponstarthitpoints;
-      if(isdefined(self.weaponriotshield)) {
+      if(isDefined(self.weaponriotshield)) {
         damagemax = self.weaponriotshield.weaponstarthitpoints;
       }
       shieldhealth = self damageriotshield(0);

@@ -3892,9 +3892,7 @@ reInitializeMatchRulesOnMigration() {
 
   while(1) {
     level waittill("host_migration_begin");
-    [
-      [level.initializeMatchRules]
-    ]();
+    [[level.initializeMatchRules]]();
   }
 }
 
@@ -4215,34 +4213,26 @@ add_to_bot_use_targets(new_use_target, use_time) {
   if(isDefined(level.bot_funcs["bots_add_to_level_targets"])) {
     new_use_target.use_time = use_time;
     new_use_target.bot_interaction_type = "use";
-    [
-      [level.bot_funcs["bots_add_to_level_targets"]]
-    ](new_use_target);
+    [[level.bot_funcs["bots_add_to_level_targets"]]](new_use_target);
   }
 }
 
 remove_from_bot_use_targets(use_target_to_remove) {
   if(isDefined(level.bot_funcs["bots_remove_from_level_targets"])) {
-    [
-      [level.bot_funcs["bots_remove_from_level_targets"]]
-    ](use_target_to_remove);
+    [[level.bot_funcs["bots_remove_from_level_targets"]]](use_target_to_remove);
   }
 }
 
 add_to_bot_damage_targets(new_damage_target) {
   if(isDefined(level.bot_funcs["bots_add_to_level_targets"])) {
     new_damage_target.bot_interaction_type = "damage";
-    [
-      [level.bot_funcs["bots_add_to_level_targets"]]
-    ](new_damage_target);
+    [[level.bot_funcs["bots_add_to_level_targets"]]](new_damage_target);
   }
 }
 
 remove_from_bot_damage_targets(damage_target_to_remove) {
   if(isDefined(level.bot_funcs["bots_remove_from_level_targets"])) {
-    [
-      [level.bot_funcs["bots_remove_from_level_targets"]]
-    ](damage_target_to_remove);
+    [[level.bot_funcs["bots_remove_from_level_targets"]]](damage_target_to_remove);
   }
 }
 

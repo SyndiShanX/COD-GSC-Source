@@ -42,9 +42,9 @@ quad_roof_crumble_fx_play() {
 
 play_quad_first_sounds() {
   location = getstruct(self.target, "targetname");
-  self PlaySound("zmb_vocals_quad_spawn", "sounddone");
+  self playSound("zmb_vocals_quad_spawn", "sounddone");
   self waittill("sounddone");
-  self PlaySound("zmb_quad_roof_hit");
+  self playSound("zmb_quad_roof_hit");
   thread play_wood_land_sound(location.origin);
 }
 
@@ -88,7 +88,7 @@ quad_roof_fx_play() {
 quad_traverse_death_fx() {
   self endon("quad_end_traverse_anim");
   self waittill("death");
-  playfx(level._effect["quad_grnd_dust_spwnr"], self.origin);
+  playFX(level._effect["quad_grnd_dust_spwnr"], self.origin);
 }
 
 begin_quad_introduction(quad_round_name) {

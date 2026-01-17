@@ -16,7 +16,7 @@ precache() {
 }
 
 set_player_model() {
-  self setmodel("c_mul_mp_pmc_shotgun_snw_fb");
+  self setModel("c_mul_mp_pmc_shotgun_snw_fb");
   self setviewmodel("c_mul_mp_pmc_shortsleeve_snw_viewhands");
   heads = [];
 }

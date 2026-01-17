@@ -20,7 +20,7 @@ main() {
   precacheString(&"SO_SNOWRACE1_CLIFFHANGER_YOUWIN");
   precacheString(&"SO_SNOWRACE1_CLIFFHANGER_YOULOSE");
 
-  level.objective_desc = & "SO_SNOWRACE1_CLIFFHANGER_OBJ_FINISHLINE";
+  level.objective_desc = &"SO_SNOWRACE1_CLIFFHANGER_OBJ_FINISHLINE";
   precacheString(level.objective_desc);
 
   precacheShader("difficulty_star");
@@ -68,9 +68,9 @@ freeze_snowmobile(player) {
   player.ignoreme = true;
   player setBlurForPlayer(6, 1);
 
-  if(!isdefined(player.vehicle))
+  if(!isDefined(player.vehicle)) {
     return;
-
+  }
   player.vehicle thread stop_vehicle();
 }
 
@@ -79,15 +79,15 @@ finishline() {
 
   playersRequired = level.players.size;
   trigger = getent("finishline", "targetname");
-  assert(isdefined(trigger));
+  assert(isDefined(trigger));
 
   // wait for all players to cross the finish line
-  for (;;) {
+  for(;;) {
     trigger waittill("trigger", player);
     assert(isplayer(player));
 
     // a player crossed the finish line
-    if(isdefined(player.crossed_finish_line))
+    if(isDefined(player.crossed_finish_line))
       continue;
     player.crossed_finish_line = true;
 
@@ -103,17 +103,18 @@ finishline() {
     player.award_no_stars = undefined;
 
     // this player is the winner
-    if(!isdefined(level.raceWinner)) {
+    if(!isDefined(level.raceWinner)) {
       level.raceWinner = player;
       if(is_coop()) {
-        //assert( isdefined( player.playername ) );
+        //assert( isDefined( player.playername ) );
         thread print_winners();
       }
     }
 
     playersRequired--;
-    if(playersRequired <= 0)
+    if(playersRequired <= 0) {
       break;
+    }
 
     // print message on screen that we're waiting for other players
     player thread finishline_waiting_for_players_message();
@@ -125,7 +126,7 @@ finishline() {
 }
 
 race_finished(was_success) {
-  if(isdefined(level.race_finished_thread_running))
+  if(isDefined(level.race_finished_thread_running))
     return;
   level.race_finished_thread_running = true;
 
@@ -139,9 +140,9 @@ race_finished(was_success) {
   } else {
     // make sure both player times exist because some might not have finished the race
     foreach(player in level.players) {
-      if(!isdefined(player))
+      if(!isDefined(player))
         continue;
-      if(!isdefined(player.finish_time)) {
+      if(!isDefined(player.finish_time)) {
         player.dnf = true;
         player.finish_time = getTime();
       }
@@ -182,15 +183,16 @@ finishline_waiting_for_players_message() {
 
 stop_vehicle() {
   speed = int(self vehicle_GetSpeed());
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     speed -= 2;
-    if(speed < 0)
+    if(speed < 0) {
       break;
+    }
 
     self VehPhys_SetSpeed(speed);
     wait 0.05;
   }
-  if(isdefined(self))
+  if(isDefined(self))
     self VehPhys_SetSpeed(0);
 }
 
@@ -251,7 +253,7 @@ stop_enemies() {
 }
 
 safe_stop_magic_bullet_shield() {
-  if(isdefined(self.magic_bullet_shield))
+  if(isDefined(self.magic_bullet_shield))
     self thread stop_magic_bullet_shield();
 }
 
@@ -262,7 +264,7 @@ enemy_snowmobiles_spawn_and_attack() {
 
   wait_time = 2;
 
-  for (;;) {
+  for(;;) {
     thread spawn_enemy_bike_snowrace();
     wait(wait_time);
     wait_time -= 0.5;
@@ -281,15 +283,13 @@ within_fov_allplayers(pos) {
 }
 
 spawn_enemy_bike_snowrace() {
-  assertex(isdefined(level.enemy_snowmobiles), "Please add maps\_vehicle_spline::init_vehicle_splines(); to the beginning of your script");
+  assertex(isDefined(level.enemy_snowmobiles), "Please add maps\_vehicle_spline::init_vehicle_splines(); to the beginning of your script");
 
-  /#
   debug_enemy_vehicles();
-  # /
 
-    if(level.enemy_snowmobiles.size >= level.enemy_snowmobiles_max)
-      return;
-
+  if(level.enemy_snowmobiles.size >= level.enemy_snowmobiles_max) {
+    return;
+  }
   player_targ = get_player_targ();
   player_progress = get_player_progress();
   my_direction = "forward";
@@ -314,7 +314,7 @@ spawn_enemy_bike_snowrace() {
   spawn_pos = drop_to_ground(spawn_pos);
 
   snowmobile_spawner = getent("snowmobile_spawner", "targetname");
-  assertEx(isdefined(snowmobile_spawner), "Need a snowmobile spawner with targetname snowmobile_spawner in the level");
+  assertEx(isDefined(snowmobile_spawner), "Need a snowmobile spawner with targetname snowmobile_spawner in the level");
   targ = spawn_array["targ"];
 
   snowmobile_spawner.origin = spawn_pos;
@@ -322,7 +322,7 @@ spawn_enemy_bike_snowrace() {
   //snowmobile_spawner.angles = vectortoangles( snowmobile_path_node.next_node.midpoint - snowmobile_path_node.midpoint );
   snowmobile_spawner.angles = vectortoangles(targ.next_node.midpoint - targ.midpoint);
   /*
-  if( isalive( level.player ) && isdefined( level.player.vehicle ) )
+  if( isalive( level.player ) && isDefined( level.player.vehicle ) )
   	snowmobile_spawner.angles = level.player.vehicle.angles;
   */
 
@@ -338,9 +338,9 @@ spawn_enemy_bike_snowrace() {
   bike thread crash_detection();
   bike.left_spline_path_time = gettime() - 3000;
   waittillframeend; // for bike.riders to get defined
-  if(!isalive(bike))
+  if(!isalive(bike)) {
     return;
-
+  }
   targ bike_drives_path(bike);
 }
 
@@ -400,18 +400,18 @@ star_challenge_hud(x_pos_offset, removeTimer) {
   star.x = -10 - (x_pos_offset * star_width);
   star setShader("difficulty_star", 25, 25);
 
-  if(!isdefined(removeTimer))
+  if(!isDefined(removeTimer)) {
     return;
-
+  }
   flag_wait("race_started");
 
   self thread star_challenge_sound_and_flash(star, removeTimer);
   self thread star_challenge_force_alpha_at_finish(star);
   level waittill_any_timeout(removeTimer);
 
-  if(isdefined(level.raceWinner) && self == level.raceWinner)
+  if(isDefined(level.raceWinner) && self == level.raceWinner) {
     return;
-
+  }
   wait 0.05;
 
   star notify("destroy");
@@ -429,7 +429,7 @@ star_challenge_sound_and_flash(star, removeTimer) {
 
   wait timeToWait;
 
-  for (i = 0; i < secondsToTick; i++) {
+  for(i = 0; i < secondsToTick; i++) {
     self PlayLocalSound("so_snowrace_star_tick");
     star.alpha = 1;
     wait 0.5;

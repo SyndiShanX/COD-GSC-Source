@@ -8,14 +8,14 @@
 #include maps\_anim;
 #using_animtree("generic_human");
 patrol(start_target) {
-  if(isdefined(self.enemy))
+  if(isDefined(self.enemy))
     return;
   self endon("enemy");
 
   self endon("death");
   self endon("damage");
   self endon("end_patrol");
-  if(isdefined(self.script_stealthgroup))
+  if(isDefined(self.script_stealthgroup))
     [[level.global_callbacks["_patrol_endon_spotted_flag"]]]();
 
   self thread waittill_combat();
@@ -45,12 +45,12 @@ patrol(start_target) {
   set_goal_func["node"] = ::set_goal_node;
   set_goal_func["struct"] = ::set_goal_ent;
 
-  if(isdefined(start_target))
+  if(isDefined(start_target))
     self.target = start_target;
 
-  assertEx(isdefined(self.target) || isdefined(self.script_linkto), "Patroller with no target or script_linkto defined.");
+  assertEx(isDefined(self.target) || isDefined(self.script_linkto), "Patroller with no target or script_linkto defined.");
 
-  if(isdefined(self.target)) {
+  if(isDefined(self.target)) {
     link_type = true;
     ents = self get_target_ents();
     nodes = self get_target_nodes();
@@ -84,7 +84,7 @@ patrol(start_target) {
     }
   }
 
-  assertex(isdefined(currentgoal), "Initial goal for patroller is undefined");
+  assertex(isDefined(currentgoal), "Initial goal for patroller is undefined");
 
   patrol_idle_anim_table = [];
   patrol_idle_anim_table["pause"] = "patrol_idle_";
@@ -95,8 +95,8 @@ patrol(start_target) {
   patrol_idle_anim_table["phone"] = "patrol_idle_phone";
 
   nextgoal = currentgoal;
-  for (;;) {
-    while (isdefined(nextgoal.patrol_claimed)) {
+  for(;;) {
+    while(isDefined(nextgoal.patrol_claimed)) {
       // self animscripted( "scripted_animdone", self.origin, self.angles, getGenericAnim( "pause" ) );
       // self waittill( "scripted_animdone" );
       wait 0.05;
@@ -106,19 +106,17 @@ patrol(start_target) {
     currentgoal = nextgoal;
     self notify("release_node");
 
-    assertex(!isdefined(currentgoal.patrol_claimed), "Goal was already claimed");
+    assertex(!isDefined(currentgoal.patrol_claimed), "Goal was already claimed");
     currentgoal.patrol_claimed = true;
     // self thread showclaimed( currentgoal );
 
     //this is for stealth code...so we can send him back to his patrol node if need be
     self.last_patrol_goal = currentgoal;
 
-    [
-      [set_goal_func[goal_type]]
-    ](currentgoal);
-    //check for both defined and size - because ents dont have radius defined by 
+    [[set_goal_func[goal_type]]](currentgoal);
+    //check for both defined and size - because ents dont have radius defined by
     //default - but nodes do - and that radius is 0 by default.
-    if(isdefined(currentgoal.radius) && currentgoal.radius > 0)
+    if(isDefined(currentgoal.radius) && currentgoal.radius > 0)
       self.goalradius = currentgoal.radius;
     else
       self.goalradius = 32;
@@ -128,15 +126,15 @@ patrol(start_target) {
     currentgoal notify("trigger", self);
 
     //HANDLE SCRIPT_FLAG_SET and friends - z
-    if(isdefined(currentgoal.script_flag_set)) {
+    if(isDefined(currentgoal.script_flag_set)) {
       flag_set(currentgoal.script_flag_set);
     }
 
-    if(isdefined(currentgoal.script_ent_flag_set)) {
+    if(isDefined(currentgoal.script_ent_flag_set)) {
       self ent_flag_set(currentgoal.script_ent_flag_set);
     }
 
-    if(isdefined(currentgoal.script_flag_clear)) {
+    if(isDefined(currentgoal.script_flag_clear)) {
       flag_clear(currentgoal.script_flag_clear);
     }
 
@@ -149,17 +147,17 @@ patrol(start_target) {
         self.patrol_pet notify("master_reached_patrol_end");
     }
 
-    if(isdefined(currentgoal.script_delay))
+    if(isDefined(currentgoal.script_delay))
       wait currentgoal.script_delay;
 
-    if(IsDefined(currentgoal.script_flag_wait)) {
+    if(isDefined(currentgoal.script_flag_wait)) {
       flag_wait(currentgoal.script_flag_wait);
     }
 
     reactionAnimThread = animscripts\reactions::reactionsCheckLoop;
     animType = currentgoal.script_animation;
 
-    if(isdefined(animType)) {
+    if(isDefined(animType)) {
       // come to a stop
       self patrol_do_stop_transition_anim(animType, reactionAnimThread);
 
@@ -168,9 +166,9 @@ patrol(start_target) {
 
       // now pick the anim to use and do it
       anime = patrol_idle_anim_table[animType];
-      if(isdefined(anime)) {
+      if(isDefined(anime)) {
         if(animType == "pause") {
-          if(IsDefined(self.patrol_scriptedanim) && IsDefined(self.patrol_scriptedanim[animType])) {
+          if(isDefined(self.patrol_scriptedanim) && isDefined(self.patrol_scriptedanim[animType])) {
             anime = self.patrol_scriptedanim[animType][RandomInt(self.patrol_scriptedanim[animType].size)];
           } else {
             anime = anime + randomintrange(1, 6);
@@ -190,10 +188,10 @@ patrol(start_target) {
 
     if(!currentgoals.size) {
       // see if we have a custom end idle to do, but don't do it if we already did an idle on this node (can't guarantee a good-looking blend)
-      if(IsDefined(self.patrol_end_idle) && !IsDefined(animType)) {
+      if(isDefined(self.patrol_end_idle) && !isDefined(animType)) {
         self patrol_do_stop_transition_anim("path_end_idle", reactionAnimThread);
 
-        while (1) {
+        while(1) {
           idleAnim = self.patrol_end_idle[RandomInt(self.patrol_end_idle.size)];
           self anim_generic_custom_animmode(self, "gravity", idleAnim, undefined, reactionAnimThread);
         }
@@ -207,7 +205,7 @@ patrol(start_target) {
 }
 
 patrol_do_stop_transition_anim(animType, reactionAnimThread) {
-  if(IsDefined(self.patrol_stop) && IsDefined(self.patrol_stop[animType])) {
+  if(isDefined(self.patrol_stop) && isDefined(self.patrol_stop[animType])) {
     self anim_generic_custom_animmode(self, "gravity", self.patrol_stop[animType], undefined, reactionAnimThread);
   } else {
     self anim_generic_custom_animmode(self, "gravity", "patrol_stop", undefined, reactionAnimThread);
@@ -215,7 +213,7 @@ patrol_do_stop_transition_anim(animType, reactionAnimThread) {
 }
 
 patrol_do_start_transition_anim(animType, reactionAnimThread) {
-  if(IsDefined(self.patrol_start) && IsDefined(self.patrol_start[animType])) {
+  if(isDefined(self.patrol_start) && isDefined(self.patrol_start[animType])) {
     self anim_generic_custom_animmode(self, "gravity", self.patrol_start[animType], undefined, reactionAnimThread);
   } else {
     self anim_generic_custom_animmode(self, "gravity", "patrol_start", undefined, reactionAnimThread);
@@ -223,9 +221,9 @@ patrol_do_start_transition_anim(animType, reactionAnimThread) {
 }
 
 stand_up_if_necessary() {
-  if(self.a.pose == "crouch" && isdefined(self.a.array)) {
+  if(self.a.pose == "crouch" && isDefined(self.a.array)) {
     standUpAnim = self.a.array["stance_change"];
-    if(isdefined(standUpAnim)) {
+    if(isDefined(standUpAnim)) {
       self SetFlaggedAnimKnobAllRestart("stand_up", standUpAnim, % root, 1);
       self animscripts\shared::DoNoteTracks("stand_up");
     }
@@ -249,21 +247,21 @@ patrol_resume_move_start_func() {
 }
 
 turn_180_move_start_func() {
-  if(!isdefined(self.pathgoalpos))
+  if(!isDefined(self.pathgoalpos)) {
     return;
-
+  }
   pos = self.pathgoalpos;
 
   vec2 = pos - self.origin;
   vec2 = (vec2[0], vec2[1], 0);
   vec2LengthSq = lengthSquared(vec2);
 
-  if(vec2LengthSq < 1)
+  if(vec2LengthSq < 1) {
     return;
-
+  }
   vec2 = vec2 / sqrt(vec2LengthSq);
 
-  vec1 = anglestoforward(self.angles);
+  vec1 = anglesToForward(self.angles);
 
   // if the goal is behind him - do a 180 anim
   if(vectordot(vec1, vec2) < -0.5) {
@@ -288,12 +286,12 @@ turn_180_move_start_func() {
 
 set_patrol_run_anim_array() {
   walkanim = "patrol_walk";
-  if(IsDefined(self.patrol_walk_anim)) {
+  if(isDefined(self.patrol_walk_anim)) {
     walkanim = self.patrol_walk_anim;
   }
 
   twitch_weights = undefined;
-  if(IsDefined(self.patrol_walk_twitch)) {
+  if(isDefined(self.patrol_walk_twitch)) {
     twitch_weights = self.patrol_walk_twitch;
   }
 
@@ -303,7 +301,7 @@ set_patrol_run_anim_array() {
 waittill_combat_wait() {
   self endon("end_patrol");
 
-  if(isdefined(self.patrol_master))
+  if(isDefined(self.patrol_master))
     self.patrol_master endon("death");
 
   self waittill("enemy");
@@ -312,21 +310,21 @@ waittill_combat_wait() {
 waittill_death() {
   self waittill("death");
 
-  if(!isdefined(self))
+  if(!isDefined(self)) {
     return;
-
+  }
   self notify("release_node");
 
-  if(!isdefined(self.last_patrol_goal))
+  if(!isDefined(self.last_patrol_goal)) {
     return;
-
+  }
   self.last_patrol_goal.patrol_claimed = undefined;
 }
 
 waittill_combat() {
   self endon("death");
 
-  assert(!isdefined(self.enemy));
+  assert(!isDefined(self.enemy));
 
   waittill_combat_wait();
 
@@ -343,26 +341,26 @@ waittill_combat() {
     self.goalradius = level.default_goalradius;
   }
 
-  if(isdefined(self.old_interval))
+  if(isDefined(self.old_interval))
     self.interval = self.old_interval;
   self.moveplaybackrate = 1;
 
-  if(!isdefined(self))
+  if(!isDefined(self)) {
     return;
-
+  }
   self notify("release_node");
 
-  if(!isdefined(self.last_patrol_goal))
+  if(!isDefined(self.last_patrol_goal)) {
     return;
-
+  }
   self.last_patrol_goal.patrol_claimed = undefined;
 }
 
 get_target_ents() {
   array = [];
 
-  if(isdefined(self.target))
-    array = getentarray(self.target, "targetname");
+  if(isDefined(self.target))
+    array = getEntArray(self.target, "targetname");
 
   return array;
 }
@@ -370,7 +368,7 @@ get_target_ents() {
 get_target_nodes() {
   array = [];
 
-  if(isdefined(self.target))
+  if(isDefined(self.target))
     array = getnodearray(self.target, "targetname");
 
   return array;
@@ -379,7 +377,7 @@ get_target_nodes() {
 get_target_structs() {
   array = [];
 
-  if(isdefined(self.target))
+  if(isDefined(self.target))
     array = getstructarray(self.target, "targetname");
 
   return array;
@@ -388,11 +386,11 @@ get_target_structs() {
 get_linked_nodes() {
   array = [];
 
-  if(isdefined(self.script_linkto)) {
+  if(isDefined(self.script_linkto)) {
     linknames = strtok(self.script_linkto, " ");
-    for (i = 0; i < linknames.size; i++) {
+    for(i = 0; i < linknames.size; i++) {
       ent = getnode(linknames[i], "script_linkname");
-      if(isdefined(ent))
+      if(isDefined(ent))
         array[array.size] = ent;
     }
   }
@@ -403,62 +401,60 @@ get_linked_nodes() {
 showclaimed(goal) {
   self endon("release_node");
 
-  /#
-  for (;;) {
+  for(;;) {
     entnum = self getentnum();
     print3d(goal.origin, entnum, (1.0, 1.0, 0.0), 1);
     wait 0.05;
   }
-  # /
-}
 
+}
 
 //////////////////////////////////////////////////////////??//////////////////
 /*									PETS									*/
 //////////////////////////////////////////////////////////??//////////////////
 
 linkPet() {
-  if(isdefined(self.patrol_pet)) {
+  if(isDefined(self.patrol_pet)) {
     self.patrol_pet thread pet_patrol();
     return;
   }
 
-  if(!isdefined(self.script_pet))
+  if(!isDefined(self.script_pet)) {
     return;
-
+  }
   waittillframeend; // make sure everyone is spawned;
 
   pets = getaispeciesarray(self.team, "dog");
   pet = undefined;
 
-  for (i = 0; i < pets.size; i++) {
-    if(!isdefined(pets[i].script_pet))
+  for(i = 0; i < pets.size; i++) {
+    if(!isDefined(pets[i].script_pet))
       continue;
-    if(pets[i].script_pet != self.script_pet)
+    if(pets[i].script_pet != self.script_pet) {
       continue;
-
+    }
     pet = pets[i];
     self.patrol_pet = pet;
     pet.patrol_master = self;
     break;
   }
 
-  if(!isdefined(pet))
+  if(!isDefined(pet)) {
     return;
-
+  }
   pet thread pet_patrol();
 }
 
 pet_patrol() {
   spawn_failed(self);
 
-  if(isdefined(self.enemy))
+  if(isDefined(self.enemy))
     return;
   self endon("enemy");
 
   self endon("death");
   self endon("end_patrol");
-  if(isdefined(self.script_stealthgroup))
+  if(isDefined(self.script_stealthgroup))
     [[level.global_callbacks["_patrol_endon_spotted_flag"]]]();
 
   self.patrol_master endon("death");
@@ -486,8 +482,8 @@ pet_patrol() {
   self.old_interval = self.interval;
   self.interval = 70;
 
-  while (1) {
-    if(isdefined(self.patrol_master) && !isdefined(self.patrol_master.patrol_script_animation)) {
+  while(1) {
+    if(isDefined(self.patrol_master) && !isDefined(self.patrol_master.patrol_script_animation)) {
       positions = pet_patrol_init_positions(positions);
 
       //pet_debug_positions( positions );
@@ -510,35 +506,35 @@ pet_patrol() {
 pet_patrol_create_positions() {
   positions = [];
 
-  right = spawnstruct();
+  right = spawnStruct();
   right.options = [];
   right.options[right.options.size] = "right";
   right.options[right.options.size] = "back_right";
 
-  backright = spawnstruct();
+  backright = spawnStruct();
   backright.options = [];
   backright.options[backright.options.size] = "right";
   backright.options[backright.options.size] = "back_right";
   backright.options[backright.options.size] = "back";
 
-  back = spawnstruct();
+  back = spawnStruct();
   back.options = [];
   back.options[back.options.size] = "back_right";
   back.options[back.options.size] = "back_left";
   back.options[back.options.size] = "back";
 
-  backleft = spawnstruct();
+  backleft = spawnStruct();
   backleft.options = [];
   backleft.options[backleft.options.size] = "left";
   backleft.options[backleft.options.size] = "back_left";
   backleft.options[backleft.options.size] = "back";
 
-  left = spawnstruct();
+  left = spawnStruct();
   left.options = [];
   left.options[left.options.size] = "left";
   left.options[left.options.size] = "back_left";
 
-  null = spawnstruct();
+  null = spawnStruct();
 
   positions["right"] = right;
   positions["left"] = left;
@@ -557,7 +553,7 @@ pet_patrol_init_positions(positions) {
   //calculate the goal pos
   origin = self.patrol_master.origin;
   right = anglestoright(angles);
-  forward = anglestoforward(angles);
+  forward = anglesToForward(angles);
 
   //don't do positions.size because the array will constantly grow.
   positions["right"].origin = origin + vector_multiply(right, 40) + vector_multiply(forward, 30); // right
@@ -568,7 +564,7 @@ pet_patrol_init_positions(positions) {
   positions["null"].origin = self.origin;
 
   keys = getarraykeys(positions);
-  for (i = 0; i < keys.size; i++) {
+  for(i = 0; i < keys.size; i++) {
     key = keys[i];
     positions[key].checked = false;
     positions[key].recursed = false;
@@ -579,7 +575,7 @@ pet_patrol_init_positions(positions) {
 
 pet_debug_positions(positions) {
   keys = getarraykeys(positions);
-  for (i = 0; i < keys.size; i++) {
+  for(i = 0; i < keys.size; i++) {
     key = keys[i];
     if(key == "null")
       continue;
@@ -590,24 +586,24 @@ pet_debug_positions(positions) {
 pet_patrol_get_available_origin(positions, curr) {
   positions[curr].recursed = true;
 
-  for (i = 0; i < positions[curr].options.size; i++) {
+  for(i = 0; i < positions[curr].options.size; i++) {
     name = positions[curr].options[i];
 
-    if(positions[name].checked)
+    if(positions[name].checked) {
       continue;
-
+    }
     if(self maymovetopoint(positions[name].origin))
       return name;
 
     positions[name].checked = true;
   }
 
-  for (i = 0; i < positions[curr].options.size; i++) {
+  for(i = 0; i < positions[curr].options.size; i++) {
     name = positions[curr].options[i];
 
-    if(positions[name].recursed)
+    if(positions[name].recursed) {
       continue;
-
+    }
     name = pet_patrol_get_available_origin(positions, name);
     return name;
   }
@@ -616,7 +612,7 @@ pet_patrol_get_available_origin(positions, curr) {
 }
 
 pet_patrol_handle_move_state(walkdist) {
-  if(isdefined(self.enemy))
+  if(isDefined(self.enemy))
     return;
   self endon("enemy");
 
@@ -625,14 +621,13 @@ pet_patrol_handle_move_state(walkdist) {
 
   self.patrol_master endon("death");
 
-  if(isdefined(self.patrol_master.script_noteworthy) && (self.patrol_master.script_noteworthy == "cqb_patrol")) {
+  if(isDefined(self.patrol_master.script_noteworthy) && (self.patrol_master.script_noteworthy == "cqb_patrol")) {
     //always walk
     self set_dog_walk_anim();
     return;
   }
 
-
-  if(!isdefined(walkdist))
+  if(!isDefined(walkdist))
     walkdist = 200; //was 200
 
   //min_walkdist = 30;
@@ -640,7 +635,7 @@ pet_patrol_handle_move_state(walkdist) {
   //move_state = "walk";
   self set_dog_walk_anim();
 
-  while (1) {
+  while(1) {
     //wait first so we have a self.patrol_goal_pos;
     wait .1;
 
@@ -650,9 +645,9 @@ pet_patrol_handle_move_state(walkdist) {
 
     if(dist > squared(walkdist)) {
       //we want to run
-      if(self.a.movement == "run")
+      if(self.a.movement == "run") {
         continue;
-
+      }
       self anim_generic_custom_animmode(self, "gravity", "patrol_dog_start");
       self clear_run_anim();
       self.script_nobark = 1;
@@ -666,7 +661,7 @@ pet_patrol_handle_move_state(walkdist) {
 }
 
 pet_patrol_handle_movespeed(tooclose, toofar) {
-  if(isdefined(self.enemy))
+  if(isDefined(self.enemy))
     return;
   self endon("enemy");
 
@@ -675,8 +670,8 @@ pet_patrol_handle_movespeed(tooclose, toofar) {
 
   self.patrol_master endon("death");
 
-  if(isdefined(self.patrol_master.script_noteworthy) && (self.patrol_master.script_noteworthy == "cqb_patrol")) {
-    while (1) {
+  if(isDefined(self.patrol_master.script_noteworthy) && (self.patrol_master.script_noteworthy == "cqb_patrol")) {
+    while(1) {
       wait .05;
       origin = self.patrol_goal_pos;
       dist = distancesquared(self.origin, self.patrol_goal_pos);
@@ -694,15 +689,15 @@ pet_patrol_handle_movespeed(tooclose, toofar) {
     }
   }
 
-  if(!isdefined(tooclose))
+  if(!isDefined(tooclose))
     tooclose = 16;
-  if(!isdefined(toofar))
+  if(!isDefined(toofar))
     toofar = 48;
 
   tooclose2rd = tooclose * tooclose;
   toofar2rd = toofar * toofar;
 
-  while (1) {
+  while(1) {
     //wait first so we have a self.patrol_goal_pos;
     wait .05;
 
@@ -713,7 +708,6 @@ pet_patrol_handle_movespeed(tooclose, toofar) {
     //println( self.a.movement + " speed: " + self.moveplaybackrate );
     //running?
     if(self.a.movement != "walk") {
-
       self.moveplaybackrate = 1;
       continue;
     }

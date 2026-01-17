@@ -9,7 +9,7 @@ onFirstPlayerConnect() {
 }
 
 onPlayerConnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connecting", player);
     player thread onPlayerDisconnect();
     player thread onPlayerSpawned();
@@ -27,7 +27,7 @@ onPlayerDisconnect() {
 
 onPlayerSpawned() {
   self endon("disconnect");
-  for (;;) {
+  for(;;) {
     self waittill("spawned_player");
     println("Player spawned in to game at " + self.origin);
   }
@@ -35,7 +35,7 @@ onPlayerSpawned() {
 
 onPlayerKilled() {
   self endon("disconnect");
-  for (;;) {
+  for(;;) {
     self waittill("killed_player");
     println("Player killed at " + self.origin);
   }

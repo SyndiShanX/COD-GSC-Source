@@ -674,9 +674,7 @@ handlenotetrack(var_0, var_1, var_2) {
   var_3 = anim.notetracks[var_0];
 
   if(isDefined(var_3))
-    return [
-      [var_3]
-    ](var_0, var_1);
+    return [[var_3]](var_0, var_1);
 
   switch (var_0) {
     case "undefined":
@@ -749,9 +747,7 @@ handlenotetrack(var_0, var_1, var_2) {
         notetrackrocketlauncherammodelete();
     default:
       if(isDefined(var_2))
-        return [
-          [var_2]
-        ](var_0);
+        return [[var_2]](var_0);
 
       break;
   }
@@ -764,9 +760,7 @@ donotetracksintercept(var_0, var_1, var_2) {
     if(!isDefined(var_3))
       var_3 = "undefined";
 
-    var_4 = [
-      [var_1]
-    ](var_3);
+    var_4 = [[var_1]](var_3);
 
     if(isDefined(var_4) && var_4) {
       continue;
@@ -786,9 +780,7 @@ donotetrackspostcallback(var_0, var_1) {
       var_2 = "undefined";
 
     var_3 = handlenotetrack(var_2, var_0);
-    [
-      [var_1]
-    ](var_2);
+    [[var_1]](var_2);
 
     if(isDefined(var_3))
       return var_3;
@@ -818,9 +810,7 @@ donotetracksforeverproc(var_0, var_1, var_2, var_3, var_4) {
 
   for(;;) {
     var_5 = gettime();
-    var_6 = [
-      [var_0]
-    ](var_1, var_3, var_4);
+    var_6 = [[var_0]](var_1, var_3, var_4);
     var_7 = gettime() - var_5;
 
     if(var_7 < 0.05) {
@@ -891,9 +881,7 @@ playfootstep(var_0, var_1) {
     self playSound("step_" + var_4 + "_" + var_2);
 
     if(var_1) {
-      if(![
-          [anim.optionalstepeffectfunction]
-        ](var_3, var_2)) {
+      if(![[anim.optionalstepeffectfunction]](var_3, var_2)) {
         playfootstepeffectsmall(var_3, var_2);
         return;
       }

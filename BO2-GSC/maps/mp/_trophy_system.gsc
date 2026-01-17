@@ -61,7 +61,7 @@ ontrophysystemspawn(watcher, player) {
   self thread trophyactive(player);
   self thread trophywatchhack();
   self setclientfield("trophy_system_state", 1);
-  self playloopsound("wpn_trophy_spin", 0.25);
+  self playLoopSound("wpn_trophy_spin", 0.25);
 
   if(isDefined(watcher.reconmodel))
     self thread setreconmodeldeployed();
@@ -88,8 +88,8 @@ trophywatchhack() {
 }
 
 ontrophysystemsmashed(attacker) {
-  playfx(level._effect["tacticalInsertionFizzle"], self.origin);
-  self playsound("dst_tac_insert_break");
+  playFX(level._effect["tacticalInsertionFizzle"], self.origin);
+  self playSound("dst_tac_insert_break");
   self.owner maps\mp\gametypes\_globallogic_audio::leaderdialogonplayer("equipment_destroyed", "item_destroyed");
 
   if(isDefined(attacker) && self.owner isenemyplayer(attacker)) {
@@ -152,10 +152,10 @@ trophyactive(owner) {
 
         if(grenadedistancesquared < 262144) {
           if(bullettracepassed(grenade.origin, self.origin + vectorscale((0, 0, 1), 29.0), 0, self)) {
-            playfx(level.trophylongflashfx, self.origin + vectorscale((0, 0, 1), 15.0), grenade.origin - self.origin, anglestoup(self.angles));
+            playFX(level.trophylongflashfx, self.origin + vectorscale((0, 0, 1), 15.0), grenade.origin - self.origin, anglestoup(self.angles));
             owner thread projectileexplode(grenade, self);
             index--;
-            self playsound("wpn_trophy_alert");
+            self playSound("wpn_trophy_alert");
             self.ammo--;
 
             if(self.ammo <= 0)
@@ -183,10 +183,10 @@ trophyactive(owner) {
 
         if(grenadedistancesquared < 262144) {
           if(bullettracepassed(tac_insert.origin, self.origin + vectorscale((0, 0, 1), 29.0), 0, tac_insert)) {
-            playfx(level.trophylongflashfx, self.origin + vectorscale((0, 0, 1), 15.0), tac_insert.origin - self.origin, anglestoup(self.angles));
+            playFX(level.trophylongflashfx, self.origin + vectorscale((0, 0, 1), 15.0), tac_insert.origin - self.origin, anglestoup(self.angles));
             owner thread trophydestroytacinsert(tac_insert, self);
             index--;
-            self playsound("wpn_trophy_alert");
+            self playSound("wpn_trophy_alert");
             self.ammo--;
 
             if(self.ammo <= 0)
@@ -201,7 +201,7 @@ trophyactive(owner) {
 projectileexplode(projectile, trophy) {
   self endon("death");
   projposition = projectile.origin;
-  playfx(level.trophydetonationfx, projposition);
+  playFX(level.trophydetonationfx, projposition);
   projectile delete();
   trophy radiusdamage(projposition, 128, 105, 10, self);
   maps\mp\_scoreevents::processscoreevent("trophy_defense", self);
@@ -212,7 +212,7 @@ projectileexplode(projectile, trophy) {
 trophydestroytacinsert(tacinsert, trophy) {
   self endon("death");
   tacpos = tacinsert.origin;
-  playfx(level.trophydetonationfx, tacinsert.origin);
+  playFX(level.trophydetonationfx, tacinsert.origin);
   tacinsert thread maps\mp\_tacticalinsertion::tacticalinsertiondestroyedbytrophysystem(self, trophy);
   trophy radiusdamage(tacpos, 128, 105, 10, self);
   maps\mp\_scoreevents::processscoreevent("trophy_defense", self);
@@ -224,7 +224,7 @@ trophysystemdetonate(attacker, weaponname) {
   from_emp = maps\mp\killstreaks\_emp::isempweapon(weaponname);
 
   if(!from_emp)
-    playfx(level._equipment_explode_fx_lg, self.origin);
+    playFX(level._equipment_explode_fx_lg, self.origin);
 
   if(isDefined(attacker) && self.owner isenemyplayer(attacker)) {
     attacker maps\mp\_challenges::destroyedequipment(weaponname);
@@ -238,7 +238,7 @@ trophysystemdetonate(attacker, weaponname) {
 watchtrophysystemdamage(watcher) {
   self endon("death");
   self endon("hacked");
-  self setcandamage(1);
+  self setCanDamage(1);
   damagemax = 20;
 
   if(!self maps\mp\_utility::ishacked())

@@ -11,7 +11,6 @@
 #include scripts\core_common\postfx_shared;
 #include scripts\core_common\shaderanim_shared;
 #include scripts\core_common\system_shared;
-
 #namespace animation;
 
 autoexec __init__system__() {
@@ -40,9 +39,9 @@ _play(animation, v_origin_or_ent, v_angles_or_tag, n_rate = 1, n_blend_in = 0.2,
   }
 
   self notify(#"new_scripted_anim");
-  self endon(#"new_scripted_anim", #"death");
+  self endon(#"new_scripted_anim", # "death");
 
-  if(!isDefined(self.model) || self.model == #"") {
+  if(!isDefined(self.model) || self.model == # "") {
     assertmsg("<dev string:x38>" + self.origin);
     return;
   }
@@ -85,8 +84,8 @@ _play(animation, v_origin_or_ent, v_angles_or_tag, n_rate = 1, n_blend_in = 0.2,
 
   self.var_80c69db6 = "<dev string:xd2>";
   self.var_6c4bb19 = {
-    #animation: animation, 
-    #v_origin_or_ent: v_origin_or_ent, 
+    #animation: animation,
+    #v_origin_or_ent: v_origin_or_ent,
     #v_angles_or_tag: v_angles_or_tag
   };
   level flagsys::clear("<dev string:xdb>");
@@ -106,11 +105,11 @@ _play(animation, v_origin_or_ent, v_angles_or_tag, n_rate = 1, n_blend_in = 0.2,
   flagsys::clear(#"scripted_anim_this_frame");
 }
 
-private waittill_end() {
+waittill_end() {
   level endon(#"demo_jump");
   self waittillmatch({
     #notetrack: "end"
-  }, #"_anim_notify_");
+  }, # "_anim_notify_");
 }
 
 _get_align_ent(e_align) {
@@ -252,7 +251,7 @@ setup_notetracks() {
 handle_notetracks() {
   self notify(#"handle_notetracks");
   level endon(#"demo_jump");
-  self endon(#"handle_notetracks", #"death");
+  self endon(#"handle_notetracks", # "death");
 
   while(true) {
     waitresult = self waittill(#"_anim_notify_");
@@ -269,16 +268,16 @@ handle_notetracks() {
 
 cracks_on(str_type) {
   switch (str_type) {
-    case #"red":
+    case # "red":
       cf_cracks_on(self.localclientnum, 0, 1);
       break;
-    case #"green":
+    case # "green":
       cf_cracks_on(self.localclientnum, 0, 3);
       break;
-    case #"blue":
+    case # "blue":
       cf_cracks_on(self.localclientnum, 0, 2);
       break;
-    case #"all":
+    case # "all":
       cf_cracks_on(self.localclientnum, 0, 4);
       break;
   }
@@ -286,16 +285,16 @@ cracks_on(str_type) {
 
 cracks_off(str_type) {
   switch (str_type) {
-    case #"red":
+    case # "red":
       cf_cracks_off(self.localclientnum, 0, 1);
       break;
-    case #"green":
+    case # "green":
       cf_cracks_off(self.localclientnum, 0, 3);
       break;
-    case #"blue":
+    case # "blue":
       cf_cracks_off(self.localclientnum, 0, 2);
       break;
-    case #"all":
+    case # "all":
       cf_cracks_off(self.localclientnum, 0, 4);
       break;
   }

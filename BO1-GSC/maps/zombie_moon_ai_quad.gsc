@@ -35,13 +35,13 @@ moon_quad_sidestep(animname, stepAnim) {
     self waittill(animname, note);
     if(note == "phase_start") {
       self thread moon_quad_phase_fx();
-      self playsound("zmb_quad_phase_out");
+      self playSound("zmb_quad_phase_out");
       self hide();
     } else if(note == "phase_end") {
       self notify("stop_wait_phase_end");
       self thread moon_quad_phase_fx();
       self show();
-      self playsound("zmb_quad_phase_in");
+      self playSound("zmb_quad_phase_in");
       break;
     }
   }
@@ -75,8 +75,8 @@ moon_quad_exit_align(stepAnim) {
 
 moon_quad_phase_fx() {
   self endon("death");
-  PlayFxOnTag(level._effect["quad_phasing"], self, "j_head");
-  PlayFxOnTag(level._effect["quad_phasing"], self, "j_mainroot");
+  playFXOnTag(level._effect["quad_phasing"], self, "j_head");
+  playFXOnTag(level._effect["quad_phasing"], self, "j_mainroot");
 }
 
 moon_quad_gas_immune() {

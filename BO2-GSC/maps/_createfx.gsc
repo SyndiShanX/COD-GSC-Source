@@ -81,8 +81,7 @@ init_client_sp_variables() {
   level.cfx_exploder_after = maps\_utility::exploder_after_load;
 }
 
-init_client_mp_variables() {
-}
+init_client_mp_variables() {}
 
 fx_init() {
   if(ismp())
@@ -97,37 +96,37 @@ fx_init() {
   level.non_fx_ents = 0;
 
   if(level.createfx_enabled) {
-    triggers = getentarray("trigger_multiple", "classname");
+    triggers = getEntArray("trigger_multiple", "classname");
 
     for(i = 0; i < triggers.size; i++)
       triggers[i] delete();
 
-    triggers = getentarray("trigger_once", "classname");
+    triggers = getEntArray("trigger_once", "classname");
 
     for(i = 0; i < triggers.size; i++)
       triggers[i] delete();
 
-    triggers = getentarray("trigger_box", "classname");
+    triggers = getEntArray("trigger_box", "classname");
 
     for(i = 0; i < triggers.size; i++)
       triggers[i] delete();
 
-    triggers = getentarray("trigger_radius", "classname");
+    triggers = getEntArray("trigger_radius", "classname");
 
     for(i = 0; i < triggers.size; i++)
       triggers[i] delete();
 
-    triggers = getentarray("trigger_lookat", "classname");
+    triggers = getEntArray("trigger_lookat", "classname");
 
     for(i = 0; i < triggers.size; i++)
       triggers[i] delete();
 
-    triggers = getentarray("trigger_damage", "classname");
+    triggers = getEntArray("trigger_damage", "classname");
 
     for(i = 0; i < triggers.size; i++)
       triggers[i] delete();
 
-    sm = getentarray("spawn_manager", "classname");
+    sm = getEntArray("spawn_manager", "classname");
 
     for(i = 0; i < sm.size; i++)
       sm[i] delete();
@@ -185,14 +184,14 @@ createeffect(type, fxid) {
     if(!isDefined(level.cfx_uniqueid))
       level.cfx_uniqueid = 0;
 
-    ent = spawnstruct();
+    ent = spawnStruct();
     ent.uniqueid = level.cfx_uniqueid;
     level.cfx_uniqueid++;
   } else if(type == "exploder")
-    ent = spawnstruct();
+    ent = spawnStruct();
   else {
     if(!isDefined(level._fake_createfx_struct))
-      level._fake_createfx_struct = spawnstruct();
+      level._fake_createfx_struct = spawnStruct();
 
     ent = level._fake_createfx_struct;
   }
@@ -208,7 +207,7 @@ createeffect(type, fxid) {
 }
 
 createloopsound() {
-  ent = spawnstruct();
+  ent = spawnStruct();
 
   if(!isDefined(level.createfxent))
     level.createfxent = [];
@@ -226,7 +225,7 @@ createloopsound() {
 
 set_forward_and_up_vectors() {
   temp_up = anglestoup(self.v["angles"]);
-  temp_forward = anglestoforward(self.v["angles"]);
+  temp_forward = anglesToForward(self.v["angles"]);
 
   if(abs(temp_up[0]) < 0.05)
     temp_up = (0, temp_up[1], temp_up[2]);
@@ -404,11 +403,11 @@ createfxlogic() {
     player = get_players()[0];
     changedselectedents = 0;
     right = anglestoright(player getplayerangles());
-    forward = anglestoforward(player getplayerangles());
+    forward = anglesToForward(player getplayerangles());
     up = anglestoup(player getplayerangles());
     dot = 0.85;
     placeent_vector = vectorscale(forward, 750);
-    level.createfxcursor = bullettrace(player geteye(), player geteye() + placeent_vector, 0, undefined);
+    level.createfxcursor = bulletTrace(player getEye(), player getEye() + placeent_vector, 0, undefined);
     highlightedent = undefined;
     level.buttonclick = [];
     level.button_is_kb = [];
@@ -495,8 +494,7 @@ createfxlogic() {
     }
 
     if(button_is_clicked("z")) {
-      if(shiftheld) {
-      } else
+      if(shiftheld) {} else
         undo();
     }
 
@@ -870,7 +868,7 @@ draw_axis() {
 
 spawn_axis_model(origin, angles) {
   model = spawn("script_model", origin);
-  model setmodel("fx_axis_createfx");
+  model setModel("fx_axis_createfx");
   model.angles = angles;
   return model;
 }
@@ -969,7 +967,7 @@ get_selected_move_vector() {
   yaw = player getplayerangles()[1];
   angles = (0, yaw, 0);
   right = anglestoright(angles);
-  forward = anglestoforward(angles);
+  forward = anglesToForward(angles);
   up = anglestoup(angles);
   ctrlheld = button_is_held("ctrl", "BUTTON_LSHLDR");
 
@@ -1790,7 +1788,7 @@ copy_ents() {
 
   for(i = 0; i < level.selected_fx_ents.size; i++) {
     ent = level.selected_fx_ents[i];
-    newent = spawnstruct();
+    newent = spawnStruct();
     newent.v = ent.v;
     newent post_entity_creation_function();
     array[array.size] = newent;
@@ -1951,8 +1949,7 @@ last_selected_entity_has_changed(lastselectentity) {
   return lastselectentity != level.selected_fx_ents[level.selected_fx_ents.size - 1];
 }
 
-createfx_showorigin(id, org, delay, org2, type, exploder, id2, firefx, firefxdelay, firefxsound, fxsound, fxquake, fxdamage, soundalias, repeat, delay_min, delay_max, damage_radius, firefxtimeout) {
-}
+createfx_showorigin(id, org, delay, org2, type, exploder, id2, firefx, firefxdelay, firefxsound, fxsound, fxquake, fxdamage, soundalias, repeat, delay_min, delay_max, damage_radius, firefxtimeout) {}
 
 drop_selection_to_ground() {
   if(level.cfx_last_action != "drop_to_ground") {
@@ -1962,7 +1959,7 @@ drop_selection_to_ground() {
 
   for(i = 0; i < level.selected_fx_ents.size; i++) {
     ent = level.selected_fx_ents[i];
-    trace = bullettrace(ent.v["origin"], ent.v["origin"] + vectorscale((0, 0, -1), 2048.0), 0, undefined);
+    trace = bulletTrace(ent.v["origin"], ent.v["origin"] + vectorscale((0, 0, -1), 2048.0), 0, undefined);
     ent.v["origin"] = trace["position"];
   }
 
@@ -2114,9 +2111,9 @@ createfx_emergency_backup() {
 move_player_around_map_fast() {
   player = get_players()[0];
   direction = player getplayerangles();
-  direction_vec = anglestoforward(direction);
-  eye = player geteye();
-  trace = bullettrace(eye, eye + vectorscale(direction_vec, 20000), 0, undefined);
+  direction_vec = anglesToForward(direction);
+  eye = player getEye();
+  trace = bulletTrace(eye, eye + vectorscale(direction_vec, 20000), 0, undefined);
   dist = distance(eye, trace["position"]);
   position = eye + vectorscale(direction_vec, dist - 64);
   player setorigin(position);
@@ -2125,7 +2122,7 @@ move_player_around_map_fast() {
 move_player_to_next_same_effect(forward_search, lastselectentity) {
   player = get_players()[0];
   direction = player getplayerangles();
-  direction_vec = anglestoforward(direction);
+  direction_vec = anglesToForward(direction);
 
   if(!isDefined(forward_search))
     forward_search = 1;
@@ -2343,8 +2340,7 @@ dot_changed(old, new) {
   return false;
 }
 
-damage_void(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, timeoffset) {
-}
+damage_void(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, timeoffset) {}
 
 handle_camera() {
   level notify("new_camera");
@@ -2353,7 +2349,7 @@ handle_camera() {
 
   if(!isDefined(level.camera)) {
     level.camera = spawn("script_origin", (0, 0, 0));
-    level.camera setmodel("tag_origin");
+    level.camera setModel("tag_origin");
   }
 
   players = get_players();
@@ -2384,8 +2380,7 @@ handle_camera() {
           newmovement = players[0] getnormalizedmovement();
           dolly_movement = players[0] getnormalizedcameramovement();
 
-          if(button_is_held("BUTTON_LTRIG") || button_is_held("BUTTON_RTRIG")) {
-          } else {
+          if(button_is_held("BUTTON_LTRIG") || button_is_held("BUTTON_RTRIG")) {} else {
             if(newmovement[1] <= -0.4) {
               n_y_vector = n_y_vector + -0.2;
               b_changes_y = 1;
@@ -2432,7 +2427,7 @@ handle_camera() {
 
           if(!isDefined(model)) {
             model = spawn("script_origin", level.current_select_ent.v["origin"]);
-            model setmodel("tag_origin");
+            model setModel("tag_origin");
           }
 
           if(model.origin != level.current_select_ent.v["origin"])
@@ -2510,7 +2505,7 @@ delete_arrays_in_sp() {
       spawners[i] delete();
   }
 
-  orgs = getentarray("script_origin", "classname");
+  orgs = getEntArray("script_origin", "classname");
 
   for(i = 0; i < orgs.size; i++)
     orgs[i] delete();
@@ -2532,11 +2527,9 @@ used_in_animation(sp) {
   return false;
 }
 
-init_mp_paths() {
-}
+init_mp_paths() {}
 
-callback_playerconnect() {
-}
+callback_playerconnect() {}
 
 delete_spawns() {
   spawn_classes = [];
@@ -2550,7 +2543,7 @@ delete_spawns() {
   spawn_classes[spawn_classes.size] = "mp_res_spawn_axis_start";
 
   foreach(class in spawn_classes) {
-    spawns = getentarray(class, "classname");
+    spawns = getEntArray(class, "classname");
 
     foreach(spawn in spawns)
     spawn delete();

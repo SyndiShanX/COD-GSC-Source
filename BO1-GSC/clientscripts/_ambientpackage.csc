@@ -83,7 +83,7 @@ init_ambient_package_triggers() {
   wait(0.1);
   player = getLocalPlayers()[0];
   remove_triggers_from_ent(player);
-  trigs = GetEntArray(0, "ambient_package", "targetname");
+  trigs = getEntArray(0, "ambient_package", "targetname");
   array_thread(trigs, ::ambientPackageTrigger);
   println("Client : " + trigs.size + " ambient package triggers.");
 }
@@ -345,7 +345,7 @@ ambientElementThread() {
       timer = randomfloatrange(self.spawnMin, self.spawnMax);
       wait timer;
       if(getdvarint(#"debug_audio") > 0) {}
-      playsound(0, self.alias);
+      playSound(0, self.alias);
     }
   } else {
     dist = 0;
@@ -360,7 +360,7 @@ ambientElementThread() {
         dist = randomintrange(self.distMin, self.distMax);
         angle = randomintrange(self.angleMin, self.angleMax);
         player_angle = getlocalclientangles(0)[1];
-        offset = anglestoforward((0, angle + player_angle, 0));
+        offset = anglesToForward((0, angle + player_angle, 0));
         offset = vector_scale(offset, dist);
         pos = getlocalclienteyepos(0) + offset;
         setfakeentorg(0, level.ambientPackageScriptOriginPool[index].org, pos);

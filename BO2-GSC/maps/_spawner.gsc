@@ -234,7 +234,7 @@ trigger_spawner(trigger) {
   assert(isDefined(trigger.target), "Triggers with flag TRIGGER_SPAWN at " + trigger.origin + " must target at least one spawner.");
   trigger endon("death");
   trigger trigger_wait();
-  spawners = getentarray(trigger.target, "targetname");
+  spawners = getEntArray(trigger.target, "targetname");
 
   foreach(sp in spawners) {
     if(isspawner(sp)) {
@@ -719,7 +719,7 @@ set_goal_volume() {
 }
 
 get_target_ents(target) {
-  return getentarray(target, "targetname");
+  return getEntArray(target, "targetname");
 }
 
 get_target_nodes(target) {
@@ -905,13 +905,9 @@ go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, optional_arri
     else
       self.goalheight = level.default_goalheight;
 
-    [
-      [set_goal_func_quits]
-    ](node);
+    [[set_goal_func_quits]](node);
     self waittill("goal");
-    [
-      [optional_arrived_at_node_func]
-    ](node);
+    [[optional_arrived_at_node_func]](node);
 
     if(isDefined(node.script_flag_set))
       flag_set(node.script_flag_set);
@@ -983,9 +979,7 @@ go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, optional_arri
       break;
     }
 
-    nextnode_array = [
-      [get_target_func]
-    ](node.target);
+    nextnode_array = [[get_target_func]](node.target);
 
     if(!nextnode_array.size) {
       break;
@@ -1015,19 +1009,17 @@ go_to_node_wait_for_player(node, get_target_func, dist) {
       return true;
   }
 
-  vec = anglestoforward(self.angles);
+  vec = anglesToForward(self.angles);
 
   if(isDefined(node.target)) {
-    temp = [
-      [get_target_func]
-    ](node.target);
+    temp = [[get_target_func]](node.target);
 
     if(temp.size == 1)
       vec = vectornormalize(temp[0].origin - node.origin);
     else if(isDefined(node.angles))
-      vec = anglestoforward(node.angles);
+      vec = anglesToForward(node.angles);
   } else if(isDefined(node.angles))
-    vec = anglestoforward(node.angles);
+    vec = anglesToForward(node.angles);
 
   vec2 = [];
 
@@ -1067,7 +1059,7 @@ targets_and_uses_turret(node) {
   if(!isDefined(node.target))
     return false;
 
-  turrets = getentarray(node.target, "targetname");
+  turrets = getEntArray(node.target, "targetname");
 
   if(!turrets.size)
     return false;
@@ -1108,9 +1100,7 @@ crawl_target_and_init_flags(ent, get_func) {
       }
 
       if(isDefined(ent.target)) {
-        new_targets = [
-          [get_func]
-        ](ent.target);
+        new_targets = [[get_func]](ent.target);
         targets = add_to_array(targets, new_targets);
       }
     }
@@ -1141,7 +1131,7 @@ get_node_funcs_based_on_target(node, goal_type) {
   if(isDefined(node))
     array["node"][0] = node;
   else {
-    node = getentarray(self.target, "targetname");
+    node = getEntArray(self.target, "targetname");
 
     if(node.size > 0)
       goal_type = "origin";
@@ -1525,7 +1515,7 @@ fallback_add_previous_group(num, node_array) {
 }
 
 goalvolumes() {
-  volumes = getentarray("info_volume", "classname");
+  volumes = getEntArray("info_volume", "classname");
   level.deathchain_goalvolume = [];
   level.goalvolumes = [];
 
@@ -1542,7 +1532,7 @@ goalvolumes() {
 
 aigroup_init(aigroup, spawner) {
   if(!isDefined(level._ai_group[aigroup])) {
-    level._ai_group[aigroup] = spawnstruct();
+    level._ai_group[aigroup] = spawnStruct();
     level._ai_group[aigroup].aigroup = aigroup;
     level._ai_group[aigroup].aicount = 0;
     level._ai_group[aigroup].killed_count = 0;
@@ -1596,7 +1586,7 @@ set_ai_group_cleared_flag(tracker) {
 
 flood_trigger_think(trigger) {
   assert(isDefined(trigger.target), "flood_spawner at " + trigger.origin + " without target");
-  floodspawners = getentarray(trigger.target, "targetname");
+  floodspawners = getEntArray(trigger.target, "targetname");
   assert(floodspawners.size, "flood_spawner at with target " + trigger.target + " without any targets");
 
   for(i = 0; i < floodspawners.size; i++)
@@ -1604,7 +1594,7 @@ flood_trigger_think(trigger) {
 
   array_thread(floodspawners, ::flood_spawner_init);
   trigger waittill("trigger");
-  floodspawners = getentarray(trigger.target, "targetname");
+  floodspawners = getEntArray(trigger.target, "targetname");
   array_thread(floodspawners, ::flood_spawner_think, trigger);
 }
 
@@ -1701,7 +1691,7 @@ player_saw_kill(guy, attacker) {
   if(isDefined(closest_player) && distancesquared(guy.origin, closest_player.origin) < 40000)
     return 1;
 
-  return bullettracepassed(closest_player geteye(), guy geteye(), 0, undefined);
+  return bullettracepassed(closest_player getEye(), guy getEye(), 0, undefined);
 }
 
 show_bad_path() {

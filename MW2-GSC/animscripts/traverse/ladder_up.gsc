@@ -22,7 +22,7 @@ main() {
 
   // orient to the Negotiation start node
   startnode = self getnegotiationstartnode();
-  assert(isdefined(startnode));
+  assert(isDefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);
 
   self setFlaggedAnimKnoballRestart("climbanim", climbAnim, % body, 1, .1, 1);
@@ -30,12 +30,12 @@ main() {
   endAnimDelta = GetMoveDelta(endAnim, 0, 1);
 
   endNode = self getnegotiationendnode();
-  assert(isdefined(endnode));
+  assert(isDefined(endnode));
   endPos = endnode.origin - endAnimDelta + (0, 0, 1); // 1 unit padding
 
   cycleDelta = GetMoveDelta(climbAnim, 0, 1);
   climbRate = cycleDelta[2] / getanimlength(climbAnim);
-  //("ladder_up: about to start climbing.Height to climb: " + (endAnimDelta[2] + endPos[2] - self.origin[2]) );#/
+  //("ladder_up: about to start climbing.Height to climb: " + (endAnimDelta[2] + endPos[2] - self.origin[2]) );
 
   climbingTime = (endPos[2] - self.origin[2]) / climbRate;
   if(climbingTime > 0) {
@@ -49,5 +49,5 @@ main() {
   self traverseMode("gravity");
   self.a.movement = "run";
   self.a.pose = "crouch";
-  //("ladder_up: all done");#/
+  //("ladder_up: all done");
 }

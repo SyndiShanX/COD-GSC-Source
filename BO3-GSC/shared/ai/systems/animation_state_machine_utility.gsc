@@ -7,14 +7,14 @@
 #namespace animationstatenetworkutility;
 
 function requeststate(entity, statename) {
-  assert(isdefined(entity));
+  assert(isDefined(entity));
   entity asmrequestsubstate(statename);
 }
 
 function searchanimationmap(entity, aliasname) {
-  if(isdefined(entity) && isdefined(aliasname)) {
+  if(isDefined(entity) && isDefined(aliasname)) {
     animationname = entity animmappingsearch(istring(aliasname));
-    if(isdefined(animationname)) {
+    if(isDefined(animationname)) {
       return findanimbyname("generic", animationname);
     }
   }

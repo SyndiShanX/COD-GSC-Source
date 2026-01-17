@@ -19,14 +19,14 @@ function see_map_trigger() {}
 
 function vo_play_soliloquy(convo) {
   self endon("disconnect");
-  assert(isdefined(convo), "");
+  assert(isDefined(convo), "");
   if(!level flag::get("story_vo_playing")) {
     level flag::set("story_vo_playing");
     self thread vo_play_soliloquy_disconnect_listener();
     self.dontspeak = 1;
     self clientfield::set_to_player("isspeaking", 1);
-    for (i = 0; i < convo.size; i++) {
-      if(isdefined(self.afterlife) && self.afterlife) {
+    for(i = 0; i < convo.size; i++) {
+      if(isDefined(self.afterlife) && self.afterlife) {
         self.dontspeak = 0;
         self clientfield::set_to_player("isspeaking", 0);
         level flag::clear("story_vo_playing");
@@ -51,7 +51,7 @@ function vo_play_soliloquy_disconnect_listener() {
 }
 
 function vo_play_four_part_conversation(convo) {
-  assert(isdefined(convo), "");
+  assert(isDefined(convo), "");
   players = getplayers();
   if(players.size == 4 && !level flag::get("story_vo_playing")) {
     level flag::set("story_vo_playing");
@@ -64,7 +64,7 @@ function vo_play_four_part_conversation(convo) {
     e_player3 = undefined;
     e_player4 = undefined;
     foreach(player in players) {
-      if(isdefined(player)) {
+      if(isDefined(player)) {
         switch (player.character_name) {
           case "Arlington": {
             e_player1 = player;
@@ -85,20 +85,20 @@ function vo_play_four_part_conversation(convo) {
         }
       }
     }
-    if(!isdefined(e_player1) || !isdefined(e_player2) || !isdefined(e_player3) || !isdefined(e_player4)) {
+    if(!isDefined(e_player1) || !isDefined(e_player2) || !isDefined(e_player3) || !isDefined(e_player4)) {
       return;
     }
     foreach(player in players) {
-      if(isdefined(player)) {
+      if(isDefined(player)) {
         player.dontspeak = 1;
         player clientfield::set_to_player("isspeaking", 1);
       }
     }
-    for (i = 0; i < convo.size; i++) {
+    for(i = 0; i < convo.size; i++) {
       players = getplayers();
       if(players.size != 4) {
         foreach(player in players) {
-          if(isdefined(player)) {
+          if(isDefined(player)) {
             player.dontspeak = 0;
             player clientfield::set_to_player("isspeaking", 0);
           }
@@ -119,12 +119,12 @@ function vo_play_four_part_conversation(convo) {
           }
         }
       }
-      if(isdefined(old_speaking_player)) {
+      if(isDefined(old_speaking_player)) {
         n_dist = distance(old_speaking_player.origin, speaking_player.origin);
       }
       if(speaking_player.afterlife || n_dist > n_max_reply_dist) {
         foreach(player in players) {
-          if(isdefined(player)) {
+          if(isDefined(player)) {
             player.dontspeak = 0;
             player clientfield::set_to_player("isspeaking", 0);
           }
@@ -138,7 +138,7 @@ function vo_play_four_part_conversation(convo) {
       wait(1);
     }
     foreach(player in players) {
-      if(isdefined(player)) {
+      if(isDefined(player)) {
         player.dontspeak = 0;
         player clientfield::set_to_player("isspeaking", 0);
       }

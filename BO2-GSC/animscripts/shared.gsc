@@ -330,7 +330,7 @@ shownotetrack(note) {
 
     time = 1.0 * i / 20;
     alpha = 1.0 - amnt * amnt;
-    pos = self geteye() + (0, 0, 20 + anim.shownotetrackspeed * time - thisoffset);
+    pos = self getEye() + (0, 0, 20 + anim.shownotetrackspeed * time - thisoffset);
     print3d(pos, note, color, alpha);
     wait 0.05;
   }
@@ -350,7 +350,7 @@ reduceshownotetrackoffset() {
 
 handledogsoundnotetracks(note) {
   if(note == "sound_dogstep_run_default") {
-    self playsound("fly_dog_step_run_default");
+    self playSound("fly_dog_step_run_default");
     return true;
   }
 
@@ -469,8 +469,7 @@ registernotetracks() {
         thread[[animscripts\shared::shootnotetrack]]();
     }
 
-    notetrackstopanim(note, flagname) {
-    }
+    notetrackstopanim(note, flagname) {}
 
     notetrackstartragdoll(note, flagname) {
       if(isDefined(self.noragdoll)) {
@@ -662,8 +661,7 @@ registernotetracks() {
       self.lastweapon = self.weapon;
     }
 
-    notetrackdropclip(note, flagname) {
-    }
+    notetrackdropclip(note, flagname) {}
 
     notetrackrefillclip(note, flagname) {
       if(self.weaponclass == "rocketlauncher")
@@ -672,8 +670,7 @@ registernotetracks() {
       self animscripts\weaponlist::refillclip();
     }
 
-    notetrackloadshell(note, flagname) {
-    }
+    notetrackloadshell(note, flagname) {}
 
     notetrackgravity(note, flagname) {
       if(issubstr(note, "on"))
@@ -689,13 +686,12 @@ registernotetracks() {
         groundtype = "dirt";
 
       if(issubstr(note, "large"))
-        self playsound("fly_bodyfall_large_" + groundtype);
+        self playSound("fly_bodyfall_large_" + groundtype);
       else if(issubstr(note, "small"))
-        self playsound("fly_bodyfall_small_" + groundtype);
+        self playSound("fly_bodyfall_small_" + groundtype);
     }
 
-    notetrackfootstep(note, flagname) {
-    }
+    notetrackfootstep(note, flagname) {}
 
     notetrackfootscrape(note, flagname) {
       if(isDefined(self.groundtype))
@@ -703,7 +699,7 @@ registernotetracks() {
       else
         groundtype = "dirt";
 
-      self playsound("fly_step_scrape_" + groundtype);
+      self playSound("fly_step_scrape_" + groundtype);
     }
 
     notetrackland(note, flagname) {
@@ -713,9 +709,9 @@ registernotetracks() {
         groundtype = "dirt";
 
       if(isplayer(self))
-        self playsound("fly_land_plr_" + groundtype);
+        self playSound("fly_land_plr_" + groundtype);
       else
-        self playsound("fly_land_npc_" + groundtype);
+        self playSound("fly_land_npc_" + groundtype);
     }
 
     handlenotetrack(note, flagname, customfunction, var1) {
@@ -738,9 +734,7 @@ registernotetracks() {
       notetrackfunc = anim.notetracks[note];
 
       if(isDefined(notetrackfunc))
-        return [
-          [notetrackfunc]
-        ](note, flagname);
+        return [[notetrackfunc]](note, flagname);
 
       switch (note) {
         case "end":
@@ -820,9 +814,7 @@ registernotetracks() {
         if(!isDefined(note))
           note = "undefined";
 
-        intercepted = [
-          [interceptfunction]
-        ](note);
+        intercepted = [[interceptfunction]](note);
 
         if(isDefined(intercepted) && intercepted) {
           continue;
@@ -844,9 +836,7 @@ registernotetracks() {
           note = "undefined";
 
         val = self handlenotetrack(note, flagname);
-        [
-          [postfunction]
-        ](note);
+        [[postfunction]](note);
 
         if(isDefined(val))
           return val;
@@ -872,9 +862,7 @@ registernotetracks() {
 
       for(;;) {
         time = gettime();
-        returnednote = [
-          [notetracksfunc]
-        ](flagname, customfunction, debugidentifier);
+        returnednote = [[notetracksfunc]](flagname, customfunction, debugidentifier);
         timetaken = gettime() - time;
 
         if(timetaken < 0.05) {
@@ -894,13 +882,13 @@ registernotetracks() {
     }
 
     donotetracksfortime(time, flagname, customfunction, debugidentifier) {
-      ent = spawnstruct();
+      ent = spawnStruct();
       ent thread donotetracksfortimeendnotify(time);
       donotetracksfortimeproc(::donotetracksforever, time, flagname, customfunction, debugidentifier, ent);
     }
 
     donotetracksfortimeintercept(time, flagname, interceptfunction, debugidentifier) {
-      ent = spawnstruct();
+      ent = spawnStruct();
       ent thread donotetracksfortimeendnotify(time);
       donotetracksfortimeproc(::donotetracksforeverintercept, time, flagname, interceptfunction, debugidentifier, ent);
     }
@@ -941,7 +929,7 @@ registernotetracks() {
       }
 
       weaporig = self gettagorigin("tag_weapon");
-      dir = anglestoforward(self gettagangles("tag_weapon"));
+      dir = anglesToForward(self gettagangles("tag_weapon"));
       pos = weaporig + vectorscale(dir, 1000);
       self.a.lastshoottime = gettime();
       self shoot(1, pos);
@@ -953,11 +941,11 @@ registernotetracks() {
         return;
       }
       weaporig = self gettagorigin("tag_weapon");
-      dir = anglestoforward(self gettagangles("tag_weapon"));
+      dir = anglesToForward(self gettagangles("tag_weapon"));
       hitenemy = 0;
 
       if(issentient(self.enemy) && isalive(self.enemy) && self canshoot(self.enemy getshootatpos())) {
-        enemydir = vectornormalize(self.enemy geteye() - weaporig);
+        enemydir = vectornormalize(self.enemy getEye() - weaporig);
 
         if(vectordot(dir, enemydir) > cos(10))
           hitenemy = 1;
@@ -1201,7 +1189,7 @@ registernotetracks() {
 
         if(debugaiming) {
           tempangles = (shootfrompitchangle, self.desiredangle, shootfromangles[2]);
-          tempvector = anglestoforward(tempangles);
+          tempvector = anglesToForward(tempangles);
           recordline(shootfrompos, shootfrompos + vectorscale(tempvector, 100), level.color_debug["white"], "Animscript", self);
         }
 
@@ -1219,14 +1207,14 @@ registernotetracks() {
         if(debugaiming) {
           recordenttext("actualAngle: " + shootfromangles[0] + " shootFromPitchAngle: " + shootfrompitchangle + " shootFromPitchDelta: " + shootfrompitchdelta, self, level.color_debug["cyan"], "Animscript");
           recordenttext("actualAngle: " + shootfromangles[1] + " shootFromYawAngle: " + shootfromyawangle + " shootFromYawDelta: " + shootfromyawdelta, self, level.color_debug["orange"], "Animscript");
-          facingvector = anglestoforward(shootfromangles);
+          facingvector = anglesToForward(shootfromangles);
           recordline(shootfrompos, shootfrompos + vectorscale(facingvector, 100), level.color_debug["blue"], "Animscript", self);
         }
 
         shootfromangles = (shootfrompitchangle, shootfromyawangle, shootfromangles[2]);
 
         if(debugaiming) {
-          facingvector = anglestoforward(shootfromangles);
+          facingvector = anglesToForward(shootfromangles);
           recordline(shootfrompos, shootfrompos + vectorscale(facingvector, 100), level.color_debug["green"], "Animscript", self);
 
           if(isDefined(shootpos))
@@ -1347,7 +1335,7 @@ registernotetracks() {
 
     trackloopgetcqbshootpos(shootfrompos) {
       shootpos = undefined;
-      selfforward = anglestoforward(self.angles);
+      selfforward = anglesToForward(self.angles);
 
       if(isDefined(self.cqb_target)) {
         shootpos = self.cqb_target getshootatpos();

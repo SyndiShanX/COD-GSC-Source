@@ -8,7 +8,7 @@
 #include maps\_hud_util;
 
 init() {
-  anim.so = spawnstruct(); // holds all of our SO-specific bc stuff
+  anim.so = spawnStruct(); // holds all of our SO-specific bc stuff
 
   anim.so.eventTypes = [];
   anim.so.eventTypes["check_fire"] = "threat_friendly_fire";
@@ -115,7 +115,7 @@ revive_tracking() {
   level endon("special_op_terminated");
   self endon("death");
 
-  while (1) {
+  while(1) {
     note = self waittill_any_return("so_downed", "so_bleedingout", "so_reviving", "so_revived");
 
     if(note == "so_downed") {
@@ -134,7 +134,7 @@ claymore_tracking() {
   level endon("special_op_terminated");
   self endon("death");
 
-  while (1) {
+  while(1) {
     self waittill("begin_firing");
     weaponName = self GetCurrentWeapon();
     if(weaponName == "claymore") {
@@ -147,7 +147,7 @@ sentry_tracking() {
   level endon("special_op_terminated");
   self endon("death");
 
-  while (1) {
+  while(1) {
     self waittill("sentry_placement_finished");
 
     self play_so_chatter("sentry_out");
@@ -158,7 +158,7 @@ kill_generic_tracking() {
   level endon("special_op_terminated");
   self endon("death");
 
-  while (1) {
+  while(1) {
     self waittill("so_bcs_kill_generic");
 
     self play_so_chatter("kill_generic");
@@ -169,7 +169,7 @@ kill_infantry_tracking() {
   level endon("special_op_terminated");
   self endon("death");
 
-  while (1) {
+  while(1) {
     self waittill("so_bcs_kill_infantry");
 
     self play_so_chatter("kill_infantry");
@@ -180,7 +180,7 @@ area_secure_tracking() {
   level endon("special_op_terminated");
   self endon("death");
 
-  while (1) {
+  while(1) {
     self waittill("so_bcs_area_secure");
 
     self play_so_chatter("area_secure");
@@ -191,7 +191,7 @@ affirmative_tracking() {
   level endon("special_op_terminated");
   self endon("death");
 
-  while (1) {
+  while(1) {
     self waittill("so_bcs_affirmative");
 
     self play_so_chatter("area_secure");
@@ -202,7 +202,7 @@ negative_tracking() {
   level endon("special_op_terminated");
   self endon("death");
 
-  while (1) {
+  while(1) {
     self waittill("so_bcs_negative");
 
     self play_so_chatter("negative");
@@ -213,7 +213,7 @@ on_comms_tracking() {
   level endon("special_op_terminated");
   self endon("death");
 
-  while (1) {
+  while(1) {
     self waittill("so_bcs_on_comms");
 
     self play_so_chatter("on_comms");
@@ -224,7 +224,7 @@ mark_dropzone_tracking() {
   level endon("special_op_terminated");
   self endon("death");
 
-  while (1) {
+  while(1) {
     self waittill("so_bcs_mark_dropzone");
 
     self play_so_chatter("mark_dropzone");
@@ -239,7 +239,7 @@ reload_tracking() {
   level endon("special_op_terminated");
   self endon("death");
 
-  for (;;) {
+  for(;;) {
     self waittill("reload_start");
 
     weaponName = self GetCurrentWeapon();
@@ -270,7 +270,7 @@ grenade_tracking() {
   level endon("special_op_terminated");
   self endon("death");
 
-  while (1) {
+  while(1) {
     self waittill("grenade_fire", grenade, weaponName);
 
     eventType = undefined;
@@ -287,7 +287,7 @@ grenade_tracking() {
       eventType = "c4_plant";
     }
 
-    if(IsDefined(eventType)) {
+    if(isDefined(eventType)) {
       self play_so_chatter(eventType);
     }
   }
@@ -297,7 +297,7 @@ friendlyfire_tracking() {
   level endon("special_op_terminated");
   self endon("death");
 
-  while (1) {
+  while(1) {
     self waittill("damage", damage, attacker, direction_vec, point, type);
 
     if(!friendlyfire_is_valid(damage, attacker, type)) {
@@ -325,7 +325,7 @@ friendlyfire_is_valid(damage, attacker, type) {
     return false;
   }
 
-  if(isdefined(level.friendlyfire_warnings) && !level.friendlyfire_warnings) {
+  if(isDefined(level.friendlyfire_warnings) && !level.friendlyfire_warnings) {
     return false;
   }
 
@@ -338,7 +338,7 @@ friendlyfire_whizby_tracking() {
 
   self AddAiEventListener("bulletwhizby");
 
-  while (1) {
+  while(1) {
     self waittill("ai_event", event, shooter, whizByOrigin);
 
     if(event == "bulletwhizby") {
@@ -377,7 +377,7 @@ friendlyfire_whizby_is_valid(shooter, whizByOrigin) {
     return false;
   }
 
-  if(isdefined(level.friendlyfire_warnings) && !level.friendlyfire_warnings) {
+  if(isDefined(level.friendlyfire_warnings) && !level.friendlyfire_warnings) {
     return false;
   }
 
@@ -386,7 +386,7 @@ friendlyfire_whizby_is_valid(shooter, whizByOrigin) {
 
 play_revive_nag() {
   type = self get_nag_event_type();
-  ASSERT(IsDefined(type));
+  ASSERT(isDefined(type));
 
   self play_so_chatter(type);
 }
@@ -426,7 +426,7 @@ play_so_chatter(eventType) {
   soundalias = get_player_team_prefix(self) + anim.so.eventTypes[eventType];
 
   soundalias = check_overrides(eventType, soundalias);
-  if(!IsDefined(soundalias)) {
+  if(!isDefined(soundalias)) {
     return;
   }
 
@@ -436,7 +436,7 @@ play_so_chatter(eventType) {
   }
 
   self.so_isSpeaking = true;
-  self PlaySound(soundalias, "bc_done", true);
+  self playSound(soundalias, "bc_done", true);
   self waittill("bc_done");
   self.so_isSpeaking = false;
 
@@ -444,7 +444,7 @@ play_so_chatter(eventType) {
 }
 
 can_say_event_type(eventType) {
-  if(!isdefined(level.so_player_chatter_enabled) || !level.so_player_chatter_enabled) {
+  if(!isDefined(level.so_player_chatter_enabled) || !level.so_player_chatter_enabled) {
     return false;
   }
 
@@ -452,7 +452,7 @@ can_say_event_type(eventType) {
     return false;
   }
 
-  if(!IsDefined(self.bc_eventTypeLastUsedTime[eventType])) {
+  if(!isDefined(self.bc_eventTypeLastUsedTime[eventType])) {
     return true;
   }
 
@@ -472,11 +472,11 @@ update_event_type(eventType) {
 
 check_overrides(soundtype, defaultAlias) {
   if(soundtype == "reload") {
-    if(isdefined(level.so_override["skip_inform_reloading"]) && level.so_override["skip_inform_reloading"]) {
+    if(isDefined(level.so_override["skip_inform_reloading"]) && level.so_override["skip_inform_reloading"]) {
       return undefined;
     }
 
-    if(isdefined(level.so_override["inform_reloading"])) {
+    if(isDefined(level.so_override["inform_reloading"])) {
       return level.so_override["inform_reloading"];
     }
   }
@@ -485,10 +485,10 @@ check_overrides(soundtype, defaultAlias) {
 }
 
 get_player_team_prefix(player) {
-  assertex(isdefined(level.so_campaign), "level.so_campaign must be set in order to play co-op team chatter.");
+  assertex(isDefined(level.so_campaign), "level.so_campaign must be set in order to play co-op team chatter.");
 
   stealth = "";
-  if(isdefined(level.so_stealth) && level.so_stealth)
+  if(isDefined(level.so_stealth) && level.so_stealth)
     stealth = "STEALTH_";
 
   player_num = "1";
@@ -511,7 +511,7 @@ get_player_team_prefix(player) {
 }
 
 close_enough_to_other_player(eventType) {
-  if(isdefined(eventType)) {
+  if(isDefined(eventType)) {
     foreach(event in anim.so.skipDistanceCheck) {
       if(event == eventType)
         return true;

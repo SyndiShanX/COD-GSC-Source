@@ -10,7 +10,7 @@ main() {
   waittillframeend;
   if(getDvar(#"animated_trees_enabled") == "")
     setdvar("animated_trees_enabled", "1");
-  level.wind = spawnstruct();
+  level.wind = spawnStruct();
   level.wind.rate = 0.4;
   level.wind.weight = 1;
   level.wind.variance = 0.2;
@@ -20,7 +20,7 @@ main() {
     level.anim_prop_models = [];
   }
   level.init_animatedmodels = [];
-  animated_models = getentarray("animated_model", "targetname");
+  animated_models = getEntArray("animated_model", "targetname");
   if(getDvar(#"animated_trees_enabled") == "1") {
     array_thread(animated_models, ::model_init);
   } else {

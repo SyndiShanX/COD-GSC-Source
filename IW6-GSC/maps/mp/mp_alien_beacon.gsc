@@ -9,10 +9,10 @@ main() {
   level.prematchperiod = 13;
   level.icargohives = 0;
   level.extinction_episode = 2;
-  level.introscreen_line_1 = & "MP_ALIEN_BEACON_INTRO_LINE_1";
-  level.introscreen_line_2 = & "MP_ALIEN_BEACON_INTRO_LINE_2";
-  level.introscreen_line_3 = & "MP_ALIEN_BEACON_INTRO_LINE_3";
-  level.introscreen_line_4 = & "MP_ALIEN_BEACON_INTRO_LINE_4";
+  level.introscreen_line_1 = &"MP_ALIEN_BEACON_INTRO_LINE_1";
+  level.introscreen_line_2 = &"MP_ALIEN_BEACON_INTRO_LINE_2";
+  level.introscreen_line_3 = &"MP_ALIEN_BEACON_INTRO_LINE_3";
+  level.introscreen_line_4 = &"MP_ALIEN_BEACON_INTRO_LINE_4";
   common_scripts\utility::flag_init("players_on_top_deck");
   common_scripts\utility::flag_init("tp_to_kraken_on_spawn");
   common_scripts\utility::flag_init("stop_tp_to_well_deck");
@@ -529,14 +529,14 @@ check_for_player_near_bot_with_drill() {
 
       if(distancesquared(level.drill_vehicle.origin, self.origin) < var_0) {
         if(!isDefined(level.drill_carrier) || isDefined(level.drill_carrier) && level.drill_carrier != self) {
-          maps\mp\_utility::setlowermessage("bot_drill", & "MP_ALIEN_BEACON_PLACE_DRILL", undefined, 10);
+          maps\mp\_utility::setlowermessage("bot_drill", &"MP_ALIEN_BEACON_PLACE_DRILL", undefined, 10);
 
           while(player_should_see_drillbot_hint(level.drill_vehicle, var_0, 1))
             wait 0.05;
 
           maps\mp\_utility::clearlowermessage("bot_drill");
         } else {
-          maps\mp\_utility::setlowermessage("bot_drill", & "MP_ALIEN_BEACON_DRILL_ONBOT", undefined, 10);
+          maps\mp\_utility::setlowermessage("bot_drill", &"MP_ALIEN_BEACON_DRILL_ONBOT", undefined, 10);
 
           while(player_should_see_drillbot_hint(level.drill_vehicle, var_0, 0))
             wait 0.05;
@@ -653,23 +653,23 @@ beacon_get_non_agent_enemies() {
 
 beacon_hint_precache() {
   var_0 = [];
-  var_0["ALIEN_PICKUPS_BEACON_PICKUP_PROPANE_TANK"] = & "ALIEN_PICKUPS_BEACON_PICKUP_PROPANE_TANK";
-  var_0["ALIEN_PICKUPS_BEACON_PICKUP_VKS"] = & "ALIEN_PICKUPS_BEACON_PICKUP_VKS";
-  var_0["ALIEN_PICKUPS_BEACON_PICKUP_FP6"] = & "ALIEN_PICKUPS_BEACON_PICKUP_FP6";
-  var_0["ALIEN_PICKUPS_BEACON_PICKUP_RGM"] = & "ALIEN_PICKUPS_BEACON_PICKUP_RGM";
-  var_0["ALIEN_PICKUPS_BEACON_PICKUP_PP19"] = & "ALIEN_PICKUPS_BEACON_PICKUP_PP19";
-  var_0["ALIEN_PICKUPS_BEACON_PICKUP_CBJMS"] = & "ALIEN_PICKUPS_BEACON_PICKUP_CBJMS";
-  var_0["ALIEN_PICKUPS_BEACON_PICKUP_MAUL"] = & "ALIEN_PICKUPS_BEACON_PICKUP_MAUL";
-  var_0["ALIEN_PICKUPS_BEACON_PICKUP_MICROTAR"] = & "ALIEN_PICKUPS_BEACON_PICKUP_MICROTAR";
-  var_0["ALIEN_PICKUPS_BEACON_PICKUP_KAC"] = & "ALIEN_PICKUPS_BEACON_PICKUP_KAC";
-  var_0["ALIEN_PICKUPS_BEACON_PICKUP_PANZERFAUST"] = & "ALIEN_PICKUPS_BEACON_PICKUP_PANZERFAUST";
-  var_0["ALIEN_PICKUPS_BEACON_PICKUP_G28"] = & "ALIEN_PICKUPS_BEACON_PICKUP_G28";
-  var_0["ALIEN_PICKUPS_BEACON_PICKUP_HONEYBADGER"] = & "ALIEN_PICKUPS_BEACON_PICKUP_HONEYBADGER";
-  var_0["ALIEN_PICKUPS_BEACON_PICKUP_RGM"] = & "ALIEN_PICKUPS_BEACON_PICKUP_RGM";
-  var_0["ALIEN_PICKUPS_BEACON_PICKUP_ARX_160"] = & "ALIEN_PICKUPS_BEACON_PICKUP_ARX_160";
-  var_0["ALIEN_PICKUPS_BEACON_PICKUP_LSAT"] = & "ALIEN_PICKUPS_BEACON_PICKUP_LSAT";
-  var_0["ALIEN_PICKUPS_BEACON_PICKUP_SVU"] = & "ALIEN_PICKUPS_BEACON_PICKUP_SVU";
-  var_0["ALIEN_PICKUPS_BEACON_PICKUP_RIPPER"] = & "ALIEN_PICKUPS_BEACON_PICKUP_RIPPER";
+  var_0["ALIEN_PICKUPS_BEACON_PICKUP_PROPANE_TANK"] = &"ALIEN_PICKUPS_BEACON_PICKUP_PROPANE_TANK";
+  var_0["ALIEN_PICKUPS_BEACON_PICKUP_VKS"] = &"ALIEN_PICKUPS_BEACON_PICKUP_VKS";
+  var_0["ALIEN_PICKUPS_BEACON_PICKUP_FP6"] = &"ALIEN_PICKUPS_BEACON_PICKUP_FP6";
+  var_0["ALIEN_PICKUPS_BEACON_PICKUP_RGM"] = &"ALIEN_PICKUPS_BEACON_PICKUP_RGM";
+  var_0["ALIEN_PICKUPS_BEACON_PICKUP_PP19"] = &"ALIEN_PICKUPS_BEACON_PICKUP_PP19";
+  var_0["ALIEN_PICKUPS_BEACON_PICKUP_CBJMS"] = &"ALIEN_PICKUPS_BEACON_PICKUP_CBJMS";
+  var_0["ALIEN_PICKUPS_BEACON_PICKUP_MAUL"] = &"ALIEN_PICKUPS_BEACON_PICKUP_MAUL";
+  var_0["ALIEN_PICKUPS_BEACON_PICKUP_MICROTAR"] = &"ALIEN_PICKUPS_BEACON_PICKUP_MICROTAR";
+  var_0["ALIEN_PICKUPS_BEACON_PICKUP_KAC"] = &"ALIEN_PICKUPS_BEACON_PICKUP_KAC";
+  var_0["ALIEN_PICKUPS_BEACON_PICKUP_PANZERFAUST"] = &"ALIEN_PICKUPS_BEACON_PICKUP_PANZERFAUST";
+  var_0["ALIEN_PICKUPS_BEACON_PICKUP_G28"] = &"ALIEN_PICKUPS_BEACON_PICKUP_G28";
+  var_0["ALIEN_PICKUPS_BEACON_PICKUP_HONEYBADGER"] = &"ALIEN_PICKUPS_BEACON_PICKUP_HONEYBADGER";
+  var_0["ALIEN_PICKUPS_BEACON_PICKUP_RGM"] = &"ALIEN_PICKUPS_BEACON_PICKUP_RGM";
+  var_0["ALIEN_PICKUPS_BEACON_PICKUP_ARX_160"] = &"ALIEN_PICKUPS_BEACON_PICKUP_ARX_160";
+  var_0["ALIEN_PICKUPS_BEACON_PICKUP_LSAT"] = &"ALIEN_PICKUPS_BEACON_PICKUP_LSAT";
+  var_0["ALIEN_PICKUPS_BEACON_PICKUP_SVU"] = &"ALIEN_PICKUPS_BEACON_PICKUP_SVU";
+  var_0["ALIEN_PICKUPS_BEACON_PICKUP_RIPPER"] = &"ALIEN_PICKUPS_BEACON_PICKUP_RIPPER";
   return var_0;
 }
 
@@ -800,11 +800,11 @@ beacon_get_hintstring_for_pillaged_item_func(var_0) {
 
   switch (var_0) {
     case "crafting":
-      return & "ALIEN_CRAFTING_FOUND_CRAFTING_ITEM";
+      return &"ALIEN_CRAFTING_FOUND_CRAFTING_ITEM";
     case "locker_key":
-      return & "ALIEN_PILLAGE_LOCKER_FOUND_LOCKER_KEY";
+      return &"ALIEN_PILLAGE_LOCKER_FOUND_LOCKER_KEY";
     case "locker_weapon":
-      return & "ALIEN_PILLAGE_LOCKER_FOUND_LOCKER_WEAPON";
+      return &"ALIEN_PILLAGE_LOCKER_FOUND_LOCKER_WEAPON";
   }
 }
 
@@ -813,52 +813,50 @@ beacon_get_hintstring_for_item_pickup_func(var_0) {
 
   switch (var_0) {
     case "wire":
-      return & "ALIEN_CRAFTING_PICKUP_WIRE";
+      return &"ALIEN_CRAFTING_PICKUP_WIRE";
     case "amolecular":
-      return & "ALIEN_CRAFTING_PICKUP_AMOLECULAR";
+      return &"ALIEN_CRAFTING_PICKUP_AMOLECULAR";
     case "fuse":
-      return & "ALIEN_CRAFTING_PICKUP_FUSE";
+      return &"ALIEN_CRAFTING_PICKUP_FUSE";
     case "pipe":
-      return & "ALIEN_CRAFTING_PICKUP_PIPE";
+      return &"ALIEN_CRAFTING_PICKUP_PIPE";
     case "pressureplate":
-      return & "ALIEN_CRAFTING_PICKUP_PRESSUREPLATE";
+      return &"ALIEN_CRAFTING_PICKUP_PRESSUREPLATE";
     case "nucleicbattery":
-      return & "ALIEN_CRAFTING_PICKUP_NUCLEICBATTERY";
+      return &"ALIEN_CRAFTING_PICKUP_NUCLEICBATTERY";
     case "cellbattery":
-      return & "ALIEN_CRAFTING_PICKUP_CELLBATTERY";
+      return &"ALIEN_CRAFTING_PICKUP_CELLBATTERY";
     case "liquidbattery":
-      return & "ALIEN_CRAFTING_PICKUP_LIQUIDBATTERY";
+      return &"ALIEN_CRAFTING_PICKUP_LIQUIDBATTERY";
     case "tnt":
-      return & "ALIEN_CRAFTING_PICKUP_TNT";
+      return &"ALIEN_CRAFTING_PICKUP_TNT";
     case "resin":
-      return & "ALIEN_CRAFTING_PICKUP_RESIN";
+      return &"ALIEN_CRAFTING_PICKUP_RESIN";
     case "biolum":
-      return & "ALIEN_CRAFTING_PICKUP_BIOLUM";
+      return &"ALIEN_CRAFTING_PICKUP_BIOLUM";
     case "locker_key":
-      return & "ALIEN_PILLAGE_LOCKER_PICKUP_LOCKER_KEY";
+      return &"ALIEN_PILLAGE_LOCKER_PICKUP_LOCKER_KEY";
     case "locker_weapon":
-      return & "ALIEN_PILLAGE_LOCKER_PICKUP_LOCKER_WEAPON";
+      return &"ALIEN_PILLAGE_LOCKER_PICKUP_LOCKER_WEAPON";
     case "venomx":
-      return & "ALIEN_CRAFTING_PICKUP_DISARMED_VENOM";
+      return &"ALIEN_CRAFTING_PICKUP_DISARMED_VENOM";
     case "bluebiolum":
-      return & "ALIEN_CRAFTING_PICKUP_BLUEBIOLUM";
+      return &"ALIEN_CRAFTING_PICKUP_BLUEBIOLUM";
     case "orangebiolum":
-      return & "ALIEN_CRAFTING_PICKUP_ORANGEBIOLUM";
+      return &"ALIEN_CRAFTING_PICKUP_ORANGEBIOLUM";
     case "amethystbiolum":
-      return & "ALIEN_CRAFTING_PICKUP_PURPLEBIOLUM";
+      return &"ALIEN_CRAFTING_PICKUP_PURPLEBIOLUM";
     case "iw6_aliendlc22_mp":
-      return & "ALIEN_CRAFTING_PICKUP_PIPEBOMB";
+      return &"ALIEN_CRAFTING_PICKUP_PIPEBOMB";
     case "flare":
     case "stickyflare":
     case "viewmodel_flare":
     case "iw6_aliendlc21_mp":
-      return & "ALIEN_CRAFTING_PICKUP_STICKYFLARE";
+      return &"ALIEN_CRAFTING_PICKUP_STICKYFLARE";
   }
 
   if(isDefined(level.level_locker_weapon_pickup_string_func))
-    return [
-      [level.level_locker_weapon_pickup_string_func]
-    ](var_0);
+    return [[level.level_locker_weapon_pickup_string_func]](var_0);
 }
 
 beacon_build_pillageitem_array_func(var_0) {
@@ -882,31 +880,31 @@ beacon_locker_weapon_pickup_string_func(var_0) {
 
   switch (var_0) {
     case "weapon_maul":
-      return & "ALIEN_PICKUPS_BEACON_LOCKER_MAUL";
+      return &"ALIEN_PICKUPS_BEACON_LOCKER_MAUL";
     case "weapon_kac_chainsaw":
-      return & "ALIEN_PICKUPS_BEACON_LOCKER_KAC";
+      return &"ALIEN_PICKUPS_BEACON_LOCKER_KAC";
     case "weapon_g28":
-      return & "ALIEN_PICKUPS_BEACON_LOCKER_G28";
+      return &"ALIEN_PICKUPS_BEACON_LOCKER_G28";
     case "weapon_fabarm_fp6":
-      return & "ALIEN_PICKUPS_BEACON_LOCKER_FP6";
+      return &"ALIEN_PICKUPS_BEACON_LOCKER_FP6";
     case "weapon_pp19_bizon_iw6":
-      return & "ALIEN_PICKUPS_BEACON_LOCKER_PP19";
+      return &"ALIEN_PICKUPS_BEACON_LOCKER_PP19";
     case "weapon_cbj_ms_iw6":
-      return & "ALIEN_PICKUPS_BEACON_LOCKER_CBJMS";
+      return &"ALIEN_PICKUPS_BEACON_LOCKER_CBJMS";
     case "weapon_tar21":
-      return & "ALIEN_PICKUPS_BEACON_LOCKER_MICROTAR";
+      return &"ALIEN_PICKUPS_BEACON_LOCKER_MICROTAR";
     case "weapon_honeybadger":
-      return & "ALIEN_PICKUPS_BEACON_LOCKER_HONEYBADGER";
+      return &"ALIEN_PICKUPS_BEACON_LOCKER_HONEYBADGER";
     case "weapon_arx_160":
-      return & "ALIEN_PICKUPS_BEACON_LOCKER_ARX_160";
+      return &"ALIEN_PICKUPS_BEACON_LOCKER_ARX_160";
     case "weapon_lsat_iw6":
-      return & "ALIEN_PICKUPS_BEACON_LOCKER_LSAT";
+      return &"ALIEN_PICKUPS_BEACON_LOCKER_LSAT";
     case "weapon_dragunov_svu":
-      return & "ALIEN_PICKUPS_BEACON_LOCKER_SVU";
+      return &"ALIEN_PICKUPS_BEACON_LOCKER_SVU";
     case "weapon_evopro":
-      return & "ALIEN_PICKUPS_BEACON_LOCKER_RIPPER";
+      return &"ALIEN_PICKUPS_BEACON_LOCKER_RIPPER";
     default:
-      return & "ALIEN_PILLAGE_LOCKER_PICKUP_LOCKER_WEAPON";
+      return &"ALIEN_PILLAGE_LOCKER_PICKUP_LOCKER_WEAPON";
   }
 }
 
@@ -1967,7 +1965,7 @@ wait_for_spawn_and_remove_forceteleport() {
 
 teleport_black_screen() {
   self endon("disconnect");
-  maps\mp\_utility::setlowermessage("cargo_teleport", & "MP_ALIEN_BEACON_CARGO_TELEPORT", 3);
+  maps\mp\_utility::setlowermessage("cargo_teleport", &"MP_ALIEN_BEACON_CARGO_TELEPORT", 3);
   self.teleport_overlay = newclienthudelem(self);
   self.teleport_overlay.x = 0;
   self.teleport_overlay.y = 0;

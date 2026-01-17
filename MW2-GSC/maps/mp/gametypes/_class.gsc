@@ -38,7 +38,6 @@ init() {
 
   level.classMap["copycat"] = -1;
 
-  /#
   // classes testclients may choose from.
   level.botClasses = [];
   level.botClasses[0] = "class0";
@@ -46,9 +45,8 @@ init() {
   level.botClasses[2] = "class0";
   level.botClasses[3] = "class0";
   level.botClasses[4] = "class0";
-  # /
 
-    level.defaultClass = "CLASS_ASSAULT";
+  level.defaultClass = "CLASS_ASSAULT";
 
   level.classTableName = "mp/classTable.csv";
 
@@ -74,11 +72,11 @@ getWeaponChoice(response) {
 }
 
 logClassChoice(class, primaryWeapon, specialType, perks) {
-  if(class == self.lastClass)
+  if(class == self.lastClass) {
     return;
-
+  }
   self logstring("choseclass: " + class + " weapon: " + primaryWeapon + " special: " + specialType);
-  for (i = 0; i < perks.size; i++)
+  for(i = 0; i < perks.size; i++)
     self logstring("perk" + i + ": " + perks[i]);
 
   self.lastClass = class;
@@ -116,7 +114,6 @@ cac_getOffhand(classIndex) {
   return self getPlayerData("customClasses", classIndex, "specialGrenade");
 }
 
-
 table_getWeapon(tableName, classIndex, weaponIndex) {
   if(weaponIndex == 0)
     return tableLookup(tableName, 0, "loadoutPrimary", classIndex + 1);
@@ -143,7 +140,6 @@ table_getWeaponAttachment(tableName, classIndex, weaponIndex, attachmentIndex) {
     return "none";
   else
     return tempName;
-
 }
 
 table_getWeaponCamo(tableName, classIndex, weaponIndex) {
@@ -559,9 +555,9 @@ loadoutAllPerks(loadoutEquipment, loadoutPerk1, loadoutPerk2, loadoutPerk3) {
   perkUpgrd[2] = tablelookup("mp/perktable.csv", 1, loadoutPerk3, 8);
 
   foreach(upgrade in perkUpgrd) {
-    if(upgrade == "" || upgrade == "specialty_null")
+    if(upgrade == "" || upgrade == "specialty_null") {
       continue;
-
+    }
     if(self isItemUnlocked(upgrade))
       self maps\mp\perks\_perks::givePerk(upgrade);
   }
@@ -585,14 +581,14 @@ trackRiotShield() {
     }
   }
 
-  for (;;) {
+  for(;;) {
     self waittill("weapon_change", newWeapon);
 
     if(newWeapon == "riotshield_mp") {
       // defensive check in case we somehow get an extra "weapon_change"
-      if(self.hasRiotShieldEquipped)
+      if(self.hasRiotShieldEquipped) {
         continue;
-
+      }
       if(self.hasRiotShield)
         self MoveShieldModel("weapon_riot_shield_mp", "tag_shield_back", "tag_weapon_left");
       else
@@ -631,7 +627,7 @@ tryAttach(placement) // deprecated; hopefully we won't need to bring this defens
 
   attachSize = self getAttachSize();
 
-  for (i = 0; i < attachSize; i++) {
+  for(i = 0; i < attachSize; i++) {
     attachedTag = self getAttachTagName(i);
     if(attachedTag == tag && self getAttachModelName(i) == "weapon_riot_shield_mp") {
       return;
@@ -650,7 +646,7 @@ tryDetach(placement) // deprecated; hopefully we won't need to bring this defens
 
   attachSize = self getAttachSize();
 
-  for (i = 0; i < attachSize; i++) {
+  for(i = 0; i < attachSize; i++) {
     attachedModel = self getAttachModelName(i);
     if(attachedModel == "weapon_riot_shield_mp") {
       self DetachShieldModel(attachedModel, tag);
@@ -659,7 +655,6 @@ tryDetach(placement) // deprecated; hopefully we won't need to bring this defens
   }
   return;
 }
-
 
 buildWeaponName(baseName, attachment1, attachment2) {
   if(!isDefined(level.letterToNumber))
@@ -678,7 +673,6 @@ buildWeaponName(baseName, attachment1, attachment2) {
 
   if(attachment1 != "none" && attachment2 != "none") {
     if(level.letterToNumber[attachment1[0]] < level.letterToNumber[attachment2[0]]) {
-
       attachments[0] = attachment1;
       attachments[1] = attachment2;
 
@@ -792,10 +786,10 @@ setKillstreaks(streak1, streak2, streak3) {
       maxVal = streakVal;
   }
 
-  for (streakIndex = 0; streakIndex <= maxVal; streakIndex++) {
-    if(!isDefined(killStreaks[streakIndex]))
+  for(streakIndex = 0; streakIndex <= maxVal; streakIndex++) {
+    if(!isDefined(killStreaks[streakIndex])) {
       continue;
-
+    }
     streakName = killStreaks[streakIndex];
 
     self.killStreaks[streakIndex] = killStreaks[streakIndex];
@@ -805,7 +799,7 @@ setKillstreaks(streak1, streak2, streak3) {
   // defcon rollover
   maxRollOvers = 10;
   newKillstreaks = self.killstreaks;
-  for (rollOver = 1; rollOver <= maxRollOvers; rollOver++) {
+  for(rollOver = 1; rollOver <= maxRollOvers; rollOver++) {
     foreach(streakVal, streakName in self.killstreaks) {
       newKillstreaks[streakVal + (maxVal * rollOver)] = streakName + "-rollover" + rollOver;
     }
@@ -820,7 +814,7 @@ replenishLoadout() // used by ammo hardpoint.
   class = self.pers["class"];
 
   weaponsList = self GetWeaponsListAll();
-  for (idx = 0; idx < weaponsList.size; idx++) {
+  for(idx = 0; idx < weaponsList.size; idx++) {
     weapon = weaponsList[idx];
 
     self giveMaxAmmo(weapon);
@@ -838,7 +832,7 @@ replenishLoadout() // used by ammo hardpoint.
 }
 
 onPlayerConnecting() {
-  for (;;) {
+  for(;;) {
     level waittill("connected", player);
 
     if(!isDefined(player.pers["class"])) {

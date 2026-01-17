@@ -209,8 +209,8 @@ binoculars_init(var_0) {
   level.default_visionset = var_0;
   precachestring(&"FACTORY_CAMERA_USE_HINT");
   precachestring(&"FACTORY_CAMERA_REMOVE_HINT");
-  maps\_utility::add_hint_string("camera_use", & "FACTORY_CAMERA_USE_HINT", ::hint_camera_use_should_break);
-  maps\_utility::add_hint_string("camera_deactivate", & "FACTORY_CAMERA_REMOVE_HINT");
+  maps\_utility::add_hint_string("camera_use", &"FACTORY_CAMERA_USE_HINT", ::hint_camera_use_should_break);
+  maps\_utility::add_hint_string("camera_deactivate", &"FACTORY_CAMERA_REMOVE_HINT");
 }
 
 hint_camera_use_should_break() {

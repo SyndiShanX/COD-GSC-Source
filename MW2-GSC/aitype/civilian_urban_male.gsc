@@ -69,5 +69,4 @@ precache() {
   character\character_civilian_urban_male_ba_wht::precache();
   character\character_civilian_urban_male_bb_wht::precache();
   character\character_civilian_urban_male_bc_wht::precache();
-
 }

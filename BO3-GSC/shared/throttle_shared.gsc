@@ -9,7 +9,6 @@ class throttle {
   var queue_;
   var updaterate_;
 
-
   constructor() {
     queue_ = [];
     processed_ = 0;
@@ -17,16 +16,14 @@ class throttle {
     updaterate_ = 0.05;
   }
 
-
   destructor() {}
-
 
   function waitinqueue(entity) {
     if(processed_ >= processlimit_) {
       queue_[queue_.size] = entity;
       firstinqueue = 0;
-      while (!firstinqueue) {
-        if(!isdefined(entity)) {
+      while(!firstinqueue) {
+        if(!isDefined(entity)) {
           return;
         }
         if(processed_ < processlimit_ && queue_[0] === entity) {
@@ -40,28 +37,25 @@ class throttle {
     processed_++;
   }
 
-
   function initialize(processlimit = 1, updaterate = 0.05) {
     processlimit_ = processlimit;
     updaterate_ = updaterate;
     self thread _updatethrottlethread(self);
   }
 
-
   function private _updatethrottle() {
     processed_ = 0;
     currentqueue = queue_;
     queue_ = [];
     foreach(item in currentqueue) {
-      if(isdefined(item)) {
+      if(isDefined(item)) {
         queue_[queue_.size] = item;
       }
     }
   }
 
-
   function private _updatethrottlethread(throttle) {
-    while (isdefined(throttle)) {
+    while(isDefined(throttle)) {
       [
         [throttle]
       ] - > _updatethrottle();

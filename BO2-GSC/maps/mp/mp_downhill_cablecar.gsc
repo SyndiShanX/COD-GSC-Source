@@ -44,8 +44,8 @@ main() {
   } else
     return;
 
-  cablecars = getentarray("cablecar", "targetname");
-  cablecarkilltrigger = getentarray("cable_car_kill_trigger", "targetname");
+  cablecars = getEntArray("cablecar", "targetname");
+  cablecarkilltrigger = getEntArray("cable_car_kill_trigger", "targetname");
   assert(isDefined(cablecars));
   assert(isDefined(cablecarkilltrigger));
   level.cablecardefaultangle = cablecars[0].angles;
@@ -58,7 +58,7 @@ main() {
 
   for(i = 0; i < cablecars.size; i++) {
     cablecar = cablecars[i];
-    cablecar thread waitthenplayfx(0.1, level.cablecarlightsfx, "tag_origin");
+    cablecar thread waitthenplayFX(0.1, level.cablecarlightsfx, "tag_origin");
     cablecar.killtrigger = getclosest(cablecar.origin, cablecarkilltrigger);
     assert(isDefined(cablecar.killtrigger));
     cablecar.killtrigger enablelinkto();
@@ -82,7 +82,7 @@ main() {
     }
 
     grip.origin = grip.origin - (0, cos(grip.angles[1]) * -12, 8);
-    grip setmodel("dh_cable_car_top_piece");
+    grip setModel("dh_cable_car_top_piece");
     cablecar.grip = grip;
 
     if(getgametypesetting("allowMapScripting")) {
@@ -95,12 +95,12 @@ main() {
   }
 }
 
-waitthenplayfx(time, fxnum, tag) {
+waitthenplayFX(time, fxnum, tag) {
   self endon("death");
   wait(time);
 
   for(;;) {
-    playfxontag(fxnum, self, tag);
+    playFXOnTag(fxnum, self, tag);
     level waittill("host_migration_end");
   }
 }
@@ -180,7 +180,7 @@ createcablecarpath(cablecar) {
   movetime = -1;
 
   while(isDefined(currentnode)) {
-    cablecarnodestruct = spawnstruct();
+    cablecarnodestruct = spawnStruct();
     cablecarnodestruct.origin = currentnode.origin;
     level.cablecartrack[level.cablecartrack.size] = cablecarnodestruct;
 
@@ -288,14 +288,14 @@ cablecarrun(cablecar) {
 
       if(isDefined(currentnode)) {
         if(isDefined(currentnode.playsound))
-          cablecar playsound(currentnode.playsound);
+          cablecar playSound(currentnode.playsound);
 
         if(isDefined(currentnode.playloopsound)) {
           cablecar stoploopsound();
-          cablecar playsound("veh_cable_car_leave");
+          cablecar playSound("veh_cable_car_leave");
 
           if(currentnode.playloopsound != "")
-            cablecar playloopsound(currentnode.playloopsound);
+            cablecar playLoopSound(currentnode.playloopsound);
         }
       }
 
@@ -403,7 +403,7 @@ prettyslowdown(waittime) {
     wait(waittime);
 
   self stoploopsound();
-  self playsound(level.gondolasounds["slow_down"]);
+  self playSound(level.gondolasounds["slow_down"]);
   originalangle = self.angles;
   swingtime = getdvarfloatdefault("scr_cable_swing_time", 1.5);
   swingbacktime = getdvarfloatdefault("scr_cable_swing_back_time", 1.5);
@@ -416,8 +416,8 @@ prettyslowdown(waittime) {
 
 prettyspeedup() {
   self stoploopsound();
-  self playsound(level.gondolasounds["rollers_start"]);
-  self playloopsound(level.gondolaloopsounds["start"]);
+  self playSound(level.gondolasounds["rollers_start"]);
+  self playLoopSound(level.gondolaloopsounds["start"]);
   originalangle = self.angles;
   swingtime = getdvarfloatdefault("scr_cable_swing_time_up", 1.0);
   swingbacktime = getdvarfloatdefault("scr_cable_swing_back_time_up", 1.5);
@@ -444,7 +444,7 @@ cablecar_ai_watch() {
       }
     }
 
-    dir = vectornormalize(anglestoforward(self.angles));
+    dir = vectornormalize(anglesToForward(self.angles));
     dangerorigin = self.origin - dir * 196;
     nodes = getnodesinradius(dangerorigin, 256, 0, 196);
 
@@ -606,12 +606,12 @@ getwatcherforweapon(weapname) {
 }
 
 destroy_supply_crates() {
-  crates = getentarray("care_package", "script_noteworthy");
+  crates = getEntArray("care_package", "script_noteworthy");
 
   foreach(crate in crates) {
     if(distancesquared(crate.origin, self.origin) < 40000) {
       if(crate istouching(self)) {
-        playfx(level._supply_drop_explosion_fx, crate.origin);
+        playFX(level._supply_drop_explosion_fx, crate.origin);
         playsoundatposition("wpn_grenade_explode", crate.origin);
         wait 0.1;
         crate maps\mp\killstreaks\_supplydrop::cratedelete();

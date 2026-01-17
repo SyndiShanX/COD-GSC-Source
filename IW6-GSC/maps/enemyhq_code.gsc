@@ -151,7 +151,7 @@ safe_activate_trigger_with_targetname(var_0) {
   if(isDefined(var_2) && !isDefined(var_2.trigger_off)) {
     var_2 maps\_utility::activate_trigger();
 
-    if(isDefined(var_2.spawnflags) && var_2.spawnflags & var_1)
+    if(isDefined(var_2.spawnflags) && var_2.spawnflags &var_1)
       var_2 common_scripts\utility::trigger_off();
   }
 }
@@ -181,7 +181,7 @@ safe_activate_triggers_with_targetname(var_0, var_1) {
       if(var_6)
         var_5 maps\_utility::activate_trigger();
 
-      if(isDefined(var_5.spawnflags) && var_5.spawnflags & var_2)
+      if(isDefined(var_5.spawnflags) && var_5.spawnflags &var_2)
         var_5 common_scripts\utility::trigger_off();
     }
   }
@@ -1487,7 +1487,7 @@ handle_leave_team_fail(var_0, var_1) {
 
     while(common_scripts\utility::flag(var_0)) {
       if(var_3 >= var_2.size) {
-        setdvar("ui_deadquote", & "ENEMY_HQ_YOU_LEFT_YOUR_TEAM_BEHIND");
+        setdvar("ui_deadquote", &"ENEMY_HQ_YOU_LEFT_YOUR_TEAM_BEHIND");
         maps\_utility::missionfailedwrapper();
         break;
       }
@@ -1502,6 +1502,6 @@ handle_leave_team_fail(var_0, var_1) {
 handle_leave_team_too_far_fail(var_0) {
   level endon("stop_leave_fails");
   common_scripts\utility::flag_wait(var_0);
-  setdvar("ui_deadquote", & "ENEMY_HQ_YOU_LEFT_YOUR_TEAM_BEHIND");
+  setdvar("ui_deadquote", &"ENEMY_HQ_YOU_LEFT_YOUR_TEAM_BEHIND");
   maps\_utility::missionfailedwrapper();
 }

@@ -18,7 +18,6 @@
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
-
 #namespace zm_progress;
 
 event_handler[level_init] main(eventstruct) {
@@ -31,7 +30,7 @@ function_53a680b8(var_deac51dd, var_5301f4f1, var_13c55557, var_4737bddd, var_ac
   params.var_2b18af9d = 0.76;
   params.var_8dfc1be0 = int(3000);
   params.var_69681160 = getweapon(#"zombie_builder");
-  params.fx_name = level._effect[#"building_dust"];
+  params.fx_name = level._effect[# "building_dust"];
   params.fx_loop = 0.5;
   params.var_deac51dd = var_deac51dd;
   params.var_5301f4f1 = var_5301f4f1;
@@ -46,7 +45,7 @@ function_163442cb(params, w_weapon) {
   params.var_69681160 = w_weapon;
 }
 
-private function_89769800(params, unitrigger, b_start, var_c060d2c8) {
+function_89769800(params, unitrigger, b_start, var_c060d2c8) {
   if(!isDefined(self)) {
     return false;
   }
@@ -98,16 +97,16 @@ private function_89769800(params, unitrigger, b_start, var_c060d2c8) {
   return true;
 }
 
-private function_1b125050(params, unitrigger, var_c060d2c8) {
+function_1b125050(params, unitrigger, var_c060d2c8) {
   return function_89769800(params, unitrigger, 1, var_c060d2c8);
 }
 
-private function_a82534d(params, unitrigger, var_c060d2c8) {
+function_a82534d(params, unitrigger, var_c060d2c8) {
   return function_89769800(params, unitrigger, 0, var_c060d2c8);
 }
 
-private player_progress_bar_update(start_time, use_time) {
-  self endon(#"entering_last_stand", #"death", #"progress_end");
+player_progress_bar_update(start_time, use_time) {
+  self endon(#"entering_last_stand", # "death", # "progress_end");
 
   while(isDefined(self) && gettime() - start_time < use_time) {
     progress = (gettime() - start_time) / use_time;
@@ -125,7 +124,7 @@ private player_progress_bar_update(start_time, use_time) {
   }
 }
 
-private player_progress_bar(start_time, use_time) {
+player_progress_bar(start_time, use_time) {
   if(level.zm_build_progress zm_build_progress::is_open(self) || !isDefined(start_time) || !isDefined(use_time)) {
     return;
   }
@@ -136,7 +135,7 @@ private player_progress_bar(start_time, use_time) {
 }
 
 function_48098d30(player, params) {
-  self endon(#"kill_trigger", #"progress_succeed", #"progress_failed");
+  self endon(#"kill_trigger", # "progress_succeed", # "progress_failed");
 
   while(isDefined(params.fx_name)) {
     angles = player getplayerangles();
@@ -152,7 +151,7 @@ function_48098d30(player, params) {
   }
 }
 
-private function_f8b39299(player, params, var_c060d2c8) {
+function_f8b39299(player, params, var_c060d2c8) {
   b_waited = 0;
 
   if(!isDefined(self)) {
@@ -262,10 +261,10 @@ private function_f8b39299(player, params, var_c060d2c8) {
   self notify(result);
 }
 
-private function_4335011a(player, params, var_c060d2c8) {
+function_4335011a(player, params, var_c060d2c8) {
   self thread function_48098d30(player, params);
   self thread function_f8b39299(player, params, var_c060d2c8);
-  retval = self waittill(#"progress_succeed", #"progress_failed");
+  retval = self waittill(#"progress_succeed", # "progress_failed");
 
   if(retval._notify == "progress_succeed") {
     return true;

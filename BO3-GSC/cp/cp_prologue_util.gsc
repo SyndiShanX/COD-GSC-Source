@@ -51,7 +51,7 @@ function function_2f943869() {
   self endon("death");
   wait(randomfloatrange(0.1, 0.6));
   self vehicle::get_out();
-  if(isdefined(self.script_noteworthy)) {
+  if(isDefined(self.script_noteworthy)) {
     self setgoal(getnode(self.script_noteworthy, "targetname"), 1);
   }
 }
@@ -72,25 +72,25 @@ function spawn_coop_player_replacement(skipto, var_de2f1b3 = 1) {
   flag::wait_till("all_players_spawned");
   primary_weapon = getweapon("ar_standard_hero");
   var_5178c24b = getdvarint("scene_debug_player", 0);
-  if(!isdefined(level.var_681ad194)) {
+  if(!isDefined(level.var_681ad194)) {
     level.var_681ad194 = [];
   }
   if(var_de2f1b3) {
-    if(level.players.size <= 3 && !isdefined(level.var_681ad194[1]) && var_5178c24b != 2) {
+    if(level.players.size <= 3 && !isDefined(level.var_681ad194[1]) && var_5178c24b != 2) {
       level.var_681ad194[1] = util::get_hero("ally_03");
       s_struct = struct::get(skipto + "_ally_03", "targetname");
       level.var_681ad194[1] forceteleport(s_struct.origin, s_struct.angles);
       level.var_681ad194[1] ai::gun_switchto(primary_weapon, "right");
       level.var_681ad194[1].var_a89679b6 = 3;
     }
-    if(level.players.size <= 2 && !isdefined(level.var_681ad194[2]) && var_5178c24b != 3) {
+    if(level.players.size <= 2 && !isDefined(level.var_681ad194[2]) && var_5178c24b != 3) {
       level.var_681ad194[2] = util::get_hero("ally_02");
       s_struct = struct::get(skipto + "_ally_02", "targetname");
       level.var_681ad194[2] forceteleport(s_struct.origin, s_struct.angles);
       level.var_681ad194[2] ai::gun_switchto(primary_weapon, "right");
       level.var_681ad194[2].var_a89679b6 = 2;
     }
-    if(level.players.size == 1 && !isdefined(level.var_681ad194[3]) && var_5178c24b != 4) {
+    if(level.players.size == 1 && !isDefined(level.var_681ad194[3]) && var_5178c24b != 4) {
       level.var_681ad194[3] = util::get_hero("ally_01");
       s_struct = struct::get(skipto + "_ally_01", "targetname");
       level.var_681ad194[3] forceteleport(s_struct.origin, s_struct.angles);
@@ -98,15 +98,15 @@ function spawn_coop_player_replacement(skipto, var_de2f1b3 = 1) {
       level.var_681ad194[3].var_a89679b6 = 1;
     }
   }
-  if(level.players.size >= 2 && isdefined(level.var_681ad194[3])) {
+  if(level.players.size >= 2 && isDefined(level.var_681ad194[3])) {
     level.var_681ad194[3] delete();
     level.var_681ad194[3] = undefined;
   }
-  if(level.players.size >= 3 && isdefined(level.var_681ad194[2])) {
+  if(level.players.size >= 3 && isDefined(level.var_681ad194[2])) {
     level.var_681ad194[2] delete();
     level.var_681ad194[2] = undefined;
   }
-  if(level.players.size >= 4 && isdefined(level.var_681ad194[1])) {
+  if(level.players.size >= 4 && isDefined(level.var_681ad194[1])) {
     level.var_681ad194[1] delete();
     level.var_681ad194[1] = undefined;
   }
@@ -148,23 +148,23 @@ function ai_idle_then_alert(str_wait_till, var_4afdd260) {
   self.goalradius = 32;
   self ai::set_ignoreall(0);
   self ai::set_ignoreme(0);
-  if(isdefined(self.target)) {
+  if(isDefined(self.target)) {
     node = getnodearray(self.target, "targetname");
     index = randomintrange(0, node.size);
     self setgoal(node[index], 1);
   }
-  if(isdefined(var_4afdd260)) {
+  if(isDefined(var_4afdd260)) {
     self waittill("goal");
     self.goalradius = var_4afdd260;
   }
 }
 
 function get_ai_allies() {
-  if(!isdefined(level.var_681ad194)) {
+  if(!isDefined(level.var_681ad194)) {
     return [];
   }
-  for (i = 1; i < 4; i++) {
-    if(!isdefined(level.var_681ad194[i]) || !isalive(level.var_681ad194[i])) {
+  for(i = 1; i < 4; i++) {
+    if(!isDefined(level.var_681ad194[i]) || !isalive(level.var_681ad194[i])) {
       level.var_681ad194[i] = undefined;
     }
   }
@@ -181,10 +181,10 @@ function follow_linked_scripted_nodes() {
   self.goalradius = 64;
   self.ignoreall = 1;
   nd_node = getnode(self.script_string, "targetname");
-  while (true) {
+  while(true) {
     self setgoal(nd_node.origin);
     self waittill("goal");
-    if(!isdefined(nd_node.script_string)) {
+    if(!isDefined(nd_node.script_string)) {
       break;
     }
     nd_node = getnode(nd_node.script_string, "targetname");
@@ -244,7 +244,7 @@ function function_1db6047f(str_cleanup) {
 
 function function_3a642801() {
   foreach(ai_rider in self.riders) {
-    if(isdefined(ai_rider)) {
+    if(isDefined(ai_rider)) {
       ai_rider delete();
     }
   }
@@ -260,18 +260,18 @@ function function_3a642801() {
 }
 
 function function_73acb160(str_spawners, start_func) {
-  a_spawners = getentarray(str_spawners, "targetname");
-  for (i = 0; i < a_spawners.size; i++) {
+  a_spawners = getEntArray(str_spawners, "targetname");
+  for(i = 0; i < a_spawners.size; i++) {
     level thread function_1f89893f(a_spawners[i], start_func);
   }
 }
 
 function function_1f89893f(e_spawner, start_func) {
-  if(isdefined(e_spawner.script_delay)) {
+  if(isDefined(e_spawner.script_delay)) {
     wait(e_spawner.script_delay);
   }
   e_ent = e_spawner spawner::spawn();
-  if(isdefined(start_func)) {
+  if(isDefined(start_func)) {
     e_ent thread[[start_func]]();
   }
 }
@@ -281,19 +281,19 @@ function remove_grenades() {
 }
 
 function function_40e4b0cf(str_spawn_manager, str_spawners, var_c5690501) {
-  a_spawners = getentarray(str_spawners, "targetname");
+  a_spawners = getEntArray(str_spawners, "targetname");
   e_volume = getent(var_c5690501, "targetname");
   foreach(sp_spawner in a_spawners) {
-    sp_spawner spawner::add_spawn_function( & set_goal_volume, e_volume);
+    sp_spawner spawner::add_spawn_function(&set_goal_volume, e_volume);
   }
   spawn_manager::enable(str_spawn_manager);
 }
 
 function function_a7eac508(str_spawner, var_4ac59d48, end_goal_radius, disable_fallback) {
-  a_ents = getentarray(str_spawner, "targetname");
-  for (i = 0; i < a_ents.size; i++) {
+  a_ents = getEntArray(str_spawner, "targetname");
+  for(i = 0; i < a_ents.size; i++) {
     e_ent = a_ents[i] spawner::spawn();
-    if(isdefined(var_4ac59d48)) {
+    if(isDefined(var_4ac59d48)) {
       e_ent.goalradius = 64;
     }
     e_ent thread ai_wakamole(end_goal_radius, disable_fallback);
@@ -302,24 +302,24 @@ function function_a7eac508(str_spawner, var_4ac59d48, end_goal_radius, disable_f
 
 function ai_wakamole(end_goal_radius, disable_fallback) {
   self endon("death");
-  if(isdefined(disable_fallback) && disable_fallback) {
+  if(isDefined(disable_fallback) && disable_fallback) {
     self.disable_fallback = 1;
   }
   self waittill("goal");
-  if(isdefined(end_goal_radius)) {
+  if(isDefined(end_goal_radius)) {
     self.goalradius = end_goal_radius;
   }
 }
 
 function function_8f7b1e06(str_trigger, var_390543cc, var_9d774f5d) {
-  if(isdefined(str_trigger)) {
+  if(isDefined(str_trigger)) {
     e_trigger = getent(str_trigger, "targetname");
     e_trigger waittill("trigger");
   }
   var_441bd962 = getent(var_390543cc, "targetname");
   var_ee2fd889 = getent(var_9d774f5d, "targetname");
   a_ai = getaiteamarray("axis");
-  for (i = 0; i < a_ai.size; i++) {
+  for(i = 0; i < a_ai.size; i++) {
     e_ent = a_ai[i];
     if(e_ent istouching(var_441bd962)) {
       e_ent setgoal(var_ee2fd889);
@@ -330,11 +330,11 @@ function function_8f7b1e06(str_trigger, var_390543cc, var_9d774f5d) {
 
 function wait_for_all_players_to_pass_struct(str_struct, var_e209da48) {
   s_struct = struct::get(str_struct, "targetname");
-  v_struct_dir = anglestoforward(s_struct.angles);
-  while (true) {
+  v_struct_dir = anglesToForward(s_struct.angles);
+  while(true) {
     num_players_past = 0;
     a_players = getplayers();
-    for (i = 0; i < a_players.size; i++) {
+    for(i = 0; i < a_players.size; i++) {
       e_player = a_players[i];
       v_dir = vectornormalize(e_player.origin - s_struct.origin);
       dp = vectordot(v_dir, v_struct_dir);
@@ -342,7 +342,7 @@ function wait_for_all_players_to_pass_struct(str_struct, var_e209da48) {
         num_players_past++;
       }
     }
-    if(isdefined(var_e209da48) && num_players_past >= a_players.size) {
+    if(isDefined(var_e209da48) && num_players_past >= a_players.size) {
       break;
     }
     if(num_players_past == a_players.size) {
@@ -354,13 +354,13 @@ function wait_for_all_players_to_pass_struct(str_struct, var_e209da48) {
 
 function function_12ce22ee() {
   level.a_ai_allies = [];
-  if(isdefined(level.var_681ad194[1])) {
+  if(isDefined(level.var_681ad194[1])) {
     arrayinsert(level.a_ai_allies, level.var_681ad194[1], 0);
   }
-  if(isdefined(level.var_681ad194[2])) {
+  if(isDefined(level.var_681ad194[2])) {
     arrayinsert(level.a_ai_allies, level.var_681ad194[2], 0);
   }
-  if(isdefined(level.var_681ad194[3])) {
+  if(isDefined(level.var_681ad194[3])) {
     arrayinsert(level.a_ai_allies, level.var_681ad194[3], 0);
   }
 }
@@ -375,7 +375,7 @@ function function_520255e3(str_trigger, time) {
 function function_901793d(str_trigger, str_notify) {
   level endon(str_notify);
   e_trigger = getent(str_trigger, "targetname");
-  if(isdefined(e_trigger)) {
+  if(isDefined(e_trigger)) {
     e_trigger waittill("trigger");
   }
   level notify(str_notify);
@@ -395,14 +395,14 @@ function function_609c412a(str_volume, check_players) {
   e_volume = getent(str_volume, "targetname");
   num_touching = 0;
   a_ai = getaiteamarray("axis");
-  for (i = 0; i < a_ai.size; i++) {
+  for(i = 0; i < a_ai.size; i++) {
     if(a_ai[i] istouching(e_volume)) {
       num_touching++;
     }
   }
   if(check_players) {
     a_players = getplayers();
-    for (i = 0; i < a_players.size; i++) {
+    for(i = 0; i < a_players.size; i++) {
       if(a_players[i] istouching(e_volume)) {
         num_touching++;
         break;
@@ -416,14 +416,14 @@ function function_15823dab(v_pos, shake_size, shake_time, var_e64e30a6, rumble_n
   if(shake_size) {
     earthquake(shake_size, shake_time, v_pos, var_e64e30a6);
   }
-  for (i = 0; i < rumble_num; i++) {
+  for(i = 0; i < rumble_num; i++) {
     e_player playrumbleonentity("damage_heavy");
     wait(0.1);
   }
 }
 
 function rumble_all_players(str_type, n_time_between, n_iterations, e_ent) {
-  for (i = 0; i < n_iterations; i++) {
+  for(i = 0; i < n_iterations; i++) {
     e_ent playrumbleonentity(str_type);
     wait(n_time_between);
   }
@@ -435,7 +435,7 @@ function function_2a0bc326(v_pos, var_48f82942, var_51fbdea, var_644bf6a7, var_8
   }
   var_5ca58060 = var_644bf6a7 * var_644bf6a7;
   foreach(player in level.activeplayers) {
-    if(isdefined(var_183c13ad)) {
+    if(isDefined(var_183c13ad)) {
       player shellshock(var_183c13ad, var_51fbdea);
     }
     player thread function_e42cebb6(v_pos, var_5ca58060, var_8f4ca4be, str_rumble_type);
@@ -444,7 +444,7 @@ function function_2a0bc326(v_pos, var_48f82942, var_51fbdea, var_644bf6a7, var_8
 
 function function_e42cebb6(v_pos, var_5ca58060, var_8f4ca4be, str_rumble_type) {
   self endon("death");
-  for (i = 0; i < var_8f4ca4be; i++) {
+  for(i = 0; i < var_8f4ca4be; i++) {
     if(distancesquared(v_pos, self.origin) <= var_5ca58060) {
       self playrumbleonentity(str_rumble_type);
     }
@@ -453,17 +453,17 @@ function function_e42cebb6(v_pos, var_5ca58060, var_8f4ca4be, str_rumble_type) {
 }
 
 function vehicle_rumble(str_rumble_type = "damage_light", var_74584a64, var_48f82942 = 0.1, n_period = 0.1, n_radius = 2000, n_timeout) {
-  if(isdefined(var_74584a64)) {
+  if(isDefined(var_74584a64)) {
     self endon(var_74584a64);
   }
   self endon("death");
   n_timepassed = 0;
   b_done = 0;
-  while (!b_done) {
+  while(!b_done) {
     self playrumbleonentity(str_rumble_type);
     earthquake(var_48f82942, n_period, self.origin, n_radius);
     wait(n_period);
-    if(isdefined(n_timeout) && n_timeout > 0) {
+    if(isDefined(n_timeout) && n_timeout > 0) {
       n_timepassed = n_timepassed + n_period;
       b_done = n_timepassed >= n_timeout;
     }
@@ -501,7 +501,7 @@ function function_db027040(var_eb6e3c93) {
 function num_players_touching_volume(e_volume) {
   a_players = getplayers();
   num_touching = 0;
-  for (i = 0; i < a_players.size; i++) {
+  for(i = 0; i < a_players.size; i++) {
     if(a_players[i] istouching(e_volume)) {
       num_touching++;
     }
@@ -512,7 +512,7 @@ function num_players_touching_volume(e_volume) {
 function function_68b8f4af(e_volume) {
   a_ai = getaiteamarray("axis");
   a_touching = [];
-  for (i = 0; i < a_ai.size; i++) {
+  for(i = 0; i < a_ai.size; i++) {
     if(a_ai[i] istouching(e_volume)) {
       a_touching[a_touching.size] = a_ai[i];
     }
@@ -522,7 +522,7 @@ function function_68b8f4af(e_volume) {
 
 function function_d1f1caad(str_trigger) {
   e_trigger = getent(str_trigger, "targetname");
-  if(isdefined(e_trigger)) {
+  if(isDefined(e_trigger)) {
     e_trigger waittill("trigger");
   }
 }
@@ -535,10 +535,10 @@ function function_e0fb6da9(str_struct, close_dist, wait_time, var_d1b83750, max_
   s_struct = struct::get(str_struct, "targetname");
   var_37124366 = getent(var_1813646e, "targetname");
   var_7d22b48e = getent(var_98e9bc46, "targetname");
-  v_forward = anglestoforward(s_struct.angles);
+  v_forward = anglesToForward(s_struct.angles);
   s_struct.start_time = undefined;
   var_cc06a93d = 0;
-  while (true) {
+  while(true) {
     e_player = getplayers()[0];
     v_dir = s_struct.origin - e_player.origin;
     var_989d1f7c = vectordot(v_dir, v_forward);
@@ -547,21 +547,21 @@ function function_e0fb6da9(str_struct, close_dist, wait_time, var_d1b83750, max_
     }
     dist = distance(s_struct.origin, e_player.origin);
     if(dist < close_dist) {
-      if(!isdefined(s_struct.start_time)) {
+      if(!isDefined(s_struct.start_time)) {
         s_struct.start_time = gettime();
       }
     } else {
       s_struct.start_time = undefined;
     }
-    if(isdefined(s_struct.start_time)) {
+    if(isDefined(s_struct.start_time)) {
       time = gettime();
       dt = (time - s_struct.start_time) / 1000;
       if(dt > wait_time) {
         a_ai = getaiteamarray("axis");
         a_touching = [];
-        for (i = 0; i < a_ai.size; i++) {
+        for(i = 0; i < a_ai.size; i++) {
           e_ent = a_ai[i];
-          if(!isdefined(e_ent.var_db552f4)) {
+          if(!isDefined(e_ent.var_db552f4)) {
             if(e_ent istouching(var_37124366)) {
               a_touching[a_touching.size] = e_ent;
             }
@@ -571,7 +571,7 @@ function function_e0fb6da9(str_struct, close_dist, wait_time, var_d1b83750, max_
         if(var_d6f9eed8 > a_touching.size) {
           var_d6f9eed8 = a_touching.size;
         }
-        for (i = 0; i < var_d6f9eed8; i++) {
+        for(i = 0; i < var_d6f9eed8; i++) {
           a_touching[i] setgoal(var_7d22b48e);
           a_touching[i].var_db552f4 = 1;
         }
@@ -587,9 +587,9 @@ function function_e0fb6da9(str_struct, close_dist, wait_time, var_d1b83750, max_
 }
 
 function function_f5363f47(str_trigger) {
-  a_triggers = getentarray(str_trigger, "targetname");
+  a_triggers = getEntArray(str_trigger, "targetname");
   str_notify = str_trigger + "_waiting";
-  for (i = 0; i < a_triggers.size; i++) {
+  for(i = 0; i < a_triggers.size; i++) {
     level thread function_7eb8a7ab(a_triggers[i], str_notify);
   }
   level waittill(str_notify);
@@ -602,21 +602,21 @@ function function_7eb8a7ab(e_trigger, str_notify) {
 }
 
 function function_25e841ea() {
-  if(!isdefined(level.var_c6c69fca)) {
+  if(!isDefined(level.var_c6c69fca)) {
     level.var_c6c69fca = 1;
   }
 }
 
 function function_92d5b013(speed_frac) {
   a_players = getplayers();
-  for (i = 0; i < a_players.size; i++) {
+  for(i = 0; i < a_players.size; i++) {
     a_players[i] setmovespeedscale(speed_frac);
   }
 }
 
 function debug_line(e_ent) {
   e_ent endon("death");
-  while (true) {
+  while(true) {
     v_start = e_ent.origin;
     v_end = v_start + vectorscale((0, 0, 1), 1000);
     v_col = (1, 1, 1);
@@ -632,8 +632,8 @@ function function_42da021e(str_spawner_name, var_4c026543, var_61e0b19a, var_e3f
   e_vtol thread vehicle_rumble("buzz_high", var_28290004, 0.05, 0.1, 5000);
   nd_start = getvehiclenode(e_vtol.target, "targetname");
   e_vtol attachpath(nd_start);
-  if(isdefined(var_4c026543)) {
-    if(!isdefined(var_61e0b19a)) {
+  if(isDefined(var_4c026543)) {
+    if(!isDefined(var_61e0b19a)) {
       e_vtol setspeed(var_4c026543);
     } else {
       e_vtol setspeed(var_4c026543, var_61e0b19a);
@@ -653,8 +653,8 @@ function function_42da021e(str_spawner_name, var_4c026543, var_61e0b19a, var_e3f
 }
 
 function function_c56034b7() {
-  playfxontag(level._effect["vtol_rotorwash"], self, "tag_engine_left");
-  playfxontag(level._effect["vtol_rotorwash"], self, "tag_engine_right");
+  playFXOnTag(level._effect["vtol_rotorwash"], self, "tag_engine_left");
+  playFXOnTag(level._effect["vtol_rotorwash"], self, "tag_engine_right");
 }
 
 function function_950d1c3b(b_enable = 1) {
@@ -687,19 +687,19 @@ function function_cfabe921() {
 }
 
 function function_21f52196(str_door_name, t_enter, var_13aabd08) {
-  assert(isdefined(t_enter), "");
-  assert(isdefined(t_enter.target), "");
+  assert(isDefined(t_enter), "");
+  assert(isDefined(t_enter.target), "");
   level endon("stop_door_" + str_door_name);
   t_exit = getent(t_enter.target, "targetname");
   t_enter thread function_e0f9fe98(str_door_name, 0);
   t_exit thread function_e0f9fe98(str_door_name, 1);
-  if(isdefined(var_13aabd08)) {
+  if(isDefined(var_13aabd08)) {
     var_dee3d10a = getent(var_13aabd08, "targetname");
-    assert(isdefined(var_dee3d10a), "");
+    assert(isDefined(var_dee3d10a), "");
     var_dee3d10a endon("death");
     var_dee3d10a waittill("hash_c0b9931e");
     foreach(player in level.players) {
-      if(!isdefined(player.a_doors)) {
+      if(!isDefined(player.a_doors)) {
         player.a_doors = [];
       }
       player.a_doors[str_door_name] = 1;
@@ -708,11 +708,11 @@ function function_21f52196(str_door_name, t_enter, var_13aabd08) {
 }
 
 function function_2e61b3e8(str_door_name, t_enter, a_ai) {
-  assert(isdefined(t_enter), "");
-  assert(isdefined(t_enter.target), "");
+  assert(isDefined(t_enter), "");
+  assert(isDefined(t_enter.target), "");
   level endon("stop_door_" + str_door_name);
   t_exit = getent(t_enter.target, "targetname");
-  if(!isdefined(level.var_40c4c9da)) {
+  if(!isDefined(level.var_40c4c9da)) {
     level.var_40c4c9da = [];
   }
   level.var_40c4c9da[str_door_name] = a_ai;
@@ -724,10 +724,10 @@ function function_2e61b3e8(str_door_name, t_enter, a_ai) {
 function function_e0f9fe98(str_door_name, b_state) {
   level endon("stop_door_" + str_door_name);
   self endon("death");
-  while (true) {
+  while(true) {
     self waittill("trigger", e_who);
     if(isplayer(e_who)) {
-      if(!isdefined(e_who.a_doors)) {
+      if(!isDefined(e_who.a_doors)) {
         e_who.a_doors = [];
       }
       e_who.a_doors[str_door_name] = b_state;
@@ -738,14 +738,14 @@ function function_e0f9fe98(str_door_name, b_state) {
 function function_e010251d(str_door_name, b_state, e_guy) {
   level endon("stop_door_" + str_door_name);
   self endon("death");
-  if(!isdefined(e_guy.a_doors)) {
+  if(!isDefined(e_guy.a_doors)) {
     e_guy.a_doors = [];
   }
   e_guy.a_doors[str_door_name] = 0;
-  while (true) {
+  while(true) {
     self waittill("trigger", e_who);
     if(isai(e_who) && e_who == e_guy) {
-      if(!isdefined(e_who.a_doors)) {
+      if(!isDefined(e_who.a_doors)) {
         e_who.a_doors = [];
       }
       e_who.a_doors[str_door_name] = b_state;
@@ -756,13 +756,13 @@ function function_e010251d(str_door_name, b_state, e_guy) {
 function function_cdd726fb(str_door_name) {
   var_83b77796 = 1;
   foreach(player in level.activeplayers) {
-    if(!isdefined(player.a_doors) || !isdefined(player.a_doors[str_door_name]) || !player.a_doors[str_door_name]) {
+    if(!isDefined(player.a_doors) || !isDefined(player.a_doors[str_door_name]) || !player.a_doors[str_door_name]) {
       var_83b77796 = 0;
     }
   }
-  if(isdefined(level.var_40c4c9da) && isdefined(level.var_40c4c9da[str_door_name])) {
+  if(isDefined(level.var_40c4c9da) && isDefined(level.var_40c4c9da[str_door_name])) {
     foreach(e_guy in level.var_40c4c9da[str_door_name]) {
-      if(isalive(e_guy) && (!isdefined(e_guy.a_doors) || !isdefined(e_guy.a_doors[str_door_name]) || !e_guy.a_doors[str_door_name])) {
+      if(isalive(e_guy) && (!isDefined(e_guy.a_doors) || !isDefined(e_guy.a_doors[str_door_name]) || !e_guy.a_doors[str_door_name])) {
         var_83b77796 = 0;
       }
     }
@@ -778,11 +778,11 @@ function function_d990de5a(t_enter) {
 
 function function_d723979e(str_notify, str_model, str_endon) {
   self endon("death");
-  if(isdefined(str_endon)) {
+  if(isDefined(str_endon)) {
     level endon(str_endon);
   }
   self waittill(str_notify);
-  self setmodel(str_model);
+  self setModel(str_model);
 }
 
 function function_72e9bdb8() {

@@ -45,9 +45,7 @@ initialize(animscript) {
   if(isDefined(self.a.postscriptfunc)) {
     scriptfunc = self.a.postscriptfunc;
     self.a.postscriptfunc = undefined;
-    [
-      [scriptfunc]
-    ](animscript);
+    [[scriptfunc]](animscript);
   }
 
   if(animscript != "death")
@@ -83,9 +81,9 @@ getnodeyawtoenemy() {
     pos = self.enemy.origin;
   else {
     if(isDefined(self.node))
-      forward = anglestoforward(self.node.angles);
+      forward = anglesToForward(self.node.angles);
     else
-      forward = anglestoforward(self.angles);
+      forward = anglesToForward(self.angles);
 
     forward = vectorscale(forward, 150);
     pos = self.origin + forward;
@@ -106,7 +104,7 @@ getcovernodeyawtoenemy() {
   if(isvalidenemy(self.enemy))
     pos = self.enemy.origin;
   else {
-    forward = anglestoforward(self.covernode.angles + self.animarray["angle_step_out"][self.a.cornermode]);
+    forward = anglesToForward(self.covernode.angles + self.animarray["angle_step_out"][self.a.cornermode]);
     forward = vectorscale(forward, 150);
     pos = self.origin + forward;
   }
@@ -129,7 +127,7 @@ getyawtoenemy() {
   if(isvalidenemy(self.enemy))
     pos = self.enemy.origin;
   else {
-    forward = anglestoforward(self.angles);
+    forward = anglesToForward(self.angles);
     forward = vectorscale(forward, 150);
     pos = self.origin + forward;
   }
@@ -258,9 +256,9 @@ getnodeforward() {
   mynode = getclaimednode();
 
   if(isDefined(mynode))
-    return anglestoforward(mynode.angles);
+    return anglesToForward(mynode.angles);
 
-  return anglestoforward(self.angles);
+  return anglesToForward(self.angles);
 }
 
 getnodeorigin() {
@@ -402,7 +400,7 @@ debugposinternal(org, string, size) {
   self endon("death");
   self notify("stop debug " + org);
   self endon("stop debug " + org);
-  ent = spawnstruct();
+  ent = spawnStruct();
   ent thread debugtimeout();
   ent endon("timeout");
 
@@ -454,7 +452,7 @@ getnodeoffset(node) {
   cornernode = 0;
   nodeoffset = (0, 0, 0);
   right = anglestoright(node.angles);
-  forward = anglestoforward(node.angles);
+  forward = anglesToForward(node.angles);
 
   switch (node.type) {
     case "Cover Left":
@@ -941,7 +939,7 @@ play_sound_in_space(alias, origin, master) {
   if(isDefined(master) && master)
     org playsoundasmaster(alias);
   else
-    org playsound(alias);
+    org playSound(alias);
 
   if(isDefined(org))
     org delete();

@@ -6,13 +6,12 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\struct;
 #include scripts\core_common\util_shared;
-
 #namespace tracker;
 
 init_shared() {
   registerclientfields();
 }
 
-private registerclientfields() {
+registerclientfields() {
   clientfield::register("clientuimodel", "huditems.isExposedOnMinimap", 1, 1, "int", undefined, 0, 0);
 }

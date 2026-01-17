@@ -32,7 +32,7 @@ stage_logic() {
 
 sq_ll_show_code() {
   a_spots = getstructarray("sq_code_pos", "targetname");
-  a_signs = getentarray("sq_tunnel_sign", "targetname");
+  a_signs = getEntArray("sq_tunnel_sign", "targetname");
   a_codes = [];
 
   foreach(m_sign in a_signs) {
@@ -55,7 +55,7 @@ sq_ll_show_code() {
   for(i = 0; i < a_codes.size; i++) {
     m_code = spawn("script_model", a_spots[i].origin);
     m_code.angles = a_spots[i].angles;
-    m_code setmodel(a_codes[i]);
+    m_code setModel(a_codes[i]);
   }
 
   if(flag("sq_is_max_tower_built"))
@@ -64,11 +64,10 @@ sq_ll_show_code() {
     level thread sq_ll_show_code_vo_ric();
 }
 
-exit_stage(success) {
-}
+exit_stage(success) {}
 
 sq_ll_show_code_vo_max() {
-  a_signs = getentarray("sq_tunnel_sign", "targetname");
+  a_signs = getEntArray("sq_tunnel_sign", "targetname");
   maxissay("vox_maxi_sidequest_signs_0", a_signs[0]);
   maxissay("vox_maxi_sidequest_signs_1", a_signs[0]);
 }

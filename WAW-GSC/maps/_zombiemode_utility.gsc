@@ -17,9 +17,9 @@ get_enemy_count() {
 spawn_zombie(spawner, target_name) {
   spawner.script_moveoverride = true;
   if(isDefined(spawner.script_forcespawn) && spawner.script_forcespawn) {
-    guy = spawner StalingradSpawn();
+    guy = spawner Stalingradspawn();
   } else {
-    guy = spawner DoSpawn();
+    guy = spawner Dospawn();
   }
   spawner.count = 666;
   if(!spawn_failed(guy)) {
@@ -50,7 +50,7 @@ destroy_hud() {
 }
 
 all_chunks_intact(barrier_chunks) {
-  for (i = 0; i < barrier_chunks.size; i++) {
+  for(i = 0; i < barrier_chunks.size; i++) {
     if(barrier_chunks[i].destroyed) {
       return false;
     }
@@ -59,7 +59,7 @@ all_chunks_intact(barrier_chunks) {
 }
 
 all_chunks_destroyed(barrier_chunks) {
-  for (i = 0; i < barrier_chunks.size; i++) {
+  for(i = 0; i < barrier_chunks.size; i++) {
     if(!barrier_chunks[i].destroyed || isDefined(barrier_chunks[i].target_by_zombie)) {
       return false;
     }
@@ -90,7 +90,7 @@ random_tan() {
 places_before_decimal(num) {
   abs_num = abs(num);
   count = 0;
-  while (1) {
+  while(1) {
     abs_num *= 0.1;
     count += 1;
     if(abs_num < 1) {
@@ -105,7 +105,7 @@ get_closest_valid_player(origin, ignore_player) {
   if(isDefined(ignore_player)) {
     players = array_remove(players, ignore_player);
   }
-  while (!valid_player_found) {
+  while(!valid_player_found) {
     player = GetClosest(origin, players);
     if(!isDefined(player)) {
       return undefined;
@@ -148,7 +148,7 @@ is_player_valid(player) {
 
 in_revive_trigger() {
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(!isDefined(players[i]) || !IsAlive(players[i])) {
       continue;
     }
@@ -171,7 +171,7 @@ get_closest_2d(origin, ents) {
   }
   dist = Distance2d(origin, ents[0].origin);
   index = 0;
-  for (i = 1; i < ents.size; i++) {
+  for(i = 1; i < ents.size; i++) {
     temp_dist = Distance2d(origin, ents[i].origin);
     if(temp_dist < dist) {
       dist = temp_dist;
@@ -197,12 +197,12 @@ enable_trigger() {
 }
 
 in_playable_area() {
-  trigger = GetEntarray("playable_area", "targetname");
+  trigger = getEntArray("playable_area", "targetname");
   if(!isDefined(trigger)) {
     println("No playable area trigger found! Assume EVERYWHERE is PLAYABLE");
     return true;
   }
-  for (i = 0; i < trigger.size; i++) {
+  for(i = 0; i < trigger.size; i++) {
     if(self IsTouching(trigger[i])) {
       return true;
     }
@@ -239,7 +239,7 @@ get_random_destroyed_chunk(barrier_chunks) {
 
 get_non_destroyed_chunks(barrier_chunks) {
   array = [];
-  for (i = 0; i < barrier_chunks.size; i++) {
+  for(i = 0; i < barrier_chunks.size; i++) {
     if(!barrier_chunks[i].destroyed && !isDefined(barrier_chunks[i].target_by_zombie)) {
       array[array.size] = barrier_chunks[i];
     }
@@ -252,7 +252,7 @@ get_non_destroyed_chunks(barrier_chunks) {
 
 get_destroyed_chunks(barrier_chunks) {
   array = [];
-  for (i = 0; i < barrier_chunks.size; i++) {
+  for(i = 0; i < barrier_chunks.size; i++) {
     if(barrier_chunks[i].destroyed) {
       array[array.size] = barrier_chunks[i];
     }
@@ -274,7 +274,7 @@ is_float(num) {
 
 array_limiter(array, total) {
   new_array = [];
-  for (i = 0; i < array.size; i++) {
+  for(i = 0; i < array.size; i++) {
     if(i < total) {
       new_array[new_array.size] = array[i];
     }
@@ -291,8 +291,8 @@ array_validate(array) {
 }
 
 add_later_round_spawners() {
-  spawners = GetEntArray("later_round_spawners", "script_noteworthy");
-  for (i = 0; i < spawners.size; i++) {
+  spawners = getEntArray("later_round_spawners", "script_noteworthy");
+  for(i = 0; i < spawners.size; i++) {
     add_spawner(spawners[i]);
   }
 }
@@ -340,7 +340,7 @@ remove_from_spectate_list() {
 
 get_next_from_spectate_list(ent) {
   index = 0;
-  for (i = 0; i < level.spectate_list.size; i++) {
+  for(i = 0; i < level.spectate_list.size; i++) {
     if(ent == level.spectate_list[i]) {
       index = i;
     }
@@ -409,7 +409,7 @@ play_sound_at_pos(ref, pos, ent) {
 
 play_sound_on_ent(ref) {
   if(isDefined(self.script_soundalias)) {
-    self PlaySound(self.script_soundalias);
+    self playSound(self.script_soundalias);
     return;
   }
   if(isDefined(self.script_sound)) {
@@ -422,7 +422,7 @@ play_sound_on_ent(ref) {
     AssertMsg("Sound \"" + ref + "\" was not put to the zombie sounds list, please use add_sound( ref, alias ) at the start of your level.");
     return;
   }
-  self PlaySound(level.zombie_sounds[ref]);
+  self playSound(level.zombie_sounds[ref]);
 }
 
 play_loopsound_on_ent(ref) {
@@ -436,7 +436,7 @@ play_loopsound_on_ent(ref) {
     AssertMsg("Sound \"" + ref + "\" was not put to the zombie sounds list, please use add_sound( ref, alias ) at the start of your level.");
     return;
   }
-  self PlaySound(level.zombie_sounds[ref]);
+  self playSound(level.zombie_sounds[ref]);
 }
 
 string_to_float(string) {
@@ -445,7 +445,7 @@ string_to_float(string) {
     return int(floatParts[0]);
   whole = int(floatParts[0]);
   decimal = int(floatParts[1]);
-  while (decimal > 1)
+  while(decimal > 1)
     decimal *= 0.1;
   if(whole >= 0)
     return (whole + decimal);
@@ -498,7 +498,7 @@ debug_ui() {
   menu[zombie_health] = maps\_debug::new_hud(menu_name, "", x + x_offset, y + 20, 1);
   menu[zombie_speed] = maps\_debug::new_hud(menu_name, "", x + x_offset, y + 30, 1);
   menu[round_number] = maps\_debug::new_hud(menu_name, "", x + x_offset, y + 40, 1);
-  while (true) {
+  while(true) {
     wait(0.05);
     menu[spawn_delay] SetText(level.zombie_vars["zombie_spawn_delay"]);
     menu[zombie_health] SetText(level.zombie_health);
@@ -510,7 +510,7 @@ debug_ui() {
 hudelem_count() {
   max = 0;
   curr_total = 0;
-  while (1) {
+  while(1) {
     if(level.hudelem_count > max) {
       max = level.hudelem_count;
     }
@@ -520,9 +520,9 @@ hudelem_count() {
 }
 
 debug_round_advancer() {
-  while (1) {
+  while(1) {
     zombs = getaiarray("axis");
-    for (i = 0; i < zombs.size; i++) {
+    for(i = 0; i < zombs.size; i++) {
       zombs[i] dodamage(zombs[i].health * 100, (0, 0, 0));
       wait 0.5;
     }
@@ -531,7 +531,7 @@ debug_round_advancer() {
 
 print_run_speed(speed) {
   self endon("death");
-  while (1) {
+  while(1) {
     print3d(self.origin + (0, 0, 64), speed, (1, 1, 1));
     wait 0.05;
   }
@@ -543,7 +543,7 @@ draw_line_ent_to_ent(ent1, ent2) {
   }
   ent1 endon("death");
   ent2 endon("death");
-  while (1) {
+  while(1) {
     line(ent1.origin, ent2.origin);
     wait(0.05);
   }
@@ -559,7 +559,7 @@ draw_line_ent_to_pos(ent, pos, end_on) {
   if(isDefined(end_on)) {
     ent endon(end_on);
   }
-  while (1) {
+  while(1) {
     line(ent.origin, pos);
     wait(0.05);
   }
@@ -574,7 +574,7 @@ debug_print(msg) {
 debug_blocker(pos, rad, height) {
   self notify("stop_debug_blocker");
   self endon("stop_debug_blocker");
-  for (;;) {
+  for(;;) {
     if(GetDvarInt("zombie_debug") != 1) {
       return;
     }
@@ -586,7 +586,7 @@ debug_blocker(pos, rad, height) {
 drawcylinder(pos, rad, height) {
   currad = rad;
   curheight = height;
-  for (r = 0; r < 20; r++) {
+  for(r = 0; r < 20; r++) {
     theta = r / 20 * 360;
     theta2 = (r + 1) / 20 * 360;
     line(pos + (cos(theta) * currad, sin(theta) * currad, 0), pos + (cos(theta2) * currad, sin(theta2) * currad, 0));
@@ -604,7 +604,7 @@ print3d_at_pos(msg, pos, thread_endon, offset) {
   if(!isDefined(offset)) {
     offset = (0, 0, 0);
   }
-  while (1) {
+  while(1) {
     print3d(self.origin + offset, msg);
     wait(0.05);
   }
@@ -612,12 +612,12 @@ print3d_at_pos(msg, pos, thread_endon, offset) {
 
 debug_breadcrumbs() {
   self endon("disconnect");
-  while (1) {
+  while(1) {
     if(GetDvarInt("zombie_debug") != 1) {
       wait(1);
       continue;
     }
-    for (i = 0; i < self.zombie_breadcrumbs.size; i++) {
+    for(i = 0; i < self.zombie_breadcrumbs.size; i++) {
       drawcylinder(self.zombie_breadcrumbs[i], 5, 5);
     }
     wait(0.05);
@@ -625,14 +625,14 @@ debug_breadcrumbs() {
 }
 
 debug_attack_spots_taken() {
-  while (1) {
+  while(1) {
     if(GetDvarInt("zombie_debug") != 2) {
       wait(1);
       continue;
     }
     wait(0.05);
     count = 0;
-    for (i = 0; i < self.attack_spots_taken.size; i++) {
+    for(i = 0; i < self.attack_spots_taken.size; i++) {
       if(self.attack_spots_taken[i]) {
         count++;
       }
@@ -646,7 +646,7 @@ float_print3d(msg, time) {
   self endon("death");
   time = GetTime() + (time * 1000);
   offset = (0, 0, 72);
-  while (GetTime() < time) {
+  while(GetTime() < time) {
     offset = offset + (0, 0, 2);
     print3d(self.origin + offset, msg, (1, 1, 1));
     wait(0.05);
@@ -664,7 +664,7 @@ do_player_vo(snd, variation_count) {
   }
   if(level.player_is_speaking == 0) {
     level.player_is_speaking = 1;
-    self playsound(sound, "sound_done");
+    self playSound(sound, "sound_done");
     self waittill("sound_done");
     wait(2);
     level.player_is_speaking = 0;
@@ -683,7 +683,7 @@ player_killstreak_timer() {
   if(!isDefined(self.timerIsrunning)) {
     self.timerIsrunning = 0;
   }
-  while (1) {
+  while(1) {
     self waittill("zom_kill");
     self.killcounter++;
     if(self.timerIsrunning != 1) {
@@ -695,7 +695,7 @@ player_killstreak_timer() {
 
 timer_actual(kills, time) {
   timer = gettime() + (time * 1000);
-  while (getTime() < timer) {
+  while(getTime() < timer) {
     if(self.killcounter > kills) {
       self play_killstreak_dialog();
       wait(1);
@@ -714,7 +714,7 @@ play_killstreak_dialog() {
   if(!isDefined(self.vox_killstreak)) {
     num_variants = maps\_zombiemode_spawner::get_number_variants(player_index + "vox_killstreak");
     self.vox_killstreak = [];
-    for (i = 0; i < num_variants; i++) {
+    for(i = 0; i < num_variants; i++) {
       self.vox_killstreak[self.vox_killstreak.size] = "vox_killstreak_" + i;
     }
     self.vox_killstreak_available = self.vox_killstreak;
@@ -734,7 +734,7 @@ do_player_killstreak_dialog(player_index, sound_to_play, waittime) {
   }
   if(level.player_is_speaking != 1) {
     level.player_is_speaking = 1;
-    self playsound(player_index + sound_to_play, "sound_done" + sound_to_play);
+    self playSound(player_index + sound_to_play, "sound_done" + sound_to_play);
     self waittill("sound_done" + sound_to_play);
     wait(waittime);
     level.player_is_speaking = 0;
@@ -753,7 +753,7 @@ enemy_is_dog() {
 
 really_play_2D_sound(sound) {
   temp_ent = spawn("script_origin", (0, 0, 0));
-  temp_ent playsound(sound, sound + "wait");
+  temp_ent playSound(sound, sound + "wait");
   temp_ent waittill(sound + "wait");
   wait(0.05);
   temp_ent delete();

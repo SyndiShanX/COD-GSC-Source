@@ -13,21 +13,21 @@
 #namespace dragon_strike;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_dragon_strike", & __init__, undefined, undefined);
+  system::register("zm_weap_dragon_strike", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("scriptmover", "dragon_strike_spawn_fx", 12000, 1, "int", & dragon_strike_spawn_fx, 0, 0);
-  clientfield::register("scriptmover", "dragon_strike_marker_on", 12000, 1, "int", & dragon_strike_marker_on, 0, 0);
-  clientfield::register("scriptmover", "dragon_strike_marker_fx", 12000, 1, "counter", & dragon_strike_marker_fx, 0, 0);
-  clientfield::register("scriptmover", "dragon_strike_marker_upgraded_fx", 12000, 1, "counter", & dragon_strike_marker_upgraded_fx, 0, 0);
-  clientfield::register("scriptmover", "dragon_strike_marker_invalid_fx", 12000, 1, "counter", & dragon_strike_marker_invalid_fx, 0, 0);
-  clientfield::register("scriptmover", "dragon_strike_marker_upgraded_invalid_fx", 12000, 1, "counter", & dragon_strike_marker_upgraded_invalid_fx, 0, 0);
-  clientfield::register("scriptmover", "dragon_strike_flare_fx", 12000, 1, "int", & dragon_strike_flare_fx, 0, 0);
-  clientfield::register("scriptmover", "dragon_strike_marker_fx_fadeout", 12000, 1, "counter", & dragon_strike_marker_fx_fadeout, 0, 0);
-  clientfield::register("scriptmover", "dragon_strike_marker_upgraded_fx_fadeout", 12000, 1, "counter", & dragon_strike_marker_upgraded_fx_fadeout, 0, 0);
-  clientfield::register("actor", "dragon_strike_zombie_fire", 12000, 2, "int", & dragon_strike_zombie_fire, 0, 0);
-  clientfield::register("vehicle", "dragon_strike_zombie_fire", 12000, 2, "int", & dragon_strike_zombie_fire, 0, 0);
+  clientfield::register("scriptmover", "dragon_strike_spawn_fx", 12000, 1, "int", &dragon_strike_spawn_fx, 0, 0);
+  clientfield::register("scriptmover", "dragon_strike_marker_on", 12000, 1, "int", &dragon_strike_marker_on, 0, 0);
+  clientfield::register("scriptmover", "dragon_strike_marker_fx", 12000, 1, "counter", &dragon_strike_marker_fx, 0, 0);
+  clientfield::register("scriptmover", "dragon_strike_marker_upgraded_fx", 12000, 1, "counter", &dragon_strike_marker_upgraded_fx, 0, 0);
+  clientfield::register("scriptmover", "dragon_strike_marker_invalid_fx", 12000, 1, "counter", &dragon_strike_marker_invalid_fx, 0, 0);
+  clientfield::register("scriptmover", "dragon_strike_marker_upgraded_invalid_fx", 12000, 1, "counter", &dragon_strike_marker_upgraded_invalid_fx, 0, 0);
+  clientfield::register("scriptmover", "dragon_strike_flare_fx", 12000, 1, "int", &dragon_strike_flare_fx, 0, 0);
+  clientfield::register("scriptmover", "dragon_strike_marker_fx_fadeout", 12000, 1, "counter", &dragon_strike_marker_fx_fadeout, 0, 0);
+  clientfield::register("scriptmover", "dragon_strike_marker_upgraded_fx_fadeout", 12000, 1, "counter", &dragon_strike_marker_upgraded_fx_fadeout, 0, 0);
+  clientfield::register("actor", "dragon_strike_zombie_fire", 12000, 2, "int", &dragon_strike_zombie_fire, 0, 0);
+  clientfield::register("vehicle", "dragon_strike_zombie_fire", 12000, 2, "int", &dragon_strike_zombie_fire, 0, 0);
   clientfield::register("clientuimodel", "dragon_strike_invalid_use", 12000, 1, "counter", undefined, 0, 0);
   clientfield::register("clientuimodel", "hudItems.showDpadRight_DragonStrike", 12000, 1, "int", undefined, 0, 0);
   level._effect["dragon_strike_portal"] = "dlc3/stalingrad/fx_dragonstrike_portal_flash";
@@ -39,9 +39,9 @@ function __init__() {
 
 function dragon_strike_spawn_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    playfxontag(localclientnum, level._effect["dragon_strike_portal"], self, "tag_neck_fx");
-    playfxontag(localclientnum, level._effect["dragon_strike_mouth"], self, "tag_throat_fx");
-    playfxontag(localclientnum, level._effect["dragon_strike_tongue"], self, "tag_mouth_floor_fx");
+    playFXOnTag(localclientnum, level._effect["dragon_strike_portal"], self, "tag_neck_fx");
+    playFXOnTag(localclientnum, level._effect["dragon_strike_mouth"], self, "tag_throat_fx");
+    playFXOnTag(localclientnum, level._effect["dragon_strike_tongue"], self, "tag_mouth_floor_fx");
   }
 }
 
@@ -58,7 +58,7 @@ function dragon_strike_marker_on(localclientnum, oldval, newval, bnewent, biniti
 function function_778495b0(localclientnum) {
   self endon("hash_e98f7ec4");
   self endon("entityshutdown");
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     self dragonstrike_setposition(self.origin);
     wait(0.016);
   }
@@ -82,8 +82,8 @@ function dragon_strike_marker_upgraded_invalid_fx(localclientnum, oldval, newval
 
 function dragon_strike_flare_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self.fx_flare = playfx(localclientnum, level._effect["dragon_strike_beacon"], self.origin);
-  } else if(isdefined(self.fx_flare)) {
+    self.fx_flare = playFX(localclientnum, level._effect["dragon_strike_beacon"], self.origin);
+  } else if(isDefined(self.fx_flare)) {
     deletefx(localclientnum, self.fx_flare, 1);
     self.fx_flare = undefined;
   }
@@ -101,7 +101,7 @@ function function_1ba92b11(var_6d056a0e, var_9ad65443, var_cddc37e, var_76d07324
   var_e0a873d1 = var_6d056a0e / 16;
   var_24ce51da = var_9ad65443 / 16;
   var_1e73d761 = var_cddc37e / 16;
-  for (i = 0; i < 16; i++) {
+  for(i = 0; i < 16; i++) {
     var_6d056a0e = var_6d056a0e - var_e0a873d1;
     var_9ad65443 = var_9ad65443 - var_24ce51da;
     var_cddc37e = var_cddc37e - var_1e73d761;
@@ -116,12 +116,12 @@ function dragon_strike_zombie_fire(localclientnum, oldval, newval, bnewent, bini
   } else {
     str_tag = "j_spinelower";
     v_tag = self gettagorigin(str_tag);
-    if(!isdefined(v_tag)) {
+    if(!isDefined(v_tag)) {
       str_tag = "tag_origin";
     }
     self.var_9f5c18b = 1;
-    if(isdefined(self)) {
-      self.dragon_strike_zombie_fire = playfxontag(localclientnum, level._effect["dragon_strike_zombie_fire"], self, str_tag);
+    if(isDefined(self)) {
+      self.dragon_strike_zombie_fire = playFXOnTag(localclientnum, level._effect["dragon_strike_zombie_fire"], self, str_tag);
       self thread function_3cc1555d(localclientnum);
     }
   }
@@ -130,7 +130,7 @@ function dragon_strike_zombie_fire(localclientnum, oldval, newval, bnewent, bini
 function function_3cc1555d(localclientnum) {
   self endon("entityshutdown");
   wait(12);
-  if(isdefined(self) && isalive(self)) {
+  if(isDefined(self) && isalive(self)) {
     stopfx(localclientnum, self.dragon_strike_zombie_fire);
     self.var_9f5c18b = 0;
   }

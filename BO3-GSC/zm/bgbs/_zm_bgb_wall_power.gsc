@@ -13,14 +13,14 @@
 #namespace zm_bgb_wall_power;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_wall_power", & __init__, undefined, "bgb");
+  system::register("zm_bgb_wall_power", &__init__, undefined, "bgb");
 }
 
 function __init__() {
-  if(!(isdefined(level.bgb_in_use) && level.bgb_in_use)) {
+  if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
-  bgb::register("zm_bgb_wall_power", "event", & event, undefined, undefined, undefined);
+  bgb::register("zm_bgb_wall_power", "event", &event, undefined, undefined, undefined);
 }
 
 function event() {

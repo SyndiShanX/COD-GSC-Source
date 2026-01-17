@@ -11,7 +11,6 @@ main() {
 }
 
 precacheFX() {
-
   //Player Footstep fx
   level._effect["footstep_snow_small"] = loadfx("impacts/footstep_snow_small");
   level._effect["footstep_snow"] = loadfx("impacts/footstep_snow");
@@ -81,5 +80,4 @@ precacheFX() {
   level._effect["avalanche_start"] = loadfx("snow/avalanche_start");
   level._effect["avalanche_start2"] = loadfx("snow/avalanche_start2");
   level._effect["avalanche_loop_large"] = loadfx("snow/avalanche_loop_large");
-
 }

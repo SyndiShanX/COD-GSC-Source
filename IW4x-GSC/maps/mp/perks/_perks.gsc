@@ -205,7 +205,6 @@ givePerk(perkName) {
   }
 
   self _setPerk(perkName);
-
 }
 
 validatePerk(perkIndex, perkName) {
@@ -218,7 +217,7 @@ validatePerk(perkIndex, perkName) {
 }
 
 onPlayerConnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connected", player);
     player thread onPlayerSpawned();
   }
@@ -231,7 +230,7 @@ onPlayerSpawned() {
   self.weaponList = [];
   self.omaClassChanged = false;
 
-  for (;;) {
+  for(;;) {
     self waittill("spawned_player");
 
     self.omaClassChanged = false;
@@ -241,7 +240,7 @@ onPlayerSpawned() {
 
 drawLine(start, end, timeSlice) {
   drawTime = int(timeSlice * 20);
-  for (time = 0; time < drawTime; time++) {
+  for(time = 0; time < drawTime; time++) {
     line(start, end, (1, 0, 0), false, 1);
     wait(0.05);
   }
@@ -287,7 +286,7 @@ cac_modified_damage(victim, attacker, damage, meansofdeath, weapon, impactPoint,
     damageAdd += 200;
 
   if(!GetDvarInt("bg_replace_painkiller_with_adrenaline") && victim _hasperk("specialty_combathigh")) {
-    if(IsDefined(self.damageBlockedTotal) && (!level.teamBased || (isDefined(attacker) && isDefined(attacker.team) && victim.team != attacker.team))) {
+    if(isDefined(self.damageBlockedTotal) && (!level.teamBased || (isDefined(attacker) && isDefined(attacker.team) && victim.team != attacker.team))) {
       damageTotal = damage + damageAdd;
       damageBlocked = (damageTotal - (damageTotal / 3));
       self.damageBlockedTotal += damageBlocked;
@@ -329,7 +328,6 @@ initPerkDvars() {
 // Info: Called every time player spawns during loadout stage
 cac_selector() {
   perks = self.specialty;
-
 }
 
 gambitUseTracker() {

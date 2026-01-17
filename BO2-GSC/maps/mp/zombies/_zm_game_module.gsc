@@ -24,7 +24,7 @@ register_game_module(index, module_name, pre_init_func, post_init_func, pre_init
       assert(level._game_modules[i].index != index, "A Game module is already registered for index (" + index + ")");
   }
 
-  level._game_modules[level._num_registered_game_modules] = spawnstruct();
+  level._game_modules[level._num_registered_game_modules] = spawnStruct();
   level._game_modules[level._num_registered_game_modules].index = index;
   level._game_modules[level._num_registered_game_modules].module_name = module_name;
   level._game_modules[level._num_registered_game_modules].pre_init_func = pre_init_func;
@@ -109,7 +109,7 @@ turn_power_on_and_open_doors() {
   level.power_local_doors_globally = 1;
   flag_set("power_on");
   level setclientfield("zombie_power_on", 1);
-  zombie_doors = getentarray("zombie_door", "targetname");
+  zombie_doors = getEntArray("zombie_door", "targetname");
 
   foreach(door in zombie_doors) {
     if(isDefined(door.script_noteworthy) && door.script_noteworthy == "electric_door") {
@@ -322,7 +322,7 @@ game_module_custom_intermission(intermission_struct) {
   if(!isDefined(level.intermission_cam_model)) {
     level.intermission_cam_model = spawn("script_model", s_point.origin);
     level.intermission_cam_model.angles = s_point.angles;
-    level.intermission_cam_model setmodel("tag_origin");
+    level.intermission_cam_model setModel("tag_origin");
   }
 
   self.game_over_bg = newclienthudelem(self);
@@ -364,10 +364,10 @@ create_fireworks(launch_spots, min_wait, max_wait, randomize) {
 
 fireworks_launch(launch_spot) {
   firework = spawn("script_model", launch_spot.origin + (randomintrange(-60, 60), randomintrange(-60, 60), 0));
-  firework setmodel("tag_origin");
+  firework setModel("tag_origin");
   wait_network_frame();
-  playfxontag(level._effect["fw_trail_cheap"], firework, "tag_origin");
-  firework playloopsound("zmb_souls_loop", 0.75);
+  playFXOnTag(level._effect["fw_trail_cheap"], firework, "tag_origin");
+  firework playLoopSound("zmb_souls_loop", 0.75);
   dest = launch_spot;
 
   while(isDefined(dest) && isDefined(dest.target)) {
@@ -381,7 +381,7 @@ fireworks_launch(launch_spot) {
     firework waittill("movedone");
   }
 
-  firework playsound("zmb_souls_end");
-  playfx(level._effect["fw_pre_burst"], firework.origin);
+  firework playSound("zmb_souls_end");
+  playFX(level._effect["fw_pre_burst"], firework.origin);
   firework delete();
 }

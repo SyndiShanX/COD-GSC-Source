@@ -17,7 +17,7 @@
 
 init_flamethrower_triggers() {
   flag_wait("initial_players_connected");
-  level.flamethrower_trigger_array = getentarray("flamethrower_trigger", "script_noteworthy");
+  level.flamethrower_trigger_array = getEntArray("flamethrower_trigger", "script_noteworthy");
   assert(isDefined(level.flamethrower_trigger_array) && level.flamethrower_trigger_array.size >= 4);
 
   for(i = 0; i < level.flamethrower_trigger_array.size; i++)
@@ -247,7 +247,7 @@ zombie_burning_fx() {
   while(true) {
     if(isDefined(level._effect) && isDefined(level._effect["character_fire_death_torso"])) {
       if(!self.isdog)
-        playfxontag(level._effect["character_fire_death_torso"], self, "J_SpineLower");
+        playFXOnTag(level._effect["character_fire_death_torso"], self, "J_SpineLower");
     }
 
     if(isDefined(level._effect) && isDefined(level._effect["character_fire_death_sm"])) {
@@ -273,7 +273,7 @@ zombie_burning_fx() {
 }
 
 zombie_burning_audio() {
-  self playloopsound("zmb_fire_loop");
+  self playLoopSound("zmb_fire_loop");
   self waittill_any("death", "stop_flame_damage");
 
   if(isDefined(self) && isalive(self))
@@ -287,12 +287,12 @@ zombie_burning_dmg() {
   damage = 2;
 
   while(true) {
-    eyeorigin = self geteye();
+    eyeorigin = self getEye();
     players = get_players();
 
     for(i = 0; i < players.size; i++) {
       if(is_player_valid(players[i], 1, 0)) {
-        playereye = players[i] geteye();
+        playereye = players[i] getEye();
 
         if(distancesquared(eyeorigin, playereye) < damageradius * damageradius) {
           players[i] dodamage(damage, self.origin, self);
@@ -328,9 +328,9 @@ explode_on_death() {
 
   if(is_mature()) {
     if(isDefined(level._effect["zomb_gib"]))
-      playfx(level._effect["zomb_gib"], self gettagorigin(tag));
+      playFX(level._effect["zomb_gib"], self gettagorigin(tag));
   } else if(isDefined(level._effect["spawn_cloud"]))
-    playfx(level._effect["spawn_cloud"], self gettagorigin(tag));
+    playFX(level._effect["spawn_cloud"], self gettagorigin(tag));
 
   self radiusdamage(self.origin, 128, 30, 15, undefined, "MOD_EXPLOSIVE");
   self ghost();
@@ -469,7 +469,7 @@ mechz_kill_flamethrower_watcher() {
 }
 
 mechz_flamethrower_cleanup() {
-  self.fx_field = self.fx_field & ~64;
+  self.fx_field = self.fx_field &~64;
   self setclientfield("mechz_fx", self.fx_field);
   self.firing = 0;
   self.doing_tank_sweep = 0;

@@ -667,5 +667,4 @@ main() {
   ent.v["origin"] = (918.466, 1791.94, 557.907);
   ent.v["angles"] = (270, 0, 0);
   ent.v["soundalias"] = "emt_metal_rattle_dull";
-
 }

@@ -9,7 +9,7 @@
 #namespace ability_util;
 
 function gadget_is_type(slot, type) {
-  if(!isdefined(self._gadgets_player[slot])) {
+  if(!isDefined(self._gadgets_player[slot])) {
     return 0;
   }
   return self._gadgets_player[slot].gadget_type == type;
@@ -17,7 +17,7 @@ function gadget_is_type(slot, type) {
 
 function gadget_slot_for_type(type) {
   invalid = 3;
-  for (i = 0; i < 3; i++) {
+  for(i = 0; i < 3; i++) {
     if(!self gadget_is_type(i, type)) {
       continue;
     }
@@ -31,7 +31,7 @@ function gadget_is_camo_suit_on() {
 }
 
 function gadget_combat_efficiency_enabled() {
-  if(isdefined(self._gadget_combat_efficiency)) {
+  if(isDefined(self._gadget_combat_efficiency)) {
     return self._gadget_combat_efficiency;
   }
   return 0;
@@ -82,19 +82,19 @@ function gadget_reset(gadgetweapon, changedclass, roundbased, firstround) {
   }
   slot = self gadgetgetslot(gadgetweapon);
   if(slot >= 0 && slot < 3) {
-    if(isdefined(self.pers["held_gadgets_power"]) && isdefined(self.pers["held_gadgets_power"][gadgetweapon])) {
+    if(isDefined(self.pers["held_gadgets_power"]) && isDefined(self.pers["held_gadgets_power"][gadgetweapon])) {
       self gadgetpowerset(slot, self.pers["held_gadgets_power"][gadgetweapon]);
     } else {
-      if(isdefined(self.pers["held_gadgets_power"]) && isdefined(self.pers[# "hash_c35f137f"]) && isdefined(self.pers["held_gadgets_power"][self.pers[# "hash_c35f137f"]])) {
+      if(isDefined(self.pers["held_gadgets_power"]) && isDefined(self.pers[# "hash_c35f137f"]) && isDefined(self.pers["held_gadgets_power"][self.pers[# "hash_c35f137f"]])) {
         self gadgetpowerset(slot, self.pers["held_gadgets_power"][self.pers[# "hash_c35f137f"]]);
-      } else if(isdefined(self.pers["held_gadgets_power"]) && isdefined(self.pers[# "hash_65987563"]) && isdefined(self.pers["held_gadgets_power"][self.pers[# "hash_65987563"]])) {
+      } else if(isDefined(self.pers["held_gadgets_power"]) && isDefined(self.pers[# "hash_65987563"]) && isDefined(self.pers["held_gadgets_power"][self.pers[# "hash_65987563"]])) {
         self gadgetpowerset(slot, self.pers["held_gadgets_power"][self.pers[# "hash_65987563"]]);
       }
     }
     resetonclasschange = changedclass && gadgetweapon.gadget_power_reset_on_class_change;
-    resetonfirstround = !isdefined(self.firstspawn) && (!roundbased || firstround);
-    resetonroundswitch = !isdefined(self.firstspawn) && roundbased && !firstround && gadgetweapon.gadget_power_reset_on_round_switch;
-    resetonteamchanged = isdefined(self.firstspawn) && (isdefined(self.switchedteamsresetgadgets) && self.switchedteamsresetgadgets) && gadgetweapon.gadget_power_reset_on_team_change;
+    resetonfirstround = !isDefined(self.firstspawn) && (!roundbased || firstround);
+    resetonroundswitch = !isDefined(self.firstspawn) && roundbased && !firstround && gadgetweapon.gadget_power_reset_on_round_switch;
+    resetonteamchanged = isDefined(self.firstspawn) && (isDefined(self.switchedteamsresetgadgets) && self.switchedteamsresetgadgets) && gadgetweapon.gadget_power_reset_on_team_change;
     if(resetonclasschange || resetonfirstround || resetonroundswitch || resetonteamchanged) {
       self gadgetpowerreset(slot);
       self gadgetcharging(slot, 1);

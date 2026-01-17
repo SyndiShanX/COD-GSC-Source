@@ -8,7 +8,7 @@
 #namespace teamset;
 
 function autoexec __init__sytem__() {
-  system::register("teamset_seals", & __init__, undefined, undefined);
+  system::register("teamset_seals", &__init__, undefined, undefined);
 }
 
 function __init__() {

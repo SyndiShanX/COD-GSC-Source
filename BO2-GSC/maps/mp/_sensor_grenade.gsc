@@ -35,7 +35,7 @@ onspawnsensorgrenade(watcher, player) {
   self setowner(player);
   self setteam(player.team);
   self.owner = player;
-  self playloopsound("fly_sensor_nade_lp");
+  self playLoopSound("fly_sensor_nade_lp");
   self maps\mp\_hacker_tool::registerwithhackertool(level.equipmenthackertoolradius, level.equipmenthackertooltimems);
   player addweaponstat("sensor_grenade_mp", "used", 1);
   self thread watchforstationary(player);
@@ -71,7 +71,7 @@ checkfortracking(origin) {
     if(player isenemyplayer(self.owner)) {
       if(!player hasperk("specialty_nomotionsensor")) {
         if(distancesquared(player.origin, origin) < 562500) {
-          trace = bullettrace(origin, player.origin + vectorscale((0, 0, 1), 12.0), 0, player);
+          trace = bulletTrace(origin, player.origin + vectorscale((0, 0, 1), 12.0), 0, player);
 
           if(trace["fraction"] == 1)
             self.owner tracksensorgrenadevictim(player);
@@ -104,7 +104,7 @@ sensorgrenadedestroyed(attacker, weaponname) {
   from_emp = maps\mp\killstreaks\_emp::isempweapon(weaponname);
 
   if(!from_emp)
-    playfx(level._equipment_explode_fx, self.origin);
+    playFX(level._equipment_explode_fx, self.origin);
 
   if(isDefined(attacker)) {
     if(self.owner isenemyplayer(attacker)) {
@@ -120,7 +120,7 @@ sensorgrenadedestroyed(attacker, weaponname) {
 watchsensorgrenadedamage(watcher) {
   self endon("death");
   self endon("hacked");
-  self setcandamage(1);
+  self setCanDamage(1);
   damagemax = 1;
 
   if(!self maps\mp\_utility::ishacked())

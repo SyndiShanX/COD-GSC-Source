@@ -9,7 +9,7 @@ main() {
 
 inventory_create(shader, show_icon) {
   if(true)
-    return spawnstruct();
+    return spawnStruct();
   assert(isDefined(shader));
   if(!isDefined(show_icon))
     show_icon = false;
@@ -51,7 +51,7 @@ inventroy_update() {
   y = 8;
   gap = 42;
   position = 0;
-  for (i = 0; i < level.inventory.size; i++) {
+  for(i = 0; i < level.inventory.size; i++) {
     if(level.inventory[i].show_icon) {
       new_y = y + (gap * position);
       if(new_y != level.inventory[i].y) {
@@ -80,7 +80,7 @@ inventory_destroy() {
   index = 0;
   old_inventory = level.inventory;
   level.inventory = [];
-  for (i = 0; i < old_inventory.size; i++) {
+  for(i = 0; i < old_inventory.size; i++) {
     if(isDefined(old_inventory[i]))
       level.inventory[level.inventory.size] = old_inventory[i];
   }

@@ -85,5 +85,4 @@ gasmask_on_cracked_3() {
   }
 }
 
-gasmask_breathing() {
-}
+gasmask_breathing() {}

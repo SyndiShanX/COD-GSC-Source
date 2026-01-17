@@ -53,7 +53,7 @@ cqb_gettranstime() {
 }
 
 cqb_animate(var_0, var_1, var_2) {
-  if(isdefined(self.timeofmaincqbupdate))
+  if(isDefined(self.timeofmaincqbupdate))
     var_3 = self.timeofmaincqbupdate;
   else
     var_3 = 0;
@@ -79,7 +79,7 @@ cqb_animate(var_0, var_1, var_2) {
 }
 
 determinecqbanim() {
-  if(isdefined(self.custommoveanimset) && isdefined(self.custommoveanimset["cqb"]))
+  if(isDefined(self.custommoveanimset) && isDefined(self.custommoveanimset["cqb"]))
     return animscripts\run::getrunanim();
 
   if(animscripts\stairs_utility::isonstairs()) {
@@ -90,15 +90,15 @@ determinecqbanim() {
   if(self.movemode == "walk")
     return animscripts\utility::lookupanim("cqb", "move_f");
 
-  if(isdefined(self.a.bdisablemovetwitch) && self.a.bdisablemovetwitch)
+  if(isDefined(self.a.bdisablemovetwitch) && self.a.bdisablemovetwitch)
     return animscripts\utility::lookupanim("cqb", "straight");
 
-  if(!isdefined(self.a.runloopcount))
+  if(!isDefined(self.a.runloopcount))
     return animscripts\utility::lookupanim("cqb", "straight");
 
   var_1 = animscripts\utility::lookupanim("cqb", "straight_twitch");
 
-  if(!isdefined(var_1) || var_1.size == 0)
+  if(!isDefined(var_1) || var_1.size == 0)
     return animscripts\utility::lookupanim("cqb", "straight");
 
   var_2 = animscripts\utility::getrandomintfromseed(self.a.runloopcount, 4);
@@ -142,16 +142,16 @@ cqbtracking() {
 
 setupcqbpointsofinterest() {
   level.cqbpointsofinterest = [];
-  var_0 = getentarray("cqb_point_of_interest", "targetname");
+  var_0 = getEntArray("cqb_point_of_interest", "targetname");
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++) {
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     level.cqbpointsofinterest[var_1] = var_0[var_1].origin;
     var_0[var_1] delete();
   }
 }
 
 findcqbpointsofinterest() {
-  if(isdefined(anim.findingcqbpointsofinterest)) {
+  if(isDefined(anim.findingcqbpointsofinterest)) {
     return;
   }
   anim.findingcqbpointsofinterest = 1;
@@ -159,26 +159,26 @@ findcqbpointsofinterest() {
   if(!level.cqbpointsofinterest.size) {
     return;
   }
-  for (;;) {
+  for(;;) {
     var_0 = getaiarray();
     var_1 = 0;
 
     foreach(var_3 in var_0) {
-      if(isalive(var_3) && var_3 animscripts\utility::iscqbwalking() && !isdefined(var_3.disable_cqb_points_of_interest)) {
+      if(isalive(var_3) && var_3 animscripts\utility::iscqbwalking() && !isDefined(var_3.disable_cqb_points_of_interest)) {
         var_4 = var_3.a.movement != "stop";
         var_5 = (var_3.origin[0], var_3.origin[1], var_3 getshootatpos()[2]);
         var_6 = var_5;
-        var_7 = anglestoforward(var_3.angles);
+        var_7 = anglesToForward(var_3.angles);
 
         if(var_4) {
-          var_8 = bullettrace(var_6, var_6 + var_7 * 128, 0, undefined);
+          var_8 = bulletTrace(var_6, var_6 + var_7 * 128, 0, undefined);
           var_6 = var_8["position"];
         }
 
         var_9 = -1;
         var_10 = 1048576;
 
-        for (var_11 = 0; var_11 < level.cqbpointsofinterest.size; var_11++) {
+        for(var_11 = 0; var_11 < level.cqbpointsofinterest.size; var_11++) {
           var_12 = level.cqbpointsofinterest[var_11];
           var_13 = distancesquared(var_12, var_6);
 
@@ -230,7 +230,7 @@ cqb_scaleforslowdown(var_0, var_1) {
   self.cqb_slowdown_anim = var_0;
   self.cqb_slowdown_move_time = var_1;
 
-  if(isdefined(self.cqb_slowdown_watcher_running)) {
+  if(isDefined(self.cqb_slowdown_watcher_running)) {
     return;
   }
   self.cqb_slowdown_watcher_running = 1;
@@ -246,10 +246,10 @@ cqb_slowdownwatcher() {
   self endon("move_interrupt");
   self endon("end_cqb_slowdown_watcher");
 
-  if(isdefined(self.cqb_slowdown_scale) && self.cqb_slowdown_scale != 1)
+  if(isDefined(self.cqb_slowdown_scale) && self.cqb_slowdown_scale != 1)
     self waittill("slow_down_stop");
 
-  for (;;) {
+  for(;;) {
     cqb_slowdownscale(1);
     self waittill("slow_down_start");
     cqb_slowdownscale(0.75);
@@ -268,7 +268,7 @@ cqb_slowdownwatcher_ender() {
   self endon("move_interrupt");
   wait(self.cqb_slowdown_move_time);
 
-  while (animscripts\utility::shouldcqb())
+  while(animscripts\utility::shouldcqb())
     wait(self.cqb_slowdown_move_time);
 
   self notify("end_cqb_slowdown_watcher");

@@ -45,38 +45,38 @@ c4_location(tag, origin_offset, angles_offset, org) {
   //self ---> the entity the c4 is placed on
   tag_origin = undefined;
 
-  if(!isdefined(origin_offset))
+  if(!isDefined(origin_offset))
     origin_offset = (0, 0, 0);
-  if(!isdefined(angles_offset))
+  if(!isDefined(angles_offset))
     angles_offset = (0, 0, 0);
 
-  if(isdefined(tag))
+  if(isDefined(tag))
     tag_origin = self gettagorigin(tag);
-  else if(isdefined(org))
+  else if(isDefined(org))
     tag_origin = org;
   else
     assertmsg("need to specify either a 'tag' or an 'org' parameter to attach the c4 to");
 
   c4_model = spawn("script_model", tag_origin + origin_offset);
-  c4_model setmodel("weapon_c4_obj");
+  c4_model setModel("weapon_c4_obj");
 
-  if(isdefined(tag))
+  if(isDefined(tag))
     c4_model linkto(self, tag, origin_offset, angles_offset);
   else
     c4_model.angles = self.angles;
 
   c4_model.trigger = get_use_trigger();
-  // Press and hold &&1 to plant the explosives.
+  // Press and hold && 1 to plant the explosives.
   c4_model.trigger sethintstring(&"SCRIPT_PLATFORM_HINT_PLANTEXPLOSIVES");
 
-  if(isdefined(tag)) {
+  if(isDefined(tag)) {
     c4_model.trigger linkto(self, tag, origin_offset, angles_offset);
     c4_model.trigger.islinked = true;
   } else
     c4_model.trigger.origin = c4_model.origin;
 
   c4_model thread handle_use(self);
-  if(!isdefined(self.multiple_c4))
+  if(!isDefined(self.multiple_c4))
     c4_model thread handle_delete(self);
   c4_model thread handle_clear_c4(self);
 
@@ -96,10 +96,10 @@ handle_use(c4_target) {
   //c4_target ==> the entity the c4 is placed on
   c4_target endon("clear_c4");
 
-  if(!isdefined(c4_target.multiple_c4))
+  if(!isDefined(c4_target.multiple_c4))
     c4_target endon("c4_planted");
 
-  if(!isdefined(c4_target.c4_count))
+  if(!isDefined(c4_target.c4_count))
     c4_target.c4_count = 0;
 
   c4_target.c4_count++;
@@ -112,14 +112,14 @@ handle_use(c4_target) {
   self.trigger unlink();
   self.trigger release_use_trigger();
 
-  self playsound("c4_bounce_default");
-  self setmodel("weapon_c4");
+  self playSound("c4_bounce_default");
+  self setModel("weapon_c4");
 
   self thread playC4Effects();
 
   c4_target.c4_count--;
 
-  if(!isdefined(c4_target.multiple_c4) || !c4_target.c4_count)
+  if(!isDefined(c4_target.multiple_c4) || !c4_target.c4_count)
     player switch_to_detonator();
 
   self thread handle_detonation(c4_target, player);
@@ -141,17 +141,17 @@ handle_detonation(c4_target, player) {
   c4_target endon("clear_c4");
 
   player waittill("detonate");
-  playfx(level._effect["c4_explosion"], self.origin);
+  playFX(level._effect["c4_explosion"], self.origin);
 
   soundPlayer = spawn("script_origin", self.origin);
 
-  if(isdefined(level.c4_sound_override))
-    soundPlayer playsound("detpack_explo_main", "sound_done");
+  if(isDefined(level.c4_sound_override))
+    soundPlayer playSound("detpack_explo_main", "sound_done");
 
   self radiusdamage(self.origin, 256, 200, 50);
   earthquake(0.4, 1, self.origin, 1000);
 
-  if(isdefined(self))
+  if(isDefined(self))
     self delete();
 
   player thread remove_detonator();
@@ -169,13 +169,13 @@ handle_clear_c4(c4_target) {
 
   c4_target waittill("clear_c4");
 
-  if(!isdefined(self))
+  if(!isDefined(self)) {
     return;
-
-  if(isdefined(self.trigger.inuse) && self.trigger.inuse)
+  }
+  if(isDefined(self.trigger.inuse) && self.trigger.inuse)
     self.trigger release_use_trigger();
 
-  if(isdefined(self))
+  if(isDefined(self))
     self delete();
 
   level.player thread remove_detonator();
@@ -187,7 +187,7 @@ remove_detonator() {
   wait 1;
 
   had_empty_old_weapon = false;
-  if("c4" == self getcurrentweapon() && (isdefined(self.old_weapon))) {
+  if("c4" == self getcurrentweapon() && (isDefined(self.old_weapon))) {
     if(self.old_weapon == "none") {
       had_empty_old_weapon = true;
       self switchtoweapon(self GetWeaponsListPrimaries()[0]);
@@ -210,17 +210,17 @@ remove_detonator() {
 
 switch_to_detonator() {
   c4_weapon = undefined;
-  if(!isdefined(self.old_weapon))
+  if(!isDefined(self.old_weapon))
     self.old_weapon = self getcurrentweapon();
 
   // if the player doesn't have the C4 weapon give it to him.
   weapons = self GetWeaponsListAll();
-  for (i = 0; i < weapons.size; i++) {
+  for(i = 0; i < weapons.size; i++) {
     if(weapons[i] != "c4")
       continue;
     c4_weapon = weapons[i];
   }
-  if(!isdefined(c4_weapon)) {
+  if(!isDefined(c4_weapon)) {
     self giveWeapon("c4");
     self SetWeaponAmmoClip("c4", 0);
     self SetActionSlot(2, "weapon", "c4");
@@ -230,12 +230,12 @@ switch_to_detonator() {
 }
 
 get_use_trigger() {
-  ents = getentarray("generic_use_trigger", "targetname");
-  assertex(isdefined(ents) && ents.size > 0, "Missing use trigger with targetname: generic_use_trigger.");
-  for (i = 0; i < ents.size; i++) {
-    if(isdefined(ents[i].inuse) && ents[i].inuse)
+  ents = getEntArray("generic_use_trigger", "targetname");
+  assertex(isDefined(ents) && ents.size > 0, "Missing use trigger with targetname: generic_use_trigger.");
+  for(i = 0; i < ents.size; i++) {
+    if(isDefined(ents[i].inuse) && ents[i].inuse)
       continue;
-    if(!isdefined(ents[i].inuse))
+    if(!isDefined(ents[i].inuse))
       ents[i] enablelinkto();
     ents[i].inuse = true;
     ents[i].oldorigin = ents[i].origin;
@@ -245,8 +245,7 @@ get_use_trigger() {
 }
 
 release_use_trigger() {
-
-  if(isdefined(self.islinked))
+  if(isDefined(self.islinked))
     self unlink();
   self.islinked = undefined;
   self.origin = self.oldorigin;

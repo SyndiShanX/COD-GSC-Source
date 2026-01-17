@@ -11,8 +11,7 @@
 #include maps\la_sam;
 #include maps\createfx\la_1_fx;
 
-precache_util_fx() {
-}
+precache_util_fx() {}
 
 precache_scripted_fx() {
   level._effect["cellphone_glow"] = loadfx("light/fx_la_p6_cell_phone_glow");
@@ -237,8 +236,7 @@ createfx_setup() {
   maps\la_utility::load_gumps();
 }
 
-createfx_setup_gump1a() {
-}
+createfx_setup_gump1a() {}
 
 createfx_setup_gump1b() {
   run_scene_first_frame("cougar_crawl");
@@ -256,8 +254,7 @@ createfx_setup_gump1c() {
   delete_scene_all("grouprappel_tbone");
 }
 
-createfx_setup_gump1d() {
-}
+createfx_setup_gump1d() {}
 
 footsteps() {
   loadfx("bio/player/fx_footstep_dust");

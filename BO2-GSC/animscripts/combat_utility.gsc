@@ -16,8 +16,7 @@
 #include maps\_dds;
 #include maps\_damagefeedback;
 
-player_init() {
-}
+player_init() {}
 
 enemieswithinstandingrange() {
   enemydistancesq = self mygetenemysqdist();
@@ -375,7 +374,7 @@ shotgunpumpsound(animname) {
   self endon("shotgun_pump_sound_end");
   self thread stopshotgunpumpaftertime(2.0);
   self waittillmatch(animname, "rechamber");
-  self playsound("wpn_shotgun_pump");
+  self playSound("wpn_shotgun_pump");
   self notify("shotgun_pump_sound_end");
 }
 
@@ -1040,7 +1039,7 @@ watchgrenadetowardsplayer(nextgrenadetimetouse) {
 
 watchgrenadetowardsplayerinternal(nextgrenadetimetouse) {
   activegrenadetimer = self.activegrenadetimer;
-  timeoutobj = spawnstruct();
+  timeoutobj = spawnStruct();
   timeoutobj thread watchgrenadetowardsplayertimeout(5);
   timeoutobj endon("watchGrenadeTowardsPlayerTimeout");
   type = self.grenadeweapon;
@@ -1134,7 +1133,7 @@ detachgrenadeonscriptchange(model, tag) {
 }
 
 offsettoorigin(start) {
-  forward = anglestoforward(self.angles);
+  forward = anglesToForward(self.angles);
   right = anglestoright(self.angles);
   up = anglestoup(self.angles);
   forward = vectorscale(forward, start[0]);
@@ -1480,11 +1479,11 @@ proximitygrenadeaireactionfx(duration) {
 
   if(isDefined(self.isbigdog) && self.isbigdog) {
     if(isDefined(anim._effect["bigdog_emped"]))
-      playfxontag(anim._effect["bigdog_emped"], self, "tag_body_animate");
+      playFXOnTag(anim._effect["bigdog_emped"], self, "tag_body_animate");
   } else if(isDefined(level._effect["prox_grenade_shock"])) {
-    playfxontag(level._effect["prox_grenade_shock"], self, "J_SpineUpper");
+    playFXOnTag(level._effect["prox_grenade_shock"], self, "J_SpineUpper");
     wait(duration / 2);
-    playfxontag(level._effect["prox_grenade_shock"], self, "J_SpineUpper");
+    playFXOnTag(level._effect["prox_grenade_shock"], self, "J_SpineUpper");
   }
 }
 
@@ -1522,18 +1521,18 @@ randomfasteranimspeed() {
 }
 
 player_sees_my_scope() {
-  start = self geteye();
+  start = self getEye();
   players = get_players();
 
   foreach(player in players) {
     if(!self cansee(player)) {
       continue;
     }
-    end = player geteye();
+    end = player getEye();
     angles = vectortoangles(start - end);
-    forward = anglestoforward(angles);
+    forward = anglesToForward(angles);
     player_angles = player getplayerangles();
-    player_forward = anglestoforward(player_angles);
+    player_forward = anglesToForward(player_angles);
     dot = vectordot(forward, player_forward);
 
     if(dot < 0.805) {

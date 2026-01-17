@@ -50,7 +50,7 @@ event_parliament_setup(skipto) {
 }
 
 parliament_aa_tracers() {
-  emitters = GetEntArray("org_parliament_aa_emitter", "targetname");
+  emitters = getEntArray("org_parliament_aa_emitter", "targetname");
   ASSERTEX(array_validate(emitters), "Couldn't find parliament AA tracer emitters.");
   array_thread(emitters, maps\ber3b_fx::ambient_aaa_fx, "parliament_doors_open");
   level waittill("parliament_doors_open");
@@ -318,12 +318,12 @@ downstairs_doors_wait() {
 downstairs_door_opener() {
   animSpot = getstruct_safe("struct_parliament_downstairs_dooropen_spot", "targetname");
   waitNode1 = getnode_safe("node_parliament_doors_downstairs_wait1", "targetname");
-  while (!array_validate(get_allies_by_color("c"))) {
+  while(!array_validate(get_allies_by_color("c"))) {
     wait(0.1);
   }
   opener = undefined;
   redshirts = get_allies_by_color("c");
-  for (i = 0; i < redshirts.size; i++) {
+  for(i = 0; i < redshirts.size; i++) {
     if(is_active_ai(redshirts[i])) {
       opener = redshirts[i];
       break;
@@ -376,11 +376,11 @@ bug_player(lines, minBugInterval, maxBugInterval, ender) {
   theLine = undefined;
   lastLine = undefined;
   maxTries = 10;
-  while (1) {
+  while(1) {
     wait(RandomFloatRange(minBugInterval, maxBugInterval));
     foundOne = false;
     tries = 0;
-    while (!foundOne) {
+    while(!foundOne) {
       theLine = get_random(lines);
       if(!isDefined(lastLine)) {
         break;
@@ -404,7 +404,7 @@ bug_player(lines, minBugInterval, maxBugInterval, ender) {
 balcony_playerkills(requiredKills, timeout) {
   level.balcony_playerkills = 0;
   endTime = GetTime() + (timeout * 1000);
-  while ((level.balcony_playerkills < requiredKills) && (GetTime() < endTime)) {
+  while((level.balcony_playerkills < requiredKills) && (GetTime() < endTime)) {
     wait(0.1);
   }
   flag_set("first_balcony_russians_moveup");
@@ -412,7 +412,7 @@ balcony_playerkills(requiredKills, timeout) {
 
 balcony_threatbiases() {
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i] SetThreatBiasGroup("players");
   }
   SetIgnoreMeGroup("players", "parliament_floor_enemies");
@@ -428,7 +428,7 @@ kill_balcony_enemies() {
   trigger_wait("trig_parliament_defensive_line_entrance", "targetname");
   wait(5);
   ais = get_ai_group_ai("parliament_balcony_enemies");
-  for (i = 0; i < ais.size; i++) {
+  for(i = 0; i < ais.size; i++) {
     if(is_active_ai(ais[i])) {
       ais[i] DoDamage(ais[i].health + 1, ais[i].origin);
       wait(RandomFloatRange(3, 7));
@@ -448,8 +448,8 @@ parliament_molotovguy_spawnfunc() {
   wait(RandomFloatRange(0, 2));
   self.animname = "parliament_molotov_thrower";
   anime = "molotov_throw_custom";
-  while (1) {
-    forward = AnglesToForward(node.angles);
+  while(1) {
+    forward = anglesToForward(node.angles);
     targetDist = RandomIntRange(300, 700);
     target_pos = self.origin + vectorScale(forward, targetDist);
     self maps\_grenade_toss::force_grenade_toss(target_pos, "molotov", undefined, anime);
@@ -486,7 +486,7 @@ flamer_setup() {
 
 flamer_blow(flamer) {
   total_dmg = 0;
-  while (1) {
+  while(1) {
     flamer waittill("damage", amount, attacker, dir, point, mod);
     if(IsPlayer(attacker)) {
       if(flamer animscripts\utility::damageLocationIsAny("torso_upper", "torso_lower", "head", "neck", "right_arm_upper", "right_arm_lower", "left_arm_upper", "left_arm_lower")) {
@@ -505,7 +505,7 @@ flamer_blow(flamer) {
   }
   level thread flamer_blow_catch_splash_kills(flamer, attacker, 0.25);
   Earthquake(0.2, 0.2, flamer.origin, 1500);
-  PlayFX(level._effect["flameguy_explode"], flamer.origin + (0, 0, 50));
+  playFX(level._effect["flameguy_explode"], flamer.origin + (0, 0, 50));
   flamer.health = 50;
   attacker MagicGrenadeType("stick_grenade", flamer.origin + (-20, -25, 20), flamer.origin, 0.01);
   attacker MagicGrenadeType("stick_grenade", flamer.origin + (-25, -30, 10), flamer.origin, 0.01);
@@ -533,7 +533,7 @@ flamer_blow_catch_splash_kills(flamer, attacker, splashKillTimeWindow) {
   attacker.flamerSplashKills[flamerIndex] = 0;
   closeGuys = [];
   ais = GetAIArray("axis");
-  for (i = 0; i < ais.size; i++) {
+  for(i = 0; i < ais.size; i++) {
     if((Distance(ais[i].origin, flamer.origin) <= grenadeDist) && (ais[i] != flamer)) {
       closeGuys[closeGuys.size] = ais[i];
     }
@@ -545,7 +545,7 @@ flamer_blow_catch_splash_kills(flamer, attacker, splashKillTimeWindow) {
 
 flamer_blow_splash_kill_watcher(attacker, flamerIndex, splashKillTimeWindow) {
   endTime = GetTime() + (splashKillTimeWindow * 1000);
-  while (IsAlive(self) && endTime > GetTime()) {
+  while(IsAlive(self) && endTime > GetTime()) {
     wait(0.05);
   }
   if(!IsAlive(self)) {
@@ -572,7 +572,7 @@ spawn_podium_filler_enemies() {
 balcony_failsafe_spawn_podium_enemies(axisLowerLimit) {
   trig = getent_safe("trig_spawn_podium_enemies", "script_noteworthy");
   trig endon("trigger");
-  while (1) {
+  while(1) {
     axis = GetAIArray("axis");
     if(!isDefined(axis)) {
       break;
@@ -636,12 +636,12 @@ bazooka_team(trig) {
   guys bazookateam_runto_nodes(node_primary, node_secondary);
   guy_primary.animname = "fireteam_bazooka_primary";
   guy_secondary.animname = "fireteam_bazooka_secondary";
-  guy_primary SetCanDamage(false);
-  aimSpots = GetEntArray(node_primary.target, "targetname");
+  guy_primary setCanDamage(false);
+  aimSpots = getEntArray(node_primary.target, "targetname");
   explosionRadius = 215;
   flag_set("bazookateam_keep_firing");
   guy_primary.shoot_notify = "bazooka_shot";
-  for (i = 0; i < aimSpots.size; i++) {
+  for(i = 0; i < aimSpots.size; i++) {
     guys bazookateam_reload();
     guy_primary thread bazookateam_fire_dialogue();
     wait(1);
@@ -693,7 +693,7 @@ bazooka_reload_rocket_attach(guys) {
   attachNote = "attach clip left";
   detachNote = "detach clip left";
   guy = undefined;
-  for (i = 0; i < guys.size; i++) {
+  for(i = 0; i < guys.size; i++) {
     if(guys[i].animname == animname) {
       guy = guys[i];
       break;
@@ -718,7 +718,7 @@ bazooka_rocket_deathdetach(rocketModel, attachTag) {
 bazookateam_setup_ais() {
   self[0].bazookateam_role = "primary";
   self[1].bazookateam_role = "secondary";
-  for (i = 0; i < self.size; i++) {
+  for(i = 0; i < self.size; i++) {
     guy = self[i];
     guy.og_goalradius = guy.goalradius;
     guy.goalradius = 12;
@@ -732,7 +732,7 @@ bazookateam_setup_ais() {
 }
 
 bazookateam_reset_ais() {
-  for (i = 0; i < self.size; i++) {
+  for(i = 0; i < self.size; i++) {
     guy = self[i];
     if(!is_active_ai(guy)) {
       continue;
@@ -743,7 +743,7 @@ bazookateam_reset_ais() {
     guy.grenadeawareness = guy.og_grenadeawareness;
     guy PushPlayer(false);
     guy notify("stop magic bullet shield");
-    guy SetCanDamage(true);
+    guy setCanDamage(true);
     guy AllowedStances("stand", "crouch", "prone");
   }
 }
@@ -753,7 +753,7 @@ bazookateam_runto_nodes(nodePrimary, nodeSecondary) {
   self[1] SetGoalNode(nodeSecondary);
   array_thread(self, ::bazooka_guy_reached_node);
   numReached = 0;
-  while (numReached < self.size) {
+  while(numReached < self.size) {
     level waittill("bazooka_guy_reached_node");
     numReached++;
   }
@@ -787,7 +787,7 @@ falling_eagle() {
   pieces["bookcase09_jnt"] = getent_safe("smodel_parliament_bookshelf_9", "targetname");
   pieces["bookcase10_jnt"] = getent_safe("smodel_parliament_bookshelf_10", "targetname");
   keys = GetArrayKeys(pieces);
-  for (i = 0; i < pieces.size; i++) {
+  for(i = 0; i < pieces.size; i++) {
     pieces[keys[i]] LinkTo(eagle, keys[i]);
   }
   rocketStart = (1144, 17688, 984);
@@ -796,7 +796,7 @@ falling_eagle() {
   level waittill("eagle_slip");
   MagicBullet("panzerschrek", rocketStart, eagle.origin);
   wait(rocketTime);
-  PlayFX(level._effect["eagle_support_break"], eagle.origin);
+  playFX(level._effect["eagle_support_break"], eagle.origin);
   eagle thread parliament_eagle_anim("parliament_eagle", "slip", "eagle_slip_anim");
   eagle_fall_wait();
   killtrig = GetEnt("trig_killspawner_22", "targetname");
@@ -810,8 +810,8 @@ falling_eagle() {
     wait(rocketTime);
   }
   fxSpot = getstruct_safe("struct_parliament_eaglefall_fxspot", "targetname");
-  PlayFX(level._effect["eagle_fall_impact"], fxSpot.origin);
-  PlayFX(level._effect["eagle_support_break"], eagle.origin);
+  playFX(level._effect["eagle_fall_impact"], fxSpot.origin);
+  playFX(level._effect["eagle_support_break"], eagle.origin);
   eagle thread parliament_eagle_anim("parliament_eagle", "fall", "eagle_fall_anim");
   wait(0.6);
   podiumtrig = getent_safe("trig_parliament_podium_area", "targetname");
@@ -867,7 +867,7 @@ eagle_fall_dmgtrigger() {
 
 parliament_podiumdoor_clean_rogue_ai() {
   axis = GetAIArray("axis");
-  for (i = 0; i < axis.size; i++) {
+  for(i = 0; i < axis.size; i++) {
     guy = axis[i];
     if(guy.origin[1] > 20360) {
       guy bloody_death(true, 0);
@@ -896,10 +896,10 @@ parliament_doors_open() {
   pushers[2] parliament_doorpusher_setup();
   pushers[2].animname = "parliament_doorpusher_3";
   thread parliament_doors_open_sarge_dialogue();
-  spawners = GetEntArray("spawner_parliament_doorholder", "targetname");
+  spawners = getEntArray("spawner_parliament_doorholder", "targetname");
   ASSERTEX(isDefined(spawners) && spawners.size == 3, "Couldn't find enough parliament door holder enemy spawners.");
   germans = [];
-  for (i = 0; i < spawners.size; i++) {
+  for(i = 0; i < spawners.size; i++) {
     enemy = spawn_guy(spawners[i]);
     enemy parliament_doorpusher_setup();
     enemy.nodeathragdoll = true;
@@ -915,7 +915,7 @@ parliament_doors_open() {
   pushers[1] thread parliament_doors_reach_wait(doorNodeRight);
   pushers[2] thread parliament_doors_reach_wait();
   animSpot thread anim_reach_solo(pushers[2], "doorpush");
-  while (level.door_reachers < pushers.size) {
+  while(level.door_reachers < pushers.size) {
     wait(0.05);
   }
   doorLeft thread reichstag_dooranim("parliament_door_left", "doorpush", "parliamentdoor_anim", false);
@@ -929,7 +929,7 @@ parliament_doors_open() {
   animSpot anim_single(pushers, "doorbreach");
   pushers[0] AllowedStances("stand", "crouch", "prone");
   pushers[1] AllowedStances("stand", "crouch", "prone");
-  for (i = 0; i < pushers.size; i++) {
+  for(i = 0; i < pushers.size; i++) {
     pushers[i] parliament_doorpusher_reset();
   }
   level.sarge thread playsound_generic_facial("Ber3B_IGD_042A_REZN");
@@ -1006,7 +1006,7 @@ door_runner_think() {
   self.pacifist = true;
   self thread magic_bullet_shield_safe();
   self SetGoalPos(self.origin);
-  org = Spawn("script_origin", self.origin);
+  org = spawn("script_origin", self.origin);
   self LinkTo(org);
   level waittill("parliament_doors_opening");
   wait(8.75);

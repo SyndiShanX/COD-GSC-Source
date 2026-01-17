@@ -26,8 +26,8 @@
 #namespace zm_island_bgb;
 
 function init() {
-  level.var_2c12d9a6 = & function_fa778ca4;
-  level.var_2d0e5eb6 = & function_2d0e5eb6;
+  level.var_2c12d9a6 = &function_fa778ca4;
+  level.var_2d0e5eb6 = &function_2d0e5eb6;
 }
 
 function function_fa778ca4() {
@@ -50,7 +50,7 @@ function function_2d0e5eb6() {
   var_cdb0f86b = getarraykeys(level.zombie_powerups);
   var_b4442b55 = array("shield_charge", "ww_grenade", "bonus_points_team");
   var_62e2eaf2 = [];
-  for (i = 0; i < var_cdb0f86b.size; i++) {
+  for(i = 0; i < var_cdb0f86b.size; i++) {
     var_77917a61 = 0;
     foreach(var_68de493a in var_b4442b55) {
       if(var_cdb0f86b[i] == var_68de493a) {
@@ -62,7 +62,7 @@ function function_2d0e5eb6() {
       continue;
       continue;
     }
-    if(!isdefined(var_62e2eaf2)) {
+    if(!isDefined(var_62e2eaf2)) {
       var_62e2eaf2 = [];
     } else if(!isarray(var_62e2eaf2)) {
       var_62e2eaf2 = array(var_62e2eaf2);

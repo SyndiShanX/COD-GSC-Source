@@ -4,7 +4,7 @@
 ****************************************/
 
 main() {
-  self setmodel("c_mul_farid_cc_fb");
+  self setModel("c_mul_farid_cc_fb");
   self.headmodel = "c_mul_farid_cc_shirt";
   self attach(self.headmodel, "", 1);
   self.voice = "american";

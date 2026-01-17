@@ -11,18 +11,18 @@ main() {
   setsaveddvar("hud_drawhud", 0);
 
   level.script = tolower(getdvar("mapname"));
-  if(!isdefined(level.tmpmsg))
+  if(!isDefined(level.tmpmsg))
     level.tmpmsg = [];
 
-  player = getentarray("player", "classname")[0];
+  player = getEntArray("player", "classname")[0];
   setsaveddvar("g_speed", 0);
   player setViewmodel("viewmodel_hands_cloth"); // hack
 
   precacheShader("black");
 
   movieDefined = 0;
-  for (index = 0; index < level.slide.size; index++) {
-    if(isdefined(level.slide[index]["movie"])) {
+  for(index = 0; index < level.slide.size; index++) {
+    if(isDefined(level.slide[index]["movie"])) {
       movieDefined = 1;
       break;
     }
@@ -35,8 +35,8 @@ main() {
   } else {
     // Press &&BUTTON_SELECTCHOICE" to Skip."
     precacheString(&"SCRIPT_PLATFORM_FIRE_TO_SKIP");
-    for (i = 0; i < level.slide.size; i++)
-      if(isdefined(level.slide[i]["image"]))
+    for(i = 0; i < level.slide.size; i++)
+      if(isDefined(level.slide[i]["image"]))
         precacheshader(level.slide[i]["image"]);
 
     player thread skipthebriefing();
@@ -52,13 +52,13 @@ start(fFadeTime) {
   level.briefing_ending = false;
   level.PlaceNextImage = "A";
 
-  if(isdefined(level.imageA))
+  if(isDefined(level.imageA))
     level.imageA destroy();
-  if(isdefined(level.imageB))
+  if(isDefined(level.imageB))
     level.imageB destroy();
-  if(isdefined(level.blackscreen))
+  if(isDefined(level.blackscreen))
     level.blackscreen destroy();
-  if(isdefined(level.FiretoSkip))
+  if(isDefined(level.FiretoSkip))
     level.FiretoSkip destroy();
 
   if(!isDefined(fFadeTime) || !fFadeTime) {
@@ -131,22 +131,22 @@ start(fFadeTime) {
 
   wait .5;
 
-  for (i = 0; i < level.slide.size; i++) {
+  for(i = 0; i < level.slide.size; i++) {
     soundplaying = false;
-    if(isdefined(level.slide[i]["image"])) {
+    if(isDefined(level.slide[i]["image"])) {
       if(level.script[0] != "m") // movie_ maps don't play the sound
         self soundplay("slide_advance");
       wait .5;
       self thread image(level.slide[i]["image"]);
     }
-    if(isdefined(level.slide[i]["dialog_wait"]) && self.dialogplaying[level.slide[i]["dialog_wait"]]) {
+    if(isDefined(level.slide[i]["dialog_wait"]) && self.dialogplaying[level.slide[i]["dialog_wait"]]) {
       self waittill(level.slide[i]["dialog_wait"] + "sounddone");
     }
-    if(isdefined(level.slide[i]["dialog"])) {
+    if(isDefined(level.slide[i]["dialog"])) {
       self soundplay(level.slide[i]["dialog"], level.slide[i]["dialog"] + "sounddone");
       soundplaying = true;
     }
-    if(isdefined(level.slide[i]["delay"])) {
+    if(isDefined(level.slide[i]["delay"])) {
       wait(level.slide[i]["delay"]);
     } else if(soundplaying) {
       self waittill(level.slide[i]["dialog"] + "sounddone");
@@ -178,15 +178,15 @@ waitTillBriefingDone() {
 skipCheck() {
   self endon("briefingend");
 
-  player = getentarray("player", "classname")[0];
+  player = getEntArray("player", "classname")[0];
 
   wait(0.05);
 
   maps\_utility::set_console_status();
 
-  for (;;) {
+  for(;;) {
     // we want to check if the "A" button has been pressed on xenon
-    // instead of FIRE. 
+    // instead of FIRE.
     if(level.console) {
       if(player buttonPressed("BUTTON_A")) {
         self notify("briefingskip");
@@ -238,15 +238,15 @@ endThread() {
   // Check for the briefing already being ended
   if(!level.briefing_running)
     return;
-  if(level.briefing_ending)
+  if(level.briefing_ending) {
     return;
-
+  }
   self notify("briefingend");
   level.briefing_ending = true;
 
   // Make sure the briefing audio is ended on for slideshows
   if(level.script[0] != "m") {
-    self playsound("stop_voice");
+    self playSound("stop_voice");
   }
 
   // Fade the screen in
@@ -264,13 +264,13 @@ end() {
 }
 
 soundplay(dialog, msg) {
-  if(isdefined(level.tmpmsg[dialog]))
+  if(isDefined(level.tmpmsg[dialog]))
     iprintlnbold(level.tmpmsg[dialog]);
-  if(isdefined(msg)) {
+  if(isDefined(msg)) {
     thread soundplay_flag(dialog, msg);
-    self playsound(dialog, msg);
+    self playSound(dialog, msg);
   } else
-    self playsound(dialog);
+    self playSound(dialog);
 }
 
 soundplay_flag(dialog, msg) {
@@ -294,8 +294,8 @@ skipthebriefing() {
 
 gotothelevel(skipMovie) {
   if(!skipMovie) {
-    for (i = 0; i < level.slide.size; i++) {
-      if(isdefined(level.slide[i]["movie"]))
+    for(i = 0; i < level.slide.size; i++) {
+      if(isDefined(level.slide[i]["movie"]))
         cinematic(level.slide[i]["movie"]);
     }
   }

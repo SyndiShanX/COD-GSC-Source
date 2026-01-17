@@ -43,6 +43,4 @@ main() {
   ent.atmosFogHeightFogHalfPlaneDistance = 128.876;
 }
 
-setupfog() {
-
-}
+setupfog() {}

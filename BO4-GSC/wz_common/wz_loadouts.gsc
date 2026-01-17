@@ -8,17 +8,16 @@
 #include scripts\mp_common\item_inventory;
 #include scripts\mp_common\item_inventory_util;
 #include scripts\mp_common\item_world;
-
 #namespace wz_loadouts;
 
 autoexec __init__system__() {
-  system::register(#"wz_loadouts", &__init__, undefined, #"item_inventory");
+  system::register(#"wz_loadouts", &__init__, undefined, # "item_inventory");
 }
 
-private __init__() {
+__init__() {
   gametype = util::get_game_type();
 
-  if(gametype !== #"warzone_hot_pursuit" && gametype !== #"warzone_heavy_metal" && gametype !== #"warzone_bigteam_dbno_quad" && gametype !== #"warzone_heavy_metal_heroes") {
+  if(gametype !== # "warzone_hot_pursuit" && gametype !== # "warzone_heavy_metal" && gametype !== # "warzone_bigteam_dbno_quad" && gametype !== # "warzone_heavy_metal_heroes") {
     return;
   }
 
@@ -29,7 +28,7 @@ private __init__() {
   if(isDefined(getgametypesetting(#"hash_4149d5d65eb07138")) ? getgametypesetting(#"hash_4149d5d65eb07138") : 0) {
     level.var_317fb13c = &function_3fed57dd;
 
-    if(gametype === #"warzone_bigteam_dbno_quad") {
+    if(gametype === # "warzone_bigteam_dbno_quad") {
       level.var_317fb13c = &function_a9b8fa06;
     }
   }
@@ -41,7 +40,7 @@ private __init__() {
 }
 
 _get_item(itemname) {
-  if(isDefined(level.var_4afb8f5a[itemname]) && level.var_4afb8f5a[itemname] != #"") {
+  if(isDefined(level.var_4afb8f5a[itemname]) && level.var_4afb8f5a[itemname] != # "") {
     itemname = level.var_4afb8f5a[itemname];
   }
 
@@ -352,10 +351,10 @@ function_9de0644f() {
   }
 }
 
-private function_58190f52() {
+function_58190f52() {
   gametype = util::get_game_type();
 
-  if(gametype == #"warzone_hot_pursuit" || gametype == #"warzone_bigteam_dbno_quad") {
+  if(gametype == # "warzone_hot_pursuit" || gametype == # "warzone_bigteam_dbno_quad") {
     pistol = _get_item(#"pistol_standard_t8_item");
     var_fa3df96 = self item_inventory::function_e66dcff5(pistol);
     self item_world::function_de2018e3(pistol, self, var_fa3df96);
@@ -365,7 +364,7 @@ private function_58190f52() {
     return;
   }
 
-  if(gametype == #"warzone_heavy_metal") {
+  if(gametype == # "warzone_heavy_metal") {
     weapon = _get_item(#"lmg_spray_t8_item");
     var_fa3df96 = self item_inventory::function_e66dcff5(weapon);
     self item_world::function_de2018e3(weapon, self, var_fa3df96);
@@ -375,15 +374,15 @@ private function_58190f52() {
     return;
   }
 
-  if(gametype == #"hash_135cf8c5c6396f04") {
+  if(gametype == # "hash_135cf8c5c6396f04") {
     function_f56a5599();
   }
 }
 
-private function_6667abef() {
+function_6667abef() {
   gametype = util::get_game_type();
 
-  if(gametype == #"warzone_hot_pursuit" || gametype == #"warzone_bigteam_dbno_quad") {
+  if(gametype == # "warzone_hot_pursuit" || gametype == # "warzone_bigteam_dbno_quad") {
     pistol = _get_item(#"pistol_standard_t8_item");
     var_fa3df96 = self item_inventory::function_e66dcff5(pistol);
     pistol.attachments = [];
@@ -413,7 +412,7 @@ private function_6667abef() {
     return;
   }
 
-  if(gametype == #"warzone_heavy_metal") {
+  if(gametype == # "warzone_heavy_metal") {
     weapon = _get_item(#"lmg_spray_t8_item");
     var_fa3df96 = self item_inventory::function_e66dcff5(weapon);
     weapon.attachments = [];
@@ -442,15 +441,15 @@ private function_6667abef() {
     return;
   }
 
-  if(gametype == #"hash_135cf8c5c6396f04") {
+  if(gametype == # "hash_135cf8c5c6396f04") {
     function_f56a5599();
   }
 }
 
-private function_7376c60d() {
+function_7376c60d() {
   gametype = util::get_game_type();
 
-  if(gametype == #"warzone_hot_pursuit" || gametype == #"warzone_bigteam_dbno_quad") {
+  if(gametype == # "warzone_hot_pursuit" || gametype == # "warzone_bigteam_dbno_quad") {
     smg = _get_item(#"smg_standard_t8_item");
     var_fa3df96 = self item_inventory::function_e66dcff5(smg);
     self item_world::function_de2018e3(smg, self, var_fa3df96);
@@ -464,7 +463,7 @@ private function_7376c60d() {
     return;
   }
 
-  if(gametype == #"warzone_heavy_metal") {
+  if(gametype == # "warzone_heavy_metal") {
     weapon = _get_item(#"lmg_standard_t8_item");
     var_fa3df96 = self item_inventory::function_e66dcff5(weapon);
     self item_world::function_de2018e3(weapon, self, var_fa3df96);
@@ -478,15 +477,15 @@ private function_7376c60d() {
     return;
   }
 
-  if(gametype == #"hash_135cf8c5c6396f04") {
+  if(gametype == # "hash_135cf8c5c6396f04") {
     function_f56a5599();
   }
 }
 
-private function_1f091d2f() {
+function_1f091d2f() {
   gametype = util::get_game_type();
 
-  if(gametype == #"warzone_hot_pursuit" || gametype == #"warzone_bigteam_dbno_quad") {
+  if(gametype == # "warzone_hot_pursuit" || gametype == # "warzone_bigteam_dbno_quad") {
     smg = _get_item(#"smg_standard_t8_item");
     var_fa3df96 = self item_inventory::function_e66dcff5(smg);
     self item_world::function_de2018e3(smg, self, var_fa3df96);
@@ -510,7 +509,7 @@ private function_1f091d2f() {
     return;
   }
 
-  if(gametype == #"warzone_heavy_metal") {
+  if(gametype == # "warzone_heavy_metal") {
     weapon = _get_item(#"lmg_standard_t8_item");
     var_fa3df96 = self item_inventory::function_e66dcff5(weapon);
     weapon.attachments = [];
@@ -543,15 +542,15 @@ private function_1f091d2f() {
     return;
   }
 
-  if(gametype == #"hash_135cf8c5c6396f04") {
+  if(gametype == # "hash_135cf8c5c6396f04") {
     function_f56a5599();
   }
 }
 
-private function_2d31b980() {
+function_2d31b980() {
   gametype = util::get_game_type();
 
-  if(gametype == #"warzone_hot_pursuit" || gametype == #"warzone_bigteam_dbno_quad") {
+  if(gametype == # "warzone_hot_pursuit" || gametype == # "warzone_bigteam_dbno_quad") {
     smg = _get_item(#"smg_standard_t8_item");
     var_fa3df96 = self item_inventory::function_e66dcff5(smg);
     self item_world::function_de2018e3(smg, self, var_fa3df96);
@@ -581,7 +580,7 @@ private function_2d31b980() {
     return;
   }
 
-  if(gametype == #"warzone_heavy_metal") {
+  if(gametype == # "warzone_heavy_metal") {
     weapon = _get_item(#"lmg_standard_t8_item");
     var_fa3df96 = self item_inventory::function_e66dcff5(weapon);
     weapon.attachments = [];
@@ -625,12 +624,12 @@ private function_2d31b980() {
     return;
   }
 
-  if(gametype == #"hash_135cf8c5c6396f04") {
+  if(gametype == # "hash_135cf8c5c6396f04") {
     function_f56a5599();
   }
 }
 
-private function_f56a5599() {
+function_f56a5599() {
   weapon = _get_item(#"lmg_stealth_t8_item");
   var_fa3df96 = self item_inventory::function_e66dcff5(weapon);
   self item_world::function_de2018e3(weapon, self, var_fa3df96);

@@ -76,7 +76,7 @@ init() {
 }
 
 onPlayerConnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connected", player);
 
     player thread onMenuResponse();
@@ -102,7 +102,7 @@ isOptionsMenu(menu) {
 onMenuResponse() {
   self endon("disconnect");
 
-  for (;;) {
+  for(;;) {
     self waittill("menuresponse", menu, response);
 
     if(response == "back") {
@@ -354,9 +354,9 @@ menuAxis() {
 menuSpectator() {
   self closeMenus();
 
-  if(isDefined(self.pers["team"]) && self.pers["team"] == "spectator")
+  if(isDefined(self.pers["team"]) && self.pers["team"] == "spectator") {
     return;
-
+  }
   if(isAlive(self)) {
     assert(isDefined(self.pers["team"]));
     self.switching_teams = true;
@@ -384,9 +384,9 @@ menuClass(response) {
   }
 
   // this should probably be an assert
-  if(!isDefined(self.pers["team"]) || (self.pers["team"] != "allies" && self.pers["team"] != "axis"))
+  if(!isDefined(self.pers["team"]) || (self.pers["team"] != "allies" && self.pers["team"] != "axis")) {
     return;
-
+  }
   class = self maps\mp\gametypes\_class::getClassChoice(response);
   primary = self maps\mp\gametypes\_class::getWeaponChoice(response);
 
@@ -396,17 +396,17 @@ menuClass(response) {
   }
 
   if((isDefined(self.pers["class"]) && self.pers["class"] == class) &&
-    (isDefined(self.pers["primary"]) && self.pers["primary"] == primary))
+    (isDefined(self.pers["primary"]) && self.pers["primary"] == primary)) {
     return;
-
+  }
   if(self.sessionstate == "playing") {
     self.pers["class"] = class;
     self.class = class;
     self.pers["primary"] = primary;
 
-    if(game["state"] == "postgame")
+    if(game["state"] == "postgame") {
       return;
-
+    }
     if(level.inGracePeriod && !self.hasDoneCombat) // used weapons check?
     {
       self maps\mp\gametypes\_class::setClass(self.pers["class"]);
@@ -421,16 +421,15 @@ menuClass(response) {
     self.class = class;
     self.pers["primary"] = primary;
 
-    if(game["state"] == "postgame")
+    if(game["state"] == "postgame") {
       return;
-
+    }
     if(game["state"] == "playing" && !isInKillcam())
       self thread maps\mp\gametypes\_playerlogic::spawnClient();
   }
 
   self thread maps\mp\gametypes\_spectating::setSpectatePermissions();
 }
-
 
 addToTeam(team, firstConnect) {
   // UTS update playerCount remove from team

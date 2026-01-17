@@ -8,7 +8,7 @@
 #include xmodelalias\c_zom_zombie_buried_civilian_hat4_als;
 
 main() {
-  self setmodel("c_zom_zombie_buried_civilian_body4_nohat");
+  self setModel("c_zom_zombie_buried_civilian_body4_nohat");
   self.headmodel = codescripts\character::randomelement(xmodelalias\c_zom_zombie_buried_male_heads_als::main());
   self attach(self.headmodel, "", 1);
   self.hatmodel = codescripts\character::randomelement(xmodelalias\c_zom_zombie_buried_civilian_hat4_als::main());

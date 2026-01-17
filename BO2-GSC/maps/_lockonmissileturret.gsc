@@ -500,7 +500,7 @@ missileturrettargetdeathtread(player) {
 }
 
 locksighttest(target) {
-  eyepos = self geteye();
+  eyepos = self getEye();
 
   if(!isDefined(target))
     return false;
@@ -567,7 +567,7 @@ getbestmissileturrettarget() {
   chosenindex = -1;
 
   if(targetsvalid.size > 1) {
-    forward = anglestoforward(self getplayerangles());
+    forward = anglesToForward(self getplayerangles());
 
     for(i = 0; i < targetsvalid.size; i++) {
       vec_to_target = vectornormalize(targetsvalid[i].origin - self get_eye());
@@ -586,8 +586,7 @@ getbestmissileturrettarget() {
   return chosenent;
 }
 
-getbestmissileturrettargetlist() {
-}
+getbestmissileturrettargetlist() {}
 
 insidemissileturretreticlenolock(target) {
   weaponname = self getturretweaponname();
@@ -654,7 +653,7 @@ setnoclearance() {
     debug = 1;
 
   playerangles = self getplayerangles();
-  forward = anglestoforward(playerangles);
+  forward = anglesToForward(playerangles);
   right = anglestoright(playerangles);
   up = anglestoup(playerangles);
   origin = self.origin + (0, 0, 60) + right * 10;
@@ -662,7 +661,7 @@ setnoclearance() {
 
   for(idx = 0; idx < checks.size; idx++) {
     endpoint = origin + forward * 400 + up * checks[idx][2] + right * checks[idx][0];
-    trace = bullettrace(origin, endpoint, 0, undefined);
+    trace = bulletTrace(origin, endpoint, 0, undefined);
 
     if(trace["fraction"] < 1) {
       obstructed = 1;
@@ -731,7 +730,7 @@ looplocallocksound(alias, interval) {
 
 missile_lock_loop_audio(alias) {
   player = get_players()[0];
-  player playloopsound(alias, 0.05);
+  player playLoopSound(alias, 0.05);
   self waittill_any("stop_locked_sound", "disconnect", "death");
   player stoploopsound(0.05);
 }
@@ -798,7 +797,7 @@ looplocaltrackingsoundrealloop(alias, drone) {
   drone waittill("missileTurret_fired_at_me", missile);
   self notify("stop_seeking_sound");
   self notify("stop_locked_sound");
-  self playloopsound(alias);
+  self playLoopSound(alias);
   waittill_drone_done(self, drone, missile);
   self stoploopsound();
 }
@@ -862,7 +861,7 @@ getturretweapon() {
 
 startmissilecam() {
   script_model = spawn("script_model", (0, 0, 0));
-  script_model setmodel(self.model);
+  script_model setModel(self.model);
   script_model hide();
   script_model linkto(self, "tag_origin", vectorscale((1, 0, 0), 25.0));
   script_model setclientflag(0);

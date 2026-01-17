@@ -15,17 +15,17 @@
 #namespace weaponobjects;
 
 function autoexec __init__sytem__() {
-  system::register("weaponobjects", & __init__, undefined, undefined);
+  system::register("weaponobjects", &__init__, undefined, undefined);
 }
 
 function __init__() {
   init_shared();
-  callback::on_start_gametype( & start_gametype);
+  callback::on_start_gametype(&start_gametype);
 }
 
 function start_gametype() {
-  callback::on_connect( & on_player_connect);
-  callback::on_spawned( & on_player_spawned);
+  callback::on_connect(&on_player_connect);
+  callback::on_spawned(&on_player_spawned);
 }
 
 function on_player_spawned() {

@@ -46,7 +46,7 @@ init() {
   level.fx_airstrike_afterburner = loadfx("fire/jet_afterburner");
   level.fx_airstrike_contrail = loadfx("smoke/jet_contrail");
 
-  // airstrike danger area is the circle of radius artilleryDangerMaxRadius 
+  // airstrike danger area is the circle of radius artilleryDangerMaxRadius
   // stretched by a factor of artilleryDangerOvalScale in the direction of the incoming airstrike,
   // moved by artilleryDangerForwardPush * artilleryDangerMaxRadius in the same direction.
   // use scr_Airstrikedebug to visualize.
@@ -145,7 +145,7 @@ doAirstrike(lifeId, origin, yaw, owner, team) {
     level.planes++;
 
   if(isDefined(level.airstrikeInProgress)) {
-    while (isDefined(level.airstrikeInProgress))
+    while(isDefined(level.airstrikeInProgress))
       level waittill("begin_airstrike");
 
     level.airstrikeInProgress = true;
@@ -162,16 +162,16 @@ doAirstrike(lifeId, origin, yaw, owner, team) {
   level.airstrikeInProgress = true;
 
   num = 17 + randomint(3);
-  trace = bullettrace(origin, origin + (0, 0, -1000000), false, undefined);
+  trace = bulletTrace(origin, origin + (0, 0, -1000000), false, undefined);
   targetpos = trace["position"];
 
   if(level.teambased) {
     players = level.players;
 
-    for (i = 0; i < level.players.size; i++) {
+    for(i = 0; i < level.players.size; i++) {
       player = level.players[i];
       playerteam = player.pers["team"];
-      if(isdefined(playerteam)) {
+      if(isDefined(playerteam)) {
         if(playerteam == team && self.airStrikeType != "stealth")
           player iprintln(&"MP_WAR_AIRSTRIKE_INBOUND", owner);
       }
@@ -183,13 +183,13 @@ doAirstrike(lifeId, origin, yaw, owner, team) {
     }
   }
 
-  dangerCenter = spawnstruct();
+  dangerCenter = spawnStruct();
   dangerCenter.origin = targetpos;
   dangerCenter.forward = anglesToForward((0, yaw, 0));
   dangerCenter.airstrikeType = airstrikeType;
 
   level.artilleryDangerCenters[level.artilleryDangerCenters.size] = dangerCenter;
-  /# level thread debugArtilleryDangerCenters( airstrikeType ); #/
+  /# level thread debugArtilleryDangerCenters( airstrikeType );
 
   harrierEnt = callStrike(lifeId, owner, targetpos, yaw);
 
@@ -202,7 +202,7 @@ doAirstrike(lifeId, origin, yaw, owner, team) {
 
   found = false;
   newarray = [];
-  for (i = 0; i < level.artilleryDangerCenters.size; i++) {
+  for(i = 0; i < level.artilleryDangerCenters.size; i++) {
     if(!found && level.artilleryDangerCenters[i].origin == targetpos) {
       found = true;
       continue;
@@ -214,10 +214,10 @@ doAirstrike(lifeId, origin, yaw, owner, team) {
   assert(newarray.size == level.artilleryDangerCenters.size - 1);
   level.artilleryDangerCenters = newarray;
 
-  if(airStrikeType != "harrier")
+  if(airStrikeType != "harrier") {
     return;
-
-  while (isDefined(harrierEnt))
+  }
+  while(isDefined(harrierEnt))
     wait(0.1);
 
   level.planes--;
@@ -229,7 +229,6 @@ clearProgress(delay) {
   level.airstrikeInProgress = undefined;
 }
 
-/#
 debugArtilleryDangerCenters(airstrikeType) {
   level notify("debugArtilleryDangerCenters_thread");
   level endon("debugArtilleryDangerCenters_thread");
@@ -238,8 +237,8 @@ debugArtilleryDangerCenters(airstrikeType) {
     return;
   }
 
-  while (level.artilleryDangerCenters.size > 0) {
-    for (i = 0; i < level.artilleryDangerCenters.size; i++) {
+  while(level.artilleryDangerCenters.size > 0) {
+    for(i = 0; i < level.artilleryDangerCenters.size; i++) {
       origin = level.artilleryDangerCenters[i].origin;
       forward = level.artilleryDangerCenters[i].forward;
 
@@ -247,7 +246,7 @@ debugArtilleryDangerCenters(airstrikeType) {
 
       previnnerpos = (0, 0, 0);
       prevouterpos = (0, 0, 0);
-      for (j = 0; j <= 40; j++) {
+      for(j = 0; j <= 40; j++) {
         frac = (j * 1.0) / 40;
         angle = frac * 360;
         dir = anglesToForward((0, angle, 0));
@@ -271,19 +270,18 @@ debugArtilleryDangerCenters(airstrikeType) {
     wait .05;
   }
 }
-# /
 
-  getAirstrikeDanger(point) {
-    danger = 0;
-    for (i = 0; i < level.artilleryDangerCenters.size; i++) {
-      origin = level.artilleryDangerCenters[i].origin;
-      forward = level.artilleryDangerCenters[i].forward;
-      airstrikeType = level.artilleryDangerCenters[i].airstrikeType;
+getAirstrikeDanger(point) {
+  danger = 0;
+  for(i = 0; i < level.artilleryDangerCenters.size; i++) {
+    origin = level.artilleryDangerCenters[i].origin;
+    forward = level.artilleryDangerCenters[i].forward;
+    airstrikeType = level.artilleryDangerCenters[i].airstrikeType;
 
-      danger += getSingleAirstrikeDanger(point, origin, forward, airstrikeType);
-    }
-    return danger;
+    danger += getSingleAirstrikeDanger(point, origin, forward, airstrikeType);
   }
+  return danger;
+}
 
 getSingleAirstrikeDanger(point, origin, forward, airstrikeType) {
   center = origin + level.dangerForwardPush[airstrikeType] * level.dangerMaxRadius[airstrikeType] * forward;
@@ -296,7 +294,7 @@ getSingleAirstrikeDanger(point, origin, forward, airstrikeType) {
 
   circlePos = perpendicularPart + forwardPart / level.dangerOvalScale[airstrikeType];
 
-  /* /#
+  /*
   if( getdvar("scr_airstrikedebug") == "1" )
   {
   	thread airstrikeLine( center, center + perpendicularPart, (1,1,1), 50 );
@@ -332,10 +330,10 @@ losRadiusDamage(pos, radius, max, min, owner, eInflictor, sWeapon) {
 
   glassRadiusDamage(pos, radius, max, min);
 
-  for (i = 0; i < ents.size; i++) {
-    if(ents[i].entity == self)
+  for(i = 0; i < ents.size; i++) {
+    if(ents[i].entity == self) {
       continue;
-
+    }
     dist = distance(pos, ents[i].damageCenter);
 
     if(ents[i].isPlayer || (isDefined(ents[i].isSentry) && ents[i].isSentry)) {
@@ -367,15 +365,15 @@ airstrikeDamageEntsThread(sWeapon) {
   self notify("airstrikeDamageEntsThread");
   self endon("airstrikeDamageEntsThread");
 
-  for (; level.airstrikeDamagedEntsIndex < level.airstrikeDamagedEntsCount; level.airstrikeDamagedEntsIndex++) {
-    if(!isDefined(level.airstrikeDamagedEnts[level.airstrikeDamagedEntsIndex]))
+  for(; level.airstrikeDamagedEntsIndex < level.airstrikeDamagedEntsCount; level.airstrikeDamagedEntsIndex++) {
+    if(!isDefined(level.airstrikeDamagedEnts[level.airstrikeDamagedEntsIndex])) {
       continue;
-
+    }
     ent = level.airstrikeDamagedEnts[level.airstrikeDamagedEntsIndex];
 
-    if(!isDefined(ent.entity))
+    if(!isDefined(ent.entity)) {
       continue;
-
+    }
     if(!ent.isPlayer || isAlive(ent.entity)) {
       ent maps\mp\gametypes\_weapons::damageEnt(
         ent.eInflictor, // eInflictor = the entity that causes the damage (e.g. a claymore)
@@ -401,18 +399,18 @@ radiusArtilleryShellshock(pos, radius, maxduration, minduration, team) {
   players = level.players;
 
   foreach(player in level.players) {
-    if(!isAlive(player))
+    if(!isAlive(player)) {
       continue;
-
-    if(player.team == team || player.team == "spectator")
+    }
+    if(player.team == team || player.team == "spectator") {
       continue;
-
+    }
     playerPos = player.origin + (0, 0, 32);
     dist = distance(pos, playerPos);
 
-    if(dist > radius)
+    if(dist > radius) {
       continue;
-
+    }
     duration = int(maxduration + (minduration - maxduration) * dist / radius);
     player thread artilleryShellshock("default", duration);
   }
@@ -421,7 +419,7 @@ radiusArtilleryShellshock(pos, radius, maxduration, minduration, team) {
 artilleryShellshock(type, duration) {
   self endon("disconnect");
 
-  if(isdefined(self.beingArtilleryShellshocked) && self.beingArtilleryShellshocked)
+  if(isDefined(self.beingArtilleryShellshocked) && self.beingArtilleryShellshocked)
     return;
   self.beingArtilleryShellshocked = true;
 
@@ -431,10 +429,9 @@ artilleryShellshock(type, duration) {
   self.beingArtilleryShellshocked = false;
 }
 
-/#
 airstrikeLine(start, end, color, duration) {
   frames = duration * 20;
-  for (i = 0; i < frames; i++) {
+  for(i = 0; i < frames; i++) {
     line(start, end, color);
     wait .05;
   }
@@ -443,55 +440,54 @@ airstrikeLine(start, end, color, duration) {
 traceBomb() {
   self endon("death");
   prevpos = self.origin;
-  while (1) {
+  while(1) {
     thread airstrikeLine(prevpos, self.origin, (.5, 1, 0), 40);
     prevpos = self.origin;
     wait .2;
   }
 }
-# /
 
-  doBomberStrike(lifeId, owner, requiredDeathCount, bombsite, startPoint, endPoint, bombTime, flyTime, direction, airStrikeType) {
-    // plane spawning randomness = up to 125 units, biased towards 0
-    // radius of bomb damage is 512
+doBomberStrike(lifeId, owner, requiredDeathCount, bombsite, startPoint, endPoint, bombTime, flyTime, direction, airStrikeType) {
+  // plane spawning randomness = up to 125 units, biased towards 0
+  // radius of bomb damage is 512
 
-    if(!isDefined(owner))
-      return;
-
-    startPathRandomness = 100;
-    endPathRandomness = 150;
-
-    pathStart = startPoint + ((randomfloat(2) - 1) * startPathRandomness, (randomfloat(2) - 1) * startPathRandomness, 0);
-    pathEnd = endPoint + ((randomfloat(2) - 1) * endPathRandomness, (randomfloat(2) - 1) * endPathRandomness, 0);
-
-    // Spawn the planes
-    plane = spawnplane(owner, "script_model", pathStart, "compass_objpoint_b2_airstrike_friendly", "compass_objpoint_b2_airstrike_enemy");
-
-    plane playLoopSound("veh_b2_dist_loop");
-    plane setModel("vehicle_b2_bomber");
-    plane thread handleEMP(owner);
-    plane.lifeId = lifeId;
-
-    plane.angles = direction;
-    forward = anglesToForward(direction);
-    plane moveTo(pathEnd, flyTime, 0, 0);
-
-    thread stealthBomber_killCam(plane, pathEnd, flyTime, airStrikeType);
-
-    thread bomberDropBombs(plane, bombsite, owner);
-
-    // Delete the plane after its flyby
-    wait(flyTime);
-    plane notify("delete");
-    plane delete();
+  if(!isDefined(owner)) {
+    return;
   }
+  startPathRandomness = 100;
+  endPathRandomness = 150;
+
+  pathStart = startPoint + ((randomfloat(2) - 1) * startPathRandomness, (randomfloat(2) - 1) * startPathRandomness, 0);
+  pathEnd = endPoint + ((randomfloat(2) - 1) * endPathRandomness, (randomfloat(2) - 1) * endPathRandomness, 0);
+
+  // Spawn the planes
+  plane = spawnplane(owner, "script_model", pathStart, "compass_objpoint_b2_airstrike_friendly", "compass_objpoint_b2_airstrike_enemy");
+
+  plane playLoopSound("veh_b2_dist_loop");
+  plane setModel("vehicle_b2_bomber");
+  plane thread handleEMP(owner);
+  plane.lifeId = lifeId;
+
+  plane.angles = direction;
+  forward = anglesToForward(direction);
+  plane moveTo(pathEnd, flyTime, 0, 0);
+
+  thread stealthBomber_killCam(plane, pathEnd, flyTime, airStrikeType);
+
+  thread bomberDropBombs(plane, bombsite, owner);
+
+  // Delete the plane after its flyby
+  wait(flyTime);
+  plane notify("delete");
+  plane delete();
+}
 
 bomberDropBombs(plane, bombSite, owner) {
-  while (!targetIsClose(plane, bombsite, 5000))
+  while(!targetIsClose(plane, bombsite, 5000))
     wait(0.05);
 
-  //playfxontag( level.stealthbombfx, plane, "tag_left_alamo_missile" );
-  //playfxontag( level.stealthbombfx, plane, "tag_right_alamo_missile" );
+  //playFXOnTag( level.stealthbombfx, plane, "tag_left_alamo_missile" );
+  //playFXOnTag( level.stealthbombfx, plane, "tag_right_alamo_missile" );
 
   showFx = true;
   sonicBoom = false;
@@ -500,7 +496,7 @@ bomberDropBombs(plane, bombSite, owner) {
 
   plane thread playBombFx();
 
-  for (dist = targetGetDist(plane, bombsite); dist < 5000; dist = targetGetDist(plane, bombsite)) {
+  for(dist = targetGetDist(plane, bombsite); dist < 5000; dist = targetGetDist(plane, bombsite)) {
     if(dist < 1500 && !sonicBoom) {
       plane playSound("veh_b2_sonic_boom");
       sonicBoom = true;
@@ -514,16 +510,16 @@ bomberDropBombs(plane, bombSite, owner) {
 
   plane notify("stop_bombing");
 
-  //stopfxontag( level.stealthbombfx, plane, "tag_left_alamo_missile" );
-  //stopfxontag( level.stealthbombfx, plane, "tag_right_alamo_missile" );
+  //stopFXOnTag( level.stealthbombfx, plane, "tag_left_alamo_missile" );
+  //stopFXOnTag( level.stealthbombfx, plane, "tag_right_alamo_missile" );
 }
 
 playBombFx() {
   self endon("stop_bombing");
 
-  for (;;) {
-    playFxOnTag(level.stealthbombfx, self, "tag_left_alamo_missile");
-    playFxOnTag(level.stealthbombfx, self, "tag_right_alamo_missile");
+  for(;;) {
+    playFXOnTag(level.stealthbombfx, self, "tag_left_alamo_missile");
+    playFXOnTag(level.stealthbombfx, self, "tag_right_alamo_missile");
 
     wait(0.5);
   }
@@ -552,16 +548,16 @@ callStrike_bomb(coord, owner, offset, showFx) {
   accuracyRadius = 512;
 
   randVec = (0, randomint(360), 0);
-  bombPoint = coord + vector_multiply(anglestoforward(randVec), randomFloat(accuracyRadius));
+  bombPoint = coord + vector_multiply(anglesToForward(randVec), randomFloat(accuracyRadius));
   trace = bulletTrace(bombPoint, bombPoint + (0, 0, -10000), false, undefined);
 
   bombPoint = trace["position"];
 
   bombHeight = distance(coord, bombPoint);
 
-  if(bombHeight > 5000)
+  if(bombHeight > 5000) {
     return;
-
+  }
   wait(0.85 * (bombHeight / 2000));
 
   if(!isDefined(owner) || owner isEMPed()) {
@@ -570,7 +566,7 @@ callStrike_bomb(coord, owner, offset, showFx) {
   }
 
   if(showFx) {
-    playFx(level.mortareffect, bombPoint);
+    playFX(level.mortareffect, bombPoint);
 
     PlayRumbleOnPosition("grenade_rumble", bombPoint);
     earthquake(1.0, 0.6, bombPoint, 2000);
@@ -585,9 +581,9 @@ doPlaneStrike(lifeId, owner, requiredDeathCount, bombsite, startPoint, endPoint,
   // plane spawning randomness = up to 125 units, biased towards 0
   // radius of bomb damage is 512
 
-  if(!isDefined(owner))
+  if(!isDefined(owner)) {
     return;
-
+  }
   startPathRandomness = 100;
   endPathRandomness = 150;
 
@@ -608,7 +604,7 @@ doPlaneStrike(lifeId, owner, requiredDeathCount, bombsite, startPoint, endPoint,
   } else
     plane setModel("vehicle_mig29_desert");
 
-  plane playloopsound("veh_mig29_dist_loop");
+  plane playLoopSound("veh_mig29_dist_loop");
   plane thread handleEMP(owner);
 
   plane.lifeId = lifeId;
@@ -618,13 +614,11 @@ doPlaneStrike(lifeId, owner, requiredDeathCount, bombsite, startPoint, endPoint,
   plane thread playPlaneFx();
   plane moveTo(pathEnd, flyTime, 0, 0);
 
-  /#
   if(getdvar("scr_airstrikedebug") == "1")
     thread airstrikeLine(pathStart, pathEnd, (1, 1, 1), 20);
-  # /
 
-    //thread callStrike_planeSound( plane, bombsite );
-    thread callStrike_bombEffect(plane, pathEnd, flyTime, bombTime - 1.0, owner, requiredDeathCount, typeOfStrike);
+  //thread callStrike_planeSound( plane, bombsite );
+  thread callStrike_bombEffect(plane, pathEnd, flyTime, bombTime - 1.0, owner, requiredDeathCount, typeOfStrike);
 
   // Delete the plane after its flyby
   wait flyTime;
@@ -635,14 +629,14 @@ doPlaneStrike(lifeId, owner, requiredDeathCount, bombsite, startPoint, endPoint,
 callStrike_bombEffect(plane, pathEnd, flyTime, launchTime, owner, requiredDeathCount, typeOfStrike) {
   wait(launchTime);
 
-  if(!isDefined(owner) || owner isEMPed())
+  if(!isDefined(owner) || owner isEMPed()) {
     return;
-
+  }
   plane playSound("veh_mig29_sonic_boom");
   planedir = anglesToForward(plane.angles);
 
   bomb = spawnbomb(plane.origin, plane.angles);
-  bomb moveGravity(vector_multiply(anglestoforward(plane.angles), 7000 / 1.5), 3.0);
+  bomb moveGravity(vector_multiply(anglesToForward(plane.angles), 7000 / 1.5), 3.0);
 
   bomb.lifeId = requiredDeathCount;
 
@@ -654,12 +648,10 @@ callStrike_bombEffect(plane, pathEnd, flyTime, launchTime, owner, requiredDeathC
   killCamEnt.angles = planedir;
   killCamEnt moveTo(pathEnd + (0, 0, 100), flyTime, 0, 0);
 
-  /#
   if(getdvar("scr_airstrikedebug") == "1")
     bomb thread traceBomb();
-  # /
 
-    wait .4;
+  wait .4;
   //plane stoploopsound();
   killCamEnt moveTo(killCamEnt.origin + planedir * 4000, 1, 0, 0);
 
@@ -678,7 +670,7 @@ callStrike_bombEffect(plane, pathEnd, flyTime, launchTime, owner, requiredDeathC
 
   bombOrigin = newBomb.origin;
   bombAngles = newBomb.angles;
-  playfxontag(level.airstrikefx, newBomb, "tag_origin");
+  playFXOnTag(level.airstrikefx, newBomb, "tag_origin");
 
   wait .05;
   killCamEnt moveTo(killCamEnt.origin + (planedir + (0, 0, -.25)) * 2500, 2, 0, 0);
@@ -698,7 +690,7 @@ callStrike_bombEffect(plane, pathEnd, flyTime, launchTime, owner, requiredDeathC
 
   hitpos = (0, 0, 0);
 
-  for (i = 0; i < repeat; i++) {
+  for(i = 0; i < repeat; i++) {
     traceDir = anglesToForward(bombAngles + (maxAngles - (angleDiff * i), randomInt(10) - 5, 0));
     traceEnd = bombOrigin + vector_multiply(traceDir, 10000);
     trace = bulletTrace(bombOrigin, traceEnd, false, undefined);
@@ -706,12 +698,10 @@ callStrike_bombEffect(plane, pathEnd, flyTime, launchTime, owner, requiredDeathC
     traceHit = trace["position"];
     hitpos += traceHit;
 
-    /#
     if(getdvar("scr_airstrikedebug") == "1")
       thread airstrikeLine(bombOrigin, traceHit, (1, 0, 0), 40);
-    # /
 
-      thread losRadiusDamage(traceHit + (0, 0, 16), 512, 200, 30, owner, bomb, "artillery_mp"); // targetpos, radius, maxdamage, mindamage, player causing damage, entity that player used to cause damage
+    thread losRadiusDamage(traceHit + (0, 0, 16), 512, 200, 30, owner, bomb, "artillery_mp"); // targetpos, radius, maxdamage, mindamage, player causing damage, entity that player used to cause damage
 
     if(i % 3 == 0) {
       thread playsoundinspace("exp_airstrike_bomb", traceHit);
@@ -749,17 +739,16 @@ playPlaneFx() {
   self endon("death");
 
   wait(0.5);
-  playfxontag(level.fx_airstrike_afterburner, self, "tag_engine_right");
+  playFXOnTag(level.fx_airstrike_afterburner, self, "tag_engine_right");
   wait(0.5);
-  playfxontag(level.fx_airstrike_afterburner, self, "tag_engine_left");
+  playFXOnTag(level.fx_airstrike_afterburner, self, "tag_engine_left");
   wait(0.5);
-  playfxontag(level.fx_airstrike_contrail, self, "tag_right_wingtip");
+  playFXOnTag(level.fx_airstrike_contrail, self, "tag_right_wingtip");
   wait(0.5);
-  playfxontag(level.fx_airstrike_contrail, self, "tag_left_wingtip");
+  playFXOnTag(level.fx_airstrike_contrail, self, "tag_left_wingtip");
 }
 
 callStrike(lifeId, owner, coord, yaw) {
-
   heightEnt = undefined;
   planeBombExplodeDistance = 0;
   // Get starting and ending point for the plane
@@ -772,12 +761,12 @@ callStrike(lifeId, owner, coord, yaw) {
     planeHalfDistance = 12000;
     planeFlySpeed = 2000;
 
-    if(!isDefined(heightEnt)) //old system 
+    if(!isDefined(heightEnt)) //old system
     {
       println("NO DEFINED AIRSTRIKE HEIGHT SCRIPT_ORIGIN IN LEVEL");
       planeFlyHeight = 950;
       planeBombExplodeDistance = 1500;
-      if(isdefined(level.airstrikeHeightScale))
+      if(isDefined(level.airstrikeHeightScale))
         planeFlyHeight *= level.airstrikeHeightScale;
     } else {
       planeFlyHeight = heightEnt.origin[2];
@@ -788,12 +777,12 @@ callStrike(lifeId, owner, coord, yaw) {
     planeHalfDistance = 24000;
     planeFlySpeed = 7000;
 
-    if(!isDefined(heightEnt)) //old system 
+    if(!isDefined(heightEnt)) //old system
     {
       println("NO DEFINED AIRSTRIKE HEIGHT SCRIPT_ORIGIN IN LEVEL");
       planeFlyHeight = 850;
       planeBombExplodeDistance = 1500;
-      if(isdefined(level.airstrikeHeightScale))
+      if(isDefined(level.airstrikeHeightScale))
         planeFlyHeight *= level.airstrikeHeightScale;
     } else {
       planeFlyHeight = heightEnt.origin[2];
@@ -801,7 +790,7 @@ callStrike(lifeId, owner, coord, yaw) {
     }
   }
 
-  startPoint = coord + vector_multiply(anglestoforward(direction), -1 * planeHalfDistance);
+  startPoint = coord + vector_multiply(anglesToForward(direction), -1 * planeHalfDistance);
 
   if(isDefined(heightEnt)) // used in the new height system
     startPoint *= (1, 1, 0);
@@ -809,9 +798,9 @@ callStrike(lifeId, owner, coord, yaw) {
   startPoint += (0, 0, planeFlyHeight);
 
   if(self.airStrikeType == "stealth")
-    endPoint = coord + vector_multiply(anglestoforward(direction), planeHalfDistance * 4);
+    endPoint = coord + vector_multiply(anglesToForward(direction), planeHalfDistance * 4);
   else
-    endPoint = coord + vector_multiply(anglestoforward(direction), planeHalfDistance);
+    endPoint = coord + vector_multiply(anglesToForward(direction), planeHalfDistance);
 
   if(isDefined(heightEnt)) // used in the new height system
     endPoint *= (1, 1, 0);
@@ -890,7 +879,7 @@ targetGetDist(other, target) {
   else
     dir = -1;
   a = flat_origin(other.origin);
-  b = a + vector_multiply(anglestoforward(flat_angle(other.angles)), (dir * 100000));
+  b = a + vector_multiply(anglesToForward(flat_angle(other.angles)), (dir * 100000));
   point = pointOnSegmentNearestToPoint(a, b, target);
   dist = distance(a, point);
 
@@ -907,7 +896,7 @@ targetisclose(other, target, closeDist) {
   else
     dir = -1;
   a = flat_origin(other.origin);
-  b = a + vector_multiply(anglestoforward(flat_angle(other.angles)), (dir * 100000));
+  b = a + vector_multiply(anglesToForward(flat_angle(other.angles)), (dir * 100000));
   point = pointOnSegmentNearestToPoint(a, b, target);
   dist = distance(a, point);
   if(dist < closeDist)
@@ -917,7 +906,7 @@ targetisclose(other, target, closeDist) {
 }
 
 targetisinfront(other, target) {
-  forwardvec = anglestoforward(flat_angle(other.angles));
+  forwardvec = anglesToForward(flat_angle(other.angles));
   normalvec = vectorNormalize(flat_origin(target) - other.origin);
   dot = vectordot(forwardvec, normalvec);
   if(dot > 0)
@@ -981,7 +970,7 @@ finishAirstrikeUsage(lifeId, location, directionYaw) {
   self notify("used");
 
   // find underside of top of skybox
-  trace = bullettrace(level.mapCenter + (0, 0, 1000000), level.mapCenter, false, undefined);
+  trace = bulletTrace(level.mapCenter + (0, 0, 1000000), level.mapCenter, false, undefined);
   location = (location[0], location[1], trace["position"][2] - 514);
 
   thread doAirstrike(lifeId, location, directionYaw, self, self.pers["team"]);
@@ -1001,12 +990,12 @@ endSelectionOnGameEnd() {
 
 endSelectionOnEMP() {
   self endon("stop_location_selection");
-  for (;;) {
+  for(;;) {
     level waittill("emp_update");
 
-    if(!self isEMPed())
+    if(!self isEMPed()) {
       continue;
-
+    }
     self thread stopAirstrikeLocationSelection(false);
     return;
   }
@@ -1027,18 +1016,18 @@ handleEMP(owner) {
   self endon("death");
 
   if(owner isEMPed()) {
-    playFxOnTag(level.onfirefx, self, "tag_engine_right");
-    playFxOnTag(level.onfirefx, self, "tag_engine_left");
+    playFXOnTag(level.onfirefx, self, "tag_engine_right");
+    playFXOnTag(level.onfirefx, self, "tag_engine_left");
     return;
   }
 
-  for (;;) {
+  for(;;) {
     level waittill("emp_update");
 
-    if(!owner isEMPed())
+    if(!owner isEMPed()) {
       continue;
-
-    playFxOnTag(level.onfirefx, self, "tag_engine_right");
-    playFxOnTag(level.onfirefx, self, "tag_engine_left");
+    }
+    playFXOnTag(level.onfirefx, self, "tag_engine_right");
+    playFXOnTag(level.onfirefx, self, "tag_engine_left");
   }
 }

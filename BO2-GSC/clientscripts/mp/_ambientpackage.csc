@@ -74,7 +74,7 @@ ambientpackagetrigger() {
 init_ambient_package_triggers() {
   waitforclient(0);
   init_trigger_data();
-  trigs = getentarray(0, "ambient_package", "targetname");
+  trigs = getEntArray(0, "ambient_package", "targetname");
   array_thread(trigs, ::ambientpackagetrigger);
 
   println("Client : " + trigs.size + " ambient package triggers.");
@@ -90,7 +90,7 @@ init() {
   level.ambientpackagescriptoriginpool = [];
 
   for(i = 0; i < 5; i++) {
-    level.ambientpackagescriptoriginpool[i] = spawnstruct();
+    level.ambientpackagescriptoriginpool[i] = spawnStruct();
     level.ambientpackagescriptoriginpool[i].org = spawnfakeent(0);
     level.ambientpackagescriptoriginpool[i].inuse = 0;
     level.ambientpackagescriptoriginpool[i] thread scriptoriginpoolthread();
@@ -114,7 +114,7 @@ declareambientpackage(package, defaultpackage) {
   if(isDefined(level.ambientpackages[package])) {
     return;
   }
-  level.ambientpackages[package] = spawnstruct();
+  level.ambientpackages[package] = spawnStruct();
   level.ambientpackages[package].priority = [];
   level.ambientpackages[package].refcount = [];
   level.ambientpackages[package].elements = [];
@@ -133,7 +133,7 @@ addambientelement(package, alias, spawnmin, spawnmax, distmin, distmax, anglemin
   }
 
   index = level.ambientpackages[package].elements.size;
-  level.ambientpackages[package].elements[index] = spawnstruct();
+  level.ambientpackages[package].elements[index] = spawnStruct();
   level.ambientpackages[package].elements[index].alias = alias;
 
   if(spawnmin < 0)
@@ -165,7 +165,7 @@ declareambientroom(room, defaultroom) {
   if(isDefined(level.ambientrooms[room])) {
     return;
   }
-  level.ambientrooms[room] = spawnstruct();
+  level.ambientrooms[room] = spawnStruct();
   level.ambientrooms[room].priority = [];
   level.ambientrooms[room].refcount = [];
   level.ambientrooms[room].ent = spawnfakeent(0);
@@ -177,7 +177,7 @@ declareambientroom(room, defaultroom) {
 }
 
 gettriggers(name) {
-  trigs = getentarray(0, "ambient_package", "targetname");
+  trigs = getEntArray(0, "ambient_package", "targetname");
   trigkeys = getarraykeys(trigs);
   triggerentnums = [];
   num = 0;
@@ -196,7 +196,7 @@ gettriggers(name) {
 }
 
 gettriggerpriorities(name) {
-  trigs = getentarray(0, "ambient_package", "targetname");
+  trigs = getEntArray(0, "ambient_package", "targetname");
   trigkeys = getarraykeys(trigs);
   triggerpriorities = [];
   num = 0;
@@ -278,7 +278,7 @@ setambientroomreverb(room, reverbroomtype, dry, wet, fade) {
     return;
   }
 
-  level.ambientrooms[room].reverb = spawnstruct();
+  level.ambientrooms[room].reverb = spawnStruct();
   level.ambientrooms[room].reverb.reverbroomtype = reverbroomtype;
   level.ambientrooms[room].reverb.dry = dry;
   level.ambientrooms[room].reverb.wet = wet;
@@ -485,7 +485,7 @@ ambientelementthread() {
       if(getdvarint(#"_id_0AEB127D") > 0)
         iprintlnbold("AP : playing2d: " + self.alias);
 
-      playsound(0, self.alias);
+      playSound(0, self.alias);
     }
   } else {
     dist = 0;
@@ -502,11 +502,11 @@ ambientelementthread() {
         dist = randomintrange(self.distmin, self.distmax);
         angle = randomintrange(self.anglemin, self.anglemax);
         player_angle = getlocalclientangles(0)[1];
-        offset = anglestoforward((0, angle + player_angle, 0));
+        offset = anglesToForward((0, angle + player_angle, 0));
         offset = vectorscale(offset, dist);
         pos = getlocalclienteyepos(0) + offset;
         setfakeentorg(0, level.ambientpackagescriptoriginpool[index].org, pos);
-        level.ambientpackagescriptoriginpool[index].soundid = playsound(0, self.alias, pos);
+        level.ambientpackagescriptoriginpool[index].soundid = playSound(0, self.alias, pos);
 
         if(getdvarint(#"_id_0AEB127D") > 0) {
           if(level.ambientpackagescriptoriginpool[index].soundid == -1)
@@ -609,8 +609,7 @@ findhighestpriorityambientroom() {
   if(isDefined(roomarray)) {
     for(i = 0; i < roomarray.size; i++) {
       for(j = 0; j < level.ambientrooms[roomarray[i]].priority.size; j++) {
-        if(level.ambientrooms[roomarray[i]].refcount[j]) {
-        }
+        if(level.ambientrooms[roomarray[i]].refcount[j]) {}
 
         if(level.ambientrooms[roomarray[i]].refcount[j] && level.ambientrooms[roomarray[i]].priority[j] > priority) {
           room = roomarray[i];
@@ -647,9 +646,8 @@ updateactiveambientroom() {
       oldroom.ent = tmp;
     } else {
       if(isDefined(newroom) && isDefined(newroom.tone))
-        newroom.id = playloopsound(0, newroom.ent, newroom.tone, newroom.fadein);
-      else {
-      }
+        newroom.id = playLoopSound(0, newroom.ent, newroom.tone, newroom.fadein);
+      else {}
 
       if(isDefined(oldroom) && isDefined(oldroom.tone))
         stoploopsound(0, oldroom.ent, oldroom.fadeout);
@@ -715,7 +713,7 @@ init_trigger_data() {
     }
   }
 
-  trigs = getentarray(0, "ambient_package", "targetname");
+  trigs = getEntArray(0, "ambient_package", "targetname");
   trigkeys = getarraykeys(trigs);
 
   for(i = 0; i < trigkeys.size; i++) {
@@ -772,9 +770,8 @@ switchactiveambientroom(ambientroom, roomcollidercent) {
     oldroom.ent = tmp;
   } else {
     if(isDefined(newroom) && isDefined(newroom.tone))
-      newroom.id = playloopsound(0, newroom.ent, newroom.tone, newroom.fadein);
-    else {
-    }
+      newroom.id = playLoopSound(0, newroom.ent, newroom.tone, newroom.fadein);
+    else {}
 
     if(isDefined(oldroom) && isDefined(oldroom.tone))
       stoploopsound(0, oldroom.ent, oldroom.fadeout);

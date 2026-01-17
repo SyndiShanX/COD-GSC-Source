@@ -4,7 +4,7 @@
 ********************************************************/
 
 // Shared.gsc - Functions that are shared between animscripts and level scripts.
-// Functions in this file can't rely on the animscripts\init function having run, and can't call any 
+// Functions in this file can't rely on the animscripts\init function having run, and can't call any
 // functions not allowed in level scripts.
 
 #include maps\_utility;
@@ -48,7 +48,7 @@ placeWeaponOn(weapon, position, activeWeapon) {
     self detachWeapon(self.a.weaponPos[position]);
 
   // to ensure that the correct tags for the active weapon are used, we need to make sure it gets attached first
-  if(!isdefined(activeWeapon))
+  if(!isDefined(activeWeapon))
     activeWeapon = true;
 
   if(activeWeapon && (position == "left" || position == "right")) {
@@ -105,9 +105,9 @@ detachAllWeaponModels() {
   foreach(position in positions) {
     weapon = self getWeaponForPos(position);
 
-    if(weapon == "none")
+    if(weapon == "none") {
       continue;
-
+    }
     self detach(getWeaponModel(weapon), getTagForPos(position));
   }
 }
@@ -124,9 +124,9 @@ updateAttachedWeaponModels() {
   foreach(position in positions) {
     weapon = self getWeaponForPos(position);
 
-    if(weapon == "none")
+    if(weapon == "none") {
       continue;
-
+    }
     weapon_model = getWeaponModel(weapon);
     assertEx(weapon_model != "", "No weapon model for '" + weapon + "', make sure it is precached");
 
@@ -136,7 +136,7 @@ updateAttachedWeaponModels() {
       self attach(weapon_model, getTagForPos(position), NO_COLLISION);
 
     hideTagList = GetWeaponHideTags(weapon);
-    for (i = 0; i < hideTagList.size; i++) {
+    for(i = 0; i < hideTagList.size; i++) {
       self HidePart(hideTagList[i], weapon_model);
     }
 
@@ -148,17 +148,15 @@ updateAttachedWeaponModels() {
 }
 
 updateLaserStatus() {
-  if(isdefined(self.custom_laser_function)) {
-    [
-      [self.custom_laser_function]
-    ]();
+  if(isDefined(self.custom_laser_function)) {
+    [[self.custom_laser_function]]();
     return;
   }
 
   // we have no weapon so there's no laser to turn off or on
-  if(self.a.weaponPos["right"] == "none")
+  if(self.a.weaponPos["right"] == "none") {
     return;
-
+  }
   if(canUseLaser())
     self laserOn();
   else
@@ -198,12 +196,12 @@ DropAIWeapon(weapon) {
   if(!isDefined(weapon))
     weapon = self.weapon;
 
-  if(weapon == "none")
+  if(weapon == "none") {
     return;
-
-  if(isdefined(self.noDrop))
+  }
+  if(isDefined(self.noDrop)) {
     return;
-
+  }
   self detachAllWeaponModels();
 
   position = self.weaponInfo[weapon].position;
@@ -219,7 +217,7 @@ DropAIWeapon(weapon) {
 }
 
 DropAllAIWeapons() {
-  if(isdefined(self.noDrop))
+  if(isDefined(self.noDrop))
     return "none";
 
   positions = [];
@@ -233,9 +231,9 @@ DropAllAIWeapons() {
   foreach(position in positions) {
     weapon = self.a.weaponPos[position];
 
-    if(weapon == "none")
+    if(weapon == "none") {
       continue;
-
+    }
     self.weaponInfo[weapon].position = "none";
     self.a.weaponPos[position] = "none";
 
@@ -271,25 +269,24 @@ DropWeaponWrapper(weapon, position) {
   self endon("end_weapon_drop_" + position);
   wait .1;
 
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
-
+  }
   self detachAllWeaponModels();
   self.a.weaponPosDropping[position] = "none";
   self updateAttachedWeaponModels();
 }
 
-/#
 showNoteTrack(note) {
-  if(getdebugdvar("scr_shownotetracks") != "on" && getdebugdvarint("scr_shownotetracks") != self getentnum())
+  if(getdebugdvar("scr_shownotetracks") != "on" && getdebugdvarint("scr_shownotetracks") != self getentnum()) {
     return;
-
+  }
   self endon("death");
 
   anim.showNotetrackSpeed = 30; // units / sec
   anim.showNotetrackDuration = 30; // frames
 
-  if(!isdefined(self.a.shownotetrackoffset)) {
+  if(!isDefined(self.a.shownotetrackoffset)) {
     thisoffset = 0;
     self.a.shownotetrackoffset = 10;
     self thread reduceShowNotetrackOffset();
@@ -306,7 +303,7 @@ showNoteTrack(note) {
   else if(note == "undefined")
     color = (1, .5, .5);
 
-  for (i = 0; i < duration; i++) {
+  for(i = 0; i < duration; i++) {
     if(duration - i <= anim.showNotetrackDuration)
       amnt = 1.0 * (i - (duration - anim.showNotetrackDuration)) / anim.showNotetrackDuration;
     else
@@ -314,7 +311,7 @@ showNoteTrack(note) {
     time = 1.0 * i / 20;
 
     alpha = 1.0 - amnt * amnt;
-    pos = self geteye() + (0, 0, 20 + anim.showNotetrackSpeed * time - thisoffset);
+    pos = self getEye() + (0, 0, 20 + anim.showNotetrackSpeed * time - thisoffset);
 
     print3d(pos, note, color, alpha);
 
@@ -323,39 +320,38 @@ showNoteTrack(note) {
 }
 reduceShowNotetrackOffset() {
   self endon("death");
-  while (self.a.shownotetrackoffset > 0) {
+  while(self.a.shownotetrackoffset > 0) {
     wait .05;
     self.a.shownotetrackoffset -= anim.showNotetrackSpeed * .05;
   }
   self.a.shownotetrackoffset = undefined;
 }
-# /
 
-  HandleDogSoundNoteTracks(note) {
-    if(note == "sound_dogstep_run_default") {
-      self playsound("dogstep_run_default");
-      return true;
-    }
-
-    prefix = getsubstr(note, 0, 5);
-
-    if(prefix != "sound")
-      return false;
-
-    alias = "anml" + getsubstr(note, 5);
-
-    //	if( growling() && !issubstr( alias, "growl" ) )
-    //		return false;
-
-    if(isalive(self))
-      self thread play_sound_on_tag_endon_death(alias, "tag_eye");
-    else
-      self thread play_sound_in_space(alias, self GetEye());
+HandleDogSoundNoteTracks(note) {
+  if(note == "sound_dogstep_run_default") {
+    self playSound("dogstep_run_default");
     return true;
   }
 
+  prefix = getsubstr(note, 0, 5);
+
+  if(prefix != "sound")
+    return false;
+
+  alias = "anml" + getsubstr(note, 5);
+
+  //	if( growling() && !issubstr( alias, "growl" ) )
+  //		return false;
+
+  if(isalive(self))
+    self thread play_sound_on_tag_endon_death(alias, "tag_eye");
+  else
+    self thread play_sound_in_space(alias, self getEye());
+  return true;
+}
+
 growling() {
-  return isdefined(self.script_growl);
+  return isDefined(self.script_growl);
 }
 
 registerNoteTracks() {
@@ -416,22 +412,20 @@ registerNoteTracks() {
 
   anim.notetracks["bloodpool"] = animscripts\death::play_blood_pool;
 
-  /#
   anim.notetracks["attach clip left"] = animscripts\shared::insure_dropping_clip;
   anim.notetracks["attach clip right"] = animscripts\shared::insure_dropping_clip;
   anim.notetracks["detach clip left"] = animscripts\shared::insure_dropping_clip;
   anim.notetracks["detach clip right"] = animscripts\shared::insure_dropping_clip;
-  # /
 
-    if(isdefined(level._notetrackFX)) {
-      keys = getArrayKeys(level._notetrackFX);
-      foreach(key in keys)
-      anim.notetracks[key] = ::customNotetrackFX;
-    }
+  if(isDefined(level._notetrackFX)) {
+    keys = getArrayKeys(level._notetrackFX);
+    foreach(key in keys)
+    anim.notetracks[key] = ::customNotetrackFX;
+  }
 }
 
 noteTrackFire(note, flagName) {
-  if(isdefined(anim.fire_notetrack_functions[self.script]))
+  if(isDefined(anim.fire_notetrack_functions[self.script]))
     thread[[anim.fire_notetrack_functions[self.script]]]();
   else
     thread[[animscripts\shared::shootNotetrack]]();
@@ -450,20 +444,19 @@ noteTrackStopAnim(note, flagName) {}
 unlinkNextFrame() {
   // by waiting a couple frames, we let ragdoll inherit our velocity.
   wait .1;
-  if(isdefined(self))
+  if(isDefined(self))
     self unlink();
 }
 
 noteTrackStartRagdoll(note, flagName) {
-  if(isdefined(self.noragdoll))
+  if(isDefined(self.noragdoll))
     return; // Nate - hack for armless zakhaev who doesn't do ragdoll
-  if(!isdefined(self.dont_unlink_ragdoll))
+  if(!isDefined(self.dont_unlink_ragdoll))
     self thread unlinkNextFrame();
   self startRagdoll();
-  /#
+
   if(isalive(self))
     println("^4Warning!! Living guy did ragdoll!");
-  # /
 }
 
 noteTrackMovementStop(note, flagName) {
@@ -498,7 +491,7 @@ stopOnBack() {
 setPose(pose) {
   self.a.pose = pose;
 
-  if(isdefined(self.a.onback))
+  if(isDefined(self.a.onback))
     stopOnBack();
 
   self notify("entered_pose" + pose);
@@ -521,23 +514,23 @@ noteTrackPoseCrouch(note, flagName) {
 }
 
 noteTrackPoseProne(note, flagName) {
-  if(!issentient(self))
+  if(!issentient(self)) {
     return;
-
+  }
   self setProneAnimNodes(-45, 45, % prone_legs_down, % exposed_aiming, % prone_legs_up);
   self EnterProneWrapper(1.0); // make code start lerping in the prone orientation to ground
   setPose("prone");
 
-  if(isdefined(self.a.goingToProneAim))
+  if(isDefined(self.a.goingToProneAim))
     self.a.proneAiming = true;
   else
     self.a.proneAiming = undefined;
 }
 
 noteTrackPoseCrawl(note, flagName) {
-  if(!issentient(self))
+  if(!issentient(self)) {
     return;
-
+  }
   self setProneAnimNodes(-45, 45, % prone_legs_down, % exposed_aiming, % prone_legs_up);
   self EnterProneWrapper(1.0); // make code start lerping in the prone orientation to ground
   setPose("prone");
@@ -545,9 +538,9 @@ noteTrackPoseCrawl(note, flagName) {
 }
 
 noteTrackPoseBack(note, flagName) {
-  if(!issentient(self))
+  if(!issentient(self)) {
     return;
-
+  }
   setPose("crouch");
   self.a.onback = true;
   self.a.movement = "stop";
@@ -644,7 +637,7 @@ noteTrackFootStepSmall(note, flagName) {
 }
 
 customNotetrackFX(note, flagName) {
-  assert(isdefined(level._notetrackFX[note]));
+  assert(isDefined(level._notetrackFX[note]));
 
   if(isDefined(self.groundType))
     groundType = self.groundType;
@@ -652,22 +645,22 @@ customNotetrackFX(note, flagName) {
     groundType = "dirt";
 
   fxStruct = undefined;
-  if(isdefined(level._notetrackFX[note][groundType]))
+  if(isDefined(level._notetrackFX[note][groundType]))
     fxStruct = level._notetrackFX[note][groundType];
-  else if(isdefined(level._notetrackFX[note]["all"]))
+  else if(isDefined(level._notetrackFX[note]["all"]))
     fxStruct = level._notetrackFX[note]["all"];
 
-  if(!isdefined(fxStruct))
+  if(!isDefined(fxStruct)) {
     return;
-
+  }
   if(isAI(self))
     playFXOnTag(fxStruct.fx, self, fxStruct.tag);
 
-  if(!isdefined(fxStruct.sound_prefix) && !isdefined(fxStruct.sound_suffix))
+  if(!isDefined(fxStruct.sound_prefix) && !isDefined(fxStruct.sound_suffix)) {
     return;
-
+  }
   soundAlias = "" + fxStruct.sound_prefix + groundType + fxStruct.sound_suffix;
-  self playsound(soundAlias);
+  self playSound(soundAlias);
 }
 
 noteTrackFootScrape(note, flagName) {
@@ -676,7 +669,7 @@ noteTrackFootScrape(note, flagName) {
   else
     groundType = "dirt";
 
-  self playsound("step_scrape_" + groundType);
+  self playSound("step_scrape_" + groundType);
 }
 
 noteTrackLand(note, flagName) {
@@ -685,7 +678,7 @@ noteTrackLand(note, flagName) {
   else
     groundType = "dirt";
 
-  self playsound("land_" + groundType);
+  self playSound("land_" + groundType);
 }
 
 noteTrackCodeMove(note, flagName) {
@@ -696,7 +689,7 @@ noteTrackFaceEnemy(note, flagName) {
   if(self.script != "reactions") {
     self orientmode("face enemy");
   } else {
-    if(isdefined(self.enemy) && distanceSquared(self.enemy.origin, self.reactionTargetPos) < 64 * 64)
+    if(isDefined(self.enemy) && distanceSquared(self.enemy.origin, self.reactionTargetPos) < 64 * 64)
       self orientmode("face enemy");
     else
       self orientmode("face point", self.reactionTargetPos);
@@ -704,19 +697,15 @@ noteTrackFaceEnemy(note, flagName) {
 }
 
 HandleNoteTrack(note, flagName, customFunction) {
-  /#
   self thread showNoteTrack(note);
-  # /
 
-    if(isAI(self) && self.type == "dog")
-      if(HandleDogSoundNoteTracks(note))
-        return;
-
+  if(isAI(self) && self.type == "dog")
+    if(HandleDogSoundNoteTracks(note)) {
+      return;
+    }
   notetrackFunc = anim.notetracks[note];
   if(isDefined(notetrackFunc)) {
-    return [
-      [notetrackFunc]
-    ](note, flagName);
+    return [[notetrackFunc]](note, flagName);
   }
 
   switch (note) {
@@ -726,7 +715,7 @@ HandleNoteTrack(note, flagName, customFunction) {
       return note;
 
     case "finish early":
-      if(isdefined(self.enemy))
+      if(isDefined(self.enemy))
         return note;
       break;
 
@@ -762,7 +751,7 @@ HandleNoteTrack(note, flagName, customFunction) {
       break;
     case "swap taghelmet to tagleft":
       if(isDefined(self.hatModel)) {
-        if(isdefined(self.helmetSideModel)) {
+        if(isDefined(self.helmetSideModel)) {
           self detach(self.helmetSideModel, "TAG_HELMETSIDE");
           self.helmetSideModel = undefined;
         }
@@ -782,9 +771,7 @@ HandleNoteTrack(note, flagName, customFunction) {
       break;
     default:
       if(isDefined(customFunction))
-        return [
-          [customFunction]
-        ](note);
+        return [[customFunction]](note);
       break;
   }
 }
@@ -796,7 +783,7 @@ HandleNoteTrack(note, flagName, customFunction) {
 // function could be called multiple times for a single animation.
 DoNoteTracks(flagName, customFunction, debugIdentifier) // debugIdentifier isn't even used. we should get rid of it.
 {
-  for (;;) {
+  for(;;) {
     self waittill(flagName, note);
 
     if(!isDefined(note))
@@ -815,18 +802,16 @@ DoNoteTracksIntercept(flagName, interceptFunction, debugIdentifier) // debugIden
 {
   assert(isDefined(interceptFunction));
 
-  for (;;) {
+  for(;;) {
     self waittill(flagName, note);
 
     if(!isDefined(note))
       note = "undefined";
 
-    intercepted = [
-      [interceptFunction]
-    ](note);
-    if(isDefined(intercepted) && intercepted)
+    intercepted = [[interceptFunction]](note);
+    if(isDefined(intercepted) && intercepted) {
       continue;
-
+    }
     //prof_begin("HandleNoteTrack");
     val = self HandleNoteTrack(note, flagName);
     //prof_end("HandleNoteTrack");
@@ -839,7 +824,7 @@ DoNoteTracksIntercept(flagName, interceptFunction, debugIdentifier) // debugIden
 DoNoteTracksPostCallback(flagName, postFunction) {
   assert(isDefined(postFunction));
 
-  for (;;) {
+  for(;;) {
     self waittill(flagName, note);
 
     if(!isDefined(note))
@@ -849,9 +834,7 @@ DoNoteTracksPostCallback(flagName, postFunction) {
     val = self HandleNoteTrack(note, flagName);
     //prof_end("HandleNoteTrack");
 
-    [
-      [postFunction]
-    ](note);
+    [[postFunction]](note);
 
     if(isDefined(val))
       return val;
@@ -872,19 +855,17 @@ DoNoteTracksForeverIntercept(flagName, killString, interceptFunction, debugIdent
 }
 
 DoNoteTracksForeverProc(notetracksFunc, flagName, killString, customFunction, debugIdentifier) {
-  if(isdefined(killString))
+  if(isDefined(killString))
     self endon(killString);
   self endon("killanimscript");
   if(!isDefined(debugIdentifier))
     debugIdentifier = "undefined";
 
-  for (;;) {
+  for(;;) {
     //prof_begin( "DoNoteTracksForeverProc" );
     time = GetTime();
     //prof_begin( "notetracksFunc" );
-    returnedNote = [
-      [notetracksFunc]
-    ](flagName, customFunction, debugIdentifier);
+    returnedNote = [[notetracksFunc]](flagName, customFunction, debugIdentifier);
     //prof_end( "notetracksFunc" );
     timetaken = GetTime() - time;
     if(timetaken < 0.05) {
@@ -900,27 +881,27 @@ DoNoteTracksForeverProc(notetracksFunc, flagName, killString, customFunction, de
         wait(0.05 - timetaken);
       }
     }
-    //(GetTime()+" "+debugIdentifier+" DoNoteTracksForever returned in "+timetaken+" ms.");#/
+    //(GetTime()+" "+debugIdentifier+" DoNoteTracksForever returned in "+timetaken+" ms.");
     //prof_end( "DoNoteTracksForeverProc" );
   }
 }
 
 // Designed for using DoNoteTracks until "end" is reached, or a specified amount of time, whichever happens first
 DoNoteTracksWithTimeout(flagName, time, customFunction, debugIdentifier) {
-  ent = spawnstruct();
+  ent = spawnStruct();
   ent thread doNoteTracksForTimeEndNotify(time);
   DoNoteTracksForTimeProc(::DoNoteTracksForTimeout, flagName, customFunction, debugIdentifier, ent);
 }
 
 // Designed for using DoNoteTracks on looping animations, so you can wait for a time instead of the "end" parameter
 DoNoteTracksForTime(time, flagName, customFunction, debugIdentifier) {
-  ent = spawnstruct();
+  ent = spawnStruct();
   ent thread doNoteTracksForTimeEndNotify(time);
   DoNoteTracksForTimeProc(::DoNoteTracksForever, flagName, customFunction, debugIdentifier, ent);
 }
 
 DoNoteTracksForTimeIntercept(time, flagName, interceptFunction, debugIdentifier) {
-  ent = spawnstruct();
+  ent = spawnStruct();
   ent thread doNoteTracksForTimeEndNotify(time);
   DoNoteTracksForTimeProc(::DoNoteTracksForeverIntercept, flagName, interceptFunction, debugIdentifier, ent);
 }
@@ -937,15 +918,15 @@ doNoteTracksForTimeEndNotify(time) {
 
 playFootStep(foot) {
   if(!isAI(self)) {
-    self playsound("step_run_dirt");
+    self playSound("step_run_dirt");
     return;
   }
 
   groundType = undefined;
   // gotta record the groundtype in case it goes undefined on us
-  if(!isdefined(self.groundtype)) {
-    if(!isdefined(self.lastGroundtype)) {
-      self playsound("step_run_dirt");
+  if(!isDefined(self.groundtype)) {
+    if(!isDefined(self.lastGroundtype)) {
+      self playSound("step_run_dirt");
       return;
     }
 
@@ -955,24 +936,22 @@ playFootStep(foot) {
     self.lastGroundtype = self.groundType;
   }
 
-  self playsound("step_run_" + groundType);
-  if(![
-      [anim.optionalStepEffectFunction]
-    ](foot, groundType))
+  self playSound("step_run_" + groundType);
+  if(![[anim.optionalStepEffectFunction]](foot, groundType))
     playFootStepEffectSmall(foot, groundType);
 }
 
 playFootStepSmall(foot) {
   if(!isAI(self)) {
-    self playsound("step_run_dirt");
+    self playSound("step_run_dirt");
     return;
   }
 
   groundType = undefined;
   // gotta record the groundtype in case it goes undefined on us
-  if(!isdefined(self.groundtype)) {
-    if(!isdefined(self.lastGroundtype)) {
-      self playsound("step_run_dirt");
+  if(!isDefined(self.groundtype)) {
+    if(!isDefined(self.lastGroundtype)) {
+      self playSound("step_run_dirt");
       return;
     }
 
@@ -982,24 +961,22 @@ playFootStepSmall(foot) {
     self.lastGroundtype = self.groundType;
   }
 
-  self playsound("step_run_" + groundType);
-  if(![
-      [anim.optionalStepEffectSmallFunction]
-    ](foot, groundType))
+  self playSound("step_run_" + groundType);
+  if(![[anim.optionalStepEffectSmallFunction]](foot, groundType))
     playFootStepEffect(foot, groundType);
 }
 
 playFootStepEffect(foot, groundType) {
-  for (i = 0; i < anim.optionalStepEffects.size; i++) {
+  for(i = 0; i < anim.optionalStepEffects.size; i++) {
     if(groundType != anim.optionalStepEffects[i])
       continue;
     org = self gettagorigin(foot);
     angles = self.angles;
-    forward = anglestoforward(angles);
+    forward = anglesToForward(angles);
     back = forward * -1;
     up = anglestoup(angles);
 
-    playfx(level._effect["step_" + anim.optionalStepEffects[i]], org, up, back);
+    playFX(level._effect["step_" + anim.optionalStepEffects[i]], org, up, back);
     return true;
   }
 
@@ -1007,16 +984,16 @@ playFootStepEffect(foot, groundType) {
 }
 
 playFootStepEffectSmall(foot, groundType) {
-  for (i = 0; i < anim.optionalStepEffectsSmall.size; i++) {
+  for(i = 0; i < anim.optionalStepEffectsSmall.size; i++) {
     if(groundType != anim.optionalStepEffectsSmall[i])
       continue;
     org = self gettagorigin(foot);
     angles = self.angles;
-    forward = anglestoforward(angles);
+    forward = anglesToForward(angles);
     back = forward * -1;
     up = anglestoup(angles);
 
-    playfx(level._effect["step_small_" + anim.optionalStepEffectsSmall[i]], org, up, back);
+    playFX(level._effect["step_small_" + anim.optionalStepEffectsSmall[i]], org, up, back);
     return true;
   }
   return false;
@@ -1024,7 +1001,7 @@ playFootStepEffectSmall(foot, groundType) {
 
 shootNotetrack() {
   waittillframeend; // this gives a chance for anything else waiting on "fire" to shoot
-  if(isdefined(self) && gettime() > self.a.lastShootTime) {
+  if(isDefined(self) && gettime() > self.a.lastShootTime) {
     self shootEnemyWrapper();
     self decrementBulletsInClip();
     if(weaponClass(self.weapon) == "rocketlauncher")
@@ -1033,16 +1010,16 @@ shootNotetrack() {
 }
 
 fire_straight() {
-  if(self.a.weaponPos["right"] == "none")
+  if(self.a.weaponPos["right"] == "none") {
     return;
-
-  if(isdefined(self.dontShootStraight)) {
+  }
+  if(isDefined(self.dontShootStraight)) {
     shootNotetrack();
     return;
   }
 
   weaporig = self gettagorigin("tag_weapon");
-  dir = anglestoforward(self getMuzzleAngle());
+  dir = anglesToForward(self getMuzzleAngle());
   pos = weaporig + vector_multiply(dir, 1000);
   // note, shootwrapper is not called because shootwrapper applies a random spread, and shots
   // fired in a scripted sequence need to go perfectly straight so they get the same result each time.
@@ -1052,13 +1029,13 @@ fire_straight() {
 
 noteTrackFireSpray(note, flagName) {
   if(!isalive(self) && self isBadGuy()) {
-    if(isdefined(self.changed_team))
+    if(isDefined(self.changed_team)) {
       return;
-
+    }
     self.changed_team = true;
     teams["axis"] = "team3";
     teams["team3"] = "axis";
-    assertex(isdefined(teams[self.team]), "no team for " + self.team);
+    assertex(isDefined(teams[self.team]), "no team for " + self.team);
     self.team = teams[self.team];
   }
 
@@ -1070,23 +1047,23 @@ noteTrackFireSpray(note, flagName) {
     return;
   }
 
-  if(self.a.weaponPos["right"] == "none")
+  if(self.a.weaponPos["right"] == "none") {
     return;
-
+  }
   //prof_begin( "noteTrackFireSpray" );
 
   weaporig = self getMuzzlePos();
-  dir = anglestoforward(self getMuzzleAngle());
+  dir = anglesToForward(self getMuzzleAngle());
 
   // rambo set sprays at a wider range than other fire_spray anims
   ang = 10;
-  if(isdefined(self.isRambo))
+  if(isDefined(self.isRambo))
     ang = 20;
 
   hitenemy = false;
   // check if we're aiming closish to our enemy
   if(isalive(self.enemy) && issentient(self.enemy) && self canShootEnemy()) {
-    enemydir = vectornormalize(self.enemy geteye() - weaporig);
+    enemydir = vectornormalize(self.enemy getEye() - weaporig);
     if(vectordot(dir, enemydir) > cos(ang)) {
       hitenemy = true;
     }
@@ -1107,8 +1084,8 @@ noteTrackFireSpray(note, flagName) {
 }
 
 getPredictedAimYawToShootEntOrPos(time) {
-  if(!isdefined(self.shootEnt)) {
-    if(!isdefined(self.shootPos))
+  if(!isDefined(self.shootEnt)) {
+    if(!isDefined(self.shootPos))
       return 0;
 
     return getAimYawToPoint(self.shootPos);
@@ -1120,8 +1097,8 @@ getPredictedAimYawToShootEntOrPos(time) {
 
 getAimYawToShootEntOrPos() {
   // make use of the fact that shootPos = shootEnt getShootAtPos() if shootEnt is defined
-  if(!isdefined(self.shootEnt)) {
-    if(!isdefined(self.shootPos))
+  if(!isDefined(self.shootEnt)) {
+    if(!isDefined(self.shootPos))
       return 0;
 
     return getAimYawToPoint(self.shootPos);
@@ -1132,15 +1109,15 @@ getAimYawToShootEntOrPos() {
 
 getAimPitchToShootEntOrPos() {
   pitch = getPitchToShootEntOrPos();
-  if(self.script == "cover_crouch" && isdefined(self.a.coverMode) && self.a.coverMode == "lean")
+  if(self.script == "cover_crouch" && isDefined(self.a.coverMode) && self.a.coverMode == "lean")
     pitch -= anim.coverCrouchLeanPitch;
   return pitch;
 }
 
 getPitchToShootEntOrPos() {
-  if(!isdefined(self.shootEnt)) {
+  if(!isDefined(self.shootEnt)) {
     // make use of the fact that shootPos = shootEnt getShootAtPos() if shootEnt is defined
-    if(!isdefined(self.shootPos))
+    if(!isDefined(self.shootPos))
       return 0;
 
     return animscripts\combat_utility::getPitchToSpot(self.shootPos);
@@ -1150,7 +1127,7 @@ getPitchToShootEntOrPos() {
 }
 
 getShootFromPos() {
-  if(isdefined(self.useMuzzleSideOffset)) {
+  if(isDefined(self.useMuzzleSideOffset)) {
     muzzlePos = self getMuzzleSideOffsetPos();
     return (muzzlePos[0], muzzlePos[1], self getEye()[2]);
   }
@@ -1162,7 +1139,7 @@ getAimYawToPoint(point) {
   yaw = GetYawToSpot(point);
 
   // need to have fudge factor because the gun's origin is different than our origin,
-  // the closer our distance, the more we need to fudge. 
+  // the closer our distance, the more we need to fudge.
   dist = distance(self.origin, point);
   if(dist > 3) {
     angleFudge = asin(-3 / dist);
@@ -1177,13 +1154,11 @@ trackShootEntOrPos() {
   self endon("stop tracking");
   self endon("melee");
 
-  /#
-  assert(!isdefined(self.trackLoopThread));
+  assert(!isDefined(self.trackLoopThread));
   self.trackLoopThread = thisthread;
   self.trackLoopThreadType = "trackShootEntOrPos";
-  # /
 
-    trackLoop( % aim_2, % aim_4, % aim_6, % aim_8);
+  trackLoop( % aim_2, % aim_4, % aim_6, % aim_8);
 }
 
 // max change in angle in 1 frame
@@ -1191,7 +1166,7 @@ normalDeltaChangePerFrame = 10;
 largeDeltaChangePerFrame = 30;
 
 trackLoop(aim2, aim4, aim6, aim8) {
-  assert(isdefined(self.trackLoopThread));
+  assert(isDefined(self.trackLoopThread));
 
   prevYawDelta = 0;
   prevPitchDelta = 0;
@@ -1210,14 +1185,14 @@ trackLoop(aim2, aim4, aim6, aim8) {
   } else {
     doMaxAngleCheck = true;
 
-    if(isdefined(self.coverCrouchLean_aimmode))
+    if(isDefined(self.coverCrouchLean_aimmode))
       pitchAdd = anim.coverCrouchLeanPitch;
 
-    if((self.script == "cover_left" || self.script == "cover_right") && isdefined(self.a.cornerMode) && self.a.cornerMode == "lean")
+    if((self.script == "cover_left" || self.script == "cover_right") && isDefined(self.a.cornerMode) && self.a.cornerMode == "lean")
       yawAdd = self.coverNode.angles[1] - self.angles[1];
   }
 
-  for (;;) {
+  for(;;) {
     //prof_begin("trackLoop");
 
     incrAnimAimWeight();
@@ -1225,10 +1200,10 @@ trackLoop(aim2, aim4, aim6, aim8) {
     shootFromPos = getShootFromPos();
 
     shootPos = self.shootPos;
-    if(isdefined(self.shootEnt))
+    if(isDefined(self.shootEnt))
       shootPos = self.shootEnt getShootAtPos();
 
-    if(!isdefined(shootPos) && self shouldCQB())
+    if(!isDefined(shootPos) && self shouldCQB())
       shootPos = trackLoop_CQBShootPos(shootFromPos);
 
     if(self.stairsState == "up") {
@@ -1244,7 +1219,7 @@ trackLoop(aim2, aim4, aim6, aim8) {
       wasOnStairs = false;
     }
 
-    if(!isdefined(shootPos))
+    if(!isDefined(shootPos))
       angleDeltas = trackLoop_anglesForNoShootPos(shootFromPos, pitchAdd, yawAdd);
     else
       angleDeltas = trackLoop_getDesiredAngles((shootPos - shootFromPos), pitchAdd, yawAdd);
@@ -1299,12 +1274,12 @@ trackLoop_CQBShootPos(shootFromPos) {
   shootPos = undefined;
   selfForward = anglesToForward(self.angles);
 
-  if(isdefined(self.cqb_target)) {
+  if(isDefined(self.cqb_target)) {
     shootPos = self.cqb_target getShootAtPos();
     if(vectorDot(vectorNormalize(shootPos - shootFromPos), selfForward) < 0.643) // 0.643 = cos50
       shootPos = undefined;
   }
-  if(!isdefined(shootPos) && isdefined(self.cqb_point_of_interest)) {
+  if(!isDefined(shootPos) && isDefined(self.cqb_point_of_interest)) {
     shootPos = self.cqb_point_of_interest;
     if(vectorDot(vectorNormalize(shootPos - shootFromPos), selfForward) < 0.643) // 0.643 = cos50
       shootPos = undefined;
@@ -1314,7 +1289,7 @@ trackLoop_CQBShootPos(shootFromPos) {
 }
 
 trackLoop_anglesForNoShootPos(shootFromPos, pitchAdd, yawAdd) {
-  assert(!isdefined(self.shootEnt));
+  assert(!isDefined(self.shootEnt));
 
   if(recentlySawEnemy()) {
     shootAtOffset = (self.enemy getShootAtPos() - self.enemy.origin);
@@ -1325,11 +1300,11 @@ trackLoop_anglesForNoShootPos(shootFromPos, pitchAdd, yawAdd) {
   pitchDelta = 0;
   yawDelta = 0;
 
-  if(isdefined(self.node) && isdefined(anim.isCombatScriptNode[self.node.type]) && distanceSquared(self.origin, self.node.origin) < 16) {
+  if(isDefined(self.node) && isDefined(anim.isCombatScriptNode[self.node.type]) && distanceSquared(self.origin, self.node.origin) < 16) {
     yawDelta = AngleClamp180(self.angles[1] - self.node.angles[1]);
   } else {
     likelyEnemyDir = self getAnglesToLikelyEnemyPath();
-    if(isdefined(likelyEnemyDir)) {
+    if(isDefined(likelyEnemyDir)) {
       yawDelta = AngleClamp180(self.angles[1] - likelyEnemyDir[1]);
       pitchDelta = AngleClamp180(360 - likelyEnemyDir[0]);
     }
@@ -1356,7 +1331,7 @@ trackLoop_getDesiredAngles(vectorToShootPos, pitchAdd, yawAdd) {
 }
 
 trackLoop_clampAngles(pitchDelta, yawDelta, doMaxAngleCheck) {
-  if(isdefined(self.onSnowMobile)) {
+  if(isDefined(self.onSnowMobile)) {
     if(yawDelta > self.rightAimLimit || yawDelta < self.leftAimLimit)
       yawDelta = 0;
     if(pitchDelta > self.upAimLimit || pitchDelta < self.downAimLimit)
@@ -1406,13 +1381,13 @@ trackLoop_setAnimWeights(aim2, aim4, aim6, aim8, pitchDelta, yawDelta) {
 
 //setAnimAimWeight works just like setanimlimited on an imaginary anim node that affects the four aiming directions.
 setAnimAimWeight(goalweight, goaltime) {
-  if(!isdefined(goaltime) || goaltime <= 0) {
+  if(!isDefined(goaltime) || goaltime <= 0) {
     self.a.aimweight = goalweight;
     self.a.aimweight_start = goalweight;
     self.a.aimweight_end = goalweight;
     self.a.aimweight_transframes = 0;
   } else {
-    if(!isdefined(self.a.aimweight))
+    if(!isDefined(self.a.aimweight))
       self.a.aimweight = 0;
     self.a.aimweight_start = self.a.aimweight;
     self.a.aimweight_end = goalweight;
@@ -1451,7 +1426,7 @@ ramboAimInternal(baseYaw) {
   interval = 0.2;
 
   yaw = 0;
-  for (;;) {
+  for(;;) {
     if(isDefined(self.shootPos)) {
       newyaw = GetYaw(self.shootPos) - self.coverNode.angles[1];
       newyaw = AngleClamp180(newyaw - baseYaw);
@@ -1527,55 +1502,50 @@ decideNumShotsForFull() {
 }
 
 insure_dropping_clip(note, flagName) {
-  /#
   // will turn this assert on after the current anims get fixed
-  //assertex( isdefined( self.last_drop_clip_time ) && self.last_drop_clip_time > gettime() - 5000, "Tried to do attach clip notetrack without doing drop clip notetrack first, do /g_dumpanims " + self getentnum() + " and report erroneous anim." );
-  # /
+  //assertex( isDefined( self.last_drop_clip_time ) && self.last_drop_clip_time > gettime() - 5000, "Tried to do attach clip notetrack without doing drop clip notetrack first, do /g_dumpanims " + self getentnum() + " and report erroneous anim." );
 }
 
 handleDropClip(flagName) {
   self endon("killanimscript");
   self endon("abort_reload");
 
-  /#
   // make sure that we don't do clip anims without drop clip first
   self.last_drop_clip_time = gettime();
-  # /
-    //prof_begin( "handleDropClip" );
 
-    clipModel = undefined;
+  //prof_begin( "handleDropClip" );
+
+  clipModel = undefined;
   if(self.weaponInfo[self.weapon].useClip)
     clipModel = getWeaponClipModel(self.weapon);
 
-  /#
-  if(isdefined(clipModel))
+  if(isDefined(clipModel))
     self thread assertDropClipCleanedUp(4, clipModel);
-  # /
 
-    if(self.weaponInfo[self.weapon].hasClip) {
-      if(usingSidearm())
-        self playsound("weap_reload_pistol_clipout_npc");
-      else
-        self playsound("weap_reload_smg_clipout_npc");
+  if(self.weaponInfo[self.weapon].hasClip) {
+    if(usingSidearm())
+      self playSound("weap_reload_pistol_clipout_npc");
+    else
+      self playSound("weap_reload_smg_clipout_npc");
 
-      if(isDefined(clipModel)) {
-        self hidepart("tag_clip");
-        self thread dropClipModel(clipModel, "tag_clip");
-        self.weaponInfo[self.weapon].hasClip = false;
+    if(isDefined(clipModel)) {
+      self hidepart("tag_clip");
+      self thread dropClipModel(clipModel, "tag_clip");
+      self.weaponInfo[self.weapon].hasClip = false;
 
-        self thread resetClipOnAbort(clipModel);
-      }
+      self thread resetClipOnAbort(clipModel);
     }
+  }
 
   //prof_end( "handleDropClip" );
 
-  for (;;) {
+  for(;;) {
     self waittill(flagName, noteTrack);
 
     switch (noteTrack) {
       case "attach clip left":
       case "attach clip right":
-        if(isdefined(clipModel)) {
+        if(isDefined(clipModel)) {
           self attach(clipModel, "tag_inhand");
           self thread resetClipOnAbort(clipModel, "tag_inhand");
         }
@@ -1586,13 +1556,13 @@ handleDropClip(flagName) {
         break;
 
       case "detach clip nohand":
-        if(isdefined(clipModel))
+        if(isDefined(clipModel))
           self detach(clipModel, "tag_inhand");
         break;
 
       case "detach clip right":
       case "detach clip left":
-        if(isdefined(clipModel)) {
+        if(isDefined(clipModel)) {
           self detach(clipModel, "tag_inhand");
           self showpart("tag_clip");
           self notify("clip_detached");
@@ -1600,9 +1570,9 @@ handleDropClip(flagName) {
         }
 
         if(usingSidearm())
-          self playsound("weap_reload_pistol_clipin_npc");
+          self playSound("weap_reload_pistol_clipin_npc");
         else
-          self playsound("weap_reload_smg_clipin_npc");
+          self playSound("weap_reload_smg_clipin_npc");
 
         self.a.needsToRechamber = 0;
 
@@ -1619,9 +1589,9 @@ resetClipOnAbort(clipModel, currentTag) {
   self waittill_any("killanimscript", "abort_reload");
 
   // we can be dead but still defined. if we're undefined we got deleted.
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
-
+  }
   if(isDefined(currentTag))
     self detach(clipModel, currentTag);
 
@@ -1646,7 +1616,6 @@ dropClipModel(clipModel, tagName) {
     clip delete();
 }
 
-/#
 assertDropClipCleanedUp(waitTime, clipModel) {
   self endon("death");
   self endon("abort_reload");
@@ -1657,60 +1626,57 @@ assertDropClipCleanedUp(waitTime, clipModel) {
   // this assert can be fixed by adding an "abort_reload" notify from whatever interrupted the reload.
   assertmsg("AI " + self getEntityNumber() + " started a reload and didn't reset clip models after " + waitTime + " seconds");
 }
-# /
 
-  moveToOriginOverTime(origin, time) {
-    self endon("killanimscript");
+moveToOriginOverTime(origin, time) {
+  self endon("killanimscript");
 
-    distSq = distanceSquared(self.origin, origin);
+  distSq = distanceSquared(self.origin, origin);
 
-    if(distSq < 1) {
-      self safeTeleport(origin);
-      return;
-    }
-
-    if(distSq > 16 * 16 && !self mayMoveToPoint(origin)) {
-      /# println( "^1Warning: AI starting behavior for node at " + origin + " but could not move to that point." ); #/
-      return;
-    }
-
-    self.keepClaimedNodeIfValid = true;
-
-    offset = self.origin - origin;
-
-    frames = int(time * 20);
-    offsetreduction = vector_multiply(offset, 1.0 / frames);
-
-    for (i = 0; i < frames; i++) {
-      offset -= offsetreduction;
-      self safeTeleport(origin + offset);
-      wait .05;
-    }
-
-    self.keepClaimedNodeIfValid = false;
+  if(distSq < 1) {
+    self safeTeleport(origin);
+    return;
   }
+
+  if(distSq > 16 * 16 && !self mayMoveToPoint(origin)) {
+    /# println( "^1Warning: AI starting behavior for node at " + origin + " but could not move to that point." );
+    return;
+  }
+
+  self.keepClaimedNodeIfValid = true;
+
+  offset = self.origin - origin;
+
+  frames = int(time * 20);
+  offsetreduction = vector_multiply(offset, 1.0 / frames);
+
+  for(i = 0; i < frames; i++) {
+    offset -= offsetreduction;
+    self safeTeleport(origin + offset);
+    wait .05;
+  }
+
+  self.keepClaimedNodeIfValid = false;
+}
 
 returnTrue() {
   return true;
 }
 
 playLookAnimation(lookAnim, lookTime, canStopCallback) {
-  if(!isdefined(canStopCallback))
+  if(!isDefined(canStopCallback))
     canStopCallback = ::returnTrue;
 
-  for (i = 0; i < lookTime * 10; i++) {
+  for(i = 0; i < lookTime * 10; i++) {
     // Break out if you saw somebody lately
     if(isalive(self.enemy)) {
-      if(self canSeeEnemy() && [
-          [canStopCallback]
-        ]())
+      if(self canSeeEnemy() && [[canStopCallback]]())
         return;
     }
     if(self isSuppressedWrapper() && [
         [canStopCallback]
-      ]())
+      ]()) {
       return;
-
+    }
     self setAnimKnobAll(lookAnim, % body, 1, .1);
     wait(0.1);
   }
@@ -1734,25 +1700,25 @@ rpgPlayerRepulsor() {
   // After a couple freebe misses the repulsor is removed
 
   MISSES_REMAINING = rpgPlayerRepulsor_getNumMisses();
-  if(MISSES_REMAINING == 0)
+  if(MISSES_REMAINING == 0) {
     return;
-
+  }
   self endon("death");
-  for (;;) {
+  for(;;) {
     level waittill("an_enemy_shot", guy);
 
-    if(guy != self)
+    if(guy != self) {
       continue;
-
-    if(!isdefined(guy.enemy))
+    }
+    if(!isDefined(guy.enemy)) {
       continue;
-
-    if(guy.enemy != level.player)
+    }
+    if(guy.enemy != level.player) {
       continue;
-
-    if((isdefined(level.createRpgRepulsors)) && (level.createRpgRepulsors == false))
+    }
+    if((isDefined(level.createRpgRepulsors)) && (level.createRpgRepulsors == false)) {
       continue;
-
+    }
     thread rpgPlayerRepulsor_create();
 
     MISSES_REMAINING--;

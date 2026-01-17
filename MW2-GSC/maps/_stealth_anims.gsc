@@ -18,7 +18,7 @@ humans() {
   level.scr_anim["generic"]["_stealth_combat_jog"] = % combat_jog;
   level.scr_anim["generic"]["_stealth_patrol_cqb"] = % walk_CQB_F;
 
-  if(!isdefined(level.scr_anim["generic"]["_stealth_patrol_search_a"])) {
+  if(!isDefined(level.scr_anim["generic"]["_stealth_patrol_search_a"])) {
     level.scr_anim["generic"]["_stealth_patrol_search_a"] = % patrol_boredwalk_lookcycle_A;
     level.scr_anim["generic"]["_stealth_patrol_search_b"] = % patrol_boredwalk_lookcycle_B;
   }
@@ -49,7 +49,6 @@ humans() {
   level.scr_anim["generic"]["_stealth_prone_stop"] = % prone_crawl_2_prone;
   level.scr_anim["generic"]["_stealth_prone_start"] = % prone_2_prone_crawl;
   level.scr_anim["generic"]["_stealth_prone_2_run_roll"] = % hunted_pronehide_2_stand_v4;
-
 }
 
 #using_animtree("dog");

@@ -31,7 +31,7 @@
 function main() {
   init_clientfields();
   level flag::init("sing_root_depthcharges");
-  ai_spawners = getentarray("root_singapore_spawners", "script_noteworthy");
+  ai_spawners = getEntArray("root_singapore_spawners", "script_noteworthy");
   level._effect["depth_charge_explosion"] = "explosions/fx_exp_underwater_depth_charge";
   level._effect["depth_charge_spawn"] = "player/fx_ai_raven_teleport";
   level._effect["vortex_explode"] = "player/fx_ai_dni_rez_in_hero_clean";
@@ -43,11 +43,11 @@ function main() {
   level._effect["dirt_impact_md"] = "dirt/fx_dust_furn_drop_md";
   level._effect["blood_impact_lg"] = "blood/fx_blood_splash_furn_drop_lg";
   level._effect["dirt_impact_lg"] = "dirt/fx_dust_furn_drop_lg";
-  scene::add_scene_func("p7_fxanim_cp_zurich_ferris_wheel_bundle", & zurich_util::function_9f90bc0f, "done", "root_singapore_start_done");
-  scene::add_scene_func("p7_fxanim_cp_zurich_container_collapse_bundle", & zurich_util::function_9f90bc0f, "done", "root_singapore_start_done");
-  scene::add_scene_func("p7_fxanim_cp_zurich_car_slide_bundle", & zurich_util::function_9f90bc0f, "done", "root_singapore_start_done");
-  scene::add_scene_func("p7_fxanim_cp_zurich_ferris_wheel_wave_bundle", & function_8fbe0681, "play");
-  scene::add_scene_func("p7_fxanim_cp_zurich_ferris_wheel_wave_bundle", & zurich_util::function_9f90bc0f, "done", "root_singapore_start_done");
+  scene::add_scene_func("p7_fxanim_cp_zurich_ferris_wheel_bundle", &zurich_util::function_9f90bc0f, "done", "root_singapore_start_done");
+  scene::add_scene_func("p7_fxanim_cp_zurich_container_collapse_bundle", &zurich_util::function_9f90bc0f, "done", "root_singapore_start_done");
+  scene::add_scene_func("p7_fxanim_cp_zurich_car_slide_bundle", &zurich_util::function_9f90bc0f, "done", "root_singapore_start_done");
+  scene::add_scene_func("p7_fxanim_cp_zurich_ferris_wheel_wave_bundle", &function_8fbe0681, "play");
+  scene::add_scene_func("p7_fxanim_cp_zurich_ferris_wheel_wave_bundle", &zurich_util::function_9f90bc0f, "done", "root_singapore_start_done");
 }
 
 function init_clientfields() {
@@ -65,8 +65,8 @@ function skipto_main(str_objective, b_starting) {
   videostart("cp_zurich_env_corvusmonitor", 1);
   var_4ccf970 = zurich_util::function_a00fa665(str_objective);
   zurich_util::enable_surreal_ai_fx(1, 0.5);
-  array::thread_all(level.players, & zurich_util::function_39af75ef, "singapore_root_completed");
-  spawner::add_spawn_function_group("raven_ambush_ai", "script_parameters", & zurich_util::function_aceff870);
+  array::thread_all(level.players, &zurich_util::function_39af75ef, "singapore_root_completed");
+  spawner::add_spawn_function_group("raven_ambush_ai", "script_parameters", &zurich_util::function_aceff870);
   level thread scene::init("p7_fxanim_cp_zurich_ferris_wheel_bundle");
   level thread function_29073d62();
   level thread function_eb271a4b(str_objective);
@@ -74,9 +74,9 @@ function skipto_main(str_objective, b_starting) {
   skipto::teleport_players(str_objective, 0);
   level thread function_23a51944();
   level thread function_54fbadd1();
-  array::thread_all(level.activeplayers, & function_db4d091);
-  callback::on_spawned( & function_db4d091);
-  level.var_1895e0f9 = & function_1aeafdf8;
+  array::thread_all(level.activeplayers, &function_db4d091);
+  callback::on_spawned(&function_db4d091);
+  level.var_1895e0f9 = &function_1aeafdf8;
   level thread function_4402ab63();
   level thread function_95353712();
   level thread function_8842e57d();
@@ -112,7 +112,7 @@ function function_52ac3a61() {
   var_4d85762b = self getentitynumber();
   self waittill("death");
   wait(0.5);
-  if(isdefined(self.currentspectatingclient) && self.currentspectatingclient >= 0 && var_4d85762b != self.currentspectatingclient) {
+  if(isDefined(self.currentspectatingclient) && self.currentspectatingclient >= 0 && var_4d85762b != self.currentspectatingclient) {
     foreach(player in level.players) {
       if(player getentitynumber() == self.currentspectatingclient) {
         player clientfield::increment_to_player("umbra_tome_singapore");
@@ -136,16 +136,16 @@ function function_c38b8260() {
 }
 
 function function_95b88092(str_objective, b_starting) {
-  if(isdefined(b_starting) && b_starting) {
+  if(isDefined(b_starting) && b_starting) {
     load::function_73adcefc();
     load::function_a2995f22();
     skipto::teleport_players(str_objective, 0);
-    array::thread_all(level.players, & zurich_util::function_39af75ef, "singapore_root_completed");
+    array::thread_all(level.players, &zurich_util::function_39af75ef, "singapore_root_completed");
     level thread function_252e350();
     zurich_util::enable_surreal_ai_fx(1, 0.5);
     level thread zurich_util::function_c90e23b6(str_objective);
   }
-  if(isdefined(level.bzm_zurichdialogue17callback)) {
+  if(isDefined(level.bzm_zurichdialogue17callback)) {
     level thread[[level.bzm_zurichdialogue17callback]]();
   }
   level thread scene::init("singapore_fxanim_heart_ceiling", "targetname");
@@ -159,10 +159,8 @@ function function_95b88092(str_objective, b_starting) {
   var_8fb0849a = zurich_util::function_a1851f86(str_objective);
   var_8fb0849a waittill("brn");
   level thread root_cinematics::play_scene(str_objective, var_8fb0849a.var_90971f20.e_player);
-  if(isdefined(level.bzm_forceaicleanup)) {
-    [
-      [level.bzm_forceaicleanup]
-    ]();
+  if(isDefined(level.bzm_forceaicleanup)) {
+    [[level.bzm_forceaicleanup]]();
   }
   videostop("cp_zurich_env_corvusmonitor");
   util::clientnotify("stp_mus");
@@ -170,13 +168,13 @@ function function_95b88092(str_objective, b_starting) {
 
 function skipto_start_done(str_objective, b_starting, b_direct, player) {
   level thread function_c38b8260();
-  a_e_cover = getentarray("singapore_cover", "targetname");
-  array::run_all(a_e_cover, & delete);
+  a_e_cover = getEntArray("singapore_cover", "targetname");
+  array::run_all(a_e_cover, &delete);
 }
 
 function function_53a05865(str_objective, b_starting, b_direct, player) {
   level notify("hash_73b00182");
-  callback::remove_on_spawned( & function_db4d091);
+  callback::remove_on_spawned(&function_db4d091);
   level.var_1895e0f9 = undefined;
   level thread zurich_util::function_4a00a473("root_singapore");
 }
@@ -253,18 +251,18 @@ function function_54fbadd1() {
 }
 
 function function_c9c3556c(str_objective) {
-  array::run_all(level.players, & freezecontrols, 1);
-  array::run_all(level.players, & enableinvulnerability);
-  array::run_all(level.players, & util::show_hud, 0);
+  array::run_all(level.players, &freezecontrols, 1);
+  array::run_all(level.players, &enableinvulnerability);
+  array::run_all(level.players, &util::show_hud, 0);
   wait(2);
   level thread util::screen_fade_in(1);
-  array::thread_all(level.players, & clientfield::increment_to_player, "postfx_transition");
+  array::thread_all(level.players, &clientfield::increment_to_player, "postfx_transition");
   playsoundatposition("evt_clearing_trans_in", (0, 0, 0));
   level zurich_util::function_c90e23b6(str_objective, "breadcrumb_singroot_3");
   level.ai_taylor ai::set_ignoreall(1);
-  array::run_all(level.players, & freezecontrols, 0);
-  array::run_all(level.players, & disableinvulnerability);
-  array::run_all(level.players, & util::show_hud, 1);
+  array::run_all(level.players, &freezecontrols, 0);
+  array::run_all(level.players, &disableinvulnerability);
+  array::run_all(level.players, &util::show_hud, 1);
   util::clear_streamer_hint();
   savegame::checkpoint_save();
 }
@@ -272,10 +270,10 @@ function function_c9c3556c(str_objective) {
 function function_3893ad5c(str_objective) {
   b_in_water = 1;
   wait(1);
-  if(isdefined(level.bzm_zurichdialogue19callback)) {
+  if(isDefined(level.bzm_zurichdialogue19callback)) {
     level thread[[level.bzm_zurichdialogue19callback]]();
   }
-  while (b_in_water) {
+  while(b_in_water) {
     foreach(e_player in level.activeplayers) {
       if(!e_player isplayerunderwater()) {
         b_in_water = 0;
@@ -291,10 +289,10 @@ function function_eb271a4b(str_objective) {
   level endon(str_objective + "_done");
   level endon("hash_73b00182");
   var_b1cdbf1d = 0;
-  while (true) {
+  while(true) {
     var_f6e695c0 = struct::get("breadcrumb_singroot_" + var_b1cdbf1d, "targetname");
     var_b1fe230f = getent("t_singroot_" + var_b1cdbf1d, "script_noteworthy");
-    if(!isdefined(var_f6e695c0) || !isdefined(var_b1fe230f)) {
+    if(!isDefined(var_f6e695c0) || !isDefined(var_b1fe230f)) {
       return;
     }
     objectives::set("cp_waypoint_breadcrumb", var_f6e695c0);
@@ -314,17 +312,17 @@ function function_26f61e7c() {
 }
 
 function function_8842e57d() {
-  var_d5aeed2b = getentarray("root_sing_cover", "targetname");
-  var_d5aeed2b = array::thread_all(var_d5aeed2b, & function_258afdfc);
+  var_d5aeed2b = getEntArray("root_sing_cover", "targetname");
+  var_d5aeed2b = array::thread_all(var_d5aeed2b, &function_258afdfc);
 }
 
 function function_258afdfc() {
   var_482d5204 = struct::get_array(self.target, "targetname");
-  assert(isdefined(var_482d5204), "");
+  assert(isDefined(var_482d5204), "");
   foreach(var_19966f24 in var_482d5204) {
-    assert(isdefined(var_19966f24.model), "");
-    assert(isdefined(var_19966f24.target), "");
-    if(isdefined(var_19966f24.script_string)) {
+    assert(isDefined(var_19966f24.model), "");
+    assert(isDefined(var_19966f24.target), "");
+    if(isDefined(var_19966f24.script_string)) {
       a_nd_cover = getnodearray(var_19966f24.script_string, "targetname");
       foreach(nd_cover in a_nd_cover) {
         setenablenode(nd_cover, 0);
@@ -342,10 +340,10 @@ function function_375f158a() {
   var_4b1dfeae = util::spawn_model(self.model, self.origin, self.angles);
   var_4b1dfeae.var_1069f2d4 = struct::get(self.target, "targetname");
   var_4b1dfeae.targetname = "singapore_cover";
-  if(isdefined(self.script_fxid)) {
+  if(isDefined(self.script_fxid)) {
     var_4b1dfeae.script_fxid = self.script_fxid;
   }
-  if(isdefined(self.script_string)) {
+  if(isDefined(self.script_string)) {
     var_4b1dfeae.script_string = self.script_string;
     var_4b1dfeae thread function_e8047245();
   }
@@ -361,10 +359,10 @@ function function_14bb726e() {
   self solid();
   self playrumbleonentity("damage_heavy");
   playsoundatposition("evt_floor_debris_big", self.origin);
-  if(isdefined(self.script_fxid)) {
-    playfxontag(level._effect[self.script_fxid], self, "tag_origin");
+  if(isDefined(self.script_fxid)) {
+    playFXOnTag(level._effect[self.script_fxid], self, "tag_origin");
   } else {
-    playfxontag(level._effect["dirt_impact_lg"], self, "tag_origin");
+    playFXOnTag(level._effect["dirt_impact_lg"], self, "tag_origin");
   }
 }
 
@@ -379,14 +377,14 @@ function function_e8047245() {
 function function_1bf4af4f() {
   self endon("delete");
   level waittill("hash_4bb2007e");
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     self delete();
   }
 }
 
 function function_a0e6701b() {
-  var_95ff9697 = getentarray("sing_falling_destructible", "script_noteworthy");
-  array::thread_all(var_95ff9697, & function_514e0b2e);
+  var_95ff9697 = getEntArray("sing_falling_destructible", "script_noteworthy");
+  array::thread_all(var_95ff9697, &function_514e0b2e);
 }
 
 function function_514e0b2e() {
@@ -402,7 +400,7 @@ function function_514e0b2e() {
     self waittill("movedone");
     self playrumbleonentity("damage_heavy");
     playsoundatposition("evt_floor_debris_big", self.origin);
-    playfxontag(level._effect["dirt_impact_md"], self, "tag_origin");
+    playFXOnTag(level._effect["dirt_impact_md"], self, "tag_origin");
   }
 }
 
@@ -448,15 +446,15 @@ function surge_player_tracker(player) {
   self endon("death");
   self endon("wave_stop");
   player endon("death");
-  while (true) {
+  while(true) {
     self waittill("trigger", e_hit);
-    if(e_hit == player && (!(isdefined(player.is_surged) && player.is_surged))) {
+    if(e_hit == player && (!(isDefined(player.is_surged) && player.is_surged))) {
       player.is_surged = 1;
       player thread surge_trigger_watcher(self);
       if(isplayer(player) && player istouching(self)) {
         player thread surge_player_push(self);
         player thread surge_player_rumble(self);
-        player playsound("evt_surge_impact");
+        player playSound("evt_surge_impact");
         break;
       }
     }
@@ -465,11 +463,11 @@ function surge_player_tracker(player) {
 
 function surge_trigger_watcher(t_surge) {
   self endon("death");
-  while (isdefined(t_surge) && self istouching(t_surge)) {
+  while(isDefined(t_surge) && self istouching(t_surge)) {
     wait(0.05);
   }
   self.is_surged = 0;
-  if(isdefined(t_surge)) {
+  if(isDefined(t_surge)) {
     t_surge notify("wave_stop");
   }
 }
@@ -477,7 +475,7 @@ function surge_trigger_watcher(t_surge) {
 function surge_player_rumble(t_wave) {
   self endon("death");
   t_wave endon("wave_stop");
-  while (true) {
+  while(true) {
     self playrumbleonentity("damage_heavy");
     wait(0.1);
   }
@@ -486,9 +484,9 @@ function surge_player_rumble(t_wave) {
 function surge_player_push(t_wave) {
   self endon("death");
   t_wave endon("wave_stop");
-  while (true) {
-    if(!(isdefined(self.laststand) && self.laststand)) {
-      self setvelocity(anglestoforward(vectorscale((0, 1, 0), 345)) * 200);
+  while(true) {
+    if(!(isDefined(self.laststand) && self.laststand)) {
+      self setvelocity(anglesToForward(vectorscale((0, 1, 0), 345)) * 200);
     }
     wait(0.05);
   }
@@ -497,9 +495,9 @@ function surge_player_push(t_wave) {
 function enemy_surge_tracker() {
   self endon("death");
   self endon("wave_stop");
-  while (true) {
+  while(true) {
     self waittill("trigger", ai_entity);
-    if(isalive(ai_entity) && ai_entity.team == "axis" && (!(isdefined(ai_entity.b_swept) && ai_entity.b_swept))) {
+    if(isalive(ai_entity) && ai_entity.team == "axis" && (!(isDefined(ai_entity.b_swept) && ai_entity.b_swept))) {
       ai_entity.b_swept = 1;
       ai_entity thread enemy_surge_hit(self);
     }
@@ -528,7 +526,7 @@ function function_252e350() {
   level flag::set("sing_root_depthcharges");
   level thread namespace_e9d9fb34::function_62b0213a();
   var_8edc0313 = struct::get_array("singapore_depth_charge", "targetname");
-  array::thread_all(var_8edc0313, & create_depth_charge);
+  array::thread_all(var_8edc0313, &create_depth_charge);
   level thread function_1c297ab3();
 }
 
@@ -538,12 +536,12 @@ function create_depth_charge() {
   self thread function_6a938164();
   n_spawned = 0;
   wait(1);
-  while (3 > n_spawned) {
+  while(3 > n_spawned) {
     e_depth_charge = self create_depth_charge_model();
     n_spawned++;
-    if(isdefined(e_depth_charge)) {
+    if(isDefined(e_depth_charge)) {
       s_target = struct::get(self.target, "targetname");
-      if(isdefined(s_target)) {
+      if(isDefined(s_target)) {
         e_depth_charge thread handle_movement(s_target);
       }
       e_depth_charge.targetname = "depth_charger_dive";
@@ -566,9 +564,9 @@ function function_1c297ab3() {
 function function_6a938164() {
   self endon("hash_f9256645");
   level endon("hash_cc8de88d");
-  while (true) {
+  while(true) {
     e_player = arraygetclosest(self.origin, level.activeplayers);
-    if(isdefined(e_player) && distance(e_player.origin, self.origin) < 256) {
+    if(isDefined(e_player) && distance(e_player.origin, self.origin) < 256) {
       self notify("hash_f9256645");
     }
     wait(0.1);
@@ -576,12 +574,12 @@ function function_6a938164() {
 }
 
 function create_depth_charge_model() {
-  playfx(level._effect["depth_charge_spawn"], self.origin);
+  playFX(level._effect["depth_charge_spawn"], self.origin);
   wait(0.2);
   e_depth_charge = util::spawn_model("veh_t7_drone_depth_charge", self.origin, (randomint(360), randomint(360), randomint(360)));
-  if(isdefined(e_depth_charge)) {
+  if(isDefined(e_depth_charge)) {
     e_depth_charge.script_noteworthy = "depth_charge_model";
-    e_depth_charge setcandamage(1);
+    e_depth_charge setCanDamage(1);
     e_depth_charge.health = 999999;
     e_depth_charge clientfield::set("sm_depth_charge_fx", 1);
     e_depth_charge thread handle_damage();
@@ -591,12 +589,12 @@ function create_depth_charge_model() {
 
 function handle_movement(s_target, should_ignore_player) {
   self endon("death");
-  while (isdefined(s_target)) {
+  while(isDefined(s_target)) {
     n_distance = distance(self.origin, s_target.origin);
     n_time = n_distance / 100;
     self moveto(s_target.origin, n_time);
     self waittill("movedone");
-    if(isdefined(s_target.target)) {
+    if(isDefined(s_target.target)) {
       s_target = struct::get(s_target.target, "targetname");
     } else {
       s_target = undefined;
@@ -609,7 +607,7 @@ function handle_movement(s_target, should_ignore_player) {
 function handle_damage() {
   self endon("death");
   self waittill("damage", damage, e_attacker);
-  self detonate_depth_charge(isdefined(e_attacker) && isplayer(e_attacker));
+  self detonate_depth_charge(isDefined(e_attacker) && isplayer(e_attacker));
 }
 
 function early_explosion() {
@@ -621,7 +619,7 @@ function early_explosion() {
 }
 
 function detonate_depth_charge(should_chain = 0) {
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   v_origin = self.origin;
@@ -629,13 +627,13 @@ function detonate_depth_charge(should_chain = 0) {
   playrumbleonposition("depth_charge_rumble", v_origin);
   self notify("exploded");
   if(self.classname === "script_model") {
-    playfx(level._effect["depth_charge_explosion"], v_origin);
+    playFX(level._effect["depth_charge_explosion"], v_origin);
     playsoundatposition("exp_drone_underwater", v_origin);
     self util::self_delete();
   }
   wait(0.1);
-  if(isdefined(should_chain) && should_chain) {
-    a_e_depth_charges = getentarray("depth_charge_model", "script_noteworthy");
+  if(isDefined(should_chain) && should_chain) {
+    a_e_depth_charges = getEntArray("depth_charge_model", "script_noteworthy");
     a_e_depth_charges = arraysortclosest(a_e_depth_charges, v_origin, undefined, 0, 120);
     foreach(e_depth_charge in a_e_depth_charges) {
       e_depth_charge detonate_depth_charge();
@@ -645,7 +643,7 @@ function detonate_depth_charge(should_chain = 0) {
 
 function detect_nearby_player(n_update_range = 200) {
   self endon("death");
-  while (true) {
+  while(true) {
     foreach(e_player in level.activeplayers) {
       if(!e_player isinmovemode("ufo", "noclip")) {
         if(distancesquared(e_player.origin, self.origin) < (n_update_range * n_update_range) && !e_player laststand::player_is_in_laststand()) {

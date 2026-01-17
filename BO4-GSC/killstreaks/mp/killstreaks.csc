@@ -6,7 +6,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\killstreaks\killstreaks_shared;
 #include scripts\killstreaks\mp\killstreak_vehicle;
-
 #namespace killstreaks;
 
 autoexec __init__system__() {

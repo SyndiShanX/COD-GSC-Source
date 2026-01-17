@@ -40,13 +40,13 @@
 #namespace escort;
 
 function autoexec __init__sytem__() {
-  system::register("escort", & __init__, undefined, undefined);
+  system::register("escort", &__init__, undefined, undefined);
 }
 
 function __init__() {
   clientfield::register("actor", "robot_state", 1, 2, "int");
   clientfield::register("actor", "escort_robot_burn", 1, 1, "int");
-  callback::on_spawned( & on_player_spawned);
+  callback::on_spawned(&on_player_spawned);
 }
 
 function main() {
@@ -81,7 +81,7 @@ function main() {
       level.shutdowndamage = 0;
     }
   }
-  if(isdefined(level.escortrobotkillstreakbundle)) {
+  if(isDefined(level.escortrobotkillstreakbundle)) {
     killstreak_bundles::register_killstreak_bundle(level.escortrobotkillstreakbundle);
     level.shutdowndamage = killstreak_bundles::get_max_health(level.escortrobotkillstreakbundle);
   }
@@ -109,15 +109,15 @@ function main() {
   level.overrideteamscore = 1;
   level.scoreroundwinbased = 1;
   level.doubleovertime = 1;
-  level.onprecachegametype = & onprecachegametype;
-  level.onstartgametype = & onstartgametype;
-  level.onspawnplayer = & onspawnplayer;
-  level.onplayerkilled = & onplayerkilled;
-  level.ontimelimit = & ontimelimit;
-  level.onroundswitch = & onroundswitch;
-  level.onendgame = & onendgame;
-  level.shouldplayovertimeround = & shouldplayovertimeround;
-  level.onroundendgame = & onroundendgame;
+  level.onprecachegametype = &onprecachegametype;
+  level.onstartgametype = &onstartgametype;
+  level.onspawnplayer = &onspawnplayer;
+  level.onplayerkilled = &onplayerkilled;
+  level.ontimelimit = &ontimelimit;
+  level.onroundswitch = &onroundswitch;
+  level.onendgame = &onendgame;
+  level.shouldplayovertimeround = &shouldplayovertimeround;
+  level.onroundendgame = &onroundendgame;
   gameobjects::register_allowed_gameobject(level.gametype);
   killstreak_bundles::register_killstreak_bundle("escort_robot");
 }
@@ -126,7 +126,7 @@ function onprecachegametype() {}
 
 function onstartgametype() {
   level.usestartspawns = 1;
-  if(!isdefined(game["switchedsides"])) {
+  if(!isDefined(game["switchedsides"])) {
     game["switchedsides"] = 0;
   }
   setclientnamemode("auto_change");
@@ -136,32 +136,28 @@ function onstartgametype() {
     game["attackers"] = olddefenders;
     game["defenders"] = oldattackers;
   }
-  util::setobjectivetext(game["attackers"], & "OBJECTIVES_ESCORT_ATTACKER");
-  util::setobjectivetext(game["defenders"], & "OBJECTIVES_ESCORT_DEFENDER");
-  util::setobjectivescoretext(game["attackers"], & "OBJECTIVES_ESCORT_ATTACKER_SCORE");
-  util::setobjectivescoretext(game["defenders"], & "OBJECTIVES_ESCORT_DEFENDER_SCORE");
-  util::setobjectivehinttext(game["attackers"], & "OBJECTIVES_ESCORT_ATTACKER_HINT");
-  util::setobjectivehinttext(game["defenders"], & "OBJECTIVES_ESCORT_DEFENDER_HINT");
-  if(isdefined(game["overtime_round"])) {
-    [
-      [level._setteamscore]
-    ]("allies", 0);
-    [
-      [level._setteamscore]
-    ]("axis", 0);
-    if(isdefined(game["escort_overtime_time_to_beat"])) {
+  util::setobjectivetext(game["attackers"], &"OBJECTIVES_ESCORT_ATTACKER");
+  util::setobjectivetext(game["defenders"], &"OBJECTIVES_ESCORT_DEFENDER");
+  util::setobjectivescoretext(game["attackers"], &"OBJECTIVES_ESCORT_ATTACKER_SCORE");
+  util::setobjectivescoretext(game["defenders"], &"OBJECTIVES_ESCORT_DEFENDER_SCORE");
+  util::setobjectivehinttext(game["attackers"], &"OBJECTIVES_ESCORT_ATTACKER_HINT");
+  util::setobjectivehinttext(game["defenders"], &"OBJECTIVES_ESCORT_DEFENDER_HINT");
+  if(isDefined(game["overtime_round"])) {
+    [[level._setteamscore]]("allies", 0);
+    [[level._setteamscore]]("axis", 0);
+    if(isDefined(game["escort_overtime_time_to_beat"])) {
       times = game["escort_overtime_time_to_beat"] / 1000;
       timem = int(times) / 60;
       util::registertimelimit(timem, timem);
     }
     if(game["overtime_round"] == 1) {
-      level.ontimelimit = & ontimelimit_overtime1;
-      util::setobjectivehinttext(game["attackers"], & "MP_ESCORT_OVERTIME_ROUND_1_ATTACKERS");
-      util::setobjectivehinttext(game["defenders"], & "MP_ESCORT_OVERTIME_ROUND_1_DEFENDERS");
+      level.ontimelimit = &ontimelimit_overtime1;
+      util::setobjectivehinttext(game["attackers"], &"MP_ESCORT_OVERTIME_ROUND_1_ATTACKERS");
+      util::setobjectivehinttext(game["defenders"], &"MP_ESCORT_OVERTIME_ROUND_1_DEFENDERS");
     } else {
-      level.ontimelimit = & ontimelimit_overtime2;
-      util::setobjectivehinttext(game["attackers"], & "MP_ESCORT_OVERTIME_ROUND_2_TIE_ATTACKERS");
-      util::setobjectivehinttext(game["defenders"], & "MP_ESCORT_OVERTIME_ROUND_2_TIE_DEFENDERS");
+      level.ontimelimit = &ontimelimit_overtime2;
+      util::setobjectivehinttext(game["attackers"], &"MP_ESCORT_OVERTIME_ROUND_2_TIE_ATTACKERS");
+      util::setobjectivehinttext(game["defenders"], &"MP_ESCORT_OVERTIME_ROUND_2_TIE_DEFENDERS");
     }
   }
   level.spawnmins = (0, 0, 0);
@@ -189,13 +185,13 @@ function onspawnplayer(predictedspawn) {
 }
 
 function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(!isdefined(attacker) || attacker == self || !isplayer(attacker) || attacker.team == self.team) {
+  if(!isDefined(attacker) || attacker == self || !isplayer(attacker) || attacker.team == self.team) {
     return;
   }
-  if(self.team == game["defenders"] && (isdefined(attacker.escortingrobot) && attacker.escortingrobot)) {
+  if(self.team == game["defenders"] && (isDefined(attacker.escortingrobot) && attacker.escortingrobot)) {
     attacker recordgameevent("attacking");
     scoreevents::processscoreevent("killed_defender", attacker);
-  } else if(self.team == game["attackers"] && (isdefined(self.escortingrobot) && self.escortingrobot)) {
+  } else if(self.team == game["attackers"] && (isDefined(self.escortingrobot) && self.escortingrobot)) {
     attacker recordgameevent("defending");
     scoreevents::processscoreevent("killed_attacker", attacker);
   }
@@ -227,7 +223,7 @@ function onroundswitch() {
 }
 
 function onendgame(winningteam) {
-  if(isdefined(game["overtime_round"])) {
+  if(isDefined(game["overtime_round"])) {
     if(game["overtime_round"] == 1) {
       game["escort_overtime_first_winner"] = winningteam;
       if(winningteam == game["defenders"]) {
@@ -237,7 +233,7 @@ function onendgame(winningteam) {
       }
     } else {
       game["escort_overtime_second_winner"] = winningteam;
-      if(isdefined(winningteam) && winningteam != "tie") {
+      if(isDefined(winningteam) && winningteam != "tie") {
         game["escort_overtime_best_time"] = globallogic_utils::gettimepassed();
       }
     }
@@ -246,7 +242,7 @@ function onendgame(winningteam) {
 }
 
 function shouldplayovertimeround() {
-  if(isdefined(game["overtime_round"])) {
+  if(isDefined(game["overtime_round"])) {
     if(game["overtime_round"] == 1 || !level.gameended) {
       return true;
     }
@@ -261,7 +257,7 @@ function shouldplayovertimeround() {
 }
 
 function onroundendgame(winningteam) {
-  if(isdefined(game["overtime_round"])) {
+  if(isDefined(game["overtime_round"])) {
     foreach(team in level.teams) {
       score = game["roundswon"][team];
       [
@@ -284,7 +280,7 @@ function drop_robot() {
   startdir = patharray[0] - movetrigger.origin;
   startangles = vectortoangles(startdir);
   drop_origin = movetrigger.origin;
-  drop_height = (isdefined(level.escort_drop_height) ? level.escort_drop_height : supplydrop::getdropheight(drop_origin));
+  drop_height = (isDefined(level.escort_drop_height) ? level.escort_drop_height : supplydrop::getdropheight(drop_origin));
   heli_drop_goal = (drop_origin[0], drop_origin[1], drop_height);
   goalpath = undefined;
   dropoffset = vectorscale((0, -1, 0), 120);
@@ -295,8 +291,8 @@ function drop_robot() {
   chopper.maxhealth = 999999;
   chopper.health = 999999;
   chopper.spawntime = gettime();
-  supplydropspeed = (isdefined(level.escort_drop_speed) ? level.escort_drop_speed : getdvarint("scr_supplydropSpeedStarting", 1000));
-  supplydropaccel = (isdefined(level.escort_drop_accel) ? level.escort_drop_accel : getdvarint("scr_supplydropAccelStarting", 1000));
+  supplydropspeed = (isDefined(level.escort_drop_speed) ? level.escort_drop_speed : getdvarint("scr_supplydropSpeedStarting", 1000));
+  supplydropaccel = (isDefined(level.escort_drop_accel) ? level.escort_drop_accel : getdvarint("scr_supplydropAccelStarting", 1000));
   chopper setspeed(supplydropspeed, supplydropaccel);
   maxpitch = getdvarint("scr_supplydropMaxPitch", 25);
   maxroll = getdvarint("scr_supplydropMaxRoll", 45);
@@ -313,9 +309,9 @@ function drop_robot() {
   level.robot.dropundervehicleoriginoverride = 1;
   level.robot.targetangles = startangles;
   chopper vehicle::unload("all");
-  level.robot playsound("evt_safeguard_robot_land");
+  level.robot playSound("evt_safeguard_robot_land");
   chopper thread drop_heli_leave();
-  while (level.robot flagsys::get("in_vehicle")) {
+  while(level.robot flagsys::get("in_vehicle")) {
     wait(1);
   }
   level.robot.patharray = patharray;
@@ -344,7 +340,7 @@ function drop_robot() {
   }
   level.robot thread wait_robot_shutdown();
   level.robot thread wait_robot_reboot();
-  while (level.inprematchperiod) {
+  while(level.inprematchperiod) {
     wait(0.05);
   }
   level.robot.onground = 1;
@@ -367,12 +363,12 @@ function drop_heli_leave() {
 }
 
 function debug_draw_robot_path() {
-  if((isdefined(getdvarint("")) ? getdvarint("") : 0) == 0) {
+  if((isDefined(getdvarint("")) ? getdvarint("") : 0) == 0) {
     return;
   }
   debug_duration = 999999999;
   pathnodes = level.robot.patharray;
-  for (i = 0; i < (pathnodes.size - 1); i++) {
+  for(i = 0; i < (pathnodes.size - 1); i++) {
     currnode = pathnodes[i];
     nextnode = pathnodes[i + 1];
     util::debug_line(currnode, nextnode, vectorscale((0, 1, 0), 0.9), 0.9, 0, debug_duration);
@@ -382,13 +378,13 @@ function debug_draw_robot_path() {
   }
 }
 
-function debug_draw_approximate_robot_path_to_goal( & goalpatharray) {
-  if((isdefined(getdvarint("")) ? getdvarint("") : 0) == 0) {
+function debug_draw_approximate_robot_path_to_goal(&goalpatharray) {
+  if((isDefined(getdvarint("")) ? getdvarint("") : 0) == 0) {
     return;
   }
   debug_duration = 60;
   pathnodes = goalpatharray;
-  for (i = 0; i < (pathnodes.size - 1); i++) {
+  for(i = 0; i < (pathnodes.size - 1); i++) {
     currnode = pathnodes[i];
     nextnode = pathnodes[i + 1];
     util::debug_line(currnode, nextnode, vectorscale((1, 1, 0), 0.9), 0.9, 0, debug_duration);
@@ -399,40 +395,40 @@ function debug_draw_approximate_robot_path_to_goal( & goalpatharray) {
 }
 
 function debug_draw_current_robot_goal(goal) {
-  if((isdefined(getdvarint("")) ? getdvarint("") : 0) == 0) {
+  if((isDefined(getdvarint("")) ? getdvarint("") : 0) == 0) {
     return;
   }
-  if(isdefined(goal)) {
+  if(isDefined(goal)) {
     debug_duration = 60;
     util::debug_sphere(goal, 8, vectorscale((0, 1, 0), 0.9), 0.9, debug_duration);
   }
 }
 
 function debug_draw_find_immediate_goal(pathgoal) {
-  if((isdefined(getdvarint("")) ? getdvarint("") : 0) == 0) {
+  if((isDefined(getdvarint("")) ? getdvarint("") : 0) == 0) {
     return;
   }
-  if(isdefined(pathgoal)) {
+  if(isDefined(pathgoal)) {
     debug_duration = 60;
     util::debug_sphere(pathgoal + vectorscale((0, 0, 1), 18), 6, vectorscale((1, 0, 0), 0.9), 0.9, debug_duration);
   }
 }
 
 function debug_draw_find_immediate_goal_override(immediategoal) {
-  if((isdefined(getdvarint("")) ? getdvarint("") : 0) == 0) {
+  if((isDefined(getdvarint("")) ? getdvarint("") : 0) == 0) {
     return;
   }
-  if(isdefined(immediategoal)) {
+  if(isDefined(immediategoal)) {
     debug_duration = 60;
     util::debug_sphere(immediategoal + vectorscale((0, 0, 1), 18), 6, vectorscale((1, 0, 1), 0.9), 0.9, debug_duration);
   }
 }
 
 function debug_draw_blocked_path_kill_radius(center, radius) {
-  if((isdefined(getdvarint("")) ? getdvarint("") : 0) == 0) {
+  if((isDefined(getdvarint("")) ? getdvarint("") : 0) == 0) {
     return;
   }
-  if(isdefined(center)) {
+  if(isDefined(center)) {
     debug_duration = 200;
     circle(center + vectorscale((0, 0, 1), 2), radius, vectorscale((1, 0, 0), 0.9), 1, 1, debug_duration);
     circle(center + vectorscale((0, 0, 1), 4), radius, vectorscale((1, 0, 0), 0.9), 1, 1, debug_duration);
@@ -441,7 +437,7 @@ function debug_draw_blocked_path_kill_radius(center, radius) {
 
 function wait_robot_moving() {
   level endon("game_ended");
-  while (true) {
+  while(true) {
     self waittill("robot_moving");
     self recordgameeventnonplayer("robot_start");
     self clientfield::set("robot_state", 1);
@@ -451,7 +447,7 @@ function wait_robot_moving() {
 
 function wait_robot_stopped() {
   level endon("game_ended");
-  while (true) {
+  while(true) {
     self waittill("robot_stopped");
     if(self.active) {
       self recordgameeventnonplayer("robot_stop");
@@ -463,7 +459,7 @@ function wait_robot_stopped() {
 
 function wait_robot_shutdown() {
   level endon("game_ended");
-  while (true) {
+  while(true) {
     self waittill("robot_shutdown");
     level.moveobject gameobjects::allow_use("none");
     objective_setprogress(level.moveobject.objectiveid, -0.05);
@@ -480,7 +476,7 @@ function wait_robot_shutdown() {
 
 function wait_robot_reboot() {
   level endon("game_ended");
-  while (true) {
+  while(true) {
     self waittill("robot_reboot");
     self recordgameeventnonplayer("robot_repair_complete");
     level.moveobject gameobjects::allow_use("friendly");
@@ -503,7 +499,7 @@ function auto_reboot_robot(time) {
   self endon("robot_reboot");
   self endon("game_ended");
   shutdowntime = 0;
-  while (shutdowntime < time) {
+  while(shutdowntime < time) {
     rate = 0;
     friendlycount = level.moveobject.numtouching[level.moveobject.ownerteam];
     if(!level.rebootplayers) {
@@ -532,13 +528,13 @@ function auto_reboot_robot(time) {
 
 function watch_robot_damaged() {
   level endon("game_ended");
-  while (true) {
+  while(true) {
     self waittill("robot_damaged");
     percent = min(1, self.shutdowndamage / level.shutdowndamage);
     objective_setprogress(level.moveobject.objectiveid, 1 - percent);
     health = level.shutdowndamage - self.shutdowndamage;
     lowhealth = killstreak_bundles::get_low_health(level.escortrobotkillstreakbundle);
-    if(!(isdefined(self.playeddamage) && self.playeddamage) && health <= lowhealth) {
+    if(!(isDefined(self.playeddamage) && self.playeddamage) && health <= lowhealth) {
       globallogic_audio::leader_dialog("sfgRobotUnderFire", self.team, undefined, "robot");
       self.playeddamage = 1;
     } else if(health > lowhealth) {
@@ -554,7 +550,7 @@ function delete_on_endgame_sequence() {
 }
 
 function get_robot_path_array() {
-  if(isdefined(level.escortrobotpath)) {
+  if(isDefined(level.escortrobotpath)) {
     println("");
     return level.escortrobotpath;
   }
@@ -562,14 +558,12 @@ function get_robot_path_array() {
   patharray = [];
   currnode = getnode("escort_robot_path_start", "targetname");
   patharray[patharray.size] = currnode.origin;
-  while (isdefined(currnode.target)) {
+  while(isDefined(currnode.target)) {
     currnode = getnode(currnode.target, "targetname");
     patharray[patharray.size] = currnode.origin;
   }
-  if(isdefined(level.update_escort_robot_path)) {
-    [
-      [level.update_escort_robot_path]
-    ](patharray);
+  if(isDefined(level.update_escort_robot_path)) {
+    [[level.update_escort_robot_path]](patharray);
   }
   return patharray;
 }
@@ -577,7 +571,7 @@ function get_robot_path_array() {
 function calc_robot_path_length(robotorigin, patharray) {
   distance = 0;
   lastpoint = robotorigin;
-  for (i = 0; i < patharray.size; i++) {
+  for(i = 0; i < patharray.size; i++) {
     distance = distance + distance(lastpoint, patharray[i]);
     lastpoint = patharray[i];
   }
@@ -617,10 +611,10 @@ function spawn_robot(position, angles) {
     aiutility::attachriotshield(robot, getweapon("riotshield"), "wpn_t7_shield_riot_world_lh", "tag_stowed_back");
   }
   robot asmsetanimationrate(1.1);
-  if(isdefined(level.shutdowndamage) && level.shutdowndamage) {
+  if(isDefined(level.shutdowndamage) && level.shutdowndamage) {
     target_set(robot, vectorscale((0, 0, 1), 50));
   }
-  robot.overrideactordamage = & robot_damage;
+  robot.overrideactordamage = &robot_damage;
   robot thread robot_move_chatter();
   robot.missiletargetmissdistance = 64;
   robot thread heatseekingmissile::missiletarget_proximitydetonateincomingmissile();
@@ -628,7 +622,7 @@ function spawn_robot(position, angles) {
 }
 
 function robot_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, modelindex) {
-  if(!(isdefined(self.onground) && self.onground)) {
+  if(!(isDefined(self.onground) && self.onground)) {
     return false;
   }
   if(level.shutdowndamage <= 0 || !self.active || eattacker.team == game["attackers"]) {
@@ -636,7 +630,7 @@ function robot_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, we
   }
   level.usestartspawns = 0;
   weapon_damage = killstreak_bundles::get_weapon_damage(level.escortrobotkillstreakbundle, level.shutdowndamage, eattacker, weapon, smeansofdeath, idamage, idflags, undefined);
-  if(!isdefined(weapon_damage)) {
+  if(!isDefined(weapon_damage)) {
     weapon_damage = idamage;
   }
   if(!weapon_damage) {
@@ -644,7 +638,7 @@ function robot_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, we
   }
   self.shutdowndamage = self.shutdowndamage + weapon_damage;
   self notify("robot_damaged");
-  if(!isdefined(eattacker.damagerobot)) {
+  if(!isDefined(eattacker.damagerobot)) {
     eattacker.damagerobot = 0;
   }
   eattacker.damagerobot = eattacker.damagerobot + weapon_damage;
@@ -658,7 +652,7 @@ function robot_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, we
       } else {
         scoreevents::processscoreevent("escort_robot_disable", eattacker);
       }
-      if(isdefined(eattacker.pers["disables"])) {
+      if(isDefined(eattacker.pers["disables"])) {
         eattacker.pers["disables"]++;
         eattacker.disables = eattacker.pers["disables"];
       }
@@ -667,7 +661,7 @@ function robot_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, we
       origin = eattacker.origin;
     }
     foreach(player in level.players) {
-      if(player == eattacker || player.team == self.team || !isdefined(player.damagerobot)) {
+      if(player == eattacker || player.team == self.team || !isDefined(player.damagerobot)) {
         continue;
       }
       damagepercent = player.damagerobot / level.shutdowndamage;
@@ -680,25 +674,25 @@ function robot_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, we
     }
     bbprint("mpobjective", "gametime %d objtype %s team %s playerx %d playery %d playerz %d", gettime(), "escort_shutdown", game["defenders"], origin);
     self shutdown_robot();
-    if(isdefined(eattacker) && eattacker != self && isdefined(weapon)) {
+    if(isDefined(eattacker) && eattacker != self && isDefined(weapon)) {
       if(weapon.name == "planemortar") {
-        if(!isdefined(eattacker.planemortarbda)) {
+        if(!isDefined(eattacker.planemortarbda)) {
           eattacker.planemortarbda = 0;
         }
         eattacker.planemortarbda++;
       } else {
         if(weapon.name == "dart" || weapon.name == "dart_turret") {
-          if(!isdefined(eattacker.dartbda)) {
+          if(!isDefined(eattacker.dartbda)) {
             eattacker.dartbda = 0;
           }
           eattacker.dartbda++;
         } else {
           if(weapon.name == "straferun_rockets" || weapon.name == "straferun_gun") {
-            if(isdefined(eattacker.straferunbda)) {
+            if(isDefined(eattacker.straferunbda)) {
               eattacker.straferunbda++;
             }
           } else if(weapon.name == "remote_missile_missile" || weapon.name == "remote_missile_bomblet") {
-            if(!isdefined(eattacker.remotemissilebda)) {
+            if(!isDefined(eattacker.remotemissilebda)) {
               eattacker.remotemissilebda = 0;
             }
             eattacker.remotemissilebda++;
@@ -724,7 +718,7 @@ function shutdown_robot() {
   if(target_istarget(self)) {
     target_remove(self);
   }
-  if(isdefined(self.riotshield)) {
+  if(isDefined(self.riotshield)) {
     self asmchangeanimmappingtable(1);
     self detach(self.riotshield.model, self.riotshield.tag);
     aiutility::attachriotshield(self, getweapon("riotshield"), "wpn_t7_shield_riot_world_lh", "tag_weapon_left");
@@ -739,10 +733,10 @@ function reboot_robot() {
   self.shutdowndamage = 0;
   self ai::set_ignoreme(0);
   self notify("robot_reboot");
-  if(isdefined(level.shutdowndamage) && level.shutdowndamage) {
+  if(isDefined(level.shutdowndamage) && level.shutdowndamage) {
     target_set(self, vectorscale((0, 0, 1), 50));
   }
-  if(isdefined(self.riotshield)) {
+  if(isDefined(self.riotshield)) {
     self asmchangeanimmappingtable(0);
     self detach(self.riotshield.model, self.riotshield.tag);
     aiutility::attachriotshield(self, getweapon("riotshield"), "wpn_t7_shield_riot_world_lh", "tag_stowed_back");
@@ -753,13 +747,13 @@ function reboot_robot() {
 }
 
 function move_robot() {
-  if(self.active == 0 || self.moving || !isdefined(self.pathindex)) {
+  if(self.active == 0 || self.moving || !isDefined(self.pathindex)) {
     return;
   }
   if(self check_blocked_goal_and_kill()) {
     return;
   }
-  if(gettime() < (isdefined(self.blocked_wait_end_time) ? self.blocked_wait_end_time : 0)) {
+  if(gettime() < (isDefined(self.blocked_wait_end_time) ? self.blocked_wait_end_time : 0)) {
     return;
   }
   self notify("robot_moving");
@@ -769,11 +763,11 @@ function move_robot() {
 }
 
 function get_current_goal() {
-  return (isdefined(self.immediategoaloverride) ? self.immediategoaloverride : self.patharray[self.pathindex]);
+  return (isDefined(self.immediategoaloverride) ? self.immediategoaloverride : self.patharray[self.pathindex]);
 }
 
 function reached_closest_nav_mesh_goal_but_still_too_far_and_blocked(goalonnavmesh) {
-  if(isdefined(self.immediategoaloverride)) {
+  if(isDefined(self.immediategoaloverride)) {
     return false;
   }
   distsqr = distancesquared(goalonnavmesh, self.origin);
@@ -794,11 +788,11 @@ function check_blocked_goal_and_kill() {
   if(!self.canwalk) {
     return 0;
   }
-  if(gettime() < (isdefined(self.blocked_wait_end_time) ? self.blocked_wait_end_time : 0)) {
+  if(gettime() < (isDefined(self.blocked_wait_end_time) ? self.blocked_wait_end_time : 0)) {
     wait((self.blocked_wait_end_time - gettime()) / 1000);
   }
   goalonnavmesh = self get_closest_point_on_nav_mesh_for_current_goal();
-  previousgoal = (!isdefined(self.immediategoaloverride) ? self.patharray[self.pathindex - 1] : self.origin);
+  previousgoal = (!isDefined(self.immediategoaloverride) ? self.patharray[self.pathindex - 1] : self.origin);
   if(self.goaljustblocked || self reached_closest_nav_mesh_goal_but_still_too_far_and_blocked(goalonnavmesh) || self check_if_goal_is_blocked(previousgoal, goalonnavmesh)) {
     self.goaljustblocked = 0;
     stillblocked = 1;
@@ -822,7 +816,7 @@ function find_immediate_goal() {
   currpos = self.origin;
   debug_draw_find_immediate_goal(pathgoal);
   immediategoal = get_closest_point_on_nav_mesh(vectorlerp(currpos, pathgoal, 0.5));
-  while (self check_if_goal_is_blocked(currpos, immediategoal)) {
+  while(self check_if_goal_is_blocked(currpos, immediategoal)) {
     immediategoal = get_closest_point_on_nav_mesh(vectorlerp(currpos, immediategoal, 0.5));
   }
   self.immediategoaloverride = immediategoal;
@@ -843,9 +837,9 @@ function watch_goal_becoming_blocked(goal) {
   self endon("goal");
   level endon("game_ended");
   disttogoalsqr = 1E+09;
-  while (true) {
+  while(true) {
     wait(0.1);
-    if(isdefined(self.traversestartnode)) {
+    if(isDefined(self.traversestartnode)) {
       self waittill("traverse_end");
       continue;
     }
@@ -870,14 +864,14 @@ function watch_becoming_blocked_at_goal() {
   self endon("end_watch_becoming_blocked_at_goal");
   self endon("robot_stop");
   level endon("game_ended");
-  while (isdefined(self.traversestartnode)) {
+  while(isDefined(self.traversestartnode)) {
     self waittill("traverse_end");
   }
   self.watch_becoming_blocked_at_goal_established = 1;
   startpos = self.origin;
   atsameposcount = 0;
   iterationcount = 0;
-  while (self.moving) {
+  while(self.moving) {
     wait(0.1);
     if(distancesquared(startpos, self.origin) < 1) {
       atsameposcount++;
@@ -898,7 +892,7 @@ function stop_robot() {
   if(!self.moving) {
     return;
   }
-  if(isdefined(self.traversestartnode)) {
+  if(isDefined(self.traversestartnode)) {
     self thread check_robot_on_travesal_end();
     return;
   }
@@ -907,7 +901,7 @@ function stop_robot() {
   self.watch_becoming_blocked_at_goal_established = 0;
   velocity = self getvelocity();
   deltapos = velocity * 0.05;
-  stopgoal = (isdefined(getclosestpointonnavmesh(self.origin + deltapos, 48, 15)) ? getclosestpointonnavmesh(self.origin + deltapos, 48, 15) : self.origin);
+  stopgoal = (isDefined(getclosestpointonnavmesh(self.origin + deltapos, 48, 15)) ? getclosestpointonnavmesh(self.origin + deltapos, 48, 15) : self.origin);
   self setgoal(stopgoal, 0);
   self notify("robot_stopped");
 }
@@ -917,7 +911,7 @@ function check_robot_on_travesal_end() {
   self endon("check_robot_on_travesal_end_singleton");
   self endon("death");
   self waittill("traverse_end");
-  numowners = (isdefined(level.moveobject.numtouching[level.moveobject.ownerteam]) ? level.moveobject.numtouching[level.moveobject.ownerteam] : 0);
+  numowners = (isDefined(level.moveobject.numtouching[level.moveobject.ownerteam]) ? level.moveobject.numtouching[level.moveobject.ownerteam] : 0);
   if(numowners < level.moveplayers) {
     self stop_robot();
   } else {
@@ -928,7 +922,7 @@ function check_robot_on_travesal_end() {
 function update_stop_position() {
   self endon("death");
   level endon("game_ended");
-  while (true) {
+  while(true) {
     self waittill("traverse_end");
     if(!self.moving) {
       self setgoal(self.origin, 1);
@@ -940,16 +934,16 @@ function robot_wait_next_point() {
   self endon("robot_stopped");
   self endon("death");
   level endon("game_ended");
-  while (true) {
+  while(true) {
     self util::waittill_any("goal", "goal_blocked");
-    if(!isdefined(self.watch_becoming_blocked_at_goal_established) || self.watch_becoming_blocked_at_goal_established == 0) {
+    if(!isDefined(self.watch_becoming_blocked_at_goal_established) || self.watch_becoming_blocked_at_goal_established == 0) {
       self thread watch_becoming_blocked_at_goal();
     }
     if(distancesquared(self.origin, get_current_goal()) < (24 * 24)) {
-      self.pathindex = self.pathindex + (isdefined(self.immediategoaloverride) ? 0 : 1);
+      self.pathindex = self.pathindex + (isDefined(self.immediategoaloverride) ? 0 : 1);
       self.immediategoaloverride = undefined;
     }
-    while (self.pathindex < self.patharray.size && distancesquared(self.origin, self.patharray[self.pathindex]) < (48 + 1) * (48 + 1)) {
+    while(self.pathindex < self.patharray.size && distancesquared(self.origin, self.patharray[self.pathindex]) < (48 + 1) * (48 + 1)) {
       self.pathindex++;
     }
     if(self.pathindex >= self.patharray.size) {
@@ -972,34 +966,34 @@ function robot_wait_next_point() {
 function get_closest_point_on_nav_mesh_for_current_goal() {
   immediategoal = get_current_goal();
   closestpathpoint = getclosestpointonnavmesh(immediategoal, 48, 15);
-  if(!isdefined(closestpathpoint)) {
+  if(!isDefined(closestpathpoint)) {
     closestpathpoint = getclosestpointonnavmesh(immediategoal, 96, 15);
   }
-  return (isdefined(closestpathpoint) ? closestpathpoint : immediategoal);
+  return (isDefined(closestpathpoint) ? closestpathpoint : immediategoal);
 }
 
 function get_closest_point_on_nav_mesh(point) {
   closestpathpoint = getclosestpointonnavmesh(point, 48, 15);
-  if(!isdefined(closestpathpoint)) {
+  if(!isDefined(closestpathpoint)) {
     closestpathpoint = getclosestpointonnavmesh(point, 96, 15);
   }
-  if(!isdefined(closestpathpoint)) {
+  if(!isDefined(closestpathpoint)) {
     itercount = 0;
     lowerpoint = point - vectorscale((0, 0, 1), 36);
-    while (!isdefined(closestpathpoint) && itercount < 5) {
+    while(!isDefined(closestpathpoint) && itercount < 5) {
       closestpathpoint = getclosestpointonnavmesh(lowerpoint, 48, 15);
       lowerpoint = lowerpoint - vectorscale((0, 0, 1), 36);
       itercount++;
     }
   }
-  return (isdefined(closestpathpoint) ? closestpathpoint : point);
+  return (isDefined(closestpathpoint) ? closestpathpoint : point);
 }
 
 function set_goal_to_point_on_path(recursioncount = 0) {
   self.goaljustblocked = 0;
   closestpathpoint = self get_closest_point_on_nav_mesh_for_current_goal();
-  if(isdefined(closestpathpoint)) {
-    if(!isdefined(self.mostrecentclosestpathpointgoal) || distancesquared(closestpathpoint, self.mostrecentclosestpathpointgoal) > 1) {
+  if(isDefined(closestpathpoint)) {
+    if(!isDefined(self.mostrecentclosestpathpointgoal) || distancesquared(closestpathpoint, self.mostrecentclosestpathpointgoal) > 1) {
       self setgoal(closestpathpoint, 0, 24);
       self thread watch_goal_becoming_blocked(closestpathpoint);
       self.mostrecentclosestpathpointgoal = closestpathpoint;
@@ -1015,14 +1009,14 @@ function set_goal_to_point_on_path(recursioncount = 0) {
   debug_draw_current_robot_goal(closestpathpoint);
 }
 
-function is_path_distance_to_goal_too_long( & patharray, toolongthreshold) {
+function is_path_distance_to_goal_too_long(&patharray, toolongthreshold) {
   debug_draw_approximate_robot_path_to_goal(patharray);
   if(toolongthreshold < 20) {
     toolongthreshold = 20;
   }
   goaldistance = 0;
   lastindextocheck = patharray.size - 1;
-  for (i = 0; i < lastindextocheck; i++) {
+  for(i = 0; i < lastindextocheck; i++) {
     goaldistance = goaldistance + (distance(patharray[i], patharray[i + 1]));
     if(goaldistance >= toolongthreshold) {
       return true;
@@ -1033,10 +1027,10 @@ function is_path_distance_to_goal_too_long( & patharray, toolongthreshold) {
 
 function debug_reset_robot_to_start() {
   level endon("game_ended");
-  while (true) {
-    if((isdefined(getdvarint("")) ? getdvarint("") : 0) > 0) {
-      if(isdefined(level.robot)) {
-        pathindex = (isdefined(getdvarint("")) ? getdvarint("") : 0) - 1;
+  while(true) {
+    if((isDefined(getdvarint("")) ? getdvarint("") : 0) > 0) {
+      if(isDefined(level.robot)) {
+        pathindex = (isDefined(getdvarint("")) ? getdvarint("") : 0) - 1;
         pathpoint = level.robot.patharray[pathindex];
         robotangles = (0, 0, 0);
         if(pathindex < (level.robot.patharray.size - 1)) {
@@ -1046,7 +1040,7 @@ function debug_reset_robot_to_start() {
         level.robot forceteleport(pathpoint, robotangles);
         level.robot.pathindex = pathindex;
         level.robot.immediategoaloverride = undefined;
-        while (isdefined(self.traversestartnode)) {
+        while(isDefined(self.traversestartnode)) {
           wait(0.05);
         }
         level.robot stop_robot();
@@ -1072,7 +1066,7 @@ function explode_robot() {
   velocity = self getvelocity() * 0.125;
   self startragdoll();
   self launchragdoll((velocity[0] + (randomfloatrange(-20, 20)), velocity[1] + (randomfloatrange(-20, 20)), randomfloatrange(60, 80)), "j_mainroot");
-  playfxontag("weapon/fx_c4_exp_metal", self, "tag_origin");
+  playFXOnTag("weapon/fx_c4_exp_metal", self, "tag_origin");
   if(target_istarget(self)) {
     target_remove(self);
   }
@@ -1089,7 +1083,7 @@ function wait_robot_corpse() {
 
 function robot_move_chatter() {
   level endon("game_ended");
-  while (true) {
+  while(true) {
     if(self.moving) {
       self playsoundontag("vox_robot_chatter", "J_Head");
     }
@@ -1099,18 +1093,18 @@ function robot_move_chatter() {
 
 function setup_move_object(robot, triggername) {
   trigger = getent(triggername, "targetname");
-  useobj = gameobjects::create_use_object(game["attackers"], trigger, [], (0, 0, 0), & "escort_robot");
+  useobj = gameobjects::create_use_object(game["attackers"], trigger, [], (0, 0, 0), &"escort_robot");
   useobj gameobjects::set_objective_entity(robot);
   useobj gameobjects::allow_use("none");
   useobj gameobjects::set_visible_team("any");
   useobj gameobjects::set_use_time(0);
   trigger enablelinkto();
   trigger linkto(robot);
-  useobj.onuse = & on_use_robot_move;
-  useobj.onupdateuserate = & on_update_use_rate_robot_move;
+  useobj.onuse = &on_use_robot_move;
+  useobj.onupdateuserate = &on_update_use_rate_robot_move;
   useobj.robot = robot;
-  if(isdefined(level.levelescortdisable)) {
-    if(!isdefined(useobj.exclusions)) {
+  if(isDefined(level.levelescortdisable)) {
+    if(!isDefined(useobj.exclusions)) {
       useobj.exclusions = [];
     }
     foreach(trigger in level.levelescortdisable) {
@@ -1139,9 +1133,9 @@ function on_update_use_rate_robot_move(team, progress, change) {
 function track_escorting_players() {
   level endon("game_ended");
   self.robot endon("robot_stopped");
-  while (true) {
+  while(true) {
     foreach(touch in self.touchlist[self.team]) {
-      if(!(isdefined(touch.player.escortingrobot) && touch.player.escortingrobot)) {
+      if(!(isDefined(touch.player.escortingrobot) && touch.player.escortingrobot)) {
         self thread track_escort_time(touch.player);
       }
     }
@@ -1159,7 +1153,7 @@ function track_escort_time(player) {
   self thread wait_escort_death(player);
   self thread wait_escort_shutdown(player);
   consecutiveescorts = 0;
-  while (true) {
+  while(true) {
     wait(1);
     touching = 0;
     foreach(touch in self.touchlist[self.team]) {
@@ -1171,7 +1165,7 @@ function track_escort_time(player) {
     if(!touching) {
       break;
     }
-    if(isdefined(player.pers["escorts"])) {
+    if(isDefined(player.pers["escorts"])) {
       player.pers["escorts"]++;
       player.escorts = player.pers["escorts"];
     }
@@ -1185,7 +1179,7 @@ function track_escort_time(player) {
 }
 
 function player_stop_escort() {
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   self.escortingrobot = 0;
@@ -1211,14 +1205,14 @@ function wait_escort_shutdown(player) {
 
 function setup_reboot_object(robot, triggername) {
   trigger = getent(triggername, "targetname");
-  if(isdefined(trigger)) {
+  if(isDefined(trigger)) {
     trigger delete();
   }
 }
 
 function setup_goal_object(robot, triggername) {
   trigger = getent(triggername, "targetname");
-  useobj = gameobjects::create_use_object(game["defenders"], trigger, [], (0, 0, 0), & "escort_goal");
+  useobj = gameobjects::create_use_object(game["defenders"], trigger, [], (0, 0, 0), &"escort_goal");
   useobj gameobjects::set_visible_team("any");
   useobj gameobjects::allow_use("none");
   useobj gameobjects::set_use_time(0);
@@ -1235,17 +1229,17 @@ function watch_robot_enter(robot) {
   robot endon("death");
   level endon("game_ended");
   radiussq = self.trigger.radius * self.trigger.radius;
-  while (true) {
+  while(true) {
     if(robot.moving === 1 && distance2dsquared(self.trigger.origin, robot.origin) < radiussq) {
       level.moveplayers = 0;
-      robot.overrideactordamage = & robot_damage_none;
+      robot.overrideactordamage = &robot_damage_none;
       if(target_istarget(self)) {
         target_remove(self);
       }
       attackers = game["attackers"];
       self.fx.team = attackers;
       foreach(player in level.aliveplayers[attackers]) {
-        if(isdefined(player.escortingrobot) && player.escortingrobot) {
+        if(isDefined(player.escortingrobot) && player.escortingrobot) {
           scoreevents::processscoreevent("escort_robot_escort_goal", player);
         }
       }
@@ -1264,7 +1258,7 @@ function watch_robot_enter(robot) {
 function explode_robot_after_wait(wait_time) {
   robot = self;
   wait(wait_time);
-  if(isdefined(robot)) {
+  if(isDefined(robot)) {
     robot explode_robot();
   }
 }
@@ -1297,26 +1291,26 @@ function kill_anything_blocking_goal(goal) {
       bestcandidatedot = entitydot;
     }
   }
-  if(isdefined(bestcandidate)) {
+  if(isDefined(bestcandidate)) {
     entity = bestcandidate;
-    if(isdefined(entity.targetname)) {
+    if(isDefined(entity.targetname)) {
       if(entity.targetname == "talon") {
         entity notify("death");
         return 1;
       }
     }
-    if(isdefined(entity.helitype) && entity.helitype == "qrdrone") {
+    if(isDefined(entity.helitype) && entity.helitype == "qrdrone") {
       watcher = entity.owner weaponobjects::getweaponobjectwatcher("qrdrone");
       watcher thread weaponobjects::waitanddetonate(entity, 0, undefined);
       return 1;
     }
     if(entity.classname == "auto_turret") {
-      if(!isdefined(entity.damagedtodeath) || !entity.damagedtodeath) {
+      if(!isDefined(entity.damagedtodeath) || !entity.damagedtodeath) {
         entity util::domaxdamage(self.origin + (0, 0, 1), self, self, 0, "MOD_CRUSH");
       }
       return 1;
     }
-    if(isvehicle(entity) && (!isdefined(entity.team) || entity.team != "neutral")) {
+    if(isvehicle(entity) && (!isDefined(entity.team) || entity.team != "neutral")) {
       entity kill();
       return 1;
     }
@@ -1328,7 +1322,7 @@ function kill_anything_blocking_goal(goal) {
 }
 
 function destroy_supply_crate_blocking_goal(dirtogoal) {
-  crates = getentarray("care_package", "script_noteworthy");
+  crates = getEntArray("care_package", "script_noteworthy");
   bestcrate = undefined;
   bestcrateedot = -1E+09;
   foreach(crate in crates) {
@@ -1341,8 +1335,8 @@ function destroy_supply_crate_blocking_goal(dirtogoal) {
       bestcrateedot = cratedot;
     }
   }
-  if(isdefined(bestcrate)) {
-    playfx(level._supply_drop_explosion_fx, bestcrate.origin);
+  if(isDefined(bestcrate)) {
+    playFX(level._supply_drop_explosion_fx, bestcrate.origin);
     playsoundatposition("wpn_grenade_explode", bestcrate.origin);
     wait(0.1);
     bestcrate supplydrop::cratedelete();

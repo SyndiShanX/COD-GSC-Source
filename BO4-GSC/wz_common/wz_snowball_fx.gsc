@@ -6,7 +6,6 @@
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\system_shared;
-
 #namespace wz_snowball_fx;
 
 autoexec __init__system__() {
@@ -21,7 +20,7 @@ __init__() {
 
 function_c9509a9c(params) {
   if(isalive(self) && isplayer(self)) {
-    if(params.weapon.name === #"snowball") {
+    if(params.weapon.name === # "snowball") {
       var_feafe576 = 0;
       var_cb01806c = 0;
       bleft = 0;
@@ -83,7 +82,7 @@ function_c9509a9c(params) {
 }
 
 function_4df181ef() {
-  self endoncallback(&function_8407e8ae, #"death", #"game_ended");
+  self endoncallback(&function_8407e8ae, # "death", # "game_ended");
   self clientfield::set_to_player("player_hit_freezing_snowball", 1);
   wait 2;
   self clientfield::set_to_player("player_hit_freezing_snowball", 0);

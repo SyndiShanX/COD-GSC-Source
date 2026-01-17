@@ -34,7 +34,7 @@ vista_ships_init(clientnum) {
   level.boatswaytime = getdvarfloatdefault("cscr_boatswaytime", 4.0);
   level.boatswayslowdowntime = getdvarfloatdefault("cscr_boatswayslowdowntime", 2.0);
   level.boatroll = getdvarfloatdefault("cscr_boatroll", 1.0);
-  farboats = getentarray(clientnum, "carrier_vista_ships", "targetname");
+  farboats = getEntArray(clientnum, "carrier_vista_ships", "targetname");
 
   if(level.isdemoplaying) {
     return;

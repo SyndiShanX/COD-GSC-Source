@@ -11,7 +11,6 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace scene;
 
 autoexec __init__system__() {
@@ -483,7 +482,7 @@ scene_list_settext(strings, n_selected, str_title, b_shot_menu, var_444abf97) {
   }
 }
 
-private _scene_list_settext(strings, n_selected, str_title, b_shot_menu, var_444abf97) {
+_scene_list_settext(strings, n_selected, str_title, b_shot_menu, var_444abf97) {
   if(!isDefined(b_shot_menu)) {
     b_shot_menu = 0;
   }
@@ -496,16 +495,16 @@ private _scene_list_settext(strings, n_selected, str_title, b_shot_menu, var_444
   str_mode = tolower(getdvarstring(#"scene_menu_mode", "<dev string:x3b>"));
 
   switch (str_mode) {
-    case #"default":
+    case # "default":
       debug2dtext((150, 362.5, 0), "<dev string:x2b6>", (1, 1, 1), 1, (0, 0, 0), 1, 1, var_444abf97);
       break;
-    case #"loop":
+    case # "loop":
       debug2dtext((150, 362.5, 0), "<dev string:x2c6>", (1, 1, 1), 1, (0, 0, 0), 1, 1, var_444abf97);
       break;
-    case #"capture_single":
+    case # "capture_single":
       debug2dtext((150, 362.5, 0), "<dev string:x2d3>", (1, 1, 1), 1, (0, 0, 0), 1, 1, var_444abf97);
       break;
-    case #"capture_series":
+    case # "capture_series":
       debug2dtext((150, 362.5, 0), "<dev string:x2f0>", (1, 1, 1), 1, (0, 0, 0), 1, 1, var_444abf97);
       break;
   }
@@ -815,4 +814,3 @@ function_42edf155() {
     waitframe(1);
   }
 }
-

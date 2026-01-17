@@ -12,15 +12,15 @@
 #namespace zm_tomb_quest_fire;
 
 function main() {
-  clientfield::register("scriptmover", "barbecue_fx", 21000, 1, "int", & barbecue_fx, 0, 0);
+  clientfield::register("scriptmover", "barbecue_fx", 21000, 1, "int", &barbecue_fx, 0, 0);
 }
 
 function function_f53f6b0a(localclientnum) {
   self notify("stop_bbq_fx_loop");
   self endon("stop_bbq_fx_loop");
   self endon("entityshutdown");
-  while (true) {
-    playfxontag(localclientnum, level._effect["fire_sacrifice_flame"], self, "tag_origin");
+  while(true) {
+    playFXOnTag(localclientnum, level._effect["fire_sacrifice_flame"], self, "tag_origin");
     wait(0.5);
   }
 }

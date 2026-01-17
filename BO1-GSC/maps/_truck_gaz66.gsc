@@ -116,7 +116,7 @@ setanims() {
   positions = [];
   num_positions = 10;
   for(i = 0; i < num_positions; i++) {
-    positions[i] = spawnstruct();
+    positions[i] = spawnStruct();
   }
   positions[0].sittag = "tag_driver";
   positions[1].sittag = "tag_passenger";
@@ -207,7 +207,7 @@ set_gunner_anims() {
   positions = [];
   num_positions = 3;
   for(i = 0; i < num_positions; i++) {
-    positions[i] = spawnstruct();
+    positions[i] = spawnStruct();
   }
   positions[0].sittag = "tag_driver";
   positions[1].sittag = "tag_passenger";

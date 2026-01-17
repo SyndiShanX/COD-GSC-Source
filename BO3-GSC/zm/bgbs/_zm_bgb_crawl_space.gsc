@@ -15,20 +15,20 @@
 #namespace zm_bgb_crawl_space;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_crawl_space", & __init__, undefined, "bgb");
+  system::register("zm_bgb_crawl_space", &__init__, undefined, "bgb");
 }
 
 function __init__() {
-  if(!(isdefined(level.bgb_in_use) && level.bgb_in_use)) {
+  if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
-  bgb::register("zm_bgb_crawl_space", "activated", 5, undefined, undefined, undefined, & activation);
+  bgb::register("zm_bgb_crawl_space", "activated", 5, undefined, undefined, undefined, &activation);
 }
 
 function activation() {
   a_ai = getaiarray();
-  for (i = 0; i < a_ai.size; i++) {
-    if(isdefined(a_ai[i]) && isalive(a_ai[i]) && a_ai[i].archetype === "zombie" && isdefined(a_ai[i].gibdef)) {
+  for(i = 0; i < a_ai.size; i++) {
+    if(isDefined(a_ai[i]) && isalive(a_ai[i]) && a_ai[i].archetype === "zombie" && isDefined(a_ai[i].gibdef)) {
       var_5a3ad5d6 = distancesquared(self.origin, a_ai[i].origin);
       if(var_5a3ad5d6 < 360000) {
         a_ai[i] zombie_utility::makezombiecrawler();

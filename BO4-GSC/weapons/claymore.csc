@@ -6,7 +6,6 @@
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace claymore;
 
 autoexec __init__system__() {
@@ -27,7 +26,7 @@ claymore_spawned(localclientnum) {
       continue;
     }
 
-    self.claymorelaserfxid = util::playFXOnTag(localclientnum, #"_t6/weapon/claymore/fx_claymore_laser", self, "tag_fx");
+    self.claymorelaserfxid = util::playFXOnTag(localclientnum, # "_t6/weapon/claymore/fx_claymore_laser", self, "tag_fx");
     self waittill(#"stunned");
     stopfx(localclientnum, self.claymorelaserfxid);
   }

@@ -10,7 +10,6 @@
 #include scripts\zm_common\zm_bgb_pack;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
-
 #namespace zm_trial_mansion_billiards;
 
 autoexec __init__system__() {
@@ -25,11 +24,11 @@ __init__() {
   zm_trial::register_challenge(#"mansion_billiards", &on_begin, &on_end);
 }
 
-private on_begin() {
+on_begin() {
   level thread function_b7bc0616();
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   zm_trial_util::function_f3dbeda7();
 
   if(!round_reset && !level flag::get(#"hash_4207012c64662b4d")) {
@@ -39,8 +38,8 @@ private on_end(round_reset) {
   enable_newtonian_negation();
 }
 
-private function_b7bc0616() {
-  level endon(#"hash_7646638df88a3656", #"end_game");
+function_b7bc0616() {
+  level endon(#"hash_7646638df88a3656", # "end_game");
   zm_trial_util::function_7d32b7d0(0);
   function_f5ad51bd();
   level flag::wait_till(#"hash_4207012c64662b4d");
@@ -49,7 +48,7 @@ private function_b7bc0616() {
   enable_newtonian_negation();
 }
 
-private function_f5ad51bd() {
+function_f5ad51bd() {
   foreach(player in getplayers()) {
     if(player bgb::is_enabled(#"zm_bgb_newtonian_negation")) {
       player.var_30ee603f = 1;
@@ -63,7 +62,7 @@ private function_f5ad51bd() {
   zm_bgb_newtonian_negation::function_8622e664(0);
 }
 
-private enable_newtonian_negation() {
+enable_newtonian_negation() {
   foreach(player in getplayers()) {
     if(isDefined(player.var_30ee603f) && player.var_30ee603f) {
       zm_bgb_newtonian_negation::function_8622e664(1);

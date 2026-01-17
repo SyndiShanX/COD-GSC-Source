@@ -9,7 +9,7 @@
 
 /* -=-=-=-=-=-=-=-=-=-=
 
-PMC & CO-OP Money system
+PMC &CO-OP Money system
 
 -=-=-=-=-=-=-=-=-=-=-=- */
 
@@ -156,12 +156,12 @@ initNotifyMessage() {
 show_total_money() {
   // Shows total money the player has earned in the corner of the screen
   // Fades in when money is made, counts up, then fades out
-  assert(isdefined(self.hud_totalmoney));
+  assert(isDefined(self.hud_totalmoney));
 
   currentCount = 0;
   moneyToAddPerFrame = 10;
-  for (;;) {
-    while (self.summary["summary"]["total_money"] == currentCount)
+  for(;;) {
+    while(self.summary["summary"]["total_money"] == currentCount)
       wait 0.05;
 
     currentCount += moneyToAddPerFrame;
@@ -226,26 +226,26 @@ giveMoney_think() {
 }
 
 giveMoney_helper(attacker, type) {
-  if(isdefined(attacker) && !isplayer(attacker)) {
-    if(isdefined(self.saved_player_attacker))
+  if(isDefined(attacker) && !isplayer(attacker)) {
+    if(isDefined(self.saved_player_attacker))
       attacker = self.saved_player_attacker;
   }
 
   // if AI removed by script/game, no money to player
-  if(!isdefined(attacker))
+  if(!isDefined(attacker)) {
     return;
-
+  }
   playBonusSound = false;
   juggernaut = false;
   killType = "kill";
-  if(isdefined(self.juggernaut)) {
+  if(isDefined(self.juggernaut)) {
     killType = "juggernaut_kill";
     juggernaut = true;
     playBonusSound = true;
   }
 
   // Melee kills are worth more money cuz you're good like dat
-  if((isdefined(type)) && (issubstr(tolower(type), "melee"))) {
+  if((isDefined(type)) && (issubstr(tolower(type), "melee"))) {
     if(juggernaut)
       killType = "juggernaut_kill_melee";
     else
@@ -257,8 +257,8 @@ giveMoney_helper(attacker, type) {
   if(isPlayer(attacker)) {
     if(getdvar("money_sharing") == "1") {
       foreach(player in level.players) {
-        if(isdefined(self.kill_reward_money)) {
-          if(killType == "kill_melee" && isdefined(self.kill_melee_reward_money))
+        if(isDefined(self.kill_reward_money)) {
+          if(killType == "kill_melee" && isDefined(self.kill_melee_reward_money))
             player thread giveMoney(killType, self.kill_melee_reward_money, attacker);
           else
             player thread giveMoney(killType, self.kill_reward_money, attacker);
@@ -275,25 +275,25 @@ giveMoney_helper(attacker, type) {
   }
 
   // no money if enemy was finished off by other enemies
-  if(isAI(attacker) && attacker isBadGuy())
+  if(isAI(attacker) && attacker isBadGuy()) {
     return;
-
+  }
   // if enemy shot by player was killed by destructibles
   if(is_special_targetname_attacker(attacker)) {
-    if(isdefined(attacker.attacker))
+    if(isDefined(attacker.attacker))
       self thread giveMoney_helper(attacker.attacker);
     return;
   }
 
   // if enemy shot by player was killed by natural causes, no money
-  if(!isPlayer(attacker) && !isAI(attacker))
+  if(!isPlayer(attacker) && !isAI(attacker)) {
     return;
-
+  }
   /*
   // if enemy shot by player was killed by friendly, give assist
-  if( isdefined( self.attacker_list ) && self.attacker_list.size > 0 )
+  if( isDefined( self.attacker_list ) && self.attacker_list.size > 0 )
   {
-  	for ( i = 0; i < self.attacker_list.size; i++ )
+  	for( i = 0; i < self.attacker_list.size; i++ )
   	{
   		// if attacker is player and not the last to kill, give player assist points
   		if( isPlayer( self.attacker_list[ i ] ) && self.attacker_list[ i ] != attacker )
@@ -307,15 +307,15 @@ give_objective_reward() {
   if(getdvar("money_sharing") == "1") {
     foreach(player in level.players)
     player giveMoney("objective");
-  } else if(isdefined(self) && isPlayer(self))
+  } else if(isDefined(self) && isPlayer(self))
     self giveMoney("objective");
   else
     level.player giveMoney("objective");
 }
 
 is_special_targetname_attacker(attacker) {
-  assert(isdefined(attacker));
-  if(!isdefined(attacker.targetname))
+  assert(isDefined(attacker));
+  if(!isDefined(attacker.targetname))
     return false;
 
   if(attacker.targetname == "destructible")
@@ -335,14 +335,14 @@ AI_money_init() {
 }
 
 took_damage(damage, attacker, direction_vec, point, type, modelName, tagName) {
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     // AI removed, no need to keep track
     return;
   }
 
-  if(!isdefined(attacker))
+  if(!isDefined(attacker)) {
     return;
-
+  }
   // this is to make sure player gets money after killing enemy during their traversal anim
   if(isplayer(attacker))
     self.saved_player_attacker = attacker;
@@ -366,9 +366,9 @@ updatePlayerMoney(type, value, attacker) {
   self notify("update_money");
   self endon("update_money");
 
-  if(getdvar("money_enable", "0") != "1")
+  if(getdvar("money_enable", "0") != "1") {
     return;
-
+  }
   // optional in game reward control
   if(getdvar("in_game_reward") != "1") {
     allowed_types = "completion ";
@@ -406,7 +406,7 @@ updatePlayerMoney(type, value, attacker) {
   self.moneyUpdateTotal += value;
 
   bShowMoneyUpdate = true;
-  if(isdefined(attacker) && self != attacker)
+  if(isDefined(attacker) && self != attacker)
     bShowMoneyUpdate = false;
 
   if(bShowMoneyUpdate) {
@@ -447,12 +447,12 @@ fontPulse(player) {
   scaleRange = self.maxFontScale - self.baseFontScale;
   //self thread fontMoveup( -60 );
 
-  while (self.fontScale < self.maxFontScale) {
+  while(self.fontScale < self.maxFontScale) {
     self.fontScale = min(self.maxFontScale, self.fontScale + (scaleRange / self.inFrames));
     wait 0.05;
   }
 
-  while (self.fontScale > self.baseFontScale) {
+  while(self.fontScale > self.baseFontScale) {
     self.fontScale = max(self.baseFontScale, self.fontScale - (scaleRange / self.outFrames));
     wait 0.05;
   }
@@ -464,7 +464,7 @@ fontMoveup( start )
 	self endon( "fontPulse" );
 	self.y = start;
 
-	while ( abs( start ) - abs( self.y ) < 60 )
+	while( abs( start ) - abs( self.y ) < 60 )
 	{
 		self.y = self.y - self.moveUpSpeed;
 		wait 0.05;
@@ -533,7 +533,7 @@ moneyCountUp(amount) {
   self endon("disconnect");
 
   counts = 10;
-  for (i = counts; i > 0; i--) {
+  for(i = counts; i > 0; i--) {
     self.moneyString setText("$" + int(amount / i));
     wait 0.1;
   }

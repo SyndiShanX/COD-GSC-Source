@@ -7,7 +7,7 @@
 
 main() {
   self endon("killanimscript");
-  if(isdefined(self.a.nodeath)) {
+  if(isDefined(self.a.nodeath)) {
     assertex(self.a.nodeath, "Nodeath needs to be set to true or undefined.");
 
     // allow death script to run for a bit so it doesn't turn to corpse and get deleted too soon during melee sequence
@@ -17,7 +17,7 @@ main() {
 
   self unlink();
 
-  if(isdefined(self.enemy) && isdefined(self.enemy.syncedMeleeTarget) && self.enemy.syncedMeleeTarget == self) {
+  if(isDefined(self.enemy) && isDefined(self.enemy.syncedMeleeTarget) && self.enemy.syncedMeleeTarget == self) {
     self.enemy.syncedMeleeTarget = undefined;
   }
 

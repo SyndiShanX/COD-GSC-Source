@@ -10,7 +10,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\mp_common\gametypes\battlechatter;
 #include scripts\mp_common\util;
-
 #namespace gadget_radiation_field;
 
 autoexec __init__system__() {

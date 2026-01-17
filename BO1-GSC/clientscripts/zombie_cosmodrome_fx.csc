@@ -151,7 +151,7 @@ trap_fx_monitor(name, loc, trap_type) {
 
 trap_play_fx(loc, trap_type) {
   ang = self.angles;
-  forward = anglestoforward(ang);
+  forward = anglesToForward(ang);
   up = anglestoup(ang);
   if(isDefined(self.loopFX)) {
     for(i = 0; i < self.loopFX.size; i++) {
@@ -211,10 +211,10 @@ toggle_lander_lights(color) {
   }
   players = getLocalPlayers();
   for(x = 0; x < players.size; x++) {
-    doors1 = getentarray(x, "centrifuge_zip_door", "targetname");
-    doors2 = getentarray(x, "base_entry_zip_door", "targetname");
-    doors3 = getentarray(x, "storage_zip_door", "targetname");
-    doors4 = getentarray(x, "catwalk_zip_door", "targetname");
+    doors1 = getEntArray(x, "centrifuge_zip_door", "targetname");
+    doors2 = getEntArray(x, "base_entry_zip_door", "targetname");
+    doors3 = getEntArray(x, "storage_zip_door", "targetname");
+    doors4 = getEntArray(x, "catwalk_zip_door", "targetname");
     doorsa = array_combine(doors1, doors2);
     doorsb = array_combine(doors3, doors4);
     all_doors = array_combine(doorsa, doorsb);
@@ -223,12 +223,12 @@ toggle_lander_lights(color) {
         if(isDefined(all_doors[i].fx)) {
           StopFX(x, all_doors[i].fx);
         }
-        all_doors[i].fx = PlayFxOnTag(x, right_fx, all_doors[i], "tag_origin");
+        all_doors[i].fx = playFXOnTag(x, right_fx, all_doors[i], "tag_origin");
       } else if(all_doors[i].model == "p_zom_lander_doors_left") {
         if(isDefined(all_doors[i].fx)) {
           StopFX(x, all_doors[i].fx);
         }
-        all_doors[i].fx = PlayFxOnTag(x, left_fx, all_doors[i], "tag_origin");
+        all_doors[i].fx = playFXOnTag(x, left_fx, all_doors[i], "tag_origin");
       }
     }
   }

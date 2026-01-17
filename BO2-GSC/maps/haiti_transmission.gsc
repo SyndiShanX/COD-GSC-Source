@@ -35,8 +35,7 @@ init_flags() {
   flag_init("close_ending_transition");
 }
 
-init_spawn_funcs() {
-}
+init_spawn_funcs() {}
 
 skipto_foyer() {
   maps\haiti::fxanim_construct_front_door();
@@ -61,7 +60,7 @@ skipto_transmission() {
   maps\haiti_anim::interior_anims();
   maps\haiti::fxanim_construct_interior();
   model_restore_area("convert_lobby_theater");
-  a_m_big_screen = getentarray("big_screen", "targetname");
+  a_m_big_screen = getEntArray("big_screen", "targetname");
 
   foreach(m_big_screen in a_m_big_screen)
   m_big_screen hide();
@@ -169,7 +168,7 @@ foyer_main() {
 }
 
 theater_main() {
-  a_m_big_screen = getentarray("big_screen", "targetname");
+  a_m_big_screen = getEntArray("big_screen", "targetname");
 
   foreach(m_big_screen in a_m_big_screen)
   m_big_screen hide();
@@ -463,11 +462,11 @@ assembly_line() {
     v_origin = lerpvector(s_hoist.origin, s_dest_hoist.origin, n_fraction);
     m_hoist = spawn("script_model", v_origin);
     m_hoist.angles = s_hoist.angles;
-    m_hoist setmodel("p6_claw_hoist");
+    m_hoist setModel("p6_claw_hoist");
     v_origin = lerpvector(s_bigdog.origin, s_dest_bigdog.origin, n_fraction);
     m_bigdog = spawn("script_model", v_origin);
     m_bigdog.angles = s_bigdog.angles;
-    m_bigdog setmodel("veh_t6_drone_claw_mk2_alt");
+    m_bigdog setModel("veh_t6_drone_claw_mk2_alt");
     n_interval = lerpfloat(70, 0, n_fraction);
     m_hoist moveto(s_dest_hoist.origin, n_interval);
     m_bigdog moveto(s_dest_bigdog.origin, n_interval);
@@ -478,10 +477,10 @@ assembly_line() {
   while(true) {
     m_hoist = spawn("script_model", s_hoist.origin);
     m_hoist.angles = s_hoist.angles;
-    m_hoist setmodel("p6_claw_hoist");
+    m_hoist setModel("p6_claw_hoist");
     m_bigdog = spawn("script_model", s_bigdog.origin);
     m_bigdog.angles = s_bigdog.angles;
-    m_bigdog setmodel("veh_t6_drone_claw_mk2_alt");
+    m_bigdog setModel("veh_t6_drone_claw_mk2_alt");
     m_hoist moveto(s_dest_hoist.origin, 70);
     m_bigdog moveto(s_dest_bigdog.origin, 70);
     m_hoist thread delete_at_end_of_line(m_bigdog);
@@ -542,7 +541,7 @@ qr_theater_think(s_defend) {
 
 theater_cleanup() {
   trigger_wait("obj_transmission");
-  a_vh_qr = getentarray("theater_qr", "targetname");
+  a_vh_qr = getEntArray("theater_qr", "targetname");
 
   foreach(vh_qr in a_vh_qr) {
     vh_qr dodamage(1000, vh_qr.origin);
@@ -558,7 +557,7 @@ theater_cleanup() {
 }
 
 control_room_closet() {
-  a_m_destroyed = getentarray("control_room_destroyed", "targetname");
+  a_m_destroyed = getEntArray("control_room_destroyed", "targetname");
 
   foreach(m_destroyed in a_m_destroyed)
   m_destroyed hide();
@@ -569,7 +568,7 @@ control_room_closet() {
   foreach(m_destroyed in a_m_destroyed)
   m_destroyed show();
 
-  a_m_clean = getentarray("control_room_clean", "targetname");
+  a_m_clean = getEntArray("control_room_clean", "targetname");
 
   foreach(m_clean in a_m_clean)
   m_clean delete();
@@ -680,7 +679,7 @@ enter_theater(s_start_loc, s_loc_end, b_is_cqb) {
 }
 
 menendez_movie(m_actor) {
-  a_m_big_screen = getentarray("big_screen", "targetname");
+  a_m_big_screen = getEntArray("big_screen", "targetname");
 
   foreach(m_big_screen in a_m_big_screen)
   m_big_screen show();
@@ -724,11 +723,11 @@ theater_light(m_player, str_notetrack) {
 booby_trap_explode(m_actor) {
   flag_set("bomb_exploded");
   level notify("fxanim_closet_bomb_start");
-  level.player playsound("wpn_grenade_explode");
-  level.player playsound("evt_closet_explo_swt");
+  level.player playSound("wpn_grenade_explode");
+  level.player playSound("evt_closet_explo_swt");
   level.player playrumbleonentity("damage_heavy");
   wait 0.5;
-  level.player playsound("wpn_grenade_explode_metal");
+  level.player playSound("wpn_grenade_explode_metal");
   level thread distant_explosions();
   cleanup_ents("cleanup_transmission");
   ai_guy = get_ais_from_scene("stop_transmission_3", "soldier2");
@@ -762,16 +761,16 @@ distant_explosions() {
     }
 
     n_distance = (1 - n_magnitude) * 512;
-    v_location = level.player.origin + anglestoforward((0, randomint(360), 0)) * n_distance;
+    v_location = level.player.origin + anglesToForward((0, randomint(360), 0)) * n_distance;
     earthquake(n_magnitude, n_duration, level.player.origin, 100);
     level.player playrumbleonentity(str_rumble);
-    level.player playsound("exp_interior_explo");
+    level.player playSound("exp_interior_explo");
   }
 }
 
 triggered_explosion() {
   self waittill("trigger");
-  a_sp_guys = getentarray(self.target, "targetname");
+  a_sp_guys = getEntArray(self.target, "targetname");
   simple_spawn(a_sp_guys);
   s_explosion = getstruct(self.target, "targetname");
 
@@ -791,7 +790,7 @@ triggered_explosion() {
   if(isDefined(s_explosion.script_float))
     n_magnitude = s_explosion.script_float;
 
-  v_force = anglestoforward(s_explosion.angles) * n_magnitude;
+  v_force = anglesToForward(s_explosion.angles) * n_magnitude;
   a_ai_guys = getaiarray("axis", "allies");
 
   foreach(ai_guy in a_ai_guys) {
@@ -935,7 +934,7 @@ sliding_door_think() {
 
 spin_emergency_light(str_targetname, str_start_notify, str_endon) {
   m_light = getent(str_targetname, "targetname");
-  playfxontag(level._effect["emergency_light"], m_light, "tag_light_fx");
+  playFXOnTag(level._effect["emergency_light"], m_light, "tag_light_fx");
   level notify(str_start_notify);
 
   if(isDefined(str_endon))

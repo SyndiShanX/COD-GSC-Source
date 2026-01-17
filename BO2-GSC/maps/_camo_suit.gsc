@@ -44,7 +44,7 @@ autoexec _camo_suit_perk_init() {
   run_scene("lockbreaker_perk");
   player disableweapons();
   screen_fade_out(1);
-  player playsound("fly_camo_suit_change");
+  player playSound("fly_camo_suit_change");
   wait 1;
   player giveweapon("camo_suit_sp");
   player setactionslot(2, "weapon", "camo_suit_sp");
@@ -107,8 +107,8 @@ player_camo_suit() {
     remove_visor_text("SCRIPT_HINT_CAMO_SUIT_OFF");
     add_visor_text("SCRIPT_HINT_CAMO_SUIT_ON", 0, "default", "medium", 0);
     camo_suit_snd_ent = spawn("script_origin", (0, 0, 0));
-    level.player playsound("fly_camo_suit_plr_on");
-    camo_suit_snd_ent playloopsound("fly_camo_suit_plr_loop", 1);
+    level.player playSound("fly_camo_suit_plr_on");
+    camo_suit_snd_ent playLoopSound("fly_camo_suit_plr_loop", 1);
     self.maxvisibledist = self.camo_visible_dist;
     self.attackeraccuracy = 0.2;
     self.str_old_vision = self getvisionsetnaked();
@@ -125,7 +125,7 @@ player_camo_suit() {
       wait 0.05;
     }
 
-    self playsound("fly_camo_suit_plr_off");
+    self playSound("fly_camo_suit_plr_off");
     camo_suit_snd_ent stoploopsound(0.5);
     camo_suit_snd_ent delete();
 

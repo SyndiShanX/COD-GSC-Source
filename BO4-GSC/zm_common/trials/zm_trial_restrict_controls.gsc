@@ -13,7 +13,6 @@
 #include scripts\zm_common\zm_bgb_pack;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_trial_restrict_controls;
 
 autoexec __init__system__() {
@@ -28,19 +27,19 @@ __init__() {
   zm_trial::register_challenge(#"restrict_controls", &on_begin, &on_end);
 }
 
-private on_begin(var_bd9d962 = #"invert") {
+on_begin(var_bd9d962 = # "invert") {
   level endon(#"hash_7646638df88a3656");
   wait 5;
   level.var_2439365b = var_bd9d962;
 
   switch (level.var_2439365b) {
-    case #"invert":
+    case # "invert":
       foreach(player in getplayers()) {
-        player clientfield::set_to_player("" + #"hash_6536ca4fb2858a9f", 1);
+        player clientfield::set_to_player("" + # "hash_6536ca4fb2858a9f", 1);
       }
 
       break;
-    case #"turret":
+    case # "turret":
       foreach(player in getplayers()) {
         player bgb_pack::function_59004002(#"zm_bgb_anywhere_but_here", 1);
         player bgb_pack::function_59004002(#"zm_bgb_nowhere_but_there", 1);
@@ -50,7 +49,7 @@ private on_begin(var_bd9d962 = #"invert") {
       callback::on_ai_spawned(&function_a5b02a07);
       callback::on_spawned(&function_eaba7c6f);
       break;
-    case #"half_speed":
+    case # "half_speed":
       foreach(player in getplayers()) {
         player setmovespeedscale(0.5);
         player allowsprint(0);
@@ -61,15 +60,15 @@ private on_begin(var_bd9d962 = #"invert") {
   }
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   switch (level.var_2439365b) {
-    case #"invert":
+    case # "invert":
       foreach(player in getplayers()) {
-        player clientfield::set_to_player("" + #"hash_6536ca4fb2858a9f", 0);
+        player clientfield::set_to_player("" + # "hash_6536ca4fb2858a9f", 0);
       }
 
       break;
-    case #"turret":
+    case # "turret":
       foreach(player in getplayers()) {
         player bgb_pack::function_59004002(#"zm_bgb_anywhere_but_here", 0);
         player bgb_pack::function_59004002(#"zm_bgb_nowhere_but_there", 0);
@@ -82,7 +81,7 @@ private on_end(round_reset) {
       callback::remove_on_ai_spawned(&function_a5b02a07);
       callback::remove_on_spawned(&function_eaba7c6f);
       break;
-    case #"half_speed":
+    case # "half_speed":
       foreach(player in getplayers()) {
         player setmovespeedscale(1);
         player allowsprint(1);
@@ -95,11 +94,11 @@ private on_end(round_reset) {
   level.var_2439365b = undefined;
 }
 
-private function_eaba7c6f() {
+function_eaba7c6f() {
   self thread function_3d8fa20a();
 }
 
-private function_3d8fa20a() {
+function_3d8fa20a() {
   self notify("63943c3872eb77bc");
   self endon("63943c3872eb77bc");
   self endon(#"death");
@@ -121,7 +120,7 @@ private function_3d8fa20a() {
   }
 }
 
-private function_dc856fd8() {
+function_dc856fd8() {
   self notify("4becff0e4eba900e");
   self endon("4becff0e4eba900e");
   level endon(#"hash_7646638df88a3656");
@@ -131,7 +130,7 @@ private function_dc856fd8() {
   self allowsprint(0);
 
   while(true) {
-    self waittill(#"crafting_fail", #"crafting_success", #"bgb_update");
+    self waittill(#"crafting_fail", # "crafting_success", # "bgb_update");
 
     if(isalive(self)) {
       self allowjump(0);
@@ -141,7 +140,7 @@ private function_dc856fd8() {
   }
 }
 
-private function_a5b02a07() {
+function_a5b02a07() {
   self endon(#"death");
   wait 0.5;
   n_players = getplayers().size;

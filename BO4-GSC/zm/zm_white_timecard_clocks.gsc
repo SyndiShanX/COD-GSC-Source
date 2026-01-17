@@ -4,7 +4,6 @@
 ***********************************************/
 
 #include scripts\core_common\scene_shared;
-
 #namespace timecard_control;
 
 function_9b62d333(n_hour, n_minute) {
@@ -86,7 +85,7 @@ function_783891ed() {
   function_9e6251db("fast");
 }
 
-private function_9e6251db(str_speed) {
+function_9e6251db(str_speed) {
   if(!isDefined(self.n_hour)) {
     self.n_hour = 0;
   }

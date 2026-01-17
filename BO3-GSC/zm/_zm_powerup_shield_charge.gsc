@@ -25,13 +25,13 @@
 #namespace zm_powerup_shield_charge;
 
 function autoexec __init__sytem__() {
-  system::register("zm_powerup_shield_charge", & __init__, undefined, undefined);
+  system::register("zm_powerup_shield_charge", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  zm_powerups::register_powerup("shield_charge", & grab_shield_charge);
+  zm_powerups::register_powerup("shield_charge", &grab_shield_charge);
   if(tolower(getdvarstring("g_gametype")) != "zcleansed") {
-    zm_powerups::add_zombie_powerup("shield_charge", "p7_zm_zod_nitrous_tank", & "ZOMBIE_POWERUP_SHIELD_CHARGE", & func_drop_when_players_own, 1, 0, 0);
+    zm_powerups::add_zombie_powerup("shield_charge", "p7_zm_zod_nitrous_tank", &"ZOMBIE_POWERUP_SHIELD_CHARGE", &func_drop_when_players_own, 1, 0, 0);
     zm_powerups::powerup_set_statless_powerup("shield_charge");
   }
   thread function_f3127c4f();
@@ -47,7 +47,7 @@ function grab_shield_charge(player) {
 }
 
 function shield_charge_powerup(item, player) {
-  if(isdefined(player.hasriotshield) && player.hasriotshield) {
+  if(isDefined(player.hasriotshield) && player.hasriotshield) {
     player givestartammo(player.weaponriotshield);
   }
   level thread shield_on_hud(item, player.team);
@@ -61,7 +61,7 @@ function shield_on_hud(drop_item, player_team) {
   hudelem.alpha = 0;
   hudelem fadeovertime(0.5);
   hudelem.alpha = 1;
-  if(isdefined(drop_item)) {
+  if(isDefined(drop_item)) {
     hudelem.label = drop_item.hint;
   }
   hudelem thread full_ammo_move_hud(player_team);
@@ -83,7 +83,7 @@ function full_ammo_move_hud(player_team) {
 function function_f3127c4f() {
   level flagsys::wait_till("");
   wait(1);
-  zm_devgui::add_custom_devgui_callback( & function_b6937313);
+  zm_devgui::add_custom_devgui_callback(&function_b6937313);
   adddebugcommand("");
   adddebugcommand("");
 }

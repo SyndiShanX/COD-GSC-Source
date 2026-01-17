@@ -90,7 +90,7 @@ updateserversettings() {
 }
 
 constraingametype(gametype) {
-  entities = getentarray();
+  entities = getEntArray();
 
   for(i = 0; i < entities.size; i++) {
     entity = entities[i];
@@ -138,7 +138,7 @@ constraingametype(gametype) {
 }
 
 constrainmapsize(mapsize) {
-  entities = getentarray();
+  entities = getEntArray();
 
   for(i = 0; i < entities.size; i++) {
     entity = entities[i];

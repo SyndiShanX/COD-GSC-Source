@@ -34,10 +34,10 @@ setSkill(reset, skill_override) {
     level.difficultyType[1] = "normal";
     level.difficultyType[2] = "hardened";
     level.difficultyType[3] = "veteran";
-    level.difficultyString["easy"] = & "GAMESKILL_EASY";
-    level.difficultyString["normal"] = & "GAMESKILL_NORMAL";
-    level.difficultyString["hardened"] = & "GAMESKILL_HARDENED";
-    level.difficultyString["veteran"] = & "GAMESKILL_VETERAN";
+    level.difficultyString["easy"] = &"GAMESKILL_EASY";
+    level.difficultyString["normal"] = &"GAMESKILL_NORMAL";
+    level.difficultyString["hardened"] = &"GAMESKILL_HARDENED";
+    level.difficultyString["veteran"] = &"GAMESKILL_VETERAN";
     thread playerHealthDebug();
   }
   level.gameSkill = getdvarint("g_gameskill");
@@ -354,24 +354,22 @@ apply_difficulty_frac_with_func(difficulty_func, current_frac) {
 }
 
 apply_threat_bias_to_all_players(difficulty_func, current_frac) {
-  while (!isDefined(level.flag) || !isDefined(level.flag["all_players_connected"])) {
+  while(!isDefined(level.flag) || !isDefined(level.flag["all_players_connected"])) {
     wait 0.05;
     continue;
   }
   flag_wait("all_players_connected");
   players = get_players();
-  for (i = 0; i < players.size; i++) {
-    players[i].threatbias = int([
-      [difficulty_func]
-    ]("threatbias", current_frac));
+  for(i = 0; i < players.size; i++) {
+    players[i].threatbias = int([[difficulty_func]]("threatbias", current_frac));
   }
 }
 
 coop_damage_and_accuracy_scaling(difficulty_func, current_frac) {
-  while (!isDefined(level.flag)) {
+  while(!isDefined(level.flag)) {
     wait 0.05;
   }
-  while (!isDefined(level.flag["all_players_spawned"])) {
+  while(!isDefined(level.flag["all_players_spawned"])) {
     wait 0.05;
   }
   flag_wait("all_players_spawned");
@@ -419,7 +417,7 @@ get_locked_difficulty_step_val(system, ignored) {
 
 get_blended_difficulty(system, current_frac) {
   difficulty_array = level.difficultySettings_frac_data_points[system];
-  for (i = 1; i < difficulty_array.size; i++) {
+  for(i = 1; i < difficulty_array.size; i++) {
     high_frac = difficulty_array[i]["frac"];
     high_val = difficulty_array[i]["val"];
     if(current_frac <= high_frac) {
@@ -492,10 +490,10 @@ playerHealthDebug() {
   if(getdvar("scr_health_debug") == "")
     setdvar("scr_health_debug", "0");
   waittillframeend;
-  while (1) {
+  while(1) {
     if(getdebugdvar("replay_debug") == "1")
       println("File: _gameskill.gsc. Function: playerHealthDebug() - INNER LOOP START\n");
-    while (1) {
+    while(1) {
       if(getdebugdvar("replay_debug") == "1")
         println("File: _gameskill.gsc. Function: playerHealthDebug() - INNER INNER LOOP 1 START\n");
       if(getdebugdvar("scr_health_debug") != "0") {
@@ -506,7 +504,7 @@ playerHealthDebug() {
         println("File: _gameskill.gsc. Function: playerHealthDebug() - INNER INNER LOOP 1 STOP\n");
     }
     thread printHealthDebug();
-    while (1) {
+    while(1) {
       if(getdebugdvar("replay_debug") == "1")
         println("File: _gameskill.gsc. Function: playerHealthDebug() - INNER INNER LOOP 2 START\n");
       if(getdebugdvar("scr_health_debug") == "0") {
@@ -538,7 +536,7 @@ printHealthDebug() {
     level.playerInvulTimeEnd = 0;
   if(!isDefined(level.player_deathInvulnerableTimeout))
     level.player_deathInvulnerableTimeout = 0;
-  for (i = 0; i < level.healthBarKeys.size; i++) {
+  for(i = 0; i < level.healthBarKeys.size; i++) {
     key = level.healthBarKeys[i];
     textelem = newHudElem();
     textelem.x = x;
@@ -561,10 +559,10 @@ printHealthDebug() {
     y += 10;
     level.healthBarHudElems[key] = textelem;
   }
-  while (1) {
+  while(1) {
     wait .05;
     players = get_players();
-    for (i = 0; i < level.healthBarKeys.size && players.size > 0; i++) {
+    for(i = 0; i < level.healthBarKeys.size && players.size > 0; i++) {
       key = level.healthBarKeys[i];
       player = players[0];
       width = 0;
@@ -584,7 +582,7 @@ printHealthDebug() {
 destroyHealthDebug() {
   if(!isDefined(level.healthBarHudElems))
     return;
-  for (i = 0; i < level.healthBarKeys.size; i++) {
+  for(i = 0; i < level.healthBarKeys.size; i++) {
     level.healthBarHudElems[level.healthBarKeys[i]].bar destroy();
     level.healthBarHudElems[level.healthBarKeys[i]] destroy();
   }
@@ -669,7 +667,7 @@ waitTimeIfPlayerIsHit() {
 
 print3d_time(org, text, color, timer) {
   timer *= 20;
-  for (i = 0; i < timer; i++) {
+  for(i = 0; i < timer; i++) {
     print3d(org, text, color);
     wait(0.05);
   }
@@ -723,7 +721,7 @@ player_aim_debug() {
   self endon("disconnect");
   self notify("playeraim");
   self endon("playeraim");
-  for (;;) {
+  for(;;) {
     color = (0, 1, 0);
     if(self.a.misstime > gettime())
       color = (1, 0, 0);
@@ -734,7 +732,7 @@ player_aim_debug() {
 
 playerHurtcheck() {
   self.hurtAgain = false;
-  for (;;) {
+  for(;;) {
     self waittill("damage", amount, attacker, dir, point, mod);
     self.hurtAgain = true;
     self.damagePoint = point;
@@ -781,7 +779,7 @@ playerHealthRegen() {
   playerInvulTimeScale = getdvarfloat("scr_playerInvulTimeScale");
   if(maps\_collectibles::has_collectible("collectible_vampire"))
     regenRate = 0.0;
-  for (;;) {
+  for(;;) {
     wait(0.05);
     waittillframeend;
     if(self.health == self.maxHealth) {
@@ -943,7 +941,7 @@ playerBreathingSound(healthcap) {
   self endon("disconnect");
   sound_on = false;
   wait(2);
-  for (;;) {
+  for(;;) {
     wait(0.2);
     if(!isDefined(self)) {
       return;
@@ -981,11 +979,11 @@ healthOverlay() {
   overlay.vertAlign = "fullscreen";
   overlay.alpha = 0;
   wait(0.05);
-  level.strings["take_cover"] = spawnstruct();
-  level.strings["take_cover"].text = & "GAME_GET_TO_COVER";
+  level.strings["take_cover"] = spawnStruct();
+  level.strings["take_cover"].text = &"GAME_GET_TO_COVER";
   self thread healthOverlay_remove(overlay);
   pulseTime = 0.8;
-  for (;;) {
+  for(;;) {
     overlay fadeOverTime(0.5);
     overlay.alpha = 0;
     self player_flag_wait("player_has_red_flashing_overlay");
@@ -1004,7 +1002,7 @@ compassHealthOverlay() {
   overlay.horzAlign = "center";
   overlay.vertAlign = "bottom";
   overlay.alpha = 0;
-  for (;;) {
+  for(;;) {
     overlay fadeOverTime(0.2);
     overlay.alpha = 0;
     if(!isAlive(self)) {
@@ -1025,7 +1023,7 @@ compassFlashingOverlay(overlay) {
   zeroAlphaTime = fullAlphaTime + 500;
   fadeTime = .2;
   fadeFullInterval = .2;
-  while (isalive(self)) {
+  while(isalive(self)) {
     alpha = 1;
     if(gettime() > fullAlphaTime) {
       alpha = 1 - ((gettime() - fullAlphaTime) / (zeroAlphaTime - fullAlphaTime));
@@ -1208,7 +1206,7 @@ redFlashingOverlay(overlay) {
   }
   stopFlashingBadlyTime = gettime() + level.longRegenTime;
   fadeFunc(overlay, coverWarning, 1, 1, false);
-  while (gettime() < stopFlashingBadlyTime && isalive(self))
+  while(gettime() < stopFlashingBadlyTime && isalive(self))
     fadeFunc(overlay, coverWarning, .9, 1, false);
   if(isalive(self))
     fadeFunc(overlay, coverWarning, .65, 0.8, false);
@@ -1298,21 +1296,21 @@ hud_debug_add_display(msg, num, isfloat) {
   hundreds = 0;
   tens = 0;
   ones = 0;
-  while (num >= 10000)
+  while(num >= 10000)
     num -= 10000;
-  while (num >= 1000) {
+  while(num >= 1000) {
     num -= 1000;
     thousands++;
   }
-  while (num >= 100) {
+  while(num >= 100) {
     num -= 100;
     hundreds++;
   }
-  while (num >= 10) {
+  while(num >= 10) {
     num -= 10;
     tens++;
   }
-  while (num >= 1) {
+  while(num >= 1) {
     num -= 1;
     ones++;
   }
@@ -1433,9 +1431,7 @@ return_false(attacker) {
 }
 
 player_attacker(attacker) {
-  if([
-      [level.custom_player_attacker]
-    ](attacker))
+  if([[level.custom_player_attacker]](attacker))
     return true;
   if(IsPlayer(attacker))
     return true;
@@ -1455,7 +1451,7 @@ auto_adjust_enemy_died(ai, amount, attacker, type, point) {
     return;
   }
   if(isDefined(ai) && isDefined(ai.attackers)) {
-    for (j = 0; j < ai.attackers.size; j++) {
+    for(j = 0; j < ai.attackers.size; j++) {
       player = ai.attackers[j];
       if(!isDefined(player)) {
         continue;
@@ -1496,19 +1492,15 @@ auto_adjust_enemy_died(ai, amount, attacker, type, point) {
     }
   }
   if(arcadeMode()) {
-    [
-      [level.global_kill_func]
-    ](type, damage_location, point, attacker, ai, attacker.arcademode_bonus["uberKillingMachineStreak"]);
+    [[level.global_kill_func]](type, damage_location, point, attacker, ai, attacker.arcademode_bonus["uberKillingMachineStreak"]);
   } else {
-    [
-      [level.global_kill_func]
-    ](type, damage_location, point, attacker);
+    [[level.global_kill_func]](type, damage_location, point, attacker);
   }
   aa_add_event("aa_player_kills", 1);
 }
 
 auto_adjust_enemy_death_detection() {
-  for (;;) {
+  for(;;) {
     self waittill("damage", amount, attacker, direction_vec, point, type);
     aa_add_event("aa_enemy_damage_taken", amount);
     if(!isalive(self) || self.delayeddeath) {
@@ -1538,15 +1530,11 @@ aa_player_attacks_enemy_with_ads(player, amount, type, point) {
     self.attackerData[player getEntityNumber()] = false;
   }
   if(!isADS(player)) {
-    [
-      [level.global_damage_func]
-    ](type, self.damagelocation, point, player);
+    [[level.global_damage_func]](type, self.damagelocation, point, player);
     return false;
   }
   if(!bullet_attack(type)) {
-    [
-      [level.global_damage_func]
-    ](type, self.damagelocation, point, player);
+    [[level.global_damage_func]](type, self.damagelocation, point, player);
     return false;
   }
   [[level.global_damage_func_ads]](type, self.damagelocation, point, player);
@@ -1581,7 +1569,7 @@ coop_enemy_accuracy_scalar_watcher() {
   if(getdvarint("coop_difficulty_scaling") == 0) {
     return;
   }
-  while (1) {
+  while(1) {
     if(getdebugdvar("replay_debug") == "1")
       println("File: _gameskill.gsc. Function: coop_enemy_accuracy_scalar_watcher() - INNER LOOP START\n");
     players = get_players();
@@ -1599,7 +1587,7 @@ coop_friendly_accuracy_scalar_watcher() {
   if(getdvarint("coop_difficulty_scaling") == 0) {
     return;
   }
-  while (1) {
+  while(1) {
     players = get_players();
     level.coop_friendly_accuracy_scalar = getCoopValue("coopFriendlyAccuracyScalar", players.size);
     wait(0.5);
@@ -1613,7 +1601,7 @@ coop_axis_accuracy_scaler() {
   if(getdvarint("coop_difficulty_scaling") == 0) {
     return;
   }
-  while (1) {
+  while(1) {
     if(!isDefined(level.coop_enemy_accuracy_scalar)) {
       wait 0.5;
       continue;
@@ -1634,7 +1622,7 @@ coop_allies_accuracy_scaler() {
   if(getdvarint("coop_difficulty_scaling") == 0) {
     return;
   }
-  while (1) {
+  while(1) {
     if(!isDefined(level.coop_friendly_accuracy_scalar)) {
       wait 0.5;
       continue;
@@ -1649,14 +1637,14 @@ coop_allies_accuracy_scaler() {
 }
 
 coop_player_threat_bias_adjuster() {
-  while (1) {
+  while(1) {
     wait 5;
     if(isDefined(level.script) && level.script == "ber3b") {
       return;
     }
     if(level.auto_adjust_threatbias) {
       players = get_players();
-      for (i = 0; i < players.size; i++) {
+      for(i = 0; i < players.size; i++) {
         enable_auto_adjust_threatbias(players[i]);
       }
     }
@@ -1664,16 +1652,16 @@ coop_player_threat_bias_adjuster() {
 }
 
 coop_spawner_count_adjuster() {
-  while (!isDefined(level.flag) || !isDefined(level.flag["all_players_connected"])) {
+  while(!isDefined(level.flag) || !isDefined(level.flag["all_players_connected"])) {
     wait 0.05;
     continue;
   }
   flag_wait("all_players_connected");
   spawners = GetSpawnerArray();
   players = get_players();
-  for (i = 0; i < spawners.size; i++) {
+  for(i = 0; i < spawners.size; i++) {
     if(isDefined(spawners[i].targetname)) {
-      possible_trig = getentarray(spawners[i].targetname, "target");
+      possible_trig = getEntArray(spawners[i].targetname, "target");
       if(isDefined(possible_trig[0])) {
         if(isDefined(possible_trig[0].targetname)) {
           if(possible_trig[0].targetname == "flood_spawner") {

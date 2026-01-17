@@ -52,8 +52,8 @@ handle_audio() {
   vehicle_scripts\_technical_aud::snd_init_technical();
   thread monitor_death_stop_sounds();
 
-  for (;;) {
-    if(!isdefined(self.script_disablevehicleaudio) || !self.script_disablevehicleaudio) {
+  for(;;) {
+    if(!isDefined(self.script_disablevehicleaudio) || !self.script_disablevehicleaudio) {
       var_3 = distance(self.origin, level.player.origin);
 
       if(var_0 && var_3 > var_1) {
@@ -84,8 +84,8 @@ monitor_death_stop_sounds() {
 setanims() {
   var_0 = [];
 
-  for (var_1 = 0; var_1 < 3; var_1++)
-    var_0[var_1] = spawnstruct();
+  for(var_1 = 0; var_1 < 3; var_1++)
+    var_0[var_1] = spawnStruct();
 
   var_0[0].sittag = "tag_driver";
   var_0[1].sittag = "tag_gunner";

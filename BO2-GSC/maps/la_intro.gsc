@@ -19,8 +19,7 @@ autoexec event_funcs() {
   add_spawn_function_group("mason_reflection", "targetname", ::reflection_scene_head_track);
 }
 
-skipto_intro() {
-}
+skipto_intro() {}
 
 main() {
   println("Intro");
@@ -40,7 +39,7 @@ main() {
 
   s_cougar_spawner = get_vehicle_spawner("intro_cougar");
   veh_cougar = spawnvehicle("veh_t6_mil_cougar_interior", "intro_cougar", "apc_cougar_nophysics", s_cougar_spawner.origin, s_cougar_spawner.angles);
-  veh_cougar setmodel("veh_t6_mil_cougar_interior");
+  veh_cougar setModel("veh_t6_mil_cougar_interior");
   veh_cougar thread intro_cougar();
   n_fov = getdvarint(#"cg_fov");
   level.player setclientdvar("cg_fov", 55);
@@ -59,7 +58,7 @@ main() {
 
   debug_timer();
 
-  level.player playsound("evt_la_1_intro");
+  level.player playSound("evt_la_1_intro");
   level thread run_scene_and_delete("intro_fxanim_loop");
   level thread hide_player_ropes();
 
@@ -172,7 +171,7 @@ reflection_scene_head_track() {
   self endon("death");
 
   while(true) {
-    v_forward = anglestoforward(level.player getplayerangles());
+    v_forward = anglesToForward(level.player getplayerangles());
     v_eye = level.player get_eye();
     self lookatpos(v_eye + v_forward * 300);
     wait 0.05;

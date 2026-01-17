@@ -346,7 +346,7 @@ civ_stop_callback() {
   n_player_near_dist = 5184;
   n_pathing_fov = cos(45);
   n_dist = distancesquared(self.origin, level.player.origin);
-  v_facing = anglestoforward(self.angles);
+  v_facing = anglesToForward(self.angles);
   v_to_player = vectornormalize(level.player.origin - self.origin);
   n_facing_offset = vectordot(v_facing, v_to_player);
 
@@ -369,7 +369,7 @@ civ_bumped() {
 
   while(gettime() < n_timeout) {
     n_dist = distancesquared(self.origin, level.player.origin);
-    v_facing = anglestoforward(self.angles);
+    v_facing = anglesToForward(self.angles);
     v_to_player = vectornormalize(level.player.origin - self.origin);
     n_facing_offset = vectordot(v_facing, v_to_player);
 
@@ -412,7 +412,7 @@ goto_wander_anim_point() {
     foreach(nd_point in level.a_civ_wander_anim_points) {
       if(!(isDefined(nd_point.patrol_claimed) && nd_point.patrol_claimed) && distancesquared(self.origin, nd_point.origin) < 262144) {
         v_to_point = nd_point.origin - self.origin;
-        n_dot = vectordot(v_to_point, anglestoforward(self.angles));
+        n_dot = vectordot(v_to_point, anglesToForward(self.angles));
 
         if(n_dot > 0.2588) {
           b_point_found = 1;
@@ -468,7 +468,7 @@ get_target_ents() {
   array = [];
 
   if(isDefined(self.target))
-    array = getentarray(self.target, "targetname");
+    array = getEntArray(self.target, "targetname");
 
   return array;
 }
@@ -509,7 +509,7 @@ assign_civ_spawners(str_spawnerbase, n_baseindex) {
   } else
     str_spawnername = str_spawnerbase;
 
-  a_spawners = getentarray(str_spawnername, "targetname");
+  a_spawners = getEntArray(str_spawnername, "targetname");
 
   while(a_spawners.size != 0) {
     foreach(sp_civ in a_spawners) {
@@ -528,14 +528,14 @@ assign_civ_spawners(str_spawnerbase, n_baseindex) {
     if(isDefined(n_index)) {
       n_index++;
       str_spawnername = str_spawnerbase + n_index;
-      a_spawners = getentarray(str_spawnername, "targetname");
+      a_spawners = getEntArray(str_spawnername, "targetname");
     } else
       return;
   }
 }
 
 assign_civ_drone_spawners(str_spawnername, script_string) {
-  a_sp_civs = getentarray(str_spawnername, "targetname");
+  a_sp_civs = getEntArray(str_spawnername, "targetname");
 
   foreach(sp_civ in a_sp_civs)
   maps\_drones::drones_assign_spawner(script_string, sp_civ);
@@ -557,7 +557,7 @@ assign_civ_drone_spawners_by_type(type, script_string) {
 }
 
 delete_all_civs() {
-  a_m_civs = getentarray("civilian", "targetname");
+  a_m_civs = getEntArray("civilian", "targetname");
 
   foreach(index, m_civ in a_m_civs) {
     if(isalive(m_civ))
@@ -573,7 +573,7 @@ delete_civs(str_id, str_key) {
     str_key = "targetname";
 
   n_deleted = 0;
-  a_m_civs = getentarray(str_id, str_key);
+  a_m_civs = getEntArray(str_id, str_key);
 
   foreach(m_civ in a_m_civs) {
     m_civ delete();
@@ -729,7 +729,7 @@ spawn_static_club_civs(str_structnames, n_delay_max, str_male_spawners, str_fema
 
     if(isDefined(a_static_locs[i]["script_string"]) && (a_static_locs[i]["script_string"] == str_male_spawners || a_static_locs[i]["script_string"] == str_female_spawners)) {
       m_drone.targetname = m_body;
-      m_drone setmodel(m_body);
+      m_drone setModel(m_body);
 
       if(isDefined(m_drone.script_float)) {
         if(a_static_locs[i]["script_string"] == str_male_spawners)

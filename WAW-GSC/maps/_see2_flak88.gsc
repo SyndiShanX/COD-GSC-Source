@@ -27,7 +27,7 @@ main(model, type) {
   level.timersused = 0;
   level.safetyRange = 350;
   load_crew_anims();
-  array_levelthread(getentarray("flakbarrel", "targetname"), ::flakbarrel);
+  array_levelthread(getEntArray("flakbarrel", "targetname"), ::flakbarrel);
 }
 
 init_local() {
@@ -86,7 +86,7 @@ flakcrew_animation_think(flak) {
   self endon("crew dismounted");
   flak endon("crew dismounted");
   flak endon("newcrew");
-  for (;;) {
+  for(;;) {
     if(flak.turning != "none")
       self thread flakcrew_playAnim(flak, flak.turning);
     else
@@ -118,7 +118,7 @@ donotetracks_flak88(anime, flak) {
   flak endon("death");
   flak endon("crew dead");
   flak endon("crew dismounted");
-  while (1) {
+  while(1) {
     self waittill(anime, note);
     switch (note) {
       case "attach":
@@ -173,7 +173,7 @@ badplace_when_near() {
   self endon("death");
   self endon("bomb planted");
   trig = spawn("trigger_radius", self.origin, 0, 200, 200);
-  for (;;) {
+  for(;;) {
     trig waittill("trigger");
     badplacename = ("flak_badplace_player_near" + randomint(1000));
     badplace_cylinder(badplacename, 2, self.origin, 250, 300);
@@ -193,9 +193,9 @@ flak88_init() {
   self thread shoot();
   self.enemyque = [];
   if(isDefined(self.target)) {
-    targeted = getentarray(self.target, "targetname");
+    targeted = getEntArray(self.target, "targetname");
     triggerUse = [];
-    for (i = 0; i < targeted.size; i++) {
+    for(i = 0; i < targeted.size; i++) {
       if(targeted[i].classname == "trigger_use")
         triggerUse[triggerUse.size] = targeted[i];
       else if(targeted[i].classname == "script_origin")
@@ -204,7 +204,7 @@ flak88_init() {
     if(triggerUse.size > 0) {
       self.bombTriggers = [];
       self.bombs = [];
-      for (i = 0; i < triggerUse.size; i++) {
+      for(i = 0; i < triggerUse.size; i++) {
         if(isDefined(triggerUse[i].target)) {
           tempBomb = getent(triggerUse[i].target, "targetname");
           if(isDefined(tempBomb)) {
@@ -231,7 +231,7 @@ flak_monitorTurretAngles() {
   self endon("crew dismounted");
   prevAngles = (0, 0, 0);
   newAngles = (0, 0, 0);
-  for (;;) {
+  for(;;) {
     prevAngles = newAngles;
     newAngles = self getTagAngles("tag_turret");
     if(newAngles[1] < prevAngles[1])
@@ -246,11 +246,11 @@ flak_monitorTurretAngles() {
 
 flak88_explosives() {
   self endon("death");
-  for (i = 0; i < self.bombs.size; i++) {
+  for(i = 0; i < self.bombs.size; i++) {
     self.bombs[i] linkto(self, "tag_turret");
-    self.bombs[i] setmodel(level.flak88_bomb_model_obj);
+    self.bombs[i] setModel(level.flak88_bomb_model_obj);
   }
-  for (i = 0; i < self.bombTriggers.size; i++) {
+  for(i = 0; i < self.bombTriggers.size; i++) {
     self.bombTriggers[i] enablelinkto();
     self.bombTriggers[i] linkto(self, "tag_barrel");
     self thread flak88_explosives_wait(self.bombTriggers[i]);
@@ -258,13 +258,13 @@ flak88_explosives() {
   self waittill("explosives planted");
   badplace_cylinder("", level.explosiveplanttime, self.origin, 250, 300);
   iprintlnbold(&"SCRIPT_EXPLOSIVESPLANTED");
-  for (i = 0; i < self.bombTriggers.size; i++)
+  for(i = 0; i < self.bombTriggers.size; i++)
     self.bombTriggers[i] delete();
   bomb = getClosest(get_players()[0] getOrigin(), self.bombs);
-  bomb setmodel(level.flak88_bomb_model);
-  bomb playsound("explo_plant_rand");
+  bomb setModel(level.flak88_bomb_model);
+  bomb playSound("explo_plant_rand");
   bomb thread loopsound_for_time_or_death("bomb_tick", level.explosiveplanttime);
-  for (i = 0; i < self.bombs.size; i++) {
+  for(i = 0; i < self.bombs.size; i++) {
     if(self.bombs[i] == bomb)
       continue;
     self.bombs[i] delete();
@@ -284,7 +284,7 @@ flak88_explosives() {
 
 loopsound_for_time_or_death(sound, time) {
   self endon("death");
-  self playloopsound(sound);
+  self playLoopSound(sound);
   wait time;
   self stoploopsound(sound);
 }
@@ -305,7 +305,7 @@ stop_flak88_objective(flak) {
   self waittill("trigger");
   flak.remaining_ai_afterstop = 0;
   ai = getaiarray("axis");
-  for (i = 0; i < ai.size; i++) {
+  for(i = 0; i < ai.size; i++) {
     if(distance(flat_origin(ai[i].origin), flat_origin(flak.origin)) < 600)
       ai[i] thread stop_flak88_remainingai(flak);
   }
@@ -348,15 +348,15 @@ spawner_trigger() {
     return;
   spawn_trigger = false;
   AllTrigs = [];
-  AllTrigs = getentarray("trigger_multiple", "classname");
+  AllTrigs = getEntArray("trigger_multiple", "classname");
   trigs2 = [];
-  trigs2 = getentarray("trigger_radius", "classname");
+  trigs2 = getEntArray("trigger_radius", "classname");
   if(isDefined(trigs2[0])) {
-    for (i = 0; i < trigs2.size; i++)
+    for(i = 0; i < trigs2.size; i++)
       AllTrigs[AllTrigs.size] = trigs2[i];
   }
   if(isDefined(AllTrigs[0])) {
-    for (i = 0; i < AllTrigs.size; i++) {
+    for(i = 0; i < AllTrigs.size; i++) {
       if((isDefined(AllTrigs[i].script_flak88)) && (AllTrigs[i].script_flak88 == self.script_flak88)) {
         if((isDefined(AllTrigs[i].targetname)) && (AllTrigs[i].targetname == "stop flak88")) {
           alltrigs[i] thread stop_flak88_objective(self);
@@ -369,7 +369,7 @@ spawner_trigger() {
   }
   ents = getspawnerarray();
   spawners = [];
-  for (i = 0; i < ents.size; i++) {
+  for(i = 0; i < ents.size; i++) {
     if(!isDefined(ents[i].script_flak88))
       continue;
     if(ents[i].script_flak88 == self.script_flak88)
@@ -380,7 +380,7 @@ spawner_trigger() {
   }
   crewspawned = false;
   count = 0;
-  while (1) {
+  while(1) {
     numberofguys = undefined;
     if(spawn_trigger)
       self waittill("spawntriggered", numberofguys);
@@ -396,7 +396,7 @@ spawner_trigger() {
     passer = undefined;
     ejecter = undefined;
     aimer = undefined;
-    for (i = 0; i < numberofguys; i++) {
+    for(i = 0; i < numberofguys; i++) {
       wait_network_frame();
       if(!isDefined(spawners[i]))
         continue;
@@ -478,8 +478,8 @@ spawner_trigger() {
     self.crewmembers = array_removeDead(self.crewmembers);
     self thread flak88_waittill_crewdead(self.crewmembers);
     self thread think();
-    trigs = getentarray("stop flak88", "targetname");
-    for (i = 0; i < trigs.size; i++) {
+    trigs = getEntArray("stop flak88", "targetname");
+    for(i = 0; i < trigs.size; i++) {
       if((isDefined(trigs[i].script_flak88)) && (trigs[i].script_flak88 == self.script_flak88)) {
         trigs[i] thread stop_flak88(self);
         break;
@@ -497,7 +497,7 @@ mount_world_flakcrew(entArray) {
     self.crewmembers = [];
     self.crewsize = 5;
   }
-  for (i = 0; i < self.crewsize; i++) {
+  for(i = 0; i < self.crewsize; i++) {
     if(isDefined(self.crewmembers[i])) {
       ASSERTMSG("Trying to set a new crew on a flak 88 with a designated crew!");
       return;
@@ -509,7 +509,7 @@ mount_world_flakcrew(entArray) {
   passer = undefined;
   ejecter = undefined;
   aimer = undefined;
-  for (i = 0; i < entArray.size; i++) {
+  for(i = 0; i < entArray.size; i++) {
     if(!isDefined(entArray[i])) {
       continue;
     }
@@ -558,7 +558,7 @@ mount_world_flakcrew(entArray) {
     level thread flak88_crew_waittill_death(self, entArray[i]);
   }
   level anim_reach(crew_array, "idle1", "tag_turret", self);
-  for (i = 0; i < crew_array.size; i++) {
+  for(i = 0; i < crew_array.size; i++) {
     entArray[i].oldhealth = entArray[i].health;
     entArray[i].health = 1;
     entArray[i] linkto(self, "tag_turret");
@@ -570,8 +570,8 @@ mount_world_flakcrew(entArray) {
   self.crewmembers = array_removeDead(self.crewmembers);
   self thread flak88_waittill_crewdead(self.crewmembers);
   self thread think();
-  trigs = getentarray("stop flak88", "targetname");
-  for (i = 0; i < trigs.size; i++) {
+  trigs = getEntArray("stop flak88", "targetname");
+  for(i = 0; i < trigs.size; i++) {
     if((isDefined(trigs[i].script_flak88)) && (trigs[i].script_flak88 == self.script_flak88)) {
       trigs[i] thread stop_flak88(self);
       break;
@@ -589,7 +589,7 @@ flak88_dismount_crew(flak, used) {
   if(!isDefined(used))
     used = false;
   if(isDefined(flak.crewMembers)) {
-    for (i = 0; i < flak.crewMembers.size; i++) {
+    for(i = 0; i < flak.crewMembers.size; i++) {
       if(!isDefined(flak.crewMembers[i]))
         continue;
       flak.crewMembers[i] detach_shell();
@@ -614,7 +614,7 @@ flak88_crew_waittill_damage(flak, crew_member) {
   crew_member endon("crew dismounted");
   crew_member waittill("damage", damage, other, direction, origin, damage_type);
   if(!isDefined(crew_member) || damage > crew_member.health) {
-    for (i = 0; i < flak.crewsize; i++) {
+    for(i = 0; i < flak.crewsize; i++) {
       if(isDefined(flak.crewMembers[i])) {
         flak.crewMembers[i] doDamage(flak.crewMembers[i].health, flak.crewMembers[i].origin, other);
         flak.crewMembers[i] thread cleanup_drones();
@@ -626,7 +626,7 @@ flak88_crew_waittill_damage(flak, crew_member) {
 
 flak88_cleanup_after_death() {
   self waittill("death");
-  for (i = 0; i < self.crewsize; i++) {
+  for(i = 0; i < self.crewsize; i++) {
     if(isDefined(self.crewMembers[i])) {
       self.crewMembers[i] thread cleanup_drones();
     }
@@ -669,7 +669,7 @@ kill_flak88() {
   if(isDefined(level.hitbyplayervehiclethread))
     thread[[level.hitbyplayervehiclethread]]();
   ai = getaiarray();
-  for (i = 0; i < ai.size; i++) {
+  for(i = 0; i < ai.size; i++) {
     if(!isDefined(ai[i]))
       continue;
     if(!isalive(ai[i]))
@@ -697,11 +697,11 @@ kill_flak88() {
   if(level.playervehicle != self)
     self clearTurretTarget();
   if(isDefined(self.deathsound))
-    self playsound(self.deathsound);
+    self playSound(self.deathsound);
   if(isDefined(self.deathfx))
     level thread maps\_fx::OneShotfx(self.deathfx, self.origin, 0);
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i] enableHealthShield(false);
     radiusDamage(self.origin + (0, 0, 300), 400, 700, 100);
     players[i] enableHealthShield(true);
@@ -709,15 +709,15 @@ kill_flak88() {
   level thread maps\_fx::loopfx("damaged_vehicle_smoke", self.origin, .8);
   earthquake(0.25, 3, self.origin, 1050);
   if(isDefined(self.deathmodel))
-    self setmodel(self.deathmodel);
+    self setModel(self.deathmodel);
   if(isDefined(self.bombs)) {
-    for (i = 0; i < self.bombs.size; i++) {
+    for(i = 0; i < self.bombs.size; i++) {
       if(isDefined(self.bombs[i]))
         self.bombs[i] delete();
     }
   }
   if(isDefined(self.bombTriggers)) {
-    for (i = 0; i < self.bombTriggers.size; i++) {
+    for(i = 0; i < self.bombTriggers.size; i++) {
       if(isDefined(self.bombTriggers[i]))
         self.bombTriggers[i] delete();
     }
@@ -733,7 +733,7 @@ shoot_flak(org, no_anim) {
     return false;
   wait 0.2;
   if(isDefined(self.crewMembers) && !isDefined(no_anim)) {
-    for (i = 0; i < self.crewMembers.size; i++) {
+    for(i = 0; i < self.crewMembers.size; i++) {
       if((isDefined(self.crewMembers[i])) && (isDefined(self.crewMembers[i].crewposition)))
         self.crewMembers[i] thread flakcrew_playAnim(self, "fire");
     }
@@ -817,7 +817,7 @@ Target_Kill_Using_Accuracy(flak, target, delay_difference) {
   org = flak gettagorigin("tag_flash");
   vec = aim_org - org;
   final_pos = org + (800 * VectorNormalize(vec));
-  trace = bullettrace(org, final_pos, 0, flak);
+  trace = bulletTrace(org, final_pos, 0, flak);
   dist = distanceSquared(flak.origin, trace["position"]);
   if(dist < (700 * 700)) {
     return;
@@ -848,7 +848,7 @@ Target_Kill_Using_Accuracy(flak, target, delay_difference) {
 cone_check(flak88, target_org) {
   if((!isDefined(flak88.script_leftarc)) || (!isDefined(flak88.script_leftarc)))
     return true;
-  forwardvec = anglestoforward(flak88.angles);
+  forwardvec = anglesToForward(flak88.angles);
   orgA = flak88.origin;
   orgB = target_org;
   normalvec = vectorNormalize(orgB - orgA);
@@ -872,14 +872,14 @@ debug_flak88_drawLines(targetOrg) {
   self endon("death");
   self endon("stop drawing debug lines");
   return;
-  for (;;) {
+  for(;;) {
     line(self.origin + (0, 0, 68), targetOrg, (0.2, 0.5, 0.8), 0.5);
     wait 0.05;
   }
 }
 
 shoot() {
-  while (self.health > 0) {
+  while(self.health > 0) {
     self waittill("turret_fire");
     self fire_flak88();
   }

@@ -11,7 +11,7 @@ function move_ring(ring) {
   positions = struct::get_array(ring.target, "targetname");
   positions = array::randomize(positions);
   level endon("end_game");
-  while (true) {
+  while(true) {
     foreach(position in positions) {
       self moveto(position.origin, randomintrange(30, 45));
       self waittill("movedone");
@@ -25,7 +25,7 @@ function rotate_ring(forward) {
   if(forward) {
     dir = 360;
   }
-  while (true) {
+  while(true) {
     self rotateyaw(dir, 9);
     wait(9);
   }

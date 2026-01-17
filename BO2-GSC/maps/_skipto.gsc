@@ -143,7 +143,7 @@ handle_skiptos() {
   thread skipto_menu();
 
   if(!is_default_skipto())
-    savegame("levelstart", 0, & "AUTOSAVE_LEVELSTART", "", 1);
+    savegame("levelstart", 0, &"AUTOSAVE_LEVELSTART", "", 1);
 
   skipto_array = level.skipto_arrays[level.skipto_point];
 
@@ -159,9 +159,7 @@ handle_skiptos() {
 
   if(isDefined(skipto_array["skipto_func"])) {
     level flag_set("running_skipto");
-    [
-      [skipto_array["skipto_func"]]
-    ]();
+    [[skipto_array["skipto_func"]]]();
   }
 
   if(is_default_skipto()) {
@@ -186,9 +184,7 @@ handle_skiptos() {
     if(already_ran_function(next_logic_func, previously_run_logic_functions)) {
       continue;
     }
-    [
-      [next_logic_func]
-    ]();
+    [[next_logic_func]]();
     previously_run_logic_functions[previously_run_logic_functions.size] = next_logic_func;
   }
 }
@@ -303,8 +299,7 @@ display_skiptos() {
     if(s_name != "cancel" && s_name != "default" && s_name != "no_game") {
       skipto_string = skipto_string + " -> ";
 
-      if(isDefined(level.skipto_arrays[s_name]["skipto_loc_string"])) {
-      }
+      if(isDefined(level.skipto_arrays[s_name]["skipto_loc_string"])) {}
     }
 
     strings[strings.size] = skipto_string;
@@ -468,7 +463,7 @@ do_no_game_skipto() {
   level thread all_players_connected();
   level thread all_players_spawned();
   level thread maps\_endmission::main();
-  array_thread(getentarray("water", "targetname"), maps\_load_common::waterthink);
+  array_thread(getEntArray("water", "targetname"), maps\_load_common::waterthink);
   thread maps\_interactive_objects::main();
   thread maps\_audio::main();
   maps\_hud::init();

@@ -72,7 +72,7 @@ nuked_dome_explosion_think(localclientnum) {
 }
 
 flag_think(localclientnum) {
-  flags = getentarray(localclientnum, "ending_flag", "targetname");
+  flags = getEntArray(localclientnum, "ending_flag", "targetname");
   array_thread(flags, ::rotate_flags);
 }
 

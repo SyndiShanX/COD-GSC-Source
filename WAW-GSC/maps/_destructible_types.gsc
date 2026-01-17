@@ -221,7 +221,7 @@ getInfoIndex(destructibleType) {
     return -1;
   if(level.destructible_type.size == 0)
     return -1;
-  for (i = 0; i < level.destructible_type.size; i++) {
+  for(i = 0; i < level.destructible_type.size; i++) {
     if(destructibleType == level.destructible_type[i].v["type"])
       return i;
   }

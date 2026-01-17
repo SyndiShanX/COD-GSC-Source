@@ -70,16 +70,16 @@ staff_lightning_position_source(v_detonate, v_angles, str_weapon) {
   if(!isDefined(v_angles))
     v_angles = (0, 0, 0);
 
-  e_ball_fx = spawn("script_model", v_detonate + anglestoforward(v_angles) * 100.0);
+  e_ball_fx = spawn("script_model", v_detonate + anglesToForward(v_angles) * 100.0);
   e_ball_fx.angles = v_angles;
   e_ball_fx.str_weapon = str_weapon;
-  e_ball_fx setmodel("tag_origin");
+  e_ball_fx setModel("tag_origin");
   e_ball_fx.n_range = get_lightning_blast_range(self.chargeshotlevel);
   e_ball_fx.n_damage_per_sec = get_lightning_ball_damage_per_sec(self.chargeshotlevel);
   e_ball_fx setclientfield("lightning_miss_fx", 1);
   n_shot_range = staff_lightning_get_shot_range(self.chargeshotlevel);
-  v_end = v_detonate + anglestoforward(v_angles) * n_shot_range;
-  trace = bullettrace(v_detonate, v_end, 0, undefined);
+  v_end = v_detonate + anglesToForward(v_angles) * n_shot_range;
+  trace = bulletTrace(v_detonate, v_end, 0, undefined);
 
   if(trace["fraction"] != 1)
     v_end = trace["position"];
@@ -290,7 +290,7 @@ staff_lightning_death_fx() {
 zombie_shock_eyes_network_safe(fx, entity, tag) {
   if(network_entity_valid(entity)) {
     if(!is_true(self.head_gibbed))
-      playfxontag(fx, entity, tag);
+      playFXOnTag(fx, entity, tag);
   }
 }
 

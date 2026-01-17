@@ -8,7 +8,6 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace destructclientutils;
 
 autoexec __init__system__() {
@@ -67,18 +66,18 @@ __init__() {
   level.destructiblecharacterdefs = processedbundles;
 }
 
-private _getdestructibledef(entity) {
+_getdestructibledef(entity) {
   return level.destructiblecharacterdefs[entity.destructibledef];
 }
 
-private _destructhandler(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
+_destructhandler(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   if(!util::is_mature() || util::is_gib_restricted_build()) {
     return;
   }
 
   entity = self;
   destructflags = oldvalue ^ newvalue;
-  shouldspawngibs = newvalue&1;
+  shouldspawngibs = newvalue & 1;
 
   if(bnewent) {
     destructflags = 0 ^ newvalue;
@@ -91,7 +90,7 @@ private _destructhandler(localclientnum, oldvalue, newvalue, bnewent, binitialsn
   currentdestructflag = 2;
 
   for(piecenumber = 1; destructflags >= currentdestructflag; piecenumber++) {
-    if(destructflags&currentdestructflag) {
+    if(destructflags &currentdestructflag) {
       _destructpiece(localclientnum, entity, piecenumber, shouldspawngibs);
     }
 
@@ -101,7 +100,7 @@ private _destructhandler(localclientnum, oldvalue, newvalue, bnewent, binitialsn
   entity._destruct_state = newvalue;
 }
 
-private _destructpiece(localclientnum, entity, piecenumber, shouldspawngibs) {
+_destructpiece(localclientnum, entity, piecenumber, shouldspawngibs) {
   if(!isDefined(entity.destructibledef)) {
     return;
   }
@@ -122,7 +121,7 @@ private _destructpiece(localclientnum, entity, piecenumber, shouldspawngibs) {
   }
 }
 
-private _getdestructstate(localclientnum, entity) {
+_getdestructstate(localclientnum, entity) {
   if(isDefined(entity._destruct_state)) {
     return entity._destruct_state;
   }
@@ -130,13 +129,11 @@ private _getdestructstate(localclientnum, entity) {
   return 0;
 }
 
-private _handledestructcallbacks(localclientnum, entity, piecenumber) {
+_handledestructcallbacks(localclientnum, entity, piecenumber) {
   if(isDefined(entity._destructcallbacks) && isDefined(entity._destructcallbacks[piecenumber])) {
     foreach(callback in entity._destructcallbacks[piecenumber]) {
       if(isfunctionptr(callback)) {
-        [
-          [callback]
-        ](localclientnum, entity, piecenumber);
+        [[callback]](localclientnum, entity, piecenumber);
       }
     }
   }
@@ -159,5 +156,5 @@ adddestructpiececallback(localclientnum, entity, piecenumber, callbackfunction) 
 }
 
 ispiecedestructed(localclientnum, entity, piecenumber) {
-  return _getdestructstate(localclientnum, entity)&1 << piecenumber;
+  return _getdestructstate(localclientnum, entity) & 1 << piecenumber;
 }

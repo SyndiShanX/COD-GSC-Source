@@ -33,7 +33,7 @@ init() {
   onplayerconnect_callback(::onplayerconnect_ee_jump_scare);
   onplayerconnect_callback(::onplayerconnect_ee_oneinchpunch);
   sq_one_inch_punch();
-  a_triggers = getentarray("audio_bump_trigger", "targetname");
+  a_triggers = getEntArray("audio_bump_trigger", "targetname");
 
   foreach(trigger in a_triggers) {
     if(isDefined(trigger.script_sound) && trigger.script_sound == "zmb_perks_bump_bottle")
@@ -59,10 +59,10 @@ quadrotor_medallions() {
   player = get_players()[0];
   options = player maps\mp\zombies\_zm_weapons::get_pack_a_punch_weapon_options("mg08_upgraded_zm");
   m_mg_model = spawn_weapon_model("mg08_upgraded_zm", undefined, v_spawnpt, v_spawnang, options);
-  playfxontag(level._effect["special_glow"], m_mg_model, "tag_origin");
+  playFXOnTag(level._effect["special_glow"], m_mg_model, "tag_origin");
   t_weapon_swap = tomb_spawn_trigger_radius(v_spawnpt, 100, 1);
   t_weapon_swap.require_look_at = 1;
-  t_weapon_swap.hint_string = & "ZM_TOMB_X2PU";
+  t_weapon_swap.hint_string = &"ZM_TOMB_X2PU";
   t_weapon_swap.hint_parm1 = getweapondisplayname("mg08_upgraded_zm");
 
   for(b_retrieved = 0; !b_retrieved; b_retrieved = swap_mg(e_player))
@@ -77,7 +77,7 @@ quadrotor_medallions_vo() {
 
   while(n_vo_counter < 4) {
     level waittill("quadrotor_medallion_found", v_quadrotor);
-    v_quadrotor playsound("zmb_medallion_pickup");
+    v_quadrotor playSound("zmb_medallion_pickup");
 
     if(isDefined(v_quadrotor)) {
       maxissay("vox_maxi_drone_pickups_" + n_vo_counter, v_quadrotor);
@@ -114,7 +114,7 @@ swap_mg(e_player) {
 
 wall_hole_poster() {
   m_poster = getent("hole_poster", "targetname");
-  m_poster setcandamage(1);
+  m_poster setCanDamage(1);
   m_poster.health = 1000;
   m_poster.maxhealth = m_poster.health;
 
@@ -159,7 +159,7 @@ wagon_fire_challenge() {
 
 wagon_fire_start() {
   level.n_wagon_fires_out = 0;
-  a_triggers = getentarray("wagon_damage_trigger", "targetname");
+  a_triggers = getEntArray("wagon_damage_trigger", "targetname");
 
   foreach(trigger in a_triggers) {
     trigger thread wagon_fire_trigger_watch();
@@ -314,7 +314,7 @@ bunker_trigger_thread() {
       player.sq_one_inch_punch_stage++;
       player.sq_one_inch_punch_tablet_num = level.n_tablets_remaining;
       player setclientfieldtoplayer("player_tablet_state", 2);
-      player playsound("zmb_squest_oiptablet_pickup");
+      player playSound("zmb_squest_oiptablet_pickup");
       player thread sq_one_inch_punch_disconnect_watch();
       player thread sq_one_inch_punch_death_watch();
       m_tablet = getent("tablet_bunker_" + level.n_tablets_remaining, "targetname");
@@ -329,7 +329,7 @@ bunker_trigger_thread() {
       player.sq_one_inch_punch_tablet = spawn_tablet_model(player.sq_one_inch_punch_tablet_num, "bunker", "clean");
       player.sq_one_inch_punch_stage++;
       player setclientfieldtoplayer("player_tablet_state", 0);
-      player playsound("zmb_squest_oiptablet_place_table");
+      player playSound("zmb_squest_oiptablet_place_table");
 
       iprintln("5 - charge the tablet in the bunker");
 
@@ -343,7 +343,7 @@ bunker_trigger_thread() {
         level.zombie_weapons["beacon_zm"].is_in_box = 1;
       }
 
-      player playsound("zmb_squest_oiptablet_get_reward");
+      player playSound("zmb_squest_oiptablet_get_reward");
       player.sq_one_inch_punch_stage++;
 
       iprintln("7 - tablet is activated; bestow rewards");
@@ -365,7 +365,7 @@ birdbath_trigger_thread() {
       } else
         player.sq_one_inch_punch_tablet = spawn_tablet_model(player.sq_one_inch_punch_tablet_num, "church", "muddy");
 
-      player playsound("zmb_squest_oiptablet_bathe");
+      player playSound("zmb_squest_oiptablet_bathe");
       player setclientfieldtoplayer("player_tablet_state", 0);
       player.sq_one_inch_punch_stage++;
 
@@ -380,7 +380,7 @@ birdbath_trigger_thread() {
       if(isDefined(player.sq_one_inch_punch_tablet))
         player.sq_one_inch_punch_tablet delete();
 
-      player playsound("zmb_squest_oiptablet_pickup_clean");
+      player playSound("zmb_squest_oiptablet_pickup_clean");
       player thread tablet_cleanliness_thread();
 
       iprintln("4 - take the tablet to the tank bunker");
@@ -517,12 +517,12 @@ spawn_tablet_model(n_player_id, str_location, str_state) {
   m_tablet.angles = v_spawnang;
 
   if(str_state == "clean") {
-    m_tablet setmodel("p6_zm_tm_tablet");
+    m_tablet setModel("p6_zm_tm_tablet");
 
     if(str_location == "church")
-      m_tablet playsound("zmb_squest_oiptablet_charged");
+      m_tablet playSound("zmb_squest_oiptablet_charged");
   } else
-    m_tablet setmodel("p6_zm_tm_tablet_muddy");
+    m_tablet setModel("p6_zm_tm_tablet_muddy");
 
   m_tablet.targetname = "tablet_" + str_location + "_" + n_player_id;
   return m_tablet;
@@ -541,7 +541,7 @@ radio_ee_song() {
     unitrigger_stub.require_look_at = 1;
     m_radio = spawn("script_model", unitrigger_stub.origin);
     m_radio.angles = unitrigger_stub.angles;
-    m_radio setmodel("p6_zm_tm_radio_01");
+    m_radio setModel("p6_zm_tm_radio_01");
     m_radio attach("p6_zm_tm_radio_01_panel2_blood", "tag_j_cover");
     maps\mp\zombies\_zm_unitrigger::register_static_unitrigger(unitrigger_stub, ::radio_ee_think);
 

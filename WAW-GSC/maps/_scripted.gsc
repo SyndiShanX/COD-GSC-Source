@@ -17,7 +17,7 @@ main(notifyname, character, node, scr_thread, bitflags) {
     self.scripted_notifyname = notifyname;
     self.scriptedFacialAnim = level.scr_anim[notifyname][character]["facial"];
     self.scriptedFacialSound = level.scr_anim[notifyname][character]["sound"][0];
-    self playsound(self.scriptedFacialSound);
+    self playSound(self.scriptedFacialSound);
     println("^bPlayed friendly chat sound " + self.scriptedFacialSound);
     self notify("ScriptedFacial");
     return;
@@ -51,7 +51,7 @@ main(notifyname, character, node, scr_thread, bitflags) {
     self.goalradius = (25);
     teleport = false;
     if(isDefined(bitflags)) {
-      if(bitflags & level.teleport) {
+      if(bitflags &level.teleport) {
         self teleport(org);
         teleport = true;
       }
@@ -76,7 +76,7 @@ main(notifyname, character, node, scr_thread, bitflags) {
 
 checkanim(notifyname, total) {
   doanim = true;
-  for (i = 0; i < total; i++) {
+  for(i = 0; i < total; i++) {
     if(!isalive(level.scripted_animation[notifyname][i]))
       donanim = false;
   }
@@ -91,7 +91,7 @@ wait_notify(notifyname) {
     println("Wait-notify reached for sequence ", notifyname);
   total = 0;
   allai = getaiarray("axis", "allies");
-  for (i = 0; i < allai.size; i++) {
+  for(i = 0; i < allai.size; i++) {
     if((isDefined(allai[i].notifyname)) && (allai[i].notifyname == notifyname))
       total++;
   }
@@ -99,7 +99,7 @@ wait_notify(notifyname) {
     println("Cancelling scripted animation because one of the members of the scripted sequence has died.");
     return;
   }
-  for (i = 0; i < total; i++)
+  for(i = 0; i < total; i++)
     level.scripted_animation[notifyname][i] thread doscriptedanim(notifyname);
   level.scripted_animation_slot[notifyname] = undefined;
 }
@@ -110,7 +110,7 @@ idle_anim(node, notifyname, character, bitflags) {
     org = node.origin;
   else
     org = getStartOrigin(node.origin, node.angles, level.scr_anim[notifyname][character]["idle"][0]);
-  if((isDefined(bitflags)) && (bitflags & level.teleport))
+  if((isDefined(bitflags)) && (bitflags &level.teleport))
     self teleport(org);
   else {
     oldradius = self.goalradius;
@@ -119,7 +119,7 @@ idle_anim(node, notifyname, character, bitflags) {
     self waittill("goal");
     self.goalradius = oldradius;
   }
-  while (isalive(self)) {
+  while(isalive(self)) {
     self animscripted("scriptedanimdone", node.origin, node.angles,
       level.scr_anim[notifyname][character]["idle"][randomint(level.scr_anim[notifyname][character]["idle"].size)]);
     self waittillmatch("scriptedanimdone", "end");
@@ -142,14 +142,14 @@ doscriptedanim(notifyname) {
   self animscripted("scriptedanimdone", self.seeknode.origin, self.seeknode.angles, level.scr_anim[notifyname][self.character]["animation"]);
   thread abort_sequence(notifyname);
   soundnum = undefined;
-  while (1) {
+  while(1) {
     self waittill("scriptedanimdone", notetrack);
     if((notetrack == "sound") || (notetrack == "dialogue") || (notetrack == "dialog")) {
       if(!isDefined(soundnum))
         soundnum = 0;
       if((isDefined(level.scr_anim[notifyname][self.character]["sound"])) && (isDefined(level.scr_anim[notifyname][self.character]["sound"][soundnum]))) {
         println("^bPlayed friendly chat sound " + level.scr_anim[notifyname][self.character]["sound"][soundnum]);
-        self playsound(level.scr_anim[notifyname][self.character]["sound"][soundnum]);
+        self playSound(level.scr_anim[notifyname][self.character]["sound"][soundnum]);
       } else
         println("sound ", notifyname, " ", self.character, " ", soundnum, " was undefined");
       soundnum++;

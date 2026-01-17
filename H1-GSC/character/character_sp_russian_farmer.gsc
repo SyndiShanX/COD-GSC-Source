@@ -5,7 +5,7 @@
 *****************************************************/
 
 main() {
-  self setmodel("body_sp_russian_farmer");
+  self setModel("body_sp_russian_farmer");
   self attach("head_sp_russian_farmer", "", 1);
   self.headmodel = "head_sp_russian_farmer";
   self.voice = "russian";

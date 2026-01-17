@@ -16,17 +16,17 @@ init() {
   }
   registerMedalCallback("playerKilled", maps\mp\_medals::medal_kills);
   level.numKills = 0;
-  level.medalSettings = spawnstruct();
+  level.medalSettings = spawnStruct();
   level.medalSettings.teamColumn = 4;
   level.medalSettings.playerColumn = 5;
   level.medalSettings.hardcoreMedalPopup = 6;
   baseRef = "";
-  for (idx = 1; isDefined(tableLookup(tableName, 0, idx, 0)) && tableLookup(tableName, 0, idx, 0) != ""; idx++) {
+  for(idx = 1; isDefined(tableLookup(tableName, 0, idx, 0)) && tableLookup(tableName, 0, idx, 0) != ""; idx++) {
     refString = tableLookup(tableName, 0, idx, 1);
     assert(refString != "MEDALS");
     level.medalInfo[refString] = [];
     level.medalInfo[refString]["index"] = idx;
-    level.medalInfo[refString]["xp"] = spawnstruct();
+    level.medalInfo[refString]["xp"] = spawnStruct();
     level.medalInfo[refString]["xp"].team = int(tableLookup(tableName, 0, idx, level.medalSettings.teamColumn));
     level.medalInfo[refString]["xp"].player = int(tableLookup(tableName, 0, idx, level.medalSettings.playerColumn));
     level.medalInfo[refString]["hardcore"] = int(tableLookup(tableName, 0, idx, level.medalSettings.hardcoreMedalPopup));
@@ -51,15 +51,15 @@ doMedalCallback(callback, data) {
   if(!isDefined(level.medalCallbacks[callback]))
     return;
   if(isDefined(data)) {
-    for (i = 0; i < level.medalCallbacks[callback].size; i++)
+    for(i = 0; i < level.medalCallbacks[callback].size; i++)
       thread[[level.medalCallbacks[callback][i]]](data);
   } else {
-    for (i = 0; i < level.medalCallbacks[callback].size; i++)
+    for(i = 0; i < level.medalCallbacks[callback].size; i++)
       thread[[level.medalCallbacks[callback][i]]]();
   }
 }
 onPlayerConnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connected", player);
     player.lastKilledBy = undefined;
     player thread hijackCrate();
@@ -90,9 +90,7 @@ giveMedal(medalName, weapon) {
       self thread maps\mp\gametypes\_rank::giveRankXP("medal", xp);
       self maps\mp\gametypes\_persistence::statAdd("MEDALS", 1, false);
     }
-    [
-      [level.onMedalAwarded]
-    ](self, medalName, xp);
+    [[level.onMedalAwarded]](self, medalName, xp);
     self thread maps\mp\_properks::medalEarned(medalName, weapon);
     if(level.hardcoreMode == false || level.medalInfo[medalName]["hardcore"] == 1) {
       addMedalToQueue(level.medalInfo[medalName]["index"]);
@@ -145,7 +143,7 @@ medal_kills(data, time) {
   }
   if(isDefined(victim.damagedPlayers)) {
     keys = getarraykeys(victim.damagedPlayers);
-    for (i = 0; i < keys.size; i++) {
+    for(i = 0; i < keys.size; i++) {
       key = keys[i];
       if(key == attacker.clientid)
         continue;
@@ -281,7 +279,7 @@ updatemultikills(weapon) {
 hijackCrate() {
   self endon("disconnect");
   level endon("game_ended");
-  for (;;) {
+  for(;;) {
     self waittill("hijacked crate");
     self processMedal("MEDAL_HIJACKER");
   }
@@ -289,7 +287,7 @@ hijackCrate() {
 hijackTeamCrate() {
   self endon("disconnect");
   level endon("game_ended");
-  for (;;) {
+  for(;;) {
     self waittill("team crate hijacked", crateType);
     level.globalSharePackages++;
     if(isDefined(crateType.shareStat)) {

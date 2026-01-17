@@ -350,7 +350,7 @@ setFlashFrac(flashFrac) {
 flashThread() {
   self endon("death");
   self.alpha = 1;
-  while (1) {
+  while(1) {
     if(self.frac >= self.flashFrac) {
       self fadeOverTime(0.3);
       self.alpha = .2;
@@ -367,9 +367,9 @@ flashThread() {
 
 destroyElem() {
   tempChildren = [];
-  for (index = 0; index < self.children.size; index++)
+  for(index = 0; index < self.children.size; index++)
     tempChildren[index] = self.children[index];
-  for (index = 0; index < tempChildren.size; index++)
+  for(index = 0; index < tempChildren.size; index++)
     tempChildren[index] setParent(self getParent());
   if(self.elemType == "bar") {
     self.bar destroy();
@@ -396,7 +396,7 @@ setSize(width, height) {
 }
 
 updateChildren() {
-  for (index = 0; index < self.children.size; index++) {
+  for(index = 0; index < self.children.size; index++) {
     child = self.children[index];
     child setPoint(child.point, child.relativePoint, child.xOffset, child.yOffset);
   }

@@ -6,8 +6,7 @@
 #include maps\mp\_utility;
 #include common_scripts\utility;
 
-init() {
-}
+init() {}
 
 wait_until_first_player() {
   players = get_players();
@@ -29,7 +28,7 @@ stand_think(trig) {
 
   while(true) {
     if(self.player_is_moving)
-      trig playsound(trig.script_label);
+      trig playSound(trig.script_label);
 
     wait 1;
   }
@@ -70,7 +69,7 @@ thread_enter_exit_sound(trig) {
   trig.touchingplayers[self getentitynumber()] = 1;
 
   if(isDefined(trig.script_sound) && trig.script_activated && self._is_sprinting)
-    self playsound(trig.script_sound);
+    self playSound(trig.script_sound);
 
   self thread stand_think(trig);
 
@@ -78,7 +77,7 @@ thread_enter_exit_sound(trig) {
     wait 0.1;
 
   self notify("kill_stand_think" + trig getentitynumber());
-  self playsound(trig.script_noteworthy);
+  self playSound(trig.script_noteworthy);
   trig.touchingplayers[self getentitynumber()] = 0;
 }
 
@@ -102,7 +101,7 @@ thread_step_trigger() {
 }
 
 disable_bump_trigger(triggername) {
-  triggers = getentarray("audio_bump_trigger", "targetname");
+  triggers = getEntArray("audio_bump_trigger", "targetname");
 
   if(isDefined(triggers)) {
     for(i = 0; i < triggers.size; i++) {

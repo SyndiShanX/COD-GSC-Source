@@ -10,7 +10,6 @@
 #include scripts\core_common\util_shared;
 #include scripts\core_common\vehicle_shared;
 #include scripts\core_common\vehicles\seeker_mine;
-
 #namespace seeker_mine_mp;
 
 autoexec __init__system__() {
@@ -67,7 +66,7 @@ seeker_mine_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
 }
 
 function_fc90058e(localclientnum, fx) {
-  self waittill(#"death", #"hash_6b4bac2b8c2122ef");
+  self waittill(#"death", # "hash_6b4bac2b8c2122ef");
 
   if(isDefined(fx)) {
     stopfx(localclientnum, fx);
@@ -84,7 +83,7 @@ on_player_corpse(localclientnum, params) {
 }
 
 function_a6451cfe(localclientnum, camfx) {
-  self waittill(#"death", #"hash_43f06be9944cddc1");
+  self waittill(#"death", # "hash_43f06be9944cddc1");
 
   if(isDefined(camfx)) {
     stopfx(localclientnum, camfx);
@@ -93,7 +92,7 @@ function_a6451cfe(localclientnum, camfx) {
   setuimodelvalue(createuimodel(getuimodelforcontroller(localclientnum), "hudItems.playerIsShocked"), 0);
 }
 
-private spawned(localclientnum) {
+spawned(localclientnum) {
   self function_811196d1(1);
   self seeker_mine::spawned(localclientnum);
 }

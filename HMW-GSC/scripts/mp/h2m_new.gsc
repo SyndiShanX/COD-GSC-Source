@@ -1,5 +1,5 @@
 main() {
-  // use map vision from start & don't wait for players
+  // use map vision from start &don't wait for players
   replacefunc(maps\mp\gametypes\_gamelogic::matchstarttimerwaitforplayers, ::matchstarttimerwaitforplayers_stub);
 
   // use new freeze when game ends
@@ -22,7 +22,7 @@ matchstarttimerwaitforplayers_stub() {
 
   if(maps\mp\_utility::getmapname() != "trainer" &&
     level.prematchperiodend > 0 &&
-    !isdefined(level.hostmigrationtimer))
+    !isDefined(level.hostmigrationtimer))
     maps\mp\gametypes\_gamelogic::matchstarttimer(level.prematchperiodend);
   else
     setomnvar("ui_match_countdown_title", 0);
@@ -52,7 +52,7 @@ init() {
 
 connected() {
   level endon("game_ended");
-  for (;;) {
+  for(;;) {
     level waittill("connected", player);
     player thread spawned();
   }
@@ -67,7 +67,7 @@ spawned() {
   self force_play_weap_anim(19, 19); // first raise
 
   // handle freezing the player and limit what they can do
-  if(!isdefined(level.prematch_done_time) || (gettime() < level.prematch_done_time)) {
+  if(!isDefined(level.prematch_done_time) || (gettime() < level.prematch_done_time)) {
     self thread toggle_custom_freeze(true);
   }
 }
@@ -78,7 +78,7 @@ monitor_class_changes_for_stock() {
   level endon("prematch_over");
   level endon("shutdowngame_called");
 
-  for (;;) {
+  for(;;) {
     self common_scripts\utility::waittill_any("applyLoadout", "weapon_change");
 
     self setmovespeedscale(0.0);
@@ -93,8 +93,6 @@ toggle_custom_freeze(should_freeze) {
     self freezeControls(should_freeze);
     return;
   }
-
-
 
   // unfreeze
   self freezecontrols(false);
@@ -116,7 +114,7 @@ toggle_custom_freeze(should_freeze) {
 
   if(should_freeze) {
     self thread monitor_class_changes_for_stock();
-  } else if(!should_freeze && (isdefined(self.freeze_save_data) && self.freeze_save_data.size > 0)) {
+  } else if(!should_freeze && (isDefined(self.freeze_save_data) && self.freeze_save_data.size > 0)) {
     self notify("stop_monitoring_class_stock");
   }
 
@@ -151,7 +149,7 @@ prematchperiod_stub() {
   } else
     maps\mp\gametypes\_gamelogic::matchstarttimerskip();
 
-  for (index = 0; index < level.players.size; index++) {
+  for(index = 0; index < level.players.size; index++) {
     level.players[index] maps\mp\_utility::freezecontrolswrapper(0);
     level.players[index] enableweapons();
     level.players[index] enableammogeneration();

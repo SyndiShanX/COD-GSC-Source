@@ -11,7 +11,7 @@
 #namespace duplicate_render;
 
 function autoexec __init__sytem__() {
-  system::register("duplicate_render", & __init__, undefined, undefined);
+  system::register("duplicate_render", &__init__, undefined, undefined);
 }
 
 function __init__() {}

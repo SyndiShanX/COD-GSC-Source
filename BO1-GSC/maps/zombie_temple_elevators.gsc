@@ -116,7 +116,7 @@ geyser_watch_for_player() {
       who thread player_geyser_move(self);
       continue;
     }
-    self playsound("evt_geyser_buildup");
+    self playSound("evt_geyser_buildup");
     startTime = GetTime();
     players = get_players();
     while(1) {
@@ -328,7 +328,7 @@ geyser_sounds(struct_name, sfx_start, sfx_loop, sfx_loop_delay) {
 geyser_blocker_remove() {
   clip = getEnt(self.target, "targetname");
   clip Delete();
-  struct = spawnstruct();
+  struct = spawnStruct();
   struct.origin = self.origin + (0, 0, 500);
   struct.angles = self.angles + (0, 180, 0);
   self.script_noteworthy = "jiggle";
@@ -347,8 +347,8 @@ geyser_trigger_dust_think() {
   while(1) {
     self waittill("trigger", player);
     if(isDefined(player) && isDefined(player.geyser_dust_time) && player.geyser_dust_time > gettime()) {
-      playfx(level._effect["player_land_dust"], player.origin);
-      player playsound("fly_bodyfall_large_dirt");
+      playFX(level._effect["player_land_dust"], player.origin);
+      player playSound("fly_bodyfall_large_dirt");
       player.geyser_dust_time = 0;
     }
   }

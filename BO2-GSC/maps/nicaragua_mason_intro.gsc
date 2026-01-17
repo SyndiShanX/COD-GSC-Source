@@ -233,7 +233,7 @@ mason_intro_cleanup() {
   delete_scene("mason_intro_part2_woods");
   delete_scene("mason_intro_part2_hudson");
   delete_scene_all("mason_intro_part2_noriega");
-  array_delete(getentarray("mason_intro_window_spawners", "script_noteworthy"));
+  array_delete(getEntArray("mason_intro_window_spawners", "script_noteworthy"));
   kill_spawnernum(10);
 }
 

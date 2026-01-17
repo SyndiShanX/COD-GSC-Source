@@ -5,7 +5,7 @@
 ********************************/
 
 patrol(var_0, var_1, var_2) {
-  if(isdefined(self.enemy)) {
+  if(isDefined(self.enemy)) {
     return;
   }
   self endon("death");
@@ -23,10 +23,10 @@ patrol(var_0, var_1, var_2) {
   self.script_patroller = 1;
   var_3 = "patrol_walk";
 
-  if(isdefined(self.patrol_walk_anim))
+  if(isDefined(self.patrol_walk_anim))
     var_3 = self.patrol_walk_anim;
 
-  var_4 = isdefined(self.canpatrolturn) && self.canpatrolturn;
+  var_4 = isDefined(self.canpatrolturn) && self.canpatrolturn;
   maps\_utility::set_generic_run_anim(var_3, 1, !var_4);
   thread patrol_walk_twitch_loop();
   var_5[1][1] = ::get_target_ents;
@@ -36,10 +36,10 @@ patrol(var_0, var_1, var_2) {
   var_6[1] = maps\_utility::set_goal_ent;
   var_6[0] = maps\_utility::set_goal_node;
 
-  if(isdefined(var_0))
+  if(isDefined(var_0))
     self.target = var_0;
 
-  if(isdefined(self.target)) {
+  if(isDefined(self.target)) {
     var_7 = 1;
     var_8 = get_target_ents();
     var_9 = get_target_nodes();
@@ -67,8 +67,8 @@ patrol(var_0, var_1, var_2) {
 
   var_12 = var_10;
 
-  for (;;) {
-    while (isdefined(var_12.patrol_claimed))
+  for(;;) {
+    while(isDefined(var_12.patrol_claimed))
       wait 0.05;
 
     var_10.patrol_claimed = undefined;
@@ -76,11 +76,9 @@ patrol(var_0, var_1, var_2) {
     self notify("release_node");
     var_10.patrol_claimed = 1;
     self.last_patrol_goal = var_10;
-    [
-      [var_6[var_11]]
-    ](var_10);
+    [[var_6[var_11]]](var_10);
 
-    if(isdefined(var_10.radius) && var_10.radius > 0)
+    if(isDefined(var_10.radius) && var_10.radius > 0)
       self.goalradius = var_10.radius;
     else
       self.goalradius = 32;
@@ -88,8 +86,8 @@ patrol(var_0, var_1, var_2) {
     self waittill("goal");
     var_10 notify("trigger", self);
 
-    if(isdefined(var_10.script_animation)) {
-      if(!isdefined(var_2) || var_2 == 0) {
+    if(isDefined(var_10.script_animation)) {
+      if(!isDefined(var_2) || var_2 == 0) {
         var_13 = "patrol_stop";
         maps\_anim::anim_generic_custom_animmode(self, "gravity", var_13);
       }
@@ -140,7 +138,7 @@ patrol(var_0, var_1, var_2) {
       }
     }
 
-    if(isdefined(var_1) && var_1 == 1)
+    if(isDefined(var_1) && var_1 == 1)
       self animmode("none");
 
     var_18 = var_10[[var_5[var_11][var_7]]]();
@@ -155,7 +153,7 @@ patrol(var_0, var_1, var_2) {
 }
 
 add_to_patrol_animation_list(var_0, var_1) {
-  if(isdefined(var_1))
+  if(isDefined(var_1))
     level.patrol_anims[var_0] = var_1;
 }
 
@@ -195,7 +193,7 @@ init_patrol_animation_list() {
 
 is_patrolling() {
   foreach(var_1 in level.patrol_anims) {
-    if(isdefined(var_1) && self getanimweight(var_1) != 0.0) {
+    if(isDefined(var_1) && self getanimweight(var_1) != 0.0) {
       self.usepathsmoothingvalues = 1;
       self.pathlookaheaddist = 70.0;
       self.maxturnspeed = 19.0;
@@ -217,7 +215,7 @@ disable_patrol_turn() {
 }
 
 can_smoke() {
-  if(!isdefined(self.headmodel))
+  if(!isDefined(self.headmodel))
     return 0;
 
   switch (self.headmodel) {
@@ -241,23 +239,23 @@ patrol_walk_twitch_loop() {
   self notify("patrol_walk_twitch_loop");
   self endon("patrol_walk_twitch_loop");
 
-  if(isdefined(self.patrol_walk_anim) && !isdefined(self.patrol_walk_twitch)) {
+  if(isDefined(self.patrol_walk_anim) && !isDefined(self.patrol_walk_twitch)) {
     return;
   }
-  for (;;) {
+  for(;;) {
     wait(randomfloatrange(8, 20));
     var_0 = "patrol_walk_twitch";
 
-    if(isdefined(self.patrol_walk_twitch))
+    if(isDefined(self.patrol_walk_twitch))
       var_0 = self.patrol_walk_twitch;
 
-    var_1 = isdefined(self.canpatrolturn) && self.canpatrolturn;
+    var_1 = isDefined(self.canpatrolturn) && self.canpatrolturn;
     maps\_utility::set_generic_run_anim(var_0, 1, !var_1);
     var_2 = getanimlength(maps\_utility::getanim_generic(var_0));
     wait(var_2);
     var_0 = "patrol_walk";
 
-    if(isdefined(self.patrol_walk_anim))
+    if(isDefined(self.patrol_walk_anim))
       var_0 = self.patrol_walk_anim;
 
     maps\_utility::set_generic_run_anim(var_0, 1, !var_1);
@@ -274,12 +272,12 @@ waittill_combat_wait() {
 waittill_death() {
   self waittill("death");
 
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   self notify("release_node");
 
-  if(!isdefined(self.last_patrol_goal)) {
+  if(!isDefined(self.last_patrol_goal)) {
     return;
   }
   self.last_patrol_goal.patrol_claimed = undefined;
@@ -289,7 +287,7 @@ waittill_combat() {
   self endon("death");
   waittill_combat_wait();
 
-  if(!isdefined(self._stealth)) {
+  if(!isDefined(self._stealth)) {
     maps\_utility::clear_run_anim();
     self allowedstances("stand", "crouch", "prone");
     self.disablearrivals = 0;
@@ -300,12 +298,12 @@ waittill_combat() {
 
   self.allowdeath = 0;
 
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   self notify("release_node");
 
-  if(!isdefined(self.last_patrol_goal)) {
+  if(!isDefined(self.last_patrol_goal)) {
     return;
   }
   self.last_patrol_goal.patrol_claimed = undefined;
@@ -314,8 +312,8 @@ waittill_combat() {
 get_target_ents() {
   var_0 = [];
 
-  if(isdefined(self.target))
-    var_0 = getentarray(self.target, "targetname");
+  if(isDefined(self.target))
+    var_0 = getEntArray(self.target, "targetname");
 
   return var_0;
 }
@@ -323,7 +321,7 @@ get_target_ents() {
 get_target_nodes() {
   var_0 = [];
 
-  if(isdefined(self.target))
+  if(isDefined(self.target))
     var_0 = getnodearray(self.target, "targetname");
 
   return var_0;
@@ -332,13 +330,13 @@ get_target_nodes() {
 get_linked_nodes() {
   var_0 = [];
 
-  if(isdefined(self.script_linkto)) {
+  if(isDefined(self.script_linkto)) {
     var_1 = strtok(self.script_linkto, " ");
 
-    for (var_2 = 0; var_2 < var_1.size; var_2++) {
+    for(var_2 = 0; var_2 < var_1.size; var_2++) {
       var_3 = getnode(var_1[var_2], "script_linkname");
 
-      if(isdefined(var_3))
+      if(isDefined(var_3))
         var_0[var_0.size] = var_3;
     }
   }

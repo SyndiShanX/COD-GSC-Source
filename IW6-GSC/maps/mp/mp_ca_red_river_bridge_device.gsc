@@ -17,7 +17,7 @@ redriverCustomCrateFunc() {
   if(!level.allow_level_killstreak || game["player_holding_level_killstrek"]) {
     return;
   }
-  maps\mp\killstreaks\_airdrop::addCrateType("airdrop_assault", "warhawk_mortars", REDRIVER_NUKE_WEIGHT, maps\mp\killstreaks\_airdrop::killstreakCrateThink, maps\mp\killstreaks\_airdrop::get_friendly_crate_model(), maps\mp\killstreaks\_airdrop::get_enemy_crate_model(), & "KILLSTREAKS_HINTS_WARHAWK_MORTARS");
+  maps\mp\killstreaks\_airdrop::addCrateType("airdrop_assault", "warhawk_mortars", REDRIVER_NUKE_WEIGHT, maps\mp\killstreaks\_airdrop::killstreakCrateThink, maps\mp\killstreaks\_airdrop::get_friendly_crate_model(), maps\mp\killstreaks\_airdrop::get_enemy_crate_model(), &"KILLSTREAKS_HINTS_WARHAWK_MORTARS");
   level thread watch_for_redriver_nuke_crate();
 }
 

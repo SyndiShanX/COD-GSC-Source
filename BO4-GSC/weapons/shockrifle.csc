@@ -9,7 +9,6 @@
 #include scripts\core_common\postfx_shared;
 #include scripts\core_common\util_shared;
 #include scripts\weapons\weaponobjects;
-
 #namespace shockrifle;
 
 init_shared() {

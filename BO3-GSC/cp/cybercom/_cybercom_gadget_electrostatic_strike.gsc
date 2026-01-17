@@ -36,21 +36,21 @@ function main() {
   level._effect["es_effect_generic"] = "electric/fx_ability_elec_strike_generic";
   level._effect["es_contact"] = "electric/fx_ability_elec_strike_impact";
   level._effect["es_arc"] = "electric/fx_ability_elec_strike_trail";
-  level.cybercom.electro_strike = spawnstruct();
-  level.cybercom.electro_strike._is_flickering = & _is_flickering;
-  level.cybercom.electro_strike._on_flicker = & _on_flicker;
-  level.cybercom.electro_strike._on_give = & _on_give;
-  level.cybercom.electro_strike._on_take = & _on_take;
-  level.cybercom.electro_strike._on_connect = & _on_connect;
-  level.cybercom.electro_strike._on = & _on;
-  level.cybercom.electro_strike._off = & _off;
+  level.cybercom.electro_strike = spawnStruct();
+  level.cybercom.electro_strike._is_flickering = &_is_flickering;
+  level.cybercom.electro_strike._on_flicker = &_on_flicker;
+  level.cybercom.electro_strike._on_give = &_on_give;
+  level.cybercom.electro_strike._on_take = &_on_take;
+  level.cybercom.electro_strike._on_connect = &_on_connect;
+  level.cybercom.electro_strike._on = &_on;
+  level.cybercom.electro_strike._off = &_off;
   level.cybercom.electro_strike.human_weapon = getweapon("gadget_es_strike");
   level.cybercom.electro_strike.var_bf0de5fb = getweapon("gadget_es_strike");
   level.cybercom.electro_strike.robot_weapon = getweapon("gadget_es_strike");
   level.cybercom.electro_strike.var_f492f9d5 = getweapon("emp_grenade");
   level.cybercom.electro_strike.vehicle_weapon = getweapon("emp_grenade");
   level.cybercom.electro_strike.other_weapon = getweapon("emp_grenade");
-  callback::on_spawned( & on_player_spawned);
+  callback::on_spawned(&on_player_spawned);
 }
 
 function on_player_spawned() {}
@@ -78,10 +78,10 @@ function function_677ed44f(weapon) {
   self endon("hash_677ed44f");
   self endon("hash_343d4580");
   self endon("disconnect");
-  while (true) {
+  while(true) {
     level waittill("hash_63acb616", target, attacker, damage, weapon, hitorigin);
     wait(0.05);
-    if(isdefined(target)) {
+    if(isDefined(target)) {
       if(target cybercom::cybercom_aicheckoptout("cybercom_es_strike")) {
         continue;
       }
@@ -96,13 +96,13 @@ function function_677ed44f(weapon) {
       target notify("hash_f8c5dd60", weapon, attacker);
       target thread electrostaticcontact(attacker, attacker, upgraded, hitorigin);
       target thread electrostaticarc(attacker, upgraded);
-      if(isdefined(target.archetype) && target.archetype == "human") {
+      if(isDefined(target.archetype) && target.archetype == "human") {
         target clientfield::set("arch_actor_char", 1);
         target thread function_71a4f1d5();
       }
       if(isplayer(self)) {
         itemindex = getitemindexfromref("cybercom_es_strike");
-        if(isdefined(itemindex)) {
+        if(isDefined(itemindex)) {
           self adddstat("ItemStats", itemindex, "stats", "used", "statValue", 1);
         }
       }
@@ -127,10 +127,10 @@ function aielectrostatickillmonitor(statusoverride) {
   }
   self notify("electro_static_monitor_kill");
   self endon("electro_static_monitor_kill");
-  while (true) {
+  while(true) {
     level waittill("hash_63acb616", target, attacker, damage, weapon, hitorigin);
     wait(0.05);
-    if(isdefined(target)) {
+    if(isDefined(target)) {
       target notify("hash_f8c5dd60", weapon, attacker);
       upgraded = statusoverride == 2;
       target thread electrostaticcontact(attacker, attacker, upgraded, hitorigin);
@@ -140,7 +140,7 @@ function aielectrostatickillmonitor(statusoverride) {
 }
 
 function function_4830484e(attacker) {
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return false;
   }
   if(self cybercom::cybercom_aicheckoptout("cybercom_es_strike")) {
@@ -149,16 +149,16 @@ function function_4830484e(attacker) {
   if(!isalive(self)) {
     return false;
   }
-  if(isdefined(self._ai_melee_opponent)) {
+  if(isDefined(self._ai_melee_opponent)) {
     return false;
   }
-  if(!isdefined(self.archetype)) {
+  if(!isDefined(self.archetype)) {
     return false;
   }
-  if(isdefined(self.magic_bullet_shield) && self.magic_bullet_shield) {
+  if(isDefined(self.magic_bullet_shield) && self.magic_bullet_shield) {
     return false;
   }
-  if(isdefined(self._ai_melee_opponent)) {
+  if(isDefined(self._ai_melee_opponent)) {
     return false;
   }
   if(self.team == attacker.team) {
@@ -171,16 +171,16 @@ function electrostaticcontact(attacker, source, upgraded = 0, contactpoint, seco
   if(!self function_4830484e(attacker)) {
     return;
   }
-  if(!isdefined(source)) {
+  if(!isDefined(source)) {
     source = attacker;
   }
-  if(!isdefined(attacker)) {
+  if(!isDefined(attacker)) {
     return;
   }
-  if(isdefined(contactpoint)) {
-    playfx(level._effect["es_contact"], contactpoint);
+  if(isDefined(contactpoint)) {
+    playFX(level._effect["es_contact"], contactpoint);
   }
-  if(isdefined(self.archetype)) {
+  if(isDefined(self.archetype)) {
     switch (self.archetype) {
       case "human": {
         self clientfield::set("arch_actor_char", 1);
@@ -217,44 +217,44 @@ function electrostaticcontact(attacker, source, upgraded = 0, contactpoint, seco
     fx = level._effect["es_effect_generic"];
     tag = "tag_body";
   }
-  if(!isdefined(self gettagorigin(tag))) {
+  if(!isDefined(self gettagorigin(tag))) {
     tag = "tag_origin";
   }
-  playfxontag(fx, self, tag);
+  playFXOnTag(fx, self, tag);
   if(self cybercom::function_421746e0()) {
     self kill(self.origin, attacker);
     return;
   }
   if(self.archetype == "human" || self.archetype == "zombie" || self.archetype == "human_riotshield" || self.archetype == "direwolf") {
-    if(isdefined(self.voiceprefix) && isdefined(self.bcvoicenumber)) {
+    if(isDefined(self.voiceprefix) && isDefined(self.bcvoicenumber)) {
       self thread battlechatter::do_sound((self.voiceprefix + self.bcvoicenumber) + "_exert_electrocution", 1);
     }
-    self dodamage(self.health, source.origin, (isdefined(attacker) ? attacker : undefined), undefined, "none", "MOD_UNKNOWN", 512, level.cybercom.electro_strike.human_weapon, -1, 1);
+    self dodamage(self.health, source.origin, (isDefined(attacker) ? attacker : undefined), undefined, "none", "MOD_UNKNOWN", 512, level.cybercom.electro_strike.human_weapon, -1, 1);
   } else {
     if(self.archetype == "warlord") {
-      self dodamage(getdvarint("scr_es_upgraded_damage", 80), self.origin, (isdefined(attacker) ? attacker : undefined), undefined, undefined, "MOD_UNKNOWN", 0, level.cybercom.electro_strike.var_bf0de5fb, -1, 1);
+      self dodamage(getdvarint("scr_es_upgraded_damage", 80), self.origin, (isDefined(attacker) ? attacker : undefined), undefined, undefined, "MOD_UNKNOWN", 0, level.cybercom.electro_strike.var_bf0de5fb, -1, 1);
     } else {
       if(self.archetype == "robot") {
         self ai::set_behavior_attribute("can_gib", 0);
-        if(isdefined(secondary) && secondary) {
-          self dodamage(getdvarint("scr_es_damage", 5), source.origin, (isdefined(attacker) ? attacker : undefined), undefined, "none", "MOD_MELEE", 512, level.cybercom.electro_strike.var_f492f9d5, -1, 1);
+        if(isDefined(secondary) && secondary) {
+          self dodamage(getdvarint("scr_es_damage", 5), source.origin, (isDefined(attacker) ? attacker : undefined), undefined, "none", "MOD_MELEE", 512, level.cybercom.electro_strike.var_f492f9d5, -1, 1);
         } else {
-          self dodamage(self.health, source.origin, (isdefined(attacker) ? attacker : undefined), undefined, "none", "MOD_UNKNOWN", 512, level.cybercom.electro_strike.robot_weapon, -1, 1);
+          self dodamage(self.health, source.origin, (isDefined(attacker) ? attacker : undefined), undefined, "none", "MOD_UNKNOWN", 512, level.cybercom.electro_strike.robot_weapon, -1, 1);
         }
         self ai::set_behavior_attribute("robot_lights", 1);
-        if(!(isdefined(self.is_disabled) && self.is_disabled) && isalive(self)) {
+        if(!(isDefined(self.is_disabled) && self.is_disabled) && isalive(self)) {
           self thread cybercom_gadget_system_overload::system_overload(attacker, undefined, undefined, 0);
         }
         wait(2.5);
-        if(isdefined(self)) {
+        if(isDefined(self)) {
           self ai::set_behavior_attribute("robot_lights", 2);
         }
       } else {
         if(isvehicle(self)) {
-          self dodamage(getdvarint("scr_es_damage", 5), source.origin, (isdefined(attacker) ? attacker : undefined), undefined, "none", "MOD_GRENADE", 0, level.cybercom.electro_strike.vehicle_weapon);
-          self playsound("gdt_cybercore_amws_shutdown");
+          self dodamage(getdvarint("scr_es_damage", 5), source.origin, (isDefined(attacker) ? attacker : undefined), undefined, "none", "MOD_GRENADE", 0, level.cybercom.electro_strike.vehicle_weapon);
+          self playSound("gdt_cybercore_amws_shutdown");
         } else {
-          self dodamage(getdvarint("scr_es_damage", 5), source.origin, (isdefined(attacker) ? attacker : undefined), undefined, "none", "MOD_UNKNOWN", 512, level.cybercom.electro_strike.other_weapon);
+          self dodamage(getdvarint("scr_es_damage", 5), source.origin, (isDefined(attacker) ? attacker : undefined), undefined, "none", "MOD_UNKNOWN", 512, level.cybercom.electro_strike.other_weapon);
         }
       }
     }
@@ -276,16 +276,16 @@ function electrostaticarc(player, upgraded) {
   prospects = arraycombine(getaiteamarray("axis"), getaiteamarray("team3"), 0, 0);
   potential_enemies = util::get_array_of_closest(self.origin, prospects);
   foreach(enemy in potential_enemies) {
-    if(!isdefined(enemy)) {
+    if(!isDefined(enemy)) {
       continue;
     }
     if(enemy == self) {
       continue;
     }
-    if(isdefined(enemy.is_disabled) && enemy.is_disabled) {
+    if(isDefined(enemy.is_disabled) && enemy.is_disabled) {
       continue;
     }
-    if(isdefined(enemy.missinglegs) && enemy.missinglegs || (isdefined(enemy.iscrawler) && enemy.iscrawler)) {
+    if(isDefined(enemy.missinglegs) && enemy.missinglegs || (isDefined(enemy.iscrawler) && enemy.iscrawler)) {
       continue;
     }
     if(!enemy function_4830484e(player)) {
@@ -311,15 +311,15 @@ function electrostaticarc(player, upgraded) {
 }
 
 function private _electrodischargearcdmg(target, player, upgraded) {
-  if(!isdefined(self) || !isdefined(target)) {
+  if(!isDefined(self) || !isDefined(target)) {
     return;
   }
   origin = self.origin + vectorscale((0, 0, 1), 40);
   target_origin = target.origin + vectorscale((0, 0, 1), 40);
   fxorg = spawn("script_model", origin);
-  fxorg setmodel("tag_origin");
-  fx = playfxontag(level._effect["es_arc"], fxorg, "tag_origin");
-  fxorg playsound("gdt_electro_bounce");
+  fxorg setModel("tag_origin");
+  fx = playFXOnTag(level._effect["es_arc"], fxorg, "tag_origin");
+  fxorg playSound("gdt_electro_bounce");
   fxorg moveto(target_origin, 0.25);
   fxorg util::waittill_any_timeout(1, "movedone");
   fxorg delete();

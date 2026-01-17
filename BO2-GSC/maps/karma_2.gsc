@@ -294,7 +294,7 @@ spawn_func_harper() {
   flag_wait("level.player");
 
   if(level.player get_story_stat("HARPER_SCARRED"))
-    self setmodel("c_usa_unioninsp_harper_scar_cin_fb");
+    self setModel("c_usa_unioninsp_harper_scar_cin_fb");
 }
 
 spawn_func_salazar() {

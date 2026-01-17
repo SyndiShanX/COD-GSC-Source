@@ -111,7 +111,7 @@ main() {
 
 game_objects_allowed(mode, location) {
   allowed[0] = mode;
-  entities = getentarray();
+  entities = getEntArray();
 
   foreach(entity in entities) {
     if(isDefined(entity.script_gameobjectname)) {
@@ -242,10 +242,10 @@ setup_standard_objects(location) {
 
     barricade = spawn("script_model", struct.origin);
     barricade.angles = struct.angles;
-    barricade setmodel(struct.script_parameters);
+    barricade setModel(struct.script_parameters);
   }
 
-  objects = getentarray();
+  objects = getEntArray();
 
   foreach(object in objects) {
     if(!object is_survival_object()) {
@@ -306,13 +306,13 @@ game_module_player_damage_callback(einflictor, eattacker, idamage, idflags, smea
 
     if(isDefined(level._effect["butterflies"])) {
       if(isDefined(sweapon) && weapontype(sweapon) == "grenade")
-        playfx(level._effect["butterflies"], self.origin + vectorscale((0, 0, 1), 40.0));
+        playFX(level._effect["butterflies"], self.origin + vectorscale((0, 0, 1), 40.0));
       else
-        playfx(level._effect["butterflies"], vpoint, vdir);
+        playFX(level._effect["butterflies"], vpoint, vdir);
     }
 
     self thread do_game_mode_shellshock();
-    self playsound("zmb_player_hit_ding");
+    self playSound("zmb_player_hit_ding");
   }
 }
 
@@ -435,12 +435,8 @@ round_logic(mode_logic_func) {
   set_gamemode_var_once("team_2_score", 0);
 
   if(isDefined(is_encounter()) && is_encounter()) {
-    [
-      [level._setteamscore]
-    ]("allies", get_gamemode_var("team_2_score"));
-    [
-      [level._setteamscore]
-    ]("axis", get_gamemode_var("team_1_score"));
+    [[level._setteamscore]]("allies", get_gamemode_var("team_2_score"));
+    [[level._setteamscore]]("axis", get_gamemode_var("team_1_score"));
   }
 
   flag_set("pregame");
@@ -448,7 +444,7 @@ round_logic(mode_logic_func) {
   level.gameended = 0;
   cur_round = get_gamemode_var("current_round");
   set_gamemode_var("current_round", cur_round + 1);
-  game["gamemode_match"]["rounds"][cur_round] = spawnstruct();
+  game["gamemode_match"]["rounds"][cur_round] = spawnStruct();
   game["gamemode_match"]["rounds"][cur_round].mode = getdvar(#"ui_gametype");
   level thread[[mode_logic_func]]();
   flag_wait("start_encounters_match_logic");
@@ -471,12 +467,8 @@ round_logic(mode_logic_func) {
   }
 
   if(isDefined(is_encounter()) && is_encounter()) {
-    [
-      [level._setteamscore]
-    ]("allies", get_gamemode_var("team_2_score"));
-    [
-      [level._setteamscore]
-    ]("axis", get_gamemode_var("team_1_score"));
+    [[level._setteamscore]]("allies", get_gamemode_var("team_2_score"));
+    [[level._setteamscore]]("axis", get_gamemode_var("team_1_score"));
 
     if(get_gamemode_var("team_1_score") == get_gamemode_var("team_2_score")) {
       level thread maps\mp\zombies\_zm_audio::zmbvoxcrowdonteam("win");
@@ -728,7 +720,7 @@ game_end_func() {
 }
 
 setup_classic_gametype() {
-  ents = getentarray();
+  ents = getEntArray();
 
   foreach(ent in ents) {
     if(isDefined(ent.script_parameters)) {
@@ -764,7 +756,7 @@ setup_classic_gametype() {
     }
     barricade = spawn("script_model", struct.origin);
     barricade.angles = struct.angles;
-    barricade setmodel(struct.script_parameters);
+    barricade setModel(struct.script_parameters);
   }
 
   unlink_meat_traversal_nodes();
@@ -807,7 +799,7 @@ ondeadevent(team) {
 
 onspawnintermission() {
   spawnpointname = "info_intermission";
-  spawnpoints = getentarray(spawnpointname, "classname");
+  spawnpoints = getEntArray(spawnpointname, "classname");
 
   if(spawnpoints.size < 1) {
     println("NO " + spawnpointname + " SPAWNPOINTS IN MAP");
@@ -821,8 +813,7 @@ onspawnintermission() {
     self spawn(spawnpoint.origin, spawnpoint.angles);
 }
 
-onspawnspectator(origin, angles) {
-}
+onspawnspectator(origin, angles) {}
 
 mayspawn() {
   if(isDefined(level.custommayspawnlogic))
@@ -1119,7 +1110,7 @@ start_round() {
     players[i] freeze_player_controls(1);
 
   level._module_round_hud.alpha = 1;
-  label = & "Next Round Starting In^2";
+  label = &"Next Round Starting In^2";
   level._module_round_hud.label = label;
   level._module_round_hud settimer(3);
   level thread maps\mp\zombies\_zm_audio_announcer::leaderdialog("countdown");
@@ -1295,9 +1286,7 @@ onspawnplayer(predictedspawn) {
   }
 
   if(isDefined(level.game_mode_spawn_player_logic)) {
-    spawn_in_spectate = [
-      [level.game_mode_spawn_player_logic]
-    ]();
+    spawn_in_spectate = [[level.game_mode_spawn_player_logic]]();
 
     if(spawn_in_spectate)
       self delay_thread(0.05, maps\mp\zombies\_zm::spawnspectator);
@@ -1335,8 +1324,7 @@ get_player_spawns_for_gametype() {
   return player_spawns;
 }
 
-onendgame(winningteam) {
-}
+onendgame(winningteam) {}
 
 onroundendgame(roundwinner) {
   if(game["roundswon"]["allies"] == game["roundswon"]["axis"])
@@ -1539,8 +1527,7 @@ menu_onmenuresponse() {
       self closemenu();
       self closeingamemenu();
 
-      if(level.rankedmatch && issubstr(response, "custom")) {
-      }
+      if(level.rankedmatch && issubstr(response, "custom")) {}
 
       self.selectedclass = 1;
       self[[level.class]](response);
@@ -1645,11 +1632,11 @@ onplayerspawned() {
       if(self.team == "axis") {
         self.characterindex = 0;
         self._encounters_team = "A";
-        self._team_name = & "ZOMBIE_RACE_TEAM_1";
+        self._team_name = &"ZOMBIE_RACE_TEAM_1";
       } else {
         self.characterindex = 1;
         self._encounters_team = "B";
-        self._team_name = & "ZOMBIE_RACE_TEAM_2";
+        self._team_name = &"ZOMBIE_RACE_TEAM_2";
       }
     }
 

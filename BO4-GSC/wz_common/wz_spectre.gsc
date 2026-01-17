@@ -11,7 +11,6 @@
 #include scripts\core_common\weapons_shared;
 #include scripts\mp_common\item_inventory;
 #include scripts\mp_common\item_inventory_util;
-
 #namespace wz_spectre;
 
 autoexec __init__system__() {
@@ -39,14 +38,14 @@ start_beams() {
   level clientfield::set("showSpectreSwordBeams", 1);
 }
 
-private function_4467066e(params) {
+function_4467066e(params) {
   var_ec8e239d = 0;
 
   if(isstruct(self.inventory) && isarray(self.inventory.items)) {
     foreach(item in self.inventory.items) {
       itementry = item.itementry;
 
-      if(isDefined(item.itementry) && item.itementry.name == #"sig_blade_wz_item") {
+      if(isDefined(item.itementry) && item.itementry.name == # "sig_blade_wz_item") {
         var_ec8e239d = 1;
         break;
       }
@@ -56,9 +55,9 @@ private function_4467066e(params) {
   function_f82142f8(var_ec8e239d);
 }
 
-private function_f82142f8(isspectre) {
+function_f82142f8(isspectre) {
   self notify(#"hash_2e4cc87f4b3a6396");
-  self endon(#"death", #"hash_2e4cc87f4b3a6396");
+  self endon(#"death", # "hash_2e4cc87f4b3a6396");
   level endon(#"game_playing");
   self function_1edd6e9e(isspectre);
 
@@ -93,13 +92,13 @@ private function_f82142f8(isspectre) {
   self clientfield::set_player_uimodel("hudItems.isSpectre", isspectre);
 }
 
-private function_9299d039() {
+function_9299d039() {
   if(isDefined(self.var_fcb62e3f)) {
     self player_role::set(self.var_fcb62e3f);
   }
 }
 
-private function_1edd6e9e(isspectre) {
+function_1edd6e9e(isspectre) {
   modelvalue = 0;
 
   if(isspectre && isalive(self)) {
@@ -107,7 +106,7 @@ private function_1edd6e9e(isspectre) {
   }
 }
 
-private function_ef53914c() {
+function_ef53914c() {
   params = self.laststandparams;
 
   if(!isDefined(params)) {
@@ -117,7 +116,7 @@ private function_ef53914c() {
   attacker = params.attacker;
   weapon = params.sweapon;
 
-  if(!isplayer(attacker) || attacker.team == self.team || weapon.name != #"sig_blade") {
+  if(!isplayer(attacker) || attacker.team == self.team || weapon.name != # "sig_blade") {
     return;
   }
 
@@ -134,7 +133,7 @@ private function_ef53914c() {
   }
 }
 
-private give_max_ammo(weaponslot) {
+give_max_ammo(weaponslot) {
   item = self.inventory.items[weaponslot];
 
   if(!isDefined(item)) {
@@ -149,7 +148,7 @@ private give_max_ammo(weaponslot) {
 
   self setweaponammoclip(weapon, weapon.clipsize);
 
-  foreach(ammo in array(#"ammo_type_9mm_item", #"ammo_type_45_item", #"ammo_type_556_item", #"ammo_type_762_item", #"ammo_type_338_item", #"ammo_type_50cal_item", #"ammo_type_12ga_item", #"ammo_type_rocket_item")) {
+  foreach(ammo in array(#"ammo_type_9mm_item", # "ammo_type_45_item", # "ammo_type_556_item", # "ammo_type_762_item", # "ammo_type_338_item", # "ammo_type_50cal_item", # "ammo_type_12ga_item", # "ammo_type_rocket_item")) {
     ammoitem = getscriptbundle(ammo);
 
     if(!isDefined(ammoitem.weapon) || ammoitem.weapon.ammoindex !== weapon.ammoindex) {
@@ -164,14 +163,14 @@ private give_max_ammo(weaponslot) {
   }
 }
 
-private function_124f7ba3() {
+function_124f7ba3() {
   self endon(#"disconnect");
   self clientfield::set_to_player("spectrebladebonus", 1);
   util::wait_network_frame();
   self clientfield::set_to_player("spectrebladebonus", 0);
 }
 
-private function_de83cc91(params) {
+function_de83cc91(params) {
   attacker = params.eattacker;
   weapon = params.weapon;
 
@@ -180,7 +179,7 @@ private function_de83cc91(params) {
     weapon = params.laststandparams.sweapon;
   }
 
-  if(!isplayer(attacker) || attacker.team == self.team || weapon.name != #"sig_blade") {
+  if(!isplayer(attacker) || attacker.team == self.team || weapon.name != # "sig_blade") {
     return;
   }
 }

@@ -9,7 +9,7 @@ autoexec initnotetrackhandler() {
   level._notetrack_handler = [];
 }
 
-private event_handler[runnotetrackhandler] runnotetrackhandler(eventstruct) {
+event_handler[runnotetrackhandler] runnotetrackhandler(eventstruct) {
   assert(isarray(eventstruct.notetracks));
 
   for(index = 0; index < eventstruct.notetracks.size; index++) {
@@ -17,7 +17,7 @@ private event_handler[runnotetrackhandler] runnotetrackhandler(eventstruct) {
   }
 }
 
-private handlenotetrack(entity, notetrack) {
+handlenotetrack(entity, notetrack) {
   notetrackhandler = level._notetrack_handler[notetrack];
 
   if(!isDefined(notetrackhandler)) {

@@ -72,10 +72,10 @@ function autoexec opt_in() {
 function init_gamemodes() {}
 
 function main() {
-  scene::add_scene_func("p7_fxanim_gp_tracer_fire_01_bundle", & function_1c53c4e1);
+  scene::add_scene_func("p7_fxanim_gp_tracer_fire_01_bundle", &function_1c53c4e1);
   zm_stalingrad_ffotd::main_start();
   level.debug_keyline_zombies = 0;
-  level.setupcustomcharacterexerts = & setup_personality_character_exerts;
+  level.setupcustomcharacterexerts = &setup_personality_character_exerts;
   level._effect["eye_glow"] = "dlc3/stalingrad/fx_glow_eye_red_stal";
   level._effect["headshot"] = "impacts/fx_flesh_hit";
   level._effect["headshot_nochunks"] = "misc/fx_zombie_bloodsplat";
@@ -102,12 +102,12 @@ function main() {
 
 function function_1c53c4e1(a_ents) {
   level endon("zesn");
-  while (true) {
-    while (!isdefined(level.localplayers[0]) || !isigcactive(level.localplayers[0].localclientnum)) {
+  while(true) {
+    while(!isDefined(level.localplayers[0]) || !isigcactive(level.localplayers[0].localclientnum)) {
       wait(1);
     }
     self scene::stop(1);
-    while (isigcactive(level.localplayers[0].localclientnum)) {
+    while(isigcactive(level.localplayers[0].localclientnum)) {
       wait(1);
     }
     self scene::play();
@@ -123,23 +123,23 @@ function register_clientfields() {
   clientfield::register("clientuimodel", "zmInventory.widget_egg", 12000, 1, "int", undefined, 0, 0);
   clientfield::register("clientuimodel", "zmInventory.piece_egg", 12000, 1, "int", undefined, 0, 0);
   clientfield::register("clientuimodel", "zmInventory.progress_egg", 12000, 4, "float", undefined, 0, 0);
-  clientfield::register("actor", "drop_pod_score_beam_fx", 12000, 1, "counter", & zm_stalingrad_pap::function_c86c0cdd, 0, 0);
-  clientfield::register("scriptmover", "drop_pod_active", 12000, 1, "int", & zm_stalingrad_pap::function_5858bdaf, 0, 0);
-  clientfield::register("scriptmover", "drop_pod_hp_light", 12000, 2, "int", & zm_stalingrad_pap::function_5e369bd2, 0, 0);
-  clientfield::register("world", "drop_pod_streaming", 12000, 1, "int", & zm_stalingrad_pap::drop_pod_streaming, 0, 0);
-  clientfield::register("toplayer", "tp_water_sheeting", 12000, 1, "int", & water_sheeting_toggle, 0, 0);
-  clientfield::register("toplayer", "sewer_landing_rumble", 12000, 1, "counter", & function_931fa0e1, 0, 0);
-  clientfield::register("scriptmover", "dragon_egg_heat_fx", 12000, 1, "int", & function_3931d3fe, 0, 0);
-  clientfield::register("scriptmover", "dragon_egg_placed", 12000, 1, "counter", & function_4b1f1b87, 0, 0);
-  clientfield::register("actor", "dragon_egg_score_beam_fx", 12000, 1, "counter", & function_bfdc67e3, 0, 0);
-  clientfield::register("world", "force_stream_dragon_egg", 12000, 1, "int", & function_b116183d, 0, 0);
-  clientfield::register("scriptmover", "ethereal_audio_log_fx", 12000, 1, "int", & function_a96968f2, 0, 0);
-  clientfield::register("world", "deactivate_ai_vox", 12000, 1, "int", & deactivate_ai_vox, 0, 0);
-  clientfield::register("world", "sophia_intro_outro", 12000, 1, "int", & function_21deab84, 0, 0);
-  clientfield::register("allplayers", "sophia_follow", 12000, 3, "int", & function_a431bec5, 0, 0);
-  clientfield::register("scriptmover", "sophia_eye_shader", 12000, 1, "int", & function_70b3b237, 0, 0);
-  clientfield::register("world", "sophia_main_waveform", 12000, 1, "int", & function_6cfcd54d, 0, 0);
-  clientfield::register("toplayer", "interact_rumble", 12000, 1, "counter", & function_bbbdcfd5, 0, 0);
+  clientfield::register("actor", "drop_pod_score_beam_fx", 12000, 1, "counter", &zm_stalingrad_pap::function_c86c0cdd, 0, 0);
+  clientfield::register("scriptmover", "drop_pod_active", 12000, 1, "int", &zm_stalingrad_pap::function_5858bdaf, 0, 0);
+  clientfield::register("scriptmover", "drop_pod_hp_light", 12000, 2, "int", &zm_stalingrad_pap::function_5e369bd2, 0, 0);
+  clientfield::register("world", "drop_pod_streaming", 12000, 1, "int", &zm_stalingrad_pap::drop_pod_streaming, 0, 0);
+  clientfield::register("toplayer", "tp_water_sheeting", 12000, 1, "int", &water_sheeting_toggle, 0, 0);
+  clientfield::register("toplayer", "sewer_landing_rumble", 12000, 1, "counter", &function_931fa0e1, 0, 0);
+  clientfield::register("scriptmover", "dragon_egg_heat_fx", 12000, 1, "int", &function_3931d3fe, 0, 0);
+  clientfield::register("scriptmover", "dragon_egg_placed", 12000, 1, "counter", &function_4b1f1b87, 0, 0);
+  clientfield::register("actor", "dragon_egg_score_beam_fx", 12000, 1, "counter", &function_bfdc67e3, 0, 0);
+  clientfield::register("world", "force_stream_dragon_egg", 12000, 1, "int", &function_b116183d, 0, 0);
+  clientfield::register("scriptmover", "ethereal_audio_log_fx", 12000, 1, "int", &function_a96968f2, 0, 0);
+  clientfield::register("world", "deactivate_ai_vox", 12000, 1, "int", &deactivate_ai_vox, 0, 0);
+  clientfield::register("world", "sophia_intro_outro", 12000, 1, "int", &function_21deab84, 0, 0);
+  clientfield::register("allplayers", "sophia_follow", 12000, 3, "int", &function_a431bec5, 0, 0);
+  clientfield::register("scriptmover", "sophia_eye_shader", 12000, 1, "int", &function_70b3b237, 0, 0);
+  clientfield::register("world", "sophia_main_waveform", 12000, 1, "int", &function_6cfcd54d, 0, 0);
+  clientfield::register("toplayer", "interact_rumble", 12000, 1, "counter", &function_bbbdcfd5, 0, 0);
   level.var_6ca4d0f2 = [];
   level.var_48c1095e = [];
 }
@@ -298,9 +298,9 @@ function function_38b57afd() {
 function water_sheeting_toggle(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     startwatersheetingfx(localclientnum, 1);
-    playsound(localclientnum, "zmb_stalingrad_sewer_water_travel_start");
-    self.var_5962d89c = self playloopsound("zmb_stalingrad_sewer_water_travel_lp", 0.3);
-    var_11eaf469 = getentarray(0, "sewer_ride_end", "targetname");
+    playSound(localclientnum, "zmb_stalingrad_sewer_water_travel_start");
+    self.var_5962d89c = self playLoopSound("zmb_stalingrad_sewer_water_travel_lp", 0.3);
+    var_11eaf469 = getEntArray(0, "sewer_ride_end", "targetname");
     foreach(var_b81de649 in var_11eaf469) {
       self thread function_da4ab728(localclientnum, var_b81de649);
     }
@@ -313,13 +313,13 @@ function water_sheeting_toggle(localclientnum, oldval, newval, bnewent, binitial
 
 function function_da4ab728(localclientnum, var_b81de649) {
   self endon("hash_e7cca3ce");
-  while (true) {
+  while(true) {
     var_b81de649 waittill("trigger", who);
     if(who islocalplayer()) {
-      playsound(localclientnum, "zmb_stalingrad_sewer_pipe_exit");
+      playSound(localclientnum, "zmb_stalingrad_sewer_pipe_exit");
       self stoploopsound(self.var_5962d89c);
       wait(0.1);
-      self.var_5962d89c = self playloopsound("zmb_stalingrad_sewer_air_lp", 0.3);
+      self.var_5962d89c = self playLoopSound("zmb_stalingrad_sewer_air_lp", 0.3);
       return;
     }
   }
@@ -344,9 +344,9 @@ function function_bfdc67e3(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_10e7e603(mdl_target) {
   level beam::launch(self, "tag_origin", mdl_target, "tag_origin", "electric_arc_zombie_to_drop_pod");
-  mdl_target playsound(0, "zmb_pod_electrocute");
+  mdl_target playSound(0, "zmb_pod_electrocute");
   wait(0.2);
-  self playsound(0, "zmb_pod_electrocute_zmb");
+  self playSound(0, "zmb_pod_electrocute_zmb");
   level beam::kill(self, "tag_origin", mdl_target, "tag_origin", "electric_arc_zombie_to_drop_pod");
   mdl_target delete();
   self delete();
@@ -354,8 +354,8 @@ function function_10e7e603(mdl_target) {
 
 function function_3931d3fe(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
-    self.n_fx_id = playfxontag(localclientnum, level._effect["dragon_egg_heat"], self, "tag_origin");
-  } else if(isdefined(self.n_fx_id)) {
+    self.n_fx_id = playFXOnTag(localclientnum, level._effect["dragon_egg_heat"], self, "tag_origin");
+  } else if(isDefined(self.n_fx_id)) {
     stopfx(localclientnum, self.n_fx_id);
   }
 }
@@ -370,15 +370,15 @@ function function_b116183d(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_a96968f2(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
-    self.n_fx_id = playfxontag(localclientnum, level._effect["audio_log"], self, "tag_origin");
-  } else if(isdefined(self.n_fx_id)) {
+    self.n_fx_id = playFXOnTag(localclientnum, level._effect["audio_log"], self, "tag_origin");
+  } else if(isDefined(self.n_fx_id)) {
     stopfx(localclientnum, self.n_fx_id);
   }
 }
 
 function function_21deab84(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   var_1c7b6837 = getent(localclientnum, "sophia_eye", "targetname");
-  if(!isdefined(var_1c7b6837)) {
+  if(!isDefined(var_1c7b6837)) {
     return;
   }
   if(newval) {
@@ -396,12 +396,12 @@ function function_21deab84(localclientnum, oldval, newval, bnewent, binitialsnap
 function function_a431bec5(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   level endon("demo_jump");
   var_1c7b6837 = getent(localclientnum, "sophia_eye", "targetname");
-  if(!isdefined(var_1c7b6837)) {
+  if(!isDefined(var_1c7b6837)) {
     return;
   }
   level notify("hash_deeb3634");
   wait(0.5);
-  if(!isdefined(var_1c7b6837)) {
+  if(!isDefined(var_1c7b6837)) {
     return;
   }
   if(newval == 0) {
@@ -417,7 +417,7 @@ function function_36666e11(e_player) {
   level endon("hash_deeb3634");
   e_player endon("death");
   self endon("entityshutdown");
-  while (isdefined(e_player)) {
+  while(isDefined(e_player)) {
     var_c746e6bf = e_player gettagorigin("j_head");
     var_933e0d32 = vectortoangles(self.origin - var_c746e6bf);
     if(var_933e0d32[0] > 200) {
@@ -442,7 +442,7 @@ function function_70b3b237(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_6cfcd54d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   var_1c7b6837 = getent(localclientnum, "sophia_eye", "targetname");
-  if(!isdefined(var_1c7b6837)) {
+  if(!isDefined(var_1c7b6837)) {
     return;
   }
   if(newval) {

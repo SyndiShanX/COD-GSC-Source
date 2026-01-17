@@ -67,17 +67,13 @@ set_water_dvar() {
   setsaveddvar("r_waterwavespeed", "0.39 0.54 0 0");
 }
 
-dof_intro(m_player_body) {
-}
+dof_intro(m_player_body) {}
 
-dof_grab_hat(m_player_body) {
-}
+dof_grab_hat(m_player_body) {}
 
-dof_close_door(m_player_body) {
-}
+dof_close_door(m_player_body) {}
 
-dof_reflection(m_player_body) {
-}
+dof_reflection(m_player_body) {}
 
 dof_shed_open(m_player_body) {
   n_near_start = 1;
@@ -358,17 +354,12 @@ dof_walk_out(m_player_body) {
   level.player depth_of_field_off(0.5);
 }
 
-dof_chopper(m_player_body) {
-}
+dof_chopper(m_player_body) {}
 
-dof_noriega(m_player_body) {
-}
+dof_noriega(m_player_body) {}
 
-dof_noriega_shoots(m_player_body) {
-}
+dof_noriega_shoots(m_player_body) {}
 
-dof_take_gun(m_player_body) {
-}
+dof_take_gun(m_player_body) {}
 
-dof_throw_gun(m_player_body) {
-}
+dof_throw_gun(m_player_body) {}

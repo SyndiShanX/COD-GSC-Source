@@ -9,7 +9,6 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_weapons;
-
 #namespace zm_trial_double_damage;
 
 autoexec __init__system__() {
@@ -24,7 +23,7 @@ __init__() {
   zm_trial::register_challenge(#"double_damage", &on_begin, &on_end);
 }
 
-private on_begin() {
+on_begin() {
   self.var_42fe565a = level.var_c739ead9;
   self.var_8271882d = level.var_4d7e8b66;
   self.var_ecdf7fbe = level.var_1bb1a2fb;
@@ -37,7 +36,7 @@ private on_begin() {
   level.var_53c7ca1d = 2;
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   level.var_c739ead9 = self.var_42fe565a;
   level.var_4d7e8b66 = self.var_8271882d;
   level.var_1bb1a2fb = self.var_ecdf7fbe;

@@ -47,7 +47,7 @@ watch_global_power() {
 
 standard_powered_items() {
   flag_wait("start_zombie_round_logic");
-  vending_triggers = getentarray("zombie_vending", "targetname");
+  vending_triggers = getEntArray("zombie_vending", "targetname");
 
   foreach(trigger in vending_triggers) {
     if(trigger.script_noteworthy == "specialty_weapupgrade") {
@@ -57,14 +57,14 @@ standard_powered_items() {
     add_powered_item(::perk_power_on, ::perk_power_off, ::perk_range, ::cost_low_if_local, 0, powered_on, trigger);
   }
 
-  pack_a_punch = getentarray("specialty_weapupgrade", "script_noteworthy");
+  pack_a_punch = getEntArray("specialty_weapupgrade", "script_noteworthy");
 
   foreach(trigger in pack_a_punch) {
     powered_on = maps\mp\zombies\_zm_perks::get_perk_machine_start_state(trigger.script_noteworthy);
     trigger.powered = add_powered_item(::pap_power_on, ::pap_power_off, ::pap_range, ::cost_low_if_local, 0, powered_on, trigger);
   }
 
-  zombie_doors = getentarray("zombie_door", "targetname");
+  zombie_doors = getEntArray("zombie_door", "targetname");
 
   foreach(door in zombie_doors) {
     if(isDefined(door.script_noteworthy) && door.script_noteworthy == "electric_door") {
@@ -86,7 +86,7 @@ standard_powered_items() {
 }
 
 add_powered_item(power_on_func, power_off_func, range_func, cost_func, power_sources, self_powered, target) {
-  powered = spawnstruct();
+  powered = spawnStruct();
   powered.power_on_func = power_on_func;
   powered.power_off_func = power_off_func;
   powered.range_func = range_func;
@@ -207,7 +207,7 @@ revert_power(delta, origin, radius, powered_list) {
 }
 
 add_local_power(origin, radius) {
-  localpower = spawnstruct();
+  localpower = spawnStruct();
 
   println("ZM POWER: local power on at " + origin + " radius " + radius + "\\n");
 
@@ -345,11 +345,9 @@ global_power(on_off) {
   }
 }
 
-never_power_on(origin, radius) {
-}
+never_power_on(origin, radius) {}
 
-never_power_off(origin, radius) {
-}
+never_power_off(origin, radius) {}
 
 cost_negligible() {
   if(isDefined(self.one_time_cost)) {

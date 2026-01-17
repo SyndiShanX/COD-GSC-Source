@@ -14,11 +14,11 @@ main() {
   game["defenders"] = "axis";
   game["allies_soldiertype"] = "german";
   game["axis_soldiertype"] = "german";
-  game["strings"]["war_callsign_a"] = & "PATCH_CALLSIGN_VODKA_A";
-  game["strings"]["war_callsign_b"] = & "PATCH_CALLSIGN_VODKA_B";
-  game["strings"]["war_callsign_c"] = & "PATCH_CALLSIGN_VODKA_C";
-  game["strings"]["war_callsign_d"] = & "PATCH_CALLSIGN_VODKA_D";
-  game["strings"]["war_callsign_e"] = & "PATCH_CALLSIGN_VODKA_E";
+  game["strings"]["war_callsign_a"] = &"PATCH_CALLSIGN_VODKA_A";
+  game["strings"]["war_callsign_b"] = &"PATCH_CALLSIGN_VODKA_B";
+  game["strings"]["war_callsign_c"] = &"PATCH_CALLSIGN_VODKA_C";
+  game["strings"]["war_callsign_d"] = &"PATCH_CALLSIGN_VODKA_D";
+  game["strings"]["war_callsign_e"] = &"PATCH_CALLSIGN_VODKA_E";
   game["strings_menu"]["war_callsign_a"] = "@PATCH_CALLSIGN_VODKA_A";
   game["strings_menu"]["war_callsign_b"] = "@PATCH_CALLSIGN_VODKA_B";
   game["strings_menu"]["war_callsign_c"] = "@PATCH_CALLSIGN_VODKA_C";

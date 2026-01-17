@@ -26,14 +26,14 @@ onSpawnAcousticSensor(watcher, player) {
   self SetOwner(player);
   self SetTeam(player.team);
   self.owner = player;
-  self PlayLoopSound("fly_acoustic_sensor_lp");
+  self playLoopSound("fly_acoustic_sensor_lp");
   if(!self maps\mp\gametypes\_weaponobjects::isHacked()) {
     player maps\mp\gametypes\_globallogic_score::setWeaponStat("acoustic_sensor_mp", 1, "used");
   }
   self thread watchShutdown(player, self.origin);
 }
 acousticSensorDetonate(attacker) {
-  PlayFX(level._equipment_explode_fx, self.origin);
+  playFX(level._equipment_explode_fx, self.origin);
   PlaySoundAtPosition("dst_equipment_destroy", self.origin);
   self destroyEnt();
 }
@@ -48,12 +48,12 @@ watchShutdown(player, origin) {
 watchAcousticSensorDamage(watcher) {
   self endon("death");
   self endon("hacked");
-  self SetCanDamage(true);
+  self setCanDamage(true);
   damageMax = 100;
   if(!self maps\mp\gametypes\_weaponobjects::isHacked()) {
     self.damageTaken = 0;
   }
-  while (true) {
+  while(true) {
     self.maxhealth = 100000;
     self.health = self.maxhealth;
     self waittill("damage", damage, attacker, direction, point, type, tagName, modelName, partname, weaponName, iDFlags);

@@ -36,7 +36,6 @@
 #include scripts\mp_common\player\player_utils;
 #include scripts\mp_common\spawnbeacon;
 #include scripts\mp_common\util;
-
 #namespace koth;
 
 event_handler[gametype_init] main(eventstruct) {
@@ -82,7 +81,7 @@ event_handler[gametype_init] main(eventstruct) {
   level.var_d3a438fb = &function_d3a438fb;
 }
 
-private function_14e751e9() {
+function_14e751e9() {
   level endon(#"game_ended");
 
   while(true) {
@@ -115,7 +114,7 @@ updateobjectivehintmessage(message) {
   }
 }
 
-private function_785d5e6d() {
+function_785d5e6d() {
   foreach(team, _ in level.teams) {
     spawning::add_spawn_points(team, "mp_tdm_spawn");
     spawning::add_spawn_points(team, "mp_multi_team_spawn");
@@ -129,9 +128,9 @@ private function_785d5e6d() {
 onstartgametype() {
   globallogic_score::resetteamscores();
   level.kothtotalsecondsinzone = 0;
-  level.objectivehintpreparezone = #"mp/control_koth";
-  level.objectivehintcapturezone = #"mp/capture_koth";
-  level.objectivehintdefendhq = #"mp/defend_koth";
+  level.objectivehintpreparezone = # "mp/control_koth";
+  level.objectivehintcapturezone = # "mp/capture_koth";
+  level.objectivehintdefendhq = # "mp/defend_koth";
 
   if(getgametypesetting(#"allowovertime")) {
     level.ontimelimit = &function_a2ef4132;
@@ -187,7 +186,7 @@ spawn_first_zone(delay) {
 
   print("<dev string:x38>" + level.zone.trigorigin[0] + "<dev string:x4a>" + level.zone.trigorigin[1] + "<dev string:x4a>" + level.zone.trigorigin[2] + "<dev string:x4e>");
 
-    level.zone enable_influencers(1);
+  level.zone enable_influencers(1);
   level.zone.gameobject.trigger allowtacticalinsertion(0);
   spawn_beacon::addprotectedzone(level.zone.trig);
   matchrecordroundstart();
@@ -205,10 +204,9 @@ spawn_next_zone() {
   matchrecordroundend();
 
   if(isDefined(level.zone)) {
-
     print("<dev string:x38>" + level.zone.trigorigin[0] + "<dev string:x4a>" + level.zone.trigorigin[1] + "<dev string:x4a>" + level.zone.trigorigin[2] + "<dev string:x4e>");
 
-      level.zone enable_influencers(1);
+    level.zone enable_influencers(1);
     spawn_beacon::addprotectedzone(level.zone.trig);
     matchrecordroundstart();
   }
@@ -243,7 +241,7 @@ togglezoneeffects(enabled) {
 }
 
 kothcaptureloop() {
-  level endon(#"game_ended", #"zone_moved");
+  level endon(#"game_ended", # "zone_moved");
   level.kothstarttime = gettime();
 
   while(true) {
@@ -261,7 +259,7 @@ kothcaptureloop() {
     level.zone.gameobject.ontouchuse = &ontouchuse;
     level.zone.gameobject.onupdateuserate = &onupdateuserate;
     level.zone togglezoneeffects(1);
-    msg = level waittill(#"zone_captured", #"zone_destroyed");
+    msg = level waittill(#"zone_captured", # "zone_destroyed");
 
     if(msg._notify == "zone_destroyed") {
       continue;
@@ -379,7 +377,7 @@ forcespawnteam(team) {
       continue;
     }
 
-    if(player.pers[#"team"] == team) {
+    if(player.pers[# "team"] == team) {
       player notify(#"force_spawn");
       wait 0.1;
     }
@@ -394,12 +392,12 @@ updateteamclientfield() {
     return;
   }
 
-  if(ownerteam == #"neutral") {
+  if(ownerteam == # "neutral") {
     level clientfield::set("hardpointteam", 0);
     return;
   }
 
-  if(ownerteam == #"allies") {
+  if(ownerteam == # "allies") {
     level clientfield::set("hardpointteam", 1);
     return;
   }
@@ -407,7 +405,7 @@ updateteamclientfield() {
   level clientfield::set("hardpointteam", 2);
 }
 
-private iszonecontested(gameobject) {
+iszonecontested(gameobject) {
   if(gameobject.touchlist[game.attackers].size > 0 && gameobject.touchlist[game.defenders].size > 0) {
     return true;
   }
@@ -467,12 +465,12 @@ onbeginuse(sentient) {
 
   ownerteam = self gameobjects::get_owner_team();
 
-  if(ownerteam == #"neutral") {
-    player thread battlechatter::gametype_specific_battle_chatter("hq_protect", player.pers[#"team"]);
+  if(ownerteam == # "neutral") {
+    player thread battlechatter::gametype_specific_battle_chatter("hq_protect", player.pers[# "team"]);
     return;
   }
 
-  player thread battlechatter::gametype_specific_battle_chatter("hq_attack", player.pers[#"team"]);
+  player thread battlechatter::gametype_specific_battle_chatter("hq_attack", player.pers[# "team"]);
 }
 
 onenduse(team, sentient, success) {
@@ -501,8 +499,8 @@ onzonecapture(sentient) {
 
   print("<dev string:x52>");
 
-    pause_time();
-  string = #"hash_446b7b0b3e4df72e";
+  pause_time();
+  string = # "hash_446b7b0b3e4df72e";
   level.zone.gameobject.iscontested = 0;
   level.usestartspawns = 0;
 
@@ -526,7 +524,7 @@ onzonecapture(sentient) {
         for(index = 0; index < level.players.size; index++) {
           player = level.players[index];
 
-          if(player.pers[#"team"] == team) {
+          if(player.pers[# "team"] == team) {
             if(player.lastkilltime + 500 > gettime()) {
               player challenges::killedlastcontester();
             }
@@ -585,13 +583,13 @@ give_capture_credit(touchlist, string, capturetime, capture_team, lastcapturetea
       player recordgameevent("hardpoint_captured");
       level thread popups::displayteammessagetoall(string, player);
 
-      if(isDefined(player.pers[#"captures"])) {
-        player.pers[#"captures"]++;
-        player.captures = player.pers[#"captures"];
+      if(isDefined(player.pers[# "captures"])) {
+        player.pers[# "captures"]++;
+        player.captures = player.pers[# "captures"];
       }
 
-      player.pers[#"objectives"]++;
-      player.objectives = player.pers[#"objectives"];
+      player.pers[# "objectives"]++;
+      player.objectives = player.pers[# "objectives"];
 
       if(level.kothstarttime + 500 > capturetime) {
         player challenges::immediatecapture();
@@ -627,7 +625,7 @@ give_held_credit(touchlist, team) {
 
 onzoneunoccupied() {
   level notify(#"zone_destroyed");
-  level.kothcapteam = #"neutral";
+  level.kothcapteam = # "neutral";
   level.zone.gameobject.wasleftunoccupied = 1;
   level.zone.gameobject.iscontested = 0;
   level.zone.gameobject recordgameeventnonplayer("hardpoint_empty");
@@ -643,7 +641,7 @@ onzonecontested() {
   self updateteamclientfield();
   self recordgameeventnonplayer("hardpoint_contested");
   resume_time();
-  util::function_5a68c330(8, #"free");
+  util::function_5a68c330(8, # "free");
 
   foreach(team, _ in level.teams) {
     if(team == zoneowningteam) {
@@ -664,7 +662,7 @@ onzoneuncontested(lastclaimteam) {
 }
 
 movezoneaftertime(time) {
-  level endon(#"game_ended", #"zone_reset");
+  level endon(#"game_ended", # "zone_reset");
   level.zonemovetime = gettime() + int(time * 1000);
   level.zonedestroyedbytimer = 0;
   wait time;
@@ -684,11 +682,11 @@ movezoneaftertime(time) {
   level.zone.gameobject recordgameeventnonplayer("hardpoint_moved");
   level notify(#"zone_moved");
   level.zone.gameobject.onuse = undefined;
-  util::function_5a68c330(6, #"free");
+  util::function_5a68c330(6, # "free");
 }
 
 awardcapturepoints(team, lastcaptureteam) {
-  level endon(#"game_ended", #"zone_destroyed", #"zone_reset", #"zone_moved");
+  level endon(#"game_ended", # "zone_destroyed", # "zone_reset", # "zone_moved");
   level notify(#"awardcapturepointsrunning");
   level endon(#"awardcapturepointsrunning");
 
@@ -716,9 +714,9 @@ awardcapturepoints(team, lastcaptureteam) {
           continue;
         }
 
-        if(isDefined(player.pers[#"objtime"])) {
-          player.pers[#"objtime"]++;
-          player.objtime = player.pers[#"objtime"];
+        if(isDefined(player.pers[# "objtime"])) {
+          player.pers[# "objtime"]++;
+          player.objtime = player.pers[# "objtime"];
         }
 
         player stats::function_bb7eedf0(#"objective_time", 1);
@@ -844,7 +842,7 @@ setupzones() {
       }
     }
 
-    objective_name = #"hardpoint";
+    objective_name = # "hardpoint";
     zone.gameobject = gameobjects::create_use_object(#"neutral", zone.trig, visuals, (0, 0, 0), objective_name);
     zone.gameobject gameobjects::set_objective_entity(zone);
     zone.gameobject gameobjects::disable_object();
@@ -967,7 +965,7 @@ function_38874bf6() {
 function_610d3790(einflictor, victim, idamage, weapon) {
   attacker = self;
 
-  if(!isplayer(attacker) || level.capturetime && !victim.touchtriggers.size && !attacker.touchtriggers.size || attacker.pers[#"team"] == victim.pers[#"team"]) {
+  if(!isplayer(attacker) || level.capturetime && !victim.touchtriggers.size && !attacker.touchtriggers.size || attacker.pers[# "team"] == victim.pers[# "team"]) {
     return;
   }
 
@@ -993,7 +991,7 @@ function_610d3790(einflictor, victim, idamage, weapon) {
 
     ownerteam = level.zone.gameobject.ownerteam;
 
-    if(!isDefined(ownerteam) || ownerteam == #"neutral") {
+    if(!isDefined(ownerteam) || ownerteam == # "neutral") {
       return;
     }
   }
@@ -1004,19 +1002,19 @@ function_610d3790(einflictor, victim, idamage, weapon) {
       ownerteam = victim.touchtriggers[triggerids[0]].useobj.ownerteam;
     }
 
-    if(ownerteam != #"neutral") {
+    if(ownerteam != # "neutral") {
       attacker.lastkilltime = gettime();
-      team = attacker.pers[#"team"];
+      team = attacker.pers[# "team"];
 
       if(team == ownerteam) {
         if(!medalgiven) {
           attacker medals::offenseglobalcount();
           attacker thread challenges::killedbaseoffender(level.zone.trig, weapon, einflictor);
           attacker challenges::function_2f462ffd(victim, weapon, einflictor, level.zone.gameobject);
-          attacker.pers[#"objectiveekia"]++;
-          attacker.objectiveekia = attacker.pers[#"objectiveekia"];
-          attacker.pers[#"objectives"]++;
-          attacker.objectives = attacker.pers[#"objectives"];
+          attacker.pers[# "objectiveekia"]++;
+          attacker.objectiveekia = attacker.pers[# "objectiveekia"];
+          attacker.pers[# "objectives"]++;
+          attacker.objectives = attacker.pers[# "objectives"];
           medalgiven = 1;
         }
 
@@ -1028,19 +1026,19 @@ function_610d3790(einflictor, victim, idamage, weapon) {
         scoreeventprocessed = 1;
       } else {
         if(!medalgiven) {
-          if(isDefined(attacker.pers[#"defends"])) {
-            attacker.pers[#"defends"]++;
-            attacker.defends = attacker.pers[#"defends"];
+          if(isDefined(attacker.pers[# "defends"])) {
+            attacker.pers[# "defends"]++;
+            attacker.defends = attacker.pers[# "defends"];
           }
 
           attacker medals::defenseglobalcount();
           medalgiven = 1;
           attacker thread challenges::killedbasedefender(level.zone.trig);
           attacker challenges::function_2f462ffd(victim, weapon, einflictor, level.zone.gameobject);
-          attacker.pers[#"objectiveekia"]++;
-          attacker.objectiveekia = attacker.pers[#"objectiveekia"];
-          attacker.pers[#"objectives"]++;
-          attacker.objectives = attacker.pers[#"objectives"];
+          attacker.pers[# "objectiveekia"]++;
+          attacker.objectiveekia = attacker.pers[# "objectiveekia"];
+          attacker.pers[# "objectives"]++;
+          attacker.objectives = attacker.pers[# "objectives"];
           attacker recordgameevent("defending");
         }
 
@@ -1073,14 +1071,14 @@ function_610d3790(einflictor, victim, idamage, weapon) {
       ownerteam = attacker.touchtriggers[triggerids[0]].useobj.ownerteam;
     }
 
-    if(ownerteam != #"neutral") {
-      team = victim.pers[#"team"];
+    if(ownerteam != # "neutral") {
+      team = victim.pers[# "team"];
 
       if(team == ownerteam) {
         if(!medalgiven) {
-          if(isDefined(attacker.pers[#"defends"])) {
-            attacker.pers[#"defends"]++;
-            attacker.defends = attacker.pers[#"defends"];
+          if(isDefined(attacker.pers[# "defends"])) {
+            attacker.pers[# "defends"]++;
+            attacker.defends = attacker.pers[# "defends"];
           }
 
           attacker medals::defenseglobalcount();
@@ -1098,10 +1096,10 @@ function_610d3790(einflictor, victim, idamage, weapon) {
 
           victim recordkillmodifier("assaulting");
           attacker challenges::function_2f462ffd(victim, weapon, einflictor, level.zone.gameobject);
-          attacker.pers[#"objectiveekia"]++;
-          attacker.objectiveekia = attacker.pers[#"objectiveekia"];
-          attacker.pers[#"objectives"]++;
-          attacker.objectives = attacker.pers[#"objectives"];
+          attacker.pers[# "objectiveekia"]++;
+          attacker.objectiveekia = attacker.pers[# "objectiveekia"];
+          attacker.pers[# "objectives"]++;
+          attacker.objectives = attacker.pers[# "objectives"];
         }
       } else {
         if(!medalgiven) {
@@ -1117,10 +1115,10 @@ function_610d3790(einflictor, victim, idamage, weapon) {
 
           victim recordkillmodifier("defending");
           attacker challenges::function_2f462ffd(victim, weapon, einflictor, level.zone.gameobject);
-          attacker.pers[#"objectiveekia"]++;
-          attacker.objectiveekia = attacker.pers[#"objectiveekia"];
-          attacker.pers[#"objectives"]++;
-          attacker.objectives = attacker.pers[#"objectives"];
+          attacker.pers[# "objectiveekia"]++;
+          attacker.objectiveekia = attacker.pers[# "objectiveekia"];
+          attacker.pers[# "objectives"]++;
+          attacker.objectives = attacker.pers[# "objectives"];
         }
       }
     }
@@ -1158,15 +1156,15 @@ updatecapsperminute(lastownerteam) {
     self.capsperminute = 0;
   }
 
-  if(!isDefined(lastownerteam) || lastownerteam == #"neutral") {
+  if(!isDefined(lastownerteam) || lastownerteam == # "neutral") {
     return;
   }
 
   self.numcaps++;
   minutespassed = float(globallogic_utils::gettimepassed()) / 60000;
 
-  if(isplayer(self) && isDefined(self.timeplayed[#"total"])) {
-    minutespassed = self.timeplayed[#"total"] / 60;
+  if(isplayer(self) && isDefined(self.timeplayed[# "total"])) {
+    minutespassed = self.timeplayed[# "total"] / 60;
   }
 
   if(minutespassed <= 0) {

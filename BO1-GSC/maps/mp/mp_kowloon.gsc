@@ -43,7 +43,7 @@ main() {
 }
 trigger_killer(position, width, height) {
   kill_trig = spawn("trigger_radius", position, 0, width, height);
-  while (1) {
+  while(1) {
     kill_trig waittill("trigger", player);
     if(isplayer(player)) {
       player suicide();
@@ -55,7 +55,7 @@ zipline_init() {
   SetDvar("scr_zipline_decelerate", ".3");
   SetDvar("scr_zipline_line_up", ".35");
   level waittill("prematch_over");
-  zipline_trigs = GetEntArray("zipline_trigger", "targetname");
+  zipline_trigs = getEntArray("zipline_trigger", "targetname");
   array_thread(zipline_trigs, ::zipline_trigger_func);
   array_thread(zipline_trigs, ::zipline_prox_think);
 }
@@ -65,9 +65,9 @@ zipline_trigger_func() {
   end_point = GetStruct(start_point.target);
   zipline_speed = self.script_float;
   AssertEx(isDefined(zipline_speed), "Zip line use trigger does not have a script_float K/V pair defined");
-  moving_ent = Spawn("script_model", start_point.origin);
-  moving_ent SetModel("tag_origin");
-  while (1) {
+  moving_ent = spawn("script_model", start_point.origin);
+  moving_ent setModel("tag_origin");
+  while(1) {
     self waittill("trigger", player);
     if(canZipline(player)) {
       player.enteringVehicle = true;
@@ -140,12 +140,12 @@ zipline_player_func(start_point, end_point_origin, moving_ent, zipline_speed) {
   moving_ent RotateTo(start_point.angles, zipline_line_up);
   moving_ent MoveTo(start_point.origin, zipline_line_up);
   moving_ent waittill("movedone");
-  moving_ent playloopsound("evt_zipline_slide");
+  moving_ent playLoopSound("evt_zipline_slide");
   moving_ent MoveTo(end_point_origin, zipline_speed, zipline_accelerate, zipline_decelerate);
   dist = Distance2D(moving_ent.origin, end_point_origin);
   self SetDepthOfField(0, 10, 1000, 7000, 6, 1.8);
   moving_ent waittill("movedone");
-  while (dist > end_zipline_offset) {
+  while(dist > end_zipline_offset) {
     wait(0.05);
     dist = Distance2D(moving_ent.origin, end_point_origin);
   }
@@ -173,13 +173,13 @@ zipline_prox_think() {
   }
   s = strtok(self.script_noteworthy, " ");
   origin = (Int(s[0]), Int(s[1]), Int(s[2]));
-  for (;;) {
+  for(;;) {
     wait(RandomIntRange(5, 10));
     if(!isDefined(game["bots_spawned"])) {
       return;
     }
     players = get_players();
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       if(players[i] is_bot() && cointoss()) {
         if(DistanceSquared(players[i].origin, origin) < 256 * 256) {
           players[i] SetScriptGoal(origin, 32);
@@ -202,7 +202,7 @@ handle_ambient_planes() {
   foundPlanePoints = true;
   startPos = undefined;
   endPos = undefined;
-  while (foundPlanePoints) {
+  while(foundPlanePoints) {
     foundPlanePoints = false;
     startPosEnt = GetStruct("plane_flyby_start_" + index, "targetname");
     endPosEnt = GetStruct("plane_flyby_end_" + index, "targetname");
@@ -221,11 +221,11 @@ handle_ambient_planes() {
     delta = (endPos - startPos);
     dist = Length(delta);
     travelTime = dist / speed;
-    plane = Spawn("script_model", startPos);
+    plane = spawn("script_model", startPos);
     if(isDefined(plane)) {
       dir = VectorNormalize(delta);
       plane.angles = VectorToAngles(dir);
-      plane SetModel("p_kow_airplane_747");
+      plane setModel("p_kow_airplane_747");
       plane MoveTo(endPos, travelTime);
       plane thread maps\mp\mp_kowloon_amb::plane_position_updater(4500, "evt_jet_flyover");
       wait travelTime;
@@ -235,7 +235,7 @@ handle_ambient_planes() {
 }
 glass_exploder_init() {
   single_exploders = [];
-  for (i = 0; i < level.createFXent.size; i++) {
+  for(i = 0; i < level.createFXent.size; i++) {
     ent = level.createFXent[i];
     if(!isDefined(ent))
       continue;
@@ -252,11 +252,11 @@ glass_exploder_think(exploders) {
   if(exploders.size <= 0) {
     return;
   }
-  for (;;) {
+  for(;;) {
     closest = 999 * 999;
     closest_exploder = undefined;
     level waittill("glass_smash", origin);
-    for (i = 0; i < exploders.size; i++) {
+    for(i = 0; i < exploders.size; i++) {
       if(!isDefined(exploders[i])) {
         continue;
       }

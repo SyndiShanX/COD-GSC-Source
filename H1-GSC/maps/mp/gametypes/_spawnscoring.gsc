@@ -106,10 +106,8 @@ scorespawns_twar(var_0, var_1, var_2) {
 }
 
 checkdynamicspawns(var_0) {
-  if(isdefined(level.dynamicspawns))
-    var_0 = [
-      [level.dynamicspawns]
-    ](var_0);
+  if(isDefined(level.dynamicspawns))
+    var_0 = [[level.dynamicspawns]](var_0);
 
   return var_0;
 }
@@ -118,7 +116,7 @@ selectbestspawnpoint(var_0, var_1, var_2) {
   var_3 = var_0;
   var_4 = 0;
 
-  if(isdefined(var_2) && var_2 && var_1.size > 1) {
+  if(isDefined(var_2) && var_2 && var_1.size > 1) {
     var_1 = maps\mp\_utility::quicksort(var_1, ::spawnpointcomparefunc);
     var_5 = int(min(level.badspawncount[self.team] / 2 + 1, var_1.size - 1));
     var_3 = var_1[randomint(var_5)];
@@ -139,16 +137,16 @@ recon_log_spawnpoint_info_wrapper(var_0) {
 }
 
 recon_log_spawnpoint_info(var_0) {
-  if(!isdefined(var_0.israndom))
+  if(!isDefined(var_0.israndom))
     var_0.israndom = 0;
 
-  if(!isdefined(var_0.teambase))
+  if(!isDefined(var_0.teambase))
     var_0.teambase = "none";
 
-  if(!isdefined(var_0.lastspawnteam))
+  if(!isDefined(var_0.lastspawnteam))
     var_0.lastspawnteam = "none";
 
-  if(!isdefined(var_0.lastspawntime))
+  if(!isDefined(var_0.lastspawntime))
     var_0.lastspawntime = -1;
 
   if(level.teambased) {
@@ -183,28 +181,28 @@ recon_log_spawnpoint_info(var_0) {
   var_20 = var_0.teambase;
   var_21 = var_0.outside;
 
-  if(isdefined(var_0.debugcriticaldata[0]))
+  if(isDefined(var_0.debugcriticaldata[0]))
     var_7 = var_0.debugcriticaldata[0];
 
-  if(isdefined(var_0.debugcriticaldata[1]))
+  if(isDefined(var_0.debugcriticaldata[1]))
     var_8 = var_0.debugcriticaldata[1];
 
-  if(isdefined(var_0.debugcriticaldata[2]))
+  if(isDefined(var_0.debugcriticaldata[2]))
     var_9 = var_0.debugcriticaldata[2];
 
-  if(isdefined(var_0.debugcriticaldata[3]))
+  if(isDefined(var_0.debugcriticaldata[3]))
     var_10 = var_0.debugcriticaldata[3];
 
-  if(isdefined(var_0.debugcriticaldata[4]))
+  if(isDefined(var_0.debugcriticaldata[4]))
     var_11 = var_0.debugcriticaldata[4];
 
-  if(isdefined(var_0.debugcriticaldata[5]))
+  if(isDefined(var_0.debugcriticaldata[5]))
     var_12 = var_0.debugcriticaldata[5];
 
-  if(isdefined(var_0.debugcriticaldata[6]))
+  if(isDefined(var_0.debugcriticaldata[6]))
     var_13 = var_0.debugcriticaldata[6];
 
-  if(isdefined(var_0.debugcriticaldata[7]))
+  if(isDefined(var_0.debugcriticaldata[7]))
     var_14 = var_0.debugcriticaldata[7];
 
   var_22 = var_0.totalpossiblescore;
@@ -217,28 +215,28 @@ recon_log_spawnpoint_info(var_0) {
   var_29 = -1;
   var_30 = -1;
 
-  if(isdefined(var_0.debugscoredata[0]))
+  if(isDefined(var_0.debugscoredata[0]))
     var_23 = var_0.debugscoredata[0];
 
-  if(isdefined(var_0.debugscoredata[1]))
+  if(isDefined(var_0.debugscoredata[1]))
     var_24 = var_0.debugscoredata[1];
 
-  if(isdefined(var_0.debugscoredata[2]))
+  if(isDefined(var_0.debugscoredata[2]))
     var_25 = var_0.debugscoredata[2];
 
-  if(isdefined(var_0.debugscoredata[3]))
+  if(isDefined(var_0.debugscoredata[3]))
     var_26 = var_0.debugscoredata[3];
 
-  if(isdefined(var_0.debugscoredata[4]))
+  if(isDefined(var_0.debugscoredata[4]))
     var_27 = var_0.debugscoredata[4];
 
-  if(isdefined(var_0.debugscoredata[5]))
+  if(isDefined(var_0.debugscoredata[5]))
     var_28 = var_0.debugscoredata[5];
 
-  if(isdefined(var_0.debugscoredata[6]))
+  if(isDefined(var_0.debugscoredata[6]))
     var_29 = var_0.debugscoredata[6];
 
-  if(isdefined(var_0.debugscoredata[7]))
+  if(isDefined(var_0.debugscoredata[7]))
     var_30 = var_0.debugscoredata[7];
 
   reconspatialevent(var_0.origin, "script_mp_spawnpoint_score: player_name %s, life_id %d, script_file %s, gameTime %d, classname %s, totalscore %d, totalPossibleScore %d, score_data0 %d, score_data1 %d, score_data2 %d, score_data3 %d, score_data4 %d, score_data5 %d, score_data6 %d, score_data7 %d, fullsights_allies %d, fullsights_axis %d, cornersights_allies %d, cornersights_axis %d, min_dist_squared_allies %d, min_dist_squared_axis %d, criticalResult %s, critical_data0 %d, critical_data1 %d, critical_data2 %d, critical_data3 %d, critical_data4 %d, critical_data5 %d, critical_data6 %d, critical_data7 %d, teambase %s, outside %d", self.name, self.lifeid, var_15, var_16, var_17, var_18, var_22, var_23, var_24, var_25, var_26, var_27, var_28, var_29, var_30, var_1, var_2, var_3, var_4, var_5, var_6, var_19, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_20, var_21);
@@ -567,7 +565,7 @@ getspawnpoint_ctf(var_0, var_1) {
   var_2["secondary"] = [];
   var_2["bad"] = [];
 
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     var_1 = self.team;
 
   foreach(var_4 in var_0) {
@@ -627,7 +625,7 @@ getspawnpoint_awayfromenemies(var_0, var_1) {
   var_2["secondary"] = [];
   var_2["bad"] = [];
 
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     var_1 = self.team;
 
   foreach(var_4 in var_0) {

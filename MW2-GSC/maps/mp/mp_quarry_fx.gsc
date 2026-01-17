@@ -21,10 +21,7 @@ main() {
   level._effect["drips_slow"] = loadfx("misc/drips_slow");
   level._effect["drips_fast"] = loadfx("misc/drips_fast");
 
-
-  /#
   if(getdvar("clientSideEffects") != "1")
     maps\createfx\mp_quarry_fx::main();
-  # /
 
 }

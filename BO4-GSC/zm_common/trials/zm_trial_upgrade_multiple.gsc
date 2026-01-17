@@ -9,7 +9,6 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_weapons;
-
 #namespace zm_trial_upgrade_multiple;
 
 autoexec __init__system__() {
@@ -24,7 +23,7 @@ __init__() {
   zm_trial::register_challenge(#"upgrade_multiple", &on_begin, &on_end);
 }
 
-private on_begin(n_count, n_repacks) {
+on_begin(n_count, n_repacks) {
   assert(isDefined(level.zombie_weapons_upgraded));
   level.var_ab9d0ec6 = [];
 
@@ -55,7 +54,7 @@ private on_begin(n_count, n_repacks) {
   }
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   foreach(player in getplayers()) {
     player zm_trial_util::function_f3aacffb();
   }
@@ -92,7 +91,7 @@ private on_end(round_reset) {
   self.var_5ba20db5 = undefined;
 }
 
-private function_e73fbbf7(var_5ba20db5, var_27f8d634) {
+function_e73fbbf7(var_5ba20db5, var_27f8d634) {
   self endon(#"disconnect");
   level endon(#"hash_7646638df88a3656");
   self.var_c2490d61 = 0;
@@ -128,7 +127,7 @@ private function_e73fbbf7(var_5ba20db5, var_27f8d634) {
   }
 }
 
-private function_46feb36d(var_5ba20db5, var_27f8d634) {
+function_46feb36d(var_5ba20db5, var_27f8d634) {
   if(self.sessionstate != "spectator") {
     var_6c114dfb = 0;
     self.var_c2490d61 = 0;

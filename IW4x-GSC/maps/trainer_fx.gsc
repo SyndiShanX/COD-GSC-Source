@@ -41,5 +41,4 @@ main() {
   level._effect["drips_fast"] = loadfx("misc/drips_fast");
 
   maps\createfx\trainer_fx::main();
-
 }

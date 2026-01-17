@@ -20,7 +20,7 @@ pers_register_upgrade(name, upgrade_active_func, stat_name, stat_desired_value, 
     assert(0, "A persistent upgrade is already registered for name: " + name);
 
   level.pers_upgrades_keys[level.pers_upgrades_keys.size] = name;
-  level.pers_upgrades[name] = spawnstruct();
+  level.pers_upgrades[name] = spawnStruct();
   level.pers_upgrades[name].stat_names = [];
   level.pers_upgrades[name].stat_desired_values = [];
   level.pers_upgrades[name].upgrade_active_func = upgrade_active_func;
@@ -91,12 +91,12 @@ pers_upgrades_monitor() {
                   player.upgrade_fx_origin = undefined;
                 } else {
                   fx_org = player.origin;
-                  v_dir = anglestoforward(player getplayerangles());
+                  v_dir = anglesToForward(player getplayerangles());
                   v_up = anglestoup(player getplayerangles());
                   fx_org = fx_org + v_dir * 30 + v_up * 12;
                 }
 
-                playfx(level._effect["upgrade_aquired"], fx_org);
+                playFX(level._effect["upgrade_aquired"], fx_org);
                 level thread maps\mp\zombies\_zm::disable_end_game_intermission(1.5);
               }
 

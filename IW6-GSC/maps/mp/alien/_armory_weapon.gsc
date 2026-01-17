@@ -258,13 +258,13 @@ give_special_gun() {
     self waittill("trigger", var_0);
 
     if(var_0.has_special_weapon || var_0.is_holding_deployable) {
-      var_0 maps\mp\_utility::setlowermessage("cant_buy", & "ALIEN_COLLECTIBLES_PLAYER_HOLDING", 3);
+      var_0 maps\mp\_utility::setlowermessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_HOLDING", 3);
       continue;
     }
 
     if(!var_0 hasweapon("iw6_aliendlc11_mp")) {
       if(var_0 maps\mp\alien\_prestige::prestige_getpistolsonly() == 1) {
-        var_0 maps\mp\_utility::setlowermessage("cant_buy", & "ALIEN_COLLECTIBLES_PLAYER_NERFED", 3);
+        var_0 maps\mp\_utility::setlowermessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_NERFED", 3);
         continue;
       }
 
@@ -296,7 +296,7 @@ disable_special_gun_purchase() {
 show_specialweapon_hint() {
   self endon("disconnect");
   wait 1;
-  maps\mp\_utility::setlowermessage("weapon_hint", & "MP_ALIEN_ARMORY_SPECIAL_WEAPON_HINT", 6);
+  maps\mp\_utility::setlowermessage("weapon_hint", &"MP_ALIEN_ARMORY_SPECIAL_WEAPON_HINT", 6);
 }
 
 show_specialweapon_hint_repeat() {
@@ -368,7 +368,7 @@ spitter_ammo_think() {
       var_3 = var_1 getweaponammostock("iw6_aliendlc11_mp");
 
       if(var_2 + var_3 >= weaponmaxammo("iw6_aliendlc11_mp") + weaponclipsize("iw6_aliendlc11_mp")) {
-        var_1 maps\mp\_utility::setlowermessage("ammo_taken", & "ALIEN_COLLECTIBLES_AMMO_MAX", 3);
+        var_1 maps\mp\_utility::setlowermessage("ammo_taken", &"ALIEN_COLLECTIBLES_AMMO_MAX", 3);
         continue;
       }
 

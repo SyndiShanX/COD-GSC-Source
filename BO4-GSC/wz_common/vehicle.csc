@@ -14,7 +14,6 @@
 #include scripts\core_common\util_shared;
 #include scripts\core_common\vehicle_shared;
 #include scripts\core_common\vehicles\driving_fx;
-
 #namespace wz_vehicle;
 
 autoexec __init__system__() {
@@ -42,7 +41,7 @@ __init__() {
   callback::on_localplayer_spawned(&on_localplayer_spawned);
 }
 
-private on_localplayer_spawned(localclientnum) {
+on_localplayer_spawned(localclientnum) {
   if(self function_21c0fa55()) {
     self.var_53204996 = &function_3ec2efae;
 
@@ -52,7 +51,7 @@ private on_localplayer_spawned(localclientnum) {
   }
 }
 
-private function_12d038ac(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+function_12d038ac(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     if(isDefined(self.var_e29b96d2)) {
       self.var_e29b96d2 delete();
@@ -67,7 +66,7 @@ private function_12d038ac(localclientnum, oldval, newval, bnewent, binitialsnap,
   }
 }
 
-private function_54e9d3c4(localclientnum) {
+function_54e9d3c4(localclientnum) {
   self notify("34f17bedff89ee31");
   self endon("34f17bedff89ee31");
   self endon(#"death");
@@ -142,17 +141,17 @@ stunnedcallback(localclientnum, val) {
   self setstunned(val);
 }
 
-private function_79500af5(localclientnum, data) {
+function_79500af5(localclientnum, data) {
   self function_3f24c5a(1);
   self.stunnedcallback = &stunnedcallback;
 }
 
-private function_fb9c790a(localclientnum, data) {
+function_fb9c790a(localclientnum, data) {
   self function_3f24c5a(1);
   self.stunnedcallback = &stunnedcallback;
 }
 
-private function_bd3b5229(localclientnum, data) {
+function_bd3b5229(localclientnum, data) {
   self function_3f24c5a(1);
   self.stunnedcallback = &stunnedcallback;
 
@@ -167,29 +166,29 @@ private function_bd3b5229(localclientnum, data) {
   }
 }
 
-private function_500291c4(localclientnum, data) {
+function_500291c4(localclientnum, data) {
   self function_3f24c5a(1);
   self.stunnedcallback = &stunnedcallback;
 }
 
-private function_8278ed00(localclientnum, data) {
+function_8278ed00(localclientnum, data) {
   self function_3f24c5a(1);
   self.stunnedcallback = &stunnedcallback;
 }
 
-private function_6b617752(localclientnum, data) {
+function_6b617752(localclientnum, data) {
   self.var_917cf8e3 = &function_b0d51c9;
   self.var_1a6ef836 = 0;
   self.stunnedcallback = &stunnedcallback;
 }
 
-private function_cc0af45d(localclientnum, data) {
+function_cc0af45d(localclientnum, data) {
   self.var_917cf8e3 = &function_b0d51c9;
   self.var_1a6ef836 = 0;
   self.stunnedcallback = &stunnedcallback;
 }
 
-private function_a01726dd(localclientnum, data) {
+function_a01726dd(localclientnum, data) {
   self.var_41860110 = &function_74272495;
   self.var_c6a9216 = &function_8411122e;
   self thread function_69fda304(localclientnum);
@@ -205,7 +204,7 @@ private function_a01726dd(localclientnum, data) {
   }
 }
 
-private function_cb575bc3(localclientnum, data) {
+function_cb575bc3(localclientnum, data) {
   self function_3f24c5a(1);
   self.stunnedcallback = &stunnedcallback;
 
@@ -220,24 +219,24 @@ private function_cb575bc3(localclientnum, data) {
   }
 }
 
-private function_c0f1d81b(localclientnum, data) {
+function_c0f1d81b(localclientnum, data) {
   self function_3f24c5a(1);
   self.stunnedcallback = &stunnedcallback;
 }
 
-private function_8411122e(localclientnum, owner) {
+function_8411122e(localclientnum, owner) {
   surfaces = [];
 
   if(isDefined(self.trace)) {
-    if(self.trace[#"fraction"] != 1) {
+    if(self.trace[# "fraction"] != 1) {
       if(!isDefined(surfaces)) {
         surfaces = [];
       } else if(!isarray(surfaces)) {
         surfaces = array(surfaces);
       }
 
-      if(!isinarray(surfaces, driving_fx::function_73e08cca(self.trace[#"surfacetype"]))) {
-        surfaces[surfaces.size] = driving_fx::function_73e08cca(self.trace[#"surfacetype"]);
+      if(!isinarray(surfaces, driving_fx::function_73e08cca(self.trace[# "surfacetype"]))) {
+        surfaces[surfaces.size] = driving_fx::function_73e08cca(self.trace[# "surfacetype"]);
       }
     }
   }
@@ -245,7 +244,7 @@ private function_8411122e(localclientnum, owner) {
   return surfaces;
 }
 
-private function_b0d51c9(localclientnum, owner) {
+function_b0d51c9(localclientnum, owner) {
   curtime = gettime();
 
   if(curtime < self.var_1a6ef836) {
@@ -272,11 +271,11 @@ private function_b0d51c9(localclientnum, owner) {
   return self.var_ed40ad25;
 }
 
-private function_74272495(localclientnum, owner) {
+function_74272495(localclientnum, owner) {
   return true;
 }
 
-private function_69fda304(localclientnum) {
+function_69fda304(localclientnum) {
   self endon(#"death");
 
   while(true) {
@@ -290,21 +289,21 @@ private function_69fda304(localclientnum) {
   }
 }
 
-private heli_exit(localclientnum) {
+heli_exit(localclientnum) {
   self endon(#"death");
   self endon(#"disconnect");
   self waittill(#"exit_vehicle");
   self function_d1731820(localclientnum);
 }
 
-private function_d1731820(localclientnum) {
+function_d1731820(localclientnum) {
   if(isDefined(self) && isDefined(self.var_a9757792)) {
     self stoprumble(localclientnum, self.var_a9757792);
     self.var_a9757792 = undefined;
   }
 }
 
-private function_ff8d2820(localclientnum, rumble) {
+function_ff8d2820(localclientnum, rumble) {
   if(!isDefined(self)) {
     return;
   }
@@ -321,7 +320,7 @@ private function_ff8d2820(localclientnum, rumble) {
   self playrumblelooponentity(localclientnum, self.var_a9757792);
 }
 
-private function_732976d8(localclientnum, vehicle) {
+function_732976d8(localclientnum, vehicle) {
   self notify("45998e3f5e44c183");
   self endon("45998e3f5e44c183");
   self endon(#"death");
@@ -341,9 +340,9 @@ private function_732976d8(localclientnum, vehicle) {
     }
 
     trace = bulletTrace(vehicle.origin, vehicle.origin - offsetorigin, 0, vehicle, 1);
-    distsqr = distancesquared(vehicle.origin, trace[#"position"]);
+    distsqr = distancesquared(vehicle.origin, trace[# "position"]);
 
-    if(trace[#"fraction"] == 1) {
+    if(trace[# "fraction"] == 1) {
       self function_d1731820(localclientnum);
       wait 1;
       continue;
@@ -362,19 +361,19 @@ private function_732976d8(localclientnum, vehicle) {
   self function_d1731820(localclientnum);
 }
 
-private field_do_deathfx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+field_do_deathfx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     self util::playFXOnTag(localclientnum, "vehicle/fx8_vdest_heli_fuselage_destroyed", self, "tag_origin");
   }
 }
 
-private function_de69d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+function_de69d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     self util::playFXOnTag(localclientnum, "vehicle/fx8_vdest_mil_tank_turret_destroyed", self, "tag_turret_animate");
   }
 }
 
-private function_b4806ee(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+function_b4806ee(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(!isDefined(self.settings) && isDefined(self.scriptbundlesettings)) {
     self.settings = struct::get_script_bundle("vehiclecustomsettings", self.scriptbundlesettings);
   }
@@ -391,7 +390,7 @@ private function_b4806ee(localclientnum, oldval, newval, bnewent, binitialsnap, 
   }
 }
 
-private function_a998aede(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+function_a998aede(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
     if(isDefined(self.var_a9203a35)) {
       stopfx(localclientnum, self.var_a9203a35);
@@ -404,7 +403,7 @@ private function_a998aede(localclientnum, oldval, newval, bnewent, binitialsnap,
   }
 }
 
-private function_8fd2e04f(localclientnum) {
+function_8fd2e04f(localclientnum) {
   while(true) {
     if(isarray(level.allvehicles)) {
       player = function_5c10bd79(localclientnum);
@@ -422,7 +421,7 @@ private function_8fd2e04f(localclientnum) {
 
         if(playfx && vehicle.scriptvehicletype === "player_muscle" && var_5d188f8a) {
           if(!isDefined(vehicle.var_2dc49011)) {
-            vehicle.var_2dc49011 = vehicle util::playFXOnTag(localclientnum, #"hash_77086882cbd57674", vehicle, "tag_origin");
+            vehicle.var_2dc49011 = vehicle util::playFXOnTag(localclientnum, # "hash_77086882cbd57674", vehicle, "tag_origin");
           }
 
           continue;

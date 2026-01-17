@@ -8,7 +8,6 @@ main() {
 }
 
 precache_createfx_fx() {
-
   level._effect["snow_medium_2"] = loadfx("snow/snow_medium_2");
   level._effect["snow_wind_sh"] = loadfx("snow/snow_wind_sh");
   level._effect["mp_cargoship_rain_noise01"] = loadfx("ambient_runners/mp_cargoship_rain_noise01");

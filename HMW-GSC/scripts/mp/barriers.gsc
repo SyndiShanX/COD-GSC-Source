@@ -30,18 +30,18 @@ setup_barriers() {
 }
 
 create_barrier(model, model_origin, model_angles) {
-  if(!isdefined(model))
+  if(!isDefined(model))
     return undefined;
 
   precachemodel(model);
   barrier = spawn("script_model", model_origin);
-  barrier setmodel(model);
+  barrier setModel(model);
   barrier.angles = model_angles;
 }
 
 remove_barrier(entity) {
   ent = getent(entity, "targetname");
-  if(isdefined(ent))
+  if(isDefined(ent))
     ent delete();
 }
 

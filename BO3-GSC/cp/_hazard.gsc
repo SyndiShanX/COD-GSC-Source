@@ -12,26 +12,26 @@
 #namespace hazard;
 
 function autoexec __init__sytem__() {
-  system::register("hazard", & __init__, undefined, undefined);
+  system::register("hazard", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  add_hazard("heat", 500, 50, 1, & function_476442fb);
+  add_hazard("heat", 500, 50, 1, &function_476442fb);
   add_hazard("filter", 500, 50, 2);
-  add_hazard("o2", 500, 60, 3, & function_8b413656);
+  add_hazard("o2", 500, 60, 3, &function_8b413656);
   add_hazard("radation", 500, 50, 4);
   add_hazard("biohazard", 500, 50, 5);
-  callback::on_spawned( & on_player_spawned);
-  callback::on_player_killed( & on_player_killed);
-  callback::on_connect( & on_player_connect);
+  callback::on_spawned(&on_player_spawned);
+  callback::on_player_killed(&on_player_killed);
+  callback::on_connect(&on_player_connect);
 }
 
 function add_hazard(str_name, n_max_protection, n_regen_rate, n_type, func_update) {
-  if(!isdefined(level.hazards)) {
+  if(!isDefined(level.hazards)) {
     level.hazards = [];
   }
-  if(!isdefined(level.hazards[str_name])) {
-    level.hazards[str_name] = spawnstruct();
+  if(!isDefined(level.hazards[str_name])) {
+    level.hazards[str_name] = spawnStruct();
   }
   level.hazards[str_name].n_max_protection = n_max_protection;
   level.hazards[str_name].n_regen_rate = n_regen_rate;
@@ -69,9 +69,9 @@ function reset(var_b18f74fe) {
 
 function function_b6af57a8() {
   self endon("disconnect");
-  while (true) {
+  while(true) {
     level waittill("save_restore");
-    if(isdefined(self.var_8dcb3948) && self.var_8dcb3948) {
+    if(isDefined(self.var_8dcb3948) && self.var_8dcb3948) {
       continue;
     }
     var_8601d520 = getarraykeys(level.hazards);
@@ -84,7 +84,7 @@ function function_b6af57a8() {
 
 function function_a421f870() {
   self endon("disconnect");
-  while (true) {
+  while(true) {
     self waittill("player_revived");
     foreach(str_name, _ in level.hazards) {
       if(function_b78a859e(str_name) >= 1) {
@@ -95,13 +95,13 @@ function function_a421f870() {
 }
 
 function function_12231466(str_name) {
-  assert(isdefined(level.hazards[str_name]), ("" + str_name) + "");
+  assert(isDefined(level.hazards[str_name]), ("" + str_name) + "");
   self.hazard_damage[str_name] = 0;
 }
 
 function do_damage(str_name, n_damage, e_ent, disable_ui) {
-  assert(isdefined(level.hazards[str_name]), ("" + str_name) + "");
-  if(!isdefined(disable_ui)) {
+  assert(isDefined(level.hazards[str_name]), ("" + str_name) + "");
+  if(!isDefined(disable_ui)) {
     disable_ui = 0;
   }
   if(scene::is_igc_active()) {
@@ -131,17 +131,17 @@ function do_damage(str_name, n_damage, e_ent, disable_ui) {
 }
 
 function function_eaa9157d(str_name) {
-  assert(isdefined(self.hazard_damage[str_name]), ("" + str_name) + "");
+  assert(isDefined(self.hazard_damage[str_name]), ("" + str_name) + "");
   return self.hazard_damage[str_name];
 }
 
 function function_b78a859e(str_name) {
-  assert(isdefined(self.hazard_damage[str_name]), ("" + str_name) + "");
+  assert(isDefined(self.hazard_damage[str_name]), ("" + str_name) + "");
   return self.hazard_damage[str_name] / level.hazards[str_name].n_max_protection;
 }
 
 function function_459e5eff(str_name, var_5b9ad5b3 = 1) {
-  assert(isdefined(self.var_6c3e78bb[str_name]), ("" + str_name) + "");
+  assert(isDefined(self.var_6c3e78bb[str_name]), ("" + str_name) + "");
   self.var_6c3e78bb[str_name] = var_5b9ad5b3;
 }
 
@@ -176,7 +176,7 @@ function private _fill_hazard_protection(str_name, e_ent, disable_ui) {
     if(str_ui_model != "" && !disable_ui) {
       self setcontrolleruimodelvalue(str_ui_model + ".ratio", n_frac);
     }
-    if(isdefined(s_hazard.func_update)) {
+    if(isDefined(s_hazard.func_update)) {
       [
         [s_hazard.func_update]
       ](n_frac, e_ent);
@@ -186,7 +186,7 @@ function private _fill_hazard_protection(str_name, e_ent, disable_ui) {
       self.hazard_damage[str_name] = self.hazard_damage[str_name] - (s_hazard.n_regen_rate * 0.05);
     }
   }
-  while (self.hazard_damage[str_name] >= 0);
+  while(self.hazard_damage[str_name] >= 0);
   self function_45f02912();
   if(str_ui_model != "") {
     if(!disable_ui) {
@@ -204,12 +204,12 @@ function function_45f02912() {
 }
 
 function function_476442fb(n_damage_frac, e_ent) {
-  if(!isdefined(e_ent) || scene::is_igc_active()) {
+  if(!isDefined(e_ent) || scene::is_igc_active()) {
     self.var_65e617f8 = undefined;
     self clientfield::set("burn", 0);
     return;
   }
-  if(!(isdefined(self.var_65e617f8) && self.var_65e617f8) && self istouching(e_ent)) {
+  if(!(isDefined(self.var_65e617f8) && self.var_65e617f8) && self istouching(e_ent)) {
     self clientfield::set("burn", 1);
   } else {
     self.var_65e617f8 = undefined;
@@ -225,7 +225,7 @@ function function_503a50a8() {
 }
 
 function function_8b413656(var_d2eebe84, e_ent) {
-  if(!isdefined(self.var_18c7e911)) {
+  if(!isDefined(self.var_18c7e911)) {
     self.var_18c7e911 = 0;
   }
   if(var_d2eebe84 <= 0.2) {
@@ -241,7 +241,7 @@ function function_8b413656(var_d2eebe84, e_ent) {
   foreach(num in var_b45ec125) {
     if(var_d2eebe84 != 0 && var_d2eebe84 <= num) {
       if(self.var_18c7e911 > num) {
-        self playsound("vox_plyr_uw_gasp");
+        self playSound("vox_plyr_uw_gasp");
         if(num < 0.4) {
           self thread function_fda01c41("vox_plyr_uw_emerge_gasp");
         } else {
@@ -260,10 +260,10 @@ function function_fda01c41(alias) {
   self endon("death");
   self endon("disconnect");
   level endon("save_restore");
-  while (self isplayerunderwater()) {
+  while(self isplayerunderwater()) {
     wait(0.1);
   }
-  self playsound(alias);
+  self playSound(alias);
 }
 
 function function_e9b126ef(n_time, var_827d6de0 = 1) {
@@ -271,7 +271,7 @@ function function_e9b126ef(n_time, var_827d6de0 = 1) {
 }
 
 function function_ccddb105(var_be6a04c9, var_6d20ee14, n_time, var_827d6de0) {
-  assert(isdefined(level.hazards[var_be6a04c9]), ("" + var_be6a04c9) + "");
+  assert(isDefined(level.hazards[var_be6a04c9]), ("" + var_be6a04c9) + "");
   self notify("stop_hazard_dot_" + var_be6a04c9);
   self endon("stop_hazard_dot_" + var_be6a04c9);
   self endon("death");
@@ -279,7 +279,7 @@ function function_ccddb105(var_be6a04c9, var_6d20ee14, n_time, var_827d6de0) {
   var_dd075cd2 = 1;
   s_hazard = level.hazards[var_be6a04c9];
   n_damage = var_6d20ee14;
-  if(isdefined(n_time)) {
+  if(isDefined(n_time)) {
     var_97dd249c = self function_eaa9157d(var_be6a04c9);
     var_90d01cd2 = s_hazard.n_max_protection;
     var_7046c7b3 = var_827d6de0 * var_90d01cd2;
@@ -288,7 +288,7 @@ function function_ccddb105(var_be6a04c9, var_6d20ee14, n_time, var_827d6de0) {
       n_damage = var_a6321c17 / n_time;
     }
   }
-  while (true) {
+  while(true) {
     wait(1);
     var_dd075cd2 = self do_damage(var_be6a04c9, n_damage);
     var_7ba0abc9 = self function_b78a859e(var_be6a04c9);

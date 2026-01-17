@@ -59,7 +59,7 @@ boneyardCustomCrateFunc() {
   if(!level.allow_level_killstreak) {
     return;
   }
-  maps\mp\killstreaks\_airdrop::addCrateType("airdrop_assault", "f1_engine_fire", BONEYARD_KILLSTREAK_WEIGHT, maps\mp\killstreaks\_airdrop::killstreakCrateThink, maps\mp\killstreaks\_airdrop::get_friendly_crate_model(), maps\mp\killstreaks\_airdrop::get_enemy_crate_model(), & "MP_BONEYARD_NS_F1_ENGINE_FIRE_PICKUP");
+  maps\mp\killstreaks\_airdrop::addCrateType("airdrop_assault", "f1_engine_fire", BONEYARD_KILLSTREAK_WEIGHT, maps\mp\killstreaks\_airdrop::killstreakCrateThink, maps\mp\killstreaks\_airdrop::get_friendly_crate_model(), maps\mp\killstreaks\_airdrop::get_enemy_crate_model(), &"MP_BONEYARD_NS_F1_ENGINE_FIRE_PICKUP");
 
   if(isDefined(game["player_holding_level_killstreak"]) && IsAlive(game["player_holding_level_killstreak"])) {
     level.ks_vertical.player = game["player_holding_level_killstreak"];

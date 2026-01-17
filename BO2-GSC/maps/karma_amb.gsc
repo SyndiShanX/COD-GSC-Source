@@ -9,12 +9,12 @@
 
 main() {
   level thread wait_for_bullet_fire();
-  array_thread(getentarray("advertisement", "targetname"), ::advertisements);
+  array_thread(getEntArray("advertisement", "targetname"), ::advertisements);
 }
 
 wait_for_bullet_fire() {
   level waittill("club_shoot_target_down");
-  level.player playsound("evt_solar_slow_bullet");
+  level.player playSound("evt_solar_slow_bullet");
 }
 
 vtol_doors_open(brah) {
@@ -23,17 +23,17 @@ vtol_doors_open(brah) {
 
 advertisements() {
   if(self.script_noteworthy == "solar")
-    self playloopsound("vox_ads_1_01_005a_pa");
+    self playLoopSound("vox_ads_1_01_005a_pa");
 
   if(self.script_noteworthy == "mall")
-    self playloopsound("vox_ads_1_01_003a_pa");
+    self playLoopSound("vox_ads_1_01_003a_pa");
 
   if(self.script_noteworthy == "pool")
-    self playloopsound("vox_ads_1_01_006a_pa");
+    self playLoopSound("vox_ads_1_01_006a_pa");
 
   self waittill("damage");
   self stoploopsound();
-  self playloopsound("amb_" + self.script_noteworthy + "_damaged_ad");
+  self playLoopSound("amb_" + self.script_noteworthy + "_damaged_ad");
 }
 
 duck_club_music() {

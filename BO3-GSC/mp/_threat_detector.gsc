@@ -16,22 +16,22 @@
 #namespace threat_detector;
 
 function autoexec __init__sytem__() {
-  system::register("threat_detector", & __init__, undefined, undefined);
+  system::register("threat_detector", &__init__, undefined, undefined);
 }
 
 function __init__() {
   clientfield::register("missile", "threat_detector", 1, 1, "int");
-  callback::add_weapon_watcher( & createthreatdetectorwatcher);
+  callback::add_weapon_watcher(&createthreatdetectorwatcher);
 }
 
 function createthreatdetectorwatcher() {
   watcher = self weaponobjects::createuseweaponobjectwatcher("threat_detector", self.team);
   watcher.headicon = 0;
-  watcher.onspawn = & onspawnthreatdetector;
-  watcher.ondetonatecallback = & threatdetectordestroyed;
-  watcher.stun = & weaponobjects::weaponstun;
+  watcher.onspawn = &onspawnthreatdetector;
+  watcher.ondetonatecallback = &threatdetectordestroyed;
+  watcher.stun = &weaponobjects::weaponstun;
   watcher.stuntime = 0;
-  watcher.ondamage = & watchthreatdetectordamage;
+  watcher.ondamage = &watchthreatdetectordamage;
   watcher.enemydestroy = 1;
 }
 
@@ -41,7 +41,7 @@ function onspawnthreatdetector(watcher, player) {
   self setowner(player);
   self setteam(player.team);
   self.owner = player;
-  self playloopsound("wpn_sensor_nade_lp");
+  self playLoopSound("wpn_sensor_nade_lp");
   self hacker_tool::registerwithhackertool(level.equipmenthackertoolradius, level.equipmenthackertooltimems);
   player addweaponstat(self.weapon, "used", 1);
   self thread watchforstationary(player);
@@ -58,20 +58,20 @@ function watchforstationary(owner) {
 }
 
 function tracksensorgrenadevictim(victim) {
-  if(!isdefined(self.sensorgrenadedata)) {
+  if(!isDefined(self.sensorgrenadedata)) {
     self.sensorgrenadedata = [];
   }
-  if(!isdefined(self.sensorgrenadedata[victim.clientid])) {
+  if(!isDefined(self.sensorgrenadedata[victim.clientid])) {
     self.sensorgrenadedata[victim.clientid] = gettime();
   }
   self clientfield::set_to_player("threat_detected", 1);
 }
 
 function threatdetectordestroyed(attacker, weapon, target) {
-  if(!isdefined(weapon) || !weapon.isemp) {
-    playfx(level._equipment_explode_fx, self.origin);
+  if(!isDefined(weapon) || !weapon.isemp) {
+    playFX(level._equipment_explode_fx, self.origin);
   }
-  if(isdefined(attacker)) {
+  if(isDefined(attacker)) {
     if(self.owner util::isenemyplayer(attacker)) {
       attacker challenges::destroyedequipment(weapon);
       scoreevents::processscoreevent("destroyed_motion_sensor", attacker, self.owner, weapon);
@@ -84,16 +84,16 @@ function threatdetectordestroyed(attacker, weapon, target) {
 function watchthreatdetectordamage(watcher) {
   self endon("death");
   self endon("hacked");
-  self setcandamage(1);
+  self setCanDamage(1);
   damagemax = 1;
   if(!self util::ishacked()) {
     self.damagetaken = 0;
   }
-  while (true) {
+  while(true) {
     self.maxhealth = 100000;
     self.health = self.maxhealth;
     self waittill("damage", damage, attacker, direction, point, type, tagname, modelname, partname, weapon, idflags);
-    if(!isdefined(attacker) || !isplayer(attacker)) {
+    if(!isDefined(attacker) || !isplayer(attacker)) {
       continue;
     }
     if(level.teambased && isplayer(attacker)) {

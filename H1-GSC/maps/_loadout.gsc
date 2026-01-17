@@ -10,10 +10,10 @@ init_loadout() {
 }
 
 give_loadout() {
-  if(isdefined(level.dodgeloadout)) {
+  if(isDefined(level.dodgeloadout)) {
     return;
   }
-  if(!isdefined(level.campaign))
+  if(!isDefined(level.campaign))
     level.campaign = "american";
 
   var_0 = maps\_loadout_code::get_loadout();

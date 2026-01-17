@@ -188,7 +188,7 @@ bowie_show(player) {
     yaw = weapon_yaw + 90;
   }
   self.og_origin = self.origin;
-  self.origin = self.origin + (AnglesToForward((0, yaw, 0)) * 8);
+  self.origin = self.origin + (anglesToForward((0, yaw, 0)) * 8);
   wait(0.05);
   self Show();
   play_sound_at_pos("weapon_show", self.origin, self);

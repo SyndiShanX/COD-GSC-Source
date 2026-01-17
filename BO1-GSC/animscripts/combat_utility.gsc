@@ -377,7 +377,7 @@ shotgunPumpSound(animName) {
   self endon("shotgun_pump_sound_end");
   self thread stopShotgunPumpAfterTime(2.0);
   self waittillmatch(animName, "rechamber");
-  self PlaySound("wpn_shotgun_pump");
+  self playSound("wpn_shotgun_pump");
   self notify("shotgun_pump_sound_end");
 }
 
@@ -834,7 +834,7 @@ watchGrenadeTowardsPlayer(nextGrenadeTimeToUse) {
 
 watchGrenadeTowardsPlayerInternal(nextGrenadeTimeToUse) {
   activeGrenadeTimer = self.activeGrenadeTimer;
-  timeoutObj = SpawnStruct();
+  timeoutObj = spawnStruct();
   timeoutObj thread watchGrenadeTowardsPlayerTimeout(5);
   timeoutObj endon("watchGrenadeTowardsPlayerTimeout");
   type = self.grenadeWeapon;
@@ -909,7 +909,7 @@ detachGrenadeOnScriptChange(model, tag) {
 }
 
 offsetToOrigin(start) {
-  forward = AnglesToForward(self.angles);
+  forward = anglesToForward(self.angles);
   right = AnglesToRight(self.angles);
   up = anglestoup(self.angles);
   forward = vector_scale(forward, start[0]);

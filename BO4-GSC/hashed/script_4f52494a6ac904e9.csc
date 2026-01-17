@@ -8,7 +8,6 @@
 #include scripts\core_common\postfx_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace namespace_1d05befd;
 
 autoexec __init__system__() {
@@ -24,11 +23,11 @@ __init__() {
   clientfield::register("toplayer", "zombie_electric_burst_postfx_clientfield", 21000, 1, "counter", &function_4d29fadf, 0, 0);
 }
 
-private function_65089f84(localclientnum) {
-  if(isDefined(self.subarchetype) && self.subarchetype == #"zombie_electric") {}
+function_65089f84(localclientnum) {
+  if(isDefined(self.subarchetype) && self.subarchetype == # "zombie_electric") {}
 }
 
-private zombie_electric_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+zombie_electric_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self util::waittill_dobj(localclientnum);
 
   if(isDefined(self)) {
@@ -44,7 +43,7 @@ private zombie_electric_fx(localclientnum, oldval, newval, bnewent, binitialsnap
   }
 }
 
-private function_8f477183(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+function_8f477183(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self util::waittill_dobj(localclientnum);
 
   if(isDefined(self) && newval) {
@@ -52,7 +51,7 @@ private function_8f477183(localclientnum, oldval, newval, bnewent, binitialsnap,
   }
 }
 
-private function_c9f98c07(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+function_c9f98c07(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self util::waittill_dobj(localclientnum);
 
   if(isDefined(self) && newval) {
@@ -60,7 +59,7 @@ private function_c9f98c07(localclientnum, oldval, newval, bnewent, binitialsnap,
   }
 }
 
-private function_4d29fadf(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
+function_4d29fadf(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   self util::waittill_dobj(localclientnum);
 
   if(isDefined(self) && newval) {
@@ -68,7 +67,7 @@ private function_4d29fadf(localclientnum, oldval, newval, bnewent, binitialsnap,
   }
 }
 
-private function_93585307(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+function_93585307(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self util::waittill_dobj(localclientnum);
 
   if(isDefined(self)) {

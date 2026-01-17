@@ -16,43 +16,43 @@
 #namespace zm_bgb_eye_candy;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_eye_candy", & __init__, undefined, "bgb");
+  system::register("zm_bgb_eye_candy", &__init__, undefined, "bgb");
 }
 
 function __init__() {
-  if(!(isdefined(level.bgb_in_use) && level.bgb_in_use)) {
+  if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
-  bgb::register("zm_bgb_eye_candy", "activated", 5, undefined, undefined, & validation, & activation);
-  if(!isdefined(level.vsmgr_prio_visionset_zm_bgb_eye_candy_1)) {
+  bgb::register("zm_bgb_eye_candy", "activated", 5, undefined, undefined, &validation, &activation);
+  if(!isDefined(level.vsmgr_prio_visionset_zm_bgb_eye_candy_1)) {
     level.vsmgr_prio_visionset_zm_bgb_eye_candy_1 = 113;
   }
   visionset_mgr::register_info("visionset", "zm_bgb_eye_candy_vs_1", 21000, level.vsmgr_prio_visionset_zm_bgb_eye_candy_1, 31, 1);
-  if(!isdefined(level.vsmgr_prio_overlay_zm_bgb_eye_candy_1)) {
+  if(!isDefined(level.vsmgr_prio_overlay_zm_bgb_eye_candy_1)) {
     level.vsmgr_prio_overlay_zm_bgb_eye_candy_1 = 113;
   }
   visionset_mgr::register_info("overlay", "zm_bgb_eye_candy_vs_1", 21000, level.vsmgr_prio_overlay_zm_bgb_eye_candy_1, 1, 1);
-  if(!isdefined(level.vsmgr_prio_visionset_zm_bgb_eye_candy_2)) {
+  if(!isDefined(level.vsmgr_prio_visionset_zm_bgb_eye_candy_2)) {
     level.vsmgr_prio_visionset_zm_bgb_eye_candy_2 = 114;
   }
   visionset_mgr::register_info("visionset", "zm_bgb_eye_candy_vs_2", 21000, level.vsmgr_prio_visionset_zm_bgb_eye_candy_2, 31, 1);
-  if(!isdefined(level.vsmgr_prio_overlay_zm_bgb_eye_candy_2)) {
+  if(!isDefined(level.vsmgr_prio_overlay_zm_bgb_eye_candy_2)) {
     level.vsmgr_prio_overlay_zm_bgb_eye_candy_2 = 114;
   }
   visionset_mgr::register_info("overlay", "zm_bgb_eye_candy_vs_2", 21000, level.vsmgr_prio_overlay_zm_bgb_eye_candy_2, 1, 1);
-  if(!isdefined(level.vsmgr_prio_visionset_zm_bgb_eye_candy_3)) {
+  if(!isDefined(level.vsmgr_prio_visionset_zm_bgb_eye_candy_3)) {
     level.vsmgr_prio_visionset_zm_bgb_eye_candy_3 = 115;
   }
   visionset_mgr::register_info("visionset", "zm_bgb_eye_candy_vs_3", 21000, level.vsmgr_prio_visionset_zm_bgb_eye_candy_3, 31, 1);
-  if(!isdefined(level.vsmgr_prio_overlay_zm_bgb_eye_candy_3)) {
+  if(!isDefined(level.vsmgr_prio_overlay_zm_bgb_eye_candy_3)) {
     level.vsmgr_prio_overlay_zm_bgb_eye_candy_3 = 115;
   }
   visionset_mgr::register_info("overlay", "zm_bgb_eye_candy_vs_3", 21000, level.vsmgr_prio_overlay_zm_bgb_eye_candy_3, 1, 1);
-  if(!isdefined(level.vsmgr_prio_visionset_zm_bgb_eye_candy_4)) {
+  if(!isDefined(level.vsmgr_prio_visionset_zm_bgb_eye_candy_4)) {
     level.vsmgr_prio_visionset_zm_bgb_eye_candy_4 = 116;
   }
   visionset_mgr::register_info("visionset", "zm_bgb_eye_candy_vs_4", 21000, level.vsmgr_prio_visionset_zm_bgb_eye_candy_4, 31, 1);
-  if(!isdefined(level.vsmgr_prio_overlay_zm_bgb_eye_candy_4)) {
+  if(!isDefined(level.vsmgr_prio_overlay_zm_bgb_eye_candy_4)) {
     level.vsmgr_prio_overlay_zm_bgb_eye_candy_4 = 116;
   }
   visionset_mgr::register_info("overlay", "zm_bgb_eye_candy_vs_4", 21000, level.vsmgr_prio_overlay_zm_bgb_eye_candy_4, 1, 1);
@@ -61,16 +61,16 @@ function __init__() {
   clientfield::register("toplayer", "eye_candy_render", 21000, n_bits, "int");
   clientfield::register("actor", "eye_candy_active", 21000, 1, "int");
   clientfield::register("vehicle", "eye_candy_active", 21000, 1, "int");
-  spawner::add_global_spawn_function("axis", & function_b390826f);
+  spawner::add_global_spawn_function("axis", &function_b390826f);
 }
 
 function validation() {
-  return !(isdefined(self bgb::get_active()) && self bgb::get_active());
+  return !(isDefined(self bgb::get_active()) && self bgb::get_active());
 }
 
 function activation() {
   self endon("disconnect");
-  if(!isdefined(self.var_e20073c4)) {
+  if(!isDefined(self.var_e20073c4)) {
     self.var_e20073c4 = 0;
     self.var_29cebda6 = arraycopy(level.var_29cebda6);
     self.var_29cebda6 = array::randomize(self.var_29cebda6);
@@ -129,7 +129,7 @@ function function_b390826f() {
 function function_3b5b1f1e() {
   self endon("hash_67d0cc9f");
   self waittill("death");
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     self function_67d0cc9f();
   }
 }

@@ -10,7 +10,6 @@
 #include scripts\zm_common\zm_loadout;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
-
 #namespace namespace_e7fb1aea;
 
 autoexec __init__system__() {
@@ -25,7 +24,7 @@ __init__() {
   zm_trial::register_challenge(#"hash_6e4fd4c82cd73524", &on_begin, &on_end);
 }
 
-private on_begin(n_kill_count) {
+on_begin(n_kill_count) {
   level.var_f7e95a13 = zm_trial::function_5769f26a(n_kill_count);
 
   foreach(player in getplayers()) {
@@ -38,7 +37,7 @@ private on_begin(n_kill_count) {
   callback::on_ai_killed(&on_ai_killed);
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   var_7df0eb27 = level.var_f7e95a13;
   level.var_f7e95a13 = undefined;
 
@@ -82,7 +81,7 @@ private on_end(round_reset) {
   }
 }
 
-private on_ai_killed(params) {
+on_ai_killed(params) {
   e_attacker = params.eattacker;
 
   if(!isplayer(e_attacker)) {
@@ -99,13 +98,13 @@ private on_ai_killed(params) {
   }
 }
 
-private function_d99b4aa5() {
+function_d99b4aa5() {
   foreach(e_player in getplayers()) {
     e_player gadgetpowerset(level.var_a53a05b5, 100);
   }
 }
 
-private on_death(params) {
+on_death(params) {
   if(isDefined(self.var_76bb4a3e) && self.var_76bb4a3e < level.var_f7e95a13) {
     zm_trial::fail(#"hash_18fa90427a117729", array(self));
   }

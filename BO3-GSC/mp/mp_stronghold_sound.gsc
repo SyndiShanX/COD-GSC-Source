@@ -12,13 +12,13 @@ function main() {
 
 function snd_dmg_chant() {
   trigger = getent("snd_chant", "targetname");
-  if(!isdefined(trigger)) {
+  if(!isDefined(trigger)) {
     return;
   }
-  while (true) {
+  while(true) {
     trigger waittill("trigger", who);
     if(isplayer(who)) {
-      trigger playsound("amb_monk_chant");
+      trigger playSound("amb_monk_chant");
     }
   }
 }

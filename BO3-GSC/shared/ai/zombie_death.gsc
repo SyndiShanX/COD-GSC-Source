@@ -12,12 +12,12 @@
 
 function on_fire_timeout() {
   self endon("death");
-  if(isdefined(self.flame_fx_timeout)) {
+  if(isDefined(self.flame_fx_timeout)) {
     wait(self.flame_fx_timeout);
   } else {
     wait(12);
   }
-  if(isdefined(self) && isalive(self)) {
+  if(isDefined(self) && isalive(self)) {
     self.is_on_fire = 0;
     self notify("stop_flame_damage");
   }
@@ -25,37 +25,37 @@ function on_fire_timeout() {
 
 function flame_death_fx() {
   self endon("death");
-  if(isdefined(self.is_on_fire) && self.is_on_fire) {
+  if(isDefined(self.is_on_fire) && self.is_on_fire) {
     return;
   }
-  if(isdefined(self.disable_flame_fx) && self.disable_flame_fx) {
+  if(isDefined(self.disable_flame_fx) && self.disable_flame_fx) {
     return;
   }
   self.is_on_fire = 1;
   self thread on_fire_timeout();
-  if(isdefined(level._effect) && isdefined(level._effect["character_fire_death_torso"])) {
+  if(isDefined(level._effect) && isDefined(level._effect["character_fire_death_torso"])) {
     fire_tag = "j_spinelower";
     fire_death_torso_fx = level._effect["character_fire_death_torso"];
-    if(isdefined(self.weapon_specific_fire_death_torso_fx)) {
+    if(isDefined(self.weapon_specific_fire_death_torso_fx)) {
       fire_death_torso_fx = self.weapon_specific_fire_death_torso_fx;
     }
-    if(!isdefined(self gettagorigin(fire_tag))) {
+    if(!isDefined(self gettagorigin(fire_tag))) {
       fire_tag = "tag_origin";
     }
-    if(!isdefined(self.isdog) || !self.isdog) {
-      playfxontag(fire_death_torso_fx, self, fire_tag);
+    if(!isDefined(self.isdog) || !self.isdog) {
+      playFXOnTag(fire_death_torso_fx, self, fire_tag);
     }
     self.weapon_specific_fire_death_torso_fx = undefined;
   } else {
     println("");
   }
-  if(isdefined(level._effect) && isdefined(level._effect["character_fire_death_sm"])) {
+  if(isDefined(level._effect) && isDefined(level._effect["character_fire_death_sm"])) {
     if(self.archetype !== "parasite" && self.archetype !== "raps" && self.archetype !== "spider") {
       fire_death_sm_fx = level._effect["character_fire_death_sm"];
-      if(isdefined(self.weapon_specific_fire_death_sm_fx)) {
+      if(isDefined(self.weapon_specific_fire_death_sm_fx)) {
         fire_death_sm_fx = self.weapon_specific_fire_death_sm_fx;
       }
-      if(isdefined(self.weapon_specific_fire_death_torso_fx)) {
+      if(isDefined(self.weapon_specific_fire_death_torso_fx)) {
         fire_death_torso_fx = self.weapon_specific_fire_death_torso_fx;
       }
       wait(1);
@@ -65,17 +65,17 @@ function flame_death_fx() {
       tagarray[2] = "J_Knee_RI";
       tagarray[3] = "J_Knee_LE";
       tagarray = randomize_array(tagarray);
-      playfxontag(fire_death_sm_fx, self, tagarray[0]);
+      playFXOnTag(fire_death_sm_fx, self, tagarray[0]);
       wait(1);
       tagarray[0] = "J_Wrist_RI";
       tagarray[1] = "J_Wrist_LE";
-      if(!isdefined(self.a.gib_ref) || self.a.gib_ref != "no_legs") {
+      if(!isDefined(self.a.gib_ref) || self.a.gib_ref != "no_legs") {
         tagarray[2] = "J_Ankle_RI";
         tagarray[3] = "J_Ankle_LE";
       }
       tagarray = randomize_array(tagarray);
-      playfxontag(fire_death_sm_fx, self, tagarray[0]);
-      playfxontag(fire_death_sm_fx, self, tagarray[1]);
+      playFXOnTag(fire_death_sm_fx, self, tagarray[0]);
+      playFXOnTag(fire_death_sm_fx, self, tagarray[1]);
       self.weapon_specific_fire_death_sm_fx = undefined;
     }
   } else {
@@ -84,7 +84,7 @@ function flame_death_fx() {
 }
 
 function randomize_array(array) {
-  for (i = 0; i < array.size; i++) {
+  for(i = 0; i < array.size; i++) {
     j = randomint(array.size);
     temp = array[i];
     array[i] = array[j];
@@ -102,7 +102,7 @@ function set_last_gib_time() {
 }
 
 function get_gib_ref(direction) {
-  if(isdefined(self.a.gib_ref)) {
+  if(isDefined(self.a.gib_ref)) {
     return;
   }
   if(self.damagetaken < 165) {
@@ -166,10 +166,10 @@ function get_random(array) {
 }
 
 function do_gib() {
-  if(!isdefined(self.a.gib_ref)) {
+  if(!isDefined(self.a.gib_ref)) {
     return;
   }
-  if(isdefined(self.is_on_fire) && self.is_on_fire) {
+  if(isDefined(self.is_on_fire) && self.is_on_fire) {
     return;
   }
   switch (self.a.gib_ref) {

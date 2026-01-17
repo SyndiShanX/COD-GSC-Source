@@ -7,8 +7,7 @@
 #include clientscripts\mp\createfx\mp_turbine_fx;
 #include clientscripts\mp\_fx;
 
-precache_scripted_fx() {
-}
+precache_scripted_fx() {}
 
 #using_animtree("fxanim_props");
 

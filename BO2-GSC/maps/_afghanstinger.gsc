@@ -79,7 +79,7 @@ _afghanstinger_impact_check(e_missile) {
 
 _afghanstinger_fireballs_think(v_explode_point) {
   v_end_pos = v_explode_point - vectorscale((0, 0, 1), 8000.0);
-  a_ground_trace = bullettrace(v_explode_point, v_end_pos, 0, self);
+  a_ground_trace = bulletTrace(v_explode_point, v_end_pos, 0, self);
 
   if(a_ground_trace["position"] == v_end_pos)
     return false;
@@ -104,9 +104,9 @@ _afghanstinger_fireballs_think(v_explode_point) {
 
 _fireball_drop(v_start) {
   m_fireball = spawn_model("tag_origin", v_start, (0, 0, 0));
-  playfxontag(level._effect["_afghanstinger_trail"], m_fireball, "tag_origin");
+  playFXOnTag(level._effect["_afghanstinger_trail"], m_fireball, "tag_origin");
   v_end_pos = v_start - vectorscale((0, 0, 1), 8000.0);
-  a_ground_trace = bullettrace(v_start, v_end_pos, 0, m_fireball);
+  a_ground_trace = bulletTrace(v_start, v_end_pos, 0, m_fireball);
   n_fall_dist = length(a_ground_trace["position"] - v_start);
   n_fall_time = n_fall_dist / 900;
 
@@ -121,7 +121,7 @@ _fireball_drop(v_start) {
   }
 
   v_final_pos = m_fireball.origin;
-  playfx(level._effect["_afghanstinger_impact"], v_final_pos, (1, 0, 0), (0, 0, 1));
+  playFX(level._effect["_afghanstinger_impact"], v_final_pos, (1, 0, 0), (0, 0, 1));
   radiusdamage(v_final_pos, 200, 200, 100, self, "MOD_PROJECTILE", "afghanstinger_sp");
   m_fireball delete();
   self thread _fireball_do_damage(v_final_pos);

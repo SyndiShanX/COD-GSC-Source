@@ -78,11 +78,11 @@ horse_feet(localclientnum, note, ground_type) {
     sound_alias = sound_alias + "_npc";
 
   sound_alias = sound_alias + "_" + ground_type;
-  playsound(localclientnum, sound_alias, origin);
+  playSound(localclientnum, sound_alias, origin);
   effect = getfooteffect(ground_type);
 
   if(isDefined(effect))
-    playfx(localclientnum, effect, origin, (0, 0, 1));
+    playFX(localclientnum, effect, origin, (0, 0, 1));
 
   if(self islocalclientdriver(localclientnum)) {
     if(note == "step_front_left_walk" || note == "step_rear_left_walk" || note == "step_front_left_trot" || note == "step_rear_left_trot" || note == "step_front_left_run" || note == "step_rear_left_run" || note == "step_front_left_canter" || note == "step_rear_left_canter" || note == "step_front_left_sprint" || note == "step_rear_left_sprint") {

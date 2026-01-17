@@ -53,17 +53,17 @@ function autoexec opt_in() {
   level._effect["zm_bgb_machine_bulb_time"] = "zombie/fx_bgb_machine_bulb_time_factory_zmb";
   level._effect["zm_bgb_machine_light_interior"] = "zombie/fx_bgb_machine_light_interior_factory_zmb";
   level._effect["zm_bgb_machine_light_interior_away"] = "zombie/fx_bgb_machine_light_interior_away_factory_zmb";
-  clientfield::register("world", "console_blue", 1, 1, "int", & console_blue, 0, 0);
-  clientfield::register("world", "console_green", 1, 1, "int", & console_green, 0, 0);
-  clientfield::register("world", "console_red", 1, 1, "int", & console_red, 0, 0);
-  clientfield::register("world", "console_start", 1, 1, "int", & console_start, 0, 0);
-  clientfield::register("toplayer", "lightning_strike", 1, 1, "counter", & lightning_strike, 0, 0);
+  clientfield::register("world", "console_blue", 1, 1, "int", &console_blue, 0, 0);
+  clientfield::register("world", "console_green", 1, 1, "int", &console_green, 0, 0);
+  clientfield::register("world", "console_red", 1, 1, "int", &console_red, 0, 0);
+  clientfield::register("world", "console_start", 1, 1, "int", &console_start, 0, 0);
+  clientfield::register("toplayer", "lightning_strike", 1, 1, "counter", &lightning_strike, 0, 0);
 }
 
 function main() {
   zm_factory_ffotd::main_start();
   zm_factory_fx::main();
-  level.setupcustomcharacterexerts = & setup_personality_character_exerts;
+  level.setupcustomcharacterexerts = &setup_personality_character_exerts;
   level.legacy_cymbal_monkey = 1;
   level._effect["eye_glow"] = "zombie/fx_glow_eye_orange";
   level._effect["headshot"] = "zombie/fx_bul_flesh_head_fatal_zmb";
@@ -82,8 +82,8 @@ function main() {
   _zm_weap_tesla::init();
   level thread zm_factory_amb::main();
   level thread power_on_fxanims();
-  callback::on_localclient_connect( & on_player_connected);
-  callback::on_spawned( & on_player_spawned);
+  callback::on_localclient_connect(&on_player_connected);
+  callback::on_spawned(&on_player_spawned);
   level thread function_e0500062();
   zm_factory_ffotd::main_end();
   util::waitforclient(0);
@@ -96,7 +96,7 @@ function on_player_connected(localclientnum) {
   }
   wait(0.05);
   keys = getarraykeys(level._active_wallbuys);
-  for (i = 0; i < keys.size; i++) {
+  for(i = 0; i < keys.size; i++) {
     wallbuy = level._active_wallbuys[keys[i]];
     stopfx(localclientnum, wallbuy.fx[localclientnum]);
   }
@@ -118,14 +118,14 @@ function player_snow_thread(localclientnum) {
   if(1 == getdvarint("movie_intro")) {
     return;
   }
-  if(!self islocalplayer() || !isdefined(self getlocalclientnumber()) || localclientnum != self getlocalclientnumber()) {
+  if(!self islocalplayer() || !isDefined(self getlocalclientnumber()) || localclientnum != self getlocalclientnumber()) {
     return;
   }
-  while (true) {
-    if(!isdefined(self)) {
+  while(true) {
+    if(!isDefined(self)) {
       return;
     }
-    fxid = playfx(localclientnum, level._effect["player_snow"], self.origin);
+    fxid = playFX(localclientnum, level._effect["player_snow"], self.origin);
     setfxoutdoor(localclientnum, fxid);
     wait(0.25);
   }
@@ -191,8 +191,8 @@ function fx_overrides() {
 
 function function_e0500062() {
   level waittill("sndsb");
-  playsound(0, "zmb_robothead_laser", (-434, 706, 439));
-  playsound(0, "zmb_robothead_reflection_laser", (-451, -397, 294));
+  playSound(0, "zmb_robothead_laser", (-434, 706, 439));
+  playSound(0, "zmb_robothead_reflection_laser", (-451, -397, 294));
 }
 
 function console_blue(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -244,7 +244,7 @@ function console_start(localclientnum, oldval, newval, bnewent, binitialsnap, fi
 
 function lightning_strike(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   setukkoscriptindex(localclientnum, 1, 1);
-  playsound(0, "amb_lightning_dist_low", (0, 0, 0));
+  playSound(0, "amb_lightning_dist_low", (0, 0, 0));
   wait(0.02);
   setukkoscriptindex(localclientnum, 3, 1);
   wait(0.15);

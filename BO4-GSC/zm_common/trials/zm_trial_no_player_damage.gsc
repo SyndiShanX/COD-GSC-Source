@@ -7,7 +7,6 @@
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_trial;
-
 #namespace zm_trial_no_player_damage;
 
 autoexec __init__system__() {
@@ -22,19 +21,19 @@ __init__() {
   zm_trial::register_challenge(#"no_player_damage", &on_begin, &on_end);
 }
 
-private on_begin() {
+on_begin() {
   foreach(player in getplayers()) {
     player callback::on_player_damage(&on_player_damage);
   }
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   foreach(player in getplayers()) {
     player callback::remove_on_player_damage(&on_player_damage);
   }
 }
 
-private on_player_damage(params) {
+on_player_damage(params) {
   if((isai(params.eattacker) || isai(params.einflictor)) && (params.idamage > 0 || isDefined(self.armor) && self.armor > 0)) {
     var_57807cdc = [];
     array::add(var_57807cdc, self, 0);

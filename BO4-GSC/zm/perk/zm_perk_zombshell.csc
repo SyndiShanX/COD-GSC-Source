@@ -8,7 +8,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm_perks;
-
 #namespace zm_perk_zombshell;
 
 autoexec __init__system__() {
@@ -20,18 +19,18 @@ __init__() {
     zm_perks::register_perk_clientfields(#"specialty_zombshell", &function_9e1d9985, &function_d0ba0d3);
     zm_perks::register_perk_effects(#"specialty_zombshell", "zombshell_light");
     zm_perks::register_perk_init_thread(#"specialty_zombshell", &function_efe56acb);
-    zm_perks::function_b60f4a9f(#"specialty_zombshell", #"p8_zm_vapor_altar_icon_01_zombshell", "zombie/fx8_perk_altar_symbol_ambient_zombshell", #"zmperkszombshell");
+    zm_perks::function_b60f4a9f(#"specialty_zombshell", # "p8_zm_vapor_altar_icon_01_zombshell", "zombie/fx8_perk_altar_symbol_ambient_zombshell", # "zmperkszombshell");
     zm_perks::function_f3c80d73("zombie_perk_bottle_zombshell", "zombie_perk_totem_zombshell");
-    clientfield::register("scriptmover", "" + #"zombshell_aoe", 15000, 1, "int", &zombshell_aoe, 0, 0);
-    clientfield::register("toplayer", "" + #"hash_5f545b88ba3e2938", 15000, 1, "int", &function_1e112e5f, 0, 1);
-    clientfield::register("actor", "" + #"zombshell_explosion", 15000, 1, "counter", &zombshell_explosion, 0, 0);
+    clientfield::register("scriptmover", "" + # "zombshell_aoe", 15000, 1, "int", &zombshell_aoe, 0, 0);
+    clientfield::register("toplayer", "" + # "hash_5f545b88ba3e2938", 15000, 1, "int", &function_1e112e5f, 0, 1);
+    clientfield::register("actor", "" + # "zombshell_explosion", 15000, 1, "counter", &zombshell_explosion, 0, 0);
   }
 }
 
 function_efe56acb() {
-  level._effect[#"zombshell_aoe"] = #"hash_3d2e7548c7dfc406";
-  level._effect[#"zombshell_explosion"] = #"hash_1900ec48b2f264fe";
-  level._effect[#"zombie_blood_1st"] = #"player/fx8_plyr_pstfx_katana_rush_loop";
+  level._effect[# "zombshell_aoe"] = # "hash_3d2e7548c7dfc406";
+  level._effect[# "zombshell_explosion"] = # "hash_1900ec48b2f264fe";
+  level._effect[# "zombie_blood_1st"] = # "player/fx8_plyr_pstfx_katana_rush_loop";
 }
 
 function_9e1d9985() {}
@@ -44,10 +43,10 @@ zombshell_aoe(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, 
       deletefx(localclientnum, self.var_a6da95e6, 1);
     }
 
-    self.var_a6da95e6 = util::playFXOnTag(localclientnum, level._effect[#"zombshell_aoe"], self, "tag_origin");
+    self.var_a6da95e6 = util::playFXOnTag(localclientnum, level._effect[# "zombshell_aoe"], self, "tag_origin");
 
     if(!isDefined(self.var_e3d27e69)) {
-      self playSound(localclientnum, #"hash_6aa32cc737673479");
+      self playSound(localclientnum, # "hash_6aa32cc737673479");
       self.var_e3d27e69 = self playLoopSound(#"hash_d377c202c27be3f");
     }
 
@@ -60,7 +59,7 @@ zombshell_aoe(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, 
   }
 
   if(isDefined(self.var_e3d27e69)) {
-    self playSound(localclientnum, #"hash_5aa45eab2ab681e8");
+    self playSound(localclientnum, # "hash_5aa45eab2ab681e8");
     self stoploopsound(self.var_e3d27e69);
     self.var_e3d27e69 = undefined;
   }
@@ -95,11 +94,11 @@ function_1e112e5f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   if(newval == 1) {
     if(self getlocalclientnumber() === localclientnum) {
       self thread postfx::playpostfxbundle(#"hash_4c9c4b6464bd9a1c");
-      self.var_5b8b57b9[localclientnum][self.var_5b8b57b9[localclientnum].size] = playfxoncamera(localclientnum, level._effect[#"zombie_blood_1st"]);
+      self.var_5b8b57b9[localclientnum][self.var_5b8b57b9[localclientnum].size] = playfxoncamera(localclientnum, level._effect[# "zombie_blood_1st"]);
     }
   }
 }
 
 zombshell_explosion(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  util::playFXOnTag(localclientnum, level._effect[#"zombshell_explosion"], self, "j_spineupper");
+  util::playFXOnTag(localclientnum, level._effect[# "zombshell_explosion"], self, "j_spineupper");
 }

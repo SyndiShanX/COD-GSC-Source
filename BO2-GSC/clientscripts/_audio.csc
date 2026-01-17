@@ -45,7 +45,7 @@ sndvonotify(notifystring, dialog) {
   for(;;) {
     player waittill(notifystring);
     soundalias = player.teamclientprefix + "_" + dialog;
-    player playsound(0, soundalias);
+    player playSound(0, soundalias);
   }
 }
 
@@ -139,7 +139,7 @@ soundrandom_thread(localclientnum, randsound) {
       println("ambient sound at " + randsound.origin + " has undefined script_sound");
 
     } else if(level.soundrandomsplay)
-      playsound(localclientnum, randsound.script_sound, randsound.origin);
+      playSound(localclientnum, randsound.script_sound, randsound.origin);
 
     if(getdvarint(#"_id_0AEB127D") > 0)
       print3d(randsound.origin, randsound.script_sound, vectorscale((0, 1, 0), 0.8), 1, 3, 45);
@@ -157,7 +157,7 @@ create_sound_random(origin, alias, min_delay, max_delay) {
   if(!isDefined(level.user_created_soundrandoms))
     level.user_created_soundrandoms = [];
 
-  sr = spawnstruct();
+  sr = spawnStruct();
   sr.origin = origin;
   sr.script_sound = alias;
   sr.script_wait_min = min_delay;
@@ -228,8 +228,7 @@ soundloopthink() {
 
       started = !started;
     }
-  } else {
-  }
+  } else {}
 }
 
 soundlinethink() {
@@ -269,8 +268,7 @@ soundlinethink() {
 
       started = !started;
     }
-  } else {
-  }
+  } else {}
 }
 
 startsoundloops() {
@@ -307,7 +305,7 @@ startlineemitters() {
 
 init_audio_material_triggers() {
   waitforclient(0);
-  materialtrigs = getentarray(0, "audio_material_trigger", "targetname");
+  materialtrigs = getEntArray(0, "audio_material_trigger", "targetname");
 
   println("Client : " + materialtrigs.size + " audio_material_triggers.");
 
@@ -347,7 +345,7 @@ trig_leave_audio_material_trigger(player) {
 
 init_audio_step_triggers() {
   waitforclient(0);
-  trigs = getentarray(0, "audio_step_trigger", "targetname");
+  trigs = getEntArray(0, "audio_step_trigger", "targetname");
 
   println("Client : " + trigs.size + " audio_step_triggers.");
 
@@ -370,19 +368,19 @@ trig_enter_audio_step_trigger(trigplayer) {
   }
 
   if(isDefined(self.script_sound) && trigplayer getmovementtype() == "sprint")
-    self playsound(0, self.script_sound, self.origin, 9);
+    self playSound(0, self.script_sound, self.origin, 9);
 }
 
 trig_leave_audio_step_trigger(trigplayer) {
   if(isDefined(self.script_noteworthy) && trigplayer getmovementtype() == "sprint")
-    self playsound(0, self.script_noteworthy, self.origin, 9);
+    self playSound(0, self.script_noteworthy, self.origin, 9);
 
   trigplayer.step_sound = "null";
   trigplayer clearsteptriggersound();
 }
 
 bump_trigger_start() {
-  bump_trigs = getentarray(0, "audio_bump_trigger", "targetname");
+  bump_trigs = getEntArray(0, "audio_bump_trigger", "targetname");
 
   for(i = 0; i < bump_trigs.size; i++)
     bump_trigs[i] thread thread_bump_trigger();
@@ -405,15 +403,14 @@ trig_enter_bump(ent) {
 
   if(isDefined(self.script_sound) && self.script_activated) {
     if(isDefined(self.script_noteworthy) && self.script_wait > volume)
-      test_id = self playsound(0, self.script_noteworthy, self.origin, volume);
+      test_id = self playSound(0, self.script_noteworthy, self.origin, volume);
 
     if(!isDefined(self.script_wait) || self.script_wait <= volume)
-      test_id = self playsound(0, self.script_sound, self.origin, volume);
+      test_id = self playSound(0, self.script_sound, self.origin, volume);
   }
 }
 
-trig_leave_bump(ent) {
-}
+trig_leave_bump(ent) {}
 
 bump_trigger_listener() {
   if(isDefined(self.script_label)) {
@@ -449,7 +446,7 @@ start_player_health_system() {
     if(health > 40) {
       if(level.health_ambient_room_change) {
         setsoundcontext("health", "full");
-        playsound(0, "chr_health_out", (0, 0, 0));
+        playSound(0, "chr_health_out", (0, 0, 0));
         deactivateambientroom(0, "health", 100);
         level.health_ambient_room_change = 0;
         level notify("pain_out");
@@ -459,7 +456,7 @@ start_player_health_system() {
     } else {
       if(!level.health_ambient_room_change) {
         setsoundcontext("health", "half");
-        playsound(0, "chr_health_in", (0, 0, 0));
+        playSound(0, "chr_health_in", (0, 0, 0));
         activateambientroom(0, "health", 100);
         level.health_ambient_room_change = 1;
       }
@@ -494,7 +491,7 @@ pain_pulse() {
   level endon("pain_out");
 
   while(true) {
-    playsound(0, "chr_pain_pulse", (0, 0, 0));
+    playSound(0, "chr_pain_pulse", (0, 0, 0));
     wait 0.3;
   }
 }
@@ -562,7 +559,7 @@ stoploopat(aliasname, origin, stopsoundalias) {
   soundstoploopemitter(aliasname, origin);
 
   if(isDefined(stopsoundalias))
-    playsound(0, stopsoundalias, origin);
+    playSound(0, stopsoundalias, origin);
 }
 
 snd_add_exploder_alias(num, alias) {
@@ -676,7 +673,7 @@ snd_play_auto_fx(fxid, alias, offsetx, offsety, offsetz, onground, area, thresho
         y = y / a_temp_array.size;
         z = z / a_temp_array.size;
         n_new_array_index = a_fx_result_origin.size;
-        a_fx_result_origin[n_new_array_index] = spawnstruct();
+        a_fx_result_origin[n_new_array_index] = spawnStruct();
         a_fx_result_origin[n_new_array_index].origin = (x, y, z);
         a_fx_result_origin[n_new_array_index].alias_override = 1;
         continue;
@@ -684,7 +681,7 @@ snd_play_auto_fx(fxid, alias, offsetx, offsety, offsetz, onground, area, thresho
 
       for(k = 0; k < a_temp_array.size; k++) {
         n_new_array_index = a_fx_result_origin.size;
-        a_fx_result_origin[n_new_array_index] = spawnstruct();
+        a_fx_result_origin[n_new_array_index] = spawnStruct();
         a_fx_result_origin[n_new_array_index].origin = a_temp_array[k].v["origin"];
       }
     }
@@ -712,7 +709,7 @@ snd_play_auto_fx(fxid, alias, offsetx, offsety, offsetz, onground, area, thresho
       trace = undefined;
       d = undefined;
       v_fxorigin = v_origin;
-      trace = bullettrace(v_fxorigin, v_fxorigin - vectorscale((0, 0, 1), 100000.0), 0, undefined);
+      trace = bulletTrace(v_fxorigin, v_fxorigin - vectorscale((0, 0, 1), 100000.0), 0, undefined);
       d = distance(v_fxorigin, trace["position"]);
       v_origin = trace["position"];
     }
@@ -779,9 +776,9 @@ line_sound_player() {
   if(isDefined(self.script_looping)) {
     self.fake_ent = spawnfakeent(self.localclientnum);
     setfakeentorg(self.localclientnum, self.fake_ent, self.origin);
-    playloopsound(self.localclientnum, self.fake_ent, self.script_sound);
+    playLoopSound(self.localclientnum, self.fake_ent, self.script_sound);
   } else
-    playsound(self.localclientnum, self.script_sound, self.origin);
+    playSound(self.localclientnum, self.script_sound, self.origin);
 }
 
 soundwait(id) {
@@ -882,13 +879,13 @@ swimmingaudiodivesurface() {
     self waittill("aS_underwater");
     activateambientroom(0, "underwater", 50);
     snd_set_snapshot("spl_cmn_underwater");
-    self playsound(0, "chr_swimming_dive_start_plr");
-    self playsound(0, "chr_ear_fill");
+    self playSound(0, "chr_swimming_dive_start_plr");
+    self playSound(0, "chr_ear_fill");
     self waittill("aS_surface");
     deactivateambientroom(0, "underwater", 50);
     snd_set_snapshot("default");
-    self playsound(0, "chr_swimming_surface_plr");
-    self playsound(0, "chr_ear_drain");
+    self playSound(0, "chr_swimming_surface_plr");
+    self playSound(0, "chr_ear_drain");
   }
 }
 
@@ -948,7 +945,7 @@ projectilewhizbydistancecheck(projectile, alais, distance) {
     projectiledistance = distancesquared(projectile.origin, players[0].origin);
 
     if(projectiledistance <= distance * distance) {
-      projectile playsound(0, alais);
+      projectile playSound(0, alais);
       return;
     }
 
@@ -977,7 +974,7 @@ play_water_loop(loop, splash, maxspeed) {
   newsoundent linkto(self, "tag_origin", (0, 100, 100));
   level.watersoundent[level.watersoundent.size] = newsoundent;
   volume = 0.0;
-  id = newsoundent playloopsound(loop);
+  id = newsoundent playLoopSound(loop);
   setsoundvolume(id, volume);
 
   while(true) {
@@ -991,7 +988,7 @@ play_water_loop(loop, splash, maxspeed) {
 
     if(self isvehicleinwater()) {
       if(isDefined(self.shouldplaysplash)) {
-        self playsound(0, splash, self.origin, volume);
+        self playSound(0, splash, self.origin, volume);
         self.shouldplaysplash = undefined;
       }
 

@@ -136,7 +136,7 @@ tweakart() {
       setdvar("scr_art_sun_fog_dir_set", "0");
       println("Setting sun fog direction to facing of player");
       players = get_players();
-      dir = vectornormalize(anglestoforward(players[0] getplayerangles()));
+      dir = vectornormalize(anglesToForward(players[0] getplayerangles()));
       level.fogsundir = [];
       level.fogsundir[0] = dir[0];
       level.fogsundir[1] = dir[1];

@@ -92,23 +92,23 @@ init_powerups() {
   if(!isDefined(level.zombie_special_drop_array))
     level.zombie_special_drop_array = [];
 
-  add_zombie_powerup("nuke", "zombie_bomb", & "ZOMBIE_POWERUP_NUKE", ::func_should_always_drop, 0, 0, 0, "misc/fx_zombie_mini_nuke_hotness");
-  add_zombie_powerup("insta_kill", "zombie_skull", & "ZOMBIE_POWERUP_INSTA_KILL", ::func_should_always_drop, 0, 0, 0, undefined, "powerup_instant_kill", "zombie_powerup_insta_kill_time", "zombie_powerup_insta_kill_on");
-  add_zombie_powerup("full_ammo", "zombie_ammocan", & "ZOMBIE_POWERUP_MAX_AMMO", ::func_should_always_drop, 0, 0, 0);
-  add_zombie_powerup("double_points", "zombie_x2_icon", & "ZOMBIE_POWERUP_DOUBLE_POINTS", ::func_should_always_drop, 0, 0, 0, undefined, "powerup_double_points", "zombie_powerup_point_doubler_time", "zombie_powerup_point_doubler_on");
-  add_zombie_powerup("carpenter", "zombie_carpenter", & "ZOMBIE_POWERUP_MAX_AMMO", ::func_should_drop_carpenter, 0, 0, 0);
-  add_zombie_powerup("fire_sale", "zombie_firesale", & "ZOMBIE_POWERUP_MAX_AMMO", ::func_should_drop_fire_sale, 0, 0, 0, undefined, "powerup_fire_sale", "zombie_powerup_fire_sale_time", "zombie_powerup_fire_sale_on");
-  add_zombie_powerup("bonfire_sale", "zombie_pickup_bonfire", & "ZOMBIE_POWERUP_MAX_AMMO", ::func_should_never_drop, 0, 0, 0, undefined, "powerup_bon_fire", "zombie_powerup_bonfire_sale_time", "zombie_powerup_bonfire_sale_on");
-  add_zombie_powerup("minigun", "zombie_pickup_minigun", & "ZOMBIE_POWERUP_MINIGUN", ::func_should_drop_minigun, 1, 0, 0, undefined, "powerup_mini_gun", "zombie_powerup_minigun_time", "zombie_powerup_minigun_on");
-  add_zombie_powerup("free_perk", "zombie_pickup_perk_bottle", & "ZOMBIE_POWERUP_FREE_PERK", ::func_should_never_drop, 0, 0, 0);
-  add_zombie_powerup("tesla", "zombie_pickup_minigun", & "ZOMBIE_POWERUP_MINIGUN", ::func_should_never_drop, 1, 0, 0, undefined, "powerup_tesla", "zombie_powerup_tesla_time", "zombie_powerup_tesla_on");
-  add_zombie_powerup("random_weapon", "zombie_pickup_minigun", & "ZOMBIE_POWERUP_MAX_AMMO", ::func_should_never_drop, 1, 0, 0);
-  add_zombie_powerup("bonus_points_player", "zombie_z_money_icon", & "ZOMBIE_POWERUP_BONUS_POINTS", ::func_should_never_drop, 1, 0, 0);
-  add_zombie_powerup("bonus_points_team", "zombie_z_money_icon", & "ZOMBIE_POWERUP_BONUS_POINTS", ::func_should_never_drop, 0, 0, 0);
-  add_zombie_powerup("lose_points_team", "zombie_z_money_icon", & "ZOMBIE_POWERUP_LOSE_POINTS", ::func_should_never_drop, 0, 0, 1);
-  add_zombie_powerup("lose_perk", "zombie_pickup_perk_bottle", & "ZOMBIE_POWERUP_MAX_AMMO", ::func_should_never_drop, 0, 0, 1);
-  add_zombie_powerup("empty_clip", "zombie_ammocan", & "ZOMBIE_POWERUP_MAX_AMMO", ::func_should_never_drop, 0, 0, 1);
-  add_zombie_powerup("insta_kill_ug", "zombie_skull", & "ZOMBIE_POWERUP_INSTA_KILL", ::func_should_never_drop, 1, 0, 0, undefined, "powerup_instant_kill_ug", "zombie_powerup_insta_kill_ug_time", "zombie_powerup_insta_kill_ug_on", 5000);
+  add_zombie_powerup("nuke", "zombie_bomb", &"ZOMBIE_POWERUP_NUKE", ::func_should_always_drop, 0, 0, 0, "misc/fx_zombie_mini_nuke_hotness");
+  add_zombie_powerup("insta_kill", "zombie_skull", &"ZOMBIE_POWERUP_INSTA_KILL", ::func_should_always_drop, 0, 0, 0, undefined, "powerup_instant_kill", "zombie_powerup_insta_kill_time", "zombie_powerup_insta_kill_on");
+  add_zombie_powerup("full_ammo", "zombie_ammocan", &"ZOMBIE_POWERUP_MAX_AMMO", ::func_should_always_drop, 0, 0, 0);
+  add_zombie_powerup("double_points", "zombie_x2_icon", &"ZOMBIE_POWERUP_DOUBLE_POINTS", ::func_should_always_drop, 0, 0, 0, undefined, "powerup_double_points", "zombie_powerup_point_doubler_time", "zombie_powerup_point_doubler_on");
+  add_zombie_powerup("carpenter", "zombie_carpenter", &"ZOMBIE_POWERUP_MAX_AMMO", ::func_should_drop_carpenter, 0, 0, 0);
+  add_zombie_powerup("fire_sale", "zombie_firesale", &"ZOMBIE_POWERUP_MAX_AMMO", ::func_should_drop_fire_sale, 0, 0, 0, undefined, "powerup_fire_sale", "zombie_powerup_fire_sale_time", "zombie_powerup_fire_sale_on");
+  add_zombie_powerup("bonfire_sale", "zombie_pickup_bonfire", &"ZOMBIE_POWERUP_MAX_AMMO", ::func_should_never_drop, 0, 0, 0, undefined, "powerup_bon_fire", "zombie_powerup_bonfire_sale_time", "zombie_powerup_bonfire_sale_on");
+  add_zombie_powerup("minigun", "zombie_pickup_minigun", &"ZOMBIE_POWERUP_MINIGUN", ::func_should_drop_minigun, 1, 0, 0, undefined, "powerup_mini_gun", "zombie_powerup_minigun_time", "zombie_powerup_minigun_on");
+  add_zombie_powerup("free_perk", "zombie_pickup_perk_bottle", &"ZOMBIE_POWERUP_FREE_PERK", ::func_should_never_drop, 0, 0, 0);
+  add_zombie_powerup("tesla", "zombie_pickup_minigun", &"ZOMBIE_POWERUP_MINIGUN", ::func_should_never_drop, 1, 0, 0, undefined, "powerup_tesla", "zombie_powerup_tesla_time", "zombie_powerup_tesla_on");
+  add_zombie_powerup("random_weapon", "zombie_pickup_minigun", &"ZOMBIE_POWERUP_MAX_AMMO", ::func_should_never_drop, 1, 0, 0);
+  add_zombie_powerup("bonus_points_player", "zombie_z_money_icon", &"ZOMBIE_POWERUP_BONUS_POINTS", ::func_should_never_drop, 1, 0, 0);
+  add_zombie_powerup("bonus_points_team", "zombie_z_money_icon", &"ZOMBIE_POWERUP_BONUS_POINTS", ::func_should_never_drop, 0, 0, 0);
+  add_zombie_powerup("lose_points_team", "zombie_z_money_icon", &"ZOMBIE_POWERUP_LOSE_POINTS", ::func_should_never_drop, 0, 0, 1);
+  add_zombie_powerup("lose_perk", "zombie_pickup_perk_bottle", &"ZOMBIE_POWERUP_MAX_AMMO", ::func_should_never_drop, 0, 0, 1);
+  add_zombie_powerup("empty_clip", "zombie_ammocan", &"ZOMBIE_POWERUP_MAX_AMMO", ::func_should_never_drop, 0, 0, 1);
+  add_zombie_powerup("insta_kill_ug", "zombie_skull", &"ZOMBIE_POWERUP_INSTA_KILL", ::func_should_never_drop, 1, 0, 0, undefined, "powerup_instant_kill_ug", "zombie_powerup_insta_kill_ug_time", "zombie_powerup_insta_kill_ug_on", 5000);
 
   if(isDefined(level.level_specific_init_powerups))
     [[level.level_specific_init_powerups]]();
@@ -121,18 +121,10 @@ init_powerups() {
   level thread powerup_hud_monitor();
 
   if(isDefined(level.quantum_bomb_register_result_func)) {
-    [
-      [level.quantum_bomb_register_result_func]
-    ]("random_powerup", ::quantum_bomb_random_powerup_result, 5, level.quantum_bomb_in_playable_area_validation_func);
-    [
-      [level.quantum_bomb_register_result_func]
-    ]("random_zombie_grab_powerup", ::quantum_bomb_random_zombie_grab_powerup_result, 5, level.quantum_bomb_in_playable_area_validation_func);
-    [
-      [level.quantum_bomb_register_result_func]
-    ]("random_weapon_powerup", ::quantum_bomb_random_weapon_powerup_result, 60, level.quantum_bomb_in_playable_area_validation_func);
-    [
-      [level.quantum_bomb_register_result_func]
-    ]("random_bonus_or_lose_points_powerup", ::quantum_bomb_random_bonus_or_lose_points_powerup_result, 25, level.quantum_bomb_in_playable_area_validation_func);
+    [[level.quantum_bomb_register_result_func]]("random_powerup", ::quantum_bomb_random_powerup_result, 5, level.quantum_bomb_in_playable_area_validation_func);
+    [[level.quantum_bomb_register_result_func]]("random_zombie_grab_powerup", ::quantum_bomb_random_zombie_grab_powerup_result, 5, level.quantum_bomb_in_playable_area_validation_func);
+    [[level.quantum_bomb_register_result_func]]("random_weapon_powerup", ::quantum_bomb_random_weapon_powerup_result, 60, level.quantum_bomb_in_playable_area_validation_func);
+    [[level.quantum_bomb_register_result_func]]("random_bonus_or_lose_points_powerup", ::quantum_bomb_random_bonus_or_lose_points_powerup_result, 25, level.quantum_bomb_in_playable_area_validation_func);
   }
 
   registerclientfield("scriptmover", "powerup_fx", 1000, 3, "int");
@@ -193,7 +185,7 @@ powerup_hud_monitor() {
   for(powerup_key_index = 0; powerup_key_index < powerup_keys.size; powerup_key_index++) {
     if(isDefined(level.zombie_powerups[powerup_keys[powerup_key_index]].client_field_name)) {
       powerup_name = powerup_keys[powerup_key_index];
-      client_fields[powerup_name] = spawnstruct();
+      client_fields[powerup_name] = spawnStruct();
       client_fields[powerup_name].client_field_name = level.zombie_powerups[powerup_name].client_field_name;
       client_fields[powerup_name].solo = level.zombie_powerups[powerup_name].solo;
       client_fields[powerup_name].time_name = level.zombie_powerups[powerup_name].time_name;
@@ -382,7 +374,7 @@ add_zombie_powerup(powerup_name, model_name, hint, func_should_drop_with_regular
   }
   precachemodel(model_name);
   precachestring(hint);
-  struct = spawnstruct();
+  struct = spawnStruct();
 
   if(!isDefined(level.zombie_powerups))
     level.zombie_powerups = [];
@@ -452,7 +444,7 @@ powerup_drop(drop_point) {
   } else
     debug = "random";
 
-  playable_area = getentarray("player_volume", "script_noteworthy");
+  playable_area = getEntArray("player_volume", "script_noteworthy");
   level.powerup_drop_count++;
   powerup = maps\mp\zombies\_zm_net::network_safe_spawn("powerup", 1, "script_model", drop_point + vectorscale((0, 0, 1), 40.0));
   valid_drop = 0;
@@ -617,7 +609,7 @@ special_powerup_drop(drop_point) {
     return;
   }
   powerup = spawn("script_model", drop_point + vectorscale((0, 0, 1), 40.0));
-  playable_area = getentarray("player_volume", "script_noteworthy");
+  playable_area = getEntArray("player_volume", "script_noteworthy");
   valid_drop = 0;
 
   for(i = 0; i < playable_area.size; i++) {
@@ -676,7 +668,7 @@ powerup_setup(powerup_override, powerup_team, powerup_location) {
     if(isDefined(level.zombie_weapons[self.weapon].upgrade_name) && !randomint(4))
       self.weapon = level.zombie_weapons[self.weapon].upgrade_name;
 
-    self setmodel(getweaponmodel(self.weapon));
+    self setModel(getweaponmodel(self.weapon));
     self useweaponhidetags(self.weapon);
     offsetdw = vectorscale((1, 1, 1), 3.0);
     self.worldgundw = undefined;
@@ -684,12 +676,12 @@ powerup_setup(powerup_override, powerup_team, powerup_location) {
     if(maps\mp\zombies\_zm_magicbox::weapon_is_dual_wield(self.weapon)) {
       self.worldgundw = spawn("script_model", self.origin + offsetdw);
       self.worldgundw.angles = self.angles;
-      self.worldgundw setmodel(maps\mp\zombies\_zm_magicbox::get_left_hand_weapon_model_name(self.weapon));
+      self.worldgundw setModel(maps\mp\zombies\_zm_magicbox::get_left_hand_weapon_model_name(self.weapon));
       self.worldgundw useweaponhidetags(self.weapon);
       self.worldgundw linkto(self, "tag_weapon", offsetdw, (0, 0, 0));
     }
   } else
-    self setmodel(struct.model_name);
+    self setModel(struct.model_name);
 
   maps\mp\_demo::bookmark("zm_powerup_dropped", gettime(), undefined, undefined, 1);
   playsoundatposition("zmb_spawn_powerup", self.origin);
@@ -713,7 +705,7 @@ powerup_setup(powerup_override, powerup_team, powerup_location) {
   if(isDefined(struct.can_pick_up_in_last_stand))
     self.can_pick_up_in_last_stand = struct.can_pick_up_in_last_stand;
 
-  self playloopsound("zmb_spawn_powerup_loop");
+  self playLoopSound("zmb_spawn_powerup_loop");
   level.active_powerups[level.active_powerups.size] = self;
 }
 
@@ -757,7 +749,7 @@ special_drop_setup() {
     case "dog":
       if(level.round_number >= 15) {
         is_powerup = 0;
-        dog_spawners = getentarray("special_dog_spawner", "targetname");
+        dog_spawners = getEntArray("special_dog_spawner", "targetname");
         thread play_sound_2d("sam_nospawn");
       } else
         powerup = get_valid_powerup();
@@ -765,12 +757,10 @@ special_drop_setup() {
       break;
     default:
       if(isDefined(level._zombiemode_special_drop_setup))
-        is_powerup = [
-          [level._zombiemode_special_drop_setup]
-        ](powerup);
+        is_powerup = [[level._zombiemode_special_drop_setup]](powerup);
       else {
         is_powerup = 0;
-        playfx(level._effect["lightning_dog_spawn"], self.origin);
+        playFX(level._effect["lightning_dog_spawn"], self.origin);
         playsoundatposition("pre_spawn", self.origin);
         wait 1.5;
         playsoundatposition("zmb_bolt", self.origin);
@@ -784,7 +774,7 @@ special_drop_setup() {
   }
 
   if(is_powerup) {
-    playfx(level._effect["lightning_dog_spawn"], self.origin);
+    playFX(level._effect["lightning_dog_spawn"], self.origin);
     playsoundatposition("pre_spawn", self.origin);
     wait 1.5;
     playsoundatposition("zmb_bolt", self.origin);
@@ -830,8 +820,8 @@ powerup_zombie_grab(powerup_team) {
     } else if(!isDefined(who) || !isai(who)) {
       continue;
     }
-    playfx(level._effect["powerup_grabbed_red"], self.origin);
-    playfx(level._effect["powerup_grabbed_wave_red"], self.origin);
+    playFX(level._effect["powerup_grabbed_red"], self.origin);
+    playFX(level._effect["powerup_grabbed_wave_red"], self.origin);
 
     switch (self.powerup_name) {
       case "lose_points_team":
@@ -992,14 +982,14 @@ powerup_grab(powerup_team) {
         }
 
         if(self.solo) {
-          playfx(level._effect["powerup_grabbed_solo"], self.origin);
-          playfx(level._effect["powerup_grabbed_wave_solo"], self.origin);
+          playFX(level._effect["powerup_grabbed_solo"], self.origin);
+          playFX(level._effect["powerup_grabbed_wave_solo"], self.origin);
         } else if(self.caution) {
-          playfx(level._effect["powerup_grabbed_caution"], self.origin);
-          playfx(level._effect["powerup_grabbed_wave_caution"], self.origin);
+          playFX(level._effect["powerup_grabbed_caution"], self.origin);
+          playFX(level._effect["powerup_grabbed_wave_caution"], self.origin);
         } else {
-          playfx(level._effect["powerup_grabbed"], self.origin);
-          playfx(level._effect["powerup_grabbed_wave"], self.origin);
+          playFX(level._effect["powerup_grabbed"], self.origin);
+          playFX(level._effect["powerup_grabbed_wave"], self.origin);
         }
 
         if(isDefined(self.stolen) && self.stolen)
@@ -1070,7 +1060,7 @@ start_bonfire_sale(item) {
   level notify("powerup bonfire sale");
   level endon("powerup bonfire sale");
   temp_ent = spawn("script_origin", (0, 0, 0));
-  temp_ent playloopsound("zmb_double_point_loop");
+  temp_ent playLoopSound("zmb_double_point_loop");
   level.zombie_vars["zombie_powerup_bonfire_sale_on"] = 1;
   level thread toggle_bonfire_sale_on();
   level.zombie_vars["zombie_powerup_bonfire_sale_time"] = 30;
@@ -1085,7 +1075,7 @@ start_bonfire_sale(item) {
   players = get_players();
 
   for(i = 0; i < players.size; i++)
-    players[i] playsound("zmb_points_loop_off");
+    players[i] playSound("zmb_points_loop_off");
 
   temp_ent delete();
 }
@@ -1094,7 +1084,7 @@ start_carpenter(origin) {
   window_boards = getstructarray("exterior_goal", "targetname");
   total = level.exterior_goals.size;
   carp_ent = spawn("script_origin", (0, 0, 0));
-  carp_ent playloopsound("evt_carpenter");
+  carp_ent playLoopSound("evt_carpenter");
 
   while(true) {
     windows = get_closest_window_repair(window_boards, origin);
@@ -1245,9 +1235,7 @@ powerup_timeout() {
   wait_time = 15;
 
   if(isDefined(level._powerup_timeout_custom_time)) {
-    time = [
-      [level._powerup_timeout_custom_time]
-    ](self);
+    time = [[level._powerup_timeout_custom_time]](self);
 
     if(time == 0) {
       return;
@@ -1307,7 +1295,7 @@ powerup_delete_delayed(time) {
 
 nuke_powerup(drop_item, player_team) {
   location = drop_item.origin;
-  playfx(drop_item.fx, location);
+  playFX(drop_item.fx, location);
   level thread nuke_flash(player_team);
   wait 0.5;
   zombies = getaiarray(level.zombie_team);
@@ -1350,7 +1338,7 @@ nuke_powerup(drop_item, player_team) {
       if(!(isDefined(zombies_nuked[i].no_gib) && zombies_nuked[i].no_gib))
         zombies_nuked[i] maps\mp\zombies\_zm_spawner::zombie_head_gib();
 
-      zombies_nuked[i] playsound("evt_nuked");
+      zombies_nuked[i] playSound("evt_nuked");
     }
 
     zombies_nuked[i] dodamage(zombies_nuked[i].health + 666, zombies_nuked[i].origin);
@@ -1366,7 +1354,7 @@ nuke_flash(team) {
   if(isDefined(team))
     get_players()[0] playsoundtoteam("evt_nuke_flash", team);
   else
-    get_players()[0] playsound("evt_nuke_flash");
+    get_players()[0] playSound("evt_nuke_flash");
 
   fadetowhite = newhudelem();
   fadetowhite.x = 0;
@@ -1426,9 +1414,7 @@ full_ammo_powerup(drop_item, player) {
   players = get_players(player.team);
 
   if(isDefined(level._get_game_module_players))
-    players = [
-      [level._get_game_module_players]
-    ](player);
+    players = [[level._get_game_module_players]](player);
 
   for(i = 0; i < players.size; i++) {
     if(players[i] maps\mp\zombies\_zm_laststand::player_is_in_laststand()) {
@@ -1550,7 +1536,7 @@ insta_kill_on_hud(drop_item, player_team) {
 
 time_remaning_on_insta_kill_powerup(player_team) {
   temp_enta = spawn("script_origin", (0, 0, 0));
-  temp_enta playloopsound("zmb_insta_kill_loop");
+  temp_enta playLoopSound("zmb_insta_kill_loop");
 
   while(level.zombie_vars[player_team]["zombie_powerup_insta_kill_time"] >= 0) {
     wait 0.05;
@@ -1578,7 +1564,7 @@ point_doubler_on_hud(drop_item, player_team) {
 
 time_remaining_on_point_doubler_powerup(player_team) {
   temp_ent = spawn("script_origin", (0, 0, 0));
-  temp_ent playloopsound("zmb_double_point_loop");
+  temp_ent playLoopSound("zmb_double_point_loop");
 
   while(level.zombie_vars[player_team]["zombie_powerup_point_doubler_time"] >= 0) {
     wait 0.05;
@@ -1589,7 +1575,7 @@ time_remaining_on_point_doubler_powerup(player_team) {
   players = get_players(player_team);
 
   for(i = 0; i < players.size; i++)
-    players[i] playsound("zmb_points_loop_off");
+    players[i] playSound("zmb_points_loop_off");
 
   temp_ent stoploopsound(2);
   level.zombie_vars[player_team]["zombie_powerup_point_doubler_time"] = 30;
@@ -1678,9 +1664,9 @@ remove_temp_chest(chest_index) {
   for(i = 0; i < chest_index; i++)
     wait_network_frame();
 
-  playfx(level._effect["poltergeist"], level.chests[chest_index].orig_origin);
-  level.chests[chest_index].zbarrier playsound("zmb_box_poof_land");
-  level.chests[chest_index].zbarrier playsound("zmb_couch_slam");
+  playFX(level._effect["poltergeist"], level.chests[chest_index].orig_origin);
+  level.chests[chest_index].zbarrier playSound("zmb_box_poof_land");
+  level.chests[chest_index].zbarrier playSound("zmb_couch_slam");
   wait_network_frame();
   level.chests[chest_index] maps\mp\zombies\_zm_magicbox::hide_chest();
 }
@@ -1726,7 +1712,7 @@ check_for_rare_drop_override(pos) {
 
 setup_firesale_audio() {
   wait 2;
-  intercom = getentarray("intercom", "targetname");
+  intercom = getEntArray("intercom", "targetname");
 
   while(true) {
     while(level.zombie_vars["zombie_powerup_fire_sale_on"] == 0)
@@ -1747,9 +1733,9 @@ play_firesale_audio() {
     return;
   }
   if(isDefined(level.sndannouncerisrich) && level.sndannouncerisrich)
-    self playloopsound("mus_fire_sale_rich");
+    self playLoopSound("mus_fire_sale_rich");
   else
-    self playloopsound("mus_fire_sale");
+    self playLoopSound("mus_fire_sale");
 
   level waittill("firesale_over");
   self stoploopsound();
@@ -1757,7 +1743,7 @@ play_firesale_audio() {
 
 setup_bonfiresale_audio() {
   wait 2;
-  intercom = getentarray("intercom", "targetname");
+  intercom = getEntArray("intercom", "targetname");
 
   while(true) {
     while(level.zombie_vars["zombie_powerup_fire_sale_on"] == 0)
@@ -1778,9 +1764,9 @@ play_bonfiresale_audio() {
     return;
   }
   if(isDefined(level.sndannouncerisrich) && level.sndannouncerisrich)
-    self playloopsound("mus_fire_sale_rich");
+    self playLoopSound("mus_fire_sale_rich");
   else
-    self playloopsound("mus_fire_sale");
+    self playLoopSound("mus_fire_sale");
 
   level waittill("firesale_over");
   self stoploopsound();
@@ -1866,9 +1852,7 @@ bonus_points_player_powerup(item, player) {
   points = randomintrange(1, 25) * 100;
 
   if(isDefined(level.bonus_points_powerup_override))
-    points = [
-      [level.bonus_points_powerup_override]
-    ]();
+    points = [[level.bonus_points_powerup_override]]();
 
   if(!player maps\mp\zombies\_zm_laststand::player_is_in_laststand() && !(player.sessionstate == "spectator"))
     player maps\mp\zombies\_zm_score::player_add_points("bonus_points_powerup", points);
@@ -1878,9 +1862,7 @@ bonus_points_team_powerup(item) {
   points = randomintrange(1, 25) * 100;
 
   if(isDefined(level.bonus_points_powerup_override))
-    points = [
-      [level.bonus_points_powerup_override]
-    ]();
+    points = [[level.bonus_points_powerup_override]]();
 
   players = get_players();
 
@@ -2238,7 +2220,7 @@ start_carpenter_new(origin) {
     window_boards = arraycombine(window_boards, level._additional_carpenter_nodes, 0, 0);
 
   carp_ent = spawn("script_origin", (0, 0, 0));
-  carp_ent playloopsound("evt_carpenter");
+  carp_ent playLoopSound("evt_carpenter");
   boards_near_players = get_near_boards(window_boards);
   boards_far_from_players = get_far_boards(window_boards);
   level repair_far_boards(boards_far_from_players, maps\mp\zombies\_zm_powerups::is_carpenter_boards_upgraded());
@@ -2470,7 +2452,7 @@ powerup_emp() {
     level waittill("emp_detonate", origin, radius);
 
     if(distancesquared(origin, self.origin) < radius * radius) {
-      playfx(level._effect["powerup_off"], self.origin);
+      playFX(level._effect["powerup_off"], self.origin);
       self thread powerup_delete_delayed();
       self notify("powerup_timedout");
     }

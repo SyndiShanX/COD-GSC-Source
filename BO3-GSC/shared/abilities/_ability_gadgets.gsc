@@ -14,12 +14,12 @@
 #namespace ability_gadgets;
 
 function autoexec __init__sytem__() {
-  system::register("ability_gadgets", & __init__, undefined, undefined);
+  system::register("ability_gadgets", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_connect( & on_player_connect);
-  callback::on_spawned( & on_player_spawned);
+  callback::on_connect(&on_player_connect);
+  callback::on_spawned(&on_player_spawned);
 }
 
 function gadgets_print(str) {
@@ -59,7 +59,7 @@ function gadget_ready_callback(ent, slot, weapon) {
 
 function gadget_on_callback(ent, slot, weapon) {
   ent gadgets_print(("" + slot) + "");
-  if(isdefined(level.bzmoncybercomoncallback)) {
+  if(isDefined(level.bzmoncybercomoncallback)) {
     level thread[[level.bzmoncybercomoncallback]](ent);
   }
   ent ability_player::turn_gadget_on(slot, weapon);

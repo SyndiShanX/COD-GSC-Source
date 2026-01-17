@@ -15,15 +15,15 @@
 #namespace duplicate_render;
 
 function autoexec __init__sytem__() {
-  system::register("duplicate_render", & __init__, undefined, undefined);
+  system::register("duplicate_render", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  if(!isdefined(level.drfilters)) {
+  if(!isDefined(level.drfilters)) {
     level.drfilters = [];
   }
-  callback::on_spawned( & on_player_spawned);
-  callback::on_localclient_connect( & on_player_connect);
+  callback::on_spawned(&on_player_spawned);
+  callback::on_localclient_connect(&on_player_connect);
   set_dr_filter_framebuffer("none_fb", 0, undefined, undefined, 0, 1, 0);
   set_dr_filter_framebuffer_duplicate("none_fbd", 0, undefined, undefined, 1, 0, 0);
   set_dr_filter_offscreen("none_os", 0, undefined, undefined, 2, 0, 0);
@@ -64,9 +64,9 @@ function on_player_connect(localclientnum) {
 }
 
 function wait_team_changed(localclientnum) {
-  while (true) {
+  while(true) {
     level waittill("team_changed");
-    while (!isdefined(getlocalplayer(localclientnum))) {
+    while(!isDefined(getlocalplayer(localclientnum))) {
       wait(0.05);
     }
     player = getlocalplayer(localclientnum);
@@ -75,19 +75,19 @@ function wait_team_changed(localclientnum) {
 }
 
 function set_dr_filter(filterset, name, priority, require_flags, refuse_flags, drtype1, drval1, drcull1, drtype2, drval2, drcull2, drtype3, drval3, drcull3) {
-  if(!isdefined(level.drfilters)) {
+  if(!isDefined(level.drfilters)) {
     level.drfilters = [];
   }
-  if(!isdefined(level.drfilters[filterset])) {
+  if(!isDefined(level.drfilters[filterset])) {
     level.drfilters[filterset] = [];
   }
-  if(!isdefined(level.drfilters[filterset][name])) {
-    level.drfilters[filterset][name] = spawnstruct();
+  if(!isDefined(level.drfilters[filterset][name])) {
+    level.drfilters[filterset][name] = spawnStruct();
   }
   filter = level.drfilters[filterset][name];
   filter.name = name;
   filter.priority = priority * -1;
-  if(!isdefined(require_flags)) {
+  if(!isDefined(require_flags)) {
     filter.require = [];
   } else {
     if(isarray(require_flags)) {
@@ -96,7 +96,7 @@ function set_dr_filter(filterset, name, priority, require_flags, refuse_flags, d
       filter.require = strtok(require_flags, ",");
     }
   }
-  if(!isdefined(refuse_flags)) {
+  if(!isDefined(refuse_flags)) {
     filter.refuse = [];
   } else {
     if(isarray(refuse_flags)) {
@@ -108,19 +108,19 @@ function set_dr_filter(filterset, name, priority, require_flags, refuse_flags, d
   filter.types = [];
   filter.values = [];
   filter.culling = [];
-  if(isdefined(drtype1)) {
+  if(isDefined(drtype1)) {
     idx = filter.types.size;
     filter.types[idx] = drtype1;
     filter.values[idx] = drval1;
     filter.culling[idx] = drcull1;
   }
-  if(isdefined(drtype2)) {
+  if(isDefined(drtype2)) {
     idx = filter.types.size;
     filter.types[idx] = drtype2;
     filter.values[idx] = drval2;
     filter.culling[idx] = drcull2;
   }
-  if(isdefined(drtype3)) {
+  if(isDefined(drtype3)) {
     idx = filter.types.size;
     filter.types[idx] = drtype3;
     filter.values[idx] = drval3;
@@ -144,22 +144,22 @@ function set_dr_filter_offscreen(name, priority, require_flags, refuse_flags, dr
 function register_filter_materials(filter) {
   playercount = undefined;
   opts = filter.types.size;
-  for (i = 0; i < opts; i++) {
+  for(i = 0; i < opts; i++) {
     value = filter.values[i];
     if(isstring(value)) {
-      if(!isdefined(playercount)) {
-        while (!isdefined(level.localplayers) && !isdefined(level.frontendclientconnected)) {
+      if(!isDefined(playercount)) {
+        while(!isDefined(level.localplayers) && !isDefined(level.frontendclientconnected)) {
           wait(0.016);
         }
-        if(isdefined(level.frontendclientconnected)) {
+        if(isDefined(level.frontendclientconnected)) {
           playercount = 1;
         } else {
           util::waitforallclients();
           playercount = level.localplayers.size;
         }
       }
-      if(!isdefined(filter::mapped_material_id(value))) {
-        for (localclientnum = 0; localclientnum < playercount; localclientnum++) {
+      if(!isDefined(filter::mapped_material_id(value))) {
+        for(localclientnum = 0; localclientnum < playercount; localclientnum++) {
           filter::map_material_helper_by_localclientnum(localclientnum, value);
         }
       }
@@ -175,13 +175,13 @@ function update_dr_flag(localclientnum, toset, setto = 1) {
 }
 
 function set_dr_flag_not_array(toset, setto = 1) {
-  if(!isdefined(self.flag) || !isdefined(self.flag[toset])) {
+  if(!isDefined(self.flag) || !isDefined(self.flag[toset])) {
     self flag::init(toset);
   }
   if(setto == self.flag[toset]) {
     return false;
   }
-  if(isdefined(setto) && setto) {
+  if(isDefined(setto) && setto) {
     self flag::set(toset);
   } else {
     self flag::clear(toset);
@@ -190,20 +190,20 @@ function set_dr_flag_not_array(toset, setto = 1) {
 }
 
 function set_dr_flag(toset, setto = 1) {
-  assert(isdefined(setto));
+  assert(isDefined(setto));
   if(isarray(toset)) {
     foreach(ts in toset) {
       set_dr_flag(ts, setto);
     }
     return;
   }
-  if(!isdefined(self.flag) || !isdefined(self.flag[toset])) {
+  if(!isDefined(self.flag) || !isDefined(self.flag[toset])) {
     self flag::init(toset);
   }
   if(setto == self.flag[toset]) {
     return false;
   }
-  if(isdefined(setto) && setto) {
+  if(isDefined(setto) && setto) {
     self flag::set(toset);
   } else {
     self flag::clear(toset);
@@ -216,13 +216,13 @@ function clear_dr_flag(toclear) {
 }
 
 function change_dr_flags(localclientnum, toset, toclear) {
-  if(isdefined(toset)) {
+  if(isDefined(toset)) {
     if(isstring(toset)) {
       toset = strtok(toset, ",");
     }
     self set_dr_flag(toset);
   }
-  if(isdefined(toclear)) {
+  if(isDefined(toclear)) {
     if(isstring(toclear)) {
       toclear = strtok(toclear, ",");
     }
@@ -238,7 +238,7 @@ function _update_dr_filters(localclientnum) {
   waittillframeend();
   foreach(key, filterset in level.drfilters) {
     filter = self find_dr_filter(filterset);
-    if(isdefined(filter) && (!isdefined(self.currentdrfilter) || !self.currentdrfilter[key] === filter.name)) {
+    if(isDefined(filter) && (!isDefined(self.currentdrfilter) || !self.currentdrfilter[key] === filter.name)) {
       self apply_filter(localclientnum, filter, key);
     }
   }
@@ -252,7 +252,7 @@ function find_dr_filter(filterset = level.drfilters["framebuffer"]) {
   best = undefined;
   foreach(filter in filterset) {
     if(self can_use_filter(filter)) {
-      if(!isdefined(best) || filter.priority > best.priority) {
+      if(!isDefined(best) || filter.priority > best.priority) {
         best = filter;
       }
     }
@@ -261,12 +261,12 @@ function find_dr_filter(filterset = level.drfilters["framebuffer"]) {
 }
 
 function can_use_filter(filter) {
-  for (i = 0; i < filter.require.size; i++) {
+  for(i = 0; i < filter.require.size; i++) {
     if(!self flagsys::get(filter.require[i])) {
       return false;
     }
   }
-  for (i = 0; i < filter.refuse.size; i++) {
+  for(i = 0; i < filter.refuse.size; i++) {
     if(self flagsys::get(filter.refuse[i])) {
       return false;
     }
@@ -275,7 +275,7 @@ function can_use_filter(filter) {
 }
 
 function apply_filter(localclientnum, filter, filterset = "framebuffer") {
-  if(isdefined(level.postgame) && level.postgame && (!(isdefined(level.showedtopthreeplayers) && level.showedtopthreeplayers))) {
+  if(isDefined(level.postgame) && level.postgame && (!(isDefined(level.showedtopthreeplayers) && level.showedtopthreeplayers))) {
     player = getlocalplayer(localclientnum);
     if(!player getinkillcam(localclientnum)) {
       return;
@@ -284,21 +284,21 @@ function apply_filter(localclientnum, filter, filterset = "framebuffer") {
   if(getdvarint("")) {
     name = "";
     if(self isplayer()) {
-      if(isdefined(self.name)) {
+      if(isDefined(self.name)) {
         name = "" + self.name;
       }
-    } else if(isdefined(self.model)) {
+    } else if(isDefined(self.model)) {
       name = name + ("" + self.model);
     }
     msg = (((("" + filter.name) + "") + name) + "") + filterset;
     println(msg);
   }
-  if(!isdefined(self.currentdrfilter)) {
+  if(!isDefined(self.currentdrfilter)) {
     self.currentdrfilter = [];
   }
   self.currentdrfilter[filterset] = filter.name;
   opts = filter.types.size;
-  for (i = 0; i < opts; i++) {
+  for(i = 0; i < opts; i++) {
     type = filter.types[i];
     value = filter.values[i];
     culling = filter.culling[i];
@@ -306,7 +306,7 @@ function apply_filter(localclientnum, filter, filterset = "framebuffer") {
     if(isstring(value)) {
       material = filter::mapped_material_id(value);
       value = 3;
-      if(isdefined(value) && isdefined(material)) {
+      if(isDefined(value) && isDefined(material)) {
         self addduplicaterenderoption(type, value, material, culling);
       } else {
         self.currentdrfilter[filterset] = undefined;
@@ -380,7 +380,7 @@ function set_hacker_tool_breaching(localclientnum, on_off) {
   flags_changed = self set_dr_flag("hacker_tool_breaching", on_off);
   if(on_off) {
     flags_changed = self set_dr_flag("enemyvehicle", 0) || flags_changed;
-  } else if(isdefined(self.isenemyvehicle) && self.isenemyvehicle) {
+  } else if(isDefined(self.isenemyvehicle) && self.isenemyvehicle) {
     flags_changed = self set_dr_flag("enemyvehicle", 1) || flags_changed;
   }
   if(flags_changed) {
@@ -389,7 +389,7 @@ function set_hacker_tool_breaching(localclientnum, on_off) {
 }
 
 function show_friendly_outlines(local_client_num) {
-  if(!(isdefined(level.friendlycontentoutlines) && level.friendlycontentoutlines)) {
+  if(!(isDefined(level.friendlycontentoutlines) && level.friendlycontentoutlines)) {
     return false;
   }
   if(isshoutcaster(local_client_num)) {

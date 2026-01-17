@@ -10,7 +10,6 @@
 #include scripts\core_common\exploder_shared;
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
-
 #namespace wz_array_broadcast;
 
 autoexec __init__system__() {
@@ -88,7 +87,7 @@ function_fb90d490() {
   var_5be26843 = struct::get_array("array_emergency_broadcast", "targetname");
 
   foreach(struct in var_5be26843) {
-    playSound(0, #"hash_6086b2f61672a07e", struct.origin);
+    playSound(0, # "hash_6086b2f61672a07e", struct.origin);
   }
 }
 
@@ -135,12 +134,12 @@ function_44e1ce2e(var_ffe2b6da = 0) {
     while(var_ffe2b6da < 8) {
       foreach(struct in var_5be26843) {
         if(var_ffe2b6da == 0) {
-          struct.var_7a993bec = playSound(0, #"hash_6ee08a10b9c18ba7", struct.origin);
+          struct.var_7a993bec = playSound(0, # "hash_6ee08a10b9c18ba7", struct.origin);
           continue;
         }
 
         sound_id = var_ffe2b6da - 1;
-        sound_alias = #"hash_5ae0628f3d30469e" + sound_id;
+        sound_alias = # "hash_5ae0628f3d30469e" + sound_id;
         struct.var_7a993bec = playSound(0, sound_alias, struct.origin);
       }
 
@@ -165,18 +164,18 @@ function_44e1ce2e(var_ffe2b6da = 0) {
 
       wait 1;
       var_ffe2b6da++;
-      struct.var_7a993bec = playSound(0, #"hash_6ee08a10b9c18ba7", struct.origin);
+      struct.var_7a993bec = playSound(0, # "hash_6ee08a10b9c18ba7", struct.origin);
     }
   } else {
     while(var_ffe2b6da < 5) {
       foreach(struct in var_5be26843) {
         if(var_ffe2b6da == 0) {
-          struct.var_7a993bec = playSound(0, #"hash_6ee08a10b9c18ba7", struct.origin);
+          struct.var_7a993bec = playSound(0, # "hash_6ee08a10b9c18ba7", struct.origin);
           continue;
         }
 
         sound_id = var_ffe2b6da - 1;
-        sound_alias = #"hash_59821865a3dff39c" + sound_id;
+        sound_alias = # "hash_59821865a3dff39c" + sound_id;
         struct.var_7a993bec = playSound(0, sound_alias, struct.origin);
       }
 
@@ -201,7 +200,7 @@ function_44e1ce2e(var_ffe2b6da = 0) {
 
       wait 1;
       var_ffe2b6da++;
-      struct.var_7a993bec = playSound(0, #"hash_6ee08a10b9c18ba7", struct.origin);
+      struct.var_7a993bec = playSound(0, # "hash_6ee08a10b9c18ba7", struct.origin);
     }
   }
 
@@ -217,7 +216,7 @@ function_44e1ce2e(var_ffe2b6da = 0) {
 function_72e8e600() {
   for(loopcount = 0; loopcount < 10; loopcount++) {
     wait randomintrange(1, 2);
-    playSound(0, #"hash_7e2183e61d5335a8", self.origin);
+    playSound(0, # "hash_7e2183e61d5335a8", self.origin);
     wait 3;
   }
 }

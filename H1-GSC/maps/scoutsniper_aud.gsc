@@ -31,7 +31,7 @@ init_snd_flags() {
 }
 
 init_globals() {
-  level._interior_vo_zone = getentarray("interior_vo_zone", "targetname");
+  level._interior_vo_zone = getEntArray("interior_vo_zone", "targetname");
 }
 
 launch_threads() {}
@@ -175,7 +175,7 @@ start_mix_moving_to_town() {
 
   level common_scripts\utility::flag_wait("musicSubmixDelay");
 
-  if(isdefined(level.movingtotownsubmix) && level.movingtotownsubmix)
+  if(isDefined(level.movingtotownsubmix) && level.movingtotownsubmix)
     soundscripts\_audio_mix_manager::mm_clear_submix("moving_to_town");
 }
 
@@ -235,7 +235,7 @@ aud_start_graveyard_heli_scripted_sequence(var_0) {
   soundscripts\_audio_mix_manager::mm_add_submix("graveyard_hind_mix");
   var_1 = spawn("script_origin", self.origin);
   var_1 linkto(self);
-  var_1 playsound("scn_scoutsniper_graveyard_hind_passby");
+  var_1 playSound("scn_scoutsniper_graveyard_hind_passby");
   var_2 = spawn("script_origin", self.origin);
   var_3 = (0, 0, -400);
   var_2 linkto(self, "tag_origin", var_3, (0, 0, 0));
@@ -271,11 +271,11 @@ aud_start_dash_heli_flyby_sequence() {
   wait 0.1;
   soundscripts\_audio_mix_manager::mm_add_submix("dash_heli_flyby_mix");
   var_1 = maps\_utility::get_vehicle("dash_hind", "targetname");
-  var_1 playsound("scn_scoutsniper_dash_heli_flyby");
+  var_1 playSound("scn_scoutsniper_dash_heli_flyby");
   thread aud_start_dash_heli_idle(var_1);
   common_scripts\utility::flag_wait("_stealth_spotted");
 
-  if(isdefined(level.dash_section) && level.dash_section) {
+  if(isDefined(level.dash_section) && level.dash_section) {
     soundscripts\_audio_mix_manager::mm_clear_submix("dash_heli_flyby_mix");
     var_1 scalevolume(0, 1);
     wait 1;
@@ -289,11 +289,11 @@ aud_start_dash_heli_idle(var_0) {
   soundscripts\_audio_mix_manager::mm_clear_submix("dash_heli_flyby_mix");
   var_0 scalevolume(0.5, 0.5);
   wait 0.5;
-  var_0 playloopsound("scn_scoutsniper_dash_heli_idle");
+  var_0 playLoopSound("scn_scoutsniper_dash_heli_idle");
   var_0 scalevolume(1, 1.5);
   common_scripts\utility::flag_wait("_stealth_spotted");
 
-  if(isdefined(level.dash_section) && level.dash_section) {
+  if(isDefined(level.dash_section) && level.dash_section) {
     var_0 scalevolume(0, 1);
     wait 1;
     var_0 stoploopsound("scn_scoutsniper_dash_heli_idle");

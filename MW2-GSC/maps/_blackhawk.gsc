@@ -18,7 +18,7 @@ main(model, type, no_death) {
 
   build_drive( % bh_rotors, undefined, 0);
 
-  if(!isdefined(no_death)) {
+  if(!isDefined(no_death)) {
     blackhawk_death_fx = [];
     blackhawk_death_fx["vehicle_blackhawk"] = "explosions/helicopter_explosion";
     blackhawk_death_fx["vehicle_blackhawk_sas_night"] = "explosions/helicopter_explosion";
@@ -58,7 +58,6 @@ main(model, type, no_death) {
   build_light(model, "white_blink_tail", "tag_light_tail", "misc/aircraft_light_white_blink", "running", randomStartDelay);
   build_light(model, "wingtip_green", "tag_light_L_wing", "misc/aircraft_light_wingtip_green", "running", randomStartDelay);
   build_light(model, "wingtip_red", "tag_light_R_wing", "misc/aircraft_light_wingtip_red", "running", randomStartDelay);
-
 }
 
 init_local() {
@@ -67,14 +66,14 @@ init_local() {
 
   self.script_badplace = false; // All helicopters dont need to create bad places
   //maps\_vehicle::lights_on( "running" );
-  //maps\_vehicle::lights_on( "interior" ); 
+  //maps\_vehicle::lights_on( "interior" );
 }
 
 #using_animtree("vehicles");
 set_vehicle_anims(positions) {
   //	positions[ 0 ].vehicle_getinanim = %tigertank_hatch_open;
 
-  for (i = 0; i < positions.size; i++)
+  for(i = 0; i < positions.size; i++)
     positions[i].vehicle_getoutanim = % bh_idle;
 
   return positions;
@@ -130,8 +129,8 @@ set_coop_player_anims(positions) {
 
 setanims() {
   positions = [];
-  for (i = 0; i < 8; i++)
-    positions[i] = spawnstruct();
+  for(i = 0; i < 8; i++)
+    positions[i] = spawnStruct();
 
   positions[0].idle = % bh_Pilot_idle;
   positions[1].idle = % bh_coPilot_idle;
@@ -216,7 +215,6 @@ setanims() {
   return set_coop_player_anims(positions);
 }
 
-
 //WIP.. posible to unload different sets of people wirh vehicle notify( "unload", set ); sets defined here.
 unload_groups() {
   unload_groups = [];
@@ -242,18 +240,17 @@ unload_groups() {
   unload_groups["default"] = unload_groups["both"];
 
   return unload_groups;
-
 }
 
 set_attached_models() {
   array = [];
-  array["TAG_FastRope_LE"] = spawnstruct();
+  array["TAG_FastRope_LE"] = spawnStruct();
   array["TAG_FastRope_LE"].model = "rope_test";
   array["TAG_FastRope_LE"].tag = "TAG_FastRope_LE";
   array["TAG_FastRope_LE"].idleanim = % bh_rope_idle_le;
   array["TAG_FastRope_LE"].dropanim = % bh_rope_drop_le;
 
-  array["TAG_FastRope_RI"] = spawnstruct();
+  array["TAG_FastRope_RI"] = spawnStruct();
   array["TAG_FastRope_RI"].model = "rope_test_ri";
   array["TAG_FastRope_RI"].tag = "TAG_FastRope_RI";
   array["TAG_FastRope_RI"].idleanim = % bh_rope_idle_ri;
@@ -261,13 +258,12 @@ set_attached_models() {
 
   strings = getarraykeys(array);
 
-  for (i = 0; i < strings.size; i++) {
+  for(i = 0; i < strings.size; i++) {
     precachemodel(array[strings[i]].model);
   }
 
   return array;
 }
-
 
 /*QUAKED script_vehicle_blackhawk (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 

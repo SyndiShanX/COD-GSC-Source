@@ -66,7 +66,7 @@ f35_dogfights() {
   setculldist(0);
   level clientnotify("set_jet_fog_banks");
   level.player setclientdvar("cg_tracerSpeed", 25000);
-  level.player playsound("evt_air_to_air");
+  level.player playSound("evt_air_to_air");
   setmusicstate("LA_2_DOGFIGHT");
   level thread maps\la_2_anim::vo_ground_air_transition();
   level thread dogfight_event_logic();
@@ -134,7 +134,7 @@ _blast_off_sequence(n_time) {
 mark_targetted_enemies_as_targets() {
   while(!flag("dogfight_done")) {
     a_closest_drones = get_array_of_closest(level.player.origin, level.aerial_vehicles.axis, undefined, 10, 35000);
-    forward = anglestoforward(level.player getplayerangles());
+    forward = anglesToForward(level.player getplayerangles());
     bestdot = -999;
     chosenindex = -1;
     fov = getdvarfloat(#"cg_fov");
@@ -237,7 +237,7 @@ _dogfights_failure_distance_check() {
     if(isplayer(e_triggered) && !isgodmode(e_triggered)) {
       level notify("player_failed");
       screen_message_delete();
-      setdvar("ui_deadquote", & "LA_SHARED_LEFT_COMBAT");
+      setdvar("ui_deadquote", &"LA_SHARED_LEFT_COMBAT");
       missionfailed();
     }
   }
@@ -389,7 +389,7 @@ spawn_eject_friendly_follow_plane() {
   level thread spawn_convoy_f35_allies("start_flyby_for_eject", 1, 4, undefined, 1, 0);
   level thread spawn_convoy_strafing_wave("start_flyby_for_eject", 4, 4);
   wait 1;
-  a_enemy_planes = getentarray("convoy_strafing_plane", "targetname");
+  a_enemy_planes = getEntArray("convoy_strafing_plane", "targetname");
 
   foreach(vh_plane in a_enemy_planes) {
     vh_plane veh_magic_bullet_shield(1);
@@ -443,7 +443,7 @@ reinforce_wave() {
 spawn_end_helis() {
   trigger_use("trig_end_helis");
   wait 0.15;
-  helis = getentarray("end_heli", "targetname");
+  helis = getEntArray("end_heli", "targetname");
 }
 
 wait_until_convoy_can_move(str_structs_name) {
@@ -472,12 +472,11 @@ dogfights_manage_wave_count() {
   }
 }
 
-pip_dogfights_1() {
-}
+pip_dogfights_1() {}
 
 _setup_deathblossom_offsets(str_temp_planes, str_veh_pathnode) {
   level.a_death_blossom_offsets = [];
-  a_planes = getentarray(str_temp_planes, "targetname");
+  a_planes = getEntArray(str_temp_planes, "targetname");
   veh_node = getvehiclenode(str_veh_pathnode, "targetname");
 
   foreach(e_plane in a_planes)
@@ -540,7 +539,7 @@ play_specialized_shot_audio() {
   level.player waittill("missile_fire", missile);
   clientnotify("gnses");
   setmusicstate("LA_2_END");
-  level.player playsound("wpn_f35_rocket_fire_green");
+  level.player playSound("wpn_f35_rocket_fire_green");
 }
 
 waitfor_leadplane_death(plane, array) {
@@ -775,7 +774,7 @@ convoy_strafing_fail_watcher() {
 
 convoy_strafing_kill_cougar() {
   vh_leader = convoy_get_leader();
-  e_attacker = getentarray("convoy_strafing_plane", "targetname")[0];
+  e_attacker = getEntArray("convoy_strafing_plane", "targetname")[0];
   vh_leader.takedamage = 1;
   vh_leader.overridevehicledamage = undefined;
   vh_leader do_vehicle_damage(vh_leader.armor, e_attacker);
@@ -811,7 +810,7 @@ spawn_convoy_f35_allies(initial_path, n_count, n_wave_num, b_blah, b_follow_obj,
 
   for(i = 0; i < n_count; i++) {
     vh_plane = plane_spawn("f35_fast_la2");
-    vh_plane setmodel("veh_t6_air_fa38_x2");
+    vh_plane setModel("veh_t6_air_fa38_x2");
     vh_plane.targetname = "convoy_f35_ally_" + n_wave_num;
     vh_plane.script_noteworthy = "friendly_f35";
     vh_plane.n_wave_num = n_wave_num;
@@ -909,7 +908,7 @@ attacking_drone_think(id) {
       level.f35.dot_active = 0;
     }
 
-    self setvehgoalpos(level.f35.origin + anglestoforward(level.f35.angles) * attack_dist + anglestoright(level.f35.angles) * level.attack_drone_offsets[id][1]);
+    self setvehgoalpos(level.f35.origin + anglesToForward(level.f35.angles) * attack_dist + anglestoright(level.f35.angles) * level.attack_drone_offsets[id][1]);
     wait 0.05;
   }
 }
@@ -1178,7 +1177,7 @@ dogfight_player_strafe(vh_lead_plane, n_follower) {
     return false;
   }
 
-  v_forward = anglestoforward((0, level.f35.angles[1], level.f35.angles[2]));
+  v_forward = anglesToForward((0, level.f35.angles[1], level.f35.angles[2]));
   nd_start_path = getvehiclenode("start_flyover_player_spline", "targetname");
   nd_start_path.origin = level.f35.origin + vectorscale((0, 0, 1), 360.0);
   nd_next_path = getvehiclenode(nd_start_path.target, "targetname");
@@ -1275,7 +1274,7 @@ dogfight_player_strafe(vh_lead_plane, n_follower) {
   self pathvariableoffset(vectorscale((1, 1, 1), 500.0), 1);
   self thread go_path(nd_start_path);
   self setswitchnode(nd_next, nd_join_path);
-  self playsound("evt_flyby_avenger_apex_spawn");
+  self playSound("evt_flyby_avenger_apex_spawn");
   return true;
 }
 
@@ -1324,7 +1323,7 @@ dogfight_convoy_strafe_follow(nd_start_path, num_offset) {
 dogfight_player_strafe_follow(vh_leader, num_offset, vec_variation) {
   self endon("death");
   self thread go_path(vh_leader.chosen_path);
-  self playsound("evt_flyby_avenger_apex_spawn");
+  self playSound("evt_flyby_avenger_apex_spawn");
 
   if(num_offset < level.a_air_to_air_offsets["player"].size)
     self pathfixedoffset(level.a_air_to_air_offsets["player"][num_offset]);
@@ -1348,7 +1347,7 @@ _set_objective_on_plane() {
   if(!isDefined(level.dogfights_objective_marker_active)) {
     level.dogfights_objective_marker_active = 1;
     objective_add(level.obj_dogfights, "current");
-    objective_string(level.obj_dogfights, & "LA_2_OBJ_DOGFIGHTS", n_targets_total);
+    objective_string(level.obj_dogfights, &"LA_2_OBJ_DOGFIGHTS", n_targets_total);
     dogfights_objective_setup();
     objective_set3d(level.obj_dogfights, 1, "default");
   }
@@ -1377,11 +1376,11 @@ dogfights_objective_update_counter() {
   if(n_remaining <= 0) {
     if(!flag("dogfight_done")) {
       flag_set("dogfight_done");
-      objective_string(level.obj_dogfights, & "LA_2_OBJ_DOGFIGHTS", 0);
+      objective_string(level.obj_dogfights, &"LA_2_OBJ_DOGFIGHTS", 0);
       objective_state(level.obj_dogfights, "done");
     }
   } else
-    objective_string(level.obj_dogfights, & "LA_2_OBJ_DOGFIGHTS", n_remaining);
+    objective_string(level.obj_dogfights, &"LA_2_OBJ_DOGFIGHTS", n_remaining);
 }
 
 dogfights_objective_setup() {
@@ -1457,8 +1456,8 @@ wave_speed_monitor(a_planes, n_ideal_dist, n_too_close) {
         else if(n_distance_sq < n_ideal_dist_sq) {
           is_player_close = 1;
           v_plane_to_player = vectornormalize(level.f35.origin - e_plane.origin);
-          v_plane_forward = vectornormalize(anglestoforward(e_plane.angles));
-          v_player_forward = vectornormalize(anglestoforward(level.f35.angles));
+          v_plane_forward = vectornormalize(anglesToForward(e_plane.angles));
+          v_player_forward = vectornormalize(anglesToForward(level.f35.angles));
 
           if(vectordot(v_plane_to_player, v_plane_forward) > 0.7) {
             if(vectordot(v_plane_forward, v_player_forward) > 0.7)
@@ -1542,7 +1541,7 @@ _dogfight_ally_speed_monitor() {
 
       v_player_to_enemy = vectornormalize(e_target.origin - level.f35.origin);
       v_self_to_enemy = vectornormalize(e_target.origin - self.origin);
-      v_self_forward = vectornormalize(anglestoforward(self.angles));
+      v_self_forward = vectornormalize(anglesToForward(self.angles));
       n_speed = e_target getspeedmph();
       n_dot = vectordot(v_self_forward, v_self_to_enemy);
 
@@ -1657,9 +1656,9 @@ use_chaff(e_missile) {
     self.chaff_count--;
     n_chaff_scale = 200;
     n_chaff_time = 6;
-    playfxontag(level._effect["chaff"], self, "tag_origin");
-    self playsound("evt_drone_chaff_use");
-    v_forward = anglestoforward(self.angles);
+    playFXOnTag(level._effect["chaff"], self, "tag_origin");
+    self playSound("evt_drone_chaff_use");
+    v_forward = anglesToForward(self.angles);
     v_right = anglestoright(self.angles);
     v_down = anglestoup(self.angles) * -1;
     v_chaff_pos = self.origin + v_down * n_chaff_scale;
@@ -1671,7 +1670,7 @@ use_chaff(e_missile) {
     v_velocity = vectorscale(v_chaff_dir, randomintrange(400, 600));
     v_velocity = (v_velocity[0], v_velocity[1], v_velocity[2] - randomintrange(10, 100));
     e_chaff = spawn("script_model", v_chaff_pos);
-    e_chaff setmodel("tag_origin");
+    e_chaff setModel("tag_origin");
     e_chaff movegravity(v_velocity, n_chaff_time);
     e_missile missile_settarget(e_chaff);
     e_missile thread _detonate_missile_near_chaff(e_chaff);
@@ -1828,7 +1827,7 @@ getbestmissileturrettarget_f38_deathblossom() {
   chosenindex = -1;
 
   if(targetsvalid.size > 1) {
-    forward = anglestoforward(self getplayerangles());
+    forward = anglesToForward(self getplayerangles());
 
     for(i = 0; i < targetsvalid.size; i++) {
       vec_to_target = vectornormalize(targetsvalid[i].origin - self get_eye());
@@ -1848,13 +1847,13 @@ getbestmissileturrettarget_f38_deathblossom() {
 }
 
 player_strafe_burst_firing() {
-  v_f35_forward = anglestoforward(level.f35.angles);
+  v_f35_forward = anglesToForward(level.f35.angles);
   level notify("player_being_fired_on");
 
   if(cointoss())
-    level.player playsound("evt_strafe_burst_front_00");
+    level.player playSound("evt_strafe_burst_front_00");
   else
-    level.player playsound("evt_strafe_burst_front_01");
+    level.player playSound("evt_strafe_burst_front_01");
 
   for(i = 0; i < 10; i++) {
     v_start = level.f35.origin + vectorscale((0, 0, 1), 120.0);
@@ -1961,7 +1960,7 @@ dogfight_ambient_building_explosions() {
     }
 
     if(isDefined(s_current_struct))
-      playfx(level._effect["explosion_side_large"], s_current_struct.origin, anglestoforward(s_current_struct.angles));
+      playFX(level._effect["explosion_side_large"], s_current_struct.origin, anglesToForward(s_current_struct.angles));
 
     wait 1;
   }
@@ -1978,7 +1977,7 @@ dogfight_ally_avoid_player() {
     delta = self.origin - level.f35.origin;
     angles = level.f35.angles;
     angles = (angles[0], angles[1], 0);
-    fwd = anglestoforward(angles);
+    fwd = anglesToForward(angles);
     right = anglestoright(angles);
     dist = length(delta);
     dist_fwd = vectordot(delta, fwd);
@@ -2008,7 +2007,7 @@ dogfight_save_restore() {
   foreach(vehicle in vehicles) {
     if(isDefined(vehicle.is_convoy_plane) && vehicle.is_convoy_plane) {
       avg_pos = avg_pos + vehicle.origin;
-      avg_fwd = avg_fwd + anglestoforward(vehicle.angles);
+      avg_fwd = avg_fwd + anglesToForward(vehicle.angles);
       count++;
     }
   }

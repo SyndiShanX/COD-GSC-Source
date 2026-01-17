@@ -20,13 +20,12 @@
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_vo;
-
 #namespace zm_orange_mq_blood;
 
 preload() {
-  clientfield::register("scriptmover", "" + #"hash_10906b9ce905bda8", 24000, 3, "int");
-  clientfield::register("scriptmover", "" + #"hash_5dd642a0bd6e6cb9", 24000, 2, "int");
-  clientfield::register("scriptmover", "" + #"hash_1b72c208f2964e24", 24000, 3, "int");
+  clientfield::register("scriptmover", "" + # "hash_10906b9ce905bda8", 24000, 3, "int");
+  clientfield::register("scriptmover", "" + # "hash_5dd642a0bd6e6cb9", 24000, 2, "int");
+  clientfield::register("scriptmover", "" + # "hash_1b72c208f2964e24", 24000, 3, "int");
 }
 
 main() {
@@ -47,12 +46,12 @@ main() {
   level waittill(#"start_zombie_round_logic");
   level.s_mq_blood_vessel_loc thread blood_think();
   level.var_4adebdfc moveto(level.var_63a35083[0].origin, 1, 0.1, 0.3);
-  level.var_4adebdfc clientfield::set("" + #"hash_10906b9ce905bda8", level.var_9e3c632e);
+  level.var_4adebdfc clientfield::set("" + # "hash_10906b9ce905bda8", level.var_9e3c632e);
   level.var_9928b94b = [];
   level.var_9928b94b[0] = array("docks_1", "docks_2", "boathouse", "frozen_crevasse", "ice_grotto", "lagoon");
   level.var_9928b94b[1] = array("beach", "lighthouse_approach", "lighthouse_station", "lighthouse_cove", "hidden_path");
   level.var_9928b94b[2] = array("main_entrance", "outer_walkway", "loading_platform", "specimen_storage", "decontamination", "security_lobby", "geological_processing", "upper_catwalk", "human_infusion");
-  level.var_16972e5c = array(#"snowball", #"snowball_upgraded", #"snowball_yellow", #"snowball_yellow_upgraded", #"tundragun", #"tundragun_upgraded");
+  level.var_16972e5c = array(#"snowball", # "snowball_upgraded", # "snowball_yellow", # "snowball_yellow_upgraded", # "tundragun", # "tundragun_upgraded");
 }
 
 function_8d43b840(var_5ea5c94d) {
@@ -106,7 +105,7 @@ function_2d9e1e29(var_5ea5c94d, ended_early) {
     }
 
     level.var_9e3c632e++;
-    level.var_4adebdfc clientfield::set("" + #"hash_10906b9ce905bda8", level.var_9e3c632e);
+    level.var_4adebdfc clientfield::set("" + # "hash_10906b9ce905bda8", level.var_9e3c632e);
     level.var_ed1e7d4d = level.var_9e3c632e - 1;
 
     foreach(wisp in level.var_4adebdfc.a_wisps) {
@@ -127,7 +126,7 @@ blood_think() {
   level endon(#"end_game");
 
   while(!level flag::get(#"blood_waiting")) {
-    s_notify = self waittill(#"trigger_activated", #"blood_waiting");
+    s_notify = self waittill(#"trigger_activated", # "blood_waiting");
     player = s_notify.e_who;
 
     if(s_notify._notify === "trigger_activated") {
@@ -164,7 +163,7 @@ blood_think() {
 }
 
 function_ee4a200b() {
-  level endon(#"end_game", #"hash_6cbede8616798eb");
+  level endon(#"end_game", # "hash_6cbede8616798eb");
 
   if(level.var_9e3c632e > 1) {
     self.vessel setModel("p8_zm_ora_elemental_vessel");
@@ -183,12 +182,12 @@ function_ee4a200b() {
     }
   }
 
-    level.var_ed1e7d4d++;
-  self.vessel clientfield::set("" + #"hash_1b72c208f2964e24", level.var_ed1e7d4d);
+  level.var_ed1e7d4d++;
+  self.vessel clientfield::set("" + # "hash_1b72c208f2964e24", level.var_ed1e7d4d);
   self waittill(#"trigger_activated");
   self.vessel hide();
   self.vessel playSound("zmb_vessel_pickup");
-  self.vessel clientfield::set("" + #"hash_1b72c208f2964e24", 0);
+  self.vessel clientfield::set("" + # "hash_1b72c208f2964e24", 0);
   level notify(#"vessel_collected");
   level flag::clear(#"blood_waiting");
   wait 2;
@@ -203,7 +202,7 @@ function_15f8d6f0() {
 }
 
 blood_event() {
-  level endon(#"hash_1f0238cda598f6e9", #"end_game");
+  level endon(#"hash_1f0238cda598f6e9", # "end_game");
   level waittill(#"hash_6fb77fda0e7419a6");
   level flag::set(#"infinite_round_spawning");
   level flag::set(#"blood_active");
@@ -236,7 +235,7 @@ blood_event() {
   self moveto(level.var_63a35083[0].origin, 1, 0.1, 0.5);
   self.var_d0fed9fb = undefined;
   level.var_9e3c632e++;
-  level.var_4adebdfc clientfield::set("" + #"hash_10906b9ce905bda8", level.var_9e3c632e);
+  level.var_4adebdfc clientfield::set("" + # "hash_10906b9ce905bda8", level.var_9e3c632e);
   level zm_utility::function_9ad5aeb1(1, 1, 0, 1, 0);
   level flag::clear(#"infinite_round_spawning");
 
@@ -295,14 +294,14 @@ blood_move() {
     s_point = array::random(stance_any_step);
     self moveto(s_point.origin, 0.5, 0.1, 0.2);
     self.var_d0fed9fb = s_point.script_int;
-    s_result = self waittilltimeout(randomintrangeinclusive(4 - level.var_9e3c632e, 6 - level.var_9e3c632e), #"threshold_hit");
+    s_result = self waittilltimeout(randomintrangeinclusive(4 - level.var_9e3c632e, 6 - level.var_9e3c632e), # "threshold_hit");
   }
 }
 
 function_9a991dc2(n_index) {
   var_c80c2ab6 = spawn("script_model", level.var_4adebdfc.origin);
   var_c80c2ab6 setModel("apothican_blood_sphere_16");
-  var_c80c2ab6 clientfield::set("" + #"hash_5dd642a0bd6e6cb9", 1);
+  var_c80c2ab6 clientfield::set("" + # "hash_5dd642a0bd6e6cb9", 1);
   var_c80c2ab6.b_frozen = 0;
   var_c80c2ab6.b_primed = 0;
   var_c80c2ab6.health = 999;
@@ -332,7 +331,7 @@ function_c2d403f(n_index) {
           wait var_3a253a6f;
           self.b_primed = 1;
           self notify(#"primed");
-          self clientfield::set("" + #"hash_5dd642a0bd6e6cb9", 1);
+          self clientfield::set("" + # "hash_5dd642a0bd6e6cb9", 1);
           self.b_frozen = 0;
         }
 
@@ -340,7 +339,7 @@ function_c2d403f(n_index) {
       }
 
       if(isinarray(level.var_16972e5c, s_notify.weapon.name)) {
-        self clientfield::set("" + #"hash_5dd642a0bd6e6cb9", 2);
+        self clientfield::set("" + # "hash_5dd642a0bd6e6cb9", 2);
         self.b_frozen = 1;
         continue;
       }
@@ -352,7 +351,7 @@ function_c2d403f(n_index) {
 
 function_a4fa2df0(n_index) {
   level endon(#"end_game");
-  self endon(#"death", #"primed");
+  self endon(#"death", # "primed");
 
   if(level.var_9e3c632e > 2) {
     self moveto(level.var_e70fa660[n_index].origin, 0.3, 0.1, 0.1);
@@ -378,7 +377,7 @@ function_a4fa2df0(n_index) {
       }
     }
 
-      self.zone = zone;
+    self.zone = zone;
     a_locations = struct::get_array("dog_location", "script_noteworthy");
     var_a4cd10ea = [];
 

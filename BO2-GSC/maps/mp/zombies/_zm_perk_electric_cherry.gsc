@@ -13,7 +13,7 @@
 #include maps\mp\zombies\_zm_ai_basic;
 
 enable_electric_cherry_perk_for_level() {
-  maps\mp\zombies\_zm_perks::register_perk_basic_info("specialty_grenadepulldeath", "electric_cherry", 2000, & "ZM_PRISON_PERK_CHERRY", "zombie_perk_bottle_cherry");
+  maps\mp\zombies\_zm_perks::register_perk_basic_info("specialty_grenadepulldeath", "electric_cherry", 2000, &"ZM_PRISON_PERK_CHERRY", "zombie_perk_bottle_cherry");
   maps\mp\zombies\_zm_perks::register_perk_precache_func("specialty_grenadepulldeath", ::electic_cherry_precache);
   maps\mp\zombies\_zm_perks::register_perk_clientfields("specialty_grenadepulldeath", ::electric_cherry_register_clientfield, ::electric_cherry_set_clientfield);
   maps\mp\zombies\_zm_perks::register_perk_threads("specialty_grenadepulldeath", ::electric_cherry_reload_attack, ::electric_cherry_perk_lost);
@@ -69,20 +69,20 @@ electric_cherry_perk_machine_think() {
   init_electric_cherry();
 
   while(true) {
-    machine = getentarray("vendingelectric_cherry", "targetname");
-    machine_triggers = getentarray("vending_electriccherry", "target");
+    machine = getEntArray("vendingelectric_cherry", "targetname");
+    machine_triggers = getEntArray("vending_electriccherry", "target");
 
     for(i = 0; i < machine.size; i++)
-      machine[i] setmodel("p6_zm_vending_electric_cherry_off");
+      machine[i] setModel("p6_zm_vending_electric_cherry_off");
 
     level thread do_initial_power_off_callback(machine, "electriccherry");
     array_thread(machine_triggers, maps\mp\zombies\_zm_perks::set_power_on, 0);
     level waittill("electric_cherry_on");
 
     for(i = 0; i < machine.size; i++) {
-      machine[i] setmodel("p6_zm_vending_electric_cherry_on");
+      machine[i] setModel("p6_zm_vending_electric_cherry_on");
       machine[i] vibrate(vectorscale((0, -1, 0), 100.0), 0.3, 0.4, 3);
-      machine[i] playsound("zmb_perks_power_on");
+      machine[i] playSound("zmb_perks_power_on");
       machine[i] thread perk_fx("electriccherry");
       machine[i] thread play_loop_on_machine();
     }
@@ -95,7 +95,7 @@ electric_cherry_perk_machine_think() {
 }
 
 electric_cherry_host_migration_func() {
-  a_electric_cherry_perk_machines = getentarray("vending_electriccherry", "targetname");
+  a_electric_cherry_perk_machines = getEntArray("vending_electriccherry", "targetname");
 
   foreach(perk_machine in a_electric_cherry_perk_machines) {
     if(isDefined(perk_machine.model) && perk_machine.model == "p6_zm_vending_electric_cherry_on") {
@@ -109,8 +109,8 @@ electric_cherry_laststand() {
   visionsetlaststand("zombie_last_stand", 1);
 
   if(isDefined(self)) {
-    playfx(level._effect["electric_cherry_explode"], self.origin);
-    self playsound("zmb_cherry_explode");
+    playFX(level._effect["electric_cherry_explode"], self.origin);
+    self playSound("zmb_cherry_explode");
     self notify("electric_cherry_start");
     wait 0.05;
     a_zombies = get_round_enemy_array();
@@ -147,7 +147,7 @@ electric_cherry_death_fx() {
   if(self.isdog)
     tag = "J_Spine1";
 
-  self playsound("zmb_elec_jib_zombie");
+  self playSound("zmb_elec_jib_zombie");
   network_safe_play_fx_on_tag("tesla_death_fx", 2, level._effect[fx], self, tag);
 
   if(isDefined(self.tesla_head_gib_func) && !self.head_gibbed)
@@ -162,7 +162,7 @@ electric_cherry_shock_fx() {
   if(self.isdog)
     tag = "J_Spine1";
 
-  self playsound("zmb_elec_jib_zombie");
+  self playSound("zmb_elec_jib_zombie");
   network_safe_play_fx_on_tag("tesla_shock_fx", 2, level._effect[fx], self, tag);
 }
 
@@ -243,7 +243,7 @@ electric_cherry_reload_attack() {
       }
       self thread electric_cherry_reload_fx(n_fraction);
       self notify("electric_cherry_start");
-      self playsound("zmb_cherry_explode");
+      self playSound("zmb_cherry_explode");
       a_zombies = get_round_enemy_array();
       a_zombies = get_array_of_closest(self.origin, a_zombies, undefined, undefined, perk_radius);
       n_zombies_hit = 0;

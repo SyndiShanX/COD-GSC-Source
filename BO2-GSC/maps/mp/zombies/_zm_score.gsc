@@ -26,7 +26,7 @@ score_cf_register_info(name, version, max_count) {
   if(level.createfx_enabled) {
     return;
   }
-  info = spawnstruct();
+  info = spawnStruct();
   info.name = name;
   info.cf_field = "score_cf_" + name;
   info.version = version;
@@ -319,11 +319,9 @@ minus_to_player_score(points, ignore_double_points_upgrade) {
   level notify("spent_points", self, points);
 }
 
-add_to_team_score(points) {
-}
+add_to_team_score(points) {}
 
-minus_to_team_score(points) {
-}
+minus_to_team_score(points) {}
 
 player_died_penalty() {
   players = get_players(self.team);

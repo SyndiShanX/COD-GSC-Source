@@ -7,7 +7,6 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\visionset_mgr_shared;
-
 #namespace zombie_vortex;
 
 autoexec __init__system__() {
@@ -45,7 +44,7 @@ start_vortex(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, b
 
   vortex_fx_handle = playFX(localclientnum, registerplayer_lift_clipbamfupdate, vposition);
   setfxignorepause(localclientnum, vortex_fx_handle, 1);
-  playSound(0, #"wpn_idgun_portal_start", vposition);
+  playSound(0, # "wpn_idgun_portal_start", vposition);
   audio::playloopat("wpn_idgun_portal_loop", vposition);
   self thread vortex_shake_and_rumble(localclientnum, vposition);
   self thread function_2dd3c5bc(localclientnum, vortex_fx_handle, vposition, fx_vortex_explosion, n_vortex_time);
@@ -82,12 +81,12 @@ function_2dd3c5bc(localclientnum, vortex_fx_handle, vposition, fx_vortex_explosi
 
   stopfx(localclientnum, vortex_fx_handle);
   audio::stoploopat("wpn_idgun_portal_loop", vposition);
-  playSound(0, #"wpn_idgun_portal_stop", vposition);
+  playSound(0, # "wpn_idgun_portal_stop", vposition);
   wait 0.15;
   self notify(#"vortex_stop");
   var_ad8208a9 = playFX(localclientnum, fx_vortex_explosion, vposition);
   setfxignorepause(localclientnum, var_ad8208a9, 1);
-  playSound(0, #"wpn_idgun_portal_explode", vposition);
+  playSound(0, # "wpn_idgun_portal_explode", vposition);
   waitframe(1);
   self playrumbleonentity(localclientnum, "zod_idgun_vortex_shockwave");
   vision_blur(localclientnum, undefined, 1);

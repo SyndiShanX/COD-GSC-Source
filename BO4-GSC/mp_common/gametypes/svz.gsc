@@ -30,13 +30,12 @@
 #include scripts\mp_common\player\player_loadout;
 #include scripts\mp_common\player\player_utils;
 #include scripts\mp_common\util;
-
 #namespace svz;
 
 event_handler[gametype_init] main(eventstruct) {
   globallogic::init();
   infection::initialize();
-  infection::function_153000d0(#"hash_70fe115fad3f4fa", #"hash_3ca96ae1bd7d344f");
+  infection::function_153000d0(#"hash_70fe115fad3f4fa", # "hash_3ca96ae1bd7d344f");
   level.var_757f1b92 = getweapon("melee_bowie_bloody");
   level.var_4ae49bbd = getweapon("hatchet");
   util::registerroundswitch(0, 9);
@@ -166,14 +165,14 @@ onspawnplayer(predictedspawn) {
   if(self.team == game.attackers) {
     self.var_ec2d285c = 0;
 
-    if(!isDefined(self.pers[#"cachedrole"])) {
-      self.pers[#"cachedrole"] = self player_role::get();
+    if(!isDefined(self.pers[# "cachedrole"])) {
+      self.pers[# "cachedrole"] = self player_role::get();
     }
 
     self thread function_fe170e7();
-  } else if(isDefined(self.pers[#"cachedrole"])) {
-    self player_role::set(self.pers[#"cachedrole"], 1);
-    self.pers[#"cachedrole"] = undefined;
+  } else if(isDefined(self.pers[# "cachedrole"])) {
+    self player_role::set(self.pers[# "cachedrole"], 1);
+    self.pers[# "cachedrole"] = undefined;
   }
 
   spawning::onspawnplayer(predictedspawn);
@@ -268,7 +267,7 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitl
 }
 
 function_f9df98d3(type, value) {
-  if(type === #"ekia") {
+  if(type === # "ekia") {
     return (value + level.var_49a15413);
   }
 
@@ -361,7 +360,7 @@ function_8d346fd8(winningteam) {
   players = level.players;
 
   for(i = 0; i < players.size; i++) {
-    if(!isDefined(players[i].pers[#"team"])) {
+    if(!isDefined(players[i].pers[# "team"])) {
       continue;
     }
 
@@ -374,17 +373,17 @@ function_8d346fd8(winningteam) {
       continue;
     }
 
-    if(players[i].pers[#"team"] == winningteam) {
+    if(players[i].pers[# "team"] == winningteam) {
       globallogic_score::updatewinstats(players[i]);
       continue;
     }
 
-    if(level.rankedmatch && !level.leaguematch && players[i].pers[#"latejoin"] === 1) {
+    if(level.rankedmatch && !level.leaguematch && players[i].pers[# "latejoin"] === 1) {
       globallogic_score::updatelosslatejoinstats(players[i]);
     }
 
     if(!level.disablestattracking) {
-      players[i] stats::set_stat(#"playerstatslist", "cur_win_streak", #"statvalue", 0);
+      players[i] stats::set_stat(#"playerstatslist", "cur_win_streak", # "statvalue", 0);
     }
   }
 }

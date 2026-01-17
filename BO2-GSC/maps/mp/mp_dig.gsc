@@ -19,11 +19,11 @@ main() {
   maps\mp\mp_dig_amb::main();
   maps\mp\_compass::setupminimap("compass_map_mp_dig");
   setdvar("compassmaxrange", "2100");
-  game["strings"]["war_callsign_a"] = & "MPUI_CALLSIGN_MAPNAME_A";
-  game["strings"]["war_callsign_b"] = & "MPUI_CALLSIGN_MAPNAME_B";
-  game["strings"]["war_callsign_c"] = & "MPUI_CALLSIGN_MAPNAME_C";
-  game["strings"]["war_callsign_d"] = & "MPUI_CALLSIGN_MAPNAME_D";
-  game["strings"]["war_callsign_e"] = & "MPUI_CALLSIGN_MAPNAME_E";
+  game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_MAPNAME_A";
+  game["strings"]["war_callsign_b"] = &"MPUI_CALLSIGN_MAPNAME_B";
+  game["strings"]["war_callsign_c"] = &"MPUI_CALLSIGN_MAPNAME_C";
+  game["strings"]["war_callsign_d"] = &"MPUI_CALLSIGN_MAPNAME_D";
+  game["strings"]["war_callsign_e"] = &"MPUI_CALLSIGN_MAPNAME_E";
   game["strings_menu"]["war_callsign_a"] = "@MPUI_CALLSIGN_MAPNAME_A";
   game["strings_menu"]["war_callsign_b"] = "@MPUI_CALLSIGN_MAPNAME_B";
   game["strings_menu"]["war_callsign_c"] = "@MPUI_CALLSIGN_MAPNAME_C";
@@ -41,12 +41,12 @@ main() {
   brick5.angles = (359.199, 90.0129, -0.822672);
   brick6 = spawn("script_model", (-12.63, 629.47, 39.55));
   brick6.angles = (359.199, 90.0129, -0.822672);
-  brick1 setmodel("p6_dig_brick_03");
-  brick2 setmodel("p6_dig_brick_03");
-  brick3 setmodel("p6_dig_brick_03");
-  brick4 setmodel("p6_dig_brick_03");
-  brick5 setmodel("p6_dig_brick_03");
-  brick6 setmodel("p6_dig_brick_03");
+  brick1 setModel("p6_dig_brick_03");
+  brick2 setModel("p6_dig_brick_03");
+  brick3 setModel("p6_dig_brick_03");
+  brick4 setModel("p6_dig_brick_03");
+  brick5 setModel("p6_dig_brick_03");
+  brick6 setModel("p6_dig_brick_03");
   spawncollision("collision_clip_wall_32x32x10", "collider", (-1404, -1126, 46.5), vectorscale((0, 1, 0), 90.0));
   maps\mp\gametypes\_spawning::level_use_unified_spawning(1);
 }

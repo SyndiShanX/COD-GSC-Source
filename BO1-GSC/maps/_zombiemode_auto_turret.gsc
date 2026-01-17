@@ -71,7 +71,7 @@ auto_turret_think() {
       continue;
     }
     if(player.score < cost) {
-      self playsound("deny");
+      self playSound("deny");
       player thread play_no_money_turret_dialog();
       continue;
     } {
@@ -82,7 +82,7 @@ auto_turret_think() {
       player maps\_zombiemode_audio::create_and_play_dialog("general", "turret_active");
     }
     self thread auto_turret_activate();
-    self PlaySound("zmb_turret_startup");
+    self playSound("zmb_turret_startup");
     self disable_trigger();
     self waittill("turret_deactivated");
     if(isDefined(player)) {
@@ -138,7 +138,7 @@ auto_turret_activate() {
   self.turret_fx = spawn("script_model", self.turret.origin);
   self.turret_fx setModel("tag_origin");
   self.turret_fx.angles = self.turret.angles;
-  PlayFxOnTag(level._effect["auto_turret_light"], self.turret_fx, "tag_origin");
+  playFXOnTag(level._effect["auto_turret_light"], self.turret_fx, "tag_origin");
   self.curr_time = level.auto_turret_timeout;
   self thread auto_turret_update_timeout();
   wait(level.auto_turret_timeout);

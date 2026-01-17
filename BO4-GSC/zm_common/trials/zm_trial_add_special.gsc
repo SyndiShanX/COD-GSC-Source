@@ -6,7 +6,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_round_spawning;
 #include scripts\zm_common\zm_trial;
-
 #namespace zm_trial_add_special;
 
 autoexec __init__system__() {
@@ -21,7 +20,7 @@ __init__() {
   zm_trial::register_challenge(#"add_special", &on_begin, &on_end);
 }
 
-private on_begin(enemy_type, var_1f950d4d, var_81dcf087, var_d631185a, var_fe1bdf31) {
+on_begin(enemy_type, var_1f950d4d, var_81dcf087, var_d631185a, var_fe1bdf31) {
   level.var_1c7412f9 = enemy_type;
 
   switch (getplayers().size) {
@@ -44,7 +43,7 @@ private on_begin(enemy_type, var_1f950d4d, var_81dcf087, var_d631185a, var_fe1bd
   zm_round_spawning::function_2876740e(level.var_1c7412f9, &function_a7c00976);
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   zm_round_spawning::function_9bf14a10(level.var_1c7412f9, &function_a7c00976);
   zm_round_spawning::function_510039c1(&function_51ec9e09);
   zm_round_spawning::function_375519eb(&function_1b1d71e7);

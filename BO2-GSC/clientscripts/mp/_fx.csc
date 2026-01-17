@@ -7,8 +7,7 @@
 #include clientscripts\mp\_rewindobjects;
 #include clientscripts\mp\_lights;
 
-disableallparticlefxinlevel() {
-}
+disableallparticlefxinlevel() {}
 
 fx_validate(fxid, origin) {
   if(level.createfx_enabled) {
@@ -22,7 +21,7 @@ fx_validate(fxid, origin) {
 }
 
 createloopsound() {
-  ent = spawnstruct();
+  ent = spawnStruct();
 
   if(!isDefined(level.createfxent))
     level.createfxent = [];
@@ -39,7 +38,7 @@ createloopsound() {
 }
 
 createeffect(type, fxid) {
-  ent = spawnstruct();
+  ent = spawnStruct();
 
   if(!isDefined(level.createfxent))
     level.createfxent = [];
@@ -75,7 +74,7 @@ createexploder(fxid) {
 
 set_forward_and_up_vectors() {
   self.v["up"] = anglestoup(self.v["angles"]);
-  self.v["forward"] = anglestoforward(self.v["angles"]);
+  self.v["forward"] = anglesToForward(self.v["angles"]);
 }
 
 create_triggerfx(clientnum) {
@@ -85,7 +84,7 @@ create_triggerfx(clientnum) {
     println("self.v['fxid'] " + self.v["fxid"]);
 
   if(!level.createfx_disable_fx)
-    self.looperfx = playfx(clientnum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"], self.v["delay"]);
+    self.looperfx = playFX(clientnum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"], self.v["delay"]);
 
   create_loopsound(clientnum);
 }
@@ -100,7 +99,7 @@ loopfx(clientnum) {
     return;
   }
   fx_validate(self.v["fxid"], self.v["origin"]);
-  self.looperfx = playfx(clientnum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"], self.v["delay"]);
+  self.looperfx = playFX(clientnum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"], self.v["delay"]);
 
   while(true) {
     if(isDefined(self.v["delay"])) {
@@ -111,7 +110,7 @@ loopfx(clientnum) {
     while(isfxplaying(clientnum, self.looperfx))
       wait 0.25;
 
-    self.looperfx = playfx(clientnum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
+    self.looperfx = playFX(clientnum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
   }
 }
 
@@ -228,7 +227,7 @@ playexploderfx(clientnum) {
   if(level.createfx_disable_fx) {
     return;
   }
-  return playfx(clientnum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
+  return playFX(clientnum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
 }
 
 create_loopsound(clientnum) {
@@ -319,9 +318,9 @@ blinky_light(localclientnum, tagname, friendlyfx, enemyfx) {
 
     if(isDefined(self)) {
       if(friendnotfoe(localclientnum))
-        self.blinkylightfx = playfxontag(localclientnum, friendlyfx, self, self.lighttagname);
+        self.blinkylightfx = playFXOnTag(localclientnum, friendlyfx, self, self.lighttagname);
       else
-        self.blinkylightfx = playfxontag(localclientnum, enemyfx, self, self.lighttagname);
+        self.blinkylightfx = playFXOnTag(localclientnum, enemyfx, self, self.lighttagname);
     }
 
     serverwait(localclientnum, 0.5, 0.01);
@@ -426,7 +425,7 @@ fire_effect() {
   players = getlocalplayers();
 
   for(i = 0; i < players.size; i++)
-    playfx(i, level._effect[firefx], self.v["origin"], forward, up);
+    playFX(i, level._effect[firefx], self.v["origin"], forward, up);
 }
 
 cannon_effect() {
@@ -438,7 +437,7 @@ cannon_effect() {
       players = getlocalplayers();
 
       for(player = 0; player < players.size; player++)
-        playfx(player, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
+        playFX(player, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
 
       self exploder_delay();
     }
@@ -467,10 +466,10 @@ cannon_effect() {
 
   for(i = 0; i < players.size; i++) {
     if(isDefined(self.v["fxid"]))
-      self.loopfx[i] = playfx(i, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
+      self.loopfx[i] = playFX(i, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
   }
 
-  self exploder_playsound();
+  self exploder_playSound();
 }
 
 exploder_delay() {
@@ -498,7 +497,7 @@ exploder_earthquake() {
     getlocalplayers()[0] earthquake(eq["magnitude"], eq["duration"], self.v["origin"], eq["radius"]);
 }
 
-exploder_playsound() {
+exploder_playSound() {
   if(!isDefined(self.v["soundalias"]) || self.v["soundalias"] == "nil") {
     return;
   }

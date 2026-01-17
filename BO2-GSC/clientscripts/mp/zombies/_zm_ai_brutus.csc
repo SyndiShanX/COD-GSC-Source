@@ -18,7 +18,7 @@ brutus_helmet_launch_cb(localclientnum, oldval, newval, bnewent, binitialsnap, f
   }
   if(newval) {
     self.helmet_launched = 1;
-    createdynentandlaunch(localclientnum, "c_zom_cellbreaker_helmet", self.origin + vectorscale((0, 0, 1), 85.0), self.angles, self.origin + vectorscale((0, 0, 1), 85.0), anglestoforward(self.angles));
+    createdynentandlaunch(localclientnum, "c_zom_cellbreaker_helmet", self.origin + vectorscale((0, 0, 1), 85.0), self.angles, self.origin + vectorscale((0, 0, 1), 85.0), anglesToForward(self.angles));
   }
 }
 

@@ -10,7 +10,6 @@
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\load;
 #include scripts\zm_common\zm_bgb_pack;
-
 #namespace bgb;
 
 autoexec __init__system__() {
@@ -33,10 +32,10 @@ __init__() {
   clientfield::register("clientuimodel", "zmhud.bgb_invalid_use", 1, 1, "counter", undefined, 0, 0);
   clientfield::register("clientuimodel", "zmhud.bgb_one_shot_use", 1, 1, "counter", undefined, 0, 0);
   clientfield::register("toplayer", "bgb_blow_bubble", 1, 1, "counter", &bgb_blow_bubble, 0, 0);
-  level._effect[#"bgb_blow_bubble"] = "zombie/fx_bgb_bubble_blow_zmb";
+  level._effect[# "bgb_blow_bubble"] = "zombie/fx_bgb_bubble_blow_zmb";
 }
 
-private __main__() {
+__main__() {
   if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
@@ -54,7 +53,7 @@ force_stream() {
   }
 }
 
-private on_player_connect(localclientnum) {
+on_player_connect(localclientnum) {
   if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
@@ -62,7 +61,7 @@ private on_player_connect(localclientnum) {
   self thread bgb_player_init(localclientnum);
 }
 
-private bgb_player_init(localclientnum) {
+bgb_player_init(localclientnum) {
   if(isDefined(level.bgb_pack[localclientnum])) {
     return;
   }
@@ -70,7 +69,7 @@ private bgb_player_init(localclientnum) {
   level.bgb_pack[localclientnum] = getbubblegumpack(localclientnum);
 }
 
-private bgb_finalize() {
+bgb_finalize() {
   level.var_afb8293c = [];
   level.var_afb8293c[0] = "base";
   level.var_afb8293c[1] = "pinwheel";
@@ -112,7 +111,7 @@ private bgb_finalize() {
 
 register(name, limit_type) {
   assert(isDefined(name), "<dev string:x79>");
-  assert(#"none" != name, "<dev string:xa1>" + #"none" + "<dev string:xc5>");
+  assert(#"none" != name, "<dev string:xa1>" + # "none" + "<dev string:xc5>");
   assert(!isDefined(level.bgb[name]), "<dev string:xfe>" + name + "<dev string:x117>");
   assert(isDefined(limit_type), "<dev string:xfe>" + name + "<dev string:x137>");
   level.bgb[name] = spawnStruct();
@@ -120,7 +119,7 @@ register(name, limit_type) {
   level.bgb[name].limit_type = limit_type;
 }
 
-private function_5e7b3f16(localclientnum, time) {
+function_5e7b3f16(localclientnum, time) {
   self endon(#"death");
 
   if(isdemoplaying()) {
@@ -132,16 +131,16 @@ private function_5e7b3f16(localclientnum, time) {
   }
 
   switch (level.bgb[self.bgb].limit_type) {
-    case #"activated":
+    case # "activated":
       color = (25, 0, 50) / 255;
       break;
-    case #"event":
+    case # "event":
       color = (100, 50, 0) / 255;
       break;
-    case #"rounds":
+    case # "rounds":
       color = (1, 149, 244) / 255;
       break;
-    case #"time":
+    case # "time":
       color = (19, 244, 20) / 255;
       break;
     default:
@@ -156,12 +155,12 @@ private function_5e7b3f16(localclientnum, time) {
   }
 }
 
-private function_d9afd5ee(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+function_d9afd5ee(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self.bgb = level.bgb_item_index_to_name[newval];
   self thread function_5e7b3f16(localclientnum, 3);
 }
 
-private function_f4763ffe(localclientnum, fx) {
+function_f4763ffe(localclientnum, fx) {
   if(isDefined(self.var_629940ea)) {
     deletefx(localclientnum, self.var_629940ea, 1);
   }
@@ -171,7 +170,7 @@ private function_f4763ffe(localclientnum, fx) {
   }
 }
 
-private bgb_blow_bubble(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  function_f4763ffe(localclientnum, level._effect[#"bgb_blow_bubble"]);
+bgb_blow_bubble(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+  function_f4763ffe(localclientnum, level._effect[# "bgb_blow_bubble"]);
   self thread function_5e7b3f16(localclientnum, 0.5);
 }

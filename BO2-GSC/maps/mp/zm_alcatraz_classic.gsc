@@ -48,7 +48,7 @@ main() {
   maps\mp\zm_prison_achievement::init();
   level thread maps\mp\zm_prison_spoon::init();
   level thread maps\mp\zm_prison_sq_bg::init();
-  a_grief_clips = getentarray("grief_clips", "targetname");
+  a_grief_clips = getEntArray("grief_clips", "targetname");
 
   foreach(clip in a_grief_clips) {
     clip connectpaths();
@@ -209,10 +209,10 @@ afterlife_intro_door() {
   m_door = getent("powerup_door", "targetname");
   level waittill("intro_powerup_activate");
   wait 1;
-  array_delete(getentarray("wires_cell_dblock", "script_noteworthy"));
+  array_delete(getEntArray("wires_cell_dblock", "script_noteworthy"));
   m_door.opened = 1;
   m_door movex(34, 2, 1);
-  m_door playsound("zmb_jail_door");
+  m_door playSound("zmb_jail_door");
   level waittill("intro_powerup_restored");
   s_powerup_loc = getstruct("powerup_start", "targetname");
   spawn_infinite_powerup_drop(s_powerup_loc.origin);
@@ -222,20 +222,20 @@ afterlife_cell_door_1() {
   m_door = getent("powerup_cell_door_1", "targetname");
   level waittill("cell_1_powerup_activate");
   wait 1;
-  array_delete(getentarray("wires_cell_cafeteria", "script_noteworthy"));
+  array_delete(getEntArray("wires_cell_cafeteria", "script_noteworthy"));
   m_door.opened = 1;
   m_door movex(36, 2, 1);
-  m_door playsound("zmb_jail_door");
+  m_door playSound("zmb_jail_door");
 }
 
 afterlife_cell_door_2() {
   m_door = getent("powerup_cell_door_2", "targetname");
   level waittill("cell_2_powerup_activate");
   wait 1;
-  array_delete(getentarray("wires_cell_michigan", "script_noteworthy"));
+  array_delete(getEntArray("wires_cell_michigan", "script_noteworthy"));
   m_door.opened = 1;
   m_door movex(-34, 2, 1);
-  m_door playsound("zmb_jail_door");
+  m_door playSound("zmb_jail_door");
 }
 
 spawn_infinite_powerup_drop(v_origin, str_type) {
@@ -249,12 +249,11 @@ spawn_infinite_powerup_drop(v_origin, str_type) {
   level._powerup_timeout_override = undefined;
 }
 
-powerup_infinite_time() {
-}
+powerup_infinite_time() {}
 
 power_on_perk_machines() {
   level waittill_any("unlock_all_perk_machines", "open_sesame");
-  a_shockboxes = getentarray("perk_afterlife_trigger", "script_noteworthy");
+  a_shockboxes = getEntArray("perk_afterlife_trigger", "script_noteworthy");
 
   foreach(e_shockbox in a_shockboxes) {
     e_shockbox notify("damage", 1, level);

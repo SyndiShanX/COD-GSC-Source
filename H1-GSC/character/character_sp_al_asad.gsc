@@ -5,7 +5,7 @@
 **********************************************/
 
 main() {
-  self setmodel("body_sp_arab_regular_al_asad");
+  self setModel("body_sp_arab_regular_al_asad");
   self attach("head_khaled_alasad", "", 1);
   self.headmodel = "head_khaled_alasad";
   self.voice = "arab";

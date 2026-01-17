@@ -17,7 +17,7 @@
 function getteamopstableid() {
   teamopsinfotableloaded = 0;
   teamopsinfotableid = tablelookupfindcoreasset("gamedata/tables/mp/teamops.csv");
-  if(isdefined(teamopsinfotableid)) {
+  if(isDefined(teamopsinfotableid)) {
     teamopsinfotableloaded = 1;
   }
   assert(teamopsinfotableloaded, "" + "");
@@ -25,24 +25,24 @@ function getteamopstableid() {
 }
 
 function init() {
-  game["teamops"] = spawnstruct();
+  game["teamops"] = spawnStruct();
   game["teamops"].data = [];
   game["teamops"].teamprogress = [];
   game["teamops"].teamopsname = undefined;
   foreach(team in level.teams) {
     game["teamops"].teamprogress[team] = 0;
   }
-  level.teamopsonprocessplayerevent = & processplayerevent;
+  level.teamopsonprocessplayerevent = &processplayerevent;
   tableid = getteamopstableid();
-  assert(isdefined(tableid));
-  if(!isdefined(tableid)) {
+  assert(isDefined(tableid));
+  if(!isDefined(tableid)) {
     game["teamops"].teamopsinitialed = 0;
     return;
   }
-  for (row = 1; row < 256; row++) {
+  for(row = 1; row < 256; row++) {
     name = tablelookupcolumnforrow(tableid, row, 0);
     if(name != "") {
-      game["teamops"].data[name] = spawnstruct();
+      game["teamops"].data[name] = spawnStruct();
       game["teamops"].data[name].description = tablelookupcolumnforrow(tableid, row, 1);
       game["teamops"].data[name].pushevent = tablelookupcolumnforrow(tableid, row, 2);
       game["teamops"].data[name].popevent = tablelookupcolumnforrow(tableid, row, 3);
@@ -58,7 +58,7 @@ function init() {
 
 function getid(name) {
   tableid = getteamopstableid();
-  for (row = 1; row < 256; row++) {
+  for(row = 1; row < 256; row++) {
     _name = tablelookupcolumnforrow(tableid, row, 0);
     if(name == _name) {
       return row;
@@ -72,7 +72,7 @@ function teamopsallowed(name) {
   if(teamops.modes.size == 0) {
     return true;
   }
-  for (mi = 0; mi < teamops.modes.size; mi++) {
+  for(mi = 0; mi < teamops.modes.size; mi++) {
     if(teamops.modes[mi] == level.gametype) {
       return true;
     }
@@ -92,9 +92,9 @@ function startteamops(name) {
     globallogic_audio::leader_dialog("teamops_preannounce", team);
   }
   wait(preanouncetime);
-  for (i = 0; i < level.players.size; i++) {
+  for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
-    if(isdefined(player)) {
+    if(isDefined(player)) {
       player playlocalsound("uin_objective_updated");
     }
   }
@@ -117,9 +117,9 @@ function startteamops(name) {
 }
 
 function teamopswatcher() {
-  while (isdefined(game["teamops"].teamopsname)) {
+  while(isDefined(game["teamops"].teamopsname)) {
     time = game["teamops"].data[game["teamops"].teamopsname].time;
-    if(isdefined(time) && time > 0) {
+    if(isDefined(time) && time > 0) {
       elapsed = gettime() - game["teamops"].teamopsstarttime;
       if(elapsed > (time * 1000)) {
         stopteamops();
@@ -144,7 +144,7 @@ function stopteamops() {
 
 function processplayerevent(event, player) {
   teamopsname = game["teamops"].teamopsname;
-  if(isplayer(player) && isdefined(teamopsname)) {
+  if(isplayer(player) && isDefined(teamopsname)) {
     level processteamevent(event, player, player.team);
   }
 }
@@ -152,18 +152,18 @@ function processplayerevent(event, player) {
 function processteamevent(event, player, team) {
   teamopsname = game["teamops"].teamopsname;
   teamops = game["teamops"].data[teamopsname];
-  if(isdefined(teamops.pushevent) && event == teamops.pushevent) {
+  if(isDefined(teamops.pushevent) && event == teamops.pushevent) {
     game["teamops"].teamprogress[team] = game["teamops"].teamprogress[team] + 1;
     level updateteamops(event, player, team);
   }
-  if(isdefined(teamops.popevent) && event == teamops.popevent) {
+  if(isDefined(teamops.popevent) && event == teamops.popevent) {
     game["teamops"].teamprogress[team] = game["teamops"].teamprogress[team] - 1;
     if(game["teamops"].teamprogress[team] < 0) {
       game["teamops"].teamprogress[team] = 0;
     }
     level updateteamops(event, player, team);
   }
-  if(isdefined(teamops.resetevent) && event == teamops.resetevent) {
+  if(isDefined(teamops.resetevent) && event == teamops.resetevent) {
     game["teamops"].teamprogress[team] = 0;
     level updateteamops(event, player, team);
   }
@@ -176,7 +176,7 @@ function updateteamops(event, player, team) {
   progress = int((100 * game["teamops"].teamprogress[team]) / count_target);
   teamopsupdateprogress(team, progress);
   if(game["teamops"].teamprogress[team] >= teamops.count) {
-    if(isdefined(player)) {
+    if(isDefined(player)) {
       level thread teamopsacheived(player, team);
     }
   }
@@ -198,19 +198,19 @@ function main() {
   thread watchteamopstime();
   level.teamopstargetkills = getdvarint("teamOpsKillsCountTrigger_" + level.gametype, 37);
   if(level.teamopstargetkills > 0) {
-    level.teamopsonplayerkilled = & onplayerkilled;
+    level.teamopsonplayerkilled = &onplayerkilled;
   }
 }
 
 function getcompatibleoperation() {
   operations = strtok(getdvarstring("teamOpsName"), ",");
-  for (i = 0; i < 20; i++) {
+  for(i = 0; i < 20; i++) {
     operation = operations[randomintrange(0, operations.size)];
     if(teamopsallowed(operation)) {
       return operation;
     }
   }
-  for (i = 0; i < operations.size; i++) {
+  for(i = 0; i < operations.size; i++) {
     operation = operations[i];
     if(teamopsallowed(operation)) {
       return operation;
@@ -221,16 +221,16 @@ function getcompatibleoperation() {
 
 function watchteamopstime() {
   level endon("teamops_starting");
-  if(isdefined(level.inprematchperiod) && level.inprematchperiod) {
+  if(isDefined(level.inprematchperiod) && level.inprematchperiod) {
     level waittill("prematch_over");
   }
   activeteamops = getcompatibleoperation();
-  if(!isdefined(activeteamops)) {
+  if(!isDefined(activeteamops)) {
     return;
   }
   startdelay = getdvarint("teamOpsStartDelay_" + level.gametype, 300);
-  while (true) {
-    if(isdefined(game["teamops"].teamopsname)) {
+  while(true) {
+    if(isDefined(game["teamops"].teamopsname)) {
       if(getdvarint("scr_stop_teamops") == 1) {
         stopteamops();
         setdvar("scr_stop_teamops", 0);
@@ -251,16 +251,16 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
   if(isplayer(attacker) == 0 || attacker.team == self.team) {
     return;
   }
-  if(!isdefined(level.teamopskilltracker)) {
+  if(!isDefined(level.teamopskilltracker)) {
     level.teamopskilltracker = [];
   }
-  if(!isdefined(level.teamopskilltracker[attacker.team])) {
+  if(!isDefined(level.teamopskilltracker[attacker.team])) {
     level.teamopskilltracker[attacker.team] = 0;
   }
   level.teamopskilltracker[attacker.team]++;
   if(level.teamopskilltracker[attacker.team] >= level.teamopstargetkills) {
     activeteamops = getcompatibleoperation();
-    if(!isdefined(activeteamops)) {
+    if(!isDefined(activeteamops)) {
       return;
     }
     level thread startteamops(activeteamops);

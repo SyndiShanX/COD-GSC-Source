@@ -87,23 +87,19 @@ dof_get_up(m_player_body) {
   level.player depth_of_field_off(0.1);
 }
 
-dof_chopper(m_player_body) {
-}
+dof_chopper(m_player_body) {}
 
-dof_noriega(m_player_body) {
-}
+dof_noriega(m_player_body) {}
 
 dof_noriega_shoots(m_player_body) {
   wait 0.1;
   sniper = getent("end_roof_sniper_ai", "targetname");
-  playfxontag(level._effect["soldier_impact_blood"], sniper, "j_clavicle_le");
+  playFXOnTag(level._effect["soldier_impact_blood"], sniper, "j_clavicle_le");
 }
 
-dof_take_gun(m_player_body) {
-}
+dof_take_gun(m_player_body) {}
 
-dof_throw_gun(m_player_body) {
-}
+dof_throw_gun(m_player_body) {}
 
 dof_noriega_look_1(m_player_body) {
   iprintlnbold("dof_noriega_look_1");

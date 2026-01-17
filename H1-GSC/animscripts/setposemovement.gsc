@@ -12,7 +12,7 @@ setposemovement(var_0, var_1) {
       var_0 = self.a.pose;
   }
 
-  if(!isdefined(var_1) || var_1 == "")
+  if(!isDefined(var_1) || var_1 == "")
     var_1 = self.a.movement;
 
   return [[anim.setposemovementfnarray[var_0][var_1]]]();
@@ -495,7 +495,7 @@ blendintostandrun() {
     return 0;
   }
 
-  if(isdefined(self.run_overrideanim)) {
+  if(isDefined(self.run_overrideanim)) {
     self clearanim( % h1_stairs, 0.1);
 
     if(animscripts\stairs_utility::isonstairs()) {
@@ -514,7 +514,7 @@ blendintostandrun() {
   if(self.a.movement != "stop" && self.stairsstate == "none")
     var_2 = 0.5;
 
-  if(isdefined(self.sprint))
+  if(isDefined(self.sprint))
     self setanimknoblimited(animscripts\utility::getmoveanim("sprint"), 1, var_2, 1);
   else
     self setanimknoblimited(animscripts\run::getrunanim(), 1, var_2, 1);
@@ -530,7 +530,7 @@ blendintostandwalk() {
   if(self.a.movement != "stop")
     self endon("movemode");
 
-  if(!isdefined(self.alwaysrunforward) && self.a.pose != "prone")
+  if(!isDefined(self.alwaysrunforward) && self.a.pose != "prone")
     animscripts\run::setmovenonforwardanims(animscripts\utility::getmoveanim("move_b"), animscripts\utility::getmoveanim("move_l"), animscripts\utility::getmoveanim("move_r"));
 
   self.a.pose = "stand";
@@ -540,7 +540,7 @@ blendintostandwalk() {
 crouchtostand() {
   var_0 = 1;
 
-  if(isdefined(self.faststand)) {
+  if(isDefined(self.faststand)) {
     var_0 = 1.8;
     self.faststand = undefined;
   }
@@ -596,7 +596,7 @@ crouchtostandrun() {
 }
 
 blendintocrouchrun() {
-  if(isdefined(self.crouchrun_combatanim))
+  if(isDefined(self.crouchrun_combatanim))
     playblendtransition(self.crouchrun_combatanim, 0.6, "crouch", "run");
   else {
     var_0 = % crouchrun;
@@ -613,13 +613,13 @@ blendintocrouchrun() {
     if(var_2) {
       var_3 = 0.27;
 
-      if(isdefined(self.crouchtransitionoverridewait))
+      if(isDefined(self.crouchtransitionoverridewait))
         var_3 = self.crouchtransitionoverridewait;
 
       wait(var_3);
     }
 
-    if(animscripts\utility::usingsmg() && self.a.movement == "run" && !(isdefined(self.custommoveanimset) && isdefined(self.custommoveanimset["run"]))) {
+    if(animscripts\utility::usingsmg() && self.a.movement == "run" && !(isDefined(self.custommoveanimset) && isDefined(self.custommoveanimset["run"]))) {
       var_4 = "smg_crouch_run";
       thread animscripts\run::updatemoveanimweights("crouchrun", animscripts\utility::lookupanim(var_4, "crouch"), animscripts\utility::lookupanim(var_4, "crouch_b"), animscripts\utility::lookupanim(var_4, "crouch_l"), animscripts\utility::lookupanim(var_4, "crouch_r"));
     } else
@@ -643,7 +643,7 @@ pronetocrouchwalk() {
 }
 
 blendintocrouchwalk() {
-  if(isdefined(self.crouchrun_combatanim)) {
+  if(isDefined(self.crouchrun_combatanim)) {
     self setanimknoball(self.crouchrun_combatanim, % body, 1, 0.4);
     playblendtransition(self.crouchrun_combatanim, 0.6, "crouch", "walk");
     self notify("BlendIntoCrouchWalk");
@@ -659,7 +659,7 @@ standtocrouch() {
   animscripts\utility::randomizeidleset();
   var_0 = 1;
 
-  if(isdefined(self.fastcrouch)) {
+  if(isDefined(self.fastcrouch)) {
     var_0 = 1.8;
     self.fastcrouch = undefined;
   }
@@ -682,10 +682,8 @@ pronetostandwalk() {
 }
 
 pronetopronemove(var_0) {
-  if(isdefined(self.custompronetopronetransitionfunc)) {
-    [
-      [self.custompronetopronetransitionfunc]
-    ]();
+  if(isDefined(self.custompronetopronetransitionfunc)) {
+    [[self.custompronetopronetransitionfunc]]();
     return;
   }
 
@@ -787,7 +785,7 @@ playtransitionanimation(var_0, var_1, var_2, var_3, var_4) {
 }
 
 playtransitionanimationfunc(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(!isdefined(var_4))
+  if(!isDefined(var_4))
     var_4 = 1;
 
   self.movetransitionanimation = var_0;
@@ -798,10 +796,10 @@ playtransitionanimationfunc(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   self setflaggedanimknoballrestart("transAnimDone2", var_0, % body, 1, 0.2, var_4);
 
-  if(!isdefined(self.a.pose))
+  if(!isDefined(self.a.pose))
     self.pose = "undefined";
 
-  if(!isdefined(self.a.movement))
+  if(!isDefined(self.a.movement))
     self.movement = "undefined";
 
   var_6 = "";
@@ -813,7 +811,7 @@ playtransitionanimationfunc(var_0, var_1, var_2, var_3, var_4, var_5) {
   self.movetransitionanimation = undefined;
   self.movetransitionendpose = undefined;
 
-  if(isdefined(var_3))
+  if(isDefined(var_3))
     self setanimknoball(var_3, % body, 1, 0.3, var_4);
   else
     self clearanim(var_0, 0.1);

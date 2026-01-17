@@ -116,5 +116,4 @@ precache_createfx_fx() {
   level._effect["fx_mp_elec_spark_pop_runner"] = loadfx("maps/mp_maps/fx_mp_elec_spark_pop_runner");
 }
 
-precache_fxanim_props() {
-}
+precache_fxanim_props() {}

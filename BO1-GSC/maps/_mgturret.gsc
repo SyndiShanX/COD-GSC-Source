@@ -523,10 +523,10 @@ get_bestdrone(team) {
     return;
   }
   ent = undefined;
-  dotforward = AnglesToForward(self.angles);
+  dotforward = anglesToForward(self.angles);
   for(i = 0; i < level.drones[team].lastindex; i++) {
     angles = VectorToAngles(level.drones[team].array[i].origin - self.origin);
-    forward = AnglesToForward(angles);
+    forward = anglesToForward(angles);
     if(VectorDot(dotforward, forward) < .88) {
       continue;
     }
@@ -572,7 +572,7 @@ saw_mgTurretLink(nodes) {
       dot = vectorDot(nodeForward, turretForward);
       if(dot < 0.9)
         continue;
-      node.turretInfo = spawnstruct();
+      node.turretInfo = spawnStruct();
       node.turretInfo.origin = turret.origin;
       node.turretInfo.angles = turret.angles;
       node.turretInfo.node = node;
@@ -619,14 +619,14 @@ auto_mgTurretLink(nodes) {
     if(node.type == "End") {
       continue;
     }
-    nodeForward = AnglesToForward((0, node.angles[1], 0));
+    nodeForward = anglesToForward((0, node.angles[1], 0));
     keys = GetArrayKeys(turrets);
     for(i = 0; i < keys.size; i++) {
       turret = turrets[keys[i]];
       if(Distance(node.origin, turret.origin) > 70) {
         continue;
       }
-      turretForward = AnglesToForward((0, turret.angles[1], 0));
+      turretForward = anglesToForward((0, turret.angles[1], 0));
       dot = VectorDot(nodeForward, turretForward);
       if(dot < 0.9) {
         continue;
@@ -682,7 +682,7 @@ dropTurretProc() {
   turret.origin = self GetTagOrigin(level.portable_mg_gun_tag);
   turret.angles = self GetTagAngles(level.portable_mg_gun_tag);
   turret setModel(self.turretModel);
-  forward = AnglesToForward(self.angles);
+  forward = anglesToForward(self.angles);
   forward = vector_scale(forward, 100);
   turret MoveGravity(forward, 0.5);
   self Detach(self.turretModel, level.portable_mg_gun_tag);
@@ -741,7 +741,7 @@ move_target_pos_to_new_turrets_visibility(ent, new_spot) {
       continue;
     }
     angles = VectorToAngles(old_turret_pos - ent.origin);
-    forward = AnglesToForward(angles);
+    forward = anglesToForward(angles);
     forward = vector_scale(forward, 8);
     ent.origin = ent.origin + forward;
   }
@@ -763,7 +763,7 @@ aim_turret_at_ambush_point_or_visible_enemy(turret, ent) {
     ent.origin = self.last_enemy_sighting_position;
     return;
   }
-  forward = AnglesToForward(turret.angles);
+  forward = anglesToForward(turret.angles);
   for(i = ent.bread_crumbs.size - 3; i >= 0; i--) {
     crumb = ent.bread_crumbs[i];
     normal = VectorNormalize(crumb - turret.origin);
@@ -953,9 +953,7 @@ get_portable_mg_spot(ent) {
   find_spot_funcs[find_spot_funcs.size] = ::find_good_ambush_spot;
   find_spot_funcs = array_randomize(find_spot_funcs);
   for(i = 0; i < find_spot_funcs.size; i++) {
-    array = [
-      [find_spot_funcs[i]]
-    ](ent);
+    array = [[find_spot_funcs[i]]](ent);
     if(!isDefined(array["spots"])) {
       continue;
     }

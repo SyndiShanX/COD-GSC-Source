@@ -2869,5 +2869,4 @@ main() {
   ent.v["exploder"] = "point_of_no_return";
   ent.v["soundalias"] = "anml_bird_startle_flyaway";
   ent.v["loopsound"] = "nil";
-
 }

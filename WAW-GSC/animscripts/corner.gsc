@@ -32,7 +32,7 @@ corner_think(direction) {
   self.cornerAiming = false;
   animscripts\shared::setAnimAimWeight(0);
   self.haveGoneToCover = false;
-  behaviorCallbacks = spawnstruct();
+  behaviorCallbacks = spawnStruct();
   behaviorCallbacks.mainLoopStart = ::mainLoopStart;
   behaviorCallbacks.reload = ::cornerReload;
   behaviorCallbacks.leaveCoverAndShoot = ::stepOutAndShootEnemy;
@@ -68,7 +68,7 @@ mainLoopStart() {
 
 printYaws() {
   wait(2);
-  for (;;) {
+  for(;;) {
     println("coveryaw = ", self.coverNode GetYawToOrigin(getEnemyEyePos()));
     printYawToEnemy();
     wait(0.05);
@@ -366,8 +366,8 @@ haventRamboedWithinTime(time) {
 
 shootAsTold() {
   self maps\_gameskill::didSomethingOtherThanShooting();
-  while (1) {
-    while (1) {
+  while(1) {
+    while(1) {
       if(self.shouldReturnToCover) {
         break;
       }
@@ -468,7 +468,7 @@ standIdleThreadInternal() {
   if(self.a.cornerMode == "lean")
     animArrayArg = "lean_idle";
   assert(animArrayAnyExist(animArrayArg));
-  for (i = 0;; i++) {
+  for(i = 0;; i++) {
     flagname = "idle" + i;
     idleanim = animArrayPickRandom(animArrayArg);
     self setFlaggedAnimKnobLimitedRestart(flagname, idleanim, 1, 0.2);
@@ -481,7 +481,7 @@ angleRangeThread() {
   self notify("newAngleRangeCheck");
   self endon("newAngleRangeCheck");
   self endon("take_cover_at_corner");
-  while (1) {
+  while(1) {
     if(shootPosOutsideLegalYawRange()) {
       break;
     }
@@ -494,7 +494,7 @@ showstate() {
   self.enemy endon("death");
   self endon("enemy");
   self endon("stopshowstate");
-  while (1) {
+  while(1) {
     wait .05;
     print3d(self.origin + (0, 0, 60), self.statetext);
   }
@@ -575,7 +575,7 @@ blindfire() {
 linethread(a, b, col) {
   if(!isDefined(col))
     col = (1, 1, 1);
-  for (i = 0; i < 100; i++) {
+  for(i = 0; i < 100; i++) {
     line(a, b, col);
     wait .05;
   }
@@ -692,7 +692,7 @@ getPredictedPathMidpoint() {
 
 idle() {
   self endon("end_idle");
-  while (1) {
+  while(1) {
     useTwitch = (randomint(2) == 0 && animArrayAnyExist("alert_idle_twitch"));
     if(useTwitch)
       idleanim = animArrayPickRandom("alert_idle_twitch");
@@ -749,7 +749,7 @@ GoToCover(coveranim, transTime, playTime) {
   self thread animscripts\shared::moveToOriginOverTime(cornerOrigin, transTime);
   self setFlaggedAnimKnobAllRestart("coveranim", coveranim, % body, 1, transTime);
   self animscripts\shared::DoNoteTracksForTime(playTime, "coveranim");
-  while (AbsAngleClamp180(self.angles[1] - desiredYaw) > 1) {
+  while(AbsAngleClamp180(self.angles[1] - desiredYaw) > 1) {
     self animscripts\shared::DoNoteTracksForTime(0.1, "coveranim");
   }
   self animMode("zonly_physics");
@@ -761,7 +761,7 @@ GoToCover(coveranim, transTime, playTime) {
 
 drawoffset() {
   self endon("killanimscript");
-  for (;;) {
+  for(;;) {
     line(self.node.origin + (0, 0, 20), (0, 0, 20) + self.node.origin + vectorscale(anglestoright(self.node.angles + (0, 0, 0)), 16));
     wait(0.05);
   }

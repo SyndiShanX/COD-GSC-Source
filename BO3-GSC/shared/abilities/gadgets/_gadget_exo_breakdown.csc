@@ -15,7 +15,7 @@
 #namespace _gadget_exo_breakdown;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_exo_breakdown", & __init__, undefined, undefined);
+  system::register("gadget_exo_breakdown", &__init__, undefined, undefined);
 }
 
 function __init__() {}

@@ -22,7 +22,7 @@
 #namespace devgui;
 
 function autoexec __init__sytem__() {
-  system::register("", & __init__, undefined, undefined);
+  system::register("", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -69,12 +69,12 @@ function __init__() {
   level thread devgui_vehicle_spawn_think();
   thread init_debug_center_screen();
   level thread dev::body_customization_devgui(1);
-  callback::on_connect( & hero_art_on_player_connect);
-  callback::on_connect( & on_player_connect);
+  callback::on_connect(&hero_art_on_player_connect);
+  callback::on_connect(&on_player_connect);
 }
 
 function on_player_connect() {
-  /# /
+  /
   #
   self.devguilockspawn = 0;
   self thread devgui_player_spawn();
@@ -95,7 +95,7 @@ function devgui_player_spawn() {
 }
 
 function devgui_player_spawn_think() {
-  for (;;) {
+  for(;;) {
     playername = getdvarstring("");
     if(playername == "") {
       wait(0.05);
@@ -119,7 +119,7 @@ function devgui_player_spawn_think() {
 
 function devgui_vehicle_spawn_think() {
   wait(0.05);
-  for (;;) {
+  for(;;) {
     val = getdvarint("");
     if(val != 0) {
       if(val == 1) {
@@ -142,7 +142,7 @@ function devgui_vehicle_spawn_think() {
 }
 
 function devgui_player_weapons() {
-  if(isdefined(game[""]) && game[""]) {
+  if(isDefined(game[""]) && game[""]) {
     return;
   }
   level flag::wait_till("");
@@ -150,7 +150,7 @@ function devgui_player_weapons() {
   a_weapons_mp = [];
   a_grenades_mp = [];
   a_misc_mp = [];
-  for (i = 0; i < a_weapons.size; i++) {
+  for(i = 0; i < a_weapons.size; i++) {
     if(weapons::is_primary_weapon(a_weapons[i]) || weapons::is_side_arm(a_weapons[i]) && !killstreaks::is_killstreak_weapon(a_weapons[i])) {
       arrayinsert(a_weapons_mp, a_weapons[i], 0);
       continue;
@@ -181,14 +181,14 @@ function devgui_player_weapons() {
   menu_index++;
   acv_menu_index = 1;
   acv_sub_menu_index = 1;
-  for (i = 0; i <= 3; i++) {
+  for(i = 0; i <= 3; i++) {
     adddebugcommand((((((((acv_devgui_base_mp + "") + "") + i) + "") + "") + "") + i) + "");
     acv_sub_menu_index++;
   }
   acv_menu_index++;
   attachmentnames = getattachmentnames();
   acv_sub_menu_index = 1;
-  for (i = 0; i < attachmentnames.size; i++) {
+  for(i = 0; i < attachmentnames.size; i++) {
     if(issubstr(attachmentnames[i], "")) {
       continue;
     }
@@ -198,7 +198,7 @@ function devgui_player_weapons() {
   }
   acv_menu_index++;
   acv_sub_menu_index = 1;
-  for (i = 0; i < attachmentnames.size; i++) {
+  for(i = 0; i < attachmentnames.size; i++) {
     if(issubstr(attachmentnames[i], "")) {
       continue;
     }
@@ -211,10 +211,10 @@ function devgui_player_weapons() {
   attachment_cycling_devgui_base_mp = (player_devgui_base_mp + "") + "";
   adddebugcommand(((attachment_cycling_devgui_base_mp + "") + "") + "");
   adddebugcommand(((attachment_cycling_devgui_base_mp + "") + "") + "");
-  for (i = 0; i < 6; i++) {
+  for(i = 0; i < 6; i++) {
     attachment_cycling_sub_menu_index = 1;
     adddebugcommand((((((attachment_cycling_devgui_base_mp + "") + (i + 1) + "") + "") + "") + i) + "");
-    for (attachmentname = 0; attachmentname < attachmentnames.size; attachmentname++) {
+    for(attachmentname = 0; attachmentname < attachmentnames.size; attachmentname++) {
       if(issubstr(attachmentnames[attachmentname], "")) {
         continue;
       }
@@ -234,8 +234,8 @@ function devgui_add_player_weapons(root, pname, index, a_weapons, weapon_type, m
     return;
   }
   devgui_root = (root + weapon_type) + "";
-  if(isdefined(a_weapons)) {
-    for (i = 0; i < a_weapons.size; i++) {
+  if(isDefined(a_weapons)) {
+    for(i = 0; i < a_weapons.size; i++) {
       attachments = a_weapons[i].supportedattachments;
       name = a_weapons[i].name;
       if(attachments.size) {
@@ -254,7 +254,7 @@ function devgui_add_player_weapons(root, pname, index, a_weapons, weapon_type, m
 }
 
 function function_27141585() {
-  if(!isdefined(level.var_f842514b)) {
+  if(!isDefined(level.var_f842514b)) {
     level.var_f842514b = 0;
   }
   level.var_f842514b++;
@@ -269,10 +269,10 @@ function devgui_add_player_weap_command(root, pid, weap_name, cmdindex) {
 }
 
 function devgui_weapon_think() {
-  for (;;) {
+  for(;;) {
     weapon_name = getdvarstring("");
     if(weapon_name != "") {
-      devgui_handle_player_command( & devgui_give_weapon, weapon_name);
+      devgui_handle_player_command(&devgui_give_weapon, weapon_name);
     }
     setdvar("", "");
     wait(0.5);
@@ -280,7 +280,7 @@ function devgui_weapon_think() {
 }
 
 function hero_art_on_player_connect() {
-  self._debugheromodels = spawnstruct();
+  self._debugheromodels = spawnStruct();
 }
 
 function devgui_weapon_asset_name_display_think() {
@@ -295,7 +295,7 @@ function devgui_weapon_asset_name_display_think() {
   colors[colors.size] = (1, 1, 0);
   colors[colors.size] = (1, 0, 1);
   colors[colors.size] = (0, 1, 1);
-  for (;;) {
+  for(;;) {
     wait(update_time);
     display = getdvarint("");
     if(!display) {
@@ -309,10 +309,10 @@ function devgui_weapon_asset_name_display_think() {
       printlnbold_counter = 0;
     }
     color_index = 0;
-    for (i = 1; i < level.players.size; i++) {
+    for(i = 1; i < level.players.size; i++) {
       player = level.players[i];
       weapon = player getcurrentweapon();
-      if(!isdefined(weapon) || level.weaponnone == weapon) {
+      if(!isDefined(weapon) || level.weaponnone == weapon) {
         continue;
       }
       print3d(player gettagorigin(""), weapon.name, colors[color_index], 1, 0.15, print_duration);
@@ -323,14 +323,14 @@ function devgui_weapon_asset_name_display_think() {
     }
     color_index = 0;
     ai_list = getaiarray();
-    for (i = 0; i < ai_list.size; i++) {
+    for(i = 0; i < ai_list.size; i++) {
       ai = ai_list[i];
       if(isvehicle(ai)) {
         weapon = ai.turretweapon;
       } else {
         weapon = ai.weapon;
       }
-      if(!isdefined(weapon) || level.weaponnone == weapon) {
+      if(!isDefined(weapon) || level.weaponnone == weapon) {
         continue;
       }
       print3d(ai gettagorigin(""), weapon.name, colors[color_index], 1, 0.15, print_duration);
@@ -346,12 +346,12 @@ function devgui_attachment_cosmetic_variant_think() {
   old_index = 0;
   old_attachment_1 = "";
   old_attachment_2 = "";
-  for (;;) {
+  for(;;) {
     index = getdvarint("");
     attachment_1 = getdvarstring("");
     attachment_2 = getdvarstring("");
     if(old_attachment_1 != attachment_1 || old_attachment_2 != attachment_2 || old_index != index) {
-      devgui_handle_player_command( & devgui_update_attachment_cosmetic_variant, attachment_1, attachment_2);
+      devgui_handle_player_command(&devgui_update_attachment_cosmetic_variant, attachment_1, attachment_2);
     }
     old_index = index;
     old_attachment_1 = attachment_1;
@@ -374,7 +374,7 @@ function devgui_attachment_cycling_update() {
   acvs = [];
   originalattachments = [];
   originalacvs = [];
-  for (i = 0; i < 6; i++) {
+  for(i = 0; i < 6; i++) {
     originalattachments[i] = getdvarstring(level.attachment_cycling_dvars[i]);
     originalacvs[i] = getdvarint(level.acv_cycling_dvars[i]);
     textcolor[i] = "";
@@ -385,7 +385,7 @@ function devgui_attachment_cycling_update() {
       continue;
     }
     textcolor[i] = "";
-    for (supportedindex = 0; supportedindex < supportedattachments.size; supportedindex++) {
+    for(supportedindex = 0; supportedindex < supportedattachments.size; supportedindex++) {
       if(name == supportedattachments[supportedindex]) {
         textcolor[i] = "";
         attachments[i] = name;
@@ -394,11 +394,11 @@ function devgui_attachment_cycling_update() {
       }
     }
   }
-  for (i = 0; i < 6; i++) {
+  for(i = 0; i < 6; i++) {
     if("" == originalattachments[i]) {
       continue;
     }
-    for (j = i + 1; j < 6; j++) {
+    for(j = i + 1; j < 6; j++) {
       if(originalattachments[i] == originalattachments[j]) {
         textcolor[j] = "";
         attachments[j] = "";
@@ -407,7 +407,7 @@ function devgui_attachment_cycling_update() {
     }
   }
   msg = "";
-  for (i = 0; i < 6; i++) {
+  for(i = 0; i < 6; i++) {
     if("" == originalattachments[i]) {
       continue;
     }
@@ -429,12 +429,12 @@ function devgui_attachment_cycling_update() {
 }
 
 function devgui_attachment_cycling_think() {
-  for (;;) {
+  for(;;) {
     state = getdvarstring("");
     setdvar("", "");
     if(issubstr(state, "")) {
       if("" == state) {
-        for (i = 0; i < 6; i++) {
+        for(i = 0; i < 6; i++) {
           devgui_attachment_cycling_clear(i);
         }
       } else {
@@ -444,7 +444,7 @@ function devgui_attachment_cycling_think() {
       state = "";
     }
     if("" == state) {
-      array::thread_all(getplayers(), & devgui_attachment_cycling_update);
+      array::thread_all(getplayers(), &devgui_attachment_cycling_update);
     }
     wait(0.5);
   }
@@ -453,21 +453,21 @@ function devgui_attachment_cycling_think() {
 function devgui_test_chart_think() {
   wait(0.05);
   old_val = getdvarint("");
-  for (;;) {
+  for(;;) {
     val = getdvarint("");
     if(old_val != val) {
-      if(isdefined(level.test_chart_model)) {
+      if(isDefined(level.test_chart_model)) {
         level.test_chart_model delete();
         level.test_chart_model = undefined;
       }
       if(val) {
         player = getplayers()[0];
         direction = player getplayerangles();
-        direction_vec = anglestoforward((0, direction[1], 0));
+        direction_vec = anglesToForward((0, direction[1], 0));
         scale = 120;
         direction_vec = (direction_vec[0] * scale, direction_vec[1] * scale, direction_vec[2] * scale);
-        level.test_chart_model = spawn("", player geteye() + direction_vec);
-        level.test_chart_model setmodel("");
+        level.test_chart_model = spawn("", player getEye() + direction_vec);
+        level.test_chart_model setModel("");
         level.test_chart_model.angles = (0, direction[1], 0) + vectorscale((0, 1, 0), 90);
       }
     }
@@ -477,9 +477,9 @@ function devgui_test_chart_think() {
 }
 
 function devgui_give_weapon(weapon_name) {
-  /# /
+  /
   #
-  assert(isdefined(self));
+  assert(isDefined(self));
   assert(isplayer(self));
   assert(isalive(self));
   self notify("devgui_give_ammo");
@@ -547,9 +547,9 @@ function devgui_give_weapon(weapon_name) {
 }
 
 function devgui_update_attachment_cosmetic_variant(attachment_1, attachment_2) {
-  /# /
+  /
   #
-  assert(isdefined(self));
+  assert(isDefined(self));
   assert(isplayer(self));
   assert(isalive(self));
   currentweapon = self getcurrentweapon();
@@ -565,11 +565,11 @@ function devgui_handle_player_command(playercallback, pcb_param_1, pcb_param_2) 
   pid = getdvarint("");
   if(pid > 0) {
     player = getplayers()[pid - 1];
-    if(isdefined(player)) {
-      if(isdefined(pcb_param_2)) {
+    if(isDefined(player)) {
+      if(isDefined(pcb_param_2)) {
         player thread[[playercallback]](pcb_param_1, pcb_param_2);
       } else {
-        if(isdefined(pcb_param_1)) {
+        if(isDefined(pcb_param_1)) {
           player thread[[playercallback]](pcb_param_1);
         } else {
           player thread[[playercallback]]();
@@ -584,12 +584,12 @@ function devgui_handle_player_command(playercallback, pcb_param_1, pcb_param_2) 
 
 function init_debug_center_screen() {
   zero_idle_movement = "";
-  for (;;) {
+  for(;;) {
     if(getdvarint("")) {
-      if(!isdefined(level.center_screen_debug_hudelem_active) || level.center_screen_debug_hudelem_active == 0) {
+      if(!isDefined(level.center_screen_debug_hudelem_active) || level.center_screen_debug_hudelem_active == 0) {
         thread debug_center_screen();
         zero_idle_movement = getdvarstring("");
-        if(isdefined(zero_idle_movement) && zero_idle_movement == "") {
+        if(isDefined(zero_idle_movement) && zero_idle_movement == "") {
           setdvar("", "");
           zero_idle_movement = "";
         }
@@ -635,7 +635,7 @@ function add_vehicle_at_eye_trace(vehiclename) {
   trace = host bot::eye_trace();
   veh_spawner = getent(vehiclename + "", "");
   vehicle = veh_spawner spawnfromspawner(vehiclename, 1, 1, 1);
-  if(isdefined(vehicle.archetype)) {
+  if(isDefined(vehicle.archetype)) {
     vehicle asmrequestsubstate("");
   }
   wait(0.05);
@@ -648,9 +648,9 @@ function add_vehicle_at_eye_trace(vehiclename) {
 function watch_player_death() {
   self endon("death");
   vehicle = self;
-  while (true) {
+  while(true) {
     driver = self getseatoccupant(0);
-    if(isdefined(driver) && !isalive(driver)) {
+    if(isDefined(driver) && !isalive(driver)) {
       driver unlink();
     }
     wait(0.05);

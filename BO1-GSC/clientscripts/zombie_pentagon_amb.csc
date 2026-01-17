@@ -57,11 +57,11 @@ play_elevator1_audio() {
   while(1) {
     level waittill("ele1");
     ent = spawn(0, (0, 0, 0), "script_origin");
-    PlaySound(0, "evt_elevator_office_start", ent.origin);
+    playSound(0, "evt_elevator_office_start", ent.origin);
     ent playLoopSound("evt_elevator_office_run", 1);
     level waittill("ele1e");
     ent stopLoopSound(1);
-    PlaySound(0, "evt_elevator_office_stop", ent.origin);
+    playSound(0, "evt_elevator_office_stop", ent.origin);
     wait(1);
     ent Delete();
   }
@@ -71,11 +71,11 @@ play_elevator2_audio() {
   while(1) {
     level waittill("ele2");
     ent = spawn(0, (0, 0, 0), "script_origin");
-    PlaySound(0, "evt_elevator_freight_start", ent.origin);
+    playSound(0, "evt_elevator_freight_start", ent.origin);
     ent playLoopSound("evt_elevator_freight_run", 1);
     level waittill("ele2e");
     ent stopLoopSound(1);
-    PlaySound(0, "evt_elevator_freight_stop", ent.origin);
+    playSound(0, "evt_elevator_freight_stop", ent.origin);
     wait(1);
     ent Delete();
   }
@@ -87,7 +87,7 @@ play_minigun_loop() {
     ent = spawn(0, (0, 0, 0), "script_origin");
     ent playLoopSound("zmb_insta_kill_loop");
     level waittill("minie");
-    PlaySound(0, "zmb_insta_kill", (0, 0, 0));
+    playSound(0, "zmb_insta_kill", (0, 0, 0));
     ent stopLoopSound(.5);
     wait(.5);
     ent Delete();

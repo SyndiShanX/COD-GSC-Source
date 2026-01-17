@@ -13,12 +13,12 @@ init() {
   level.maxprestige = int(tablelookup("mp\rankIconTable.csv", 0, "maxPrestige", 1));
   level.maxrankformaxprestige = int(tablelookup("mp\rankTable.csv", 0, "maxrankformaxprestige", 1));
 
-  if(!isdefined(level.xpgamemodescale))
+  if(!isDefined(level.xpgamemodescale))
     level.xpgamemodescale = 1;
 
   var_0 = 0;
 
-  for (var_1 = tablelookup("mp\rankTable.csv", 0, var_0, 1); isdefined(var_1) && var_1 != ""; var_1 = tablelookup("mp\rankTable.csv", 0, var_0, 1)) {
+  for(var_1 = tablelookup("mp\rankTable.csv", 0, var_0, 1); isDefined(var_1) && var_1 != ""; var_1 = tablelookup("mp\rankTable.csv", 0, var_0, 1)) {
     level.ranktable[var_0][1] = tablelookup("mp\rankTable.csv", 0, var_0, 1);
     level.ranktable[var_0][2] = tablelookup("mp\rankTable.csv", 0, var_0, 2);
     level.ranktable[var_0][3] = tablelookup("mp\rankTable.csv", 0, var_0, 3);
@@ -33,7 +33,7 @@ init() {
 }
 
 onplayerconnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connected", var_0);
 
     if(!isai(var_0) && var_0 maps\mp\_utility::rankingenabled()) {
@@ -62,7 +62,7 @@ onplayerconnect() {
     var_0.pers["redeemedxp"] = var_3;
     var_0.pers["prestige"] = var_1;
 
-    if(!isdefined(var_0.pers["participation"]))
+    if(!isDefined(var_0.pers["participation"]))
       var_0.pers["participation"] = 0;
 
     var_5 = getrankforxp(var_0 gettotalxp(), var_1);
@@ -83,12 +83,12 @@ onplayerconnect() {
       setmatchdata("players", var_0.clientid, "rankAtStart", maps\mp\_utility::clamptobyte(var_0.pers["rank"]));
     }
 
-    if(!isdefined(var_0.pers["postGameChallenges"]))
+    if(!isDefined(var_0.pers["postGameChallenges"]))
       var_0 setclientdvars("ui_challenge_1_ref", "", "ui_challenge_2_ref", "", "ui_challenge_3_ref", "", "ui_challenge_4_ref", "", "ui_challenge_5_ref", "", "ui_challenge_6_ref", "", "ui_challenge_7_ref", "");
 
     var_0 setclientdvar("ui_promotion", 0);
 
-    if(!isdefined(var_0.pers["summary"])) {
+    if(!isDefined(var_0.pers["summary"])) {
       var_0.pers["summary"] = [];
       var_0.pers["summary"]["xp"] = 0;
       var_0.pers["summary"]["score"] = 0;
@@ -113,7 +113,7 @@ processprestigemasteryonspawn(var_0, var_1) {
   self endon("disconnect");
   var_2 = processprestigemastery(var_0, var_1);
 
-  if(isdefined(var_2)) {
+  if(isDefined(var_2)) {
     self waittill("spawned_player");
     maps\mp\_utility::gameflagwait("prematch_done");
     thread maps\mp\gametypes\_hud_message::splashnotify(var_2);
@@ -123,7 +123,7 @@ processprestigemasteryonspawn(var_0, var_1) {
 onplayerspawned() {
   self endon("disconnect");
 
-  for (;;)
+  for(;;)
     self waittill("spawned_player");
 }
 
@@ -146,7 +146,7 @@ getxpscalewithparty() {
 }
 
 isregisteredevent(var_0) {
-  if(isdefined(level.xpeventinfo[var_0]))
+  if(isDefined(level.xpeventinfo[var_0]))
     return 1;
   else
     return 0;
@@ -157,10 +157,10 @@ registerxpeventinfo(var_0, var_1, var_2, var_3) {
   level.xpeventinfo[var_0]["allowPlayerScore"] = 0;
   level.xpeventinfo[var_0]["playSplash"] = 0;
 
-  if(isdefined(var_2) && var_2)
+  if(isDefined(var_2) && var_2)
     level.xpeventinfo[var_0]["allowPlayerScore"] = 1;
 
-  if(isdefined(var_3) && var_3)
+  if(isDefined(var_3) && var_3)
     level.xpeventinfo[var_0]["playSplash"] = 1;
 }
 
@@ -206,7 +206,7 @@ getrankinfomaxxp(var_0) {
 
 getrankinfofull(var_0) {
   if(var_0 > level.maxrank)
-    return & "RANK_PARAGON_FULL";
+    return &"RANK_PARAGON_FULL";
   else
     return tablelookupistring("mp\rankTable.csv", 0, var_0, 16);
 }
@@ -234,7 +234,7 @@ awardgameevent(var_0, var_1, var_2, var_3, var_4) {
 giverankxp(var_0, var_1, var_2, var_3, var_4, var_5) {
   self endon("disconnect");
 
-  if(isdefined(self.owner) && !isbot(self)) {
+  if(isDefined(self.owner) && !isbot(self)) {
     self.owner giverankxp(var_0, var_1, var_2, var_3, var_4, var_5);
     return;
   }
@@ -254,16 +254,16 @@ giverankxp(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(!level.teambased && level.teamcount["allies"] + level.teamcount["axis"] < 2 && var_0 != "win") {
     return;
   }
-  if(isdefined(level.disableranking) && level.disableranking) {
+  if(isDefined(level.disableranking) && level.disableranking) {
     return;
   }
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     var_1 = getscoreinfovalue(var_0);
 
   if(var_1 == 0) {
     return;
   }
-  if(var_1 > 0 && !isdefined(self.lootplaytimevalidated)) {
+  if(var_1 > 0 && !isDefined(self.lootplaytimevalidated)) {
     self.lootplaytimevalidated = 1;
     lootservicevalidateplaytime(self.xuid);
   }
@@ -290,7 +290,7 @@ giverankxp(var_0, var_1, var_2, var_3, var_4, var_5) {
       if(self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "hasDoubleXPItem"))
         var_6 = int(var_6 * 2);
 
-      if(isdefined(level.nukedetonated) && level.nukedetonated) {
+      if(isDefined(level.nukedetonated) && level.nukedetonated) {
         if(level.teambased && level.nukeinfo.team == self.team)
           var_6 = var_6 * level.nukeinfo.xpscalar;
         else if(!level.teambased && level.nukeinfo.player == self)
@@ -362,7 +362,7 @@ updaterankannouncehud() {
   self endon("update_rank");
   var_0 = self.pers["team"];
 
-  if(!isdefined(var_0)) {
+  if(!isDefined(var_0)) {
     return;
   }
   if(!maps\mp\_utility::levelflag("game_over"))
@@ -388,11 +388,11 @@ updaterankannouncehud() {
 
   var_6 = getrankinfofull(var_1);
 
-  for (var_7 = 0; var_7 < level.players.size; var_7++) {
+  for(var_7 = 0; var_7 < level.players.size; var_7++) {
     var_8 = level.players[var_7];
     var_9 = var_8.pers["team"];
 
-    if(isdefined(var_9) && var_8 != self) {
+    if(isDefined(var_9) && var_8 != self) {
       if(var_9 == var_0) {
         if(var_1 > level.maxrank) {
           var_8 iprintln(&"RANK_PLAYER_WAS_PROMOTED_N", self, var_6, var_1 + 1);
@@ -429,7 +429,7 @@ xppointspopup(var_0, var_1) {
   self.xpupdatetotal = self.xpupdatetotal + var_1;
   self setclientomnvar("ui_points_popup", self.xpupdatetotal);
 
-  if(!isdefined(var_2) || isdefined(var_2) && var_2 == -1) {} else
+  if(!isDefined(var_2) || isDefined(var_2) && var_2 == -1) {} else
     self setclientomnvar("ui_points_popup_event", var_2);
 
   wait 1;
@@ -448,21 +448,21 @@ getrank() {
 }
 
 getprestigelevel() {
-  if(isai(self) && isdefined(self.pers["prestige_fake"]))
+  if(isai(self) && isDefined(self.pers["prestige_fake"]))
     return self.pers["prestige_fake"];
   else
     return maps\mp\gametypes\_persistence::statget("prestige");
 }
 
 getrankxp() {
-  if(isdefined(self.pers["rankxp"]))
+  if(isDefined(self.pers["rankxp"]))
     return self.pers["rankxp"];
   else
     return 0;
 }
 
 getredeemedxp() {
-  if(isdefined(self.pers["redeemedxp"]))
+  if(isDefined(self.pers["redeemedxp"]))
     return self.pers["redeemedxp"];
   else
     return 0;
@@ -492,7 +492,7 @@ incrankxp(var_0) {
   self.pers["rankxp"] = var_5;
   var_6 = processprestigemastery(var_2, var_5);
 
-  if(isdefined(var_6))
+  if(isDefined(var_6))
     thread maps\mp\gametypes\_hud_message::splashnotify(var_6);
 }
 
@@ -500,21 +500,21 @@ processprestigemastery(var_0, var_1) {
   var_2 = getrankinfomaxxp(level.maxrank) - getredeemedxp();
   var_3 = getrankinfomaxxp(level.maxrankformaxprestige - 1) - getredeemedxp();
 
-  if(var_0 == level.maxprestige && var_1 >= var_3 && !isdefined(self.pers["prestigeMaster2"])) {
+  if(var_0 == level.maxprestige && var_1 >= var_3 && !isDefined(self.pers["prestigeMaster2"])) {
     var_4 = self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "challengeState", "ch_prestige_max");
     var_5 = var_4 >= 3;
     self.pers["prestigeMaster2"] = self setprestigemastery();
 
-    if(isdefined(self.pers["prestigeMaster2"]) && !var_5)
+    if(isDefined(self.pers["prestigeMaster2"]) && !var_5)
       return "prestigeMaster2";
   }
 
-  if(var_0 == level.maxprestige && var_1 >= var_2 && !isdefined(self.pers["prestigeMaster"])) {
+  if(var_0 == level.maxprestige && var_1 >= var_2 && !isDefined(self.pers["prestigeMaster"])) {
     var_4 = self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "challengeState", "ch_prestige_max");
     var_5 = var_4 >= 2;
     self.pers["prestigeMaster"] = self setprestigemastery();
 
-    if(isdefined(self.pers["prestigeMaster"]) && !var_5)
+    if(isDefined(self.pers["prestigeMaster"]) && !var_5)
       return "prestigeMaster";
   }
 

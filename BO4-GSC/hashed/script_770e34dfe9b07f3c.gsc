@@ -12,7 +12,6 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_utility;
-
 #namespace namespace_841de7df;
 
 autoexec __init__system__() {
@@ -24,11 +23,11 @@ __init__() {
     return;
   }
 
-  clientfield::register("zbarrier", "" + #"hash_100f180bf5d2a517", 14000, 1, "int");
+  clientfield::register("zbarrier", "" + # "hash_100f180bf5d2a517", 14000, 1, "int");
   zm_trial::register_challenge(#"hash_28d1b9857e2ca681", &on_begin, &on_end);
 }
 
-private on_begin(var_c4da4541, var_93a137cd) {
+on_begin(var_c4da4541, var_93a137cd) {
   level.var_6f6736a8 = zm_trial::function_5769f26a(var_c4da4541);
 
   if(isDefined(var_93a137cd)) {
@@ -50,7 +49,7 @@ private on_begin(var_c4da4541, var_93a137cd) {
   }
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   foreach(player in getplayers()) {
     player.var_14361e0c = undefined;
     player zm_trial_util::function_f3aacffb();
@@ -94,8 +93,8 @@ private on_end(round_reset) {
   level.var_6f6736a8 = undefined;
 }
 
-private pap_machine_fx() {
-  level endon(#"hash_7646638df88a3656", #"end_game");
+pap_machine_fx() {
+  level endon(#"hash_7646638df88a3656", # "end_game");
 
   while(true) {
     var_4c755588 = function_34835ec7();
@@ -106,14 +105,14 @@ private pap_machine_fx() {
       continue;
     }
 
-    var_4c755588 clientfield::set("" + #"hash_100f180bf5d2a517", 1);
-    var_4c755588 waittill(#"pap_taken", #"pap_timeout");
-    var_4c755588 clientfield::set("" + #"hash_100f180bf5d2a517", 0);
+    var_4c755588 clientfield::set("" + # "hash_100f180bf5d2a517", 1);
+    var_4c755588 waittill(#"pap_taken", # "pap_timeout");
+    var_4c755588 clientfield::set("" + # "hash_100f180bf5d2a517", 0);
   }
 }
 
-private function_34835ec7() {
-  level endon(#"hash_7646638df88a3656", #"end_game");
+function_34835ec7() {
+  level endon(#"hash_7646638df88a3656", # "end_game");
 
   while(true) {
     var_4d8e32c8 = getEntArray("zm_pack_a_punch", "targetname");
@@ -128,7 +127,7 @@ private function_34835ec7() {
   }
 }
 
-private function_a14072bf() {
+function_a14072bf() {
   self endon(#"disconnect");
   level endon(#"hash_7646638df88a3656");
   self.var_41d5077e = 0;
@@ -151,7 +150,7 @@ private function_a14072bf() {
   }
 }
 
-private function_c33c2895() {
+function_c33c2895() {
   level endon(#"hash_7646638df88a3656");
   zm_trial_util::function_2976fa44(level.var_6f6736a8);
 

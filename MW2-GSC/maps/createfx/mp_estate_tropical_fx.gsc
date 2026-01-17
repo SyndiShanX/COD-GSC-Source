@@ -1166,5 +1166,4 @@ main() {
   ent.v["angles"] = (282.772, 289.962, -18.3823);
   ent.v["fxid"] = "leaves_fall_gentlewind_codo";
   ent.v["delay"] = -15;
-
 }

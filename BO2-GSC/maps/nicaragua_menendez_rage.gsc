@@ -51,7 +51,7 @@ setup_rage_settings() {
 }
 
 _get_low_rage_settings() {
-  s_settings = spawnstruct();
+  s_settings = spawnStruct();
 
   switch (getdifficulty()) {
     case "easy":
@@ -76,7 +76,7 @@ _get_low_rage_settings() {
 }
 
 _get_high_rage_settings() {
-  s_settings = spawnstruct();
+  s_settings = spawnStruct();
 
   switch (getdifficulty()) {
     case "easy":
@@ -312,7 +312,7 @@ rage_high_take_weapons() {
   self.weapons_info = [];
 
   for(i = 0; i < self.weapons_list.size; i++) {
-    self.weapons_info[i] = spawnstruct();
+    self.weapons_info[i] = spawnStruct();
 
     if(isDefined(self.offhand) && self.weapons_list[i] == self.offhand) {
       self.weapons_info[i]._ammo = 0;
@@ -476,13 +476,13 @@ sound_fake_reload() {
   self endon("weapon_change");
   self endon("weapon_melee");
   self endon("rage_sprinting");
-  self playsound("fly_spas_pull");
+  self playSound("fly_spas_pull");
   wait 0.1;
-  self playsound("fly_spas_shell_in");
+  self playSound("fly_spas_shell_in");
   wait 0.05;
-  self playsound("fly_spas_shell_in");
+  self playSound("fly_spas_shell_in");
   wait 0.05;
-  self playsound("fly_spas_release");
+  self playSound("fly_spas_release");
 }
 
 rage_ammo_weapon_change() {
@@ -571,7 +571,7 @@ rage_ragdoll_death(v_hit_direction, v_hit_location) {
   v_launch = v_hit_direction * n_launch_force;
   n_up_force = linear_map(n_dist_invert, 0, 512, 6, 23);
   v_launch_final = (v_launch[0], v_launch[1], n_up_force);
-  playfx(level._effect["rage_mode_blood"], v_hit_location, v_hit_direction);
+  playFX(level._effect["rage_mode_blood"], v_hit_location, v_hit_direction);
   self ragdoll_death();
 
   if(isDefined(self))
@@ -588,7 +588,7 @@ rage_blood_enemy_death(v_hit_direction, v_hit_location) {
   if(isDefined(self.ent_flag["rage_extra_gore"])) {
     if(!ent_flag("rage_extra_gore")) {
       self thread rage_extra_gore_cool_down();
-      playfx(level._effect["rage_mode_blood"], v_hit_location, v_hit_direction);
+      playFX(level._effect["rage_mode_blood"], v_hit_location, v_hit_direction);
 
       if(is_mature())
         self blood_splat_logic();
@@ -986,7 +986,7 @@ rage_mode_audio_loop(str_vox) {
     level.str_rage_breath = str_vox;
 
     while(!flag("shattered_1_started")) {
-      self playsound(str_vox, "breathing_done");
+      self playSound(str_vox, "breathing_done");
       self waittill("breathing_done");
       wait 0.05;
     }

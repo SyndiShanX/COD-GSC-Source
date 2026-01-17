@@ -12,7 +12,6 @@
 #include scripts\core_common\ai\systems\shared;
 #include scripts\core_common\ai_shared;
 #include scripts\core_common\array_shared;
-
 #namespace aiutility;
 
 autoexec registerbehaviorscriptfunctions() {
@@ -186,7 +185,7 @@ autoexec registerbehaviorscriptfunctions() {
   archetype_aivsaimelee::registeraivsaimeleebehaviorfunctions();
 }
 
-private bb_getstairsnumskipsteps() {
+bb_getstairsnumskipsteps() {
   assert(isDefined(self._stairsstartnode) && isDefined(self._stairsendnode));
   numtotalsteps = self getblackboardattribute("_staircase_num_total_steps");
   stepssofar = self getblackboardattribute("_staircase_num_steps");
@@ -206,7 +205,7 @@ private bb_getstairsnumskipsteps() {
   return "staircase_skip_3";
 }
 
-private bb_gettraversalheight() {
+bb_gettraversalheight() {
   entity = self;
   startposition = entity.traversalstartpos;
   endposition = entity.traversalendpos;
@@ -239,7 +238,7 @@ private bb_gettraversalheight() {
   return 0;
 }
 
-private bb_gettraversalwidth() {
+bb_gettraversalwidth() {
   entity = self;
   startposition = entity.traversalstartpos;
   endposition = entity.traversalendpos;
@@ -389,7 +388,7 @@ function_cc26899f() {
   return "locomotion_speed_walk";
 }
 
-private bb_getgibbedlimbs() {
+bb_getgibbedlimbs() {
   entity = self;
   rightarmgibbed = gibserverutils::isgibbed(entity, 16);
   leftarmgibbed = gibserverutils::isgibbed(entity, 32);
@@ -405,7 +404,7 @@ private bb_getgibbedlimbs() {
   return "none";
 }
 
-private bb_getyawtocovernode() {
+bb_getyawtocovernode() {
   if(!isDefined(self.node)) {
     return 0;
   }
@@ -641,7 +640,7 @@ getangleusingdirection(direction) {
 
 wasatcovernode() {
   if(isDefined(self.prevnode)) {
-    if(self.prevnode.type == #"cover left" || self.prevnode.type == #"cover right" || self.prevnode.type == #"cover pillar" || self.prevnode.type == #"cover stand" || self.prevnode.type == #"conceal stand" || self.prevnode.type == #"cover crouch" || self.prevnode.type == #"cover crouch window" || self.prevnode.type == #"conceal crouch") {
+    if(self.prevnode.type == # "cover left" || self.prevnode.type == # "cover right" || self.prevnode.type == # "cover pillar" || self.prevnode.type == # "cover stand" || self.prevnode.type == # "conceal stand" || self.prevnode.type == # "cover crouch" || self.prevnode.type == # "cover crouch window" || self.prevnode.type == # "conceal crouch") {
       return true;
     }
   }
@@ -652,7 +651,7 @@ wasatcovernode() {
 bb_getlocomotionexityaw(blackboard, yaw) {
   if(self haspath()) {
     predictedlookaheadinfo = self predictexit();
-    status = predictedlookaheadinfo[#"path_prediction_status"];
+    status = predictedlookaheadinfo[# "path_prediction_status"];
 
     if(!isDefined(self.pathgoalpos)) {
       return -1;
@@ -660,8 +659,8 @@ bb_getlocomotionexityaw(blackboard, yaw) {
 
     if(status == 3) {
       start = self.origin;
-      end = start + vectorscale((0, predictedlookaheadinfo[#"path_prediction_travel_vector"][1], 0), 100);
-      angletoexit = vectortoangles(predictedlookaheadinfo[#"path_prediction_travel_vector"])[1];
+      end = start + vectorscale((0, predictedlookaheadinfo[# "path_prediction_travel_vector"][1], 0), 100);
+      angletoexit = vectortoangles(predictedlookaheadinfo[# "path_prediction_travel_vector"])[1];
       exityaw = absangleclamp360(angletoexit - self.prevnode.angles[1]);
 
       record3dtext("<dev string:x82>" + int(exityaw), self.origin - (0, 0, 5), (1, 0, 0), "<dev string:x75>", undefined, 0.4);
@@ -669,8 +668,8 @@ bb_getlocomotionexityaw(blackboard, yaw) {
       return exityaw;
     } else if(status == 4) {
       start = self.origin;
-      end = start + vectorscale((0, predictedlookaheadinfo[#"path_prediction_travel_vector"][1], 0), 100);
-      angletoexit = vectortoangles(predictedlookaheadinfo[#"path_prediction_travel_vector"])[1];
+      end = start + vectorscale((0, predictedlookaheadinfo[# "path_prediction_travel_vector"][1], 0), 100);
+      angletoexit = vectortoangles(predictedlookaheadinfo[# "path_prediction_travel_vector"])[1];
       exityaw = absangleclamp360(angletoexit - self.angles[1]);
 
       record3dtext("<dev string:x82>" + int(exityaw), self.origin - (0, 0, 5), (1, 0, 0), "<dev string:x75>", undefined, 0.4);
@@ -687,9 +686,9 @@ bb_getlocomotionexityaw(blackboard, yaw) {
         return exityaw;
       }
 
-      start = predictedlookaheadinfo[#"path_prediction_start_point"];
-      end = start + predictedlookaheadinfo[#"path_prediction_travel_vector"];
-      exityaw = getangleusingdirection(predictedlookaheadinfo[#"path_prediction_travel_vector"]);
+      start = predictedlookaheadinfo[# "path_prediction_start_point"];
+      end = start + predictedlookaheadinfo[# "path_prediction_travel_vector"];
+      exityaw = getangleusingdirection(predictedlookaheadinfo[# "path_prediction_travel_vector"]);
 
       record3dtext("<dev string:x82>" + int(exityaw), self.origin - (0, 0, 5), (1, 0, 0), "<dev string:x75>", undefined, 0.4);
 
@@ -720,11 +719,11 @@ bb_getlocomotionfaceenemyquadrant() {
   walkstring = getdvarstring(#"tacticalwalkdirection");
 
   switch (walkstring) {
-    case #"right":
+    case # "right":
       return "<dev string:x8f>";
-    case #"left":
+    case # "left":
       return "<dev string:xad>";
-    case #"back":
+    case # "back":
       return "<dev string:xca>";
   }
 
@@ -751,7 +750,7 @@ bb_getlocomotionfaceenemyquadrant() {
 bb_getlocomotionpaintype() {
   if(self haspath()) {
     predictedlookaheadinfo = self predictpath();
-    status = predictedlookaheadinfo[#"path_prediction_status"];
+    status = predictedlookaheadinfo[# "path_prediction_status"];
     startpos = self.origin;
     furthestpointtowardsgoalclear = 1;
 
@@ -896,7 +895,7 @@ scriptstartragdoll(behaviortreeentity) {
   behaviortreeentity startragdoll();
 }
 
-private prepareforexposedmelee(behaviortreeentity) {
+prepareforexposedmelee(behaviortreeentity) {
   keepclaimnode(behaviortreeentity);
   meleeacquiremutex(behaviortreeentity);
   currentstance = behaviortreeentity getblackboardattribute("_stance");
@@ -1244,7 +1243,7 @@ choosebettercoverservicecodeversion(behaviortreeentity) {
   return false;
 }
 
-private choosebettercoverservice(behaviortreeentity) {
+choosebettercoverservice(behaviortreeentity) {
   shouldchoosebettercoverresult = shouldchoosebettercover(behaviortreeentity);
 
   if(shouldchoosebettercoverresult && !behaviortreeentity.keepclaimednode) {
@@ -1325,17 +1324,17 @@ getsecondbestcovernodeifavailable(behaviortreeentity) {
 
 getcovertype(node) {
   if(isDefined(node)) {
-    if(node.type == #"cover pillar") {
+    if(node.type == # "cover pillar") {
       return "cover_pillar";
-    } else if(node.type == #"cover left") {
+    } else if(node.type == # "cover left") {
       return "cover_left";
-    } else if(node.type == #"cover right") {
+    } else if(node.type == # "cover right") {
       return "cover_right";
-    } else if(node.type == #"cover stand" || node.type == #"conceal stand") {
+    } else if(node.type == # "cover stand" || node.type == # "conceal stand") {
       return "cover_stand";
-    } else if(node.type == #"cover crouch" || node.type == #"cover crouch window" || node.type == #"conceal crouch") {
+    } else if(node.type == # "cover crouch" || node.type == # "cover crouch window" || node.type == # "conceal crouch") {
       return "cover_crouch";
-    } else if(node.type == #"exposed" || node.type == #"guard") {
+    } else if(node.type == # "exposed" || node.type == # "guard") {
       return "cover_exposed";
     }
   }
@@ -1345,7 +1344,7 @@ getcovertype(node) {
 
 iscoverconcealed(node) {
   if(isDefined(node)) {
-    return (node.type == #"conceal crouch" || node.type == #"conceal stand");
+    return (node.type == # "conceal crouch" || node.type == # "conceal stand");
   }
 
   return false;
@@ -1364,17 +1363,17 @@ canseeenemywrapper() {
   enemyeye = self.enemy getEye();
   yawtoenemy = angleclamp180(node.angles[1] - vectortoangles(enemyeye - node.origin)[1]);
 
-  if(node.type == #"cover left" || node.type == #"cover right") {
+  if(node.type == # "cover left" || node.type == # "cover right") {
     if(yawtoenemy > 60 || yawtoenemy < -60) {
       return 0;
     }
 
-    if(isDefined(node.spawnflags) && (node.spawnflags&4) == 4) {
-      if(node.type == #"cover left" && yawtoenemy > 10) {
+    if(isDefined(node.spawnflags) && (node.spawnflags & 4) == 4) {
+      if(node.type == # "cover left" && yawtoenemy > 10) {
         return 0;
       }
 
-      if(node.type == #"cover right" && yawtoenemy < -10) {
+      if(node.type == # "cover right" && yawtoenemy < -10) {
         return 0;
       }
     }
@@ -1382,8 +1381,8 @@ canseeenemywrapper() {
 
   nodeoffset = (0, 0, 0);
 
-  if(node.type == #"cover pillar") {
-    assert(!(isDefined(node.spawnflags) && (node.spawnflags&2048) == 2048) || !(isDefined(node.spawnflags) && (node.spawnflags&1024) == 1024));
+  if(node.type == # "cover pillar") {
+    assert(!(isDefined(node.spawnflags) && (node.spawnflags & 2048) == 2048) || !(isDefined(node.spawnflags) && (node.spawnflags & 1024) == 1024));
     canseefromleft = 1;
     canseefromright = 1;
     nodeoffset = (-32, 3.7, 60);
@@ -1395,13 +1394,13 @@ canseeenemywrapper() {
     return (canseefromright || canseefromleft);
   }
 
-  if(node.type == #"cover left") {
+  if(node.type == # "cover left") {
     nodeoffset = (-36, 7, 63);
-  } else if(node.type == #"cover right") {
+  } else if(node.type == # "cover right") {
     nodeoffset = (36, 7, 63);
-  } else if(node.type == #"cover stand" || node.type == #"conceal stand") {
+  } else if(node.type == # "cover stand" || node.type == # "conceal stand") {
     nodeoffset = (-3.7, -22, 63);
-  } else if(node.type == #"cover crouch" || node.type == #"cover crouch window" || node.type == #"conceal crouch") {
+  } else if(node.type == # "cover crouch" || node.type == # "cover crouch window" || node.type == # "conceal crouch") {
     nodeoffset = (3.5, -12.5, 45);
   }
 
@@ -1423,21 +1422,21 @@ calculatenodeoffsetposition(node, nodeoffset) {
 gethighestnodestance(node) {
   assert(isDefined(node));
 
-  if(isDefined(node.spawnflags) && (node.spawnflags&4) == 4) {
+  if(isDefined(node.spawnflags) && (node.spawnflags & 4) == 4) {
     return "stand";
   }
 
-  if(isDefined(node.spawnflags) && (node.spawnflags&8) == 8) {
+  if(isDefined(node.spawnflags) && (node.spawnflags & 8) == 8) {
     return "crouch";
   }
 
-  if(isDefined(node.spawnflags) && (node.spawnflags&16) == 16) {
+  if(isDefined(node.spawnflags) && (node.spawnflags & 16) == 16) {
     return "prone";
   }
 
   errormsg(node.type + "<dev string:x13b>" + node.origin + "<dev string:x146>");
 
-  if(node.type == #"cover crouch" || node.type == #"cover crouch window" || node.type == #"conceal crouch") {
+  if(node.type == # "cover crouch" || node.type == # "cover crouch window" || node.type == # "conceal crouch") {
     return "crouch";
   }
 
@@ -1448,15 +1447,15 @@ isstanceallowedatnode(stance, node) {
   assert(isDefined(stance));
   assert(isDefined(node));
 
-  if(stance == "stand" && isDefined(node.spawnflags) && (node.spawnflags&4) == 4) {
+  if(stance == "stand" && isDefined(node.spawnflags) && (node.spawnflags & 4) == 4) {
     return true;
   }
 
-  if(stance == "crouch" && isDefined(node.spawnflags) && (node.spawnflags&8) == 8) {
+  if(stance == "crouch" && isDefined(node.spawnflags) && (node.spawnflags & 8) == 8) {
     return true;
   }
 
-  if(stance == "prone" && isDefined(node.spawnflags) && (node.spawnflags&16) == 16) {
+  if(stance == "prone" && isDefined(node.spawnflags) && (node.spawnflags & 16) == 16) {
     return true;
   }
 
@@ -1606,20 +1605,20 @@ shouldstealthresume(behaviortreeentity) {
   return false;
 }
 
-private stealthreactcondition(entity) {
+stealthreactcondition(entity) {
   inscene = isDefined(self._o_scene) && isDefined(self._o_scene._str_state) && self._o_scene._str_state == "play";
   return !(isDefined(entity.stealth_reacting) && entity.stealth_reacting) && entity hasvalidinterrupt("react") && !inscene;
 }
 
-private stealthreactstart(behaviortreeentity) {
+stealthreactstart(behaviortreeentity) {
   behaviortreeentity.stealth_reacting = 1;
 }
 
-private stealthreactterminate(behaviortreeentity) {
+stealthreactterminate(behaviortreeentity) {
   behaviortreeentity.stealth_reacting = undefined;
 }
 
-private stealthidleterminate(behaviortreeentity) {
+stealthidleterminate(behaviortreeentity) {
   behaviortreeentity notify(#"stealthidleterminate");
 
   if(isDefined(behaviortreeentity.stealth_resume_after_idle) && behaviortreeentity.stealth_resume_after_idle) {
@@ -1640,7 +1639,7 @@ locomotionshouldpatrol(behaviortreeentity) {
   return false;
 }
 
-private _dropriotshield(riotshieldinfo) {
+_dropriotshield(riotshieldinfo) {
   entity = self;
   entity shared::throwweapon(riotshieldinfo.weapon, riotshieldinfo.tag, 1, 0);
 
@@ -1831,7 +1830,7 @@ shouldchargemelee(entity) {
   return false;
 }
 
-private shouldattackinchargemelee(behaviortreeentity) {
+shouldattackinchargemelee(behaviortreeentity) {
   if(isDefined(behaviortreeentity.enemy)) {
     if(distancesquared(behaviortreeentity.origin, behaviortreeentity.enemy.origin) < 74 * 74) {
       yawtoenemy = angleclamp180(behaviortreeentity.angles[1] - vectortoangles(behaviortreeentity.enemy.origin - behaviortreeentity.origin)[1]);
@@ -1845,7 +1844,7 @@ private shouldattackinchargemelee(behaviortreeentity) {
   }
 }
 
-private setupchargemeleeattack(behaviortreeentity) {
+setupchargemeleeattack(behaviortreeentity) {
   if(isDefined(behaviortreeentity.enemy) && behaviortreeentity.enemy.scriptvehicletype === "firefly") {
     behaviortreeentity setblackboardattribute("_melee_enemy_type", "fireflyswarm");
   }
@@ -1854,7 +1853,7 @@ private setupchargemeleeattack(behaviortreeentity) {
   keepclaimnode(behaviortreeentity);
 }
 
-private cleanupmelee(behaviortreeentity) {
+cleanupmelee(behaviortreeentity) {
   meleereleasemutex(behaviortreeentity);
   releaseclaimnode(behaviortreeentity);
   behaviortreeentity setblackboardattribute("_melee_enemy_type", undefined);
@@ -1864,7 +1863,7 @@ private cleanupmelee(behaviortreeentity) {
   }
 }
 
-private cleanupchargemelee(behaviortreeentity) {
+cleanupchargemelee(behaviortreeentity) {
   behaviortreeentity.ai.nextchargemeleetime = gettime() + 2000;
   behaviortreeentity setblackboardattribute("_melee_enemy_type", undefined);
   meleereleasemutex(behaviortreeentity);
@@ -1885,24 +1884,24 @@ cleanupchargemeleeattack(behaviortreeentity) {
   behaviortreeentity pathmode("move delayed", 1, randomfloatrange(0.5, 1));
 }
 
-private shouldchoosespecialpronepain(behaviortreeentity) {
+shouldchoosespecialpronepain(behaviortreeentity) {
   stance = behaviortreeentity getblackboardattribute("_stance");
   return stance == "prone_back" || stance == "prone_front";
 }
 
-private function_9b0e7a22(behaviortreeentity) {
+function_9b0e7a22(behaviortreeentity) {
   return behaviortreeentity.var_40543c03 === "concussion";
 }
 
-private shouldchoosespecialpain(behaviortreeentity) {
+shouldchoosespecialpain(behaviortreeentity) {
   return isDefined(behaviortreeentity.var_40543c03);
 }
 
-private function_89cb7bfd(behaviortreeentity) {
+function_89cb7bfd(behaviortreeentity) {
   return behaviortreeentity.var_ab2486b4;
 }
 
-private shouldchoosespecialdeath(behaviortreeentity) {
+shouldchoosespecialdeath(behaviortreeentity) {
   if(isDefined(behaviortreeentity.damageweapon)) {
     return behaviortreeentity.damageweapon.specialpain;
   }
@@ -1910,12 +1909,12 @@ private shouldchoosespecialdeath(behaviortreeentity) {
   return 0;
 }
 
-private shouldchoosespecialpronedeath(behaviortreeentity) {
+shouldchoosespecialpronedeath(behaviortreeentity) {
   stance = behaviortreeentity getblackboardattribute("_stance");
   return stance == "prone_back" || stance == "prone_front";
 }
 
-private setupexplosionanimscale(entity, asmstatename) {
+setupexplosionanimscale(entity, asmstatename) {
   self.animtranslationscale = 2;
   self asmsetanimationrate(0.7);
   return 4;
@@ -1926,7 +1925,7 @@ isbalconydeath(behaviortreeentity) {
     return false;
   }
 
-  if(!(behaviortreeentity.node.spawnflags&1024 || behaviortreeentity.node.spawnflags&2048)) {
+  if(!(behaviortreeentity.node.spawnflags & 1024 || behaviortreeentity.node.spawnflags & 2048)) {
     return false;
   }
 
@@ -1949,12 +1948,12 @@ isbalconydeath(behaviortreeentity) {
 balconydeath(behaviortreeentity) {
   behaviortreeentity.clamptonavmesh = 0;
 
-  if(behaviortreeentity.node.spawnflags&1024) {
+  if(behaviortreeentity.node.spawnflags & 1024) {
     behaviortreeentity setblackboardattribute("_special_death", "balcony");
     return;
   }
 
-  if(behaviortreeentity.node.spawnflags&2048) {
+  if(behaviortreeentity.node.spawnflags & 2048) {
     behaviortreeentity setblackboardattribute("_special_death", "balcony_norail");
   }
 }
@@ -1978,7 +1977,7 @@ preshootlaserandglinton(ai) {
     ai.laserstatus = 0;
   }
 
-  sniper_glint = #"hash_3db1ecb54b192a49";
+  sniper_glint = # "hash_3db1ecb54b192a49";
 
   while(true) {
     self waittill(#"about_to_fire");
@@ -2013,32 +2012,32 @@ postshootlaserandglintoff(ai) {
   }
 }
 
-private isinphalanx(entity) {
+isinphalanx(entity) {
   return entity ai::get_behavior_attribute("phalanx");
 }
 
-private isinphalanxstance(entity) {
+isinphalanxstance(entity) {
   phalanxstance = entity ai::get_behavior_attribute("phalanx_force_stance");
   currentstance = entity getblackboardattribute("_stance");
 
   switch (phalanxstance) {
-    case #"stand":
+    case # "stand":
       return (currentstance == "stand");
-    case #"crouch":
+    case # "crouch":
       return (currentstance == "crouch");
   }
 
   return true;
 }
 
-private togglephalanxstance(entity) {
+togglephalanxstance(entity) {
   phalanxstance = entity ai::get_behavior_attribute("phalanx_force_stance");
 
   switch (phalanxstance) {
-    case #"stand":
+    case # "stand":
       entity setblackboardattribute("_desired_stance", "stand");
       break;
-    case #"crouch":
+    case # "crouch":
       entity setblackboardattribute("_desired_stance", "crouch");
       break;
   }
@@ -2079,7 +2078,7 @@ shouldattackobject(entity) {
 
 meleeattributescallback(entity, attribute, oldvalue, value) {
   switch (attribute) {
-    case #"can_melee":
+    case # "can_melee":
       if(value) {
         entity.canmelee = 1;
       } else {
@@ -2087,7 +2086,7 @@ meleeattributescallback(entity, attribute, oldvalue, value) {
       }
 
       break;
-    case #"can_be_meleed":
+    case # "can_be_meleed":
       if(value) {
         entity.canbemeleed = 1;
       } else {
@@ -2100,7 +2099,7 @@ meleeattributescallback(entity, attribute, oldvalue, value) {
 
 arrivalattributescallback(entity, attribute, oldvalue, value) {
   switch (attribute) {
-    case #"disablearrivals":
+    case # "disablearrivals":
       if(value) {
         entity.ai.disablearrivals = 1;
       } else {
@@ -2120,7 +2119,7 @@ phalanxattributecallback(entity, attribute, oldvalue, value) {
   entity.ai.phalanx = 0;
 }
 
-private generictryreacquireservice(behaviortreeentity) {
+generictryreacquireservice(behaviortreeentity) {
   if(!isDefined(behaviortreeentity.reacquire_state)) {
     behaviortreeentity.reacquire_state = 0;
   }

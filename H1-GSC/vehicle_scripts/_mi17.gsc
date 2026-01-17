@@ -24,7 +24,7 @@ init_local() {
 }
 
 keep_ragdolls_alive() {
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     wakeupragdollsphere(self.origin, 300);
     wait 0.05;
   }
@@ -37,11 +37,11 @@ handle_audio() {
   vehicle_scripts\_mi17_aud::snd_init_mi17();
   thread monitor_death_stop_sounds();
 
-  if(isdefined(level.override_aud_mi17_dist_treshold))
+  if(isDefined(level.override_aud_mi17_dist_treshold))
     var_1 = level.override_aud_mi17_dist_treshold;
 
-  for (;;) {
-    if(!isdefined(self.script_disablevehicleaudio) || !self.script_disablevehicleaudio) {
+  for(;;) {
+    if(!isDefined(self.script_disablevehicleaudio) || !self.script_disablevehicleaudio) {
       var_2 = distance(self.origin, level.player.origin);
 
       if(var_0 && var_2 > var_1) {
@@ -69,7 +69,7 @@ monitor_death_stop_sounds() {
 #using_animtree("vehicles");
 
 set_vehicle_anims(var_0) {
-  for (var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++)
     var_0[var_1].vehicle_getoutanim = % mi17_heli_idle;
 
   return var_0;
@@ -84,8 +84,8 @@ setplayer_anims(var_0) {
 setanims() {
   var_0 = [];
 
-  for (var_1 = 0; var_1 < 10; var_1++)
-    var_0[var_1] = spawnstruct();
+  for(var_1 = 0; var_1 < 10; var_1++)
+    var_0[var_1] = spawnStruct();
 
   var_0[1].idle = % mi17_1_idle;
   var_0[2].idle = % mi17_2_idle;
@@ -209,19 +209,19 @@ unload_groups() {
 
 set_attached_models() {
   var_0 = [];
-  var_0["TAG_FastRope_LE"] = spawnstruct();
+  var_0["TAG_FastRope_LE"] = spawnStruct();
   var_0["TAG_FastRope_LE"].model = "rope_test";
   var_0["TAG_FastRope_LE"].tag = "TAG_FastRope_LE";
   var_0["TAG_FastRope_LE"].idleanim = % mi17_rope_idle_le;
   var_0["TAG_FastRope_LE"].dropanim = % mi17_rope_drop_le;
-  var_0["TAG_FastRope_RI"] = spawnstruct();
+  var_0["TAG_FastRope_RI"] = spawnStruct();
   var_0["TAG_FastRope_RI"].model = "rope_test_ri";
   var_0["TAG_FastRope_RI"].tag = "TAG_FastRope_RI";
   var_0["TAG_FastRope_RI"].idleanim = % mi17_rope_idle_ri;
   var_0["TAG_FastRope_RI"].dropanim = % mi17_rope_drop_ri;
   var_1 = getarraykeys(var_0);
 
-  for (var_2 = 0; var_2 < var_1.size; var_2++)
+  for(var_2 = 0; var_2 < var_1.size; var_2++)
     precachemodel(var_0[var_1[var_2]].model);
 
   return var_0;

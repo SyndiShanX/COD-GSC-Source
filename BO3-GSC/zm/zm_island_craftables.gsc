@@ -28,18 +28,18 @@ function include_craftables() {
   level.craftable_piece_swap_allowed = 0;
   shared_pieces = getnumexpectedplayers() == 1;
   craftable_name = "gasmask";
-  var_a2709918 = zm_craftables::generate_zombie_craftable_piece(craftable_name, "part_visor", 32, 64, 0, undefined, & function_aef4c63, undefined, & function_3e3b2e02, undefined, undefined, undefined, ("gasmask" + "_") + "part_visor", 1, undefined, undefined, & "ZOMBIE_BUILD_PIECE_GRAB", 0);
-  var_f113dd3d = zm_craftables::generate_zombie_craftable_piece(craftable_name, "part_filter", 32, 64, 0, undefined, & function_aef4c63, undefined, & function_3e3b2e02, undefined, undefined, undefined, ("gasmask" + "_") + "part_filter", 1, undefined, undefined, & "ZOMBIE_BUILD_PIECE_GRAB", 0);
-  var_c4ee7b63 = zm_craftables::generate_zombie_craftable_piece(craftable_name, "part_strap", 32, 64, 0, undefined, & function_aef4c63, undefined, & function_3e3b2e02, undefined, undefined, undefined, ("gasmask" + "_") + "part_strap", 1, undefined, undefined, & "ZOMBIE_BUILD_PIECE_GRAB", 0);
+  var_a2709918 = zm_craftables::generate_zombie_craftable_piece(craftable_name, "part_visor", 32, 64, 0, undefined, &function_aef4c63, undefined, &function_3e3b2e02, undefined, undefined, undefined, ("gasmask" + "_") + "part_visor", 1, undefined, undefined, &"ZOMBIE_BUILD_PIECE_GRAB", 0);
+  var_f113dd3d = zm_craftables::generate_zombie_craftable_piece(craftable_name, "part_filter", 32, 64, 0, undefined, &function_aef4c63, undefined, &function_3e3b2e02, undefined, undefined, undefined, ("gasmask" + "_") + "part_filter", 1, undefined, undefined, &"ZOMBIE_BUILD_PIECE_GRAB", 0);
+  var_c4ee7b63 = zm_craftables::generate_zombie_craftable_piece(craftable_name, "part_strap", 32, 64, 0, undefined, &function_aef4c63, undefined, &function_3e3b2e02, undefined, undefined, undefined, ("gasmask" + "_") + "part_strap", 1, undefined, undefined, &"ZOMBIE_BUILD_PIECE_GRAB", 0);
   var_a2709918.client_field_state = undefined;
   var_f113dd3d.client_field_state = undefined;
   var_c4ee7b63.client_field_state = undefined;
-  gasmask = spawnstruct();
+  gasmask = spawnStruct();
   gasmask.name = craftable_name;
   gasmask zm_craftables::add_craftable_piece(var_a2709918);
   gasmask zm_craftables::add_craftable_piece(var_f113dd3d);
   gasmask zm_craftables::add_craftable_piece(var_c4ee7b63);
-  gasmask.triggerthink = & function_d2d29a1b;
+  gasmask.triggerthink = &function_d2d29a1b;
   gasmask.no_challenge_stat = 1;
   zm_craftables::include_zombie_craftable(gasmask);
   level flag::init(((craftable_name + "_") + "part_visor") + "_found");
@@ -49,7 +49,7 @@ function include_craftables() {
 
 function init_craftables() {
   register_clientfields();
-  zm_craftables::add_zombie_craftable("gasmask", & "ZM_ISLAND_CRAFT_GASMASK", "", & "ZM_ISLAND_TOOK_GASMASK", & function_4e02c665, 1);
+  zm_craftables::add_zombie_craftable("gasmask", &"ZM_ISLAND_CRAFT_GASMASK", "", &"ZM_ISLAND_TOOK_GASMASK", &function_4e02c665, 1);
   zm_craftables::make_zombie_craftable_open("gasmask", "", vectorscale((0, -1, 0), 90), (0, 0, 0));
 }
 
@@ -79,7 +79,7 @@ function function_9708cb71(piecename) {
       break;
     }
   }
-  self playsound(var_983a0e9b);
+  self playSound(var_983a0e9b);
 }
 
 function show_infotext_for_duration(str_infotext, n_duration) {
@@ -140,7 +140,7 @@ function function_4e02c665(player) {
   function_aa4f440c(self.origin, self.angles);
   var_6796a7a4 = getent("mask_display", "targetname");
   var_6796a7a4 setscale(1.5);
-  var_6796a7a4 moveto((self.origin + anglestoforward(self.angles)) + (-5, 0, -105), 0.05);
+  var_6796a7a4 moveto((self.origin + anglesToForward(self.angles)) + (-5, 0, -105), 0.05);
   var_6796a7a4 rotateto(self.angles + vectorscale((0, 1, 0), 90), 0.05);
   var_6796a7a4 waittill("movedone");
   return true;
@@ -150,7 +150,7 @@ function function_aa4f440c(v_origin, v_angles) {
   width = 128;
   height = 128;
   length = 128;
-  unitrigger_stub = spawnstruct();
+  unitrigger_stub = spawnStruct();
   unitrigger_stub.origin = v_origin;
   unitrigger_stub.angles = v_angles;
   unitrigger_stub.script_unitrigger_type = "unitrigger_box_use";
@@ -159,8 +159,8 @@ function function_aa4f440c(v_origin, v_angles) {
   unitrigger_stub.script_height = height;
   unitrigger_stub.script_length = length;
   unitrigger_stub.require_look_at = 1;
-  unitrigger_stub.prompt_and_visibility_func = & function_dbc8e9c0;
-  zm_unitrigger::register_static_unitrigger(unitrigger_stub, & function_272fcc74);
+  unitrigger_stub.prompt_and_visibility_func = &function_dbc8e9c0;
+  zm_unitrigger::register_static_unitrigger(unitrigger_stub, &function_272fcc74);
 }
 
 function function_dbc8e9c0(player) {
@@ -173,7 +173,7 @@ function function_dbc8e9c0(player) {
 }
 
 function function_272fcc74() {
-  while (true) {
+  while(true) {
     self waittill("trigger", player);
     if(player zm_utility::in_revive_trigger()) {
       continue;
@@ -198,17 +198,17 @@ function function_b4c30297(trig_stub, player) {
 
 function init_craftable_choke() {
   level.craftables_spawned_this_frame = 0;
-  while (true) {
+  while(true) {
     util::wait_network_frame();
     level.craftables_spawned_this_frame = 0;
   }
 }
 
 function craftable_wait_your_turn() {
-  if(!isdefined(level.craftables_spawned_this_frame)) {
+  if(!isDefined(level.craftables_spawned_this_frame)) {
     level thread init_craftable_choke();
   }
-  while (level.craftables_spawned_this_frame >= 2) {
+  while(level.craftables_spawned_this_frame >= 2) {
     util::wait_network_frame();
   }
   level.craftables_spawned_this_frame++;

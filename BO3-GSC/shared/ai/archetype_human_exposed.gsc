@@ -11,14 +11,14 @@
 #namespace archetype_human_exposed;
 
 function autoexec registerbehaviorscriptfunctions() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("hasCloseEnemy", & hascloseenemy);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("noCloseEnemyService", & nocloseenemyservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("tryReacquireService", & tryreacquireservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("prepareToReactToEnemy", & preparetoreacttoenemy);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("resetReactionToEnemy", & resetreactiontoenemy);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("exposedSetDesiredStanceToStand", & exposedsetdesiredstancetostand);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("setPathMoveDelayedRandom", & setpathmovedelayedrandom);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("vengeanceService", & vengeanceservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("hasCloseEnemy", &hascloseenemy);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("noCloseEnemyService", &nocloseenemyservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("tryReacquireService", &tryreacquireservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("prepareToReactToEnemy", &preparetoreacttoenemy);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("resetReactionToEnemy", &resetreactiontoenemy);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("exposedSetDesiredStanceToStand", &exposedsetdesiredstancetostand);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("setPathMoveDelayedRandom", &setpathmovedelayedrandom);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("vengeanceService", &vengeanceservice);
 }
 
 function private preparetoreacttoenemy(behaviortreeentity) {
@@ -33,7 +33,7 @@ function private resetreactiontoenemy(behaviortreeentity) {
 }
 
 function private nocloseenemyservice(behaviortreeentity) {
-  if(isdefined(behaviortreeentity.enemy) && aiutility::hascloseenemytomelee(behaviortreeentity)) {
+  if(isDefined(behaviortreeentity.enemy) && aiutility::hascloseenemytomelee(behaviortreeentity)) {
     behaviortreeentity clearpath();
     return true;
   }
@@ -41,7 +41,7 @@ function private nocloseenemyservice(behaviortreeentity) {
 }
 
 function private hascloseenemy(behaviortreeentity) {
-  if(!isdefined(behaviortreeentity.enemy)) {
+  if(!isDefined(behaviortreeentity.enemy)) {
     return false;
   }
   if(distancesquared(behaviortreeentity.origin, behaviortreeentity.enemy.origin) < 22500) {
@@ -51,12 +51,12 @@ function private hascloseenemy(behaviortreeentity) {
 }
 
 function private _isvalidneighbor(entity, neighbor) {
-  return isdefined(neighbor) && entity.team === neighbor.team;
+  return isDefined(neighbor) && entity.team === neighbor.team;
 }
 
 function private vengeanceservice(entity) {
   actors = getaiarray();
-  if(!isdefined(entity.attacker)) {
+  if(!isDefined(entity.attacker)) {
     return;
   }
   foreach(ai in actors) {
@@ -77,10 +77,10 @@ function private exposedsetdesiredstancetostand(behaviortreeentity, asmstatename
 }
 
 function private tryreacquireservice(behaviortreeentity) {
-  if(!isdefined(behaviortreeentity.reacquire_state)) {
+  if(!isDefined(behaviortreeentity.reacquire_state)) {
     behaviortreeentity.reacquire_state = 0;
   }
-  if(!isdefined(behaviortreeentity.enemy)) {
+  if(!isDefined(behaviortreeentity.enemy)) {
     behaviortreeentity.reacquire_state = 0;
     return false;
   }
@@ -93,7 +93,7 @@ function private tryreacquireservice(behaviortreeentity) {
     return false;
   }
   dirtoenemy = vectornormalize(behaviortreeentity.enemy.origin - behaviortreeentity.origin);
-  forward = anglestoforward(behaviortreeentity.angles);
+  forward = anglesToForward(behaviortreeentity.angles);
   if(vectordot(dirtoenemy, forward) < 0.5) {
     behaviortreeentity.reacquire_state = 0;
     return false;

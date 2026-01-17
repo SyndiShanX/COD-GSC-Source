@@ -6,7 +6,7 @@
 #include codescripts\character;
 
 setmodelfromarray(a) {
-  self setmodel(a[randomint(a.size)]);
+  self setModel(a[randomint(a.size)]);
 }
 
 precachemodelarray(a) {

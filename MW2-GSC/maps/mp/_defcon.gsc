@@ -12,15 +12,15 @@
 ICONSIZE = 20;
 
 init() {
-  if(!isDefined(level.defconMode) || level.defconMode == false)
+  if(!isDefined(level.defconMode) || level.defconMode == false) {
     return;
-
+  }
   if(!isDefined(game["defcon"]))
     game["defcon"] = 4;
 
   makeDvarServerInfo("scr_defcon", game["defcon"]);
 
-  /# setDevDvarIfUninitialized( "scr_defconStreak", 10 );	#/
+  /# setDevDvarIfUninitialized( "scr_defconStreak", 10 );	
 
   level.defconStreakAdd[5] = 0;
   level.defconStreakAdd[4] = 0;
@@ -39,7 +39,7 @@ init() {
 }
 
 defconKillstreakWait(streakCount) {
-  for (;;) {
+  for(;;) {
     level waittill("player_got_killstreak_" + streakCount, player);
     level notify("defcon_killstreak", streakCount, player);
   }
@@ -50,11 +50,9 @@ defconKillstreakThread() {
 
   requiredKillCount = 10;
 
-  /#
   requiredKillCount = getDvarInt("scr_defconStreak");
-  # /
 
-    level thread defconKillstreakWait(requiredKillCount);
+  level thread defconKillstreakWait(requiredKillCount);
   level thread defconKillstreakWait(requiredKillCount - 1);
   level thread defconKillstreakWait(requiredKillCount - 2);
 
@@ -66,24 +64,24 @@ defconKillstreakThread() {
   level thread defconKillstreakWait((requiredKillCount * 3) - 1);
   level thread defconKillstreakWait((requiredKillCount * 3) - 2);
 
-  for (;;) {
+  for(;;) {
     level waittill("defcon_killstreak", streakCount, changingPlayer);
 
-    if(game["defcon"] <= 1)
+    if(game["defcon"] <= 1) {
       continue;
-
+    }
     if((streakCount % requiredKillCount) == requiredKillCount - 2) {
       foreach(player in level.players) {
-        if(!isAlive(player))
+        if(!isAlive(player)) {
           continue;
-
+        }
         player thread maps\mp\gametypes\_hud_message::playerCardSplashNotify("two_from_defcon", changingPlayer);
       }
     } else if((streakCount % requiredKillCount) == requiredKillCount - 1) {
       foreach(player in level.players) {
-        if(!isAlive(player))
+        if(!isAlive(player)) {
           continue;
-
+        }
         player thread maps\mp\gametypes\_hud_message::playerCardSplashNotify("one_from_defcon", changingPlayer);
       }
     } else {
@@ -106,9 +104,9 @@ updateDefcon(newDefcon, changingPlayer, streakCount) {
   if(isDefined(changingPlayer))
     changingPlayer notify("changed_defcon");
 
-  if(newDefcon == oldDefcon)
+  if(newDefcon == oldDefcon) {
     return;
-
+  }
   if(game["defcon"] == 3 && isDefined(changingPlayer)) {
     changingPlayer maps\mp\killstreaks\_killstreaks::giveKillstreak("airdrop_mega");
     changingPlayer thread maps\mp\gametypes\_hud_message::splashNotify("caused_defcon", streakCount);

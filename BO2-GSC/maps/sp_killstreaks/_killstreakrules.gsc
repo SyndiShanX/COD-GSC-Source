@@ -81,7 +81,7 @@ init() {
 }
 
 createrule(rule, maxallowable, maxallowableperteam) {
-  level.killstreakrules[rule] = spawnstruct();
+  level.killstreakrules[rule] = spawnStruct();
   level.killstreakrules[rule].cur = 0;
   level.killstreakrules[rule].curteam = [];
   level.killstreakrules[rule].max = maxallowable;
@@ -96,7 +96,7 @@ addkillstreaktorule(hardpointtype, rule, counttowards, checkagainst) {
   assert(isDefined(level.killstreakrules[rule]));
 
   if(!isDefined(level.killstreaktype[hardpointtype][rule]))
-    level.killstreaktype[hardpointtype][rule] = spawnstruct();
+    level.killstreaktype[hardpointtype][rule] = spawnStruct();
 
   level.killstreaktype[hardpointtype][rule].counts = counttowards;
   level.killstreaktype[hardpointtype][rule].checks = checkagainst;

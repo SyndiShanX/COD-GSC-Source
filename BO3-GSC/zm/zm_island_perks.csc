@@ -26,19 +26,19 @@
 #namespace zm_island_perks;
 
 function init() {
-  clientfield::register("world", "perk_light_speed_cola", 1, 3, "int", & perk_light_speed_cola, 0, 0);
-  clientfield::register("world", "perk_light_doubletap", 1, 3, "int", & perk_light_doubletap, 0, 0);
-  clientfield::register("world", "perk_light_quick_revive", 1, 3, "int", & perk_light_quick_revive, 0, 0);
-  clientfield::register("world", "perk_light_staminup", 1, 3, "int", & perk_light_staminup, 0, 0);
-  clientfield::register("world", "perk_light_juggernog", 1, 3, "int", & perk_light_juggernog, 0, 0);
-  clientfield::register("world", "perk_light_mule_kick", 1, 1, "int", & perk_light_mule_kick, 0, 0);
+  clientfield::register("world", "perk_light_speed_cola", 1, 3, "int", &perk_light_speed_cola, 0, 0);
+  clientfield::register("world", "perk_light_doubletap", 1, 3, "int", &perk_light_doubletap, 0, 0);
+  clientfield::register("world", "perk_light_quick_revive", 1, 3, "int", &perk_light_quick_revive, 0, 0);
+  clientfield::register("world", "perk_light_staminup", 1, 3, "int", &perk_light_staminup, 0, 0);
+  clientfield::register("world", "perk_light_juggernog", 1, 3, "int", &perk_light_juggernog, 0, 0);
+  clientfield::register("world", "perk_light_mule_kick", 1, 1, "int", &perk_light_mule_kick, 0, 0);
 }
 
 function perk_light_speed_cola(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     level.var_7202315c = "lgt_sleight_" + newval;
     exploder::exploder(level.var_7202315c);
-  } else if(isdefined(level.var_7202315c)) {
+  } else if(isDefined(level.var_7202315c)) {
     exploder::stop_exploder(level.var_7202315c);
   }
 }
@@ -47,7 +47,7 @@ function perk_light_doubletap(localclientnum, oldval, newval, bnewent, binitials
   if(newval) {
     level.var_c09154cb = "lgt_doubletap_" + newval;
     exploder::exploder(level.var_c09154cb);
-  } else if(isdefined(level.var_c09154cb)) {
+  } else if(isDefined(level.var_c09154cb)) {
     exploder::stop_exploder(level.var_c09154cb);
   }
 }
@@ -56,7 +56,7 @@ function perk_light_quick_revive(localclientnum, oldval, newval, bnewent, biniti
   if(newval) {
     level.var_2ff875ec = "lgt_revive_" + newval;
     exploder::exploder(level.var_2ff875ec);
-  } else if(isdefined(level.var_2ff875ec)) {
+  } else if(isDefined(level.var_2ff875ec)) {
     exploder::stop_exploder(level.var_2ff875ec);
   }
 }
@@ -65,7 +65,7 @@ function perk_light_staminup(localclientnum, oldval, newval, bnewent, binitialsn
   if(newval) {
     level.var_d3ce4f8e = "lgt_staminup_" + newval;
     exploder::exploder(level.var_d3ce4f8e);
-  } else if(isdefined(level.var_d3ce4f8e)) {
+  } else if(isDefined(level.var_d3ce4f8e)) {
     exploder::stop_exploder(level.var_d3ce4f8e);
   }
 }
@@ -74,7 +74,7 @@ function perk_light_juggernog(localclientnum, oldval, newval, bnewent, binitials
   if(newval) {
     level.var_7202315c = "lgt_jugg_" + newval;
     exploder::exploder(level.var_7202315c);
-  } else if(isdefined(level.var_7202315c)) {
+  } else if(isDefined(level.var_7202315c)) {
     exploder::stop_exploder(level.var_7202315c);
   }
 }

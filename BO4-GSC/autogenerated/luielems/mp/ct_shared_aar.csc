@@ -4,11 +4,9 @@
 *******************************************************/
 
 #include scripts\core_common\lui_shared;
-
 #namespace ct_shared_aar;
 
 class cct_shared_aar: cluielem {
-
   function set_medalthresholds(localclientnum, value) {
     set_data(localclientnum, "medalThresholds", value);
   }
@@ -90,16 +88,16 @@ class cct_shared_aar: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, #"ct_shared_aar");
+    cluielem::open(localclientnum, # "ct_shared_aar");
   }
 
   function function_fa582112(localclientnum) {
     cluielem::function_fa582112(localclientnum);
-    set_state(localclientnum, #"defaultstate");
+    set_state(localclientnum, # "defaultstate");
     set_data(localclientnum, "timeMilliseconds", 0);
     set_data(localclientnum, "bestTimeMilliseconds", 0);
-    set_data(localclientnum, "missionResultMsg", #"");
-    set_data(localclientnum, "medalThresholds", #"");
+    set_data(localclientnum, "missionResultMsg", # "");
+    set_data(localclientnum, "medalThresholds", # "");
   }
 
   function register_clientside(uid) {

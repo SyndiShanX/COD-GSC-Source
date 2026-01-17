@@ -326,14 +326,10 @@ onAlienAgentDamaged(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWea
   iDamage = scale_alien_damage_func(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset);
 
   if(isDefined(level.custom_scale_alien_damage_func))
-    iDamage = [
-      [level.custom_scale_alien_damage_func]
-    ](eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset);
+    iDamage = [[level.custom_scale_alien_damage_func]](eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset);
 
   if(isDefined(level.custom_OnAlienAgentDamaged_func))
-    iDamage = [
-      [level.custom_OnAlienAgentDamaged_func]
-    ](eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset);
+    iDamage = [[level.custom_OnAlienAgentDamaged_func]](eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset);
 
   if(sMeansOfDeath == "MOD_MELEE" && level.players.size == 1)
     iDamage = Int(iDamage * 0.9);
@@ -394,7 +390,7 @@ onAlienAgentDamaged(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWea
       typeHit = "none";
     else if(!maps\mp\gametypes\_damage::shouldWeaponFeedback(sWeapon))
       typeHit = "none";
-    else if(iDFlags & level.iDFLAGS_STUN)
+    else if(iDFlags &level.iDFLAGS_STUN)
       typeHit = "stun";
     else if(!eAttacker _hasperk("specialty_armorpiercing") && sHitLoc == "armor")
       typeHit = "hitalienarmor";

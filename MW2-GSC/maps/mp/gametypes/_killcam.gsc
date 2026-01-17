@@ -35,9 +35,9 @@ killcam(
   self endon("spawned");
   level endon("game_ended");
 
-  if(attackerNum < 0)
+  if(attackerNum < 0) {
     return;
-
+  }
   // length from killcam start to killcam end
   if(getdvar("scr_killcam_time") == "") {
     if(sWeapon == "artillery_mp" || sWeapon == "stealth_bomb_mp")
@@ -57,7 +57,7 @@ killcam(
   } else
     camtime = getdvarfloat("scr_killcam_time");
 
-  if(isdefined(maxtime)) {
+  if(isDefined(maxtime)) {
     if(camtime > maxtime)
       camtime = maxtime;
     if(camtime < .05)
@@ -74,25 +74,25 @@ killcam(
   }
 
   /* timeline:
-	
+  	
   |camtime |postdelay|
   || predelay|
-	
+  	
   ^ killcam start^ player death^ killcam end
    ^ player starts watching killcam
-	
+  	
   */
 
   killcamlength = camtime + postdelay;
 
   // don't let the killcam last past the end of the round.
-  if(isdefined(maxtime) && killcamlength > maxtime) {
+  if(isDefined(maxtime) && killcamlength > maxtime) {
     // first trim postdelay down to a minimum of 1 second.
     // if that doesn't make it short enough, trim camtime down to a minimum of 1 second.
     // if that's still not short enough, cancel the killcam.
-    if(maxtime < 2)
+    if(maxtime < 2) {
       return;
-
+    }
     if(maxtime - camtime >= 1) {
       // reduce postdelay so killcam ends at end of match
       postdelay = maxtime - camtime;
@@ -176,9 +176,9 @@ killcam(
     if(timeUntilRespawn > 0)
       setLowerMessage("kc_info", game["strings"]["waiting_to_spawn"], timeUntilRespawn);
     else
-      setLowerMessage("kc_info", & "PLATFORM_PRESS_TO_SKIP");
+      setLowerMessage("kc_info", &"PLATFORM_PRESS_TO_SKIP");
   } else if(!level.gameEnded) {
-    setLowerMessage("kc_info", & "PLATFORM_PRESS_TO_RESPAWN");
+    setLowerMessage("kc_info", &"PLATFORM_PRESS_TO_RESPAWN");
   }
 
   if(!level.showingFinalKillcam)
@@ -264,10 +264,10 @@ waitSkipKillcamButton(timeUntilRespawn) {
   self endon("disconnect");
   self endon("killcam_ended");
 
-  while (self useButtonPressed())
+  while(self useButtonPressed())
     wait .05;
 
-  while (!(self useButtonPressed()))
+  while(!(self useButtonPressed()))
     wait .05;
 
   if(!matchMakingGame())
@@ -335,13 +335,13 @@ waitSkipKillcamSafeSpawnButton() {
   self endon("disconnect");
   self endon("killcam_ended");
 
-  if(!self maps\mp\gametypes\_playerlogic::maySpawn())
+  if(!self maps\mp\gametypes\_playerlogic::mayspawn()) {
     return;
-
-  while (self fragButtonPressed())
+  }
+  while(self fragButtonPressed())
     wait .05;
 
-  while (!(self fragButtonPressed()))
+  while(!(self fragButtonPressed()))
     wait .05;
 
   self.wantSafeSpawn = true;
@@ -353,12 +353,13 @@ endKillcamIfNothingToShow() {
   self endon("disconnect");
   self endon("killcam_ended");
 
-  while (1) {
+  while(1) {
     // code may trim our archivetime to zero if there is nothing "recorded" to show.
     // this can happen when the person we're watching in our killcam goes into killcam himself.
     // in this case, end the killcam.
-    if(self.archivetime <= 0)
+    if(self.archivetime <= 0) {
       break;
+    }
     wait .05;
   }
 
@@ -404,13 +405,12 @@ killcamCleanup(clearState) {
 
   self notify("killcam_ended"); // do this last, in case this function was called from a thread ending on it
 
-  if(!clearState)
+  if(!clearState) {
     return;
-
+  }
   self.sessionstate = "dead";
   self ClearKillcamState();
 }
-
 
 cancelKillCamOnUse() {
   self.cancelKillcam = false;
@@ -437,31 +437,31 @@ cancelKillCamOnUse_specificButton(pressingButtonFunc, finishedFunc) {
   self endon("disconnect");
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     if(!self[[pressingButtonFunc]]()) {
       wait(0.05);
       continue;
     }
 
     buttonTime = 0;
-    while (self[[pressingButtonFunc]]()) {
+    while(self[[pressingButtonFunc]]()) {
       buttonTime += 0.05;
       wait(0.05);
     }
 
-    if(buttonTime >= 0.5)
+    if(buttonTime >= 0.5) {
       continue;
-
+    }
     buttonTime = 0;
 
-    while (!self[[pressingButtonFunc]]() && buttonTime < 0.5) {
+    while(!self[[pressingButtonFunc]]() && buttonTime < 0.5) {
       buttonTime += 0.05;
       wait(0.05);
     }
 
-    if(buttonTime >= 0.5)
+    if(buttonTime >= 0.5) {
       continue;
-
+    }
     self[[finishedFunc]]();
     return;
   }
@@ -527,7 +527,7 @@ initKCElements() {
   }
 
   if(!level.splitscreen) {
-    if(!isdefined(self.kc_timer)) {
+    if(!isDefined(self.kc_timer)) {
       self.kc_timer = createFontString("hudbig", 1.0);
       self.kc_timer.archived = false;
       self.kc_timer.x = 0;

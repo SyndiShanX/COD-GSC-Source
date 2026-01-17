@@ -26,7 +26,6 @@
 #include scripts\zm_common\zm_score;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
-
 #namespace zm_weap_hand_hemera;
 
 autoexec __init__system__() {
@@ -35,12 +34,12 @@ autoexec __init__system__() {
 
 __init__() {
   clientfield::register("scriptmover", "hemera_shoot", 16000, 1, "counter");
-  clientfield::register("scriptmover", "" + #"hemera_beam", 16000, 1, "int");
-  clientfield::register("scriptmover", "" + #"hemera_impact", 16000, 1, "counter");
+  clientfield::register("scriptmover", "" + # "hemera_beam", 16000, 1, "int");
+  clientfield::register("scriptmover", "" + # "hemera_impact", 16000, 1, "counter");
   clientfield::register("allplayers", "hemera_proj_flash", 16000, 1, "int");
   clientfield::register("allplayers", "hemera_beam_flash", 16000, 1, "int");
   clientfield::register("actor", "hemera_proj_death", 16000, 1, "int");
-  clientfield::register("actor", "" + #"hemera_beam_death", 16000, 1, "int");
+  clientfield::register("actor", "" + # "hemera_beam_death", 16000, 1, "int");
   level.w_hand_hemera = getweapon(#"ww_hand_h");
   level.w_hand_hemera_charged = getweapon(#"ww_hand_h_charged");
   level.w_hand_hemera_uncharged = getweapon(#"ww_hand_h_uncharged");
@@ -86,7 +85,7 @@ function_3f8da82c() {
     }
 
     if(isDefined(self.mdl_beam)) {
-      self.mdl_beam clientfield::set("" + #"hemera_beam", 0);
+      self.mdl_beam clientfield::set("" + # "hemera_beam", 0);
       self.mdl_beam delete();
     }
   }
@@ -112,7 +111,7 @@ function_d8a9b5a6(weapon) {
   a_e_targets = function_6880852f(b_up);
 
   if(isDefined(a_e_targets)) {
-    if(isDefined(a_e_targets[0]) && a_e_targets[0].zm_ai_category === #"boss") {
+    if(isDefined(a_e_targets[0]) && a_e_targets[0].zm_ai_category === # "boss") {
       n_proj = 3;
     } else if(!a_e_targets.size || a_e_targets.size === 1 && !isactor(a_e_targets[0])) {
       n_proj = 1;
@@ -149,7 +148,7 @@ function_d8a9b5a6(weapon) {
 }
 
 function_54922a21() {
-  self endon(#"death", #"weapon_change");
+  self endon(#"death", # "weapon_change");
 
   while(true) {
     while((self.chargeshotlevel != 2 || !self attackbuttonpressed()) && (self.currentweapon === level.w_hand_hemera || self.currentweapon === level.w_hand_hemera_upgraded)) {
@@ -157,7 +156,7 @@ function_54922a21() {
     }
 
     self thread player_charged_shot(self.currentweapon);
-    self waittill(#"weapon_fired", #"stop_beaming");
+    self waittill(#"weapon_fired", # "stop_beaming");
 
     while(self.chargeshotlevel >= 2) {
       waitframe(1);
@@ -323,7 +322,7 @@ function_8e7f5291(e_projectile, ai_zombie, n_damage) {
   if(!isDefined(ai_zombie) || isDefined(ai_zombie.var_3df1a748) && ai_zombie.var_3df1a748) {
     e_projectile moveto(v_end, n_time);
     e_projectile waittill(#"movedone");
-    e_projectile clientfield::increment("" + #"hemera_impact");
+    e_projectile clientfield::increment("" + # "hemera_impact");
     waitframe(1);
   } else {
     var_2ed6f142 = self getweaponmuzzlepoint();
@@ -371,7 +370,7 @@ function_8e7f5291(e_projectile, ai_zombie, n_damage) {
 
       wait n_time - 0.05;
 
-      if(isDefined(ai_zombie) && ai_zombie.zm_ai_category === #"boss") {
+      if(isDefined(ai_zombie) && ai_zombie.zm_ai_category === # "boss") {
         if(isDefined(ai_zombie gettagorigin("j_tail_1"))) {
           n_hit_dist_sq = 2500;
         } else {
@@ -446,7 +445,7 @@ function_8e7f5291(e_projectile, ai_zombie, n_damage) {
     e_projectile waittill(#"movedone");
   }
 
-  if(isalive(ai_zombie) || isDefined(ai_zombie) && ai_zombie.zm_ai_category === #"boss") {
+  if(isalive(ai_zombie) || isDefined(ai_zombie) && ai_zombie.zm_ai_category === # "boss") {
     self thread function_dced5aef(ai_zombie, level.w_hand_hemera_uncharged, n_damage);
   }
 
@@ -455,7 +454,7 @@ function_8e7f5291(e_projectile, ai_zombie, n_damage) {
 }
 
 function_30239376(e_target) {
-  if(isDefined(e_target) && e_target.zm_ai_category === #"boss") {
+  if(isDefined(e_target) && e_target.zm_ai_category === # "boss") {
     if(isDefined(e_target gettagorigin("j_tail_1"))) {
       v_org = e_target gettagorigin("j_tail_1");
     } else if(isDefined(e_target gettagorigin("j_spine4"))) {
@@ -490,9 +489,9 @@ function_dced5aef(e_target, weapon = level.weaponnone, n_damage, b_charged) {
     [[level.var_ab6fef61]] - > waitinqueue(e_target);
 
     switch (e_target.zm_ai_category) {
-      case #"popcorn":
-      case #"basic":
-      case #"enhanced":
+      case # "popcorn":
+      case # "basic":
+      case # "enhanced":
         if(isDefined(level.var_14f649ad) && level.var_14f649ad) {
           n_damage = e_target.health + 666;
         }
@@ -501,7 +500,7 @@ function_dced5aef(e_target, weapon = level.weaponnone, n_damage, b_charged) {
           e_target.marked_for_death = 1;
         }
 
-        if(e_target.archetype === #"skeleton") {
+        if(e_target.archetype === # "skeleton") {
           e_target dodamage(n_damage, self.origin, self, undefined, "none", "MOD_UNKNOWN", 0, weapon);
         } else if(isDefined(e_target.marked_for_death) && e_target.marked_for_death) {
           self thread function_e56c350e(e_target, b_charged, n_damage);
@@ -510,14 +509,14 @@ function_dced5aef(e_target, weapon = level.weaponnone, n_damage, b_charged) {
         }
 
         break;
-      case #"heavy":
+      case # "heavy":
         if(!isDefined(b_charged)) {
           n_damage *= 0.75;
         }
 
         e_target dodamage(n_damage, self.origin, self, undefined, "none", "MOD_UNKNOWN", 0, weapon);
         break;
-      case #"miniboss":
+      case # "miniboss":
         if(isDefined(b_charged)) {
           n_damage = int(n_damage * 0.2);
         } else {
@@ -536,9 +535,9 @@ function_dced5aef(e_target, weapon = level.weaponnone, n_damage, b_charged) {
         }
 
         break;
-      case #"boss":
+      case # "boss":
         if(!isactor(e_target)) {
-          e_target clientfield::increment("" + #"hemera_impact");
+          e_target clientfield::increment("" + # "hemera_impact");
         }
 
         n_damage = 175;
@@ -577,19 +576,19 @@ function_3f079da() {
 
   if(isDefined(level.var_137b8e71)) {
     level notify(#"ww_hemera_hit", {
-      #player: self, 
-      #e_entity: a_trace[#"entity"], 
-      #v_position: a_trace[#"position"]
+      #player: self,
+      #e_entity: a_trace[# "entity"],
+      #v_position: a_trace[# "position"]
     });
   }
 
-  return a_trace[#"position"];
+  return a_trace[# "position"];
 }
 
 player_charged_shot(weapon) {
-  self endoncallback(&function_8a56ed15, #"death", #"disconnect", #"weapon_change", #"weapon_fired", #"stop_beaming");
+  self endoncallback(&function_8a56ed15, # "death", # "disconnect", # "weapon_change", # "weapon_fired", # "stop_beaming");
   v_trace = self function_3f079da();
-  v_ground = groundtrace(v_trace + (0, 0, 200), v_trace + (0, 0, -1000), 0, self)[#"position"];
+  v_ground = groundtrace(v_trace + (0, 0, 200), v_trace + (0, 0, -1000), 0, self)[# "position"];
 
   if(!isDefined(self.mdl_beam)) {
     self.mdl_beam = util::spawn_model("tag_origin", v_ground);
@@ -604,7 +603,7 @@ player_charged_shot(weapon) {
 
   self notify(#"hash_4969a839c4e666dc");
   self clientfield::set("hemera_beam_flash", 1);
-  self.mdl_beam clientfield::set("" + #"hemera_beam", 1);
+  self.mdl_beam clientfield::set("" + # "hemera_beam", 1);
   self playSound(#"hash_1f3a25ed02b0fb5f");
   self thread function_1e39fbc5(weapon);
   self thread function_8bf301a6();
@@ -617,7 +616,7 @@ player_charged_shot(weapon) {
     v_trace = self function_3f079da();
 
     if(isDefined(v_trace)) {
-      v_ground = groundtrace(v_trace + (0, 0, 100), v_trace + (0, 0, -1000), 0, self)[#"position"];
+      v_ground = groundtrace(v_trace + (0, 0, 100), v_trace + (0, 0, -1000), 0, self)[# "position"];
     }
 
     if(isDefined(v_ground) && isDefined(self.mdl_beam)) {
@@ -628,7 +627,7 @@ player_charged_shot(weapon) {
   self clientfield::set("hemera_beam_flash", 0);
 
   if(isDefined(self.mdl_beam)) {
-    self.mdl_beam clientfield::set("" + #"hemera_beam", 0);
+    self.mdl_beam clientfield::set("" + # "hemera_beam", 0);
     self.mdl_beam delete();
   }
 
@@ -641,7 +640,7 @@ function_8a56ed15(s_notify) {
 
   if(isDefined(self.mdl_beam)) {
     self playSound(#"hash_7aeea3d29c1624a");
-    self.mdl_beam clientfield::set("" + #"hemera_beam", 0);
+    self.mdl_beam clientfield::set("" + # "hemera_beam", 0);
     self.mdl_beam delete();
   }
 
@@ -650,7 +649,7 @@ function_8a56ed15(s_notify) {
 }
 
 function_a2065170() {
-  self endon(#"death", #"weapon_change", #"stop_beaming", #"weapon_fired");
+  self endon(#"death", # "weapon_change", # "stop_beaming", # "weapon_fired");
 
   while(true) {
     if(self meleebuttonpressed()) {
@@ -662,7 +661,7 @@ function_a2065170() {
 }
 
 function_8bf301a6() {
-  self endon(#"death", #"weapon_change", #"stop_beaming");
+  self endon(#"death", # "weapon_change", # "stop_beaming");
   self.mdl_beam endon(#"death");
 
   if(self.currentweapon === level.w_hand_hemera_upgraded) {
@@ -689,7 +688,7 @@ function_8bf301a6() {
 }
 
 function_1e39fbc5(weapon) {
-  self endon(#"death", #"stop_beaming", #"weapon_change");
+  self endon(#"death", # "stop_beaming", # "weapon_change");
   wait 0.3;
 
   while(zm_utility::is_player_valid(self) && self attackbuttonpressed()) {
@@ -725,7 +724,7 @@ function_1e39fbc5(weapon) {
 
 function_6e71e724() {
   self notify(#"beaming");
-  self endon(#"death", #"beaming", #"stop_beaming", #"weapon_change");
+  self endon(#"death", # "beaming", # "stop_beaming", # "weapon_change");
 
   while(zm_utility::is_player_valid(self) && self attackbuttonpressed()) {
     waitframe(1);
@@ -749,7 +748,7 @@ function_e56c350e(e_target, b_charged, n_damage) {
   w_weapon = level.w_hand_hemera_uncharged;
 
   if(isDefined(b_charged)) {
-    e_target clientfield::set("" + #"hemera_beam_death", 1);
+    e_target clientfield::set("" + # "hemera_beam_death", 1);
     e_target.var_4dcd7a1c = 1;
     n_damage = e_target.health + 999;
     w_weapon = level.w_hand_hemera;
@@ -766,7 +765,7 @@ function_e56c350e(e_target, b_charged, n_damage) {
   }
 
   if(isalive(e_target)) {
-    if(e_target.archetype === #"skeleton") {
+    if(e_target.archetype === # "skeleton") {
       e_target dodamage(n_damage, self.origin, self, undefined, "none", "MOD_UNKNOWN", 0, w_weapon);
     } else {
       e_target dodamage(n_damage, self.origin, self, undefined, "none", "MOD_UNKNOWN", 0, w_weapon);

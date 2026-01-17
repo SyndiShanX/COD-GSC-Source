@@ -16,7 +16,7 @@
 #namespace doa_utility;
 
 function function_4e9a23a9(array) {
-  for (i = 0; i < array.size; i++) {
+  for(i = 0; i < array.size; i++) {
     j = randomint(array.size);
     temp = array[i];
     array[i] = array[j];
@@ -37,7 +37,7 @@ function isexplosivedamage(damage_mod) {
 }
 
 function function_767f35f5(mod) {
-  return isdefined(self.damageweapon) && self.damageweapon == "zombietron_tesla_gun" && (mod == "MOD_PROJECTILE" || mod == "MOD_PROJECTILE_SPLASH");
+  return isDefined(self.damageweapon) && self.damageweapon == "zombietron_tesla_gun" && (mod == "MOD_PROJECTILE" || mod == "MOD_PROJECTILE_SPLASH");
 }
 
 function stringtofloat(string) {
@@ -47,7 +47,7 @@ function stringtofloat(string) {
   }
   whole = int(floatparts[0]);
   decimal = 0;
-  for (i = floatparts[1].size - 1; i >= 0; i--) {
+  for(i = floatparts[1].size - 1; i >= 0; i--) {
     decimal = (decimal / 10) + (int(floatparts[1][i]) / 10);
   }
   if(whole >= 0) {
@@ -57,7 +57,7 @@ function stringtofloat(string) {
 }
 
 function function_124b9a08() {
-  while (true) {
+  while(true) {
     if(level flag::get("doa_round_active")) {
       return;
     }
@@ -66,18 +66,18 @@ function function_124b9a08() {
 }
 
 function function_c8f4d63a() {
-  while (level flag::get("doa_bonusroom_active")) {
+  while(level flag::get("doa_bonusroom_active")) {
     wait(0.05);
   }
 }
 
 function function_d0e32ad0(state) {
   if(state == 1) {
-    while (!level flag::get("doa_screen_faded_out")) {
+    while(!level flag::get("doa_screen_faded_out")) {
       wait(0.05);
     }
   } else if(state == 0) {
-    while (level flag::get("doa_screen_faded_out")) {
+    while(level flag::get("doa_screen_faded_out")) {
       wait(0.05);
     }
   }
@@ -92,7 +92,7 @@ function function_390adefe(unfreeze = 1) {
 }
 
 function function_a5821e05(time = 1) {
-  if(isdefined(level.var_a7749866)) {
+  if(isDefined(level.var_a7749866)) {
     debugmsg("");
     return;
   }
@@ -132,7 +132,7 @@ function function_c85960dd(hold_black_time = 1.2, unfreeze = 1) {
 
 function function_1d62c13a() {
   level endon("fade_in_complete");
-  while (isdefined(level.var_a7749866)) {
+  while(isDefined(level.var_a7749866)) {
     if(level flag::get("doa_game_is_over")) {
       return;
     }
@@ -147,19 +147,19 @@ function function_1d62c13a() {
 
 function function_d0c69425(var_30d383f5) {
   level endon("fade_in_complete");
-  while (!(isdefined(level.var_de693c3) && level.var_de693c3)) {
+  while(!(isDefined(level.var_de693c3) && level.var_de693c3)) {
     wait(0.05);
   }
   timeout = gettime() + (var_30d383f5 * 1000);
-  while (isdefined(level.var_a7749866) && gettime() < timeout) {
+  while(isDefined(level.var_a7749866) && gettime() < timeout) {
     wait(0.05);
   }
   debugmsg("");
   level thread function_c85960dd();
 }
 
-function getclosestto(origin, & entarray, maxdist = 2048) {
-  if(!isdefined(entarray)) {
+function getclosestto(origin, &entarray, maxdist = 2048) {
+  if(!isDefined(entarray)) {
     return;
   }
   if(entarray.size == 0) {
@@ -171,11 +171,11 @@ function getclosestto(origin, & entarray, maxdist = 2048) {
   return arraygetclosest(origin, entarray, maxdist);
 }
 
-function getarrayitemswithin(origin, & entarray, minsq) {
+function getarrayitemswithin(origin, &entarray, minsq) {
   items = [];
-  if(isdefined(entarray) && entarray.size) {
-    for (i = 0; i < entarray.size; i++) {
-      if(!isdefined(entarray[i])) {
+  if(isDefined(entarray) && entarray.size) {
+    for(i = 0; i < entarray.size; i++) {
+      if(!isDefined(entarray[i])) {
         continue;
       }
       distsq = distancesquared(entarray[i].origin, origin);
@@ -187,17 +187,17 @@ function getarrayitemswithin(origin, & entarray, minsq) {
   return items;
 }
 
-function getclosesttome( & entarray) {
+function getclosesttome(&entarray) {
   return getclosestto(self.origin, entarray);
 }
 
 function function_999bba85(origin, time) {
   self moveto(origin, time, 0, 0);
   wait(time);
-  if(isdefined(self.trigger)) {
+  if(isDefined(self.trigger)) {
     self.trigger delete();
   }
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     self delete();
   }
 }
@@ -209,12 +209,12 @@ function notify_timeout(note, timeout) {
 }
 
 function clamp(val, min, max) {
-  if(isdefined(min)) {
+  if(isDefined(min)) {
     if(val < min) {
       val = min;
     }
   }
-  if(isdefined(max)) {
+  if(isDefined(max)) {
     if(val > max) {
       val = max;
     }
@@ -223,7 +223,7 @@ function clamp(val, min, max) {
 }
 
 function function_75e76155(other, note) {
-  if(!isdefined(other)) {
+  if(!isDefined(other)) {
     return;
   }
   killnote = function_2ccf4b82("DeleteNote");
@@ -237,7 +237,7 @@ function function_75e76155(other, note) {
   } else {
     other util::waittill_any(note, killnote);
   }
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     self delete();
   }
 }
@@ -246,13 +246,13 @@ function function_f5db70f1(other, note) {
   self endon(note);
   other endon("death");
   self waittill("death");
-  if(isdefined(other)) {
+  if(isDefined(other)) {
     other notify(note);
   }
 }
 
 function function_24245456(other, note) {
-  if(!isdefined(other)) {
+  if(!isDefined(other)) {
     return;
   }
   self endon("death");
@@ -267,7 +267,7 @@ function function_24245456(other, note) {
   } else {
     other util::waittill_any(note, killnote);
   }
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     self notify(killnote);
     self.aioverridedamage = undefined;
     self.takedamage = 1;
@@ -291,7 +291,7 @@ function function_783519c1(note, var_8b804bd9 = 0) {
   } else {
     level waittill(note);
   }
-  if(isdefined(self.anchor)) {
+  if(isDefined(self.anchor)) {
     self.anchor delete();
   }
   self delete();
@@ -300,7 +300,7 @@ function function_783519c1(note, var_8b804bd9 = 0) {
 function function_1bd67aef(time) {
   self endon("death");
   wait(time);
-  if(isdefined(self.anchor)) {
+  if(isDefined(self.anchor)) {
     self.anchor delete();
   }
   self delete();
@@ -315,7 +315,7 @@ function function_981c685d(var_627e7613) {
   } else {
     var_627e7613 util::waittill_any("death", killnote);
   }
-  if(isdefined(self.anchor)) {
+  if(isDefined(self.anchor)) {
     self.anchor delete();
   }
   self delete();
@@ -329,13 +329,13 @@ function function_a625b5d3(player) {
 }
 
 function function_c157030a() {
-  while (function_b99d78c7() > 0) {
+  while(function_b99d78c7() > 0) {
     wait(1);
   }
 }
 
 function function_1ced251e(all = 0) {
-  while (function_b99d78c7() > 0) {
+  while(function_b99d78c7() > 0) {
     killallenemy(all);
     wait(1);
   }
@@ -345,7 +345,7 @@ function function_2f0d697f(spawner) {
   count = 0;
   ai = function_fb2ad2fb();
   foreach(guy in ai) {
-    if(isdefined(guy.spawner) && guy.spawner == spawner) {
+    if(isDefined(guy.spawner) && guy.spawner == spawner) {
       count++;
     }
   }
@@ -369,13 +369,13 @@ function function_fe180f6f(count = 1) {
     if(count <= 0) {
       return;
     }
-    if(!isdefined(guy)) {
+    if(!isDefined(guy)) {
       continue;
     }
-    if(isdefined(guy.boss) && guy.boss) {
+    if(isDefined(guy.boss) && guy.boss) {
       continue;
     }
-    if(!(isdefined(guy.spawner.var_8d1af144) && guy.spawner.var_8d1af144)) {
+    if(!(isDefined(guy.spawner.var_8d1af144) && guy.spawner.var_8d1af144)) {
       continue;
     }
     guy thread function_ba30b321(0);
@@ -393,10 +393,10 @@ function killallenemy(all = 0) {
   var_76cfbf10 = 0;
   enemies = function_fb2ad2fb();
   foreach(guy in enemies) {
-    if(!isdefined(guy)) {
+    if(!isDefined(guy)) {
       continue;
     }
-    if(!all && (isdefined(guy.boss) && guy.boss)) {
+    if(!all && (isDefined(guy.boss) && guy.boss)) {
       continue;
     }
     guy.aioverridedamage = undefined;
@@ -412,17 +412,17 @@ function killallenemy(all = 0) {
 }
 
 function function_e3c30240(dir, var_e3e1b987 = 100, var_1f32eac0 = 0.1, attacker) {
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   self thread function_ba30b321(var_1f32eac0, attacker);
-  if(isdefined(self.no_ragdoll) && self.no_ragdoll) {
+  if(isDefined(self.no_ragdoll) && self.no_ragdoll) {
     return;
   }
   self endon("death");
   self setplayercollision(0);
   self startragdoll();
-  if(isdefined(dir)) {
+  if(isDefined(dir)) {
     dir = vectornormalize(dir);
     self launchragdoll(dir * var_e3e1b987);
   }
@@ -430,7 +430,7 @@ function function_e3c30240(dir, var_e3e1b987 = 100, var_1f32eac0 = 0.1, attacker
 
 function function_ba30b321(time, attacker, mod = "MOD_HIT_BY_OBJECT") {
   assert(!isplayer(self));
-  if(isdefined(self.boss) && self.boss) {
+  if(isDefined(self.boss) && self.boss) {
     return;
   }
   self endon("death");
@@ -439,7 +439,7 @@ function function_ba30b321(time, attacker, mod = "MOD_HIT_BY_OBJECT") {
   }
   self.takedamage = 1;
   self.allowdeath = 1;
-  if(isdefined(attacker)) {
+  if(isDefined(attacker)) {
     self dodamage(self.health + 187, self.origin, attacker, attacker, "none", mod, 0, getweapon("none"));
   } else {
     self dodamage(self.health + 187, self.origin);
@@ -449,7 +449,7 @@ function function_ba30b321(time, attacker, mod = "MOD_HIT_BY_OBJECT") {
 function function_308fa126(num = 5) {
   locs = [];
   players = getplayers();
-  if(isdefined(level.doa.arenas[level.doa.current_arena].var_1d2ed40)) {
+  if(isDefined(level.doa.arenas[level.doa.current_arena].var_1d2ed40)) {
     foreach(spot in level.doa.arenas[level.doa.current_arena].var_1d2ed40) {
       locs[locs.size] = spot.origin;
       num--;
@@ -458,7 +458,7 @@ function function_308fa126(num = 5) {
       }
     }
   }
-  if(isdefined(level.doa.var_3361a074)) {
+  if(isDefined(level.doa.var_3361a074)) {
     foreach(spot in level.doa.var_3361a074) {
       locs[locs.size] = spot.origin;
       num--;
@@ -468,7 +468,7 @@ function function_308fa126(num = 5) {
     }
   }
   foreach(player in players) {
-    if(isdefined(player.vehicle)) {
+    if(isDefined(player.vehicle)) {
       continue;
     }
     locs[locs.size] = player.origin;
@@ -482,7 +482,7 @@ function function_308fa126(num = 5) {
 
 function function_8fc4387a(num = 5) {
   locs = [];
-  if(isdefined(level.doa.arenas[level.doa.current_arena].var_1d2ed40)) {
+  if(isDefined(level.doa.arenas[level.doa.current_arena].var_1d2ed40)) {
     foreach(spot in level.doa.arenas[level.doa.current_arena].var_1d2ed40) {
       locs[locs.size] = spot;
       num--;
@@ -491,7 +491,7 @@ function function_8fc4387a(num = 5) {
       }
     }
   }
-  if(isdefined(level.doa.var_3361a074)) {
+  if(isDefined(level.doa.var_3361a074)) {
     foreach(spot in level.doa.var_3361a074) {
       locs[locs.size] = spot;
       num--;
@@ -551,10 +551,10 @@ function function_5b4fbaef() {
 
 function getyawtoenemy() {
   pos = undefined;
-  if(isdefined(self.enemy)) {
+  if(isDefined(self.enemy)) {
     pos = self.enemy.origin;
   } else {
-    forward = anglestoforward(self.angles);
+    forward = anglesToForward(self.angles);
     forward = vectorscale(forward, 150);
     pos = self.origin + forward;
   }
@@ -584,7 +584,7 @@ function function_a98c85b2(location, timesec = 1) {
   }
   increment = (self.origin - location) / (timesec * 20);
   var_afc5c189 = gettime() + (timesec * 1000);
-  while (gettime() < var_afc5c189) {
+  while(gettime() < var_afc5c189) {
     self.origin = self.origin - increment;
     wait(0.05);
   }
@@ -594,16 +594,16 @@ function function_a98c85b2(location, timesec = 1) {
 function function_89a258a7() {
   self endon("death");
   self endon("hash_3d81b494");
-  while (true) {
+  while(true) {
     wait(0.5);
-    if(isdefined(self.var_111c7bbb)) {
+    if(isDefined(self.var_111c7bbb)) {
       distsq = distancesquared(self.var_111c7bbb, self.origin);
       if(distsq < (32 * 32)) {
         continue;
       }
     }
     var_111c7bbb = getclosestpointonnavmesh(self.origin, 64, 16);
-    if(isdefined(var_111c7bbb)) {
+    if(isDefined(var_111c7bbb)) {
       self.var_111c7bbb = var_111c7bbb;
     }
   }
@@ -629,8 +629,8 @@ function clearallcorpses(num = 99) {
   } else {
     total = num;
   }
-  for (i = 0; i < total; i++) {
-    if(isdefined(corpse_array[i])) {
+  for(i = 0; i < total; i++) {
+    if(isDefined(corpse_array[i])) {
       corpse_array[i] delete();
     }
   }
@@ -639,14 +639,14 @@ function clearallcorpses(num = 99) {
 function function_5f54cafa(waittime) {
   level notify("hash_5f54cafa");
   level endon("hash_5f54cafa");
-  while (true) {
+  while(true) {
     clearallcorpses();
     wait(waittime);
   }
 }
 
 function function_2ccf4b82(note) {
-  if(!isdefined(level.doa.var_24cbf490)) {
+  if(!isDefined(level.doa.var_24cbf490)) {
     level.doa.var_24cbf490 = 0;
   }
   level.doa.var_24cbf490++;
@@ -658,7 +658,7 @@ function function_c5f3ece8(text, param, holdtime = 5, color = vectorscale((1, 1,
   self endon("hash_c5f3ece8");
   level.doa.title1.color = color;
   level.doa.title1.alpha = 0;
-  if(isdefined(param)) {
+  if(isDefined(param)) {
     level.doa.title1 settext(text, param);
   } else {
     level.doa.title1 settext(text);
@@ -680,7 +680,7 @@ function function_37fb5c23(text, param, holdtime = 5, color = (1, 1, 0), note = 
   self endon("hash_37fb5c23");
   level.doa.title2.color = color;
   level.doa.title2.alpha = 0;
-  if(isdefined(param)) {
+  if(isDefined(param)) {
     level.doa.title2 settext(text, param);
   } else {
     level.doa.title2 settext(text);
@@ -694,8 +694,8 @@ function function_37fb5c23(text, param, holdtime = 5, color = (1, 1, 0), note = 
 }
 
 function function_13fbad22() {
-  if(isdefined(world.var_c642e28c)) {
-    for (i = 0; i < world.var_c642e28c; i++) {
+  if(isDefined(world.var_c642e28c)) {
+    for(i = 0; i < world.var_c642e28c; i++) {
       function_11f3f381(i, 1);
       util::wait_network_frame();
     }
@@ -711,14 +711,14 @@ function function_c9fb43e9(text, position) {
 }
 
 function function_11f3f381(index, fadetime) {
-  luinotifyevent(&"doa_bubble", 2, (isdefined(fadetime) ? fadetime : 0), index);
+  luinotifyevent(&"doa_bubble", 2, (isDefined(fadetime) ? fadetime : 0), index);
 }
 
 function function_dbcf48a0(delay = 0, width = 40, height = 40) {
   if(delay) {
     wait(delay);
   }
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   trigger = spawn("trigger_radius", self.origin, 1, width, height);
@@ -727,31 +727,31 @@ function function_dbcf48a0(delay = 0, width = 40, height = 40) {
   trigger linkto(self);
   trigger thread function_981c685d(self);
   trigger endon("death");
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     trigger waittill("trigger", guy);
-    if(isdefined(guy)) {
-      if(isdefined(guy.untouchable) && guy.untouchable) {
+    if(isDefined(guy)) {
+      if(isDefined(guy.untouchable) && guy.untouchable) {
         continue;
       }
-      if(isdefined(guy.boss) && guy.boss) {
+      if(isDefined(guy.boss) && guy.boss) {
         continue;
       }
-      if(isdefined(guy.doa) && isdefined(guy.doa.vehicle)) {
+      if(isDefined(guy.doa) && isDefined(guy.doa.vehicle)) {
         continue;
       }
       guy dodamage(guy.health + 1, guy.origin);
     }
   }
-  if(isdefined(trigger)) {
+  if(isDefined(trigger)) {
     trigger delete();
   }
 }
 
 function function_1ded48e6(time, var_f88fd757) {
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return 0;
   }
-  if(isdefined(var_f88fd757)) {
+  if(isDefined(var_f88fd757)) {
     return time * var_f88fd757;
   }
   if(self.doa.fate == 2) {
@@ -801,10 +801,10 @@ function function_fa8a86e8(ent, target) {
 }
 
 function debug_circle(origin, radius, seconds, color) {
-  if(!isdefined(seconds)) {
+  if(!isDefined(seconds)) {
     seconds = 1;
   }
-  if(!isdefined(color)) {
+  if(!isDefined(color)) {
     color = (1, 0, 0);
   }
   frames = int(20 * seconds);
@@ -825,7 +825,7 @@ function function_a0e51d80(point, timesec, size, color) {
   var_842de44a = point + (0, halfwidth, 0);
   h1 = point + (0, 0, halfwidth * -1);
   h2 = point + (0, 0, halfwidth);
-  while (end > gettime()) {
+  while(end > gettime()) {
     line(l1, l2, color, 1, 0, 1);
     line(var_5e2b69e1, var_842de44a, color, 1, 0, 1);
     line(h1, h2, color, 1, 0, 1);
@@ -837,7 +837,7 @@ function debugorigin(timesec, size, color) {
   self endon("hash_c32e3b78");
   end = gettime() + (timesec * 1000);
   halfwidth = int(size / 2);
-  while (end > gettime()) {
+  while(end > gettime()) {
     point = self.origin;
     l1 = point + (halfwidth * -1, 0, 0);
     l2 = point + (halfwidth, 0, 0);
@@ -863,7 +863,7 @@ function set_lighting_state(state) {
 
 function function_5233dbc0() {
   foreach(player in getplayers()) {
-    if(isdefined(player.doa) && isdefined(player.doa.vehicle)) {
+    if(isDefined(player.doa) && isDefined(player.doa.vehicle)) {
       return true;
     }
   }
@@ -871,12 +871,12 @@ function function_5233dbc0() {
 }
 
 function function_5bca1086() {
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return namespace_3ca3c537::function_61d60e0b();
   }
-  if(isdefined(level.doa.arenas[level.doa.current_arena].var_1d2ed40) && level.doa.arenas[level.doa.current_arena].var_1d2ed40.size) {
+  if(isDefined(level.doa.arenas[level.doa.current_arena].var_1d2ed40) && level.doa.arenas[level.doa.current_arena].var_1d2ed40.size) {
     spot = getclosestto(self.origin, level.doa.arenas[level.doa.current_arena].var_1d2ed40);
-    if(!isdefined(spot)) {
+    if(!isDefined(spot)) {
       spot = self.origin;
     } else {
       spot = spot.origin;
@@ -888,7 +888,7 @@ function function_5bca1086() {
 }
 
 function function_14a10231(origin) {
-  if(isdefined(level.doa.arenas[level.doa.current_arena].var_1d2ed40) && level.doa.arenas[level.doa.current_arena].var_1d2ed40.size) {
+  if(isDefined(level.doa.arenas[level.doa.current_arena].var_1d2ed40) && level.doa.arenas[level.doa.current_arena].var_1d2ed40.size) {
     spot = level.doa.arenas[level.doa.current_arena].var_1d2ed40[randomint(level.doa.arenas[level.doa.current_arena].var_1d2ed40.size)].origin;
   } else {
     spot = origin;
@@ -897,7 +897,7 @@ function function_14a10231(origin) {
 }
 
 function function_ada6d90() {
-  if(isdefined(level.doa.arenas[level.doa.current_arena].var_1d2ed40) && level.doa.arenas[level.doa.current_arena].var_1d2ed40.size) {
+  if(isDefined(level.doa.arenas[level.doa.current_arena].var_1d2ed40) && level.doa.arenas[level.doa.current_arena].var_1d2ed40.size) {
     return level.doa.arenas[level.doa.current_arena].var_1d2ed40[randomint(level.doa.arenas[level.doa.current_arena].var_1d2ed40.size)];
   }
 }

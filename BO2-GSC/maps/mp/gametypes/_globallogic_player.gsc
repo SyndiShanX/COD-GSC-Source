@@ -224,7 +224,7 @@ callback_playerconnect() {
   }
 
   if(!isDefined(self.pers["music"])) {
-    self.pers["music"] = spawnstruct();
+    self.pers["music"] = spawnStruct();
     self.pers["music"].spawn = 0;
     self.pers["music"].inque = 0;
     self.pers["music"].currentstate = "SILENT";
@@ -354,12 +354,8 @@ callback_playerconnect() {
     self.team = "spectator";
     self.sessionstate = "dead";
     self maps\mp\gametypes\_globallogic_ui::updateobjectivetext();
-    [
-      [level.spawnspectator]
-    ]();
-    [
-      [level.autoassign]
-    ](0);
+    [[level.spawnspectator]]();
+    [[level.autoassign]](0);
 
     if(level.rankedmatch || level.leaguematch)
       self thread maps\mp\gametypes\_globallogic_spawn::kickifdontspawn();
@@ -383,9 +379,7 @@ callback_playerconnect() {
     }
   } else if(self.pers["team"] == "spectator") {
     self setclientscriptmainmenu(game["menu_class"]);
-    [
-      [level.spawnspectator]
-    ]();
+    [[level.spawnspectator]]();
     self.sessionteam = "spectator";
     self.sessionstate = "spectator";
 
@@ -401,9 +395,7 @@ callback_playerconnect() {
       self.ffateam = self.pers["team"];
 
     self maps\mp\gametypes\_globallogic_ui::updateobjectivetext();
-    [
-      [level.spawnspectator]
-    ]();
+    [[level.spawnspectator]]();
 
     if(maps\mp\gametypes\_globallogic_utils::isvalidclass(self.pers["class"]))
       self thread[[level.spawnclient]]();
@@ -743,9 +735,7 @@ callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, sw
     smeansofdeath = "MOD_HEAD_SHOT";
 
   if(level.onplayerdamage != maps\mp\gametypes\_globallogic::blank) {
-    modifieddamage = [
-      [level.onplayerdamage]
-    ](einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime);
+    modifieddamage = [[level.onplayerdamage]](einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime);
 
     if(isDefined(modifieddamage)) {
       if(modifieddamage <= 0) {
@@ -771,7 +761,7 @@ callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, sw
   sweapon = figureoutweapon(sweapon, einflictor);
   pixendevent();
 
-  if(idflags & level.idflags_penetration && isplayer(eattacker) && eattacker hasperk("specialty_bulletpenetration"))
+  if(idflags &level.idflags_penetration && isplayer(eattacker) && eattacker hasperk("specialty_bulletpenetration"))
     self thread maps\mp\gametypes\_battlechatter_mp::perkspecificbattlechatter("deepimpact", 1);
 
   attackerishittingteammate = isplayer(eattacker) && self isenemyplayer(eattacker) == 0;
@@ -804,12 +794,12 @@ callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, sw
       }
     }
 
-    if(idflags & level.idflags_shield_explosive_impact) {
+    if(idflags &level.idflags_shield_explosive_impact) {
       shitloc = "none";
 
-      if(!(idflags & level.idflags_shield_explosive_impact_huge))
+      if(!(idflags &level.idflags_shield_explosive_impact_huge))
         idamage = idamage * 0.0;
-    } else if(idflags & level.idflags_shield_explosive_splash) {
+    } else if(idflags &level.idflags_shield_explosive_splash) {
       if(isDefined(einflictor) && isDefined(einflictor.stucktoplayer) && einflictor.stucktoplayer == self)
         idamage = 101;
 
@@ -818,7 +808,7 @@ callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, sw
       return;
   }
 
-  if(!(idflags & level.idflags_no_protection)) {
+  if(!(idflags &level.idflags_no_protection)) {
     if(isDefined(einflictor) && (smeansofdeath == "MOD_GAS" || maps\mp\gametypes\_class::isexplosivedamage(undefined, smeansofdeath))) {
       if((einflictor.classname == "grenade" || sweapon == "tabun_gas_mp") && self.lastspawntime + 3500 > gettime() && distancesquared(einflictor.origin, self.lastspawnpoint.origin) < 62500) {
         return;
@@ -957,7 +947,7 @@ callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, sw
       if(self.lastdamagewasfromenemy) {
         if(isplayer(eattacker)) {
           if(isDefined(eattacker.damagedplayers[self.clientid]) == 0)
-            eattacker.damagedplayers[self.clientid] = spawnstruct();
+            eattacker.damagedplayers[self.clientid] = spawnStruct();
 
           eattacker.damagedplayers[self.clientid].time = gettime();
           eattacker.damagedplayers[self.clientid].entity = self;
@@ -1094,7 +1084,7 @@ isaikillstreakdamage(sweapon, einflictor) {
 finishplayerdamagewrapper(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime, boneindex) {
   pixbeginevent("finishPlayerDamageWrapper");
 
-  if(!level.console && idflags & level.idflags_penetration && isplayer(eattacker)) {
+  if(!level.console && idflags &level.idflags_penetration && isplayer(eattacker)) {
     println("penetrated:" + self getentitynumber() + " health:" + self.health + " attacker:" + eattacker.clientid + " inflictor is player:" + isplayer(einflictor) + " damage:" + idamage + " hitLoc:" + shitloc);
 
     eattacker addplayerstat("penetration_shots", 1);
@@ -1419,8 +1409,7 @@ playerkilled_kill(einflictor, attacker, smeansofdeath, sweapon, shitloc) {
     if(sweapon == "straferun_gun_mp" || sweapon == "straferun_rockets_mp")
       attacker maps\mp\killstreaks\_straferun::addstraferunkill();
   } else {
-    if(smeansofdeath == "MOD_MELEE" && level.gametype == "gun") {
-    } else
+    if(smeansofdeath == "MOD_MELEE" && level.gametype == "gun") {} else
       maps\mp\_scoreevents::processscoreevent("kill", attacker, self, sweapon);
 
     if(smeansofdeath == "MOD_HEAD_SHOT")
@@ -1647,8 +1636,7 @@ callback_playerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdi
       lpattacknum = attacker getentitynumber();
       dokillcam = 1;
 
-      if(level.teambased && self.team == attacker.team && smeansofdeath == "MOD_GRENADE" && level.friendlyfire == 0) {
-      } else if(level.teambased && self.team == attacker.team) {
+      if(level.teambased && self.team == attacker.team && smeansofdeath == "MOD_GRENADE" && level.friendlyfire == 0) {} else if(level.teambased && self.team == attacker.team) {
         wasteamkill = 1;
         self playerkilled_teamkill(einflictor, attacker, smeansofdeath, sweapon, shitloc);
       } else {
@@ -1833,9 +1821,7 @@ callback_playerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdi
   defaultplayerdeathwatchtime = 1.75;
 
   if(isDefined(level.overrideplayerdeathwatchtimer))
-    defaultplayerdeathwatchtime = [
-      [level.overrideplayerdeathwatchtimer]
-    ](defaultplayerdeathwatchtime);
+    defaultplayerdeathwatchtime = [[level.overrideplayerdeathwatchtimer]](defaultplayerdeathwatchtime);
 
   maps\mp\gametypes\_globallogic_utils::waitfortimeornotifies(defaultplayerdeathwatchtime);
   self notify("death_delay_finished");
@@ -1998,8 +1984,7 @@ ignoreteamkills(sweapon, smeansofdeath) {
   return false;
 }
 
-callback_playerlaststand(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime, deathanimduration) {
-}
+callback_playerlaststand(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime, deathanimduration) {}
 
 damageshellshockandrumble(eattacker, einflictor, sweapon, smeansofdeath, idamage) {
   self thread maps\mp\gametypes\_weapons::onweapondamage(eattacker, einflictor, sweapon, smeansofdeath, idamage);
@@ -2155,7 +2140,7 @@ trackattackerdamage(eattacker, idamage, smeansofdeath, sweapon) {
     self.firsttimedamaged = gettime();
 
   if(!isDefined(self.attackerdata[eattacker.clientid])) {
-    self.attackerdamage[eattacker.clientid] = spawnstruct();
+    self.attackerdamage[eattacker.clientid] = spawnStruct();
     self.attackerdamage[eattacker.clientid].damage = idamage;
     self.attackerdamage[eattacker.clientid].meansofdeath = smeansofdeath;
     self.attackerdamage[eattacker.clientid].weapon = sweapon;

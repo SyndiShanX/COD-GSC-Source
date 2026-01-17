@@ -125,8 +125,8 @@ manage_plaza_truck() {
 }
 
 init_vehicles() {
-  a_script_models = getentarray("script_model", "classname");
-  a_vehicles = arraycombine(a_script_models, getentarray("script_vehicle", "classname"), 0, 0);
+  a_script_models = getEntArray("script_model", "classname");
+  a_vehicles = arraycombine(a_script_models, getEntArray("script_vehicle", "classname"), 0, 0);
 
   foreach(veh in a_vehicles)
   global_vehicle_spawn_func(veh);
@@ -171,9 +171,9 @@ setup_skiptos() {
   add_skipto("g20_group1", ::skipto_la_1);
   add_skipto("drive", ::skipto_la_1);
   add_skipto("skyline", ::skipto_la_1);
-  add_skipto("street", maps\la_street::skipto_street, & "SKIPTO_STRING_HERE", maps\la_street::main);
-  add_skipto("plaza", maps\la_plaza::skipto_plaza, & "SKIPTO_STRING_HERE", maps\la_plaza::main);
-  add_skipto("intersection", maps\la_intersection::skipto_intersection, & "SKIPTO_STRING_HERE", maps\la_intersection::main);
+  add_skipto("street", maps\la_street::skipto_street, &"SKIPTO_STRING_HERE", maps\la_street::main);
+  add_skipto("plaza", maps\la_plaza::skipto_plaza, &"SKIPTO_STRING_HERE", maps\la_plaza::main);
+  add_skipto("intersection", maps\la_intersection::skipto_intersection, &"SKIPTO_STRING_HERE", maps\la_intersection::main);
   add_skipto("f35_wakeup", ::skipto_la_2);
   add_skipto("f35_boarding", ::skipto_la_2);
   add_skipto("f35_flying", ::skipto_la_2);

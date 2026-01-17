@@ -21,7 +21,7 @@ section_flag_inits() {
 }
 
 section_precache() {
-  maps\_utility::add_hint_string("hint_breach_init", & "SKYWAY_HINT_BREACH", ::hint_loco_breach_init_func);
+  maps\_utility::add_hint_string("hint_breach_init", &"SKYWAY_HINT_BREACH", ::hint_loco_breach_init_func);
   precacheitem("coltanaconda_rorkearm_skyway");
   precachemodel("weapon_p226");
 }

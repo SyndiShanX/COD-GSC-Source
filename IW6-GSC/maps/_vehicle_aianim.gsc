@@ -1691,9 +1691,7 @@ guy_vehicle_death(var_0, var_1, var_2) {
     if(isDefined(var_0.ragdoll_getout_death) && var_2 != "bm21_troops") {
       return;
     }
-    [
-      [level.global_kill_func]
-    ]("MOD_RIFLE_BULLET", "torso_upper", var_0.origin);
+    [[level.global_kill_func]]("MOD_RIFLE_BULLET", "torso_upper", var_0.origin);
 
     if(var_2 == "bm21_troops") {
       var_0.allowdeath = 1;

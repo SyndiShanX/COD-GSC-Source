@@ -67,7 +67,7 @@ vanguard_activate_think(var_0, var_1, var_2) {
 
     foreach(var_4 in level.players) {
       if(isDefined(var_4.lowermessage))
-        var_4 maps\mp\_utility::setlowermessage("vanguard_use_hint", & "MP_ALIEN_DESCENT_VANGUARD_USE_HINT", 3.5);
+        var_4 maps\mp\_utility::setlowermessage("vanguard_use_hint", &"MP_ALIEN_DESCENT_VANGUARD_USE_HINT", 3.5);
     }
 
     for(;;) {
@@ -75,12 +75,12 @@ vanguard_activate_think(var_0, var_1, var_2) {
       var_4.vanguard_num = var_1;
 
       if(var_4 maps\mp\alien\_utility::is_holding_deployable() || maps\mp\alien\_utility::is_true(var_4.iscarrying) || maps\mp\alien\_utility::is_true(var_4.has_special_weapon)) {
-        var_4 maps\mp\_utility::setlowermessage("cant_buy", & "ALIEN_COLLECTIBLES_PLAYER_HOLDING", 3);
+        var_4 maps\mp\_utility::setlowermessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_HOLDING", 3);
         continue;
       }
 
       if(var_4 getstance() == "prone" || var_4 getstance() == "crouch") {
-        var_4 maps\mp\_utility::setlowermessage("change_stance", & "ALIENS_PATCH_CHANGE_STANCE", 3);
+        var_4 maps\mp\_utility::setlowermessage("change_stance", &"ALIENS_PATCH_CHANGE_STANCE", 3);
         continue;
       }
 
@@ -302,7 +302,7 @@ initvanguardhud(var_0) {
 
   if(!isDefined(self.vanguard_hint_shown)) {
     self.vanguard_hint_shown = 1;
-    maps\mp\_utility::setlowermessage("vanguard_use_hint", & "MP_ALIEN_DESCENT_VANGUARD_USE_HINT", 4.0);
+    maps\mp\_utility::setlowermessage("vanguard_use_hint", &"MP_ALIEN_DESCENT_VANGUARD_USE_HINT", 4.0);
   }
 
   self visionsetnakedforplayer("", var_0);
@@ -878,7 +878,7 @@ vanguard_handledamage() {
     self.owner thread vanguard_rumble(self, "damage_heavy", 3);
 
     if(self.damagetaken >= self.maxhealth) {
-      self.owner maps\mp\_utility::setlowermessage("vanguard_death", & "MP_ALIEN_DESCENT_VANGUARD_DESTROYED", 3.5);
+      self.owner maps\mp\_utility::setlowermessage("vanguard_death", &"MP_ALIEN_DESCENT_VANGUARD_DESTROYED", 3.5);
       self notify("death");
       continue;
     }
@@ -913,7 +913,7 @@ vanguard_turret_handledamage() {
     self.parent.owner thread vanguard_rumble(self.parent, "damage_heavy", 3);
 
     if(self.parent.damagetaken >= self.parent.maxhealth) {
-      self.parent.owner maps\mp\_utility::setlowermessage("vanguard_death", & "MP_ALIEN_DESCENT_VANGUARD_DESTROYED", 3.5);
+      self.parent.owner maps\mp\_utility::setlowermessage("vanguard_death", &"MP_ALIEN_DESCENT_VANGUARD_DESTROYED", 3.5);
       self.parent notify("death");
       continue;
     }

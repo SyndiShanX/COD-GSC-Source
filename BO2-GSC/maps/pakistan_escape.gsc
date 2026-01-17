@@ -23,7 +23,7 @@ skipto_escape_battle() {
   level.vh_player_drone play_fx("drone_spotlight_cheap", level.vh_player_drone gettagorigin("tag_spotlight"), level.vh_player_drone gettagangles("tag_spotlight"), "remove_fx_cheap", 1, "tag_spotlight");
   level.vh_player_soct play_fx("soct_spotlight", level.vh_player_soct gettagorigin("tag_headlights"), level.vh_player_soct gettagangles("tag_headlights"), "remove_fx", 1, "tag_headlights");
   level.vh_player_soct.driver = level.player;
-  a_ai_targets = getentarray("ai_target", "script_noteworthy");
+  a_ai_targets = getEntArray("ai_target", "script_noteworthy");
   array_thread(a_ai_targets, ::add_spawn_function, ::set_lock_on_target, vectorscale((0, 0, 1), 45.0));
   onsaverestored_callback(::checkpoint_save_restored);
   set_objective(level.obj_escape);
@@ -209,7 +209,7 @@ escape_battle_checkpoints() {
 }
 
 escape_battle_spawn_func() {
-  a_h_drop_bad = getentarray("h_drop_bad", "targetname");
+  a_h_drop_bad = getEntArray("h_drop_bad", "targetname");
   array_thread(a_h_drop_bad, ::add_spawn_function, ::run_over);
   sp_heli_crash_shooter = getent("heli_crash_shooter", "targetname");
   sp_heli_crash_shooter add_spawn_function(::heli_crash_ai_spawn_func);
@@ -539,7 +539,7 @@ pak_scaffold_collapse_02_volume(str_soct_targetname) {
   }
 
   level notify("fxanim_scaffold_collapse_02_start");
-  info_volume playsound("evt_soct_scaffold_1");
+  info_volume playSound("evt_soct_scaffold_1");
   exploder(10855);
   wait 1.3;
   exploder(10856);
@@ -549,7 +549,7 @@ pak_scaffold_collapse_02_volume(str_soct_targetname) {
 suicide_tunnel_running_guys_trigger() {
   e_trigger = getent("suicide_tunnel_trigger", "targetname");
   e_trigger waittill("trigger");
-  a_spawners = getentarray("end_suicide_tunnel_spawner", "targetname");
+  a_spawners = getEntArray("end_suicide_tunnel_spawner", "targetname");
 
   for(i = 0; i < a_spawners.size; i++)
     level thread spawner_run_to_node(a_spawners[i]);
@@ -559,14 +559,14 @@ kill_fxanim_catwalk1(str_level_notify, str_endon_notify) {
   level endon(str_endon_notify);
   level waittill(str_level_notify);
   a_ai = [];
-  a_ents = getentarray("mall_1_ai", "targetname");
+  a_ents = getEntArray("mall_1_ai", "targetname");
 
   if(isDefined(a_ents)) {
     for(i = 0; i < a_ents.size; i++)
       a_ai[a_ai.size] = a_ents[i];
   }
 
-  a_ents = getentarray("end_suicide_tunnel_spawner_ai", "targetname");
+  a_ents = getEntArray("end_suicide_tunnel_spawner_ai", "targetname");
 
   if(isDefined(a_ents)) {
     for(i = 0; i < a_ents.size; i++)
@@ -759,7 +759,7 @@ drone_fire_at_market_walkway_trigger() {
   if(maps\pakistan_s3_util::is_player_in_drone()) {
     return;
   }
-  v_forward = anglestoforward(level.vh_player_drone.angles);
+  v_forward = anglesToForward(level.vh_player_drone.angles);
   v_up = anglestoup(level.vh_player_drone.angles);
   v_aim_pos = level.vh_player_drone.origin + v_forward * 5000 + v_up * 750;
   level.vh_player_drone setgunnertargetvec(v_aim_pos, 0);
@@ -785,7 +785,7 @@ drone_fire_at_market_walkway_trigger() {
 start_market_inside_guys_trigger() {
   e_trigger = getent("start_market_inside_guys_trigger", "targetname");
   e_trigger waittill("trigger");
-  a_spawners = getentarray("start_market_inside_guys_spawner", "targetname");
+  a_spawners = getEntArray("start_market_inside_guys_spawner", "targetname");
 
   for(i = 0; i < a_spawners.size; i++) {
     e_ent = simple_spawn_single(a_spawners[i]);

@@ -27,12 +27,12 @@ should_spawn() {
 create_ghillie_enemies(enemy_id, wait_id, activate_id) {
   ghillie_enemies_init();
 
-  assertex(isdefined(enemy_id), "create_ghillie_enemies() requires a valid enemy_id");
+  assertex(isDefined(enemy_id), "create_ghillie_enemies() requires a valid enemy_id");
 
-  ghillie_spawners = getentarray(enemy_id, "targetname");
+  ghillie_spawners = getEntArray(enemy_id, "targetname");
   assertex(ghillie_spawners.size > 0, "create_ghillie_enemies() could not find any spawners with id " + enemy_id);
 
-  if(isdefined(wait_id))
+  if(isDefined(wait_id))
     level waittill(wait_id);
 
   thread stealth_disable();
@@ -45,9 +45,9 @@ create_ghillie_enemies(enemy_id, wait_id, activate_id) {
 }
 
 ghillie_enemies_init() {
-  if(isdefined(level.ghillie_enemies_initialized) && level.ghillie_enemies_initialized)
+  if(isDefined(level.ghillie_enemies_initialized) && level.ghillie_enemies_initialized) {
     return;
-
+  }
   foreach(player in level.players)
   player thread ghillie_player_damage_tracker();
 
@@ -61,17 +61,17 @@ ghillie_player_damage_tracker() {
   level endon("special_op_terminated");
   self endon("death");
 
-  while (1) {
+  while(1) {
     self waittill("damage", damage, attacker);
 
     // is it a ghillie?
-    if(!isai(attacker) || !isdefined(attacker.ghillie_is_prone))
+    if(!isai(attacker) || !isDefined(attacker.ghillie_is_prone)) {
       continue;
-
+    }
     // Only set this if they are currently unaware.
-    if(!array_contains(level.ghillies_unaware, attacker.unique_id))
+    if(!array_contains(level.ghillies_unaware, attacker.unique_id)) {
       continue;
-
+    }
     attacker ghillie_enemy_set_fired();
   }
 }
@@ -133,7 +133,7 @@ ghillie_enemy_behavior(activate_id) {
 
   ghillie_enemy_freeze_while_prone();
 
-  if(isdefined(activate_id))
+  if(isDefined(activate_id))
     flag_wait(activate_id);
   else
     wait 1;
@@ -148,7 +148,7 @@ ghillie_enemy_behavior(activate_id) {
   ghillie_enemy_go_prone();
   ghillie_enemy_freeze_while_prone();
 
-  while (1) {
+  while(1) {
     if(ghillie_enemy_can_be_seen(false, true)) {
       wait 0.5;
       continue;
@@ -162,7 +162,7 @@ ghillie_enemy_behavior(activate_id) {
       thread ghillie_enemy_resume_moving("prone", move_time);
 
     time_moved = 0.0;
-    while (time_moved < move_time) {
+    while(time_moved < move_time) {
       wait 1.0;
       time_moved += 1.0;
       if(ghillie_enemy_can_be_seen(false, false)) {
@@ -170,7 +170,7 @@ ghillie_enemy_behavior(activate_id) {
         if(crouch)
           ghillie_enemy_go_prone();
         ghillie_enemy_freeze_while_prone();
-        while (ghillie_enemy_can_be_seen(false, false))
+        while(ghillie_enemy_can_be_seen(false, false))
           wait 0.05;
       }
 
@@ -186,7 +186,7 @@ ghillie_enemy_behavior(activate_id) {
     self notify("stop_moving");
     shot_attempts = 0;
     ghillie_enemy_crouch_and_fire();
-    while (!ghillie_enemy_can_be_seen(false, false) && (shot_attempts <= randomintrange(1, 4))) {
+    while(!ghillie_enemy_can_be_seen(false, false) && (shot_attempts <= randomintrange(1, 4))) {
       shot_attempts++;
       ghillie_enemy_crouch_and_fire();
     }
@@ -206,9 +206,9 @@ ghillie_enemy_go_prone() {
 }
 
 ghillie_enemy_freeze_while_prone() {
-  if(self.ghillie_is_frozen)
+  if(self.ghillie_is_frozen) {
     return;
-
+  }
   self allowedstances("prone");
   self.ghillie_is_prone = true;
   self.ghillie_is_frozen = true;
@@ -243,14 +243,14 @@ ghillie_enemy_resume_moving(stance, move_time) {
 
   self waittill("goal_changed");
 
-  if(!isdefined(move_time))
+  if(!isDefined(move_time))
     move_time = ghillie_get_move_time();
 
   wait move_time;
 }
 
 ghillie_get_move_time() {
-  if(isdefined(self.ghillie_moved_once) && self.ghillie_moved_once)
+  if(isDefined(self.ghillie_moved_once) && self.ghillie_moved_once)
     return ghillie_get_time(level.ghillie_move_time_min, level.ghillie_move_time_max);
 
   self.ghillie_moved_once = true;
@@ -274,7 +274,7 @@ ghillie_enemy_crouch_and_fire() {
   thread ghillie_enemy_enable_shooting();
   thread ghillie_enemy_abandon_shooting();
 
-  //	if( isdefined( level.ghillies_unaware[ self.unique_id ] ) )
+  //	if( isDefined( level.ghillies_unaware[ self.unique_id ] ) )
   //		thread ghillie_enemy_detect_fire();
 
   waittill_any("shooting", "abandon_shooting");
@@ -340,7 +340,7 @@ ghillie_enemy_detect_player_looking(player) {
   self endon("death");
   self endon("pain_death");
 
-  while (1) {
+  while(1) {
     self waittill_player_lookat(0.95, 1.0, true, undefined, undefined, player);
 
     dist = distance(self.origin, player.origin);
@@ -380,9 +380,9 @@ ghillie_enemies_quit_ghillie() {
   foreach(guy in enemies) {
     if(guy.classname == "actor_enemy_ghillie_sniper") {
       wait 0.05;
-      if(!isalive(guy) || !isdefined(guy))
+      if(!isalive(guy) || !isDefined(guy)) {
         continue;
-
+      }
       guy ghillie_enemy_quit_ghillie();
     }
   }
@@ -393,7 +393,7 @@ ghillie_enemy_update_target() {
   self endon("death");
   self endon("pain_death");
 
-  while (1) {
+  while(1) {
     self setgoalentity(get_closest_player_healthy(self.origin));
     wait 1;
   }
@@ -418,7 +418,7 @@ ghillie_enemy_silent_remove() {
   self endon("death");
   level endon("special_op_terminated");
 
-  while (1) {
+  while(1) {
     if(!ghillie_enemy_should_delete()) {
       wait 1;
       continue;
@@ -448,7 +448,7 @@ ghillie_enemy_can_be_seen(check_for_flub, check_offset) {
     can_see_me = ghillie_enemy_sight_test(level.player2, check_offset);
 
   // If I can be seen, then check for a flub. If not, then restart my flub from scratch.
-  if(isdefined(check_for_flub) && check_for_flub) {
+  if(isDefined(check_for_flub) && check_for_flub) {
     if(can_see_me)
       can_see_me = ghillie_enemy_check_flub();
     else
@@ -462,8 +462,8 @@ ghillie_enemy_sight_test(player, check_offset) {
   if(is_player_down_and_out(player))
     return false;
 
-  my_eye = self geteye();
-  their_eye = player geteye();
+  my_eye = self getEye();
+  their_eye = player getEye();
 
   dot = 0.9;
   if(player playerADS() >= 0.8)
@@ -477,7 +477,7 @@ ghillie_enemy_sight_test(player, check_offset) {
   if(!can_see_me)
     can_see_me = SightTracePassed(self.origin, their_eye, false, self);
 
-  if(!can_see_me && self.ghillie_is_prone && isdefined(check_offset) && check_offset) {
+  if(!can_see_me && self.ghillie_is_prone && isDefined(check_offset) && check_offset) {
     offset = 96;
     can_see_me = SightTracePassed(my_eye + (0, 0, offset), their_eye, false, self);
     if(!can_see_me)
@@ -489,12 +489,12 @@ ghillie_enemy_sight_test(player, check_offset) {
 
 ghillie_enemy_check_flub() {
   // If we aren't allowing flubs, always return true.
-  if(!isdefined(level.ghillie_flub_time_min))
+  if(!isDefined(level.ghillie_flub_time_min))
     return true;
 
   // If we don't have a current flub time, set it now and return.
   // This makes it so the time is set from the first moment of being seen again.
-  if(!isdefined(self.ghillie_flub_time)) {
+  if(!isDefined(self.ghillie_flub_time)) {
     ghillie_enemy_set_flub_time();
     return true;
   }
@@ -533,9 +533,9 @@ ghillie_enemy_set_active() {
 }
 
 ghillie_enemy_set_flub_time() {
-  if(!isdefined(level.ghillie_flub_time_min))
+  if(!isDefined(level.ghillie_flub_time_min)) {
     return;
-
+  }
   self.ghillie_flub_time = gettime() + ghillie_get_time(level.ghillie_flub_time_min, level.ghillie_flub_time_max);
 }
 
@@ -555,14 +555,14 @@ ghillie_get_time(time_min, time_max) {
 create_patrol_enemies(enemy_id, wait_id, spawn_delay) {
   patrol_enemies_init();
 
-  assertex(isdefined(enemy_id), "create_patrol_enemies() requires a valid enemy_id");
+  assertex(isDefined(enemy_id), "create_patrol_enemies() requires a valid enemy_id");
 
-  if(isdefined(wait_id))
+  if(isDefined(wait_id))
     level waittill(wait_id);
 
   thread stealth_enable();
 
-  patrol_spawners = getentarray(enemy_id, "targetname");
+  patrol_spawners = getEntArray(enemy_id, "targetname");
   assertex(patrol_spawners.size > 0, "create_patrol_enemies() could not find any spawners with id " + enemy_id);
 
   array_thread(patrol_spawners, ::add_spawn_function, ::patrol_enemy_init);
@@ -571,12 +571,12 @@ create_patrol_enemies(enemy_id, wait_id, spawn_delay) {
 }
 
 patrol_enemy_spawn() {
-  if(!should_spawn())
+  if(!should_spawn()) {
     return;
-
+  }
   level endon("special_op_terminated");
 
-  stagger = isdefined(self.script_noteworthy) && (self.script_noteworthy == "patrol_stagger_spawn");
+  stagger = isDefined(self.script_noteworthy) && (self.script_noteworthy == "patrol_stagger_spawn");
   if(stagger)
     wait randomfloatrange(0.0, 3.0);
 
@@ -584,9 +584,9 @@ patrol_enemy_spawn() {
 }
 
 patrol_enemies_init() {
-  if(isdefined(level.patrol_enemies_initialized) && level.patrol_enemies_initialized)
+  if(isDefined(level.patrol_enemies_initialized) && level.patrol_enemies_initialized) {
     return;
-
+  }
   thread script_chatgroups();
   level.patrol_enemies_initialized = true;
   level.patrols = [];
@@ -603,7 +603,7 @@ patrol_enemy_init() {
   thread patrol_enemy_register_death();
   maps\_stealth_utility::stealth_default();
 
-  if(isdefined(self.target))
+  if(isDefined(self.target))
     thread maps\_patrol::patrol();
 
   self.patrol_stop = [];
@@ -684,7 +684,7 @@ patrol_enemy_can_multi_kill(attacker, cause, weapon_name) {
   if(flag("_stealth_spotted"))
     return false;
 
-  if(!isdefined(attacker) || !isplayer(attacker))
+  if(!isDefined(attacker) || !isplayer(attacker))
     return false;
 
   if(!(cause == "MOD_PISTOL_BULLET" || cause == "MOD_RIFLE_BULLET"))
@@ -722,7 +722,7 @@ patrol_enemy_silent_remove() {
   self endon("death");
   level endon("special_op_terminated");
 
-  while (1) {
+  while(1) {
     if(!patrol_enemy_should_delete()) {
       wait 1;
       continue;
@@ -751,11 +751,11 @@ patrol_enemy_should_delete() {
 }
 
 patrol_enemy_sight_test(player) {
-  my_eye = self geteye();
+  my_eye = self getEye();
   if(!player player_looking_at(self.origin, 0.9, true) && !player player_looking_at(my_eye, 0.9, true))
     return false;
 
-  their_eye = player geteye();
+  their_eye = player getEye();
   if(!SightTracePassed(self.origin, their_eye, false, self) && !SightTracePassed(my_eye, their_eye, false, self))
     return false;
 
@@ -765,7 +765,7 @@ patrol_enemy_sight_test(player) {
 // ---------------------------------------------------------------------------------
 
 death_register_unaware(attacker, force_dialog, skip_dialog) {
-  if(isdefined(attacker) && isplayer(attacker)) {
+  if(isDefined(attacker) && isplayer(attacker)) {
     level notify("kill_registered");
     attacker.kills_stealth++;
   }
@@ -776,7 +776,7 @@ death_register_unaware(attacker, force_dialog, skip_dialog) {
 }
 
 death_register_nofire(attacker, force_dialog, skip_dialog) {
-  if(isdefined(attacker) && isplayer(attacker)) {
+  if(isDefined(attacker) && isplayer(attacker)) {
     level notify("kill_registered");
     attacker.kills_nofire++;
   }
@@ -787,7 +787,7 @@ death_register_nofire(attacker, force_dialog, skip_dialog) {
 }
 
 death_register_basic(attacker, force_dialog, skip_dialog) {
-  if(isdefined(attacker) && isplayer(attacker)) {
+  if(isDefined(attacker) && isplayer(attacker)) {
     level notify("kill_registered");
     attacker.kills_basic++;
   }
@@ -805,10 +805,10 @@ death_dialog(dialog, total, force_dialog, skip_dialog) {
   level endon("special_op_terminated");
   level endon("multi_kill_message");
 
-  if(isdefined(skip_dialog) && skip_dialog)
+  if(isDefined(skip_dialog) && skip_dialog) {
     return;
-
-  if(!isdefined(force_dialog) || !force_dialog) {
+  }
+  if(!isDefined(force_dialog) || !force_dialog) {
     if(level.death_dialog_time > gettime())
       return;
   }
@@ -855,9 +855,9 @@ stealth_disable() {
 
   // Currently the Ghillies behave poorly when the Stealth System is active. The way the map is structured
   // makes it viable to disable stealth from pocket to pocket. Wait until all the patrols are dead before doing
-  // so though, just in case they are at the edge. 
+  // so though, just in case they are at the edge.
   // A flag can be set to force it (player touches a trigger where they've gone too far to allow stealth to continue.
-  while (level.patrol_count > 0 && !flag("force_disable_stealth"))
+  while(level.patrol_count > 0 && !flag("force_disable_stealth"))
     wait 1;
 
   foreach(player in level.players) {
@@ -867,7 +867,7 @@ stealth_disable() {
       player ent_flag_clear("_stealth_enabled");
   }
 
-  if(isdefined(level.patrols)) {
+  if(isDefined(level.patrols)) {
     foreach(patrol in level.patrols)
     patrol thread patrol_enemy_silent_remove();
   }
@@ -891,7 +891,7 @@ stealth_enable() {
 stealth_music_loop() {
   level endon("special_op_terminated");
 
-  while (1) {
+  while(1) {
     thread stealth_music_hidden_loop();
 
     flag_wait("_stealth_spotted");
@@ -914,7 +914,7 @@ stealth_music_hidden_loop() {
   	level endon( "_stealth_spotted" );
 
   	hidden_stealth_music_TIME = 119;
-  	while ( 1 )
+  	while( 1 )
   	{
   		MusicPlayWrapper( "so_hidden_so_ghillies_stealth_music" );
   		wait hidden_stealth_music_TIME;
@@ -929,7 +929,7 @@ stealth_music_busted_loop() {
   	level endon( "_stealth_spotted" );
 
   	hidden_stealth_busted_music_TIME = 88;
-  	while ( 1 )
+  	while( 1 )
   	{
   		MusicPlayWrapper( "so_hidden_so_ghillies_busted_music" );
   		wait hidden_stealth_busted_music_TIME;
@@ -940,7 +940,7 @@ stealth_music_busted_loop() {
 stealth_chastize_loop() {
   level endon("special_op_terminated");
 
-  while (1) {
+  while(1) {
     flag_wait("_stealth_spotted");
 
     flag_waitopen("_stealth_spotted");
@@ -962,9 +962,9 @@ turn_on_radiation() {
 
 hud_bonuses_create() {
   ypos = so_hud_ypos();
-  stealth_title = so_create_hud_item(3, ypos, & "SO_HIDDEN_SO_GHILLIES_KILL_STEALTH", self);
-  nofire_title = so_create_hud_item(4, ypos, & "SO_HIDDEN_SO_GHILLIES_KILL_NOFIRE", self);
-  basic_title = so_create_hud_item(5, ypos, & "SO_HIDDEN_SO_GHILLIES_KILL_BASIC", self);
+  stealth_title = so_create_hud_item(3, ypos, &"SO_HIDDEN_SO_GHILLIES_KILL_STEALTH", self);
+  nofire_title = so_create_hud_item(4, ypos, &"SO_HIDDEN_SO_GHILLIES_KILL_NOFIRE", self);
+  basic_title = so_create_hud_item(5, ypos, &"SO_HIDDEN_SO_GHILLIES_KILL_BASIC", self);
 
   stealth_kills = so_create_hud_item(3, ypos, undefined, self);
   nofire_kills = so_create_hud_item(4, ypos, undefined, self);
@@ -1002,7 +1002,7 @@ hud_bonuses_create() {
 hud_bonuses_update_scores(stealth_kills, nofire_kills, basic_kills) {
   level endon("special_op_terminated");
 
-  while (1) {
+  while(1) {
     level waittill("kill_registered");
 
     stealth_kills SetValue(self.kills_stealth);
@@ -1077,7 +1077,7 @@ script_chatgroups() {
 
   level.current_conversation_point = RandomInt(level.chatter_aliases.size);
 
-  while (true /*!flag( "done_with_stealth_camp" )*/ ) {
+  while(true /*!flag( "done_with_stealth_camp" )*/ ) {
     flag_waitopen("_stealth_spotted");
 
     closest_talker = undefined;
@@ -1086,20 +1086,20 @@ script_chatgroups() {
     //sort from closest to furthest
     closest_enemies = get_array_of_closest(getAveragePlayerOrigin(), enemies);
 
-    for (i = 0; i < closest_enemies.size; i++) {
-      if(IsDefined(closest_enemies[i].script_chatgroup)) {
+    for(i = 0; i < closest_enemies.size; i++) {
+      if(isDefined(closest_enemies[i].script_chatgroup)) {
         closest_chat_group = closest_enemies[i].script_chatgroup;
         closest_talker = closest_enemies[i];
         if(closest_talker ent_flag_exist("_stealth_normal"))
-          if(!closest_talker ent_flag("_stealth_normal"))
+          if(!closest_talker ent_flag("_stealth_normal")) {
             continue;
-
+          }
         //find next closest member of same chat group
         next_closest = find_next_member(closest_enemies, i, closest_chat_group);
 
         //if has no buddy or is too far from buddy or buddy is alert find another
 
-        if(!isdefined(next_closest))
+        if(!isDefined(next_closest))
           continue;
         if(next_closest ent_flag_exist("_stealth_normal"))
           if(!next_closest ent_flag("_stealth_normal"))
@@ -1113,9 +1113,9 @@ script_chatgroups() {
       }
     }
     //we have a group, say something
-    if(IsDefined(next_closest)) {
+    if(isDefined(next_closest)) {
       //check if closest guy is our last talker, if so use second closest
-      if(IsDefined(level.last_talker)) {
+      if(isDefined(level.last_talker)) {
         if(level.last_talker == closest_talker)
           talker = next_closest;
         else
@@ -1137,9 +1137,9 @@ script_chatgroups() {
 }
 
 setup_chatter() {
-  if(!isdefined(self.script_chatgroup))
+  if(!isDefined(self.script_chatgroup)) {
     return;
-
+  }
   self endon("death");
 
   self ent_flag_init("mission_dialogue_kill");
@@ -1156,10 +1156,10 @@ setup_chatter_kill_wait() {
 }
 
 chatter_play_sound(alias) {
-  if(is_dead_sentient())
+  if(is_dead_sentient()) {
     return;
-
-  org = Spawn("script_origin", (0, 0, 0));
+  }
+  org = spawn("script_origin", (0, 0, 0));
   org endon("death");
   thread maps\_utility::delete_on_death_wait_sound(org, "sounddone");
 
@@ -1167,7 +1167,7 @@ chatter_play_sound(alias) {
   org.angles = self.angles;
   org LinkTo(self);
 
-  org PlaySound(alias, "sounddone");
+  org playSound(alias, "sounddone");
   //println( "script_chatter alias = " + alias );
 
   self chatter_play_sound_wait(org);
@@ -1187,8 +1187,8 @@ chatter_play_sound_wait(org) {
 }
 
 find_next_member(closest_enemies, closest, closest_chat_group) {
-  for (i = closest + 1; i < closest_enemies.size; i++) {
-    if(IsDefined(closest_enemies[i].script_chatgroup)) {
+  for(i = closest + 1; i < closest_enemies.size; i++) {
+    if(isDefined(closest_enemies[i].script_chatgroup)) {
       if(closest_enemies[i].script_chatgroup == closest_chat_group)
         return closest_enemies[i];
     }
@@ -1208,12 +1208,12 @@ clip_nosight_wait_for_activate() {
 }
 
 clip_nosight_wait_damage() {
-  if(flag("_stealth_spotted"))
+  if(flag("_stealth_spotted")) {
     return;
-
+  }
   level endon("_stealth_spotted");
 
-  self setcandamage(true);
+  self setCanDamage(true);
   self waittill("damage");
 
   self delete();
@@ -1253,7 +1253,7 @@ init_prone_DOF() {
 player_prone_DOF() {
   self endon("death");
 
-  while (1) {
+  while(1) {
     my_stance = self getstance();
     if(my_stance == "prone")
       self set_prone_DOF();
@@ -1265,9 +1265,9 @@ player_prone_DOF() {
 }
 
 set_default_DOF() {
-  if(self.dofDefault["nearStart"] == self.dofReg["nearStart"])
+  if(self.dofDefault["nearStart"] == self.dofReg["nearStart"]) {
     return;
-
+  }
   self.dofDefault["nearStart"] = self.dofReg["nearStart"];
   self.dofDefault["nearEnd"] = self.dofReg["nearEnd"];
   self.dofDefault["nearBlur"] = self.dofReg["nearBlur"];
@@ -1278,9 +1278,9 @@ set_default_DOF() {
 }
 
 set_prone_DOF() {
-  if(self.dofDefault["nearStart"] == self.dofProne["nearStart"])
+  if(self.dofDefault["nearStart"] == self.dofProne["nearStart"]) {
     return;
-
+  }
   self.dofDefault["nearStart"] = self.dofProne["nearStart"];
   self.dofDefault["nearEnd"] = self.dofProne["nearEnd"];
   self.dofDefault["nearBlur"] = self.dofProne["nearBlur"];
@@ -1296,25 +1296,25 @@ dialog_unsilenced_weapons() {
   self endon("death");
   level endon("nonsilenced_weapon_pickup");
 
-  while (true) {
+  while(true) {
     self waittill("weapon_change");
 
     current_weapon = self getcurrentprimaryweapon();
-    if(!isdefined(current_weapon))
+    if(!isDefined(current_weapon)) {
       continue;
-
-    if(current_weapon == "none")
+    }
+    if(current_weapon == "none") {
       continue;
-
-    if(current_weapon == "c4")
+    }
+    if(current_weapon == "c4") {
       continue;
-
-    if(current_weapon == "claymore")
+    }
+    if(current_weapon == "claymore") {
       continue;
-
-    if(issubstr(current_weapon, "silence"))
+    }
+    if(issubstr(current_weapon, "silence")) {
       continue;
-
+    }
     //Be careful about picking up enemy weapons, Soap. Any un-suppressed firearms will attract a lot of attention.	
     thread radio_dialogue("so_hid_ghil_pri_attractattn");
     break;

@@ -37,7 +37,7 @@
 #namespace zm_altbody_beast;
 
 function autoexec __init__sytem__() {
-  system::register("zm_altbody_beast", & __init__, & __main__, undefined);
+  system::register("zm_altbody_beast", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -51,10 +51,10 @@ function __init__() {
   loadout = array("zombie_beast_grapple_dwr", "zombie_beast_lightning_dwl", "zombie_beast_lightning_dwl2", "zombie_beast_lightning_dwl3");
   beastmode_loadout = zm_weapons::create_loadout(loadout);
   var_55affbc1 = array("zm_bgb_disorderly_combat");
-  zm_altbody::init("beast_mode", "beast_mode_kiosk", & "ZM_ZOD_ENTER_BEAST_MODE", "zombie_beast_2", 123, beastmode_loadout, 4, & player_enter_beastmode, & player_exit_beastmode, & player_allow_beastmode, & "ZM_ZOD_CANT_ENTER_BEAST_MODE", var_55affbc1);
-  callback::on_connect( & player_on_connect);
-  callback::on_spawned( & player_on_spawned);
-  callback::on_player_killed( & player_on_killed);
+  zm_altbody::init("beast_mode", "beast_mode_kiosk", &"ZM_ZOD_ENTER_BEAST_MODE", "zombie_beast_2", 123, beastmode_loadout, 4, &player_enter_beastmode, &player_exit_beastmode, &player_allow_beastmode, &"ZM_ZOD_CANT_ENTER_BEAST_MODE", var_55affbc1);
+  callback::on_connect(&player_on_connect);
+  callback::on_spawned(&player_on_spawned);
+  callback::on_player_killed(&player_on_killed);
   level.var_87ee6f27 = 4;
   level._effect["human_disappears"] = "zombie/fx_bmode_transition_zmb";
   level._effect["zombie_disappears"] = "zombie/fx_bmode_transition_zmb";
@@ -66,18 +66,18 @@ function __init__() {
   level._effect["beast_return_aoe_kill"] = "zombie/fx_bmode_attack_grapple_zod_zmb";
   level._effect["beast_shock_aoe"] = "zombie/fx_bmode_shock_lvl3_zod_zmb";
   level._effect["beast_3p_trail"] = "zombie/fx_bmode_trail_3p_zod_zmb";
-  level.grapple_valid_target_check = & grapple_valid_target_check;
-  level.get_grapple_targets = & get_grapple_targets;
+  level.grapple_valid_target_check = &grapple_valid_target_check;
+  level.get_grapple_targets = &get_grapple_targets;
   level.grapple_notarget_distance = 120;
   level.grapple_notarget_enabled = 0;
-  zm_spawner::register_zombie_damage_callback( & lightning_zombie_damage_response);
-  zm_spawner::register_zombie_death_event_callback( & beast_mode_death_watch);
+  zm_spawner::register_zombie_damage_callback(&lightning_zombie_damage_response);
+  zm_spawner::register_zombie_death_event_callback(&beast_mode_death_watch);
   thread beastmode_devgui();
-  triggers = getentarray("trig_beast_mode_kiosk", "targetname");
+  triggers = getEntArray("trig_beast_mode_kiosk", "targetname");
   foreach(trigger in triggers) {
     trigger delete();
   }
-  triggers = getentarray("trig_beast_mode_kiosk_unavailable", "targetname");
+  triggers = getEntArray("trig_beast_mode_kiosk_unavailable", "targetname");
   foreach(trigger in triggers) {
     trigger delete();
   }
@@ -88,7 +88,7 @@ function __main__() {
   thread hide_ooze_triggers();
   thread kiosk_cooldown();
   thread make_powerups_grapplable();
-  zm_spawner::add_custom_zombie_spawn_logic( & zombie_on_spawn);
+  zm_spawner::add_custom_zombie_spawn_logic(&zombie_on_spawn);
   create_lightning_params();
   level.weaponbeastrevivetool = getweapon("syrette_zod_beast");
 }
@@ -100,7 +100,7 @@ function player_disappear_in_flash(washuman) {
 }
 
 function player_enter_beastmode(name, trigger) {
-  assert(!(isdefined(self.beastmode) && self.beastmode));
+  assert(!(isDefined(self.beastmode) && self.beastmode));
   self notify("clear_red_flashing_overlay");
   self disableoffhandweapons();
   self zm_weapons::suppress_stowed_weapon(1);
@@ -110,17 +110,17 @@ function player_enter_beastmode(name, trigger) {
   self.beast_mode_return_angles = self.var_227fe352;
   self zm_utility::create_streamer_hint(self.origin, self.angles + vectorscale((0, 1, 0), 180), 0.25);
   self thread player_cover_transition();
-  self playsound("evt_beastmode_enter");
-  if(!isdefined(self.firsttime)) {
+  self playSound("evt_beastmode_enter");
+  if(!isDefined(self.firsttime)) {
     self.firsttime = 1;
     level.n_first_beast_mode_player_index = self.characterindex;
     level notify("hash_571c8e3c");
   }
   self player_disappear_in_flash(1);
   self.overrideplayerdamage_original = self.overrideplayerdamage;
-  self.overrideplayerdamage = & player_damage_override_beast_mode;
+  self.overrideplayerdamage = &player_damage_override_beast_mode;
   self.weaponrevivetool = level.weaponbeastrevivetool;
-  self.get_revive_time = & player_get_revive_time;
+  self.get_revive_time = &player_get_revive_time;
   self zm_utility::increment_ignoreme();
   self.beastmode = 1;
   self.inhibit_scoring_from_zombies = 1;
@@ -166,22 +166,22 @@ function player_enter_beastmode(name, trigger) {
 function watch_scr_beast_no_visionset(localclientnum) {
   self endon("player_exit_beastmode");
   was_scr_beast_no_visionset = 0;
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     scr_beast_no_visionset = getdvarint("scr_beast_no_visionset") > 0;
     if(scr_beast_no_visionset != was_scr_beast_no_visionset) {
       name = "beast_mode";
       visionset = "zombie_beast_2";
       if(scr_beast_no_visionset) {
-        if(isdefined(visionset)) {
+        if(isDefined(visionset)) {
           visionset_mgr::deactivate("visionset", visionset, self);
           self.altbody_visionset[name] = 0;
         }
-      } else if(isdefined(visionset)) {
-        if(isdefined(self.altbody_visionset[name]) && self.altbody_visionset[name]) {
+      } else if(isDefined(visionset)) {
+        if(isDefined(self.altbody_visionset[name]) && self.altbody_visionset[name]) {
           visionset_mgr::deactivate("visionset", visionset, self);
           util::wait_network_frame();
           util::wait_network_frame();
-          if(!isdefined(self)) {
+          if(!isDefined(self)) {
             return;
           }
         }
@@ -199,7 +199,7 @@ function player_enter_superbeastmode() {
   self.superbeastmana = 1;
   self.see_kiosks_in_altbody = 1;
   self.trigger_kiosks_in_altbody = 1;
-  self.custom_altbody_callback = & player_recharge_superbeastmode;
+  self.custom_altbody_callback = &player_recharge_superbeastmode;
   self disableinvulnerability();
   self thread superbeastmode_override_hp();
   bb::logplayerevent(self, "enter_superbeast_mode");
@@ -214,14 +214,14 @@ function player_recharge_superbeastmode(trigger, name) {
 
 function superbeastmode_override_hp() {
   self endon("player_exit_beastmode");
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     self.beastmana = self.superbeastmana;
     wait(0.05);
   }
 }
 
 function player_exit_beastmode(name, trigger) {
-  assert(isdefined(self.beastmode) && self.beastmode);
+  assert(isDefined(self.beastmode) && self.beastmode);
   self notify("clear_red_flashing_overlay");
   self thread player_cover_transition(0);
   self player_disappear_in_flash(0);
@@ -236,7 +236,7 @@ function player_exit_beastmode(name, trigger) {
   bb::logplayerevent(self, "exit_beast_mode");
   self thread wait_invulnerable(2);
   self thread wait_enable_offhand_weapons(3);
-  while (self isthrowinggrenade() || self isgrappling() || (isdefined(self.teleporting) && self.teleporting)) {
+  while(self isthrowinggrenade() || self isgrappling() || (isDefined(self.teleporting) && self.teleporting)) {
     wait(0.05);
   }
   self unsetperk("specialty_unlimitedsprint");
@@ -286,7 +286,7 @@ function wait_and_appear(no_ignore) {
         break;
       }
     }
-    if(isdefined(ai_closest)) {
+    if(isDefined(ai_closest)) {
       self setplayerangles(vectortoangles(ai_closest getcentroid() - v_return_pos));
     }
   }
@@ -294,25 +294,25 @@ function wait_and_appear(no_ignore) {
     ai_closest = self;
     self enableinvulnerability();
   }
-  if(!isdefined(ai_closest)) {
+  if(!isDefined(ai_closest)) {
     self setplayerangles(self.beast_mode_return_angles + vectorscale((0, 1, 0), 180));
   }
   wait(0.5);
   self zm_utility::decrement_is_drinking();
   self zm_weapons::suppress_stowed_weapon(0);
   self show();
-  self playsound("evt_beastmode_exit");
+  self playSound("evt_beastmode_exit");
   self zm_utility::clear_streamer_hint();
-  playfx(level._effect["human_disappears"], self.beast_mode_return_origin);
-  playfx(level._effect["beast_return_aoe"], self.beast_mode_return_origin);
+  playFX(level._effect["human_disappears"], self.beast_mode_return_origin);
+  playFX(level._effect["beast_return_aoe"], self.beast_mode_return_origin);
   a_ai = getaiarray();
   a_aoe_ai = arraysortclosest(a_ai, self.beast_mode_return_origin, a_ai.size, 0, 200);
   foreach(ai in a_aoe_ai) {
     if(isactor(ai)) {
       if(ai.archetype === "zombie") {
-        playfx(level._effect["beast_return_aoe_kill"], ai gettagorigin("j_spineupper"));
+        playFX(level._effect["beast_return_aoe_kill"], ai gettagorigin("j_spineupper"));
       } else {
-        playfx(level._effect["beast_return_aoe_kill"], ai.origin);
+        playFX(level._effect["beast_return_aoe_kill"], ai.origin);
       }
       ai.no_powerups = 1;
       ai.marked_for_recycle = 1;
@@ -325,7 +325,7 @@ function wait_and_appear(no_ignore) {
   if(!self zm::in_life_brush() && (self zm::in_kill_brush() || !self zm::in_enabled_playable_area())) {
     wait(3);
   }
-  if(isdefined(self.firsttime) && self.firsttime) {
+  if(isDefined(self.firsttime) && self.firsttime) {
     self.firsttime = 0;
   }
   if(!level.intermission) {
@@ -343,7 +343,7 @@ function wait_and_appear(no_ignore) {
 function wait_invulnerable(time) {
   was_inv = self enableinvulnerability();
   wait(time);
-  if(isdefined(self) && (!(isdefined(was_inv) && was_inv))) {
+  if(isDefined(self) && (!(isDefined(was_inv) && was_inv))) {
     self disableinvulnerability();
   }
 }
@@ -351,10 +351,10 @@ function wait_invulnerable(time) {
 function wait_enable_offhand_weapons(time) {
   self disableoffhandweapons();
   wait(time);
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     self enableoffhandweapons();
   }
-  if(isdefined(self.beast_grenades_missed) && self.beast_grenades_missed) {
+  if(isDefined(self.beast_grenades_missed) && self.beast_grenades_missed) {
     lethal_grenade = self zm_utility::get_player_lethal_grenade();
     if(!self hasweapon(lethal_grenade)) {
       self giveweapon(lethal_grenade);
@@ -379,10 +379,10 @@ function player_allow_beastmode(name, kiosk) {
   if(!level flagsys::get("start_zombie_round_logic")) {
     return 0;
   }
-  if(isdefined(self.beastmode) && self.beastmode && !b_superbeastmode) {
+  if(isDefined(self.beastmode) && self.beastmode && !b_superbeastmode) {
     return 0;
   }
-  if(isdefined(kiosk) && !kiosk_allowed(kiosk)) {
+  if(isDefined(kiosk) && !kiosk_allowed(kiosk)) {
     return 0;
   }
   if(level clientfield::get("bm_superbeast")) {
@@ -392,7 +392,7 @@ function player_allow_beastmode(name, kiosk) {
 }
 
 function kiosk_allowed(kiosk) {
-  return !(isdefined(kiosk.is_cooling_down) && kiosk.is_cooling_down);
+  return !(isDefined(kiosk.is_cooling_down) && kiosk.is_cooling_down);
 }
 
 function player_on_connect() {
@@ -413,7 +413,7 @@ function player_on_spawned() {
 }
 
 function make_powerups_grapplable() {
-  while (true) {
+  while(true) {
     level waittill("powerup_dropped", powerup);
     powerup.grapple_type = 2;
     powerup setgrapplabletype(powerup.grapple_type);
@@ -432,14 +432,14 @@ function function_10dcd1d5(kiosk_name) {
 
 function update_kiosk_effects() {
   self endon("death");
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     n_ent_num = self getentitynumber();
     foreach(kiosk in level.beast_kiosks) {
       n_players_allowed = level clientfield::get(kiosk.var_80eeb471);
       if(kiosk_allowed(kiosk)) {
         n_players_allowed = n_players_allowed | (1 << n_ent_num);
       } else {
-        n_players_allowed = n_players_allowed & (~(1 << n_ent_num));
+        n_players_allowed = n_players_allowed &(~(1 << n_ent_num));
       }
       level clientfield::set(kiosk.var_80eeb471, n_players_allowed);
     }
@@ -459,8 +459,8 @@ function get_number_of_available_kiosks() {
 
 function function_f6014f2c(v_origin, var_8ebf7724) {
   a_kiosks = arraysortclosest(level.beast_kiosks, v_origin);
-  a_kiosks = array::filter(a_kiosks, 0, & function_b7520b09);
-  for (i = 0; i < a_kiosks.size && i < var_8ebf7724; i++) {
+  a_kiosks = array::filter(a_kiosks, 0, &function_b7520b09);
+  for(i = 0; i < a_kiosks.size && i < var_8ebf7724; i++) {
     zm_zod_util::function_5cc835d6(v_origin, a_kiosks[i].origin, 1);
     a_kiosks[i].is_cooling_down = 0;
     wait(0.05);
@@ -468,16 +468,16 @@ function function_f6014f2c(v_origin, var_8ebf7724) {
 }
 
 function function_b7520b09(s_kiosk) {
-  if(!isdefined(s_kiosk) || !isdefined(s_kiosk.is_cooling_down) || !s_kiosk.is_cooling_down) {
+  if(!isDefined(s_kiosk) || !isDefined(s_kiosk.is_cooling_down) || !s_kiosk.is_cooling_down) {
     return false;
   }
   return true;
 }
 
 function kiosk_cooldown() {
-  while (true) {
+  while(true) {
     level waittill("kiosk_used", e_kiosk);
-    if(isdefined(e_kiosk)) {
+    if(isDefined(e_kiosk)) {
       e_kiosk thread _kiosk_cooldown();
     }
   }
@@ -485,7 +485,7 @@ function kiosk_cooldown() {
 
 function round_number() {
   n_start_round = 0;
-  if(isdefined(level.round_number)) {
+  if(isDefined(level.round_number)) {
     n_start_round = level.round_number;
   }
   return n_start_round;
@@ -496,7 +496,7 @@ function _kiosk_cooldown() {
   self endon("_kiosk_cooldown");
   self.is_cooling_down = 1;
   n_start_round = round_number();
-  while ((round_number() - n_start_round) < 1) {
+  while((round_number() - n_start_round) < 1) {
     level waittill("start_of_round");
   }
   self.is_cooling_down = 0;
@@ -505,12 +505,12 @@ function _kiosk_cooldown() {
 function function_fd8fb00d(b_cooldown = 1) {
   foreach(kiosk in level.beast_kiosks) {
     if(b_cooldown) {
-      if(!(isdefined(kiosk.is_cooling_down) && kiosk.is_cooling_down)) {
+      if(!(isDefined(kiosk.is_cooling_down) && kiosk.is_cooling_down)) {
         kiosk thread _kiosk_cooldown();
       }
       continue;
     }
-    if(isdefined(kiosk.is_cooling_down) && kiosk.is_cooling_down) {
+    if(isDefined(kiosk.is_cooling_down) && kiosk.is_cooling_down) {
       kiosk.is_cooling_down = 0;
     }
   }
@@ -526,7 +526,7 @@ function player_watch_cancel() {
     self thread beast_cancel_hint();
   }
   self.beast_cancel_timer = 0;
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     if(self stancebuttonpressed()) {
       self notify("hide_equipment_hint_text");
       self player_stance_hold_think();
@@ -536,10 +536,10 @@ function player_watch_cancel() {
 }
 
 function beast_cancel_hint() {
-  hint = & "ZM_ZOD_EXIT_BEAST_MODE_HINT";
+  hint = &"ZM_ZOD_EXIT_BEAST_MODE_HINT";
   y = 315;
   if(level.players.size > 1) {
-    hint = & "ZM_ZOD_EXIT_BEAST_MODE_HINT_COOP";
+    hint = &"ZM_ZOD_EXIT_BEAST_MODE_HINT_COOP";
     y = 285;
   }
   self thread watch_beast_hint_use(12, 12.05);
@@ -556,7 +556,7 @@ function watch_beast_hint_use(mintime, maxtime) {
 function watch_beast_hint_end(mintime, maxtime) {
   self endon("disconnect");
   wait(mintime);
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     self flag::wait_till_timeout(maxtime - mintime, "beast_hint_shown");
     self notify("hide_equipment_hint_text");
   }
@@ -590,7 +590,7 @@ function player_continue_cancel() {
   if(!self stancebuttonpressed()) {
     return false;
   }
-  if(isdefined(self.teleporting) && self.teleporting) {
+  if(isDefined(self.teleporting) && self.teleporting) {
     return false;
   }
   return true;
@@ -598,17 +598,17 @@ function player_continue_cancel() {
 
 function player_stance_hold_think_internal() {
   wait(0.05);
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     self notify("exit_failed");
     return;
   }
   self.beast_cancel_timer = gettime();
   build_time = 1000;
   self thread player_beast_cancel_bar(self.beast_cancel_timer, build_time);
-  while (isdefined(self) && self player_continue_cancel() && (gettime() - self.beast_cancel_timer) < build_time) {
+  while(isDefined(self) && self player_continue_cancel() && (gettime() - self.beast_cancel_timer) < build_time) {
     wait(0.05);
   }
-  if(isdefined(self) && self player_continue_cancel() && (gettime() - self.beast_cancel_timer) >= build_time) {
+  if(isDefined(self) && self player_continue_cancel() && (gettime() - self.beast_cancel_timer) >= build_time) {
     self notify("exit_succeed");
   } else {
     self notify("exit_failed");
@@ -629,7 +629,7 @@ function player_progress_bar_update(start_time, build_time) {
   self endon("disconnect");
   self endon("player_exit_beastmode");
   self endon("exit_failed");
-  while (isdefined(self) && (gettime() - start_time) < build_time) {
+  while(isDefined(self) && (gettime() - start_time) < build_time) {
     progress = (gettime() - start_time) / build_time;
     if(progress < 0) {
       progress = 0;
@@ -680,7 +680,7 @@ function player_get_revive_time(player_being_revived) {
 }
 
 function player_damage_override_beast_mode(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime) {
-  if(isdefined(eattacker) && isplayer(eattacker)) {
+  if(isDefined(eattacker) && isplayer(eattacker)) {
     return false;
   }
   b_superbeastmode = level clientfield::get("bm_superbeast");
@@ -700,7 +700,7 @@ function player_damage_override_beast_mode(einflictor, eattacker, idamage, idfla
     }
     return false;
   }
-  if(isdefined(eattacker) && (isdefined(eattacker.is_zombie) && eattacker.is_zombie || eattacker.team === level.zombie_team)) {
+  if(isDefined(eattacker) && (isDefined(eattacker.is_zombie) && eattacker.is_zombie || eattacker.team === level.zombie_team)) {
     return false;
   }
   if(idamage < self.health) {
@@ -712,7 +712,7 @@ function player_damage_override_beast_mode(einflictor, eattacker, idamage, idfla
 }
 
 function player_check_grenades() {
-  if(isdefined(self.beastmode) && self.beastmode) {
+  if(isDefined(self.beastmode) && self.beastmode) {
     self.beast_grenades_missed = 1;
   }
 }
@@ -722,10 +722,10 @@ function watch_round_start_mana() {
   foreach(player in getplayers()) {
     player player_check_grenades();
   }
-  while (true) {
+  while(true) {
     level waittill("start_of_round");
     foreach(player in getplayers()) {
-      if(!(isdefined(player.beastmode) && player.beastmode)) {
+      if(!(isDefined(player.beastmode) && player.beastmode)) {
         player player_give_mana(1);
       }
       player player_give_lives(1);
@@ -735,17 +735,17 @@ function watch_round_start_mana() {
 }
 
 function player_watch_mana() {
-  if(!isdefined(self.superbeastmana)) {
+  if(!isDefined(self.superbeastmana)) {
     self.superbeastmana = 0;
   }
   self notify("player_watch_mana");
   self endon("player_watch_mana");
-  while (isdefined(self)) {
-    if(isdefined(level.hostmigrationtimer) && level.hostmigrationtimer) {
+  while(isDefined(self)) {
+    if(isDefined(level.hostmigrationtimer) && level.hostmigrationtimer) {
       wait(1);
       continue;
     }
-    if(isdefined(self.beastmode) && self.beastmode && (!(isdefined(self.teleporting) && self.teleporting))) {
+    if(isDefined(self.beastmode) && self.beastmode && (!(isDefined(self.teleporting) && self.teleporting))) {
       self player_take_mana(1 / 500);
     }
     if(level clientfield::get("bm_superbeast")) {
@@ -771,31 +771,27 @@ function player_on_killed() {
 
 function hide_ooze_triggers() {
   level flagsys::wait_till("start_zombie_round_logic");
-  ooo = getentarray("ooze_only", "script_noteworthy");
-  array::thread_all(ooo, & trigger_ooze_only);
-  moo = getentarray("beast_melee_only", "script_noteworthy");
-  array::thread_all(moo, & trigger_melee_only);
-  goo = getentarray("beast_grapple_only", "script_noteworthy");
-  array::thread_all(goo, & trigger_grapple_only);
+  ooo = getEntArray("ooze_only", "script_noteworthy");
+  array::thread_all(ooo, &trigger_ooze_only);
+  moo = getEntArray("beast_melee_only", "script_noteworthy");
+  array::thread_all(moo, &trigger_melee_only);
+  goo = getEntArray("beast_grapple_only", "script_noteworthy");
+  array::thread_all(goo, &trigger_grapple_only);
 }
 
 function player_update_beast_mode_objects(onoff) {
-  bmo = getentarray("beast_mode", "script_noteworthy");
-  if(isdefined(level.get_beast_mode_objects)) {
-    more_bmo = [
-      [level.get_beast_mode_objects]
-    ]();
+  bmo = getEntArray("beast_mode", "script_noteworthy");
+  if(isDefined(level.get_beast_mode_objects)) {
+    more_bmo = [[level.get_beast_mode_objects]]();
     bmo = arraycombine(bmo, more_bmo, 0, 0);
   }
-  array::run_all(bmo, & entity_set_visible, self, onoff);
-  bmho = getentarray("not_beast_mode", "script_noteworthy");
-  if(isdefined(level.get_beast_mode_hide_objects)) {
-    more_bmho = [
-      [level.get_beast_mode_hide_objects]
-    ]();
+  array::run_all(bmo, &entity_set_visible, self, onoff);
+  bmho = getEntArray("not_beast_mode", "script_noteworthy");
+  if(isDefined(level.get_beast_mode_hide_objects)) {
+    more_bmho = [[level.get_beast_mode_hide_objects]]();
     bmho = arraycombine(bmho, more_bmho, 0, 0);
   }
-  array::run_all(bmho, & entity_set_visible, self, !onoff);
+  array::run_all(bmho, &entity_set_visible, self, !onoff);
 }
 
 function entity_set_visible(player, onoff) {
@@ -809,7 +805,7 @@ function entity_set_visible(player, onoff) {
 function player_watch_melee_charge() {
   self endon("player_exit_beastmode");
   self endon("death");
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     self waittill("weapon_melee_charge", weapon);
     self notify("weapon_melee", weapon);
   }
@@ -818,7 +814,7 @@ function player_watch_melee_charge() {
 function player_watch_melee_power() {
   self endon("player_exit_beastmode");
   self endon("death");
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     self waittill("weapon_melee_power", weapon);
     self notify("weapon_melee", weapon);
   }
@@ -827,11 +823,11 @@ function player_watch_melee_power() {
 function player_watch_melee() {
   self endon("player_exit_beastmode");
   self endon("death");
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     self waittill("weapon_melee", weapon);
     if(weapon == getweapon("zombie_beast_grapple_dwr")) {
       self player_take_mana(0.03);
-      forward = anglestoforward(self getplayerangles());
+      forward = anglesToForward(self getplayerangles());
       up = anglestoup(self getplayerangles());
       meleepos = (self.origin + (15 * up)) + (30 * forward);
       level notify("beast_melee", self, meleepos);
@@ -843,7 +839,7 @@ function player_watch_melee() {
 function player_watch_melee_juke() {
   self endon("player_exit_beastmode");
   self endon("death");
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     self waittill("weapon_melee_juke", weapon);
     if(weapon == getweapon("zombie_beast_grapple_dwr")) {
       player_beast_melee_juke(weapon);
@@ -856,7 +852,7 @@ function player_beast_melee_juke(weapon) {
   self endon("weapon_melee_power");
   self endon("weapon_melee_charge");
   start_time = gettime();
-  while ((start_time + 3000) > gettime()) {
+  while((start_time + 3000) > gettime()) {
     self playrumbleonentity("zod_beast_juke");
     wait(0.1);
   }
@@ -871,23 +867,23 @@ function function_b484a03e(meleepos, radius) {
 function trigger_melee_only() {
   self endon("death");
   level flagsys::wait_till("start_zombie_round_logic");
-  if(isdefined(self.target)) {
+  if(isDefined(self.target)) {
     target = getent(self.target, "targetname");
-    if(isdefined(target)) {
+    if(isDefined(target)) {
       target enableaimassist();
     }
   }
   self setinvisibletoall();
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     level waittill("beast_melee", player, meleepos);
-    if(isdefined(self) && self function_b484a03e(meleepos, 48)) {
+    if(isDefined(self) && self function_b484a03e(meleepos, 48)) {
       self useby(player);
     }
   }
 }
 
 function is_lightning_weapon(weapon) {
-  if(!isdefined(weapon)) {
+  if(!isDefined(weapon)) {
     return false;
   }
   if(weapon == getweapon("zombie_beast_lightning_dwl") || weapon == getweapon("zombie_beast_lightning_dwl2") || weapon == getweapon("zombie_beast_lightning_dwl3")) {
@@ -897,7 +893,7 @@ function is_lightning_weapon(weapon) {
 }
 
 function lightning_weapon_level(weapon) {
-  if(!isdefined(weapon)) {
+  if(!isDefined(weapon)) {
     return 0;
   }
   if(weapon == getweapon("zombie_beast_lightning_dwl")) {
@@ -919,7 +915,7 @@ function player_watch_lightning() {
   self.tesla_enemies_hit = 0;
   self.tesla_powerup_dropped = 0;
   self.tesla_arc_count = 0;
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     self waittill("weapon_fired", weapon);
     if(is_lightning_weapon(weapon)) {
       self player_take_mana(0);
@@ -945,11 +941,11 @@ function lightning_aoe(weapon) {
       break;
     }
   }
-  forward = anglestoforward(self getplayerangles());
+  forward = anglesToForward(self getplayerangles());
   up = anglestoup(self getplayerangles());
   center = (self.origin + (16 * up)) + (24 * forward);
   if(shocklevel > 1) {
-    playfx(level._effect["beast_shock_aoe"], center);
+    playFX(level._effect["beast_shock_aoe"], center);
   }
   zombies = array::get_all_closest(center, getaiteamarray(level.zombie_team), undefined, undefined, shockradius);
   foreach(zombie in zombies) {
@@ -962,7 +958,7 @@ function lightning_aoe(weapon) {
 
 function arc_damage_init(hit_location, hit_origin, player, shocklevel) {
   player endon("disconnect");
-  if(isdefined(self.zombie_tesla_hit) && self.zombie_tesla_hit) {
+  if(isDefined(self.zombie_tesla_hit) && self.zombie_tesla_hit) {
     return;
   }
   if(shocklevel < 2) {
@@ -988,7 +984,7 @@ function create_lightning_params() {
 }
 
 function get_grapple_targets() {
-  if(!isdefined(level.beast_mode_targets)) {
+  if(!isDefined(level.beast_mode_targets)) {
     level.beast_mode_targets = [];
   }
   return level.beast_mode_targets;
@@ -998,9 +994,9 @@ function trigger_grapple_only() {
   self endon("death");
   level flagsys::wait_till("start_zombie_round_logic");
   self setinvisibletoall();
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     level waittill("grapple_hit", target, player);
-    if(isdefined(self) && target istouching(self)) {
+    if(isDefined(self) && target istouching(self)) {
       self useby(player);
     }
   }
@@ -1010,10 +1006,10 @@ function player_watch_grapple() {
   self endon("player_exit_beastmode");
   self endon("death");
   grapple = getweapon("zombie_beast_grapple_dwr");
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     self waittill("grapple_fired", weapon);
     if(weapon == grapple) {
-      if(isdefined(self.lockonentity)) {
+      if(isDefined(self.lockonentity)) {
         if(!self function_668dcfac(self.lockonentity)) {
           self.lockonentity = undefined;
         }
@@ -1025,7 +1021,7 @@ function player_watch_grapple() {
 }
 
 function function_668dcfac(target) {
-  if(isdefined(target.var_deccd0c8) && target.var_deccd0c8) {
+  if(isDefined(target.var_deccd0c8) && target.var_deccd0c8) {
     return false;
   }
   target.var_deccd0c8 = 1;
@@ -1035,9 +1031,9 @@ function function_668dcfac(target) {
 
 function function_b8488073(target, time) {
   self util::waittill_any_timeout(time, "disconnect", "grapple_cancel", "player_exit_beastmode");
-  if(isdefined(target)) {
+  if(isDefined(target)) {
     target.var_deccd0c8 = undefined;
-    if(isdefined(target.is_zombie) && target.is_zombie) {
+    if(isDefined(target.is_zombie) && target.is_zombie) {
       target dodamage(target.health + 1000, target.origin);
       if(!isvehicle(target)) {
         target.no_powerups = 1;
@@ -1054,7 +1050,7 @@ function player_beast_grapple_rumble(weapon, rumble, length) {
   self endon("grapple_landed");
   self endon("grapple_cancel");
   start_time = gettime();
-  while ((start_time + 3000) > gettime()) {
+  while((start_time + 3000) > gettime()) {
     self playrumbleonentity(rumble);
     wait(length);
   }
@@ -1062,8 +1058,8 @@ function player_beast_grapple_rumble(weapon, rumble, length) {
 
 function grapple_valid_target_check(ent) {
   if(!isvehicle(ent)) {
-    if(isdefined(ent.is_zombie) && ent.is_zombie) {
-      if(!(isdefined(ent.completed_emerging_into_playable_area) && ent.completed_emerging_into_playable_area)) {
+    if(isDefined(ent.is_zombie) && ent.is_zombie) {
+      if(!(isDefined(ent.completed_emerging_into_playable_area) && ent.completed_emerging_into_playable_area)) {
         return false;
       }
     }
@@ -1078,7 +1074,7 @@ function zombie_on_spawn() {
   if(!isvehicle(self)) {
     self waittill("completed_emerging_into_playable_area");
   }
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   self.grapple_type = 2;
@@ -1089,17 +1085,17 @@ function player_watch_grappled_object() {
   self endon("player_exit_beastmode");
   self endon("death");
   grapple = getweapon("zombie_beast_grapple_dwr");
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     self waittill("grapple_stick", weapon, target);
     if(weapon == grapple) {
       self notify("grapplable_grappled");
       self playrumbleonentity("zod_beast_grapple_hit");
-      if(isdefined(target)) {
-        if(isdefined(target.is_zombie) && target.is_zombie) {
+      if(isDefined(target)) {
+        if(isDefined(target.is_zombie) && target.is_zombie) {
           target zombie_gets_pulled(self);
         }
       }
-      level notify("grapple_hit", target, self, isdefined(self.pivotentity) && !isplayer(self.pivotentity));
+      level notify("grapple_hit", target, self, isDefined(self.pivotentity) && !isplayer(self.pivotentity));
       playsoundatposition("wpn_beastmode_grapple_imp", target.origin);
     }
   }
@@ -1109,12 +1105,12 @@ function player_watch_grapple_traverse() {
   self endon("player_exit_beastmode");
   self endon("death");
   grapple = getweapon("zombie_beast_grapple_dwr");
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     self waittill("grapple_reelin", weapon, target);
     if(weapon == grapple) {
       origin = target.origin;
       self thread player_watch_grapple_landing(origin);
-      self playsound("wpn_beastmode_grapple_pullin");
+      self playSound("wpn_beastmode_grapple_pullin");
       wait(0.15);
       self thread player_beast_grapple_rumble(weapon, "zod_beast_grapple_reel", 0.2);
     }
@@ -1136,7 +1132,7 @@ function player_watch_grappled_zombies() {
   self endon("player_exit_beastmode");
   self endon("death");
   grapple = getweapon("zombie_beast_grapple_dwr");
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     self waittill("grapple_pullin", weapon, target);
     if(weapon == grapple) {
       wait(0.15);
@@ -1149,11 +1145,11 @@ function player_kill_grappled_zombies() {
   self endon("player_exit_beastmode");
   self endon("death");
   grapple = getweapon("zombie_beast_grapple_dwr");
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     self waittill("grapple_pulled", weapon, target);
     if(weapon == grapple) {
-      if(isdefined(target)) {
-        if(isdefined(target.is_zombie) && target.is_zombie) {} else if(isdefined(target.powerup_name)) {
+      if(isDefined(target)) {
+        if(isDefined(target.is_zombie) && target.is_zombie) {} else if(isDefined(target.powerup_name)) {
           target.origin = self.origin;
         }
       }
@@ -1165,7 +1161,7 @@ function zombie_gets_pulled(player) {
   self.grapple_is_fatal = 1;
   zombie_to_player = player.origin - self.origin;
   zombie_to_player_2d = vectornormalize((zombie_to_player[0], zombie_to_player[1], 0));
-  zombie_forward = anglestoforward(self.angles);
+  zombie_forward = anglesToForward(self.angles);
   zombie_forward_2d = vectornormalize((zombie_forward[0], zombie_forward[1], 0));
   zombie_right = anglestoright(self.angles);
   zombie_right_2d = vectornormalize((zombie_right[0], zombie_right[1], 0));
@@ -1190,14 +1186,14 @@ function zombie_gets_pulled(player) {
 function function_d4252c93(player) {
   player util::waittill_any_timeout(2.5, "disconnect", "grapple_pulled", "altbody_end");
   wait(0.15);
-  if(isdefined(self)) {
-    if(isdefined(player)) {
-      player playsound("wpn_beastmode_grapple_zombie_imp");
+  if(isDefined(self)) {
+    if(isDefined(player)) {
+      player playSound("wpn_beastmode_grapple_zombie_imp");
     }
-    if(!(isdefined(self.grapple_is_fatal) && self.grapple_is_fatal)) {
+    if(!(isDefined(self.grapple_is_fatal) && self.grapple_is_fatal)) {
       self dodamage(1000, player.origin, player);
     } else {
-      if(isdefined(player)) {
+      if(isDefined(player)) {
         self dodamage(self.health + 1000, player.origin, player);
       } else {
         self dodamage(self.health + 1000, self.origin);
@@ -1207,7 +1203,7 @@ function function_d4252c93(player) {
         self.marked_for_recycle = 1;
         self.has_been_damaged_by_player = 0;
         self startragdoll();
-        if(isdefined(player)) {
+        if(isDefined(player)) {
           player clientfield::increment_to_player("beast_blood_on_player");
         }
       }
@@ -1223,7 +1219,7 @@ function lightning_zombie_damage_response(mod, hit_location, hit_origin, player,
     return true;
   }
   if(weapon === getweapon("zombie_beast_grapple_dwr")) {
-    if(amount > 0 && isdefined(player)) {
+    if(amount > 0 && isDefined(player)) {
       player playrumbleonentity("damage_heavy");
       earthquake(1, 0.75, player.origin, 100);
     }
@@ -1234,23 +1230,23 @@ function lightning_zombie_damage_response(mod, hit_location, hit_origin, player,
 
 function watch_lightning_damage(triggers) {
   self endon("delete");
-  self setcandamage(1);
-  while (isdefined(triggers)) {
+  self setCanDamage(1);
+  while(isDefined(triggers)) {
     self waittill("damage", amount, attacker, direction, point, mod, tagname, modelname, partname, weapon);
-    if(is_lightning_weapon(weapon) && isdefined(attacker) && amount > 0) {
-      if(isdefined(attacker)) {
+    if(is_lightning_weapon(weapon) && isDefined(attacker) && amount > 0) {
+      if(isDefined(attacker)) {
         attacker notify("shockable_shocked");
       }
-      if(isdefined(level._effect["beast_shock_box"])) {
-        forward = anglestoforward(self.angles);
-        playfx(level._effect["beast_shock_box"], self.origin, forward);
+      if(isDefined(level._effect["beast_shock_box"])) {
+        forward = anglesToForward(self.angles);
+        playFX(level._effect["beast_shock_box"], self.origin, forward);
       }
-      if(!isdefined(triggers)) {
+      if(!isDefined(triggers)) {
         return;
       }
       if(isarray(triggers)) {
         foreach(trigger in triggers) {
-          if(isdefined(trigger)) {
+          if(isDefined(trigger)) {
             trigger useby(attacker);
           }
         }
@@ -1262,7 +1258,7 @@ function watch_lightning_damage(triggers) {
 }
 
 function beast_mode_death_watch(attacker) {
-  if(isdefined(self.attacker) && (isdefined(self.attacker.beastmode) && self.attacker.beastmode)) {
+  if(isDefined(self.attacker) && (isDefined(self.attacker.beastmode) && self.attacker.beastmode)) {
     self.no_powerups = 1;
     self.marked_for_recycle = 1;
     self.has_been_damaged_by_player = 0;
@@ -1279,7 +1275,7 @@ function beast_mode_death_watch(attacker) {
     if(!isvehicle(self)) {
       if(self.damagemod === "MOD_MELEE") {
         player = self.attacker;
-        if(isdefined(player)) {
+        if(isDefined(player)) {
           player playrumbleonentity("damage_heavy");
           earthquake(1, 0.75, player.origin, 100);
         }
@@ -1287,7 +1283,7 @@ function beast_mode_death_watch(attacker) {
         gibserverutils::annihilate(self);
       } else {
         player = self.attacker;
-        if(isdefined(player)) {
+        if(isDefined(player)) {
           player playrumbleonentity("damage_heavy");
           earthquake(1, 0.75, player.origin, 100);
         }
@@ -1302,25 +1298,25 @@ function trigger_ooze_only() {
   self endon("death");
   level flagsys::wait_till("start_zombie_round_logic");
   self setinvisibletoall();
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     level waittill("ooze_detonate", grenade, player);
-    if(isdefined(self) && isdefined(grenade) && grenade istouching(self)) {
+    if(isDefined(self) && isDefined(grenade) && grenade istouching(self)) {
       self useby(player);
     }
   }
 }
 
 function zombie_can_be_zapped() {
-  if(isdefined(self.barricade_enter) && self.barricade_enter) {
+  if(isDefined(self.barricade_enter) && self.barricade_enter) {
     return false;
   }
-  if(isdefined(self.is_traversing) && self.is_traversing) {
+  if(isDefined(self.is_traversing) && self.is_traversing) {
     return false;
   }
-  if(!(isdefined(self.completed_emerging_into_playable_area) && self.completed_emerging_into_playable_area) && !isdefined(self.first_node)) {
+  if(!(isDefined(self.completed_emerging_into_playable_area) && self.completed_emerging_into_playable_area) && !isDefined(self.first_node)) {
     return false;
   }
-  if(isdefined(self.is_leaping) && self.is_leaping) {
+  if(isDefined(self.is_leaping) && self.is_leaping) {
     return false;
   }
   return true;
@@ -1334,16 +1330,16 @@ function lightning_slow_zombie(zombie) {
     return;
   }
   num = zombie getentitynumber();
-  if(!isdefined(zombie.beast_slow_count)) {
+  if(!isDefined(zombie.beast_slow_count)) {
     zombie.beast_slow_count = 0;
   }
   zombie.beast_slow_count++;
-  if(!isdefined(zombie.animation_rate)) {
+  if(!isDefined(zombie.animation_rate)) {
     zombie.animation_rate = 1;
   }
   zombie.slow_time_left = 8;
   zombie thread lightning_slow_zombie_fx(zombie);
-  while (isdefined(zombie) && isalive(zombie) && zombie.animation_rate > 0.03) {
+  while(isDefined(zombie) && isalive(zombie) && zombie.animation_rate > 0.03) {
     zombie.animation_rate = zombie.animation_rate - (0.97 * 0.05);
     if(zombie.animation_rate < 0.03) {
       zombie.animation_rate = 0.03;
@@ -1352,11 +1348,11 @@ function lightning_slow_zombie(zombie) {
     zombie.slow_time_left = zombie.slow_time_left - 0.05;
     wait(0.05);
   }
-  while (isdefined(zombie) && isalive(zombie) && zombie.slow_time_left > 0.5) {
+  while(isDefined(zombie) && isalive(zombie) && zombie.slow_time_left > 0.5) {
     zombie.slow_time_left = zombie.slow_time_left - 0.05;
     wait(0.05);
   }
-  while (isdefined(zombie) && isalive(zombie) && zombie.animation_rate < 1) {
+  while(isDefined(zombie) && isalive(zombie) && zombie.animation_rate < 1) {
     zombie.animation_rate = zombie.animation_rate + (0.97 * 0.1);
     if(zombie.animation_rate > 1) {
       zombie.animation_rate = 1;
@@ -1367,7 +1363,7 @@ function lightning_slow_zombie(zombie) {
   }
   zombie asmsetanimationrate(1);
   zombie.slow_time_left = 0;
-  if(isdefined(zombie)) {
+  if(isDefined(zombie)) {
     zombie.beast_slow_count--;
   }
 }
@@ -1375,10 +1371,10 @@ function lightning_slow_zombie(zombie) {
 function lightning_slow_zombie_fx(zombie) {
   tag = "J_SpineUpper";
   fx = "beast_shock";
-  if(isdefined(zombie.isdog) && zombie.isdog) {
+  if(isDefined(zombie.isdog) && zombie.isdog) {
     tag = "J_Spine1";
   }
-  while (isdefined(zombie) && isalive(zombie) && zombie.slow_time_left > 0) {
+  while(isDefined(zombie) && isalive(zombie) && zombie.slow_time_left > 0) {
     zombie zm_net::network_safe_play_fx_on_tag("beast_slow_fx", 2, level._effect[fx], zombie, tag);
     wait(1);
   }
@@ -1387,7 +1383,7 @@ function lightning_slow_zombie_fx(zombie) {
 function function_41cc3fc8() {
   players = level.activeplayers;
   foreach(player in players) {
-    player thread player_update_beast_mode_objects(isdefined(player.beastmode) && player.beastmode);
+    player thread player_update_beast_mode_objects(isDefined(player.beastmode) && player.beastmode);
   }
 }
 
@@ -1395,10 +1391,10 @@ function function_d7b8b2f5() {
   self endon("player_exit_beastmode");
   self endon("altbody_end");
   n_start_time = undefined;
-  while (true) {
+  while(true) {
     current_zone = self zm_utility::get_current_zone();
-    if(!isdefined(current_zone)) {
-      if(!isdefined(n_start_time)) {
+    if(!isDefined(current_zone)) {
+      if(!isDefined(n_start_time)) {
         n_start_time = gettime();
       }
       n_current_time = gettime();
@@ -1417,7 +1413,7 @@ function function_d7b8b2f5() {
 function beastmode_devgui() {
   level flagsys::wait_till("");
   wait(1);
-  zm_devgui::add_custom_devgui_callback( & beastmode_devgui_callback);
+  zm_devgui::add_custom_devgui_callback(&beastmode_devgui_callback);
   adddebugcommand("");
   adddebugcommand("");
   adddebugcommand("");
@@ -1425,7 +1421,7 @@ function beastmode_devgui() {
   adddebugcommand("");
   adddebugcommand("");
   players = getplayers();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     ip1 = i + 1;
     adddebugcommand(((("" + players[i].name) + "") + ip1) + "");
     adddebugcommand(((("" + players[i].name) + "") + ip1) + "");
@@ -1445,21 +1441,21 @@ function beastmode_devgui_callback(cmd) {
       break;
     }
     case "": {
-      array::thread_all(players, & player_zombie_devgui_beast_mode);
+      array::thread_all(players, &player_zombie_devgui_beast_mode);
       retval = 1;
       break;
     }
     case "": {
-      array::thread_all(players, & player_zombie_devgui_superbeast_mode);
+      array::thread_all(players, &player_zombie_devgui_superbeast_mode);
       retval = 1;
       break;
     }
     case "": {
-      a_trigs = getentarray("", "");
+      a_trigs = getEntArray("", "");
       foreach(e_trig in a_trigs) {
         e_trig useby(level.players[0]);
       }
-      a_trigs = getentarray("", "");
+      a_trigs = getEntArray("", "");
       foreach(e_trig in a_trigs) {
         e_trig useby(level.players[0]);
       }
@@ -1501,7 +1497,7 @@ function beastmode_devgui_callback(cmd) {
       break;
     }
     case "": {
-      array::thread_all(players, & player_zombie_devgui_beast_mode_preserve);
+      array::thread_all(players, &player_zombie_devgui_beast_mode_preserve);
       retval = 1;
       break;
     }
@@ -1542,7 +1538,7 @@ function player_zombie_devgui_beast_mode() {
     return;
   }
   level flagsys::wait_till("");
-  if(!(isdefined(self.beastmode) && self.beastmode)) {
+  if(!(isDefined(self.beastmode) && self.beastmode)) {
     self player_give_mana(1);
     self thread zm_altbody::devgui_start_altbody("");
   } else {
@@ -1556,7 +1552,7 @@ function player_zombie_devgui_superbeast_mode() {
   }
   level flagsys::wait_till("");
   b_superbeastmode = level clientfield::get("");
-  if(!(isdefined(self.beastmode) && self.beastmode) && !b_superbeastmode) {
+  if(!(isDefined(self.beastmode) && self.beastmode) && !b_superbeastmode) {
     self player_give_mana(1);
     self thread zm_altbody::devgui_start_altbody("");
   } else {
@@ -1565,7 +1561,7 @@ function player_zombie_devgui_superbeast_mode() {
 }
 
 function detect_reentry() {
-  if(isdefined(self.devgui_preserve_time)) {
+  if(isDefined(self.devgui_preserve_time)) {
     if(self.devgui_preserve_time == gettime()) {
       return true;
     }
@@ -1581,9 +1577,9 @@ function player_zombie_devgui_beast_mode_preserve() {
   self notify("zombie_devgui_beast_mode_preserve");
   self endon("zombie_devgui_beast_mode_preserve");
   level flagsys::wait_till("");
-  self.devgui_preserve_beast_mode = !(isdefined(self.devgui_preserve_beast_mode) && self.devgui_preserve_beast_mode);
+  self.devgui_preserve_beast_mode = !(isDefined(self.devgui_preserve_beast_mode) && self.devgui_preserve_beast_mode);
   if(self.devgui_preserve_beast_mode) {
-    while (isdefined(self)) {
+    while(isDefined(self)) {
       self player_give_lives(3);
       self player_give_mana(1);
       wait(0.05);

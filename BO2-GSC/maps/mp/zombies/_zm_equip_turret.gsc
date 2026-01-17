@@ -20,10 +20,10 @@ init() {
   precachemodel("p6_anim_zm_buildable_turret");
   precacheturret("zombie_bullet_crouch_zm");
   level.turret_name = "equip_turret_zm";
-  maps\mp\zombies\_zm_equipment::register_equipment("equip_turret_zm", & "ZOMBIE_EQUIP_TURRET_PICKUP_HINT_STRING", & "ZOMBIE_EQUIP_TURRET_HOWTO", "turret_zm_icon", "turret", undefined, ::transferturret, ::dropturret, ::pickupturret, ::placeturret);
+  maps\mp\zombies\_zm_equipment::register_equipment("equip_turret_zm", &"ZOMBIE_EQUIP_TURRET_PICKUP_HINT_STRING", &"ZOMBIE_EQUIP_TURRET_HOWTO", "turret_zm_icon", "turret", undefined, ::transferturret, ::dropturret, ::pickupturret, ::placeturret);
   maps\mp\zombies\_zm_equipment::add_placeable_equipment("equip_turret_zm", "p6_anim_zm_buildable_turret");
   level thread onplayerconnect();
-  maps\mp\gametypes_zm\_weaponobjects::createretrievablehint("equip_turret", & "ZOMBIE_EQUIP_TURRET_PICKUP_HINT_STRING");
+  maps\mp\gametypes_zm\_weaponobjects::createretrievablehint("equip_turret", &"ZOMBIE_EQUIP_TURRET_PICKUP_HINT_STRING");
 }
 
 onplayerconnect() {
@@ -180,7 +180,7 @@ startturretdeploy(weapon) {
     turret = spawnturret("misc_turret", weapon.origin, "zombie_bullet_crouch_zm");
     turret.turrettype = "sentry";
     turret setturrettype(turret.turrettype);
-    turret setmodel("p6_anim_zm_buildable_turret");
+    turret setModel("p6_anim_zm_buildable_turret");
     turret.origin = weapon.origin;
     turret.angles = weapon.angles;
     turret linkto(weapon);
@@ -217,7 +217,7 @@ startturretdeploy(weapon) {
     while(isDefined(weapon)) {
       if(!is_true(weapon.power_on)) {
         if(isDefined(self.buildableturret.sound_ent)) {
-          self.buildableturret.sound_ent playsound("wpn_zmb_turret_stop");
+          self.buildableturret.sound_ent playSound("wpn_zmb_turret_stop");
           self.buildableturret.sound_ent delete();
           self.buildableturret.sound_ent = undefined;
         }
@@ -227,7 +227,7 @@ startturretdeploy(weapon) {
     }
 
     if(isDefined(self.buildableturret.sound_ent)) {
-      self.buildableturret.sound_ent playsound("wpn_zmb_turret_stop");
+      self.buildableturret.sound_ent playSound("wpn_zmb_turret_stop");
       self.buildableturret.sound_ent delete();
       self.buildableturret.sound_ent = undefined;
     }
@@ -263,8 +263,8 @@ turret_power_on(origin, radius) {
   if(!isDefined(player.buildableturret.sound_ent))
     player.buildableturret.sound_ent = spawn("script_origin", self.target.turret.origin);
 
-  player.buildableturret.sound_ent playsound("wpn_zmb_turret_start");
-  player.buildableturret.sound_ent playloopsound("wpn_zmb_turret_loop", 2);
+  player.buildableturret.sound_ent playSound("wpn_zmb_turret_start");
+  player.buildableturret.sound_ent playLoopSound("wpn_zmb_turret_loop", 2);
 }
 
 turret_power_off(origin, radius) {
@@ -278,7 +278,7 @@ turret_power_off(origin, radius) {
   player = self.target.turret.owner;
 
   if(isDefined(player.buildableturret.sound_ent)) {
-    player.buildableturret.sound_ent playsound("wpn_zmb_turret_stop");
+    player.buildableturret.sound_ent playSound("wpn_zmb_turret_stop");
     player.buildableturret.sound_ent delete();
     player.buildableturret.sound_ent = undefined;
   }

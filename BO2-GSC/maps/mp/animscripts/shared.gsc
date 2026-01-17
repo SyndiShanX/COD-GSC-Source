@@ -75,9 +75,7 @@ donotetracksforeverproc(notetracksfunc, flagname, killstring, customfunction, va
 
   for(;;) {
     time = gettime();
-    returnednote = [
-      [notetracksfunc]
-    ](flagname, customfunction, var1);
+    returnednote = [[notetracksfunc]](flagname, customfunction, var1);
     timetaken = gettime() - time;
 
     if(timetaken < 0.05) {
@@ -106,7 +104,7 @@ donotetracksfortimeproc(donotetracksforeverfunc, time, flagname, customfunction,
 }
 
 donotetracksfortime(time, flagname, customfunction, var1) {
-  ent = spawnstruct();
+  ent = spawnStruct();
   ent thread donotetracksfortimeendnotify(time);
   donotetracksfortimeproc(::donotetracksforever, time, flagname, customfunction, ent, var1);
 }
@@ -146,7 +144,7 @@ trackloop() {
 
   for(;;) {
     incranimaimweight();
-    selfshootatpos = (self.origin[0], self.origin[1], self geteye()[2]);
+    selfshootatpos = (self.origin[0], self.origin[1], self getEye()[2]);
     shootpos = undefined;
 
     if(isDefined(self.enemy))

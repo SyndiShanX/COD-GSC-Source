@@ -514,5 +514,4 @@ main() {
   ent.v["origin"] = (-82.9914, -1031.38, 253.318);
   ent.v["angles"] = (270, 0, 0);
   ent.v["soundalias"] = "emt_ac_duct_rattle";
-
 }

@@ -14,21 +14,21 @@
 #namespace airsupport;
 
 function init() {
-  if(!isdefined(level.airsupportheightscale)) {
+  if(!isDefined(level.airsupportheightscale)) {
     level.airsupportheightscale = 1;
   }
   level.airsupportheightscale = getdvarint("scr_airsupportHeightScale", level.airsupportheightscale);
   level.noflyzones = [];
-  level.noflyzones = getentarray("no_fly_zone", "targetname");
+  level.noflyzones = getEntArray("no_fly_zone", "targetname");
   airsupport_heights = struct::get_array("air_support_height", "targetname");
   if(airsupport_heights.size > 1) {
     util::error("");
   }
-  airsupport_heights = getentarray("air_support_height", "targetname");
+  airsupport_heights = getEntArray("air_support_height", "targetname");
   if(airsupport_heights.size > 0) {
     util::error("");
   }
-  heli_height_meshes = getentarray("heli_height_lock", "classname");
+  heli_height_meshes = getEntArray("heli_height_lock", "classname");
   if(heli_height_meshes.size > 1) {
     util::error("");
   }
@@ -38,7 +38,7 @@ function init() {
 function finishhardpointlocationusage(location, usedcallback) {
   self notify("used");
   wait(0.05);
-  if(isdefined(usedcallback)) {
+  if(isDefined(usedcallback)) {
     return self[[usedcallback]](location);
   }
   return 1;
@@ -73,7 +73,7 @@ function endselectiononhostmigration() {
 function endselectionthink() {
   assert(isplayer(self));
   assert(isalive(self));
-  assert(isdefined(self.selectinglocation));
+  assert(isDefined(self.selectinglocation));
   assert(self.selectinglocation == 1);
   self thread endselectionongameend();
   self thread endselectiononhostmigration();
@@ -115,16 +115,16 @@ function calculatereleasetime(flytime, flyheight, flyspeed, bombspeedscale) {
 
 function getminimumflyheight() {
   airsupport_height = struct::get("air_support_height", "targetname");
-  if(isdefined(airsupport_height)) {
+  if(isDefined(airsupport_height)) {
     planeflyheight = airsupport_height.origin[2];
   } else {
     println("");
     planeflyheight = 850;
-    if(isdefined(level.airsupportheightscale)) {
+    if(isDefined(level.airsupportheightscale)) {
       level.airsupportheightscale = getdvarint("scr_airsupportHeightScale", level.airsupportheightscale);
       planeflyheight = planeflyheight * getdvarint("scr_airsupportHeightScale", level.airsupportheightscale);
     }
-    if(isdefined(level.forceairsupportmapheight)) {
+    if(isDefined(level.forceairsupportmapheight)) {
       planeflyheight = planeflyheight + level.forceairsupportmapheight;
     }
   }
@@ -151,7 +151,7 @@ function callstrike(flightplan) {
   assert(flytime > bombtime);
   flightplan.owner endon("disconnect");
   requireddeathcount = flightplan.owner.deathcount;
-  side = vectorcross(anglestoforward(direction), (0, 0, 1));
+  side = vectorcross(anglesToForward(direction), (0, 0, 1));
   plane_seperation = 25;
   side_offset = vectorscale(side, plane_seperation);
   level thread planestrike(flightplan.owner, requireddeathcount, startpoint, endpoint, bombtime, flytime, flightplan.speed, flightplan.bombspeedscale, direction, flightplan.planespawncallback);
@@ -163,14 +163,14 @@ function callstrike(flightplan) {
 }
 
 function planestrike(owner, requireddeathcount, pathstart, pathend, bombtime, flytime, flyspeed, bombspeedscale, direction, planespawnedfunction) {
-  if(!isdefined(owner)) {
+  if(!isDefined(owner)) {
     return;
   }
   plane = spawnplane(owner, "script_model", pathstart);
   plane.angles = direction;
   plane moveto(pathend, flytime, 0, 0);
   thread debug_plane_line(flytime, flyspeed, pathstart, pathend);
-  if(isdefined(planespawnedfunction)) {
+  if(isDefined(planespawnedfunction)) {
     plane[[planespawnedfunction]](owner, requireddeathcount, pathstart, pathend, bombtime, bombspeedscale, flytime, flyspeed);
   }
   wait(flytime);
@@ -180,7 +180,7 @@ function planestrike(owner, requireddeathcount, pathstart, pathend, bombtime, fl
 
 function determinegroundpoint(player, position) {
   ground = (position[0], position[1], player.origin[2]);
-  trace = bullettrace(ground + vectorscale((0, 0, 1), 10000), ground, 0, undefined);
+  trace = bulletTrace(ground + vectorscale((0, 0, 1), 10000), ground, 0, undefined);
   return trace["position"];
 }
 
@@ -210,7 +210,7 @@ function clamptarget(target) {
 }
 
 function _insidecylinder(point, base, radius, height) {
-  if(isdefined(height)) {
+  if(isDefined(height)) {
     if(point[2] > (base[2] + height)) {
       return false;
     }
@@ -224,7 +224,7 @@ function _insidecylinder(point, base, radius, height) {
 
 function _insidenoflyzonebyindex(point, index, disregardheight) {
   height = level.noflyzones[index].height;
-  if(isdefined(disregardheight)) {
+  if(isDefined(disregardheight)) {
     height = undefined;
   }
   return _insidecylinder(point, level.noflyzones[index].origin, level.noflyzones[index].radius, height);
@@ -233,7 +233,7 @@ function _insidenoflyzonebyindex(point, index, disregardheight) {
 function getnoflyzoneheight(point) {
   height = point[2];
   origin = undefined;
-  for (i = 0; i < level.noflyzones.size; i++) {
+  for(i = 0; i < level.noflyzones.size; i++) {
     if(_insidenoflyzonebyindex(point, i)) {
       if(height < level.noflyzones[i].height) {
         height = level.noflyzones[i].height;
@@ -241,7 +241,7 @@ function getnoflyzoneheight(point) {
       }
     }
   }
-  if(!isdefined(origin)) {
+  if(!isDefined(origin)) {
     return point[2];
   }
   return origin[2] + height;
@@ -249,7 +249,7 @@ function getnoflyzoneheight(point) {
 
 function insidenoflyzones(point, disregardheight) {
   noflyzones = [];
-  for (i = 0; i < level.noflyzones.size; i++) {
+  for(i = 0; i < level.noflyzones.size; i++) {
     if(_insidenoflyzonebyindex(point, i, disregardheight)) {
       noflyzones[noflyzones.size] = i;
     }
@@ -258,7 +258,7 @@ function insidenoflyzones(point, disregardheight) {
 }
 
 function crossesnoflyzone(start, end) {
-  for (i = 0; i < level.noflyzones.size; i++) {
+  for(i = 0; i < level.noflyzones.size; i++) {
     point = math::closest_point_on_line(level.noflyzones[i].origin + (0, 0, 0.5 * level.noflyzones[i].height), start, end);
     dist = distance2d(point, level.noflyzones[i].origin);
     if(point[2] > (level.noflyzones[i].origin[2] + level.noflyzones[i].height)) {
@@ -273,7 +273,7 @@ function crossesnoflyzone(start, end) {
 
 function crossesnoflyzones(start, end) {
   zones = [];
-  for (i = 0; i < level.noflyzones.size; i++) {
+  for(i = 0; i < level.noflyzones.size; i++) {
     point = math::closest_point_on_line(level.noflyzones[i].origin, start, end);
     dist = distance2d(point, level.noflyzones[i].origin);
     if(point[2] > (level.noflyzones[i].origin[2] + level.noflyzones[i].height)) {
@@ -288,7 +288,7 @@ function crossesnoflyzones(start, end) {
 
 function getnoflyzoneheightcrossed(start, end, minheight) {
   height = minheight;
-  for (i = 0; i < level.noflyzones.size; i++) {
+  for(i = 0; i < level.noflyzones.size; i++) {
     point = math::closest_point_on_line(level.noflyzones[i].origin, start, end);
     dist = distance2d(point, level.noflyzones[i].origin);
     if(dist < level.noflyzones[i].radius) {
@@ -301,11 +301,11 @@ function getnoflyzoneheightcrossed(start, end, minheight) {
 }
 
 function _shouldignorenoflyzone(noflyzone, noflyzones) {
-  if(!isdefined(noflyzone)) {
+  if(!isDefined(noflyzone)) {
     return true;
   }
-  for (i = 0; i < noflyzones.size; i++) {
-    if(isdefined(noflyzones[i]) && noflyzones[i] == noflyzone) {
+  for(i = 0; i < noflyzones.size; i++) {
+    if(isDefined(noflyzones[i]) && noflyzones[i] == noflyzone) {
       return true;
     }
   }
@@ -313,7 +313,7 @@ function _shouldignorenoflyzone(noflyzone, noflyzones) {
 }
 
 function _shouldignorestartgoalnoflyzone(noflyzone, startnoflyzones, goalnoflyzones) {
-  if(!isdefined(noflyzone)) {
+  if(!isDefined(noflyzone)) {
     return true;
   }
   if(_shouldignorenoflyzone(noflyzone, startnoflyzones)) {
@@ -333,7 +333,7 @@ function gethelipath(start, goal) {
     goal = (goal[0], goal[1], getnoflyzoneheight(goal));
   }
   goal_points = calculatepath(start, goal, startnoflyzones, goalnoflyzones);
-  if(!isdefined(goal_points)) {
+  if(!isDefined(goal_points)) {
     return undefined;
   }
   assert(goal_points.size >= 1);
@@ -341,7 +341,7 @@ function gethelipath(start, goal) {
 }
 
 function followpath(path, donenotify, stopatgoal) {
-  for (i = 0; i < (path.size - 1); i++) {
+  for(i = 0; i < (path.size - 1); i++) {
     self setvehgoalpos(path[i], 0);
     thread debug_line(self.origin, path[i], (1, 1, 0));
     self waittill("goal");
@@ -349,7 +349,7 @@ function followpath(path, donenotify, stopatgoal) {
   self setvehgoalpos(path[path.size - 1], stopatgoal);
   thread debug_line(self.origin, path[i], (1, 1, 0));
   self waittill("goal");
-  if(isdefined(donenotify)) {
+  if(isDefined(donenotify)) {
     self notify(donenotify);
   }
 }
@@ -357,7 +357,7 @@ function followpath(path, donenotify, stopatgoal) {
 function setgoalposition(goal, donenotify, stopatgoal = 1) {
   start = self.origin;
   goal_points = gethelipath(start, goal);
-  if(!isdefined(goal_points)) {
+  if(!isDefined(goal_points)) {
     goal_points = [];
     goal_points[0] = goal;
   }
@@ -366,7 +366,7 @@ function setgoalposition(goal, donenotify, stopatgoal = 1) {
 
 function clearpath(start, end, startnoflyzone, goalnoflyzone) {
   noflyzones = crossesnoflyzones(start, end);
-  for (i = 0; i < noflyzones.size; i++) {
+  for(i = 0; i < noflyzones.size; i++) {
     if(!_shouldignorestartgoalnoflyzone(noflyzones[i], startnoflyzone, goalnoflyzone)) {
       return false;
     }
@@ -375,7 +375,7 @@ function clearpath(start, end, startnoflyzone, goalnoflyzone) {
 }
 
 function append_array(dst, src) {
-  for (i = 0; i < src.size; i++) {
+  for(i = 0; i < src.size; i++) {
     dst[dst.size] = src[i];
   }
 }
@@ -387,7 +387,7 @@ function calculatepath_r(start, end, points, startnoflyzones, goalnoflyzones, de
     return points;
   }
   noflyzones = crossesnoflyzones(start, end);
-  for (i = 0; i < noflyzones.size; i++) {
+  for(i = 0; i < noflyzones.size; i++) {
     noflyzone = noflyzones[i];
     if(!_shouldignorestartgoalnoflyzone(noflyzone, startnoflyzones, goalnoflyzones)) {
       return undefined;
@@ -400,13 +400,13 @@ function calculatepath_r(start, end, points, startnoflyzones, goalnoflyzones, de
 function calculatepath(start, end, startnoflyzones, goalnoflyzones) {
   points = [];
   points = calculatepath_r(start, end, points, startnoflyzones, goalnoflyzones, 3);
-  if(!isdefined(points)) {
+  if(!isDefined(points)) {
     return undefined;
   }
   assert(points.size >= 1);
   debug_sphere(points[points.size - 1], 10, (1, 0, 0), 1, 1000);
   point = start;
-  for (i = 0; i < points.size; i++) {
+  for(i = 0; i < points.size; i++) {
     thread debug_line(point, points[i], (0, 1, 0));
     debug_sphere(points[i], 10, (0, 0, 1), 1, 1000);
     point = points[i];
@@ -416,11 +416,11 @@ function calculatepath(start, end, startnoflyzones, goalnoflyzones) {
 
 function _getstrikepathstartandend(goal, yaw, halfdistance) {
   direction = (0, yaw, 0);
-  startpoint = goal + (vectorscale(anglestoforward(direction), -1 * halfdistance));
-  endpoint = goal + vectorscale(anglestoforward(direction), halfdistance);
+  startpoint = goal + (vectorscale(anglesToForward(direction), -1 * halfdistance));
+  endpoint = goal + vectorscale(anglesToForward(direction), halfdistance);
   noflyzone = crossesnoflyzone(startpoint, endpoint);
   path = [];
-  if(isdefined(noflyzone)) {
+  if(isDefined(noflyzone)) {
     path["noFlyZone"] = noflyzone;
     startpoint = (startpoint[0], startpoint[1], level.noflyzones[noflyzone].origin[2] + level.noflyzones[noflyzone].height);
     endpoint = (endpoint[0], endpoint[1], startpoint[2]);
@@ -441,10 +441,10 @@ function getstrikepath(target, height, halfdistance, yaw) {
   }
   goal = (target[0], target[1], worldheight);
   path = [];
-  if(!isdefined(yaw) || yaw != "random") {
-    for (i = 0; i < 3; i++) {
+  if(!isDefined(yaw) || yaw != "random") {
+    for(i = 0; i < 3; i++) {
       path = _getstrikepathstartandend(goal, randomint(360), halfdistance);
-      if(!isdefined(path["noFlyZone"])) {
+      if(!isDefined(path["noFlyZone"])) {
         break;
       }
     }
@@ -464,7 +464,7 @@ function entlosradiusdamage(ent, pos, radius, max, min, owner, einflictor) {
   dist = distance(pos, ent.damagecenter);
   if(ent.isplayer || ent.isactor) {
     assumed_ceiling_height = 800;
-    eye_position = ent.entity geteye();
+    eye_position = ent.entity getEye();
     head_height = eye_position[2];
     debug_display_time = 4000;
     trace = weapons::damage_trace(ent.entity.origin, ent.entity.origin + (0, 0, assumed_ceiling_height), 0, undefined);
@@ -506,7 +506,7 @@ function entlosradiusdamage(ent, pos, radius, max, min, owner, einflictor) {
 }
 
 function getmapcenter() {
-  minimaporigins = getentarray("minimap_corner", "targetname");
+  minimaporigins = getEntArray("minimap_corner", "targetname");
   if(minimaporigins.size) {
     return math::find_box_center(minimaporigins[0].origin, minimaporigins[1].origin);
   }
@@ -514,7 +514,7 @@ function getmapcenter() {
 }
 
 function getrandommappoint(x_offset, y_offset, map_x_percentage, map_y_percentage) {
-  minimaporigins = getentarray("minimap_corner", "targetname");
+  minimaporigins = getEntArray("minimap_corner", "targetname");
   if(minimaporigins.size) {
     rand_x = 0;
     rand_y = 0;
@@ -531,7 +531,7 @@ function getrandommappoint(x_offset, y_offset, map_x_percentage, map_y_percentag
 }
 
 function getmaxmapwidth() {
-  minimaporigins = getentarray("minimap_corner", "targetname");
+  minimaporigins = getEntArray("minimap_corner", "targetname");
   if(minimaporigins.size) {
     x = abs(minimaporigins[0].origin[0] - minimaporigins[1].origin[0]);
     y = abs(minimaporigins[0].origin[1] - minimaporigins[1].origin[1]);
@@ -541,8 +541,8 @@ function getmaxmapwidth() {
 }
 
 function initrotatingrig() {
-  level.airsupport_rotator = spawn("script_model", getmapcenter() + ((isdefined(level.rotator_x_offset) ? level.rotator_x_offset : 0), (isdefined(level.rotator_y_offset) ? level.rotator_y_offset : 0), 1200));
-  level.airsupport_rotator setmodel("tag_origin");
+  level.airsupport_rotator = spawn("script_model", getmapcenter() + ((isDefined(level.rotator_x_offset) ? level.rotator_x_offset : 0), (isDefined(level.rotator_y_offset) ? level.rotator_y_offset : 0), 1200));
+  level.airsupport_rotator setModel("tag_origin");
   level.airsupport_rotator.angles = vectorscale((0, 1, 0), 115);
   level.airsupport_rotator hide();
   level.airsupport_rotator thread rotaterig();
@@ -550,7 +550,7 @@ function initrotatingrig() {
 }
 
 function rotaterig() {
-  for (;;) {
+  for(;;) {
     self rotateyaw(-360, 60);
     wait(60);
   }
@@ -558,7 +558,7 @@ function rotaterig() {
 
 function swayrig() {
   centerorigin = self.origin;
-  for (;;) {
+  for(;;) {
     z = randomintrange(-200, -100);
     time = randomintrange(3, 6);
     self moveto(centerorigin + (0, 0, z), time, 1, 1);
@@ -582,7 +582,7 @@ function flattenyaw(goal) {
   if(self.angles[1] > goal) {
     increment = increment * -1;
   }
-  while ((abs(self.angles[1] - goal)) > 3) {
+  while((abs(self.angles[1] - goal)) > 3) {
     self.angles = (self.angles[0], self.angles[1] + increment, self.angles[2]);
     wait(0.05);
   }
@@ -590,7 +590,7 @@ function flattenyaw(goal) {
 
 function flattenroll() {
   self endon("death");
-  while (self.angles[2] < 0) {
+  while(self.angles[2] < 0) {
     self.angles = (self.angles[0], self.angles[1], self.angles[2] + 2.5);
     wait(0.05);
   }
@@ -601,12 +601,12 @@ function leave(duration) {
   self thread stoprotation(1);
   tries = 10;
   yaw = 0;
-  while (tries > 0) {
-    exitvector = (anglestoforward(self.angles + (0, yaw, 0))) * 20000;
+  while(tries > 0) {
+    exitvector = (anglesToForward(self.angles + (0, yaw, 0))) * 20000;
     exitpoint = (self.origin[0] + exitvector[0], self.origin[1] + exitvector[1], self.origin[2] - 2500);
     exitpoint = self.origin + exitvector;
     nfz = crossesnoflyzone(self.origin, exitpoint);
-    if(isdefined(nfz)) {
+    if(isDefined(nfz)) {
       if(tries != 1) {
         if((tries % 2) == 1) {
           yaw = yaw * -1;
@@ -637,7 +637,7 @@ function getrandomhelicopterstartorigin() {
   dist = -1 * getdvarint("scr_supplydropIncomingDistance", 10000);
   pathrandomness = 100;
   direction = (0, randomintrange(-2, 3), 0);
-  start_origin = anglestoforward(direction) * dist;
+  start_origin = anglesToForward(direction) * dist;
   start_origin = start_origin + ((randomfloat(2) - 1) * pathrandomness, (randomfloat(2) - 1) * pathrandomness, 0);
   if(getdvarint("", 0)) {
     if(level.noflyzones.size) {
@@ -652,7 +652,7 @@ function getrandomhelicopterstartorigin() {
 }
 
 function debug_no_fly_zones() {
-  for (i = 0; i < level.noflyzones.size; i++) {
+  for(i = 0; i < level.noflyzones.size; i++) {
     debug_airsupport_cylinder(level.noflyzones[i].origin, level.noflyzones[i].radius, level.noflyzones[i].height, (1, 1, 1), undefined, 5000);
   }
 }
@@ -660,7 +660,7 @@ function debug_no_fly_zones() {
 function debug_plane_line(flytime, flyspeed, pathstart, pathend) {
   thread debug_line(pathstart, pathend, (1, 1, 1));
   delta = vectornormalize(pathend - pathstart);
-  for (i = 0; i < flytime; i++) {
+  for(i = 0; i < flytime; i++) {
     thread debug_star(pathstart + (vectorscale(delta, i * flyspeed)), (1, 0, 0));
   }
 }
@@ -677,15 +677,15 @@ function debug_draw_bomb_explosion(prevpos) {
 function debug_draw_bomb_path(projectile, color, time) {
   self endon("death");
   level.airsupport_debug = getdvarint("", 0);
-  if(!isdefined(color)) {
+  if(!isDefined(color)) {
     color = (0.5, 1, 0);
   }
-  if(isdefined(level.airsupport_debug) && level.airsupport_debug == 1) {
+  if(isDefined(level.airsupport_debug) && level.airsupport_debug == 1) {
     prevpos = self.origin;
-    while (isdefined(self.origin)) {
+    while(isDefined(self.origin)) {
       thread debug_line(prevpos, self.origin, color, time);
       prevpos = self.origin;
-      if(isdefined(projectile) && projectile) {
+      if(isDefined(projectile) && projectile) {
         thread debug_draw_bomb_explosion(prevpos);
       }
       wait(0.2);
@@ -695,8 +695,8 @@ function debug_draw_bomb_path(projectile, color, time) {
 
 function debug_print3d_simple(message, ent, offset, frames) {
   level.airsupport_debug = getdvarint("", 0);
-  if(isdefined(level.airsupport_debug) && level.airsupport_debug == 1) {
-    if(isdefined(frames)) {
+  if(isDefined(level.airsupport_debug) && level.airsupport_debug == 1) {
+    if(isDefined(frames)) {
       thread draw_text(message, vectorscale((1, 1, 1), 0.8), ent, offset, frames);
     } else {
       thread draw_text(message, vectorscale((1, 1, 1), 0.8), ent, offset, 0);
@@ -706,13 +706,13 @@ function debug_print3d_simple(message, ent, offset, frames) {
 
 function draw_text(msg, color, ent, offset, frames) {
   if(frames == 0) {
-    while (isdefined(ent) && isdefined(ent.origin)) {
+    while(isDefined(ent) && isDefined(ent.origin)) {
       print3d(ent.origin + offset, msg, color, 0.5, 4);
       wait(0.05);
     }
   } else {
-    for (i = 0; i < frames; i++) {
-      if(!isdefined(ent)) {
+    for(i = 0; i < frames; i++) {
+      if(!isDefined(ent)) {
         break;
       }
       print3d(ent.origin + offset, msg, color, 0.5, 4);
@@ -723,21 +723,21 @@ function draw_text(msg, color, ent, offset, frames) {
 
 function debug_print3d(message, color, ent, origin_offset, frames) {
   level.airsupport_debug = getdvarint("", 0);
-  if(isdefined(level.airsupport_debug) && level.airsupport_debug == 1) {
+  if(isDefined(level.airsupport_debug) && level.airsupport_debug == 1) {
     self thread draw_text(message, color, ent, origin_offset, frames);
   }
 }
 
 function debug_line(from, to, color, time, depthtest) {
   level.airsupport_debug = getdvarint("", 0);
-  if(isdefined(level.airsupport_debug) && level.airsupport_debug == 1) {
+  if(isDefined(level.airsupport_debug) && level.airsupport_debug == 1) {
     if(distancesquared(from, to) < 0.01) {
       return;
     }
-    if(!isdefined(time)) {
+    if(!isDefined(time)) {
       time = 1000;
     }
-    if(!isdefined(depthtest)) {
+    if(!isDefined(depthtest)) {
       depthtest = 1;
     }
     line(from, to, color, 1, depthtest, time);
@@ -746,11 +746,11 @@ function debug_line(from, to, color, time, depthtest) {
 
 function debug_star(origin, color, time) {
   level.airsupport_debug = getdvarint("", 0);
-  if(isdefined(level.airsupport_debug) && level.airsupport_debug == 1) {
-    if(!isdefined(time)) {
+  if(isDefined(level.airsupport_debug) && level.airsupport_debug == 1) {
+    if(!isDefined(time)) {
       time = 1000;
     }
-    if(!isdefined(color)) {
+    if(!isDefined(color)) {
       color = (1, 1, 1);
     }
     debugstar(origin, time, color);
@@ -759,11 +759,11 @@ function debug_star(origin, color, time) {
 
 function debug_circle(origin, radius, color, time) {
   level.airsupport_debug = getdvarint("", 0);
-  if(isdefined(level.airsupport_debug) && level.airsupport_debug == 1) {
-    if(!isdefined(time)) {
+  if(isDefined(level.airsupport_debug) && level.airsupport_debug == 1) {
+    if(!isDefined(time)) {
       time = 1000;
     }
-    if(!isdefined(color)) {
+    if(!isDefined(color)) {
       color = (1, 1, 1);
     }
     circle(origin, radius, color, 1, 1, time);
@@ -772,11 +772,11 @@ function debug_circle(origin, radius, color, time) {
 
 function debug_sphere(origin, radius, color, alpha, time) {
   level.airsupport_debug = getdvarint("", 0);
-  if(isdefined(level.airsupport_debug) && level.airsupport_debug == 1) {
-    if(!isdefined(time)) {
+  if(isDefined(level.airsupport_debug) && level.airsupport_debug == 1) {
+    if(!isDefined(time)) {
       time = 1000;
     }
-    if(!isdefined(color)) {
+    if(!isDefined(color)) {
       color = (1, 1, 1);
     }
     sides = int(10 * (1 + (int(radius / 100))));
@@ -786,25 +786,25 @@ function debug_sphere(origin, radius, color, alpha, time) {
 
 function debug_airsupport_cylinder(origin, radius, height, color, mustrenderheight, time) {
   level.airsupport_debug = getdvarint("", 0);
-  if(isdefined(level.airsupport_debug) && level.airsupport_debug == 1) {
+  if(isDefined(level.airsupport_debug) && level.airsupport_debug == 1) {
     debug_cylinder(origin, radius, height, color, mustrenderheight, time);
   }
 }
 
 function debug_cylinder(origin, radius, height, color, mustrenderheight, time) {
   subdivision = 600;
-  if(!isdefined(time)) {
+  if(!isDefined(time)) {
     time = 1000;
   }
-  if(!isdefined(color)) {
+  if(!isDefined(color)) {
     color = (1, 1, 1);
   }
   count = height / subdivision;
-  for (i = 0; i < count; i++) {
+  for(i = 0; i < count; i++) {
     point = origin + (0, 0, i * subdivision);
     circle(point, radius, color, 1, 1, time);
   }
-  if(isdefined(mustrenderheight)) {
+  if(isDefined(mustrenderheight)) {
     point = origin + (0, 0, mustrenderheight);
     circle(point, radius, color, 1, 1, time);
   }
@@ -816,8 +816,8 @@ function getpointonline(startpoint, endpoint, ratio) {
 }
 
 function cantargetplayerwithspecialty() {
-  if(self hasperk("specialty_nottargetedbyairsupport") || (isdefined(self.specialty_nottargetedbyairsupport) && self.specialty_nottargetedbyairsupport)) {
-    if(!isdefined(self.nottargettedai_underminspeedtimer) || self.nottargettedai_underminspeedtimer < getdvarint("perk_nottargetedbyai_graceperiod")) {
+  if(self hasperk("specialty_nottargetedbyairsupport") || (isDefined(self.specialty_nottargetedbyairsupport) && self.specialty_nottargetedbyairsupport)) {
+    if(!isDefined(self.nottargettedai_underminspeedtimer) || self.nottargettedai_underminspeedtimer < getdvarint("perk_nottargetedbyai_graceperiod")) {
       return false;
     }
   }
@@ -840,10 +840,10 @@ function monitorspeed(spawnprotectiontime) {
     return;
   }
   self.nottargettedai_underminspeedtimer = 0;
-  if(isdefined(spawnprotectiontime)) {
+  if(isDefined(spawnprotectiontime)) {
     wait(spawnprotectiontime);
   }
-  while (true) {
+  while(true) {
     velocity = self getvelocity();
     speedsq = lengthsquared(velocity);
     if(speedsq < minspeedsq) {
@@ -856,7 +856,7 @@ function monitorspeed(spawnprotectiontime) {
 }
 
 function clearmonitoredspeed() {
-  if(isdefined(self.nottargettedai_underminspeedtimer)) {
+  if(isDefined(self.nottargettedai_underminspeedtimer)) {
     self.nottargettedai_underminspeedtimer = 0;
   }
 }

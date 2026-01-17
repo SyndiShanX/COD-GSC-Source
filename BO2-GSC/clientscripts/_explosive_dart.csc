@@ -26,8 +26,8 @@ loop_local_sound(localclientnum, alias, interval, fx) {
   self endon("entityshutdown");
 
   while(true) {
-    self playsound(localclientnum, alias);
-    n_id = playfxontag(localclientnum, fx, self, self.fxtagname);
+    self playSound(localclientnum, alias);
+    n_id = playFXOnTag(localclientnum, fx, self, self.fxtagname);
     wait(interval);
     stopfx(localclientnum, n_id);
     interval = interval / 1.2;

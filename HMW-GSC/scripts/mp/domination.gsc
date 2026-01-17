@@ -10,7 +10,7 @@ updatescoreboarddom_stub() {
   level.halftimeonscorelimit = halfTime;
   maps\mp\_utility::registerhalftimedvar("dom", halfTime);
 
-  for (;;) {
+  for(;;) {
     level waittill("connected", player);
     player thread maps\mp\gametypes\dom::updatecaptures();
     player thread maps\mp\gametypes\dom::updatedefends();

@@ -19,7 +19,7 @@ corner_think(var_0, var_1) {
   self.corneraiming = 0;
   animscripts\track::setanimaimweight(0);
   self.havegonetocover = 0;
-  var_2 = spawnstruct();
+  var_2 = spawnStruct();
 
   if(!self.fixednode)
     var_2.movetonearbycover = animscripts\cover_behavior::movetonearbycover;
@@ -54,19 +54,19 @@ set_corner_anim_array() {
 }
 
 shouldchangestanceforfun() {
-  if(!isdefined(self.allowstancechangesforfun))
+  if(!isDefined(self.allowstancechangesforfun))
     return 0;
 
-  if(!isdefined(self.enemy))
+  if(!isDefined(self.enemy))
     return 0;
 
-  if(!isdefined(self.changestanceforfuntime))
+  if(!isDefined(self.changestanceforfuntime))
     self.changestanceforfuntime = gettime() + randomintrange(5000, 20000);
 
   if(gettime() > self.changestanceforfuntime) {
     self.changestanceforfuntime = gettime() + randomintrange(5000, 20000);
 
-    if(isdefined(self.rambochance) && self.a.pose == "stand")
+    if(isDefined(self.rambochance) && self.a.pose == "stand")
       return 0;
 
     self.a.prevattack = undefined;
@@ -83,7 +83,7 @@ mainloopstart() {
   if(self.a.pose == "crouch") {
     var_1 = "crouch";
 
-    if(isdefined(self.animarchetype) && self.animarchetype == "s1_soldier") {
+    if(isDefined(self.animarchetype) && self.animarchetype == "s1_soldier") {
       if(self.script == "cover_right")
         var_1 = "crouch_r";
       else if(self.script == "cover_left")
@@ -98,7 +98,7 @@ mainloopstart() {
     if(!self.covernode doesnodeallowstance("stand") || shouldchangestanceforfun()) {
       var_1 = "crouch";
 
-      if(isdefined(self.animarchetype) && self.animarchetype == "s1_soldier") {
+      if(isDefined(self.animarchetype) && self.animarchetype == "s1_soldier") {
         if(self.script == "cover_right")
           var_1 = "crouch_r";
         else if(self.script == "cover_left")
@@ -108,7 +108,7 @@ mainloopstart() {
   }
 
   if(self.havegonetocover) {
-    if(isdefined(self.animarchetype) && self.animarchetype == "s1_soldier") {
+    if(isDefined(self.animarchetype) && self.animarchetype == "s1_soldier") {
       if(var_1 == "crouch_l" || var_1 == "crouch_r")
         var_1 = "crouch";
     }
@@ -120,7 +120,7 @@ mainloopstart() {
     if(self.a.pose == var_1) {
       var_3 = 0.4;
 
-      if(isdefined(self.cover) && isdefined(self.cover.hidestate) && self.cover.hidestate == "back")
+      if(isDefined(self.cover) && isDefined(self.cover.hidestate) && self.cover.hidestate == "back")
         var_4 = animscripts\utility::animarray("alert_idle_back");
       else if(var_1 == "crouch" && shouldplayalerttransition(self)) {
         var_4 = animscripts\utility::animarray("AW_to_MW_alert_trans");
@@ -133,7 +133,7 @@ mainloopstart() {
 
       gotocover(var_4, 0.3, var_3);
     } else {
-      if(isdefined(self.animarchetype) && self.animarchetype == "s1_soldier") {
+      if(isDefined(self.animarchetype) && self.animarchetype == "s1_soldier") {
         if(var_1 == "crouch_l") {
           var_2 = animscripts\utility::lookupanim("combat", "trans_to_crouch_l");
           var_1 = "crouch";
@@ -143,7 +143,7 @@ mainloopstart() {
         }
       }
 
-      if(!isdefined(var_2))
+      if(!isDefined(var_2))
         var_2 = animscripts\utility::animarray("stance_change");
 
       gotocover(var_2, 0.3, getanimlength(var_2));
@@ -198,7 +198,7 @@ shouldplayalerttransition(var_0) {
 printyaws() {
   wait 2;
 
-  for (;;) {
+  for(;;) {
     printyawtoenemy();
     wait 0.05;
   }
@@ -220,7 +220,7 @@ canseepointfromexposedatcorner(var_0, var_1) {
 }
 
 shootposoutsidelegalyawrange() {
-  if(!isdefined(self.shootpos))
+  if(!isDefined(self.shootpos))
     return 0;
 
   var_0 = self.covernode animscripts\utility::getyawtoorigin(self.shootpos);
@@ -249,21 +249,21 @@ getcornermode(var_0, var_1) {
   var_2 = 0;
   var_3 = 0;
 
-  if(isdefined(var_1))
+  if(isDefined(var_1))
     var_3 = var_0 animscripts\utility::getyawtoorigin(var_1);
 
   var_4 = [];
 
-  if(isdefined(var_0) && self.a.pose == "crouch" && (var_3 > self.leftaimlimit && self.rightaimlimit > var_3))
+  if(isDefined(var_0) && self.a.pose == "crouch" && (var_3 > self.leftaimlimit && self.rightaimlimit > var_3))
     var_4 = var_0 getvalidcoverpeekouts();
 
   if(self.cornerdirection == "up") {
     if(animscripts\utility::isspaceai()) {
       var_5 = 0;
 
-      if(isdefined(var_1)) {
+      if(isDefined(var_1)) {
         var_6 = anglestoup(self.angles);
-        var_5 = animscripts\combat_utility::getpitchtoorgfromorg(var_1, self geteye() + (var_6[0] * 12, var_6[1] * 12, var_6[2] * 12));
+        var_5 = animscripts\combat_utility::getpitchtoorgfromorg(var_1, self getEye() + (var_6[0] * 12, var_6[1] * 12, var_6[2] * 12));
       }
 
       if(canlean(var_5, -5, 80)) {
@@ -314,7 +314,7 @@ getbeststepoutpos() {
 
   if(animscripts\utility::cansuppressenemy())
     var_0 = self.covernode animscripts\utility::getyawtoorigin(animscripts\utility::getenemysightpos());
-  else if(self.doingambush && isdefined(self.shootpos))
+  else if(self.doingambush && isDefined(self.shootpos))
     var_0 = self.covernode animscripts\utility::getyawtoorigin(self.shootpos);
 
   if(self.a.cornermode == "lean")
@@ -464,12 +464,12 @@ setaimingparams(var_0, var_1, var_2) {
   corner_playaimfacialanim(undefined);
   var_3 = undefined;
 
-  if(isdefined(self.a.array["lean_aim_straight"]))
+  if(isDefined(self.a.array["lean_aim_straight"]))
     var_3 = self.a.array["lean_aim_straight"];
 
   thread animscripts\combat_utility::aimidlethread();
 
-  if(isdefined(self.a.leanaim)) {
+  if(isDefined(self.a.leanaim)) {
     self setanimlimited(var_3, 1, var_2);
     self setanimlimited(animscripts\utility::animarray("straight_level"), 0, 0);
     self setanimknoblimited(animscripts\utility::animarray("lean_aim_left"), 1, var_2);
@@ -479,7 +479,7 @@ setaimingparams(var_0, var_1, var_2) {
   } else if(var_1) {
     self setanimlimited(animscripts\utility::animarray("straight_level"), 1, var_2);
 
-    if(isdefined(var_3))
+    if(isDefined(var_3))
       self setanimlimited(var_3, 0, 0);
 
     self setanimknoblimited(animscripts\utility::animarray("add_aim_up"), 1, var_2);
@@ -489,7 +489,7 @@ setaimingparams(var_0, var_1, var_2) {
   } else {
     self setanimlimited(animscripts\utility::animarray("straight_level"), 0, var_2);
 
-    if(isdefined(var_3))
+    if(isDefined(var_3))
       self setanimlimited(var_3, 0, 0);
 
     self setanimknoblimited(animscripts\utility::animarray("add_turn_aim_up"), 1, var_2);
@@ -509,7 +509,7 @@ stepoutandhidespeed() {
 stepout() {
   self.a.cornermode = "alert";
 
-  if(isdefined(self.disablestepout) && self.disablestepout)
+  if(isDefined(self.disablestepout) && self.disablestepout)
     return 0;
 
   setdefaultcorneranimmode();
@@ -529,7 +529,7 @@ stepout() {
   else
     var_1 = getcornermode(self.covernode);
 
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     return 0;
 
   var_2 = "alert_to_" + var_1;
@@ -600,7 +600,7 @@ stepout() {
 stepoutandshootenemy() {
   self.keepclaimednodeifvalid = 1;
 
-  if(isdefined(self.rambochance) && randomfloat(1) < self.rambochance) {
+  if(isDefined(self.rambochance) && randomfloat(1) < self.rambochance) {
     if(rambo())
       return 1;
   }
@@ -610,7 +610,7 @@ stepoutandshootenemy() {
 
   shootastold();
 
-  if(isdefined(self.shootpos)) {
+  if(isDefined(self.shootpos)) {
     var_0 = lengthsquared(self.origin - self.shootpos);
 
     if(animscripts\utility::usingrocketlauncher() && animscripts\utility::shoulddroprocketlauncher(var_0)) {
@@ -630,7 +630,7 @@ stepoutandshootenemy() {
 }
 
 haventramboedwithintime(var_0) {
-  if(!isdefined(self.lastrambotime))
+  if(!isDefined(self.lastrambotime))
     return 1;
 
   return gettime() - self.lastrambotime > var_0 * 1000;
@@ -689,17 +689,17 @@ rambo() {
 shootastold() {
   maps\_gameskill::didsomethingotherthanshooting();
 
-  for (;;) {
-    for (;;) {
-      if(isdefined(self.shouldreturntocover)) {
+  for(;;) {
+    for(;;) {
+      if(isDefined(self.shouldreturntocover)) {
         break;
       }
 
-      if(!isdefined(self.shootpos)) {
+      if(!isDefined(self.shootpos)) {
         self waittill("do_slow_things");
         waittillframeend;
 
-        if(isdefined(self.shootpos)) {
+        if(isDefined(self.shootpos)) {
           continue;
         }
         break;
@@ -773,7 +773,7 @@ anglerangethread() {
   self endon("newAngleRangeCheck");
   self endon("take_cover_at_corner");
 
-  for (;;) {
+  for(;;) {
     if(shootposoutsidelegalyawrange()) {
       break;
     }
@@ -789,7 +789,7 @@ showstate() {
   self endon("enemy");
   self endon("stopshowstate");
 
-  for (;;)
+  for(;;)
     wait 0.05;
 }
 
@@ -866,10 +866,10 @@ blindfire() {
 }
 
 linethread(var_0, var_1, var_2) {
-  if(!isdefined(var_2))
+  if(!isDefined(var_2))
     var_2 = (1, 1, 1);
 
-  for (var_3 = 0; var_3 < 100; var_3++)
+  for(var_3 = 0; var_3 < 100; var_3++)
     wait 0.05;
 }
 
@@ -884,7 +884,7 @@ trythrowinggrenade(var_0, var_1) {
   if(!self maymovetopoint(getpredictedpathmidpoint()))
     return 0;
 
-  if(isdefined(self.dontevershoot) || isdefined(var_0.dontattackme))
+  if(isDefined(self.dontevershoot) || isDefined(var_0.dontattackme))
     return 0;
 
   if(self.a.pose == "crouch" && shouldplayalerttransition(self))
@@ -892,19 +892,19 @@ trythrowinggrenade(var_0, var_1) {
 
   var_2 = undefined;
 
-  if(isdefined(self.rambochance) && randomfloat(1) < self.rambochance) {
-    if(isdefined(self.a.array["grenade_rambo"]))
+  if(isDefined(self.rambochance) && randomfloat(1) < self.rambochance) {
+    if(isDefined(self.a.array["grenade_rambo"]))
       var_2 = animscripts\utility::animarray("grenade_rambo");
   }
 
-  if(!isdefined(var_2)) {
-    if(isdefined(var_1) && var_1) {
-      if(!isdefined(self.a.array["grenade_safe"]))
+  if(!isDefined(var_2)) {
+    if(isDefined(var_1) && var_1) {
+      if(!isDefined(self.a.array["grenade_safe"]))
         return 0;
 
       var_2 = animscripts\utility::animarray("grenade_safe");
     } else {
-      if(!isdefined(self.a.array["grenade_exposed"]))
+      if(!isDefined(self.a.array["grenade_exposed"]))
         return 0;
 
       var_2 = animscripts\utility::animarray("grenade_exposed");
@@ -921,7 +921,7 @@ trythrowinggrenade(var_0, var_1) {
 printyawtoenemy() {}
 
 lookforenemy(var_0) {
-  if(!isdefined(self.a.array["alert_to_look"]))
+  if(!isDefined(self.a.array["alert_to_look"]))
     return 0;
 
   setdefaultcorneranimmode();
@@ -953,7 +953,7 @@ ispeekoutposclear() {
   if(animscripts\utility::isspaceai())
     var_0 = animscripts\utility::gettruenodeangles(self.covernode);
 
-  var_1 = self geteye();
+  var_1 = self getEye();
   var_2 = anglestoright(var_0);
   var_3 = anglestoup(var_0);
 
@@ -969,15 +969,15 @@ ispeekoutposclear() {
       return 0;
   }
 
-  var_4 = var_1 + anglestoforward(var_0) * 30;
+  var_4 = var_1 + anglesToForward(var_0) * 30;
   return sighttracepassed(var_1, var_4, 1, self);
 }
 
 peekout() {
-  if(isdefined(self.covernode.script_dontpeek))
+  if(isDefined(self.covernode.script_dontpeek))
     return 0;
 
-  if(isdefined(self.nextpeekoutattempttime) && gettime() < self.nextpeekoutattempttime)
+  if(isDefined(self.nextpeekoutattempttime) && gettime() < self.nextpeekoutattempttime)
     return 0;
 
   if(!ispeekoutposclear()) {
@@ -1047,7 +1047,7 @@ getpredictedpathmidpoint(var_0) {
   var_1 = self.covernode.angles;
   var_2 = anglestoright(var_1);
 
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     var_0 = 36;
 
   var_3 = self.script;
@@ -1090,9 +1090,9 @@ behaviorstransitiontocorrectpose() {
 idle() {
   self endon("end_idle");
 
-  for (;;) {
+  for(;;) {
     behaviorstransitiontocorrectpose();
-    var_0 = randomint(2) == 0 && isdefined(self.a.array["alert_idle_twitch"]) && animscripts\utility::animarrayanyexist("alert_idle_twitch");
+    var_0 = randomint(2) == 0 && isDefined(self.a.array["alert_idle_twitch"]) && animscripts\utility::animarrayanyexist("alert_idle_twitch");
 
     if(var_0)
       var_1 = animscripts\utility::animarraypickrandom("alert_idle_twitch");
@@ -1156,14 +1156,14 @@ gotocover(var_0, var_1, var_2) {
 
   self animmode("normal");
 
-  if(isdefined(var_4))
+  if(isDefined(var_4))
     thread animscripts\shared::movetonodeovertime(var_4, var_1);
 
   self setflaggedanimknoballrestart("coveranim", var_0, % body, 1, var_1);
   corner_playcornerfacialanim(var_0);
   animscripts\notetracks::donotetracksfortime(var_2, "coveranim");
 
-  while (animscripts\utility::absangleclamp180(self.angles[1] - var_5) > 1) {
+  while(animscripts\utility::absangleclamp180(self.angles[1] - var_5) > 1) {
     animscripts\notetracks::donotetracksfortime(0.1, "coveranim");
     var_3 = animscripts\utility::getnodedirection();
     var_5 = var_3 + self.hideyawoffset;
@@ -1182,17 +1182,17 @@ gotocover(var_0, var_1, var_2) {
 drawoffset() {
   self endon("killanimscript");
 
-  for (;;)
+  for(;;)
     wait 0.05;
 }
 
 set_standing_animarray_aiming() {
-  if(self.swimmer && isdefined(self.node)) {
+  if(self.swimmer && isDefined(self.node)) {
     set_swimming_animarray_aiming();
     return;
   }
 
-  if(!isdefined(self.a.array)) {}
+  if(!isDefined(self.a.array)) {}
 
   var_0 = animscripts\utility::lookupanimarray("default_stand");
   self.a.array["add_aim_up"] = var_0["add_aim_up"];
@@ -1242,12 +1242,12 @@ set_standing_animarray_aiming() {
 }
 
 set_crouching_animarray_aiming() {
-  if(self.swimmer && isdefined(self.node)) {
+  if(self.swimmer && isDefined(self.node)) {
     set_swimming_animarray_aiming();
     return;
   }
 
-  if(!isdefined(self.a.array)) {}
+  if(!isDefined(self.a.array)) {}
 
   var_0 = animscripts\utility::lookupanimarray("default_crouch");
   var_1["add_aim_up"] = animscripts\utility::lookupanim("cover_crouch", "add_aim_up");
@@ -1310,7 +1310,7 @@ set_crouching_animarray_aiming() {
 }
 
 set_swimming_animarray_aiming() {
-  if(!isdefined(self.a.array)) {}
+  if(!isDefined(self.a.array)) {}
 
   var_0 = [];
 

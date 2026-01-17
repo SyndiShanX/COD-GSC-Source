@@ -130,7 +130,7 @@ staff_air_position_source(v_detonate, str_weapon) {
   flag_set("whirlwind_active");
   n_time = self.chargeshotlevel * 3.5;
   e_whirlwind = spawn("script_model", v_detonate + vectorscale((0, 0, 1), 100.0));
-  e_whirlwind setmodel("tag_origin");
+  e_whirlwind setModel("tag_origin");
   e_whirlwind.angles = vectorscale((-1, 0, 0), 90.0);
   e_whirlwind thread puzzle_debug_position("X", vectorscale((1, 1, 0), 255.0));
   e_whirlwind moveto(groundpos_ignore_water_new(e_whirlwind.origin), 0.05);
@@ -369,9 +369,7 @@ staff_air_fling_zombie(player) {
 zombie_launch(e_attacker, str_weapon) {
   self do_damage_network_safe(e_attacker, self.health, str_weapon, "MOD_IMPACT");
 
-  if(isDefined(level.ragdoll_limit_check) && ![
-      [level.ragdoll_limit_check]
-    ]())
+  if(isDefined(level.ragdoll_limit_check) && ![[level.ragdoll_limit_check]]())
     level thread staff_air_gib(self);
   else {
     self startragdoll();

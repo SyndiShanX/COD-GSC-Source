@@ -39,7 +39,7 @@ init() {
 
   sq_buried_register_visionset();
   register_map_navcard("navcard_held_zm_buried", "navcard_held_zm_highrise");
-  ss_buttons = getentarray("sq_ss_button", "targetname");
+  ss_buttons = getEntArray("sq_ss_button", "targetname");
 
   for(i = 0; i < ss_buttons.size; i++) {
     ss_buttons[i] usetriggerrequirelookat();
@@ -109,8 +109,7 @@ precache_sq() {
   precachevehicle("heli_quadrotor2_zm");
 }
 
-sq_prestart_hide() {
-}
+sq_prestart_hide() {}
 
 sq_buried_clientfield_init() {
   registerclientfield("actor", "buried_sq_maxis_ending_update_eyeball_color", 12000, 1, "int");
@@ -160,7 +159,7 @@ sq_buried_register_visionset() {
 sq_easy_cleanup() {
   computer_buildable_trig = getent("sq_common_buildable_trigger", "targetname");
   computer_buildable_trig delete();
-  sq_buildables = getentarray("buildable_sq_common", "targetname");
+  sq_buildables = getEntArray("buildable_sq_common", "targetname");
 
   foreach(item in sq_buildables)
   item delete();
@@ -170,7 +169,7 @@ sq_easy_cleanup() {
   if(isDefined(t_generator))
     t_generator delete();
 
-  gallow_col = getentarray("gallow_col", "targetname");
+  gallow_col = getEntArray("gallow_col", "targetname");
 
   foreach(collmap in gallow_col) {
     collmap connectpaths();
@@ -279,7 +278,7 @@ sq_spawn_model_at_struct(str_struct, str_model) {
 
   m_prop = spawn("script_model", s_struct.origin);
   m_prop.angles = s_struct.angles;
-  m_prop setmodel(str_model);
+  m_prop setModel(str_model);
   m_prop.targetname = str_struct;
   return m_prop;
 }
@@ -369,7 +368,7 @@ playfx_on_tower(str_fx, delete_old) {
   if(!isDefined(delete_old))
     delete_old = 0;
 
-  a_fx_spots = getentarray("sq_complete_tower_fx", "targetname");
+  a_fx_spots = getEntArray("sq_complete_tower_fx", "targetname");
 
   if(delete_old) {
     foreach(m_fx_spot in a_fx_spots)
@@ -379,13 +378,13 @@ playfx_on_tower(str_fx, delete_old) {
   s_spot = getstruct("sq_end_smoke", "targetname");
   m_fx_spot = spawn("script_model", s_spot.origin);
   m_fx_spot.angles = s_spot.angles;
-  m_fx_spot setmodel("tag_origin");
+  m_fx_spot setModel("tag_origin");
   m_fx_spot.targetname = "sq_complete_tower_fx";
 
   if(delete_old)
-    playfx(level._effect[str_fx], s_spot.origin, anglestoforward(s_spot.angles));
+    playFX(level._effect[str_fx], s_spot.origin, anglesToForward(s_spot.angles));
   else
-    playfxontag(level._effect[str_fx], m_fx_spot, "tag_origin");
+    playFXOnTag(level._effect[str_fx], m_fx_spot, "tag_origin");
 }
 
 snddelayedsidequest8() {
@@ -400,7 +399,7 @@ sq_give_player_rewards() {
 }
 
 sq_give_player_all_perks() {
-  machines = getentarray("zombie_vending", "targetname");
+  machines = getEntArray("zombie_vending", "targetname");
   perks = [];
 
   for(i = 0; i < machines.size; i++) {
@@ -451,10 +450,10 @@ sq_assign_signs() {
     m_sign.angles = s_sign.angles;
     m_sign.target = s_sign.target;
     m_sign.targetname = "sq_tunnel_sign";
-    m_sign setmodel(s_sign.model);
+    m_sign setModel(s_sign.model);
   }
 
-  a_signs = getentarray("sq_tunnel_sign", "targetname");
+  a_signs = getEntArray("sq_tunnel_sign", "targetname");
   a_sign_keys = array_randomize(getarraykeys(a_signs));
   a_max_signs = array(a_signs[a_sign_keys[0]], a_signs[a_sign_keys[1]], a_signs[a_sign_keys[2]]);
   a_ric_signs = array(a_signs[a_sign_keys[3]], a_signs[a_sign_keys[4]], a_max_signs[0]);
@@ -474,8 +473,7 @@ complete_sidequest() {
   level thread sidequest_done();
 }
 
-sidequest_done() {
-}
+sidequest_done() {}
 
 init_navcard() {
   flag_wait("start_zombie_round_logic");
@@ -570,7 +568,7 @@ navcomputer_waitfor_navcard() {
     if(isplayer(who) && is_player_valid(who)) {
       if(does_player_have_correct_navcard(who)) {
         navcomputer_use_trig sethintstring(&"ZOMBIE_NAVCARD_SUCCESS");
-        who playsound("zmb_sq_navcard_success");
+        who playSound("zmb_sq_navcard_success");
         update_sidequest_stats("navcard_applied_zm_buried");
         who.navcard_grabbed = undefined;
         wait 1;
@@ -579,7 +577,7 @@ navcomputer_waitfor_navcard() {
         return;
       } else {
         navcomputer_use_trig sethintstring(&"ZOMBIE_NAVCARD_FAIL");
-        who playsound("zmb_sq_navcard_fail");
+        who playSound("zmb_sq_navcard_fail");
         wait 1;
         navcomputer_use_trig sethintstring(&"ZOMBIE_NAVCARD_USE");
       }
@@ -688,7 +686,7 @@ richtofensay(vox_line, time, play_in_3d) {
   }
 
   if(isDefined(play_in_3d) && play_in_3d)
-    level.rich_sq_player playsound(vox_line);
+    level.rich_sq_player playSound(vox_line);
   else
     level.rich_sq_player playsoundtoplayer(vox_line, level.rich_sq_player);
 
@@ -713,7 +711,7 @@ maxissay(vox_line, m_spot_override, b_wait_for_nearby_speakers) {
   if(!isDefined(level.m_maxis_vo_spot)) {
     s_spot = getstruct("maxis_vo_spot", "targetname");
     level.m_maxis_vo_spot = spawn("script_model", s_spot.origin);
-    level.m_maxis_vo_spot setmodel("tag_origin");
+    level.m_maxis_vo_spot setModel("tag_origin");
   }
 
   if(isDefined(level.maxcompleted) && level.maxcompleted && !(isDefined(level.metagame_sq_complete) && level.metagame_sq_complete)) {
@@ -1197,8 +1195,7 @@ vo_stuhlingerpossessed() {
   while(true) {
     wait(randomintrange(120, 480));
 
-    for(nvo = randomintrange(1, 8); noldvo == nvo; nvo = randomintrange(1, 8)) {
-    }
+    for(nvo = randomintrange(1, 8); noldvo == nvo; nvo = randomintrange(1, 8)) {}
 
     noldvo = nvo;
 
@@ -1319,7 +1316,7 @@ sq_maxis_ending_spawn_func() {
 
 can_spawn_richtofen_zombie() {
   if(!isDefined(level.sq_richtofen_zombie)) {
-    level.sq_richtofen_zombie = spawnstruct();
+    level.sq_richtofen_zombie = spawnStruct();
     level.sq_richtofen_zombie.spawned = 0;
     level.sq_richtofen_zombie.last_killed_time = 0;
   }
@@ -1372,7 +1369,7 @@ richtofen_zombie_vo_watcher() {
   }
 
   str_vox = randomint(level._sq_m_possessed_zombie_vo.size);
-  self playsound(level._sq_m_possessed_zombie_vo[str_vox]);
+  self playSound(level._sq_m_possessed_zombie_vo[str_vox]);
 }
 
 richtofen_zombie_watch_death() {

@@ -65,7 +65,7 @@ exploderfx(num, fxId, fxPos, waittime, fxPos2, fireFx, fireFxDelay, fireFxSound,
   fx.script_delay_min = (delay_min);
   fx.script_delay_max = (delay_max);
   fx.script_exploder_group = exploder_group;
-  forward = anglestoforward(fx.angles);
+  forward = anglesToForward(fx.angles);
   forward = vectorScale(forward, 150);
   fx.targetPos = fxPos + forward;
   if(!isDefined(level._script_exploders))
@@ -122,7 +122,7 @@ loopfxthread() {
   maps\_spawner::waitframe();
   if(isDefined(self.fxStart))
     level waittill("start fx" + self.fxStart);
-  while (1) {
+  while(1) {
     create_looper();
     if(isDefined(self.timeout))
       thread loopfxStop(self.timeout);
@@ -146,7 +146,7 @@ loopfxChangeID(ent) {
 
 loopfxChangeOrg(ent) {
   self endon("death");
-  for (;;) {
+  for(;;) {
     ent waittill("effect org changed", change);
     self.origin = change;
   }
@@ -208,9 +208,9 @@ gunfireloopfxthread(fxId, fxPos, shotsMin, shotsMax, shotdelayMin, shotdelayMax,
   shotsBase = shotsMin;
   shotsRange = shotsMax - shotsMin;
   fxEnt = spawnFx_wrapper(fxId, fxPos);
-  for (;;) {
+  for(;;) {
     shotnum = shotsBase + randomint(shotsRange);
-    for (i = 0; i < shotnum; i++) {
+    for(i = 0; i < shotnum; i++) {
       triggerFx(fxEnt);
       wait(shotdelayBase + randomfloat(shotdelayRange));
     }
@@ -248,9 +248,9 @@ gunfireloopfxVecthread(fxId, fxPos, fxPos2, shotsMin, shotsMax, shotdelayMin, sh
   shotsRange = shotsMax - shotsMin;
   fxPos2 = vectornormalize(fxPos2 - fxPos);
   fxEnt = spawnFx_wrapper(fxId, fxPos, fxPos2);
-  for (;;) {
+  for(;;) {
     shotnum = shotsBase + randomint(shotsRange);
-    for (i = 0; i < int(shotnum / level.fxfireloopmod); i++) {
+    for(i = 0; i < int(shotnum / level.fxfireloopmod); i++) {
       triggerFx(fxEnt);
       delay = ((shotdelayBase + randomfloat(shotdelayRange)) * level.fxfireloopmod);
       if(delay < .05)
@@ -306,8 +306,8 @@ burnville_paratrooper_hack() {
 }
 
 burnville_paratrooper_hack_loop(normal, origin, id) {
-  while (1) {
-    playfx(id, origin);
+  while(1) {
+    playFX(id, origin);
     wait(30 + randomfloat(40));
   }
 }
@@ -330,32 +330,32 @@ script_print_fx() {
     println("maps\_fx::LoopSound(\"" + self.script_fxid + "\", " + self.origin + ", " + self.script_delay + ", " + org + ");");
 }
 
-script_playfx(id, pos, pos2) {
+script_playFX(id, pos, pos2) {
   if(!id) {
     return;
   }
   if(isDefined(pos2))
-    playfx(id, pos, pos2);
+    playFX(id, pos, pos2);
   else
-    playfx(id, pos);
+    playFX(id, pos);
 }
 
-script_playfxontag(id, ent, tag) {
+script_playFXOnTag(id, ent, tag) {
   if(!id) {
     return;
   }
-  playfxontag(id, ent, tag);
+  playFXOnTag(id, ent, tag);
 }
 
 GrenadeExplosionfx(pos) {
-  playfx(level._effect["mechanical explosion"], pos);
+  playFX(level._effect["mechanical explosion"], pos);
   earthquake(0.15, 0.5, pos, 250);
 }
 
 soundfx(fxId, fxPos, endonNotify) {
   org = spawn("script_origin", (0, 0, 0));
   org.origin = fxPos;
-  org playloopsound(fxId);
+  org playLoopSound(fxId);
   if(isDefined(endonNotify))
     org thread soundfxDelete(endonNotify);
 }
@@ -383,7 +383,7 @@ rainLoop(hardRain, lightRain) {
   blend2 setSoundBlend(hardRain + "_null", hardRain, 1);
   rain = "hard";
   blendTime = undefined;
-  for (;;) {
+  for(;;) {
     level waittill("rain_change", change, blendTime);
     blendTime *= 20;
     assert(change == "hard" || change == "light" || change == "none");
@@ -391,14 +391,14 @@ rainLoop(hardRain, lightRain) {
     if(change == "hard") {
       if(rain == "none") {
         blendTime *= 0.5;
-        for (i = 0; i < blendtime; i++) {
+        for(i = 0; i < blendtime; i++) {
           blend setSoundBlend(lightRain + "_null", lightRain, i / blendtime);
           wait(0.05);
         }
         rain = "light";
       }
       if(rain == "light") {
-        for (i = 0; i < blendtime; i++) {
+        for(i = 0; i < blendtime; i++) {
           blend setSoundBlend(lightRain + "_null", lightRain, 1 - (i / blendtime));
           blend2 setSoundBlend(hardRain + "_null", hardRain, i / blendtime);
           wait(0.05);
@@ -408,7 +408,7 @@ rainLoop(hardRain, lightRain) {
     if(change == "none") {
       if(rain == "hard") {
         blendTime *= 0.5;
-        for (i = 0; i < blendtime; i++) {
+        for(i = 0; i < blendtime; i++) {
           blend setSoundBlend(lightRain + "_null", lightRain, (i / blendtime));
           blend2 setSoundBlend(hardRain + "_null", hardRain, 1 - (i / blendtime));
           wait(0.05);
@@ -416,7 +416,7 @@ rainLoop(hardRain, lightRain) {
         rain = "light";
       }
       if(rain == "light") {
-        for (i = 0; i < blendtime; i++) {
+        for(i = 0; i < blendtime; i++) {
           blend setSoundBlend(lightRain + "_null", lightRain, 1 - (i / blendtime));
           wait(0.05);
         }
@@ -424,13 +424,13 @@ rainLoop(hardRain, lightRain) {
     }
     if(change == "light") {
       if(rain == "none") {
-        for (i = 0; i < blendtime; i++) {
+        for(i = 0; i < blendtime; i++) {
           blend setSoundBlend(lightRain + "_null", lightRain, i / blendtime);
           wait(0.05);
         }
       }
       if(rain == "hard") {
-        for (i = 0; i < blendtime; i++) {
+        for(i = 0; i < blendtime; i++) {
           blend setSoundBlend(lightRain + "_null", lightRain, i / blendtime);
           blend2 setSoundBlend(hardRain + "_null", hardRain, 1 - (i / blendtime));
           wait(0.05);

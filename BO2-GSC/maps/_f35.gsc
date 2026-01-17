@@ -38,8 +38,8 @@ set_deathmodel(v_point, v_dir) {
 
   if(isDefined(self.deathmodel)) {
     str_deathmodel = self.deathmodel;
-    self setmodel(str_deathmodel);
-    self playsound("evt_f35_explo");
+    self setModel(str_deathmodel);
+    self playSound("evt_f35_explo");
     playsoundatposition("evt_debris_flythrough", self.origin);
   }
 
@@ -53,7 +53,7 @@ set_deathmodel(v_point, v_dir) {
     assert(b_is_model_in_memory, str_model + " xmodel is not loaded in memory. Include vehicle_f35 in your level CSV!");
     deathmodel_pieces[i] = spawn("script_model", self gettagorigin(str_model_tag));
     deathmodel_pieces[i].angles = self gettagangles(str_model_tag);
-    deathmodel_pieces[i] setmodel(str_model);
+    deathmodel_pieces[i] setModel(str_model);
     deathmodel_pieces[i] linkto(self, str_model_tag);
   }
 

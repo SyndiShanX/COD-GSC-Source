@@ -29,11 +29,11 @@ main() {
   maps\mp\_compass::setupminimap("compass_map_mp_drone");
   maps\mp\_load::main();
   maps\mp\mp_drone_amb::main();
-  game["strings"]["war_callsign_a"] = & "MPUI_CALLSIGN_MAPNAME_A";
-  game["strings"]["war_callsign_b"] = & "MPUI_CALLSIGN_MAPNAME_B";
-  game["strings"]["war_callsign_c"] = & "MPUI_CALLSIGN_MAPNAME_C";
-  game["strings"]["war_callsign_d"] = & "MPUI_CALLSIGN_MAPNAME_D";
-  game["strings"]["war_callsign_e"] = & "MPUI_CALLSIGN_MAPNAME_E";
+  game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_MAPNAME_A";
+  game["strings"]["war_callsign_b"] = &"MPUI_CALLSIGN_MAPNAME_B";
+  game["strings"]["war_callsign_c"] = &"MPUI_CALLSIGN_MAPNAME_C";
+  game["strings"]["war_callsign_d"] = &"MPUI_CALLSIGN_MAPNAME_D";
+  game["strings"]["war_callsign_e"] = &"MPUI_CALLSIGN_MAPNAME_E";
   game["strings_menu"]["war_callsign_a"] = "@MPUI_CALLSIGN_MAPNAME_A";
   game["strings_menu"]["war_callsign_b"] = "@MPUI_CALLSIGN_MAPNAME_B";
   game["strings_menu"]["war_callsign_c"] = "@MPUI_CALLSIGN_MAPNAME_C";
@@ -79,7 +79,7 @@ main() {
 
   foreach(welder in welders) {
     collision = spawn("script_model", welder);
-    collision setmodel("fxanim_gp_robot_arm_welder_server_side_mod");
+    collision setModel("fxanim_gp_robot_arm_welder_server_side_mod");
   }
 }
 
@@ -94,7 +94,7 @@ geo_changes() {
   if(isDefined(rts_floor))
     rts_floor delete();
 
-  removes = getentarray("rts_only", "targetname");
+  removes = getEntArray("rts_only", "targetname");
 
   foreach(removal in removes)
   removal delete();

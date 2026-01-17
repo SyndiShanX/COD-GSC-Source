@@ -45,10 +45,10 @@ airlock_fx_init() {
 
 airlock_fx(localClientNum) {
   level waittill("power_on");
-  airlock_fx = GetEntArray(localClientNum, "airlock_jambs_fx", "targetname");
+  airlock_fx = getEntArray(localClientNum, "airlock_jambs_fx", "targetname");
   for(i = 0; i < airlock_fx.size; i++) {
-    forwardVec = VectorNormalize(AnglesToForward(airlock_fx[i].angles));
-    PlayFX(localClientNum, level._effect["airlock_fx"], airlock_fx[i].origin, forwardVec);
+    forwardVec = VectorNormalize(anglesToForward(airlock_fx[i].angles));
+    playFX(localClientNum, level._effect["airlock_fx"], airlock_fx[i].origin, forwardVec);
   }
 }
 
@@ -162,7 +162,7 @@ breach_labs_upper_fx() {
 
 electric_trap_fx(name, side, trap_type) {
   ang = self.angles;
-  forward = anglestoforward(ang);
+  forward = anglesToForward(ang);
   up = anglestoup(ang);
   if(isDefined(self.loopFX)) {
     for(i = 0; i < self.loopFX.size; i++) {
@@ -194,15 +194,15 @@ electric_trap_fx(name, side, trap_type) {
 }
 
 moon_fog_triggers_init(localClientNum) {
-  exterior_array = GetEntArray(localClientNum, "zombie_moonExterior", "targetname");
+  exterior_array = getEntArray(localClientNum, "zombie_moonExterior", "targetname");
   array_thread(exterior_array, ::fog_trigger, ::moon_exterior_fog_change);
-  moon_interior_array = GetEntArray(localClientNum, "zombie_moonInterior", "targetname");
+  moon_interior_array = getEntArray(localClientNum, "zombie_moonInterior", "targetname");
   array_thread(moon_interior_array, ::fog_trigger, ::moon_interior_fog_change);
-  moon_biodome_array = GetEntArray(localClientNum, "zombie_moonBiodome", "targetname");
+  moon_biodome_array = getEntArray(localClientNum, "zombie_moonBiodome", "targetname");
   array_thread(moon_biodome_array, ::fog_trigger, ::moon_biodome_fog_change);
-  moon_biodome_array = GetEntArray(localClientNum, "zombie_moonTunnels", "targetname");
+  moon_biodome_array = getEntArray(localClientNum, "zombie_moonTunnels", "targetname");
   array_thread(moon_biodome_array, ::fog_trigger, ::moon_tunnels_fog_change);
-  nml_array = GetEntArray(localClientNum, "zombie_nmlVision", "targetname");
+  nml_array = getEntArray(localClientNum, "zombie_nmlVision", "targetname");
   if(isDefined(nml_array) && nml_array.size > 0) {
     array_thread(nml_array, ::fog_trigger, ::moon_nml_fog_change);
   }

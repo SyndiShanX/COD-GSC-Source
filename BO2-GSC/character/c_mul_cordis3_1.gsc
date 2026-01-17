@@ -4,7 +4,7 @@
 *****************************************/
 
 main() {
-  self setmodel("c_mul_cordis_body3_1");
+  self setModel("c_mul_cordis_body3_1");
   self.voice = "terrorist";
   self.skeleton = "base";
   self.torsodmg1 = "c_mul_cordis_body3_1_g_upclean";

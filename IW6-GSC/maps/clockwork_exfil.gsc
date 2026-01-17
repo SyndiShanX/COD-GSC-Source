@@ -941,7 +941,7 @@ chaos_kill_player() {
   common_scripts\utility::flag_wait("chaos_kill_player");
   common_scripts\utility::flag_set("exfil_fire_fail");
   wait 3;
-  setdvar("ui_deadquote", & "CLOCKWORK_QUOTE_FOLLOW");
+  setdvar("ui_deadquote", &"CLOCKWORK_QUOTE_FOLLOW");
   maps\_utility::missionfailedwrapper();
 }
 
@@ -2261,7 +2261,7 @@ in_to_jeep() {
     level.allies[0] maps\clockwork_code::char_dialog_add_and_go("clockwork_bkr_exitingthebase");
     maps\clockwork_code::radio_dialog_add_and_go("clockwork_diz_meetonexfil");
     level.allies[0] maps\clockwork_code::char_dialog_add_and_go("clockwork_bkr_exfilin2mins");
-    thread maps\clockwork_code::clockwork_timer(95, & "CLOCKWORK_EXFIL", 1);
+    thread maps\clockwork_code::clockwork_timer(95, &"CLOCKWORK_EXFIL", 1);
   }
 
   common_scripts\utility::flag_wait("exfil_door_close_start");
@@ -2395,7 +2395,7 @@ skip_to_end(var_0, var_1, var_2, var_3, var_4) {
   wait 3;
 
   if(!common_scripts\utility::flag("ally_start_path_exfil")) {
-    setdvar("ui_deadquote", & "CLOCKWORK_QUOTE_COMPROMISE");
+    setdvar("ui_deadquote", &"CLOCKWORK_QUOTE_COMPROMISE");
     maps\_utility::missionfailedwrapper();
   }
 }
@@ -2598,7 +2598,7 @@ handle_sneak_vo() {
   level.allies[0] maps\clockwork_code::char_dialog_add_and_go("clockwork_bkr_exitingthebase");
   maps\clockwork_code::radio_dialog_add_and_go("clockwork_diz_meetonexfil");
   level.allies[0] maps\clockwork_code::char_dialog_add_and_go("clockwork_bkr_exfilin2mins");
-  thread maps\clockwork_code::clockwork_timer(125, & "CLOCKWORK_EXFIL", 1);
+  thread maps\clockwork_code::clockwork_timer(125, &"CLOCKWORK_EXFIL", 1);
   common_scripts\utility::flag_wait("exfil_door_close_start");
   wait 2;
   thread handle_enemies_get_out_of_car();
@@ -2715,7 +2715,7 @@ getinturret() {
   thread maps\clockwork_audio::exfil_get_on_turret();
   maps\_utility::objective_complete(maps\_utility::obj("exitfac"));
   var_0 = maps\_utility::obj("exfil");
-  objective_add(var_0, "active", & "CLOCKWORK_EXTRACTION");
+  objective_add(var_0, "active", &"CLOCKWORK_EXTRACTION");
   objective_current(var_0);
   maps\clockwork_code::radio_dialog_add_and_go("clockwork_bkr_getturret");
   level.allies[0] maps\_utility::clear_generic_idle_anim();

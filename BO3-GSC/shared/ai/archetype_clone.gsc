@@ -30,8 +30,8 @@
 
 function autoexec init() {
   initthrasherbehaviorsandasm();
-  spawner::add_archetype_spawn_function("human_clone", & archetypecloneblackboardinit);
-  spawner::add_archetype_spawn_function("human_clone", & clonespawnsetup);
+  spawner::add_archetype_spawn_function("human_clone", &archetypecloneblackboardinit);
+  spawner::add_archetype_spawn_function("human_clone", &clonespawnsetup);
 }
 
 function private initthrasherbehaviorsandasm() {}
@@ -41,7 +41,7 @@ function private archetypecloneblackboardinit() {
   blackboard::createblackboardforentity(entity);
   entity aiutility::registerutilityblackboardattributes();
   ai::createinterfaceforentity(entity);
-  entity.___archetypeonanimscriptedcallback = & archetypecloneonanimscriptedcallback;
+  entity.___archetypeonanimscriptedcallback = &archetypecloneonanimscriptedcallback;
   entity finalizetrackedblackboardattributes();
 }
 
@@ -53,8 +53,8 @@ function private archetypecloneonanimscriptedcallback(entity) {
 function private perfectinfothread() {
   entity = self;
   entity endon("death");
-  while (true) {
-    if(isdefined(entity.enemy)) {
+  while(true) {
+    if(isDefined(entity.enemy)) {
       entity getperfectinfo(entity.enemy, 1);
     }
     wait(0.05);
@@ -82,18 +82,18 @@ function cloneplayerlook(clone, cloneplayer, targetplayer) {
   clone setentityowner(cloneplayer);
   clone detachall();
   bodymodel = cloneplayer getcharacterbodymodel();
-  if(isdefined(bodymodel)) {
-    clone setmodel(bodymodel);
+  if(isDefined(bodymodel)) {
+    clone setModel(bodymodel);
   }
   headmodel = cloneplayer getcharacterheadmodel();
-  if(isdefined(headmodel) && headmodel != "tag_origin") {
-    if(isdefined(clone.head)) {
+  if(isDefined(headmodel) && headmodel != "tag_origin") {
+    if(isDefined(clone.head)) {
       clone detach(clone.head);
     }
     clone attach(headmodel);
   }
   helmetmodel = cloneplayer getcharacterhelmetmodel();
-  if(isdefined(helmetmodel) && headmodel != "tag_origin") {
+  if(isDefined(helmetmodel) && headmodel != "tag_origin") {
     clone attach(helmetmodel);
   }
 }

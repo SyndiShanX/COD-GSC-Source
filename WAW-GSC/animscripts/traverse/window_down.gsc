@@ -25,13 +25,13 @@ main() {
   thread animscripts\shared::DoNoteTracksForever("traverse", "stop_traverse_notetracks");
   wait 1.5;
   angles = (0, startnode.angles[1], 0);
-  forward = anglestoforward(angles);
+  forward = anglesToForward(angles);
   forward = vector_multiply(forward, 85);
-  trace = bullettrace(startnode.origin + forward, startnode.origin + forward + (0, 0, -500), false, undefined);
+  trace = bulletTrace(startnode.origin + forward, startnode.origin + forward + (0, 0, -500), false, undefined);
   endheight = trace["position"][2];
   finaldif = startnode.origin[2] - endheight;
   heightChange = 0;
-  for (i = 0; i < level.window_down_height.size; i++) {
+  for(i = 0; i < level.window_down_height.size; i++) {
     if(finaldif < level.window_down_height[i])
       continue;
     heightChange = finaldif - level.window_down_height[i];
@@ -41,7 +41,7 @@ main() {
   oldheight = self.origin[2];
   change = 0;
   level.traverseFall = [];
-  for (;;) {
+  for(;;) {
     change = oldheight - self.origin[2];
     if(self.origin[2] - change < endheight) {
       break;
@@ -50,7 +50,7 @@ main() {
     wait(0.05);
   }
   if(isDefined(self.groundtype))
-    self playsound("Land_" + self.groundtype);
+    self playSound("Land_" + self.groundtype);
   self notify("stop_traverse_notetracks");
   self setFlaggedAnimKnoballRestart("traverse", landAnim, % body, 1, 0.15, 1);
   self traverseMode("gravity");
@@ -64,14 +64,14 @@ main() {
 printer(org) {
   level notify("print_this_" + org);
   level endon("print_this_" + org);
-  for (;;) {
+  for(;;) {
     print3d(org, ".", (1, 1, 1), 5);
     wait(0.05);
   }
 }
 
 showline(start, end) {
-  for (;;) {
+  for(;;) {
     line(start, end + (-1, -1, -1), (1, 0, 0));
     wait(0.05);
   }
@@ -80,7 +80,7 @@ showline(start, end) {
 printerdebugger(msg, org) {
   level notify("prrint_this_" + org);
   level endon("prrint_this_" + org);
-  for (;;) {
+  for(;;) {
     print3d(org, msg, (1, 1, 1), 5);
     wait(0.05);
   }

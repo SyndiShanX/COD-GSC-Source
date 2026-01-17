@@ -30,7 +30,7 @@ mayProcessChallenges() {
   return level.rankedMatch;
 }
 onPlayerConnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connected", player);
     player thread initMissionData();
     player thread monitorBombUse();
@@ -201,7 +201,7 @@ isHighestScoringPlayer(player) {
   else
     team = "all";
   highScore = player.score;
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(!isDefined(players[i].score))
       continue;
     if(players[i].score < 1)
@@ -219,7 +219,7 @@ getWeaponClass(weapon) {
   return weaponClass;
 }
 processKillsChallengeForWeapon(weaponName, player, challengeClassName) {
-  for (weaponNum = 0; weaponNum < 64; weaponNum++) {
+  for(weaponNum = 0; weaponNum < 64; weaponNum++) {
     if(isDefined(level.tbl_weaponIDs[weaponNum]) &&
       isStrStart(weaponName, level.tbl_weaponIDs[weaponNum]["reference"])) {
       player processChallenge("ch_" + challengeClassName + "_" + level.tbl_weaponIDs[weaponNum]["reference"] + "_", 1, weaponNum, challengeClassName);
@@ -469,7 +469,7 @@ ch_bulletKillCommon(data, player, time, weaponClass) {
     }
   }
   if(data.victim.iDFlagsTime == time) {
-    if(data.victim.iDFlags & level.iDFLAGS_PENETRATION)
+    if(data.victim.iDFlags &level.iDFLAGS_PENETRATION)
       player processChallenge("ch_xrayvision_");
   }
   if(data.attackerInLastStand) {
@@ -570,7 +570,7 @@ playerDamaged(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, sHitLoc) {
     attacker endon("disconnect");
   wait .05;
   maps\mp\gametypes\_globallogic_utils::WaitTillSlowProcessAllowed();
-  data = spawnstruct();
+  data = spawnStruct();
   data.victim = self;
   data.eInflictor = eInflictor;
   data.attacker = attacker;
@@ -598,7 +598,7 @@ playerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, sHitLoc, att
   if(!isDefined(sWeapon))
     sWeapon = "none";
   self endon("disconnect");
-  data = spawnstruct();
+  data = spawnStruct();
   data.victim = self;
   data.eInflictor = eInflictor;
   data.attacker = attacker;
@@ -636,14 +636,14 @@ waitAndProcessPlayerKilledCallback(data) {
   level thread maps\mp\_challenges::doChallengeCallback("playerKilled", data);
 }
 playerAssist() {
-  data = spawnstruct();
+  data = spawnStruct();
   data.player = self;
   doMissionCallback("playerAssist", data);
 }
 useKillstreak(hardpointType) {
   wait .05;
   maps\mp\gametypes\_globallogic_utils::WaitTillSlowProcessAllowed();
-  data = spawnstruct();
+  data = spawnStruct();
   data.player = self;
   data.hardpointType = hardpointType;
   doMissionCallback("playerHardpoint", data);
@@ -654,10 +654,10 @@ roundBegin() {
   SetTimeScale(1.0, getTime());
 }
 roundEnd(winner) {
-  data = spawnstruct();
+  data = spawnStruct();
   if(level.teamBased) {
     team = "allies";
-    for (index = 0; index < level.placement[team].size; index++) {
+    for(index = 0; index < level.placement[team].size; index++) {
       data.player = level.placement[team][index];
       data.winner = (team == winner);
       data.place = index;
@@ -665,7 +665,7 @@ roundEnd(winner) {
       doMissionCallback("roundEnd", data);
     }
     team = "axis";
-    for (index = 0; index < level.placement[team].size; index++) {
+    for(index = 0; index < level.placement[team].size; index++) {
       data.player = level.placement[team][index];
       data.winner = (team == winner);
       data.place = index;
@@ -673,7 +673,7 @@ roundEnd(winner) {
       doMissionCallback("roundEnd", data);
     }
   } else {
-    for (index = 0; index < level.placement["all"].size; index++) {
+    for(index = 0; index < level.placement["all"].size; index++) {
       data.player = level.placement["all"][index];
       data.winner = (isDefined(winner) && (data.player == winner));
       data.place = index;
@@ -691,16 +691,16 @@ doMissionCallback(callback, data) {
   if(!isDefined(level.missionCallbacks[callback]))
     return;
   if(isDefined(data)) {
-    for (i = 0; i < level.missionCallbacks[callback].size; i++)
+    for(i = 0; i < level.missionCallbacks[callback].size; i++)
       thread[[level.missionCallbacks[callback][i]]](data);
   } else {
-    for (i = 0; i < level.missionCallbacks[callback].size; i++)
+    for(i = 0; i < level.missionCallbacks[callback].size; i++)
       thread[[level.missionCallbacks[callback][i]]]();
   }
 }
 monitorDriveDistance() {
   self endon("disconnect");
-  while (1) {
+  while(1) {
     if(!maps\mp\_vehicles::player_is_driver())
       self waittill("vehicle_driver");
     self.drivenDistanceThisDrive = 0;
@@ -717,7 +717,7 @@ monitorSingleDriveDistance() {
   waittime = .5;
   self.inVehicleTime = 0;
   self.currentTank = undefined;
-  while (((count * waittime) < lengthOfCheck) && maps\mp\_vehicles::player_is_driver()) {
+  while(((count * waittime) < lengthOfCheck) && maps\mp\_vehicles::player_is_driver()) {
     wait(waittime);
     self.drivenDistanceThisDrive += distance(self.origin, prevpos);
     prevpos = self.origin;
@@ -730,7 +730,7 @@ monitorSingleSprintDistance() {
   self endon("death");
   self endon("sprint_end");
   prevpos = self.origin;
-  while (1) {
+  while(1) {
     wait .1;
     self.sprintDistThisSprint += distance(self.origin, prevpos);
     prevpos = self.origin;
@@ -739,7 +739,7 @@ monitorSingleSprintDistance() {
 monitorFallDistance() {
   self endon("disconnect");
   self.pers["midairStreak"] = 0;
-  while (1) {
+  while(1) {
     if(!isAlive(self)) {
       self waittill("spawned_player");
       continue;
@@ -747,7 +747,7 @@ monitorFallDistance() {
     if(!self isOnGround() && !self isOnLadder()) {
       self.pers["midairStreak"] = 0;
       highestPoint = self.origin[2];
-      while (!self isOnGround() && !self isOnLadder()) {
+      while(!self isOnGround() && !self isOnLadder()) {
         if(self.origin[2] > highestPoint)
           highestPoint = self.origin[2];
         wait .05;
@@ -798,13 +798,13 @@ ch_medic(player) {
 }
 monitorBombUse() {
   self endon("disconnect");
-  while (1) {
+  while(1) {
     self waittill("bomb_defused");
     self processChallenge("ch_hero");
   }
 }
 monitorLiveTime() {
-  for (;;) {
+  for(;;) {
     self waittill("spawned_player");
     self thread survivalistChallenge();
   }
@@ -817,7 +817,7 @@ survivalistChallenge() {
 }
 monitorPerkUsage() {
   self endon("disconnect");
-  for (;;) {
+  for(;;) {
     self.perkSpawnTime = gettime();
     self waittill("spawned");
     deathTime = gettime();
@@ -834,7 +834,7 @@ monitorGameEnded() {
 }
 monitorFlaredOrTabuned() {
   self endon("disconnect");
-  for (;;) {
+  for(;;) {
     self waittill("flared_or_tabuned_death", attacker, isFlared, isPoisoned);
     if(isPlayer(attacker) && attacker != self) {
       if(isFlared)
@@ -846,7 +846,7 @@ monitorFlaredOrTabuned() {
 }
 monitorDestroyedTank() {
   self endon("disconnect");
-  for (;;) {
+  for(;;) {
     self waittill("destroyed_vehicle", weaponUsed, occupantEnt);
     if(game["dialog"]["gametype"] == "ffa_start" || occupantEnt.pers["team"] != self.pers["team"]) {
       if(weaponUsed == "tankGun")
@@ -862,7 +862,7 @@ monitorDestroyedTank() {
 }
 monitorImmobilizedTank() {
   self endon("disconnect");
-  for (;;) {
+  for(;;) {
     self waittill("immobilized_tank");
     self processChallenge("ch_immobilizer_");
   }
@@ -883,7 +883,7 @@ monitorMisc() {
   self notify("dog_handler");
 }
 monitorMiscSingle(waittillString) {
-  while (1) {
+  while(1) {
     self waittill(waittillString);
     if(!isDefined(self))
       return;

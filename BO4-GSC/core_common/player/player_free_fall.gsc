@@ -8,7 +8,6 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace player_free_fall;
 
 autoexec __init__system__() {
@@ -22,7 +21,6 @@ __init__() {
   level.parachute_weapon = getweapon(#"parachute");
 
   level thread function_1fc427dc();
-
 }
 
 function_d2a1520c() {
@@ -35,7 +33,7 @@ function_d2a1520c() {
   return wingsuit.var_94166112;
 }
 
-private function_c9a18304(eventstruct) {
+function_c9a18304(eventstruct) {
   model = function_d2a1520c();
 
   if(eventstruct.freefall) {
@@ -78,13 +76,13 @@ private function_c9a18304(eventstruct) {
   self setclientuivisibilityflag("weapon_hud_visible", 1);
 }
 
-private function_6aac1790(var_dbb94a) {
+function_6aac1790(var_dbb94a) {
   if(isDefined(var_dbb94a) && !self isattached(var_dbb94a, "tag_weapon_right")) {}
 }
 
-private function_b6e83203(delay) {
+function_b6e83203(delay) {
   if(isDefined(delay)) {
-    self endon(#"death", #"disconnect");
+    self endon(#"death", # "disconnect");
     wait delay;
   }
 
@@ -93,7 +91,7 @@ private function_b6e83203(delay) {
   function_6aac1790(var_dbb94a);
 }
 
-private function_26d46af3(eventstruct) {
+function_26d46af3(eventstruct) {
   if(eventstruct.parachute) {
     self function_b6e83203();
     return;
@@ -110,7 +108,7 @@ private function_26d46af3(eventstruct) {
   if(isDefined(var_dbb94a)) {}
 }
 
-private function_a7e644f6(eventstruct) {
+function_a7e644f6(eventstruct) {
   if(!eventstruct.debug_movement) {
     if(getdvarint(#"hash_bfa71d08f383550", 0)) {
       speed = 8800;
@@ -120,7 +118,7 @@ private function_a7e644f6(eventstruct) {
   }
 }
 
-private function_1fc427dc() {
+function_1fc427dc() {
   mapname = util::get_map_name();
   waitframe(1);
   waitframe(1);
@@ -133,4 +131,3 @@ private function_1fc427dc() {
   waitframe(1);
   adddebugcommand("<dev string:x17a>" + mapname + "<dev string:x18a>");
 }
-

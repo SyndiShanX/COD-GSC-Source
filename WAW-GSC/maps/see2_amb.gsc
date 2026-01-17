@@ -16,10 +16,10 @@ walla_audio_notify() {
   walla2 = getent("walla2", "targetname");
   chug = getent("chug", "targetname");
   whistle = getent("whistle", "targetname");
-  walla1 playloopsound("See1_IGD_703A_RURS", 1);
-  chug playloopsound("train_chug", 1);
+  walla1 playLoopSound("See1_IGD_703A_RURS", 1);
+  chug playLoopSound("train_chug", 1);
   wait(5);
-  walla2 playloopsound("See1_IGD_703A_RURS", 1);
+  walla2 playLoopSound("See1_IGD_703A_RURS", 1);
   level waittill("audio_fade");
   playsoundatposition("train_whistle", whistle.origin);
   walla1 stoploopsound(4);

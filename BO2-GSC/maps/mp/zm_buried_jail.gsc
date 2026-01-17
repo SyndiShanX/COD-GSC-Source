@@ -33,7 +33,7 @@ init_jail() {
 }
 
 jail_open_door(jumpback) {
-  level.cell_door playsound("zmb_jail_door_open");
+  level.cell_door playSound("zmb_jail_door_open");
 
   if(is_true(jumpback))
     level.cell_door setanim(level.jail_open_jumpback, 1, 1, 1);
@@ -47,7 +47,7 @@ jail_open_door(jumpback) {
 }
 
 jail_close_door() {
-  level.cell_door playsound("zmb_jail_door_close");
+  level.cell_door playSound("zmb_jail_door_close");
   level.cell_door setanim(level.jail_close_cower, 1, 1, 1);
 
   if(isDefined(level.cell_door.clip)) {

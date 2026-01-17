@@ -35,7 +35,7 @@ setup_anims() {
   level.scr_anim["generic"]["window_smash_stop_outside"] = % window_smash_stop_outside;
   level.scr_anim["generic"]["window_smash_run"] = % window_smash_run;
 
-  // guys running & shooting above player
+  // guys running &shooting above player
   level.scr_anim["generic"]["favela_chaotic_above_through"] = % favela_chaotic_above_through;
   level.scr_anim["generic"]["favela_chaotic_above_through_uzi"] = % favela_chaotic_above_through_uzi;
   level.scr_anim["generic"]["favela_chaotic_above_back"] = % favela_chaotic_above_back;

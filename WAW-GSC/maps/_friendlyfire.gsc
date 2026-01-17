@@ -42,7 +42,7 @@ debug_friendlyfire() {
   friendly_fire.y = 100;
   friendly_fire.fontScale = 2;
   friendly_fire.alpha = 0;
-  for (;;) {
+  for(;;) {
     if(getdebugdvar("replay_debug") == "1")
       println("File: _friendlyfire.gsc. Function: debug_friendlyfire() - INNER LOOP START\n");
     if(GetDvar("debug_friendlyfire") == "1") {
@@ -72,7 +72,7 @@ friendly_fire_think(entity) {
   level thread notifyDamage(entity);
   level thread notifyDamageNotDone(entity);
   level thread notifyDeath(entity);
-  for (;;) {
+  for(;;) {
     if(!isDefined(entity)) {
       return;
     }
@@ -185,7 +185,7 @@ participation_point_cap() {
 participation_point_flattenOverTime() {
   level endon("mission failed");
   self endon("disconnect");
-  for (;;) {
+  for(;;) {
     if(self.participation > 0) {
       self.participation--;
     } else if(self.participation < 0) {
@@ -213,11 +213,11 @@ missionfail() {
   level endon("mine death");
   level notify("mission failed");
   if(level.campaign == "british") {
-    SetDvar("ui_deadquote", & "SCRIPT_MISSIONFAIL_KILLTEAM_BRITISH");
+    SetDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_BRITISH");
   } else if(level.campaign == "russian") {
-    SetDvar("ui_deadquote", & "SCRIPT_MISSIONFAIL_KILLTEAM_RUSSIAN");
+    SetDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_RUSSIAN");
   } else {
-    SetDvar("ui_deadquote", & "SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN");
+    SetDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN");
   }
   if(isDefined(level.custom_friendly_fire_shader))
     thread maps\_load::special_death_indicator_hudelement(level.custom_friendly_fire_shader, 64, 64, 0);
@@ -228,7 +228,7 @@ missionfail() {
 notifyDamage(entity) {
   level endon("mission failed");
   entity endon("death");
-  for (;;) {
+  for(;;) {
     entity waittill("damage", damage, attacker, direction, point, method);
     entity notify("friendlyfire_notify", damage, attacker, direction, point, method);
   }

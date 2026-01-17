@@ -117,7 +117,7 @@ determineNodeApproachType(node) {
 }
 
 getMaxDirectionsAndExcludeDirFromApproachType(approachtype) {
-  returnobj = spawnstruct();
+  returnobj = spawnStruct();
   if(approachtype == "left" || approachtype == "left_crouch") {
     returnobj.maxDirections = 9;
     returnobj.excludeDir = 9;
@@ -155,7 +155,7 @@ shouldApproachToExposed() {
 
 calculateNodeOffsetFromAnimationDelta(nodeAngles, delta) {
   right = anglestoright(nodeAngles);
-  forward = anglestoforward(nodeAngles);
+  forward = anglesToForward(nodeAngles);
   return vectorScale(forward, delta[0]) + vectorScale(right, 0 - delta[1]);
 }
 
@@ -254,7 +254,7 @@ startCornerApproach(approachType, approachPoint, approachNodeYaw, approachFinalY
   finalPositionYawOffset = 0;
   if(approachType == "exposed") {
     result = self CheckArrivalEnterPositions(approachPoint, approachFinalYaw, approachType, approach_dir, maxDirections, excludeDir);
-    for (i = 0; i < result.data.size; i++)
+    for(i = 0; i < result.data.size; i++)
       debug_arrival(result.data[i]);
     if(result.approachNumber < 0) {
       debug_arrival("approach aborted: " + result.failure);
@@ -265,7 +265,7 @@ startCornerApproach(approachType, approachPoint, approachNodeYaw, approachFinalY
     tryNormalApproach = true;
     if(tryNormalApproach) {
       result = self CheckArrivalEnterPositions(approachPoint, approachFinalYaw, approachType, approach_dir, maxDirections, excludeDir);
-      for (i = 0; i < result.data.size; i++)
+      for(i = 0; i < result.data.size; i++)
         debug_arrival(result.data[i]);
       if(result.approachNumber < 0) {
         debug_arrival("approach aborted: " + result.failure);
@@ -313,17 +313,17 @@ startCornerApproach(approachType, approachPoint, approachNodeYaw, approachFinalY
 }
 
 CheckArrivalEnterPositions(approachpoint, approachYaw, approachtype, approach_dir, maxDirections, excludeDir) {
-  angleDataObj = spawnstruct();
+  angleDataObj = spawnStruct();
   calculateNodeTransitionAngles(angleDataObj, approachtype, true, approachYaw, approach_dir, maxDirections, excludeDir);
   sortNodeTransitionAngles(angleDataObj, maxDirections);
-  resultobj = spawnstruct();
+  resultobj = spawnStruct();
   resultobj.data = [];
   arrivalPos = (0, 0, 0);
   resultobj.approachNumber = -1;
   numAttempts = 2;
   if(approachtype == "exposed")
     numAttempts = 1;
-  for (i = 1; i <= numAttempts; i++) {
+  for(i = 1; i <= numAttempts; i++) {
     assert(angleDataObj.transIndex[i] != excludeDir);
     resultobj.approachNumber = angleDataObj.transIndex[i];
     if(!self checkCoverEnterPos(approachpoint, approachYaw, approachtype, resultobj.approachNumber)) {
@@ -362,9 +362,9 @@ doLastMinuteExposedApproachWrapper() {
   self notify("doing_last_minute_exposed_approach");
   self endon("doing_last_minute_exposed_approach");
   self thread watchGoalChanged();
-  while (1) {
+  while(1) {
     doLastMinuteExposedApproach();
-    while (1) {
+    while(1) {
       self waittill_any("goal_changed", "goal_changed_previous_frame");
       if(isDefined(self.coverEnterPos) && isDefined(self.pathGoalPos) && distanceSquared(self.coverEnterPos, self.pathGoalPos) < 1)
         continue;
@@ -376,7 +376,7 @@ doLastMinuteExposedApproachWrapper() {
 watchGoalChanged() {
   self endon("killanimscript");
   self endon("doing_last_minute_exposed_approach");
-  while (1) {
+  while(1) {
     self waittill("goal_changed");
     wait .05;
     self notify("goal_changed_previous_frame");
@@ -390,7 +390,7 @@ doLastMinuteExposedApproach() {
   }
   maxSpeed = 200;
   allowedError = 6;
-  while (1) {
+  while(1) {
     if(!isDefined(self.pathGoalPos))
       self waitForPathGoalPos();
     dist = distance(self.origin, self.pathGoalPos);
@@ -430,10 +430,10 @@ doLastMinuteExposedApproach() {
     if(isDefined(likelyEnemyDir))
       desiredFacingYaw = likelyEnemyDir[1];
   }
-  angleDataObj = spawnstruct();
+  angleDataObj = spawnStruct();
   calculateNodeTransitionAngles(angleDataObj, approachType, true, desiredFacingYaw, approachDir, 9, -1);
   best = 1;
-  for (i = 2; i < 9; i++) {
+  for(i = 2; i < 9; i++) {
     if(angleDataObj.transitions[i] > angleDataObj.transitions[best])
       best = i;
   }
@@ -452,7 +452,7 @@ doLastMinuteExposedApproach() {
   animDist = length(anim.coverTransDist[approachType][self.approachNumber]);
   requiredDistSq = animDist + allowedError;
   requiredDistSq = requiredDistSq * requiredDistSq;
-  while (isDefined(self.pathGoalPos) && distanceSquared(self.origin, self.pathGoalPos) > requiredDistSq)
+  while(isDefined(self.pathGoalPos) && distanceSquared(self.origin, self.pathGoalPos) > requiredDistSq)
     wait .05;
   if(!isDefined(self.pathGoalPos)) {
     debug_arrival("Aborting exposed approach because I have no path");
@@ -501,7 +501,7 @@ doLastMinuteExposedApproach() {
 }
 
 waitForPathGoalPos() {
-  while (1) {
+  while(1) {
     if(isDefined(self.pathgoalpos)) {
       return;
     }
@@ -516,7 +516,7 @@ alignToGoalAngle() {
   self endon("doing_last_minute_exposed_approach");
   waittillframeend;
   maxdist = 80;
-  while (1) {
+  while(1) {
     if(distanceSquared(self.origin, self.goalPos) > maxdist * maxdist) {
       wait .05;
       continue;
@@ -538,7 +538,7 @@ alignToGoalAngle() {
   targetYaw = self.goalangle[1];
   targetYaw = startYaw + AngleClamp180(targetYaw - startYaw);
   self thread resetOrientModeOnGoalChange();
-  while (1) {
+  while(1) {
     dist = distance(self.origin, self.goalPos);
     if(dist > startdist * 1.1) {
       self orientMode("face default");
@@ -563,7 +563,7 @@ alignToNodeAngles() {
   self endon("doing_last_minute_exposed_approach");
   waittillframeend;
   maxdist = 80;
-  while (1) {
+  while(1) {
     if(!isDefined(self.node) || self.node.type == "Path" || self.node.type == "Guard" || !isDefined(self.pathGoalPos) || distanceSquared(self.node.origin, self.pathGoalPos) > 1) {
       return;
     }
@@ -591,7 +591,7 @@ alignToNodeAngles() {
     targetYaw += getNodeStanceYawOffset(self.node.approachtype);
   targetYaw = startYaw + AngleClamp180(targetYaw - startYaw);
   self thread resetOrientModeOnGoalChange();
-  while (1) {
+  while(1) {
     if(!isDefined(self.node)) {
       self orientMode("face default");
       return;
@@ -693,14 +693,14 @@ startMoveTransition() {
   maxDirections = result.maxDirections;
   excludeDir = result.excludeDir;
   exityaw = exityaw + getNodeStanceYawOffset(exittype);
-  angleDataObj = spawnstruct();
+  angleDataObj = spawnStruct();
   calculateNodeTransitionAngles(angleDataObj, exittype, false, exityaw, leaveDir, maxDirections, excludeDir);
   sortNodeTransitionAngles(angleDataObj, maxDirections);
   approachnumber = -1;
   numAttempts = 3;
   if(exittype == "exposed" || exittype == "exposed_crouch")
     numAttempts = 1;
-  for (i = 1; i <= numAttempts; i++) {
+  for(i = 1; i <= numAttempts; i++) {
     assert(angleDataObj.transIndex[i] != excludeDir);
     approachNumber = angleDataObj.transIndex[i];
     if(self checkCoverExitPos(exitpos, exityaw, exittype, approachNumber)) {
@@ -764,7 +764,7 @@ doCoverExitAnimation(exittype, approachNumber) {
   self.a.pose = "stand";
   self.a.movement = "run";
   hasCodeMoveNoteTrack = animHasNotetrack(leaveAnim, "code_move");
-  while (1) {
+  while(1) {
     curfrac = self getAnimTime(leaveAnim);
     remainingMoveDelta = getMoveDelta(leaveAnim, curfrac, 1);
     remainingAngleDelta = getAngleDelta(leaveAnim, curfrac, 1);
@@ -815,7 +815,7 @@ coverexit_blend_out(leaveAnim, playSpeed, blendOutTime) {
 faceEnemyOrMotionAfterABit() {
   self endon("killanimscript");
   wait 1.0;
-  while (isDefined(self.pathGoalPos) && distanceSquared(self.origin, self.pathGoalPos) < 200 * 200)
+  while(isDefined(self.pathGoalPos) && distanceSquared(self.origin, self.pathGoalPos) < 200 * 200)
     wait .25;
   self OrientMode("face default");
 }
@@ -828,7 +828,7 @@ DoNoteTracksForExit(animname, hasExitAlign) {
 }
 
 drawVec(start, end, duration, color) {
-  for (i = 0; i < duration * 100; i++) {
+  for(i = 0; i < duration * 100; i++) {
     line(start + (0, 0, 30), end + (0, 0, 30), color);
     wait 0.05;
   }
@@ -836,7 +836,7 @@ drawVec(start, end, duration, color) {
 
 drawApproachVec(approach_dir) {
   self endon("killanimscript");
-  for (;;) {
+  for(;;) {
     if(!isDefined(self.node)) {
       break;
     }
@@ -860,20 +860,20 @@ calculateNodeTransitionAngles(angleDataObj, approachtype, isarrival, arrivalYaw,
     sign = 1;
     offset = 180;
   }
-  for (i = 1; i <= maxDirections; i++) {
+  for(i = 1; i <= maxDirections; i++) {
     angleDataObj.transIndex[i] = i;
     if(i == 5 || i == excludeDir || !isDefined(anglearray[i])) {
       angleDataObj.transitions[i] = -1.0003;
       continue;
     }
     angles = (0, arrivalYaw + sign * anglearray[i] + offset, 0);
-    dir = vectornormalize(anglestoforward(angles));
+    dir = vectornormalize(anglesToForward(angles));
     angleDataObj.transitions[i] = vectordot(approach_dir, dir);
   }
 }
 
 printdebug(pos, offset, text, color, linecolor) {
-  for (i = 0; i < 20 * 5; i++) {
+  for(i = 0; i < 20 * 5; i++) {
     line(pos, pos + offset, linecolor);
     print3d(pos + offset, text, (color, color, color));
     wait .05;
@@ -881,10 +881,10 @@ printdebug(pos, offset, text, color, linecolor) {
 }
 
 sortNodeTransitionAngles(angleDataObj, maxDirections) {
-  for (i = 2; i <= maxDirections; i++) {
+  for(i = 2; i <= maxDirections; i++) {
     currentValue = angleDataObj.transitions[angleDataObj.transIndex[i]];
     currentIndex = angleDataObj.transIndex[i];
-    for (j = i - 1; j >= 1; j--) {
+    for(j = i - 1; j >= 1; j--) {
       if(currentValue < angleDataObj.transitions[angleDataObj.transIndex[j]]) {
         break;
       }
@@ -895,7 +895,7 @@ sortNodeTransitionAngles(angleDataObj, maxDirections) {
 }
 checkCoverExitPos(exitpoint, exityaw, exittype, approachNumber) {
   angle = (0, exityaw, 0);
-  forwardDir = anglestoforward(angle);
+  forwardDir = anglesToForward(angle);
   rightDir = anglestoright(angle);
   forward = vectorscale(forwardDir, anim.coverExitDist[exittype][approachNumber][0]);
   right = vectorscale(rightDir, anim.coverExitDist[exittype][approachNumber][1]);
@@ -924,7 +924,7 @@ checkCoverExitPos(exitpoint, exityaw, exittype, approachNumber) {
 
 checkCoverEnterPos(arrivalpoint, arrivalYaw, approachtype, approachNumber) {
   angle = (0, arrivalYaw - anim.coverTransAngles[approachtype][approachNumber], 0);
-  forwardDir = anglestoforward(angle);
+  forwardDir = anglesToForward(angle);
   rightDir = anglestoright(angle);
   forward = vectorscale(forwardDir, anim.coverTransDist[approachtype][approachNumber][0]);
   right = vectorscale(rightDir, anim.coverTransDist[approachtype][approachNumber][1]);
@@ -986,7 +986,7 @@ DoMiniArrival(node) {
   if(isDefined(node.approachtype))
     targetYaw += getNodeStanceYawOffset(node.approachtype);
   targetYaw = startYaw + AngleClamp180(targetYaw - startYaw);
-  for (i = 0; i < numFrames; i++) {
+  for(i = 0; i < numFrames; i++) {
     timefrac = (i + 1) / numFrames;
     frac = length(getMoveDelta(arrivalAnim, 0, timefrac)) / totalAnimDist;
     currentYaw = startYaw + frac * (targetYaw - startYaw);

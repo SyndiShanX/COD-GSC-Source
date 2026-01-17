@@ -48,7 +48,7 @@ cleanup_ents(str_category, n_delay) {
     level.a_e_cleanup[str_category] = undefined;
   }
 
-  a_ents = getentarray(str_category, "script_noteworthy");
+  a_ents = getEntArray(str_category, "script_noteworthy");
 
   foreach(ent in a_ents) {
     if(isDefined(ent)) {
@@ -62,7 +62,7 @@ cleanup_ents(str_category, n_delay) {
 }
 
 kill_and_cleanup_ents(str_category) {
-  a_e_kill = getentarray(str_category, "script_noteworthy");
+  a_e_kill = getEntArray(str_category, "script_noteworthy");
   kill_array(a_e_kill);
   cleanup_ents(str_category);
 }
@@ -73,7 +73,7 @@ player_stick(b_look, n_clamp_right, n_clamp_left, n_clamp_top, n_clamp_bottom) {
 
   self.m_link = spawn("script_model", self.origin);
   self.m_link.angles = self.angles;
-  self.m_link setmodel("tag_origin");
+  self.m_link setModel("tag_origin");
   self allowsprint(0);
 
   if(b_look)
@@ -95,7 +95,7 @@ harper_think() {
 }
 
 setup_harper() {
-  a_sp_harpers = getentarray("harper", "targetname");
+  a_sp_harpers = getEntArray("harper", "targetname");
   str_search = "normal";
 
   if(!level.is_harper_alive)
@@ -110,8 +110,7 @@ setup_harper() {
 
   if(level.is_harper_alive)
     level.ai_harper = init_hero("harper", ::harper_think);
-  else {
-  }
+  else {}
 }
 
 enemy_battle_think(b_aggressive, b_ally_priority) {
@@ -222,8 +221,8 @@ camo_suit_think() {
   self ent_flag_set("camo_suit_on");
   self.camo_sound_ent = spawn("script_origin", self.origin);
   self.camo_sound_ent linkto(self, "tag_origin");
-  self playsound("fly_camo_suit_npc_on", self.origin);
-  self.camo_sound_ent playloopsound("fly_camo_suit_npc_loop", 0.5);
+  self playSound("fly_camo_suit_npc_on", self.origin);
+  self.camo_sound_ent playLoopSound("fly_camo_suit_npc_loop", 0.5);
   self thread enemy_battle_think(1);
   self.health = 150;
   self.moveplaybackrate = 1.3;
@@ -240,12 +239,12 @@ camo_emp_behavior() {
     self waittill("doEmpBehavior", attacker, duration);
     self.emped = 1;
     self.blockingpain = 1;
-    playfxontag(level._effect["camo_transition"], self, "J_SpineLower");
+    playFXOnTag(level._effect["camo_transition"], self, "J_SpineLower");
     self setclientflag(12);
     wait(duration);
     self.emped = 0;
     self.blockingpain = 0;
-    playfxontag(level._effect["camo_transition"], self, "J_SpineLower");
+    playFXOnTag(level._effect["camo_transition"], self, "J_SpineLower");
     self clearclientflag(12);
   }
 }
@@ -269,7 +268,7 @@ toggle_camo_suit(b_disable, b_play_fx) {
   if(b_disable) {
     self setclientflag(12);
     self ent_flag_clear("camo_suit_on");
-    self playsound("fly_camo_suit_npc_off", self.origin);
+    self playSound("fly_camo_suit_npc_off", self.origin);
 
     if(isDefined(self.camo_sound_ent)) {
       self.camo_sound_ent stoploopsound(1);
@@ -281,7 +280,7 @@ toggle_camo_suit(b_disable, b_play_fx) {
   }
 
   if(b_play_fx)
-    playfxontag(getfx("camo_transition"), self, "J_SpineLower");
+    playFXOnTag(getfx("camo_transition"), self, "J_SpineLower");
 }
 
 sniper_think() {
@@ -313,7 +312,7 @@ ai_player_squad_think() {
 
 squad_replenish_init() {
   level.a_ai_player_squad = [];
-  level.a_sp_player_squad = getentarray("ally_player_squad", "targetname");
+  level.a_sp_player_squad = getEntArray("ally_player_squad", "targetname");
 
   if(level.is_harper_alive)
     level.n_player_squad_size = 3;
@@ -458,7 +457,7 @@ play_fake_flyby() {
   sound_ent = spawn("script_origin", self.origin);
   sound_ent linkto(self, "tag_body");
   wait(randomfloatrange(1, 3));
-  sound_ent playsound("evt_fake_flyby");
+  sound_ent playSound("evt_fake_flyby");
   self waittill("reached_end_node");
   sound_ent delete();
 }
@@ -485,7 +484,7 @@ ambient_drone_die() {
     return;
   }
   if(!isDefined(self.delete_on_death) && isDefined(level._effect["fireball_trail_lg"])) {
-    playfxontag(level._effect["fireball_trail_lg"], self, "tag_origin");
+    playFXOnTag(level._effect["fireball_trail_lg"], self, "tag_origin");
     playsoundatposition("evt_amb_drone_explo", self.origin);
     wait 5;
 
@@ -569,14 +568,14 @@ door_think(str_targetname, str_flag_open, str_flag_close, v_slide, n_time) {
   if(!isDefined(n_time))
     n_time = 2.0;
 
-  a_m_doors = getentarray(str_targetname, "targetname");
+  a_m_doors = getEntArray(str_targetname, "targetname");
 
   if(a_m_doors.size == 0) {
     return;
   }
   foreach(m_door in a_m_doors) {
     if(isDefined(m_door.target)) {
-      a_m_link = getentarray(m_door.target, "targetname");
+      a_m_link = getEntArray(m_door.target, "targetname");
 
       foreach(m_link in a_m_link)
       m_link linkto(m_door);
@@ -684,7 +683,7 @@ turn_on_interior_light_fx() {
 
   foreach(struct in structs) {
     if(isDefined(struct.script_string))
-      playfx(level._effect[struct.script_string], struct.origin);
+      playFX(level._effect[struct.script_string], struct.origin);
   }
 }
 

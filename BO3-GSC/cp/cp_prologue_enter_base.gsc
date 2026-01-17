@@ -49,7 +49,7 @@ function nrc_knocking_precache() {}
 
 function nrc_knocking_main() {
   level cp_prologue_util::spawn_coop_player_replacement("skipto_nrc_knocking");
-  if(isdefined(level.bzmloadoutchangecallback)) {
+  if(isDefined(level.bzmloadoutchangecallback)) {
     level thread[[level.bzmloadoutchangecallback]]();
   }
   foreach(ai_ally in level.var_681ad194) {
@@ -60,22 +60,22 @@ function nrc_knocking_main() {
   cp_prologue_util::function_47a62798(1);
   cp_prologue_util::function_25e841ea();
   level thread function_599e2f36();
-  util::delay(2, undefined, & function_b206d9a7);
+  util::delay(2, undefined, &function_b206d9a7);
   level thread function_e4486a45();
-  if(isdefined(level.bzm_prologuedialogue2callback)) {
+  if(isDefined(level.bzm_prologuedialogue2callback)) {
     level thread[[level.bzm_prologuedialogue2callback]]();
   }
   spawner::waittill_ai_group_cleared("tower_guards");
-  array::run_all(level.activeplayers, & util::set_low_ready, 1);
-  array::thread_all(level.activeplayers, & cp_mi_eth_prologue::function_7072c5d8);
+  array::run_all(level.activeplayers, &util::set_low_ready, 1);
+  array::thread_all(level.activeplayers, &cp_mi_eth_prologue::function_7072c5d8);
   level thread function_63075f1d();
   battlechatter::function_d9f49fba(0);
   level.ai_hendricks.allowbattlechatter["bc"] = 1;
   level thread function_127fb1fb();
   level thread function_5dc7beec();
   level thread function_a7dec0e7();
-  scene::add_scene_func("cin_pro_03_01_blendin_vign_movedown_tower_hendricks", & function_c9e3016d, "play");
-  scene::add_scene_func("cin_pro_03_01_blendin_vign_movedown_tower_hendricks", & function_fe6bccbc, "play");
+  scene::add_scene_func("cin_pro_03_01_blendin_vign_movedown_tower_hendricks", &function_c9e3016d, "play");
+  scene::add_scene_func("cin_pro_03_01_blendin_vign_movedown_tower_hendricks", &function_fe6bccbc, "play");
   level scene::play("cin_pro_03_01_blendin_vign_movedown_tower_hendricks");
   level flag::wait_till("player_reached_tower_bottom");
   skipto::objective_completed("skipto_nrc_knocking");
@@ -115,7 +115,7 @@ function function_b206d9a7() {
   level thread scene::play("cin_pro_03_01_blendin_vign_vtol_sweep");
   level thread scene::play("p7_fxanim_cp_prologue_control_tower_ceiling_tiles_02_bundle");
   e_vtol = getent("sp_vtol_sweep_at_start_ai", "targetname");
-  if(isdefined(e_vtol)) {
+  if(isDefined(e_vtol)) {
     e_vtol thread cp_prologue_util::function_c56034b7();
   }
   wait(1.2);
@@ -127,7 +127,7 @@ function function_b206d9a7() {
 
 function blend_in_start() {
   blend_in_precache();
-  spawner::add_spawn_function_group("start_through_take_out_guards", "script_aigroup", & set_ai_ignore);
+  spawner::add_spawn_function_group("start_through_take_out_guards", "script_aigroup", &set_ai_ignore);
   level thread function_bc06f066();
   level thread blend_in_main();
 }
@@ -141,7 +141,7 @@ function blend_in_main() {
     ai_ally ai::set_pacifist(1);
   }
   level thread function_be42a33f();
-  if(isdefined(level.bzm_prologuedialogue2_1callback)) {
+  if(isDefined(level.bzm_prologuedialogue2_1callback)) {
     level thread[[level.bzm_prologuedialogue2_1callback]]();
   }
   cp_prologue_util::function_25e841ea();
@@ -217,7 +217,7 @@ function function_bf532adb() {
   var_46100e43 = getent("t_tarmac_vo_firetruck", "targetname");
   var_46100e43 endon("death");
   var_46100e43 trigger::wait_till();
-  var_46100e43 playsound("nrcm0_put_out_that_fire_w_0");
+  var_46100e43 playSound("nrcm0_put_out_that_fire_w_0");
 }
 
 function function_bafd79f6(str_triggername, a_vo_lines, var_61ae76d5, var_9e3b0b67) {
@@ -231,9 +231,9 @@ function function_bafd79f6(str_triggername, a_vo_lines, var_61ae76d5, var_9e3b0b
 
 function function_f9be6553(var_97fbbd0a, a_vo_lines, var_61ae76d5, var_9e3b0b67) {
   level endon("objective_take_out_guards_done");
-  for (i = 0; i < a_vo_lines.size; i++) {
-    var_79cf4848 = getentarray(var_61ae76d5[i], "targetname");
-    if(isdefined(var_79cf4848) && var_79cf4848.size > 0) {
+  for(i = 0; i < a_vo_lines.size; i++) {
+    var_79cf4848 = getEntArray(var_61ae76d5[i], "targetname");
+    if(isDefined(var_79cf4848) && var_79cf4848.size > 0) {
       var_58c5eb41 = arraygetclosest(var_97fbbd0a, var_79cf4848);
       wait(var_9e3b0b67[i]);
       var_58c5eb41 notify("scriptedbc", a_vo_lines[i]);
@@ -249,11 +249,11 @@ function function_3eb38d8d() {
   nag2 = 0;
   var_ab05eb1f = 50;
   s_struct = struct::get("s_player_exits_tower", "targetname");
-  v_forward = anglestoforward(s_struct.angles);
+  v_forward = anglesToForward(s_struct.angles);
   start_time = gettime();
-  while (true) {
+  while(true) {
     a_players = getplayers();
-    for (i = 0; i < a_players.size; i++) {
+    for(i = 0; i < a_players.size; i++) {
       v_dir = vectornormalize(s_struct.origin - a_players[i].origin);
       dp = vectordot(v_forward, v_dir);
       if(dp < 0) {
@@ -286,7 +286,7 @@ function enter_tunnel_nag() {
   nag1 = 0;
   var_38fe7be4 = 50;
   start_time = gettime();
-  while (level flag::get("player_entering_tunnel") == 0) {
+  while(level flag::get("player_entering_tunnel") == 0) {
     time = gettime();
     dt = (time - start_time) / 1000;
     if(dt > var_5f00f64d && nag0 == 0) {
@@ -312,9 +312,9 @@ function function_4358b88b() {
 
 function hendricks_movement_handler() {
   level thread function_ae8c8b7b();
-  level thread scene::add_scene_func("cin_pro_03_02_blendin_vign_call_for_help", & function_9b773ab2);
+  level thread scene::add_scene_func("cin_pro_03_02_blendin_vign_call_for_help", &function_9b773ab2);
   level thread scene::play("cin_pro_03_02_blendin_vign_call_for_help");
-  scene::add_scene_func("cin_pro_03_02_blendin_vign_tarmac_cross", & function_cdc39276, "play");
+  scene::add_scene_func("cin_pro_03_02_blendin_vign_tarmac_cross", &function_cdc39276, "play");
   level scene::play("cin_pro_03_01_blendin_vign_movedown_tower_exit_hendr");
   level waittill("hash_c64e52db");
   level flag::set("hendr_crossed_tarmac");
@@ -382,9 +382,9 @@ function function_a7dec0e7() {
   level flag::wait_till("tower_doors_open");
   level.ai_hendricks ai::set_behavior_attribute("cqb", 0);
   a_allies = cp_prologue_util::get_ai_allies();
-  array::thread_all(a_allies, & ai::set_behavior_attribute, "cqb", 0);
-  array::run_all(level.players, & util::set_low_ready, 1);
-  array::thread_all(level.players, & cp_mi_eth_prologue::function_7072c5d8);
+  array::thread_all(a_allies, &ai::set_behavior_attribute, "cqb", 0);
+  array::run_all(level.players, &util::set_low_ready, 1);
+  array::thread_all(level.players, &cp_mi_eth_prologue::function_7072c5d8);
 }
 
 function function_a87bddf2() {
@@ -409,7 +409,7 @@ function function_ae8c8b7b() {
   var_3c301126 = getent("controltower_exitdoor_r", "targetname");
   var_280d5f68 rotateto(var_280d5f68.angles + (vectorscale((0, -1, 0), 90)), 0.75);
   var_3c301126 rotateto(var_3c301126.angles + vectorscale((0, 1, 0), 90), 0.75);
-  var_3c301126 playsound("evt_towerdoor_open");
+  var_3c301126 playSound("evt_towerdoor_open");
   level thread cp_prologue_util::rumble_all_players("damage_light", 0.05, 2, var_3c301126);
   level flag::set("tower_doors_open");
 }
@@ -433,12 +433,12 @@ function tarmac_vign_anims() {
   level thread function_d5fbb820("tarmac_wounded_2");
   level thread scene::play("tarmac_deathpose");
   var_197aede3 = struct::get("injured_carried2", "targetname");
-  var_197aede3 scene::add_scene_func(var_197aede3.scriptbundlename, & function_28d9b6cd, "play");
+  var_197aede3 scene::add_scene_func(var_197aede3.scriptbundlename, &function_28d9b6cd, "play");
   var_197aede3 thread scene::play(var_197aede3.scriptbundlename);
-  scene::add_scene_func("cin_pro_03_02_blendin_vign_destruction_help", & function_28d9b6cd, "play");
+  scene::add_scene_func("cin_pro_03_02_blendin_vign_destruction_help", &function_28d9b6cd, "play");
   level thread scene::play("cin_pro_03_02_blendin_vign_destruction_help");
   var_a7737ea8 = struct::get("injured_carried1", "targetname");
-  var_a7737ea8 scene::add_scene_func(var_a7737ea8.scriptbundlename, & function_28d9b6cd, "play");
+  var_a7737ea8 scene::add_scene_func(var_a7737ea8.scriptbundlename, &function_28d9b6cd, "play");
   var_a7737ea8 thread scene::play(var_a7737ea8.scriptbundlename);
 }
 
@@ -472,7 +472,7 @@ function function_92e75cce(n_range, var_b0ecff80 = 1) {
       wait(var_b0ecff80);
     }
   }
-  while (!b_player_near);
+  while(!b_player_near);
 }
 
 function blend_in_tsa_guard(str_scene) {
@@ -484,9 +484,9 @@ function blend_in_tsa_guard(str_scene) {
   ai_victim.health = int(ai_victim.health * 0.25);
   ai_victim thread function_b79bfbce();
   level thread scene::play(str_scene, ai_victim);
-  ai_victim util::delay(0.5, undefined, & kill);
+  ai_victim util::delay(0.5, undefined, &kill);
   ai_victim waittill("death");
-  if(isdefined(ai_victim)) {
+  if(isDefined(ai_victim)) {
     ai_victim startragdoll(1);
   }
 }
@@ -558,7 +558,7 @@ function function_374cf6ee() {
 }
 
 function function_599e2f36() {
-  if(isdefined(level.var_8d6df5cb)) {
+  if(isDefined(level.var_8d6df5cb)) {
     return;
   }
   level.var_8d6df5cb = 1;
@@ -566,7 +566,7 @@ function function_599e2f36() {
   a_vehicles[a_vehicles.size] = "tarmac_cargo_short";
   a_vehicles[a_vehicles.size] = "tarmac_cargo_long";
   a_vehicles[a_vehicles.size] = "tarmac_humvee";
-  for (i = 0; i < 12; i++) {
+  for(i = 0; i < 12; i++) {
     index = randomintrange(0, a_vehicles.size);
     veh_to_spawn = a_vehicles[index] + "_far";
     sp_tunneltruck2 = vehicle::simple_spawn_single(veh_to_spawn);
@@ -586,8 +586,8 @@ function function_71f51761() {
   delays[delays.size] = 12;
   delays[delays.size] = 8;
   delays[delays.size] = 12;
-  for (num = 0; num < 2; num++) {
-    for (i = 0; i < delays.size; i++) {
+  for(num = 0; num < 2; num++) {
+    for(i = 0; i < delays.size; i++) {
       var_5e344df1 = vehicle::simple_spawn_single("tarmac_cargo_enter_far_base");
       var_5e344df1 thread tunneltruck("nd_tarmac_cargo_enter_far_base");
       wait(delays[i]);
@@ -606,12 +606,12 @@ function function_3f3cae8c() {
   var_1dd38210 = getent("info_crouch_tutorial", "targetname");
   self flag::wait_till("tutorial_allowed");
   self flag::set_val("tutorial_allowed", 0);
-  while (!self istouching(var_1dd38210)) {
+  while(!self istouching(var_1dd38210)) {
     wait(0.1);
   }
   self util::show_hint_text(&"CP_MI_ETH_PROLOGUE_TUTORIAL_CROUCH", 0, undefined, 10);
   self.var_9db68ebf = 0;
-  while (!self.var_9db68ebf) {
+  while(!self.var_9db68ebf) {
     if(self stancebuttonpressed()) {
       self util::hide_hint_text();
       self.var_9db68ebf = 1;
@@ -678,7 +678,7 @@ function fxanim_plane_explosion_backup() {
 }
 
 function function_11ec608d() {
-  while (!level flag::get("tower_doors_open")) {
+  while(!level flag::get("tower_doors_open")) {
     wait(randomfloatrange(5, 12));
     level thread cp_prologue_util::function_2a0bc326(level.ai_hendricks.origin, 0.4, 0.5, 800, 2);
     playsoundatposition("amb_tower_shake", (0, 0, 0));
@@ -721,8 +721,8 @@ function take_out_guards_main() {
   cp_prologue_util::function_47a62798(1);
   level.ai_hendricks.pacifist = 1;
   level.ai_hendricks.ignoreme = 1;
-  array::run_all(level.players, & util::set_low_ready, 1);
-  array::thread_all(level.players, & cp_mi_eth_prologue::function_7072c5d8);
+  array::run_all(level.players, &util::set_low_ready, 1);
+  array::thread_all(level.players, &cp_mi_eth_prologue::function_7072c5d8);
   level thread tunnel_vignettes();
   level thread take_out_guards_objective_handler();
   level thread function_65e80b9e();
@@ -738,10 +738,10 @@ function hendricks_take_out_guard() {
   level flag::wait_till("start_hendr_kill");
   level thread function_f126566f();
   level thread function_eb28ee9b();
-  level scene::add_scene_func("cin_pro_04_01_takeout_vign_keycard", & security_camera::function_30b1de21);
-  level scene::add_scene_func("cin_pro_05_01_securitycam_1st_stealth_kill_prepare", & security_camera::function_d6557dc4);
-  level scene::add_scene_func("cin_pro_05_01_securitycam_1st_stealth_kill_prepare", & security_camera::function_9887d555, "done");
-  level scene::add_scene_func("cin_pro_04_01_takeout_vign_kiosk_kill", & hend_taylor_dialog, "play");
+  level scene::add_scene_func("cin_pro_04_01_takeout_vign_keycard", &security_camera::function_30b1de21);
+  level scene::add_scene_func("cin_pro_05_01_securitycam_1st_stealth_kill_prepare", &security_camera::function_d6557dc4);
+  level scene::add_scene_func("cin_pro_05_01_securitycam_1st_stealth_kill_prepare", &security_camera::function_9887d555, "done");
+  level scene::add_scene_func("cin_pro_04_01_takeout_vign_kiosk_kill", &hend_taylor_dialog, "play");
   level scene::play("cin_pro_04_01_takeout_vign_kiosk_kill");
 }
 
@@ -762,7 +762,7 @@ function function_eb28ee9b() {
 function function_60b83ce9() {
   t_door = getent("kiosk_guard_door", "targetname");
   level thread cp_prologue_util::function_21f52196("kiosk_doors", t_door, "t_regroup_past_guards");
-  while (!cp_prologue_util::function_cdd726fb("kiosk_doors")) {
+  while(!cp_prologue_util::function_cdd726fb("kiosk_doors")) {
     wait(0.5);
   }
   var_7e130296 = getent("blend_security_door_lt", "targetname");
@@ -803,14 +803,14 @@ function function_d095f82f() {
 function function_927f3ae0(delete_delay) {
   self turret::enable_laser(0, 0);
   a_players = getplayers();
-  for (i = 0; i < a_players.size; i++) {
+  for(i = 0; i < a_players.size; i++) {
     a_players[i].ignoreme = 1;
   }
   level.ai_hendricks.ignoreme = 1;
   level thread function_3d9b2dbc();
   level waittill("minister_located");
   a_players = getplayers();
-  for (i = 0; i < a_players.size; i++) {
+  for(i = 0; i < a_players.size; i++) {
     a_players[i].ignoreme = 0;
   }
   level.ai_hendricks.ignoreme = 0;
@@ -820,10 +820,10 @@ function function_927f3ae0(delete_delay) {
 
 function function_3d9b2dbc() {
   level endon("objective_take_out_guards_done");
-  while (true) {
+  while(true) {
     level waittill("hash_25ea191a");
     a_players = getplayers();
-    for (i = 0; i < a_players.size; i++) {
+    for(i = 0; i < a_players.size; i++) {
       a_players[i].ignoreme = 1;
     }
   }
@@ -833,17 +833,17 @@ function function_65e80b9e() {
   function_173d3769("close", 1);
   var_813b7ee8 = vehicle::simple_spawn_single("sp_truck_tarmac_enter_base");
   var_813b7ee8 thread tunneltruck("nd_truck_tarmac_enter_base", 0);
-  var_813b7ee8 playloopsound("evt_tunnel_truck_script_drive_lp");
+  var_813b7ee8 playLoopSound("evt_tunnel_truck_script_drive_lp");
   level waittill("hash_3bc05b4");
   var_813b7ee8 setspeed(0, 15, 15);
-  var_813b7ee8 playsound("evt_tunnel_truck_brake");
+  var_813b7ee8 playSound("evt_tunnel_truck_brake");
   var_813b7ee8 thread function_8677e162();
   level thread function_790e40ec();
   level waittill("hash_236f4ebe");
   var_813b7ee8 setspeed(20, 15, 15);
   var_813b7ee8 resumespeed(20);
-  var_813b7ee8 playloopsound("evt_tunnel_truck_script_drive_lp", 0.2);
-  util::delay(2, undefined, & function_173d3769, "open");
+  var_813b7ee8 playLoopSound("evt_tunnel_truck_script_drive_lp", 0.2);
+  util::delay(2, undefined, &function_173d3769, "open");
   level waittill("hash_bed7581c");
   function_173d3769("close");
 }
@@ -851,18 +851,18 @@ function function_65e80b9e() {
 function function_8677e162() {
   self stoploopsound(0.75);
   wait(0.25);
-  self playloopsound("evt_tunnel_truck_script_idle_lp", 0.25);
+  self playLoopSound("evt_tunnel_truck_script_idle_lp", 0.25);
 }
 
 function function_790e40ec() {
-  var_b8823447 = getentarray("tunnel_traffic_barrier", "targetname");
+  var_b8823447 = getEntArray("tunnel_traffic_barrier", "targetname");
   var_ecbf6327 = var_b8823447[0];
-  var_ecbf6327 playsound("evt_tunnel_truck_trafficarm");
+  var_ecbf6327 playSound("evt_tunnel_truck_trafficarm");
   var_ecbf6327 rotateroll(60, 1.5, 0.5, 0.3);
   var_ecbf6327 waittill("rotatedone");
   level notify("hash_236f4ebe");
   level waittill("hash_a4ce8e72");
-  var_ecbf6327 playsound("evt_tunnel_truck_trafficarm");
+  var_ecbf6327 playSound("evt_tunnel_truck_trafficarm");
   var_ecbf6327 rotateroll(60 * -1, 1.5, 0.5, 0.3);
   var_ecbf6327 waittill("rotatedone");
 }
@@ -871,8 +871,8 @@ function function_173d3769(str_state, var_abf03d83 = 0) {
   var_3c301126 = getent("tunnel_vault_door_r", "targetname");
   var_280d5f68 = getent("tunnel_vault_door_l", "targetname");
   if(!var_abf03d83) {
-    var_3c301126 playsound("evt_tunnel_door_start");
-    var_3c301126 playloopsound("evt_tunnel_door_loop", 1);
+    var_3c301126 playSound("evt_tunnel_door_start");
+    var_3c301126 playLoopSound("evt_tunnel_door_loop", 1);
   }
   if(str_state == "open") {
     if(var_abf03d83) {
@@ -893,7 +893,7 @@ function function_173d3769(str_state, var_abf03d83 = 0) {
   }
   var_3c301126 waittill("rotatedone");
   var_3c301126 stoploopsound(0.5);
-  var_3c301126 playsound("evt_tunnel_door_stop");
+  var_3c301126 playSound("evt_tunnel_door_stop");
 }
 
 function take_out_guards_objective_handler() {
@@ -965,7 +965,7 @@ function function_21dd3be1() {
   e_left_door moveto(v_pos_left, 1.5);
   v_pos_right = e_right_door.origin + (v_side * (move_amount * -1));
   e_right_door moveto(v_pos_right, 1.5);
-  while (!cp_prologue_util::function_cdd726fb("keycard_doors")) {
+  while(!cp_prologue_util::function_cdd726fb("keycard_doors")) {
     wait(0.5);
   }
   v_pos_left = e_left_door.origin + (v_side * (move_amount * -1));

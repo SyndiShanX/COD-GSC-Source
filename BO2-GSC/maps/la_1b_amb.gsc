@@ -11,32 +11,32 @@ main() {
   level thread play_intro_radio();
   level thread force_reverb_for_intro();
   level thread play_sam_ambience();
-  array_thread(getentarray("advertisement", "targetname"), ::advertisements);
+  array_thread(getEntArray("advertisement", "targetname"), ::advertisements);
 }
 
 advertisements() {
   if(self.script_noteworthy == "talent")
-    self playloopsound("vox_ads_1_01_001a_pa");
+    self playLoopSound("vox_ads_1_01_001a_pa");
 
   if(self.script_noteworthy == "tiny")
-    self playloopsound("vox_ads_1_01_002a_pa");
+    self playLoopSound("vox_ads_1_01_002a_pa");
 
   if(self.script_noteworthy == "bala")
-    self playloopsound("vox_ads_1_01_004a_pa");
+    self playLoopSound("vox_ads_1_01_004a_pa");
 
   if(self.script_noteworthy == "passion")
-    self playloopsound("vox_ads_1_01_007a_pa");
+    self playLoopSound("vox_ads_1_01_007a_pa");
 
   if(self.script_noteworthy == "cola")
-    self playloopsound("vox_ads_1_01_008a_pa");
+    self playLoopSound("vox_ads_1_01_008a_pa");
 
   if(self.script_noteworthy == "cinema")
-    self playloopsound("vox_ads_1_01_009a_pa");
+    self playLoopSound("vox_ads_1_01_009a_pa");
 
   self waittill("damage");
-  self playsound("dst_glass_pane");
+  self playSound("dst_glass_pane");
   self stoploopsound();
-  self playloopsound("amb_" + self.script_noteworthy + "_damaged_ad");
+  self playLoopSound("amb_" + self.script_noteworthy + "_damaged_ad");
 }
 
 force_snapshot_wait() {
@@ -57,7 +57,7 @@ play_sam_ambience() {
   level.player waittill("missileTurret_on");
   clientnotify("mTon");
   temp_ent = spawn("script_origin", level.player.origin);
-  temp_ent playloopsound("wpn_sam_interface_loop", 1);
+  temp_ent playLoopSound("wpn_sam_interface_loop", 1);
   level.player thread end_looping_sound(temp_ent);
   level.player thread play_sam_radio();
 }
@@ -75,7 +75,7 @@ play_sam_radio() {
   level.player endon("missileTurret_off");
 
   while(true) {
-    level.player playsound("amb_sam_radio_chatter");
+    level.player playSound("amb_sam_radio_chatter");
     wait(randomintrange(5, 10));
   }
 }
@@ -91,7 +91,7 @@ play_sam_creaking_sounds() {
     else
       wait_max = get_wait_max();
 
-    level.player playsound("evt_cougar_creak");
+    level.player playSound("evt_cougar_creak");
     wait(randomintrange(2, wait_max));
   }
 }
@@ -110,7 +110,7 @@ get_wait_max() {
 play_post_cougar_blend() {
   level waittill("cougar_blend_go");
   radioent = spawn("script_origin", (0, 0, 0));
-  radioent playloopsound("vox_blend_post_la");
+  radioent playLoopSound("vox_blend_post_la");
   level waittill("player_on_turret");
   radioent stoploopsound(0.5);
   radioent delete();
@@ -167,7 +167,7 @@ play_drone_control_tones_single() {
     return;
   }
   drone = drones[randomintrange(0, drones.size)];
-  drone playsound("veh_qr_tones_activate");
+  drone playSound("veh_qr_tones_activate");
   wait 4;
   drones = get_vehicle_array("veh_t6_drone_quad_rotor_sp", "model");
 
@@ -181,5 +181,5 @@ play_drone_reply() {
   wait(randomfloatrange(0.1, 0.85));
 
   if(isDefined(self))
-    self playsound("veh_qr_tones_activate_reply");
+    self playSound("veh_qr_tones_activate_reply");
 }

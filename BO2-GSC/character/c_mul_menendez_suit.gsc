@@ -4,7 +4,7 @@
 *********************************************/
 
 main() {
-  self setmodel("c_mul_menendez_suit_body");
+  self setModel("c_mul_menendez_suit_body");
   self.headmodel = "c_mul_menendez_old_head";
   self attach(self.headmodel, "", 1);
   self.voice = "american";

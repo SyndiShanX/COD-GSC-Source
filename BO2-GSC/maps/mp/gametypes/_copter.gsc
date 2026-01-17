@@ -17,7 +17,7 @@ init() {
 }
 
 getabovebuildingslocation(location) {
-  trace = bullettrace(location + vectorscale((0, 0, 1), 10000.0), location, 0, undefined);
+  trace = bulletTrace(location + vectorscale((0, 0, 1), 10000.0), location, 0, undefined);
   startorigin = trace["position"] + vectorscale((0, 0, -1), 514.0);
   zpos = 0;
   maxxpos = 13;
@@ -26,7 +26,7 @@ getabovebuildingslocation(location) {
   for(xpos = 0; xpos < maxxpos; xpos++) {
     for(ypos = 0; ypos < maxypos; ypos++) {
       thisstartorigin = startorigin + ((xpos / (maxxpos - 1) - 0.5) * 1024, (ypos / (maxypos - 1) - 0.5) * 1024, 0);
-      thisorigin = bullettrace(thisstartorigin, thisstartorigin + vectorscale((0, 0, -1), 10000.0), 0, undefined);
+      thisorigin = bulletTrace(thisstartorigin, thisstartorigin + vectorscale((0, 0, -1), 10000.0), 0, undefined);
       zpos = zpos + thisorigin["position"][2];
     }
   }
@@ -69,8 +69,8 @@ createcopter(location, team, damagetrig) {
   copter.angles = vectortoangles((0, 1, 0));
   copter linkto(scriptorigin);
   scriptorigin.copter = copter;
-  copter setmodel(level.coptermodel);
-  copter playloopsound("mp_copter_ambience");
+  copter setModel(level.coptermodel);
+  copter playLoopSound("mp_copter_ambience");
   damagetrig.origin = scriptorigin.origin;
   damagetrig thread mylinkto(scriptorigin);
   scriptorigin.damagetrig = damagetrig;
@@ -123,7 +123,7 @@ setcopterdefensearea(areaent) {
   self.areadescentpoints = [];
 
   if(isDefined(areaent.target))
-    self.areadescentpoints = getentarray(areaent.target, "targetname");
+    self.areadescentpoints = getEntArray(areaent.target, "targetname");
 
   for(i = 0; i < self.areadescentpoints.size; i++)
     self.areadescentpoints[i].targetent = getent(self.areadescentpoints[i].target, "targetname");
@@ -162,13 +162,13 @@ copterai() {
 
     insidetargets = [];
     outsidetargets = [];
-    skyheight = bullettrace(self.origin, self.origin + vectorscale((0, 0, 1), 10000.0), 0, undefined)["position"][2] - 10;
+    skyheight = bulletTrace(self.origin, self.origin + vectorscale((0, 0, 1), 10000.0), 0, undefined)["position"][2] - 10;
     besttarget = undefined;
     bestweight = 0;
 
     for(i = 0; i < enemytargets.size; i++) {
       inside = 0;
-      trace = bullettrace(enemytargets[i].origin + vectorscale((0, 0, 1), 10.0), enemytargets[i].origin + vectorscale((0, 0, 1), 10000.0), 0, undefined);
+      trace = bulletTrace(enemytargets[i].origin + vectorscale((0, 0, 1), 10.0), enemytargets[i].origin + vectorscale((0, 0, 1), 10000.0), 0, undefined);
 
       if(trace["position"][2] >= skyheight) {
         outsidetargets[outsidetargets.size] = enemytargets[i];
@@ -408,8 +408,7 @@ determinebestattackpos(targetpos, curpos, desireddist) {
 }
 
 getrandompos(origin, radius) {
-  for(pos = origin + ((randomfloat(2) - 1) * radius, (randomfloat(2) - 1) * radius, 0); distancesquared(pos, origin) > radius * radius; pos = origin + ((randomfloat(2) - 1) * radius, (randomfloat(2) - 1) * radius, 0)) {
-  }
+  for(pos = origin + ((randomfloat(2) - 1) * radius, (randomfloat(2) - 1) * radius, 0); distancesquared(pos, origin) > radius * radius; pos = origin + ((randomfloat(2) - 1) * radius, (randomfloat(2) - 1) * radius, 0)) {}
 
   return pos;
 }
@@ -423,7 +422,7 @@ coptershoot() {
     if(isDefined(self.desireddirentity) && isDefined(self.desireddirentity.origin)) {
       mypos = self.origin + level.coptercenteroffset;
       enemypos = self.desireddirentity.origin + self.desireddirentityoffset;
-      curdir = anglestoforward(self.angles);
+      curdir = anglesToForward(self.angles);
       enemydirraw = enemypos - mypos;
       enemydir = vectornormalize(enemydirraw);
 
@@ -431,15 +430,15 @@ coptershoot() {
         canseetarget = bullettracepassed(mypos, enemypos, 0, undefined);
 
         if(!canseetarget && isplayer(self.desireddirentity) && isalive(self.desireddirentity))
-          canseetarget = bullettracepassed(mypos, self.desireddirentity geteye(), 0, undefined);
+          canseetarget = bullettracepassed(mypos, self.desireddirentity getEye(), 0, undefined);
 
         if(canseetarget) {
-          self playsound("mp_copter_shoot");
+          self playSound("mp_copter_shoot");
           numshots = 20;
 
           for(i = 0; i < numshots; i++) {
             mypos = self.origin + level.coptercenteroffset;
-            dir = anglestoforward(self.angles);
+            dir = anglesToForward(self.angles);
             dir = dir + ((randomfloat(2) - 1) * 0.015, (randomfloat(2) - 1) * 0.015, (randomfloat(2) - 1) * 0.015);
             dir = vectornormalize(dir);
             self mymagicbullet(mypos, dir);
@@ -461,7 +460,7 @@ mymagicbullet(pos, dir) {
   if(getdvar(#"_id_9E8F8CB7") != "")
     damage = getdvarint(#"_id_9E8F8CB7");
 
-  trace = bullettrace(pos, pos + vectorscale(dir, 10000), 1, undefined);
+  trace = bulletTrace(pos, pos + vectorscale(dir, 10000), 1, undefined);
 
   if(isDefined(trace["entity"]) && isplayer(trace["entity"]) && isalive(trace["entity"]))
     trace["entity"] thread[[level.callbackplayerdamage]](self, self, damage, 0, "MOD_RIFLE_BULLET", "copter", self.origin, dir, "none", 0, 0);
@@ -549,7 +548,7 @@ coptermove() {
     else if(isDefined(self.desireddir))
       self.destdir = self.desireddir;
     else if(movingvertically) {
-      self.destdir = anglestoforward(self.angles);
+      self.destdir = anglesToForward(self.angles);
       self.destdir = vectornormalize((self.destdir[0], self.destdir[1], 0));
     } else {
       tiltamnt = speed / level.copter_maxvel;
@@ -560,7 +559,7 @@ coptermove() {
 
       self.destdir = movevec;
       self.destdir = vectornormalize((self.destdir[0], self.destdir[1], 0));
-      tiltamnt = tiltamnt * (1 - vectorangle(anglestoforward(self.angles), self.destdir) / 180);
+      tiltamnt = tiltamnt * (1 - vectorangle(anglesToForward(self.angles), self.destdir) / 180);
       self.destdir = vectornormalize((self.destdir[0], self.destdir[1], tiltamnt * -0.4));
     }
 
@@ -571,7 +570,7 @@ coptermove() {
 
     copterangles = self.angles;
     copterangles = combineangles(copterangles, vectorscale((0, 1, 0), 90.0));
-    olddir = anglestoforward(copterangles);
+    olddir = anglesToForward(copterangles);
     thisrotspeed = level.copter_rotspeed;
     olddir2d = vectornormalize((olddir[0], olddir[1], 0));
     newdir2d = vectornormalize((newdir[0], newdir[1], 0));
@@ -651,9 +650,9 @@ copterdie() {
     wait(interval);
   }
 
-  playfx(level.copterfinalexplosion, self.origin);
+  playFX(level.copterfinalexplosion, self.origin);
   fakeself = spawn("script_origin", self.origin);
-  fakeself playsound("mp_copter_explosion");
+  fakeself playSound("mp_copter_explosion");
   self notify("finaldeath");
   deletecopter();
   wait 2;
@@ -674,8 +673,8 @@ copterexplodefx() {
   self endon("finaldeath");
 
   while(true) {
-    playfx(level.copterexplosion, self.origin);
-    self playsound("mp_copter_explosion");
+    playFX(level.copterexplosion, self.origin);
+    self playSound("mp_copter_explosion");
     wait(0.5 + randomfloat(1));
   }
 }

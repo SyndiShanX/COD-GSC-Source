@@ -31,23 +31,23 @@
 #namespace namespace_9c39c8b3;
 
 function autoexec init() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("bonuszmZombieTraversalDoesAnimationExist", & function_6de9fa37);
-  behaviortreenetworkutility::registerbehaviortreeaction("bonuszmSpecialTraverseAction", & function_88e9d5da, undefined, & function_dd1fc89b);
-  animationstatenetwork::registeranimationmocomp("mocomp_bonuszm_special_traversal", & function_26c42b09, undefined, & function_47268b78);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("bonuszmZombieTraversalDoesAnimationExist", &function_6de9fa37);
+  behaviortreenetworkutility::registerbehaviortreeaction("bonuszmSpecialTraverseAction", &function_88e9d5da, undefined, &function_dd1fc89b);
+  animationstatenetwork::registeranimationmocomp("mocomp_bonuszm_special_traversal", &function_26c42b09, undefined, &function_47268b78);
 }
 
 function private function_6de9fa37(entity) {
-  assert(isdefined(entity.traversestartnode));
-  var_f6b30806 = isdefined(entity.traversestartnode) && entity.traversestartnode.script_noteworthy === "custom_traversal" || (isdefined(entity.traverseendnode) && entity.traverseendnode.script_noteworthy === "custom_traversal");
+  assert(isDefined(entity.traversestartnode));
+  var_f6b30806 = isDefined(entity.traversestartnode) && entity.traversestartnode.script_noteworthy === "custom_traversal" || (isDefined(entity.traverseendnode) && entity.traverseendnode.script_noteworthy === "custom_traversal");
   if(var_f6b30806) {
-    if(isdefined(entity.traversestartnode) && !issubstr(entity.traversestartnode.animscript, "human")) {
-      if(isdefined(entity.traversestartnode.animscript)) {
+    if(isDefined(entity.traversestartnode) && !issubstr(entity.traversestartnode.animscript, "human")) {
+      if(isDefined(entity.traversestartnode.animscript)) {
         iprintln("" + entity.traversestartnode.animscript);
       }
       return false;
     }
-    if(isdefined(entity.traverseendnode) && !issubstr(entity.traversestartnode.animscript, "human")) {
-      if(isdefined(entity.traversestartnode.animscript)) {
+    if(isDefined(entity.traverseendnode) && !issubstr(entity.traversestartnode.animscript, "human")) {
+      if(isDefined(entity.traversestartnode.animscript)) {
         iprintln("" + entity.traversestartnode.animscript);
       }
       return false;
@@ -60,10 +60,10 @@ function private function_6de9fa37(entity) {
   } else {
     animationresults = entity astsearch(istring("traverse@zombie"));
   }
-  if(isdefined(animationresults["animation"])) {
+  if(isDefined(animationresults["animation"])) {
     return true;
   }
-  if(isdefined(entity.traversestartnode.animscript)) {
+  if(isDefined(entity.traversestartnode.animscript)) {
     iprintln("" + entity.traversestartnode.animscript);
   }
   return false;
@@ -101,7 +101,7 @@ function private function_26c42b09(entity, mocompanim, mocompanimblendouttime, m
   if(entity haspath()) {
     entity.var_51ea7126 = entity.pathgoalpos;
   }
-  assert(isdefined(entity.traverseendnode));
+  assert(isDefined(entity.traverseendnode));
   entity forceteleport(entity.traverseendnode.origin, entity.angles);
   entity animmode("noclip", 0);
   entity.blockingpain = 1;
@@ -110,7 +110,7 @@ function private function_26c42b09(entity, mocompanim, mocompanimblendouttime, m
 function private function_47268b78(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
   entity.blockingpain = 0;
   entity setrepairpaths(1);
-  if(isdefined(entity.var_51ea7126)) {
+  if(isDefined(entity.var_51ea7126)) {
     entity setgoal(entity.var_51ea7126);
   }
   entity asmsetanimationrate(1);

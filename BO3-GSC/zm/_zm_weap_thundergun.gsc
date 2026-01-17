@@ -19,7 +19,7 @@
 #namespace zm_weap_thundergun;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_thundergun", & __init__, & __main__, undefined);
+  system::register("zm_weap_thundergun", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -40,12 +40,12 @@ function __main__() {
   level.thundergun_gib_refs[level.thundergun_gib_refs.size] = "guts";
   level.thundergun_gib_refs[level.thundergun_gib_refs.size] = "right_arm";
   level.thundergun_gib_refs[level.thundergun_gib_refs.size] = "left_arm";
-  level.basic_zombie_thundergun_knockdown = & zombie_knockdown;
-  if(!isdefined(level.override_thundergun_damage_func)) {
-    level.override_thundergun_damage_func = & override_thundergun_damage_func;
+  level.basic_zombie_thundergun_knockdown = &zombie_knockdown;
+  if(!isDefined(level.override_thundergun_damage_func)) {
+    level.override_thundergun_damage_func = &override_thundergun_damage_func;
   }
   level thread thundergun_devgui_dvar_think();
-  callback::on_connect( & thundergun_on_player_connect);
+  callback::on_connect(&thundergun_on_player_connect);
 }
 
 function thundergun_devgui_dvar_think() {
@@ -58,7 +58,7 @@ function thundergun_devgui_dvar_think() {
   setdvar("", level.zombie_vars[""]);
   setdvar("", level.zombie_vars[""]);
   setdvar("", level.zombie_vars[""]);
-  for (;;) {
+  for(;;) {
     level.zombie_vars[""] = getdvarint("");
     level.zombie_vars[""] = getdvarint("");
     level.zombie_vars[""] = getdvarint("");
@@ -76,14 +76,14 @@ function thundergun_on_player_connect() {
 function wait_for_thundergun_fired() {
   self endon("disconnect");
   self waittill("spawned_player");
-  for (;;) {
+  for(;;) {
     self waittill("weapon_fired");
     currentweapon = self getcurrentweapon();
     if(currentweapon == level.weaponzmthundergun || currentweapon == level.weaponzmthundergunupgraded) {
       self thread thundergun_fired();
       view_pos = self gettagorigin("tag_flash") - self getplayerviewheight();
       view_angles = self gettagangles("tag_flash");
-      playfx(level._effect["thundergun_smoke_cloud"], view_pos, anglestoforward(view_angles), anglestoup(view_angles));
+      playFX(level._effect["thundergun_smoke_cloud"], view_pos, anglesToForward(view_angles), anglestoup(view_angles));
     }
   }
 }
@@ -103,7 +103,7 @@ function thundergun_fired() {
 }
 
 function thundergun_affect_ais() {
-  if(!isdefined(level.thundergun_knockdown_enemies)) {
+  if(!isDefined(level.thundergun_knockdown_enemies)) {
     level.thundergun_knockdown_enemies = [];
     level.thundergun_knockdown_gib = [];
     level.thundergun_fling_enemies = [];
@@ -111,10 +111,10 @@ function thundergun_affect_ais() {
   }
   self thundergun_get_enemies_in_range();
   level.thundergun_network_choke_count = 0;
-  for (i = 0; i < level.thundergun_fling_enemies.size; i++) {
+  for(i = 0; i < level.thundergun_fling_enemies.size; i++) {
     level.thundergun_fling_enemies[i] thread thundergun_fling_zombie(self, level.thundergun_fling_vecs[i], i);
   }
-  for (i = 0; i < level.thundergun_knockdown_enemies.size; i++) {
+  for(i = 0; i < level.thundergun_knockdown_enemies.size; i++) {
     level.thundergun_knockdown_enemies[i] thread thundergun_knockdown_zombie(self, level.thundergun_knockdown_gib[i]);
   }
   level.thundergun_knockdown_enemies = [];
@@ -126,7 +126,7 @@ function thundergun_affect_ais() {
 function thundergun_get_enemies_in_range() {
   view_pos = self getweaponmuzzlepoint();
   zombies = array::get_all_closest(view_pos, getaiteamarray(level.zombie_team), undefined, undefined, level.zombie_vars["thundergun_knockdown_range"]);
-  if(!isdefined(zombies)) {
+  if(!isDefined(zombies)) {
     return;
   }
   knockdown_range_squared = level.zombie_vars["thundergun_knockdown_range"] * level.zombie_vars["thundergun_knockdown_range"];
@@ -141,8 +141,8 @@ function thundergun_get_enemies_in_range() {
     line(near_circle_pos, end_pos, (0, 0, 1), 1, 0, 100);
     circle(end_pos, level.zombie_vars[""], (1, 0, 0), 0, 0, 100);
   }
-  for (i = 0; i < zombies.size; i++) {
-    if(!isdefined(zombies[i]) || !isalive(zombies[i])) {
+  for(i = 0; i < zombies.size; i++) {
+    if(!isDefined(zombies[i]) || !isalive(zombies[i])) {
       continue;
     }
     test_origin = zombies[i] getcentroid();
@@ -195,24 +195,24 @@ function thundergun_debug_print(msg, color) {
   if(!getdvarint("")) {
     return;
   }
-  if(!isdefined(color)) {
+  if(!isDefined(color)) {
     color = (1, 1, 1);
   }
   print3d(self.origin + vectorscale((0, 0, 1), 60), msg, color, 1, 1, 40);
 }
 
 function thundergun_fling_zombie(player, fling_vec, index) {
-  if(!isdefined(self) || !isalive(self)) {
+  if(!isDefined(self) || !isalive(self)) {
     return;
   }
-  if(isdefined(self.thundergun_fling_func)) {
+  if(isDefined(self.thundergun_fling_func)) {
     self[[self.thundergun_fling_func]](player);
     return;
   }
   self.deathpoints_already_given = 1;
   self dodamage(self.health + 666, player.origin, player);
   if(self.health <= 0) {
-    if(isdefined(player) && isdefined(level.hero_power_update)) {
+    if(isDefined(player) && isDefined(level.hero_power_update)) {
       level thread[[level.hero_power_update]](player, self);
     }
     points = 10;
@@ -233,14 +233,14 @@ function zombie_knockdown(player, gib) {
     self.a.gib_ref = array::random(level.thundergun_gib_refs);
     self thread zombie_death::do_gib();
   }
-  if(isdefined(level.override_thundergun_damage_func)) {
+  if(isDefined(level.override_thundergun_damage_func)) {
     self[[level.override_thundergun_damage_func]](player, gib);
   } else {
     damage = level.zombie_vars["thundergun_knockdown_damage"];
-    self playsound("fly_thundergun_forcehit");
-    self.thundergun_handle_pain_notetracks = & handle_thundergun_pain_notetracks;
+    self playSound("fly_thundergun_forcehit");
+    self.thundergun_handle_pain_notetracks = &handle_thundergun_pain_notetracks;
     self dodamage(damage, player.origin, player);
-    self animcustom( & playthundergunpainanim);
+    self animcustom(&playthundergunpainanim);
   }
 }
 
@@ -249,7 +249,7 @@ function playthundergunpainanim() {
   self endon("killanimscript");
   self endon("death");
   self endon("end_play_thundergun_pain_anim");
-  if(isdefined(self.marked_for_death) && self.marked_for_death) {
+  if(isDefined(self.marked_for_death) && self.marked_for_death) {
     return;
   }
   if(self.damageyaw <= -135 || self.damageyaw >= 135) {
@@ -279,7 +279,7 @@ function playthundergunpainanim() {
   }
   self setanimstatefromasd(fallanim);
   self zombie_shared::donotetracks("thundergun_fall_anim", self.thundergun_handle_pain_notetracks);
-  if(!isdefined(self) || !isalive(self) || self.missinglegs || (isdefined(self.marked_for_death) && self.marked_for_death)) {
+  if(!isDefined(self) || !isalive(self) || self.missinglegs || (isDefined(self.marked_for_death) && self.marked_for_death)) {
     return;
   }
   self setanimstatefromasd(getupanim);
@@ -289,18 +289,18 @@ function playthundergunpainanim() {
 function thundergun_knockdown_zombie(player, gib) {
   self endon("death");
   playsoundatposition("wpn_thundergun_proj_impact", self.origin);
-  if(!isdefined(self) || !isalive(self)) {
+  if(!isDefined(self) || !isalive(self)) {
     return;
   }
-  if(isdefined(self.thundergun_knockdown_func)) {
+  if(isDefined(self.thundergun_knockdown_func)) {
     self[[self.thundergun_knockdown_func]](player, gib);
   }
 }
 
 function handle_thundergun_pain_notetracks(note) {
   if(note == "zombie_knockdown_ground_impact") {
-    playfx(level._effect["thundergun_knockdown_ground"], self.origin, anglestoforward(self.angles), anglestoup(self.angles));
-    self playsound("fly_thundergun_forcehit");
+    playFX(level._effect["thundergun_knockdown_ground"], self.origin, anglesToForward(self.angles), anglestoup(self.angles));
+    self playSound("fly_thundergun_forcehit");
   }
 }
 
@@ -309,19 +309,19 @@ function is_thundergun_damage() {
 }
 
 function enemy_killed_by_thundergun() {
-  return isdefined(self.thundergun_death) && self.thundergun_death;
+  return isDefined(self.thundergun_death) && self.thundergun_death;
 }
 
 function thundergun_sound_thread() {
   self endon("disconnect");
   self waittill("spawned_player");
-  for (;;) {
+  for(;;) {
     result = self util::waittill_any_return("grenade_fire", "death", "player_downed", "weapon_change", "grenade_pullback", "disconnect");
-    if(!isdefined(result)) {
+    if(!isDefined(result)) {
       continue;
     }
     if(result == "weapon_change" || result == "grenade_fire" && self getcurrentweapon() == level.weaponzmthundergun) {
-      self playloopsound("tesla_idle", 0.25);
+      self playLoopSound("tesla_idle", 0.25);
       continue;
     }
     self notify("weap_away");
@@ -330,7 +330,7 @@ function thundergun_sound_thread() {
 }
 
 function setup_thundergun_vox(player, fling, gib, knockdown) {
-  if(!isdefined(self) || !isalive(self)) {
+  if(!isDefined(self) || !isalive(self)) {
     return;
   }
   if(!fling && (gib || knockdown)) {}

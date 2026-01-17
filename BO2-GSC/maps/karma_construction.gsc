@@ -140,7 +140,7 @@ clear_exit_victims_spawn_funcs() {
 }
 
 remove_tarp_blockers() {
-  foreach(blocker in getentarray("tarp_blocker", "targetname"))
+  foreach(blocker in getEntArray("tarp_blocker", "targetname"))
   blocker delete();
 
   bloody_tarp_blocker = getent("tarp_collision_bloody", "targetname");
@@ -156,7 +156,7 @@ escalator_doors_open() {
   s_right_door_open = getstruct("escalator_door_right_open", "targetname");
   trigger_wait("escalator_door_proximity_trigger");
 
-  foreach(e_trigger in getentarray("construction_battle_color_triggers", "script_noteworthy"))
+  foreach(e_trigger in getEntArray("construction_battle_color_triggers", "script_noteworthy"))
   e_trigger delete();
 
   autosave_by_name("crc_exit_cleared");
@@ -176,7 +176,7 @@ escalator_doors_open() {
   level thread run_scene_and_delete("call_reinforcements");
   level thread run_scene_and_delete("escalator_door_kick");
   wait 0.15;
-  e_left_door playsound("evt_door_kick");
+  e_left_door playSound("evt_door_kick");
   e_left_door rotateyaw(-120.0, 0.4);
   e_right_door rotateyaw(140.0, 0.25);
   flag_set("room_clear");
@@ -218,7 +218,7 @@ sal_think() {
   level.ai_salazar set_goalradius(8);
   level.ai_salazar setgoalnode(getnode("salazar_elevator_wait_position", "targetname"));
   trigger_wait("t_elevator_3_anims");
-  level.ai_salazar setmodel("c_usa_unioninsp_salazar_cin_highlod_fb");
+  level.ai_salazar setModel("c_usa_unioninsp_salazar_cin_highlod_fb");
   level.ai_salazar setforcenocull();
   level thread run_scene("scene_sal_elevator_enter");
   flag_wait("construction_elevator_salazar_open");
@@ -373,7 +373,7 @@ play_elevator_03_anim() {
   e_elevator_door linkto(e_elevator);
   s_club_origin = getstruct("club_floor_origin", "targetname");
   m_tag_origin = spawn("script_model", e_p_align.origin);
-  m_tag_origin setmodel("tag_origin");
+  m_tag_origin setModel("tag_origin");
   m_tag_origin.angles = e_p_align.angles;
   m_tag_origin linkto(e_elevator);
   e_elevator setmovingplatformenabled(1);
@@ -384,9 +384,9 @@ play_elevator_03_anim() {
   e_elevator_door solid();
   setsaveddvar("g_speed", 110);
   wait 5.0;
-  level.player playsound("amb_elevator_2_button");
-  level.player playsound("amb_elevator_2_close");
-  level.player playloopsound("amb_elevator_2_loop", 3);
+  level.player playSound("amb_elevator_2_button");
+  level.player playSound("amb_elevator_2_close");
+  level.player playLoopSound("amb_elevator_2_loop", 3);
   level thread run_scene("club_elevator_close");
   e_e3_left_door moveto((e_e3_left_door.origin[0], s_e3_left_close.origin[1], e_e3_left_door.origin[2]), 1.5);
   e_e3_right_door moveto((e_e3_right_door.origin[0], s_e3_right_close.origin[1], e_e3_right_door.origin[2]), 1.5);
@@ -404,8 +404,8 @@ play_elevator_03_anim() {
   e_elevator moveto(s_club_origin.origin, 10.0);
   level thread load_gump("karma_gump_club");
   e_elevator waittill("movedone");
-  level.player playsound("amb_elevator_2_stop");
-  level.player playsound("amb_elevator_2_bell");
+  level.player playSound("amb_elevator_2_stop");
+  level.player playSound("amb_elevator_2_bell");
   level.player stoploopsound(1);
   e_elevator_model unlink();
   flag_wait("karma_gump_club");

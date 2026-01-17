@@ -50,8 +50,7 @@ stage_logic() {
   stage_completed("sq", level._cur_stage_name);
 }
 
-exit_stage(success) {
-}
+exit_stage(success) {}
 
 stage_vo_max() {
   sq_ftl_maxis_vo_on_holder("vox_maxi_sidequest_pl_0");
@@ -159,12 +158,12 @@ ric_lantern_ghost_death_watcher() {
 ftl_lantern_increment() {
   level.sq_ftl_lantern_fuel++;
   level notify("sq_ftl_lantern_inc");
-  self playsound("zmb_lantern_fill_" + level.sq_ftl_lantern_fuel);
+  self playSound("zmb_lantern_fill_" + level.sq_ftl_lantern_fuel);
 
   iprintlnbold("Fuel Level: " + level.sq_ftl_lantern_fuel);
 
   if(level.sq_ftl_lantern_fuel >= 10) {
-    self playsound("zmb_lantern_fill_done");
+    self playSound("zmb_lantern_fill_done");
     flag_set("ftl_lantern_charged");
   }
 }

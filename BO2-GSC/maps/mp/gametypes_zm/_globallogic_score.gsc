@@ -12,11 +12,9 @@
 #include maps\mp\_challenges;
 #include maps\mp\gametypes_zm\_globallogic_utils;
 
-updatematchbonusscores(winner) {
-}
+updatematchbonusscores(winner) {}
 
-givematchbonus(scoretype, score) {
-}
+givematchbonus(scoretype, score) {}
 
 doskillupdate(winner) {
   skillupdate(winner, level.teambased);
@@ -109,8 +107,7 @@ resetplayermomentumondeath() {
   }
 }
 
-giveplayermomentum(event, player, victim, weapon, descvalue) {
-}
+giveplayermomentum(event, player, victim, weapon, descvalue) {}
 
 giveplayerscore(event, player, victim, weapon, descvalue) {
   scorediff = 0;
@@ -144,11 +141,9 @@ giveplayerscore(event, player, victim, weapon, descvalue) {
   return scorediff;
 }
 
-default_onplayerscore(event, player, victim) {
-}
+default_onplayerscore(event, player, victim) {}
 
-_setplayerscore(player, score) {
-}
+_setplayerscore(player, score) {}
 
 _getplayerscore(player) {
   return player.pers["score"];
@@ -173,8 +168,7 @@ _setplayermomentum(player, momentum) {
   player.momentum = player.pers["momentum"];
 }
 
-_giveplayerkillstreakinternal(player, momentum, oldmomentum, killstreaktypearray) {
-}
+_giveplayerkillstreakinternal(player, momentum, oldmomentum, killstreaktypearray) {}
 
 setplayermomentumdebug() {
   setdvar("sv_momentumPercent", 0.0);
@@ -359,8 +353,7 @@ onteamscore(score, team) {
   level.waswinning = iswinning;
 }
 
-default_onteamscore(event, team) {
-}
+default_onteamscore(event, team) {}
 
 initpersstat(dataname, record_stats, init_to_stat_value) {
   if(!isDefined(self.pers[dataname]))
@@ -398,8 +391,7 @@ threadedrecordplayerstats(dataname) {
   recordplayerstats(self, dataname, self.pers[dataname]);
 }
 
-updatewinstats(winner) {
-}
+updatewinstats(winner) {}
 
 updatelossstats(loser) {
   loser addplayerstatwithgametype("losses", 1);
@@ -459,11 +451,9 @@ updatewinlossstats(winner) {
   }
 }
 
-backupandclearwinstreaks() {
-}
+backupandclearwinstreaks() {}
 
-restorewinstreaks(winner) {
-}
+restorewinstreaks(winner) {}
 
 inckillstreaktracker(sweapon) {
   self endon("disconnect");
@@ -678,5 +668,4 @@ processassist(killedplayer, damagedone, weapon) {
   self maps\mp\_challenges::assisted();
 }
 
-xpratethread() {
-}
+xpratethread() {}

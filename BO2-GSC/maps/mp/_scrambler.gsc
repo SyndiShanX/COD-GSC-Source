@@ -52,7 +52,7 @@ scramblerdetonate(attacker, weaponname) {
   from_emp = maps\mp\killstreaks\_emp::isempweapon(weaponname);
 
   if(!from_emp)
-    playfx(level._equipment_explode_fx, self.origin);
+    playFX(level._equipment_explode_fx, self.origin);
 
   if(self.owner isenemyplayer(attacker))
     attacker maps\mp\_challenges::destroyedequipment(weaponname);
@@ -76,7 +76,7 @@ destroyent() {
 watchscramblerdamage(watcher) {
   self endon("death");
   self endon("hacked");
-  self setcandamage(1);
+  self setCanDamage(1);
   damagemax = 100;
 
   if(!self maps\mp\_utility::ishacked())
@@ -147,7 +147,7 @@ ownersameteam(owner1, owner2) {
 }
 
 checkscramblerstun() {
-  scramblers = getentarray("grenade", "classname");
+  scramblers = getEntArray("grenade", "classname");
 
   if(isDefined(self.name) && self.name == "scrambler_mp")
     return false;

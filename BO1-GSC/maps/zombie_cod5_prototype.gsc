@@ -110,8 +110,8 @@ setup_weapon_cabinet() {
 }
 
 weapon_cabinet_think() {
-  weapons = getentarray("cabinet_weapon", "targetname");
-  doors = getentarray(self.target, "targetname");
+  weapons = getEntArray("cabinet_weapon", "targetname");
+  doors = getEntArray(self.target, "targetname");
   for(i = 0; i < doors.size; i++) {
     doors[i] NotSolid();
   }
@@ -164,7 +164,7 @@ weapon_cabinet_think() {
       self SetHintString(&"WAW_ZOMBIE_WEAPONCOSTAMMO", cost, ammo_cost);
       self setCursorHint("HINT_NOICON");
       player maps\_zombiemode_score::minus_to_player_score(self.zombie_cost);
-      doors = getentarray(self.target, "targetname");
+      doors = getEntArray(self.target, "targetname");
       for(i = 0; i < doors.size; i++) {
         if(doors[i].model == "dest_test_cabinet_ldoor_dmg0") {
           doors[i] thread weapon_cabinet_door_open("left");
@@ -351,23 +351,23 @@ include_weapons() {
   maps\_zombiemode_weapons::add_limited_weapon("knife_ballistic_zm", 1);
   precacheItem("explosive_bolt_zm");
   precacheItem("explosive_bolt_upgraded_zm");
-  maps\_zombiemode_weapons::add_zombie_weapon("zombie_kar98k", "zombie_kar98k_upgraded", & "WAW_ZOMBIE_WEAPON_KAR98K_200", 200, "rifle");
-  maps\_zombiemode_weapons::add_zombie_weapon("zombie_type99_rifle", "", & "WAW_ZOMBIE_WEAPON_TYPE99_200", 200, "rifle");
-  maps\_zombiemode_weapons::add_zombie_weapon("zombie_gewehr43", "zombie_gewehr43_upgraded", & "WAW_ZOMBIE_WEAPON_GEWEHR43_600", 600, "rifle");
-  maps\_zombiemode_weapons::add_zombie_weapon("zombie_m1carbine", "zombie_m1carbine_upgraded", & "WAW_ZOMBIE_WEAPON_M1CARBINE_600", 600, "rifle");
-  maps\_zombiemode_weapons::add_zombie_weapon("zombie_m1garand", "zombie_m1garand_upgraded", & "WAW_ZOMBIE_WEAPON_M1GARAND_600", 600, "rifle");
-  maps\_zombiemode_weapons::add_zombie_weapon("stielhandgranate", "", & "WAW_ZOMBIE_WEAPON_STIELHANDGRANATE_250", 250, "grenade", "", 250);
-  maps\_zombiemode_weapons::add_zombie_weapon("mine_bouncing_betty", "", & "WAW_ZOMBIE_WEAPON_SATCHEL_2000", 2000);
-  maps\_zombiemode_weapons::add_zombie_weapon("kar98k_scoped_zombie", "", & "WAW_ZOMBIE_WEAPON_KAR98K_S_750", 750, "sniper");
-  maps\_zombiemode_weapons::add_zombie_weapon("zombie_stg44", "zombie_stg44_upgraded", & "WAW_ZOMBIE_WEAPON_STG44_1200", 1200, "mg");
-  maps\_zombiemode_weapons::add_zombie_weapon("zombie_thompson", "zombie_thompson_upgraded", & "WAW_ZOMBIE_WEAPON_THOMPSON_1200", 1200, "mg");
-  maps\_zombiemode_weapons::add_zombie_weapon("zombie_type100_smg", "zombie_type100_smg_upgraded", & "WAW_ZOMBIE_WEAPON_TYPE100_1000", 1000, "mg");
-  maps\_zombiemode_weapons::add_zombie_weapon("zombie_fg42", "zombie_fg42_upgraded", & "WAW_ZOMBIE_WEAPON_FG42_1500", 1500, "mg");
-  maps\_zombiemode_weapons::add_zombie_weapon("zombie_doublebarrel", "zombie_doublebarrel_upgraded", & "WAW_ZOMBIE_WEAPON_DOUBLEBARREL_1200", 1200, "shotgun");
-  maps\_zombiemode_weapons::add_zombie_weapon("zombie_doublebarrel_sawed", "", & "WAW_ZOMBIE_WEAPON_DOUBLEBARREL_SAWED_1200", 1200, "shotgun");
-  maps\_zombiemode_weapons::add_zombie_weapon("zombie_shotgun", "zombie_shotgun_upgraded", & "WAW_ZOMBIE_WEAPON_SHOTGUN_1500", 1500, "shotgun");
-  maps\_zombiemode_weapons::add_zombie_weapon("zombie_bar", "zombie_bar_upgraded", & "WAW_ZOMBIE_WEAPON_BAR_1800", 1800, "mg");
-  maps\_zombiemode_weapons::add_zombie_weapon("zombie_bar_bipod", "", & "WAW_ZOMBIE_WEAPON_BAR_BIPOD_2500", 2500, "mg");
+  maps\_zombiemode_weapons::add_zombie_weapon("zombie_kar98k", "zombie_kar98k_upgraded", &"WAW_ZOMBIE_WEAPON_KAR98K_200", 200, "rifle");
+  maps\_zombiemode_weapons::add_zombie_weapon("zombie_type99_rifle", "", &"WAW_ZOMBIE_WEAPON_TYPE99_200", 200, "rifle");
+  maps\_zombiemode_weapons::add_zombie_weapon("zombie_gewehr43", "zombie_gewehr43_upgraded", &"WAW_ZOMBIE_WEAPON_GEWEHR43_600", 600, "rifle");
+  maps\_zombiemode_weapons::add_zombie_weapon("zombie_m1carbine", "zombie_m1carbine_upgraded", &"WAW_ZOMBIE_WEAPON_M1CARBINE_600", 600, "rifle");
+  maps\_zombiemode_weapons::add_zombie_weapon("zombie_m1garand", "zombie_m1garand_upgraded", &"WAW_ZOMBIE_WEAPON_M1GARAND_600", 600, "rifle");
+  maps\_zombiemode_weapons::add_zombie_weapon("stielhandgranate", "", &"WAW_ZOMBIE_WEAPON_STIELHANDGRANATE_250", 250, "grenade", "", 250);
+  maps\_zombiemode_weapons::add_zombie_weapon("mine_bouncing_betty", "", &"WAW_ZOMBIE_WEAPON_SATCHEL_2000", 2000);
+  maps\_zombiemode_weapons::add_zombie_weapon("kar98k_scoped_zombie", "", &"WAW_ZOMBIE_WEAPON_KAR98K_S_750", 750, "sniper");
+  maps\_zombiemode_weapons::add_zombie_weapon("zombie_stg44", "zombie_stg44_upgraded", &"WAW_ZOMBIE_WEAPON_STG44_1200", 1200, "mg");
+  maps\_zombiemode_weapons::add_zombie_weapon("zombie_thompson", "zombie_thompson_upgraded", &"WAW_ZOMBIE_WEAPON_THOMPSON_1200", 1200, "mg");
+  maps\_zombiemode_weapons::add_zombie_weapon("zombie_type100_smg", "zombie_type100_smg_upgraded", &"WAW_ZOMBIE_WEAPON_TYPE100_1000", 1000, "mg");
+  maps\_zombiemode_weapons::add_zombie_weapon("zombie_fg42", "zombie_fg42_upgraded", &"WAW_ZOMBIE_WEAPON_FG42_1500", 1500, "mg");
+  maps\_zombiemode_weapons::add_zombie_weapon("zombie_doublebarrel", "zombie_doublebarrel_upgraded", &"WAW_ZOMBIE_WEAPON_DOUBLEBARREL_1200", 1200, "shotgun");
+  maps\_zombiemode_weapons::add_zombie_weapon("zombie_doublebarrel_sawed", "", &"WAW_ZOMBIE_WEAPON_DOUBLEBARREL_SAWED_1200", 1200, "shotgun");
+  maps\_zombiemode_weapons::add_zombie_weapon("zombie_shotgun", "zombie_shotgun_upgraded", &"WAW_ZOMBIE_WEAPON_SHOTGUN_1500", 1500, "shotgun");
+  maps\_zombiemode_weapons::add_zombie_weapon("zombie_bar", "zombie_bar_upgraded", &"WAW_ZOMBIE_WEAPON_BAR_1800", 1800, "mg");
+  maps\_zombiemode_weapons::add_zombie_weapon("zombie_bar_bipod", "", &"WAW_ZOMBIE_WEAPON_BAR_BIPOD_2500", 2500, "mg");
 }
 
 include_powerups() {
@@ -470,7 +470,7 @@ prototype_zone_init() {
 }
 
 prototype_eggs() {
-  trigs = getentarray("evt_egg_killme", "targetname");
+  trigs = getEntArray("evt_egg_killme", "targetname");
   for(i = 0; i < trigs.size; i++) {
     trigs[i] thread check_for_egg_damage();
   }

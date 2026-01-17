@@ -44,9 +44,9 @@ function main() {
   thread function_ee430caa();
   thread function_a1b52577();
   thread function_18af354a();
-  spawner::add_spawn_function_group("water_robots", "targetname", & robot_underwater_callback);
-  spawner::add_spawn_function_group("water_robots2", "targetname", & robot_underwater_callback);
-  spawner::add_spawn_function_group("water_robots3", "targetname", & robot_underwater_callback);
+  spawner::add_spawn_function_group("water_robots", "targetname", &robot_underwater_callback);
+  spawner::add_spawn_function_group("water_robots2", "targetname", &robot_underwater_callback);
+  spawner::add_spawn_function_group("water_robots3", "targetname", &robot_underwater_callback);
 }
 
 function init_flags() {
@@ -67,16 +67,16 @@ function function_60f7b1b6() {
 
 function function_1ecf48ef() {
   level endon("hash_47f08523");
-  scene::add_scene_func("cin_aqu_05_01_enter_1st_look", & function_3d8a313e, "play");
+  scene::add_scene_func("cin_aqu_05_01_enter_1st_look", &function_3d8a313e, "play");
   scene::init("cin_aqu_05_01_enter_1st_look");
   level waittill("hash_7e64f485");
   var_5b5cfed1 = trigger::wait_till("water_room_igc");
   struct = getent("igc_kane_khalil_1", "targetname");
   level notify("hash_ee3f7dc5");
-  if(isdefined(level.bzm_aquiferdialogue1_7callback)) {
+  if(isDefined(level.bzm_aquiferdialogue1_7callback)) {
     level thread[[level.bzm_aquiferdialogue1_7callback]]();
   }
-  if(isdefined(level.kayne) && isalive(level.kayne)) {
+  if(isDefined(level.kayne) && isalive(level.kayne)) {
     level.kayne delete();
   }
   aquifer_obj::function_b3ed487d(1);
@@ -90,7 +90,7 @@ function function_1ecf48ef() {
   level.kayne thread function_8fdcc95b(1);
   savegame::checkpoint_save();
   setdvar("player_swimSpeed", 80);
-  if(isdefined(level.bzm_aquiferdialogue2callback)) {
+  if(isDefined(level.bzm_aquiferdialogue2callback)) {
     level thread[[level.bzm_aquiferdialogue2callback]]();
   }
   foreach(p in level.players) {
@@ -104,7 +104,7 @@ function function_1ecf48ef() {
 
 function function_cd377710() {
   foreach(player in level.activeplayers) {
-    if(isdefined(player getlinkedent())) {
+    if(isDefined(player getlinkedent())) {
       player.pvtol notify("hash_c38e4003");
       player unlink();
       player.pvtol.state = undefined;
@@ -163,7 +163,7 @@ function function_8aec0a4c() {
   level notify("hash_eb6a1c8b");
   level.kayne scene::stop(1);
   struct thread scene::play("cin_aqu_03_21_server_room_explosion", level.kayne);
-  if(isdefined(level.bzm_aquiferdialogue2_1callback)) {
+  if(isDefined(level.bzm_aquiferdialogue2_1callback)) {
     level thread[[level.bzm_aquiferdialogue2_1callback]]();
   }
   level.kayne dialog::say("kane_on_me_0");
@@ -216,19 +216,19 @@ function function_ee430caa() {
   var_a40e8c9b = arraycombine(var_ebc124a5, var_19e0145d, 0, 0);
   var_8a13f363 = arraycombine(var_a40e8c9b, var_f3dd99f4, 0, 0);
   foreach(i in var_8a13f363) {
-    if(isdefined(i)) {
+    if(isDefined(i)) {
       i delete();
     }
   }
-  if(isdefined(level.kayne) && isalive(level.kayne)) {
+  if(isDefined(level.kayne) && isalive(level.kayne)) {
     level.kayne delete();
   }
-  if(isdefined(level.bzm_aquiferdialogue3callback)) {
+  if(isDefined(level.bzm_aquiferdialogue3callback)) {
     level thread[[level.bzm_aquiferdialogue3callback]]();
   }
   thread function_ddc03444();
   struct = getent("igc_kane_khalil_1", "targetname");
-  if(!isdefined(level.activeplayers[0].pvtol)) {
+  if(!isDefined(level.activeplayers[0].pvtol)) {
     level.activeplayers[0] aquifer_util::function_d683f26a(0);
   }
   level.activeplayers[0].pvtol show();
@@ -274,21 +274,21 @@ function function_a079b7e3() {
 }
 
 function function_26031755() {
-  playfxontag(level._effect["emp_flash"], self, "tag_origin");
+  playFXOnTag(level._effect["emp_flash"], self, "tag_origin");
 }
 
 function emprumbleloop(duration) {
   self endon("emp_rumble_loop");
   self notify("emp_rumble_loop");
   goaltime = gettime() + (duration * 1000);
-  while (gettime() < goaltime) {
+  while(gettime() < goaltime) {
     self playrumbleonentity("damage_heavy");
     wait(0.05);
   }
 }
 
 function checktoturnoffemp() {
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     self.empgrenaded = 0;
     shutdownemprebootindicatormenu();
     self setempjammed(0);
@@ -298,7 +298,7 @@ function checktoturnoffemp() {
 
 function shutdownemprebootindicatormenu() {
   emprebootmenu = self getluimenu("EmpRebootIndicator");
-  if(isdefined(emprebootmenu)) {
+  if(isDefined(emprebootmenu)) {
     self closeluimenu(emprebootmenu);
   }
 }
@@ -318,7 +318,7 @@ function function_4f725f0b() {
   self thread emprumbleloop(0.75);
   self setempjammed(1);
   wait(7);
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     self notify("empgrenadetimedout");
     self checktoturnoffemp();
   }
@@ -398,8 +398,8 @@ function player_underwater() {
   self notify("hash_1fffa65c");
   self endon("death");
   self endon("hash_1fffa65c");
-  while (true) {
-    if(self.sessionstate == "playing" && isalive(self) && self isplayerunderwater() && (!(isdefined(self.is_underwater) && self.is_underwater))) {
+  while(true) {
+    if(self.sessionstate == "playing" && isalive(self) && self isplayerunderwater() && (!(isDefined(self.is_underwater) && self.is_underwater))) {
       self thread function_41018429();
     }
     wait(0.5);
@@ -413,7 +413,7 @@ function function_41018429() {
   self.is_underwater = 1;
   self hazard::function_459e5eff("o2", 0);
   var_dd075cd2 = 1;
-  while (self isplayerunderwater()) {
+  while(self isplayerunderwater()) {
     wait(1);
     var_dd075cd2 = self hazard::do_damage("o2", 5);
   }
@@ -478,7 +478,7 @@ function function_18af354a() {
 }
 
 function function_8fdcc95b(delay) {
-  if(isdefined(delay)) {
+  if(isDefined(delay)) {
     wait(delay);
   }
   self fx::play("bubbles", self.origin, (0, 0, 0), "swim_done", 1, "j_spineupper", 1);
@@ -543,7 +543,7 @@ function function_a0faf694(var_4b70f64, kane, var_be38fd90) {
   rotator = spawn("script_origin", var_4b70f64.origin);
   rotator.angles = var_4b70f64 getplayerangles();
   var_4b70f64 playerlinkto(rotator, undefined, 1, 0, 0, 0, 0);
-  player_eye = var_4b70f64 geteye();
+  player_eye = var_4b70f64 getEye();
   if(distance(var_4b70f64.origin, var_be38fd90.origin) < 175) {
     if(var_4b70f64.origin[1] < var_be38fd90.origin[1]) {
       rotator moveto(rotator.origin + vectorscale((0, 1, 0), 40), 0.3, 0.15, 0.15);
@@ -564,7 +564,7 @@ function robot_underwater_callback() {
   self asmsetanimationrate(0.7);
   self clientfield::set("robot_bubbles_fx", 1);
   self waittill("death");
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     self startragdoll();
   }
 }
@@ -600,7 +600,7 @@ function function_8492aced() {
 
 function fade_from_black() {
   level endon("hash_8f79547f");
-  while (true) {
+  while(true) {
     level waittill("hash_f26c95d0");
     if(level.var_75756ef4 == 1) {
       level.var_75756ef4 = 0;
@@ -611,7 +611,7 @@ function fade_from_black() {
 
 function fade_to_black() {
   level endon("hash_8f79547f");
-  while (true) {
+  while(true) {
     level waittill("hash_43565802");
     if(level.var_75756ef4 == 0) {
       level.var_75756ef4 = 1;

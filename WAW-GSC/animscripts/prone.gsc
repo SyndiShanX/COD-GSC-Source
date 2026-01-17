@@ -33,7 +33,7 @@ ProneTurningThread(threadToSpawn, killmeString) {
   self.a.usingProneLeftAndRight = false;
   if(isDefined(threadToSpawn))
     self thread[[threadToSpawn]]("kill ProneTurningThread children");
-  for (;;) {
+  for(;;) {
     if(self.a.pose != "prone") {
       self OrientMode("face default");
     } else {
@@ -99,7 +99,7 @@ ProneCombatThread(killmeString) {
   self endon("killanimscript");
   self endon(killmeString);
   wait 0;
-  for (;;) {
+  for(;;) {
     if(!self isStanceAllowedWrapper("prone")) {
       self notify("kill ProneRangeCombat");
       break;
@@ -185,7 +185,7 @@ ProneShootVolley() {
     animRate = animscripts\weaponList::autoShootAnimRate();
     self Set3FlaggedAnimKnobs("shootanim", autoshootanims, 1, 0.05, animRate);
     rand = randomint(8) + 6;
-    for (i = 0; i < rand; i++) {
+    for(i = 0; i < rand; i++) {
       self waittillmatch("shootanim", "fire");
       self shootEnemyWrapper();
       self decrementBulletsInClip();
@@ -194,7 +194,7 @@ ProneShootVolley() {
     self Set3FlaggedAnimKnobs("shootanim", shootanims, 1, 0.2, 0);
     wait 0.2;
     rand = randomint(3) + 2;
-    for (i = 0; i < rand; i++) {
+    for(i = 0; i < rand; i++) {
       self Set3FlaggedAnimKnobs("shootanim", shootanims, 1, 0, 1);
       self shootEnemyWrapper();
       self decrementBulletsInClip();

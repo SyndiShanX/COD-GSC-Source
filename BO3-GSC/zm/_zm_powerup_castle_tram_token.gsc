@@ -26,18 +26,18 @@
 #namespace zm_powerup_castle_tram_token;
 
 function autoexec __init__sytem__() {
-  system::register("zm_powerup_castle_tram_token", & __init__, undefined, undefined);
+  system::register("zm_powerup_castle_tram_token", &__init__, undefined, undefined);
 }
 
 function __init__() {
   register_clientfields();
-  zm_powerups::register_powerup("castle_tram_token", & function_bcb6924e);
+  zm_powerups::register_powerup("castle_tram_token", &function_bcb6924e);
   if(tolower(getdvarstring("g_gametype")) != "zcleansed") {
-    zm_powerups::add_zombie_powerup("castle_tram_token", "p7_zm_ctl_115_fuse_pickup", & "ZM_CASTLE_TRAM_TOKEN_POWERUP", & function_56739ab1, 1, 0, 0);
+    zm_powerups::add_zombie_powerup("castle_tram_token", "p7_zm_ctl_115_fuse_pickup", &"ZM_CASTLE_TRAM_TOKEN_POWERUP", &function_56739ab1, 1, 0, 0);
     zm_powerups::powerup_set_statless_powerup("castle_tram_token");
   }
-  callback::on_connect( & on_player_connect);
-  callback::on_spawned( & on_player_spawned);
+  callback::on_connect(&on_player_connect);
+  callback::on_spawned(&on_player_spawned);
   thread function_6dd86f90();
 }
 
@@ -45,7 +45,7 @@ function register_clientfields() {
   clientfield::register("toplayer", "has_castle_tram_token", 1, 1, "int");
   clientfield::register("toplayer", "ZM_CASTLE_TRAM_TOKEN_ACQUIRED", 1, 1, "int");
   clientfield::register("scriptmover", "powerup_fuse_fx", 1, 1, "int");
-  for (i = 0; i < 4; i++) {
+  for(i = 0; i < 4; i++) {
     clientfield::register("world", ("player" + i) + "hasItem", 1, 1, "int");
   }
   clientfield::register("clientuimodel", "zmInventory.player_using_sprayer", 1, 1, "int");
@@ -80,7 +80,7 @@ function function_83ef471e(player) {
 }
 
 function function_56739ab1() {
-  if(isdefined(level.var_6e2e91a0) && level.var_6e2e91a0) {
+  if(isDefined(level.var_6e2e91a0) && level.var_6e2e91a0) {
     return 0;
   }
   var_db175e = !level flag::get("tram_moving") && !level flag::get("tram_docked") && !level flag::get("tram_cooldown");
@@ -103,7 +103,7 @@ function private function_1cb39173(var_1d640f59, str_widget_clientuimodel, var_1
   level notify("widget_ui_override");
   self endon("disconnect");
   if(var_18bfcc38) {
-    if(isdefined(var_1d640f59)) {
+    if(isDefined(var_1d640f59)) {
       self thread clientfield::set_player_uimodel(var_1d640f59, 1);
     }
     n_show_ui_duration = 3.5;
@@ -134,7 +134,7 @@ function on_player_spawned() {}
 function function_6dd86f90() {
   level flagsys::wait_till("");
   wait(1);
-  zm_devgui::add_custom_devgui_callback( & function_9293606a);
+  zm_devgui::add_custom_devgui_callback(&function_9293606a);
   adddebugcommand("");
   adddebugcommand("");
 }

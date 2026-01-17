@@ -128,7 +128,7 @@ chair_light() {
   mdl.angles = (90, 0, 0);
   mdl setModel("tag_origin");
   mdl linkto(lantern);
-  playfxontag(level._effect["chair_light_fx"], mdl, "tag_origin");
+  playFXOnTag(level._effect["chair_light_fx"], mdl, "tag_origin");
   while(1) {
     wait(randomfloatrange(10, 15));
     lantern physicslaunch(lantern.origin, (randomintrange(-20, 20), randomintrange(-20, 20), randomintrange(-20, 20)));

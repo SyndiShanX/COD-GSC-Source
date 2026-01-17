@@ -16,7 +16,7 @@ init(weapon_name, flourish_weapon_name, ballistic_weapon_name, ballistic_upgrade
   precacheitem(weapon_name);
   precacheitem(flourish_weapon_name);
   add_melee_weapon(weapon_name, flourish_weapon_name, ballistic_weapon_name, ballistic_upgraded_weapon_name, cost, wallbuy_targetname, hint_string, vo_dialog_id, flourish_fn);
-  melee_weapon_triggers = getentarray(wallbuy_targetname, "targetname");
+  melee_weapon_triggers = getEntArray(wallbuy_targetname, "targetname");
 
   for(i = 0; i < melee_weapon_triggers.size; i++) {
     knife_model = getent(melee_weapon_triggers[i].target, "targetname");
@@ -37,7 +37,7 @@ init(weapon_name, flourish_weapon_name, ballistic_weapon_name, ballistic_upgrade
         melee_weapon_triggers[i] setcursorhint("HINT_NOICON");
     } else {
       weapon_display = get_weapon_display_name(weapon_name);
-      hint_string = & "ZOMBIE_WEAPONCOSTONLY";
+      hint_string = &"ZOMBIE_WEAPONCOSTONLY";
       melee_weapon_triggers[i] sethintstring(hint_string, weapon_display, cost);
 
       if(getdvarint(#"tu12_zombies_allow_hint_weapon_from_script") && !(isDefined(level.disable_melee_wallbuy_icons) && level.disable_melee_wallbuy_icons)) {
@@ -90,7 +90,7 @@ prepare_stub(stub, weapon_name, flourish_weapon_name, ballistic_weapon_name, bal
     } else {
       stub.hint_parm1 = get_weapon_display_name(weapon_name);
       stub.hint_parm2 = cost;
-      stub.hint_string = & "ZOMBIE_WEAPONCOSTONLY";
+      stub.hint_string = &"ZOMBIE_WEAPONCOSTONLY";
 
       if(getdvarint(#"tu12_zombies_allow_hint_weapon_from_script") && !(isDefined(level.disable_melee_wallbuy_icons) && level.disable_melee_wallbuy_icons)) {
         stub.cursor_hint = "HINT_WEAPON";
@@ -141,7 +141,7 @@ give_melee_weapon_by_name(weapon_name) {
 }
 
 add_melee_weapon(weapon_name, flourish_weapon_name, ballistic_weapon_name, ballistic_upgraded_weapon_name, cost, wallbuy_targetname, hint_string, vo_dialog_id, flourish_fn) {
-  melee_weapon = spawnstruct();
+  melee_weapon = spawnStruct();
   melee_weapon.weapon_name = weapon_name;
   melee_weapon.flourish_weapon_name = flourish_weapon_name;
   melee_weapon.ballistic_weapon_name = ballistic_weapon_name;
@@ -174,7 +174,7 @@ spectator_respawn_all() {
 }
 
 spectator_respawn(wallbuy_targetname, weapon_name) {
-  melee_triggers = getentarray(wallbuy_targetname, "targetname");
+  melee_triggers = getEntArray(wallbuy_targetname, "targetname");
   players = get_players();
 
   for(i = 0; i < melee_triggers.size; i++) {
@@ -195,7 +195,7 @@ trigger_hide_all() {
 }
 
 trigger_hide(wallbuy_targetname) {
-  melee_triggers = getentarray(wallbuy_targetname, "targetname");
+  melee_triggers = getEntArray(wallbuy_targetname, "targetname");
 
   for(i = 0; i < melee_triggers.size; i++)
     melee_triggers[i] setinvisibletoplayer(self);
@@ -420,7 +420,7 @@ melee_weapon_show(player) {
     yaw = weapon_yaw + 90;
 
   self.og_origin = self.origin;
-  self.origin = self.origin + anglestoforward((0, yaw, 0)) * 8;
+  self.origin = self.origin + anglesToForward((0, yaw, 0)) * 8;
   wait 0.05;
   self show();
   play_sound_at_pos("weapon_show", self.origin, self);

@@ -4,7 +4,7 @@
 ***************************************************************/
 
 main() {
-  self setmodel("c_zom_dlc0_zom_haz_body2");
+  self setModel("c_zom_dlc0_zom_haz_body2");
   self.headmodel = "c_zom_dlc0_zom_haz_head_mask_blueeyes";
   self attach(self.headmodel, "", 1);
   self.voice = "american";

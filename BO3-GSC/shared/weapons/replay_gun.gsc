@@ -15,11 +15,11 @@
 #namespace replay_gun;
 
 function autoexec __init__sytem__() {
-  system::register("replay_gun", & __init__, undefined, undefined);
+  system::register("replay_gun", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_spawned( & watch_for_replay_gun);
+  callback::on_spawned(&watch_for_replay_gun);
 }
 
 function watch_for_replay_gun() {
@@ -27,10 +27,10 @@ function watch_for_replay_gun() {
   self endon("death");
   self endon("spawned_player");
   self endon("killreplaygunmonitor");
-  while (true) {
+  while(true) {
     self waittill("weapon_change_complete", weapon);
     self weaponlockfree();
-    if(isdefined(weapon.usespivottargeting) && weapon.usespivottargeting) {
+    if(isDefined(weapon.usespivottargeting) && weapon.usespivottargeting) {
       self thread watch_lockon(weapon);
     }
   }
@@ -41,9 +41,9 @@ function watch_lockon(weapon) {
   self endon("death");
   self endon("spawned_player");
   self endon("weapon_change_complete");
-  while (true) {
+  while(true) {
     wait(0.05);
-    if(!isdefined(self.lockonentity)) {
+    if(!isDefined(self.lockonentity)) {
       ads = self playerads() == 1;
       if(ads) {
         target = self get_a_target(weapon);
@@ -60,15 +60,15 @@ function get_a_target(weapon) {
   origin = self getweaponmuzzlepoint();
   forward = self getweaponforwarddir();
   targets = self get_potential_targets();
-  if(!isdefined(targets)) {
+  if(!isDefined(targets)) {
     return undefined;
   }
-  if(!isdefined(weapon.lockonscreenradius) || weapon.lockonscreenradius < 1) {
+  if(!isDefined(weapon.lockonscreenradius) || weapon.lockonscreenradius < 1) {
     return undefined;
   }
   validtargets = [];
   should_wait = 0;
-  for (i = 0; i < targets.size; i++) {
+  for(i = 0; i < targets.size; i++) {
     if(should_wait) {
       wait(0.05);
       origin = self getweaponmuzzlepoint();
@@ -122,16 +122,16 @@ function get_potential_targets() {
 }
 
 function pick_a_target_from(targets) {
-  if(!isdefined(targets)) {
+  if(!isDefined(targets)) {
     return undefined;
   }
   besttarget = undefined;
   besttargetdistancesquared = undefined;
-  for (i = 0; i < targets.size; i++) {
+  for(i = 0; i < targets.size; i++) {
     target = targets[i];
     if(is_valid_target(target)) {
       targetdistancesquared = distancesquared(self.origin, target.origin);
-      if(!isdefined(besttarget) || !isdefined(besttargetdistancesquared)) {
+      if(!isDefined(besttarget) || !isDefined(besttargetdistancesquared)) {
         besttarget = target;
         besttargetdistancesquared = targetdistancesquared;
         continue;
@@ -146,7 +146,7 @@ function pick_a_target_from(targets) {
 }
 
 function trace(from, to) {
-  return bullettrace(from, to, 0, self)["position"];
+  return bulletTrace(from, to, 0, self)["position"];
 }
 
 function can_see_projected_crosshair(target, target_origin, player_origin, player_forward, distance) {
@@ -163,7 +163,7 @@ function can_see_projected_crosshair(target, target_origin, player_origin, playe
 }
 
 function is_valid_target(ent) {
-  return isdefined(ent) && isalive(ent);
+  return isDefined(ent) && isalive(ent);
 }
 
 function inside_screen_crosshair_radius(testorigin, weapon) {

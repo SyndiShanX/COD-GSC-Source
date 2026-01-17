@@ -21,7 +21,7 @@ main() {
   init_radio_dialogue();
   init_dialogue();
   setup_fire_damage();
-  maps\_utility::intro_screen_create(&"JUNGLE_GHOSTS_INTROSCREEN_LINE_1", & "JUNGLE_GHOSTS_INTROSCREEN_LINE_2", & "JUNGLE_GHOSTS_INTROSCREEN_LINE_5", & "JUNGLE_GHOSTS_INTROSCREEN_LINE_3");
+  maps\_utility::intro_screen_create(&"JUNGLE_GHOSTS_INTROSCREEN_LINE_1", &"JUNGLE_GHOSTS_INTROSCREEN_LINE_2", &"JUNGLE_GHOSTS_INTROSCREEN_LINE_5", &"JUNGLE_GHOSTS_INTROSCREEN_LINE_3");
   maps\_utility::intro_screen_custom_func(::custom_intro_screen_func);
   maps\_load::main();
 
@@ -48,12 +48,12 @@ main() {
   maps\jungle_ghosts_audio::main();
   maps\_stealth::main();
   common_scripts\utility::array_thread(level.players, maps\_stealth_utility::stealth_default);
-  maps\_utility::add_hint_string("hint_silencer_toggle", & "JUNGLE_GHOSTS_SILENCER_TOGGLE", ::should_toggle_silencer);
+  maps\_utility::add_hint_string("hint_silencer_toggle", &"JUNGLE_GHOSTS_SILENCER_TOGGLE", ::should_toggle_silencer);
 
   if(maps\jungle_ghosts_util::game_is_pc())
-    maps\_utility::add_hint_string("hint_drag", & "JUNGLE_GHOSTS_HINT_PLANE_DRAG", ::player_pushing_forward);
+    maps\_utility::add_hint_string("hint_drag", &"JUNGLE_GHOSTS_HINT_PLANE_DRAG", ::player_pushing_forward);
   else
-    maps\_utility::add_hint_string("hint_drag", & "JUNGLE_GHOSTS_HINT_PLANE_DRAG_NORMAL", ::player_pushing_forward);
+    maps\_utility::add_hint_string("hint_drag", &"JUNGLE_GHOSTS_HINT_PLANE_DRAG_NORMAL", ::player_pushing_forward);
 
   level.doing_hand_signal = 0;
   var_0 = ["to_grassy_field", "field_entrance"];
@@ -113,19 +113,19 @@ ai_total_count() {
 
 setup_bind_detection() {
   level.actionbinds = [];
-  registeractionbinding("player_takedown", "+activate", & "JUNGLE_GHOSTS_HINT_TAKEDOWN");
-  registeractionbinding("player_takedown", "+usereload", & "JUNGLE_GHOSTS_HINT_TAKEDOWN_RELOAD");
-  registeractionbinding("pickup_rpg", "+activate", & "JUNGLE_GHOSTS_RPG_PICKUP");
-  registeractionbinding("pickup_rpg", "+usereload", & "JUNGLE_GHOSTS_RPG_PICKUP_RELOAD");
-  registeractionbinding("player_helpup", "+activate", & "JUNGLE_GHOSTS_HINT_HELPUP");
-  registeractionbinding("player_helpup", "+usereload", & "JUNGLE_GHOSTS_HINT_HELPUP_RELOAD");
-  registeractionbinding("ads_360", "+speed_throw", & "JUNGLE_GHOSTS_HINT_ADS_THROW_360");
-  registeractionbinding("ads_360", "+speed", & "JUNGLE_GHOSTS_HINT_ADS_360");
-  registeractionbinding("ads", "+speed_throw", & "JUNGLE_GHOSTS_HINT_ADS_THROW");
-  registeractionbinding("ads", "+speed", & "JUNGLE_GHOSTS_HINT_ADS");
-  registeractionbinding("ads", "+toggleads_throw", & "JUNGLE_GHOSTS_HINT_ADS_TOGGLE_THROW");
-  registeractionbinding("ads", "toggleads", & "JUNGLE_GHOSTS_HINT_ADS_TOGGLE");
-  registeractionbinding("equip_soflam", "+actionslot 4", & "JUNGLE_GHOSTS_HINT_WEAPON_SOFLAM");
+  registeractionbinding("player_takedown", "+activate", &"JUNGLE_GHOSTS_HINT_TAKEDOWN");
+  registeractionbinding("player_takedown", "+usereload", &"JUNGLE_GHOSTS_HINT_TAKEDOWN_RELOAD");
+  registeractionbinding("pickup_rpg", "+activate", &"JUNGLE_GHOSTS_RPG_PICKUP");
+  registeractionbinding("pickup_rpg", "+usereload", &"JUNGLE_GHOSTS_RPG_PICKUP_RELOAD");
+  registeractionbinding("player_helpup", "+activate", &"JUNGLE_GHOSTS_HINT_HELPUP");
+  registeractionbinding("player_helpup", "+usereload", &"JUNGLE_GHOSTS_HINT_HELPUP_RELOAD");
+  registeractionbinding("ads_360", "+speed_throw", &"JUNGLE_GHOSTS_HINT_ADS_THROW_360");
+  registeractionbinding("ads_360", "+speed", &"JUNGLE_GHOSTS_HINT_ADS_360");
+  registeractionbinding("ads", "+speed_throw", &"JUNGLE_GHOSTS_HINT_ADS_THROW");
+  registeractionbinding("ads", "+speed", &"JUNGLE_GHOSTS_HINT_ADS");
+  registeractionbinding("ads", "+toggleads_throw", &"JUNGLE_GHOSTS_HINT_ADS_TOGGLE_THROW");
+  registeractionbinding("ads", "toggleads", &"JUNGLE_GHOSTS_HINT_ADS_TOGGLE");
+  registeractionbinding("equip_soflam", "+actionslot 4", &"JUNGLE_GHOSTS_HINT_WEAPON_SOFLAM");
 }
 
 registeractionbinding(var_0, var_1, var_2) {
@@ -1231,11 +1231,11 @@ objectives(var_0) {
       wait 1;
     case "jungle_hill":
     case "waterfall":
-      objective_add(maps\_utility::obj("waterfall"), "current", & "JUNGLE_GHOSTS_OBJ_REGROUP_AT_WATERFALL");
+      objective_add(maps\_utility::obj("waterfall"), "current", &"JUNGLE_GHOSTS_OBJ_REGROUP_AT_WATERFALL");
       common_scripts\utility::flag_wait("waterfall_see_friendlies");
       maps\_utility::objective_complete(maps\_utility::obj("waterfall"));
       common_scripts\utility::flag_wait_any("player_at_execution", "obj_save_team");
-      objective_add(maps\_utility::obj("rescue"), "current", & "JUNGLE_GHOSTS_OBJ_SAVE_TEAM");
+      objective_add(maps\_utility::obj("rescue"), "current", &"JUNGLE_GHOSTS_OBJ_SAVE_TEAM");
       common_scripts\utility::flag_wait("player_rescued_hostage");
       maps\_utility::objective_complete(maps\_utility::obj("rescue"));
       common_scripts\utility::flag_wait("obj_get_to_river");
@@ -1243,7 +1243,7 @@ objectives(var_0) {
     case "runway":
     case "tall_grass":
     case "stream":
-      objective_add(maps\_utility::obj("escape"), "current", & "JUNGLE_GHOSTS_OBJ_ESC_TO_RIVER");
+      objective_add(maps\_utility::obj("escape"), "current", &"JUNGLE_GHOSTS_OBJ_ESC_TO_RIVER");
       common_scripts\utility::flag_wait("obj_all_done");
       maps\_utility::objective_complete(maps\_utility::obj("escape"));
   }

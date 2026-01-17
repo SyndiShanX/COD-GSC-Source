@@ -26,5 +26,4 @@ main() {
   setdvar("r_specularcolorscale", "2");
 
   setdvar("compassmaxrange", "1600");
-
 }

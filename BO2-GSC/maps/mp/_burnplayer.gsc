@@ -51,13 +51,13 @@ hitwithincendiary(attacker, inflictor, mod) {
 
   if(isDefined(level._effect["character_fire_death_torso"])) {
     for(arrayindex = 0; arrayindex < tagarray.size; arrayindex++)
-      playfxontag(level._effect["character_fire_death_sm"], self, tagarray[arrayindex]);
+      playFXOnTag(level._effect["character_fire_death_sm"], self, tagarray[arrayindex]);
   }
 
   if(isai(self))
-    playfxontag(level._effect["character_fire_death_torso"], self, "J_Spine1");
+    playFXOnTag(level._effect["character_fire_death_torso"], self, "J_Spine1");
   else
-    playfxontag(level._effect["character_fire_death_torso"], self, "J_SpineLower");
+    playFXOnTag(level._effect["character_fire_death_torso"], self, "J_SpineLower");
 
   if(!isalive(self)) {
     return;
@@ -112,11 +112,11 @@ hitwithnapalmstrike(attacker, inflictor, mod) {
 
   if(isDefined(level._effect["character_fire_death_sm"])) {
     for(arrayindex = 0; arrayindex < tagarray.size; arrayindex++)
-      playfxontag(level._effect["character_fire_death_sm"], self, tagarray[arrayindex]);
+      playFXOnTag(level._effect["character_fire_death_sm"], self, tagarray[arrayindex]);
   }
 
   if(isDefined(level._effect["character_fire_death_torso"]))
-    playfxontag(level._effect["character_fire_death_torso"], self, "J_SpineLower");
+    playFXOnTag(level._effect["character_fire_death_torso"], self, "J_SpineLower");
 
   if(!isalive(self)) {
     return;
@@ -159,7 +159,7 @@ walkedthroughflames(attacker, inflictor, weapon) {
 
   if(isDefined(level._effect["character_fire_player_sm"])) {
     for(arrayindex = 0; arrayindex < tagarray.size; arrayindex++)
-      playfxontag(level._effect["character_fire_player_sm"], self, tagarray[arrayindex]);
+      playFXOnTag(level._effect["character_fire_player_sm"], self, tagarray[arrayindex]);
   }
 
   if(!isalive(self)) {
@@ -208,7 +208,7 @@ burnedwithflamethrower(attacker, inflictor, weapon) {
 
   if(isDefined(level._effect["character_fire_player_sm"])) {
     for(arrayindex = 0; arrayindex < tagarray.size; arrayindex++)
-      playfxontag(level._effect["character_fire_player_sm"], self, tagarray[arrayindex]);
+      playFXOnTag(level._effect["character_fire_player_sm"], self, tagarray[arrayindex]);
   }
 }
 
@@ -249,7 +249,7 @@ burnedwithdragonsbreath(attacker, inflictor, weapon) {
 
   if(isDefined(level._effect["character_fire_player_sm"])) {
     for(arrayindex = 0; arrayindex < tagarray.size; arrayindex++)
-      playfxontag(level._effect["character_fire_player_sm"], self, tagarray[arrayindex]);
+      playFXOnTag(level._effect["character_fire_player_sm"], self, tagarray[arrayindex]);
   }
 }
 
@@ -303,7 +303,7 @@ finish_burn() {
 
   if(isDefined(level._effect["fx_fire_player_sm_smk_2sec"])) {
     for(arrayindex = 0; arrayindex < tagarray.size; arrayindex++)
-      playfxontag(level._effect["fx_fire_player_sm_smk_2sec"], self, tagarray[arrayindex]);
+      playFXOnTag(level._effect["fx_fire_player_sm_smk_2sec"], self, tagarray[arrayindex]);
   }
 
   self.burning = undefined;
@@ -472,7 +472,7 @@ doburningsound() {
   self endon("death");
   fire_sound_ent = spawn("script_origin", self.origin);
   fire_sound_ent linkto(self, "tag_origin", (0, 0, 0), (0, 0, 0));
-  fire_sound_ent playloopsound("mpl_player_burn_loop");
+  fire_sound_ent playLoopSound("mpl_player_burn_loop");
   self thread firesounddeath(fire_sound_ent);
   self waittill("StopBurnSound");
 

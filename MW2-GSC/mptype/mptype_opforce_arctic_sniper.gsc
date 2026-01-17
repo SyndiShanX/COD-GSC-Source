@@ -4,7 +4,6 @@
 ********************************************************/
 
 main() {
-
   character\mp_character_op_arctic_sniper::main();
 }
 

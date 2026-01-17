@@ -96,7 +96,7 @@ soundRandom_Thread(localClientNum, randSound) {
     if(!isDefined(randSound.script_sound)) {
       println("ambient sound at " + randSound.origin + " has undefined script_sound");
     } else {
-      playsound(localClientNum, randSound.script_sound, randSound.origin);
+      playSound(localClientNum, randSound.script_sound, randSound.origin);
     }
   }
 }
@@ -218,7 +218,7 @@ startLineEmitters() {
 
 init_audio_step_triggers() {
   waitforclient(0);
-  trigs = GetEntArray(0, "audio_step_trigger", "targetname");
+  trigs = getEntArray(0, "audio_step_trigger", "targetname");
   println("Client : " + trigs.size + " audio_step_triggers.");
   array_thread(trigs, ::audio_step_trigger);
 }
@@ -234,25 +234,25 @@ trig_enter_audio_step_trigger(trigPlayer) {
   if(!isDefined(trigPlayer.movementtype)) {
     trigPlayer.movementtype = "null";
   }
-  if(Isdefined(self.script_label)) {
+  if(isDefined(self.script_label)) {
     trigPlayer.step_sound = self.script_label;
   }
-  if(Isdefined(self.script_sound) && (trigPlayer.movementtype == "sprint")) {
+  if(isDefined(self.script_sound) && (trigPlayer.movementtype == "sprint")) {
     volume = 9;
-    self playsound(0, self.script_sound, self.origin, volume);
+    self playSound(0, self.script_sound, self.origin, volume);
   }
 }
 
 trig_leave_audio_step_trigger(trigPlayer) {
-  if(Isdefined(self.script_noteworthy) && (trigPlayer.movementtype == "sprint")) {
+  if(isDefined(self.script_noteworthy) && (trigPlayer.movementtype == "sprint")) {
     volume = 9;
-    self playsound(0, self.script_noteworthy, self.origin, volume);
+    self playSound(0, self.script_noteworthy, self.origin, volume);
   }
   trigPlayer.step_sound = "null";
 }
 
 bump_trigger_start() {
-  bump_trigs = GetEntArray(0, "audio_bump_trigger", "targetname");
+  bump_trigs = getEntArray(0, "audio_bump_trigger", "targetname");
   for(i = 0; i < bump_trigs.size; i++) {
     bump_trigs[i] thread thread_bump_trigger();
   }
@@ -273,10 +273,10 @@ trig_enter_bump(ent) {
   volume = get_vol_from_speed(ent);
   if(isDefined(self.script_sound) && self.script_activated) {
     if(isDefined(self.script_noteworthy) && isDefined(self.script_wait) && (self.script_wait > volume)) {
-      test_id = self playsound(0, self.script_noteworthy, self.origin, volume);
+      test_id = self playSound(0, self.script_noteworthy, self.origin, volume);
     }
     if(!isDefined(self.script_wait) || (self.script_wait <= volume)) {
-      test_id = self playsound(0, self.script_sound, self.origin, volume);
+      test_id = self playSound(0, self.script_sound, self.origin, volume);
     }
   }
 }
@@ -426,7 +426,7 @@ line_sound_player() {
     setfakeentorg(self.localClientNum, self.fake_ent, self.origin);
     playLoopSound(self.localClientNum, self.fake_ent, self.script_sound);
   } else {
-    playsound(self.localClientNum, self.script_sound, self.origin);
+    playSound(self.localClientNum, self.script_sound, self.origin);
   }
 }
 

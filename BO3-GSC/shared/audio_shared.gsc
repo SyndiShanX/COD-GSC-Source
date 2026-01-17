@@ -13,15 +13,15 @@
 #namespace audio;
 
 function autoexec __init__sytem__() {
-  system::register("audio", & __init__, undefined, undefined);
+  system::register("audio", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_spawned( & sndresetsoundsettings);
-  callback::on_spawned( & missilelockwatcher);
-  callback::on_spawned( & missilefirewatcher);
-  callback::on_player_killed( & on_player_killed);
-  callback::on_vehicle_spawned( & vehiclespawncontext);
+  callback::on_spawned(&sndresetsoundsettings);
+  callback::on_spawned(&missilelockwatcher);
+  callback::on_spawned(&missilefirewatcher);
+  callback::on_player_killed(&on_player_killed);
+  callback::on_vehicle_spawned(&vehiclespawncontext);
   level thread register_clientfields();
   level thread sndchyronwatcher();
   level thread sndigcskipwatcher();
@@ -49,7 +49,7 @@ function sndchyronwatcher() {
 }
 
 function sndigcskipwatcher() {
-  while (true) {
+  while(true) {
     level waittill("scene_skip_sequence_started");
     music::setmusicstate("death");
   }
@@ -61,7 +61,7 @@ function sndresetsoundsettings() {
 }
 
 function on_player_killed() {
-  if(!(isdefined(self.killcam) && self.killcam)) {
+  if(!(isDefined(self.killcam) && self.killcam)) {
     self util::clientnotify("sndDED");
   }
 }
@@ -71,7 +71,7 @@ function vehiclespawncontext() {
 }
 
 function sndupdatevehiclecontext(added) {
-  if(!isdefined(self.sndoccupants)) {
+  if(!isDefined(self.sndoccupants)) {
     self.sndoccupants = 0;
   }
   if(added) {
@@ -90,14 +90,14 @@ function playtargetmissilesound(alias, looping) {
   self endon("stop_target_missile_sound");
   self endon("disconnect");
   self endon("death");
-  if(isdefined(alias)) {
+  if(isDefined(alias)) {
     time = soundgetplaybacktime(alias) * 0.001;
     if(time > 0) {
       do {
         self playlocalsound(alias);
         wait(time);
       }
-      while (looping);
+      while(looping);
     }
   }
 }
@@ -110,7 +110,7 @@ function missilelockwatcher() {
   } else {
     self flag::clear("playing_stinger_fired_at_me");
   }
-  while (true) {
+  while(true) {
     self waittill("missile_lock", attacker, weapon);
     if(!flag::get("playing_stinger_fired_at_me")) {
       self thread playtargetmissilesound(weapon.lockontargetlockedsound, weapon.lockontargetlockedsoundloops);
@@ -123,7 +123,7 @@ function missilelockwatcher() {
 function missilefirewatcher() {
   self endon("death");
   self endon("disconnect");
-  while (true) {
+  while(true) {
     self waittill("stinger_fired_at_me", missile, weapon, attacker);
     waittillframeend();
     self flag::set("playing_stinger_fired_at_me");
@@ -135,8 +135,8 @@ function missilefirewatcher() {
 }
 
 function unlockfrontendmusic(unlockname, allplayers = 1) {
-  if(isdefined(allplayers) && allplayers) {
-    if(isdefined(level.players) && level.players.size > 0) {
+  if(isDefined(allplayers) && allplayers) {
+    if(isDefined(level.players) && level.players.size > 0) {
       foreach(player in level.players) {
         player unlocksongbyalias(unlockname);
       }

@@ -16,20 +16,19 @@
 #include scripts\zm\zm_orange_zones;
 #include scripts\zm_common\zm_devgui;
 #include scripts\zm_common\zm_sq;
-
 #namespace zm_orange_devgui;
 
 init() {
   level thread devgui();
 }
 
-private jump_to(str_dest) {
+jump_to(str_dest) {
   s_dest = struct::get(str_dest);
   self setorigin(s_dest.origin);
   self setplayerangles(s_dest.angles);
 }
 
-private devgui() {
+devgui() {
   adddebugcommand("<dev string:x38>");
   adddebugcommand("<dev string:x8a>");
   adddebugcommand("<dev string:xde>");
@@ -59,30 +58,30 @@ private devgui() {
     str_command = getdvarstring(#"zm_orange_debug_cmd", "<dev string:x8e8>");
 
     switch (str_command) {
-      case #"hash_78bca375c84177d4":
+      case # "hash_78bca375c84177d4":
         getplayers()[0] jump_to("<dev string:x8eb>");
         break;
-      case #"hash_18769c2b6ae60247":
+      case # "hash_18769c2b6ae60247":
         level thread zm_orange_fasttravel_ziplines::function_80a9077f();
         break;
-      case #"hash_24668a82eef6ed20":
+      case # "hash_24668a82eef6ed20":
         level thread zm_orange_pap::function_79946aff();
         break;
-      case #"lava_toggle":
+      case # "lava_toggle":
         zm_orange_mq_hell::lava_control();
         break;
-      case #"hash_75c01ef1f8005214":
+      case # "hash_75c01ef1f8005214":
         iprintln("<dev string:x8f9>");
         level flag::set(#"soul_fill");
         break;
-      case #"hash_7db70cb23b9d2739":
+      case # "hash_7db70cb23b9d2739":
         iprintln("<dev string:x917>");
         level flag::clear(#"soul_fill");
         break;
-      case #"hash_58843c67593e2cfe":
+      case # "hash_58843c67593e2cfe":
         zm_orange_challenges::function_e4b04738();
         break;
-      case #"test_last_stand":
+      case # "test_last_stand":
         zm_devgui::zombie_devgui_open_sesame();
         zm_orange_fasttravel_ziplines::function_80a9077f();
         zm_orange_zones::function_3b77181c(1);
@@ -95,61 +94,61 @@ private devgui() {
 
         zm_orange_mq_hell::function_405f867d();
         break;
-      case #"hash_1ff4cd3ce63b00f9":
+      case # "hash_1ff4cd3ce63b00f9":
         zm_orange_ee_dynamite::function_61511fcf(0);
         zm_orange_ee_dynamite::function_61511fcf(1);
         zm_orange_ee_dynamite::function_61511fcf(2);
         break;
-      case #"max_dynamite_chance":
+      case # "max_dynamite_chance":
         level flag::set(#"debug_dynamite_zombie");
         break;
-      case #"hash_4f92a974297244f1":
+      case # "hash_4f92a974297244f1":
         if(!isDefined(level.var_969fe3f1)) {
           level.var_969fe3f1 = 0;
         }
 
         level.var_969fe3f1 = !level.var_969fe3f1;
         break;
-      case #"hash_78366ec4a1968af6":
+      case # "hash_78366ec4a1968af6":
         foreach(item in level.var_50e4c504) {
           item show();
         }
 
         break;
-      case #"play_portal":
+      case # "play_portal":
         level thread zm_orange_mq_sendoff::function_d096f18f();
         break;
-      case #"hash_86a620951049404":
+      case # "hash_86a620951049404":
         zm_orange_mq_hell::function_fe36418c();
         break;
-      case #"move_pap_boathouse":
+      case # "move_pap_boathouse":
         zm_orange_pap::function_ccc079bc("<dev string:x953>");
         break;
-      case #"move_pap_beach":
+      case # "move_pap_beach":
         zm_orange_pap::function_ccc079bc("<dev string:x963>");
         break;
-      case #"move_pap_ship":
+      case # "move_pap_ship":
         zm_orange_pap::function_ccc079bc("<dev string:x96f>");
         break;
-      case #"move_pap_lagoon":
+      case # "move_pap_lagoon":
         zm_orange_pap::function_ccc079bc("<dev string:x97a>");
         break;
-      case #"hash_7bfd0d4950600d9a":
+      case # "hash_7bfd0d4950600d9a":
         zm_orange_pap::function_ccc079bc("<dev string:x987>");
         break;
-      case #"full_unlock":
+      case # "full_unlock":
         zm_devgui::zombie_devgui_open_sesame();
         zm_orange_fasttravel_ziplines::function_80a9077f();
         zm_orange_zones::function_3b77181c(1);
         level thread zm_sq::function_f2dd8601(#"pap_rock", 1);
         break;
-      case #"hash_2918cc0fd8ab72cd":
+      case # "hash_2918cc0fd8ab72cd":
         level thread zm_orange_pap::function_eaaea036();
         break;
-      case #"hash_3da3831f62e16b2c":
+      case # "hash_3da3831f62e16b2c":
         level thread zm_orange_pap::function_96ef31b7();
         break;
-      case #"test_hell":
+      case # "test_hell":
         zm_orange_mq_hell::test_hell();
         break;
     }
@@ -157,4 +156,3 @@ private devgui() {
     setdvar(#"zm_orange_debug_cmd", "<dev string:x8e8>");
   }
 }
-

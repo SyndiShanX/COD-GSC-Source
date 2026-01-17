@@ -26,11 +26,10 @@
 #include scripts\mp_common\gametypes\globallogic_audio;
 #include scripts\weapons\hacker_tool;
 #include scripts\weapons\heatseekingmissile;
-
 #namespace dart;
 
 autoexec __init__system__() {
-  system::register(#"dart", &__init__, undefined, #"killstreaks");
+  system::register(#"dart", &__init__, undefined, # "killstreaks");
 }
 
 __init__() {
@@ -42,19 +41,19 @@ __init__() {
   killstreaks::register_alt_weapon("dart", getweapon(#"dart_turret"));
   clientfield::register("toplayer", "dart_update_ammo", 1, 2, "int");
   clientfield::register("toplayer", "fog_bank_3", 1, 1, "int");
-  remote_weapons::registerremoteweapon("dart", #"", &startdartremotecontrol, &enddartremotecontrol, 1);
+  remote_weapons::registerremoteweapon("dart", # "", &startdartremotecontrol, &enddartremotecontrol, 1);
   visionset_mgr::register_info("visionset", "dart_visionset", 1, 90, 16, 1, &visionset_mgr::ramp_in_out_thread_per_player_death_shutdown, 0);
 }
 
 wait_dart_timed_out(time) {
-  self endon(#"disconnect", #"death", #"dart_throw_failed", #"dart_entered");
+  self endon(#"disconnect", # "death", # "dart_throw_failed", # "dart_entered");
   wait time;
   self notify(#"dart_throw_timed_out");
 }
 
 wait_for_throw_status() {
   thread wait_dart_timed_out(5);
-  notifystring = self waittill(#"death", #"disconnect", #"dart_entered", #"dart_throw_timed_out", #"dart_throw_failed");
+  notifystring = self waittill(#"death", # "disconnect", # "dart_entered", # "dart_throw_timed_out", # "dart_throw_failed");
 
   if(notifystring._notify == "dart_entered" || notifystring._notify == "death") {
     return true;
@@ -80,7 +79,7 @@ activatedart(killstreaktype) {
   }
 
   player thread watchthrow(missileweapon);
-  notifystring = player waittill(#"weapon_change", #"grenade_fire", #"death", #"disconnect", #"joined_team", #"emp_jammed", #"emp_grenaded");
+  notifystring = player waittill(#"weapon_change", # "grenade_fire", # "death", # "disconnect", # "joined_team", # "emp_jammed", # "emp_grenaded");
 
   if(notifystring._notify == "death" || notifystring._notify == "emp_jammed" || notifystring._notify == "emp_grenaded") {
     if(isDefined(player)) {
@@ -110,7 +109,7 @@ activatedart(killstreaktype) {
     return false;
   }
 
-  player waittill(#"dart_end", #"disconnect");
+  player waittill(#"dart_end", # "disconnect");
   return true;
 }
 
@@ -123,7 +122,7 @@ watchthrow(missileweapon) {
   assert(isplayer(self));
   player = self;
   playerentnum = player.entnum;
-  player endon(#"disconnect", #"joined_team", #"dart_putaway");
+  player endon(#"disconnect", # "joined_team", # "dart_putaway");
   level endon(#"game_ended");
   player.waitingondartthrow = 1;
   waitresult = player waittill(#"grenade_fire");
@@ -138,7 +137,7 @@ watchthrow(missileweapon) {
 
   trace = player check_launch_space(grenade.origin);
 
-  if(trace[#"fraction"] < 1) {
+  if(trace[# "fraction"] < 1) {
     player iprintlnbold(#"hash_150caa190a45d9eb");
     grenade cleanup_grenade();
     player notify(#"dart_throw_failed");
@@ -155,15 +154,15 @@ watchthrow(missileweapon) {
 
   player killstreaks::set_killstreak_delay_killcam("dart");
   player.resurrect_not_allowed_by = "dart";
-  player stats::function_e24eec31(getweapon(#"dart"), #"used", 1);
+  player stats::function_e24eec31(getweapon(#"dart"), # "used", 1);
   level thread popups::displaykillstreakteammessagetoall("dart", player);
-  dart = player spawndart(grenade, killstreak_id, trace[#"position"]);
+  dart = player spawndart(grenade, killstreak_id, trace[# "position"]);
   player thread function_6fe329bb(missileweapon);
 }
 
 function_6fe329bb(missileweapon) {
   player = self;
-  player endon(#"disconnect", #"joined_team", #"death", #"dart_putaway");
+  player endon(#"disconnect", # "joined_team", # "death", # "dart_putaway");
   level endon(#"game_ended");
   player waittill(#"weapon_change");
 
@@ -197,7 +196,7 @@ hackedpostfunction(hacker) {
 watchremotecontroldeactivate() {
   dart = self;
   dart notify(#"watchremotecontroldeactivate_remoteweapons");
-  dart endon(#"watchremotecontroldeactivate_remoteweapons", #"death", #"remote_weapon_end");
+  dart endon(#"watchremotecontroldeactivate_remoteweapons", # "death", # "remote_weapon_end");
   dart.remoteowner endon(#"disconnect");
 
   while(dart.remoteowner attackbuttonpressed()) {
@@ -237,7 +236,7 @@ spawndart(grenade, killstreak_id, spawn_origin) {
   playerentnum = player.entnum;
   player_angles = player getplayerangles();
   grenade cleanup_grenade();
-  params = level.killstreakbundle[#"dart"];
+  params = level.killstreakbundle[# "dart"];
 
   if(!isDefined(params.ksvehicle)) {
     params.ksvehicle = "veh_dart_mp";
@@ -304,10 +303,9 @@ debug_origin() {
   self endon(#"death");
 
   while(true) {
-
     sphere(self.origin, 5, (1, 0, 0), 1, 1, 2, 120);
 
-      waitframe(1);
+    waitframe(1);
   }
 }
 
@@ -316,7 +314,7 @@ waitremotecontrol() {
   remote_controlled = isDefined(dart.control_initiated) && dart.control_initiated || isDefined(dart.controlled) && dart.controlled;
 
   if(remote_controlled) {
-    notifystring = dart waittill(#"remote_weapon_end", #"dart_left");
+    notifystring = dart waittill(#"remote_weapon_end", # "dart_left");
 
     if(notifystring._notify == "remote_weapon_end") {
       dart waittill(#"dart_left");
@@ -377,7 +375,7 @@ stop_remote_weapon(attacker, weapon) {
     challenges::destroyedaircraft(attacker, weapon, 1, 1);
     attacker challenges::addflyswatterstat(weapon, dart);
     dart killstreaks::function_73566ec7(attacker, weapon, dart.owner);
-    luinotifyevent(#"player_callout", 2, #"hash_5cbeb6b82bac95e5", attacker.entnum);
+    luinotifyevent(#"player_callout", 2, # "hash_5cbeb6b82bac95e5", attacker.entnum);
     attacker battlechatter::function_dd6a6012("dart", weapon);
   }
 
@@ -455,7 +453,7 @@ watchownernondeathevents(endcondition1, endcondition2) {
   player endon(#"dart_entered");
   dart endon(#"death");
   dart thread watchforgameend();
-  player waittill(#"joined_team", #"disconnect", #"joined_spectators", #"emp_jammed");
+  player waittill(#"joined_team", # "disconnect", # "joined_spectators", # "emp_jammed");
   dart thread leave_dart();
 }
 
@@ -472,7 +470,7 @@ watchammo() {
   player = dart.owner;
   player endon(#"disconnect");
   shotcount = 0;
-  params = level.killstreakbundle[#"dart"];
+  params = level.killstreakbundle[# "dart"];
 
   if(!isDefined(params.ksdartshotcount)) {
     params.ksdartshotcount = 0;
@@ -528,7 +526,7 @@ leave_dart() {
     dart notify(#"death");
   }
 
-  params = level.killstreakbundle[#"dart"];
+  params = level.killstreakbundle[# "dart"];
 
   if(!isDefined(params.ksdartexplosionouterradius)) {
     params.ksdartexplosionouterradius = 200;
@@ -579,7 +577,7 @@ leave_dart() {
       moveamount = vectorscale(forward, params.ksdartcamerawatchdistance * -1);
       size = 4;
       trace = physicstrace(dart.origin, dart.origin + moveamount, (size * -1, size * -1, size * -1), (size, size, size), undefined, 1);
-      cam = spawn("script_model", trace[#"position"]);
+      cam = spawn("script_model", trace[# "position"]);
       cam setModel(#"tag_origin");
       cam linkto(dart);
       dart setspeedimmediate(0);
@@ -635,13 +633,13 @@ deleteonconditions(condition) {
 }
 
 waitthendelete(waittime) {
-  self endon(#"delete", #"death");
+  self endon(#"delete", # "death");
   wait waittime;
   self delete();
 }
 
 play_bda_dialog(pilotindex) {
-  self endon(#"game_ended", #"death");
+  self endon(#"game_ended", # "death");
   wait 0.5;
 
   if(!isDefined(self.dartbda) || self.dartbda == 0) {

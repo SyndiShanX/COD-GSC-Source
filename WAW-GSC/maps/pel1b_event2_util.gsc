@@ -9,8 +9,8 @@
 #using_animtree("generic_human");
 
 kill_enemies(value, key) {
-  enemies = getentarray(value, key);
-  for (i = 0; i < enemies.size; i++) {
+  enemies = getEntArray(value, key);
+  for(i = 0; i < enemies.size; i++) {
     enemies[i] thread maps\pel1b::bloody_death();
     wait(0.3);
   }
@@ -33,7 +33,7 @@ force_to_goal_ignore_player() {
 }
 
 force_spawn_guy(spawner) {
-  guy = spawner StalingradSpawn();
+  guy = spawner Stalingradspawn();
   spawn_failed(guy);
   return (guy);
 }
@@ -54,7 +54,7 @@ spawn_flame_runner(value, key) {
     runner set_run_anim("panick_run_2");
   }
   runner thread animscripts\death::flame_death_fx();
-  while (distance(runner.origin, runner.goalpos) > 200) {
+  while(distance(runner.origin, runner.goalpos) > 200) {
     wait(0.1);
     if(!isalive(runner)) {
       break;
@@ -68,7 +68,7 @@ spawn_flame_runner(value, key) {
 fire_shrecks_with_damage(tank, damage) {
   radiusdamage(tank.origin + (0, 0, 200), 300, damage, 35);
   earthquake(0.3, 1.5, tank.origin, 512);
-  playfx(level._effect["tank_blowup"], tank.origin);
+  playFX(level._effect["tank_blowup"], tank.origin);
 }
 
 waittill_vehiclenode(node) {
@@ -103,7 +103,7 @@ trace_turret_target_by_name(point_name, end_msg) {
   point_line[0] = getstruct(point_name, "targetname");
   next_point_name = point_line[0].target;
   done = false;
-  while (1) {
+  while(1) {
     point_line[point_line.size] = getstruct(next_point_name, "targetname");
     if(isDefined(point_line[point_line.size - 1].target)) {
       next_point_name = point_line[point_line.size - 1].target;
@@ -111,7 +111,7 @@ trace_turret_target_by_name(point_name, end_msg) {
       break;
     }
   }
-  for (i = 0; i < point_line.size; i++) {
+  for(i = 0; i < point_line.size; i++) {
     self SetTurretTargetVecSafe(point_line[i].origin);
     self waittill("turret_on_target");
     if(isDefined(point_line[i].script_noteworthy)) {
@@ -124,9 +124,9 @@ trace_turret_target_by_name(point_name, end_msg) {
 load_bombs(bomb_num) {
   self.bomb_count = bomb_num;
   self.bomb = [];
-  for (i = 0; i < self.bomb_count; i++) {
-    self.bomb[i] = Spawn("script_model", (self.origin));
-    self.bomb[i] SetModel(level.plane_bomb_model[self.vehicletype]);
+  for(i = 0; i < self.bomb_count; i++) {
+    self.bomb[i] = spawn("script_model", (self.origin));
+    self.bomb[i] setModel(level.plane_bomb_model[self.vehicletype]);
     self.bomb[i].dropped = false;
     wait(.1);
     if(i % 2 == 0) {
@@ -149,8 +149,8 @@ drop_bombs(node_name, fire_fx, num) {
   level notify(node_name);
   if(fire_fx) {
     fire_fx_origin = getstruct(node_name, "targetname");
-    playfx(level._effect["fire_foliage_large"], fire_fx_origin.origin);
-    playfx(level._effect["smoke_column"], fire_fx_origin.origin);
+    playFX(level._effect["fire_foliage_large"], fire_fx_origin.origin);
+    playFX(level._effect["smoke_column"], fire_fx_origin.origin);
   }
   self waittill("reached_end_node");
   self delete();
@@ -158,7 +158,7 @@ drop_bombs(node_name, fire_fx, num) {
 
 drop_bombs_rumble() {
   players = get_players();
-  for (p = 0; p < players.size; p++) {
+  for(p = 0; p < players.size; p++) {
     earthquake(1, 0.5, players[p].origin, 50);
     wait_network_frame();
     PlayRumbleOnPosition("explosion_generic", players[p].origin);
@@ -170,8 +170,8 @@ additional_bomb(struct_name, start_msg) {
   struct_target = getstruct(struct_name, "targetname");
   level waittill(start_msg);
   wait(0.3);
-  playfx(level._effect["napalm_explosion"], struct_target.origin);
-  playfx(level._effect["fire_foliage_large"], struct_target.origin);
+  playFX(level._effect["napalm_explosion"], struct_target.origin);
+  playFX(level._effect["fire_foliage_large"], struct_target.origin);
   playsoundatposition("mortar_dirt", struct_target.origin);
 }
 
@@ -180,7 +180,7 @@ napalm_chain(start_struct_name) {
   point_line[0] = getstruct(start_struct_name, "targetname");
   next_point_name = point_line[0].target;
   done = false;
-  while (1) {
+  while(1) {
     point_line[point_line.size] = getstruct(next_point_name, "targetname");
     if(isDefined(point_line[point_line.size - 1].target)) {
       next_point_name = point_line[point_line.size - 1].target;
@@ -188,8 +188,8 @@ napalm_chain(start_struct_name) {
       break;
     }
   }
-  for (i = 0; i < point_line.size; i++) {
-    PlayFx(level._effect["napalm_explosion"], point_line[i].origin);
+  for(i = 0; i < point_line.size; i++) {
+    playFX(level._effect["napalm_explosion"], point_line[i].origin);
     playsoundatposition("mortar_dirt", point_line[i].origin);
     if(isDefined(point_line[i].script_noteworthy)) {
       level notify(point_line[i].script_noteworthy);
@@ -236,9 +236,9 @@ spawn_fake_guy(startpoint, startangles, side, animname) {
 
 jog_waittill_stop() {
   stop_trigger = getent("ev2_initial_plane_spawn", "targetname");
-  while (1) {
+  while(1) {
     players = get_players();
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       if(players[i] istouching(stop_trigger)) {
         return;
       }
@@ -276,7 +276,7 @@ jog_internal() {
   jogs_forward = [];
   jogs_forward[jogs_forward.size] = "jog1";
   jogs_forward[jogs_forward.size] = "jog2";
-  while (flag("jog_enabled")) {
+  while(flag("jog_enabled")) {
     if(flag("jog_look_around")) {
       if(self.script_forceColor == "y") {
         jog = jogs_left[RandomInt(jogs_left.size)];
@@ -304,29 +304,29 @@ play_dust_fx_near_players() {
   struct_pos = getstructarray("ev2_cave_dust", "targetname");
   org_closest = [];
   players = get_players();
-  for (i = 0; i < struct_pos.size; i++) {
-    for (p = 0; p < players.size; p++) {
+  for(i = 0; i < struct_pos.size; i++) {
+    for(p = 0; p < players.size; p++) {
       if(Distance2D(struct_pos[i].origin, players[p].origin) < 500) {
         org_closest[org_closest.size] = struct_pos[i].origin;
       }
     }
   }
-  for (p = 0; p < players.size; p++) {
+  for(p = 0; p < players.size; p++) {
     earthquake(1, 0.5, players[p].origin, 60);
     PlayRumbleOnPosition("explosion_generic", players[p].origin);
   }
   org_closest = array_randomize(org_closest);
-  for (i = 0; i < org_closest.size; i++) {
+  for(i = 0; i < org_closest.size; i++) {
     if(i < 3) {
-      playfx(level._effect["dirt_fall_huge"], org_closest[i]);
+      playFX(level._effect["dirt_fall_huge"], org_closest[i]);
       playsoundatposition("ceiling_dust", org_closest[i]);
       wait(0.05);
     } else if(i < 8) {
-      playfx(level._effect["dirt_fall_md"], org_closest[i]);
+      playFX(level._effect["dirt_fall_md"], org_closest[i]);
       playsoundatposition("ceiling_dust", org_closest[i]);
       wait(0.05);
     } else {
-      playfx(level._effect["dirt_fall_sm"], org_closest[i]);
+      playFX(level._effect["dirt_fall_sm"], org_closest[i]);
       playsoundatposition("ceiling_dust", org_closest[i]);
       wait(0.1);
     }

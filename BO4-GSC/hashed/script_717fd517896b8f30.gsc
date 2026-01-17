@@ -6,7 +6,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
-
 #namespace zm_trial_randomize_perks;
 
 autoexec __init__system__() {
@@ -21,7 +20,7 @@ __init__() {
   zm_trial::register_challenge(#"hash_45ef12aaa7c1d585", &on_begin, &on_end);
 }
 
-private on_begin(var_e38c7612, var_2d4ba9d4) {
+on_begin(var_e38c7612, var_2d4ba9d4) {
   self.var_e38c7612 = zm_trial::function_5769f26a(var_e38c7612);
   self.var_2d4ba9d4 = isDefined(var_2d4ba9d4);
 
@@ -30,7 +29,7 @@ private on_begin(var_e38c7612, var_2d4ba9d4) {
   }
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   if(!round_reset) {
     var_696c3b4 = [];
 
@@ -51,9 +50,9 @@ private on_end(round_reset) {
 
     if(var_696c3b4.size) {
       if(isDefined(self.var_2d4ba9d4) && self.var_2d4ba9d4) {
-        var_ded5d2ed = #"hash_192dc062b9c5de31";
+        var_ded5d2ed = # "hash_192dc062b9c5de31";
       } else {
-        var_ded5d2ed = #"hash_26f44827b2b24825";
+        var_ded5d2ed = # "hash_26f44827b2b24825";
       }
 
       zm_trial::fail(var_ded5d2ed, var_696c3b4);
@@ -66,7 +65,7 @@ is_active(var_34f09024 = 0) {
   return isDefined(challenge);
 }
 
-private function_e4c3443c(s_challenge) {
+function_e4c3443c(s_challenge) {
   level endon(#"hash_7646638df88a3656");
   self endon(#"disconnect");
 
@@ -87,6 +86,6 @@ private function_e4c3443c(s_challenge) {
       self.var_167bc422 = undefined;
     }
 
-    self waittill(#"earned_points", #"spent_points", #"reduced_points");
+    self waittill(#"earned_points", # "spent_points", # "reduced_points");
   }
 }

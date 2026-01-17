@@ -22,14 +22,14 @@ main() {
 }
 
 replace_turrets() {
-  var_0 = getentarray("misc_turret", "classname");
+  var_0 = getEntArray("misc_turret", "classname");
 
   foreach(var_2 in var_0) {
     var_3 = var_2.origin;
     var_4 = var_2.angles;
     var_2 delete();
     var_5 = spawnturret("misc_turret", var_3, "saw_bipod_stand_mp", 0);
-    var_5 setmodel("weapon_saw_MG_setup");
+    var_5 setModel("weapon_saw_MG_setup");
     var_5.angles = var_4;
   }
 }

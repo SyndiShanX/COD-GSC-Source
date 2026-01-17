@@ -66,7 +66,7 @@ init() {
 }
 
 onPlayerConnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connecting", player);
     player setClientDvar("ui_3dwaypointtext", "1");
     player.enable3DWaypoints = true;
@@ -78,7 +78,7 @@ onPlayerConnect() {
 
 onMenuResponse() {
   self endon("disconnect");
-  for (;;) {
+  for(;;) {
     self waittill("menuresponse", menu, response);
     if(response == "back") {
       self closeMenu();

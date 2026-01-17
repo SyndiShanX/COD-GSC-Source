@@ -24,19 +24,19 @@ turret_microwave_sound_start(localclientnum) {
   self endon("sound_stop");
   origin = self gettagorigin("tag_flash");
   angles = self gettagangles("tag_flash");
-  forward = anglestoforward(angles);
+  forward = anglesToForward(angles);
   forward = vectorscale(forward, 750);
-  trace = bullettrace(origin, origin + forward, 0, self);
+  trace = bulletTrace(origin, origin + forward, 0, self);
   start = origin;
   end = trace["position"];
   self thread turret_microwave_sound_off_waiter(localclientnum, start, end);
-  self playsound(0, "wpn_micro_turret_start");
+  self playSound(0, "wpn_micro_turret_start");
   soundlineemitter("wpn_micro_turret_loop", start, end);
 }
 
 turret_microwave_sound_off_waiter(localclientnum, start, end) {
   self waittill_any("sound_stop", "entityshutdown");
-  playsound(0, "wpn_micro_turret_stop", start);
+  playSound(0, "wpn_micro_turret_stop", start);
   soundstoplineemitter("wpn_micro_turret_loop", start, end);
 }
 

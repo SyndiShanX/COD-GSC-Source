@@ -47,7 +47,7 @@ conflictCustomCrateFunc() {
   if(!allowLevelKillstreaks() || game["player_holding_level_killstrek"]) {
     return;
   }
-  maps\mp\killstreaks\_airdrop::addCrateType("airdrop_assault", "harrier_airstrike", CONFLICT_KILLSTREAK_WEIGHT, maps\mp\killstreaks\_airdrop::killstreakCrateThink, maps\mp\killstreaks\_airdrop::get_friendly_crate_model(), maps\mp\killstreaks\_airdrop::get_enemy_crate_model(), & "MP_CONFLICT_KILLSTREAKS_HARRIER_PICKUP");
+  maps\mp\killstreaks\_airdrop::addCrateType("airdrop_assault", "harrier_airstrike", CONFLICT_KILLSTREAK_WEIGHT, maps\mp\killstreaks\_airdrop::killstreakCrateThink, maps\mp\killstreaks\_airdrop::get_friendly_crate_model(), maps\mp\killstreaks\_airdrop::get_enemy_crate_model(), &"MP_CONFLICT_KILLSTREAKS_HARRIER_PICKUP");
   maps\mp\killstreaks\_airdrop::generateMaxWeightedCrateValue();
   level thread watch_for_conflict_crate();
 }

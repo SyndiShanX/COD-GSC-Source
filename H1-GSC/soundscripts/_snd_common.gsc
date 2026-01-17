@@ -19,8 +19,7 @@ snd_common_init() {
     ["wpn_int_med", 0],
     ["bullet_metal_vehicle", 0],
     ["bullet_whizby_glass", 0],
-    ["finale_handgun", 0]
-  ];
+    ["finale_handgun", 0]];
   soundsettimescalefactor("interface", 0);
   soundsettimescalefactor("notimescale", 0);
 
@@ -46,20 +45,17 @@ create_common_envelop_arrays() {
     [0.25, 0.65],
     [0.35, 0.5],
     [0.75, 0.2],
-    [1.0, 0.1]
-  ];
+    [1.0, 0.1]];
   level._snd.envs["veh_crash_intensity_to_pitch"] = [[0.0, 0.7],
     [0.1, 0.7],
     [0.5, 0.8],
     [0.9, 1.0],
-    [1.0, 1.1]
-  ];
+    [1.0, 1.1]];
   level._snd.envs["veh_crash_vel_to_lfe_vol"] = [[0.0, 0.0],
     [200, 0.05],
     [500, 0.25],
     [850, 0.35],
-    [1000, 0.6]
-  ];
+    [1000, 0.6]];
   level._snd.envs["aud_mute_device_falloff"] = [[0.0, 1.0],
     [0.1, 0.9],
     [0.2, 0.88],
@@ -70,8 +66,7 @@ create_common_envelop_arrays() {
     [0.7, 0.5],
     [0.8, 0.35],
     [0.9, 0.15],
-    [1.0, 0.0]
-  ];
+    [1.0, 0.0]];
 }
 
 apply_common_globalmix() {
@@ -81,18 +76,15 @@ apply_common_globalmix() {
 
 init_ambient_explosion_arrays() {
   if(level.currentgen)
-    level._snd.ambientexp["exp_generic_explo_shot"] = [
-      ["exp_generic_explo_shot_04", 0.17],
+    level._snd.ambientexp["exp_generic_explo_shot"] = [["exp_generic_explo_shot_04", 0.17],
       ["exp_generic_explo_shot_07", 0.11],
       ["exp_generic_explo_shot_10", 0.22],
       ["exp_generic_explo_shot_12", 0.15],
       ["exp_generic_explo_shot_13", 0.08],
       ["exp_generic_explo_shot_20", 0.15],
-      ["exp_generic_explo_shot_22", 0.25]
-    ];
+      ["exp_generic_explo_shot_22", 0.25]];
   else
-    level._snd.ambientexp["exp_generic_explo_shot"] = [
-      ["exp_generic_explo_shot_01", 0.13],
+    level._snd.ambientexp["exp_generic_explo_shot"] = [["exp_generic_explo_shot_01", 0.13],
       ["exp_generic_explo_shot_02", 0.25],
       ["exp_generic_explo_shot_03", 0.12],
       ["exp_generic_explo_shot_04", 0.17],
@@ -112,8 +104,7 @@ init_ambient_explosion_arrays() {
       ["exp_generic_explo_shot_19", 0.12],
       ["exp_generic_explo_shot_20", 0.15],
       ["exp_generic_explo_shot_21", 0.15],
-      ["exp_generic_explo_shot_22", 0.25]
-    ];
+      ["exp_generic_explo_shot_22", 0.25]];
 }
 
 init_impact_system_arrays() {
@@ -201,7 +192,7 @@ player_death() {
 }
 
 friendly_fire_mission_failed() {
-  if(!isdefined(level.ff_mission_failed_already_playing) && common_scripts\utility::issp()) {
+  if(!isDefined(level.ff_mission_failed_already_playing) && common_scripts\utility::issp()) {
     soundscripts\_audio_mix_manager::mm_add_submix("friendly_fire_failed_mix");
     soundscripts\_snd_playsound::snd_play_2d("friendly_fire_mission_failed");
     level.ff_mission_failed_already_playing = 1;
@@ -244,14 +235,14 @@ wpn_deam160_charge(var_0) {
   level.player thread wpn_deam160_is_chargeable();
   level waittill("aud_deam160_charge_break");
 
-  if(isdefined(var_1))
+  if(isDefined(var_1))
     var_1 scalevolume(0, 0.05);
 }
 
 wpn_deam160_watch_weapon_change() {
   level endon("aud_deam160_charge_break");
 
-  for (;;) {
+  for(;;) {
     if(self isthrowinggrenade() || self isreloading() || self ismeleeing() || self ismantling()) {
       level notify("aud_deam160_charge_break");
       break;
@@ -264,7 +255,7 @@ wpn_deam160_watch_weapon_change() {
 wpn_deam160_is_chargeable() {
   level endon("aud_deam160_charge_break");
 
-  for (;;) {
+  for(;;) {
     var_0 = weaponischargeable(self getcurrentweapon());
 
     if(!var_0) {
@@ -282,7 +273,7 @@ wpn_deam160_play_charge_loop_sfx() {
   var_0 scalevolume(0, 0.05);
   wait 2;
 
-  if(isdefined(var_0))
+  if(isDefined(var_0))
     var_0 scalevolume(1, 0.4);
 }
 
@@ -339,36 +330,36 @@ aud_microwave_grenade() {
   self waittill("death");
   thread soundscripts\_snd_playsound::snd_play_at("wpn_mw_grenade_die", var_0);
 
-  if(isdefined(var_2))
+  if(isDefined(var_2))
     var_2 scalevolume(0, 0.3);
 
-  if(isdefined(var_1))
+  if(isDefined(var_1))
     var_1 scalevolume(0, 0.3);
 
   wait 0.3;
 
-  if(isdefined(var_2))
+  if(isDefined(var_2))
     var_2 stopsounds();
 
-  if(isdefined(var_1))
+  if(isDefined(var_1))
     var_1 stopsounds();
 }
 
 aud_microwave_grenade_sparks_env(var_0) {
-  if(isdefined(var_0))
+  if(isDefined(var_0))
     thread soundscripts\_snd_playsound::snd_play_at("wpn_mw_grenade_elect", var_0);
 }
 
 aud_microwave_grenade_sparks_dude(var_0) {
-  if(isdefined(var_0))
+  if(isDefined(var_0))
     var_0 thread soundscripts\_snd_playsound::snd_play_linked("wpn_mw_grenade_elect");
 }
 
 snd_ads_mix() {
   level.player endon("death");
 
-  for (;;) {
-    while (!level.player maps\_utility::isads())
+  for(;;) {
+    while(!level.player maps\_utility::isads())
       wait 0.05;
 
     if(weaponclass(level.player getcurrentweapon()) == "sniper")
@@ -376,7 +367,7 @@ snd_ads_mix() {
     else
       soundscripts\_audio_mix_manager::mm_add_submix("ads_mix");
 
-    while (level.player maps\_utility::isads())
+    while(level.player maps\_utility::isads())
       wait 0.05;
 
     soundscripts\_audio_mix_manager::mm_clear_submix("ads_mix");
@@ -389,20 +380,20 @@ snd_mute_device(var_0, var_1, var_2, var_3, var_4, var_5) {
   thread sndx_mute_device_bubble_fx();
   thread sndx_mute_device_bubble_off_fx();
 
-  if(!isdefined(self.aud))
-    self.aud = spawnstruct();
+  if(!isDefined(self.aud))
+    self.aud = spawnStruct();
 
   self.aud.mute_device_mix_enable = 1;
   self.aud.mute_device_in_bubble = 1;
 
-  if(isdefined(var_2))
+  if(isDefined(var_2))
     var_6 = var_2;
   else
     var_6 = var_1 + 250;
 
   level.mute_device_active = 1;
 
-  if(isdefined(var_4)) {
+  if(isDefined(var_4)) {
     self.aud.mute_device_filter = 1;
     thread soundscripts\_snd_filters::snd_fade_in_filter(var_4, 0.5);
   }
@@ -410,11 +401,11 @@ snd_mute_device(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_7 = 0;
   thread sndx_mute_device_stopper(var_0, var_3, var_7);
 
-  while (isdefined(self.aud.mute_device_mix_enable)) {
+  while(isDefined(self.aud.mute_device_mix_enable)) {
     var_8 = distance(self.origin, level.player.origin);
 
     if(var_8 < var_1) {
-      if(!isdefined(self.aud.mute_device_start)) {
+      if(!isDefined(self.aud.mute_device_start)) {
         self notify("mute_device_bubble_enter");
         soundscripts\_audio_mix_manager::mm_add_submix(var_0, 0.05);
         self.aud.loop_ent = soundscripts\_snd_playsound::snd_play_loop_2d("mute_device_active_lp", "stop_mute_device_lp", 5, 3, 1);
@@ -423,11 +414,11 @@ snd_mute_device(var_0, var_1, var_2, var_3, var_4, var_5) {
 
       soundscripts\_audio_mix_manager::mm_blend_submix(var_0, 1);
 
-      if(!isdefined(self.aud.mute_device_filter) && isdefined(var_4)) {
+      if(!isDefined(self.aud.mute_device_filter) && isDefined(var_4)) {
         self.aud.mute_device_filter = 1;
         thread soundscripts\_snd_filters::snd_fade_in_filter(var_4, 0.5);
 
-        if(!isdefined(self.aud.mute_device_enter)) {
+        if(!isDefined(self.aud.mute_device_enter)) {
           self notify("mute_device_bubble_enter");
           soundscripts\_snd_playsound::snd_play_delayed_2d("mute_device_active_enter", 0.05);
           self.aud.mute_device_in_bubble = 1;
@@ -441,11 +432,11 @@ snd_mute_device(var_0, var_1, var_2, var_3, var_4, var_5) {
       var_10 = soundscripts\_snd::snd_map(var_9, level._snd.envs["aud_mute_device_falloff"]);
       soundscripts\_audio_mix_manager::mm_blend_submix(var_0, var_10);
 
-      if(isdefined(self.aud.mute_device_filter)) {
+      if(isDefined(self.aud.mute_device_filter)) {
         self.aud.mute_device_filter = undefined;
         thread soundscripts\_snd_filters::snd_fade_out_filter(1);
 
-        if(!isdefined(self.aud.mute_device_exit)) {
+        if(!isDefined(self.aud.mute_device_exit)) {
           thread sndx_mute_device_delay_notify("mute_device_bubble_exit", 0.5);
           soundscripts\_snd_playsound::snd_play_delayed_2d("mute_device_active_exit", 0.05);
           self.aud.mute_device_in_bubble = 0;
@@ -456,7 +447,7 @@ snd_mute_device(var_0, var_1, var_2, var_3, var_4, var_5) {
     } else if(self.aud.mute_device_start == 1) {
       soundscripts\_audio_mix_manager::mm_blend_submix(var_0, 0);
 
-      if(isdefined(self.aud.mute_device_filter)) {
+      if(isDefined(self.aud.mute_device_filter)) {
         wait 0.05;
         self.aud.mute_device_filter = undefined;
         thread soundscripts\_snd_filters::snd_fade_out_filter(1);
@@ -473,7 +464,7 @@ snd_mute_device(var_0, var_1, var_2, var_3, var_4, var_5) {
 sndx_mute_device_delay_notify(var_0, var_1) {
   var_2 = 0;
 
-  if(isdefined(var_1))
+  if(isDefined(var_1))
     var_2 = var_1;
 
   wait(var_2);
@@ -487,7 +478,7 @@ sndx_mute_device_stopper(var_0, var_1, var_2) {
   thread sndx_mute_device_kill(var_0, "turn_off");
   var_3 = 30;
 
-  if(isdefined(var_1))
+  if(isDefined(var_1))
     var_3 = var_1;
 
   wait(var_3);
@@ -496,14 +487,14 @@ sndx_mute_device_stopper(var_0, var_1, var_2) {
 }
 
 sndx_mute_device_stop(var_0) {
-  if(isdefined(self.aud.loop_ent))
+  if(isDefined(self.aud.loop_ent))
     level notify("stop_mute_device_lp");
 
   if(self.aud.mute_device_in_bubble) {
     thread sndx_mute_device_delay_notify("mute_device_bubble_exit", 0.5);
     thread sndx_mute_device_delay_notify("mute_device_bubble_off", 1);
 
-    if(!isdefined(self.aud.mute_device_exit))
+    if(!isDefined(self.aud.mute_device_exit))
       soundscripts\_snd_playsound::snd_play_delayed_2d("mute_device_active_exit", 0.05);
   }
 
@@ -517,7 +508,7 @@ sndx_mute_device_kill(var_0, var_1) {
   self endon("complete");
   var_2 = "death";
 
-  if(isdefined(var_1))
+  if(isDefined(var_1))
     var_2 = var_1;
 
   self waittill(var_2);
@@ -539,7 +530,7 @@ sndx_mute_device_debug_timer(var_0) {
 sndx_mute_device_bubble_fx() {
   self endon("mute_device_bubble_off");
 
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     self waittill("mute_device_bubble_enter");
     playfxontag_safe("mute_breach_distort_vm_enter");
     self waittill("mute_device_bubble_exit");
@@ -550,20 +541,20 @@ sndx_mute_device_bubble_fx() {
 }
 
 sndx_mute_device_bubble_off_fx() {
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     self waittill("mute_device_bubble_off");
     wait 0.05;
   }
 }
 
 playfxontag_safe(var_0) {
-  if(isdefined(self) && isdefined(level._effect[var_0]))
-    playfxontag(common_scripts\utility::getfx(var_0), self, "tag_origin");
+  if(isDefined(self) && isDefined(level._effect[var_0]))
+    playFXOnTag(common_scripts\utility::getfx(var_0), self, "tag_origin");
   else {}
 }
 
 killfxontag_safe(var_0) {
-  if(isdefined(self) && isdefined(level._effect[var_0]))
+  if(isDefined(self) && isDefined(level._effect[var_0]))
     killfxontag(common_scripts\utility::getfx(var_0), self, "tag_origin");
   else {}
 }
@@ -582,7 +573,7 @@ pdrone_death_explode() {
   var_0 = self;
   var_1 = var_0.origin;
 
-  while (isdefined(var_0)) {
+  while(isDefined(var_0)) {
     var_1 = var_0.origin;
     wait 0.05;
   }
@@ -637,8 +628,8 @@ boost_jump_disable_npc(var_0) {
 }
 
 boost_jump_player() {
-  if(!isdefined(level._snd.boost_jump)) {
-    level._snd.boost_jump = spawnstruct();
+  if(!isDefined(level._snd.boost_jump)) {
+    level._snd.boost_jump = spawnStruct();
     level._snd.boost_jump.is_jumping = 0;
     thread init_boost_land_arrays();
   }
@@ -653,8 +644,8 @@ boost_land_player(var_0) {
   var_1 = 40;
   var_2 = 10;
 
-  if(!isdefined(level._snd.boost_jump)) {
-    level._snd.boost_jump = spawnstruct();
+  if(!isDefined(level._snd.boost_jump)) {
+    level._snd.boost_jump = spawnStruct();
     level._snd.boost_jump.is_jumping = 0;
     thread init_boost_land_arrays();
   }
@@ -668,7 +659,7 @@ boost_land_player(var_0) {
       var_6 = "pc_boost_land_" + var_5;
       level._snd.boost_jump.is_jumping = 0;
 
-      if(isdefined(level._snd.boost_jump.jump_sound))
+      if(isDefined(level._snd.boost_jump.jump_sound))
         soundscripts\_audio::aud_fade_out_and_delete(level._snd.boost_jump.jump_sound, 0.5);
 
       if(var_0 < var_2) {
@@ -721,7 +712,7 @@ boost_land_npc() {
 boost_dodge_activate_plr() {
   level._snd.boost_jump.is_jumping = 0;
 
-  if(isdefined(level._snd.boost_jump.jump_sound))
+  if(isDefined(level._snd.boost_jump.jump_sound))
     soundscripts\_audio::aud_fade_out_and_delete(level._snd.boost_jump.jump_sound, 0.5);
 }
 
@@ -736,14 +727,14 @@ boost_land_hud_disable() {
 boost_land_use_fuel(var_0) {
   var_1 = 0.5;
 
-  if(!isdefined(level.aud.boost_land_on)) {
+  if(!isDefined(level.aud.boost_land_on)) {
     level.aud.boost_land_on = 1;
     thread boost_land_play_oneshot();
     level.player soundscripts\_snd_playsound::snd_play_loop_linked("tac_pc_boost_land_assist_jet_lp", var_0, 0.1, 0.2);
     level waittill(var_0);
     var_2 = getlevelticks();
 
-    if(!isdefined(level.aud.boost_land_release_start_time)) {
+    if(!isDefined(level.aud.boost_land_release_start_time)) {
       level.aud.boost_land_release_start_time = var_2;
       soundscripts\_snd_playsound::snd_play_2d("tac_pc_boost_land_assist_release");
     } else if(var_2 - level.aud.boost_land_release_start_time >= var_1 / 0.05) {
@@ -756,7 +747,7 @@ boost_land_use_fuel(var_0) {
 }
 
 boost_land_velocity_finder() {
-  for (;;) {
+  for(;;) {
     var_0 = length(level.player getvelocity());
     iprintlnbold(var_0);
     wait 0.05;
@@ -768,10 +759,10 @@ boost_land_play_oneshot() {
   var_1 = 7500;
   var_2 = 500;
 
-  if(!isdefined(level.aud.boost_land_first_shot))
+  if(!isDefined(level.aud.boost_land_first_shot))
     level.aud.boost_land_first_shot = 1;
 
-  if(!isdefined(level.aud.boost_land_max_locked_out))
+  if(!isDefined(level.aud.boost_land_max_locked_out))
     level.aud.boost_land_max_locked_out = 0;
 
   var_3 = length(level.player getvelocity());
@@ -792,10 +783,10 @@ boost_land_play_oneshot() {
 boost_land_max_shot_timer() {
   var_0 = 4.0;
 
-  if(!isdefined(level.aud.boost_land_max_shot_timer))
+  if(!isDefined(level.aud.boost_land_max_shot_timer))
     level.aud.boost_land_max_shot_timer = 0;
 
-  for (;;) {
+  for(;;) {
     level.aud.boost_land_max_shot_timer = level.aud.boost_land_max_shot_timer + 0.1;
     level.aud.boost_land_max_locked_out = 1;
     wait 0.1;
@@ -811,10 +802,10 @@ boost_land_max_shot_timer() {
 boost_land_release_shot_timer() {
   var_0 = 0.1;
 
-  if(!isdefined(level.aud.boost_land_release_shot_timer))
+  if(!isDefined(level.aud.boost_land_release_shot_timer))
     level.aud.boost_land_release_shot_timer = 0;
 
-  for (;;) {
+  for(;;) {
     level.aud.boost_land_release_shot_timer = level.aud.boost_land_release_shot_timer + 0.1;
     level.aud.boost_land_release_locked_out = 1;
     wait 0.1;
@@ -865,7 +856,7 @@ tracking_grenade_beep(var_0) {
 anml_doberman(var_0) {
   var_1 = "anml_doberman_" + var_0;
 
-  if(isdefined(self.snd_guid))
+  if(isDefined(self.snd_guid))
     level notify(self.snd_guid);
 
   self.snd_guid = "anml_doberman_" + soundscripts\_snd::snd_new_guid();
@@ -914,7 +905,7 @@ exo_cloak_battery_low() {
   var_0 = level._cloaked_stealth_settings.cloak_battery_level;
   var_1 = undefined;
 
-  while (common_scripts\utility::flag("snd_cloak_is_enabled")) {
+  while(common_scripts\utility::flag("snd_cloak_is_enabled")) {
     var_2 = level._cloaked_stealth_settings.cloak_battery_level;
 
     if(var_2 <= 0.26 && var_0 > 0.26)
@@ -926,7 +917,7 @@ exo_cloak_battery_low() {
     wait 0.05;
   }
 
-  if(isdefined(var_1)) {
+  if(isDefined(var_1)) {
     var_1 scalevolume(0, 0.25);
     wait 0.25;
     level notify("notify_stop_exo_cloak_battery_low");
@@ -944,10 +935,10 @@ exo_cloak_battery_dead() {
 exo_cloak_battery_recharge() {
   var_0 = soundscripts\_audio::deprecated_aud_play_2d_sound("exo_cloak_battery_recharge");
 
-  while (level._cloaked_stealth_settings.cloak_battery_level < 1.0 && !common_scripts\utility::flag("snd_cloak_is_enabled"))
+  while(level._cloaked_stealth_settings.cloak_battery_level < 1.0 && !common_scripts\utility::flag("snd_cloak_is_enabled"))
     wait 0.1;
 
-  if(isdefined(var_0))
+  if(isDefined(var_0))
     var_0 scalevolume(0, 0.25);
 }
 
@@ -1013,7 +1004,7 @@ sonic_blast() {
 }
 
 sonic_blast_aftershock() {
-  if(isdefined(level.aud.sonic_blast_started) && level.aud.sonic_blast_started == 1)
+  if(isDefined(level.aud.sonic_blast_started) && level.aud.sonic_blast_started == 1)
     level.aud.sonic_blast_started = 0;
   else
     soundscripts\_snd_playsound::snd_play_2d("sonic_attack_aftershock");
@@ -1070,7 +1061,7 @@ start_next_radiation_level(var_0, var_1, var_2) {
   soundscripts\_snd_filters::snd_fade_in_filter(var_0, var_3);
   stop_shellshock_loop();
   level.player thread common_scripts\utility::play_loop_sound_on_entity(var_1);
-  level.player playsound(var_2);
+  level.player playSound(var_2);
 }
 
 stop_radiation_level(var_0, var_1) {
@@ -1080,7 +1071,7 @@ stop_radiation_level(var_0, var_1) {
   wait 1.0;
   soundscripts\_audio_zone_manager::azm_set_filter_bypass(0);
   stop_shellshock_loop();
-  level.player playsound(var_1);
+  level.player playSound(var_1);
 }
 
 stop_shellshock_loop() {
@@ -1089,7 +1080,7 @@ stop_shellshock_loop() {
 }
 
 explo_ambientexp_dirt(var_0, var_1) {
-  var_2 = spawnstruct();
+  var_2 = spawnStruct();
   var_2.pos = var_0;
   var_2.exploder_num_ = var_1;
   var_2.incoming_alias_ = "exp_generic_incoming";
@@ -1105,7 +1096,7 @@ explo_ambientexp_dirt(var_0, var_1) {
 }
 
 explo_ambientexp_fireball(var_0) {
-  var_1 = spawnstruct();
+  var_1 = spawnStruct();
   var_1.pos = var_0;
   var_1.speed_of_sound_ = 1;
   var_1.duck_alias_ = "exp_generic_explo_sub_kick";
@@ -1121,15 +1112,15 @@ explo_ambientexp_fireball(var_0) {
 snd_air_vehicle_smart_flyby(var_0, var_1, var_2, var_3, var_4) {
   var_5 = 0;
 
-  if(isdefined(var_2))
+  if(isDefined(var_2))
     var_5 = var_2;
 
   var_6 = 0;
 
-  if(isdefined(var_3))
+  if(isDefined(var_3))
     var_6 = var_3;
 
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     if(var_6)
       var_7 = distance(self.origin, level.player.origin);
     else
@@ -1138,7 +1129,7 @@ snd_air_vehicle_smart_flyby(var_0, var_1, var_2, var_3, var_4) {
     if(var_7 < var_1) {
       var_8 = spawn("script_origin", self.origin);
       var_8 linkto(self);
-      var_8 playsound(var_0, "sounddone");
+      var_8 playSound(var_0, "sounddone");
       var_8 thread sndx_air_vehicle_smart_flyby_deathspin(self, var_4);
       var_8 thread sndx_air_vehicle_smart_flyby_sounddone();
       var_8 waittill("flyby_ent", var_9);
@@ -1167,10 +1158,10 @@ sndx_air_vehicle_smart_flyby_deathspin(var_0, var_1) {
   var_0 waittill("deathspin");
   self notify("flyby_ent", "deathspin");
 
-  if(isdefined(var_1)) {
+  if(isDefined(var_1)) {
     var_2 = spawn("script_origin", self.origin);
     var_2 linkto(self);
-    var_2 playsound(var_1, "sounddone");
+    var_2 playSound(var_1, "sounddone");
     var_2 waittill("sounddone");
     var_2 delete();
   }
@@ -1187,8 +1178,8 @@ snd_advanced_flyby_system(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
   self endon("deathspin");
   self vehicle_turnengineoff();
 
-  if(!isdefined(self.audio))
-    self.audio = spawnstruct();
+  if(!isDefined(self.audio))
+    self.audio = spawnStruct();
 
   self.audio.prev_dist = sndx_advanced_flyby_dist_check(var_4);
   self.audio.flying_over = 0;
@@ -1197,10 +1188,10 @@ snd_advanced_flyby_system(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
   self.audio.approaching = 1;
   self.audio.debug_id = var_10;
 
-  if(isdefined(var_5))
+  if(isDefined(var_5))
     thread sndx_advanced_flyby_deathspin(var_5, var_10);
 
-  if(isdefined(var_6)) {
+  if(isDefined(var_6)) {
     var_12 = spawn("script_origin", self.origin);
     var_12 linkto(self);
     thread sndx_advanced_flyby_destruct(var_12, var_6, var_10);
@@ -1208,17 +1199,17 @@ snd_advanced_flyby_system(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
 
   self.audio.min_flyingover_wait = 5;
 
-  if(isdefined(var_7))
+  if(isDefined(var_7))
     self.audio.min_flyingover_wait = var_7;
 
   self.audio.min_flyingby_wait = 3;
 
-  if(isdefined(var_8))
+  if(isDefined(var_8))
     self.audio.min_flyingby_wait = var_8;
 
   var_13 = 0.05;
 
-  if(isdefined(var_9))
+  if(isDefined(var_9))
     var_13 = var_9;
 
   if(isarray(var_1)) {
@@ -1227,17 +1218,17 @@ snd_advanced_flyby_system(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
   }
 
   if(isarray(var_2)) {
-    while (isdefined(self)) {
+    while(isDefined(self)) {
       var_17 = sndx_advanced_flyby_dist_check(var_4);
 
-      for (var_18 = 0; var_18 < var_2.size; var_18++) {
+      for(var_18 = 0; var_18 < var_2.size; var_18++) {
         if(var_17 < var_2[var_18]) {
           if(var_18 == 0) {
             if(self.audio.approaching && self.audio.flying_over == 0 && self.audio.death_spining == 0) {
               var_19 = sndx_advanced_flyby_construct_alias(var_0, var_18, var_3, var_10);
 
-              if(isdefined(var_19))
-                thread sndx_advanced_flyby_playsound(var_19, var_18);
+              if(isDefined(var_19))
+                thread sndx_advanced_flyby_playSound(var_19, var_18);
             } else if(var_17 < self.audio.prev_dist)
               self.audio.approaching = 1;
             else
@@ -1247,8 +1238,8 @@ snd_advanced_flyby_system(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
               self.audio.approaching = 0;
               var_19 = sndx_advanced_flyby_construct_alias(var_0, var_18, var_3, var_10);
 
-              if(isdefined(var_19))
-                thread sndx_advanced_flyby_playsound(var_19, var_18);
+              if(isDefined(var_19))
+                thread sndx_advanced_flyby_playSound(var_19, var_18);
             }
           } else
             self.audio.approaching = 1;
@@ -1267,13 +1258,13 @@ sndx_advanced_flyby_spawn_sound(var_0, var_1, var_2) {
   self endon("death");
   self endon("deathspin");
   wait(var_1);
-  thread sndx_advanced_flyby_playsound(var_0);
+  thread sndx_advanced_flyby_playSound(var_0);
 }
 
 sndx_advanced_flyby_dist_check(var_0) {
   var_1 = 0;
 
-  if(isdefined(var_0))
+  if(isDefined(var_0))
     var_1 = var_0;
 
   if(var_1)
@@ -1295,7 +1286,7 @@ sndx_advanced_flyby_construct_alias(var_0, var_1, var_2, var_3) {
       var_8 = var_5 - var_7;
       var_9 = length(var_8) * 0.0568182;
 
-      for (var_10 = 0; var_10 < var_2.size; var_10++) {
+      for(var_10 = 0; var_10 < var_2.size; var_10++) {
         var_4 = var_10 + 1;
 
         if(var_9 > var_2[var_10]) {
@@ -1333,7 +1324,7 @@ sndx_advanced_flyby_construct_alias(var_0, var_1, var_2, var_3) {
     return undefined;
 }
 
-sndx_advanced_flyby_playsound(var_0, var_1) {
+sndx_advanced_flyby_playSound(var_0, var_1) {
   thread sndx_advanced_flyby_retrigger_wait(var_1);
   var_2 = soundscripts\_audio::deprecated_aud_play_linked_sound(var_0, self);
   thread sndx_advanced_flyby_cleanup(var_2, "deathspin");
@@ -1355,16 +1346,16 @@ sndx_advanced_flyby_destruct(var_0, var_1, var_2) {
 }
 
 sndx_advanced_flyby_retrigger_wait(var_0) {
-  if(isdefined(var_0)) {
+  if(isDefined(var_0)) {
     if(var_0 == 0) {
       wait(self.audio.min_flyingover_wait);
 
-      if(isdefined(self))
+      if(isDefined(self))
         self.audio.flying_over = 0;
     } else {
       wait(self.audio.min_flyingby_wait);
 
-      if(isdefined(self))
+      if(isDefined(self))
         self.audio.flying_by = 0;
     }
   }
@@ -1373,20 +1364,20 @@ sndx_advanced_flyby_retrigger_wait(var_0) {
 sndx_advanced_flyby_cleanup(var_0, var_1, var_2) {
   self waittill(var_1);
 
-  if(isdefined(var_0)) {
+  if(isDefined(var_0)) {
     var_3 = 0.3;
 
-    if(isdefined(var_2))
+    if(isDefined(var_2))
       var_3 = var_2;
 
     var_0 scalevolume(0.0, var_3);
     wait(var_3);
 
-    if(isdefined(var_0)) {
+    if(isDefined(var_0)) {
       var_0 stopsounds();
       wait 0.1;
 
-      if(isdefined(var_0))
+      if(isDefined(var_0))
         var_0 delete();
     }
   }
@@ -1398,41 +1389,41 @@ snd_ambient_explosion(var_0) {
 }
 
 sndx_ambient_explosion_args_validation(var_0) {
-  if(!isdefined(level._snd.ambientexp))
+  if(!isDefined(level._snd.ambientexp))
     init_ambient_explosion_arrays();
 
-  if(!isdefined(var_0.explo_shot_array_)) {
+  if(!isDefined(var_0.explo_shot_array_)) {
     var_0.explo_shot_array_ = level._snd.ambientexp["exp_generic_explo_shot"];
 
-    if(!isdefined(var_0.explo_tail_alias_))
+    if(!isDefined(var_0.explo_tail_alias_))
       var_0.explo_tail_alias_ = "exp_generic_explo_tail";
   }
 
-  if(isdefined(var_0.duck_alias_)) {
-    if(isdefined(var_0.duck_dist_threshold_))
+  if(isDefined(var_0.duck_alias_)) {
+    if(isDefined(var_0.duck_dist_threshold_))
       var_0.duck_dist_threshold_ = max(var_0.duck_dist_threshold_, 0);
     else
       var_0.duck_dist_threshold_ = 1000;
   }
 
-  if(isdefined(var_0.explo_delay_chance_))
+  if(isDefined(var_0.explo_delay_chance_))
     var_0.explo_delay_chance_ = max(var_0.explo_delay_chance_, 0);
   else
     var_0.explo_delay_chance_ = 50;
 
-  if(isdefined(var_0.shake_dist_threshold_))
+  if(isDefined(var_0.shake_dist_threshold_))
     var_0.shake_dist_threshold_ = max(var_0.shake_dist_threshold_, 0);
 
-  if(!isdefined(var_0.shake_envelope_))
+  if(!isDefined(var_0.shake_envelope_))
     var_0.shake_envelope_ = level._snd.envs["explo_shake_over_distance"];
 
-  if(isdefined(var_0.shake_durration_))
+  if(isDefined(var_0.shake_durration_))
     var_0.shake_durration_ = max(var_0.shake_durration_, 0);
   else
     var_0.shake_durration_ = 0.5;
 
-  if(isdefined(var_0.ground_zero_alias_)) {
-    if(isdefined(var_0.ground_zero_dist_threshold_))
+  if(isDefined(var_0.ground_zero_alias_)) {
+    if(isDefined(var_0.ground_zero_dist_threshold_))
       var_0.ground_zero_dist_threshold_ = max(var_0.ground_zero_dist_threshold_, 0);
     else
       var_0.ground_zero_dist_threshold_ = 500;
@@ -1459,13 +1450,13 @@ sndx_ambient_explosion_internal(var_0) {
   var_15 = var_0.ground_zero_dist_threshold_;
   var_16 = distance(level.player.origin, var_1);
 
-  if(isdefined(var_4) && var_4 == 1) {
+  if(isDefined(var_4) && var_4 == 1) {
     var_17 = var_16 * 0.0000833333;
     wait(var_17);
   }
 
-  if(isdefined(var_2)) {
-    if(isdefined(var_3))
+  if(isDefined(var_2)) {
+    if(isDefined(var_3))
       common_scripts\utility::play_sound_in_space(var_3, var_1);
 
     common_scripts\_exploder::exploder(var_2);
@@ -1476,22 +1467,22 @@ sndx_ambient_explosion_internal(var_0) {
   var_20 = var_19[0];
   thread common_scripts\utility::play_sound_in_space(var_20, var_1);
 
-  if(isdefined(var_6)) {
+  if(isDefined(var_6)) {
     if(var_16 < var_7)
       thread common_scripts\utility::play_sound_in_space(var_6, var_1);
   }
 
   var_21 = var_19[1];
 
-  if(isdefined(var_21)) {
+  if(isDefined(var_21)) {
     if(soundscripts\_audio::aud_percent_chance(var_8))
       wait(var_21);
   }
 
-  if(isdefined(var_9))
+  if(isDefined(var_9))
     thread common_scripts\utility::play_sound_in_space(var_9, var_1);
 
-  if(isdefined(var_10)) {
+  if(isDefined(var_10)) {
     if(var_16 < var_10) {
       var_22 = var_16 / var_10;
       var_23 = soundscripts\_audio::deprecated_aud_map2(var_22, var_11);
@@ -1499,17 +1490,17 @@ sndx_ambient_explosion_internal(var_0) {
     }
   }
 
-  if(isdefined(var_13))
+  if(isDefined(var_13))
     thread common_scripts\utility::play_sound_in_space(var_13, var_1);
 
-  if(isdefined(var_14) && var_16 < var_15)
+  if(isDefined(var_14) && var_16 < var_15)
     thread common_scripts\utility::play_sound_in_space(var_14, var_1);
 }
 
 snd_impact(var_0, var_1, var_2, var_3, var_4) {
   var_5 = var_0 + "_" + var_1 + "_" + var_2;
 
-  if(isdefined(var_4))
+  if(isDefined(var_4))
     var_6 = soundscripts\_audio::deprecated_aud_play_linked_sound(var_5, var_4, undefined, undefined, undefined, undefined, var_3);
   else
     var_6 = soundscripts\_audio::deprecated_aud_play_sound_at(var_5, var_3);
@@ -1535,8 +1526,8 @@ start_vehicle_shell_shock(var_0) {
 }
 
 sndx_vehicle_collision_args_setup(var_0, var_1, var_2) {
-  if(!isdefined(self.audio))
-    self.audio = spawnstruct();
+  if(!isDefined(self.audio))
+    self.audio = spawnStruct();
 
   if(!isarray(var_1))
     var_1 = [];
@@ -1564,11 +1555,11 @@ sndx_vehicle_collision_args_setup(var_0, var_1, var_2) {
   self.audio.lrgvolmin = soundscripts\_audio::aud_get_optional_param(0.3, var_1["LrgVolMin"]);
   self.audio.nonplayerimpvolreduction = soundscripts\_audio::aud_get_optional_param(0.0, var_1["NonPlayerImpVolReduction"]);
 
-  if(!isdefined(self.audio.prev_impacttime))
+  if(!isDefined(self.audio.prev_impacttime))
     self.audio.prev_impacttime = 0;
 
-  if(!isdefined(level._snd.veh_collision)) {
-    level._snd.veh_collision = spawnstruct();
+  if(!isDefined(level._snd.veh_collision)) {
+    level._snd.veh_collision = spawnStruct();
     init_impact_system_arrays();
     level._snd.veh_collision.is_scraping = 0;
     level._snd.veh_collision.scrapeenabled = soundscripts\_audio::aud_get_optional_param(1, var_1["ScrapeEnabled"]);
@@ -1582,7 +1573,7 @@ sndx_vehicle_collision_args_setup(var_0, var_1, var_2) {
 
   var_3 = level._snd.veh_collision.surfaces;
 
-  if(isdefined(var_2))
+  if(isDefined(var_2))
     var_3 = var_2;
 
   if(!snd_is_valid_surface(var_0["surface"], var_3))
@@ -1608,10 +1599,10 @@ sndx_play_vehicle_collision_internal(var_0) {
   var_14 = undefined;
   var_15 = 0;
 
-  if(isdefined(level.player.drivingvehicle)) {
+  if(isDefined(level.player.drivingvehicle)) {
     var_13 = level.player.drivingvehicle;
 
-    if(isdefined(var_2) && var_2 == var_13 || var_1 == var_13) {
+    if(isDefined(var_2) && var_2 == var_13 || var_1 == var_13) {
       var_14 = var_13;
       var_15 = 1;
 
@@ -1668,7 +1659,7 @@ sndx_play_vehicle_collision_internal(var_0) {
       }
     }
 
-    if(isdefined(var_13) && var_1 != var_13) {
+    if(isDefined(var_13) && var_1 != var_13) {
       if(randomint(100) < self.audio.tireskidprobability)
         soundscripts\_audio::deprecated_aud_play_sound_at("vehicle_tire_skid", var_3);
     }
@@ -1722,17 +1713,17 @@ sndx_vehicle_collision_scrape(var_0) {
   level._snd.veh_collision.is_scraping = 1;
   level endon("aud_stop_vehicle_scraping");
 
-  while (level._snd.veh_collision.is_scraping) {
-    if(isdefined(var_0)) {
+  while(level._snd.veh_collision.is_scraping) {
+    if(isDefined(var_0)) {
       var_1 = var_0.origin;
 
-      if(isdefined(level._snd.veh_collision.scrape_pos))
+      if(isDefined(level._snd.veh_collision.scrape_pos))
         var_1 = level._snd.veh_collision.scrape_pos;
 
       var_2 = var_0.audio.vehicleid + "_scrape";
       var_3 = soundscripts\_audio::deprecated_aud_play_linked_sound(var_2, var_0, undefined, undefined, undefined, undefined, var_1);
 
-      if(!isdefined(level._snd.veh_collision.scrape_sounds))
+      if(!isDefined(level._snd.veh_collision.scrape_sounds))
         level._snd.veh_collision.scrape_sounds = [];
 
       level._snd.veh_collision.scrape_sounds[level._snd.veh_collision.scrape_sounds.size] = var_3;
@@ -1754,15 +1745,15 @@ sndx_vehicle_collision_scrape_timer() {
 sndx_vehicle_collision_stop_scrapes(var_0) {
   var_1 = level._snd.veh_collision.scrapefadeouttime;
 
-  if(isdefined(var_0))
+  if(isDefined(var_0))
     var_1 = var_0;
 
   level notify("aud_stop_vehicle_scraping");
   level._snd.veh_collision.is_scraping = 0;
 
-  if(isdefined(level._snd.veh_collision.scrape_sounds)) {
-    for (var_2 = 0; var_2 < level._snd.veh_collision.scrape_sounds.size; var_2++) {
-      if(isdefined(level._snd.veh_collision.scrape_sounds[var_2])) {
+  if(isDefined(level._snd.veh_collision.scrape_sounds)) {
+    for(var_2 = 0; var_2 < level._snd.veh_collision.scrape_sounds.size; var_2++) {
+      if(isDefined(level._snd.veh_collision.scrape_sounds[var_2])) {
         var_3 = level._snd.veh_collision.scrape_sounds[var_2];
         thread soundscripts\_audio::aud_fade_out_and_delete(var_3, var_1);
       }
@@ -1774,36 +1765,34 @@ sndx_vehicle_collision_stop_scrapes(var_0) {
 
 sndx_vehicle_collision_print_stats(var_0, var_1, var_2, var_3) {
   if(self.audio.debug) {
-    if(!isdefined(var_1))
+    if(!isDefined(var_1))
       var_1 = "-";
 
-    if(!isdefined(var_2))
+    if(!isDefined(var_2))
       var_2 = "-";
 
-    if(!isdefined(var_3))
+    if(!isDefined(var_3))
       var_3 = "-";
 
     if(self.audio.output_type) {
-      if(isdefined(var_0))
+      if(isDefined(var_0))
         return;
-    } else {
-
-    }
+    } else {}
   }
 }
 
 sndx_vehicle_collision_print_impact(var_0, var_1, var_2, var_3) {
   if(self.audio.debug) {
-    if(!isdefined(var_0))
+    if(!isDefined(var_0))
       var_0 = "-";
 
-    if(!isdefined(var_1))
+    if(!isDefined(var_1))
       var_1 = "-";
 
-    if(!isdefined(var_2))
+    if(!isDefined(var_2))
       var_2 = "-";
 
-    if(!isdefined(var_3))
+    if(!isDefined(var_3))
       var_3 = "-";
   }
 }
@@ -1817,19 +1806,19 @@ sndx_vehicle_collision_dpad_down() {
 }
 
 sndx_vehicle_collision_dpad_left() {
-  if(isdefined(self.audio.input_type))
+  if(isDefined(self.audio.input_type))
     self.audio.output_type = 1;
 }
 
 sndx_vehicle_collision_dpad_right() {
-  if(isdefined(self.audio.input_type))
+  if(isDefined(self.audio.input_type))
     self.audio.output_type = 0;
 }
 
 snd_is_valid_surface(var_0, var_1) {
   var_2 = 0;
 
-  for (var_3 = 0; var_3 < var_1.size; var_3++) {
+  for(var_3 = 0; var_3 < var_1.size; var_3++) {
     if(var_0 == var_1[var_3]) {
       var_2 = 1;
       break;
@@ -1851,11 +1840,11 @@ snd_dpad_functions(var_0, var_1, var_2, var_3) {
 }
 
 sndx_dpad_function_watch(var_0, var_1) {
-  if(isdefined(var_0)) {
-    for (;;) {
+  if(isDefined(var_0)) {
+    for(;;) {
       level.player waittill(var_0);
 
-      if(isdefined(var_1))
+      if(isDefined(var_1))
         thread[[var_1]]();
 
       wait 0.05;
@@ -1868,7 +1857,7 @@ snd_waittill_within_radius(var_0, var_1, var_2) {
   var_1 = soundscripts\_audio::aud_get_optional_param(1, var_1);
   var_2 = soundscripts\_audio::aud_get_optional_param(0.1, var_2);
 
-  while (isdefined(self) && !var_3) {
+  while(isDefined(self) && !var_3) {
     if(var_1) {
       if(distance(self.origin, level.player.origin) < var_0)
         var_3 = 1;
@@ -1905,7 +1894,7 @@ sndx_debug_value_destroy(var_0) {}
 snd_debug_timer(var_0, var_1) {}
 
 snd_wait_for_enemies_aware(var_0) {
-  for (;;) {
+  for(;;) {
     var_1 = getaiarray("axis");
 
     foreach(var_3 in var_1) {
@@ -1922,7 +1911,7 @@ snd_wait_for_enemies_aware(var_0) {
 }
 
 snd_wait_for_enemies_see_player(var_0) {
-  for (;;) {
+  for(;;) {
     var_1 = getaiarray("axis");
 
     foreach(var_3 in var_1) {

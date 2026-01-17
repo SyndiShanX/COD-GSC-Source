@@ -10,8 +10,7 @@ main() {
   build_unload_groups(::unload_groups);
 }
 
-precache_submodels() {
-}
+precache_submodels() {}
 
 #using_animtree("vehicles");
 #using_animtree("generic_human");
@@ -54,7 +53,7 @@ setanims() {
   positions = [];
 
   for(i = 0; i < 9; i++)
-    positions[i] = spawnstruct();
+    positions[i] = spawnStruct();
 
   positions[0].sittag = "tag_driver";
   positions[1].sittag = "tag_passenger";

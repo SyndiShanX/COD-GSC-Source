@@ -89,5 +89,4 @@ precacheFX() {
     level._effect["spotlight"] = loadfx("misc/spotlight_large");
 
   level._effect["heli_dlight_blue"] = loadfx("misc/aircraft_light_cockpit_blue");
-
 }

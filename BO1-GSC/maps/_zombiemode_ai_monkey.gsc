@@ -239,9 +239,7 @@ init_monkey_zombie_anims() {
   level._zombie_walk_melee["monkey_zombie"] = [];
   level._zombie_run_melee["monkey_zombie"] = [];
   if(isDefined(level.monkey_zombie_anim_override)) {
-    [
-      [level.monkey_zombie_anim_override]
-    ]();
+    [[level.monkey_zombie_anim_override]]();
   }
   if(!isDefined(level._zombie_melee_crawl)) {
     level._zombie_melee_crawl = [];
@@ -421,7 +419,7 @@ monkey_get_available_spawners() {
 
 monkey_pack_man_setup_perks() {
   level.monkey_perks = [];
-  vending_triggers = getentarray("zombie_vending", "targetname");
+  vending_triggers = getEntArray("zombie_vending", "targetname");
   for(i = 0; i < vending_triggers.size; i++) {
     if(vending_triggers[i].targeted) {
       continue;
@@ -462,7 +460,7 @@ monkey_pack_man_get_next_perk() {
 
 monkey_pack_spawn() {
   monkey_print("spawning pack");
-  pack = SpawnStruct();
+  pack = spawnStruct();
   pack.monkeys = [];
   pack.attack = [];
   pack.target = undefined;
@@ -542,7 +540,7 @@ monkey_pack_set_machine() {
   if(!isDefined(self.perk)) {
     return;
   }
-  targets = getentarray(self.perk.target, "targetname");
+  targets = getEntArray(self.perk.target, "targetname");
   for(j = 0; j < targets.size; j++) {
     if(targets[j].classname == "script_model") {
       self.machine = targets[j];
@@ -724,7 +722,7 @@ monkey_round_stop() {
 }
 
 monkey_player_has_perk() {
-  vending_triggers = getentarray("zombie_vending", "targetname");
+  vending_triggers = getEntArray("zombie_vending", "targetname");
   for(i = 0; i < vending_triggers.size; i++) {
     players = getplayers();
     for(j = 0; j < players.size; j++) {
@@ -760,9 +758,7 @@ monkey_zombie_pick_best_spawner() {
   best_spawner = undefined;
   best_score = -1;
   for(i = 0; i < level.monkey_zombie_spawners.size; i++) {
-    score = [
-      [level.monkey_zombie_spawn_heuristic]
-    ](level.monkey_zombie_spawners[i]);
+    score = [[level.monkey_zombie_spawn_heuristic]](level.monkey_zombie_spawners[i]);
     if(score > best_score) {
       best_spawner = level.monkey_zombie_spawners[i];
       best_score = score;
@@ -824,7 +820,7 @@ monkey_zombie_think() {
 monkey_zombie_debug() {
   self endon("death");
   while(true) {
-    forward = VectorNormalize(AnglesToForward(self.angles));
+    forward = VectorNormalize(anglesToForward(self.angles));
     end_pos = self.origin - vector_scale(forward, 120);
     recordLine(self.origin, end_pos, (.5, 1, 0), "Script", self);
     wait_network_frame();
@@ -961,7 +957,7 @@ monkey_zombie_grenade_throw_watcher(target, animname) {
   throw_angle = RandomIntRange(20, 30);
   dir = VectorToAngles(target.origin - self.origin);
   dir = (dir[0] - throw_angle, dir[1], dir[2]);
-  dir = AnglesToForward(dir);
+  dir = anglesToForward(dir);
   velocity = dir * 550;
   fuse = RandomFloatRange(1, 2);
   hand_pos = self GetTagOrigin("TAG_WEAPON_RIGHT");
@@ -972,7 +968,7 @@ monkey_zombie_grenade_throw_watcher(target, animname) {
 monkey_zombie_grenade_throw(target) {
   self endon("death");
   throw_anim = [];
-  forward = VectorNormalize(AnglesToForward(self.angles));
+  forward = VectorNormalize(anglesToForward(self.angles));
   end_pos = self.origin + vector_scale(forward, 96);
   if(BulletTracePassed(self.origin, end_pos, false, undefined)) {
     throw_anim[throw_anim.size] = % ai_zombie_monkey_grenade_throw_back_run_01;
@@ -1126,7 +1122,7 @@ play_attack_impacts(time) {
   self endon("death");
   for(i = 0; i < time; i++) {
     if(RandomIntRange(0, 100) >= 41)
-      self PlaySound("zmb_monkey_attack_machine");
+      self playSound("zmb_monkey_attack_machine");
     wait(RandomFloatRange(.7, 1.1));
   }
 }
@@ -1246,12 +1242,12 @@ monkey_zombie_ground_hit_think() {
     } else if(!self.ground_hit && self monkey_zombie_check_ground_hit()) {
       players = GetPlayers();
       closeEnough = false;
-      origin = self GetEye();
+      origin = self getEye();
       for(i = 0; i < players.size; i++) {
         if(players[i] maps\_laststand::player_is_in_laststand()) {
           continue;
         }
-        test_origin = players[i] GetEye();
+        test_origin = players[i] getEye();
         d = distanceSquared(origin, test_origin);
         if(d > level.monkey_zombie_groundhit_trigger_radius * level.monkey_zombie_groundhit_trigger_radius) {
           continue;
@@ -1274,7 +1270,7 @@ monkey_zombie_ground_hit_think() {
 groundhit_watcher(animname) {
   self endon("death");
   self waittillmatch(animname, "fire");
-  playfxontag(level._effect["monkey_groundhit"], self, "tag_origin");
+  playFXOnTag(level._effect["monkey_groundhit"], self, "tag_origin");
   origin = self.origin + (0, 0, 40);
   zombies_axis = get_array_of_closest(origin, GetAiSpeciesArray("axis", "all"), undefined, undefined, level.monkey_zombie_groundhit_damage_radius);
   dogs = get_array_of_closest(origin, GetAiSpeciesArray("allies", "zombie_dog"), undefined, undefined, level.monkey_zombie_groundhit_damage_radius);
@@ -1287,7 +1283,7 @@ groundhit_watcher(animname) {
       if(is_magic_bullet_shield_enabled(zombies[i])) {
         continue;
       }
-      test_origin = zombies[i] GetEye();
+      test_origin = zombies[i] getEye();
       if(!BulletTracePassed(origin, test_origin, false, undefined)) {
         continue;
       }
@@ -1317,7 +1313,7 @@ groundhit_watcher(animname) {
     if(!is_player_valid(players[i])) {
       continue;
     }
-    test_origin = players[i] GetEye();
+    test_origin = players[i] getEye();
     if(distanceSquared(origin, test_origin) > level.monkey_zombie_groundhit_damage_radius * level.monkey_zombie_groundhit_damage_radius) {
       continue;
     }
@@ -1365,7 +1361,7 @@ monkey_zombie_grenade_pickup() {
     while(1) {
       self SetGoalPos(self.monkey_thrower.origin);
       target_dir = self.monkey_thrower.origin - self.origin;
-      monkey_dir = AnglesToForward(self.angles);
+      monkey_dir = anglesToForward(self.angles);
       dot = VectorDot(VectorNormalize(target_dir), VectorNormalize(monkey_dir));
       if(dot >= 0.5) {
         break;
@@ -1604,7 +1600,7 @@ monkey_remove_from_pack() {
   if(level.monkey_packs_killed >= level.monkey_pack_max) {
     flag_set("last_monkey_down");
     if(self monkey_zombie_can_drop_free_perk()) {
-      forward = VectorNormalize(AnglesToForward(self.angles));
+      forward = VectorNormalize(anglesToForward(self.angles));
       end_pos = self.origin - vector_scale(forward, 32);
       level thread maps\_zombiemode_powerups::specific_powerup_drop("free_perk", end_pos);
     }
@@ -1630,7 +1626,7 @@ monkey_zombie_can_drop_free_perk() {
     }
   }
   players = getplayers();
-  vending_triggers = getentarray("zombie_vending", "targetname");
+  vending_triggers = getEntArray("zombie_vending", "targetname");
   for(i = 0; i < players.size; i++) {
     num_perks = 0;
     for(j = 0; j < vending_triggers.size; j++) {
@@ -1651,7 +1647,7 @@ monkey_zombie_die() {
   self.grenadeAmmo = 0;
   self thread maps\_zombiemode_audio::do_zombies_playvocals("death", self.animname);
   self thread maps\_zombiemode_spawner::zombie_eye_glow_stop();
-  PlayFX(level._effect["monkey_death"], self.origin);
+  playFX(level._effect["monkey_death"], self.origin);
   level maps\_zombiemode_spawner::zombie_death_points(self.origin, self.damagemod, self.damagelocation, self.attacker, self);
   if(RandomIntRange(0, 100) >= 75) {
     if(isDefined(self.attacker) && IsPlayer(self.attacker))
@@ -1676,7 +1672,7 @@ monkey_custom_damage(player) {
 }
 
 monkey_zombie_default_enter_level() {
-  Playfx(level._effect["monkey_spawn"], self.origin);
+  playFX(level._effect["monkey_spawn"], self.origin);
   playsoundatposition("zmb_bolt", self.origin);
   PlayRumbleOnPosition("explosion_generic", self.origin);
 }
@@ -1731,7 +1727,7 @@ monkey_find_flesh() {
 }
 
 monkey_zombie_setup_perks() {
-  vending_triggers = getentarray("zombie_vending", "targetname");
+  vending_triggers = getEntArray("zombie_vending", "targetname");
   for(i = 0; i < vending_triggers.size; i++) {
     vending_triggers[i] monkey_zombie_perk_init();
   }
@@ -1740,7 +1736,7 @@ monkey_zombie_setup_perks() {
 monkey_zombie_perk_init() {
   self.targeted = 0;
   machine = undefined;
-  targets = getentarray(self.target, "targetname");
+  targets = getEntArray(self.target, "targetname");
   for(i = 0; i < targets.size; i++) {
     if(targets[i].classname == "script_model") {
       machine = targets[i];
@@ -1835,7 +1831,7 @@ monkey_fling(player) {
   monkey_print("fling monkey damage");
   damage = int(level.monkey_zombie_health * 0.5);
   self DoDamage(damage, self.origin, self);
-  forward = VectorNormalize(AnglesToForward(self.angles));
+  forward = VectorNormalize(anglesToForward(self.angles));
   attack_dir = VectorNormalize(self.origin - player.origin);
   dot = VectorDot(attack_dir, forward);
   if(dot < 0) {
@@ -1858,7 +1854,7 @@ monkey_fling(player) {
 }
 
 monkey_revive_solo_fx() {
-  vending_triggers = getentarray("zombie_vending", "targetname");
+  vending_triggers = getEntArray("zombie_vending", "targetname");
   for(i = 0; i < vending_triggers.size; i++) {
     if(vending_triggers[i].script_noteworthy == "specialty_quickrevive") {
       vending_triggers[i] delete();

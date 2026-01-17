@@ -155,10 +155,10 @@ startfx(localclientnum) {
     self.exhaustfx = loadfx(self.exhaustfxname);
 
   if(isDefined(self.exhaustfx)) {
-    self.exhaustleftfxhandle = playfxontag(localclientnum, self.exhaustfx, self, "tag_engine_left");
+    self.exhaustleftfxhandle = playFXOnTag(localclientnum, self.exhaustfx, self, "tag_engine_left");
 
     if(!self.oneexhaust)
-      self.exhaustrightfxhandle = playfxontag(localclientnum, self.exhaustfx, self, "tag_engine_right");
+      self.exhaustrightfxhandle = playFXOnTag(localclientnum, self.exhaustfx, self, "tag_engine_right");
   } else {
     println("Client: _helicopter.csc - startfx() - exhaust rotor fx is not loaded");
 
@@ -173,8 +173,8 @@ startfx(localclientnum) {
         light_fx = "heli_comlink_light";
         break;
       case "heli_player_gunner_mp":
-        self.vtolleftfxid = playfxontag(localclientnum, level._effect["heli_gunner"]["vtol_fx"], self, "tag_engine_left");
-        self.vtolrightfxid = playfxontag(localclientnum, level._effect["heli_gunner"]["vtol_fx_ft"], self, "tag_engine_right");
+        self.vtolleftfxid = playFXOnTag(localclientnum, level._effect["heli_gunner"]["vtol_fx"], self, "tag_engine_left");
+        self.vtolrightfxid = playFXOnTag(localclientnum, level._effect["heli_gunner"]["vtol_fx_ft"], self, "tag_engine_right");
         self thread heli_gunner_vtol_state(localclientnum);
         light_fx = "heli_gunner_light";
         break;
@@ -188,13 +188,13 @@ startfx(localclientnum) {
 
     if(isDefined(light_fx)) {
       if(self friendnotfoe(localclientnum))
-        self.lightfxid = playfxontag(localclientnum, level._effect[light_fx]["friendly"], self, "tag_origin");
+        self.lightfxid = playFXOnTag(localclientnum, level._effect[light_fx]["friendly"], self, "tag_origin");
       else
-        self.lightfxid = playfxontag(localclientnum, level._effect[light_fx]["enemy"], self, "tag_origin");
+        self.lightfxid = playFXOnTag(localclientnum, level._effect[light_fx]["enemy"], self, "tag_origin");
     }
 
     if(isDefined(prop_fx) && !self islocalclientdriver(localclientnum))
-      self.propfxid = playfxontag(localclientnum, level._effect[prop_fx], self, "tag_origin");
+      self.propfxid = playFXOnTag(localclientnum, level._effect[prop_fx], self, "tag_origin");
   }
 
   self thread damage_fx_stages(localclientnum);
@@ -254,6 +254,6 @@ damage_fx_stages(localclientnum) {
 }
 
 trail_fx(localclientnum, trail_fx, trail_tag) {
-  id = playfxontag(localclientnum, trail_fx, self, trail_tag);
+  id = playFXOnTag(localclientnum, trail_fx, self, trail_tag);
   return id;
 }

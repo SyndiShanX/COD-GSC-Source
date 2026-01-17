@@ -5,7 +5,7 @@
 ********************************/
 
 main() {
-  if(isdefined(level.credits_active))
+  if(isDefined(level.credits_active))
     return 0;
 
   introscreen_init();
@@ -179,7 +179,7 @@ flying_intro() {
   level.player.origin = var_4 + (0, 0, var_0);
   var_5 = spawn("script_model", (69, 69, 69));
   var_5.origin = level.player.origin;
-  var_5 setmodel("tag_origin");
+  var_5 setModel("tag_origin");
   var_5.angles = level.player.angles;
   level.player playerlinktoabsolute(var_5);
   var_5.angles = (var_5.angles[0] + 89, var_5.angles[1], 0);
@@ -191,7 +191,7 @@ flying_intro() {
   var_5 rotateto((var_5.angles[0] - 89, var_5.angles[1], 0), 0.5, 0.3, 0.2);
 
   if(!var_3)
-    savegame("levelstart", & "AUTOSAVE_LEVELSTART", "whatever", 1);
+    savegame("levelstart", &"AUTOSAVE_LEVELSTART", "whatever", 1);
 
   wait 0.5;
   common_scripts\utility::flag_set("pullup_weapon");
@@ -210,7 +210,7 @@ flying_intro() {
 flying_intro_force_streaming_center(var_0) {
   self endon("introscreen_complete");
 
-  for (;;) {
+  for(;;) {
     level.player playersetstreamorigin(var_0);
     wait 0.01;
   }
@@ -230,7 +230,7 @@ cargoship_intro() {
   cinematicingamesync("cargoship_fade");
   wait 0.4;
   level notify("intro_movie_done");
-  savegame("levelstart", & "AUTOSAVE_LEVELSTART", "whatever", 1);
+  savegame("levelstart", &"AUTOSAVE_LEVELSTART", "whatever", 1);
   common_scripts\utility::flag_set("introscreen_remove_submix");
   introscreen_generic_white_fade_in(1.75);
   introscreen_feed_lines(level.introscreen_lines);
@@ -244,7 +244,7 @@ jeepride_intro() {
   level.player freezecontrols(1);
   cinematicingamesync("jeepride_fade");
   introscreen_feed_lines(level.introscreen_lines);
-  savegame("levelstart", & "AUTOSAVE_LEVELSTART", "whatever", 1);
+  savegame("levelstart", &"AUTOSAVE_LEVELSTART", "whatever", 1);
   common_scripts\utility::flag_set("introscreen_complete");
   level.player freezecontrols(0);
 }
@@ -261,7 +261,7 @@ airlift_intro() {
   cinematicingamesync("airlift_fade");
   introscreen_feed_lines(level.introscreen_lines);
   wait 2;
-  savegame("levelstart", & "AUTOSAVE_LEVELSTART", "whatever", 1);
+  savegame("levelstart", &"AUTOSAVE_LEVELSTART", "whatever", 1);
   level notify("introscreen_black");
   var_0 = newhudelem();
   var_0.x = 0;
@@ -318,7 +318,7 @@ village_defend_intro() {
   wait 8.8;
   introscreen_feed_lines(level.introscreen_lines);
   wait 10;
-  savegame("levelstart", & "AUTOSAVE_LEVELSTART", "whatever", 1);
+  savegame("levelstart", &"AUTOSAVE_LEVELSTART", "whatever", 1);
   common_scripts\utility::flag_set("introscreen_remove_submix");
   var_0 fadeovertime(1.5);
   var_0.alpha = 0;
@@ -337,7 +337,7 @@ scoutsniper_intro() {
   cinematicingamesync("scoutsniper_fade");
   wait 4;
   maps\_utility::set_vision_set("grayscale");
-  savegame("levelstart", & "AUTOSAVE_LEVELSTART", "whatever", 1);
+  savegame("levelstart", &"AUTOSAVE_LEVELSTART", "whatever", 1);
   var_0 = newhudelem();
   var_0.x = 0;
   var_0.y = 0;
@@ -399,7 +399,7 @@ ac130_intro() {
   level.player freezecontrols(1);
   introscreen_feed_lines(level.introscreen_lines);
   level notify("introscreen_black");
-  savegame("levelstart", & "AUTOSAVE_LEVELSTART", "whatever", 1);
+  savegame("levelstart", &"AUTOSAVE_LEVELSTART", "whatever", 1);
   var_0 = newhudelem();
   var_0.x = 0;
   var_0.y = 0;
@@ -438,10 +438,10 @@ hunted_intro() {
   introscreen_feed_lines(level.introscreen_lines);
   cinematicingamesync("hunted_fade");
   wait 1;
-  savegame("levelstart", & "AUTOSAVE_LEVELSTART", "whatever", 1);
+  savegame("levelstart", &"AUTOSAVE_LEVELSTART", "whatever", 1);
   common_scripts\utility::flag_set("introscreen_remove_submix");
   introscreen_generic_white_fade_in(2);
-  savegame("levelstart", & "AUTOSAVE_LEVELSTART", "whatever", 1);
+  savegame("levelstart", &"AUTOSAVE_LEVELSTART", "whatever", 1);
   wait 1;
   level.player freezecontrols(0);
   common_scripts\utility::flag_set("introscreen_complete");
@@ -463,7 +463,7 @@ launchfacility_b_intro() {
   introscreen_feed_lines(level.introscreen_lines);
   introscreen_generic_white_fade_in(1);
   common_scripts\utility::flag_set("introscreen_remove_submix");
-  savegame("levelstart", & "AUTOSAVE_LEVELSTART", "whatever", 1);
+  savegame("levelstart", &"AUTOSAVE_LEVELSTART", "whatever", 1);
   wait 1;
   level.player freezecontrols(0);
   common_scripts\utility::flag_set("introscreen_complete");
@@ -482,7 +482,7 @@ ambush_intro() {
   introscreen_feed_lines(level.introscreen_lines);
   cinematicingamesync("ambush_fade");
   wait 2;
-  savegame("levelstart", & "AUTOSAVE_LEVELSTART", "whatever", 1);
+  savegame("levelstart", &"AUTOSAVE_LEVELSTART", "whatever", 1);
   introscreen_generic_white_fade_in(2);
   common_scripts\utility::flag_set("introscreen_remove_submix");
   thread maps\_utility::autosave_now(1);
@@ -513,7 +513,7 @@ armada_intro() {
 introscreen_feed_lines(var_0) {
   var_1 = getarraykeys(var_0);
 
-  for (var_2 = 0; var_2 < var_1.size; var_2++) {
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
     var_3 = var_1[var_2];
     var_4 = 1;
     var_5 = var_2 * var_4 + 1;
@@ -530,7 +530,7 @@ introscreen_generic_white_fade_in(var_0, var_1) {
 }
 
 introscreen_generic_fade_in(var_0, var_1, var_2) {
-  if(!isdefined(var_2))
+  if(!isDefined(var_2))
     var_2 = 1.5;
 
   var_3 = newhudelem();
@@ -571,21 +571,21 @@ introscreen_create_line(var_0) {
 }
 
 introscreen_fadeouttext() {
-  for (var_0 = 0; var_0 < level.introstring.size; var_0++) {
+  for(var_0 = 0; var_0 < level.introstring.size; var_0++) {
     level.introstring[var_0] fadeovertime(1.5);
     level.introstring[var_0].alpha = 0;
   }
 
   wait 1.5;
 
-  for (var_0 = 0; var_0 < level.introstring.size; var_0++)
+  for(var_0 = 0; var_0 < level.introstring.size; var_0++)
     level.introstring[var_0] destroy();
 }
 
 _cornerlinethread(var_0, var_1, var_2, var_3) {
   level notify("new_introscreen_element");
 
-  if(!isdefined(level.intro_offset))
+  if(!isDefined(level.intro_offset))
     level.intro_offset = 0;
   else
     level.intro_offset++;
@@ -614,7 +614,7 @@ _cornerlinethread(var_0, var_1, var_2, var_3) {
   var_5 setpulsefx(30, var_6, 700);
   thread hudelem_destroy(var_5);
 
-  if(!isdefined(var_3)) {
+  if(!isDefined(var_3)) {
     return;
   }
   if(!isstring(var_3)) {
@@ -654,7 +654,7 @@ weapon_pullout() {
 revive_ammo_counter() {
   common_scripts\utility::flag_wait("safe_for_objectives");
 
-  if(!isdefined(level.nocompass))
+  if(!isDefined(level.nocompass))
     setsaveddvar("compass", 1);
 
   setsaveddvar("ammoCounterHide", "0");
@@ -663,7 +663,7 @@ revive_ammo_counter() {
 }
 
 introscreen_add_line(var_0) {
-  if(!isdefined(level.introscreen_lines))
+  if(!isDefined(level.introscreen_lines))
     level.introscreen_lines = [];
 
   precachestring(var_0);

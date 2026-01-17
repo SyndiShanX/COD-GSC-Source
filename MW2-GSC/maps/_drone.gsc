@@ -27,47 +27,46 @@ initGlobals() {
   if(getdvar("debug_drones") == "")
     setdvar("debug_drones", "0");
 
-  assert(isdefined(level.drone_anims));
+  assert(isDefined(level.drone_anims));
 
   // lookahead value - how far the character will lookahead for movement direction
   // larger number makes smother, more linear travel. small value makes character go almost exactly point to point
-  if(!isdefined(level.lookAhead_value))
+  if(!isDefined(level.lookAhead_value))
     level.drone_lookAhead_value = 200;
 
-  if(!isdefined(level.max_drones))
+  if(!isDefined(level.max_drones))
     level.max_drones = [];
-  if(!isdefined(level.max_drones["allies"]))
+  if(!isDefined(level.max_drones["allies"]))
     level.max_drones["allies"] = MAX_DRONES_ALLIES;
-  if(!isdefined(level.max_drones["axis"]))
+  if(!isDefined(level.max_drones["axis"]))
     level.max_drones["axis"] = MAX_DRONES_AXIS;
-  if(!isdefined(level.max_drones["team3"]))
+  if(!isDefined(level.max_drones["team3"]))
     level.max_drones["team3"] = MAX_DRONES_TEAM3;
-  if(!isdefined(level.max_drones["neutral"]))
+  if(!isDefined(level.max_drones["neutral"]))
     level.max_drones["neutral"] = MAX_DRONES_CIVILIAN;
 
-  if(!isdefined(level.drones))
+  if(!isDefined(level.drones))
     level.drones = [];
-  if(!isdefined(level.drones["allies"]))
+  if(!isDefined(level.drones["allies"]))
     level.drones["allies"] = struct_arrayspawn();
-  if(!isdefined(level.drones["axis"]))
+  if(!isDefined(level.drones["axis"]))
     level.drones["axis"] = struct_arrayspawn();
-  if(!isdefined(level.drones["team3"]))
+  if(!isDefined(level.drones["team3"]))
     level.drones["team3"] = struct_arrayspawn();
-  if(!isdefined(level.drones["neutral"]))
+  if(!isDefined(level.drones["neutral"]))
     level.drones["neutral"] = struct_arrayspawn();
 
   level.drone_spawn_func = ::drone_init;
 }
 
 drone_give_soul() {
-
   // Tell drone which animtree to use
   self useAnimTree(#animtree);
 
   // Tell drone to use hero-only lighting so they look like AI
   self startUsingHeroOnlyLighting();
 
-  if(isdefined(self.script_moveplaybackrate))
+  if(isDefined(self.script_moveplaybackrate))
     self.moveplaybackrate = self.script_moveplaybackrate;
   else
     self.moveplaybackrate = 1;
@@ -76,11 +75,11 @@ drone_give_soul() {
   if(self.team == "allies") {
     // asign name
     self maps\_names::get_name();
-    // string not found for 
-    self setlookattext(self.name, & "");
+    // string not found for
+    self setlookattext(self.name, &"");
   }
 
-  if(isdefined(level.droneCallbackThread))
+  if(isDefined(level.droneCallbackThread))
     self thread[[level.droneCallbackThread]]();
 
   // Run the friendly fire thread on this drone so the mission can be failed for killing friendly drones
@@ -90,7 +89,7 @@ drone_give_soul() {
 
 drone_init() {
   // Dont keep this drone if we've reached the max population for that team of drones
-  assertEx(isdefined(level.max_drones), "You need to put maps\_drone::init(); in your level script!");
+  assertEx(isDefined(level.max_drones), "You need to put maps\_drone::init(); in your level script!");
   if(level.drones[self.team].array.size >= level.max_drones[self.team]) {
     self delete();
     return;
@@ -103,20 +102,20 @@ drone_init() {
 
   drone_give_soul();
 
-  if(isdefined(self.script_drone_override))
+  if(isDefined(self.script_drone_override)) {
     return;
-
+  }
   // Wait until this drone loses it's health so it can die
   thread drone_death_thread();
 
   // If the drone targets something then make it move, otherwise just idle in place
-  if(isdefined(self.target)) {
-    if(!isdefined(self.script_moveoverride))
+  if(isDefined(self.target)) {
+    if(!isDefined(self.script_moveoverride))
       self thread drone_move();
     else
       self thread drone_wait_move();
   }
-  if((isdefined(self.script_looping)) && (self.script_looping == 0)) {
+  if((isDefined(self.script_looping)) && (self.script_looping == 0)) {
     return;
   }
 
@@ -130,7 +129,7 @@ drone_array_handling(drone) {
 
   drone waittill("death");
 
-  if(isdefined(drone) && isdefined(drone.struct_array_index))
+  if(isDefined(drone) && isDefined(drone.struct_array_index))
     structarray_remove_index(level.drones[team], drone.struct_array_index);
   else
     structarray_remove_undefined(level.drones[team]);
@@ -138,30 +137,31 @@ drone_array_handling(drone) {
 
 drone_death_thread() {
   // Wait until the drone reaches 0 health
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     self waittill("damage");
 
-    if(isdefined(self.damageShield) && self.damageShield) {
+    if(isDefined(self.damageShield) && self.damageShield) {
       self.health = 100000;
       continue;
     }
 
-    if(self.health <= 0)
+    if(self.health <= 0) {
       break;
+    }
   }
 
   deathanim = level.drone_anims[self.team]["stand"]["death"];
-  if(isdefined(self.deathanim))
+  if(isDefined(self.deathanim))
     deathanim = self.deathanim;
 
   // Make drone die
   self notify("death");
 
-  if(!(isdefined(self.noragdoll) && isdefined(self.skipDeathAnim))) {
-    if(isdefined(self.noragdoll)) {
+  if(!(isDefined(self.noragdoll) && isDefined(self.skipDeathAnim))) {
+    if(isDefined(self.noragdoll)) {
       self drone_play_scripted_anim(deathanim, "deathplant");
     } else
-    if(isdefined(self.skipDeathAnim)) {
+    if(isDefined(self.skipDeathAnim)) {
       self startragdoll();
       self drone_play_scripted_anim(deathanim, "deathplant");
     } else {
@@ -172,11 +172,11 @@ drone_death_thread() {
 
   self notsolid();
 
-  if(isdefined(self) && isdefined(self.nocorpsedelete))
+  if(isDefined(self) && isDefined(self.nocorpsedelete)) {
     return;
-
+  }
   wait 10;
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     if(!within_fov(level.player.origin, level.player.angles, self.origin, DEATH_DELETE_FOV))
       self delete();
     wait(5);
@@ -197,7 +197,7 @@ drone_play_scripted_anim(droneAnim, deathplant) {
   self stopAnimScripted();
 
   mode = "normal";
-  if(isdefined(deathplant))
+  if(isDefined(deathplant))
     mode = "deathplant";
 
   flag = "drone_anim";
@@ -220,21 +220,21 @@ drone_play_scripted_anim(droneAnim, deathplant) {
 =============
 */
 drone_drop_real_weapon_on_death() {
-  if(!isdefined(self))
+  if(!isDefined(self)) {
     return;
-
+  }
   self waittill("death");
-  if(!isdefined(self)) //abort if deleted manually
+  if(!isDefined(self)) //abort if deleted manually
     return;
 
   weapon_model = getWeaponModel(self.weapon);
   weapon = self.weapon;
-  if(isdefined(weapon_model)) {
+  if(isDefined(weapon_model)) {
     //self waittill_match_or_timeout( "deathanim", "end", 4 );
     self detach(weapon_model, "tag_weapon_right");
     org = self gettagorigin("tag_weapon_right");
     ang = self gettagangles("tag_weapon_right");
-    gun = Spawn("weapon_" + weapon, (0, 0, 0));
+    gun = spawn("weapon_" + weapon, (0, 0, 0));
     gun.angles = ang;
     gun.origin = org;
   }
@@ -242,8 +242,7 @@ drone_drop_real_weapon_on_death() {
 }
 
 drone_idle(lastNode, moveToDest) {
-
-  if((isdefined(lastNode)) && (isdefined(lastNode["script_noteworthy"])) && (isdefined(level.drone_anims[self.team][lastNode["script_noteworthy"]]))) {
+  if((isDefined(lastNode)) && (isDefined(lastNode["script_noteworthy"])) && (isDefined(level.drone_anims[self.team][lastNode["script_noteworthy"]]))) {
     //if the last node has a valid fight behavior in its script_noteworthy, fight from that node
     self thread drone_fight(lastNode["script_noteworthy"], lastNode, moveToDest);
   } else {
@@ -255,7 +254,7 @@ drone_idle(lastNode, moveToDest) {
 
 drone_get_goal_loc_with_arrival(dist, node) {
   animset = node["script_noteworthy"];
-  if(!isdefined(level.drone_anims[self.team][animset]["arrival"]))
+  if(!isDefined(level.drone_anims[self.team][animset]["arrival"]))
     return dist;
   animDelta = GetMoveDelta(level.drone_anims[self.team][animset]["arrival"], 0, 1);
   animDelta = length(animDelta);
@@ -269,12 +268,11 @@ ent_cleanup( drone )
 	//cleanup the script_origin used to make arrivals work on uneven terrain
 	self endon( "death" );
 	drone waittill( "death" );
-	if( isdefined( self ) )
+	if( isDefined( self ) )
 		self delete();
 }
 */
 drone_fight(animset, struct, moveToDest) {
-
   self endon("death");
   self endon("stop_drone_fighting");
   self.animset = animset;
@@ -323,12 +321,12 @@ drone_fight(animset, struct, moveToDest) {
   self.noragdoll = true;
   self.deathanim = level.drone_anims[self.team][animset]["death"];
   bPopUpToFire = 1;
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     //play random cover loop/twitch
     self drone_play_scripted_anim(level.drone_anims[self.team][animset]["idle"][randomint(level.drone_anims[self.team][animset]["idle"].size)]);
 
     //pop up and fire
-    if((cointoss()) && (!isdefined(self.ignoreall))) {
+    if((cointoss()) && (!isDefined(self.ignoreall))) {
       //dont always pop up if prone
       if(animset == "coverprone") {
         if(cointoss())
@@ -346,7 +344,7 @@ drone_fight(animset, struct, moveToDest) {
       }
 
       //fire some blank bullets
-      if(isdefined(level.drone_anims[self.team][animset]["fire"])) {
+      if(isDefined(level.drone_anims[self.team][animset]["fire"])) {
         if((animset == "coverprone") && (bPopUpToFire == 1))
           self thread drone_play_looping_anim(level.drone_anims[self.team][animset]["fire_exposed"], 1);
         else
@@ -363,7 +361,6 @@ drone_fight(animset, struct, moveToDest) {
         wait(.15);
         self drone_shoot();
       }
-
 
       //dont always pop up if prone..never pop up if coverguard
       if(bPopUpToFire == 1)
@@ -431,11 +428,11 @@ drone_shoot_fx() {
   }
 
   self thread drone_play_weapon_sound(self.weaponsound);
-  PlayFXOnTag(shoot_fx, self, "tag_flash");
+  playFXOnTag(shoot_fx, self, "tag_flash");
 }
 
 drone_play_weapon_sound(weaponsound) {
-  self playsound(weaponsound);
+  self playSound(weaponsound);
 }
 
 drone_wait_move() {
@@ -445,47 +442,50 @@ drone_wait_move() {
 }
 
 drone_init_path() {
-  if(!isdefined(self.target))
+  if(!isDefined(self.target))
     return;
-  if(isdefined(level.drone_paths[self.target]))
+  if(isDefined(level.drone_paths[self.target])) {
     return;
-
+  }
   // don't process a path more than once
   level.drone_paths[self.target] = true;
 
   target = self.target;
   node = getstruct(target, "targetname");
-  if(!isdefined(node))
+  if(!isDefined(node)) {
     return;
-
+  }
   vectors = [];
 
   completed_nodes = [];
   original_node = node;
 
-  for (;;) {
+  for(;;) {
     node = original_node;
     found_new_node = false;
 
-    for (;;) {
-      if(!isdefined(node.target))
+    for(;;) {
+      if(!isDefined(node.target)) {
         break;
+      }
 
       nextNodes = getstructarray(node.target, "targetname");
-      if(nextNodes.size)
+      if(nextNodes.size) {
         break;
+      }
 
       nextNode = undefined;
       foreach(newNode in nextNodes) {
         // origin should be unique per node
-        if(isdefined(completed_nodes[newNode.origin + ""]))
+        if(isDefined(completed_nodes[newNode.origin + ""])) {
           continue;
-
+        }
         nextNode = newNode;
         break;
       }
-      if(!isdefined(nextNode))
+      if(!isDefined(nextNode)) {
         break;
+      }
 
       completed_nodes[nextNode.origin + ""] = true;
 
@@ -497,8 +497,9 @@ drone_init_path() {
       found_new_node = true;
     }
 
-    if(!found_new_node)
+    if(!found_new_node) {
       break;
+    }
   }
 
   // now average the angles so they take corners properly
@@ -507,34 +508,36 @@ drone_init_path() {
   prevNode = node;
   completed_nodes = [];
 
-  for (;;) {
+  for(;;) {
     node = original_node;
     found_new_node = false;
 
-    for (;;) {
-      if(!isdefined(node.target))
+    for(;;) {
+      if(!isDefined(node.target)) {
         return;
-
-      if(!isdefined(vectors[node.targetname]))
+      }
+      if(!isDefined(vectors[node.targetname])) {
         return;
-
+      }
       nextNodes = getstructarray(node.target, "targetname");
-      if(nextNodes.size)
+      if(nextNodes.size) {
         break;
+      }
 
       nextNode = undefined;
       foreach(newNode in nextNodes) {
         // origin should be unique per node
-        if(isdefined(completed_nodes[newNode.origin + ""]))
+        if(isDefined(completed_nodes[newNode.origin + ""])) {
           continue;
-
+        }
         nextNode = newNode;
         break;
       }
-      if(!isdefined(nextNode))
+      if(!isDefined(nextNode)) {
         break;
+      }
 
-      if(isdefined(node.radius)) {
+      if(isDefined(node.radius)) {
         vec1 = vectors[prevNode.targetname];
         vec2 = vectors[node.targetname];
         vec = (vec1 + vec2) * 0.5;
@@ -544,10 +547,10 @@ drone_init_path() {
         Line( node.origin, node.origin + vec1, (1,0,0), 1, 1, 1000 );
         Line( node.origin, node.origin + vec2, (0,0,1), 1, 1, 1000 );
         Line( node.origin, node.origin + vec, (0,1,0), 1, 1, 1000 );
-				
-        /#
+        				
+
         thread maps\_debug::drawArrowForever( node.origin, node.angles );
-        #/
+
         */
       }
 
@@ -556,8 +559,9 @@ drone_init_path() {
       node = nextNode;
     }
 
-    if(!found_new_node)
+    if(!found_new_node) {
       break;
+    }
   }
 }
 
@@ -568,22 +572,23 @@ drone_move() {
   wait randomfloat(0.5);
 
   runAnim = level.drone_anims[self.team]["stand"]["run"];
-  if(isdefined(self.runanim))
+  if(isDefined(self.runanim))
     runAnim = self.runanim;
 
   self drone_play_looping_anim(runAnim, self.moveplaybackrate);
 
   nodes = self getPathArray(self.target, self.origin);
-  assert(isdefined(nodes));
-  assert(isdefined(nodes[0]));
+  assert(isDefined(nodes));
+  assert(isDefined(nodes[0]));
 
   prof_begin("drone_math");
 
   loopTime = 0.5;
   currentNode_LookAhead = 0;
-  for (;;) {
-    if(!isdefined(nodes[currentNode_LookAhead]))
+  for(;;) {
+    if(!isDefined(nodes[currentNode_LookAhead])) {
       break;
+    }
 
     // Calculate how far and what direction the lookahead path point should move
     //--------------------------------------------------------------------------
@@ -594,22 +599,23 @@ drone_move() {
     distanceFromPoint1 = vectorDot(vectorNormalize(vec1), vec2);
 
     // check if this is the last node (wont have a distance value)
-    if(!isdefined(nodes[currentNode_LookAhead]["dist"]))
+    if(!isDefined(nodes[currentNode_LookAhead]["dist"])) {
       break;
+    }
 
     lookaheadDistanceFromNode = (distanceFromPoint1 + level.drone_lookAhead_value);
-    assert(isdefined(lookaheadDistanceFromNode));
+    assert(isDefined(lookaheadDistanceFromNode));
 
-    assert(isdefined(currentNode_LookAhead));
-    assert(isdefined(nodes[currentNode_LookAhead]));
-    assert(isdefined(nodes[currentNode_LookAhead]["dist"]));
+    assert(isDefined(currentNode_LookAhead));
+    assert(isDefined(nodes[currentNode_LookAhead]));
+    assert(isDefined(nodes[currentNode_LookAhead]["dist"]));
 
-    while (lookaheadDistanceFromNode > nodes[currentNode_LookAhead]["dist"]) {
+    while(lookaheadDistanceFromNode > nodes[currentNode_LookAhead]["dist"]) {
       // moving the lookahead would pass the node, so move it the remaining distance on the vector of the next node
       lookaheadDistanceFromNode = lookaheadDistanceFromNode - nodes[currentNode_LookAhead]["dist"];
       currentNode_LookAhead++;
 
-      if(!isdefined(nodes[currentNode_LookAhead]["dist"])) {
+      if(!isDefined(nodes[currentNode_LookAhead]["dist"])) {
         //last node on the chain
         self rotateTo(vectorToAngles(nodes[nodes.size - 1]["vec"]), loopTime);
         d = distance(self.origin, nodes[nodes.size - 1]["origin"]);
@@ -617,7 +623,7 @@ drone_move() {
 
         //compensate for arrivals, if any
         //				timeOfMoveWithArrival = undefined;
-        //				if( isdefined( nodes[ nodes.size - 1 ][ "script_noteworthy" ] ) )
+        //				if( isDefined( nodes[ nodes.size - 1 ][ "script_noteworthy" ] ) )
         //				{
         //					d = drone_get_goal_loc_with_arrival( d, nodes[ nodes.size - 1 ] );
         //					timeOfMoveWithArrival = ( d / ( DRONE_RUN_SPEED * self.moveplaybackrate ) );
@@ -633,7 +639,7 @@ drone_move() {
         }
         self moveTo(moveToDest, timeOfMove);
 
-        //				if( isdefined( timeOfMoveWithArrival ) )
+        //				if( isDefined( timeOfMoveWithArrival ) )
         //					wait timeOfMoveWithArrival;
         //				else
         //					wait timeOfMove;
@@ -645,23 +651,23 @@ drone_move() {
         return;
       }
 
-      if(!isdefined(nodes[currentNode_LookAhead])) {
+      if(!isDefined(nodes[currentNode_LookAhead])) {
         prof_end("drone_math");
         self notify("goal");
         self thread drone_idle();
         return;
       }
 
-      assert(isdefined(nodes[currentNode_LookAhead]));
+      assert(isDefined(nodes[currentNode_LookAhead]));
     }
     //-------------------------------------------------------------------------
 
     // Move the lookahead point down along it's path
     //----------------------------------------------
-    assert(isdefined(nodes[currentNode_LookAhead]["vec"]));
-    assert(isdefined(nodes[currentNode_LookAhead]["vec"][0]));
-    assert(isdefined(nodes[currentNode_LookAhead]["vec"][1]));
-    assert(isdefined(nodes[currentNode_LookAhead]["vec"][2]));
+    assert(isDefined(nodes[currentNode_LookAhead]["vec"]));
+    assert(isDefined(nodes[currentNode_LookAhead]["vec"][0]));
+    assert(isDefined(nodes[currentNode_LookAhead]["vec"][1]));
+    assert(isDefined(nodes[currentNode_LookAhead]["vec"][2]));
     desiredPosition = vector_multiply(nodes[currentNode_LookAhead]["vec"], lookaheadDistanceFromNode);
     desiredPosition = desiredPosition + nodes[currentNode_LookAhead]["origin"];
     lookaheadPoint = desiredPosition;
@@ -679,12 +685,12 @@ drone_move() {
 
     //Rotate character to face the lookahead point
     //--------------------------------------------
-    assert(isdefined(lookaheadPoint));
+    assert(isDefined(lookaheadPoint));
     characterFaceDirection = VectorToAngles(lookaheadPoint - self.origin);
-    assert(isdefined(characterFaceDirection));
-    assert(isdefined(characterFaceDirection[0]));
-    assert(isdefined(characterFaceDirection[1]));
-    assert(isdefined(characterFaceDirection[2]));
+    assert(isDefined(characterFaceDirection));
+    assert(isDefined(characterFaceDirection[0]));
+    assert(isDefined(characterFaceDirection[1]));
+    assert(isDefined(characterFaceDirection[2]));
     self rotateTo((0, characterFaceDirection[1], 0), loopTime);
     //--------------------------------------------
 
@@ -722,11 +728,11 @@ getPathArray(firstTargetName, initialPoint) {
   //#########################################################################################################
 
   usingNodes = true;
-  assert(isdefined(firstTargetName));
+  assert(isDefined(firstTargetName));
 
   prof_begin("drone_math");
 
-  assert(isdefined(initialPoint));
+  assert(isDefined(initialPoint));
 
   nodes = [];
   nodes[0]["origin"] = initialPoint;
@@ -753,17 +759,15 @@ getPathArray(firstTargetName, initialPoint) {
   if(test_str.size)
     goal_type = "struct";
 
-  for (;;) {
+  for(;;) {
     index = nodes.size;
 
     // get the next node in the chain
-    nextNodes = [
-      [get_target_func[goal_type]]
-    ](nextNodeName);
+    nextNodes = [[get_target_func[goal_type]]](nextNodeName);
     node = random(nextNodes);
     /*
     		// no script_struct was found
-    		if( !isdefined( node ) )
+    		if( !isDefined( node ) )
     		{
     			if( index == 0 )
     				assertMsg( "Drone was told to walk to a node with a targetname that doesnt match a script_struct targetname" );
@@ -774,18 +778,18 @@ getPathArray(firstTargetName, initialPoint) {
     org = node.origin;
 
     //check for radius on node, since you can make them run to a radius rather than an exact point
-    if(isdefined(node.radius)) {
+    if(isDefined(node.radius)) {
       assert(node.radius > 0);
 
       // offset for this drone (-1 to 1)
-      if(!isdefined(self.droneRunOffset))
+      if(!isDefined(self.droneRunOffset))
         self.droneRunOffset = (0 - 1 + (randomfloat(2)));
 
-      if(!isdefined(node.angles))
+      if(!isDefined(node.angles))
         node.angles = (0, 0, 0);
 
       prof_begin("drone_math");
-      forwardVec = anglestoforward(node.angles);
+      forwardVec = anglesToForward(node.angles);
       rightVec = anglestoright(node.angles);
       upVec = anglestoup(node.angles);
       relativeOffset = (0, (self.droneRunOffset * node.radius), 0);
@@ -795,7 +799,7 @@ getPathArray(firstTargetName, initialPoint) {
       prof_end("drone_math");
     }
     nodes[index]["origin"] = org;
-    if(isdefined(node.script_noteworthy))
+    if(isDefined(node.script_noteworthy))
       nodes[index]["script_noteworthy"] = node.script_noteworthy;
 
     // find the distance from the previous node to this node, and the vector of of the previous node to this node
@@ -804,8 +808,9 @@ getPathArray(firstTargetName, initialPoint) {
     nodes[index - 1]["vec"] = vectorNormalize(nodes[index]["origin"] - nodes[index - 1]["origin"]);
 
     //if the node doesn't target another node then it's the last of the chain
-    if(!isdefined(node.target))
+    if(!isDefined(node.target)) {
       break;
+    }
     //it targets something
     nextNodeName = node.target;
   }
@@ -834,14 +839,14 @@ draw_point(org, r, g, b, size, time) {
 }
 
 check_delete() {
-  if(!isdefined(self))
+  if(!isDefined(self)) {
     return;
-
-  if(!isdefined(self.script_noteworthy))
+  }
+  if(!isDefined(self.script_noteworthy)) {
     return;
-
-  if(self.script_noteworthy != "delete_on_goal")
+  }
+  if(self.script_noteworthy != "delete_on_goal") {
     return;
-
+  }
   self delete();
 }

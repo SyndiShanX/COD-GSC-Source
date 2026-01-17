@@ -45,7 +45,7 @@ bot_sab_think() {
   level endon("game_ended");
   self endon("owner_disconnect");
 
-  while (!isdefined(level.bot_gametype_precaching_done))
+  while(!isDefined(level.bot_gametype_precaching_done))
     wait 0.05;
 
   self botsetflag("separation", 0);
@@ -55,16 +55,16 @@ bot_sab_think() {
   var_2 = (0, 0, 0);
   self.defuser_bad_path_counter = 0;
 
-  for (;;) {
+  for(;;) {
     wait 0.05;
 
     if(!level.bombplanted) {
       var_3 = bot_sab_get_bomb_carrier();
 
-      if(!isdefined(var_3) || var_3.team == self.team)
+      if(!isDefined(var_3) || var_3.team == self.team)
         var_0 = undefined;
 
-      if(!isdefined(var_3)) {
+      if(!isDefined(var_3)) {
         if(maps\mp\bots\_bots_util::bot_is_defending())
           maps\mp\bots\_bots_strategy::bot_defend_stop();
 
@@ -81,7 +81,7 @@ bot_sab_think() {
       } else if(gettime() > level.sabbomb.lastclaimtime) {
         var_5 = level.bombzones[self.team];
 
-        if(!isdefined(var_0)) {
+        if(!isDefined(var_0)) {
           var_6 = distance(self.origin, level.sabbomb.curorigin);
           var_7 = distance(self.origin, var_5.curorigin);
 
@@ -106,10 +106,10 @@ bot_sab_think() {
               var_10 = undefined;
               var_11 = getnodesonpath(var_8, common_scripts\utility::random(var_5.bottargets).origin);
 
-              if(isdefined(var_11) && var_11.size > 0)
+              if(isDefined(var_11) && var_11.size > 0)
                 var_10 = var_11[int(var_11.size * randomfloatrange(0.25, 0.75))].origin;
 
-              if(isdefined(var_10) && maps\mp\bots\_bots_personality::find_ambush_node(var_10, 512))
+              if(isDefined(var_10) && maps\mp\bots\_bots_personality::find_ambush_node(var_10, 512))
                 self botsetscriptgoalnode(self.node_ambushing_from, "guard", self.ambush_yaw);
               else
                 var_9 = 0;
@@ -140,7 +140,7 @@ bot_sab_think() {
     } else {
       var_14 = bot_sab_get_bomb_defuser();
 
-      if(!isdefined(var_14))
+      if(!isDefined(var_14))
         self.role = "defuser";
       else if(isai(var_14)) {
         var_15 = distance(self.origin, var_13.curorigin);
@@ -152,7 +152,7 @@ bot_sab_think() {
         }
       }
 
-      if(isdefined(self.role) && self.role == "defuser")
+      if(isDefined(self.role) && self.role == "defuser")
         defuse_bomb(var_13);
       else if(!bot_is_protecting_point(var_13.curorigin)) {
         var_12["min_goal_time"] = 2;
@@ -207,14 +207,14 @@ defuse_bomb(var_0) {
     self.defuser_bad_path_counter++;
 
     if(self.defuser_bad_path_counter >= 4) {
-      for (;;) {
+      for(;;) {
         var_3 = getnodesinradiussorted(var_1, 50, 0);
         var_4 = self.defuser_bad_path_counter - 4;
 
         if(var_3.size <= var_4) {
           var_5 = botgetclosestnavigablepoint(var_1, 50, self);
 
-          if(isdefined(var_5))
+          if(isDefined(var_5))
             self botsetscriptgoal(var_5, 20, "critical");
           else
             break;
@@ -284,7 +284,7 @@ bot_sab_get_bomb_defuser() {
 
   foreach(var_1 in level.players) {
     if(maps\mp\_utility::isreallyalive(var_1) && isai(var_1)) {
-      if(isdefined(var_1.role) && var_1.role == "defuser")
+      if(isDefined(var_1.role) && var_1.role == "defuser")
         return var_1;
     }
   }

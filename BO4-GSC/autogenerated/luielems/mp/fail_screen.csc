@@ -4,13 +4,11 @@
 *****************************************************/
 
 #include scripts\core_common\lui_shared;
-
 #namespace fail_screen;
 
 class cfail_screen: cluielem {
-
   function open(localclientnum) {
-    cluielem::open(localclientnum, #"fail_screen");
+    cluielem::open(localclientnum, # "fail_screen");
   }
 
   function function_fa582112(localclientnum) {

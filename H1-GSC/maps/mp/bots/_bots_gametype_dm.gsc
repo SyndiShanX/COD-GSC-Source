@@ -23,7 +23,7 @@ bot_dm_think() {
   level endon("game_ended");
   self endon("owner_disconnect");
 
-  for (;;) {
+  for(;;) {
     self[[self.personality_update_function]]();
     wait 0.05;
   }

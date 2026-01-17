@@ -18,7 +18,7 @@ init() {
 
   constrainGameType(getdvar("g_gametype"));
 
-  for (;;) {
+  for(;;) {
     updateServerSettings();
     wait 5;
   }
@@ -44,37 +44,37 @@ updateServerSettings() {
 }
 
 constrainGameType(gametype) {
-  entities = getentarray();
-  for (i = 0; i < entities.size; i++) {
+  entities = getEntArray();
+  for(i = 0; i < entities.size; i++) {
     entity = entities[i];
 
     if(gametype == "dm") {
-      if(isdefined(entity.script_gametype_dm) && entity.script_gametype_dm != "1") {
+      if(isDefined(entity.script_gametype_dm) && entity.script_gametype_dm != "1") {
         //iprintln("DELETED(GameType): ", entity.classname);
         entity delete();
       }
     } else if(gametype == "tdm") {
-      if(isdefined(entity.script_gametype_tdm) && entity.script_gametype_tdm != "1") {
+      if(isDefined(entity.script_gametype_tdm) && entity.script_gametype_tdm != "1") {
         //iprintln("DELETED(GameType): ", entity.classname);
         entity delete();
       }
     } else if(gametype == "ctf") {
-      if(isdefined(entity.script_gametype_ctf) && entity.script_gametype_ctf != "1") {
+      if(isDefined(entity.script_gametype_ctf) && entity.script_gametype_ctf != "1") {
         //iprintln("DELETED(GameType): ", entity.classname);
         entity delete();
       }
     } else if(gametype == "hq") {
-      if(isdefined(entity.script_gametype_hq) && entity.script_gametype_hq != "1") {
+      if(isDefined(entity.script_gametype_hq) && entity.script_gametype_hq != "1") {
         //iprintln("DELETED(GameType): ", entity.classname);
         entity delete();
       }
     } else if(gametype == "sd") {
-      if(isdefined(entity.script_gametype_sd) && entity.script_gametype_sd != "1") {
+      if(isDefined(entity.script_gametype_sd) && entity.script_gametype_sd != "1") {
         //iprintln("DELETED(GameType): ", entity.classname);
         entity delete();
       }
     } else if(gametype == "koth") {
-      if(isdefined(entity.script_gametype_koth) && entity.script_gametype_koth != "1") {
+      if(isDefined(entity.script_gametype_koth) && entity.script_gametype_koth != "1") {
         //iprintln("DELETED(GameType): ", entity.classname);
         entity delete();
       }

@@ -12,11 +12,11 @@
 #include maps\so_rooftop_contingency_code;
 
 // Fend off three waves of enemy reinforcements.
-CONST_regular_obj = & "SO_ROOFTOP_CONTINGENCY_OBJ_REGULAR";
+CONST_regular_obj = &"SO_ROOFTOP_CONTINGENCY_OBJ_REGULAR";
 // Fend off four waves of enemy reinforcements.
-CONST_hardened_obj = & "SO_ROOFTOP_CONTINGENCY_OBJ_HARDENED";
+CONST_hardened_obj = &"SO_ROOFTOP_CONTINGENCY_OBJ_HARDENED";
 // Fend off five waves of enemy reinforcements.
-CONST_veteran_obj = & "SO_ROOFTOP_CONTINGENCY_OBJ_VETERAN";
+CONST_veteran_obj = &"SO_ROOFTOP_CONTINGENCY_OBJ_VETERAN";
 
 main() {
   level.so_compass_zoom = "far";
@@ -69,8 +69,8 @@ main() {
   flag_init("start_countdown");
 
   // Press^3 [{+actionslot 4}] ^7to control the Predator Drone.
-  add_hint_string("use_uav_4", & "HELLFIRE_USE_DRONE", maps\_remotemissile::should_break_use_drone);
-  add_hint_string("use_uav_2", & "HELLFIRE_USE_DRONE_2", maps\_remotemissile::should_break_use_drone);
+  add_hint_string("use_uav_4", &"HELLFIRE_USE_DRONE", maps\_remotemissile::should_break_use_drone);
+  add_hint_string("use_uav_2", &"HELLFIRE_USE_DRONE_2", maps\_remotemissile::should_break_use_drone);
 
   // delete certain non special ops entities
   so_delete_all_by_type(::type_vehicle_special, ::type_spawners, ::type_spawn_trigger);
@@ -107,7 +107,7 @@ main() {
 
   maps\_compass::setupMiniMap("compass_map_contingency");
 
-  vehicles = GetEntArray("destructible_vehicle", "targetname");
+  vehicles = getEntArray("destructible_vehicle", "targetname");
   foreach(vehicle in vehicles) {
     vehicle thread destructible_damage_monitor();
   }
@@ -118,9 +118,7 @@ main() {
   so_include_deadquote_array(deadquotes);
   level.so_deadquotes_chance = 0.33;
 
-  /#
   //	thread player_input();
-  # /
 }
 
 init_radio() {
@@ -158,7 +156,7 @@ precache_strings() {
 
 type_vehicle_special() {
   // keep all collmaps
-  if(IsDefined(self.code_classname) && self.code_classname == "script_vehicle_collmap") {
+  if(isDefined(self.code_classname) && self.code_classname == "script_vehicle_collmap") {
     return false;
   }
 
@@ -177,17 +175,15 @@ type_vehicle_special() {
   special_result = special_case && special_case2 && special_case3 && special_case4;
   result = special_result && original_case;
 
-  /#
   if(!special_result) {
     thread so_debug_print("vehicle[" + self.targetname + "] saved", 5);
   }
-  # /
 
-    return result;
+  return result;
 }
 
 transform_vehicle_by_targetname(vehicle_name, targetname_string, target_string) {
-  result = IsDefined(self.targetname) && self.targetname == vehicle_name;
+  result = isDefined(self.targetname) && self.targetname == vehicle_name;
 
   if(result) {
     self.targetname = targetname_string;
@@ -198,11 +194,11 @@ transform_vehicle_by_targetname(vehicle_name, targetname_string, target_string) 
 }
 
 init_wave(wave_num, count) {
-  if(!IsDefined(level.wave_spawn_structs)) {
+  if(!isDefined(level.wave_spawn_structs)) {
     level.wave_spawn_structs = [];
   }
 
-  temp = SpawnStruct();
+  temp = spawnStruct();
   temp.hostile_count = count;
   temp.vehicles = [];
 
@@ -210,26 +206,26 @@ init_wave(wave_num, count) {
 }
 
 add_wave_vehicle(wave_num, targetname, type, alt_node, delay) {
-  if(!IsDefined(level.wave_spawn_structs)) {
+  if(!isDefined(level.wave_spawn_structs)) {
     level.wave_spawn_structs = [];
   }
 
-  if(!IsDefined(level.wave_spawn_structs[wave_num].vehicles)) {
+  if(!isDefined(level.wave_spawn_structs[wave_num].vehicles)) {
     level.wave_spawn_structs[wave_num].vehicles = [];
   }
 
-  temp = SpawnStruct();
+  temp = spawnStruct();
   temp.targetname = targetname;
   temp.ent = GetEnt(targetname, "targetname");
   temp.type = type;
 
   temp.delay = undefined;
-  if(IsDefined(delay)) {
+  if(isDefined(delay)) {
     temp.delay = delay;
   }
 
   temp.alt_node = undefined;
-  if(IsDefined(alt_node)) {
+  if(isDefined(alt_node)) {
     temp.alt_node = alt_node;
   }
 
@@ -320,7 +316,7 @@ so_rooftop_init() {
   level.hostile_count = 0;
   level.wave_spawn_structs = [];
 
-  Assert(IsDefined(level.gameskill));
+  Assert(isDefined(level.gameskill));
   switch (level.gameSkill) {
     case 0: // Easy
     case 1:
@@ -338,7 +334,7 @@ so_rooftop_init() {
   level.roof_factor = 1;
 
   // setup all attack line script origins
-  all_attack_lines = GetEntArray("attack_line", "targetname");
+  all_attack_lines = getEntArray("attack_line", "targetname");
   foreach(attack_line in all_attack_lines) {
     attack_line.times_used = 0;
   }
@@ -378,9 +374,9 @@ so_rooftop_init() {
 spawner_setup() {
   // Setup the Spawners
   wave_size = get_wave_count();
-  for (i = 1; i < wave_size + 1; i++) {
+  for(i = 1; i < wave_size + 1; i++) {
     new_array = [];
-    foreach(member in GetEntArray("wave_guys", "script_noteworthy")) {
+    foreach(member in getEntArray("wave_guys", "script_noteworthy")) {
       new_array[new_array.size] = member;
       if(new_array.size >= get_wave_ai_count(i)) {
         break;
@@ -391,7 +387,7 @@ spawner_setup() {
   }
 
   // We don't want the failsafe spawners to be included in the Setting up of spawners.
-  foreach(spawner in GetEntArray("failsafe_spawners", "targetname")) {
+  foreach(spawner in getEntArray("failsafe_spawners", "targetname")) {
     spawner.script_noteworthy = "wave_guys";
   }
 }
@@ -428,27 +424,27 @@ death_think() {
   self waittill_any("death", "pain_death");
   level.hostile_count--;
 
-  if(!IsDefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
 
   damage_weapon = undefined;
   attacker = undefined;
 
-  if(IsDefined(self.damageweapon)) {
+  if(isDefined(self.damageweapon)) {
     damage_weapon = self.damageweapon;
   }
 
-  if(IsDefined(self.lastattacker)) {
+  if(isDefined(self.lastattacker)) {
     attacker = self.lastattacker;
   }
 
   // Assume destructible
   destructible_killed = false;
-  if(IsDefined(attacker.damageOwner)) {
-    if(IsDefined(attacker.hellfired) && attacker.hellfired) {
+  if(isDefined(attacker.damageOwner)) {
+    if(isDefined(attacker.hellfired) && attacker.hellfired) {
       damage_weapon = "remote_missile_snow";
-    } else if(IsDefined(attacker.claymored) && attacker.claymored) {
+    } else if(isDefined(attacker.claymored) && attacker.claymored) {
       damage_weapon = "claymore";
     }
 
@@ -457,7 +453,7 @@ death_think() {
     destructible_killed = true;
   }
 
-  if(!IsDefined(attacker) || !IsPlayer(attacker) || !IsDefined(damage_weapon)) {
+  if(!isDefined(attacker) || !IsPlayer(attacker) || !isDefined(damage_weapon)) {
     return;
   }
 
@@ -481,11 +477,11 @@ death_think() {
 destructible_damage_monitor() {
   self endon("exploded");
 
-  while (1) {
+  while(1) {
     self waittill("damage", dmg, attacker, dir, point, mod, model, tagname, partname, dflags, weapon);
 
     if(IsPlayer(attacker)) {
-      if(IsDefined(weapon)) {
+      if(isDefined(weapon)) {
         if(weapon == "remote_missile_snow") {
           self.hellfired = true;
         } else if(weapon == "claymore") {
@@ -501,7 +497,7 @@ hostile_nerf() {
 }
 
 set_wave_id() {
-  if(!isdefined(level.wave_spawn_structs[level.current_wave].wave_members)) {
+  if(!isDefined(level.wave_spawn_structs[level.current_wave].wave_members)) {
     level.wave_spawn_structs[level.current_wave].wave_members = [];
   }
 
@@ -510,12 +506,12 @@ set_wave_id() {
 }
 
 getaiarray_by_wave_id() {
-  Assert(IsDefined(level.current_wave));
-  Assert(IsDefined(level.wave_spawn_structs));
+  Assert(isDefined(level.current_wave));
+  Assert(isDefined(level.wave_spawn_structs));
 
   members = level.wave_spawn_structs[level.current_wave1].wave_members;
 
-  Assert(IsDefined(members));
+  Assert(isDefined(members));
   return members;
 }
 
@@ -543,11 +539,9 @@ start_so_rooftop() {
   thread fade_challenge_in(undefined, false);
   thread so_intro_dialogue();
 
-  /#
   test_vehicles();
-  # /
 
-    wait so_standard_wait();
+  wait so_standard_wait();
 
   enable_challenge_timer("waves_start", "challenge_success");
   thread enable_countdown_timer(level.wave_delay);
@@ -569,7 +563,7 @@ wave_wiped_out() {
   level endon("special_op_terminated");
 
   flag_wait("waves_start");
-  while (1) {
+  while(1) {
     flag_wait("wave_spawned");
 
     population = 0;
@@ -587,19 +581,19 @@ wave_wiped_out() {
 
       // Wait for everyone to be dead before starting next wave.
       //			enemies = GetAIArray( "bad_guys" );
-      while (level.hostile_count > 0) {
+      while(level.hostile_count > 0) {
         wait(0.5);
         //				enemies = GetAIArray( "bad_guys" );
       }
 
       //level.wave_spawn_structs[level.current_wave].wave_members = undefined;
-      /# so_debug_print( "wave [" + level.current_wave + "] wiped out" ); #/
+      /# so_debug_print( "wave [" + level.current_wave + "] wiped out" );
 
       flag_clear("wave_spawned");
       flag_set("wave_wiped_out");
 
       // sounds
-      level.player PlaySound("arcademode_kill_streak_won");
+      level.player playSound("arcademode_kill_streak_won");
     }
 
     wait(1);
@@ -620,7 +614,7 @@ wave_spawn_think() {
   array_thread(level.players, ::hud_wave_num);
 
   flag_wait("waves_start");
-  for (i = 1; i < level.wave_spawn_structs.size + 1; i++) {
+  for(i = 1; i < level.wave_spawn_structs.size + 1; i++) {
     flag_clear("wave_wiped_out");
     level.current_wave = i;
 
@@ -633,20 +627,20 @@ wave_spawn_think() {
       spawner set_count(1);
       guy = spawner spawn_ai();
 
-      if(!IsDefined(guy)) {
+      if(!isDefined(guy)) {
         spawn_failed_count++;
         so_debug_print("wave_spawn_think() -- SPAWN FAILED COUNT = " + spawn_failed_count);
       }
     }
 
     // If an AI does not spawn, try again until one does.
-    failsafe_spawners = GetEntArray("failsafe_spawners", "targetname");
-    for (q = 0; q < spawn_failed_count; q++) {
+    failsafe_spawners = getEntArray("failsafe_spawners", "targetname");
+    for(q = 0; q < spawn_failed_count; q++) {
       spawner = failsafe_spawners[RandomInt(failsafe_spawners.size)];
       spawner set_count(1);
       guy = spawner spawn_ai();
 
-      if(!IsDefined(guy)) {
+      if(!isDefined(guy)) {
         q--;
       }
     }
@@ -662,7 +656,7 @@ wave_spawn_think() {
     flag_set("wave_" + (level.current_wave) + "_started");
     level notify("new_wave_started");
 
-    if(IsDefined(level.so_uav_player)) {
+    if(isDefined(level.so_uav_player)) {
       // Also re-enable if reloading... Just so the player can expect to use it right away.
       level notify("stop_uav_reload");
       flag_clear("uav_reloading");
@@ -674,7 +668,7 @@ wave_spawn_think() {
     wait(1); // give some time for all AI to spawn into map before monitoring population
     flag_set("wave_spawned");
 
-    /# so_debug_print( "wave [" + ( level.current_wave + 1 ) + "] spawn complete" ); #/
+    /# so_debug_print( "wave [" + ( level.current_wave + 1 ) + "] spawn complete" );
 
     flag_wait("wave_wiped_out");
 
@@ -683,7 +677,7 @@ wave_spawn_think() {
       return;
     }
 
-    if(IsDefined(level.so_uav_player)) {
+    if(isDefined(level.so_uav_player)) {
       level.so_uav_player maps\_remotemissile::disable_uav(level.so_uav_picked_up, true);
     }
 
@@ -706,7 +700,7 @@ wave_closing_in(start_with) {
   self endon("wave_closing_in_called");
 
   // vehicle riders are to wait till they have unloaded to continue this spawn function
-  if(IsDefined(self.script_noteworthy) && self.script_noteworthy == "vehicle_guys") {
+  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "vehicle_guys") {
     self waittill("jumpedout");
   }
 
@@ -725,7 +719,7 @@ wave_closing_in(start_with) {
     factor *= 0.25;
   }
 
-  if(IsDefined(start_with) && start_with != "attack_line_far") {
+  if(isDefined(start_with) && start_with != "attack_line_far") {
     AssertEx(start_with == "attack_line_med" || start_with == "attack_line_close", "wave_closing_in() is misused, " + start_with + " attack line does not exist.");
 
     if(start_with == "attack_line_med") {
@@ -747,7 +741,7 @@ threat_priority_thread() {
 
   roof_point = getstruct("so_roof_point", "targetname");
 
-  while (1) {
+  while(1) {
     weight = 0;
 
     dist = Distance(roof_point.origin, self.origin);
@@ -817,13 +811,13 @@ seek_player(target_ent) {
   self endon("death");
   level endon("special_op_terminated");
 
-  if(!IsDefined(target_ent)) {
+  if(!isDefined(target_ent)) {
     target_ent = get_higher_priority_player(-1);
   }
 
   self.goalradius = 2000;
 
-  while (1) {
+  while(1) {
     goalradius = self.goalradius;
     if(goalradius > 300) {
       goalradius -= RandomIntRange(200, 600);
@@ -835,7 +829,7 @@ seek_player(target_ent) {
 
     self.goalradius = goalradius;
 
-    if(!IsDefined(target_ent)) {
+    if(!isDefined(target_ent)) {
       target_ent = level.player;
 
       if(level.players.size > 1) {
@@ -846,10 +840,10 @@ seek_player(target_ent) {
     }
 
     // Incase the player is downed already, go seek out the other player
-    if(IsDefined(target_ent.coop_downed) && target_ent.coop_downed) {
+    if(isDefined(target_ent.coop_downed) && target_ent.coop_downed) {
       count = 0;
       foreach(player in level.players) {
-        if(IsDefined(player.coop_downed) && player.coop_downed) {
+        if(isDefined(player.coop_downed) && player.coop_downed) {
           count++;
         }
       }
@@ -863,7 +857,7 @@ seek_player(target_ent) {
         self.goalradius = 800;
         self thread seek_player(level.player2);
         return;
-      } else if(IsDefined(level.player2) && level.player2 == target_ent) {
+      } else if(isDefined(level.player2) && level.player2 == target_ent) {
         self.goalradius = 800;
         self thread seek_player(level.player);
         return;
@@ -879,7 +873,7 @@ seek_player(target_ent) {
 
 player_on_roof_think() {
   // if player on roof, challenge is easier
-  while (1) {
+  while(1) {
     level waittill("player_on_roof");
 
     if(flag("player_on_roof")) {
@@ -889,7 +883,7 @@ player_on_roof_think() {
         guy hostile_nerf();
       }
       set_grenade_frequency(1);
-      /# so_debug_print( "player on roof" ); #/
+      /# so_debug_print( "player on roof" );
     } else {
       foreach(guy in GetAIArray("axis")) {
         //				guy set_goal_radius( 220 );
@@ -897,7 +891,7 @@ player_on_roof_think() {
         guy.baseaccuracy = 2;
       }
       set_grenade_frequency(0.5);
-      /# so_debug_print( "player off roof" ); #/
+      /# so_debug_print( "player off roof" );
     }
 
     wait(2);
@@ -905,7 +899,7 @@ player_on_roof_think() {
 }
 
 set_grenade_frequency(fraction) {
-  if(!isdefined(fraction))
+  if(!isDefined(fraction))
     fraction = 1;
 
   maps\_gameskill::add_fractional_data_point("playerGrenadeBaseTime", 0.25, 40000 * fraction); // original easy
@@ -932,7 +926,7 @@ wave_closing_in_at_line(delay, attack_line) {
 
   target_ent = get_higher_priority_player(min_weight);
 
-  if(IsDefined(target_ent)) {
+  if(isDefined(target_ent)) {
     self seek_player(target_ent);
   } else {
     self set_attack_line(attack_line);
@@ -941,8 +935,8 @@ wave_closing_in_at_line(delay, attack_line) {
 }
 
 set_attack_line(line_position) {
-  attack_line = GetEntArray(line_position, "script_noteworthy");
-  AssertEx(IsDefined(attack_line), "There is no " + line_position + " attack line in level.");
+  attack_line = getEntArray(line_position, "script_noteworthy");
+  AssertEx(isDefined(attack_line), "There is no " + line_position + " attack line in level.");
 
   // use all attack lines evenly
   to_ent = attack_line[RandomInt(attack_line.size)];
@@ -956,9 +950,7 @@ set_attack_line(line_position) {
   self set_goal_pos(to_ent.origin);
   to_ent.times_used++;
 
-  /#
   so_debug_print("AI[" + self GetEntNum() + "] going to [" + line_position + "]");
-  # /
 }
 
 test_vehicles() {
@@ -970,7 +962,7 @@ test_vehicles() {
   //	add_wave_vehicle( 5, "jeep_1", "uaz", GetVehicleNode( "jeep_1_guys_alt2", "targetname" ) );
 
   //	wait( 5 );
-  //	temp = SpawnStruct();
+  //	temp = spawnStruct();
   //	temp.alt_node = undefined;
 
   // JEEP 1

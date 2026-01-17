@@ -39,7 +39,7 @@ corner_think(direction, nodeangleoffset) {
   self.corneraiming = 0;
   animscripts\shared::setanimaimweight(0);
   self.havegonetocover = 0;
-  behaviorcallbacks = spawnstruct();
+  behaviorcallbacks = spawnStruct();
   behaviorcallbacks.mainloopstart = ::mainloopstart;
   behaviorcallbacks.reload = ::cornerreload;
   behaviorcallbacks.leavecoverandshoot = ::stepoutandshootenemy;
@@ -980,7 +980,7 @@ lookforenemy(looktime) {
 
 ispeekoutposclear() {
   assert(isDefined(self.covernode));
-  eyepos = self geteye();
+  eyepos = self getEye();
   rightdir = anglestoright(self.covernode.angles);
 
   if(self.a.atpillarnode)
@@ -993,7 +993,7 @@ ispeekoutposclear() {
   else
     eyepos = eyepos + rightdir * anim.coverglobals.peekout_offset;
 
-  lookatpos = eyepos + anglestoforward(self.covernode.angles) * anim.coverglobals.peekout_offset;
+  lookatpos = eyepos + anglesToForward(self.covernode.angles) * anim.coverglobals.peekout_offset;
   return sighttracepassed(eyepos, lookatpos, 1, self);
 }
 

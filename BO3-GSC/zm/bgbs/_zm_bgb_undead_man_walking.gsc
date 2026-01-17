@@ -16,14 +16,14 @@
 #namespace zm_bgb_undead_man_walking;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_undead_man_walking", & __init__, undefined, "bgb");
+  system::register("zm_bgb_undead_man_walking", &__init__, undefined, "bgb");
 }
 
 function __init__() {
-  if(!(isdefined(level.bgb_in_use) && level.bgb_in_use)) {
+  if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
-  bgb::register("zm_bgb_undead_man_walking", "time", 240, & enable, undefined, undefined, undefined);
+  bgb::register("zm_bgb_undead_man_walking", "time", 240, &enable, undefined, undefined, undefined);
 }
 
 function enable() {
@@ -35,7 +35,7 @@ function enable() {
     return;
   }
   function_b41dc007(1);
-  spawner::add_global_spawn_function("axis", & function_f3d5076d);
+  spawner::add_global_spawn_function("axis", &function_f3d5076d);
 }
 
 function function_40e95c74() {
@@ -43,15 +43,15 @@ function function_40e95c74() {
   if(bgb::decrement_ref_count("zm_bgb_undead_man_walking")) {
     return;
   }
-  spawner::remove_global_spawn_function("axis", & function_f3d5076d);
+  spawner::remove_global_spawn_function("axis", &function_f3d5076d);
   function_b41dc007(0);
 }
 
 function function_b41dc007(b_walk = 1) {
   a_ai = getaiarray();
-  for (i = 0; i < a_ai.size; i++) {
+  for(i = 0; i < a_ai.size; i++) {
     var_3812f8bd = 0;
-    if(isdefined(level.var_9e59cb5b)) {
+    if(isDefined(level.var_9e59cb5b)) {
       var_3812f8bd = [
         [level.var_9e59cb5b]
       ](a_ai[i]);
@@ -70,10 +70,8 @@ function function_b41dc007(b_walk = 1) {
 
 function function_f3d5076d() {
   var_3812f8bd = 0;
-  if(isdefined(level.var_9e59cb5b)) {
-    var_3812f8bd = [
-      [level.var_9e59cb5b]
-    ](self);
+  if(isDefined(level.var_9e59cb5b)) {
+    var_3812f8bd = [[level.var_9e59cb5b]](self);
   } else if(isalive(self) && self.archetype === "zombie" && self.team === level.zombie_team) {
     var_3812f8bd = 1;
   }

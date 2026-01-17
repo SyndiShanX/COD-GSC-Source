@@ -22,8 +22,8 @@ function precache_assets() {
 
 function minecart_main() {
   level flag::init("players_riding_minecart");
-  level.var_b2360d92 = getentarray("minecart_lever_trigger", "targetname");
-  for (i = 0; i < level.var_b2360d92.size; i++) {
+  level.var_b2360d92 = getEntArray("minecart_lever_trigger", "targetname");
+  for(i = 0; i < level.var_b2360d92.size; i++) {
     level.var_b2360d92[i] thread function_f8358462();
   }
 }
@@ -49,53 +49,53 @@ function function_807ee0b0() {
   self.var_629f3738 = vectorscale((0, 1, 0), 180);
   self.var_c25552a2 = getent(self.targetname + "_start_switch", "targetname");
   self.cage = getent(self.targetname + "_cage", "targetname");
-  if(isdefined(self.cage)) {
+  if(isDefined(self.cage)) {
     self.cage linkto(self);
   }
   self.var_cd74abf8 = getent(self.targetname + "_cage_door", "targetname");
-  if(isdefined(self.var_cd74abf8)) {
+  if(isDefined(self.var_cd74abf8)) {
     self.var_cd74abf8 linkto(self);
     self.var_cd74abf8 notsolid();
   }
   self.door = getent(self.targetname + "_door", "targetname");
-  if(isdefined(self.door)) {
+  if(isDefined(self.door)) {
     self.door.closed = 1;
     self.door.clip = getent(self.targetname + "_door_clip", "targetname");
     self thread function_c379c791(1);
   }
   self.pusher = getent(self.targetname + "_pusher", "targetname");
-  if(isdefined(self.pusher)) {
+  if(isDefined(self.pusher)) {
     self.pusher.out = 0;
   }
   self.floor = getent(self.targetname + "_floor", "targetname");
-  if(isdefined(self.floor)) {
+  if(isDefined(self.floor)) {
     self.floor linkto(self);
   }
   self.front = getent(self.targetname + "_front", "targetname");
-  if(isdefined(self.front)) {
+  if(isDefined(self.front)) {
     self.front linkto(self);
   }
-  self.var_54b40cc8 = getentarray(self.targetname + "_front_door", "targetname");
+  self.var_54b40cc8 = getEntArray(self.targetname + "_front_door", "targetname");
   self.var_ab67891f = 1;
   self.var_7c850021 = getent(self.targetname + "_front_door_clip", "targetname");
   self.var_a1647650 = getent(self.targetname + "_start_volume", "targetname");
-  if(isdefined(self.var_a1647650)) {
+  if(isDefined(self.var_a1647650)) {
     self.var_a1647650.minecart = self;
     self.var_a1647650 thread function_7fec5b68();
   }
   self.var_be938773 = getent("trigger_minecart_water_splash", "targetname");
-  if(isdefined(self.var_be938773)) {
+  if(isDefined(self.var_be938773)) {
     self.var_be938773 thread function_68c61932();
   }
   self.speaker_left = spawn("script_model", self.origin);
-  self.speaker_left setmodel("tag_origin");
+  self.speaker_left setModel("tag_origin");
   self.speaker_left linkto(self, "tag_origin", (0, 32, 40));
   util::wait_network_frame();
   self.speaker_right = spawn("script_model", self.origin);
-  self.speaker_right setmodel("tag_origin");
+  self.speaker_right setModel("tag_origin");
   self.speaker_right linkto(self, "tag_origin", (0, -32, 40));
-  blockers = getentarray(self.targetname + "_blocker", "targetname");
-  array::thread_all(blockers, & blocker_think, self);
+  blockers = getEntArray(self.targetname + "_blocker", "targetname");
+  array::thread_all(blockers, &blocker_think, self);
   level.minecart_force_zone_active = 0;
   self function_b6cb1d5a("start");
   self function_f16a275();
@@ -104,7 +104,7 @@ function function_807ee0b0() {
 function blocker_think(minecart) {
   minecart endon("hash_76e3734");
   minecart waittill("hash_4c5d405f");
-  while (true) {
+  while(true) {
     if(self function_742e2b0d(minecart)) {
       self thread function_78442d5();
       break;
@@ -120,7 +120,7 @@ function function_742e2b0d(minecart) {
 
 function function_1306489b() {
   players = getplayers();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(players[i] istouching(self)) {
       return true;
     }
@@ -131,14 +131,14 @@ function function_1306489b() {
 function function_78442d5() {
   level thread scene::play("p7_fxanim_zm_sha_minecart_gate_bundle");
   exploder::exploder("fxexp_400");
-  self playsound("evt_minecart_barrier");
+  self playSound("evt_minecart_barrier");
 }
 
 function function_2ae67320(offsetorigin) {
   linkent = spawn("script_model", (0, 0, 0));
   linkent.offsetorigin = offsetorigin;
   linkent linkto(self, "", linkent.offsetorigin, (0, 0, 0));
-  linkent setmodel("tag_origin");
+  linkent setModel("tag_origin");
   linkent.occupied = 0;
   self.linkents[self.linkents.size] = linkent;
   util::wait_network_frame();
@@ -147,14 +147,14 @@ function function_2ae67320(offsetorigin) {
 function function_46d092ff() {
   wait(0.5);
   players = getplayers();
-  if(isdefined(self.var_cd74abf8)) {
+  if(isDefined(self.var_cd74abf8)) {
     self.var_cd74abf8 solid();
   }
-  for (i = 0; i < self.linkents.size; i++) {
+  for(i = 0; i < self.linkents.size; i++) {
     self.linkents[i].claimed = 0;
   }
   var_c22b6489 = [];
-  for (p = 0; p < players.size; p++) {
+  for(p = 0; p < players.size; p++) {
     player = players[p];
     closestent = undefined;
     closestdist = 0;
@@ -163,10 +163,10 @@ function function_46d092ff() {
       continue;
     }
     var_c22b6489[var_c22b6489.size] = player;
-    for (e = 0; e < self.linkents.size; e++) {
+    for(e = 0; e < self.linkents.size; e++) {
       linkent = self.linkents[e];
       dist = distancesquared(player.origin, linkent.origin);
-      if(!linkent.claimed && (!isdefined(closestent) || dist < closestdist)) {
+      if(!linkent.claimed && (!isDefined(closestent) || dist < closestdist)) {
         closestent = linkent;
         closestdist = dist;
       }
@@ -174,40 +174,40 @@ function function_46d092ff() {
     closestent.claimed = 1;
     player.var_68072c39 = closestent;
   }
-  array::thread_all(var_c22b6489, & function_3ae7bd53, self);
+  array::thread_all(var_c22b6489, &function_3ae7bd53, self);
   level thread function_82d1ad64(var_c22b6489);
   zombies = getaispeciesarray("axis", "all");
   zombie_sort = util::get_array_of_closest(self.origin, zombies, undefined, undefined, 300);
   self.var_54277932 = [];
-  for (i = 0; i < zombie_sort.size; i++) {
+  for(i = 0; i < zombie_sort.size; i++) {
     zombie = zombie_sort[i];
     closestent = undefined;
     closestdist = 0;
     if(zombie.animname == "monkey_zombie") {
       continue;
     }
-    if(isdefined(zombie.shrinked) && zombie.shrinked) {
+    if(isDefined(zombie.shrinked) && zombie.shrinked) {
       continue;
     }
     var_a9be802d = self function_a3fe9db2(zombie);
     if(!var_a9be802d) {
       continue;
     }
-    for (e = 0; e < self.linkents.size; e++) {
+    for(e = 0; e < self.linkents.size; e++) {
       linkent = self.linkents[e];
       dist = distancesquared(zombie.origin, linkent.origin);
-      if(!linkent.claimed && (!isdefined(closestent) || dist < closestdist)) {
+      if(!linkent.claimed && (!isDefined(closestent) || dist < closestdist)) {
         closestent = linkent;
         closestdist = dist;
       }
     }
-    if(isdefined(closestent)) {
+    if(isDefined(closestent)) {
       closestent.claimed = 1;
       zombie.var_68072c39 = closestent;
       self.var_54277932[self.var_54277932.size] = zombie;
     }
   }
-  array::thread_all(self.var_54277932, & function_a676846, self);
+  array::thread_all(self.var_54277932, &function_a676846, self);
 }
 
 function function_3ae7bd53(minecart) {
@@ -221,7 +221,7 @@ function function_3ae7bd53(minecart) {
   pitch_down = 75;
   if(self laststand::player_is_in_laststand()) {
     self setorigin(self.var_68072c39.origin);
-    while (self laststand::player_is_in_laststand()) {
+    while(self laststand::player_is_in_laststand()) {
       wait(0.1);
     }
   } else {
@@ -247,7 +247,7 @@ function function_3321eefe(activetime) {
   self endon("disconnect");
   self endon("hash_aa83d93d");
   self clientfield::set_to_player("minecart_rumble", 1);
-  while (true) {
+  while(true) {
     earthquake(randomfloatrange(0.1, 0.2), randomfloatrange(1, 2), self.origin, 100, self);
     wait(randomfloatrange(0.1, 0.3));
   }
@@ -266,13 +266,13 @@ function function_dd13ce12(var_717a30ce) {
 function function_d7bc1fd8(var_f127a043) {
   self notify("hash_76e3734");
   level notify("hash_76e3734");
-  if(isdefined(self.front)) {
+  if(isDefined(self.front)) {
     self.front notsolid();
   }
   players = getplayers();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     player = players[i];
-    if(isdefined(player.var_68072c39)) {
+    if(isDefined(player.var_68072c39)) {
       player clientfield::set("player_legs_hide", 0);
       player unlink();
       player setvelocity(var_f127a043);
@@ -292,20 +292,20 @@ function function_d7bc1fd8(var_f127a043) {
 }
 
 function function_41ad38d8(zombie, vel) {
-  if(!isdefined(zombie)) {
+  if(!isDefined(zombie)) {
     return;
   }
   zombie startragdoll();
   zombie launchragdoll(vel);
   util::wait_network_frame();
   level.zombie_total++;
-  if(isdefined(zombie)) {
+  if(isDefined(zombie)) {
     zombie dodamage(zombie.health + 666, zombie.origin);
   }
 }
 
 function function_a3fe9db2(ent) {
-  if(isdefined(self.var_a1647650)) {
+  if(isDefined(self.var_a1647650)) {
     return ent istouching(self.var_a1647650);
   }
   return distance2d(ent.origin, self.origin) < 120;
@@ -324,12 +324,12 @@ function get_ai_touching_volume(team, volume) {
 
 function function_81a9b489() {
   ai_list = get_ai_touching_volume(level.zombie_team, self.var_a1647650);
-  for (i = 0; i < ai_list.size; i++) {
+  for(i = 0; i < ai_list.size; i++) {
     wait(randomfloatrange(0.05, 0.1));
-    if(!isdefined(ai_list[i])) {
+    if(!isDefined(ai_list[i])) {
       continue;
     }
-    if(isdefined(ai_list[i].var_68072c39)) {
+    if(isDefined(ai_list[i].var_68072c39)) {
       continue;
     }
     level.zombie_total++;
@@ -338,18 +338,18 @@ function function_81a9b489() {
 }
 
 function function_9c70545() {
-  if(!isdefined(level.spikemores) || level.spikemores.size <= 0) {
+  if(!isDefined(level.spikemores) || level.spikemores.size <= 0) {
     return;
   }
   var_3a52b05 = [];
-  for (i = 0; i < level.spikemores.size; i++) {
-    if(!isdefined(level.spikemores[i])) {
+  for(i = 0; i < level.spikemores.size; i++) {
+    if(!isDefined(level.spikemores[i])) {
       continue;
     }
     trace = groundtrace(level.spikemores[i].origin, level.spikemores[i].origin + (vectorscale((0, 0, -1), 24)), 0, level.spikemores[i]);
-    if(isdefined(trace["entity"])) {
-      if(self == trace["entity"] || (isdefined(self.floor) && self.floor == trace["entity"])) {
-        if(!isdefined(var_3a52b05)) {
+    if(isDefined(trace["entity"])) {
+      if(self == trace["entity"] || (isDefined(self.floor) && self.floor == trace["entity"])) {
+        if(!isDefined(var_3a52b05)) {
           var_3a52b05 = [];
         } else if(!isarray(var_3a52b05)) {
           var_3a52b05 = array(var_3a52b05);
@@ -364,7 +364,7 @@ function function_539188d5() {}
 
 function function_b6cb1d5a(name) {
   node = getvehiclenode((self.targetname + "_") + name, "targetname");
-  if(isdefined(node)) {
+  if(isDefined(node)) {
     self attachpath(node);
     self startpath();
   }
@@ -372,7 +372,7 @@ function function_b6cb1d5a(name) {
 
 function function_4c5d405f(accel) {
   self notify("hash_4c5d405f");
-  if(!isdefined(accel)) {
+  if(!isDefined(accel)) {
     accel = self.accel;
   }
   self resumespeed(accel);
@@ -381,7 +381,7 @@ function function_4c5d405f(accel) {
 
 function function_7e02ada5() {
   self endon("death");
-  if(!isdefined(self.var_282f646e)) {
+  if(!isDefined(self.var_282f646e)) {
     self.var_282f646e = 1;
   }
   self waittill("hash_709c9be8");
@@ -410,7 +410,7 @@ function function_b02072a5(var_2f6d87e4) {
 
 function function_f8358462() {
   level endon("fake_death");
-  if(!isdefined(self.zombie_cost)) {
+  if(!isDefined(self.zombie_cost)) {
     self.zombie_cost = 250;
   }
   self.var_e70591 = 10;
@@ -422,7 +422,7 @@ function function_f8358462() {
   minecart_poi = getent("minecart_poi", "targetname");
   minecart_poi zm_utility::create_zombie_point_of_interest(undefined, 30, 0, 0);
   minecart_poi thread zm_utility::create_zombie_point_of_interest_attractor_positions(4, 45);
-  if(isdefined(self.target)) {
+  if(isDefined(self.target)) {
     self.minecart = getent(self.target, "targetname");
   } else {
     self.minecart = getent("minecart", "targetname");
@@ -439,19 +439,19 @@ function function_f8358462() {
   }
   wait(1);
   level notify("hash_25007749");
-  while (true) {
+  while(true) {
     self function_b02072a5(1);
-    if(isdefined(self.minecart.cage)) {
+    if(isDefined(self.minecart.cage)) {
       self.minecart.cage solid();
     }
-    if(isdefined(self.minecart.var_cd74abf8)) {
+    if(isDefined(self.minecart.var_cd74abf8)) {
       self.minecart.var_cd74abf8 notsolid();
     }
-    if(isdefined(self.minecart.front)) {
+    if(isDefined(self.minecart.front)) {
       self.minecart.front solid();
     }
     self sethintstring(&"ZM_TEMPLE_MINECART_COST", self.zombie_cost);
-    while (true) {
+    while(true) {
       self waittill("trigger", player);
       if(player zm_score::can_player_purchase(self.zombie_cost)) {
         zm_utility::play_sound_at_pos("purchase", self.origin);
@@ -463,7 +463,7 @@ function function_f8358462() {
     level thread function_43dedd2a();
     self triggerenable(0);
     self sethintstring(&"ZM_TEMPLE_MINECART_UNAVAILABLE");
-    if(isdefined(self.minecart.var_c25552a2)) {
+    if(isDefined(self.minecart.var_c25552a2)) {
       self.minecart.var_c25552a2 rotateroll(180, 0.3, 0.1, 0.1);
       self.minecart.var_c25552a2 waittill("rotatedone");
     }
@@ -474,9 +474,9 @@ function function_f8358462() {
     self.minecart thread function_5b5fcc02();
     self.minecart.away = 1;
     self.minecart function_4c5d405f();
-    self.minecart.speaker_left playsound("evt_minecart_l");
-    self.minecart.speaker_right playsound("evt_minecart_r");
-    self.minecart.speaker_left playloopsound("zmb_singing", 5);
+    self.minecart.speaker_left playSound("evt_minecart_l");
+    self.minecart.speaker_right playSound("evt_minecart_r");
+    self.minecart.speaker_left playLoopSound("zmb_singing", 5);
     self thread function_b02072a5(0);
     self.minecart function_46d092ff();
     self.minecart thread function_81a9b489();
@@ -509,7 +509,7 @@ function function_f8358462() {
       var_246ba808 function_b6cb1d5a("start");
       var_246ba808 ghost();
       function_59dcb5d1(self.minecart, var_246ba808);
-      var_246ba808 playloopsound("evt_minecart_climb_loop");
+      var_246ba808 playLoopSound("evt_minecart_climb_loop");
       self.minecart.away = 0;
       self.minecart function_b6cb1d5a("start");
       var_246ba808 function_4c5d405f(self.minecart.accel);
@@ -517,13 +517,13 @@ function function_f8358462() {
       var_246ba808 function_f16a275(self.minecart.accel, self.minecart.decel);
       function_59dcb5d1(var_246ba808, self.minecart);
       var_246ba808 stoploopsound();
-      self.minecart playsound("evt_spiketrap_warn");
+      self.minecart playSound("evt_spiketrap_warn");
       var_246ba808 delete();
     } else {
       self.minecart.away = 0;
       self.minecart function_b6cb1d5a("start");
     }
-    if(isdefined(self.minecart.var_c25552a2)) {
+    if(isDefined(self.minecart.var_c25552a2)) {
       self.minecart.var_c25552a2 rotateroll(-180, 0.3, 0.1, 0.1);
       self.minecart.var_c25552a2 waittill("rotatedone");
     }
@@ -533,11 +533,11 @@ function function_f8358462() {
 function function_b56e3436() {
   var_6fbe862f = 1;
   players = getplayers();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(players[i] laststand::player_is_in_laststand()) {
       continue;
     }
-    if(!(isdefined(players[i].is_on_minecart) && players[i].is_on_minecart)) {
+    if(!(isDefined(players[i].is_on_minecart) && players[i].is_on_minecart)) {
       var_6fbe862f = 0;
     }
   }
@@ -546,7 +546,7 @@ function function_b56e3436() {
 
 function function_59dcb5d1(var_e48fa956, var_8c9fa61, time) {
   model = spawn("script_model", var_e48fa956.origin);
-  model setmodel(var_e48fa956.model);
+  model setModel(var_e48fa956.model);
   model.angles = var_e48fa956.angles;
   var_e48fa956 ghost();
   model moveto(var_8c9fa61.origin, 1, 0.1, 0.1);
@@ -561,25 +561,25 @@ function function_a2aafac6() {
   speed = 500;
   self function_b1da7b23();
   exploder::exploder("fxexp_6");
-  if(isdefined(self.var_be938773)) {
+  if(isDefined(self.var_be938773)) {
     self.var_be938773 thread function_86d73e41();
   }
-  forward = anglestoforward(self.angles);
+  forward = anglesToForward(self.angles);
   forwarddist = 370;
   var_f127a043 = (forward * forwarddist) + vectorscale((0, 0, 1), 110);
   time = forwarddist / speed;
   players = getplayers();
   var_e6eabdfa = [];
-  if(isdefined(self.front)) {
+  if(isDefined(self.front)) {
     self.front notsolid();
   }
-  for (i = 0; i < self.var_54277932.size; i++) {
+  for(i = 0; i < self.var_54277932.size; i++) {
     self thread function_41ad38d8(self.var_54277932[i], var_f127a043 / 2);
   }
   var_8e3b7101 = [];
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     player = players[i];
-    if(!isdefined(player.var_68072c39)) {
+    if(!isDefined(player.var_68072c39)) {
       continue;
     }
     var_8e3b7101[var_8e3b7101.size] = player;
@@ -590,11 +590,11 @@ function function_a2aafac6() {
     earthquake(0.5, 2, player.origin, 100, player);
     player.var_e4bd94c = gettime() + 2000;
     player.var_68072c39 unlink();
-    if(!isdefined(player getlinkedent())) {
+    if(!isDefined(player getlinkedent())) {
       player function_dd13ce12(360);
     }
     player enableinvulnerability();
-    player util::delay(2, undefined, & function_5724a279);
+    player util::delay(2, undefined, &function_5724a279);
     player.var_68072c39 movegravity(var_f127a043, time);
   }
   var_f127a043 = (0, 0, 0);
@@ -608,7 +608,7 @@ function function_a2aafac6() {
   }
   self function_d7bc1fd8(var_f127a043);
   wait(0.5);
-  for (i = 0; i < self.linkents.size; i++) {
+  for(i = 0; i < self.linkents.size; i++) {
     e = self.linkents[i];
     e unlink();
     e.origin = (0, 0, 0);
@@ -617,7 +617,7 @@ function function_a2aafac6() {
 }
 
 function function_5724a279() {
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     self disableinvulnerability();
   }
 }
@@ -629,7 +629,7 @@ function function_b65d8973(minecart) {
 
 function function_131c0ce7() {
   trigger = getent("force_waterfall_active", "script_noteworthy");
-  if(isdefined(trigger)) {
+  if(isDefined(trigger)) {
     trigger waittill("trigger");
     level.minecart_force_zone_active = 1;
     self waittill("reached_end_node");
@@ -643,7 +643,7 @@ function function_b97fa0a1(time, delay) {
 }
 
 function function_c379c791(time) {
-  if(isdefined(self.door)) {
+  if(isDefined(self.door)) {
     if(self.door.closed) {
       self.door movez(-130, time, 0.1, 0.1);
       self.door.clip movez(-130, time, 0.1, 0.1);
@@ -655,7 +655,7 @@ function function_c379c791(time) {
 }
 
 function function_e42c263d() {
-  if(isdefined(self.door)) {
+  if(isDefined(self.door)) {
     if(!self.door.closed) {
       self.door movez(130, 0.5, 0.1, 0.1);
       self.door.clip movez(130, 0.1);
@@ -669,15 +669,15 @@ function function_e42c263d() {
 function function_31bd47e5(time) {
   if(self.var_ab67891f) {
     door = undefined;
-    for (i = 0; i < self.var_54b40cc8.size; i++) {
+    for(i = 0; i < self.var_54b40cc8.size; i++) {
       door = self.var_54b40cc8[i];
       door rotateyaw(door.script_vector[1], time, 0.1, 0.1);
     }
-    if(isdefined(door)) {
+    if(isDefined(door)) {
       door waittill("rotatedone");
     }
     self.var_ab67891f = 0;
-    if(isdefined(self.var_7c850021)) {
+    if(isDefined(self.var_7c850021)) {
       self.var_7c850021 notsolid();
     }
   }
@@ -685,15 +685,15 @@ function function_31bd47e5(time) {
 
 function function_290ed469() {
   if(!self.var_ab67891f) {
-    if(isdefined(self.var_7c850021)) {
+    if(isDefined(self.var_7c850021)) {
       self.var_7c850021 solid();
     }
     door = undefined;
-    for (i = 0; i < self.var_54b40cc8.size; i++) {
+    for(i = 0; i < self.var_54b40cc8.size; i++) {
       door = self.var_54b40cc8[i];
       door rotateyaw(-1 * door.script_vector[1], 1, 0.1, 0.1);
     }
-    if(isdefined(door)) {
+    if(isDefined(door)) {
       door waittill("rotatedone");
     }
     self.var_ab67891f = 1;
@@ -706,7 +706,7 @@ function function_a4db8189(delay) {
 }
 
 function function_5b5fcc02() {
-  if(isdefined(self.pusher)) {
+  if(isDefined(self.pusher)) {
     if(!self.pusher.out) {
       wait(0.3);
       self.pusher movey(166, 2, 0.25, 0.1);
@@ -720,7 +720,7 @@ function function_5b5fcc02() {
 }
 
 function function_c716b3b7() {
-  if(isdefined(self.pusher)) {
+  if(isDefined(self.pusher)) {
     if(self.pusher.out) {
       self.pusher movey(-166, 4, 0.25, 0.1);
       self.pusher waittill("movedone");
@@ -732,23 +732,23 @@ function function_c716b3b7() {
 function function_7fec5b68() {
   height = 0;
   scale = getent("minecart1_scale", "targetname");
-  if(!isdefined(scale)) {
+  if(!isDefined(scale)) {
     return;
   }
   scale.origin = scale.origin + (vectorscale((0, 0, -1), 37));
   level waittill("hash_25007749");
-  while (true) {
+  while(true) {
     count = 0;
-    if(isdefined(self.minecart) && !self.minecart.away) {
+    if(isDefined(self.minecart) && !self.minecart.away) {
       players = getplayers();
-      for (i = 0; i < players.size; i++) {
+      for(i = 0; i < players.size; i++) {
         if(players[i] istouching(self)) {
           count++;
         }
       }
     }
     if(height < count) {
-      while (height < count) {
+      while(height < count) {
         rise = 0;
         if(height == 3) {
           rise = 10;
@@ -775,7 +775,7 @@ function function_7fec5b68() {
       time = 0;
       pop = 2;
       dip = -1;
-      while (height > count) {
+      while(height > count) {
         if(height == 4) {
           drop = drop + -10;
         } else {
@@ -811,11 +811,11 @@ function function_86d73e41() {
 }
 
 function function_68c61932() {
-  while (true) {
+  while(true) {
     self waittill("trigger", player);
-    if(isdefined(player) && isdefined(player.var_e4bd94c) && player.var_e4bd94c > gettime()) {
-      playfx(level._effect["player_water_splash"], player.origin);
-      player playsound("fly_bodyfall_large_water");
+    if(isDefined(player) && isDefined(player.var_e4bd94c) && player.var_e4bd94c > gettime()) {
+      playFX(level._effect["player_water_splash"], player.origin);
+      player playSound("fly_bodyfall_large_water");
       player.var_e4bd94c = 0;
     }
   }
@@ -827,7 +827,7 @@ function function_82d1ad64(array) {
   }
   wait(6);
   player = array[randomintrange(0, array.size)];
-  if(isdefined(player) && isplayer(player)) {
+  if(isDefined(player) && isplayer(player)) {
     player thread zm_audio::create_and_play_dialog("general", "mine_ride");
   }
 }
@@ -835,8 +835,8 @@ function function_82d1ad64(array) {
 function function_43dedd2a() {
   corpse_trig = getent("minecart1_start_volume", "targetname");
   corpses = getcorpsearray();
-  if(isdefined(corpses)) {
-    for (i = 0; i < corpses.size; i++) {
+  if(isDefined(corpses)) {
+    for(i = 0; i < corpses.size; i++) {
       if(corpses[i] istouching(corpse_trig)) {
         corpses[i] thread function_edc2ec93();
       }
@@ -845,6 +845,6 @@ function function_43dedd2a() {
 }
 
 function function_edc2ec93() {
-  playfx(level._effect["corpse_gib"], self.origin);
+  playFX(level._effect["corpse_gib"], self.origin);
   self delete();
 }

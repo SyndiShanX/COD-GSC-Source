@@ -5,11 +5,9 @@
 
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\lui_shared;
-
 #namespace prototype_self_revive;
 
 class cprototype_self_revive: cluielem {
-
   function close(player) {
     cluielem::close_luielem(player);
   }

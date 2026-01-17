@@ -6,7 +6,6 @@
 #include scripts\core_common\player\player_stats;
 #include scripts\mp_common\item_drop;
 #include scripts\mp_common\item_world;
-
 #namespace wz_blast_doors;
 
 event_handler[level_init] main(eventstruct) {
@@ -98,11 +97,11 @@ function_cd4de84f(doors) {
 
   sphere(centerposition, 12, (1, 0, 0), 1, 0, 12, 100);
 
-    vehicles = getentitiesinradius(centerposition, 32, 12);
+  vehicles = getentitiesinradius(centerposition, 32, 12);
   var_7344b4ac = 0;
 
   foreach(vehicle in vehicles) {
-    if(isDefined(vehicle.scriptvehicletype) && vehicle.scriptvehicletype == #"cargo_truck_wz") {
+    if(isDefined(vehicle.scriptvehicletype) && vehicle.scriptvehicletype == # "cargo_truck_wz") {
       var_7344b4ac = 1;
       playsoundatposition(#"hash_694b6b5d665c7a5e", centerposition);
       break;

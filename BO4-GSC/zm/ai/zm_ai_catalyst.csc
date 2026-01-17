@@ -11,27 +11,26 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm_transformation;
-
 #namespace zm_ai_catalyst;
 
 autoexec __init__system__() {
   system::register(#"zm_ai_catalyst", &__init__, undefined, undefined);
 }
 
-private __init__() {
+__init__() {
   if(!isarchetypeloaded(#"catalyst")) {
     return;
   }
 
-  level._effect[#"fx8_aat_opposite_exp"] = "zm_weapons/fx8_aat_opposite_exp";
-  level._effect[#"fx8_cata_cor_aura"] = "zm_ai/fx8_cata_cor_aura";
-  level._effect[#"fx8_cata_cor_aura_locked"] = "zm_ai/fx8_cata_cor_aura_locked";
-  level._effect[#"fx8_cata_water_purify"] = "zm_ai/fx8_cata_water_purify";
-  level._effect[#"fx8_cata_elec_blast"] = "zm_ai/fx8_cata_elec_blast";
-  level._effect[#"fx8_cata_elec_blast"] = "zm_ai/fx8_cata_elec_blast";
-  level._effect[#"fx8_cata_plasma_blast"] = "zm_ai/fx8_cata_plasma_blast";
-  level._effect[#"fx8_cata_plasma_blast_tell_head"] = "zm_ai/fx8_cata_plasma_blast_tell_head";
-  level._effect[#"fx8_cata_plasma_blast_tell_torso"] = "zm_ai/fx8_cata_plasma_blast_tell_torso";
+  level._effect[# "fx8_aat_opposite_exp"] = "zm_weapons/fx8_aat_opposite_exp";
+  level._effect[# "fx8_cata_cor_aura"] = "zm_ai/fx8_cata_cor_aura";
+  level._effect[# "fx8_cata_cor_aura_locked"] = "zm_ai/fx8_cata_cor_aura_locked";
+  level._effect[# "fx8_cata_water_purify"] = "zm_ai/fx8_cata_water_purify";
+  level._effect[# "fx8_cata_elec_blast"] = "zm_ai/fx8_cata_elec_blast";
+  level._effect[# "fx8_cata_elec_blast"] = "zm_ai/fx8_cata_elec_blast";
+  level._effect[# "fx8_cata_plasma_blast"] = "zm_ai/fx8_cata_plasma_blast";
+  level._effect[# "fx8_cata_plasma_blast_tell_head"] = "zm_ai/fx8_cata_plasma_blast_tell_head";
+  level._effect[# "fx8_cata_plasma_blast_tell_torso"] = "zm_ai/fx8_cata_plasma_blast_tell_torso";
   function_b6fd8c68();
   ai::add_archetype_spawn_function(#"catalyst", &function_5608540a);
 }
@@ -46,7 +45,7 @@ function_b6fd8c68() {
   clientfield::register("actor", "corrosive_death_clientfield", 1, 1, "int", &function_5c22755, 0, 0);
 }
 
-private function_213aaacc(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
+function_213aaacc(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   self util::waittill_dobj(localclientnum);
 
   switch (newvalue) {
@@ -72,15 +71,15 @@ private function_213aaacc(localclientnum, oldvalue, newvalue, bnewent, binitials
   }
 }
 
-private function_b3c2dc1c(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
-  util::playFXOnTag(localclientnum, level._effect[#"fx8_aat_opposite_exp"], self, "j_spine4");
-  playSound(0, #"hash_7d7c027e3b78c5b6", self.origin);
+function_b3c2dc1c(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
+  util::playFXOnTag(localclientnum, level._effect[# "fx8_aat_opposite_exp"], self, "j_spine4");
+  playSound(0, # "hash_7d7c027e3b78c5b6", self.origin);
 }
 
-private function_8cc5be3b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, wasdemojump) {
+function_8cc5be3b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, wasdemojump) {
   if(newval) {
-    self.var_565b4840 = util::playFXOnTag(localclientnum, level._effect[#"fx8_cata_cor_aura"], self, "j_spine4");
-    self.var_430cfa87 = util::playFXOnTag(localclientnum, level._effect[#"fx8_cata_cor_aura_locked"], self, "tag_origin");
+    self.var_565b4840 = util::playFXOnTag(localclientnum, level._effect[# "fx8_cata_cor_aura"], self, "j_spine4");
+    self.var_430cfa87 = util::playFXOnTag(localclientnum, level._effect[# "fx8_cata_cor_aura_locked"], self, "tag_origin");
 
     if(!isDefined(self.var_8c3a51be)) {
       self.var_8c3a51be = self playLoopSound("zmb_ai_catalyst_corrosive_lp");
@@ -104,12 +103,12 @@ private function_8cc5be3b(localclientnum, oldval, newval, bnewent, binitialsnap,
   }
 }
 
-private function_72d9d9e7(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
+function_72d9d9e7(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   if(newvalue === 1) {
-    self.var_5fe1f99b = util::playFXOnTag(localclientnum, level._effect[#"fx8_cata_water_purify"], self, "tag_eye");
+    self.var_5fe1f99b = util::playFXOnTag(localclientnum, level._effect[# "fx8_cata_water_purify"], self, "tag_eye");
 
     if(!isDefined(self.var_983b7af9)) {
-      self playSound(localclientnum, #"hash_56157e961854c964");
+      self playSound(localclientnum, # "hash_56157e961854c964");
       self.var_983b7af9 = self playLoopSound(#"hash_4d16df16d08f6404");
     }
 
@@ -122,15 +121,15 @@ private function_72d9d9e7(localclientnum, oldvalue, newvalue, bnewent, binitials
   }
 
   if(isDefined(self.var_983b7af9)) {
-    self playSound(localclientnum, #"hash_58e6fac48dd8515d");
+    self playSound(localclientnum, # "hash_58e6fac48dd8515d");
     self stoploopsound(self.var_983b7af9);
     self.var_983b7af9 = undefined;
   }
 }
 
-private function_dce55f49(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
+function_dce55f49(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   if(newvalue === 1) {
-    self playSound(localclientnum, #"hash_579a9e520b10d768");
+    self playSound(localclientnum, # "hash_579a9e520b10d768");
     self thread function_8c78e227(localclientnum);
     return;
   }
@@ -142,7 +141,7 @@ private function_dce55f49(localclientnum, oldvalue, newvalue, bnewent, binitials
   }
 }
 
-private function_8c78e227(localclientnum) {
+function_8c78e227(localclientnum) {
   self notify(#"hash_28942d030dbe705");
   self endon(#"hash_28942d030dbe705");
 
@@ -153,21 +152,21 @@ private function_8c78e227(localclientnum) {
   str_tag = "tag_eye";
   v_origin = self gettagorigin(str_tag);
   self.var_c1e13a67 = util::spawn_model(localclientnum, "tag_origin", v_origin, self.angles);
-  self.var_5e3f0a3c = util::playFXOnTag(localclientnum, level._effect[#"fx8_cata_elec_blast"], self.var_c1e13a67, "tag_origin");
-  self waittill(#"death", #"scream_attack_done");
+  self.var_5e3f0a3c = util::playFXOnTag(localclientnum, level._effect[# "fx8_cata_elec_blast"], self.var_c1e13a67, "tag_origin");
+  self waittill(#"death", # "scream_attack_done");
   self.var_c1e13a67 delete();
 }
 
-private function_1578a764(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
-  util::playFXOnTag(localclientnum, level._effect[#"fx8_cata_plasma_blast"], self, "j_spine4");
-  playSound(0, #"hash_7d7c027e3b78c5b6", self.origin);
-  function_2a9101fe(localclientnum, #"hash_528115ad9eebc84f", self.origin);
+function_1578a764(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
+  util::playFXOnTag(localclientnum, level._effect[# "fx8_cata_plasma_blast"], self, "j_spine4");
+  playSound(0, # "hash_7d7c027e3b78c5b6", self.origin);
+  function_2a9101fe(localclientnum, # "hash_528115ad9eebc84f", self.origin);
 }
 
-private function_5c22755(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
+function_5c22755(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   self util::waittill_dobj(localclientnum);
 
-  if(newvalue && isDefined(self) && self.subarchetype === #"catalyst_corrosive") {
+  if(newvalue && isDefined(self) && self.subarchetype === # "catalyst_corrosive") {
     animname = self getprimarydeltaanim();
 
     if(!isDefined(animname) || animname != "ai_t8_zm_zod_catalyst_corrosive_death_01" && animname != "ai_t8_zm_zod_catalyst_corrosive_death_02") {
@@ -183,7 +182,7 @@ private function_5c22755(localclientnum, oldvalue, newvalue, bnewent, binitialsn
   }
 }
 
-private function_ce9e3dc7(animname) {
+function_ce9e3dc7(animname) {
   self endon(#"death");
   var_1d3061ce = animname + "_scale";
   animlength = int(getanimlength(var_1d3061ce) * 1000);
@@ -209,6 +208,6 @@ private function_ce9e3dc7(animname) {
   self delete();
 }
 
-private function_5608540a(localclientnum) {
-  self.var_fab3cf78 = #"hash_10bdf06ea5640d49";
+function_5608540a(localclientnum) {
+  self.var_fab3cf78 = # "hash_10bdf06ea5640d49";
 }

@@ -7,7 +7,6 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace util;
 
 autoexec __init__system__() {
@@ -289,9 +288,7 @@ _single_func(entity, func, a_vars) {
       if(isDefined(entity)) {
         return entity[[func]](a_vars[0], a_vars[1], a_vars[2], a_vars[3], a_vars[4], a_vars[5], a_vars[6], a_vars[7]);
       } else {
-        return [
-          [func]
-        ](a_vars[0], a_vars[1], a_vars[2], a_vars[3], a_vars[4], a_vars[5], a_vars[6], a_vars[7]);
+        return [[func]](a_vars[0], a_vars[1], a_vars[2], a_vars[3], a_vars[4], a_vars[5], a_vars[6], a_vars[7]);
       }
 
       break;
@@ -299,9 +296,7 @@ _single_func(entity, func, a_vars) {
       if(isDefined(entity)) {
         return entity[[func]](a_vars[0], a_vars[1], a_vars[2], a_vars[3], a_vars[4], a_vars[5], a_vars[6]);
       } else {
-        return [
-          [func]
-        ](a_vars[0], a_vars[1], a_vars[2], a_vars[3], a_vars[4], a_vars[5], a_vars[6]);
+        return [[func]](a_vars[0], a_vars[1], a_vars[2], a_vars[3], a_vars[4], a_vars[5], a_vars[6]);
       }
 
       break;
@@ -309,9 +304,7 @@ _single_func(entity, func, a_vars) {
       if(isDefined(entity)) {
         return entity[[func]](a_vars[0], a_vars[1], a_vars[2], a_vars[3], a_vars[4], a_vars[5]);
       } else {
-        return [
-          [func]
-        ](a_vars[0], a_vars[1], a_vars[2], a_vars[3], a_vars[4], a_vars[5]);
+        return [[func]](a_vars[0], a_vars[1], a_vars[2], a_vars[3], a_vars[4], a_vars[5]);
       }
 
       break;
@@ -319,9 +312,7 @@ _single_func(entity, func, a_vars) {
       if(isDefined(entity)) {
         return entity[[func]](a_vars[0], a_vars[1], a_vars[2], a_vars[3], a_vars[4]);
       } else {
-        return [
-          [func]
-        ](a_vars[0], a_vars[1], a_vars[2], a_vars[3], a_vars[4]);
+        return [[func]](a_vars[0], a_vars[1], a_vars[2], a_vars[3], a_vars[4]);
       }
 
       break;
@@ -329,9 +320,7 @@ _single_func(entity, func, a_vars) {
       if(isDefined(entity)) {
         return entity[[func]](a_vars[0], a_vars[1], a_vars[2], a_vars[3]);
       } else {
-        return [
-          [func]
-        ](a_vars[0], a_vars[1], a_vars[2], a_vars[3]);
+        return [[func]](a_vars[0], a_vars[1], a_vars[2], a_vars[3]);
       }
 
       break;
@@ -339,9 +328,7 @@ _single_func(entity, func, a_vars) {
       if(isDefined(entity)) {
         return entity[[func]](a_vars[0], a_vars[1], a_vars[2]);
       } else {
-        return [
-          [func]
-        ](a_vars[0], a_vars[1], a_vars[2]);
+        return [[func]](a_vars[0], a_vars[1], a_vars[2]);
       }
 
       break;
@@ -349,9 +336,7 @@ _single_func(entity, func, a_vars) {
       if(isDefined(entity)) {
         return entity[[func]](a_vars[0], a_vars[1]);
       } else {
-        return [
-          [func]
-        ](a_vars[0], a_vars[1]);
+        return [[func]](a_vars[0], a_vars[1]);
       }
 
       break;
@@ -359,9 +344,7 @@ _single_func(entity, func, a_vars) {
       if(isDefined(entity)) {
         return entity[[func]](a_vars[0]);
       } else {
-        return [
-          [func]
-        ](a_vars[0]);
+        return [[func]](a_vars[0]);
       }
 
       break;
@@ -369,9 +352,7 @@ _single_func(entity, func, a_vars) {
       if(isDefined(entity)) {
         return entity[[func]]();
       } else {
-        return [
-          [func]
-        ]();
+        return [[func]]();
       }
 
       break;
@@ -633,17 +614,17 @@ lerp_dvar(str_dvar, n_start_val = getdvarfloat(str_dvar, 0), n_end_val, n_lerp_t
 
 is_valid_type_for_callback(type) {
   switch (type) {
-    case #"scriptmover":
-    case #"na":
-    case #"missile":
-    case #"general":
-    case #"player":
-    case #"turret":
-    case #"actor":
-    case #"helicopter":
-    case #"trigger":
-    case #"vehicle":
-    case #"plane":
+    case # "scriptmover":
+    case # "na":
+    case # "missile":
+    case # "general":
+    case # "player":
+    case # "turret":
+    case # "actor":
+    case # "helicopter":
+    case # "trigger":
+    case # "vehicle":
+    case # "plane":
       return true;
     default:
       return false;
@@ -745,12 +726,12 @@ server_wait(localclientnum, seconds, waitbetweenchecks, level_endon) {
 }
 
 get_other_team(str_team) {
-  if(str_team == #"allies") {
-    return #"axis";
-  } else if(str_team == #"axis") {
-    return #"allies";
+  if(str_team == # "allies") {
+    return # "axis";
+  } else if(str_team == # "axis") {
+    return # "allies";
   } else {
-    return #"allies";
+    return # "allies";
   }
 
   assertmsg("<dev string:x1c9>" + str_team);
@@ -1327,21 +1308,21 @@ function_73fab74d() {
   }
 
   level.var_1bbf77be = 1;
-  function_c16f65a3(#"allies", #"axis");
-  function_c16f65a3(#"team3", #"any");
-  set_team_mapping(#"allies", #"axis");
+  function_c16f65a3(#"allies", # "axis");
+  function_c16f65a3(#"team3", # "any");
+  set_team_mapping(#"allies", # "axis");
 }
 
 cf_team_mapping(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   switch (newval) {
     case 0:
-      set_team_mapping(#"axis", #"allies");
+      set_team_mapping(#"axis", # "allies");
       break;
     case 1:
-      set_team_mapping(#"allies", #"axis");
+      set_team_mapping(#"allies", # "axis");
       break;
     default:
-      set_team_mapping(#"allies", #"axis");
+      set_team_mapping(#"allies", # "axis");
       break;
   }
 }
@@ -1353,30 +1334,30 @@ preload_frontend(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
 }
 
 set_team_mapping(str_team_for_sidea, str_team_for_sideb) {
-  if(str_team_for_sidea == #"allies") {
-    str_team_for_sidea = #"allies";
-  } else if(str_team_for_sidea == #"axis") {
-    str_team_for_sidea = #"axis";
+  if(str_team_for_sidea == # "allies") {
+    str_team_for_sidea = # "allies";
+  } else if(str_team_for_sidea == # "axis") {
+    str_team_for_sidea = # "axis";
   }
 
-  if(str_team_for_sideb == #"axis") {
-    str_team_for_sideb = #"axis";
-  } else if(str_team_for_sideb == #"allies") {
-    str_team_for_sideb = #"allies";
+  if(str_team_for_sideb == # "axis") {
+    str_team_for_sideb = # "axis";
+  } else if(str_team_for_sideb == # "allies") {
+    str_team_for_sideb = # "allies";
   }
 
   assert(str_team_for_sidea != str_team_for_sideb, "<dev string:x302>");
-  level.team_mapping[#"sidea"] = str_team_for_sidea;
-  level.team_mapping[#"sideb"] = str_team_for_sideb;
-  level.team_mapping[#"attacker"] = str_team_for_sidea;
-  level.team_mapping[#"defender"] = str_team_for_sideb;
-  level.team_mapping[#"attackers"] = str_team_for_sidea;
-  level.team_mapping[#"defenders"] = str_team_for_sideb;
-  level.team_mapping[#"wun"] = #"allies";
-  level.team_mapping[#"fpa"] = #"axis";
-  level.team_mapping[#"teama"] = level.team_mapping[#"sidea"];
-  level.team_mapping[#"teamb"] = level.team_mapping[#"sideb"];
-  level.team_mapping[#"side3"] = #"team3";
+  level.team_mapping[# "sidea"] = str_team_for_sidea;
+  level.team_mapping[# "sideb"] = str_team_for_sideb;
+  level.team_mapping[# "attacker"] = str_team_for_sidea;
+  level.team_mapping[# "defender"] = str_team_for_sideb;
+  level.team_mapping[# "attackers"] = str_team_for_sidea;
+  level.team_mapping[# "defenders"] = str_team_for_sideb;
+  level.team_mapping[# "wun"] = # "allies";
+  level.team_mapping[# "fpa"] = # "axis";
+  level.team_mapping[# "teama"] = level.team_mapping[# "sidea"];
+  level.team_mapping[# "teamb"] = level.team_mapping[# "sideb"];
+  level.team_mapping[# "side3"] = # "team3";
 }
 
 get_team_mapping(str_team) {
@@ -1404,7 +1385,7 @@ get_enemy_team(team) {
     return level.team_enemy_mapping[team];
   }
 
-  return #"none";
+  return # "none";
 }
 
 function_35aed314(teama, teamb) {
@@ -1465,10 +1446,10 @@ function_26489405() {
   mapname = get_map_name();
 
   switch (mapname) {
-    case #"mp_casino":
+    case # "mp_casino":
       isnightmap = 1;
       break;
-    case #"mp_austria":
+    case # "mp_austria":
       isnightmap = 1;
       break;
     default:
@@ -1605,4 +1586,3 @@ add_devgui(localclientnum, menu_path, commands) {
 remove_devgui(localclientnum, menu_path) {
   adddebugcommand(localclientnum, "<dev string:x369>" + menu_path + "<dev string:x364>");
 }
-

@@ -15,7 +15,7 @@ init_spawner_set(name) {
   level.spawners[name]["left"] = [];
   level.spawners[name]["right"] = [];
   level.spawners[name]["boss"] = [];
-  for (i = 0; i < spawners.size; i++) {
+  for(i = 0; i < spawners.size; i++) {
     side = spawners[i].script_parameters;
     size = level.spawners[name][side].size;
     level.spawners[name][side][size] = spawners[i];
@@ -28,7 +28,7 @@ init() {
   level.dogRunPainSpeed = 20;
   zombies = getEntArray("zombie_spawner", "script_noteworthy");
   array_thread(zombies, ::add_spawn_function, ::zombie_spawn_init);
-  for (i = 0; i < level.arenas.size; i++) {
+  for(i = 0; i < level.arenas.size; i++) {
     spawn_set = level.arenas[i] + "_spawner";
     init_spawner_set(spawn_set);
   }
@@ -89,7 +89,7 @@ zombie_spawn_init(animname_set) {
 start_burning(attacker) {
   self endon("death");
   time = 8;
-  while (time > 0) {
+  while(time > 0) {
     wait .4;
     time -= .4;
     if(isDefined(attacker)) {
@@ -105,7 +105,7 @@ zombie_blood() {
   self clearclientflag(level._ZT_ACTOR_CF_BLOOD);
 }
 zombie_damage_event(zombie) {
-  while (isAlive(zombie)) {
+  while(isAlive(zombie)) {
     zombie waittill("damage", damage, attacker, direction, point, type);
     if(isDefined(zombie.damagedby) && zombie.damagedby == "tesla") {
       zombie maps\_zombietron_weapon::tesla_damage_init(attacker);
@@ -271,7 +271,7 @@ zombie_go_faster() {
     self.zombie_move_speed = "sprint";
   }
   retries = 10;
-  while (isDefined(self) && retries > 0) {
+  while(isDefined(self) && retries > 0) {
     theanim = undefined;
     switch (self.zombie_move_speed) {
       case "walk":
@@ -375,10 +375,10 @@ find_flesh() {
   self.ignoreme = false;
   self.ignore_player = [];
   self.goalradius = 32;
-  while (1) {
+  while(1) {
     near_zombies = GetAISpeciesArray("axis", "all");
     same_enemy_count = 0;
-    for (i = 0; i < near_zombies.size; i++) {
+    for(i = 0; i < near_zombies.size; i++) {
       if(isDefined(near_zombies[i]) && isalive(near_zombies[i])) {
         if(isDefined(near_zombies[i].favoriteenemy) && isDefined(self.favoriteenemy) &&
           near_zombies[i].favoriteenemy == self.favoriteenemy) {
@@ -396,7 +396,7 @@ find_flesh() {
     if(players.size == 1) {
       self.ignore_player = [];
     } else {
-      for (i = 0; i < self.ignore_player.size; i++) {
+      for(i = 0; i < self.ignore_player.size; i++) {
         if(isDefined(self.ignore_player[i]) && isDefined(self.ignore_player[i].ignore_counter) && self.ignore_player[i].ignore_counter > 3) {
           self.ignore_player[i].ignore_counter = 0;
           self.ignore_player = array_remove(self.ignore_player, self.ignore_player[i]);
@@ -414,7 +414,7 @@ find_flesh() {
     self.favoriteenemy = player;
     self thread zombie_pathing();
     if(players.size > 1) {
-      for (i = 0; i < self.ignore_player.size; i++) {
+      for(i = 0; i < self.ignore_player.size; i++) {
         if(isDefined(self.ignore_player[i])) {
           if(!isDefined(self.ignore_player[i].ignore_counter))
             self.ignore_player[i].ignore_counter = 0;
@@ -424,7 +424,7 @@ find_flesh() {
       }
     }
     self.zombie_path_timer = GetTime() + (RandomFloatRange(1, 3) * 1000);
-    while (GetTime() < self.zombie_path_timer) {
+    while(GetTime() < self.zombie_path_timer) {
       zombie_poi = self get_zombie_point_of_interest(self.origin);
       if(!isDefined(self.boss)) {
         self.enemyoverride = zombie_poi;
@@ -464,14 +464,14 @@ get_zombie_point_of_interest(origin) {
     }
   }
   if(self.moveplaybackrate > 1.5 && !isDefined(self.mini_boss)) {
-    if(isDefined(self.favoriteenemy) && isDefineD(self.favoriteenemy.crumbs)) {
+    if(isDefined(self.favoriteenemy) && isDefined(self.favoriteenemy.crumbs)) {
       distSQ = distanceSquared(self.origin, self.favoriteenemy.origin);
       if(distSQ < 72 * 72) {
         self.poi = undefined;
         self.poi_expire = undefined;
         return undefined;
       }
-      if(isDefineD(self.poi_expire)) {
+      if(isDefined(self.poi_expire)) {
         if(GetTime() > self.poi_expire) {
           self.poi_next = GetTime() + 10000;
           self.poi = undefined;
@@ -508,7 +508,7 @@ zombie_follow_enemy() {
   self endon("follow_enemy");
   self endon("death");
   self endon("bad_path");
-  while (1) {
+  while(1) {
     wait(0.1);
     if(isDefined(level.zombie_count) && level.zombie_count <= 3) {
       self set_zombie_run_cycle();
@@ -543,7 +543,7 @@ spawn_a_mini_boss(spawn_point, type, checkAvailFirst) {
   miniBoss = undefined;
   if(miniBossSpawners.size > 0) {
     if(isDefined(type)) {
-      for (i = 0; i < miniBossSpawners.size; i++) {
+      for(i = 0; i < miniBossSpawners.size; i++) {
         if(type == miniBossSpawners[i].script_parameters) {
           miniBoss = miniBossSpawners[i];
           break;
@@ -555,7 +555,7 @@ spawn_a_mini_boss(spawn_point, type, checkAvailFirst) {
   }
   if(isDefined(checkAvailFirst) && checkAvailFirst) {
     found = false;
-    for (i = 0; i < level.RandomMiniBosses.size; i++) {
+    for(i = 0; i < level.RandomMiniBosses.size; i++) {
       if(miniBoss == level.RandomMiniBosses[i]) {
         found = true;
       }
@@ -600,8 +600,8 @@ the_big_boss_defeated(type) {
   boss_msg3 = undefined;
   switch (type) {
     case "ape_zombie":
-      text2 = & "ZOMBIETRON_COSMIC_SB_DEFEATED";
-      text3 = & "ZOMBIETRON_COSMIC_SB_DEFEATED2";
+      text2 = &"ZOMBIETRON_COSMIC_SB_DEFEATED";
+      text3 = &"ZOMBIETRON_COSMIC_SB_DEFEATED2";
       break;
   }
   boss_msg = NewHudElem(self);
@@ -672,7 +672,7 @@ the_big_boss_introduction(type) {
   boss_msg2 = undefined;
   switch (type) {
     case "ape_zombie":
-      text2 = & "ZOMBIETRON_COSMIC_SB";
+      text2 = &"ZOMBIETRON_COSMIC_SB";
       break;
   }
   boss_msg = NewHudElem(self);
@@ -731,8 +731,8 @@ spawn_the_big_boss() {
   flag_wait("boss_spawn_go");
   numBosses = level.arena_laps + 1;
   boss = undefined;
-  while (numBosses > 0) {
-    for (i = 0; i < spawners.size; i++) {
+  while(numBosses > 0) {
+    for(i = 0; i < spawners.size; i++) {
       spawner = spawners[i];
       if(isDefined(spawner.script_animname) && spawner.script_animname == "ape_zombie") {
         maps\_zombietron_ai_ape::init(spawner);
@@ -759,7 +759,7 @@ clark_spawn_init() {
 moss_death_martyrdom() {
   self waittill("death");
   if(isDefined(self)) {
-    PlayFx(level._effect["barrel_explode"], self.origin, AnglestoForward(self.angles));
+    playFX(level._effect["barrel_explode"], self.origin, anglesToForward(self.angles));
     RadiusDamage(self.origin + (0, 0, 20), 128, 7000, 5000, self, "MOD_PROJECTILE_SPLASH");
     physicsExplosionSphere(self.origin, 512, 128, 2);
     playRumbleOnPosition("grenade_rumble", self.origin);
@@ -772,7 +772,7 @@ moss_death_martyrdom() {
 }
 moss_proximity_watch() {
   self endon("death");
-  while (1) {
+  while(1) {
     if(isDefined(self.favoriteenemy)) {
       distSQ = distanceSquared(self.origin, self.favoriteenemy.origin);
       if(distSQ < 96 * 96) {
@@ -791,7 +791,7 @@ moss_spawn_init_big() {
   self thread moss_death_martyrdom();
   self thread moss_proximity_watch();
   self.deathFunction = undefined;
-  PlayFxOnTag(level._effect["player3_light"], self, "tag_origin");
+  playFXOnTag(level._effect["player3_light"], self, "tag_origin");
 }
 sergei_spawn_init() {
   self.vox_alias_name = "sergei";
@@ -832,21 +832,21 @@ spawn_engineer_postCB() {
     self.landed = false;
     timeToDrop = GetTime() + 10000;
     landingThresh = dropOverNode.origin[2] + 36;
-    while (GetTime() < timeToDrop) {
+    while(GetTime() < timeToDrop) {
       if(self.origin[2] > landingThresh) {
         wait 0.05;
       } else {
-        self PlaySound("zmb_engineer_groundbang");
+        self playSound("zmb_engineer_groundbang");
         self.landed = true;
         break;
       }
     }
     if(self.landed) {
-      PlayFxOnTag(level._effect["betty_explode"], self, "tag_origin");
+      playFXOnTag(level._effect["betty_explode"], self, "tag_origin");
       playRumbleOnPosition("explosion_generic", self.origin);
       if(RandomInt(100) < 35) {
         time = getAnimLength( % ai_zombie_boss_enrage_start);
-        self playsound("zmb_boss_vox_hit");
+        self playSound("zmb_boss_vox_hit");
         self animscripted("groundhit_anim", self.origin, self.angles, % ai_zombie_boss_enrage_start, "normal", % body, 3);
         time = time / 4.0;
         wait(time);
@@ -858,10 +858,10 @@ spawn_engineer_postCB() {
       self DoDamage(self.health + 500, self.origin);
     }
   }
-  while (1) {
+  while(1) {
     if(self.health < int(self.maxhealth * 0.7)) {
       self.walkOnly = undefined;
-      self playsound("zmb_boss_vox_hit");
+      self playSound("zmb_boss_vox_hit");
       set_zombie_run_cycle();
       break;
     }
@@ -880,7 +880,7 @@ zombie_kite_watch() {
   max_anim_playback = 2;
   max_time_till_fullspeed = 100;
   increment = (max_anim_playback - self.moveplaybackrate) / max_time_till_fullspeed;
-  while (max_time_till_fullspeed > 0) {
+  while(max_time_till_fullspeed > 0) {
     self.moveplaybackrate += increment;
     if(self.moveplaybackrate > max_anim_playback) {
       self.moveplaybackrate = max_anim_playback;
@@ -898,7 +898,7 @@ zombie_killer_failsafe() {
     self thread zombie_kite_watch();
   }
   fails = 0;
-  while (isDefined(self) && !flag("exits_open")) {
+  while(isDefined(self) && !flag("exits_open")) {
     if(flag("round_is_active")) {
       wait 1;
       continue;
@@ -920,7 +920,7 @@ zombie_killer_failsafe() {
     }
     close = false;
     players = GetPlayers();
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       distSQ = distanceSquared(self.origin, players[i].origin);
       if(distSQ < 1024 * 1024) {
         close = true;
@@ -962,21 +962,21 @@ zombie_alive_audio() {
   self.playing_attack_vox = false;
   self.playing_movement_vox = false;
   wait(RandomFloatRange(.5, 1.5));
-  while (1) {
+  while(1) {
     players = get_players();
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       if((DistanceSquared(self.origin, players[i].origin) < 50 * 50) && (level.attack_vox <= 3) && !self.playing_attack_vox) {
         level.attack_vox++;
         self.playing_attack_vox = true;
         self thread vox_timer("attack");
-        self PlaySound(alias + "attack");
+        self playSound(alias + "attack");
       }
     }
     if(!self.playing_movement_vox && !self.playing_attack_vox && (level.movement_vox <= 8)) {
       level.movement_vox++;
       self.playing_movement_vox = true;
       self thread vox_timer("movement");
-      self PlaySound(alias + "move");
+      self playSound(alias + "move");
     }
     wait(.1);
   }
@@ -1003,6 +1003,6 @@ vox_timer(type) {
 zombie_death_audio(alias) {
   self waittill("death");
   if(isDefined(self))
-    self PlaySound(alias + "death");
+    self playSound(alias + "death");
 }
 �

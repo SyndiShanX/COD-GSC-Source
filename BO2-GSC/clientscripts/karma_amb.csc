@@ -213,7 +213,7 @@ main() {
 play_muzak_lobby() {
   level waittill("clr_sec");
   wait 4;
-  playsound(0, "mus_karma_checkin_end", (4672, -8356, 1067));
+  playSound(0, "mus_karma_checkin_end", (4672, -8356, 1067));
 }
 
 playlobbywalla() {
@@ -261,7 +261,7 @@ snd_spiderbot_look_servo(loop) {
 
 snd_spiderbot_look_servo_start(loopsoundent) {
   loopsoundent = spawn(0, self.origin, "script_origin");
-  loopsound = loopsoundent playloopsound("veh_spiderbot_look_servo", 0);
+  loopsound = loopsoundent playLoopSound("veh_spiderbot_look_servo", 0);
   self thread snd_spiderbot_look_servo(loopsound);
   self waittill_any("entityshutdown", "drpdn");
   loopsoundent stoploopsound();
@@ -352,8 +352,8 @@ play_loops_for_player(player) {
   loop_ent_1 = spawn(0, (0, 0, 0), "script_origin");
   loop_ent_2 = spawn(0, (0, 0, 0), "script_origin");
   self thread loop_cleanup("exit_vehicle", loop_ent_1, loop_ent_2);
-  loop_ent_1 playloopsound("veh_spiderbot_ui_plr_loop1", 1);
-  loop_ent_2 playloopsound("veh_spiderbot_ui_plr_loop2", 1);
+  loop_ent_1 playLoopSound("veh_spiderbot_ui_plr_loop1", 1);
+  loop_ent_2 playLoopSound("veh_spiderbot_ui_plr_loop2", 1);
 }
 
 play_engine_audio() {
@@ -363,7 +363,7 @@ play_engine_audio() {
 
   while(true) {
     if(self getspeed() >= 5)
-      loop_ent_1 playloopsound("veh_spiderbot_legs_loop_front", 0.05);
+      loop_ent_1 playLoopSound("veh_spiderbot_legs_loop_front", 0.05);
     else
       loop_ent_1 stoploopsound(0.1);
 
@@ -375,7 +375,7 @@ play_static_loop() {
   level endon("spiderbot_audio_cleanup");
   loop_ent_1 = spawn(0, (0, 0, 0), "script_origin");
   self thread loop_cleanup("exit_vehicle", loop_ent_1);
-  loop_id = loop_ent_1 playloopsound("veh_spiderbot_static_loop", 1);
+  loop_id = loop_ent_1 playLoopSound("veh_spiderbot_static_loop", 1);
   setsoundvolume(loop_id, 0);
 
   while(true) {
@@ -411,7 +411,7 @@ loop_cleanup(string, ent1, ent2, ent3, ent4) {
 
 spiderbot_amb_convo_triggers() {
   wait 5;
-  array_thread(getentarray(0, "audio_spiderbot_convo", "targetname"), ::waitfor_convo_trigger);
+  array_thread(getEntArray(0, "audio_spiderbot_convo", "targetname"), ::waitfor_convo_trigger);
 }
 
 waitfor_convo_trigger() {
@@ -419,7 +419,7 @@ waitfor_convo_trigger() {
   struct = getstruct(self.target, "targetname");
 
   if(isDefined(struct.script_sound))
-    playsound(0, struct.script_sound, struct.origin);
+    playSound(0, struct.script_sound, struct.origin);
 }
 
 waitfor_bodyscan() {
@@ -437,31 +437,31 @@ play_intro_blockout_pa_vox() {
   level endon("slpa");
   wait 5;
   location = [];
-  location[0] = spawnstruct();
+  location[0] = spawnStruct();
   location[0].origin = (5172, -10291, 1145);
   location[0].alias = "vox_blk_pa_welcome_lrg";
-  location[1] = spawnstruct();
+  location[1] = spawnStruct();
   location[1].origin = (5063, -9699, 1036);
   location[1].alias = "vox_blk_pa_welcome_sml";
-  location[2] = spawnstruct();
+  location[2] = spawnStruct();
   location[2].origin = (5265, -9697, 1039);
   location[2].alias = "vox_blk_pa_welcome_sml";
-  location[3] = spawnstruct();
+  location[3] = spawnStruct();
   location[3].origin = (5158, -8890, 1058);
   location[3].alias = "vox_blk_pa_welcome_sml";
-  location[4] = spawnstruct();
+  location[4] = spawnStruct();
   location[4].origin = (5159, -8286, 818);
   location[4].alias = "vox_blk_pa_welcome_sml";
-  location[5] = spawnstruct();
+  location[5] = spawnStruct();
   location[5].origin = (4958, -7645, 769);
   location[5].alias = "vox_blk_pa_welcome_sml";
-  location[6] = spawnstruct();
+  location[6] = spawnStruct();
   location[6].origin = (5373, -7589, 773);
   location[6].alias = "vox_blk_pa_welcome_sml";
 
   while(true) {
     for(i = 0; i < location.size; i++)
-      playsound(0, location[i].alias, location[i].origin);
+      playSound(0, location[i].alias, location[i].origin);
 
     wait 18;
   }
@@ -470,7 +470,7 @@ play_intro_blockout_pa_vox() {
 primary_alarm() {
   level waittill("alarm_on");
   sound_ent = spawn(0, self.origin, "script_origin");
-  sound_ent playloopsound("evt_primary_alarm", 0.1);
+  sound_ent playLoopSound("evt_primary_alarm", 0.1);
   wait 10;
   sound_ent stoploopsound(1);
   wait 1;
@@ -479,7 +479,7 @@ primary_alarm() {
 
 main_area_pa_vox_setup() {
   level waittill("slpa");
-  test = getentarray(0, "karma_pa_lobby", "targetname");
+  test = getEntArray(0, "karma_pa_lobby", "targetname");
 
   if(!isDefined(test[0])) {
     return;
@@ -495,12 +495,12 @@ main_area_pa_vox_setup() {
 
   array_vox_remind = array_randomize(pa_vox[0]);
   array_vox_ad = array_randomize(pa_vox[1]);
-  array_thread(getentarray(0, "karma_pa_lobby", "targetname"), ::play_main_area_pa_muzak);
+  array_thread(getEntArray(0, "karma_pa_lobby", "targetname"), ::play_main_area_pa_muzak);
   level thread pick_and_play_pa_vox(pa_vox);
 }
 
 pick_and_play_pa_vox(pa_vox) {
-  ent_array = getentarray(0, "karma_pa_lobby", "targetname");
+  ent_array = getEntArray(0, "karma_pa_lobby", "targetname");
   num = 0;
   old_array = [];
   old_array[0] = pa_vox[0];
@@ -515,7 +515,7 @@ pick_and_play_pa_vox(pa_vox) {
     arrayremovevalue(pa_vox[num], alias);
 
     for(i = 0; i < ent_array.size; i++)
-      playsound(0, alias, ent_array[i].origin);
+      playSound(0, alias, ent_array[i].origin);
 
     if(pa_vox[num].size <= 0)
       pa_vox[num] = old_array[num];
@@ -526,7 +526,7 @@ pick_and_play_pa_vox(pa_vox) {
 }
 
 play_main_area_pa_muzak() {
-  self playloopsound("mus_karma_lobby", 1);
+  self playLoopSound("mus_karma_lobby", 1);
 }
 
 wait_to_start_club_music() {
@@ -536,14 +536,14 @@ wait_to_start_club_music() {
   ent2 = spawn(0, struct.origin, "script_origin");
   level thread play_club_lowend_until_door(struct);
   level waittill("scms");
-  ent1 playloopsound("blk_mus_club", 0.1);
+  ent1 playLoopSound("blk_mus_club", 0.1);
   level waittill("scm2");
   ent1 thread temp_stop_sound_wait();
-  ent2 playloopsound("blk_mus_club_quiet", 0.1);
-  playsound(0, "evt_enterclub_crowd_front", (0, 0, 0));
+  ent2 playLoopSound("blk_mus_club_quiet", 0.1);
+  playSound(0, "evt_enterclub_crowd_front", (0, 0, 0));
   level waittill("scm3");
   ent2 stoploopsound(1);
-  ent1 playloopsound("blk_mus_club_fight", 0.1);
+  ent1 playLoopSound("blk_mus_club_fight", 0.1);
   wait 110;
   ent1 stoploopsound(3);
   wait 3;
@@ -558,7 +558,7 @@ temp_stop_sound_wait() {
 play_club_lowend_until_door(struct) {
   level waittill("scle");
   ent1 = spawn(0, struct.origin, "script_origin");
-  ent1 playloopsound("blk_mus_club_lowend", 3);
+  ent1 playLoopSound("blk_mus_club_lowend", 3);
   level waittill("scms");
   ent1 stoploopsound(0.5);
   wait 2;

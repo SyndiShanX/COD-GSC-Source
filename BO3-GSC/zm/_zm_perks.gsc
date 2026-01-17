@@ -38,37 +38,35 @@ function init() {
   initialize_custom_perk_arrays();
   perk_machine_spawn_init();
   vending_weapon_upgrade_trigger = [];
-  vending_triggers = getentarray("zombie_vending", "targetname");
+  vending_triggers = getEntArray("zombie_vending", "targetname");
   if(vending_triggers.size < 1) {
     return;
   }
   level.machine_assets = [];
-  if(!isdefined(level.custom_vending_precaching)) {
-    level.custom_vending_precaching = & default_vending_precaching;
+  if(!isDefined(level.custom_vending_precaching)) {
+    level.custom_vending_precaching = &default_vending_precaching;
   }
   [[level.custom_vending_precaching]]();
   zombie_utility::set_zombie_var("zombie_perk_cost", 2000);
-  array::thread_all(vending_triggers, & vending_trigger_think);
-  array::thread_all(vending_triggers, & electric_perks_dialog);
+  array::thread_all(vending_triggers, &vending_trigger_think);
+  array::thread_all(vending_triggers, &electric_perks_dialog);
   if(level._custom_perks.size > 0) {
     a_keys = getarraykeys(level._custom_perks);
-    for (i = 0; i < a_keys.size; i++) {
-      if(isdefined(level._custom_perks[a_keys[i]].perk_machine_thread)) {
+    for(i = 0; i < a_keys.size; i++) {
+      if(isDefined(level._custom_perks[a_keys[i]].perk_machine_thread)) {
         level thread[[level._custom_perks[a_keys[i]].perk_machine_thread]]();
       }
-      if(isdefined(level._custom_perks[a_keys[i]].perk_machine_power_override_thread)) {
+      if(isDefined(level._custom_perks[a_keys[i]].perk_machine_power_override_thread)) {
         level thread[[level._custom_perks[a_keys[i]].perk_machine_power_override_thread]]();
         continue;
       }
-      if(isdefined(level._custom_perks[a_keys[i]].alias) && isdefined(level._custom_perks[a_keys[i]].radiant_machine_name) && isdefined(level._custom_perks[a_keys[i]].machine_light_effect)) {
+      if(isDefined(level._custom_perks[a_keys[i]].alias) && isDefined(level._custom_perks[a_keys[i]].radiant_machine_name) && isDefined(level._custom_perks[a_keys[i]].machine_light_effect)) {
         level thread perk_machine_think(a_keys[i], level._custom_perks[a_keys[i]]);
       }
     }
   }
-  if(isdefined(level.quantum_bomb_register_result_func)) {
-    [
-      [level.quantum_bomb_register_result_func]
-    ]("give_nearest_perk", & quantum_bomb_give_nearest_perk_result, 10, & quantum_bomb_give_nearest_perk_validation);
+  if(isDefined(level.quantum_bomb_register_result_func)) {
+    [[level.quantum_bomb_register_result_func]]("give_nearest_perk", &quantum_bomb_give_nearest_perk_result, 10, &quantum_bomb_give_nearest_perk_validation);
   }
   level thread perk_hostmigration();
 }
@@ -79,41 +77,41 @@ function perk_machine_think(str_key, s_custom_perk) {
   str_on = s_custom_perk.alias + "_on";
   str_off = s_custom_perk.alias + "_off";
   str_notify = str_key + "_power_on";
-  while (true) {
-    machine = getentarray(s_custom_perk.radiant_machine_name, "targetname");
-    machine_triggers = getentarray(s_custom_perk.radiant_machine_name, "target");
-    for (i = 0; i < machine.size; i++) {
-      machine[i] setmodel(level.machine_assets[str_key].off_model);
+  while(true) {
+    machine = getEntArray(s_custom_perk.radiant_machine_name, "targetname");
+    machine_triggers = getEntArray(s_custom_perk.radiant_machine_name, "target");
+    for(i = 0; i < machine.size; i++) {
+      machine[i] setModel(level.machine_assets[str_key].off_model);
       machine[i] solid();
     }
     level thread do_initial_power_off_callback(machine, str_key);
-    array::thread_all(machine_triggers, & set_power_on, 0);
+    array::thread_all(machine_triggers, &set_power_on, 0);
     level waittill(str_on);
-    for (i = 0; i < machine.size; i++) {
-      machine[i] setmodel(level.machine_assets[str_key].on_model);
+    for(i = 0; i < machine.size; i++) {
+      machine[i] setModel(level.machine_assets[str_key].on_model);
       machine[i] vibrate(vectorscale((0, -1, 0), 100), 0.3, 0.4, 3);
-      machine[i] playsound("zmb_perks_power_on");
+      machine[i] playSound("zmb_perks_power_on");
       machine[i] thread perk_fx(s_custom_perk.machine_light_effect);
       machine[i] thread play_loop_on_machine();
     }
     level notify(str_notify);
-    array::thread_all(machine_triggers, & set_power_on, 1);
-    if(isdefined(level.machine_assets[str_key].power_on_callback)) {
+    array::thread_all(machine_triggers, &set_power_on, 1);
+    if(isDefined(level.machine_assets[str_key].power_on_callback)) {
       array::thread_all(machine, level.machine_assets[str_key].power_on_callback);
     }
     level waittill(str_off);
-    if(isdefined(level.machine_assets[str_key].power_off_callback)) {
+    if(isDefined(level.machine_assets[str_key].power_off_callback)) {
       array::thread_all(machine, level.machine_assets[str_key].power_off_callback);
     }
-    array::thread_all(machine, & turn_perk_off);
+    array::thread_all(machine, &turn_perk_off);
   }
 }
 
 function default_vending_precaching() {
   if(level._custom_perks.size > 0) {
     a_keys = getarraykeys(level._custom_perks);
-    for (i = 0; i < a_keys.size; i++) {
-      if(isdefined(level._custom_perks[a_keys[i]].precache_func)) {
+    for(i = 0; i < a_keys.size; i++) {
+      if(isDefined(level._custom_perks[a_keys[i]].precache_func)) {
         level[[level._custom_perks[a_keys[i]].precache_func]]();
       }
     }
@@ -121,11 +119,11 @@ function default_vending_precaching() {
 }
 
 function do_initial_power_off_callback(machine_array, perkname) {
-  if(!isdefined(level.machine_assets[perkname])) {
+  if(!isDefined(level.machine_assets[perkname])) {
     println("");
     return;
   }
-  if(!isdefined(level.machine_assets[perkname].power_off_callback)) {
+  if(!isDefined(level.machine_assets[perkname].power_off_callback)) {
     return;
   }
   wait(0.05);
@@ -133,14 +131,12 @@ function do_initial_power_off_callback(machine_array, perkname) {
 }
 
 function use_solo_revive() {
-  if(isdefined(level.override_use_solo_revive)) {
-    return [
-      [level.override_use_solo_revive]
-    ]();
+  if(isDefined(level.override_use_solo_revive)) {
+    return [[level.override_use_solo_revive]]();
   }
   players = getplayers();
   solo_mode = 0;
-  if(players.size == 1 || (isdefined(level.force_solo_quick_revive) && level.force_solo_quick_revive)) {
+  if(players.size == 1 || (isDefined(level.force_solo_quick_revive) && level.force_solo_quick_revive)) {
     solo_mode = 1;
   }
   level.using_solo_revive = solo_mode;
@@ -153,11 +149,11 @@ function set_power_on(state) {
 
 function turn_perk_off(ishidden) {
   self notify("stop_loopsound");
-  if(!(isdefined(self.b_keep_when_turned_off) && self.b_keep_when_turned_off)) {
+  if(!(isDefined(self.b_keep_when_turned_off) && self.b_keep_when_turned_off)) {
     newmachine = spawn("script_model", self.origin);
     newmachine.angles = self.angles;
     newmachine.targetname = self.targetname;
-    if(isdefined(ishidden) && ishidden) {
+    if(isDefined(ishidden) && ishidden) {
       newmachine.ishidden = 1;
       newmachine ghost();
       newmachine notsolid();
@@ -169,11 +165,11 @@ function turn_perk_off(ishidden) {
 }
 
 function play_loop_on_machine() {
-  if(isdefined(level.sndperksacolaloopoverride)) {
+  if(isDefined(level.sndperksacolaloopoverride)) {
     return;
   }
   sound_ent = spawn("script_origin", self.origin);
-  sound_ent playloopsound("zmb_perks_machine_loop");
+  sound_ent playLoopSound("zmb_perks_machine_loop");
   sound_ent linkto(self);
   self waittill("stop_loopsound");
   sound_ent unlink();
@@ -181,24 +177,24 @@ function play_loop_on_machine() {
 }
 
 function perk_fx(fx, turnofffx) {
-  if(isdefined(turnofffx)) {
+  if(isDefined(turnofffx)) {
     self.perk_fx = 0;
-    if(isdefined(self.b_keep_when_turned_off) && self.b_keep_when_turned_off && isdefined(self.s_fxloc)) {
+    if(isDefined(self.b_keep_when_turned_off) && self.b_keep_when_turned_off && isDefined(self.s_fxloc)) {
       self.s_fxloc delete();
     }
   } else {
     wait(3);
-    if(!isdefined(self)) {
+    if(!isDefined(self)) {
       return;
     }
-    if(!(isdefined(self.b_keep_when_turned_off) && self.b_keep_when_turned_off)) {
-      if(isdefined(self) && (!(isdefined(self.perk_fx) && self.perk_fx))) {
-        playfxontag(level._effect[fx], self, "tag_origin");
+    if(!(isDefined(self.b_keep_when_turned_off) && self.b_keep_when_turned_off)) {
+      if(isDefined(self) && (!(isDefined(self.perk_fx) && self.perk_fx))) {
+        playFXOnTag(level._effect[fx], self, "tag_origin");
         self.perk_fx = 1;
       }
-    } else if(isdefined(self) && !isdefined(self.s_fxloc)) {
+    } else if(isDefined(self) && !isDefined(self.s_fxloc)) {
       self.s_fxloc = util::spawn_model("tag_origin", self.origin);
-      playfxontag(level._effect[fx], self.s_fxloc, "tag_origin");
+      playFXOnTag(level._effect[fx], self.s_fxloc, "tag_origin");
       self.perk_fx = 1;
     }
   }
@@ -215,11 +211,11 @@ function electric_perks_dialog() {
   self endon("warning_dialog");
   level endon("switch_flipped");
   timer = 0;
-  while (true) {
+  while(true) {
     wait(0.5);
     players = getplayers();
-    for (i = 0; i < players.size; i++) {
-      if(!isdefined(players[i])) {
+    for(i = 0; i < players.size; i++) {
+      if(!isDefined(players[i])) {
         continue;
       }
       dist = distancesquared(players[i].origin, self.origin);
@@ -232,7 +228,7 @@ function electric_perks_dialog() {
         timer++;
       }
       if(dist < 4900 && timer == 3) {
-        if(!isdefined(players[i])) {
+        if(!isDefined(players[i])) {
           continue;
         }
         players[i] thread zm_utility::do_player_vo("vox_start", 5);
@@ -247,12 +243,10 @@ function electric_perks_dialog() {
 function reset_vending_hint_string() {
   perk = self.script_noteworthy;
   solo = use_solo_revive();
-  if(isdefined(level._custom_perks)) {
-    if(isdefined(level._custom_perks[perk]) && isdefined(level._custom_perks[perk].cost) && isdefined(level._custom_perks[perk].hint_string)) {
+  if(isDefined(level._custom_perks)) {
+    if(isDefined(level._custom_perks[perk]) && isDefined(level._custom_perks[perk].cost) && isDefined(level._custom_perks[perk].hint_string)) {
       if(isfunctionptr(level._custom_perks[perk].cost)) {
-        n_cost = [
-          [level._custom_perks[perk].cost]
-        ]();
+        n_cost = [[level._custom_perks[perk].cost]]();
       } else {
         n_cost = level._custom_perks[perk].cost;
       }
@@ -262,7 +256,7 @@ function reset_vending_hint_string() {
 }
 
 function vending_trigger_can_player_use(player) {
-  if(player laststand::player_is_in_laststand() || (isdefined(player.intermission) && player.intermission)) {
+  if(player laststand::player_is_in_laststand() || (isDefined(player.intermission) && player.intermission)) {
     return false;
   }
   if(player zm_utility::in_revive_trigger()) {
@@ -290,19 +284,19 @@ function vending_trigger_think() {
   solo = 0;
   start_on = 0;
   level.revive_machine_is_solo = 0;
-  if(isdefined(perk) && perk == "specialty_quickrevive") {
+  if(isDefined(perk) && perk == "specialty_quickrevive") {
     level flag::wait_till("start_zombie_round_logic");
     solo = use_solo_revive();
     self endon("stop_quickrevive_logic");
     level.quick_revive_trigger = self;
     if(solo) {
-      if(!(isdefined(level.revive_machine_is_solo) && level.revive_machine_is_solo)) {
-        if(!(isdefined(level.initial_quick_revive_power_off) && level.initial_quick_revive_power_off)) {
+      if(!(isDefined(level.revive_machine_is_solo) && level.revive_machine_is_solo)) {
+        if(!(isDefined(level.initial_quick_revive_power_off) && level.initial_quick_revive_power_off)) {
           start_on = 1;
         }
         players = getplayers();
         foreach(player in players) {
-          if(!isdefined(player.lives)) {
+          if(!isDefined(player.lives)) {
             player.lives = 0;
           }
         }
@@ -315,7 +309,7 @@ function vending_trigger_think() {
   self setcursorhint("HINT_NOICON");
   self usetriggerrequirelookat();
   cost = level.zombie_vars["zombie_perk_cost"];
-  if(isdefined(level._custom_perks[perk]) && isdefined(level._custom_perks[perk].cost)) {
+  if(isDefined(level._custom_perks[perk]) && isDefined(level._custom_perks[perk].cost)) {
     if(isint(level._custom_perks[perk].cost)) {
       cost = level._custom_perks[perk].cost;
     } else {
@@ -330,20 +324,20 @@ function vending_trigger_think() {
     level waittill(notify_name);
   }
   start_on = 0;
-  if(!isdefined(level._perkmachinenetworkchoke)) {
+  if(!isDefined(level._perkmachinenetworkchoke)) {
     level._perkmachinenetworkchoke = 0;
   } else {
     level._perkmachinenetworkchoke++;
   }
-  for (i = 0; i < level._perkmachinenetworkchoke; i++) {
+  for(i = 0; i < level._perkmachinenetworkchoke; i++) {
     util::wait_network_frame();
   }
   self thread zm_audio::sndperksjingles_timer();
   self thread check_player_has_perk(perk);
-  if(isdefined(level._custom_perks[perk]) && isdefined(level._custom_perks[perk].hint_string)) {
+  if(isDefined(level._custom_perks[perk]) && isDefined(level._custom_perks[perk].hint_string)) {
     self sethintstring(level._custom_perks[perk].hint_string, cost);
   }
-  for (;;) {
+  for(;;) {
     self waittill("trigger", player);
     index = zm_utility::get_player_index(player);
     if(!vending_trigger_can_player_use(player)) {
@@ -356,12 +350,12 @@ function vending_trigger_think() {
         cheat = 1;
       }
       if(cheat != 1) {
-        self playsound("evt_perk_deny");
+        self playSound("evt_perk_deny");
         player zm_audio::create_and_play_dialog("general", "sigh");
         continue;
       }
     }
-    if(isdefined(level.custom_perk_validation)) {
+    if(isDefined(level.custom_perk_validation)) {
       valid = self[[level.custom_perk_validation]](player);
       if(!valid) {
         continue;
@@ -372,12 +366,12 @@ function vending_trigger_think() {
       current_cost = player zm_pers_upgrades_functions::pers_upgrade_double_points_cost(current_cost);
     }
     if(!player zm_score::can_player_purchase(current_cost)) {
-      self playsound("evt_perk_deny");
+      self playSound("evt_perk_deny");
       player zm_audio::create_and_play_dialog("general", "outofmoney");
       continue;
     }
     if(!player zm_utility::can_player_purchase_perk()) {
-      self playsound("evt_perk_deny");
+      self playSound("evt_perk_deny");
       player zm_audio::create_and_play_dialog("general", "sigh");
       continue;
     }
@@ -386,7 +380,7 @@ function vending_trigger_think() {
     player zm_score::minus_to_player_score(current_cost);
     bb::logpurchaseevent(player, self, current_cost, perk, 0, "_perk", "_purchased");
     perkhash = -1;
-    if(isdefined(level._custom_perks[perk]) && isdefined(level._custom_perks[perk].var_2c8ee667)) {
+    if(isDefined(level._custom_perks[perk]) && isDefined(level._custom_perks[perk].var_2c8ee667)) {
       perkhash = level._custom_perks[perk].var_2c8ee667;
     }
     player recordmapevent(29, gettime(), self.origin, level.round_number, perkhash);
@@ -407,21 +401,21 @@ function vending_trigger_post_think(player, perk) {
     player thread wait_give_perk(perk, 1);
   }
   player perk_give_bottle_end(gun, perk);
-  if(player laststand::player_is_in_laststand() || (isdefined(player.intermission) && player.intermission)) {
+  if(player laststand::player_is_in_laststand() || (isDefined(player.intermission) && player.intermission)) {
     return;
   }
   player notify("burp");
-  if(isdefined(level.pers_upgrade_cash_back) && level.pers_upgrade_cash_back) {
+  if(isDefined(level.pers_upgrade_cash_back) && level.pers_upgrade_cash_back) {
     player zm_pers_upgrades_functions::cash_back_player_drinks_perk();
   }
-  if(isdefined(level.pers_upgrade_perk_lose) && level.pers_upgrade_perk_lose) {
+  if(isDefined(level.pers_upgrade_perk_lose) && level.pers_upgrade_perk_lose) {
     player thread zm_pers_upgrades_functions::pers_upgrade_perk_lose_bought();
   }
-  if(isdefined(level.perk_bought_func)) {
+  if(isDefined(level.perk_bought_func)) {
     player[[level.perk_bought_func]](perk);
   }
   player.perk_purchased = undefined;
-  if(!(isdefined(self.power_on) && self.power_on)) {
+  if(!(isDefined(self.power_on) && self.power_on)) {
     wait(1);
     perk_pause(self.script_noteworthy);
   }
@@ -437,10 +431,10 @@ function wait_give_perk(perk, bought) {
 }
 
 function return_retained_perks() {
-  if(isdefined(self._retain_perks_array)) {
+  if(isDefined(self._retain_perks_array)) {
     keys = getarraykeys(self._retain_perks_array);
     foreach(perk in keys) {
-      if(isdefined(self._retain_perks_array[perk]) && self._retain_perks_array[perk]) {
+      if(isDefined(self._retain_perks_array[perk]) && self._retain_perks_array[perk]) {
         self give_perk(perk, 0);
       }
     }
@@ -453,10 +447,10 @@ function give_perk_presentation(perk) {
   self endon("end_game");
   self endon("perk_abort_drinking");
   self zm_audio::playerexert("burp");
-  if(isdefined(level.remove_perk_vo_delay) && level.remove_perk_vo_delay) {
+  if(isDefined(level.remove_perk_vo_delay) && level.remove_perk_vo_delay) {
     self zm_audio::create_and_play_dialog("perk", perk);
   } else {
-    self util::delay(1.5, undefined, & zm_audio::create_and_play_dialog, "perk", perk);
+    self util::delay(1.5, undefined, &zm_audio::create_and_play_dialog, "perk", perk);
   }
   self setblur(9, 0.1);
   wait(0.1);
@@ -466,12 +460,12 @@ function give_perk_presentation(perk) {
 function give_perk(perk, bought) {
   self setperk(perk);
   self.num_perks++;
-  if(isdefined(bought) && bought) {
+  if(isDefined(bought) && bought) {
     self thread give_perk_presentation(perk);
     self notify("perk_bought", perk);
     self zm_stats::increment_challenge_stat("SURVIVALIST_BUY_PERK");
   }
-  if(isdefined(level._custom_perks[perk]) && isdefined(level._custom_perks[perk].player_thread_give)) {
+  if(isDefined(level._custom_perks[perk]) && isDefined(level._custom_perks[perk].player_thread_give)) {
     self thread[[level._custom_perks[perk].player_thread_give]]();
   }
   self set_perk_clientfield(perk, 1);
@@ -480,14 +474,14 @@ function give_perk(perk, bought) {
   self zm_stats::increment_client_stat(perk + "_drank");
   self zm_stats::increment_player_stat(perk + "_drank");
   self zm_stats::increment_player_stat("perks_drank");
-  if(!isdefined(self.perk_history)) {
+  if(!isDefined(self.perk_history)) {
     self.perk_history = [];
   }
   array::add(self.perk_history, perk, 0);
-  if(!isdefined(self.perks_active)) {
+  if(!isDefined(self.perks_active)) {
     self.perks_active = [];
   }
-  if(!isdefined(self.perks_active)) {
+  if(!isDefined(self.perks_active)) {
     self.perks_active = [];
   } else if(!isarray(self.perks_active)) {
     self.perks_active = array(self.perks_active);
@@ -520,7 +514,7 @@ function perk_set_max_health_if_jugg(str_perk, set_premaxhealth, clamp_health_to
     }
     case "health_reboot": {
       n_max_total_health = level.zombie_vars["player_base_health"];
-      if(isdefined(self.n_player_health_boost)) {
+      if(isDefined(self.n_player_health_boost)) {
         n_max_total_health = n_max_total_health + self.n_player_health_boost;
       }
       if(self hasperk("specialty_armorvest")) {
@@ -528,13 +522,13 @@ function perk_set_max_health_if_jugg(str_perk, set_premaxhealth, clamp_health_to
       }
     }
   }
-  if(isdefined(n_max_total_health)) {
+  if(isDefined(n_max_total_health)) {
     if(self zm_pers_upgrades_functions::pers_jugg_active()) {
       n_max_total_health = n_max_total_health + level.pers_jugg_upgrade_health_bonus;
     }
     self.maxhealth = n_max_total_health;
     self setmaxhealth(n_max_total_health);
-    if(isdefined(clamp_health_to_max_health) && clamp_health_to_max_health == 1) {
+    if(isDefined(clamp_health_to_max_health) && clamp_health_to_max_health == 1) {
       if(self.health > self.maxhealth) {
         self.health = self.maxhealth;
       }
@@ -548,9 +542,9 @@ function check_player_has_perk(perk) {
     return;
   }
   dist = 16384;
-  while (true) {
+  while(true) {
     players = getplayers();
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       if(distancesquared(players[i].origin, self.origin) < dist) {
         if(!players[i] hasperk(perk) && self vending_trigger_can_player_use(players[i]) && !players[i] has_perk_paused(perk) && !players[i] zm_utility::in_revive_trigger() && !zm_equipment::is_equipment_that_blocks_purchase(players[i] getcurrentweapon()) && !players[i] zm_equipment::hacker_active()) {
           self setinvisibletoplayer(players[i], 0);
@@ -574,13 +568,13 @@ function vending_set_hintstring(perk) {
 function perk_think(perk) {
   self endon("disconnect");
   if(getdvarint("") >= 5) {
-    if(isdefined(self.perk_hud[perk])) {
+    if(isDefined(self.perk_hud[perk])) {
       return;
     }
   }
   perk_str = perk + "_stop";
   result = self util::waittill_any_return("fake_death", "death", "player_downed", perk_str);
-  while (self bgb::lost_perk_override(perk)) {
+  while(self bgb::lost_perk_override(perk)) {
     result = self util::waittill_any_return("fake_death", "death", "player_downed", perk_str);
   }
   do_retain = 1;
@@ -588,31 +582,31 @@ function perk_think(perk) {
     do_retain = 0;
   }
   if(do_retain) {
-    if(isdefined(self._retain_perks) && self._retain_perks) {
+    if(isDefined(self._retain_perks) && self._retain_perks) {
       return;
     }
-    if(isdefined(self._retain_perks_array) && (isdefined(self._retain_perks_array[perk]) && self._retain_perks_array[perk])) {
+    if(isDefined(self._retain_perks_array) && (isDefined(self._retain_perks_array[perk]) && self._retain_perks_array[perk])) {
       return;
     }
   }
   self unsetperk(perk);
   self.num_perks--;
-  if(isdefined(level._custom_perks[perk]) && isdefined(level._custom_perks[perk].player_thread_take)) {
+  if(isDefined(level._custom_perks[perk]) && isDefined(level._custom_perks[perk].player_thread_take)) {
     self thread[[level._custom_perks[perk].player_thread_take]](0, perk_str, result);
   }
   self set_perk_clientfield(perk, 0);
   self.perk_purchased = undefined;
-  if(isdefined(level.perk_lost_func)) {
+  if(isDefined(level.perk_lost_func)) {
     self[[level.perk_lost_func]](perk);
   }
-  if(isdefined(self.perks_active) && isinarray(self.perks_active, perk)) {
+  if(isDefined(self.perks_active) && isinarray(self.perks_active, perk)) {
     arrayremovevalue(self.perks_active, perk, 0);
   }
   self notify("perk_lost");
 }
 
 function set_perk_clientfield(perk, state) {
-  if(isdefined(level._custom_perks[perk]) && isdefined(level._custom_perks[perk].clientfield_set)) {
+  if(isDefined(level._custom_perks[perk]) && isDefined(level._custom_perks[perk].clientfield_set)) {
     self[[level._custom_perks[perk].clientfield_set]](state);
   }
 }
@@ -635,7 +629,7 @@ function perk_give_bottle_begin(perk) {
   self zm_utility::disable_player_move_states(1);
   original_weapon = self getcurrentweapon();
   weapon = "";
-  if(isdefined(level._custom_perks[perk]) && isdefined(level._custom_perks[perk].perk_bottle_weapon)) {
+  if(isDefined(level._custom_perks[perk]) && isDefined(level._custom_perks[perk].perk_bottle_weapon)) {
     weapon = level._custom_perks[perk].perk_bottle_weapon;
   }
   self giveweapon(weapon);
@@ -649,10 +643,10 @@ function perk_give_bottle_end(original_weapon, perk) {
   assert(original_weapon != level.weaponrevivetool);
   self zm_utility::enable_player_move_states();
   weapon = "";
-  if(isdefined(level._custom_perks[perk]) && isdefined(level._custom_perks[perk].perk_bottle_weapon)) {
+  if(isDefined(level._custom_perks[perk]) && isDefined(level._custom_perks[perk].perk_bottle_weapon)) {
     weapon = level._custom_perks[perk].perk_bottle_weapon;
   }
-  if(self laststand::player_is_in_laststand() || (isdefined(self.intermission) && self.intermission)) {
+  if(self laststand::player_is_in_laststand() || (isDefined(self.intermission) && self.intermission)) {
     self takeweapon(weapon);
     return;
   }
@@ -671,7 +665,7 @@ function perk_give_bottle_end(original_weapon, perk) {
     self zm_weapons::switch_back_primary_weapon();
   }
   self waittill("weapon_change_complete");
-  if(!self laststand::player_is_in_laststand() && (!(isdefined(self.intermission) && self.intermission))) {
+  if(!self laststand::player_is_in_laststand() && (!(isDefined(self.intermission) && self.intermission))) {
     self zm_utility::decrement_is_drinking();
   }
 }
@@ -681,7 +675,7 @@ function perk_abort_drinking(post_delay) {
     self notify("perk_abort_drinking");
     self zm_utility::decrement_is_drinking();
     self zm_utility::enable_player_move_states();
-    if(isdefined(post_delay)) {
+    if(isDefined(post_delay)) {
       wait(post_delay);
     }
   }
@@ -691,9 +685,9 @@ function give_random_perk() {
   random_perk = undefined;
   a_str_perks = getarraykeys(level._custom_perks);
   perks = [];
-  for (i = 0; i < a_str_perks.size; i++) {
+  for(i = 0; i < a_str_perks.size; i++) {
     perk = a_str_perks[i];
-    if(isdefined(self.perk_purchased) && self.perk_purchased == perk) {
+    if(isDefined(self.perk_purchased) && self.perk_purchased == perk) {
       continue;
     }
     if(!self hasperk(perk) && !self has_perk_paused(perk)) {
@@ -713,9 +707,9 @@ function give_random_perk() {
 function lose_random_perk() {
   a_str_perks = getarraykeys(level._custom_perks);
   perks = [];
-  for (i = 0; i < a_str_perks.size; i++) {
+  for(i = 0; i < a_str_perks.size; i++) {
     perk = a_str_perks[i];
-    if(isdefined(self.perk_purchased) && self.perk_purchased == perk) {
+    if(isDefined(self.perk_purchased) && self.perk_purchased == perk) {
       continue;
     }
     if(self hasperk(perk) || self has_perk_paused(perk)) {
@@ -734,18 +728,18 @@ function lose_random_perk() {
 }
 
 function update_perk_hud() {
-  if(isdefined(self.perk_hud)) {
+  if(isDefined(self.perk_hud)) {
     keys = getarraykeys(self.perk_hud);
-    for (i = 0; i < self.perk_hud.size; i++) {
+    for(i = 0; i < self.perk_hud.size; i++) {
       self.perk_hud[keys[i]].x = i * 30;
     }
   }
 }
 
 function quantum_bomb_give_nearest_perk_validation(position) {
-  vending_triggers = getentarray("zombie_vending", "targetname");
+  vending_triggers = getEntArray("zombie_vending", "targetname");
   range_squared = 32400;
-  for (i = 0; i < vending_triggers.size; i++) {
+  for(i = 0; i < vending_triggers.size; i++) {
     if(distancesquared(vending_triggers[i].origin, position) < range_squared) {
       return true;
     }
@@ -755,21 +749,21 @@ function quantum_bomb_give_nearest_perk_validation(position) {
 
 function quantum_bomb_give_nearest_perk_result(position) {
   [[level.quantum_bomb_play_mystery_effect_func]](position);
-  vending_triggers = getentarray("zombie_vending", "targetname");
+  vending_triggers = getEntArray("zombie_vending", "targetname");
   nearest = 0;
-  for (i = 1; i < vending_triggers.size; i++) {
+  for(i = 1; i < vending_triggers.size; i++) {
     if(distancesquared(vending_triggers[i].origin, position) < distancesquared(vending_triggers[nearest].origin, position)) {
       nearest = i;
     }
   }
   players = getplayers();
   perk = vending_triggers[nearest].script_noteworthy;
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     player = players[i];
     if(player.sessionstate == "spectator" || player laststand::player_is_in_laststand()) {
       continue;
     }
-    if(!player hasperk(perk) && (!isdefined(player.perk_purchased) || player.perk_purchased != perk) && randomint(5)) {
+    if(!player hasperk(perk) && (!isDefined(player.perk_purchased) || player.perk_purchased != perk) && randomint(5)) {
       if(player == self) {
         self thread zm_audio::create_and_play_dialog("kill", "quant_good");
       }
@@ -780,19 +774,19 @@ function quantum_bomb_give_nearest_perk_result(position) {
 }
 
 function perk_pause(perk) {
-  if(isdefined(level.dont_unset_perk_when_machine_paused) && level.dont_unset_perk_when_machine_paused) {
+  if(isDefined(level.dont_unset_perk_when_machine_paused) && level.dont_unset_perk_when_machine_paused) {
     return;
   }
-  for (j = 0; j < getplayers().size; j++) {
+  for(j = 0; j < getplayers().size; j++) {
     player = getplayers()[j];
-    if(!isdefined(player.disabled_perks)) {
+    if(!isDefined(player.disabled_perks)) {
       player.disabled_perks = [];
     }
-    player.disabled_perks[perk] = isdefined(player.disabled_perks[perk]) && player.disabled_perks[perk] || player hasperk(perk);
+    player.disabled_perks[perk] = isDefined(player.disabled_perks[perk]) && player.disabled_perks[perk] || player hasperk(perk);
     if(player.disabled_perks[perk]) {
       player unsetperk(perk);
       player set_perk_clientfield(perk, 2);
-      if(isdefined(level._custom_perks[perk]) && isdefined(level._custom_perks[perk].player_thread_take)) {
+      if(isDefined(level._custom_perks[perk]) && isDefined(level._custom_perks[perk].player_thread_take)) {
         player thread[[level._custom_perks[perk].player_thread_take]](1);
       }
       println(((("" + player.name) + "") + perk) + "");
@@ -801,21 +795,21 @@ function perk_pause(perk) {
 }
 
 function perk_unpause(perk) {
-  if(isdefined(level.dont_unset_perk_when_machine_paused) && level.dont_unset_perk_when_machine_paused) {
+  if(isDefined(level.dont_unset_perk_when_machine_paused) && level.dont_unset_perk_when_machine_paused) {
     return;
   }
-  if(!isdefined(perk)) {
+  if(!isDefined(perk)) {
     return;
   }
-  for (j = 0; j < getplayers().size; j++) {
+  for(j = 0; j < getplayers().size; j++) {
     player = getplayers()[j];
-    if(isdefined(player.disabled_perks) && (isdefined(player.disabled_perks[perk]) && player.disabled_perks[perk])) {
+    if(isDefined(player.disabled_perks) && (isDefined(player.disabled_perks[perk]) && player.disabled_perks[perk])) {
       player.disabled_perks[perk] = 0;
       player set_perk_clientfield(perk, 1);
       player setperk(perk);
       println(((("" + player.name) + "") + perk) + "");
       player perk_set_max_health_if_jugg(perk, 0, 0);
-      if(isdefined(level._custom_perks[perk]) && isdefined(level._custom_perks[perk].player_thread_give)) {
+      if(isDefined(level._custom_perks[perk]) && isDefined(level._custom_perks[perk].player_thread_give)) {
         player thread[[level._custom_perks[perk].player_thread_give]]();
       }
     }
@@ -823,83 +817,83 @@ function perk_unpause(perk) {
 }
 
 function perk_pause_all_perks(power_zone) {
-  vending_triggers = getentarray("zombie_vending", "targetname");
+  vending_triggers = getEntArray("zombie_vending", "targetname");
   foreach(trigger in vending_triggers) {
-    if(!isdefined(power_zone)) {
+    if(!isDefined(power_zone)) {
       perk_pause(trigger.script_noteworthy);
       continue;
     }
-    if(isdefined(trigger.script_int) && trigger.script_int == power_zone) {
+    if(isDefined(trigger.script_int) && trigger.script_int == power_zone) {
       perk_pause(trigger.script_noteworthy);
     }
   }
 }
 
 function perk_unpause_all_perks(power_zone) {
-  vending_triggers = getentarray("zombie_vending", "targetname");
+  vending_triggers = getEntArray("zombie_vending", "targetname");
   foreach(trigger in vending_triggers) {
-    if(!isdefined(power_zone)) {
+    if(!isDefined(power_zone)) {
       perk_unpause(trigger.script_noteworthy);
       continue;
     }
-    if(isdefined(trigger.script_int) && trigger.script_int == power_zone) {
+    if(isDefined(trigger.script_int) && trigger.script_int == power_zone) {
       perk_unpause(trigger.script_noteworthy);
     }
   }
 }
 
 function has_perk_paused(perk) {
-  if(isdefined(self.disabled_perks) && isdefined(self.disabled_perks[perk]) && self.disabled_perks[perk]) {
+  if(isDefined(self.disabled_perks) && isDefined(self.disabled_perks[perk]) && self.disabled_perks[perk]) {
     return true;
   }
   return false;
 }
 
 function getvendingmachinenotify() {
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return "";
   }
   str_perk = undefined;
-  if(isdefined(level._custom_perks[self.script_noteworthy]) && isdefined(isdefined(level._custom_perks[self.script_noteworthy].alias))) {
+  if(isDefined(level._custom_perks[self.script_noteworthy]) && isDefined(isDefined(level._custom_perks[self.script_noteworthy].alias))) {
     str_perk = level._custom_perks[self.script_noteworthy].alias;
   }
   return str_perk;
 }
 
 function perk_machine_removal(machine, replacement_model) {
-  if(!isdefined(machine)) {
+  if(!isDefined(machine)) {
     return;
   }
   trig = getent(machine, "script_noteworthy");
   machine_model = undefined;
-  if(isdefined(trig)) {
+  if(isDefined(trig)) {
     trig notify("warning_dialog");
-    if(isdefined(trig.target)) {
-      parts = getentarray(trig.target, "targetname");
-      for (i = 0; i < parts.size; i++) {
-        if(isdefined(parts[i].classname) && parts[i].classname == "script_model") {
+    if(isDefined(trig.target)) {
+      parts = getEntArray(trig.target, "targetname");
+      for(i = 0; i < parts.size; i++) {
+        if(isDefined(parts[i].classname) && parts[i].classname == "script_model") {
           machine_model = parts[i];
           continue;
         }
-        if(isdefined(parts[i].script_noteworthy && parts[i].script_noteworthy == "clip")) {
+        if(isDefined(parts[i].script_noteworthy && parts[i].script_noteworthy == "clip")) {
           model_clip = parts[i];
           continue;
         }
         parts[i] delete();
       }
     }
-    if(isdefined(replacement_model) && isdefined(machine_model)) {
-      machine_model setmodel(replacement_model);
-    } else if(!isdefined(replacement_model) && isdefined(machine_model)) {
+    if(isDefined(replacement_model) && isDefined(machine_model)) {
+      machine_model setModel(replacement_model);
+    } else if(!isDefined(replacement_model) && isDefined(machine_model)) {
       machine_model delete();
-      if(isdefined(model_clip)) {
+      if(isDefined(model_clip)) {
         model_clip delete();
       }
-      if(isdefined(trig.clip)) {
+      if(isDefined(trig.clip)) {
         trig.clip delete();
       }
     }
-    if(isdefined(trig.bump)) {
+    if(isDefined(trig.bump)) {
       trig.bump delete();
     }
     trig delete();
@@ -909,18 +903,18 @@ function perk_machine_removal(machine, replacement_model) {
 function perk_machine_spawn_init() {
   match_string = "";
   location = level.scr_zm_map_start_location;
-  if(location == "default" || location == "" && isdefined(level.default_start_location)) {
+  if(location == "default" || location == "" && isDefined(level.default_start_location)) {
     location = level.default_start_location;
   }
   match_string = (level.scr_zm_ui_gametype + "_perks_") + location;
   a_s_spawn_pos = [];
-  if(isdefined(level.override_perk_targetname)) {
+  if(isDefined(level.override_perk_targetname)) {
     structs = struct::get_array(level.override_perk_targetname, "targetname");
   } else {
     structs = struct::get_array("zm_perk_machine", "targetname");
   }
   foreach(struct in structs) {
-    if(isdefined(struct.script_string)) {
+    if(isDefined(struct.script_string)) {
       tokens = strtok(struct.script_string, " ");
       foreach(token in tokens) {
         if(token == match_string) {
@@ -934,7 +928,7 @@ function perk_machine_spawn_init() {
   if(a_s_spawn_pos.size == 0) {
     return;
   }
-  if(isdefined(level.randomize_perk_machine_location) && level.randomize_perk_machine_location) {
+  if(isDefined(level.randomize_perk_machine_location) && level.randomize_perk_machine_location) {
     a_s_random_perk_locs = struct::get_array("perk_random_machine_location", "targetname");
     if(a_s_random_perk_locs.size > 0) {
       a_s_random_perk_locs = array::randomize(a_s_random_perk_locs);
@@ -943,17 +937,17 @@ function perk_machine_spawn_init() {
   }
   foreach(s_spawn_pos in a_s_spawn_pos) {
     perk = s_spawn_pos.script_noteworthy;
-    if(isdefined(perk) && isdefined(s_spawn_pos.model)) {
-      if(isdefined(level.randomize_perk_machine_location) && level.randomize_perk_machine_location && a_s_random_perk_locs.size > 0 && isdefined(s_spawn_pos.script_notify)) {
+    if(isDefined(perk) && isDefined(s_spawn_pos.model)) {
+      if(isDefined(level.randomize_perk_machine_location) && level.randomize_perk_machine_location && a_s_random_perk_locs.size > 0 && isDefined(s_spawn_pos.script_notify)) {
         s_new_loc = a_s_random_perk_locs[n_random_perks_assigned];
         s_spawn_pos.origin = s_new_loc.origin;
         s_spawn_pos.angles = s_new_loc.angles;
-        if(isdefined(s_new_loc.script_int)) {
+        if(isDefined(s_new_loc.script_int)) {
           s_spawn_pos.script_int = s_new_loc.script_int;
         }
-        if(isdefined(s_new_loc.target)) {
+        if(isDefined(s_new_loc.target)) {
           s_tell_location = struct::get(s_new_loc.target);
-          if(isdefined(s_tell_location)) {
+          if(isDefined(s_tell_location)) {
             util::spawn_model("p7_zm_perk_bottle_broken_" + perk, s_tell_location.origin, s_tell_location.angles);
           }
         }
@@ -962,17 +956,17 @@ function perk_machine_spawn_init() {
       t_use = spawn("trigger_radius_use", s_spawn_pos.origin + vectorscale((0, 0, 1), 60), 0, 40, 80);
       t_use.targetname = "zombie_vending";
       t_use.script_noteworthy = perk;
-      if(isdefined(s_spawn_pos.script_int)) {
+      if(isDefined(s_spawn_pos.script_int)) {
         t_use.script_int = s_spawn_pos.script_int;
       }
       t_use triggerignoreteam();
       perk_machine = spawn("script_model", s_spawn_pos.origin);
-      if(!isdefined(s_spawn_pos.angles)) {
+      if(!isDefined(s_spawn_pos.angles)) {
         s_spawn_pos.angles = (0, 0, 0);
       }
       perk_machine.angles = s_spawn_pos.angles;
-      perk_machine setmodel(s_spawn_pos.model);
-      if(isdefined(level._no_vending_machine_bump_trigs) && level._no_vending_machine_bump_trigs) {
+      perk_machine setModel(s_spawn_pos.model);
+      if(isDefined(level._no_vending_machine_bump_trigs) && level._no_vending_machine_bump_trigs) {
         bump_trigger = undefined;
       } else {
         bump_trigger = spawn("trigger_radius", s_spawn_pos.origin + vectorscale((0, 0, 1), 20), 0, 40, 80);
@@ -980,31 +974,31 @@ function perk_machine_spawn_init() {
         bump_trigger.script_sound = "zmb_perks_bump_bottle";
         bump_trigger.targetname = "audio_bump_trigger";
       }
-      if(isdefined(level._no_vending_machine_auto_collision) && level._no_vending_machine_auto_collision) {
+      if(isDefined(level._no_vending_machine_auto_collision) && level._no_vending_machine_auto_collision) {
         collision = undefined;
       } else {
         collision = spawn("script_model", s_spawn_pos.origin, 1);
         collision.angles = s_spawn_pos.angles;
-        collision setmodel("zm_collision_perks1");
+        collision setModel("zm_collision_perks1");
         collision.script_noteworthy = "clip";
         collision disconnectpaths();
       }
       t_use.clip = collision;
       t_use.machine = perk_machine;
       t_use.bump = bump_trigger;
-      if(isdefined(s_spawn_pos.script_notify)) {
+      if(isDefined(s_spawn_pos.script_notify)) {
         perk_machine.script_notify = s_spawn_pos.script_notify;
       }
-      if(isdefined(s_spawn_pos.target)) {
+      if(isDefined(s_spawn_pos.target)) {
         perk_machine.target = s_spawn_pos.target;
       }
-      if(isdefined(s_spawn_pos.blocker_model)) {
+      if(isDefined(s_spawn_pos.blocker_model)) {
         t_use.blocker_model = s_spawn_pos.blocker_model;
       }
-      if(isdefined(s_spawn_pos.script_int)) {
+      if(isDefined(s_spawn_pos.script_int)) {
         perk_machine.script_int = s_spawn_pos.script_int;
       }
-      if(isdefined(s_spawn_pos.turn_on_notify)) {
+      if(isDefined(s_spawn_pos.turn_on_notify)) {
         perk_machine.turn_on_notify = s_spawn_pos.turn_on_notify;
       }
       t_use.script_sound = "mus_perks_speed_jingle";
@@ -1013,37 +1007,35 @@ function perk_machine_spawn_init() {
       t_use.target = "vending_sleight";
       perk_machine.script_string = "speedcola_perk";
       perk_machine.targetname = "vending_sleight";
-      if(isdefined(bump_trigger)) {
+      if(isDefined(bump_trigger)) {
         bump_trigger.script_string = "speedcola_perk";
       }
-      if(isdefined(level._custom_perks[perk]) && isdefined(level._custom_perks[perk].perk_machine_set_kvps)) {
-        [
-          [level._custom_perks[perk].perk_machine_set_kvps]
-        ](t_use, perk_machine, bump_trigger, collision);
+      if(isDefined(level._custom_perks[perk]) && isDefined(level._custom_perks[perk].perk_machine_set_kvps)) {
+        [[level._custom_perks[perk].perk_machine_set_kvps]](t_use, perk_machine, bump_trigger, collision);
       }
     }
   }
 }
 
 function get_perk_machine_start_state(perk) {
-  if(isdefined(level.vending_machines_powered_on_at_start) && level.vending_machines_powered_on_at_start) {
+  if(isDefined(level.vending_machines_powered_on_at_start) && level.vending_machines_powered_on_at_start) {
     return 1;
   }
   if(perk == "specialty_quickrevive") {
-    assert(isdefined(level.revive_machine_is_solo));
+    assert(isDefined(level.revive_machine_is_solo));
     return level.revive_machine_is_solo;
   }
   return 0;
 }
 
 function perks_register_clientfield() {
-  if(isdefined(level.zombiemode_using_perk_intro_fx) && level.zombiemode_using_perk_intro_fx) {
+  if(isDefined(level.zombiemode_using_perk_intro_fx) && level.zombiemode_using_perk_intro_fx) {
     clientfield::register("scriptmover", "clientfield_perk_intro_fx", 1, 1, "int");
   }
-  if(isdefined(level._custom_perks)) {
+  if(isDefined(level._custom_perks)) {
     a_keys = getarraykeys(level._custom_perks);
-    for (i = 0; i < a_keys.size; i++) {
-      if(isdefined(level._custom_perks[a_keys[i]].clientfield_register)) {
+    for(i = 0; i < a_keys.size; i++) {
+      if(isDefined(level._custom_perks[a_keys[i]].clientfield_register)) {
         level[[level._custom_perks[a_keys[i]].clientfield_register]]();
       }
     }
@@ -1051,10 +1043,10 @@ function perks_register_clientfield() {
 }
 
 function thread_bump_trigger() {
-  for (;;) {
+  for(;;) {
     self waittill("trigger", trigplayer);
-    trigplayer playsound(self.script_sound);
-    while (zm_utility::is_player_valid(trigplayer) && trigplayer istouching(self)) {
+    trigplayer playSound(self.script_sound);
+    while(zm_utility::is_player_valid(trigplayer) && trigplayer istouching(self)) {
       wait(0.5);
     }
   }
@@ -1062,9 +1054,9 @@ function thread_bump_trigger() {
 
 function players_are_in_perk_area(perk_machine) {
   perk_area_origin = level.quick_revive_default_origin;
-  if(isdefined(perk_machine._linked_ent)) {
+  if(isDefined(perk_machine._linked_ent)) {
     perk_area_origin = perk_machine._linked_ent.origin;
-    if(isdefined(perk_machine._linked_ent_offset)) {
+    if(isDefined(perk_machine._linked_ent_offset)) {
       perk_area_origin = perk_area_origin + perk_machine._linked_ent_offset;
     }
   }
@@ -1083,12 +1075,12 @@ function perk_hostmigration() {
   level endon("end_game");
   level notify("perk_hostmigration");
   level endon("perk_hostmigration");
-  while (true) {
+  while(true) {
     level waittill("host_migration_end");
-    if(isdefined(level._custom_perks) && level._custom_perks.size > 0) {
+    if(isDefined(level._custom_perks) && level._custom_perks.size > 0) {
       a_keys = getarraykeys(level._custom_perks);
       foreach(key in a_keys) {
-        if(isdefined(level._custom_perks[key].radiant_machine_name) && isdefined(level._custom_perks[key].machine_light_effect)) {
+        if(isDefined(level._custom_perks[key].radiant_machine_name) && isDefined(level._custom_perks[key].machine_light_effect)) {
           level thread host_migration_func(level._custom_perks[key], key);
         }
       }
@@ -1097,9 +1089,9 @@ function perk_hostmigration() {
 }
 
 function host_migration_func(s_custom_perk, keyname) {
-  a_machines = getentarray(s_custom_perk.radiant_machine_name, "targetname");
+  a_machines = getEntArray(s_custom_perk.radiant_machine_name, "targetname");
   foreach(perk in a_machines) {
-    if(isdefined(perk.model) && perk.model == level.machine_assets[keyname].on_model) {
+    if(isDefined(perk.model) && perk.model == level.machine_assets[keyname].on_model) {
       perk perk_fx(undefined, 1);
       perk thread perk_fx(s_custom_perk.machine_light_effect);
     }
@@ -1107,7 +1099,7 @@ function host_migration_func(s_custom_perk, keyname) {
 }
 
 function spare_change(str_trigger = "audio_bump_trigger", str_sound = "zmb_perks_bump_bottle") {
-  a_t_audio = getentarray(str_trigger, "targetname");
+  a_t_audio = getEntArray(str_trigger, "targetname");
   foreach(t_audio_bump in a_t_audio) {
     if(t_audio_bump.script_sound === str_sound) {
       t_audio_bump thread check_for_change();
@@ -1117,7 +1109,7 @@ function spare_change(str_trigger = "audio_bump_trigger", str_sound = "zmb_perks
 
 function check_for_change() {
   self endon("death");
-  while (true) {
+  while(true) {
     self waittill("trigger", player);
     if(player getstance() == "prone") {
       player zm_score::add_to_player_score(100);
@@ -1132,7 +1124,7 @@ function get_perk_array() {
   perk_array = [];
   if(level._custom_perks.size > 0) {
     a_keys = getarraykeys(level._custom_perks);
-    for (i = 0; i < a_keys.size; i++) {
+    for(i = 0; i < a_keys.size; i++) {
       if(self hasperk(a_keys[i])) {
         perk_array[perk_array.size] = a_keys[i];
       }
@@ -1142,24 +1134,24 @@ function get_perk_array() {
 }
 
 function initialize_custom_perk_arrays() {
-  if(!isdefined(level._custom_perks)) {
+  if(!isDefined(level._custom_perks)) {
     level._custom_perks = [];
   }
 }
 
 function register_revive_success_perk_func(revive_func) {
-  if(!isdefined(level.a_revive_success_perk_func)) {
+  if(!isDefined(level.a_revive_success_perk_func)) {
     level.a_revive_success_perk_func = [];
   }
   level.a_revive_success_perk_func[level.a_revive_success_perk_func.size] = revive_func;
 }
 
 function register_perk_basic_info(str_perk, str_alias, n_perk_cost, str_hint_string, w_perk_bottle_weapon) {
-  assert(isdefined(str_perk), "");
-  assert(isdefined(str_alias), "");
-  assert(isdefined(n_perk_cost), "");
-  assert(isdefined(str_hint_string), "");
-  assert(isdefined(w_perk_bottle_weapon), "");
+  assert(isDefined(str_perk), "");
+  assert(isDefined(str_alias), "");
+  assert(isDefined(n_perk_cost), "");
+  assert(isDefined(str_hint_string), "");
+  assert(isDefined(w_perk_bottle_weapon), "");
   _register_undefined_perk(str_perk);
   level._custom_perks[str_perk].alias = str_alias;
   level._custom_perks[str_perk].var_2c8ee667 = hashstring(str_alias);
@@ -1169,87 +1161,87 @@ function register_perk_basic_info(str_perk, str_alias, n_perk_cost, str_hint_str
 }
 
 function register_perk_machine(str_perk, func_perk_machine_setup, func_perk_machine_thread) {
-  assert(isdefined(str_perk), "");
-  assert(isdefined(func_perk_machine_setup), "");
+  assert(isDefined(str_perk), "");
+  assert(isDefined(func_perk_machine_setup), "");
   _register_undefined_perk(str_perk);
-  if(!isdefined(level._custom_perks[str_perk].perk_machine_set_kvps)) {
+  if(!isDefined(level._custom_perks[str_perk].perk_machine_set_kvps)) {
     level._custom_perks[str_perk].perk_machine_set_kvps = func_perk_machine_setup;
   }
-  if(!isdefined(level._custom_perks[str_perk].perk_machine_thread) && isdefined(func_perk_machine_thread)) {
+  if(!isDefined(level._custom_perks[str_perk].perk_machine_thread) && isDefined(func_perk_machine_thread)) {
     level._custom_perks[str_perk].perk_machine_thread = func_perk_machine_thread;
   }
 }
 
 function register_perk_machine_power_override(str_perk, func_perk_machine_power_override) {
-  assert(isdefined(str_perk), "");
-  assert(isdefined(func_perk_machine_power_override), "");
+  assert(isDefined(str_perk), "");
+  assert(isDefined(func_perk_machine_power_override), "");
   _register_undefined_perk(str_perk);
-  if(!isdefined(level._custom_perks[str_perk].perk_machine_power_override_thread) && isdefined(func_perk_machine_power_override)) {
+  if(!isDefined(level._custom_perks[str_perk].perk_machine_power_override_thread) && isDefined(func_perk_machine_power_override)) {
     level._custom_perks[str_perk].perk_machine_power_override_thread = func_perk_machine_power_override;
   }
 }
 
 function register_perk_precache_func(str_perk, func_precache) {
-  assert(isdefined(str_perk), "");
-  assert(isdefined(func_precache), "");
+  assert(isDefined(str_perk), "");
+  assert(isDefined(func_precache), "");
   _register_undefined_perk(str_perk);
-  if(!isdefined(level._custom_perks[str_perk].precache_func)) {
+  if(!isDefined(level._custom_perks[str_perk].precache_func)) {
     level._custom_perks[str_perk].precache_func = func_precache;
   }
 }
 
 function register_perk_threads(str_perk, func_give_player_perk, func_take_player_perk) {
-  assert(isdefined(str_perk), "");
-  assert(isdefined(func_give_player_perk), "");
+  assert(isDefined(str_perk), "");
+  assert(isDefined(func_give_player_perk), "");
   _register_undefined_perk(str_perk);
-  if(!isdefined(level._custom_perks[str_perk].player_thread_give)) {
+  if(!isDefined(level._custom_perks[str_perk].player_thread_give)) {
     level._custom_perks[str_perk].player_thread_give = func_give_player_perk;
   }
-  if(isdefined(func_take_player_perk)) {
-    if(!isdefined(level._custom_perks[str_perk].player_thread_take)) {
+  if(isDefined(func_take_player_perk)) {
+    if(!isDefined(level._custom_perks[str_perk].player_thread_take)) {
       level._custom_perks[str_perk].player_thread_take = func_take_player_perk;
     }
   }
 }
 
 function register_perk_clientfields(str_perk, func_clientfield_register, func_clientfield_set) {
-  assert(isdefined(str_perk), "");
-  assert(isdefined(func_clientfield_register), "");
-  assert(isdefined(func_clientfield_set), "");
+  assert(isDefined(str_perk), "");
+  assert(isDefined(func_clientfield_register), "");
+  assert(isDefined(func_clientfield_set), "");
   _register_undefined_perk(str_perk);
-  if(!isdefined(level._custom_perks[str_perk].clientfield_register)) {
+  if(!isDefined(level._custom_perks[str_perk].clientfield_register)) {
     level._custom_perks[str_perk].clientfield_register = func_clientfield_register;
   }
-  if(!isdefined(level._custom_perks[str_perk].clientfield_set)) {
+  if(!isDefined(level._custom_perks[str_perk].clientfield_set)) {
     level._custom_perks[str_perk].clientfield_set = func_clientfield_set;
   }
 }
 
 function register_perk_host_migration_params(str_perk, str_radiant_name, str_effect_name) {
-  assert(isdefined(str_perk), "");
-  assert(isdefined(str_radiant_name), "");
-  assert(isdefined(str_effect_name), "");
+  assert(isDefined(str_perk), "");
+  assert(isDefined(str_radiant_name), "");
+  assert(isDefined(str_effect_name), "");
   _register_undefined_perk(str_perk);
-  if(!isdefined(level._custom_perks[str_perk].radiant_name)) {
+  if(!isDefined(level._custom_perks[str_perk].radiant_name)) {
     level._custom_perks[str_perk].radiant_machine_name = str_radiant_name;
   }
-  if(!isdefined(level._custom_perks[str_perk].light_effect)) {
+  if(!isDefined(level._custom_perks[str_perk].light_effect)) {
     level._custom_perks[str_perk].machine_light_effect = str_effect_name;
   }
 }
 
 function _register_undefined_perk(str_perk) {
-  if(!isdefined(level._custom_perks)) {
+  if(!isDefined(level._custom_perks)) {
     level._custom_perks = [];
   }
-  if(!isdefined(level._custom_perks[str_perk])) {
-    level._custom_perks[str_perk] = spawnstruct();
+  if(!isDefined(level._custom_perks[str_perk])) {
+    level._custom_perks[str_perk] = spawnStruct();
   }
 }
 
 function register_perk_damage_override_func(func_damage_override) {
-  assert(isdefined(func_damage_override), "");
-  if(!isdefined(level.perk_damage_override)) {
+  assert(isDefined(func_damage_override), "");
+  if(!isDefined(level.perk_damage_override)) {
     level.perk_damage_override = [];
   }
   array::add(level.perk_damage_override, func_damage_override, 0);

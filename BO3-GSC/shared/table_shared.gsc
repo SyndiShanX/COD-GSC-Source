@@ -13,7 +13,7 @@ function load(str_filename, str_table_start, b_convert_numbers = 1) {
   n_row = n_header_row + 1;
   do {
     a_row = tablelookuprow(str_filename, n_row);
-    if(isdefined(a_row) && a_row.size > 0) {
+    if(isDefined(a_row) && a_row.size > 0) {
       index = strstrip(a_row[0]);
       if(index != "") {
         if(index == "table_end") {
@@ -23,7 +23,7 @@ function load(str_filename, str_table_start, b_convert_numbers = 1) {
           index = str_to_num(index);
         }
         a_table[index] = [];
-        for (val = 1; val < a_row.size; val++) {
+        for(val = 1; val < a_row.size; val++) {
           if(strstrip(a_headers[val]) != "" && strstrip(a_row[val]) != "") {
             value = a_row[val];
             if(b_convert_numbers) {
@@ -36,7 +36,7 @@ function load(str_filename, str_table_start, b_convert_numbers = 1) {
     }
     n_row++;
   }
-  while (isdefined(a_row) && a_row.size > 0);
+  while(isDefined(a_row) && a_row.size > 0);
   return a_table;
 }
 

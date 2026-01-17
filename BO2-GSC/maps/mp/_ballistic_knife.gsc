@@ -21,7 +21,7 @@ onspawn(watcher, player) {
 
   if(isDefined(endpos)) {
     retrievable_model = spawn("script_model", endpos);
-    retrievable_model setmodel("t6_wpn_ballistic_knife_projectile");
+    retrievable_model setModel("t6_wpn_ballistic_knife_projectile");
     retrievable_model setteam(player.team);
     retrievable_model setowner(player);
     retrievable_model.owner = player;
@@ -73,7 +73,7 @@ wait_to_show_glowing_model(prey) {
   if(isDefined(prey) && !isalive(prey))
     wait 2;
 
-  glowing_retrievable_model setmodel("t6_wpn_ballistic_knife_blade_retrieve");
+  glowing_retrievable_model setModel("t6_wpn_ballistic_knife_blade_retrieve");
 }
 
 watch_shutdown() {
@@ -165,7 +165,7 @@ watch_use_trigger(trigger, model, callback, playersoundonuse, npcsoundonuse) {
       player playlocalsound(playersoundonuse);
 
     if(isDefined(npcsoundonuse))
-      player playsound(npcsoundonuse);
+      player playSound(npcsoundonuse);
 
     self thread[[callback]](player);
     break;

@@ -18,7 +18,7 @@
 
 function main() {
   clientfields_init();
-  util::set_streamer_hint_function( & force_streamer, 2);
+  util::set_streamer_hint_function(&force_streamer, 2);
   cp_mi_sing_biodomes_fx::main();
   cp_mi_sing_biodomes_sound::main();
   load::main();
@@ -27,35 +27,35 @@ function main() {
 }
 
 function clientfields_init() {
-  clientfield::register("toplayer", "player_dust_fx", 1, 1, "int", & function_b33fd8cd, 0, 0);
-  clientfield::register("toplayer", "player_waterfall_pstfx", 1, 1, "int", & player_waterfall_callback, 0, 0);
-  clientfield::register("toplayer", "bullet_disconnect_pstfx", 1, 1, "int", & bullet_disconnect_callback, 0, 0);
-  clientfield::register("toplayer", "zipline_speed_blur", 1, 1, "int", & function_424e31ac, 0, 0);
-  clientfield::register("toplayer", "umbra_tome_markets2", 1, 1, "counter", & function_51e4599a, 0, 0);
-  clientfield::register("scriptmover", "waiter_blood_shader", 1, 1, "int", & function_81199318, 0, 0);
-  clientfield::register("world", "set_exposure_bank", 1, 1, "int", & function_1e832062, 0, 0);
-  clientfield::register("world", "party_house_shutter", 1, 1, "int", & function_e49f0db0, 0, 0);
-  clientfield::register("world", "party_house_destruction", 1, 1, "int", & function_f3caffbf, 0, 0);
-  clientfield::register("world", "dome_glass_break", 1, 1, "int", & function_f386de49, 0, 0);
-  clientfield::register("world", "warehouse_window_break", 1, 1, "int", & warehouse_window_break, 0, 0);
-  clientfield::register("world", "control_room_window_break", 1, 1, "int", & control_room_window_break, 0, 0);
-  clientfield::register("toplayer", "server_extra_cam", 1, 5, "int", & server_extra_cam, 0, 0);
-  clientfield::register("toplayer", "server_interact_cam", 1, 3, "int", & server_interact_cam, 0, 0);
-  clientfield::register("world", "cloud_mountain_crows", 1, 2, "int", & function_76ca6777, 0, 0);
-  clientfield::register("world", "fighttothedome_exfil_rope", 1, 2, "int", & function_32baa33e, 0, 0);
-  clientfield::register("world", "fighttothedome_exfil_rope_sim_player", 1, 1, "int", & function_d550bd06, 0, 0);
+  clientfield::register("toplayer", "player_dust_fx", 1, 1, "int", &function_b33fd8cd, 0, 0);
+  clientfield::register("toplayer", "player_waterfall_pstfx", 1, 1, "int", &player_waterfall_callback, 0, 0);
+  clientfield::register("toplayer", "bullet_disconnect_pstfx", 1, 1, "int", &bullet_disconnect_callback, 0, 0);
+  clientfield::register("toplayer", "zipline_speed_blur", 1, 1, "int", &function_424e31ac, 0, 0);
+  clientfield::register("toplayer", "umbra_tome_markets2", 1, 1, "counter", &function_51e4599a, 0, 0);
+  clientfield::register("scriptmover", "waiter_blood_shader", 1, 1, "int", &function_81199318, 0, 0);
+  clientfield::register("world", "set_exposure_bank", 1, 1, "int", &function_1e832062, 0, 0);
+  clientfield::register("world", "party_house_shutter", 1, 1, "int", &function_e49f0db0, 0, 0);
+  clientfield::register("world", "party_house_destruction", 1, 1, "int", &function_f3caffbf, 0, 0);
+  clientfield::register("world", "dome_glass_break", 1, 1, "int", &function_f386de49, 0, 0);
+  clientfield::register("world", "warehouse_window_break", 1, 1, "int", &warehouse_window_break, 0, 0);
+  clientfield::register("world", "control_room_window_break", 1, 1, "int", &control_room_window_break, 0, 0);
+  clientfield::register("toplayer", "server_extra_cam", 1, 5, "int", &server_extra_cam, 0, 0);
+  clientfield::register("toplayer", "server_interact_cam", 1, 3, "int", &server_interact_cam, 0, 0);
+  clientfield::register("world", "cloud_mountain_crows", 1, 2, "int", &function_76ca6777, 0, 0);
+  clientfield::register("world", "fighttothedome_exfil_rope", 1, 2, "int", &function_32baa33e, 0, 0);
+  clientfield::register("world", "fighttothedome_exfil_rope_sim_player", 1, 1, "int", &function_d550bd06, 0, 0);
 }
 
 function player_bullet_transition(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   switch (newval) {
     case 2: {
       self thread postfx::playpostfxbundle("pstfx_vehicle_takeover_fade_in");
-      playsound(0, "gdt_securitybreach_transition_in", (0, 0, 0));
+      playSound(0, "gdt_securitybreach_transition_in", (0, 0, 0));
       break;
     }
     case 3: {
       self thread postfx::playpostfxbundle("pstfx_vehicle_takeover_fade_out");
-      playsound(0, "gdt_securitybreach_transition_out", (0, 0, 0));
+      playSound(0, "gdt_securitybreach_transition_out", (0, 0, 0));
       break;
     }
     case 1: {
@@ -95,7 +95,7 @@ function function_81199318(localclientnum, oldval, newval, bnewent, binitialsnap
   self endon("entityshutdown");
   n_start_time = gettime();
   b_is_updating = 1;
-  while (b_is_updating) {
+  while(b_is_updating) {
     n_time = gettime();
     var_348e23ad = (n_time - n_start_time) / 1000;
     if(var_348e23ad >= 4) {
@@ -150,7 +150,7 @@ function function_76ca6777(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_32baa33e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
-    scene::add_scene_func("p7_fxanim_cp_biodomes_rope_sim_player_bundle", & function_1f0ba50, "init");
+    scene::add_scene_func("p7_fxanim_cp_biodomes_rope_sim_player_bundle", &function_1f0ba50, "init");
     level thread scene::init("p7_fxanim_cp_biodomes_rope_drop_player_bundle");
     level thread scene::init("p7_fxanim_cp_biodomes_rope_sim_player_bundle");
     wait(1);
@@ -167,7 +167,7 @@ function function_1f0ba50(a_ents) {
 
 function function_d550bd06(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    scene::add_scene_func("p7_fxanim_cp_biodomes_rope_sim_player_bundle", & function_be7ae167, "play");
+    scene::add_scene_func("p7_fxanim_cp_biodomes_rope_sim_player_bundle", &function_be7ae167, "play");
     level thread scene::play("p7_fxanim_cp_biodomes_rope_sim_player_bundle");
   }
 }
@@ -240,11 +240,11 @@ function function_1e832062(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_b33fd8cd(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
-    if(isdefined(self.n_fx_id)) {
+    if(isDefined(self.n_fx_id)) {
       deletefx(localclientnum, self.n_fx_id, 1);
     }
     self.n_fx_id = playfxoncamera(localclientnum, level._effect["player_dust"], (0, 0, 0), (1, 0, 0), (0, 0, 1));
-  } else if(isdefined(self.n_fx_id)) {
+  } else if(isDefined(self.n_fx_id)) {
     deletefx(localclientnum, self.n_fx_id, 1);
   }
 }

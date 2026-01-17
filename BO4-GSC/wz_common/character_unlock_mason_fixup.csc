@@ -5,15 +5,14 @@
 
 #include scripts\core_common\system_shared;
 #include scripts\wz_common\character_unlock_fixup;
-
 #namespace character_unlock_mason_fixup;
 
 autoexec __init__system__() {
-  system::register(#"character_unlock_mason_fixup", &__init__, undefined, #"character_unlock_fixup");
+  system::register(#"character_unlock_mason_fixup", &__init__, undefined, # "character_unlock_fixup");
 }
 
 __init__() {
-  character_unlock_fixup::register_character_unlock(#"mason_unlock", #"hash_72350169be9133ae", #"cu19_item", &function_d95e620c, #"hash_7334970069e5e147", #"hash_7334980069e5e2fa");
+  character_unlock_fixup::register_character_unlock(#"mason_unlock", # "hash_72350169be9133ae", # "cu19_item", &function_d95e620c, # "hash_7334970069e5e147", # "hash_7334980069e5e2fa");
 }
 
 function_d95e620c() {

@@ -28,7 +28,7 @@ quick_revive_solo_watch() {
   if(flag("solo_game"))
     self.body perkelevatordoor(1);
 
-  machine_triggers = getentarray("vending_revive", "target");
+  machine_triggers = getEntArray("vending_revive", "target");
   machine_trigger = machine_triggers[0];
   triggeroffset = machine_trigger.origin - self.body.origin;
   machineoffset = level.quick_revive_machine.origin - self.body.origin;
@@ -255,7 +255,7 @@ init_elevator(elevatorname, force_starting_floor, force_starting_origin) {
   if(!isDefined(level.elevators))
     level.elevators = [];
 
-  elevator = spawnstruct();
+  elevator = spawnStruct();
   elevator.name = elevatorname;
   elevator.body = undefined;
   level.elevators["bldg" + elevatorname] = elevator;
@@ -415,7 +415,7 @@ elev_clean_up_corpses() {
 }
 
 elev_remove_corpses() {
-  playfx(level._effect["zomb_gib"], self.origin);
+  playFX(level._effect["zomb_gib"], self.origin);
   self delete();
 }
 
@@ -524,8 +524,7 @@ elevator_think(elevator) {
     elevator thread quick_revive_solo_watch();
   }
 
-  if(elevator.body.perk_type == "vending_revive" && flag("solo_game")) {
-  } else
+  if(elevator.body.perk_type == "vending_revive" && flag("solo_game")) {} else
     flag_wait("power_on");
 
   elevator.body perkelevatordoor(1);
@@ -620,7 +619,7 @@ squashed_death_alarm() {
   if(!is_true(self.squashed_death_alarm)) {
     self.squashed_death_alarm = 1;
     alarm_origin = spawn("script_origin", self squashed_death_alarm_nearest_point());
-    alarm_origin playloopsound("amb_alarm_bell", 0.1);
+    alarm_origin playLoopSound("amb_alarm_bell", 0.1);
     self waittill_any("movedone", "forcego");
     alarm_origin delete();
     self.squashed_death_alarm = 0;
@@ -640,15 +639,15 @@ squashed_death_alarm_nearest_point() {
 }
 
 elevator_move_sound() {
-  self playsound("zmb_elevator_ding");
+  self playSound("zmb_elevator_ding");
   wait 0.4;
-  self playsound("zmb_elevator_ding");
-  self playsound("zmb_elevator_run_start");
-  self playloopsound("zmb_elevator_run", 0.5);
+  self playSound("zmb_elevator_ding");
+  self playSound("zmb_elevator_run_start");
+  self playLoopSound("zmb_elevator_run", 0.5);
   self waittill("movedone");
   self stoploopsound(0.5);
-  self playsound("zmb_elevator_run_stop");
-  self playsound("zmb_elevator_ding");
+  self playSound("zmb_elevator_run_stop");
+  self playSound("zmb_elevator_ding");
 }
 
 init_elevator_perks() {
@@ -656,7 +655,7 @@ init_elevator_perks() {
   level.elevator_perks_building = [];
   level.elevator_perks_building["green"] = [];
   level.elevator_perks_building["blue"] = [];
-  level.elevator_perks_building["green"][0] = spawnstruct();
+  level.elevator_perks_building["green"][0] = spawnStruct();
   level.elevator_perks_building["green"][0].model = "zombie_vending_revive";
   level.elevator_perks_building["green"][0].script_noteworthy = "specialty_quickrevive";
   level.elevator_perks_building["green"][0].turn_on_notify = "revive_on";
@@ -668,27 +667,27 @@ init_elevator_perks() {
     b = 1;
   }
 
-  level.elevator_perks_building["green"][a] = spawnstruct();
+  level.elevator_perks_building["green"][a] = spawnStruct();
   level.elevator_perks_building["green"][a].model = "p6_zm_vending_chugabud";
   level.elevator_perks_building["green"][a].script_noteworthy = "specialty_finalstand";
   level.elevator_perks_building["green"][a].turn_on_notify = "chugabud_on";
-  level.elevator_perks_building["green"][b] = spawnstruct();
+  level.elevator_perks_building["green"][b] = spawnStruct();
   level.elevator_perks_building["green"][b].model = "zombie_vending_sleight";
   level.elevator_perks_building["green"][b].script_noteworthy = "specialty_fastreload";
   level.elevator_perks_building["green"][b].turn_on_notify = "sleight_on";
-  level.elevator_perks_building["blue"][0] = spawnstruct();
+  level.elevator_perks_building["blue"][0] = spawnStruct();
   level.elevator_perks_building["blue"][0].model = "zombie_vending_three_gun";
   level.elevator_perks_building["blue"][0].script_noteworthy = "specialty_additionalprimaryweapon";
   level.elevator_perks_building["blue"][0].turn_on_notify = "specialty_additionalprimaryweapon_power_on";
-  level.elevator_perks_building["blue"][1] = spawnstruct();
+  level.elevator_perks_building["blue"][1] = spawnStruct();
   level.elevator_perks_building["blue"][1].model = "zombie_vending_jugg";
   level.elevator_perks_building["blue"][1].script_noteworthy = "specialty_armorvest";
   level.elevator_perks_building["blue"][1].turn_on_notify = "juggernog_on";
-  level.elevator_perks_building["blue"][2] = spawnstruct();
+  level.elevator_perks_building["blue"][2] = spawnStruct();
   level.elevator_perks_building["blue"][2].model = "zombie_vending_doubletap2";
   level.elevator_perks_building["blue"][2].script_noteworthy = "specialty_rof";
   level.elevator_perks_building["blue"][2].turn_on_notify = "doubletap_on";
-  level.elevator_perks_building["blue"][3] = spawnstruct();
+  level.elevator_perks_building["blue"][3] = spawnStruct();
   level.elevator_perks_building["blue"][3].model = "p6_anim_zm_buildable_pap";
   level.elevator_perks_building["blue"][3].script_noteworthy = "specialty_weapupgrade";
   level.elevator_perks_building["blue"][3].turn_on_notify = "Pack_A_Punch_on";
@@ -839,7 +838,7 @@ elevator_perk_offset(machine, perk) {
   if(scale == 0) {
     return;
   }
-  forward = anglestoforward(self.angles);
+  forward = anglesToForward(self.angles);
   machine.origin = machine.origin - forward * scale;
 }
 
@@ -922,9 +921,9 @@ elevator_sparks_fx(elevator) {
       wait 1;
 
     if(is_true(elevator.body.departing))
-      playfxontag(level._effect["perk_elevator_departing"], elevator.body, "tag_origin");
+      playFXOnTag(level._effect["perk_elevator_departing"], elevator.body, "tag_origin");
     else
-      playfxontag(level._effect["perk_elevator_idle"], elevator.body, "tag_origin");
+      playFXOnTag(level._effect["perk_elevator_idle"], elevator.body, "tag_origin");
 
     wait 0.5;
   }
@@ -1053,7 +1052,7 @@ watch_for_elevator_during_faller_spawn() {
     }
 
     if(should_gib) {
-      playfx(level._effect["zomb_gib"], self.origin);
+      playFX(level._effect["zomb_gib"], self.origin);
 
       if(!(isDefined(self.has_been_damaged_by_player) && self.has_been_damaged_by_player) && !(isDefined(self.is_leaper) && self.is_leaper))
         level.zombie_total++;

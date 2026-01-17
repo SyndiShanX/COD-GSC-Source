@@ -112,43 +112,43 @@ airfield_spawnfuncs() {
   createthreatbiasgroup("runway_seals");
   createthreatbiasgroup("learjet_pdf");
   createthreatbiasgroup("learjet_seals");
-  a_force_goal_guy = getentarray("force_goal_guy", "script_noteworthy");
+  a_force_goal_guy = getEntArray("force_goal_guy", "script_noteworthy");
   array_thread(a_force_goal_guy, ::add_spawn_function, ::init_force_goal_guy);
-  a_pdf_stealth = getentarray("pdf_stealth", "script_noteworthy");
+  a_pdf_stealth = getEntArray("pdf_stealth", "script_noteworthy");
   array_thread(a_pdf_stealth, ::add_spawn_function, maps\_stealth_logic::stealth_ai);
-  a_pdf_hangar_assaulters = getentarray("pdf_hangar_assaulters", "targetname");
+  a_pdf_hangar_assaulters = getEntArray("pdf_hangar_assaulters", "targetname");
   array_thread(a_pdf_hangar_assaulters, ::add_spawn_function, ::init_hangar_assaulters);
-  a_rooftop_pdf = getentarray("rooftop_pdf", "targetname");
+  a_rooftop_pdf = getEntArray("rooftop_pdf", "targetname");
   array_thread(a_rooftop_pdf, ::add_spawn_function, ::init_rooftop_pdf);
-  hangar_frontline = getentarray("hangar_frontline", "targetname");
+  hangar_frontline = getEntArray("hangar_frontline", "targetname");
   array_thread(hangar_frontline, ::add_spawn_function, ::init_hangar_pdf);
-  hangar_seals = getentarray("hangar_seals", "targetname");
+  hangar_seals = getEntArray("hangar_seals", "targetname");
   array_thread(hangar_seals, ::add_spawn_function, ::init_hangar_seals);
-  pdf_hangar_assaulters = getentarray("pdf_hangar_assaulters", "targetname");
+  pdf_hangar_assaulters = getEntArray("pdf_hangar_assaulters", "targetname");
   array_thread(pdf_hangar_assaulters, ::add_spawn_function, ::init_pdf_hangar_assaulters);
-  a_pdf_runner = getentarray("pdf_runner", "script_noteworthy");
+  a_pdf_runner = getEntArray("pdf_runner", "script_noteworthy");
   array_thread(a_pdf_runner, ::add_spawn_function, ::init_pdf_runner);
-  a_learjet_intro_pdf = getentarray("learjet_intro_pdf", "targetname");
+  a_learjet_intro_pdf = getEntArray("learjet_intro_pdf", "targetname");
   array_thread(a_learjet_intro_pdf, ::add_spawn_function, ::learjet_turret_challenge_count);
-  a_learjet_truck_pdf = getentarray("learjet_truck_pdf", "targetname");
+  a_learjet_truck_pdf = getEntArray("learjet_truck_pdf", "targetname");
   array_thread(a_learjet_truck_pdf, ::add_spawn_function, ::learjet_turret_challenge_count);
-  a_learjet_wave_1 = getentarray("learjet_wave_1", "targetname");
+  a_learjet_wave_1 = getEntArray("learjet_wave_1", "targetname");
   array_thread(a_learjet_wave_1, ::add_spawn_function, ::learjet_turret_challenge_count);
-  a_learjet_wave_1_rpg = getentarray("learjet_wave_1_rpg", "targetname");
+  a_learjet_wave_1_rpg = getEntArray("learjet_wave_1_rpg", "targetname");
   array_thread(a_learjet_wave_1_rpg, ::add_spawn_function, ::learjet_turret_challenge_count);
-  a_learjet_wave_2 = getentarray("learjet_wave_2", "targetname");
+  a_learjet_wave_2 = getEntArray("learjet_wave_2", "targetname");
   array_thread(a_learjet_wave_2, ::add_spawn_function, ::learjet_turret_challenge_count);
-  a_learjet_wave_3 = getentarray("learjet_wave_3", "targetname");
+  a_learjet_wave_3 = getEntArray("learjet_wave_3", "targetname");
   array_thread(a_learjet_wave_3, ::add_spawn_function, ::learjet_turret_challenge_count);
-  a_learjet_back_left = getentarray("learjet_back_left", "targetname");
+  a_learjet_back_left = getEntArray("learjet_back_left", "targetname");
   array_thread(a_learjet_back_left, ::add_spawn_function, ::learjet_turret_challenge_count);
-  a_learjet_back_door_kick_pdf = getentarray("learjet_back_door_kick_pdf", "targetname");
+  a_learjet_back_door_kick_pdf = getEntArray("learjet_back_door_kick_pdf", "targetname");
   array_thread(a_learjet_back_door_kick_pdf, ::add_spawn_function, ::learjet_turret_challenge_count);
-  a_learjet_back_right = getentarray("learjet_back_right", "targetname");
+  a_learjet_back_right = getEntArray("learjet_back_right", "targetname");
   array_thread(a_learjet_back_right, ::add_spawn_function, ::learjet_turret_challenge_count);
-  a_tarp_pdf = getentarray("tarp_pdf", "targetname");
+  a_tarp_pdf = getEntArray("tarp_pdf", "targetname");
   array_thread(a_tarp_pdf, ::add_spawn_function, ::learjet_turret_challenge_count);
-  a_rolling_door_guys = getentarray("rolling_door_guys", "script_noteworthy");
+  a_rolling_door_guys = getEntArray("rolling_door_guys", "script_noteworthy");
   array_thread(a_rolling_door_guys, ::add_spawn_function, ::learjet_turret_challenge_count);
 }
 
@@ -228,11 +228,11 @@ zodiac_approach_main() {
   clean_up_christmas_lights();
   wait 2;
   exploder(1024);
-  a_intro_zodiacs = getentarray("intro_zodiacs", "script_noteworthy");
+  a_intro_zodiacs = getEntArray("intro_zodiacs", "script_noteworthy");
 
   foreach(zodiac in a_intro_zodiacs) {
-    playfxontag(getfx("zodiac_churn"), zodiac, "TAG_PROPELLER_FX");
-    playfxontag(level._effect["glowstick_light"], zodiac, "TAG_BODY_ORIGIN");
+    playFXOnTag(getfx("zodiac_churn"), zodiac, "TAG_PROPELLER_FX");
+    playFXOnTag(level._effect["glowstick_light"], zodiac, "TAG_BODY_ORIGIN");
   }
 
   level.mason = init_hero("mason");
@@ -252,7 +252,7 @@ zodiac_approach_main() {
   level thread invasion_read();
   level thread delete_models_on_zodiac();
   delay_thread(2, ::zodiac_jet_flyover);
-  level.player playloopsound("evt_boat_loop", 1);
+  level.player playLoopSound("evt_boat_loop", 1);
   level.player delay_thread(20, ::end_boat_sounds);
   level.player thread set_zodiac_overlay();
   level thread spawn_zodiac_littlebird();
@@ -269,7 +269,7 @@ zodiac_approach_main() {
   level.player playrumbleonentity("artillery_rumble");
   earthquake(0.5, randomfloatrange(1.0, 2.0), level.player.origin, 100);
   player_body = get_model_or_models_from_scene("zodiac_dismount_player", "player_body");
-  playfxontag(getfx("player_bubbles"), player_body, "tag_camera");
+  playFXOnTag(getfx("player_bubbles"), player_body, "tag_camera");
   level.player setwatersheeting(1, 7);
   level.player setwaterdrops(50);
   wait 3;
@@ -439,9 +439,9 @@ phantom_fire_rocket() {
   self endon("death");
   self veh_magic_bullet_shield(1);
   wait 1.5;
-  magicbullet("apache_rockets", self.origin + anglestoforward(self.angles) * 200, self.origin + anglestoforward(self.angles) * 1000);
+  magicbullet("apache_rockets", self.origin + anglesToForward(self.angles) * 200, self.origin + anglesToForward(self.angles) * 1000);
   wait 0.1;
-  magicbullet("apache_rockets", self.origin + anglestoforward(self.angles) * 200, self.origin + anglestoforward(self.angles) * 1000);
+  magicbullet("apache_rockets", self.origin + anglesToForward(self.angles) * 200, self.origin + anglesToForward(self.angles) * 1000);
 }
 
 phantom_building_rockets() {
@@ -450,9 +450,9 @@ phantom_building_rockets() {
   wait 1.5;
   building_missile_1 = getstruct("building_missile_1", "targetname");
   building_missile_2 = getstruct("building_missile_2", "targetname");
-  magicbullet("apache_rockets", self.origin + anglestoforward(self.angles) * 200, building_missile_1.origin);
+  magicbullet("apache_rockets", self.origin + anglesToForward(self.angles) * 200, building_missile_1.origin);
   wait 0.1;
-  magicbullet("apache_rockets", self.origin + anglestoforward(self.angles) * 200, building_missile_2.origin);
+  magicbullet("apache_rockets", self.origin + anglesToForward(self.angles) * 200, building_missile_2.origin);
   level notify("blow_up_building");
 }
 
@@ -491,7 +491,7 @@ turn_off_hotel_lights() {
   a_floor_numbers = array_randomize(a_floor_numbers);
 
   for(i = 0; i < 3; i++) {
-    a_hotel_lights = getentarray("hotel_floor_" + a_floor_numbers[i], "targetname");
+    a_hotel_lights = getEntArray("hotel_floor_" + a_floor_numbers[i], "targetname");
 
     foreach(m_hotel_light in a_hotel_lights)
     m_hotel_light delete();
@@ -500,7 +500,7 @@ turn_off_hotel_lights() {
   wait 0.4;
 
   for(i = 3; i < 6; i++) {
-    a_hotel_lights = getentarray("hotel_floor_" + a_floor_numbers[i], "targetname");
+    a_hotel_lights = getEntArray("hotel_floor_" + a_floor_numbers[i], "targetname");
 
     foreach(m_hotel_light in a_hotel_lights)
     m_hotel_light delete();
@@ -554,22 +554,21 @@ challenge_find_weapon_cache(str_notify) {
 
 end_boat_sounds() {
   level.player stoploopsound(1);
-  level.player playsound("evt_boat_stop");
+  level.player playSound("evt_boat_stop");
 }
 
 clean_up_christmas_lights() {
   if(level.skipto_point == "house") {
-    lights = getentarray("fxanim_christmas_lights", "targetname");
+    lights = getEntArray("fxanim_christmas_lights", "targetname");
     array_delete(lights);
   } else {
     wait 10;
-    lights = getentarray("fxanim_christmas_lights", "targetname");
+    lights = getEntArray("fxanim_christmas_lights", "targetname");
     array_delete(lights);
   }
 }
 
-zodiac_jet_flyover() {
-}
+zodiac_jet_flyover() {}
 
 invasion_read() {
   a_zodiac_littlebird_armada = spawn_vehicles_from_targetname_and_drive("zodiac_littlebird_armada");
@@ -582,7 +581,7 @@ invasion_read() {
   foreach(jet in a_intro_building_jets)
   jet thread delete_vehicle_after_opening();
 
-  level.player playsound("evt_zodiac_flyby_f");
+  level.player playSound("evt_zodiac_flyby_f");
   level thread temp_building_fx_explosion();
   intro_convoy_jet = spawn_vehicle_from_targetname_and_drive("intro_convoy_jet");
   intro_convoy_jet thread delete_vehicle_after_opening();
@@ -608,12 +607,12 @@ ac130_fire() {
   vh_ac130 hide();
   vh_ac130 thread ac130_fake_move(s_spawnpt);
   e_ac130 = spawn("script_model", vh_ac130.origin);
-  e_ac130 setmodel("tag_origin");
+  e_ac130 setModel("tag_origin");
   e_ac130.angles = (45, 270, 0);
   e_ac130 linkto(vh_ac130);
 
   while(true) {
-    playfxontag(level._effect["ac130_intense_fake_no_impact"], e_ac130, "tag_origin");
+    playFXOnTag(level._effect["ac130_intense_fake_no_impact"], e_ac130, "tag_origin");
     wait(randomfloatrange(1.0, 1.5));
   }
 }
@@ -835,7 +834,7 @@ flare_guard_lives() {
 open_flareguy_door() {
   m_flareguy_door = getent("m_flareguy_door", "targetname");
   m_flareguy_door rotateyaw(-130, 0.6, 0.2, 0.05);
-  m_flareguy_door playsound("evt_guards_door_open");
+  m_flareguy_door playSound("evt_guards_door_open");
 }
 
 player_contextual_kill() {
@@ -965,20 +964,20 @@ flare_sky_effect(guy) {
   s_flare_sky_effect = getstruct("flare_sky_effect", "targetname");
   e_flare_weapon_effect = getent("flare_weapon_effect", "targetname");
   e_flare_effect_mover = spawn("script_origin", e_flare_weapon_effect.origin);
-  e_flare_effect_mover setmodel("tag_origin");
+  e_flare_effect_mover setModel("tag_origin");
   e_flare_weapon_effect linkto(e_flare_effect_mover);
-  playfx(getfx("fx_pan_signal_flare"), e_flare_weapon_effect.origin);
+  playFX(getfx("fx_pan_signal_flare"), e_flare_weapon_effect.origin);
 }
 
 flare_guy_lives_flare(guy) {
   m_flare_gun = get_model_or_models_from_scene("flare_guy_lives", "flare_gun");
-  playfxontag(level._effect["fx_pan_signal_flare"], m_flare_gun, "tag_fx");
+  playFXOnTag(level._effect["fx_pan_signal_flare"], m_flare_gun, "tag_fx");
   exploder(298);
 }
 
 flare_guy_killed_flare(guy) {
   m_flare_gun = get_model_or_models_from_scene("flare_guy_killed", "flare_gun");
-  playfxontag(level._effect["fx_pan_signal_flare"], m_flare_gun, "tag_fx");
+  playFXOnTag(level._effect["fx_pan_signal_flare"], m_flare_gun, "tag_fx");
   exploder(298);
 }
 
@@ -1033,7 +1032,7 @@ parking_lot_backup() {
 
 spin_rooftop_fans() {
   level endon("turn_off_rooftop_fans");
-  fan_array = getentarray("rooftop_fan", "targetname");
+  fan_array = getEntArray("rooftop_fan", "targetname");
 
   while(true) {
     foreach(fan in fan_array)
@@ -1094,7 +1093,7 @@ parking_lot_scene() {
   level thread climb_over_wall();
   trigger_wait("spawn_parking_lot_truck");
   vh_parking_lot_truck = spawn_vehicle_from_targetname_and_drive("parking_lot_truck");
-  vh_parking_lot_truck playsound("evt_pickup_drive_in");
+  vh_parking_lot_truck playSound("evt_pickup_drive_in");
 }
 
 car_slide() {
@@ -1262,7 +1261,7 @@ learjet_turret_truck() {
   vo = getent("vo_for_lear_jet", "targetname");
   vo say_dialog("pdf2_bring_up_the_mg_truc_0");
   wait 0.5;
-  e_turret_target playsound("evt_lear_jet_truck");
+  e_turret_target playSound("evt_lear_jet_truck");
   vh_learjet_truck = spawn_vehicle_from_targetname_and_drive("vh_learjet_truck");
   vh_learjet_truck set_turret_target(e_turret_target, undefined, 1);
   ai_gunner = getent("learjet_turret_guy_ai", "targetname");
@@ -1553,7 +1552,7 @@ learjet_garage_guys_vo() {
 
 learjet_retreat() {
   trigger_wait("trig_learjet_retreat");
-  a_learjet_enemies = getentarray("learjet_intro_pdf_ai", "targetname");
+  a_learjet_enemies = getEntArray("learjet_intro_pdf_ai", "targetname");
   nd_side_reinforcement_node = getnode("side_reinforcement_node", "targetname");
 
   foreach(ai_enemy in a_learjet_enemies) {
@@ -1601,14 +1600,14 @@ learjet_battle_seal_vs_pdf() {
 }
 
 cleanup_seals() {
-  a_ai_seal1 = getentarray("seal_group_1_ai", "targetname");
+  a_ai_seal1 = getEntArray("seal_group_1_ai", "targetname");
 
   if(isDefined(a_ai_seal1)) {
     foreach(ai_seal1 in a_ai_seal1)
     ai_seal1 die();
   }
 
-  a_ai_seal2 = getentarray("seal_group_2_ai", "targetname");
+  a_ai_seal2 = getEntArray("seal_group_2_ai", "targetname");
 
   if(isDefined(a_ai_seal2)) {
     foreach(ai_seal2 in a_ai_seal2)
@@ -1617,7 +1616,7 @@ cleanup_seals() {
 
   spawn_manager_kill("trig_sm_runway_seals");
   wait 0.1;
-  a_ai_hangar_seals = getentarray("hangar_seals_ai", "targetname");
+  a_ai_hangar_seals = getEntArray("hangar_seals_ai", "targetname");
 
   if(isDefined(a_ai_hangar_seals)) {
     foreach(ai_hangar_seal in a_ai_hangar_seals)
@@ -1722,9 +1721,9 @@ learjet_audio() {
   level endon("jet_exp_audio");
   sound_ent = spawn("script_origin", self.origin);
   sound_ent thread learjet_audio_explode(self);
-  self playsound("evt_learjet_poweron");
+  self playSound("evt_learjet_poweron");
   wait 36;
-  sound_ent playloopsound("evt_learjet_loop", 2);
+  sound_ent playLoopSound("evt_learjet_loop", 2);
 }
 
 learjet_audio_explode(jet) {
@@ -1764,14 +1763,14 @@ shop_door_opens() {
   e_garage_bottom_piece = getent("garage_bottom_piece", "targetname");
   e_garage_clip = getent("garage_clip", "targetname");
   door_snd = spawn("script_origin", e_garage_bottom_piece.origin);
-  door_snd playsound("evt_door_start");
-  door_snd playloopsound("evt_door_move", 1);
+  door_snd playSound("evt_door_start");
+  door_snd playLoopSound("evt_door_move", 1);
   e_garage_mid_piece movez(38, 5);
   e_garage_mid_piece connectpaths();
   e_garage_bottom_piece movez(74, 5);
   e_garage_bottom_piece connectpaths();
   e_garage_bottom_piece waittill("movedone");
-  door_snd playsound("evt_door_stop");
+  door_snd playSound("evt_door_stop");
   door_snd stoploopsound(0.3);
   e_garage_mid_piece delete();
   e_garage_bottom_piece delete();
@@ -1829,7 +1828,7 @@ learjet_dialog() {
 }
 
 mcknight_clear_pool() {
-  a_enemies_near_pool = getentarray("motel_path_runners_ai", "targetname");
+  a_enemies_near_pool = getEntArray("motel_path_runners_ai", "targetname");
 
   foreach(ai_near_pool in a_enemies_near_pool) {
     while(flag("mcknight_sniping"))
@@ -1884,7 +1883,7 @@ monitor_player_distance() {
 
   while(true) {
     if(distancesquared(level.player.origin, level.mason.origin) <= 750) {
-      setdvar("ui_deadquote", & "PANAMA_HANGAR_FAIL");
+      setdvar("ui_deadquote", &"PANAMA_HANGAR_FAIL");
       level notify("mission failed");
       maps\_utility::missionfailedwrapper();
     }
@@ -1897,7 +1896,7 @@ hotel_path_fail() {
   trigger_wait("trig_hotel_warn");
   level.player thread display_hint("hangar_warning");
   trigger_wait("trig_hotel_fail");
-  setdvar("ui_deadquote", & "PANAMA_HANGAR_FAIL");
+  setdvar("ui_deadquote", &"PANAMA_HANGAR_FAIL");
   level notify("mission failed");
   maps\_utility::missionfailedwrapper();
 }
@@ -1925,7 +1924,7 @@ learjet_challenge_think(m_fxanim_learjet) {
 learjet_explode_snd(jet) {
   exp_ent = spawn("script_origin", jet.origin);
   level waittill("jet_exp_audio");
-  exp_ent playsound("evt_learjet_explode");
+  exp_ent playSound("evt_learjet_explode");
   wait 12;
   exp_ent delete();
 }
@@ -2059,10 +2058,10 @@ intro_truck_behaviour() {
 
   switch (self.script_noteworthy) {
     case "intro_civ_truck_transport":
-      a_intro_civ_truck_guys = getentarray("intro_civ_truck_guys", "script_noteworthy");
+      a_intro_civ_truck_guys = getEntArray("intro_civ_truck_guys", "script_noteworthy");
       break;
     case "intro_civ_truck_turret":
-      a_intro_civ_truck_guys = getentarray("intro_civ_truck_turret_guys", "script_noteworthy");
+      a_intro_civ_truck_guys = getEntArray("intro_civ_truck_turret_guys", "script_noteworthy");
       break;
   }
 
@@ -2234,7 +2233,7 @@ radio_antenna_explosion() {
   tower_base = getent("radar_disk_base", "targetname");
   tower_base delete();
   a_antenna_jets = spawn_vehicles_from_targetname_and_drive("antenna_jets");
-  a_antenna_jets[0] playsound("fxa_radar_tower_jets_by");
+  a_antenna_jets[0] playSound("fxa_radar_tower_jets_by");
 }
 
 runway_standoff_main() {
@@ -2320,7 +2319,7 @@ setup_runway_cessnas() {
   self.do_scripted_crash = 0;
   self veh_toggle_tread_fx(0);
   wait(randomfloatrange(1, 5));
-  self setmodel("veh_t6_air_small_plane_dead");
+  self setModel("veh_t6_air_small_plane_dead");
   self notify("death");
 }
 
@@ -2610,7 +2609,7 @@ sniper_victim() {
 runway_standoff_fail_timeout() {
   level endon("player_at_hatch");
   wait 35;
-  setdvar("ui_deadquote", & "PANAMA_ROOFTOP_FAIL");
+  setdvar("ui_deadquote", &"PANAMA_ROOFTOP_FAIL");
   level notify("mission failed");
   maps\_utility::missionfailedwrapper();
 }
@@ -2792,7 +2791,7 @@ vo_seals_under_fire() {
 
 talker_spawn_func() {
   self endon("death");
-  self setcandamage(0);
+  self setCanDamage(0);
   self set_ignoreall(1);
   self set_ignoreme(1);
   flag_wait("runway_vo_done");
@@ -2820,8 +2819,7 @@ vo_rooftop_battle() {
   level.mason say_dialog("mckn_focus_on_supporting_0", 2);
 }
 
-vo_nag_rooftop_approach() {
-}
+vo_nag_rooftop_approach() {}
 
 vo_skylight() {
   waittill_ai_group_cleared("rooftop_pdf");
@@ -2849,7 +2847,7 @@ vo_upper_hangar_battle() {
 
 talker_hangar_spawn_func() {
   self endon("death");
-  self setcandamage(0);
+  self setCanDamage(0);
   self set_ignoreall(1);
   self set_ignoreme(1);
   flag_wait("hangar_vo_done");
@@ -2857,7 +2855,7 @@ talker_hangar_spawn_func() {
 }
 
 rooftop_tracers() {
-  a_ai_seals = getentarray("hangar_seals_ai", "targetname");
+  a_ai_seals = getEntArray("hangar_seals_ai", "targetname");
 
   foreach(ai_seal in a_ai_seals)
   ai_seal thread fire_at_rooftop();
@@ -2877,7 +2875,7 @@ fire_at_rooftop() {
     if(cointoss())
       e_target = spawn("script_model", s_m203_end_2.origin + (0, randomintrange(-300, 300), 0));
 
-    e_target setmodel("tag_origin");
+    e_target setModel("tag_origin");
     self shoot_at_target(e_target, "tag_origin", 0, randomintrange(4, 7));
     wait(randomintrange(2, 4));
     e_target delete();
@@ -2959,7 +2957,7 @@ sniper_logic() {
 
   while(true) {
     a_ai_targets = get_ai_group_ai("rooftop_pdf");
-    playfx(level._effect["sniper_glint"], s_sniper.origin);
+    playFX(level._effect["sniper_glint"], s_sniper.origin);
 
     if(a_ai_targets.size) {
       ai_target = a_ai_targets[randomint(a_ai_targets.size)];
@@ -2980,11 +2978,11 @@ sniper_shoot(ai_target) {
   s_sniper = getstruct("sniper_pos", "targetname");
   v_target = ai_target gettagorigin(a_tags[randomint(a_tags.size)]);
   e_trail = spawn("script_model", s_sniper.origin);
-  e_trail setmodel("tag_origin");
-  playfxontag(level._effect["sniper_trail"], e_trail, "tag_origin");
+  e_trail setModel("tag_origin");
+  playFXOnTag(level._effect["sniper_trail"], e_trail, "tag_origin");
   e_trail moveto(v_target, 0.1);
   magicbullet("dragunov_sp", s_sniper.origin, v_target);
-  playfx(level._effect["sniper_impact"], v_target);
+  playFX(level._effect["sniper_impact"], v_target);
   playsoundatposition("evt_sniper_shot_front", s_sniper.origin);
   playsoundatposition("evt_sniper_impacts", v_target);
 
@@ -2999,10 +2997,10 @@ sniper_shot_without_death(ai_target) {
   s_sniper = getstruct("sniper_pos", "targetname");
   v_target = ai_target gettagorigin("J_Head");
   e_trail = spawn("script_model", s_sniper.origin);
-  e_trail setmodel("tag_origin");
-  playfxontag(level._effect["sniper_trail"], e_trail, "tag_origin");
+  e_trail setModel("tag_origin");
+  playFXOnTag(level._effect["sniper_trail"], e_trail, "tag_origin");
   e_trail moveto(v_target, 0.1);
-  playfx(level._effect["sniper_impact"], v_target);
+  playFX(level._effect["sniper_impact"], v_target);
   playsoundatposition("evt_sniper_shot_front", s_sniper.origin);
   playsoundatposition("evt_sniper_impacts", v_target);
   wait 0.2;
@@ -3028,7 +3026,7 @@ mason_door_kick() {
   level waittill("open_hangar_door");
   hangar_door_clip = getent("hangar_door_mason_clip", "targetname");
   hangar_door_clip rotateyaw(108, 1);
-  hangar_door_clip playsound("evt_door_breach_mas");
+  hangar_door_clip playSound("evt_door_breach_mas");
   hangar_door_clip connectpaths();
   wait 2;
   s_fire2 = getstruct("hangar_rpg_fire2", "targetname");
@@ -3063,7 +3061,7 @@ rooftop_fail_timeout() {
   level endon("player_near_skylight");
   level endon("player_in_hangar");
   wait 25;
-  setdvar("ui_deadquote", & "PANAMA_ROOFTOP_FAIL");
+  setdvar("ui_deadquote", &"PANAMA_ROOFTOP_FAIL");
   level notify("mission failed");
   maps\_utility::missionfailedwrapper();
 }
@@ -3079,7 +3077,7 @@ open_ladder_door() {
 }
 
 extra_muzzle_flash(guy) {
-  playfxontag(getfx("maginified_muzzle_flash"), guy, "tag_flash");
+  playFXOnTag(getfx("maginified_muzzle_flash"), guy, "tag_flash");
 }
 
 ladder_obj_breadcrumb() {

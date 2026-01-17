@@ -32,7 +32,7 @@ main() {
   town_treasure_chest_init();
   level.enemy_location_override_func = ::enemy_location_override;
   collision = spawn("script_model", (1363, 471, 0), 1);
-  collision setmodel("zm_collision_transit_town_survival");
+  collision setModel("zm_collision_transit_town_survival");
   collision disconnectpaths();
   flag_wait("initial_blackscreen_passed");
   maps\mp\zombies\_zm_game_module::turn_power_on_and_open_doors();

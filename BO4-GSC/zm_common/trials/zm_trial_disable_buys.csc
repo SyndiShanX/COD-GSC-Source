@@ -5,7 +5,6 @@
 
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_trial;
-
 #namespace zm_trial_disable_buys;
 
 autoexec __init__system__() {
@@ -43,6 +42,6 @@ __init__() {
   forcestreamxmodel(#"hash_38b107b1b645837d");
 }
 
-private on_begin(local_client_num, params) {}
+on_begin(local_client_num, params) {}
 
-private on_end(local_client_num) {}
+on_end(local_client_num) {}

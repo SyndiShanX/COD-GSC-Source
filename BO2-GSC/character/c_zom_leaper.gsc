@@ -4,7 +4,7 @@
 **************************************/
 
 main() {
-  self setmodel("c_zom_leaper_body");
+  self setModel("c_zom_leaper_body");
   self.headmodel = "c_zom_leaper_head";
   self attach(self.headmodel, "", 1);
   self.voice = "american";

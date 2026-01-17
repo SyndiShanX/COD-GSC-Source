@@ -37,14 +37,14 @@ initTeamChallenges(team) {
 }
 monitorFallDistance() {
   self endon("disconnect");
-  while (1) {
+  while(1) {
     if(!isAlive(self)) {
       self waittill("spawned_player");
       continue;
     }
     if(!self isOnGround()) {
       highestPoint = self.origin[2];
-      while (!self isOnGround()) {
+      while(!self isOnGround()) {
         if(self.origin[2] > highestPoint)
           highestPoint = self.origin[2];
         wait .05;
@@ -78,15 +78,15 @@ doChallengeCallback(callback, data) {
   if(!isDefined(level.ChallengesCallbacks[callback]))
     return;
   if(isDefined(data)) {
-    for (i = 0; i < level.ChallengesCallbacks[callback].size; i++)
+    for(i = 0; i < level.ChallengesCallbacks[callback].size; i++)
       thread[[level.ChallengesCallbacks[callback][i]]](data);
   } else {
-    for (i = 0; i < level.ChallengesCallbacks[callback].size; i++)
+    for(i = 0; i < level.ChallengesCallbacks[callback].size; i++)
       thread[[level.ChallengesCallbacks[callback][i]]]();
   }
 }
 onPlayerConnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connected", player);
     player thread initChallengeData();
     player thread dtpWatcher();
@@ -268,13 +268,13 @@ genericBulletKill(data, victim, weapon) {
   if(player.pers["bulletStreak"] == 2)
     player maps\mp\gametypes\_persistence::statAdd("KILLS_BULLET_MULTI", 1, false, weapon);
   if(data.victim.iDFlagsTime == time) {
-    if(data.victim.iDFlags & level.iDFLAGS_PENETRATION)
+    if(data.victim.iDFlags &level.iDFLAGS_PENETRATION)
       player maps\mp\gametypes\_persistence::statAdd("BASIC_PENETRATION_KILLS", 1, false, weapon);
   }
 }
 dtpThroughGlassWatcher() {
   self endon("disconnect");
-  while (1) {
+  while(1) {
     self waittill("dtp_through_glass");
     self maps\mp\gametypes\_persistence::statAdd("BASIC_DTP_GLASS", 1, false);
     dtpTime = getTime();
@@ -283,7 +283,7 @@ dtpThroughGlassWatcher() {
 }
 dtpWatcher() {
   self endon("disconnect");
-  while (1) {
+  while(1) {
     self waittill("dtp_end");
     dtpTime = getTime();
     self thread dtpKills(dtpTime);
@@ -293,7 +293,7 @@ dtpKills(mutex) {
   self endon("death");
   self endon("dtpTimeOut" + mutex);
   self thread DtpKillTimeout(5, mutex);
-  while (1) {
+  while(1) {
     self waittill("challenge_killed", victim);
     if(!isDefined(victim))
       continue;
@@ -316,7 +316,7 @@ dtpGlassKills(mutex) {
   self endon("death");
   self endon("dtpGlassTimeOut" + mutex);
   self thread DtpGlassKillTimeout(5, mutex);
-  while (1) {
+  while(1) {
     self waittill("challenge_killed", victim);
     if(!isDefined(victim))
       continue;
@@ -344,7 +344,7 @@ isHighestScoringPlayer(player) {
   else
     team = "all";
   highScore = player.score;
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(!isDefined(players[i].score))
       continue;
     if(players[i] == player)
@@ -360,7 +360,7 @@ isHighestScoringPlayer(player) {
 }
 spawnWatcher() {
   self endon("disconnect");
-  while (1) {
+  while(1) {
     self waittill("spawned_player");
     self thread watchForBallisticKnifeKills();
     self thread watchForHatchetKills();
@@ -370,7 +370,7 @@ watchForHatchetKills() {
   self endon("disconnect");
   self endon("death");
   self.hatchetKills = 0;
-  while (self.hatchetKills < 2) {
+  while(self.hatchetKills < 2) {
     self waittill("hatchet_kill");
     self.hatchetKills++;
   }
@@ -380,7 +380,7 @@ watchForBallisticKnifeKills() {
   self endon("disconnect");
   self endon("death");
   self.ballisticKnifeKills = 0;
-  while (self.ballisticKnifeKills < 2) {
+  while(self.ballisticKnifeKills < 2) {
     self waittill("ballistic_knife_kill");
     self.ballisticKnifeKills++;
   }
@@ -545,7 +545,7 @@ roundEnd(winner) {
   if(!canProcessChallenges())
     return;
   wait(0.05);
-  data = spawnstruct();
+  data = spawnStruct();
   data.time = getTime();
   if(level.teamBased) {
     if(isDefined(winner) && winner == "axis" || winner == "allies") {
@@ -556,7 +556,7 @@ roundEnd(winner) {
       data.winner = winner;
     }
   }
-  for (index = 0; index < level.placement["all"].size; index++) {
+  for(index = 0; index < level.placement["all"].size; index++) {
     data.player = level.placement["all"][index];
     data.place = index;
     doChallengeCallback("roundEnd", data);
@@ -566,7 +566,7 @@ gameEnd(winner) {
   if(!canProcessChallenges())
     return;
   wait(0.05);
-  data = spawnstruct();
+  data = spawnStruct();
   data.time = getTime();
   if(level.teamBased) {
     if(isDefined(winner) && winner == "axis" || winner == "allies") {
@@ -577,7 +577,7 @@ gameEnd(winner) {
       data.winner = winner;
     }
   }
-  for (index = 0; index < level.placement["all"].size; index++) {
+  for(index = 0; index < level.placement["all"].size; index++) {
     data.player = level.placement["all"][index];
     data.place = index;
     doChallengeCallback("gameEnd", data);
@@ -614,7 +614,7 @@ teamCompletedChallenge(team, challenge) {
   if(!canProcessChallenges())
     return;
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(isDefined(players[i].team) && players[i].team == team) {
       players[i] maps\mp\gametypes\_persistence::statAdd(challenge, 1, false);
     }

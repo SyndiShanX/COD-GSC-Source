@@ -27,9 +27,9 @@ main() {
   maps\favela_anim::main();
   thread maps\favela_amb::main();
 
-  add_hint_string("leaving_warning", & "SO_KILLSPREE_FAVELA_MISSION_FAILED_LEAVING_WARNING");
-  add_hint_string("harmed_civilian", & "SO_KILLSPREE_FAVELA_DONT_HARM_CIVILIAN");
-  add_hint_string("harmed_civilian_final", & "SO_KILLSPREE_FAVELA_DONT_HARM_CIVILIAN_FINAL");
+  add_hint_string("leaving_warning", &"SO_KILLSPREE_FAVELA_MISSION_FAILED_LEAVING_WARNING");
+  add_hint_string("harmed_civilian", &"SO_KILLSPREE_FAVELA_DONT_HARM_CIVILIAN");
+  add_hint_string("harmed_civilian_final", &"SO_KILLSPREE_FAVELA_DONT_HARM_CIVILIAN_FINAL");
 
   flag_init("challenge_success");
   flag_init("favela_enemies_spawned");
@@ -54,17 +54,17 @@ main() {
 }
 
 delete_on_veteran() {
-  assert(isdefined(level.gameskill));
-  if(level.gameskill != 3)
+  assert(isDefined(level.gameskill));
+  if(level.gameskill != 3) {
     return;
-
-  delete_ents = getentarray("delete_on_veteran", "script_noteworthy");
+  }
+  delete_ents = getEntArray("delete_on_veteran", "script_noteworthy");
   foreach(ent in delete_ents)
   ent delete();
 }
 
 so_favela_setup_regular() {
-  level.challenge_objective = & "SO_KILLSPREE_FAVELA_OBJ_REGULAR";
+  level.challenge_objective = &"SO_KILLSPREE_FAVELA_OBJ_REGULAR";
   level.points_counter = 30;
 
   level.min_enemy_population = 14; // min enemies in level, refills a wave if drops below this number
@@ -78,7 +78,7 @@ so_favela_setup_regular() {
 }
 
 so_favela_setup_hardened() {
-  level.challenge_objective = & "SO_KILLSPREE_FAVELA_OBJ_HARDENED";
+  level.challenge_objective = &"SO_KILLSPREE_FAVELA_OBJ_HARDENED";
   level.points_counter = 40;
 
   level.min_enemy_population = 14; // min enemies in level, refills a wave if drops below this number
@@ -94,7 +94,7 @@ so_favela_setup_hardened() {
 so_favela_setup_veteran() {
   delete_on_veteran();
 
-  level.challenge_objective = & "SO_KILLSPREE_FAVELA_OBJ_VETERAN";
+  level.challenge_objective = &"SO_KILLSPREE_FAVELA_OBJ_VETERAN";
   level.points_counter = 50;
 
   level.min_enemy_population = 12; // min enemies in level, refills a wave if drops below this number
@@ -111,14 +111,14 @@ so_favela_init() {
   activate_trigger("vision_shanty", "script_noteworthy");
 
   // Remove unwanted weapons
-  sentries = getentarray("misc_turret", "classname");
+  sentries = getEntArray("misc_turret", "classname");
   foreach(sentry in sentries)
   sentry Delete();
-  stingers = getentarray("weapon_stinger", "classname");
+  stingers = getEntArray("weapon_stinger", "classname");
   foreach(stinger in stingers)
   stinger Delete();
 
-  assert(isdefined(level.gameskill));
+  assert(isDefined(level.gameskill));
 
   switch (level.gameSkill) {
     case 0: // Easy
@@ -161,7 +161,7 @@ so_favela_init() {
   array_spawn_function_noteworthy("ignored_until_goal", ::ignored_until_goal);
   array_spawn_function_noteworthy("desert_eagle_guy", ::desert_eagle_guy);
   array_spawn_function_noteworthy("faust", ::faust_spawn_func);
-  //array_thread( getentarray( "curtain_pulldown", "script_noteworthy" ), ::curtain_pulldown );
+  //array_thread( getEntArray( "curtain_pulldown", "script_noteworthy" ), ::curtain_pulldown );
 }
 
 // ---------------------------------------------------------------------------------
@@ -201,11 +201,10 @@ start_so_favela() {
   wait 2;
 
   //thread enemy_population_watch( 0.5, 5 );	// ( delay, sampling interval in seconds, sampling buffer duration in seconds )
-  /#
-  thread enemy_type_monitor();
-  # /
 
-    thread release_doggy();
+  thread enemy_type_monitor();
+
+  thread release_doggy();
   thread doggy_attack();
   thread enemy_refill(10, seeker_spawn_trig, favela_spawn_ambush_trigger);
   thread enemy_remove_when_max(10);
@@ -225,7 +224,7 @@ spawn_enemy_secondary_wave(trigger, max_spawned) {
   else
     spawn_trig = trigger;
 
-  if(!isdefined(max_spawned) || max_spawned < 0) {
+  if(!isDefined(max_spawned) || max_spawned < 0) {
     spawn_wave_by_trigger(spawn_trig);
     return;
   }
@@ -235,7 +234,7 @@ spawn_enemy_secondary_wave(trigger, max_spawned) {
 
   foreach(trig in spawn_trig) {
     spawner_targetname = trig.target;
-    enemy_spawners = getentarray(spawner_targetname, "targetname");
+    enemy_spawners = getEntArray(spawner_targetname, "targetname");
     enemy_spawners = array_randomize(enemy_spawners);
 
     foreach(spawner in enemy_spawners) {
@@ -256,7 +255,7 @@ enemy_refill(delay, seek_trigger, ambush_trigger) {
   flag_wait("enemy_population_info_available");
   wait delay;
 
-  while (1) {
+  while(1) {
     population_min_delta = level.min_enemy_population - level.current_enemy_population;
 
     if(population_min_delta > 0) {
@@ -277,7 +276,7 @@ enemy_remove_when_max(delay) {
 
   flag_wait("enemy_population_info_available");
 
-  while (1) {
+  while(1) {
     level waittill("enemy_number_changed");
     population_max_delta = level.max_enemy_population - level.current_enemy_population;
 
@@ -291,7 +290,7 @@ enemy_remove_when_max(delay) {
       enemies = getaiarray("axis");
       guys = [];
 
-      for (i = 0; i < abs(population_max_delta); i++) {
+      for(i = 0; i < abs(population_max_delta); i++) {
         idx = randomint(enemies.size);
         guys[i] = enemies[idx];
         enemies = array_remove_index(enemies, idx);
@@ -335,21 +334,21 @@ enemy_population_watch( delay, sample_duration )
 
 queue_push(array) {
   newArray = [];
-  for (i = 1; i < (array.size - 1); i++)
+  for(i = 1; i < (array.size - 1); i++)
     newArray[newArray.size] = array[i];
 
   return newArray;
 }
 
 doggy_attack() {
-  if(level.max_dogs_at_once <= 0)
+  if(level.max_dogs_at_once <= 0) {
     return;
-
+  }
   level endon("special_op_terminated");
 
   flag_wait("enemy_population_info_available");
 
-  while (1) {
+  while(1) {
     level waittill("enemy_downed");
     if(should_release_dog())
       level notify("who_let_the_dogs_out");
@@ -363,11 +362,11 @@ should_release_dog() {
 random_favela_background_runners() {
   level endon("special_op_terminated");
 
-  spawners = getentarray("random_favela_background_runner", "targetname");
+  spawners = getEntArray("random_favela_background_runner", "targetname");
 
   flag_wait("favela_enemies_spawned");
 
-  for (;;) {
+  for(;;) {
     spawners = array_randomize(spawners);
     foreach(spawner in spawners) {
       spawner.count = 1;

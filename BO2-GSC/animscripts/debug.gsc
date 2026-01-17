@@ -125,7 +125,7 @@ drawdebugcross(atpoint, radius, color, durationframes) {
 
 updatedebuginfo() {
   self endon("death");
-  self.debuginfo = spawnstruct();
+  self.debuginfo = spawnStruct();
   self.debuginfo.enabled = getdvarint(#"_id_40CDA2CF") > 0;
   debugclearstate();
 
@@ -315,7 +315,7 @@ debugpushstate(statename, extrainfo) {
   }
   assert(isDefined(self.debuginfo.states));
   assert(isDefined(statename));
-  state = spawnstruct();
+  state = spawnStruct();
   state.statename = statename;
   state.statelevel = self.debuginfo.statelevel;
   state.statetime = gettime();

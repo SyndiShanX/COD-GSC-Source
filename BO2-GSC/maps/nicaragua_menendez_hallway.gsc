@@ -107,7 +107,7 @@ nicaragua_to_misssion_animations() {
 }
 
 menendez_chickens_cleanup() {
-  a_chickens = getentarray("menendez_chicken", "targetname");
+  a_chickens = getEntArray("menendez_chicken", "targetname");
 
   foreach(m_chicken in a_chickens)
   m_chicken thread chicken_cleanup();

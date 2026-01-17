@@ -265,9 +265,7 @@ melee_mainloop() {
 
   for(;;) {
     var_0 = self.melee.func;
-    [
-      [self.melee.func]
-    ]();
+    [[self.melee.func]]();
 
     if(!isDefined(self.melee.func) || var_0 == self.melee.func) {
       break;

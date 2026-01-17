@@ -18,7 +18,6 @@
 #include scripts\zm_common\zm_spawner;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_zonemgr;
-
 #namespace namespace_df88241c;
 
 autoexec __init__system__() {
@@ -60,7 +59,7 @@ crawler_round_spawn() {
 spawn_nova_crawler(override_spawn_location = undefined) {
   var_d8d8ce1b = undefined;
 
-  if(function_4748fb49() < function_59257d57() && !(isDefined(level.var_5e45f817) && level.var_5e45f817) && isDefined(level.zm_loc_types[#"nova_crawler_location"]) && level.zm_loc_types[#"nova_crawler_location"].size > 0) {
+  if(function_4748fb49() < function_59257d57() && !(isDefined(level.var_5e45f817) && level.var_5e45f817) && isDefined(level.zm_loc_types[# "nova_crawler_location"]) && level.zm_loc_types[# "nova_crawler_location"].size > 0) {
     var_d8d8ce1b = zombie_utility::spawn_zombie(level.nova_crawler_spawner);
 
     if(isDefined(var_d8d8ce1b)) {
@@ -145,8 +144,8 @@ function_a5abd591() {
   return e_target;
 }
 
-private function_9a898f07(e_target) {
-  if(isDefined(level.zm_loc_types[#"nova_crawler_location"]) && level.zm_loc_types[#"nova_crawler_location"].size > 0) {
+function_9a898f07(e_target) {
+  if(isDefined(level.zm_loc_types[# "nova_crawler_location"]) && level.zm_loc_types[# "nova_crawler_location"].size > 0) {
     var_a6c95035 = [];
     str_target_zone = e_target zm_zonemgr::get_player_zone();
 
@@ -170,7 +169,7 @@ private function_9a898f07(e_target) {
       }
     }
 
-    foreach(loc in level.zm_loc_types[#"nova_crawler_location"]) {
+    foreach(loc in level.zm_loc_types[# "nova_crawler_location"]) {
       if(array::contains(var_24f5d9f8, loc.zone_name)) {
         if(!isDefined(var_a6c95035)) {
           var_a6c95035 = [];
@@ -193,12 +192,12 @@ function_87348a88(e_target) {
   return spawn_nova_crawler(override_spawn_location);
 }
 
-private function_9216fd1f() {
+function_9216fd1f() {
   spawn_locations = [];
   spawn_location = undefined;
 
-  if(isDefined(level.zm_loc_types[#"nova_crawler_location"])) {
-    spawn_locations = level.zm_loc_types[#"nova_crawler_location"];
+  if(isDefined(level.zm_loc_types[# "nova_crawler_location"])) {
+    spawn_locations = level.zm_loc_types[# "nova_crawler_location"];
   }
 
   if(spawn_locations.size > 0) {
@@ -219,7 +218,7 @@ private function_9216fd1f() {
   return spawn_location;
 }
 
-private function_e2bab5ec(spot) {
+function_e2bab5ec(spot) {
   if(isDefined(self.anchor)) {
     return;
   }

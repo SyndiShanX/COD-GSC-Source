@@ -10,14 +10,13 @@
 #include scripts\core_common\scene_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace gadget_homunculus;
 
 autoexec __init__system__() {
   system::register(#"homunculus", &__init__, undefined, undefined);
 }
 
-private __init__() {
+__init__() {
   level.var_2da60c10 = [];
 
   if(isDefined(getgametypesetting(#"wzenablehomunculus")) && getgametypesetting(#"wzenablehomunculus")) {
@@ -34,7 +33,7 @@ function_1c601b99() {
   }
 }
 
-private function_c83057f0() {
+function_c83057f0() {
   level endon(#"game_ended");
 
   while(true) {
@@ -69,7 +68,7 @@ private function_c83057f0() {
   }
 }
 
-private function_9ce07f7c(homunculus) {
+function_9ce07f7c(homunculus) {
   var_b1de6a06 = getentitiesinradius(homunculus.origin, 250, 15);
 
   foreach(actor in var_b1de6a06) {
@@ -81,7 +80,7 @@ private function_9ce07f7c(homunculus) {
   return false;
 }
 
-private function_90cc805b(homunculus) {
+function_90cc805b(homunculus) {
   var_b1de6a06 = getentitiesinradius(homunculus.origin, 250, 15);
   var_9db93b2e = [];
 
@@ -100,7 +99,7 @@ private function_90cc805b(homunculus) {
   return arraysortclosest(var_9db93b2e, homunculus.origin, undefined, undefined, 250);
 }
 
-private function_62318121(homunculus, ent) {
+function_62318121(homunculus, ent) {
   if(!isDefined(ent)) {
     return false;
   }
@@ -112,8 +111,8 @@ private function_62318121(homunculus, ent) {
   return false;
 }
 
-private event_handler[grenade_fire] function_4776caf4(eventstruct) {
-  if(eventstruct.weapon.name == #"homunculus") {
+event_handler[grenade_fire] function_4776caf4(eventstruct) {
+  if(eventstruct.weapon.name == # "homunculus") {
     grenade = eventstruct.projectile;
     grenade ghost();
     grenade.angles = self.angles;
@@ -135,7 +134,7 @@ private event_handler[grenade_fire] function_4776caf4(eventstruct) {
     }
 
     homunculus thread scene::play(#"aib_t8_zm_zod_homunculus_throw_loop_01", homunculus);
-    grenade waittill(#"stationary", #"death");
+    grenade waittill(#"stationary", # "death");
 
     if(isDefined(grenade)) {
       homunculus unlink();
@@ -188,7 +187,7 @@ private event_handler[grenade_fire] function_4776caf4(eventstruct) {
 }
 
 function_1dba4a2() {
-  self endon(#"death", #"hash_3e410dbcd9e66000");
+  self endon(#"death", # "hash_3e410dbcd9e66000");
   self.mover endon(#"death");
 
   while(true) {
@@ -200,7 +199,7 @@ function_1dba4a2() {
   }
 }
 
-private function_bb17ec5a() {
+function_bb17ec5a() {
   self endon(#"death");
   self.attacking = 1;
   self.mover scene::stop();
@@ -253,16 +252,16 @@ private function_bb17ec5a() {
   self.attacking = undefined;
 }
 
-private function_b053b486() {
+function_b053b486() {
   self endon(#"death");
   self.dancing = 1;
   self.mover scene::play(#"aib_t8_zm_zod_homunculus_idle_01", self);
 }
 
-private drop_to_ground(b_immediate = 0) {
+drop_to_ground(b_immediate = 0) {
   self endon(#"death");
   s_trace = groundtrace(self.origin + (0, 0, 16), self.origin + (0, 0, -1000), 0, self);
-  var_a75fe4be = s_trace[#"position"];
+  var_a75fe4be = s_trace[# "position"];
 
   if(b_immediate) {
     self.mover moveto(var_a75fe4be, 0.01);
@@ -278,23 +277,23 @@ private drop_to_ground(b_immediate = 0) {
   }
 }
 
-private jump(scene_ents) {
-  scene_ents[#"homunculus"] endon(#"death");
-  scene_ents[#"homunculus"] waittill(#"jumped");
+jump(scene_ents) {
+  scene_ents[# "homunculus"] endon(#"death");
+  scene_ents[# "homunculus"] waittill(#"jumped");
 
-  if(isDefined(scene_ents[#"homunculus"].mover)) {
-    scene_ents[#"homunculus"].mover movez(40, 0.35);
+  if(isDefined(scene_ents[# "homunculus"].mover)) {
+    scene_ents[# "homunculus"].mover movez(40, 0.35);
   }
 }
 
-private face_target(target) {
+face_target(target) {
   v_dir = vectornormalize(target.origin - self.origin);
   v_dir = (v_dir[0], v_dir[1], 0);
   v_angles = vectortoangles(v_dir);
   self.mover rotateto(v_angles, 0.15);
 }
 
-private function_c8f642f6(enemy, n_time) {
+function_c8f642f6(enemy, n_time) {
   self.mover movez(16, n_time);
   self.mover waittill(#"movedone");
 

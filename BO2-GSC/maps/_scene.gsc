@@ -513,7 +513,7 @@ _get_align_object(str_scene) {
       else
         align_object = getent(self.str_align_targetname, "targetname");
     } else {
-      s_align = spawnstruct();
+      s_align = spawnStruct();
       s_align.origin = align_object.origin;
 
       if(isDefined(align_object.angles))
@@ -672,10 +672,10 @@ _setup_asset_for_scene(s_asset_info, s_scene_info, b_first_frame) {
 _setup_ai_for_scene(s_asset_info, s_scene_info) {
   if(isDefined(s_asset_info.do_not_allow_death) && s_asset_info.do_not_allow_death) {
     self.allowdeath = 0;
-    self setcandamage(0);
+    self setCanDamage(0);
   } else {
     self.allowdeath = 1;
-    self setcandamage(1);
+    self setCanDamage(1);
   }
 
   self.do_hide_weapon = s_asset_info.do_hide_weapon;
@@ -698,7 +698,7 @@ _setup_model_for_scene(s_asset_info, s_scene_info, b_first_frame) {
   if(isDefined(self.is_drone) && self.is_drone) {
     if(isDefined(s_asset_info.b_play_dead) && s_asset_info.b_play_dead) {
       self.takedamage = 0;
-      self setlookattext("", & "");
+      self setlookattext("", &"");
       self notify("no_friendly_fire");
     } else if(!isDefined(s_asset_info.do_not_allow_death) || s_asset_info.do_not_allow_death)
       self.takedamage = 0;
@@ -878,11 +878,11 @@ _assemble_already_exist_model(str_scene, b_first_frame, clientside_linkto) {
 }
 
 _assemble_multiple_ais(str_scene, b_test_run, clientside_linkto) {
-  a_ai_spawned = getentarray(self.str_name + "_ai", "targetname");
+  a_ai_spawned = getEntArray(self.str_name + "_ai", "targetname");
   does_spawner_exist = 0;
 
   if(a_ai_spawned.size == 0) {
-    a_ai_spawners = getentarray(self.str_name, "targetname");
+    a_ai_spawners = getEntArray(self.str_name, "targetname");
 
     if(a_ai_spawners.size > 0) {
       does_spawner_exist = 1;
@@ -1191,7 +1191,7 @@ _run_anim_first_frame_on_asset(str_scene, align_object, b_clear_anim) {
 
   if(isai(self)) {
     self.allowdeath = 0;
-    self setcandamage(0);
+    self setCanDamage(0);
   }
 
   if(isDefined(s_scene_info.do_not_align) && s_scene_info.do_not_align)
@@ -1218,13 +1218,13 @@ _get_models_from_radiant(str_scene) {
   level.from_radiant_count = 0;
 
   if(isDefined(self.has_multiple_props) && self.has_multiple_props)
-    a_models = getentarray(self.str_name, "targetname");
+    a_models = getEntArray(self.str_name, "targetname");
   else {
     if(!isDefined(level.a_script_models) || !isDefined(level.a_script_models_time) || level.a_script_models_time != gettime()) {
       level.a_script_models = [];
-      level.a_script_models["script_model"] = getentarray("script_model", "classname");
-      level.a_script_models["script_vehicle"] = getentarray("script_vehicle", "classname");
-      level.a_script_models["script_brushmodel"] = getentarray("script_brushmodel", "classname");
+      level.a_script_models["script_model"] = getEntArray("script_model", "classname");
+      level.a_script_models["script_vehicle"] = getEntArray("script_vehicle", "classname");
+      level.a_script_models["script_brushmodel"] = getEntArray("script_brushmodel", "classname");
       level.a_script_models_time = gettime();
     }
 
@@ -1406,7 +1406,7 @@ _delete_ais(str_scene, b_specific_ais) {
       if(isDefined(ai.do_give_back_weapon) && ai.do_give_back_weapon)
         ai gun_recall();
 
-      ai setcandamage(1);
+      ai setCanDamage(1);
     }
   }
 
@@ -1428,7 +1428,7 @@ _delete_ais(str_scene, b_specific_ais) {
 
 add_scene(str_scene, str_align_targetname, do_reach, do_generic, do_loop, do_not_align) {
   if(!isDefined(level.scene_sys)) {
-    level.scene_sys = spawnstruct();
+    level.scene_sys = spawnStruct();
     level.scene_sys.str_current_scene = undefined;
     level.scene_sys.a_active_anim_models = [];
   }
@@ -1448,7 +1448,7 @@ add_scene(str_scene, str_align_targetname, do_reach, do_generic, do_loop, do_not
   if(!level flag_exists(str_scene + "_done"))
     flag_init(str_scene + "_done");
 
-  s_scene_info = spawnstruct();
+  s_scene_info = spawnStruct();
   s_scene_info.str_scene = str_scene;
   s_scene_info.a_anim_info = [];
 
@@ -1560,7 +1560,7 @@ add_cheap_actor_model_anim(str_animname, animation, str_model, do_delete, str_ta
 
 _basic_actor_setup(str_name, animation, do_delete) {
   assert(!isDefined(level.a_scenes[level.scene_sys.str_current_scene].a_anim_info[str_name]), "Actor, " + str_name + ", has already been declared for the scene, " + level.scene_sys.str_current_scene);
-  s_actor = spawnstruct();
+  s_actor = spawnStruct();
   s_actor.str_name = str_name;
   s_actor.animation = animation;
   s_actor.anim_tree = #animtree;
@@ -1621,7 +1621,7 @@ _basic_prop_setup(str_animname, animation, do_delete, is_simple_prop, str_functi
   assert(isDefined(str_animname), "str_animname is a required argument for " + str_function_name + " in scene, " + level.scene_sys.str_current_scene);
   assert(isDefined(animation), "animation is a required argument for " + str_function_name + " in scene, " + level.scene_sys.str_current_scene);
   assert(!isDefined(level.a_scenes[level.scene_sys.str_current_scene].a_anim_info[str_animname]), "Prop, " + str_animname + ", has already been declared for the scene, " + level.scene_sys.str_current_scene);
-  s_prop_anim = spawnstruct();
+  s_prop_anim = spawnStruct();
   s_prop_anim.str_name = str_animname;
   s_prop_anim.animation = animation;
 
@@ -1673,7 +1673,7 @@ add_player_anim(str_animname, animation, do_delete, n_player_number, str_tag, do
   assert(isDefined(str_animname), "str_animname is a required argument for add_player_anim() in scene, " + level.scene_sys.str_current_scene);
   assert(isDefined(animation), "animation is a required argument for add_player_anim() in scene, " + level.scene_sys.str_current_scene);
   assert(!isDefined(level.a_scenes[level.scene_sys.str_current_scene].a_anim_info[str_animname]), "Player model, " + str_animname + ", has already been declared for the scene, " + level.scene_sys.str_current_scene);
-  s_player = spawnstruct();
+  s_player = spawnStruct();
   s_player.str_name = str_animname;
   s_player.animation = animation;
   s_player.anim_tree = #animtree;
@@ -1827,7 +1827,7 @@ add_scene_custom_function(func, arg1, arg2, arg3, arg4, arg5, arg6) {
   if(!isDefined(level.a_scenes[str_scene].a_start_funcs))
     level.a_scenes[str_scene].a_start_funcs = [];
 
-  s_callback = spawnstruct();
+  s_callback = spawnStruct();
   s_callback.func = func;
   s_callback.arg1 = arg1;
   s_callback.arg2 = arg2;

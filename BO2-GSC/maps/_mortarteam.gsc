@@ -14,11 +14,11 @@ main(team) {
   precachemodel(level.prop_mortar_ammunition);
   precachemodel(level.prop_mortar);
   anims();
-  array_thread(getentarray("mortar_team", "targetname"), ::mortartrigger);
+  array_thread(getEntArray("mortar_team", "targetname"), ::mortartrigger);
 }
 
 mortarteam(spawners, node, mortar_targets, delay_base, delay_range) {
-  ent = spawnstruct();
+  ent = spawnStruct();
   ent.delay_base = delay_base;
   ent.delay_range = delay_range;
   ent thread mortarteamspawn(spawners, node, mortar_targets);
@@ -42,7 +42,7 @@ mortarspawner(delayent) {
     if(self.script_mortar_team_size == 2)
       spawners[1] = self;
   } else {
-    ents = getentarray(self.target, "targetname");
+    ents = getEntArray(self.target, "targetname");
 
     for(i = 0; i < ents.size; i++) {
       if(issubstr(ents[i].classname, "actor"))
@@ -377,7 +377,7 @@ loadguy(ent, node) {
   mortar = spawn("script_model", (0, 0, 0));
   mortar.origin = self gettagorigin("TAG_WEAPON_LEFT");
   mortar.angles = self gettagangles("TAG_WEAPON_LEFT");
-  mortar setmodel(level.prop_mortar);
+  mortar setModel(level.prop_mortar);
   node.mortarsetup = 1;
   ent.mortar = mortar;
   node.mortar = mortar;
@@ -412,12 +412,11 @@ fire(guy) {
   wait 0.4;
 
   if(isDefined(level._effect["mortar_flash_special"]))
-    playfxontag(level._effect["mortar_flash_special"], mortar, "TAG_fx");
+    playFXOnTag(level._effect["mortar_flash_special"], mortar, "TAG_fx");
   else if(isDefined(level._effect["mortar_flash"]))
-    playfxontag(level._effect["mortar_flash"], mortar, "TAG_fx");
+    playFXOnTag(level._effect["mortar_flash"], mortar, "TAG_fx");
 
-  if(isDefined(level.scr_sound["mortar_flash"])) {
-  }
+  if(isDefined(level.scr_sound["mortar_flash"])) {}
 
   target = random(mortar_targets);
 
@@ -432,7 +431,7 @@ fire(guy) {
   else {
     incoming_ent = spawn("script_origin", target.origin);
     wait(distance(self.origin, target.origin) * 0.0008);
-    incoming_ent playsound(level.mortarteam_incoming_sound, "sound_done");
+    incoming_ent playSound(level.mortarteam_incoming_sound, "sound_done");
     incoming_ent waittill("sound_done");
     incoming_ent delete();
   }
@@ -443,7 +442,7 @@ fire(guy) {
     else
       thread play_sound_in_space("exp_mortar", target.origin);
 
-    playfx(level.mortar, target.origin);
+    playFX(level.mortar, target.origin);
   }
 }
 

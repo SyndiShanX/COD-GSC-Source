@@ -652,8 +652,7 @@ zombie_devgui_think() {
 
         break;
       case "chest":
-        if(isDefined(level.zombie_weapons[getdvar(#"_id_45ED7744")])) {
-        }
+        if(isDefined(level.zombie_weapons[getdvar(#"_id_45ED7744")])) {}
 
         break;
       case "quantum_bomb_random_result":
@@ -881,8 +880,7 @@ zombie_devgui_think() {
             [
               [level.custom_devgui]
             ](cmd);
-        } else {
-        }
+        } else {}
 
         break;
     }
@@ -916,13 +914,13 @@ devgui_zombie_spawn() {
   spawnername = undefined;
   spawnername = "zombie_spawner";
   direction = player getplayerangles();
-  direction_vec = anglestoforward(direction);
-  eye = player geteye();
+  direction_vec = anglesToForward(direction);
+  eye = player getEye();
   scale = 8000;
   direction_vec = (direction_vec[0] * scale, direction_vec[1] * scale, direction_vec[2] * scale);
-  trace = bullettrace(eye, eye + direction_vec, 0, undefined);
+  trace = bulletTrace(eye, eye + direction_vec, 0, undefined);
   guy = undefined;
-  spawners = getentarray(spawnername, "script_noteworthy");
+  spawners = getEntArray(spawnername, "script_noteworthy");
   spawner = spawners[0];
   guy = maps\mp\zombies\_zm_utility::spawn_zombie(spawner);
 
@@ -939,11 +937,11 @@ devgui_zombie_spawn() {
 devgui_bot_spawn(team) {
   player = gethostplayer();
   direction = player getplayerangles();
-  direction_vec = anglestoforward(direction);
-  eye = player geteye();
+  direction_vec = anglesToForward(direction);
+  eye = player getEye();
   scale = 8000;
   direction_vec = (direction_vec[0] * scale, direction_vec[1] * scale, direction_vec[2] * scale);
-  trace = bullettrace(eye, eye + direction_vec, 0, undefined);
+  trace = bulletTrace(eye, eye + direction_vec, 0, undefined);
   direction_vec = player.origin - trace["position"];
   direction = vectortoangles(direction_vec);
   bot = addtestclient();
@@ -979,7 +977,7 @@ zombie_devgui_open_sesame() {
   flag_set("power_on");
   players = get_players();
   array_thread(players, ::zombie_devgui_give_money);
-  zombie_doors = getentarray("zombie_door", "targetname");
+  zombie_doors = getEntArray("zombie_door", "targetname");
 
   for(i = 0; i < zombie_doors.size; i++) {
     zombie_doors[i] notify("trigger", players[0]);
@@ -990,14 +988,14 @@ zombie_devgui_open_sesame() {
     wait 0.05;
   }
 
-  zombie_airlock_doors = getentarray("zombie_airlock_buy", "targetname");
+  zombie_airlock_doors = getEntArray("zombie_airlock_buy", "targetname");
 
   for(i = 0; i < zombie_airlock_doors.size; i++) {
     zombie_airlock_doors[i] notify("trigger", players[0]);
     wait 0.05;
   }
 
-  zombie_debris = getentarray("zombie_debris", "targetname");
+  zombie_debris = getEntArray("zombie_debris", "targetname");
 
   for(i = 0; i < zombie_debris.size; i++) {
     zombie_debris[i] notify("trigger", players[0]);
@@ -1535,7 +1533,7 @@ zombie_devgui_give_health() {
 }
 
 zombie_devgui_give_perk(perk) {
-  vending_triggers = getentarray("zombie_vending", "targetname");
+  vending_triggers = getEntArray("zombie_vending", "targetname");
   player = get_players()[0];
   level.devcheater = 1;
 
@@ -1568,11 +1566,11 @@ zombie_devgui_give_powerup(powerup_name, now, origin) {
     return;
   }
   direction = player getplayerangles();
-  direction_vec = anglestoforward(direction);
-  eye = player geteye();
+  direction_vec = anglesToForward(direction);
+  eye = player getEye();
   scale = 8000;
   direction_vec = (direction_vec[0] * scale, direction_vec[1] * scale, direction_vec[2] * scale);
-  trace = bullettrace(eye, eye + direction_vec, 0, undefined);
+  trace = bulletTrace(eye, eye + direction_vec, 0, undefined);
   level.zombie_devgui_power = 1;
   level.zombie_vars["zombie_drop_item"] = 1;
   level.powerup_drop_count = 0;
@@ -1630,8 +1628,7 @@ zombie_devgui_dog_round(num_dogs) {
   }
   if(!flag("dog_round"))
     setdvar("force_dogs", num_dogs);
-  else {
-  }
+  else {}
 
   zombie_devgui_goto_round(level.round_number + 1);
 }
@@ -1813,7 +1810,7 @@ showonespawnpoint(spawn_point, color, notification, height, print) {
     print = spawn_point.classname;
 
   center = spawn_point.origin;
-  forward = anglestoforward(spawn_point.angles);
+  forward = anglesToForward(spawn_point.angles);
   right = anglestoright(spawn_point.angles);
   forward = vectorscale(forward, 16);
   right = vectorscale(right, 16);
@@ -1838,8 +1835,8 @@ showonespawnpoint(spawn_point, color, notification, height, print) {
   thread lineuntilnotified(c, d, color, 0, notification);
   thread lineuntilnotified(d, a, color, 0, notification);
   center = center + (0, 0, height / 2);
-  arrow_forward = anglestoforward(spawn_point.angles);
-  arrowhead_forward = anglestoforward(spawn_point.angles);
+  arrow_forward = anglesToForward(spawn_point.angles);
+  arrowhead_forward = anglesToForward(spawn_point.angles);
   arrowhead_right = anglestoright(spawn_point.angles);
   arrow_forward = vectorscale(arrow_forward, 32);
   arrowhead_forward = vectorscale(arrowhead_forward, 24);

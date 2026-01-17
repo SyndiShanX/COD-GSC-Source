@@ -48,7 +48,7 @@ main() {
 
 busaddopening(tag_name, script_noteworthy) {
   index = self.openings.size;
-  self.openings[index] = spawnstruct();
+  self.openings[index] = spawnStruct();
   opening = self.openings[index];
   opening.name = script_noteworthy;
   opening.enabled = 1;
@@ -66,7 +66,7 @@ busaddopening(tag_name, script_noteworthy) {
   opening.roofjoint = _busgetroofjointfrombindtag(opening.bindtag);
   opening.origin = level.the_bus gettagorigin(opening.bindtag);
   opening.angles = self gettagangles(opening.bindtag);
-  targets = getentarray(tag_name, "targetname");
+  targets = getEntArray(tag_name, "targetname");
 
   if(!isDefined(targets)) {
     assert(0);
@@ -143,7 +143,7 @@ post_carpenter_callback() {
 }
 
 businitmantle() {
-  mantlebrush = getentarray("window_mantle", "targetname");
+  mantlebrush = getEntArray("window_mantle", "targetname");
 
   if(isDefined(mantlebrush) && mantlebrush.size > 0) {
     for(i = 0; i < mantlebrush.size; i++)
@@ -1154,7 +1154,7 @@ bussetupladder() {
   trigger linkto(level.the_bus);
   trigger setmovingplatformenabled(1);
   trigger setinvisibletoall();
-  mantlebrush = getentarray("ladder_mantle", "targetname");
+  mantlebrush = getEntArray("ladder_mantle", "targetname");
 
   if(isDefined(mantlebrush) && mantlebrush.size > 0) {
     for(i = 0; i < mantlebrush.size; i++)
@@ -1179,7 +1179,7 @@ busladderthink() {
   angles = angles + vectorscale((0, 1, 0), 90.0);
   level.the_bus.ladder = spawn("script_model", origin);
   level.the_bus.ladder.angles = angles;
-  level.the_bus.ladder setmodel("com_stepladder_large_closed");
+  level.the_bus.ladder setModel("com_stepladder_large_closed");
   level.the_bus.ladder notsolid();
   level.the_bus.ladder linkto(level.the_bus, "tag_ladder_attach");
   level.the_bus.ladder setmovingplatformenabled(1);
@@ -1206,14 +1206,14 @@ bussetuproofopening() {
   trigger setmovingplatformenabled(1);
   self thread bus_hatch_wait();
   self thread bus_hatch_tearin_wait();
-  clipbrush = getentarray("hatch_clip", "targetname");
+  clipbrush = getEntArray("hatch_clip", "targetname");
 
   if(isDefined(clipbrush) && clipbrush.size > 0) {
     for(i = 0; i < clipbrush.size; i++)
       self thread businithatchclip(clipbrush[i]);
   }
 
-  mantlebrush = getentarray("hatch_mantle", "targetname");
+  mantlebrush = getEntArray("hatch_mantle", "targetname");
 
   if(isDefined(mantlebrush) && mantlebrush.size > 0) {
     for(i = 0; i < mantlebrush.size; i++)
@@ -1264,7 +1264,7 @@ bus_hatch_tearin_wait() {
   level.the_bus hidepart("tag_hatch_pristine");
   level.the_bus showpart("tag_hatch_damaged");
   self notify("hatch_drop_allowed");
-  playfxontag(level._effect["bus_hatch_bust"], self, "tag_headlights");
+  playFXOnTag(level._effect["bus_hatch_bust"], self, "tag_headlights");
 }
 
 businithatchclip(clip) {
@@ -1357,7 +1357,7 @@ zombiemoveonbus() {
         self orientmode("face enemy");
 
         if(!(isDefined(level.the_bus.doorsclosed) && level.the_bus.doorsclosed)) {
-          doorstrigger = getentarray("bus_door_trigger", "targetname");
+          doorstrigger = getEntArray("bus_door_trigger", "targetname");
 
           foreach(trigger in doorstrigger) {
             if(self istouching(trigger)) {
@@ -1798,7 +1798,7 @@ zombiepathtoladder() {
       return false;
     }
 
-    goal_dir = anglestoforward(level.the_bus.angles + self.goal_local_angles);
+    goal_dir = anglesToForward(level.the_bus.angles + self.goal_local_angles);
     goal_pos = level.the_bus.hatch_location.origin;
 
     if(distancesquared(self.origin, goal_pos) <= 1600) {
@@ -1948,7 +1948,7 @@ zombieclimbtoroof() {
   self linkto(level.the_bus, hatch_tag);
   tag_origin = level.the_bus gettagorigin(hatch_tag);
   tag_angles = level.the_bus gettagangles(hatch_tag);
-  hatch_vec = vectornormalize(anglestoforward(tag_angles));
+  hatch_vec = vectornormalize(anglesToForward(tag_angles));
   player = self.favoriteenemy;
   player_vec = vectornormalize(player.origin - tag_origin);
   substate = 0;

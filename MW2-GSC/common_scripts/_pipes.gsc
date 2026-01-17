@@ -17,10 +17,10 @@ level_pipe_fx_chance = 33;
 //////////////////////////////////////////////////////////////////////////////
 main() {
   level._pipe_fx_time = 25;
-  pipes = GetEntArray("pipe_shootable", "targetname");
+  pipes = getEntArray("pipe_shootable", "targetname");
   if(!pipes.size)
     return;
-  level._pipes = SpawnStruct();
+  level._pipes = spawnStruct();
   level._pipes.num_pipe_fx = 0;
 
   pipes thread precacheFX();
@@ -31,20 +31,20 @@ main() {
 }
 
 pipesetup() {
-  self SetCanDamage(true);
-  self SetCanRadiusDamage(false); // optimization
+  self setCanDamage(true);
+  self setCanRadiusDamage(false); // optimization
   self.pipe_fx_array = [];
 
   node = undefined;
 
-  if(IsDefined(self.target)) {
+  if(isDefined(self.target)) {
     node = getstruct(self.target, "targetname");
     self.A = node.origin;
-    vec = AnglesToForward(node.angles);
+    vec = anglesToForward(node.angles);
     vec = vector_multiply(vec, 128);
     self.B = self.A + vec;
   } else {
-    vec = AnglesToForward(self.angles);
+    vec = anglesToForward(self.angles);
     vec1 = vector_multiply(vec, 64);
     self.A = self.origin + vec1;
     vec1 = vector_multiply(vec, -64);
@@ -60,7 +60,7 @@ pipe_wait_loop() {
   hasTakenDamage = false;
   remaining = max_fires_from_entity;
 
-  while (1) {
+  while(1) {
     self waittill("damage", damage, other, direction_vec, P, type);
 
     // random so we don't get so many fx, but the very first time is guarenteed
@@ -74,11 +74,12 @@ pipe_wait_loop() {
     if(result)
       remaining--;
 
-    if(remaining <= 0)
+    if(remaining <= 0) {
       break;
+    }
   }
 
-  self SetCanDamage(false);
+  self setCanDamage(false);
 }
 
 pipe_logic(direction_vec, P, type, damageOwner) {
@@ -90,10 +91,10 @@ pipe_logic(direction_vec, P, type, damageOwner) {
   else
     P = self[[level._pipes._pipe_methods[type]]](P, type);
 
-  if(!isdefined(P))
+  if(!isDefined(P))
     return false;
 
-  if(IsDefined(damageOwner.classname) && damageOwner.classname == "worldspawn")
+  if(isDefined(damageOwner.classname) && damageOwner.classname == "worldspawn")
     return false;
 
   foreach(value in self.pipe_fx_array) {
@@ -114,10 +115,10 @@ pipefx(P, vec, damageOwner) {
   loopsnd = level._pipes._sound[self.script_noteworthy + "_loop"];
   endsnd = level._pipes._sound[self.script_noteworthy + "_end"];
 
-  snd = Spawn("script_origin", P);
+  snd = spawn("script_origin", P);
   snd Hide();
-  snd PlaySound(hitsnd);
-  snd PlayLoopSound(loopsnd);
+  snd playSound(hitsnd);
+  snd playLoopSound(loopsnd);
   self.pipe_fx_array[self.pipe_fx_array.size] = snd;
 
   level._pipes.num_pipe_fx++;
@@ -126,17 +127,17 @@ pipefx(P, vec, damageOwner) {
     self thread pipe_damage(P, vec, damageOwner, snd);
 
   //do it once without checking for newer fx being played ( we're the newest )
-  PlayFX(level._pipes._effect[self.script_noteworthy], P, vec);
+  playFX(level._pipes._effect[self.script_noteworthy], P, vec);
   wait time;
   intervals--;
 
   //now check	for other fx and rest of intervals
-  while (level._pipes.num_pipe_fx <= level_limit_pipe_fx && intervals > 0) {
-    PlayFX(level._pipes._effect[self.script_noteworthy], P, vec);
+  while(level._pipes.num_pipe_fx <= level_limit_pipe_fx && intervals > 0) {
+    playFX(level._pipes._effect[self.script_noteworthy], P, vec);
     wait time;
     intervals--;
   }
-  snd PlaySound(endsnd);
+  snd playSound(endsnd);
   wait(.5);
   snd StopLoopSound(loopsnd);
   snd Delete();
@@ -146,17 +147,17 @@ pipefx(P, vec, damageOwner) {
 }
 
 pipe_damage(P, vec, damageOwner, fx) {
-  if(!allow_pipe_damage())
+  if(!allow_pipe_damage()) {
     return;
-
+  }
   fx endon("death");
 
   origin = fx.origin + vector_multiply(VectorNormalize(vec), 40);
   dmg = level._pipes._dmg[self.script_noteworthy];
 
-  while (1) {
+  while(1) {
     // do not pass damage owner if they have disconnected before the barrels explode.. the barrels?
-    if(!isdefined(self.damageOwner)) {
+    if(!isDefined(self.damageOwner)) {
       // MOD_TRIGGER_HURT so they dont do dirt on the player's screen
       self RadiusDamage(origin, 36, dmg, dmg * 0.75, undefined, "MOD_TRIGGER_HURT");
     } else {

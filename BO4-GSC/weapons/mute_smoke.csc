@@ -6,7 +6,6 @@
 #include scripts\core_common\audio_shared;
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\duplicaterender_mgr;
-
 #namespace mute_smoke;
 
 init_shared() {
@@ -18,9 +17,9 @@ init_shared() {
     clientfield::register("allplayers", "inFriendlyMuteSmoke", 1, 1, "int", &function_baebe8c4, 0, 0);
     level thread function_12e09509();
     level.var_1726ea2d = [];
-    level.var_1726ea2d[#"stand"] = 62;
-    level.var_1726ea2d[#"crouch"] = 42;
-    level.var_1726ea2d[#"prone"] = 13;
+    level.var_1726ea2d[# "stand"] = 62;
+    level.var_1726ea2d[# "crouch"] = 42;
+    level.var_1726ea2d[# "prone"] = 13;
   }
 }
 
@@ -96,7 +95,6 @@ function_12e09509(localclientnum = 0) {
 
     if(!player function_8e51b4f(0)) {
       if(var_34bb1a09) {
-
         function_e08f51f(var_46e1fb08.origin);
         function_e08f51f(var_37b85cb5.origin);
         function_e08f51f(var_618fb067.origin);
@@ -124,7 +122,7 @@ function_12e09509(localclientnum = 0) {
 
     function_783a1c07(previs_weapon);
 
-      settings = level.mute_smoke_custom_settings;
+    settings = level.mute_smoke_custom_settings;
     var_91f40e9 = max(isDefined(settings.var_91f40e9) ? settings.var_91f40e9 : 1, 0.01);
     var_46e1fb08 setscale(var_91f40e9);
     var_37b85cb5 setscale(var_91f40e9);
@@ -143,19 +141,19 @@ function_12e09509(localclientnum = 0) {
     grenadeangles = vectortoangles(velocity);
     eye_pos = getlocalclienteyepos(localclientnum);
     trace1 = projectiletrace(eye_pos, velocity, 0);
-    var_46e1fb08.origin = trace1[#"position"];
-    var_46e1fb08.angles = (angleclamp180(vectortoangles(trace1[#"normal"])[0] + 90), vectortoangles(trace1[#"normal"])[1], 0);
+    var_46e1fb08.origin = trace1[# "position"];
+    var_46e1fb08.angles = (angleclamp180(vectortoangles(trace1[# "normal"])[0] + 90), vectortoangles(trace1[# "normal"])[1], 0);
     speed = length(velocity);
     var_2571f440 = grenadeangles + (var_de0fa6f1, var_71c4a0d9, 0);
     var_d2922c1e = vectorscale(anglesToForward(var_2571f440), speed * var_46f48578);
     trace2 = projectiletrace(eye_pos, var_d2922c1e, 0);
-    var_37b85cb5.origin = trace2[#"position"];
-    var_37b85cb5.angles = (angleclamp180(vectortoangles(trace2[#"normal"])[0] + 90), vectortoangles(trace2[#"normal"])[1], 0);
+    var_37b85cb5.origin = trace2[# "position"];
+    var_37b85cb5.angles = (angleclamp180(vectortoangles(trace2[# "normal"])[0] + 90), vectortoangles(trace2[# "normal"])[1], 0);
     var_c1917dbc = grenadeangles + (var_99803ce, var_6b0817d7, 0);
     var_c0cb8891 = vectorscale(anglesToForward(var_c1917dbc), speed * var_3300383);
     trace3 = projectiletrace(eye_pos, var_c0cb8891, 0);
-    var_618fb067.origin = trace3[#"position"];
-    var_618fb067.angles = (angleclamp180(vectortoangles(trace3[#"normal"])[0] + 90), vectortoangles(trace3[#"normal"])[1], 0);
+    var_618fb067.origin = trace3[# "position"];
+    var_618fb067.angles = (angleclamp180(vectortoangles(trace3[# "normal"])[0] + 90), vectortoangles(trace3[# "normal"])[1], 0);
   }
 }
 
@@ -169,9 +167,9 @@ function_e08f51f(origin, color) {
   }
 }
 
-  function function_b2248deb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-    self function_7aeda665(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump);
-  }
+function function_b2248deb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+  self function_7aeda665(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump);
+}
 
 function_baebe8c4(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self function_24dbaaee(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump);
@@ -188,7 +186,7 @@ function_24dbaaee(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 function_7aeda665(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   player = self;
-  var_f0120993 = function_5778f82(localclientnum, #"hash_410c46b5ff702c96");
+  var_f0120993 = function_5778f82(localclientnum, # "hash_410c46b5ff702c96");
 
   if(var_f0120993 && !player function_83973173()) {
     if(newval == 0) {
@@ -202,7 +200,7 @@ function_7aeda665(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 function_12d5587e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   player = self;
-  var_f0120993 = function_5778f82(localclientnum, #"hash_410c46b5ff702c96");
+  var_f0120993 = function_5778f82(localclientnum, # "hash_410c46b5ff702c96");
 
   if(var_f0120993 && !player function_83973173()) {
     if(newval == 0) {
@@ -220,7 +218,7 @@ function_a189ab2e(localclientnum, enemy) {
   local_player = self;
   local_player notify("stop_watching_enemy_visibility" + enemy getentitynumber());
   local_player endon(#"death", "stop_watching_enemy_visibility" + enemy getentitynumber());
-  enemy endon(#"death", #"disconnect");
+  enemy endon(#"death", # "disconnect");
   can_see_enemy = 0;
 
   while(true) {
@@ -229,7 +227,7 @@ function_a189ab2e(localclientnum, enemy) {
     player_eye_pos = local_player getEye();
     trace = bulletTrace(player_eye_pos, enemy_eye_pos, 1, enemy);
     var_8c0e537d = can_see_enemy;
-    can_see_enemy = trace[#"fraction"] > 0.95;
+    can_see_enemy = trace[# "fraction"] > 0.95;
 
     if(var_8c0e537d != can_see_enemy) {
       enemy duplicate_render::set_hacker_tool_hacked(localclientnum, can_see_enemy);

@@ -59,9 +59,7 @@ initialize(animscript) {
   if(isDefined(self.a.postScriptFunc)) {
     scriptFunc = self.a.postScriptFunc;
     self.a.postScriptFunc = undefined;
-    [
-      [scriptFunc]
-    ](animscript);
+    [[scriptFunc]](animscript);
   }
   if(animscript != "combat" && animscript != "pain" && animscript != "death" && usingSidearm()) {
     self animscripts\shared::placeWeaponOn(self.primaryweapon, "right");
@@ -94,7 +92,7 @@ checkGrenadeInHand(animscript) {
     waittillframeend;
   }
   attachSize = self getattachsize();
-  for (i = 0; i < attachSize; i++) {
+  for(i = 0; i < attachSize; i++) {
     model = toLower(self getAttachModelName(i));
     assertex(model != "weapon_m67_grenade", "AI has a grenade in hand after animscript finished. Please call over an animscripter! " + self.origin);
     assertex(model != "weapon_m84_flashbang_grenade", "AI has a grenade in hand after animscript finished. Please call over an animscripter! " + self.origin);
@@ -120,10 +118,10 @@ should_find_a_new_node() {
 }
 
 badplacer(time, org, radius) {
-  for (i = 0; i < time * 20; i++) {
-    for (p = 0; p < 10; p++) {
+  for(i = 0; i < time * 20; i++) {
+    for(p = 0; p < 10; p++) {
       angles = (0, randomint(360), 0);
-      forward = anglestoforward(angles);
+      forward = anglesToForward(angles);
       scale = vectorScale(forward, radius);
       line(org, org + scale, (1, 0.3, 0.3));
     }
@@ -135,7 +133,7 @@ printDisplaceInfo() {
   self endon("death");
   self notify("displaceprint");
   self endon("displaceprint");
-  for (;;) {
+  for(;;) {
     print3d(self.origin + (0, 0, 60), "displacer", (0, 0.4, 0.7), 0.85, 0.5);
     wait(0.05);
   }
@@ -263,7 +261,7 @@ canShootEnemyFrom(offset, posOverrideEntity, useSightCheck, posOverrideOrigin) {
     return false;
   if(isDefined(posOverrideEntity)) {
     if(isSentient(posOverrideEntity)) {
-      eye = posOverrideEntity GetEye();
+      eye = posOverrideEntity getEye();
       chest = eye + (0, 0, -20);
     } else {
       eye = posOverrideEntity.origin;
@@ -342,9 +340,9 @@ GetNodeYawToEnemy() {
     pos = self.enemy.origin;
   } else {
     if(isDefined(self.node))
-      forward = anglestoforward(self.node.angles);
+      forward = anglesToForward(self.node.angles);
     else
-      forward = anglestoforward(self.angles);
+      forward = anglesToForward(self.angles);
     forward = vectorScale(forward, 150);
     pos = self.origin + forward;
   }
@@ -361,7 +359,7 @@ GetCoverNodeYawToEnemy() {
   if(isValidEnemy(self.enemy)) {
     pos = self.enemy.origin;
   } else {
-    forward = anglestoforward(self.coverNode.angles + self.animarray["angle_step_out"][self.a.cornerMode]);
+    forward = anglesToForward(self.coverNode.angles + self.animarray["angle_step_out"][self.a.cornerMode]);
     forward = vectorScale(forward, 150);
     pos = self.origin + forward;
   }
@@ -382,7 +380,7 @@ GetYawToEnemy() {
   if(isValidEnemy(self.enemy)) {
     pos = self.enemy.origin;
   } else {
-    forward = anglestoforward(self.angles);
+    forward = anglesToForward(self.angles);
     forward = vectorScale(forward, 150);
     pos = self.origin + forward;
   }
@@ -613,8 +611,8 @@ GetNodeDirection() {
 GetNodeForward() {
   myNode = GetClaimedNode();
   if(isDefined(myNode))
-    return AnglesToForward(myNode.angles);
-  return AnglesToForward(self.angles);
+    return anglesToForward(myNode.angles);
+  return anglesToForward(self.angles);
 }
 
 GetNodeOrigin() {
@@ -629,7 +627,7 @@ isDebugOn() {
 }
 
 drawDebugLineInternal(fromPoint, toPoint, color, durationFrames) {
-  for (i = 0; i < durationFrames; i++) {
+  for(i = 0; i < durationFrames; i++) {
     line(fromPoint, toPoint, color);
     wait(0.05);
   }
@@ -641,7 +639,7 @@ drawDebugLine(fromPoint, toPoint, color, durationFrames) {
 }
 
 debugLine(fromPoint, toPoint, color, durationFrames) {
-  for (i = 0; i < durationFrames * 20; i++) {
+  for(i = 0; i < durationFrames * 20; i++) {
     line(fromPoint, toPoint, color);
     wait(0.05);
   }
@@ -687,7 +685,7 @@ UpdateDebugInfoInternal() {
 
 UpdateDebugInfo() {
   self endon("death");
-  for (;;) {
+  for(;;) {
     thread UpdateDebugInfoInternal();
     wait 1;
   }
@@ -696,7 +694,7 @@ UpdateDebugInfo() {
 drawDebugInfoThread() {
   self endon("EndDebugInfo");
   self endon("death");
-  for (;;) {
+  for(;;) {
     self thread drawDebugInfo();
     wait 0.05;
   }
@@ -713,7 +711,7 @@ drawDebugInfo() {
   line[4] = self.a.lastDebugPrint1;
   belowFeet = self.origin + (0, 0, -8);
   offset = (0, 0, -10);
-  for (i = 0; i < line.size; i++) {
+  for(i = 0; i < line.size; i++) {
     if(isDefined(line[i])) {
       textPos = (belowFeet[0] + (offset[0] * i), belowFeet[1] + (offset[1] * i), belowFeet[2] + (offset[2] * i));
       print3d(textPos, line[i], (.2, .2, 1), 1, 0.75);
@@ -777,7 +775,7 @@ getQuadrant(angle) {
 }
 
 IsInSet(input, set) {
-  for (i = set.size - 1; i >= 0; i--) {
+  for(i = set.size - 1; i >= 0; i--) {
     if(input == set[i])
       return true;
   }
@@ -806,7 +804,7 @@ NotifyAfterTime(notifyString, killmestring, time) {
 drawString(stringtodraw) {
   self endon("killanimscript");
   self endon("enddrawstring");
-  for (;;) {
+  for(;;) {
     wait .05;
     print3d((self GetDebugEye()) + (0, 0, 8), stringtodraw, (1, 1, 1), 1, 0.2);
   }
@@ -814,7 +812,7 @@ drawString(stringtodraw) {
 
 drawStringTime(msg, org, color, timer) {
   maxtime = timer * 20;
-  for (i = 0; i < maxtime; i++) {
+  for(i = 0; i < maxtime; i++) {
     print3d(org, msg, color, 1, 1);
     wait .05;
   }
@@ -831,7 +829,7 @@ showLastEnemySightPos(string) {
     color = (0.4, 0.7, 1);
   else
     color = (1, 0.7, 0.4);
-  while (1) {
+  while(1) {
     wait(0.05);
     if(!isDefined(self.lastEnemySightPos)) {
       continue;
@@ -846,7 +844,7 @@ printDebugTextProc(string, org, printTime, color) {
   if(!isDefined(color))
     color = (0.3, 0.9, 0.6);
   timer = printTime * 20;
-  for (i = 0; i < timer; i += 1) {
+  for(i = 0; i < timer; i += 1) {
     wait(0.05);
     print3d(org, string, color, 1, 1);
   }
@@ -964,14 +962,14 @@ debugPosInternal(org, string, size) {
   self endon("death");
   self notify("stop debug " + org);
   self endon("stop debug " + org);
-  ent = spawnstruct();
+  ent = spawnStruct();
   ent thread debugTimeout();
   ent endon("timeout");
   if(self.enemy.team == "allies")
     color = (0.4, 0.7, 1);
   else
     color = (1, 0.7, 0.4);
-  while (1) {
+  while(1) {
     wait(0.05);
     print3d(org, string, color, 1, size);
   }
@@ -1008,7 +1006,7 @@ printShootProc() {
   self endon("stop shoot " + self.export);
   printTime = 0.25;
   timer = printTime * 20;
-  for (i = 0; i < timer; i += 1) {
+  for(i = 0; i < timer; i += 1) {
     wait(0.05);
     print3d(self.origin + (0, 0, 70), "Shoot", (1, 0, 0), 1, 1);
   }
@@ -1022,7 +1020,7 @@ printShoot() {
 showDebugProc(fromPoint, toPoint, color, printTime) {
   self endon("death");
   timer = printTime * 20;
-  for (i = 0; i < timer; i += 1) {
+  for(i = 0; i < timer; i += 1) {
     wait(0.05);
     line(fromPoint, toPoint, color);
   }
@@ -1034,13 +1032,9 @@ showDebugLine(fromPoint, toPoint, color, printTime) {
 
 shootEnemyWrapper() {
   if(self usingGasWeapon()) {
-    [
-      [anim.shootFlameThrowerWrapper_func]
-    ]();
+    [[anim.shootFlameThrowerWrapper_func]]();
   } else {
-    [
-      [anim.shootEnemyWrapper_func]
-    ]();
+    [[anim.shootEnemyWrapper_func]]();
   }
 }
 
@@ -1088,12 +1082,12 @@ shootPosWrapper(shootPos) {
 
 throwGun() {
   org = spawn("script_model", (0, 0, 0));
-  org setmodel("temp");
+  org setModel("temp");
   org.origin = self getTagOrigin("tag_weapon_right") + (50, 50, 0);
   org.angles = self getTagAngles("tag_weapon_right");
   right = anglestoright(org.angles);
   right = vectorScale(right, 15);
-  forward = anglestoforward(org.angles);
+  forward = anglesToForward(org.angles);
   forward = vectorScale(forward, 15);
   org moveGravity((0, 50, 150), 100);
   weaponClass = "weapon_" + self.weapon;
@@ -1101,11 +1095,11 @@ throwGun() {
   weapon.angles = self getTagAngles("tag_weapon_right");
   weapon linkto(org);
   lastOrigin = org.origin;
-  while ((isDefined(weapon)) && (isDefined(weapon.origin))) {
+  while((isDefined(weapon)) && (isDefined(weapon.origin))) {
     start = lastOrigin;
     end = org.origin;
     angles = vectortoangles(end - start);
-    forward = anglestoforward(angles);
+    forward = anglesToForward(angles);
     forward = vectorScale(forward, 4);
     trace = bulletTrace(end, end + forward, true, weapon);
     if(isalive(trace["entity"]) && trace["entity"] == self) {
@@ -1185,9 +1179,9 @@ PersonalColdBreath() {
   self endon("death");
   self notify("stop personal effect");
   self endon("stop personal effect");
-  for (;;) {
+  for(;;) {
     if(self.a.movement != "run") {
-      playfxOnTag(level._effect["cold_breath"], self, tag);
+      playFXOnTag(level._effect["cold_breath"], self, tag);
       wait(2.5 + randomfloat(3));
     } else
       wait(0.5);
@@ -1198,7 +1192,7 @@ PersonalColdBreathSpawner() {
   self endon("death");
   self notify("stop personal effect");
   self endon("stop personal effect");
-  for (;;) {
+  for(;;) {
     self waittill("spawned", spawn);
     if(maps\_utility::spawn_failed(spawn))
       continue;
@@ -1236,7 +1230,7 @@ getNodeOffset(node) {
   cornernode = false;
   nodeOffset = (0, 0, 0);
   right = anglestoright(node.angles);
-  forward = anglestoforward(node.angles);
+  forward = anglesToForward(node.angles);
   switch (node.type) {
     case "Cover Left":
     case "Cover Left Wide":
@@ -1275,7 +1269,7 @@ canSeeEnemy() {
   if(!isValidEnemy(self.enemy))
     return false;
   if(self canSee(self.enemy) || (isDefined(self.cansee_override) && self.cansee_override)) {
-    if(!checkPitchVisibility(self geteye(), self.enemy getshootatpos()))
+    if(!checkPitchVisibility(self getEye(), self.enemy getshootatpos()))
       return false;
     self.goodShootPosValid = true;
     self.goodShootPos = GetEnemyEyePos();
@@ -1351,7 +1345,7 @@ updateGiveUpOnSuppressionTimer() {
 }
 
 showLines(start, end, end2) {
-  for (;;) {
+  for(;;) {
     line(start, end, (1, 0, 0), 1);
     wait(0.05);
     line(start, end2, (0, 0, 1), 1);
@@ -1371,7 +1365,7 @@ aiSuppressAI() {
   if(!self canShoot(shootPos))
     return false;
   if(self.a.script == "combat") {
-    if(!sighttracepassed(self geteye(), self gettagorigin("tag_flash"), false, undefined))
+    if(!sighttracepassed(self getEye(), self gettagorigin("tag_flash"), false, undefined))
       return false;
   }
   self.goodShootPosValid = true;
@@ -1455,7 +1449,7 @@ findGoodSuppressSpot(startOffset) {
   self.lastEnemySightPosSelfOrigin = self.origin;
   self.lastEnemySightPosOld = self.lastEnemySightPos;
   currentEnemyPos = GetEnemyEyePos();
-  trace = bullettrace(self.lastEnemySightPos, currentEnemyPos, false, undefined);
+  trace = bulletTrace(self.lastEnemySightPos, currentEnemyPos, false, undefined);
   startTracesAt = trace["position"];
   percievedMovementVector = self.lastEnemySightPos - startTracesAt;
   lookVector = vectorNormalize(self.lastEnemySightPos - startOffset);
@@ -1477,7 +1471,7 @@ findGoodSuppressSpot(startOffset) {
   self.goodShootPosValid = false;
   goodTraces = 0;
   neededGoodTraces = 2;
-  for (i = 0; i < numTraces + neededGoodTraces; i++) {
+  for(i = 0; i < numTraces + neededGoodTraces; i++) {
     tracePassed = sightTracePassed(startOffset, traceTo, false, undefined);
     thisTraceTo = traceTo;
     if(getdebugdvarint("debug_dotshow") == self getentnum()) {
@@ -1515,11 +1509,11 @@ anim_array(animArray, animWeights) {
     return animArray[0];
   weights = 0;
   total_weight = 0;
-  for (i = 0; i < total_anims; i++)
+  for(i = 0; i < total_anims; i++)
     total_weight += animWeights[i];
   anim_play = randomfloat(total_weight);
   current_weight = 0;
-  for (i = 0; i < total_anims; i++) {
+  for(i = 0; i < total_anims; i++) {
     current_weight += animWeights[i];
     if(anim_play >= current_weight) {
       continue;
@@ -1540,7 +1534,7 @@ forcedCover(msg) {
 
 print3dtime(timer, org, msg, color, alpha, scale) {
   newtime = timer / 0.05;
-  for (i = 0; i < newtime; i++) {
+  for(i = 0; i < newtime; i++) {
     print3d(org, msg, color, alpha, scale);
     wait(0.05);
   }
@@ -1550,7 +1544,7 @@ print3drise(org, msg, color, alpha, scale) {
   newtime = 5 / 0.05;
   up = 0;
   org = org + randomvector(30);
-  for (i = 0; i < newtime; i++) {
+  for(i = 0; i < newtime; i++) {
     up += 0.5;
     print3d(org + (0, 0, up), msg, color, alpha, scale);
     wait(0.05);
@@ -1624,11 +1618,11 @@ random_weight(array) {
   idleanim = randomint(array.size);
   if(array.size > 1) {
     anim_weight = 0;
-    for (i = 0; i < array.size; i++)
+    for(i = 0; i < array.size; i++)
       anim_weight += array[i];
     anim_play = randomfloat(anim_weight);
     anim_weight = 0;
-    for (i = 0; i < array.size; i++) {
+    for(i = 0; i < array.size; i++) {
       anim_weight += array[i];
       if(anim_play < anim_weight) {
         idleanim = i;
@@ -1671,7 +1665,7 @@ persistentDebugLine(start, end) {
   self endon("death");
   level notify("newdebugline");
   level endon("newdebugline");
-  for (;;) {
+  for(;;) {
     line(start, end, (0.3, 1, 0), 1);
     wait(0.05);
   }
@@ -1782,7 +1776,7 @@ animArrayPickRandom(animname) {
 dumpAnimArray() {
   println("self.a.array:");
   keys = getArrayKeys(self.a.array);
-  for (i = 0; i < keys.size; i++) {
+  for(i = 0; i < keys.size; i++) {
     if(isarray(self.a.array[keys[i]]))
       println(" array[ \"" + keys[i] + "\" ] = {array of size " + self.a.array[keys[i]].size + "}");
     else
@@ -1955,7 +1949,7 @@ ragdollDeath(moveAnim) {
   self endon("killanimscript");
   lastOrg = self.origin;
   moveVec = (0, 0, 0);
-  for (;;) {
+  for(;;) {
     wait(0.05);
     force = distance(self.origin, lastOrg);
     lastOrg = self.origin;

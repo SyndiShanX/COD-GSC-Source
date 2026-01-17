@@ -9,7 +9,7 @@
 #namespace zm_ai_mechz;
 
 function autoexec __init__sytem__() {
-  system::register("zm_ai_mechz", & __init__, & __main__, undefined);
+  system::register("zm_ai_mechz", &__init__, &__main__, undefined);
 }
 
 function autoexec __init__() {}

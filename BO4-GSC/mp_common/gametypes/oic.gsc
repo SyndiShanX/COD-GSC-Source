@@ -37,7 +37,6 @@
 #include scripts\mp_common\player\player_utils;
 #include scripts\mp_common\util;
 #include scripts\weapons\weapon_utils;
-
 #namespace oic;
 
 event_handler[gametype_init] main(eventstruct) {
@@ -169,17 +168,17 @@ givecustomloadout() {
   self switchtoweapon(weapon);
   clipammo = 1;
 
-  if(isDefined(self.pers[#"clip_ammo"])) {
-    clipammo = self.pers[#"clip_ammo"];
-    self.pers[#"clip_ammo"] = undefined;
+  if(isDefined(self.pers[# "clip_ammo"])) {
+    clipammo = self.pers[# "clip_ammo"];
+    self.pers[# "clip_ammo"] = undefined;
   }
 
   self setweaponammoclip(weapon, clipammo);
   stockammo = 0;
 
-  if(isDefined(self.pers[#"stock_ammo"])) {
-    stockammo = self.pers[#"stock_ammo"];
-    self.pers[#"stock_ammo"] = undefined;
+  if(isDefined(self.pers[# "stock_ammo"])) {
+    stockammo = self.pers[# "stock_ammo"];
+    self.pers[# "stock_ammo"] = undefined;
   }
 
   self setweaponammostock(weapon, stockammo);
@@ -199,7 +198,7 @@ givecustomloadout() {
     self ability_util::gadget_power_full(secondaryoffhand);
   }
 
-  if(isbot(self) && !isDefined(level.botweapons[#"hero_annihilator_oic"])) {
+  if(isbot(self) && !isDefined(level.botweapons[# "hero_annihilator_oic"])) {
     bot_action::register_bulletweapon(#"hero_annihilator_oic");
   }
 
@@ -231,7 +230,7 @@ onspawnplayer(predictedspawn) {
   spawning::onspawnplayer(predictedspawn);
   clientfield::set_player_uimodel("hudItems.playerLivesCount", level.numlives - self.var_a7d7e50a);
 
-  if(self.pers[#"lives"] == 1) {
+  if(self.pers[# "lives"] == 1) {
     globallogic_audio::leader_dialog_on_player("oicLastLife");
   }
 }
@@ -251,18 +250,18 @@ saveoffallplayersammo() {
       continue;
     }
 
-    if(player.pers[#"lives"] == 0) {
+    if(player.pers[# "lives"] == 0) {
       continue;
     }
 
     currentweapon = player getcurrentweapon();
-    player.pers[#"clip_ammo"] = player getweaponammoclip(currentweapon);
-    player.pers[#"stock_ammo"] = player getweaponammostock(currentweapon);
+    player.pers[# "clip_ammo"] = player getweaponammoclip(currentweapon);
+    player.pers[# "stock_ammo"] = player getweaponammostock(currentweapon);
   }
 }
 
 isplayereliminated(player) {
-  return isDefined(player.pers[#"lives"]) && player.pers[#"lives"] <= 0;
+  return isDefined(player.pers[# "lives"]) && player.pers[# "lives"] <= 0;
 }
 
 getplayersleft() {
@@ -313,7 +312,7 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shit
       }
     }
 
-    if(self.pers[#"lives"] == 0) {
+    if(self.pers[# "lives"] == 0) {
       scoreevents::processscoreevent(#"eliminated_enemy", attacker, self, sweapon);
     }
   }
@@ -330,7 +329,7 @@ shouldreceivesurvivorbonus() {
     return true;
   }
 
-  if(self.hasspawned && self.pers[#"lives"] > 0) {
+  if(self.hasspawned && self.pers[# "lives"] > 0) {
     return true;
   }
 
@@ -346,8 +345,8 @@ watchelimination() {
 
     for(i = 0; i < players.size; i++) {
       if(isDefined(players[i]) && players[i] shouldreceivesurvivorbonus()) {
-        players[i].pers[#"survived"]++;
-        players[i].survived = players[i].pers[#"survived"];
+        players[i].pers[# "survived"]++;
+        players[i].survived = players[i].pers[# "survived"];
         scoreevents::processscoreevent(#"survivor", players[i]);
         players[i] globallogic_score::givepointstowin(level.pointsforsurvivalbonus);
       }
@@ -361,7 +360,7 @@ watchelimination() {
   }
 }
 
-private function_ce7ffccb(winner) {
+function_ce7ffccb(winner) {
   if(globallogic_utils::gettimeremaining() <= int(level.var_18823aed * 1000)) {
     return;
   }

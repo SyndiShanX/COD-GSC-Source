@@ -7,15 +7,14 @@
 #include scripts\core_common\ai\strategic_command;
 #include scripts\core_common\ai\systems\blackboard;
 #include scripts\core_common\ai\systems\planner;
-
 #namespace plannergenericcommander;
 
-private _createcommanderplanner(team) {
+_createcommanderplanner(team) {
   planner = plannerutility::createplannerfromasset("strategic_commander.ai_htn");
   return planner;
 }
 
-private _createsquadplanner(team) {
+_createsquadplanner(team) {
   planner = plannerutility::createplannerfromasset("strategic_squad.ai_htn");
   return planner;
 }
@@ -24,7 +23,7 @@ createcommander(team) {
   commander = plannercommanderutility::createcommander(team, _createcommanderplanner(team), _createsquadplanner(team));
   commanderdaemons(commander);
   commanderutilityevaluators(commander);
-  blackboard::setstructblackboardattribute(commander, #"gameobjects_exclude", array("ammo_cache", "mobile_armory", "trap"));
+  blackboard::setstructblackboardattribute(commander, # "gameobjects_exclude", array("ammo_cache", "mobile_armory", "trap"));
   return commander;
 }
 

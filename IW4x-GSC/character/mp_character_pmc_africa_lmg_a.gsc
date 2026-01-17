@@ -7,7 +7,7 @@
 // Decompiled by https://github.com/xensik/gsc-tool
 
 main() {
-  self setmodel("mp_body_pmc_africa_lmg_a");
+  self setModel("mp_body_pmc_africa_lmg_a");
   codescripts\character::attachhead("alias_pmc_africa_heads", xmodelalias\alias_pmc_africa_heads::main());
   self setviewmodel("viewhands_pmc");
   self.voice = "russian";

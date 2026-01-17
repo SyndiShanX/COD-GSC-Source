@@ -14,8 +14,7 @@ main() {
   maps\mp\createfx\mp_studio_fx::main();
 }
 
-precache_scripted_fx() {
-}
+precache_scripted_fx() {}
 
 precache_createfx_fx() {
   level._effect["fx_mp_express_train_blow_dust"] = loadfx("maps/mp_maps/fx_mp_express_train_blow_dust");
@@ -105,5 +104,4 @@ precache_fxanim_props() {
   level.scr_anim["fxanim_props"]["oarsmen_jailed"] = % fxanim_mp_stu_pirate_jailed_oarsmen_anim;
 }
 
-precache_fxanim_props_dlc() {
-}
+precache_fxanim_props_dlc() {}

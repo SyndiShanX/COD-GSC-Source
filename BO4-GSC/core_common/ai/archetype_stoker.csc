@@ -7,7 +7,6 @@
 #include scripts\core_common\ai_shared;
 #include scripts\core_common\footsteps_shared;
 #include scripts\core_common\system_shared;
-
 #namespace archetype_stoker;
 
 autoexec __init__system__() {
@@ -55,6 +54,6 @@ function_7188417c(localclientnum, pos, surface, notetrack, bone) {
   function_36e4ebd4(localclientnum, "damage_light");
 }
 
-private function_580b77a2(localclientnum) {
+function_580b77a2(localclientnum) {
   fxclientutils::playfxbundle(localclientnum, self, self.fxdef);
 }

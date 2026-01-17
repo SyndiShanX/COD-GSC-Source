@@ -146,7 +146,7 @@ pel2_merge_sunsingledvar(dvar, delay, timer, l1, l2) {
   wait(delay);
   timer = timer * 20;
   suncolor = [];
-  for (i = 0; i < timer; i++) {
+  for(i = 0; i < timer; i++) {
     dif = i / timer;
     level.thedif = dif;
     ld = l2 * dif + l1 * (1 - dif);
@@ -157,7 +157,7 @@ pel2_merge_sunsingledvar(dvar, delay, timer, l1, l2) {
 }
 
 fire_flicker_init() {
-  lights = GetEntArray("firecaster", "targetname");
+  lights = getEntArray("firecaster", "targetname");
   if(!isDefined(lights) || lights.size <= 0) {
     return;
   }
@@ -167,10 +167,10 @@ fire_flicker_init() {
 pel2_firelight() {
   full = self GetLightIntensity();
   old_intensity = full;
-  while (1) {
+  while(1) {
     intensity = RandomFloatRange(full * 0.63, full * 1.2);
     timer = RandomFloatRange(2, 5);
-    for (i = 0; i < timer; i++) {
+    for(i = 0; i < timer; i++) {
       new_intensity = intensity * (i / timer) + old_intensity * ((timer - i) / timer);
       self SetLightIntensity(new_intensity);
       wait(0.05);

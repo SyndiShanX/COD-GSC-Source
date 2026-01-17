@@ -593,8 +593,7 @@ fxanim_drones() {
   level.scr_anim["fxanim_ambient_f35"]["f35_ambient_2"][0] = % fxanim_la_drone_ambient_02_anim;
 }
 
-temp_vo() {
-}
+temp_vo() {}
 
 bloody_model_death(ch_lapd) {
   a_tags = [];
@@ -636,7 +635,7 @@ drone_squib_fire_at_lapd(vh_drone) {
 
 spawn_drone_for_lapd_squibs(ch_lapd) {
   n_spawn_yaw = absangleclamp360(level.player.angles[1] + randomintrange(90, 270));
-  v_drone_spawn_org = level.player.origin + anglestoforward((0, n_spawn_yaw, 0)) * 3000;
+  v_drone_spawn_org = level.player.origin + anglesToForward((0, n_spawn_yaw, 0)) * 3000;
   v_drone_spawn_org = (v_drone_spawn_org[0], v_drone_spawn_org[1], randomintrange(2000, 3000));
   v_drone_goto = ch_lapd.origin + (ch_lapd.origin - v_drone_spawn_org);
   v_drone_goto = (v_drone_goto[0], v_drone_goto[1], randomintrange(1000, 2000));

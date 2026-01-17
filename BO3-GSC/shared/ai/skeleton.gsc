@@ -26,13 +26,13 @@
 #namespace skeletonbehavior;
 
 function autoexec __init__sytem__() {
-  system::register("skeleton", & __init__, undefined, undefined);
+  system::register("skeleton", &__init__, undefined, undefined);
 }
 
 function __init__() {
   initskeletonbehaviorsandasm();
-  spawner::add_archetype_spawn_function("skeleton", & archetypeskeletonblackboardinit);
-  spawner::add_archetype_spawn_function("skeleton", & skeletonspawnsetup);
+  spawner::add_archetype_spawn_function("skeleton", &archetypeskeletonblackboardinit);
+  spawner::add_archetype_spawn_function("skeleton", &skeletonspawnsetup);
   if(ai::shouldregisterclientfieldforarchetype("skeleton")) {
     clientfield::register("actor", "skeleton", 1, 1, "int");
   }
@@ -52,26 +52,26 @@ function skeletonspawnsetup() {
 }
 
 function private initskeletonbehaviorsandasm() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("skeletonTargetService", & skeletontargetservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("skeletonShouldMelee", & skeletonshouldmeleecondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("skeletonGibLegsCondition", & skeletongiblegscondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("isSkeletonWalking", & isskeletonwalking);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("skeletonDeathAction", & skeletondeathaction);
-  animationstatenetwork::registernotetrackhandlerfunction("contact", & skeletonnotetrackmeleefire);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("skeletonTargetService", &skeletontargetservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("skeletonShouldMelee", &skeletonshouldmeleecondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("skeletonGibLegsCondition", &skeletongiblegscondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("isSkeletonWalking", &isskeletonwalking);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("skeletonDeathAction", &skeletondeathaction);
+  animationstatenetwork::registernotetrackhandlerfunction("contact", &skeletonnotetrackmeleefire);
 }
 
 function private archetypeskeletonblackboardinit() {
   blackboard::createblackboardforentity(self);
   self aiutility::registerutilityblackboardattributes();
-  blackboard::registerblackboardattribute(self, "_arms_position", "arms_up", & bb_getarmsposition);
+  blackboard::registerblackboardattribute(self, "_arms_position", "arms_up", &bb_getarmsposition);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_locomotion_speed", "locomotion_speed_walk", & bb_getlocomotionspeedtype);
+  blackboard::registerblackboardattribute(self, "_locomotion_speed", "locomotion_speed_walk", &bb_getlocomotionspeedtype);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_has_legs", "has_legs_yes", & bb_gethaslegsstatus);
+  blackboard::registerblackboardattribute(self, "_has_legs", "has_legs_yes", &bb_gethaslegsstatus);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
@@ -83,7 +83,7 @@ function private archetypeskeletonblackboardinit() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  self.___archetypeonanimscriptedcallback = & archetypeskeletononanimscriptedcallback;
+  self.___archetypeonanimscriptedcallback = &archetypeskeletononanimscriptedcallback;
   self finalizetrackedblackboardattributes();
 }
 
@@ -93,7 +93,7 @@ function private archetypeskeletononanimscriptedcallback(entity) {
 }
 
 function bb_getarmsposition() {
-  if(isdefined(self.skeleton_arms_position)) {
+  if(isDefined(self.skeleton_arms_position)) {
     if(self.zombie_arms_position == "up") {
       return "arms_up";
     }
@@ -103,7 +103,7 @@ function bb_getarmsposition() {
 }
 
 function bb_getlocomotionspeedtype() {
-  if(isdefined(self.zombie_move_speed)) {
+  if(isDefined(self.zombie_move_speed)) {
     if(self.zombie_move_speed == "walk") {
       return "locomotion_speed_walk";
     }
@@ -128,10 +128,10 @@ function bb_gethaslegsstatus() {
 }
 
 function isskeletonwalking(behaviortreeentity) {
-  if(!isdefined(behaviortreeentity.zombie_move_speed)) {
+  if(!isDefined(behaviortreeentity.zombie_move_speed)) {
     return 1;
   }
-  return behaviortreeentity.zombie_move_speed == "walk" && (!(isdefined(behaviortreeentity.missinglegs) && behaviortreeentity.missinglegs)) && behaviortreeentity.zombie_arms_position == "up";
+  return behaviortreeentity.zombie_move_speed == "walk" && (!(isDefined(behaviortreeentity.missinglegs) && behaviortreeentity.missinglegs)) && behaviortreeentity.zombie_arms_position == "up";
 }
 
 function skeletongiblegscondition(behaviortreeentity) {
@@ -140,25 +140,25 @@ function skeletongiblegscondition(behaviortreeentity) {
 
 function skeletonnotetrackmeleefire(animationentity) {
   hitent = animationentity melee();
-  if(isdefined(hitent) && isdefined(animationentity.aux_melee_damage) && self.team != hitent.team) {
+  if(isDefined(hitent) && isDefined(animationentity.aux_melee_damage) && self.team != hitent.team) {
     animationentity[[animationentity.aux_melee_damage]](hitent);
   }
 }
 
 function is_within_fov(start_origin, start_angles, end_origin, fov) {
   normal = vectornormalize(end_origin - start_origin);
-  forward = anglestoforward(start_angles);
+  forward = anglesToForward(start_angles);
   dot = vectordot(forward, normal);
   return dot >= fov;
 }
 
 function skeletoncanseeplayer(player) {
   self endon("death");
-  if(!isdefined(self.players_viscache)) {
+  if(!isDefined(self.players_viscache)) {
     self.players_viscache = [];
   }
   entnum = player getentitynumber();
-  if(!isdefined(self.players_viscache[entnum])) {
+  if(!isDefined(self.players_viscache[entnum])) {
     self.players_viscache[entnum] = 0;
   }
   if(self.players_viscache[entnum] > gettime()) {
@@ -186,7 +186,7 @@ function skeletoncanseeplayer(player) {
 }
 
 function is_player_valid(player, checkignoremeflag, ignore_laststand_players) {
-  if(!isdefined(player)) {
+  if(!isDefined(player)) {
     return 0;
   }
   if(!isalive(player)) {
@@ -195,7 +195,7 @@ function is_player_valid(player, checkignoremeflag, ignore_laststand_players) {
   if(!isplayer(player)) {
     return 0;
   }
-  if(isdefined(player.is_zombie) && player.is_zombie == 1) {
+  if(isDefined(player.is_zombie) && player.is_zombie == 1) {
     return 0;
   }
   if(player.sessionstate == "spectator") {
@@ -204,21 +204,19 @@ function is_player_valid(player, checkignoremeflag, ignore_laststand_players) {
   if(player.sessionstate == "intermission") {
     return 0;
   }
-  if(isdefined(self.intermission) && self.intermission) {
+  if(isDefined(self.intermission) && self.intermission) {
     return 0;
   }
-  if(!(isdefined(ignore_laststand_players) && ignore_laststand_players)) {
+  if(!(isDefined(ignore_laststand_players) && ignore_laststand_players)) {
     if(player laststand::player_is_in_laststand()) {
       return 0;
     }
   }
-  if(isdefined(checkignoremeflag) && checkignoremeflag && player.ignoreme) {
+  if(isDefined(checkignoremeflag) && checkignoremeflag && player.ignoreme) {
     return 0;
   }
-  if(isdefined(level.is_player_valid_override)) {
-    return [
-      [level.is_player_valid_override]
-    ](player);
+  if(isDefined(level.is_player_valid_override)) {
+    return [[level.is_player_valid_override]](player);
   }
   return 1;
 }
@@ -226,15 +224,15 @@ function is_player_valid(player, checkignoremeflag, ignore_laststand_players) {
 function get_closest_valid_player(origin, ignore_player) {
   valid_player_found = 0;
   players = getplayers();
-  if(isdefined(ignore_player)) {
-    for (i = 0; i < ignore_player.size; i++) {
+  if(isDefined(ignore_player)) {
+    for(i = 0; i < ignore_player.size; i++) {
       arrayremovevalue(players, ignore_player[i]);
     }
   }
   done = 0;
-  while (players.size && !done) {
+  while(players.size && !done) {
     done = 1;
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       player = players[i];
       if(!is_player_valid(player, 1)) {
         arrayremovevalue(players, player);
@@ -247,7 +245,7 @@ function get_closest_valid_player(origin, ignore_player) {
     return undefined;
   }
   if(!valid_player_found) {
-    for (;;) {
+    for(;;) {
       player = [
         [self.closest_player_override]
       ](origin, players);
@@ -259,10 +257,10 @@ function get_closest_valid_player(origin, ignore_player) {
       arrayremovevalue(players, player);
       return undefined;
     }
-    if(isdefined(self.closest_player_override)) {} else {
-      if(isdefined(level.closest_player_override)) {} else {}
+    if(isDefined(self.closest_player_override)) {} else {
+      if(isDefined(level.closest_player_override)) {} else {}
     }
-    if(!isdefined(player) || players.size == 0) {}
+    if(!isDefined(player) || players.size == 0) {}
     if(!is_player_valid(player, 1)) {
       if(players.size == 0) {}
     }
@@ -271,33 +269,31 @@ function get_closest_valid_player(origin, ignore_player) {
 }
 
 function skeletonsetgoal(goal) {
-  if(isdefined(self.setgoaloverridecb)) {
-    return [
-      [self.setgoaloverridecb]
-    ](goal);
+  if(isDefined(self.setgoaloverridecb)) {
+    return [[self.setgoaloverridecb]](goal);
   }
   self setgoal(goal);
 }
 
 function skeletontargetservice(behaviortreeentity) {
   self endon("death");
-  if(isdefined(behaviortreeentity.ignoreall) && behaviortreeentity.ignoreall) {
+  if(isDefined(behaviortreeentity.ignoreall) && behaviortreeentity.ignoreall) {
     return false;
   }
-  if(isdefined(behaviortreeentity.enemy) && behaviortreeentity.enemy.team == behaviortreeentity.team) {
+  if(isDefined(behaviortreeentity.enemy) && behaviortreeentity.enemy.team == behaviortreeentity.team) {
     behaviortreeentity clearentitytarget();
   }
   if(behaviortreeentity.team == "allies") {
-    if(isdefined(behaviortreeentity.favoriteenemy)) {
+    if(isDefined(behaviortreeentity.favoriteenemy)) {
       behaviortreeentity skeletonsetgoal(behaviortreeentity.favoriteenemy.origin);
       return true;
     }
-    if(isdefined(behaviortreeentity.enemy)) {
+    if(isDefined(behaviortreeentity.enemy)) {
       behaviortreeentity skeletonsetgoal(behaviortreeentity.enemy.origin);
       return true;
     }
     target = getclosesttome(getaiteamarray("axis"));
-    if(isdefined(target)) {
+    if(isDefined(target)) {
       behaviortreeentity skeletonsetgoal(target.origin);
       return true;
     }
@@ -305,11 +301,9 @@ function skeletontargetservice(behaviortreeentity) {
     return false;
   }
   player = get_closest_valid_player(behaviortreeentity.origin, behaviortreeentity.ignore_player);
-  if(!isdefined(player)) {
-    if(isdefined(behaviortreeentity.ignore_player)) {
-      if(isdefined(level._should_skip_ignore_player_logic) && [
-          [level._should_skip_ignore_player_logic]
-        ]()) {
+  if(!isDefined(player)) {
+    if(isDefined(behaviortreeentity.ignore_player)) {
+      if(isDefined(level._should_skip_ignore_player_logic) && [[level._should_skip_ignore_player_logic]]()) {
         return;
       }
       behaviortreeentity.ignore_player = [];
@@ -317,14 +311,14 @@ function skeletontargetservice(behaviortreeentity) {
     behaviortreeentity skeletonsetgoal(behaviortreeentity.origin);
     return false;
   }
-  if(isdefined(player.last_valid_position)) {
+  if(isDefined(player.last_valid_position)) {
     cansee = self skeletoncanseeplayer(player);
     if(cansee) {
       behaviortreeentity skeletonsetgoal(player.last_valid_position);
       return true;
     }
     influencepos = undefined;
-    if(isdefined(influencepos)) {
+    if(isDefined(influencepos)) {
       if(distancesquared(influencepos, behaviortreeentity.origin) > 1024) {
         behaviortreeentity skeletonsetgoal(influencepos);
         return true;
@@ -340,7 +334,7 @@ function skeletontargetservice(behaviortreeentity) {
 }
 
 function isvalidenemy(enemy) {
-  if(!isdefined(enemy)) {
+  if(!isDefined(enemy)) {
     return false;
   }
   return true;
@@ -356,7 +350,7 @@ function getyawtoenemy() {
   if(isvalidenemy(self.enemy)) {
     pos = self.enemy.origin;
   } else {
-    forward = anglestoforward(self.angles);
+    forward = anglesToForward(self.angles);
     forward = vectorscale(forward, 150);
     pos = self.origin + forward;
   }
@@ -366,13 +360,13 @@ function getyawtoenemy() {
 }
 
 function skeletonshouldmeleecondition(behaviortreeentity) {
-  if(!isdefined(behaviortreeentity.enemy)) {
+  if(!isDefined(behaviortreeentity.enemy)) {
     return false;
   }
-  if(isdefined(behaviortreeentity.marked_for_death)) {
+  if(isDefined(behaviortreeentity.marked_for_death)) {
     return false;
   }
-  if(isdefined(behaviortreeentity.stunned) && behaviortreeentity.stunned) {
+  if(isDefined(behaviortreeentity.stunned) && behaviortreeentity.stunned) {
     return false;
   }
   yaw = abs(getyawtoenemy());
@@ -386,13 +380,13 @@ function skeletonshouldmeleecondition(behaviortreeentity) {
 }
 
 function skeletondeathaction(behaviortreeentity) {
-  if(isdefined(behaviortreeentity.deathfunction)) {
+  if(isDefined(behaviortreeentity.deathfunction)) {
     behaviortreeentity[[behaviortreeentity.deathfunction]]();
   }
 }
 
 function getclosestto(origin, entarray) {
-  if(!isdefined(entarray)) {
+  if(!isDefined(entarray)) {
     return;
   }
   if(entarray.size == 0) {

@@ -8,7 +8,6 @@
 #include scripts\core_common\postfx_shared;
 #include scripts\core_common\util_shared;
 #include scripts\killstreaks\killstreak_detect;
-
 #namespace icepick;
 
 init_shared() {
@@ -33,9 +32,9 @@ function_b53fa4ba(entity) {
   }
 
   if(isDefined(entity.vehicletype)) {
-    if(entity.vehicletype == #"vehicle_t8_mil_helicopter_swat_transport") {
+    if(entity.vehicletype == # "vehicle_t8_mil_helicopter_swat_transport") {
       return getweapon("player_air_vehicle1_main_turret_3rd_person_swat");
-    } else if(entity.vehicletype == #"vehicle_t8_mil_helicopter_overwatch") {
+    } else if(entity.vehicletype == # "vehicle_t8_mil_helicopter_overwatch") {
       return getweapon("overwatch_helicopter");
     }
   }
@@ -47,26 +46,26 @@ function_b2755499(weapon, entity) {
   returnweapon = weapon;
 
   switch (weapon.name) {
-    case #"cobra_20mm_comlink":
+    case # "cobra_20mm_comlink":
       returnweapon = getweapon("helicopter_comlink");
       break;
-    case #"gun_ultimate_turret":
+    case # "gun_ultimate_turret":
       returnweapon = getweapon("ultimate_turret");
       break;
-    case #"hash_17df39d53492b0bf":
+    case # "hash_17df39d53492b0bf":
       returnweapon = getweapon("ac130");
       break;
-    case #"straferun_gun":
+    case # "straferun_gun":
       returnweapon = getweapon("straferun");
       break;
-    case #"hash_26ffb92552ae26be":
+    case # "hash_26ffb92552ae26be":
       returnweapon = getweapon("drone_squadron");
       break;
-    case #"player_air_vehicle1_main_turret_3rd_person":
+    case # "player_air_vehicle1_main_turret_3rd_person":
       returnweapon = function_b53fa4ba(entity);
       break;
-    case #"hash_61b88900b127386a":
-    case #"hash_71088fcd3aaa23fb":
+    case # "hash_61b88900b127386a":
+    case # "hash_71088fcd3aaa23fb":
       returnweapon = getweapon("eq_hawk");
       break;
   }
@@ -74,7 +73,7 @@ function_b2755499(weapon, entity) {
   return returnweapon;
 }
 
-private registerclientfields() {
+registerclientfields() {
   clientfield::register("toplayer", "gadget_icepick_on", 9000, 1, "int", &icepick_on, 0, 0);
   clientfield::register("toplayer", "currentlyHacking", 9000, 1, "int", &function_d3c5b110, 0, 0);
   clientfield::register("toplayer", "hackedvehpostfx", 9000, 1, "int", &function_4a82368f, 0, 1);
@@ -107,7 +106,7 @@ function_45e26cb2(local_client_num, oldval, newval, bnewent, binitialsnap, field
 function_d3c5b110(local_client_num, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
     if(!isDefined(level.var_1a8113a7[local_client_num])) {
-      level.var_1a8113a7[local_client_num] = function_604c9983(local_client_num, #"hash_7c507989ceae567f");
+      level.var_1a8113a7[local_client_num] = function_604c9983(local_client_num, # "hash_7c507989ceae567f");
     }
 
     return;
@@ -116,7 +115,7 @@ function_d3c5b110(local_client_num, oldval, newval, bnewent, binitialsnap, field
   if(isDefined(level.var_1a8113a7[local_client_num])) {
     function_d48752e(local_client_num, level.var_1a8113a7[local_client_num]);
     level.var_1a8113a7[local_client_num] = undefined;
-    playSound(local_client_num, #"hash_1d4f78480965b59d");
+    playSound(local_client_num, # "hash_1d4f78480965b59d");
   }
 }
 
@@ -171,7 +170,7 @@ function_ca096bad(model, index, namehash, entnum, category, categoryindex, weapo
   doublewidth = 0;
   setuimodelvalue(createuimodel(itemuimodel, "hackableId"), entnum);
 
-  if(isDefined(weapon) && weapon.statname != #"") {
+  if(isDefined(weapon) && weapon.statname != # "") {
     weaponindex = getitemindexfromref(weapon.statname);
     setuimodelvalue(createuimodel(itemuimodel, "hackableItemIndex"), weaponindex);
     doublewidth = weapon.var_df381b5d == 2;
@@ -181,7 +180,7 @@ function_ca096bad(model, index, namehash, entnum, category, categoryindex, weapo
   setuimodelvalue(createuimodel(itemuimodel, "indexWithinCategory"), categoryindex);
   setuimodelvalue(createuimodel(itemuimodel, "hackStatus"), 0);
   setuimodelvalue(createuimodel(itemuimodel, "hackableDoubleWidth"), doublewidth);
-  setuimodelvalue(createuimodel(itemuimodel, "hackableFlavorText"), #"");
+  setuimodelvalue(createuimodel(itemuimodel, "hackableFlavorText"), # "");
 }
 
 function_808efdee(hacker, entity, weapon) {
@@ -303,7 +302,7 @@ function_9e88e881(local_client_num) {
   numplayers = getdvarint(#"com_maxclients", 0);
 
   for(i = 0; i < numplayers; i++) {
-    function_ca096bad(var_e2d02d46, var_9411ea0, #"", i, 0, var_a9705012[0], undefined);
+    function_ca096bad(var_e2d02d46, var_9411ea0, # "", i, 0, var_a9705012[0], undefined);
     var_9411ea0++;
     var_a9705012[0]++;
   }
@@ -353,7 +352,7 @@ function_9e88e881(local_client_num) {
 function_868adc20(local_client_num, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1 && oldval != 1) {
     if(!isDefined(level.var_422c4695[local_client_num])) {
-      level.var_422c4695[local_client_num] = function_604c9983(local_client_num, #"hash_48af3a16cdf94e6f");
+      level.var_422c4695[local_client_num] = function_604c9983(local_client_num, # "hash_48af3a16cdf94e6f");
     }
 
     return;
@@ -364,7 +363,7 @@ function_868adc20(local_client_num, oldval, newval, bnewent, binitialsnap, field
     level.var_422c4695[local_client_num] = undefined;
 
     if(!bwastimejump) {
-      playSound(local_client_num, #"hash_b5e00bf57762b86");
+      playSound(local_client_num, # "hash_b5e00bf57762b86");
     }
   }
 }
@@ -399,7 +398,7 @@ function_4a82368f(local_client_num, oldval, newval, bnewent, binitialsnap, field
   }
 }
 
-private function_67b9bc99(player, local_client_num) {
+function_67b9bc99(player, local_client_num) {
   entitynumber = player getentitynumber();
 
   if(isDefined(level.var_11631715[entitynumber]) && isarray(level.var_11631715[entitynumber])) {
@@ -445,7 +444,7 @@ function_d96f79be(local_client_num, oldval, newval, bwastimejump) {
   }
 }
 
-private function_34aba8d8(local_client_num, targetid, newval) {
+function_34aba8d8(local_client_num, targetid, newval) {
   parentmodel = getuimodel(getuimodelforcontroller(local_client_num), "IcePickHackables");
 
   if(!isDefined(parentmodel)) {
@@ -467,7 +466,7 @@ private function_34aba8d8(local_client_num, targetid, newval) {
         var_b095c57b = function_b2755499(self.weapon, self);
         flavortext = var_b095c57b.var_77b46a8c;
       } else {
-        flavortext = #"";
+        flavortext = # "";
       }
 
       setuimodelvalue(getuimodel(itemuimodel, "hackableFlavorText"), flavortext);

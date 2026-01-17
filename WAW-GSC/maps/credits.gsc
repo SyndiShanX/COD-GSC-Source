@@ -24,13 +24,13 @@ main() {
   precache_models();
   flag_wait("all_players_connected");
   SetDvar("credits_active", "1");
-  script_model_link_ent = Spawn("script_model", get_players()[0].origin);
-  script_model_link_ent SetModel("tag_origin");
+  script_model_link_ent = spawn("script_model", get_players()[0].origin);
+  script_model_link_ent setModel("tag_origin");
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     player = players[i];
     player playerLinkToAbsolute(script_model_link_ent, "tag_origin");
-    player SetCanDamage(false);
+    player setCanDamage(false);
     player FreezeControls(true);
     player SetClientDvar("hud_showStance", "0");
     player SetClientDvar("compass", "0");
@@ -60,7 +60,7 @@ nextmission_wait() {
   fadetoblack.alpha = 1;
   wait(0.05);
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     player = players[i];
     player SetClientDvar("hud_showStance", "1");
     player SetClientDvar("compass", "1");
@@ -78,7 +78,7 @@ init_flags() {
 init_dvars() {
   SetDvar("credits_active", "1");
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     player = players[i];
     player SetClientDvar("hud_showStance", 0);
     player SetClientDvar("compass", "0");
@@ -101,7 +101,7 @@ play_scene_controller() {
     return;
   }
   time = 0;
-  for (i = 0; i < level.credit_list.size; i++) {
+  for(i = 0; i < level.credit_list.size; i++) {
     if(isDefined(level.credit_list[i].delay)) {
       delay = level.credit_list[i].delay;
     } else if(level.credit_list[i].type == "spacesmall") {
@@ -113,7 +113,7 @@ play_scene_controller() {
   }
   scenes = getstructarray("scene", "targetname");
   div_time = time / (scenes.size + 1);
-  for (i = 0; i < scenes.size; i++) {
+  for(i = 0; i < scenes.size; i++) {
     wait(div_time);
     flag_set("play_scene");
   }
@@ -125,15 +125,15 @@ play_scenes() {
   player DisableWeapons();
   player EnableInvulnerability();
   player.ignoreme = true;
-  ent = Spawn("script_model", player.origin);
-  ent SetModel("tag_origin");
+  ent = spawn("script_model", player.origin);
+  ent setModel("tag_origin");
   ent Hide();
   player PlayerLinkTo(ent, "tag_origin", 1, 10, 10, 10, 10, false);
   player.linked_object = ent;
   fadein_fog();
   scenes = getstructarray("scene", "targetname");
   scenes = array_randomize(scenes);
-  for (i = 0; i < scenes.size; i++) {
+  for(i = 0; i < scenes.size; i++) {
     if(GetDvarInt("test_scenes") == 0) {
       flag_wait("play_scene");
       flag_clear("play_scene");
@@ -165,7 +165,7 @@ player_movement(player, struct) {
   structs = get_targeted_structs(struct);
   if(structs.size > 0) {
     get_duration_of_structs(struct, structs);
-    for (i = 0; i < structs.size; i++) {
+    for(i = 0; i < structs.size; i++) {
       time = structs[i].dist / structs[i].speed;
       player.linked_object MoveTo(structs[i].origin - (0, 0, 66), time);
       player.linked_object RotateTo(structs[i].angles, time);
@@ -176,7 +176,7 @@ player_movement(player, struct) {
 
 get_targeted_structs(struct) {
   structs = [];
-  while (isDefined(struct.target)) {
+  while(isDefined(struct.target)) {
     next_struct = getstruct(struct.target, "targetname");
     if(!isDefined(next_struct)) {
       break;
@@ -189,7 +189,7 @@ get_targeted_structs(struct) {
 
 get_duration_of_structs(struct, structs) {
   curr_pos = struct.origin;
-  for (i = 0; i < structs.size; i++) {
+  for(i = 0; i < structs.size; i++) {
     structs[i].dist = Distance(curr_pos, structs[i].origin);
     structs[i].speed = structs[i].dist / (struct.script_wait / (structs.size));
     curr_pos = structs[i].origin;
@@ -198,11 +198,11 @@ get_duration_of_structs(struct, structs) {
 
 scene_spawn_guys(struct) {
   struct script_delay();
-  spawners = GetEntArray(struct.target, "targetname");
+  spawners = getEntArray(struct.target, "targetname");
   guys = spawn_guys(spawners);
   wait(0.1);
   struct script_wait();
-  for (i = 0; i < guys.size; i++) {
+  for(i = 0; i < guys.size; i++) {
     if(isDefined(guys[i]) && IsAlive(guys[i]) && !isDefined(guys[i].script_death)) {
       guys[i] thread bloody_death(1);
     }
@@ -256,7 +256,7 @@ fadein_fog() {
 
 spawn_guys(spawners, target_name) {
   guys = [];
-  for (i = 0; i < spawners.size; i++) {
+  for(i = 0; i < spawners.size; i++) {
     guy = spawn_guy(spawners[i], target_name);
     if(isDefined(guy)) {
       guys[guys.size] = guy;
@@ -269,9 +269,9 @@ spawn_guy(spawner, target_name) {
   spawner.count = 1;
   spawner script_delay();
   if(isDefined(spawner.script_forcespawn) && spawner.script_forcespawn) {
-    guy = spawner StalingradSpawn();
+    guy = spawner Stalingradspawn();
   } else {
-    guy = spawner DoSpawn();
+    guy = spawner Dospawn();
   }
   if(!spawn_failed(guy)) {
     if(isDefined(target_name)) {
@@ -280,7 +280,7 @@ spawn_guy(spawner, target_name) {
     if(isDefined(guy.script_noteworthy)) {
       switch (guy.script_noteworthy) {
         case "nodamage":
-          guy SetCanDamage(false);
+          guy setCanDamage(false);
           break;
       }
     }
@@ -313,12 +313,12 @@ bloody_death(delay) {
   tags[5] = "j_elbow_ri";
   tags[6] = "j_clavicle_le";
   tags[7] = "j_clavicle_ri";
-  for (i = 0; i < 2; i++) {
+  for(i = 0; i < 2; i++) {
     random = RandomIntRange(0, tags.size);
     self thread bloody_death_fx(tags[random], undefined);
     wait(RandomFloat(0.1));
   }
-  self SetCanDamage(true);
+  self setCanDamage(true);
   if(self.health == 1000000) {
     self DoDamage(200, self.origin);
   } else {
@@ -330,12 +330,12 @@ bloody_death_fx(tag, fxName) {
   if(!isDefined(fxName)) {
     fxName = level._effect["flesh_hit"];
   }
-  PlayFxOnTag(fxName, self, tag);
+  playFXOnTag(fxName, self, tag);
 }
 
 create_spawner_function(value, key, func) {
-  spawners = GetEntArray(value, key);
-  for (i = 0; i < spawners.size; i++) {
+  spawners = getEntArray(value, key);
+  for(i = 0; i < spawners.size; i++) {
     spawners[i] add_spawn_function(func);
   }
 }

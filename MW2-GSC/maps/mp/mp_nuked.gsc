@@ -22,7 +22,7 @@ main() {
   nuked_doomsday_clock_init();
   level thread nuked_population_sign_think();
 
-  array_thread(getentarray("compassTriggers", "targetname"), ::compass_triggers_think);
+  array_thread(getEntArray("compassTriggers", "targetname"), ::compass_triggers_think);
 }
 
 self_delete() {
@@ -30,8 +30,8 @@ self_delete() {
 }
 
 compass_triggers_think() {
-  assertex(isdefined(self.script_noteworthy), "compassTrigger at " + self.origin + " needs to have a script_noteworthy with the name of the minimap to use");
-  while (true) {
+  assertex(isDefined(self.script_noteworthy), "compassTrigger at " + self.origin + " needs to have a script_noteworthy with the name of the minimap to use");
+  while(true) {
     wait(1);
     self waittill("trigger");
     maps\mp\_compass::setupMiniMap(self.script_noteworthy);
@@ -42,9 +42,9 @@ createSpawnpoint(classname, origin, yaw) {
   spawnpoint = spawn("script_origin", origin);
   spawnpoint.angles = (0, yaw, 0);
 
-  if(!isdefined(level.extraspawnpoints))
+  if(!isDefined(level.extraspawnpoints))
     level.extraspawnpoints = [];
-  if(!isdefined(level.extraspawnpoints[classname]))
+  if(!isDefined(level.extraspawnpoints[classname]))
     level.extraspawnpoints[classname] = [];
   level.extraspawnpoints[classname][level.extraspawnpoints[classname].size] = spawnpoint;
 }
@@ -62,10 +62,10 @@ nuked_population_sign_think() {
   tens_model RotateRoll(step, 0.05);
   ones_model RotateRoll(step, 0.05);
 
-  for (;;) {
+  for(;;) {
     wait(1);
 
-    for (;;) {
+    for(;;) {
       num_players = level.players.size;
       dial = ones + (tens * 10);
 
@@ -115,7 +115,7 @@ nuked_doomsday_clock_init() {
 }
 
 nuked_doomsday_clock_seconds_think() {
-  for (;;) {
+  for(;;) {
     self RotatePitch(360, 60);
     self waittill("rotatedone");
   }

@@ -84,7 +84,7 @@ splitscreen_optimize() {
 
   if(a_players.size > 2) {
     for(localclientnum = 0; localclientnum < a_players.size; localclientnum++) {
-      a_fxanim = getentarray(localclientnum, "fxanim", "targetname");
+      a_fxanim = getEntArray(localclientnum, "fxanim", "targetname");
 
       for(i = 0; i < a_fxanim.size; i++) {
         if(isDefined(a_fxanim[i].script_noteworthy) && a_fxanim[i].script_noteworthy == "no_delete") {
@@ -127,9 +127,9 @@ golden_gate_lighthouse() {
 
   for(localclientnum = 0; localclientnum < players.size; localclientnum++) {
     m_light_house_fx = spawn(localclientnum, (-1848, 9006, 2467), "script_model");
-    m_light_house_fx setmodel("tag_origin");
+    m_light_house_fx setModel("tag_origin");
     m_light_house_fx.angles = (0, 0, 0);
-    playfxontag(localclientnum, level._effect["fx_alcatraz_lighthouse"], m_light_house_fx, "tag_origin");
+    playFXOnTag(localclientnum, level._effect["fx_alcatraz_lighthouse"], m_light_house_fx, "tag_origin");
     m_light_house_fx thread golden_gate_lighthouse_rotate();
   }
 }
@@ -457,18 +457,18 @@ toggle_futz_on_world(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
 
   if(newval == 1) {
     setglobalfutz("dlc_res_1", 0.0);
-    playsound(0, "zmb_sq_headset_start", (0, 0, 0));
-    level.sndsqfinalent playloopsound("zmb_sq_headset_loop");
+    playSound(0, "zmb_sq_headset_start", (0, 0, 0));
+    level.sndsqfinalent playLoopSound("zmb_sq_headset_loop");
   } else if(newval == 0) {
     setglobalfutz("no_gfutz", 0.0);
-    playsound(0, "zmb_sq_headset_stop", (0, 0, 0));
+    playSound(0, "zmb_sq_headset_stop", (0, 0, 0));
     level.sndsqfinalent stoploopsound(1);
   }
 }
 
 dryer_stage_notifies(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   m_dryer_prop = undefined;
-  fxanim_props = getentarray(localclientnum, "fxanim", "targetname");
+  fxanim_props = getEntArray(localclientnum, "fxanim", "targetname");
 
   for(i = 0; i < fxanim_props.size; i++) {
     if(isDefined(fxanim_props[i].fxanim_waittill_1)) {
@@ -483,14 +483,14 @@ dryer_stage_notifies(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
 
     switch (newval) {
       case 1:
-        level.dryer_light = playfxontag(localclientnum, level._effect["alcatraz_dryer_light_red"], m_dryer_prop, "tag_light01");
+        level.dryer_light = playFXOnTag(localclientnum, level._effect["alcatraz_dryer_light_red"], m_dryer_prop, "tag_light01");
         break;
       case 2:
-        level.dryer_light = playfxontag(localclientnum, level._effect["alcatraz_dryer_light_yellow"], m_dryer_prop, "tag_light02");
+        level.dryer_light = playFXOnTag(localclientnum, level._effect["alcatraz_dryer_light_yellow"], m_dryer_prop, "tag_light02");
         setworldfogactivebank(localclientnum, 2);
         break;
       case 3:
-        level.dryer_light = playfxontag(localclientnum, level._effect["alcatraz_dryer_light_green"], m_dryer_prop, "tag_light03");
+        level.dryer_light = playFXOnTag(localclientnum, level._effect["alcatraz_dryer_light_green"], m_dryer_prop, "tag_light03");
         setworldfogactivebank(localclientnum, 1);
         break;
     }
@@ -529,7 +529,7 @@ flicker_in_and_out(localclientnum) {
     }
     while(n_current_time < n_phase_in);
 
-    self playsound(0, "evt_perk_warp");
+    self playSound(0, "evt_perk_warp");
     s_timer reset_timer();
     n_phase_in = randomfloatrange(0.1, 0.3);
 
@@ -565,12 +565,12 @@ player_lightning(localclientnum) {
 
     while(isDefined(self.b_lightning) && self.b_lightning) {
       v_p_angles = self.angles;
-      v_forward = anglestoforward(self.angles) * 25000;
+      v_forward = anglesToForward(self.angles) * 25000;
       v_end_pos = self.origin + (v_forward[0], v_forward[1], 0);
       v_offset = (randomintrange(-5000, 5000), randomintrange(-5000, 5000), randomint(3000));
       v_end_pos = v_end_pos + v_offset;
-      playfx(localclientnum, level._effect["lightning_flash"], v_end_pos);
-      playsound(0, "amb_thunder_clap_zm", v_end_pos);
+      playFX(localclientnum, level._effect["lightning_flash"], v_end_pos);
+      playSound(0, "amb_thunder_clap_zm", v_end_pos);
       serverwait(localclientnum, randomfloatrange(0.2, 0.3));
       n_level_sunlight = getdvarfloat(#"r_lightTweakSunLight");
       n_level_exposure = getdvarfloat(#"r_exposureValue");
@@ -580,7 +580,7 @@ player_lightning(localclientnum) {
         serverwait(localclientnum, 0.1);
         n_blend_time = randomfloatrange(0.1, 0.35);
         setdvar("r_exposureTweak", 1);
-        playsound(0, "amb_thunder_flash_zm", v_end_pos);
+        playSound(0, "amb_thunder_flash_zm", v_end_pos);
         setdvar("r_exposureValue", randomfloatrange(-1, 1));
         level thread lerp_dvar("r_exposureValue", n_level_exposure, n_blend_time, undefined, localclientnum);
         setsaveddvar("r_lightTweakSunLight", randomfloatrange(28, 32));
@@ -624,12 +624,12 @@ scripted_player_lightning_strike() {
     return;
   }
   v_p_angles = self.angles;
-  v_forward = anglestoforward(self.angles) * 25000;
+  v_forward = anglesToForward(self.angles) * 25000;
   v_end_pos = self.origin + (v_forward[0], v_forward[1], 0);
   v_offset = (randomintrange(-5000, 5000), randomintrange(-5000, 5000), randomint(3000));
   v_end_pos = v_end_pos + v_offset;
-  playfx(localclientnum, level._effect["lightning_flash"], v_end_pos);
-  playsound(0, "amb_thunder_clap_zm", v_end_pos);
+  playFX(localclientnum, level._effect["lightning_flash"], v_end_pos);
+  playSound(0, "amb_thunder_clap_zm", v_end_pos);
   n_level_sunlight = getdvarfloat(#"r_lightTweakSunLight");
   n_level_exposure = getdvarfloat(#"r_exposureValue");
   n_strikes = randomintrange(3, 5);
@@ -638,7 +638,7 @@ scripted_player_lightning_strike() {
     serverwait(localclientnum, 0.1);
     n_blend_time = randomfloatrange(0.05, 0.1);
     setdvar("r_exposureTweak", 1);
-    playsound(0, "amb_thunder_flash_zm", v_end_pos);
+    playSound(0, "amb_thunder_flash_zm", v_end_pos);
     setdvar("r_exposureValue", randomfloatrange(-1, 1));
     level thread lerp_dvar("r_exposureValue", n_level_exposure, n_blend_time, undefined, localclientnum);
     setsaveddvar("r_lightTweakSunLight", randomfloatrange(28, 32));
@@ -693,7 +693,7 @@ timer_increment_loop(localclientnum) {
 }
 
 new_timer(localclientnum) {
-  s_timer = spawnstruct();
+  s_timer = spawnStruct();
   s_timer.n_time_current = 0;
   s_timer thread timer_increment_loop(localclientnum);
   return s_timer;

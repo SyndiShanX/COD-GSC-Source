@@ -28,7 +28,7 @@ main() {
   init_level_flags();
   maps\_utility::transient_init("las_vegas_transient_hotel_tr");
   maps\_utility::transient_init("las_vegas_transient_crasharea_tr");
-  maps\_utility::intro_screen_create(&"LAS_VEGAS_INTROSCREEN_TITLE", & "LAS_VEGAS_INTROSCREEN_DATE", & "LAS_VEGAS_INTROSCREEN_LOCATION");
+  maps\_utility::intro_screen_create(&"LAS_VEGAS_INTROSCREEN_TITLE", &"LAS_VEGAS_INTROSCREEN_DATE", &"LAS_VEGAS_INTROSCREEN_LOCATION");
   maps\_utility::intro_screen_custom_func(::chryon);
   common_scripts\utility::add_destructible_type_transient("toy_lv_slot_machine", "las_vegas_transient_hotel_tr");
   common_scripts\utility::add_destructible_type_transient("toy_lv_slot_machine_flicker", "las_vegas_transient_hotel_tr");

@@ -22,11 +22,11 @@ main() {
   maps\mp\_compass::setupminimap("compass_map_mp_dockside");
   level.overrideplayerdeathwatchtimer = ::leveloverridetime;
   level.useintermissionpointsonwavespawn = ::useintermissionpointsonwavespawn;
-  game["strings"]["war_callsign_a"] = & "MPUI_CALLSIGN_MAPNAME_A";
-  game["strings"]["war_callsign_b"] = & "MPUI_CALLSIGN_MAPNAME_B";
-  game["strings"]["war_callsign_c"] = & "MPUI_CALLSIGN_MAPNAME_C";
-  game["strings"]["war_callsign_d"] = & "MPUI_CALLSIGN_MAPNAME_D";
-  game["strings"]["war_callsign_e"] = & "MPUI_CALLSIGN_MAPNAME_E";
+  game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_MAPNAME_A";
+  game["strings"]["war_callsign_b"] = &"MPUI_CALLSIGN_MAPNAME_B";
+  game["strings"]["war_callsign_c"] = &"MPUI_CALLSIGN_MAPNAME_C";
+  game["strings"]["war_callsign_d"] = &"MPUI_CALLSIGN_MAPNAME_D";
+  game["strings"]["war_callsign_e"] = &"MPUI_CALLSIGN_MAPNAME_E";
   game["strings_menu"]["war_callsign_a"] = "@MPUI_CALLSIGN_MAPNAME_A";
   game["strings_menu"]["war_callsign_b"] = "@MPUI_CALLSIGN_MAPNAME_B";
   game["strings_menu"]["war_callsign_c"] = "@MPUI_CALLSIGN_MAPNAME_C";
@@ -41,7 +41,7 @@ main() {
   if(getgametypesetting("allowMapScripting"))
     level maps\mp\mp_dockside_crane::init();
   else {
-    crate_triggers = getentarray("crate_kill_trigger", "targetname");
+    crate_triggers = getEntArray("crate_kill_trigger", "targetname");
 
     for(i = 0; i < crate_triggers.size; i++)
       crate_triggers[i] delete();
@@ -62,7 +62,7 @@ levelspawndvars(reset_dvars) {
 
 water_trigger_init() {
   wait 3;
-  triggers = getentarray("trigger_hurt", "classname");
+  triggers = getEntArray("trigger_hurt", "classname");
 
   foreach(trigger in triggers) {
     if(trigger.origin[2] > level.mapcenter[2]) {
@@ -77,8 +77,8 @@ water_trigger_think() {
     self waittill("trigger", entity);
 
     if(isplayer(entity)) {
-      entity playsound("mpl_splash_death");
-      playfx(level._effect["water_splash"], entity.origin + vectorscale((0, 0, 1), 40.0));
+      entity playSound("mpl_splash_death");
+      playFX(level._effect["water_splash"], entity.origin + vectorscale((0, 0, 1), 40.0));
     }
   }
 }
@@ -95,7 +95,7 @@ useintermissionpointsonwavespawn() {
 }
 
 isinwater() {
-  triggers = getentarray("trigger_hurt", "classname");
+  triggers = getEntArray("trigger_hurt", "classname");
 
   foreach(trigger in triggers) {
     if(trigger.origin[2] > level.mapcenter[2]) {
@@ -109,7 +109,7 @@ isinwater() {
 }
 
 rts_remove() {
-  removes = getentarray("rts_only", "targetname");
+  removes = getEntArray("rts_only", "targetname");
 
   foreach(remove in removes) {
     if(isDefined(remove))

@@ -15,10 +15,10 @@ main() {
   level.init_animatedmodels_dump = false;
   level.anim_prop_models_animtree = #animtree;
 
-  if(!isdefined(level.anim_prop_models))
+  if(!isDefined(level.anim_prop_models))
     level.anim_prop_models = []; // this is what the LD puts in their map
 
-  animated_models = GetEntArray("animated_model", "targetname");
+  animated_models = getEntArray("animated_model", "targetname");
   array_thread(animated_models, ::model_init);
 
   // one or more of the models initialized by model_init() was not setup by the map
@@ -45,16 +45,16 @@ main() {
 }
 
 init_wind_if_uninitialized() {
-  if(IsDefined(level.wind))
+  if(isDefined(level.wind))
     return;
-  level.wind = SpawnStruct();
+  level.wind = spawnStruct();
   level.wind.rate = 0.4;
   level.wind.weight = 1;
   level.wind.variance = 0.2;
 }
 
 model_init() {
-  if(!isdefined(level.anim_prop_models[self.model]))
+  if(!isDefined(level.anim_prop_models[self.model]))
     level.init_animatedmodels_dump = true;
 }
 
@@ -72,7 +72,7 @@ animateModel() {
 animateTreeWind() {
   self UseAnimTree(#animtree);
   wind = "strong";
-  while (1) {
+  while(1) {
     thread blendTreeAnims(wind);
     level waittill("windchange", wind);
   }

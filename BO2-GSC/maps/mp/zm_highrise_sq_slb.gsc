@@ -29,11 +29,10 @@ stage_logic() {
   stage_completed("sq", level._cur_stage_name);
 }
 
-exit_stage_1(success) {
-}
+exit_stage_1(success) {}
 
 snipe_balls_wait() {
-  a_balls = getentarray("sq_dragon_lion_ball", "targetname");
+  a_balls = getEntArray("sq_dragon_lion_ball", "targetname");
   array_thread(a_balls, ::snipe_balls_watch_ball);
   is_complete = 0;
 
@@ -54,7 +53,7 @@ snipe_balls_wait() {
 snipe_balls_watch_ball() {
   self endon("delete");
   a_snipers = array("dsr50_zm", "dsr50_upgraded_zm+vzoom", "barretm82_zm", "barretm82_upgraded_zm+vzoom", "svu_zm", "svu_upgraded_zm+vzoom");
-  self setcandamage(1);
+  self setCanDamage(1);
 
   while(true) {
     self waittill("damage", amount, attacker, direction, point, mod, tagname, modelname, partname, weaponname);
@@ -62,7 +61,7 @@ snipe_balls_watch_ball() {
     if(maps\mp\zm_highrise_sq::sq_is_weapon_sniper(weaponname)) {
       level notify("zm_ball_shot");
       playsoundatposition("zmb_sq_ball_ding", self.origin);
-      playfx(level._effect["sidequest_flash"], self.origin);
+      playFX(level._effect["sidequest_flash"], self.origin);
       str_noteworthy = self.script_noteworthy;
       self delete();
       wait 0.5;
@@ -72,7 +71,7 @@ snipe_balls_watch_ball() {
       if(str_noteworthy == "m_drg_tail")
         m_ball = getent("sq_sliquify_m", "script_noteworthy");
 
-      playfx(level._effect["sidequest_flash"], m_ball.origin);
+      playFX(level._effect["sidequest_flash"], m_ball.origin);
       m_ball show();
       m_ball thread lion_ball_enable_pickup();
 
@@ -90,7 +89,7 @@ lion_ball_enable_pickup() {
 
   while(true) {
     self.can_pickup = 1;
-    self.t_pickup = sq_slb_create_use_trigger(self.origin, 32, 70, & "ZM_HIGHRISE_SQ_PICKUP_BALL");
+    self.t_pickup = sq_slb_create_use_trigger(self.origin, 32, 70, &"ZM_HIGHRISE_SQ_PICKUP_BALL");
 
     while(self.can_pickup) {
       self.t_pickup waittill("trigger", player);
@@ -108,9 +107,9 @@ lion_ball_enable_pickup() {
 
     self.t_pickup delete();
     self hide();
-    self setcandamage(0);
+    self setCanDamage(0);
     wait 1;
-    self.t_putdown = sq_slb_create_use_trigger(self.origin, 16, 70, & "ZM_HIGHRISE_SQ_PUTDOWN_BALL");
+    self.t_putdown = sq_slb_create_use_trigger(self.origin, 16, 70, &"ZM_HIGHRISE_SQ_PUTDOWN_BALL");
     self.player clientclaimtrigger(self.t_putdown);
     self.player.t_putdown_ball = self.t_putdown;
     self ball_pickup_waittill_change();
@@ -126,11 +125,11 @@ lion_ball_enable_pickup() {
 
     if(play_spark) {
       self.sq_pickup_reset = undefined;
-      playfx(level._effect["sidequest_flash"], self.origin);
+      playFX(level._effect["sidequest_flash"], self.origin);
     }
 
     self show();
-    self setcandamage(1);
+    self setCanDamage(1);
     self.player.zm_sq_has_ball = undefined;
     self.player = undefined;
     wait 1;

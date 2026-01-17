@@ -28,7 +28,7 @@ step_up_human() {
 
   // orient to the Negotiation start node
   startnode = self getnegotiationstartnode();
-  assert(isdefined(startnode));
+  assert(isDefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);
 
   self setFlaggedAnimKnoballRestart("stepanim", % step_up_low_wall, % body, 1, .1, 1);

@@ -94,7 +94,7 @@ teleport_link_think() {
     if(!flag("core_linked")) {
       core sethintstring(&"ZOMBIE_THEATER_LINK_CORE");
       core waittill("trigger", user);
-      core PlaySound("evt_teleporter_activate_start");
+      core playSound("evt_teleporter_activate_start");
       flag_set("core_linked");
       core sethintstring("");
       pad = getEnt(core.target, "targetname");
@@ -128,7 +128,7 @@ teleport_pad_think() {
     if(!flag("teleporter_linked") && flag("core_linked")) {
       pad waittill("trigger", user);
       pad sethintstring("");
-      pad PlaySound("evt_teleporter_activate_finish");
+      pad playSound("evt_teleporter_activate_finish");
       flag_set("teleporter_linked");
       if(isDefined(level.link_cable_on) && isDefined(level.link_cable_off)) {
         level.link_cable_off hide();
@@ -670,7 +670,7 @@ theater_moon_jump_go() {
   ship.fx_spot.angles = (90, 0, 0);
   ship.fx_spot LinkTo(ship);
   wait(0.1);
-  PlayFXOnTag(blast_off_fx, ship.fx_spot, "tag_origin");
+  playFXOnTag(blast_off_fx, ship.fx_spot, "tag_origin");
   ship MoveZ(120, 3.0, 0.7, 0);
   ship waittill("movedone");
   ship.fx_spot Unlink();

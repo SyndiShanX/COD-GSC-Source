@@ -21,7 +21,7 @@ snd_get_current_filter_lerp() {
 }
 
 snd_init_current_filters() {
-  var_0 = spawnstruct();
+  var_0 = spawnStruct();
   var_0.names = [];
   var_0.names[0] = "";
   var_0.names[1] = "";
@@ -38,7 +38,7 @@ snd_set_current_filter_name(var_0, var_1) {
 }
 
 snd_init_current_occlusion() {
-  var_0 = spawnstruct();
+  var_0 = spawnStruct();
   var_0.name = "";
   level._snd.current_occlusion = var_0;
   snd_set_current_occlusion_name("");
@@ -55,7 +55,7 @@ snd_set_current_occlusion_name(var_0) {
 snd_load_dsp_buses() {
   var_0 = soundscripts\_snd::snd_parse_soundtables("DSP bus", ["sounddata\dspbuses.csv"], 2, "name", "name");
 
-  if(isdefined(var_0))
+  if(isDefined(var_0))
     level._snd.dsp_buses = var_0;
   else
     level._snd.dsp_buses = [];
@@ -71,7 +71,7 @@ snd_get_dsp_buses() {
 }
 
 snd_is_dsp_bus(var_0) {
-  return isdefined(level._snd.dsp_buses[var_0]);
+  return isDefined(level._snd.dsp_buses[var_0]);
 }
 
 snd_get_dsp_filename() {
@@ -79,7 +79,7 @@ snd_get_dsp_filename() {
 }
 
 snd_load_filter_presets() {
-  level._snd.filters = spawnstruct();
+  level._snd.filters = spawnStruct();
   var_0 = [];
   var_0[var_0.size] = "soundtables\sp_defaults.csv";
   var_0[var_0.size] = "soundtables\" + level.script + ".csv ";
@@ -87,15 +87,15 @@ snd_load_filter_presets() {
 }
 
 snd_set_filter(var_0, var_1, var_2) {
-  if(isdefined(level.player.ent_flag) && isdefined(level.player.ent_flag["player_has_red_flashing_overlay"]) && level.player maps\_utility::ent_flag("player_has_red_flashing_overlay")) {
+  if(isDefined(level.player.ent_flag) && isDefined(level.player.ent_flag["player_has_red_flashing_overlay"]) && level.player maps\_utility::ent_flag("player_has_red_flashing_overlay")) {
     return;
   }
   var_3 = 0;
 
-  if(isdefined(var_1))
+  if(isDefined(var_1))
     var_3 = var_1;
 
-  if(!isdefined(var_0) || isdefined(var_0) && (var_0 == "" || var_0 == "none")) {
+  if(!isDefined(var_0) || isDefined(var_0) && (var_0 == "" || var_0 == "none")) {
     snd_set_current_filter_name(var_3, "");
     level.player deactivateeq(var_3);
     return;
@@ -103,7 +103,7 @@ snd_set_filter(var_0, var_1, var_2) {
 
   var_4 = snd_get_filter_preset(var_0);
 
-  if(!isdefined(var_4)) {
+  if(!isDefined(var_4)) {
     return;
   }
   if(snd_get_current_filter_name(var_3) != var_0) {
@@ -117,7 +117,7 @@ sndx_fade_in_filter_lerp(var_0) {
   var_1 = 0.0;
   var_2 = 0.05 / var_0;
 
-  while (var_1 < 1.0) {
+  while(var_1 < 1.0) {
     snd_set_filter_lerp(var_1);
     var_1 = var_1 + var_2;
     wait 0.05;
@@ -140,7 +140,7 @@ sndx_fade_out_filter_lerp(var_0) {
   var_1 = snd_get_current_filter_lerp();
   var_2 = var_1 * (0.05 / var_0);
 
-  while (var_1 > 0.0) {
+  while(var_1 > 0.0) {
     snd_set_filter_lerp(var_1);
     var_1 = var_1 - var_2;
     wait 0.05;
@@ -155,14 +155,14 @@ snd_fade_out_filter(var_0) {
 }
 
 snd_get_filter_preset(var_0) {
-  if(isdefined(level._snd.filters.presets[var_0]))
+  if(isDefined(level._snd.filters.presets[var_0]))
     return level._snd.filters.presets[var_0];
 
   return undefined;
 }
 
 sndx_get_dsp_filter_setting(var_0, var_1, var_2) {
-  var_3 = spawnstruct();
+  var_3 = spawnStruct();
   var_3.dsp_bus = var_1;
   var_3.index = var_0;
   var_3.type = var_2["type"];
@@ -203,14 +203,14 @@ snd_set_filter_threaded(var_0, var_1) {
 snd_clear_filter(var_0) {
   var_1 = 0;
 
-  if(isdefined(var_0))
+  if(isDefined(var_0))
     var_1 = var_0;
 
   snd_set_filter(undefined, var_1);
 }
 
 snd_load_occlusion_presets() {
-  level._snd.occlusion = spawnstruct();
+  level._snd.occlusion = spawnStruct();
   var_0 = [];
   var_0[var_0.size] = "soundtables\sp_defaults.csv";
   var_0[var_0.size] = "soundtables\" + level.script + ".csv ";
@@ -218,10 +218,10 @@ snd_load_occlusion_presets() {
 }
 
 snd_set_occlusion(var_0) {
-  if(isdefined(level.player.ent_flag) && isdefined(level.player.ent_flag["player_has_red_flashing_overlay"]) && level.player maps\_utility::ent_flag("player_has_red_flashing_overlay")) {
+  if(isDefined(level.player.ent_flag) && isDefined(level.player.ent_flag["player_has_red_flashing_overlay"]) && level.player maps\_utility::ent_flag("player_has_red_flashing_overlay")) {
     return;
   }
-  if(!isdefined(var_0)) {
+  if(!isDefined(var_0)) {
     snd_set_current_occlusion_name("");
     thread snd_disable_occlusion_threaded();
     return;
@@ -229,7 +229,7 @@ snd_set_occlusion(var_0) {
 
   var_1 = snd_get_occlusion_preset(var_0);
 
-  if(!isdefined(var_1)) {
+  if(!isDefined(var_1)) {
     return;
   }
   if(snd_get_current_occlusion_name() != var_0) {
@@ -239,7 +239,7 @@ snd_set_occlusion(var_0) {
 }
 
 snd_get_occlusion_preset(var_0) {
-  if(isdefined(level._snd.occlusion.presets[var_0]))
+  if(isDefined(level._snd.occlusion.presets[var_0]))
     return level._snd.occlusion.presets[var_0];
 
   return undefined;
@@ -263,9 +263,7 @@ snd_set_occlusion_threaded(var_0) {
     } else {
       if(snd_is_dsp_bus(var_4))
         level.player setocclusion(var_4, var_3["freq"], var_3["type"], var_3["gain"], var_3["q"]);
-      else {
-
-      }
+      else {}
 
       var_1 soundscripts\_snd::snd_throttle_wait();
     }
@@ -300,7 +298,7 @@ snd_enable_zone_filters() {
 }
 
 snd_get_zone_filters_enabled() {
-  return isdefined(level._snd.zone_filters_enabled);
+  return isDefined(level._snd.zone_filters_enabled);
 }
 
 snd_disable_zone_occlusion_and_filtering() {
@@ -314,14 +312,14 @@ snd_enable_zone_occlusion_and_filtering() {
   var_0 = undefined;
   var_1 = "default";
 
-  if(isdefined(level._audio.zone_mgr.current_zone) && isdefined(level._audio.zone_mgr.zones[level._audio.zone_mgr.current_zone])) {
+  if(isDefined(level._audio.zone_mgr.current_zone) && isDefined(level._audio.zone_mgr.zones[level._audio.zone_mgr.current_zone])) {
     var_2 = soundscripts\_audio_zone_manager::azm_get_current_zone();
     var_3 = level._audio.zone_mgr.zones[var_2];
 
-    if(isdefined(var_3["occlusion"]) && var_3["occlusion"] != "none")
+    if(isDefined(var_3["occlusion"]) && var_3["occlusion"] != "none")
       var_1 = var_3["occlusion"];
 
-    if(isdefined(var_3["filter"]) && var_3["filter"] != "none")
+    if(isDefined(var_3["filter"]) && var_3["filter"] != "none")
       var_0 = var_3["filter"];
   }
 

@@ -14,14 +14,14 @@
 #namespace zm_bgb_im_feelin_lucky;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_im_feelin_lucky", & __init__, undefined, "bgb");
+  system::register("zm_bgb_im_feelin_lucky", &__init__, undefined, "bgb");
 }
 
 function __init__() {
-  if(!(isdefined(level.bgb_in_use) && level.bgb_in_use)) {
+  if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
-  bgb::register("zm_bgb_im_feelin_lucky", "activated", 2, undefined, undefined, undefined, & activation);
+  bgb::register("zm_bgb_im_feelin_lucky", "activated", 2, undefined, undefined, undefined, &activation);
 }
 
 function activation() {
@@ -31,7 +31,7 @@ function activation() {
   if(n_roll < var_a8c63b5d) {
     var_93eb638b = zm_powerups::specific_powerup_drop(zm_powerups::get_regular_random_powerup_name(), powerup_origin);
   } else {
-    if(isdefined(level.var_2d0e5eb6)) {
+    if(isDefined(level.var_2d0e5eb6)) {
       str_powerup = [
         [level.var_2d0e5eb6]
       ]();
@@ -39,10 +39,8 @@ function activation() {
       str_powerup = function_29a9b9b8();
     }
     if(str_powerup === "free_perk") {
-      if(isdefined(level.var_2d0e5eb6)) {
-        str_powerup = [
-          [level.var_2d0e5eb6]
-        ]();
+      if(isDefined(level.var_2d0e5eb6)) {
+        str_powerup = [[level.var_2d0e5eb6]]();
       } else {
         str_powerup = function_29a9b9b8();
       }

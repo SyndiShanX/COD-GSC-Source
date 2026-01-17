@@ -18,7 +18,6 @@
 #include scripts\wz_common\vehicle;
 #include scripts\wz_common\wz_ai;
 #include scripts\wz_common\wz_ignore_systems;
-
 #namespace warzone;
 
 event_handler[gametype_init] main(eventstruct) {
@@ -102,15 +101,15 @@ function_7be1ea25() {
     level.var_a5ec5f1a[localclientnum][waitresult.clientnum] = obj_id;
 
     if(!(isDefined(getgametypesetting(#"hash_76c2c603f164eb31")) && getgametypesetting(#"hash_76c2c603f164eb31")) || !(isDefined(level.localplayers[localclientnum].infiltrating) && level.localplayers[localclientnum].infiltrating)) {
-      objective_add(localclientnum, obj_id, "active", #"teammate_waypoint", (waitresult.xcoord, waitresult.ycoord, 0), #"none", waitresult.clientnum);
+      objective_add(localclientnum, obj_id, "active", # "teammate_waypoint", (waitresult.xcoord, waitresult.ycoord, 0), # "none", waitresult.clientnum);
     } else {
       x = waitresult.xcoord;
       y = waitresult.ycoord;
       var_bfd46ccc = 2147483647;
       var_cfa5f67b = -2147483647;
       trace = bulletTrace((x, y, var_bfd46ccc), (x, y, var_cfa5f67b), 0, self, 1);
-      position = trace[#"position"];
-      objective_add(localclientnum, obj_id, "active", #"hash_4d290db83b852838", position, #"none", waitresult.clientnum);
+      position = trace[# "position"];
+      objective_add(localclientnum, obj_id, "active", # "hash_4d290db83b852838", position, # "none", waitresult.clientnum);
       level thread function_97d0a8af(localclientnum, obj_id, x, y, waitresult.clientnum);
     }
 
@@ -127,7 +126,7 @@ function_97d0a8af(local_client_num, obj_id, x, y, clientnum) {
   }
 
   objective_delete(local_client_num, obj_id);
-  objective_add(local_client_num, obj_id, "active", #"teammate_waypoint", (x, y, 0), #"none", clientnum);
+  objective_add(local_client_num, obj_id, "active", # "teammate_waypoint", (x, y, 0), # "none", clientnum);
 }
 
 function_783be487() {
@@ -219,7 +218,7 @@ on_killcam_end(params) {
 }
 
 function_f8c70ad7(localclientnum) {
-  self endoncallback(&function_e8d2d8c5, #"death");
+  self endoncallback(&function_e8d2d8c5, # "death");
   self endon(#"disconnect");
   assert(!isDefined(self.var_408847b6));
 
@@ -338,7 +337,7 @@ function_a1b40aa4(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   function_3f258626(localclientnum);
 }
 
-private function_3dadedf8(localclientnum) {
+function_3dadedf8(localclientnum) {
   while(true) {
     origin = getlocalclientpos(localclientnum);
     players = getplayers(localclientnum);
@@ -386,7 +385,7 @@ private function_3dadedf8(localclientnum) {
   }
 }
 
-private function_7e3a43c3(localclientnum) {
+function_7e3a43c3(localclientnum) {
   self notify("2dfbcba8182d1332");
   self endon("2dfbcba8182d1332");
 
@@ -406,7 +405,7 @@ private function_7e3a43c3(localclientnum) {
   }
 }
 
-private function_b522ef5c() {
+function_b522ef5c() {
   s_hijacked = struct::get("map_dest_hijacked");
 
   if(isDefined(s_hijacked)) {

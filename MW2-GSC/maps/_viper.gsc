@@ -34,7 +34,6 @@ main(model, type) {
   build_light(model, "white_blink_tail", "tag_light_tail", "misc/aircraft_light_white_blink", "running", randomStartDelay);
   build_aianims(::setanims, ::set_vehicle_anims);
   build_compassicon("helicopter", false);
-
 }
 
 init_local() {
@@ -50,8 +49,8 @@ set_vehicle_anims(positions) {
 
 setanims() {
   positions = [];
-  for (i = 0; i < 2; i++)
-    positions[i] = spawnstruct();
+  for(i = 0; i < 2; i++)
+    positions[i] = spawnStruct();
 
   positions[0].sittag = "tag_pilot";
   positions[1].sittag = "tag_gunner";

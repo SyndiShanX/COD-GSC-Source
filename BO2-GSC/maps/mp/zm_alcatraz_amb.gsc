@@ -67,7 +67,7 @@ sndperksacolajingle(perksacola) {
     self.sndent stoploopsound(1);
     self.sndent playsoundwithnotify(self.script_sound, "sndJingleDone");
     self.sndent waittill("sndJingleDone");
-    self.sndent playloopsound("zmb_perksacola_alcatraz_loop", 1);
+    self.sndent playLoopSound("zmb_perksacola_alcatraz_loop", 1);
     self.jingle_is_playing = 0;
   }
 }
@@ -75,7 +75,7 @@ sndperksacolajingle(perksacola) {
 sndperksacolaloop() {
   self endon("death");
   self.sndent = spawn("script_origin", self.origin);
-  self.sndent playloopsound("zmb_perksacola_alcatraz_loop", 1);
+  self.sndent playLoopSound("zmb_perksacola_alcatraz_loop", 1);
 
   while(true) {
     wait(randomfloatrange(31, 45));
@@ -87,7 +87,7 @@ sndperksacolaloop() {
 
 sndeventstingertriggers() {
   flag_wait("start_zombie_round_logic");
-  triggers = getentarray("sndMusicEventStinger", "targetname");
+  triggers = getEntArray("sndMusicEventStinger", "targetname");
 
   foreach(trigger in triggers)
   trigger thread sndeventstingertriggerthink();
@@ -107,7 +107,7 @@ sndeventstingertriggerthink() {
 sndeventtension() {
   flag_wait("start_zombie_round_logic");
   wait 30;
-  struct = spawnstruct();
+  struct = spawnStruct();
 
   while(true) {
     tension = sndgettensionlevel(struct);
@@ -315,7 +315,7 @@ sndlocationqueue(zone) {
 
 sndstingersetup() {
   level.sndmusicstingerevent = ::sndplaystinger;
-  level.sndstinger = spawnstruct();
+  level.sndstinger = spawnStruct();
   level.sndstinger.ent = spawn("script_origin", (0, 0, 0));
   level.sndstinger.queue = 0;
   level.sndstinger.isplaying = 0;
@@ -372,7 +372,7 @@ createstingerstate(state, alias, prewait, interrupt) {
   s = level.sndstinger;
 
   if(!isDefined(s.states[state])) {
-    s.states[state] = spawnstruct();
+    s.states[state] = spawnStruct();
     s.states[state].alias = alias;
     s.states[state].prewait = prewait;
     s.states[state].interrupt = interrupt;
@@ -420,7 +420,7 @@ playstinger(state, player, ignore) {
     if(isDefined(player))
       player playsoundtoplayer(s.states[state].alias, player);
     else
-      s.ent playsound(s.states[state].alias);
+      s.ent playSound(s.states[state].alias);
   } else if(isDefined(player)) {
     player playsoundtoplayer(s.states[state].alias, player);
     wait 8;
@@ -560,11 +560,11 @@ sndmusicegg() {
 
 sndmusicegg_wait(bottle_origin) {
   temp_ent = spawn("script_origin", bottle_origin);
-  temp_ent playloopsound("zmb_meteor_loop");
+  temp_ent playLoopSound("zmb_meteor_loop");
   temp_ent thread maps\mp\zombies\_zm_sidequests::fake_use("main_music_egg_hit", ::sndmusicegg_override);
   temp_ent waittill("main_music_egg_hit", player);
   temp_ent stoploopsound(1);
-  player playsound("zmb_meteor_activate");
+  player playSound("zmb_meteor_activate");
   level.meteor_counter = level.meteor_counter + 1;
 
   if(level.meteor_counter == 3) {
@@ -586,7 +586,7 @@ sndmusicegg_override() {
 sndmuseggplay(ent, alias, time) {
   level.music_override = 1;
   wait 1;
-  ent playsound(alias);
+  ent playSound(alias);
   level thread sndeggmusicwait(time);
   level waittill_either("end_game", "sndSongDone");
   ent stopsounds();

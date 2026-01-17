@@ -61,7 +61,7 @@ init() {
 }
 
 onPlayerConnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connected", player);
 
     player.killedPlayers = [];
@@ -118,7 +118,6 @@ killedPlayer(killId, victim, weapon, meansOfDeath) {
     }
 
     if(victim.attackers.size == 1) {
-      /#
       if(!isDefined(victim.attackers[self.guid])) {
         println("Weapon: " + weapon);
         println("Attacker GUID:" + self.guid);
@@ -126,8 +125,8 @@ killedPlayer(killId, victim, weapon, meansOfDeath) {
         foreach(key, value in victim.attackers)
         println("Victim Attacker list GUID: " + key);
       }
-      # /
-        assertEx(isDefined(victim.attackers[self.guid]), "See console log for details");
+
+      assertEx(isDefined(victim.attackers[self.guid]), "See console log for details");
 
       weaponClass = getWeaponClass(weapon);
 
@@ -169,9 +168,9 @@ killedPlayer(killId, victim, weapon, meansOfDeath) {
     }
 
     foreach(guid, damageTime in victim.damagedPlayers) {
-      if(guid == self.guid)
+      if(guid == self.guid) {
         continue;
-
+      }
       if(level.teamBased && curTime - damageTime < 500)
         self defendedPlayer(killId);
     }
@@ -227,10 +226,10 @@ checkMatchDataKills(killId, victim, weapon, meansOfDeath) {
     self.lastKilledBy = undefined;
     self revenge(killId);
 
-    playFx(level._effect["money"], victim getTagOrigin("j_spine4"));
+    playFX(level._effect["money"], victim getTagOrigin("j_spine4"));
   }
 
-  if(victim.iDFlags & level.iDFLAGS_PENETRATION)
+  if(victim.iDFlags &level.iDFLAGS_PENETRATION)
     self incPlayerStat("bulletpenkills", 1);
 
   if(self.pers["rank"] < victim.pers["rank"])
@@ -544,7 +543,7 @@ comeBack(killId) {
 disconnected() {
   myGuid = self.guid;
 
-  for (entry = 0; entry < level.players.size; entry++) {
+  for(entry = 0; entry < level.players.size; entry++) {
     if(isDefined(level.players[entry].killedPlayers[myGuid]))
       level.players[entry].killedPlayers[myGuid] = undefined;
 
@@ -577,7 +576,7 @@ monitorCrateJacking() {
   level endon("end_game");
   self endon("disconnect");
 
-  for (;;) {
+  for(;;) {
     self waittill("hijacker", crateType, owner);
 
     if(crateType == "sentry") {
@@ -587,9 +586,9 @@ monitorCrateJacking() {
         owner maps\mp\gametypes\_hud_message::playerCardSplashNotify("hijacked_sentry", self);
       self notify("process", "ch_hijacker");
     } else if(crateType == "mega" || crateType == "emergency_airdrop") {
-      if(self.team == owner.team)
+      if(self.team == owner.team) {
         continue;
-
+      }
       self thread maps\mp\gametypes\_hud_message::SplashNotifyDelayed("hijacker", 100);
       self thread maps\mp\gametypes\_rank::giveRankXP("hijacker", 100);
       if(isDefined(owner))

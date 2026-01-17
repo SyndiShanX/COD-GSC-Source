@@ -5,7 +5,7 @@
 ***********************************************************/
 
 main() {
-  self setmodel("body_sp_sas_woodland_colon");
+  self setModel("body_sp_sas_woodland_colon");
   self attach("head_sas_ct_assault_benjamin_nomask", "", 1);
   self.headmodel = "head_sas_ct_assault_benjamin_nomask";
   self.voice = "british";

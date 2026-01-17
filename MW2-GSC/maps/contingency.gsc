@@ -104,8 +104,6 @@ main() {
   precacheString(&"CONTINGENCY_DONT_LEAVE");
   precacheString(&"CONTINGENCY_DONT_LEAVE_FAILURE");
 
-
-
   maps\_load::main();
   maps\_load::set_player_viewhand_model("viewhands_player_arctic_wind");
   thread maps\contingency_amb::main();
@@ -219,7 +217,7 @@ main() {
   level.player thread playerSnowFootsteps();
   player_speed_percent(90);
 
-  destroyable_trees = getentarray("trigger_tree_explosion", "targetname");
+  destroyable_trees = getEntArray("trigger_tree_explosion", "targetname");
   foreach(trigger in destroyable_trees)
   trigger thread setup_destroyable_tree();
 
@@ -227,33 +225,33 @@ main() {
   //thread destroy_chain( tree_destruction_chain );
 
   //thread spawn_bridge_trucks();
-  truck_patrol_vehicles = getentarray("truck_patrol", "targetname");
+  truck_patrol_vehicles = getEntArray("truck_patrol", "targetname");
   array_thread(truck_patrol_vehicles, ::add_spawn_function, ::setup_bridge_trucks);
-  truck_guys = getentarray("truck_guys", "script_noteworthy");
+  truck_guys = getEntArray("truck_guys", "script_noteworthy");
   array_thread(truck_guys, ::add_spawn_function, ::base_truck_guys_think);
 
-  rasta_spawners = getentarray("rasta", "script_noteworthy");
+  rasta_spawners = getEntArray("rasta", "script_noteworthy");
   array_thread(rasta_spawners, ::add_spawn_function, ::setup_rasta);
 
-  bricktop_spawners = getentarray("bricktop", "script_noteworthy");
+  bricktop_spawners = getEntArray("bricktop", "script_noteworthy");
   array_thread(bricktop_spawners, ::add_spawn_function, ::setup_bricktop);
 
-  village_redshirt = getentarray("village_redshirt", "script_noteworthy");
-  if(isdefined(village_redshirt))
+  village_redshirt = getEntArray("village_redshirt", "script_noteworthy");
+  if(isDefined(village_redshirt))
     array_thread(village_redshirt, ::add_spawn_function, ::setup_village_redshirt);
 
-  start_of_base_redshirt = getentarray("start_of_base_redshirt", "script_noteworthy");
-  if(isdefined(start_of_base_redshirt))
+  start_of_base_redshirt = getEntArray("start_of_base_redshirt", "script_noteworthy");
+  if(isDefined(start_of_base_redshirt))
     array_thread(start_of_base_redshirt, ::add_spawn_function, ::setup_base_redshirt);
 
   level.village_defenders_dead = 0;
-  village_defenders = getentarray("village_defenders", "targetname");
+  village_defenders = getEntArray("village_defenders", "targetname");
   array_thread(village_defenders, ::add_spawn_function, ::setup_village_defenders);
 
-  base_starting_guys = getentarray("base_starting_guys", "script_noteworthy");
+  base_starting_guys = getEntArray("base_starting_guys", "script_noteworthy");
   array_thread(base_starting_guys, ::add_spawn_function, ::setup_base_starting_guys);
 
-  base_vehicles = getentarray("base_vehicles", "script_noteworthy");
+  base_vehicles = getEntArray("base_vehicles", "script_noteworthy");
   array_thread(base_vehicles, ::add_spawn_function, ::setup_base_vehicles);
 
   base_troop_transport1 = getent("base_troop_transport1", "targetname");
@@ -272,18 +270,18 @@ main() {
   price_spawner add_spawn_function(::setup_price);
   price_spawner add_spawn_function(::set_threatbias_group, "price");
 
-  //base_truck_guys = getentarray( "base_truck_guys", "script_noteworthy" );
+  //base_truck_guys = getEntArray( "base_truck_guys", "script_noteworthy" );
   //array_thread( base_truck_guys, ::add_spawn_function, ::setup_remote_missile_target_rider );
-  //defend_sub_vehicle_guys = getentarray( "defend_sub_vehicle_guys", "script_noteworthy" );
+  //defend_sub_vehicle_guys = getEntArray( "defend_sub_vehicle_guys", "script_noteworthy" );
   //array_thread( defend_sub_vehicle_guys, ::add_spawn_function, ::setup_remote_missile_target_rider );
-  //base_starting_guys_truckriders = getentarray( "base_starting_guys_truckriders", "targetname" );
+  //base_starting_guys_truckriders = getEntArray( "base_starting_guys_truckriders", "targetname" );
   //array_thread( base_starting_guys_truckriders, ::add_spawn_function, ::setup_remote_missile_target_rider );
 
-  //defend_sub_final_guys = getentarray( "defend_sub_final_guys", "targetname" );
+  //defend_sub_final_guys = getEntArray( "defend_sub_final_guys", "targetname" );
   //array_thread( defend_sub_final_guys, ::add_spawn_function, maps\_remotemissile::setup_remote_missile_target );
-  //base_defenders = getentarray( "base_defenders", "script_noteworthy" );
+  //base_defenders = getEntArray( "base_defenders", "script_noteworthy" );
   //array_thread( base_defenders, ::add_spawn_function, maps\_remotemissile::setup_remote_missile_target );
-  //base_starting_guys = getentarray( "base_starting_guys", "targetname" );
+  //base_starting_guys = getEntArray( "base_starting_guys", "targetname" );
   //array_thread( base_starting_guys, ::add_spawn_function, maps\_remotemissile::setup_remote_missile_target );
 
   add_global_spawn_function("axis", ::setup_remote_missile_target_guy);
@@ -296,10 +294,10 @@ main() {
   base_troop_transport2 = getent("base_troop_transport2", "targetname");
   base_troop_transport2 add_spawn_function(::flag_set, "base_troop_transport2_spawned");
 
-  village_truck_guys = getentarray("village_truck_guys", "script_noteworthy");
+  village_truck_guys = getEntArray("village_truck_guys", "script_noteworthy");
   array_thread(village_truck_guys, ::add_spawn_function, ::village_truck_guys_setup);
 
-  //end_patrol = getentarray( "end_patrol", "targetname" );
+  //end_patrol = getEntArray( "end_patrol", "targetname" );
   //array_thread( end_patrol, ::add_spawn_function, ::set_threatbias_group, "end_patrol" );
 
   sub_ladder = getent("sub_ladder", "targetname");
@@ -310,9 +308,9 @@ main() {
 
   thread setup_dont_leave_failure();
   thread setup_dont_leave_hint();
-  add_hint_string("hint_dont_leave_price", & "CONTINGENCY_DONT_LEAVE", ::should_break_dont_leave);
-  add_hint_string("hint_predator_drone", & "HELLFIRE_USE_DRONE", ::should_break_use_drone);
-  add_hint_string("hint_steer_drone", & "SCRIPT_PLATFORM_STEER_DRONE", ::should_break_steer_drone);
+  add_hint_string("hint_dont_leave_price", &"CONTINGENCY_DONT_LEAVE", ::should_break_dont_leave);
+  add_hint_string("hint_predator_drone", &"HELLFIRE_USE_DRONE", ::should_break_use_drone);
+  add_hint_string("hint_steer_drone", &"SCRIPT_PLATFORM_STEER_DRONE", ::should_break_steer_drone);
 
   thread objective_main();
 }
@@ -320,7 +318,6 @@ main() {
 tons_of_health() {
   self.health = 100000;
 }
-
 
 start_start() {
   thread handle_start();
@@ -331,14 +328,14 @@ start_base() {
   level.player setOrigin(start.origin);
   level.player setPlayerAngles(start.angles);
 
-  friendlies = getentarray("start_friendly", "targetname");
-  friendlies2 = getentarray("rasta_and_bricktop", "targetname");
+  friendlies = getEntArray("start_friendly", "targetname");
+  friendlies2 = getEntArray("rasta_and_bricktop", "targetname");
   friendlies = array_combine(friendlies, friendlies2);
 
   //array_thread( friendlies, ::spawn_ai );
   friendly_starts = getstructarray("base_start_friendly", "targetname");
 
-  for (i = 0; i < friendlies.size; i++) {
+  for(i = 0; i < friendlies.size; i++) {
     friendlies[i].origin = friendly_starts[i].origin;
     friendlies[i].angles = friendly_starts[i].angles;
     friendlies[i] spawn_ai();
@@ -354,21 +351,19 @@ start_base() {
   thread handle_base();
 }
 
-
-
 start_defend_sub() {
   start = getstruct("defend_sub_start_player", "targetname");
   level.player setOrigin(start.origin);
   level.player setPlayerAngles(start.angles);
 
-  friendlies = getentarray("start_friendly", "targetname");
-  friendlies2 = getentarray("rasta_and_bricktop", "targetname");
+  friendlies = getEntArray("start_friendly", "targetname");
+  friendlies2 = getEntArray("rasta_and_bricktop", "targetname");
   friendlies = array_combine(friendlies, friendlies2);
 
   //array_thread( friendlies, ::spawn_ai );
   friendly_starts = getstructarray("defend_sub_start_friendly", "targetname");
 
-  for (i = 0; i < friendlies.size; i++) {
+  for(i = 0; i < friendlies.size; i++) {
     friendlies[i].origin = friendly_starts[i].origin;
     friendlies[i].angles = friendly_starts[i].angles;
     friendlies[i] spawn_ai();
@@ -418,7 +413,6 @@ dialog_i_cant_see_roach() {
   wait 4;
   //Price, I can barely see Roach's chute on my satellite feed.Too much interference. Do you see him, over?
   thread radio_dialogue("cont_cmt_barelysee");
-
 }
 
 handle_start() {
@@ -448,7 +442,7 @@ handle_start() {
   flag_wait("start_first_patrol");
 
   autosave_by_name("start_first_patrol");
-  first_patrol = getentarray("first_patrol", "targetname");
+  first_patrol = getEntArray("first_patrol", "targetname");
   foreach(guy in first_patrol) {
     guy thread spawn_with_delays();
   }
@@ -501,11 +495,11 @@ start_slide() {
   level.player setOrigin(start.origin);
   level.player setPlayerAngles(start.angles);
 
-  friendlies = getentarray("start_friendly", "targetname");
+  friendlies = getEntArray("start_friendly", "targetname");
   //array_thread( friendlies, ::spawn_ai );
   friendly_starts = getstructarray("slide_start_friendly", "targetname");
 
-  for (i = 0; i < friendlies.size; i++) {
+  for(i = 0; i < friendlies.size; i++) {
     friendlies[i].origin = friendly_starts[i].origin;
     friendlies[i].angles = friendly_starts[i].angles;
     friendlies[i] spawn_ai();
@@ -523,12 +517,10 @@ start_slide() {
   thread handle_slide();
 }
 
-
 //#using_animtree( "generic_human" );
 handle_slide() {
   price_destroys_btr = level.price_destroys_btr;
   thread cargo_choppers2();
-
 
   level.price notify("stop_smart_path_following");
 
@@ -571,7 +563,7 @@ handle_slide() {
   //thread draw_line_for_time ( btr81_slide_node.origin, btr81_slide_node.origin + (0,0,32), 0, 1, 1, 999);
 
   btr81_slide_node thread anim_single_solo(level.btr_slider, "contingency_btr_slide");
-  level.btr_slider playsound("scn_con_bmp_skid");
+  level.btr_slider playSound("scn_con_bmp_skid");
 
   //thread dialog_btr_incoming();
   //thread debug_timer();
@@ -629,17 +621,16 @@ handle_slide() {
   thread handle_woods();
 }
 
-
 start_woods() {
   start = getstruct("woods_start_player", "targetname");
   level.player setOrigin(start.origin);
   level.player setPlayerAngles(start.angles);
 
-  friendlies = getentarray("start_friendly", "targetname");
+  friendlies = getEntArray("start_friendly", "targetname");
   //array_thread( friendlies, ::spawn_ai );
   friendly_starts = getstructarray("woods_start_friendly", "targetname");
 
-  for (i = 0; i < friendlies.size; i++) {
+  for(i = 0; i < friendlies.size; i++) {
     friendlies[i].origin = friendly_starts[i].origin;
     friendlies[i].angles = friendly_starts[i].angles;
     friendlies[i] spawn_ai();
@@ -659,11 +650,11 @@ start_midwoods() {
   level.player setOrigin(start.origin);
   level.player setPlayerAngles(start.angles);
 
-  friendlies = getentarray("start_friendly", "targetname");
+  friendlies = getEntArray("start_friendly", "targetname");
   //array_thread( friendlies, ::spawn_ai );
   friendly_starts = getstructarray("midwoods_start_friendly", "targetname");
 
-  for (i = 0; i < friendlies.size; i++) {
+  for(i = 0; i < friendlies.size; i++) {
     friendlies[i].origin = friendly_starts[i].origin;
     friendlies[i].angles = friendly_starts[i].angles;
     friendlies[i] spawn_ai();
@@ -690,7 +681,6 @@ handle_woods() {
       guy delete();
   }
 
-
   thread dialog_russians_looking_for_you();
 
   level.price notify("_utility::follow_path");
@@ -716,7 +706,7 @@ handle_woods() {
 
   //level.price stealth_fog_smart_stance();
 
-  //woods_guys = getentarray( "woods_guys", "targetname" );
+  //woods_guys = getEntArray( "woods_guys", "targetname" );
   //foreach( guy in woods_guys )
   //	guy spawn_ai();
 
@@ -752,11 +742,11 @@ start_ridge() {
   level.player setOrigin(start.origin);
   level.player setPlayerAngles(start.angles);
 
-  friendlies = getentarray("start_friendly", "targetname");
+  friendlies = getEntArray("start_friendly", "targetname");
   //array_thread( friendlies, ::spawn_ai );
   friendly_starts = getstructarray("ridge_start_friendly", "targetname");
 
-  for (i = 0; i < friendlies.size; i++) {
+  for(i = 0; i < friendlies.size; i++) {
     friendlies[i].origin = friendly_starts[i].origin;
     friendlies[i].angles = friendly_starts[i].angles;
     friendlies[i] spawn_ai();
@@ -767,11 +757,10 @@ start_ridge() {
 }
 
 first_uav_sequence() {
-
   //because of stealth clean up
   //rasta and bricktop could destroy the gauntlets beofre the UAV shows
   if((isalive(level.gauntlet_east)) && (isalive(level.gauntlet_west))) {
-    //ambient_villagers = getentarray( "ambient_villagers", "targetname" );
+    //ambient_villagers = getEntArray( "ambient_villagers", "targetname" );
     //foreach( guy in ambient_villagers )
     //	guy spawn_ai();
 
@@ -781,7 +770,7 @@ first_uav_sequence() {
     level.uav = spawn_vehicle_from_targetname_and_drive("first_uav");
     level.uav playLoopSound("uav_engine_loop");
     level.uavRig = spawn("script_model", level.uav.origin);
-    level.uavRig setmodel("tag_origin");
+    level.uavRig setModel("tag_origin");
     thread UAVRigAiming();
 
   }
@@ -806,7 +795,7 @@ first_uav_sequence() {
 
     enemies = GetAISpeciesArray("axis", "all");
     level.stealth_enemies_remaining = enemies.size;
-    while (level.stealth_enemies_remaining > 0)
+    while(level.stealth_enemies_remaining > 0)
       wait 1;
   }
   level.price thread disable_cqbwalk();
@@ -814,7 +803,6 @@ first_uav_sequence() {
   flag_wait("price_on_ridge");
 
   if((isalive(level.gauntlet_east)) && (isalive(level.gauntlet_west))) {
-
     level.last_uav_launch_time = gettime();
 
     level.player.has_remote_detonator = true;
@@ -836,7 +824,7 @@ first_uav_sequence() {
     if(!flag("going_down_ridge"))
       wait 3;
 
-    if(!flag("going_down_ridge") && (!isdefined(level.player.is_controlling_UAV)))
+    if(!flag("going_down_ridge") && (!isDefined(level.player.is_controlling_UAV)))
       wait 3;
   } else {
     level.last_uav_launch_time = gettime();
@@ -869,10 +857,10 @@ first_uav_sequence() {
 }
 
 handle_ridge() {
-  rasta_spawners = getentarray("rasta", "script_noteworthy");
+  rasta_spawners = getEntArray("rasta", "script_noteworthy");
   array_thread(rasta_spawners, ::add_spawn_function, ::setup_rasta_village);
 
-  bricktop_spawners = getentarray("bricktop", "script_noteworthy");
+  bricktop_spawners = getEntArray("bricktop", "script_noteworthy");
   array_thread(bricktop_spawners, ::add_spawn_function, ::setup_bricktop_village);
 
   thread price_slides_down_the_ridge();
@@ -914,7 +902,7 @@ handle_ridge() {
 
   thread save_when_x_are_killed();
 
-  first_villagers = getentarray("first_villagers", "targetname");
+  first_villagers = getEntArray("first_villagers", "targetname");
   foreach(guy in first_villagers)
   guy spawn_ai();
 
@@ -959,7 +947,7 @@ handle_ridge() {
   level.price thread turn_off_stealth_settings();
   //level.price.colornode_func = ::dialog_moving_to_new_position_in_village;
 
-  village_defenders = getentarray("village_defenders", "targetname");
+  village_defenders = getEntArray("village_defenders", "targetname");
   foreach(guy in village_defenders)
   guy spawn_ai();
 
@@ -992,8 +980,8 @@ handle_base() {
   }
 
   desired = 3 - alive;
-  start_of_base_redshirt = getentarray("start_of_base_redshirt", "targetname");
-  for (i = 0; i < desired; i++) {
+  start_of_base_redshirt = getEntArray("start_of_base_redshirt", "targetname");
+  for(i = 0; i < desired; i++) {
     start_of_base_redshirt[i] spawn_ai();
   }
 
@@ -1014,7 +1002,7 @@ handle_base() {
 
   sight_ranges_foggy_woods();
 
-  base_starting_guys = getentarray("base_starting_guys", "targetname");
+  base_starting_guys = getEntArray("base_starting_guys", "targetname");
   foreach(guy in base_starting_guys) {
     guy spawn_ai();
   }
@@ -1070,8 +1058,6 @@ handle_base() {
 
   thread handle_defend_sub();
 }
-
-
 
 handle_defend_sub() {
   flag_wait("price_splits_off");
@@ -1148,7 +1134,7 @@ handle_defend_sub() {
 
   autosave_by_name("defend2");
 
-  defend_sub_final_guys = getentarray("defend_sub_final_guys", "targetname");
+  defend_sub_final_guys = getEntArray("defend_sub_final_guys", "targetname");
   foreach(guy in defend_sub_final_guys)
   guy spawn_ai();
 
@@ -1172,7 +1158,7 @@ handle_defend_sub() {
   flee_pos = getstruct("contacts_south_flee_pos", "targetname").origin;
   enemies = getaiarray("axis");
   foreach(guy in enemies) {
-    //if( !isdefined( guy.targetname ) )
+    //if( !isDefined( guy.targetname ) )
     //	continue;
     //if( guy.targetname == "defend_sub_final_guys" )
     guy thread enemies_flee(flee_pos);
@@ -1244,14 +1230,14 @@ handle_defend_sub() {
 //	level.player setOrigin( start.origin );
 //	level.player setPlayerAngles( start.angles );
 //	
-//	friendlies = getentarray( "start_friendly", "targetname" );
-//	friendlies2 = getentarray( "rasta_and_bricktop", "targetname" );
+//	friendlies = getEntArray( "start_friendly", "targetname" );
+//	friendlies2 = getEntArray( "rasta_and_bricktop", "targetname" );
 //	friendlies = array_combine( friendlies, friendlies2 );
 //	
 //	//array_thread( friendlies, ::spawn_ai );
 //	friendly_starts = getstructarray( "sub_start_friendly", "targetname" );
 //	
-//	for ( i = 0 ; i < friendlies.size ; i++ )
+//	for( i = 0 ; i < friendlies.size ; i++ )
 //	{
 //		friendlies[ i ].origin = friendly_starts[ i ].origin;
 //		friendlies[ i ].angles = friendly_starts[ i ].angles;
@@ -1426,14 +1412,14 @@ handle_defend_sub() {
 //	level.player setOrigin( start.origin );
 //	level.player setPlayerAngles( start.angles );
 //	
-//	friendlies = getentarray( "start_friendly", "targetname" );
-//	//friendlies2 = getentarray( "rasta_and_bricktop", "targetname" );
+//	friendlies = getEntArray( "start_friendly", "targetname" );
+//	//friendlies2 = getEntArray( "rasta_and_bricktop", "targetname" );
 //	//friendlies = array_combine( friendlies, friendlies2 );
 //	
 //	//array_thread( friendlies, ::spawn_ai );
 //	friendly_starts = getstructarray( "exit_sub_start_friendly", "targetname" );
 //	
-//	for ( i = 0 ; i < friendlies.size ; i++ )
+//	for( i = 0 ; i < friendlies.size ; i++ )
 //	{
 //		friendlies[ i ].origin = friendly_starts[ i ].origin;
 //		friendlies[ i ].angles = friendly_starts[ i ].angles;
@@ -1552,7 +1538,6 @@ handle_defend_sub() {
 //	nextmission();
 //}
 
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1623,7 +1608,7 @@ base_arrival_music() {
   level endon("stop_base_arrival_music");
   music_TIME = musicLength("contingency_base_arrival");
 
-  while (1) {
+  while(1) {
     MusicPlayWrapper("contingency_base_arrival");
     wait music_TIME;
   }
@@ -1635,14 +1620,14 @@ breakforsub_music() {
   music_stop(1);
   //wait .1;
   //MusicPlayWrapper( "contingency_breakforsub" );
-  level.player playsound("contingency_breakforsub");
+  level.player playSound("contingency_breakforsub");
 }
 
 save_when_x_are_killed() {
   start_amount = level.enemies_killed;
   needed = 20 + start_amount;
 
-  while (level.enemies_killed < needed)
+  while(level.enemies_killed < needed)
     wait 1;
 
   autosave_by_name("x_killed");
@@ -1673,7 +1658,7 @@ spawn_ghosts_team() {
   if(isalive(level.gauntlet_east))
     level.gauntlet_east waittill("death");
 
-  other_guys = getentarray("village_redshirt", "script_noteworthy");
+  other_guys = getEntArray("village_redshirt", "script_noteworthy");
   foreach(guy in other_guys)
   guy spawn_ai();
 }
@@ -1698,14 +1683,14 @@ fake_treads() {
 faster_price_if_player_close() {
   level.player endon("death");
   level endon("safe_from_btrs");
-  while (1) {
+  while(1) {
     wait .1;
 
     if(distance(level.player.origin, level.price.origin) < 400) {
       level.price.moveplaybackrate = 1;
     } else {
       vec2 = VectorNormalize((level.player.origin - level.price.origin));
-      vec = anglestoforward(level.price.angles);
+      vec = anglesToForward(level.price.angles);
       vecdot = vectordot(vec, vec2); //dot of my angle vs player position
 
       //vecdot > 0 means in 180 in front
@@ -1727,7 +1712,7 @@ dialog_price_splits_off() {
   //Roach, we have to get to that guardhouse by the west gate to cover Price! Follow me!	
   level.rasta dialogue_queue("cont_gst_guardhouse");
 
-  while (!flag("player_on_guardhouse")) {
+  while(!flag("player_on_guardhouse")) {
     wait 20;
     if(flag("player_on_guardhouse"))
       return;
@@ -1787,7 +1772,7 @@ setup_defend_sub_vehicles() {
 
 setup_vehicle_gate(stringname) {
   flag_wait(stringname);
-  gates = getentarray(stringname, "targetname");
+  gates = getEntArray(stringname, "targetname");
   foreach(gate in gates) {
     dir = -160;
     if(gate.script_noteworthy == "left")
@@ -1796,11 +1781,12 @@ setup_vehicle_gate(stringname) {
     gate movex(dir, 2, 1, 0);
   }
 
-  while (1) {
+  while(1) {
     flag_clear(stringname);
     wait .2;
-    if(!flag(stringname))
+    if(!flag(stringname)) {
       break;
+    }
   }
 
   foreach(gate in gates) {
@@ -1829,7 +1815,7 @@ setup_sub_hatch() {
 }
 
 open_sub_missile_doors() {
-  sub_missile_doors = getentarray("sub_missile_door", "targetname");
+  sub_missile_doors = getEntArray("sub_missile_door", "targetname");
 
   current_side = "left";
   current_num = 1;
@@ -1837,7 +1823,7 @@ open_sub_missile_doors() {
   shake_time = .1;
   time_between_doors = 1.6;
 
-  while (1) {
+  while(1) {
     foreach(door in sub_missile_doors) {
       if((door.script_noteworthy == current_side) && (int(door.script_namenumber) == current_num)) {
         door thread open_sub_missile_door_action(open_time, shake_time);
@@ -1858,9 +1844,9 @@ open_sub_missile_doors() {
 }
 
 open_sub_missile_door_action(open_time, shake_time) {
-  org = Spawn("script_origin", (0, 0, 1));
+  org = spawn("script_origin", (0, 0, 1));
   org.origin = self.origin;
-  org PlaySound("missile_hatch_slams_open", "sounddone");
+  org playSound("missile_hatch_slams_open", "sounddone");
 
   door = self;
   if(door.script_noteworthy == "left")
@@ -1882,7 +1868,7 @@ open_sub_missile_door_action(open_time, shake_time) {
 
 dialog_looking_for_us() {
   flag_wait("first_patrol_cqb");
-  first_patrol_cqb = getentarray("first_patrol_cqb", "targetname");
+  first_patrol_cqb = getEntArray("first_patrol_cqb", "targetname");
   foreach(guy in first_patrol_cqb)
   guy spawn_ai();
 
@@ -1893,14 +1879,14 @@ dialog_looking_for_us() {
 }
 
 launch_nuke() {
-  //level.player playsound( "scn_icbm_missile_launch" );
+  //level.player playSound( "scn_icbm_missile_launch" );
   //icbm_missile01 thread play_loop_sound_on_entity( "scn_icbm_missile2_loop" );
 
   icbm_missile01 = getent("icbm_missile01", "targetname");
   missile01_start = getent("missile01_start", "targetname");
   missile01_end = getent("missile01_end", "targetname");
 
-  //PlayFX( getfx("icbm_launch") , icbm_missile01.origin );
+  //playFX( getfx("icbm_launch") , icbm_missile01.origin );
 
   //Earthquake( <scale>, <duration>, <source>, <radius> )
   earthquake(0.3, 12, icbm_missile01.origin, 8000);
@@ -1908,22 +1894,22 @@ launch_nuke() {
   level.player PlayRumbleLoopOnEntity("tank_rumble");
   level.player delaycall(8.0, ::stopRumble, "tank_rumble");
 
-  icbm_missile01 playsound("scn_con_icbm_ignition");
+  icbm_missile01 playSound("scn_con_icbm_ignition");
 
   icbm_missile01 linkto(missile01_start);
   //point, time, accel time, decel time
   missile01_start moveto(missile01_end.origin, 50, 10, 0);
   // icbm_missile thread maps\_utility::playSoundOnTag( "parachute_land_player" );
-  playfxontag(level._effect["smoke_geotrail_icbm"], icbm_missile01, "TAG_NOZZLE");
+  playFXOnTag(level._effect["smoke_geotrail_icbm"], icbm_missile01, "TAG_NOZZLE");
   exploder("icbm_launch");
-  //playfxontag( level._effect[ "smoke_geotrail_icbm" ], icbm_missile01, "tag_origin" );
+  //playFXOnTag( level._effect[ "smoke_geotrail_icbm" ], icbm_missile01, "tag_origin" );
 
   wait 1;
 
   if(distance(level.player.origin, missile01_start.origin) < 600)
     level.player dodamage((level.player.health + 1000), missile01_start.origin);
 
-  icbm_missile01 playloopsound("scn_con_icbm_rocket_loop");
+  icbm_missile01 playLoopSound("scn_con_icbm_rocket_loop");
 
   missile01_start waittill("movedone");
   icbm_missile01 delete();
@@ -1965,10 +1951,10 @@ uaz_control() {
 
 spawn_sub_enemies() {
   level endon("stop_sub_enemies");
-  sub_enemies = getentarray("sub_enemies", "targetname"); //6 total
-  while (1) {
+  sub_enemies = getEntArray("sub_enemies", "targetname"); //6 total
+  while(1) {
     desired = 1 + randomint(3);
-    while (desired > 0) {
+    while(desired > 0) {
       sub_enemies[(desired - 1)] spawn_ai();
       desired--;
     }
@@ -1998,23 +1984,22 @@ activate_players_key() {
   players_key glow();
 
   players_key setCursorHint("HINT_NOICON");
-  // Press and hold ^3&&1^7 to pick up the turret.
+  // Press and hold ^3&& 1^7 to pick up the turret.
   players_key setHintString(&"CONTINGENCY_TURN_KEY");
   players_key makeUsable();
 
   players_key waittill("trigger", player);
 
-  //predator_drone_control playsound( "scn_invasion_controlrig_pickup" );
+  //predator_drone_control playSound( "scn_invasion_controlrig_pickup" );
   flag_set("player_turned_key");
   players_key stopGlow();
   players_key makeUnusable();
-
 }
 
 dialog_turn_key_nags() {
   wait 10;
   first_line = true;
-  while (!flag("player_turned_key")) {
+  while(!flag("player_turned_key")) {
     if(first_line) {
       //Roach! We're running out of time! Turn the key!!!	
       level.price dialogue_queue("cont_pri_runningout");
@@ -2030,7 +2015,7 @@ dialog_turn_key_nags() {
 
 start_tear_gas_guys() {
   flag_wait("player_dropping_into_sub");
-  tear_gas_nodes = getentarray("tear_gas_nodes", "script_noteworthy");
+  tear_gas_nodes = getEntArray("tear_gas_nodes", "script_noteworthy");
   foreach(anode in tear_gas_nodes) {
     spawner = getent(anode.target, "targetname");
     anim_name = anode.script_animation;
@@ -2054,7 +2039,7 @@ setup_tear_gas_guy(anim_name, anode) {
 
 debug_timer() {
   time_past = 0;
-  while (time_past < 70) {
+  while(time_past < 70) {
     wait .05;
     time_past = time_past + .05;
     println("time past: " + time_past);
@@ -2083,7 +2068,7 @@ put_on_player_gas_mask() {
   wait(2.5);
   level.player takeweapon("facemask");
   level.player enableweapons();
-  //level.player playloopsound( "gas_mask_breath" );
+  //level.player playLoopSound( "gas_mask_breath" );
   //SetSavedDvar( "nightVisionDisableEffects", 0 );
   //SetSavedDvar( "overrideNVGModelWithKnife", 0 );
   //SetSavedDvar( "nightVisionPowerOnTime", orig_nightVisionPowerOnTime );
@@ -2092,7 +2077,7 @@ put_on_player_gas_mask() {
 
 nag_player_to_destroy_btr() {
   level endon("base_btr2_dead");
-  while (1) {
+  while(1) {
     flag_wait("nag_player_to_destroy_btr");
 
     //Destroy that armored vehicle!	
@@ -2126,12 +2111,12 @@ unload_base_truck() {
 
   wait 1;
 
-  if(isdefined(level.base_truck1.has_target_shader)) {
+  if(isDefined(level.base_truck1.has_target_shader)) {
     level.base_truck1.has_target_shader = undefined;
     Target_Remove(level.base_truck1);
   }
 
-  if(isdefined(level.remote_missile_targets))
+  if(isDefined(level.remote_missile_targets))
     level.remote_missile_targets = array_remove(level.remote_missile_targets, level.base_truck1);
 }
 
@@ -2157,7 +2142,7 @@ base_alarm_sound() {
   dialog[dialog.size] = "cont_bpa_prejudice";
   //2nd Platoon, reinforce submarine pens two, five, and seven! Establish blocking positions to the east and west of the mess hall to stop the intruders!	
   dialog[dialog.size] = "cont_bpa_2ndplatoon";
-  //Alert! Enemy forces have penetrated the perimeter and are making their way towards the submarines! 
+  //Alert! Enemy forces have penetrated the perimeter and are making their way towards the submarines!
   dialog[dialog.size] = "cont_bpa_alert";
   //All submarine maintenance crews, get to your battlestation and prepare to dive immediately! I repeat, all submarine maintenance crews, get to your battlestations and prepare to dive immediately!	
   dialog[dialog.size] = "cont_bpa_battlestations";
@@ -2165,9 +2150,9 @@ base_alarm_sound() {
 
   base_pa = getent("base_pa", "targetname");
   base_alarm_sound = getent("base_alarm_sound", "targetname");
-  while (!flag("price_splits_off"))
-    while (1) {
-      base_alarm_sound playloopsound("emt_alarm_base_alert");
+  while(!flag("price_splits_off"))
+    while(1) {
+      base_alarm_sound playLoopSound("emt_alarm_base_alert");
       base_alarm_sound.playing = true;
       wait 8;
       base_alarm_sound StopLoopSound();
@@ -2175,14 +2160,14 @@ base_alarm_sound() {
 
       wait 1;
 
-      base_pa playsound(dialog[current]);
+      base_pa playSound(dialog[current]);
       current++;
       if(current >= dialog.size)
         current = 0;
 
       wait 12;
     }
-  if(isdefined(base_alarm_sound.playing))
+  if(isDefined(base_alarm_sound.playing))
     base_alarm_sound StopLoopSound();
 }
 
@@ -2193,7 +2178,7 @@ waittill_base_alerted() {
 }
 
 setup_remote_missile_target_guy() {
-  if(isdefined(self.ridingvehicle)) {
+  if(isDefined(self.ridingvehicle)) {
     self endon("death");
     self waittill("jumpedout");
 
@@ -2207,7 +2192,7 @@ dialog_destroyed_vehicle(dialog) {
 
   wait .05; //so that old_veh_num is accurate
 
-  if(!isdefined(level.vehicles_killed))
+  if(!isDefined(level.vehicles_killed))
     level.vehicles_killed = 1;
   else
     level.vehicles_killed++;
@@ -2218,12 +2203,12 @@ dialog_destroyed_vehicle(dialog) {
 setup_count_predator_infantry_kills() {
   self waittill("death");
 
-  if(isdefined(self.ridingvehicle))
+  if(isDefined(self.ridingvehicle)) {
     return;
-
+  }
   wait .05;
 
-  if(!isdefined(level.enemies_killed))
+  if(!isDefined(level.enemies_killed))
     level.enemies_killed = 1;
   else
     level.enemies_killed++;
@@ -2242,7 +2227,7 @@ dialog_handle_predator_infantry_kills() {
   said_good_effect = false;
   kills = 0;
 
-  while (1) {
+  while(1) {
     level waittill("remote_missile_exploded");
     old_num = level.enemies_killed;
     old_veh_num = level.vehicles_killed;
@@ -2251,21 +2236,20 @@ dialog_handle_predator_infantry_kills() {
 
     veh_kills = level.vehicles_killed - old_veh_num;
 
-    if(isdefined(level.uav_killstats["ai"]))
+    if(isDefined(level.uav_killstats["ai"]))
       kills = level.uav_killstats["ai"];
 
     //wait a bit before saying the line
     wait 1.2;
 
-    if(flag("saying_base_on_alert"))
+    if(flag("saying_base_on_alert")) {
       continue;
-
+    }
     if(veh_kills == 1) {
       radio_dialogue(level.veh_type);
       continue;
     }
     if(veh_kills > 1) {
-
       if(said_good_effect) {
         //Good hit. Multiple vehicles destroyed.	
         radio_dialogue("cont_cmt_goodhitvehicles");
@@ -2314,7 +2298,7 @@ setup_base_vehicles() {
 
   self waittill("unloaded");
 
-  if(isdefined(self.has_target_shader)) {
+  if(isDefined(self.has_target_shader)) {
     self.has_target_shader = undefined;
     Target_Remove(self);
   }
@@ -2325,7 +2309,7 @@ setup_base_vehicles() {
 dead_vehicle_blocking_path() {
   count = 0;
   last_bad_path_time = -10000;
-  while (1) {
+  while(1) {
     // bad_path nofies are every 0.5 seconds
     self waittill("bad_path");
 
@@ -2341,7 +2325,7 @@ dead_vehicle_blocking_path() {
     {
       count = 0;
       foreach(vehicle in level.dead_vehicles) {
-        if(IsDefined(vehicle) && !IsAlive(vehicle) && DistanceSquared(vehicle.origin, self.origin) < 300 * 300) {
+        if(isDefined(vehicle) && !IsAlive(vehicle) && DistanceSquared(vehicle.origin, self.origin) < 300 * 300) {
           vehicle thread dead_vehicle_enable_paths_thread();
         }
       }
@@ -2373,8 +2357,8 @@ vehicle_death_paths() {
   min_dist = 50 * 50;
   death_origin = self.origin;
 
-  while (IsDefined(self)) {
-    if(IsDefined(self.dead_vehicle_enable_paths)) {
+  while(isDefined(self)) {
+    if(isDefined(self.dead_vehicle_enable_paths)) {
       wait(0.5);
       continue;
     }
@@ -2386,14 +2370,14 @@ vehicle_death_paths() {
       self ConnectPaths();
 
       // Don't disconnectpaths until we're done moving.
-      while (1) {
-        if(IsDefined(self.dead_vehicle_enable_paths)) {
+      while(1) {
+        if(isDefined(self.dead_vehicle_enable_paths)) {
           wait(0.5);
           continue;
         }
 
         wait(0.05);
-        if(!IsDefined(self)) {
+        if(!isDefined(self)) {
           return;
         }
 
@@ -2415,7 +2399,7 @@ vehicle_death_paths() {
 unload_when_stuck() {
   self endon("unloading");
   self endon("death");
-  while (1) {
+  while(1) {
     wait 2;
     if(self Vehicle_GetSpeed() < 2) {
       self Vehicle_SetSpeed(0, 15);
@@ -2497,7 +2481,7 @@ setup_friendlies_for_base() {
 }
 
 vehicles_move_when_player_can_see_them() {
-  while ((!isdefined(level.player.is_controlling_UAV)) && !flag("obj_base_entrance"))
+  while((!isDefined(level.player.is_controlling_UAV)) && !flag("obj_base_entrance"))
     wait .05;
 
   thread gopath(level.base_btr2);
@@ -2520,7 +2504,7 @@ stealth_ai_ignore_tree_explosions() {
 }
 
 dialog_moving_to_new_position_in_village(p_node) {
-  if(!isdefined(level.dialog_moving_to_new_position_time)) {
+  if(!isDefined(level.dialog_moving_to_new_position_time)) {
     level.dialog_moving_to_new_position_time = gettime();
   } else {
     if(gettime() < (level.dialog_moving_to_new_position_time + (15 * 1000)))
@@ -2541,7 +2525,7 @@ enemies_flee(flee_pos) {
   self.ignoreme = true;
   self.goalradius = 96;
   self waittill("goal");
-  while (self cansee(level.player))
+  while(self cansee(level.player))
     wait 1;
   self kill();
 }
@@ -2555,7 +2539,7 @@ village_enemies_setup_retreat(retreat_pos) {
   self.ignoreme = true;
   self.goalradius = 32;
   self waittill("goal");
-  while (self cansee(level.player))
+  while(self cansee(level.player))
     wait 1;
   self kill();
 }
@@ -2571,7 +2555,7 @@ smart_barney(end_flag, end_goal, end_volume) {
   //level.taco setgoalentity( level.player );
   self.fixednode = false;
 
-  while (!flag(end_flag)) {
+  while(!flag(end_flag)) {
     player = level.player.origin;
     vec = VectorNormalize(end_goal - player);
     forward = vector_multiply(vec, 400);
@@ -2579,7 +2563,7 @@ smart_barney(end_flag, end_goal, end_volume) {
     self setgoalpos(goal);
     //println(" player " + level.player.origin + " goal " + forward );
 
-    //if( !isdefined( self.favoriteenemy ) )
+    //if( !isDefined( self.favoriteenemy ) )
     //{
     //	goal_enemies = end_volume get_ai_touching_volume( "axis" );
     //	if( goal_enemies.size )
@@ -2592,10 +2576,9 @@ smart_barney(end_flag, end_goal, end_volume) {
   self.moveplaybackrate = 1.0;
 
   self setgoalpos(end_goal);
-  if(isdefined(end_volume))
+  if(isDefined(end_volume))
     self setgoalvolume(end_volume);
 }
-
 
 price_changes_weapons() {
   flag_wait("going_down_ridge");
@@ -2604,13 +2587,14 @@ price_changes_weapons() {
   dot = .9;
   dot_only = true;
 
-  for (;;) {
-    org = level.price GetEye();
+  for(;;) {
+    org = level.price getEye();
 
     if(!player_looking_at(org, dot, dot_only)) {
       count--;
-      if(count <= 0)
+      if(count <= 0) {
         break;
+      }
     } else {
       count = base_time;
     }
@@ -2619,7 +2603,6 @@ price_changes_weapons() {
 
   level.price forceUseWeapon("aug_scope", "primary");
   //level.price forceUseWeapon( "ak47_arctic_acog", "primary" );
-
 }
 
 village_enemies() {}
@@ -2630,7 +2613,6 @@ friendlies_shoot_at_truck_until_its_unloads() {
   self waittill_either("unloaded", "death");
   self.ignoreme = true;
 }
-
 
 //kill_all_enemies_when_going_down_ridge()
 //{
@@ -2691,13 +2673,13 @@ price_slides_down_the_ridge() {
 kill_helicopter_fail_safe() {
   flag_wait("price_splits_off");
   wait 2;
-  if(!isalive(level.base_heli))
+  if(!isalive(level.base_heli)) {
     return;
-
+  }
   origin = (-13500.0, 876.0, 749.0);
 
   kill_heli_fail_safe = getstruct("kill_heli_fail_safe", "targetname");
-  if(isdefined(kill_heli_fail_safe))
+  if(isDefined(kill_heli_fail_safe))
     origin = kill_heli_fail_safe.origin;
   newMissile = MagicBullet("zippy_rockets", origin, level.base_heli.origin);
 
@@ -2705,16 +2687,16 @@ kill_helicopter_fail_safe() {
 }
 
 fire_stinger(stinger_source) {
-  forward = AnglesToForward(level.uav.angles);
+  forward = anglesToForward(level.uav.angles);
   forwardfar = vector_multiply(forward, 10000);
   end = forwardfar + level.uav.origin;
 
-  if(isdefined(level.player.is_controlling_UAV)) {
+  if(isDefined(level.player.is_controlling_UAV)) {
     //muzzlflash
-    PlayFX(getfx("thermal_missle_flash_inverted"), stinger_source);
+    playFX(getfx("thermal_missle_flash_inverted"), stinger_source);
     newMissile = MagicBullet("zippy_rockets_inverted", stinger_source, end);
   } else {
-    PlayFX(getfx("missle_flash"), stinger_source);
+    playFX(getfx("missle_flash"), stinger_source);
     newMissile = MagicBullet("zippy_rockets", stinger_source, end);
   }
 
@@ -2724,7 +2706,7 @@ fire_stinger(stinger_source) {
 }
 
 setup_dont_leave_hint() {
-  while (1) {
+  while(1) {
     //player_returning_to_map
     flag_wait("player_leaving_map");
 
@@ -2738,7 +2720,7 @@ setup_dont_leave_failure() {
   flag_wait("player_left_map");
 
   level notify("mission failed");
-  setDvar("ui_deadquote", & "CONTINGENCY_DONT_LEAVE_FAILURE");
+  setDvar("ui_deadquote", &"CONTINGENCY_DONT_LEAVE_FAILURE");
   maps\_utility::missionFailedWrapper();
 }
 
@@ -2759,11 +2741,11 @@ should_break_dont_leave() {
 
 should_break_use_drone() {
   break_hint = false;
-  if(isdefined(level.uav_is_destroyed))
+  if(isDefined(level.uav_is_destroyed))
     break_hint = true;
   if(!isalive(level.uav))
     break_hint = true;
-  if(isdefined(level.player.is_flying_missile))
+  if(isDefined(level.player.is_flying_missile))
     break_hint = true;
   if(flag("base_alerted"))
     break_hint = true;
@@ -2783,70 +2765,72 @@ should_break_steer_drone() {
   return break_hint;
 }
 
-
 fire_stinger_at_uav(stinger_source) {
   level.uav maps\_vehicle::godoff();
   level.uav.health = 400;
 
   attractor = Missile_CreateAttractorEnt(level.uav, 100000, 60000);
 
-  stinger_source playsound("gauntlet_fires");
-  stinger_source playsound("gauntlet_ignition");
+  stinger_source playSound("gauntlet_fires");
+  stinger_source playSound("gauntlet_ignition");
 
   newMissile = fire_stinger(stinger_source.origin);
 
   old_org = level.uav.origin;
   old_dist = 9999999999;
-  while (IsDefined(newMissile)) {
-    if(!isalive(level.uav))
+  while(isDefined(newMissile)) {
+    if(!isalive(level.uav)) {
       break;
+    }
     dist = Distance(newMissile.origin, level.uav.origin);
-    if(dist <= 200)
+    if(dist <= 200) {
       break;
-    if(dist > old_dist)
+    }
+    if(dist > old_dist) {
       break;
+    }
     old_dist = dist;
     old_org = level.uav.origin;
     wait .05;
   }
 
-  if(IsDefined(newMissile))
+  if(isDefined(newMissile))
     newMissile delete();
-  playfx(getfx("uav_explosion"), old_org);
+  playFX(getfx("uav_explosion"), old_org);
   level.uav thread play_sound_on_tag("uav_explode");
   level.uav_is_destroyed = true;
   level.player maps\_remotemissile::disable_uav(false, true);
 
   level notify("uav_destroyed");
 
-  if(isdefined(level.uav))
+  if(isDefined(level.uav))
     level.uav delete();
 }
 
 UAVRigAiming() {
   if(!isalive(level.uav))
     return;
-  if(isdefined(level.uav_is_destroyed))
+  if(isDefined(level.uav_is_destroyed)) {
     return;
-
-  focus_points = getentarray("uav_focus_point", "targetname");
+  }
+  focus_points = getEntArray("uav_focus_point", "targetname");
   village_focus_point = getent("village_focus_point", "script_noteworthy");
 
   level endon("uav_destroyed");
   level.uav endon("death");
-  for (;;) {
-    //if( IsDefined( level.uavTargetEnt ) )
+  for(;;) {
+    //if( isDefined( level.uavTargetEnt ) )
     //{
     //	targetPos = level.uavTargetEnt.origin;
     //}
-    //else 
+    //else
     if(flag("leaving_village")) {
       closest_focus = getclosest(level.player.origin, focus_points);
       targetPos = closest_focus.origin;
     } else {
       targetPos = village_focus_point.origin;
     }
-    //else if( IsDefined( level.uavTargetPos ) )
+    //else if( isDefined( level.uavTargetPos ) )
     //	targetPos = level.uavTargetPos;
     //else
     //	targetpos = ( -17052.6, -4000.98, 696.409 );
@@ -2870,9 +2854,9 @@ spawn_second_uav() {
     level.uav playLoopSound("uav_engine_loop");
   }
 
-  if(!isdefined(level.uavRig)) {
+  if(!isDefined(level.uavRig)) {
     level.uavRig = spawn("script_model", level.uav.origin);
-    level.uavRig setmodel("tag_origin");
+    level.uavRig setModel("tag_origin");
   }
 
   if(restart_rig)
@@ -2898,16 +2882,16 @@ dialog_russians_looking_for_you() {
   dialog[dialog.size] = "cont_ru3_woods";
   dialog[dialog.size] = "cont_ru4_woods";
 
-  while (!flag("approaching_ridge")) {
+  while(!flag("approaching_ridge")) {
     wait(randomfloatrange(2, 4));
 
-    guys = getentarray("cqb_patrol", "script_noteworthy");
+    guys = getEntArray("cqb_patrol", "script_noteworthy");
     guys = array_randomize(guys);
     foreach(guy in guys) {
       if(isalive(guy)) {
         selection = dialog[randomint(dialog.size)];
         println("guy.export " + guy.export+" sound " + selection);
-        guy playsound(selection);
+        guy playSound(selection);
         break;
       }
     }
@@ -2970,7 +2954,7 @@ dialog_rasta_and_bricktop() {
     return;
   level endon("start_village_fight");
 
-  while (!isalive(level.rasta))
+  while(!isalive(level.rasta))
     wait 1;
 
   level.price waittill_entity_in_range(level.rasta, 300);
@@ -2983,7 +2967,6 @@ dialog_rasta_and_bricktop() {
   level.rasta dialogue_queue("cont_rst_getmoving");
 
   //wait 1;
-
 }
 
 village_truck_guys_setup() {
@@ -2997,15 +2980,15 @@ price_smart_path_following(first_node) {
   self.smart_path_following_node = first_node;
   self setgoalnode(first_node);
 
-  if(!isdefined(first_node.target))
+  if(!isDefined(first_node.target)) {
     return;
-
+  }
   next_node = getnode(first_node.target, "targetname");
-  while (1) {
+  while(1) {
     trigger = undefined;
     volume = undefined;
 
-    links = getentarray(next_node.script_linkto, "script_linkname");
+    links = getEntArray(next_node.script_linkto, "script_linkname");
     //get the flag trigger linked to the next_node
     foreach(link in links) {
       if(link.classname == "trigger_multiple_flag_set")
@@ -3014,9 +2997,9 @@ price_smart_path_following(first_node) {
         volume = link;
     }
 
-    assert(isdefined(trigger));
-    assert(isdefined(trigger.script_flag));
-    assert(isdefined(volume));
+    assert(isDefined(trigger));
+    assert(isDefined(trigger.script_flag));
+    assert(isDefined(volume));
 
     // a flag trigger the player passes through
     flag_wait(trigger.script_flag);
@@ -3033,8 +3016,9 @@ price_smart_path_following(first_node) {
     self setgoalnode(next_node);
     self.smart_path_following_node = next_node;
 
-    if(!isdefined(next_node.target))
+    if(!isDefined(next_node.target)) {
       break;
+    }
 
     //get the next node
     next_node = getnode(next_node.target, "targetname");
@@ -3044,20 +3028,20 @@ price_smart_path_following(first_node) {
 
 destroy_chain(start_ent) {
   current_target = start_ent;
-  while (1) {
-    if(isdefined(current_target.script_linkTo)) {
+  while(1) {
+    if(isDefined(current_target.script_linkTo)) {
       tree = getent(current_target.script_linkTo, "script_linkname");
       tree notify("explode");
     }
 
     wait .2;
 
-    if(isdefined(current_target.script_delay))
+    if(isDefined(current_target.script_delay))
       wait current_target.script_delay;
 
-    if(isdefined(current_target.target)) {
+    if(isDefined(current_target.target)) {
       next_target = getstruct(current_target.target, "targetname");
-      assert(isdefined(next_target));
+      assert(isDefined(next_target));
       current_target = next_target;
     } else
       break;
@@ -3078,10 +3062,10 @@ friendly_adjust_movement_speed() {
   self endon("death");
   self endon("stop_adjust_movement_speed");
 
-  for (;;) {
+  for(;;) {
     wait randomfloatrange(.5, 1.5);
 
-    while (friendly_should_speed_up()) {
+    while(friendly_should_speed_up()) {
       //iPrintLnBold( "friendlies speeding up" );
       self.moveplaybackrate = 2.5;
       wait 0.05;
@@ -3118,7 +3102,7 @@ monitor_player_returns_to_btrs() {
   level.btr_tree_destroyer setturrettargetent(level.player);
 
   shots = randomintrange(2, 5);
-  for (i = 0; i < shots; i++) {
+  for(i = 0; i < shots; i++) {
     level.btr_tree_destroyer fireWeapon();
     wait(0.35);
   }
@@ -3126,7 +3110,7 @@ monitor_player_returns_to_btrs() {
   wait(randomfloatrange(.2, .5));
 
   shots = randomintrange(2, 4);
-  for (i = 0; i < shots; i++) {
+  for(i = 0; i < shots; i++) {
     level.btr_slider fireWeapon();
     level.btr_tree_destroyer fireWeapon();
     wait(0.35);
@@ -3139,7 +3123,7 @@ monitor_distance_player_vs_price() {
 
   level endon("safe_from_btrs");
 
-  while (1) {
+  while(1) {
     level.player waittill_entity_out_of_range(level.price, 1000);
 
     vec2 = VectorNormalize((level.player.origin - level.price.origin));
@@ -3147,7 +3131,7 @@ monitor_distance_player_vs_price() {
     //vec_goal = VectorNormalize( ( level.price.goalpos - level.price.origin ) );//angle of where I'm supposed to go
     //vecdot = vectordot( vec_goal, vec2 );//dot my my goal dir vs player position
 
-    vec = anglestoforward(level.price.angles);
+    vec = anglesToForward(level.price.angles);
     vecdot = vectordot(vec, vec2); //dot of my angle vs player position
 
     //vecdot > 0 means in 180 in front
@@ -3162,7 +3146,7 @@ monitor_distance_player_vs_price() {
   self setturrettargetent(level.player);
 
   shots = randomintrange(2, 5);
-  for (i = 0; i < shots; i++) {
+  for(i = 0; i < shots; i++) {
     self fireWeapon();
     wait(0.35);
   }
@@ -3170,7 +3154,7 @@ monitor_distance_player_vs_price() {
   wait(randomfloatrange(.2, .5));
 
   shots = randomintrange(2, 4);
-  for (i = 0; i < shots; i++) {
+  for(i = 0; i < shots; i++) {
     level.btr_slider fireWeapon();
     self fireWeapon();
     wait(0.35);
@@ -3183,7 +3167,7 @@ end_of_tree_explosions() {
   flag_wait("end_of_tree_explosions");
   wait 2;
 
-  destroyable_trees = getentarray("trigger_tree_explosion", "targetname");
+  destroyable_trees = getEntArray("trigger_tree_explosion", "targetname");
 
   thread random_tree_impact_sounds(destroyable_trees);
   level.btr_tree_destroyer fireWeapon();
@@ -3230,8 +3214,8 @@ end_of_tree_explosions() {
 
 random_tree_impact_sounds(destroyable_trees) {
   loc = destroyable_trees[randomint(destroyable_trees.size)];
-  loc playsound("contingency_tree_impact");
-  loc playsound("contingency_tree_fall");
+  loc playSound("contingency_tree_impact");
+  loc playSound("contingency_tree_fall");
 }
 
 setup_destroyable_tree() {
@@ -3249,36 +3233,36 @@ setup_destroyable_tree() {
   if(tree_base.model == "foliage_tree_pine_snow_tall_b_broken_btm") {
     small_tree = true;
     tree_base.endmodel = tree_base.model;
-    tree_base setmodel("foliage_tree_pine_snow_tall_b");
+    tree_base setModel("foliage_tree_pine_snow_tall_b");
   } else {
     tree_base.endmodel = tree_base.model;
-    tree_base setmodel("foliage_tree_pine_snow_tall_c");
+    tree_base setModel("foliage_tree_pine_snow_tall_c");
   }
-  parts = getentarray(tree_base.target, "targetname");
+  parts = getEntArray(tree_base.target, "targetname");
   foreach(part in parts) {
     if(part.classname == "script_model")
       destroyed_top = part;
     if(part.classname == "script_brushmodel")
       clip_brush = part;
   }
-  assert(isdefined(destroyed_top));
+  assert(isDefined(destroyed_top));
   destroyed_top.goalangles = destroyed_top.angles;
   //destroyed_top.angles = (0, tree_base.angles[1], 0);
   destroyed_top.angles = tree_base.angles;
   destroyed_top hide();
 
   hits_ground = false;
-  if((isdefined(destroyed_top.script_noteworthy)) && (destroyed_top.script_noteworthy == "hits_the_ground"))
+  if((isDefined(destroyed_top.script_noteworthy)) && (destroyed_top.script_noteworthy == "hits_the_ground"))
     hits_ground = true;
   if(hits_ground)
-    assert(isdefined(clip_brush));
-  if(isdefined(clip_brush)) {
+    assert(isDefined(clip_brush));
+  if(isDefined(clip_brush)) {
     assert(hits_ground);
     clip_brush notsolid();
   }
 
   self waittill("trigger");
-  //while( !isdefined( level.price ) )
+  //while( !isDefined( level.price ) )
   //	wait 1;
 
   if(isalive(level.btr_slider)) {
@@ -3291,22 +3275,22 @@ setup_destroyable_tree() {
     level.btr_tree_destroyer fireWeapon();
   }
 
-  destroyed_top playsound("contingency_tree_impact");
-  tree_base playsound("contingency_tree_fall");
+  destroyed_top playSound("contingency_tree_impact");
+  tree_base playSound("contingency_tree_fall");
 
-  tree_base setmodel(tree_base.endmodel);
-  forward = AnglesToForward(destroyed_top.angles);
+  tree_base setModel(tree_base.endmodel);
+  forward = anglesToForward(destroyed_top.angles);
   up = AnglesToUp(destroyed_top.angles);
   if(small_tree) {
-    playfx(getfx("tree_snow_dump_fast_small"), destroyed_top.origin, up, forward);
+    playFX(getfx("tree_snow_dump_fast_small"), destroyed_top.origin, up, forward);
   } else {
-    playfx(getfx("tree_snow_dump_fast"), destroyed_top.origin, up, forward);
+    playFX(getfx("tree_snow_dump_fast"), destroyed_top.origin, up, forward);
   }
 
   destroyed_top show();
   //drop_time = randomfloatrange( .6, 1.4 );
 
-  //if( isdefined( destroyed_top.script_duration ) )
+  //if( isDefined( destroyed_top.script_duration ) )
   //	drop_time = destroyed_top.script_duration;
   //else
   //{
@@ -3329,15 +3313,15 @@ setup_destroyable_tree() {
   wait(drop_time - pre_hit_fx_time);
 
   if(hits_ground) {
-    forward = AnglesToForward(destroyed_top.angles);
+    forward = anglesToForward(destroyed_top.angles);
     up = AnglesToUp(destroyed_top.angles);
 
     if(small_tree) {
       //destroyed_top thread maps\_debug::drawOrgForever();
-      playfx(getfx("tree_snow_fallen_small"), destroyed_top.origin, up, forward);
+      playFX(getfx("tree_snow_fallen_small"), destroyed_top.origin, up, forward);
     } else {
       //destroyed_top thread maps\_debug::drawOrgForever();
-      playfx(getfx("tree_snow_fallen_heavy"), destroyed_top.origin, up, forward);
+      playFX(getfx("tree_snow_fallen_heavy"), destroyed_top.origin, up, forward);
     }
   }
   wait pre_hit_fx_time;
@@ -3352,23 +3336,23 @@ setup_destroyable_tree() {
   if((hits_ground) && (!small_tree)) {
     if(level.player point_in_fov(destroyed_top.origin))
       Earthquake(0.3, .3, destroyed_top.origin, 2000);
-    destroyed_top playsound("contingency_tree_ground");
+    destroyed_top playSound("contingency_tree_ground");
   }
 
   if(!hits_ground) {
-    forward = AnglesToForward(destroyed_top.angles);
+    forward = anglesToForward(destroyed_top.angles);
     up = AnglesToUp(destroyed_top.angles);
 
     if(small_tree) {
       //destroyed_top thread maps\_debug::drawOrgForever();
-      playfx(getfx("tree_snow_fallen_small"), destroyed_top.origin, up, forward);
+      playFX(getfx("tree_snow_fallen_small"), destroyed_top.origin, up, forward);
     } else {
       //destroyed_top thread maps\_debug::drawOrgForever();
-      playfx(getfx("tree_snow_fallen"), destroyed_top.origin, up, forward);
+      playFX(getfx("tree_snow_fallen"), destroyed_top.origin, up, forward);
     }
   }
 
-  //if( !isdefined( destroyed_top.script_duration ) )
+  //if( !isDefined( destroyed_top.script_duration ) )
   //{
   shake_time = .2;
 
@@ -3388,15 +3372,15 @@ setup_destroyable_tree() {
   /*
   shake_time = .2;
   destroyed_top rotatepitch( 3, shake_time, shake_time, 0);
-	
+  	
   wait shake_time;
-	
+  	
   destroyed_top rotatepitch( -2, shake_time, shake_time, 0);
-	
+  	
   wait shake_time;
-	
+  	
   destroyed_top rotatepitch( 1, shake_time, shake_time, 0);
-	
+  	
   wait shake_time;
   */
 }
@@ -3404,7 +3388,7 @@ setup_destroyable_tree() {
 dialog_enemy_saw_corpse() {
   first_line = true;
 
-  while (1) {
+  while(1) {
     level waittill("_stealth_saw_corpse");
 
     wait 2;
@@ -3450,14 +3434,14 @@ dialog_enemy_saw_corpse() {
 }
 
 dialog_player_kill() {
-  if(flag("_stealth_spotted"))
+  if(flag("_stealth_spotted")) {
     return;
-
+  }
   wait 3;
 
   if(!stealth_is_everything_normal())
     return;
-  if(!isdefined(level.good_kill_dialog_time)) {
+  if(!isDefined(level.good_kill_dialog_time)) {
     level.good_kill_dialog_time = gettime();
   } else {
     if(gettime() < (level.good_kill_dialog_time + (15 * 1000)))
@@ -3488,7 +3472,7 @@ dialog_player_kill_master() {
 
   line = 0;
 
-  while (1) {
+  while(1) {
     level waittill("player kill dialog");
 
     radio_dialogue(dialog[line]);
@@ -3515,17 +3499,17 @@ dialog_price_kill() {
   //Target down.	
   dialog[dialog.size] = "cont_pri_targetdown";
 
-  while (1) {
+  while(1) {
     level waittill("dialog_price_kill");
 
     wait 1.5;
 
-    if(isdefined(level.dont_brag_when_following_your_own_orders_time)) {
+    if(isDefined(level.dont_brag_when_following_your_own_orders_time)) {
       if(gettime() < (level.dont_brag_when_following_your_own_orders_time + (15 * 1000)))
         continue;
     }
 
-    if(!isdefined(level.good_kill_dialog_time)) {
+    if(!isDefined(level.good_kill_dialog_time)) {
       level.good_kill_dialog_time = gettime();
     } else {
       if(gettime() < (level.good_kill_dialog_time + (3 * 1000)))
@@ -3552,17 +3536,17 @@ dialog_price_kill_dog() {
   //Down boy.	
   dialog_dog[dialog_dog.size] = "cont_pri_downboy";
 
-  while (1) {
+  while(1) {
     level waittill("dialog_price_kill_dog");
 
     wait 1.5;
 
-    if(isdefined(level.dont_brag_when_following_your_own_orders_time)) {
+    if(isDefined(level.dont_brag_when_following_your_own_orders_time)) {
       if(gettime() < (level.dont_brag_when_following_your_own_orders_time + (15 * 1000)))
         continue;
     }
 
-    if(!isdefined(level.good_kill_dialog_time)) {
+    if(!isDefined(level.good_kill_dialog_time)) {
       level.good_kill_dialog_time = gettime();
     } else {
       if(gettime() < (level.good_kill_dialog_time + (3 * 1000)))
@@ -3582,10 +3566,10 @@ dialog_price_kill_dog() {
 monitor_stealth_pain() {
   self waittill("damage", damage, attacker);
 
-  if(!isdefined(attacker))
+  if(!isDefined(attacker)) {
     return;
-
-  if((isplayer(attacker)) && (isdefined(self.script_deathflag))) {
+  }
+  if((isplayer(attacker)) && (isDefined(self.script_deathflag))) {
     if(self.script_deathflag != "blocking_stationary_dead")
       thread price_helps_kill_group(self.script_deathflag);
   }
@@ -3594,15 +3578,15 @@ monitor_stealth_pain() {
 monitor_stealth_kills() {
   self waittill("death", killer);
 
-  if(!isdefined(killer))
+  if(!isDefined(killer)) {
     return;
-
+  }
   if(isplayer(killer)) {
     thread dialog_player_kill();
     return;
   }
 
-  if((level.price == killer) && (!isdefined(self.no_price_kill_callout))) {
+  if((level.price == killer) && (!isDefined(self.no_price_kill_callout))) {
     if(self.type == "dog")
       level notify("dialog_price_kill_dog");
     else
@@ -3627,7 +3611,7 @@ dialog_stealth_recovery() {
 
   line = 0;
 
-  while (1) {
+  while(1) {
     flag_wait("_stealth_spotted");
     wait 1;
     flag_waitopen("_stealth_spotted");
@@ -3653,7 +3637,7 @@ dialog_we_are_spotted() {
   failure = array_randomize(failure);
   line = 0;
 
-  while (1) {
+  while(1) {
     flag_wait("_stealth_spotted");
 
     radio_dialogue_stop(); //kills current line
@@ -3668,7 +3652,6 @@ dialog_we_are_spotted() {
     //dialog_check_path_clear();
   }
 }
-
 
 dialog_first_patrol_spotted() {
   level.price thread disable_cqbwalk();
@@ -3741,9 +3724,9 @@ dialog_lets_follow_quietly() {
   if(flag("saying_contact"))
     flag_waitopen("saying_contact");
 
-  if(flag("said_convoy_coming"))
+  if(flag("said_convoy_coming")) {
     return;
-
+  }
   //Let's follow them quietly, and pick off any stragglers.	
   radio_dialogue("cont_pri_pickoffstragglers");
 }
@@ -3768,15 +3751,15 @@ hide_and_kill_everyone() {
   //I'm ready. Lets take them all out at once.	
   radio_dialogue("cont_pri_imready");
 
-  if(flag("cross_bridge_patrol_dead") || flag("rightside_patrol_dead"))
+  if(flag("cross_bridge_patrol_dead") || flag("rightside_patrol_dead")) {
     return;
-
+  }
   //You handle the two on the left.	
   radio_dialogue("cont_pri_twoonleft");
 }
 
 spawn_with_delays() {
-  if(isdefined(self.script_delay))
+  if(isDefined(self.script_delay))
     wait self.script_delay;
 
   self spawn_ai();
@@ -3830,12 +3813,10 @@ hide_and_kill_first_stragglers() {
   radio_dialogue("cont_pri_forasmoke");
 }
 
-
-
 price_is_ready_vs_everyone() {
   ai = GetAIspeciesArray("axis", "all");
   foreach(actor in ai) {
-    if((isdefined(actor.script_noteworthy)) && (actor.script_noteworthy == "rightside_patrol"))
+    if((isDefined(actor.script_noteworthy)) && (actor.script_noteworthy == "rightside_patrol"))
       actor.threatbias = 20000;
   }
 
@@ -3847,7 +3828,7 @@ price_is_ready_vs_everyone() {
   level.price.dontevershoot = undefined;
   level.price.baseaccuracy = 5000000;
 
-  //ai = getentarray( "first_stragglers", "script_noteworthy" );
+  //ai = getEntArray( "first_stragglers", "script_noteworthy" );
   //foreach ( actor in ai )
   //{
   //	self.dontattackme = undefined;
@@ -3878,7 +3859,7 @@ price_is_ready_vs_first_stragglers() {
   level.price.dontevershoot = undefined;
   level.price.baseaccuracy = 5000000;
 
-  //ai = getentarray( "first_stragglers", "script_noteworthy" );
+  //ai = getEntArray( "first_stragglers", "script_noteworthy" );
   //foreach ( actor in ai )
   //{
   //	self.dontattackme = undefined;
@@ -3889,7 +3870,7 @@ price_is_ready_vs_first_stragglers() {
 
   ai = GetAIspeciesArray("axis", "all");
   foreach(actor in ai) {
-    if((isdefined(actor.script_noteworthy)) && (actor.script_noteworthy == "first_stragglers")) {
+    if((isDefined(actor.script_noteworthy)) && (actor.script_noteworthy == "first_stragglers")) {
       actor.no_price_kill_callout = true;
       actor.dontattackme = undefined;
       level.price.favoriteenemy = actor;
@@ -3917,7 +3898,7 @@ price_helps_kill_group(script_deathflag) {
   level.price.dontevershoot = undefined;
   level.price.baseaccuracy = 5000000;
 
-  //ai = getentarray( "first_stragglers", "script_noteworthy" );
+  //ai = getEntArray( "first_stragglers", "script_noteworthy" );
   //foreach ( actor in ai )
   //{
   //	self.dontattackme = undefined;
@@ -3927,11 +3908,11 @@ price_helps_kill_group(script_deathflag) {
   //}
 
   ai = GetAIspeciesArray("axis", "all");
-  while (!flag(script_deathflag)) {
+  while(!flag(script_deathflag)) {
     foreach(actor in ai) {
       if(!isalive(actor))
         continue;
-      if((isdefined(actor.script_deathflag)) && (actor.script_deathflag == script_deathflag)) {
+      if((isDefined(actor.script_deathflag)) && (actor.script_deathflag == script_deathflag)) {
         //actor.no_price_kill_callout = true;
         actor.dontattackme = undefined;
         actor.threatbias = 5000;
@@ -3944,7 +3925,7 @@ price_helps_kill_group(script_deathflag) {
   }
   //foreach ( actor in ai )
   //{
-  //	if( ( isdefined( actor.script_deathflag ) ) && ( actor.script_deathflag == script_deathflag ) )
+  //	if( ( isDefined( actor.script_deathflag ) ) && ( actor.script_deathflag == script_deathflag ) )
   //	{
   //		actor.no_price_kill_callout = true;
   //		actor.dontattackme = undefined;
@@ -3987,8 +3968,6 @@ woods_reset_price_to_stealth() {
 //	price_path_side_of_road = getent( "price_path_side_of_road", "targetname" );
 //	level.price thread follow_path( price_path_side_of_road );
 //}
-
-
 
 hide_from_bridge_convoy() {
   //if( flag( "price_is_hiding" ) )
@@ -4037,7 +4016,6 @@ hide_from_bridge_convoy() {
   price_goes_halfway_across_bridge = getnode("price_goes_halfway_across_bridge", "targetname");
   level.price thread price_smart_path_following(price_goes_halfway_across_bridge);
 
-
   //level.price thread price_move_speed_think();
   //level.price enable_stealth_smart_stance();
   //level.price enable_dynamic_run_speed();
@@ -4046,8 +4024,6 @@ hide_from_bridge_convoy() {
   //level.price thread follow_path( path_start_cross_bridge );
   //level.price.ignoreall = false;
 }
-
-
 
 dialog_lets_keep_moving() {
   //level endon( "someone_became_alert" );
@@ -4112,7 +4088,7 @@ dialog_wait_for_me_to_get_into_position() {
 //		ai = GetAIspeciesArray( "axis", "all" );
 //		foreach ( actor in ai )
 //		{
-//			if( ( isdefined( actor.script_noteworthy ) ) && ( actor.script_noteworthy == "cross_bridge_patrol" ) )
+//			if( ( isDefined( actor.script_noteworthy ) ) && ( actor.script_noteworthy == "cross_bridge_patrol" ) )
 //				actor SetThreatBiasGroup( "bridge_guys" );
 //		}
 //		SetThreatBiasAgainstAll( "bridge_guys", 2000 );
@@ -4161,7 +4137,7 @@ price_is_ready_vs_bridge_patrol() {
   level.price.baseaccuracy = 5000000;
   level.price.ignoreall = false;
 
-  //ai = getentarray( "first_stragglers", "script_noteworthy" );
+  //ai = getEntArray( "first_stragglers", "script_noteworthy" );
   //foreach ( actor in ai )
   //{
   //	self.dontattackme = undefined;
@@ -4172,7 +4148,7 @@ price_is_ready_vs_bridge_patrol() {
 
   ai = GetAIspeciesArray("axis", "all");
   foreach(actor in ai) {
-    if((isdefined(actor.script_noteworthy)) && (actor.script_noteworthy == "cross_bridge_patrol")) {
+    if((isDefined(actor.script_noteworthy)) && (actor.script_noteworthy == "cross_bridge_patrol")) {
       actor.no_price_kill_callout = true;
       actor.dontattackme = undefined;
       level.price.favoriteenemy = actor;
@@ -4187,9 +4163,9 @@ dialog_woods_first_patrol() {
 
   //wait 6;
 
-  if(flag("someone_became_alert"))
+  if(flag("someone_became_alert")) {
     return;
-
+  }
   //iprintlnbold( "let them pass" );
   //Let them pass.	
   level.price radio_dialogue("cont_pri_letpass");
@@ -4198,9 +4174,9 @@ dialog_woods_first_patrol() {
 dialog_woods_first_dog_patrol() {
   flag_wait("dialog_woods_first_dog_patrol");
 
-  if(flag("someone_became_alert"))
+  if(flag("someone_became_alert")) {
     return;
-
+  }
   autosave_stealth();
   //Dog patrol.	
   level.price radio_dialogue("cont_pri_dogpatrol");
@@ -4209,12 +4185,12 @@ dialog_woods_first_dog_patrol() {
 dialog_woods_first_stationary() {
   flag_wait("dialog_woods_first_stationary");
 
-  if(flag("someone_became_alert"))
+  if(flag("someone_became_alert")) {
     return;
-
-  if(flag("first_stationary_dead"))
+  }
+  if(flag("first_stationary_dead")) {
     return;
-
+  }
   autosave_stealth();
   level endon("someone_became_alert");
   //Three man patrol dead ahead.	
@@ -4235,7 +4211,7 @@ dialog_woods_first_stationary() {
 price_is_ready_vs_blocking_stationary() {
   ai = GetAIspeciesArray("axis", "all");
   foreach(actor in ai) {
-    if(!isdefined(actor.script_noteworthy))
+    if(!isDefined(actor.script_noteworthy))
       continue;
     if(actor.script_noteworthy == "blocking_group_left_two")
       actor.threatbias = 20000;
@@ -4249,7 +4225,7 @@ price_is_ready_vs_blocking_stationary() {
   level.price.dontevershoot = undefined;
   level.price.baseaccuracy = 5000000;
 
-  //ai = getentarray( "first_stragglers", "script_noteworthy" );
+  //ai = getEntArray( "first_stragglers", "script_noteworthy" );
   //foreach ( actor in ai )
   //{
   //	self.dontattackme = undefined;
@@ -4258,13 +4234,12 @@ price_is_ready_vs_blocking_stationary() {
   //	self.health = 1;
   //}
 
-
   ai = GetAIspeciesArray("axis", "all");
-  while (!flag("blocking_stationary_dead")) {
+  while(!flag("blocking_stationary_dead")) {
     foreach(actor in ai) {
       if(!isalive(actor))
         continue;
-      if(!isdefined(actor.script_noteworthy))
+      if(!isDefined(actor.script_noteworthy))
         continue;
       if(actor.script_noteworthy == "blocking_group_left_two") {
         if(!isalive(level.price.enemy))
@@ -4279,7 +4254,7 @@ price_is_ready_vs_blocking_stationary() {
     foreach(actor in ai) {
       if(!isalive(actor))
         continue;
-      if(!isdefined(actor.script_noteworthy))
+      if(!isDefined(actor.script_noteworthy))
         continue;
       if(actor.script_noteworthy == "two_on_right") {
         //actor.no_price_kill_callout = true;
@@ -4295,7 +4270,7 @@ price_is_ready_vs_blocking_stationary() {
   //ai = GetAIspeciesArray( "axis", "all" );
   //foreach ( actor in ai )
   //{
-  //	if( isdefined( actor.script_noteworthy ) )
+  //	if( isDefined( actor.script_noteworthy ) )
   //	{
   //		if( ( actor.script_noteworthy == "two_on_right" ) || ( actor.script_noteworthy == "blocking_group_right_two" ) )
   //		{
@@ -4313,12 +4288,12 @@ price_is_ready_vs_blocking_stationary() {
 dialog_woods_blocking_stationary() {
   flag_wait("dialog_woods_blocking_stationary");
 
-  if(flag("someone_became_alert"))
+  if(flag("someone_became_alert")) {
     return;
-
-  if(flag("blocking_stationary_dead"))
+  }
+  if(flag("blocking_stationary_dead")) {
     return;
-
+  }
   autosave_stealth();
   level endon("someone_became_alert");
 
@@ -4344,12 +4319,12 @@ dialog_woods_blocking_stationary() {
 dialog_woods_second_dog_patrol() {
   flag_wait("dialog_woods_second_dog_patrol");
 
-  if(flag("someone_became_alert"))
+  if(flag("someone_became_alert")) {
     return;
-
+  }
   autosave_stealth();
 
-  end_patrol = getentarray("end_patrol", "targetname");
+  end_patrol = getEntArray("end_patrol", "targetname");
   foreach(guy in end_patrol) {
     if(isalive(guy))
       guy.threatbias = 10000;
@@ -4359,7 +4334,6 @@ dialog_woods_second_dog_patrol() {
 
   //iprintlnbold( "Take them out or try to slip past. Your call." );
   level.price radio_dialogue("cont_pri_slippast");
-
 }
 
 dialog_convoy_coming() {
@@ -4381,7 +4355,6 @@ dialog_convoy_coming() {
   level.price radio_dialogue("cont_pri_letthempass");
 }
 
-
 dialog_theyre_looking_for_you() {
   current_line = 0;
   dialog = [];
@@ -4393,7 +4366,7 @@ dialog_theyre_looking_for_you() {
   //They're alerted! Hide in the woods! Move!	
   dialog[dialog.size] = "cont_pri_theyrealerted";
 
-  while (1) {
+  while(1) {
     level waittill("dialog_someone_is_alert");
 
     dialog_line = dialog[current_line];
@@ -4406,7 +4379,7 @@ dialog_theyre_looking_for_you() {
 }
 
 monitor_price_hides_on_alerts() {
-  while (1) {
+  while(1) {
     flag_wait("someone_became_alert");
     if(!flag("price_is_hiding")) {
       level.price.fixednode = true;
@@ -4426,17 +4399,17 @@ monitor_someone_became_alert() {
 
   self.ignoreme = false;
 
-  if(flag("someone_became_alert"))
+  if(flag("someone_became_alert")) {
     return;
-
+  }
   flag_set("someone_became_alert");
   thread monitor_waittill_stealth_normal();
 
   wait 1; //gives player a chance to kill the guy before warning dialog
 
-  if(flag("_stealth_spotted"))
+  if(flag("_stealth_spotted")) {
     return;
-
+  }
   level notify("dialog_someone_is_alert");
 }
 
@@ -4447,7 +4420,7 @@ monitor_waittill_stealth_normal() {
 }
 
 wait_till_every_thing_stealth_normal_for(time) {
-  while (1) {
+  while(1) {
     if(stealth_is_everything_normal()) {
       wait time;
       if(stealth_is_everything_normal())
@@ -4456,7 +4429,6 @@ wait_till_every_thing_stealth_normal_for(time) {
     wait 1;
   }
 }
-
 
 dialog_into_the_woods() {
   //FOLLOW ME!	
@@ -4513,7 +4485,6 @@ dialog_base_on_alert() {
   flag_clear("saying_base_on_alert");
 }
 
-
 dialog_progress_through_base() {
   flag_wait("player_is_halfway_to_sub");
   //You're halfway there!	
@@ -4546,7 +4517,7 @@ dialog_time_nags(total_time) {
   dialog = array_randomize(dialog);
   current = 0;
 
-  while (1) {
+  while(1) {
     wait 30;
     time_past = time_past + 30;
     time_remaining = total_time - time_past;
@@ -4594,10 +4565,10 @@ kill_btr_slider(newMissile) {
   if(gettime() > fire_time + 2000)
     return; //we missed
 
-  self setmodel("vehicle_btr80_snow_d");
-  playfx(getfx("btr_explosion"), self.origin);
-  StopFXOnTag(getfx("btr_spotlight"), self, "TAG_FRONT_LIGHT_RIGHT");
-  StopFXOnTag(getfx("btr_spotlight"), self, "TAG_TURRET_LIGHT");
+  self setModel("vehicle_btr80_snow_d");
+  playFX(getfx("btr_explosion"), self.origin);
+  stopFXOnTag(getfx("btr_spotlight"), self, "TAG_FRONT_LIGHT_RIGHT");
+  stopFXOnTag(getfx("btr_spotlight"), self, "TAG_TURRET_LIGHT");
 }
 
 dialog_intro() {
@@ -4660,7 +4631,7 @@ stealth_music_control() {
 
   //flag_wait( "first_two_guys_in_sight" );
 
-  while (1) {
+  while(1) {
     thread stealth_music_hidden_loop();
 
     flag_wait("_stealth_spotted");
@@ -4686,7 +4657,7 @@ stealth_music_hidden_loop() {
     return;
   level endon("stop_stealth_music");
 
-  while (1) {
+  while(1) {
     MusicPlayWrapper("contingency_stealth");
 
     wait music_TIME;
@@ -4703,7 +4674,7 @@ stealth_music_busted_loop() {
   if(flag("stop_stealth_music"))
     return;
   level endon("stop_stealth_music");
-  while (1) {
+  while(1) {
     MusicPlayWrapper("contingency_stealth_busted");
 
     wait music_TIME;
@@ -4713,9 +4684,9 @@ stealth_music_busted_loop() {
 }
 
 cargo_choppers2() {
-  cargo_heli_spawners = getentarray("cargo_heli_group2", "targetname");
+  cargo_heli_spawners = getEntArray("cargo_heli_group2", "targetname");
   foreach(spawner in cargo_heli_spawners) {
-    Cargo_item_spawners = getentarray(spawner.script_noteworthy, "targetname");
+    Cargo_item_spawners = getEntArray(spawner.script_noteworthy, "targetname");
     foreach(ent in cargo_item_spawners)
     ent Hide();
     spawner.cargo_item_spawners = cargo_item_spawners;
@@ -4727,11 +4698,11 @@ cargo_choppers2() {
 
   current_spawner = 0;
   num_of_groups = 1;
-  while (num_of_groups > 0) {
+  while(num_of_groups > 0) {
     //group = randomintrange( 2, 4 );
     group = cargo_heli_spawners.size;
 
-    while (group > 0) {
+    while(group > 0) {
       if(current_spawner >= cargo_heli_spawners.size)
         current_spawner = 0;
       thread spawn_cargo_chopper(cargo_heli_spawners[current_spawner]);
@@ -4746,9 +4717,9 @@ cargo_choppers2() {
 }
 
 cargo_choppers() {
-  cargo_heli_spawners = getentarray("cargo_heli", "targetname");
+  cargo_heli_spawners = getEntArray("cargo_heli", "targetname");
   foreach(spawner in cargo_heli_spawners) {
-    Cargo_item_spawners = getentarray(spawner.script_noteworthy, "targetname");
+    Cargo_item_spawners = getEntArray(spawner.script_noteworthy, "targetname");
     foreach(ent in cargo_item_spawners)
     ent Hide();
     spawner.cargo_item_spawners = cargo_item_spawners;
@@ -4756,11 +4727,11 @@ cargo_choppers() {
 
   current_spawner = 0;
   num_of_groups = 1;
-  while (num_of_groups > 0) {
+  while(num_of_groups > 0) {
     //group = randomintrange( 2, 4 );
     group = cargo_heli_spawners.size;
 
-    while (group > 0) {
+    while(group > 0) {
       if(current_spawner >= cargo_heli_spawners.size)
         current_spawner = 0;
       thread spawn_cargo_chopper(cargo_heli_spawners[current_spawner]);
@@ -4780,11 +4751,11 @@ spawn_cargo_chopper(cargo_heli_spawner) {
   wait .1; //vehicle spawns in one place and then moves on the first frame
   cargo_item_spawners = cargo_heli_spawner.cargo_item_spawners;
   new_cargo = [];
-  for (i = 0; i < cargo_item_spawners.size; i++) {
+  for(i = 0; i < cargo_item_spawners.size; i++) {
     new_cargo[i] = spawn(cargo_item_spawners[i].classname, cargo_item_spawners[i].origin);
     new_cargo[i].angles = cargo_item_spawners[i].angles;
     if(new_cargo[i].classname == "script_model")
-      new_cargo[i] setmodel(cargo_item_spawners[i].model);
+      new_cargo[i] setModel(cargo_item_spawners[i].model);
     new_cargo[i] linkto(cargo_heli);
   }
 
@@ -4822,7 +4793,7 @@ destroy_thing_with_at4(fire_pos_ent, thing, thing_offset, missile_func) {
 
   gun = self gettagorigin(tag);
   newMissile = MagicBullet("at4_straight", gun, (thing.origin + thing_offset));
-  //if( isdefined( missile_func ) )
+  //if( isDefined( missile_func ) )
   //	level.btr_slider thread kill_btr_slider( newMissile );
 
   self waittill("drop rocket"); //notetrack
@@ -4833,7 +4804,7 @@ destroy_thing_with_at4(fire_pos_ent, thing, thing_offset, missile_func) {
   self place_weapon_on("at4", "none");
 
   model_at4 = spawn("script_model", org_hand);
-  model_at4 setmodel("weapon_at4");
+  model_at4 setModel("weapon_at4");
   model_at4.angles = angles_hand;
 
   fire_pos_ent waittill("at4_fire");
@@ -4900,7 +4871,6 @@ setup_rasta() {
 }
 
 setup_rasta_village() {
-
   if(isalive(level.gauntlet_west)) {
     self place_weapon_on("at4", "back");
 
@@ -4919,7 +4889,6 @@ setup_rasta_village() {
 
   self set_force_color("g");
   self enable_ai_color();
-
 
   //Check your fire! Check your fire! Friendlies coming in at your 12!	
   level.rasta dialogue_queue("cont_rst_checkfire");
@@ -5126,13 +5095,12 @@ woods_prespotted_func() {
   wait 3; //default is 2.25
 }
 
-
 stealth_woods() {
   self stealth_plugin_basic();
 
-  if(isplayer(self))
+  if(isplayer(self)) {
     return;
-
+  }
   //threat_array[ "warning1" ] = maps\_stealth_threat_enemy::enemy_alert_level_warning2;
 
   switch (self.team) {
@@ -5164,8 +5132,8 @@ stealth_woods() {
       self thread monitor_stealth_pain();
       self init_cold_patrol_anims();
 
-      if(isdefined(self.script_noteworthy) && (self.script_noteworthy == "cqb_patrol")) {
-        if(isdefined(self.script_patroller)) {
+      if(isDefined(self.script_noteworthy) && (self.script_noteworthy == "cqb_patrol")) {
+        if(isDefined(self.script_patroller)) {
           wait .05;
           self clear_run_anim();
         }
@@ -5173,7 +5141,7 @@ stealth_woods() {
         self.alertlevel = "alert";
         self.disablearrivals = undefined;
         self.disableexits = undefined;
-        //if( isdefined( self.script_pet ) )
+        //if( isDefined( self.script_pet ) )
         //	self.moveplaybackrate = .4;
         //else
         self.moveplaybackrate = .8;
@@ -5189,7 +5157,7 @@ stealth_woods() {
 
 scan_when_idle() {
   self endon("death");
-  while (1) {
+  while(1) {
     self set_generic_idle_anim("cqb_stand_idle_scan");
 
     self waittill("clearing_specialIdleAnim");
@@ -5199,9 +5167,9 @@ scan_when_idle() {
 stealth_bridge_area() {
   self stealth_plugin_basic();
 
-  if(isplayer(self))
+  if(isplayer(self)) {
     return;
-
+  }
   switch (self.team) {
     case "axis":
       if(self.type == "dog") {
@@ -5209,7 +5177,7 @@ stealth_bridge_area() {
         self set_threatbias_group("dogs");
       }
       //self thread flashlight_when_alerted();
-      if((isdefined(self.script_noteworthy)) && (self.script_noteworthy == "truck_guys"))
+      if((isDefined(self.script_noteworthy)) && (self.script_noteworthy == "truck_guys"))
         self set_threatbias_group("truck_guys");
       else
         self set_threatbias_group("bridge_stealth_guys");
@@ -5232,7 +5200,7 @@ stealth_bridge_area() {
       self thread monitor_stealth_kills(); //price and player kill dialog
       self thread monitor_someone_became_alert();
 
-      if((isdefined(self.script_type)) && (self.script_type == "cold_patrol"))
+      if((isDefined(self.script_type)) && (self.script_type == "cold_patrol"))
         self init_cold_patrol_anims();
       break;
 
@@ -5262,9 +5230,9 @@ stealth_bridge_area() {
 stealth_base() {
   self stealth_plugin_basic();
 
-  if(isplayer(self))
+  if(isplayer(self)) {
     return;
-
+  }
   switch (self.team) {
     case "axis":
       //self thread flashlight_when_alerted();
@@ -5287,7 +5255,7 @@ stealth_base() {
       //self thread monitor_stealth_kills();//price and player kill dialog
       //self thread monitor_someone_became_alert();
 
-      if((isdefined(self.script_type)) && (self.script_type == "cold_patrol"))
+      if((isDefined(self.script_type)) && (self.script_type == "cold_patrol"))
         self init_cold_patrol_anims();
       break;
 
@@ -5323,15 +5291,15 @@ stealth_base() {
 //	self endon( "stop_dynamic_run_speed" );
 //	self endon( "start_dynamic_run_speed" );
 //
-//	if( !isdefined( self.ent_flag[ "dynamic_run_speed_stopped" ] ) )
+//	if( !isDefined( self.ent_flag[ "dynamic_run_speed_stopped" ] ) )
 //	{
 //		self ent_flag_init( "dynamic_run_speed_stopped" );
-//		self ent_flag_init( "dynamic_run_speed_stopping" ); 
+//		self ent_flag_init( "dynamic_run_speed_stopping" );
 //	}
 //	else
 //	{
 //		self ent_flag_clear( "dynamic_run_speed_stopping" );
-//		self ent_flag_clear( "dynamic_run_speed_stopped" ); 
+//		self ent_flag_clear( "dynamic_run_speed_stopped" );
 //	}
 //	
 //	self thread price_move_speed_handle_cleanup();
@@ -5352,12 +5320,12 @@ stealth_base() {
 //	//ticks = 0;
 //
 //
-//	while ( 1 )
+//	while( 1 )
 //	{
 //		closest_dist = self GetClosestEnemySqDist();
-//		if( !isdefined( closest_dist ) )
+//		if( !isDefined( closest_dist ) )
 //			closest_dist = 99999999;
-//		//enemies = GetAISpeciesArray( "axis", "all" ); 
+//		//enemies = GetAISpeciesArray( "axis", "all" );
 ////
 //		//if( enemies.size == 0 )
 //		//	closest_dist = 99999999;
@@ -5366,9 +5334,9 @@ stealth_base() {
 //
 //		if( ( closest_dist < ai_stop_dist_min ) )
 //		{
-//			/#
+//			
 //			println( "price_dynamic: enemy close. stopping (min). " + closest_dist/closest_dist );
-//			#/
+//			
 //			price_dynamic_run_set( "stop" );
 //			wait responsiveness_ai;
 //			continue;
@@ -5383,23 +5351,23 @@ stealth_base() {
 //		}
 //		
 //		//how far is the player from price
-//		dist = DistanceSquared( self.origin, level.player.origin ); 
+//		dist = DistanceSquared( self.origin, level.player.origin );
 //		
 //		/*
 //		angles1 = vectortoangles( self.goalpos - self.origin );
-//		forward1 = anglestoforward( angles1 );
+//		forward1 = anglesToForward( angles1 );
 //		
 //		angles2 = vectortoangles( level.player.origin - self.origin );
-//		forward2 = anglestoforward( angles2 );
+//		forward2 = anglesToForward( angles2 );
 //		
 //		vectordor( forward1, forward2 );
 //		*/
 //				
 //		//normal = VectorNormalize( end_origin - start_origin );
-//		//forward = AnglesToForward( start_angles );
+//		//forward = anglesToForward( start_angles );
 //		//dot = VectorDot( forward, normal );
 //			
-//		//vec = anglestoforward( self.angles );
+//		//vec = anglesToForward( self.angles );
 //		vec_goal = VectorNormalize( ( self.goalpos - self.origin ) );//angle of where I'm supposed to go
 //		vec2 = VectorNormalize( ( level.player.origin - self.origin ) );
 //		//vecdot = vectordot( vec, vec2 );//dot of my angle vs player position
@@ -5424,19 +5392,19 @@ stealth_base() {
 //		
 //		if( ( closest_dist < ai_slow_dist ) )
 //		{
-//			/#
+//			
 //			println( "price_dynamic: enemy close. crouch. " + closest_dist/closest_dist );
-//			#/
+//			
 //			price_dynamic_run_set( "crouch" );
 //			wait responsiveness_ai;
 //			continue;
 //		}
 //		
 //		
-//		if( ( vecdot > - .25 ) && ( dist > fardist_max ) ) 
+//		if( ( vecdot > - .25 ) && ( dist > fardist_max ) )
 //		{
 //			println( "price_dynamic: player in front (max). running. " );
-//			price_dynamic_run_set( "run" ); 
+//			price_dynamic_run_set( "run" );
 //			wait responsiveness_ai;
 //			continue;
 //		}
@@ -5444,13 +5412,13 @@ stealth_base() {
 //		if( ( vecdot > - .25 ) && ( dist > fardist_min ) && ( self.run_speed_state == "run" ) )
 //		{
 //			println( "price_dynamic: player in front (min). running. " );
-//			price_dynamic_run_set( "run" ); 
+//			price_dynamic_run_set( "run" );
 //			wait responsiveness_ai;
 //			continue;
 //		}
 //		
 //		//otherwise cqb
-//		println( "price_dynamic: cqb " ); 
+//		println( "price_dynamic: cqb " );
 //		price_dynamic_run_set( "cqb" );
 //		wait responsiveness_ai;
 //	}
@@ -5459,7 +5427,7 @@ stealth_base() {
 //
 //
 //price_dynamic_run_set( speed )
-//{ 
+//{
 //	if( self.run_speed_state == speed )
 //		return;
 //	self notify( "dynamic_run_speed_changing" );
@@ -5505,7 +5473,7 @@ stealth_base() {
 //
 //
 //price_move_speed_handle_cleanup()
-//{ 
+//{
 //	self endon( "start_dynamic_run_speed" );
 //	self endon( "death" );
 //
@@ -5515,10 +5483,10 @@ stealth_base() {
 //	self allowedstances( "stand", "crouch", "prone" );
 //	self.pathenemyfightdist = 192;
 //	self.pathenemylookahead = 192;
-//	self notify( "stop_loop" ); 
-//	self anim_stopanimscripted(); 
+//	self notify( "stop_loop" );
+//	self anim_stopanimscripted();
 //	self ent_flag_clear( "dynamic_run_speed_stopping" );
-//	self ent_flag_clear( "dynamic_run_speed_stopped" ); 
+//	self ent_flag_clear( "dynamic_run_speed_stopped" );
 //}
 //
 //price_dynamic_run_speed_cleanup_wait()
@@ -5528,7 +5496,7 @@ stealth_base() {
 //}
 
 //price_dynamic_run_stop()
-//{ 
+//{
 //	self notify( "stop_going_to_node" );
 //	wait 1;
 //	
@@ -5541,15 +5509,15 @@ stealth_base() {
 //	self waittill( "dynamic_run_speed_changing" );
 //	
 //	self.goalradius = self.oldradius;
-//	if( isdefined( self.last_set_goalent ) )
+//	if( isDefined( self.last_set_goalent ) )
 //	{
-//		self thread follow_path( self.last_set_goalent ); 
+//		self thread follow_path( self.last_set_goalent );
 //	}
 //	else
 //	{
 //		self setgoalpos( self.oldradius );
-//	} 
-//} 
+//	}
+//}
 
 //price_dynamic_run_set( speed )
 //{
@@ -5572,7 +5540,7 @@ stealth_base() {
 //		case "run":
 //
 //			self disable_cqbwalk();
-//			if( IsDefined( level.scr_anim[ "generic" ][ "DRS_run" ] ) )
+//			if( isDefined( level.scr_anim[ "generic" ][ "DRS_run" ] ) )
 //			{
 //				if( IsArray( level.scr_anim[ "generic" ][ "DRS_run" ] ) )
 //					self set_generic_run_anim_array( "DRS_run" );
@@ -5622,9 +5590,9 @@ price_dynamic_run_stop() {
 
   if(self ent_flag("dynamic_run_speed_stopped"))
     return;
-  if(self ent_flag("dynamic_run_speed_stopping"))
+  if(self ent_flag("dynamic_run_speed_stopping")) {
     return;
-
+  }
   self endon("stop_dynamic_run_speed");
 
   self ent_flag_set("dynamic_run_speed_stopping");
@@ -5643,20 +5611,20 @@ price_dynamic_run_stop() {
     return;
   self endon("dynamic_run_speed_stopped");
 
-  //if he's already playing a looping animation - we can assume its part of level logic and 
+  //if he's already playing a looping animation - we can assume its part of level logic and
   //it makes sense not to play a stopping animation or play dialogue to tell you to catch up
-  if(IsDefined(self.loops) && self.loops > 0)
+  if(isDefined(self.loops) && self.loops > 0) {
     return;
-
-  while (self ent_flag("dynamic_run_speed_stopped")) {
+  }
+  while(self ent_flag("dynamic_run_speed_stopped")) {
     //->turned this off because I think checking the current movement would fix whatever this was trying to
     //if( self ent_flag_exist( "_stealth_stance_handler" ) )
-    //	self ent_flag_waitopen( "_stealth_stance_handler" ); 
+    //	self ent_flag_waitopen( "_stealth_stance_handler" );
 
     idle = "DRS_stop_idle";
     self thread maps\_anim::anim_generic_loop(self, idle);
 
-    if(IsDefined(level.scr_anim["generic"]["signal_go"]))
+    if(isDefined(level.scr_anim["generic"]["signal_go"]))
       self handsignal("go");
 
     wait RandomFloatRange(12, 20);
@@ -5666,25 +5634,23 @@ price_dynamic_run_stop() {
 
     self notify("stop_loop");
 
-    if(!self ent_flag("dynamic_run_speed_stopped"))
+    if(!self ent_flag("dynamic_run_speed_stopped")) {
       return;
-
-    if(IsDefined(level.dynamic_run_speed_dialogue)) {
+    }
+    if(isDefined(level.dynamic_run_speed_dialogue)) {
       string = random(level.dynamic_run_speed_dialogue);
       level thread radio_dialogue_queue(string);
     }
 
-    if(IsDefined(level.scr_anim["generic"]["signal_go"]))
+    if(isDefined(level.scr_anim["generic"]["signal_go"]))
       self handsignal("go");
   }
 }
 
-
-
 dogs_have_small_fovs_when_stopped() {
   self endon("death");
 
-  while (1) {
+  while(1) {
     self waittill("master_reached_patrol_end");
     self.fovcosine = .99;
     self notify("end_patrol");
@@ -5697,7 +5663,7 @@ dogs_have_small_fovs_when_stopped() {
 setup_stealth_enemy_cleanup() {
   self.pathrandompercent = 200;
   self thread disable_cqbwalk();
-  if(isdefined(self.script_stealthgroup))
+  if(isDefined(self.script_stealthgroup))
     self thread maps\_stealth_shared_utilities::enemy_announce_spotted(self.origin);
 
   self.goalradius = 400;
@@ -5719,13 +5685,12 @@ Small_Goal_Attack_Behavior() {
 
   self ent_flag_set("_stealth_override_goalpos");
 
-  while (isdefined(self.enemy) && self ent_flag("_stealth_enabled")) {
+  while(isDefined(self.enemy) && self ent_flag("_stealth_enabled")) {
     self setgoalpos(self.enemy.origin);
 
     wait 4;
   }
 }
-
 
 setup_base_starting_guys() {
   self endon("death");
@@ -5736,7 +5701,7 @@ setup_base_starting_guys() {
 
   self.ignoreme = false;
   self.maxsightdistsqrd = 8000 * 8000;
-  //	if( isdefined( self._stealth ) )
+  //	if( isDefined( self._stealth ) )
   //	{
   //		self ent_flag_clear( "_stealth_normal" );
   //		self stealth_ai_clear_custom_idle_and_react();
@@ -5811,8 +5776,6 @@ large_goal_ambush_attack_behavior() {}
 //	stealth_friendly_stance_handler_distances_set( looking_away, neutral, looking_towards );
 //}
 
-
-
 stealth_friendly_state_hidden() {
   flag_clear("price_is_hiding");
   self.no_pistol_switch = true;
@@ -5827,7 +5790,7 @@ stealth_friendly_state_hidden() {
   if(!flag("approaching_ridge")) {
     self disable_ai_color();
 
-    if(isdefined(self.smart_path_following_node)) {
+    if(isDefined(self.smart_path_following_node)) {
       self thread enable_cqbwalk();
       self thread price_smart_path_following(self.smart_path_following_node);
     }
@@ -5843,10 +5806,10 @@ stealth_friendly_state_hidden() {
   self.grenadeammo = 0;
 
   self.forceSideArm = undefined;
-  //used to be ignore all - but that makes him not aim at enemies when exposed - which isn't good...also 
+  //used to be ignore all - but that makes him not aim at enemies when exposed - which isn't good...also
   //after stealth groups were created we want to differentiate between who should be shot at and who shouldn't
   //so we don't all of a sudden alert another stealth group by shooting at them
-  //self.dontEverShoot 	= true; 
+  //self.dontEverShoot 	= true;
   self.ignoreme = true;
   //self enable_ai_color();
   self.ignoresuppression = true;
@@ -5874,7 +5837,7 @@ stealth_friendly_state_spotted() {
 
   self.maxsightdistsqrd = 8000 * 8000;
   self.grenadeammo = 0;
-  //used to be ignore all - but that makes him not aim at enemies when exposed - which isn't good...also 
+  //used to be ignore all - but that makes him not aim at enemies when exposed - which isn't good...also
   //after stealth groups were created we want to differentiate between who should be shot at and who shouldn't
   //so we don't all of a sudden alert another stealth group by shooting at them	
   //self.dontEverShoot 	= false;//self.ignoreall 	 = false;
@@ -5899,7 +5862,7 @@ stealth_friendly_state_spotted() {
 
 init_cold_patrol_anims() {
   // make sure we alternate instead of doing a random selection
-  if(!IsDefined(level.lastColdPatrolAnimSetAssigned)) {
+  if(!isDefined(level.lastColdPatrolAnimSetAssigned)) {
     level.lastColdPatrolAnimSetAssigned = "none";
   }
 
@@ -5931,7 +5894,6 @@ init_cold_patrol_anims() {
 }
 
 setup_bridge_trucks() {
-
   self endon("death");
 
   flag_wait("truck_guys_alerted");
@@ -6042,7 +6004,7 @@ truck_guys_think_jumpout() {
   self endon("death");
   self endon("pain_death");
 
-  while (1) {
+  while(1) {
     self waittill("jumpedout");
     self._stealth.behavior.last_spot = self.origin;
     //self enemy_set_original_goal( self.origin );
@@ -6079,14 +6041,14 @@ truck_guys_reaction_behavior(type) {
 
   if(!flag("truck_guys_alerted"))
     return;
-  if(flag_exist("truck_guys_not_going_back") && flag("truck_guys_not_going_back"))
+  if(flag_exist("truck_guys_not_going_back") && flag("truck_guys_not_going_back")) {
     return;
-
+  }
   if(!flag("_stealth_spotted") && !self ent_flag("_stealth_attack")) {
     player = get_closest_player(self.origin);
     node = maps\_stealth_shared_utilities::enemy_find_free_pathnode_near(player.origin, 1500, 128);
 
-    if(isdefined(node))
+    if(isDefined(node))
       self thread truck_guys_base_search_behavior(node);
   }
 
@@ -6109,9 +6071,9 @@ truck_guys_no_enemy_reaction_behavior(type) {
 
   if(!flag("truck_guys_alerted"))
     return;
-  if(flag_exist("truck_guys_not_going_back") && flag("truck_guys_not_going_back"))
+  if(flag_exist("truck_guys_not_going_back") && flag("truck_guys_not_going_back")) {
     return;
-
+  }
   if(!flag("_stealth_spotted") && !self ent_flag("_stealth_attack")) {
     origin = self._stealth.logic.event.awareness_param[type];
 
@@ -6119,7 +6081,7 @@ truck_guys_no_enemy_reaction_behavior(type) {
 
     self thread maps\_stealth_shared_utilities::enemy_announce_wtf();
 
-    if(isdefined(node))
+    if(isDefined(node))
       self thread truck_guys_base_search_behavior(node);
   }
 
@@ -6145,7 +6107,7 @@ truck_alert_level_attack(enemy) {
 
 setObjectiveWaypoint(objName, text) {
   objective = level.objectives[objName];
-  if(isdefined(text))
+  if(isDefined(text))
     Objective_SetPointerTextOverride(objective.id, text);
   else
     Objective_SetPointerTextOverride(objective.id);
@@ -6153,7 +6115,7 @@ setObjectiveWaypoint(objName, text) {
 
 registerObjective(objName, objText, objOrigin) {
   flag_init(objName);
-  if(!isdefined(level.objectives))
+  if(!isDefined(level.objectives))
     level.objectives = [];
   objID = level.objectives.size;
 
@@ -6210,7 +6172,7 @@ setObjectiveLocationMoving(objName, objEnt, offset) {
 
   //while( objective.state != "done" )
   //{
-  //	if( !isdefined( objEnt ) )
+  //	if( !isDefined( objEnt ) )
   //		break;
   //	objective_position( objective.id, objEnt.origin + (0,0,64) );
   //	wait .05;
@@ -6265,9 +6227,9 @@ delay_first_obj() {
 }
 
 objective_price() {
-  while (!isdefined(level.price))
+  while(!isDefined(level.price))
     wait .1;
-  registerObjective("obj_price", & "CONTINGENCY_OBJ_PRICE", level.price.origin);
+  registerObjective("obj_price", &"CONTINGENCY_OBJ_PRICE", level.price.origin);
   setObjectiveState("obj_price", "current");
   thread setObjectiveLocationMoving("obj_price", level.price, (0, 0, 70));
 
@@ -6294,15 +6256,15 @@ objective_price() {
 //}
 
 objective_get_to_sub() {
-  if(level.gameSkill <= 1)
+  if(level.gameSkill <= 1) {
     return;
-
+  }
   origin = (-11742.0, 2368.0, 643.0);
 
   obj_reach_split_off = getstruct("obj_reach_split_off", "targetname");
-  if(isdefined(obj_reach_split_off))
+  if(isDefined(obj_reach_split_off))
     origin = obj_reach_split_off.origin;
-  registerObjective("obj_reach", & "CONTINGENCY_OBJ_ENTER_SUB", origin);
+  registerObjective("obj_reach", &"CONTINGENCY_OBJ_ENTER_SUB", origin);
   setObjectiveState("obj_reach", "current");
 
   flag_wait("price_splits_off");
@@ -6311,7 +6273,6 @@ objective_get_to_sub() {
 }
 
 objective_defend_sub() {
-
   //obj_sub_entrance = getent( "obj_sub_entrance", "targetname" );
   //registerObjective( "obj_sub", &"CONTINGENCY_OBJ_ENTER_SUB", obj_sub_entrance.origin );
   //setObjectiveState( "obj_sub", "current" );
@@ -6319,9 +6280,9 @@ objective_defend_sub() {
   flag_wait("price_splits_off");
 
   origin = getstruct("obj_guard_house", "targetname").origin;
-  registerObjective("obj_sub", & "CONTINGENCY_OBJ_DEFEND_SUB", origin + (0, 0, 48));
+  registerObjective("obj_sub", &"CONTINGENCY_OBJ_DEFEND_SUB", origin + (0, 0, 48));
   setObjectiveState("obj_sub", "current");
-  setObjectiveWaypoint("obj_sub", & "CONTINGENCY_OBJ_DEFEND");
+  setObjectiveWaypoint("obj_sub", &"CONTINGENCY_OBJ_DEFEND");
   //setObjectiveString( "obj_sub", &"CONTINGENCY_OBJ_DEFEND_SUB" );
   //setObjectiveLocation( "obj_sub", origin + (0,0,48) );
 
@@ -6351,7 +6312,7 @@ objective_defend_sub() {
 //
 //objective_exit_sub()
 //{	
-//	while( !isdefined( level.soap_truck ) )
+//	while( !isDefined( level.soap_truck ) )
 //		wait .1;
 //	registerObjective( "obj_exit", &"CONTINGENCY_OBJ_EXIT_SUB", level.soap_truck.origin );
 //	setObjectiveState( "obj_exit", "current" );
@@ -6362,12 +6323,11 @@ objective_defend_sub() {
 //	setObjectiveState( "obj_exit", "done" );
 //}
 
-
 base_autosave_logic() {
   save = true;
   flag_wait("base_entrance");
 
-  if(isdefined(level.timer_allowed_time)) {
+  if(isDefined(level.timer_allowed_time)) {
     time_passed = (gettime() - level.timer_start_time) / 1000;
     println("time passed " + time_passed);
     time_left = level.timer_allowed_time - time_passed;
@@ -6382,7 +6342,7 @@ base_autosave_logic() {
 
   flag_wait("player_is_halfway_to_sub");
 
-  if(isdefined(level.timer_allowed_time)) {
+  if(isDefined(level.timer_allowed_time)) {
     time_passed = (gettime() - level.timer_start_time) / 1000;
     println("time passed " + time_passed);
     time_left = level.timer_allowed_time - time_passed;
@@ -6397,7 +6357,7 @@ base_autosave_logic() {
 
   flag_wait("base_ending");
 
-  if(isdefined(level.timer_allowed_time)) {
+  if(isDefined(level.timer_allowed_time)) {
     time_passed = (gettime() - level.timer_start_time) / 1000;
     println("time passed " + time_passed);
     time_left = level.timer_allowed_time - time_passed;
@@ -6432,20 +6392,19 @@ timer_start() {
       level.timer_allowed_time = 120;
       break;
   }
-  assert(isdefined(level.timer_allowed_time));
+  assert(isDefined(level.timer_allowed_time));
 
   thread dialog_time_nags(level.timer_allowed_time);
 
-  level thread timer_logic(level.timer_allowed_time, & "CONTINGENCY_TIME_TO_ENTER_SUB");
+  level thread timer_logic(level.timer_allowed_time, &"CONTINGENCY_TIME_TO_ENTER_SUB");
   level.timer_start_time = gettime();
 }
 
 timer_logic(iSeconds, sLabel, bUseTick) {
-
-  if(getdvar("notimer") == "1")
+  if(getdvar("notimer") == "1") {
     return;
-
-  if(!isdefined(bUseTick))
+  }
+  if(!isDefined(bUseTick))
     bUseTick = false;
   // destroy any previous timer just in case
   killTimer();
@@ -6476,14 +6435,14 @@ timer_logic(iSeconds, sLabel, bUseTick) {
 
 killTimer() {
   level notify("kill_timer");
-  if(isdefined(level.timer))
+  if(isDefined(level.timer))
     level.timer destroy();
 }
 
 timer_tick() {
   level endon("stop_timer_tick");
   level endon("kill_timer");
-  while (true) {
+  while(true) {
     wait(1);
     level.player thread play_sound_on_entity("countdown_beep");
     level notify("timer_tick");
@@ -6514,26 +6473,26 @@ flashlight_when_alerted() {
 
   wait randomfloatrange(.2, .8);
 
-  PlayFXOnTag(level._effect["flashlight"], self, "tag_flash");
+  playFXOnTag(level._effect["flashlight"], self, "tag_flash");
   self.have_flashlight = true;
 }
 
 attach_flashlight() {
-  PlayFXOnTag(level._effect["flashlight"], self, "tag_flash");
+  playFXOnTag(level._effect["flashlight"], self, "tag_flash");
   self.have_flashlight = true;
 }
 
 bmp_turret_attack_player(end_if_cant_see, no_misses) {
-  if(!isdefined(end_if_cant_see))
+  if(!isDefined(end_if_cant_see))
     end_if_cant_see = false;
 
-  if(!isdefined(no_misses))
+  if(!isDefined(no_misses))
     no_misses = false;
 
   //self thread debug_bmp_hit_player();
   self endon("stop_shooting");
   self endon("death");
-  while (1) {
+  while(1) {
     //choose our target based on distance and visibility
     player = get_closest_player(self.origin);
     /*
@@ -6555,7 +6514,7 @@ bmp_turret_attack_player(end_if_cant_see, no_misses) {
     //	continue;
 
     //wait for player to be visible
-    while (!can_see_player(player))
+    while(!can_see_player(player))
       wait(randomfloatrange(0.2, 0.6)); //was .8 1.3
 
     if(!no_misses) {
@@ -6568,7 +6527,7 @@ bmp_turret_attack_player(end_if_cant_see, no_misses) {
     }
 
     //if player is still exposed then hit him
-    while (can_see_player(player)) {
+    while(can_see_player(player)) {
       fire_at_player(player);
       wait(randomfloatrange(2, 3));
     }
@@ -6596,9 +6555,9 @@ can_see_player(player) {
 
   tag_flash_loc = self getTagOrigin("tag_flash");
   //BulletTracePassed( <start>, <end>, <hit characters>, <ignore entity> );
-  player_eye = player geteye();
+  player_eye = player getEye();
   if(SightTracePassed(tag_flash_loc, player_eye, false, self)) {
-    if(isdefined(level.debug))
+    if(isDefined(level.debug))
       line(tag_flash_loc, player_eye, (0.2, 0.5, 0.8), 0.5, false, 60);
     return true;
   } else {
@@ -6611,7 +6570,7 @@ fire_at_player(player) {
   burstsize = randomintrange(3, 5);
   //println(" **HITTING PLAYER, burst: " + burstsize );
   fireTime = .2;
-  for (i = 0; i < burstsize; i++) {
+  for(i = 0; i < burstsize; i++) {
     self setturrettargetent(player, randomvector(20) + (0, 0, 32)); //randomvec was 50
     self fireweapon();
     wait fireTime;
@@ -6624,13 +6583,13 @@ miss_player(player) {
   //miss_vec = randomvectorrange( 40, 100 );
 
   //point in front of player
-  forward = AnglesToForward(level.player.angles);
+  forward = anglesToForward(level.player.angles);
   forwardfar = vector_multiply(forward, 100);
   miss_vec = forwardfar + randomvector(50);
 
   burstsize = randomintrange(4, 6);
   fireTime = .2;
-  for (i = 0; i < burstsize; i++) {
+  for(i = 0; i < burstsize; i++) {
     offset = randomvector(15) + miss_vec + (0, 0, 64);
     //println( " offset: " + offset );
     //thread draw_line_for_time( self.origin+(0,0,128), player.origin+offset, 0, 0, 1, 2 );

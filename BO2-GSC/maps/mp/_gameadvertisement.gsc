@@ -40,9 +40,7 @@ sessionadvertisementcheck() {
   while(true) {
     sessionadvertcheckwait = getdvarintdefault("sessionAdvertCheckwait", 1);
     wait(sessionadvertcheckwait);
-    advertise = [
-      [runrules]
-    ]();
+    advertise = [[runrules]]();
     setadvertisedstatus(advertise);
   }
 }

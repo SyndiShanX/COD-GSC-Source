@@ -20,7 +20,7 @@ init() {
 finalKillcamWaiter() {
   if(!level.inFinalKillcam)
     return;
-  while (level.inFinalKillcam)
+  while(level.inFinalKillcam)
     wait(0.05);
 }
 postRoundFinalKillcam() {
@@ -65,20 +65,20 @@ startLastKillcam() {
     level.lastKillCam.attacker notify("finalKillCamKiller");
   visionSetNaked(GetDvar(#"mapname"), 0.0);
   players = level.players;
-  for (index = 0; index < players.size; index++) {
+  for(index = 0; index < players.size; index++) {
     player = players[index];
     player closeMenu();
     player closeInGameMenu();
     player thread finalKillcam();
   }
   wait(0.1);
-  while (areAnyPlayersWatchingTheKillcam())
+  while(areAnyPlayersWatchingTheKillcam())
     wait(0.05);
   level.inFinalKillcam = false;
 }
 areAnyPlayersWatchingTheKillcam() {
   players = level.players;
-  for (index = 0; index < players.size; index++) {
+  for(index = 0; index < players.size; index++) {
     player = players[index];
     if(isDefined(player.killcam))
       return true;
@@ -205,9 +205,9 @@ waitFinalKillcamSlowdown(startTime) {
 waitSkipKillcamButton() {
   self endon("disconnect");
   self endon("end_killcam");
-  while (self useButtonPressed())
+  while(self useButtonPressed())
     wait .05;
-  while (!(self useButtonPressed()))
+  while(!(self useButtonPressed()))
     wait .05;
   self notify("end_killcam");
   self clientNotify("fkce");
@@ -221,9 +221,9 @@ waitTeamChangeEndKillcam() {
 waitSkipKillcamSafeSpawnButton() {
   self endon("disconnect");
   self endon("end_killcam");
-  while (self fragButtonPressed())
+  while(self fragButtonPressed())
     wait .05;
-  while (!(self fragButtonPressed()))
+  while(!(self fragButtonPressed()))
     wait .05;
   self.wantSafeSpawn = true;
   self notify("end_killcam");
@@ -245,7 +245,7 @@ endKillcam(final) {
 checkForAbruptKillcamEnd() {
   self endon("disconnect");
   self endon("end_killcam");
-  while (1) {
+  while(1) {
     if(self.archivetime <= 0) {
       break;
     }
@@ -300,20 +300,20 @@ cancelKillCamOnUse_specificButton(pressingButtonFunc, finishedFunc) {
   self endon("death_delay_finished");
   self endon("disconnect");
   level endon("game_ended");
-  for (;;) {
+  for(;;) {
     if(!self[[pressingButtonFunc]]()) {
       wait(0.05);
       continue;
     }
     buttonTime = 0;
-    while (self[[pressingButtonFunc]]()) {
+    while(self[[pressingButtonFunc]]()) {
       buttonTime += 0.05;
       wait(0.05);
     }
     if(buttonTime >= 0.5)
       continue;
     buttonTime = 0;
-    while (!self[[pressingButtonFunc]]() && buttonTime < 0.5) {
+    while(!self[[pressingButtonFunc]]() && buttonTime < 0.5) {
       buttonTime += 0.05;
       wait(0.05);
     }
@@ -325,7 +325,7 @@ cancelKillCamOnUse_specificButton(pressingButtonFunc, finishedFunc) {
 }
 recordKillcamSettings(spectatorclient, targetentityindex, sWeapon, deathTime, deathTimeOffset, offsettime, entityindex, entitystarttime, perks, killstreaks, attacker) {
   if(!isDefined(level.lastKillCam)) {
-    level.lastKillCam = SpawnStruct();
+    level.lastKillCam = spawnStruct();
   }
   level.lastKillCam.spectatorclient = spectatorclient;
   level.lastKillCam.weapon = sWeapon;

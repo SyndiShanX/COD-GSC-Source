@@ -138,7 +138,7 @@ add_fxanim_stop_loop(fieldname, soundname, origin, start_sound_on_register) {
   if(!isDefined(start_sound_on_register))
     start_sound_on_register = 1;
 
-  s = spawnstruct();
+  s = spawnStruct();
   s.soundname = soundname;
   s.origin = origin;
   level.fxanim_stop_loops[fieldname] = s;
@@ -148,7 +148,7 @@ add_fxanim_stop_loop(fieldname, soundname, origin, start_sound_on_register) {
 }
 
 add_fxanim_start_loop(fieldname, soundname, origin) {
-  s = spawnstruct();
+  s = spawnStruct();
   s.soundname = soundname;
   s.origin = origin;
   level.fxanim_start_loops[fieldname] = s;
@@ -201,11 +201,11 @@ sndslidetrigger() {
 }
 
 sndslidetriggeraudio(trig) {
-  self playsound(0, "zmb_slide_start");
+  self playSound(0, "zmb_slide_start");
   ent = spawn(0, self.origin, "script_origin");
   ent thread cleanup_on_spectate();
   ent linkto(self);
-  ent playloopsound("zmb_slide_loop", 0.25);
+  ent playLoopSound("zmb_slide_loop", 0.25);
 
   while(self istouching(trig)) {
     wait 0.1;
@@ -231,7 +231,7 @@ sndslidetriggeraudio(trig) {
     }
   }
 
-  self playsound(0, "zmb_slide_end");
+  self playSound(0, "zmb_slide_end");
   self.issliding = 0;
   ent delete();
   wait 1;
@@ -253,7 +253,7 @@ sndslidewoodaudio(calling_trig) {
   trig waittill("trigger", who);
 
   if(who == self)
-    self playsound(0, "zmb_slide_woodstop");
+    self playSound(0, "zmb_slide_woodstop");
 }
 
 snd_play_loopers() {
@@ -347,5 +347,5 @@ sndbackgroundtrackplay(alias) {
   self endon("death");
   self stoploopsound(2);
   wait 2;
-  self playloopsound(alias, 2);
+  self playLoopSound(alias, 2);
 }

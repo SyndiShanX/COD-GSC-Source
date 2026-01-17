@@ -22,7 +22,7 @@
 #namespace cp_mi_eth_prologue;
 
 function main() {
-  util::set_streamer_hint_function( & force_streamer, 7);
+  util::set_streamer_hint_function(&force_streamer, 7);
   precache_scripted_fx();
   clientfields_init();
   cp_mi_eth_prologue_fx::main();
@@ -40,30 +40,30 @@ function precache_scripted_fx() {
 }
 
 function clientfields_init() {
-  clientfield::register("world", "tunnel_wall_explode", 1, 1, "int", & function_2e707998, 0, 0);
-  clientfield::register("toplayer", "unlimited_sprint_off", 1, 1, "int", & function_9e6eac31, 0, 0);
-  clientfield::register("world", "apc_rail_tower_collapse", 1, 1, "int", & apc_rail_tower_collapse, 1, 0);
-  clientfield::register("world", "vtol_missile_explode_trash_fx", 1, 1, "int", & function_b9aea50f, 1, 0);
-  clientfield::register("toplayer", "turn_on_multicam", 1, 3, "int", & player_turn_on_extra_cam, 0, 0);
-  clientfield::register("world", "setup_security_cameras", 1, 1, "int", & setup_security_cameras, 0, 0);
-  clientfield::register("scriptmover", "update_camera_position", 1, 4, "int", & function_9fd7493, 0, 0);
-  clientfield::register("world", "interrogate_physics", 1, 1, "int", & function_a1ad4aa7, 0, 0);
-  clientfield::register("toplayer", "set_cam_lookat_object", 1, 4, "int", & set_cam_lookat_object, 0, 0);
-  clientfield::register("toplayer", "sndCameraScanner", 1, 3, "int", & function_8466bb27, 0, 0);
-  clientfield::register("world", "blend_in_cleanup", 1, 1, "int", & function_4551c159, 0, 0);
-  clientfield::register("world", "fuel_depot_truck_explosion", 1, 1, "int", & function_aea2e22e, 0, 0);
-  clientfield::register("toplayer", "turn_off_tacmode_vfx", 1, 1, "int", & function_7e8cf38d, 0, 0);
-  clientfield::register("toplayer", "dropship_rumble_loop", 1, 1, "int", & function_d376a908, 0, 0);
-  clientfield::register("toplayer", "apc_speed_blur", 1, 1, "int", & function_8515be07, 0, 0);
-  clientfield::register("world", "diaz_break_1", 1, 2, "int", & function_35a91904, 0, 0);
-  clientfield::register("world", "diaz_break_2", 1, 2, "int", & function_a7b0883f, 0, 0);
-  clientfield::register("toplayer", "player_tunnel_dust_fx_on_off", 1, 1, "int", & cp_mi_eth_prologue_fx::function_fda9ad5f, 0, 0);
-  clientfield::register("toplayer", "player_tunnel_dust_fx", 1, 1, "int", & cp_mi_eth_prologue_fx::function_ba9197c, 0, 0);
-  clientfield::register("toplayer", "player_blood_splatter", 1, 1, "int", & cp_mi_eth_prologue_fx::function_55f87893, 0, 0);
-  clientfield::register("actor", "cyber_soldier_camo", 1, 2, "int", & ent_camo_material_callback, 0, 1);
+  clientfield::register("world", "tunnel_wall_explode", 1, 1, "int", &function_2e707998, 0, 0);
+  clientfield::register("toplayer", "unlimited_sprint_off", 1, 1, "int", &function_9e6eac31, 0, 0);
+  clientfield::register("world", "apc_rail_tower_collapse", 1, 1, "int", &apc_rail_tower_collapse, 1, 0);
+  clientfield::register("world", "vtol_missile_explode_trash_fx", 1, 1, "int", &function_b9aea50f, 1, 0);
+  clientfield::register("toplayer", "turn_on_multicam", 1, 3, "int", &player_turn_on_extra_cam, 0, 0);
+  clientfield::register("world", "setup_security_cameras", 1, 1, "int", &setup_security_cameras, 0, 0);
+  clientfield::register("scriptmover", "update_camera_position", 1, 4, "int", &function_9fd7493, 0, 0);
+  clientfield::register("world", "interrogate_physics", 1, 1, "int", &function_a1ad4aa7, 0, 0);
+  clientfield::register("toplayer", "set_cam_lookat_object", 1, 4, "int", &set_cam_lookat_object, 0, 0);
+  clientfield::register("toplayer", "sndCameraScanner", 1, 3, "int", &function_8466bb27, 0, 0);
+  clientfield::register("world", "blend_in_cleanup", 1, 1, "int", &function_4551c159, 0, 0);
+  clientfield::register("world", "fuel_depot_truck_explosion", 1, 1, "int", &function_aea2e22e, 0, 0);
+  clientfield::register("toplayer", "turn_off_tacmode_vfx", 1, 1, "int", &function_7e8cf38d, 0, 0);
+  clientfield::register("toplayer", "dropship_rumble_loop", 1, 1, "int", &function_d376a908, 0, 0);
+  clientfield::register("toplayer", "apc_speed_blur", 1, 1, "int", &function_8515be07, 0, 0);
+  clientfield::register("world", "diaz_break_1", 1, 2, "int", &function_35a91904, 0, 0);
+  clientfield::register("world", "diaz_break_2", 1, 2, "int", &function_a7b0883f, 0, 0);
+  clientfield::register("toplayer", "player_tunnel_dust_fx_on_off", 1, 1, "int", &cp_mi_eth_prologue_fx::function_fda9ad5f, 0, 0);
+  clientfield::register("toplayer", "player_tunnel_dust_fx", 1, 1, "int", &cp_mi_eth_prologue_fx::function_ba9197c, 0, 0);
+  clientfield::register("toplayer", "player_blood_splatter", 1, 1, "int", &cp_mi_eth_prologue_fx::function_55f87893, 0, 0);
+  clientfield::register("actor", "cyber_soldier_camo", 1, 2, "int", &ent_camo_material_callback, 0, 1);
   duplicate_render::set_dr_filter_framebuffer("active_camo", 90, "actor_camo_on", "", 0, "mc/hud_outline_predator_camo_active_inf", 0);
   duplicate_render::set_dr_filter_framebuffer("active_camo_flicker", 80, "actor_camo_flicker", "", 0, "mc/hud_outline_predator_camo_disruption_inf", 0);
-  clientfield::register("world", "toggle_security_camera_pbg_bank", 1, 1, "int", & function_c9395227, 0, 0);
+  clientfield::register("world", "toggle_security_camera_pbg_bank", 1, 1, "int", &function_c9395227, 0, 0);
 }
 
 function force_streamer(n_index) {
@@ -149,7 +149,7 @@ function player_turn_on_extra_cam(localclientnum, oldval, newval, bnewent, binit
 }
 
 function function_5f6dad34(localclientnum, b_on) {
-  if(!isdefined(level.var_4073afd6)) {
+  if(!isDefined(level.var_4073afd6)) {
     level.var_4073afd6 = getent(localclientnum, "security_pstfx_screen", "targetname");
   }
   level.var_4073afd6 notify("hash_5f6dad34");
@@ -158,10 +158,10 @@ function function_5f6dad34(localclientnum, b_on) {
   level.var_4073afd6 mapshaderconstant(localclientnum, 1, "ScriptVector1");
   if(b_on) {
     level.var_4073afd6 setshaderconstant(localclientnum, 0, 1, 0, 0, 0);
-    while (true) {
+    while(true) {
       starttime = gettime();
       i = gettime() - starttime;
-      while (i < 2000 && isdefined(self)) {
+      while(i < 2000 && isDefined(self)) {
         st = i / 1000;
         if(st <= 1) {
           level.var_4073afd6 setshaderconstant(localclientnum, 1, 0, 0, st, 0);
@@ -179,25 +179,25 @@ function function_5f6dad34(localclientnum, b_on) {
 }
 
 function function_9fd7493(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(!isdefined(level.a_cam_objects)) {
+  if(!isDefined(level.a_cam_objects)) {
     return;
   }
   n_index = newval;
   if(n_index == 9) {
     n_index = 0;
   }
-  if(isdefined(level.a_cam_objects[localclientnum][n_index])) {
+  if(isDefined(level.a_cam_objects[localclientnum][n_index])) {
     level.a_cam_objects[localclientnum][n_index].origin = self.origin;
     level.a_cam_objects[localclientnum][n_index].angles = self.angles;
   }
 }
 
 function set_cam_lookat_object(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(!isdefined(level.a_cam_objects) || level.a_cam_objects.size == 0) {
+  if(!isDefined(level.a_cam_objects) || level.a_cam_objects.size == 0) {
     return;
   }
   e_camera = level.a_cam_objects[localclientnum][newval];
-  if(isdefined(e_camera)) {
+  if(isDefined(e_camera)) {
     if(!util::is_mature() && e_camera.var_6516b558) {
       e_camera setextracam(level.active_extra_cam, 64, 36);
     } else {
@@ -210,26 +210,26 @@ function set_cam_lookat_object(localclientnum, oldval, newval, bnewent, binitial
 function function_8466bb27(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   switch (newval) {
     case 1: {
-      playsound(0, "evt_camera_scan_start", (0, 0, 0));
-      self.loopid = self playloopsound("evt_camera_scan_lp", 1);
+      playSound(0, "evt_camera_scan_start", (0, 0, 0));
+      self.loopid = self playLoopSound("evt_camera_scan_lp", 1);
       break;
     }
     case 2: {
-      playsound(0, "evt_camera_scan_nomatch", (0, 0, 0));
-      if(isdefined(self.loopid)) {
+      playSound(0, "evt_camera_scan_nomatch", (0, 0, 0));
+      if(isDefined(self.loopid)) {
         self stoploopsound(self.loopid, 0.5);
       }
       break;
     }
     case 3: {
-      playsound(0, "evt_camera_scan_match", (0, 0, 0));
-      if(isdefined(self.loopid)) {
+      playSound(0, "evt_camera_scan_match", (0, 0, 0));
+      if(isDefined(self.loopid)) {
         self stoploopsound(self.loopid, 0.5);
       }
       break;
     }
     default: {
-      if(isdefined(self.loopid)) {
+      if(isDefined(self.loopid)) {
         self stoploopsound(self.loopid, 0.5);
       }
       break;
@@ -239,10 +239,10 @@ function function_8466bb27(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function setup_security_cameras(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    if(!isdefined(level.a_cam_objects)) {
+    if(!isDefined(level.a_cam_objects)) {
       level.a_cam_objects = [];
     }
-    if(!isdefined(level.a_cam_objects[localclientnum])) {
+    if(!isDefined(level.a_cam_objects[localclientnum])) {
       level.a_cam_objects[localclientnum] = [];
       level.a_cam_objects[localclientnum][level.a_cam_objects[localclientnum].size] = function_b0867fa6(localclientnum, "s_security_cam_hallway", 28);
       level.a_cam_objects[localclientnum][level.a_cam_objects[localclientnum].size] = function_b0867fa6(localclientnum, "s_security_interrogation", 45);
@@ -255,8 +255,8 @@ function setup_security_cameras(localclientnum, oldval, newval, bnewent, binitia
       level.a_cam_objects[localclientnum][level.a_cam_objects[localclientnum].size] = function_b0867fa6(localclientnum, "s_security_standing_wall", 38, 1);
     }
   } else {
-    if(isdefined(level.a_cam_objects[localclientnum])) {
-      for (i = 0; i < level.a_cam_objects[localclientnum].size; i++) {
+    if(isDefined(level.a_cam_objects[localclientnum])) {
+      for(i = 0; i < level.a_cam_objects[localclientnum].size; i++) {
         level.a_cam_objects[localclientnum][i] clearextracam();
         level.a_cam_objects[localclientnum][i] delete();
         level.a_cam_objects[localclientnum][i] = undefined;
@@ -289,7 +289,7 @@ function function_cd98eb8d() {
   n_wait_time = 5;
   self rotateto(self.angles + v_angles, n_move_time / 2);
   wait(n_wait_time / 2);
-  while (true) {
+  while(true) {
     v_angles = vectorscale((0, 1, 0), 40);
     self rotateto(self.angles + v_angles, n_move_time);
     wait(n_wait_time);

@@ -34,14 +34,14 @@ next_song(localClientNum, set, val) {
   if(level.stop_radio == false) {
     if(set) {
       println("client changing songs");
-      playsound(0, "static", self.origin);
+      playSound(0, "static", self.origin);
       if(SoundPlaying(level.radio_id)) {
         fade(level.radio_id, 1);
       } else {
         wait(.5);
       }
       println("new song: " + level.radio_songs[level.radio_index]);
-      level.radio_id = playsound(0, level.radio_songs[level.radio_index], self.origin);
+      level.radio_id = playSound(0, level.radio_songs[level.radio_index], self.origin);
       level.radio_index += 1;
       if(level.radio_index >= level.radio_songs.size) {
         level.radio_index = 0;

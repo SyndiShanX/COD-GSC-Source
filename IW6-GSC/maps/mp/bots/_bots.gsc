@@ -147,9 +147,7 @@ initBotLevelVariables() {
 
 initBotMapExtents() {
   if(isDefined(level.teleportGetActiveNodesFunc))
-    all_nodes = [
-      [level.teleportGetActiveNodesFunc]
-    ]();
+    all_nodes = [[level.teleportGetActiveNodesFunc]]();
   else
     all_nodes = GetAllNodes();
 
@@ -473,9 +471,7 @@ bot_set_loadout_class() {
       }
 
       if(isDefined(self.override_class_function)) {
-        self.bot_class = [
-          [self.override_class_function]
-        ]();
+        self.bot_class = [[self.override_class_function]]();
       } else {
         self.bot_class = bot_setup_callback_class();
       }

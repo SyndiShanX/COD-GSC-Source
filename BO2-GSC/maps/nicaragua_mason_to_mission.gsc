@@ -138,8 +138,7 @@ bruteforce_rumble_med(m_body) {
   level.player rumble_loop(1, 0.25, "damage_heavy");
 }
 
-bruteforce_mortar_pickup(m_body) {
-}
+bruteforce_mortar_pickup(m_body) {}
 
 mason_mission_setup() {
   add_spawn_function_group("mason_mission_cartel_shotgunners", "script_noteworthy", ::make_ai_aggressive);
@@ -153,7 +152,7 @@ mason_mission_setup() {
   foreach(node in a_nd_archway)
   setenablenode(node, 0);
 
-  a_e_entrance_clip = getentarray("mission_entrance_clip", "targetname");
+  a_e_entrance_clip = getEntArray("mission_entrance_clip", "targetname");
 
   foreach(clip in a_e_entrance_clip) {
     clip trigger_off();
@@ -402,7 +401,7 @@ friendlies_move_into_courtyard() {
       guy set_force_color("g");
   }
 
-  a_sp_pdf_reinforcements = getentarray("mason_pdf_precourtyard_reinforcements", "targetname");
+  a_sp_pdf_reinforcements = getEntArray("mason_pdf_precourtyard_reinforcements", "targetname");
 
   foreach(spawner in a_sp_pdf_reinforcements)
   spawner set_force_color_spawner("g");
@@ -859,7 +858,7 @@ run_split_up_pdf_03_scenes() {
 }
 
 mission_lockdown() {
-  a_e_entrance_clip = getentarray("mission_entrance_clip", "targetname");
+  a_e_entrance_clip = getEntArray("mission_entrance_clip", "targetname");
 
   foreach(clip in a_e_entrance_clip)
   clip trigger_on();

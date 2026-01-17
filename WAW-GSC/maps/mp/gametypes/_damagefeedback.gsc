@@ -10,7 +10,7 @@ init() {
 }
 
 onPlayerConnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connecting", player);
     player.hud_damagefeedback = newClientHudElem(player);
     player.hud_damagefeedback.horzAlign = "center";

@@ -4,7 +4,7 @@
 **************************************/
 
 setmodelfromarray(a) {
-  self setmodel(a[randomint(a.size)]);
+  self setModel(a[randomint(a.size)]);
 }
 
 precachemodelarray(a) {
@@ -62,7 +62,7 @@ load(info) {
   self detachall();
   self.anim_gunhand = info["gunHand"];
   self.anim_guninhand = info["gunInHand"];
-  self setmodel(info["model"]);
+  self setModel(info["model"]);
   self.hatmodel = info["hatModel"];
   self.gearmodel = info["gearModel"];
 

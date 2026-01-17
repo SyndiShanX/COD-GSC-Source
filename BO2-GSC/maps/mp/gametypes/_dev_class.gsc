@@ -288,8 +288,7 @@ dev_cac_overlay_think() {
   dev_cac_overlay_destroy(hud);
 }
 
-dev_cac_overlay_update(hud) {
-}
+dev_cac_overlay_update(hud) {}
 
 dev_cac_overlay_destroy(hud) {
   for(i = 0; i < hud.menu.size; i++)
@@ -410,8 +409,7 @@ dev_cac_gdt_update_think() {
     level.cac_attributes[key][asset] = value;
     players = get_players();
 
-    for(i = 0; i < players.size; i++) {
-    }
+    for(i = 0; i < players.size; i++) {}
   }
 
 }

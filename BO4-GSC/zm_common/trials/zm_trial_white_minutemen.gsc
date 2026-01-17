@@ -13,7 +13,6 @@
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_weapons;
-
 #namespace zm_trial_white_minutemen;
 
 autoexec __init__system__() {
@@ -28,7 +27,7 @@ __init__() {
   zm_trial::register_challenge(#"minutemen", &on_begin, &on_end);
 }
 
-private on_begin(var_8a72a00b, var_49d8a02c, var_325ff213, var_dd2fad64) {
+on_begin(var_8a72a00b, var_49d8a02c, var_325ff213, var_dd2fad64) {
   switch (getplayers().size) {
     case 1:
       level.var_b4a6cec6 = zm_trial::function_5769f26a(var_8a72a00b);
@@ -47,8 +46,8 @@ private on_begin(var_8a72a00b, var_49d8a02c, var_325ff213, var_dd2fad64) {
   callback::on_ai_killed(&on_ai_killed);
   level flag::set(#"hash_25d9ccebd2bdecd9");
   n_obj_id = gameobjects::get_next_obj_id();
-  level.a_n_objective_ids[#"minutemen"] = n_obj_id;
-  objective_add(n_obj_id, "active", level.s_weapons_locker.origin, #"hash_423a75e2700a53ab");
+  level.a_n_objective_ids[# "minutemen"] = n_obj_id;
+  objective_add(n_obj_id, "active", level.s_weapons_locker.origin, # "hash_423a75e2700a53ab");
   function_da7940a3(n_obj_id, 1);
 
   foreach(player in getplayers()) {
@@ -59,7 +58,7 @@ private on_begin(var_8a72a00b, var_49d8a02c, var_325ff213, var_dd2fad64) {
   }
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   callback::remove_on_ai_killed(&on_ai_killed);
 
   if(!round_reset) {
@@ -82,8 +81,8 @@ private on_end(round_reset) {
     }
   }
 
-  objective_delete(level.a_n_objective_ids[#"minutemen"]);
-  gameobjects::release_obj_id(level.a_n_objective_ids[#"minutemen"]);
+  objective_delete(level.a_n_objective_ids[# "minutemen"]);
+  gameobjects::release_obj_id(level.a_n_objective_ids[# "minutemen"]);
 
   foreach(player in getplayers()) {
     player zm_trial_util::function_f3aacffb();
@@ -96,7 +95,7 @@ private on_end(round_reset) {
   level.var_b4a6cec6 = undefined;
 }
 
-private on_ai_killed(params) {
+on_ai_killed(params) {
   if(isplayer(params.eattacker)) {
     w_root = zm_weapons::function_386dacbc(params.weapon);
 
@@ -127,16 +126,16 @@ function_ccbbe9c4(n_obj_id) {
   self zm_trial_util::function_c2cd0cba(level.var_b4a6cec6);
   self zm_trial_util::function_2190356a(self.var_b4a6cec6);
   waitframe(1);
-  s_notify = self waittill(#"hash_9e146af7233ec36", #"hash_7646638df88a3656");
+  s_notify = self waittill(#"hash_9e146af7233ec36", # "hash_7646638df88a3656");
   objective_setinvisibletoplayer(n_obj_id, self);
 
-  if(s_notify._notify == #"hash_9e146af7233ec36") {
+  if(s_notify._notify == # "hash_9e146af7233ec36") {
     self thread function_8b87e57c(undefined, 2, 60);
   }
 }
 
-private function_8b87e57c(timer_label, grace_period, timer_value) {
-  level endon(#"end_of_round", #"host_migration_begin", #"hash_7646638df88a3656", #"end_game");
+function_8b87e57c(timer_label, grace_period, timer_value) {
+  level endon(#"end_of_round", # "host_migration_begin", # "hash_7646638df88a3656", # "end_game");
   self endon(#"hash_6170578b35e8c5d7");
 
   if(!isDefined(level.var_489d6aa2)) {
@@ -148,7 +147,7 @@ private function_8b87e57c(timer_label, grace_period, timer_value) {
   }
 
   wait grace_period;
-  timer_label = isDefined(timer_label) ? timer_label : #"";
+  timer_label = isDefined(timer_label) ? timer_label : # "";
 
   if(!level.var_f995ece6 zm_trial_timer::is_open(self)) {
     level.var_f995ece6 zm_trial_timer::open(self);

@@ -48,7 +48,7 @@ init() {
   else
     precacheString(&"MP_HOST_ENDED_GAME");
   level.halftimeType = "halftime";
-  level.halftimeSubCaption = & "MP_SWITCHING_SIDES";
+  level.halftimeSubCaption = &"MP_SWITCHING_SIDES";
   level.lastStatusTime = 0;
   level.wasWinning = "none";
   level.lastSlowProcessFrame = 0;
@@ -154,7 +154,7 @@ SetupCallbacks() {
 }
 
 WaitTillSlowProcessAllowed() {
-  while (level.lastSlowProcessFrame == gettime())
+  while(level.lastSlowProcessFrame == gettime())
     wait .05;
   level.lastSlowProcessFrame = gettime();
 }
@@ -170,7 +170,7 @@ default_onForfeit(team) {
   wait(10.0);
   announcement(game["strings"]["opponent_forfeiting_in"], 10.0);
   wait(10.0);
-  endReason = & "";
+  endReason = &"";
   if(!isDefined(team)) {
     setDvar("ui_text_endreason", game["strings"]["players_forfeited"]);
     endReason = game["strings"]["players_forfeited"];
@@ -231,9 +231,9 @@ default_onOneLeftEvent(team) {
       logString("last one alive, win: " + winner.name);
     else
       logString("last one alive, win: unknown");
-    thread endGame(winner, & "MP_ENEMIES_ELIMINATED");
+    thread endGame(winner, &"MP_ENEMIES_ELIMINATED");
   } else {
-    for (index = 0; index < level.players.size; index++) {
+    for(index = 0; index < level.players.size; index++) {
       player = level.players[index];
       if(!isAlive(player)) {
         continue;
@@ -293,12 +293,12 @@ forceEnd(hostsucks) {
   level.forcedEnd = true;
   level.hostForcedEnd = true;
   if(hostsucks) {
-    endString = & "MP_HOST_SUCKS";
+    endString = &"MP_HOST_SUCKS";
   } else {
     if(level.splitscreen)
-      endString = & "MP_ENDED_GAME";
+      endString = &"MP_ENDED_GAME";
     else
-      endString = & "MP_HOST_ENDED_GAME";
+      endString = &"MP_HOST_ENDED_GAME";
   }
   makeDvarServerInfo("ui_text_endreason", endString);
   setDvar("ui_text_endreason", endString);
@@ -437,7 +437,7 @@ matchStartTimer() {
   matchStartTimer maps\mp\gametypes\_hud::fontPulseInit();
   countTime = int(level.prematchPeriod);
   if(countTime >= 2) {
-    while (countTime > 0 && !level.gameEnded) {
+    while(countTime > 0 && !level.gameEnded) {
       matchStartTimer setValue(countTime);
       matchStartTimer thread maps\mp\gametypes\_hud::fontPulse(level);
       if(countTime == 2)
@@ -512,7 +512,7 @@ spawnPlayer() {
   prof_end("spawnPlayer_preUTS");
   level thread updateTeamStatus();
   prof_begin("spawnPlayer_postUTS");
-  self thread stopPoisoningAndFlareOnSpawn();
+  self thread stopPoisoningAndFlareOnspawn();
   self StopBurning();
   if(level.oldschool) {
     assert(!isDefined(self.class));
@@ -598,9 +598,9 @@ xpRateThread() {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
-  while (level.inPrematchPeriod)
+  while(level.inPrematchPeriod)
     wait(0.05);
-  for (;;) {
+  for(;;) {
     wait(5.0);
     if(level.players[0].pers["team"] == "allies" || level.players[0].pers["team"] == "axis")
       self maps\mp\gametypes\_rank::giveRankXP("kill", int(min(getDvarInt("scr_xprate"), 50)));
@@ -617,7 +617,7 @@ hidePerksAfterTime(delay) {
   self thread hidePerk(3, 2.0);
   self notify("perks_hidden");
 }
-stopPoisoningAndFlareOnSpawn() {
+stopPoisoningAndFlareOnspawn() {
   self endon("disconnect");
   self.inPoisonArea = false;
   self.inFlareVisionArea = false;
@@ -649,10 +649,10 @@ hidePerksOnKill() {
 testMenu() {
   self endon("death");
   self endon("disconnect");
-  for (;;) {
+  for(;;) {
     wait(10.0);
     notifyData = spawnStruct();
-    notifyData.titleText = & "MP_CHALLENGE_COMPLETED";
+    notifyData.titleText = &"MP_CHALLENGE_COMPLETED";
     notifyData.notifyText = "wheee";
     notifyData.sound = "mp_challenge_complete";
     self thread maps\mp\gametypes\_hud_message::notifyMessage(notifyData);
@@ -662,10 +662,10 @@ testMenu() {
 testShock() {
   self endon("death");
   self endon("disconnect");
-  for (;;) {
+  for(;;) {
     wait(3.0);
     numShots = randomInt(6);
-    for (i = 0; i < numShots; i++) {
+    for(i = 0; i < numShots; i++) {
       iPrintLnBold(numShots);
       self shellShock("frag_grenade_mp", 0.2);
       wait(0.1);
@@ -680,7 +680,7 @@ testHPs() {
   hps[hps.size] = "radar_mp";
   hps[hps.size] = "artillery_mp";
   hps[hps.size] = "dogs_mp";
-  for (;;) {
+  for(;;) {
     hp = "radar_mp";
     if(self thread maps\mp\gametypes\_hardpoints::giveHardpointItem(hp)) {
       self playLocalSound(level.hardpointInforms[hp]);
@@ -732,7 +732,7 @@ spectatorThirdPersonness() {
 getPlayerFromClientNum(clientNum) {
   if(clientNum < 0)
     return undefined;
-  for (i = 0; i < level.players.size; i++) {
+  for(i = 0; i < level.players.size; i++) {
     if(level.players[i] getEntityNumber() == clientNum)
       return level.players[i];
   }
@@ -752,7 +752,7 @@ setThirdPerson(value) {
 
 waveSpawnTimer() {
   level endon("game_ended");
-  while (game["state"] == "playing") {
+  while(game["state"] == "playing") {
     time = getTime();
     if(time - level.lastWave["allies"] > (level.waveDelay["allies"] * 1000)) {
       level notify("wave_respawn_allies");
@@ -774,7 +774,7 @@ default_onSpawnSpectator(origin, angles) {
     return;
   }
   spawnpointname = "mp_global_intermission";
-  spawnpoints = getentarray(spawnpointname, "classname");
+  spawnpoints = getEntArray(spawnpointname, "classname");
   assertex(spawnpoints.size, "There are no mp_global_intermission spawn points in the map.There must be at least one.");
   spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_Random(spawnpoints);
   self spawn(spawnpoint.origin, spawnpoint.angles);
@@ -799,7 +799,7 @@ spawnIntermission() {
 
 default_onSpawnIntermission() {
   spawnpointname = "mp_global_intermission";
-  spawnpoints = getentarray(spawnpointname, "classname");
+  spawnpoints = getEntArray(spawnpointname, "classname");
   spawnpoint = spawnPoints[0];
   if(isDefined(spawnpoint))
     self spawn(spawnpoint.origin, spawnpoint.angles);
@@ -838,7 +838,7 @@ logXPGains() {
     return;
   }
   xpTypes = getArrayKeys(self.xpGains);
-  for (index = 0; index < xpTypes.size; index++) {
+  for(index = 0; index < xpTypes.size; index++) {
     gain = self.xpGains[xpTypes[index]];
     if(!gain) {
       continue;
@@ -877,7 +877,7 @@ freeGameplayHudElems() {
 
 getHostPlayer() {
   players = get_players();
-  for (index = 0; index < players.size; index++) {
+  for(index = 0; index < players.size; index++) {
     if(players[index] getEntityNumber() == 0)
       return players[index];
   }
@@ -915,7 +915,7 @@ endGame(winner, endReasonText) {
   updatePlacement();
   updateMatchBonusScores(winner);
   updateWinLossStats(winner);
-  for (index = 0; index < level.players.size; index++) {
+  for(index = 0; index < level.players.size; index++) {
     nemesis = level.players[index].pers["nemesis_name"];
     if(!isDefined(level.players[index].pers["killed_players"][nemesis]))
       level.players[index].pers["killed_players"][nemesis] = 0;
@@ -971,7 +971,7 @@ endGame(winner, endReasonText) {
     recordPlayerStats(level.players[index], "numDogsKills", level.players[index].pers["dog_kills"]);
   }
   players = level.players;
-  for (index = 0; index < players.size; index++) {
+  for(index = 0; index < players.size; index++) {
     player = players[index];
     player freezePlayerForRoundEnd();
     player thread roundEndDoF(4.0);
@@ -989,7 +989,7 @@ endGame(winner, endReasonText) {
   if((level.roundLimit > 1 || (!level.roundLimit && level.scoreLimit != 1)) && !level.forcedEnd) {
     if(level.displayRoundEndText) {
       players = level.players;
-      for (index = 0; index < players.size; index++) {
+      for(index = 0; index < players.size; index++) {
         player = players[index];
         if(level.teamBased)
           player thread[[level.onTeamOutcomeNotify]](winner, true, endReasonText);
@@ -1012,7 +1012,7 @@ endGame(winner, endReasonText) {
       roundSwitching = checkRoundSwitch();
     if(roundSwitching && level.teamBased) {
       players = level.players;
-      for (index = 0; index < players.size; index++) {
+      for(index = 0; index < players.size; index++) {
         player = players[index];
         if(!isDefined(player.pers["team"]) || player.pers["team"] == "spectator") {
           player[[level.spawnIntermission]]();
@@ -1059,7 +1059,7 @@ endGame(winner, endReasonText) {
       roundEndWait(level.halftimeRoundEndDelay, false);
     } else if(!hitRoundLimit() && !hitScoreLimit() && !level.displayRoundEndText && level.teamBased) {
       players = level.players;
-      for (index = 0; index < players.size; index++) {
+      for(index = 0; index < players.size; index++) {
         player = players[index];
         if(!isDefined(player.pers["team"]) || player.pers["team"] == "spectator") {
           player[[level.spawnIntermission]]();
@@ -1117,7 +1117,7 @@ endGame(winner, endReasonText) {
   }
   thread maps\mp\gametypes\_missions::roundEnd(winner);
   players = level.players;
-  for (index = 0; index < players.size; index++) {
+  for(index = 0; index < players.size; index++) {
     player = players[index];
     if(!isDefined(player.pers["team"]) || player.pers["team"] == "spectator") {
       player[[level.spawnIntermission]]();
@@ -1162,7 +1162,7 @@ endGame(winner, endReasonText) {
   roundEndWait(level.postRoundTime, true);
   level.intermission = true;
   players = level.players;
-  for (index = 0; index < players.size; index++) {
+  for(index = 0; index < players.size; index++) {
     player = players[index];
     player closeMenu();
     player closeInGameMenu();
@@ -1182,14 +1182,14 @@ endGame(winner, endReasonText) {
     wait getDvarFloat("scr_show_unlock_wait");
   }
   players = level.players;
-  for (index = 0; index < players.size; index++) {
+  for(index = 0; index < players.size; index++) {
     player = players[index];
     player openMenu(game["menu_eog_unlock"]);
   }
   thread timeLimitClock_Intermission(getDvarFloat("scr_intermission_time"));
   wait getDvarFloat("scr_intermission_time");
   players = level.players;
-  for (index = 0; index < players.size; index++) {
+  for(index = 0; index < players.size; index++) {
     player = players[index];
     player closeMenu();
     player closeInGameMenu();
@@ -1209,10 +1209,10 @@ getWinningTeam() {
 
 roundEndWait(defaultDelay, matchBonus) {
   notifiesDone = false;
-  while (!notifiesDone) {
+  while(!notifiesDone) {
     players = level.players;
     notifiesDone = true;
-    for (index = 0; index < players.size; index++) {
+    for(index = 0; index < players.size; index++) {
       if(!isDefined(players[index].doingNotify) || !players[index].doingNotify) {
         continue;
       }
@@ -1228,10 +1228,10 @@ roundEndWait(defaultDelay, matchBonus) {
   level notify("give_match_bonus");
   wait(defaultDelay / 2);
   notifiesDone = false;
-  while (!notifiesDone) {
+  while(!notifiesDone) {
     players = level.players;
     notifiesDone = true;
-    for (index = 0; index < players.size; index++) {
+    for(index = 0; index < players.size; index++) {
       if(!isDefined(players[index].doingNotify) || !players[index].doingNotify) {
         continue;
       }
@@ -1283,7 +1283,7 @@ updateMatchBonusScores(winner) {
       loserScale = maps\mp\gametypes\_rank::getScoreInfoValue("tie");
     }
     players = level.players;
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       player = players[i];
       if(player.timePlayed["total"] < 1 || player.pers["participation"] < 1) {
         player thread maps\mp\gametypes\_rank::endGameUpdate();
@@ -1320,7 +1320,7 @@ updateMatchBonusScores(winner) {
       loserScale = maps\mp\gametypes\_rank::getScoreInfoValue("tie");
     }
     players = level.players;
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       player = players[i];
       if(player.timePlayed["total"] < 1 || player.pers["participation"] < 1) {
         player thread maps\mp\gametypes\_rank::endGameUpdate();
@@ -1332,7 +1332,7 @@ updateMatchBonusScores(winner) {
       }
       spm = player maps\mp\gametypes\_rank::getSPM();
       isWinner = false;
-      for (pIdx = 0; pIdx < min(level.placement["all"][0].size, 3); pIdx++) {
+      for(pIdx = 0; pIdx < min(level.placement["all"][0].size, 3); pIdx++) {
         if(level.placement["all"][pIdx] != player)
           continue;
         isWinner = true;
@@ -1360,13 +1360,13 @@ giveMatchBonus(scoreType, score) {
 
 setXenonRanks(winner) {
   players = level.players;
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     player = players[i];
     if(!isDefined(player.score) || !isDefined(player.pers["team"])) {
       continue;
     }
   }
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     player = players[i];
     if(!isDefined(player.score) || !isDefined(player.pers["team"])) {
       continue;
@@ -1381,7 +1381,7 @@ getHighestScoringPlayer() {
   players = level.players;
   winner = undefined;
   tie = false;
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(!isDefined(players[i].score)) {
       continue;
     }
@@ -1467,7 +1467,7 @@ hitScoreLimit() {
     if(game["teamScores"]["allies"] >= level.scoreLimit || game["teamScores"]["axis"] >= level.scoreLimit)
       return true;
   } else {
-    for (i = 0; i < level.players.size; i++) {
+    for(i = 0; i < level.players.size; i++) {
       player = level.players[i];
       if(isDefined(player.score) && player.score >= level.scorelimit)
         return true;
@@ -1563,15 +1563,13 @@ default_getTimeLimitDvarValue() {
 
 updateGameTypeDvars() {
   level endon("game_ended");
-  while (game["state"] == "playing") {
+  while(game["state"] == "playing") {
     roundlimit = getValueInRange(getDvarInt(level.roundLimitDvar), level.roundLimitMin, level.roundLimitMax);
     if(roundlimit != level.roundlimit) {
       level.roundlimit = roundlimit;
       level notify("update_roundlimit");
     }
-    timeLimit = [
-      [level.getTimeLimitDvarValue]
-    ]();
+    timeLimit = [[level.getTimeLimitDvarValue]]();
     if(timeLimit != level.timeLimit) {
       level.timeLimit = timeLimit;
       setDvar("ui_timelimit", level.timeLimit);
@@ -1840,9 +1838,7 @@ menuSpectator() {
     self.canDoCombat = false;
     self updateObjectiveText();
     self.sessionteam = "spectator";
-    [
-      [level.spawnSpectator]
-    ]();
+    [[level.spawnSpectator]]();
     self setclientdvar("g_scriptMainMenu", game["menu_team"]);
     self notify("joined_spectators");
   }
@@ -1901,10 +1897,10 @@ menuClass(response) {
 
 assertProperPlacement() {
   numPlayers = level.placement["all"].size;
-  for (i = 0; i < numPlayers - 1; i++) {
+  for(i = 0; i < numPlayers - 1; i++) {
     if(level.placement["all"][i].score < level.placement["all"][i + 1].score) {
       println("^1Placement array:");
-      for (i = 0; i < numPlayers; i++) {
+      for(i = 0; i < numPlayers; i++) {
         player = level.placement["all"][i];
         println("^1" + i + ". " + player.name + ": " + player.score);
       }
@@ -1918,7 +1914,7 @@ removeDisconnectedPlayerFromPlacement() {
   offset = 0;
   numPlayers = level.placement["all"].size;
   found = false;
-  for (i = 0; i < numPlayers; i++) {
+  for(i = 0; i < numPlayers; i++) {
     if(level.placement["all"][i] == self)
       found = true;
     if(found)
@@ -1935,7 +1931,7 @@ removeDisconnectedPlayerFromPlacement() {
     return;
   }
   numPlayers = level.placement["all"].size;
-  for (i = 0; i < numPlayers; i++) {
+  for(i = 0; i < numPlayers; i++) {
     player = level.placement["all"][i];
     player notify("update_outcome");
   }
@@ -1946,15 +1942,15 @@ updatePlacement() {
     return;
   }
   level.placement["all"] = [];
-  for (index = 0; index < level.players.size; index++) {
+  for(index = 0; index < level.players.size; index++) {
     if(level.players[index].team == "allies" || level.players[index].team == "axis")
       level.placement["all"][level.placement["all"].size] = level.players[index];
   }
   placementAll = level.placement["all"];
-  for (i = 1; i < placementAll.size; i++) {
+  for(i = 1; i < placementAll.size; i++) {
     player = placementAll[i];
     playerScore = player.score;
-    for (j = i - 1; j >= 0 && (playerScore > placementAll[j].score || (playerScore == placementAll[j].score && player.deaths < placementAll[j].deaths)); j--)
+    for(j = i - 1; j >= 0 && (playerScore > placementAll[j].score || (playerScore == placementAll[j].score && player.deaths < placementAll[j].deaths)); j--)
       placementAll[j + 1] = placementAll[j];
     placementAll[j + 1] = player;
   }
@@ -1973,7 +1969,7 @@ updateTeamPlacement() {
   }
   placementAll = level.placement["all"];
   placementAllSize = placementAll.size;
-  for (i = 0; i < placementAllSize; i++) {
+  for(i = 0; i < placementAllSize; i++) {
     player = placementAll[i];
     team = player.pers["team"];
     placement[team][placement[team].size] = player;
@@ -2089,7 +2085,7 @@ sendUpdatedTeamScores() {
   level endon("updating_scores");
   wait .05;
   WaitTillSlowProcessAllowed();
-  for (i = 0; i < level.players.size; i++) {
+  for(i = 0; i < level.players.size; i++) {
     level.players[i] updateScores();
   }
 }
@@ -2099,7 +2095,7 @@ sendUpdatedDMScores() {
   level endon("updating_dm_scores");
   wait .05;
   WaitTillSlowProcessAllowed();
-  for (i = 0; i < level.players.size; i++) {
+  for(i = 0; i < level.players.size; i++) {
     level.players[i] updateDMScores();
     level.players[i].updatedDMScores = true;
   }
@@ -2170,7 +2166,7 @@ updateTeamStatus() {
   level.squads["allies"] = [];
   level.squads["axis"] = [];
   players = level.players;
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     player = players[i];
     if(!isDefined(player) && level.splitscreen) {
       continue;
@@ -2193,7 +2189,7 @@ updateTeamStatus() {
           }
         }
       } else {
-        if(player maySpawn())
+        if(player mayspawn())
           level.playerLives[team]++;
       }
     }
@@ -2220,7 +2216,7 @@ playTickingSound() {
   self endon("death");
   self endon("stop_ticking");
   level endon("game_ended");
-  while (1) {
+  while(1) {
     self playSound("ui_mp_suitcasebomb_timer");
     wait 1.0;
   }
@@ -2234,7 +2230,7 @@ timeLimitClock() {
   level endon("game_ended");
   wait .05;
   clockObject = spawn("script_origin", (0, 0, 0));
-  while (game["state"] == "playing") {
+  while(game["state"] == "playing") {
     if(!level.timerStopped && level.timeLimit) {
       timeLeft = getTimeRemaining() / 1000;
       timeLeftInt = int(timeLeft + 0.5);
@@ -2261,7 +2257,7 @@ timeLimitClock_Intermission(waitTime) {
   clockObject = spawn("script_origin", (0, 0, 0));
   if(waitTime >= 10.0)
     wait(waitTime - 10.0);
-  for (;;) {
+  for(;;) {
     clockObject playSound("ui_mp_timer_countdown");
     wait(1.0);
   }
@@ -2278,7 +2274,7 @@ gameTimer() {
     game["roundMillisecondsAlreadyPassed"] = undefined;
   }
   prevtime = gettime();
-  while (game["state"] == "playing") {
+  while(game["state"] == "playing") {
     if(!level.timerStopped) {
       game["timepassed"] += gettime() - prevtime;
     }
@@ -2356,7 +2352,7 @@ suspenseMusic() {
   level endon("game_ended");
   level endon("match_ending_soon");
   numTracks = game["music"]["suspense"].size;
-  for (;;) {
+  for(;;) {
     wait(randomFloatRange(60, 120));
     playSoundOnPlayers(game["music"]["suspense"][randomInt(numTracks)]);
   }
@@ -2375,7 +2371,7 @@ prematchPeriod() {
     matchStartTimerSkip();
   }
   level.inPrematchPeriod = false;
-  for (index = 0; index < level.players.size; index++) {
+  for(index = 0; index < level.players.size; index++) {
     level.players[index] freezeControls(false);
     level.players[index] enableWeapons();
     hintMessage = getObjectiveHintText(level.players[index].pers["team"]);
@@ -2404,7 +2400,7 @@ gracePeriod() {
   }
   if(level.numLives) {
     players = level.players;
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       player = players[i];
       if(!player.hasSpawned && player.sessionteam != "spectator" && !isAlive(player))
         player.statusicon = "hud_status_dead";
@@ -2496,7 +2492,7 @@ updateWinLossStats(winner) {
   }
   players = level.players;
   if(!isDefined(winner) || (isDefined(winner) && !isPlayer(winner) && winner == "tie")) {
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       if(!isDefined(players[i].pers["team"])) {
         continue;
       }
@@ -2511,7 +2507,7 @@ updateWinLossStats(winner) {
     }
     updateWinStats(winner);
   } else {
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       if(!isDefined(players[i].pers["team"])) {
         continue;
       }
@@ -2531,7 +2527,7 @@ updateWinLossStats(winner) {
   }
 }
 
-TimeUntilWaveSpawn(minimumWait) {
+TimeUntilWavespawn(minimumWait) {
   earliestSpawnTime = gettime() + minimumWait * 1000;
   lastWaveTime = level.lastWave[self.pers["team"]];
   waveDelay = level.waveDelay[self.pers["team"]] * 1000;
@@ -2582,7 +2578,7 @@ TeamKillDelay() {
   return maps\mp\gametypes\_tweakables::getTweakableValue("team", "teamkillspawndelay") * exceeded;
 }
 
-TimeUntilSpawn(includeTeamkillDelay) {
+TimeUntilspawn(includeTeamkillDelay) {
   if(level.inGracePeriod && !self.hasSpawned)
     return 0;
   respawnDelay = 0;
@@ -2597,11 +2593,11 @@ TimeUntilSpawn(includeTeamkillDelay) {
   }
   waveBased = (getDvarInt("scr_" + level.gameType + "_waverespawndelay") > 0);
   if(waveBased)
-    return self TimeUntilWaveSpawn(respawnDelay);
+    return self TimeUntilWavespawn(respawnDelay);
   return respawnDelay;
 }
 
-maySpawn() {
+mayspawn() {
   if(level.inOvertime)
     return false;
   if(level.numLives) {
@@ -2622,7 +2618,7 @@ maySpawn() {
 spawnClient(timeAlreadyPassed) {
   assert(isDefined(self.team));
   assert(isValidClass(self.class));
-  if(!self maySpawn()) {
+  if(!self mayspawn()) {
     currentorigin = self.origin;
     currentangles = self.angles;
     shouldShowRespawnMessage = true;
@@ -2673,7 +2669,7 @@ waitAndSpawnClient(timeAlreadyPassed) {
     self.waveSpawnIndex = level.wavePlayerSpawnIndex[self.team];
     level.wavePlayerSpawnIndex[self.team]++;
   }
-  timeUntilSpawn = TimeUntilSpawn(false);
+  timeUntilSpawn = TimeUntilspawn(false);
   if(timeUntilSpawn > timeAlreadyPassed) {
     timeUntilSpawn -= timeAlreadyPassed;
     timeAlreadyPassed = 0;
@@ -2705,7 +2701,7 @@ waitAndSpawnClient(timeAlreadyPassed) {
 
 rumbler() {
   self endon("disconnect");
-  while (1) {
+  while(1) {
     wait(0.1);
     self PlayRumbleOnEntity("damage_heavy");
   }
@@ -2714,7 +2710,7 @@ rumbler() {
 waitRespawnOrSafeSpawnButton() {
   self endon("disconnect");
   self endon("end_respawn");
-  while (1) {
+  while(1) {
     if(self useButtonPressed()) {
       break;
     }
@@ -2730,7 +2726,7 @@ waitForTimeOrNotify(time, notifyname) {
 waitForTimeOrNotifyNoArtillery(time, notifyname) {
   self endon(notifyname);
   wait time;
-  while (isDefined(level.artilleryInProgress)) {
+  while(isDefined(level.artilleryInProgress)) {
     assert(level.artilleryInProgress);
     wait .25;
   }
@@ -2767,36 +2763,36 @@ Callback_StartGameType() {
     makeDvarServerInfo("scr_axis", "japanese");
     makeDvarServerInfo("cg_thirdPersonAngle", 354);
     setDvar("cg_thirdPersonAngle", 354);
-    game["strings"]["press_to_spawn"] = & "PLATFORM_PRESS_TO_SPAWN";
+    game["strings"]["press_to_spawn"] = &"PLATFORM_PRESS_TO_SPAWN";
     if(level.teamBased) {
-      game["strings"]["waiting_for_teams"] = & "MP_WAITING_FOR_TEAMS";
-      game["strings"]["opponent_forfeiting_in"] = & "MP_OPPONENT_FORFEITING_IN";
+      game["strings"]["waiting_for_teams"] = &"MP_WAITING_FOR_TEAMS";
+      game["strings"]["opponent_forfeiting_in"] = &"MP_OPPONENT_FORFEITING_IN";
     } else {
-      game["strings"]["waiting_for_teams"] = & "MP_WAITING_FOR_PLAYERS";
-      game["strings"]["opponent_forfeiting_in"] = & "MP_OPPONENT_FORFEITING_IN";
+      game["strings"]["waiting_for_teams"] = &"MP_WAITING_FOR_PLAYERS";
+      game["strings"]["opponent_forfeiting_in"] = &"MP_OPPONENT_FORFEITING_IN";
     }
-    game["strings"]["match_starting_in"] = & "MP_MATCH_STARTING_IN";
-    game["strings"]["spawn_next_round"] = & "MP_SPAWN_NEXT_ROUND";
-    game["strings"]["waiting_to_spawn"] = & "MP_WAITING_TO_SPAWN";
-    game["strings"]["match_starting"] = & "MP_MATCH_STARTING";
-    game["strings"]["change_class"] = & "MP_CHANGE_CLASS_NEXT_SPAWN";
-    game["strings"]["last_stand"] = & "MPUI_LAST_STAND";
-    game["strings"]["cowards_way"] = & "PLATFORM_COWARDS_WAY_OUT";
-    game["strings"]["tie"] = & "MP_MATCH_TIE";
-    game["strings"]["round_draw"] = & "MP_ROUND_DRAW";
-    game["strings"]["enemies_eliminated"] = & "MP_ENEMIES_ELIMINATED";
-    game["strings"]["score_limit_reached"] = & "MP_SCORE_LIMIT_REACHED";
-    game["strings"]["round_limit_reached"] = & "MP_ROUND_LIMIT_REACHED";
-    game["strings"]["time_limit_reached"] = & "MP_TIME_LIMIT_REACHED";
-    game["strings"]["players_forfeited"] = & "MP_PLAYERS_FORFEITED";
+    game["strings"]["match_starting_in"] = &"MP_MATCH_STARTING_IN";
+    game["strings"]["spawn_next_round"] = &"MP_SPAWN_NEXT_ROUND";
+    game["strings"]["waiting_to_spawn"] = &"MP_WAITING_TO_SPAWN";
+    game["strings"]["match_starting"] = &"MP_MATCH_STARTING";
+    game["strings"]["change_class"] = &"MP_CHANGE_CLASS_NEXT_SPAWN";
+    game["strings"]["last_stand"] = &"MPUI_LAST_STAND";
+    game["strings"]["cowards_way"] = &"PLATFORM_COWARDS_WAY_OUT";
+    game["strings"]["tie"] = &"MP_MATCH_TIE";
+    game["strings"]["round_draw"] = &"MP_ROUND_DRAW";
+    game["strings"]["enemies_eliminated"] = &"MP_ENEMIES_ELIMINATED";
+    game["strings"]["score_limit_reached"] = &"MP_SCORE_LIMIT_REACHED";
+    game["strings"]["round_limit_reached"] = &"MP_ROUND_LIMIT_REACHED";
+    game["strings"]["time_limit_reached"] = &"MP_TIME_LIMIT_REACHED";
+    game["strings"]["players_forfeited"] = &"MP_PLAYERS_FORFEITED";
     switch (game["allies"]) {
       case "russian":
-        game["strings"]["allies_win"] = & "MP_RUSSIAN_WIN_MATCH";
-        game["strings"]["allies_win_round"] = & "MP_RUSSIAN_WIN_ROUND";
-        game["strings"]["allies_mission_accomplished"] = & "MP_RUSSIAN_MISSION_ACCOMPLISHED";
-        game["strings"]["allies_eliminated"] = & "MP_RUSSIAN_ELIMINATED";
-        game["strings"]["allies_forfeited"] = & "MP_RUSSIAN_FORFEITED";
-        game["strings"]["allies_name"] = & "MP_RUSSIAN_NAME";
+        game["strings"]["allies_win"] = &"MP_RUSSIAN_WIN_MATCH";
+        game["strings"]["allies_win_round"] = &"MP_RUSSIAN_WIN_ROUND";
+        game["strings"]["allies_mission_accomplished"] = &"MP_RUSSIAN_MISSION_ACCOMPLISHED";
+        game["strings"]["allies_eliminated"] = &"MP_RUSSIAN_ELIMINATED";
+        game["strings"]["allies_forfeited"] = &"MP_RUSSIAN_FORFEITED";
+        game["strings"]["allies_name"] = &"MP_RUSSIAN_NAME";
         game["music"]["spawn_allies"] = "mp_spawn_soviet";
         game["music"]["victory_allies"] = "mp_victory_soviet";
         game["icons"]["allies"] = "faction_128_soviet";
@@ -2806,12 +2802,12 @@ Callback_StartGameType() {
         break;
       default:
       case "marines":
-        game["strings"]["allies_win"] = & "MP_MARINE_WIN_MATCH";
-        game["strings"]["allies_win_round"] = & "MP_MARINE_WIN_ROUND";
-        game["strings"]["allies_mission_accomplished"] = & "MP_MARINE_MISSION_ACCOMPLISHED";
-        game["strings"]["allies_eliminated"] = & "MP_MARINE_ELIMINATED";
-        game["strings"]["allies_forfeited"] = & "MP_MARINE_FORFEITED";
-        game["strings"]["allies_name"] = & "MP_MARINE_NAME";
+        game["strings"]["allies_win"] = &"MP_MARINE_WIN_MATCH";
+        game["strings"]["allies_win_round"] = &"MP_MARINE_WIN_ROUND";
+        game["strings"]["allies_mission_accomplished"] = &"MP_MARINE_MISSION_ACCOMPLISHED";
+        game["strings"]["allies_eliminated"] = &"MP_MARINE_ELIMINATED";
+        game["strings"]["allies_forfeited"] = &"MP_MARINE_FORFEITED";
+        game["strings"]["allies_name"] = &"MP_MARINE_NAME";
         game["music"]["spawn_allies"] = "mp_spawn_usa";
         game["music"]["victory_allies"] = "mp_victory_usa";
         game["icons"]["allies"] = "faction_128_american";
@@ -2822,12 +2818,12 @@ Callback_StartGameType() {
     }
     switch (game["axis"]) {
       case "german":
-        game["strings"]["axis_win"] = & "MP_GERMAN_WIN_MATCH";
-        game["strings"]["axis_win_round"] = & "MP_GERMAN_WIN_ROUND";
-        game["strings"]["axis_mission_accomplished"] = & "MP_GERMAN_MISSION_ACCOMPLISHED";
-        game["strings"]["axis_eliminated"] = & "MP_GERMAN_ELIMINATED";
-        game["strings"]["axis_forfeited"] = & "MP_GERMAN_FORFEITED";
-        game["strings"]["axis_name"] = & "MP_GERMAN_NAME";
+        game["strings"]["axis_win"] = &"MP_GERMAN_WIN_MATCH";
+        game["strings"]["axis_win_round"] = &"MP_GERMAN_WIN_ROUND";
+        game["strings"]["axis_mission_accomplished"] = &"MP_GERMAN_MISSION_ACCOMPLISHED";
+        game["strings"]["axis_eliminated"] = &"MP_GERMAN_ELIMINATED";
+        game["strings"]["axis_forfeited"] = &"MP_GERMAN_FORFEITED";
+        game["strings"]["axis_name"] = &"MP_GERMAN_NAME";
         game["music"]["spawn_axis"] = "mp_spawn_german";
         game["music"]["victory_axis"] = "mp_victory_german";
         game["icons"]["axis"] = "faction_128_german";
@@ -2837,12 +2833,12 @@ Callback_StartGameType() {
         break;
       default:
       case "japanese":
-        game["strings"]["axis_win"] = & "MP_JAPANESE_WIN_MATCH";
-        game["strings"]["axis_win_round"] = & "MP_JAPANESE_WIN_ROUND";
-        game["strings"]["axis_mission_accomplished"] = & "MP_JAPANESE_MISSION_ACCOMPLISHED";
-        game["strings"]["axis_eliminated"] = & "MP_JAPANESE_ELIMINATED";
-        game["strings"]["axis_forfeited"] = & "MP_JAPANESE_FORFEITED";
-        game["strings"]["axis_name"] = & "MP_JAPANESE_NAME";
+        game["strings"]["axis_win"] = &"MP_JAPANESE_WIN_MATCH";
+        game["strings"]["axis_win_round"] = &"MP_JAPANESE_WIN_ROUND";
+        game["strings"]["axis_mission_accomplished"] = &"MP_JAPANESE_MISSION_ACCOMPLISHED";
+        game["strings"]["axis_eliminated"] = &"MP_JAPANESE_ELIMINATED";
+        game["strings"]["axis_forfeited"] = &"MP_JAPANESE_FORFEITED";
+        game["strings"]["axis_name"] = &"MP_JAPANESE_NAME";
         game["music"]["spawn_axis"] = "mp_spawn_japanese";
         game["music"]["victory_axis"] = "mp_victory_japanese";
         game["icons"]["axis"] = "faction_128_japan";
@@ -2986,9 +2982,7 @@ Callback_StartGameType() {
     game["dialog"]["squad_plant"] = "squad_plant";
     game["dialog"]["squad_take"] = "squad_takeobj";
     game["dialog"]["kicked"] = "player_kicked";
-    [
-      [level.onPrecacheGameType]
-    ]();
+    [[level.onPrecacheGameType]]();
     game["gamestarted"] = true;
     game["teamScores"]["allies"] = 0;
     game["teamScores"]["axis"] = 0;
@@ -3047,7 +3041,7 @@ Callback_StartGameType() {
   if(!level.console)
     thread maps\mp\gametypes\_quickmessages::init();
   stringNames = getArrayKeys(game["strings"]);
-  for (index = 0; index < stringNames.size; index++)
+  for(index = 0; index < stringNames.size; index++)
     precacheString(game["strings"][stringNames[index]]);
   level.maxPlayerCount = 0;
   level.playerCount["allies"] = 0;
@@ -3111,10 +3105,10 @@ Callback_StartGameType() {
 initialDMScoreUpdate() {
   wait .2;
   numSent = 0;
-  while (1) {
+  while(1) {
     didAny = false;
     players = level.players;
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       player = players[i];
       if(!isDefined(player)) {
         continue;
@@ -3139,9 +3133,7 @@ checkRoundSwitch() {
     return false;
   assert(game["roundsplayed"] > 0);
   if(game["roundsplayed"] % level.roundswitch == 0) {
-    [
-      [level.onRoundSwitch]
-    ]();
+    [[level.onRoundSwitch]]();
     return true;
   }
   return false;
@@ -3154,7 +3146,7 @@ getGameScore(team) {
 fakeLag() {
   self endon("disconnect");
   self.fakeLag = randomIntRange(50, 150);
-  for (;;) {
+  for(;;) {
     self setClientDvar("fakelag_target", self.fakeLag);
     wait(randomFloatRange(5.0, 15.0));
   }
@@ -3222,7 +3214,7 @@ Callback_PlayerConnect() {
       "player_clipSizeMultiplier", 2.0);
   }
   if(getdvarint("scr_hitloc_debug")) {
-    for (i = 0; i < 6; i++) {
+    for(i = 0; i < 6; i++) {
       self setClientDvar("ui_hitloc_" + i, "");
     }
     self.hitlocInited = true;
@@ -3330,9 +3322,7 @@ Callback_PlayerConnect() {
     self.team = "spectator";
     self setClientDvars("ui_hud_hardcore", 1,
       "cg_drawSpectatorMessages", 0);
-    [
-      [level.spawnIntermission]
-    ]();
+    [[level.spawnIntermission]]();
     self closeMenu();
     self closeInGameMenu();
     return;
@@ -3358,14 +3348,12 @@ Callback_PlayerConnect() {
     self.team = "spectator";
     self.sessionstate = "dead";
     self updateObjectiveText();
-    [
-      [level.spawnSpectator]
-    ]();
+    [[level.spawnSpectator]]();
     if(level.rankedMatch && level.console) {
       [
         [level.autoassign]
       ]();
-      self thread kickIfDontSpawn();
+      self thread kickIfDontspawn();
     } else if(!level.teamBased && level.console) {
       [
         [level.autoassign]
@@ -3384,18 +3372,14 @@ Callback_PlayerConnect() {
     }
   } else if(self.pers["team"] == "spectator") {
     self setclientdvar("g_scriptMainMenu", game["menu_team"]);
-    [
-      [level.spawnSpectator]
-    ]();
+    [[level.spawnSpectator]]();
     self.sessionteam = "spectator";
     self.sessionstate = "spectator";
   } else {
     self.sessionteam = self.pers["team"];
     self.sessionstate = "dead";
     self updateObjectiveText();
-    [
-      [level.spawnSpectator]
-    ]();
+    [[level.spawnSpectator]]();
     if(isValidClass(self.pers["class"])) {
       self thread[[level.spawnClient]]();
     } else {
@@ -3407,7 +3391,7 @@ Callback_PlayerConnect() {
     return;
 }
 
-forceSpawn() {
+forcespawn() {
   self endon("death");
   self endon("disconnect");
   self endon("spawned");
@@ -3429,7 +3413,7 @@ forceSpawn() {
   self thread[[level.spawnClient]]();
 }
 
-kickIfDontSpawn() {
+kickIfDontspawn() {
   if(self getEntityNumber() == 0) {
     return;
   }
@@ -3485,9 +3469,9 @@ Callback_PlayerDisconnect() {
   lpselfnum = self getEntityNumber();
   lpGuid = self getGuid();
   logPrint("Q;" + lpGuid + ";" + lpselfnum + ";" + self.name + "\n");
-  for (entry = 0; entry < level.players.size; entry++) {
+  for(entry = 0; entry < level.players.size; entry++) {
     if(level.players[entry] == self) {
-      while (entry < level.players.size - 1) {
+      while(entry < level.players.size - 1) {
         level.players[entry] = level.players[entry + 1];
         entry++;
       }
@@ -3495,7 +3479,7 @@ Callback_PlayerDisconnect() {
       break;
     }
   }
-  for (entry = 0; entry < level.players.size; entry++) {
+  for(entry = 0; entry < level.players.size; entry++) {
     if(isDefined(level.players[entry].pers["killed_players"][self.name]))
       level.players[entry].pers["killed_players"][self.name] = undefined;
     if(isDefined(level.players[entry].killedPlayersCurrent[self.name]))
@@ -3509,9 +3493,9 @@ Callback_PlayerDisconnect() {
 }
 
 removePlayerOnDisconnect() {
-  for (entry = 0; entry < level.players.size; entry++) {
+  for(entry = 0; entry < level.players.size; entry++) {
     if(level.players[entry] == self) {
-      while (entry < level.players.size - 1) {
+      while(entry < level.players.size - 1) {
         level.players[entry] = level.players[entry + 1];
         entry++;
       }
@@ -3526,7 +3510,7 @@ isHeadShot(sWeapon, sHitLoc, sMeansOfDeath) {
 }
 
 Callback_VehicleDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, psOffsetTime, damageFromUnderneath, modelIndex, partName) {
-  if(!(level.iDFLAGS_RADIUS & iDFlags)) {
+  if(!(level.iDFLAGS_RADIUS &iDFlags)) {
     iDamage = maps\mp\gametypes\_class::cac_modified_vehicle_damage(self, eAttacker, iDamage, sMeansOfDeath, sWeapon, eInflictor);
   }
   self.iDFlags = iDFlags;
@@ -3551,7 +3535,7 @@ Callback_VehicleDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, s
     else if(isDefined(eInflictor.destructible_type) && isSubStr(eInflictor.destructible_type, "vehicle_"))
       sWeapon = "destructible_car";
   }
-  if(!(iDFlags & level.iDFLAGS_NO_PROTECTION)) {
+  if(!(iDFlags &level.iDFLAGS_NO_PROTECTION)) {
     if(self IsVehicleImmuneToDamage(iDFlags, sMeansOfDeath, sWeapon)) {
       return;
     }
@@ -3671,7 +3655,7 @@ Callback_VehicleRadiusDamage(eInflictor, eAttacker, iDamage, fInnerDamage, fOute
     return;
   }
   friendly = false;
-  if(!(iDFlags & level.iDFLAGS_NO_PROTECTION)) {
+  if(!(iDFlags &level.iDFLAGS_NO_PROTECTION)) {
     if(self IsVehicleImmuneToDamage(iDFlags, sMeansOfDeath, sWeapon)) {
       return;
     }
@@ -3795,7 +3779,7 @@ Callback_ActorDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWe
   if(maps\mp\_dogs::dog_get_dvar_int("debug_dog_attack", "0") == 2) {
     iDamage = 1;
   }
-  if(!(iDFlags & level.iDFLAGS_NO_PROTECTION)) {
+  if(!(iDFlags &level.iDFLAGS_NO_PROTECTION)) {
     if(isPlayer(eAttacker))
       eAttacker.pers["participation"]++;
     prevHealthRatio = self.health / self.maxhealth;
@@ -3939,9 +3923,9 @@ Callback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sW
     }
   }
   prof_end("PlayerDamage flags/tweaks");
-  if(iDFlags & level.iDFLAGS_PENETRATION && eAttacker hasPerk("specialty_bulletpenetration"))
+  if(iDFlags &level.iDFLAGS_PENETRATION && eAttacker hasPerk("specialty_bulletpenetration"))
     self thread maps\mp\gametypes\_battlechatter_mp::perkSpecificBattleChatter("deepimpact", true);
-  if(!(iDFlags & level.iDFLAGS_NO_PROTECTION)) {
+  if(!(iDFlags &level.iDFLAGS_NO_PROTECTION)) {
     if(level.teamBased && isDefined(level.chopper) && isDefined(eAttacker) && eAttacker == level.chopper && eAttacker.team == self.pers["team"]) {
       return;
     }
@@ -4086,7 +4070,7 @@ Callback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sW
   }
   if(getdvarint("scr_hitloc_debug")) {
     if(!isDefined(eAttacker.hitlocInited)) {
-      for (i = 0; i < 6; i++) {
+      for(i = 0; i < 6; i++) {
         eAttacker setClientDvar("ui_hitloc_" + i, "");
       }
       eAttacker.hitlocInited = true;
@@ -4100,8 +4084,8 @@ Callback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sW
       elemcount = 6;
       if(!isDefined(eAttacker.damageInfo)) {
         eAttacker.damageInfo = [];
-        for (i = 0; i < elemcount; i++) {
-          eAttacker.damageInfo[i] = spawnstruct();
+        for(i = 0; i < elemcount; i++) {
+          eAttacker.damageInfo[i] = spawnStruct();
           eAttacker.damageInfo[i].damage = 0;
           eAttacker.damageInfo[i].hitloc = "";
           eAttacker.damageInfo[i].bp = false;
@@ -4111,7 +4095,7 @@ Callback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sW
         eAttacker.damageInfoColorIndex = 0;
         eAttacker.damageInfoVictim = undefined;
       }
-      for (i = elemcount - 1; i > 0; i--) {
+      for(i = elemcount - 1; i > 0; i--) {
         eAttacker.damageInfo[i].damage = eAttacker.damageInfo[i - 1].damage;
         eAttacker.damageInfo[i].hitloc = eAttacker.damageInfo[i - 1].hitloc;
         eAttacker.damageInfo[i].bp = eAttacker.damageInfo[i - 1].bp;
@@ -4120,7 +4104,7 @@ Callback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sW
       }
       eAttacker.damageInfo[0].damage = iDamage;
       eAttacker.damageInfo[0].hitloc = sHitLoc;
-      eAttacker.damageInfo[0].bp = (iDFlags & level.iDFLAGS_PENETRATION);
+      eAttacker.damageInfo[0].bp = (iDFlags &level.iDFLAGS_PENETRATION);
       eAttacker.damageInfo[0].jugg = self hasPerk("specialty_armorvest");
       if(isDefined(eAttacker.damageInfoVictim) && eAttacker.damageInfoVictim != self) {
         eAttacker.damageInfoColorIndex++;
@@ -4129,7 +4113,7 @@ Callback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sW
       }
       eAttacker.damageInfoVictim = self;
       eAttacker.damageInfo[0].colorIndex = eAttacker.damageInfoColorIndex;
-      for (i = 0; i < elemcount; i++) {
+      for(i = 0; i < elemcount; i++) {
         color = "^" + colors[eAttacker.damageInfo[i].colorIndex];
         if(eAttacker.damageInfo[i].hitloc != "") {
           val = color + eAttacker.damageInfo[i].hitloc;
@@ -4428,7 +4412,7 @@ Callback_PlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDi
         if(level.teamBased) {
           prof_begin("PlayerKilled assists");
           if(isDefined(self.attackers)) {
-            for (j = 0; j < self.attackers.size; j++) {
+            for(j = 0; j < self.attackers.size; j++) {
               player = self.attackers[j];
               if(!isDefined(player)) {
                 continue;
@@ -4528,7 +4512,7 @@ Callback_PlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDi
   self.joining_team = undefined;
   self.leaving_team = undefined;
   self thread[[level.onPlayerKilled]](eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime, deathAnimDuration);
-  for (iCB = 0; iCB < level.onPlayerKilledExtraUnthreadedCBs.size; iCB++) {
+  for(iCB = 0; iCB < level.onPlayerKilledExtraUnthreadedCBs.size; iCB++) {
     self[[level.onPlayerKilledExtraUnthreadedCBs[iCB]]](
       eInflictor,
       attacker,
@@ -4564,7 +4548,7 @@ Callback_PlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDi
   }
   if(!self.cancelKillcam && doKillcam && level.killcam) {
     livesLeft = !(level.numLives && !self.pers["lives"]);
-    timeUntilSpawn = TimeUntilSpawn(true);
+    timeUntilSpawn = TimeUntilspawn(true);
     willRespawnImmediately = livesLeft && (timeUntilSpawn <= 0);
     self maps\mp\gametypes\_killcam::killcam(lpattacknum, killcamentity, killcamentityindex, killcamentitystarttime, sWeapon, postDeathDelay + deathTimeOffset, psOffsetTime, willRespawnImmediately, timeUntilRoundEnd(), perks, attacker);
   }
@@ -4698,7 +4682,7 @@ clearLastTankAttacker() {
   self endon("clearLastTankAttacker");
   count = 1;
   wait(3);
-  while (self.health < 99 && count < 10) {
+  while(self.health < 99 && count < 10) {
     wait(1);
     count++;
   }
@@ -4730,13 +4714,13 @@ cancelKillCamOnUse_specificButton(pressingButtonFunc, finishedFunc) {
   self endon("death_delay_finished");
   self endon("disconnect");
   level endon("game_ended");
-  for (;;) {
+  for(;;) {
     if(!self[[pressingButtonFunc]]()) {
       wait(0.05);
       continue;
     }
     buttonTime = 0;
-    while (self[[pressingButtonFunc]]()) {
+    while(self[[pressingButtonFunc]]()) {
       buttonTime += 0.05;
       wait(0.05);
     }
@@ -4744,7 +4728,7 @@ cancelKillCamOnUse_specificButton(pressingButtonFunc, finishedFunc) {
       continue;
     }
     buttonTime = 0;
-    while (!self[[pressingButtonFunc]]() && buttonTime < 0.5) {
+    while(!self[[pressingButtonFunc]]() && buttonTime < 0.5) {
       buttonTime += 0.05;
       wait(0.05);
     }
@@ -4770,7 +4754,7 @@ waitForTimeOrNotifies(desiredDelay) {
 reduceTeamKillsOverTime() {
   timePerOneTeamkillReduction = 20.0;
   reductionPerSecond = 1.0 / timePerOneTeamkillReduction;
-  while (1) {
+  while(1) {
     if(isAlive(self)) {
       self.pers["teamkills_nostats"] -= reductionPerSecond;
       if(self.pers["teamkills_nostats"] < level.minimumAllowedTeamKills) {
@@ -4912,7 +4896,7 @@ getHitLocHeight(sHitLoc) {
 }
 
 debugLine(start, end) {
-  for (i = 0; i < 50; i++) {
+  for(i = 0; i < 50; i++) {
     line(start, end);
     wait .05;
   }
@@ -4965,7 +4949,7 @@ delayStartRagdoll(ent, sHitLoc, vDir, sWeapon, eInflictor, sMeansOfDeath) {
 }
 
 isExcluded(entity, entityList) {
-  for (index = 0; index < entityList.size; index++) {
+  for(index = 0; index < entityList.size; index++) {
     if(entity == entityList[index])
       return true;
   }
@@ -4987,7 +4971,7 @@ leaderDialog(dialog, team, group, excludeList, squadDialog, squadID) {
     return;
   }
   if(isDefined(squadDialog)) {
-    for (i = 0; i < level.players.size; i++) {
+    for(i = 0; i < level.players.size; i++) {
       player = level.players[i];
       playerSquadID = getplayersquadid(player);
       if(isDefined(squadID) && isDefined(playerSquadID) && (isDefined(player.pers["team"]) && (player.pers["team"] == team)) && playerSquadID == squadID && level.squads[team][squadID].size > 1) {
@@ -5002,13 +4986,13 @@ leaderDialog(dialog, team, group, excludeList, squadDialog, squadID) {
         player leaderDialogOnPlayer(dialog, group);
     }
   } else if(isDefined(excludeList)) {
-    for (i = 0; i < level.players.size; i++) {
+    for(i = 0; i < level.players.size; i++) {
       player = level.players[i];
       if((isDefined(player.pers["team"]) && (player.pers["team"] == team)) && !isExcluded(player, excludeList))
         player leaderDialogOnPlayer(dialog, group);
     }
   } else {
-    for (i = 0; i < level.players.size; i++) {
+    for(i = 0; i < level.players.size; i++) {
       player = level.players[i];
       if(isDefined(player.pers["team"]) && (player.pers["team"] == team))
         player leaderDialogOnPlayer(dialog, group);
@@ -5027,7 +5011,7 @@ leaderDialogBothTeams(dialog1, team1, dialog2, team2, group, excludeList) {
     return;
   }
   if(isDefined(excludeList)) {
-    for (i = 0; i < level.players.size; i++) {
+    for(i = 0; i < level.players.size; i++) {
       player = level.players[i];
       team = player.pers["team"];
       if(!isDefined(team)) {
@@ -5042,7 +5026,7 @@ leaderDialogBothTeams(dialog1, team1, dialog2, team2, group, excludeList) {
         player leaderDialogOnPlayer(dialog2, group);
     }
   } else {
-    for (i = 0; i < level.players.size; i++) {
+    for(i = 0; i < level.players.size; i++) {
       player = level.players[i];
       team = player.pers["team"];
       if(!isDefined(team)) {
@@ -5099,7 +5083,7 @@ playLeaderDialogOnPlayer(dialog, team) {
   self.leaderDialogGroup = "";
   if(self.leaderDialogQueue.size > 0) {
     nextDialog = self.leaderDialogQueue[0];
-    for (i = 1; i < self.leaderDialogQueue.size; i++)
+    for(i = 1; i < self.leaderDialogQueue.size; i++)
       self.leaderDialogQueue[i - 1] = self.leaderDialogQueue[i];
     self.leaderDialogQueue[i - 1] = undefined;
     self thread playLeaderDialogOnPlayer(nextDialog, team);
@@ -5110,7 +5094,7 @@ getMostKilledBy() {
   mostKilledBy = "";
   killCount = 0;
   killedByNames = getArrayKeys(self.pers["killed_by"]);
-  for (index = 0; index < killedByNames.size; index++) {
+  for(index = 0; index < killedByNames.size; index++) {
     killedByName = killedByNames[index];
     if(self.pers["killed_by"][killedByName] <= killCount) {
       continue;
@@ -5125,7 +5109,7 @@ getMostKilled() {
   mostKilled = "";
   killCount = 0;
   killedNames = getArrayKeys(self.pers["killed_players"]);
-  for (index = 0; index < killedNames.size; index++) {
+  for(index = 0; index < killedNames.size; index++) {
     killedName = killedNames[index];
     if(self.pers["killed_players"][killedName] <= killCount) {
       continue;
@@ -5139,9 +5123,9 @@ getMostKilled() {
 vehicleCrush() {
   self endon("disconnect");
   if(isDefined(level._effect) && isDefined(level._effect["tanksquish"])) {
-    PlayFX(level._effect["tanksquish"], self.origin + (0, 0, 30));
+    playFX(level._effect["tanksquish"], self.origin + (0, 0, 30));
   }
-  self playsound("human_crunch");
+  self playSound("human_crunch");
 }
 
 GetVehicleProjectileScalar(sWeapon) {

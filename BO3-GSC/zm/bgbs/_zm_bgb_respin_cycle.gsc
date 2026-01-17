@@ -15,21 +15,21 @@
 #namespace zm_bgb_respin_cycle;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_respin_cycle", & __init__, undefined, "bgb");
+  system::register("zm_bgb_respin_cycle", &__init__, undefined, "bgb");
 }
 
 function __init__() {
-  if(!(isdefined(level.bgb_in_use) && level.bgb_in_use)) {
+  if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
-  bgb::register("zm_bgb_respin_cycle", "activated", 2, undefined, undefined, & validation, & activation);
+  bgb::register("zm_bgb_respin_cycle", "activated", 2, undefined, undefined, &validation, &activation);
   clientfield::register("zbarrier", "zm_bgb_respin_cycle", 1, 1, "counter");
 }
 
 function validation() {
-  for (i = 0; i < level.chests.size; i++) {
+  for(i = 0; i < level.chests.size; i++) {
     chest = level.chests[i];
-    if(isdefined(chest.zbarrier.weapon_model) && isdefined(chest.chest_user) && self == chest.chest_user) {
+    if(isDefined(chest.zbarrier.weapon_model) && isDefined(chest.chest_user) && self == chest.chest_user) {
       return true;
     }
   }
@@ -38,9 +38,9 @@ function validation() {
 
 function activation() {
   self endon("disconnect");
-  for (i = 0; i < level.chests.size; i++) {
+  for(i = 0; i < level.chests.size; i++) {
     chest = level.chests[i];
-    if(isdefined(chest.zbarrier.weapon_model) && isdefined(chest.chest_user) && self == chest.chest_user) {
+    if(isDefined(chest.zbarrier.weapon_model) && isDefined(chest.chest_user) && self == chest.chest_user) {
       chest thread function_7a5dc39b(self);
     }
   }
@@ -48,12 +48,12 @@ function activation() {
 
 function function_7a5dc39b(player) {
   self.zbarrier clientfield::increment("zm_bgb_respin_cycle");
-  if(isdefined(self.zbarrier.weapon_model)) {
+  if(isDefined(self.zbarrier.weapon_model)) {
     self.zbarrier.weapon_model notify("kill_respin_think_thread");
   }
   self.no_fly_away = 1;
   self.zbarrier notify("box_hacked_respin");
-  self.zbarrier playsound("zmb_bgb_powerup_respin");
+  self.zbarrier playSound("zmb_bgb_powerup_respin");
   self thread zm_unitrigger::unregister_unitrigger(self.unitrigger_stub);
   zm_utility::play_sound_at_pos("open_chest", self.zbarrier.origin);
   zm_utility::play_sound_at_pos("music_chest", self.zbarrier.origin);
@@ -63,7 +63,7 @@ function function_7a5dc39b(player) {
   if(!level flag::get("moving_chest_now")) {
     self.grab_weapon_hint = 1;
     self.grab_weapon = self.zbarrier.weapon;
-    self thread zm_unitrigger::register_static_unitrigger(self.unitrigger_stub, & zm_magicbox::magicbox_unitrigger_think);
+    self thread zm_unitrigger::register_static_unitrigger(self.unitrigger_stub, &zm_magicbox::magicbox_unitrigger_think);
     self thread zm_magicbox::treasure_chest_timeout();
   }
 }

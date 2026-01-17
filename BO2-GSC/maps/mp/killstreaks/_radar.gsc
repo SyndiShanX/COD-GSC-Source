@@ -30,7 +30,7 @@ init() {
 
   if(maps\mp\gametypes\_tweakables::gettweakablevalue("killstreak", "allowradar")) {
     maps\mp\killstreaks\_killstreaks::registerkillstreak("radar_mp", "radar_mp", "killstreak_spyplane", "uav_used", ::usekillstreakradar);
-    maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("radar_mp", & "KILLSTREAK_EARNED_RADAR", & "KILLSTREAK_RADAR_NOT_AVAILABLE", & "KILLSTREAK_RADAR_INBOUND");
+    maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("radar_mp", &"KILLSTREAK_EARNED_RADAR", &"KILLSTREAK_RADAR_NOT_AVAILABLE", &"KILLSTREAK_RADAR_INBOUND");
     maps\mp\killstreaks\_killstreaks::registerkillstreakdialog("radar_mp", "mpl_killstreak_radar", "kls_u2_used", "", "kls_u2_enemy", "", "kls_u2_ready");
     maps\mp\killstreaks\_killstreaks::registerkillstreakdevdvar("radar_mp", "scr_giveradar");
     maps\mp\killstreaks\_killstreaks::createkillstreaktimer("radar_mp");
@@ -38,7 +38,7 @@ init() {
 
   if(maps\mp\gametypes\_tweakables::gettweakablevalue("killstreak", "allowcounteruav")) {
     maps\mp\killstreaks\_killstreaks::registerkillstreak("counteruav_mp", "counteruav_mp", "killstreak_counteruav", "counteruav_used", ::usekillstreakcounteruav);
-    maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("counteruav_mp", & "KILLSTREAK_EARNED_COUNTERUAV", & "KILLSTREAK_COUNTERUAV_NOT_AVAILABLE", & "KILLSTREAK_COUNTERUAV_INBOUND");
+    maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("counteruav_mp", &"KILLSTREAK_EARNED_COUNTERUAV", &"KILLSTREAK_COUNTERUAV_NOT_AVAILABLE", &"KILLSTREAK_COUNTERUAV_INBOUND");
     maps\mp\killstreaks\_killstreaks::registerkillstreakdialog("counteruav_mp", "mpl_killstreak_radar", "kls_cu2_used", "", "kls_cu2_enemy", "", "kls_cu2_ready");
     maps\mp\killstreaks\_killstreaks::registerkillstreakdevdvar("counteruav_mp", "scr_givecounteruav");
     maps\mp\killstreaks\_killstreaks::createkillstreaktimer("counteruav_mp");
@@ -46,7 +46,7 @@ init() {
 
   if(maps\mp\gametypes\_tweakables::gettweakablevalue("killstreak", "allowradardirection")) {
     maps\mp\killstreaks\_killstreaks::registerkillstreak("radardirection_mp", "radardirection_mp", "killstreak_spyplane_direction", "uav_used", ::usekillstreaksatellite);
-    maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("radardirection_mp", & "KILLSTREAK_EARNED_SATELLITE", & "KILLSTREAK_SATELLITE_NOT_AVAILABLE", & "KILLSTREAK_SATELLITE_INBOUND");
+    maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("radardirection_mp", &"KILLSTREAK_EARNED_SATELLITE", &"KILLSTREAK_SATELLITE_NOT_AVAILABLE", &"KILLSTREAK_SATELLITE_INBOUND");
     maps\mp\killstreaks\_killstreaks::registerkillstreakdialog("radardirection_mp", "mpl_killstreak_satellite", "kls_sat_used", "", "kls_sat_enemy", "", "kls_sat_ready");
     maps\mp\killstreaks\_killstreaks::registerkillstreakdevdvar("radardirection_mp", "scr_giveradardirection");
     maps\mp\killstreaks\_killstreaks::createkillstreaktimer("radardirection_mp");

@@ -28,12 +28,12 @@
 #namespace zm_shadow_zombie;
 
 function autoexec __init__sytem__() {
-  system::register("zm_shadow_zombie", & __init__, undefined, undefined);
+  system::register("zm_shadow_zombie", &__init__, undefined, undefined);
 }
 
 function __init__() {
   register_clientfields();
-  if(!isdefined(level._effect["cursetrap_explosion"])) {
+  if(!isDefined(level._effect["cursetrap_explosion"])) {
     level._effect["cursetrap_explosion"] = "dlc4/genesis/fx_zombie_shadow_trap_exp";
   }
   thread function_71c88f2b();
@@ -49,8 +49,8 @@ function private register_clientfields() {
 function function_1b2b62b() {
   ai_zombie = self;
   var_90bd2712 = zm_elemental_zombie::function_4aeed0a5("shadow");
-  if(!isdefined(level.var_6041e4d5) || var_90bd2712 < level.var_6041e4d5) {
-    if(!isdefined(ai_zombie.is_elemental_zombie) || ai_zombie.is_elemental_zombie == 0) {
+  if(!isDefined(level.var_6041e4d5) || var_90bd2712 < level.var_6041e4d5) {
+    if(!isDefined(ai_zombie.is_elemental_zombie) || ai_zombie.is_elemental_zombie == 0) {
       ai_zombie.is_elemental_zombie = 1;
       ai_zombie.var_9a02a614 = "shadow";
       ai_zombie clientfield::set("shadow_zombie_clientfield_aura_fx", 1);
@@ -64,7 +64,7 @@ function function_1b2b62b() {
 function shadow_zombie_damage_fx() {
   self endon("entityshutdown");
   self endon("death");
-  while (true) {
+  while(true) {
     self waittill("damage");
     if(randomint(100) < 50) {
       self clientfield::increment("shadow_zombie_clientfield_damaged_fx");
@@ -76,7 +76,7 @@ function shadow_zombie_damage_fx() {
 function function_32a2f099() {
   ai_zombie = self;
   ai_zombie waittill("death", attacker);
-  if(!isdefined(ai_zombie) || ai_zombie.nuked === 1) {
+  if(!isDefined(ai_zombie) || ai_zombie.nuked === 1) {
     return;
   }
   v_origin = ai_zombie.origin;
@@ -91,11 +91,11 @@ function function_32a2f099() {
 
 function function_ada13668(v_origin, n_duration, var_526fc172 = 0) {
   if(var_526fc172) {
-    while (function_ab84e253(v_origin, 64)) {
+    while(function_ab84e253(v_origin, 64)) {
       wait(0.25);
     }
   }
-  if(!isdefined(n_duration)) {
+  if(!isDefined(n_duration)) {
     n_duration = randomfloatrange(5, 10);
   }
   e_fx_origin = util::spawn_model("tag_origin", v_origin, vectorscale((-1, 0, 0), 90));
@@ -108,8 +108,8 @@ function function_ada13668(v_origin, n_duration, var_526fc172 = 0) {
 
 function private function_57b55fe1(n_duration) {
   wait(n_duration);
-  if(isdefined(self)) {
-    if(isdefined(self.trigger)) {
+  if(isDefined(self)) {
+    if(isDefined(self.trigger)) {
       self.trigger delete();
     }
     self delete();
@@ -117,21 +117,21 @@ function private function_57b55fe1(n_duration) {
 }
 
 function private function_48fccb59(var_7478a6b4 = undefined) {
-  if(isdefined(var_7478a6b4)) {
+  if(isDefined(var_7478a6b4)) {
     self.trigger = spawn("trigger_radius", self.origin, 2, 40, 50);
   } else {
     self.trigger = spawn("trigger_radius", self.origin, 2, 20, 25);
   }
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     self.trigger waittill("trigger", guy);
-    if(isdefined(self)) {
-      playfx(level._effect["cursetrap_explosion"], self.origin);
-      guy playsound("zmb_zod_cursed_landmine_explode");
+    if(isDefined(self)) {
+      playFX(level._effect["cursetrap_explosion"], self.origin);
+      guy playSound("zmb_zod_cursed_landmine_explode");
       guy dodamage(guy.health / 2, guy.origin, self, self);
-      if(isdefined(var_7478a6b4)) {
+      if(isDefined(var_7478a6b4)) {
         var_7478a6b4.active = 0;
       }
-      if(isdefined(self.trigger)) {
+      if(isDefined(self.trigger)) {
         self.trigger delete();
       }
       self delete();
@@ -143,7 +143,7 @@ function private function_48fccb59(var_7478a6b4 = undefined) {
 function function_ab84e253(v_origin, n_radius) {
   var_5a3ad5d6 = n_radius * n_radius;
   foreach(player in level.activeplayers) {
-    if(isdefined(player) && distance2dsquared(player.origin, v_origin) <= var_5a3ad5d6) {
+    if(isDefined(player) && distance2dsquared(player.origin, v_origin) <= var_5a3ad5d6) {
       return true;
     }
   }
@@ -158,7 +158,7 @@ function function_71c88f2b() {
   adddebugcommand(str_cmd);
   str_cmd = "";
   adddebugcommand(str_cmd);
-  while (true) {
+  while(true) {
     string = getdvarstring("");
     if(string == "") {
       a_zombies = zm_elemental_zombie::function_d41418b8();

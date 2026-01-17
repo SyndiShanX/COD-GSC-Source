@@ -18,20 +18,22 @@ stealth_corpse_enemy_main() {
 }
 
 /************************************************************************************************************/
+
 /*												BEHAVIOR LOOPS												*/
 /************************************************************************************************************/
+
 enemy_Corpse_Loop() {
   self endon("death");
   self endon("pain_death");
 
   self thread enemy_found_corpse_loop();
 
-  while (1) {
+  while(1) {
     self waittill("_stealth_saw_corpse");
 
-    if(!self ent_flag("_stealth_enabled"))
+    if(!self ent_flag("_stealth_enabled")) {
       continue;
-
+    }
     self enemy_saw_corpse_logic();
   }
 }
@@ -47,7 +49,7 @@ enemy_found_corpse_loop() {
     return;
   level endon(spotted_flag);
 
-  while (1) {
+  while(1) {
     self ent_flag_wait("_stealth_enabled");
 
     if(self ent_flag_exist("_stealth_behavior_asleep"))
@@ -57,9 +59,10 @@ enemy_found_corpse_loop() {
 
     if(!self ent_flag("_stealth_enabled"))
       continue;
-    while (self stealth_group_corpse_flag()) {
-      if(!self ent_flag("_stealth_enabled"))
+    while(self stealth_group_corpse_flag()) {
+      if(!self ent_flag("_stealth_enabled")) {
         break;
+      }
 
       self enemy_corpse_found_wrapper();
 
@@ -80,13 +83,13 @@ enemy_saw_corpse_logic() {
 
   level endon(corpse_flag);
 
-  while (1) {
+  while(1) {
     self ent_flag_waitopen("_stealth_enemy_alert_level_action");
 
     self enemy_corpse_saw_wrapper();
 
-    // the only reason we failed - and didn't end this function 
-    // is if we had an alert change so wait to go back to normal 
+    // the only reason we failed - and didn't end this function
+    // is if we had an alert change so wait to go back to normal
     // and then resume looking for the corpse
     self waittill("normal");
   }
@@ -145,8 +148,10 @@ enemy_corpse_reset_wrapper() {
 }
 
 /************************************************************************************************************/
+
 /*												DEFAULT BEHAVIOR											*/
 /************************************************************************************************************/
+
 enemy_corpse_saw_behavior() {
   self.disableArrivals = false;
   self.disableExits = false;
@@ -173,9 +178,9 @@ enemy_corpse_found_behavior() {
 
   node = enemy_find_free_pathnode_near(level._stealth.logic.corpse.last_pos, 512, 40);
 
-  if(!isdefined(node))
+  if(!isDefined(node)) {
     return;
-
+  }
   self thread enemy_runto_and_lookaround(node);
 }
 
@@ -187,8 +192,10 @@ enemy_corpse_reset_behavior() {
 }
 
 /************************************************************************************************************/
+
 /*													LOGIC													*/
 /************************************************************************************************************/
+
 player_can_see_corpse(corpse_location) {
   player = get_closest_player(corpse_location);
   d = distance(player.origin, corpse_location);
@@ -201,7 +208,7 @@ player_can_see_corpse(corpse_location) {
   if(d > level._stealth.logic.corpse.player_distsqrd)
     return false;
 
-  return sightTracePassed((corpse_location + (0, 0, 48)), player geteye(), false, player);
+  return sightTracePassed((corpse_location + (0, 0, 48)), player getEye(), false, player);
 }
 
 enemy_corpse_logic() {
@@ -209,13 +216,13 @@ enemy_corpse_logic() {
   self endon("pain_death");
 
   self thread enemy_corpse_found_loop();
-  while (1) {
+  while(1) {
     if(self ent_flag_exist("_stealth_behavior_asleep"))
       self ent_flag_waitopen("_stealth_behavior_asleep");
 
     self ent_flag_wait("_stealth_enabled");
 
-    while (!self stealth_group_spotted_flag() && !self ent_flag("_stealth_attack")) {
+    while(!self stealth_group_spotted_flag() && !self ent_flag("_stealth_attack")) {
       found = false;
       saw = false;
       corpse = undefined;
@@ -223,16 +230,16 @@ enemy_corpse_logic() {
 
       corpseArray = GetCorpseArray();
 
-      for (i = 0; i < corpseArray.size; i++) {
+      for(i = 0; i < corpseArray.size; i++) {
         corpse = corpseArray[i];
 
-        if(isdefined(corpse.found))
+        if(isDefined(corpse.found)) {
           continue;
-
-        if(!isdefined(level.corpse_behavior_doesnt_require_player_sight))
-          if(!player_can_see_corpse(corpse.origin))
+        }
+        if(!isDefined(level.corpse_behavior_doesnt_require_player_sight))
+          if(!player_can_see_corpse(corpse.origin)) {
             continue;
-
+          }
         distsqrd = distancesquared(self.origin, corpse.origin);
 
         if(self.type != "dog")
@@ -247,14 +254,14 @@ enemy_corpse_logic() {
         }
 
         //that's the only check for finding a guy - now lets see if we just see anyone
-        //and make sure not to make any duplicates...we don't want to notify seeing the 
+        //and make sure not to make any duplicates...we don't want to notify seeing the
         //same corpse multiple times
 
         //have we already seen this guy?
-        if(isdefined(self._stealth.logic.corpse.corpse_entity)) {
-          if(self._stealth.logic.corpse.corpse_entity == corpse)
+        if(isDefined(self._stealth.logic.corpse.corpse_entity)) {
+          if(self._stealth.logic.corpse.corpse_entity == corpse) {
             continue;
-
+          }
           //ok so it's a new guy - is this one closer than the one we already have?
           distsqrd2 = distancesquared(self.origin, self._stealth.logic.corpse.corpse_entity.origin);
           if(distsqrd2 <= distsqrd)
@@ -262,9 +269,9 @@ enemy_corpse_logic() {
         }
 
         //are we close enough to check?
-        if(distsqrd > level._stealth.logic.corpse.sight_distsqrd)
+        if(distsqrd > level._stealth.logic.corpse.sight_distsqrd) {
           continue;
-
+        }
         //ok how about close enough to automatically see one?
         if(distsqrd < level._stealth.logic.corpse.detect_distsqrd) {
           //do we have clear line of sight to the corpse
@@ -278,7 +285,7 @@ enemy_corpse_logic() {
         angles = self gettagangles("tag_eye");
         origin = self getEye();
 
-        sight = anglestoforward(angles);
+        sight = anglesToForward(angles);
         vec_to_corpse = vectornormalize(corpse.origin - origin);
 
         //are we looking towards a corpse
@@ -328,15 +335,15 @@ enemy_corpse_logic() {
 remove_corpse_loop_while_stealth_broken() {
   spotted_flag = self group_get_flagname("_stealth_spotted");
 
-  while (flag(spotted_flag)) {
+  while(flag(spotted_flag)) {
     corpseArray = GetCorpseArray();
 
-    for (i = 0; i < corpseArray.size; i++) {
+    for(i = 0; i < corpseArray.size; i++) {
       corpse = corpseArray[i];
 
-      if(isdefined(corpse.found))
+      if(isDefined(corpse.found)) {
         continue;
-
+      }
       distsqrd = distancesquared(self.origin, corpse.origin);
 
       if(self.type != "dog")
@@ -360,13 +367,13 @@ enemy_corpse_found_loop() {
 
   _flag = self stealth_get_group_corpse_flag();
 
-  while (1) {
+  while(1) {
     level waittill(_flag);
 
     //make sure the flag's not notifying because it's getting cleared
-    if(!self stealth_group_corpse_flag())
+    if(!self stealth_group_corpse_flag()) {
       continue;
-
+    }
     self enemy_corpse_alert_level();
   }
 }
@@ -374,7 +381,7 @@ enemy_corpse_found_loop() {
 enemy_corpse_alert_level() {
   enemy = undefined;
 
-  if(isdefined(self.enemy))
+  if(isDefined(self.enemy))
     enemy = self.enemy;
   else
     enemy = random(level.players);
@@ -382,7 +389,7 @@ enemy_corpse_alert_level() {
   //we want the ai to detect an enemy without actually causing the behavior to happen
   //so we can't use the regular alert function, because that causes a notify
 
-  if(!isdefined(enemy._stealth.logic.spotted_list[self.unique_id]))
+  if(!isDefined(enemy._stealth.logic.spotted_list[self.unique_id]))
     enemy._stealth.logic.spotted_list[self.unique_id] = 0;
 
   //basically take up their alert level each time they see a corpse...but not enough
@@ -432,10 +439,12 @@ enemy_corpse_clear() {
 }
 
 /************************************************************************************************************/
+
 /*													SETUP													*/
 /************************************************************************************************************/
+
 enemy_init() {
-  self._stealth.logic.corpse = spawnstruct();
+  self._stealth.logic.corpse = spawnStruct();
   self._stealth.logic.corpse.corpse_entity = undefined;
 
   self ent_flag_init("_stealth_saw_corpse");
@@ -448,7 +457,6 @@ enemy_init() {
 }
 
 enemy_default_corpse_anim_behavior() {
-
   if(self.type == "dog") {
     self ai_create_behavior_function("animation", "heard_corpse", ::dog_animation_generic);
     self ai_create_behavior_function("animation", "saw_corpse", ::dog_animation_sawcorpse);

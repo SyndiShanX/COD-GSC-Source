@@ -16,7 +16,7 @@
 #namespace zm_theater_amb;
 
 function autoexec __init__sytem__() {
-  system::register("zm_theater_amb", & __init__, undefined, undefined);
+  system::register("zm_theater_amb", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -30,8 +30,8 @@ function main() {
   level thread setup_meteor_audio();
   level thread setup_radio_egg_audio();
   level thread sndzhd_knocker();
-  array::thread_all(getentarray("portrait_egg", "targetname"), & portrait_egg_vox);
-  array::thread_all(getentarray("location_egg", "targetname"), & location_egg_vox);
+  array::thread_all(getEntArray("portrait_egg", "targetname"), &portrait_egg_vox);
+  array::thread_all(getEntArray("location_egg", "targetname"), &location_egg_vox);
   level thread function_8d1c7be1();
   level thread amb_0_zombie();
   var_3a067a8d = struct::get_array("trap_electric", "targetname");
@@ -40,7 +40,7 @@ function main() {
     e_trap thread function_57a1070b();
   }
   level thread function_71554606();
-  level.sndtrapfunc = & function_448d83df;
+  level.sndtrapfunc = &function_448d83df;
   level.b_trap_start_custom_vo = 1;
 }
 
@@ -48,9 +48,9 @@ function amb_0_zombie() {
   level endon("hash_993b920d");
   wait(50);
   var_64ab0444 = getent("amb_0_zombie", "targetname");
-  var_64ab0444 playloopsound(var_64ab0444.script_label);
+  var_64ab0444 playLoopSound(var_64ab0444.script_label);
   wait(35);
-  while (true) {
+  while(true) {
     int = randomintrange(0, 40);
     if(int == 10) {
       var_64ab0444 thread function_ae3642b4();
@@ -70,7 +70,7 @@ function setup_power_on_sfx() {
   sound_emitters = struct::get_array("amb_power", "targetname");
   level flag::wait_till("power_on");
   level thread play_evil_generator_audio();
-  for (i = 0; i < sound_emitters.size; i++) {
+  for(i = 0; i < sound_emitters.size; i++) {
     sound_emitters[i] thread play_emitter();
   }
 }
@@ -80,7 +80,7 @@ function play_emitter() {
   playsoundatposition("amb_circuit", self.origin);
   wait(1);
   soundloop = spawn("script_origin", self.origin);
-  soundloop playloopsound(self.script_sound);
+  soundloop playLoopSound(self.script_sound);
 }
 
 function play_evil_generator_audio() {
@@ -97,13 +97,13 @@ function play_projecter_soundtrack() {
   level waittill("generator_done");
   wait(20);
   speaker = spawn("script_origin", (32, 1216, 592));
-  speaker playloopsound("amb_projecter_soundtrack");
+  speaker playLoopSound("amb_projecter_soundtrack");
 }
 
 function play_projecter_loop() {
   level waittill("generator_done");
   projecter = spawn("script_origin", (-72, -144, 384));
-  projecter playloopsound("amb_projecter");
+  projecter playLoopSound("amb_projecter");
 }
 
 function setup_meteor_audio() {
@@ -118,13 +118,13 @@ function setup_meteor_audio() {
 }
 
 function function_1da885f0() {
-  while (true) {
+  while(true) {
     level waittill("hash_9b53c751", e_player);
     n_variant = level.var_2a0600f - 1;
     if(n_variant < 0) {
       n_variant = 0;
     }
-    if(isdefined(e_player)) {
+    if(isDefined(e_player)) {
       e_player thread zm_audio::create_and_play_dialog("eggs", "meteors", n_variant);
     }
   }
@@ -132,20 +132,20 @@ function function_1da885f0() {
 
 function function_71554606() {
   level flag::wait_till("start_zombie_round_logic");
-  for (i = 0; i < level.players.size; i++) {
+  for(i = 0; i < level.players.size; i++) {
     level.players[i] clientfield::set_to_player("player_dust_mote", 1);
   }
 }
 
 function portrait_egg_vox() {
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   self usetriggerrequirelookat();
   self setcursorhint("HINT_NOICON");
-  while (true) {
+  while(true) {
     self waittill("trigger", player);
-    if(!(isdefined(player.isspeaking) && player.isspeaking)) {
+    if(!(isDefined(player.isspeaking) && player.isspeaking)) {
       break;
     }
   }
@@ -162,14 +162,14 @@ function location_egg_vox() {
 }
 
 function play_radio_egg(delay) {
-  if(isdefined(delay)) {
+  if(isDefined(delay)) {
     wait(delay);
   }
-  if(isdefined(self.target)) {
+  if(isDefined(self.target)) {
     s_target = struct::get(self.target, "targetname");
     playsoundatposition("vox_kino_radio_" + level.radio_egg_counter, s_target.origin);
   } else {
-    self playsound("vox_kino_radio_" + level.radio_egg_counter);
+    self playSound("vox_kino_radio_" + level.radio_egg_counter);
   }
   level.radio_egg_counter++;
 }
@@ -177,11 +177,11 @@ function play_radio_egg(delay) {
 function setup_radio_egg_audio() {
   wait(1);
   level.radio_egg_counter = 0;
-  array::thread_all(getentarray("audio_egg_radio", "targetname"), & radio_egg_trigger);
+  array::thread_all(getEntArray("audio_egg_radio", "targetname"), &radio_egg_trigger);
 }
 
 function radio_egg_trigger() {
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   self waittill("trigger", who);
@@ -198,18 +198,18 @@ function function_8d1c7be1() {
 function function_57a1070b() {
   level flag::wait_till("power_on");
   str_exploder_name = self.target + "_flashes";
-  while (true) {
+  while(true) {
     self waittill("trap_done");
     exploder::exploder(str_exploder_name);
   }
 }
 
 function function_448d83df(trap, b_start) {
-  if(!(isdefined(b_start) && b_start)) {
+  if(!(isDefined(b_start) && b_start)) {
     return;
   }
   player = trap.activated_by_player;
-  if(isdefined(trap._trap_type) && trap._trap_type == "fire") {
+  if(isDefined(trap._trap_type) && trap._trap_type == "fire") {
     return;
   }
   player zm_audio::create_and_play_dialog("trap", "start");
@@ -217,23 +217,23 @@ function function_448d83df(trap, b_start) {
 
 function sndzhd_knocker() {
   var_8e7ce497 = getent("sndzhd_knocker", "targetname");
-  if(!isdefined(var_8e7ce497)) {
+  if(!isDefined(var_8e7ce497)) {
     return;
   }
-  while (true) {
+  while(true) {
     wait(randomintrange(60, 180));
     var_adc6a71a = level function_57f2b10e(var_8e7ce497);
-    if(!(isdefined(var_adc6a71a) && var_adc6a71a)) {
+    if(!(isDefined(var_adc6a71a) && var_adc6a71a)) {
       continue;
     }
     wait(1);
     var_adc6a71a = level function_57f2b10e(var_8e7ce497);
-    if(!(isdefined(var_adc6a71a) && var_adc6a71a)) {
+    if(!(isDefined(var_adc6a71a) && var_adc6a71a)) {
       continue;
     }
     wait(1);
     var_adc6a71a = level function_57f2b10e(var_8e7ce497);
-    if(!(isdefined(var_adc6a71a) && var_adc6a71a)) {
+    if(!(isDefined(var_adc6a71a) && var_adc6a71a)) {
       continue;
     }
     break;
@@ -249,10 +249,10 @@ function function_57f2b10e(var_8e7ce497) {
 }
 
 function function_5c13c705(var_6140b6dd, var_8e7ce497) {
-  for (var_918879b9 = 0; var_918879b9 < 3; var_918879b9++) {
+  for(var_918879b9 = 0; var_918879b9 < 3; var_918879b9++) {
     wait(1.5);
-    for (n_count = 0; n_count < var_6140b6dd[var_918879b9]; n_count++) {
-      var_8e7ce497 playsound("zmb_zhd_knocker_door");
+    for(n_count = 0; n_count < var_6140b6dd[var_918879b9]; n_count++) {
+      var_8e7ce497 playSound("zmb_zhd_knocker_door");
       wait(0.75);
     }
   }
@@ -270,18 +270,18 @@ function function_7f30e34a(var_6140b6dd, var_8e7ce497) {
 
 function function_47cc6622(var_6140b6dd, var_8e7ce497) {
   level endon("zhd_knocker_timeout");
-  for (var_918879b9 = 0; var_918879b9 < 3; var_918879b9++) {
+  for(var_918879b9 = 0; var_918879b9 < 3; var_918879b9++) {
     level thread function_e497b291(3000);
     n_count = 0;
-    while (n_count < var_6140b6dd[var_918879b9]) {
+    while(n_count < var_6140b6dd[var_918879b9]) {
       var_8e7ce497 waittill("damage", damage, attacker, dir, loc, str_type, model, tag, part, weapon, flags);
-      if(!isdefined(attacker) || !isplayer(attacker)) {
+      if(!isDefined(attacker) || !isplayer(attacker)) {
         continue;
       }
-      if(isdefined(str_type) && str_type != "MOD_MELEE") {
+      if(isDefined(str_type) && str_type != "MOD_MELEE") {
         continue;
       }
-      var_8e7ce497 playsound("zmb_zhd_knocker_plr");
+      var_8e7ce497 playSound("zmb_zhd_knocker_plr");
       level notify("hash_a5e68e5c");
       n_count++;
       level thread function_e497b291(1000);
@@ -300,7 +300,7 @@ function function_e497b291(n_max) {
   level endon("zhd_knocker_success");
   var_c9cd8e88 = gettime();
   n_max = n_max + var_c9cd8e88;
-  while (gettime() < n_max) {
+  while(gettime() < n_max) {
     wait(0.05);
   }
   level notify("zhd_knocker_timeout");
@@ -326,8 +326,8 @@ function function_314be731() {
 }
 
 function function_702e84d0() {
-  for (n_count = 0; n_count < 6; n_count++) {
-    self playsound("zmb_zhd_knocker_door");
+  for(n_count = 0; n_count < 6; n_count++) {
+    self playSound("zmb_zhd_knocker_door");
     wait(0.25);
   }
 }

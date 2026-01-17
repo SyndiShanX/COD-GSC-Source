@@ -11,7 +11,7 @@ main() {
   self endon("killanimscript");
   self SetAimAnimWeights(0, 0);
   self thread lookAtTarget("attackIdle");
-  while (1) {
+  while(1) {
     if(shouldAttackIdle()) {
       self randomAttackIdle();
       maps\mp\animscripts\shared::DoNoteTracks("done");

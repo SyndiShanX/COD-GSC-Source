@@ -128,10 +128,10 @@ function init() {
 
 function function_ce931b57(name, type, looping = 0, fadeout = 0.5) {
   assert(type < 128, "");
-  if(!isdefined(level.var_4a6df8b3)) {
+  if(!isDefined(level.var_4a6df8b3)) {
     level.var_4a6df8b3 = [];
   }
-  sfx = spawnstruct();
+  sfx = spawnStruct();
   sfx.name = name;
   sfx.looping = looping;
   sfx.fadeout = fadeout;
@@ -139,17 +139,17 @@ function function_ce931b57(name, type, looping = 0, fadeout = 0.5) {
 }
 
 function function_736ce6da(type) {
-  assert(isdefined(level.var_4a6df8b3[type]), "");
+  assert(isDefined(level.var_4a6df8b3[type]), "");
   return level.var_4a6df8b3[type].name;
 }
 
 function function_72f9305c(type) {
-  assert(isdefined(level.var_4a6df8b3[type]), "");
+  assert(isDefined(level.var_4a6df8b3[type]), "");
   return level.var_4a6df8b3[type].looping;
 }
 
 function function_229b9d9e(type) {
-  assert(isdefined(level.var_4a6df8b3[type]), "");
+  assert(isDefined(level.var_4a6df8b3[type]), "");
   return level.var_4a6df8b3[type].fadeout;
 }
 
@@ -158,21 +158,21 @@ function function_1f085aea(localclientnum, type, off) {
     return;
   }
   self endon("entityshutdown");
-  while (!clienthassnapshot(localclientnum)) {
+  while(!clienthassnapshot(localclientnum)) {
     wait(0.016);
   }
-  while (!self hasdobj(localclientnum)) {
+  while(!self hasdobj(localclientnum)) {
     wait(0.016);
   }
   looping = function_72f9305c(type);
   alias = function_736ce6da(type);
   if(!off) {
     if(!looping) {
-      self playsound(localclientnum, alias);
+      self playSound(localclientnum, alias);
     } else {
-      self.var_7aa99fd0 = self playloopsound(alias);
+      self.var_7aa99fd0 = self playLoopSound(alias);
     }
-  } else if(looping && isdefined(self.var_7aa99fd0)) {
+  } else if(looping && isDefined(self.var_7aa99fd0)) {
     self stoploopsound(self.var_7aa99fd0, function_229b9d9e(type));
     self.var_7aa99fd0 = undefined;
   }

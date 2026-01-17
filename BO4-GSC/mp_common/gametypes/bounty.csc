@@ -10,7 +10,6 @@
 #include scripts\killstreaks\mp\killstreak_vehicle;
 #include scripts\mp_common\dynamic_loadout;
 #include scripts\mp_common\laststand;
-
 #namespace bounty;
 
 event_handler[gametype_init] main(eventstruct) {
@@ -24,7 +23,7 @@ event_handler[gametype_init] main(eventstruct) {
   vehicle::add_vehicletype_callback(#"vehicle_t8_mil_helicopter_swat_transport", &spawned);
 }
 
-private function_44cacd61(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+function_44cacd61(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     self function_cf7d552d(localclientnum);
     return;
@@ -43,7 +42,7 @@ function_3a4e5f28() {
   self notify(#"hash_eca936d9bc271de");
 }
 
-private function_f7842f51(localclientnum) {
+function_f7842f51(localclientnum) {
   if(!isDefined(self)) {
     return;
   }
@@ -55,8 +54,8 @@ private function_f7842f51(localclientnum) {
   self thread function_bd48b229(localclientnum, activefx);
 }
 
-private function_bd48b229(localclientnum, fxarray) {
-  self waittill(#"hash_eca936d9bc271de", #"death");
+function_bd48b229(localclientnum, fxarray) {
+  self waittill(#"hash_eca936d9bc271de", # "death");
 
   if(isDefined(fxarray)) {
     foreach(fx in fxarray) {
@@ -76,7 +75,7 @@ function_a1b40aa4(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 spawned(localclientnum, killstreak_duration) {
   if(localclientnum === 0) {
-    if(self.team === #"neutral") {
+    if(self.team === # "neutral") {
       self.var_22a05c26 = level.var_c80088b7;
     }
   }

@@ -52,7 +52,7 @@ init() {
 sq_easy_cleanup() {
   computer_buildable_trig = getent("sq_common_buildable_trigger", "targetname");
   computer_buildable_trig delete();
-  sq_buildables = getentarray("buildable_sq_common", "targetname");
+  sq_buildables = getEntArray("buildable_sq_common", "targetname");
 
   foreach(item in sq_buildables)
   item delete();
@@ -125,8 +125,7 @@ sidequest_logic() {
   maxissay("vox_maxi_turbine_terminal_0", (11360, 8489, -576));
 }
 
-complete_sidequest() {
-}
+complete_sidequest() {}
 
 sidequest_main() {
   sidequest_init_tracker();
@@ -607,8 +606,7 @@ richtofen_sidequest_b() {
 
     level.sq_progress["rich"]["B_zombies_tower"]--;
 
-    if(level.sq_progress["rich"]["B_zombies_tower"] > 0) {
-    }
+    if(level.sq_progress["rich"]["B_zombies_tower"] > 0) {}
   }
 
   level thread richtofensay("vox_zmba_sidequest_blow_nomag_0");
@@ -1116,16 +1114,16 @@ avogadro_at_tower() {
 
 droppowerup(story) {
   center_struct = getstruct("sq_common_tower_fx", "targetname");
-  trace = bullettrace(center_struct.origin, center_struct.origin - vectorscale((0, 0, 1), 999999.0), 0, undefined);
+  trace = bulletTrace(center_struct.origin, center_struct.origin - vectorscale((0, 0, 1), 999999.0), 0, undefined);
   poweruporigin = trace["position"] + vectorscale((0, 0, 1), 25.0);
   mintime = 240;
   maxtime = 720;
 
   while(true) {
     trail = spawn("script_model", center_struct.origin);
-    trail setmodel("tag_origin");
+    trail setModel("tag_origin");
     wait 0.5;
-    playfxontag(level._effect[story + "_sparks"], trail, "tag_origin");
+    playFXOnTag(level._effect[story + "_sparks"], trail, "tag_origin");
     trail moveto(poweruporigin, 10);
     trail waittill("movedone");
     level thread droppoweruptemptation(story, poweruporigin);
@@ -1255,7 +1253,7 @@ navcomputer_waitfor_navcard() {
     if(isplayer(who) && is_player_valid(who)) {
       if(does_player_have_correct_navcard(who)) {
         navcomputer_use_trig sethintstring(&"ZOMBIE_NAVCARD_SUCCESS");
-        who playsound("zmb_sq_navcard_success");
+        who playSound("zmb_sq_navcard_success");
         update_sidequest_stats("navcard_applied_zm_transit");
         return;
       } else {

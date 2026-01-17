@@ -27,16 +27,16 @@
 
 function autoexec init() {
   initastrobehaviorsandasm();
-  spawner::add_archetype_spawn_function("astronaut", & archetypeastroblackboardinit);
-  spawner::add_archetype_spawn_function("astronaut", & astrospawnsetup);
-  animationstatenetwork::registernotetrackhandlerfunction("headbutt_start", & astro_zombie_headbutt_release);
-  animationstatenetwork::registernotetrackhandlerfunction("astro_melee", & astro_zombie_headbutt);
+  spawner::add_archetype_spawn_function("astronaut", &archetypeastroblackboardinit);
+  spawner::add_archetype_spawn_function("astronaut", &astrospawnsetup);
+  animationstatenetwork::registernotetrackhandlerfunction("headbutt_start", &astro_zombie_headbutt_release);
+  animationstatenetwork::registernotetrackhandlerfunction("astro_melee", &astro_zombie_headbutt);
   init_astro_zombie_fx();
-  if(!isdefined(level.astro_zombie_enter_level)) {
-    level.astro_zombie_enter_level = & astro_zombie_default_enter_level;
+  if(!isDefined(level.astro_zombie_enter_level)) {
+    level.astro_zombie_enter_level = &astro_zombie_default_enter_level;
   }
   level.num_astro_zombies = 0;
-  level.astro_zombie_spawners = getentarray("astronaut_zombie", "targetname");
+  level.astro_zombie_spawners = getEntArray("astronaut_zombie", "targetname");
   level.max_astro_zombies = 1;
   level.astro_zombie_health_mult = 4;
   level.min_astro_round_wait = 1;
@@ -52,23 +52,23 @@ function autoexec init() {
   level.astro_headbutt_delay = 2000;
   level.astro_headbutt_radius_sqr = 4096;
   level.zombie_total_update = 0;
-  level.zombie_total_set_func = & astro_zombie_total_update;
-  zm_spawner::register_zombie_damage_callback( & astro_damage_callback);
-  while (!isdefined(level.custom_ai_spawn_check_funcs)) {
+  level.zombie_total_set_func = &astro_zombie_total_update;
+  zm_spawner::register_zombie_damage_callback(&astro_damage_callback);
+  while(!isDefined(level.custom_ai_spawn_check_funcs)) {
     wait(0.05);
   }
-  zm::register_custom_ai_spawn_check("astro", & astro_spawn_check, & get_astro_spawners, & get_astro_locations);
+  zm::register_custom_ai_spawn_check("astro", &astro_spawn_check, &get_astro_spawners, &get_astro_locations);
 }
 
 function archetypeastroblackboardinit() {
   blackboard::createblackboardforentity(self);
   self aiutility::registerutilityblackboardattributes();
   ai::createinterfaceforentity(self);
-  blackboard::registerblackboardattribute(self, "_locomotion_speed", "locomotion_speed_walk", & zombiebehavior::bb_getlocomotionspeedtype);
+  blackboard::registerblackboardattribute(self, "_locomotion_speed", "locomotion_speed_walk", &zombiebehavior::bb_getlocomotionspeedtype);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  self.___archetypeonanimscriptedcallback = & archetypeastroonanimscriptedcallback;
+  self.___archetypeonanimscriptedcallback = &archetypeastroonanimscriptedcallback;
   self finalizetrackedblackboardattributes();
 }
 
@@ -78,8 +78,8 @@ function private archetypeastroonanimscriptedcallback(entity) {
 }
 
 function private initastrobehaviorsandasm() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("astroTargetService", & astrotargetservice);
-  behaviortreenetworkutility::registerbehaviortreeaction("moonAstroProceduralTraversal", & astrotraversestart, & robotsoldierbehavior::robotproceduraltraversalupdate, & astrotraverseend);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("astroTargetService", &astrotargetservice);
+  behaviortreenetworkutility::registerbehaviortreeaction("moonAstroProceduralTraversal", &astrotraversestart, &robotsoldierbehavior::robotproceduraltraversalupdate, &astrotraverseend);
 }
 
 function astrospawnsetup() {
@@ -88,21 +88,19 @@ function astrospawnsetup() {
 }
 
 function astrotargetservice(entity) {
-  if(isdefined(entity.ignoreall) && entity.ignoreall) {
+  if(isDefined(entity.ignoreall) && entity.ignoreall) {
     return false;
   }
   player = zombie_utility::get_closest_valid_player(self.origin, self.ignore_player);
   entity.favoriteenemy = player;
-  if(!isdefined(player) || player isnotarget()) {
-    if(isdefined(entity.ignore_player)) {
-      if(isdefined(level._should_skip_ignore_player_logic) && [
-          [level._should_skip_ignore_player_logic]
-        ]()) {
+  if(!isDefined(player) || player isnotarget()) {
+    if(isDefined(entity.ignore_player)) {
+      if(isDefined(level._should_skip_ignore_player_logic) && [[level._should_skip_ignore_player_logic]]()) {
         return;
       }
       entity.ignore_player = [];
     }
-    if(isdefined(level.no_target_override)) {
+    if(isDefined(level.no_target_override)) {
       [
         [level.no_target_override]
       ](entity);
@@ -111,21 +109,19 @@ function astrotargetservice(entity) {
     }
     return false;
   }
-  if(isdefined(level.enemy_location_override_func)) {
-    enemy_ground_pos = [
-      [level.enemy_location_override_func]
-    ](entity, player);
-    if(isdefined(enemy_ground_pos)) {
+  if(isDefined(level.enemy_location_override_func)) {
+    enemy_ground_pos = [[level.enemy_location_override_func]](entity, player);
+    if(isDefined(enemy_ground_pos)) {
       entity setgoal(enemy_ground_pos);
       return true;
     }
   }
   targetpos = getclosestpointonnavmesh(player.origin, 15, 15);
-  if(isdefined(targetpos)) {
+  if(isDefined(targetpos)) {
     entity setgoal(targetpos);
     return true;
   }
-  if(isdefined(player.last_valid_position)) {
+  if(isDefined(player.last_valid_position)) {
     entity setgoal(player.last_valid_position);
     return true;
   }
@@ -134,16 +130,16 @@ function astrotargetservice(entity) {
 }
 
 function astro_spawn_check() {
-  if(isdefined(level.zm_loc_types["astro_location"]) && level.zm_loc_types["astro_location"].size <= 0) {
+  if(isDefined(level.zm_loc_types["astro_location"]) && level.zm_loc_types["astro_location"].size <= 0) {
     return false;
   }
   if(!(level.round_number >= level.next_astro_round && level.num_astro_zombies < level.max_astro_zombies)) {
     return false;
   }
-  if(!(isdefined(level.on_the_moon) && level.on_the_moon)) {
+  if(!(isDefined(level.on_the_moon) && level.on_the_moon)) {
     return false;
   }
-  if(!(isdefined(level.zombie_total_update) && level.zombie_total_update)) {
+  if(!(isDefined(level.zombie_total_update) && level.zombie_total_update)) {
     return false;
   }
   if(level.zombie_total > level.zombies_left_before_astro_spawn) {
@@ -187,10 +183,10 @@ function astro_prespawn() {
   self.no_powerups = 1;
   self.no_gib = 1;
   self.ignorelocationaldamage = 1;
-  self.actor_damage_func = & astro_actor_damage;
-  self.nuke_damage_func = & astro_nuke_damage;
-  self.custom_damage_func = & astro_custom_damage;
-  self.microwavegun_sizzle_func = & astro_microwavegun_sizzle;
+  self.actor_damage_func = &astro_actor_damage;
+  self.nuke_damage_func = &astro_nuke_damage;
+  self.custom_damage_func = &astro_custom_damage;
+  self.microwavegun_sizzle_func = &astro_microwavegun_sizzle;
   self.ignore_cleanup_mgr = 1;
   self.ignore_distance_tracking = 1;
   self.ignore_enemy_count = 1;
@@ -215,14 +211,14 @@ function init_astro_zombie_fx() {
 
 function astro_zombie_spawn(astro_zombie) {
   self.script_moveoverride = 1;
-  if(!isdefined(level.num_astro_zombies)) {
+  if(!isDefined(level.num_astro_zombies)) {
     level.num_astro_zombies = 0;
   }
   level.num_astro_zombies++;
   astro_zombie.has_legs = 1;
   self.count = 100;
   playsoundatposition("evt_astro_spawn", self.origin);
-  astro_zombie.deathfunction = & astro_zombie_die;
+  astro_zombie.deathfunction = &astro_zombie_die;
   astro_zombie.animname = "astro_zombie";
   astro_zombie.loopsound = "evt_astro_gasmask_loop";
   astro_zombie thread astro_zombie_think();
@@ -249,25 +245,25 @@ function astro_zombie_think() {
   self.maxsightdistsqrd = 9216;
   self.zombie_move_speed = "walk";
   self thread[[level.astro_zombie_enter_level]]();
-  if(isdefined(level.astro_zombie_custom_think)) {
+  if(isDefined(level.astro_zombie_custom_think)) {
     self thread[[level.astro_zombie_custom_think]]();
   }
   self thread astro_zombie_headbutt_think();
-  self playloopsound(self.loopsound);
+  self playLoopSound(self.loopsound);
 }
 
 function astro_zombie_headbutt_think() {
   self endon("death");
   self.is_headbutt = 0;
   self.next_headbutt_time = gettime() + level.astro_headbutt_delay;
-  while (true) {
-    if(!isdefined(self.enemy)) {
+  while(true) {
+    if(!isDefined(self.enemy)) {
       wait(0.05);
       continue;
     }
     if(!self.is_headbutt && gettime() > self.next_headbutt_time) {
-      origin = self geteye();
-      test_origin = self.enemy geteye();
+      origin = self getEye();
+      test_origin = self.enemy getEye();
       dist_sqr = distancesquared(origin, test_origin);
       if(dist_sqr > level.astro_headbutt_radius_sqr) {
         wait(0.05);
@@ -350,13 +346,13 @@ function lerp_player_view_to_position(origin, angles, lerptime, fraction, right_
   linker = spawn("script_origin", (0, 0, 0));
   linker.origin = self.origin;
   linker.angles = self getplayerangles();
-  if(isdefined(hit_geo)) {
+  if(isDefined(hit_geo)) {
     self playerlinkto(linker, "", fraction, right_arc, left_arc, top_arc, bottom_arc, hit_geo);
   } else {
-    if(isdefined(right_arc)) {
+    if(isDefined(right_arc)) {
       self playerlinkto(linker, "", fraction, right_arc, left_arc, top_arc, bottom_arc);
     } else {
-      if(isdefined(fraction)) {
+      if(isDefined(fraction)) {
         self playerlinkto(linker, "", fraction);
       } else {
         self playerlinkto(linker);
@@ -379,7 +375,7 @@ function astro_watch_controls(astro) {
 }
 
 function astro_zombie_headbutt(entity) {
-  if(!isdefined(entity.player_to_headbutt) || !zombie_utility::is_player_valid(entity.player_to_headbutt)) {
+  if(!isDefined(entity.player_to_headbutt) || !zombie_utility::is_player_valid(entity.player_to_headbutt)) {
     return;
   }
   entity thread astro_zombie_attack();
@@ -389,7 +385,7 @@ function astro_zombie_headbutt(entity) {
 function astro_zombie_headbutt_release(entity) {
   _release_dist = 59;
   player = entity.player_to_headbutt;
-  if(!isdefined(player) || !isalive(player)) {
+  if(!isDefined(player) || !isalive(player)) {
     return;
   }
   dist = distance(player.origin, entity.origin);
@@ -406,20 +402,20 @@ function astro_zombie_headbutt_release(entity) {
 
 function astro_zombie_attack() {
   self endon("death");
-  if(!isdefined(self.player_to_headbutt)) {
+  if(!isDefined(self.player_to_headbutt)) {
     return;
   }
   player = self.player_to_headbutt;
   perk_list = [];
-  vending_triggers = getentarray("zombie_vending", "targetname");
-  for (i = 0; i < vending_triggers.size; i++) {
+  vending_triggers = getEntArray("zombie_vending", "targetname");
+  for(i = 0; i < vending_triggers.size; i++) {
     perk = vending_triggers[i].script_noteworthy;
     if(player hasperk(perk)) {
       perk_list[perk_list.size] = perk;
     }
   }
   take_perk = 0;
-  if(perk_list.size > 0 && !isdefined(player._retain_perks)) {
+  if(perk_list.size > 0 && !isDefined(player._retain_perks)) {
     take_perk = 1;
     perk_list = array::randomize(perk_list);
     perk = perk_list[0];
@@ -440,7 +436,7 @@ function astro_headbutt_damage(astro, org) {
   self endon("disconnect");
   self waittill("perk_lost");
   damage = self.health - 1;
-  if(isdefined(astro)) {
+  if(isDefined(astro)) {
     self dodamage(damage, astro.origin, astro);
   } else {
     self dodamage(damage, org);
@@ -452,20 +448,18 @@ function astro_zombie_teleport_enemy() {
   player = self.player_to_headbutt;
   black_hole_teleport_structs = struct::get_array("struct_black_hole_teleport", "targetname");
   chosen_spot = undefined;
-  if(isdefined(level._special_blackhole_bomb_structs)) {
-    black_hole_teleport_structs = [
-      [level._special_blackhole_bomb_structs]
-    ]();
+  if(isDefined(level._special_blackhole_bomb_structs)) {
+    black_hole_teleport_structs = [[level._special_blackhole_bomb_structs]]();
   }
   player_current_zone = player zm_utility::get_current_zone();
-  if(!isdefined(black_hole_teleport_structs) || black_hole_teleport_structs.size == 0 || !isdefined(player_current_zone)) {
+  if(!isDefined(black_hole_teleport_structs) || black_hole_teleport_structs.size == 0 || !isDefined(player_current_zone)) {
     return;
   }
   black_hole_teleport_structs = array::randomize(black_hole_teleport_structs);
-  for (i = 0; i < black_hole_teleport_structs.size; i++) {
+  for(i = 0; i < black_hole_teleport_structs.size; i++) {
     volume = level.zones[black_hole_teleport_structs[i].script_string].volumes[0];
     zone_enabled = zm_zonemgr::get_zone_from_position(black_hole_teleport_structs[i].origin, 0);
-    if(isdefined(zone_enabled) && player_current_zone != black_hole_teleport_structs[i].script_string) {
+    if(isDefined(zone_enabled) && player_current_zone != black_hole_teleport_structs[i].script_string) {
       if(!level flag::get("power_on") || volume.script_string == "lowgravity") {
         chosen_spot = black_hole_teleport_structs[i];
         break;
@@ -474,18 +468,18 @@ function astro_zombie_teleport_enemy() {
       }
       continue;
     }
-    if(isdefined(zone_enabled)) {
+    if(isDefined(zone_enabled)) {
       chosen_spot = black_hole_teleport_structs[i];
     }
   }
-  if(isdefined(chosen_spot)) {
+  if(isDefined(chosen_spot)) {
     player thread astro_zombie_teleport(chosen_spot);
   }
 }
 
 function astro_zombie_teleport(struct_dest) {
   self endon("death");
-  if(!isdefined(struct_dest)) {
+  if(!isDefined(struct_dest)) {
     return;
   }
   prone_offset = vectorscale((0, 0, 1), 49);
@@ -501,7 +495,7 @@ function astro_zombie_teleport(struct_dest) {
       destination = struct_dest.origin + stand_offset;
     }
   }
-  if(isdefined(level._black_hole_teleport_override)) {
+  if(isDefined(level._black_hole_teleport_override)) {
     level[[level._black_hole_teleport_override]](self);
   }
   self freezecontrols(1);
@@ -518,9 +512,9 @@ function astro_zombie_teleport(struct_dest) {
 }
 
 function astro_zombie_die(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime) {
-  playfxontag(level._effect["astro_explosion"], self, "J_SpineLower");
+  playFXOnTag(level._effect["astro_explosion"], self, "J_SpineLower");
   self stoploopsound(1);
-  self playsound("evt_astro_zombie_explo");
+  self playSound("evt_astro_zombie_explo");
   self thread astro_delay_delete();
   self thread astro_player_pulse();
   level.num_astro_zombies--;
@@ -541,11 +535,11 @@ function astro_delay_delete() {
 }
 
 function astro_player_pulse() {
-  eye_org = self geteye();
+  eye_org = self getEye();
   foot_org = self.origin + vectorscale((0, 0, 1), 8);
   mid_org = (foot_org[0], foot_org[1], (foot_org[2] + eye_org[2]) / 2);
   astro_org = self.origin;
-  if(isdefined(self.player_to_headbutt)) {
+  if(isDefined(self.player_to_headbutt)) {
     self.player_to_headbutt allowjump(1);
     self.player_to_headbutt allowprone(1);
     self.player_to_headbutt allowcrouch(1);
@@ -554,12 +548,12 @@ function astro_player_pulse() {
     wait(0.05);
   }
   players = getplayers();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     player = players[i];
     if(!zombie_utility::is_player_valid(player)) {
       continue;
     }
-    test_org = player geteye();
+    test_org = player getEye();
     explode_radius = level.astro_explode_radius;
     if(distancesquared(eye_org, test_org) > (explode_radius * explode_radius)) {
       continue;
@@ -587,7 +581,7 @@ function astro_player_pulse() {
     player setorigin(player.origin + (0, 0, 1));
     player_velocity = dir;
     player setvelocity(player_velocity);
-    if(isdefined(level.ai_astro_explode)) {
+    if(isDefined(level.ai_astro_explode)) {
       player thread[[level.ai_astro_explode]](mid_org);
     }
   }
@@ -623,7 +617,7 @@ function astro_microwavegun_sizzle(player) {
 }
 
 function astro_zombie_default_enter_level() {
-  playfx(level._effect["astro_spawn"], self.origin);
+  playFX(level._effect["astro_spawn"], self.origin);
   playsoundatposition("zmb_bolt", self.origin);
   players = getplayers();
   players[randomintrange(0, players.size)] thread zm_audio::create_and_play_dialog("general", "astro_spawn");
@@ -631,7 +625,7 @@ function astro_zombie_default_enter_level() {
 }
 
 function astro_damage_callback(mod, hit_location, hit_origin, player, amount, weapon, direction_vec, tagname, modelname, partname, dflags, inflictor, chargelevel) {
-  if(isdefined(self.animname) && self.animname == "astro_zombie") {
+  if(isDefined(self.animname) && self.animname == "astro_zombie") {
     return true;
   }
   return false;
@@ -639,14 +633,14 @@ function astro_damage_callback(mod, hit_location, hit_origin, player, amount, we
 
 function _debug_astro_health_watch() {
   self endon("death");
-  while (true) {
+  while(true) {
     iprintln("" + self.health);
     wait(1);
   }
 }
 
 function _debug_astro_print(str) {
-  if(isdefined(level.debug_astro) && level.debug_astro) {
+  if(isDefined(level.debug_astro) && level.debug_astro) {
     iprintln(str);
   }
 }

@@ -370,10 +370,10 @@ main(bscriptgened, bcsvgened, bsgenabled) {
   thread maps\_minefields::main();
   thread maps\_endmission::main();
   maps\_friendlyfire::main();
-  level array_ent_thread(getentarray("badplace", "targetname"), ::badplace_think);
-  array_delete(getentarray("delete_on_load", "targetname"));
+  level array_ent_thread(getEntArray("badplace", "targetname"), ::badplace_think);
+  array_delete(getEntArray("delete_on_load", "targetname"));
   setup_traversals();
-  array_thread(getentarray("water", "targetname"), ::waterthink);
+  array_thread(getEntArray("water", "targetname"), ::waterthink);
   thread maps\_interactive_objects::main();
   thread maps\_audio::main();
   thread maps\_collectibles::main();
@@ -388,7 +388,7 @@ main(bscriptgened, bcsvgened, bsgenabled) {
   level.spawn_funcs["neutral"] = [];
   thread maps\_spawner::goalvolumes();
   update_script_forcespawn_based_on_flags();
-  trigs = getentarray("explodable_volume", "targetname");
+  trigs = getEntArray("explodable_volume", "targetname");
   array_thread(trigs, ::explodable_volume);
   level.shared_portable_turrets = [];
   maps\_spawner::spawner_targets_init();
@@ -435,7 +435,7 @@ onplayerconnect() {
     level waittill("connecting", player);
 
     if(!isDefined(player.a))
-      player.a = spawnstruct();
+      player.a = spawnStruct();
 
     player thread animscripts\init::onplayerconnect();
     player thread onplayerspawned();
@@ -683,7 +683,7 @@ level_struct_array_free() {
 }
 
 delete_bounce_light_brushes() {
-  a_m_lights = getentarray("bounce_light_brush", "targetname");
+  a_m_lights = getEntArray("bounce_light_brush", "targetname");
 
   foreach(m_light in a_m_lights)
   m_light delete();

@@ -33,8 +33,8 @@
 function skipto_flood_init(str_objective, b_starting) {
   init_flags();
   spawn_manager::set_global_active_count(30);
-  spawner::add_spawn_function_group("flood_combat_runners", "script_noteworthy", & fallback_spawnfunc);
-  array::run_all(getentarray("floor_door_hint_trigger", "targetname"), & triggerenable, 0);
+  spawner::add_spawn_function_group("flood_combat_runners", "script_noteworthy", &fallback_spawnfunc);
+  array::run_all(getEntArray("floor_door_hint_trigger", "targetname"), &triggerenable, 0);
   if(b_starting) {
     sgen::init_hendricks(str_objective);
     cp_mi_sing_sgen_pallas::elevator_setup();
@@ -46,7 +46,7 @@ function skipto_flood_init(str_objective, b_starting) {
     objectives::complete("cp_level_sgen_goto_signal_source");
     objectives::complete("cp_level_sgen_goto_server_room");
     objectives::complete("cp_level_sgen_confront_pallas");
-    array::run_all(getaiteamarray("axis"), & delete);
+    array::run_all(getaiteamarray("axis"), &delete);
     load::function_a2995f22();
     if(level.skipto_point === "dev_flood_combat") {
       level.players[0] setorigin((1152, -3864, -4876));
@@ -60,15 +60,15 @@ function skipto_flood_init(str_objective, b_starting) {
   level thread sgen_util::set_door_state("charging_station_entrance", "open");
   level clientfield::set("w_underwater_state", 1);
   setdvar("phys_buoyancy", 1);
-  spawner::add_spawn_function_group("flood_reinforcement_robot", "script_noteworthy", & reinforcement_robot_setup);
+  spawner::add_spawn_function_group("flood_reinforcement_robot", "script_noteworthy", &reinforcement_robot_setup);
   level.ai_hendricks ai::set_behavior_attribute("can_melee", 0);
   level.ai_hendricks ai::set_behavior_attribute("can_be_meleed", 0);
   level thread set_pipes_states_combat();
   set_doors_states_combat();
   a_s_spawn_point = struct::get_array("charging_station_spawn_point");
-  array::thread_all(a_s_spawn_point, & util::delay_notify, 5, "post_pallas");
-  array::thread_all(getentarray("water_spout_trigger", "targetname"), & water_spout_push);
-  array::thread_all(getentarray("stumble_trigger", "targetname"), & sgen_util::stumble_trigger_think);
+  array::thread_all(a_s_spawn_point, &util::delay_notify, 5, "post_pallas");
+  array::thread_all(getEntArray("water_spout_trigger", "targetname"), &water_spout_push);
+  array::thread_all(getEntArray("stumble_trigger", "targetname"), &sgen_util::stumble_trigger_think);
   main();
   skipto::objective_completed("flood_combat");
 }
@@ -81,24 +81,24 @@ function skipto_flood_defend_init(str_objective, b_starting) {
   if(b_starting) {
     level flag::init("hendricks_defend_started");
     level flag::init("flood_defend_hendricks_at_door");
-    array::run_all(getentarray("floor_door_hint_trigger", "targetname"), & triggerenable, 0);
+    array::run_all(getEntArray("floor_door_hint_trigger", "targetname"), &triggerenable, 0);
     sgen::init_hendricks(str_objective);
     cp_mi_sing_sgen_pallas::elevator_setup();
     getent("pallas_lift_front", "targetname") util::self_delete();
     level flag::set("pallas_lift_front_open");
     level flag::wait_till("all_players_spawned");
-    array::run_all(getaiteamarray("axis"), & delete);
+    array::run_all(getaiteamarray("axis"), &delete);
     if(level.skipto_point === "dev_flood_combat") {
       level.players[0] setorigin((1152, -3864, -4876));
       level.players[0] setplayerangles((0, 0, 0));
     }
     level clientfield::set("w_underwater_state", 1);
     setdvar("phys_buoyancy", 1);
-    spawner::add_spawn_function_group("flood_reinforcement_robot", "script_noteworthy", & reinforcement_robot_setup);
+    spawner::add_spawn_function_group("flood_reinforcement_robot", "script_noteworthy", &reinforcement_robot_setup);
     level.ai_hendricks ai::set_behavior_attribute("can_melee", 0);
     level.ai_hendricks ai::set_behavior_attribute("can_be_meleed", 0);
     set_doors_states_defend();
-    array::thread_all(getentarray("water_spout_trigger", "targetname"), & water_spout_push);
+    array::thread_all(getEntArray("water_spout_trigger", "targetname"), &water_spout_push);
     level thread defend_room_set_state_flooded();
     level thread handle_earthquakes();
     objectives::complete("cp_level_sgen_enter_sgen_no_pointer");
@@ -115,7 +115,7 @@ function skipto_flood_defend_init(str_objective, b_starting) {
     t_boundary setvisibletoall();
     load::function_a2995f22();
   }
-  spawner::add_spawn_function_group("flood_defend_catwalk_spawn_zone_robot", "targetname", & catwalk_spawn_zone_spawnfunc);
+  spawner::add_spawn_function_group("flood_defend_catwalk_spawn_zone_robot", "targetname", &catwalk_spawn_zone_spawnfunc);
   defend_main(b_starting);
   spawn_manager::set_global_active_count(32);
   skipto::objective_completed("flood_defend");
@@ -134,14 +134,14 @@ function catwalk_spawn_zone_spawnfunc() {
 function skipto_flood_defend_done(str_objective, b_starting, b_direct, player) {
   a_ai = getaiteamarray("axis", "team3");
   foreach(ai in a_ai) {
-    if(!(isdefined(ai.archetype) && ai.archetype == "robot")) {
+    if(!(isDefined(ai.archetype) && ai.archetype == "robot")) {
       ai.ignoreall = 1;
       ai sgen_util::teleport_to_underwater();
       continue;
     }
     ai util::self_delete();
   }
-  if(isdefined(level.ai_hendricks)) {
+  if(isDefined(level.ai_hendricks)) {
     level.ai_hendricks ai::set_behavior_attribute("can_melee", 1);
     level.ai_hendricks ai::set_behavior_attribute("can_be_meleed", 1);
   }
@@ -170,7 +170,7 @@ function main() {
   level thread hendricks_movement();
   level thread function_28b80c6f();
   level util::clientnotify("escp");
-  scene::add_scene_func("cin_sgen_20_02_twinrevenge_1st_elevator", & function_4234be51, "done");
+  scene::add_scene_func("cin_sgen_20_02_twinrevenge_1st_elevator", &function_4234be51, "done");
   level thread scene::play("cin_sgen_20_02_twinrevenge_1st_elevator");
   trigger::wait_till("surprised_54i_trigger");
   level thread play_rejoin_scene();
@@ -233,7 +233,7 @@ function hendricks_movement() {
   zone_wait_till_player("flood_combat_catwalk_front_zone_trig", undefined, 0.75);
   level.ai_hendricks zone_wait_till_safe("flood_combat_catwalk_front_zone_trig", undefined, undefined, 0.74, "cancel_hendricks_safe_zone");
   level thread weaken_catwalk_close_enemies();
-  scene::add_scene_func("cin_sgen_21_02_floodcombat_vign_traverse_hendricks", & kill_fallback_spawnmanager, "play");
+  scene::add_scene_func("cin_sgen_21_02_floodcombat_vign_traverse_hendricks", &kill_fallback_spawnmanager, "play");
   level scene::play("cin_sgen_21_02_floodcombat_vign_traverse_hendricks");
   play_hendricks_defend_scene();
   nd_goal = getnode("flood_defend_hendricks_ready_node", "targetname");
@@ -260,14 +260,14 @@ function zone_wait_till_player(str_key, str_val = "targetname", n_delay = 0) {
       break;
     }
   }
-  while (1);
+  while(1);
   wait(n_delay);
 }
 
 function zone_wait_till_safe(str_key, str_val = "targetname", str_species = "robot", n_delay = 0, str_ender) {
   self endon("death");
   level endon("flood_defend");
-  if(isdefined(str_ender)) {
+  if(isDefined(str_ender)) {
     level endon(str_ender);
   }
   t_safe = getent(str_key, str_val);
@@ -283,7 +283,7 @@ function zone_wait_till_safe(str_key, str_val = "targetname", str_species = "rob
     }
     wait(1.5);
   }
-  while (n_touchers > 0);
+  while(n_touchers > 0);
   wait(n_delay);
 }
 
@@ -314,13 +314,13 @@ function set_doors_states_defend() {
 function handle_earthquakes() {
   level endon("defend_time_expired");
   level sgen_util::quake(0.5, 1.5, sgen_util::get_players_center(), 5000, 4, 7);
-  while (true) {
+  while(true) {
     if(math::cointoss()) {
       v_origin = level.ai_hendricks.origin;
     } else {
       v_origin = sgen_util::get_players_center();
     }
-    if(isdefined(v_origin)) {
+    if(isDefined(v_origin)) {
       n_magnitude = randomfloatrange(0.15, 0.25);
       n_duration = randomfloatrange(0.75, 1.78);
       n_range = 5000;
@@ -334,7 +334,7 @@ function handle_earthquakes() {
 function handle_fallback_runners_cleanup() {
   level endon("flood_combat_completed");
   t_exit = getent("flood_combat_flood_hall_cleanup_trig", "targetname");
-  while (true) {
+  while(true) {
     t_exit waittill("trigger", ai_runner);
     level flag::set("flood_runner_escaped");
     ai_runner delete();
@@ -390,7 +390,7 @@ function issue_last_stand() {
   t_combat_zone endon("death");
   t_last_stand_zone endon("death");
   t_combat_zone setinvisibletoall();
-  while (true) {
+  while(true) {
     t_combat_zone waittill("trigger", e_triggerer);
     if(isalive(e_triggerer) && e_triggerer.script_noteworthy !== "ignore_last_stand") {
       e_triggerer notify("cancel_fallback");
@@ -438,7 +438,7 @@ function handle_fallback() {
 }
 
 function fallback_spawnfunc() {
-  if(isdefined(level.b_fallback_active) && level.b_fallback_active) {
+  if(isDefined(level.b_fallback_active) && level.b_fallback_active) {
     self fallback_think();
   }
 }
@@ -450,11 +450,11 @@ function fallback_think() {
 }
 
 function alarm_sounds() {
-  array::thread_all(getentarray("alarm_sound", "targetname"), & play_looping_alarm);
+  array::thread_all(getEntArray("alarm_sound", "targetname"), &play_looping_alarm);
 }
 
 function play_looping_alarm() {
-  self playloopsound("evt_flood_alarm_" + self.script_noteworthy);
+  self playLoopSound("evt_flood_alarm_" + self.script_noteworthy);
   self waittill("stop_flood_sounds");
   self stoploopsound(0.5);
   self util::self_delete();
@@ -508,15 +508,15 @@ function flooding_sound_start() {
   torrent_gush_right = getent("evt_torrent_gush_right", "targetname");
   torrent_surface_left = getent("evt_torrent_gush_surface_l", "targetname");
   torrent_surface_right = getent("evt_torrent_gush_surface_r", "targetname");
-  if(isdefined(flood_start_1) && isdefined(flood_start_2)) {
+  if(isDefined(flood_start_1) && isDefined(flood_start_2)) {
     playsoundatposition("evt_flood_start_1", flood_start_1.origin);
     playsoundatposition("evt_flood_start_2", flood_start_2.origin);
   }
-  if(isdefined(torrent_gush_left) && isdefined(torrent_gush_right) && isdefined(torrent_surface_left) && isdefined(torrent_surface_right)) {
-    torrent_gush_left playloopsound("evt_torrent_gush");
-    torrent_gush_right playloopsound("evt_torrent_gush");
-    torrent_surface_left playloopsound("evt_torrent_gush_surface");
-    torrent_surface_right playloopsound("evt_torrent_gush_surface");
+  if(isDefined(torrent_gush_left) && isDefined(torrent_gush_right) && isDefined(torrent_surface_left) && isDefined(torrent_surface_right)) {
+    torrent_gush_left playLoopSound("evt_torrent_gush");
+    torrent_gush_right playLoopSound("evt_torrent_gush");
+    torrent_surface_left playLoopSound("evt_torrent_gush_surface");
+    torrent_surface_right playLoopSound("evt_torrent_gush_surface");
     level waittill("stop_flood_sounds");
     torrent_gush_left stoploopsound(0.5);
     torrent_gush_left delete();
@@ -535,35 +535,35 @@ function flooding_water_sheeting() {
   level endon("flood_defend_completed");
   e_volume = getent("flood_combat_water_sheeting", "targetname");
   e_volume endon("death");
-  while (true) {
+  while(true) {
     foreach(player in level.players) {
       if(player istouching(e_volume)) {
-        if(!(isdefined(player.tp_water_sheeting) && player.tp_water_sheeting)) {
+        if(!(isDefined(player.tp_water_sheeting) && player.tp_water_sheeting)) {
           player clientfield::set_to_player("tp_water_sheeting", 1);
           player.tp_water_sheeting = 1;
         }
         continue;
       }
-      if(isdefined(player.tp_water_sheeting) && player.tp_water_sheeting) {
+      if(isDefined(player.tp_water_sheeting) && player.tp_water_sheeting) {
         player clientfield::set_to_player("tp_water_sheeting", 0);
         player.tp_water_sheeting = 0;
       }
     }
     wait(1);
   }
-  array::thread_all(level.players, & clientfield::set_to_player, "tp_water_sheeting", 0);
+  array::thread_all(level.players, &clientfield::set_to_player, "tp_water_sheeting", 0);
 }
 
 function water_spout_push() {
   level endon("flood_combat_completed");
   str_water_fx_origins = struct::get_array(self.target, "targetname");
-  v_dir = anglestoforward((0, str_water_fx_origins[0].angles[1], 0));
+  v_dir = anglesToForward((0, str_water_fx_origins[0].angles[1], 0));
   v_org = str_water_fx_origins[0].origin;
   v_length = 128;
-  array::thread_all(str_water_fx_origins, & loop_water_spout_fx, self);
-  while (true) {
+  array::thread_all(str_water_fx_origins, &loop_water_spout_fx, self);
+  while(true) {
     self waittill("trigger", player);
-    if(!player isonground() && isdefined(player.last_air_push_time) && (gettime() - player.last_air_push_time) < 1000) {
+    if(!player isonground() && isDefined(player.last_air_push_time) && (gettime() - player.last_air_push_time) < 1000) {
       continue;
     }
     n_distance = distance2d(v_org, player.origin);
@@ -587,17 +587,17 @@ function loop_water_spout_fx(trigger) {
   e_fx_origin = util::spawn_model("tag_origin", self.origin, self.angles);
   e_fx_origin.script_objective = "flood_defend";
   trigger::wait_till(self.target, undefined, undefined, 0);
-  if(isdefined(trigger.script_string)) {
+  if(isDefined(trigger.script_string)) {
     level thread scene::play(trigger.script_string);
     level thread sgen_util::quake(0.35, randomfloatrange(0.8, 1.4), sgen_util::get_players_center(), 5000, 1, 2);
   }
-  e_fx_origin playsound("evt_pipe_break");
-  e_fx_origin playloopsound("evt_water_pipe_flow");
+  e_fx_origin playSound("evt_pipe_break");
+  e_fx_origin playLoopSound("evt_water_pipe_flow");
 }
 
 function play_surgical_room_door_scene() {
   ai_door = spawner::simple_spawn_single("surgical_room_door_close_guy_spawner");
-  level util::delay(2, "death", & sgen_util::set_door_state, "surgical_room_door", "close");
+  level util::delay(2, "death", &sgen_util::set_door_state, "surgical_room_door", "close");
   if(isalive(ai_door)) {
     ai_door fallback_think();
   }
@@ -612,7 +612,7 @@ function surgical_room_entrance_close_resistance() {
 
 function surgical_room_entrance_close_resistance_earthquake() {
   level endon("floor_door_open");
-  while (true) {
+  while(true) {
     level sgen_util::quake(0.35, randomfloatrange(0.8, 1.4), sgen_util::get_players_center(), 5000, 1, 2);
     wait(randomintrange(8, 15));
   }
@@ -622,7 +622,7 @@ function defend_logic(b_starting) {
   level thread play_flood_hallway_kill_scene();
   level thread handle_flood_hallway();
   level thread stop_fallback_and_scatter();
-  spawner::add_spawn_function_group("flood_defend_runner", "script_noteworthy", & function_3ed2d232);
+  spawner::add_spawn_function_group("flood_defend_runner", "script_noteworthy", &function_3ed2d232);
   if(b_starting) {
     level thread play_hendricks_defend_scene();
   }
@@ -643,7 +643,7 @@ function defend_logic(b_starting) {
   level flag::set("defend_time_expired");
   t_flood_hint_trigger = getent("floor_door_hint_trigger", "targetname");
   objectives::set("cp_level_sgen_use_door", t_flood_hint_trigger.origin);
-  var_8ad7c437 = util::init_interactive_gameobject(t_flood_hint_trigger, & "cp_prompt_enter_sgen_door", & "CP_MI_SING_SGEN_FLOOD_USE_DOOR", & function_d0378b1a);
+  var_8ad7c437 = util::init_interactive_gameobject(t_flood_hint_trigger, &"cp_prompt_enter_sgen_door", &"CP_MI_SING_SGEN_FLOOD_USE_DOOR", &function_d0378b1a);
   level waittill("hash_37c452a9");
   objectives::complete("cp_level_sgen_use_door");
   objectives::set("cp_level_sgen_get_to_surface");
@@ -661,15 +661,15 @@ function function_d0378b1a(e_player) {
   level thread namespace_d40478f6::function_973b77f9();
   self gameobjects::disable_object();
   objectives::complete("cp_level_sgen_use_door");
-  if(isdefined(level.bzm_sgendialogue8_2callback)) {
+  if(isDefined(level.bzm_sgendialogue8_2callback)) {
     level thread[[level.bzm_sgendialogue8_2callback]]();
   }
-  scene::add_scene_func("cin_sgen_22_01_release_torrent_1st_flood_hendricks", & handle_flood_door_animation, "play");
+  scene::add_scene_func("cin_sgen_22_01_release_torrent_1st_flood_hendricks", &handle_flood_door_animation, "play");
   level thread scene::play("cin_sgen_22_01_release_torrent_1st_flood_hendricks", level.ai_hendricks);
-  scene::add_scene_func("cin_sgen_22_01_release_torrent_1st_flood_player", & function_7ade3b88, "play");
+  scene::add_scene_func("cin_sgen_22_01_release_torrent_1st_flood_player", &function_7ade3b88, "play");
   level scene::play("cin_sgen_22_01_release_torrent_1st_flood_player", e_player);
   wait(0.05);
-  if(!isdefined(level.var_5580212f)) {
+  if(!isDefined(level.var_5580212f)) {
     level notify("hash_f8576d57");
     play_water_teleport_fx();
   }
@@ -688,7 +688,7 @@ function function_7ade3b88(a_ents) {
 }
 
 function play_water_teleport_fx() {
-  if(!isdefined(level.var_5580212f)) {
+  if(!isDefined(level.var_5580212f)) {
     level.var_5580212f = gettime();
   }
   foreach(player in level.activeplayers) {
@@ -697,7 +697,7 @@ function play_water_teleport_fx() {
 }
 
 function stop_water_teleport_fx(a_ents) {
-  while ((gettime() - level.var_5580212f) < 1000) {
+  while((gettime() - level.var_5580212f) < 1000) {
     wait(0.1);
   }
   foreach(player in level.activeplayers) {
@@ -722,7 +722,7 @@ function play_hendricks_defend_scene() {
   level flag::wait_till("defend_ready");
   var_421ccb2d = getent("flood_defend_defend_room_zone_trig", "targetname");
   var_a3eb613f = 1;
-  while (var_a3eb613f) {
+  while(var_a3eb613f) {
     var_a3eb613f = 0;
     a_ai_enemies = getaiteamarray("axis");
     foreach(ai_enemy in a_ai_enemies) {
@@ -747,7 +747,7 @@ function hendricks_defend_movement() {
 
 function charging_station_cleanup() {
   level thread sgen_util::set_door_state("charging_station_entrance", "close");
-  array::thread_all(getentarray("pod_track_model", "targetname"), & util::self_delete);
+  array::thread_all(getEntArray("pod_track_model", "targetname"), &util::self_delete);
 }
 
 function reinforcement_robot_setup() {
@@ -763,7 +763,7 @@ function catwalk_zone_anti_camper_measures() {
   t_zone waittill("trigger");
   level thread sgen_util::set_door_state("flood_robot_room_door_close", "open");
   level thread sgen_util::set_door_state("flood_robot_room_door_open", "close");
-  while (isdefined(t_zone)) {
+  while(isDefined(t_zone)) {
     t_zone waittill("trigger");
     if(!spawn_manager::is_enabled(e_spawnmanager.targetname)) {
       spawn_manager::enable(e_spawnmanager.targetname);
@@ -780,15 +780,15 @@ function kill_anti_campers() {
   self endon("death");
   self endon("trigger");
   wait(4);
-  a_ai_robots = getentarray("flood_defend_catwalk_spawn_zone_robot" + "_ai", "targetname");
+  a_ai_robots = getEntArray("flood_defend_catwalk_spawn_zone_robot" + "_ai", "targetname");
   foreach(ai_kill in a_ai_robots) {
     ai_kill kill();
   }
 }
 
 function set_ignoreall_array(str_spawner_name, str_key = "targetname", b_ignore = 1) {
-  a_ai_ignorers = getentarray(str_spawner_name + "_ai", str_key);
-  array::thread_all(a_ai_ignorers, & ai::set_ignoreall, b_ignore);
+  a_ai_ignorers = getEntArray(str_spawner_name + "_ai", str_key);
+  array::thread_all(a_ai_ignorers, &ai::set_ignoreall, b_ignore);
 }
 
 function play_rejoin_scene() {
@@ -825,10 +825,10 @@ function handle_flood_hallway() {
 function flood_wave_sound() {
   flood_emitter = spawn("script_origin", (26380, 1589, -6604));
   var_fcca8f52 = spawn("script_origin", (26380, 1589, -6604));
-  var_fcca8f52 playsound("evt_sgen_flood_door_close");
+  var_fcca8f52 playSound("evt_sgen_flood_door_close");
   level waittill("play_flood_door_impact");
-  flood_emitter playsound("evt_flood_door_impact");
-  flood_emitter playloopsound("evt_flood_metal_stress", 2);
+  flood_emitter playSound("evt_flood_door_impact");
+  flood_emitter playLoopSound("evt_flood_metal_stress", 2);
   level waittill("floor_door_open");
   flood_emitter stoploopsound(3);
   wait(3);
@@ -884,7 +884,7 @@ function do_security_room_nag() {
   a_str_nags = [];
   a_str_nags[0] = "hend_keep_moving_the_wh_0";
   a_str_nags[1] = "hend_go_go_go_0";
-  while (n_index < a_str_nags.size) {
+  while(n_index < a_str_nags.size) {
     trigger::wait_till("flood_combat_security_room_zone_trig");
     if(!level flag::get("flood_combat_nag_playing")) {
       level flag::set("flood_combat_nag_playing");
@@ -906,7 +906,7 @@ function do_charging_room_nag() {
   a_str_nags[0] = "hend_get_through_them_we_0";
   a_str_nags[1] = "hend_don_t_stop_move_m_0";
   a_str_nags[2] = "hend_fucking_move_0";
-  while (n_index < a_str_nags.size) {
+  while(n_index < a_str_nags.size) {
     n_nag_time = randomfloatrange(n_nag_min, n_nag_max);
     wait(n_nag_time);
     trigger::wait_till("flood_combat_charging_station_zone_trig");

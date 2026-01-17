@@ -36,7 +36,7 @@ main() {
     animscripts\battlechatter_ai::evaluateattackevent("grenade");
   }
 
-  if(isdefined(self.grenade))
+  if(isDefined(self.grenade))
     self throwgrenade();
 
   self waittillmatch("throwanim", "finish");
@@ -50,7 +50,7 @@ main() {
 getgrenadereturnanim() {
   var_1 = 1000;
 
-  if(isdefined(self.enemy))
+  if(isDefined(self.enemy))
     var_1 = distance(self.origin, self.enemy.origin);
 
   var_2 = [];
@@ -90,7 +90,7 @@ getgrenadereturnanim_h1() {
     var_1 = (var_1[0] / var_2, var_1[1] / var_2, 0);
 
   var_3 = length2dsquared(self.velocity);
-  var_4 = anglestoforward(self.angles);
+  var_4 = anglesToForward(self.angles);
 
   if(var_3 > 1) {
     if(var_2 < 300 && islowthrowsafe())
@@ -131,7 +131,7 @@ getgrenadereturnanim_h1() {
 
 islowthrowsafe() {
   var_0 = (self.origin[0], self.origin[1], self.origin[2] + 20);
-  var_1 = var_0 + anglestoforward(self.angles) * 50;
+  var_1 = var_0 + anglesToForward(self.angles) * 50;
   return sighttracepassed(var_0, var_1, 0, undefined);
 }
 

@@ -56,16 +56,16 @@ hostmigrationwaitforplayers() {
 }
 
 hostmigrationname(var_0) {
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     return "<removed_ent>";
 
   var_1 = -1;
   var_2 = "?";
 
-  if(isdefined(var_0.entity_number))
+  if(isDefined(var_0.entity_number))
     var_1 = var_0.entity_number;
 
-  if(isplayer(var_0) && isdefined(var_0.name))
+  if(isplayer(var_0) && isDefined(var_0.name))
     var_2 = var_0.name;
 
   if(isplayer(var_0))
@@ -86,7 +86,7 @@ hostmigrationtimerthink_internal() {
   self endon("disconnect");
   self.hostmigrationcontrolsfrozen = 1;
 
-  while (!maps\mp\_utility::isreallyalive(self))
+  while(!maps\mp\_utility::isreallyalive(self))
     self waittill("spawned");
 
   maps\mp\_utility::freezecontrolswrapper(1);
@@ -114,7 +114,7 @@ hostmigrationtimerthink() {
 }
 
 waittillhostmigrationdone() {
-  if(!isdefined(level.hostmigrationtimer))
+  if(!isDefined(level.hostmigrationtimer))
     return 0;
 
   var_0 = gettime();
@@ -123,7 +123,7 @@ waittillhostmigrationdone() {
 }
 
 waittillhostmigrationstarts(var_0) {
-  if(isdefined(level.hostmigrationtimer)) {
+  if(isDefined(level.hostmigrationtimer)) {
     return;
   }
   level endon("host_migration_begin");
@@ -137,10 +137,10 @@ waitlongdurationwithhostmigrationpause(var_0) {
   var_1 = gettime();
   var_2 = gettime() + var_0 * 1000;
 
-  while (gettime() < var_2) {
+  while(gettime() < var_2) {
     waittillhostmigrationstarts((var_2 - gettime()) / 1000);
 
-    if(isdefined(level.hostmigrationtimer)) {
+    if(isDefined(level.hostmigrationtimer)) {
       var_3 = waittillhostmigrationdone();
       var_2 = var_2 + var_3;
     }
@@ -159,10 +159,10 @@ waittill_notify_or_timeout_hostmigration_pause(var_0, var_1) {
   var_2 = gettime();
   var_3 = gettime() + var_1 * 1000;
 
-  while (gettime() < var_3) {
+  while(gettime() < var_3) {
     waittillhostmigrationstarts((var_3 - gettime()) / 1000);
 
-    if(isdefined(level.hostmigrationtimer)) {
+    if(isDefined(level.hostmigrationtimer)) {
       var_4 = waittillhostmigrationdone();
       var_3 = var_3 + var_4;
     }
@@ -179,17 +179,17 @@ waitlongdurationwithgameendtimeupdate(var_0) {
   var_1 = gettime();
   var_2 = gettime() + var_0 * 1000;
 
-  while (gettime() < var_2) {
+  while(gettime() < var_2) {
     waittillhostmigrationstarts((var_2 - gettime()) / 1000);
 
-    while (isdefined(level.hostmigrationtimer)) {
+    while(isDefined(level.hostmigrationtimer)) {
       var_2 = var_2 + 1000;
       setgameendtime(int(var_2));
       wait 1;
     }
   }
 
-  while (isdefined(level.hostmigrationtimer)) {
+  while(isDefined(level.hostmigrationtimer)) {
     var_2 = var_2 + 1000;
     setgameendtime(int(var_2));
     wait 1;

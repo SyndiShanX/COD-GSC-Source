@@ -8,7 +8,6 @@
 #include scripts\core_common\math_shared;
 #include scripts\core_common\spawner_shared;
 #include scripts\core_common\values_shared;
-
 #namespace phalanx;
 
 class phalanx {
@@ -32,34 +31,34 @@ class phalanx {
   function scatterphalanx() {
     if(!scattered_) {
       scattered_ = 1;
-      _releasesentients(sentienttiers_[#"phalanx_tier1"]);
-      sentienttiers_[#"phalanx_tier1"] = [];
-      _assignphalanxstance(sentienttiers_[#"phalanx_tier2"], "crouch");
+      _releasesentients(sentienttiers_[# "phalanx_tier1"]);
+      sentienttiers_[# "phalanx_tier1"] = [];
+      _assignphalanxstance(sentienttiers_[# "phalanx_tier2"], "crouch");
       wait randomfloatrange(5, 7);
-      _releasesentients(sentienttiers_[#"phalanx_tier2"]);
-      sentienttiers_[#"phalanx_tier2"] = [];
-      _assignphalanxstance(sentienttiers_[#"phalanx_tier3"], "crouch");
+      _releasesentients(sentienttiers_[# "phalanx_tier2"]);
+      sentienttiers_[# "phalanx_tier2"] = [];
+      _assignphalanxstance(sentienttiers_[# "phalanx_tier3"], "crouch");
       wait randomfloatrange(5, 7);
-      _releasesentients(sentienttiers_[#"phalanx_tier3"]);
-      sentienttiers_[#"phalanx_tier3"] = [];
+      _releasesentients(sentienttiers_[# "phalanx_tier3"]);
+      sentienttiers_[# "phalanx_tier3"] = [];
     }
   }
 
   function resumefire() {
-    _resumefiresentients(sentienttiers_[#"phalanx_tier1"]);
-    _resumefiresentients(sentienttiers_[#"phalanx_tier2"]);
-    _resumefiresentients(sentienttiers_[#"phalanx_tier3"]);
+    _resumefiresentients(sentienttiers_[# "phalanx_tier1"]);
+    _resumefiresentients(sentienttiers_[# "phalanx_tier2"]);
+    _resumefiresentients(sentienttiers_[# "phalanx_tier3"]);
   }
 
   function resumeadvance() {
     if(!scattered_) {
-      _assignphalanxstance(sentienttiers_[#"phalanx_tier1"], "stand");
+      _assignphalanxstance(sentienttiers_[# "phalanx_tier1"], "stand");
       wait 1;
       forward = vectornormalize(endposition_ - startposition_);
-      _movephalanxtier(sentienttiers_[#"phalanx_tier1"], phalanxtype_, "phalanx_tier1", endposition_, forward);
-      _movephalanxtier(sentienttiers_[#"phalanx_tier2"], phalanxtype_, "phalanx_tier2", endposition_, forward);
-      _movephalanxtier(sentienttiers_[#"phalanx_tier3"], phalanxtype_, "phalanx_tier3", endposition_, forward);
-      _assignphalanxstance(sentienttiers_[#"phalanx_tier1"], "crouch");
+      _movephalanxtier(sentienttiers_[# "phalanx_tier1"], phalanxtype_, "phalanx_tier1", endposition_, forward);
+      _movephalanxtier(sentienttiers_[# "phalanx_tier2"], phalanxtype_, "phalanx_tier2", endposition_, forward);
+      _movephalanxtier(sentienttiers_[# "phalanx_tier3"], phalanxtype_, "phalanx_tier3", endposition_, forward);
+      _assignphalanxstance(sentienttiers_[# "phalanx_tier1"], "crouch");
     }
   }
 
@@ -69,9 +68,9 @@ class phalanx {
     assert(isvec(origin));
     assert(isvec(destination));
     tierspawners = [];
-    tierspawners[#"phalanx_tier1"] = tieronespawner;
-    tierspawners[#"phalanx_tier2"] = tiertwospawner;
-    tierspawners[#"phalanx_tier3"] = tierthreespawner;
+    tierspawners[# "phalanx_tier1"] = tieronespawner;
+    tierspawners[# "phalanx_tier2"] = tiertwospawner;
+    tierspawners[# "phalanx_tier3"] = tierthreespawner;
     maxtiersize = math::clamp(maxtiersize, 1, 10);
     forward = vectornormalize(destination - origin);
 
@@ -80,7 +79,7 @@ class phalanx {
       startsentientcount_ += sentienttiers_[tiername].size;
     }
 
-    _assignphalanxstance(sentienttiers_[#"phalanx_tier1"], "crouch");
+    _assignphalanxstance(sentienttiers_[# "phalanx_tier1"], "crouch");
 
     foreach(name, tier in sentienttiers_) {
       _movephalanxtier(sentienttiers_[name], phalanxtype, name, destination, forward);
@@ -175,7 +174,7 @@ class phalanx {
       sentient setavoidancemask("avoid all");
       aiutility::removeaioverridedamagecallback(sentient, &_dampenexplosivedamage);
 
-      if(isDefined(sentient.archetype) && sentient.archetype == #"robot") {
+      if(isDefined(sentient.archetype) && sentient.archetype == # "robot") {
         sentient ai::set_behavior_attribute("move_mode", "normal");
         sentient ai::set_behavior_attribute("force_cover", 0);
       }
@@ -219,7 +218,7 @@ class phalanx {
 
     sentient setavoidancemask("avoid none");
 
-    if(isDefined(sentient.archetype) && sentient.archetype == #"robot") {
+    if(isDefined(sentient.archetype) && sentient.archetype == # "robot") {
       sentient ai::set_behavior_attribute("move_mode", "marching");
       sentient ai::set_behavior_attribute("force_cover", 1);
     }
@@ -258,79 +257,79 @@ class phalanx {
 
   function private _getphalanxpositions(phalanxtype, tier) {
     switch (phalanxtype) {
-      case #"phanalx_wedge":
+      case # "phanalx_wedge":
         switch (tier) {
-          case #"phalanx_tier1":
+          case # "phalanx_tier1":
             return array((0, 0, 0), (-64, -48, 0), (64, -48, 0), (-128, -96, 0), (128, -96, 0));
-          case #"phalanx_tier2":
+          case # "phalanx_tier2":
             return array((-32, -96, 0), (32, -96, 0));
-          case #"phalanx_tier3":
+          case # "phalanx_tier3":
             return array();
         }
 
         break;
-      case #"phalanx_reverse_wedge":
+      case # "phalanx_reverse_wedge":
         switch (tier) {
-          case #"phalanx_tier1":
+          case # "phalanx_tier1":
             return array((-32, 0, 0), (32, 0, 0));
-          case #"phalanx_tier2":
+          case # "phalanx_tier2":
             return array((0, -96, 0));
-          case #"phalanx_tier3":
+          case # "phalanx_tier3":
             return array();
         }
 
         break;
-      case #"phalanx_diagonal_left":
+      case # "phalanx_diagonal_left":
         switch (tier) {
-          case #"phalanx_tier1":
+          case # "phalanx_tier1":
             return array((0, 0, 0), (-48, -64, 0), (-96, -128, 0), (-144, -192, 0));
-          case #"phalanx_tier2":
+          case # "phalanx_tier2":
             return array((64, 0, 0), (16, -64, 0), (-48, -128, 0), (-112, -192, 0));
-          case #"phalanx_tier3":
+          case # "phalanx_tier3":
             return array();
         }
 
         break;
-      case #"phalanx_diagonal_right":
+      case # "phalanx_diagonal_right":
         switch (tier) {
-          case #"phalanx_tier1":
+          case # "phalanx_tier1":
             return array((0, 0, 0), (48, -64, 0), (96, -128, 0), (144, -192, 0));
-          case #"phalanx_tier2":
+          case # "phalanx_tier2":
             return array((-64, 0, 0), (-16, -64, 0), (48, -128, 0), (112, -192, 0));
-          case #"phalanx_tier3":
+          case # "phalanx_tier3":
             return array();
         }
 
         break;
-      case #"phalanx_forward":
+      case # "phalanx_forward":
         switch (tier) {
-          case #"phalanx_tier1":
+          case # "phalanx_tier1":
             return array((0, 0, 0), (64, 0, 0), (128, 0, 0), (192, 0, 0));
-          case #"phalanx_tier2":
+          case # "phalanx_tier2":
             return array((-32, -64, 0), (32, -64, 0), (96, -64, 0), (160, -64, 0));
-          case #"phalanx_tier3":
+          case # "phalanx_tier3":
             return array();
         }
 
         break;
-      case #"phalanx_column":
+      case # "phalanx_column":
         switch (tier) {
-          case #"phalanx_tier1":
+          case # "phalanx_tier1":
             return array((0, 0, 0), (-64, 0, 0), (0, -64, 0), (-64, -64, 0));
-          case #"phalanx_tier2":
+          case # "phalanx_tier2":
             return array((0, -128, 0), (-64, -128, 0), (0, -192, 0), (-64, -192, 0));
-          case #"phalanx_tier3":
+          case # "phalanx_tier3":
             return array((64, 0, 0), (64, -64, 0), (64, -128, 0), (64, -192, 0));
         }
 
         break;
-      case #"phalanx_column_right":
+      case # "phalanx_column_right":
         switch (tier) {
-          case #"phalanx_tier1":
+          case # "phalanx_tier1":
             return array((0, 0, 0), (0, -64, 0), (0, -128, 0), (0, -192, 0));
-          case #"phalanx_tier2":
+          case # "phalanx_tier2":
             return array();
-          case #"phalanx_tier3":
+          case # "phalanx_tier3":
             return array();
         }
 
@@ -380,7 +379,7 @@ class phalanx {
       orientedpos = _rotatevec(position, angles[1] - 90);
       navmeshposition = getclosestpointonnavmesh(phalanxposition + orientedpos, 200);
 
-      if(!(spawner.spawnflags&64)) {
+      if(!(spawner.spawnflags & 64)) {
         spawner.count++;
       }
 

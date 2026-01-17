@@ -12,7 +12,6 @@
 #include scripts\core_common\util_shared;
 #include scripts\zm\zm_lightning_chain;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_weap_hand_ouranos;
 
 autoexec __init__system__() {
@@ -22,17 +21,17 @@ autoexec __init__system__() {
 __init__() {
   clientfield::register("scriptmover", "ouranos_shoot", 16000, 1, "counter", &function_b3ffbfd, 0, 0);
   clientfield::register("scriptmover", "ouranos_impact", 16000, 1, "counter", &ouranos_impact_fx, 0, 0);
-  clientfield::register("allplayers", "" + #"ouranos_beam_fire", 16000, 1, "int", &skull_turret_beam_fire, 0, 1);
-  clientfield::register("allplayers", "" + #"hash_4fb73e88d45af0ef", 16000, 1, "int", &function_98b06f97, 0, 1);
-  clientfield::register("actor", "" + #"ouranos_proj_knock", 16000, getminbitcountfornum(3), "int", &function_a1d614f9, 0, 1);
-  clientfield::register("actor", "" + #"ouranos_zombie_impact", 16000, 1, "counter", &function_1322534b, 0, 0);
+  clientfield::register("allplayers", "" + # "ouranos_beam_fire", 16000, 1, "int", &skull_turret_beam_fire, 0, 1);
+  clientfield::register("allplayers", "" + # "hash_4fb73e88d45af0ef", 16000, 1, "int", &function_98b06f97, 0, 1);
+  clientfield::register("actor", "" + # "ouranos_proj_knock", 16000, getminbitcountfornum(3), "int", &function_a1d614f9, 0, 1);
+  clientfield::register("actor", "" + # "ouranos_zombie_impact", 16000, 1, "counter", &function_1322534b, 0, 0);
   serverfield::register("ouranos_feather_hit", 16000, getminbitcountfornum(3), "int");
-  level._effect[#"ouranos_wind"] = #"hash_3ee5b689d09f0824";
-  level._effect[#"ouranos_trail"] = #"hash_62f4ee1a2e3c46fc";
-  level._effect[#"ouranos_impact"] = #"hash_5869597389a55f7b";
-  level._effect[#"ouranos_proj_knock"] = #"hash_215ead487c4bef59";
-  level._effect[#"ouranos_wind_knock"] = #"hash_4cc40e13ee8dff61";
-  level._effect[#"hash_31736c99409b40ef"] = #"hash_44bd80522ac100e7";
+  level._effect[# "ouranos_wind"] = # "hash_3ee5b689d09f0824";
+  level._effect[# "ouranos_trail"] = # "hash_62f4ee1a2e3c46fc";
+  level._effect[# "ouranos_impact"] = # "hash_5869597389a55f7b";
+  level._effect[# "ouranos_proj_knock"] = # "hash_215ead487c4bef59";
+  level._effect[# "ouranos_wind_knock"] = # "hash_4cc40e13ee8dff61";
+  level._effect[# "hash_31736c99409b40ef"] = # "hash_44bd80522ac100e7";
 }
 
 function_1322534b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -48,8 +47,8 @@ function_1322534b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     }
   }
 
-  playFX(localclientnum, level._effect[#"ouranos_impact"], v_org, anglesToForward(self.angles));
-  playSound(localclientnum, #"hash_3360f981ac697bfe", self.origin);
+  playFX(localclientnum, level._effect[# "ouranos_impact"], v_org, anglesToForward(self.angles));
+  playSound(localclientnum, # "hash_3360f981ac697bfe", self.origin);
 }
 
 function_a1d614f9(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -64,20 +63,20 @@ function_a1d614f9(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   if(newval == 1) {
-    self playSound(localclientnum, #"hash_3360f981ac697bfe");
-    util::playFXOnTag(localclientnum, level._effect[#"ouranos_proj_knock"], self, str_tag);
+    self playSound(localclientnum, # "hash_3360f981ac697bfe");
+    util::playFXOnTag(localclientnum, level._effect[# "ouranos_proj_knock"], self, str_tag);
     return;
   }
 
   if(newval == 2) {
-    self playSound(localclientnum, #"hash_3360f981ac697bfe");
-    util::playFXOnTag(localclientnum, level._effect[#"ouranos_wind_knock"], self, str_tag);
+    self playSound(localclientnum, # "hash_3360f981ac697bfe");
+    util::playFXOnTag(localclientnum, level._effect[# "ouranos_wind_knock"], self, str_tag);
     return;
   }
 
   if(newval == 3) {
-    self playSound(localclientnum, #"hash_3360f981ac697bfe");
-    util::playFXOnTag(localclientnum, level._effect[#"ouranos_proj_knock"], self, str_tag);
+    self playSound(localclientnum, # "hash_3360f981ac697bfe");
+    util::playFXOnTag(localclientnum, level._effect[# "ouranos_proj_knock"], self, str_tag);
     self thread function_f89a4434(localclientnum);
   }
 }
@@ -125,7 +124,7 @@ function_1ebdc841(n_feather) {
 }
 
 function_b3ffbfd(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  util::playFXOnTag(localclientnum, level._effect[#"ouranos_trail"], self, "tag_origin");
+  util::playFXOnTag(localclientnum, level._effect[# "ouranos_trail"], self, "tag_origin");
 
   if(!isDefined(self.n_sfx)) {
     self.n_sfx = self playLoopSound(#"hash_166762facd657625");
@@ -145,18 +144,18 @@ ouranos_impact_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   v_back = anglesToForward(self.angles) * -100 + self.origin;
   a_trace = bulletTrace(v_back, v_forward, 0, self);
 
-  if(isDefined(a_trace[#"normal"])) {
-    v_ang = a_trace[#"normal"];
+  if(isDefined(a_trace[# "normal"])) {
+    v_ang = a_trace[# "normal"];
   } else {
     v_ang = anglesToForward(self.angles) * -1;
   }
 
-  playFX(localclientnum, level._effect[#"ouranos_impact"], v_org, v_ang);
-  playSound(localclientnum, #"hash_d09856cb05b1a39", self.origin);
+  playFX(localclientnum, level._effect[# "ouranos_impact"], v_org, v_ang);
+  playSound(localclientnum, # "hash_d09856cb05b1a39", self.origin);
 }
 
 skull_turret_beam_fire(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self endon(#"death", #"disconnect");
+  self endon(#"death", # "disconnect");
 
   if(newval == 1) {
     if(isDefined(self.var_c400cdd5)) {
@@ -165,11 +164,11 @@ skull_turret_beam_fire(localclientnum, oldval, newval, bnewent, binitialsnap, fi
     }
 
     if(!self zm_utility::function_f8796df3(localclientnum)) {
-      self.var_c400cdd5 = util::playFXOnTag(localclientnum, level._effect[#"hash_31736c99409b40ef"], self, "tag_weapon_right");
+      self.var_c400cdd5 = util::playFXOnTag(localclientnum, level._effect[# "hash_31736c99409b40ef"], self, "tag_weapon_right");
     }
 
     if(!isDefined(self.var_76c23e4c)) {
-      self playSound(localclientnum, #"hash_5e5e7d42f62fb92d");
+      self playSound(localclientnum, # "hash_5e5e7d42f62fb92d");
       self.var_76c23e4c = self playLoopSound(#"hash_14ac86ceee99d2f3");
     }
 
@@ -182,7 +181,7 @@ skull_turret_beam_fire(localclientnum, oldval, newval, bnewent, binitialsnap, fi
   }
 
   if(isDefined(self.var_76c23e4c)) {
-    self playSound(localclientnum, #"hash_6b91419f41fc8d34");
+    self playSound(localclientnum, # "hash_6b91419f41fc8d34");
     self stoploopsound(self.var_76c23e4c);
     self.var_76c23e4c = undefined;
   }
@@ -191,7 +190,7 @@ skull_turret_beam_fire(localclientnum, oldval, newval, bnewent, binitialsnap, fi
 function_98b06f97(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
     if(!isDefined(self.var_76c23e4c)) {
-      self playSound(localclientnum, #"hash_5e5e7d42f62fb92d");
+      self playSound(localclientnum, # "hash_5e5e7d42f62fb92d");
       self.var_76c23e4c = self playLoopSound(#"hash_14ac86ceee99d2f3");
     }
 
@@ -199,7 +198,7 @@ function_98b06f97(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   if(isDefined(self.var_76c23e4c)) {
-    self playSound(localclientnum, #"hash_6b91419f41fc8d34");
+    self playSound(localclientnum, # "hash_6b91419f41fc8d34");
     self stoploopsound(self.var_76c23e4c);
     self.var_76c23e4c = undefined;
   }

@@ -40,7 +40,6 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_utility;
-
 #namespace ztrials;
 
 event_handler[gametype_init] main(eventstruct) {
@@ -67,7 +66,7 @@ event_handler[level_init] levelinit(eventstruct) {
 
   var_189d26ca = getdvarstring(#"ztrial_name");
 
-    var_3b363b7a = getgametypesetting(#"zmtrialsvariant");
+  var_3b363b7a = getgametypesetting(#"zmtrialsvariant");
 
   if(isDefined(var_3b363b7a) && var_3b363b7a > 0) {
     var_189d26ca = util::get_map_name() + "_variant_" + var_3b363b7a;
@@ -80,7 +79,6 @@ event_handler[level_init] levelinit(eventstruct) {
   assert(isDefined(level.var_6d87ac05), "<dev string:x53>");
 
   function_9a6b2309();
-
 }
 
 onprecachegametype() {
@@ -102,14 +100,14 @@ onstartgametype() {
   changeadvertisedstatus(0);
 }
 
-private function_8277ff43() {
+function_8277ff43() {
   self endon(#"disconnect");
   level flag::wait_till("start_zombie_round_logic");
   waitframe(1);
   self zm_laststand::function_3d685b5f(0);
 }
 
-private function_491101ba(player) {
+function_491101ba(player) {
   if(player hasperk(#"specialty_berserker") && !(isDefined(player.var_a4630f64) && player.var_a4630f64)) {
     return true;
   }
@@ -158,7 +156,7 @@ private function_491101ba(player) {
   return false;
 }
 
-private function_61fd0e87() {
+function_61fd0e87() {
   assert(isDefined(level.var_6d87ac05));
 
   if(!level flag::get("round_reset") && level.round_number >= level.var_6d87ac05.rounds.size) {
@@ -171,10 +169,10 @@ private function_61fd0e87() {
   }
 }
 
-private function_b8839207(e_door, n_cost) {
+function_b8839207(e_door, n_cost) {
   level flag::wait_till("start_zombie_round_logic");
   e_door notify(#"hash_42c191c31ed08a4");
-  e_door endon(#"hash_42c191c31ed08a4", #"death");
+  e_door endon(#"hash_42c191c31ed08a4", # "death");
 
   while(true) {
     if(n_cost > 0 && zm_trial_disable_buys::is_active()) {
@@ -187,7 +185,7 @@ private function_b8839207(e_door, n_cost) {
   }
 }
 
-private complete_current_round() {
+complete_current_round() {
   level.devcheater = 1;
   level.zombie_total = 0;
   level notify(#"kill_round");
@@ -205,17 +203,17 @@ private complete_current_round() {
   }
 }
 
-private function_1201b5da(medal) {
+function_1201b5da(medal) {
   round = undefined;
 
   switch (medal) {
-    case #"gold":
+    case # "gold":
       round = 30;
       break;
-    case #"silver":
+    case # "silver":
       round = 20;
       break;
-    case #"bronze":
+    case # "bronze":
       round = 10;
       break;
     default:
@@ -230,7 +228,7 @@ private function_1201b5da(medal) {
   for(i = 0; i < round_info.challenges.size; i++) {
     challenge = round_info.challenges[i];
 
-    if(challenge.name == #"give_reward") {
+    if(challenge.name == # "give_reward") {
       return challenge;
     }
   }
@@ -239,7 +237,7 @@ private function_1201b5da(medal) {
   return undefined;
 }
 
-private function_9a6b2309() {
+function_9a6b2309() {
   assert(isDefined(level.var_6d87ac05));
 
   foreach(round_info in level.var_6d87ac05.rounds) {
@@ -266,9 +264,7 @@ private function_9a6b2309() {
       round_number = int(cmd[0]);
 
       if(isDefined(level.var_b9714a5d)) {
-        [
-          [level.var_b9714a5d]
-        ](round_number);
+        [[level.var_b9714a5d]](round_number);
       }
 
       level thread zm_game_module::zombie_goto_round(round_number);
@@ -345,4 +341,3 @@ private function_9a6b2309() {
     waitframe(1);
   }
 }
-

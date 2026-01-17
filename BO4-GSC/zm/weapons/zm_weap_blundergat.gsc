@@ -31,7 +31,6 @@
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
-
 #namespace zm_weap_blundergat;
 
 autoexec __init__system__() {
@@ -84,10 +83,10 @@ function_845f2546() {
 }
 
 function_9ef27f88(n_fuse_timer, attacker, weapon) {
-  self endon(#"death", #"titus_target_timeout");
+  self endon(#"death", # "titus_target_timeout");
   self thread titus_target_timeout(n_fuse_timer);
 
-  if(self.zm_ai_category == #"miniboss" || self.zm_ai_category == #"boss") {
+  if(self.zm_ai_category == # "miniboss" || self.zm_ai_category == # "boss") {
     wait n_fuse_timer;
     self.var_c541eedd = undefined;
     return;
@@ -103,7 +102,7 @@ function_9ef27f88(n_fuse_timer, attacker, weapon) {
 }
 
 function_2b03f05f() {
-  self endon(#"death", #"titus_target_timeout");
+  self endon(#"death", # "titus_target_timeout");
 
   while(true) {
     s_result = self waittill(#"damage");
@@ -112,7 +111,7 @@ function_2b03f05f() {
       a_grenades = getEntArray("grenade", "classname");
 
       foreach(e_grenade in a_grenades) {
-        if(isDefined(e_grenade.model) && e_grenade.model == #"wpn_t8_zm_blundergat_acid_projectile") {
+        if(isDefined(e_grenade.model) && e_grenade.model == # "wpn_t8_zm_blundergat_acid_projectile") {
           if(e_grenade islinkedto(self)) {
             e_grenade thread function_971df325(self);
           }
@@ -138,7 +137,7 @@ function_8882e03(attacker) {
 function_971df325(target) {
   self endon(#"death");
   target endon(#"titus_target_timeout");
-  target waittill(#"hash_1c822785c3e778b5", #"death");
+  target waittill(#"hash_1c822785c3e778b5", # "death");
 
   if(self clientfield::get("blundergat_dart_blink")) {
     self clientfield::set("blundergat_dart_blink", 0);
@@ -158,7 +157,7 @@ function_efefda46(willbekilled, einflictor, eattacker, idamage, flags, meansofde
       self.var_c541eedd = 1;
 
       foreach(e_grenade in a_grenades) {
-        if(isDefined(e_grenade) && isDefined(e_grenade.model) && e_grenade.model == #"wpn_t8_zm_blundergat_acid_projectile") {
+        if(isDefined(e_grenade) && isDefined(e_grenade.model) && e_grenade.model == # "wpn_t8_zm_blundergat_acid_projectile") {
           if(e_grenade islinkedto(self)) {
             while(isDefined(e_grenade)) {
               if(!isDefined(e_grenade.n_fuse_time)) {
@@ -187,7 +186,7 @@ function_efefda46(willbekilled, einflictor, eattacker, idamage, flags, meansofde
 
     return idamage;
   } else if(weapon === var_6d65656c) {
-    if(self.zm_ai_category == #"miniboss" || self.zm_ai_category == #"boss") {
+    if(self.zm_ai_category == # "miniboss" || self.zm_ai_category == # "boss") {
       return (idamage * 0.1);
     }
 
@@ -199,7 +198,7 @@ function_efefda46(willbekilled, einflictor, eattacker, idamage, flags, meansofde
   var_e97d8c2c = getweapon(#"ww_blundergat_fire_t8_unfinished");
 
   if(weapon == w_blundergat_fire || weapon == w_blundergat_fire_upgraded || weapon == var_e97d8c2c) {
-    if(self.zm_ai_category == #"basic" || self.zm_ai_category == #"popcorn" || self.zm_ai_category == #"enhanced") {
+    if(self.zm_ai_category == # "basic" || self.zm_ai_category == # "popcorn" || self.zm_ai_category == # "enhanced") {
       if(meansofdeath == "MOD_IMPACT") {
         self thread function_dc3470c5(shitloc, vpoint, eattacker, weapon);
         return 0;
@@ -218,7 +217,7 @@ function_efefda46(willbekilled, einflictor, eattacker, idamage, flags, meansofde
           self clientfield::set("zombie_magma_fire_explosion", 1);
         }
       }
-    } else if(self.zm_ai_category == #"miniboss" || self.zm_ai_category == #"boss") {
+    } else if(self.zm_ai_category == # "miniboss" || self.zm_ai_category == # "boss") {
       if(meansofdeath == "MOD_IMPACT") {
         self thread function_dc3470c5(shitloc, vpoint, eattacker, weapon);
         return 0;
@@ -232,10 +231,8 @@ function_efefda46(willbekilled, einflictor, eattacker, idamage, flags, meansofde
   w_blundergat_upgraded = getweapon(#"ww_blundergat_t8_upgraded");
 
   if(weapon == w_blundergat || weapon == w_blundergat_upgraded) {
-    if((self.zm_ai_category == #"basic" || self.zm_ai_category == #"enhanced") && self.archetype !== #"ghost") {
-      if(isDefined(level.no_gib_in_wolf_area) && [
-          [level.no_gib_in_wolf_area]
-        ]()) {
+    if((self.zm_ai_category == # "basic" || self.zm_ai_category == # "enhanced") && self.archetype !== # "ghost") {
+      if(isDefined(level.no_gib_in_wolf_area) && [[level.no_gib_in_wolf_area]]()) {
         return idamage;
       }
 
@@ -248,7 +245,7 @@ function_efefda46(willbekilled, einflictor, eattacker, idamage, flags, meansofde
   return idamage;
 }
 
-private function_eaa9c593() {
+function_eaa9c593() {
   self endon(#"disconnect");
 
   while(true) {
@@ -267,9 +264,9 @@ private function_eaa9c593() {
   }
 }
 
-private function_d72c4a61() {
+function_d72c4a61() {
   self notify(#"hash_20e403096a8af3b7");
-  self endon(#"disconnect", #"hash_20e403096a8af3b7");
+  self endon(#"disconnect", # "hash_20e403096a8af3b7");
 
   while(true) {
     s_result = self waittill(#"weapon_fired");
@@ -307,7 +304,7 @@ function_d82e684c(is_not_upgraded = 1) {
         if(!isDefined(target.titusmarked)) {
           a_tags = [];
 
-          if(target.archetype == #"zombie_dog") {
+          if(target.archetype == # "zombie_dog") {
             a_tags[0] = "j_hip_le";
             a_tags[1] = "j_hip_ri";
             a_tags[2] = "j_spine4";
@@ -341,7 +338,7 @@ function_d82e684c(is_not_upgraded = 1) {
   vec = anglesToForward(var_d571151f);
   trace_end = var_d0407533 + vec * 20000;
   trace = bulletTrace(var_d0407533, trace_end, 1, self);
-  var_7a29db08 = trace[#"position"] + function_40e83b36(55);
+  var_7a29db08 = trace[# "position"] + function_40e83b36(55);
   e_dart = magicbullet(getweapon(#"hash_3de0926b89369160"), var_d0407533, var_7a29db08, self);
   e_dart thread function_49cfb951(n_fuse_timer);
 }
@@ -351,7 +348,7 @@ function_49cfb951(n_fuse_timer = randomfloatrange(1, 1.5), is_not_upgraded = 1, 
   a_grenades = getEntArray("grenade", "classname");
 
   foreach(e_grenade in a_grenades) {
-    if(isDefined(e_grenade.model) && !(isDefined(e_grenade.var_66570d1b) && e_grenade.var_66570d1b) && e_grenade.model == #"wpn_t8_zm_blundergat_acid_projectile") {
+    if(isDefined(e_grenade.model) && !(isDefined(e_grenade.var_66570d1b) && e_grenade.var_66570d1b) && e_grenade.model == # "wpn_t8_zm_blundergat_acid_projectile") {
       e_grenade clientfield::set("blundergat_dart_blink", 1);
       e_grenade.var_66570d1b = 1;
       e_grenade.n_fuse_time = n_fuse_timer;
@@ -368,7 +365,7 @@ function_49cfb951(n_fuse_timer = randomfloatrange(1, 1.5), is_not_upgraded = 1, 
 }
 
 wait_for_grenade_explode(n_fuse_timer, ai_target, e_attacker) {
-  util::waittill_any_ents(self, "death", ai_target, #"titus_target_timeout", ai_target, "death");
+  util::waittill_any_ents(self, "death", ai_target, # "titus_target_timeout", ai_target, "death");
 
   if(isDefined(ai_target)) {
     if(isDefined(self.weapon)) {
@@ -377,7 +374,7 @@ wait_for_grenade_explode(n_fuse_timer, ai_target, e_attacker) {
       w_grenade = undefined;
     }
 
-    if(ai_target.zm_ai_category == #"miniboss" || ai_target.zm_ai_category == #"boss") {
+    if(ai_target.zm_ai_category == # "miniboss" || ai_target.zm_ai_category == # "boss") {
       ai_target dodamage(ai_target.maxhealth * 0.1, ai_target.origin, e_attacker, e_attacker, "none", "MOD_GRENADE", 0, w_grenade);
       return;
     }
@@ -407,7 +404,7 @@ function_38eaed4c(watcher) {
   watcher.onstun = &weaponobjects::weaponstun;
   watcher.stuntime = 0;
   watcher.activationdelay = 1;
-  watcher.activatesound = #"wpn_gelgun_blob_burst";
+  watcher.activatesound = # "wpn_gelgun_blob_burst";
   watcher.deleteonplayerspawn = 1;
   watcher.timeout = 5;
   watcher.ignorevehicles = 0;
@@ -422,11 +419,11 @@ function_482c54d5(watcher, owner) {
     ai_zombie thread function_aa1b44dc(self);
   }
 
-  s_result = self waittilltimeout(5, #"stationary", #"hash_14fd7b6a20ac8f44");
+  s_result = self waittilltimeout(5, # "stationary", # "hash_14fd7b6a20ac8f44");
   waitframe(1);
 
   if(isplayer(s_result.target)) {
-    v_pos = groundtrace(self.origin + (0, 0, 32) + (0, 0, 8), self.origin + (0, 0, 32) + (0, 0, -100000), 0, self)[#"position"];
+    v_pos = groundtrace(self.origin + (0, 0, 32) + (0, 0, 8), self.origin + (0, 0, 32) + (0, 0, -100000), 0, self)[# "position"];
 
     if(isDefined(v_pos)) {
       self ghost();
@@ -462,7 +459,7 @@ function_482c54d5(watcher, owner) {
   self thread function_bf2a4486(mdl_magma, owner, watcher.weapon);
 }
 
-private function_bf2a4486(mdl_magma, owner, weapon) {
+function_bf2a4486(mdl_magma, owner, weapon) {
   self delete();
 
   if(!isDefined(level.var_56f299e3)) {
@@ -487,19 +484,19 @@ private function_bf2a4486(mdl_magma, owner, weapon) {
 
   mdl_magma thread function_c74dfed4(weapon);
   mdl_magma thread function_7b25328b(owner);
-  mdl_magma waittilltimeout(5, #"hash_39da21c99d3cf743");
+  mdl_magma waittilltimeout(5, # "hash_39da21c99d3cf743");
 
   if(isDefined(mdl_magma)) {
     mdl_magma function_19b9fb04();
   }
 }
 
-private function_7b25328b(e_player) {
+function_7b25328b(e_player) {
   if(isDefined(e_player)) {
     w_current = e_player getcurrentweapon();
   }
 
-  v_ground_pos = groundtrace(self.origin, self.origin + (0, 0, -1000), 0, self)[#"position"];
+  v_ground_pos = groundtrace(self.origin, self.origin + (0, 0, -1000), 0, self)[# "position"];
 
   if(!isDefined(v_ground_pos) || distance(v_ground_pos, self.origin) > 64) {
     return;
@@ -529,7 +526,7 @@ private function_7b25328b(e_player) {
   a_ai_zombies = getaiteamarray(level.zombie_team);
 
   foreach(ai_zombie in a_ai_zombies) {
-    if(ai_zombie.zm_ai_category == #"miniboss" || ai_zombie.zm_ai_category == #"boss") {
+    if(ai_zombie.zm_ai_category == # "miniboss" || ai_zombie.zm_ai_category == # "boss") {
       ai_zombie thread zm_utility::add_poi_to_ignore_list(var_dd239d21);
     }
   }
@@ -538,10 +535,10 @@ private function_7b25328b(e_player) {
   var_dd239d21 delete();
 }
 
-private function_aa1b44dc(e_grenade) {
+function_aa1b44dc(e_grenade) {
   self endon(#"death");
   e_grenade endon(#"death");
-  s_result = self waittilltimeout(5, #"grenade_stuck");
+  s_result = self waittilltimeout(5, # "grenade_stuck");
 
   if(s_result.projectile === e_grenade) {
     self.var_4bfa8f6c = e_grenade;
@@ -549,20 +546,20 @@ private function_aa1b44dc(e_grenade) {
   }
 }
 
-private function_5f305489(mdl_magma) {
+function_5f305489(mdl_magma) {
   mdl_magma endon(#"death");
 
-  if(self.zm_ai_category == #"basic" || self.zm_ai_category == #"enhanced" || self.zm_ai_category == #"popcorn") {
+  if(self.zm_ai_category == # "basic" || self.zm_ai_category == # "enhanced" || self.zm_ai_category == # "popcorn") {
     self waittill(#"death");
-  } else if(self.zm_ai_category == #"miniboss" || self.zm_ai_category == #"boss") {
-    self waittilltimeout(5, #"death");
+  } else if(self.zm_ai_category == # "miniboss" || self.zm_ai_category == # "boss") {
+    self waittilltimeout(5, # "death");
     self notify(#"hash_556bad125b55e1a9");
   }
 
   mdl_magma function_19b9fb04();
 }
 
-private function_c74dfed4(weapon) {
+function_c74dfed4(weapon) {
   self endon(#"death");
   self.trigger endon(#"death");
 
@@ -576,7 +573,7 @@ private function_c74dfed4(weapon) {
       }
 
       if(isinarray(getaiteamarray(level.zombie_team), s_result.activator)) {
-        if(s_result.activator.zm_ai_category == #"popcorn" && !(isDefined(s_result.activator.is_on_fire) && s_result.activator.is_on_fire)) {
+        if(s_result.activator.zm_ai_category == # "popcorn" && !(isDefined(s_result.activator.is_on_fire) && s_result.activator.is_on_fire)) {
           s_result.activator dodamage(s_result.activator.health + 100, self.origin, self.owner, self.owner, undefined, "MOD_BURNED", 0, weapon);
           continue;
         }
@@ -589,7 +586,7 @@ private function_c74dfed4(weapon) {
   }
 }
 
-private function_19b9fb04() {
+function_19b9fb04() {
   if(self clientfield::get("magma_gat_blob_fx")) {
     self clientfield::set("magma_gat_blob_fx", 0);
   }
@@ -607,7 +604,7 @@ private function_19b9fb04() {
   }
 }
 
-private get_closest_tag(v_pos) {
+get_closest_tag(v_pos) {
   if(!isDefined(level.gib_tags)) {
     zombie_utility::init_gib_tags();
   }
@@ -667,42 +664,42 @@ function_bd27d397(oldweapondata, newweapondata) {
   w_blundergat_fire = getweapon(#"ww_blundergat_fire_t8");
   w_blundergat_fire_upg = getweapon(#"ww_blundergat_fire_t8_upgraded");
 
-  if((oldweapondata[#"weapon"] === var_e97d8c2c || oldweapondata[#"weapon"] === w_blundergat || oldweapondata[#"weapon"] === w_blundergat_upg || oldweapondata[#"weapon"] === w_blundergat_acid || oldweapondata[#"weapon"] === w_blundergat_acid_upg || oldweapondata[#"weapon"] === w_blundergat_fire || oldweapondata[#"weapon"] === w_blundergat_fire_upg) && (newweapondata[#"weapon"] === var_e97d8c2c || newweapondata[#"weapon"] === w_blundergat || newweapondata[#"weapon"] === w_blundergat_upg || newweapondata[#"weapon"] === w_blundergat_acid || newweapondata[#"weapon"] === w_blundergat_acid_upg || newweapondata[#"weapon"] === w_blundergat_fire || newweapondata[#"weapon"] === w_blundergat_fire_upg)) {
+  if((oldweapondata[# "weapon"] === var_e97d8c2c || oldweapondata[# "weapon"] === w_blundergat || oldweapondata[# "weapon"] === w_blundergat_upg || oldweapondata[# "weapon"] === w_blundergat_acid || oldweapondata[# "weapon"] === w_blundergat_acid_upg || oldweapondata[# "weapon"] === w_blundergat_fire || oldweapondata[# "weapon"] === w_blundergat_fire_upg) && (newweapondata[# "weapon"] === var_e97d8c2c || newweapondata[# "weapon"] === w_blundergat || newweapondata[# "weapon"] === w_blundergat_upg || newweapondata[# "weapon"] === w_blundergat_acid || newweapondata[# "weapon"] === w_blundergat_acid_upg || newweapondata[# "weapon"] === w_blundergat_fire || newweapondata[# "weapon"] === w_blundergat_fire_upg)) {
     weapondata = [];
 
-    if(oldweapondata[#"weapon"] === w_blundergat_fire_upg || newweapondata[#"weapon"] === w_blundergat_fire_upg) {
-      weapondata[#"weapon"] = w_blundergat_fire_upg;
-    } else if(oldweapondata[#"weapon"] === w_blundergat_acid_upg || newweapondata[#"weapon"] === w_blundergat_acid_upg) {
-      weapondata[#"weapon"] = w_blundergat_acid_upg;
-    } else if(oldweapondata[#"weapon"] === w_blundergat_fire || newweapondata[#"weapon"] === w_blundergat_fire) {
-      weapondata[#"weapon"] = w_blundergat_fire;
-    } else if(oldweapondata[#"weapon"] === w_blundergat_acid || newweapondata[#"weapon"] === w_blundergat_acid) {
-      weapondata[#"weapon"] = w_blundergat_acid;
-    } else if(oldweapondata[#"weapon"] === w_blundergat_upg || newweapondata[#"weapon"] === w_blundergat_upg) {
-      weapondata[#"weapon"] = w_blundergat_upg;
-    } else if(oldweapondata[#"weapon"] === var_e97d8c2c) {
-      weapondata[#"weapon"] = newweapondata[#"weapon"];
-    } else if(newweapondata[#"weapon"] === var_e97d8c2c) {
-      weapondata[#"weapon"] = oldweapondata[#"weapon"];
+    if(oldweapondata[# "weapon"] === w_blundergat_fire_upg || newweapondata[# "weapon"] === w_blundergat_fire_upg) {
+      weapondata[# "weapon"] = w_blundergat_fire_upg;
+    } else if(oldweapondata[# "weapon"] === w_blundergat_acid_upg || newweapondata[# "weapon"] === w_blundergat_acid_upg) {
+      weapondata[# "weapon"] = w_blundergat_acid_upg;
+    } else if(oldweapondata[# "weapon"] === w_blundergat_fire || newweapondata[# "weapon"] === w_blundergat_fire) {
+      weapondata[# "weapon"] = w_blundergat_fire;
+    } else if(oldweapondata[# "weapon"] === w_blundergat_acid || newweapondata[# "weapon"] === w_blundergat_acid) {
+      weapondata[# "weapon"] = w_blundergat_acid;
+    } else if(oldweapondata[# "weapon"] === w_blundergat_upg || newweapondata[# "weapon"] === w_blundergat_upg) {
+      weapondata[# "weapon"] = w_blundergat_upg;
+    } else if(oldweapondata[# "weapon"] === var_e97d8c2c) {
+      weapondata[# "weapon"] = newweapondata[# "weapon"];
+    } else if(newweapondata[# "weapon"] === var_e97d8c2c) {
+      weapondata[# "weapon"] = oldweapondata[# "weapon"];
     } else {
-      weapondata[#"weapon"] = w_blundergat;
+      weapondata[# "weapon"] = w_blundergat;
     }
 
-    weapon = weapondata[#"weapon"];
-    weapondata[#"clip"] = newweapondata[#"clip"] + oldweapondata[#"clip"];
-    weapondata[#"stock"] = newweapondata[#"stock"] + oldweapondata[#"stock"];
-    weapondata[#"fuel"] = newweapondata[#"fuel"] + oldweapondata[#"fuel"];
-    weapondata[#"clip"] = int(min(weapondata[#"clip"], weapon.clipsize));
-    weapondata[#"stock"] = int(min(weapondata[#"stock"], weapon.maxammo));
-    weapondata[#"fuel"] = int(min(weapondata[#"fuel"], weapon.fuellife));
-    weapondata[#"heat"] = int(min(newweapondata[#"heat"], oldweapondata[#"heat"]));
-    weapondata[#"overheat"] = int(min(newweapondata[#"overheat"], oldweapondata[#"overheat"]));
-    weapondata[#"power"] = int(max(isDefined(newweapondata[#"power"]) ? newweapondata[#"power"] : 0, isDefined(oldweapondata[#"power"]) ? oldweapondata[#"power"] : 0));
+    weapon = weapondata[# "weapon"];
+    weapondata[# "clip"] = newweapondata[# "clip"] + oldweapondata[# "clip"];
+    weapondata[# "stock"] = newweapondata[# "stock"] + oldweapondata[# "stock"];
+    weapondata[# "fuel"] = newweapondata[# "fuel"] + oldweapondata[# "fuel"];
+    weapondata[# "clip"] = int(min(weapondata[# "clip"], weapon.clipsize));
+    weapondata[# "stock"] = int(min(weapondata[# "stock"], weapon.maxammo));
+    weapondata[# "fuel"] = int(min(weapondata[# "fuel"], weapon.fuellife));
+    weapondata[# "heat"] = int(min(newweapondata[# "heat"], oldweapondata[# "heat"]));
+    weapondata[# "overheat"] = int(min(newweapondata[# "overheat"], oldweapondata[# "overheat"]));
+    weapondata[# "power"] = int(max(isDefined(newweapondata[# "power"]) ? newweapondata[# "power"] : 0, isDefined(oldweapondata[# "power"]) ? oldweapondata[# "power"] : 0));
     return weapondata;
   }
 }
 
-private function_b1abe6ab(t_damage, weapon) {
+function_b1abe6ab(t_damage, weapon) {
   self endon(#"disconnect");
 
   if(isDefined(self.var_bfe9b833) && self.var_bfe9b833) {
@@ -720,7 +717,7 @@ private function_b1abe6ab(t_damage, weapon) {
   self.var_bfe9b833 = undefined;
 }
 
-private function_209c8c45(eattacker, weapon) {
+function_209c8c45(eattacker, weapon) {
   v_pos = self.origin;
   var_223fc6f5 = self getcentroid();
   a_ai_zombies = getaiteamarray(level.zombie_team);
@@ -735,7 +732,7 @@ private function_209c8c45(eattacker, weapon) {
       continue;
     }
 
-    if(ai_target.zm_ai_category === #"basic" || ai_target.zm_ai_category === #"enhanced") {
+    if(ai_target.zm_ai_category === # "basic" || ai_target.zm_ai_category === # "enhanced") {
       ai_target thread function_b826901d(eattacker, var_223fc6f5, weapon);
       continue;
     }
@@ -760,17 +757,17 @@ function_b826901d(eattacker, var_223fc6f5, weapon) {
   self dodamage(400, var_223fc6f5, eattacker, eattacker, "torso_lower", "MOD_EXPLOSIVE", 0, weapon);
 }
 
-private function_dc3470c5(shitloc, vpoint, eattacker, weapon) {
+function_dc3470c5(shitloc, vpoint, eattacker, weapon) {
   self endon(#"death");
   wait 0.5;
 
-  if(self.zm_ai_category == #"miniboss" || self.zm_ai_category == #"boss") {
+  if(self.zm_ai_category == # "miniboss" || self.zm_ai_category == # "boss") {
     self thread function_ba9e077b(eattacker, vpoint, 100, weapon);
     self thread function_78f754f7(eattacker, weapon);
     return;
   }
 
-  if(self.zm_ai_category == #"popcorn") {
+  if(self.zm_ai_category == # "popcorn") {
     self thread function_209c8c45(eattacker, weapon);
     self dodamage(self.health + 100, vpoint, eattacker, eattacker, shitloc, "MOD_BURNED", 0, weapon);
     return;
@@ -794,8 +791,8 @@ private function_dc3470c5(shitloc, vpoint, eattacker, weapon) {
   self thread function_7f95d262(eattacker, weapon);
 }
 
-private function_78f754f7(eattacker, weapon) {
-  self endon(#"death", #"hash_556bad125b55e1a9");
+function_78f754f7(eattacker, weapon) {
+  self endon(#"death", # "hash_556bad125b55e1a9");
 
   while(true) {
     if(level.round_number < 15) {
@@ -814,7 +811,7 @@ private function_78f754f7(eattacker, weapon) {
   }
 }
 
-private function_ba9e077b(eattacker, v_hit_pos, n_damage, weapon) {
+function_ba9e077b(eattacker, v_hit_pos, n_damage, weapon) {
   self endon(#"death");
   self.var_d3bcc6f9 = 1;
 
@@ -822,7 +819,7 @@ private function_ba9e077b(eattacker, v_hit_pos, n_damage, weapon) {
     self dodamage(n_damage, self getcentroid(), eattacker, eattacker, "torso_lower", "MOD_BURNED", 0, weapon);
   }
 
-  if(self.zm_ai_category == #"basic" || self.zm_ai_category == #"enhanced") {
+  if(self.zm_ai_category == # "basic" || self.zm_ai_category == # "enhanced") {
     if(!(isDefined(self.var_cde645df) && self.var_cde645df)) {
       self thread function_faa2e2e5(eattacker, weapon);
     }
@@ -831,7 +828,7 @@ private function_ba9e077b(eattacker, v_hit_pos, n_damage, weapon) {
   }
 
   if(level.var_5fcf49dc.size < 12) {
-    if(self.zm_ai_category == #"basic" || self.zm_ai_category == #"enhanced") {
+    if(self.zm_ai_category == # "basic" || self.zm_ai_category == # "enhanced") {
       self thread function_6901bb20(v_hit_pos);
     } else {
       self thread zombie_death::flame_death_fx();
@@ -841,7 +838,7 @@ private function_ba9e077b(eattacker, v_hit_pos, n_damage, weapon) {
   }
 }
 
-private function_6901bb20(v_hit_pos) {
+function_6901bb20(v_hit_pos) {
   self endon(#"death");
 
   if(isDefined(self.var_cde645df) && self.var_cde645df) {
@@ -866,32 +863,32 @@ private function_6901bb20(v_hit_pos) {
   self thread zombie_death::on_fire_timeout();
 
   switch (str_tag) {
-    case #"j_head":
+    case # "j_head":
       n_fx_pos = 1;
       break;
-    case #"j_spinelower":
-    case #"j_spine4":
-    case #"j_spineupper":
+    case # "j_spinelower":
+    case # "j_spine4":
+    case # "j_spineupper":
       n_fx_pos = 2;
       break;
-    case #"j_elbow_le":
-    case #"j_wrist_le":
-    case #"j_shoulder_le":
+    case # "j_elbow_le":
+    case # "j_wrist_le":
+    case # "j_shoulder_le":
       n_fx_pos = 3;
       break;
-    case #"j_elbow_ri":
-    case #"j_wrist_ri":
-    case #"j_shoulder_ri":
+    case # "j_elbow_ri":
+    case # "j_wrist_ri":
+    case # "j_shoulder_ri":
       n_fx_pos = 4;
       break;
-    case #"j_ankle_le":
-    case #"j_knee_le":
-    case #"j_hip_le":
+    case # "j_ankle_le":
+    case # "j_knee_le":
+    case # "j_hip_le":
       n_fx_pos = 5;
       break;
-    case #"j_ankle_ri":
-    case #"j_knee_ri":
-    case #"j_hip_ri":
+    case # "j_ankle_ri":
+    case # "j_knee_ri":
+    case # "j_hip_ri":
       n_fx_pos = 6;
       break;
     default:
@@ -904,8 +901,8 @@ private function_6901bb20(v_hit_pos) {
   self clientfield::set("positional_zombie_fire_fx", 0);
 }
 
-private function_faa2e2e5(eattacker, weapon) {
-  self endon(#"death", #"stop_flame_damage");
+function_faa2e2e5(eattacker, weapon) {
+  self endon(#"death", # "stop_flame_damage");
   waitframe(1);
 
   while(isDefined(self.var_cde645df) && self.var_cde645df) {
@@ -931,7 +928,7 @@ private function_faa2e2e5(eattacker, weapon) {
   }
 }
 
-private function_20905835() {
+function_20905835() {
   if(!isDefined(level.var_5fcf49dc)) {
     level.var_5fcf49dc = [];
   } else if(!isarray(level.var_5fcf49dc)) {
@@ -946,10 +943,10 @@ private function_20905835() {
   arrayremovevalue(level.var_5fcf49dc, self);
 }
 
-private function_7f95d262(eattacker, weapon) {
+function_7f95d262(eattacker, weapon) {
   self endon(#"death");
 
-  if(self.zm_ai_category !== #"basic" && self.zm_ai_category !== #"enhanced") {
+  if(self.zm_ai_category !== # "basic" && self.zm_ai_category !== # "enhanced") {
     return;
   }
 
@@ -978,7 +975,7 @@ function_f2ef907f() {
   level thread function_c95282e3();
 }
 
-private function_c95282e3() {
+function_c95282e3() {
   level endon(#"hash_209ec855e7a13ef3");
 
   while(true) {
@@ -991,9 +988,9 @@ private function_c95282e3() {
 }
 
 crafting_table_watcher() {
-  if(isDefined(self.stub.blueprint) && self.stub.blueprint.name == #"zblueprint_acid_gat_build_kit") {
+  if(isDefined(self.stub.blueprint) && self.stub.blueprint.name == # "zblueprint_acid_gat_build_kit") {
     v_pos = self.stub.origin;
-    s_progress = self waittill(#"death", #"hash_6db03c91467a21f5");
+    s_progress = self waittill(#"death", # "hash_6db03c91467a21f5");
 
     if(isDefined(s_progress.b_completed) && s_progress.b_completed) {
       var_17022e1e = arraygetclosest(v_pos, level.var_acbfec33);
@@ -1102,17 +1099,17 @@ function_b1347a6() {
       var_fc074136 = undefined;
 
       if(e_player hasweapon(getweapon(#"ww_blundergat_t8"))) {
-        var_fc074136 = #"ww_blundergat_t8";
+        var_fc074136 = # "ww_blundergat_t8";
         var_87cbf0eb = 0;
       } else if(e_player hasweapon(getweapon(#"ww_blundergat_t8_upgraded"))) {
-        var_fc074136 = #"ww_blundergat_t8_upgraded";
+        var_fc074136 = # "ww_blundergat_t8_upgraded";
         var_87cbf0eb = 1;
       } else if(e_player hasweapon(getweapon(#"ww_blundergat_fire_t8"))) {
-        var_fc074136 = #"ww_blundergat_fire_t8";
+        var_fc074136 = # "ww_blundergat_fire_t8";
         var_87cbf0eb = 0;
         var_da887cb9 = getweapon(#"ww_blundergat_fire_t8");
       } else if(e_player hasweapon(getweapon(#"ww_blundergat_fire_t8_upgraded"))) {
-        var_fc074136 = #"ww_blundergat_fire_t8_upgraded";
+        var_fc074136 = # "ww_blundergat_fire_t8_upgraded";
         var_87cbf0eb = 1;
         var_da887cb9 = getweapon(#"ww_blundergat_fire_t8_upgraded");
       }
@@ -1171,7 +1168,7 @@ function_b1347a6() {
             e_player.var_452feb6c = undefined;
           }
 
-          e_player thread zm_audio::create_and_play_dialog(#"weapon_pickup", #"acidgat");
+          e_player thread zm_audio::create_and_play_dialog(#"weapon_pickup", # "acidgat");
         }
 
         e_player notify(#"player_obtained_acidgat");
@@ -1191,7 +1188,7 @@ function_b1347a6() {
 }
 
 wait_for_timeout(var_607f49de) {
-  self endon(#"disconnect", #"acid_taken", #"player_obtained_acidgat");
+  self endon(#"disconnect", # "acid_taken", # "player_obtained_acidgat");
   wait 15;
   level flag::clear(#"hash_634424410f574c1c");
 
@@ -1216,7 +1213,7 @@ blundergat_upgrade_station_inject(var_f2528cbc, e_player) {
     self.worldgun delete();
   }
 
-  if(var_f2528cbc == #"ww_blundergat_t8" || var_f2528cbc == #"ww_blundergat_fire_t8") {
+  if(var_f2528cbc == # "ww_blundergat_t8" || var_f2528cbc == # "ww_blundergat_fire_t8") {
     self.worldgun = zm_utility::spawn_weapon_model(getweapon(#"ww_blundergat_acid_t8"), undefined, self.v_weapon_origin, self.v_weapon_angles);
   } else {
     self.worldgun = zm_utility::spawn_weapon_model(getweapon(#"ww_blundergat_acid_t8_upgraded"), undefined, self.v_weapon_origin, self.v_weapon_angles);

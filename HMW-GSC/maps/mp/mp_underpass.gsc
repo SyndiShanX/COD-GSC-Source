@@ -62,7 +62,7 @@ zombie_easter_egg() {
   damageTrigger setCanDamage(true);
   damageTrigger.health = 999999; // keep it from dying anywhere in code
 
-  for (;;) {
+  for(;;) {
     damageTrigger waittill("damage", damage, attacker, direction_vec, point, sMeansOfDeath, modelName, tagName, partName, iDFlags, sWeapon);
 
     if(isDefined(sMeansOfDeath) && sMeansOfDeath == "MOD_MELEE" && isDefined(attacker) && isPlayer(attacker)) {

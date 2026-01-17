@@ -55,7 +55,7 @@ function ignore_non_sentient(entity) {
 }
 
 function has_threat() {
-  return isdefined(self.bot.threat.entity);
+  return isDefined(self.bot.threat.entity);
 }
 
 function threat_visible() {
@@ -66,7 +66,7 @@ function threat_is_alive() {
   if(!self has_threat()) {
     return 0;
   }
-  if(isdefined(level.botthreatisalive)) {
+  if(isDefined(level.botthreatisalive)) {
     return self[[level.botthreatisalive]](self.bot.threat.entity);
   }
   return isalive(self.bot.threat.entity);
@@ -85,20 +85,20 @@ function clear_threat() {
 }
 
 function update_threat(newthreat) {
-  if(isdefined(newthreat) && newthreat) {
+  if(isDefined(newthreat) && newthreat) {
     self.bot.threat.wasvisible = 0;
     self clear_threat_aim();
   } else {
     self.bot.threat.wasvisible = self.bot.threat.visible;
   }
   velocity = self.bot.threat.entity getvelocity();
-  distancesq = distancesquared(self geteye(), self.bot.threat.entity.origin);
-  predictiontime = (isdefined(level.botsettings.thinkinterval) ? level.botsettings.thinkinterval : 0.05);
+  distancesq = distancesquared(self getEye(), self.bot.threat.entity.origin);
+  predictiontime = (isDefined(level.botsettings.thinkinterval) ? level.botsettings.thinkinterval : 0.05);
   predictedposition = self.bot.threat.entity.origin + (velocity * predictiontime);
   aimpoint = predictedposition + self.bot.threat.aimoffset;
   dot = self bot::fwd_dot(aimpoint);
   fov = self botgetfov();
-  if(isdefined(newthreat) && newthreat) {
+  if(isDefined(newthreat) && newthreat) {
     self.bot.threat.visible = 1;
   } else if(dot < fov || !self botsighttrace(self.bot.threat.entity)) {
     self.bot.threat.visible = 0;
@@ -120,7 +120,7 @@ function update_threat(newthreat) {
 
 function get_new_threat(maxdistance) {
   entity = self get_greatest_threat(maxdistance);
-  if(isdefined(entity) && entity !== self.bot.threat.entity) {
+  if(isDefined(entity) && entity !== self.bot.threat.entity) {
     self set_threat(entity);
     return true;
   }
@@ -129,7 +129,7 @@ function get_new_threat(maxdistance) {
 
 function get_greatest_threat(maxdistance) {
   threats = self[[level.botgetthreats]](maxdistance);
-  if(!isdefined(threats)) {
+  if(!isDefined(threats)) {
     return undefined;
   }
   foreach(entity in threats) {
@@ -144,14 +144,14 @@ function get_greatest_threat(maxdistance) {
 function engage_threat() {
   if(!self.bot.threat.wasvisible && self.bot.threat.visible && !self isthrowinggrenade() && !self fragbuttonpressed() && !self secondaryoffhandbuttonpressed() && !self isswitchingweapons()) {
     visibleroll = randomint(100);
-    rollweight = (isdefined(level.botsettings.lethalweight) ? level.botsettings.lethalweight : 0);
+    rollweight = (isDefined(level.botsettings.lethalweight) ? level.botsettings.lethalweight : 0);
     if(visibleroll < rollweight && self.bot.threat.lastdistancesq >= level.botsettings.lethaldistanceminsq && self.bot.threat.lastdistancesq <= level.botsettings.lethaldistancemaxsq && self getweaponammostock(self.grenadetypeprimary)) {
       self clear_threat_aim();
       self throw_grenade(self.grenadetypeprimary, self.bot.threat.lastposition);
       return;
     }
     visibleroll = visibleroll - rollweight;
-    rollweight = (isdefined(level.botsettings.tacticalweight) ? level.botsettings.tacticalweight : 0);
+    rollweight = (isDefined(level.botsettings.tacticalweight) ? level.botsettings.tacticalweight : 0);
     if(visibleroll >= 0 && visibleroll < rollweight && self.bot.threat.lastdistancesq >= level.botsettings.tacticaldistanceminsq && self.bot.threat.lastdistancesq <= level.botsettings.tacticaldistancemaxsq && self getweaponammostock(self.grenadetypesecondary)) {
       self clear_threat_aim();
       self throw_grenade(self.grenadetypesecondary, self.bot.threat.lastposition);
@@ -241,7 +241,7 @@ function chase_threat() {
     self bot::sprint_to_goal();
     return;
   }
-  if((self.bot.threat.lastvisibletime + (isdefined(level.botsettings.chasethreattime) ? level.botsettings.chasethreattime : 0)) < gettime()) {
+  if((self.bot.threat.lastvisibletime + (isDefined(level.botsettings.chasethreattime) ? level.botsettings.chasethreattime : 0)) < gettime()) {
     self clear_threat();
     return;
   }
@@ -252,39 +252,39 @@ function chase_threat() {
 }
 
 function get_aim_offset(entity) {
-  if(issentient(entity) && randomint(100) < (isdefined(level.botsettings.headshotweight) ? level.botsettings.headshotweight : 0)) {
-    return entity geteye() - entity.origin;
+  if(issentient(entity) && randomint(100) < (isDefined(level.botsettings.headshotweight) ? level.botsettings.headshotweight : 0)) {
+    return entity getEye() - entity.origin;
   }
   return entity getcentroid() - entity.origin;
 }
 
 function update_weapon_aim() {
-  if(!isdefined(self.bot.threat.aimstarttime)) {
+  if(!isDefined(self.bot.threat.aimstarttime)) {
     self start_threat_aim();
   }
   aimtime = gettime() - self.bot.threat.aimstarttime;
   if(aimtime < 0) {
     return;
   }
-  if(aimtime >= self.bot.threat.aimtime || !isdefined(self.bot.threat.aimerror)) {
+  if(aimtime >= self.bot.threat.aimtime || !isDefined(self.bot.threat.aimerror)) {
     self botlookatpoint(self.bot.threat.aimpoint);
     return;
   }
-  eyepoint = self geteye();
+  eyepoint = self getEye();
   threatangles = vectortoangles(self.bot.threat.aimpoint - eyepoint);
   initialangles = threatangles + self.bot.threat.aimerror;
   currangles = vectorlerp(initialangles, threatangles, aimtime / self.bot.threat.aimtime);
   playerangles = self getplayerangles();
-  self botsetlookangles(anglestoforward(currangles));
+  self botsetlookangles(anglesToForward(currangles));
 }
 
 function start_threat_aim() {
-  self.bot.threat.aimstarttime = gettime() + ((isdefined(level.botsettings.aimdelay) ? level.botsettings.aimdelay : 0) * 1000);
-  self.bot.threat.aimtime = (isdefined(level.botsettings.aimtime) ? level.botsettings.aimtime : 0) * 1000;
+  self.bot.threat.aimstarttime = gettime() + ((isDefined(level.botsettings.aimdelay) ? level.botsettings.aimdelay : 0) * 1000);
+  self.bot.threat.aimtime = (isDefined(level.botsettings.aimtime) ? level.botsettings.aimtime : 0) * 1000;
   loc_00001942:
-    pitcherror = angleerror((isdefined(level.botsettings.aimerrorminpitch) ? level.botsettings.aimerrorminpitch : 0), (isdefined(level.botsettings.aimerrormaxpitch) ? level.botsettings.aimerrormaxpitch : 0));
+    pitcherror = angleerror((isDefined(level.botsettings.aimerrorminpitch) ? level.botsettings.aimerrorminpitch : 0), (isDefined(level.botsettings.aimerrormaxpitch) ? level.botsettings.aimerrormaxpitch : 0));
   loc_000019AA:
-    yawerror = angleerror((isdefined(level.botsettings.aimerrorminyaw) ? level.botsettings.aimerrorminyaw : 0), (isdefined(level.botsettings.aimerrormaxyaw) ? level.botsettings.aimerrormaxyaw : 0));
+    yawerror = angleerror((isDefined(level.botsettings.aimerrorminyaw) ? level.botsettings.aimerrorminyaw : 0), (isDefined(level.botsettings.aimerrormaxyaw) ? level.botsettings.aimerrormaxyaw : 0));
   self.bot.threat.aimerror = (pitcherror, yawerror, 0);
 }
 
@@ -300,7 +300,7 @@ function angleerror(anglemin, anglemax) {
 }
 
 function clear_threat_aim() {
-  if(!isdefined(self.bot.threat.aimstarttime)) {
+  if(!isDefined(self.bot.threat.aimstarttime)) {
     return;
   }
   self.bot.threat.aimstarttime = undefined;
@@ -312,7 +312,7 @@ function bot_pre_combat() {
   if(self has_threat()) {
     return;
   }
-  if(isdefined(self.bot.damage.time) && (self.bot.damage.time + 1500) > gettime()) {
+  if(isDefined(self.bot.damage.time) && (self.bot.damage.time + 1500) > gettime()) {
     if(self has_threat() && self.bot.damage.time > self.bot.threat.lastvisibletime) {
       self clear_threat();
     }
@@ -453,7 +453,7 @@ function switch_weapon() {
   }
   weapon = bot::get_ready_gadget();
   if(weapon != level.weaponnone) {
-    if(!isdefined(level.enemyempactive) || !self[[level.enemyempactive]]()) {
+    if(!isDefined(level.enemyempactive) || !self[[level.enemyempactive]]()) {
       self bot::activate_hero_gadget(weapon);
       return true;
     }
@@ -545,7 +545,7 @@ function weapon_clip_frac(weapon) {
 }
 
 function throw_grenade(weapon, target) {
-  if(!isdefined(self.bot.threat.aimstarttime)) {
+  if(!isDefined(self.bot.threat.aimstarttime)) {
     self aim_grenade(weapon, target);
     self press_grenade_button(weapon);
     return;
@@ -576,7 +576,7 @@ function aim_grenade(weapon, target) {
 
 function will_hit_target(weapon, target) {
   velocity = get_throw_velocity(weapon);
-  throworigin = self geteye();
+  throworigin = self getEye();
   xydist = distance2d(throworigin, target);
   xyspeed = distance2d(velocity, (0, 0, 0));
   t = xydist / xyspeed;
@@ -587,7 +587,7 @@ function will_hit_target(weapon, target) {
 
 function get_throw_velocity(weapon) {
   angles = self getplayerangles();
-  forward = anglestoforward(angles);
+  forward = anglesToForward(angles);
   return forward * 928;
 }
 
@@ -604,7 +604,7 @@ function get_lethal_grenade() {
 function wait_damage_loop() {
   self endon("death");
   level endon("game_ended");
-  while (true) {
+  while(true) {
     self waittill("damage", damage, attacker, direction, point, mod, unused1, unused2, unused3, weapon, flags, inflictor);
     self.bot.damage.entity = attacker;
     self.bot.damage.amount = damage;
@@ -625,20 +625,20 @@ function clear_damage() {
   self.bot.damage.time = undefined;
 }
 
-function combat_strafe(radiusmin = (isdefined(level.botsettings.strafemin) ? level.botsettings.strafemin : 0), radiusmax, spacing, sidedotmin, sidedotmax) {
-  if(!isdefined(radiusmax)) {
-    radiusmax = (isdefined(level.botsettings.strafemax) ? level.botsettings.strafemax : 0);
+function combat_strafe(radiusmin = (isDefined(level.botsettings.strafemin) ? level.botsettings.strafemin : 0), radiusmax, spacing, sidedotmin, sidedotmax) {
+  if(!isDefined(radiusmax)) {
+    radiusmax = (isDefined(level.botsettings.strafemax) ? level.botsettings.strafemax : 0);
   }
-  if(!isdefined(spacing)) {
-    spacing = (isdefined(level.botsettings.strafespacing) ? level.botsettings.strafespacing : 0);
+  if(!isDefined(spacing)) {
+    spacing = (isDefined(level.botsettings.strafespacing) ? level.botsettings.strafespacing : 0);
   }
-  if(!isdefined(sidedotmin)) {
-    sidedotmin = (isdefined(level.botsettings.strafesidedotmin) ? level.botsettings.strafesidedotmin : 0);
+  if(!isDefined(sidedotmin)) {
+    sidedotmin = (isDefined(level.botsettings.strafesidedotmin) ? level.botsettings.strafesidedotmin : 0);
   }
-  if(!isdefined(sidedotmax)) {
-    sidedotmax = (isdefined(level.botsettings.strafesidedotmax) ? level.botsettings.strafesidedotmax : 0);
+  if(!isDefined(sidedotmax)) {
+    sidedotmax = (isDefined(level.botsettings.strafesidedotmax) ? level.botsettings.strafesidedotmax : 0);
   }
-  fwd = anglestoforward(self.angles);
+  fwd = anglesToForward(self.angles);
   queryresult = positionquery_source_navigation(self.origin, radiusmin, radiusmax, 64, spacing, self);
   best_point = undefined;
   foreach(point in queryresult.data) {
@@ -648,11 +648,11 @@ function combat_strafe(radiusmin = (isdefined(level.botsettings.strafemin) ? lev
       point.score = mapfloat(radiusmin, radiusmax, 0, 50, point.disttoorigin2d);
       point.score = point.score + randomfloatrange(0, 50);
     }
-    if(!isdefined(best_point) || point.score > best_point.score) {
+    if(!isDefined(best_point) || point.score > best_point.score) {
       best_point = point;
     }
   }
-  if(isdefined(best_point)) {
+  if(isDefined(best_point)) {
     self botsetgoal(best_point.origin);
     self bot::end_sprint_to_goal();
   }

@@ -43,7 +43,7 @@ end_last_stand(clientnum) {
 
   println("Gasp.");
 
-  playsound(clientnum, "revive_gasp");
+  playSound(clientnum, "revive_gasp");
 }
 
 last_stand_thread(clientnum) {
@@ -62,7 +62,7 @@ last_stand_thread(clientnum) {
   vol = 0.5;
 
   while(true) {
-    id = playsound(clientnum, "chr_heart_beat");
+    id = playSound(clientnum, "chr_heart_beat");
     setsoundvolume(id, vol);
     waitrealtime(pause);
 
@@ -94,7 +94,7 @@ last_stand_monitor(clientnum, state, oldstate) {
       player thread last_stand_thread(clientnum);
 
       if(players.size <= 1)
-        level.lslooper playloopsound("evt_laststand_loop", 0.3);
+        level.lslooper playLoopSound("evt_laststand_loop", 0.3);
 
       level._laststand[clientnum] = 1;
     }
@@ -136,8 +136,7 @@ damage_visionset_think(local_client_num) {
   }
 }
 
-default_flag_change_handler(localclientnum, flag, set, newent) {
-}
+default_flag_change_handler(localclientnum, flag, set, newent) {}
 
 init_client_flags() {
   level.cf_player_underwater = 15;

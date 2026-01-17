@@ -11,10 +11,7 @@ main() {
   level._effect["room_smoke_200"] = loadfx("smoke/room_smoke_200");
   level._effect["snow_spiral_runner"] = loadfx("snow/snow_spiral_runner");
 
-
-  /#
   if(getdvar("clientSideEffects") != "1")
     maps\createfx\mp_derail_fx::main();
-  # /
 
 }

@@ -54,7 +54,7 @@ main() {
   level.a_sp_actors["sco"] = getent("sco_assault", "targetname");
   level.a_sp_actors["pmc"] = getent("pmc_assault", "targetname");
   level.overrideactorkilled = ::global_actor_killed_callback;
-  a_m_clips = getentarray("compile_paths_clips", "targetname");
+  a_m_clips = getEntArray("compile_paths_clips", "targetname");
 
   foreach(m_clip in a_m_clips)
   m_clip delete();
@@ -383,7 +383,7 @@ antiair_challenge(str_notify) {
 }
 
 delete_ent(str_targetname) {
-  a_m_to_delete = getentarray(str_targetname, "targetname");
+  a_m_to_delete = getEntArray(str_targetname, "targetname");
 
   foreach(m_to_delete in a_m_to_delete)
   m_to_delete delete();

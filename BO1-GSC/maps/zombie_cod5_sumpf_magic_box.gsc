@@ -22,9 +22,9 @@ swamp_pandora_fx_func() {
   self.pandora_light.angles = self.chest_origin.angles + (-90, 0, 0);
   self.pandora_light setModel("tag_origin");
   if(self.script_noteworthy == "start_chest") {
-    PlayFXOnTag(level._effect["lght_marker"], self.pandora_light, "tag_origin");
+    playFXOnTag(level._effect["lght_marker"], self.pandora_light, "tag_origin");
   } else {
-    PlayFXOnTag(level._effect["lght_marker_old"], self.pandora_light, "tag_origin");
+    playFXOnTag(level._effect["lght_marker_old"], self.pandora_light, "tag_origin");
   }
 }
 
@@ -34,7 +34,7 @@ waitfor_flag_open_chest_location(which) {
     case "nw_magic_box":
       flag_wait("nw_magic_box");
       maps\zombie_cod5_sumpf_trap_pendulum::initPendulumTrap();
-      penBuyTrigger = getentarray("pendulum_buy_trigger", "targetname");
+      penBuyTrigger = getEntArray("pendulum_buy_trigger", "targetname");
       if(level.mutators["mutator_noTraps"]) {
         maps\_zombiemode_traps::disable_traps(penBuyTrigger);
       } else {

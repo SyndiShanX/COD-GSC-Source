@@ -7,7 +7,7 @@
 
 function main() {
   disablefx = getdvarint("disable_fx");
-  if(!isdefined(disablefx) || disablefx <= 0) {
+  if(!isDefined(disablefx) || disablefx <= 0) {
     precache_scripted_fx();
   }
 }

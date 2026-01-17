@@ -45,15 +45,15 @@ event1_fakefire() {
 
 event1_fakefire_think(firepoints) {
   level endon("stop_event1_fakefire");
-  while (1) {
+  while(1) {
     firepoint = firepoints[randomint(firepoints.size)];
     if(isDefined(firepoint.is_firing) && firepoint.is_firing == true) {
       continue;
     }
     firepoint.is_firing = true;
     clipsize = randomintrange(2, 7);
-    for (i = 0; i < clipsize; i++) {
-      playfx(level._effect["distant_muzzleflash"], firepoint.origin, anglestoforward(firepoint.angles), anglestoup(firepoint.angles));
+    for(i = 0; i < clipsize; i++) {
+      playFX(level._effect["distant_muzzleflash"], firepoint.origin, anglesToForward(firepoint.angles), anglestoup(firepoint.angles));
       rand = randomint(3);
       if(!rand) {
         thread play_sound_in_space("weap_mp40_fire", firepoint.origin);
@@ -77,16 +77,16 @@ event1_katyusha_rocket_barrage(truck_name, trigger_name) {
   rocket_separation = 10;
   rocket_center_point = truck.origin + (0, -50, 100);
   rocket_left_most_point = rocket_center_point - (rocket_num * rocket_separation * 0.5, 0, 0);
-  for (i = 0; i < rocket_num; i++) {
+  for(i = 0; i < rocket_num; i++) {
     start_points[i] = rocket_left_most_point + (i * rocket_separation, 0, 0);
     dest_points[i] = start_points[i] + attack_range;
   }
-  for (i = 0; i < start_points.size; i++) {
+  for(i = 0; i < start_points.size; i++) {
     rocket = spawn("script_model", start_points[i]);
-    rocket setmodel("weapon_ger_panzershreck_rocket");
+    rocket setModel("weapon_ger_panzershreck_rocket");
     rocket.angles = (320, 90, 0);
-    playfxontag(level._effect["rocket_trail"], rocket, "tag_origin");
-    rocket playsound("rocket_run");
+    playFXOnTag(level._effect["rocket_trail"], rocket, "tag_origin");
+    rocket playSound("rocket_run");
     rocket thread event1_katyusha_rocket_fly_think(dest_points[i] + (randomint(50), randomint(50), randomint(50)));
     wait(0.7);
   }
@@ -95,7 +95,7 @@ event1_katyusha_rocket_barrage(truck_name, trigger_name) {
 event1_katyusha_rocket_barrage_side(struct_name, trigger_name) {
   trucks = getstructarray(struct_name, "targetname");
   trigger = getent(trigger_name, "targetname");
-  for (i = 0; i < trucks.size; i++) {
+  for(i = 0; i < trucks.size; i++) {
     event1_katyusha_rocket_barrage_side_single(trucks[i], trigger);
   }
 }
@@ -110,18 +110,18 @@ event1_katyusha_rocket_barrage_side_single(start_struct, trigger) {
   rocket_separation = 10;
   rocket_center_point = start_struct.origin + (0, -50, 100);
   rocket_left_most_point = rocket_center_point - (rocket_num * rocket_separation * 0.5, 0, 0);
-  for (i = 0; i < rocket_num; i++) {
+  for(i = 0; i < rocket_num; i++) {
     start_points[i] = rocket_left_most_point + (i * rocket_separation, 0, 0);
     dest_points[i] = start_points[i] + attack_range;
   }
-  while (1) {
+  while(1) {
     wait(randomint(2));
-    for (i = 0; i < start_points.size; i++) {
+    for(i = 0; i < start_points.size; i++) {
       rocket = spawn("script_model", start_points[i]);
-      rocket setmodel("weapon_ger_panzershreck_rocket");
+      rocket setModel("weapon_ger_panzershreck_rocket");
       rocket.angles = (320, 90, 0);
-      playfxontag(level._effect["rocket_trail"], rocket, "tag_origin");
-      rocket playsound("rocket_run");
+      playFXOnTag(level._effect["rocket_trail"], rocket, "tag_origin");
+      rocket playSound("rocket_run");
       rocket thread event1_katyusha_rocket_fly_think(dest_points[i] + (randomint(50), randomint(50), randomint(50)));
       wait(0.7);
     }
@@ -130,11 +130,11 @@ event1_katyusha_rocket_barrage_side_single(start_struct, trigger) {
 }
 
 event1_katyusha_rocket_fly_think(destination_pos) {
-  playfx(level._effect["lci_rocket_launch"], self.origin, anglestoforward((320, 90, 0)), anglestoup((320, 90, 0)));
-  while (1) {
+  playFX(level._effect["lci_rocket_launch"], self.origin, anglesToForward((320, 90, 0)), anglestoup((320, 90, 0)));
+  while(1) {
     if(self.origin[2] < -500) {
       if(self.origin[1] > 8000) {
-        playfx(level._effect["lci_rocket_impact"], self.origin);
+        playFX(level._effect["lci_rocket_impact"], self.origin);
         thread play_sound_in_space("rocket_dirt", self.origin);
       }
       break;
@@ -153,14 +153,14 @@ event3() {
 
 event3_flak_flashes() {
   targets = getstructarray("ev3_flash", "targetname");
-  for (i = 0; i < targets.size; i++) {
+  for(i = 0; i < targets.size; i++) {
     level thread event3_flak_flash_single(targets[i].origin);
   }
 }
 
 event3_flak_flash_single(position) {
-  while (1) {
+  while(1) {
     wait(randomfloat(4) + 3);
-    playfx(level._effect["flak_flash"], position);
+    playFX(level._effect["flak_flash"], position);
   }
 }

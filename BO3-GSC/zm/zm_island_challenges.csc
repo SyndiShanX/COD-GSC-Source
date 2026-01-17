@@ -16,19 +16,19 @@
 
 function init() {
   var_850da4c5 = getminbitcountfornum(4);
-  clientfield::register("world", "pillar_challenge_0_1", 9000, var_850da4c5, "int", & pillar_challenge_0_1, 0, 0);
-  clientfield::register("world", "pillar_challenge_0_2", 9000, var_850da4c5, "int", & pillar_challenge_0_2, 0, 0);
-  clientfield::register("world", "pillar_challenge_0_3", 9000, var_850da4c5, "int", & pillar_challenge_0_3, 0, 0);
-  clientfield::register("world", "pillar_challenge_1_1", 9000, var_850da4c5, "int", & pillar_challenge_1_1, 0, 0);
-  clientfield::register("world", "pillar_challenge_1_2", 9000, var_850da4c5, "int", & pillar_challenge_1_2, 0, 0);
-  clientfield::register("world", "pillar_challenge_1_3", 9000, var_850da4c5, "int", & pillar_challenge_1_3, 0, 0);
-  clientfield::register("world", "pillar_challenge_2_1", 9000, var_850da4c5, "int", & pillar_challenge_2_1, 0, 0);
-  clientfield::register("world", "pillar_challenge_2_2", 9000, var_850da4c5, "int", & pillar_challenge_2_2, 0, 0);
-  clientfield::register("world", "pillar_challenge_2_3", 9000, var_850da4c5, "int", & pillar_challenge_2_3, 0, 0);
-  clientfield::register("world", "pillar_challenge_3_1", 9000, var_850da4c5, "int", & pillar_challenge_3_1, 0, 0);
-  clientfield::register("world", "pillar_challenge_3_2", 9000, var_850da4c5, "int", & pillar_challenge_3_2, 0, 0);
-  clientfield::register("world", "pillar_challenge_3_3", 9000, var_850da4c5, "int", & pillar_challenge_3_3, 0, 0);
-  clientfield::register("scriptmover", "challenge_glow_fx", 9000, 2, "int", & challenge_glow_fx, 0, 0);
+  clientfield::register("world", "pillar_challenge_0_1", 9000, var_850da4c5, "int", &pillar_challenge_0_1, 0, 0);
+  clientfield::register("world", "pillar_challenge_0_2", 9000, var_850da4c5, "int", &pillar_challenge_0_2, 0, 0);
+  clientfield::register("world", "pillar_challenge_0_3", 9000, var_850da4c5, "int", &pillar_challenge_0_3, 0, 0);
+  clientfield::register("world", "pillar_challenge_1_1", 9000, var_850da4c5, "int", &pillar_challenge_1_1, 0, 0);
+  clientfield::register("world", "pillar_challenge_1_2", 9000, var_850da4c5, "int", &pillar_challenge_1_2, 0, 0);
+  clientfield::register("world", "pillar_challenge_1_3", 9000, var_850da4c5, "int", &pillar_challenge_1_3, 0, 0);
+  clientfield::register("world", "pillar_challenge_2_1", 9000, var_850da4c5, "int", &pillar_challenge_2_1, 0, 0);
+  clientfield::register("world", "pillar_challenge_2_2", 9000, var_850da4c5, "int", &pillar_challenge_2_2, 0, 0);
+  clientfield::register("world", "pillar_challenge_2_3", 9000, var_850da4c5, "int", &pillar_challenge_2_3, 0, 0);
+  clientfield::register("world", "pillar_challenge_3_1", 9000, var_850da4c5, "int", &pillar_challenge_3_1, 0, 0);
+  clientfield::register("world", "pillar_challenge_3_2", 9000, var_850da4c5, "int", &pillar_challenge_3_2, 0, 0);
+  clientfield::register("world", "pillar_challenge_3_3", 9000, var_850da4c5, "int", &pillar_challenge_3_3, 0, 0);
+  clientfield::register("scriptmover", "challenge_glow_fx", 9000, 2, "int", &challenge_glow_fx, 0, 0);
 }
 
 function pillar_challenge_0_1(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -214,9 +214,9 @@ function function_72573d3d(localclientnum, n_challenge, var_2ca030e2) {
 
 function challenge_glow_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
-    playfxontag(localclientnum, level._effect["powerup_on"], self, "tag_origin");
+    playFXOnTag(localclientnum, level._effect["powerup_on"], self, "tag_origin");
   }
   if(newval == 2) {
-    playfxontag(localclientnum, level._effect["powerup_on_solo"], self, "tag_origin");
+    playFXOnTag(localclientnum, level._effect["powerup_on_solo"], self, "tag_origin");
   }
 }

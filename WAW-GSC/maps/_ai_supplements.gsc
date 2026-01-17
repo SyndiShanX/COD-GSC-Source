@@ -30,7 +30,7 @@ is_valid_spawner(spawner, type) {
 
 ai_supplements_think() {
   level waittill("first_player_ready");
-  for (;;) {
+  for(;;) {
     wait 1;
     type = need_more_enemies();
     if(!isDefined(type)) {
@@ -39,7 +39,7 @@ ai_supplements_think() {
     wait 0.05;
     aiarray = GetAIArray("axis");
     if(level.ais_possesion_mode == 1 && type != "standard") {
-      for (i = 0; i < aiarray.size; i++) {
+      for(i = 0; i < aiarray.size; i++) {
         if(ok_to_possess(aiarray[i])) {
           aiarray[i] thread ai_supplement_tracker(type, 1);
           break;
@@ -52,7 +52,7 @@ ai_supplements_think() {
       continue;
     }
     enemy_origins = [];
-    for (i = 0; i < aiarray.size; i++) {
+    for(i = 0; i < aiarray.size; i++) {
       if(!isDefined(aiarray[i].ai_supplement_type)) {
         enemy_origins[enemy_origins.size] = aiarray[i].origin;
       }
@@ -63,7 +63,7 @@ ai_supplements_think() {
     spawners = getspawnerarray();
     best_spawner_score = 0;
     best_spawner = undefined;
-    for (i = 0; i < spawners.size; i++) {
+    for(i = 0; i < spawners.size; i++) {
       spawner = spawners[i];
       if(is_valid_spawner(spawner, type)) {
         score = score_spawner(spawner, type, enemy_origins);
@@ -83,7 +83,7 @@ ai_supplements_think() {
 display_ai_supplements_menu() {
   if(getdebugdvar("debug_ai_supplement") == "")
     setdvar("debug_ai_supplement", "0");
-  for (;;) {
+  for(;;) {
     if(getdvarInt("debug_ai_supplement")) {
       wait .5;
       setdvar("debug_ai_supplement", 0);
@@ -165,13 +165,13 @@ display_ai_supplements() {
     down_pressed = false;
     right_pressed = false;
     left_pressed = false;
-    for (;;) {
+    for(;;) {
       players = get_players();
       if(isDefined(players))
         settings_index = players.size - 1;
       else
         settings_index = 0;
-      for (i = 0; i < 8; i++) {
+      for(i = 0; i < 8; i++) {
         elems[i].color = (0.7, 0.7, 0.7);
       }
       elems[0].label = "Min Standard: " + level.ai_supplements_settings[settings_index].extra_standard_min + "Cur: " + level.extra_standard_current;
@@ -221,7 +221,7 @@ display_ai_supplements() {
       if(players[0] buttonPressed("kp_enter") || players[0] buttonPressed("BUTTON_A") || players[0] buttonPressed("enter")) {
         if(selected == 7) {
           title destroy();
-          for (i = 0; i < elems.size; i++) {
+          for(i = 0; i < elems.size; i++) {
             elems[i] destroy();
           }
           break;

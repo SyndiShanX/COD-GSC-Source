@@ -64,8 +64,7 @@ skipto_slums_main() {
   level thread church_right_mg();
 }
 
-skipto_slums_halfway() {
-}
+skipto_slums_halfway() {}
 
 init_flags() {
   flag_init("ambulance_complete");
@@ -248,13 +247,13 @@ ambulance_van() {
   run_scene("slums_ambulance");
   v_ambulance = getent("ambulence", "targetname");
   light_left = spawn("script_model", v_ambulance gettagorigin("tag_light_left") + vectorscale((0, 0, 1), 6.0));
-  light_left setmodel("tag_origin");
+  light_left setModel("tag_origin");
   light_left.angles = v_ambulance gettagangles("tag_light_left");
-  playfxontag(getfx("ambulance_siren"), light_left, "tag_origin");
+  playFXOnTag(getfx("ambulance_siren"), light_left, "tag_origin");
   light_right = spawn("script_model", v_ambulance gettagorigin("tag_light_right") + vectorscale((0, 0, 1), 6.0));
-  light_right setmodel("tag_origin");
+  light_right setModel("tag_origin");
   light_right.angles = v_ambulance gettagangles("tag_light_right");
-  playfxontag(getfx("ambulance_siren"), light_right, "tag_origin");
+  playFXOnTag(getfx("ambulance_siren"), light_right, "tag_origin");
 }
 
 intro_ambulance() {
@@ -565,7 +564,7 @@ slums_drones_setup() {
 }
 
 slums_magic_rpg_setup() {
-  a_triggers = getentarray("slums_rpg", "targetname");
+  a_triggers = getEntArray("slums_rpg", "targetname");
   array_thread(a_triggers, ::slums_magic_rpg_think);
 }
 
@@ -622,9 +621,9 @@ init_slums_pre_mgnest_axis() {
 }
 
 e_01_army_street_push() {
-  a_sp_allies = getentarray("slums_mg_nest_allies", "targetname");
+  a_sp_allies = getEntArray("slums_mg_nest_allies", "targetname");
   array_thread(a_sp_allies, ::add_spawn_function, ::magic_bullet_shield);
-  a_slums_pre_mgnest_axis = getentarray("slums_pre_mgnest_axis", "targetname");
+  a_slums_pre_mgnest_axis = getEntArray("slums_pre_mgnest_axis", "targetname");
   array_thread(a_slums_pre_mgnest_axis, ::add_spawn_function, ::init_slums_pre_mgnest_axis);
   slums_mg_nest_allies = simple_spawn("slums_mg_nest_allies");
   spawn_manager_enable("sm_slums_axis_pre_mgnest");
@@ -636,7 +635,7 @@ e_01_army_street_push() {
 }
 
 e_01_fire_building_civs() {
-  a_fire_building_civilians = getentarray("fire_building_civilians", "targetname");
+  a_fire_building_civilians = getEntArray("fire_building_civilians", "targetname");
   array_thread(a_fire_building_civilians, ::add_spawn_function, ::init_fire_building_civilians);
   level thread run_scene("civs_building_01");
   level thread run_scene("civs_building_02");
@@ -696,14 +695,14 @@ e_01_overlook() {
   stop_exploder(15011);
   level notify("fxanim_overlook_building_start");
   level thread e_01_fire_building_civs();
-  level.player playsound("fxa_pan_overwatch_collapse");
-  a_models = getentarray("overlook_hide", "targetname");
+  level.player playSound("fxa_pan_overwatch_collapse");
+  a_models = getEntArray("overlook_hide", "targetname");
   array_delete(a_models);
 }
 
 e_01_apc_digbat_alley() {
   level endon("kill_e_01_apc_digbat_alley");
-  a_apc_alley_army = getentarray("apc_alley_army", "targetname");
+  a_apc_alley_army = getEntArray("apc_alley_army", "targetname");
   array_thread(a_apc_alley_army, ::add_spawn_function, ::magic_bullet_shield);
   ai_alley_apc_gunner = getent("alley_apc_gunner", "targetname");
   ai_alley_apc_gunner add_spawn_function(::magic_bullet_shield);
@@ -742,10 +741,10 @@ e_01_overlook_advance(str_aigroup) {
 e_01_overlook_attach_strobe(e_thrower) {
   e_thrower attach("t5_weapon_tactical_insertion_world", "tag_weapon_left");
   e_thrower.e_strobe = spawn("script_model", e_thrower.origin);
-  e_thrower.e_strobe setmodel("tag_origin");
+  e_thrower.e_strobe setModel("tag_origin");
   e_thrower.e_strobe linkto(e_thrower, "tag_weapon_left");
-  playfxontag(getfx("ir_strobe"), e_thrower.e_strobe, "tag_origin");
-  e_thrower.e_strobe playloopsound("fly_irstrobe_beep", 0.1);
+  playFXOnTag(getfx("ir_strobe"), e_thrower.e_strobe, "tag_origin");
+  e_thrower.e_strobe playLoopSound("fly_irstrobe_beep", 0.1);
 }
 
 e_01_overlook_detach_strobe(e_thrower) {
@@ -793,7 +792,7 @@ e_02_apache_attack() {
   flag_set("slums_apache_retreat");
   maps\_drones::drones_delete("slums_apache_drones");
   level notify("apache_target_stop");
-  a_pdf = getentarray("apache_target", "script_noteworthy");
+  a_pdf = getEntArray("apache_target", "script_noteworthy");
 
   foreach(e_drone in a_pdf) {
     if(isDefined(e_drone)) {
@@ -862,7 +861,7 @@ e_02_gazebo_destruction() {
 
 gazebo_audio_loop() {
   gaz_sound = spawn("script_origin", (24465, 28335, 720));
-  gaz_sound playloopsound("fxa_gzbo_loop", 2);
+  gaz_sound playLoopSound("fxa_gzbo_loop", 2);
   gaz_sound thread gazebo_impacts();
   level waittill("blow_gazebo");
   gaz_sound stoploopsound(2.5);
@@ -874,13 +873,13 @@ gazebo_impacts() {
   level endon("blow_gazebo");
 
   while(true) {
-    self playsound("fxa_gzbo_hit_prj");
+    self playSound("fxa_gzbo_hit_prj");
     wait(randomfloatrange(0.02, 0.1));
   }
 }
 
 e_03_building_destroy() {
-  a_library_destroyed = getentarray("jc_library_destroyed", "targetname");
+  a_library_destroyed = getEntArray("jc_library_destroyed", "targetname");
 
   foreach(e_piece in a_library_destroyed)
   e_piece hide();
@@ -892,7 +891,7 @@ e_03_building_destroy() {
   s_start = getstruct("slums_howitzer_start", "targetname");
   s_end = getstruct(s_start.target, "targetname");
   magicbullet("ac130_howitzer_minigun", s_start.origin, s_end.origin);
-  a_pdf = getentarray("howitzer_target", "script_noteworthy");
+  a_pdf = getEntArray("howitzer_target", "script_noteworthy");
 
   foreach(e_drone in a_pdf)
   e_drone thread drone_fakedeath(1);
@@ -904,7 +903,7 @@ e_03_building_destroy() {
   foreach(e_piece in a_library_destroyed)
   e_piece show();
 
-  a_library_pristine = getentarray("jc_library_intact", "targetname");
+  a_library_pristine = getEntArray("jc_library_intact", "targetname");
   array_delete(a_library_pristine);
 }
 
@@ -915,7 +914,7 @@ e_04_apc_wall_crash() {
   s_pos = getstruct("APC_StoreCrash", "targetname");
   e_sound = spawn("script_origin", s_pos.origin);
   level notify("fxanim_laundromat_wall_start");
-  e_sound playsound("evt_apc_wall_crash");
+  e_sound playSound("evt_apc_wall_crash");
   run_scene("slums_apc_wall_crash");
   e_sound delete();
   wall_clip = getent("apc_marine_guard_clip", "targetname");
@@ -1041,10 +1040,10 @@ apc_announcements(vehicle) {
   if(isDefined(vehicle.model) && vehicle.model == "veh_t6_mil_m113") {
     while(isDefined(vehicle)) {
       wait(randomfloatrange(3, 6));
-      vehicle playsound("vox_pan_2_01_024A_pa", "sounddone");
+      vehicle playSound("vox_pan_2_01_024A_pa", "sounddone");
       vehicle waittill("sounddone");
       wait(randomfloatrange(3, 6));
-      vehicle playsound("vox_pan_2_01_025A_pa", "sounddone");
+      vehicle playSound("vox_pan_2_01_025A_pa", "sounddone");
       vehicle waittill("sounddone");
     }
   }
@@ -1073,10 +1072,10 @@ e_15_dumpster_push() {
 }
 
 e_16_claymore_alley() {
-  a_claymores = getentarray("slums_claymore", "targetname");
+  a_claymores = getEntArray("slums_claymore", "targetname");
 
   foreach(m_claymore in a_claymores) {
-    playfxontag(getfx("claymore_laser"), m_claymore, "tag_fx");
+    playFXOnTag(getfx("claymore_laser"), m_claymore, "tag_fx");
     m_claymore thread e_16_satchel_damage();
     m_claymore thread e_16_claymore_detonation();
   }
@@ -1085,7 +1084,7 @@ e_16_claymore_alley() {
 e_16_satchel_damage() {
   self endon("death");
   self.health = 100;
-  self setcandamage(1);
+  self setCanDamage(1);
   self.maxhealth = 100000;
   self.health = self.maxhealth;
   self waittill("damage");
@@ -1112,7 +1111,7 @@ e_16_claymore_detonation() {
 }
 
 e_16_detonate() {
-  playfx(getfx("claymore_explode"), self gettagorigin("tag_fx"));
+  playFX(getfx("claymore_explode"), self gettagorigin("tag_fx"));
   radiusdamage(self gettagorigin("tag_fx"), 192, 250, 500);
   self delete();
 }
@@ -1168,15 +1167,15 @@ e_19_molotov_digbat() {
 
 e_19_attach(e_digbat) {
   e_digbat attach("t6_wpn_molotov_cocktail_prop_world", "tag_weapon_left");
-  playfxontag(getfx("molotov_lit"), e_digbat, "TAG_FX");
+  playFXOnTag(getfx("molotov_lit"), e_digbat, "TAG_FX");
 }
 
 e_19_shot(e_digbat) {
-  playfxontag(getfx("on_fire_tor"), e_digbat, "J_Spine4");
-  playfxontag(getfx("on_fire_leg"), e_digbat, "J_Hip_LE");
-  playfxontag(getfx("on_fire_leg"), e_digbat, "J_Hip_RI");
-  playfxontag(getfx("on_fire_arm"), e_digbat, "J_Elbow_LE");
-  playfxontag(getfx("on_fire_arm"), e_digbat, "J_Elbow_RI");
+  playFXOnTag(getfx("on_fire_tor"), e_digbat, "J_Spine4");
+  playFXOnTag(getfx("on_fire_leg"), e_digbat, "J_Hip_LE");
+  playFXOnTag(getfx("on_fire_leg"), e_digbat, "J_Hip_RI");
+  playFXOnTag(getfx("on_fire_arm"), e_digbat, "J_Elbow_LE");
+  playFXOnTag(getfx("on_fire_arm"), e_digbat, "J_Elbow_RI");
 }
 
 e_19_left_side() {
@@ -1238,7 +1237,7 @@ ambience_right_alley_truck() {
 }
 
 ambience_alley_fire(flag_ender) {
-  a_triggers = getentarray("slums_fakefire_lookat", "targetname");
+  a_triggers = getEntArray("slums_fakefire_lookat", "targetname");
   array_thread(a_triggers, ::ambient_alley_fire_think, flag_ender);
 }
 
@@ -1271,7 +1270,7 @@ ambient_alley_fire_burst(s_start) {
 ambient_alley_dog() {
   level endon("slums_done");
   t_scare = trigger_wait("slums_dog_scare");
-  a_dogs = getentarray("slums_dog", "script_noteworthy");
+  a_dogs = getEntArray("slums_dog", "script_noteworthy");
   nd_delete = getnode("slums_dog_goal", "targetname");
 
   foreach(ai_dog in a_dogs) {
@@ -1311,7 +1310,7 @@ dog_that_runs_on_slum_entrance() {
 }
 
 ambient_slums_dog_init() {
-  a_dog_triggers = getentarray("trig_run_a_dog", "script_noteworthy");
+  a_dog_triggers = getEntArray("trig_run_a_dog", "script_noteworthy");
   array_thread(a_dog_triggers, ::ambient_slums_dog);
 }
 
@@ -1347,7 +1346,7 @@ cleanup_slums_think() {
 }
 
 cleanup_slums_ai_by_targetname(str_targetname) {
-  a_guys = getentarray(str_targetname, "targetname");
+  a_guys = getEntArray(str_targetname, "targetname");
 
   foreach(e_guy in a_guys)
   e_guy delete();
@@ -1363,7 +1362,7 @@ cleanup_progression_passed_digbat_parking_lot() {
   spawn_manager_kill("sm_apc_alley_digbats");
   wait 0.05;
   level notify("kill_e_01_apc_digbat_alley");
-  a_guys = getentarray("apc_alley_army_ai", "targetname");
+  a_guys = getEntArray("apc_alley_army_ai", "targetname");
   array_thread(a_guys, ::bloody_death);
   wait 0.05;
   cleanup_slums_ai_by_targetname("sm_apc_alley_digbats_ai");
@@ -1643,9 +1642,7 @@ slums_go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, require
       break;
     }
 
-    nextnode_array = [
-      [get_target_func]
-    ](node.target);
+    nextnode_array = [[get_target_func]](node.target);
 
     if(!nextnode_array.size) {
       break;
@@ -1657,8 +1654,7 @@ slums_go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, require
   self notify("reached_path_end");
 }
 
-get_animation_endings() {
-}
+get_animation_endings() {}
 
 print_out_end_location_of_animation(_anim, str_align_node, animname) {
   align_node = getstruct(str_align_node, "targetname");
@@ -1759,8 +1755,7 @@ mn_moveup_after_apache_attack() {
   flag_set("mv_noriega_to_gazebo");
 }
 
-mn_move_along_cafe_wall() {
-}
+mn_move_along_cafe_wall() {}
 
 mn_moveup_into_bottleneck_right() {
   waittill_spawn_manager_cleared("sm_slums_bottleneck");
@@ -1872,7 +1867,7 @@ mw_warp_end_failsafe() {
 #using_animtree("animated_props");
 
 veh_animate_pickup_trucks() {
-  a_trucks = getentarray("anim_truck_hood", "targetname");
+  a_trucks = getEntArray("anim_truck_hood", "targetname");
 
   foreach(e_truck in a_trucks) {
     e_truck useanimtree(#animtree);
@@ -1884,7 +1879,7 @@ veh_animate_pickup_trucks() {
 }
 
 veh_animate_pickup_cars() {
-  a_cars = getentarray("anim_car_door", "targetname");
+  a_cars = getEntArray("anim_car_door", "targetname");
 
   foreach(e_car in a_cars) {
     e_car useanimtree(#animtree);
@@ -2076,7 +2071,7 @@ get_random_ai_no_closer_than(min_distance, max_distance, trigger) {
       return a_ai[i];
   }
 
-  a_struct = getentarray("random_vo_location", "targetname");
+  a_struct = getEntArray("random_vo_location", "targetname");
 
   for(i = 0; i < a_struct.size; i++) {
     player_distance = distance2dsquared(a_struct[i].origin, level.player.origin);
@@ -2096,7 +2091,7 @@ molotov_intro_van() {
 
 intro_cleanup() {
   flag_wait("move_intro_heli");
-  models = getentarray("pan_intro_models", "script_noteworthy");
+  models = getEntArray("pan_intro_models", "script_noteworthy");
 
   for(i = 0; i < models.size; i++)
     models[i] delete();

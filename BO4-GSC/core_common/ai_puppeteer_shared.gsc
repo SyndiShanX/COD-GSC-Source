@@ -5,7 +5,6 @@
 
 #include scripts\core_common\system_shared;
 #include scripts\core_common\values_shared;
-
 #namespace ai_puppeteer;
 
 autoexec __init__system__() {
@@ -62,13 +61,13 @@ ai_puppet_manager() {
   self endon(#"death");
 
   while(true) {
-    if(isDefined(level.playercursor[#"position"]) && isDefined(level.ai_puppet) && isDefined(level.ai_puppet.debuglookatenabled) && level.ai_puppet.debuglookatenabled == 1) {
-      level.ai_puppet lookatpos(level.playercursor[#"position"]);
+    if(isDefined(level.playercursor[# "position"]) && isDefined(level.ai_puppet) && isDefined(level.ai_puppet.debuglookatenabled) && level.ai_puppet.debuglookatenabled == 1) {
+      level.ai_puppet lookatpos(level.playercursor[# "position"]);
     }
 
     if(self buttonpressed("<dev string:x4c>") && self buttonpressed("<dev string:x5c>")) {
       if(isDefined(level.ai_puppet)) {
-        level.ai_puppet forceteleport(level.playercursor[#"position"], level.ai_puppet.angles);
+        level.ai_puppet forceteleport(level.playercursor[# "position"], level.ai_puppet.angles);
       }
 
       wait 0.2;
@@ -92,10 +91,10 @@ ai_puppet_manager() {
             self thread ai_puppeteer_highlight_ai(level.playercursorai, (1, 0, 0));
           }
         } else {
-          level.ai_puppet_target = spawn("<dev string:x6c>", level.playercursor[#"position"]);
+          level.ai_puppet_target = spawn("<dev string:x6c>", level.playercursor[# "position"]);
           level.ai_puppet_target makesentient();
           level.ai_puppet_target.health = 10000;
-          level.ai_puppet_target_normal = level.playercursor[#"normal"];
+          level.ai_puppet_target_normal = level.playercursor[# "normal"];
           level.ai_puppet setentitytarget(level.ai_puppet_target);
           self thread ai_puppeteer_highlight_point(level.ai_puppet_target.origin, level.ai_puppet_target_normal, anglesToForward(self getplayerangles()), (1, 0, 0));
         }
@@ -105,9 +104,9 @@ ai_puppet_manager() {
     } else if(self buttonpressed("<dev string:x7b>")) {
       if(isDefined(level.ai_puppet)) {
         if(isDefined(level.ai_puppet) && isusingnavvolume(level.ai_puppet)) {
-          var_8d9fdff6 = vectornormalize(level.playercursor[#"position"] - self.origin);
-          level.playercursor[#"position"] = self.origin + vectorscale(var_8d9fdff6, 1000);
-          level.playercursor[#"position"] = level.ai_puppet getclosestpointonnavvolume(level.playercursor[#"position"], 400);
+          var_8d9fdff6 = vectornormalize(level.playercursor[# "position"] - self.origin);
+          level.playercursor[# "position"] = self.origin + vectorscale(var_8d9fdff6, 1000);
+          level.playercursor[# "position"] = level.ai_puppet getclosestpointonnavvolume(level.playercursor[# "position"], 400);
         }
 
         if(isDefined(level.playercursorai) && level.playercursorai != level.ai_puppet) {
@@ -128,12 +127,12 @@ ai_puppet_manager() {
           if(isDefined(level.ai_puppet.scriptenemy)) {
             to_target = level.ai_puppet.scriptenemy.origin - level.ai_puppet.origin;
           } else {
-            to_target = level.playercursor[#"position"] - level.ai_puppet.origin;
+            to_target = level.playercursor[# "position"] - level.ai_puppet.origin;
           }
 
           angles = vectortoangles(to_target);
-          level.ai_puppet setgoal(level.playercursor[#"position"]);
-          self thread ai_puppeteer_highlight_point(level.playercursor[#"position"], level.playercursor[#"normal"], anglesToForward(self getplayerangles()), (0, 1, 0));
+          level.ai_puppet setgoal(level.playercursor[# "position"]);
+          self thread ai_puppeteer_highlight_point(level.playercursor[# "position"], level.playercursor[# "normal"], anglesToForward(self getplayerangles()), (0, 1, 0));
         }
       }
 
@@ -141,9 +140,9 @@ ai_puppet_manager() {
     } else if(self buttonpressed("<dev string:x86>") && self buttonpressed("<dev string:x91>")) {
       if(isDefined(level.ai_puppet)) {
         if(isusingnavvolume(level.ai_puppet)) {
-          var_8d9fdff6 = vectornormalize(level.playercursor[#"position"] - self.origin);
-          level.playercursor[#"position"] = self.origin + vectorscale(var_8d9fdff6, 1000);
-          level.playercursor[#"position"] = level.ai_puppet getclosestpointonnavvolume(level.playercursor[#"position"], 400);
+          var_8d9fdff6 = vectornormalize(level.playercursor[# "position"] - self.origin);
+          level.playercursor[# "position"] = self.origin + vectorscale(var_8d9fdff6, 1000);
+          level.playercursor[# "position"] = level.ai_puppet getclosestpointonnavvolume(level.playercursor[# "position"], 400);
         }
 
         if(isDefined(level.playercursorai) && level.playercursorai != level.ai_puppet) {
@@ -174,12 +173,12 @@ ai_puppet_manager() {
           if(isDefined(level.ai_puppet.scriptenemy)) {
             to_target = level.ai_puppet.scriptenemy.origin - level.ai_puppet.origin;
           } else {
-            to_target = level.playercursor[#"position"] - level.ai_puppet.origin;
+            to_target = level.playercursor[# "position"] - level.ai_puppet.origin;
           }
 
           angles = vectortoangles(to_target);
-          level.ai_puppet setgoal(level.playercursor[#"position"], 1);
-          self thread ai_puppeteer_highlight_point(level.playercursor[#"position"], level.playercursor[#"normal"], anglesToForward(self getplayerangles()), (0, 1, 0));
+          level.ai_puppet setgoal(level.playercursor[# "position"], 1);
+          self thread ai_puppeteer_highlight_point(level.playercursor[# "position"], level.playercursor[# "normal"], anglesToForward(self getplayerangles()), (0, 1, 0));
         }
       }
 
@@ -295,11 +294,11 @@ ai_puppet_cursor_tracker() {
     level.playercursorai = undefined;
     level.playercursornode = undefined;
     cursorcolor = (0, 1, 1);
-    hitent = level.playercursor[#"entity"];
+    hitent = level.playercursor[# "entity"];
 
     if(!isDefined(hitent)) {
       bullettrace = bulletTrace(self getEye(), self getEye() + forward_vector, 1, self);
-      hitent = bullettrace[#"entity"];
+      hitent = bullettrace[# "entity"];
     }
 
     if(isDefined(hitent) && (isai(hitent) || isbot(hitent) || isvehicle(hitent))) {
@@ -313,12 +312,12 @@ ai_puppet_cursor_tracker() {
 
       level.playercursorai = hitent;
     } else if(isDefined(level.ai_puppet)) {
-      nodes = getanynodearray(level.playercursor[#"position"], 24);
+      nodes = getanynodearray(level.playercursor[# "position"], 24);
 
       if(nodes.size > 0) {
         node = nodes[0];
 
-        if(node.type != #"path" && distancesquared(node.origin, level.playercursor[#"position"]) < 576) {
+        if(node.type != # "path" && distancesquared(node.origin, level.playercursor[# "position"]) < 576) {
           if(!level.ai_puppet_highlighting) {
             ai_puppeteer_render_node(node, (0, 1, 1));
           }
@@ -329,7 +328,7 @@ ai_puppet_cursor_tracker() {
     }
 
     if(!level.ai_puppet_highlighting) {
-      ai_puppeteer_render_point(level.playercursor[#"position"], level.playercursor[#"normal"], forward, cursorcolor);
+      ai_puppeteer_render_point(level.playercursor[# "position"], level.playercursor[# "normal"], forward, cursorcolor);
     }
 
     waitframe(1);
@@ -474,4 +473,3 @@ ai_puppeteer_highlight_ai(ai, color) {
 
   level.ai_puppet_highlighting = 0;
 }
-

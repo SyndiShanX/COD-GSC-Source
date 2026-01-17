@@ -362,7 +362,7 @@ is_reviving(revivee) {
 
 is_facing(facee) {
   orientation = self getplayerangles();
-  forwardvec = anglestoforward(orientation);
+  forwardvec = anglesToForward(orientation);
   forwardvec2d = (forwardvec[0], forwardvec[1], 0);
   unitforwardvec2d = vectornormalize(forwardvec2d);
   tofaceevec = facee.origin - self.origin;
@@ -435,8 +435,7 @@ revive_do_revive(playerbeingrevived, revivergun) {
   if(isDefined(self.revivetexthud))
     self.revivetexthud destroy();
 
-  if(isDefined(playerbeingrevived.revivetrigger.auto_revive) && playerbeingrevived.revivetrigger.auto_revive == 1) {
-  } else if(!revived)
+  if(isDefined(playerbeingrevived.revivetrigger.auto_revive) && playerbeingrevived.revivetrigger.auto_revive == 1) {} else if(!revived)
     playerbeingrevived stoprevive(self);
 
   playerbeingrevived.revivetrigger sethintstring(&"GAME_BUTTON_TO_REVIVE_PLAYER");
@@ -496,8 +495,7 @@ revive_success(reviver) {
   reviver.revives++;
   reviver.stats["revives"] = reviver.revives;
 
-  if(isDefined(level.missioncallbacks)) {
-  }
+  if(isDefined(level.missioncallbacks)) {}
 
   setclientsysstate("lsm", "0", self);
   self.revivetrigger delete();
@@ -661,7 +659,7 @@ update_lives_remaining(increment) {
 }
 
 player_getup_setup() {
-  self.laststand_info = spawnstruct();
+  self.laststand_info = spawnStruct();
   self.laststand_info.type_getup_lives = level.const_laststand_getup_count_start;
 }
 
@@ -712,7 +710,7 @@ laststand_getup_hud() {
   hudelem.hidewheninmenu = 1;
   hudelem.hidewhendead = 1;
   hudelem.sort = 2;
-  hudelem.label = & "SO_WAR_LASTSTAND_GETUP_BAR";
+  hudelem.label = &"SO_WAR_LASTSTAND_GETUP_BAR";
   self thread laststand_getup_hud_destroy(hudelem);
 
   while(true) {

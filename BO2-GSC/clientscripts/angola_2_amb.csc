@@ -165,7 +165,7 @@ village_amb() {
   playloopat("amb_base_loop", (-18423, -1963, 875));
 
   while(true) {
-    playsound(0, "amb_village_cb_radio", (-19396, -3091, 690));
+    playSound(0, "amb_village_cb_radio", (-19396, -3091, 690));
     wait(randomint(5));
   }
 }
@@ -196,7 +196,7 @@ playambientyellsaroundvillage() {
 
   while(true) {
     rand = randomintrange(0, 5);
-    playsound(0, "amb_base_alert_lines", location[rand]);
+    playSound(0, "amb_base_alert_lines", location[rand]);
     wait(randomfloatrange(0.3, 2));
   }
 }
@@ -206,9 +206,9 @@ escape_dogs() {
   wait 8.5;
 
   while(true) {
-    playsound(0, "evt_escape_dogs", (-18953, -3434, 649));
+    playSound(0, "evt_escape_dogs", (-18953, -3434, 649));
     wait(randomint(2));
-    playsound(0, "evt_escape_dogs", (-19051, -2422, 638));
+    playSound(0, "evt_escape_dogs", (-19051, -2422, 638));
     wait(randomint(2));
   }
 }
@@ -216,8 +216,8 @@ escape_dogs() {
 truck_loops() {
   truck_ent_1 = spawn(0, (-17780, -1539, 571), "script_origin");
   truck_ent_2 = spawn(0, (-17770, -3391, 556), "script_origin");
-  truck_ent_1 playloopsound("amb_truck_loop_1", 0.1);
-  truck_ent_2 playloopsound("amb_truck_loop_2", 0.1);
+  truck_ent_1 playLoopSound("amb_truck_loop_1", 0.1);
+  truck_ent_2 playLoopSound("amb_truck_loop_2", 0.1);
 }
 
 child_soldiers() {
@@ -226,11 +226,11 @@ child_soldiers() {
   cs_emit_3 = spawn(0, (-21466, -3545, 587), "script_origin");
   cs_emit_4 = spawn(0, (-21953, -2064, 476), "script_origin");
   cs_emit_5 = spawn(0, (-17780, -1539, 571), "script_origin");
-  cs_emit_1 playloopsound("amb_child_soldiers_1", 0.1);
-  cs_emit_2 playloopsound("amb_child_soldiers_2", 0.1);
-  cs_emit_3 playloopsound("amb_child_soldiers_3", 0.1);
-  cs_emit_4 playloopsound("amb_child_soldiers_4", 0.1);
-  cs_emit_5 playloopsound("amb_child_soldiers_5", 0.1);
+  cs_emit_1 playLoopSound("amb_child_soldiers_1", 0.1);
+  cs_emit_2 playLoopSound("amb_child_soldiers_2", 0.1);
+  cs_emit_3 playLoopSound("amb_child_soldiers_3", 0.1);
+  cs_emit_4 playLoopSound("amb_child_soldiers_4", 0.1);
+  cs_emit_5 playLoopSound("amb_child_soldiers_5", 0.1);
   level waittill("esc_alrm");
   cs_emit_1 stoploopsound(1);
   cs_emit_2 stoploopsound(1);
@@ -262,8 +262,7 @@ reset_alouette_context_ext() {
   }
 }
 
-chasers() {
-}
+chasers() {}
 
 sinking_barge() {
   level waittill("barge_sink");

@@ -15,7 +15,6 @@
 #include scripts\zm_common\zm_stats;
 #include scripts\zm_common\zm_talisman;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_talisman_impatient;
 
 autoexec __init__system__() {
@@ -37,7 +36,7 @@ activate_talisman() {
 }
 
 special_revive() {
-  self endon(#"disconnect", #"end_of_round");
+  self endon(#"disconnect", # "end_of_round");
 
   if(self.var_135a4148 == zm_round_logic::get_round_number()) {
     return;

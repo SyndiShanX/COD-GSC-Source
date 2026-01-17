@@ -23,13 +23,13 @@
 function init() {}
 
 function main() {
-  callback::on_connect( & on_player_connect);
-  callback::on_spawned( & on_player_spawned);
+  callback::on_connect(&on_player_connect);
+  callback::on_spawned(&on_player_spawned);
   setdvar("scr_emergency_reserve_timer", 5);
   setdvar("scr_emergency_reserve_timer_upgraded", 8);
   cybercom_tacrig::register_cybercom_rig_ability("cybercom_emergencyreserve", 3);
-  cybercom_tacrig::register_cybercom_rig_possession_callbacks("cybercom_emergencyreserve", & emergencyreservegive, & emergencyreservetake);
-  cybercom_tacrig::register_cybercom_rig_activation_callbacks("cybercom_emergencyreserve", & emergencyreserveactivate, & emergencyreservedeactivate);
+  cybercom_tacrig::register_cybercom_rig_possession_callbacks("cybercom_emergencyreserve", &emergencyreservegive, &emergencyreservetake);
+  cybercom_tacrig::register_cybercom_rig_activation_callbacks("cybercom_emergencyreserve", &emergencyreserveactivate, &emergencyreservedeactivate);
 }
 
 function on_player_connect() {}
@@ -55,13 +55,13 @@ function emergencyreserveactivate(type) {
   }
   self cybercom_tacrig::turn_rig_ability_off("cybercom_emergencyreserve");
   self playlocalsound("gdt_cybercore_regen_godown");
-  playfx("player/fx_plyr_ability_emergency_reserve_1p", self.origin);
+  playFX("player/fx_plyr_ability_emergency_reserve_1p", self.origin);
 }
 
 function emergencyreservedeactivate(type) {}
 
 function validdeathtypesforemergencyreserve(smeansofdeath) {
-  if(isdefined(smeansofdeath)) {
+  if(isDefined(smeansofdeath)) {
     return issubstr(smeansofdeath, "_BULLET") || issubstr(smeansofdeath, "_GRENADE") || issubstr(smeansofdeath, "_MELEE") || smeansofdeath == "MOD_EXPLOSIVE" || smeansofdeath == "MOD_SUICIDE" || smeansofdeath == "MOD_HEAD_SHOT";
   }
   return 0;

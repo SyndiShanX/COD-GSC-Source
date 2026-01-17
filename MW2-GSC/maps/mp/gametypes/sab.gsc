@@ -32,9 +32,9 @@ Axis players spawn away from enemies and near their team at one of these positio
 Allied players spawn away from enemies and near their team at one of these positions at the start of a round.*/
 
 main() {
-  if(getdvar("mapname") == "mp_background")
+  if(getdvar("mapname") == "mp_background") {
     return;
-
+  }
   maps\mp\gametypes\_globallogic::init();
   maps\mp\gametypes\_callbacksetup::SetupCallbacks();
   maps\mp\gametypes\_globallogic::SetupCallbacks();
@@ -76,11 +76,11 @@ main() {
   game["dialog"]["defense_obj"] = "capture_obj";
 
   badtrig = getent("sab_bomb_defuse_allies", "targetname");
-  if(isdefined(badtrig))
+  if(isDefined(badtrig))
     badtrig delete();
 
   badtrig = getent("sab_bomb_defuse_axis", "targetname");
-  if(isdefined(badtrig))
+  if(isDefined(badtrig))
     badtrig delete();
 }
 
@@ -118,26 +118,26 @@ onPrecacheGameType() {
 }
 
 onStartGameType() {
-  if(!isdefined(game["switchedsides"]))
+  if(!isDefined(game["switchedsides"]))
     game["switchedsides"] = false;
 
   setClientNameMode("auto_change");
 
-  game["strings"]["target_destroyed"] = & "MP_TARGET_DESTROYED";
-  game["strings"]["target_defended"] = & "MP_TARGET_DEDEFEND";
+  game["strings"]["target_destroyed"] = &"MP_TARGET_DESTROYED";
+  game["strings"]["target_defended"] = &"MP_TARGET_DEDEFEND";
 
-  setObjectiveText("allies", & "OBJECTIVES_SAB");
-  setObjectiveText("axis", & "OBJECTIVES_SAB");
+  setObjectiveText("allies", &"OBJECTIVES_SAB");
+  setObjectiveText("axis", &"OBJECTIVES_SAB");
 
   if(level.splitscreen) {
-    setObjectiveScoreText("allies", & "OBJECTIVES_SAB");
-    setObjectiveScoreText("axis", & "OBJECTIVES_SAB");
+    setObjectiveScoreText("allies", &"OBJECTIVES_SAB");
+    setObjectiveScoreText("axis", &"OBJECTIVES_SAB");
   } else {
-    setObjectiveScoreText("allies", & "OBJECTIVES_SAB_SCORE");
-    setObjectiveScoreText("axis", & "OBJECTIVES_SAB_SCORE");
+    setObjectiveScoreText("allies", &"OBJECTIVES_SAB_SCORE");
+    setObjectiveScoreText("axis", &"OBJECTIVES_SAB_SCORE");
   }
-  setObjectiveHintText("allies", & "OBJECTIVES_SAB_HINT");
-  setObjectiveHintText("axis", & "OBJECTIVES_SAB_HINT");
+  setObjectiveHintText("allies", &"OBJECTIVES_SAB_HINT");
+  setObjectiveHintText("axis", &"OBJECTIVES_SAB_HINT");
 
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);
@@ -221,7 +221,6 @@ printOTHint() {
 
   self thread maps\mp\gametypes\_hud_message::SplashNotify("sudden_death");
   self.otSpawned = true;
-
 }
 
 updateGametypeDvars() {
@@ -316,7 +315,7 @@ scoreThread() {
 
   dangerTeam = "";
 
-  for (;;) {
+  for(;;) {
     if(isDefined(level.sabBomb.carrier))
       bombEnt = level.sabBomb.carrier;
     else
@@ -360,7 +359,7 @@ createBombZone(team, trigger) {
   bombZone.onCantUse = ::onCantUse;
   bombZone.useWeapon = "briefcase_bomb_mp";
 
-  for (i = 0; i < visuals.size; i++) {
+  for(i = 0; i < visuals.size; i++) {
     if(isDefined(visuals[i].script_exploder)) {
       bombZone.exploderIndex = visuals[i].script_exploder;
       break;
@@ -379,9 +378,9 @@ onBeginUse(player) {
 }
 
 onEndUse(team, player, result) {
-  if(!isAlive(player))
+  if(!isAlive(player)) {
     return;
-
+  }
   player.isPlanting = false;
   player.isDefusing = false;
 }
@@ -414,10 +413,10 @@ onPickup(player) {
 
   // recovered the bomb before abandonment timer elapsed
   if(team == self maps\mp\gametypes\_gameobjects::getOwnerTeam()) {
-    //printOnTeamArg( &"MP_EXPLOSIVES_RECOVERED_BY", team, player );
+    //printOnTeamArg(&"MP_EXPLOSIVES_RECOVERED_BY", team, player );
     playSoundOnPlayers(game["bomb_recovered_sound"], team);
   } else {
-    //printOnTeamArg( &"MP_EXPLOSIVES_RECOVERED_BY", team, player );
+    //printOnTeamArg(&"MP_EXPLOSIVES_RECOVERED_BY", team, player );
     playSoundOnPlayers(game["bomb_recovered_sound"]);
   }
 
@@ -436,9 +435,7 @@ onPickup(player) {
 }
 
 onDrop(player) {
-  if(level.bombPlanted) {
-
-  } else {
+  if(level.bombPlanted) {} else {
     if(isDefined(player))
       printOnTeamArg(&"MP_EXPLOSIVES_DROPPED_BY", self maps\mp\gametypes\_gameobjects::getOwnerTeam(), player);
 
@@ -453,15 +450,15 @@ abandonmentThink(delay) {
 
   wait(delay);
 
-  if(isDefined(self.carrier))
+  if(isDefined(self.carrier)) {
     return;
-
+  }
   if(self maps\mp\gametypes\_gameobjects::getOwnerTeam() == "allies")
     otherTeam = "axis";
   else
     otherTeam = "allies";
 
-  //	printOnTeamArg( &"MP_EXPLOSIVES_DROPPED_BY", otherTeam, &"MP_THE_ENEMY" );
+  //	printOnTeamArg(&"MP_EXPLOSIVES_DROPPED_BY", otherTeam, &"MP_THE_ENEMY" );
   playSoundOnPlayers(game["bomb_dropped_sound"], otherTeam);
 
   self maps\mp\gametypes\_gameobjects::setOwnerTeam("neutral");
@@ -575,7 +572,7 @@ bombPlanted(destroyedObj, team) {
   level.bombExploded = true;
   setDvar("ui_danger_team", "BombExploded");
 
-  if(isdefined(level.bombowner)) {
+  if(isDefined(level.bombowner)) {
     destroyedObj.visuals[0] radiusDamage(explosionOrigin, 512, 200, 20, level.bombowner);
     level.bombowner incPlayerStat("targetsdestroyed", 1);
   } else
@@ -640,9 +637,9 @@ giveLastOnTeamWarning() {
 }
 
 onTimeLimit() {
-  if(level.bombExploded)
+  if(level.bombExploded) {
     return;
-
+  }
   if(game["teamScores"]["axis"] > game["teamScores"]["allies"]) {
     thread maps\mp\gametypes\_gamelogic::endGame("axis", game["strings"]["time_limit_reached"]);
   } else if(game["teamScores"]["axis"] < game["teamScores"]["allies"]) {
@@ -698,7 +695,7 @@ overtimeThread()
 
 	level.bombExploded = true;	
 	
-	if( isdefined( level.bombowner ) )
+	if( isDefined( level.bombowner ) )
 		explosionEnt radiusDamage( explosionEnt.origin, 512, 200, 20, level.bombowner );
 	else
 		explosionEnt radiusDamage( explosionEnt.origin, 512, 200, 20 );
@@ -728,7 +725,7 @@ bombDistanceThread() {
   else
     level.dangerTeam = "axis";
 
-  for (;;) {
+  for(;;) {
     if(isDefined(level.sabBomb.carrier))
       bombEnt = level.sabBomb.carrier;
     else
@@ -779,9 +776,9 @@ bombDefused(object) {
 }
 
 onOneLeftEvent(team) {
-  if(level.bombExploded)
+  if(level.bombExploded) {
     return;
-
+  }
   lastPlayer = getLastLivingPlayer(team);
 
   lastPlayer thread giveLastOnTeamWarning();

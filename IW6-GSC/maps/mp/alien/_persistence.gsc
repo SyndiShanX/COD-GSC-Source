@@ -230,7 +230,7 @@ give_player_currency(amount, font_size, sHitloc, skip_prestige_scalar) {
       return;
     }
     if(!level.gameEnded) {
-      self maps\mp\_utility::setLowerMessage("maxmoney", & "ALIEN_COLLECTIBLES_MONEY_MAX", 4);
+      self maps\mp\_utility::setLowerMessage("maxmoney", &"ALIEN_COLLECTIBLES_MONEY_MAX", 4);
       self.next_maxmoney_hint_time = current_time + MAX_CASH_COOL_DOWN_TIME;
     }
   }
@@ -1002,9 +1002,7 @@ update_weaponstats(stat_type, weapon_ref, stat, value) {
     return;
   }
   if(isDefined(level.weapon_stats_override_name_func))
-    base_weapon = [
-      [level.weapon_stats_override_name_func]
-    ](base_weapon);
+    base_weapon = [[level.weapon_stats_override_name_func]](base_weapon);
 
   if(IsSubStr(base_weapon, "dlc")) {
     tokens = StrTok(base_weapon, "d");

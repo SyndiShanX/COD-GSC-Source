@@ -17,7 +17,7 @@ initFlashed() {
 }
 
 randomizeFlashAnimArray() {
-  for (i = 0; i < anim.flashAnimArray.size; i++) {
+  for(i = 0; i < anim.flashAnimArray.size; i++) {
     switchwith = randomint(anim.flashAnimArray.size);
     temp = anim.flashAnimArray[i];
     anim.flashAnimArray[i] = anim.flashAnimArray[switchwith];
@@ -54,7 +54,7 @@ main() {
     self setanimknoball(self.flashedanim, % body);
   else
     self thread flashBangAnim();
-  for (;;) {
+  for(;;) {
     time = gettime();
     if(time > self.flashendtime) {
       self notify("stop_flashbang_effect");

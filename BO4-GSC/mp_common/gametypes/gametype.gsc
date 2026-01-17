@@ -8,7 +8,6 @@
 #include scripts\mp_common\gametypes\globallogic_score;
 #include scripts\mp_common\userspawnselection;
 #include scripts\mp_common\util;
-
 #namespace gametype;
 
 init() {
@@ -59,7 +58,7 @@ on_round_switch() {
   }
 }
 
-private function_788fb510(value) {
+function_788fb510(value) {
   if(!isDefined(value)) {
     return "";
   }

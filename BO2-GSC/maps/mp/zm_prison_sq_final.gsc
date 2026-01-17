@@ -20,8 +20,7 @@
 #include maps\mp\zombies\_zm_stats;
 #include maps\mp\zombies\_zm;
 
-onplayerconnect_sq_final() {
-}
+onplayerconnect_sq_final() {}
 
 stage_one() {
   if(isDefined(level.gamedifficulty) && level.gamedifficulty == 0) {
@@ -122,7 +121,7 @@ nixie_tube_scramble_protected_effects(n_tube_index) {
     self hidepart("J_" + n_number_to_display);
     n_number_to_display = random(unrestricted_scramble_num[n_tube_index]);
     self showpart("J_" + n_number_to_display);
-    self playsound("zmb_quest_nixie_count");
+    self playSound("zmb_quest_nixie_count");
     wait(n_change_rate);
   }
 }
@@ -159,7 +158,7 @@ nixie_tube_win_effects_all_tubes_final(goal_num_1, goal_num_2, goal_num_3) {
       a_nixie_tube[i] showpart("J_" + level.a_nixie_tube_code[i]);
 
       if(i == 1 && n_off_tube == 2 || i == 3 && n_off_tube == 1)
-        a_nixie_tube[i] playsound("zmb_quest_nixie_count");
+        a_nixie_tube[i] playSound("zmb_quest_nixie_count");
     }
 
     n_off_tube++;
@@ -201,14 +200,14 @@ nixie_tube_win_effects_all_tubes_final(goal_num_1, goal_num_2, goal_num_3) {
       a_nixie_tube[n_current_tube] showpart("J_" + level.a_nixie_tube_code[n_current_tube]);
 
       if(j % 3 == 0)
-        a_nixie_tube[n_current_tube] playsound("zmb_quest_nixie_count");
+        a_nixie_tube[n_current_tube] playSound("zmb_quest_nixie_count");
 
       j++;
       wait 0.05;
     }
   }
 
-  a_nixie_tube[2] playsound("zmb_quest_nixie_count_final");
+  a_nixie_tube[2] playSound("zmb_quest_nixie_count_final");
   wait_network_frame();
 }
 
@@ -237,7 +236,7 @@ stage_two() {
 
   level.m_headphones delete();
   t_plane_fly_afterlife = getent("plane_fly_afterlife_trigger", "script_noteworthy");
-  t_plane_fly_afterlife playsound("zmb_easteregg_laugh");
+  t_plane_fly_afterlife playSound("zmb_easteregg_laugh");
   trigger_is_on = 0;
 
   while(true) {
@@ -282,10 +281,10 @@ play_sq_audio_log(num, a_vo, b_use_trig) {
   if(!isDefined(level.m_headphones)) {
     level.m_headphones = spawn("script_model", v_pos);
     level.m_headphones ghostindemo();
-    level.m_headphones setmodel("p6_zm_al_audio_headset_icon");
-    playfxontag(level._effect["powerup_on"], level.m_headphones, "tag_origin");
+    level.m_headphones setModel("p6_zm_al_audio_headset_icon");
+    playFXOnTag(level._effect["powerup_on"], level.m_headphones, "tag_origin");
     level.m_headphones thread headphones_rotate();
-    level.m_headphones playloopsound("zmb_spawn_powerup_loop");
+    level.m_headphones playLoopSound("zmb_spawn_powerup_loop");
     level.m_headphones trigger_off();
   } else {
     level.m_headphones trigger_on();
@@ -511,20 +510,20 @@ stage_final() {
     s_start_point = getstruct("final_fight_starting_point_weasel", "targetname");
 
     if(isDefined(p_weasel) && isDefined(s_start_point)) {
-      playfx(level._effect["afterlife_teleport"], p_weasel.origin);
+      playFX(level._effect["afterlife_teleport"], p_weasel.origin);
       p_weasel setorigin(s_start_point.origin);
       p_weasel setplayerangles(s_start_point.angles);
-      playfx(level._effect["afterlife_teleport"], p_weasel.origin);
+      playFX(level._effect["afterlife_teleport"], p_weasel.origin);
     }
 
     for(i = 0; i < a_player_team.size; i++) {
       s_start_point = getstruct("final_fight_starting_point_hero_" + (i + 1), "targetname");
 
       if(isDefined(a_player_team[i]) && isDefined(s_start_point)) {
-        playfx(level._effect["afterlife_teleport"], a_player_team[i].origin);
+        playFX(level._effect["afterlife_teleport"], a_player_team[i].origin);
         a_player_team[i] setorigin(s_start_point.origin);
         a_player_team[i] setplayerangles(s_start_point.angles);
-        playfx(level._effect["afterlife_teleport"], a_player_team[i].origin);
+        playFX(level._effect["afterlife_teleport"], a_player_team[i].origin);
       }
     }
 
@@ -754,7 +753,7 @@ player_intermission_bridge() {
   points = getstructarray("final_cam", "targetname");
 
   if(!isDefined(points) || points.size == 0) {
-    points = getentarray("info_intermission", "classname");
+    points = getEntArray("info_intermission", "classname");
 
     if(points.size < 1) {
       println("NO info_intermission POINTS IN MAP");
@@ -782,7 +781,7 @@ player_intermission_bridge() {
       if(isDefined(points[i].target)) {
         if(!isDefined(org)) {
           org = spawn("script_model", self.origin + vectorscale((0, 0, -1), 60.0));
-          org setmodel("tag_origin");
+          org setModel("tag_origin");
         }
 
         org.origin = points[i].origin;

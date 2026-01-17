@@ -115,8 +115,8 @@ set_vehicle_anims(var_0) {
 setanims() {
   var_0 = [];
 
-  for (var_1 = 0; var_1 < 8; var_1++)
-    var_0[var_1] = spawnstruct();
+  for(var_1 = 0; var_1 < 8; var_1++)
+    var_0[var_1] = spawnStruct();
 
   var_0[0].sittag = "tag_pilot1";
   var_0[1].sittag = "tag_pilot2";
@@ -252,7 +252,7 @@ unload_groups() {
 }
 
 littlebird_emp_damage_function(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  if(var_4 == "MOD_ENERGY" && isdefined(self.emp_death_function))
+  if(var_4 == "MOD_ENERGY" && isDefined(self.emp_death_function))
     self thread[[self.emp_death_function]](var_1, var_4);
 }
 
@@ -265,13 +265,11 @@ littlebird_emp_death(var_0, var_1) {
   var_2 = self vehicle_getvelocity();
   var_3 = 250;
 
-  if(isdefined(level.get_littlebird_crash_location_override))
-    var_4 = [
-      [level.get_littlebird_crash_location_override]
-    ]();
+  if(isDefined(level.get_littlebird_crash_location_override))
+    var_4 = [[level.get_littlebird_crash_location_override]]();
   else {
     var_5 = (self.origin[0] + var_2[0] * 5, self.origin[1] + var_2[1] * 5, self.origin[2] - 2000);
-    var_4 = bullettrace(self.origin, var_5, 0, self)["position"];
+    var_4 = bulletTrace(self.origin, var_5, 0, self)["position"];
   }
 
   self notify("newpath");
@@ -296,7 +294,7 @@ littlebird_emp_death(var_0, var_1) {
 }
 
 check_lab_achievement() {
-  if(!isdefined(level.restricted_airspace))
+  if(!isDefined(level.restricted_airspace))
     level.restricted_airspace = 0;
 
   level.restricted_airspace++;
@@ -310,8 +308,8 @@ littlebird_deathspin() {
   self clearlookatent();
   self setyawspeed(400, 100, 100);
 
-  for (;;) {
-    if(!isdefined(self)) {
+  for(;;) {
+    if(!isDefined(self)) {
       return;
     }
     var_0 = randomintrange(90, 120);
@@ -329,7 +327,7 @@ littlebird_emp_crash_movement(var_0, var_1, var_2) {
   var_5 = undefined;
   var_6 = 90 * randomintrange(-2, 3);
 
-  for (;;) {
+  for(;;) {
     if(self.origin[2] < var_0[2] + var_1)
       self notify("near_goal");
 
@@ -342,8 +340,8 @@ helicopter_crash_rotate() {
   self clearlookatent();
   self setyawspeed(400, 100, 100);
 
-  for (;;) {
-    if(!isdefined(self)) {
+  for(;;) {
+    if(!isDefined(self)) {
       return;
     }
     var_0 = randomintrange(90, 120);

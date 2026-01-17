@@ -128,7 +128,7 @@ trap_fx_monitor(name, loc, trap_type) {
 
 trap_play_fx(loc, trap_type) {
   ang = self.angles;
-  forward = anglestoforward(ang);
+  forward = anglesToForward(ang);
   up = anglestoup(ang);
   if(isDefined(self.loopFX)) {
     for(i = 0; i < self.loopFX.size; i++) {
@@ -169,7 +169,7 @@ light_model_swap(name, model) {
   level waittill("pl1");
   players = getLocalPlayers();
   for(p = 0; p < players.size; p++) {
-    lamps = GetEntArray(p, name, "targetname");
+    lamps = getEntArray(p, name, "targetname");
     for(i = 0; i < lamps.size; i++) {
       lamps[i] setModel(model);
     }
@@ -180,11 +180,11 @@ projector_screen_fx() {
   projector_struct = getstruct("struct_theater_projector_beam", "targetname");
   projector_ang = projector_struct.angles;
   projector_up = AnglesToUp(projector_ang);
-  projector_forward = AnglesToForward(projector_ang);
+  projector_forward = anglesToForward(projector_ang);
   screen_struct = getstruct("struct_theater_screen", "targetname");
   screen_ang = screen_struct.angles;
   screen_up = AnglesToUp(screen_ang);
-  screen_forward = AnglesToForward(screen_ang);
+  screen_forward = anglesToForward(screen_ang);
   projector_struct.screen_beam = [];
   projector_struct.vid = [];
   if(!isDefined(screen_struct.script_string)) {
@@ -196,13 +196,13 @@ projector_screen_fx() {
     projector_struct.screen_beam[i] = spawn(i, projector_struct.origin, "script_model");
     projector_struct.screen_beam[i].angles = projector_struct.angles;
     projector_struct.screen_beam[i] setModel("tag_origin");
-    PlayFXOnTag(i, level._effect["theater_projector_beam"], projector_struct.screen_beam[i], "tag_origin");
+    playFXOnTag(i, level._effect["theater_projector_beam"], projector_struct.screen_beam[i], "tag_origin");
   }
   for(i = 0; i < players.size; i++) {
     projector_struct.vid[i] = spawn(i, screen_struct.origin, "script_model");
     projector_struct.vid[i].angles = screen_struct.angles;
     projector_struct.vid[i] setModel("tag_origin");
-    PlayFXOnTag(i, level._effect["projector_screen_0"], projector_struct.vid[i], "tag_origin");
+    playFXOnTag(i, level._effect["projector_screen_0"], projector_struct.vid[i], "tag_origin");
   }
   projector_reel_change_init(projector_struct);
 }
@@ -218,7 +218,7 @@ projector_reel_swap(struct_screen, str_clientnotify) {
   players = getLocalPlayers();
   for(i = 0; i < players.size; i++) {
     if(isDefined(struct_screen.vid[i])) {
-      PlayFXOnTag(i, level._effect[str_clientnotify], struct_screen.vid[i], "tag_origin");
+      playFXOnTag(i, level._effect[str_clientnotify], struct_screen.vid[i], "tag_origin");
     }
   }
 }

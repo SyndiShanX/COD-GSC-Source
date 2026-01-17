@@ -8,7 +8,7 @@ init() {
   precacheshader("progress_bar_fg");
   precacheshader("progress_bar_fill");
   precacheshader("score_bar_bg");
-  level.uiparent = spawnstruct();
+  level.uiparent = spawnStruct();
   level.uiparent.horzalign = "left";
   level.uiparent.vertalign = "top";
   level.uiparent.alignx = "left";
@@ -21,7 +21,7 @@ init() {
   level.fontheight = 12;
 
   foreach(team in level.teams)
-  level.hud[team] = spawnstruct();
+  level.hud[team] = spawnStruct();
 
   level.primaryprogressbary = -61;
   level.primaryprogressbarx = 0;

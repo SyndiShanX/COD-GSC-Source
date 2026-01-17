@@ -39,8 +39,7 @@ updatetimerpausedness() {
   }
 }
 
-callback_hostmigrationsave() {
-}
+callback_hostmigrationsave() {}
 
 pausetimer() {
   level.migrationtimerpausetime = gettime();

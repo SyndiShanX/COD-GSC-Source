@@ -178,8 +178,7 @@ set_flag_messiah_mode(localclientnum, set, newent) {
   level.messiah_mode_on = set;
 }
 
-play_swaying_lights() {
-}
+play_swaying_lights() {}
 
 karma_shot_blood(localclientnum, set, newent) {
   n_frames = int(3 / 0.016);

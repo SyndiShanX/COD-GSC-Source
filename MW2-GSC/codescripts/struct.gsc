@@ -8,7 +8,7 @@ InitStructs() {
 }
 
 CreateStruct() {
-  struct = spawnstruct();
+  struct = spawnStruct();
   level.struct[level.struct.size] = struct;
   return struct;
 }

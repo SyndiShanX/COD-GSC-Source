@@ -12,11 +12,11 @@
 
 trigger_multiple_speed_think() {
   speed = self.script_speed;
-  AssertEx(IsDefined(speed), "Trigger at " + self.origin + " has no script_speed");
+  AssertEx(isDefined(speed), "Trigger at " + self.origin + " has no script_speed");
 
-  for (;;) {
+  for(;;) {
     self waittill("trigger", other);
-    if(!isdefined(other.vehicle))
+    if(!isDefined(other.vehicle))
       continue;
     other.vehicle.veh_topspeed = speed;
   }
@@ -34,7 +34,7 @@ ZODIAC_TREADFX_HEIGHTOFFSET = (0, 0, 16);
 
 zodiac_treadfx_chaser(chaseobj) {
   // self here is the invisible boat for playing leveled wake fx.
-  PlayFXOnTag(getfx("zodiac_wake_geotrail"), self, "tag_origin");
+  playFXOnTag(getfx("zodiac_wake_geotrail"), self, "tag_origin");
   self NotSolid();
   self Hide();
   self endon("death");
@@ -48,7 +48,7 @@ zodiac_treadfx_chaser(chaseobj) {
   childthread zodiac_treadfx_stop_notify(chaseobj);
   childthread zodiac_treadfx_toggle(chaseobj);
 
-  while (IsAlive(chaseobj)) {
+  while(IsAlive(chaseobj)) {
     //		self DontInterpolate();
     self MoveTo(chaseobj GetTagOrigin("tag_origin") + ZODIAC_TREADFX_HEIGHTOFFSET + (chaseobj Vehicle_GetVelocity() / ZODIAC_TREADFX_MOVETIMEFRACTION), ZODIAC_TREADFX_MOVETIME);
     self RotateTo((0, chaseobj.angles[1], 0), ZODIAC_TREADFX_MOVETIME);
@@ -59,23 +59,23 @@ zodiac_treadfx_chaser(chaseobj) {
 }
 
 zodiac_treadfx_toggle(chaseobj) {
-  while (1) {
+  while(1) {
     msg = chaseobj waittill_any_return("zodiac_treadfx_stop", "veh_leftground");
     if(msg == "veh_leftground")
       chaseobj ent_flag_set("in_air");
 
-    StopFXOnTag(getfx("zodiac_wake_geotrail"), self, "tag_origin");
+    stopFXOnTag(getfx("zodiac_wake_geotrail"), self, "tag_origin");
 
     msg = chaseobj waittill_any_return("zodiac_treadfx_go", "veh_landed");
     if(msg == "veh_landed")
       chaseobj ent_flag_clear("in_air");
 
-    PlayFXOnTag(getfx("zodiac_wake_geotrail"), self, "tag_origin");
+    playFXOnTag(getfx("zodiac_wake_geotrail"), self, "tag_origin");
   }
 }
 
 zodiac_treadfx_stop_notify(chaseobj) {
-  while (1) {
+  while(1) {
     if(chaseobj Vehicle_GetSpeed() < 4)
       chaseobj notify("zodiac_treadfx_stop");
     else if(!chaseobj ent_flag("in_air"))
@@ -90,14 +90,14 @@ zodiac_treadfx_chaser_death(chaseobj) {
 }
 
 zodiac_treadfx() {
-  chaser = Spawn("script_model", self.origin);
-  chaser SetModel(self.model);
+  chaser = spawn("script_model", self.origin);
+  chaser setModel(self.model);
   chaser.angles = (0, self.angles[1], 0);
   chaser thread zodiac_treadfx_chaser(self);
 }
 
 enemy_chase_boat_breadcrumb() {
-  struct = SpawnStruct();
+  struct = spawnStruct();
   struct.origin = self.origin;
   struct.angles = flat_angle(self.angles);
   struct.spawn_time = GetTime();
@@ -105,14 +105,14 @@ enemy_chase_boat_breadcrumb() {
 }
 
 vehicle_dump() {
-  predumpvehicles = GetEntArray("script_vehicle", "code_classname");
+  predumpvehicles = getEntArray("script_vehicle", "code_classname");
   vehicles = [];
 
   // dumping can jump a frame in which the information could be altered, this stores the necessary info real quick
   foreach(vehicle in predumpvehicles) {
     if(IsSpawner(vehicle))
       continue;
-    struct = SpawnStruct();
+    struct = spawnStruct();
     struct.classname = vehicle.classname;
     struct.origin = vehicle.origin;
     struct.angles = vehicle.angles;
@@ -122,7 +122,7 @@ vehicle_dump() {
     struct.script_VehicleStartMove = vehicle.script_vehiclestartmove;
     struct.model = vehicle.model;
     struct.angles = vehicle.angles;
-    if(IsDefined(level.playersride) && vehicle == level.playersride)
+    if(isDefined(level.playersride) && vehicle == level.playersride)
       struct.playersride = true;
     vehicles[vehicles.size] = struct;
   }
@@ -139,11 +139,11 @@ vehicle_dump() {
     fileprint_map_keypairprint("model", vehicle.model);
     fileprint_map_keypairprint("origin", origin);
     fileprint_map_keypairprint("angles", angles);
-    if(IsDefined(vehicle.speedbeforepause))
+    if(isDefined(vehicle.speedbeforepause))
       fileprint_map_keypairprint("current_speed", vehicle.speedbeforepause);
-    if(IsDefined(vehicle.script_VehicleSpawngroup))
+    if(isDefined(vehicle.script_VehicleSpawngroup))
       fileprint_map_keypairprint("script_vehiclespawngroup", vehicle.script_VehicleSpawngroup);
-    if(IsDefined(vehicle.script_VehicleStartMove))
+    if(isDefined(vehicle.script_VehicleStartMove))
       fileprint_map_keypairprint("script_vehiclestartmove", vehicle.script_VehicleStartMove);
     fileprint_map_entity_end();
   }
@@ -161,9 +161,9 @@ draw_crumb(crumb, lastcrumb, fraction) {
 
   Line(left_spot, right_spot, color);
 
-  if(!isdefined(lastcrumb))
+  if(!isDefined(lastcrumb)) {
     return;
-
+  }
   left_spot_last = lastcrumb.origin + AnglesToRight(lastcrumb.angles) * -1000;
   right_spot_last = lastcrumb.origin + AnglesToRight(lastcrumb.angles) * 1000;
   Line(left_spot, left_spot_last, color);
@@ -201,13 +201,13 @@ zodiac_physics() {
 zodiac_fx(fxName) {
   tag = "tag_origin";
 
-  if(IsDefined(level._effect_tag[fxName]))
+  if(isDefined(level._effect_tag[fxName]))
     tag = level._effect_tag[fxName];
 
-  if(IsDefined(level._effect[fxName]))
-    PlayFXOnTag(level._effect[fxName], self, tag);
+  if(isDefined(level._effect[fxName]))
+    playFXOnTag(level._effect[fxName], self, tag);
   //iprintlnbold( fxName );
-  if(IsDefined(level.zodiac_fx_sound[fxname]))
+  if(isDefined(level.zodiac_fx_sound[fxname]))
     thread play_sound_on_entity(level.zodiac_fx_sound[fxname]);
   //println( fxName );
 }
@@ -215,7 +215,7 @@ zodiac_fx(fxName) {
 listen_leftground() {
   self endon("death");
   flag_wait("player_on_boat");
-  for (;;) {
+  for(;;) {
     self waittill("veh_leftground");
     self.event_time = GetTime();
     self.event["jump"]["driver"] = true;
@@ -229,7 +229,7 @@ listen_landed() {
   self endon("death");
   wait 2; // no ignore the land that happens when they spawn above the water.
   flag_wait("player_on_boat");
-  for (;;) {
+  for(;;) {
     self waittill("veh_landed");
     if(self.event_time + self.bigjump_timedelta < GetTime()) {
       self.event["bump_big"]["driver"] = true;
@@ -266,12 +266,12 @@ set_water_sheating_time(bump_small, bump_big) {
 }
 
 water_bump(bumptype) {
-  if(!isdefined(level.players_boat) || self != level.players_boat)
+  if(!isDefined(level.players_boat) || self != level.players_boat)
     return;
   level endon("missionfailed");
-  if(flag("missionfailed"))
+  if(flag("missionfailed")) {
     return;
-
+  }
   if(bumptype == "bump_big")
     level.player PlayRumbleOnEntity("damage_heavy");
   else
@@ -284,7 +284,7 @@ water_bump(bumptype) {
 listen_jolt() {
   self endon("death");
   flag_wait("player_on_boat");
-  for (;;) {
+  for(;;) {
     self waittill("veh_jolt", jolt);
     if(jolt[1] >= 0) {
       self.event["sway_left"]["driver"] = true;
@@ -304,20 +304,20 @@ listen_bounce() {
   self endon("death");
   flag_wait("player_on_boat");
 
-  for (;;) {
+  for(;;) {
     self waittill("veh_boatbounce", force);
 
     //		if( self == level.players_boat )
     //			IPrintLnBold( force );
 
     if(force < 50.0) {
-      //PlayFXOnTag( getfx( "zodiac_bounce_small_left" ), self, "TAG_FX_LF" );
-      //PlayFXOnTag( getfx( "zodiac_bounce_small_left" ), self, "TAG_FX_RF" );
+      //playFXOnTag( getfx( "zodiac_bounce_small_left" ), self, "TAG_FX_LF" );
+      //playFXOnTag( getfx( "zodiac_bounce_small_left" ), self, "TAG_FX_RF" );
       zodiac_fx("zodiac_bounce_small_left");
       zodiac_fx("zodiac_bounce_small_right");
     } else {
-      //PlayFXOnTag( getfx( "zodiac_bounce_large_left" ), self, "TAG_FX_LF" );
-      //PlayFXOnTag( getfx( "zodiac_bounce_large_left" ), self, "TAG_FX_RF" );
+      //playFXOnTag( getfx( "zodiac_bounce_large_left" ), self, "TAG_FX_LF" );
+      //playFXOnTag( getfx( "zodiac_bounce_large_left" ), self, "TAG_FX_RF" );
       zodiac_fx("zodiac_bounce_large_left");
       zodiac_fx("zodiac_bounce_large_right");
     }
@@ -326,7 +326,7 @@ listen_bounce() {
 
 listen_turn_spray() {
   self endon("death");
-  while (1) {
+  while(1) {
     velocity = self Vehicle_GetBodyVelocity();
 
     if(self Vehicle_GetSpeed() > 40) {
@@ -347,11 +347,11 @@ listen_turn_spray() {
 listen_collision() {
   self endon("death");
 
-  for (;;) {
+  for(;;) {
     self waittill("veh_collision", collision, start_vel);
 
     foreach(rider in self.riders) {
-      if(IsAlive(rider) && !isdefined(rider.magic_bullet_shield)) {
+      if(IsAlive(rider) && !isDefined(rider.magic_bullet_shield)) {
         //				rider.specialDeathFunc = animscripts\snowmobile::snowmobile_collide_death;
         rider Kill();
       }
@@ -363,7 +363,7 @@ listen_collision() {
 watchVelocity() {
   self endon("death");
   vel = self Vehicle_GetVelocity();
-  for (;;) {
+  for(;;) {
     self.prevFrameVelocity = vel;
     vel = self Vehicle_GetVelocity();
     wait .05;
@@ -374,7 +374,7 @@ autosave_boat_chase() {
   // I should just replace these with real autosave triggers.
   self waittill("trigger");
 
-  if(IsDefined(self.targetname))
+  if(isDefined(self.targetname))
     autosave_by_name(self.targetname);
   else
     autosave_by_name("boat_chase");
@@ -397,16 +397,13 @@ bread_crumb_get_player_trailing_fraction() {
 }
 
 bread_crumb_chase() {
-  /#
   SetDvarIfUninitialized("scr_debug_breadcrumbs", 1);
-  # /
 
-    /#
-  if(GetDvarInt("scr_zodiac_test"))
+  if(GetDvarInt("scr_zodiac_test")) {
     return;
-  # /
+  }
 
-    currenttime = GetTime();
+  currenttime = GetTime();
   lastcrumb = undefined;
   test_array = [];
   count = 0;
@@ -433,7 +430,7 @@ bread_crumb_chase() {
 
   //	skipped = false;
   foreach(crumb in test_array) {
-    vec = AnglesToForward(crumb.angles);
+    vec = anglesToForward(crumb.angles);
     vec2 = VectorNormalize((level.player.origin - crumb.origin));
     vecdot = VectorDot(vec, vec2);
     if(vecdot > 0)
@@ -449,17 +446,17 @@ breadcrumb_docatchup(trailing_fraction) {
 }
 
 bread_crumb_fail() {
-  if(!isalive(level.player))
+  if(!isalive(level.player)) {
     return;
+  }
 
-  /#
-  if(GetDvarInt("scr_zodiac_test"))
+  if(GetDvarInt("scr_zodiac_test")) {
     return;
-  # /
+  }
 
-    // Shepherd got away.
-    level notify("stop_deadquote_for_gettingout_of_bounds");
-  SetDvar("ui_deadquote", & "AF_CHASE_MISSION_FAILED_KEEP_UP");
+  // Shepherd got away.
+  level notify("stop_deadquote_for_gettingout_of_bounds");
+  SetDvar("ui_deadquote", &"AF_CHASE_MISSION_FAILED_KEEP_UP");
   if(level.start_point != "test_boat_current")
     missionFailedWrapper();
 }
@@ -471,12 +468,12 @@ is_breadcrumb_debug() {
 zodiac_monitor_player_trailing_time() {
   self endon("death");
   flag_wait("player_on_boat");
-  while (1) {
+  while(1) {
     level waittill("zodiac_catchup");
 
-    if(flag("zodiac_boarding"))
+    if(flag("zodiac_boarding")) {
       return;
-
+    }
     if(flag("zodiac_catchup")) {
       player_boat_speed_plus = level.players_boat Vehicle_GetSpeed() + 5;
       if(self Vehicle_GetSpeed() < player_boat_speed_plus)
@@ -494,7 +491,7 @@ zodiac_catchup() {
 }
 
 is_main_enemy_boat() {
-  if(!isdefined(self.targetname))
+  if(!isDefined(self.targetname))
     return false;
   return self.targetname == "enemy_chase_boat";
 }
@@ -525,7 +522,7 @@ heli_attack_player_idle() {
 
   heli thread handle_fire_missiles();
 
-  while (Distance(level.player.origin, self.origin) > 8500)
+  while(Distance(level.player.origin, self.origin) > 8500)
     wait .05;
 
   heli thread mgon();
@@ -540,7 +537,7 @@ heli_attack_player_idle() {
 
   heli SetLookAtEnt(level.player);
 
-  while (in_front(level.players_boat, heli))
+  while(in_front(level.players_boat, heli))
     wait .05;
 
   if(!flag("rapids_trigger")) // don't care about this particular dialog after the rapids.
@@ -555,7 +552,6 @@ heli_attack_player_idle() {
   wait 3; // let it try to converge then turn it off.
 
   heli thread mgoff();
-
 }
 
 rumble_with_throttle() {
@@ -569,7 +565,7 @@ rumble_with_throttle() {
 
   rumble_fraction = .13;
 
-  while (1) {
+  while(1) {
     throttle = self Vehicle_GetThrottle();
 
     full_throttled_time += .05;
@@ -589,15 +585,16 @@ rumble_with_throttle() {
     }
 
     wait .05;
-    if(flag("player_in_sight_of_boarding"))
+    if(flag("player_in_sight_of_boarding")) {
       break;
+    }
   }
   rumble_ent Delete();
 }
 
 kill_ai_in_volume() {
   volume = GetEnt(self.target, "targetname");
-  Assert(IsDefined(volume));
+  Assert(isDefined(volume));
 
   self waittill("trigger");
   ai = GetAIArray();
@@ -607,12 +604,12 @@ kill_ai_in_volume() {
     guy Delete();
 
   //hack.. shortcutting adding another volume. want to delete these fx forever.
-  tester = Spawn("script_origin", (0, 0, 0));
+  tester = spawn("script_origin", (0, 0, 0));
 
   inc = 0;
   foreach(createfxent in level.createfxent) {
     inc++;
-    if(IsDefined(createfxent.looper)) {
+    if(isDefined(createfxent.looper)) {
       level.createfxent = array_remove(level.createfxent, createfxent);
       tester.origin = createfxent.v["origin"];
       if(tester IsTouching(volume))
@@ -627,7 +624,7 @@ kill_ai_in_volume() {
 }
 
 kill_all_the_ai_and_fx_from_boatride() {
-  kill_ai_in_volume = GetEntArray("kill_ai_in_volume", "targetname");
+  kill_ai_in_volume = getEntArray("kill_ai_in_volume", "targetname");
   foreach(trigger in kill_ai_in_volume) {
     wait(0.1);
     trigger notify("trigger", level.player);
@@ -636,11 +633,11 @@ kill_all_the_ai_and_fx_from_boatride() {
 
 kill_destructibles_and_barrels_in_volume() {
   volume = GetEnt(self.target, "targetname");
-  Assert(IsDefined(volume));
+  Assert(isDefined(volume));
 
   self waittill("trigger");
 
-  shootable_stuff = GetEntArray("destructible_toy", "targetname");
+  shootable_stuff = getEntArray("destructible_toy", "targetname");
 
   inc = 0;
   foreach(thing in shootable_stuff) {
@@ -653,7 +650,7 @@ kill_destructibles_and_barrels_in_volume() {
   }
 
   //dupping script for speed.
-  shootable_stuff = GetEntArray("explodable_barrel", "targetname");
+  shootable_stuff = getEntArray("explodable_barrel", "targetname");
   foreach(thing in shootable_stuff) {
     thing delete_shootable_stuff_in_volume(volume);
     inc++;
@@ -666,9 +663,9 @@ kill_destructibles_and_barrels_in_volume() {
 }
 
 delete_shootable_stuff_in_volume(volume) {
-  if(!self IsTouching(volume))
+  if(!self IsTouching(volume)) {
     return;
-
+  }
   self notify("delete_destructible"); // kill the effects looping first.
   self Delete();
 }
@@ -676,7 +673,6 @@ delete_shootable_stuff_in_volume(volume) {
 disable_origin_offset() {
   // I need this for more precise hovering with the ramp in the water.
   self.originheightoffset = undefined;
-
 }
 
 destructible_fake() {
@@ -684,17 +680,16 @@ destructible_fake() {
   destructible_org = GetEnt(self.target, "targetname");
 
   radius = 600;
-  if(IsDefined(destructible_org.radius))
+  if(isDefined(destructible_org.radius))
     radius = destructible_org.radius;
 
   count = 3;
 
   destructible_damage_count_in_radius(count, radius, destructible_org.origin);
-
 }
 
 destructible_damage_count_in_radius(count, radius, origin) {
-  destructible_toys = get_array_of_closest(origin, GetEntArray("destructible_toy", "targetname"), undefined, count, radius, 0);
+  destructible_toys = get_array_of_closest(origin, getEntArray("destructible_toy", "targetname"), undefined, count, radius, 0);
   foreach(toy in destructible_toys) {
     wait RandomFloatRange(.1, .4);
     //		toy thread common_scripts\_destructible::force_explosion();
@@ -703,7 +698,7 @@ destructible_damage_count_in_radius(count, radius, origin) {
 }
 
 destroy_fast(toy) {
-  for (i = 0; i < 5; i++) {
+  for(i = 0; i < 5; i++) {
     toy notify("damage", 160, level.player, self.origin, toy.origin, "MOD_PISTOL_BULLET", "", "");
     wait RandomFloatRange(.1, .2);
   }
@@ -714,7 +709,7 @@ raise_attacker_accuracy_on_nearby_boats() {
   flag_wait("player_on_boat");
 
   level.players_boat endon("death");
-  while (1) {
+  while(1) {
     attack_boats_in_range_in_front();
     wait .05;
   }
@@ -724,7 +719,7 @@ SQRT_BOATS_IN_RANGE = 1400 * 1400;
 SQRT_BOATS_IN_RANGE_BEHIND = 50 * 50;
 
 attack_boats_in_range_in_front(range, backrange) {
-  boats = GetEntArray("script_vehicle_zodiac_physics", "classname");
+  boats = getEntArray("script_vehicle_zodiac_physics", "classname");
 
   return_boats = [];
   foreach(boat in boats) {
@@ -732,9 +727,9 @@ attack_boats_in_range_in_front(range, backrange) {
       continue;
     if(IsSpawner(boat))
       continue;
-    if(!boat_in_range_in_front(boat))
+    if(!boat_in_range_in_front(boat)) {
       continue;
-
+    }
     boat thread raise_attacker_accuracy_while_in_range();
   }
   return return_boats;
@@ -751,7 +746,7 @@ raise_attacker_accuracy_while_in_range() {
     rider.suppressionwait = 1000;
   }
 
-  while (boat_in_range_in_front(self))
+  while(boat_in_range_in_front(self))
     wait .05;
 
   foreach(rider in self.riders) {
@@ -777,9 +772,9 @@ conveyerbelt_speed(yaw, speed, rate) {
 
   speeddiff = speed - level.VehPhys_SetConveyorBelt_speed;
 
-  if(speeddiff == 0)
+  if(speeddiff == 0) {
     return;
-
+  }
   time = abs(speeddiff / rate);
 
   level notify("conveyerbelt_speed");
@@ -793,13 +788,12 @@ conveyerbelt_speed(yaw, speed, rate) {
   else
     return;
 
-  for (i = 0; i < iterations; i++) {
+  for(i = 0; i < iterations; i++) {
     wait .05;
     level.VehPhys_SetConveyorBelt_speed += speedinc;
   }
 
   level.VehPhys_SetConveyorBelt_speed = speed;
-
 }
 
 CONVEYERBELT_PLAYER_MAX_SPEED = 40;
@@ -815,7 +809,7 @@ conveyerbelt_player_speed_mod() {
   velocity = flat_origin(velocity);
 
   normal = VectorNormalize(velocity);
-  forward = AnglesToForward((0, level.VehPhys_SetConveyorBelt_yaw, 0));
+  forward = anglesToForward((0, level.VehPhys_SetConveyorBelt_yaw, 0));
   dot = VectorDot(forward, normal);
 
   //	speed = level.players_boat Vehicle_GetSpeed();
@@ -850,7 +844,7 @@ conveyerbelt_set_speed_fraction(dest_fraction, time) {
   incs = Int(time * 20);
   fraction_increment = (dest_fraction - current_fraction) / incs;
 
-  for (i = 0; i < incs; i++) {
+  for(i = 0; i < incs; i++) {
     level.VehPhys_SetConveyorBelt_speed_fraction += fraction_increment;
     wait .05;
   }
@@ -865,10 +859,10 @@ conveyerbelt_clear_speed_fraction() {
 set_fixed_node_after_seeing_player_spawn_func() {
   self endon("death");
 
-  if(IsSubStr(self.classname, "shepherd"))
+  if(IsSubStr(self.classname, "shepherd")) {
     return;
-
-  while (!self CanSee(level.player) && Distance(self.origin, level.player.origin) > 3500)
+  }
+  while(!self CanSee(level.player) && Distance(self.origin, level.player.origin) > 3500)
     wait .1;
   self.fixednode = true;
 
@@ -881,12 +875,11 @@ river_current(noteworthy) {
   level notify("new_river_current");
   level endon("new_river_current");
 
-  /#
-  if(GetDvarInt("scr_zodiac_test"))
+  if(GetDvarInt("scr_zodiac_test")) {
     return;
-  # /
+  }
 
-    current_node = getstruct(noteworthy, "script_noteworthy");
+  current_node = getstruct(noteworthy, "script_noteworthy");
   next_node = getstruct(current_node.target, "targetname");
 
   maxdropspeed_cos = Cos(35);
@@ -895,7 +888,7 @@ river_current(noteworthy) {
   mindropspeed_cos = Cos(3);
   mindropspeed = 10;
 
-  if(IsDefined(current_node.script_speed))
+  if(isDefined(current_node.script_speed))
     mindropspeed = current_node.script_speed;
 
   next_angle = get_next_angle(next_node);
@@ -913,7 +906,7 @@ river_current(noteworthy) {
 
   flat_angle = (0, 0, 0);
 
-  while (1) {
+  while(1) {
     dot = get_dot(next_node.origin, next_angle, level.players_boat.origin);
     if(dot < 0) {
       //			draw_arrow( current_node.origin , next_node.origin, (0,1,0) );
@@ -924,7 +917,7 @@ river_current(noteworthy) {
         continue;
       } else {
         current_node = getstruct(current_node.targetname, "target");
-        if(!isdefined(current_node)) {
+        if(!isDefined(current_node)) {
           current_node = getstruct(next_node.targetname, "target"); // reset to the first node..
           level.players_boat thread conveyerbelt_speed(flat_angle[1], 0, CONVEYER_RATE);
         }
@@ -933,24 +926,25 @@ river_current(noteworthy) {
       current_node = next_node;
     }
 
-    if(IsDefined(current_node.script_speed))
+    if(isDefined(current_node.script_speed))
       mindropspeed = current_node.script_speed;
-    if(!isdefined(current_node.target))
+    if(!isDefined(current_node.target)) {
       break;
+    }
 
     if(mindropspeed > maxdropspeed_lower_cap)
       maxdropspeed = mindropspeed + 20;
     else
       maxdropspeed = maxdropspeed_lower_cap;
     next_node = getstruct(current_node.target, "targetname");
-    if(!isdefined(next_node)) {
+    if(!isDefined(next_node)) {
       next_node = current_node;
       current_node = getstruct(next_node.targetname, "target"); // keep cycling the last section in this case.
       wait .05;
       continue;
     }
 
-    if(IsDefined(next_node.target))
+    if(isDefined(next_node.target))
       next_angle = get_next_angle(next_node);
 
     speed = mindropspeed;
@@ -975,16 +969,15 @@ river_current(noteworthy) {
 }
 
 river_current_apply() {
-
-  if(!isdefined(level.VehPhys_SetConveyorBelt_speed_fraction))
+  if(!isDefined(level.VehPhys_SetConveyorBelt_speed_fraction))
     level.VehPhys_SetConveyorBelt_speed_fraction = 1;
 
-  while (!isdefined(level.vehphys_setconveyorbelt_yaw))
+  while(!isDefined(level.vehphys_setconveyorbelt_yaw))
     wait .05;
 
   level.players_boat endon("death");
 
-  while (1) {
+  while(1) {
     level.players_boat conveyerbelt_player_speed_mod();
     wait .05;
   }
@@ -992,12 +985,12 @@ river_current_apply() {
 
 get_next_angle(current_node, currentangles) {
   next_node = getstruct(current_node.target, "targetname");
-  Assert(IsDefined(next_node));
+  Assert(isDefined(next_node));
   return VectorToAngles(next_node.origin - current_node.origin);
 }
 
 enable_bread_crumb_chase() {
-  s = SpawnStruct();
+  s = spawnStruct();
   s.checkdepth = 3; // how far up the chain do I crawl to see if we're caught up.
   s.fail_time = 10; // how far behind the player is allowed to trail..
 
@@ -1009,14 +1002,14 @@ enable_bread_crumb_chase() {
 
   //	thread bread_crumb_button();
 
-  while (1) {
+  while(1) {
     bread_crumb_chase();
     wait .05;
   }
 }
 
 set_breadcrumb_fail_time(fail_time, transition_time) {
-  if(!isdefined(transition_time)) {
+  if(!isDefined(transition_time)) {
     level.breadcrumb_settings.fail_time = fail_time;
     return;
   }
@@ -1029,24 +1022,23 @@ set_breadcrumb_fail_time(fail_time, transition_time) {
   increments = transition_time * 20;
   inc_step = increase_time_by / increments;
 
-  for (i = 0; i < increments; i++) {
+  for(i = 0; i < increments; i++) {
     level.breadcrumb_settings.fail_time += inc_step;
     wait .05;
   }
 
   level.breadcrumb_settings.fail_time = fail_time;
-
 }
 
 bread_crumb_button() {
-  while (1) {
-    while (!level.player ButtonPressed("BUTTON_Y"))
+  while(1) {
+    while(!level.player ButtonPressed("BUTTON_Y"))
       wait .05;
     if(flag("debug_crumbs"))
       flag_clear("debug_crumbs");
     else
       flag_set("debug_crumbs");
-    while (level.player ButtonPressed("BUTTON_Y"))
+    while(level.player ButtonPressed("BUTTON_Y"))
       wait .05;
   }
 }
@@ -1054,11 +1046,11 @@ bread_crumb_button() {
 test_m203() {
   level.price endon("death");
   effect = LoadFX("muzzleflashes/m203_flshview");
-  while (!flag("exit_caves")) {
+  while(!flag("exit_caves")) {
     start = level.price GetTagOrigin("tag_flash");
     angles = level.price GetTagAngles("tag_flash");
     if(level.price has_good_enemy_for_grenade_launcher(start, angles)) {
-      PlayFXOnTag(effect, level.price, "tag_flash");
+      playFXOnTag(effect, level.price, "tag_flash");
       shootpos = level.price.enemy GetShootAtPos() + (0, 0, 150);
       if(Distance(level.price.origin, level.price.enemy.origin) > 1700)
         shootpos += (0, 0, 150); // I'm just guessing here.magical numbers make grenads go farther..
@@ -1072,11 +1064,11 @@ test_m203() {
 test_m203_again() {
   level.price endon("death");
   effect = LoadFX("muzzleflashes/m203_flshview");
-  while (1) {
+  while(1) {
     start = level.price GetTagOrigin("tag_flash");
     angles = level.price GetTagAngles("tag_flash");
     if(level.price has_good_enemy_for_grenade_launcher(start, angles)) {
-      PlayFXOnTag(effect, level.price, "tag_flash");
+      playFXOnTag(effect, level.price, "tag_flash");
       shootpos = level.price.enemy GetShootAtPos() + (0, 0, 190);
       if(Distance(level.price.origin, level.price.enemy.origin) > 1700)
         shootpos += (0, 0, 120); // I'm just guessing here.magical numbers make grenads go farther..
@@ -1093,7 +1085,7 @@ DIST_M203_SQRD = 650 * 650;
 //good_spot_for_grenade_launcher
 
 has_good_enemy_for_grenade_launcher(start, angles) {
-  if(!isdefined(self.enemy))
+  if(!isDefined(self.enemy))
     return false;
   if(!DistanceSquared(start, self.enemy.origin) > DIST_M203_SQRD)
     return false;
@@ -1102,7 +1094,7 @@ has_good_enemy_for_grenade_launcher(start, angles) {
 
   good_spot_for_grenade_launcher = getstructarray("good_spot_for_grenade_launcher", "targetname");
   foreach(spot in good_spot_for_grenade_launcher) {
-    Assert(IsDefined(spot.radius));
+    Assert(isDefined(spot.radius));
     if(Distance(spot.origin, self.enemy.origin) < spot.radius)
       if(!burning_barrel_in_spots_radius(spot))
         return true;
@@ -1112,7 +1104,7 @@ has_good_enemy_for_grenade_launcher(start, angles) {
 }
 
 burning_barrel_in_spots_radius(spot) {
-  barrels = GetEntArray("explodable_barrel", "targetname");
+  barrels = getEntArray("explodable_barrel", "targetname");
   squaredist = spot.radius * spot.radius;
   foreach(barrel in barrels) {
     if(DistanceSquared(spot.origin, barrel.origin) > squaredist)
@@ -1124,7 +1116,7 @@ burning_barrel_in_spots_radius(spot) {
 }
 
 price_position_switch() {
-  Assert(IsDefined(self.script_noteworthy));
+  Assert(isDefined(self.script_noteworthy));
 
   self waittill("trigger");
 
@@ -1145,7 +1137,7 @@ in_front_by_velocity(ent1, ent2) {
 
 delete_when_not_in_view() {
   cosa = Cos(55);
-  while (within_fov_of_players(self.origin, cosa))
+  while(within_fov_of_players(self.origin, cosa))
     wait .05;
   self Delete();
 }
@@ -1155,13 +1147,13 @@ movewithrate(dest, moverate, accelfraction, decelfraction) {
   self notify("newmove");
   self endon("newmove");
 
-  if(!isdefined(accelfraction))
+  if(!isDefined(accelfraction))
     accelfraction = 0;
-  if(!isdefined(decelfraction))
+  if(!isDefined(decelfraction))
     decelfraction = 0;
   self.movefinished = false;
   // moverate = units / persecond
-  if(!isdefined(moverate))
+  if(!isDefined(moverate))
     moverate = 200;
 
   dist = Distance(self.origin, dest);
@@ -1180,7 +1172,7 @@ movewithrate(dest, moverate, accelfraction, decelfraction) {
   //	self RotateTo( destang, movetime, accel, decel );
   wait movetime;
 
-  if(!isdefined(self))
+  if(!isDefined(self))
     return;
   self.velocity = movevec * (dist / movetime);
   self.movefinished = true;
@@ -1188,7 +1180,7 @@ movewithrate(dest, moverate, accelfraction, decelfraction) {
 
 price_anim_single_on_boat(anim_scene, relink) {
   self endon("death");
-  if(!isdefined(relink))
+  if(!isDefined(relink))
     relink = true;
 
   level.price notify("new_price_anim_single_on_boat");
@@ -1209,7 +1201,7 @@ price_anim_single_on_boat(anim_scene, relink) {
 }
 
 price_anim_loop_on_boat(anim_scene, notify_str, relink) {
-  if(!isdefined(relink))
+  if(!isDefined(relink))
     relink = true;
 
   level.price notify("new_price_anim_single_on_boat");
@@ -1227,7 +1219,6 @@ price_anim_loop_on_boat(anim_scene, notify_str, relink) {
 
 boatrider_link(vehicle) {
   self LinkToBlendToTag(vehicle, "tag_guy2", false);
-
 }
 
 boatrider_think(vehicle) {
@@ -1249,18 +1240,18 @@ boatrider_think(vehicle) {
 boatrider_targets() {
   level.price endon("stop_boatrider_targets");
   level.price endon("death");
-  while (1) {
+  while(1) {
     wait .05;
-    end = level.price maps\_zodiac_drive::drive_magic_bullet_get_end(level.players_boat, level.player GetEye(), true); // piggyback this functionality. Price finds the same targets interesting.
+    end = level.price maps\_zodiac_drive::drive_magic_bullet_get_end(level.players_boat, level.player getEye(), true); // piggyback this functionality. Price finds the same targets interesting.
 
-    if(!isdefined(end.obj)) {
+    if(!isDefined(end.obj)) {
       level.price ClearEntityTarget();
       continue;
     }
     if(!isai(end.obj)) {
       level.price SetEntityTarget(end.obj);
       level.price.favoriteenemy = undefined;
-      if(IsDefined(end.shootable_driver))
+      if(isDefined(end.shootable_driver))
         end.obj thread enable_shoot_driver();
     } else {
       level.price ClearEntityTarget();
@@ -1274,12 +1265,11 @@ enable_shoot_driver() {
   self endon("enable_shoot_driver");
 
   self.allowdeath = 1;
-  self SetCanDamage(true);
+  self setCanDamage(true);
 
   self waittill("damage");
   maps\_zodiac_drive::driver_death(self);
 }
-
 
 price_link_and_think() {
   level.price boatrider_link(level.players_boat);
@@ -1302,7 +1292,7 @@ player_lerplink_fov(opts) {
   fov_inc = fov_dif / timeincs;
   timeincs = Int(timeincs);
 
-  for (i = 0; i < timeincs; i++) {
+  for(i = 0; i < timeincs; i++) {
     current_fov += fov_inc;
     level.player PlayerLinkToDelta(ent, tag, 1, current_fov, current_fov, current_fov, current_fov);
     wait .05;
@@ -1312,7 +1302,7 @@ player_lerplink_fov(opts) {
 
 trigger_thread_the_needle() {
   targetent = getstruct(self.target, "targetname");
-  Assert(IsDefined(targetent));
+  Assert(isDefined(targetent));
 
   self waittill("trigger");
 
@@ -1331,9 +1321,9 @@ _objective_onentity(id, ent) {
 
   /*
   ent endon( "death" );
-  while ( 1 )
+  while( 1 )
   {
-  	eye_pos = level.player GetEye();
+  	eye_pos = level.player getEye();
   	Objective_Position( id, (ent.origin[0],ent.origin[1],eye_pos[2]) );
   	wait .05;
   }
@@ -1343,21 +1333,22 @@ _objective_onentity(id, ent) {
 crashable_whizby_boats() {
   self.veh_pathtype = "follow";
   self VehPhys_EnableCrashing();
-  while (1) {
+  while(1) {
     self waittill("veh_jolt"); // veh_collision wasn't working, just make it crash when it jolts around the player that should do.
-    if(Distance(self.origin, level.player.origin) < 512)
+    if(Distance(self.origin, level.player.origin) < 512) {
       break;
+    }
   }
   self VehPhys_Crash();
 }
 
 get_farthest_struct(org, array) {
-  if(array.size < 1)
+  if(array.size < 1) {
     return;
-
+  }
   dist = DistanceSquared(array[0].origin, org);
   ent = array[0];
-  for (i = 0; i < array.size; i++) {
+  for(i = 0; i < array.size; i++) {
     newdist = DistanceSquared(array[i].origin, org);
     if(newdist < dist)
       continue;
@@ -1371,24 +1362,24 @@ ignoreall_till_not_touch(guy) {
   prevteam = guy.team;
   guy endon("death");
   guy.ignoreall = true;
-  while (guy IsTouching(self)) // teehee
+  while(guy IsTouching(self)) // teehee
     wait .05;
   guy.ignoreall = false;
 }
 
 dump_on_command() {
-  while (1) {
-    while (!level.player ButtonPressed("BUTTON_B"))
+  while(1) {
+    while(!level.player ButtonPressed("BUTTON_B"))
       wait .05;
     vehicle_dump();
-    while (level.player ButtonPressed("BUTTON_B"))
+    while(level.player ButtonPressed("BUTTON_B"))
       wait .05;
 
   }
 }
 
 set_lerp_opts(time, ent, tag, base_fov, dest_fov) {
-  opts = SpawnStruct();
+  opts = spawnStruct();
   opts.time = time;
   opts.ent = ent;
   opts.tag = tag;
@@ -1402,22 +1393,22 @@ player_full_heath() {
 }
 
 trigger_neutral_enemies() {
-  while (1) {
+  while(1) {
     self waittill("trigger", other);
-    if(!isalive(other))
+    if(!isalive(other)) {
       continue;
-
-    if(!first_touch(other))
+    }
+    if(!first_touch(other)) {
       continue;
-
+    }
     thread ignoreall_till_not_touch(other);
   }
 }
 
 draw_arrow_forward() {
   self endon("death");
-  while (1) {
-    draw_arrow(self.origin, self.origin + AnglesToForward(self.angles) * 200, (0, 0, 1));
+  while(1) {
+    draw_arrow(self.origin, self.origin + anglesToForward(self.angles) * 200, (0, 0, 1));
     wait .05;
   }
 }
@@ -1430,10 +1421,10 @@ dvar_warn() {
 }
 
 get_boat_rider(num) {
-  if(!isdefined(level.boatrider))
+  if(!isDefined(level.boatrider))
     level.boatrider = [];
   else
-  if(IsDefined(level.boatrider[num]))
+  if(isDefined(level.boatrider[num]))
     return level.boatrider[num];
 
   level.boatrider[num] = spawn_targetname(num, true);
@@ -1443,8 +1434,6 @@ get_boat_rider(num) {
   level.boatrider[num] set_battlechatter(false); // got enough chatter on the boat.
   return level.boatrider[num];
 }
-
-
 
 set_price_auto_switch_pose() {
   level.price.scripted_boat_pose = undefined;
@@ -1463,7 +1452,7 @@ zodiac_enemy_setup() {
   self endon("death");
   level.players_boat endon("death");
 
-  while (1) {
+  while(1) {
     start_origin = level.players_boat.origin;
     end_origin = self.origin;
     //		normal = VectorNormalize( end_origin - start_origin );
@@ -1493,7 +1482,7 @@ exp_fade_overlay(target_alpha, fade_time) {
   current_alpha = self.alpha;
   alpha_dif = current_alpha - target_alpha;
 
-  for (i = 0; i < fade_steps; i++) {
+  for(i = 0; i < fade_steps; i++) {
     current_angle += step_angle;
 
     self FadeOverTime(step_time);
@@ -1513,7 +1502,7 @@ handle_fire_missiles() {
   self endon("death");
   level.players_boat endon("death");
 
-  while (1) {
+  while(1) {
     dofire = true;
     predictorg = fire_volley_of_missiles_predict(level.players_boat Vehicle_GetVelocity());
     //		draw_arrow( self.origin, predictorg, (1,0,0) );
@@ -1561,9 +1550,9 @@ dialog_fire_volley_of_missiles_at_player(base_origin) {
 }
 
 fire_volley_of_missiles_at_player() {
-  if(!isalive(self))
+  if(!isalive(self)) {
     return;
-
+  }
   if(flag("heli_firing"))
     return;
   flag_set("heli_firing");
@@ -1587,14 +1576,14 @@ fire_volley_of_missiles_at_player() {
 
   shotorgs = [];
 
-  linkorg = Spawn("script_origin", level.players_boat.origin);
+  linkorg = spawn("script_origin", level.players_boat.origin);
   linkorg thread linkorg(level.players_boat);
 
-  //	if( IsDefined( level.players_boat ) )
+  //	if( isDefined( level.players_boat ) )
   //		thread draw_line_from_ent_to_ent_until_notify( linkorg , level.players_boat , 0 , 1 , 0 , linkorg , "balls" );
 
-  for (i = 0; i < number_of_shots; i++) {
-    shotorgs[i] = Spawn("script_origin", shot_origin);
+  for(i = 0; i < number_of_shots; i++) {
+    shotorgs[i] = spawn("script_origin", shot_origin);
     shotorgs[i] LinkTo(linkorg);
     shot_origin += velocity * .1;
     //			thread draw_line_from_ent_to_ent_until_notify( linkorg , shotorgs[i] , 1 , 0 , 1 , linkorg , "balls" );
@@ -1605,9 +1594,10 @@ fire_volley_of_missiles_at_player() {
   tags[1] = "tag_missile_left";
   ents = [];
 
-  for (i = 0; i < number_of_shots; i++) {
-    if(!isalive(self))
+  for(i = 0; i < number_of_shots; i++) {
+    if(!isalive(self)) {
       break;
+    }
     self SetVehWeapon("littlebird_FFAR");
     self SetTurretTargetEnt(shotorgs[i]);
     missile = self FireWeapon(tags[i % tags.size], shotorgs[i], (0, 0, 0));
@@ -1629,7 +1619,7 @@ linkorg(linkent) {
   self endon("death");
   linkent endon("death");
   offset = self.origin - linkent.origin;
-  while (1) {
+  while(1) {
     self MoveTo(linkent.origin + offset, .05, 0, 0);
     //		self.origin = linkent.origin + offset;
     wait .05;
@@ -1642,13 +1632,12 @@ get_generic_anim(anime) {
 
 cleanup_stuff_on_players_boat() {
   level.players_boat notify("cleanup");
-  if(IsDefined(level.players_boat.gun_attached)) {
+  if(isDefined(level.players_boat.gun_attached)) {
     level.players_boat Detach(level.zodiac_gunModel, "tag_weapon_left");
     level.players_boat.gun_attached = undefined;
   }
   level.players_boat Detach(level.zodiac_playerHandModel, "tag_player");
 }
-
 
 TEST_FLIP = false;
 
@@ -1659,7 +1648,7 @@ flip_when_player_dies() {
     level.player waittill("death");
 
   if(TEST_FLIP) {
-    while (!level.player ButtonPressed("BUTTON_B"))
+    while(!level.player ButtonPressed("BUTTON_B"))
       wait .05;
   }
 
@@ -1669,14 +1658,14 @@ flip_when_player_dies() {
 
   cleanup_stuff_on_players_boat();
 
-  linkobj = Spawn("script_model", level.player.origin);
+  linkobj = spawn("script_model", level.player.origin);
   linkobj.angles = level.player.angles;
   linkobj Hide();
-  linkobj SetModel("zodiac_head_roller");
+  linkobj setModel("zodiac_head_roller");
   linkobj LinkTo(self, "tag_player", (0, 0, 60), (0, 0, 0));
 
-  offset_obj = Spawn("script_model", level.player.origin);
-  offset_obj SetModel("zodiac_head_roller");
+  offset_obj = spawn("script_model", level.player.origin);
+  offset_obj setModel("zodiac_head_roller");
   offset_obj LinkTo(linkobj, "tag_player", (0, 0, -60), (0, 0, 0));
   offset_obj.angles = level.player.angles;
   offset_obj Hide();
@@ -1701,7 +1690,7 @@ flip_when_player_dies() {
     rider stop_magic_bullet_shield();
     rider Unlink();
 
-    if(IsDefined(rider.function_stack))
+    if(isDefined(rider.function_stack))
       rider function_stack_clear();
     rider Kill();
   }
@@ -1726,7 +1715,7 @@ flip_when_player_dies() {
 
   lastorg = (0, 0, 0);
 
-  while (lastorg != linkobj.origin) {
+  while(lastorg != linkobj.origin) {
     lastorg = linkobj.origin;
     wait .05;
   }
@@ -1735,7 +1724,7 @@ flip_when_player_dies() {
 node_can_reach_spot_infront_of_player(basenode) {
   //might check basenode moveability
   nodearray = GetNodesInRadius(level.player.origin, 800, 500, 1000, "path");
-  forward = AnglesToForward(level.player.angles);
+  forward = anglesToForward(level.player.angles);
   foreach(node in nodearray) {
     normal = VectorNormalize(node.origin - level.player.origin);
     dot = VectorDot(forward, normal);
@@ -1749,7 +1738,7 @@ node_can_reach_spot_infront_of_player(basenode) {
 
 find_good_node_for_price_to_spawn_at() {
   nodearray = GetNodesInRadius(level.player.origin, 230, 100, 1000, "path");
-  forward = AnglesToForward(level.player.angles);
+  forward = anglesToForward(level.player.angles);
   foreach(node in nodearray) {
     normal = VectorNormalize(node.origin - level.player.origin);
     dot = VectorDot(forward, normal);
@@ -1763,21 +1752,21 @@ lower_accuracy_behind_player() {
   self endon("death");
   originalbaseaccuracy = self.baseaccuracy;
   wait .1; // just in case I'm first.
-  if(!isdefined(level.players_boat))
+  if(!isDefined(level.players_boat))
     return; // craziness keeps goiing.
   level.players_boat endon("death");
 
-  if(IsDefined(self.ridingVehicle) && IsSubStr(self.ridingvehicle.classname, "zodiac"))
+  if(isDefined(self.ridingVehicle) && IsSubStr(self.ridingvehicle.classname, "zodiac"))
     return;
-  if(IsSubStr(self.classname, "shepherd"))
+  if(IsSubStr(self.classname, "shepherd")) {
     return;
-
-  while (1) {
-    while (boat_in_range_in_front(self))
+  }
+  while(1) {
+    while(boat_in_range_in_front(self))
       wait .05;
     self.baseaccuracy = 0;
     self.ignoreSuppression = false;
-    while (!boat_in_range_in_front(self))
+    while(!boat_in_range_in_front(self))
       wait .05;
     self.baseaccuracy = originalbaseaccuracy;
   }
@@ -1802,7 +1791,7 @@ setup_boat_for_drive() {
 
   level.players_boat StartUsingHeroOnlyLighting();
 
-  self SetModel("vehicle_zodiac");
+  self setModel("vehicle_zodiac");
 
   self waittill("vehicle_mount", player);
 
@@ -1813,12 +1802,12 @@ setup_boat_for_drive() {
 
   level.price.orgmodel = level.price.model;
 
-  level.price SetModel("body_desert_tf141_zodiac");
+  level.price setModel("body_desert_tf141_zodiac");
   hideTagList = GetWeaponHideTags(level.price.weapon);
-  for (i = 0; i < hideTagList.size; i++)
+  for(i = 0; i < hideTagList.size; i++)
     level.price HidePart(hideTagList[i], "weapon_m4");
 
-  self SetModel("vehicle_zodiac_viewmodel");
+  self setModel("vehicle_zodiac_viewmodel");
 
   self Vehicle_TurnEngineOn();
 
@@ -1872,10 +1861,7 @@ price_ai_mods(price) {
   price.baseaccuracy = 25;
 }
 
-players_boat() {
-
-}
-
+players_boat() {}
 
 change_target_on_vehicle_spawner(boat_targetname, boat_destination_node) {
   boat = GetEnt(boat_targetname, "targetname");
@@ -1903,13 +1889,13 @@ enemy_chase_boat() {
   self thread zodiac_monitor_player_trailing_time();
 
   foreach(rider in self.riders) {
-    if(IsDefined(rider.magic_bullet_shield) && rider.magic_bullet_shield)
+    if(isDefined(rider.magic_bullet_shield) && rider.magic_bullet_shield)
       continue;
     rider thread magic_bullet_shield();
   }
 
   //	self.veh_pathtype = "follow";
-  while (1) {
+  while(1) {
     wait .25;
     enemy_chase_boat_breadcrumb();
   }
@@ -1923,18 +1909,18 @@ boat_common() {
   thread price_ai_mods(boatrider);
   thread test_m203();
 
-  kill_ai_in_volume = GetEntArray("kill_ai_in_volume", "targetname");
+  kill_ai_in_volume = getEntArray("kill_ai_in_volume", "targetname");
   array_thread(kill_ai_in_volume, ::kill_ai_in_volume);
 }
 
 rpg_bridge_guy() {
-  trigger = Spawn("trigger_radius", self.origin + (0, 0, -2000), 0, 4500, 2000);
+  trigger = spawn("trigger_radius", self.origin + (0, 0, -2000), 0, 4500, 2000);
   trigger waittill("trigger");
   level notify("dialog_rpg_bridge_guy");
 }
 
 rpg_bridge_guy_target() {
-  target_ent = Spawn("script_origin", level.players_boat.origin);
+  target_ent = spawn("script_origin", level.players_boat.origin);
   self ent_flag_init("first_player_sighting");
   self disable_long_death();
   self SetEntityTarget(target_ent);
@@ -1944,7 +1930,7 @@ rpg_bridge_guy_target() {
 
   random_vec = flat_origin(randomvectorrange(-64, 64));
   firing_range = 3000;
-  while (IsAlive(self)) {
+  while(IsAlive(self)) {
     velocity_offset = level.players_boat Vehicle_GetVelocity() * 1.4;
 
     //		target_ent.origin = level.players_boat.origin +( level.players_boat Vehicle_GetVelocity() * 1.89 );
@@ -1955,7 +1941,7 @@ rpg_bridge_guy_target() {
     //		Line( forward_origin, level.players_boat.origin, (0,1,0) );
 
     //when the player is headed towards something use the spline direction to influence the shot. otherwise fire away in the direct forward path.
-    if(!BulletTracePassed(level.player GetEye() + (0, 0, 16), forward_origin, false, self)) {
+    if(!BulletTracePassed(level.player getEye() + (0, 0, 16), forward_origin, false, self)) {
       offset = Distance((0, 0, 0), velocity_offset);
       target_ent.origin = get_position_from_spline_unlimited(level.player.targ, level.player.progress + offset - level.POS_LOOKAHEAD_DIST, level.player.offset);
       target_ent.origin = set_z(target_ent.origin, level.players_boat.origin[2] + 24);
@@ -1969,7 +1955,7 @@ rpg_bridge_guy_target() {
     self OrientMode("face point", target_ent.origin);
 
     bullettraced_to_player = false;
-    if(BulletTracePassed(self GetTagOrigin("tag_flash"), level.player GetEye(), false, self)) {
+    if(BulletTracePassed(self GetTagOrigin("tag_flash"), level.player getEye(), false, self)) {
       bullettraced_to_player = true;
       if(!ent_flag("first_player_sighting"))
         ent_flag_set("first_player_sighting");
@@ -1982,8 +1968,9 @@ rpg_bridge_guy_target() {
       if(bullettraced_to_player)
         if(BulletTracePassed(self GetTagOrigin("tag_flash"), target_ent.origin + random_vec, false, self))
           if(Distance(self.origin, level.player.origin) < firing_range)
-            if(GetTime() > level.next_rpg_firetime)
+            if(GetTime() > level.next_rpg_firetime) {
               break;
+            }
 
     wait .05;
   }
@@ -1992,7 +1979,7 @@ rpg_bridge_guy_target() {
   //	if( cointoss() )
   //		ammo = "rpg";
 
-  if(IsDefined(self) && IsDefined(self GetTagOrigin("tag_flash"))) // Tried isalive . debugger is broken today = ( .
+  if(isDefined(self) && isDefined(self GetTagOrigin("tag_flash"))) // Tried isalive . debugger is broken today = ( .
   {
     rpg_shot = MagicBullet(ammo, self GetTagOrigin("tag_flash"), target_ent.origin + random_vec);
     rpg_shot thread kill_rpg_shot_behind_player();
@@ -2004,12 +1991,11 @@ rpg_bridge_guy_target() {
 kill_rpg_shot_behind_player() {
   level.players_boat endon("death");
   self endon("death");
-  while (in_front(level.player, self))
+  while(in_front(level.player, self))
     wait .05;
   thread play_sound_in_space("rocket_explode_water");
   self Delete();
 }
-
 
 set_price_autoswitch_after_caves() {
   flag_wait("exit_caves");
@@ -2024,14 +2010,12 @@ teleport_price_on_mount(node) {
 
 teleport_ai_here(eNode) {
   AssertEx(IsAI(self), "Function teleport_ai can only be called on an AI entity");
-  AssertEx(IsDefined(eNode), "Need to pass a node entity to function teleport_ai");
+  AssertEx(isDefined(eNode), "Need to pass a node entity to function teleport_ai");
   self ForceTeleport(eNode.origin, eNode.angles);
   self SetGoalPos(self.origin);
 }
 
-
 dialog_boat_battlechatter() {
-
   dialog_direction = [];
   dialog_direction = array_add(dialog_direction, "TF_pri_callout_targetclock_");
 
@@ -2075,17 +2059,16 @@ dialog_boat_battlechatter() {
 
   wait 1; // let enemy boat get defined..
 
-  /#
-  if(GetDvarInt("scr_zodiac_test"))
+  if(GetDvarInt("scr_zodiac_test")) {
     return;
-  # /
+  }
 
-    level endon("price_stops_talking_about_helicopters");
+  level endon("price_stops_talking_about_helicopters");
 
   level.player endon("death");
   self endon("death");
   flag_wait("exit_caves");
-  while (1) {
+  while(1) {
     type = level waittill_any_return("dialog_direction", "dialog_helicopter_six", "dialog_helicopter_ahead", "dialog_rpg_bridge_guy");
     if(flag("price_anim_on_boat"))
       continue;
@@ -2093,9 +2076,9 @@ dialog_boat_battlechatter() {
       continue;
     picked = random(unused_dialog[type]);
 
-    if(GetTime() - last_nagtime[type] < nagtime[type])
+    if(GetTime() - last_nagtime[type] < nagtime[type]) {
       continue;
-
+    }
     last_nagtime[type] = GetTime();
 
     if(type == "dialog_direction")
@@ -2131,12 +2114,12 @@ dialog_boat_nag() {
   self endon("death");
   level.price endon("death");
 
-  while (1) {
+  while(1) {
     if(bread_crumb_get_player_trailing_fraction() > .5 && next_nag < GetTime() && !level.price ent_flag("transitioning_positions")) {
       picked = random(unused_dialog);
       //			level.price thread radio_dialogue( picked );
       side = level.price.a.boat_pose;
-      Assert(IsDefined(side) && (side == "left" || side == "right"));
+      Assert(isDefined(side) && (side == "left" || side == "right"));
 
       doradio = false;
 
@@ -2169,7 +2152,6 @@ dialog_cave() {
   level.price generic_dialogue_queue("afchase_pri_thrucave");
 }
 
-
 dialog_start() {
   //	thread add_dialogue_line( "Price", "They're just around the corner, come on." );
   level.price thread generic_dialogue_queue("afchase_pri_aroundcorner");
@@ -2197,16 +2179,15 @@ dialog_boat_direction_nag() {
 
   wait 1; // let enemy boat get defined..
 
-  /#
-  if(GetDvarInt("scr_zodiac_test"))
+  if(GetDvarInt("scr_zodiac_test")) {
     return;
-  # /
+  }
 
-    self endon("death");
+  self endon("death");
   level.enemy_boat endon("death");
   level.player endon("death");
 
-  while (1) {
+  while(1) {
     if(!in_front_by_velocity(level.players_boat, level.enemy_boat) && next_nag < GetTime())
       wrong_way_time_count += .05;
     else
@@ -2232,12 +2213,11 @@ dialog_boat_direction_nag() {
   }
 }
 
-
 animate_price_into_boat() {
   level endon("stop_animate_price_into_boat");
   waittillframeend; // let players boat get spawned and defined
   pathnode = GetNode(self.target, "targetname");
-  node = Spawn("script_origin", pathnode.origin);
+  node = spawn("script_origin", pathnode.origin);
   node.angles = pathnode.angles + (0, -90, 0);
   level.price ent_flag_init("price_animated_into_boat");
 
@@ -2265,10 +2245,9 @@ search_the_scrash_site() {
   damaged_heli = GetEnt("damaged_pavelow", "targetname");
   wait .5;
   damaged_heli Show();
-  trigger = Spawn("trigger_radius", damaged_heli.origin + (0, 0, -100), 0, 670, 600);
+  trigger = spawn("trigger_radius", damaged_heli.origin + (0, 0, -100), 0, 670, 600);
   trigger waittill("trigger");
 }
-
 
 trigger_out_of_caves() {
   self waittill("trigger");
@@ -2278,9 +2257,9 @@ trigger_out_of_caves() {
 trigger_boat_mount() {
   self waittill("trigger");
 
-  if(flag("player_on_boat"))
+  if(flag("player_on_boat")) {
     return;
-
+  }
   origin = level.players_boat GetTagOrigin("tag_player");
   angles = level.players_boat GetTagAngles("tag_player");
   level.player SwitchToWeapon("uzi");
@@ -2294,13 +2273,10 @@ trigger_boat_mount() {
   level.player.drivingVehicle = level.players_boat;
 }
 
-
-
 trigger_price_tells_player_go_right() {
   self.origin += (0, 0, -50);
   self waittill("trigger");
   level.price thread generic_dialogue_queue("afchase_pri_right");
-
 }
 
 hint_test() {
@@ -2315,9 +2291,8 @@ trigger_end_caves() {
   thread maps\_utility::set_ambient("af_chase_exit");
   wait 3;
   SetSavedDvar("sm_sunSampleSizeNear", "2");
-  if(IsDefined(level.price))
+  if(isDefined(level.price))
     level.price DontCastShadows();
-
 }
 
 rope_splashers() {
@@ -2325,7 +2300,7 @@ rope_splashers() {
   wait .5;
   org_z = self.origin[2];
 
-  while (self.origin[2] == org_z)
+  while(self.origin[2] == org_z)
     wait .1;
 
   self Kill();
@@ -2335,14 +2310,14 @@ rope_splashers() {
   //self waittill ( "death" );
   //self endon ("death");
   //
-  //ent = SpawnStruct();
+  //ent = spawnStruct();
   //ent endon( "complete" );
   //ent delayThread( 5, ::send_notify, "complete" );
 
   //while( self.origin[2] > 48 )
   //	wait .05;
   //
-  //PlayFX( getfx("body_falls_from_ropes_splash") , set_z( self.origin,48 ) );
+  //playFX( getfx("body_falls_from_ropes_splash") , set_z( self.origin,48 ) );
   // StartRagdoll();
 }
 
@@ -2391,13 +2366,13 @@ trigger_open_area() {
   level endon("stop_deadquote_for_gettingout_of_bounds");
   level.player endon("death");
   nagtime = GetTime() + 30000;
-  while (1) {
+  while(1) {
     SetDvar("ui_deadquote", "");
     level thread maps\_quotes::setDeadQuote();
 
     flag_clear("player_in_open");
     self waittill("trigger");
-    while (level.player IsTouching(self)) {
+    while(level.player IsTouching(self)) {
       if(GetTime() > nagtime) {
         nagtime = GetTime() + RandomFloatRange(20000, 22000);
 
@@ -2407,7 +2382,7 @@ trigger_open_area() {
       flag_set("player_in_open"); // done every frame to support overlap.
       level notify("new_quote_string");
       // Stay clear of open areas as much as possible!
-      SetDvar("ui_deadquote", & "AF_CHASE_MISSION_FAILED_IN_THE_OPEN");
+      SetDvar("ui_deadquote", &"AF_CHASE_MISSION_FAILED_IN_THE_OPEN");
       wait .05;
     }
   }
@@ -2442,51 +2417,51 @@ sunsample_after_caves() {
 }
 
 boatsquish() {
-  if(IsDefined(level.noTankSquish)) {
+  if(isDefined(level.noTankSquish)) {
     AssertEx(level.noTankSquish, "level.noTankSquish must be true or undefined");
     return;
   }
 
-  if(IsDefined(level.levelHasVehicles) && !level.levelHasVehicles)
+  if(isDefined(level.levelHasVehicles) && !level.levelHasVehicles)
     return;
   self add_damage_function(::boatsquish_damage_check);
   self remove_damage_function(maps\_spawner::tanksquish_damage_check);
 }
 
 boatsquish_damage_check(amt, who, force, b, c, d, e) {
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
-  if(IsAlive(self))
+  if(IsAlive(self)) {
     return;
-
+  }
   if(!isalive(who))
     return;
-  if(!isdefined(who.vehicletype))
+  if(!isDefined(who.vehicletype)) {
     return;
-
-  if(who maps\_vehicle::ishelicopter())
+  }
+  if(who maps\_vehicle::ishelicopter()) {
     return;
-
+  }
   if(abs(self.origin[2] - level.players_boat.origin[2]) > 64) {
     self Delete(); // these guys are gettinghit by the players tall boat collision.. just delete them so they don't fly over.
   }
 
   self thread boat_squish_ragdoll_or_bust();
 
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   self remove_damage_function(::boatsquish_damage_check);
 
-  //		self PlaySound( "human_crunch" );
+  //		self playSound( "human_crunch" );
 }
 
 boat_squish_ragdoll_or_bust() {
   make_room_for_priority_squished_guy_corpse();
   timer = GetTime() + 500;
-  while (GetTime() < timer) {
-    if(!isdefined(self))
+  while(GetTime() < timer) {
+    if(!isDefined(self))
       return;
     if(self IsRagdoll())
       return;
@@ -2499,15 +2474,14 @@ boat_squish_ragdoll_or_bust() {
 make_room_for_priority_squished_guy_corpse() {
   corpses = GetCorpseArray();
   foreach(corpse in corpses)
-  if(Distance(corpse.origin, level.player GetEye()) > 600)
+  if(Distance(corpse.origin, level.player getEye()) > 600)
     corpse Delete();
-
 }
 
 explode_barrels_in_radius_think() {
-  assert(isdefined(self.radius));
+  assert(isDefined(self.radius));
 
-  shootable_stuff = GetEntArray("explodable_barrel", "targetname");
+  shootable_stuff = getEntArray("explodable_barrel", "targetname");
   flat_org = flat_origin(self.origin);
 
   my_barrels = [];
@@ -2518,7 +2492,7 @@ explode_barrels_in_radius_think() {
 
   self waittill("trigger");
 
-  for (i = 0; i < 10; i++) {
+  for(i = 0; i < 10; i++) {
     foreach(barrel in my_barrels)
     barrel notify("damage", 50, level.player, (0, 0, 0), barrel.origin, "MOD_EXPLOSIVE");
     wait .05;

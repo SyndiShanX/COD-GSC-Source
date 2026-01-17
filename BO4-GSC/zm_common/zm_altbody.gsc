@@ -26,7 +26,6 @@
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
-
 #namespace zm_altbody;
 
 autoexec __init__system__() {
@@ -97,39 +96,39 @@ devgui_start_altbody(name) {
   self player_altbody(name);
 }
 
-  function private function_17d98816(trigger, name) {
-    if(self zm_utility::is_drinking() && !(isDefined(self.trigger_kiosks_in_altbody) && self.trigger_kiosks_in_altbody)) {
-      return false;
-    }
-
-    if(self zm_utility::in_revive_trigger()) {
-      return false;
-    }
-
-    if(self laststand::player_is_in_laststand()) {
-      return false;
-    }
-
-    if(self isthrowinggrenade()) {
-      return false;
-    }
-
-    if(self function_1193c448(name)) {
-      return false;
-    }
-
-    callback = level.altbody_allow_callbacks[name];
-
-    if(isDefined(callback)) {
-      if(!self[[callback]](name, trigger.kiosk)) {
-        return false;
-      }
-    }
-
-    return true;
+function private function_17d98816(trigger, name) {
+  if(self zm_utility::is_drinking() && !(isDefined(self.trigger_kiosks_in_altbody) && self.trigger_kiosks_in_altbody)) {
+    return false;
   }
 
-private player_can_altbody(kiosk, name) {
+  if(self zm_utility::in_revive_trigger()) {
+    return false;
+  }
+
+  if(self laststand::player_is_in_laststand()) {
+    return false;
+  }
+
+  if(self isthrowinggrenade()) {
+    return false;
+  }
+
+  if(self function_1193c448(name)) {
+    return false;
+  }
+
+  callback = level.altbody_allow_callbacks[name];
+
+  if(isDefined(callback)) {
+    if(!self[[callback]](name, trigger.kiosk)) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+player_can_altbody(kiosk, name) {
   if(isDefined(self.altbody) && self.altbody) {
     return false;
   }
@@ -183,7 +182,7 @@ function_1193c448(name) {
   return false;
 }
 
-private player_try_altbody(trigger, name) {
+player_try_altbody(trigger, name) {
   self endon(#"disconnect");
 
   if(self player_can_altbody(trigger, name)) {
@@ -194,7 +193,7 @@ private player_try_altbody(trigger, name) {
   }
 }
 
-private player_altbody(name, trigger) {
+player_altbody(name, trigger) {
   self.altbody = 1;
   self thread val::set_for_time(1, "altbody", "takedamage", 0);
   self player_enter_altbody(name, trigger);
@@ -207,7 +206,7 @@ get_altbody_weapon_limit(player) {
   return 16;
 }
 
-private player_enter_altbody(name, trigger) {
+player_enter_altbody(name, trigger) {
   charindex = level.altbody_charindexes[name];
   self.var_fdbe134c = self.origin;
   self.var_55433be5 = self.angles;
@@ -226,7 +225,7 @@ private player_enter_altbody(name, trigger) {
   clientfield::set("player_altbody", 1);
 }
 
-private player_apply_visionset(name) {
+player_apply_visionset(name) {
   if(!isDefined(self.altbody_visionset)) {
     self.altbody_visionset = [];
   }
@@ -249,7 +248,7 @@ private player_apply_visionset(name) {
   }
 }
 
-private player_apply_loadout(name) {
+player_apply_loadout(name) {
   self bgb::suspend_weapon_cycling();
   loadout = level.altbody_loadouts[name];
 
@@ -269,12 +268,12 @@ private player_apply_loadout(name) {
     }
 
     self.altbody_loadout_ever_had[name] = 1;
-    self waittilltimeout(1, #"weapon_change_complete");
+    self waittilltimeout(1, # "weapon_change_complete");
     self resetanimations();
   }
 }
 
-private player_exit_altbody(name, trigger) {
+player_exit_altbody(name, trigger) {
   clientfield::set("player_altbody", 0);
   clientfield::set_to_player("player_in_afterlife", 0);
   callback = level.altbody_exit_callbacks[name];
@@ -301,14 +300,14 @@ private player_exit_altbody(name, trigger) {
   zm_characters::set_character();
 }
 
-private player_restore_loadout(name, trigger) {
+player_restore_loadout(name, trigger) {
   loadout = level.altbody_loadouts[name];
 
   if(isDefined(loadout)) {
     if(isDefined(self.altbody_loadout[name])) {
       self zm_weapons::switch_back_primary_weapon(self.altbody_loadout[name].current, 1);
       self.altbody_loadout[name] = undefined;
-      self waittilltimeout(1, #"weapon_change_complete");
+      self waittilltimeout(1, # "weapon_change_complete");
     }
 
     self zm_weapons::player_take_loadout(loadout);
@@ -323,11 +322,11 @@ private player_restore_loadout(name, trigger) {
 
 function_d709966a(washuman) {
   if(washuman) {
-    playFX(level._effect[#"human_disappears"], self.origin);
+    playFX(level._effect[# "human_disappears"], self.origin);
     return;
   }
 
-  playFX(level._effect[#"zombie_disappears"], self.origin);
+  playFX(level._effect[# "zombie_disappears"], self.origin);
   playsoundatposition(#"zmb_player_disapparate", self.origin);
   self playlocalsound(#"zmb_player_disapparate_2d");
 }
@@ -403,7 +402,7 @@ kiosk_trigger_think() {
   }
 }
 
-private watch_kiosk_triggers(name, trigger_name, trigger_hint, whenvisible) {
+watch_kiosk_triggers(name, trigger_name, trigger_hint, whenvisible) {
   triggers = getEntArray(trigger_name, "targetname");
 
   if(!triggers.size) {
@@ -413,7 +412,7 @@ private watch_kiosk_triggers(name, trigger_name, trigger_hint, whenvisible) {
   array::thread_all(triggers, &trigger_watch_kiosk, name, trigger_name, trigger_hint, whenvisible);
 }
 
-private trigger_watch_kiosk(name, trigger_name, trigger_hint, whenvisible) {
+trigger_watch_kiosk(name, trigger_name, trigger_hint, whenvisible) {
   self endon(#"death");
   self sethintstring(trigger_hint);
   self setcursorhint("HINT_NOICON");

@@ -20,14 +20,14 @@ main() {
   rope_model_anim_setup();
   level._effect["foot_step_up_tree"] = loadfx("maps/mak/fx_dust_foot_kickup");
   level._effect["fall_out_fx"] = loadfx("maps/mak/fx_dust_and_leaves_kickup_small");
-  sniper_trigs = getentarray("tree_snipers", "targetname");
+  sniper_trigs = getEntArray("tree_snipers", "targetname");
   array_thread(sniper_trigs, ::init_tree_snipers);
 }
 
 init_tree_snipers() {
-  spawners = getentarray(self.target, "targetname");
+  spawners = getEntArray(self.target, "targetname");
   if(isDefined(spawners) && spawners.size) {
-    for (i = 0; i < spawners.size; i++) {
+    for(i = 0; i < spawners.size; i++) {
       if(issubstr(spawners[i].classname, "actor")) {
         spawners[i] thread tree_sniper();
       }
@@ -109,22 +109,22 @@ tree_death(guy, anim_point) {
     self unlink();
   }
   wait randomfloatrange(0.1, 0.5);
-  playfx(level._effect["fall_out_fx"], anim_point.origin - (0, 0, 75));
+  playFX(level._effect["fall_out_fx"], anim_point.origin - (0, 0, 75));
   frondnum = randomintrange(1, 3);
   fronds = [];
-  for (i = 0; i < frondnum; i++) {
+  for(i = 0; i < frondnum; i++) {
     fronds[i] = spawn("script_model", anim_point.origin + (randomintrange(-40, 40), randomintrange(-40, 40), randomintrange(-20, 20)));
     frondmodel = randomint(2);
     if(frondmodel) {
-      fronds[i] setmodel("dest_test_palm_spawnfrond1");
+      fronds[i] setModel("dest_test_palm_spawnfrond1");
     } else {
-      fronds[i] setmodel("dest_test_palm_spawnfrond2");
+      fronds[i] setModel("dest_test_palm_spawnfrond2");
     }
     fronds[i] physicslaunch((randomint(360), randomint(360), randomint(360)), (randomint(10), randomint(10), randomint(10)));
     wait randomfloatrange(0.05, 0.4);
   }
   wait 10;
-  for (i = 0; i < fronds.size; i++) {
+  for(i = 0; i < fronds.size; i++) {
     fronds[i] delete();
   }
 }
@@ -139,9 +139,9 @@ convert_guy_to_drone(guy, bKeepguy) {
     bKeepguy = false;
   model = spawn("script_model", guy.origin);
   model.angles = guy.angles;
-  model setmodel(guy.model);
+  model setModel(guy.model);
   size = guy getattachsize();
-  for (i = 0; i < size; i++) {
+  for(i = 0; i < size; i++) {
     model attach(guy getattachmodelname(i), guy getattachtagname(i));
   }
   model useanimtree(#animtree);
@@ -161,7 +161,7 @@ watch_for_fake_death() {
   self.realhealth = self.health;
   self.health = 1000000;
   total_damage = 0;
-  while (1) {
+  while(1) {
     self waittill("damage", amount, attacker);
     total_damage = total_damage + amount;
     if(total_damage >= self.realhealth) {
@@ -180,13 +180,13 @@ helmet_eject() {
   pos2 = undefined;
   helmet_model = undefined;
   helmet_off = false;
-  for (i = 0; i < size; i++) {
+  for(i = 0; i < size; i++) {
     helmet = self getattachmodelname(i);
     if(issubstr(helmet, "helm") || issubstr(helmet, "cap")) {
       pos1 = self GetTagOrigin(tagname);
       wait(0.05);
       pos2 = self GetTagOrigin(tagname);
-      helmet_model = Spawn("script_model", self GetTagOrigin(tagname));
+      helmet_model = spawn("script_model", self GetTagOrigin(tagname));
       helmet_model.angles = self GetTagAngles(tagname);
       self detach(helmet);
       helmet_off = true;
@@ -201,18 +201,18 @@ helmet_eject() {
   }
   forward = VectorNormalize(pos2 - pos1);
   velocities = forward * RandomIntRange(600, 1000);
-  helmet_model SetModel(helmet);
+  helmet_model setModel(helmet);
   helmet_model PhysicsLaunch(self GetTagOrigin(tagname), velocities);
   wait 10;
   helmet_model delete();
 }
 
 play_footfx_up_tree_right(guy) {
-  playfxontag(level._effect["foot_step_up_tree"], guy, "J_BALL_RI");
+  playFXOnTag(level._effect["foot_step_up_tree"], guy, "J_BALL_RI");
 }
 
 play_footfx_up_tree_left(guy) {
-  playfxontag(level._effect["foot_step_up_tree"], guy, "J_Ball_LE");
+  playFXOnTag(level._effect["foot_step_up_tree"], guy, "J_Ball_LE");
 }
 
 #using_animtree("tree_sniper");
@@ -226,7 +226,7 @@ rope_model_anim_setup() {
 rope_spawn_and_animate(anim_point) {
   rope = spawn("script_model", anim_point.origin);
   rope.angles = anim_point.angles;
-  rope setmodel("anim_foliage_pacific_palmtree_hideout_rope");
+  rope setModel("anim_foliage_pacific_palmtree_hideout_rope");
   rope useanimtree(#animtree);
   rope.animname = "sniper_rope";
   rope anim_single_solo(rope, "rope_fall", undefined, "stop rope idle", anim_point);

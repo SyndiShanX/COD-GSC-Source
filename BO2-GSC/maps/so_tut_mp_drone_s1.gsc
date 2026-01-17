@@ -101,13 +101,13 @@ drone_ai_takeover_trigger(oob) {
 
 drone_ai_takeover_off() {
   level endon("rts_terminated");
-  triggers = getentarray("rts_takeover_OFF", "targetname");
+  triggers = getEntArray("rts_takeover_OFF", "targetname");
   array_thread(triggers, ::drone_ai_takeover_trigger, 1);
 }
 
 drone_ai_takeover_on() {
   level endon("rts_terminated");
-  triggers = getentarray("rts_takeover_ON", "targetname");
+  triggers = getEntArray("rts_takeover_ON", "targetname");
   array_thread(triggers, ::drone_ai_takeover_trigger, 0);
 }
 
@@ -201,17 +201,17 @@ level_fade_in(player, delay) {
 drone_geo_changes() {
   level.rts_floor = getent("overwatch_floor", "targetname");
   level.rts_floor delete();
-  ents = getentarray("rts_poi_LZ", "targetname");
+  ents = getEntArray("rts_poi_LZ", "targetname");
 
   foreach(ent in ents)
   ent delete();
 
-  ents = getentarray("rts_remove", "targetname");
+  ents = getEntArray("rts_remove", "targetname");
 
   foreach(ent in ents)
   ent delete();
 
-  ents = getentarray("script_model", "classname");
+  ents = getEntArray("script_model", "classname");
 
   foreach(ent in ents) {
     if(isDefined(ent.script_index)) {
@@ -220,12 +220,12 @@ drone_geo_changes() {
     }
   }
 
-  ents = getentarray("delivery_van", "targetname");
+  ents = getEntArray("delivery_van", "targetname");
 
   foreach(ent in ents)
   ent delete();
 
-  level.laser_doors = getentarray("laser_door", "targetname");
+  level.laser_doors = getEntArray("laser_door", "targetname");
 
   foreach(ent in level.laser_doors)
   ent disconnectpaths();
@@ -558,7 +558,7 @@ drone_tutorial() {
     } else
       flag_set("block_button_press");
 
-    spots = sortarraybyfurthest(dogsquad.members[0].origin, getentarray("rts_movespot", "targetname"), undefined, undefined, 1);
+    spots = sortarraybyfurthest(dogsquad.members[0].origin, getEntArray("rts_movespot", "targetname"), undefined, undefined, 1);
     level.rts.tutorialobj = getent("tut_highlight", "targetname");
     level.rts.tutorialobj ignorecheapentityflag(1);
     level.rts.tutorialobj hide();
@@ -914,7 +914,7 @@ dronecodespawner(pkg_ref, team, callback, squadid) {
   } else if(pkg_ref.ref == "turret_pkg") {
     ai_ref = level.rts.ai[pkg_ref.units[0]];
     squadid = maps\_so_rts_squad::createsquad(level.rts.allied_center.origin, team, pkg_ref);
-    turrets = getentarray("sentry_turret_friendly", "targetname");
+    turrets = getEntArray("sentry_turret_friendly", "targetname");
 
     foreach(turret in turrets) {
       turret.ai_ref = ai_ref;

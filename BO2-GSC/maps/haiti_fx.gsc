@@ -199,7 +199,7 @@ createfx_setup() {
 }
 
 createfx_control_room_closet() {
-  a_m_destroyed = getentarray("control_room_destroyed", "targetname");
+  a_m_destroyed = getEntArray("control_room_destroyed", "targetname");
 
   foreach(m_destroyed in a_m_destroyed)
   m_destroyed hide();
@@ -211,7 +211,7 @@ createfx_control_room_closet() {
   foreach(m_destroyed in a_m_destroyed)
   m_destroyed show();
 
-  a_m_clean = getentarray("control_room_clean", "targetname");
+  a_m_clean = getEntArray("control_room_clean", "targetname");
 
   foreach(m_clean in a_m_clean)
   m_clean delete();

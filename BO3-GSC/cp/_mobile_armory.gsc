@@ -31,28 +31,24 @@ class cmobilearmory {
   var var_ab455203;
   var var_3df2554f;
 
-
   constructor() {}
 
-
   destructor() {}
-
 
   function function_71f6269a(var_bd13c94b) {
     self waittill("death");
     gameobject gameobjects::destroy_object(1);
     gameobject delete();
-    if(isdefined(target)) {
+    if(isDefined(target)) {
       var_5ba2ceb4 = getent(target, "targetname");
-      if(isdefined(var_5ba2ceb4)) {
+      if(isDefined(var_5ba2ceb4)) {
         var_5ba2ceb4 delete();
       }
     }
-    if(isdefined(var_bd13c94b)) {
+    if(isDefined(var_bd13c94b)) {
       var_bd13c94b delete();
     }
   }
-
 
   function function_69cca2a0(var_ab455203) {
     if(var_ab455203.var_ce22f999) {
@@ -66,7 +62,7 @@ class cmobilearmory {
     var_ab455203 scene::play("p7_fxanim_gp_mobile_armory_open_bundle", var_ab455203);
     wait(1);
     var_d3571721 = 1;
-    while (var_d3571721 > 0) {
+    while(var_d3571721 > 0) {
       var_d3571721 = 0;
       foreach(e_player in level.players) {
         dist_sq = distancesquared(e_player.origin, var_ab455203.origin);
@@ -84,13 +80,12 @@ class cmobilearmory {
     var_ab455203.var_ce22f999 = 0;
   }
 
-
   function function_e76edd0b(var_ab455203) {
     self endon("death");
     var_ab455203 endon("death");
-    while (true) {
+    while(true) {
       self waittill("trigger", entity);
-      if(!isdefined(var_ab455203)) {
+      if(!isDefined(var_ab455203)) {
         break;
       }
       if(isplayer(entity)) {
@@ -98,7 +93,6 @@ class cmobilearmory {
       }
     }
   }
-
 
   function function_6b1fa4df(weapon) {
     clipammo = self getweaponammoclip(weapon);
@@ -108,7 +102,7 @@ class cmobilearmory {
       stockammo = stockmax;
     }
     item = self dropitem(weapon, "tag_origin");
-    if(!isdefined(item)) {
+    if(!isDefined(item)) {
       iprintlnbold(("" + weapon.name) + "");
       return;
     }
@@ -119,14 +113,12 @@ class cmobilearmory {
     item thread weapons::delete_pickup_after_awhile();
   }
 
-
   function function_afd39ac7(e_player) {
-    var_ab455203.gameobject.caninteractwithplayer = & function_66708329;
+    var_ab455203.gameobject.caninteractwithplayer = &function_66708329;
     var_ab455203.gameobject.var_3df2554f = e_player;
     wait(0.25);
     var_ab455203.gameobject.caninteractwithplayer = undefined;
   }
-
 
   function function_66708329(e_player) {
     if(var_3df2554f === e_player) {
@@ -135,13 +127,12 @@ class cmobilearmory {
     return true;
   }
 
-
   function function_ecdbdfeb(e_player) {
     e_player endon("death");
     e_player endon("entering_last_stand");
     e_player flagsys::clear("mobile_armory_begin_use");
     var_9cba4a73 = 1;
-    if(isdefined(var_ab455203.script_int)) {
+    if(isDefined(var_ab455203.script_int)) {
       var_9cba4a73 = 3;
       var_9cba4a73 = var_9cba4a73 + ((var_ab455203.script_int - 6) << 2);
     }
@@ -154,8 +145,8 @@ class cmobilearmory {
     var_95cf88cc = e_player getloadoutweapon(e_player.class_num, "secondary");
     a_heroweapons = [];
     foreach(weapon in a_weaponlist) {
-      if(isdefined(weapon.isheroweapon) && weapon.isheroweapon) {
-        if(!isdefined(a_heroweapons)) {
+      if(isDefined(weapon.isheroweapon) && weapon.isheroweapon) {
+        if(!isDefined(a_heroweapons)) {
           a_heroweapons = [];
         } else if(!isarray(a_heroweapons)) {
           a_heroweapons = array(a_heroweapons);
@@ -175,7 +166,7 @@ class cmobilearmory {
       var_63a103f4 = var_d3a640a8 == var_eb5bcea7 || e_player cybercom::function_6e0bf068();
       e_player savegame::set_player_data("lives", undefined);
       if(response == "cancel") {
-        e_player loadout::function_db96b564(!(isdefined(var_63a103f4) && var_63a103f4));
+        e_player loadout::function_db96b564(!(isDefined(var_63a103f4) && var_63a103f4));
       } else {
         responsearray = strtok(response, ",");
         if(responsearray.size > 1) {
@@ -187,7 +178,7 @@ class cmobilearmory {
         }
         playerclass = e_player loadout::getclasschoice(str_class_chosen);
         e_player savegame::set_player_data("playerClass", playerclass);
-        if(isdefined(altplayer)) {
+        if(isDefined(altplayer)) {
           xuid = altplayer getxuid();
           e_player savegame::set_player_data("altPlayerID", xuid);
         } else {
@@ -202,7 +193,7 @@ class cmobilearmory {
         e_player loadout::setclass(playerclass);
         e_player.tag_stowed_back = undefined;
         e_player.tag_stowed_hip = undefined;
-        e_player loadout::giveloadout(e_player.pers["team"], playerclass, !(isdefined(var_63a103f4) && var_63a103f4), altplayer);
+        e_player loadout::giveloadout(e_player.pers["team"], playerclass, !(isDefined(var_63a103f4) && var_63a103f4), altplayer);
       }
     }
     foreach(weapon in a_heroweapons) {
@@ -231,11 +222,9 @@ class cmobilearmory {
     e_player flagsys::clear("mobile_armory_in_use");
   }
 
-
   function onuse(e_player) {
     self thread function_ecdbdfeb(e_player);
   }
-
 
   function onenduse(team, e_player, b_result) {
     if(!b_result) {
@@ -243,13 +232,11 @@ class cmobilearmory {
     }
   }
 
-
   function onbeginuse(e_player) {
-    e_player playsound("fly_ammo_crate_refill");
+    e_player playSound("fly_ammo_crate_refill");
     e_player util::_disableweapon();
     e_player flagsys::set("mobile_armory_begin_use");
   }
-
 
   function init_mobile_armory(mdl_mobile_armory) {
     t_use = spawn("trigger_radius_use", mdl_mobile_armory.origin + vectorscale((0, 0, 1), 24), 0, 94, 64);
@@ -259,7 +246,7 @@ class cmobilearmory {
     t_use setteamfortrigger("none");
     t_use setcursorhint("HINT_INTERACTIVE_PROMPT");
     t_use sethintstring(&"COOP_SELECT_LOADOUT");
-    if(isdefined(mdl_mobile_armory.script_linkto)) {
+    if(isDefined(mdl_mobile_armory.script_linkto)) {
       moving_platform = getent(mdl_mobile_armory.script_linkto, "targetname");
       mdl_mobile_armory linkto(moving_platform);
       t_use enablelinkto();
@@ -270,22 +257,22 @@ class cmobilearmory {
     mdl_mobile_armory hidepart("tag_weapons_02_jnt");
     mdl_mobile_armory hidepart("tag_weapons_03_jnt");
     mdl_mobile_armory hidepart("tag_weapons_04_jnt");
-    s_mobile_armory_object = gameobjects::create_use_object("any", t_use, array(mdl_mobile_armory), vectorscale((0, 0, 1), 68), & "cp_mobile_armory");
+    s_mobile_armory_object = gameobjects::create_use_object("any", t_use, array(mdl_mobile_armory), vectorscale((0, 0, 1), 68), &"cp_mobile_armory");
     s_mobile_armory_object gameobjects::allow_use("any");
     s_mobile_armory_object gameobjects::set_use_time(0.35);
     s_mobile_armory_object gameobjects::set_use_text(&"COOP_SELECT_LOADOUT");
     s_mobile_armory_object gameobjects::set_owner_team("allies");
     s_mobile_armory_object gameobjects::set_visible_team("any");
-    s_mobile_armory_object.onuse = & onuse;
-    s_mobile_armory_object.onbeginuse = & onbeginuse;
-    s_mobile_armory_object.onenduse = & onenduse;
+    s_mobile_armory_object.onuse = &onuse;
+    s_mobile_armory_object.onbeginuse = &onbeginuse;
+    s_mobile_armory_object.onenduse = &onenduse;
     s_mobile_armory_object.onuse_thread = 1;
     s_mobile_armory_object.useweapon = undefined;
     s_mobile_armory_object.single_use = 0;
     s_mobile_armory_object.classobj = self;
     s_mobile_armory_object.origin = mdl_mobile_armory.origin;
     s_mobile_armory_object.angles = s_mobile_armory_object.angles;
-    if(!isdefined(mdl_mobile_armory.script_linkto)) {
+    if(!isDefined(mdl_mobile_armory.script_linkto)) {
       s_mobile_armory_object enablelinkto();
       s_mobile_armory_object linkto(t_use);
     }
@@ -304,7 +291,7 @@ class cmobilearmory {
 #namespace mobile_armory;
 
 function autoexec __init__sytem__() {
-  system::register("cp_mobile_armory", & __init__, & __main__, undefined);
+  system::register("cp_mobile_armory", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -315,17 +302,13 @@ function __main__() {
   if(sessionmodeiscampaignzombiesgame()) {
     return;
   }
-  if(isdefined(level.var_40b3237f)) {
-    [
-      [level.var_40b3237f]
-    ]();
+  if(isDefined(level.var_40b3237f)) {
+    [[level.var_40b3237f]]();
   }
   wait(0.05);
-  a_mdl_mobile_armory = getentarray("mobile_armory", "script_noteworthy");
+  a_mdl_mobile_armory = getEntArray("mobile_armory", "script_noteworthy");
   foreach(mdl_mobile_armory in a_mdl_mobile_armory) {
     mobile_armory = new cmobilearmory();
-    [
-      [mobile_armory]
-    ] - > init_mobile_armory(mdl_mobile_armory);
+    [[mobile_armory]] - > init_mobile_armory(mdl_mobile_armory);
   }
 }

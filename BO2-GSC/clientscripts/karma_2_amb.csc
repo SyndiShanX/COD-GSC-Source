@@ -175,7 +175,7 @@ turn_off_waitfordryland() {
 }
 
 splash_trigs() {
-  array_thread(getentarray(0, "sndSplashTrig", "targetname"), ::splash_trigs_think);
+  array_thread(getEntArray(0, "sndSplashTrig", "targetname"), ::splash_trigs_think);
 }
 
 splash_trigs_think() {
@@ -186,7 +186,7 @@ splash_trigs_think() {
     self waittill("trigger", who);
 
     if(who isplayer()) {
-      playsound(0, "fly_player_jump_into_water", who.origin);
+      playSound(0, "fly_player_jump_into_water", who.origin);
 
       while(who istouching(self))
         wait 0.1;
@@ -212,7 +212,7 @@ play_door_bang() {
 
   while(true) {
     wait(randomfloatrange(2, 4));
-    playsound(0, "amb_door_banging", (-2572, -2528, -2828));
+    playSound(0, "amb_door_banging", (-2572, -2528, -2828));
   }
 }
 
@@ -220,7 +220,7 @@ wait_to_start_club_crowd() {
   level waittill("scle");
   struct = getstruct("blk_mus_club", "targetname");
   ent1 = spawn(0, struct.origin, "script_origin");
-  ent1 playloopsound("blk_karma_club_bg", 2);
+  ent1 playLoopSound("blk_karma_club_bg", 2);
   level waittill("scm2");
   ent1 stoploopsound(1);
   wait 2;
@@ -293,7 +293,7 @@ atrium_alarms() {
 
 sndplayfakeciv() {
   wait 1.2;
-  playsound(0, "vox_civ_cm3_crawl_1", (711, -8224, -2684));
+  playSound(0, "vox_civ_cm3_crawl_1", (711, -8224, -2684));
   wait 12;
-  playsound(0, "vox_civ_cm3_crawl_2", (711, -8224, -2684));
+  playSound(0, "vox_civ_cm3_crawl_2", (711, -8224, -2684));
 }

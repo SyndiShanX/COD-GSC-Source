@@ -45,7 +45,7 @@ init() {
 
   if(maps\mp\gametypes\_tweakables::gettweakablevalue("killstreak", "allowrcbomb")) {
     maps\mp\killstreaks\_killstreaks::registerkillstreak("rcbomb_mp", "rcbomb_mp", "killstreak_rcbomb", "rcbomb_used", ::usekillstreakrcbomb);
-    maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("rcbomb_mp", & "KILLSTREAK_EARNED_RCBOMB", & "KILLSTREAK_RCBOMB_NOT_AVAILABLE", & "KILLSTREAK_RCBOMB_INBOUND");
+    maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("rcbomb_mp", &"KILLSTREAK_EARNED_RCBOMB", &"KILLSTREAK_RCBOMB_NOT_AVAILABLE", &"KILLSTREAK_RCBOMB_INBOUND");
     maps\mp\killstreaks\_killstreaks::registerkillstreakdialog("rcbomb_mp", "mpl_killstreak_rcbomb", "kls_rcbomb_used", "", "kls_rcbomb_enemy", "", "kls_rcbomb_ready");
     maps\mp\killstreaks\_killstreaks::registerkillstreakdevdvar("rcbomb_mp", "scr_givercbomb");
     maps\mp\killstreaks\_killstreaks::allowkillstreakassists("rcbomb_mp", 1);
@@ -411,7 +411,7 @@ detonateiftouchingsphere(origin, radius) {
 }
 
 detonatealliftouchingsphere(origin, radius) {
-  rcbombs = getentarray("rcbomb", "targetname");
+  rcbombs = getEntArray("rcbomb", "targetname");
 
   for(index = 0; index < rcbombs.size; index++)
     rcbombs[index] detonateiftouchingsphere(origin, radius);
@@ -437,10 +437,10 @@ blowup(attacker, weaponname) {
     physicsexplosionsphere(origin, radius, radius, 1, max_damage, min_damage);
     maps\mp\gametypes\_shellshock::rcbomb_earthquake(origin);
     playsoundatposition("mpl_rc_exp", self.origin);
-    playfx(level._effect["rcbombexplosion"], explosionorigin, (0, 0, 1));
+    playFX(level._effect["rcbombexplosion"], explosionorigin, (0, 0, 1));
   }
 
-  self setmodel(self.death_model);
+  self setModel(self.death_model);
   self hide();
   self setclientfield("rcbomb_death", 1);
 
@@ -457,8 +457,7 @@ blowup(attacker, weaponname) {
         attacker addweaponstat("rcbomb_mp", "destroyed", 1);
         attacker addweaponstat(weaponname, "destroyed_controlled_killstreak", 1);
       }
-    } else {
-    }
+    } else {}
   }
 
   wait 1;
@@ -525,7 +524,7 @@ calculatespawnorigin(origin, angles) {
   for(i = 0; i < testangles.size; i++) {
     testcheck[i] = 0;
     startangles[i] = (0, angles[1], 0);
-    startpoint = origin + vectorscale(anglestoforward(startangles[i] + testangles[i]), distance_from_player);
+    startpoint = origin + vectorscale(anglesToForward(startangles[i] + testangles[i]), distance_from_player);
     endpoint = startpoint - vectorscale((0, 0, 1), 100.0);
     startpoint = startpoint + (0, 0, startheight);
     mask = level.physicstracemaskphysics | level.physicstracemaskvehicle;
@@ -551,7 +550,7 @@ calculatespawnorigin(origin, angles) {
       testcheck[i] = 1;
 
       if(testspawnorigin(startpoints[i], startangles[i])) {
-        placement = spawnstruct();
+        placement = spawnStruct();
         placement.origin = startpoints[i];
         placement.angles = startangles[i];
         return placement;
@@ -563,7 +562,7 @@ calculatespawnorigin(origin, angles) {
     if(!testcheck[i]) {
       if(wheelcounts[i] >= 2) {
         if(testspawnorigin(startpoints[i], startangles[i])) {
-          placement = spawnstruct();
+          placement = spawnStruct();
           placement.origin = startpoints[i];
           placement.angles = startangles[i];
           return placement;
@@ -592,7 +591,7 @@ testwheellocations(origin, angles, heightoffset) {
     startpoint = origin + wheel;
     endpoint = startpoint + (0, 0, -1 * height - heightoffset);
     startpoint = startpoint + (0, 0, height - heightoffset);
-    trace = bullettrace(startpoint, endpoint, 0, self);
+    trace = bulletTrace(startpoint, endpoint, 0, self);
 
     if(trace["fraction"] < 1) {
       touchcount++;

@@ -8,7 +8,6 @@
 #include maps\_weather;
 
 main() {
-
   if(getdvarint("sm_enable")) {
     // Hunted Spotlight
     level._effect["_attack_heli_spotlight"] = loadfx("misc/hunted_spotlight_model");
@@ -17,7 +16,7 @@ main() {
     level._effect["_attack_heli_spotlight"] = loadfx("misc/spotlight_large_dcburning");
   }
 
-  //CRASH SCENE FX 
+  //CRASH SCENE FX
   level._effect["firelp_large_pm"] = loadfx("fire/firelp_large_pm");
   level._effect["firelp_med_pm"] = loadfx("fire/firelp_med_pm");
   level._effect["firelp_small_pm"] = loadfx("fire/firelp_small_pm");
@@ -106,22 +105,21 @@ main() {
 
   //enable this line for correct vision in createfx BESURE TO DISABLE
   //thread maps\_utility::vision_set_fog_changes( "dc_whitehouse_roof", 0 );
-
 }
 
 lightning_flash(dir) {
   level notify("emp_lighting_flash");
   level endon("emp_lighting_flash");
 
-  if(level.createFX_enabled)
+  if(level.createFX_enabled) {
     return;
-
+  }
   num = randomintrange(1, 4);
 
-  if(!isdefined(dir))
+  if(!isDefined(dir))
     dir = (-20, 60, 0);
 
-  for (i = 0; i < num; i++) {
+  for(i = 0; i < num; i++) {
     type = randomint(3);
     switch (type) {
       case 0:

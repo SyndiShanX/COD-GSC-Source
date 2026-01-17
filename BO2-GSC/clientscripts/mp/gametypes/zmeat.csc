@@ -24,8 +24,7 @@ init_animtree() {
   scriptmodelsuseanimtree(#animtree);
 }
 
-onprecachegametype() {
-}
+onprecachegametype() {}
 
 onstartgametype() {
   setsaveddvar("r_skyTransition", 1);
@@ -38,7 +37,7 @@ play_meat_glow(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
   }
   if(newval) {
     if(!isDefined(self._meat_fx))
-      self._meat_fx = playfxontag(localclientnum, level._effect["meat_glow3p"], self, "tag_weapon_right");
+      self._meat_fx = playFXOnTag(localclientnum, level._effect["meat_glow3p"], self, "tag_weapon_right");
   } else if(isDefined(self._meat_fx)) {
     deletefx(localclientnum, self._meat_fx);
     self._meat_fx = undefined;
@@ -48,7 +47,7 @@ play_meat_glow(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
 play_ring_meatglow(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
     if(!isDefined(self._glow_fx))
-      self._glow_fx = playfxontag(localclientnum, level._effect["meat_glow"], self, "tag_origin");
+      self._glow_fx = playFXOnTag(localclientnum, level._effect["meat_glow"], self, "tag_origin");
   } else if(isDefined(self._glow_fx)) {
     deletefx(localclientnum, self._glow_fx);
     self._glow_fx = undefined;
@@ -58,7 +57,7 @@ play_ring_meatglow(localclientnum, oldval, newval, bnewent, binitialsnap, fieldn
 play_ring_glow(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
     if(!isDefined(self._glow_fx))
-      self._glow_fx = playfxontag(localclientnum, level._effect["ring_glow"], self, "tag_origin");
+      self._glow_fx = playFXOnTag(localclientnum, level._effect["ring_glow"], self, "tag_origin");
   } else if(isDefined(self._glow_fx)) {
     deletefx(localclientnum, self._glow_fx);
     self._glow_fx = undefined;

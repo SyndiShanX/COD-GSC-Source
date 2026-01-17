@@ -13,7 +13,6 @@
 #include scripts\core_common\laststand_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace zm_bot_position;
 
 autoexec __init__system__() {

@@ -14,12 +14,12 @@
 #namespace zm_pap_util;
 
 function init_parameters() {
-  if(!isdefined(level.pack_a_punch)) {
-    level.pack_a_punch = spawnstruct();
+  if(!isDefined(level.pack_a_punch)) {
+    level.pack_a_punch = spawnStruct();
     level.pack_a_punch.timeout = 15;
     level.pack_a_punch.interaction_height = 35;
-    level.pack_a_punch.move_in_func = & pap_weapon_move_in;
-    level.pack_a_punch.move_out_func = & pap_weapon_move_out;
+    level.pack_a_punch.move_in_func = &pap_weapon_move_in;
+    level.pack_a_punch.move_out_func = &pap_weapon_move_out;
     level.pack_a_punch.grabbable_by_anyone = 0;
     level.pack_a_punch.swap_attachments_on_reuse = 0;
     level.pack_a_punch.triggers = [];
@@ -70,7 +70,7 @@ function get_triggers() {
 }
 
 function is_pap_trigger() {
-  return isdefined(self.script_noteworthy) && self.script_noteworthy == "pack_a_punch";
+  return isDefined(self.script_noteworthy) && self.script_noteworthy == "pack_a_punch";
 }
 
 function enable_swap_attachments() {
@@ -79,7 +79,7 @@ function enable_swap_attachments() {
 }
 
 function can_swap_attachments() {
-  if(!isdefined(level.pack_a_punch)) {
+  if(!isDefined(level.pack_a_punch)) {
     return 0;
   }
   return level.pack_a_punch.swap_attachments_on_reuse;

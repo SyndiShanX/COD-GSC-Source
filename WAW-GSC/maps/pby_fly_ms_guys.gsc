@@ -31,7 +31,7 @@ ms_soldier_deaththread() {
   damage_type = self;
   damage_ori = self;
   death_index = 0;
-  while (isDefined(drone)) {
+  while(isDefined(drone)) {
     drone waittill("damage", amount, attacker, damage_dir, damage_ori, damage_type);
     if(drone.health <= 0) {
       break;
@@ -43,13 +43,13 @@ ms_soldier_deaththread() {
   }
   if(damage_type == "MOD_EXPLOSIVE") {
     ref_point = [];
-    ref_point[0] = drone.origin + (AnglesToForward(drone.angles) * 5);
-    ref_point[1] = drone.origin + (AnglesToForward(drone.angles) * -5);
+    ref_point[0] = drone.origin + (anglesToForward(drone.angles) * 5);
+    ref_point[1] = drone.origin + (anglesToForward(drone.angles) * -5);
     ref_point[2] = drone.origin + (AnglesToRight(drone.angles) * -5);
     ref_point[3] = drone.origin + (AnglesToRight(drone.angles) * 5);
     closest_point = ref_point[0];
     index = 0;
-    for (i = 1; i < ref_point.size; i++) {
+    for(i = 1; i < ref_point.size; i++) {
       if(Distance(ref_point[i], damage_ori) < Distance(closest_point, damage_ori)) {
         closest_point = ref_point[i];
         index = i;
@@ -59,11 +59,11 @@ ms_soldier_deaththread() {
     trace = 0;
     switch (index) {
       case 0:
-        new_point = drone.origin + (AnglesToForward(drone.angles) * 264);
+        new_point = drone.origin + (anglesToForward(drone.angles) * 264);
         drone.angles = VectorToAngles(damage_ori - drone.origin);
         break;
       case 1:
-        new_point = drone.origin + (AnglesToForward(drone.angles) * -264);
+        new_point = drone.origin + (anglesToForward(drone.angles) * -264);
         drone.angles = VectorToAngles(drone.origin - damage_ori);
         break;
       case 2:
@@ -75,7 +75,7 @@ ms_soldier_deaththread() {
         drone.angles = VectorToAngles(damage_ori - drone.origin) + (0, 90, 0);
         break;
     }
-    trace = BulletTrace(new_point, new_point - (0, 0, 2000), true, undefined);
+    trace = bulletTrace(new_point, new_point - (0, 0, 2000), true, undefined);
     if(trace["position"][2] < (new_point[2] - 32)) {
       switch (index) {
         case 0:
@@ -128,7 +128,7 @@ ms_soldier_deaththread() {
   drone stopAnimScripted();
   if(isDefined(drone.special_death_fx)) {
     drone.special_death_fx = "drone_burst";
-    PlayFXOnTag(level._effect[drone.special_death_fx], drone, "J_SpineLower");
+    playFXOnTag(level._effect[drone.special_death_fx], drone, "J_SpineLower");
   }
   drone.need_notetrack = true;
   drone maps\_drone::drone_play_anim(level.drone_anims["stand"]["death"][death_index]);
@@ -143,13 +143,13 @@ add_me_to_the_death_queue() {
 init_drone_manager() {
   MAX_DEAD_DRONES = 10;
   level.drone_death_queue = [];
-  while (1) {
+  while(1) {
     level waittill("drone_manager_process");
     if(level.drone_death_queue.size > MAX_DEAD_DRONES) {
-      while (level.drone_death_queue.size > MAX_DEAD_DRONES) {
+      while(level.drone_death_queue.size > MAX_DEAD_DRONES) {
         removed_guy = level.drone_death_queue[0];
         new_drone_queue = [];
-        for (i = 1; i < (level.drone_death_queue.size); i++) {
+        for(i = 1; i < (level.drone_death_queue.size); i++) {
           new_drone_queue[i - 1] = level.drone_death_queue[i];
         }
         if(isDefined(removed_guy)) {
@@ -165,11 +165,11 @@ ms_soldier_run_and_rail(spawner_name, path_name, cover_name, amount_of_cover) {
   spawner = GetStruct(spawner_name, "targetname");
   path = GetStruct(path_name, "targetname");
   cover_array = [];
-  for (i = 0; i < amount_of_cover; i++) {
+  for(i = 0; i < amount_of_cover; i++) {
     cover_array[i] = GetStruct(cover_name + "_" + i, "targetname");
   }
   drones_spawned = [];
-  for (i = 0; i < cover_array.size; i++) {
+  for(i = 0; i < cover_array.size; i++) {
     drones_spawned[i] = maps\_drone::drone_scripted_spawn("actor_axis_jap_reg_type99rifle", spawner);
     drones_spawned[i] maps\_drone::drone_move_to_ent(path);
     drones_spawned[i] thread ms_soldier_cover_shoot(cover_array[i], "goal");
@@ -200,9 +200,9 @@ ms_soldier_triple_25_add_gunners() {
   offset_forward = 0;
   temp = self GetTagOrigin("tag_gunner_turret1");
   temp_angles = self GetTagAngles("tag_gunner_turret1");
-  temp = temp + (AnglesToForward(temp_angles) * offset_forward) + (AnglesToRight(temp_angles) * offset_right) + (AnglesToUp(temp_angles) * offset_up);
+  temp = temp + (anglesToForward(temp_angles) * offset_forward) + (AnglesToRight(temp_angles) * offset_right) + (AnglesToUp(temp_angles) * offset_up);
   maps\pby_fly::pby_ok_to_spawn();
-  gunner_tower_right_pos = Spawn("script_origin", temp);
+  gunner_tower_right_pos = spawn("script_origin", temp);
   maps\pby_fly::pby_ok_to_spawn();
   gunner_tower_right = maps\_drone::drone_scripted_spawn("actor_axis_jap_reg_type99rifle", gunner_tower_right_pos);
   gunner_tower_right.animname = "triple25_gunner1";
@@ -212,10 +212,10 @@ ms_soldier_triple_25_add_gunners() {
   gunner_tower_right thread reset_position(temp);
   temp = self GetTagOrigin("tag_gunner_turret1");
   temp_angles = self GetTagAngles("tag_gunner_turret1");
-  temp_offset = (AnglesToForward(temp_angles) * offset_forward) + (AnglesToRight(temp_angles) * offset_right * -1) + (AnglesToUp(temp_angles) * offset_up);
+  temp_offset = (anglesToForward(temp_angles) * offset_forward) + (AnglesToRight(temp_angles) * offset_right * -1) + (AnglesToUp(temp_angles) * offset_up);
   temp = temp + temp_offset;
   maps\pby_fly::pby_ok_to_spawn();
-  gunner_tower_left_pos = Spawn("script_origin", temp);
+  gunner_tower_left_pos = spawn("script_origin", temp);
   maps\pby_fly::pby_ok_to_spawn();
   gunner_tower_left = maps\_drone::drone_scripted_spawn("actor_axis_jap_reg_type99rifle", gunner_tower_left_pos);
   gunner_tower_left.animname = "triple25_gunner2";
@@ -225,9 +225,9 @@ ms_soldier_triple_25_add_gunners() {
   gunner_tower_left thread reset_position(temp);
   temp = self GetTagOrigin("tag_gunner_turret2");
   temp_angles = self GetTagAngles("tag_gunner_turret2");
-  temp = temp + (AnglesToForward(temp_angles) * offset_forward) + (AnglesToRight(temp_angles) * offset_right) + (AnglesToUp(temp_angles) * offset_up);
+  temp = temp + (anglesToForward(temp_angles) * offset_forward) + (AnglesToRight(temp_angles) * offset_right) + (AnglesToUp(temp_angles) * offset_up);
   maps\pby_fly::pby_ok_to_spawn();
-  gunner_deck_right_pos = Spawn("script_origin", temp);
+  gunner_deck_right_pos = spawn("script_origin", temp);
   maps\pby_fly::pby_ok_to_spawn();
   gunner_deck_right = maps\_drone::drone_scripted_spawn("actor_axis_jap_reg_type99rifle", gunner_deck_right_pos);
   gunner_deck_right.animname = "triple25_gunner1";
@@ -237,9 +237,9 @@ ms_soldier_triple_25_add_gunners() {
   gunner_deck_right thread reset_position(temp);
   temp = self GetTagOrigin("tag_gunner_turret2");
   temp_angles = self GetTagAngles("tag_gunner_turret2");
-  temp = temp + (AnglesToForward(temp_angles) * offset_forward) + (AnglesToRight(temp_angles) * offset_right * -1) + (AnglesToUp(temp_angles) * offset_up);
+  temp = temp + (anglesToForward(temp_angles) * offset_forward) + (AnglesToRight(temp_angles) * offset_right * -1) + (AnglesToUp(temp_angles) * offset_up);
   maps\pby_fly::pby_ok_to_spawn();
-  gunner_deck_left_pos = Spawn("script_origin", temp);
+  gunner_deck_left_pos = spawn("script_origin", temp);
   maps\pby_fly::pby_ok_to_spawn();
   gunner_deck_left = maps\_drone::drone_scripted_spawn("actor_axis_jap_reg_type99rifle", gunner_deck_left_pos);
   gunner_deck_left.animname = "triple25_gunner2";
@@ -251,7 +251,7 @@ ms_soldier_triple_25_add_gunners() {
 
 reset_position(position) {
   self endon("death");
-  while (1) {
+  while(1) {
     self.origin = position;
     wait(0.05);
   }
@@ -259,8 +259,8 @@ reset_position(position) {
 
 kill_all_ms_guys() {
   drones = [];
-  drones = GetEntArray("drone", "targetname");
-  for (i = 0; i < drones.size; i++) {
+  drones = getEntArray("drone", "targetname");
+  for(i = 0; i < drones.size; i++) {
     if(!isDefined(drones[i].driver)) {
       drones[i] DoDamage(1000, drones[i].origin);
       if(isDefined(drones[i].boat)) {
@@ -278,8 +278,8 @@ kill_all_ms_guys() {
 
 delete_all_ms_guys() {
   drones = [];
-  drones = GetEntArray("drone", "targetname");
-  for (i = 0; i < drones.size; i++) {
+  drones = getEntArray("drone", "targetname");
+  for(i = 0; i < drones.size; i++) {
     if(!isDefined(drones[i].driver)) {
       drones[i] Delete();
     }
@@ -297,11 +297,11 @@ torch_ai(delay) {
   tagArray[tagArray.size] = "J_Ankle_RI";
   tagArray[tagArray.size] = "J_Ankle_LE";
   tagArray = maps\_utility::array_randomize(tagArray);
-  for (i = 0; i < 3; i++) {
-    PlayFxOnTag(level._effect["character_fire_death_sm"], self, tagArray[i]);
+  for(i = 0; i < 3; i++) {
+    playFXOnTag(level._effect["character_fire_death_sm"], self, tagArray[i]);
     if(isDefined(delay)) {
       wait(delay);
     }
   }
-  PlayFxOnTag(level._effect["character_fire_death_torso"], self, "J_SpineLower");
+  playFXOnTag(level._effect["character_fire_death_torso"], self, "J_SpineLower");
 }

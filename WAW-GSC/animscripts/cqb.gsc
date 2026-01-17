@@ -89,7 +89,7 @@ DontCQBTrackUnlessWeMoveCQBAgain() {
 setupCQBPointsOfInterest() {
   level.cqbPointsOfInterest = [];
   pointents = getEntArray("cqb_point_of_interest", "targetname");
-  for (i = 0; i < pointents.size; i++) {
+  for(i = 0; i < pointents.size; i++) {
     level.cqbPointsOfInterest[i] = pointents[i].origin;
     pointents[i] delete();
   }
@@ -102,10 +102,10 @@ findCQBPointsOfInterest() {
   if(!level.cqbPointsOfInterest.size) {
     return;
   }
-  while (1) {
+  while(1) {
     ai = getaiarray();
     waited = false;
-    for (i = 0; i < ai.size; i++) {
+    for(i = 0; i < ai.size; i++) {
       if(isAlive(ai[i]) && ai[i] isCQBWalking()) {
         moving = (ai[i].a.movement != "stop");
         shootAtPos = ai[i] getShootAtPos();
@@ -117,7 +117,7 @@ findCQBPointsOfInterest() {
         }
         best = -1;
         bestdist = 1024 * 1024;
-        for (j = 0; j < level.cqbPointsOfInterest.size; j++) {
+        for(j = 0; j < level.cqbPointsOfInterest.size; j++) {
           point = level.cqbPointsOfInterest[j];
           dist = distanceSquared(point, lookAheadPoint);
           if(dist < bestdist) {
@@ -158,7 +158,7 @@ CQBDebug() {
   if(getdvar("scr_cqbdebug") == "")
     setdvar("scr_cqbdebug", "off");
   level thread CQBDebugGlobal();
-  while (1) {
+  while(1) {
     if(getdebugdvar("scr_cqbdebug") == "on" || getdebugdvarint("scr_cqbdebug") == self getentnum()) {
       if(isDefined(self.shootPos)) {
         line(self getShootAtPos(), self.shootPos, (1, 1, 1));
@@ -196,12 +196,12 @@ CQBDebugGlobal() {
   if(isDefined(level.cqbdebugglobal))
     return;
   level.cqbdebugglobal = true;
-  while (1) {
+  while(1) {
     if(getdebugdvar("scr_cqbdebug") != "on") {
       wait 1;
       continue;
     }
-    for (i = 0; i < level.cqbPointsOfInterest.size; i++) {
+    for(i = 0; i < level.cqbPointsOfInterest.size; i++) {
       print3d(level.cqbPointsOfInterest[i], ".", (.7, .7, 1), .7, 3);
     }
     wait .05;

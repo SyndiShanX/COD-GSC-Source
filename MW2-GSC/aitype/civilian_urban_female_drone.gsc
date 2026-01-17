@@ -49,5 +49,4 @@ spawner() {
 precache() {
   character\character_civilian_urban_fem_a_drone::precache();
   character\character_civilian_urban_fem_b_drone::precache();
-
 }

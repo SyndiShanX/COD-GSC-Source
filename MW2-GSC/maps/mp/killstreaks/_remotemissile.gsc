@@ -62,15 +62,15 @@ getBestSpawnPoint(remoteMissileSpawnPoints) {
   }
 
   foreach(player in level.players) {
-    if(!isReallyAlive(player))
+    if(!isReallyAlive(player)) {
       continue;
-
-    if(player.team == self.team)
+    }
+    if(player.team == self.team) {
       continue;
-
-    if(player.team == "spectator")
+    }
+    if(player.team == "spectator") {
       continue;
-
+    }
     bestDistance = 999999999;
     bestSpawnPoint = undefined;
 
@@ -113,7 +113,7 @@ getBestSpawnPoint(remoteMissileSpawnPoints) {
 
 drawLine(start, end, timeSlice, color) {
   drawTime = int(timeSlice * 20);
-  for (time = 0; time < drawTime; time++) {
+  for(time = 0; time < drawTime; time++) {
     line(start, end, color, false, 1);
     wait(0.05);
   }
@@ -149,14 +149,14 @@ _fire(lifeId, player) {
     backDist = level.missileRemoteLaunchHorz;
     targetDist = level.missileRemoteLaunchTargetDist;
 
-    forward = AnglesToForward(player.angles);
+    forward = anglesToForward(player.angles);
     startpos = player.origin + upVector + forward * backDist * -1;
     targetPos = player.origin + forward * targetDist;
 
     rocket = MagicBullet("remotemissile_projectile_mp", startpos, targetPos, player);
   }
 
-  if(!IsDefined(rocket)) {
+  if(!isDefined(rocket)) {
     player clearUsingRemote();
     return;
   }
@@ -170,21 +170,20 @@ _fire(lifeId, player) {
   MissileEyes(player, rocket);
 }
 
-/#
 _fire_noplayer(lifeId, player) {
   upVector = (0, 0, level.missileRemoteLaunchVert);
   backDist = level.missileRemoteLaunchHorz;
   targetDist = level.missileRemoteLaunchTargetDist;
 
-  forward = AnglesToForward(player.angles);
+  forward = anglesToForward(player.angles);
   startpos = player.origin + upVector + forward * backDist * -1;
   targetPos = player.origin + forward * targetDist;
 
   rocket = MagicBullet("remotemissile_projectile_mp", startpos, targetPos, player);
 
-  if(!IsDefined(rocket))
+  if(!isDefined(rocket)) {
     return;
-
+  }
   rocket thread handleDamage();
 
   rocket.lifeId = lifeId;
@@ -200,20 +199,19 @@ _fire_noplayer(lifeId, player) {
   player ControlsUnlink();
   player CameraUnlink();
 }
-# /
 
-  handleDamage() {
-    self endon("death");
-    self endon("deleted");
+handleDamage() {
+  self endon("death");
+  self endon("deleted");
 
-    self setCanDamage(true);
+  self setCanDamage(true);
 
-    for (;;) {
-      self waittill("damage");
+  for(;;) {
+    self waittill("damage");
 
-      println("projectile damaged!");
-    }
+    println("projectile damaged!");
   }
+}
 
 MissileEyes(player, rocket) {
   //level endon ( "game_ended" );

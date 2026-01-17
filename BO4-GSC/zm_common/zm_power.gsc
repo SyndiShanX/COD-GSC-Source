@@ -20,7 +20,6 @@
 #include scripts\zm_common\zm_perks;
 #include scripts\zm_common\zm_stats;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_power;
 
 autoexec __init__system__() {
@@ -37,7 +36,6 @@ __main__() {
   level thread electric_switch_init();
 
   thread debug_powered_items();
-
 }
 
 debug_powered_items() {
@@ -54,16 +52,16 @@ debug_powered_items() {
   }
 }
 
-  function electric_switch_init() {
-    trigs = getEntArray("use_elec_switch", "targetname");
+function electric_switch_init() {
+  trigs = getEntArray("use_elec_switch", "targetname");
 
-    if(isDefined(level.temporary_power_switch_logic)) {
-      array::thread_all(trigs, level.temporary_power_switch_logic, trigs);
-      return;
-    }
-
-    array::thread_all(trigs, &electric_switch);
+  if(isDefined(level.temporary_power_switch_logic)) {
+    array::thread_all(trigs, level.temporary_power_switch_logic, trigs);
+    return;
   }
+
+  array::thread_all(trigs, &electric_switch);
+}
 
 electric_switch() {
   self endon(#"hash_21e36726a7f30458");
@@ -81,11 +79,11 @@ electric_switch() {
         master_switch = ent;
 
         switch (ent.script_noteworthy) {
-          case #"elec_switch":
+          case # "elec_switch":
             break;
-          case #"hash_47bde376753a03c9":
+          case # "hash_47bde376753a03c9":
             break;
-          case #"artifact_mind":
+          case # "artifact_mind":
             break;
         }
       }
@@ -101,7 +99,7 @@ electric_switch() {
   while(isDefined(self)) {
     if(isDefined(master_switch) && isDefined(master_switch.script_noteworthy) && !(isDefined(self.var_1d2fecd6) && self.var_1d2fecd6)) {
       switch (master_switch.script_noteworthy) {
-        case #"elec_switch":
+        case # "elec_switch":
           if(function_8b1a219a()) {
             self sethintstring(#"hash_5c4125d53451e888");
           } else {
@@ -109,7 +107,7 @@ electric_switch() {
           }
 
           break;
-        case #"hash_47bde376753a03c9":
+        case # "hash_47bde376753a03c9":
           if(function_8b1a219a()) {
             self sethintstring(#"hash_5c4125d53451e888");
           } else {
@@ -117,7 +115,7 @@ electric_switch() {
           }
 
           break;
-        case #"artifact_mind":
+        case # "artifact_mind":
           level waittill(#"player_spawned");
 
           if(function_8b1a219a()) {
@@ -151,13 +149,13 @@ electric_switch() {
 
     if(isDefined(master_switch) && isDefined(master_switch.script_noteworthy)) {
       switch (master_switch.script_noteworthy) {
-        case #"elec_switch":
+        case # "elec_switch":
           elec_switch_on(master_switch, fx_pos);
           break;
-        case #"hash_47bde376753a03c9":
+        case # "hash_47bde376753a03c9":
           function_9d9892d2(master_switch);
           break;
-        case #"artifact_mind":
+        case # "artifact_mind":
           artifact_mind_on(master_switch, fx_pos, user);
           break;
       }
@@ -171,7 +169,7 @@ electric_switch() {
     }
 
     if(isplayer(user)) {
-      user util::delay(1, "death", &zm_audio::create_and_play_dialog, #"power_switch", #"activate", undefined, 2);
+      user util::delay(1, "death", &zm_audio::create_and_play_dialog, # "power_switch", # "activate", undefined, 2);
     }
 
     if(!isDefined(self.script_noteworthy) || self.script_noteworthy != "allow_power_off") {
@@ -181,7 +179,7 @@ electric_switch() {
 
     if(isDefined(master_switch) && isDefined(master_switch.script_noteworthy)) {
       switch (master_switch.script_noteworthy) {
-        case #"elec_switch":
+        case # "elec_switch":
           self sethintstring(#"hash_3071a199ee6ad7a6");
           break;
       }
@@ -195,7 +193,7 @@ electric_switch() {
 
     if(isDefined(master_switch) && isDefined(master_switch.script_noteworthy)) {
       switch (master_switch.script_noteworthy) {
-        case #"elec_switch":
+        case # "elec_switch":
           elec_switch_off(master_switch);
           break;
       }
@@ -216,7 +214,7 @@ elec_switch_on(master_switch, fx_pos) {
   master_switch playSound(#"zmb_turn_on");
 
   if(isDefined(fx_pos)) {
-    playFX(level._effect[#"switch_sparks"], fx_pos.origin);
+    playFX(level._effect[# "switch_sparks"], fx_pos.origin);
   }
 }
 
@@ -684,13 +682,12 @@ zombie_power_off(origin, radius) {
 
 stun_zombie() {
   self notify(#"stun_zombie");
-  self endon(#"death", #"stun_zombie");
+  self endon(#"death", # "stun_zombie");
 
   if(self.health <= 0) {
-
     iprintln("<dev string:x192>");
 
-      return;
+    return;
   }
 
   if(isDefined(self.ignore_inert) && self.ignore_inert) {

@@ -36,8 +36,8 @@ ambush_stuff() {
 
 play_tower_creaks() {
   level endon("tower_collapse");
-  while (1) {
-    self playsound("tower_creak");
+  while(1) {
+    self playSound("tower_creak");
     wait(randomintrange(8, 15));
   }
 }
@@ -50,15 +50,15 @@ start_explosion_test() {
   target_right = getent("exp_target_right", "targetname");
   ent1 = spawn("script_origin", origin_left.origin);
   ent2 = spawn("script_origin", origin_right.origin);
-  ent1 playsound("exp_hut_4_sweet_L");
-  ent2 playsound("exp_hut_4_sweet_R");
+  ent1 playSound("exp_hut_4_sweet_L");
+  ent2 playSound("exp_hut_4_sweet_R");
   ent1 moveto(target_left.origin, 1.5);
   ent2 moveto(target_right.origin, 1.5);
 }
 
 line_to_me(guy) {
   self endon("movedone");
-  while (1) {
+  while(1) {
     line(self.origin, guy.origin, (1, 1, 1));
     wait 0.05;
   }
@@ -69,7 +69,7 @@ hut_4_exp() {
   dest_pos = piece.origin + (0, -2500, 0);
   piece MoveTo(dest_pos, 3);
   wait(0.5);
-  piece playsound("exp_whoosh");
+  piece playSound("exp_whoosh");
   wait(1);
   level thread start_explosion_test();
   piece waittill("movedone");
@@ -80,7 +80,7 @@ flare_fire_1() {
   level waittill("flare_fire_1");
   wait(0.1);
   flare_fire_1 = getent("flare_starter1", "targetname");
-  flare_fire_1 playsound("flare1");
+  flare_fire_1 playSound("flare1");
   wait(55);
 }
 
@@ -88,12 +88,12 @@ flare_fire_2() {
   level waittill("flare_fire_2");
   wait(0.1);
   flare_fire_2 = getent("flare_starter2", "targetname");
-  flare_fire_2 playsound("flare2");
+  flare_fire_2 playSound("flare2");
 }
 
 play_environmental_sound(sound_to_play, pos) {
   sound = spawn("script_origin", pos);
-  sound playloopsound(sound_to_play);
+  sound playLoopSound(sound_to_play);
 }
 
 start_environmental_sounds() {
@@ -123,14 +123,14 @@ change_music_state(state) {
 start_tower_creak() {
   creaksound = spawn("script_origin", (-12088, -14936, 328));
   wait(0.1);
-  creaksound playloopsound("hut_creak");
+  creaksound playLoopSound("hut_creak");
   flag_wait("event1_hut1_collapse");
   creaksound stoploopsound();
 }
 
 play_dragging_sound() {
   level endon("IN_BOAT");
-  while (1) {
+  while(1) {
     wait(randomintrange(1, 3));
     {
       playsoundatposition("drag", (0, 0, 0));

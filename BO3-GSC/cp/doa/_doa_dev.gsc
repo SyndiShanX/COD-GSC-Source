@@ -16,10 +16,10 @@
 
 function function_40206fdf() {
   level endon("hash_1684cf71");
-  while (true) {
+  while(true) {
     player = getplayers()[0];
     wait(0.05);
-    if(level.var_cee29ae7 != 1 || !isdefined(player)) {
+    if(level.var_cee29ae7 != 1 || !isDefined(player)) {
       continue;
     }
     var_a67ace85 = randomint(255) << 22;
@@ -60,7 +60,7 @@ function function_40206fdf() {
 }
 
 function function_35d58a26() {
-  while (namespace_831a4a7c::function_5eb6e4d1().size == 0) {
+  while(namespace_831a4a7c::function_5eb6e4d1().size == 0) {
     wait(0.05);
   }
   doa_utility::debugmsg("Hail to the King baby!");
@@ -81,7 +81,7 @@ function setupdevgui() {
   var_9ba2319f = index;
   var_9c0bafd1 = level.doa.rules.var_88c0b67b;
   foreach(arena in level.doa.arenas) {
-    if(isdefined(arena.var_63b4dab3) && arena.var_63b4dab3) {
+    if(isDefined(arena.var_63b4dab3) && arena.var_63b4dab3) {
       continue;
     }
     name = (((((arena.name + "") + var_9ba2319f) + "") + var_9c0bafd1) + "") + index;
@@ -91,7 +91,7 @@ function setupdevgui() {
     var_9ba2319f = var_9ba2319f + level.doa.rules.var_88c0b67b;
     var_9c0bafd1 = var_9c0bafd1 + level.doa.rules.var_88c0b67b;
   }
-  if(isdefined(world.var_e5cf1b41)) {
+  if(isDefined(world.var_e5cf1b41)) {
     level.doa.dev_level_skipped = world.var_e5cf1b41 * 4;
     doa_utility::debugmsg((("" + world.var_e5cf1b41) + "") + level.doa.dev_level_skipped);
     flag::clear("");
@@ -111,7 +111,7 @@ function setupdevgui() {
     setdvar("scr_doa_soak_think", 1);
     level thread function_35d58a26();
   }
-  if(getdvarint("scr_doa_soak_think", 0) && (!(isdefined(level.var_1575b6db) && level.var_1575b6db))) {
+  if(getdvarint("scr_doa_soak_think", 0) && (!(isDefined(level.var_1575b6db) && level.var_1575b6db))) {
     level thread function_a3bba13d();
   }
 }
@@ -122,7 +122,7 @@ function function_92c840a6(delay = 0.1) {
   level endon("hash_a291d1ee");
   self endon("disconnect");
   wait(delay);
-  while (true) {
+  while(true) {
     if(self.doa.lives <= 3) {
       self.doa.lives = 9;
     }
@@ -146,14 +146,14 @@ function function_a4d5519a(pickup) {
   level thread doa_utility::debug_circle(pickup.origin + vectorscale((0, 0, 1), 20), 30, 3, namespace_831a4a7c::function_fea7ed75(self.entnum));
   level thread doa_utility::debug_line(self.origin + vectorscale((0, 0, 1), 20), pickup.origin + vectorscale((0, 0, 1), 20), 3, namespace_831a4a7c::function_fea7ed75(self.entnum));
   yaw = doa_utility::function_fa8a86e8(self, pickup);
-  if(!isdefined(yaw)) {
+  if(!isDefined(yaw)) {
     return;
   }
   angles = (0, yaw, 0);
   self setplayerangles(angles);
   wait(2);
   yaw = doa_utility::function_fa8a86e8(self, pickup);
-  if(!isdefined(yaw)) {
+  if(!isDefined(yaw)) {
     return;
   }
   angles = (0, yaw, 0);
@@ -167,13 +167,13 @@ function function_733651c() {
   self notify("hash_733651c");
   self endon("hash_733651c");
   level endon("hash_e20ba07c");
-  while (isdefined(self)) {
-    if(isdefined(self.doa.boosters) && self.doa.boosters) {
-      pickupsitems = getentarray("a_pickup_item", "script_noteworthy");
+  while(isDefined(self)) {
+    if(isDefined(self.doa.boosters) && self.doa.boosters) {
+      pickupsitems = getEntArray("a_pickup_item", "script_noteworthy");
       if(pickupsitems.size > 0) {
         var_a49668c4 = pickupsitems[randomint(pickupsitems.size)];
       }
-      if(isdefined(var_a49668c4) && isdefined(var_a49668c4.trigger)) {
+      if(isDefined(var_a49668c4) && isDefined(var_a49668c4.trigger)) {
         self thread function_a4d5519a(var_a49668c4);
       }
     }
@@ -206,9 +206,9 @@ function function_a3bba13d() {
   level thread function_f71d59c();
   doa_utility::debugmsg("DOA Soak Test [ON]");
   adddebugcommand("set bot_AllowMovement 0; set bot_PressAttackBtn 1; set bot_PressMeleeBtn 0; set scr_botsAllowKillstreaks 0; set bot_AllowGrenades 1");
-  while (level.var_1575b6db) {
+  while(level.var_1575b6db) {
     foreach(guy in namespace_831a4a7c::function_5eb6e4d1()) {
-      if(!isdefined(guy)) {
+      if(!isDefined(guy)) {
         continue;
       }
       guy thread function_733651c();
@@ -260,7 +260,7 @@ function function_a3bba13d() {
       }
       wait(30);
     }
-    if(isdefined(level.doa.boss) && (isdefined(level.doa.boss.takedamage) && level.doa.boss.takedamage)) {
+    if(isDefined(level.doa.boss) && (isDefined(level.doa.boss.takedamage) && level.doa.boss.takedamage)) {
       level.doa.boss dodamage(30000, level.doa.boss.origin);
     }
     if(level flag::get("doa_round_active") && getdvarint("scr_doa_soak_think", 0) > 1) {
@@ -278,14 +278,14 @@ function function_a3bba13d() {
         foreach(exit in level.doa.exits_open) {
           exit thread doa_utility::function_a4d1f25e("trigger", randomfloatrange(0.5, 1));
         }
-      } else if(isdefined(level.doa.teleporter) && isdefined(level.doa.teleporter.trigger)) {
+      } else if(isDefined(level.doa.teleporter) && isDefined(level.doa.teleporter.trigger)) {
         if(getdvarint("scr_doa_soak_think", 0) > 1) {
           wait(0.2);
           doa_utility::killallenemy();
         } else {
           wait(5);
         }
-        if(isdefined(level.doa.teleporter) && isdefined(level.doa.teleporter.trigger)) {
+        if(isDefined(level.doa.teleporter) && isDefined(level.doa.teleporter.trigger)) {
           level.doa.teleporter.trigger notify("trigger");
         }
       }
@@ -296,7 +296,7 @@ function function_a3bba13d() {
 function function_f24eee41() {
   level endon("hash_da8786df");
   lockspot = self.origin;
-  while (true) {
+  while(true) {
     self setorigin(lockspot);
     wait(0.05);
   }
@@ -307,7 +307,7 @@ function devguithink() {
   setdvar("scr_spawn_pickup", "");
   setdvar("scr_spawn_room_name", "");
   setdvar("scr_spawn_room", "");
-  while (true) {
+  while(true) {
     if(getdvarint("scr_doa_kingme_soak_think", 0)) {
       setdvar("scr_doa_kingme_soak_think", 0);
       setdvar("scr_doa_soak_think", 1);
@@ -317,10 +317,10 @@ function devguithink() {
       }
     }
     if(getdvarint("scr_doa_soak_think", 0)) {
-      if(!(isdefined(level.var_1575b6db) && level.var_1575b6db)) {
+      if(!(isDefined(level.var_1575b6db) && level.var_1575b6db)) {
         level thread function_a3bba13d();
       }
-    } else if(isdefined(level.var_1575b6db) && level.var_1575b6db) {
+    } else if(isDefined(level.var_1575b6db) && level.var_1575b6db) {
       level notify("hash_e20ba07c");
     }
     cmd = getdvarstring("zombie_devgui");
@@ -332,7 +332,7 @@ function devguithink() {
     switch (cmd) {
       case "outro": {
         players = namespace_831a4a7c::function_5eb6e4d1();
-        for (i = 0; i < players.size; i++) {
+        for(i = 0; i < players.size; i++) {
           players[i].doa.lives = 0;
           players[i] dodamage(players[i].health + 100, players[i].origin);
         }
@@ -410,7 +410,7 @@ function devguithink() {
       case "gem": {
         doa_utility::debugmsg("Gem Launching!");
         players = namespace_831a4a7c::function_5eb6e4d1();
-        for (i = 0; i < players.size; i++) {
+        for(i = 0; i < players.size; i++) {
           level thread doa_pickups::spawnubertreasure(players[i].origin, 4, 10, 1, 1);
         }
         break;
@@ -419,7 +419,7 @@ function devguithink() {
         doa_utility::debugmsg("Gem Launching!");
         players = namespace_831a4a7c::function_5eb6e4d1();
         scale = int(getdvarstring("scr_spawn_pickup"));
-        for (i = 0; i < players.size; i++) {
+        for(i = 0; i < players.size; i++) {
           level thread doa_pickups::spawnubertreasure(players[i].origin, 1, 10, 1, 1, scale);
         }
         break;
@@ -447,7 +447,7 @@ function devguithink() {
         }
         if(level.doa.forced_magical_room == 10) {
           players = namespace_831a4a7c::function_5eb6e4d1();
-          for (i = 1; i < players.size; i++) {
+          for(i = 1; i < players.size; i++) {
             if(players[i].doa.fate == 0) {
               players[i] doa_fate::awardfate(randomintrange(1, 5));
             }
@@ -476,7 +476,7 @@ function devguithink() {
         doa_utility::debugmsg(("Fating you ->") + type);
         level.doa.fates_have_been_chosen = 1;
         players = namespace_831a4a7c::function_5eb6e4d1();
-        for (i = 0; i < players.size; i++) {
+        for(i = 0; i < players.size; i++) {
           if(type < 10) {
             players[i] doa_fate::awardfate(type);
             continue;
@@ -490,7 +490,7 @@ function devguithink() {
       }
       case "all_pickups": {
         doa_utility::debugmsg("Spawning All Pickups");
-        for (i = 0; i < level.doa.pickups.items.size; i++) {
+        for(i = 0; i < level.doa.pickups.items.size; i++) {
           level doa_pickups::function_3238133b(level.doa.pickups.items[i].gdtname);
         }
         break;
@@ -518,10 +518,10 @@ function devguithink() {
           }
         }
         var_7dce6dce = 1;
-        while (var_7dce6dce) {
+        while(var_7dce6dce) {
           var_7dce6dce = 0;
           foreach(room in level.doa.var_ec2bff7b) {
-            if(isdefined(room.var_6f369ab4) && room.var_57ce7582.size >= room.var_6f369ab4) {
+            if(isDefined(room.var_6f369ab4) && room.var_57ce7582.size >= room.var_6f369ab4) {
               arrayremovevalue(level.doa.var_ec2bff7b, room, 0);
               var_7dce6dce = 1;
               break;
@@ -536,7 +536,7 @@ function devguithink() {
         break;
       }
       case "aispawn": {
-        if(isdefined(level.doa.var_e6fd0e17)) {
+        if(isDefined(level.doa.var_e6fd0e17)) {
           [
             [level.doa.var_e6fd0e17]
           ](getdvarstring("scr_spawn_name"));
@@ -590,7 +590,7 @@ function devguithink() {
       case "kill_all": {
         doa_utility::debugmsg("death to all...");
         players = namespace_831a4a7c::function_5eb6e4d1();
-        for (i = 0; i < players.size; i++) {
+        for(i = 0; i < players.size; i++) {
           players[i] dodamage(players[i].health + 100, players[i].origin);
         }
         break;
@@ -613,14 +613,14 @@ function function_5e6b8376(origin, radius, time, color = (0, 1, 0)) {
   circleinc = 360 / circleres;
   circleres++;
   timer = gettime() + (time * 1000);
-  while (gettime() < timer) {
+  while(gettime() < timer) {
     plotpoints = [];
     rad = 0;
     wait(hangtime);
     players = getplayers();
     angletoplayer = vectortoangles(origin - players[0].origin);
-    for (i = 0; i < circleres; i++) {
-      plotpoints[plotpoints.size] = (origin + (vectorscale(anglestoforward(angletoplayer + (rad, 90, 0)), radius))) + vectorscale((0, 0, 1), 12);
+    for(i = 0; i < circleres; i++) {
+      plotpoints[plotpoints.size] = (origin + (vectorscale(anglesToForward(angletoplayer + (rad, 90, 0)), radius))) + vectorscale((0, 0, 1), 12);
       rad = rad + circleinc;
     }
     plotpoints(plotpoints, color, hangtime);
@@ -632,8 +632,8 @@ function plotpoints(plotpoints, var_c75b4e78, server_frames = 1) {
     return;
   }
   lastpoint = plotpoints[0];
-  for (server_frames = int(server_frames); server_frames; server_frames--) {
-    for (i = 1; i < plotpoints.size; i++) {
+  for(server_frames = int(server_frames); server_frames; server_frames--) {
+    for(i = 1; i < plotpoints.size; i++) {
       line(lastpoint, plotpoints[i], var_c75b4e78, 1, server_frames);
       lastpoint = plotpoints[i];
     }
@@ -646,8 +646,8 @@ function drawcylinder(pos, rad, height, server_frames = 1, color = (0, 0, 0)) {
   self endon("death");
   currad = rad;
   curheight = height;
-  for (server_frames = int(server_frames); server_frames; server_frames--) {
-    for (r = 0; r < 20; r++) {
+  for(server_frames = int(server_frames); server_frames; server_frames--) {
+    for(r = 0; r < 20; r++) {
       theta = (r / 20) * 360;
       theta2 = ((r + 1) / 20) * 360;
       line(pos + (cos(theta) * currad, sin(theta) * currad, 0), pos + (cos(theta2) * currad, sin(theta2) * currad, 0), color);
@@ -662,8 +662,8 @@ function debugorigin() {
   self notify("hash_707e044");
   self endon("hash_707e044");
   self endon("death");
-  for (;;) {
-    forward = anglestoforward(self.angles);
+  for(;;) {
+    forward = anglesToForward(self.angles);
     forwardfar = vectorscale(forward, 30);
     forwardclose = vectorscale(forward, 20);
     right = anglestoright(self.angles);
@@ -685,7 +685,7 @@ function function_a0e51d80(point, timesec, size, color) {
   var_842de44a = point + (0, halfwidth, 0);
   h1 = point + (0, 0, halfwidth * -1);
   h2 = point + (0, 0, halfwidth);
-  while (end > gettime()) {
+  while(end > gettime()) {
     line(l1, l2, color, 1, 0, 1);
     line(var_5e2b69e1, var_842de44a, color, 1, 0, 1);
     line(h1, h2, color, 1, 0, 1);
@@ -695,7 +695,7 @@ function function_a0e51d80(point, timesec, size, color) {
 
 function debugline(p1, p2, timesec, color) {
   end = gettime() + (timesec * 1000);
-  while (end > gettime()) {
+  while(end > gettime()) {
     line(p1, p2, color, 1, 0, 1);
     wait(0.05);
   }

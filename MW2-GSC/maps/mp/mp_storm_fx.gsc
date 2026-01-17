@@ -4,7 +4,6 @@
 ********************************************************/
 
 main() {
-
   //ambient fx
   level._effect["rain_mp_storm"] = loadfx("weather/rain_mp_storm");
   level._effect["rain_noise_splashes"] = loadfx("weather/rain_noise_splashes");
@@ -19,9 +18,7 @@ main() {
   level._effect["waterfall_drainage_mp_small"] = loadfx("water/waterfall_drainage_mp_small");
   level._effect["waterfall_drainage_splash_mp"] = loadfx("water/waterfall_drainage_splash_mp");
 
-  /#
   if(getdvar("clientSideEffects") != "1")
     maps\createfx\mp_storm_fx::main();
-  # /
 
 }

@@ -125,7 +125,7 @@ minus_to_player_score(cost) {
 
 player_died_penalty() {
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(players[i] != self && !players[i].is_zombie) {
       players[i] player_reduce_points("no_revive_penalty");
     }
@@ -167,7 +167,7 @@ create_highlight_hud(x, y, value) {
     hud.color = (0.423, 0.004, 0);
   } else {
     hud.color = (0.9, 0.9, 0.0);
-    hud.label = & "SCRIPT_PLUS";
+    hud.label = &"SCRIPT_PLUS";
   }
   hud.hidewheninmenu = false;
   hud SetValue(value);

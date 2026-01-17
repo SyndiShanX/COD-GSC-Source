@@ -1024,7 +1024,7 @@ CustomCrateFunc() {
   if(!level.allow_level_killstreak) {
     return;
   }
-  maps\mp\killstreaks\_airdrop::addCrateType("airdrop_assault", "slot_machine", KILLSTREAK_WEIGHT, maps\mp\killstreaks\_airdrop::killstreakCrateThink, maps\mp\killstreaks\_airdrop::get_friendly_crate_model(), maps\mp\killstreaks\_airdrop::get_enemy_crate_model(), & "MP_DLC_13_KILLSTREAK_PICKUP");
+  maps\mp\killstreaks\_airdrop::addCrateType("airdrop_assault", "slot_machine", KILLSTREAK_WEIGHT, maps\mp\killstreaks\_airdrop::killstreakCrateThink, maps\mp\killstreaks\_airdrop::get_friendly_crate_model(), maps\mp\killstreaks\_airdrop::get_enemy_crate_model(), &"MP_DLC_13_KILLSTREAK_PICKUP");
 
   level thread killstreak_watch_for_crate();
 }
@@ -1458,7 +1458,7 @@ set_up_multi_turret() {
   level.sentrySettings["multiturret"].modelPlacementFailed = "weapon_sentry_chaingun_obj_red";
   level.sentrySettings["multiturret"].modelBombSquad = "weapon_sentry_chaingun_bombsquad";
   level.sentrySettings["multiturret"].modelDestroyed = "weapon_sentry_chaingun_destroyed";
-  level.sentrySettings["multiturret"].hintString = & "";
+  level.sentrySettings["multiturret"].hintString = &"";
   level.sentrySettings["multiturret"].headIcon = true;
   level.sentrySettings["multiturret"].teamSplash = "used_sentry";
   level.sentrySettings["multiturret"].shouldSplash = false;

@@ -5,7 +5,7 @@
 ******************************************/
 
 whiz_init() {
-  level._audio.whiz = spawnstruct();
+  level._audio.whiz = spawnStruct();
   level._audio.whiz.use_string_table_presets = 0;
 }
 
@@ -62,12 +62,12 @@ whizx_get_mix_preset_from_stringtable_internal(var_0, var_1) {
   var_10 = 0;
   var_11 = packedtablesectionlookup(var_0, "whizby_preset_names", "zone_names;reverb_names;filter_names;occlusion_names;timescale_names;dynamic_ambience_names;components;loop_defs;whizby_preset_names;mix_names;healthfx_params");
 
-  if(isdefined(var_11)) {
-    for (var_12 = 1; var_12 < var_5; var_12++) {
+  if(isDefined(var_11)) {
+    for(var_12 = 1; var_12 < var_5; var_12++) {
       var_3 = packedtablelookupwithrange(var_0, 0, "whizby_preset_names", var_12, var_11[0], var_11[1]);
       var_4 = packedtablelookupwithrange(var_0, 0, var_1, var_12, var_11[0], var_11[1]);
 
-      if(!isdefined(var_4)) {
+      if(!isDefined(var_4)) {
         break;
       }
 
@@ -114,7 +114,7 @@ whizx_get_mix_preset_from_stringtable_internal(var_0, var_1) {
       var_2["spread"] = var_7;
       var_2["probability"] = var_8;
 
-      if(isdefined(var_9))
+      if(isDefined(var_9))
         var_2["offset"] = var_9;
     }
 

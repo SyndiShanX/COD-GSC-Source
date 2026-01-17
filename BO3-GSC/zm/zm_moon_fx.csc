@@ -15,7 +15,7 @@ function main() {
   precache_createfx_fx();
   precache_scripted_fx();
   disablefx = getdvarint("disable_fx");
-  if(!isdefined(disablefx) || disablefx <= 0) {
+  if(!isDefined(disablefx) || disablefx <= 0) {
     precache_scripted_fx();
   }
   level thread fog_triggers_setup();
@@ -27,7 +27,7 @@ function fog_triggers_setup() {
   util::waitforclient(0);
   wait(3);
   players = getlocalplayers();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     level thread moon_fog_triggers_init(i);
   }
 }
@@ -35,7 +35,7 @@ function fog_triggers_setup() {
 function airlock_fx_init() {
   util::waitforallclients();
   players = getlocalplayers();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i] thread airlock_fx(i);
   }
 }
@@ -43,13 +43,13 @@ function airlock_fx_init() {
 function airlock_fx(localclientnum) {
   level waittill("power_on");
   var_2043fd45 = struct::get_array("s_airlock_jambs_fx", "targetname");
-  for (i = 0; i < var_2043fd45.size; i++) {
-    if(isdefined(var_2043fd45[i].script_vector)) {
-      forwardvec = vectornormalize(anglestoforward(var_2043fd45[i].script_vector));
+  for(i = 0; i < var_2043fd45.size; i++) {
+    if(isDefined(var_2043fd45[i].script_vector)) {
+      forwardvec = vectornormalize(anglesToForward(var_2043fd45[i].script_vector));
     } else {
-      forwardvec = vectornormalize(anglestoforward(var_2043fd45[i].angles));
+      forwardvec = vectornormalize(anglesToForward(var_2043fd45[i].angles));
     }
-    playfx(localclientnum, level._effect["airlock_fx"], var_2043fd45[i].origin, forwardvec);
+    playFX(localclientnum, level._effect["airlock_fx"], var_2043fd45[i].origin, forwardvec);
   }
 }
 
@@ -130,10 +130,10 @@ function power_on_spinning_lights() {
 }
 
 function trap_fx_monitor(name, side, trap_type) {
-  while (true) {
+  while(true) {
     level waittill(name);
     points = struct::get_array(name, "targetname");
-    for (i = 0; i < points.size; i++) {
+    for(i = 0; i < points.size; i++) {
       points[i] thread electric_trap_fx(name, side, trap_type);
     }
   }
@@ -166,19 +166,19 @@ function breach_labs_upper_fx() {
 
 function electric_trap_fx(name, side, trap_type) {
   ang = self.angles;
-  forward = anglestoforward(ang);
+  forward = anglesToForward(ang);
   up = anglestoup(ang);
-  if(isdefined(self.loopfx)) {
-    for (i = 0; i < self.loopfx.size; i++) {
+  if(isDefined(self.loopfx)) {
+    for(i = 0; i < self.loopfx.size; i++) {
       self.loopfx[i] delete();
     }
     self.loopfx = [];
   }
-  if(!isdefined(self.loopfx)) {
+  if(!isDefined(self.loopfx)) {
     self.loopfx = [];
   }
   players = getlocalplayers();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     switch (trap_type) {
       case "electric": {
         self.loopfx[i] = spawnfx(i, level._effect["zapper"], self.origin, 0, forward, up);
@@ -193,29 +193,29 @@ function electric_trap_fx(name, side, trap_type) {
     triggerfx(self.loopfx[i]);
   }
   level waittill(side + "off");
-  for (i = 0; i < self.loopfx.size; i++) {
+  for(i = 0; i < self.loopfx.size; i++) {
     self.loopfx[i] delete();
   }
   self.loopfx = [];
 }
 
 function moon_fog_triggers_init(localclientnum) {
-  exterior_array = getentarray(localclientnum, "zombie_moonExterior", "targetname");
-  array::thread_all(exterior_array, & fog_trigger, & moon_exterior_fog_change);
-  moon_interior_array = getentarray(localclientnum, "zombie_moonInterior", "targetname");
-  array::thread_all(moon_interior_array, & fog_trigger, & moon_interior_fog_change);
-  moon_biodome_array = getentarray(localclientnum, "zombie_moonBiodome", "targetname");
-  array::thread_all(moon_biodome_array, & fog_trigger, & moon_biodome_fog_change);
-  moon_biodome_array = getentarray(localclientnum, "zombie_moonTunnels", "targetname");
-  array::thread_all(moon_biodome_array, & fog_trigger, & moon_tunnels_fog_change);
-  nml_array = getentarray(localclientnum, "zombie_nmlVision", "targetname");
-  if(isdefined(nml_array) && nml_array.size > 0) {
-    array::thread_all(nml_array, & fog_trigger, & moon_nml_fog_change);
+  exterior_array = getEntArray(localclientnum, "zombie_moonExterior", "targetname");
+  array::thread_all(exterior_array, &fog_trigger, &moon_exterior_fog_change);
+  moon_interior_array = getEntArray(localclientnum, "zombie_moonInterior", "targetname");
+  array::thread_all(moon_interior_array, &fog_trigger, &moon_interior_fog_change);
+  moon_biodome_array = getEntArray(localclientnum, "zombie_moonBiodome", "targetname");
+  array::thread_all(moon_biodome_array, &fog_trigger, &moon_biodome_fog_change);
+  moon_biodome_array = getEntArray(localclientnum, "zombie_moonTunnels", "targetname");
+  array::thread_all(moon_biodome_array, &fog_trigger, &moon_tunnels_fog_change);
+  nml_array = getEntArray(localclientnum, "zombie_nmlVision", "targetname");
+  if(isDefined(nml_array) && nml_array.size > 0) {
+    array::thread_all(nml_array, &fog_trigger, &moon_nml_fog_change);
   }
 }
 
 function fog_trigger(change_func) {
-  while (true) {
+  while(true) {
     self waittill("trigger", who);
     if(who islocalplayer()) {
       self thread util::trigger_thread(who, change_func);
@@ -224,7 +224,7 @@ function fog_trigger(change_func) {
 }
 
 function moon_exterior_fog_change(ent_player) {
-  if(!isdefined(ent_player)) {
+  if(!isDefined(ent_player)) {
     return;
   }
   ent_player endon("entityshutdown");
@@ -250,7 +250,7 @@ function moon_exterior_fog_change(ent_player) {
 }
 
 function moon_interior_fog_change(ent_player) {
-  if(!isdefined(ent_player)) {
+  if(!isDefined(ent_player)) {
     return;
   }
   ent_player endon("entityshutdown");
@@ -276,7 +276,7 @@ function moon_interior_fog_change(ent_player) {
 }
 
 function moon_biodome_fog_change(ent_player) {
-  if(!isdefined(ent_player)) {
+  if(!isDefined(ent_player)) {
     return;
   }
   ent_player endon("entityshutdown");
@@ -302,7 +302,7 @@ function moon_biodome_fog_change(ent_player) {
 }
 
 function moon_tunnels_fog_change(ent_player) {
-  if(!isdefined(ent_player)) {
+  if(!isDefined(ent_player)) {
     return;
   }
   ent_player endon("entityshutdown");
@@ -328,7 +328,7 @@ function moon_tunnels_fog_change(ent_player) {
 }
 
 function moon_nml_fog_change(ent_player) {
-  if(!isdefined(ent_player) || (isdefined(level._dte_done) && level._dte_done)) {
+  if(!isDefined(ent_player) || (isDefined(level._dte_done) && level._dte_done)) {
     return;
   }
   ent_player endon("entityshutdown");

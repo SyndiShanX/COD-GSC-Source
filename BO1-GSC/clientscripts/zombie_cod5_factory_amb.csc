@@ -66,7 +66,7 @@ start_lights() {
 
 light_sound() {
   if(isDefined(self)) {
-    playsound(0, "light_start", self.origin);
+    playSound(0, "light_start", self.origin);
     e1 = clientscripts\_audio::playloopat(0, "light", self.origin);
   }
 }
@@ -74,15 +74,15 @@ light_sound() {
 generator_sound() {
   if(isDefined(self)) {
     wait(3);
-    playsound(0, "switch_progress", self.origin);
-    playsound(0, "gen_start", self.origin);
+    playSound(0, "switch_progress", self.origin);
+    playSound(0, "gen_start", self.origin);
     g1 = clientscripts\_audio::playloopat(0, "gen_loop", self.origin, 1);
   }
 }
 
 breakers_sound() {
   if(isDefined(self)) {
-    playsound(0, "break_start", self.origin);
+    playSound(0, "break_start", self.origin);
     b1 = clientscripts\_audio::playloopat(0, "break_loop", self.origin, 2);
   }
 }
@@ -102,7 +102,7 @@ switch_progress_sound() {
     else
       time = 0;
     wait(time);
-    playsound(0, "switch_progress", self.origin);
+    playSound(0, "switch_progress", self.origin);
   }
 }
 
@@ -138,14 +138,14 @@ teleportation_audio(pad) {
     level waittill("tpw" + pad);
     if(isDefined(self.script_sound)) {
       if(self.targetname == "telepad_" + pad) {
-        playsound(0, self.script_sound + "_warmup", self.origin);
+        playSound(0, self.script_sound + "_warmup", self.origin);
         realwait(teleport_delay);
-        playsound(0, self.script_sound + "_cooldown", self.origin);
+        playSound(0, self.script_sound + "_cooldown", self.origin);
       }
       if(self.targetname == "homepad") {
         realwait(teleport_delay);
-        playsound(0, self.script_sound + "_warmup", self.origin);
-        playsound(0, self.script_sound + "_cooldown", self.origin);
+        playSound(0, self.script_sound + "_warmup", self.origin);
+        playSound(0, self.script_sound + "_cooldown", self.origin);
       }
     }
   }
@@ -171,19 +171,19 @@ pa_countdown(pad) {
   level endon("scd" + pad);
   while(1) {
     level waittill("pac" + pad);
-    playsound(0, "pa_buzz", self.origin);
+    playSound(0, "pa_buzz", self.origin);
     self thread pa_play_dialog("pa_audio_link_start");
     count = 30;
     while(count > 0) {
       play = count == 20 || count == 15 || count <= 10;
       if(play) {
-        playsound(0, "pa_audio_link_" + count, self.origin);
+        playSound(0, "pa_audio_link_" + count, self.origin);
       }
-      playsound(0, "clock_tick_1sec", (0, 0, 0));
+      playSound(0, "clock_tick_1sec", (0, 0, 0));
       realwait(1);
       count--;
     }
-    playsound(0, "pa_buzz", self.origin);
+    playSound(0, "pa_buzz", self.origin);
     wait(1.2);
     self thread pa_play_dialog("pa_audio_link_fail");
   }
@@ -192,7 +192,7 @@ pa_countdown(pad) {
 
 pa_countdown_success(pad) {
   level waittill("scd" + pad);
-  playsound(0, "pa_buzz", self.origin);
+  playSound(0, "pa_buzz", self.origin);
   wait(1.2);
   self pa_play_dialog("pa_audio_act_pad_" + pad);
 }
@@ -201,7 +201,7 @@ pa_teleport(pad) {
   while(1) {
     level waittill("tpc" + pad);
     wait(1);
-    playsound(0, "pa_buzz", self.origin);
+    playSound(0, "pa_buzz", self.origin);
     wait(1.2);
     self pa_play_dialog("pa_teleport_finish");
   }
@@ -210,11 +210,11 @@ pa_teleport(pad) {
 pa_electric_trap(location) {
   while(1) {
     level waittill(location);
-    playsound(0, "pa_buzz", self.origin);
+    playSound(0, "pa_buzz", self.origin);
     wait(1.2);
     self thread pa_play_dialog("pa_trap_inuse_" + location);
     realwait(48.5);
-    playsound(0, "pa_buzz", self.origin);
+    playSound(0, "pa_buzz", self.origin);
     wait(1.2);
     self thread pa_play_dialog("pa_trap_active_" + location);
   }
@@ -226,7 +226,7 @@ pa_play_dialog(alias) {
   }
   if(self.pa_is_speaking != 1) {
     self.pa_is_speaking = 1;
-    self.pa_id = playsound(0, alias, self.origin);
+    self.pa_id = playSound(0, alias, self.origin);
     while(SoundPlaying(self.pa_id)) {
       wait(0.01);
     }
@@ -237,21 +237,21 @@ pa_play_dialog(alias) {
 teleport_2d() {
   while(1) {
     level waittill("t2d");
-    playsound(0, "teleport_2d_fnt", (0, 0, 0));
-    playsound(0, "teleport_2d_rear", (0, 0, 0));
+    playSound(0, "teleport_2d_fnt", (0, 0, 0));
+    playSound(0, "teleport_2d_rear", (0, 0, 0));
   }
 }
 
 power_audio_2d() {
   wait(2);
-  playsound(0, "power_down_2d", (0, 0, 0));
+  playSound(0, "power_down_2d", (0, 0, 0));
   level waittill("pl1");
-  playsound(0, "power_up_2d", (0, 0, 0));
+  playSound(0, "power_up_2d", (0, 0, 0));
 }
 
 linkall_2d() {
   level waittill("pap1");
-  playsound(0, "linkall_2d", (0, 0, 0));
+  playSound(0, "linkall_2d", (0, 0, 0));
 }
 
 pole_fx_audio_init(pad) {
@@ -262,22 +262,22 @@ pole_fx_audio_init(pad) {
 pole_fx_audio(pad) {
   level waittill("scd" + pad);
   while(1) {
-    playfx(0, level._effect["zombie_elec_pole_terminal"], self.origin, anglestoforward(self.angles));
-    playsound(0, "pole_spark", self.origin);
+    playFX(0, level._effect["zombie_elec_pole_terminal"], self.origin, anglesToForward(self.angles));
+    playSound(0, "pole_spark", self.origin);
     realwait(randomintrange(2, 7));
   }
 }
 
 pa_level_start() {
   wait(2);
-  playsound(0, "pa_buzz", self.origin);
+  playSound(0, "pa_buzz", self.origin);
   wait(1.2);
   self pa_play_dialog("pa_level_start");
 }
 
 pa_power_on() {
   level waittill("pl1");
-  playsound(0, "pa_buzz", self.origin);
+  playSound(0, "pa_buzz", self.origin);
   wait(1.2);
   self pa_play_dialog("pa_power_on");
 }

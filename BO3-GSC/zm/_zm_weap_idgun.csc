@@ -15,7 +15,7 @@
 #namespace idgun;
 
 function autoexec __init__sytem__() {
-  system::register("idgun", & init, undefined, undefined);
+  system::register("idgun", &init, undefined, undefined);
 }
 
 function init() {
@@ -23,14 +23,14 @@ function init() {
   level.var_29323b70 = getweapon("robotech_launcher");
   level.var_672ab258 = getweapon("robotech_launcher_upgraded");
   construct_idgun_weapon_array();
-  callback::on_spawned( & function_50ee0a95);
+  callback::on_spawned(&function_50ee0a95);
 }
 
 function function_50ee0a95(localclientnum) {}
 
 function function_e1efbc50(var_9727e47e) {
   if(var_9727e47e != level.weaponnone) {
-    if(!isdefined(level.idgun_weapons)) {
+    if(!isDefined(level.idgun_weapons)) {
       level.idgun_weapons = [];
     } else if(!isarray(level.idgun_weapons)) {
       level.idgun_weapons = array(level.idgun_weapons);
@@ -59,7 +59,7 @@ function function_9b7ac6a9(weapon) {
 }
 
 function is_idgun_damage(weapon) {
-  if(isdefined(level.idgun_weapons)) {
+  if(isDefined(level.idgun_weapons)) {
     if(isinarray(level.idgun_weapons, weapon)) {
       return true;
     }

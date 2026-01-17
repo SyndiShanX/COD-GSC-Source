@@ -151,7 +151,7 @@ player_isaac_container() {
   run_scene_first_frame("player_isaac_container");
   flag_wait("player_at_isaac");
   e_container_keypad = getent("container_keypad", "targetname");
-  e_container_keypad setmodel("p6_monsoon_crate_access_unlocked");
+  e_container_keypad setModel("p6_monsoon_crate_access_unlocked");
   clearallcorpses();
   exploder(3233);
   run_scene("player_isaac_container");
@@ -295,9 +295,9 @@ harper_defend_scene() {
 
 harper_shield_fx(guy) {
   e_shield = get_model_or_models_from_scene("harper_shield_plant", "harper_shield");
-  playfxontag(getfx("shield_deploy_dust"), e_shield, "tag_origin");
+  playFXOnTag(getfx("shield_deploy_dust"), e_shield, "tag_origin");
   wait 0.8;
-  playfxontag(getfx("shield_lights"), e_shield, "tag_fx");
+  playFXOnTag(getfx("shield_lights"), e_shield, "tag_fx");
 }
 
 shield_vo() {
@@ -359,7 +359,7 @@ lab_defend_event_timer() {
   level notify("fxanim_defend_room_monitors_01_start");
   exploder(1998);
   earthquake(0.2, 0.5, level.player.origin, 256);
-  level.player playsound("exp_carrier_impact1");
+  level.player playSound("exp_carrier_impact1");
   level.player playrumbleonentity("damage_heavy");
   level.player setlowready(0);
   level thread maps\_audio::switch_music_wait("MONSOON_DEFEND_EVENT", 1);
@@ -368,7 +368,7 @@ lab_defend_event_timer() {
   level notify("fxanim_defend_room_monitors_02_start");
   exploder(1999);
   earthquake(0.4, 1.0, level.player.origin, 256);
-  level.player playsound("exp_carrier_impact2");
+  level.player playSound("exp_carrier_impact2");
   level.player playrumbleonentity("damage_heavy");
   wait 2;
   clientnotify("defend_room_destroy");
@@ -414,7 +414,7 @@ lab_defend_event_timer() {
   spawn_manager_kill("trig_sm_area_defend_area_2");
   simple_spawn("last_stand_enemies");
   wait 1;
-  a_lab_defend_spawners = getentarray("lab_defend_spawners", "script_noteworthy");
+  a_lab_defend_spawners = getEntArray("lab_defend_spawners", "script_noteworthy");
 
   foreach(spawner in a_lab_defend_spawners) {
     if(isDefined(spawner))
@@ -423,7 +423,7 @@ lab_defend_event_timer() {
     wait 0.05;
   }
 
-  a_last_stand_enemies = getentarray("last_stand_enemies", "script_noteworthy");
+  a_last_stand_enemies = getEntArray("last_stand_enemies", "script_noteworthy");
 
   foreach(spawner in a_last_stand_enemies) {
     if(isDefined(spawner))
@@ -454,7 +454,7 @@ lab_defend_event_timer() {
   wait 0.05;
   a_ai_axis = getaiarray("axis");
   array_wait(a_ai_axis, "death");
-  a_defend_asds = getentarray("defend_asds", "script_noteworthy");
+  a_defend_asds = getEntArray("defend_asds", "script_noteworthy");
 
   foreach(asd in a_defend_asds) {
     if(issentient(asd))
@@ -471,7 +471,7 @@ lab_defend_event_timer() {
 
 asd_wall_crash() {
   flag_wait("start_asd_wall_crash");
-  defend_crash_hide = getentarray("defend_crash_hide", "targetname");
+  defend_crash_hide = getEntArray("defend_crash_hide", "targetname");
 
   foreach(piece in defend_crash_hide)
   piece hide();
@@ -584,13 +584,13 @@ asd_intro_destruction() {
   trigger_wait("trig_damage_pillar");
   earthquake(0.65, 0.75, level.player.origin, 512);
   level.player playrumbleonentity("damage_heavy");
-  defend_pillar_hide = getentarray("defend_pillar_hide", "targetname");
+  defend_pillar_hide = getEntArray("defend_pillar_hide", "targetname");
 
   foreach(piece in defend_pillar_hide)
   piece hide();
 
   level notify("fxanim_defend_room_02_start");
-  defend_pillar_show = getentarray("defend_pillar_show", "targetname");
+  defend_pillar_show = getEntArray("defend_pillar_show", "targetname");
 
   foreach(piece in defend_pillar_show)
   piece show();

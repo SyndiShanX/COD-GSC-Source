@@ -126,8 +126,8 @@ clinic_ceiling_collapse() {
   v_ceiling_position = getstruct("building_ceiling_collapse", "targetname").origin;
   earthquake(0.3, 0.5, v_ceiling_position, 1000);
   e_sound_pos = spawn("script_origin", v_ceiling_position);
-  level.player playsound("evt_hospital_shake_1");
-  e_sound_pos playsound("evt_hospital_collapse");
+  level.player playSound("evt_hospital_shake_1");
+  e_sound_pos playSound("evt_hospital_collapse");
   e_sound_pos delete();
   level.player playrumblelooponentity("damage_heavy");
   wait 0.5;
@@ -136,7 +136,7 @@ clinic_ceiling_collapse() {
 
 clinic_light_shake() {
   trigger_wait("clinic_light_shake");
-  level.player playsound("evt_hospital_shake_0");
+  level.player playSound("evt_hospital_shake_0");
   exploder(621);
   earthquake(0.5, 1.5, level.player.origin, 250);
   a_structs = getstructarray("clinic_move_light", "targetname");
@@ -149,7 +149,7 @@ start_crying_woman() {
   flag_wait("clinic_enter_hall_1");
   level thread run_scene("crying_woman_idle");
   nurse_model = get_model_or_models_from_scene("crying_woman_idle", "crying_woman");
-  nurse_model setmodel("c_mul_redcross_nurse_wnded_body");
+  nurse_model setModel("c_mul_redcross_nurse_wnded_body");
 }
 
 digbat_tackle() {
@@ -165,7 +165,7 @@ digbat_tackle() {
     ai delete();
   }
 
-  a_vehicles = getentarray("slums_vehicle", "script_noteworthy");
+  a_vehicles = getEntArray("slums_vehicle", "script_noteworthy");
 
   foreach(vehicle in a_vehicles) {
     vehicle.delete_on_death = 1;
@@ -225,7 +225,7 @@ player_tackle_player_control_logic() {
 digbat_tackle_wall(e_digbat) {
   level notify("fxanim_wall_tackle_start");
   exploder(640);
-  level.player playsound("evt_dingbat_wall_break");
+  level.player playSound("evt_dingbat_wall_break");
   wait 1;
   level.player playrumbleonentity("damage_heavy");
   overlay = newclienthudelem(level.player);
@@ -341,7 +341,7 @@ building_stairwell_flashlights() {
   a_flashlights = get_model_or_models_from_scene("hallway_flashlights_enter");
 
   foreach(m_flashlight in a_flashlights)
-  playfxontag(level._effect["flashlight"], m_flashlight, "tag_origin");
+  playFXOnTag(level._effect["flashlight"], m_flashlight, "tag_origin");
 
   scene_wait("hallway_flashlights_enter");
   array_delete(a_flashlights);
@@ -349,7 +349,7 @@ building_stairwell_flashlights() {
   a_flashlights = get_model_or_models_from_scene("hallway_flashlights_loop");
 
   foreach(m_flashlight in a_flashlights)
-  playfxontag(level._effect["flashlight"], m_flashlight, "origin_animate_jnt");
+  playFXOnTag(level._effect["flashlight"], m_flashlight, "origin_animate_jnt");
 
   flag_wait("clinic_stairwell_top");
   array_delete(a_flashlights);

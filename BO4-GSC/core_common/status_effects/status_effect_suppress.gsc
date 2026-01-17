@@ -7,7 +7,6 @@
 #include scripts\core_common\serverfield_shared;
 #include scripts\core_common\status_effects\status_effect_util;
 #include scripts\core_common\system_shared;
-
 #namespace status_effect_suppress;
 
 autoexec __init__system__() {
@@ -26,7 +25,7 @@ suppress_apply(var_756fda07, weapon, applicant) {}
 
 registersamanthas_bundle() {}
 
-private function_aa232314(oldval, newval) {
+function_aa232314(oldval, newval) {
   if(oldval != newval) {
     if(newval) {
       self.var_dc148218 = 1;
@@ -84,6 +83,6 @@ private function_aa232314(oldval, newval) {
   }
 }
 
-private onplayerspawned() {
+onplayerspawned() {
   self.var_dc148218 = 0;
 }

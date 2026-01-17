@@ -57,7 +57,7 @@ teleportThread(verticalOffset) {
   self endon("endTeleportThread");
   reps = 5;
   offset = (0, 0, verticalOffset / reps);
-  for (i = 0; i < reps; i++) {
+  for(i = 0; i < reps; i++) {
     self teleport(self.origin + offset);
     wait .05;
   }
@@ -77,7 +77,7 @@ teleportThreadEx(verticalOffset, delay, frames) {
   else if(amount < -10.0)
     amount = -10.0;
   offset = (0, 0, amount);
-  for (i = 0; i < frames; i++) {
+  for(i = 0; i < frames; i++) {
     self teleport(self.origin + offset);
     wait .05;
   }
@@ -171,7 +171,7 @@ handleTraverseAlignment() {
 
 handleTraverseDrop() {
   startpos = self.origin + (0, 0, 32);
-  trace = bullettrace(startpos, self.origin + (0, 0, -512), false, undefined);
+  trace = bulletTrace(startpos, self.origin + (0, 0, -512), false, undefined);
   endpos = trace["position"];
   dist = distance(startpos, endpos);
   realDropHeight = dist - 32 - 0.5;
@@ -190,7 +190,7 @@ handleTraverseDrop() {
 finishTraverseDrop(finalz) {
   self endon("killanimscript");
   finalz += 4.0;
-  while (1) {
+  while(1) {
     if(self.origin[2] < finalz) {
       self traverseMode("gravity");
       break;
@@ -239,7 +239,7 @@ TraverseRagdollDeathSimple() {
   deathAnim = animscripts\death::get_death_anim();
   self setFlaggedAnimKnobAllRestart("deathanim", deathAnim, % body, 1, .1);
   if(animHasNoteTrack(deathAnim, "death_neckgrab_spurt")) {
-    PlayFXOnTag(level._effects["death_neckgrab_spurt"], self, "j_neck");
+    playFXOnTag(level._effects["death_neckgrab_spurt"], self, "j_neck");
   }
   wait 0.5;
   return true;
@@ -248,7 +248,7 @@ TraverseRagdollDeathSimple() {
 TraverseRagdollDeath(traverseAnim) {
   self endon("traverse_death");
   self endon("killanimscript");
-  while (1) {
+  while(1) {
     self waittill("damage");
     if(!self.delayedDeath) {
       continue;
@@ -258,7 +258,7 @@ TraverseRagdollDeath(traverseAnim) {
     scriptedDeathTimes[scriptedDeathTimes.size] = 1.0;
     if(getDebugDvarInt("scr_forcetraverseragdoll") == 1)
       scriptedDeathTimes = [];
-    for (i = 0; i < scriptedDeathTimes.size; i++) {
+    for(i = 0; i < scriptedDeathTimes.size; i++) {
       if(scriptedDeathTimes[i] > currentTime) {
         animLength = getAnimLength(traverseAnim);
         timeUntilScriptedDeath = (scriptedDeathTimes[i] - currentTime) * animLength;
@@ -292,7 +292,7 @@ postTraverseDeathAnim() {
   deathAnim = animscripts\death::get_death_anim();
   self setFlaggedAnimKnobAllRestart("deathanim", deathAnim, % body, 1, .1);
   if(animHasNoteTrack(deathAnim, "death_neckgrab_spurt")) {
-    PlayFXOnTag(level._effects["death_neckgrab_spurt"], self, "j_neck");
+    playFXOnTag(level._effects["death_neckgrab_spurt"], self, "j_neck");
   }
 }
 

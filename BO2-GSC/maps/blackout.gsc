@@ -156,7 +156,7 @@ init_flags() {
 }
 
 init_doors() {
-  doors = getentarray("rotating_door", "script_noteworthy");
+  doors = getEntArray("rotating_door", "script_noteworthy");
 
   for(i = 0; i < doors.size; i++) {
     model = getent(doors[i].target, "targetname");
@@ -261,7 +261,7 @@ challenge_electrocutions(str_notify) {
 }
 
 challenge_turret_oneshot(str_notify) {
-  vehicles = getentarray("script_vehicle", "classname");
+  vehicles = getEntArray("script_vehicle", "classname");
 
   foreach(veh in vehicles) {
     if(veh.vehicletype == "turret_cic")

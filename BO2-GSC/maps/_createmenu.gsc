@@ -11,7 +11,7 @@ add_menu(menu_name, title) {
     return;
   }
 
-  level.menu_sys[menu_name] = spawnstruct();
+  level.menu_sys[menu_name] = spawnStruct();
   level.menu_sys[menu_name].title = "none";
   level.menu_sys[menu_name].title = title;
 }

@@ -13,7 +13,7 @@
 #include animscripts\shoot_behavior;
 
 coverglobalsinit() {
-  anim.coverglobals = spawnstruct();
+  anim.coverglobals = spawnStruct();
   anim.coverglobals.desynched_time = 2500;
   anim.coverglobals.respond_to_death_retry_interval = 30000;
   anim.coverglobals.min_grenade_throw_distance_sq = 562500;
@@ -424,21 +424,13 @@ calloptionalbehaviorcallback(callback, arg, arg2, arg3) {
   val = undefined;
 
   if(isDefined(arg3))
-    val = [
-      [callback]
-    ](arg, arg2, arg3);
+    val = [[callback]](arg, arg2, arg3);
   else if(isDefined(arg2))
-    val = [
-      [callback]
-    ](arg, arg2);
+    val = [[callback]](arg, arg2);
   else if(isDefined(arg))
-    val = [
-      [callback]
-    ](arg);
+    val = [[callback]](arg);
   else
-    val = [
-      [callback]
-    ]();
+    val = [[callback]]();
 
   assert(isDefined(val) && (val == 1 || val == 0), "behavior callback must return true or false");
 
@@ -572,9 +564,7 @@ idle(behaviorcallbacks, howlong) {
 
   if(isDefined(behaviorcallbacks.flinch)) {
     if(!self.a.idlingatcover && gettime() - self.suppressionstart < 600) {
-      if([
-          [behaviorcallbacks.flinch]
-        ]()) {
+      if([[behaviorcallbacks.flinch]]()) {
         self animscripts\debug::debugpopstate("idle", "flinched");
 
         return true;
@@ -672,7 +662,7 @@ trythrowinggrenade(behaviorcallbacks, throwat, forcethrow) {
 
   }
 
-  forward = anglestoforward(self.angles);
+  forward = anglesToForward(self.angles);
   dir = vectornormalize(throwat.origin - self.origin);
 
   if(vectordot(forward, dir) < 0 && self.a.script != "cover_pillar") {
@@ -682,7 +672,7 @@ trythrowinggrenade(behaviorcallbacks, throwat, forcethrow) {
   }
 
   if(self.a.script == "cover_pillar" && isDefined(self.covernode)) {
-    forward = anglestoforward(self.covernode.angles);
+    forward = anglesToForward(self.covernode.angles);
     dir = vectornormalize(throwat.origin - self.covernode.origin);
 
     if(vectordot(forward, dir) < 0) {

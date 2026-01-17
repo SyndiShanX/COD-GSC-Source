@@ -27,11 +27,11 @@ sndmusicegg() {
 
 sndmusicegg_wait(bear_origin) {
   temp_ent = spawn("script_origin", bear_origin);
-  temp_ent playloopsound("zmb_meteor_loop");
+  temp_ent playLoopSound("zmb_meteor_loop");
   temp_ent thread maps\mp\zombies\_zm_sidequests::fake_use("main_music_egg_hit", ::sndmusicegg_override);
   temp_ent waittill("main_music_egg_hit", player);
   temp_ent stoploopsound(1);
-  player playsound("zmb_meteor_activate");
+  player playSound("zmb_meteor_activate");
   level.meteor_counter = level.meteor_counter + 1;
 
   if(level.meteor_counter == 3)
@@ -52,7 +52,7 @@ sndmusicegg_override() {
 sndmuseggplay(ent, alias, time) {
   level.music_override = 1;
   wait 1;
-  ent playsound(alias);
+  ent playSound(alias);
   level thread sndeggmusicwait(time);
   level waittill_either("end_game", "sndSongDone");
   ent stopsounds();

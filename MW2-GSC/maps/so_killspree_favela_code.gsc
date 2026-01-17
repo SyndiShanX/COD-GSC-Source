@@ -15,7 +15,7 @@
 {
 	self endon( "death" );
 	
-	if( isdefined( self.target ) )
+	if( isDefined( self.target ) )
 		self waittill( "goal" );
 
 	if( level.player.size == 2 )
@@ -35,11 +35,11 @@ ambush_to_seek() {
   level endon("special_op_terminated");
   self endon("death");
 
-  if(!isdefined(self.script_combatmode))
+  if(!isDefined(self.script_combatmode)) {
     return;
-
+  }
   if(self.script_combatmode == "ambush") {
-    while (1) {
+    while(1) {
       wait level.ambush_to_seeker_delay + randomint(level.ambush_to_seeker_delay);
       flag_wait("detailed_enemy_population_info_available");
       if((level.ambush_to_seeker + level.enemy_seekers) > level.current_enemy_population / 3)
@@ -61,15 +61,15 @@ enemy_seek_player(goalradius) {
   level endon("special_op_terminated");
   self endon("death");
 
-  if(isdefined(self.target))
+  if(isDefined(self.target))
     self waittill("goal");
 
   self.goalheight = 80;
   self.goalradius = goalradius;
 
-  while (1) {
+  while(1) {
     closest_player = get_closest_player_healthy(self.origin);
-    if(isdefined(closest_player))
+    if(isDefined(closest_player))
       self setgoalpos(closest_player.origin);
     wait 2;
   }
@@ -78,11 +78,11 @@ enemy_seek_player(goalradius) {
 release_doggy() {
   level endon("special_op_terminated");
 
-  dog_spawner = getentarray("fence_dog_spawner", "targetname");
+  dog_spawner = getEntArray("fence_dog_spawner", "targetname");
   array_spawn_function(dog_spawner, ::dog_register_death);
   array_spawn_function(dog_spawner, ::enemy_seek_player, 300);
 
-  if(!isdefined(level.gameskill))
+  if(!isDefined(level.gameskill))
     num_of_dogs = max(int(getdvar("g_gameskill")), 1);
   else
     num_of_dogs = max(level.gameskill, 1);
@@ -91,14 +91,14 @@ release_doggy() {
   if(is_Coop())
     num_of_dogs += 1;
 
-  while (1) {
+  while(1) {
     level waittill("who_let_the_dogs_out");
 
-    for (i = 0; i < num_of_dogs; i++) {
+    for(i = 0; i < num_of_dogs; i++) {
       doggy = random(dog_spawner);
       if(getaiSpeciesArray("axis", "dog").size < level.max_dogs_at_once) {
         doggy.count = 1;
-        doggy stalingradSpawn();
+        doggy stalingradspawn();
       }
       wait 1 + randomint(5);
     }
@@ -109,7 +109,7 @@ hud_create_kill_counter() {
   level endon("special_op_terminated");
   self endon("hud_cleaned_up");
 
-  self.kill_hudelem = so_create_hud_item(3, so_hud_ypos(), & "SPECIAL_OPS_HOSTILES", self);
+  self.kill_hudelem = so_create_hud_item(3, so_hud_ypos(), &"SPECIAL_OPS_HOSTILES", self);
   self.kill_hudelem_score = so_create_hud_item(3, so_hud_ypos(), undefined, self);
   self.kill_hudelem_score.alignx = "left";
   self.kill_hudelem_score SetValue(level.points_counter);
@@ -117,7 +117,7 @@ hud_create_kill_counter() {
 
   flag_wait("favela_enemies_spawned");
 
-  while (level.points_counter > 0) {
+  while(level.points_counter > 0) {
     level waittill("enemy_killed_by_player");
 
     thread hud_update_kill_counter();
@@ -143,7 +143,7 @@ hud_update_kill_counter() {
   // Success!
   if(level.points_counter <= 0) {
     self.kill_hudelem_score so_remove_hud_item(true);
-    self.kill_hudelem_score = so_create_hud_item(3, so_hud_ypos(), & "SPECIAL_OPS_DASHDASH", self);
+    self.kill_hudelem_score = so_create_hud_item(3, so_hud_ypos(), &"SPECIAL_OPS_DASHDASH", self);
     self.kill_hudelem_score.alignx = "left";
 
     self.kill_hudelem thread so_hud_pulse_success();
@@ -160,26 +160,26 @@ hud_update_kill_counter() {
 hud_create_civ_counter() {
   self endon("hud_cleaned_up");
 
-  self.civ_hudelem = so_create_hud_item(4, so_hud_ypos(), & "SO_KILLSPREE_FAVELA_CIVILIANS", self);
+  self.civ_hudelem = so_create_hud_item(4, so_hud_ypos(), &"SO_KILLSPREE_FAVELA_CIVILIANS", self);
   self.civ_hudelem_score = so_create_hud_item(4, so_hud_ypos(), undefined, self);
   self.civ_hudelem_score.alignx = "left";
   self.civ_hudelem_score SetValue(0);
   switch (level.gameskill) {
     case 0:
     case 1:
-      self.civ_hudelem_score.label = & "SO_KILLSPREE_FAVELA_CIV_COUNT_REGULAR";
+      self.civ_hudelem_score.label = &"SO_KILLSPREE_FAVELA_CIV_COUNT_REGULAR";
       break;
     case 2:
-      self.civ_hudelem_score.label = & "SO_KILLSPREE_FAVELA_CIV_COUNT_HARDENED";
+      self.civ_hudelem_score.label = &"SO_KILLSPREE_FAVELA_CIV_COUNT_HARDENED";
       break;
     case 3:
-      self.civ_hudelem_score.label = & "SO_KILLSPREE_FAVELA_CIV_COUNT_VETERAN";
+      self.civ_hudelem_score.label = &"SO_KILLSPREE_FAVELA_CIV_COUNT_VETERAN";
       break;
   }
 
   flag_wait("favela_enemies_spawned");
 
-  while (level.civilian_killed < level.civilian_kill_fail) {
+  while(level.civilian_killed < level.civilian_kill_fail) {
     level waittill("civilian_died");
 
     kills_remaining = level.civilian_kill_fail - level.civilian_killed;
@@ -214,7 +214,7 @@ hud_create_civ_counter() {
 hud_clean_up() {
   level waittill("special_op_terminated");
 
-  if(isdefined(self.kill_hudelem)) {
+  if(isDefined(self.kill_hudelem)) {
     self.kill_hudelem thread so_remove_hud_item();
     self.kill_hudelem_score thread so_remove_hud_item();
     self.civ_hudelem thread so_remove_hud_item();
@@ -231,7 +231,7 @@ enemy_type_monitor() {
 
   flag_wait("enemy_population_info_available");
 
-  while (1) {
+  while(1) {
     enemies = getaiarray("axis");
 
     level.ambush_to_seeker = 0;
@@ -239,13 +239,13 @@ enemy_type_monitor() {
     level.enemy_ambushers = 0;
 
     foreach(ai in enemies) {
-      if(isdefined(ai.ambush_to_seeker))
+      if(isDefined(ai.ambush_to_seeker))
         level.ambush_to_seeker++;
 
-      if(isdefined(ai.script_noteworthy) && ai.script_noteworthy == "seek_player")
+      if(isDefined(ai.script_noteworthy) && ai.script_noteworthy == "seek_player")
         level.enemy_seekers++;
 
-      if(isdefined(ai.combatmode) && ai.combatmode == "ambush")
+      if(isDefined(ai.combatmode) && ai.combatmode == "ambush")
         level.enemy_ambushers++;
     }
 
@@ -255,13 +255,13 @@ enemy_type_monitor() {
 }
 
 hunter_enemies_level_init() {
-  if(!isdefined(level.hunter_kill_value)) {
+  if(!isDefined(level.hunter_kill_value)) {
     level.hunter_kill_value = 1;
   }
 }
 
 hunter_init() {
-  if(!isdefined(level.current_enemy_population)) {
+  if(!isDefined(level.current_enemy_population)) {
     level.current_enemy_population = 1;
   }
 
@@ -272,7 +272,7 @@ hunter_init() {
 }
 
 hunter_register_death() {
-  while (1) {
+  while(1) {
     level waittill("specops_player_kill", attacker);
 
     level.current_enemy_population--;
@@ -295,7 +295,7 @@ dog_register_death() {
 civilian_register_death() {
   self waittill("death", attacker);
 
-  assert(isdefined(level.gameskill));
+  assert(isDefined(level.gameskill));
   if(isplayer(attacker)) {
     attacker.civilians_killed++;
     level.civilian_killed++;

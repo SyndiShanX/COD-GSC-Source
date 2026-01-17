@@ -56,7 +56,7 @@ precache() {
 }
 
 init() {
-  level.brutus_spawners = getentarray("brutus_zombie_spawner", "script_noteworthy");
+  level.brutus_spawners = getEntArray("brutus_zombie_spawner", "script_noteworthy");
 
   if(level.brutus_spawners.size == 0) {
     return;
@@ -130,7 +130,7 @@ init() {
 
 setup_interaction_matrix() {
   level.interaction_types = [];
-  level.interaction_types["magic_box"] = spawnstruct();
+  level.interaction_types["magic_box"] = spawnStruct();
   level.interaction_types["magic_box"].priority = 0;
   level.interaction_types["magic_box"].animstate = "zm_lock_magicbox";
   level.interaction_types["magic_box"].notify_name = "box_lock_anim";
@@ -143,7 +143,7 @@ setup_interaction_matrix() {
   level.interaction_types["magic_box"].spawn_bias = 1000;
   level.interaction_types["magic_box"].num_times_to_scale = 1;
   level.interaction_types["magic_box"].unlock_cost = 2000;
-  level.interaction_types["perk_machine"] = spawnstruct();
+  level.interaction_types["perk_machine"] = spawnStruct();
   level.interaction_types["perk_machine"].priority = 1;
   level.interaction_types["perk_machine"].animstate = "zm_lock_perk_machine";
   level.interaction_types["perk_machine"].notify_name = "perk_lock_anim";
@@ -155,7 +155,7 @@ setup_interaction_matrix() {
   level.interaction_types["perk_machine"].spawn_bias = 800;
   level.interaction_types["perk_machine"].num_times_to_scale = 3;
   level.interaction_types["perk_machine"].unlock_cost = 2000;
-  level.interaction_types["craftable_table"] = spawnstruct();
+  level.interaction_types["craftable_table"] = spawnStruct();
   level.interaction_types["craftable_table"].priority = 2;
   level.interaction_types["craftable_table"].animstate = "zm_smash_craftable_table";
   level.interaction_types["craftable_table"].notify_name = "table_smash_anim";
@@ -171,7 +171,7 @@ setup_interaction_matrix() {
   level.interaction_types["craftable_table"].interaction_yaw_offset = 270;
   level.interaction_types["craftable_table"].fx_z_offset = -44;
   level.interaction_types["craftable_table"].fx_yaw_offset = 270;
-  level.interaction_types["trap"] = spawnstruct();
+  level.interaction_types["trap"] = spawnStruct();
   level.interaction_types["trap"].priority = 3;
   level.interaction_types["trap"].animstate = "zm_smash_trap";
   level.interaction_types["trap"].notify_name = "trap_smash_anim";
@@ -182,7 +182,7 @@ setup_interaction_matrix() {
   level.interaction_types["trap"].interact_func = ::trap_smash;
   level.interaction_types["trap"].spawn_bias = 400;
   level.interaction_types["trap"].interaction_z_offset = -15;
-  level.interaction_types["plane_ramp"] = spawnstruct();
+  level.interaction_types["plane_ramp"] = spawnStruct();
   level.interaction_types["plane_ramp"].priority = 4;
   level.interaction_types["plane_ramp"].animstate = "zm_lock_plane_ramp";
   level.interaction_types["plane_ramp"].notify_name = "plane_lock_anim";
@@ -199,7 +199,7 @@ setup_interaction_matrix() {
   level.interaction_types["plane_ramp"].fx_z_offset = -60;
   level.interaction_types["plane_ramp"].fx_x_offset = 70;
   level.interaction_types["plane_ramp"].fx_yaw_offset = 90;
-  level.interaction_types["blocker"] = spawnstruct();
+  level.interaction_types["blocker"] = spawnStruct();
   level.interaction_types["blocker"].priority = 5;
   level.interaction_types["blocker"].animstate = "zm_smash_blocker";
   level.interaction_types["blocker"].notify_name = "board_smash_anim";
@@ -223,8 +223,7 @@ setup_interaction_matrix() {
     assert(isDefined(level.interaction_priority[i]));
 }
 
-brutus_prespawn() {
-}
+brutus_prespawn() {}
 
 brutus_spawn_prologue(spawn_pos) {
   playsoundatposition("zmb_ai_brutus_prespawn", spawn_pos.origin);
@@ -322,7 +321,7 @@ brutus_spawn(starting_health, has_helmet, helmet_hits, explosive_dmg_taken, zone
   self.actor_damage_func = ::brutus_damage_override;
   self.non_attacker_func = ::brutus_non_attacker_damage_override;
   self thread brutus_lockdown_client_effects(0.5);
-  playfx(level._effect["brutus_spawn"], self.origin);
+  playFX(level._effect["brutus_spawn"], self.origin);
   playsoundatposition("zmb_ai_brutus_spawn", self.origin);
   self animscripted(spawn_pos.origin, spawn_pos.angles, "zm_spawn");
   self thread maps\mp\animscripts\zm_shared::donotetracks("spawn_anim");
@@ -338,9 +337,9 @@ brutus_spawn(starting_health, has_helmet, helmet_hits, explosive_dmg_taken, zone
 brutus_chest_flashlight() {
   wait 0.1;
   self.chest_flashlight = spawn("script_model", self.origin);
-  self.chest_flashlight setmodel("tag_origin");
+  self.chest_flashlight setModel("tag_origin");
   self.chest_flashlight linkto(self, "J_spineupper", (0, 0, 0), (0, 0, 0));
-  playfxontag(level._effect["brutus_flashlight"], self.chest_flashlight, "tag_origin");
+  playFXOnTag(level._effect["brutus_flashlight"], self.chest_flashlight, "tag_origin");
   self waittill("death");
 
   if(isDefined(self.chest_flashlight))
@@ -351,7 +350,7 @@ brutus_temp_despawn(brutus, endon_notify, respawn_notify) {
   level endon(endon_notify);
   align_struct = spawn("script_model", brutus.origin);
   align_struct.angles = brutus.angles;
-  align_struct setmodel("tag_origin");
+  align_struct setModel("tag_origin");
 
   if(!level.brutus_in_grief && (brutus istouching(level.e_gondola.t_ride) || isDefined(brutus.force_gondola_teleport) && brutus.force_gondola_teleport)) {
     brutus.force_gondola_teleport = 0;
@@ -360,7 +359,7 @@ brutus_temp_despawn(brutus, endon_notify, respawn_notify) {
   }
 
   brutus.not_interruptable = 1;
-  playfxontag(level._effect["brutus_spawn"], align_struct, "tag_origin");
+  playFXOnTag(level._effect["brutus_spawn"], align_struct, "tag_origin");
   brutus animscripted(brutus.origin, brutus.angles, "zm_taunt");
   brutus maps\mp\animscripts\zm_shared::donotetracks("taunt_anim");
   brutus.not_interruptable = 0;
@@ -394,7 +393,7 @@ brutus_spawn_zone_locked(zone_name) {
   ai.force_zone = zone_name;
 
   if(isDefined(ai)) {
-    ai playsound("zmb_ai_brutus_spawn_2d");
+    ai playSound("zmb_ai_brutus_spawn_2d");
     return ai;
   }
 }
@@ -407,7 +406,7 @@ brutus_spawn_in_zone(zone_name, zone_locked) {
     ai thread brutus_spawn(undefined, undefined, undefined, undefined, zone_name);
 
     if(isDefined(ai)) {
-      ai playsound("zmb_ai_brutus_spawn_2d");
+      ai playSound("zmb_ai_brutus_spawn_2d");
       return ai;
     }
   }
@@ -421,7 +420,7 @@ snddelayedmusic() {
     sndentorigin = self gettagorigin("J_spineupper");
     self.sndbrutusmusicent = spawn("script_origin", sndentorigin);
     self.sndbrutusmusicent linkto(self, "J_spineupper");
-    self.sndbrutusmusicent playloopsound("mus_event_brutus_loop");
+    self.sndbrutusmusicent playLoopSound("mus_event_brutus_loop");
   }
 
   self thread sndbrutusloopwatcher(self.sndbrutusmusicent);
@@ -552,9 +551,8 @@ play_ambient_brutus_vocals() {
 
   while(true) {
     if(isDefined(self)) {
-      if(isDefined(self.favoriteenemy) && distance(self.origin, self.favoriteenemy.origin) <= 150) {
-      } else
-        self playsound("zmb_vocals_brutus_ambience");
+      if(isDefined(self.favoriteenemy) && distance(self.origin, self.favoriteenemy.origin) <= 150) {} else
+        self playSound("zmb_vocals_brutus_ambience");
     }
 
     wait(randomfloatrange(1, 1.5));
@@ -590,7 +588,7 @@ brutus_death() {
   self thread sndbrutusvox("vox_brutus_brutus_defeated");
   level thread maps\mp\zombies\_zm_audio::sndmusicstingerevent("brutus_death");
   level.brutus_count--;
-  playfx(level._effect["brutus_death"], self.origin);
+  playFX(level._effect["brutus_death"], self.origin);
   playsoundatposition("zmb_ai_brutus_death", self.origin);
 
   if(get_current_zombie_count() == 0 && level.zombie_total == 0) {
@@ -770,7 +768,7 @@ brutus_spawning_logic() {
     }
 
     if(isDefined(ai))
-      ai playsound("zmb_ai_brutus_spawn_2d");
+      ai playSound("zmb_ai_brutus_spawn_2d");
   }
 }
 
@@ -896,7 +894,7 @@ brutus_stuck_teleport() {
   self endon("death");
   align_struct = spawn("script_model", self.origin);
   align_struct.angles = self.angles;
-  align_struct setmodel("tag_origin");
+  align_struct setModel("tag_origin");
 
   if(!level.brutus_in_grief && (self istouching(level.e_gondola.t_ride) || isDefined(self.force_gondola_teleport) && self.force_gondola_teleport)) {
     self.force_gondola_teleport = 0;
@@ -905,7 +903,7 @@ brutus_stuck_teleport() {
   }
 
   self.not_interruptable = 1;
-  playfxontag(level._effect["brutus_spawn"], align_struct, "tag_origin");
+  playFXOnTag(level._effect["brutus_spawn"], align_struct, "tag_origin");
   self animscripted(self.origin, self.angles, "zm_taunt");
   self maps\mp\animscripts\zm_shared::donotetracks("taunt_anim");
   self.not_interruptable = 0;
@@ -1112,9 +1110,7 @@ get_priority_item_for_brutus(zone_name, do_secondary_zone_checks) {
     int_objects = self[[int_struct.get_func]](zone_name);
 
     for(j = 0; j < int_objects.size; j++) {
-      if(int_objects[j][
-          [int_struct.validity_func]
-        ]()) {
+      if(int_objects[j][[int_struct.validity_func]]()) {
         score = self[[int_struct.value_func]](int_objects[j]);
         assert(score >= 0);
 
@@ -1442,7 +1438,7 @@ brutus_fire_teargas_when_possible() {
     wait 0.05;
 
   self.not_interruptable = 1;
-  self playsound("vox_brutus_enraged");
+  self playSound("vox_brutus_enraged");
   self animscripted(self.origin, self.angles, "zm_teargas_attack");
   self thread maps\mp\animscripts\zm_shared::donotetracks("teargas_anim");
   self waittillmatch("teargas_anim", "grenade_drop");
@@ -1463,7 +1459,7 @@ sndplaydelayedsmokeaudio(org1, org2) {
 }
 
 brutus_afterlife_teleport() {
-  playfx(level._effect["afterlife_teleport"], self.origin);
+  playFX(level._effect["afterlife_teleport"], self.origin);
   self hide();
   wait 0.1;
   self notify("brutus_cleanup");
@@ -1481,7 +1477,7 @@ brutus_afterlife_teleport() {
 brutus_remove_helmet(vdir) {
   self.has_helmet = 0;
   self detach("c_zom_cellbreaker_helmet");
-  self playsound("evt_brutus_helmet");
+  self playSound("evt_brutus_helmet");
   launch_pos = self.origin + vectorscale((0, 0, 1), 85.0);
   createdynentandlaunch("c_zom_cellbreaker_helmet", launch_pos, self.angles, launch_pos, vdir);
 
@@ -1492,7 +1488,7 @@ brutus_remove_helmet(vdir) {
       return;
     }
     self.not_interruptable = 1;
-    self playsound("vox_brutus_exert");
+    self playSound("vox_brutus_exert");
     self animscripted(self.origin, self.angles, "zm_pain");
     self maps\mp\animscripts\zm_shared::donotetracks("pain_anim");
     self.not_interruptable = 0;
@@ -1534,13 +1530,13 @@ get_scaling_lock_cost(int_type, object) {
 get_lock_hint_string(cost) {
   switch (cost) {
     case 2000:
-      return & "ZOMBIE_LOCKED_COST_2000";
+      return &"ZOMBIE_LOCKED_COST_2000";
     case 4000:
-      return & "ZOMBIE_LOCKED_COST_4000";
+      return &"ZOMBIE_LOCKED_COST_4000";
     case 6000:
-      return & "ZOMBIE_LOCKED_COST_6000";
+      return &"ZOMBIE_LOCKED_COST_6000";
     default:
-      return & "ZOMBIE_LOCKED_COST";
+      return &"ZOMBIE_LOCKED_COST";
   }
 }
 
@@ -1558,7 +1554,7 @@ magic_box_lock() {
     return;
   }
   magic_box.zbarrier set_magic_box_zbarrier_state("locking");
-  self playsound("zmb_ai_brutus_clang");
+  self playSound("zmb_ai_brutus_clang");
   magic_box.locked_cost = get_scaling_lock_cost("magic_box", magic_box);
   level.lockdown_track["magic_box"] = 1;
   level notify("brutus_locked_object");
@@ -1582,9 +1578,9 @@ perk_machine_lock() {
   perk_machine.lock_fx = spawn("script_model", self.priority_item.origin);
   perk_machine.lock_fx.angles = self.priority_item.angles;
   perk_machine.lock_fx = offset_fx_struct(int_struct, perk_machine.lock_fx);
-  perk_machine.lock_fx setmodel("tag_origin");
-  playfxontag(lock_fx, perk_machine.lock_fx, "tag_origin");
-  perk_machine.lock_fx playsound("zmb_ai_brutus_clang");
+  perk_machine.lock_fx setModel("tag_origin");
+  playFXOnTag(lock_fx, perk_machine.lock_fx, "tag_origin");
+  perk_machine.lock_fx playSound("zmb_ai_brutus_clang");
   perk_machine.is_locked = 1;
   perk_machine.locked_cost = get_scaling_lock_cost("perk_machine", perk_machine);
   perk_machine sethintstring(&"ZOMBIE_LOCKED_COST", perk_machine.locked_cost);
@@ -1605,9 +1601,9 @@ craftable_table_lock() {
   craftable_table.lock_fx = spawn("script_model", table_struct.origin);
   craftable_table.lock_fx.angles = table_struct.angles;
   craftable_table.lock_fx = offset_fx_struct(int_struct, craftable_table.lock_fx);
-  craftable_table.lock_fx setmodel("tag_origin");
-  playfxontag(level._effect["brutus_lockdown_lg"], craftable_table.lock_fx, "tag_origin");
-  craftable_table.lock_fx playsound("zmb_ai_brutus_clang");
+  craftable_table.lock_fx setModel("tag_origin");
+  playFXOnTag(level._effect["brutus_lockdown_lg"], craftable_table.lock_fx, "tag_origin");
+  craftable_table.lock_fx playSound("zmb_ai_brutus_clang");
   craftable_table.is_locked = 1;
   craftable_table.locked_cost = get_scaling_lock_cost("craftable_table", craftable_table);
   craftable_table.hint_string = get_lock_hint_string(craftable_table.locked_cost);
@@ -1639,7 +1635,7 @@ trap_smash() {
   else if(trap.targetname == "tower_trap_activate_trigger")
     trap notify("tower_trap_off");
 
-  trap playsound("zmb_ai_brutus_clang");
+  trap playSound("zmb_ai_brutus_clang");
   self.priority_item = undefined;
 }
 
@@ -1654,9 +1650,9 @@ plane_ramp_lock() {
   plane_ramp.lock_fx = spawn("script_model", plane_ramp.origin);
   plane_ramp.lock_fx.angles = plane_ramp.angles;
   plane_ramp.lock_fx = offset_fx_struct(int_struct, plane_ramp.lock_fx);
-  plane_ramp.lock_fx setmodel("tag_origin");
-  plane_ramp.lock_fx playsound("zmb_ai_brutus_clang");
-  playfxontag(level._effect["brutus_lockdown"], plane_ramp.lock_fx, "tag_origin");
+  plane_ramp.lock_fx setModel("tag_origin");
+  plane_ramp.lock_fx playSound("zmb_ai_brutus_clang");
+  playFXOnTag(level._effect["brutus_lockdown"], plane_ramp.lock_fx, "tag_origin");
   plane_ramp.is_locked = 1;
   plane_ramp.locked_cost = get_scaling_lock_cost("plane_ramp", plane_ramp);
   plane_ramp.hint_string = get_lock_hint_string(plane_ramp.locked_cost);
@@ -1670,10 +1666,10 @@ plane_ramp_lock() {
 
 blocker_smash() {
   self endon("death");
-  self playsound("vox_brutus_enraged");
-  self playsound("zmb_ai_brutus_window_teardown");
+  self playSound("vox_brutus_enraged");
+  self playSound("zmb_ai_brutus_window_teardown");
   blocker = self.priority_item;
-  self playsound("zmb_ai_brutus_clang");
+  self playSound("zmb_ai_brutus_clang");
 
   if(!isDefined(blocker)) {
     return;
@@ -1690,12 +1686,12 @@ blocker_smash() {
   else
     smash_fx_alias = "brutus_smash_" + blocker.script_string;
 
-  forward = anglestoforward(blocker.angles + vectorscale((0, 1, 0), 180.0));
+  forward = anglesToForward(blocker.angles + vectorscale((0, 1, 0), 180.0));
 
   if(isDefined(level._effect[smash_fx_alias]))
-    playfx(level._effect[smash_fx_alias], blocker.origin, forward);
+    playFX(level._effect[smash_fx_alias], blocker.origin, forward);
   else
-    playfx(level._effect["brutus_smash_default"], blocker.origin, forward);
+    playFX(level._effect["brutus_smash_default"], blocker.origin, forward);
 
   self.priority_item = undefined;
 }
@@ -1819,7 +1815,7 @@ brutus_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon,
   }
 
   if(isDefined(weapon) && weapon == "bouncing_tomahawk_zm" && isDefined(inflictor)) {
-    self playsound("wpn_tomahawk_imp_zombie");
+    self playSound("wpn_tomahawk_imp_zombie");
 
     if(self.has_helmet) {
       if(damage == 1)
@@ -1896,14 +1892,13 @@ brutus_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon,
     return int(self scale_helmet_damage(attacker, damage, n_brutus_headshot_modifier, n_brutus_damage_percent, vdir));
 }
 
-brutus_instakill_override() {
-}
+brutus_instakill_override() {}
 
 brutus_nuke_override() {
   self endon("death");
   wait(randomfloatrange(0.1, 0.7));
   self thread maps\mp\animscripts\zm_death::flame_death_fx();
-  self playsound("evt_nuked");
+  self playSound("evt_nuked");
   self dodamage(level.brutus_health * 0.25, self.origin);
 }
 
@@ -1920,9 +1915,9 @@ custom_brutus_flame_death_fx() {
     if(!self.isdog) {
       v_origin = self gettagorigin("J_SpineLower");
       e_origin = spawn("script_origin", v_origin);
-      e_origin setmodel("tag_origin");
+      e_origin setModel("tag_origin");
       e_origin linkto(self, "J_SpineLower");
-      playfxontag(level._effect["character_fire_death_torso"], e_origin, "tag_origin");
+      playFXOnTag(level._effect["character_fire_death_torso"], e_origin, "tag_origin");
       a_script_origins[a_script_origins.size] = e_origin;
     }
   } else {
@@ -1940,9 +1935,9 @@ custom_brutus_flame_death_fx() {
     tagarray = maps\mp\animscripts\zm_death::randomize_array(tagarray);
     v_origin = self gettagorigin(tagarray[0]);
     e_origin = spawn("script_origin", v_origin);
-    e_origin setmodel("tag_origin");
+    e_origin setModel("tag_origin");
     e_origin linkto(self, tagarray[0]);
-    playfxontag(level._effect["character_fire_death_torso"], e_origin, "tag_origin");
+    playFXOnTag(level._effect["character_fire_death_torso"], e_origin, "tag_origin");
     a_script_origins[a_script_origins.size] = e_origin;
     wait 1;
     tagarray[0] = "J_Wrist_RI";
@@ -1958,12 +1953,12 @@ custom_brutus_flame_death_fx() {
     v_origin_1 = self gettagorigin(tagarray[1]);
     e_origin_0 = spawn("script_origin", v_origin_0);
     e_origin_1 = spawn("script_origin", v_origin_1);
-    e_origin_0 setmodel("tag_origin");
-    e_origin_1 setmodel("tag_origin");
+    e_origin_0 setModel("tag_origin");
+    e_origin_1 setModel("tag_origin");
     e_origin_0 linkto(self, tagarray[0]);
     e_origin_1 linkto(self, tagarray[1]);
-    playfxontag(level._effect["character_fire_death_torso"], e_origin_0, "tag_origin");
-    playfxontag(level._effect["character_fire_death_torso"], e_origin_1, "tag_origin");
+    playFXOnTag(level._effect["character_fire_death_torso"], e_origin_0, "tag_origin");
+    playFXOnTag(level._effect["character_fire_death_torso"], e_origin_1, "tag_origin");
     a_script_origins[a_script_origins.size] = e_origin_0;
     a_script_origins[a_script_origins.size] = e_origin_1;
   } else {
@@ -1993,7 +1988,7 @@ brutus_debug() {
 
     if(isDefined(debug_level) && debug_level) {
       if(debug_level == 1) {
-        brutus_array = getentarray("brutus_zombie_ai");
+        brutus_array = getEntArray("brutus_zombie_ai");
 
         for(i = 0; i < brutus_array.size; i++) {
           if(isDefined(brutus_array[i].goal_pos)) {
@@ -2095,13 +2090,13 @@ get_brutus_interest_points() {
 }
 
 build_trap_array() {
-  fan_array = getentarray("acid_trap_trigger", "targetname");
-  acid_array = getentarray("fan_trap_use_trigger", "targetname");
+  fan_array = getEntArray("acid_trap_trigger", "targetname");
+  acid_array = getEntArray("fan_trap_use_trigger", "targetname");
   level.trap_triggers = arraycombine(fan_array, acid_array, 0, 0);
 }
 
 add_machines_in_zone(zone, zone_name, match_string) {
-  machine_array = getentarray(match_string, "targetname");
+  machine_array = getEntArray(match_string, "targetname");
 
   for(i = 0; i < machine_array.size; i++) {
     if(machine_array[i] entity_in_zone(zone_name, 1))
@@ -2173,7 +2168,7 @@ get_zone_craftable_tables(zone_name) {
 get_zone_traps(zone_name) {
   zone = level.zones[zone_name];
   zone.traps = [];
-  acid_traps = getentarray("acid_trap_trigger", "targetname");
+  acid_traps = getEntArray("acid_trap_trigger", "targetname");
   scr_org = spawn("script_origin", (0, 0, 0));
 
   for(i = 0; i < acid_traps.size; i++) {
@@ -2188,7 +2183,7 @@ get_zone_traps(zone_name) {
     }
   }
 
-  fan_traps = getentarray("fan_trap_use_trigger", "targetname");
+  fan_traps = getEntArray("fan_trap_use_trigger", "targetname");
 
   for(i = 0; i < fan_traps.size; i++) {
     target_struct = getstruct(fan_traps[i].script_parameters, "targetname");
@@ -2202,7 +2197,7 @@ get_zone_traps(zone_name) {
     }
   }
 
-  tower_traps = getentarray("tower_trap_activate_trigger", "targetname");
+  tower_traps = getEntArray("tower_trap_activate_trigger", "targetname");
 
   for(i = 0; i < tower_traps.size; i++) {
     target_struct = getstruct(tower_traps[i].script_parameters, "targetname");

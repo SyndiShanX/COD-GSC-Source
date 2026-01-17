@@ -17,15 +17,15 @@
 #namespace zm_bgb_arms_grace;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_arms_grace", & __init__, undefined, "bgb");
+  system::register("zm_bgb_arms_grace", &__init__, undefined, "bgb");
 }
 
 function __init__() {
-  if(!(isdefined(level.bgb_in_use) && level.bgb_in_use)) {
+  if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
-  bgb::register("zm_bgb_arms_grace", "event", & event, undefined, undefined, undefined);
-  level.givestartloadout = & givestartloadout;
+  bgb::register("zm_bgb_arms_grace", "event", &event, undefined, undefined, undefined);
+  level.givestartloadout = &givestartloadout;
 }
 
 function event() {
@@ -37,10 +37,10 @@ function event() {
 }
 
 function givestartloadout() {
-  if(isdefined(self.var_e445bfc6) && self.var_e445bfc6) {
+  if(isDefined(self.var_e445bfc6) && self.var_e445bfc6) {
     self.var_e445bfc6 = 0;
     function_f1adaf91(self);
-  } else if(isdefined(level.givecustomloadout)) {
+  } else if(isDefined(level.givecustomloadout)) {
     self[[level.givecustomloadout]]();
   }
 }
@@ -54,7 +54,7 @@ function function_f1adaf91(player) {
   ray_gun_weapon = getweapon("ray_gun");
   var_52633155 = 0;
   player giveweapon(level.weaponbasemelee);
-  if(isdefined(player.laststandprimaryweapons)) {
+  if(isDefined(player.laststandprimaryweapons)) {
     var_f0e082e = 0;
     foreach(weapon in player.laststandprimaryweapons) {
       if(weapon.isprimary) {
@@ -81,7 +81,7 @@ function function_f1adaf91(player) {
         } else {
           var_cbbc46c5 = weapon;
         }
-        if(isdefined(var_cbbc46c5)) {
+        if(isDefined(var_cbbc46c5)) {
           player zm_weapons::weapon_give(var_cbbc46c5, 0, 0, 1, !weapon_switched);
           var_a430f97e++;
           weapon_switched = 1;

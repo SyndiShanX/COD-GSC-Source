@@ -34,8 +34,8 @@ function init() {
 }
 
 function main() {
-  callback::on_connect( & on_player_connect);
-  callback::on_spawned( & on_player_spawned);
+  callback::on_connect(&on_player_connect);
+  callback::on_spawned(&on_player_spawned);
   cybercom_tacrig_sensorybuffer::main();
   cybercom_tacrig_emergencyreserve::main();
   cybercom_tacrig_proximitydeterrent::main();
@@ -50,34 +50,34 @@ function on_player_connect() {}
 function on_player_spawned() {}
 
 function register_cybercom_rig_ability(name, type) {
-  if(!isdefined(level._cybercom_rig_ability)) {
+  if(!isDefined(level._cybercom_rig_ability)) {
     level._cybercom_rig_ability = [];
   }
-  if(!isdefined(level._cybercom_rig_ability[name])) {
-    level._cybercom_rig_ability[name] = spawnstruct();
+  if(!isDefined(level._cybercom_rig_ability[name])) {
+    level._cybercom_rig_ability[name] = spawnStruct();
     level._cybercom_rig_ability[name].name = name;
     level._cybercom_rig_ability[name].type = type;
   }
 }
 
 function register_cybercom_rig_possession_callbacks(name, on_give, on_take) {
-  assert(isdefined(level._cybercom_rig_ability[name]));
-  if(!isdefined(level._cybercom_rig_ability[name].on_give)) {
+  assert(isDefined(level._cybercom_rig_ability[name]));
+  if(!isDefined(level._cybercom_rig_ability[name].on_give)) {
     level._cybercom_rig_ability[name].on_give = [];
   }
-  if(!isdefined(level._cybercom_rig_ability[name].on_take)) {
+  if(!isDefined(level._cybercom_rig_ability[name].on_take)) {
     level._cybercom_rig_ability[name].on_take = [];
   }
-  if(isdefined(on_give)) {
-    if(!isdefined(level._cybercom_rig_ability[name].on_give)) {
+  if(isDefined(on_give)) {
+    if(!isDefined(level._cybercom_rig_ability[name].on_give)) {
       level._cybercom_rig_ability[name].on_give = [];
     } else if(!isarray(level._cybercom_rig_ability[name].on_give)) {
       level._cybercom_rig_ability[name].on_give = array(level._cybercom_rig_ability[name].on_give);
     }
     level._cybercom_rig_ability[name].on_give[level._cybercom_rig_ability[name].on_give.size] = on_give;
   }
-  if(isdefined(on_take)) {
-    if(!isdefined(level._cybercom_rig_ability[name].on_take)) {
+  if(isDefined(on_take)) {
+    if(!isDefined(level._cybercom_rig_ability[name].on_take)) {
       level._cybercom_rig_ability[name].on_take = [];
     } else if(!isarray(level._cybercom_rig_ability[name].on_take)) {
       level._cybercom_rig_ability[name].on_take = array(level._cybercom_rig_ability[name].on_take);
@@ -87,23 +87,23 @@ function register_cybercom_rig_possession_callbacks(name, on_give, on_take) {
 }
 
 function register_cybercom_rig_activation_callbacks(name, turn_on, turn_off) {
-  assert(isdefined(level._cybercom_rig_ability[name]));
-  if(!isdefined(level._cybercom_rig_ability[name].turn_on)) {
+  assert(isDefined(level._cybercom_rig_ability[name]));
+  if(!isDefined(level._cybercom_rig_ability[name].turn_on)) {
     level._cybercom_rig_ability[name].turn_on = [];
   }
-  if(!isdefined(level._cybercom_rig_ability[name].turn_off)) {
+  if(!isDefined(level._cybercom_rig_ability[name].turn_off)) {
     level._cybercom_rig_ability[name].turn_off = [];
   }
-  if(isdefined(turn_on)) {
-    if(!isdefined(level._cybercom_rig_ability[name].turn_on)) {
+  if(isDefined(turn_on)) {
+    if(!isDefined(level._cybercom_rig_ability[name].turn_on)) {
       level._cybercom_rig_ability[name].turn_on = [];
     } else if(!isarray(level._cybercom_rig_ability[name].turn_on)) {
       level._cybercom_rig_ability[name].turn_on = array(level._cybercom_rig_ability[name].turn_on);
     }
     level._cybercom_rig_ability[name].turn_on[level._cybercom_rig_ability[name].turn_on.size] = turn_on;
   }
-  if(isdefined(turn_off)) {
-    if(!isdefined(level._cybercom_rig_ability[name].turn_off)) {
+  if(isDefined(turn_off)) {
+    if(!isDefined(level._cybercom_rig_ability[name].turn_off)) {
       level._cybercom_rig_ability[name].turn_off = [];
     } else if(!isarray(level._cybercom_rig_ability[name].turn_off)) {
       level._cybercom_rig_ability[name].turn_off = array(level._cybercom_rig_ability[name].turn_off);
@@ -113,10 +113,10 @@ function register_cybercom_rig_activation_callbacks(name, turn_on, turn_off) {
 }
 
 function rigabilitygiven(type, upgraded) {
-  if(!isdefined(level._cybercom_rig_ability[type])) {
+  if(!isDefined(level._cybercom_rig_ability[type])) {
     return;
   }
-  if(isdefined(level._cybercom_rig_ability[type].on_give)) {
+  if(isDefined(level._cybercom_rig_ability[type].on_give)) {
     foreach(on_give in level._cybercom_rig_ability[type].on_give) {
       self[[on_give]](type);
     }
@@ -124,10 +124,10 @@ function rigabilitygiven(type, upgraded) {
 }
 
 function giverigability(type, upgraded = 0, slot, setflags = 1) {
-  if(!isdefined(level._cybercom_rig_ability[type])) {
+  if(!isDefined(level._cybercom_rig_ability[type])) {
     return false;
   }
-  if(!isdefined(slot)) {
+  if(!isDefined(slot)) {
     self setcybercomrig(type, upgraded);
   } else {
     self setcybercomrig(type, upgraded, slot);
@@ -140,7 +140,7 @@ function giverigability(type, upgraded = 0, slot, setflags = 1) {
 }
 
 function function_ccca7010(type) {
-  if(!isdefined(level._cybercom_rig_ability[type])) {
+  if(!isDefined(level._cybercom_rig_ability[type])) {
     return false;
   }
   self _take_rig_ability(type);
@@ -148,10 +148,10 @@ function function_ccca7010(type) {
 }
 
 function private _take_rig_ability(type) {
-  if(!isdefined(level._cybercom_rig_ability[type])) {
+  if(!isDefined(level._cybercom_rig_ability[type])) {
     return false;
   }
-  if(isdefined(level._cybercom_rig_ability[type]) && isdefined(level._cybercom_rig_ability[type].on_take)) {
+  if(isDefined(level._cybercom_rig_ability[type]) && isDefined(level._cybercom_rig_ability[type].on_take)) {
     foreach(on_take in level._cybercom_rig_ability[type].on_take) {
       self[[on_take]](type);
     }
@@ -186,7 +186,7 @@ function turn_rig_ability_on(type) {
   if(reserveability == 0) {
     return;
   }
-  if(isdefined(level._cybercom_rig_ability[type]) && isdefined(level._cybercom_rig_ability[type].turn_on)) {
+  if(isDefined(level._cybercom_rig_ability[type]) && isDefined(level._cybercom_rig_ability[type].turn_on)) {
     foreach(turn_on in level._cybercom_rig_ability[type].turn_on) {
       self[[turn_on]](type);
     }
@@ -198,7 +198,7 @@ function turn_rig_ability_off(type) {
   if(reserveability == 0) {
     return;
   }
-  if(isdefined(level._cybercom_rig_ability[type]) && isdefined(level._cybercom_rig_ability[type].turn_off)) {
+  if(isDefined(level._cybercom_rig_ability[type]) && isDefined(level._cybercom_rig_ability[type].turn_off)) {
     foreach(turn_off in level._cybercom_rig_ability[type].turn_off) {
       self[[turn_off]](type);
     }

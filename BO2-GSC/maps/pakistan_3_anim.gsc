@@ -73,8 +73,7 @@ event_7_anims() {
   add_actor_anim("di_scaffolding_8", % ch_pakistan_7_1_drone_tutorial_scafold_guy08);
 }
 
-event_8_anims() {
-}
+event_8_anims() {}
 
 #using_animtree("player");
 #using_animtree("vehicles");
@@ -180,7 +179,7 @@ heli_end_shooting(vh_heli, note_t) {
 }
 
 soct_explosion(vh_soct) {
-  a_vh_heli = getentarray("h_hind", "targetname");
+  a_vh_heli = getEntArray("h_hind", "targetname");
 
   if(isDefined(a_vh_heli)) {
     for(i = 0; i < a_vh_heli.size; i++) {
@@ -189,18 +188,18 @@ soct_explosion(vh_soct) {
       if(isDefined(e_heli.death_counter) && e_heli.death_counter > 0) {
         continue;
       }
-      playfx(level._effect["blockade_explosion"], e_heli gettagorigin("tag_fx_flare"));
-      playfxontag(level._effect["heli_crash_smoke_trail"], e_heli, "tag_origin");
+      playFX(level._effect["blockade_explosion"], e_heli gettagorigin("tag_fx_flare"));
+      playFXOnTag(level._effect["heli_crash_smoke_trail"], e_heli, "tag_origin");
     }
   }
 }
 
 vehicle_explosion(vh_hangar) {
-  playfx(level._effect["blockade_explosion"], vh_hangar.origin);
+  playFX(level._effect["blockade_explosion"], vh_hangar.origin);
 }
 
 drone_explosion_small(vh_drone) {
-  playfx(level._effect["blockade_explosion"], vh_drone.origin);
+  playFX(level._effect["blockade_explosion"], vh_drone.origin);
   vh_drone play_fx("heli_crash_smoke_trail", vh_drone.origin, vh_drone.angles, undefined, 1, "tag_origin");
 }
 
@@ -239,12 +238,12 @@ hanger_ending_chase_anims() {
 }
 
 heli_start_anim_callback(vh_heli) {
-  playfxontag(level._effect["ending_helicopter_explosion"], vh_heli, "body_animate_jnt");
+  playFXOnTag(level._effect["ending_helicopter_explosion"], vh_heli, "body_animate_jnt");
   heli_end_shooting(vh_heli, undefined);
 }
 
 heli_end_anim_explosion(vh_heli) {
-  playfxontag(level._effect["ending_helicopter_explosion"], vh_heli, "body_animate_jnt");
+  playFXOnTag(level._effect["ending_helicopter_explosion"], vh_heli, "body_animate_jnt");
 }
 
 player_soct_anims() {

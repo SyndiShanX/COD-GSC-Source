@@ -22,9 +22,9 @@
 
 function init() {
   assert(isplayer(self));
-  assert(!isdefined(self.stealth));
-  if(!isdefined(self.stealth)) {
-    self.stealth = spawnstruct();
+  assert(!isDefined(self.stealth));
+  if(!isDefined(self.stealth)) {
+    self.stealth = spawnStruct();
   }
   self.stealth.player_detected = 0;
   self.stealth.player_detect_count = 0;
@@ -48,7 +48,7 @@ function reset() {
 }
 
 function enabled() {
-  return isdefined(self.stealth) && isdefined(self.stealth.player_detected);
+  return isDefined(self.stealth) && isDefined(self.stealth.player_detected);
 }
 
 function inc_detected(detector, alertvalue) {
@@ -56,14 +56,14 @@ function inc_detected(detector, alertvalue) {
 }
 
 function inc_aware(detector, alertvalue) {
-  if(!isdefined(self.stealth.sensing)) {
+  if(!isDefined(self.stealth.sensing)) {
     self.stealth.sensing = [];
   }
   furthestsq = 0;
   replace = -1;
-  for (i = 0; i < self.stealth.sensing.size; i++) {
+  for(i = 0; i < self.stealth.sensing.size; i++) {
     value = self detection_value(self.stealth.sensing[i]);
-    if(value == 127 || !isdefined(self.stealth.sensing[i]) || self.stealth.sensing[i] == detector) {
+    if(value == 127 || !isDefined(self.stealth.sensing[i]) || self.stealth.sensing[i] == detector) {
       self.stealth.sensing[i] = detector;
       return;
     }
@@ -88,24 +88,24 @@ function function_ff057a95() {
   self endon("hash_ff057a95");
   self endon("disconnect");
   self endon("stop_stealth");
-  assert(isdefined(self.stealth));
-  if(!isdefined(self.stealth.var_9f4ce919)) {
+  assert(isDefined(self.stealth));
+  if(!isDefined(self.stealth.var_9f4ce919)) {
     self.stealth.var_9f4ce919 = [];
   }
-  while (true) {
-    if(!(isdefined(level.stealth.vo_callouts) && level.stealth.vo_callouts)) {
+  while(true) {
+    if(!(isDefined(level.stealth.vo_callouts) && level.stealth.vo_callouts)) {
       wait(1);
       continue;
     }
     if(self playerads() > 0.3) {
       var_bd8fb968 = self hascybercomability("cybercom_hijack");
-      eye = self geteye();
-      var_fd26df34 = anglestoforward(self getplayerangles());
+      eye = self getEye();
+      var_fd26df34 = anglesToForward(self getplayerangles());
       targets = getaiteamarray("axis");
-      if(isdefined(level.stealth.var_581c13ae)) {
+      if(isDefined(level.stealth.var_581c13ae)) {
         var_2680d17d = [];
         foreach(var_daf22616 in level.stealth.var_581c13ae) {
-          if(!isdefined(var_daf22616)) {
+          if(!isDefined(var_daf22616)) {
             continue;
           }
           targets[targets.size] = var_daf22616;
@@ -119,9 +119,9 @@ function function_ff057a95() {
         warnmsg = "careful";
         var_bbf94a49 = var_daf22616.origin;
         if(issentient(var_daf22616)) {
-          var_bbf94a49 = var_daf22616 geteye();
+          var_bbf94a49 = var_daf22616 getEye();
         }
-        if(isdefined(var_daf22616.var_3bee9acf)) {
+        if(isDefined(var_daf22616.var_3bee9acf)) {
           warnmsg = var_daf22616.var_3bee9acf;
         } else if(isvehicle(var_daf22616)) {
           if(var_bd8fb968 && var_daf22616 isremotecontrol()) {
@@ -130,7 +130,7 @@ function function_ff057a95() {
             warnmsg = "careful_" + var_daf22616.archetype;
           }
         }
-        if(isdefined(self.stealth.var_9f4ce919[warnmsg])) {
+        if(isDefined(self.stealth.var_9f4ce919[warnmsg])) {
           continue;
         }
         dir = vectornormalize(var_bbf94a49 - eye);
@@ -147,14 +147,14 @@ function function_ff057a95() {
 }
 
 function detection_value(other) {
-  if(!isdefined(other)) {
+  if(!isDefined(other)) {
     return 127;
   }
   if(getdvarint("stealth_display", 1) == 1 && isalive(other) && !other.ignoreall) {
     value = other getstealthsightvalue(self) * 49;
     bcansee = other stealth::can_see(self);
-    bcombat = isdefined(other.stealth.aware_combat) && isdefined(other.stealth.aware_combat[self getentitynumber()]);
-    balert = isdefined(other.stealth.aware_alerted) && isdefined(other.stealth.aware_alerted[self getentitynumber()]);
+    bcombat = isDefined(other.stealth.aware_combat) && isDefined(other.stealth.aware_combat[self getentitynumber()]);
+    balert = isDefined(other.stealth.aware_alerted) && isDefined(other.stealth.aware_alerted[self getentitynumber()]);
     if(value > 0 || balert || bcombat) {
       if(bcombat) {
         value = 50;
@@ -172,11 +172,11 @@ function detection_value(other) {
 
 function function_b9393d6c(awareness) {
   vals = level stealth_level::get_parms(awareness);
-  assert(isdefined(vals));
+  assert(isDefined(vals));
   maxvisibledist = vals.maxsightdist;
   if(awareness != "combat") {
     stance = self getstance();
-    if(isdefined(self.stealth.in_shadow) && self.stealth.in_shadow) {
+    if(isDefined(self.stealth.in_shadow) && self.stealth.in_shadow) {
       maxvisibledist = maxvisibledist * 0.5;
     }
     if(stance == "prone") {
@@ -203,7 +203,7 @@ function get_detected() {
 
 function stance_monitor_thread() {
   self endon("disconnect");
-  while (true) {
+  while(true) {
     stance = self getstance();
     maxvisibledist = 1600;
     switch (stance) {
@@ -216,7 +216,7 @@ function stance_monitor_thread() {
         break;
       }
     }
-    if(isdefined(self.stealth) && (isdefined(self.stealth.in_shadow) && self.stealth.in_shadow)) {
+    if(isDefined(self.stealth) && (isDefined(self.stealth.in_shadow) && self.stealth.in_shadow)) {
       maxvisibledist = maxvisibledist * 0.5;
     }
     self.maxvisibledist = maxvisibledist;
@@ -227,7 +227,7 @@ function stance_monitor_thread() {
 function detected_monitor_thread() {
   self endon("disconnect");
   self endon("stop_stealth");
-  while (true) {
+  while(true) {
     self.stealth.player_detect_count = 0;
     wait(1);
     if(self.stealth.player_detect_count <= 0) {
@@ -241,7 +241,7 @@ function function_7300ae66() {
   self endon("stop_stealth");
   wait(0.05);
   self set_ignore_me_one_to_one(1);
-  while (true) {
+  while(true) {
     self util::waittill_any("spawned");
     self function_b9393d6c("high_alert");
     wait(0.05);
@@ -253,35 +253,35 @@ function function_bb9ffa41() {
   self endon("disconnect");
   self endon("stop_stealth");
   var_52ff854e = 0;
-  while (true) {
+  while(true) {
     kills = self globallogic_score::getpersstat("kills");
-    if(!isdefined(kills)) {
+    if(!isDefined(kills)) {
       kills = 0;
     }
     var_b69afa72 = kills;
     lastkilltime = gettime();
     self waittill("killed_ai", victim, smeansofdeath, weapon);
     waittillframeend();
-    if(isdefined(victim) && isdefined(victim.team) && victim.team != "axis") {
+    if(isDefined(victim) && isDefined(victim.team) && victim.team != "axis") {
       self thread stealth_vo::function_e3ae87b3("fail_kill");
       continue;
     }
     kills = self globallogic_score::getpersstat("kills");
-    if(!isdefined(kills)) {
+    if(!isDefined(kills)) {
       kills = 1;
     }
     var_c839bf74 = kills - var_b69afa72;
     if((gettime() - lastkilltime) > 1000) {
       var_52ff854e = 0;
     }
-    if(var_c839bf74 >= 2 && isdefined(smeansofdeath) && util::isbulletimpactmod(smeansofdeath)) {
+    if(var_c839bf74 >= 2 && isDefined(smeansofdeath) && util::isbulletimpactmod(smeansofdeath)) {
       self notify("double_kill");
     }
     var_52ff854e = var_52ff854e + var_c839bf74;
-    if(!isdefined(self.stealth)) {
+    if(!isDefined(self.stealth)) {
       return;
     }
-    if(!isdefined(level.stealth)) {
+    if(!isDefined(level.stealth)) {
       return;
     }
     self thread function_e507ced8(victim, smeansofdeath, weapon, var_52ff854e);
@@ -295,26 +295,26 @@ function function_e507ced8(victim, smeansofdeath, weapon, killcount) {
   self endon("stop_stealth");
   self endon("death");
   if(!level flag::get("stealth_alert") && !level flag::get("stealth_combat") && !level flag::get("stealth_discovered")) {
-    if(isdefined(victim) && isdefined(victim.var_99baf927)) {
+    if(isDefined(victim) && isDefined(victim.var_99baf927)) {
       self stealth_vo::function_e3ae87b3(victim.var_99baf927);
-    } else if(!(isdefined(level.stealth.var_30d9fcc6) && level.stealth.var_30d9fcc6)) {
-      if(killcount > 1) {} else if(isdefined(weapon) && weapon.type == "bullet") {}
+    } else if(!(isDefined(level.stealth.var_30d9fcc6) && level.stealth.var_30d9fcc6)) {
+      if(killcount > 1) {} else if(isDefined(weapon) && weapon.type == "bullet") {}
     }
   }
 }
 
 function set_ignore_me_one_to_one(ignore) {
-  if(!isdefined(level.stealth)) {
+  if(!isDefined(level.stealth)) {
     return;
   }
-  if(!isdefined(level.stealth.enemies)) {
+  if(!isDefined(level.stealth.enemies)) {
     return;
   }
-  if(!isdefined(level.stealth.enemies[self.team])) {
+  if(!isDefined(level.stealth.enemies[self.team])) {
     return;
   }
   foreach(enemy in level.stealth.enemies[self.team]) {
-    if(!isdefined(enemy)) {
+    if(!isDefined(enemy)) {
       continue;
     }
     if(enemy stealth_aware::enabled()) {
@@ -331,7 +331,7 @@ function update_audio(e_other, bcansee, awareness) {
   if(!self enabled()) {
     return;
   }
-  if(!(isdefined(self.stealth.player_detected) && self.stealth.player_detected)) {
+  if(!(isDefined(self.stealth.player_detected) && self.stealth.player_detected)) {
     if(!bcombat) {
       if(bcansee) {
         self thread sighting_thread(awareness);
@@ -394,19 +394,19 @@ function function_509ca7a6(enemy) {
   now = gettime();
   var_9f8c9118 = now;
   entnum = self getentitynumber();
-  assert(isdefined(enemy));
-  assert(isdefined(enemy.stealth));
-  if(isdefined(self.stealth.incombat) && self.stealth.incombat) {
+  assert(isDefined(enemy));
+  assert(isDefined(enemy.stealth));
+  if(isDefined(self.stealth.incombat) && self.stealth.incombat) {
     return;
   }
-  if(isdefined(enemy.stealth.var_d1c69a51) && isdefined(enemy.stealth.var_d1c69a51[entnum]) && (now - enemy.stealth.var_d1c69a51[entnum]) < 20000) {
+  if(isDefined(enemy.stealth.var_d1c69a51) && isDefined(enemy.stealth.var_d1c69a51[entnum]) && (now - enemy.stealth.var_d1c69a51[entnum]) < 20000) {
     return;
   }
   if(getdvarint("stealth_indicator", 0)) {
     enemy notify("sight_indicator_" + entnum);
     enemy endon("sight_indicator_" + entnum);
     enemy endon("death");
-    if(!isdefined(enemy.stealth.var_d1c69a51)) {
+    if(!isDefined(enemy.stealth.var_d1c69a51)) {
       enemy.stealth.var_d1c69a51 = [];
     }
     enemy.stealth.var_d1c69a51[entnum] = now;
@@ -416,7 +416,7 @@ function function_509ca7a6(enemy) {
     enemy stealth_status::icon_show(self, var_f69107b4);
     str_shader = "white_stealth_spotting";
     color = (1, 1, 1);
-    if(isdefined(enemy.stealth.status.icon_ent) && isdefined(enemy.stealth.status.icons[index])) {
+    if(isDefined(enemy.stealth.status.icon_ent) && isDefined(enemy.stealth.status.icons[index])) {
       enemy.stealth.status.icons[index] settargetent(enemy.stealth.status.icon_ent);
       enemy.stealth.status.icons[index] setshader(str_shader, 5, 5);
       enemy.stealth.status.icons[index] setwaypoint(0, str_shader, 0, 0);
@@ -427,12 +427,12 @@ function function_509ca7a6(enemy) {
     var_8c974758 = 1 * 1000;
     var_61fba14c = min(1000, var_8c974758);
     var_a4ef7967 = 0;
-    while (var_a4ef7967 < var_8c974758) {
+    while(var_a4ef7967 < var_8c974758) {
       if(enemy stealth_aware::get_awareness() == "combat") {
         var_a4ef7967 = max(var_8c974758 - var_61fba14c, var_a4ef7967);
       }
       var_ddb74378 = basealpha + (sin(float(gettime())) * (1 - basealpha));
-      if((var_8c974758 - var_a4ef7967) <= var_61fba14c && isdefined(enemy.stealth.status.icon_ent) && isdefined(enemy.stealth.status.icons[index])) {
+      if((var_8c974758 - var_a4ef7967) <= var_61fba14c && isDefined(enemy.stealth.status.icon_ent) && isDefined(enemy.stealth.status.icons[index])) {
         alpha = var_ddb74378 * (float(var_8c974758 - var_a4ef7967)) / float(var_61fba14c);
         enemy.stealth.status.icons[index].alpha = min(max(alpha, 0), 1);
       } else {
@@ -446,12 +446,12 @@ function function_509ca7a6(enemy) {
 }
 
 function function_3f6bd04c(enemy) {
-  assert(isdefined(self.stealth));
+  assert(isDefined(self.stealth));
   now = gettime();
-  if(isdefined(self.stealth.incombat) && self.stealth.incombat) {
+  if(isDefined(self.stealth.incombat) && self.stealth.incombat) {
     return;
   }
-  if(isdefined(self.stealth.var_45848ab) && (now - self.stealth.var_45848ab) < 20000) {
+  if(isDefined(self.stealth.var_45848ab) && (now - self.stealth.var_45848ab) < 20000) {
     return;
   }
   self notify("hash_3f6bd04c");

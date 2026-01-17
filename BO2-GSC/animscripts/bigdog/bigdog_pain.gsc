@@ -63,7 +63,7 @@ bigdog_explosive_body_pain(forceexplosivedamage) {
 
     if(isDefined(painanim)) {
       self.paincausedhunkeringup = 1;
-      self playsound("veh_claw_hit_alert");
+      self playSound("veh_claw_hit_alert");
       bigdog_play_pain_anim(painanim, 0.5);
       self.hunkereddown = 0;
       self.paincausedhunkeringup = 0;
@@ -96,7 +96,7 @@ bigdog_leg_pain() {
     assert(isDefined(painanim));
 
     if(isDefined(painanim)) {
-      self playsound("veh_claw_hit_alert");
+      self playSound("veh_claw_hit_alert");
       bigdog_play_pain_anim(painanim);
       return true;
     }
@@ -191,7 +191,7 @@ bigdog_charged_or_sniper_weapon_pain() {
         assert(isDefined(painanim));
 
         if(isDefined(painanim)) {
-          self playsound("veh_claw_hit_alert");
+          self playSound("veh_claw_hit_alert");
           bigdog_play_pain_anim(painanim);
           self.hunkereddown = 0;
           return 1;

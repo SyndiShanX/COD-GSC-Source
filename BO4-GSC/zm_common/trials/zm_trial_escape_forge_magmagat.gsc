@@ -9,7 +9,6 @@
 #include scripts\zm_common\zm_score;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
-
 #namespace namespace_6c76c1da;
 
 autoexec __init__system__() {
@@ -24,12 +23,12 @@ __init__() {
   zm_trial::register_challenge(#"forge_magmagat", &on_begin, &on_end);
 }
 
-private on_begin() {
+on_begin() {
   level.var_e60b8c3a = undefined;
   level thread function_a543a954();
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   zm_trial_util::function_f3dbeda7();
 
   if(!round_reset && !(isDefined(level.var_e60b8c3a) && level.var_e60b8c3a)) {
@@ -39,9 +38,9 @@ private on_end(round_reset) {
   level.var_e60b8c3a = undefined;
 }
 
-private function_a543a954() {
+function_a543a954() {
   level endon(#"hash_7646638df88a3656");
-  level waittill(#"hash_5dc448a84a24492", #"magma_forge_completed");
+  level waittill(#"hash_5dc448a84a24492", # "magma_forge_completed");
   level.var_e60b8c3a = 1;
   zm_trial_util::function_7d32b7d0(1);
 }

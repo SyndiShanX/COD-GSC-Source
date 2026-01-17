@@ -14,9 +14,7 @@ main() {
 
   if(isusingmatchrulesdata()) {
     level.initializematchrules = ::initializematchrules;
-    [
-      [level.initializematchrules]
-    ]();
+    [[level.initializematchrules]]();
     level thread maps\mp\_utility::reinitializematchrulesonmigration();
   } else {
     maps\mp\_utility::registerroundswitchdvar(level.gametype, 0, 0, 9);
@@ -81,7 +79,7 @@ initializematchrules() {
 onstartgametype() {
   setclientnamemode("auto_change");
 
-  if(!isdefined(game["switchedsides"]))
+  if(!isDefined(game["switchedsides"]))
     game["switchedsides"] = 0;
 
   if(game["switchedsides"]) {
@@ -91,19 +89,19 @@ onstartgametype() {
     game["defenders"] = var_0;
   }
 
-  maps\mp\_utility::setobjectivetext("allies", & "OBJECTIVES_CONF");
-  maps\mp\_utility::setobjectivetext("axis", & "OBJECTIVES_CONF");
+  maps\mp\_utility::setobjectivetext("allies", &"OBJECTIVES_CONF");
+  maps\mp\_utility::setobjectivetext("axis", &"OBJECTIVES_CONF");
 
   if(level.splitscreen) {
-    maps\mp\_utility::setobjectivescoretext("allies", & "OBJECTIVES_CONF");
-    maps\mp\_utility::setobjectivescoretext("axis", & "OBJECTIVES_CONF");
+    maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_CONF");
+    maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_CONF");
   } else {
-    maps\mp\_utility::setobjectivescoretext("allies", & "OBJECTIVES_CONF_SCORE");
-    maps\mp\_utility::setobjectivescoretext("axis", & "OBJECTIVES_CONF_SCORE");
+    maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_CONF_SCORE");
+    maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_CONF_SCORE");
   }
 
-  maps\mp\_utility::setobjectivehinttext("allies", & "OBJECTIVES_CONF_HINT");
-  maps\mp\_utility::setobjectivehinttext("axis", & "OBJECTIVES_CONF_HINT");
+  maps\mp\_utility::setobjectivehinttext("allies", &"OBJECTIVES_CONF_HINT");
+  maps\mp\_utility::setobjectivehinttext("axis", &"OBJECTIVES_CONF_HINT");
   initspawns();
   level.dogtags = [];
   var_2[0] = level.gametype;
@@ -148,20 +146,20 @@ onnormaldeath(var_0, var_1, var_2) {
 spawndogtags(var_0, var_1) {
   var_2 = var_0.pers["team"];
 
-  if(isdefined(level.dogtags[var_0.guid])) {
-    playfx(level.conf_fx["vanish"], level.dogtags[var_0.guid].curorigin);
+  if(isDefined(level.dogtags[var_0.guid])) {
+    playFX(level.conf_fx["vanish"], level.dogtags[var_0.guid].curorigin);
     level.dogtags[var_0.guid] notify("reset");
   } else {
-    if(!isdefined(level.killconfirmeddogtagenemy))
+    if(!isDefined(level.killconfirmeddogtagenemy))
       level.killconfirmeddogtagenemy = "h1_dogtag_enemy_animated";
 
-    if(!isdefined(level.killconfirmeddogtagfriend))
+    if(!isDefined(level.killconfirmeddogtagfriend))
       level.killconfirmeddogtagfriend = "h1_dogtag_friend_animated";
 
     var_3[0] = spawn("script_model", (0, 0, 0));
-    var_3[0] setmodel(level.killconfirmeddogtagenemy);
+    var_3[0] setModel(level.killconfirmeddogtagenemy);
     var_3[1] = spawn("script_model", (0, 0, 0));
-    var_3[1] setmodel(level.killconfirmeddogtagfriend);
+    var_3[1] setModel(level.killconfirmeddogtagfriend);
     var_4 = spawn("trigger_radius", (0, 0, 0), 0, 32, 32);
     level.dogtags[var_0.guid] = maps\mp\gametypes\_gameobjects::createuseobject("any", var_4, var_3, (0, 0, 16));
     maps\mp\_utility::_objective_delete(level.dogtags[var_0.guid].objidallies);
@@ -218,7 +216,7 @@ showtoteam(var_0, var_1) {
       self showtoplayer(var_3);
   }
 
-  for (;;) {
+  for(;;) {
     level waittill("joined_team");
     self hide();
 
@@ -236,18 +234,18 @@ showtoteam(var_0, var_1) {
 }
 
 onuse(var_0) {
-  if(isdefined(var_0.owner))
+  if(isDefined(var_0.owner))
     var_0 = var_0.owner;
 
   var_1 = var_0.pers["team"];
 
   if(var_1 == self.victimteam) {
-    self.trigger playsound("mp_kc_tag_denied");
+    self.trigger playSound("mp_kc_tag_denied");
 
     if(isplayer(var_0))
       var_0 maps\mp\_utility::leaderdialogonplayer("kill_denied");
 
-    if(isdefined(self.attacker) && isplayer(self.attacker))
+    if(isDefined(self.attacker) && isplayer(self.attacker))
       self.attacker maps\mp\_utility::leaderdialogonplayer("kc_killlost");
 
     var_2 = self.victim == var_0;
@@ -256,7 +254,7 @@ onuse(var_0) {
     if(level.killstreak_tag_friendly)
       maps\mp\gametypes\_damage::incrementkillstreak(var_0);
   } else {
-    self.trigger playsound("mp_kc_tag_collected");
+    self.trigger playSound("mp_kc_tag_collected");
 
     if(isplayer(self.attacker) && self.attacker != var_0)
       level thread maps\mp\gametypes\_rank::awardgameevent("team_confirmed", self.attacker);
@@ -294,7 +292,7 @@ tagteamupdater(var_0) {
   level endon("game_ended");
   self endon("disconnect");
 
-  for (;;) {
+  for(;;) {
     self waittill("joined_team");
     var_0.victimteam = self.pers["team"];
     var_0 resettags();
@@ -306,18 +304,18 @@ clearonvictimdisconnect(var_0) {
   var_1 = var_0.guid;
   var_0 waittill("disconnect");
 
-  if(isdefined(level.dogtags[var_1])) {
+  if(isDefined(level.dogtags[var_1])) {
     level.dogtags[var_1] maps\mp\gametypes\_gameobjects::allowuse("none");
-    playfx(level.conf_fx["vanish"], level.dogtags[var_1].curorigin);
+    playFX(level.conf_fx["vanish"], level.dogtags[var_1].curorigin);
     level.dogtags[var_1] notify("reset");
     wait 0.05;
 
-    if(isdefined(level.dogtags[var_1])) {
+    if(isDefined(level.dogtags[var_1])) {
       objective_delete(level.dogtags[var_1].objid);
       objective_delete(level.dogtags[var_1].objidself);
       level.dogtags[var_1].trigger delete();
 
-      for (var_2 = 0; var_2 < level.dogtags[var_1].visuals.size; var_2++)
+      for(var_2 = 0; var_2 < level.dogtags[var_1].visuals.size; var_2++)
         level.dogtags[var_1].visuals[var_2] delete();
 
       level.dogtags[var_1] notify("deleted");

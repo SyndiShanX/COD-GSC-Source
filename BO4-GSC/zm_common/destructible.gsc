@@ -8,7 +8,6 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\gametypes\globallogic_player;
-
 #namespace destructible;
 
 autoexec __init__system__() {
@@ -67,7 +66,7 @@ destructible_event_callback(destructible_event, attacker, weapon) {
     explosion_radius = 300;
 
     switch (damage_type) {
-      case #"concussive":
+      case # "concussive":
         if(explosion_radius_type == "large") {
           explosion_radius = 280;
         } else {
@@ -75,7 +74,7 @@ destructible_event_callback(destructible_event, attacker, weapon) {
         }
 
         break;
-      case #"electrical":
+      case # "electrical":
         if(explosion_radius_type == "large") {
           explosion_radius = 60;
         } else {
@@ -83,7 +82,7 @@ destructible_event_callback(destructible_event, attacker, weapon) {
         }
 
         break;
-      case #"incendiary":
+      case # "incendiary":
         if(explosion_radius_type == "large") {
           explosion_radius = 250;
         } else {
@@ -100,7 +99,7 @@ destructible_event_callback(destructible_event, attacker, weapon) {
   }
 
   switch (destructible_event) {
-    case #"destructible_car_explosion":
+    case # "destructible_car_explosion":
       self destructible_car_explosion(attacker);
 
       if(isDefined(weapon)) {
@@ -108,7 +107,7 @@ destructible_event_callback(destructible_event, attacker, weapon) {
       }
 
       break;
-    case #"destructible_car_fire":
+    case # "destructible_car_fire":
       self thread destructible_car_fire_think(attacker);
 
       if(isDefined(weapon)) {
@@ -116,14 +115,14 @@ destructible_event_callback(destructible_event, attacker, weapon) {
       }
 
       break;
-    case #"explode":
+    case # "explode":
       self thread simple_explosion(attacker);
       break;
-    case #"explode_complex":
+    case # "explode_complex":
       self thread complex_explosion(attacker, explosion_radius);
       break;
-    case #"destructible_explosive_incendiary_large":
-    case #"destructible_explosive_incendiary_small":
+    case # "destructible_explosive_incendiary_large":
+    case # "destructible_explosive_incendiary_small":
       self explosive_incendiary_explosion(attacker, explosion_radius, 0);
 
       if(isDefined(weapon)) {
@@ -131,8 +130,8 @@ destructible_event_callback(destructible_event, attacker, weapon) {
       }
 
       break;
-    case #"destructible_explosive_electrical_small":
-    case #"destructible_explosive_electrical_large":
+    case # "destructible_explosive_electrical_small":
+    case # "destructible_explosive_electrical_large":
       self explosive_electrical_explosion(attacker, explosion_radius, 0);
 
       if(isDefined(weapon)) {
@@ -140,8 +139,8 @@ destructible_event_callback(destructible_event, attacker, weapon) {
       }
 
       break;
-    case #"destructible_explosive_concussive_large":
-    case #"destructible_explosive_concussive_small":
+    case # "destructible_explosive_concussive_large":
+    case # "destructible_explosive_concussive_small":
       self explosive_concussive_explosion(attacker, explosion_radius, 0);
 
       if(isDefined(weapon)) {
@@ -256,7 +255,7 @@ destructible_car_death_think() {
 }
 
 destructible_car_grenade_stuck_think() {
-  self endon(#"destructible_base_piece_death", #"car_dead", #"death");
+  self endon(#"destructible_base_piece_death", # "car_dead", # "death");
 
   for(;;) {
     waitresult = self waittill(#"grenade_stuck");
@@ -273,11 +272,11 @@ destructible_car_grenade_stuck_think() {
 }
 
 destructible_car_grenade_stuck_explode(missile) {
-  self endon(#"destructible_base_piece_death", #"car_dead", #"death");
+  self endon(#"destructible_base_piece_death", # "car_dead", # "death");
   owner = getmissileowner(missile);
 
   if(isDefined(owner) && missile.model == "wpn_t7_c4_world") {
-    owner endon(#"disconnect", #"weapon_object_destroyed");
+    owner endon(#"disconnect", # "weapon_object_destroyed");
     missile endon(#"picked_up");
     missile thread destructible_car_hacked_c4(self);
   }
@@ -293,7 +292,7 @@ destructible_car_grenade_stuck_explode(missile) {
 }
 
 destructible_car_hacked_c4(car) {
-  car endon(#"destructible_base_piece_death", #"car_dead", #"death");
+  car endon(#"destructible_base_piece_death", # "car_dead", # "death");
   self endon(#"death");
   self waittill(#"hacked");
   self notify(#"picked_up");

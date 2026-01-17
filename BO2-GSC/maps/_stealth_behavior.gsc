@@ -70,7 +70,7 @@ enemy_try_180_turn(pos) {
   if(self._stealth.logic.dog) {
     return;
   }
-  vec1 = anglestoforward(self.angles);
+  vec1 = anglesToForward(self.angles);
   vec2 = vectornormalize(pos - self.origin);
 
   if(vectordot(vec1, vec2) < -0.8) {
@@ -171,7 +171,7 @@ ai_clear_custom_animation_reaction_and_idle() {
 }
 
 ai_set_custom_animation_reaction(node, anime, tag, ender) {
-  self._stealth.behavior.event.custom_animation = spawnstruct();
+  self._stealth.behavior.event.custom_animation = spawnStruct();
   self._stealth.behavior.event.custom_animation.node = node;
   self._stealth.behavior.event.custom_animation.anime = anime;
   self._stealth.behavior.event.custom_animation.tag = tag;
@@ -196,7 +196,7 @@ ai_animate_props_on_death(node, anime, tag, ender) {
 
 system_init(state_functions) {
   assert(isDefined(level._stealth), "There is no level._stealth struct.You ran stealth behavior before running the detection logic.Run _stealth_logic::main() in your level load first");
-  level._stealth.behavior = spawnstruct();
+  level._stealth.behavior = spawnStruct();
   level._stealth.behavior.sound = [];
   level._stealth.behavior.sound["huh"] = 0;
   level._stealth.behavior.sound["hmph"] = 0;
@@ -204,7 +204,7 @@ system_init(state_functions) {
   level._stealth.behavior.sound["spotted"] = 0;
   level._stealth.behavior.sound["corpse"] = 0;
   level._stealth.behavior.sound["alert"] = 0;
-  level._stealth.behavior.corpse = spawnstruct();
+  level._stealth.behavior.corpse = spawnStruct();
   level._stealth.behavior.corpse.last_pos = vectorscale((0, 0, -1), 100000.0);
   level._stealth.behavior.corpse.search_radius = 512;
   level._stealth.behavior.corpse.node_array = undefined;
@@ -291,7 +291,7 @@ enemy_logic(state_functions, alert_functions, corpse_functions, awareness_functi
 
 enemy_init(state_functions, alert_functions, corpse_functions, awareness_functions) {
   assert(isDefined(self._stealth), "There is no self._stealth struct.You ran stealth behavior before running the detection logic.Run _stealth_logic::enemy_init() on this AI first");
-  self._stealth.behavior = spawnstruct();
+  self._stealth.behavior = spawnStruct();
   self._stealth.behavior.sndnum = randomintrange(1, 4);
   self._stealth.behavior.ai_functions = [];
   self._stealth.behavior.ai_functions["state"] = [];
@@ -312,7 +312,7 @@ enemy_init(state_functions, alert_functions, corpse_functions, awareness_functio
   self ent_flag_init("_stealth_behavior_reaction_anim");
   self ent_flag_init("_stealth_behavior_first_reaction");
   self ent_flag_init("_stealth_behavior_reaction_anim_in_progress");
-  self._stealth.behavior.event = spawnstruct();
+  self._stealth.behavior.event = spawnStruct();
 
   if(self._stealth.logic.dog)
     self enemy_dog_init();
@@ -596,8 +596,7 @@ enemy_animation_attack(type) {
   self notify("stop_animmode");
 }
 
-enemy_animation_nothing(type) {
-}
+enemy_animation_nothing(type) {}
 
 enemy_animation_generic(type) {
   self.allowdeath = 1;
@@ -960,7 +959,7 @@ enemy_announce_wtf() {
   if(!self enemy_announce_snd("wtf")) {
     return;
   }
-  self playsound("RU_0_reaction_casualty_generic");
+  self playSound("RU_0_reaction_casualty_generic");
 }
 
 enemy_announce_huh() {
@@ -968,7 +967,7 @@ enemy_announce_huh() {
     return;
   }
   alias = "scoutsniper_ru" + self._stealth.behavior.sndnum + "_huh";
-  self playsound(alias);
+  self playSound(alias);
 }
 
 enemy_announce_hmph() {
@@ -976,7 +975,7 @@ enemy_announce_hmph() {
     return;
   }
   alias = "scoutsniper_ru" + self._stealth.behavior.sndnum + "_hmph";
-  self playsound(alias);
+  self playSound(alias);
 }
 
 enemy_announce_spotted(pos) {
@@ -991,7 +990,7 @@ enemy_announce_spotted(pos) {
   if(self._stealth.logic.dog) {
     return;
   }
-  self playsound("RU_0_reaction_casualty_generic");
+  self playSound("RU_0_reaction_casualty_generic");
 }
 
 enemy_announce_spotted_bring_team(pos) {
@@ -1020,7 +1019,7 @@ enemy_announce_corpse() {
   if(!self enemy_announce_snd("corpse")) {
     return;
   }
-  self playsound("RU_0_reaction_casualty_generic");
+  self playSound("RU_0_reaction_casualty_generic");
 }
 
 enemy_announce_snd(type) {
@@ -1223,7 +1222,7 @@ friendly_logic(state_functions) {
 
 friendly_init(state_functions) {
   assert(isDefined(self._stealth), "There is no self._stealth struct.You ran stealth behavior before running the detection logic.Run _stealth_logic::friendly_init() on this AI first");
-  self._stealth.behavior = spawnstruct();
+  self._stealth.behavior = spawnStruct();
   self._stealth.behavior.accuracy = [];
   self._stealth.behavior.goodaccuracy = 50;
   self._stealth.behavior.badaccuracy = 0;
@@ -1444,7 +1443,7 @@ friendly_stance_handler_set_stance_up() {
 }
 
 friendly_stance_handler_return_ai_sight(ai, stance) {
-  vec1 = anglestoforward(ai.angles);
+  vec1 = anglesToForward(ai.angles);
   vec2 = vectornormalize(self.origin - ai.origin);
   vecdot = vectordot(vec1, vec2);
   state = level._stealth.logic.detection_level;
@@ -1484,9 +1483,7 @@ default_event_awareness(dialogue_func, ender1, ender2, ender3) {
     array_thread(getaiarray("allies"), ::default_event_awareness_handle_changes);
     flag_set("_stealth_event");
     wait 2;
-    [
-      [dialogue_func]
-    ]();
+    [[dialogue_func]]();
     default_event_awareness_waitclear(type);
     array_thread(getaiarray("allies"), ::default_event_awareness_cleanup);
     flag_clear("_stealth_event");

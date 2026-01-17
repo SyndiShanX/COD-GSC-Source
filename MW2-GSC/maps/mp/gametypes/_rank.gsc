@@ -56,8 +56,8 @@ init() {
 
   pId = 0;
   rId = 0;
-  for (pId = 0; pId <= level.maxPrestige; pId++) {
-    for (rId = 0; rId <= level.maxRank; rId++)
+  for(pId = 0; pId <= level.maxPrestige; pId++) {
+    for(rId = 0; rId <= level.maxRank; rId++)
       precacheShader(tableLookup("mp/rankIconTable.csv", 0, rId, pId + 1));
   }
 
@@ -65,7 +65,7 @@ init() {
   rankName = tableLookup("mp/ranktable.csv", 0, rankId, 1);
   assert(isDefined(rankName) && rankName != "");
 
-  while (isDefined(rankName) && rankName != "") {
+  while(isDefined(rankName) && rankName != "") {
     level.rankTable[rankId][1] = tableLookup("mp/ranktable.csv", 0, rankId, 1);
     level.rankTable[rankId][2] = tableLookup("mp/ranktable.csv", 0, rankId, 2);
     level.rankTable[rankId][3] = tableLookup("mp/ranktable.csv", 0, rankId, 3);
@@ -87,7 +87,7 @@ init() {
 patientZeroWaiter() {
   level endon("game_ended");
 
-  while (!isDefined(level.players) || !level.players.size)
+  while(!isDefined(level.players) || !level.players.size)
     wait(0.05);
 
   if(!matchMakingGame()) {
@@ -147,14 +147,13 @@ getRankInfoLevel(rankId) {
 }
 
 onPlayerConnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connected", player);
 
-    /#
     if(getDvarInt("scr_forceSequence"))
       player setPlayerData("experience", 145499);
-    # /
-      player.pers["rankxp"] = player maps\mp\gametypes\_persistence::statGet("experience");
+
+    player.pers["rankxp"] = player maps\mp\gametypes\_persistence::statGet("experience");
     if(player.pers["rankxp"] < 0) // paranoid defensive
       player.pers["rankxp"] = 0;
 
@@ -233,7 +232,7 @@ onPlayerConnect() {
 onJoinedTeam() {
   self endon("disconnect");
 
-  for (;;) {
+  for(;;) {
     self waittill("joined_team");
     self thread removeRankHUD();
   }
@@ -242,7 +241,7 @@ onJoinedTeam() {
 onJoinedSpectators() {
   self endon("disconnect");
 
-  for (;;) {
+  for(;;) {
     self waittill("joined_spectators");
     self thread removeRankHUD();
   }
@@ -251,7 +250,7 @@ onJoinedSpectators() {
 onPlayerSpawned() {
   self endon("disconnect");
 
-  for (;;) {
+  for(;;) {
     self waittill("spawned_player");
   }
 }
@@ -268,14 +267,14 @@ giveRankXP(type, value) {
 
   lootType = "none";
 
-  if(!self rankingEnabled())
+  if(!self rankingEnabled()) {
     return;
-
+  }
   if(level.teamBased && (!level.teamCount["allies"] || !level.teamCount["axis"]))
     return;
-  else if(!level.teamBased && (level.teamCount["allies"] + level.teamCount["axis"] < 2))
+  else if(!level.teamBased && (level.teamCount["allies"] + level.teamCount["axis"] < 2)) {
     return;
-
+  }
   if(!isDefined(value))
     value = getScoreInfoValue(type);
 
@@ -409,9 +408,9 @@ updateRankAnnounceHUD() {
   self endon("update_rank");
 
   team = self.pers["team"];
-  if(!isdefined(team))
+  if(!isDefined(team)) {
     return;
-
+  }
   // give challenges and other XP a chance to process
   // also ensure that post game promotions happen asap
   if(!levelFlag("game_over"))
@@ -423,13 +422,13 @@ updateRankAnnounceHUD() {
 
   thread maps\mp\gametypes\_hud_message::promotionSplashNotify();
 
-  if(subRank > 1)
+  if(subRank > 1) {
     return;
-
-  for (i = 0; i < level.players.size; i++) {
+  }
+  for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
     playerteam = player.pers["team"];
-    if(isdefined(playerteam) && player != self) {
+    if(isDefined(playerteam) && player != self) {
       if(playerteam == team)
         player iPrintLn(&"RANK_PLAYER_WAS_PROMOTED", self, newRankName);
     }
@@ -445,9 +444,9 @@ scorePopup(amount, bonus, hudColor, glowAlpha) {
   self endon("joined_team");
   self endon("joined_spectators");
 
-  if(amount == 0)
+  if(amount == 0) {
     return;
-
+  }
   self notify("scorePopup");
   self endon("scorePopup");
 
@@ -457,9 +456,9 @@ scorePopup(amount, bonus, hudColor, glowAlpha) {
   wait(0.05);
 
   if(self.xpUpdateTotal < 0)
-    self.hud_scorePopup.label = & "";
+    self.hud_scorePopup.label = &"";
   else
-    self.hud_scorePopup.label = & "MP_PLUS";
+    self.hud_scorePopup.label = &"MP_PLUS";
 
   self.hud_scorePopup.color = hudColor;
   self.hud_scorePopup.glowColor = hudColor;
@@ -472,7 +471,7 @@ scorePopup(amount, bonus, hudColor, glowAlpha) {
   increment = max(int(self.bonusUpdateTotal / 20), 1);
 
   if(self.bonusUpdateTotal) {
-    while (self.bonusUpdateTotal > 0) {
+    while(self.bonusUpdateTotal > 0) {
       self.xpUpdateTotal += min(self.bonusUpdateTotal, increment);
       self.bonusUpdateTotal -= min(self.bonusUpdateTotal, increment);
 
@@ -513,7 +512,7 @@ getRankForXp(xpVal) {
   rankName = level.rankTable[rankId][1];
   assert(isDefined(rankName));
 
-  while (isDefined(rankName) && rankName != "") {
+  while(isDefined(rankName) && rankName != "") {
     if(xpVal < getRankInfoMinXP(rankId) + getRankInfoXPAmt(rankId))
       return rankId;
 
@@ -542,12 +541,12 @@ getRankXP() {
 }
 
 incRankXP(amount) {
-  if(!self rankingEnabled())
+  if(!self rankingEnabled()) {
     return;
-
-  if(isDefined(self.isCheater))
+  }
+  if(isDefined(self.isCheater)) {
     return;
-
+  }
   xp = self getRankXP();
   newXp = (xp + amount);
 

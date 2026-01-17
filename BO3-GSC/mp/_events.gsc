@@ -17,9 +17,9 @@ function add_timed_event(seconds, notify_string, client_notify_string) {
 }
 
 function timed_event_monitor(seconds, notify_string, client_notify_string) {
-  for (;;) {
+  for(;;) {
     wait(0.5);
-    if(!isdefined(level.starttime)) {
+    if(!isDefined(level.starttime)) {
       continue;
     }
     millisecs_remaining = globallogic_utils::gettimeremaining();
@@ -64,7 +64,7 @@ function any_team_reach_score(score) {
 }
 
 function score_team_event_monitor(score, notify_string, client_notify_string) {
-  for (;;) {
+  for(;;) {
     wait(0.5);
     if(any_team_reach_score(score)) {
       event_notify(notify_string, client_notify_string);
@@ -74,11 +74,11 @@ function score_team_event_monitor(score, notify_string, client_notify_string) {
 }
 
 function score_event_monitor(score, notify_string, client_notify_string) {
-  for (;;) {
+  for(;;) {
     wait(0.5);
     players = getplayers();
-    for (i = 0; i < players.size; i++) {
-      if(isdefined(players[i].score) && players[i].score >= score) {
+    for(i = 0; i < players.size; i++) {
+      if(isDefined(players[i].score) && players[i].score >= score) {
         event_notify(notify_string, client_notify_string);
         return;
       }
@@ -87,10 +87,10 @@ function score_event_monitor(score, notify_string, client_notify_string) {
 }
 
 function event_notify(notify_string, client_notify_string) {
-  if(isdefined(notify_string)) {
+  if(isDefined(notify_string)) {
     level notify(notify_string);
   }
-  if(isdefined(client_notify_string)) {
+  if(isDefined(client_notify_string)) {
     util::clientnotify(client_notify_string);
   }
 }

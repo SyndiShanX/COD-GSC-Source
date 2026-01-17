@@ -74,13 +74,13 @@ cleanup_ents(str_category) {
     level.a_e_cleanup[str_category] = undefined;
   }
 
-  a_ents = getentarray(str_category, "script_noteworthy");
+  a_ents = getEntArray(str_category, "script_noteworthy");
 
   foreach(ent in a_ents)
   ent delete();
 
   if(str_category == "cleanup_outersolar") {
-    foreach(e_solarsystem in getentarray("solar_systems", "script_noteworthy"))
+    foreach(e_solarsystem in getEntArray("solar_systems", "script_noteworthy"))
     e_solarsystem delete();
   }
 }
@@ -91,7 +91,7 @@ cleanup(ent) {
 }
 
 cleanup_kvp(str_value, str_key) {
-  array_delete(getentarray(str_value, str_key));
+  array_delete(getEntArray(str_value, str_key));
 }
 
 cleanup_structs(str_category) {
@@ -110,7 +110,7 @@ delete_structs(str_value, str_key) {
 
 setup_elevator(str_brushmodelname, str_modelname, str_cleanup) {
   bm_lift = getent(str_brushmodelname, "targetname");
-  a_bm_door_clips = getentarray(bm_lift.target, "targetname");
+  a_bm_door_clips = getEntArray(bm_lift.target, "targetname");
 
   foreach(bm_door_clip in a_bm_door_clips)
   bm_door_clip linkto(bm_lift);
@@ -136,7 +136,7 @@ elevator_move_doors(b_open, n_time, n_accel, n_decel, b_connect_paths) {
   if(!isDefined(n_decel))
     n_decel = 0.0;
 
-  a_doors = getentarray(self.target, "targetname");
+  a_doors = getEntArray(self.target, "targetname");
 
   foreach(m_door in a_doors) {
     if(b_open)
@@ -235,8 +235,7 @@ spawn_fn_ai_run_to_prone_node(player_favourate_enemy, str_cleanup_category, igno
   self entity_common_spawn_setup(player_favourate_enemy, str_cleanup_category, ignore_surpression, disable_grenades);
 }
 
-spawn_fn_ai_run_to_jumper_node(player_favourate_enemy, str_cleanup_category, ignore_surpression, disable_grenades, attack_dist) {
-}
+spawn_fn_ai_run_to_jumper_node(player_favourate_enemy, str_cleanup_category, ignore_surpression, disable_grenades, attack_dist) {}
 
 run_to_jumper_damage_override(e_inflictor, e_attacker, n_damage, n_flags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, n_model_index, psoffsettime, str_bone_name) {
   if(isDefined(self.npc_damage_scale))
@@ -365,8 +364,7 @@ aggressive_runner(str_category, n_delay) {
   self.canflank = 1;
 }
 
-player_rusher(str_category, delay, breakoff_distance, npc_damage_scale, npc_damage_scale_breakoff, disable_pain) {
-}
+player_rusher(str_category, delay, breakoff_distance, npc_damage_scale, npc_damage_scale_breakoff, disable_pain) {}
 
 helicopter_fly_down_attack_path(teleport_to_start_node, use_start_node_angles, initial_delay, accel, str_start_struct, reached_node_dist, delete_at_path_end) {
   self endon("death");
@@ -395,7 +393,7 @@ helicopter_fly_down_attack_path(teleport_to_start_node, use_start_node_angles, i
 
     self setspeed(speed, accel, accel);
     self setvehgoalpos(s_node.origin);
-    dir = anglestoforward(s_prev_node.angles);
+    dir = anglesToForward(s_prev_node.angles);
     e_look_at_ent.origin = s_node.origin + dir * 840;
     self setlookatent(e_look_at_ent);
     dist = distance(self.origin, s_node.origin);
@@ -464,7 +462,7 @@ civ_idle() {
 }
 
 camera_think() {
-  v_camera_eyes = self geteye();
+  v_camera_eyes = self getEye();
   level.e_extra_cam.origin = v_camera_eyes;
   level.e_extra_cam.angles = self.angles;
   level.e_extra_cam linkto(self);
@@ -854,7 +852,7 @@ should_stop_at_goal() {
 helicopter_unload(nd_path) {
   self sethoverparams(0, 0, 10);
   goal = nd_path.origin;
-  trace = bullettrace(nd_path.origin, nd_path.origin - vectorscale((0, 0, 1), 10000.0), 0, undefined, 1);
+  trace = bulletTrace(nd_path.origin, nd_path.origin - vectorscale((0, 0, 1), 10000.0), 0, undefined, 1);
 
   if(trace["fraction"] <= 1)
     goal = (trace["position"][0], trace["position"][1], trace["position"][2] + self.fastropeoffset);
@@ -911,7 +909,7 @@ spawn_func_helicopter() {
 }
 
 can_see_position(v_pos, req_dot) {
-  v_forward = anglestoforward(level.player.angles);
+  v_forward = anglesToForward(level.player.angles);
   v_dir = v_pos - level.player.origin;
   v_dir = vectornormalize(v_dir);
   dp = vectordot(v_forward, v_dir);
@@ -994,7 +992,7 @@ add_effect_to_ent_when_stops_falling(delay, str_ent_targetname, effect, min_wait
     wait 0.2;
   }
 
-  playfx(effect, e_ai.origin);
+  playFX(effect, e_ai.origin);
 }
 
 die_behind_player(s_exit) {
@@ -1047,7 +1045,7 @@ kill_behind_player() {
     n_kill = clamp(n_ai - max_ai, 0, level.auto_kill_ai.size);
 
     if(n_kill > 0) {
-      v_eye = level.player geteye();
+      v_eye = level.player getEye();
       i = 0;
 
       while(n_kill > 0 && i < level.auto_kill_ai.size) {
@@ -1083,11 +1081,11 @@ fxanim_destruct_until_flag(str_name, str_flag) {
 
 wipe_volume(str_volume) {
   a_touching_ents = [];
-  a_touching_ents = arraycombine(a_touching_ents, getentarray("script_model", "classname"), 0, 0);
+  a_touching_ents = arraycombine(a_touching_ents, getEntArray("script_model", "classname"), 0, 0);
   a_touching_ents = arraycombine(a_touching_ents, getspawnerarray(), 0, 0);
   a_touching_ents = arraycombine(a_touching_ents, getaiarray(), 0, 0);
   a_other_ents = [];
-  a_other_ents = arraycombine(a_other_ents, getentarray("script_brushmodel", "classname"), 0, 0);
+  a_other_ents = arraycombine(a_other_ents, getEntArray("script_brushmodel", "classname"), 0, 0);
   a_other_ents = arraycombine(a_other_ents, get_triggers(), 0, 0);
   e_cleanup_volume = getent(str_volume, "targetname");
   n_count = 0;

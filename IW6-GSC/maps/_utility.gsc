@@ -392,7 +392,7 @@ level_end_save() {
 
   common_scripts\utility::flag_set("game_saving");
   var_2 = "levelshots / autosave / autosave_" + level.script + "end";
-  savegame("levelend", & "AUTOSAVE_AUTOSAVE", var_2, 1);
+  savegame("levelend", &"AUTOSAVE_AUTOSAVE", var_2, 1);
   common_scripts\utility::flag_clear("game_saving");
 }
 
@@ -3707,16 +3707,12 @@ do_in_order(var_0, var_1, var_2, var_3) {
   if(isDefined(var_1))
     [[var_0]](var_1);
   else
-    [
-      [var_0]
-    ]();
+    [[var_0]]();
 
   if(isDefined(var_3))
     [[var_2]](var_3);
   else
-    [
-      [var_2]
-    ]();
+    [[var_2]]();
 }
 
 send_notify(var_0, var_1) {
@@ -4310,19 +4306,13 @@ display_hint_stick_timeout_mintime(var_0, var_1, var_2, var_3, var_4, var_5, var
 
 check_hint_condition(var_0, var_1, var_2, var_3) {
   if(isDefined(var_3))
-    return [
-      [level.trigger_hint_func[var_0]]
-    ](var_1, var_2, var_3);
+    return [[level.trigger_hint_func[var_0]]](var_1, var_2, var_3);
 
   if(isDefined(var_2))
-    return [
-      [level.trigger_hint_func[var_0]]
-    ](var_1, var_2);
+    return [[level.trigger_hint_func[var_0]]](var_1, var_2);
 
   if(isDefined(var_1))
-    return [
-      [level.trigger_hint_func[var_0]]
-    ](var_1);
+    return [[level.trigger_hint_func[var_0]]](var_1);
 
   return [[level.trigger_hint_func[var_0]]]();
 }

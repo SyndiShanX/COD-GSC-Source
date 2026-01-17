@@ -13,7 +13,6 @@
 #include scripts\core_common\util_shared;
 #include scripts\mp_common\draft;
 #include scripts\mp_common\gametypes\globallogic_utils;
-
 #namespace mp_cosmodrome_scripted;
 
 autoexec __init__system__() {
@@ -50,7 +49,7 @@ on_game_playing() {
 
   level thread function_56b1158f(level.var_40263d6);
 
-    level util::delay(#"emergency_lights_start", "game_ended", &exploder::stop_exploder, "exp_lgt_spawn_flavor");
+  level util::delay(#"emergency_lights_start", "game_ended", &exploder::stop_exploder, "exp_lgt_spawn_flavor");
   level util::delay(#"emergency_lights_start", "game_ended", &function_aa8af5cd, level.var_40263d6, "evt_base_alarm");
 
   if(getgametypesetting(#"allowmapscripting")) {
@@ -144,7 +143,6 @@ function_b121d5f5() {
 
   foreach(i, countdown_line in countdown_lines) {
     if(getdvarint(#"hash_8ddd1821fceebe9", 0)) {
-
       iprintlnbold(i);
 
     }
@@ -167,7 +165,7 @@ function_efa3251f() {
   }
 
   foreach(team, _ in level.teams) {
-    if(game.stat[#"teamscores"][team] >= int(round_score_limit / 2)) {
+    if(game.stat[# "teamscores"][team] >= int(round_score_limit / 2)) {
       return true;
     }
   }
@@ -183,7 +181,7 @@ rocket_init() {
 }
 
 function_84d0eb82(a_ents) {
-  cradle = a_ents[#"prop 2"];
+  cradle = a_ents[# "prop 2"];
   waitframe(2);
 
   if(isDefined(cradle)) {
@@ -218,16 +216,16 @@ function_e3ec98e4(a_ents) {
 
   array::run_all(rumbles, &playrumblelooponentity, "mp_cosdmodrome_gantry_prep_rumble");
   function_aa8af5cd(level.var_40263d6, "vox_rupa_pa_rocket_sequence_3");
-  a_ents[#"prop 2"] waittill(#"stop_rumble", #"death");
+  a_ents[# "prop 2"] waittill(#"stop_rumble", # "death");
   array::run_all(rumbles, &stoprumble, "mp_cosdmodrome_rocket_ready_rumble");
 
-  if(isDefined(a_ents[#"prop 2"])) {
-    a_ents[#"prop 2"] playrumbleonentity("mp_cosdmodrome_rocket_ready_rumble");
+  if(isDefined(a_ents[# "prop 2"])) {
+    a_ents[# "prop 2"] playrumbleonentity("mp_cosdmodrome_rocket_ready_rumble");
   }
 
   array::run_all(rumbles, &playrumblelooponentity, "mp_cosdmodrome_rocket_ready_gantry_rumble");
   array::delete_all(rumbles);
-  a_ents[#"prop 2"] waittill(#"rocket_on_pad");
+  a_ents[# "prop 2"] waittill(#"rocket_on_pad");
   function_aa8af5cd(level.var_40263d6, "vox_rupa_pa_rocket_sequence_7");
 }
 
@@ -236,25 +234,25 @@ function_269c793(a_ents) {
 
   if(isDefined(self.rocket_kill_trig)) {
     level endon(#"game_ended");
-    a_ents[#"prop 3"] endon(#"death");
+    a_ents[# "prop 3"] endon(#"death");
     rumble_ent = util::spawn_model(#"tag_origin", self.rocket_kill_trig.origin);
-    rumble_ent linkto(a_ents[#"prop 3"]);
-    a_ents[#"prop 3"] waittill(#"start_damage");
-    a_ents[#"prop 3"] util::delay("line_23", undefined, &function_aa8af5cd, level.var_40263d6, "vox_rupa_pa_rocket_sequence_23");
+    rumble_ent linkto(a_ents[# "prop 3"]);
+    a_ents[# "prop 3"] waittill(#"start_damage");
+    a_ents[# "prop 3"] util::delay("line_23", undefined, &function_aa8af5cd, level.var_40263d6, "vox_rupa_pa_rocket_sequence_23");
     level.var_578a0ca4 thread function_7be405f8();
     self.rocket_kill_trig triggerenable(1);
     self.rocket_kill_trig callback::on_trigger(&function_971b8aa2);
-    self thread function_6edeb4c2(a_ents[#"prop 3"]);
+    self thread function_6edeb4c2(a_ents[# "prop 3"]);
     rumble_ent playrumblelooponentity("mp_cosdmodrome_rocket_rumble");
-    a_ents[#"prop 3"] waittill(#"stop_damage");
+    a_ents[# "prop 3"] waittill(#"stop_damage");
     level thread function_aa8af5cd(level.var_40263d6, "vox_rupa_pa_rocket_sequence_19");
 
     if(isDefined(self) && isDefined(self.rocket_kill_trig)) {
       self.rocket_kill_trig triggerenable(0);
     }
 
-    a_ents[#"prop 3"] thread util::delete_on_death(rumble_ent);
-    a_ents[#"prop 3"] waittill(#"cleared_tower");
+    a_ents[# "prop 3"] thread util::delete_on_death(rumble_ent);
+    a_ents[# "prop 3"] waittill(#"cleared_tower");
     level thread function_aa8af5cd(level.var_40263d6, "vox_rupa_pa_rocket_sequence_20");
   }
 }
@@ -275,7 +273,7 @@ function_971b8aa2(var_ae2faaca) {
 
 function_6edeb4c2(rocket) {
   level endon(#"game_ended");
-  rocket endon(#"stop_damage", #"death");
+  rocket endon(#"stop_damage", # "death");
 
   while(true) {
     self kill_equipment(self.rocket_kill_trig);
@@ -351,19 +349,19 @@ function_6c6d4350() {
 
   level thread function_56b1158f(locs, (1, 1, 0));
 
-    foreach(loc in locs) {
-      playsoundatposition("evt_gantry_alarm", loc);
+  foreach(loc in locs) {
+    playsoundatposition("evt_gantry_alarm", loc);
 
-      level thread function_cd7664d5(loc, "<dev string:x38>", (1, 1, 0));
+    level thread function_cd7664d5(loc, "<dev string:x38>", (1, 1, 0));
 
-    }
+  }
 }
 
 is_equipment(entity) {
   if(isDefined(entity.weapon)) {
     weapon = entity.weapon;
 
-    if(weapon.name === #"ability_smart_cover" || weapon.name === #"eq_tripwire" || weapon.name === #"trophy_system" || weapon.name === #"eq_concertina_wire" || weapon.name === #"eq_sensor" || weapon.name === #"cymbal_monkey" || weapon.name === #"gadget_supplypod" || weapon.name === #"homunculus") {
+    if(weapon.name === # "ability_smart_cover" || weapon.name === # "eq_tripwire" || weapon.name === # "trophy_system" || weapon.name === # "eq_concertina_wire" || weapon.name === # "eq_sensor" || weapon.name === # "cymbal_monkey" || weapon.name === # "gadget_supplypod" || weapon.name === # "homunculus") {
       return true;
     }
   }
@@ -384,25 +382,25 @@ kill_equipment(rocket_kill_trig) {
   foreach(device in equipment) {
     if(isDefined(device) && is_equipment(device) && device istouching(rocket_kill_trig)) {
       switch (device.weapon.name) {
-        case #"eq_tripwire":
+        case # "eq_tripwire":
           device[[level.var_2e06b76a]]();
           break;
-        case #"trophy_system":
+        case # "trophy_system":
           device[[level.var_4f3822f4]]();
           break;
-        case #"cymbal_monkey":
+        case # "cymbal_monkey":
           device[[level.var_7c5c96dc]]();
           break;
-        case #"homunculus":
+        case # "homunculus":
           device[[level.var_cc310d06]]();
           break;
-        case #"eq_sensor":
+        case # "eq_sensor":
           device[[level.var_9911d36f]]();
           break;
-        case #"eq_concertina_wire":
+        case # "eq_concertina_wire":
           device[[level.var_94029383]]();
           break;
-        case #"gadget_supplypod":
+        case # "gadget_supplypod":
           device notify(#"death");
           break;
         default:
@@ -434,22 +432,21 @@ function_cd7664d5(loc, alias, color) {
   }
 
   if(getdvarint(#"hash_2115192db52b1b16", 0)) {
-
     print3d(loc + (0, 0, 32), alias, color, 1, 1.2, 120);
 
   }
 }
 
-  function debug_pa() {
-    while(true) {
-      wait 3;
-      function_aa8af5cd(level.var_40263d6, "evt_base_alarm");
-      wait 3;
-      function_b121d5f5();
-      function_aa8af5cd(level.var_40263d6, "evt_rocket_alarm");
-      wait 5;
-      function_aa8af5cd(level.var_40263d6, "vox_rupa_pa_rocket_sequence_3");
-      wait 3;
-      function_aa8af5cd(level.var_40263d6, "vox_rupa_pa_rocket_sequence_7");
-    }
+function debug_pa() {
+  while(true) {
+    wait 3;
+    function_aa8af5cd(level.var_40263d6, "evt_base_alarm");
+    wait 3;
+    function_b121d5f5();
+    function_aa8af5cd(level.var_40263d6, "evt_rocket_alarm");
+    wait 5;
+    function_aa8af5cd(level.var_40263d6, "vox_rupa_pa_rocket_sequence_3");
+    wait 3;
+    function_aa8af5cd(level.var_40263d6, "vox_rupa_pa_rocket_sequence_7");
   }
+}

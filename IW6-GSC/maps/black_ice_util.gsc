@@ -33,7 +33,7 @@ fire_death_watcher(var_0, var_1) {
 
     if(isDefined(var_1) && var_1.classname != "worldspawn") {
       if(var_1 == level._fire_damage_ent && self.health - var_0 <= 0) {
-        setdvar("ui_deadquote", & "BLACK_ICE_DEATH_FIRE");
+        setdvar("ui_deadquote", &"BLACK_ICE_DEATH_FIRE");
         maps\_utility::missionfailedwrapper();
       }
     }

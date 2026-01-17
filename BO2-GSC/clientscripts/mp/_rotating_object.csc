@@ -6,7 +6,7 @@
 #include clientscripts\mp\_utility;
 
 init(localclientnum) {
-  rotating_objects = getentarray(localclientnum, "rotating_object", "targetname");
+  rotating_objects = getEntArray(localclientnum, "rotating_object", "targetname");
   array_thread(rotating_objects, ::rotating_object_think);
 }
 

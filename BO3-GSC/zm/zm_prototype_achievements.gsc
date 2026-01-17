@@ -18,15 +18,15 @@
 #namespace zm_prototype_achievements;
 
 function autoexec __init__sytem__() {
-  system::register("zm_theater_achievements", & __init__, undefined, undefined);
+  system::register("zm_theater_achievements", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  level.achievement_sound_func = & achievement_sound_func;
+  level.achievement_sound_func = &achievement_sound_func;
   level thread function_dab290f5();
   level thread function_94bb4bfb();
-  zm_spawner::register_zombie_death_event_callback( & function_1abfde35);
-  callback::on_connect( & onplayerconnect);
+  zm_spawner::register_zombie_death_event_callback(&function_1abfde35);
+  callback::on_connect(&onplayerconnect);
 }
 
 function achievement_sound_func(achievement_name_lower) {
@@ -34,7 +34,7 @@ function achievement_sound_func(achievement_name_lower) {
   if(!sessionmodeisonlinegame()) {
     return;
   }
-  for (i = 0; i < (self getentitynumber() + 1); i++) {
+  for(i = 0; i < (self getentitynumber() + 1); i++) {
     util::wait_network_frame();
   }
   self thread zm_utility::do_player_general_vox("general", "achievement");
@@ -49,7 +49,7 @@ function function_dab290f5() {
   level endon("i_said_were_closed_failed");
   level waittill("start_zombie_round_logic");
   level thread function_2d04250a();
-  while (level.round_number < 3) {
+  while(level.round_number < 3) {
     level waittill("end_of_round");
   }
   level zm_utility::giveachievement_wrapper("ZM_PROTOTYPE_I_SAID_WERE_CLOSED", 1);
@@ -57,10 +57,10 @@ function function_dab290f5() {
 }
 
 function function_2d04250a() {
-  assert(isdefined(level.zombie_spawners), "");
-  array::thread_all(level.zombie_spawners, & spawner::add_spawn_function, & function_c97e69a9);
+  assert(isDefined(level.zombie_spawners), "");
+  array::thread_all(level.zombie_spawners, &spawner::add_spawn_function, &function_c97e69a9);
   level util::waittill_any("i_said_were_closed_failed", "i_said_were_closed_completed");
-  array::run_all(level.zombie_spawners, & spawner::remove_spawn_function, & function_c97e69a9);
+  array::run_all(level.zombie_spawners, &spawner::remove_spawn_function, &function_c97e69a9);
 }
 
 function function_c97e69a9() {
@@ -80,7 +80,7 @@ function function_94bb4bfb() {
   level endon("end_game");
   level endon("door_opened");
   level waittill("start_of_round");
-  while (level.round_number <= 10) {
+  while(level.round_number <= 10) {
     level waittill("end_of_round");
   }
 }
@@ -89,7 +89,7 @@ function function_405cf907() {
   level endon("end_game");
   self endon("disconnect");
   self.var_dc48525e = 0;
-  while (self.var_dc48525e < 5) {
+  while(self.var_dc48525e < 5) {
     self thread function_b32b243f();
     self function_7ea87222();
   }
@@ -100,7 +100,7 @@ function function_7ea87222() {
   level endon("end_game");
   level endon("end_of_round");
   self endon("disconnect");
-  while (self.var_dc48525e < 5) {
+  while(self.var_dc48525e < 5) {
     self waittill("hash_abf05fe4");
     self.var_dc48525e++;
   }
@@ -115,7 +115,7 @@ function function_b32b243f() {
 }
 
 function function_1abfde35(e_attacker) {
-  if(isdefined(e_attacker) && isdefined(self.damagemod) && isdefined(level.lastexplodingbarrel) && isdefined(level.lastexplodingbarrel["origin"])) {
+  if(isDefined(e_attacker) && isDefined(self.damagemod) && isDefined(level.lastexplodingbarrel) && isDefined(level.lastexplodingbarrel["origin"])) {
     if(self.damagemod != "MOD_EXPLOSIVE") {
       return;
     }

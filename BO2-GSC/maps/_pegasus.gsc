@@ -71,13 +71,13 @@ set_deathmodel(v_point, v_dir) {
 
   if(isDefined(self.deathmodel)) {
     str_deathmodel = self.deathmodel;
-    self setmodel(str_deathmodel);
-    self playsound("evt_pegasus_explo");
-    self playsound("evt_drone_explo_close");
+    self setModel(str_deathmodel);
+    self playSound("evt_pegasus_explo");
+    self playSound("evt_drone_explo_close");
     playsoundatposition("evt_debris_flythrough", self.origin);
 
     if(isDefined(self.fx_crash_effects["fireball_trail_lg"]))
-      playfxontag(self.fx_crash_effects["fireball_trail_lg"], self, "tag_origin");
+      playFXOnTag(self.fx_crash_effects["fireball_trail_lg"], self, "tag_origin");
   }
 
   deathmodel_pieces = [];
@@ -88,7 +88,7 @@ set_deathmodel(v_point, v_dir) {
     str_fx_tag = a_fx_tags[i];
     deathmodel_pieces[i] = spawn("script_model", self gettagorigin(str_model_tag));
     deathmodel_pieces[i].angles = self gettagangles(str_model_tag);
-    deathmodel_pieces[i] setmodel(str_model);
+    deathmodel_pieces[i] setModel(str_model);
     deathmodel_pieces[i] linkto(self, str_model_tag);
     deathmodel_pieces[i] thread delete_deathmodel_piece();
   }
@@ -110,7 +110,7 @@ set_deathmodel(v_point, v_dir) {
       deathmodel_pieces[i].b_launched = 1;
 
       if(isDefined(self.fx_crash_effects["fire_trail_lg"]))
-        playfxontag(self.fx_crash_effects["fire_trail_lg"], deathmodel_pieces[i], "tag_origin");
+        playFXOnTag(self.fx_crash_effects["fire_trail_lg"], deathmodel_pieces[i], "tag_origin");
     }
   }
 }
@@ -142,7 +142,7 @@ update_damage_states() {
 
     if(self.health <= self.maxhealth * 0.5) {
       if(isDefined(self.fx_crash_effects["fire_trail_lg"]))
-        playfxontag(self.fx_crash_effects["fire_trail_lg"], self, "tag_origin");
+        playFXOnTag(self.fx_crash_effects["fire_trail_lg"], self, "tag_origin");
 
       is_damaged = 1;
     }

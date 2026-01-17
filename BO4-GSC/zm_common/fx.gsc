@@ -8,7 +8,6 @@
 #include scripts\core_common\sound_shared;
 #include scripts\core_common\struct;
 #include scripts\zm_common\util;
-
 #namespace fx;
 
 print_org(fxcommand, fxid, fxpos, waittime) {
@@ -24,9 +23,9 @@ print_org(fxcommand, fxid, fxpos, waittime) {
   }
 }
 
-  function gunfireloopfx(fxid, fxpos, shotsmin, shotsmax, shotdelaymin, shotdelaymax, betweensetsmin, betweensetsmax) {
-    thread gunfireloopfxthread(fxid, fxpos, shotsmin, shotsmax, shotdelaymin, shotdelaymax, betweensetsmin, betweensetsmax);
-  }
+function gunfireloopfx(fxid, fxpos, shotsmin, shotsmax, shotdelaymin, shotdelaymax, betweensetsmin, betweensetsmax) {
+  thread gunfireloopfxthread(fxid, fxpos, shotsmin, shotsmax, shotdelaymin, shotdelaymax, betweensetsmin, betweensetsmax);
+}
 
 gunfireloopfxthread(fxid, fxpos, shotsmin, shotsmax, shotdelaymin, shotdelaymax, betweensetsmin, betweensetsmax) {
   level endon(#"stop all gunfireloopfx");
@@ -129,6 +128,6 @@ gunfireloopfxvecthread(fxid, fxpos, fxpos2, shotsmin, shotsmax, shotdelaymin, sh
 }
 
 grenadeexplosionfx(pos) {
-  playFX(level._effect[#"mechanical explosion"], pos);
+  playFX(level._effect[# "mechanical explosion"], pos);
   earthquake(0.15, 0.5, pos, 250);
 }

@@ -10,7 +10,6 @@
 #include scripts\core_common\perks;
 #include scripts\core_common\weapons_shared;
 #include scripts\weapons\weapon_utils;
-
 #namespace armor;
 
 event_handler[gametype_init] main(eventstruct) {
@@ -19,13 +18,13 @@ event_handler[gametype_init] main(eventstruct) {
 
 function_9c8b5737() {
   self.lightarmor = {
-    #amount: 0, 
-    #max: 0, 
-    #var_2274e560: 1, 
+    #amount: 0,
+    #max: 0,
+    #var_2274e560: 1,
     #var_cdeeec29: 1
   };
   self.var_59a874a7 = {
-    #var_2274e560: 1, 
+    #var_2274e560: 1,
     #var_cdeeec29: 1
   };
   self set_armor(0, 0, 0, 1, 0);
@@ -83,7 +82,7 @@ setlightarmor(optionalarmorvalue, var_2274e560, var_cdeeec29) {
 }
 
 removelightarmorondeath() {
-  self endon(#"disconnect", #"give_light_armor", #"remove_light_armor");
+  self endon(#"disconnect", # "give_light_armor", # "remove_light_armor");
   self waittill(#"death");
   unsetlightarmor();
 }
@@ -94,7 +93,7 @@ unsetlightarmor() {
 }
 
 removelightarmoronmatchend() {
-  self endon(#"disconnect", #"remove_light_armor");
+  self endon(#"disconnect", # "remove_light_armor");
   level waittill(#"game_ended");
   self thread unsetlightarmor();
 }
@@ -255,7 +254,7 @@ get_armor_bars() {
   return math::clamp(self.armorbarcount, 1, 10);
 }
 
-private function_37f4e0e0(smeansofdeath, shitloc) {
+function_37f4e0e0(smeansofdeath, shitloc) {
   if(!isDefined(smeansofdeath)) {
     return true;
   }
@@ -297,8 +296,8 @@ private function_37f4e0e0(smeansofdeath, shitloc) {
   return false;
 }
 
-private function_7538fede(weapon) {
-  if(weapon.name == #"ar_stealth_t8_operator") {
+function_7538fede(weapon) {
+  if(weapon.name == # "ar_stealth_t8_operator") {
     return true;
   }
 

@@ -114,7 +114,7 @@ jetgun_fx_fire(localclientnum) {
   for(i = level.jetgun_steam_vents; i > 0; i--)
     playviewmodelfx(localclientnum, fx, "tag_steam" + i);
 
-  playsound(localclientnum, "wpn_thunder_breath", (0, 0, 0));
+  playSound(localclientnum, "wpn_thunder_breath", (0, 0, 0));
 }
 
 jetgun_notetrack_think() {
@@ -135,12 +135,11 @@ jetgun_notetrack_think() {
   }
 }
 
-jetgun_death_effects(localclientnum, weaponname, userdata) {
-}
+jetgun_death_effects(localclientnum, weaponname, userdata) {}
 
 thread_zombie_vox() {
   ent = spawn(0, self.origin, "script_origin");
-  playsound(0, "wpn_thundergun_proj_impact_zombie", ent.origin);
+  playSound(0, "wpn_thundergun_proj_impact_zombie", ent.origin);
   wait 5;
   ent delete();
 }

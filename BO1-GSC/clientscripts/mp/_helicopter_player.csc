@@ -73,8 +73,8 @@ spawnWarningLight(localClientNum) {
   self endon("entityshutdown");
   if(!IsInVehicle(localClientNum, self))
     return;
-  self.warningLight = PlayFXOnTag(localClientnum, level.fx_hind_warning, self, "tag_origin");
-  for (;;) {
+  self.warningLight = playFXOnTag(localClientnum, level.fx_hind_warning, self, "tag_origin");
+  for(;;) {
     if(!isDefined(self.warningLight))
       return;
     if(!IsInVehicle(localClientNum, self)) {
@@ -96,7 +96,7 @@ chopperGunnerSpawned(localClientNum, set) {
   self chopperGunnerOpenDoor(localClientNum, false);
   self setHelicopterEnvEffects(localClientNum);
   wait(0.1);
-  self.cloudFX = PlayFXOnTag(localClientNum, level.fx_door_ambient, self, "tag_origin");
+  self.cloudFX = playFXOnTag(localClientNum, level.fx_door_ambient, self, "tag_origin");
 }
 #using_animtree("multiplayer");
 checkForPlayerSwitch(localClientNum) {
@@ -121,17 +121,17 @@ spawnFakePlayer(localClientNum) {
   self endon("entityshutdown");
   level endon("demo_player_switch");
   serverWait(localClientNum, 0.1);
-  for (;;) {
+  for(;;) {
     if(!isDefined(self.fakePlayer) && !IsInVehicle(localClientNum, self)) {
       self.fakePlayer = spawn(localClientNum, self.origin, "script_model");
       self.fakePlayer thread watchShutdownForFakePlayer(self);
       self linkFakePlayer();
       team = GetLocalPlayerTeam(localClientNum);
       if(team == "allies") {
-        self.fakePlayer SetModel(level.chopper_gunner_player_model[level.allies_team]);
+        self.fakePlayer setModel(level.chopper_gunner_player_model[level.allies_team]);
         self.fakePlayer Attach(level.chopper_gunner_player_head[level.allies_team], "");
       } else {
-        self.fakePlayer SetModel(level.chopper_gunner_player_model[level.axis_team]);
+        self.fakePlayer setModel(level.chopper_gunner_player_model[level.axis_team]);
         self.fakePlayer Attach(level.chopper_gunner_player_head[level.allies_team], "");
       }
       wait(0.2);
@@ -160,7 +160,7 @@ watchShutdownForFakePlayer(heli) {
 }
 linkFakePlayer() {
   self.fakePlayer.angles = self GetTagAngles("tag_gunner1");
-  forwardVec = AnglesToForward(self.fakePlayer.angles);
+  forwardVec = anglesToForward(self.fakePlayer.angles);
   rightVec = AnglesToRight(self.fakePlayer.angles);
   self.fakePlayer.origin = self GetTagOrigin("tag_gunner1");
   self.fakeplayer LinkTo(self, "tag_gunner1");
@@ -174,7 +174,7 @@ setHelicopterEnvEffects(localClientNum) {
 helicopterEnvEffectsUpdate(localClientNum) {
   self endon("entityshutdown");
   insideHeli = false;
-  for (;;) {
+  for(;;) {
     if(IsInHelicopter(localClientNum) != insideHeli) {
       if(insideHeli) {
         if(isDefined(level.helicopter_fog) && level.helicopter_fog) {
@@ -194,7 +194,7 @@ helicopterEnvEffectsUpdate(localClientNum) {
         }
         if(isDefined(level.fx_local_heli_rain) && !isDefined(self.localRainFX)) {
           println("Start helicopter rain");
-          self.localRainFX = PlayFXOnTag(localClientNum, level.fx_local_heli_rain, self, "tag_origin");
+          self.localRainFX = playFXOnTag(localClientNum, level.fx_local_heli_rain, self, "tag_origin");
         }
         insideHeli = true;
       }
@@ -276,7 +276,7 @@ updateFakePlayer() {
   level endon("demo_player_switch");
   upDownBlend = 0;
   rightLeftBlend = 0;
-  for (;;) {
+  for(;;) {
     localAngles = self GetLocalGunnerAngles(0);
     upDownBlend = getBlend(localAngles[0]);
     rightLeftBlend = getBlend(localAngles[1]);
@@ -300,7 +300,7 @@ chopperGunnerInteriorLight(localClientNum, fxID, timeout) {
   self waittill_dobj(localClientNum);
   if(isDefined(self.doorStateFX))
     stopfx(localClientNum, self.doorStateFX);
-  self.doorStateFX = PlayFXOnTag(localClientNum, fxID, self, "tag_origin");
+  self.doorStateFX = playFXOnTag(localClientNum, fxID, self, "tag_origin");
   if(!isDefined(timeout))
     return;
   wait(timeout);
@@ -311,7 +311,7 @@ debugAnimLoop() {
   self endon("entityshutdown");
   level endon("demo_player_switch");
   animTime = 0.2;
-  while (1) {
+  while(1) {
     wait 2;
     self SetAnim(level.chopper_door_open_state, 0, 0, 1);
     self SetAnim(level.chopper_door_closed_state, 1, 0, 1);
@@ -322,7 +322,7 @@ debugAnimLoop() {
 }
 chopperGunnerOpenDoor(localClientNum, set) {
   self endon("entityshutdown");
-  while (!(self HasAnimTree())) {
+  while(!(self HasAnimTree())) {
     self chopperUseAnimTree();
     wait(0.1);
   }
@@ -354,7 +354,7 @@ chopperDoorOpenSound() {
   self endon("entityshutdown");
   level endon("demo_player_switch");
   wait .7;
-  self playsound(0, "veh_heli_door");
+  self playSound(0, "veh_heli_door");
 }
 chopperCrashing(localClientNum, set) {
   self endon("entityshutdown");
@@ -362,7 +362,7 @@ chopperCrashing(localClientNum, set) {
   if(!set)
     return;
   localPlayers = getlocalplayers();
-  for (i = 0; i < localPlayers.size; i++) {
+  for(i = 0; i < localPlayers.size; i++) {
     self thread chopperCrashingFX(localPlayers[i]);
     self thread chopperCrashingEarthquake(localClientNum, localPlayers[i]);
   }
@@ -377,7 +377,7 @@ chopperCrashingEarthquake(localClientNum, player) {
   player endon("entityshutdown");
   self endon("entityshutdown");
   self endon("stop_player_fx");
-  while (1) {
+  while(1) {
     player Earthquake(randomFloatRange(0.5, 1.5), randomFloatRange(0.5, 2), self.origin, 1024);
     self PlayRumbleOnEntity(localClientNum, "grenade_rumble");
     wait(randomFloatRange(0.25, 1));
@@ -387,15 +387,15 @@ spawnFakeArms(localClientNum) {
   self endon("entityshutdown");
   level endon("demo_player_switch");
   origin = self GetTagOrigin("tag_gunner_barrel2_anim");
-  arms = Spawn(localClientNum, origin, "script_model");
+  arms = spawn(localClientNum, origin, "script_model");
   arms.angles = self GetTagAngles("tag_gunner_barrel2_anim");
   arms LinkTo(self, "tag_gunner_barrel2_anim");
   arms Hide();
   team = GetLocalPlayerTeam(localClientNum);
   if(team == "allies") {
-    arms SetModel(level.chopper_gunner_viewmodel[level.allies_team]);
+    arms setModel(level.chopper_gunner_viewmodel[level.allies_team]);
   } else {
-    arms SetModel(level.chopper_gunner_viewmodel[level.axis_team]);
+    arms setModel(level.chopper_gunner_viewmodel[level.axis_team]);
   }
   arms UseAnimTree(#animtree, true);
   self.fakeArms = arms;

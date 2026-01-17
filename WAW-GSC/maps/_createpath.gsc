@@ -49,7 +49,7 @@ main() {
     level.path_selectindex = level.path_views.size;
   level.path_viewindex = undefined;
   thread path_viewmode();
-  while (1) {
+  while(1) {
     path_enable();
     path_editmode_update();
     path_select_next();
@@ -74,18 +74,18 @@ path_enable() {
 }
 
 path_waittill_enable() {
-  while (getdvar("path_enable") != "1")
+  while(getdvar("path_enable") != "1")
     wait .1;
 }
 
 path_viewmode() {
   wait .1;
-  while (1) {
+  while(1) {
     path_waittill_enable();
     flag_set("path_Notviewing");
     flag_clear("path_refresh");
     thread path_connectlines();
-    for (i = 0; i < level.path_views[level.path_selectid].size; i++)
+    for(i = 0; i < level.path_views[level.path_selectid].size; i++)
       level.path_views[level.path_selectid][i] thread path_viewwait(i);
     thread path_activatebutton();
     thread path_handleselectindex();
@@ -97,10 +97,10 @@ path_viewmode() {
 path_connectlines() {
   level endon("path_refresh");
   dots = [];
-  for (i = 0; i < level.path_views[level.path_selectid].size; i++) {
+  for(i = 0; i < level.path_views[level.path_selectid].size; i++) {
     dots[i] = level.path_views[level.path_selectid][i].origin;
   }
-  while (1) {
+  while(1) {
     plot_points(dots, 1, 0, 0, .05);
     wait .05;
   }
@@ -108,16 +108,16 @@ path_connectlines() {
 
 path_activatebutton() {
   level endon("path_refresh");
-  while (1) {
+  while(1) {
     players = get_players();
-    while (!players[0] usebuttonpressed())
+    while(!players[0] usebuttonpressed())
       wait .05;
     pick = path_getvisible();
     if(isDefined(pick.index)) {
       level.path_selectindex = pick.index;
       level.path_selectid = path_createid(pick.ident);
     }
-    while (players[0] usebuttonpressed())
+    while(players[0] usebuttonpressed())
       wait .05;
   }
 }
@@ -125,7 +125,7 @@ path_activatebutton() {
 path_handleselectindex() {
   level endon("path_refresh");
   lastselect = level.path_selectindex;
-  while (1) {
+  while(1) {
     if(!isDefined(level.path_views[level.path_selectid][lastselect]))
       level.pathmod setshader("psourcecreate", level.pathmodsize * 2, level.pathmodsize);
     if(lastselect == level.path_selectindex) {
@@ -143,10 +143,10 @@ path_hudshow() {
   flag_clear("path_Notviewing");
   level.pathmod setshader("psourcemodify", level.pathmodsize * 2, level.pathmodsize);
   players[0] freezecontrols(true);
-  players[0] setorigin(self.origin + (players[0].origin - players[0] geteye()) - vector_multiply(anglestoforward(self.angles), 3));
+  players[0] setorigin(self.origin + (players[0].origin - players[0] getEye()) - vector_multiply(anglesToForward(self.angles), 3));
   players[0] setplayerangles(self.angles);
   flag_set("path_refresh");
-  while (players[0] islookingorg(self) && players[0] usebuttonpressed())
+  while(players[0] islookingorg(self) && players[0] usebuttonpressed())
     wait .05;
   players[0] freezecontrols(false);
   flag_set("path_Notviewing");
@@ -156,12 +156,12 @@ path_getvisible() {
   outident = undefined;
   index = undefined;
   dist = 1000000;
-  for (j = 0; j < level.paths_selectid_list.size; j++) {
+  for(j = 0; j < level.paths_selectid_list.size; j++) {
     ident = level.paths_selectid_list[j];
-    for (i = 0; i < level.path_views[ident].size; i++) {
+    for(i = 0; i < level.path_views[ident].size; i++) {
       players = get_players();
       if(players[0] islookingorg(level.path_views[ident][i])) {
-        newdist = distance(players[0] geteye(), level.path_views[ident][i].origin);
+        newdist = distance(players[0] getEye(), level.path_views[ident][i].origin);
         if(newdist < dist) {
           dist = newdist;
           index = i;
@@ -170,7 +170,7 @@ path_getvisible() {
       }
     }
   }
-  outvar = spawnstruct();
+  outvar = spawnStruct();
   outvar.index = index;
   outvar.ident = outident;
   return outvar;
@@ -183,13 +183,13 @@ path_viewwait(index) {
   viewradexpandcount = 0;
   viewraddir = 1;
   frametime = .05;
-  while (1) {
+  while(1) {
     players = get_players();
     if(distance(flat_origin(self.origin), flat_origin(players[0].origin)) < 32) {
       wait .05;
       continue;
     }
-    thread draw_arrow_time(self.origin, self.origin + vector_multiply(anglestoforward(self.angles), arrowlength), (0, 1, 1), frametime);
+    thread draw_arrow_time(self.origin, self.origin + vector_multiply(anglesToForward(self.angles), arrowlength), (0, 1, 1), frametime);
     if(level.path_selectindex == index)
       thread plot_circle_star_fortime(level.path_selectrad, frametime, (1, 1, 0));
     else
@@ -224,14 +224,14 @@ plot_circle_star_fortime(radius, time, color) {
   plotpoints = [];
   rad = 0.000;
   timer = gettime() + (time * 1000);
-  while (gettime() < timer) {
+  while(gettime() < timer) {
     players = get_players();
-    angletoplayer = vectortoangles(self.origin - players[0] geteye());
-    for (i = 0; i < circleres; i++) {
-      plotpoints[plotpoints.size] = self.origin + vector_multiply(anglestoforward((angletoplayer + (rad, 90, 0))), radius);
+    angletoplayer = vectortoangles(self.origin - players[0] getEye());
+    for(i = 0; i < circleres; i++) {
+      plotpoints[plotpoints.size] = self.origin + vector_multiply(anglesToForward((angletoplayer + (rad, 90, 0))), radius);
       rad += circleinc;
     }
-    for (i = 0; i < plotpoints.size; i++)
+    for(i = 0; i < plotpoints.size; i++)
       line(plotpoints[i], self.origin, color, 1);
     plotpoints = [];
     wait hangtime;
@@ -251,11 +251,11 @@ plot_circle_fortime(radius, time, color) {
   plotpoints = [];
   rad = 0.000;
   timer = gettime() + (time * 1000);
-  while (gettime() < timer) {
+  while(gettime() < timer) {
     players = get_players();
-    angletoplayer = vectortoangles(self.origin - players[0] geteye());
-    for (i = 0; i < circleres; i++) {
-      plotpoints[plotpoints.size] = self.origin + vector_multiply(anglestoforward((angletoplayer + (rad, 90, 0))), radius);
+    angletoplayer = vectortoangles(self.origin - players[0] getEye());
+    for(i = 0; i < circleres; i++) {
+      plotpoints[plotpoints.size] = self.origin + vector_multiply(anglesToForward((angletoplayer + (rad, 90, 0))), radius);
       rad += circleinc;
     }
     plot_points(plotpoints, color[0], color[1], color[2], hangtime);
@@ -305,13 +305,13 @@ path_setview() {
 
 path_setvieworgang(view) {
   players = get_players();
-  view.origin = players[0] geteye();
+  view.origin = players[0] getEye();
   view.angles = players[0] getplayerangles();
 }
 
 path_trigger_setvieworgang(view) {
   players = get_players();
-  view.origin = players[0] geteye();
+  view.origin = players[0] getEye();
   view.radius = 200;
 }
 
@@ -326,15 +326,15 @@ path_dump() {
   println("--------******--------");
   println(" ");
   println(" ");
-  for (j = 0; j < level.paths_selectid_list.size; j++) {
+  for(j = 0; j < level.paths_selectid_list.size; j++) {
     ident = level.paths_selectid_list[j];
     println("path ident: " + ident);
-    for (i = 0; i < level.path_views[ident].size; i++)
+    for(i = 0; i < level.path_views[ident].size; i++)
       println(level.path_views[ident][i].origin + "," + level.path_views[ident][i].angles);
   }
-  for (j = 0; j < level.paths_selectid_list.size; j++) {
+  for(j = 0; j < level.paths_selectid_list.size; j++) {
     ident = level.paths_selectid_list[j];
-    for (i = 0; i < level.path_views[ident].size; i++) {
+    for(i = 0; i < level.path_views[ident].size; i++) {
       println("maps\\\_createpath::path_create(\"" + level.path_views[ident][i].origin + "," + level.path_views[ident][i].angles + ");");
     }
   }
@@ -381,7 +381,7 @@ path_delete() {
   if(getdvar("path_delete") == "")
     return;
   newarray = [];
-  for (i = 0; i < level.path_views[level.path_selectid].size; i++)
+  for(i = 0; i < level.path_views[level.path_selectid].size; i++)
     if(i != level.path_selectindex)
       newarray[newarray.size] = level.path_views[level.path_selectid][i];
   level.path_views = newarray;
@@ -422,7 +422,7 @@ path_getcurrentview() {
 }
 
 path_trigger_newview(bScriptAdded) {
-  view = spawnstruct();
+  view = spawnStruct();
   if(!bScriptAdded)
     path_trigger_setvieworgang(view);
   if(isDefined(level.path_triggers[level.path_selectid][level.path_selectindex]))
@@ -434,7 +434,7 @@ path_trigger_newview(bScriptAdded) {
 }
 
 path_newview(bScriptAdded) {
-  view = spawnstruct();
+  view = spawnStruct();
   if(!bScriptAdded) {
     path_setvieworgang(view);
   }
@@ -449,7 +449,7 @@ path_newview(bScriptAdded) {
 path_createid(ident) {
   if(!isDefined(level.paths_selectid_list))
     level.paths_selectid_list = [];
-  for (i = 0; i < level.paths_selectid_list.size; i++) {
+  for(i = 0; i < level.paths_selectid_list.size; i++) {
     if(ident == level.paths_selectid_list[i])
       return ident;
   }
@@ -498,10 +498,10 @@ path_trigger_create(position, radius, ident) {
 }
 
 islookingorg(view) {
-  normalvec = vectorNormalize(view.origin - self geteye());
-  veccomp = vectorNormalize((view.origin - (0, 0, level.path_selectrad * 2)) - self geteye());
+  normalvec = vectorNormalize(view.origin - self getEye());
+  veccomp = vectorNormalize((view.origin - (0, 0, level.path_selectrad * 2)) - self getEye());
   insidedot = vectordot(normalvec, veccomp);
-  anglevec = anglestoforward(self getplayerangles());
+  anglevec = anglesToForward(self getplayerangles());
   vectordot = vectordot(anglevec, normalvec);
   if(vectordot > insidedot)
     return true;

@@ -24,17 +24,17 @@ main() {
 
 onStartGameType() {
   setClientNameMode("auto_change");
-  maps\mp\gametypes\_globallogic::setObjectiveText("allies", & "OBJECTIVES_DM");
-  maps\mp\gametypes\_globallogic::setObjectiveText("axis", & "OBJECTIVES_DM");
+  maps\mp\gametypes\_globallogic::setObjectiveText("allies", &"OBJECTIVES_DM");
+  maps\mp\gametypes\_globallogic::setObjectiveText("axis", &"OBJECTIVES_DM");
   if(level.splitscreen) {
-    maps\mp\gametypes\_globallogic::setObjectiveScoreText("allies", & "OBJECTIVES_DM");
-    maps\mp\gametypes\_globallogic::setObjectiveScoreText("axis", & "OBJECTIVES_DM");
+    maps\mp\gametypes\_globallogic::setObjectiveScoreText("allies", &"OBJECTIVES_DM");
+    maps\mp\gametypes\_globallogic::setObjectiveScoreText("axis", &"OBJECTIVES_DM");
   } else {
-    maps\mp\gametypes\_globallogic::setObjectiveScoreText("allies", & "OBJECTIVES_DM_SCORE");
-    maps\mp\gametypes\_globallogic::setObjectiveScoreText("axis", & "OBJECTIVES_DM_SCORE");
+    maps\mp\gametypes\_globallogic::setObjectiveScoreText("allies", &"OBJECTIVES_DM_SCORE");
+    maps\mp\gametypes\_globallogic::setObjectiveScoreText("axis", &"OBJECTIVES_DM_SCORE");
   }
-  maps\mp\gametypes\_globallogic::setObjectiveHintText("allies", & "OBJECTIVES_DM_HINT");
-  maps\mp\gametypes\_globallogic::setObjectiveHintText("axis", & "OBJECTIVES_DM_HINT");
+  maps\mp\gametypes\_globallogic::setObjectiveHintText("allies", &"OBJECTIVES_DM_HINT");
+  maps\mp\gametypes\_globallogic::setObjectiveHintText("axis", &"OBJECTIVES_DM_HINT");
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);
   maps\mp\gametypes\_spawnlogic::addSpawnPoints("allies", "mp_dm_spawn");

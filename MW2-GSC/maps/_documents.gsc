@@ -8,18 +8,18 @@
 	trigger_use must have origin brush or it will be usable even if activate_notify is set
 	also needs that so the use icon goes away after use
 	- each trigger_use targets the script_model of the documents
-	- add script call, example script call: 
+	- add script call, example script call:
 	thread maps\_documents::main(1, "Capture the enemy documents", "documents_triggers");
-	The "objective_number" parameter is the number of this objective, 
+	The "objective_number" parameter is the number of this objective,
 	the "array_targetname" parameter is the target name of the trigger_use(s)
 	The "activate_notify" parameter is the notify the bombs wait for before becoming usable
 */
 
 main(objective_number, objective_text, array_targetname, activate_notify) {
-  documents = getentarray(array_targetname, "targetname");
+  documents = getEntArray(array_targetname, "targetname");
   println(array_targetname, " documents.size: ", documents.size);
 
-  for (i = 0; i < documents.size; i++) {
+  for(i = 0; i < documents.size; i++) {
     documents[i].document = getent(documents[i].target, "targetname");
     documents[i].used = 0;
     documents[i] thread document_think(activate_notify, array_targetname);
@@ -30,19 +30,19 @@ main(objective_number, objective_text, array_targetname, activate_notify) {
     //obj_text = (objective_text1 + remaining_documents + objective_text2);
 
     closest = get_closest_document(documents);
-    if(isdefined(closest)) {
+    if(isDefined(closest)) {
       objective_add(objective_number, "active", objective_text, (closest.document.origin));
       objective_string(objective_number, objective_text, remaining_documents);
     }
 
-    while (1) {
+    while(1) {
       level waittill(array_targetname + " gotten");
 
       remaining_documents--;
       objective_string(objective_number, objective_text, remaining_documents);
 
       closest = get_closest_document(documents);
-      if(isdefined(closest)) {
+      if(isDefined(closest)) {
         objective_position(objective_number, (closest.document.origin));
         objective_ring(objective_number);
       } else {
@@ -58,7 +58,7 @@ main(objective_number, objective_text, array_targetname, activate_notify) {
 get_closest_document(array) {
   range = 500000000;
   ent = undefined;
-  for (i = 0; i < array.size; i++) {
+  for(i = 0; i < array.size; i++) {
     if(!array[i].used) {
       newrange = distance(level.player getorigin(), array[i].document.origin);
       if(newrange < range) {
@@ -67,7 +67,7 @@ get_closest_document(array) {
       }
     }
   }
-  if(isdefined(ent))
+  if(isDefined(ent))
     return array[ent];
   else
     return;
@@ -76,10 +76,10 @@ get_closest_document(array) {
 document_think(activate_notify, array_targetname) {
   //	println ("waittill trigger");
 
-  // Press &&1 to pick up the documents.
+  // Press && 1 to pick up the documents.
   self setHintString(&"SCRIPT_PLATFORM_HINTSTR_DOCUMENTS");
 
-  if(isdefined(activate_notify)) {
+  if(isDefined(activate_notify)) {
     self maps\_utility::trigger_off();
     self.document hide();
 

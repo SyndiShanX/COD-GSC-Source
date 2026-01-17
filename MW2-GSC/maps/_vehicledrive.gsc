@@ -15,7 +15,7 @@ main() {
 }
 
 vehicle_wait(startinvehicle) {
-  if(!isdefined(startinvehicle))
+  if(!isDefined(startinvehicle))
     startinvehicle = false;
   else if(startinvehicle) {
     if(getdvar("player_vehicle_dismountable") == "off")
@@ -23,7 +23,7 @@ vehicle_wait(startinvehicle) {
   }
   self endon("death");
   self endon("stop_vehicle_wait");
-  while (self.health > 0) {
+  while(self.health > 0) {
     if(!(startinvehicle))
       self waittill("trigger");
     else {
@@ -31,12 +31,13 @@ vehicle_wait(startinvehicle) {
       self useby(level.player);
     }
     owner = self getvehicleowner();
-    if(isdefined(owner) && isplayer(owner))
+    if(isDefined(owner) && isplayer(owner))
       self thread vehicle_enter();
     else
       self thread vehicle_exit();
-    if(startinvehicle)
+    if(startinvehicle) {
       break;
+    }
     wait 0.05;
   }
 }
@@ -46,16 +47,16 @@ vehicle_exit() {
   level.playervehicle = level.playervehiclenone;
   level notify("player exited vehicle");
 
-  if(isdefined(level.player.oldthreatbias)) {
+  if(isDefined(level.player.oldthreatbias)) {
     level.player.threatbias = level.player.oldthreatbias;
     level.player.oldthreatbias = undefined;
   }
   //	level.player.ignoreme = false;
-  if(isdefined(level.vehicleHUD))
+  if(isDefined(level.vehicleHUD))
     level.vehicleHUD destroy();
-  if(isdefined(level.vehicleHUD2))
+  if(isDefined(level.vehicleHUD2))
     level.vehicleHUD2 destroy();
-  if(isdefined(level.VehicleFireIcon))
+  if(isDefined(level.VehicleFireIcon))
     level.VehicleFireIcon destroy();
 }
 
@@ -91,7 +92,7 @@ vehicle_giveHealth() {
   else
     self.health = 2000;
 
-  if(isdefined(self.healthbuffer)) {
+  if(isDefined(self.healthbuffer)) {
     self.health += self.healthbuffer; // restore healthbuffer
     self.currenthealth = self.health;
     self.maxhealth = self.health;
@@ -103,18 +104,18 @@ Protect_Player() {
   self endon("death");
   playerCurrentHealth = level.player.health;
   /*
-	if(self.vehicletype == "flak88" || self.vehicletype == "flak88_forward")
-	{
-		if(!isdefined(level.player.oldthreatbias))
-		{
-			level.player.oldthreatbias = level.player.threatbias;
-//			level.player.ignoreme = true;
-		}
-		level.player.threatbias = -3000;			
+  	if(self.vehicletype == "flak88" || self.vehicletype == "flak88_forward")
+  	{
+  		if(!isDefined(level.player.oldthreatbias))
+  		{
+  			level.player.oldthreatbias = level.player.threatbias;
+  //			level.player.ignoreme = true;
+  		}
+  		level.player.threatbias = -3000;			
 
-	}
-	*/
-  while (isalive(level.player)) {
+  	}
+  	*/
+  while(isalive(level.player)) {
     level.player waittill("damage", ammount);
     /*
     		if(self.vehicletype != "flak88" && self.vehicletype != "flak88_forward")
@@ -175,20 +176,19 @@ vehicle_ridehandle() {
 
   }
   if(self.vehicletype == "crusader_player") {
-    self setmodel("vehicle_crusader2_viewmodel");
+    self setModel("vehicle_crusader2_viewmodel");
   }
 
   regentimer = gettime();
   if(getdvar("debug_vehiclegod") != "off") {
-    while (1) {
+    while(1) {
       self waittill("damage");
       self.health = self.maxhealth;
     }
   }
   thread vehicle_damageset();
   regeninctimer = gettime();
-  while (1) {
-
+  while(1) {
     if(self.damaged) {
       if(getdvar("debug_vehicleplayerhealth") != "off")
         iprintlnbold("playervehicles health: ", self.health - self.healthbuffer);
@@ -215,7 +215,7 @@ vehicle_kill_player_ondeath() {
   level endon("player exited vehicle");
   self waittill("death");
   level.player enablehealthshield(false);
-  while (1) {
+  while(1) {
     level.player kill();
     wait .1;
   }
@@ -226,7 +226,7 @@ vehicle_kill_player_ondeath() {
 vehicle_damageset() {
   self.damaged = false;
   self endon("death");
-  while (1) {
+  while(1) {
     self waittill("damage", ammount);
     println("damage ", ammount);
     self.damaged = true;
@@ -234,10 +234,10 @@ vehicle_damageset() {
 }
 
 vehicle_reloadsound() {
-  while (1) {
+  while(1) {
     self waittill("turret_fire");
     wait .5;
-    self playsound("tank_reload");
+    self playSound("tank_reload");
   }
 }
 
@@ -247,7 +247,7 @@ vehicle_hud_tank_fireicon() {
   level endon("player exited vehicle");
   level.player endon("death");
   self endon("death");
-  if(isdefined(level.VehicleFireIcon))
+  if(isDefined(level.VehicleFireIcon))
     level.VehicleFireIcon destroy();
 
   level.VehicleFireIcon = newHudElem();
@@ -261,7 +261,7 @@ vehicle_hud_tank_fireicon() {
 
   icon = true;
   level.VehicleFireIcon.alpha = icon;
-  while (1) {
+  while(1) {
     if(icon) {
       if(!self isTurretReady()) {
         icon = false;
@@ -295,7 +295,7 @@ healthOverlay() {
   maxHealth = self.health - self.healthbuffer;
   hurt = false;
   bonus = 0.3;
-  for (;;) {
+  for(;;) {
     healthRatio = (self.health - self.healthbuffer) / maxHealth;
     pulseTime = 0.5 + (0.5 * healthRatio);
     if(healthRatio < 0.75 || hurt) {

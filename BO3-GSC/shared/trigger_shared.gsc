@@ -13,35 +13,35 @@
 #namespace trigger;
 
 function autoexec __init__sytem__() {
-  system::register("trigger", & __init__, undefined, undefined);
+  system::register("trigger", &__init__, undefined, undefined);
 }
 
 function __init__() {
   level.fog_trigger_current = undefined;
   level.trigger_hint_string = [];
   level.trigger_hint_func = [];
-  if(!isdefined(level.trigger_flags)) {
+  if(!isDefined(level.trigger_flags)) {
     init_flags();
   }
   trigger_funcs = [];
-  trigger_funcs["trigger_unlock"] = & trigger_unlock;
-  trigger_funcs["flag_set"] = & flag_set_trigger;
-  trigger_funcs["flag_clear"] = & flag_clear_trigger;
-  trigger_funcs["flag_set_touching"] = & flag_set_touching;
-  trigger_funcs["friendly_respawn_trigger"] = & friendly_respawn_trigger;
-  trigger_funcs["friendly_respawn_clear"] = & friendly_respawn_clear;
-  trigger_funcs["trigger_delete"] = & trigger_turns_off;
-  trigger_funcs["trigger_delete_on_touch"] = & trigger_delete_on_touch;
-  trigger_funcs["trigger_off"] = & trigger_turns_off;
-  trigger_funcs["delete_link_chain"] = & delete_link_chain;
-  trigger_funcs["no_crouch_or_prone"] = & no_crouch_or_prone_think;
-  trigger_funcs["no_prone"] = & no_prone_think;
-  trigger_funcs["flood_spawner"] = & spawner::flood_trigger_think;
-  trigger_funcs["trigger_spawner"] = & trigger_spawner;
-  trigger_funcs["trigger_hint"] = & trigger_hint;
-  trigger_funcs["exploder"] = & trigger_exploder;
+  trigger_funcs["trigger_unlock"] = &trigger_unlock;
+  trigger_funcs["flag_set"] = &flag_set_trigger;
+  trigger_funcs["flag_clear"] = &flag_clear_trigger;
+  trigger_funcs["flag_set_touching"] = &flag_set_touching;
+  trigger_funcs["friendly_respawn_trigger"] = &friendly_respawn_trigger;
+  trigger_funcs["friendly_respawn_clear"] = &friendly_respawn_clear;
+  trigger_funcs["trigger_delete"] = &trigger_turns_off;
+  trigger_funcs["trigger_delete_on_touch"] = &trigger_delete_on_touch;
+  trigger_funcs["trigger_off"] = &trigger_turns_off;
+  trigger_funcs["delete_link_chain"] = &delete_link_chain;
+  trigger_funcs["no_crouch_or_prone"] = &no_crouch_or_prone_think;
+  trigger_funcs["no_prone"] = &no_prone_think;
+  trigger_funcs["flood_spawner"] = &spawner::flood_trigger_think;
+  trigger_funcs["trigger_spawner"] = &trigger_spawner;
+  trigger_funcs["trigger_hint"] = &trigger_hint;
+  trigger_funcs["exploder"] = &trigger_exploder;
   foreach(trig in get_all("trigger_radius", "trigger_multiple", "trigger_once", "trigger_box")) {
-    if(isdefined(trig.spawnflags) && (trig.spawnflags & 256) == 256) {
+    if(isDefined(trig.spawnflags) && (trig.spawnflags & 256) == 256) {
       level thread trigger_look(trig);
     }
   }
@@ -49,7 +49,7 @@ function __init__() {
     trig check_spawnflags();
     if(trig.classname != "trigger_damage") {
       if(trig.classname != "trigger_hurt") {
-        if(isdefined(trig.spawnflags) && (trig.spawnflags & 32) == 32) {
+        if(isDefined(trig.spawnflags) && (trig.spawnflags & 32) == 32) {
           level thread trigger_spawner(trig);
         }
       }
@@ -57,35 +57,35 @@ function __init__() {
     if(trig.classname != "trigger_once" && is_trigger_once(trig)) {
       level thread trigger_once(trig);
     }
-    if(isdefined(trig.script_flag_true)) {
+    if(isDefined(trig.script_flag_true)) {
       level thread script_flag_true_trigger(trig);
     }
-    if(isdefined(trig.script_flag_set)) {
+    if(isDefined(trig.script_flag_set)) {
       level thread flag_set_trigger(trig, trig.script_flag_set);
     }
-    if(isdefined(trig.script_flag_set_on_touching) || isdefined(trig.script_flag_set_on_cleared)) {
+    if(isDefined(trig.script_flag_set_on_touching) || isDefined(trig.script_flag_set_on_cleared)) {
       level thread script_flag_set_touching(trig);
     }
-    if(isdefined(trig.script_flag_clear)) {
+    if(isDefined(trig.script_flag_clear)) {
       level thread flag_clear_trigger(trig, trig.script_flag_clear);
     }
-    if(isdefined(trig.script_flag_false)) {
+    if(isDefined(trig.script_flag_false)) {
       level thread script_flag_false_trigger(trig);
     }
-    if(isdefined(trig.script_trigger_group)) {
+    if(isDefined(trig.script_trigger_group)) {
       trig thread trigger_group();
     }
-    if(isdefined(trig.script_notify)) {
+    if(isDefined(trig.script_notify)) {
       level thread trigger_notify(trig, trig.script_notify);
     }
-    if(isdefined(trig.script_fallback)) {
+    if(isDefined(trig.script_fallback)) {
       level thread spawner::fallback_think(trig);
     }
-    if(isdefined(trig.script_killspawner)) {
+    if(isDefined(trig.script_killspawner)) {
       level thread kill_spawner_trigger(trig);
     }
-    if(isdefined(trig.targetname)) {
-      if(isdefined(trigger_funcs[trig.targetname])) {
+    if(isDefined(trig.targetname)) {
+      if(isDefined(trigger_funcs[trig.targetname])) {
         level thread[[trigger_funcs[trig.targetname]]](trig);
       }
     }
@@ -96,15 +96,15 @@ function check_spawnflags() {}
 
 function trigger_unlock(trigger) {
   noteworthy = "not_set";
-  if(isdefined(trigger.script_noteworthy)) {
+  if(isDefined(trigger.script_noteworthy)) {
     noteworthy = trigger.script_noteworthy;
   }
-  target_triggers = getentarray(trigger.target, "targetname");
+  target_triggers = getEntArray(trigger.target, "targetname");
   trigger thread trigger_unlock_death(trigger.target);
-  while (true) {
-    array::run_all(target_triggers, & triggerenable, 0);
+  while(true) {
+    array::run_all(target_triggers, &triggerenable, 0);
     trigger waittill("trigger");
-    array::run_all(target_triggers, & triggerenable, 1);
+    array::run_all(target_triggers, &triggerenable, 1);
     wait_for_an_unlocked_trigger(target_triggers, noteworthy);
     array::notify_all(target_triggers, "relock");
   }
@@ -112,14 +112,14 @@ function trigger_unlock(trigger) {
 
 function trigger_unlock_death(target) {
   self waittill("death");
-  target_triggers = getentarray(target, "targetname");
-  array::run_all(target_triggers, & triggerenable, 0);
+  target_triggers = getEntArray(target, "targetname");
+  array::run_all(target_triggers, &triggerenable, 0);
 }
 
 function wait_for_an_unlocked_trigger(triggers, noteworthy) {
   level endon("unlocked_trigger_hit" + noteworthy);
-  ent = spawnstruct();
-  for (i = 0; i < triggers.size; i++) {
+  ent = spawnStruct();
+  for(i = 0; i < triggers.size; i++) {
     triggers[i] thread report_trigger(ent, noteworthy);
   }
   ent waittill("trigger");
@@ -134,12 +134,12 @@ function report_trigger(ent, noteworthy) {
 }
 
 function get_trigger_look_target() {
-  if(isdefined(self.target)) {
-    a_potential_targets = getentarray(self.target, "targetname");
+  if(isDefined(self.target)) {
+    a_potential_targets = getEntArray(self.target, "targetname");
     a_targets = [];
     foreach(target in a_potential_targets) {
       if(target.classname === "script_origin") {
-        if(!isdefined(a_targets)) {
+        if(!isDefined(a_targets)) {
           a_targets = [];
         } else if(!isarray(a_targets)) {
           a_targets = array(a_targets);
@@ -154,7 +154,7 @@ function get_trigger_look_target() {
       e_target = a_targets[0];
     }
   }
-  if(!isdefined(e_target)) {
+  if(!isDefined(e_target)) {
     e_target = self;
   }
   return e_target;
@@ -163,29 +163,29 @@ function get_trigger_look_target() {
 function trigger_look(trigger) {
   trigger endon("death");
   e_target = trigger get_trigger_look_target();
-  if(isdefined(trigger.script_flag) && !isdefined(level.flag[trigger.script_flag])) {
+  if(isDefined(trigger.script_flag) && !isDefined(level.flag[trigger.script_flag])) {
     level flag::init(trigger.script_flag, undefined, 1);
   }
   a_parameters = [];
-  if(isdefined(trigger.script_parameters)) {
+  if(isDefined(trigger.script_parameters)) {
     a_parameters = strtok(trigger.script_parameters, ",; ");
   }
   b_ads_check = isinarray(a_parameters, "check_ads");
-  while (true) {
+  while(true) {
     trigger waittill("trigger", e_other);
     if(isplayer(e_other)) {
-      while (isdefined(e_other) && e_other istouching(trigger)) {
-        if(e_other util::is_looking_at(e_target, trigger.script_dot, isdefined(trigger.script_trace) && trigger.script_trace) && (!b_ads_check || !e_other util::is_ads())) {
+      while(isDefined(e_other) && e_other istouching(trigger)) {
+        if(e_other util::is_looking_at(e_target, trigger.script_dot, isDefined(trigger.script_trace) && trigger.script_trace) && (!b_ads_check || !e_other util::is_ads())) {
           trigger notify("trigger_look", e_other);
-          if(isdefined(trigger.script_flag)) {
+          if(isDefined(trigger.script_flag)) {
             level flag::set(trigger.script_flag);
           }
-        } else if(isdefined(trigger.script_flag)) {
+        } else if(isDefined(trigger.script_flag)) {
           level flag::clear(trigger.script_flag);
         }
         wait(0.05);
       }
-      if(isdefined(trigger.script_flag)) {
+      if(isDefined(trigger.script_flag)) {
         level flag::clear(trigger.script_flag);
       }
     } else {
@@ -200,7 +200,7 @@ function trigger_spawner(trigger) {
   trigger endon("death");
   trigger wait_till();
   foreach(sp in a_spawners) {
-    if(isdefined(sp)) {
+    if(isDefined(sp)) {
       sp thread trigger_spawner_spawn();
     }
   }
@@ -216,8 +216,8 @@ function trigger_spawner_spawn() {
 function trigger_notify(trigger, msg) {
   trigger endon("death");
   other = trigger wait_till();
-  if(isdefined(trigger.target)) {
-    a_target_ents = getentarray(trigger.target, "targetname");
+  if(isDefined(trigger.target)) {
+    a_target_ents = getEntArray(trigger.target, "targetname");
     foreach(notify_ent in a_target_ents) {
       notify_ent notify(msg, other);
     }
@@ -227,15 +227,15 @@ function trigger_notify(trigger, msg) {
 
 function flag_set_trigger(trigger, str_flag) {
   trigger endon("death");
-  if(!isdefined(str_flag)) {
+  if(!isDefined(str_flag)) {
     str_flag = trigger.script_flag;
   }
   if(!level flag::exists(str_flag)) {
     level flag::init(str_flag, undefined, 1);
   }
-  while (true) {
+  while(true) {
     trigger wait_till();
-    if(isdefined(trigger.targetname) && trigger.targetname == "flag_set") {
+    if(isDefined(trigger.targetname) && trigger.targetname == "flag_set") {
       trigger util::script_delay();
     }
     level flag::set(str_flag);
@@ -244,15 +244,15 @@ function flag_set_trigger(trigger, str_flag) {
 
 function flag_clear_trigger(trigger, str_flag) {
   trigger endon("death");
-  if(!isdefined(str_flag)) {
+  if(!isDefined(str_flag)) {
     str_flag = trigger.script_flag;
   }
   if(!level flag::exists(str_flag)) {
     level flag::init(str_flag, undefined, 1);
   }
-  while (true) {
+  while(true) {
     trigger wait_till();
-    if(isdefined(trigger.targetname) && trigger.targetname == "flag_clear") {
+    if(isDefined(trigger.targetname) && trigger.targetname == "flag_clear") {
       trigger util::script_delay();
     }
     level flag::clear(str_flag);
@@ -260,9 +260,9 @@ function flag_clear_trigger(trigger, str_flag) {
 }
 
 function add_tokens_to_trigger_flags(tokens) {
-  for (i = 0; i < tokens.size; i++) {
+  for(i = 0; i < tokens.size; i++) {
     flag = tokens[i];
-    if(!isdefined(level.trigger_flags[flag])) {
+    if(!isDefined(level.trigger_flags[flag])) {
       level.trigger_flags[flag] = [];
     }
     level.trigger_flags[flag][level.trigger_flags[flag].size] = self;
@@ -283,15 +283,15 @@ function script_flag_true_trigger(trigger) {
 
 function friendly_respawn_trigger(trigger) {
   trigger endon("death");
-  spawners = getentarray(trigger.target, "targetname");
+  spawners = getEntArray(trigger.target, "targetname");
   assert(spawners.size == 1, ("" + trigger.target) + "");
   spawner = spawners[0];
-  assert(!isdefined(spawner.script_forcecolor), ("" + spawner.origin) + "");
+  assert(!isDefined(spawner.script_forcecolor), ("" + spawner.origin) + "");
   spawners = undefined;
   spawner endon("death");
-  while (true) {
+  while(true) {
     trigger waittill("trigger");
-    if(isdefined(trigger.script_forcecolor)) {
+    if(isDefined(trigger.script_forcecolor)) {
       level.respawn_spawners_specific[trigger.script_forcecolor] = spawner;
     } else {
       level.respawn_spawner = spawner;
@@ -303,7 +303,7 @@ function friendly_respawn_trigger(trigger) {
 
 function friendly_respawn_clear(trigger) {
   trigger endon("death");
-  while (true) {
+  while(true) {
     trigger waittill("trigger");
     level flag::clear("respawn_friendlies");
     wait(0.5);
@@ -313,25 +313,25 @@ function friendly_respawn_clear(trigger) {
 function trigger_turns_off(trigger) {
   trigger wait_till();
   trigger triggerenable(0);
-  if(!isdefined(trigger.script_linkto)) {
+  if(!isDefined(trigger.script_linkto)) {
     return;
   }
   tokens = strtok(trigger.script_linkto, " ");
-  for (i = 0; i < tokens.size; i++) {
-    array::run_all(getentarray(tokens[i], "script_linkname"), & triggerenable, 0);
+  for(i = 0; i < tokens.size; i++) {
+    array::run_all(getEntArray(tokens[i], "script_linkname"), &triggerenable, 0);
   }
 }
 
 function script_flag_set_touching(trigger) {
   trigger endon("death");
-  if(isdefined(trigger.script_flag_set_on_touching)) {
+  if(isDefined(trigger.script_flag_set_on_touching)) {
     level flag::init(trigger.script_flag_set_on_touching, undefined, 1);
   }
-  if(isdefined(trigger.script_flag_set_on_cleared)) {
+  if(isDefined(trigger.script_flag_set_on_cleared)) {
     level flag::init(trigger.script_flag_set_on_cleared, undefined, 1);
   }
   trigger thread _detect_touched();
-  while (true) {
+  while(true) {
     trigger.script_touched = 0;
     wait(0.05);
     waittillframeend();
@@ -340,17 +340,17 @@ function script_flag_set_touching(trigger) {
       waittillframeend();
     }
     if(trigger.script_touched) {
-      if(isdefined(trigger.script_flag_set_on_touching)) {
+      if(isDefined(trigger.script_flag_set_on_touching)) {
         level flag::set(trigger.script_flag_set_on_touching);
       }
-      if(isdefined(trigger.script_flag_set_on_cleared)) {
+      if(isDefined(trigger.script_flag_set_on_cleared)) {
         level flag::clear(trigger.script_flag_set_on_cleared);
       }
     } else {
-      if(isdefined(trigger.script_flag_set_on_touching)) {
+      if(isDefined(trigger.script_flag_set_on_touching)) {
         level flag::clear(trigger.script_flag_set_on_touching);
       }
-      if(isdefined(trigger.script_flag_set_on_cleared)) {
+      if(isDefined(trigger.script_flag_set_on_cleared)) {
         level flag::set(trigger.script_flag_set_on_cleared);
       }
     }
@@ -359,16 +359,16 @@ function script_flag_set_touching(trigger) {
 
 function _detect_touched() {
   self endon("death");
-  while (true) {
+  while(true) {
     self waittill("trigger");
     self.script_touched = 1;
   }
 }
 
 function trigger_delete_on_touch(trigger) {
-  while (true) {
+  while(true) {
     trigger waittill("trigger", other);
-    if(isdefined(other)) {
+    if(isDefined(other)) {
       other delete();
     }
   }
@@ -376,13 +376,13 @@ function trigger_delete_on_touch(trigger) {
 
 function flag_set_touching(trigger) {
   str_flag = trigger.script_flag;
-  if(!isdefined(level.flag[str_flag])) {
+  if(!isDefined(level.flag[str_flag])) {
     level flag::init(str_flag, undefined, 1);
   }
-  while (true) {
+  while(true) {
     trigger waittill("trigger", other);
     level flag::set(str_flag);
-    while (isalive(other) && other istouching(trigger) && isdefined(trigger)) {
+    while(isalive(other) && other istouching(trigger) && isDefined(trigger)) {
       wait(0.25);
     }
     level flag::clear(str_flag);
@@ -398,7 +398,7 @@ function trigger_once(trig) {
   }
   waittillframeend();
   waittillframeend();
-  if(isdefined(trig)) {
+  if(isDefined(trig)) {
     println("");
     println((("" + trig getentitynumber()) + "") + trig.origin);
     println("");
@@ -407,16 +407,16 @@ function trigger_once(trig) {
 }
 
 function trigger_hint(trigger) {
-  assert(isdefined(trigger.script_hint), ("" + trigger.origin) + "");
+  assert(isDefined(trigger.script_hint), ("" + trigger.origin) + "");
   trigger endon("death");
-  if(!isdefined(level.displayed_hints)) {
+  if(!isDefined(level.displayed_hints)) {
     level.displayed_hints = [];
   }
   waittillframeend();
-  assert(isdefined(level.trigger_hint_string[trigger.script_hint]), ("" + trigger.script_hint) + "");
+  assert(isDefined(level.trigger_hint_string[trigger.script_hint]), ("" + trigger.script_hint) + "");
   trigger waittill("trigger", other);
   assert(isplayer(other), "");
-  if(isdefined(level.displayed_hints[trigger.script_hint])) {
+  if(isDefined(level.displayed_hints[trigger.script_hint])) {
     return;
   }
   level.displayed_hints[trigger.script_hint] = 1;
@@ -425,9 +425,9 @@ function trigger_hint(trigger) {
 
 function trigger_exploder(trigger) {
   trigger endon("death");
-  while (true) {
+  while(true) {
     trigger waittill("trigger");
-    if(isdefined(trigger.target)) {
+    if(isDefined(trigger.target)) {
       activateclientradiantexploder(trigger.target);
     }
   }
@@ -437,7 +437,7 @@ function display_hint(hint) {
   if(getdvarstring("chaplincheat") == "1") {
     return;
   }
-  if(isdefined(level.trigger_hint_func[hint])) {
+  if(isDefined(level.trigger_hint_func[hint])) {
     if([
         [level.trigger_hint_func[hint]]
       ]()) {
@@ -467,27 +467,23 @@ function _hint_print(string, breakfunc) {
   hint fadeovertime(1);
   hint.alpha = 0.95;
   _hint_print_wait(1);
-  if(isdefined(breakfunc)) {
-    for (;;) {
+  if(isDefined(breakfunc)) {
+    for(;;) {
       hint fadeovertime(0.75);
       hint.alpha = 0.4;
       _hint_print_wait(0.75, breakfunc);
-      if([
-          [breakfunc]
-        ]()) {
+      if([[breakfunc]]()) {
         break;
       }
       hint fadeovertime(0.75);
       hint.alpha = 0.95;
       _hint_print_wait(0.75);
-      if([
-          [breakfunc]
-        ]()) {
+      if([[breakfunc]]()) {
         break;
       }
     }
   } else {
-    for (i = 0; i < 5; i++) {
+    for(i = 0; i < 5; i++) {
       hint fadeovertime(0.75);
       hint.alpha = 0.4;
       _hint_print_wait(0.75);
@@ -501,12 +497,12 @@ function _hint_print(string, breakfunc) {
 }
 
 function _hint_print_wait(length, breakfunc) {
-  if(!isdefined(breakfunc)) {
+  if(!isDefined(breakfunc)) {
     wait(length);
     return;
   }
   timer = length * 20;
-  for (i = 0; i < timer; i++) {
+  for(i = 0; i < timer; i++) {
     if([
         [breakfunc]
       ]()) {
@@ -517,7 +513,7 @@ function _hint_print_wait(length, breakfunc) {
 }
 
 function get_all(type1, type2, type3, type4, type5, type6, type7, type8, type9) {
-  if(!isdefined(type1)) {
+  if(!isDefined(type1)) {
     type1 = "trigger_damage";
     type2 = "trigger_hurt";
     type3 = "trigger_lookat";
@@ -530,42 +526,42 @@ function get_all(type1, type2, type3, type4, type5, type6, type7, type8, type9) 
     type10 = "trigger_out_of_bounds";
   }
   assert(_is_valid_trigger_type(type1));
-  trigs = getentarray(type1, "classname");
-  if(isdefined(type2)) {
+  trigs = getEntArray(type1, "classname");
+  if(isDefined(type2)) {
     assert(_is_valid_trigger_type(type2));
-    trigs = arraycombine(trigs, getentarray(type2, "classname"), 1, 0);
+    trigs = arraycombine(trigs, getEntArray(type2, "classname"), 1, 0);
   }
-  if(isdefined(type3)) {
+  if(isDefined(type3)) {
     assert(_is_valid_trigger_type(type3));
-    trigs = arraycombine(trigs, getentarray(type3, "classname"), 1, 0);
+    trigs = arraycombine(trigs, getEntArray(type3, "classname"), 1, 0);
   }
-  if(isdefined(type4)) {
+  if(isDefined(type4)) {
     assert(_is_valid_trigger_type(type4));
-    trigs = arraycombine(trigs, getentarray(type4, "classname"), 1, 0);
+    trigs = arraycombine(trigs, getEntArray(type4, "classname"), 1, 0);
   }
-  if(isdefined(type5)) {
+  if(isDefined(type5)) {
     assert(_is_valid_trigger_type(type5));
-    trigs = arraycombine(trigs, getentarray(type5, "classname"), 1, 0);
+    trigs = arraycombine(trigs, getEntArray(type5, "classname"), 1, 0);
   }
-  if(isdefined(type6)) {
+  if(isDefined(type6)) {
     assert(_is_valid_trigger_type(type6));
-    trigs = arraycombine(trigs, getentarray(type6, "classname"), 1, 0);
+    trigs = arraycombine(trigs, getEntArray(type6, "classname"), 1, 0);
   }
-  if(isdefined(type7)) {
+  if(isDefined(type7)) {
     assert(_is_valid_trigger_type(type7));
-    trigs = arraycombine(trigs, getentarray(type7, "classname"), 1, 0);
+    trigs = arraycombine(trigs, getEntArray(type7, "classname"), 1, 0);
   }
-  if(isdefined(type8)) {
+  if(isDefined(type8)) {
     assert(_is_valid_trigger_type(type8));
-    trigs = arraycombine(trigs, getentarray(type8, "classname"), 1, 0);
+    trigs = arraycombine(trigs, getEntArray(type8, "classname"), 1, 0);
   }
-  if(isdefined(type9)) {
+  if(isDefined(type9)) {
     assert(_is_valid_trigger_type(type9));
-    trigs = arraycombine(trigs, getentarray(type9, "classname"), 1, 0);
+    trigs = arraycombine(trigs, getEntArray(type9, "classname"), 1, 0);
   }
-  if(isdefined(type10)) {
+  if(isDefined(type10)) {
     assert(_is_valid_trigger_type(type9));
-    trigs = arraycombine(trigs, getentarray(type10, "classname"), 1, 0);
+    trigs = arraycombine(trigs, getEntArray(type10, "classname"), 1, 0);
   }
   return trigs;
 }
@@ -592,8 +588,8 @@ function _is_valid_trigger_type(type) {
 }
 
 function wait_till(str_name, str_key = "targetname", e_entity, b_assert = 1) {
-  if(isdefined(str_name)) {
-    triggers = getentarray(str_name, str_key);
+  if(isDefined(str_name)) {
+    triggers = getEntArray(str_name, str_key);
     if(sessionmodeiscampaignzombiesgame()) {
       if(triggers.size <= 0) {
         return;
@@ -606,8 +602,8 @@ function wait_till(str_name, str_key = "targetname", e_entity, b_assert = 1) {
         trigger_hit = triggers[0];
         trigger_hit _trigger_wait(e_entity);
       } else {
-        s_tracker = spawnstruct();
-        array::thread_all(triggers, & _trigger_wait_think, s_tracker, e_entity);
+        s_tracker = spawnStruct();
+        array::thread_all(triggers, &_trigger_wait_think, s_tracker, e_entity);
         s_tracker waittill("trigger", e_other, trigger_hit);
         trigger_hit.who = e_other;
       }
@@ -615,7 +611,7 @@ function wait_till(str_name, str_key = "targetname", e_entity, b_assert = 1) {
     }
   } else {
     if(sessionmodeiscampaignzombiesgame()) {
-      if(!isdefined(self)) {
+      if(!isDefined(self)) {
         return;
       }
     }
@@ -625,7 +621,7 @@ function wait_till(str_name, str_key = "targetname", e_entity, b_assert = 1) {
 
 function _trigger_wait(e_entity) {
   self endon("death");
-  if(isdefined(e_entity)) {
+  if(isDefined(e_entity)) {
     e_entity endon("death");
   }
   if(is_look_trigger(self)) {
@@ -633,10 +629,10 @@ function _trigger_wait(e_entity) {
   } else if(self.classname === "") {
     assert(!isarray(e_entity), "");
   }
-  while (true) {
+  while(true) {
     if(is_look_trigger(self)) {
       self waittill("trigger_look", e_other);
-      if(isdefined(e_entity)) {
+      if(isDefined(e_entity)) {
         if(e_other !== e_entity) {
           continue;
         }
@@ -644,14 +640,14 @@ function _trigger_wait(e_entity) {
     } else {
       if(self.classname === "trigger_damage") {
         self waittill("trigger", e_other);
-        if(isdefined(e_entity)) {
+        if(isDefined(e_entity)) {
           if(e_other !== e_entity) {
             continue;
           }
         }
       } else {
         self waittill("trigger", e_other);
-        if(isdefined(e_entity)) {
+        if(isDefined(e_entity)) {
           if(isarray(e_entity)) {
             if(!array::is_touching(e_entity, self)) {
               continue;
@@ -676,9 +672,9 @@ function _trigger_wait_think(s_tracker, e_entity) {
 }
 
 function use(str_name, str_key = "targetname", ent = getplayers()[0], b_assert = 1) {
-  if(isdefined(str_name)) {
+  if(isDefined(str_name)) {
     e_trig = getent(str_name, str_key);
-    if(!isdefined(e_trig)) {
+    if(!isDefined(e_trig)) {
       if(b_assert) {
         assertmsg((("" + str_name) + "") + str_key);
       }
@@ -688,7 +684,7 @@ function use(str_name, str_key = "targetname", ent = getplayers()[0], b_assert =
     e_trig = self;
     str_name = self.targetname;
   }
-  if(isdefined(ent)) {
+  if(isDefined(ent)) {
     e_trig useby(ent);
   } else {
     e_trig useby(e_trig);
@@ -701,19 +697,19 @@ function use(str_name, str_key = "targetname", ent = getplayers()[0], b_assert =
 }
 
 function set_flag_permissions(msg) {
-  if(!isdefined(level.trigger_flags) || !isdefined(level.trigger_flags[msg])) {
+  if(!isDefined(level.trigger_flags) || !isDefined(level.trigger_flags[msg])) {
     return;
   }
   level.trigger_flags[msg] = array::remove_undefined(level.trigger_flags[msg]);
-  array::thread_all(level.trigger_flags[msg], & update_based_on_flags);
+  array::thread_all(level.trigger_flags[msg], &update_based_on_flags);
 }
 
 function update_based_on_flags() {
   true_on = 1;
-  if(isdefined(self.script_flag_true)) {
+  if(isDefined(self.script_flag_true)) {
     true_on = 0;
     tokens = util::create_flags_and_return_tokens(self.script_flag_true);
-    for (i = 0; i < tokens.size; i++) {
+    for(i = 0; i < tokens.size; i++) {
       if(level flag::get(tokens[i])) {
         true_on = 1;
         break;
@@ -721,9 +717,9 @@ function update_based_on_flags() {
     }
   }
   false_on = 1;
-  if(isdefined(self.script_flag_false)) {
+  if(isDefined(self.script_flag_false)) {
     tokens = util::create_flags_and_return_tokens(self.script_flag_false);
-    for (i = 0; i < tokens.size; i++) {
+    for(i = 0; i < tokens.size; i++) {
       if(level flag::get(tokens[i])) {
         false_on = 0;
         break;
@@ -747,11 +743,11 @@ function is_trigger_once(trig) {
 }
 
 function wait_for_either(str_targetname1, str_targetname2) {
-  ent = spawnstruct();
+  ent = spawnStruct();
   array = [];
-  array = arraycombine(array, getentarray(str_targetname1, "targetname"), 1, 0);
-  array = arraycombine(array, getentarray(str_targetname2, "targetname"), 1, 0);
-  for (i = 0; i < array.size; i++) {
+  array = arraycombine(array, getEntArray(str_targetname1, "targetname"), 1, 0);
+  array = arraycombine(array, getEntArray(str_targetname2, "targetname"), 1, 0);
+  for(i = 0; i < array.size; i++) {
     ent thread _ent_waits_for_trigger(array[i]);
   }
   ent waittill("done", t_hit);
@@ -764,8 +760,8 @@ function _ent_waits_for_trigger(trigger) {
 }
 
 function wait_or_timeout(n_time, str_name, str_key) {
-  if(isdefined(n_time)) {
-    __s = spawnstruct();
+  if(isDefined(n_time)) {
+    __s = spawnStruct();
     __s endon("timeout");
     __s util::delay_notify(n_time, "timeout");
   }
@@ -774,7 +770,7 @@ function wait_or_timeout(n_time, str_name, str_key) {
 
 function trigger_on_timeout(n_time, b_cancel_on_triggered = 1, str_name, str_key = "targetname") {
   trig = self;
-  if(isdefined(str_name)) {
+  if(isDefined(str_name)) {
     trig = getent(str_name, str_key);
   }
   if(b_cancel_on_triggered) {
@@ -790,7 +786,7 @@ function trigger_on_timeout(n_time, b_cancel_on_triggered = 1, str_name, str_key
 }
 
 function multiple_waits(str_trigger_name, str_trigger_notify) {
-  foreach(trigger in getentarray(str_trigger_name, "targetname")) {
+  foreach(trigger in getEntArray(str_trigger_name, "targetname")) {
     trigger thread multiple_wait(str_trigger_notify);
   }
 }
@@ -808,10 +804,10 @@ function add_function(trigger, str_remove_on, func, param_1, param_2, param_3, p
 function _do_trigger_function(trigger, str_remove_on, func, param_1, param_2, param_3, param_4, param_5, param_6) {
   self endon("death");
   trigger endon("death");
-  if(isdefined(str_remove_on)) {
+  if(isDefined(str_remove_on)) {
     trigger endon(str_remove_on);
   }
-  while (true) {
+  while(true) {
     if(isstring(trigger)) {
       wait_till(trigger);
     } else {
@@ -827,7 +823,7 @@ function kill_spawner_trigger(trigger) {
   foreach(sp in a_spawners) {
     sp delete();
   }
-  a_ents = getentarray(trigger.script_killspawner, "script_killspawner");
+  a_ents = getEntArray(trigger.script_killspawner, "script_killspawner");
   foreach(ent in a_ents) {
     if(ent.classname === "spawn_manager" && ent != trigger) {
       ent delete();
@@ -837,14 +833,14 @@ function kill_spawner_trigger(trigger) {
 
 function get_script_linkto_targets() {
   targets = [];
-  if(!isdefined(self.script_linkto)) {
+  if(!isDefined(self.script_linkto)) {
     return targets;
   }
   tokens = strtok(self.script_linkto, " ");
-  for (i = 0; i < tokens.size; i++) {
+  for(i = 0; i < tokens.size; i++) {
     token = tokens[i];
     target = getent(token, "script_linkname");
-    if(isdefined(target)) {
+    if(isDefined(target)) {
       targets[targets.size] = target;
     }
   }
@@ -854,22 +850,22 @@ function get_script_linkto_targets() {
 function delete_link_chain(trigger) {
   trigger waittill("trigger");
   targets = trigger get_script_linkto_targets();
-  array::thread_all(targets, & delete_links_then_self);
+  array::thread_all(targets, &delete_links_then_self);
 }
 
 function delete_links_then_self() {
   targets = get_script_linkto_targets();
-  array::thread_all(targets, & delete_links_then_self);
+  array::thread_all(targets, &delete_links_then_self);
   self delete();
 }
 
 function no_crouch_or_prone_think(trigger) {
-  while (true) {
+  while(true) {
     trigger waittill("trigger", other);
     if(!isplayer(other)) {
       continue;
     }
-    while (other istouching(trigger)) {
+    while(other istouching(trigger)) {
       other allowprone(0);
       other allowcrouch(0);
       wait(0.05);
@@ -880,12 +876,12 @@ function no_crouch_or_prone_think(trigger) {
 }
 
 function no_prone_think(trigger) {
-  while (true) {
+  while(true) {
     trigger waittill("trigger", other);
     if(!isplayer(other)) {
       continue;
     }
-    while (other istouching(trigger)) {
+    while(other istouching(trigger)) {
       other allowprone(0);
       wait(0.05);
     }
@@ -913,29 +909,25 @@ function function_d1278be0(ent, on_enter_payload, on_exit_payload) {
     return;
   }
   add_to_ent(ent, self);
-  if(isdefined(on_enter_payload)) {
-    [
-      [on_enter_payload]
-    ](ent);
+  if(isDefined(on_enter_payload)) {
+    [[on_enter_payload]](ent);
   }
-  while (isdefined(ent) && ent istouching(self)) {
+  while(isDefined(ent) && ent istouching(self)) {
     wait(0.01);
   }
-  if(isdefined(ent) && isdefined(on_exit_payload)) {
-    [
-      [on_exit_payload]
-    ](ent);
+  if(isDefined(ent) && isDefined(on_exit_payload)) {
+    [[on_exit_payload]](ent);
   }
-  if(isdefined(ent)) {
+  if(isDefined(ent)) {
     remove_from_ent(ent, self);
   }
 }
 
 function ent_already_in(trig) {
-  if(!isdefined(self._triggers)) {
+  if(!isDefined(self._triggers)) {
     return false;
   }
-  if(!isdefined(self._triggers[trig getentitynumber()])) {
+  if(!isDefined(self._triggers[trig getentitynumber()])) {
     return false;
   }
   if(!self._triggers[trig getentitynumber()]) {
@@ -945,17 +937,17 @@ function ent_already_in(trig) {
 }
 
 function add_to_ent(ent, trig) {
-  if(!isdefined(ent._triggers)) {
+  if(!isDefined(ent._triggers)) {
     ent._triggers = [];
   }
   ent._triggers[trig getentitynumber()] = 1;
 }
 
 function remove_from_ent(ent, trig) {
-  if(!isdefined(ent._triggers)) {
+  if(!isDefined(ent._triggers)) {
     return;
   }
-  if(!isdefined(ent._triggers[trig getentitynumber()])) {
+  if(!isDefined(ent._triggers[trig getentitynumber()])) {
     return;
   }
   ent._triggers[trig getentitynumber()] = 0;

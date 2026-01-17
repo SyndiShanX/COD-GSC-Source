@@ -11,8 +11,7 @@
 #include maps\karma_2_anim;
 #include maps\karma_2;
 
-precache_util_fx() {
-}
+precache_util_fx() {}
 
 precache_scripted_fx() {
   level._effect["sniper_glint"] = loadfx("misc/fx_misc_sniper_scope_glint");
@@ -196,11 +195,8 @@ createfx_setup() {
   maps\karma_2::load_gumps_karma();
 }
 
-createfx_setup_gump_mall() {
-}
+createfx_setup_gump_mall() {}
 
-createfx_setup_gump_sundeck() {
-}
+createfx_setup_gump_sundeck() {}
 
-createfx_setup_gump_the_end() {
-}
+createfx_setup_gump_the_end() {}

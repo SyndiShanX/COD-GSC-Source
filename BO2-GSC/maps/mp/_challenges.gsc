@@ -762,7 +762,7 @@ genericbulletkill(data, victim, weapon) {
   player.pers["lastBulletKillTime"] = time;
 
   if(data.victim.idflagstime == time) {
-    if(data.victim.idflags & level.idflags_penetration) {
+    if(data.victim.idflags &level.idflags_penetration) {
       player addplayerstat("kill_enemy_through_wall", 1);
 
       if(isDefined(weapon) && weaponhasattachment(weapon, "fmj"))
@@ -923,7 +923,7 @@ challengeroundend(data) {
 
 roundend(winner) {
   wait 0.05;
-  data = spawnstruct();
+  data = spawnStruct();
   data.time = gettime();
 
   if(level.teambased) {
@@ -941,7 +941,7 @@ roundend(winner) {
 
 gameend(winner) {
   wait 0.05;
-  data = spawnstruct();
+  data = spawnStruct();
   data.time = gettime();
 
   if(level.teambased) {
@@ -989,8 +989,7 @@ capturedobjective(capturetime) {
       if(distsq < 57600) {
         self addplayerstat("capture_objective_in_smoke", 1);
         self addweaponstat("willy_pete_mp", "CombatRecordStat", 1);
-      } else {
-      }
+      } else {}
     }
   }
 }
@@ -1330,8 +1329,7 @@ bothbombsdetonatewithintime() {
   self addgametypestat("both_bombs_detonate_10_seconds", 1);
 }
 
-fullclipnomisses(weaponclass, weapon) {
-}
+fullclipnomisses(weaponclass, weapon) {}
 
 destroyedturret(weaponname) {
   self destroyscorestreak(weaponname);
@@ -1444,7 +1442,7 @@ playerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, shitloc, att
     sweapon = "none";
 
   self endon("disconnect");
-  data = spawnstruct();
+  data = spawnStruct();
   data.victim = self;
   data.victimstance = self getstance();
   data.einflictor = einflictor;

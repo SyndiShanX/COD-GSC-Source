@@ -37,11 +37,11 @@ onSpawnCameraSpike(watcher, player) {
   self SetTeam(player.team);
   self.prevOwner = player;
   playerAngles = player GetPlayerAngles();
-  forward = AnglesToForward(playerAngles);
-  eye = player GetEye();
-  trace = BulletTrace(eye + vector_scale(forward, 10), eye + vector_scale(forward, 10000), false, player, false, true);
-  self.cameraHead = Spawn("script_model", self GetTagOrigin("tag_leg_2"));
-  self.cameraHead SetModel("t5_weapon_camera_head_world");
+  forward = anglesToForward(playerAngles);
+  eye = player getEye();
+  trace = bulletTrace(eye + vector_scale(forward, 10), eye + vector_scale(forward, 10000), false, player, false, true);
+  self.cameraHead = spawn("script_model", self GetTagOrigin("tag_leg_2"));
+  self.cameraHead setModel("t5_weapon_camera_head_world");
   self.cameraHead.angles = self.angles;
   self.cameraHead linkto(self);
   self.cameraHead maps\mp\gametypes\_weaponobjects::attachReconModel("t5_weapon_camera_head_world_detect", player);
@@ -83,7 +83,7 @@ changeOwner(lastOwner, newOwner) {
   self SetTeam(newOwner.team);
 }
 cameraSpikeDetonate(attacker) {
-  PlayFX(level._equipment_explode_fx, self.origin);
+  playFX(level._equipment_explode_fx, self.origin);
   PlaySoundAtPosition("dst_equipment_destroy", self.origin);
   self destroyEnt();
 }
@@ -103,7 +103,7 @@ adjustCameraDirection(point) {
 watchStun() {
   self endon("death");
   self.cameraHead endon("death");
-  for (;;) {
+  for(;;) {
     self waittill("stunned");
     if(isDefined(self.cameraHead)) {
       self.cameraHead.stunned = true;
@@ -131,11 +131,11 @@ watchToggle(player) {
   self endon("death");
   self endon("owner_changed");
   player endon("disconnect");
-  while (true) {
+  while(true) {
     if(player ActionSlotOneButtonPressed() && !player IsRemoteControlling()) {
       player.cameraSpikeToggle = !player.cameraSpikeToggle;
       player toggleCameraSpike(player.cameraSpikeToggle);
-      while (player ActionSlotOneButtonPressed())
+      while(player ActionSlotOneButtonPressed())
         wait 0.05;
     }
     wait 0.05;
@@ -144,12 +144,12 @@ watchToggle(player) {
 watchCameraSpikeDamage(watcher) {
   self endon("death");
   self endon("hacked");
-  self SetCanDamage(true);
+  self setCanDamage(true);
   damageMax = 100;
   if(!self maps\mp\gametypes\_weaponobjects::isHacked()) {
     self.damageTaken = 0;
   }
-  while (true) {
+  while(true) {
     self.maxhealth = 100000;
     self.health = self.maxhealth;
     self waittill("damage", damage, attacker, direction, point, type, tagName, modelName, partname, weaponName, iDFlags);
@@ -194,8 +194,8 @@ watchCameraSpikeDamage(watcher) {
 watch_camera_head_damage(watcher, body) {
   self endon("death");
   body endon("death");
-  self SetCanDamage(true);
-  while (true) {
+  self setCanDamage(true);
+  while(true) {
     self.maxhealth = 100000;
     self.health = self.maxhealth;
     self waittill("damage", damage, attacker, direction, point, type, tagName, modelName, partname, weapon, iDFlags);

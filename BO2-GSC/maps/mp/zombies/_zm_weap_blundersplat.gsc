@@ -19,7 +19,7 @@ init() {
     precacheitem("blundersplat_explosive_dart_zm");
   }
 
-  level.zombie_spawners = getentarray("zombie_spawner", "script_noteworthy");
+  level.zombie_spawners = getEntArray("zombie_spawner", "script_noteworthy");
   array_thread(level.zombie_spawners, ::add_spawn_function, ::zombie_wait_for_blundersplat_hit);
   level.custom_derive_damage_refs = ::gib_on_blundergat_damage;
   level._effect["dart_light"] = loadfx("weapon/crossbow/fx_trail_crossbow_blink_grn_os");
@@ -39,7 +39,7 @@ zombie_wait_for_blundersplat_hit() {
 
     if(weaponname == "blundersplat_bullet_zm") {
       if(!isDefined(self.titus_tagged)) {
-        a_grenades = getentarray("grenade", "classname");
+        a_grenades = getEntArray("grenade", "classname");
 
         if(!isDefined(a_grenades) || a_grenades.size <= 0) {
           continue;
@@ -147,9 +147,9 @@ _titus_locate_target(is_not_upgraded) {
     }
   }
 
-  vec = anglestoforward(fire_angles);
+  vec = anglesToForward(fire_angles);
   trace_end = fire_origin + vec * 20000;
-  trace = bullettrace(fire_origin, trace_end, 1, self);
+  trace = bulletTrace(fire_origin, trace_end, 1, self);
   offsetpos = trace["position"] + _titus_get_spread(80);
   e_dart = magicbullet("blundersplat_bullet_zm", fire_origin, offsetpos, self);
   e_dart thread _titus_reset_grenade_fuse(n_fuse_timer);
@@ -188,7 +188,7 @@ _titus_target_check_for_grenade_hits() {
     self waittill("damage", amount, inflictor, direction, point, type, tagname, modelname, partname, weaponname, idflags);
 
     if(weaponname == "blundersplat_bullet_zm") {
-      a_grenades = getentarray("grenade", "classname");
+      a_grenades = getEntArray("grenade", "classname");
 
       foreach(e_grenade in a_grenades) {
         if(isDefined(e_grenade.model) && e_grenade.model == "t6_wpn_zmb_projectile_blundergat") {
@@ -228,7 +228,7 @@ _titus_reset_grenade_fuse(n_fuse_timer, is_not_upgraded) {
     n_fuse_timer = randomfloatrange(1, 1.5);
 
   self waittill("death");
-  a_grenades = getentarray("grenade", "classname");
+  a_grenades = getEntArray("grenade", "classname");
 
   foreach(e_grenade in a_grenades) {
     if(isDefined(e_grenade.model) && e_grenade.model == "t6_wpn_zmb_projectile_blundergat" && !isDefined(e_grenade.fuse_reset)) {

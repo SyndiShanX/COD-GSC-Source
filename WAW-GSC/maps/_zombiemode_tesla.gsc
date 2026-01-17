@@ -64,7 +64,7 @@ tesla_arc_damage(source_enemy, player, arc_num) {
   enemies = tesla_get_enemies_in_area(self GetTagOrigin("j_head"), level.zombie_vars["tesla_radius_start"] - radius_decay, player);
   tesla_flag_hit(enemies, true);
   debug_print("TESLA: " + enemies.size + " enemies hit during arc: " + arc_num);
-  for (i = 0; i < enemies.size; i++) {
+  for(i = 0; i < enemies.size; i++) {
     if(tesla_end_arc_damage(arc_num + 1, player.tesla_enemies_hit)) {
       tesla_flag_hit(enemies[i], false);
       continue;
@@ -101,7 +101,7 @@ tesla_get_enemies_in_area(origin, distance, player) {
   }
   zombies = player.tesla_enemies;
   if(isDefined(zombies)) {
-    for (i = 0; i < zombies.size; i++) {
+    for(i = 0; i < zombies.size; i++) {
       test_origin = zombies[i] GetTagOrigin("j_head");
       if(isDefined(zombies[i].zombie_tesla_hit) && zombies[i].zombie_tesla_hit == true) {
         continue;
@@ -123,7 +123,7 @@ tesla_get_enemies_in_area(origin, distance, player) {
 
 tesla_flag_hit(enemy, hit) {
   if(IsArray(enemy)) {
-    for (i = 0; i < enemy.size; i++) {
+    for(i = 0; i < enemy.size; i++) {
       enemy[i].zombie_tesla_hit = hit;
     }
   } else {
@@ -156,7 +156,7 @@ tesla_do_damage(source_enemy, arc_num, player) {
     player.tesla_arc_count++;
     source_enemy tesla_play_arc_fx(self);
   }
-  while (player.tesla_network_death_choke > level.zombie_vars["tesla_network_death_choke"]) {
+  while(player.tesla_network_death_choke > level.zombie_vars["tesla_network_death_choke"]) {
     debug_print("TESLA: Choking Tesla Damage. Dead enemies this network frame: " + player.tesla_network_death_choke);
     wait(0.05);
   }
@@ -191,21 +191,21 @@ tesla_play_death_fx(arc_num) {
   if(arc_num > 1) {
     fx = "tesla_shock_secondary";
   }
-  PlayFxOnTag(level._effect[fx], self, tag);
-  self playsound("imp_tesla");
+  playFXOnTag(level._effect[fx], self, tag);
+  self playSound("imp_tesla");
   level thread play_elec_vox(self.origin);
   if(!self enemy_is_dog()) {
     if(RandomInt(100) < level.zombie_vars["tesla_head_gib_chance"]) {
       wait(RandomFloat(0.53, 1.0));
       self maps\_zombiemode_spawner::zombie_head_gib();
     } else {
-      PlayFxOnTag(level._effect["tesla_shock_eyes"], self, "J_Eyeball_LE");
+      playFXOnTag(level._effect["tesla_shock_eyes"], self, "J_Eyeball_LE");
     }
   }
 }
 
 play_elec_vox_choke() {
-  while (1) {
+  while(1) {
     level._num_tesla_elec_vox = 0;
     wait_network_frame();
     wait_network_frame();
@@ -217,7 +217,7 @@ play_elec_vox(origin) {
     level thread play_elec_vox_choke();
   }
   wait(randomfloatrange(0, 0.2));
-  while (level._num_tesla_elec_vox > 0) {
+  while(level._num_tesla_elec_vox > 0) {
     wait_network_frame();
   }
   level._num_tesla_elec_vox++;
@@ -239,9 +239,9 @@ tesla_play_arc_fx(target) {
     debug_print("TESLA: Not playing arcing FX. Enemies too close.");
     return;
   }
-  fxOrg = Spawn("script_model", origin);
-  fxOrg SetModel("tag_origin");
-  fx = PlayFxOnTag(level._effect["tesla_bolt"], fxOrg, "tag_origin");
+  fxOrg = spawn("script_model", origin);
+  fxOrg setModel("tag_origin");
+  fx = playFXOnTag(level._effect["tesla_bolt"], fxOrg, "tag_origin");
   playsoundatposition("tesla_bounce", fxOrg.origin);
   fxOrg MoveTo(target_origin, level.zombie_vars["tesla_arc_travel_time"]);
   fxOrg waittill("movedone");
@@ -257,7 +257,7 @@ tesla_debug_arc(origin, distance) {
     return;
   }
   start = GetTime();
-  while (GetTime() < start + 3000) {
+  while(GetTime() < start + 3000) {
     drawcylinder(origin, distance, 1);
     wait(0.05);
   }
@@ -272,7 +272,7 @@ enemy_killed_by_tesla() {
 }
 
 on_player_connect() {
-  for (;;) {
+  for(;;) {
     level waittill("connecting", player);
     player thread tesla_sound_thread();
     player thread tesla_pvp_thread();
@@ -283,13 +283,13 @@ on_player_connect() {
 tesla_sound_thread() {
   self endon("disconnect");
   self waittill("spawned_player");
-  for (;;) {
+  for(;;) {
     result = self waittill_any_return("grenade_fire", "death", "player_downed", "weapon_change", "grenade_pullback");
     if(!isDefined(result)) {
       continue;
     }
     if((result == "weapon_change" || result == "grenade_fire") && self GetCurrentWeapon() == "tesla_gun") {
-      self PlayLoopSound("tesla_idle", 0.25);
+      self playLoopSound("tesla_idle", 0.25);
     } else {
       self notify("weap_away");
       self StopLoopSound(0.25);
@@ -300,7 +300,7 @@ tesla_sound_thread() {
 tesla_engine_sweets() {
   self endon("disconnect");
   self endon("weap_away");
-  while (1) {
+  while(1) {
     wait(randomintrange(7, 15));
     self play_tesla_sound("tesla_sweeps_idle");
   }
@@ -310,7 +310,7 @@ tesla_pvp_thread() {
   self endon("disconnect");
   self endon("death");
   self waittill("spawned_player");
-  for (;;) {
+  for(;;) {
     self waittill("weapon_pvp_attack", attacker, weapon, damage, mod);
     if(self maps\_laststand::player_is_in_laststand()) {
       continue;
@@ -334,7 +334,7 @@ tesla_pvp_thread() {
     }
     self setelectrified(1.0);
     self shellshock("electrocution", 1.0);
-    self playsound("tesla_bounce");
+    self playSound("tesla_bounce");
   }
 }
 
@@ -349,7 +349,7 @@ play_tesla_sound(emotion) {
     level.one_emo_at_a_time = 1;
     org = spawn("script_origin", self.origin);
     org LinkTo(self);
-    org playsound(emotion, "sound_complete" + "_" + level.var_counter);
+    org playSound(emotion, "sound_complete" + "_" + level.var_counter);
     org waittill("sound_complete" + "_" + level.var_counter);
     org delete();
     level.one_emo_at_a_time = 0;
@@ -370,7 +370,7 @@ tesla_network_choke() {
   self endon("death");
   self waittill("spawned_player");
   self.tesla_network_death_choke = 0;
-  for (;;) {
+  for(;;) {
     wait_network_frame();
     wait_network_frame();
     self.tesla_network_death_choke = 0;

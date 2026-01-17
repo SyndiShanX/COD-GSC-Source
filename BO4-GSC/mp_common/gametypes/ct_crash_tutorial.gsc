@@ -29,7 +29,6 @@
 #include scripts\mp_common\gametypes\ct_vo;
 #include scripts\mp_common\gametypes\globallogic_score;
 #include scripts\mp_common\supplypod;
-
 #namespace ct_crash_tutorial;
 
 init() {
@@ -82,7 +81,7 @@ function_c9ff0dce() {
   self.health_start = self.health;
   self.overrideplayerdamage = &callback_player_damage;
 
-  if(self.team == #"allies") {
+  if(self.team == # "allies") {
     if(!isbot(self)) {
       if(level.var_ad7c0539 === 4) {
         self thread function_6e01051f();
@@ -123,21 +122,21 @@ function_62afa484() {
 }
 
 callback_player_damage(e_inflictor, e_attacker, n_damage, n_dflags, str_means_of_death, weapon, v_point, v_dir, str_hit_loc, n_psoffsettime, var_8b69d5cf) {
-  if(level.var_ad7c0539 === 1 && self.team == #"allies" && isbot(self)) {
+  if(level.var_ad7c0539 === 1 && self.team == # "allies" && isbot(self)) {
     if(self.health > int(self.health_start * 0.3)) {
       n_damage *= 1.5;
     }
   }
 
-  if(level.var_ad7c0539 === 4 && self.team == #"allies") {
+  if(level.var_ad7c0539 === 4 && self.team == # "allies") {
     n_damage *= 0.1;
-  } else if(self.health < int(self.health_start * 0.3) && self.team == #"allies" && isbot(self)) {
+  } else if(self.health < int(self.health_start * 0.3) && self.team == # "allies" && isbot(self)) {
     n_damage = 0;
   } else if(isbot(e_attacker)) {
     n_damage *= 0.2;
   }
 
-  if(level.var_ad7c0539 === 2 && self.team == #"axis") {
+  if(level.var_ad7c0539 === 2 && self.team == # "axis") {
     n_damage *= 4;
   }
 
@@ -145,7 +144,7 @@ callback_player_damage(e_inflictor, e_attacker, n_damage, n_dflags, str_means_of
 }
 
 function_72ba0df6(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(isbot(self) && self.team === #"axis") {
+  if(isbot(self) && self.team === # "axis") {
     self.isinuse = 0;
   }
 
@@ -153,7 +152,7 @@ function_72ba0df6(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
     self ct_utils::clear_killstreaks();
   }
 
-  if(level.var_ad7c0539 === 2 && self.team === #"axis") {
+  if(level.var_ad7c0539 === 2 && self.team === # "axis") {
     if(isalive(level.players[0])) {
       level.var_3cdb14a8--;
       level.players[0] ct_utils::function_80bf685b(level.var_3cdb14a8);
@@ -162,7 +161,7 @@ function_72ba0df6(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
     return;
   }
 
-  if(level.var_ad7c0539 === 4 && self.team === #"axis" && isplayer(attacker)) {
+  if(level.var_ad7c0539 === 4 && self.team === # "axis" && isplayer(attacker)) {
     if(isDefined(level.var_f9242904) && level.var_f9242904 && isalive(level.players[0])) {
       function_1089714c();
       return;
@@ -211,7 +210,7 @@ function_9b9525e9() {
 
 function_5ac0441c() {
   level endon(#"combattraining_logic_finished");
-  level.var_e72728b8 = array(#"eq_localheal", #"gadget_supplypod");
+  level.var_e72728b8 = array(#"eq_localheal", # "gadget_supplypod");
   level.var_32ae304 = undefined;
   player = getplayers()[0];
   level notify(#"start_tak_5_collision");
@@ -219,11 +218,11 @@ function_5ac0441c() {
   ct_vo::function_3ca1b77d();
   level.var_72c3ea74 = struct::get_array("s_squad_loc_1");
   level.var_da5432a2 = 0;
-  level thread ct_bots::activate_bots(level.var_72c3ea74.size, #"allies");
+  level thread ct_bots::activate_bots(level.var_72c3ea74.size, # "allies");
   wait 0.5;
   level ct_vo::play_vo(#"hash_73f500c897cb9e5", 1);
   level thread ct_vo::function_14b08e49(array(#"hash_52baeef8970ea64c"), "stop_goto_nag");
-  ct_utils::function_e0d36a2c(undefined, "s_tak_5_goto", array(#"eq_localheal", #"gadget_supplypod"), 0, 1, 30);
+  ct_utils::function_e0d36a2c(undefined, "s_tak_5_goto", array(#"eq_localheal", # "gadget_supplypod"), 0, 1, 30);
   ct_utils::function_e9ab1003("s_tak_5_goto");
   level thread function_c1069664();
   level notify(#"stop_goto_nag");
@@ -234,7 +233,7 @@ function_5ac0441c() {
   ct_utils::function_9aca2fa0("ct_action2");
   level.var_72c3ea74 = struct::get_array("s_enemy_loc_1");
   level.var_da5432a2 = 0;
-  level thread ct_bots::activate_bots(level.var_72c3ea74.size, #"axis");
+  level thread ct_bots::activate_bots(level.var_72c3ea74.size, # "axis");
   wait 0.5;
   player thread ct_utils::function_61c3d59c(#"hash_2bf8d3080956ea43", undefined);
   level ct_vo::play_vo(#"hash_4ece0ca73eb52d2", 1);
@@ -246,16 +245,16 @@ function_5ac0441c() {
   level thread ct_vo::play_vo(#"hash_66f25a8f7113d138", 0);
   wait 2.5;
   level thread ct_vo::function_14b08e49(array(#"hash_3fbd29645b774ffa"), "stop_heal_nag");
-  var_5bddeb93 = player gamepadusedlast() ? #"hash_64d49e1e2e7c63e3" : #"hash_6e680b15656b935d";
+  var_5bddeb93 = player gamepadusedlast() ? # "hash_64d49e1e2e7c63e3" : # "hash_6e680b15656b935d";
   player thread ct_utils::function_61c3d59c(var_5bddeb93, undefined);
   level.var_e72728b8 = array(#"gadget_supplypod");
   level waittill(#"hash_4acf6588b40fe941");
   level notify(#"stop_heal_nag");
   ct_vo::function_3ca1b77d();
   ct_utils::function_c2a10fc();
-  level.var_e72728b8 = array(#"eq_localheal", #"gadget_supplypod");
+  level.var_e72728b8 = array(#"eq_localheal", # "gadget_supplypod");
   level flag::set("stop_reinforce");
-  level ct_vo::function_831e0584(array(#"hash_50cde9f5b369d5fa", #"hash_50cdeaf5b369d7ad"), 1);
+  level ct_vo::function_831e0584(array(#"hash_50cde9f5b369d5fa", # "hash_50cdeaf5b369d7ad"), 1);
   ct_utils::function_654280be();
   ct_utils::function_9aca2fa0("ct_action");
   level flag::set("first_battle_over");
@@ -273,13 +272,13 @@ function_6dd7691f() {
   level notify(#"start_assault_pack_collision");
   level notify(#"start_assault_pack_lower_ramp_collision");
   level thread ct_vo::function_14b08e49(array(#"hash_52baeef8970ea64c"), "stop_goto_nag");
-  ct_utils::function_e0d36a2c(undefined, "s_assault_pack_goto", array(#"eq_localheal", #"gadget_supplypod"), 0, 1, 50);
+  ct_utils::function_e0d36a2c(undefined, "s_assault_pack_goto", array(#"eq_localheal", # "gadget_supplypod"), 0, 1, 50);
   ct_utils::function_e9ab1003("s_assault_pack_goto");
   level notify(#"stop_goto_nag");
   level notify(#"start_tak_5_collision");
   level notify(#"stop_tak_5_rear_collision");
   ct_vo::function_3ca1b77d();
-  level ct_vo::function_831e0584(array(#"hash_2f703d36d8623dbd", #"hash_2f703a36d86238a4"), 1);
+  level ct_vo::function_831e0584(array(#"hash_2f703d36d8623dbd", # "hash_2f703a36d86238a4"), 1);
   s_loc = struct::get("s_assault_pack_target");
   mdl_pod = util::spawn_model("wpn_t8_eqp_supply_pod_prop", s_loc.origin, s_loc.angles);
   wait 0.1;
@@ -303,7 +302,7 @@ function_6dd7691f() {
   }
 
   level flag::set("supply_dropped");
-  level.var_e72728b8 = array(#"eq_localheal", #"gadget_supplypod");
+  level.var_e72728b8 = array(#"eq_localheal", # "gadget_supplypod");
   mdl_pod delete();
   ct_utils::function_c2a10fc();
   level notify(#"stop_resupply_nag");
@@ -311,7 +310,7 @@ function_6dd7691f() {
   wait 1.5;
   level.pod = gameobjects::function_6cdadc59(level.var_57a0fc09);
   level thread function_13b1605();
-  level ct_vo::function_831e0584(array(#"hash_2f703b36d8623a57", #"hash_2f703836d862353e"), 1);
+  level ct_vo::function_831e0584(array(#"hash_2f703b36d8623a57", # "hash_2f703836d862353e"), 1);
   level flag::wait_till("supply_done");
   level flag::clear("supply_done");
 
@@ -330,7 +329,7 @@ function_6dd7691f() {
   ct_utils::function_9aca2fa0("ct_action2");
   level.var_72c3ea74 = struct::get_array("s_enemy_loc_2");
   level.var_da5432a2 = 0;
-  level thread ct_bots::activate_bots(level.var_72c3ea74.size, #"axis");
+  level thread ct_bots::activate_bots(level.var_72c3ea74.size, # "axis");
   wait 3;
   level.players[0] thread ct_utils::function_61c3d59c(undefined, undefined, "dynobj_TeamDefend");
   level.players[0] ct_utils::function_80bf685b(level.var_3cdb14a8);
@@ -377,7 +376,7 @@ function_6dd7691f() {
   }
 
   ct_vo::function_3ca1b77d();
-  level.var_e72728b8 = array(#"eq_localheal", #"gadget_supplypod");
+  level.var_e72728b8 = array(#"eq_localheal", # "gadget_supplypod");
   wait 0.5;
 }
 
@@ -390,7 +389,7 @@ function_b8b46dc4() {
   level notify(#"stop_assault_pack_collision");
   level flag::set("goto_entry");
   level thread ct_vo::function_14b08e49(array(#"hash_52baeef8970ea64c"), "stop_goto_nag");
-  ct_utils::function_e0d36a2c(undefined, "s_flash_bang_goto", array(#"eq_localheal", #"gadget_supplypod"), 0, 0, 30);
+  ct_utils::function_e0d36a2c(undefined, "s_flash_bang_goto", array(#"eq_localheal", # "gadget_supplypod"), 0, 0, 30);
   ct_utils::function_e9ab1003("s_flash_bang_goto");
   level notify(#"start_assault_pack_collision");
   level notify(#"start_flash_bang_collision");
@@ -432,7 +431,7 @@ function_b8b46dc4() {
       wait 0.75;
       level.var_72c3ea74 = struct::get_array("bathhouse", "script_noteworthy");
       level.var_da5432a2 = 0;
-      level thread ct_bots::activate_bots(level.var_72c3ea74.size, #"allies");
+      level thread ct_bots::activate_bots(level.var_72c3ea74.size, # "allies");
       wait 0.5;
     }
 
@@ -459,7 +458,7 @@ function_c43189cd() {
   level notify(#"stop_goto_nag");
   level notify(#"start_earn_scorestreak_collision");
   level notify(#"stop_flash_bang_collision");
-  level ct_vo::function_831e0584(array(#"hash_e9de3cecbdc8e8c", #"hash_e9de4cecbdc903f", #"hash_e9de5cecbdc91f2", #"hash_e9de6cecbdc93a5"), 1);
+  level ct_vo::function_831e0584(array(#"hash_e9de3cecbdc8e8c", # "hash_e9de4cecbdc903f", # "hash_e9de5cecbdc91f2", # "hash_e9de6cecbdc93a5"), 1);
   globallogic_score::_setplayermomentum(level.players[0], 0);
   callback::on_player_killed_with_params(&ct_utils::function_944e4110);
   level thread ct_vo::function_831e0584(array("vox_tvoi_tutor_crash_final_score_earn_4"));
@@ -469,9 +468,9 @@ function_c43189cd() {
   function_8ab81320();
 
   if(level.players[0] isinvehicle()) {
-    ct_vo::function_5df1a850(level.mantis, array(#"hash_23cf8a3a3e0d6ed3", #"hash_23cf893a3e0d6d20", #"hash_23cf8c3a3e0d7239"));
+    ct_vo::function_5df1a850(level.mantis, array(#"hash_23cf8a3a3e0d6ed3", # "hash_23cf893a3e0d6d20", # "hash_23cf8c3a3e0d7239"));
   } else {
-    level ct_vo::function_831e0584(array(#"hash_23cf8a3a3e0d6ed3", #"hash_23cf893a3e0d6d20", #"hash_23cf8c3a3e0d7239"), 1);
+    level ct_vo::function_831e0584(array(#"hash_23cf8a3a3e0d6ed3", # "hash_23cf893a3e0d6d20", # "hash_23cf8c3a3e0d7239"), 1);
   }
 
   wait 1;
@@ -494,7 +493,7 @@ function_8ab81320() {
   level thread ct_vo::play_vo(#"hash_746bbb3099ae8d4b", 0);
 
   while(!level flag::get("scorestreak_done")) {
-    var_c6847598 = level.players[0] gamepadusedlast() ? #"hash_6294dadea114ab41" : #"hash_57872bdaf9640a47";
+    var_c6847598 = level.players[0] gamepadusedlast() ? # "hash_6294dadea114ab41" : # "hash_57872bdaf9640a47";
     level.players[0] ct_utils::function_61c3d59c(var_c6847598, undefined);
     level.players[0] ct_utils::function_49e0c5bc(0);
     level.players[0] thread function_667b9fbc();
@@ -524,7 +523,7 @@ function_8ab81320() {
         level ct_vo::play_vo(#"hash_fc616b0cea91320", 1);
         level.players[0] ct_utils::function_61c3d59c(#"hash_6294dadea114ab41", undefined);
         ct_utils::function_e44c5b8e(#"ai_tank_marker", 10);
-        level.var_b4a06c5b = #"tank_robot";
+        level.var_b4a06c5b = # "tank_robot";
         setdvar(#"hash_3e06b14c41136e95", 0);
         level.players[0] thread function_667b9fbc();
         level waittill(#"marker_ready");
@@ -540,9 +539,9 @@ function_8ab81320() {
 
     level thread ct_vo::play_vo(#"hash_6d4d58453e122b30");
     level thread ct_vo::function_14b08e49(array(#"hash_786dd82792eda658"), "stop_mantis_nag");
-    var_fc51cece = level.players[0] gamepadusedlast() ? #"hash_4015899fc4930e7d" : #"hash_6731f4ac7ebfc213";
+    var_fc51cece = level.players[0] gamepadusedlast() ? # "hash_4015899fc4930e7d" : # "hash_6731f4ac7ebfc213";
     level.players[0] ct_utils::function_61c3d59c(var_fc51cece, undefined);
-    s_result = level.mantis waittill(#"enter_vehicle", #"death");
+    s_result = level.mantis waittill(#"enter_vehicle", # "death");
     level.players[0] ct_utils::function_61c3d59c(#"hash_6d973e1934818fdc", undefined);
     level notify(#"stop_mantis_nag");
 
@@ -562,7 +561,7 @@ function_8ab81320() {
     }
 
     if(isDefined(level.mantis)) {
-      level.mantis.team = #"allies";
+      level.mantis.team = # "allies";
       level.mantis thread function_27c1d990();
       level thread function_89bb199b();
     }
@@ -630,7 +629,7 @@ function_45f0ba8d() {
 
   while(level.var_f9242904) {
     ct_utils::function_e44c5b8e(#"ai_tank_marker", 10);
-    level.var_b4a06c5b = #"tank_robot";
+    level.var_b4a06c5b = # "tank_robot";
     setdvar(#"hash_3e06b14c41136e95", 0);
     level.players[0] thread ct_utils::function_61c3d59c(undefined, undefined, "dynobj_EarnMantis");
     level.var_37591676 = 0;
@@ -642,7 +641,7 @@ function_45f0ba8d() {
     level.players[0] thread function_c59990b1();
     level.var_72c3ea74 = struct::get_array("s_enemy_loc_scorestreak");
     level.var_da5432a2 = 0;
-    level thread ct_bots::activate_bots(level.var_72c3ea74.size, #"axis");
+    level thread ct_bots::activate_bots(level.var_72c3ea74.size, # "axis");
     wait 0.5;
 
     while(!level flag::get("squad_dead") && level.var_f9242904 && !(isDefined(level.var_51ff7a58) && level.var_51ff7a58) && isalive(level.players[0])) {
@@ -662,7 +661,7 @@ function_45f0ba8d() {
       wait 0.5;
       level.var_72c3ea74 = struct::get_array("s_cover_scorestreak");
       level.var_da5432a2 = 0;
-      level thread ct_bots::activate_bots(level.var_72c3ea74.size, #"allies");
+      level thread ct_bots::activate_bots(level.var_72c3ea74.size, # "allies");
       wait 0.5;
       level flag::clear("squad_dead");
       level flag::clear("stop_reinforce");
@@ -683,7 +682,7 @@ function_45f0ba8d() {
   level notify(#"killstreak_ready");
   level.var_51ff7a58 = 0;
   callback::remove_on_player_killed_with_params(&ct_utils::function_944e4110);
-  level.var_e72728b8 = array(#"eq_localheal", #"gadget_supplypod");
+  level.var_e72728b8 = array(#"eq_localheal", # "gadget_supplypod");
 }
 
 function_537c9eea() {
@@ -696,7 +695,7 @@ function_537c9eea() {
 }
 
 function_1089714c(str_type) {
-  level endon(#"combattraining_logic_finished", #"killstreak_ready");
+  level endon(#"combattraining_logic_finished", # "killstreak_ready");
 
   if(isDefined(str_type)) {
     if(str_type == "ammo") {
@@ -706,9 +705,9 @@ function_1089714c(str_type) {
     }
 
     level.var_37591676 += n_points;
-    event = #"ekia";
-    eventindex = level.scoreinfo[event][#"row"];
-    level.players[0] globallogic_score::giveplayermomentumnotification(n_points, #"hash_480234a872bd64ac", undefined, 0, level.players[0].currentweapon, 0, eventindex, event, undefined);
+    event = # "ekia";
+    eventindex = level.scoreinfo[event][# "row"];
+    level.players[0] globallogic_score::giveplayermomentumnotification(n_points, # "hash_480234a872bd64ac", undefined, 0, level.players[0].currentweapon, 0, eventindex, event, undefined);
   } else {
     level.var_37591676 += 100;
   }
@@ -727,7 +726,7 @@ function_1089714c(str_type) {
 }
 
 function_667b9fbc() {
-  var_4152a793 = killstreaks::get_killstreak_momentum_cost(self, #"tank_robot");
+  var_4152a793 = killstreaks::get_killstreak_momentum_cost(self, # "tank_robot");
 
   if(self.momentum < var_4152a793) {
     globallogic_score::_setplayermomentum(self, var_4152a793);
@@ -804,7 +803,7 @@ function_119c4576(s_loc) {
   self setgoal(s_goal.origin, 1);
 
   while(isDefined(s_goal.target)) {
-    self waittill(#"goal", #"near_goal");
+    self waittill(#"goal", # "near_goal");
     s_goal = struct::get(s_goal.target);
     self setgoal(s_goal.origin, 1);
 
@@ -817,10 +816,10 @@ function_119c4576(s_loc) {
 }
 
 function_57da4e0f() {
-  level endon(#"combattraining_logic_finished", #"mantis_failed");
+  level endon(#"combattraining_logic_finished", # "mantis_failed");
   level.var_72c3ea74 = struct::get_array("s_mantis_enemy_1");
   level.var_da5432a2 = 0;
-  level thread ct_bots::activate_bots(level.var_72c3ea74.size, #"axis");
+  level thread ct_bots::activate_bots(level.var_72c3ea74.size, # "axis");
   wait 1;
   a_bots = level.players[0] ct_bots::function_dde6edbd();
   n_enemy_count = a_bots.size;
@@ -837,7 +836,7 @@ function_57da4e0f() {
 
   level.var_72c3ea74 = struct::get_array("s_mantis_enemy_2");
   level.var_da5432a2 = 0;
-  level thread ct_bots::activate_bots(level.var_72c3ea74.size, #"axis");
+  level thread ct_bots::activate_bots(level.var_72c3ea74.size, # "axis");
   a_bots = level.players[0] ct_bots::function_dde6edbd();
   n_enemy_count = a_bots.size;
 
@@ -853,7 +852,7 @@ function_57da4e0f() {
 
   level.var_72c3ea74 = struct::get_array("s_mantis_enemy_3");
   level.var_da5432a2 = 0;
-  level thread ct_bots::activate_bots(level.var_72c3ea74.size, #"axis");
+  level thread ct_bots::activate_bots(level.var_72c3ea74.size, # "axis");
 }
 
 function_27c1d990() {
@@ -867,7 +866,7 @@ function_27c1d990() {
 }
 
 function_457bfbbf() {
-  level endon(#"combattraining_logic_finished", #"scorestreak_done");
+  level endon(#"combattraining_logic_finished", # "scorestreak_done");
   level.players[0] endon(#"death");
   self endon(#"death");
   level.players[0] val::set("mantis_control", "takedamage", 0);
@@ -887,7 +886,7 @@ function_457bfbbf() {
 }
 
 function_2ba574d8() {
-  level endon(#"combattraining_logic_finished", #"mantis_failed");
+  level endon(#"combattraining_logic_finished", # "mantis_failed");
   s_result = self waittill(#"death");
   level thread cleanup_enemies();
 
@@ -945,7 +944,7 @@ function_58c62280(b_keyline, b_ignoreall) {
 
   switch (level.var_ad7c0539) {
     case 1:
-      if(self.team == #"allies") {
+      if(self.team == # "allies") {
         self thread function_58521014(s_loc);
         self thread function_85903699();
         self thread function_68ac03e(s_loc);
@@ -956,7 +955,7 @@ function_58c62280(b_keyline, b_ignoreall) {
 
       break;
     case 2:
-      if(self.team == #"allies") {
+      if(self.team == # "allies") {
         self thread function_85903699();
       } else {
         self thread function_257306e5(s_loc);
@@ -964,7 +963,7 @@ function_58c62280(b_keyline, b_ignoreall) {
 
       break;
     case 3:
-      if(self.team == #"allies") {
+      if(self.team == # "allies") {
         self thread function_68ac03e(s_loc);
         self thread function_d43893a9(s_loc);
       } else if(s_loc.script_noteworthy === "flash_bang") {
@@ -975,7 +974,7 @@ function_58c62280(b_keyline, b_ignoreall) {
 
       break;
     case 4:
-      if(self.team == #"allies") {
+      if(self.team == # "allies") {
         self thread function_d43893a9(s_loc);
       } else if(!isDefined(s_loc.script_noteworthy)) {
         self thread function_de259bfd(s_loc);
@@ -1250,7 +1249,7 @@ reinforce_enemy(s_loc) {
       if(level.players[0] ct_bots::function_dde6edbd().size < level.var_3cdb14a8) {
         level.var_72c3ea74 = array(s_loc);
         level.var_da5432a2 = 0;
-        ct_bots::activate_bots(level.var_72c3ea74.size, #"axis");
+        ct_bots::activate_bots(level.var_72c3ea74.size, # "axis");
       }
 
       return;
@@ -1258,7 +1257,7 @@ reinforce_enemy(s_loc) {
 
     level.var_72c3ea74 = array(s_loc);
     level.var_da5432a2 = 0;
-    ct_bots::activate_bots(level.var_72c3ea74.size, #"axis");
+    ct_bots::activate_bots(level.var_72c3ea74.size, # "axis");
   }
 }
 
@@ -1363,7 +1362,7 @@ function_c93a1ee3() {
 }
 
 function_c3ff6f27() {
-  level endon(#"combattraining_logic_finished", #"battle_over", #"squad_health_40");
+  level endon(#"combattraining_logic_finished", # "battle_over", # "squad_health_40");
   self endon(#"death");
   level flag::wait_till("squad_health_70");
   wait 10;
@@ -1428,7 +1427,7 @@ function_9ece6b44() {
 }
 
 function_779e90b6() {
-  level endon(#"combattraining_logic_finished", #"supply_done");
+  level endon(#"combattraining_logic_finished", # "supply_done");
 
   while(true) {
     s_result = level.players[0] waittill(#"supplypod_placed");
@@ -1490,7 +1489,7 @@ function_779e90b6() {
 
 function_b086032b(v_org) {
   self endon(#"death");
-  level.pod endoncallback(&function_9d4e5572, #"death");
+  level.pod endoncallback(&function_9d4e5572, # "death");
   self.var_72ec14cd = 0;
   self.s_entry = struct::get("s_bathhouse_entry_" + self.n_index);
   wait randomfloatrange(0.5, 2);
@@ -1554,7 +1553,7 @@ function_9d4e5572() {
 
 function_22014724() {
   self endon(#"death");
-  level endon(#"flash_bang", #"combattraining_logic_finished");
+  level endon(#"flash_bang", # "combattraining_logic_finished");
 
   while(true) {
     if(level.var_ad7c0539 === 4) {
@@ -1576,11 +1575,11 @@ slo_mo() {
   self endon(#"death");
   level flag::wait_till("slo_mo");
   level.var_e72728b8 = array(#"gadget_supplypod");
-  var_e9cfe36e = self gamepadusedlast() ? #"hash_262142273aedf81a" : #"hash_2a38a94893bab6ba";
+  var_e9cfe36e = self gamepadusedlast() ? # "hash_262142273aedf81a" : # "hash_2a38a94893bab6ba";
   self thread ct_utils::function_61c3d59c(var_e9cfe36e, undefined);
   level thread ct_vo::play_vo(#"hash_4ab0ccbfd177602f");
   setslowmotion(1, 0.2, 2);
-  s_result = level waittilltimeout(2.5, #"tak5_start");
+  s_result = level waittilltimeout(2.5, # "tak5_start");
   ct_utils::function_c2a10fc();
   setslowmotion(0.2, 1, 2);
   level notify(#"stop_flash_bang_contain_collision");
@@ -1611,12 +1610,12 @@ function_fa4b570b() {
   level endon(#"combattraining_logic_finished");
   level.var_72c3ea74 = array(struct::get("s_enemy_flash_bang"));
   level.var_da5432a2 = 0;
-  ct_bots::activate_bots(level.var_72c3ea74.size, #"axis");
+  ct_bots::activate_bots(level.var_72c3ea74.size, # "axis");
   level flag::wait_till("flash_bang");
   wait 2;
   level.var_72c3ea74 = struct::get_array("s_enemy_flash_banger");
   level.var_da5432a2 = 0;
-  level thread ct_bots::activate_bots(level.var_72c3ea74.size, #"axis");
+  level thread ct_bots::activate_bots(level.var_72c3ea74.size, # "axis");
 }
 
 function_a7eac7bd(s_loc) {
@@ -1701,7 +1700,7 @@ function_44b78b73() {
 
 ammo_watch(str_event) {
   self notify(#"ammo_watch");
-  self endon(#"death", #"ammo_watch");
+  self endon(#"death", # "ammo_watch");
   level flag::wait_till("supply_done");
   wait 1;
 
@@ -1712,7 +1711,7 @@ ammo_watch(str_event) {
 
     if(isDefined(s_result.pod)) {
       level.pod = s_result.pod;
-      level.pod endoncallback(&function_70fb1a55, #"death");
+      level.pod endoncallback(&function_70fb1a55, # "death");
       wait randomfloatrange(1, 2.5);
       var_d9fa3a2c = self getammocount(self.currentweapon);
 
@@ -1800,7 +1799,7 @@ function_a929047f() {
   level flag::wait_till_any(array("supply_drop", "tak5_done"));
 
   if(level flag::get("supply_drop")) {
-    var_8c977127 = self gamepadusedlast() ? #"hash_1c4ac6e9a0d267e4" : #"hash_24b56919b50565e0";
+    var_8c977127 = self gamepadusedlast() ? # "hash_1c4ac6e9a0d267e4" : # "hash_24b56919b50565e0";
     self thread ct_utils::function_61c3d59c(var_8c977127, undefined);
     level flag::wait_till("tak5_done");
   } else {
@@ -1813,7 +1812,7 @@ function_a929047f() {
 
 function_885de242() {
   level notify(#"ammo_watch");
-  level endon(#"combattraining_logic_finished", #"ammo_watch");
+  level endon(#"combattraining_logic_finished", # "ammo_watch");
 
   while(true) {
     s_result = level.players[0] waittill(#"supplypod_placed");
@@ -1855,7 +1854,7 @@ function_7bbbb2b2(v_org) {
   self endon(#"death");
 
   if(isDefined(level.var_cd01b270)) {
-    level.var_cd01b270 endoncallback(&function_70fb1a55, #"death");
+    level.var_cd01b270 endoncallback(&function_70fb1a55, # "death");
   }
 
   self.var_72ec14cd = 0;

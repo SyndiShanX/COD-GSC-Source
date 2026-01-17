@@ -554,9 +554,7 @@ node_wait(var_0, var_1, var_2) {
 }
 
 nodes_flag_triggered(var_0, var_1, var_2) {
-  for(var_3 = 0; isDefined(var_1) && var_3 < 3; var_1 = [
-      [var_2]
-    ](var_1.target)) {
+  for(var_3 = 0; isDefined(var_1) && var_3 < 3; var_1 = [[var_2]](var_1.target)) {
     var_3++;
     thread node_flag_triggered(var_0, var_1);
 
@@ -754,9 +752,7 @@ vehicle_paths_non_heli(var_0) {
       self vehicle_setspeed(0, var_7);
 
       if(isDefined(var_4.target))
-        thread overshoot_next_node([
-          [var_5]
-        ](var_4.target));
+        thread overshoot_next_node([[var_5]](var_4.target));
 
       var_4 maps\_utility::script_delay();
       self notify("delay_passed");
@@ -783,9 +779,7 @@ vehicle_paths_non_heli(var_0) {
           var_7 = var_4.script_decel;
 
         _vehicle_stop_named("script_flag_wait_" + var_4.script_flag_wait, var_8, var_7);
-        thread overshoot_next_node([
-          [var_5]
-        ](var_4.target));
+        thread overshoot_next_node([[var_5]](var_4.target));
       }
 
       common_scripts\utility::flag_wait(var_4.script_flag_wait);
@@ -831,9 +825,7 @@ vehicle_paths_non_heli(var_0) {
       break;
     }
 
-    var_4 = [
-      [var_5]
-    ](var_4.target);
+    var_4 = [[var_5]](var_4.target);
 
     if(!isDefined(var_4)) {
       var_4 = var_3;
@@ -1042,9 +1034,7 @@ vehicle_paths_helicopter(var_0, var_1, var_2) {
       break;
     }
 
-    var_7 = [
-      [var_8]
-    ](var_7.target);
+    var_7 = [[var_8]](var_7.target);
 
     if(!isDefined(var_7)) {
       var_7 = var_6;
@@ -1269,7 +1259,7 @@ vehicle_init(var_0) {
   var_0 thread maps\_vehicle_aianim::handle_attached_guys();
 
   if(isDefined(var_0.script_friendname))
-    var_0 setvehiclelookattext(var_0.script_friendname, & "");
+    var_0 setvehiclelookattext(var_0.script_friendname, &"");
 
   if(!var_0 ischeap())
     var_0 thread vehicle_handleunloadevent();

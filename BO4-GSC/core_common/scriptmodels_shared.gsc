@@ -5,7 +5,6 @@
 
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace scriptmodels;
 
 autoexec __init__system__() {
@@ -20,7 +19,7 @@ __init__() {
   }
 }
 
-private function_9abee270(model) {
+function_9abee270(model) {
   assert(isDefined(model));
 
   if(model.classname != "script_model" && model.classname != "script_brushmodel") {

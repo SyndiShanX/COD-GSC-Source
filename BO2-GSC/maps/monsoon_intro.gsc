@@ -99,10 +99,10 @@ wingsuit_ai_setup(str_model, str_orig_model) {
   if(self != level.crosby)
     self attach("c_usa_seal6_helmet_prop", "J_Head");
 
-  self setmodel(str_model);
+  self setModel(str_model);
   flag_wait("wingsuit_landing_started");
   wait 5;
-  self setmodel(str_orig_model);
+  self setModel(str_orig_model);
 
   if(self != level.crosby)
     self detach("c_usa_seal6_helmet_prop", "J_Head");
@@ -122,7 +122,7 @@ eagle_eye_far_flung() {
   flag_set("goggles_started");
   level clientnotify("sndFakeAmb");
   flag_set("intro_start_ambient_activity");
-  luinotifyevent(&"hud_update_vehicle_custom", 2, 1, & "goggles_hud");
+  luinotifyevent(&"hud_update_vehicle_custom", 2, 1, &"goggles_hud");
   wait 20;
   flag_set("goggles_done");
   wait 1;
@@ -173,7 +173,7 @@ eagle_eye_vo() {
 eagle_eye_vertigo() {
   flag_set("vertigo_started");
   o_player_start = getent("intro_far_flung_player_spot_org", "targetname");
-  a_m_fx_models = getentarray("enemy_marker_model", "targetname");
+  a_m_fx_models = getEntArray("enemy_marker_model", "targetname");
   o_player_start delete();
   array_delete(a_m_fx_models);
 }
@@ -211,7 +211,7 @@ eagle_eye_leap_of_faith() {
   level thread eagle_eye_squad_waits();
   level.crosby thread eagle_eye_crosby_jumps();
   level waittill("uncage_player");
-  array_delete(getentarray("wingsuit_launch_blocker", "targetname"));
+  array_delete(getEntArray("wingsuit_launch_blocker", "targetname"));
   level.player thread jump_fail_check();
   flag_set("jet_stream_launch_obj");
   flag_wait("leap_of_faith_started");
@@ -359,9 +359,9 @@ goggles_zoom_sound(str_direction) {
   e_binoc = spawn("script_origin", level.player.origin);
 
   if(str_direction == "in")
-    e_binoc playsound("evt_binocs_hud_zoom_out");
+    e_binoc playSound("evt_binocs_hud_zoom_out");
   else
-    e_binoc playsound("evt_binocs_hud_zoom_in");
+    e_binoc playSound("evt_binocs_hud_zoom_in");
 
   e_binoc delete();
 }
@@ -525,16 +525,15 @@ cliff_intro_harper_intro(guy) {
 
 cliff_swing_success_window_assist_start(guy) {
   level.player thread player_camera_shake_loop(0.15, 0.5, level.player.origin, 1000);
-  cliff_swing_success_window_harper(0.3, 0.2, "monsoon_gloves_impact", & "MONSOON_PROMPT_SWING", "lstick", "left");
+  cliff_swing_success_window_harper(0.3, 0.2, "monsoon_gloves_impact", &"MONSOON_PROMPT_SWING", "lstick", "left");
 }
 
 cliff_swing_success_window_grab_start(guy) {
   level.player thread player_camera_shake_loop(0.25, 0.5, level.player.origin, 1000);
-  cliff_swing_success_window_player(0.6, 0.2, "monsoon_gloves_impact", & "MONSOON_PROMPT_GLOVES_ON", "ltrig_rtrig");
+  cliff_swing_success_window_player(0.6, 0.2, "monsoon_gloves_impact", &"MONSOON_PROMPT_GLOVES_ON", "ltrig_rtrig");
 }
 
-cliff_swing_6_landing(guy) {
-}
+cliff_swing_6_landing(guy) {}
 
 cliff_swing_flying_rumble(guy) {
   level.player playrumblelooponentity("monsoon_player_swing");
@@ -642,7 +641,7 @@ cliff_swing_player_fx() {
   m_player_body = getent("player_body", "targetname");
 
   for(i = 0; i < 10; i++) {
-    playfxontag(getfx("fx_water_rope_swing"), m_player_body, "tag_camera");
+    playFXOnTag(getfx("fx_water_rope_swing"), m_player_body, "tag_camera");
     wait 0.2;
   }
 }
@@ -802,7 +801,7 @@ cliff_swing_tree_fall_rumble(m_player_body) {
 }
 
 nano_glove_left_on(m_player_body) {
-  playfxontag(getfx("nanoglove_impact"), m_player_body, "j_index_le_1");
+  playFXOnTag(getfx("nanoglove_impact"), m_player_body, "j_index_le_1");
   m_player_body ignorecheapentityflag(1);
   m_player_body setclientflag(2);
 }
@@ -813,7 +812,7 @@ nano_glove_left_off(m_player_body) {
 }
 
 nano_glove_right_on(m_player_body) {
-  playfxontag(getfx("nanoglove_impact"), m_player_body, "j_index_ri_1");
+  playFXOnTag(getfx("nanoglove_impact"), m_player_body, "j_index_ri_1");
   m_player_body ignorecheapentityflag(1);
   m_player_body setclientflag(1);
 }
@@ -829,6 +828,6 @@ nano_gloves_off(m_player_body) {
 }
 
 cliff_swing_impact_player(m_player_body) {
-  playfxontag(getfx("nanoglove_impact_cheap"), m_player_body, "j_index_le_1");
-  playfxontag(getfx("nanoglove_impact_cheap"), m_player_body, "j_index_ri_1");
+  playFXOnTag(getfx("nanoglove_impact_cheap"), m_player_body, "j_index_le_1");
+  playFXOnTag(getfx("nanoglove_impact_cheap"), m_player_body, "j_index_ri_1");
 }

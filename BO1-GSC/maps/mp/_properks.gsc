@@ -22,15 +22,15 @@ doProPerkCallback(callback, data) {
   if(!isDefined(level.ProPerkCallbacks[callback]))
     return;
   if(isDefined(data)) {
-    for (i = 0; i < level.ProPerkCallbacks[callback].size; i++)
+    for(i = 0; i < level.ProPerkCallbacks[callback].size; i++)
       thread[[level.ProPerkCallbacks[callback][i]]](data);
   } else {
-    for (i = 0; i < level.ProPerkCallbacks[callback].size; i++)
+    for(i = 0; i < level.ProPerkCallbacks[callback].size; i++)
       thread[[level.ProPerkCallbacks[callback][i]]]();
   }
 }
 onPlayerConnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connected", player);
     player thread monitorSprintDistance();
     player thread monitorReloads();
@@ -131,7 +131,7 @@ proPerkkills(data, time) {
     }
   }
   if(attacker ownsAndUsingPerk("specialty_bulletpenetration")) {
-    if(isDefined(victim.iDFlags) && victim.iDFlags & level.iDFLAGS_PENETRATION) {
+    if(isDefined(victim.iDFlags) && victim.iDFlags &level.iDFLAGS_PENETRATION) {
       attacker maps\mp\gametypes\_persistence::statAdd("PERKS_DEEP_IMPACT_KILL", 1, false);
     }
   }
@@ -147,7 +147,7 @@ proPerkkills(data, time) {
       } else {
         attachmentArray = maps\mp\gametypes\_class::listWeaponAttachments(weapon);
       }
-      for (attachmentCount = 0; attachmentCount < attachmentArray.size; attachmentCount++) {
+      for(attachmentCount = 0; attachmentCount < attachmentArray.size; attachmentCount++) {
         if(attachmentArray[attachmentCount]["name"] == "silencer")
           attacker maps\mp\gametypes\_persistence::statAdd("PERKS_NINJA_SILENCED", 1, false);
       }
@@ -192,7 +192,7 @@ multiGrenadeKill() {
 shotEquipment(owner, idflags) {
   if(isplayer(self) && self ownsAndUsingPerk("specialty_bulletpenetration")) {
     if(isDefined(owner)) {
-      if(isDefined(iDFlags) && (iDFlags & level.iDFLAGS_PENETRATION)) {
+      if(isDefined(iDFlags) && (iDFlags &level.iDFLAGS_PENETRATION)) {
         if(level.teambased) {
           if(isplayer(owner) && (owner.team != self.team))
             self maps\mp\gametypes\_persistence::statAdd("PERKS_DEEP_IMPACT_SHOT_EQUIPMENT", 1, false);
@@ -233,7 +233,7 @@ monitorSprintDistance() {
   if(!isDefined(self.pers["sprintDist"]))
     self.pers["sprintDist"] = 0;
   self.currentSprintDist = self.pers["sprintDist"];
-  while (1) {
+  while(1) {
     self waittill("sprint_begin");
     self.currentSprintDist = int(self.currentSprintDist) % 100;
     self monitorSingleSprintDistance();
@@ -251,7 +251,7 @@ sprintThenKill() {
   self endon("sprintThenKillEnd");
   sprintThenKillTimeOut = 3;
   self thread sprintThenKillTimeOut(sprintThenKillTimeOut);
-  while (1) {
+  while(1) {
     self waittill("killed_a_player");
     if(self ownsAndUsingPerk("specialty_bulletaccuracy"))
       self maps\mp\gametypes\_persistence::statAdd("PERKS_STEADY_AIM_SPRINT_KILL", 1, false);
@@ -267,7 +267,7 @@ monitorSingleSprintDistance() {
   self endon("death");
   self endon("sprint_end");
   prevpos = self.origin;
-  while (1) {
+  while(1) {
     wait .1;
     self.currentSprintDist += distance(self.origin, prevpos);
     prevpos = self.origin;
@@ -275,7 +275,7 @@ monitorSingleSprintDistance() {
 }
 monitorGrenadeThrowBacks() {
   self endon("disconnect");
-  while (1) {
+  while(1) {
     self waittill("grenade_throwback", originalOwner, grenade);
     grenade.originalOwner = originalOwner;
     if(self ownsAndUsingPerk("specialty_flakjacket") && isplayer(originalOwner)) {
@@ -291,7 +291,7 @@ monitorGrenadeThrowBacks() {
 }
 monitorReloads() {
   self endon("disconnect");
-  while (1) {
+  while(1) {
     self waittill("reload");
     self thread reloadThenKill();
     self.lastReloadTime = getTime();
@@ -317,7 +317,7 @@ scavengedGrenade() {
   self endon("death");
   self notify("scavengedGrenade");
   self endon("scavengedGrenade");
-  for (;;) {
+  for(;;) {
     self waittill("lethalGrenadeKill");
     if(self ownsAndUsingPerk("specialty_scavenger")) {
       self maps\mp\gametypes\_persistence::statAdd("PERKS_SCAVENGER_NADE_KILL", 1, false);
@@ -439,4 +439,3 @@ shotAirplane(owner, weapon, type) {
     }
   }
 }
-

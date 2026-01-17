@@ -36,8 +36,9 @@ run_dissolve_effect(localClientNum, colorIndex, durationMsec) {
       return;
     }
     self setshaderconstant(localClientNum, 0, alphaDissolveMaskCompression, alphaDissolveAmount, colIndex * (1.0 / 127.0), colorDissolveAmount);
-    if(t == 1.0)
+    if(t == 1.0) {
       break;
+    }
     realwait(0.05);
   }
 }

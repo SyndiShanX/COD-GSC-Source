@@ -5,14 +5,10 @@
 **********************************************/
 
 score_factor(var_0, var_1, var_2, var_3) {
-  if(isdefined(var_3))
-    var_4 = [
-      [var_1]
-    ](var_2, var_3);
+  if(isDefined(var_3))
+    var_4 = [[var_1]](var_2, var_3);
   else
-    var_4 = [
-      [var_1]
-    ](var_2);
+    var_4 = [[var_1]](var_2);
 
   var_4 = clamp(var_4, 0, 100);
   var_4 = var_4 * var_0;
@@ -22,14 +18,10 @@ score_factor(var_0, var_1, var_2, var_3) {
 }
 
 critical_factor(var_0, var_1, var_2) {
-  if(isdefined(var_2))
-    var_3 = [
-      [var_0]
-    ](var_1, var_2);
+  if(isDefined(var_2))
+    var_3 = [[var_0]](var_1, var_2);
   else
-    var_3 = [
-      [var_0]
-    ](var_1);
+    var_3 = [[var_0]](var_1);
 
   var_3 = clamp(var_3, 0, 100);
   var_1.debugcriticaldata[var_1.debugcriticaldata.size] = var_3;
@@ -38,7 +30,7 @@ critical_factor(var_0, var_1, var_2) {
 
 avoidcarepackages(var_0) {
   foreach(var_2 in level.carepackages) {
-    if(!isdefined(var_2)) {
+    if(!isDefined(var_2)) {
       continue;
     }
     if(distancesquared(var_0.origin, var_2.origin) < 22500)
@@ -50,7 +42,7 @@ avoidcarepackages(var_0) {
 
 avoidgrenades(var_0) {
   foreach(var_2 in level.grenades) {
-    if(!isdefined(var_2) || !var_2 isexplosivedangeroustoplayer(self)) {
+    if(!isDefined(var_2) || !var_2 isexplosivedangeroustoplayer(self)) {
       continue;
     }
     if(distancesquared(var_0.origin, var_2.origin) < 122500)
@@ -64,7 +56,7 @@ avoidmines(var_0) {
   var_1 = level.mines;
 
   foreach(var_3 in var_1) {
-    if(!isdefined(var_3) || !var_3 isexplosivedangeroustoplayer(self)) {
+    if(!isDefined(var_3) || !var_3 isexplosivedangeroustoplayer(self)) {
       continue;
     }
     if(distancesquared(var_0.origin, var_3.origin) < 122500)
@@ -75,10 +67,10 @@ avoidmines(var_0) {
 }
 
 isexplosivedangeroustoplayer(var_0) {
-  if(!level.teambased || level.friendlyfire || !isdefined(var_0.team))
+  if(!level.teambased || level.friendlyfire || !isDefined(var_0.team))
     return 1;
 
-  if(!isdefined(self.owner) || !isdefined(self.owner.team))
+  if(!isDefined(self.owner) || !isDefined(self.owner.team))
     return 1;
 
   if(var_0 == self.owner)
@@ -89,7 +81,7 @@ isexplosivedangeroustoplayer(var_0) {
 }
 
 avoidairstrikelocations(var_0) {
-  if(!isdefined(level.artillerydangercenters))
+  if(!isDefined(level.artillerydangercenters))
     return 100;
 
   if(!var_0.outside)
@@ -128,7 +120,7 @@ avoidfullvisibleenemies(var_0) {
 }
 
 avoidtelefrag(var_0) {
-  if(isdefined(self.allowtelefrag))
+  if(isDefined(self.allowtelefrag))
     return 100;
 
   if(positionwouldtelefrag(var_0.origin)) {
@@ -145,14 +137,14 @@ avoidtelefrag(var_0) {
 }
 
 avoidsamespawn(var_0) {
-  if(isdefined(self.lastspawnpoint) && self.lastspawnpoint == var_0)
+  if(isDefined(self.lastspawnpoint) && self.lastspawnpoint == var_0)
     return 0;
 
   return 100;
 }
 
 avoidrecentlyused(var_0) {
-  if(isdefined(var_0.lastspawntime)) {
+  if(isDefined(var_0.lastspawntime)) {
     var_1 = gettime() - var_0.lastspawntime;
 
     if(var_1 > 4000)
@@ -165,7 +157,7 @@ avoidrecentlyused(var_0) {
 }
 
 avoidenemyspawn(var_0) {
-  if(isdefined(var_0.lastspawnteam) && (!level.teambased || var_0.lastspawnteam != self.team)) {
+  if(isDefined(var_0.lastspawnteam) && (!level.teambased || var_0.lastspawnteam != self.team)) {
     var_1 = var_0.lastspawntime + 500;
 
     if(gettime() < var_1)
@@ -185,7 +177,7 @@ avoidspawninzone(var_0, var_1) {
 }
 
 avoidlastdeathlocation(var_0) {
-  if(!isdefined(self.lastdeathpos))
+  if(!isDefined(self.lastdeathpos))
     return 100;
 
   var_1 = distancesquared(var_0.origin, self.lastdeathpos);
@@ -198,7 +190,7 @@ avoidlastdeathlocation(var_0) {
 }
 
 avoidlastattackerlocation(var_0) {
-  if(!isdefined(self.lastattacker) || !isdefined(self.lastattacker.origin))
+  if(!isDefined(self.lastattacker) || !isDefined(self.lastattacker.origin))
     return 100;
 
   if(!maps\mp\_utility::isreallyalive(self.lastattacker))
@@ -260,7 +252,7 @@ preferdompoints(var_0, var_1) {
 }
 
 preferbyteambase(var_0, var_1) {
-  if(isdefined(var_0.teambase) && var_0.teambase == var_1)
+  if(isDefined(var_0.teambase) && var_0.teambase == var_1)
     return 100;
 
   return 0;

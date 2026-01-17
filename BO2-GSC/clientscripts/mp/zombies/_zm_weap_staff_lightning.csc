@@ -23,18 +23,18 @@ init() {
 
 lightning_impact_play_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
-    playfxontag(localclientnum, level._effect["lightning_impact"], self, "J_SpineUpper");
-    self playsound(0, "wpn_imp_lightningstaff");
+    playFXOnTag(localclientnum, level._effect["lightning_impact"], self, "J_SpineUpper");
+    self playSound(0, "wpn_imp_lightningstaff");
   }
 }
 
 lightning_miss_play_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
-    playfxontag(localclientnum, level._effect["lightning_miss"], self, "tag_origin");
+    playFXOnTag(localclientnum, level._effect["lightning_miss"], self, "tag_origin");
     level.lightning_ball_fx[localclientnum] = self;
     ent = spawn(0, self.origin, "script_origin");
     ent linkto(self);
-    ent playloopsound("wpn_lightningstaff_ball", 1);
+    ent playLoopSound("wpn_lightningstaff_ball", 1);
     self thread watch_ball_fx_killed(localclientnum, ent);
     level notify("lightning_ball_created");
   }
@@ -43,7 +43,7 @@ lightning_miss_play_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fi
 watch_ball_fx_killed(localclientnum, ent) {
   self waittill("entityshutdown");
   ent stoploopsound(1);
-  playsound(0, "wpn_lightningstaff_ball_explo", ent.origin);
+  playSound(0, "wpn_lightningstaff_ball_explo", ent.origin);
   ent delete();
   level.lightning_ball_fx[localclientnum] = undefined;
 }
@@ -59,8 +59,8 @@ lightning_arc_play_fx_thread(localclientnum) {
   e_ball endon("entityshutdown");
   serverwait(localclientnum, randomfloatrange(0.1, 0.5));
   self.e_fx = spawn(localclientnum, e_ball.origin, "script_model");
-  self.e_fx setmodel("tag_origin");
-  self.fx_arc = playfxontag(localclientnum, level._effect["lightning_arc"], self.e_fx, "tag_origin");
+  self.e_fx setModel("tag_origin");
+  self.fx_arc = playFXOnTag(localclientnum, level._effect["lightning_arc"], self.e_fx, "tag_origin");
 
   while(true) {
     v_spine = self gettagorigin("J_SpineUpper");

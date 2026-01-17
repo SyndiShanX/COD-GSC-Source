@@ -8,11 +8,10 @@
 #include scripts\killstreaks\ultimate_turret_shared;
 #include scripts\mp_common\gametypes\battlechatter;
 #include scripts\mp_common\gametypes\globallogic_audio;
-
 #namespace ultimate_turret;
 
 autoexec __init__system__() {
-  system::register(#"ultimate_turret", &__init__, undefined, #"killstreaks");
+  system::register(#"ultimate_turret", &__init__, undefined, # "killstreaks");
 }
 
 __init__() {
@@ -30,7 +29,7 @@ turret_destroyed(attacker, weapon) {
 
   if(isDefined(attacker)) {
     attacker battlechatter::function_dd6a6012("ultimate_turret", weapon);
-    attacker stats::function_e24eec31(weapon, #"hash_3f3d8a93c372c67d", 1);
+    attacker stats::function_e24eec31(weapon, # "hash_3f3d8a93c372c67d", 1);
   }
 
   profilestop();

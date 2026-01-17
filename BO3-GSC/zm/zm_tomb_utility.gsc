@@ -67,7 +67,7 @@ function setup_devgui() {
   setdvar("", "");
   setdvar("", "");
   execdevgui("");
-  zm_devgui::add_custom_devgui_callback( & zombie_devgui_tomb);
+  zm_devgui::add_custom_devgui_callback(&zombie_devgui_tomb);
   adddebugcommand("");
   adddebugcommand("");
   adddebugcommand("");
@@ -145,7 +145,7 @@ function zombie_devgui_tomb(cmd) {
 }
 
 function function_23eb2509() {
-  while (true) {
+  while(true) {
     if(getdvarstring("") != "") {
       n_zone = int(getdvarstring(""));
       level notify("force_zone_capture", n_zone);
@@ -161,7 +161,7 @@ function function_23eb2509() {
 }
 
 function function_6f935c89() {
-  while (true) {
+  while(true) {
     if(getdvarstring("") == "") {
       zm_tomb_capture_zones::function_b0debead();
       setdvar("", "");
@@ -172,9 +172,9 @@ function function_6f935c89() {
 
 function watch_for_upgraded_staffs() {
   cmd = "";
-  while (true) {
+  while(true) {
     wait(0.25);
-    if(!isdefined(level.zombie_devgui_gun) || level.zombie_devgui_gun != cmd) {
+    if(!isDefined(level.zombie_devgui_gun) || level.zombie_devgui_gun != cmd) {
       a_players = getplayers();
       foreach(player in a_players) {
         has_upgraded_staff = 0;
@@ -193,7 +193,7 @@ function watch_for_upgraded_staffs() {
 }
 
 function function_d88b52e6() {
-  while (true) {
+  while(true) {
     if(getdvarstring("") == "" || getdvarstring("") == "" || getdvarstring("") == "" || getdvarstring("") == "" || getdvarstring("") == "" || getdvarstring("") == "" || getdvarstring("") == "" || getdvarstring("") == "" || getdvarstring("") == "") {
       level flag::set("");
       level flag::set("");
@@ -223,11 +223,11 @@ function function_d88b52e6() {
     if(getdvarstring("") == "" || getdvarstring("") == "" || getdvarstring("") == "" || getdvarstring("") == "" || getdvarstring("") == "" || getdvarstring("") == "") {
       level flag::set("");
       var_5e72b36d = getent("", "");
-      if(isdefined(var_5e72b36d)) {
+      if(isDefined(var_5e72b36d)) {
         var_5e72b36d delete();
       }
       t_hole = getent("", "");
-      if(isdefined(t_hole)) {
+      if(isDefined(t_hole)) {
         t_hole delete();
       }
       level waittill("little_girl_lost_step_3_over");
@@ -284,7 +284,7 @@ function function_d88b52e6() {
 }
 
 function watch_devgui_complete_puzzles() {
-  while (true) {
+  while(true) {
     if(getdvarstring("") == "" || getdvarstring("") == "") {
       level flag::set("");
       level flag::set("");
@@ -405,7 +405,7 @@ function get_teleport_fx_from_enum(n_enum) {
 }
 
 function watch_devgui_quadrotor() {
-  while (getdvarstring("") != "") {
+  while(getdvarstring("") != "") {
     wait(0.1);
   }
   players = getplayers();
@@ -453,7 +453,7 @@ function player_slow_movement_speed_monitor() {
   n_new_move_scale = 1;
   n_move_scale_delta = 1;
   self.n_move_scale = n_new_move_scale;
-  while (true) {
+  while(true) {
     is_player_slowed = 0;
     self.is_player_slowed = 0;
     foreach(area in level.a_e_slow_areas) {
@@ -462,7 +462,7 @@ function player_slow_movement_speed_monitor() {
         self allowslide(0);
         is_player_slowed = 1;
         self.is_player_slowed = 1;
-        if(!(isdefined(self.played_mud_vo) && self.played_mud_vo) && (!(isdefined(self.dontspeak) && self.dontspeak))) {
+        if(!(isDefined(self.played_mud_vo) && self.played_mud_vo) && (!(isDefined(self.dontspeak) && self.dontspeak))) {
           self thread zm_tomb_vo::struggle_mud_vo();
         }
         if(self hasperk("specialty_staminup")) {
@@ -499,7 +499,7 @@ function dug_zombie_spawn_init(animname_set = 0) {
   if(!animname_set) {
     self.animname = "zombie";
   }
-  if(isdefined(zm_utility::get_gamemode_var("pre_init_zombie_spawn_func"))) {
+  if(isDefined(zm_utility::get_gamemode_var("pre_init_zombie_spawn_func"))) {
     self[[zm_utility::get_gamemode_var("pre_init_zombie_spawn_func")]]();
   }
   self thread zm_spawner::play_ambient_zombie_vocals();
@@ -528,9 +528,9 @@ function dug_zombie_spawn_init(animname_set = 0) {
   self.chatinitialized = 0;
   self.a.disablepain = 1;
   self zm_utility::disable_react();
-  if(isdefined(level.zombie_health)) {
+  if(isDefined(level.zombie_health)) {
     self.maxhealth = level.zombie_health;
-    if(isdefined(level.a_zombie_respawn_health[self.archetype]) && level.a_zombie_respawn_health[self.archetype].size > 0) {
+    if(isDefined(level.a_zombie_respawn_health[self.archetype]) && level.a_zombie_respawn_health[self.archetype].size > 0) {
       self.health = level.a_zombie_respawn_health[self.archetype][0];
       arrayremovevalue(level.a_zombie_respawn_health[self.archetype], level.a_zombie_respawn_health[self.archetype][0]);
     } else {
@@ -547,32 +547,32 @@ function dug_zombie_spawn_init(animname_set = 0) {
   self thread zombie_utility::zombie_gib_on_damage();
   self thread zm_spawner::zombie_damage_failsafe();
   self thread zm_spawner::enemy_death_detection();
-  if(isdefined(level._zombie_custom_spawn_logic)) {
+  if(isDefined(level._zombie_custom_spawn_logic)) {
     if(isarray(level._zombie_custom_spawn_logic)) {
-      for (i = 0; i < level._zombie_custom_spawn_logic.size; i++) {
+      for(i = 0; i < level._zombie_custom_spawn_logic.size; i++) {
         self thread[[level._zombie_custom_spawn_logic[i]]]();
       }
     } else {
       self thread[[level._zombie_custom_spawn_logic]]();
     }
   }
-  if(!isdefined(self.no_eye_glow) || !self.no_eye_glow) {
-    if(!(isdefined(self.is_inert) && self.is_inert)) {
+  if(!isDefined(self.no_eye_glow) || !self.no_eye_glow) {
+    if(!(isDefined(self.is_inert) && self.is_inert)) {
       self thread zombie_utility::delayed_zombie_eye_glow();
     }
   }
-  self.deathfunction = & zm_spawner::zombie_death_animscript;
+  self.deathfunction = &zm_spawner::zombie_death_animscript;
   self.flame_damage_time = 0;
   self.meleedamage = 60;
   self.no_powerups = 1;
   self zm_spawner::zombie_history(("zombie_spawn_init -> Spawned = ") + self.origin);
   self.thundergun_knockdown_func = level.basic_zombie_thundergun_knockdown;
-  self.tesla_head_gib_func = & zm_spawner::zombie_tesla_head_gib;
+  self.tesla_head_gib_func = &zm_spawner::zombie_tesla_head_gib;
   self.team = level.zombie_team;
-  if(isdefined(zm_utility::get_gamemode_var("post_init_zombie_spawn_func"))) {
+  if(isDefined(zm_utility::get_gamemode_var("post_init_zombie_spawn_func"))) {
     self[[zm_utility::get_gamemode_var("post_init_zombie_spawn_func")]]();
   }
-  if(isdefined(level.zombie_init_done)) {
+  if(isDefined(level.zombie_init_done)) {
     self[[level.zombie_init_done]]();
   }
   self.zombie_init_done = 1;
@@ -588,14 +588,14 @@ function dug_zombie_think() {
   node = undefined;
   desired_nodes = [];
   self.entrance_nodes = [];
-  if(isdefined(level.max_barrier_search_dist_override)) {
+  if(isDefined(level.max_barrier_search_dist_override)) {
     max_dist = level.max_barrier_search_dist_override;
   } else {
     max_dist = 500;
   }
-  if(!isdefined(find_flesh_struct_string) && isdefined(self.target) && self.target != "") {
+  if(!isDefined(find_flesh_struct_string) && isDefined(self.target) && self.target != "") {
     desired_origin = zombie_utility::get_desired_origin();
-    assert(isdefined(desired_origin), ("" + self.origin) + "");
+    assert(isDefined(desired_origin), ("" + self.origin) + "");
     origin = desired_origin;
     node = arraygetclosest(origin, level.exterior_goals);
     self.entrance_nodes[self.entrance_nodes.size] = node;
@@ -603,25 +603,25 @@ function dug_zombie_think() {
   } else {
     if(self zm_spawner::should_skip_teardown(find_flesh_struct_string)) {
       self zm_spawner::zombie_setup_attack_properties();
-      if(isdefined(self.target)) {
+      if(isDefined(self.target)) {
         end_at_node = getnode(self.target, "targetname");
-        if(isdefined(end_at_node)) {
+        if(isDefined(end_at_node)) {
           self setgoalnode(end_at_node);
           self waittill("goal");
         }
       }
-      if(isdefined(self.start_inert) && self.start_inert) {
+      if(isDefined(self.start_inert) && self.start_inert) {
         self zm_spawner::zombie_complete_emerging_into_playable_area();
       } else {
         self thread dug_zombie_entered_playable();
       }
       return;
     }
-    if(isdefined(find_flesh_struct_string)) {
-      /# /
+    if(isDefined(find_flesh_struct_string)) {
+      /
       #
-      assert(isdefined(find_flesh_struct_string));
-      for (i = 0; i < level.exterior_goals.size; i++) {
+      assert(isDefined(find_flesh_struct_string));
+      for(i = 0; i < level.exterior_goals.size; i++) {
         if(level.exterior_goals[i].script_string == find_flesh_struct_string) {
           node = level.exterior_goals[i];
           break;
@@ -633,13 +633,13 @@ function dug_zombie_think() {
     } else {
       origin = self.origin;
       desired_origin = zombie_utility::get_desired_origin();
-      if(isdefined(desired_origin)) {
+      if(isDefined(desired_origin)) {
         origin = desired_origin;
       }
       nodes = util::get_array_of_closest(origin, level.exterior_goals, undefined, 3);
       desired_nodes[0] = nodes[0];
       prev_dist = distance(self.origin, nodes[0].origin);
-      for (i = 1; i < nodes.size; i++) {
+      for(i = 1; i < nodes.size; i++) {
         dist = distance(self.origin, nodes[i].origin);
         if((dist - prev_dist) > max_dist) {
           break;
@@ -656,7 +656,7 @@ function dug_zombie_think() {
       self thread zm_spawner::zombie_assure_node();
     }
   }
-  assert(isdefined(node), "");
+  assert(isDefined(node), "");
   level thread zm_utility::draw_line_ent_to_pos(self, node.origin, "goal");
   self.first_node = node;
   self thread zm_spawner::zombie_goto_entrance(node);
@@ -664,10 +664,10 @@ function dug_zombie_think() {
 
 function dug_zombie_entered_playable() {
   self endon("death");
-  if(!isdefined(level.playable_areas)) {
-    level.playable_areas = getentarray("player_volume", "script_noteworthy");
+  if(!isDefined(level.playable_areas)) {
+    level.playable_areas = getEntArray("player_volume", "script_noteworthy");
   }
-  while (true) {
+  while(true) {
     foreach(area in level.playable_areas) {
       if(self istouching(area)) {
         self dug_zombie_complete_emerging_into_playable_area();
@@ -685,15 +685,15 @@ function dug_zombie_complete_emerging_into_playable_area() {
   self thread zm_spawner::zombie_free_cam_allowed();
 }
 
-function dug_zombie_rise(spot, func_rise_fx = & zm_spawner::zombie_rise_fx) {
+function dug_zombie_rise(spot, func_rise_fx = &zm_spawner::zombie_rise_fx) {
   self endon("death");
   self.in_the_ground = 1;
   self.no_eye_glow = 1;
-  if(!isdefined(spot.angles)) {
+  if(!isDefined(spot.angles)) {
     spot.angles = (0, 0, 0);
   }
   target_org = zombie_utility::get_desired_origin();
-  if(isdefined(target_org)) {
+  if(isDefined(target_org)) {
     spot.angles = vectortoangles(target_org - spot.origin);
   }
   level thread zombie_utility::zombie_rise_death(self, spot);
@@ -708,7 +708,7 @@ function dug_zombie_rise(spot, func_rise_fx = & zm_spawner::zombie_rise_fx) {
       substate = 3;
     }
   }
-  self playsound("zmb_vocals_capzomb_spawn");
+  self playSound("zmb_vocals_capzomb_spawn");
   self function_f356818(spot);
   self notify("rise_anim_finished");
   spot notify("stop_zombie_rise_fx");
@@ -754,7 +754,7 @@ function watch_staff_usage() {
   self endon("watch_staff_usage");
   self endon("disconnect");
   self clientfield::set_to_player("player_staff_charge", 0);
-  while (true) {
+  while(true) {
     self waittill("weapon_change", weapon);
     has_upgraded_staff = 0;
     has_revive_staff = 0;
@@ -802,7 +802,7 @@ function function_38af9e8e() {
   self endon("hash_38af9e8e");
   self endon("hash_75edd128");
   self endon("disconnect");
-  while (true) {
+  while(true) {
     ammo = self getammocount(level.var_2b2f83e5);
     self clientfield::set_player_uimodel("hudItems.dpadLeftAmmo", ammo);
     wait(0.05);
@@ -814,11 +814,11 @@ function staff_charge_watch() {
   self endon("player_downed");
   self endon("weapon_change");
   self endon("weapon_fired");
-  while (!self attackbuttonpressed()) {
+  while(!self attackbuttonpressed()) {
     wait(0.05);
   }
   n_old_charge = 0;
-  while (true) {
+  while(true) {
     if(n_old_charge != self.chargeshotlevel) {
       self clientfield::set_to_player("player_staff_charge", self.chargeshotlevel);
       n_old_charge = self.chargeshotlevel;
@@ -832,7 +832,7 @@ function staff_charge_watch_wrapper(weapon) {
   self endon("staff_charge_watch_wrapper");
   self endon("disconnect");
   self clientfield::set_to_player("player_staff_charge", 0);
-  while (is_weapon_upgraded_staff(weapon)) {
+  while(is_weapon_upgraded_staff(weapon)) {
     self staff_charge_watch();
     self clientfield::set_to_player("player_staff_charge", 0);
     weapon = self getcurrentweapon();
@@ -864,26 +864,26 @@ function door_gramophone_elsewhere_hint() {
 function puzzle_debug_position(string_to_show, color, origin, str_dvar, n_show_time) {
   self endon("death");
   self endon("stop_debug_position");
-  if(!isdefined(string_to_show)) {
+  if(!isDefined(string_to_show)) {
     string_to_show = "";
   }
-  if(!isdefined(color)) {
+  if(!isDefined(color)) {
     color = vectorscale((1, 1, 1), 255);
   }
-  if(isdefined(str_dvar)) {
-    while (getdvarstring("") != "") {
+  if(isDefined(str_dvar)) {
+    while(getdvarstring("") != "") {
       wait(1);
     }
   }
-  while (true) {
-    if(isdefined(origin)) {
+  while(true) {
+    if(isDefined(origin)) {
       where_to_draw = origin;
     } else {
       where_to_draw = self.origin;
     }
     print3d(where_to_draw, string_to_show, color, 1);
     wait(0.1);
-    if(isdefined(n_show_time)) {
+    if(isDefined(n_show_time)) {
       n_show_time = n_show_time - 0.1;
       if(n_show_time <= 0) {
         break;
@@ -900,7 +900,7 @@ function placeholder_puzzle_delete_ent(str_flag_name) {
 
 function placeholder_puzzle_spin_model() {
   self endon("death");
-  while (true) {
+  while(true) {
     self rotateyaw(360, 10, 0, 0);
     wait(9.9);
   }
@@ -925,7 +925,7 @@ function tomb_trigger_update_message(func_per_player_msg) {
   a_players = getplayers();
   foreach(e_player in a_players) {
     n_player = e_player getentitynumber();
-    if(!isdefined(self.stub.playertrigger[n_player])) {
+    if(!isDefined(self.stub.playertrigger[n_player])) {
       continue;
     }
     new_msg = self[[func_per_player_msg]](e_player);
@@ -937,11 +937,11 @@ function tomb_trigger_update_message(func_per_player_msg) {
 function set_unitrigger_hint_string(str_message) {
   self.hint_string = str_message;
   zm_unitrigger::unregister_unitrigger(self);
-  zm_unitrigger::register_unitrigger(self, & tomb_unitrigger_think);
+  zm_unitrigger::register_unitrigger(self, &tomb_unitrigger_think);
 }
 
 function tomb_spawn_trigger_radius(origin, radius, use_trigger = 0, var_3fe858d9, func_visibility) {
-  trigger_stub = spawnstruct();
+  trigger_stub = spawnStruct();
   trigger_stub.origin = origin;
   trigger_stub.radius = radius;
   if(use_trigger) {
@@ -950,23 +950,23 @@ function tomb_spawn_trigger_radius(origin, radius, use_trigger = 0, var_3fe858d9
   } else {
     trigger_stub.script_unitrigger_type = "unitrigger_radius";
   }
-  if(isdefined(var_3fe858d9)) {
+  if(isDefined(var_3fe858d9)) {
     trigger_stub.func_update_msg = var_3fe858d9;
     zm_unitrigger::unitrigger_force_per_player_triggers(trigger_stub, 1);
   }
-  if(isdefined(func_visibility)) {
+  if(isDefined(func_visibility)) {
     trigger_stub.prompt_and_visibility_func = func_visibility;
   }
-  zm_unitrigger::register_unitrigger(trigger_stub, & tomb_unitrigger_think);
+  zm_unitrigger::register_unitrigger(trigger_stub, &tomb_unitrigger_think);
   return trigger_stub;
 }
 
 function tomb_unitrigger_think() {
   self endon("kill_trigger");
-  if(isdefined(self.stub.func_update_msg)) {
+  if(isDefined(self.stub.func_update_msg)) {
     self thread tomb_trigger_update_message(self.stub.func_update_msg);
   }
-  while (true) {
+  while(true) {
     self waittill("trigger", player);
     self.stub notify("trigger", player);
   }
@@ -977,10 +977,10 @@ function tomb_unitrigger_delete() {
 }
 
 function zombie_gib_all() {
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
-  if(isdefined(self.is_mechz) && self.is_mechz) {
+  if(isDefined(self.is_mechz) && self.is_mechz) {
     return;
   }
   a_gib_ref = [];
@@ -988,28 +988,28 @@ function zombie_gib_all() {
   self gib("normal", a_gib_ref);
   self ghost();
   wait(0.4);
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     self delete();
   }
 }
 
 function zombie_gib_guts() {
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
-  if(isdefined(self.is_mechz) && self.is_mechz) {
+  if(isDefined(self.is_mechz) && self.is_mechz) {
     return;
   }
   v_origin = self gettagorigin("J_SpineLower");
-  if(isdefined(v_origin)) {
-    v_forward = anglestoforward((0, randomint(360), 0));
-    playfx(level._effect["zombie_guts_explosion"], v_origin, v_forward);
+  if(isDefined(v_origin)) {
+    v_forward = anglesToForward((0, randomint(360), 0));
+    playFX(level._effect["zombie_guts_explosion"], v_origin, v_forward);
   }
   util::wait_network_frame();
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     self ghost();
     wait(randomfloatrange(0.4, 1.1));
-    if(isdefined(self)) {
+    if(isDefined(self)) {
       self delete();
     }
   }
@@ -1040,7 +1040,7 @@ function init_weather_manager() {
   level.weather_vision = 0;
   level thread weather_manager();
   level thread rotate_skydome();
-  callback::on_connect( & set_weather_to_player);
+  callback::on_connect(&set_weather_to_player);
   level.force_weather = [];
   level.force_weather[1] = "none";
   if(math::cointoss()) {
@@ -1048,7 +1048,7 @@ function init_weather_manager() {
   } else {
     level.force_weather[4] = "snow";
   }
-  for (i = 5; i <= 9; i++) {
+  for(i = 5; i <= 9; i++) {
     if(math::cointoss()) {
       level.force_weather[i] = "none";
       continue;
@@ -1061,7 +1061,7 @@ function init_weather_manager() {
 
 function randomize_weather() {
   weather_name = level.force_weather[level.round_number];
-  if(!isdefined(weather_name)) {
+  if(!isDefined(weather_name)) {
     n_round_weather = randomint(100);
     rounds_since_snow = level.round_number - level.last_snow_round;
     rounds_since_rain = level.round_number - level.last_rain_round;
@@ -1098,7 +1098,7 @@ function weather_manager() {
   level.last_snow_round = 0;
   level.last_rain_round = 0;
   level waittill("hash_149fa2ac");
-  while (true) {
+  while(true) {
     randomize_weather();
     level clientfield::set("rain_level", level.weather_rain);
     level clientfield::set("snow_level", level.weather_snow);
@@ -1132,7 +1132,7 @@ function set_weather_to_player() {
 
 function rotate_skydome() {
   level.sky_rotation = 360;
-  while (true) {
+  while(true) {
     level.sky_rotation = level.sky_rotation - 0;
     if(level.sky_rotation < 0) {
       level.sky_rotation = level.sky_rotation + 360;
@@ -1156,9 +1156,9 @@ function puzzle_orb_move(v_to_pos) {
 
 function puzzle_orb_follow_path(s_start) {
   s_next_pos = s_start;
-  while (isdefined(s_next_pos)) {
+  while(isDefined(s_next_pos)) {
     self puzzle_orb_move(s_next_pos.origin);
-    if(isdefined(s_next_pos.target)) {
+    if(isDefined(s_next_pos.target)) {
       s_next_pos = struct::get(s_next_pos.target, "targetname");
     } else {
       s_next_pos = undefined;
@@ -1169,9 +1169,9 @@ function puzzle_orb_follow_path(s_start) {
 function puzzle_orb_follow_return_path(s_start, n_element) {
   a_path = [];
   s_next = s_start;
-  while (isdefined(s_next)) {
+  while(isDefined(s_next)) {
     a_path[a_path.size] = s_next;
-    if(isdefined(s_next.target)) {
+    if(isDefined(s_next.target)) {
       s_next = struct::get(s_next.target, "targetname");
     } else {
       s_next = undefined;
@@ -1179,10 +1179,10 @@ function puzzle_orb_follow_return_path(s_start, n_element) {
   }
   v_start = (a_path[a_path.size - 1].origin) + vectorscale((0, 0, 1), 1000);
   e_model = spawn("script_model", v_start);
-  e_model setmodel(s_start.model);
+  e_model setModel(s_start.model);
   e_model clientfield::set("element_glow_fx", n_element);
-  playfxontag(level._effect["puzzle_orb_trail"], e_model, "tag_origin");
-  for (i = a_path.size - 1; i >= 0; i--) {
+  playFXOnTag(level._effect["puzzle_orb_trail"], e_model, "tag_origin");
+  for(i = a_path.size - 1; i >= 0; i--) {
     e_model puzzle_orb_move(a_path[i].origin);
   }
   return e_model;
@@ -1194,13 +1194,13 @@ function puzzle_orb_pillar_show() {
   s_pillar = struct::get("crypt_pillar", "targetname");
   exploder::exploder("fxexp_333");
   level thread exploder::stop_after_duration("fxexp_333", 28.5);
-  if(isdefined(s_pillar.e_model)) {
+  if(isDefined(s_pillar.e_model)) {
     s_pillar.e_model delete();
   }
   s_pillar.e_model = spawn("script_model", s_pillar.origin);
   s_pillar.e_model endon("death");
   s_pillar.e_model ghost();
-  s_pillar.e_model setmodel("fxuse_sky_pillar_new");
+  s_pillar.e_model setModel("fxuse_sky_pillar_new");
   s_pillar.e_model clientfield::set("sky_pillar", 1);
   util::wait_network_frame();
   s_pillar.e_model show();
@@ -1216,7 +1216,7 @@ function any_player_looking_at_plinth(min_lookat_dot, n_near_dist_sq) {
   foreach(player in players) {
     dist_sq = distance2dsquared(player.origin, self.origin);
     if(dist_sq < n_near_dist_sq) {
-      fvec = anglestoforward(player.angles);
+      fvec = anglesToForward(player.angles);
       to_self = self.origin - player.origin;
       to_self = vectornormalize(to_self);
       dot_to_self = vectordot(to_self, fvec);
@@ -1244,17 +1244,17 @@ function puzzle_orb_chamber_to_crypt(str_start_point, e_gem_pos) {
   level flag::wait_till(a_puzzle_flags[0]);
   s_start = struct::get(str_start_point, "targetname");
   e_model = spawn("script_model", s_start.origin);
-  e_model setmodel(s_start.model);
+  e_model setModel(s_start.model);
   e_model.script_int = e_gem_pos.script_int;
   util::wait_network_frame();
-  e_model playsound("zmb_squest_crystal_leave");
+  e_model playSound("zmb_squest_crystal_leave");
   util::wait_network_frame();
-  e_model playloopsound("zmb_squest_crystal_loop", 1);
+  e_model playLoopSound("zmb_squest_crystal_loop", 1);
   str_zone = zm_zonemgr::get_zone_from_position(s_start.origin, 1);
   time_looking_at_orb = 0;
   min_lookat_dot = cos(30);
   n_near_dist_sq = 32400;
-  while (time_looking_at_orb < 1) {
+  while(time_looking_at_orb < 1) {
     wait(0.1);
     if(s_start puzzle_orb_ready_to_leave(str_zone, min_lookat_dot, n_near_dist_sq)) {
       time_looking_at_orb = time_looking_at_orb + 0.1;
@@ -1263,7 +1263,7 @@ function puzzle_orb_chamber_to_crypt(str_start_point, e_gem_pos) {
     }
   }
   util::wait_network_frame();
-  playfxontag(level._effect["puzzle_orb_trail"], e_model, "tag_origin");
+  playFXOnTag(level._effect["puzzle_orb_trail"], e_model, "tag_origin");
   util::wait_network_frame();
   s_next_pos = struct::get(s_start.target, "targetname");
   e_model puzzle_orb_follow_path(s_next_pos);
@@ -1282,13 +1282,13 @@ function puzzle_orb_chamber_to_crypt(str_start_point, e_gem_pos) {
   level flag::set("disc_rotation_active");
   e_model puzzle_orb_move(e_gem_pos.origin);
   e_model_nofx = spawn("script_model", e_model.origin);
-  e_model_nofx setmodel(e_model.model);
+  e_model_nofx setModel(e_model.model);
   e_model_nofx.script_int = e_gem_pos.script_int;
   e_model delete();
   util::wait_network_frame();
-  e_model_nofx playsound("zmb_squest_crystal_arrive");
+  e_model_nofx playSound("zmb_squest_crystal_arrive");
   util::wait_network_frame();
-  e_model_nofx playloopsound("zmb_squest_crystal_loop", 1);
+  e_model_nofx playLoopSound("zmb_squest_crystal_loop", 1);
   level flag::clear("disc_rotation_active");
   return e_model_nofx;
 }
@@ -1299,7 +1299,7 @@ function capture_zombie_spawn_init(animname_set = 0) {
     self.animname = "zombie";
   }
   self.sndname = "capzomb";
-  if(isdefined(zm_utility::get_gamemode_var("pre_init_zombie_spawn_func"))) {
+  if(isDefined(zm_utility::get_gamemode_var("pre_init_zombie_spawn_func"))) {
     self[[zm_utility::get_gamemode_var("pre_init_zombie_spawn_func")]]();
   }
   self thread zm_spawner::play_ambient_zombie_vocals();
@@ -1330,9 +1330,9 @@ function capture_zombie_spawn_init(animname_set = 0) {
   self.chatinitialized = 0;
   self.a.disablepain = 1;
   self zm_utility::disable_react();
-  if(isdefined(level.zombie_health)) {
+  if(isDefined(level.zombie_health)) {
     self.maxhealth = level.zombie_health;
-    if(isdefined(level.a_zombie_respawn_health[self.archetype]) && level.a_zombie_respawn_health[self.archetype].size > 0) {
+    if(isDefined(level.a_zombie_respawn_health[self.archetype]) && level.a_zombie_respawn_health[self.archetype].size > 0) {
       self.health = level.a_zombie_respawn_health[self.archetype][0];
       arrayremovevalue(level.a_zombie_respawn_health[self.archetype], level.a_zombie_respawn_health[self.archetype][0]);
     } else {
@@ -1349,20 +1349,20 @@ function capture_zombie_spawn_init(animname_set = 0) {
   self thread zombie_utility::zombie_gib_on_damage();
   self thread zm_spawner::zombie_damage_failsafe();
   self thread zm_spawner::enemy_death_detection();
-  if(!isdefined(self.no_eye_glow) || !self.no_eye_glow) {
-    if(!(isdefined(self.is_inert) && self.is_inert)) {
+  if(!isDefined(self.no_eye_glow) || !self.no_eye_glow) {
+    if(!(isDefined(self.is_inert) && self.is_inert)) {
       self thread zombie_utility::delayed_zombie_eye_glow();
     }
   }
-  self.deathfunction = & zm_spawner::zombie_death_animscript;
+  self.deathfunction = &zm_spawner::zombie_death_animscript;
   self.flame_damage_time = 0;
   self.meleedamage = 60;
   self.no_powerups = 1;
   self zm_spawner::zombie_history(("zombie_spawn_init -> Spawned = ") + self.origin);
   self.thundergun_knockdown_func = level.basic_zombie_thundergun_knockdown;
-  self.tesla_head_gib_func = & zm_spawner::zombie_tesla_head_gib;
+  self.tesla_head_gib_func = &zm_spawner::zombie_tesla_head_gib;
   self.team = level.zombie_team;
-  if(isdefined(zm_utility::get_gamemode_var("post_init_zombie_spawn_func"))) {
+  if(isDefined(zm_utility::get_gamemode_var("post_init_zombie_spawn_func"))) {
     self[[zm_utility::get_gamemode_var("post_init_zombie_spawn_func")]]();
   }
   self.zombie_init_done = 1;
@@ -1401,7 +1401,7 @@ function rumble_nearby_players(v_center, n_range, n_rumble_enum) {
 }
 
 function whirlwind_rumble_player(e_whirlwind, str_active_flag) {
-  if(isdefined(self.whirlwind_rumble_on) && self.whirlwind_rumble_on) {
+  if(isDefined(self.whirlwind_rumble_on) && self.whirlwind_rumble_on) {
     return;
   }
   self.whirlwind_rumble_on = 1;
@@ -1410,12 +1410,12 @@ function whirlwind_rumble_player(e_whirlwind, str_active_flag) {
   dist_sq = distancesquared(self.origin, e_whirlwind.origin);
   range_inner_sq = 10000;
   range_sq = 90000;
-  while (dist_sq < range_sq) {
+  while(dist_sq < range_sq) {
     wait(0.05);
-    if(!isdefined(e_whirlwind)) {
+    if(!isDefined(e_whirlwind)) {
       break;
     }
-    if(isdefined(str_active_flag)) {
+    if(isDefined(str_active_flag)) {
       if(!level flag::get(str_active_flag)) {
         break;
       }
@@ -1435,7 +1435,7 @@ function whirlwind_rumble_player(e_whirlwind, str_active_flag) {
 
 function whirlwind_rumble_nearby_players(str_active_flag) {
   range_sq = 90000;
-  while (isdefined(self) && level flag::get(str_active_flag)) {
+  while(isDefined(self) && level flag::get(str_active_flag)) {
     a_players = getplayers();
     foreach(player in a_players) {
       dist_sq = distancesquared(self.origin, player.origin);
@@ -1448,8 +1448,8 @@ function whirlwind_rumble_nearby_players(str_active_flag) {
 }
 
 function clean_up_bunker_doors() {
-  a_door_models = getentarray("bunker_door", "script_noteworthy");
-  array::thread_all(a_door_models, & bunker_door_clean_up);
+  a_door_models = getEntArray("bunker_door", "script_noteworthy");
+  array::thread_all(a_door_models, &bunker_door_clean_up);
 }
 
 function bunker_door_clean_up() {
@@ -1458,11 +1458,11 @@ function bunker_door_clean_up() {
 }
 
 function adjustments_for_solo() {
-  if(isdefined(level.is_forever_solo_game) && level.is_forever_solo_game) {
-    a_door_buys = getentarray("zombie_door", "targetname");
-    array::thread_all(a_door_buys, & door_price_reduction_for_solo);
-    a_debris_buys = getentarray("zombie_debris", "targetname");
-    array::thread_all(a_debris_buys, & door_price_reduction_for_solo);
+  if(isDefined(level.is_forever_solo_game) && level.is_forever_solo_game) {
+    a_door_buys = getEntArray("zombie_door", "targetname");
+    array::thread_all(a_door_buys, &door_price_reduction_for_solo);
+    a_debris_buys = getEntArray("zombie_debris", "targetname");
+    array::thread_all(a_debris_buys, &door_price_reduction_for_solo);
   }
 }
 
@@ -1486,7 +1486,7 @@ function change_weapon_cost(str_weapon, n_cost) {
 }
 
 function zone_capture_powerup() {
-  while (true) {
+  while(true) {
     level flag::wait_till("zone_capture_in_progress");
     level flag::wait_till_clear("zone_capture_in_progress");
     wait(2);
@@ -1495,9 +1495,9 @@ function zone_capture_powerup() {
         foreach(uts_box in level.a_uts_challenge_boxes) {
           if(uts_box.str_location == "start_bunker") {
             if(level.players.size == 1) {
-              level thread zm_challenges_tomb::open_box(undefined, uts_box, & zm_tomb_challenges::reward_powerup_double_points, -1);
+              level thread zm_challenges_tomb::open_box(undefined, uts_box, &zm_tomb_challenges::reward_powerup_double_points, -1);
             } else {
-              level thread zm_challenges_tomb::open_box(undefined, uts_box, & zm_tomb_challenges::reward_powerup_zombie_blood, -1);
+              level thread zm_challenges_tomb::open_box(undefined, uts_box, &zm_tomb_challenges::reward_powerup_zombie_blood, -1);
             }
             return;
           }
@@ -1521,7 +1521,7 @@ function traversal_blocker_disabler() {
   pos1 = (-1509, 3912, -168);
   pos2 = (672, 3720, -179);
   b_too_close = 0;
-  while (level.round_number < 10 && !b_too_close) {
+  while(level.round_number < 10 && !b_too_close) {
     a_players = getplayers();
     foreach(player in a_players) {
       if(distancesquared(player.origin, pos1) < 4096 || distancesquared(player.origin, pos2) < 4096) {
@@ -1534,7 +1534,7 @@ function traversal_blocker_disabler() {
 }
 
 function _kill_zombie_network_safe_internal(e_attacker, str_weapon) {
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   if(!isalive(self)) {
@@ -1545,7 +1545,7 @@ function _kill_zombie_network_safe_internal(e_attacker, str_weapon) {
 }
 
 function _damage_zombie_network_safe_internal(e_attacker, str_weapon, n_damage_amt) {
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   if(!isalive(self)) {
@@ -1558,17 +1558,17 @@ function do_damage_network_safe(e_attacker, n_amount, w_damage, str_mod) {
   if(isstring(w_damage)) {
     w_damage = getweapon(w_damage);
   }
-  if(isdefined(self.is_mechz) && self.is_mechz) {
+  if(isDefined(self.is_mechz) && self.is_mechz) {
     self dodamage(n_amount, self.origin, e_attacker, e_attacker, "none", str_mod, 0, w_damage);
   } else {
     if(n_amount < self.health) {
       self.kill_damagetype = str_mod;
       zm_net::network_safe_init("dodamage", 6);
-      self zm_net::network_choke_action("dodamage", & _damage_zombie_network_safe_internal, e_attacker, w_damage, n_amount);
+      self zm_net::network_choke_action("dodamage", &_damage_zombie_network_safe_internal, e_attacker, w_damage, n_amount);
     } else {
       self.kill_damagetype = str_mod;
       zm_net::network_safe_init("dodamage_kill", 4);
-      self zm_net::network_choke_action("dodamage_kill", & _kill_zombie_network_safe_internal, e_attacker, w_damage);
+      self zm_net::network_choke_action("dodamage_kill", &_kill_zombie_network_safe_internal, e_attacker, w_damage);
     }
   }
 }
@@ -1578,14 +1578,14 @@ function _throttle_bullet_trace_think() {
     level.bullet_traces_this_frame = 0;
     util::wait_network_frame();
   }
-  while (1);
+  while(1);
 }
 
 function bullet_trace_throttled(v_start, v_end, e_ignore) {
-  if(!isdefined(level.bullet_traces_this_frame)) {
+  if(!isDefined(level.bullet_traces_this_frame)) {
     level thread _throttle_bullet_trace_think();
   }
-  while (level.bullet_traces_this_frame >= 2) {
+  while(level.bullet_traces_this_frame >= 2) {
     util::wait_network_frame();
   }
   level.bullet_traces_this_frame++;
@@ -1593,17 +1593,17 @@ function bullet_trace_throttled(v_start, v_end, e_ignore) {
 }
 
 function function_d39fc97a(player) {
-  if(isdefined(player.b_teleporting) && player.b_teleporting) {
+  if(isDefined(player.b_teleporting) && player.b_teleporting) {
     return false;
   }
   var_de0d565a = 0;
   var_561c025d = 0;
-  if(isdefined(player.zone_name)) {
+  if(isDefined(player.zone_name)) {
     if(issubstr(player.zone_name, "zone_chamber")) {
       var_de0d565a = 1;
     }
   }
-  if(isdefined(self.zone_name)) {
+  if(isDefined(self.zone_name)) {
     if(issubstr(self.zone_name, "zone_chamber")) {
       var_561c025d = 1;
     }
@@ -1622,16 +1622,16 @@ function tomb_get_closest_player_using_paths(origin, players) {
   n_2d_distance_squared = 9999999;
   player_to_return = undefined;
   dist_to_tank = undefined;
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     player = players[i];
-    if(!isdefined(player)) {
+    if(!isDefined(player)) {
       continue;
     }
-    if(isdefined(player.b_already_on_tank) && player.b_already_on_tank) {
-      if(isdefined(self.b_on_tank) && self.b_on_tank) {
+    if(isDefined(player.b_already_on_tank) && player.b_already_on_tank) {
+      if(isDefined(self.b_on_tank) && self.b_on_tank) {
         continue;
       } else {
-        if(!isdefined(dist_to_tank)) {
+        if(!isDefined(dist_to_tank)) {
           length_to_player = self zm_tomb_tank::tomb_get_path_length_to_tank();
           dist_to_tank = length_to_player;
         } else {
@@ -1639,7 +1639,7 @@ function tomb_get_closest_player_using_paths(origin, players) {
         }
       }
     } else {
-      if(isdefined(self.b_on_tank) && self.b_on_tank) {
+      if(isDefined(self.b_on_tank) && self.b_on_tank) {
         continue;
       }
       if(self function_d39fc97a(player)) {
@@ -1648,10 +1648,10 @@ function tomb_get_closest_player_using_paths(origin, players) {
         length_to_player = undefined;
       }
     }
-    if(!isdefined(length_to_player)) {
+    if(!isDefined(length_to_player)) {
       continue;
     }
-    if(isdefined(level.validate_enemy_path_length)) {
+    if(isDefined(level.validate_enemy_path_length)) {
       if(length_to_player == 0) {
         valid = self thread[[level.validate_enemy_path_length]](player);
         if(!valid) {
@@ -1674,8 +1674,8 @@ function tomb_get_closest_player_using_paths(origin, players) {
       }
     }
   }
-  if(players.size > 1 && isdefined(player_to_return)) {
-    if(!(isdefined(player_to_return.b_already_on_tank) && player_to_return.b_already_on_tank)) {
+  if(players.size > 1 && isDefined(player_to_return)) {
+    if(!(isDefined(player_to_return.b_already_on_tank) && player_to_return.b_already_on_tank)) {
       self zm_utility::approximate_path_dist(player_to_return);
     }
   }
@@ -1683,18 +1683,18 @@ function tomb_get_closest_player_using_paths(origin, players) {
 }
 
 function update_staff_accessories(n_element_index) {
-  if(!isdefined(n_element_index)) {
+  if(!isDefined(n_element_index)) {
     n_element_index = 0;
     str_weapon = self getcurrentweapon();
     if(is_weapon_upgraded_staff(str_weapon)) {
       s_info = zm_tomb_craftables::get_staff_info_from_weapon_name(str_weapon);
-      if(isdefined(s_info)) {
+      if(isDefined(s_info)) {
         n_element_index = s_info.enum;
         s_info.charger.is_charged = 1;
       }
     }
   }
-  if(!(isdefined(self.one_inch_punch_flag_has_been_init) && self.one_inch_punch_flag_has_been_init) && !self hasperk("specialty_widowswine")) {
+  if(!(isDefined(self.one_inch_punch_flag_has_been_init) && self.one_inch_punch_flag_has_been_init) && !self hasperk("specialty_widowswine")) {
     cur_weapon = self zm_utility::get_player_melee_weapon();
     weapon_to_keep = getweapon("knife");
     self.use_staff_melee = 0;
@@ -1703,7 +1703,7 @@ function update_staff_accessories(n_element_index) {
       if(staff_info.charger.is_charged) {
         staff_info = staff_info.upgrade;
       }
-      if(isdefined(staff_info.var_8f5a8751)) {
+      if(isDefined(staff_info.var_8f5a8751)) {
         weapon_to_keep = staff_info.var_8f5a8751;
         self.use_staff_melee = 1;
       }
@@ -1731,8 +1731,8 @@ function update_staff_accessories(n_element_index) {
   } else if(!has_revive && has_upgraded_staff) {
     self setactionslot(3, "weapon", level.var_2b2f83e5);
     self giveweapon(level.var_2b2f83e5);
-    if(isdefined(staff_info)) {
-      if(isdefined(staff_info.upgrade.revive_ammo_stock)) {
+    if(isDefined(staff_info)) {
+      if(isDefined(staff_info.upgrade.revive_ammo_stock)) {
         self setweaponammostock(level.var_2b2f83e5, staff_info.upgrade.revive_ammo_stock);
         self setweaponammoclip(level.var_2b2f83e5, staff_info.upgrade.revive_ammo_clip);
       }
@@ -1741,10 +1741,8 @@ function update_staff_accessories(n_element_index) {
 }
 
 function get_round_enemy_array_wrapper() {
-  if(isdefined(level.custom_get_round_enemy_array_func)) {
-    a_enemies = [
-      [level.custom_get_round_enemy_array_func]
-    ]();
+  if(isDefined(level.custom_get_round_enemy_array_func)) {
+    a_enemies = [[level.custom_get_round_enemy_array_func]]();
   } else {
     a_enemies = zombie_utility::get_round_enemy_array();
   }

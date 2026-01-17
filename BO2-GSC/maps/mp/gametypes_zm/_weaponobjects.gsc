@@ -84,23 +84,23 @@ weapons_get_dvar(dvar, def) {
 }
 
 setupretrievablehintstrings() {
-  createretrievablehint("hatchet", & "MP_HATCHET_PICKUP");
-  createretrievablehint("claymore", & "MP_CLAYMORE_PICKUP");
-  createretrievablehint("bouncingbetty", & "MP_BOUNCINGBETTY_PICKUP");
-  createretrievablehint("trophy_system", & "MP_TROPHY_SYSTEM_PICKUP");
-  createretrievablehint("acoustic_sensor", & "MP_ACOUSTIC_SENSOR_PICKUP");
-  createretrievablehint("camera_spike", & "MP_CAMERA_SPIKE_PICKUP");
-  createretrievablehint("satchel_charge", & "MP_SATCHEL_CHARGE_PICKUP");
-  createretrievablehint("scrambler", & "MP_SCRAMBLER_PICKUP");
-  createdestroyhint("trophy_system", & "MP_TROPHY_SYSTEM_DESTROY");
-  createdestroyhint("sensor_grenade", & "MP_SENSOR_GRENADE_DESTROY");
-  createhackerhint("claymore_mp", & "MP_CLAYMORE_HACKING");
-  createhackerhint("bouncingbetty_mp", & "MP_BOUNCINGBETTY_HACKING");
-  createhackerhint("trophy_system_mp", & "MP_TROPHY_SYSTEM_HACKING");
-  createhackerhint("acoustic_sensor_mp", & "MP_ACOUSTIC_SENSOR_HACKING");
-  createhackerhint("camera_spike_mp", & "MP_CAMERA_SPIKE_HACKING");
-  createhackerhint("satchel_charge_mp", & "MP_SATCHEL_CHARGE_HACKING");
-  createhackerhint("scrambler_mp", & "MP_SCRAMBLER_HACKING");
+  createretrievablehint("hatchet", &"MP_HATCHET_PICKUP");
+  createretrievablehint("claymore", &"MP_CLAYMORE_PICKUP");
+  createretrievablehint("bouncingbetty", &"MP_BOUNCINGBETTY_PICKUP");
+  createretrievablehint("trophy_system", &"MP_TROPHY_SYSTEM_PICKUP");
+  createretrievablehint("acoustic_sensor", &"MP_ACOUSTIC_SENSOR_PICKUP");
+  createretrievablehint("camera_spike", &"MP_CAMERA_SPIKE_PICKUP");
+  createretrievablehint("satchel_charge", &"MP_SATCHEL_CHARGE_PICKUP");
+  createretrievablehint("scrambler", &"MP_SCRAMBLER_PICKUP");
+  createdestroyhint("trophy_system", &"MP_TROPHY_SYSTEM_DESTROY");
+  createdestroyhint("sensor_grenade", &"MP_SENSOR_GRENADE_DESTROY");
+  createhackerhint("claymore_mp", &"MP_CLAYMORE_HACKING");
+  createhackerhint("bouncingbetty_mp", &"MP_BOUNCINGBETTY_HACKING");
+  createhackerhint("trophy_system_mp", &"MP_TROPHY_SYSTEM_HACKING");
+  createhackerhint("acoustic_sensor_mp", &"MP_ACOUSTIC_SENSOR_HACKING");
+  createhackerhint("camera_spike_mp", &"MP_CAMERA_SPIKE_HACKING");
+  createhackerhint("satchel_charge_mp", &"MP_SATCHEL_CHARGE_HACKING");
+  createhackerhint("scrambler_mp", &"MP_SCRAMBLER_HACKING");
 }
 
 onplayerconnect() {
@@ -189,11 +189,9 @@ createtactinsertwatcher() {
   watcher.playdestroyeddialog = 0;
 }
 
-creatercbombwatcher() {
-}
+creatercbombwatcher() {}
 
-createqrdronewatcher() {
-}
+createqrdronewatcher() {}
 
 createplayerhelicopterwatcher() {
   watcher = self createuseweaponobjectwatcher("helicopter_player", "helicopter_player_mp", self.team);
@@ -230,8 +228,7 @@ waittillnotmoving_and_notstunned() {
   }
 }
 
-voidonspawn(unused0, unused1) {
-}
+voidonspawn(unused0, unused1) {}
 
 deleteent(attacker, emp) {
   self delete();
@@ -294,9 +291,9 @@ waitanddetonate(object, delay, attacker, weaponname) {
     object.stun_fx = 1;
 
     if(isDefined(object.name) && object.name == "qrdrone_turret_mp")
-      playfx(level._equipment_emp_destroy_fx, object.origin + (0, 0, 0), (0, randomfloat(360), 0));
+      playFX(level._equipment_emp_destroy_fx, object.origin + (0, 0, 0), (0, randomfloat(360), 0));
     else
-      playfx(level._equipment_emp_destroy_fx, object.origin + vectorscale((0, 0, 1), 5.0), (0, randomfloat(360), 0));
+      playFX(level._equipment_emp_destroy_fx, object.origin + vectorscale((0, 0, 1), 5.0), (0, randomfloat(360), 0));
 
     delay = 1.1;
   }
@@ -399,8 +396,7 @@ addweaponobject(watcher, weapon) {
     weapon thread deleteonkillbrush(self);
 }
 
-watchscramble(watcher) {
-}
+watchscramble(watcher) {}
 
 deleteweaponobjecthelper(weapon_ent) {
   if(!isDefined(weapon_ent.name)) {
@@ -433,7 +429,7 @@ deleteweaponobject(watcher, weapon_ent) {
 weaponobjectdamage(watcher) {
   self endon("death");
   self endon("hacked");
-  self setcandamage(1);
+  self setCanDamage(1);
   self.maxhealth = 100000;
   self.health = self.maxhealth;
   attacker = undefined;
@@ -506,7 +502,7 @@ weaponobjectdamage(watcher) {
   if(isDefined(type) && (issubstr(type, "MOD_GRENADE_SPLASH") || issubstr(type, "MOD_GRENADE") || issubstr(type, "MOD_EXPLOSIVE")))
     self.waschained = 1;
 
-  if(isDefined(idflags) && idflags & level.idflags_penetration)
+  if(isDefined(idflags) && idflags &level.idflags_penetration)
     self.wasdamagedfrombulletpenetration = 1;
 
   self.wasdamaged = 1;
@@ -585,11 +581,11 @@ weaponstun() {
     origin = self.origin + vectorscale((0, 0, 1), 10.0);
 
   self.stun_fx = spawn("script_model", origin);
-  self.stun_fx setmodel("tag_origin");
+  self.stun_fx setModel("tag_origin");
   self thread stunfxthink(self.stun_fx);
   wait 0.1;
-  playfxontag(level._equipment_spark_fx, self.stun_fx, "tag_origin");
-  self.stun_fx playsound("dst_disable_spark");
+  playFXOnTag(level._equipment_spark_fx, self.stun_fx, "tag_origin");
+  self.stun_fx playSound("dst_disable_spark");
 }
 
 stunfxthink(fx) {
@@ -650,7 +646,7 @@ createweaponobjectwatcher(name, weapon, ownerteam) {
   weaponobjectwatcher = getweaponobjectwatcher(name);
 
   if(!isDefined(weaponobjectwatcher)) {
-    weaponobjectwatcher = spawnstruct();
+    weaponobjectwatcher = spawnStruct();
     self.weaponobjectwatcherarray[self.weaponobjectwatcherarray.size] = weaponobjectwatcher;
     weaponobjectwatcher.name = name;
     weaponobjectwatcher.type = "use";
@@ -846,7 +842,7 @@ vectorcross(v1, v2) {
 showcone(angle, range, color) {
   self endon("death");
   start = self.origin;
-  forward = anglestoforward(self.angles);
+  forward = anglesToForward(self.angles);
   right = vectorcross(forward, (0, 0, 1));
   up = vectorcross(forward, right);
   fullforward = forward * range * cos(angle);
@@ -1017,8 +1013,7 @@ hackerthink(trigger, watcher) {
     self setteam(player.pers["team"]);
     self.owner = player;
 
-    if(isweaponequipment(self.name)) {
-    }
+    if(isweaponequipment(self.name)) {}
 
     if(self.name == "satchel_charge_mp" && isDefined(player.lowermessage)) {
       player.lowermessage settext(&"PLATFORM_SATCHEL_CHARGE_DOUBLE_TAP");
@@ -1259,7 +1254,7 @@ proximityweaponobjectdetonation(watcher) {
   }
 
   if(isDefined(watcher.activatesound))
-    self playsound(watcher.activatesound);
+    self playSound(watcher.activatesound);
 
   if(isDefined(watcher.activatefx))
     self setclientflag(4);
@@ -1285,7 +1280,7 @@ shouldaffectweaponobject(object, watcher) {
     return true;
 
   dirtopos = pos - object.origin;
-  objectforward = anglestoforward(object.angles);
+  objectforward = anglesToForward(object.angles);
   dist = vectordot(dirtopos, objectforward);
 
   if(dist < watcher.detectionmindist)
@@ -1315,7 +1310,7 @@ deleteonkillbrush(player) {
   player endon("disconnect");
   self endon("death");
   self endon("stationary");
-  killbrushes = getentarray("trigger_hurt", "classname");
+  killbrushes = getEntArray("trigger_hurt", "classname");
 
   while(true) {
     for(i = 0; i < killbrushes.size; i++) {
@@ -1399,7 +1394,7 @@ deleteweaponobjectson() {
     watchers = [];
 
     for(watcher = 0; watcher < self.weaponobjectwatcherarray.size; watcher++) {
-      weaponobjectwatcher = spawnstruct();
+      weaponobjectwatcher = spawnStruct();
       watchers[watchers.size] = weaponobjectwatcher;
       weaponobjectwatcher.objectarray = [];
 
@@ -1580,7 +1575,7 @@ watchhatchettrigger(trigger, callback, playersoundonuse, npcsoundonuse) {
       player playlocalsound(playersoundonuse);
 
     if(isDefined(npcsoundonuse))
-      player playsound(npcsoundonuse);
+      player playSound(npcsoundonuse);
 
     self thread[[callback]](player);
   }
@@ -1756,8 +1751,8 @@ pickup(player) {
 }
 
 ondestroyed(attacker) {
-  playfx(level._effect["tacticalInsertionFizzle"], self.origin);
-  self playsound("dst_tac_insert_break");
+  playFX(level._effect["tacticalInsertionFizzle"], self.origin);
+  self playSound("dst_tac_insert_break");
   self.owner maps\mp\gametypes_zm\_globallogic_audio::leaderdialogonplayer("equipment_destroyed", "item_destroyed");
   self delete();
 }
@@ -1821,7 +1816,7 @@ watchusetrigger(trigger, callback, playersoundonuse, npcsoundonuse) {
         player playlocalsound(playersoundonuse);
 
       if(isDefined(npcsoundonuse))
-        player playsound(npcsoundonuse);
+        player playSound(npcsoundonuse);
 
       self thread[[callback]](player);
     }
@@ -1829,21 +1824,21 @@ watchusetrigger(trigger, callback, playersoundonuse, npcsoundonuse) {
 }
 
 createretrievablehint(name, hint) {
-  retrievehint = spawnstruct();
+  retrievehint = spawnStruct();
   retrievehint.name = name;
   retrievehint.hint = hint;
   level.retrievehints[name] = retrievehint;
 }
 
 createhackerhint(name, hint) {
-  hackerhint = spawnstruct();
+  hackerhint = spawnStruct();
   hackerhint.name = name;
   hackerhint.hint = hint;
   level.hackerhints[name] = hackerhint;
 }
 
 createdestroyhint(name, hint) {
-  destroyhint = spawnstruct();
+  destroyhint = spawnStruct();
   destroyhint.name = name;
   destroyhint.hint = hint;
   level.destroyhints[name] = destroyhint;
@@ -1855,7 +1850,7 @@ attachreconmodel(modelname, owner) {
   }
   reconmodel = spawn("script_model", self.origin);
   reconmodel.angles = self.angles;
-  reconmodel setmodel(modelname);
+  reconmodel setModel(modelname);
   reconmodel.model_name = modelname;
   reconmodel linkto(self);
   reconmodel setcontents(0);
@@ -1947,5 +1942,4 @@ resetreconmodelonevent(eventname, owner) {
   }
 }
 
-switch_team(entity, weapon_name, owner) {
-}
+switch_team(entity, weapon_name, owner) {}

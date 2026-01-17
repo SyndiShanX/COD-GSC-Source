@@ -599,9 +599,7 @@ PlayerKilled_internal(eInflictor, attacker, victim, iDamage, sMeansOfDeath, sWea
   }
 
   if((sMeansOfDeath != "MOD_SUICIDE") && (IsAIGameParticipant(victim) || IsAIGameParticipant(attacker)) && isDefined(level.bot_funcs) && isDefined(level.bot_funcs["get_attacker_ent"])) {
-    killing_entity = [
-      [level.bot_funcs["get_attacker_ent"]]
-    ](attacker, eInflictor);
+    killing_entity = [[level.bot_funcs["get_attacker_ent"]]](attacker, eInflictor);
     if(isDefined(killing_entity)) {
       if(IsAIGameParticipant(victim)) {
         Assert(killing_entity.classname != "worldspawn" && killing_entity.classname != "trigger_hurt");
@@ -1421,7 +1419,7 @@ HitlocDebug(attacker, victim, damage, hitloc, dflags) {
   }
   attacker.damageInfo[0].damage = damage;
   attacker.damageInfo[0].hitloc = hitloc;
-  attacker.damageInfo[0].bp = (dflags & level.iDFLAGS_PENETRATION);
+  attacker.damageInfo[0].bp = (dflags &level.iDFLAGS_PENETRATION);
   attacker.damageInfo[0].jugg = victim isJuggernaut();
   if(isDefined(attacker.damageInfoVictim) && (attacker.damageInfoVictim != victim)) {
     attacker.damageInfoColorIndex++;
@@ -1538,7 +1536,7 @@ Callback_PlayerDamage_internal(eInflictor, eAttacker, victim, iDamage, iDFlags, 
 
   stunFraction = 0.0;
 
-  if(iDFlags & level.iDFLAGS_STUN) {
+  if(iDFlags &level.iDFLAGS_STUN) {
     stunFraction = 0.0;
 
     iDamage = 0.0;
@@ -1584,14 +1582,14 @@ Callback_PlayerDamage_internal(eInflictor, eAttacker, victim, iDamage, iDFlags, 
       }
     }
 
-    if(iDFlags & level.iDFLAGS_SHIELD_EXPLOSIVE_IMPACT) {
+    if(iDFlags &level.iDFLAGS_SHIELD_EXPLOSIVE_IMPACT) {
       if(!attackerIsHittingTeammate)
         victim thread maps\mp\gametypes\_missions::genericChallenge("shield_explosive_hits", 1);
 
       sHitLoc = "none";
-      if(!(iDFlags & level.iDFLAGS_SHIELD_EXPLOSIVE_IMPACT_HUGE))
+      if(!(iDFlags &level.iDFLAGS_SHIELD_EXPLOSIVE_IMPACT_HUGE))
         iDamage *= 0.0;
-    } else if(iDFlags & level.iDFLAGS_SHIELD_EXPLOSIVE_SPLASH) {
+    } else if(iDFlags &level.iDFLAGS_SHIELD_EXPLOSIVE_SPLASH) {
       if(isDefined(eInflictor) && isDefined(eInflictor.stuckEnemyEntity) && eInflictor.stuckEnemyEntity == victim)
         iDamage = 151;
 
@@ -1625,9 +1623,7 @@ Callback_PlayerDamage_internal(eInflictor, eAttacker, victim, iDamage, iDFlags, 
   }
 
   if(isDefined(level.modifyPlayerDamage))
-    iDamage = [
-      [level.modifyPlayerDamage]
-    ](victim, eAttacker, iDamage, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc);
+    iDamage = [[level.modifyPlayerDamage]](victim, eAttacker, iDamage, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc);
 
   if(!iDamage)
     return "!iDamage";
@@ -1696,7 +1692,7 @@ Callback_PlayerDamage_internal(eInflictor, eAttacker, victim, iDamage, iDFlags, 
 
   prof_end("PlayerDamage flags/tweaks");
 
-  if(!(iDFlags & level.iDFLAGS_NO_PROTECTION)) {
+  if(!(iDFlags &level.iDFLAGS_NO_PROTECTION)) {
     if(!level.teamBased && attackerIsNPC && isDefined(eAttacker.owner) && eAttacker.owner == victim) {
       prof_end("PlayerDamage player");
 
@@ -1874,7 +1870,7 @@ Callback_PlayerDamage_internal(eInflictor, eAttacker, victim, iDamage, iDFlags, 
     if(isDefined(damager) && damager != victim && iDamage > 0 && (!isDefined(sHitLoc) || sHitLoc != "shield")) {
       wasKilled = !isReallyAlive(victim) || (IsAgent(victim) && iDamage >= victim.health);
 
-      if(iDFlags & level.iDFLAGS_STUN)
+      if(iDFlags &level.iDFLAGS_STUN)
         typeHit = "stun";
       else if(IsExplosiveDamageMOD(sMeansOfDeath) && (isDefined(victim.thermoDebuffed) && victim.thermoDebuffed))
         typeHit = ter_op(wasKilled, "thermodebuff_kill", "thermobaric_debuff");
@@ -2043,7 +2039,7 @@ Callback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sW
 }
 
 finishPlayerDamageWrapper(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, psOffsetTime, stunFraction) {
-  if((self isUsingRemote() && (iDamage >= self.health) && !(iDFlags & level.iDFLAGS_STUN) && allowFauxDeath()) || self isRocketCorpse()) {
+  if((self isUsingRemote() && (iDamage >= self.health) && !(iDFlags &level.iDFLAGS_STUN) && allowFauxDeath()) || self isRocketCorpse()) {
     if(!isDefined(vDir))
       vDir = (0, 0, 0);
 
@@ -2282,7 +2278,7 @@ lastStandTimer(delay, isFinalStand) {
 
   if(!isFinalStand && (!isDefined(self.inC4Death) || !self.inC4Death)) {
     self thread lastStandAllowSuicide();
-    self setLowerMessage("last_stand", & "PLATFORM_COWARDS_WAY_OUT", undefined, undefined, undefined, undefined, undefined, undefined, true);
+    self setLowerMessage("last_stand", &"PLATFORM_COWARDS_WAY_OUT", undefined, undefined, undefined, undefined, undefined, undefined, true);
     self thread lastStandKeepOverlay();
   }
 
@@ -2928,9 +2924,7 @@ monitorDamageOneShot(damage, attacker, direction_vec, point, meansOfDeath, model
     if(!isDefined(modifyDamageFunc)) {
       modifyDamageFunc = ::modifyDamage;
     }
-    modifiedDamage = [
-      [modifyDamageFunc]
-    ](attacker, weapon, meansOfDeath, damage);
+    modifiedDamage = [[modifyDamageFunc]](attacker, weapon, meansOfDeath, damage);
   }
 
   if(modifiedDamage < 0) {
@@ -2940,7 +2934,7 @@ monitorDamageOneShot(damage, attacker, direction_vec, point, meansOfDeath, model
   self.wasDamaged = true;
   self.damageTaken += modifiedDamage;
 
-  if(isDefined(iDFlags) && (iDFlags & level.iDFLAGS_PENETRATION)) {
+  if(isDefined(iDFlags) && (iDFlags &level.iDFLAGS_PENETRATION)) {
     self.wasDamagedFromBulletPenetration = true;
   }
 

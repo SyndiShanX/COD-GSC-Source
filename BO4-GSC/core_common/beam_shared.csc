@@ -4,7 +4,6 @@
 ***********************************************/
 
 #include scripts\core_common\util_shared;
-
 #namespace beam;
 
 launch(ent_1, str_tag1, ent_2, str_tag2, str_beam_type, var_ee0708f0) {
@@ -89,7 +88,7 @@ function_47deed80(localclientnum, beam_id) {
   }
 }
 
-private _new_beam(ent_1, str_tag1, ent_2, str_tag2, str_beam_type) {
+_new_beam(ent_1, str_tag1, ent_2, str_tag2, str_beam_type) {
   if(!isDefined(self.active_beams)) {
     self.active_beams = [];
   }
@@ -111,7 +110,7 @@ private _new_beam(ent_1, str_tag1, ent_2, str_tag2, str_beam_type) {
   return s_beam;
 }
 
-private _get_beam(ent_1, str_tag1, ent_2, str_tag2, str_beam_type) {
+_get_beam(ent_1, str_tag1, ent_2, str_tag2, str_beam_type) {
   if(isDefined(self.active_beams)) {
     foreach(s_beam in self.active_beams) {
       if(s_beam.ent_1 === ent_1 && s_beam.str_tag1 === str_tag1 && s_beam.ent_2 === ent_2 && s_beam.str_tag2 === str_tag2 && s_beam.str_beam_type === str_beam_type) {
@@ -121,7 +120,7 @@ private _get_beam(ent_1, str_tag1, ent_2, str_tag2, str_beam_type) {
   }
 }
 
-private function_1c0feeb0(beam_id) {
+function_1c0feeb0(beam_id) {
   if(isDefined(level.active_beams)) {
     foreach(s_beam in level.active_beams) {
       if(s_beam.beam_id === beam_id) {
@@ -131,7 +130,7 @@ private function_1c0feeb0(beam_id) {
   }
 }
 
-private _kill_on_ent_death(localclientnum, s_beam, ent_1, ent_2) {
+_kill_on_ent_death(localclientnum, s_beam, ent_1, ent_2) {
   s_beam endon(#"kill");
   util::waittill_any_ents(ent_1, "death", ent_2, "death");
 

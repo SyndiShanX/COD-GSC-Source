@@ -5,14 +5,13 @@
 
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\postfx_shared;
-
 #namespace display_transition;
 
 init_shared() {
   registerclientfields();
 }
 
-private registerclientfields() {
+registerclientfields() {
   if(sessionmodeiswarzonegame()) {
     clientfield::register("clientuimodel", "eliminated_postfx", 12000, 1, "int", &function_c73ec9a, 0, 0);
   }

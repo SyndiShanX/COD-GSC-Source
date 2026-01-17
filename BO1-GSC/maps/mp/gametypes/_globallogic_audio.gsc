@@ -137,9 +137,9 @@ suspenseMusic() {
   level endon("game_ended");
   level endon("match_ending_soon");
   wait 20;
-  while (1) {
+  while(1) {
     wait(randomintrange(60, 85));
-    for (i = 0; i < level.players.size; i++) {
+    for(i = 0; i < level.players.size; i++) {
       player = level.players[i];
       if(!isDefined(player.pers["music"].inque)) {
         player.pers["music"].inque = false;
@@ -218,13 +218,13 @@ leaderDialog(dialog, team, group, excludeList, squadDialog) {
     return;
   }
   if(isDefined(excludeList)) {
-    for (i = 0; i < level.players.size; i++) {
+    for(i = 0; i < level.players.size; i++) {
       player = level.players[i];
       if((isDefined(player.pers["team"]) && (player.pers["team"] == team)) && !maps\mp\gametypes\_globallogic_utils::isExcluded(player, excludeList))
         player leaderDialogOnPlayer(dialog, group);
     }
   } else {
-    for (i = 0; i < level.players.size; i++) {
+    for(i = 0; i < level.players.size; i++) {
       player = level.players[i];
       if(isDefined(player.pers["team"]) && (player.pers["team"] == team))
         player leaderDialogOnPlayer(dialog, group);
@@ -241,7 +241,7 @@ leaderDialogBothTeams(dialog1, team1, dialog2, team2, group, excludeList) {
     return;
   }
   if(isDefined(excludeList)) {
-    for (i = 0; i < level.players.size; i++) {
+    for(i = 0; i < level.players.size; i++) {
       player = level.players[i];
       team = player.pers["team"];
       if(!isDefined(team))
@@ -254,7 +254,7 @@ leaderDialogBothTeams(dialog1, team1, dialog2, team2, group, excludeList) {
         player leaderDialogOnPlayer(dialog2, group);
     }
   } else {
-    for (i = 0; i < level.players.size; i++) {
+    for(i = 0; i < level.players.size; i++) {
       player = level.players[i];
       team = player.pers["team"];
       if(!isDefined(team))
@@ -309,7 +309,7 @@ playLeaderDialogOnPlayer(dialog, team) {
   self.leaderDialogGroup = "";
   if(self.leaderDialogQueue.size > 0) {
     nextDialog = self.leaderDialogQueue[0];
-    for (i = 1; i < self.leaderDialogQueue.size; i++)
+    for(i = 1; i < self.leaderDialogQueue.size; i++)
       self.leaderDialogQueue[i - 1] = self.leaderDialogQueue[i];
     self.leaderDialogQueue[i - 1] = undefined;
     self thread playLeaderDialogOnPlayer(nextDialog, team);
@@ -355,7 +355,7 @@ actionMusicSet() {
 }
 play_2d_on_team(alias, team) {
   assert(isDefined(level.players));
-  for (i = 0; i < level.players.size; i++) {
+  for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
     if(isDefined(player.pers["team"]) && (player.pers["team"] == team)) {
       player playLocalSound(alias);
@@ -388,7 +388,7 @@ set_music_on_team(state, team, save_state, return_state, wait_time) {
       println("Music System - wait_time undefined: Setting to 0");
     }
   }
-  for (i = 0; i < level.players.size; i++) {
+  for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
     if(team == "both") {
       player thread set_music_on_player(state, save_state, return_state, wait_time);
@@ -462,7 +462,7 @@ return_music_state_team(team, wait_time) {
       println("Music System - wait_time undefined: Setting to 0");
     }
   }
-  for (i = 0; i < level.players.size; i++) {
+  for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
     if(team == "both") {
       player thread set_next_music_state(self.pers["music"].returnState, wait_time);

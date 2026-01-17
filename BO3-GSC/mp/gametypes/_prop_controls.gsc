@@ -45,94 +45,94 @@ function function_e17a8f06(command, key) {
   self endon((command + "_") + key);
   switch (key) {
     case "+attack": {
-      function_c6639fc9( & attackbuttonpressed, command);
+      function_c6639fc9(&attackbuttonpressed, command);
       break;
     }
     case "+toggleads_throw": {
-      function_c6639fc9( & adsbuttonpressed, command);
+      function_c6639fc9(&adsbuttonpressed, command);
       break;
     }
     case "weapnext": {
-      function_c6639fc9( & weaponswitchbuttonpressed, command);
+      function_c6639fc9(&weaponswitchbuttonpressed, command);
       break;
     }
     case "+usereload": {
-      function_c6639fc9( & usebuttonpressed, command);
+      function_c6639fc9(&usebuttonpressed, command);
       break;
     }
     case "+smoke": {
-      function_c6639fc9( & secondaryoffhandbuttonpressed, command);
+      function_c6639fc9(&secondaryoffhandbuttonpressed, command);
       break;
     }
     case "+frag": {
-      function_c6639fc9( & fragbuttonpressed, command);
+      function_c6639fc9(&fragbuttonpressed, command);
       break;
     }
     case "+actionslot 1": {
-      function_c6639fc9( & actionslotonebuttonpressed, command);
+      function_c6639fc9(&actionslotonebuttonpressed, command);
       break;
     }
     case "+actionslot 2": {
-      function_c6639fc9( & actionslottwobuttonpressed, command);
+      function_c6639fc9(&actionslottwobuttonpressed, command);
       break;
     }
     case "+actionslot 3": {
-      function_c6639fc9( & actionslotthreebuttonpressed, command);
+      function_c6639fc9(&actionslotthreebuttonpressed, command);
       break;
     }
     case "+actionslot 4": {
-      function_c6639fc9( & actionslotfourbuttonpressed, command);
+      function_c6639fc9(&actionslotfourbuttonpressed, command);
       break;
     }
     case "-actionslot 1": {
-      function_b01c4bcb( & actionslotonebuttonpressed, command);
+      function_b01c4bcb(&actionslotonebuttonpressed, command);
       break;
     }
     case "-actionslot 2": {
-      function_b01c4bcb( & actionslottwobuttonpressed, command);
+      function_b01c4bcb(&actionslottwobuttonpressed, command);
       break;
     }
     case "-actionslot 3": {
-      function_b01c4bcb( & actionslotthreebuttonpressed, command);
+      function_b01c4bcb(&actionslotthreebuttonpressed, command);
       break;
     }
     case "-actionslot 4": {
-      function_b01c4bcb( & actionslotfourbuttonpressed, command);
+      function_b01c4bcb(&actionslotfourbuttonpressed, command);
       break;
     }
     case "+stance": {
-      function_b01c4bcb( & stancebuttonpressed, command);
+      function_b01c4bcb(&stancebuttonpressed, command);
       break;
     }
     case "+breath_sprint": {
-      function_b01c4bcb( & sprintbuttonpressed, command);
+      function_b01c4bcb(&sprintbuttonpressed, command);
       break;
     }
     case "+melee": {
-      function_b01c4bcb( & meleebuttonpressed, command);
+      function_b01c4bcb(&meleebuttonpressed, command);
       break;
     }
   }
 }
 
 function function_c6639fc9(var_33b64687, command) {
-  while (true) {
-    while (!self[[var_33b64687]]()) {
+  while(true) {
+    while(!self[[var_33b64687]]()) {
       wait(0.05);
     }
     self notify(command);
-    while (self[[var_33b64687]]()) {
+    while(self[[var_33b64687]]()) {
       wait(0.05);
     }
   }
 }
 
 function function_b01c4bcb(var_33b64687, command) {
-  while (true) {
-    while (!self[[var_33b64687]]()) {
+  while(true) {
+    while(!self[[var_33b64687]]()) {
       wait(0.05);
     }
-    while (self[[var_33b64687]]()) {
+    while(self[[var_33b64687]]()) {
       wait(0.05);
     }
     self notify(command);
@@ -187,20 +187,20 @@ function addupperrighthudelem(label, value, text, labelpc) {
   hudelem.hidewheninmenu = 1;
   hudelem.hidewheninkillcam = 1;
   hudelem.startfontscale = hudelem.fontscale;
-  if(isdefined(label) && isdefined(labelpc)) {
+  if(isDefined(label) && isDefined(labelpc)) {
     if(self is_player_gamepad_enabled()) {
       hudelem.label = label;
     } else {
       hudelem.label = labelpc;
     }
   } else {
-    if(isdefined(label)) {
+    if(isDefined(label)) {
       hudelem.label = label;
-    } else if(isdefined(text)) {
+    } else if(isDefined(text)) {
       hudelem settext(text);
     }
   }
-  if(isdefined(value)) {
+  if(isDefined(value)) {
     hudelem setvalue(value);
   }
   self.currenthudy = self.currenthudy - 20;
@@ -208,7 +208,7 @@ function addupperrighthudelem(label, value, text, labelpc) {
 }
 
 function propcontrolshud() {
-  assert(!isdefined(self.changepropkey));
+  assert(!isDefined(self.changepropkey));
   if(self issplitscreen()) {
     self.currenthudy = -10;
   } else {
@@ -219,9 +219,9 @@ function propcontrolshud() {
   self.changepropkey = addupperrighthudelem(&"MP_PH_CHANGE", 0);
   self.currenthudy = self.currenthudy - 20;
   self.var_6f16621b = addupperrighthudelem(&"MP_PH_HIDEPROP");
-  self.matchslopekey = addupperrighthudelem(&"MP_PH_SLOPE", undefined, undefined, & "MP_PH_SLOPE_PC");
+  self.matchslopekey = addupperrighthudelem(&"MP_PH_SLOPE", undefined, undefined, &"MP_PH_SLOPE_PC");
   self.lockpropkey = addupperrighthudelem(&"MP_PH_LOCK");
-  self.spinpropkey = addupperrighthudelem(&"MP_PH_SPIN", undefined, undefined, & "MP_PH_SPIN_PC");
+  self.spinpropkey = addupperrighthudelem(&"MP_PH_SPIN", undefined, undefined, &"MP_PH_SPIN_PC");
   self setnewabilityhud();
   self.zoomkey = addupperrighthudelem(&"MP_PH_ZOOM");
   self thread updatetextongamepadchange();
@@ -236,7 +236,7 @@ function cleanuppropcontrolshudondeath() {
 }
 
 function safedestroy(hudelem) {
-  if(isdefined(hudelem)) {
+  if(isDefined(hudelem)) {
     hudelem destroy();
   }
 }
@@ -262,24 +262,24 @@ function updatetextongamepadchange() {
   }
   waittillframeend();
   var_85e0f0fe = self is_player_gamepad_enabled();
-  while (true) {
+  while(true) {
     var_521408c = self is_player_gamepad_enabled();
     if(var_521408c != var_85e0f0fe) {
       var_85e0f0fe = var_521408c;
       if(var_521408c) {
-        if(!(isdefined(self.slopelocked) && self.slopelocked)) {
-          self.matchslopekey.label = & "MP_PH_SLOPE";
+        if(!(isDefined(self.slopelocked) && self.slopelocked)) {
+          self.matchslopekey.label = &"MP_PH_SLOPE";
         } else {
-          self.matchslopekey.label = & "MP_PH_SLOPED";
+          self.matchslopekey.label = &"MP_PH_SLOPED";
         }
-        self.spinpropkey.label = & "MP_PH_SPIN";
+        self.spinpropkey.label = &"MP_PH_SPIN";
       } else {
-        if(!(isdefined(self.slopelocked) && self.slopelocked)) {
-          self.matchslopekey.label = & "MP_PH_SLOPE_PC";
+        if(!(isDefined(self.slopelocked) && self.slopelocked)) {
+          self.matchslopekey.label = &"MP_PH_SLOPE_PC";
         } else {
-          self.matchslopekey.label = & "MP_PH_SLOPED_PC";
+          self.matchslopekey.label = &"MP_PH_SLOPED_PC";
         }
-        self.spinpropkey.label = & "MP_PH_SPIN_PC";
+        self.spinpropkey.label = &"MP_PH_SPIN_PC";
       }
     }
     wait(0.05);
@@ -299,9 +299,9 @@ function propinputwatch() {
   self thread propmoveunlock();
   self thread propcamerazoom();
   self.debugnextpropindex = 1;
-  while (true) {
+  while(true) {
     msg = self util::waittill_any_return("lock", "spin", "changeProp", "setToSlope", "propAbility", "cloneProp", "hide");
-    if(!isdefined(msg)) {
+    if(!isDefined(msg)) {
       continue;
     }
     waittillframeend();
@@ -348,7 +348,7 @@ function function_90ce903e() {
   self.propent unlink();
   self.propent.angles = self.propent.angles + vectorscale((0, 1, 0), 45);
   self.propent.origin = self.propanchor.origin;
-  if(self.slopelocked && (isdefined(self.lock) && self.lock)) {
+  if(self.slopelocked && (isDefined(self.lock) && self.lock)) {
     self.propent set_pitch_roll_for_ground_normal(self.prop);
   }
   self.propent linkto(self.propanchor);
@@ -356,7 +356,7 @@ function function_90ce903e() {
 
 function registerpreviousprop(var_bc9de76b) {
   var_771596a5 = 3;
-  if(!isdefined(var_bc9de76b.usedpropsindex)) {
+  if(!isDefined(var_bc9de76b.usedpropsindex)) {
     var_bc9de76b.usedpropsindex = 0;
   }
   var_bc9de76b.usedprops[var_bc9de76b.usedpropsindex] = var_bc9de76b.prop.info;
@@ -372,7 +372,7 @@ function propchange() {
   }
   if(!level.console) {
     var_6f5743e8 = 300;
-    if(isdefined(self.lastpropchangetime) && (gettime() - self.lastpropchangetime) < var_6f5743e8) {
+    if(isDefined(self.lastpropchangetime) && (gettime() - self.lastpropchangetime) < var_6f5743e8) {
       return;
     }
     self.lastpropchangetime = gettime();
@@ -389,7 +389,7 @@ function propchange() {
   }
   self propchangeto(self.prop.info);
   if(level.phsettings.var_e332c699) {
-    playfxontag("player/fx_plyr_clone_reaper_appear", self.prop, "tag_origin");
+    playFXOnTag("player/fx_plyr_clone_reaper_appear", self.prop, "tag_origin");
   }
   self.maxhealth = int(prop::getprophealth(self.prop.info));
   self setnormalhealth(1);
@@ -406,14 +406,14 @@ function propchange() {
 }
 
 function prophaschangesleft() {
-  if(isdefined(self.var_c4494f8d) && self.var_c4494f8d) {
+  if(isDefined(self.var_c4494f8d) && self.var_c4494f8d) {
     return 1;
   }
   return self.changesleft > 0;
 }
 
 function propdeductchange() {
-  if(isdefined(self.var_c4494f8d) && self.var_c4494f8d) {
+  if(isDefined(self.var_c4494f8d) && self.var_c4494f8d) {
     return;
   }
   propsetchangesleft(self.changesleft - 1);
@@ -437,7 +437,7 @@ function propchangeto(info) {
     var_345eaa38 = self.prop.angles;
     var_9b6a4a66 = self.angles;
   }
-  self.prop setmodel(info.modelname);
+  self.prop setModel(info.modelname);
   self.prop.xyzoffset = info.xyzoffset;
   self.prop.anglesoffset = info.anglesoffset;
   self.prop setscale(info.var_bbac36c8, 1);
@@ -447,7 +447,7 @@ function propchangeto(info) {
   self.prop.origin = self.propent.origin;
   self.propent.angles = (self.angles[0], self.propent.angles[1], self.angles[2]);
   self.prop.angles = self.propent.angles;
-  if(isdefined(self.isangleoffset) && self.isangleoffset) {
+  if(isDefined(self.isangleoffset) && self.isangleoffset) {
     self.prop.angles = self.angles;
     self.isangleoffset = 0;
   }
@@ -459,7 +459,7 @@ function propchangeto(info) {
     self.angles = var_9b6a4a66;
   }
   self.prop linkto(self.propent);
-  if(self.slopelocked && (isdefined(self.lock) && self.lock)) {
+  if(self.slopelocked && (isDefined(self.lock) && self.lock)) {
     self.propent set_pitch_roll_for_ground_normal(self.prop);
   }
   self.propent linkto(self.propanchor);
@@ -469,23 +469,23 @@ function propchangeto(info) {
 }
 
 function propmatchslope() {
-  if(!(isdefined(self.slopelocked) && self.slopelocked)) {
+  if(!(isDefined(self.slopelocked) && self.slopelocked)) {
     self.slopelocked = 1;
-    if(isdefined(self.lock) && self.lock) {
+    if(isDefined(self.lock) && self.lock) {
       self.propent unlink();
       self.propent set_pitch_roll_for_ground_normal(self.prop);
       self.propent linkto(self.propanchor);
     }
     if(prop::useprophudserver()) {
       if(self is_player_gamepad_enabled()) {
-        self.matchslopekey.label = & "MP_PH_SLOPED";
+        self.matchslopekey.label = &"MP_PH_SLOPED";
       } else {
-        self.matchslopekey.label = & "MP_PH_SLOPED_PC";
+        self.matchslopekey.label = &"MP_PH_SLOPED_PC";
       }
     }
   } else {
     self.slopelocked = 0;
-    if(isdefined(self.lock) && self.lock) {
+    if(isDefined(self.lock) && self.lock) {
       self.propent unlink();
       self.propent.angles = (self.angles[0], self.propent.angles[1], self.angles[2]);
       self.propent.origin = self.propanchor.origin;
@@ -493,9 +493,9 @@ function propmatchslope() {
     }
     if(prop::useprophudserver()) {
       if(self is_player_gamepad_enabled()) {
-        self.matchslopekey.label = & "MP_PH_SLOPE";
+        self.matchslopekey.label = &"MP_PH_SLOPE";
       } else {
-        self.matchslopekey.label = & "MP_PH_SLOPE_PC";
+        self.matchslopekey.label = &"MP_PH_SLOPE_PC";
       }
     }
   }
@@ -519,14 +519,14 @@ function propclonepower() {
 }
 
 function prophasclonesleft() {
-  if(isdefined(self.var_b53602f4) && self.var_b53602f4) {
+  if(isDefined(self.var_b53602f4) && self.var_b53602f4) {
     return 1;
   }
   return self.clonesleft > 0;
 }
 
 function propdeductclonechange() {
-  if(isdefined(self.var_b53602f4) && self.var_b53602f4) {
+  if(isDefined(self.var_b53602f4) && self.var_b53602f4) {
     return;
   }
   propsetclonesleft(self.clonesleft - 1);
@@ -534,7 +534,7 @@ function propdeductclonechange() {
 
 function propsetclonesleft(newvalue) {
   self.clonesleft = newvalue;
-  if(prop::useprophudserver() && isdefined(self) && isalive(self) && isdefined(self.clonekey)) {
+  if(prop::useprophudserver() && isDefined(self) && isalive(self) && isDefined(self.clonekey)) {
     self.clonekey setvalue(self.clonesleft);
     if(self.clonesleft <= 0) {
       self.clonekey.alpha = 0.5;
@@ -545,14 +545,14 @@ function propsetclonesleft(newvalue) {
 }
 
 function prophasflashesleft() {
-  if(isdefined(self.var_2f1101f4) && self.var_2f1101f4) {
+  if(isDefined(self.var_2f1101f4) && self.var_2f1101f4) {
     return 1;
   }
   return self.abilityleft > 0;
 }
 
 function propdeductflash() {
-  if(isdefined(self.var_2f1101f4) && self.var_2f1101f4) {
+  if(isDefined(self.var_2f1101f4) && self.var_2f1101f4) {
     return;
   }
   propsetflashesleft(self.abilityleft - 1);
@@ -570,15 +570,15 @@ function propsetflashesleft(newvalue) {
 
 function set_pitch_roll_for_ground_normal(var_a84e1ffa) {
   groundnormal = get_ground_normal(var_a84e1ffa, 0);
-  if(!isdefined(groundnormal)) {
+  if(!isDefined(groundnormal)) {
     return;
   }
-  var_a8f94d84 = anglestoforward(self.angles);
+  var_a8f94d84 = anglesToForward(self.angles);
   ovr = anglestoright(self.angles);
   new_angles = vectortoangles(groundnormal);
   pitch = angleclamp180(new_angles[0] + 90);
   new_angles = (0, new_angles[1], 0);
-  var_7001e881 = anglestoforward(new_angles);
+  var_7001e881 = anglesToForward(new_angles);
   mod = vectordot(var_7001e881, ovr);
   if(mod < 0) {
     mod = -1;
@@ -593,7 +593,7 @@ function set_pitch_roll_for_ground_normal(var_a84e1ffa) {
 
 function function_b811663a(var_32d4bb6a) {
   foreach(player in level.players) {
-    if(isdefined(player.prop)) {
+    if(isDefined(player.prop)) {
       if(var_32d4bb6a) {
         player.prop notsolid();
         continue;
@@ -605,9 +605,9 @@ function function_b811663a(var_32d4bb6a) {
 
 function function_af3207f6(var_32d4bb6a) {
   foreach(player in level.players) {
-    if(isdefined(player.propclones)) {
+    if(isDefined(player.propclones)) {
       foreach(clone in player.propclones) {
-        if(isdefined(clone)) {
+        if(isDefined(clone)) {
           if(var_32d4bb6a) {
             clone notsolid();
             continue;
@@ -620,7 +620,7 @@ function function_af3207f6(var_32d4bb6a) {
 }
 
 function get_ground_normal(var_a84e1ffa, debug) {
-  if(!isdefined(var_a84e1ffa)) {
+  if(!isDefined(var_a84e1ffa)) {
     ignore = self;
   } else {
     ignore = var_a84e1ffa;
@@ -628,9 +628,9 @@ function get_ground_normal(var_a84e1ffa, debug) {
   var_4f9e9c19 = array(self.origin);
   if(getdvarint("scr_ph_useBoundsForGroundNormal", 1)) {
     i = -1;
-    while (i <= 1) {
+    while(i <= 1) {
       j = -1;
-      while (j <= 1) {
+      while(j <= 1) {
         corner = ignore getpointinbounds(i, j, 0);
         corner = (corner[0], corner[1], self.origin[2]);
         var_4f9e9c19[var_4f9e9c19.size] = corner;
@@ -643,7 +643,7 @@ function get_ground_normal(var_a84e1ffa, debug) {
   var_d54ec402 = (0, 0, 0);
   var_6146aef8 = 0;
   foreach(point in var_4f9e9c19) {
-    trace = bullettrace(point + vectorscale((0, 0, 1), 4), point + (vectorscale((0, 0, -1), 16)), 0, ignore);
+    trace = bulletTrace(point + vectorscale((0, 0, 1), 4), point + (vectorscale((0, 0, -1), 16)), 0, ignore);
     tracehit = trace["fraction"] > 0 && trace["fraction"] < 1;
     if(tracehit) {
       var_d54ec402 = var_d54ec402 + trace["normal"];
@@ -678,11 +678,11 @@ function propmoveunlock() {
   var_f98cbcda = 0;
   var_bc31618a = 0;
   var_449744f5 = 0;
-  while (true) {
+  while(true) {
     wait(0.05);
     movement = self getnormalizedmovement();
     jumping = self jumpbuttonpressed();
-    if(!isdefined(movement)) {
+    if(!isDefined(movement)) {
       continue;
     }
     ismoving = movement[0] != 0 || movement[1] != 0 || jumping;
@@ -712,7 +712,7 @@ function unlockprop() {
   self.propanchor linkto(self);
   self.lock = 0;
   if(prop::useprophudserver()) {
-    self.lockpropkey.label = & "MP_PH_LOCK";
+    self.lockpropkey.label = &"MP_PH_LOCK";
     self thread flashlockpropkey();
   }
 }
@@ -733,7 +733,7 @@ function lockprop() {
   self.lock = 1;
   self notify("locked");
   if(prop::useprophudserver()) {
-    self.lockpropkey.label = & "MP_PH_LOCKED";
+    self.lockpropkey.label = &"MP_PH_LOCKED";
     self thread flashlockpropkey();
   }
 }
@@ -748,7 +748,7 @@ function flashlockpropkey() {
   self.lockpropkey changefontscaleovertime(0.1);
   self.lockpropkey.fontscale = var_ec404e3d;
   wait(0.1);
-  if(isdefined(self.lockpropkey)) {
+  if(isDefined(self.lockpropkey)) {
     self.lockpropkey changefontscaleovertime(0.1);
     self.lockpropkey.fontscale = self.lockpropkey.startfontscale;
   }
@@ -765,13 +765,13 @@ function function_b9733d59() {
   assert(isplayer(self));
   start = self.origin;
   end = start + (vectorscale((0, 0, -1), 2000));
-  trace = bullettrace(start, end, 0, self.prop);
+  trace = bulletTrace(start, end, 0, self.prop);
   return trace;
 }
 
 function function_2dff88ca(success, type, player, origin1, text1, origin2, text2, origin3, text3) {
-  if(!isdefined(level.var_ec1690fd)) {
-    level.var_ec1690fd = spawnstruct();
+  if(!isDefined(level.var_ec1690fd)) {
+    level.var_ec1690fd = spawnStruct();
   }
   level.var_ec1690fd.success = success;
   level.var_ec1690fd.type = type;
@@ -788,10 +788,10 @@ function function_2dff88ca(success, type, player, origin1, text1, origin2, text2
 }
 
 function canlock() {
-  killtriggers = getentarray("trigger_hurt", "classname");
-  oobtriggers = getentarray("trigger_out_of_bounds", "classname");
+  killtriggers = getEntArray("trigger_hurt", "classname");
+  oobtriggers = getEntArray("trigger_out_of_bounds", "classname");
   triggers = arraycombine(killtriggers, oobtriggers, 0, 0);
-  var_40aa9cbd = getentarray("prop_no_lock", "targetname");
+  var_40aa9cbd = getEntArray("prop_no_lock", "targetname");
   if(var_40aa9cbd.size > 0) {
     triggers = arraycombine(triggers, var_40aa9cbd, 0, 0);
   }
@@ -820,14 +820,14 @@ function canlock() {
       }
     }
     point = getnearestpathpoint(org1, 256);
-    if(!isdefined(point)) {
+    if(!isDefined(point)) {
       function_2dff88ca(0, "", self, org1);
       return false;
     }
     distz = point[2] - org1[2];
     if(distz > 50) {
       point2 = getnearestpathpoint(org1, 50);
-      if(!isdefined(point2)) {
+      if(!isDefined(point2)) {
         function_2dff88ca(0, "", self, org1, "", point, "");
         return false;
       }
@@ -857,9 +857,9 @@ function propcamerazoom() {
   level endon("game_ended");
   var_8ea3acea = 10;
   self.thirdpersonrange = self.prop.info.proprange;
-  while (true) {
+  while(true) {
     zoom = self util::waittill_any_return("zoomin", "zoomout");
-    if(!isdefined(zoom)) {
+    if(!isDefined(zoom)) {
       continue;
     }
     if(zoom == "zoomin") {
@@ -882,7 +882,7 @@ function propcamerazoom() {
 function setnewabilityhud() {
   switch (self.currentability) {
     case "FLASH": {
-      self.abilitykey.label = & "MP_PH_FLASH";
+      self.abilitykey.label = &"MP_PH_FLASH";
       break;
     }
     default: {
@@ -895,14 +895,14 @@ function setnewabilityhud() {
 function setnewabilitycount(var_9c968389, count) {
   switch (var_9c968389) {
     case "FLASH": {
-      if(!isdefined(count)) {
+      if(!isDefined(count)) {
         count = level.phsettings.propnumflashes;
       }
       propsetflashesleft(count);
       break;
     }
     case "CLONE": {
-      if(!isdefined(count)) {
+      if(!isDefined(count)) {
         count = level.phsettings.propnumclones;
       }
       propsetclonesleft(count);
@@ -927,26 +927,26 @@ function flashtheprops(var_e967d644) {
   self thread endondeath();
   self endon("end_explode");
   self waittill("explode", position);
-  if(!isdefined(var_e967d644)) {
+  if(!isDefined(var_e967d644)) {
     return;
   }
   flashenemies(var_e967d644, position);
 }
 
 function flashenemies(var_e967d644 = self, position = self.origin) {
-  playfx(fx::get("propFlash"), position + vectorscale((0, 0, 1), 4));
+  playFX(fx::get("propFlash"), position + vectorscale((0, 0, 1), 4));
   playsoundatposition("mpl_emp_equip_stun", position);
   foreach(otherplayer in level.players) {
     if(otherplayer == var_e967d644) {
       continue;
     }
-    if(isdefined(otherplayer.flashimmune) && otherplayer.flashimmune) {
+    if(isDefined(otherplayer.flashimmune) && otherplayer.flashimmune) {
       continue;
     }
-    if(!isdefined(otherplayer) || !isalive(otherplayer) || !isdefined(otherplayer.team) || otherplayer.team != game["attackers"]) {
+    if(!isDefined(otherplayer) || !isalive(otherplayer) || !isDefined(otherplayer.team) || otherplayer.team != game["attackers"]) {
       continue;
     }
-    vec = (position + vectorscale((0, 0, 1), 4)) - otherplayer geteye();
+    vec = (position + vectorscale((0, 0, 1), 4)) - otherplayer getEye();
     dist = length(vec);
     var_6df9e8b8 = 500;
     var_88ef1466 = 150;
@@ -957,7 +957,7 @@ function flashenemies(var_e967d644 = self, position = self.origin) {
         var_bdf6b2ee = 1 - (dist - var_88ef1466) / (var_6df9e8b8 - var_88ef1466);
       }
       dir = vectornormalize(vec);
-      fwd = anglestoforward(otherplayer getplayerangles());
+      fwd = anglesToForward(otherplayer getplayerangles());
       var_b02fb38d = vectordot(fwd, dir);
       otherplayer notify("flashbang", var_bdf6b2ee, var_b02fb38d, var_e967d644);
       var_e967d644 thread damagefeedback::update();
@@ -975,7 +975,7 @@ function deletepropsifatmax() {
   }
   var_b76d0af5 = 0;
   foreach(clone in self.propclones) {
-    if(isdefined(clone)) {
+    if(isDefined(clone)) {
       var_b76d0af5++;
     }
   }
@@ -984,40 +984,40 @@ function deletepropsifatmax() {
   }
   clones = [];
   var_1292f83e = undefined;
-  for (i = 0; i < self.propclones.size; i++) {
+  for(i = 0; i < self.propclones.size; i++) {
     clone = self.propclones[i];
-    if(!isdefined(clone)) {
+    if(!isDefined(clone)) {
       continue;
     }
-    if(!isdefined(var_1292f83e)) {
+    if(!isDefined(var_1292f83e)) {
       var_1292f83e = clone;
       continue;
     }
     clones[clones.size] = clone;
   }
-  assert(isdefined(var_1292f83e));
+  assert(isDefined(var_1292f83e));
   var_1292f83e notify("hash_63ce821c");
   var_1292f83e delete();
   self.propclones = clones;
 }
 
 function cloneprop() {
-  if(!isdefined(self.propclones)) {
+  if(!isDefined(self.propclones)) {
     self.propclones = [];
   } else {
     deletepropsifatmax();
   }
   var_a20cbf64 = spawn("script_model", self.prop.origin);
   var_a20cbf64.targetname = "propClone";
-  var_a20cbf64 setmodel(self.prop.model);
+  var_a20cbf64 setModel(self.prop.model);
   var_a20cbf64 setscale(self.prop.info.var_bbac36c8, 1);
   var_a20cbf64.angles = self.prop.angles;
-  var_a20cbf64 setcandamage(1);
+  var_a20cbf64 setCanDamage(1);
   var_a20cbf64.fakehealth = 50;
   var_a20cbf64.health = 99999;
   var_a20cbf64.maxhealth = 99999;
   var_a20cbf64.playerowner = self;
-  var_a20cbf64 thread prop::function_500dc7d9( & damageclonewatch);
+  var_a20cbf64 thread prop::function_500dc7d9(&damageclonewatch);
   var_a20cbf64 setplayercollision(0);
   var_a20cbf64 makesentient();
   var_a20cbf64 notsolidcapsule();
@@ -1034,14 +1034,14 @@ function cloneprop() {
 }
 
 function damageclonewatch(damage, attacker, direction_vec, point, meansofdeath, modelname, tagname, partname, weapon, idflags) {
-  if(!isdefined(attacker)) {
+  if(!isDefined(attacker)) {
     return;
   }
   if(isplayer(attacker)) {
-    if(isdefined(self.isdying) && self.isdying) {
+    if(isDefined(self.isdying) && self.isdying) {
       return;
     }
-    if(isdefined(weapon) && weapon.rootweapon.name == "concussion_grenade" && isdefined(meansofdeath) && meansofdeath != "MOD_IMPACT") {
+    if(isDefined(weapon) && weapon.rootweapon.name == "concussion_grenade" && isDefined(meansofdeath) && meansofdeath != "MOD_IMPACT") {
       function_770b4cfa(attacker, undefined, meansofdeath, damage, point, weapon);
     }
     attacker thread damagefeedback::update();
@@ -1063,7 +1063,7 @@ function function_8e6b5244() {
 
 function function_de01cce2() {
   self.var_86fdc107 = hud::createfontstring("objective", 1);
-  self.var_86fdc107.label = & "SCORE_DECOY_KILLED";
+  self.var_86fdc107.label = &"SCORE_DECOY_KILLED";
   self.var_86fdc107.x = 0;
   self.var_86fdc107.y = 20;
   self.var_86fdc107.alignx = "center";
@@ -1078,14 +1078,14 @@ function function_de01cce2() {
 }
 
 function function_7a923efa(var_8847a584, attacker) {
-  if(isdefined(var_8847a584)) {
-    if(!isdefined(var_8847a584.var_86fdc107)) {
+  if(isDefined(var_8847a584)) {
+    if(!isDefined(var_8847a584.var_86fdc107)) {
       var_8847a584 function_de01cce2();
     }
     var_8847a584 function_8e6b5244();
   }
-  if(isdefined(attacker)) {
-    if(!isdefined(attacker.var_86fdc107)) {
+  if(isDefined(attacker)) {
+    if(!isDefined(attacker.var_86fdc107)) {
       attacker function_de01cce2();
     }
     attacker function_8e6b5244();
@@ -1095,21 +1095,21 @@ function function_7a923efa(var_8847a584, attacker) {
 function function_a40d8853() {
   if(level.phsettings.var_78280ce0) {
     thread function_7a923efa(self.playerowner, self.lastattacker);
-    if(isdefined(self.playerowner)) {
+    if(isDefined(self.playerowner)) {
       self.playerowner propsetclonesleft(self.playerowner.clonesleft + 1);
     }
-  } else if(isdefined(self.lastattacker)) {
+  } else if(isDefined(self.lastattacker)) {
     scoreevents::processscoreevent("clone_destroyed", self.lastattacker);
-    if(isdefined(self.playerowner)) {
+    if(isDefined(self.playerowner)) {
       scoreevents::processscoreevent("clone_was_destroyed", self.playerowner);
     }
   }
-  if(!isdefined(self.isdying)) {
+  if(!isDefined(self.isdying)) {
     self.isdying = 1;
   }
   playsoundatposition("wpn_flash_grenade_explode", self.origin + vectorscale((0, 0, 1), 4));
-  playfx(fx::get("propDeathFX"), self.origin + vectorscale((0, 0, 1), 4));
-  if(isdefined(self)) {
+  playFX(fx::get("propDeathFX"), self.origin + vectorscale((0, 0, 1), 4));
+  if(isDefined(self)) {
     self delete();
   }
 }
@@ -1117,13 +1117,13 @@ function function_a40d8853() {
 function function_7244ebc6(var_ad5f9a75, fade_in_time, fade_out_time) {
   level endon("game_ended");
   self endon("disconnect");
-  if(!isdefined(var_ad5f9a75)) {
+  if(!isDefined(var_ad5f9a75)) {
     var_ad5f9a75 = 5;
   }
-  if(!isdefined(fade_in_time)) {
+  if(!isDefined(fade_in_time)) {
     fade_in_time = 1;
   }
-  if(!isdefined(fade_out_time)) {
+  if(!isDefined(fade_out_time)) {
     fade_out_time = 1;
   }
   assert((fade_out_time + fade_in_time) < var_ad5f9a75);
@@ -1165,7 +1165,7 @@ function watchspecialgrenadethrow() {
   level endon("game_ended");
   self notify("watchspecialgrenadethrow");
   self endon("watchspecialgrenadethrow");
-  while (true) {
+  while(true) {
     self waittill("grenade_fire", grenade, weapon);
     self thread function_899a39ec(grenade);
     self.thrownspecialcount = self.thrownspecialcount + 1;
@@ -1177,11 +1177,11 @@ function function_899a39ec(grenade) {
   self endon("disconnect");
   weapon = grenade.weapon;
   grenade waittill("explode", damageorigin);
-  if(!isdefined(level.var_56d3e86e)) {
+  if(!isDefined(level.var_56d3e86e)) {
     level.var_56d3e86e = [];
   }
   index = function_913d23(damageorigin);
-  if(!isdefined(index)) {
+  if(!isDefined(index)) {
     index = function_141daf3d(self, damageorigin, weapon, 1, "MOD_GRENADE_SPLASH");
   }
   wait(0.05);
@@ -1193,7 +1193,7 @@ function function_899a39ec(grenade) {
 
 function function_141daf3d(attacker, damageorigin, weapon, damage, meansofdeath) {
   index = level.var_56d3e86e.size;
-  level.var_56d3e86e[index] = spawnstruct();
+  level.var_56d3e86e[index] = spawnStruct();
   level.var_56d3e86e[index].players = [];
   level.var_56d3e86e[index].attacker = self;
   level.var_56d3e86e[index].damageorigin = damageorigin;
@@ -1204,21 +1204,21 @@ function function_141daf3d(attacker, damageorigin, weapon, damage, meansofdeath)
 }
 
 function function_770b4cfa(attacker, var_bf500123, meansofdeath, damage, damageorigin, weapon) {
-  if(!isdefined(level.var_56d3e86e)) {
+  if(!isDefined(level.var_56d3e86e)) {
     level.var_56d3e86e = [];
   }
   index = function_913d23(damageorigin);
-  if(!isdefined(index)) {
+  if(!isDefined(index)) {
     index = function_141daf3d(attacker, damageorigin, weapon, damage, meansofdeath);
   }
-  if(isdefined(var_bf500123)) {
+  if(isDefined(var_bf500123)) {
     playerindex = level.var_56d3e86e[index].players.size;
     level.var_56d3e86e[index].players[playerindex] = var_bf500123;
   }
 }
 
 function function_913d23(damageorigin) {
-  if(!isdefined(level.var_56d3e86e)) {
+  if(!isDefined(level.var_56d3e86e)) {
     return;
   }
   foreach(index, event in level.var_56d3e86e) {
@@ -1229,7 +1229,7 @@ function function_913d23(damageorigin) {
 }
 
 function function_af4e8351(index) {
-  if(!isdefined(level.var_56d3e86e) || !isdefined(level.var_56d3e86e[index].attacker)) {
+  if(!isDefined(level.var_56d3e86e) || !isDefined(level.var_56d3e86e[index].attacker)) {
     return;
   }
   weapon = level.var_56d3e86e[index].weapon;
@@ -1261,15 +1261,15 @@ function function_af4e8351(index) {
 
 function function_73052bdb(var_d18ea86a) {
   foreach(player in level.players) {
-    if(isdefined(player.prop)) {
+    if(isDefined(player.prop)) {
       if(var_d18ea86a) {
-        if(isdefined(player.prop.var_42c57e68)) {
+        if(isDefined(player.prop.var_42c57e68)) {
           player.prop setcontents(player.prop.var_42c57e68);
         }
         player.prop solid();
         continue;
       }
-      if(!isdefined(player.prop.var_42c57e68)) {
+      if(!isDefined(player.prop.var_42c57e68)) {
         player.prop.var_42c57e68 = player.prop setcontents(0);
       } else {
         player.prop setcontents(0);
@@ -1281,17 +1281,17 @@ function function_73052bdb(var_d18ea86a) {
 
 function function_564fbbef(var_d18ea86a) {
   foreach(player in level.players) {
-    if(isdefined(player.propclones)) {
+    if(isDefined(player.propclones)) {
       foreach(clone in player.propclones) {
-        if(isdefined(clone)) {
+        if(isDefined(clone)) {
           if(var_d18ea86a) {
-            if(isdefined(clone.var_edad31da)) {
+            if(isDefined(clone.var_edad31da)) {
               clone setcontents(clone.var_edad31da);
             }
             clone solid();
             continue;
           }
-          if(!isdefined(clone.var_edad31da)) {
+          if(!isDefined(clone.var_edad31da)) {
             clone.var_edad31da = clone setcontents(0);
           } else {
             clone setcontents(0);
@@ -1335,7 +1335,7 @@ function function_56938929(var_d18ea86a) {
 
 function function_94e1618c(damageorigin) {
   index = function_913d23(damageorigin);
-  if(isdefined(index)) {
+  if(isDefined(index)) {
     return self function_fde936b5(index);
   }
   return 0;
@@ -1343,7 +1343,7 @@ function function_94e1618c(damageorigin) {
 
 function function_fde936b5(index) {
   foreach(var_f07e80d9 in level.var_56d3e86e[index].players) {
-    if(isdefined(var_f07e80d9) && var_f07e80d9 == self) {
+    if(isDefined(var_f07e80d9) && var_f07e80d9 == self) {
       return true;
     }
   }
@@ -1351,18 +1351,18 @@ function function_fde936b5(index) {
 }
 
 function safesetalpha(hudelem, var_9a1ea53a) {
-  if(isdefined(hudelem)) {
+  if(isDefined(hudelem)) {
     hudelem.alpha = var_9a1ea53a;
   }
 }
 
 function propabilitykeysvisible(visible, override) {
-  if(isdefined(visible) && visible) {
+  if(isDefined(visible) && visible) {
     var_4d23023a = 1;
   } else {
     var_4d23023a = 0;
   }
-  if(prop::useprophudserver() || (isdefined(override) && override)) {
+  if(prop::useprophudserver() || (isDefined(override) && override)) {
     safesetalpha(self.changepropkey, var_4d23023a);
     safesetalpha(self.spinpropkey, var_4d23023a);
     safesetalpha(self.lockpropkey, var_4d23023a);
@@ -1371,14 +1371,14 @@ function propabilitykeysvisible(visible, override) {
     safesetalpha(self.clonekey, var_4d23023a);
     safesetalpha(self.zoomkey, var_4d23023a);
     safesetalpha(self.var_6f16621b, var_4d23023a);
-    if(!(isdefined(level.nopropsspectate) && level.nopropsspectate)) {
+    if(!(isDefined(level.nopropsspectate) && level.nopropsspectate)) {
       safesetalpha(self.spectatekey, var_4d23023a);
     }
   }
 }
 
 function function_8b7be7e3() {
-  if(!isdefined(self.var_4a35819e)) {
+  if(!isDefined(self.var_4a35819e)) {
     self.var_4a35819e = 1;
   } else {
     self.var_4a35819e = !self.var_4a35819e;
@@ -1386,18 +1386,18 @@ function function_8b7be7e3() {
   if(self.var_4a35819e) {
     self.prop clientfield::set("retrievable", 1);
     if(prop::useprophudserver()) {
-      self.var_6f16621b.label = & "MP_PH_SHOWPROP";
+      self.var_6f16621b.label = &"MP_PH_SHOWPROP";
     }
   } else {
     self.prop clientfield::set("retrievable", 0);
     if(prop::useprophudserver()) {
-      self.var_6f16621b.label = & "MP_PH_HIDEPROP";
+      self.var_6f16621b.label = &"MP_PH_HIDEPROP";
     }
   }
 }
 
 function function_bf45ce54() {
-  assert(!isdefined(self.var_b47d9b7e));
+  assert(!isDefined(self.var_b47d9b7e));
   if(self issplitscreen()) {
     self.currenthudy = -50;
   } else {
@@ -1433,14 +1433,14 @@ function function_b4c19c50() {
 }
 
 function function_5951cacf() {
-  if(isdefined(self.var_74ca9cd1) && self.var_74ca9cd1) {
+  if(isDefined(self.var_74ca9cd1) && self.var_74ca9cd1) {
     return 1;
   }
   return self.var_292246d3 > 0;
 }
 
 function function_2c53f5e6() {
-  if(isdefined(self.var_74ca9cd1) && self.var_74ca9cd1) {
+  if(isDefined(self.var_74ca9cd1) && self.var_74ca9cd1) {
     return;
   }
   function_afeda2bf(self.var_292246d3 - 1);
@@ -1464,9 +1464,9 @@ function function_1abcc66() {
     return;
   }
   prop::function_45c842e9();
-  while (true) {
+  while(true) {
     msg = self util::waittill_any_return("ping");
-    if(!isdefined(msg)) {
+    if(!isDefined(msg)) {
       continue;
     }
     if(msg == "ping") {
@@ -1479,7 +1479,7 @@ function function_38543493() {
   if(!level flag::get("props_hide_over")) {
     return;
   }
-  if(isdefined(self.var_ad7b9a66) && self.var_ad7b9a66) {
+  if(isDefined(self.var_ad7b9a66) && self.var_ad7b9a66) {
     return;
   }
   if(self function_5951cacf()) {
@@ -1501,7 +1501,7 @@ function function_aac4667c() {
   objective_team(var_6f71e4e9, game["attackers"]);
   objective_position(var_6f71e4e9, self.origin);
   objective_icon(var_6f71e4e9, "t7_hud_waypoints_safeguard_location");
-  objective_setcolor(var_6f71e4e9, & "FriendlyBlue");
+  objective_setcolor(var_6f71e4e9, &"FriendlyBlue");
   objective_onentity(var_6f71e4e9, self);
   self thread function_41584b4b(var_6f71e4e9);
   self clientfield::set("pingHighlight", 1);
@@ -1513,7 +1513,7 @@ function function_aac4667c() {
   hostmigration::waitlongdurationwithhostmigrationpause(4);
   self clientfield::set("pingHighlight", 0);
   gameobjects::release_obj_id(var_6f71e4e9);
-  if(prop::useprophudserver() && isdefined(self.var_b47d9b7e)) {
+  if(prop::useprophudserver() && isDefined(self.var_b47d9b7e)) {
     self.var_b47d9b7e.alpha = 1;
   }
   self.var_ad7b9a66 = 0;

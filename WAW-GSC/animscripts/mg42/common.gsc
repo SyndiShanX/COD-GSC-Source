@@ -48,7 +48,7 @@ main(turret) {
   self setAnimKnobLimitedRestart(self.additiveTurretFire);
   turret setAnimKnobLimitedRestart(turret.additiveTurretIdle);
   turret setAnimKnobLimitedRestart(turret.additiveTurretFire);
-  for (;;) {
+  for(;;) {
     if(turret.doFiring) {
       thread DoShoot(turret);
       self waitTimeOrUntilTurretStateChange(randomFloatRange(turret_burst, turret_burst + turret_burst_range), turret);
@@ -72,8 +72,8 @@ waitTimeOrUntilTurretStateChange(time, turret) {
 fireController(turret) {
   self endon("killanimscript");
   fovdot = cos(15);
-  for (;;) {
-    while (isDefined(self.enemy)) {
+  for(;;) {
+    while(isDefined(self.enemy)) {
       enemypos = self.enemy.origin;
       if(isSentient(enemypos))
         enemypos += (0, 0, 32);
@@ -109,7 +109,7 @@ turretTimer(duration, turret) {
 
 stopUsingTurretWhenNodeLost() {
   self endon("killanimscript");
-  while (1) {
+  while(1) {
     if(!isDefined(self.node) || distancesquared(self.origin, self.node.origin) > 64 * 64)
       self stopUseTurret();
     wait .25;
@@ -159,7 +159,7 @@ preplacedPostScriptFunc(animscript) {
 
 within_fov(start_origin, start_angles, end_origin, fov) {
   normal = vectorNormalize(end_origin - start_origin);
-  forward = anglestoforward(start_angles);
+  forward = anglesToForward(start_angles);
   dot = vectorDot(forward, normal);
   return dot >= fov;
 }
@@ -184,7 +184,7 @@ DoAim(turret) {
 TurretDoShoot(turret) {
   self endon("killanimscript");
   turret endon("turretstatechange");
-  for (;;) {
+  for(;;) {
     turret ShootTurret();
     wait 0.1;
   }

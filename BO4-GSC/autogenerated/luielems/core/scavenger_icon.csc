@@ -4,11 +4,9 @@
 **********************************************************/
 
 #include scripts\core_common\lui_shared;
-
 #namespace scavenger_icon;
 
 class cscavenger_icon: cluielem {
-
   function increment_pulse(localclientnum) {
     current_val = get_data(localclientnum, "pulse");
     new_val = (current_val + 1) % 2;
@@ -16,7 +14,7 @@ class cscavenger_icon: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, #"scavenger_icon");
+    cluielem::open(localclientnum, # "scavenger_icon");
   }
 
   function function_fa582112(localclientnum) {

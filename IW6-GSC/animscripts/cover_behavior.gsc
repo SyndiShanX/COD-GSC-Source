@@ -50,9 +50,7 @@ main(var_0) {
     }
 
     if(isDefined(var_0.movetonearbycover)) {
-      if([
-          [var_0.movetonearbycover]
-        ]())
+      if([[var_0.movetonearbycover]]())
         continue;
     }
 
@@ -342,21 +340,13 @@ calloptionalbehaviorcallback(var_0, var_1, var_2, var_3) {
   var_5 = undefined;
 
   if(isDefined(var_3))
-    var_5 = [
-      [var_0]
-    ](var_1, var_2, var_3);
+    var_5 = [[var_0]](var_1, var_2, var_3);
   else if(isDefined(var_2))
-    var_5 = [
-      [var_0]
-    ](var_1, var_2);
+    var_5 = [[var_0]](var_1, var_2);
   else if(isDefined(var_1))
-    var_5 = [
-      [var_0]
-    ](var_1);
+    var_5 = [[var_0]](var_1);
   else
-    var_5 = [
-      [var_0]
-    ]();
+    var_5 = [[var_0]]();
 
   if(!var_5)
     self notify("dont_end_idle");
@@ -431,9 +421,7 @@ idle(var_0, var_1) {
 
   if(isDefined(var_0.flinch)) {
     if(!self.a.idlingatcover && gettime() - self.suppressionstart < 600) {
-      if([
-          [var_0.flinch]
-        ]())
+      if([[var_0.flinch]]())
         return 1;
     } else
       thread flinchwhensuppressed(var_0);

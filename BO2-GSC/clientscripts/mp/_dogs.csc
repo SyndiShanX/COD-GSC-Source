@@ -10,25 +10,25 @@ init() {
 
   level.movementstatesound = [];
   level.maxstatesounddistance = 99999999;
-  level.movementstatesound["normal"] = spawnstruct();
+  level.movementstatesound["normal"] = spawnStruct();
   level.movementstatesound["normal"].sound = "aml_dog_bark";
   level.movementstatesound["normal"].waitmax = 4;
   level.movementstatesound["normal"].waitmin = 1;
   level.movementstatesound["normal"].enemyrange = level.maxstatesounddistance;
   level.movementstatesound["normal"].localenemyonly = 0;
-  level.movementstatesound["attack_mid_everyone"] = spawnstruct();
+  level.movementstatesound["attack_mid_everyone"] = spawnStruct();
   level.movementstatesound["attack_mid_everyone"].sound = "aml_dog_bark_mid";
   level.movementstatesound["attack_mid_everyone"].waitmax = 2;
   level.movementstatesound["attack_mid_everyone"].waitmin = 0.5;
   level.movementstatesound["attack_mid_everyone"].enemyrange = 1500;
   level.movementstatesound["attack_mid_everyone"].localenemyonly = 0;
-  level.movementstatesound["attack_mid_enemy"] = spawnstruct();
+  level.movementstatesound["attack_mid_enemy"] = spawnStruct();
   level.movementstatesound["attack_mid_enemy"].sound = "aml_dog_bark_mid";
   level.movementstatesound["attack_mid_enemy"].waitmax = 0.5;
   level.movementstatesound["attack_mid_enemy"].waitmin = 0.01;
   level.movementstatesound["attack_mid_enemy"].enemyrange = 1500;
   level.movementstatesound["attack_mid_enemy"].localenemyonly = 1;
-  level.movementstatesound["attack_close_enemy"] = spawnstruct();
+  level.movementstatesound["attack_close_enemy"] = spawnStruct();
   level.movementstatesound["attack_close_enemy"].sound = "aml_dog_bark_close";
   level.movementstatesound["attack_close_enemy"].waitmax = 0.1;
   level.movementstatesound["attack_close_enemy"].waitmin = 0.01;
@@ -246,7 +246,7 @@ playlockonsounds(localclientnum) {
 
 soundnotify(client_num, entity, note) {
   if(note == "sound_dogstep_run_default") {
-    entity playsound(client_num, "fly_dog_step_run_default");
+    entity playSound(client_num, "fly_dog_step_run_default");
     return true;
   }
 
@@ -289,7 +289,7 @@ play_dog_sound(localclientnum, sound, position) {
   dog_sound_print("SOUND " + sound);
 
   if(isDefined(position))
-    return self playsound(localclientnum, sound, position);
+    return self playSound(localclientnum, sound, position);
 
-  return self playsound(localclientnum, sound);
+  return self playSound(localclientnum, sound);
 }

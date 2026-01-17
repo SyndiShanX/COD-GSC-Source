@@ -11,17 +11,17 @@
 #namespace healthoverlay;
 
 function autoexec __init__sytem__() {
-  system::register("healthoverlay", & __init__, undefined, undefined);
+  system::register("healthoverlay", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype( & init);
-  callback::on_joined_team( & end_health_regen);
-  callback::on_joined_spectate( & end_health_regen);
-  callback::on_spawned( & player_health_regen);
-  callback::on_disconnect( & end_health_regen);
-  callback::on_player_killed( & end_health_regen);
-  level.start_player_health_regen = & player_health_regen;
+  callback::on_start_gametype(&init);
+  callback::on_joined_team(&end_health_regen);
+  callback::on_joined_spectate(&end_health_regen);
+  callback::on_spawned(&player_health_regen);
+  callback::on_disconnect(&end_health_regen);
+  callback::on_player_killed(&end_health_regen);
+  level.start_player_health_regen = &player_health_regen;
 }
 
 function init() {
@@ -54,18 +54,18 @@ function player_health_regen() {
   lastsoundtime_recover = 0;
   hurttime = 0;
   newhealth = 0;
-  for (;;) {
+  for(;;) {
     wait(0.05);
-    if(isdefined(self.healthregendisabled) && self.healthregendisabled) {
+    if(isDefined(self.healthregendisabled) && self.healthregendisabled) {
       continue;
     }
-    if(isdefined(player.regenrate)) {
+    if(isDefined(player.regenrate)) {
       regenrate = player.regenrate;
       usetrueregen = 1;
     }
     if(player.health == maxhealth) {
       veryhurt = 0;
-      if(isdefined(self.atbrinkofdeath) && self.atbrinkofdeath == 1) {
+      if(isDefined(self.atbrinkofdeath) && self.atbrinkofdeath == 1) {
         self notify("challenge_survived_from_death");
       }
       self.atbrinkofdeath = 0;
@@ -74,7 +74,7 @@ function player_health_regen() {
     if(player.health <= 0) {
       return;
     }
-    if(isdefined(player.laststand) && player.laststand) {
+    if(isDefined(player.laststand) && player.laststand) {
       continue;
     }
     wasveryhurt = veryhurt;
@@ -143,11 +143,11 @@ function player_health_regen() {
 }
 
 function decay_player_damages(decay) {
-  if(!isdefined(self.attackerdamage)) {
+  if(!isDefined(self.attackerdamage)) {
     return;
   }
-  for (i = 0; i < self.attackerdamage.size; i++) {
-    if(!isdefined(self.attackerdamage[i]) || !isdefined(self.attackerdamage[i].damage)) {
+  for(i = 0; i < self.attackerdamage.size; i++) {
+    if(!isDefined(self.attackerdamage[i]) || !isDefined(self.attackerdamage[i].damage)) {
       continue;
     }
     self.attackerdamage[i].damage = self.attackerdamage[i].damage - decay;
@@ -161,7 +161,7 @@ function player_breathing_sound(healthcap) {
   self endon("end_healthregen");
   wait(2);
   player = self;
-  for (;;) {
+  for(;;) {
     wait(0.2);
     if(player.health <= 0) {
       return;
@@ -186,7 +186,7 @@ function player_heartbeat_sound(healthcap) {
   self.hearbeatwait = 0.2;
   wait(2);
   player = self;
-  for (;;) {
+  for(;;) {
     wait(0.2);
     if(player.health <= 0) {
       return;

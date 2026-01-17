@@ -291,7 +291,7 @@ player_use(resource, rank) {
     if(!show_alternate_spend_hint(resource))
       self thread maps\mp\alien\_hud::createSpendHintHUD(resource, rank);
     else
-      self thread maps\mp\alien\_hud::createSpendHintHUD(resource, rank, & "ALIENS_PATCH_CANCEL_USE");
+      self thread maps\mp\alien\_hud::createSpendHintHUD(resource, rank, &"ALIENS_PATCH_CANCEL_USE");
 
     usage = wait_for_use(resource, rank);
     if(!isDefined(usage) || !usage) {
@@ -424,7 +424,7 @@ player_action_slot_internal(resource, get_rank_func, waittillname) {
       continue;
     }
     if(self has_special_weapon()) {
-      self setLowerMessage("cant_buy", & "ALIEN_COLLECTIBLES_PLAYER_HAS_SPECIALWEAPON", 3);
+      self setLowerMessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_HAS_SPECIALWEAPON", 3);
       continue;
     }
 

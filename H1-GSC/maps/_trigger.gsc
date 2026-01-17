@@ -56,10 +56,10 @@ get_load_trigger_classes() {
 trigger_multiple_fx_watersheeting(var_0) {
   var_1 = 3;
 
-  if(isdefined(var_0.script_duration))
+  if(isDefined(var_0.script_duration))
     var_1 = var_0.script_duration;
 
-  for (;;) {
+  for(;;) {
     var_0 waittill("trigger", var_2);
 
     if(isplayer(var_2)) {
@@ -135,26 +135,26 @@ init_script_triggers() {
   var_1 = get_load_trigger_funcs();
 
   foreach(var_5, var_3 in var_0) {
-    var_4 = getentarray(var_5, "classname");
+    var_4 = getEntArray(var_5, "classname");
     common_scripts\utility::array_levelthread(var_4, var_3);
   }
 
-  var_6 = getentarray("trigger_multiple", "classname");
-  var_7 = getentarray("trigger_radius", "classname");
+  var_6 = getEntArray("trigger_multiple", "classname");
+  var_7 = getEntArray("trigger_radius", "classname");
   var_4 = maps\_utility::array_merge(var_6, var_7);
-  var_8 = getentarray("trigger_disk", "classname");
+  var_8 = getEntArray("trigger_disk", "classname");
   var_4 = maps\_utility::array_merge(var_4, var_8);
-  var_9 = getentarray("trigger_once", "classname");
+  var_9 = getEntArray("trigger_once", "classname");
   var_4 = maps\_utility::array_merge(var_4, var_9);
 
   if(!maps\_utility::is_no_game_start()) {
-    for (var_10 = 0; var_10 < var_4.size; var_10++) {
+    for(var_10 = 0; var_10 < var_4.size; var_10++) {
       if(var_4[var_10].spawnflags & 32)
         thread maps\_spawner::trigger_spawner(var_4[var_10]);
     }
   }
 
-  for (var_11 = 0; var_11 < 7; var_11++) {
+  for(var_11 = 0; var_11 < 7; var_11++) {
     switch (var_11) {
       case 0:
         var_12 = "trigger_multiple";
@@ -179,64 +179,64 @@ init_script_triggers() {
         break;
     }
 
-    var_4 = getentarray(var_12, "code_classname");
+    var_4 = getEntArray(var_12, "code_classname");
 
-    for (var_10 = 0; var_10 < var_4.size; var_10++) {
-      if(isdefined(var_4[var_10].script_flag_true))
+    for(var_10 = 0; var_10 < var_4.size; var_10++) {
+      if(isDefined(var_4[var_10].script_flag_true))
         level thread trigger_script_flag_true(var_4[var_10]);
 
-      if(isdefined(var_4[var_10].script_flag_false))
+      if(isDefined(var_4[var_10].script_flag_false))
         level thread trigger_script_flag_false(var_4[var_10]);
 
-      if(isdefined(var_4[var_10].script_autosavename) || isdefined(var_4[var_10].script_autosave))
+      if(isDefined(var_4[var_10].script_autosavename) || isDefined(var_4[var_10].script_autosave))
         level thread maps\_autosave::autosavenamethink(var_4[var_10]);
 
-      if(isdefined(var_4[var_10].script_fallback))
+      if(isDefined(var_4[var_10].script_fallback))
         level thread maps\_spawner::fallback_think(var_4[var_10]);
 
-      if(isdefined(var_4[var_10].script_mgturretauto))
+      if(isDefined(var_4[var_10].script_mgturretauto))
         level thread maps\_mgturret::mgturret_auto(var_4[var_10]);
 
-      if(isdefined(var_4[var_10].script_killspawner))
+      if(isDefined(var_4[var_10].script_killspawner))
         level thread maps\_spawner::kill_spawner(var_4[var_10]);
 
-      if(isdefined(var_4[var_10].script_kill_vehicle_spawner))
+      if(isDefined(var_4[var_10].script_kill_vehicle_spawner))
         level thread maps\_vehicle_code::kill_vehicle_spawner(var_4[var_10]);
 
-      if(isdefined(var_4[var_10].script_emptyspawner))
+      if(isDefined(var_4[var_10].script_emptyspawner))
         level thread maps\_spawner::empty_spawner(var_4[var_10]);
 
-      if(isdefined(var_4[var_10].script_prefab_exploder))
+      if(isDefined(var_4[var_10].script_prefab_exploder))
         var_4[var_10].script_exploder = var_4[var_10].script_prefab_exploder;
 
-      if(isdefined(var_4[var_10].script_exploder))
+      if(isDefined(var_4[var_10].script_exploder))
         level thread maps\_load::exploder_load(var_4[var_10]);
 
-      if(isdefined(var_4[var_10].ambient))
+      if(isDefined(var_4[var_10].ambient))
         var_4[var_10] thread soundscripts\_audio::trigger_multiple_audio_trigger(1);
 
-      if(isdefined(var_4[var_10].script_audio_zones) || isdefined(var_4[var_10].script_audio_enter_msg) || isdefined(var_4[var_10].script_audio_exit_msg) || isdefined(var_4[var_10].script_audio_progress_msg) || isdefined(var_4[var_10].script_audio_enter_func) || isdefined(var_4[var_10].script_audio_exit_func) || isdefined(var_4[var_10].script_audio_progress_func) || isdefined(var_4[var_10].script_audio_point_func) || isdefined(var_4[var_10].script_audio_use_distance_only))
+      if(isDefined(var_4[var_10].script_audio_zones) || isDefined(var_4[var_10].script_audio_enter_msg) || isDefined(var_4[var_10].script_audio_exit_msg) || isDefined(var_4[var_10].script_audio_progress_msg) || isDefined(var_4[var_10].script_audio_enter_func) || isDefined(var_4[var_10].script_audio_exit_func) || isDefined(var_4[var_10].script_audio_progress_func) || isDefined(var_4[var_10].script_audio_point_func) || isDefined(var_4[var_10].script_audio_use_distance_only))
         var_4[var_10] thread soundscripts\_audio::trigger_multiple_audio_trigger();
 
-      if(isdefined(var_4[var_10].script_triggered_playerseek))
+      if(isDefined(var_4[var_10].script_triggered_playerseek))
         level thread trigger_playerseek(var_4[var_10]);
 
-      if(isdefined(var_4[var_10].script_bctrigger))
+      if(isDefined(var_4[var_10].script_bctrigger))
         level thread trigger_battlechatter(var_4[var_10]);
 
-      if(isdefined(var_4[var_10].script_trigger_group))
+      if(isDefined(var_4[var_10].script_trigger_group))
         var_4[var_10] thread trigger_group();
 
-      if(isdefined(var_4[var_10].script_random_killspawner))
+      if(isDefined(var_4[var_10].script_random_killspawner))
         level thread maps\_spawner::random_killspawner(var_4[var_10]);
 
-      if(isdefined(var_4[var_10].script_parameters))
+      if(isDefined(var_4[var_10].script_parameters))
         level thread maps\_colors::init_color_delay_info(var_4[var_10]);
 
-      if(isdefined(var_4[var_10].targetname)) {
+      if(isDefined(var_4[var_10].targetname)) {
         var_13 = var_4[var_10].targetname;
 
-        if(isdefined(var_1[var_13]))
+        if(isDefined(var_1[var_13]))
           level thread[[var_1[var_13]]](var_4[var_10]);
       }
     }
@@ -255,10 +255,10 @@ createart_transient_thread() {}
 trigger_damage_player_flag_set(var_0) {
   var_1 = var_0 maps\_utility::get_trigger_flag();
 
-  if(!isdefined(level.flag[var_1]))
+  if(!isDefined(level.flag[var_1]))
     common_scripts\utility::flag_init(var_1);
 
-  for (;;) {
+  for(;;) {
     var_0 waittill("trigger", var_2);
 
     if(!isalive(var_2)) {
@@ -275,10 +275,10 @@ trigger_damage_player_flag_set(var_0) {
 trigger_flag_clear(var_0) {
   var_1 = var_0 maps\_utility::get_trigger_flag();
 
-  if(!isdefined(level.flag[var_1]))
+  if(!isDefined(level.flag[var_1]))
     common_scripts\utility::flag_init(var_1);
 
-  for (;;) {
+  for(;;) {
     var_0 waittill("trigger");
     var_0 maps\_utility::script_delay();
     common_scripts\utility::flag_clear(var_1);
@@ -288,10 +288,10 @@ trigger_flag_clear(var_0) {
 trigger_flag_on_cleared(var_0) {
   var_1 = var_0 maps\_utility::get_trigger_flag();
 
-  if(!isdefined(level.flag[var_1]))
+  if(!isDefined(level.flag[var_1]))
     common_scripts\utility::flag_init(var_1);
 
-  for (;;) {
+  for(;;) {
     var_0 waittill("trigger");
     wait 1;
 
@@ -307,7 +307,7 @@ trigger_flag_on_cleared(var_0) {
 found_toucher() {
   var_0 = getaiarray("bad_guys");
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++) {
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_2 = var_0[var_1];
 
     if(!isalive(var_2)) {
@@ -321,7 +321,7 @@ found_toucher() {
 
   var_0 = getaiarray("bad_guys");
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++) {
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_2 = var_0[var_1];
 
     if(var_2 istouching(self))
@@ -334,10 +334,10 @@ found_toucher() {
 trigger_flag_set(var_0) {
   var_1 = var_0 maps\_utility::get_trigger_flag();
 
-  if(!isdefined(level.flag[var_1]))
+  if(!isDefined(level.flag[var_1]))
     common_scripts\utility::flag_init(var_1);
 
-  for (;;) {
+  for(;;) {
     var_0 waittill("trigger", var_2);
     var_0 maps\_utility::script_delay();
     common_scripts\utility::flag_set(var_1, var_2);
@@ -347,12 +347,12 @@ trigger_flag_set(var_0) {
 trigger_flag_set_coop(var_0) {
   var_1 = var_0 maps\_utility::get_trigger_flag();
 
-  if(!isdefined(level.flag[var_1]))
+  if(!isDefined(level.flag[var_1]))
     common_scripts\utility::flag_init(var_1);
 
   var_2 = [];
 
-  for (;;) {
+  for(;;) {
     var_0 waittill("trigger", var_3);
 
     if(!isplayer(var_3)) {
@@ -374,13 +374,13 @@ trigger_flag_set_coop(var_0) {
 trigger_flag_set_specialops(var_0) {
   var_1 = var_0 maps\_utility::get_trigger_flag();
 
-  if(!isdefined(level.flag[var_1]))
+  if(!isDefined(level.flag[var_1]))
     common_scripts\utility::flag_init(var_1);
 
   var_0.player_touched_arr = level.players;
   var_0 thread trigger_flag_set_specialops_clear(var_1);
 
-  for (;;) {
+  for(;;) {
     var_0 waittill("trigger", var_2);
     var_0.player_touched_arr = common_scripts\utility::array_remove(var_0.player_touched_arr, var_2);
 
@@ -393,7 +393,7 @@ trigger_flag_set_specialops(var_0) {
 }
 
 trigger_flag_set_specialops_clear(var_0) {
-  for (;;) {
+  for(;;) {
     level waittill(var_0);
 
     if(common_scripts\utility::flag(var_0)) {
@@ -406,12 +406,12 @@ trigger_flag_set_specialops_clear(var_0) {
 }
 
 trigger_friendly_respawn(var_0) {
-  var_1 = getentarray(var_0.target, "targetname");
+  var_1 = getEntArray(var_0.target, "targetname");
   var_2 = var_1[0];
   var_1 = undefined;
   var_2 endon("death");
 
-  for (;;) {
+  for(;;) {
     var_0 waittill("trigger");
     level.respawn_spawner = var_2;
     common_scripts\utility::flag_set("respawn_friendlies");
@@ -424,7 +424,7 @@ trigger_friendly_respawn_preh1(var_0) {
   var_1 = getent(var_0.target, "targetname");
   var_2 = undefined;
 
-  if(isdefined(var_1)) {
+  if(isDefined(var_1)) {
     var_2 = var_1.origin;
     var_1 delete();
   } else {
@@ -432,7 +432,7 @@ trigger_friendly_respawn_preh1(var_0) {
     var_2 = var_1.origin;
   }
 
-  for (;;) {
+  for(;;) {
     var_0 waittill("trigger");
     level.respawn_spawner = var_1;
     common_scripts\utility::flag_set("respawn_friendlies");
@@ -441,14 +441,14 @@ trigger_friendly_respawn_preh1(var_0) {
 }
 
 trigger_friendly_stop_respawn(var_0) {
-  for (;;) {
+  for(;;) {
     var_0 waittill("trigger");
     common_scripts\utility::flag_clear("respawn_friendlies");
   }
 }
 
 friendly_respawn_clear(var_0) {
-  for (;;) {
+  for(;;) {
     var_0 waittill("trigger");
     common_scripts\utility::flag_clear("respawn_friendlies");
     wait 0.5;
@@ -460,7 +460,7 @@ trigger_enemy_respawn(var_0) {
   var_1 = getent(var_0.target, "targetname");
   var_2 = undefined;
 
-  if(isdefined(var_1)) {
+  if(isDefined(var_1)) {
     var_2 = var_1.origin;
     var_1 delete();
   } else {
@@ -468,7 +468,7 @@ trigger_enemy_respawn(var_0) {
     var_2 = var_1.origin;
   }
 
-  for (;;) {
+  for(;;) {
     var_0 waittill("trigger");
     common_scripts\utility::flag_set("respawn_enemies");
     wait 0.5;
@@ -476,7 +476,7 @@ trigger_enemy_respawn(var_0) {
 }
 
 trigger_enemy_stop_respawn(var_0) {
-  for (;;) {
+  for(;;) {
     var_0 waittill("trigger");
     common_scripts\utility::flag_clear("respawn_enemies");
   }
@@ -485,17 +485,17 @@ trigger_enemy_stop_respawn(var_0) {
 trigger_flag_set_touching(var_0) {
   var_1 = var_0 maps\_utility::get_trigger_flag();
 
-  if(!isdefined(level.flag[var_1]))
+  if(!isDefined(level.flag[var_1]))
     common_scripts\utility::flag_init(var_1);
 
-  for (;;) {
+  for(;;) {
     var_0 waittill("trigger", var_2);
     var_0 maps\_utility::script_delay();
 
-    if(isalive(var_2) && var_2 istouching(var_0) && isdefined(var_0))
+    if(isalive(var_2) && var_2 istouching(var_0) && isDefined(var_0))
       common_scripts\utility::flag_set(var_1);
 
-    while (isalive(var_2) && var_2 istouching(var_0) && isdefined(var_0))
+    while(isalive(var_2) && var_2 istouching(var_0) && isDefined(var_0))
       wait 0.25;
 
     common_scripts\utility::flag_clear(var_1);
@@ -517,7 +517,7 @@ trigger_group_remove() {
 }
 
 trigger_nobloodpool(var_0) {
-  for (;;) {
+  for(;;) {
     var_0 waittill("trigger", var_1);
 
     if(!isalive(var_1)) {
@@ -529,7 +529,7 @@ trigger_nobloodpool(var_0) {
 }
 
 trigger_multiple_interval(var_0) {
-  for (;;) {
+  for(;;) {
     var_0 waittill("trigger", var_1);
     var_1 thread trigger_multiple_interval_thread(var_0);
   }
@@ -541,14 +541,14 @@ trigger_multiple_interval_thread(var_0) {
   }
   self endon("death");
 
-  if(isdefined(self.touching_trigger_multiple_interval)) {
+  if(isDefined(self.touching_trigger_multiple_interval)) {
     return;
   }
   self.touching_trigger_multiple_interval = 1;
   var_1 = self.interval;
   self.interval = float(var_0.script_parameters);
 
-  while (self istouching(var_0))
+  while(self istouching(var_0))
     wait 0.05;
 
   self.interval = var_1;
@@ -566,10 +566,10 @@ set_wait_then_clear_skipbloodpool() {
 trigger_physics(var_0) {
   var_1 = [];
   var_2 = common_scripts\utility::getstructarray(var_0.target, "targetname");
-  var_3 = getentarray(var_0.target, "targetname");
+  var_3 = getEntArray(var_0.target, "targetname");
 
   foreach(var_5 in var_3) {
-    var_6 = spawnstruct();
+    var_6 = spawnStruct();
     var_6.origin = var_5.origin;
     var_6.script_parameters = var_5.script_parameters;
     var_6.script_damage = var_5.script_damage;
@@ -587,16 +587,16 @@ trigger_physics(var_0) {
     var_10 = var_6.script_parameters;
     var_11 = var_6.script_damage;
 
-    if(!isdefined(var_9))
+    if(!isDefined(var_9))
       var_9 = 350;
 
-    if(!isdefined(var_10))
+    if(!isDefined(var_10))
       var_10 = 0.25;
 
     setdvar("tempdvar", var_10);
     var_10 = getdvarfloat("tempdvar");
 
-    if(isdefined(var_11))
+    if(isDefined(var_11))
       radiusdamage(var_6.origin, var_9, var_11, var_11 * 0.5);
 
     physicsexplosionsphere(var_6.origin, var_9, var_9 * 0.5, var_10);
@@ -608,11 +608,11 @@ trigger_playerseek(var_0) {
   var_0 waittill("trigger");
   var_2 = getaiarray();
 
-  for (var_3 = 0; var_3 < var_2.size; var_3++) {
+  for(var_3 = 0; var_3 < var_2.size; var_3++) {
     if(!isalive(var_2[var_3])) {
       continue;
     }
-    if(isdefined(var_2[var_3].script_triggered_playerseek) && var_2[var_3].script_triggered_playerseek == var_1) {
+    if(isDefined(var_2[var_3].script_triggered_playerseek) && var_2[var_3].script_triggered_playerseek == var_1) {
       var_2[var_3].goalradius = 800;
       var_2[var_3] setgoalentity(level.player);
       level thread maps\_spawner::delayed_player_seek_think(var_2[var_3]);
@@ -633,10 +633,10 @@ trigger_script_flag_true(var_0) {
 }
 
 add_tokens_to_trigger_flags(var_0) {
-  for (var_1 = 0; var_1 < var_0.size; var_1++) {
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_2 = var_0[var_1];
 
-    if(!isdefined(level.trigger_flags[var_2]))
+    if(!isDefined(level.trigger_flags[var_2]))
       level.trigger_flags[var_2] = [];
 
     level.trigger_flags[var_2][level.trigger_flags[var_2].size] = self;
@@ -647,7 +647,7 @@ trigger_spawngroup(var_0) {
   waittillframeend;
   var_1 = var_0.script_spawngroup;
 
-  if(!isdefined(level.spawn_groups[var_1])) {
+  if(!isDefined(level.spawn_groups[var_1])) {
     return;
   }
   var_0 waittill("trigger");
@@ -658,7 +658,7 @@ trigger_spawngroup(var_0) {
 }
 
 trigger_sun_off(var_0) {
-  for (;;) {
+  for(;;) {
     var_0 waittill("trigger", var_1);
 
     if(getdvarint("sm_sunenable") == 0) {
@@ -669,7 +669,7 @@ trigger_sun_off(var_0) {
 }
 
 trigger_sun_on(var_0) {
-  for (;;) {
+  for(;;) {
     var_0 waittill("trigger", var_1);
 
     if(getdvarint("sm_sunenable") == 1) {
@@ -680,10 +680,10 @@ trigger_sun_on(var_0) {
 }
 
 trigger_vehicle_getin_spawn(var_0) {
-  var_1 = getentarray(var_0.target, "targetname");
+  var_1 = getEntArray(var_0.target, "targetname");
 
   foreach(var_3 in var_1) {
-    var_4 = getentarray(var_3.target, "targetname");
+    var_4 = getEntArray(var_3.target, "targetname");
 
     foreach(var_6 in var_4) {
       if(!issubstr(var_6.code_classname, "actor")) {
@@ -697,13 +697,13 @@ trigger_vehicle_getin_spawn(var_0) {
   }
 
   var_0 waittill("trigger");
-  var_1 = getentarray(var_0.target, "targetname");
+  var_1 = getEntArray(var_0.target, "targetname");
   common_scripts\utility::array_thread(var_1, maps\_vehicle_free_drive::spawn_vehicle_and_attach_to_free_path(undefined, 0, 1));
 }
 
 trigger_vehicle_spline_spawn(var_0) {
   var_0 waittill("trigger");
-  var_1 = getentarray(var_0.target, "targetname");
+  var_1 = getEntArray(var_0.target, "targetname");
 
   foreach(var_3 in var_1) {
     var_3 thread maps\_vehicle_free_drive::spawn_vehicle_and_attach_to_free_path(70);
@@ -715,8 +715,8 @@ get_trigger_targs() {
   var_0 = [];
   var_1 = undefined;
 
-  if(isdefined(self.target)) {
-    var_2 = getentarray(self.target, "targetname");
+  if(isDefined(self.target)) {
+    var_2 = getEntArray(self.target, "targetname");
     var_3 = [];
 
     foreach(var_5 in var_2) {
@@ -736,7 +736,7 @@ get_trigger_targs() {
       var_9 = var_3[0];
       var_1 = var_9.origin;
 
-      if(isdefined(var_9.code_classname))
+      if(isDefined(var_9.code_classname))
         var_9 delete();
     }
   }
@@ -758,19 +758,19 @@ trigger_looking(var_0) {
 trigger_lookat_think(var_0, var_1) {
   var_2 = 0.78;
 
-  if(isdefined(var_0.script_dot))
+  if(isDefined(var_0.script_dot))
     var_2 = var_0.script_dot;
 
   var_3 = var_0 get_trigger_targs();
   var_4 = var_3["triggers"];
   var_5 = var_3["target_origin"];
-  var_6 = isdefined(var_0.script_flag) || isdefined(var_0.script_noteworthy);
+  var_6 = isDefined(var_0.script_flag) || isDefined(var_0.script_noteworthy);
   var_7 = undefined;
 
   if(var_6) {
     var_7 = var_0 maps\_utility::get_trigger_flag();
 
-    if(!isdefined(level.flag[var_7]))
+    if(!isDefined(level.flag[var_7]))
       common_scripts\utility::flag_init(var_7);
   } else if(!var_4.size) {}
 
@@ -780,18 +780,18 @@ trigger_lookat_think(var_0, var_1) {
   var_0 endon("death");
   var_8 = 1;
 
-  if(isdefined(var_0.script_parameters))
+  if(isDefined(var_0.script_parameters))
     var_8 = !issubstr(var_0.script_parameters, "no_sight");
 
-  for (;;) {
+  for(;;) {
     if(var_6)
       common_scripts\utility::flag_clear(var_7);
 
     var_0 waittill("trigger", var_9);
     var_10 = [];
 
-    while (var_9 istouching(var_0)) {
-      if(var_8 && !sighttracepassed(var_9 geteye(), var_5, 0, undefined)) {
+    while(var_9 istouching(var_0)) {
+      if(var_8 && !sighttracepassed(var_9 getEye(), var_5, 0, undefined)) {
         if(var_6)
           common_scripts\utility::flag_clear(var_7);
 
@@ -801,7 +801,7 @@ trigger_lookat_think(var_0, var_1) {
 
       var_11 = vectornormalize(var_5 - var_9.origin);
       var_12 = var_9 getplayerangles();
-      var_13 = anglestoforward(var_12);
+      var_13 = anglesToForward(var_12);
       var_14 = vectordot(var_13, var_11);
 
       if(var_14 >= var_2) {
@@ -833,13 +833,13 @@ trigger_cansee(var_0) {
   var_3 = var_0 get_trigger_targs();
   var_1 = var_3["triggers"];
   var_2 = var_3["target_origin"];
-  var_4 = isdefined(var_0.script_flag) || isdefined(var_0.script_noteworthy);
+  var_4 = isDefined(var_0.script_flag) || isDefined(var_0.script_noteworthy);
   var_5 = undefined;
 
   if(var_4) {
     var_5 = var_0 maps\_utility::get_trigger_flag();
 
-    if(!isdefined(level.flag[var_5]))
+    if(!isDefined(level.flag[var_5]))
       common_scripts\utility::flag_init(var_5);
   } else if(!var_1.size) {}
 
@@ -853,13 +853,13 @@ trigger_cansee(var_0) {
   var_7[var_7.size] = (0, var_6 * -1, 0);
   var_7[var_7.size] = (0, 0, var_6);
 
-  for (;;) {
+  for(;;) {
     if(var_4)
       common_scripts\utility::flag_clear(var_5);
 
     var_0 waittill("trigger", var_8);
 
-    while (level.player istouching(var_0)) {
+    while(level.player istouching(var_0)) {
       if(!var_8 cantraceto(var_2, var_7)) {
         if(var_4)
           common_scripts\utility::flag_clear(var_5);
@@ -878,8 +878,8 @@ trigger_cansee(var_0) {
 }
 
 cantraceto(var_0, var_1) {
-  for (var_2 = 0; var_2 < var_1.size; var_2++) {
-    if(sighttracepassed(self geteye(), var_0 + var_1[var_2], 1, self))
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
+    if(sighttracepassed(self getEye(), var_0 + var_1[var_2], 1, self))
       return 1;
   }
 
@@ -889,13 +889,13 @@ cantraceto(var_0, var_1) {
 trigger_unlock(var_0) {
   var_1 = "not_set";
 
-  if(isdefined(var_0.script_noteworthy))
+  if(isDefined(var_0.script_noteworthy))
     var_1 = var_0.script_noteworthy;
 
-  var_2 = getentarray(var_0.target, "targetname");
+  var_2 = getEntArray(var_0.target, "targetname");
   var_0 thread trigger_unlock_death(var_0.target);
 
-  for (;;) {
+  for(;;) {
     common_scripts\utility::array_thread(var_2, common_scripts\utility::trigger_off);
     var_0 waittill("trigger");
     common_scripts\utility::array_thread(var_2, common_scripts\utility::trigger_on);
@@ -906,15 +906,15 @@ trigger_unlock(var_0) {
 
 trigger_unlock_death(var_0) {
   self waittill("death");
-  var_1 = getentarray(var_0, "targetname");
+  var_1 = getEntArray(var_0, "targetname");
   common_scripts\utility::array_thread(var_1, common_scripts\utility::trigger_off);
 }
 
 wait_for_an_unlocked_trigger(var_0, var_1) {
   level endon("unlocked_trigger_hit" + var_1);
-  var_2 = spawnstruct();
+  var_2 = spawnStruct();
 
-  for (var_3 = 0; var_3 < var_0.size; var_3++)
+  for(var_3 = 0; var_3 < var_0.size; var_3++)
     var_0[var_3] thread report_trigger(var_2, var_1);
 
   var_2 waittill("trigger");
@@ -931,21 +931,21 @@ report_trigger(var_0, var_1) {
 trigger_battlechatter(var_0) {
   var_1 = undefined;
 
-  if(isdefined(var_0.target)) {
-    var_2 = getentarray(var_0.target, "targetname");
+  if(isDefined(var_0.target)) {
+    var_2 = getEntArray(var_0.target, "targetname");
 
     if(issubstr(var_2[0].classname, "trigger"))
       var_1 = var_2[0];
   }
 
-  if(isdefined(var_1))
+  if(isDefined(var_1))
     var_1 waittill("trigger", var_3);
   else
     var_0 waittill("trigger", var_3);
 
   var_4 = undefined;
 
-  if(isdefined(var_1)) {
+  if(isDefined(var_1)) {
     if(var_3.team != level.player.team && level.player istouching(var_0))
       var_4 = level.player animscripts\battlechatter::getclosestfriendlyspeaker("custom");
     else if(var_3.team == level.player.team) {
@@ -972,7 +972,7 @@ trigger_battlechatter(var_0) {
   else
     var_4 = var_3;
 
-  if(!isdefined(var_4)) {
+  if(!isDefined(var_4)) {
     return;
   }
   if(battlechatter_dist_check(var_4.origin)) {
@@ -987,7 +987,7 @@ battlechatter_dist_check(var_0) {
 
 trigger_vehicle_spawn(var_0) {
   var_0 waittill("trigger");
-  var_1 = getentarray(var_0.target, "targetname");
+  var_1 = getEntArray(var_0.target, "targetname");
 
   foreach(var_3 in var_1) {
     var_3 thread maps\_vehicle::spawn_vehicle_and_gopath();
@@ -997,7 +997,7 @@ trigger_vehicle_spawn(var_0) {
 
 trigger_dooropen(var_0) {
   var_0 waittill("trigger");
-  var_1 = getentarray(var_0.target, "targetname");
+  var_1 = getEntArray(var_0.target, "targetname");
   var_2 = [];
   var_2["left_door"] = -170;
   var_2["right_door"] = 170;
@@ -1012,10 +1012,10 @@ trigger_dooropen(var_0) {
 trigger_glass_break(var_0) {
   var_1 = getglassarray(var_0.target);
 
-  if(!isdefined(var_1) || var_1.size == 0) {
+  if(!isDefined(var_1) || var_1.size == 0) {
     return;
   }
-  for (;;) {
+  for(;;) {
     level waittill("glass_break", var_2);
 
     if(var_2 istouching(var_0)) {
@@ -1027,7 +1027,7 @@ trigger_glass_break(var_0) {
       if(var_3 != var_4)
         var_5 = var_4 - var_3;
 
-      if(isdefined(var_5)) {
+      if(isDefined(var_5)) {
         foreach(var_7 in var_1)
         destroyglass(var_7, var_5);
 
@@ -1053,16 +1053,16 @@ trigger_delete_link_chain(var_0) {
 get_script_linkto_targets() {
   var_0 = [];
 
-  if(!isdefined(self.script_linkto))
+  if(!isDefined(self.script_linkto))
     return var_0;
 
   var_1 = strtok(self.script_linkto, " ");
 
-  for (var_2 = 0; var_2 < var_1.size; var_2++) {
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
     var_3 = var_1[var_2];
     var_4 = getent(var_3, "script_linkname");
 
-    if(isdefined(var_4))
+    if(isDefined(var_4))
       var_0[var_0.size] = var_4;
   }
 
@@ -1085,14 +1085,14 @@ trigger_hint(var_0) {
   if(maps\_utility::is_no_game_start()) {
     return;
   }
-  if(!isdefined(level.displayed_hints))
+  if(!isDefined(level.displayed_hints))
     level.displayed_hints = [];
 
   waittillframeend;
   var_1 = var_0.script_hint;
   var_0 waittill("trigger", var_2);
 
-  if(isdefined(level.displayed_hints[var_1])) {
+  if(isDefined(level.displayed_hints[var_1])) {
     return;
   }
   level.displayed_hints[var_1] = 1;
@@ -1100,10 +1100,10 @@ trigger_hint(var_0) {
 }
 
 trigger_delete_on_touch(var_0) {
-  for (;;) {
+  for(;;) {
     var_0 waittill("trigger", var_1);
 
-    if(isdefined(var_1))
+    if(isDefined(var_1))
       var_1 delete();
   }
 }
@@ -1112,13 +1112,13 @@ trigger_turns_off(var_0) {
   var_0 waittill("trigger");
   var_0 common_scripts\utility::trigger_off();
 
-  if(!isdefined(var_0.script_linkto)) {
+  if(!isDefined(var_0.script_linkto)) {
     return;
   }
   var_1 = strtok(var_0.script_linkto, " ");
 
-  for (var_2 = 0; var_2 < var_1.size; var_2++)
-    common_scripts\utility::array_thread(getentarray(var_1[var_2], "script_linkname"), common_scripts\utility::trigger_off);
+  for(var_2 = 0; var_2 < var_1.size; var_2++)
+    common_scripts\utility::array_thread(getEntArray(var_1[var_2], "script_linkname"), common_scripts\utility::trigger_off);
 }
 
 trigger_ignore(var_0) {
@@ -1130,7 +1130,7 @@ trigger_pacifist(var_0) {
 }
 
 trigger_runs_function_on_touch(var_0, var_1, var_2) {
-  for (;;) {
+  for(;;) {
     var_0 waittill("trigger", var_3);
 
     if(!isalive(var_3)) {
@@ -1151,7 +1151,7 @@ touched_trigger_runs_func(var_0, var_1) {
   wait 1;
   self.ignoretriggers = 0;
 
-  while (self istouching(var_0))
+  while(self istouching(var_0))
     wait 1;
 
   [[var_1]](0);
@@ -1170,10 +1170,10 @@ trigger_flag_set_player(var_0) {
 
   var_1 = var_0 maps\_utility::get_trigger_flag();
 
-  if(!isdefined(level.flag[var_1]))
+  if(!isDefined(level.flag[var_1]))
     common_scripts\utility::flag_init(var_1);
 
-  for (;;) {
+  for(;;) {
     var_0 waittill("trigger", var_2);
 
     if(!isplayer(var_2)) {
@@ -1185,7 +1185,7 @@ trigger_flag_set_player(var_0) {
 }
 
 trigger_multiple_sunflare(var_0) {
-  for (;;) {
+  for(;;) {
     var_0 waittill("trigger", var_1);
     var_1 maps\_art::sunflare_changes(var_0.script_visionset, var_0.script_delay);
     waitframe();
@@ -1198,16 +1198,16 @@ trigger_multiple_visionset_preh1(var_0) {
   var_3 = undefined;
   var_4 = undefined;
 
-  if(isdefined(var_0.script_visionset_start) && isdefined(var_0.script_visionset_end)) {
+  if(isDefined(var_0.script_visionset_start) && isDefined(var_0.script_visionset_end)) {
     var_1 = 1;
     var_3 = getent(var_0.target, "targetname");
 
-    if(!isdefined(var_3))
+    if(!isDefined(var_3))
       var_3 = common_scripts\utility::getstruct(var_0.target, "targetname");
 
     var_4 = getent(var_3.target, "targetname");
 
-    if(!isdefined(var_4))
+    if(!isDefined(var_4))
       var_4 = common_scripts\utility::getstruct(var_3.target, "targetname");
 
     var_3 = var_3.origin;
@@ -1218,14 +1218,14 @@ trigger_multiple_visionset_preh1(var_0) {
 
   var_5 = -1;
 
-  for (;;) {
+  for(;;) {
     var_0 waittill("trigger", var_6);
 
     if(isplayer(var_6)) {
       if(var_1) {
         var_7 = 0;
 
-        while (var_6 istouching(var_0)) {
+        while(var_6 istouching(var_0)) {
           var_7 = maps\_utility::get_progress(var_3, var_4, var_6.origin, var_2);
           var_7 = clamp(var_7, 0, 1);
 
@@ -1258,29 +1258,29 @@ trigger_multiple_visionset(var_0, var_1) {
   var_5 = undefined;
   var_6 = undefined;
 
-  if(!isdefined(level.default_visionset))
+  if(!isDefined(level.default_visionset))
     level.default_visionset = level.script;
 
-  if(!isdefined(level.default_lightset))
+  if(!isDefined(level.default_lightset))
     level.default_lightset = level.script;
 
-  if(!isdefined(level.default_clut))
+  if(!isDefined(level.default_clut))
     level.default_clut = level.script;
 
-  if(isdefined(var_0.script_visionset)) {}
+  if(isDefined(var_0.script_visionset)) {}
 
-  if(isdefined(var_0.script_clut)) {}
+  if(isDefined(var_0.script_clut)) {}
 
-  if(isdefined(var_0.script_visionset_start) && isdefined(var_0.script_visionset_end)) {
+  if(isDefined(var_0.script_visionset_start) && isDefined(var_0.script_visionset_end)) {
     var_3 = 1;
     var_5 = getent(var_0.target, "targetname");
 
-    if(!isdefined(var_5))
+    if(!isDefined(var_5))
       var_5 = common_scripts\utility::getstruct(var_0.target, "targetname");
 
     var_6 = getent(var_5.target, "targetname");
 
-    if(!isdefined(var_6))
+    if(!isDefined(var_6))
       var_6 = common_scripts\utility::getstruct(var_5.target, "targetname");
 
     var_5 = var_5.origin;
@@ -1289,7 +1289,7 @@ trigger_multiple_visionset(var_0, var_1) {
     var_0 init_visionset_progress_trigger();
   }
 
-  for (;;) {
+  for(;;) {
     var_0 waittill("trigger", var_7);
 
     if(var_7 != level.player) {
@@ -1298,7 +1298,7 @@ trigger_multiple_visionset(var_0, var_1) {
     level.player.current_visionset_trigger_id = var_0.visionset_trigger_id;
     var_8 = -1;
 
-    for (;;) {
+    for(;;) {
       if(level.player istouching(var_0)) {
         if(!var_2) {
           var_2 = 1;
@@ -1306,7 +1306,7 @@ trigger_multiple_visionset(var_0, var_1) {
           if(var_3) {
             var_9 = 0;
 
-            while (level.player istouching(var_0)) {
+            while(level.player istouching(var_0)) {
               var_9 = maps\_utility::get_progress(var_5, var_6, level.player.origin, var_4);
               var_9 = clamp(var_9, 0, 1);
 
@@ -1317,32 +1317,32 @@ trigger_multiple_visionset(var_0, var_1) {
 
               wait 0.05;
             }
-          } else if(isdefined(var_0.script_visionset))
+          } else if(isDefined(var_0.script_visionset))
             level.player maps\_utility::vision_set_fog_changes(var_0.script_visionset, var_0.script_delay);
 
-          if(isdefined(var_0.script_lightset))
+          if(isDefined(var_0.script_lightset))
             level.player maps\_utility::set_light_set_player(var_0.script_lightset);
 
-          if(isdefined(var_0.script_clut))
+          if(isDefined(var_0.script_clut))
             level.player setclutforplayer(var_0.script_clut, var_0.script_delay);
         }
       } else {
         if(var_2) {
           var_2 = 0;
 
-          if(isdefined(var_1) && var_1) {
+          if(isDefined(var_1) && var_1) {
             if(var_3 && can_reset_vision_type(var_0, "visionset")) {
               if(var_8 < 0.5)
                 level.player maps\_utility::vision_set_fog_changes(var_0.script_visionset_start, var_0.script_delay);
               else
                 level.player maps\_utility::vision_set_fog_changes(var_0.script_visionset_end, var_0.script_delay);
-            } else if(isdefined(var_0.script_visionset) && can_reset_vision_type(var_0, "visionset"))
+            } else if(isDefined(var_0.script_visionset) && can_reset_vision_type(var_0, "visionset"))
               level.player maps\_utility::vision_set_fog_changes(level.default_visionset, var_0.script_delay);
 
-            if(isdefined(var_0.script_lightset) && can_reset_vision_type(var_0, "lightset"))
+            if(isDefined(var_0.script_lightset) && can_reset_vision_type(var_0, "lightset"))
               level.player maps\_utility::set_light_set_player(level.default_lightset);
 
-            if(isdefined(var_0.script_clut) && can_reset_vision_type(var_0, "clut"))
+            if(isDefined(var_0.script_clut) && can_reset_vision_type(var_0, "clut"))
               level.player setclutforplayer(level.default_clut, var_0.script_delay);
           }
         }
@@ -1360,7 +1360,7 @@ trigger_multiple_visionset_touch(var_0) {
 }
 
 get_new_visionset_trigger_id() {
-  if(!isdefined(level.visionset_trigger_count))
+  if(!isDefined(level.visionset_trigger_count))
     level.visionset_trigger_count = 0;
 
   level.visionset_trigger_count++;
@@ -1368,14 +1368,14 @@ get_new_visionset_trigger_id() {
 }
 
 get_visionset_trigger(var_0) {
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     return undefined;
 
-  var_1 = getentarray("trigger_multiple_visionset", "classname");
-  var_1 = common_scripts\utility::array_combine(var_1, getentarray("trigger_multiple_visionset_touch", "classname"));
+  var_1 = getEntArray("trigger_multiple_visionset", "classname");
+  var_1 = common_scripts\utility::array_combine(var_1, getEntArray("trigger_multiple_visionset_touch", "classname"));
 
   foreach(var_3 in var_1) {
-    if(isdefined(var_3.visionset_trigger_id) && var_3.visionset_trigger_id == var_0)
+    if(isDefined(var_3.visionset_trigger_id) && var_3.visionset_trigger_id == var_0)
       return var_3;
   }
 
@@ -1385,33 +1385,33 @@ get_visionset_trigger(var_0) {
 can_reset_vision_type(var_0, var_1) {
   var_2 = get_visionset_trigger(level.player.current_visionset_trigger_id);
 
-  if(!isdefined(var_2))
+  if(!isDefined(var_2))
     return 1;
 
-  if(isdefined(var_2) && var_2 == var_0)
+  if(isDefined(var_2) && var_2 == var_0)
     return 1;
 
   if(var_1 == "visionset")
-    return !isdefined(var_2.script_visionset);
+    return !isDefined(var_2.script_visionset);
   else if(var_1 == "lightset")
-    return !isdefined(var_2.script_lightset);
+    return !isDefined(var_2.script_lightset);
   else if(var_1 == "clut")
-    return !isdefined(var_2.script_clut);
+    return !isDefined(var_2.script_clut);
 
   return 0;
 }
 
 init_visionset_progress_trigger() {
-  if(!isdefined(self.script_delay))
+  if(!isDefined(self.script_delay))
     self.script_delay = 2;
 
   var_0 = maps\_utility::get_vision_set_fog(self.script_visionset_start);
   var_1 = maps\_utility::get_vision_set_fog(self.script_visionset_end);
 
-  if(!isdefined(var_0) || !isdefined(var_1)) {
+  if(!isDefined(var_0) || !isDefined(var_1)) {
     return;
   }
-  var_2 = spawnstruct();
+  var_2 = spawnStruct();
   var_2.startdist = var_1.startdist - var_0.startdist;
   var_2.halfwaydist = var_1.halfwaydist - var_0.halfwaydist;
   var_2.red = var_1.red - var_0.red;
@@ -1419,97 +1419,97 @@ init_visionset_progress_trigger() {
   var_2.green = var_1.green - var_0.green;
   var_2.hdrcolorintensity = var_1.hdrcolorintensity - var_0.hdrcolorintensity;
   var_2.maxopacity = var_1.maxopacity - var_0.maxopacity;
-  var_2.sunfogenabled = isdefined(var_0.sunfogenabled) && var_0.sunfogenabled || isdefined(var_1.sunfogenabled) && var_1.sunfogenabled;
+  var_2.sunfogenabled = isDefined(var_0.sunfogenabled) && var_0.sunfogenabled || isDefined(var_1.sunfogenabled) && var_1.sunfogenabled;
   var_2.hdrsuncolorintensity = var_1.hdrsuncolorintensity - var_0.hdrsuncolorintensity;
   var_2.skyfogintensity = var_1.skyfogintensity - var_0.skyfogintensity;
   var_2.skyfogminangle = var_1.skyfogminangle - var_0.skyfogminangle;
   var_2.skyfogmaxangle = var_1.skyfogmaxangle - var_0.skyfogmaxangle;
   var_3 = 0;
 
-  if(isdefined(var_0.sunred))
+  if(isDefined(var_0.sunred))
     var_3 = var_0.sunred;
 
   var_4 = 0;
 
-  if(isdefined(var_1.sunred))
+  if(isDefined(var_1.sunred))
     var_4 = var_1.sunred;
 
   var_2.sunred_start = var_3;
   var_2.sunred = var_4 - var_3;
   var_5 = 0;
 
-  if(isdefined(var_0.sungreen))
+  if(isDefined(var_0.sungreen))
     var_5 = var_0.sungreen;
 
   var_6 = 0;
 
-  if(isdefined(var_1.sungreen))
+  if(isDefined(var_1.sungreen))
     var_6 = var_1.sungreen;
 
   var_2.sungreen_start = var_5;
   var_2.sungreen = var_6 - var_5;
   var_7 = 0;
 
-  if(isdefined(var_0.sunblue))
+  if(isDefined(var_0.sunblue))
     var_7 = var_0.sunblue;
 
   var_8 = 0;
 
-  if(isdefined(var_1.sunblue))
+  if(isDefined(var_1.sunblue))
     var_8 = var_1.sunblue;
 
   var_2.sunblue_start = var_7;
   var_2.sunblue = var_8 - var_7;
   var_9 = (0, 0, 0);
 
-  if(isdefined(var_0.sundir))
+  if(isDefined(var_0.sundir))
     var_9 = var_0.sundir;
 
   var_10 = (0, 0, 0);
 
-  if(isdefined(var_1.sundir))
+  if(isDefined(var_1.sundir))
     var_10 = var_1.sundir;
 
   var_2.sundir_start = var_9;
   var_2.sundir = var_10 - var_9;
   var_11 = 0;
 
-  if(isdefined(var_0.sunbeginfadeangle))
+  if(isDefined(var_0.sunbeginfadeangle))
     var_11 = var_0.sunbeginfadeangle;
 
   var_12 = 0;
 
-  if(isdefined(var_1.sunbeginfadeangle))
+  if(isDefined(var_1.sunbeginfadeangle))
     var_12 = var_1.sunbeginfadeangle;
 
   var_2.sunbeginfadeangle_start = var_11;
   var_2.sunbeginfadeangle = var_12 - var_11;
   var_13 = 0;
 
-  if(isdefined(var_0.sunendfadeangle))
+  if(isDefined(var_0.sunendfadeangle))
     var_13 = var_0.sunendfadeangle;
 
   var_14 = 0;
 
-  if(isdefined(var_1.sunendfadeangle))
+  if(isDefined(var_1.sunendfadeangle))
     var_14 = var_1.sunendfadeangle;
 
   var_2.sunendfadeangle_start = var_13;
   var_2.sunendfadeangle = var_14 - var_13;
   var_15 = 0;
 
-  if(isdefined(var_0.normalfogscale))
+  if(isDefined(var_0.normalfogscale))
     var_15 = var_0.normalfogscale;
 
   var_16 = 0;
 
-  if(isdefined(var_1.normalfogscale))
+  if(isDefined(var_1.normalfogscale))
     var_16 = var_1.normalfogscale;
 
   var_2.normalfogscale_start = var_15;
   var_2.normalfogscale = var_16 - var_15;
 
-  if(isdefined(var_0.atmosfogenabled) && isdefined(var_1.atmosfogenabled)) {
+  if(isDefined(var_0.atmosfogenabled) && isDefined(var_1.atmosfogenabled)) {
     var_2.atmosfogenabled = var_0.atmosfogenabled;
     var_2.atmosfogsunfogcolor = var_1.atmosfogsunfogcolor - var_0.atmosfogsunfogcolor;
     var_2.atmosfoghazecolor = var_1.atmosfoghazecolor - var_0.atmosfoghazecolor;
@@ -1555,7 +1555,7 @@ vision_set_fog_progress(var_0, var_1) {
   var_2 = maps\_utility::get_vision_set_fog(var_0.script_visionset_start);
   var_3 = maps\_utility::get_vision_set_fog(var_0.script_visionset_end);
   var_4 = var_0.visionset_diff;
-  var_5 = spawnstruct();
+  var_5 = spawnStruct();
   var_5.startdist = var_2.startdist + var_4.startdist * var_1;
   var_5.halfwaydist = var_2.halfwaydist + var_4.halfwaydist * var_1;
   var_5.halfwaydist = max(1, var_5.halfwaydist);
@@ -1580,7 +1580,7 @@ vision_set_fog_progress(var_0, var_1) {
     var_5.normalfogscale = var_4.normalfogscale_start + var_4.normalfogscale * var_1;
   }
 
-  if(isdefined(var_4.atmosfogenabled)) {
+  if(isDefined(var_4.atmosfogenabled)) {
     var_5.atmosfogenabled = var_4.atmosfogenabled;
     var_5.atmosfogsunfogcolor = var_2.atmosfogsunfogcolor + var_4.atmosfogsunfogcolor * var_1;
     var_5.atmosfoghazecolor = var_2.atmosfoghazecolor + var_4.atmosfoghazecolor * var_1;
@@ -1605,7 +1605,7 @@ vision_set_fog_progress(var_0, var_1) {
 }
 
 trigger_fog(var_0) {
-  if(isdefined(var_0.script_fogset_start) && isdefined(var_0.script_fogset_end)) {
+  if(isDefined(var_0.script_fogset_start) && isDefined(var_0.script_fogset_end)) {
     trigger_fog_preh1(var_0);
     return;
   }
@@ -1614,7 +1614,7 @@ trigger_fog(var_0) {
   var_2 = var_1.origin;
   var_3 = undefined;
 
-  if(isdefined(var_1.target)) {
+  if(isDefined(var_1.target)) {
     var_4 = getent(var_1.target, "targetname");
     var_3 = var_4.origin;
   } else
@@ -1622,11 +1622,11 @@ trigger_fog(var_0) {
 
   var_5 = distance(var_2, var_3);
 
-  for (;;) {
+  for(;;) {
     var_0 waittill("trigger", var_6);
     var_7 = undefined;
 
-    while (level.player istouching(var_0)) {
+    while(level.player istouching(var_0)) {
       var_7 = maps\_utility::get_progress(var_2, var_3, level.player.origin, var_5);
 
       if(var_7 < 0)
@@ -1654,10 +1654,10 @@ trigger_fog_preh1(var_0) {
   var_2 = var_0.script_fogset_end;
   var_0.sunfog_enabled = 0;
 
-  if(isdefined(var_1) && isdefined(var_2)) {
+  if(isDefined(var_1) && isDefined(var_2)) {
     var_3 = maps\_utility::get_fog(var_1);
     var_4 = maps\_utility::get_fog(var_2);
-    var_0.sunfog_enabled = isdefined(var_3.sunred) || isdefined(var_4.sunred);
+    var_0.sunfog_enabled = isDefined(var_3.sunred) || isDefined(var_4.sunred);
     var_0.start_neardist = var_3.startdist;
     var_0.start_fardist = var_3.halfwaydist;
     var_0.start_color = (var_3.red, var_3.green, var_3.blue);
@@ -1667,7 +1667,7 @@ trigger_fog_preh1(var_0) {
     var_0.start_skyfogminangle = var_3.skyfogminangle;
     var_0.start_skyfogmaxangle = var_3.skyfogmaxangle;
 
-    if(isdefined(var_3.sunred)) {
+    if(isDefined(var_3.sunred)) {
       var_0.start_suncolor = (var_3.sunred, var_3.sungreen, var_3.sunblue);
       var_0.start_hdrsuncolorintensity = var_3.hdrsuncolorintensity;
       var_0.start_sundir = var_3.sundir;
@@ -1692,7 +1692,7 @@ trigger_fog_preh1(var_0) {
     var_0.end_skyfogminangle = var_4.skyfogminangle;
     var_0.end_skyfogmaxangle = var_4.skyfogmaxangle;
 
-    if(isdefined(var_4.sunred)) {
+    if(isDefined(var_4.sunred)) {
       var_0.end_suncolor = (var_4.sunred, var_4.sungreen, var_4.sunblue);
       var_0.end_hdrsuncolorintensity = var_4.hdrsuncolorintensity;
       var_0.end_sundir = var_4.sundir;
@@ -1713,7 +1713,7 @@ trigger_fog_preh1(var_0) {
   var_6 = var_5.origin;
   var_7 = undefined;
 
-  if(isdefined(var_5.target)) {
+  if(isDefined(var_5.target)) {
     var_8 = getent(var_5.target, "targetname");
     var_7 = var_8.origin;
   } else
@@ -1721,11 +1721,11 @@ trigger_fog_preh1(var_0) {
 
   var_9 = distance(var_6, var_7);
 
-  for (;;) {
+  for(;;) {
     var_0 waittill("trigger", var_10);
     var_11 = 0;
 
-    while (var_10 istouching(var_0)) {
+    while(var_10 istouching(var_0)) {
       var_11 = maps\_utility::get_progress(var_6, var_7, var_10.origin, var_9);
       var_11 = clamp(var_11, 0, 1);
       var_0 maps\_art::set_fog_progress(var_11);
@@ -1744,7 +1744,7 @@ trigger_fog_preh1(var_0) {
 trigger_multiple_depthoffield(var_0) {
   waittillframeend;
 
-  for (;;) {
+  for(;;) {
     var_0 waittill("trigger", var_1);
     var_2 = var_0.script_dof_near_start;
     var_3 = var_0.script_dof_near_end;
@@ -1770,7 +1770,7 @@ trigger_multiple_tessellationcutoff(var_0) {
   }
   waittillframeend;
 
-  for (;;) {
+  for(;;) {
     var_0 waittill("trigger", var_1);
     var_2 = var_0.script_tess_distance;
     var_3 = var_0.script_tess_falloff;
@@ -1790,36 +1790,36 @@ trigger_multiple_tessellationcutoff(var_0) {
 }
 
 trigger_slide(var_0) {
-  for (;;) {
+  for(;;) {
     var_0 waittill("trigger", var_1);
     var_1 thread slidetriggerplayerthink(var_0);
   }
 }
 
 slidetriggerplayerthink(var_0) {
-  if(isdefined(self.vehicle)) {
+  if(isDefined(self.vehicle)) {
     return;
   }
   if(maps\_utility::issliding()) {
     return;
   }
-  if(isdefined(self.player_view)) {
+  if(isDefined(self.player_view)) {
     return;
   }
   self endon("death");
 
   if(soundexists("SCN_cliffhanger_player_hillslide"))
-    self playsound("SCN_cliffhanger_player_hillslide");
+    self playSound("SCN_cliffhanger_player_hillslide");
 
   var_1 = undefined;
 
-  if(isdefined(var_0.script_accel))
+  if(isDefined(var_0.script_accel))
     var_1 = var_0.script_accel;
 
   self endon("cancel_sliding");
   maps\_utility::beginsliding(undefined, var_1);
 
-  for (;;) {
+  for(;;) {
     if(!self istouching(var_0)) {
       break;
     }
@@ -1827,7 +1827,7 @@ slidetriggerplayerthink(var_0) {
     wait 0.05;
   }
 
-  if(isdefined(level.end_slide_delay))
+  if(isDefined(level.end_slide_delay))
     wait(level.end_slide_delay);
 
   maps\_utility::endsliding();
@@ -1846,10 +1846,10 @@ trigger_multiple_fx_volume(var_0) {
 
   var_1 delete();
 
-  if(!isdefined(var_0.target)) {
+  if(!isDefined(var_0.target)) {
     return;
   }
-  var_5 = getentarray(var_0.target, "targetname");
+  var_5 = getEntArray(var_0.target, "targetname");
   var_0.fx_on = 1;
 
   foreach(var_7 in var_5) {
@@ -1867,7 +1867,7 @@ trigger_multiple_fx_volume(var_0) {
 }
 
 trigger_multiple_fx_trigger_on_think(var_0) {
-  for (;;) {
+  for(;;) {
     self waittill("trigger");
 
     if(!var_0.fx_on)
@@ -1878,7 +1878,7 @@ trigger_multiple_fx_trigger_on_think(var_0) {
 }
 
 trigger_multiple_fx_trigger_off_think(var_0) {
-  for (;;) {
+  for(;;) {
     self waittill("trigger");
 
     if(var_0.fx_on)
@@ -1889,8 +1889,8 @@ trigger_multiple_fx_trigger_off_think(var_0) {
 }
 
 assign_fx_to_trigger(var_0, var_1, var_2) {
-  if(isdefined(var_0.v["soundalias"]) && var_0.v["soundalias"] != "nil") {
-    if(!isdefined(var_0.v["stopable"]) || !var_0.v["stopable"])
+  if(isDefined(var_0.v["soundalias"]) && var_0.v["soundalias"] != "nil") {
+    if(!isDefined(var_0.v["stopable"]) || !var_0.v["stopable"])
       return;
   }
 
@@ -1903,10 +1903,10 @@ assign_fx_to_trigger(var_0, var_1, var_2) {
 trigger_multiple_compass(var_0) {
   var_1 = var_0.script_parameters;
 
-  if(!isdefined(level.minimap_image))
+  if(!isDefined(level.minimap_image))
     level.minimap_image = "";
 
-  for (;;) {
+  for(;;) {
     var_0 waittill("trigger");
 
     if(level.minimap_image != var_1)
@@ -1919,16 +1919,16 @@ trigger_no_crouch_or_prone(var_0) {
 }
 
 no_crouch_or_prone_think_for_player(var_0) {
-  for (;;) {
+  for(;;) {
     var_0 waittill("trigger", var_1);
 
-    if(!isdefined(var_1)) {
+    if(!isDefined(var_1)) {
       continue;
     }
     if(var_1 != self) {
       continue;
     }
-    while (var_1 istouching(var_0)) {
+    while(var_1 istouching(var_0)) {
       var_1 allowprone(0);
       var_1 allowcrouch(0);
       wait 0.05;
@@ -1944,16 +1944,16 @@ trigger_no_prone(var_0) {
 }
 
 no_prone_for_player(var_0) {
-  for (;;) {
+  for(;;) {
     var_0 waittill("trigger", var_1);
 
-    if(!isdefined(var_1)) {
+    if(!isDefined(var_1)) {
       continue;
     }
     if(var_1 != self) {
       continue;
     }
-    while (var_1 istouching(var_0)) {
+    while(var_1 istouching(var_0)) {
       var_1 allowprone(0);
       wait 0.05;
     }
@@ -1963,15 +1963,13 @@ no_prone_for_player(var_0) {
 }
 
 trigger_wakevolume_think(var_0) {
-  for (;;) {
+  for(;;) {
     var_0 waittill("trigger", var_1);
 
-    if(!isdefined(var_1)) {
+    if(!isDefined(var_1)) {
       continue;
     }
-    if(var_1 maps\_utility::ent_flag_exist("in_wake_volume")) {
-
-    } else
+    if(var_1 maps\_utility::ent_flag_exist("in_wake_volume")) {} else
       var_1 maps\_utility::ent_flag_init("in_wake_volume");
 
     if(distancesquared(var_1.origin, level.player.origin) < 9250000) {
@@ -1988,7 +1986,7 @@ volume_wakefx(var_0) {
   self endon("death");
   var_1 = 200;
 
-  for (;;) {
+  for(;;) {
     if(self istouching(var_0)) {
       if(var_1 > 0)
         wait(max(1 - var_1 / 120, 0.1));
@@ -2011,12 +2009,12 @@ volume_wakefx(var_0) {
 
       if(var_2 != "null") {
         var_4 = vectornormalize((var_3[0], var_3[1], 0));
-        var_5 = anglestoforward(vectortoangles(var_4) + (270, 180, 0));
+        var_5 = anglesToForward(vectortoangles(var_4) + (270, 180, 0));
         var_6 = self.origin + (0, 0, 64);
         var_7 = self.origin - (0, 0, 150);
-        var_8 = bullettrace(var_6, var_7, 0, undefined);
+        var_8 = bulletTrace(var_6, var_7, 0, undefined);
 
-        if(isdefined(var_0.script_surfacetype)) {
+        if(isDefined(var_0.script_surfacetype)) {
           if(var_8["surfacetype"] != var_0.script_surfacetype)
             continue;
         }
@@ -2024,13 +2022,13 @@ volume_wakefx(var_0) {
         var_9 = common_scripts\utility::getfx(var_2);
         var_6 = var_8["position"] + var_1 / 4 * var_4;
 
-        if(isdefined(var_0.script_usenormals) && var_0.script_usenormals == 1) {
+        if(isDefined(var_0.script_usenormals) && var_0.script_usenormals == 1) {
           var_10 = vectornormalize(vectorcross(var_8["normal"], vectorcross(var_4, var_8["normal"])));
 
           if(var_8["normal"] != (0, 0, 0) && var_10 != (0, 0, 0))
-            playfx(var_9, var_6, var_8["normal"], var_10);
+            playFX(var_9, var_6, var_8["normal"], var_10);
         } else
-          playfx(var_9, var_6, var_5);
+          playFX(var_9, var_6, var_5);
       }
 
       continue;
@@ -2042,15 +2040,13 @@ volume_wakefx(var_0) {
 }
 
 trigger_fallingwatervolume_think(var_0) {
-  for (;;) {
+  for(;;) {
     var_0 waittill("trigger", var_1);
 
-    if(!isdefined(var_1)) {
+    if(!isDefined(var_1)) {
       continue;
     }
-    if(var_1 maps\_utility::ent_flag_exist("in_fallingwater_volume")) {
-
-    } else
+    if(var_1 maps\_utility::ent_flag_exist("in_fallingwater_volume")) {} else
       var_1 maps\_utility::ent_flag_init("in_fallingwater_volume");
 
     if(distancesquared(var_1.origin, level.player.origin) < 6250000) {
@@ -2070,47 +2066,47 @@ volume_fallingwaterfx(var_0) {
   var_3 = (var_1[0] - var_2[0]) * (var_1[1] - var_2[1]);
   var_4 = 3;
 
-  if(isdefined(var_0.script_duration))
+  if(isDefined(var_0.script_duration))
     var_4 = var_0.script_duration;
 
   var_5 = 1;
 
-  if(isdefined(var_0.script_flowrate))
+  if(isDefined(var_0.script_flowrate))
     var_5 = var_0.script_flowrate;
 
   var_6 = int(var_5 * (var_3 / 50));
   var_7 = "null";
 
-  if(isdefined(var_0.script_fxid))
+  if(isDefined(var_0.script_fxid))
     var_7 = var_0.script_fxid;
 
   var_8 = "null";
 
-  if(isdefined(var_0.script_screen_fxid))
+  if(isDefined(var_0.script_screen_fxid))
     var_8 = var_0.script_screen_fxid;
 
   var_9 = -1;
 
-  for (;;) {
+  for(;;) {
     if(self istouching(var_0)) {
       if(isai(self)) {
         wait 0.05;
 
-        for (var_10 = 0; var_10 < var_6; var_10++) {
+        for(var_10 = 0; var_10 < var_6; var_10++) {
           if(var_7 != "null") {
             var_11 = var_0 getpointinbounds(randomfloat(2) - 1, randomfloat(2) - 1, 1);
             var_12 = (var_11[0], var_11[1], self.origin[2]);
 
             if(distance2dsquared(var_12, self.origin) < 900) {
-              var_13 = bullettrace(var_11, var_12, 1, undefined, 0, 1);
+              var_13 = bulletTrace(var_11, var_12, 1, undefined, 0, 1);
 
-              if(isdefined(var_13["entity"]) && var_13["entity"] == self) {
+              if(isDefined(var_13["entity"]) && var_13["entity"] == self) {
                 var_14 = common_scripts\utility::getfx(var_7);
                 var_11 = var_13["position"];
                 var_15 = vectortoangles(var_13["normal"] + (90, 0, 0));
-                var_16 = anglestoforward(var_15);
+                var_16 = anglesToForward(var_15);
                 var_17 = anglestoup(var_15);
-                playfx(var_14, var_11, var_17, var_16);
+                playFX(var_14, var_11, var_17, var_16);
               }
             }
           }
@@ -2126,7 +2122,7 @@ volume_fallingwaterfx(var_0) {
           var_9 = 0;
         }
 
-        if(!isdefined(level.effectonplayerviewent)) {
+        if(!isDefined(level.effectonplayerviewent)) {
           if(var_8 != "null")
             spawneffectonplayerview(var_8, (500, 0, 0), (180, 0, 0));
         }
@@ -2145,25 +2141,25 @@ volume_fallingwaterfx(var_0) {
 }
 
 spawneffectonplayerview(var_0, var_1, var_2) {
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     var_1 = (0, 0, 0);
 
-  if(!isdefined(var_2))
+  if(!isDefined(var_2))
     var_2 = (0, 0, 0);
 
   var_3 = common_scripts\utility::getfx(var_0);
   level.effectonplayerviewent = common_scripts\utility::spawn_tag_origin();
   level.effectonplayerviewent linktoplayerview(level.player, "tag_origin", var_1, var_2, 1);
-  level.effectonplayerview = playfxontag(var_3, level.effectonplayerviewent, "tag_origin");
+  level.effectonplayerview = playFXOnTag(var_3, level.effectonplayerviewent, "tag_origin");
 }
 
 stopeffectonplayerview(var_0, var_1) {
-  if(isdefined(level.effectonplayerviewent)) {
-    if(isdefined(level.effectonplayerview)) {
+  if(isDefined(level.effectonplayerviewent)) {
+    if(isDefined(level.effectonplayerview)) {
       if(var_1)
         killfxontag(common_scripts\utility::getfx(var_0), level.effectonplayerviewent, "tag_origin");
       else
-        stopfxontag(common_scripts\utility::getfx(var_0), level.effectonplayerviewent, "tag_origin");
+        stopFXOnTag(common_scripts\utility::getfx(var_0), level.effectonplayerviewent, "tag_origin");
     }
 
     level.effectonplayerviewent delete();

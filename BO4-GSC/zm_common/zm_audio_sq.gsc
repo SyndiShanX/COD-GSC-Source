@@ -9,16 +9,15 @@
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm_audio;
 #include scripts\zm_common\zm_sq;
-
 #namespace zm_audio_sq;
 
 init() {
   clientfield::register("scriptmover", "medallion_fx", 1, 1, "int");
-  zm_sq::register(#"music_sq", #"first_location", #"hash_3531cfab5aa57f4b", &function_fe4dc0ff, &function_3f739fed);
+  zm_sq::register(#"music_sq", # "first_location", # "hash_3531cfab5aa57f4b", &function_fe4dc0ff, &function_3f739fed);
   zm_sq::start(#"music_sq");
 }
 
-private function_fe4dc0ff(var_a276c861) {
+function_fe4dc0ff(var_a276c861) {
   level endon(#"end_game");
 
   if(!isDefined(level.var_c5c448d)) {
@@ -33,7 +32,7 @@ private function_fe4dc0ff(var_a276c861) {
   }
 }
 
-private function_3f739fed(var_a276c861, var_19e802fa) {
+function_3f739fed(var_a276c861, var_19e802fa) {
   if(!var_a276c861) {
     if(var_19e802fa) {
       music_sq_cleanup();

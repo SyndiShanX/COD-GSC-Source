@@ -33,19 +33,19 @@ createfx() {
   if(isDefined(level.delete_when_in_createfx)) {
     level[[level.delete_when_in_createfx]]();
   }
-  triggers = getentarray("trigger_multiple", "classname");
-  for (i = 0; i < triggers.size; i++) {
+  triggers = getEntArray("trigger_multiple", "classname");
+  for(i = 0; i < triggers.size; i++) {
     triggers[i] delete();
   }
-  triggers = getentarray("trigger_radius", "classname");
-  for (i = 0; i < triggers.size; i++) {
+  triggers = getEntArray("trigger_radius", "classname");
+  for(i = 0; i < triggers.size; i++) {
     triggers[i] delete();
   }
   level.callbackPlayerDisconnect = ::void;
   level.callbackPlayerDamage = ::void;
   level.callbackPlayerKilled = ::void;
   level.callbackPlayerConnect = ::Callback_PlayerConnect;
-  while (!isDefined(level.player))
+  while(!isDefined(level.player))
     wait .05;
   thread createFxLogic();
   level waittill("eternity");
@@ -56,7 +56,7 @@ fx_init() {
   waittillframeend;
   level.exploderFunction = maps\mp\_utility::exploder_after_load;
   println("Running CreateFX 1.7.1");
-  for (i = 0; i < level.createFXent.size; i++) {
+  for(i = 0; i < level.createFXent.size; i++) {
     ent = level.createFXent[i];
     ent set_forward_and_up_vectors();
     if(level.clientscripts) {
@@ -103,10 +103,10 @@ createEffect(type, fxid) {
   if(level.createFX_enabled) {
     ent = spawnStruct();
   } else if(type == "exploder") {
-    ent = SpawnStruct();
+    ent = spawnStruct();
   } else {
     if(!isDefined(level._fake_createfx_struct)) {
-      level._fake_createfx_struct = SpawnStruct();
+      level._fake_createfx_struct = spawnStruct();
     }
     ent = level._fake_createfx_struct;
   }
@@ -155,7 +155,7 @@ createNewExploder() {
 }
 set_forward_and_up_vectors() {
   self.v["up"] = anglestoup(self.v["angles"]);
-  self.v["forward"] = anglestoforward(self.v["angles"]);
+  self.v["forward"] = anglesToForward(self.v["angles"]);
 }
 createFxLogic() {
   waittillframeend;
@@ -192,9 +192,9 @@ createFxLogic() {
   level.clearTextMarker = newDebugHudElem();
   level.clearTextMarker.alpha = 0;
   level.clearTextMarker setText("marker");
-  for (i = 0; i < level.createFx_hudElements; i++) {
+  for(i = 0; i < level.createFx_hudElements; i++) {
     newStrArray = [];
-    for (p = 0; p < 2; p++) {
+    for(p = 0; p < 2; p++) {
       newStr = newHudElem();
       newStr.alignX = "left";
       newStr.location = 0;
@@ -261,22 +261,22 @@ createFxLogic() {
   black.alpha = 0;
   level.createfx_inputlocked = false;
   help_on_last_frame = 0;
-  for (i = 0; i < level.createFXent.size; i++) {
+  for(i = 0; i < level.createFXent.size; i++) {
     ent = level.createFXent[i];
     ent post_entity_creation_function();
   }
   thread draw_distance();
   lastSelectEntity = undefined;
   thread createfx_autosave();
-  for (;;) {
+  for(;;) {
     player = get_players()[0];
     changedSelectedEnts = false;
     right = anglestoright(player getplayerangles());
-    forward = anglestoforward(player getplayerangles());
+    forward = anglesToForward(player getplayerangles());
     up = anglestoup(player getplayerangles());
     dot = 0.85;
     placeEnt_vector = vector_scale(forward, 750);
-    level.createfxCursor = bullettrace(player geteye(), player geteye() + placeEnt_vector, false, undefined);
+    level.createfxCursor = bulletTrace(player getEye(), player getEye() + placeEnt_vector, false, undefined);
     highlightedEnt = undefined;
     level.buttonClick = [];
     level.button_is_kb = [];
@@ -381,7 +381,7 @@ createFxLogic() {
     highLightedEnt = level.fx_highLightedEnt;
     if(leftClick || GetTime() - level.createfx_last_view_change_test > 250) {
       if(leftClick || vector_changed(level.createfx_last_player_origin, player.origin) || dot_changed(level.createfx_last_player_forward, forward)) {
-        for (i = 0; i < level.createFXent.size; i++) {
+        for(i = 0; i < level.createFXent.size; i++) {
           ent = level.createFXent[i];
           difference = vectornormalize(ent.v["origin"] - (player.origin + (0, 0, 55)));
           newdot = vectordot(forward, difference);
@@ -424,7 +424,7 @@ createFxLogic() {
         copy_angles_of_selected_ents();
       }
       if(GetDvarInt(#"createfx_drawaxis") == 1) {
-        for (i = 0; i < level.selected_fx_ents.size; i++) {
+        for(i = 0; i < level.selected_fx_ents.size; i++) {
           level.selected_fx_ents[i] draw_axis();
         }
       }
@@ -435,7 +435,7 @@ createFxLogic() {
     } else {
       stop_drawing_axis_models();
       selectedMove_vector = get_selected_move_vector();
-      for (i = 0; i < level.selected_fx_ents.size; i++) {
+      for(i = 0; i < level.selected_fx_ents.size; i++) {
         ent = level.selected_fx_ents[i];
         if(isDefined(ent.model)) {
           continue;
@@ -483,7 +483,7 @@ manipulate_createfx_ents(highlightedEnt, leftClick, leftHeld, ctrlHeld, colors, 
   }
   offset = level.createfx_manipulate_offset;
   level.createfx_manipulate_offset = (level.createfx_manipulate_offset + 1) % print_frames;
-  for (i = offset; i < level.createFXent.size; i += print_frames) {
+  for(i = offset; i < level.createFXent.size; i += print_frames) {
     ent = level.createFXent[i];
     if(!ent.drawn) {
       continue;
@@ -545,7 +545,7 @@ clear_settable_fx() {
   reset_fx_hud_colors();
 }
 reset_fx_hud_colors() {
-  for (i = 0; i < level.createFx_hudElements; i++) {
+  for(i = 0; i < level.createFx_hudElements; i++) {
     level.createFxHudElements[i][0].color = (1, 1, 1);
   }
 }
@@ -599,7 +599,7 @@ deselect_entity(index, ent) {
     ent thread entity_highlight_disable();
   }
   newArray = [];
-  for (i = 0; i < level.selected_fx_ents.size; i++) {
+  for(i = 0; i < level.selected_fx_ents.size; i++) {
     if(level.selected_fx_ents[i] != ent) {
       newArray[newArray.size] = level.selected_fx_ents[i];
     }
@@ -610,7 +610,7 @@ index_is_selected(index) {
   return isDefined(level.selected_fx[index]);
 }
 ent_is_selected(ent) {
-  for (i = 0; i < level.selected_fx_ents.size; i++) {
+  for(i = 0; i < level.selected_fx_ents.size; i++) {
     if(level.selected_fx_ents[i] == ent) {
       return true;
     }
@@ -618,7 +618,7 @@ ent_is_selected(ent) {
   return false;
 }
 clear_entity_selection() {
-  for (i = 0; i < level.selected_fx_ents.size; i++) {
+  for(i = 0; i < level.selected_fx_ents.size; i++) {
     if(!ent_is_highlighted(level.selected_fx_ents[i])) {
       level.selected_fx_ents[i] thread entity_highlight_disable();
     }
@@ -638,8 +638,8 @@ draw_axis() {
   level.draw_axis_models[level.draw_axis_models.size] = self.draw_axis_model;
 }
 spawn_axis_model(origin, angles) {
-  model = Spawn("script_model", origin);
-  model SetModel("fx_axis_createfx");
+  model = spawn("script_model", origin);
+  model setModel("fx_axis_createfx");
   model.angles = angles;
   return model;
 }
@@ -647,7 +647,7 @@ draw_axis_think(axis_parent) {
   axis_model = axis_parent.draw_axis_model;
   axis_model endon("death");
   player = get_players()[0];
-  while (1) {
+  while(1) {
     if(!isDefined(axis_parent)) {
       break;
     }
@@ -674,7 +674,7 @@ draw_axis_think(axis_parent) {
 }
 stop_drawing_axis_models() {
   if(isDefined(level.draw_axis_models)) {
-    for (i = 0; i < level.draw_axis_models.size; i++) {
+    for(i = 0; i < level.draw_axis_models.size; i++) {
       if(isDefined(level.draw_axis_models[i])) {
         level.draw_axis_models[i] Delete();
       }
@@ -684,15 +684,15 @@ stop_drawing_axis_models() {
 }
 clear_fx_hudElements() {
   level.clearTextMarker clearAllTextAfterHudElem();
-  for (i = 0; i < level.createFx_hudElements; i++) {
-    for (p = 0; p < 2; p++) {
+  for(i = 0; i < level.createFx_hudElements; i++) {
+    for(p = 0; p < 2; p++) {
       level.createFxHudElements[i][p] setText("");
     }
   }
   level.fxHudElements = 0;
 }
 set_fx_hudElement(text) {
-  for (p = 0; p < 2; p++) {
+  for(p = 0; p < 2; p++) {
     level.createFxHudElements[level.fxHudElements][p] setText(text);
   }
   level.fxHudElements++;
@@ -716,7 +716,7 @@ get_selected_move_vector() {
   yaw = player getplayerangles()[1];
   angles = (0, yaw, 0);
   right = anglestoright(angles);
-  forward = anglestoforward(angles);
+  forward = anglesToForward(angles);
   up = anglestoup(angles);
   keypressed = false;
   rate = 1;
@@ -904,7 +904,7 @@ cfxprintln(file, string) {
 generate_client_fx_log(autosave) {}
 generate_fx_log(autosave) {}
 print_fx_options(ent, tab, file, autosave) {
-  for (i = 0; i < level.createFX_options.size; i++) {
+  for(i = 0; i < level.createFX_options.size; i++) {
     option = level.createFX_options[i];
     if(!isDefined(ent.v[option["name"]])) {
       continue;
@@ -928,7 +928,7 @@ print_fx_options(ent, tab, file, autosave) {
 entity_highlight_disable() {
   self notify("highlight change");
   self endon("highlight change");
-  for (;;) {
+  for(;;) {
     self.textalpha = self.textalpha * 0.85;
     self.textalpha = self.textalpha - 0.05;
     if(self.textalpha < 0) {
@@ -941,7 +941,7 @@ entity_highlight_disable() {
 entity_highlight_enable() {
   self notify("highlight change");
   self endon("highlight change");
-  for (;;) {
+  for(;;) {
     self.textalpha = self.textalpha + 0.05;
     self.textalpha = self.textalpha * 1.25;
     if(self.textalpha > 1) {
@@ -953,7 +953,7 @@ entity_highlight_enable() {
 }
 get_center_of_array(array) {
   center = (0, 0, 0);
-  for (i = 0; i < array.size; i++) {
+  for(i = 0; i < array.size; i++) {
     center = (center[0] + array[i].v["origin"][0], center[1] + array[i].v["origin"][1], center[2] + array[i].v["origin"][2]);
   }
   return (center[0] / array.size, center[1] / array.size, center[2] / array.size);
@@ -982,14 +982,14 @@ process_fx_rotater() {
     org.v["angles"] = level.selected_fx_ents[0].v["angles"];
     org.v["origin"] = center;
     rotater = [];
-    for (i = 0; i < level.selected_fx_ents.size; i++) {
+    for(i = 0; i < level.selected_fx_ents.size; i++) {
       rotater[i] = spawn("script_origin", level.selected_fx_ents[i].v["origin"]);
       rotater[i].angles = level.selected_fx_ents[i].v["angles"];
       rotater[i] linkto(org);
     }
     rotate_over_time(org, rotater);
     org delete();
-    for (i = 0; i < rotater.size; i++) {
+    for(i = 0; i < rotater.size; i++) {
       rotater[i] delete();
     }
   } else if(level.selected_fx_ents.size == 1) {
@@ -1012,7 +1012,7 @@ process_fx_rotater() {
 rotate_over_time(org, rotater) {
   level endon("new_ent_selection");
   timer = 0.1;
-  for (p = 0; p < timer * 20; p++) {
+  for(p = 0; p < timer * 20; p++) {
     if(level.selectedRotate_pitch != 0) {
       org devAddPitch(level.selectedRotate_pitch);
     } else if(level.selectedRotate_yaw != 0) {
@@ -1021,7 +1021,7 @@ rotate_over_time(org, rotater) {
       org devAddRoll(level.selectedRotate_roll);
     }
     wait(0.05);
-    for (i = 0; i < level.selected_fx_ents.size; i++) {
+    for(i = 0; i < level.selected_fx_ents.size; i++) {
       ent = level.selected_fx_ents[i];
       if(isDefined(ent.model)) {
         continue;
@@ -1043,7 +1043,7 @@ remove_selected_option() {
     return;
   }
   name = level.createFX_options[level.selected_fx_option_index]["name"];
-  for (i = 0; i < level.createFXent.size; i++) {
+  for(i = 0; i < level.createFXent.size; i++) {
     ent = level.createFXent[i];
     if(!ent_is_selected(ent)) {
       continue;
@@ -1058,7 +1058,7 @@ remove_option(name) {
 }
 delete_selection() {
   newArray = [];
-  for (i = 0; i < level.createFXent.size; i++) {
+  for(i = 0; i < level.createFXent.size; i++) {
     ent = level.createFXent[i];
     if(ent_is_selected(ent)) {
       if(isDefined(ent.looper)) {
@@ -1081,7 +1081,7 @@ move_selection_to_cursor() {
   }
   center = get_center_of_array(level.selected_fx_ents);
   difference = center - origin;
-  for (i = 0; i < level.selected_fx_ents.size; i++) {
+  for(i = 0; i < level.selected_fx_ents.size; i++) {
     ent = level.selected_fx_ents[i];
     if(isDefined(ent.model)) {
       continue;
@@ -1138,7 +1138,7 @@ center_text_init() {
   level.cfx_center_text_index = 0;
   level.cfx_center_text_max = 3;
   new_array = [];
-  for (p = 0; p < level.cfx_center_text_max; p++) {
+  for(p = 0; p < level.cfx_center_text_max; p++) {
     center_hud = newDebugHudElem();
     center_hud SetText("");
     center_hud.horzAlign = "center";
@@ -1166,7 +1166,7 @@ center_text_add(text) {
   }
 }
 center_text_clear() {
-  for (p = 0; p < level.cfx_center_text_max; p++) {
+  for(p = 0; p < level.cfx_center_text_max; p++) {
     println("^3Clearing center text hud element.");
     level.cfx_center_text[p] setText("");
   }
@@ -1180,7 +1180,7 @@ write_error_msg(filename) {
     center_text_add("File " + filename + " is not writeable.");
     center_text_add("If it's checked out, restart your computer!");
     center_text_add("Press the A Button to dismiss.");
-    for (;;) {
+    for(;;) {
       player = get_players()[0];
       if(player buttonPressed("BUTTON_A")) {
         center_text_clear();
@@ -1199,9 +1199,9 @@ copy_ents() {
     return;
   }
   array = [];
-  for (i = 0; i < level.selected_fx_ents.size; i++) {
+  for(i = 0; i < level.selected_fx_ents.size; i++) {
     ent = level.selected_fx_ents[i];
-    newent = spawnstruct();
+    newent = spawnStruct();
     newent.v = ent.v;
     newent post_entity_creation_function();
     array[array.size] = newent;
@@ -1217,7 +1217,7 @@ paste_ents() {
     return;
   }
   clear_entity_selection();
-  for (i = 0; i < level.stored_ents.size; i++) {
+  for(i = 0; i < level.stored_ents.size; i++) {
     add_and_select_entity(level.stored_ents[i]);
   }
   move_selection_to_cursor();
@@ -1249,14 +1249,14 @@ restart_fx_looper() {
   }
 }
 update_selected_entities() {
-  for (i = 0; i < level.selected_fx_ents.size; i++) {
+  for(i = 0; i < level.selected_fx_ents.size; i++) {
     ent = level.selected_fx_ents[i];
     ent restart_fx_looper();
   }
 }
 copy_angles_of_selected_ents() {
   level notify("new_ent_selection");
-  for (i = 0; i < level.selected_fx_ents.size; i++) {
+  for(i = 0; i < level.selected_fx_ents.size; i++) {
     ent = level.selected_fx_ents[i];
     ent.v["angles"] = level.selected_fx_ents[level.selected_fx_ents.size - 1].v["angles"];
     ent set_forward_and_up_vectors();
@@ -1265,7 +1265,7 @@ copy_angles_of_selected_ents() {
 }
 reset_axis_of_selected_ents() {
   level notify("new_ent_selection");
-  for (i = 0; i < level.selected_fx_ents.size; i++) {
+  for(i = 0; i < level.selected_fx_ents.size; i++) {
     ent = level.selected_fx_ents[i];
     ent.v["angles"] = (0, 0, 0);
     ent set_forward_and_up_vectors();
@@ -1284,37 +1284,37 @@ last_selected_entity_has_changed(lastSelectEntity) {
 }
 createfx_showOrigin(id, org, delay, org2, type, exploder, id2, fireFx, fireFxDelay, fireFxSound, fxSound, fxQuake, fxDamage, soundalias, repeat, delay_min, delay_max, damage_radius, fireFxTimeout) {}
 drop_selection_to_ground() {
-  for (i = 0; i < level.selected_fx_ents.size; i++) {
+  for(i = 0; i < level.selected_fx_ents.size; i++) {
     ent = level.selected_fx_ents[i];
-    trace = bullettrace(ent.v["origin"], ent.v["origin"] + (0, 0, -2048), false, undefined);
+    trace = bulletTrace(ent.v["origin"], ent.v["origin"] + (0, 0, -2048), false, undefined);
     ent.v["origin"] = trace["position"];
   }
 }
 set_off_exploders() {
   level notify("createfx_exploder_reset");
   exploders = [];
-  for (i = 0; i < level.selected_fx_ents.size; i++) {
+  for(i = 0; i < level.selected_fx_ents.size; i++) {
     ent = level.selected_fx_ents[i];
     if(isDefined(ent.v["exploder"])) {
       exploders[ent.v["exploder"]] = true;
     }
   }
   keys = getarraykeys(exploders);
-  for (i = 0; i < keys.size; i++) {
+  for(i = 0; i < keys.size; i++) {
     exploder(keys[i]);
   }
 }
 turn_off_exploders() {
   level notify("createfx_exploder_reset");
   exploders = [];
-  for (i = 0; i < level.selected_fx_ents.size; i++) {
+  for(i = 0; i < level.selected_fx_ents.size; i++) {
     ent = level.selected_fx_ents[i];
     if(isDefined(ent.v["exploder"])) {
       exploders[ent.v["exploder"]] = true;
     }
   }
   keys = getarraykeys(exploders);
-  for (i = 0; i < keys.size; i++) {
+  for(i = 0; i < keys.size; i++) {
     stop_exploder(keys[i]);
   }
 }
@@ -1325,10 +1325,10 @@ draw_distance() {
     setdvar("createfx_drawdist", "1500");
   }
   player = get_players()[0];
-  for (;;) {
+  for(;;) {
     maxDist = GetDvarInt(#"createfx_drawdist");
     maxDistSqr = maxDist * maxDist;
-    for (i = 0; i < level.createFXent.size; i++) {
+    for(i = 0; i < level.createFXent.size; i++) {
       ent = level.createFXent[i];
       ent.drawn = DistanceSquared(player.origin, ent.v["origin"]) <= maxDistSqr;
       count++;
@@ -1338,7 +1338,7 @@ draw_distance() {
       }
     }
     wait(0.1);
-    while (distance(player.origin, last_pos) < 50) {
+    while(distance(player.origin, last_pos) < 50) {
       wait(0.1);
     }
     last_pos = player.origin;
@@ -1380,7 +1380,7 @@ createfx_save(autosave) {
   flag_clear("createfx_saving");
 }
 createfx_autosave() {
-  for (;;) {
+  for(;;) {
     wait_time = GetDvarInt(#"createfx_autosave_time");
     if(wait_time < 120 || IsString(wait_time)) {
       wait_time = 120;
@@ -1396,7 +1396,7 @@ move_player_around_map_fast() {
   direction = player getPlayerAngles();
   direction_vec = anglesToForward(direction);
   eye = player getEye();
-  trace = bullettrace(eye, eye + vector_scale(direction_vec, 8000), 0, undefined);
+  trace = bulletTrace(eye, eye + vector_scale(direction_vec, 8000), 0, undefined);
   dist = distance(eye, trace["position"]);
   position = eye + vector_scale(direction_vec, (dist - 64));
   player setorigin(position);
@@ -1423,14 +1423,14 @@ move_player_to_next_same_effect(lastSelectEntity) {
     return;
   }
   if(level.selected_fx_ents.size == 1) {
-    for (i = 0; i < level.createFXent.size; i++) {
+    for(i = 0; i < level.createFXent.size; i++) {
       if(isDefined(level.selected_fx[i])) {
         start_index = i + 1;
         deselect_entity(i, ent);
         break;
       }
     }
-    for (i = start_index; i < level.createFXent.size; i++) {
+    for(i = start_index; i < level.createFXent.size; i++) {
       if(ent.v["fxid"] == level.createFXent[i].v["fxid"]) {
         ent = level.createFXent[i];
         select_entity(i, ent);
@@ -1440,7 +1440,7 @@ move_player_to_next_same_effect(lastSelectEntity) {
         return;
       }
     }
-    for (i = 0; i < start_index; i++) {
+    for(i = 0; i < start_index; i++) {
       if(ent.v["fxid"] == level.createFXent[i].v["fxid"]) {
         ent = level.createFXent[i];
         select_entity(i, ent);
@@ -1454,7 +1454,7 @@ move_player_to_next_same_effect(lastSelectEntity) {
     if(isDefined(level.last_ent_moved_to) && !last_selected_entity_has_changed(lastSelectEntity)) {
       ent = level.last_ent_moved_to;
     }
-    for (i = 0; i < level.selected_fx_ents.size; i++) {
+    for(i = 0; i < level.selected_fx_ents.size; i++) {
       if(ent == level.selected_fx_ents[i]) {
         break;
       }
@@ -1471,12 +1471,12 @@ move_player_to_next_same_effect(lastSelectEntity) {
   }
 }
 get_next_ent_with_same_id(index, ent_id) {
-  for (i = index + 1; i < level.createFXent.size; i++) {
+  for(i = index + 1; i < level.createFXent.size; i++) {
     if(ent_id == level.createFXent[i].v["fxid"]) {
       return level.createFXent[i];
     }
   }
-  for (i = 0; i < index; i++) {
+  for(i = 0; i < index; i++) {
     if(ent_id == level.createFXent[i].v["fxid"]) {
       return level.createFXent[i];
     }
@@ -1484,7 +1484,7 @@ get_next_ent_with_same_id(index, ent_id) {
   return undefined;
 }
 get_ent_index(ent) {
-  for (i = 0; i < level.createFXent.size; i++) {
+  for(i = 0; i < level.createFXent.size; i++) {
     if(ent == level.createFXent[i]) {
       return i;
     }
@@ -1497,7 +1497,7 @@ select_ents_by_property(property, add_to_selection) {
   if(!isDefined(add_to_selection)) {
     clear_entity_selection();
   }
-  for (i = 0; i < level.createFXent.size; i++) {
+  for(i = 0; i < level.createFXent.size; i++) {
     if(isDefined(level.createFXent[i].v[property])) {
       if(level.createFXent[i].v[property] == prop_to_match) {
         select_entity(i, level.createFXent[i]);
@@ -1510,12 +1510,12 @@ print_ambient_fx_inventory() {
   ent_list = [];
   fx_list_count = [];
   println("\n\n^2INVENTORY OF AMBIENT EFFECTS: ");
-  for (i = 0; i < level.createFXent.size; i++) {
+  for(i = 0; i < level.createFXent.size; i++) {
     ent_list[i] = level.createFXent[i].v["fxid"];
   }
-  for (i = 0; i < fx_list.size; i++) {
+  for(i = 0; i < fx_list.size; i++) {
     count = 0;
-    for (j = 0; j < ent_list.size; j++) {
+    for(j = 0; j < ent_list.size; j++) {
       if(fx_list[i] == ent_list[j]) {
         count++;
         ent_list[j] = "";
@@ -1523,8 +1523,8 @@ print_ambient_fx_inventory() {
     }
     fx_list_count[i] = count;
   }
-  for (i = 0; i < fx_list_count.size - 1; i++) {
-    for (j = i + 1; j < fx_list_count.size; j++) {
+  for(i = 0; i < fx_list_count.size - 1; i++) {
+    for(j = i + 1; j < fx_list_count.size; j++) {
       if(fx_list_count[j] < fx_list_count[i]) {
         temp_count = fx_list_count[i];
         temp_id = fx_list[i];
@@ -1535,7 +1535,7 @@ print_ambient_fx_inventory() {
       }
     }
   }
-  for (i = 0; i < fx_list_count.size; i++) {
+  for(i = 0; i < fx_list_count.size; i++) {
     switch (fx_list_count[i]) {
       case 0:
         print("^1");
@@ -1565,7 +1565,7 @@ void() {}
 Callback_PlayerConnect() {
   self waittill("begin");
   if(!isDefined(level.hasSpawned)) {
-    spawnpoints = getentarray("mp_global_intermission", "classname");
+    spawnpoints = getEntArray("mp_global_intermission", "classname");
     assert(spawnpoints.size);
     spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_Random(spawnpoints);
     self.sessionteam = "none";

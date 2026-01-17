@@ -153,7 +153,7 @@ main(bscriptgened, bcsvgened, bsgenabled) {
         break;
     }
 
-    triggers = getentarray(triggertype, "classname");
+    triggers = getEntArray(triggertype, "classname");
 
     for(i = 0; i < triggers.size; i++) {
       if(isDefined(triggers[i].script_prefab_exploder))
@@ -252,8 +252,8 @@ exploder_load(trigger) {
 }
 
 setupexploders() {
-  ents = getentarray("script_brushmodel", "classname");
-  smodels = getentarray("script_model", "classname");
+  ents = getEntArray("script_brushmodel", "classname");
+  smodels = getEntArray("script_model", "classname");
 
   for(i = 0; i < smodels.size; i++)
     ents[ents.size] = smodels[i];
@@ -282,7 +282,7 @@ setupexploders() {
   }
 
   script_exploders = [];
-  potentialexploders = getentarray("script_brushmodel", "classname");
+  potentialexploders = getEntArray("script_brushmodel", "classname");
 
   for(i = 0; i < potentialexploders.size; i++) {
     if(isDefined(potentialexploders[i].script_prefab_exploder))
@@ -292,7 +292,7 @@ setupexploders() {
       script_exploders[script_exploders.size] = potentialexploders[i];
   }
 
-  potentialexploders = getentarray("script_model", "classname");
+  potentialexploders = getEntArray("script_model", "classname");
 
   for(i = 0; i < potentialexploders.size; i++) {
     if(isDefined(potentialexploders[i].script_prefab_exploder))
@@ -302,7 +302,7 @@ setupexploders() {
       script_exploders[script_exploders.size] = potentialexploders[i];
   }
 
-  potentialexploders = getentarray("item_health", "classname");
+  potentialexploders = getEntArray("item_health", "classname");
 
   for(i = 0; i < potentialexploders.size; i++) {
     if(isDefined(potentialexploders[i].script_prefab_exploder))

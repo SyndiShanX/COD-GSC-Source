@@ -84,7 +84,7 @@ main() {
   level._effect["debri_explosion"] = LoadFX("explosions/debri_explosion");
   level._effect["falling_debrigulag_evac"] = LoadFX("misc/falling_debris_gulag_evac");
 
-  //Scripted Lights & Stuff
+  //Scripted Lights &Stuff
   level._effect["dlight_blue"] = LoadFX("misc/dlight_blue");
   level._effect["dlight_blue_flicker"] = LoadFX("misc/dlight_blue_flicker");
   level._effect["dlight_red"] = LoadFX("misc/dlight_red");
@@ -160,12 +160,11 @@ main() {
   level._effect["cloud_bank_cloud_filler_light_gulag"] = LoadFX("weather/cloud_bank_cloud_filler_light_gulag");
   level._effect["gulag_clouds"] = LoadFX("weather/gulag_clouds");
 
-  if(!isdefined(level.script))
+  if(!isDefined(level.script))
     level.script = ToLower(GetDvar("mapname"));
 
   if(!getdvarint("r_reflectionProbeGenerate"))
     maps\createfx\gulag_fx::main();
 
   thread treadfx_override();
-
 }

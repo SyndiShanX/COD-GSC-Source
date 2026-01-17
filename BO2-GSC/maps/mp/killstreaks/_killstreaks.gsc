@@ -90,7 +90,7 @@ registerkillstreak(killstreaktype, killstreakweapon, killstreakmenuname, killstr
   assert(isDefined(killstreaktype), "Can not register a killstreak without a valid type name.");
   assert(!isDefined(level.killstreaks[killstreaktype]), "Killstreak " + killstreaktype + " already registered");
   assert(isDefined(killstreakusefunction), "No use function defined for killstreak " + killstreaktype);
-  level.killstreaks[killstreaktype] = spawnstruct();
+  level.killstreaks[killstreaktype] = spawnStruct();
   level.killstreaks[killstreaktype].killstreaklevel = int(tablelookup("mp/statstable.csv", 4, killstreakmenuname, 5));
   level.killstreaks[killstreaktype].momentumcost = int(tablelookup("mp/statstable.csv", 4, killstreakmenuname, 16));
   level.killstreaks[killstreaktype].iconmaterial = tablelookup("mp/statstable.csv", 4, killstreakmenuname, 6);
@@ -337,8 +337,8 @@ streaknotify(streakval) {
   self endon("disconnect");
   self waittill("playerKilledChallengesProcessed");
   wait 0.05;
-  notifydata = spawnstruct();
-  notifydata.titlelabel = & "MP_KILLSTREAK_N";
+  notifydata = spawnStruct();
+  notifydata.titlelabel = &"MP_KILLSTREAK_N";
   notifydata.titletext = streakval;
   notifydata.iconheight = 32;
   self maps\mp\gametypes\_hud_message::notifymessage(notifydata);
@@ -1087,10 +1087,8 @@ triggerkillstreak(killstreaktype, isfrominventory) {
     if(!timeleft)
       timeleft = 1;
 
-    self iprintlnbold(&"MP_UNAVAILABLE_FOR_N", " " + timeleft + " ", & "EXE_SECONDS");
-  } else if([
-      [level.killstreaks[killstreaktype].usefunction]
-    ](killstreaktype)) {
+    self iprintlnbold(&"MP_UNAVAILABLE_FOR_N", " " + timeleft + " ", &"EXE_SECONDS");
+  } else if([[level.killstreaks[killstreaktype].usefunction]](killstreaktype)) {
     if(isDefined(self)) {
       if(!isDefined(self.pers[level.killstreaks[killstreaktype].usagekey]))
         self.pers[level.killstreaks[killstreaktype].usagekey] = 0;
@@ -1309,7 +1307,7 @@ onjoinedteam() {
 
 createkillstreaktimerforteam(killstreaktype, xposition, team) {
   assert(isDefined(level.killstreak_timers[team]));
-  killstreaktimer = spawnstruct();
+  killstreaktimer = spawnStruct();
   killstreaktimer.team = team;
   killstreaktimer.icon = createservericon(level.killstreaks[killstreaktype].iconmaterial, 36, 36, team);
   killstreaktimer.icon.horzalign = "user_left";

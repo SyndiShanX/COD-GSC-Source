@@ -105,7 +105,7 @@ startFlashing() {
     return;
   }
   self.isFlashing = true;
-  while (self.isFlashing) {
+  while(self.isFlashing) {
     self fadeOverTime(0.75);
     self.alpha = 0.35 * self.baseAlpha;
     wait(0.75);

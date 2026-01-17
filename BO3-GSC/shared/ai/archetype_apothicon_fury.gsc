@@ -36,12 +36,10 @@ class animationadjustmentinfoz {
   var adjustmentstarted;
   var readjustmentstarted;
 
-
   constructor() {
     adjustmentstarted = 0;
     readjustmentstarted = 0;
   }
-
 
   destructor() {}
 
@@ -50,21 +48,16 @@ class animationadjustmentinfoz {
 class animationadjustmentinfoxy {
   var adjustmentstarted;
 
-
   constructor() {
     adjustmentstarted = 0;
   }
-
 
   destructor() {}
 
 }
 
 class jukeinfo {
-
-
   constructor() {}
-
 
   destructor() {}
 
@@ -75,9 +68,9 @@ class jukeinfo {
 function autoexec init() {
   initapothiconfurybehaviorsandasm();
   apothiconfuryinterface::registerapothiconfuryinterfaceattributes();
-  spawner::add_archetype_spawn_function("apothicon_fury", & apothiconfuryblackboardinit);
-  spawner::add_archetype_spawn_function("apothicon_fury", & zombie_utility::zombiespawnsetup);
-  spawner::add_archetype_spawn_function("apothicon_fury", & apothiconfuryspawnsetup);
+  spawner::add_archetype_spawn_function("apothicon_fury", &apothiconfuryblackboardinit);
+  spawner::add_archetype_spawn_function("apothicon_fury", &zombie_utility::zombiespawnsetup);
+  spawner::add_archetype_spawn_function("apothicon_fury", &apothiconfuryspawnsetup);
   if(ai::shouldregisterclientfieldforarchetype("apothicon_fury")) {
     clientfield::register("actor", "fury_fire_damage", 15000, getminbitcountfornum(7), "counter");
     clientfield::register("actor", "furious_level", 15000, 1, "int");
@@ -88,32 +81,32 @@ function autoexec init() {
 }
 
 function private initapothiconfurybehaviorsandasm() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconCanJuke", & apothiconcanjuke);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconJukeInit", & apothiconjukeinit);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconPreemptiveJukeService", & apothiconpreemptivejukeservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconPreemptiveJukePending", & apothiconpreemptivejukepending);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconPreemptiveJukeDone", & apothiconpreemptivejukedone);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconMoveStart", & apothiconmovestart);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconMoveUpdate", & apothiconmoveupdate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconCanMeleeAttack", & apothiconcanmeleeattack);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconShouldMeleeCondition", & apothiconshouldmeleecondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconCanBamf", & apothiconcanbamf);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconCanBamfAfterJuke", & apothiconcanbamfafterjuke);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconBamfInit", & apothiconbamfinit);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconShouldTauntAtPlayer", & apothiconshouldtauntatplayer);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconTauntAtPlayerEvent", & apothicontauntatplayerevent);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconFuriousModeInit", & apothiconfuriousmodeinit);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconKnockdownService", & apothiconknockdownservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconDeathStart", & apothicondeathstart);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconDeathTerminate", & apothicondeathterminate);
-  animationstatenetwork::registeranimationmocomp("mocomp_teleport@apothicon_fury", & mocompapothiconfuryteleportinit, undefined, & mocompapothiconfuryteleportterminate);
-  animationstatenetwork::registeranimationmocomp("mocomp_juke@apothicon_fury", & mocompapothiconfuryjukeinit, & mocompapothiconfuryjukeupdate, & mocompapothiconfuryjuketerminate);
-  animationstatenetwork::registeranimationmocomp("mocomp_bamf@apothicon_fury", & mocompapothiconfurybamfinit, & mocompapothiconfurybamfupdate, & mocompapothiconfurybamfterminate);
-  animationstatenetwork::registernotetrackhandlerfunction("start_effect", & apothiconbamfout);
-  animationstatenetwork::registernotetrackhandlerfunction("end_effect", & apothiconbamfin);
-  animationstatenetwork::registernotetrackhandlerfunction("bamf_land", & apothiconbamfland);
-  animationstatenetwork::registernotetrackhandlerfunction("start_dissolve", & apothicondeathdissolve);
-  animationstatenetwork::registernotetrackhandlerfunction("dissolved", & apothicondeathdissolved);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconCanJuke", &apothiconcanjuke);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconJukeInit", &apothiconjukeinit);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconPreemptiveJukeService", &apothiconpreemptivejukeservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconPreemptiveJukePending", &apothiconpreemptivejukepending);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconPreemptiveJukeDone", &apothiconpreemptivejukedone);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconMoveStart", &apothiconmovestart);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconMoveUpdate", &apothiconmoveupdate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconCanMeleeAttack", &apothiconcanmeleeattack);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconShouldMeleeCondition", &apothiconshouldmeleecondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconCanBamf", &apothiconcanbamf);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconCanBamfAfterJuke", &apothiconcanbamfafterjuke);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconBamfInit", &apothiconbamfinit);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconShouldTauntAtPlayer", &apothiconshouldtauntatplayer);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconTauntAtPlayerEvent", &apothicontauntatplayerevent);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconFuriousModeInit", &apothiconfuriousmodeinit);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconKnockdownService", &apothiconknockdownservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconDeathStart", &apothicondeathstart);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconDeathTerminate", &apothicondeathterminate);
+  animationstatenetwork::registeranimationmocomp("mocomp_teleport@apothicon_fury", &mocompapothiconfuryteleportinit, undefined, &mocompapothiconfuryteleportterminate);
+  animationstatenetwork::registeranimationmocomp("mocomp_juke@apothicon_fury", &mocompapothiconfuryjukeinit, &mocompapothiconfuryjukeupdate, &mocompapothiconfuryjuketerminate);
+  animationstatenetwork::registeranimationmocomp("mocomp_bamf@apothicon_fury", &mocompapothiconfurybamfinit, &mocompapothiconfurybamfupdate, &mocompapothiconfurybamfterminate);
+  animationstatenetwork::registernotetrackhandlerfunction("start_effect", &apothiconbamfout);
+  animationstatenetwork::registernotetrackhandlerfunction("end_effect", &apothiconbamfin);
+  animationstatenetwork::registernotetrackhandlerfunction("bamf_land", &apothiconbamfland);
+  animationstatenetwork::registernotetrackhandlerfunction("start_dissolve", &apothicondeathdissolve);
+  animationstatenetwork::registernotetrackhandlerfunction("dissolved", &apothicondeathdissolved);
 }
 
 function private apothiconfuryblackboardinit() {
@@ -122,11 +115,11 @@ function private apothiconfuryblackboardinit() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_apothicon_bamf_distance", undefined, & getbamfmeleedistance);
+  blackboard::registerblackboardattribute(self, "_apothicon_bamf_distance", undefined, &getbamfmeleedistance);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_idgun_damage_direction", "back", & bb_idgungetdamagedirection);
+  blackboard::registerblackboardattribute(self, "_idgun_damage_direction", "back", &bb_idgungetdamagedirection);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
@@ -136,7 +129,7 @@ function private apothiconfuryblackboardinit() {
   }
   self aiutility::registerutilityblackboardattributes();
   ai::createinterfaceforentity(self);
-  self.___archetypeonanimscriptedcallback = & apothiconfuryonanimscriptedcallback;
+  self.___archetypeonanimscriptedcallback = &apothiconfuryonanimscriptedcallback;
   self finalizetrackedblackboardattributes();
 }
 
@@ -148,8 +141,8 @@ function private apothiconfuryspawnsetup() {
   self setpitchorient();
   self pushactors(1);
   self.skipautoragdoll = 1;
-  aiutility::addaioverridedamagecallback(self, & apothicondamagecallback);
-  aiutility::addaioverridekilledcallback(self, & apothiconondeath);
+  aiutility::addaioverridedamagecallback(self, &apothicondamagecallback);
+  aiutility::addaioverridekilledcallback(self, &apothiconondeath);
   self.zigzag_distance_min = 300;
   self.zigzag_distance_max = 700;
   self.isfurious = 0;
@@ -170,7 +163,7 @@ function apothicondeathdissolve(entity) {
     return;
   }
   a_zombies = getaiarchetypearray("zombie");
-  a_filtered_zombies = array::filter(a_zombies, 0, & apothiconzombieeligibleforknockdown, entity, entity.origin);
+  a_filtered_zombies = array::filter(a_zombies, 0, &apothiconzombieeligibleforknockdown, entity, entity.origin);
   if(a_filtered_zombies.size > 0) {
     foreach(zombie in a_filtered_zombies) {
       apothiconknockdownzombie(entity, zombie);
@@ -190,7 +183,7 @@ function private mocompapothiconfuryteleportinit(entity, mocompanim, mocompanimb
     rate = 2;
   }
   entity asmsetanimationrate(rate);
-  assert(isdefined(entity.traverseendnode));
+  assert(isDefined(entity.traverseendnode));
   entity animmode("noclip", 0);
   entity notsolid();
   entity.blockingpain = 1;
@@ -199,7 +192,7 @@ function private mocompapothiconfuryteleportinit(entity, mocompanim, mocompanimb
 }
 
 function private mocompapothiconfuryteleportterminate(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
-  if(!isdefined(entity.traverseendnode)) {
+  if(!isDefined(entity.traverseendnode)) {
     return;
   }
   entity forceteleport(entity.traverseendnode.origin, entity.angles);
@@ -213,7 +206,7 @@ function private mocompapothiconfuryteleportterminate(entity, mocompanim, mocomp
 
 function mocompapothiconfuryjukeinit(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
   entity.isjuking = 1;
-  if(isdefined(entity.jukeinfo)) {
+  if(isDefined(entity.jukeinfo)) {
     entity orientmode("face angle", entity.jukeinfo.jukestartangles);
   } else {
     entity orientmode("face angle", entity.angles[1]);
@@ -284,7 +277,7 @@ function mocompapothiconfuryjukeupdate(entity, mocompanim, mocompanimblendouttim
   if(entity.animationadjustmentinfoz.adjustmentstarted && animtime < entity.animationadjustmentinfoz.stoptime) {
     adjustedorigin = entity.origin + (0, 0, entity.animationadjustmentinfoz.stepsize);
     entity forceteleport(adjustedorigin, entity.angles);
-  } else if(isdefined(entity.enemy)) {
+  } else if(isDefined(entity.enemy)) {
     entity orientmode("face direction", entity.enemy.origin - entity.origin);
   }
   recordcircle(entity.animationadjustmentinfoz.landposonground, 8, (0, 1, 0), "", entity);
@@ -299,28 +292,28 @@ function mocompapothiconfuryjuketerminate(entity, mocompanim, mocompanimblendout
   entity.pushable = 1;
   entity.jukeinfo = undefined;
   recordcircle(entity.animationadjustmentinfoz.landposonground, 8, (0, 1, 0), "", entity);
-  if(isdefined(entity.enemy)) {
+  if(isDefined(entity.enemy)) {
     entity orientmode("face direction", entity.enemy.origin - entity.origin);
   }
 }
 
 function private runbamfreadjustmentanalysis(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
-  assert(isdefined(entity.animationadjustmentinfoz.adjustmentstarted) && entity.animationadjustmentinfoz.adjustmentstarted);
-  if(isdefined(entity.animationadjustmentinfoz.readjustmentstarted) && entity.animationadjustmentinfoz.readjustmentstarted) {
+  assert(isDefined(entity.animationadjustmentinfoz.adjustmentstarted) && entity.animationadjustmentinfoz.adjustmentstarted);
+  if(isDefined(entity.animationadjustmentinfoz.readjustmentstarted) && entity.animationadjustmentinfoz.readjustmentstarted) {
     return;
   }
   readjustmentanimtime = 0.45;
   animtime = entity getanimtime(mocompanim);
   if(animtime >= readjustmentanimtime && entity.enemy === entity.animationadjustmentinfoz.enemy) {
     meleestartposition = entity.animationadjustmentinfoz.landposonground;
-    if(isdefined(entity.enemy.last_valid_position)) {
+    if(isDefined(entity.enemy.last_valid_position)) {
       meleeendposition = entity.enemy.last_valid_position;
     } else {
       meleeendposition = entity.enemy.origin;
-      enemyforwarddir = anglestoforward(entity.enemy.angles);
+      enemyforwarddir = anglesToForward(entity.enemy.angles);
       newmeleeendposition = meleeendposition + (enemyforwarddir * randomintrange(30, 50));
       newmeleeendposition = getclosestpointonnavmesh(newmeleeendposition, 20, 50);
-      if(isdefined(newmeleeendposition)) {
+      if(isDefined(newmeleeendposition)) {
         meleeendposition = newmeleeendposition;
       }
     }
@@ -363,12 +356,12 @@ function private runbamfreadjustmentanalysis(entity, mocompanim, mocompanimblend
     trace = groundtrace(tracestart, traceend, 0, entity, 1, 1);
     landposonground = trace["position"];
     landposonground = getclosestpointonnavmesh(landposonground, 100, 50);
-    if(!isdefined(landposonground)) {
+    if(!isDefined(landposonground)) {
       return;
     }
     recordcircle(landposonground, 8, (0, 1, 0), "", entity);
     recordline(landpos, landposonground, (0, 1, 0), "", entity);
-    assert(isdefined(entity.animationadjustmentinfoz));
+    assert(isDefined(entity.animationadjustmentinfoz));
     starttime = readjustmentanimtime;
     stoptime = entity.animationadjustmentinfoz.stoptime;
     entity.animationadjustmentinfoz2 = new animationadjustmentinfoz();
@@ -403,7 +396,7 @@ function private runbamfreadjustmentanalysis(entity, mocompanim, mocompanimblend
 }
 
 function mocompapothiconfurybamfinit(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
-  assert(isdefined(entity.enemy));
+  assert(isDefined(entity.enemy));
   entity.animationadjustmentinfoz = undefined;
   entity.animationadjustmentinfoz2 = undefined;
   entity.animationadjustmentinfoxy = undefined;
@@ -439,7 +432,7 @@ function mocompapothiconfurybamfinit(entity, mocompanim, mocompanimblendouttime,
   trace = groundtrace(tracestart, traceend, 0, entity, 1, 1);
   landposonground = trace["position"];
   landposonground = getclosestpointonnavmesh(landposonground, 100, 25);
-  if(!isdefined(landposonground)) {
+  if(!isDefined(landposonground)) {
     landposonground = entity.enemy.origin;
   }
   recordcircle(landposonground, 8, (0, 1, 0), "", entity);
@@ -482,8 +475,8 @@ function mocompapothiconfurybamfinit(entity, mocompanim, mocompanimblendouttime,
 }
 
 function mocompapothiconfurybamfupdate(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
-  assert(isdefined(entity.animationadjustmentinfoz));
-  if(!isdefined(entity.enemy)) {
+  assert(isDefined(entity.animationadjustmentinfoz));
+  if(!isDefined(entity.enemy)) {
     return;
   }
   animtime = entity getanimtime(mocompanim);
@@ -495,16 +488,16 @@ function mocompapothiconfurybamfupdate(entity, mocompanim, mocompanimblendouttim
   if(entity.animationadjustmentinfoz.adjustmentstarted && animtime < entity.animationadjustmentinfoz.stoptime) {
     adjustedorigin = entity.origin + (0, 0, entity.animationadjustmentinfoz.stepsize);
     runbamfreadjustmentanalysis(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration);
-    if(isdefined(entity.animationadjustmentinfoz.readjustmentstarted) && entity.animationadjustmentinfoz.readjustmentstarted) {
-      if(isdefined(entity.animationadjustmentinfoz2)) {
+    if(isDefined(entity.animationadjustmentinfoz.readjustmentstarted) && entity.animationadjustmentinfoz.readjustmentstarted) {
+      if(isDefined(entity.animationadjustmentinfoz2)) {
         adjustedorigin = adjustedorigin + (0, 0, entity.animationadjustmentinfoz2.stepsize);
       }
-      if(isdefined(entity.animationadjustmentinfoxy)) {
+      if(isDefined(entity.animationadjustmentinfoxy)) {
         adjustedorigin = adjustedorigin + (entity.animationadjustmentinfoxy.xydirection * entity.animationadjustmentinfoxy.stepsize);
       }
     }
     entity forceteleport(adjustedorigin, entity.angles);
-  } else if(isdefined(entity.enemy)) {
+  } else if(isDefined(entity.enemy)) {
     entity orientmode("face direction", entity.enemy.origin - entity.origin);
   }
 }
@@ -523,7 +516,7 @@ function mocompapothiconfurybamfterminate(entity, mocompanim, mocompanimblendout
   entity.jukeinfo = undefined;
   if(!ispointonnavmesh(entity.origin)) {
     clamptonavmeshlocation = getclosestpointonnavmesh(entity.origin, 100, 25);
-    if(isdefined(clamptonavmeshlocation)) {
+    if(isDefined(clamptonavmeshlocation)) {
       entity forceteleport(clamptonavmeshlocation);
     }
   }
@@ -534,16 +527,16 @@ function apothiconcanmeleeattack(entity) {
 }
 
 function apothiconshouldmeleecondition(behaviortreeentity) {
-  if(isdefined(behaviortreeentity.enemyoverride) && isdefined(behaviortreeentity.enemyoverride[1])) {
+  if(isDefined(behaviortreeentity.enemyoverride) && isDefined(behaviortreeentity.enemyoverride[1])) {
     return false;
   }
-  if(!isdefined(behaviortreeentity.enemy)) {
+  if(!isDefined(behaviortreeentity.enemy)) {
     return false;
   }
-  if(isdefined(behaviortreeentity.marked_for_death)) {
+  if(isDefined(behaviortreeentity.marked_for_death)) {
     return false;
   }
-  if(isdefined(behaviortreeentity.ignoremelee) && behaviortreeentity.ignoremelee) {
+  if(isDefined(behaviortreeentity.ignoremelee) && behaviortreeentity.ignoremelee) {
     return false;
   }
   if(distancesquared(behaviortreeentity.origin, behaviortreeentity.enemy.origin) > 10000) {
@@ -568,16 +561,16 @@ function apothiconcanbamfinternal(entity, bamfafterjuke = 0) {
   if(!ai::getaiattribute(entity, "can_bamf")) {
     return false;
   }
-  if(!isdefined(entity.enemy)) {
+  if(!isDefined(entity.enemy)) {
     return false;
   }
   if(!isplayer(entity.enemy)) {
     return false;
   }
-  if(isdefined(entity.juking) && entity.juking) {
+  if(isDefined(entity.juking) && entity.juking) {
     return false;
   }
-  if(isdefined(entity.isbamfing) && entity.isbamfing) {
+  if(isDefined(entity.isbamfing) && entity.isbamfing) {
     return false;
   }
   if(!bamfafterjuke) {
@@ -592,7 +585,7 @@ function apothiconcanbamfinternal(entity, bamfafterjuke = 0) {
       }
     }
   }
-  assert(isdefined(entity.enemy));
+  assert(isDefined(entity.enemy));
   enemyorigin = entity.enemy.origin;
   apothiconfurys = getaiarchetypearray("apothicon_fury");
   furiesnearplayer = 0;
@@ -641,11 +634,11 @@ function getbamfmeleedistance(entity) {
 }
 
 function apothiconbamfinit(entity) {
-  jukeinfo = spawnstruct();
+  jukeinfo = spawnStruct();
   jukeinfo.origin = entity.origin;
   jukeinfo.entity = entity;
   blackboard::addblackboardevent("apothicon_fury_bamf", jukeinfo, 4500);
-  if(isdefined(level.nextbamfmeleetimemin) && isdefined(level.nextbamfmeleetimemax)) {
+  if(isDefined(level.nextbamfmeleetimemin) && isDefined(level.nextbamfmeleetimemax)) {
     entity.nextbamfmeleetime = gettime() + randomfloatrange(level.nextbamfmeleetimemin, level.nextbamfmeleetimemax);
   } else {
     entity.nextbamfmeleetime = gettime() + randomfloatrange(4500, 6000);
@@ -654,21 +647,21 @@ function apothiconbamfinit(entity) {
 
 function apothiconshouldtauntatplayer(entity) {
   tauntevents = blackboard::getblackboardevents("apothicon_fury_taunt");
-  if(isdefined(tauntevents) && tauntevents.size) {
+  if(isDefined(tauntevents) && tauntevents.size) {
     return false;
   }
   return true;
 }
 
 function apothicontauntatplayerevent(entity) {
-  jukeinfo = spawnstruct();
+  jukeinfo = spawnStruct();
   jukeinfo.origin = entity.origin;
   jukeinfo.entity = entity;
   blackboard::addblackboardevent("apothicon_fury_taunt", jukeinfo, 9500);
 }
 
 function bb_idgungetdamagedirection() {
-  if(isdefined(self.damage_direction)) {
+  if(isDefined(self.damage_direction)) {
     return self.damage_direction;
   }
   return self aiutility::bb_getdamagedirection();
@@ -678,11 +671,11 @@ function apothiconbamfland(entity) {
   if(entity.archetype != "apothicon_fury") {
     return;
   }
-  if(isdefined(entity.enemy)) {
+  if(isDefined(entity.enemy)) {
     entity orientmode("face direction", entity.enemy.origin - entity.origin);
   }
   entity clientfield::increment("bamf_land");
-  if(isdefined(entity.enemy) && isplayer(entity.enemy) && distancesquared(entity.enemy.origin, entity.origin) <= (250 * 250)) {
+  if(isDefined(entity.enemy) && isplayer(entity.enemy) && distancesquared(entity.enemy.origin, entity.origin) <= (250 * 250)) {
     entity.enemy dodamage(25, entity.origin, entity, entity, undefined, "MOD_MELEE");
   }
   physicsexplosionsphere(entity.origin, 100, 15, 10);
@@ -694,14 +687,14 @@ function apothiconmovestart(entity) {
 }
 
 function apothiconmoveupdate(entity) {
-  if(isdefined(entity.move_anim_end_time) && gettime() >= entity.move_anim_end_time) {
+  if(isDefined(entity.move_anim_end_time) && gettime() >= entity.move_anim_end_time) {
     entity.move_anim_end_time = undefined;
     return;
   }
-  if(!(isdefined(entity.missinglegs) && entity.missinglegs) && (gettime() - entity.movetime) > 1000) {
+  if(!(isDefined(entity.missinglegs) && entity.missinglegs) && (gettime() - entity.movetime) > 1000) {
     distsq = distance2dsquared(entity.origin, entity.moveorigin);
     if(distsq < 144) {
-      if(isdefined(entity.cant_move_cb)) {
+      if(isDefined(entity.cant_move_cb)) {
         entity[[entity.cant_move_cb]]();
       }
     } else {
@@ -713,10 +706,10 @@ function apothiconmoveupdate(entity) {
 }
 
 function apothiconknockdownservice(entity) {
-  if(isdefined(entity.isjuking) && entity.isjuking) {
+  if(isDefined(entity.isjuking) && entity.isjuking) {
     return;
   }
-  if(isdefined(entity.isbamfing) && entity.isbamfing) {
+  if(isDefined(entity.isbamfing) && entity.isbamfing) {
     return;
   }
   velocity = entity getvelocity();
@@ -726,7 +719,7 @@ function apothiconknockdownservice(entity) {
   speed = move_dist_sq / predict_time;
   if(speed >= 10) {
     a_zombies = getaiarchetypearray("zombie");
-    a_filtered_zombies = array::filter(a_zombies, 0, & apothiconzombieeligibleforknockdown, entity, predicted_pos);
+    a_filtered_zombies = array::filter(a_zombies, 0, &apothiconzombieeligibleforknockdown, entity, predicted_pos);
     if(a_filtered_zombies.size > 0) {
       foreach(zombie in a_filtered_zombies) {
         apothiconknockdownzombie(entity, zombie);
@@ -739,7 +732,7 @@ function private apothiconzombieeligibleforknockdown(zombie, thrasher, predicted
   if(zombie.knockdown === 1) {
     return false;
   }
-  if(isdefined(zombie.missinglegs) && zombie.missinglegs) {
+  if(isDefined(zombie.missinglegs) && zombie.missinglegs) {
     return false;
   }
   knockdown_dist_sq = 2304;
@@ -748,7 +741,7 @@ function private apothiconzombieeligibleforknockdown(zombie, thrasher, predicted
     return false;
   }
   origin = thrasher.origin;
-  facing_vec = anglestoforward(thrasher.angles);
+  facing_vec = anglesToForward(thrasher.angles);
   enemy_vec = zombie.origin - origin;
   enemy_yaw_vec = (enemy_vec[0], enemy_vec[1], 0);
   facing_yaw_vec = (facing_vec[0], facing_vec[1], 0);
@@ -766,7 +759,7 @@ function apothiconknockdownzombie(entity, zombie) {
   zombie.knockdown_type = "knockdown_shoved";
   zombie_to_thrasher = entity.origin - zombie.origin;
   zombie_to_thrasher_2d = vectornormalize((zombie_to_thrasher[0], zombie_to_thrasher[1], 0));
-  zombie_forward = anglestoforward(zombie.angles);
+  zombie_forward = anglesToForward(zombie.angles);
   zombie_forward_2d = vectornormalize((zombie_forward[0], zombie_forward[1], 0));
   zombie_right = anglestoright(zombie.angles);
   zombie_right_2d = vectornormalize((zombie_right[0], zombie_right[1], 0));
@@ -799,13 +792,13 @@ function apothiconshouldswitchtofuriousmode(entity) {
   if(!ai::getaiattribute(entity, "can_be_furious")) {
     return false;
   }
-  if(isdefined(entity.isfurious) && entity.isfurious) {
+  if(isDefined(entity.isfurious) && entity.isfurious) {
     return false;
   }
   apothiconfurys = getaiarchetypearray("apothicon_fury");
   count = 0;
   foreach(apothiconfury in apothiconfurys) {
-    if(isdefined(apothiconfury.isfurious) && apothiconfury.isfurious) {
+    if(isDefined(apothiconfury.isfurious) && apothiconfury.isfurious) {
       count++;
     }
   }
@@ -823,7 +816,7 @@ function apothiconfuriousmodeinit(entity) {
   if(!apothiconshouldswitchtofuriousmode(entity)) {
     return;
   }
-  furiousinfo = spawnstruct();
+  furiousinfo = spawnStruct();
   furiousinfo.origin = entity.origin;
   furiousinfo.entity = entity;
   blackboard::addblackboardevent("apothicon_furious_mode", furiousinfo, randomintrange(5000, 7000));
@@ -835,13 +828,13 @@ function apothiconfuriousmodeinit(entity) {
 }
 
 function apothiconpreemptivejukeservice(entity) {
-  if(!(isdefined(entity.isfurious) && entity.isfurious)) {
+  if(!(isDefined(entity.isfurious) && entity.isfurious)) {
     return false;
   }
-  if(isdefined(entity.nextjuketime) && entity.nextjuketime > gettime()) {
+  if(isDefined(entity.nextjuketime) && entity.nextjuketime > gettime()) {
     return false;
   }
-  if(isdefined(entity.enemy)) {
+  if(isDefined(entity.enemy)) {
     if(!isplayer(entity.enemy)) {
       return false;
     }
@@ -855,7 +848,7 @@ function apothiconpreemptivejukeservice(entity) {
 }
 
 function apothiconpreemptivejukepending(entity) {
-  return isdefined(entity.apothiconpreemptivejuke) && entity.apothiconpreemptivejuke;
+  return isDefined(entity.apothiconpreemptivejuke) && entity.apothiconpreemptivejuke;
 }
 
 function apothiconpreemptivejukedone(entity) {
@@ -866,16 +859,16 @@ function apothiconcanjuke(entity) {
   if(!ai::getaiattribute(entity, "can_juke")) {
     return false;
   }
-  if(!isdefined(entity.enemy) || !isplayer(entity.enemy)) {
+  if(!isDefined(entity.enemy) || !isplayer(entity.enemy)) {
     return false;
   }
-  if(isdefined(entity.isjuking) && entity.isjuking) {
+  if(isDefined(entity.isjuking) && entity.isjuking) {
     return false;
   }
-  if(isdefined(entity.apothiconpreemptivejuke) && entity.apothiconpreemptivejuke) {
+  if(isDefined(entity.apothiconpreemptivejuke) && entity.apothiconpreemptivejuke) {
     return true;
   }
-  if(isdefined(entity.nextjuketime) && gettime() < entity.nextjuketime) {
+  if(isDefined(entity.nextjuketime) && gettime() < entity.nextjuketime) {
     return false;
   }
   jukeevents = blackboard::getblackboardevents("apothicon_fury_juke");
@@ -894,14 +887,14 @@ function apothiconcanjuke(entity) {
   if(!util::within_fov(entity.origin, entity.angles, entity.enemy.origin, 0.642)) {
     return false;
   }
-  if(isdefined(entity.jukemaxdistance) && isdefined(entity.enemy)) {
+  if(isDefined(entity.jukemaxdistance) && isDefined(entity.enemy)) {
     maxdistsquared = entity.jukemaxdistance * entity.jukemaxdistance;
     if(distance2dsquared(entity.origin, entity.enemy.origin) > maxdistsquared) {
       return false;
     }
   }
   jukeinfo = calculatejukeinfo(entity);
-  if(isdefined(jukeinfo)) {
+  if(isDefined(jukeinfo)) {
     return true;
   }
   return false;
@@ -909,17 +902,17 @@ function apothiconcanjuke(entity) {
 
 function apothiconjukeinit(entity) {
   jukeinfo = calculatejukeinfo(entity);
-  assert(isdefined(jukeinfo));
+  assert(isDefined(jukeinfo));
   blackboard::setblackboardattribute(entity, "_juke_distance", jukeinfo.jukedistance);
   blackboard::setblackboardattribute(entity, "_juke_direction", jukeinfo.jukedirection);
   entity clearpath();
   entity notify("bhtn_action_notify", "apothicon_fury_juke");
-  jukeinfo = spawnstruct();
+  jukeinfo = spawnStruct();
   jukeinfo.origin = entity.origin;
   jukeinfo.entity = entity;
   blackboard::addblackboardevent("apothicon_fury_juke", jukeinfo, 6000);
   entity.nextpreemptivejukeads = randomfloatrange(0.6, 0.8);
-  if(isdefined(level.nextjukemeleetimemin) && isdefined(level.nextjukemeleetimemax)) {
+  if(isDefined(level.nextjukemeleetimemin) && isDefined(level.nextjukemeleetimemax)) {
     entity.nextjukemeleetime = gettime() + randomfloatrange(level.nextjukemeleetimemin, level.nextjukemeleetimemax);
   } else {
     entity.nextjuketime = gettime() + randomfloatrange(7000, 10000);
@@ -930,14 +923,14 @@ function validatejuke(entity, entityradius, jukevector) {
   velocity = entity getvelocity();
   predictedpos = entity.origin + (velocity * 0.1);
   jukelandpos = predictedpos + jukevector;
-  if(!isdefined(jukelandpos)) {
+  if(!isDefined(jukelandpos)) {
     return undefined;
   }
   tracestart = jukelandpos + vectorscale((0, 0, 1), 70);
   traceend = jukelandpos + (vectorscale((0, 0, -1), 70));
   trace = groundtrace(tracestart, traceend, 0, entity, 1, 1);
   landposonground = trace["position"];
-  if(!isdefined(landposonground)) {
+  if(!isDefined(landposonground)) {
     return undefined;
   }
   if(!ispointonnavmesh(landposonground)) {
@@ -964,22 +957,22 @@ function private getjukevector(entity, jukeanimalias) {
 }
 
 function private calculatejukeinfo(entity) {
-  if(isdefined(entity.jukeinfo)) {
+  if(isDefined(entity.jukeinfo)) {
     return entity.jukeinfo;
   }
   directiontoenemy = vectornormalize(entity.enemy.origin - entity.origin);
-  forwarddir = anglestoforward(entity.angles);
+  forwarddir = anglesToForward(entity.angles);
   possiblejukes = [];
   jukevaliddistancetype = [];
   entityradius = entity.entityradius;
   jukevector = getjukevector(entity, "anim_zombie_juke_left_long");
   landposonground = validatejuke(entity, entityradius, jukevector);
-  if(isdefined(landposonground)) {
+  if(isDefined(landposonground)) {
     jukeinfo = new jukeinfo();
     jukeinfo.jukedirection = "left";
     jukeinfo.jukedistance = "long";
     jukeinfo.landposonground = landposonground;
-    if(!isdefined(possiblejukes)) {
+    if(!isDefined(possiblejukes)) {
       possiblejukes = [];
     } else if(!isarray(possiblejukes)) {
       possiblejukes = array(possiblejukes);
@@ -988,12 +981,12 @@ function private calculatejukeinfo(entity) {
   }
   jukevector = getjukevector(entity, "anim_zombie_juke_right_long");
   landposonground = validatejuke(entity, entityradius, jukevector);
-  if(isdefined(landposonground)) {
+  if(isDefined(landposonground)) {
     jukeinfo = new jukeinfo();
     jukeinfo.jukedirection = "right";
     jukeinfo.jukedistance = "long";
     jukeinfo.landposonground = landposonground;
-    if(!isdefined(possiblejukes)) {
+    if(!isDefined(possiblejukes)) {
       possiblejukes = [];
     } else if(!isarray(possiblejukes)) {
       possiblejukes = array(possiblejukes);
@@ -1002,12 +995,12 @@ function private calculatejukeinfo(entity) {
   }
   jukevector = getjukevector(entity, "anim_zombie_juke_left_front_long");
   landposonground = validatejuke(entity, entityradius, jukevector);
-  if(isdefined(landposonground)) {
+  if(isDefined(landposonground)) {
     jukeinfo = new jukeinfo();
     jukeinfo.jukedirection = "left_front";
     jukeinfo.jukedistance = "long";
     jukeinfo.landposonground = landposonground;
-    if(!isdefined(possiblejukes)) {
+    if(!isDefined(possiblejukes)) {
       possiblejukes = [];
     } else if(!isarray(possiblejukes)) {
       possiblejukes = array(possiblejukes);
@@ -1016,12 +1009,12 @@ function private calculatejukeinfo(entity) {
   }
   jukevector = getjukevector(entity, "anim_zombie_juke_right_front_long");
   landposonground = validatejuke(entity, entityradius, jukevector);
-  if(isdefined(landposonground)) {
+  if(isDefined(landposonground)) {
     jukeinfo = new jukeinfo();
     jukeinfo.jukedirection = "right_front";
     jukeinfo.jukedistance = "long";
     jukeinfo.landposonground = landposonground;
-    if(!isdefined(possiblejukes)) {
+    if(!isDefined(possiblejukes)) {
       possiblejukes = [];
     } else if(!isarray(possiblejukes)) {
       possiblejukes = array(possiblejukes);
@@ -1046,7 +1039,7 @@ function apothiconbamfout(entity) {
   entity notsolid();
   self clientfield::set("juke_active", 0);
   a_zombies = getaiarchetypearray("zombie");
-  a_filtered_zombies = array::filter(a_zombies, 0, & apothiconzombieeligibleforknockdown, entity, entity.origin);
+  a_filtered_zombies = array::filter(a_zombies, 0, &apothiconzombieeligibleforknockdown, entity, entity.origin);
   if(a_filtered_zombies.size > 0) {
     foreach(zombie in a_filtered_zombies) {
       apothiconknockdownzombie(entity, zombie);
@@ -1058,7 +1051,7 @@ function apothiconbamfin(entity) {
   if(entity.archetype != "apothicon_fury") {
     return;
   }
-  if(isdefined(entity.traverseendnode)) {
+  if(isDefined(entity.traverseendnode)) {
     entity forceteleport(entity.traverseendnode.origin, entity.angles);
     entity unlink();
     entity.istraveling = 0;
@@ -1075,7 +1068,7 @@ function apothiconbamfin(entity) {
   entity solid();
   self clientfield::set("juke_active", 1);
   a_zombies = getaiarchetypearray("zombie");
-  a_filtered_zombies = array::filter(a_zombies, 0, & apothiconzombieeligibleforknockdown, entity, entity.origin);
+  a_filtered_zombies = array::filter(a_zombies, 0, &apothiconzombieeligibleforknockdown, entity, entity.origin);
   if(a_filtered_zombies.size > 0) {
     foreach(zombie in a_filtered_zombies) {
       apothiconknockdownzombie(entity, zombie);
@@ -1084,7 +1077,7 @@ function apothiconbamfin(entity) {
 }
 
 function apothicondeathstart(entity) {
-  entity setmodel("c_zom_dlc4_apothicon_fury_dissolve");
+  entity setModel("c_zom_dlc4_apothicon_fury_dissolve");
   entity clientfield::set("apothicon_fury_death", 2);
   entity notsolid();
 }
@@ -1122,14 +1115,14 @@ function apothicondamageclientfieldupdate(entity, shitloc) {
 }
 
 function apothicondamagecallback(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, damagefromunderneath, modelindex, partname) {
-  if(!(isdefined(self.zombie_think_done) && self.zombie_think_done)) {
+  if(!(isDefined(self.zombie_think_done) && self.zombie_think_done)) {
     return 0;
   }
-  if(isdefined(eattacker) && isplayer(eattacker) && isdefined(shitloc)) {
+  if(isDefined(eattacker) && isplayer(eattacker) && isDefined(shitloc)) {
     apothicondamageclientfieldupdate(self, shitloc);
   }
-  if(isdefined(shitloc)) {
-    if(!(isdefined(self.isfurious) && self.isfurious)) {
+  if(isDefined(shitloc)) {
+    if(!(isDefined(self.isfurious) && self.isfurious)) {
       self.furiouslevel = self.furiouslevel + 1;
     }
   }
@@ -1146,7 +1139,7 @@ function apothiconondeath(inflictor, attacker, damage, meansofdeath, weapon, dir
 #namespace apothiconfurybehaviorinterface;
 
 function movespeedattributecallback(entity, attribute, oldvalue, value) {
-  if(isdefined(entity.isfurious) && entity.isfurious) {
+  if(isDefined(entity.isfurious) && entity.isfurious) {
     return;
   }
   switch (value) {

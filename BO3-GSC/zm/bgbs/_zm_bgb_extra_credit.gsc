@@ -14,14 +14,14 @@
 #namespace zm_bgb_extra_credit;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_extra_credit", & __init__, undefined, "bgb");
+  system::register("zm_bgb_extra_credit", &__init__, undefined, "bgb");
 }
 
 function __init__() {
-  if(!(isdefined(level.bgb_in_use) && level.bgb_in_use)) {
+  if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
-  bgb::register("zm_bgb_extra_credit", "activated", 4, undefined, undefined, undefined, & activation);
+  bgb::register("zm_bgb_extra_credit", "activated", 4, undefined, undefined, undefined, &activation);
 }
 
 function activation() {
@@ -33,9 +33,9 @@ function function_b18c3b2d(origin) {
   self endon("disconnect");
   self endon("bled_out");
   var_93eb638b = zm_powerups::specific_powerup_drop("bonus_points_player", origin, undefined, undefined, 0.1);
-  var_93eb638b.bonus_points_powerup_override = & function_3258dd42;
+  var_93eb638b.bonus_points_powerup_override = &function_3258dd42;
   wait(1);
-  if(isdefined(var_93eb638b) && (!var_93eb638b zm::in_enabled_playable_area() && !var_93eb638b zm::in_life_brush())) {
+  if(isDefined(var_93eb638b) && (!var_93eb638b zm::in_enabled_playable_area() && !var_93eb638b zm::in_life_brush())) {
     level thread bgb::function_434235f9(var_93eb638b);
   }
 }

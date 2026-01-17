@@ -7,11 +7,10 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_bgb;
-
 #namespace zm_bgb_newtonian_negation;
 
 autoexec __init__system__() {
-  system::register(#"zm_bgb_newtonian_negation", &__init__, undefined, #"bgb");
+  system::register(#"zm_bgb_newtonian_negation", &__init__, undefined, # "bgb");
 }
 
 __init__() {
@@ -35,7 +34,7 @@ function_8622e664(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 function_e752a980(localclientnum) {
-  self endon(#"end_dynent_touching", #"disconnect");
+  self endon(#"end_dynent_touching", # "disconnect");
   var_f42481ac = 0;
   a_dynents = getdynentarray();
   a_corpses = getentarraybytype(localclientnum, 17);

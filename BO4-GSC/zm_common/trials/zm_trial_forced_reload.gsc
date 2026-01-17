@@ -11,7 +11,6 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_trial_forced_reload;
 
 autoexec __init__system__() {
@@ -26,7 +25,7 @@ __init__() {
   zm_trial::register_challenge(#"forced_reload", &on_begin, &on_end);
 }
 
-private on_begin() {
+on_begin() {
   callback::on_weapon_fired(&on_weapon_fired);
   callback::function_33f0ddd3(&function_33f0ddd3);
   callback::on_weapon_change(&zm_trial_util::function_79518194);
@@ -39,7 +38,7 @@ private on_begin() {
   level zm_trial::function_25ee130(1);
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   callback::remove_on_weapon_fired(&on_weapon_fired);
   callback::function_824d206(&function_33f0ddd3);
   callback::remove_on_weapon_change(&zm_trial_util::function_79518194);
@@ -52,7 +51,7 @@ private on_end(round_reset) {
   level zm_trial::function_25ee130(0);
 }
 
-private function_33f0ddd3(s_event) {
+function_33f0ddd3(s_event) {
   if(s_event.event === "give_weapon") {
     if(zm_loadout::is_melee_weapon(s_event.weapon) || zm_loadout::is_lethal_grenade(s_event.weapon) || zm_loadout::is_tactical_grenade(s_event.weapon, 1)) {
       self lockweapon(s_event.weapon, 1, 1);
@@ -68,10 +67,10 @@ private function_33f0ddd3(s_event) {
   }
 }
 
-private on_weapon_fired(params) {
+on_weapon_fired(params) {
   self notify("3a8478a97b3babfa");
   self endon("3a8478a97b3babfa");
-  self endon(#"disconnect", #"hash_1fbfdb0105f48f89");
+  self endon(#"disconnect", # "hash_1fbfdb0105f48f89");
   n_clip_size = self getweaponammoclipsize(params.weapon);
   var_2cf11630 = self getweaponammoclip(params.weapon);
 
@@ -86,7 +85,7 @@ private on_weapon_fired(params) {
   }
 }
 
-private function_29ee24dd(weapon) {
+function_29ee24dd(weapon) {
   self endon(#"disconnect");
   self lockweapon(weapon, 1, 1);
   self zm_trial_util::function_7dbb1712();
@@ -95,7 +94,7 @@ private function_29ee24dd(weapon) {
 
   if(n_stock_ammo > 0) {
     while(true) {
-      s_waitresult = self waittill(#"reload", #"zmb_max_ammo", #"hash_278526d0bbdb4ce7", #"hash_1fbfdb0105f48f89", #"player_downed", #"death");
+      s_waitresult = self waittill(#"reload", # "zmb_max_ammo", # "hash_278526d0bbdb4ce7", # "hash_1fbfdb0105f48f89", # "player_downed", # "death");
       w_current = self getcurrentweapon();
 
       if(s_waitresult._notify == "reload" && weapon != w_current) {

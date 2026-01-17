@@ -13,7 +13,6 @@
 #include scripts\core_common\values_shared;
 #include scripts\core_common\vehicle_death_shared;
 #include scripts\core_common\vehicle_shared;
-
 #namespace vehicle_ai;
 
 autoexec __init__system__() {
@@ -79,7 +78,7 @@ gettargeteyeoffset(target) {
 }
 
 fire_for_time(totalfiretime, turretidx, target, intervalscale = 1) {
-  self endon(#"death", #"change_state");
+  self endon(#"death", # "change_state");
 
   if(!isDefined(turretidx)) {
     turretidx = 0;
@@ -89,7 +88,7 @@ fire_for_time(totalfiretime, turretidx, target, intervalscale = 1) {
   self endon("fire_stop" + turretidx);
   weapon = self seatgetweapon(turretidx);
 
-  if(!isDefined(weapon) || weapon.name == #"none" || weapon.firetime <= 0) {
+  if(!isDefined(weapon) || weapon.name == # "none" || weapon.firetime <= 0) {
     println("<dev string:x38>" + turretidx + "<dev string:x5f>" + self getentnum() + "<dev string:x6e>" + self.model);
     return;
   }
@@ -100,7 +99,7 @@ fire_for_time(totalfiretime, turretidx, target, intervalscale = 1) {
 }
 
 fire_for_rounds(firecount, turretidx, target) {
-  self endon(#"death", #"fire_stop", #"change_state");
+  self endon(#"death", # "fire_stop", # "change_state");
 
   if(!isDefined(turretidx)) {
     turretidx = 0;
@@ -108,7 +107,7 @@ fire_for_rounds(firecount, turretidx, target) {
 
   weapon = self seatgetweapon(turretidx);
 
-  if(!isDefined(weapon) || weapon.name == #"none" || weapon.firetime <= 0) {
+  if(!isDefined(weapon) || weapon.name == # "none" || weapon.firetime <= 0) {
     println("<dev string:x38>" + turretidx + "<dev string:x5f>" + self getentnum() + "<dev string:x6e>" + self.model);
     return;
   }
@@ -117,7 +116,7 @@ fire_for_rounds(firecount, turretidx, target) {
 }
 
 __fire_for_rounds_internal(firecount, fireinterval, turretidx, target) {
-  self endon(#"death", #"fire_stop", #"change_state");
+  self endon(#"death", # "fire_stop", # "change_state");
   assert(isDefined(turretidx));
 
   if(isDefined(target)) {
@@ -337,12 +336,12 @@ javelin_losetargetatrighttimeprojectile(proj, target) {
 
 waittill_pathing_done(maxtime = 15) {
   self endon(#"change_state");
-  result = self waittilltimeout(maxtime, #"near_goal", #"force_goal", #"reached_end_node", #"pathfind_failed");
+  result = self waittilltimeout(maxtime, # "near_goal", # "force_goal", # "reached_end_node", # "pathfind_failed");
 }
 
 waittill_pathresult(maxtime = 0.5) {
   self endon(#"change_state");
-  result = self waittilltimeout(maxtime, #"pathfind_failed", #"pathfind_succeeded", #"change_state");
+  result = self waittilltimeout(maxtime, # "pathfind_failed", # "pathfind_succeeded", # "change_state");
   succeeded = result === "pathfind_succeeded";
   return succeeded;
 }
@@ -397,7 +396,7 @@ throw_off_balance(damagetype, hitpoint, hitdirection, hitlocationinfo) {
 }
 
 predicted_collision() {
-  self endon(#"crash_done", #"death");
+  self endon(#"crash_done", # "death");
 
   while(true) {
     waitresult = self waittill(#"veh_predictedcollision");
@@ -416,7 +415,7 @@ collision_fx(normal) {
 }
 
 nudge_collision() {
-  self endon(#"crash_done", #"power_off_done", #"death");
+  self endon(#"crash_done", # "power_off_done", # "death");
   self notify(#"end_nudge_collision");
   self endon(#"end_nudge_collision");
 
@@ -473,7 +472,7 @@ nudge_collision() {
 }
 
 level_out_for_landing() {
-  self endon(#"death", #"change_state", #"landed");
+  self endon(#"death", # "change_state", # "landed");
 
   while(true) {
     velocity = self.velocity;
@@ -558,7 +557,7 @@ iff_override(owner, time = 60) {
   timeout = isDefined(self.settings) ? self.settings.ifftimetillrevert : time;
   assert(timeout > 10);
   self thread iff_notifymeinnsec(timeout - 10, "iff_override_revert_warn");
-  msg = self waittilltimeout(timeout, #"iff_override_reverted");
+  msg = self waittilltimeout(timeout, # "iff_override_reverted");
 
   if(msg == "timeout") {
     self notify(#"iff_override_reverted");
@@ -675,8 +674,8 @@ shared_callback_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, w
     minempdowntime = 0.8 * (isDefined(self.settings.empdowntime) ? self.settings.empdowntime : 0);
     maxempdowntime = 1.2 * (isDefined(self.settings.empdowntime) ? self.settings.empdowntime : 1);
     self notify(#"emped", {
-      #param0: randomfloatrange(minempdowntime, maxempdowntime), 
-      #param1: eattacker, 
+      #param0: randomfloatrange(minempdowntime, maxempdowntime),
+      #param1: eattacker,
       #param2: einflictor
     });
   }
@@ -1125,13 +1124,13 @@ defaultstate_death_update(params) {
   death_type = isDefined(get_death_type(params)) ? get_death_type(params) : "default";
 
   switch (death_type) {
-    case #"burning":
+    case # "burning":
       burning_death(params);
       break;
-    case #"emped":
+    case # "emped":
       emped_death(params);
       break;
-    case #"gibbed":
+    case # "gibbed":
       gibbed_death(params);
       break;
     default:
@@ -1203,7 +1202,7 @@ emp_startup_fx() {
 }
 
 defaultstate_emped_update(params) {
-  self endon(#"death", #"change_state");
+  self endon(#"death", # "change_state");
   time = params.param0;
   assert(isDefined(time));
   util::cooldown("emped_timer", time);
@@ -1386,7 +1385,7 @@ defaultstate_pain_exit(params) {
 }
 
 function_97e9de18(params) {
-  self endon(#"death", #"change_state");
+  self endon(#"death", # "change_state");
   wait 0.2;
   self evaluate_connections();
 }
@@ -1470,12 +1469,12 @@ positionquery_filter_random(queryresult, min, max) {
       point._scoredebug = [];
     }
 
-    if(!isDefined(point._scoredebug[#"random"])) {
-      point._scoredebug[#"random"] = spawnStruct();
+    if(!isDefined(point._scoredebug[# "random"])) {
+      point._scoredebug[# "random"] = spawnStruct();
     }
 
-    point._scoredebug[#"random"].score = score;
-    point._scoredebug[#"random"].scorename = "<dev string:xb8>";
+    point._scoredebug[# "random"].score = score;
+    point._scoredebug[# "random"].scorename = "<dev string:xb8>";
 
     point.score += score;
   }
@@ -1496,12 +1495,12 @@ positionquery_filter_outofgoalanchor(queryresult, tolerance = 1) {
         point._scoredebug = [];
       }
 
-      if(!isDefined(point._scoredebug[#"outofgoalanchor"])) {
-        point._scoredebug[#"outofgoalanchor"] = spawnStruct();
+      if(!isDefined(point._scoredebug[# "outofgoalanchor"])) {
+        point._scoredebug[# "outofgoalanchor"] = spawnStruct();
       }
 
-      point._scoredebug[#"outofgoalanchor"].score = score;
-      point._scoredebug[#"outofgoalanchor"].scorename = "<dev string:xc1>";
+      point._scoredebug[# "outofgoalanchor"].score = score;
+      point._scoredebug[# "outofgoalanchor"].scorename = "<dev string:xc1>";
 
       point.score += score;
     }
@@ -1582,12 +1581,12 @@ positionquery_filter_distawayfromtarget(queryresult, targetarray, distance, tooc
         point._scoredebug = [];
       }
 
-      if(!isDefined(point._scoredebug[#"tooclosetoothers"])) {
-        point._scoredebug[#"tooclosetoothers"] = spawnStruct();
+      if(!isDefined(point._scoredebug[# "tooclosetoothers"])) {
+        point._scoredebug[# "tooclosetoothers"] = spawnStruct();
       }
 
-      point._scoredebug[#"tooclosetoothers"].score = tooclosepenalty;
-      point._scoredebug[#"tooclosetoothers"].scorename = "<dev string:xd3>";
+      point._scoredebug[# "tooclosetoothers"].score = tooclosepenalty;
+      point._scoredebug[# "tooclosetoothers"].scorename = "<dev string:xd3>";
 
       point.score += tooclosepenalty;
     }
@@ -1674,7 +1673,7 @@ function_7ae52016(val) {
   }
 }
 
-private function_e057db25(var_2d1cbdd9, goalpos, vararg) {
+function_e057db25(var_2d1cbdd9, goalpos, vararg) {
   switch (vararg.size) {
     case 8:
       return tacticalquery(var_2d1cbdd9, goalpos, vararg[0], vararg[1], vararg[2], vararg[3], vararg[4], vararg[5], vararg[6], vararg[7]);
@@ -1767,7 +1766,7 @@ function_1d436633(...) {
   return newpos;
 }
 
-private function_4ab1a63a(goal) {
+function_4ab1a63a(goal) {
   if(isDefined(self.settings.engagementheightmax) && isDefined(self.settings.engagementheightmin)) {
     var_20b5eeff = 0.5 * (self.settings.engagementheightmax + self.settings.engagementheightmin);
   } else {
@@ -1788,12 +1787,12 @@ private function_4ab1a63a(goal) {
         point._scoredebug = [];
       }
 
-      if(!isDefined(point._scoredebug[#"inclaimedlocation"])) {
-        point._scoredebug[#"inclaimedlocation"] = spawnStruct();
+      if(!isDefined(point._scoredebug[# "inclaimedlocation"])) {
+        point._scoredebug[# "inclaimedlocation"] = spawnStruct();
       }
 
-      point._scoredebug[#"inclaimedlocation"].score = -5000;
-      point._scoredebug[#"inclaimedlocation"].scorename = "<dev string:x13e>";
+      point._scoredebug[# "inclaimedlocation"].score = -5000;
+      point._scoredebug[# "inclaimedlocation"].scorename = "<dev string:x13e>";
 
       point.score += -5000;
     }
@@ -1804,12 +1803,12 @@ private function_4ab1a63a(goal) {
       point._scoredebug = [];
     }
 
-    if(!isDefined(point._scoredebug[#"random"])) {
-      point._scoredebug[#"random"] = spawnStruct();
+    if(!isDefined(point._scoredebug[# "random"])) {
+      point._scoredebug[# "random"] = spawnStruct();
     }
 
-    point._scoredebug[#"random"].score = score;
-    point._scoredebug[#"random"].scorename = "<dev string:xb8>";
+    point._scoredebug[# "random"].score = score;
+    point._scoredebug[# "random"].scorename = "<dev string:xb8>";
 
     point.score += score;
   }
@@ -1869,12 +1868,12 @@ function_1e0d693b(goal, enemy) {
         point._scoredebug = [];
       }
 
-      if(!isDefined(point._scoredebug[#"outofgoalanchor"])) {
-        point._scoredebug[#"outofgoalanchor"] = spawnStruct();
+      if(!isDefined(point._scoredebug[# "outofgoalanchor"])) {
+        point._scoredebug[# "outofgoalanchor"] = spawnStruct();
       }
 
-      point._scoredebug[#"outofgoalanchor"].score = score;
-      point._scoredebug[#"outofgoalanchor"].scorename = "<dev string:xc1>";
+      point._scoredebug[# "outofgoalanchor"].score = score;
+      point._scoredebug[# "outofgoalanchor"].scorename = "<dev string:xc1>";
 
       point.score += score;
     }
@@ -1884,12 +1883,12 @@ function_1e0d693b(goal, enemy) {
         point._scoredebug = [];
       }
 
-      if(!isDefined(point._scoredebug[#"no visibility"])) {
-        point._scoredebug[#"no visibility"] = spawnStruct();
+      if(!isDefined(point._scoredebug[# "no visibility"])) {
+        point._scoredebug[# "no visibility"] = spawnStruct();
       }
 
-      point._scoredebug[#"no visibility"].score = -5000;
-      point._scoredebug[#"no visibility"].scorename = "<dev string:x152>";
+      point._scoredebug[# "no visibility"].score = -5000;
+      point._scoredebug[# "no visibility"].scorename = "<dev string:x152>";
 
       point.score += -5000;
     }
@@ -1898,12 +1897,12 @@ function_1e0d693b(goal, enemy) {
       point._scoredebug = [];
     }
 
-    if(!isDefined(point._scoredebug[#"engagementdist"])) {
-      point._scoredebug[#"engagementdist"] = spawnStruct();
+    if(!isDefined(point._scoredebug[# "engagementdist"])) {
+      point._scoredebug[# "engagementdist"] = spawnStruct();
     }
 
-    point._scoredebug[#"engagementdist"].score = point.distawayfromengagementarea * -1;
-    point._scoredebug[#"engagementdist"].scorename = "<dev string:x162>";
+    point._scoredebug[# "engagementdist"].score = point.distawayfromengagementarea * -1;
+    point._scoredebug[# "engagementdist"].scorename = "<dev string:x162>";
 
     point.score += point.distawayfromengagementarea * -1;
 
@@ -1911,12 +1910,12 @@ function_1e0d693b(goal, enemy) {
       point._scoredebug = [];
     }
 
-    if(!isDefined(point._scoredebug[#"distfromorigin"])) {
-      point._scoredebug[#"distfromorigin"] = spawnStruct();
+    if(!isDefined(point._scoredebug[# "distfromorigin"])) {
+      point._scoredebug[# "distfromorigin"] = spawnStruct();
     }
 
-    point._scoredebug[#"distfromorigin"].score = mapfloat(0, prefereddistawayfromorigin, -5000, 0, point.disttoorigin2d);
-    point._scoredebug[#"distfromorigin"].scorename = "<dev string:x173>";
+    point._scoredebug[# "distfromorigin"].score = mapfloat(0, prefereddistawayfromorigin, -5000, 0, point.disttoorigin2d);
+    point._scoredebug[# "distfromorigin"].scorename = "<dev string:x173>";
 
     point.score += mapfloat(0, prefereddistawayfromorigin, -5000, 0, point.disttoorigin2d);
 
@@ -1925,12 +1924,12 @@ function_1e0d693b(goal, enemy) {
         point._scoredebug = [];
       }
 
-      if(!isDefined(point._scoredebug[#"inclaimedlocation"])) {
-        point._scoredebug[#"inclaimedlocation"] = spawnStruct();
+      if(!isDefined(point._scoredebug[# "inclaimedlocation"])) {
+        point._scoredebug[# "inclaimedlocation"] = spawnStruct();
       }
 
-      point._scoredebug[#"inclaimedlocation"].score = -5000;
-      point._scoredebug[#"inclaimedlocation"].scorename = "<dev string:x13e>";
+      point._scoredebug[# "inclaimedlocation"].score = -5000;
+      point._scoredebug[# "inclaimedlocation"].scorename = "<dev string:x13e>";
 
       point.score += -5000;
     }
@@ -1944,12 +1943,12 @@ function_1e0d693b(goal, enemy) {
         point._scoredebug = [];
       }
 
-      if(!isDefined(point._scoredebug[#"height"])) {
-        point._scoredebug[#"height"] = spawnStruct();
+      if(!isDefined(point._scoredebug[# "height"])) {
+        point._scoredebug[# "height"] = spawnStruct();
       }
 
-      point._scoredebug[#"height"].score = heightscore;
-      point._scoredebug[#"height"].scorename = "<dev string:x184>";
+      point._scoredebug[# "height"].score = heightscore;
+      point._scoredebug[# "height"].scorename = "<dev string:x184>";
 
       point.score += heightscore;
     }
@@ -1960,12 +1959,12 @@ function_1e0d693b(goal, enemy) {
       point._scoredebug = [];
     }
 
-    if(!isDefined(point._scoredebug[#"random"])) {
-      point._scoredebug[#"random"] = spawnStruct();
+    if(!isDefined(point._scoredebug[# "random"])) {
+      point._scoredebug[# "random"] = spawnStruct();
     }
 
-    point._scoredebug[#"random"].score = score;
-    point._scoredebug[#"random"].scorename = "<dev string:xb8>";
+    point._scoredebug[# "random"].score = score;
+    point._scoredebug[# "random"].scorename = "<dev string:xb8>";
 
     point.score += score;
   }
@@ -1984,7 +1983,7 @@ function_1e0d693b(goal, enemy) {
   return undefined;
 }
 
-private function_4646fb11(goal) {
+function_4646fb11(goal) {
   minsearchradius = math::clamp(120, 0, goal.goalradius);
   maxsearchradius = math::clamp(800, 120, goal.goalradius);
   queryresult = positionquery_source_navigation(self.origin, minsearchradius, maxsearchradius, 400, 80, self, 50);
@@ -1999,12 +1998,12 @@ private function_4646fb11(goal) {
         point._scoredebug = [];
       }
 
-      if(!isDefined(point._scoredebug[#"outofgoalanchor"])) {
-        point._scoredebug[#"outofgoalanchor"] = spawnStruct();
+      if(!isDefined(point._scoredebug[# "outofgoalanchor"])) {
+        point._scoredebug[# "outofgoalanchor"] = spawnStruct();
       }
 
-      point._scoredebug[#"outofgoalanchor"].score = score;
-      point._scoredebug[#"outofgoalanchor"].scorename = "<dev string:xc1>";
+      point._scoredebug[# "outofgoalanchor"].score = score;
+      point._scoredebug[# "outofgoalanchor"].scorename = "<dev string:xc1>";
 
       point.score += score;
     }
@@ -2014,12 +2013,12 @@ private function_4646fb11(goal) {
         point._scoredebug = [];
       }
 
-      if(!isDefined(point._scoredebug[#"inclaimedlocation"])) {
-        point._scoredebug[#"inclaimedlocation"] = spawnStruct();
+      if(!isDefined(point._scoredebug[# "inclaimedlocation"])) {
+        point._scoredebug[# "inclaimedlocation"] = spawnStruct();
       }
 
-      point._scoredebug[#"inclaimedlocation"].score = -5000;
-      point._scoredebug[#"inclaimedlocation"].scorename = "<dev string:x13e>";
+      point._scoredebug[# "inclaimedlocation"].score = -5000;
+      point._scoredebug[# "inclaimedlocation"].scorename = "<dev string:x13e>";
 
       point.score += -5000;
     }
@@ -2030,12 +2029,12 @@ private function_4646fb11(goal) {
       point._scoredebug = [];
     }
 
-    if(!isDefined(point._scoredebug[#"random"])) {
-      point._scoredebug[#"random"] = spawnStruct();
+    if(!isDefined(point._scoredebug[# "random"])) {
+      point._scoredebug[# "random"] = spawnStruct();
     }
 
-    point._scoredebug[#"random"].score = score;
-    point._scoredebug[#"random"].scorename = "<dev string:xb8>";
+    point._scoredebug[# "random"].score = score;
+    point._scoredebug[# "random"].scorename = "<dev string:xb8>";
 
     point.score += score;
   }

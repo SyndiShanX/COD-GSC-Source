@@ -29,17 +29,17 @@
 #namespace zm_powerup_island_seed;
 
 function autoexec __init__sytem__() {
-  system::register("zm_powerup_island_seed", & __init__, undefined, undefined);
+  system::register("zm_powerup_island_seed", &__init__, undefined, undefined);
 }
 
 function __init__() {
   register_clientfields();
-  zm_powerups::register_powerup("island_seed", & function_6adb5862);
+  zm_powerups::register_powerup("island_seed", &function_6adb5862);
   if(tolower(getdvarstring("g_gametype")) != "zcleansed") {
-    zm_powerups::add_zombie_powerup("island_seed", "p7_zm_isl_plant_seed_pod_01", & "ZM_ISLAND_SEED_POWERUP", & function_f766ae15, 1, 0, 0);
+    zm_powerups::add_zombie_powerup("island_seed", "p7_zm_isl_plant_seed_pod_01", &"ZM_ISLAND_SEED_POWERUP", &function_f766ae15, 1, 0, 0);
   }
-  callback::on_connect( & on_player_connect);
-  callback::on_spawned( & on_player_spawned);
+  callback::on_connect(&on_player_connect);
+  callback::on_spawned(&on_player_spawned);
   thread function_7b74396f();
   level.var_9895ed0d = 0;
   level.var_325c412f = 2;
@@ -121,7 +121,7 @@ function function_3968a493(var_b89973c8 = 0) {
 }
 
 function function_f766ae15() {
-  if(isdefined(level.var_b426c9) && level.var_b426c9) {
+  if(isDefined(level.var_b426c9) && level.var_b426c9) {
     return false;
   }
   n_count = 0;
@@ -135,7 +135,7 @@ function function_f766ae15() {
 }
 
 function function_68329bc5() {
-  while (true) {
+  while(true) {
     level waittill("between_round_over");
     level.var_9895ed0d = 0;
   }
@@ -144,10 +144,10 @@ function function_68329bc5() {
 function function_b2cb89c1() {
   level flag::init("round_1_seed_spawned");
   level.var_e964b72 = 0;
-  level.custom_zombie_powerup_drop = & function_7a25b639;
+  level.custom_zombie_powerup_drop = &function_7a25b639;
   level flag::wait_till("round_1_seed_spawned");
   wait(1);
-  level.custom_zombie_powerup_drop = & function_1f5d3f75;
+  level.custom_zombie_powerup_drop = &function_1f5d3f75;
   level thread function_af95a19e();
 }
 
@@ -195,11 +195,11 @@ function function_af95a19e() {
   players = level.players;
   level.var_e4f2021b = 2000;
   score_to_drop = (players.size * (level.zombie_vars[("zombie_score_start_" + players.size) + "p"])) + level.var_e4f2021b;
-  while (true) {
+  while(true) {
     players = level.players;
     curr_total_score = 0;
-    for (i = 0; i < players.size; i++) {
-      if(isdefined(players[i].score_total)) {
+    for(i = 0; i < players.size; i++) {
+      if(isDefined(players[i].score_total)) {
         curr_total_score = curr_total_score + players[i].score_total;
       }
     }
@@ -230,7 +230,7 @@ function function_ea405166(var_1d640f59, str_widget_clientuimodel, var_18bfcc38)
   self notify("hash_6c34b226");
   self endon("hash_6c34b226");
   if(var_18bfcc38) {
-    if(isdefined(var_1d640f59)) {
+    if(isDefined(var_1d640f59)) {
       self thread clientfield::set_player_uimodel(var_1d640f59, 1);
     }
     n_show_ui_duration = 3.5;
@@ -251,7 +251,7 @@ function on_player_spawned() {
 function function_7b74396f() {
   level flagsys::wait_till("");
   wait(1);
-  zm_devgui::add_custom_devgui_callback( & function_903fbe7);
+  zm_devgui::add_custom_devgui_callback(&function_903fbe7);
   adddebugcommand("");
   adddebugcommand("");
 }

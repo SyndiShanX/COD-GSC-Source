@@ -23,15 +23,15 @@ function init() {}
 
 function main() {
   cybercom_gadget::registerability(2, 16);
-  level.cybercom.cacophany = spawnstruct();
-  level.cybercom.cacophany._is_flickering = & _is_flickering;
-  level.cybercom.cacophany._on_flicker = & _on_flicker;
-  level.cybercom.cacophany._on_give = & _on_give;
-  level.cybercom.cacophany._on_take = & _on_take;
-  level.cybercom.cacophany._on_connect = & _on_connect;
-  level.cybercom.cacophany._on = & _on;
-  level.cybercom.cacophany._off = & _off;
-  level.cybercom.cacophany._is_primed = & _is_primed;
+  level.cybercom.cacophany = spawnStruct();
+  level.cybercom.cacophany._is_flickering = &_is_flickering;
+  level.cybercom.cacophany._on_flicker = &_on_flicker;
+  level.cybercom.cacophany._on_give = &_on_give;
+  level.cybercom.cacophany._on_take = &_on_take;
+  level.cybercom.cacophany._on_connect = &_on_connect;
+  level.cybercom.cacophany._on = &_on;
+  level.cybercom.cacophany._off = &_off;
+  level.cybercom.cacophany._is_primed = &_is_primed;
 }
 
 function _is_flickering(slot) {}
@@ -47,8 +47,8 @@ function _on_give(slot, weapon) {
     self.cybercom.var_f72b478f = getdvarfloat("scr_cacophany_upgraded_fov", 0.5);
     self.cybercom.var_23d4a73a = getdvarfloat("scr_cacophany_lock_radius", 330);
   }
-  self.cybercom.targetlockcb = & _get_valid_targets;
-  self.cybercom.targetlockrequirementcb = & _lock_requirement;
+  self.cybercom.targetlockcb = &_get_valid_targets;
+  self.cybercom.targetlockrequirementcb = &_lock_requirement;
   self thread cybercom::function_b5f4e597(weapon);
 }
 
@@ -73,7 +73,7 @@ function _off(slot, weapon) {
 }
 
 function _is_primed(slot, weapon) {
-  if(!(isdefined(self.cybercom.is_primed) && self.cybercom.is_primed)) {
+  if(!(isDefined(self.cybercom.is_primed) && self.cybercom.is_primed)) {
     assert(self.cybercom.activecybercomweapon == weapon);
     self thread cybercom::weaponlockwatcher(slot, weapon, self.cybercom.var_110c156a);
     self.cybercom.is_primed = 1;
@@ -85,13 +85,13 @@ function private _lock_requirement(target) {
     self cybercom::function_29bf9dee(target, 2);
     return false;
   }
-  if(isdefined(target.destroyingweapon)) {
+  if(isDefined(target.destroyingweapon)) {
     return false;
   }
-  if(isdefined(target.var_37915be0) && target.var_37915be0) {
+  if(isDefined(target.var_37915be0) && target.var_37915be0) {
     return false;
   }
-  if(isdefined(target.is_disabled) && target.is_disabled) {
+  if(isDefined(target.is_disabled) && target.is_disabled) {
     self cybercom::function_29bf9dee(target, 6);
     return false;
   }
@@ -99,14 +99,14 @@ function private _lock_requirement(target) {
 }
 
 function private _get_valid_targets(weapon) {
-  return getentarray("destructible", "targetname");
+  return getEntArray("destructible", "targetname");
 }
 
 function private function_7f3f3bde(slot, weapon) {
   aborted = 0;
   fired = 0;
   foreach(item in self.cybercom.lock_targets) {
-    if(isdefined(item.target) && (isdefined(item.inrange) && item.inrange)) {
+    if(isDefined(item.target) && (isDefined(item.inrange) && item.inrange)) {
       if(item.inrange == 1) {
         if(!cybercom::targetisvalid(item.target, weapon)) {
           continue;
@@ -127,7 +127,7 @@ function private function_7f3f3bde(slot, weapon) {
   cybercom::function_adc40f11(weapon, fired);
   if(fired && isplayer(self)) {
     itemindex = getitemindexfromref("cybercom_cacophany");
-    if(isdefined(itemindex)) {
+    if(isDefined(itemindex)) {
       self adddstat("ItemStats", itemindex, "stats", "assists", "statValue", fired);
       self adddstat("ItemStats", itemindex, "stats", "used", "statValue", 1);
     }

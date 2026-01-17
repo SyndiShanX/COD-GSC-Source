@@ -17,44 +17,44 @@
 #namespace oed;
 
 function autoexec __init__sytem__() {
-  system::register("oed", & __init__, undefined, undefined);
+  system::register("oed", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("toplayer", "ev_toggle", 1, 1, "int", & ev_player_toggle, 0, 0);
-  clientfield::register("toplayer", "sitrep_toggle", 1, 1, "int", & sitrep_player_toggle, 0, 0);
-  clientfield::register("toplayer", "tmode_toggle", 1, 3, "int", & tmode_player_toggle, 0, 0);
-  clientfield::register("toplayer", "active_dni_fx", 1, 1, "counter", & function_6b87ceb0, 0, 0);
-  clientfield::register("toplayer", "hack_dni_fx", 1, 1, "counter", & hack_dni_fx, 0, 0);
-  clientfield::register("actor", "thermal_active", 1, 1, "int", & ent_thermal_callback, 0, 0);
-  clientfield::register("actor", "sitrep_material", 1, 1, "int", & ent_material_callback, 0, 0);
-  clientfield::register("actor", "force_tmode", 1, 1, "int", & tmode_force_toggle, 0, 0);
-  clientfield::register("actor", "tagged", 1, 1, "int", & tagged_toggle, 0, 0);
-  clientfield::register("vehicle", "thermal_active", 1, 1, "int", & ent_thermal_callback, 0, 0);
-  clientfield::register("vehicle", "sitrep_material", 1, 1, "int", & ent_material_callback, 0, 0);
-  clientfield::register("scriptmover", "thermal_active", 1, 1, "int", & ent_thermal_callback, 0, 0);
-  clientfield::register("scriptmover", "sitrep_material", 1, 1, "int", & ent_material_callback, 0, 0);
-  clientfield::register("item", "sitrep_material", 1, 1, "int", & ent_material_callback, 0, 0);
+  clientfield::register("toplayer", "ev_toggle", 1, 1, "int", &ev_player_toggle, 0, 0);
+  clientfield::register("toplayer", "sitrep_toggle", 1, 1, "int", &sitrep_player_toggle, 0, 0);
+  clientfield::register("toplayer", "tmode_toggle", 1, 3, "int", &tmode_player_toggle, 0, 0);
+  clientfield::register("toplayer", "active_dni_fx", 1, 1, "counter", &function_6b87ceb0, 0, 0);
+  clientfield::register("toplayer", "hack_dni_fx", 1, 1, "counter", &hack_dni_fx, 0, 0);
+  clientfield::register("actor", "thermal_active", 1, 1, "int", &ent_thermal_callback, 0, 0);
+  clientfield::register("actor", "sitrep_material", 1, 1, "int", &ent_material_callback, 0, 0);
+  clientfield::register("actor", "force_tmode", 1, 1, "int", &tmode_force_toggle, 0, 0);
+  clientfield::register("actor", "tagged", 1, 1, "int", &tagged_toggle, 0, 0);
+  clientfield::register("vehicle", "thermal_active", 1, 1, "int", &ent_thermal_callback, 0, 0);
+  clientfield::register("vehicle", "sitrep_material", 1, 1, "int", &ent_material_callback, 0, 0);
+  clientfield::register("scriptmover", "thermal_active", 1, 1, "int", &ent_thermal_callback, 0, 0);
+  clientfield::register("scriptmover", "sitrep_material", 1, 1, "int", &ent_material_callback, 0, 0);
+  clientfield::register("item", "sitrep_material", 1, 1, "int", &ent_material_callback, 0, 0);
   duplicate_render::set_dr_filter_offscreen("sitrep_keyline", 25, "keyline_active", "keyfill_active", 2, "mc/hud_outline_model_z_white", 0);
   duplicate_render::set_dr_filter_offscreen("sitrep_fill", 25, "keyfill_active", "keyline_active", 2, "mc/hud_outline_model_orange_alpha", 0);
   duplicate_render::set_dr_filter_offscreen("sitrep_keyfill", 30, "keyline_active,keyfill_active", undefined, 2, "mc/hud_outline_model_orange_calpha", 0);
   duplicate_render::set_dr_filter_offscreen("enemy_thermal", 24, "thermal_enemy_active", undefined, 2, "mc/hud_outline_model_z_red", 0);
   duplicate_render::set_dr_filter_offscreen("friendly_thermal", 24, "thermal_friendly_active", undefined, 2, "mc/hud_outline_model_z_green", 0);
   visionset_mgr::register_visionset_info("tac_mode", 1, 15, undefined, "tac_mode_blue");
-  callback::on_spawned( & on_player_spawned);
+  callback::on_spawned(&on_player_spawned);
   level flag::init("activate_tmode");
   level flag::init("activate_thermal");
-  callback::on_localclient_shutdown( & on_localplayer_shutdown);
+  callback::on_localclient_shutdown(&on_localplayer_shutdown);
 }
 
 function on_player_spawned(localclientnum) {
   self.b_ev_active = 0;
   var_7fd179a9 = 10500;
   var_3b6a005d = 3000;
-  if(isdefined(level.var_6411bf7a)) {
+  if(isDefined(level.var_6411bf7a)) {
     var_7fd179a9 = level.var_6411bf7a;
   }
-  if(isdefined(level.var_80d69208)) {
+  if(isDefined(level.var_80d69208)) {
     var_3b6a005d = level.var_80d69208;
   }
   evsetranges(localclientnum, var_7fd179a9, var_3b6a005d);
@@ -78,9 +78,9 @@ function tmode_remove_all_ents(localclientnum) {
   if(!self islocalplayer()) {
     return;
   }
-  a_all_entities = getentarray(localclientnum);
+  a_all_entities = getEntArray(localclientnum);
   foreach(entity in a_all_entities) {
-    if(isdefined(entity.tmode_set) && entity.tmode_set) {
+    if(isDefined(entity.tmode_set) && entity.tmode_set) {
       entity.tmode_set = 0;
       entity tmodeclearflag(4);
     }
@@ -91,7 +91,7 @@ function ev_player_toggle(localclientnum, oldval, newval, bnewent, binitialsnap,
   if(!self islocalplayer()) {
     return;
   }
-  if(!isdefined(self getlocalclientnumber())) {
+  if(!isDefined(self getlocalclientnumber())) {
     return;
   }
   if(self getlocalclientnumber() != localclientnum) {
@@ -104,7 +104,7 @@ function ev_player_toggle(localclientnum, oldval, newval, bnewent, binitialsnap,
 }
 
 function function_e8b1e8b2(localclientnum, newval) {
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     self evenable(newval);
   } else {
     println("");
@@ -133,16 +133,16 @@ function player_toggle_ev(lcn, newval) {
     function_357cbbf0(lcn);
     self function_e8b1e8b2(lcn, newval);
     level flag::set("activate_thermal");
-    if(isdefined(level.ev_override)) {
+    if(isDefined(level.ev_override)) {
       [
         [level.ev_override]
       ]();
     }
-    playsound(lcn, "gdt_oed_on", (0, 0, 0));
+    playSound(lcn, "gdt_oed_on", (0, 0, 0));
     audio::playloopat("gdt_oed_loop", (1, 2, 3));
     activate_thermal_ents(lcn);
   } else {
-    playsound(lcn, "gdt_oed_off", (0, 0, 0));
+    playSound(lcn, "gdt_oed_off", (0, 0, 0));
     audio::stoploopat("gdt_oed_loop", (1, 2, 3));
     deactivate_thermal_ents(lcn);
     wait(0.016);
@@ -154,14 +154,14 @@ function player_toggle_ev(lcn, newval) {
 function ent_thermal_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self endon("entityshutdown");
   level flagsys::wait_till("duplicaterender_registry_ready");
-  assert(isdefined(self), "");
+  assert(isDefined(self), "");
   if(newval == 0) {
     self.b_show_thermal = 0;
     self set_entity_thermal(localclientnum, 0);
   } else {
     self.b_show_thermal = newval;
     player = getlocalplayer(localclientnum);
-    if(isdefined(player.b_ev_active) && player.b_ev_active) {
+    if(isDefined(player.b_ev_active) && player.b_ev_active) {
       self set_entity_thermal(localclientnum, 1);
     } else {
       self set_entity_thermal(localclientnum, 0);
@@ -185,18 +185,18 @@ function set_entity_thermal(localclientnum, b_enabled) {
 }
 
 function activate_thermal_ents(localclientnum) {
-  a_e_thermals = getentarray(localclientnum);
+  a_e_thermals = getEntArray(localclientnum);
   foreach(entity in a_e_thermals) {
-    if(isdefined(entity.b_show_thermal) && entity.b_show_thermal) {
+    if(isDefined(entity.b_show_thermal) && entity.b_show_thermal) {
       entity set_entity_thermal(localclientnum, 1);
     }
   }
 }
 
 function deactivate_thermal_ents(localclientnum) {
-  a_e_thermals = getentarray(localclientnum);
+  a_e_thermals = getEntArray(localclientnum);
   foreach(entity in a_e_thermals) {
-    if(isdefined(entity.b_show_thermal) && entity.b_show_thermal) {
+    if(isDefined(entity.b_show_thermal) && entity.b_show_thermal) {
       entity set_entity_thermal(localclientnum, 0);
     }
   }
@@ -205,7 +205,7 @@ function deactivate_thermal_ents(localclientnum) {
 function structural_weakness_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self endon("entityshutdown");
   level flagsys::wait_till("duplicaterender_registry_ready");
-  assert(isdefined(self), "");
+  assert(isDefined(self), "");
   if(newval) {
     self duplicate_render::set_item_enemy_equipment(localclientnum, newval);
   }
@@ -231,17 +231,17 @@ function function_6b87ceb0(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function hack_dni_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self thread postfx::playpostfxbundle("pstfx_hacking_bootup");
-  self playsound(0, "uin_hack_mode_activate");
+  self playSound(0, "uin_hack_mode_activate");
 }
 
 function function_3b4d6db0(localclientnum, b_playsound = 1) {
   self tmodeenable(0);
-  if(!isdefined(level.var_e46224ba) && !isigcactive(localclientnum) && b_playsound) {
+  if(!isDefined(level.var_e46224ba) && !isigcactive(localclientnum) && b_playsound) {
     self thread postfx::playpostfxbundle("pstfx_tactical_bootup");
   }
   self thread tmode_remove_all_ents(localclientnum);
   if(!isigcactive(localclientnum) && b_playsound) {
-    self playsound(0, "uin_tac_mode_off");
+    self playSound(0, "uin_tac_mode_off");
   }
   level flag::clear("activate_tmode");
 }
@@ -250,16 +250,14 @@ function function_165838aa(localclientnum, b_playsound = 1) {
   function_22ee3552(localclientnum);
   level flag::set("activate_tmode");
   self tmodeenable(1);
-  if(isdefined(level.tmode_override)) {
-    [
-      [level.tmode_override]
-    ]();
+  if(isDefined(level.tmode_override)) {
+    [[level.tmode_override]]();
   }
-  if(!isdefined(level.var_e46224ba) && b_playsound) {
+  if(!isDefined(level.var_e46224ba) && b_playsound) {
     self thread postfx::playpostfxbundle("pstfx_tactical_bootup");
   }
   if(b_playsound) {
-    self playsound(0, "uin_tac_mode_on");
+    self playSound(0, "uin_tac_mode_on");
   }
 }
 
@@ -267,7 +265,7 @@ function tmode_player_toggle(localclientnum, oldval, newval, bnewent, binitialsn
   if(!self islocalplayer()) {
     return;
   }
-  if(!isdefined(self.localclientnum)) {
+  if(!isDefined(self.localclientnum)) {
     return;
   }
   if(self.localclientnum != localclientnum) {
@@ -293,7 +291,7 @@ function sitrep_player_toggle(localclientnum, oldval, newval, bnewent, binitials
   if(!self islocalplayer()) {
     return;
   }
-  if(!isdefined(self.localclientnum)) {
+  if(!isDefined(self.localclientnum)) {
     return;
   }
   if(self.localclientnum != localclientnum) {
@@ -309,9 +307,9 @@ function player_toggle_sitrep(lcn, newval) {
 
 function ent_material_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self endon("entityshutdown");
-  assert(isdefined(self), "");
+  assert(isDefined(self), "");
   level flagsys::wait_till("duplicaterender_registry_ready");
-  assert(isdefined(self), "");
+  assert(isDefined(self), "");
   if(newval == 0) {
     self notify("hash_1b32b83b");
     self.var_6c4eaf38 = undefined;
@@ -321,7 +319,7 @@ function ent_material_callback(localclientnum, oldval, newval, bnewent, binitial
     self duplicate_render::change_dr_flags(localclientnum, "keyline_active", "keyfill_active");
     self.var_ac0e7241 = 1;
     self tmodeclearflag(2);
-    if(!isdefined(self.var_6c4eaf38)) {
+    if(!isDefined(self.var_6c4eaf38)) {
       self.var_6c4eaf38 = 1;
       self thread function_537efcea(localclientnum);
     }
@@ -338,7 +336,7 @@ function function_537efcea(localclientnum) {
   var_56f99f06 = 0;
   var_56f99f06 = getdvarfloat("interactivePromptNearToDist", 8.4);
   var_56f99f06 = var_56f99f06 * 39.37;
-  while (true) {
+  while(true) {
     n_dist = distance(self.origin, player.origin);
     var_98b6ad82 = level flag::get("activate_thermal");
     var_d2ca8de = 0;

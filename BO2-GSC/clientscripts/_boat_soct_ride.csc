@@ -43,7 +43,7 @@ driving_anims() {
 
     if(!isDefined(level.vh_player_soct.steering_wheel)) {
       level.vh_player_soct.steering_wheel = spawn(player getlocalclientnumber(), player getorigin() + vectorscale((0, 0, -1), 1000.0), "script_model");
-      level.vh_player_soct.steering_wheel setmodel("veh_t6_mil_soc_t_steeringwheel");
+      level.vh_player_soct.steering_wheel setModel("veh_t6_mil_soc_t_steeringwheel");
       level.vh_player_soct.steering_wheel linkto(level.vh_player_soct.viewarms, "tag_weapon");
     }
 
@@ -145,10 +145,9 @@ update_splash(localclientnum) {
         setdvar("src_player_soct_in_water", "1");
 
         if(isDefined(level._effect["soct_water_splash"]))
-          playfxontag(localclientnum, level._effect["soct_water_splash"], self, "tag_body");
+          playFXOnTag(localclientnum, level._effect["soct_water_splash"], self, "tag_body");
 
-        if(isDefined(level.vh_player_soct) && self == level.vh_player_soct) {
-        }
+        if(isDefined(level.vh_player_soct) && self == level.vh_player_soct) {}
       }
     } else {
       if(self.in_water == 1)

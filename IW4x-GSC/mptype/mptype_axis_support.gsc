@@ -4,7 +4,6 @@
 ******************************************/
 
 main() {
-
   character\character_mp_arab_regular_support::main();
 }
 

@@ -50,9 +50,9 @@ function main_quest_init() {
   level flag::init("staff_water_upgrade_unlocked");
   level flag::init("staff_fire_upgrade_unlocked");
   level flag::init("staff_lightning_upgrade_unlocked");
-  level.callbackvehicledamage = & aircrystalbiplanecallback_vehicledamage;
-  level.game_mode_custom_onplayerdisconnect = & player_disconnect_callback;
-  callback::on_connect( & onplayerconnect);
+  level.callbackvehicledamage = &aircrystalbiplanecallback_vehicledamage;
+  level.game_mode_custom_onplayerdisconnect = &player_disconnect_callback;
+  callback::on_connect(&onplayerconnect);
   staff_air = getent("prop_staff_air", "targetname");
   staff_fire = getent("prop_staff_fire", "targetname");
   staff_lightning = getent("prop_staff_lightning", "targetname");
@@ -150,7 +150,7 @@ function main_quest_init() {
   }
   level.var_2b2f83e5 = getweapon("staff_revive");
   level.staffs_charged = 0;
-  array::thread_all(level.zombie_spawners, & spawner::add_spawn_function, & zombie_spawn_func);
+  array::thread_all(level.zombie_spawners, &spawner::add_spawn_function, &zombie_spawn_func);
   level thread watch_for_staff_upgrades();
   level thread chambers_init();
   level thread zm_tomb_quest_air::main();
@@ -168,15 +168,15 @@ function main_quest_init() {
   level thread zm_tomb_vo::watch_one_shot_samantha_clue("vox_sam_fire_staff_clue_2", "sam_clue_zonecap", "staff_piece_capture_complete");
   level thread zm_tomb_vo::watch_one_shot_samantha_clue("vox_sam_lightning_staff_clue_0", "sam_clue_tank", "elemental_staff_lightning_all_pieces_found");
   level thread zm_tomb_vo::watch_one_shot_samantha_clue("vox_sam_wind_staff_clue_0", "sam_clue_giant", "elemental_staff_air_all_pieces_found");
-  level.dig_spawners = getentarray("zombie_spawner_dig", "script_noteworthy");
-  array::thread_all(level.dig_spawners, & spawner::add_spawn_function, & zm_tomb_utility::dug_zombie_spawn_init);
+  level.dig_spawners = getEntArray("zombie_spawner_dig", "script_noteworthy");
+  array::thread_all(level.dig_spawners, &spawner::add_spawn_function, &zm_tomb_utility::dug_zombie_spawn_init);
 }
 
 function onplayerconnect() {}
 
 function player_disconnect_callback(player) {
   var_d95a0cf3 = player.characterindex + 1;
-  level util::delay(0.5, undefined, & zm_tomb_craftables::clear_player_staff_by_player_number, var_d95a0cf3);
+  level util::delay(0.5, undefined, &zm_tomb_craftables::clear_player_staff_by_player_number, var_d95a0cf3);
 }
 
 function place_staffs_encasement() {
@@ -186,10 +186,10 @@ function place_staffs_encasement() {
 
 function chambers_init() {
   level flag::init("gramophone_placed");
-  array::thread_all(getentarray("trigger_death_floor", "targetname"), & monitor_chamber_death_trigs);
+  array::thread_all(getEntArray("trigger_death_floor", "targetname"), &monitor_chamber_death_trigs);
   a_stargate_gramophones = struct::get_array("stargate_gramophone_pos", "targetname");
-  array::thread_all(a_stargate_gramophones, & run_gramophone_teleporter);
-  a_door_main = getentarray("chamber_entrance", "targetname");
+  array::thread_all(a_stargate_gramophones, &run_gramophone_teleporter);
+  a_door_main = getEntArray("chamber_entrance", "targetname");
   foreach(e_door in a_door_main) {
     if(e_door.classname == "script_brushmodel") {
       e_door connectpaths();
@@ -200,7 +200,7 @@ function chambers_init() {
 }
 
 function monitor_chamber_death_trigs() {
-  while (true) {
+  while(true) {
     self waittill("trigger", ent);
     if(isplayer(ent)) {
       ent.bleedout_time = 0;
@@ -272,28 +272,28 @@ function run_gramophone_teleporter(str_vinyl_record) {
   level waittill("gramophone_vinyl_player_picked_up");
   str_craftablename = "gramophone";
   t_gramophone zm_tomb_utility::set_unitrigger_hint_string(&"ZM_TOMB_RU");
-  while (!self.has_vinyl) {
+  while(!self.has_vinyl) {
     wait(0.05);
   }
   t_gramophone zm_tomb_utility::set_unitrigger_hint_string(&"ZM_TOMB_PLGR");
-  while (true) {
+  while(true) {
     t_gramophone waittill("trigger", player);
-    if(!isdefined(self.gramophone_model)) {
+    if(!isDefined(self.gramophone_model)) {
       if(!level flag::get("gramophone_placed")) {
         self.gramophone_model = spawn("script_model", self.origin);
         self.gramophone_model.angles = self.angles;
-        self.gramophone_model setmodel("p7_spl_gramophone");
+        self.gramophone_model setModel("p7_spl_gramophone");
         level clientfield::set("piece_record_zm_player", 0);
         level flag::set("gramophone_placed");
         t_gramophone zm_tomb_utility::set_unitrigger_hint_string("");
         str_song_id = self get_gramophone_song();
-        self.gramophone_model playsound(str_song_id);
+        self.gramophone_model playSound(str_song_id);
         player thread zm_tomb_vo::play_gramophone_place_vo();
         zm_tomb_teleporter::stargate_teleport_enable(self.script_int);
         level flag::wait_till("teleporter_building_" + self.script_int);
         level flag::wait_till_clear("teleporter_building_" + self.script_int);
         t_gramophone zm_tomb_utility::set_unitrigger_hint_string(&"ZM_TOMB_PUGR");
-        if(isdefined(self.script_flag)) {
+        if(isDefined(self.script_flag)) {
           level flag::set(self.script_flag);
         }
       } else {
@@ -302,7 +302,7 @@ function run_gramophone_teleporter(str_vinyl_record) {
     } else {
       self.gramophone_model delete();
       self.gramophone_model = undefined;
-      player playsound("zmb_craftable_pickup");
+      player playSound("zmb_craftable_pickup");
       level flag::clear("gramophone_placed");
       level clientfield::set("piece_record_zm_player", 1);
       zm_tomb_teleporter::stargate_teleport_disable(self.script_int);
@@ -316,7 +316,7 @@ function door_watch_open_sesame() {
   self.has_vinyl = 1;
   level.b_open_all_gramophone_doors = 1;
   wait(0.5);
-  if(isdefined(self.trigger)) {
+  if(isDefined(self.trigger)) {
     self.trigger notify("trigger", getplayers()[0]);
   }
 }
@@ -329,35 +329,35 @@ function run_gramophone_door(str_vinyl_record, var_ac769486) {
   trig_position.gramophone_model = undefined;
   trig_position thread watch_gramophone_vinyl_pickup();
   trig_position thread door_watch_open_sesame();
-  t_door = zm_tomb_utility::tomb_spawn_trigger_radius(trig_position.origin, 60, 1, undefined, & function_ed81ffaa);
+  t_door = zm_tomb_utility::tomb_spawn_trigger_radius(trig_position.origin, 60, 1, undefined, &function_ed81ffaa);
   t_door zm_tomb_utility::set_unitrigger_hint_string(&"ZOMBIE_BUILD_PIECE_MORE");
   level util::waittill_any("gramophone_vinyl_player_picked_up", "open_sesame", "open_all_gramophone_doors");
   str_craftablename = "gramophone";
   t_door zm_tomb_utility::set_unitrigger_hint_string(&"ZM_TOMB_RU");
   trig_position.trigger = t_door;
-  while (!trig_position.has_vinyl) {
+  while(!trig_position.has_vinyl) {
     wait(0.05);
   }
   t_door zm_tomb_utility::set_unitrigger_hint_string(&"ZM_TOMB_PLGR");
-  while (true) {
+  while(true) {
     t_door waittill("trigger", player);
-    if(!isdefined(trig_position.gramophone_model)) {
-      if(!level flag::get("gramophone_placed") || (isdefined(level.b_open_all_gramophone_doors) && level.b_open_all_gramophone_doors)) {
-        if(!(isdefined(level.b_open_all_gramophone_doors) && level.b_open_all_gramophone_doors)) {
+    if(!isDefined(trig_position.gramophone_model)) {
+      if(!level flag::get("gramophone_placed") || (isDefined(level.b_open_all_gramophone_doors) && level.b_open_all_gramophone_doors)) {
+        if(!(isDefined(level.b_open_all_gramophone_doors) && level.b_open_all_gramophone_doors)) {
           trig_position.gramophone_model = spawn("script_model", trig_position.origin);
           trig_position.gramophone_model.angles = trig_position.angles;
-          trig_position.gramophone_model setmodel("p7_spl_gramophone");
+          trig_position.gramophone_model setModel("p7_spl_gramophone");
           level flag::set("gramophone_placed");
           level clientfield::set("piece_record_zm_player", 0);
         }
         str_song = trig_position get_gramophone_song();
         playsoundatposition(str_song, self.origin);
         t_door zm_tomb_utility::set_unitrigger_hint_string("");
-        self playsound("zmb_crypt_stairs");
+        self playSound("zmb_crypt_stairs");
         wait(6);
         chamber_blocker();
         level flag::set(self.targetname + "_opened");
-        if(isdefined(trig_position.script_flag)) {
+        if(isDefined(trig_position.script_flag)) {
           level flag::set(trig_position.script_flag);
         }
         level clientfield::set("crypt_open_exploder", 1);
@@ -367,7 +367,7 @@ function run_gramophone_door(str_vinyl_record, var_ac769486) {
         var_ac769486 delete();
         self delete();
         t_door zm_tomb_utility::set_unitrigger_hint_string(&"ZM_TOMB_PUGR");
-        if(isdefined(level.b_open_all_gramophone_doors) && level.b_open_all_gramophone_doors) {
+        if(isDefined(level.b_open_all_gramophone_doors) && level.b_open_all_gramophone_doors) {
           break;
         }
       } else {
@@ -378,7 +378,7 @@ function run_gramophone_door(str_vinyl_record, var_ac769486) {
       trig_position.gramophone_model = undefined;
       level flag::clear("gramophone_placed");
       level flag::set("crypt_opened");
-      player playsound("zmb_craftable_pickup");
+      player playSound("zmb_craftable_pickup");
       level clientfield::set("piece_record_zm_player", 1);
       break;
     }
@@ -388,14 +388,14 @@ function run_gramophone_door(str_vinyl_record, var_ac769486) {
 }
 
 function function_ed81ffaa(player) {
-  if(level flag::get("crypt_opened") || (isdefined(level.b_open_all_gramophone_doors) && level.b_open_all_gramophone_doors)) {
+  if(level flag::get("crypt_opened") || (isDefined(level.b_open_all_gramophone_doors) && level.b_open_all_gramophone_doors)) {
     return false;
   }
   return true;
 }
 
 function chamber_blocker() {
-  a_blockers = getentarray("junk_nml_chamber", "targetname");
+  a_blockers = getEntArray("junk_nml_chamber", "targetname");
   m_blocker = getent("junk_nml_chamber", "targetname");
   s_blocker_end = struct::get(m_blocker.script_linkto, "script_linkname");
   m_blocker thread zm_blockers::debris_move(s_blocker_end);
@@ -418,28 +418,28 @@ function staff_upgrade_watch() {
 
 function staff_get_pickup_message() {
   if(self.element == "air") {
-    return & "ZM_TOMB_PUAS";
+    return &"ZM_TOMB_PUAS";
   }
   if(self.element == "fire") {
-    return & "ZM_TOMB_PUFS";
+    return &"ZM_TOMB_PUFS";
   }
   if(self.element == "lightning") {
-    return & "ZM_TOMB_PULS";
+    return &"ZM_TOMB_PULS";
   }
-  return & "ZM_TOMB_PUIS";
+  return &"ZM_TOMB_PUIS";
 }
 
 function staff_get_insert_message() {
   if(self.element == "air") {
-    return & "ZM_TOMB_INAS";
+    return &"ZM_TOMB_INAS";
   }
   if(self.element == "fire") {
-    return & "ZM_TOMB_INFS";
+    return &"ZM_TOMB_INFS";
   }
   if(self.element == "lightning") {
-    return & "ZM_TOMB_INLS";
+    return &"ZM_TOMB_INLS";
   }
-  return & "ZM_TOMB_INWS";
+  return &"ZM_TOMB_INWS";
 }
 
 function player_has_staff() {
@@ -467,7 +467,7 @@ function watch_for_player_pickup_staff() {
   pickup_message = self staff_get_pickup_message();
   self.trigger zm_tomb_utility::set_unitrigger_hint_string(pickup_message);
   self show();
-  while (!staff_picked_up) {
+  while(!staff_picked_up) {
     self.trigger waittill("trigger", player);
     self notify("retrieved", player);
     if(player can_pickup_staff() && !player bgb::is_enabled("zm_bgb_disorderly_combat")) {
@@ -503,7 +503,7 @@ function watch_for_player_pickup_staff() {
 
 function watch_staff_ammo_reload() {
   self endon("disconnect");
-  while (true) {
+  while(true) {
     self waittill("zmb_max_ammo");
     a_weapons = self getweaponslistprimaries();
     foreach(weapon in a_weapons) {
@@ -516,7 +516,7 @@ function watch_staff_ammo_reload() {
 
 function rotate_forever(rotate_time = 20) {
   self endon("death");
-  while (true) {
+  while(true) {
     self rotateyaw(360, 20, 0, 0);
     self waittill("rotatedone");
   }
@@ -535,7 +535,7 @@ function staff_crystal_wait_for_teleport(n_element_enum) {
   e_plinth.v_staff = e_plinth.origin;
   e_plinth.v_staff = (e_plinth.v_staff[0], e_plinth.v_staff[1], e_plinth.origin[2] + 110);
   e_plinth moveto(e_plinth.v_start, 0.05);
-  while (true) {
+  while(true) {
     level waittill("player_teleported", e_player, n_teleport_enum);
     if(n_teleport_enum == n_element_enum) {
       break;
@@ -546,9 +546,9 @@ function staff_crystal_wait_for_teleport(n_element_enum) {
   lookat_dot = cos(90);
   dist_sq = 250000;
   lookat_time = 0;
-  while (lookat_time < 1 && isdefined(self.piecespawn.model)) {
+  while(lookat_time < 1 && isDefined(self.piecespawn.model)) {
     wait(0.1);
-    if(!isdefined(self.piecespawn.model)) {
+    if(!isDefined(self.piecespawn.model)) {
       break;
     }
     if(self.piecespawn.model zm_tomb_utility::any_player_looking_at_plinth(lookat_dot, dist_sq)) {
@@ -557,16 +557,16 @@ function staff_crystal_wait_for_teleport(n_element_enum) {
       lookat_time = 0;
     }
   }
-  if(isdefined(self.piecespawn.model)) {
+  if(isDefined(self.piecespawn.model)) {
     self.piecespawn.model movez(985, 0.05);
     self.piecespawn.model waittill("movedone");
     self.piecespawn.model show();
     self.piecespawn.model thread rotate_forever();
     self.piecespawn.model movez(15, 2);
-    self.piecespawn.model playloopsound("zmb_squest_crystal_loop", 4.25);
+    self.piecespawn.model playLoopSound("zmb_squest_crystal_loop", 4.25);
   }
   level flag::wait_till("charger_ready_" + n_element_enum);
-  while (!zm_tomb_chamber::is_chamber_occupied()) {
+  while(!zm_tomb_chamber::is_chamber_occupied()) {
     util::wait_network_frame();
   }
   e_plinth moveto(e_plinth.v_staff, 3);
@@ -577,16 +577,16 @@ function staff_crystal_wait_for_teleport(n_element_enum) {
 function sndmoveplinth(time) {
   self notify("sndmoveplinth");
   self endon("sndmoveplinth");
-  self playloopsound("zmb_chamber_plinth_move", 0.25);
+  self playLoopSound("zmb_chamber_plinth_move", 0.25);
   wait(time);
   self stoploopsound(0.1);
-  self playsound("zmb_chamber_plinth_stop");
+  self playSound("zmb_chamber_plinth_stop");
 }
 
 function staff_mechz_drop_pieces(s_piece) {
   s_piece zm_tomb_craftables::craftable_waittill_spawned();
   s_piece.piecespawn.model ghost();
-  for (i = 0; i < 1; i++) {
+  for(i = 0; i < 1; i++) {
     level waittill("mechz_killed", origin);
   }
   s_piece.piecespawn.canmove = 1;
@@ -594,7 +594,7 @@ function staff_mechz_drop_pieces(s_piece) {
   origin = zm_utility::groundpos_ignore_water_new(origin + vectorscale((0, 0, 1), 40));
   s_piece.piecespawn.model moveto(origin + vectorscale((0, 0, 1), 16), 0.05);
   s_piece.piecespawn.model waittill("movedone");
-  if(isdefined(s_piece.piecespawn.model)) {
+  if(isDefined(s_piece.piecespawn.model)) {
     s_piece.piecespawn.model show();
     s_piece.piecespawn.model notify("staff_piece_glow");
     s_piece.piecespawn.model thread mechz_staff_piece_failsafe();
@@ -605,7 +605,7 @@ function mechz_staff_piece_failsafe() {
   min_dist_sq = 1000000;
   self endon("death");
   wait(120);
-  while (true) {
+  while(true) {
     a_players = getplayers();
     b_anyone_near = 0;
     foreach(e_player in a_players) {
@@ -627,9 +627,9 @@ function mechz_staff_piece_failsafe() {
 function biplane_clue() {
   self endon("death");
   level endon("biplane_down");
-  while (true) {
+  while(true) {
     cur_round = level.round_number;
-    while (level.round_number == cur_round) {
+    while(level.round_number == cur_round) {
       wait(1);
     }
     wait(randomfloatrange(5, 15));
@@ -649,7 +649,7 @@ function staff_biplane_drop_pieces(a_staff_pieces) {
   }
   level flag::wait_till("activate_zone_village_0");
   cur_round = level.round_number;
-  while (level.round_number == cur_round) {
+  while(level.round_number == cur_round) {
     wait(1);
   }
   s_biplane_pos = struct::get("air_crystal_biplane_pos", "targetname");
@@ -661,7 +661,7 @@ function staff_biplane_drop_pieces(a_staff_pieces) {
   e_fx_tag waittill("movedone");
   e_fx_tag linkto(vh_biplane);
   vh_biplane.health = 10000;
-  vh_biplane setcandamage(1);
+  vh_biplane setCanDamage(1);
   vh_biplane setforcenocull();
   vh_biplane attachpath(getvehiclenode("biplane_start", "targetname"));
   vh_biplane setspeed(75, 15, 5);
@@ -669,13 +669,13 @@ function staff_biplane_drop_pieces(a_staff_pieces) {
   e_fx_tag clientfield::set("plane_fx", 1);
   s_biplane_pos struct::delete();
   vh_biplane flag::wait_till("biplane_down");
-  vh_biplane playsound("zmb_zombieblood_3rd_plane_explode");
+  vh_biplane playSound("zmb_zombieblood_3rd_plane_explode");
   vh_biplane delete();
   e_fx_tag clientfield::set("plane_fx", 0);
-  playfx(level._effect["biplane_explode"], e_fx_tag.origin);
+  playFX(level._effect["biplane_explode"], e_fx_tag.origin);
   foreach(staff_piece in a_staff_pieces) {
     staff_piece.e_fx = spawn("script_model", e_fx_tag.origin);
-    staff_piece.e_fx setmodel("tag_origin");
+    staff_piece.e_fx setModel("tag_origin");
     staff_piece.e_fx clientfield::set("glow_biplane_trail_fx", 1);
     staff_piece.e_fx moveto(staff_piece.origin, 5);
   }
@@ -700,9 +700,9 @@ function aircrystalbiplanecallback_vehicledamage(e_inflictor, e_attacker, n_dama
 
 function zone_capture_clue(str_zone) {
   level endon("staff_piece_capture_complete");
-  while (true) {
+  while(true) {
     wait(5);
-    while (!level.zones[str_zone].is_occupied) {
+    while(!level.zones[str_zone].is_occupied) {
       wait(1);
     }
     a_players = getplayers();
@@ -715,13 +715,13 @@ function zone_capture_clue(str_zone) {
 function staff_unlock_with_zone_capture(s_staff_piece) {
   s_staff_piece zm_tomb_craftables::craftable_waittill_spawned();
   str_zone = zm_zonemgr::get_zone_from_position(s_staff_piece.piecespawn.model.origin, 1);
-  if(!isdefined(str_zone)) {
+  if(!isDefined(str_zone)) {
     assertmsg("");
     return;
   }
   level thread zone_capture_clue(str_zone);
   s_staff_piece.piecespawn.model ghost();
-  while (true) {
+  while(true) {
     level waittill("zone_captured_by_player", str_captured_zone);
     if(str_captured_zone == str_zone) {
       break;
@@ -731,7 +731,7 @@ function staff_unlock_with_zone_capture(s_staff_piece) {
   foreach(uts_box in level.a_uts_challenge_boxes) {
     if(uts_box.str_location == "church_capture") {
       uts_box.s_staff_piece = s_staff_piece;
-      level thread zm_challenges_tomb::open_box(undefined, uts_box, & reward_staff_piece);
+      level thread zm_challenges_tomb::open_box(undefined, uts_box, &reward_staff_piece);
       return;
     }
   }
@@ -740,7 +740,7 @@ function staff_unlock_with_zone_capture(s_staff_piece) {
 function reward_staff_piece(player, s_stat) {
   m_piece = spawn("script_model", self.origin);
   m_piece.angles = self.angles + vectorscale((0, 1, 0), 180);
-  m_piece setmodel("wpn_t7_zmb_hd_staff_tip_fire_world");
+  m_piece setModel("wpn_t7_zmb_hd_staff_tip_fire_world");
   m_piece.origin = self.origin;
   m_piece.angles = self.angles + vectorscale((0, 1, 0), 90);
   m_piece clientfield::set("element_glow_fx", 1);
@@ -751,7 +751,7 @@ function reward_staff_piece(player, s_stat) {
   n_dist = 9999;
   a_players = getplayers();
   a_players = util::get_array_of_closest(self.m_box.origin, a_players);
-  if(isdefined(a_players[0])) {
+  if(isDefined(a_players[0])) {
     a_players[0] zm_craftables::player_take_piece(self.s_staff_piece.piecespawn);
   }
   m_piece delete();
@@ -762,7 +762,7 @@ function dig_spot_get_staff_piece(e_player) {
   level notify("sam_clue_dig", e_player);
   str_zone = self.str_zone;
   foreach(s_staff in level.ice_staff_pieces) {
-    if(!isdefined(s_staff.num_misses)) {
+    if(!isDefined(s_staff.num_misses)) {
       s_staff.num_misses = 0;
     }
     if(issubstr(str_zone, s_staff.zone_substr)) {
@@ -791,8 +791,8 @@ function show_ice_staff_piece(origin) {
   self.piecespawn.model showindemo();
   self.piecespawn.model show();
   self.piecespawn.model notify("staff_piece_glow");
-  self.piecespawn.model playsound("evt_staff_digup");
-  self.piecespawn.model playloopsound("evt_staff_digup_lp");
+  self.piecespawn.model playSound("evt_staff_digup");
+  self.piecespawn.model playLoopSound("evt_staff_digup_lp");
 }
 
 function staff_ice_dig_pieces(a_staff_pieces) {
@@ -833,7 +833,7 @@ function crystal_play_glow_fx(s_crystal) {
 function watch_for_crystal_pickup(s_crystal, n_enum) {
   s_crystal.piecespawn.model clientfield::set("element_glow_fx", n_enum);
   s_crystal.piecespawn waittill("pickup");
-  self playsound("evt_crystal");
+  self playSound("evt_crystal");
   level.n_crystals_pickedup++;
 }
 
@@ -870,23 +870,23 @@ function place_staff_in_charger() {
   level flag::set("charger_ready_" + self.enum);
   v_trigger_pos = self.charger.origin;
   v_trigger_pos = (v_trigger_pos[0], v_trigger_pos[1], v_trigger_pos[2] - 30);
-  if(isdefined(self.charge_trigger)) {
+  if(isDefined(self.charge_trigger)) {
     self.charge_trigger zm_tomb_utility::tomb_unitrigger_delete();
   }
-  self.charge_trigger = zm_tomb_utility::tomb_spawn_trigger_radius(v_trigger_pos, 120, 1, & staff_charger_get_player_msg);
+  self.charge_trigger = zm_tomb_utility::tomb_spawn_trigger_radius(v_trigger_pos, 120, 1, &staff_charger_get_player_msg);
   self.charge_trigger.require_look_at = 1;
   self.charge_trigger.staff_data = self;
   waittill_staff_inserted();
 }
 
 function debug_staff_charge() {
-  if(!isdefined(self.charger.charges_received)) {
+  if(!isDefined(self.charger.charges_received)) {
     self.charger.charges_received = 0;
   }
-  while (self.charger.is_inserted) {
+  while(self.charger.is_inserted) {
     if(self.charger.is_charged) {
       maxammo = self.w_weapon.maxammo;
-      if(!isdefined(self.prev_ammo_stock)) {
+      if(!isDefined(self.prev_ammo_stock)) {
         self.prev_ammo_stock = maxammo;
       }
       print3d(self.origin, (self.prev_ammo_stock + "") + maxammo, vectorscale((1, 1, 1), 255), 1);
@@ -898,10 +898,10 @@ function debug_staff_charge() {
 }
 
 function waittill_staff_inserted() {
-  while (true) {
+  while(true) {
     self.charge_trigger waittill("trigger", player);
     weapon_available = 1;
-    if(isdefined(player)) {
+    if(isDefined(player)) {
       weapon_available = player hasweapon(self.w_weapon);
       if(weapon_available) {
         player takeweapon(self.w_weapon);
@@ -912,21 +912,21 @@ function waittill_staff_inserted() {
       self thread debug_staff_charge();
       zm_tomb_craftables::clear_player_staff(self.w_weapon);
       n_player = player getentitynumber();
-      self.charge_trigger.playertrigger[n_player] zm_tomb_utility::tomb_trigger_update_message( & staff_charger_get_player_msg);
+      self.charge_trigger.playertrigger[n_player] zm_tomb_utility::tomb_trigger_update_message(&staff_charger_get_player_msg);
       self.angles = (270, 90, 0);
       self moveto(self.charger.origin, 0.05);
       self waittill("movedone");
       self clientfield::set("staff_charger", self.enum);
       self.charger.full = 0;
       self show();
-      self playsound("zmb_squest_charge_place_staff");
+      self playSound("zmb_squest_charge_place_staff");
       return;
     }
   }
 }
 
 function zombie_spawn_func() {
-  self.actor_killed_override = & zombie_killed_override;
+  self.actor_killed_override = &zombie_killed_override;
 }
 
 function zombie_killed_override(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime) {
@@ -945,11 +945,11 @@ function zombie_killed_override(einflictor, attacker, idamage, smeansofdeath, sw
     s_nearest_staff = undefined;
     n_nearest_dist_sq = n_max_dist_sq;
     foreach(staff in level.a_elemental_staffs) {
-      if(isdefined(staff.charger.full) && staff.charger.full) {
+      if(isDefined(staff.charger.full) && staff.charger.full) {
         continue;
       }
       if(staff.charger.is_inserted || staff.upgrade.charger.is_inserted) {
-        if(!(isdefined(staff.charger.is_charged) && staff.charger.is_charged)) {
+        if(!(isDefined(staff.charger.is_charged) && staff.charger.is_charged)) {
           dist_sq = distance2dsquared(self.origin, staff.origin);
           if(dist_sq <= n_nearest_dist_sq) {
             n_nearest_dist_sq = dist_sq;
@@ -958,7 +958,7 @@ function zombie_killed_override(einflictor, attacker, idamage, smeansofdeath, sw
         }
       }
     }
-    if(isdefined(s_nearest_staff)) {
+    if(isDefined(s_nearest_staff)) {
       if(s_nearest_staff.charger.is_charged) {} else {
         s_nearest_staff.charger.charges_received++;
         s_nearest_staff.charger thread zombie_soul_to_charger(self, s_nearest_staff.enum);
@@ -977,7 +977,7 @@ function staff_charger_check() {
   self.charger.is_charged = 0;
   level flag::wait_till(self.weapname + "_upgrade_unlocked");
   self showallparts();
-  while (true) {
+  while(true) {
     if(self.charger.charges_received >= 20 || (getdvarint("zombie_cheat") >= 2 && self.charger.is_inserted)) {
       wait(0.5);
       self.charger.is_charged = 1;
@@ -1003,8 +1003,8 @@ function staff_charger_check() {
 
 function staff_sound() {
   self thread sndstaffupgradedstinger();
-  self playsound("zmb_squest_charge_soul_full");
-  self playloopsound("zmb_squest_charge_soul_full_loop", 0.1);
+  self playSound("zmb_squest_charge_soul_full");
+  self playLoopSound("zmb_squest_charge_soul_full_loop", 0.1);
   level waittill("stop_staff_sound");
   self stoploopsound(0.1);
 }
@@ -1041,13 +1041,13 @@ function spawn_upgraded_staff_triggers(n_index) {
   e_staff_standard_upgraded waittill("movedone");
   e_staff_standard_upgraded show();
   e_fx = spawn("script_model", e_staff_standard_upgraded.origin + vectorscale((0, 0, 1), 12));
-  e_fx setmodel("tag_origin");
+  e_fx setModel("tag_origin");
   wait(0.6);
   e_fx clientfield::set("element_glow_fx", e_staff_standard.enum);
   e_staff_standard_upgraded watch_for_player_pickup_staff();
   player = e_staff_standard_upgraded.owner;
   e_fx delete();
-  while (true) {
+  while(true) {
     if(e_staff_standard.charger.is_charged) {
       e_staff_standard_upgraded thread staff_upgraded_reload_monitor();
       break;
@@ -1059,14 +1059,14 @@ function spawn_upgraded_staff_triggers(n_index) {
 function staff_upgraded_reload_monitor() {
   self.weaponname = self.weapname;
   self thread zm_tomb_craftables::track_staff_weapon_respawn(self.owner);
-  while (true) {
+  while(true) {
     place_staff_in_charger();
     self thread staff_upgraded_reload();
     self watch_for_player_pickup_staff();
     self.charger.is_inserted = 0;
     maxammo = self.w_weapon.maxammo;
     n_ammo = int(min(maxammo, self.prev_ammo_stock));
-    if(isdefined(self.owner)) {
+    if(isDefined(self.owner)) {
       self.owner setweaponammostock(self.w_weapon, n_ammo);
       self.owner setweaponammoclip(self.w_weapon, self.prev_ammo_clip);
       self thread zm_tomb_craftables::track_staff_weapon_respawn(self.owner);
@@ -1079,7 +1079,7 @@ function staff_upgraded_reload() {
   max_ammo = self.w_weapon.maxammo;
   n_count = int(max_ammo / 20);
   b_reloaded = 0;
-  while (true) {
+  while(true) {
     self.charger waittill("soul_received");
     self.prev_ammo_stock = self.prev_ammo_stock + n_count;
     if(self.prev_ammo_stock > max_ammo) {

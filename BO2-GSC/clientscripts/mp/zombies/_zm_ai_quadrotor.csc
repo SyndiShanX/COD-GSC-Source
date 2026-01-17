@@ -7,8 +7,7 @@
 #include clientscripts\mp\zombies\_zm_utility;
 #include clientscripts\mp\zm_tomb_amb;
 
-init() {
-}
+init() {}
 
 spawned(localclientnum) {
   self waittill_dobj(localclientnum);

@@ -15,9 +15,7 @@ main() {
   }
 
   if(isDefined(self.customarrivalfunc)) {
-    [
-      [self.customarrivalfunc]
-    ]();
+    [[self.customarrivalfunc]]();
     return;
   }
 

@@ -202,11 +202,9 @@ register_client_fields() {
   }
 }
 
-register_client_flags() {
-}
+register_client_flags() {}
 
-register_clientflag_callbacks() {
-}
+register_clientflag_callbacks() {}
 
 start_zombie_stuff() {
   level._uses_crossbow = 1;
@@ -327,7 +325,7 @@ include_equipment_for_level() {
 }
 
 rotate_wind_turbine() {
-  turbine = getentarray(0, "depot_turbine_rotor", "targetname");
+  turbine = getEntArray(0, "depot_turbine_rotor", "targetname");
 
   if(isDefined(turbine))
     array_thread(turbine, ::spin_transit_turbines);
@@ -511,7 +509,7 @@ power_controlled_lights() {
       }
       level.current_fog = 8;
       setworldfogactivebank(i, level.current_fog);
-      vision_trigs = getentarray(i, "vision_trig", "targetname");
+      vision_trigs = getEntArray(i, "vision_trig", "targetname");
 
       if(isDefined(vision_trigs)) {
         foreach(trig in vision_trigs) {
@@ -569,7 +567,7 @@ turbine_door_sparks(wire) {
 
     for(i = 0; i < players.size; i++) {
       pos = ropegetposition(wire, 1.0);
-      playfx(i, level._effect["fx_zmb_tranzit_spark_blue_lg_os"], pos);
+      playFX(i, level._effect["fx_zmb_tranzit_spark_blue_lg_os"], pos);
     }
 
     waitrealtime(randomfloatrange(3, 10));

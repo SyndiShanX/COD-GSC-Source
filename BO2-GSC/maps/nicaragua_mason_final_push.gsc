@@ -84,7 +84,7 @@ unload_bunker_gump() {
   flag_wait("bunker_exit_door_closed");
   clearallcorpses();
   flag_wait("woods_backbreaker_scene_complete");
-  a_e_coke = getentarray("destructible_cocaine_bundles", "script_noteworthy");
+  a_e_coke = getEntArray("destructible_cocaine_bundles", "script_noteworthy");
 
   foreach(coke_bundle in a_e_coke)
   coke_bundle delete();
@@ -156,7 +156,7 @@ woods_backbreaker() {
   e_clip = getent("woods_backbreaker_clip", "targetname");
   e_clip linkto(level.woods, "tag_origin", (0, 0, 0), (0, 0, 0));
   level thread run_scene("woods_bunker_exit");
-  level.woods playsound("evt_mtl_door_kick");
+  level.woods playSound("evt_mtl_door_kick");
   level.woods thread woods_backbreaker_idle();
   trigger_wait("woods_backbreaker_player");
   level notify("player_left_bunker");
@@ -344,7 +344,7 @@ woods_scream_approach() {
 }
 
 mason_final_push_point_of_no_return_cleanup() {
-  a_t_firetriggers = getentarray("fire_damage_trigger", "script_noteworthy");
+  a_t_firetriggers = getEntArray("fire_damage_trigger", "script_noteworthy");
 
   foreach(trigger in a_t_firetriggers) {
     if(isDefined(trigger))

@@ -27,11 +27,11 @@ watch_for_touching_controls() {
   wait 1;
   v_original_origin = (self.origin[0], self.origin[1], 0);
   v_original_angles = self.angles;
-  v_forward_point = self.origin + anglestoforward(self.angles) * 10;
+  v_forward_point = self.origin + anglesToForward(self.angles) * 10;
   v_original_forward_vec = vectornormalize(v_forward_point - self.origin);
 
   while(!flag("afterlife_start_over") && level.sq_fc_still_valid) {
-    v_new_forward_point = self.origin + anglestoforward(self.angles) * 10;
+    v_new_forward_point = self.origin + anglesToForward(self.angles) * 10;
     v_new_forward_vec = vectornormalize(v_new_forward_point - self.origin);
     move_length = length((self.origin[0], self.origin[1], 0) - v_original_origin);
 
@@ -75,7 +75,7 @@ player_intermission_prison() {
   points = getstructarray("dblock_cam", "targetname");
 
   if(!isDefined(points) || points.size == 0) {
-    points = getentarray("info_intermission", "classname");
+    points = getEntArray("info_intermission", "classname");
 
     if(points.size < 1) {
       println("NO info_intermission POINTS IN MAP");
@@ -104,7 +104,7 @@ player_intermission_prison() {
       if(isDefined(points[i].target)) {
         if(!isDefined(org)) {
           org = spawn("script_model", self.origin + vectorscale((0, 0, -1), 60.0));
-          org setmodel("tag_origin");
+          org setModel("tag_origin");
         }
 
         org.origin = points[i].origin;

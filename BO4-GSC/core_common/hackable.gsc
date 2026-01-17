@@ -5,7 +5,6 @@
 
 #include scripts\core_common\array_shared;
 #include scripts\core_common\system_shared;
-
 #namespace hackable;
 
 autoexec __init__system__() {
@@ -42,7 +41,7 @@ add_hackable_object(obj, test_callback, start_callback, fail_callback, complete_
   }
 
   if(!isDefined(obj.hackable_progress_prompt)) {
-    obj.hackable_progress_prompt = #"weapon/hacking";
+    obj.hackable_progress_prompt = # "weapon/hacking";
   }
 
   if(!isDefined(obj.hackable_cost_mult)) {
@@ -110,8 +109,7 @@ is_object_hackable(obj, origin, forward) {
       }
 
       return 1;
-    } else {
-    }
+    } else {}
   }
 
   return 0;

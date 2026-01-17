@@ -85,8 +85,7 @@ visionset_change() {
   level.player thread maps\createart\karma_2_art::vision_set_change("sp_karma2_mall_interior");
 }
 
-spawn_funcs() {
-}
+spawn_funcs() {}
 
 mall_ambient_effects() {
   exploder(331);
@@ -150,7 +149,7 @@ mall_save_point(save_point_number) {
 }
 
 fxanim_mall_explosion() {
-  a_ents = getentarray("pokee_destruction", "targetname");
+  a_ents = getEntArray("pokee_destruction", "targetname");
 
   foreach(ent in a_ents)
   ent hide();
@@ -202,12 +201,12 @@ e8_wave_spawning() {
 }
 
 e8_enter_mall_trigger(str_category) {
-  a_spawners = getentarray("e8_enter_mall_regular_spawner", "targetname");
+  a_spawners = getEntArray("e8_enter_mall_regular_spawner", "targetname");
 
   if(isDefined(a_spawners))
     simple_spawn(a_spawners, ::spawn_fn_ai_run_to_target, 1, str_category, 0, 0, 0);
 
-  a_holders = getentarray("e8_enter_mall_hold_spawner", "targetname");
+  a_holders = getEntArray("e8_enter_mall_hold_spawner", "targetname");
 
   if(isDefined(a_holders))
     simple_spawn(a_holders, ::spawn_fn_ai_run_to_holding_node, 1, str_category, 1, 0);
@@ -228,17 +227,17 @@ e8_enter_mall_trigger(str_category) {
 
 e8_enter_mall_part2_trigger(str_category) {
   trigger_wait("e8_enter_mall_part2_trigger", "targetname");
-  a_spawners = getentarray("e8_enter_mall_part2_ignore_spawner", "targetname");
+  a_spawners = getEntArray("e8_enter_mall_part2_ignore_spawner", "targetname");
 
   if(isDefined(a_spawners))
     simple_spawn_script_delay(a_spawners, ::spawn_fn_ai_run_to_target, 1, str_category, 0, 0, 1);
 
-  a_spawners = getentarray("e8_enter_mall_part2_regular_spawner", "targetname");
+  a_spawners = getEntArray("e8_enter_mall_part2_regular_spawner", "targetname");
 
   if(isDefined(a_spawners))
     simple_spawn_script_delay(a_spawners, ::spawn_fn_ai_run_to_target, 1, str_category, 0, 0, 0);
 
-  a_jumpers = getentarray("e8_enter_mall_part2_jumper_spawner", "targetname");
+  a_jumpers = getEntArray("e8_enter_mall_part2_jumper_spawner", "targetname");
 
   if(isDefined(a_jumpers))
     simple_spawn(a_jumpers, ::spawn_fn_ai_run_to_jumper_node, 1, str_category, 0, 0, 420);
@@ -254,7 +253,7 @@ e8_mall_upper_left_wave1_trigger(str_category, str_thread_cleanup) {
   if(isDefined(e_ai))
     e_ai thread player_rusher(str_category, undefined, level.player_rusher_fight_dist, 0.02, 0.1, 1);
 
-  a_spawners = getentarray("e8_mall_upper_left_wave1_regular_spawner", "targetname");
+  a_spawners = getEntArray("e8_mall_upper_left_wave1_regular_spawner", "targetname");
 
   if(isDefined(a_spawners))
     simple_spawn_script_delay(a_spawners, ::spawn_fn_ai_run_to_target, 1, str_category, 1, 0, 0);
@@ -265,17 +264,17 @@ e8_mall_upper_left_wave1_trigger(str_category, str_thread_cleanup) {
 e8_mall_upper_right_wave1_trigger(str_category, str_thread_cleanup) {
   level endon(str_thread_cleanup);
   trigger_wait("e8_mall_upper_right_wave1_trigger", "targetname");
-  a_spawners = getentarray("e8_mall_upper_right_wave1_ignore_spawner", "targetname");
+  a_spawners = getEntArray("e8_mall_upper_right_wave1_ignore_spawner", "targetname");
 
   if(isDefined(a_spawners))
     simple_spawn_script_delay(a_spawners, ::spawn_fn_ai_run_to_target, 1, str_category, 0, 0, 1);
 
-  a_spawners = getentarray("e8_mall_upper_right_wave1_regular_spawner", "targetname");
+  a_spawners = getEntArray("e8_mall_upper_right_wave1_regular_spawner", "targetname");
 
   if(isDefined(a_spawners))
     simple_spawn_script_delay(a_spawners, ::spawn_fn_ai_run_to_target, 1, str_category, 1, 0, 0);
 
-  a_holders = getentarray("e8_mall_upper_right_wave1_hold_spawner", "targetname");
+  a_holders = getEntArray("e8_mall_upper_right_wave1_hold_spawner", "targetname");
 
   if(isDefined(a_holders))
     simple_spawn_script_delay(a_holders, ::spawn_fn_ai_run_to_holding_node, 1, str_category, 1, 0);
@@ -292,7 +291,7 @@ e8_start_left_staircase_trigger(str_category, str_thread_cleanup) {
   level endon(str_thread_cleanup);
   trigger_wait("e8_start_left_staircase_trigger", "targetname");
   mall_save_point(1);
-  a_spawners = getentarray("e8_start_left_staircase_regular_spawner", "targetname");
+  a_spawners = getEntArray("e8_start_left_staircase_regular_spawner", "targetname");
 
   if(isDefined(a_spawners))
     simple_spawn_script_delay(a_spawners, ::spawn_fn_ai_run_to_target, 1, str_category, 1, 0, 0);
@@ -308,7 +307,7 @@ e8_start_right_staircase_trigger(str_category, str_thread_cleanup) {
   level endon(str_thread_cleanup);
   trigger_wait("e8_start_right_staircase_trigger", "targetname");
   mall_save_point(1);
-  a_spawners = getentarray("e8_start_right_staircase_regular_spawner", "targetname");
+  a_spawners = getEntArray("e8_start_right_staircase_regular_spawner", "targetname");
 
   if(isDefined(a_spawners))
     simple_spawn_script_delay(a_spawners, ::spawn_fn_ai_run_to_target, 1, str_category, 1, 0, 0);
@@ -319,7 +318,7 @@ e8_start_right_staircase_trigger(str_category, str_thread_cleanup) {
   if(isDefined(e_ai))
     e_ai thread player_rusher(str_category, e_ai.script_delay, level.player_rusher_fight_dist, 0.02, 0.1, 1);
 
-  a_holders = getentarray("e8_start_right_staircase_hold_spawner", "targetname");
+  a_holders = getEntArray("e8_start_right_staircase_hold_spawner", "targetname");
 
   if(isDefined(a_holders))
     simple_spawn_script_delay(a_holders, ::spawn_fn_ai_run_to_holding_node, 1, str_category, 1, 0);
@@ -332,7 +331,7 @@ e8_mall_ul_mid_point_trigger(delay, str_category, str_thread_cleanup) {
     wait(delay);
 
   trigger_wait("e8_mall_ul_mid_point_trigger", "targetname");
-  a_spawners = getentarray("e8_mall_ul_mid_point_regular_spawner", "targetname");
+  a_spawners = getEntArray("e8_mall_ul_mid_point_regular_spawner", "targetname");
 
   if(isDefined(a_spawners))
     simple_spawn_script_delay(a_spawners, ::spawn_fn_ai_run_to_target, 1, str_category, 1, 0, 0);
@@ -351,7 +350,7 @@ e8_mall_ul_staircase_trigger(delay, str_category, str_thread_cleanup) {
     wait(delay);
 
   trigger_wait("e8_mall_ul_mid_point_trigger", "targetname");
-  a_spawners = getentarray("e8_mall_ul_staircase_regular_spawner", "targetname");
+  a_spawners = getEntArray("e8_mall_ul_staircase_regular_spawner", "targetname");
 
   if(isDefined(a_spawners))
     simple_spawn_script_delay(a_spawners, ::spawn_fn_ai_run_to_target, 0, str_category, 1, 0, 0);
@@ -364,7 +363,7 @@ e8_mall_ur_mid_point_trigger(delay, str_category, str_thread_cleanup) {
     wait(delay);
 
   trigger_wait("e8_mall_ur_mid_point_trigger", "targetname");
-  a_spawners = getentarray("e8_mall_ur_mid_point_regular_spawner", "targetname");
+  a_spawners = getEntArray("e8_mall_ur_mid_point_regular_spawner", "targetname");
 
   if(isDefined(a_spawners))
     simple_spawn_script_delay(a_spawners, ::spawn_fn_ai_run_to_target, 0, str_category, 1, 0, 0);
@@ -383,22 +382,22 @@ e8_mall_ur_approach_castle_trigger(delay, str_category, str_thread_cleanup) {
     wait(delay);
 
   trigger_wait("e8_mall_ur_approach_castle_trigger", "targetname");
-  a_jumpers = getentarray("e8_mall_ur_approach_castle_jumper_spawner", "targetname");
+  a_jumpers = getEntArray("e8_mall_ur_approach_castle_jumper_spawner", "targetname");
 
   if(isDefined(a_jumpers))
     simple_spawn_script_delay(a_jumpers, ::spawn_fn_ai_run_to_jumper_node, 1, str_category, 0, 0, 336);
 
-  a_spawners = getentarray("e8_mall_ur_approach_castle_regular_spawner", "targetname");
+  a_spawners = getEntArray("e8_mall_ur_approach_castle_regular_spawner", "targetname");
 
   if(isDefined(a_spawners))
     simple_spawn_script_delay(a_spawners, ::spawn_fn_ai_run_to_target, 0, str_category, 1, 0, 0);
 
-  a_holders = getentarray("e8_mall_ur_approach_castle_holder_spawner", "targetname");
+  a_holders = getEntArray("e8_mall_ur_approach_castle_holder_spawner", "targetname");
 
   if(isDefined(a_holders))
     simple_spawn_script_delay(a_holders, ::spawn_fn_ai_run_to_holding_node, 1, str_category, 1, 0);
 
-  a_spawners = getentarray("e8_mall_ur_approach_castle_ignore_spawner", "targetname");
+  a_spawners = getEntArray("e8_mall_ur_approach_castle_ignore_spawner", "targetname");
 
   if(isDefined(a_spawners))
     simple_spawn_script_delay(a_spawners, ::spawn_fn_ai_run_to_target, 1, str_category, 0, 0, 1);
@@ -414,7 +413,7 @@ e8_start_bridge_left_trigger(str_category, str_thread_cleanup) {
   if(isDefined(t_opposite))
     t_opposite delete();
 
-  a_spawners = getentarray("e8_start_bridge_left_regular_spawner", "targetname");
+  a_spawners = getEntArray("e8_start_bridge_left_regular_spawner", "targetname");
 
   if(isDefined(a_spawners))
     simple_spawn_script_delay(a_spawners, ::spawn_fn_ai_run_to_target, 1, str_category, 1, 0, 0);
@@ -436,7 +435,7 @@ e8_start_bridge_right_trigger(str_category, str_thread_cleanup) {
   if(isDefined(t_opposite))
     t_opposite delete();
 
-  a_spawners = getentarray("e8_start_bridge_right_regular_spawner", "targetname");
+  a_spawners = getEntArray("e8_start_bridge_right_regular_spawner", "targetname");
 
   if(isDefined(a_spawners))
     simple_spawn_script_delay(a_spawners, ::spawn_fn_ai_run_to_target, 1, str_category, 1, 0, 0);
@@ -456,12 +455,12 @@ e8_mall_low_left_mid_trigger(delay, str_category, str_thread_cleanup) {
 
   trigger_wait("e8_mall_low_left_mid_trigger", "targetname");
   mall_save_point(2);
-  a_spawners = getentarray("e8_mall_low_left_mid_regular_spawner", "targetname");
+  a_spawners = getEntArray("e8_mall_low_left_mid_regular_spawner", "targetname");
 
   if(isDefined(a_spawners))
     simple_spawn_script_delay(a_spawners, ::spawn_fn_ai_run_to_target, 1, str_category, 1, 0, 0);
 
-  a_spawners = getentarray("e8_mall_low_left_mid_ignore_spawner", "targetname");
+  a_spawners = getEntArray("e8_mall_low_left_mid_ignore_spawner", "targetname");
 
   if(isDefined(a_spawners))
     simple_spawn_script_delay(a_spawners, ::spawn_fn_ai_run_to_target, 1, str_category, 0, 0, 1);
@@ -481,12 +480,12 @@ e8_mall_low_right_mid_trigger(delay, str_category, str_thread_cleanup) {
 
   trigger_wait("e8_mall_low_right_mid_trigger", "targetname");
   mall_save_point(2);
-  a_spawners = getentarray("e8_mall_low_right_mid_regular_spawner", "targetname");
+  a_spawners = getEntArray("e8_mall_low_right_mid_regular_spawner", "targetname");
 
   if(isDefined(a_spawners))
     simple_spawn_script_delay(a_spawners, ::spawn_fn_ai_run_to_target, 1, str_category, 1, 0, 0);
 
-  a_spawners = getentarray("e8_mall_low_right_mid_ignore_spawner", "targetname");
+  a_spawners = getEntArray("e8_mall_low_right_mid_ignore_spawner", "targetname");
 
   if(isDefined(a_spawners))
     simple_spawn_script_delay(a_spawners, ::spawn_fn_ai_run_to_target, 1, str_category, 0, 0, 1);
@@ -497,7 +496,7 @@ e8_mall_low_right_mid_trigger(delay, str_category, str_thread_cleanup) {
   if(isDefined(e_ai))
     e_ai thread player_rusher(str_category, undefined, level.player_rusher_fight_dist, 0.02, 0.1, 1);
 
-  a_jumpers = getentarray("e8_mall_low_right_mid_jumper_spawner", "targetname");
+  a_jumpers = getEntArray("e8_mall_low_right_mid_jumper_spawner", "targetname");
 
   if(isDefined(a_jumpers))
     simple_spawn(a_jumpers, ::spawn_fn_ai_run_to_jumper_node, 1, str_category, 0, 0, 420);
@@ -517,22 +516,22 @@ e8_mall_ul_reached_staircase_trigger(delay, str_category, str_thread_cleanup) {
   if(isDefined(e_ai))
     e_ai thread player_rusher(str_category, undefined, level.player_rusher_fight_dist, 0.02, 0.1, 1);
 
-  a_holders = getentarray("e8_mall_ul_reached_staircase_hold_spawner", "targetname");
+  a_holders = getEntArray("e8_mall_ul_reached_staircase_hold_spawner", "targetname");
 
   if(isDefined(a_holders))
     simple_spawn_script_delay(a_holders, ::spawn_fn_ai_run_to_holding_node, 1, str_category, 1, 0);
 
-  a_spawners = getentarray("e8_mall_ul_reached_staircase_regular_spawner", "targetname");
+  a_spawners = getEntArray("e8_mall_ul_reached_staircase_regular_spawner", "targetname");
 
   if(isDefined(a_spawners))
     simple_spawn_script_delay(a_spawners, ::spawn_fn_ai_run_to_target, 1, str_category, 1, 0, 0);
 
-  a_jumpers = getentarray("e8_mall_ul_reached_staircase_jumper_spawner", "targetname");
+  a_jumpers = getEntArray("e8_mall_ul_reached_staircase_jumper_spawner", "targetname");
 
   if(isDefined(a_jumpers))
     simple_spawn_script_delay(a_jumpers, ::spawn_fn_ai_run_to_jumper_node, 1, str_category, 0, 0, 336);
 
-  a_spawners = getentarray("e8_mall_ul_reached_staircase_ignore_spawner", "targetname");
+  a_spawners = getEntArray("e8_mall_ul_reached_staircase_ignore_spawner", "targetname");
 
   if(isDefined(a_spawners))
     simple_spawn_script_delay(a_spawners, ::spawn_fn_ai_run_to_target, 1, str_category, 0, 0, 1);
@@ -551,17 +550,17 @@ e8_mall_ul_approach_aqua_trigger(delay, str_category, str_thread_cleanup) {
   if(isDefined(e_ai))
     e_ai thread player_rusher(str_category, undefined, level.player_rusher_fight_dist, 0.02, 0.1, 1);
 
-  a_spawners = getentarray("e8_mall_ul_approach_aqua_ignore_spawner", "targetname");
+  a_spawners = getEntArray("e8_mall_ul_approach_aqua_ignore_spawner", "targetname");
 
   if(isDefined(a_spawners))
     simple_spawn_script_delay(a_spawners, ::spawn_fn_ai_run_to_target, 1, str_category, 0, 0, 1);
 
-  a_jumpers = getentarray("e8_mall_ul_approach_aqua_jumper_spawner", "targetname");
+  a_jumpers = getEntArray("e8_mall_ul_approach_aqua_jumper_spawner", "targetname");
 
   if(isDefined(a_jumpers))
     simple_spawn_script_delay(a_jumpers, ::spawn_fn_ai_run_to_jumper_node, 1, str_category, 0, 0, 336);
 
-  a_spawners = getentarray("e8_mall_ul_approach_aqua_regular_spawner", "targetname");
+  a_spawners = getEntArray("e8_mall_ul_approach_aqua_regular_spawner", "targetname");
 
   if(isDefined(a_spawners))
     simple_spawn_script_delay(a_spawners, ::spawn_fn_ai_run_to_target, 1, str_category, 1, 0, 0);
@@ -581,12 +580,12 @@ e8_mall_ur_reached_sniper_castle_trigger(delay, str_category, str_thread_cleanup
   if(isDefined(e_ai))
     e_ai thread player_rusher(str_category, undefined, level.player_rusher_fight_dist, 0.02, 0.1, 1);
 
-  a_spawners = getentarray("e8_mall_ur_reached_sniper_castle_ignore_spawner", "targetname");
+  a_spawners = getEntArray("e8_mall_ur_reached_sniper_castle_ignore_spawner", "targetname");
 
   if(isDefined(a_spawners))
     simple_spawn_script_delay(a_spawners, ::spawn_fn_ai_run_to_target, 1, str_category, 0, 0, 1);
 
-  a_spawners = getentarray("e8_mall_ur_reached_sniper_castle_regular_spawner", "targetname");
+  a_spawners = getEntArray("e8_mall_ur_reached_sniper_castle_regular_spawner", "targetname");
 
   if(isDefined(a_spawners))
     simple_spawn_script_delay(a_spawners, ::spawn_fn_ai_run_to_target, 1, str_category, 1, 0, 0);
@@ -605,12 +604,12 @@ e8_mall_ur_approach_aqua_trigger(delay, str_category, str_thread_cleanup) {
   if(isDefined(e_ai))
     e_ai thread player_rusher(str_category, undefined, level.player_rusher_fight_dist, 0.02, 0.1, 1);
 
-  a_holders = getentarray("e8_mall_ur_approach_aqua_hold_spawner", "targetname");
+  a_holders = getEntArray("e8_mall_ur_approach_aqua_hold_spawner", "targetname");
 
   if(isDefined(a_holders))
     simple_spawn_script_delay(a_holders, ::spawn_fn_ai_run_to_holding_node, 1, str_category, 1, 0);
 
-  a_spawners = getentarray("e8_mall_ur_approach_aqua_regular_spawner", "targetname");
+  a_spawners = getEntArray("e8_mall_ur_approach_aqua_regular_spawner", "targetname");
 
   if(isDefined(a_spawners))
     simple_spawn_script_delay(a_spawners, ::spawn_fn_ai_run_to_target, 1, str_category, 1, 0, 0);
@@ -641,22 +640,22 @@ e8_mall_low_left_at_castle_trigger(delay, str_category, str_thread_cleanup) {
   if(isDefined(e_ai))
     e_ai thread player_rusher(str_category, undefined, level.player_rusher_player_busy_dist, 0.02, 0.1, 1);
 
-  a_spawners = getentarray("e8_mall_low_left_at_castle_regular_spawner", "targetname");
+  a_spawners = getEntArray("e8_mall_low_left_at_castle_regular_spawner", "targetname");
 
   if(isDefined(a_spawners))
     simple_spawn_script_delay(a_spawners, ::spawn_fn_ai_run_to_target, 1, str_category, 1, 0, 0);
 
-  a_spawners = getentarray("e8_mall_low_left_at_castle_ignore_spawner", "targetname");
+  a_spawners = getEntArray("e8_mall_low_left_at_castle_ignore_spawner", "targetname");
 
   if(isDefined(a_spawners))
     simple_spawn_script_delay(a_spawners, ::spawn_fn_ai_run_to_target, 1, str_category, 0, 0, 1);
 
-  a_holders = getentarray("e8_mall_low_left_at_castle_hold_spawner", "targetname");
+  a_holders = getEntArray("e8_mall_low_left_at_castle_hold_spawner", "targetname");
 
   if(isDefined(a_holders))
     simple_spawn_script_delay(a_holders, ::spawn_fn_ai_run_to_holding_node, 1, str_category, 1, 0);
 
-  a_jumpers = getentarray("e8_mall_low_left_at_castle_jumper_spawner", "targetname");
+  a_jumpers = getEntArray("e8_mall_low_left_at_castle_jumper_spawner", "targetname");
 
   if(isDefined(a_jumpers))
     simple_spawn_script_delay(a_jumpers, ::spawn_fn_ai_run_to_jumper_node, 1, str_category, 0, 0, 336);
@@ -676,22 +675,22 @@ e8_mall_low_right_at_castle_trigger(delay, str_category, str_thread_cleanup) {
   if(isDefined(e_ai))
     e_ai thread player_rusher(str_category, undefined, level.player_rusher_player_busy_dist, 0.02, 0.1, 1);
 
-  a_spawners = getentarray("e8_mall_low_right_at_castle_regular_spawner", "targetname");
+  a_spawners = getEntArray("e8_mall_low_right_at_castle_regular_spawner", "targetname");
 
   if(isDefined(a_spawners))
     simple_spawn_script_delay(a_spawners, ::spawn_fn_ai_run_to_target, 1, str_category, 1, 0, 0);
 
-  a_spawners = getentarray("e8_mall_low_right_at_castle_ignore_spawner", "targetname");
+  a_spawners = getEntArray("e8_mall_low_right_at_castle_ignore_spawner", "targetname");
 
   if(isDefined(a_spawners))
     simple_spawn_script_delay(a_spawners, ::spawn_fn_ai_run_to_target, 1, str_category, 0, 0, 1);
 
-  a_holders = getentarray("e8_mall_low_right_at_castle_hold_spawner", "targetname");
+  a_holders = getEntArray("e8_mall_low_right_at_castle_hold_spawner", "targetname");
 
   if(isDefined(a_holders))
     simple_spawn_script_delay(a_holders, ::spawn_fn_ai_run_to_holding_node, 1, str_category, 1, 0);
 
-  a_jumpers = getentarray("e8_mall_low_right_at_castle_jumper_spawner", "targetname");
+  a_jumpers = getEntArray("e8_mall_low_right_at_castle_jumper_spawner", "targetname");
 
   if(isDefined(a_jumpers))
     simple_spawn_script_delay(a_jumpers, ::spawn_fn_ai_run_to_jumper_node, 1, str_category, 0, 0, 336);
@@ -830,13 +829,13 @@ aqua_explosion() {
   m_aquarium = getent("aquarium", "targetname");
 
   if(isDefined(m_aquarium))
-    m_aquarium setmodel("dest_aquarium_glass_karma");
+    m_aquarium setModel("dest_aquarium_glass_karma");
 
   stop_exploder(750);
 }
 
 fxanim_aquarium_explosion() {
-  a_ents = getentarray("aquarium_bomb", "targetname");
+  a_ents = getEntArray("aquarium_bomb", "targetname");
 
   foreach(ent in a_ents)
   ent hide();
@@ -1033,7 +1032,7 @@ e8_aquarium_rpg_killers_trigger(delay, str_category) {
 
   level waittill("e8_civs_staircase_triggered");
   level thread salazar_get_into_door_open_position(10);
-  a_spawners = getentarray("e8_end_room_enemy_regular_spawner", "targetname");
+  a_spawners = getEntArray("e8_end_room_enemy_regular_spawner", "targetname");
 
   if(isDefined(a_spawners))
     simple_spawn_script_delay(a_spawners, ::spawn_fn_ai_run_to_target, 1, str_category, 1, 0, 0);
@@ -1054,7 +1053,7 @@ e8_end_rpg_killer(delay, str_targetname, str_category) {
   str_targetname = "e8_end_room_friendly_spawner_ai";
 
   while(true) {
-    a_targets = getentarray(str_targetname, "targetname");
+    a_targets = getEntArray(str_targetname, "targetname");
 
     if(!isDefined(a_targets) || a_targets.size == 0) {
       break;
@@ -1080,9 +1079,9 @@ e8_end_rpg_killer(delay, str_targetname, str_category) {
 
     if(isalive(e_ai_rpg) && total_time >= alive_time) {
       pos = e_ai_rpg.origin;
-      dir = anglestoforward(e_ai_rpg.angles);
+      dir = anglesToForward(e_ai_rpg.angles);
       pos = pos + dir * 21.0;
-      playfx(level._effect["def_explosion"], pos);
+      playFX(level._effect["def_explosion"], pos);
       e_ai_rpg dodamage(1000, e_ai_rpg.origin);
       break;
     }
@@ -1095,7 +1094,7 @@ e8_kill_all_enemy_at_end_of_mall(delay, str_objective_notify) {
   if(isDefined(delay) && delay > 0)
     wait(delay);
 
-  a_volume = getentarray("e8_aquarium_enemy_kill_volume", "targetname");
+  a_volume = getEntArray("e8_aquarium_enemy_kill_volume", "targetname");
 
   while(true) {
     a_enemy = getaiarray("axis");

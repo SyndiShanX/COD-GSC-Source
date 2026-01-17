@@ -29,7 +29,7 @@ main() {
   else
     level.max_number_of_dead_bodies = 0;
 
-  struct = spawnstruct();
+  struct = spawnStruct();
   struct.bodies = [];
 
   // triggers can spawn bodies
@@ -41,19 +41,19 @@ main() {
 
 trigger_body(struct) {
   self waittill("trigger");
-  targets = getentarray(self.target, "targetname");
+  targets = getEntArray(self.target, "targetname");
   array_thread(targets, ::spawn_dead_body, struct);
 }
 
 spawn_dead_body(struct) {
-  if(!getdvarint("ragdoll_enable") && isdefined(self.script_parameters) && self.script_parameters == "require_ragdoll")
+  if(!getdvarint("ragdoll_enable") && isDefined(self.script_parameters) && self.script_parameters == "require_ragdoll") {
     return;
-
-  if(level.max_number_of_dead_bodies == 0)
+  }
+  if(level.max_number_of_dead_bodies == 0) {
     return;
-
+  }
   index = undefined;
-  if(isdefined(self.script_index)) {
+  if(isDefined(self.script_index)) {
     index = self.script_index;
   } else {
     level.dead_body_count++;
@@ -72,17 +72,17 @@ spawn_dead_body(struct) {
 
   model[[level.scr_deadbody[index]]]();
 
-  assertex(isdefined(self.script_noteworthy), "Dead guy needs script_noteworthy death1 through 5");
+  assertex(isDefined(self.script_noteworthy), "Dead guy needs script_noteworthy death1 through 5");
 
-  if(!isdefined(self.script_trace)) {
-    trace = bullettrace(model.origin + (0, 0, 5), model.origin + (0, 0, -64), false, undefined);
+  if(!isDefined(self.script_trace)) {
+    trace = bulletTrace(model.origin + (0, 0, 5), model.origin + (0, 0, -64), false, undefined);
     model.origin = trace["position"];
   }
 
   model setflaggedanim("flag", model getanim(self.script_noteworthy), 1, 0, 1);
   model waittillmatch("flag", "end");
 
-  if(!isdefined(self.script_start))
+  if(!isDefined(self.script_start))
     model startragdoll();
 }
 

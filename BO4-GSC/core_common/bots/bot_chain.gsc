@@ -10,7 +10,6 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace bot_chain;
 
 class class_92792865 {
@@ -37,7 +36,7 @@ __init__() {
   level thread function_ea764100();
 }
 
-private function_b1487cfa(var_72284260) {
+function_b1487cfa(var_72284260) {
   entities = bot::get_bots();
 
   foreach(entity in entities) {
@@ -57,7 +56,7 @@ private function_b1487cfa(var_72284260) {
   return false;
 }
 
-private function_8ded619(var_72284260, targetstructs = undefined, duration = 1) {
+function_8ded619(var_72284260, targetstructs = undefined, duration = 1) {
   drawheight = 8;
   active = function_b1487cfa(var_72284260);
 
@@ -265,7 +264,7 @@ private function_8ded619(var_72284260, targetstructs = undefined, duration = 1) 
   return targetstructs;
 }
 
-private function_ea764100() {
+function_ea764100() {
   level.var_40ed3318 = [];
   structs = struct::get_array("<dev string:x38>", "<dev string:x118>");
   targetstructs = [];
@@ -312,7 +311,7 @@ private function_ea764100() {
 
 }
 
-private function_e3eaa42b() {
+function_e3eaa42b() {
   structs = struct::get_array("bot_chain", "variantname");
 
   if(!isDefined(structs)) {
@@ -340,7 +339,7 @@ private function_e3eaa42b() {
   }
 }
 
-private function_e7b80b1e(var_72284260) {
+function_e7b80b1e(var_72284260) {
   self endon(#"hash_382a628dad5ecbb5");
   assert(isDefined(var_72284260));
 
@@ -413,7 +412,7 @@ private function_e7b80b1e(var_72284260) {
   return undefined;
 }
 
-private function_ea88f102(entity, goal) {
+function_ea88f102(entity, goal) {
   assert(isDefined(goal));
 
   if(!isDefined(entity.bot.var_53ffa4c4)) {
@@ -427,7 +426,7 @@ private function_ea88f102(entity, goal) {
   return false;
 }
 
-private function_ce1ee70(goal, bot) {
+function_ce1ee70(goal, bot) {
   assert(isDefined(bot));
   assert(isDefined(goal));
   bots = bot bot::get_friendly_bots();
@@ -466,7 +465,7 @@ private function_ce1ee70(goal, bot) {
   return false;
 }
 
-private function_c2d874f1(var_72284260, bot) {
+function_c2d874f1(var_72284260, bot) {
   assert(isDefined(var_72284260));
   assert(isDefined(bot));
 
@@ -550,7 +549,7 @@ private function_c2d874f1(var_72284260, bot) {
   return goals;
 }
 
-private set_goalradius_based_on_settings(goal) {
+set_goalradius_based_on_settings(goal) {
   assert(isbot(self) || isvehicle(self));
   assert(isDefined(goal));
 

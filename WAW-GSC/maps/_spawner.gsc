@@ -14,13 +14,13 @@ main() {
   / /
   level.ai_classname_in_level = [];
   spawners = GetSpawnerArray();
-  for (i = 0; i < spawners.size; i++) {
+  for(i = 0; i < spawners.size; i++) {
     spawners[i] thread spawn_prethink();
   }
   thread process_deathflags();
   array_thread(ai, ::spawn_think);
   level.ai_classname_in_level_keys = getarraykeys(level.ai_classname_in_level);
-  for (i = 0; i < level.ai_classname_in_level_keys.size; i++) {
+  for(i = 0; i < level.ai_classname_in_level_keys.size; i++) {
     if(!issubstr(tolower(level.ai_classname_in_level_keys[i]), "rpg"))
       continue;
     precacheItem("rpg_player");
@@ -39,7 +39,7 @@ check_script_char_group_ratio(spawners) {
   }
   total = 0;
   grouped = 0;
-  for (i = 0; i < spawners.size; i++) {
+  for(i = 0; i < spawners.size; i++) {
     if(!spawners[i].team != "axis") {
       continue;
     }
@@ -61,7 +61,7 @@ has_char_group() {
 process_deathflags() {
   keys = getarraykeys(level.deathflags);
   level.deathflags = [];
-  for (i = 0; i < keys.size; i++) {
+  for(i = 0; i < keys.size; i++) {
     deathflag = keys[i];
     level.deathflags[deathflag] = [];
     level.deathflags[deathflag]["spawners"] = [];
@@ -133,7 +133,7 @@ update_deathflag(deathflag) {
 outdoor_think(trigger) {
   assert((trigger.spawnflags & 1) || (trigger.spawnflags & 2) || (trigger.spawnflags & 4), "trigger_outdoor at " + trigger.origin + " is not set up to trigger AI! Check one of the AI checkboxes on the trigger.");
   trigger endon("death");
-  for (;;) {
+  for(;;) {
     trigger waittill("trigger", guy);
     if(!isAI(guy)) {
       continue;
@@ -147,7 +147,7 @@ outdoor_think(trigger) {
 indoor_think(trigger) {
   assert((trigger.spawnflags & 1) || (trigger.spawnflags & 2) || (trigger.spawnflags & 4), "trigger_indoor at " + trigger.origin + " is not set up to trigger AI! Check one of the AI checkboxes on the trigger.");
   trigger endon("death");
-  for (;;) {
+  for(;;) {
     trigger waittill("trigger", guy);
     if(!isAI(guy)) {
       continue;
@@ -158,10 +158,10 @@ indoor_think(trigger) {
   }
 }
 
-doAutoSpawn(spawner) {
+doAutospawn(spawner) {
   spawner endon("death");
   self endon("death");
-  for (;;) {
+  for(;;) {
     self waittill("trigger");
     if(!spawner.count) {
       return;
@@ -172,7 +172,7 @@ doAutoSpawn(spawner) {
     if(isDefined(spawner.triggerUnlocked)) {
       return;
     }
-    while (!(self ok_to_trigger_spawn())) {
+    while(!(self ok_to_trigger_spawn())) {
       wait_network_frame();
     }
     guy = spawner spawn_ai();
@@ -189,7 +189,7 @@ doAutoSpawn(spawner) {
 trigger_spawner_monitor() {
   println("Trigger spawner monitor running...");
   level._numTriggerSpawned = 0;
-  while (1) {
+  while(1) {
     wait_network_frame();
     wait_network_frame();
     level._numTriggerSpawned = 0;
@@ -231,8 +231,8 @@ trigger_spawner(trigger) {
   assertEx(isDefined(trigger.target), "Triggers with flag TRIGGER_SPAWN at " + trigger.origin + " must target at least one spawner.");
   trigger endon("death");
   trigger waittill("trigger");
-  spawners = getentarray(trigger.target, "targetname");
-  for (i = 0; i < spawners.size; i++) {
+  spawners = getEntArray(trigger.target, "targetname");
+  for(i = 0; i < spawners.size; i++) {
     spawners[i].script_trigger = trigger;
   } {
     array_thread(spawners, ::trigger_spawner_spawns_guys);
@@ -242,7 +242,7 @@ trigger_spawner(trigger) {
 trigger_spawner_spawns_guys() {
   self endon("death");
   self script_delay();
-  while (!self ok_to_trigger_spawn()) {
+  while(!self ok_to_trigger_spawn()) {
     wait_network_frame();
   }
   if(isDefined(self.script_drone)) {
@@ -256,13 +256,13 @@ trigger_spawner_spawns_guys() {
     return;
   }
   if(isDefined(self.script_noenemyinfo) && isDefined(self.script_forcespawn))
-    spawned = self stalingradSpawn(true);
+    spawned = self stalingradspawn(true);
   else if(isDefined(self.script_noenemyinfo))
-    spawned = self doSpawn(true);
+    spawned = self dospawn(true);
   else if(isDefined(self.script_forcespawn))
-    spawned = self stalingradSpawn();
+    spawned = self stalingradspawn();
   else
-    spawned = self doSpawn();
+    spawned = self dospawn();
   level._numTriggerSpawned++;
 }
 
@@ -283,7 +283,7 @@ reincrement_count_if_deleted(spawner) {
 }
 
 delete_start(startnum) {
-  for (p = 0; p < 2; p++) {
+  for(p = 0; p < 2; p++) {
     switch (p) {
       case 0:
         aitype = "axis";
@@ -293,8 +293,8 @@ delete_start(startnum) {
         aitype = "allies";
         break;
     }
-    ai = GetEntArray(aitype, "team");
-    for (i = 0; i < ai.size; i++) {
+    ai = getEntArray(aitype, "team");
+    for(i = 0; i < ai.size; i++) {
       if(isDefined(ai[i].script_start)) {
         if(ai[i].script_start == startnum) {
           ai[i] thread delete_me();
@@ -319,7 +319,7 @@ random_killspawner(trigger) {
   trigger waittill("trigger");
   triggered_spawners = [];
   spawners = getspawnerarray();
-  for (i = 0; i < spawners.size; i++) {
+  for(i = 0; i < spawners.size; i++) {
     if((isDefined(spawners[i].script_random_killspawner)) && (random_killspawner == spawners[i].script_random_killspawner)) {
       triggered_spawners = add_to_array(triggered_spawners, spawners[i]);
     }
@@ -331,7 +331,7 @@ kill_spawner(trigger) {
   killspawner = trigger.script_killspawner;
   trigger waittill("trigger");
   spawners = GetSpawnerArray();
-  for (i = 0; i < spawners.size; i++) {
+  for(i = 0; i < spawners.size; i++) {
     if((isDefined(spawners[i].script_killspawner)) && (killspawner == spawners[i].script_killspawner)) {
       spawners[i] Delete();
     }
@@ -343,7 +343,7 @@ empty_spawner(trigger) {
   emptyspawner = trigger.script_emptyspawner;
   trigger waittill("trigger");
   spawners = GetSpawnerArray();
-  for (i = 0; i < spawners.size; i++) {
+  for(i = 0; i < spawners.size; i++) {
     if(!isDefined(spawners[i].script_emptyspawner)) {
       continue;
     }
@@ -361,7 +361,7 @@ empty_spawner(trigger) {
 
 kill_spawnerNum(number) {
   spawners = GetSpawnerArray();
-  for (i = 0; i < spawners.size; i++) {
+  for(i = 0; i < spawners.size; i++) {
     if(!isDefined(spawners[i].script_killspawner)) {
       continue;
     }
@@ -372,7 +372,7 @@ kill_spawnerNum(number) {
   }
 }
 
-trigger_Spawn(trigger) {}
+trigger_spawn(trigger) {}
 waittillDeathOrPainDeath() {
   self endon("death");
   self waittill("pain_death");
@@ -409,7 +409,7 @@ random_tire(start, end) {
   model.angles = (0, randomint(360), 0);
   dif = randomfloat(1);
   model.origin = start * dif + end * (1 - dif);
-  model setmodel("com_junktire");
+  model setModel("com_junktire");
   vel = randomvector(15000);
   vel = (vel[0], vel[1], abs(vel[2]));
   model physicslaunch(model.origin, vel);
@@ -427,12 +427,12 @@ spawn_grenade_bag(origin, angles, team) {
   if(isDefined(grenade)) {
     grenade Delete();
   }
-  grenade = Spawn("weapon_" + self.grenadeWeapon, origin);
+  grenade = spawn("weapon_" + self.grenadeWeapon, origin);
   level.grenade_cache[team][index] = grenade;
   level.grenade_cache_index[team] = (index + 1) % 16;
   grenade.angles = angles;
   grenade.count = self.grenadeammo;
-  grenade SetModel("grenade_bag");
+  grenade setModel("grenade_bag");
 }
 
 dronespawn_setstruct(spawner) {
@@ -454,10 +454,10 @@ dronespawn_check() {
 dronespawn_setstruct_from_guy(guy) {
   if(dronespawn_check())
     return;
-  struct = spawnstruct();
+  struct = spawnStruct();
   size = guy getattachsize();
   struct.attachedmodels = [];
-  for (i = 0; i < size; i++) {
+  for(i = 0; i < size; i++) {
     struct.attachedmodels[i] = guy GetAttachModelName(i);
     struct.attachedtags[i] = guy GetAttachTagName(i);
   }
@@ -516,12 +516,10 @@ spawn_prethink() {
   if(!isDefined(self.spawn_functions)) {
     self.spawn_functions = [];
   }
-  for (;;) {
+  for(;;) {
     prof_begin("spawn_prethink");
     self waittill("spawned", spawn);
-    [
-      [deathflag_func]
-    ]();
+    [[deathflag_func]]();
     if(!IsAlive(spawn)) {
       continue;
     }
@@ -529,7 +527,7 @@ spawn_prethink() {
       self thread[[level.spawnerCallbackThread]](spawn);
     }
     if(isDefined(self.script_delete)) {
-      for (i = 0; i < level._ai_delete[self.script_delete].size; i++) {
+      for(i = 0; i < level._ai_delete[self.script_delete].size; i++) {
         if(level._ai_delete[self.script_delete][i] != self) {
           level._ai_delete[self.script_delete][i] Delete();
         }
@@ -563,7 +561,7 @@ run_spawn_functions() {
   if(!isDefined(self.spawn_funcs)) {
     return;
   }
-  for (i = 0; i < self.spawn_funcs.size; i++) {
+  for(i = 0; i < self.spawn_funcs.size; i++) {
     func = self.spawn_funcs[i];
     if(isDefined(func["param4"]))
       thread[[func["function"]]](func["param1"], func["param2"], func["param3"], func["param4"]);
@@ -579,7 +577,7 @@ run_spawn_functions() {
     else
       thread[[func["function"]]]();
   }
-  for (i = 0; i < level.spawn_funcs[self.team].size; i++) {
+  for(i = 0; i < level.spawn_funcs[self.team].size; i++) {
     func = level.spawn_funcs[self.team][i];
     if(isDefined(func["param4"]))
       thread[[func["function"]]](func["param1"], func["param2"], func["param3"], func["param4"]);
@@ -604,28 +602,20 @@ run_spawn_functions() {
 
 deathFunctions() {
   self waittill("death", other);
-  for (i = 0; i < self.deathFuncs.size; i++) {
+  for(i = 0; i < self.deathFuncs.size; i++) {
     array = self.deathFuncs[i];
     switch (array["params"]) {
       case 0:
-        [
-          [array["func"]]
-        ](other);
+        [[array["func"]]](other);
         break;
       case 1:
-        [
-          [array["func"]]
-        ](other, array["param1"]);
+        [[array["func"]]](other, array["param1"]);
         break;
       case 2:
-        [
-          [array["func"]]
-        ](other, array["param1"], array["param2"]);
+        [[array["func"]]](other, array["param1"], array["param2"]);
         break;
       case 3:
-        [
-          [array["func"]]
-        ](other, array["param1"], array["param2"], array["param3"]);
+        [[array["func"]]](other, array["param1"], array["param2"], array["param3"]);
         break;
     }
   }
@@ -645,7 +635,7 @@ crawl_through_targets_to_init_flags() {
   if(isDefined(array)) {
     targets = array["node"];
     get_func = array["get_target_func"];
-    for (i = 0; i < targets.size; i++) {
+    for(i = 0; i < targets.size; i++) {
       crawl_target_and_init_flags(targets[i], get_func);
     }
   }
@@ -900,7 +890,7 @@ scrub_guy() {
 
 delayed_player_seek_think(spawned) {
   spawned endon("death");
-  while (IsAlive(spawned)) {
+  while(IsAlive(spawned)) {
     if(spawned.goalradius > 200) {
       spawned.goalradius -= 200;
     }
@@ -928,7 +918,7 @@ set_goal_volume() {
 }
 
 get_target_ents(target) {
-  return getentarray(target, "targetname");
+  return getEntArray(target, "targetname");
 }
 
 get_target_nodes(target) {
@@ -978,7 +968,7 @@ get_least_used_from_array(array) {
   array = level.go_to_node_arrays[targetname];
   first = array[0];
   newarray = [];
-  for (i = 0; i < array.size - 1; i++) {
+  for(i = 0; i < array.size - 1; i++) {
     newarray[i] = array[i + 1];
   }
   newarray[array.size - 1] = array[0];
@@ -989,7 +979,7 @@ get_least_used_from_array(array) {
 go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, optional_arrived_at_node_func) {
   self endon("stop_going_to_node");
   self endon("death");
-  for (;;) {
+  for(;;) {
     node = get_least_used_from_array(node);
     if(node_has_radius(node))
       self.goalradius = node.radius;
@@ -999,13 +989,9 @@ go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, optional_arri
       self.goalheight = node.height;
     else
       self.goalheight = level.default_goalheight;
-    [
-      [set_goal_func_quits]
-    ](node);
+    [[set_goal_func_quits]](node);
     self waittill("goal");
-    [
-      [optional_arrived_at_node_func]
-    ](node);
+    [[optional_arrived_at_node_func]](node);
     if(isDefined(node.script_flag_set)) {
       flag_set(node.script_flag_set);
     }
@@ -1018,9 +1004,7 @@ go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, optional_arri
     if(!isDefined(node.target)) {
       break;
     }
-    nextNode_array = [
-      [get_target_func]
-    ](node.target);
+    nextNode_array = [[get_target_func]](node.target);
     if(!nextNode_array.size) {
       break;
     }
@@ -1041,7 +1025,7 @@ go_to_node_set_goal_node(node) {
 targets_and_uses_turret(node) {
   if(!isDefined(node.target))
     return false;
-  turrets = getentarray(node.target, "targetname");
+  turrets = getEntArray(node.target, "targetname");
   if(!turrets.size)
     return false;
   turret = turrets[0];
@@ -1061,7 +1045,7 @@ crawl_target_and_init_flags(ent, get_func) {
   oldsize = 0;
   targets = [];
   index = 0;
-  for (;;) {
+  for(;;) {
     if(!isDefined(ent.crawled)) {
       ent.crawled = true;
       level thread remove_crawled(ent);
@@ -1076,9 +1060,7 @@ crawl_target_and_init_flags(ent, get_func) {
         }
       }
       if(isDefined(ent.target)) {
-        new_targets = [
-          [get_func]
-        ](ent.target);
+        new_targets = [[get_func]](ent.target);
         targets = add_to_array(targets, new_targets);
       }
     }
@@ -1103,7 +1085,7 @@ get_node_funcs_based_on_target(node, goal_type) {
   if(isDefined(node)) {
     array["node"][0] = node;
   } else {
-    node = getentarray(self.target, "targetname");
+    node = getEntArray(self.target, "targetname");
     if(node.size > 0) {
       goal_type = "origin";
     }
@@ -1148,7 +1130,7 @@ reachPathEnd() {
 }
 
 autoTarget(targets) {
-  for (;;) {
+  for(;;) {
     user = self GetTurretOwner();
     if(!IsAlive(user)) {
       wait(1.5);
@@ -1164,7 +1146,7 @@ autoTarget(targets) {
 }
 
 manualTarget(targets) {
-  for (;;) {
+  for(;;) {
     self SetTargetEntity(random(targets));
     self notify("startfiring");
     self StartFiring();
@@ -1180,9 +1162,9 @@ use_a_turret(turret) {
   unmanned = false;
   self Useturret(turret);
   if((isDefined(turret.target)) && (turret.target != turret.targetname)) {
-    ents = GetEntArray(turret.target, "targetname");
+    ents = getEntArray(turret.target, "targetname");
     targets = [];
-    for (i = 0; i < ents.size; i++) {
+    for(i = 0; i < ents.size; i++) {
       if(ents[i].classname == "script_origin") {
         targets[targets.size] = ents[i];
       }
@@ -1204,7 +1186,7 @@ fallback_spawner_think(num, node_array, ignoreWhileFallingBack) {
   self endon("death");
   level.max_fallbackers[num] += self.count;
   firstspawn = true;
-  while (self.count > 0) {
+  while(self.count > 0) {
     self waittill("spawned", spawn);
     if(firstspawn) {
       if(GetDvar("fallback") == "1") {
@@ -1270,7 +1252,7 @@ fallback_interrupt() {
   self endon("goto next fallback");
   self endon("fallback_notify");
   self endon("death");
-  while (1) {
+  while(1) {
     origin = self.origin;
     wait 2;
     if(self.origin == origin) {
@@ -1286,7 +1268,7 @@ fallback_ai(num, node_array, ignoreWhileFallingBack) {
   self endon("goto next fallback");
   self endon("death");
   node = undefined;
-  while (1) {
+  while(1) {
     ASSERTEX((node_array.size >= level.current_fallbackers[num]), "Number of fallbackers exceeds number of fallback nodes for fallback # " + num + ". Add more fallback nodes or reduce possible fallbackers.");
     node = node_array[RandomInt(node_array.size)];
     if(!isDefined(node.fallback_occupied) || !node.fallback_occupied) {
@@ -1320,7 +1302,7 @@ coverprint(org) {
   self endon("fallback_notify");
   self endon("stop_coverprint");
   self endon("death");
-  while (1) {
+  while(1) {
     line(self.origin + (0, 0, 35), org, (0.2, 0.5, 0.8), 0.5);
     print3d((self.origin + (0, 0, 70)), "Falling Back", (0.98, 0.4, 0.26), 0.85);
     maps\_spawner::waitframe();
@@ -1330,7 +1312,7 @@ coverprint(org) {
 fallback_overmind(num, group, ignoreWhileFallingBack, percent) {
   fallback_nodes = undefined;
   nodes = GetAllNodes();
-  for (i = 0; i < nodes.size; i++) {
+  for(i = 0; i < nodes.size; i++) {
     if((isDefined(nodes[i].script_fallback)) && (nodes[i].script_fallback == num)) {
       fallback_nodes = maps\_utility::add_to_array(fallback_nodes, nodes[i]);
     }
@@ -1346,7 +1328,7 @@ fallback_overmind_internal(num, group, fallback_nodes, ignoreWhileFallingBack, p
   level.spawner_fallbackers[num] = 0;
   level.fallback_initiated[num] = false;
   spawners = GetSpawnerArray();
-  for (i = 0; i < spawners.size; i++) {
+  for(i = 0; i < spawners.size; i++) {
     if((isDefined(spawners[i].script_fallback)) && (spawners[i].script_fallback == num)) {
       if(spawners[i].count > 0) {
         spawners[i] thread fallback_spawner_think(num, fallback_nodes, ignoreWhileFallingBack);
@@ -1356,7 +1338,7 @@ fallback_overmind_internal(num, group, fallback_nodes, ignoreWhileFallingBack, p
   }
   assertex(level.spawner_fallbackers[num] <= fallback_nodes.size, "There are more fallback spawners than fallback nodes. Add more node or remove spawners from script_fallback: " + num);
   ai = GetAiArray();
-  for (i = 0; i < ai.size; i++) {
+  for(i = 0; i < ai.size; i++) {
     if((isDefined(ai[i].script_fallback)) && (ai[i].script_fallback == num)) {
       ai[i] thread fallback_ai_think(num, undefined, undefined, ignoreWhileFallingBack);
     }
@@ -1375,7 +1357,7 @@ fallback_overmind_internal(num, group, fallback_nodes, ignoreWhileFallingBack, p
   level.fallback_initiated[num] = true;
   fallback_ai = undefined;
   ai = GetAiArray();
-  for (i = 0; i < ai.size; i++) {
+  for(i = 0; i < ai.size; i++) {
     if(((isDefined(ai[i].script_fallback)) && (ai[i].script_fallback == num)) || ((isDefined(ai[i].script_fallback_group)) && (isDefined(group)) && (ai[i].script_fallback_group == group))) {
       fallback_ai = maps\_utility::add_to_array(fallback_ai, ai[i]);
     }
@@ -1392,18 +1374,18 @@ fallback_overmind_internal(num, group, fallback_nodes, ignoreWhileFallingBack, p
   level notify("fallback initiated " + num);
   fallback_text(fallback_ai, 0, first_half);
   first_half_ai = [];
-  for (i = 0; i < first_half; i++) {
+  for(i = 0; i < first_half; i++) {
     fallback_ai[i] thread fallback_ai(num, fallback_nodes, ignoreWhileFallingBack);
     first_half_ai[i] = fallback_ai[i];
   }
-  for (i = 0; i < first_half; i++) {
+  for(i = 0; i < first_half; i++) {
     level waittill(("fallback_reached_goal" + num));
   }
   fallback_text(fallback_ai, first_half, fallback_ai.size);
-  for (i = 0; i < fallback_ai.size; i++) {
+  for(i = 0; i < fallback_ai.size; i++) {
     if(IsAlive(fallback_ai[i])) {
       set_fallback = true;
-      for (p = 0; p < first_half_ai.size; p++) {
+      for(p = 0; p < first_half_ai.size; p++) {
         if(isalive(first_half_ai[p])) {
           if(fallback_ai[i] == first_half_ai[p]) {
             set_fallback = false;
@@ -1421,7 +1403,7 @@ fallback_text(fallbackers, start, end) {
   if(GetTime() <= level._nextcoverprint) {
     return;
   }
-  for (i = start; i < end; i++) {
+  for(i = start; i < end; i++) {
     if(!IsAlive(fallbackers[i])) {
       continue;
     }
@@ -1435,7 +1417,7 @@ fallback_wait(num, group, ignoreWhileFallingBack, percent) {
   if(GetDvar("fallback") == "1") {
     println("^a Fallback wait: ", num);
   }
-  for (i = 0; i < level.spawner_fallbackers[num]; i++) {
+  for(i = 0; i < level.spawner_fallbackers[num]; i++) {
     if(GetDvar("fallback") == "1") {
       println("^a Waiting for spawners to be hit: ", num, " i: ", i);
     }
@@ -1445,14 +1427,14 @@ fallback_wait(num, group, ignoreWhileFallingBack, percent) {
     println("^a Waiting for AI to die, fall backers for group ", num, " is ", level.current_fallbackers[num]);
   }
   ai = GetAiArray();
-  for (i = 0; i < ai.size; i++) {
+  for(i = 0; i < ai.size; i++) {
     if(((isDefined(ai[i].script_fallback)) && (ai[i].script_fallback == num)) || ((isDefined(ai[i].script_fallback_group)) && (isDefined(group)) && (ai[i].script_fallback_group == group))) {
       ai[i] thread fallback_ai_think(num, undefined, undefined, ignoreWhileFallingBack);
     }
   }
   ai = undefined;
   deadfallbackers = 0;
-  while (deadfallbackers < level.max_fallbackers[num] * percent) {
+  while(deadfallbackers < level.max_fallbackers[num] * percent) {
     if(GetDvar("fallback") == "1") {
       println("^cwaiting for " + deadfallbackers + " to be more than " + (level.max_fallbackers[num] * 0.5));
     }
@@ -1484,14 +1466,14 @@ fallback_add_previous_group(num, node_array) {
   if(!isDefined(level.current_fallbackers[num - 1])) {
     return;
   }
-  for (i = 0; i < level.current_fallbackers[num - 1]; i++) {
+  for(i = 0; i < level.current_fallbackers[num - 1]; i++) {
     level.max_fallbackers[num]++;
   }
-  for (i = 0; i < level.current_fallbackers[num - 1]; i++) {
+  for(i = 0; i < level.current_fallbackers[num - 1]; i++) {
     level.current_fallbackers[num]++;
   }
   ai = GetAiArray();
-  for (i = 0; i < ai.size; i++) {
+  for(i = 0; i < ai.size; i++) {
     if(((isDefined(ai[i].script_fallback)) && (ai[i].script_fallback == (num - 1)))) {
       ai[i].script_fallback++;
       if(isDefined(ai[i].fallback_node)) {
@@ -1515,7 +1497,7 @@ fallback_coverprint() {
   self endon("fallback");
   self endon("fallback_clear_goal");
   self endon("fallback_clear_death");
-  while (1) {
+  while(1) {
     if(isDefined(self.coverpoint)) {
       line(self.origin + (0, 0, 35), self.coverpoint.origin, (0.2, 0.5, 0.8), 0.5);
     }
@@ -1527,7 +1509,7 @@ fallback_coverprint() {
 fallback_print() {
   self endon("fallback_clear_goal");
   self endon("fallback_clear_death");
-  while (1) {
+  while(1) {
     if(isDefined(self.coverpoint)) {
       line(self.origin + (0, 0, 35), self.coverpoint.origin, (0.2, 0.5, 0.8), 0.5);
     }
@@ -1561,8 +1543,8 @@ waitframe() {
 }
 
 specialCheck(name) {
-  for (;;) {
-    assertex(GetEntArray(name, "targetname").size, "Friendly wave trigger that targets " + name + " doesnt target any spawners");
+  for(;;) {
+    assertex(getEntArray(name, "targetname").size, "Friendly wave trigger that targets " + name + " doesnt target any spawners");
     wait(0.05);
   }
 }
@@ -1573,8 +1555,8 @@ friendly_wave(trigger) {
   }
   if(trigger.targetname == "friendly_wave") {
     assert = false;
-    targs = GetEntArray(trigger.target, "targetname");
-    for (i = 0; i < targs.size; i++) {
+    targs = getEntArray(trigger.target, "targetname");
+    for(i = 0; i < targs.size; i++) {
       if(isDefined(targs[i].classname[7])) {
         if(targs[i].classname[7] != "l" && targs[i].classname[8] != "l" && targs[i].classname != "info_player_respawn") {
           println("Friendyl_wave spawner at ", targs[i].origin, " is not an ally");
@@ -1586,7 +1568,7 @@ friendly_wave(trigger) {
       maps\_utility::error("Look above");
     }
   }
-  while (1) {
+  while(1) {
     trigger waittill("trigger");
     level notify("friendly_died");
     if(trigger.targetname == "friendly_wave") {
@@ -1603,8 +1585,8 @@ set_spawncount(count) {
   if(!isDefined(self.target)) {
     return;
   }
-  spawners = GetEntArray(self.target, "targetname");
-  for (i = 0; i < spawners.size; i++) {
+  spawners = getEntArray(self.target, "targetname");
+  for(i = 0; i < spawners.size; i++) {
     spawners[i].count = 0;
   }
 }
@@ -1620,16 +1602,16 @@ friendlydeath_thread() {
 
 friendly_wave_masterthread() {
   level.friendly_wave_active = true;
-  triggers = GetEntArray("friendly_wave", "targetname");
+  triggers = getEntArray("friendly_wave", "targetname");
   array_thread(triggers, ::set_spawncount, 0);
   if(!isDefined(level.maxfriendlies)) {
     level.maxfriendlies = 7;
   }
   names = 1;
-  while (1) {
+  while(1) {
     if((isDefined(level.friendly_wave_trigger)) && (isDefined(level.friendly_wave_trigger.target))) {
       old_friendly_wave_trigger = level.friendly_wave_trigger;
-      spawn = GetEntArray(level.friendly_wave_trigger.target, "targetname");
+      spawn = getEntArray(level.friendly_wave_trigger.target, "targetname");
       spawn = filter_player_respawns(spawn);
       if(!spawn.size) {
         level waittill("friendly_died");
@@ -1637,12 +1619,12 @@ friendly_wave_masterthread() {
       }
       num = 0;
       script_delay = isDefined(level.friendly_wave_trigger.script_delay);
-      while ((isDefined(level.friendly_wave_trigger)) && (level.totalfriends < level.maxfriendlies)) {
+      while((isDefined(level.friendly_wave_trigger)) && (level.totalfriends < level.maxfriendlies)) {
         if(old_friendly_wave_trigger != level.friendly_wave_trigger) {
           script_delay = isDefined(level.friendly_wave_trigger.script_delay);
           old_friendly_wave_trigger = level.friendly_wave_trigger;
           assertex(isDefined(level.friendly_wave_trigger.target), "Wave trigger must target spawner");
-          spawn = GetEntArray(level.friendly_wave_trigger.target, "targetname");
+          spawn = getEntArray(level.friendly_wave_trigger.target, "targetname");
           spawn = filter_player_respawns(spawn);
         } else if(!script_delay) {
           num = RandomInt(spawn.size);
@@ -1651,13 +1633,13 @@ friendly_wave_masterthread() {
         }
         spawn[num].count = 1;
         if(isDefined(spawn[num].script_noenemyinfo) && isDefined(spawn[num].script_forcespawn))
-          spawned = spawn[num] stalingradSpawn(true);
+          spawned = spawn[num] stalingradspawn(true);
         else if(isDefined(spawn[num].script_noenemyinfo))
-          spawned = spawn[num] doSpawn(true);
+          spawned = spawn[num] dospawn(true);
         else if(isDefined(spawn[num].script_forcespawn)) {
-          spawned = spawn[num] StalingradSpawn();
+          spawned = spawn[num] Stalingradspawn();
         } else {
-          spawned = spawn[num] DoSpawn();
+          spawned = spawn[num] Dospawn();
         }
         spawn[num].count = 0;
         if(spawn_failed(spawned)) {
@@ -1691,7 +1673,7 @@ friendly_wave_masterthread() {
 filter_player_respawns(array) {
   newarray = [];
   clear_player_spawnpoints();
-  for (i = 0; i < array.size; i++) {
+  for(i = 0; i < array.size; i++) {
     if(isDefined(array[i].classname) && array[i].classname == "info_player_respawn") {
       add_player_spawnpoInt(array[i]);
       continue;
@@ -1713,7 +1695,7 @@ friendly_mgTurret(trigger) {
   mg42 SetMode("auto_ai");
   mg42 ClearTargetEntity();
   in_use = false;
-  while (1) {
+  while(1) {
     trigger waittill("trigger", other);
     if(IsSentient(other)) {
       if(IsPlayer(other)) {
@@ -1769,14 +1751,14 @@ friendly_mg42_useable(mg42, node) {
     return false;
   }
   players = get_players();
-  for (q = 0; q < players.size; q++) {
+  for(q = 0; q < players.size; q++) {
     if(Distancesquared(players[q].origin, node.origin) < 100 * 100) {
       return false;
     }
   }
   if(isDefined(self.chainnode)) {
     player_count = 0;
-    for (q = 0; q < players.size; q++) {
+    for(q = 0; q < players.size; q++) {
       if(Distancesquared(players[q].origin, self.chainnode.origin) > 1100 * 1100) {
         player_count++;
       }
@@ -1828,7 +1810,7 @@ friendly_mg42_think(mg42, node) {
   self.ignoresuppression = false;
   self.goalradius = self.oldradius;
   players = get_players();
-  for (q = 0; q < players.size; q++) {
+  for(q = 0; q < players.size; q++) {
     if(Distancesquared(players[q].origin, node.origin) < 32 * 32) {
       mg42 notify("friendly_finished_using_mg42");
       return;
@@ -1844,7 +1826,7 @@ friendly_mg42_think(mg42, node) {
       stoptrigger thread friendly_mg42_endtrigger(mg42, self);
     }
   }
-  while (1) {
+  while(1) {
     if(Distance(self.origin, node.origin) < 32) {
       self USeturret(mg42);
     } else {
@@ -1908,7 +1890,7 @@ tanksquish() {
   if(isDefined(level.levelHasVehicles) && !level.levelHasVehicles) {
     return;
   }
-  while (1) {
+  while(1) {
     self waittill("damage", amt, who, force, b, mod, d, e);
     if(mod != "MOD_CRUSH") {
       continue;
@@ -1925,10 +1907,10 @@ tanksquish() {
     force = vectorscale(force, 50000);
     force = (force[0], force[1], abs(force[2]));
     if(isDefined(level._effect) && isDefined(level._effect["tanksquish"])) {
-      PlayFX(level._effect["tanksquish"], self.origin + (0, 0, 30));
+      playFX(level._effect["tanksquish"], self.origin + (0, 0, 30));
     }
     self startRagdoll();
-    self playsound("human_crunch");
+    self playSound("human_crunch");
     return;
   }
 }
@@ -1960,7 +1942,7 @@ panzer_target(ai, node, pos, targetEnt, targetEnt_offsetVec) {
 
 showStart(origin, angles, anime) {
   org = GetStartOrigin(origin, angles, anime);
-  for (;;) {
+  for(;;) {
     print3d(org, "x", (0.0, 0.7, 1.0), 1, 0.25);
     wait(0.05);
   }
@@ -1969,13 +1951,13 @@ showStart(origin, angles, anime) {
 spawnWaypointFriendlies() {
   self.count = 1;
   if(isDefined(self.script_noenemyinfo) && isDefined(self.script_forcespawn))
-    spawn = self stalingradSpawn(true);
+    spawn = self stalingradspawn(true);
   else if(isDefined(self.script_noenemyinfo))
-    spawn = self doSpawn(true);
+    spawn = self dospawn(true);
   else if(isDefined(self.script_forcespawn))
-    spawn = self stalingradSpawn();
+    spawn = self stalingradspawn();
   else
-    spawn = self doSpawn();
+    spawn = self dospawn();
   if(spawn_failed(spawn))
     return;
   spawn.friendlyWaypoint = true;
@@ -1987,20 +1969,20 @@ waittillDeathOrLeaveSquad() {
 }
 
 friendlySpawnWave() {
-  triggers = GetEntArray(self.target, "targetname");
-  for (i = 0; i < triggers.size; i++) {
+  triggers = getEntArray(self.target, "targetname");
+  for(i = 0; i < triggers.size; i++) {
     if(triggers[i] GetEntNum() == 526) {
       println("Target: " + triggers[i].target);
     }
   }
-  array_thread(GetEntArray(self.target, "targetname"), ::friendlySpawnWave_triggerThink, self);
-  for (;;) {
+  array_thread(getEntArray(self.target, "targetname"), ::friendlySpawnWave_triggerThink, self);
+  for(;;) {
     self waittill("trigger", other);
-    if(activeFriendlySpawn() && getFriendlySpawnTrigger() == self) {
-      unsetFriendlySpawn();
+    if(activeFriendlyspawn() && getFriendlySpawnTrigger() == self) {
+      unsetFriendlyspawn();
     }
     self waittill("friendly_wave_start", startPoint);
-    setFriendlySpawn(startPoint, self);
+    setFriendlyspawn(startPoint, self);
     if(!isDefined(startPoint.target)) {
       continue;
     }
@@ -2017,10 +1999,10 @@ flood_and_secure(instantRespawn) {
     instantRespawn = true;
   }
   level.spawnerWave = [];
-  spawners = GetEntArray(self.target, "targetname");
+  spawners = getEntArray(self.target, "targetname");
   array_thread(spawners, ::flood_and_secure_spawner, instantRespawn);
   playerTriggered = false;
-  for (;;) {
+  for(;;) {
     self waittill("trigger", other);
     if(!objectiveIsAllowed()) {
       continue;
@@ -2037,14 +2019,14 @@ flood_and_secure(instantRespawn) {
         continue;
       }
     }
-    spawners = GetEntArray(self.target, "targetname");
+    spawners = getEntArray(self.target, "targetname");
     if(isDefined(spawners[0])) {
       if(isDefined(spawners[0].script_randomspawn)) {
-        select_random_Spawn(spawners);
+        select_random_spawn(spawners);
       }
     }
-    spawners = GetEntArray(self.target, "targetname");
-    for (i = 0; i < spawners.size; i++) {
+    spawners = getEntArray(self.target, "targetname");
+    for(i = 0; i < spawners.size; i++) {
       spawners[i].playerTriggered = playerTriggered;
       spawners[i] notify("flood_begin");
     }
@@ -2058,12 +2040,12 @@ flood_and_secure(instantRespawn) {
 
 select_random_spawn(spawners) {
   groups = [];
-  for (i = 0; i < spawners.size; i++) {
+  for(i = 0; i < spawners.size; i++) {
     groups[spawners[i].script_randomspawn] = true;
   }
   keys = getarraykeys(groups);
   num_that_lives = random(keys);
-  for (i = 0; i < spawners.size; i++) {
+  for(i = 0; i < spawners.size; i++) {
     if(spawners[i].script_randomspawn != num_that_lives)
       spawners[i] delete();
   }
@@ -2084,14 +2066,14 @@ flood_and_secure_spawner(instantRespawn) {
   }
   spawners = [];
   if(isDefined(target)) {
-    possibleSpawners = getentarray(target, "targetname");
-    for (i = 0; i < possibleSpawners.size; i++) {
+    possibleSpawners = getEntArray(target, "targetname");
+    for(i = 0; i < possibleSpawners.size; i++) {
       if(!issubstr(possibleSpawners[i].classname, "actor"))
         continue;
       spawners[spawners.size] = possibleSpawners[i];
     }
   }
-  ent = spawnstruct();
+  ent = spawnStruct();
   org = self.origin;
   flood_and_secure_spawner_think(ent, spawners.size > 0, instantRespawn);
   if(isalive(ent.ai))
@@ -2099,11 +2081,11 @@ flood_and_secure_spawner(instantRespawn) {
   if(!isDefined(target)) {
     return;
   }
-  possibleSpawners = getentarray(target, "targetname");
+  possibleSpawners = getEntArray(target, "targetname");
   if(!possibleSpawners.size) {
     return;
   }
-  for (i = 0; i < possibleSpawners.size; i++) {
+  for(i = 0; i < possibleSpawners.size; i++) {
     if(!issubstr(possibleSpawners[i].classname, "actor")) {
       continue;
     }
@@ -2132,7 +2114,7 @@ flood_and_secure_spawner_think(ent, oneShot, instantRespawn) {
     delay = self.script_delay;
   else
     delay = 0;
-  for (;;) {
+  for(;;) {
     self waittill("flood_begin");
     if(self.playerTriggered) {
       break;
@@ -2144,18 +2126,18 @@ flood_and_secure_spawner_think(ent, oneShot, instantRespawn) {
   closest_player = get_closest_player(self.origin);
   dist = Distancesquared(closest_player.origin, self.origin);
   prof_begin("flood_and_secure_spawner_think");
-  while (count) {
+  while(count) {
     self.trueCount = count;
     self.count = 2;
     wait(delay);
     if(isDefined(self.script_noenemyinfo) && isDefined(self.script_forcespawn))
-      spawn = self stalingradSpawn(true);
+      spawn = self stalingradspawn(true);
     else if(isDefined(self.script_noenemyinfo))
-      spawn = self doSpawn(true);
+      spawn = self dospawn(true);
     else if(isDefined(self.script_forcespawn))
-      spawn = self stalingradSpawn();
+      spawn = self stalingradspawn();
     else
-      spawn = self doSpawn();
+      spawn = self dospawn();
     if(spawn_failed(spawn)) {
       playerKill = false;
       if(delay < 2)
@@ -2195,7 +2177,7 @@ waittillDeletedOrDeath(spawn) {
 addToWaveSpawner(spawn) {
   name = self.targetname;
   if(!isDefined(level.spawnerWave[name])) {
-    level.spawnerWave[name] = SpawnStruct();
+    level.spawnerWave[name] = spawnStruct();
     level.spawnerWave[name].count = 0;
     level.spawnerWave[name].total = 0;
   }
@@ -2219,7 +2201,7 @@ addToWaveSpawner(spawn) {
 debugWaveCount(ent) {
   self endon("debug_stop");
   self endon("death");
-  for (;;) {
+  for(;;) {
     print3d(self.origin, ent.count + "/" + ent.total, (0, 0.8, 1), 0.5);
     wait(0.05);
   }
@@ -2245,14 +2227,14 @@ playerWasNearby(playerKill, ai) {
   if(Distancesquared(closest_player.origin, org) < 700 * 700) {
     return true;
   }
-  return BulletTracePassed(closest_player GetEye(), ai GetEye(), false, undefined);
+  return BulletTracePassed(closest_player getEye(), ai getEye(), false, undefined);
 }
 
 waittillRestartOrDistance(dist) {
   self endon("flood_begin");
   dist = dist * (0.75 * 0.75);
   closest_player = get_closest_player(self.origin);
-  while (Distancesquared(closest_player.origin, self.origin) > dist) {
+  while(Distancesquared(closest_player.origin, self.origin) > dist) {
     wait(1);
     closest_player = get_closest_player(self.origin);
   }
@@ -2286,7 +2268,7 @@ flood_and_secure_spawn_goal() {
     self.goalradius = 64;
   }
   self waittill("goal");
-  while (isDefined(node.target)) {
+  while(isDefined(node.target)) {
     newNode = GetNode(node.target, "targetname");
     if(isDefined(newNode)) {
       node = newNode;
@@ -2346,12 +2328,12 @@ furniturePushSound() {
 
 friendlychain() {
   waittillframeend;
-  triggers = GetEntArray(self.target, "targetname");
+  triggers = getEntArray(self.target, "targetname");
   if(!triggers.size) {
     node = GetNode(self.target, "targetname");
     assert(isDefined(node));
     assert(isDefined(node.script_noteworthy));
-    for (;;) {
+    for(;;) {
       self waittill("trigger");
       if(isDefined(level.lastFriendlyTrigger) && level.lastFriendlyTrigger == self) {
         wait(0.5);
@@ -2367,14 +2349,14 @@ friendlychain() {
       setNewPlayerChain(node, rejoin);
     }
   }
-  for (i = 0; i < triggers.size; i++) {
+  for(i = 0; i < triggers.size; i++) {
     node = GetNode(triggers[i].target, "targetname");
     assert(isDefined(node));
     assert(isDefined(node.script_noteworthy));
   }
-  for (;;) {
+  for(;;) {
     self waittill("trigger");
-    while (any_player_IsTouching(self)) {
+    while(any_player_IsTouching(self)) {
       wait(0.05);
     }
     if(!objectiveIsAllowed()) {
@@ -2395,7 +2377,7 @@ objectiveIsAllowed() {
   active = true;
   if(isDefined(self.script_objective_active)) {
     active = false;
-    for (i = 0; i < level.active_objective.size; i++) {
+    for(i = 0; i < level.active_objective.size; i++) {
       if(!IsSubStr(self.script_objective_active, level.active_objective[i])) {
         continue;
       }
@@ -2410,7 +2392,7 @@ objectiveIsAllowed() {
     return (active);
   }
   inactive = 0;
-  for (i = 0; i < level.inactive_objective.size; i++) {
+  for(i = 0; i < level.inactive_objective.size; i++) {
     if(!IsSubStr(self.script_objective_inactive, level.inactive_objective[i])) {
       continue;
     }
@@ -2431,7 +2413,7 @@ friendlyTrigger(node) {
 waittillDeathOrEmpty() {
   self endon("death");
   num = self.script_deathChain;
-  while (self.count) {
+  while(self.count) {
     self waittill("spawned", spawn);
     spawn thread deathChainAINotify(num);
   }
@@ -2452,7 +2434,7 @@ deathChainSpawnerLogic() {
   self waittillDeathOrEmpty();
   newDeathSpawners = [];
   if(isDefined(self)) {
-    for (i = 0; i < level.deathSpawnerEnts[num].size; i++) {
+    for(i = 0; i < level.deathSpawnerEnts[num].size; i++) {
       if(!isDefined(level.deathSpawnerEnts[num][i])) {
         continue;
       }
@@ -2462,7 +2444,7 @@ deathChainSpawnerLogic() {
       newDeathSpawners[newDeathSpawners.size] = level.deathSpawnerEnts[num][i];
     }
   } else {
-    for (i = 0; i < level.deathSpawnerEnts[num].size; i++) {
+    for(i = 0; i < level.deathSpawnerEnts[num].size; i++) {
       if(!isDefined(level.deathSpawnerEnts[num][i])) {
         continue;
       }
@@ -2476,11 +2458,11 @@ deathChainSpawnerLogic() {
 }
 
 friendlychain_onDeath() {
-  triggers = GetEntArray("friendly_chain_on_death", "targetname");
+  triggers = getEntArray("friendly_chain_on_death", "targetname");
   spawners = GetSpawnerArray();
   level.deathSpawner = [];
   level.deathSpawnerEnts = [];
-  for (i = 0; i < spawners.size; i++) {
+  for(i = 0; i < spawners.size; i++) {
     if(!isDefined(spawners[i].script_deathchain)) {
       continue;
     }
@@ -2491,7 +2473,7 @@ friendlychain_onDeath() {
     }
     spawners[i] thread deathChainSpawnerLogic();
   }
-  for (i = 0; i < triggers.size; i++) {
+  for(i = 0; i < triggers.size; i++) {
     if(!isDefined(triggers[i].script_deathchain)) {
       println("trigger at origin " + triggers[i] GetOrigin() + " has no script_deathchain");
       return;
@@ -2501,12 +2483,12 @@ friendlychain_onDeath() {
 }
 
 friendlyChain_onDeathThink() {
-  while (level.deathSpawner[self.script_deathChain] > 0) {
+  while(level.deathSpawner[self.script_deathChain] > 0) {
     level waittill("spawner_expired" + self.script_deathChain);
   }
   level endon("start_chain");
   node = GetNode(self.target, "targetname");
-  for (;;) {
+  for(;;) {
     self waittill("trigger");
     setNewPlayerChain(node, true);
     iprintlnbold("Area secured, move up!");
@@ -2525,19 +2507,19 @@ setNewPlayerChain(node, rejoin) {
 friendlyChains() {
   level.friendlySpawnOrg = [];
   level.friendlySpawnTrigger = [];
-  array_thread(GetEntArray("friendlychain", "targetname"), ::friendlychain);
+  array_thread(getEntArray("friendlychain", "targetname"), ::friendlychain);
 }
 
-unsetFriendlySpawn() {
+unsetFriendlyspawn() {
   newOrg = [];
   newTrig = [];
-  for (i = 0; i < level.friendlySpawnOrg.size; i++) {
+  for(i = 0; i < level.friendlySpawnOrg.size; i++) {
     newOrg[newOrg.size] = level.friendlySpawnOrg[i];
     newTrig[newTrig.size] = level.friendlySpawnTrigger[i];
   }
   level.friendlySpawnOrg = newOrg;
   level.friendlySpawnTrigger = newTrig;
-  if(activeFriendlySpawn()) {
+  if(activeFriendlyspawn()) {
     return;
   }
   flag_Clear("spawning_friendlies");
@@ -2548,7 +2530,7 @@ getFriendlySpawnStart() {
   return (level.friendlySpawnOrg[level.friendlySpawnOrg.size - 1]);
 }
 
-activeFriendlySpawn() {
+activeFriendlyspawn() {
   return level.friendlySpawnOrg.size > 0;
 }
 
@@ -2557,7 +2539,7 @@ getFriendlySpawnTrigger() {
   return (level.friendlySpawnTrigger[level.friendlySpawnTrigger.size - 1]);
 }
 
-setFriendlySpawn(org, trigger) {
+setFriendlyspawn(org, trigger) {
   level.friendlySpawnOrg[level.friendlySpawnOrg.size] = org.origin;
   level.friendlySpawnTrigger[level.friendlySpawnTrigger.size] = trigger;
   flag_set("spawning_friendlies");
@@ -2570,12 +2552,12 @@ spawnWaveStopTrigger(startTrigger) {
   if(getFriendlySpawnTrigger() != startTrigger) {
     return;
   }
-  unsetFriendlySpawn();
+  unsetFriendlyspawn();
 }
 
 friendlySpawnWave_triggerThink(startTrigger) {
   org = GetEnt(self.target, "targetname");
-  for (;;) {
+  for(;;) {
     self waittill("trigger");
     startTrigger notify("friendly_wave_start", org);
     if(!isDefined(org.target)) {
@@ -2585,10 +2567,10 @@ friendlySpawnWave_triggerThink(startTrigger) {
 }
 
 goalVolumes() {
-  volumes = GetEntArray("info_volume", "classname");
+  volumes = getEntArray("info_volume", "classname");
   level.deathchain_goalVolume = [];
   level.goalVolumes = [];
-  for (i = 0; i < volumes.size; i++) {
+  for(i = 0; i < volumes.size; i++) {
     volume = volumes[i];
     if(isDefined(volume.script_deathChain)) {
       level.deathchain_goalVolume[volume.script_deathChain] = volume;
@@ -2612,7 +2594,7 @@ debugprInt(msg, endonmsg, color) {
     color = (0, 0.8, 0.6);
   }
   num = 0;
-  for (;;) {
+  for(;;) {
     num += 12;
     scale = Sin(num) * 0.4;
     if(scale < 0) {
@@ -2625,7 +2607,7 @@ debugprInt(msg, endonmsg, color) {
 }
 
 aigroup_create(aigroup) {
-  level._ai_group[aigroup] = SpawnStruct();
+  level._ai_group[aigroup] = spawnStruct();
   level._ai_group[aigroup].aicount = 0;
   level._ai_group[aigroup].spawnercount = 0;
   level._ai_group[aigroup].ai = [];
@@ -2638,7 +2620,7 @@ aigroup_spawnerthink(tracker) {
   tracker.spawnercount++;
   self thread aigroup_spawnerdeath(tracker);
   self thread aigroup_spawnerempty(tracker);
-  while (self.count) {
+  while(self.count) {
     self waittill("spawned", soldier);
     if(spawn_failed(soldier)) {
       continue;
@@ -2687,7 +2669,7 @@ camper_trigger_think(trigger) {
   tokens = strtok(trigger.script_linkto, " ");
   spawners = [];
   nodes = [];
-  for (i = 0; i < tokens.size; i++) {
+  for(i = 0; i < tokens.size; i++) {
     token = tokens[i];
     ai = getent(token, "script_linkname");
     if(isDefined(ai)) {
@@ -2706,10 +2688,10 @@ camper_trigger_think(trigger) {
   assertEX(nodes.size >= spawners.size, "camper_spawner with less nodes than spawners");
   trigger waittill("trigger");
   nodes = array_randomize(nodes);
-  for (i = 0; i < nodes.size; i++)
+  for(i = 0; i < nodes.size; i++)
     nodes[i].claimed = false;
   j = 0;
-  for (i = 0; i < spawners.size; i++) {
+  for(i = 0; i < spawners.size; i++) {
     spawner = spawners[i];
     if(!isDefined(spawner)) {
       continue;
@@ -2717,7 +2699,7 @@ camper_trigger_think(trigger) {
     if(isDefined(spawner.script_spawn_here)) {
       continue;
     }
-    while (isDefined(nodes[j].script_noteworthy) && nodes[j].script_noteworthy == "dont_spawn")
+    while(isDefined(nodes[j].script_noteworthy) && nodes[j].script_noteworthy == "dont_spawn")
       j++;
     spawner.origin = nodes[j].origin;
     spawner.angles = nodes[j].angles;
@@ -2737,7 +2719,7 @@ camper_guy() {
 move_when_enemy_hides(nodes) {
   self endon("death");
   waitingForEnemyToDisappear = false;
-  while (1) {
+  while(1) {
     if(!isalive(self.enemy)) {
       self waittill("enemy");
       waitingForEnemyToDisappear = false;
@@ -2746,7 +2728,7 @@ move_when_enemy_hides(nodes) {
     if(IsPlayer(self.enemy)) {
       if(flag("player_has_red_flashing_overlay") || flag("player_flashed")) {
         self.fixednode = 0;
-        for (;;) {
+        for(;;) {
           self.goalradius = 180;
           self setgoalpos(self.enemy.origin);
           wait(1);
@@ -2787,7 +2769,7 @@ claim_a_node(claimed_node, old_claimed_node) {
 }
 
 find_unclaimed_node(nodes) {
-  for (i = 0; i < nodes.size; i++) {
+  for(i = 0; i < nodes.size; i++) {
     if(nodes[i].claimed)
       continue;
     else
@@ -2798,14 +2780,14 @@ find_unclaimed_node(nodes) {
 
 flood_trigger_think(trigger) {
   assertEX(isDefined(trigger.target), "flood_spawner at " + trigger.origin + " without target");
-  floodSpawners = GetEntArray(trigger.target, "targetname");
+  floodSpawners = getEntArray(trigger.target, "targetname");
   assertex(floodSpawners.size, "flood_spawner at with target " + trigger.target + " without any targets");
-  for (i = 0; i < floodSpawners.size; i++) {
+  for(i = 0; i < floodSpawners.size; i++) {
     floodSpawners[i].script_trigger = trigger;
   }
   array_thread(floodSpawners, ::flood_spawner_init);
   trigger waittill("trigger");
-  floodSpawners = GetEntArray(trigger.target, "targetname");
+  floodSpawners = getEntArray(trigger.target, "targetname");
   {
     array_thread(floodSpawners, ::flood_spawner_think, trigger);
   }
@@ -2828,13 +2810,13 @@ two_stage_spawner_think(trigger) {
   assertEx(issubstr(trigger_target.classname, "trigger"), "Triggers with targetname two_stage_spawner must target a trigger");
   assertEx(isDefined(trigger_target.target), "The second trigger of a two_stage_spawner must target at least one spawner");
   waittillframeend;
-  spawners = getentarray(trigger_target.target, "targetname");
-  for (i = 0; i < spawners.size; i++) {
+  spawners = getEntArray(trigger_target.target, "targetname");
+  for(i = 0; i < spawners.size; i++) {
     spawners[i].script_moveoverride = true;
     spawners[i] add_spawn_function(::wait_to_go, trigger_target);
   }
   trigger waittill("trigger");
-  spawners = getentarray(trigger_target.target, "targetname");
+  spawners = getEntArray(trigger_target.target, "targetname");
   array_thread(spawners, ::spawn_ai);
 }
 
@@ -2851,28 +2833,28 @@ flood_spawner_think(trigger) {
   self notify("stop current floodspawner");
   self endon("stop current floodspawner");
   if(is_pyramid_spawner()) {
-    pyramid_Spawn(trigger);
+    pyramid_spawn(trigger);
     return;
   }
   requires_player = trigger_requires_player(trigger);
   script_delay();
-  while (self.count > 0) {
+  while(self.count > 0) {
     if(requires_player) {
-      while (!any_player_IsTouching(trigger)) {
+      while(!any_player_IsTouching(trigger)) {
         wait(0.5);
       }
     }
-    while (!(self ok_to_trigger_spawn())) {
+    while(!(self ok_to_trigger_spawn())) {
       wait_network_frame();
     }
     if(isDefined(self.script_noenemyinfo) && isDefined(self.script_forcespawn))
-      soldier = self stalingradSpawn(true);
+      soldier = self stalingradspawn(true);
     else if(isDefined(self.script_noenemyinfo))
-      soldier = self doSpawn(true);
+      soldier = self dospawn(true);
     else if(isDefined(self.script_forcespawn))
-      soldier = self stalingradSpawn();
+      soldier = self stalingradspawn();
     else
-      soldier = self doSpawn();
+      soldier = self dospawn();
     if(spawn_failed(soldier)) {
       wait(2);
       continue;
@@ -2914,7 +2896,7 @@ player_saw_kill(guy, attacker) {
       return true;
     }
     players = get_players();
-    for (q = 0; q < players.size; q++) {
+    for(q = 0; q < players.size; q++) {
       if(DistanceSquared(attacker.origin, players[q].origin) < 200 * 200) {
         return true;
       }
@@ -2934,14 +2916,14 @@ player_saw_kill(guy, attacker) {
   if(isDefined(closest_player) && distance(guy.origin, closest_player.origin) < 200) {
     return true;
   }
-  return bulletTracePassed(closest_player geteye(), guy geteye(), false, undefined);
+  return bulletTracePassed(closest_player getEye(), guy getEye(), false, undefined);
 }
 
 is_pyramid_spawner() {
   if(!isDefined(self.target)) {
     return false;
   }
-  ent = GetEntArray(self.target, "targetname");
+  ent = getEntArray(self.target, "targetname");
   if(!ent.size) {
     return false;
   }
@@ -2953,23 +2935,23 @@ pyramid_death_report(spawner) {
   self notify("death_report");
 }
 
-pyramid_Spawn(trigger) {
+pyramid_spawn(trigger) {
   self endon("death");
   requires_player = trigger_requires_player(trigger);
   script_delay();
   if(requires_player) {
-    while (!any_player_IsTouching(trigger)) {
+    while(!any_player_IsTouching(trigger)) {
       wait(0.5);
     }
   }
-  spawners = GetEntArray(self.target, "targetname");
-  for (i = 0; i < spawners.size; i++) {
+  spawners = getEntArray(self.target, "targetname");
+  for(i = 0; i < spawners.size; i++) {
     assertex(IsSubStr(spawners[i].classname, "actor"), "Pyramid spawner targets non AI!");
   }
   self.spawners = 0;
   array_thread(spawners, ::pyramid_spawner_reports_death, self);
   offset = RandomInt(spawners.size);
-  for (i = 0; i < spawners.size; i++) {
+  for(i = 0; i < spawners.size; i++) {
     if(self.count <= 0) {
       return;
     }
@@ -2979,7 +2961,7 @@ pyramid_Spawn(trigger) {
     }
     spawner = spawners[offset];
     spawner.count = 1;
-    while (!(self ok_to_trigger_spawn())) {
+    while(!(self ok_to_trigger_spawn())) {
       wait_network_frame();
     }
     soldier = spawner spawn_ai();
@@ -2995,13 +2977,13 @@ pyramid_Spawn(trigger) {
     thread pyramid_death_report(spawner);
   }
   culmulative_wait = 0.01;
-  while (self.count > 0) {
+  while(self.count > 0) {
     self waittill("death_report");
     script_wait(true);
     wait(culmulative_wait);
     culmulative_wait += 2.5;
     offset = RandomInt(spawners.size);
-    for (i = 0; i < spawners.size; i++) {
+    for(i = 0; i < spawners.size; i++) {
       spawners = array_removeUndefined(spawners);
       if(!spawners.size) {
         if(isDefined(self)) {
@@ -3022,7 +3004,7 @@ pyramid_Spawn(trigger) {
       } else {
         self.target = undefined;
       }
-      while (!(self ok_to_trigger_spawn())) {
+      while(!(self ok_to_trigger_spawn())) {
         wait_network_frame();
       }
       soldier = self spawn_ai();
@@ -3088,7 +3070,7 @@ drop_health_trigger_think() {
 }
 
 traceShow(org) {
-  for (;;) {
+  for(;;) {
     line(org + (0, 0, 100), org, (0.2, 0.5, 0.8), 0.5);
     wait(0.05);
   }
@@ -3100,7 +3082,7 @@ show_bad_path() {
   self endon("death");
   last_bad_path_time = -5000;
   bad_path_count = 0;
-  for (;;) {
+  for(;;) {
     self waittill("bad_path", badPathPos);
     if(!isDefined(level.debug_badpath) || !level.debug_badpath) {
       continue;
@@ -3114,16 +3096,16 @@ show_bad_path() {
     if(bad_path_count < 10) {
       continue;
     }
-    for (p = 0; p < 10 * 20; p++) {
+    for(p = 0; p < 10 * 20; p++) {
       line(self.origin, badPathPos, (1, 0.4, 0.1), 0, 10 * 20);
       wait(0.05);
     }
   }
 }
 
-random_Spawn(trigger) {
+random_spawn(trigger) {
   trigger waittill("trigger");
-  spawners = GetEntArray(trigger.target, "targetname");
+  spawners = getEntArray(trigger.target, "targetname");
   if(!spawners.size) {
     return;
   }
@@ -3132,7 +3114,7 @@ random_Spawn(trigger) {
   spawners[spawners.size] = spawner;
   if(isDefined(spawner.script_linkto)) {
     links = Strtok(spawner.script_linkto, " ");
-    for (i = 0; i < links.size; i++) {
+    for(i = 0; i < links.size; i++) {
       spawners[spawners.size] = GetEnt(links[i], "script_linkname");
     }
   }
@@ -3158,7 +3140,7 @@ objective_event_init(trigger) {
   if(!isDefined(level.deathSpawner[trigger.script_deathChain])) {
     return;
   }
-  while (level.deathSpawner[trigger.script_deathChain] > 0) {
+  while(level.deathSpawner[trigger.script_deathChain] > 0) {
     level waittill("spawner_expired" + trigger.script_deathChain);
   }
   flag_set(flag);
@@ -3170,7 +3152,7 @@ setup_ai_eq_triggers() {
   self.is_the_player = IsPlayer(self);
   self.eq_table = [];
   self.eq_touching = [];
-  for (i = 0; i < level.eq_trigger_num; i++) {
+  for(i = 0; i < level.eq_trigger_num; i++) {
     self.eq_table[i] = false;
   }
 }
@@ -3199,7 +3181,7 @@ updatePlayerScore(amount) {
   self notify("update_xp");
   self endon("update_xp");
   self.rankUpdateTotal += amount;
-  self.hud_rankscroreupdate.label = & "SCRIPT_PLUS";
+  self.hud_rankscroreupdate.label = &"SCRIPT_PLUS";
   self.hud_rankscroreupdate Setvalue(self.rankUpdateTotal);
   self.hud_rankscroreupdate.alpha = 1;
   self.hud_rankscroreupdate thread fontPulse(self);
@@ -3236,11 +3218,11 @@ fontPulse(player) {
   self notify("fontPulse");
   self endon("fontPulse");
   scaleRange = self.maxFontScale - self.baseFontScale;
-  while (self.fontScale < self.maxFontScale) {
+  while(self.fontScale < self.maxFontScale) {
     self.fontScale = min(self.maxFontScale, self.fontScale + (scaleRange / self.inFrames));
     wait(0.05);
   }
-  while (self.fontScale > self.baseFontScale) {
+  while(self.fontScale > self.baseFontScale) {
     self.fontScale = max(self.baseFontScale, self.fontScale - (scaleRange / self.outFrames));
     wait(0.05);
   }
@@ -3253,12 +3235,12 @@ spawner_dronespawn(spawner) {
   struct = level.dronestruct[spawner.classname];
   drone = spawn("script_model", spawner.origin);
   drone.angles = spawner.angles;
-  drone setmodel(struct.model);
+  drone setModel(struct.model);
   drone UseAnimTree(#animtree);
   drone makefakeai();
   attachedmodels = struct.attachedmodels;
   attachedtags = struct.attachedtags;
-  for (i = 0; i < attachedmodels.size; i++)
+  for(i = 0; i < attachedmodels.size; i++)
     drone attach(attachedmodels[i], attachedtags[i]);
   if(isDefined(spawner.script_startingposition))
     drone.script_startingposition = spawner.script_startingposition;
@@ -3316,7 +3298,7 @@ spawner_makerealai(drone) {
 }
 
 hiding_door_spawner() {
-  door_orgs = getentarray("hiding_door_guy_org", "targetname");
+  door_orgs = getEntArray("hiding_door_guy_org", "targetname");
   assertex(door_orgs.size, "Hiding door guy with export " + self.export+" couldn't find a hiding_door_org!");
   door_org = getclosest(self.origin, door_orgs);
   assertex(distance(door_org.origin, self.origin) < 256, "Hiding door guy with export " + self.export+" was not placed within 256 units of a hiding_door_org");
@@ -3379,7 +3361,7 @@ hiding_door_guy(door_org, trigger, door, door_clip) {
     door_org notify("stop_loop");
     door_org anim_single(guy_and_door, "close");
   }
-  for (;;) {
+  for(;;) {
     scene = "fire_3";
     if(randomint(100) < 25 * self.grenadeammo) {
       self.grenadeammo--;

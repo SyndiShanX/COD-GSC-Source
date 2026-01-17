@@ -108,8 +108,8 @@ function gamemode_callback_setup() {
 }
 
 function setup_rex_starts() {
-  zm_utility::add_gametype("zclassic", & dummy, "zclassic", & dummy);
-  zm_utility::add_gameloc("default", & dummy, "default", & dummy);
+  zm_utility::add_gametype("zclassic", &dummy, "zclassic", &dummy);
+  zm_utility::add_gameloc("default", &dummy, "default", &dummy);
 }
 
 function dummy() {}
@@ -118,20 +118,20 @@ function main() {
   zm_island_ffotd::main_start();
   function_ac03a39a();
   init_flags();
-  level.zm_aat_turned_validation_override = & function_490a2312;
+  level.zm_aat_turned_validation_override = &function_490a2312;
   level._uses_sticky_grenades = 1;
   level._uses_taser_knuckles = 1;
-  scene::add_scene_func("p7_fxanim_zm_island_power_plant_on_bundle", & zm_island_power::function_f0a1682d, "init");
-  scene::add_scene_func("p7_fxanim_zm_island_power_plant_on_bundle", & zm_island_power::function_c1edfb09, "play");
-  level.temporary_power_switch_logic = & zm_island_power::function_156f973e;
+  scene::add_scene_func("p7_fxanim_zm_island_power_plant_on_bundle", &zm_island_power::function_f0a1682d, "init");
+  scene::add_scene_func("p7_fxanim_zm_island_power_plant_on_bundle", &zm_island_power::function_c1edfb09, "play");
+  level.temporary_power_switch_logic = &zm_island_power::function_156f973e;
   level.var_7b5a9e65 = 120;
   level.var_7ccadaab = getdvarint("loc_language");
   zm::init_fx();
-  callback::on_spawned( & on_player_spawned);
-  callback::on_connect( & zm_island_challenges::on_player_connect);
-  callback::on_disconnect( & zm_island_skullquest::function_c7cd5585);
-  callback::on_disconnect( & zm_island_challenges::on_player_disconnect);
-  callback::on_ai_spawned( & function_e50fed59);
+  callback::on_spawned(&on_player_spawned);
+  callback::on_connect(&zm_island_challenges::on_player_connect);
+  callback::on_disconnect(&zm_island_skullquest::function_c7cd5585);
+  callback::on_disconnect(&zm_island_challenges::on_player_disconnect);
+  callback::on_ai_spawned(&function_e50fed59);
   var_ddba80d7 = getminbitcountfornum(3);
   var_d1cfa380 = getminbitcountfornum(7);
   var_a15256dd = getminbitcountfornum(3);
@@ -191,16 +191,16 @@ function main() {
   clientfield::register("scriptmover", "do_emissive_material_direct", 9000, 3, "float");
   level.default_start_location = "start_room";
   level.default_game_mode = "zclassic";
-  level.precachecustomcharacters = & precachecustomcharacters;
-  level.givecustomcharacters = & givecustomcharacters;
+  level.precachecustomcharacters = &precachecustomcharacters;
+  level.givecustomcharacters = &givecustomcharacters;
   initcharacterstartindex();
-  level.register_offhand_weapons_for_level_defaults_override = & offhand_weapon_overrride;
-  level.zombiemode_offhand_weapon_give_override = & offhand_weapon_give_override;
-  level._zombie_custom_add_weapons = & custom_add_weapons;
+  level.register_offhand_weapons_for_level_defaults_override = &offhand_weapon_overrride;
+  level.zombiemode_offhand_weapon_give_override = &offhand_weapon_give_override;
+  level._zombie_custom_add_weapons = &custom_add_weapons;
   level._allow_melee_weapon_switching = 1;
   level.zombiemode_reusing_pack_a_punch = 1;
   level.dont_unset_perk_when_machine_paused = 1;
-  level.bgb_machine_movement_frequency_override_func = & function_f51a1980;
+  level.bgb_machine_movement_frequency_override_func = &function_f51a1980;
   level thread zm_island_bgb::init();
   level thread custom_add_vox();
   level thread setup_personality_character_exerts();
@@ -218,17 +218,17 @@ function main() {
   zm_island_planting::main();
   zm_island_perks::init();
   zm_island_spiders::function_8e89793a();
-  spawner::add_global_spawn_function("axis", & function_b487bafd);
+  spawner::add_global_spawn_function("axis", &function_b487bafd);
   load::main();
   _zm_weap_bowie::init();
   _zm_weap_cymbal_monkey::init();
-  level._round_start_func = & zm::round_start;
+  level._round_start_func = &zm::round_start;
   init_sounds();
-  level.no_target_override = & no_target_override;
-  level.player_intersection_tracker_override = & function_4fc0dcb3;
-  level.fn_custom_round_ai_spawn = & zm_island_spiders::function_33aa4940;
+  level.no_target_override = &no_target_override;
+  level.player_intersection_tracker_override = &function_4fc0dcb3;
+  level.fn_custom_round_ai_spawn = &zm_island_spiders::function_33aa4940;
   level thread zm_ai_spiders::function_d2716ad8();
-  level.var_5f1b87ca = & zm_island_vo::function_5f161c52;
+  level.var_5f1b87ca = &zm_island_vo::function_5f161c52;
   level function_1b14c4b0();
   level thread zm_ai_thrasher::function_5e5433d8();
   level thread zm_island_zones::main();
@@ -238,8 +238,8 @@ function main() {
   zm_powerups::powerup_remove_from_regular_drops("bonus_points_team");
   zm_powerups::powerup_remove_from_regular_drops("empty_perk");
   zm_powerups::powerup_remove_from_regular_drops("island_seed");
-  level._custom_powerups["ww_grenade"].setup_powerup = & function_8608b597;
-  level._powerup_grab_check = & function_66e965d8;
+  level._custom_powerups["ww_grenade"].setup_powerup = &function_8608b597;
+  level._powerup_grab_check = &function_66e965d8;
   level flag::wait_till("start_zombie_round_logic");
   level thread zm_island_perks::function_c97259e9();
   level thread zm_perks::spare_change();
@@ -288,10 +288,10 @@ function function_1b14c4b0() {
 }
 
 function function_490a2312() {
-  if(isdefined(self.var_8853cc2a) && self.var_8853cc2a || (isdefined(self.var_2f846873) && self.var_2f846873) || (isdefined(self.var_ecc789a5) && self.var_ecc789a5 > 0)) {
+  if(isDefined(self.var_8853cc2a) && self.var_8853cc2a || (isDefined(self.var_2f846873) && self.var_2f846873) || (isDefined(self.var_ecc789a5) && self.var_ecc789a5 > 0)) {
     return false;
   }
-  if(isdefined(self.var_bf5bc647) && self.var_bf5bc647) {
+  if(isDefined(self.var_bf5bc647) && self.var_bf5bc647) {
     return false;
   }
   return true;
@@ -345,14 +345,14 @@ function function_a7fdfd3c(var_a44b86c3) {
 }
 
 function no_target_override(ai_zombie) {
-  if(isdefined(self.b_zombie_path_bad) && self.b_zombie_path_bad) {
+  if(isDefined(self.b_zombie_path_bad) && self.b_zombie_path_bad) {
     return;
   }
-  if(isdefined(self.var_20b8c74a) && self.var_20b8c74a || (isdefined(self.var_3f6ea790) && self.var_3f6ea790) || (isdefined(self.var_9b59d7f8) && self.var_9b59d7f8) || (isdefined(self.var_8853cc2a) && self.var_8853cc2a) || (isdefined(self.var_5017aabf) && self.var_5017aabf) || (isdefined(self.var_6eb9188d) && self.var_6eb9188d)) {
+  if(isDefined(self.var_20b8c74a) && self.var_20b8c74a || (isDefined(self.var_3f6ea790) && self.var_3f6ea790) || (isDefined(self.var_9b59d7f8) && self.var_9b59d7f8) || (isDefined(self.var_8853cc2a) && self.var_8853cc2a) || (isDefined(self.var_5017aabf) && self.var_5017aabf) || (isDefined(self.var_6eb9188d) && self.var_6eb9188d)) {
     return;
   }
   var_6c8e700c = ai_zombie zm_island_cleanup::get_escape_position_in_current_zone();
-  if(isalive(ai_zombie) && isdefined(var_6c8e700c) && isdefined(var_6c8e700c.origin)) {
+  if(isalive(ai_zombie) && isDefined(var_6c8e700c) && isDefined(var_6c8e700c.origin)) {
     ai_zombie thread function_dc683d01(var_6c8e700c.origin);
   }
 }
@@ -373,7 +373,7 @@ function private function_dc683d01(var_b52b26b9) {
 
 function private check_player_available() {
   self endon("death");
-  while (isdefined(self.b_zombie_path_bad) && self.b_zombie_path_bad) {
+  while(isDefined(self.b_zombie_path_bad) && self.b_zombie_path_bad) {
     wait(randomfloatrange(0.2, 0.5));
     if(self can_zombie_see_any_player()) {
       self.b_zombie_path_bad = undefined;
@@ -384,7 +384,7 @@ function private check_player_available() {
 }
 
 function private can_zombie_see_any_player() {
-  for (i = 0; i < level.activeplayers.size; i++) {
+  for(i = 0; i < level.activeplayers.size; i++) {
     if(zombie_utility::is_player_valid(level.activeplayers[i]) && self findpath(self.origin, level.activeplayers[i].origin, 1, 0)) {
       return true;
     }
@@ -411,7 +411,7 @@ function on_player_spawned() {
   self thread function_6ca6d73d();
   self.tesla_network_death_choke = 0;
   self.var_7149fc41 = 0;
-  if(isdefined(self.thrasher)) {
+  if(isDefined(self.thrasher)) {
     self.thrasher kill();
   }
 }
@@ -420,14 +420,14 @@ function function_e50fed59() {
   self endon("death");
   if(self.archetype === "zombie") {
     self.heroweapon_kill_power = 2;
-  } else if(isdefined(self.var_61f7b3a0) && self.var_61f7b3a0) {
+  } else if(isDefined(self.var_61f7b3a0) && self.var_61f7b3a0) {
     self.heroweapon_kill_power = 4;
   }
 }
 
 function function_b487bafd() {
   self.is_underwater = 0;
-  var_1282bf51 = getentarray("trigger_underwater", "targetname");
+  var_1282bf51 = getEntArray("trigger_underwater", "targetname");
   foreach(t_underwater in var_1282bf51) {
     self thread zm_island_pap_quest::function_83af0b87(t_underwater);
   }
@@ -436,7 +436,7 @@ function function_b487bafd() {
 function function_708908ca() {
   self endon("disconnect");
   self.var_b5f30643 = 0;
-  while (true) {
+  while(true) {
     str_notify = self util::waittill_any_array_return(array("perk_acquired", "perk_lost", "disconnect"));
     if(str_notify == "perk_acquired" && self hasperk("specialty_staminup") && !self.var_b5f30643) {
       self.var_b5f30643 = 1;
@@ -451,10 +451,10 @@ function function_708908ca() {
 
 function function_3363c147() {
   self endon("disconnect");
-  if(!isdefined(self.var_e2632fb2)) {
+  if(!isDefined(self.var_e2632fb2)) {
     self.var_e2632fb2 = 0;
   }
-  while (true) {
+  while(true) {
     if(self isplayerunderwater()) {
       if(!self.var_e2632fb2) {
         self.var_e2632fb2 = 1;
@@ -462,7 +462,7 @@ function function_3363c147() {
         self clientfield::set_to_player("play_bubbles", 1);
         self fx::play("bubbles", self.origin, (0, 0, 0), "swim_done", 1, "j_spineupper");
         var_f97c401 = self zm_utility::get_current_zone();
-        if(isdefined(var_f97c401)) {
+        if(isDefined(var_f97c401)) {
           if(var_f97c401 == "zone_start_water" || var_f97c401 == "zone_meteor_site" || var_f97c401 == "zone_meteor_site_2") {
             if(!level flag::get("spider_round_in_progress")) {
               self clientfield::set_to_player("set_world_fog", 1);
@@ -487,7 +487,7 @@ function function_3363c147() {
 
 function function_94ed46a2() {
   self endon("disconnect");
-  while (true) {
+  while(true) {
     self waittill("entering_last_stand");
     self.laststandstarttime = gettime();
   }
@@ -499,12 +499,12 @@ function function_dd7044da() {
   var_d64fdaf3 = 20;
   var_7bc01af9 = 30;
   self.drown_damage_after_time = var_d34e298b * 1000;
-  while (true) {
+  while(true) {
     self util::waittill_any("player_has_gasmask", "player_lost_gasmask", "player_has_staminup", "player_lost_staminup");
-    if(isdefined(self.var_b5f30643) && self.var_b5f30643 && (isdefined(self.var_df4182b1) && self.var_df4182b1)) {
+    if(isDefined(self.var_b5f30643) && self.var_b5f30643 && (isDefined(self.var_df4182b1) && self.var_df4182b1)) {
       self.drown_damage_after_time = var_7bc01af9 * 1000;
     } else {
-      if(isdefined(self.var_b5f30643) && self.var_b5f30643 || (isdefined(self.var_df4182b1) && self.var_df4182b1)) {
+      if(isDefined(self.var_b5f30643) && self.var_b5f30643 || (isDefined(self.var_df4182b1) && self.var_df4182b1)) {
         self.drown_damage_after_time = var_d64fdaf3 * 1000;
       } else {
         self.drown_damage_after_time = var_d34e298b * 1000;
@@ -533,10 +533,10 @@ function function_4fc0dcb3(other_player) {
   if(other_player isplayerunderwater() && other_player isplayerswimming()) {
     return true;
   }
-  if(isdefined(self.var_7a36438e) && self.var_7a36438e || (isdefined(self.is_ziplining) && self.is_ziplining)) {
+  if(isDefined(self.var_7a36438e) && self.var_7a36438e || (isDefined(self.is_ziplining) && self.is_ziplining)) {
     return true;
   }
-  if(isdefined(other_player.var_7a36438e) && other_player.var_7a36438e || (isdefined(other_player.is_ziplining) && other_player.is_ziplining)) {
+  if(isDefined(other_player.var_7a36438e) && other_player.var_7a36438e || (isDefined(other_player.is_ziplining) && other_player.is_ziplining)) {
     return true;
   }
   return false;
@@ -556,7 +556,7 @@ function offhand_weapon_overrride() {
 
 function offhand_weapon_give_override(str_weapon) {
   self endon("death");
-  if(zm_utility::is_tactical_grenade(str_weapon) && isdefined(self zm_utility::get_player_tactical_grenade()) && !self zm_utility::is_player_tactical_grenade(str_weapon)) {
+  if(zm_utility::is_tactical_grenade(str_weapon) && isDefined(self zm_utility::get_player_tactical_grenade()) && !self zm_utility::is_player_tactical_grenade(str_weapon)) {
     self setweaponammoclip(self zm_utility::get_player_tactical_grenade(), 0);
     self takeweapon(self zm_utility::get_player_tactical_grenade());
   }
@@ -611,14 +611,14 @@ function assign_lowest_unused_character_index() {
   }
   n_characters_defined = 0;
   foreach(player in a_players) {
-    if(isdefined(player.characterindex)) {
+    if(isDefined(player.characterindex)) {
       arrayremovevalue(charindexarray, player.characterindex, 0);
       n_characters_defined++;
     }
   }
   if(charindexarray.size > 0) {
     if(n_characters_defined == (a_players.size - 1)) {
-      if(!(isdefined(level.var_c7ffdf5) && level.var_c7ffdf5)) {
+      if(!(isDefined(level.var_c7ffdf5) && level.var_c7ffdf5)) {
         level.var_c7ffdf5 = 1;
         return 2;
       }
@@ -633,13 +633,11 @@ function assign_lowest_unused_character_index() {
 }
 
 function givecustomcharacters() {
-  if(isdefined(level.hotjoin_player_setup) && [
-      [level.hotjoin_player_setup]
-    ]("c_zom_farmgirl_viewhands")) {
+  if(isDefined(level.hotjoin_player_setup) && [[level.hotjoin_player_setup]]("c_zom_farmgirl_viewhands")) {
     return;
   }
   self detachall();
-  if(!isdefined(self.characterindex)) {
+  if(!isDefined(self.characterindex)) {
     self.characterindex = assign_lowest_unused_character_index();
   }
   self.favorite_wall_weapons_list = [];
@@ -826,7 +824,7 @@ function setupmusic() {
 }
 
 function function_66e965d8(player) {
-  if(isdefined(player.thrasherconsumed) && player.thrasherconsumed) {
+  if(isDefined(player.thrasherconsumed) && player.thrasherconsumed) {
     return false;
   }
   if(self.powerup_name == "island_seed" && player clientfield::get_to_player("has_island_seed") == 3) {
@@ -837,7 +835,7 @@ function function_66e965d8(player) {
 }
 
 function function_3ef1c13e() {
-  if(!(isdefined(self.var_521815d8) && self.var_521815d8)) {
+  if(!(isDefined(self.var_521815d8) && self.var_521815d8)) {
     self.var_521815d8 = 1;
     self thread zm_equipment::show_hint_text(&"ZM_ISLAND_SEED_POWERUP_DENIED", 3);
     wait(6);
@@ -853,7 +851,7 @@ function function_8608b597() {
     var_144498b3 = [];
     foreach(v_pos in var_7f251e62) {
       if(zm_utility::check_point_in_playable_area(v_pos)) {
-        if(!isdefined(var_144498b3)) {
+        if(!isDefined(var_144498b3)) {
           var_144498b3 = [];
         } else if(!isarray(var_144498b3)) {
           var_144498b3 = array(var_144498b3);
@@ -862,15 +860,15 @@ function function_8608b597() {
       }
     }
     var_18130313 = arraygetfarthest(v_player_pos, var_144498b3);
-    if(isdefined(var_18130313)) {
+    if(isDefined(var_18130313)) {
       self.origin = var_18130313 + vectorscale((0, 0, 1), 40);
     }
   }
-  self setmodel(level.zombie_powerups["ww_grenade"].model_name);
+  self setModel(level.zombie_powerups["ww_grenade"].model_name);
 }
 
 function placed_powerups() {
-  array::thread_all(getentarray("power_up_web", "targetname"), & function_726351cf);
+  array::thread_all(getEntArray("power_up_web", "targetname"), &function_726351cf);
   zm_powerups::powerup_round_start();
   a_bonus_types = [];
   array::add(a_bonus_types, "double_points");
@@ -884,8 +882,8 @@ function placed_powerups() {
 }
 
 function spawn_infinite_powerup_drop(v_origin, str_type) {
-  level._powerup_timeout_override = & powerup_infinite_time;
-  if(isdefined(str_type)) {
+  level._powerup_timeout_override = &powerup_infinite_time;
+  if(isDefined(str_type)) {
     var_9f6494 = zm_powerups::specific_powerup_drop(str_type, v_origin);
   } else {
     var_9f6494 = zm_powerups::powerup_drop(v_origin);
@@ -896,10 +894,10 @@ function spawn_infinite_powerup_drop(v_origin, str_type) {
 function powerup_infinite_time() {}
 
 function function_726351cf() {
-  self setcandamage(1);
+  self setCanDamage(1);
   e_clip = getent(self.target, "targetname");
   self clientfield::set("set_heavy_web_fade_material", 1);
-  while (true) {
+  while(true) {
     self waittill("damage", damage, attacker, direction_vec, point, type, modelname, tagname, partname, weapon, idflags);
     if(mirg2000::is_wonder_weapon(weapon)) {
       if(mirg2000::is_wonder_weapon(weapon, "upgraded")) {
@@ -922,14 +920,14 @@ function function_1f00b569() {
   wait(5);
   level thread exploder::exploder("ex_lightning_start");
   e_player = array::random(level.activeplayers);
-  e_player playsound("zmb_island_lightning_first");
+  e_player playSound("zmb_island_lightning_first");
   wait(3);
   level notify("hash_5574fd9b");
   level thread exploder::exploder("ex_lightning_start");
   e_player = array::random(level.activeplayers);
-  e_player playsound("zmb_island_lightning_first");
+  e_player playSound("zmb_island_lightning_first");
   wait(8);
-  while (true) {
+  while(true) {
     e_player = array::random(level.activeplayers);
     e_player thread function_37f2c48b();
     wait(randomfloatrange(30, 60));
@@ -938,7 +936,7 @@ function function_1f00b569() {
 
 function function_37f2c48b() {
   var_f97c401 = self zm_utility::get_current_zone();
-  if(isdefined(var_f97c401)) {
+  if(isDefined(var_f97c401)) {
     switch (var_f97c401) {
       case "zone_start":
       case "zone_start_2":
@@ -970,18 +968,18 @@ function function_37f2c48b() {
         break;
       }
     }
-    if(isdefined(var_c490d0cd)) {
+    if(isDefined(var_c490d0cd)) {
       level thread function_bf1537b3(var_c490d0cd, self);
     }
   }
 }
 
 function function_bf1537b3(var_c490d0cd, e_player) {
-  for (i = 0; i < randomintrange(3, 7); i++) {
+  for(i = 0; i < randomintrange(3, 7); i++) {
     wait(randomfloatrange(0.8, 1.3));
     if(math::cointoss()) {
-      if(isdefined(e_player)) {
-        e_player playsound("zmb_island_lightning");
+      if(isDefined(e_player)) {
+        e_player playSound("zmb_island_lightning");
       }
     }
     level thread exploder::exploder(var_c490d0cd);
@@ -991,7 +989,7 @@ function function_bf1537b3(var_c490d0cd, e_player) {
 function function_6ca6d73d() {
   self endon("disconnect");
   self flag::wait_till("has_skull");
-  while (true) {
+  while(true) {
     if(self util::attack_button_held() && self keeper_skull::function_97d08b97()) {
       self thread function_a9938318();
       self playrumbleonentity("zm_island_skull_reveal");
@@ -1005,7 +1003,7 @@ function function_a9938318() {
   self notify("hash_54edbfd4");
   self endon("disconnect");
   self endon("hash_54edbfd4");
-  while (self util::attack_button_held()) {
+  while(self util::attack_button_held()) {
     wait(0.05);
   }
   self stoprumble("zm_island_skull_reveal");
@@ -1021,7 +1019,7 @@ function function_94fc6a19() {
 }
 
 function function_5a24e391(var_5ef5ba1) {
-  self.var_796bbfeb = spawnstruct();
+  self.var_796bbfeb = spawnStruct();
   self.var_796bbfeb.var_cb6e479f = [];
   switch (var_5ef5ba1) {
     case 1: {
@@ -1055,9 +1053,9 @@ function function_5a24e391(var_5ef5ba1) {
 
 function function_cdab50cc() {
   self setteamfortrigger("allies");
-  while (true) {
+  while(true) {
     self waittill("trigger", e_player);
-    if(!(isdefined(e_player.var_32ad034f) && e_player.var_32ad034f)) {
+    if(!(isDefined(e_player.var_32ad034f) && e_player.var_32ad034f)) {
       e_player thread function_6c2447b1(self);
     }
   }
@@ -1074,7 +1072,7 @@ function function_6c2447b1(var_df0dbc71) {
   }
   v_moveto = undefined;
   var_8b72a0e = array::randomize(var_df0dbc71.var_796bbfeb.var_cb6e479f);
-  for (i = 0; i < var_8b72a0e.size; i++) {
+  for(i = 0; i < var_8b72a0e.size; i++) {
     if(!positionwouldtelefrag(var_8b72a0e[i])) {
       v_moveto = var_8b72a0e[i];
       break;
@@ -1088,9 +1086,9 @@ function function_8a2a48bb() {
   var_771ec2b = spawn("trigger_box", (-3917, 875.5, -247.5), 0, 128, 256, 64);
   var_771ec2b.angles = vectorscale((0, 1, 0), 342.397);
   var_771ec2b setteamfortrigger("allies");
-  while (true) {
+  while(true) {
     var_771ec2b waittill("trigger", e_player);
-    if(!(isdefined(e_player.var_66064486) && e_player.var_66064486)) {
+    if(!(isDefined(e_player.var_66064486) && e_player.var_66064486)) {
       e_player thread function_41c3dc27(var_771ec2b);
     }
   }
@@ -1115,7 +1113,7 @@ function function_41c3dc27(var_771ec2b) {
   }
   v_moveto = undefined;
   var_8eb2dd6e = array::randomize(var_8b72a0e);
-  for (i = 0; i < var_8eb2dd6e.size; i++) {
+  for(i = 0; i < var_8eb2dd6e.size; i++) {
     if(!positionwouldtelefrag(var_8eb2dd6e[i])) {
       v_moveto = var_8eb2dd6e[i];
       break;

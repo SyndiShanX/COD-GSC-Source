@@ -11,17 +11,17 @@ initBridgeRiser(bridge_location) {
   bridge_trigs = [];
   switch (bridge_location) {
     case "northwest":
-      bridge_trigs = getentarray("br_nw_buy_trigger", "targetname");
+      bridge_trigs = getEntArray("br_nw_buy_trigger", "targetname");
       array_thread(bridge_trigs, ::bridgeRiserThink, "br_nw");
       level.brVolumeNW = getent("br_nw_volume", "targetname");
       break;
     case "southeast":
-      bridge_trigs = getentarray("br_se_buy_trigger", "targetname");
+      bridge_trigs = getEntArray("br_se_buy_trigger", "targetname");
       array_thread(bridge_trigs, ::bridgeRiserThink, "br_se");
       level.sgVolume = getent("br_se_volume", "targetname");
       break;
     case "southwest":
-      bridge_trigs = getentarray("br_sw_buy_trigger", "targetname");
+      bridge_trigs = getEntArray("br_sw_buy_trigger", "targetname");
       array_thread(bridge_trigs, ::bridgeRiserThink, "br_sw");
       level.brVolumeSW = getent("br_sw_volume", "targetname");
       break;
@@ -34,9 +34,9 @@ bridgeRiserThink(bridge_area_name) {
   self.is_available = undefined;
   self.in_use = 0;
   bridgeVolume = getent(bridge_area_name + "_volume", "targetname");
-  bridgeTriggers = getentarray(bridge_area_name + "_buy_trigger", "targetname");
-  bridgeFX = getentarray(bridge_area_name + "_fx", "targetname");
-  while (1) {
+  bridgeTriggers = getEntArray(bridge_area_name + "_buy_trigger", "targetname");
+  bridgeFX = getEntArray(bridge_area_name + "_fx", "targetname");
+  while(1) {
     self waittill("trigger", who);
     if(who in_revive_trigger()) {
       continue;
@@ -48,11 +48,11 @@ bridgeRiserThink(bridge_area_name) {
           array_thread(bridgeTriggers, ::trigger_off);
           who maps\_zombiemode_score::minus_to_player_score(self.zombie_cost);
           play_sound_at_pos("purchase", self.origin);
-          for (i = 0; i < bridgefx.size; i++) {
-            PlayFX(level._effect["poltergeist"], bridgefx[i].origin);
+          for(i = 0; i < bridgefx.size; i++) {
+            playFX(level._effect["poltergeist"], bridgefx[i].origin);
           }
-          junk = getentarray(self.target, "targetname");
-          for (i = 0; i < junk.size; i++) {
+          junk = getEntArray(self.target, "targetname");
+          for(i = 0; i < junk.size; i++) {
             junk[i] connectpaths();
             if(isDefined(junk[i].script_noteworthy)) {
               junk[i] notsolid();
@@ -77,11 +77,11 @@ bridgeRiserThink(bridge_area_name) {
           wait(delay_time);
           self thread checkBridgeVolume(bridgeVolume);
           self waittill(bridgeVolume.targetname + "_clear");
-          for (i = 0; i < bridgefx.size; i++) {
-            PlayFX(level._effect["poltergeist"], bridgefx[i].origin);
+          for(i = 0; i < bridgefx.size; i++) {
+            playFX(level._effect["poltergeist"], bridgefx[i].origin);
           }
-          junk = getentarray(self.target, "targetname");
-          for (i = 0; i < junk.size; i++) {
+          junk = getEntArray(self.target, "targetname");
+          for(i = 0; i < junk.size; i++) {
             if(!isDefined(junk[i].script_noteworthy)) {
               junk[i] bridgeBlockerComeBack();
             } else {
@@ -107,9 +107,9 @@ bridgeBlockerGoAway() {
 checkBridgeVolume(bridge_volume_name) {
   playersOnBridge = true;
   players = get_players();
-  while (playersOnBridge) {
+  while(playersOnBridge) {
     playersOnBridge = false;
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       if(IsAlive(players[i]) && players[i] IsTouching(bridge_volume_name)) {
         playersOnBridge = true;
         break;
@@ -118,7 +118,7 @@ checkBridgeVolume(bridge_volume_name) {
     wait(0.1);
   }
   zombs = getaiarray("axis");
-  for (i = 0; i < zombs.size; i++) {
+  for(i = 0; i < zombs.size; i++) {
     if(IsAlive(zombs[i]) && zombs[i] IsTouching(bridge_volume_name)) {
       zombs[i] thread force_instagib();
     }

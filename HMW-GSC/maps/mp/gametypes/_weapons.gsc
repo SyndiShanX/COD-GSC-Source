@@ -2,7 +2,7 @@ h2_scavenger_bag() {
   self endon("death");
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     self hide();
 
     foreach(player in level.players) {
@@ -15,7 +15,7 @@ h2_scavenger_bag() {
 }
 
 should_precache(name) {
-  if(!isdefined(name))
+  if(!isDefined(name))
     return false;
 
   switch (name) {
@@ -69,7 +69,7 @@ init() {
   level.weaponlist = [];
   level.weaponattachments = [];
 
-  for (var_4 = 0; var_4 <= var_2; var_4++) {
+  for(var_4 = 0; var_4 <= var_2; var_4++) {
     if(!issubstr(tablelookupbyrow("mp/statstable.csv", var_4, 2), "weapon_")) {
       continue;
     }
@@ -96,7 +96,7 @@ init() {
     var_8 = [];
 
     foreach(var_10 in var_1) {
-      if(!isdefined(var_7[var_10])) {
+      if(!isDefined(var_7[var_10])) {
         continue;
       }
       level.weaponlist[level.weaponlist.size] = var_5 + "_" + var_10 + "_mp";
@@ -105,10 +105,10 @@ init() {
 
     var_12 = [];
 
-    for (var_13 = 0; var_13 < var_8.size - 1; var_13++) {
+    for(var_13 = 0; var_13 < var_8.size - 1; var_13++) {
       var_14 = tablelookuprownum("mp/attachmentCombos.csv", 0, var_8[var_13]);
 
-      for (var_15 = var_13 + 1; var_15 < var_8.size; var_15++) {
+      for(var_15 = var_13 + 1; var_15 < var_8.size; var_15++) {
         if(tablelookup("mp/attachmentCombos.csv", 0, var_8[var_15], var_14) == "no") {
           continue;
         }
@@ -121,7 +121,7 @@ init() {
   }
 
   /*
-  if( !isdefined( level.iszombiegame ) || !level.iszombiegame )
+  if( !isDefined( level.iszombiegame ) || !level.iszombiegame )
   {
   foreach ( var_20 in level.weaponlist )
   {
@@ -134,7 +134,7 @@ init() {
   thread maps\mp\_flashgrenades::main();
   thread maps\mp\_entityheadicons::init();
 
-  if(!isdefined(level.weapondropfunction))
+  if(!isDefined(level.weapondropfunction))
     level.weapondropfunction = ::dropweaponfordeath;
 
   var_23 = 70;
@@ -143,7 +143,7 @@ init() {
   level.claymoredetectiongraceperiod = 0.75;
   level.claymoredetonateradius = 192;
 
-  if(!isdefined(level.iszombiegame) || !level.iszombiegame) {
+  if(!isDefined(level.iszombiegame) || !level.iszombiegame) {
     level.minedetectiongraceperiod = 0.3;
     level.minedetectionradius = 100;
     level.minedetectionheight = 20;
@@ -172,19 +172,19 @@ init() {
   level.claymorefxid = loadfx("vfx/props/claymore_laser");
   level thread onplayerconnect();
   level.c4explodethisframe = 0;
-  common_scripts\utility::array_thread(getentarray("misc_turret", "classname"), ::turret_monitoruse);
+  common_scripts\utility::array_thread(getEntArray("misc_turret", "classname"), ::turret_monitoruse);
 }
 
 bombsquadwaiter() {
   self endon("disconnect");
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     self waittill("grenade_fire", var_0, var_1);
     var_2 = maps\mp\_utility::strip_suffix(var_1, "_lefthand");
 
     if(var_2 == "h1_c4_mp") {
-      if(!isdefined(level.bombsquadmodelc4))
+      if(!isDefined(level.bombsquadmodelc4))
         level.bombsquadmodelc4 = "weapon_c4_bombsquad_mw1";
 
       var_0 thread createbombsquadmodel(level.bombsquadmodelc4, "tag_origin", self);
@@ -192,7 +192,7 @@ bombsquadwaiter() {
     }
 
     if(var_2 == "h1_claymore_mp") {
-      if(!isdefined(level.bombsquadmodelclaymore))
+      if(!isDefined(level.bombsquadmodelclaymore))
         level.bombsquadmodelclaymore = "weapon_claymore_bombsquad_mw1";
 
       var_0 thread createbombsquadmodel(level.bombsquadmodelclaymore, "tag_origin", self);
@@ -205,16 +205,16 @@ createbombsquadmodel(var_0, var_1, var_2) {
   var_3 hide();
   wait 0.05;
 
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   var_3 thread bombsquadvisibilityupdater(var_2);
-  var_3 setmodel(var_0);
+  var_3 setModel(var_0);
   var_3 linkto(self, var_1, (0.0, 0.0, 0.0), (0.0, 0.0, 0.0));
   var_3 setcontents(0);
   self waittill("death");
 
-  if(isdefined(self.trigger))
+  if(isDefined(self.trigger))
     self.trigger delete();
 
   var_3 delete();
@@ -224,13 +224,13 @@ bombsquadvisibilityupdater(var_0) {
   self endon("death");
   level endon("game_ended");
 
-  if(!isdefined(var_0)) {
+  if(!isDefined(var_0)) {
     return;
   }
   var_1 = var_0.team;
   checkbombsquadvisibility(var_0, var_1);
 
-  for (;;) {
+  for(;;) {
     level common_scripts\utility::waittill_any("joined_team", "player_spawned", "changed_kit", "update_bombsquad");
     self hide();
     checkbombsquadvisibility(var_0, var_1);
@@ -240,7 +240,7 @@ bombsquadvisibilityupdater(var_0) {
 checkbombsquadvisibility(var_0, var_1) {
   foreach(var_3 in level.players) {
     if(level.teambased) {
-      if(!isdefined(var_3.team) || var_3.team == "spectator") {
+      if(!isDefined(var_3.team) || var_3.team == "spectator") {
         continue;
       }
       if(var_3.team != var_1 && var_3 maps\mp\_utility::_hasperk("specialty_detectexplosive"))
@@ -249,7 +249,7 @@ checkbombsquadvisibility(var_0, var_1) {
       continue;
     }
 
-    if(isdefined(var_0) && var_3 == var_0) {
+    if(isDefined(var_0) && var_3 == var_0) {
       continue;
     }
     if(!var_3 maps\mp\_utility::_hasperk("specialty_detectexplosive")) {
@@ -261,7 +261,7 @@ checkbombsquadvisibility(var_0, var_1) {
 
 onplayerconnect() {
   level endon("game_ended");
-  for (;;) {
+  for(;;) {
     level waittill("connected", var_0);
     var_0.hits = 0;
     var_0.issiliding = 0;
@@ -277,7 +277,7 @@ onplayerspawned() {
   self endon("disconnect");
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     common_scripts\utility::waittill_any("spawned_player", "faux_spawn");
     self visionSetThermalForPlayer(game["thermal_vision"], 0);
     self.currentweaponatspawn = self getcurrentweapon();
@@ -287,7 +287,7 @@ onplayerspawned() {
     self.meleeweaponbloodytime = undefined;
     maps\mp\gametypes\_gamelogic::sethasdonecombat(self, 0);
 
-    if(!isdefined(self.trackingweaponname)) {
+    if(!isDefined(self.trackingweaponname)) {
       self.trackingweaponname = "";
       self.trackingweaponname = "none";
       self.trackingweaponshots = 0;
@@ -309,9 +309,7 @@ onplayerspawned() {
     thread watchweaponinspection();
     thread maps\mp\_javelin::JavelinUsageLoop();
 
-    if(!isdefined(level.iszombiegame) || !level.iszombiegame) {
-
-    }
+    if(!isDefined(level.iszombiegame) || !level.iszombiegame) {}
 
     thread stancerecoiladjuster();
     thread maps\mp\_opticsthermal::opticsthermal_think();
@@ -323,7 +321,7 @@ onplayerspawned() {
 
     thread watchweaponchange();
 
-    if(isdefined(level.onplayerspawnedweaponsfunc))
+    if(isDefined(level.onplayerspawnedweaponsfunc))
       self thread[[level.onplayerspawnedweaponsfunc]]();
 
     self.lasthittime = [];
@@ -335,8 +333,8 @@ onplayerspawned() {
     self.trophyremainingammo = undefined;
     thread track_damage_info();
 
-    if(!isdefined(self.spawninfo))
-      self.spawninfo = spawnstruct();
+    if(!isDefined(self.spawninfo))
+      self.spawninfo = spawnStruct();
 
     self.spawninfo.spawntime = gettime();
     self.spawninfo.damagedealttoofast = 0;
@@ -344,7 +342,7 @@ onplayerspawned() {
     self.spawninfo.badspawn = 0;
     var_0 = self.spawninfo.spawntime;
 
-    if(!isdefined(self.num_lives))
+    if(!isDefined(self.num_lives))
       self.num_lives = 0;
 
     self.num_lives++;
@@ -359,15 +357,15 @@ onplayerspawned() {
     var_5 = -1;
     var_6 = -1;
 
-    if(isdefined(self.spawninfo)) {
-      if(isdefined(self.spawninfo.spawnpoint)) {
-        if(isdefined(self.spawninfo.spawnpoint.israndom))
+    if(isDefined(self.spawninfo)) {
+      if(isDefined(self.spawninfo.spawnpoint)) {
+        if(isDefined(self.spawninfo.spawnpoint.israndom))
           var_4 = self.spawninfo.spawnpoint.israndom;
 
-        if(isdefined(self.spawninfo.spawnpoint.numberofpossiblespawnchoices))
+        if(isDefined(self.spawninfo.spawnpoint.numberofpossiblespawnchoices))
           var_5 = self.spawninfo.spawnpoint.numberofpossiblespawnchoices;
 
-        if(isdefined(self.spawninfo.spawnpoint.lastupdatetime))
+        if(isDefined(self.spawninfo.spawnpoint.lastupdatetime))
           var_6 = self.spawninfo.spawnpoint.lastupdatetime;
       }
     }
@@ -392,10 +390,10 @@ monitorGrenadeThrow() {
     self setActionSlot(1, "weapon", "dogs_remote_mp");
   }
 
-  for (;;) {
+  for(;;) {
     self waittill("grenade_monitor");
 
-    while (self fragButtonPressed() || self secondaryOffhandButtonPressed()) {
+    while(self fragButtonPressed() || self secondaryOffhandButtonPressed()) {
       self.lastGrenadeThrowTime = getTIme();
       wait 0.05;
     }
@@ -435,7 +433,7 @@ watchweaponchange() {
   self.hitsthismag = [];
   var_0 = self getcurrentweapon();
 
-  if(maps\mp\_utility::iscacprimaryweapon(var_0) && !isdefined(self.hitsthismag[var_0])) {
+  if(maps\mp\_utility::iscacprimaryweapon(var_0) && !isDefined(self.hitsthismag[var_0])) {
     self.hitsthismag[var_0] = weaponclipsize(var_0);
   }
 
@@ -447,7 +445,7 @@ watchweaponchange() {
 
   var_1 = 1;
 
-  for (;;) {
+  for(;;) {
     if(!var_1) {
       self waittill("weapon_change");
     }
@@ -465,7 +463,7 @@ watchweaponchange() {
     self.has_stock = 0;
     self.has_laser = 0;
 
-    if(isdefined(var_2)) {
+    if(isDefined(var_2)) {
       foreach(var_4 in var_2) {
         if(var_4 == "opticstargetenhancer") {
           self.has_target_enhancer = 1;
@@ -506,11 +504,11 @@ watchweaponchange() {
     }
 
     if(var_0 != "none" && var_6[0] != "iw5" && var_6[0] != "iw6" && var_6[0] != "h1" && var_6[0] != "h2") {
-      if(maps\mp\_utility::iscacprimaryweapon(var_0) && !isdefined(self.hitsthismag[var_0 + "_mp"])) {
+      if(maps\mp\_utility::iscacprimaryweapon(var_0) && !isDefined(self.hitsthismag[var_0 + "_mp"])) {
         self.hitsthismag[var_0 + "_mp"] = weaponclipsize(var_0 + "_mp");
       }
     } else if(var_0 != "none" && (var_6[0] == "iw5" || var_6[0] == "iw6" || var_6[0] == "h1" || var_6[0] == "h2")) {
-      if(maps\mp\_utility::iscacprimaryweapon(var_0) && !isdefined(self.hitsthismag[var_0])) {
+      if(maps\mp\_utility::iscacprimaryweapon(var_0) && !isDefined(self.hitsthismag[var_0])) {
         self.hitsthismag[var_0] = weaponclipsize(var_0);
       }
     }
@@ -532,12 +530,12 @@ watchstartweaponchange() {
 
   self.changingweapon = undefined;
 
-  for (;;) {
+  for(;;) {
     self waittill("weapon_switch_started", var_0);
     self.changingweapon = var_0;
 
-    if(var_0 == "none" && isdefined(self.iscapturingcrate) && self.iscapturingcrate) {
-      while (self.iscapturingcrate)
+    if(var_0 == "none" && isDefined(self.iscapturingcrate) && self.iscapturingcrate) {
+      while(self.iscapturingcrate)
         wait 0.05;
 
       self.changingweapon = undefined;
@@ -552,7 +550,7 @@ watchweaponreload() {
 
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     self waittill("reload");
     var_0 = self getcurrentweapon();
     self.bothbarrels = undefined;
@@ -573,7 +571,7 @@ watchrangerusage(var_0) {
 
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     self waittill("weapon_fired", var_3);
 
     if(var_3 != var_0) {
@@ -631,13 +629,13 @@ dropweaponfordeath(var_0, var_1) {
   if(!maps\mp\_utility::isusingremote())
     waittillframeend;
 
-  if(isdefined(level.blockweapondrops)) {
+  if(isDefined(level.blockweapondrops)) {
     return;
   }
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
-  if(isdefined(self.droppeddeathweapon)) {
+  if(isDefined(self.droppeddeathweapon)) {
     return;
   }
   if(level.ingraceperiod) {
@@ -645,7 +643,7 @@ dropweaponfordeath(var_0, var_1) {
   }
   var_2 = self.lastdroppableweapon;
 
-  if(!isdefined(var_2)) {
+  if(!isDefined(var_2)) {
     return;
   }
   if(var_2 == "none") {
@@ -657,13 +655,13 @@ dropweaponfordeath(var_0, var_1) {
   if(maps\mp\_utility::isjuggernaut()) {
     return;
   }
-  if(isdefined(level.gamemodemaydropweapon) && !self[[level.gamemodemaydropweapon]](var_2)) {
+  if(isDefined(level.gamemodemaydropweapon) && !self[[level.gamemodemaydropweapon]](var_2)) {
     return;
   }
   var_3 = maps\mp\_utility::getweaponnametokens(var_2);
 
   if(var_3[0] == "alt") {
-    for (var_4 = 0; var_4 < var_3.size; var_4++) {
+    for(var_4 = 0; var_4 < var_3.size; var_4++) {
       if(var_4 > 0 && var_4 < 2) {
         var_2 += var_3[var_4];
         continue;
@@ -696,7 +694,7 @@ dropweaponfordeath(var_0, var_1) {
 
     var_9 = self dropitem(var_2);
 
-    if(!isdefined(var_9)) {
+    if(!isDefined(var_9)) {
       return;
     }
     if(maps\mp\_utility::ismeleemod(var_1))
@@ -706,7 +704,7 @@ dropweaponfordeath(var_0, var_1) {
   } else {
     var_9 = self dropitem(var_2);
 
-    if(!isdefined(var_9)) {
+    if(!isDefined(var_9)) {
       return;
     }
     var_9 itemweaponsetammo(1, 1, 0);
@@ -724,7 +722,7 @@ dropweaponfordeath(var_0, var_1) {
 detachifattached(var_0, var_1) {
   var_2 = self getattachsize();
 
-  for (var_3 = 0; var_3 < var_2; var_3++) {
+  for(var_3 = 0; var_3 < var_2; var_3++) {
     var_4 = self getattachmodelname(var_3);
 
     if(var_4 != var_0) {
@@ -736,7 +734,7 @@ detachifattached(var_0, var_1) {
     if(var_5 != var_1) {
       var_2 = self getattachsize();
 
-      for (var_3 = 0; var_3 < var_2; var_3++) {
+      for(var_3 = 0; var_3 < var_2; var_3++) {
         var_5 = self getattachtagname(var_3);
 
         if(var_5 != var_1) {
@@ -758,7 +756,7 @@ deletepickupafterawhile() {
   self endon("death");
   wait 60;
 
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   self delete();
@@ -777,29 +775,29 @@ watchpickup() {
   var_0 = getitemweaponname();
   var_1 = self.owner;
 
-  for (;;) {
+  for(;;) {
     self waittill("trigger", var_2, var_3);
 
-    if(isdefined(var_0) && var_0 == var_2.primaryweapon) {
+    if(isDefined(var_0) && var_0 == var_2.primaryweapon) {
       return;
     }
-    if(isdefined(var_0) && var_0 == var_2.secondaryweapon) {
+    if(isDefined(var_0) && var_0 == var_2.secondaryweapon) {
       return;
     }
     var_2.pickedupweaponfrom[var_0] = undefined;
     var_2.tookweaponfrom[var_0] = undefined;
 
-    if(isdefined(var_2.pers["weaponPickupsCount"]))
+    if(isDefined(var_2.pers["weaponPickupsCount"]))
       var_2.pers["weaponPickupsCount"]++;
 
-    if(isdefined(var_1) && var_1 != var_2) {
+    if(isDefined(var_1) && var_1 != var_2) {
       var_2.pickedupweaponfrom[var_0] = var_1;
 
-      if(isdefined(self.ownersattacker) && self.ownersattacker == var_2)
+      if(isDefined(self.ownersattacker) && self.ownersattacker == var_2)
         var_2.tookweaponfrom[var_0] = var_1;
     }
 
-    if(isdefined(var_3)) {
+    if(isDefined(var_3)) {
       break;
     }
   }
@@ -808,18 +806,18 @@ watchpickup() {
   var_3.targetname = "dropped_weapon";
   var_4 = var_3 getitemweaponname();
 
-  if(isdefined(var_2.primaryweapon) && var_2.primaryweapon == var_4)
+  if(isDefined(var_2.primaryweapon) && var_2.primaryweapon == var_4)
     var_2.primaryweapon = var_0;
 
-  if(isdefined(var_2.secondaryweapon) && var_2.secondaryweapon == var_4)
+  if(isDefined(var_2.secondaryweapon) && var_2.secondaryweapon == var_4)
     var_2.secondaryweapon = var_0;
 
-  if(isdefined(var_2.pickedupweaponfrom[var_4])) {
+  if(isDefined(var_2.pickedupweaponfrom[var_4])) {
     var_3.owner = var_2.pickedupweaponfrom[var_4];
     var_2.pickedupweaponfrom[var_4] = undefined;
   }
 
-  if(isdefined(var_2.tookweaponfrom[var_4])) {
+  if(isDefined(var_2.tookweaponfrom[var_4])) {
     var_3.ownersattacker = var_2;
     var_2.tookweaponfrom[var_4] = undefined;
   }
@@ -831,7 +829,7 @@ itemremoveammofromaltmodes() {
   var_0 = getitemweaponname();
   var_1 = weaponaltweaponname(var_0);
 
-  for (var_2 = 1; var_1 != "none" && var_1 != var_0; var_2++) {
+  for(var_2 = 1; var_1 != "none" && var_1 != var_0; var_2++) {
     self itemweaponsetammo(0, 0, 0, var_2);
     var_1 = weaponaltweaponname(var_1);
   }
@@ -841,7 +839,7 @@ handlescavengerbagpickup() {
   self endon("death");
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     self waittill("trigger", destPlayer);
 
     if(!isDefined(destPlayer) || !isPlayer(destPlayer) || !maps\mp\_utility::isReallyAlive(destPlayer) || !destPlayer maps\mp\_utility::_hasPerk("specialty_scavenger"))
@@ -928,10 +926,10 @@ dropscavengerfordeath(var_0) {
   if(level.ingraceperiod) {
     return;
   }
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
-  if(!isdefined(var_0)) {
+  if(!isDefined(var_0)) {
     return;
   }
   if(var_0 == self) {
@@ -942,7 +940,7 @@ dropscavengerfordeath(var_0) {
 
   scavenger_bag = spawn("script_model", self.origin);
   scavenger_bag.angles = self.angles;
-  scavenger_bag setmodel("weapon_scavenger_grenadebag");
+  scavenger_bag setModel("weapon_scavenger_grenadebag");
   scavenger_bag thread h2_scavenger_bag();
   scavenger_bag thread maps\mp\_helicopter::deleteAfterTime(20);
 
@@ -982,7 +980,7 @@ watchweaponusage() {
   self endon("faux_spawn");
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     self waittill("weapon_fired", var_1);
     maps\mp\gametypes\_gamelogic::sethasdonecombat(self, 1);
     self.lastshotfiredtime = gettime();
@@ -993,7 +991,7 @@ watchweaponusage() {
     if(!maps\mp\_utility::iscacprimaryweapon(var_1) && !maps\mp\_utility::iscacsecondaryweapon(var_1) && !maps\mp\_utility::iscacmeleeweapon(var_1)) {
       continue;
     }
-    if(isdefined(self.hitsthismag[var_1]))
+    if(isDefined(self.hitsthismag[var_1]))
       thread updatemagshots(var_1);
 
     var_2 = maps\mp\gametypes\_persistence::statgetbuffered("totalShots") + 1;
@@ -1003,7 +1001,7 @@ watchweaponusage() {
     maps\mp\gametypes\_persistence::statsetbuffered("accuracy", int(var_4));
     maps\mp\gametypes\_persistence::statsetbuffered("misses", int(var_2 - var_3));
 
-    if(isdefined(self.laststandparams) && self.laststandparams.laststandstarttime == gettime()) {
+    if(isDefined(self.laststandparams) && self.laststandparams.laststandstarttime == gettime()) {
       self.hits = 0;
       return;
     }
@@ -1031,7 +1029,7 @@ checkhitsthismag(var_0) {
   self notify("updateMagShots_" + var_0);
   waittillframeend;
 
-  if(isdefined(self.hitsthismag[var_0]) && self.hitsthismag[var_0] == 0) {
+  if(isDefined(self.hitsthismag[var_0]) && self.hitsthismag[var_0] == 0) {
     var_1 = maps\mp\_utility::getweaponclass(var_0);
     maps\mp\gametypes\_missions::genericchallenge(var_1);
     self.hitsthismag[var_0] = weaponclipsize(var_0);
@@ -1091,10 +1089,10 @@ checkhit(var_0, var_1) {
 
   waittillframeend;
 
-  if(isdefined(self.hitsthismag[var_0]))
+  if(isDefined(self.hitsthismag[var_0]))
     thread checkhitsthismag(var_0);
 
-  if(!isdefined(self.lasthittime[var_0]))
+  if(!isDefined(self.lasthittime[var_0]))
     self.lasthittime[var_0] = 0;
 
   if(self.lasthittime[var_0] == gettime()) {
@@ -1117,7 +1115,7 @@ attackercandamageitem(var_0, var_1) {
 }
 
 friendlyfirecheck(var_0, var_1, var_2) {
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     return 1;
 
   if(!level.teambased)
@@ -1126,7 +1124,7 @@ friendlyfirecheck(var_0, var_1, var_2) {
   var_3 = var_1.team;
   var_4 = level.friendlyfire;
 
-  if(isdefined(var_2))
+  if(isDefined(var_2))
     var_4 = var_2;
 
   if(var_4 != 0)
@@ -1135,7 +1133,7 @@ friendlyfirecheck(var_0, var_1, var_2) {
   if(var_1 == var_0)
     return 1;
 
-  if(!isdefined(var_3))
+  if(!isDefined(var_3))
     return 1;
 
   if(var_3 != var_0.team)
@@ -1155,18 +1153,18 @@ watchgrenadeusage() {
   self.gotpullbacknotify = 0;
 
   if(maps\mp\_utility::getintproperty("scr_deleteexplosivesonspawn", 1) == 1) {
-    if(isdefined(self.dont_delete_grenades_on_next_spawn))
+    if(isDefined(self.dont_delete_grenades_on_next_spawn))
       self.dont_delete_grenades_on_next_spawn = undefined;
     else
       delete_all_grenades();
   } else {
-    if(!isdefined(self.manuallydetonatedarray))
+    if(!isDefined(self.manuallydetonatedarray))
       self.manuallydetonatedarray = [];
 
-    if(!isdefined(self.claymorearray))
+    if(!isDefined(self.claymorearray))
       self.claymorearray = [];
 
-    if(!isdefined(self.bouncingbettyarray))
+    if(!isDefined(self.bouncingbettyarray))
       self.bouncingbettyarray = [];
   }
 
@@ -1179,7 +1177,7 @@ watchgrenadeusage() {
   thread deletec4andclaymoresondisconnect();
   thread watchforthrowbacks();
 
-  for (;;) {
+  for(;;) {
     self waittill("grenade_pullback", var_0);
     setweaponstat(var_0, 1, "shots");
     maps\mp\gametypes\_gamelogic::sethasdonecombat(self, 1);
@@ -1211,7 +1209,7 @@ begingrenadetracking() {
   var_0 = gettime();
   self waittill("grenade_fire", var_1, var_2);
 
-  if(isdefined(var_1)) {
+  if(isDefined(var_1)) {
     var_3 = maps\mp\_utility::strip_suffix(var_2, "_lefthand");
 
     if(gettime() - var_0 > 1000 && var_3 == "h1_fraggrenade_mp")
@@ -1239,7 +1237,7 @@ watchoffhandcancel() {
   self endon("grenade_fire");
   self waittill("offhand_end");
 
-  if(isdefined(self.changingweapon) && self.changingweapon != self getcurrentweapon())
+  if(isDefined(self.changingweapon) && self.changingweapon != self getcurrentweapon())
     self.changingweapon = undefined;
 }
 
@@ -1254,13 +1252,13 @@ watchsmokeexplode() {
   var_3 = 8;
   level thread waitsmoketime(var_3, var_2, var_1);
 
-  for (;;) {
-    if(!isdefined(var_0)) {
+  for(;;) {
+    if(!isDefined(var_0)) {
       break;
     }
 
     foreach(var_5 in level.players) {
-      if(!isdefined(var_5)) {
+      if(!isDefined(var_5)) {
         continue;
       }
       if(level.teambased && var_5.team == var_0.team) {
@@ -1284,7 +1282,7 @@ waitsmoketime(var_0, var_1, var_2) {
   waittillframeend;
 
   foreach(var_4 in level.players) {
-    if(isdefined(var_4))
+    if(isDefined(var_4))
       var_4.inplayersmokescreen = undefined;
   }
 }
@@ -1294,7 +1292,7 @@ watchmissileusage() {
   level endon("game_ended");
   level endon("shutdownGame_called");
 
-  for (;;) {
+  for(;;) {
     self waittill("missile_fire", var_0, var_1);
     var_2 = [var_0];
 
@@ -1304,7 +1302,7 @@ watchmissileusage() {
       var_0 thread maps\mp\gametypes\_shellshock::grenade_earthquake();
     }
 
-    if(isdefined(var_0)) {
+    if(isDefined(var_0)) {
       var_0.weaponname = var_1;
 
       if(isprimaryorsecondaryprojectileweapon(var_1))
@@ -1342,10 +1340,10 @@ watchhitbymissile() {
   self endon("disconnect");
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     self waittill("hit_by_missile", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7);
 
-    if(!isdefined(var_0) || !isdefined(var_1)) {
+    if(!isDefined(var_0) || !isDefined(var_1)) {
       continue;
     }
     if(level.teambased && self.team == var_0.team) {
@@ -1384,16 +1382,16 @@ watchhitbymissile() {
     self.body linkto(var_1);
     self.body setcontents(0);
 
-    if(!isdefined(self.switching_teams))
+    if(!isDefined(self.switching_teams))
       thread maps\mp\gametypes\_deathicons::adddeathicon(self.body, self, self.team, 5.0, 0);
 
     self playerhide();
     var_13 = vectornormalize(anglestoup(var_1.angles));
-    var_14 = vectornormalize(anglestoforward(var_1.angles));
+    var_14 = vectornormalize(anglesToForward(var_1.angles));
     var_15 = var_14 * var_9 + var_13 * var_10;
     var_16 = var_1.origin + var_15;
     var_17 = spawn("script_model", var_16);
-    var_17 setmodel("tag_origin");
+    var_17 setModel("tag_origin");
     var_17.angles = vectortoangles(var_1.origin - var_17.origin);
     var_17 linkto(var_1);
     var_17 setcontents(0);
@@ -1404,7 +1402,7 @@ watchhitbymissile() {
 
     var_18 = var_1 common_scripts\utility::waittill_notify_or_timeout_return("death", var_8);
 
-    if(isdefined(var_18) && var_18 == "timeout" && isdefined(var_1))
+    if(isDefined(var_18) && var_18 == "timeout" && isDefined(var_1))
       var_1 detonate();
 
     self notify("final_rocket_corpse_death");
@@ -1427,7 +1425,7 @@ watchsentryusage() {
 
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     self waittill("sentry_placement_finished", var_0);
     thread maps\mp\_utility::setaltsceneobj(var_0, "tag_flash", 65);
   }
@@ -1440,7 +1438,7 @@ empexplodewaiter() {
   var_1 = getempdamageents(var_0, 512, 0);
 
   foreach(var_3 in var_1) {
-    if(isdefined(var_3.owner) && !friendlyfirecheck(self.owner, var_3.owner)) {
+    if(isDefined(var_3.owner) && !friendlyfirecheck(self.owner, var_3.owner)) {
       continue;
     }
     var_3 notify("emp_damage", self.owner, 8.0);
@@ -1455,7 +1453,7 @@ ninebangexplodewaiter() {
   var_1 = getempdamageents(var_0, 512, 0);
 
   foreach(var_3 in var_1) {
-    if(isdefined(var_3.owner) && !friendlyfirecheck(self.owner, var_3.owner)) {
+    if(isDefined(var_3.owner) && !friendlyfirecheck(self.owner, var_3.owner)) {
       continue;
     }
     var_3 notify("emp_damage", self.owner, 8.0);
@@ -1487,7 +1485,7 @@ flashbangplayer(var_0, var_1, var_2) {
   if(var_10 < 0.5) {
     return;
   }
-  var_11 = anglestoforward(var_0 getplayerangles());
+  var_11 = anglesToForward(var_0 getplayerangles());
   var_12 = var_0.origin;
 
   switch (var_0 getstance()) {
@@ -1514,7 +1512,7 @@ doninebang(var_0, var_1) {
   level endon("game_ended");
   var_2 = 1;
 
-  for (var_3 = 0; var_3 < var_2; var_3++) {
+  for(var_3 = 0; var_3 < var_2; var_3++) {
     if(var_3 > 0) {
       playsoundatpos(var_0, "null");
 
@@ -1525,7 +1523,7 @@ doninebang(var_0, var_1) {
     var_7 = getempdamageents(var_0, 512, 0);
 
     foreach(var_9 in var_7) {
-      if(isdefined(var_9.owner) && !friendlyfirecheck(self.owner, var_9.owner)) {
+      if(isDefined(var_9.owner) && !friendlyfirecheck(self.owner, var_9.owner)) {
         continue;
       }
       var_9 notify("emp_damage", self.owner, 8.0);
@@ -1550,7 +1548,7 @@ watchforthrowbacks() {
 
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     self waittill("grenade_fire", var_0, var_1);
 
     if(self.gotpullbacknotify) {
@@ -1571,7 +1569,7 @@ manuallydetonated_removeundefined(var_0) {
   var_1 = [];
 
   foreach(var_4, var_3 in var_0) {
-    if(!isdefined(var_3[0])) {
+    if(!isDefined(var_3[0])) {
       continue;
     }
     var_1[var_1.size] = var_3;
@@ -1587,7 +1585,7 @@ watchmanuallydetonatedusage() {
 
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     self waittill("grenade_fire", var_0, var_1);
     var_2 = isweaponmanuallydetonatedbyemptythrow(var_1);
     var_3 = isweaponmanuallydetonatedbydoubletap(var_1);
@@ -1609,7 +1607,7 @@ watchmanuallydetonatedusage() {
       self.manuallydetonatedarray[var_4][1] = var_2;
       self.manuallydetonatedarray[var_4][2] = var_3;
 
-      if(isdefined(var_0)) {
+      if(isDefined(var_0)) {
         var_0.owner = self;
         var_0 setotherent(self);
         var_0.team = self.team;
@@ -1627,7 +1625,7 @@ watchc4usage() {
 
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     self waittill("grenade_fire", var_0, var_1);
 
     if(var_1 == "c4" || var_1 == "h1_c4_mp") {
@@ -1648,10 +1646,10 @@ watchfriendlyexplosives() {
 
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     self waittill("grenade_fire", grn, wn);
 
-    if(!isdefined(grn)) {
+    if(!isDefined(grn)) {
       continue;
     }
     if(wn == "h1_c4_mp" || wn == "h1_claymore_mp")
@@ -1664,7 +1662,7 @@ updateHudOutline(grn) {
   self endon("disconnect");
   grn endon("death");
 
-  for (;;) {
+  for(;;) {
     grn hudoutlinedisableforclients(level.players);
 
     foreach(player in level.players) {
@@ -1703,9 +1701,9 @@ c4empdamage() {
   self endon("death");
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     self waittill("emp_damage", var_0, var_1);
-    playfxontag(common_scripts\utility::getfx("sentry_explode_mp"), self, "tag_origin");
+    playFXOnTag(common_scripts\utility::getfx("sentry_explode_mp"), self, "tag_origin");
     self.disabled = 1;
     self notify("disabled");
     wait(var_1);
@@ -1718,7 +1716,7 @@ c4empkillstreakwait() {
   self endon("death");
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     level waittill("emp_update");
     self.disabled = undefined;
     self notify("enabled");
@@ -1729,9 +1727,9 @@ throwingknifeusage() {
   self endon("disconnect");
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     self waittill("grenade_fire", var_0, var_1);
-    if(isdefined(var_0) && var_1 == "iw9_throwknife_mp") {
+    if(isDefined(var_0) && var_1 == "iw9_throwknife_mp") {
       var_0 thread watchtimeout();
       var_0 hudoutlineenableforclient(self, 1, 0);
     }
@@ -1744,7 +1742,7 @@ watchtimeout() {
 
   wait 30;
 
-  if(isdefined(self))
+  if(isDefined(self))
     self delete();
 }
 
@@ -1755,7 +1753,7 @@ setmineteamheadicon(var_0) {
 
     if(level.teambased)
       maps\mp\_entityheadicons::setteamheadicon(var_0, (0.0, 0.0, 20.0));
-    else if(isdefined(self.owner))
+    else if(isDefined(self.owner))
       maps\mp\_entityheadicons::setplayerheadicon(self.owner, (0.0, 0.0, 20.0));
   }
 }
@@ -1767,7 +1765,7 @@ watchclaymores() {
   level endon("game_ended");
   self.claymorearray = [];
 
-  for (;;) {
+  for(;;) {
     self waittill("grenade_fire", var_0, var_1);
 
     if(var_1 == "claymore" || var_1 == "h1_claymore_mp") {
@@ -1816,7 +1814,7 @@ handleclaymoreeffects() {
 playclaymoreeffects() {
   var_0 = self gettagorigin("tag_fx");
   var_1 = self gettagangles("tag_fx");
-  var_2 = spawnfx(level.claymorefxid, var_0, anglestoforward(var_1), anglestoup(var_1));
+  var_2 = spawnfx(level.claymorefxid, var_0, anglesToForward(var_1), anglestoup(var_1));
   triggerfx(var_2);
   self waittill("death");
   var_2 delete();
@@ -1831,11 +1829,11 @@ equipmentenableuse(var_0) {
   self.trigger setcursorhint("HINT_NOICON");
 
   if(self.weaponname == "h1_c4_mp")
-    self.trigger sethintstring( & "LUA_C4_PICKUP");
+    self.trigger sethintstring(&"LUA_C4_PICKUP");
   else if(self.weaponname == "h1_claymore_mp")
-    self.trigger sethintstring( & "LUA_CLAYMORE_PICKUP");
+    self.trigger sethintstring(&"LUA_CLAYMORE_PICKUP");
   else if(self.weaponname == "bouncingbetty_mp")
-    self.trigger sethintstring( & "MP_PICKUP_BOUNCING_BETTY");
+    self.trigger sethintstring(&"MP_PICKUP_BOUNCING_BETTY");
 
   self.trigger maps\mp\_utility::setselfusable(var_0);
   self.trigger thread maps\mp\_utility::notUsableForJoiningPlayers(var_0);
@@ -1855,7 +1853,7 @@ equipmentwatchenabledisableuse(var_0) {
   level endon("game_ended");
   var_1 = 1;
 
-  for (;;) {
+  for(;;) {
     if(var_0 getweaponammostock(self.weaponname) < weaponmaxammo(self.weaponname)) {
       if(!var_1) {
         equipmentenableuse(var_0);
@@ -1880,10 +1878,10 @@ equipmentwatchuse(var_0, var_1) {
   self.trigger setcursorhint("HINT_NOICON");
   equipmentenableuse(var_0);
 
-  if(isdefined(var_1) && var_1)
+  if(isDefined(var_1) && var_1)
     thread updatetriggerposition();
 
-  for (;;) {
+  for(;;) {
     thread equipmentwatchenabledisableuse(var_0);
     self.trigger waittill("trigger", var_0);
     var_2 = var_0 getweaponammostock(self.weaponname);
@@ -1902,11 +1900,11 @@ updatetriggerposition() {
   self endon("death");
   level endon("game_ended");
 
-  for (;;) {
-    if(isdefined(self) && isdefined(self.trigger)) {
+  for(;;) {
+    if(isDefined(self) && isDefined(self.trigger)) {
       self.trigger.origin = self.origin;
 
-      if(isdefined(self.bombsquadmodel))
+      if(isDefined(self.bombsquadmodel))
         self.bombsquadmodel.origin = self.origin;
     } else
       return;
@@ -1923,7 +1921,7 @@ claymoredetonation() {
   var_0 = spawn("trigger_radius", self.origin + (0, 0, 0 - level.claymoredetonateradius), 0, level.claymoredetonateradius, level.claymoredetonateradius * 2);
   thread deleteondeath(var_0);
 
-  for (;;) {
+  for(;;) {
     var_0 waittill("trigger", var_1);
 
     if(self.stunned) {
@@ -1932,11 +1930,11 @@ claymoredetonation() {
     }
 
     if(getdvarint("scr_claymoredebug") != 1) {
-      if(isdefined(self.owner)) {
+      if(isDefined(self.owner)) {
         if(var_1 == self.owner) {
           continue;
         }
-        if(isdefined(var_1.owner) && var_1.owner == self.owner)
+        if(isDefined(var_1.owner) && var_1.owner == self.owner)
           continue;
       }
 
@@ -1960,7 +1958,7 @@ claymoredetonation() {
     }
   }
 
-  self playsound("claymore_activated");
+  self playSound("claymore_activated");
 
   if(isplayer(var_1) && var_1 maps\mp\_utility::_hasperk("specialty_delaymine")) {
     var_1 notify("triggered_claymore");
@@ -1968,22 +1966,22 @@ claymoredetonation() {
   } else
     wait(level.claymoredetectiongraceperiod);
 
-  if(isdefined(self.trigger))
+  if(isDefined(self.trigger))
     self.trigger delete();
 
-  if(isdefined(self.owner) && isdefined(level.leaderdialogonplayer_func))
+  if(isDefined(self.owner) && isDefined(level.leaderdialogonplayer_func))
     self.owner thread[[level.leaderdialogonplayer_func]]("claymore_destroyed", undefined, undefined, self.origin);
 
   self detonate();
 }
 
 shouldaffectclaymore(var_0) {
-  if(isdefined(var_0.disabled))
+  if(isDefined(var_0.disabled))
     return 0;
 
   var_1 = self.origin + (0.0, 0.0, 32.0);
   var_2 = var_1 - var_0.origin;
-  var_3 = anglestoforward(var_0.angles);
+  var_3 = anglesToForward(var_0.angles);
   var_4 = vectordot(var_2, var_3);
 
   if(var_4 < level.claymoredetectionmindist)
@@ -1998,8 +1996,8 @@ deleteondeath(var_0) {
   self waittill("death");
   wait 0.05;
 
-  if(isdefined(var_0)) {
-    if(isdefined(var_0.trigger))
+  if(isDefined(var_0)) {
+    if(isDefined(var_0.trigger))
       var_0.trigger delete();
 
     var_0 delete();
@@ -2007,8 +2005,8 @@ deleteondeath(var_0) {
 }
 
 deleteequipment(var_0) {
-  if(isdefined(var_0)) {
-    if(isdefined(var_0.trigger))
+  if(isDefined(var_0)) {
+    if(isDefined(var_0.trigger))
       var_0.trigger delete();
 
     var_0 delete();
@@ -2023,11 +2021,11 @@ watchmanuallydetonatedfordoubletap() {
   self endon("change_owner");
   var_0 = 0;
 
-  for (;;) {
+  for(;;) {
     if(self usebuttonpressed()) {
       var_0 = 0;
 
-      while (self usebuttonpressed()) {
+      while(self usebuttonpressed()) {
         var_0 += 0.05;
         wait 0.05;
       }
@@ -2037,7 +2035,7 @@ watchmanuallydetonatedfordoubletap() {
       }
       var_0 = 0;
 
-      while (!self usebuttonpressed() && var_0 < 0.35) {
+      while(!self usebuttonpressed() && var_0 < 0.35) {
         var_0 += 0.05;
         wait 0.05;
       }
@@ -2061,7 +2059,7 @@ watchmanualdetonationbyemptythrow() {
   self endon("disconnect");
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     self waittill("detonate");
     manuallydetonateall(1);
   }
@@ -2073,7 +2071,7 @@ watchmanualdetonationbydoubletap() {
   self endon("disconnect");
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     self waittill("detonate_double_tap");
     var_0 = self getcurrentweapon();
 
@@ -2086,7 +2084,7 @@ manuallydetonateall(var_0) {
   var_1 = 0;
   var_2 = [];
 
-  for (var_3 = 0; var_3 < self.manuallydetonatedarray.size; var_3++) {
+  for(var_3 = 0; var_3 < self.manuallydetonatedarray.size; var_3++) {
     if(!self.manuallydetonatedarray[var_3][var_0]) {
       var_1 = 1;
       continue;
@@ -2094,18 +2092,18 @@ manuallydetonateall(var_0) {
 
     var_4 = self.manuallydetonatedarray[var_3][0];
 
-    if(isdefined(var_4)) {
+    if(isDefined(var_4)) {
       if(var_4.stunned) {
         var_1 = 1;
         return;
       }
 
-      if(isdefined(var_4.weaponname) && !self getdetonateenabled(var_4.weaponname)) {
+      if(isDefined(var_4.weaponname) && !self getdetonateenabled(var_4.weaponname)) {
         var_1 = 1;
         continue;
       }
 
-      if(isdefined(var_4.manuallydetonatefunc)) {
+      if(isDefined(var_4.manuallydetonatefunc)) {
         self thread[[var_4.manuallydetonatefunc]](var_4);
         continue;
       }
@@ -2143,13 +2141,13 @@ deletec4andclaymoresondisconnect() {
   var_1 = self.claymorearray;
   wait 0.05;
 
-  for (var_2 = 0; var_2 < var_0.size; var_2++) {
-    if(isdefined(var_0[var_2][0]))
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
+    if(isDefined(var_0[var_2][0]))
       var_0[var_2][0] delete();
   }
 
-  for (var_2 = 0; var_2 < var_1.size; var_2++) {
-    if(isdefined(var_1[var_2]))
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
+    if(isDefined(var_1[var_2]))
       var_1[var_2] delete();
   }
 }
@@ -2158,12 +2156,12 @@ c4damage(var_0) {
   self endon("death");
   level endon("shutdownGame_called");
 
-  self setcandamage(1);
+  self setCanDamage(1);
   self.maxhealth = 100000;
   self.health = self.maxhealth;
   var_1 = undefined;
 
-  for (;;) {
+  for(;;) {
     self waittill("damage", var_2, var_1, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
 
     if(!isplayer(var_1) && !isagent(var_1)) {
@@ -2172,7 +2170,7 @@ c4damage(var_0) {
     if(!friendlyfirecheck(self.owner, var_1)) {
       continue;
     }
-    if(isdefined(var_10)) {
+    if(isDefined(var_10)) {
       var_11 = maps\mp\_utility::strip_suffix(var_10, "_lefthand");
       switch (var_11) {
         case "h1_smokegrenade_mp":
@@ -2192,16 +2190,16 @@ c4damage(var_0) {
   else
     wait 0.05;
 
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   level.c4explodethisframe = 1;
   thread resetc4explodethisframe();
 
-  if(isdefined(var_5) && (issubstr(var_5, "MOD_GRENADE") || issubstr(var_5, "MOD_EXPLOSIVE")))
+  if(isDefined(var_5) && (issubstr(var_5, "MOD_GRENADE") || issubstr(var_5, "MOD_EXPLOSIVE")))
     self.waschained = 1;
 
-  if(isdefined(var_9) && var_9 & level.idflags_penetration)
+  if(isDefined(var_9) && var_9 &level.idflags_penetration)
     self.wasdamagedfrombulletpenetration = 1;
 
   self.wasdamaged = 1;
@@ -2212,14 +2210,14 @@ c4damage(var_0) {
   var_12 = 0;
 
   if(level.teambased) {
-    if(isdefined(var_1) && isdefined(self.owner)) {
+    if(isDefined(var_1) && isDefined(self.owner)) {
       var_13 = var_1.pers["team"];
       var_14 = self.owner.pers["team"];
 
-      if(isdefined(var_13) && isdefined(var_14) && var_13 != var_14)
+      if(isDefined(var_13) && isDefined(var_14) && var_13 != var_14)
         var_12 = 1;
     }
-  } else if(isdefined(self.owner) && isdefined(var_1) && var_1 != self.owner)
+  } else if(isDefined(self.owner) && isDefined(var_1) && var_1 != self.owner)
     var_12 = 1;
 
   if(var_12) {
@@ -2239,7 +2237,7 @@ c4damage(var_0) {
     }
   }
 
-  if(isdefined(self.trigger))
+  if(isDefined(self.trigger))
     self.trigger delete();
 
   self detonate(var_1);
@@ -2251,12 +2249,12 @@ resetc4explodethisframe() {
 }
 
 saydamaged(var_0, var_1) {
-  for (var_2 = 0; var_2 < 60; var_2++)
+  for(var_2 = 0; var_2 < 60; var_2++)
     wait 0.05;
 }
 
 waittillenabled() {
-  if(!isdefined(self.disabled)) {
+  if(!isDefined(self.disabled)) {
     return;
   }
   self waittill("enabled");
@@ -2265,7 +2263,7 @@ waittillenabled() {
 makeexplosivetargetablebyai(var_0) {
   common_scripts\utility::make_entity_sentient_mp(self.owner.team);
 
-  if(!isdefined(var_0) || !var_0)
+  if(!isDefined(var_0) || !var_0)
     self makeentitynomeleetarget();
 
   if(issentient(self))
@@ -2276,7 +2274,7 @@ setupbombsquad() {
   self.bombsquadids = [];
 
   if(self.detectexplosives && !self.bombsquadicons.size) {
-    for (var_0 = 0; var_0 < 4; var_0++) {
+    for(var_0 = 0; var_0 < 4; var_0++) {
       self.bombsquadicons[var_0] = newclienthudelem(self);
       self.bombsquadicons[var_0].x = 0;
       self.bombsquadicons[var_0].y = 0;
@@ -2288,7 +2286,7 @@ setupbombsquad() {
       self.bombsquadicons[var_0].detectid = "";
     }
   } else if(!self.detectexplosives) {
-    for (var_0 = 0; var_0 < self.bombsquadicons.size; var_0++)
+    for(var_0 = 0; var_0 < self.bombsquadicons.size; var_0++)
       self.bombsquadicons[var_0] destroy();
 
     self.bombsquadicons = [];
@@ -2299,7 +2297,7 @@ showheadicon(var_0) {
   var_1 = var_0.detectid;
   var_2 = -1;
 
-  for (var_3 = 0; var_3 < 4; var_3++) {
+  for(var_3 = 0; var_3 < 4; var_3++) {
     var_4 = self.bombsquadicons[var_3].detectid;
 
     if(var_4 == var_1) {
@@ -2320,10 +2318,10 @@ showheadicon(var_0) {
   self.bombsquadicons[var_2].alpha = 1;
   self.bombsquadicons[var_2].detectid = var_0.detectid;
 
-  while (isalive(self) && isdefined(var_0) && self istouching(var_0))
+  while(isalive(self) && isDefined(var_0) && self istouching(var_0))
     wait 0.05;
 
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   self.bombsquadicons[var_2].detectid = "";
@@ -2335,16 +2333,16 @@ showheadicon(var_0) {
 getdamageableents(var_0, var_1, var_2, var_3) {
   var_4 = [];
 
-  if(!isdefined(var_2))
+  if(!isDefined(var_2))
     var_2 = 0;
 
-  if(!isdefined(var_3))
+  if(!isDefined(var_3))
     var_3 = 0;
 
   var_5 = var_1 * var_1;
   var_6 = level.players;
 
-  for (var_7 = 0; var_7 < var_6.size; var_7++) {
+  for(var_7 = 0; var_7 < var_6.size; var_7++) {
     if(!isalive(var_6[var_7]) || var_6[var_7].sessionstate != "playing") {
       continue;
     }
@@ -2355,9 +2353,9 @@ getdamageableents(var_0, var_1, var_2, var_3) {
       var_4[var_4.size] = maps\mp\_utility::get_damageable_player(var_6[var_7], var_8);
   }
 
-  var_10 = getentarray("grenade", "classname");
+  var_10 = getEntArray("grenade", "classname");
 
-  for (var_7 = 0; var_7 < var_10.size; var_7++) {
+  for(var_7 = 0; var_7 < var_10.size; var_7++) {
     var_11 = maps\mp\_utility::get_damageable_grenade_pos(var_10[var_7]);
     var_9 = distancesquared(var_0, var_11);
 
@@ -2365,14 +2363,14 @@ getdamageableents(var_0, var_1, var_2, var_3) {
       var_4[var_4.size] = maps\mp\_utility::get_damageable_grenade(var_10[var_7], var_11);
   }
 
-  var_12 = getentarray("destructible", "targetname");
+  var_12 = getEntArray("destructible", "targetname");
 
-  for (var_7 = 0; var_7 < var_12.size; var_7++) {
+  for(var_7 = 0; var_7 < var_12.size; var_7++) {
     var_11 = var_12[var_7].origin;
     var_9 = distancesquared(var_0, var_11);
 
     if(var_9 < var_5 && (!var_2 || weapondamagetracepassed(var_0, var_11, var_3, var_12[var_7]))) {
-      var_13 = spawnstruct();
+      var_13 = spawnStruct();
       var_13.isplayer = 0;
       var_13.isadestructable = 0;
       var_13.entity = var_12[var_7];
@@ -2381,14 +2379,14 @@ getdamageableents(var_0, var_1, var_2, var_3) {
     }
   }
 
-  var_14 = getentarray("destructable", "targetname");
+  var_14 = getEntArray("destructable", "targetname");
 
-  for (var_7 = 0; var_7 < var_14.size; var_7++) {
+  for(var_7 = 0; var_7 < var_14.size; var_7++) {
     var_11 = var_14[var_7].origin;
     var_9 = distancesquared(var_0, var_11);
 
     if(var_9 < var_5 && (!var_2 || weapondamagetracepassed(var_0, var_11, var_3, var_14[var_7]))) {
-      var_13 = spawnstruct();
+      var_13 = spawnStruct();
       var_13.isplayer = 0;
       var_13.isadestructable = 1;
       var_13.entity = var_14[var_7];
@@ -2397,7 +2395,7 @@ getdamageableents(var_0, var_1, var_2, var_3) {
     }
   }
 
-  var_15 = getentarray("misc_turret", "classname");
+  var_15 = getEntArray("misc_turret", "classname");
 
   foreach(var_17 in var_15) {
     var_11 = var_17.origin + (0.0, 0.0, 32.0);
@@ -2414,7 +2412,7 @@ getdamageableents(var_0, var_1, var_2, var_3) {
     }
   }
 
-  var_19 = getentarray("script_model", "classname");
+  var_19 = getEntArray("script_model", "classname");
 
   foreach(var_21 in var_19) {
     if(var_21.model != "projectile_bouncing_betty_grenade" && var_21.model != "ims_scorpion_body") {
@@ -2433,13 +2431,13 @@ getdamageableents(var_0, var_1, var_2, var_3) {
 getempdamageents(var_0, var_1, var_2, var_3) {
   var_4 = [];
 
-  if(!isdefined(var_2))
+  if(!isDefined(var_2))
     var_2 = 0;
 
-  if(!isdefined(var_3))
+  if(!isDefined(var_3))
     var_3 = 0;
 
-  var_5 = getentarray("grenade", "classname");
+  var_5 = getEntArray("grenade", "classname");
 
   foreach(var_7 in var_5) {
     var_8 = var_7.origin;
@@ -2449,7 +2447,7 @@ getempdamageents(var_0, var_1, var_2, var_3) {
       var_4[var_4.size] = var_7;
   }
 
-  var_11 = getentarray("misc_turret", "classname");
+  var_11 = getEntArray("misc_turret", "classname");
 
   foreach(var_13 in var_11) {
     var_8 = var_13.origin;
@@ -2471,13 +2469,13 @@ weapondamagetracepassed(var_0, var_1, var_2, var_3) {
 
   var_6 = vectornormalize(var_5);
   var_4 = var_0 + (var_6[0] * var_2, var_6[1] * var_2, var_6[2] * var_2);
-  var_7 = bullettrace(var_4, var_1, 0, var_3);
+  var_7 = bulletTrace(var_4, var_1, 0, var_3);
 
   if(getdvarint("scr_damage_debug") != 0 || getdvarint("scr_debugMines") != 0) {
     /*
     thread debugprint( var_0, ".dmg" );
 
-    if( isdefined( var_3 ) )
+    if( isDefined( var_3 ) )
     thread debugprint( var_1, "." + var_3.classname );
     else
     thread debugprint( var_1, ".undefined" );
@@ -2507,18 +2505,18 @@ damageent(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 }
 
 debugline(var_0, var_1, var_2) {
-  for (var_3 = 0; var_3 < 600; var_3++)
+  for(var_3 = 0; var_3 < 600; var_3++)
     wait 0.05;
 }
 
 debugcircle(var_0, var_1, var_2, var_3) {
-  if(!isdefined(var_3))
+  if(!isDefined(var_3))
     var_3 = 16;
 
   var_4 = 360 / var_3;
   var_5 = [];
 
-  for (var_6 = 0; var_6 < var_3; var_6++) {
+  for(var_6 = 0; var_6 < var_3; var_6++) {
     var_7 = var_4 * var_6;
     var_8 = cos(var_7) * var_1;
     var_9 = sin(var_7) * var_1;
@@ -2528,7 +2526,7 @@ debugcircle(var_0, var_1, var_2, var_3) {
     var_5[var_5.size] = (var_10, var_11, var_12);
   }
 
-  for (var_6 = 0; var_6 < var_5.size; var_6++) {
+  for(var_6 = 0; var_6 < var_5.size; var_6++) {
     var_13 = var_5[var_6];
 
     if(var_6 + 1 >= var_5.size)
@@ -2543,7 +2541,7 @@ debugcircle(var_0, var_1, var_2, var_3) {
 /*
 debugprint( var_0, var_1 )
 {
-for ( var_2 = 0; var_2 < 600; var_2++ )
+for( var_2 = 0; var_2 < 600; var_2++ )
 wait 0.05;
 }
 */
@@ -2566,7 +2564,7 @@ onweapondamage(var_0, var_1, var_2, var_3, var_4) {
 
     switch (var_12) {
       case "h1_concussiongrenade_mp":
-        if(!isdefined(var_0)) {
+        if(!isDefined(var_0)) {
           return;
         }
         if(maps\mp\_utility::is_true(self.concussionimmune)) {
@@ -2574,7 +2572,7 @@ onweapondamage(var_0, var_1, var_2, var_3, var_4) {
         }
         var_13 = 1;
 
-        if(isdefined(var_0.owner) && var_0.owner == var_4)
+        if(isDefined(var_0.owner) && var_0.owner == var_4)
           var_13 = 0;
 
         var_14 = 512;
@@ -2585,7 +2583,7 @@ onweapondamage(var_0, var_1, var_2, var_3, var_4) {
 
         var_16 = 2 + 4 * var_15;
 
-        if(isdefined(self.stunscaler))
+        if(isDefined(self.stunscaler))
           var_16 *= self.stunscaler;
 
         wait 0.05;
@@ -2593,7 +2591,7 @@ onweapondamage(var_0, var_1, var_2, var_3, var_4) {
         self shellshock("concussion_grenade_mp", var_16);
         self.concussionendtime = gettime() + var_16 * 1000;
 
-        if(isdefined(var_4) && var_4 != self)
+        if(isDefined(var_4) && var_4 != self)
           self.concussionattacker = var_4;
         else
           self.concussionattacker = undefined;
@@ -2612,7 +2610,7 @@ onweapondamage(var_0, var_1, var_2, var_3, var_4) {
 }
 
 isconcussed() {
-  return isdefined(self.concussionendtime) && gettime() < self.concussionendtime;
+  return isDefined(self.concussionendtime) && gettime() < self.concussionendtime;
 }
 
 getlastconcussionattacker() {
@@ -2623,7 +2621,7 @@ uts19shock(var_0) {
   if(getdvarint("scr_game_uts19_shock", 0) == 0) {
     return;
   }
-  if(!isdefined(var_0)) {
+  if(!isDefined(var_0)) {
     return;
   }
   var_1 = 0.45;
@@ -2635,7 +2633,7 @@ uts19shock(var_0) {
   var_6 = clamp(var_6, 0, 1);
   var_7 = var_1 + (var_2 - var_1) * var_6;
 
-  if(isdefined(self.utsshockqueuedtime)) {
+  if(isDefined(self.utsshockqueuedtime)) {
     if(self.utsshockqueuedtime >= var_7)
       return;
   }
@@ -2644,7 +2642,7 @@ uts19shock(var_0) {
   self shellshock("uts19_mp", var_7);
   waittillframeend;
 
-  if(isdefined(self))
+  if(isDefined(self))
     self.utsshockqueuedtime = undefined;
 }
 
@@ -2771,7 +2769,7 @@ updatesavedlastweapon() {
   setweaponusagevariables(var_0);
   thread recordweaponusageondeathorgameend();
 
-  for (;;) {
+  for(;;) {
     self waittill("weapon_change", var_1);
     updateweaponusagestats(var_1);
 
@@ -2844,10 +2842,8 @@ getweaponweight(var_0) {
   var_1 = undefined;
   var_2 = maps\mp\_utility::getbaseweaponname(var_0);
 
-  if(isdefined(level.weaponweightfunc))
-    return [
-      [level.weaponweightfunc]
-    ](var_2);
+  if(isDefined(level.weaponweightfunc))
+    return [[level.weaponweightfunc]](var_2);
 
   var_1 = int(tablelookup("mp/statstable.csv", 4, var_2, 8));
   return var_1;
@@ -2870,7 +2866,7 @@ isvalidmovespeedscaleweapon(var_0) {
 }
 
 updateMoveSpeedScale(weaponType) {
-  if(!isdefined(level.prematch_done_time)) {
+  if(!isDefined(level.prematch_done_time)) {
     return;
   }
 
@@ -2929,7 +2925,7 @@ stancerecoiladjuster() {
   self notifyonplayercommand("adjustedStance", "+stance");
   self notifyonplayercommand("adjustedStance", "+goStand");
 
-  for (;;) {
+  for(;;) {
     common_scripts\utility::waittill_any("adjustedStance", "sprint_begin", "weapon_change");
     wait 0.5;
     self.stance = self getstance();
@@ -2966,12 +2962,10 @@ stancerecoiladjuster() {
   }
 }
 
-buildweapondata(var_0) {
-
-}
+buildweapondata(var_0) {}
 
 isstucktofriendly(var_0) {
-  return level.teambased && isdefined(var_0.team) && var_0.team == self.team;
+  return level.teambased && isDefined(var_0.team) && var_0.team == self.team;
 }
 
 turret_monitoruse() {
@@ -2982,7 +2976,7 @@ turret_monitoruse() {
     return;
   }
 
-  for (;;) {
+  for(;;) {
     self waittill("trigger", var_0);
     thread turret_playerthread(var_0);
   }
@@ -2997,13 +2991,13 @@ turret_playerthread(var_0) {
 }
 
 spawnmine(var_0, var_1, var_2, var_3, var_4) {
-  if(!isdefined(var_3))
+  if(!isDefined(var_3))
     var_3 = (0, randomfloat(360), 0);
 
   var_5 = "projectile_bouncing_betty_grenade";
   var_6 = spawn("script_model", var_0);
   var_6.angles = var_3;
-  var_6 setmodel(var_5);
+  var_6 setModel(var_5);
   var_6.owner = var_1;
   var_6.stunned = 0;
   var_6 setotherent(var_1);
@@ -3025,7 +3019,7 @@ spawnmine(var_0, var_1, var_2, var_3, var_4) {
   var_6 thread mineproximitytrigger();
   var_7 = self getlinkedparent();
 
-  if(isdefined(var_7))
+  if(isDefined(var_7))
     var_6 linkto(var_7);
 
   var_6 makeexplosivetargetablebyai(!var_4);
@@ -3039,24 +3033,24 @@ minedamagemonitor() {
   level endon("game_ended");
   level endon("shutdownGame_called");
 
-  self setcandamage(1);
+  self setCanDamage(1);
   self.maxhealth = 100000;
   self.health = self.maxhealth;
   var_0 = undefined;
 
-  for (;;) {
+  for(;;) {
     self waittill("damage", var_1, var_0, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 
     if(!isplayer(var_0) && !isagent(var_0)) {
       continue;
     }
-    if(isdefined(var_9) && var_9 == "bouncingbetty_mp") {
+    if(isDefined(var_9) && var_9 == "bouncingbetty_mp") {
       continue;
     }
     if(!friendlyfirecheck(self.owner, var_0)) {
       continue;
     }
-    if(isdefined(var_9)) {
+    if(isDefined(var_9)) {
       var_10 = maps\mp\_utility::strip_suffix(var_9, "_lefthand");
 
       switch (var_10) {
@@ -3072,10 +3066,10 @@ minedamagemonitor() {
 
   self notify("mine_destroyed");
 
-  if(isdefined(var_4) && (issubstr(var_4, "MOD_GRENADE") || issubstr(var_4, "MOD_EXPLOSIVE")))
+  if(isDefined(var_4) && (issubstr(var_4, "MOD_GRENADE") || issubstr(var_4, "MOD_EXPLOSIVE")))
     self.waschained = 1;
 
-  if(isdefined(var_8) && var_8 & level.idflags_penetration)
+  if(isDefined(var_8) && var_8 &level.idflags_penetration)
     self.wasdamagedfrombulletpenetration = 1;
 
   self.wasdamaged = 1;
@@ -3084,14 +3078,14 @@ minedamagemonitor() {
     var_0 maps\mp\gametypes\_damagefeedback::updatedamagefeedback("bouncing_betty");
 
   if(level.teambased) {
-    if(isdefined(var_0) && isdefined(self.owner)) {
+    if(isDefined(var_0) && isDefined(self.owner)) {
       var_11 = var_0.pers["team"];
       var_12 = self.owner.pers["team"];
 
-      if(isdefined(var_11) && isdefined(var_12) && var_11 != var_12)
+      if(isDefined(var_11) && isDefined(var_12) && var_11 != var_12)
         var_0 notify("destroyed_explosive");
     }
-  } else if(isdefined(self.owner) && isdefined(var_0) && var_0 != self.owner)
+  } else if(isDefined(self.owner) && isDefined(var_0) && var_0 != self.owner)
     var_0 notify("destroyed_explosive");
 
   thread mineexplode(var_0);
@@ -3110,18 +3104,18 @@ mineproximitytrigger() {
   thread minedeletetrigger(var_0);
   var_1 = undefined;
 
-  for (;;) {
+  for(;;) {
     var_0 waittill("trigger", var_1);
 
     if(self.stunned) {
       continue;
     }
     if(getdvarint("scr_minesKillOwner") != 1) {
-      if(isdefined(self.owner)) {
+      if(isDefined(self.owner)) {
         if(var_1 == self.owner) {
           continue;
         }
-        if(isdefined(var_1.owner) && var_1.owner == self.owner)
+        if(isDefined(var_1.owner) && var_1.owner == self.owner)
           continue;
       }
 
@@ -3138,7 +3132,7 @@ mineproximitytrigger() {
   }
 
   self notify("mine_triggered");
-  self playsound("mine_betty_click");
+  self playSound("mine_betty_click");
 
   if(isplayer(var_1) && var_1 maps\mp\_utility::_hasperk("specialty_delaymine")) {
     var_1 notify("triggered_mine");
@@ -3165,10 +3159,10 @@ mineselfdestruct() {
 }
 
 minebounce() {
-  self playsound("mine_betty_spin");
-  playfx(level.mine_launch, self.origin);
+  self playSound("mine_betty_spin");
+  playFX(level.mine_launch, self.origin);
 
-  if(isdefined(self.trigger))
+  if(isDefined(self.trigger))
     self.trigger delete();
 
   var_0 = self.origin + (0.0, 0.0, 64.0);
@@ -3181,32 +3175,32 @@ minebounce() {
 }
 
 mineexplode(attacker) {
-  if(!isdefined(self) || !isdefined(self.owner)) {
+  if(!isDefined(self) || !isDefined(self.owner)) {
     return;
   }
-  if(!isdefined(attacker))
+  if(!isDefined(attacker))
     attacker = self.owner;
 
-  self playsound("null");
+  self playSound("null");
   var_1 = self gettagorigin("tag_fx");
-  playfx(level.mine_explode, var_1);
+  playFX(level.mine_explode, var_1);
   wait 0.05;
 
-  if(!isdefined(self) || !isdefined(self.owner)) {
+  if(!isDefined(self) || !isDefined(self.owner)) {
     return;
   }
   self hide();
   self radiusdamage(self.origin, level.minedamageradius, level.minedamagemax, level.minedamagemin, attacker, "MOD_EXPLOSIVE");
 
-  if(isdefined(self.owner) && isdefined(level.leaderdialogonplayer_func))
+  if(isDefined(self.owner) && isDefined(level.leaderdialogonplayer_func))
     self.owner thread[[level.leaderdialogonplayer_func]]("mine_destroyed", undefined, undefined, self.origin);
 
   wait 0.2;
 
-  if(!isdefined(self) || !isdefined(self.owner)) {
+  if(!isDefined(self) || !isDefined(self.owner)) {
     return;
   }
-  if(isdefined(self.trigger))
+  if(isDefined(self.trigger))
     self.trigger delete();
 
   self.killcament delete();
@@ -3218,30 +3212,30 @@ minestunbegin() {
     return;
   }
   self.stunned = 1;
-  playfxontag(common_scripts\utility::getfx("mine_stunned"), self, "tag_origin");
+  playFXOnTag(common_scripts\utility::getfx("mine_stunned"), self, "tag_origin");
 }
 
 minestunend() {
   self.stunned = 0;
-  stopfxontag(common_scripts\utility::getfx("mine_stunned"), self, "tag_origin");
+  stopFXOnTag(common_scripts\utility::getfx("mine_stunned"), self, "tag_origin");
 }
 
 minechangeowner(var_0) {
-  if(isdefined(self.weaponname)) {
-    if(isdefined(self.entityheadicon))
+  if(isDefined(self.weaponname)) {
+    if(isDefined(self.entityheadicon))
       self.entityheadicon destroy();
 
     if(self.weaponname == "bouncingbetty_mp") {
-      if(isdefined(self.trigger))
+      if(isDefined(self.trigger))
         self.trigger delete();
 
-      if(isdefined(self.effect["friendly"]))
+      if(isDefined(self.effect["friendly"]))
         self.effect["friendly"] delete();
 
-      if(isdefined(self.effect["enemy"]))
+      if(isDefined(self.effect["enemy"]))
         self.effect["enemy"] delete();
 
-      for (var_1 = 0; var_1 < self.owner.equipmentmines.size; var_1++) {
+      for(var_1 = 0; var_1 < self.owner.equipmentmines.size; var_1++) {
         if(self.owner.equipmentmines[var_1] == self)
           self.owner.equipmentmines[var_1] = undefined;
       }
@@ -3260,10 +3254,10 @@ minechangeowner(var_0) {
       var_0 thread minewatchownerdisconnect(self);
       var_0 thread minewatchownerchangeteams(self);
     } else if(self.weaponname == "h1_claymore_mp") {
-      if(isdefined(self.trigger))
+      if(isDefined(self.trigger))
         self.trigger delete();
 
-      for (var_1 = 0; var_1 < self.owner.claymorearray.size; var_1++) {
+      for(var_1 = 0; var_1 < self.owner.claymorearray.size; var_1++) {
         if(self.owner.claymorearray[var_1] == self)
           self.owner.claymorearray[var_1] = undefined;
       }
@@ -3285,7 +3279,7 @@ minechangeowner(var_0) {
       var_2 = 0;
       var_3 = 0;
 
-      for (var_1 = 0; var_1 < self.owner.manuallydetonatedarray.size; var_1++) {
+      for(var_1 = 0; var_1 < self.owner.manuallydetonatedarray.size; var_1++) {
         if(self.owner.manuallydetonatedarray[var_1][0] == self) {
           self.owner.manuallydetonatedarray[var_1][0] = undefined;
           var_2 = self.owner.manuallydetonatedarray[var_1][1];
@@ -3313,13 +3307,13 @@ playspinnerfx() {
   self endon("death");
   var_0 = gettime() + 1000;
 
-  while (gettime() < var_0) {
+  while(gettime() < var_0) {
     wait 0.05;
-    playfxontag(level.mine_spin, self, "tag_fx_spin1");
-    playfxontag(level.mine_spin, self, "tag_fx_spin3");
+    playFXOnTag(level.mine_spin, self, "tag_fx_spin1");
+    playFXOnTag(level.mine_spin, self, "tag_fx_spin3");
     wait 0.05;
-    playfxontag(level.mine_spin, self, "tag_fx_spin2");
-    playfxontag(level.mine_spin, self, "tag_fx_spin4");
+    playFXOnTag(level.mine_spin, self, "tag_fx_spin2");
+    playFXOnTag(level.mine_spin, self, "tag_fx_spin4");
   }
 }
 
@@ -3370,7 +3364,7 @@ watchslide() {
 
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     self.issiliding = 0;
     self waittill("sprint_slide_begin");
     self.issiliding = 1;
@@ -3386,9 +3380,9 @@ watchmineusage() {
 
   level endon("game_ended");
 
-  if(isdefined(self.equipmentmines)) {
+  if(isDefined(self.equipmentmines)) {
     if(maps\mp\_utility::getintproperty("scr_deleteexplosivesonspawn", 1) == 1) {
-      if(isdefined(self.dont_delete_mines_on_next_spawn))
+      if(isDefined(self.dont_delete_mines_on_next_spawn))
         self.dont_delete_mines_on_next_spawn = undefined;
       else
         delete_all_mines();
@@ -3396,10 +3390,10 @@ watchmineusage() {
   } else
     self.equipmentmines = [];
 
-  if(!isdefined(self.killstreakmines))
+  if(!isDefined(self.killstreakmines))
     self.killstreakmines = [];
 
-  for (;;) {
+  for(;;) {
     self waittill("grenade_fire", var_0, var_1);
 
     if(var_1 == "bouncingbetty" || var_1 == "bouncingbetty_mp") {
@@ -3418,10 +3412,10 @@ minethrown(var_0, var_1) {
   self.owner = var_0;
   self waittill("missile_stuck");
 
-  if(!isdefined(var_0)) {
+  if(!isDefined(var_0)) {
     return;
   }
-  var_2 = bullettrace(self.origin + (0.0, 0.0, 4.0), self.origin - (0.0, 0.0, 4.0), 0, self);
+  var_2 = bulletTrace(self.origin + (0.0, 0.0, 4.0), self.origin - (0.0, 0.0, 4.0), 0, self);
   var_3 = var_2["position"];
 
   if(var_2["fraction"] == 1) {
@@ -3447,7 +3441,7 @@ minewatchownerdisconnect(var_0) {
   var_0 endon("change_owner");
   self waittill("disconnect");
 
-  if(isdefined(var_0.trigger))
+  if(isDefined(var_0.trigger))
     var_0.trigger delete();
 
   var_0 delete();
@@ -3459,7 +3453,7 @@ minewatchownerchangeteams(var_0) {
   var_0 endon("change_owner");
   common_scripts\utility::waittill_either("joined_team", "joined_spectators");
 
-  if(isdefined(var_0.trigger))
+  if(isDefined(var_0.trigger))
     var_0.trigger delete();
 
   var_0 delete();
@@ -3485,7 +3479,7 @@ minebeaconteamupdater() {
   triggerfx(self.effect["friendly"]);
   triggerfx(self.effect["enemy"]);
 
-  for (;;) {
+  for(;;) {
     self.effect["friendly"] hide();
     self.effect["enemy"] hide();
 
@@ -3512,10 +3506,10 @@ minebeaconteamupdater() {
 }
 
 delete_all_grenades() {
-  if(isdefined(self.manuallydetonatedarray)) {
-    for (var_0 = 0; var_0 < self.manuallydetonatedarray.size; var_0++) {
-      if(isdefined(self.manuallydetonatedarray[var_0][0])) {
-        if(isdefined(self.manuallydetonatedarray[var_0][0].trigger))
+  if(isDefined(self.manuallydetonatedarray)) {
+    for(var_0 = 0; var_0 < self.manuallydetonatedarray.size; var_0++) {
+      if(isDefined(self.manuallydetonatedarray[var_0][0])) {
+        if(isDefined(self.manuallydetonatedarray[var_0][0].trigger))
           self.manuallydetonatedarray[var_0][0].trigger delete();
 
         self.manuallydetonatedarray[var_0][0] delete();
@@ -3525,10 +3519,10 @@ delete_all_grenades() {
 
   self.manuallydetonatedarray = [];
 
-  if(isdefined(self.claymorearray)) {
-    for (var_0 = 0; var_0 < self.claymorearray.size; var_0++) {
-      if(isdefined(self.claymorearray[var_0])) {
-        if(isdefined(self.claymorearray[var_0].trigger))
+  if(isDefined(self.claymorearray)) {
+    for(var_0 = 0; var_0 < self.claymorearray.size; var_0++) {
+      if(isDefined(self.claymorearray[var_0])) {
+        if(isDefined(self.claymorearray[var_0].trigger))
           self.claymorearray[var_0].trigger delete();
 
         self.claymorearray[var_0] delete();
@@ -3538,10 +3532,10 @@ delete_all_grenades() {
 
   self.claymorearray = [];
 
-  if(isdefined(self.bouncingbettyarray)) {
-    for (var_0 = 0; var_0 < self.bouncingbettyarray.size; var_0++) {
-      if(isdefined(self.bouncingbettyarray[var_0])) {
-        if(isdefined(self.bouncingbettyarray[var_0].trigger))
+  if(isDefined(self.bouncingbettyarray)) {
+    for(var_0 = 0; var_0 < self.bouncingbettyarray.size; var_0++) {
+      if(isDefined(self.bouncingbettyarray[var_0])) {
+        if(isDefined(self.bouncingbettyarray[var_0].trigger))
           self.bouncingbettyarray[var_0].trigger delete();
 
         self.bouncingbettyarray[var_0] delete();
@@ -3553,11 +3547,11 @@ delete_all_grenades() {
 }
 
 delete_all_mines() {
-  if(isdefined(self.equipmentmines)) {
+  if(isDefined(self.equipmentmines)) {
     self.equipmentmines = common_scripts\utility::array_removeundefined(self.equipmentmines);
 
     foreach(var_1 in self.equipmentmines) {
-      if(isdefined(var_1.trigger))
+      if(isDefined(var_1.trigger))
         var_1.trigger delete();
 
       var_1 delete();
@@ -3569,56 +3563,56 @@ transfer_grenade_ownership(var_0) {
   var_0 delete_all_grenades();
   var_0 delete_all_mines();
 
-  if(isdefined(self.manuallydetonatedarray))
+  if(isDefined(self.manuallydetonatedarray))
     var_0.manuallydetonatedarray = manuallydetonated_removeundefined(self.manuallydetonatedarray);
   else
     var_0.manuallydetonatedarray = undefined;
 
-  if(isdefined(self.claymorearray))
+  if(isDefined(self.claymorearray))
     var_0.claymorearray = common_scripts\utility::array_removeundefined(self.claymorearray);
   else
     var_0.claymorearray = undefined;
 
-  if(isdefined(self.bouncingbettyarray))
+  if(isDefined(self.bouncingbettyarray))
     var_0.bouncingbettyarray = common_scripts\utility::array_removeundefined(self.bouncingbettyarray);
   else
     var_0.bouncingbettyarray = undefined;
 
-  if(isdefined(self.equipmentmines))
+  if(isDefined(self.equipmentmines))
     var_0.equipmentmines = common_scripts\utility::array_removeundefined(self.equipmentmines);
   else
     var_0.equipmentmines = undefined;
 
-  if(isdefined(self.killstreakmines))
+  if(isDefined(self.killstreakmines))
     var_0.killstreakmines = common_scripts\utility::array_removeundefined(self.killstreakmines);
   else
     var_0.killstreakmines = undefined;
 
-  if(isdefined(var_0.manuallydetonatedarray)) {
+  if(isDefined(var_0.manuallydetonatedarray)) {
     foreach(var_2 in var_0.manuallydetonatedarray)
     var_2[0].owner = var_0;
   }
 
-  if(isdefined(var_0.claymorearray)) {
+  if(isDefined(var_0.claymorearray)) {
     foreach(var_5 in var_0.claymorearray)
     var_5.owner = var_0;
   }
 
-  if(isdefined(var_0.bouncingbettyarray)) {
+  if(isDefined(var_0.bouncingbettyarray)) {
     foreach(var_8 in var_0.bouncingbettyarray) {
       var_8.owner = var_0;
       var_8 thread equipmentwatchuse(var_0);
     }
   }
 
-  if(isdefined(var_0.equipmentmines)) {
+  if(isDefined(var_0.equipmentmines)) {
     foreach(var_11 in var_0.equipmentmines) {
       var_11.owner = var_0;
       var_11 thread equipmentwatchuse(var_0);
     }
   }
 
-  if(isdefined(var_0.killstreakmines)) {
+  if(isDefined(var_0.killstreakmines)) {
     foreach(var_14 in var_0.killstreakmines) {
       var_14.owner = var_0;
       var_14 thread equipmentwatchuse(var_0);
@@ -3635,17 +3629,17 @@ transfer_grenade_ownership(var_0) {
 }
 
 equipmentdeathvfx() {
-  playfx(common_scripts\utility::getfx("equipment_sparks"), self.origin);
-  self playsound("sentry_explode");
+  playFX(common_scripts\utility::getfx("equipment_sparks"), self.origin);
+  self playSound("sentry_explode");
 }
 
 equipmentdeletevfx() {
-  playfx(common_scripts\utility::getfx("equipment_explode_big"), self.origin);
-  playfx(common_scripts\utility::getfx("equipment_smoke"), self.origin);
+  playFX(common_scripts\utility::getfx("equipment_explode_big"), self.origin);
+  playFX(common_scripts\utility::getfx("equipment_smoke"), self.origin);
 }
 
 equipmentempstunvfx() {
-  playfxontag(common_scripts\utility::getfx("emp_stun"), self, "tag_origin");
+  playFXOnTag(common_scripts\utility::getfx("emp_stun"), self, "tag_origin");
 }
 
 track_damage_info() {
@@ -3660,8 +3654,8 @@ reset_damage_info_when_healed() {
 
   level endon("game_ended");
 
-  for (;;) {
-    if(self.health >= 100 && isdefined(self.damage_info) && self.damage_info.size > 0)
+  for(;;) {
+    if(self.health >= 100 && isDefined(self.damage_info) && self.damage_info.size > 0)
       self.damage_info = [];
 
     wait 0.05;
@@ -3669,12 +3663,12 @@ reset_damage_info_when_healed() {
 }
 
 stickyhandlemovers(var_0, var_1) {
-  var_2 = spawnstruct();
+  var_2 = spawnStruct();
 
-  if(isdefined(var_0))
+  if(isDefined(var_0))
     var_2.notifystring = var_0;
 
-  if(isdefined(var_1))
+  if(isDefined(var_1))
     var_2.endonstring = var_1;
 
   var_2.deathoverridecallback = ::stickymovingplatformdetonate;
@@ -3682,13 +3676,13 @@ stickyhandlemovers(var_0, var_1) {
 }
 
 stickymovingplatformdetonate(var_0) {
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   self endon("death");
 
-  if(isdefined(self)) {
-    if(isdefined(var_0.notifystring)) {
+  if(isDefined(self)) {
+    if(isDefined(var_0.notifystring)) {
       if(var_0.notifystring == "detonate")
         self detonate();
       else
@@ -3701,12 +3695,12 @@ stickymovingplatformdetonate(var_0) {
 getgrenadegraceperiodtimeleft() {
   var_0 = 0;
 
-  if(isdefined(level.grenadegraceperiod))
+  if(isDefined(level.grenadegraceperiod))
     var_0 = level.grenadegraceperiod;
 
   var_1 = 0;
 
-  if(isdefined(level.prematch_done_time))
+  if(isDefined(level.prematch_done_time))
     var_1 = (gettime() - level.prematch_done_time) / 1000;
 
   return var_0 - var_1;
@@ -3732,7 +3726,7 @@ isweaponallowedingrenadegraceperiod(var_0) {
 
   var_1 = getweaponbasename(var_0);
 
-  if(isdefined(var_1)) {
+  if(isDefined(var_1)) {
     switch (var_1) {
       case "h1_rpg_mp":
         return 0;
@@ -3751,10 +3745,10 @@ watchgrenadegraceperiod() {
 
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     [var_1, var_2, var_3] = common_scripts\utility::waittill_any_return_parms("grenade_fire", "missile_fire");
 
-    if(!isdefined(var_3) || var_3 == "") {
+    if(!isDefined(var_3) || var_3 == "") {
       continue;
     }
     if(ingrenadegraceperiod()) {
@@ -3765,7 +3759,7 @@ watchgrenadegraceperiod() {
           var_4 = 1;
 
         if(isplayer(self))
-          self iprintlnbold( & "MP_EXPLOSIVES_UNAVAILABLE_FOR_N", var_4);
+          self iprintlnbold(&"MP_EXPLOSIVES_UNAVAILABLE_FOR_N", var_4);
       }
 
       continue;
@@ -3799,7 +3793,7 @@ getsavedweapon(var_0) {
   var_1 = self.saveweapons.size;
   var_2 = -1;
 
-  for (var_3 = 0; var_3 < var_1; var_3++) {
+  for(var_3 = 0; var_3 < var_1; var_3++) {
     if(self.saveweapons[var_3]["type"] == var_0) {
       var_2 = var_3;
       break;
@@ -3818,7 +3812,7 @@ restoreweapon(var_0) {
   var_3 = -1;
   var_4 = 0;
 
-  for (var_5 = 0; var_5 < var_2; var_5++) {
+  for(var_5 = 0; var_5 < var_2; var_5++) {
     if(var_3 < 0 && self.saveweapons[var_5]["type"] == var_0) {
       var_3 = var_5;
       continue;
@@ -3855,13 +3849,12 @@ watchweaponinspection() {
   self endon("disconnect");
   self endon("faux_spawn");
 
-
   if(isai(self) || isbot(self)) {
     return;
   }
   self notifyonplayercommand("weapon_inspection", "+actionslot 2");
 
-  for (;;) {
+  for(;;) {
     self waittill("weapon_inspection");
 
     if(maps\mp\_utility::invirtuallobby() && !(maps\mp\_utility::is_true(level.in_firingrange))) {
@@ -3873,7 +3866,7 @@ watchweaponinspection() {
     var_3 = maps\mp\gametypes\_class::isperkequipment(var_0);
     var_4 = getweaponbasename(var_0);
 
-    if(isdefined(var_4))
+    if(isDefined(var_4))
       var_5 = var_4 == "h1_augsmg_mp";
     else
       var_5 = 0;
@@ -3888,7 +3881,7 @@ watchweaponinspection() {
     self startweaponinspection();
     waitframe();
 
-    while (self isinspectingweapon())
+    while(self isinspectingweapon())
       waitframe();
   }
 }
@@ -3897,13 +3890,13 @@ watchmeleeweapon() {
   self endon("disconnect");
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     self waittill("melee_fired", var_0);
 
-    if(!isdefined(var_0)) {
+    if(!isDefined(var_0)) {
       continue;
     }
-    if(isdefined(self.meleeweaponbloodytime) && maps\mp\_utility::ismeleeweapon(var_0)) {
+    if(isDefined(self.meleeweaponbloodytime) && maps\mp\_utility::ismeleeweapon(var_0)) {
       var_1 = gettime() - self.meleeweaponbloodytime <= 100;
       var_2 = gettime() - self.meleeweaponbloodytime > 4000;
 
@@ -3927,7 +3920,7 @@ watchmeleeweapon() {
     maps\mp\gametypes\_persistence::statsetbuffered("accuracy", int(var_5));
     maps\mp\gametypes\_persistence::statsetbuffered("misses", int(var_3 - var_4));
 
-    if(isdefined(self.laststandparams) && self.laststandparams.laststandstarttime == gettime()) {
+    if(isDefined(self.laststandparams) && self.laststandparams.laststandstarttime == gettime()) {
       self.hits = 0;
       continue;
     }
@@ -3945,9 +3938,9 @@ playcleanmeleefx() {
   wait 0.05;
   var_0 = self getvieworigin();
   var_1 = self getplayerangles();
-  var_2 = anglestoforward(var_1);
-  var_3 = bullettrace(var_0, var_0 + var_2 * 200, 0);
+  var_2 = anglesToForward(var_1);
+  var_3 = bulletTrace(var_0, var_0 + var_2 * 200, 0);
 
   if(var_3["fraction"] < 1)
-    playfx(level.meleeweaponbloodflick, var_3["position"] - var_2 * 5, -1 * var_2);
+    playFX(level.meleeweaponbloodflick, var_3["position"] - var_2 * 5, -1 * var_2);
 }

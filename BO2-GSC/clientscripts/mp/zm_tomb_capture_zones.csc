@@ -215,7 +215,7 @@ _generator_play_spark_fx(localclientnumber) {
   a_tags = array("fx_side_exhaust01", "fx_frnt_exhaust", "fx_side_exhaust02", "j_piston_01");
 
   while(true) {
-    self.n_spark_fx[localclientnumber] = playfxontag(localclientnumber, level._effect["zone_capture_damage_spark"], self, random(a_tags));
+    self.n_spark_fx[localclientnumber] = playFXOnTag(localclientnumber, level._effect["zone_capture_damage_spark"], self, random(a_tags));
     wait(randomfloatrange(0.15, 0.35));
   }
 }
@@ -231,7 +231,7 @@ _generator_play_steam_fx(localclientnumber) {
   a_tags = array("fx_side_exhaust01", "fx_frnt_exhaust", "fx_side_exhaust02", "j_piston_01");
 
   while(true) {
-    self.n_steam_fx[localclientnumber] = playfxontag(localclientnumber, level._effect["zone_capture_damage_steam"], self, random(a_tags));
+    self.n_steam_fx[localclientnumber] = playFXOnTag(localclientnumber, level._effect["zone_capture_damage_steam"], self, random(a_tags));
     wait(randomfloatrange(0.25, 0.35));
   }
 }
@@ -257,19 +257,19 @@ generator_sound_enable(newval) {
     sndorigin = self gettagorigin("j_generator_pole");
     self.snddonutent = spawn(0, sndorigin, "script_origin");
     self.snddonutent linkto(self, "j_generator_pole");
-    playsound(0, "zmb_capturezone_donut_start", self.origin);
+    playSound(0, "zmb_capturezone_donut_start", self.origin);
     self.snddonutent thread snddemojumpmonitor();
   }
 
   pitch = scale_speed(0, 1, 0.8, 1.6, newval);
-  loop_id = self.snddonutent playloopsound("zmb_capturezone_rise", 1);
+  loop_id = self.snddonutent playLoopSound("zmb_capturezone_rise", 1);
   setsoundpitch(loop_id, pitch);
   self sndliquidvats(1);
 }
 
 generator_sound_disable() {
   if(isDefined(self.snddonut)) {
-    playsound(0, "zmb_capturezone_donut_stop", self.origin);
+    playSound(0, "zmb_capturezone_donut_stop", self.origin);
     self.snddonutent delete();
     self.snddonutent = undefined;
   }
@@ -279,8 +279,8 @@ generator_sound_disable() {
 
 generator_fx_enable(localclientnumber) {
   self generator_fx_disable(localclientnumber);
-  self.a_fx_power_on[localclientnumber] = playfxontag(localclientnumber, level._effect["capture_progression"], self, "j_generator_pole");
-  self.a_fx_exhaust[localclientnumber] = playfxontag(localclientnumber, level._effect["capture_exhaust"], self, "fx_rear_exhaust");
+  self.a_fx_power_on[localclientnumber] = playFXOnTag(localclientnumber, level._effect["capture_progression"], self, "j_generator_pole");
+  self.a_fx_exhaust[localclientnumber] = playFXOnTag(localclientnumber, level._effect["capture_exhaust"], self, "fx_rear_exhaust");
 }
 
 generator_fx_disable(localclientnumber) {
@@ -318,7 +318,7 @@ loop_generator_offline_light(localclientnumber) {
 
   while(true) {
     self generator_offline_light_disable(localclientnumber);
-    self.a_fx_light[localclientnumber] = playfxontag(localclientnumber, level._effect["zapper_light_notready"], self, "tag_pole_top");
+    self.a_fx_light[localclientnumber] = playFXOnTag(localclientnumber, level._effect["zapper_light_notready"], self, "tag_pole_top");
     wait 9;
   }
 }
@@ -367,7 +367,7 @@ monolith_crysal_glow(localclientnumber, oldval, newval, bnewent, binitialsnap, f
     level thread sndexploderloop(0, level.zone_capture_exploder_ids[fieldname]);
   } else {
     m_crystal thread crystal_flicker(localclientnumber, 0, 0.2, 0.7, 1.0, 0.05, 0.35);
-    m_crystal playloopsound("amb_monolith_glow");
+    m_crystal playLoopSound("amb_monolith_glow");
     clientscripts\mp\_fx::activate_exploder(level.zone_capture_exploder_ids[fieldname]);
     level thread sndexploderloop(1, level.zone_capture_exploder_ids[fieldname]);
   }
@@ -565,16 +565,16 @@ emergence_hole_callback(localclientnumber, oldval, newval, bnewent, binitialsnap
 
 emergence_hole_spawn(localclientnumber) {
   self emergence_hole_fx_stop(localclientnumber);
-  self.n_fx_spawn[localclientnumber] = playfxontag(localclientnumber, level._effect["tesla_elec_kill"], self, "tag_origin");
-  self.n_fx_loop[localclientnumber] = playfxontag(localclientnumber, level._effect["screecher_hole"], self, "tag_origin");
+  self.n_fx_spawn[localclientnumber] = playFXOnTag(localclientnumber, level._effect["tesla_elec_kill"], self, "tag_origin");
+  self.n_fx_loop[localclientnumber] = playFXOnTag(localclientnumber, level._effect["screecher_hole"], self, "tag_origin");
 
   if(!isDefined(self.sndent)) {
     self.sndent = spawn(localclientnumber, self.origin, "script_origin");
     self.sndent thread snddemojumpmonitor();
   }
 
-  self.sndent playloopsound("zmb_capturezone_portal_loop", 2);
-  playsound(localclientnumber, "zmb_capturezone_portal_start", self.origin);
+  self.sndent playLoopSound("zmb_capturezone_portal_loop", 2);
+  playSound(localclientnumber, "zmb_capturezone_portal_start", self.origin);
 }
 
 snddemojumpmonitor() {
@@ -586,8 +586,8 @@ snddemojumpmonitor() {
 emergence_hole_despawn(localclientnumber, b_do_despawn) {
   if(b_do_despawn) {
     b_delete_despawn_fx = 0;
-    playfxontag(localclientnumber, level._effect["tesla_elec_kill"], self, "tag_origin");
-    playsound(localclientnumber, "zmb_capturezone_portal_stop");
+    playFXOnTag(localclientnumber, level._effect["tesla_elec_kill"], self, "tag_origin");
+    playSound(localclientnumber, "zmb_capturezone_portal_stop");
   }
 
   return !b_do_despawn;
@@ -632,7 +632,7 @@ capture_zombie_riser_fx() {
     wait 0.0167;
 
   if(self._aitype == "zm_tomb_basic_zone_capture") {
-    s_info = spawnstruct();
+    s_info = spawnStruct();
     s_info.burst_fx = level._effect["zone_capture_zombie_spawn"];
     s_info.billow_fx = level._effect["zone_capture_zombie_spawn"];
     s_info.type = "none";
@@ -750,7 +750,7 @@ zone_capture_zombie_callback(localclientnum, oldval, newval, bnewent, binitialsn
 
 capture_zombie_torso_fx_enable(localclientnumber) {
   self capture_zombie_torso_fx_disable(localclientnumber);
-  self.a_fx_torso[localclientnumber] = playfxontag(localclientnumber, level._effect["zone_capture_zombie_torso_fx"], self, "J_Spine4");
+  self.a_fx_torso[localclientnumber] = playFXOnTag(localclientnumber, level._effect["zone_capture_zombie_torso_fx"], self, "J_Spine4");
 
   if(!isDefined(self.sndent)) {
     self.sndent = spawn(0, self.origin, "script_origin");
@@ -758,7 +758,7 @@ capture_zombie_torso_fx_enable(localclientnumber) {
     self thread snddeleteent(self.sndent);
   }
 
-  self.sndent playloopsound("zmb_capturezone_zombie_loop", 1);
+  self.sndent playLoopSound("zmb_capturezone_zombie_loop", 1);
 }
 
 snddeleteent(ent) {
@@ -852,5 +852,5 @@ perk_pipe_smoke_fx_disable(localclientnumber) {
 
 perk_pipe_smoke_fx_enable(localclientnumber) {
   self perk_pipe_smoke_fx_disable(localclientnumber);
-  self.a_fx[localclientnumber] = playfx(localclientnumber, level._effect["perk_pipe_smoke"], self.origin, anglestoforward(self.angles));
+  self.a_fx[localclientnumber] = playFX(localclientnumber, level._effect["perk_pipe_smoke"], self.origin, anglesToForward(self.angles));
 }

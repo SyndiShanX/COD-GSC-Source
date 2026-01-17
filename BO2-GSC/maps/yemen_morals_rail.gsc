@@ -298,7 +298,7 @@ do_rail_events(veh_vtol) {
 
 morals_rail_ground_spawner() {
   str_category = "morals_rail_dudes";
-  a_spawners = getentarray("morals_rail_ground_spawner", "targetname");
+  a_spawners = getEntArray("morals_rail_ground_spawner", "targetname");
   simple_spawn_script_delay(a_spawners, ::spawn_fn_ai_run_to_target, 1, str_category, 0, 0, 0);
   level waittill("rail_ready_exit");
   wait 5.2;
@@ -326,7 +326,7 @@ do_rail_ai() {
   spawn_manager_kill("morals_rail_upper_wave_2");
   spawn_manager_kill("morals_rail_upper_wave_1");
   wait 0.1;
-  a_ai_terrorists = getentarray("morals_rail_terrorist", "script_noteworthy");
+  a_ai_terrorists = getEntArray("morals_rail_terrorist", "script_noteworthy");
   maps\yemen_hijacked::kill_units(a_ai_terrorists);
 }
 
@@ -353,8 +353,8 @@ mr_get_magic_target_position(e_shooter, n_dist) {
   if(!isDefined(n_dist))
     n_dist = 5000;
 
-  v_aim_spot = e_shooter.origin + vectornormalize(anglestoforward(e_shooter.angles)) * n_dist;
-  a_trace = bullettrace(e_shooter.origin, v_aim_spot, 1, e_shooter);
+  v_aim_spot = e_shooter.origin + vectornormalize(anglesToForward(e_shooter.angles)) * n_dist;
+  a_trace = bulletTrace(e_shooter.origin, v_aim_spot, 1, e_shooter);
   return a_trace["position"];
 }
 
@@ -406,17 +406,17 @@ enemy_target_update() {
 
 _get_aim_model() {
   m_aim = spawn("script_model", (0, 0, 0));
-  m_aim setmodel("tag_origin");
+  m_aim setModel("tag_origin");
   m_aim.targetname = "m_enemy_target";
   return m_aim;
 }
 
 _get_target_position() {
-  v_eye_pos = level.player geteye();
+  v_eye_pos = level.player getEye();
   v_player_eye = level.player getplayerangles();
-  v_player_eye = vectornormalize(anglestoforward(v_player_eye));
+  v_player_eye = vectornormalize(anglesToForward(v_player_eye));
   v_trace_to_point = v_eye_pos + v_player_eye * 512;
-  a_trace = bullettrace(v_eye_pos, v_trace_to_point, 0, level.player);
+  a_trace = bulletTrace(v_eye_pos, v_trace_to_point, 0, level.player);
   return a_trace["position"];
 }
 
@@ -457,7 +457,7 @@ do_vtol_sounds(plr_vtol) {
   vtol_snd = spawn("script_origin", plr_vtol.origin);
   vtol_snd linkto(plr_vtol);
   wait 3.5;
-  vtol_snd playloopsound("veh_osp_steady", 1);
+  vtol_snd playLoopSound("veh_osp_steady", 1);
   wait 30;
   vtol_snd stoploopsound(2);
   vtol_snd delete();

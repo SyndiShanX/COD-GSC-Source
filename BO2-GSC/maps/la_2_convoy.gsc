@@ -26,7 +26,7 @@ main() {
 }
 
 convoy_setup() {
-  level.convoy = spawnstruct();
+  level.convoy = spawnStruct();
   level.convoy.vehicles = [];
   level.convoy.distance_warning_percentage = 0.75;
   level.convoy.distance_warning_percentage_default = level.convoy.distance_warning_percentage;
@@ -109,7 +109,7 @@ convoy_add_glow_shader() {
 
 police_sirens() {
   siren_ent = spawn("script_origin", self.origin);
-  siren_ent playloopsound("amb_cop_siren");
+  siren_ent playLoopSound("amb_cop_siren");
   siren_ent linkto(self);
   waittill_any("death", "delete", "kill_siren");
   siren_ent stoploopsound(1);
@@ -159,8 +159,7 @@ harper_fires_from_van() {
   ai_harper thread _harper_fires_at_targets();
 }
 
-_harper_fires_at_targets() {
-}
+_harper_fires_at_targets() {}
 
 _init_cougar_turret(str_type) {
   self endon("death");
@@ -209,7 +208,7 @@ convoy_setup_fakehealth() {
 }
 
 convoy_low_health_func() {
-  playfxontag(level._effect["cougar_damage_smoke"], self, "tag_origin");
+  playFXOnTag(level._effect["cougar_damage_smoke"], self, "tag_origin");
 
   if(self == level.convoy.vh_potus)
     level notify("POTUS_health_low");
@@ -478,13 +477,12 @@ g20_2_death() {
 }
 
 potus_death() {
-  if(flag("trenchruns_start") && !flag("eject_sequence_started")) {
-  }
+  if(flag("trenchruns_start") && !flag("eject_sequence_started")) {}
 
   wait 1;
 
   if(level.skipto_point != "f35_eject") {
-    setdvar("ui_deadquote", & "LA_2_OBJ_PROTECT_FAIL");
+    setdvar("ui_deadquote", &"LA_2_OBJ_PROTECT_FAIL");
     missionfailed();
   }
 }

@@ -25,7 +25,7 @@
 #namespace load;
 
 function autoexec __init__sytem__() {
-  system::register("load", & __init__, undefined, undefined);
+  system::register("load", &__init__, undefined, undefined);
 }
 
 function autoexec first_frame() {
@@ -56,7 +56,7 @@ function __init__() {
   level flag::init("all_players_connected");
   level flag::init("all_players_spawned");
   level flag::init("first_player_spawned");
-  if(!isdefined(level.timeofday)) {
+  if(!isDefined(level.timeofday)) {
     level.timeofday = "day";
   }
   if(getdvarstring("scr_RequiredMapAspectratio") == "") {
@@ -68,10 +68,10 @@ function __init__() {
   level thread all_players_spawned();
   level thread keep_time();
   level thread count_network_frames();
-  callback::on_spawned( & on_spawned);
+  callback::on_spawned(&on_spawned);
   self thread playerdamagerumble();
-  array::thread_all(getentarray("water", "targetname"), & water_think);
-  array::thread_all_ents(getentarray("badplace", "targetname"), & badplace_think);
+  array::thread_all(getEntArray("water", "targetname"), &water_think);
+  array::thread_all_ents(getEntArray("badplace", "targetname"), &badplace_think);
   weapon_ammo();
   set_objective_text_colors();
   link_ents();
@@ -87,21 +87,21 @@ function init_push_out_threshold() {
 
 function count_network_frames() {
   level.network_frame = 0;
-  while (true) {
+  while(true) {
     util::wait_network_frame();
     level.network_frame++;
   }
 }
 
 function keep_time() {
-  while (true) {
+  while(true) {
     level.time = gettime();
     wait(0.05);
   }
 }
 
 function add_cleanup_msg(msg) {
-  if(!isdefined(level.cleanup_msgs)) {
+  if(!isDefined(level.cleanup_msgs)) {
     level.cleanup_msgs = [];
   } else if(!isarray(level.cleanup_msgs)) {
     level.cleanup_msgs = array(level.cleanup_msgs);
@@ -120,7 +120,7 @@ function t7_cleanup_output() {
 }
 
 function level_notify_listener() {
-  while (true) {
+  while(true) {
     val = getdvarstring("");
     if(val != "") {
       toks = strtok(val, "");
@@ -140,7 +140,7 @@ function level_notify_listener() {
 }
 
 function client_notify_listener() {
-  while (true) {
+  while(true) {
     val = getdvarstring("");
     if(val != "") {
       util::clientnotify(val);
@@ -151,7 +151,7 @@ function client_notify_listener() {
 }
 
 function load_checkpoint_on_notify() {
-  while (true) {
+  while(true) {
     level waittill("save");
     checkpointcreate();
     checkpointcommit();
@@ -159,33 +159,33 @@ function load_checkpoint_on_notify() {
 }
 
 function save_checkpoint_on_notify() {
-  while (true) {
+  while(true) {
     level waittill("load");
     checkpointrestore();
   }
 }
 
 function weapon_ammo() {
-  ents = getentarray();
-  for (i = 0; i < ents.size; i++) {
-    if(isdefined(ents[i].classname) && getsubstr(ents[i].classname, 0, 7) == "weapon_") {
+  ents = getEntArray();
+  for(i = 0; i < ents.size; i++) {
+    if(isDefined(ents[i].classname) && getsubstr(ents[i].classname, 0, 7) == "weapon_") {
       weap = ents[i];
       change_ammo = 0;
       clip = undefined;
       extra = undefined;
-      if(isdefined(weap.script_ammo_clip)) {
+      if(isDefined(weap.script_ammo_clip)) {
         clip = weap.script_ammo_clip;
         change_ammo = 1;
       }
-      if(isdefined(weap.script_ammo_extra)) {
+      if(isDefined(weap.script_ammo_extra)) {
         extra = weap.script_ammo_extra;
         change_ammo = 1;
       }
       if(change_ammo) {
-        if(!isdefined(clip)) {
+        if(!isDefined(clip)) {
           assertmsg(((("" + weap.classname) + "") + weap.origin) + "");
         }
-        if(!isdefined(extra)) {
+        if(!isDefined(extra)) {
           assertmsg(((("" + weap.classname) + "") + weap.origin) + "");
         }
         weap itemweaponsetammo(clip, extra);
@@ -196,7 +196,7 @@ function weapon_ammo() {
 }
 
 function badplace_think(badplace) {
-  if(!isdefined(level.badplaces)) {
+  if(!isDefined(level.badplaces)) {
     level.badplaces = 0;
   }
   level.badplaces++;
@@ -204,9 +204,9 @@ function badplace_think(badplace) {
 }
 
 function playerdamagerumble() {
-  while (true) {
+  while(true) {
     self waittill("damage", amount);
-    if(isdefined(self.specialdamage)) {
+    if(isDefined(self.specialdamage)) {
       continue;
     }
     self playrumbleonentity("damage_heavy");
@@ -214,25 +214,25 @@ function playerdamagerumble() {
 }
 
 function map_is_early_in_the_game() {
-  if(isdefined(level.testmap)) {
+  if(isDefined(level.testmap)) {
     return 1;
   }
-  if(!isdefined(level.early_level[level.script])) {
+  if(!isDefined(level.early_level[level.script])) {
     level.early_level[level.script] = 0;
   }
-  return isdefined(level.early_level[level.script]) && level.early_level[level.script];
+  return isDefined(level.early_level[level.script]) && level.early_level[level.script];
 }
 
 function player_throwgrenade_timer() {
   self endon("death");
   self endon("disconnect");
   self.lastgrenadetime = 0;
-  while (true) {
-    while (!self isthrowinggrenade()) {
+  while(true) {
+    while(!self isthrowinggrenade()) {
       wait(0.05);
     }
     self.lastgrenadetime = gettime();
-    while (self isthrowinggrenade()) {
+    while(self isthrowinggrenade()) {
       wait(0.05);
     }
   }
@@ -254,19 +254,19 @@ function player_special_death_hint() {
     }
   }
   if(cause == "MOD_EXPLOSIVE") {
-    if(isdefined(attacker) && (attacker.classname == "script_vehicle" || isdefined(attacker.create_fake_vehicle_damage))) {
+    if(isDefined(attacker) && (attacker.classname == "script_vehicle" || isDefined(attacker.create_fake_vehicle_damage))) {
       level notify("new_quote_string");
       setdvar("ui_deadquote", "@SCRIPT_EXPLODING_VEHICLE_DEATH");
       self thread explosive_vehice_death_indicator_hudelement();
       return;
     }
-    if(isdefined(inflicter) && isdefined(inflicter.destructibledef)) {
+    if(isDefined(inflicter) && isDefined(inflicter.destructibledef)) {
       if(issubstr(inflicter.destructibledef, "barrel_explosive")) {
         level notify("new_quote_string");
         setdvar("ui_deadquote", "@SCRIPT_EXPLODING_BARREL_DEATH");
         return;
       }
-      if(isdefined(inflicter.destructiblecar) && inflicter.destructiblecar) {
+      if(isDefined(inflicter.destructiblecar) && inflicter.destructiblecar) {
         level notify("new_quote_string");
         setdvar("ui_deadquote", "@SCRIPT_EXPLODING_VEHICLE_DEATH");
         self thread explosive_vehice_death_indicator_hudelement();
@@ -310,7 +310,7 @@ function grenade_death_text_hudelement(textline1, textline2) {
   fontelem fadeovertime(1);
   fontelem.alpha = 1;
   fontelem.hidewheninmenu = 1;
-  if(isdefined(textline2)) {
+  if(isDefined(textline2)) {
     fontelem = newhudelem();
     fontelem.elemtype = "font";
     fontelem.font = "default";
@@ -488,12 +488,12 @@ function grenade_death_indicator_hudelement_cleanup(hudelemicon, hudelempointer)
 function special_death_indicator_hudelement(shader, iwidth, iheight, fdelay = 0.5, x, y) {
   wait(fdelay);
   overlay = newclienthudelem(self);
-  if(isdefined(x)) {
+  if(isDefined(x)) {
     overlay.x = x;
   } else {
     overlay.x = 0;
   }
-  if(isdefined(y)) {
+  if(isDefined(y)) {
     overlay.y = y;
   } else {
     overlay.y = 40;
@@ -518,18 +518,18 @@ function special_death_death_indicator_hudelement_cleanup(overlay) {
 }
 
 function water_think() {
-  assert(isdefined(self.target));
+  assert(isDefined(self.target));
   targeted = getent(self.target, "targetname");
-  assert(isdefined(targeted));
+  assert(isDefined(targeted));
   waterheight = targeted.origin[2];
   targeted = undefined;
   level.depth_allow_prone = 8;
   level.depth_allow_crouch = 33;
   level.depth_allow_stand = 50;
-  while (true) {
+  while(true) {
     wait(0.05);
     players = getplayers();
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       if(players[i].inwater) {
         players[i] allowprone(1);
         players[i] allowcrouch(1);
@@ -540,10 +540,10 @@ function water_think() {
     if(!isplayer(other)) {
       continue;
     }
-    while (true) {
+    while(true) {
       players = getplayers();
       players_in_water_count = 0;
-      for (i = 0; i < players.size; i++) {
+      for(i = 0; i < players.size; i++) {
         if(players[i] istouching(self)) {
           players_in_water_count++;
           players[i].inwater = 1;
@@ -602,16 +602,16 @@ function indicate_start(start) {
 }
 
 function calculate_map_center() {
-  if(!isdefined(level.mapcenter)) {
+  if(!isDefined(level.mapcenter)) {
     nodes = getallnodes();
-    if(isdefined(nodes[0])) {
+    if(isDefined(nodes[0])) {
       level.nodesmins = nodes[0].origin;
       level.nodesmaxs = nodes[0].origin;
     } else {
       level.nodesmins = (0, 0, 0);
       level.nodesmaxs = (0, 0, 0);
     }
-    for (index = 0; index < nodes.size; index++) {
+    for(index = 0; index < nodes.size; index++) {
       if(nodes[index].type == "BAD NODE") {
         println("", nodes[index].origin);
         continue;
@@ -642,7 +642,7 @@ function lerp_trigger_dvar_value(trigger, dvar, value, time) {
   steps = time * 20;
   curr_value = getdvarfloat(dvar);
   diff = (curr_value - value) / steps;
-  for (i = 0; i < steps; i++) {
+  for(i = 0; i < steps; i++) {
     curr_value = curr_value - diff;
     setsaveddvar(dvar, curr_value);
     wait(0.05);
@@ -667,14 +667,14 @@ function all_players_spawned() {
   level flag::wait_till("all_players_connected");
   waittillframeend();
   level.host = util::gethostplayer();
-  while (true) {
+  while(true) {
     if(getnumconnectedplayers() == 0) {
       wait(0.05);
       continue;
     }
     players = getplayers();
     count = 0;
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       if(players[i].sessionstate == "playing") {
         count++;
       }
@@ -697,13 +697,13 @@ function shock_onpain() {
   if(getdvarstring("blurpain") == "") {
     setdvar("blurpain", "on");
   }
-  while (true) {
+  while(true) {
     oldhealth = self.health;
     self waittill("damage", damage, attacker, direction_vec, point, mod);
-    if(isdefined(level.shock_onpain) && !level.shock_onpain) {
+    if(isDefined(level.shock_onpain) && !level.shock_onpain) {
       continue;
     }
-    if(isdefined(self.shock_onpain) && !self.shock_onpain) {
+    if(isDefined(self.shock_onpain) && !self.shock_onpain) {
       continue;
     }
     if(self.health < 1) {
@@ -742,13 +742,13 @@ function shock_onexplosion(damage) {
 
 function shock_ondeath() {
   self waittill("death");
-  if(isdefined(level.shock_ondeath) && !level.shock_ondeath) {
+  if(isDefined(level.shock_ondeath) && !level.shock_ondeath) {
     return;
   }
-  if(isdefined(self.shock_ondeath) && !self.shock_ondeath) {
+  if(isDefined(self.shock_ondeath) && !self.shock_ondeath) {
     return;
   }
-  if(isdefined(self.specialdeath)) {
+  if(isDefined(self.specialdeath)) {
     return;
   }
   if(getdvarstring("r_texturebits") == "16") {
@@ -757,23 +757,23 @@ function shock_ondeath() {
 }
 
 function on_spawned() {
-  if(!isdefined(self.player_inited) || !self.player_inited) {
+  if(!isDefined(self.player_inited) || !self.player_inited) {
     if(sessionmodeiscampaigngame()) {
       self thread shock_ondeath();
       self thread shock_onpain();
     }
     wait(0.05);
-    if(isdefined(self)) {
+    if(isDefined(self)) {
       self.player_inited = 1;
     }
   }
 }
 
 function link_ents() {
-  foreach(ent in getentarray()) {
-    if(isdefined(ent.linkto)) {
+  foreach(ent in getEntArray()) {
+    if(isDefined(ent.linkto)) {
       e_link = getent(ent.linkto, "linkname");
-      if(isdefined(e_link)) {
+      if(isDefined(e_link)) {
         ent enablelinkto();
         ent linkto(e_link);
       }

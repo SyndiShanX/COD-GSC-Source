@@ -5,11 +5,9 @@
 
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\lui_shared;
-
 #namespace ct_crash_kill_remaining_enemy;
 
 class cct_crash_kill_remaining_enemy: cluielem {
-
   function close(player) {
     cluielem::close_luielem(player);
   }

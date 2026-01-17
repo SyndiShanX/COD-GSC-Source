@@ -13,15 +13,15 @@
 
 init() {
   level.remoteweapons = [];
-  level.remoteweapons["killstreak_remote_turret_mp"] = spawnstruct();
-  level.remoteweapons["killstreak_remote_turret_mp"].hintstring = & "MP_REMOTE_USE_TURRET";
+  level.remoteweapons["killstreak_remote_turret_mp"] = spawnStruct();
+  level.remoteweapons["killstreak_remote_turret_mp"].hintstring = &"MP_REMOTE_USE_TURRET";
   level.remoteweapons["killstreak_remote_turret_mp"].usecallback = maps\mp\killstreaks\_turret_killstreak::startturretremotecontrol;
   level.remoteweapons["killstreak_remote_turret_mp"].endusecallback = maps\mp\killstreaks\_turret_killstreak::endremoteturret;
-  level.remoteweapons["killstreak_ai_tank_mp"] = spawnstruct();
-  level.remoteweapons["killstreak_ai_tank_mp"].hintstring = & "MP_REMOTE_USE_TANK";
+  level.remoteweapons["killstreak_ai_tank_mp"] = spawnStruct();
+  level.remoteweapons["killstreak_ai_tank_mp"].hintstring = &"MP_REMOTE_USE_TANK";
   level.remoteweapons["killstreak_ai_tank_mp"].usecallback = maps\mp\killstreaks\_ai_tank::starttankremotecontrol;
   level.remoteweapons["killstreak_ai_tank_mp"].endusecallback = maps\mp\killstreaks\_ai_tank::endtankremotecontrol;
-  level.remoteexithint = & "MP_REMOTE_EXIT";
+  level.remoteexithint = &"MP_REMOTE_EXIT";
   level thread onplayerconnect();
 }
 

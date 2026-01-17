@@ -25,22 +25,22 @@ function is_killstreak_weapon(weapon) {
 }
 
 function is_weapon_associated_with_killstreak(weapon) {
-  return isdefined(level.killstreakweapons) && isdefined(level.killstreakweapons[weapon]);
+  return isDefined(level.killstreakweapons) && isDefined(level.killstreakweapons[weapon]);
 }
 
 function switch_to_last_non_killstreak_weapon(immediate, awayfromball) {
   ball = getweapon("ball");
-  if(isdefined(ball) && self hasweapon(ball) && (!(isdefined(awayfromball) && awayfromball))) {
+  if(isDefined(ball) && self hasweapon(ball) && (!(isDefined(awayfromball) && awayfromball))) {
     self switchtoweaponimmediate(ball);
     self disableweaponcycling();
     self disableoffhandweapons();
   } else {
-    if(isdefined(self.laststand) && self.laststand) {
-      if(isdefined(self.laststandpistol) && self hasweapon(self.laststandpistol)) {
+    if(isDefined(self.laststand) && self.laststand) {
+      if(isDefined(self.laststandpistol) && self hasweapon(self.laststandpistol)) {
         self switchtoweapon(self.laststandpistol);
       }
     } else {
-      if(isdefined(self.lastnonkillstreakweapon) && self hasweapon(self.lastnonkillstreakweapon)) {
+      if(isDefined(self.lastnonkillstreakweapon) && self hasweapon(self.lastnonkillstreakweapon)) {
         if(self.lastnonkillstreakweapon.isheroweapon) {
           if(self.lastnonkillstreakweapon.gadget_heroversion_2_0) {
             if(self.lastnonkillstreakweapon.isgadget && self getammocount(self.lastnonkillstreakweapon) > 0) {
@@ -53,20 +53,20 @@ function switch_to_last_non_killstreak_weapon(immediate, awayfromball) {
           } else if(self getammocount(self.lastnonkillstreakweapon) > 0) {
             return self switchtoweapon(self.lastnonkillstreakweapon);
           }
-          if(isdefined(awayfromball) && awayfromball && isdefined(self.lastdroppableweapon) && self hasweapon(self.lastdroppableweapon)) {
+          if(isDefined(awayfromball) && awayfromball && isDefined(self.lastdroppableweapon) && self hasweapon(self.lastdroppableweapon)) {
             self switchtoweapon(self.lastdroppableweapon);
           } else {
             self switchtoweapon();
           }
           return 1;
         }
-        if(isdefined(immediate) && immediate) {
+        if(isDefined(immediate) && immediate) {
           self switchtoweaponimmediate(self.lastnonkillstreakweapon);
         } else {
           self switchtoweapon(self.lastnonkillstreakweapon);
         }
       } else {
-        if(isdefined(self.lastdroppableweapon) && self hasweapon(self.lastdroppableweapon)) {
+        if(isDefined(self.lastdroppableweapon) && self hasweapon(self.lastdroppableweapon)) {
           self switchtoweapon(self.lastdroppableweapon);
         } else {
           return 0;
@@ -78,10 +78,10 @@ function switch_to_last_non_killstreak_weapon(immediate, awayfromball) {
 }
 
 function get_killstreak_weapon(killstreak) {
-  if(!isdefined(killstreak)) {
+  if(!isDefined(killstreak)) {
     return level.weaponnone;
   }
-  assert(isdefined(level.killstreaks[killstreak]));
+  assert(isDefined(level.killstreaks[killstreak]));
   return level.killstreaks[killstreak].weapon;
 }
 
@@ -97,13 +97,13 @@ function isheldinventorykillstreakweapon(killstreakweapon) {
 
 function waitfortimecheck(duration, callback, endcondition1, endcondition2, endcondition3) {
   self endon("hacked");
-  if(isdefined(endcondition1)) {
+  if(isDefined(endcondition1)) {
     self endon(endcondition1);
   }
-  if(isdefined(endcondition2)) {
+  if(isDefined(endcondition2)) {
     self endon(endcondition2);
   }
-  if(isdefined(endcondition3)) {
+  if(isDefined(endcondition3)) {
     self endon(endcondition3);
   }
   hostmigration::migrationawarewait(duration);
@@ -112,7 +112,7 @@ function waitfortimecheck(duration, callback, endcondition1, endcondition2, endc
 }
 
 function emp_isempd() {
-  if(isdefined(level.enemyempactivefunc)) {
+  if(isDefined(level.enemyempactivefunc)) {
     return self[[level.enemyempactivefunc]]();
   }
   return 0;
@@ -122,10 +122,8 @@ function waittillemp(onempdcallback, arg) {
   self endon("death");
   self endon("delete");
   self waittill("emp_deployed", attacker);
-  if(isdefined(onempdcallback)) {
-    [
-      [onempdcallback]
-    ](attacker, arg);
+  if(isDefined(onempdcallback)) {
+    [[onempdcallback]](attacker, arg);
   }
 }
 
@@ -150,24 +148,24 @@ function destroyotherteamsequipment(attacker, weapon) {
 }
 
 function destroyequipment(attacker, team, weapon) {
-  for (i = 0; i < level.missileentities.size; i++) {
+  for(i = 0; i < level.missileentities.size; i++) {
     item = level.missileentities[i];
-    if(!isdefined(item.weapon)) {
+    if(!isDefined(item.weapon)) {
       continue;
     }
-    if(!isdefined(item.owner)) {
+    if(!isDefined(item.owner)) {
       continue;
     }
-    if(isdefined(team) && item.owner.team != team) {
+    if(isDefined(team) && item.owner.team != team) {
       continue;
     } else if(item.owner == attacker) {
       continue;
     }
-    if(!item.weapon.isequipment && (!(isdefined(item.destroyedbyemp) && item.destroyedbyemp))) {
+    if(!item.weapon.isequipment && (!(isDefined(item.destroyedbyemp) && item.destroyedbyemp))) {
       continue;
     }
     watcher = item.owner weaponobjects::getwatcherforweapon(item.weapon);
-    if(!isdefined(watcher)) {
+    if(!isDefined(watcher)) {
       continue;
     }
     watcher thread weaponobjects::waitanddetonate(item, 0, attacker, weapon);
@@ -175,9 +173,9 @@ function destroyequipment(attacker, team, weapon) {
 }
 
 function destroytacticalinsertions(attacker, victimteam) {
-  for (i = 0; i < level.players.size; i++) {
+  for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
-    if(!isdefined(player.tacticalinsertion)) {
+    if(!isDefined(player.tacticalinsertion)) {
       continue;
     }
     if(level.teambased && player.team != victimteam) {
@@ -201,13 +199,13 @@ function destroyotherteamsactivevehicles(attacker, weapon) {
 }
 
 function destroyneutralgameplayvehicles(attacker, weapon) {
-  script_vehicles = getentarray("script_vehicle", "classname");
+  script_vehicles = getEntArray("script_vehicle", "classname");
   foreach(vehicle in script_vehicles) {
-    if(isvehicle(vehicle) && (!isdefined(vehicle.team) || vehicle.team == "neutral")) {
-      if(isdefined(vehicle.detonateviaemp) && (isdefined(weapon.isempkillstreak) && weapon.isempkillstreak)) {
+    if(isvehicle(vehicle) && (!isDefined(vehicle.team) || vehicle.team == "neutral")) {
+      if(isDefined(vehicle.detonateviaemp) && (isDefined(weapon.isempkillstreak) && weapon.isempkillstreak)) {
         vehicle[[vehicle.detonateviaemp]](attacker, weapon);
       }
-      if(isdefined(vehicle.archetype)) {
+      if(isDefined(vehicle.archetype)) {
         if(vehicle.archetype == "siegebot") {
           vehicle dodamage(vehicle.health + 1, vehicle.origin, attacker, attacker, "", "MOD_EXPLOSIVE", 0, weapon);
         }
@@ -219,19 +217,19 @@ function destroyneutralgameplayvehicles(attacker, weapon) {
 function destroyactivevehicles(attacker, team, weapon) {
   targets = target_getarray();
   destroyentities(targets, attacker, team, weapon);
-  ai_tanks = getentarray("talon", "targetname");
+  ai_tanks = getEntArray("talon", "targetname");
   destroyentities(ai_tanks, attacker, team, weapon);
-  remotemissiles = getentarray("remote_missile", "targetname");
+  remotemissiles = getEntArray("remote_missile", "targetname");
   destroyentities(remotemissiles, attacker, team, weapon);
-  remotedrone = getentarray("remote_drone", "targetname");
+  remotedrone = getEntArray("remote_drone", "targetname");
   destroyentities(remotedrone, attacker, team, weapon);
-  script_vehicles = getentarray("script_vehicle", "classname");
+  script_vehicles = getEntArray("script_vehicle", "classname");
   foreach(vehicle in script_vehicles) {
-    if(isdefined(team) && vehicle.team == team && isvehicle(vehicle)) {
-      if(isdefined(vehicle.detonateviaemp) && (isdefined(weapon.isempkillstreak) && weapon.isempkillstreak)) {
+    if(isDefined(team) && vehicle.team == team && isvehicle(vehicle)) {
+      if(isDefined(vehicle.detonateviaemp) && (isDefined(weapon.isempkillstreak) && weapon.isempkillstreak)) {
         vehicle[[vehicle.detonateviaemp]](attacker, weapon);
       }
-      if(isdefined(vehicle.archetype)) {
+      if(isDefined(vehicle.archetype)) {
         if(vehicle.archetype == "raps") {
           vehicle raps::detonate(attacker);
           continue;
@@ -242,9 +240,9 @@ function destroyactivevehicles(attacker, team, weapon) {
       }
     }
   }
-  planemortars = getentarray("plane_mortar", "targetname");
+  planemortars = getEntArray("plane_mortar", "targetname");
   foreach(planemortar in planemortars) {
-    if(isdefined(team) && isdefined(planemortar.team)) {
+    if(isDefined(team) && isDefined(planemortar.team)) {
       if(planemortar.team != team) {
         continue;
       }
@@ -253,9 +251,9 @@ function destroyactivevehicles(attacker, team, weapon) {
     }
     planemortar notify("emp_deployed", attacker);
   }
-  dronestrikes = getentarray("drone_strike", "targetname");
+  dronestrikes = getEntArray("drone_strike", "targetname");
   foreach(dronestrike in dronestrikes) {
-    if(isdefined(team) && isdefined(dronestrike.team)) {
+    if(isDefined(team) && isDefined(dronestrike.team)) {
       if(dronestrike.team != team) {
         continue;
       }
@@ -264,9 +262,9 @@ function destroyactivevehicles(attacker, team, weapon) {
     }
     dronestrike notify("emp_deployed", attacker);
   }
-  counteruavs = getentarray("counteruav", "targetname");
+  counteruavs = getEntArray("counteruav", "targetname");
   foreach(counteruav in counteruavs) {
-    if(isdefined(team) && isdefined(counteruav.team)) {
+    if(isDefined(team) && isDefined(counteruav.team)) {
       if(counteruav.team != team) {
         continue;
       }
@@ -275,9 +273,9 @@ function destroyactivevehicles(attacker, team, weapon) {
     }
     counteruav notify("emp_deployed", attacker);
   }
-  satellites = getentarray("satellite", "targetname");
+  satellites = getEntArray("satellite", "targetname");
   foreach(satellite in satellites) {
-    if(isdefined(team) && isdefined(satellite.team)) {
+    if(isDefined(team) && isDefined(satellite.team)) {
       if(satellite.team != team) {
         continue;
       }
@@ -288,15 +286,15 @@ function destroyactivevehicles(attacker, team, weapon) {
   }
   robots = getaiarchetypearray("robot");
   foreach(robot in robots) {
-    if(robot.allowdeath !== 0 && robot.magic_bullet_shield !== 1 && isdefined(team) && robot.team == team) {
-      if(isdefined(attacker) && (!isdefined(robot.owner) || robot.owner util::isenemyplayer(attacker))) {
+    if(robot.allowdeath !== 0 && robot.magic_bullet_shield !== 1 && isDefined(team) && robot.team == team) {
+      if(isDefined(attacker) && (!isDefined(robot.owner) || robot.owner util::isenemyplayer(attacker))) {
         scoreevents::processscoreevent("destroyed_combat_robot", attacker, robot.owner, weapon);
-        luinotifyevent(&"player_callout", 2, & "KILLSTREAK_DESTROYED_COMBAT_ROBOT", attacker.entnum);
+        luinotifyevent(&"player_callout", 2, &"KILLSTREAK_DESTROYED_COMBAT_ROBOT", attacker.entnum);
       }
       robot kill();
     }
   }
-  if(isdefined(level.missile_swarm_owner)) {
+  if(isDefined(level.missile_swarm_owner)) {
     if(level.missile_swarm_owner util::isenemyplayer(attacker)) {
       level.missile_swarm_owner notify("emp_destroyed_missile_swarm", attacker);
     }
@@ -312,11 +310,11 @@ function destroyentities(entities, attacker, team, weapon) {
   tagname = "";
   partname = "";
   foreach(entity in entities) {
-    if(isdefined(team) && isdefined(entity.team)) {
+    if(isDefined(team) && isDefined(entity.team)) {
       if(entity.team != team) {
         continue;
       }
-    } else if(isdefined(entity.owner) && entity.owner == attacker) {
+    } else if(isDefined(entity.owner) && entity.owner == attacker) {
       continue;
     }
     entity notify("damage", damage, attacker, direction_vec, point, meansofdeath, tagname, modelname, partname, weapon);

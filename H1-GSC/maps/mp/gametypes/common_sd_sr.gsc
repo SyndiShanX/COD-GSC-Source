@@ -17,7 +17,7 @@ updategametypedvars() {
 }
 
 isplayeroutsideofanybombsite(var_0) {
-  if(isdefined(level.bombzones)) {
+  if(isDefined(level.bombzones)) {
     foreach(var_2 in level.bombzones) {
       if(distancesquared(self.origin, var_2.trigger.origin) < 4096)
         return 0;
@@ -65,7 +65,7 @@ onpickup(var_0) {
   else
     var_0.objective = 2;
 
-  if(isdefined(level.carrierloadouts) && isdefined(level.carrierloadouts[var_0.team])) {
+  if(isDefined(level.carrierloadouts) && isDefined(level.carrierloadouts[var_0.team])) {
     var_0.isrespawningwithbombcarrierclass = 1;
     var_0 thread maps\mp\_utility::applycarrierclass();
   }
@@ -82,14 +82,14 @@ bombs() {
   level.bombexploded = 0;
   var_0 = getent("sd_bomb_pickup_trig", "targetname");
 
-  if(!isdefined(var_0)) {
+  if(!isDefined(var_0)) {
     common_scripts\utility::error("No sd_bomb_pickup_trig trigger found in map.");
     return;
   }
 
   var_1 = maps\mp\gametypes\common_bomb_gameobject::getcarrybombvisuals("sd_bomb");
 
-  if(!isdefined(var_1)) {
+  if(!isDefined(var_1)) {
     common_scripts\utility::error("No sd_bomb script_model found in map.");
     return;
   }
@@ -111,14 +111,14 @@ bombs() {
   }
 
   level.bombzones = [];
-  var_2 = getentarray("bombzone", "targetname");
-  var_3 = getentarray("bombzone_augmented", "targetname");
+  var_2 = getEntArray("bombzone", "targetname");
+  var_3 = getEntArray("bombzone_augmented", "targetname");
 
   if(maps\mp\_utility::isaugmentedgamemode()) {
-    for (var_4 = 0; var_4 < var_3.size; var_4++) {
+    for(var_4 = 0; var_4 < var_3.size; var_4++) {
       var_5 = var_3[var_4].script_label;
 
-      for (var_6 = 0; var_6 < var_2.size; var_6++) {
+      for(var_6 = 0; var_6 < var_2.size; var_6++) {
         if(var_2[var_6].script_label == var_5) {
           removebombzone(var_2[var_6]);
           break;
@@ -126,15 +126,15 @@ bombs() {
       }
     }
   } else {
-    for (var_7 = 0; var_7 < var_3.size; var_7++)
+    for(var_7 = 0; var_7 < var_3.size; var_7++)
       removebombzone(var_3[var_7]);
   }
 
   var_2 = common_scripts\utility::array_combine(var_2, var_3);
 
-  for (var_7 = 0; var_7 < var_2.size; var_7++) {
+  for(var_7 = 0; var_7 < var_2.size; var_7++) {
     var_0 = var_2[var_7];
-    var_1 = getentarray(var_2[var_7].target, "targetname");
+    var_1 = getEntArray(var_2[var_7].target, "targetname");
     var_8 = undefined;
 
     if(!level.multibomb)
@@ -153,10 +153,10 @@ bombs() {
     var_9.bombdefusetrig usetriggertouchcheckstance(1);
   }
 
-  for (var_7 = 0; var_7 < level.bombzones.size; var_7++) {
+  for(var_7 = 0; var_7 < level.bombzones.size; var_7++) {
     var_10 = [];
 
-    for (var_11 = 0; var_11 < level.bombzones.size; var_11++) {
+    for(var_11 = 0; var_11 < level.bombzones.size; var_11++) {
       if(var_11 != var_7)
         var_10[var_10.size] = level.bombzones[var_11];
     }
@@ -171,31 +171,31 @@ shouldstreamcarrierclasstoplayer(var_0, var_1) {
   if(level.bombplanted)
     return 0;
 
-  if(isdefined(var_0.carrier) && var_0.carrier == var_1)
+  if(isDefined(var_0.carrier) && var_0.carrier == var_1)
     return 0;
 
   return 1;
 }
 
 removebombzone(var_0) {
-  var_1 = getentarray("script_brushmodel", "classname");
+  var_1 = getEntArray("script_brushmodel", "classname");
 
   foreach(var_3 in var_1) {
-    if(!isdefined(var_3.script_gameobjectname) || var_3.script_gameobjectname != "bombzone") {
+    if(!isDefined(var_3.script_gameobjectname) || var_3.script_gameobjectname != "bombzone") {
       continue;
     }
-    if(!isdefined(var_3.script_label)) {
+    if(!isDefined(var_3.script_label)) {
       continue;
     }
     if(issubstr(var_3.script_label, var_0.script_label) && issubstr(var_3.script_label, var_0.targetname))
       var_3 delete();
   }
 
-  var_5 = getentarray(var_0.target, "targetname");
+  var_5 = getEntArray(var_0.target, "targetname");
 
   foreach(var_7 in var_5) {
-    if(isdefined(var_7.target)) {
-      var_8 = getentarray(var_7.target, "targetname");
+    if(isDefined(var_7.target)) {
+      var_8 = getEntArray(var_7.target, "targetname");
 
       foreach(var_10 in var_8)
       var_10 delete();
@@ -211,7 +211,7 @@ onuseplantobject(var_0) {
   if(!maps\mp\gametypes\_gameobjects::isfriendlyteam(var_0.pers["team"])) {
     level thread bombplanted(self, var_0);
 
-    for (var_1 = 0; var_1 < level.bombzones.size; var_1++) {
+    for(var_1 = 0; var_1 < level.bombzones.size; var_1++) {
       if(level.bombzones[var_1] == self) {
         var_2 = level.bombzones[var_1] maps\mp\gametypes\_gameobjects::getlabel();
         maps\mp\_utility::setmlgicons(level.bombzones[var_1], "waypoint_esports_snd_planted" + var_2);
@@ -224,7 +224,7 @@ onuseplantobject(var_0) {
 
     var_0 maps\mp\gametypes\common_bomb_gameobject::onplayerplantbomb(1, game["attackers"], game["defenders"]);
 
-    if(isdefined(level.carrierloadouts) && isdefined(level.carrierloadouts[var_0.team])) {
+    if(isDefined(level.carrierloadouts) && isDefined(level.carrierloadouts[var_0.team])) {
       var_0 thread maps\mp\_utility::removecarrierclass();
       return;
     }
@@ -239,7 +239,7 @@ onbeginuse(var_0) {
     maps\mp\gametypes\common_bomb_gameobject::onbeginplantbomb(var_0);
 
     if(level.multibomb) {
-      for (var_1 = 0; var_1 < self.otherbombzones.size; var_1++) {
+      for(var_1 = 0; var_1 < self.otherbombzones.size; var_1++) {
         self.otherbombzones[var_1] maps\mp\gametypes\_gameobjects::allowuse("none");
         self.otherbombzones[var_1] maps\mp\gametypes\_gameobjects::setvisibleteam("friendly");
       }
@@ -249,13 +249,13 @@ onbeginuse(var_0) {
 
 onenduse(var_0, var_1, var_2) {
   if(var_1.isplanting && level.multibomb && !var_2) {
-    for (var_3 = 0; var_3 < self.otherbombzones.size; var_3++) {
+    for(var_3 = 0; var_3 < self.otherbombzones.size; var_3++) {
       self.otherbombzones[var_3] maps\mp\gametypes\_gameobjects::allowuse("enemy");
       self.otherbombzones[var_3] maps\mp\gametypes\_gameobjects::setvisibleteam("any");
     }
   }
 
-  var_4 = isdefined(var_1) && var_1.isdefusing && !var_2;
+  var_4 = isDefined(var_1) && var_1.isdefusing && !var_2;
   maps\mp\gametypes\common_bomb_gameobject::onendusebomb(var_1, var_4);
 }
 
@@ -265,7 +265,7 @@ bombplantedanim(var_0) {
   var_0 playerlinkto(level.sdbombmodel);
   var_0 playerlinkedoffsetenable();
 
-  while (var_0 getcurrentweapon() == self.useweapon)
+  while(var_0 getcurrentweapon() == self.useweapon)
     waitframe();
 
   var_0 unlink();
@@ -287,7 +287,7 @@ bombplanted(var_0, var_1) {
   } else {
     level.sdbombmodel = spawn("script_model", var_1.origin);
     level.sdbombmodel.angles = var_1.angles;
-    level.sdbombmodel setmodel("wpn_h1_briefcase_bomb_npc");
+    level.sdbombmodel setModel("wpn_h1_briefcase_bomb_npc");
   }
 
   var_0 maps\mp\gametypes\common_bomb_gameobject::onbombplanted(level.sdbombmodel.origin + (0, 0, 1));
@@ -326,7 +326,7 @@ bombplanted(var_0, var_1) {
   level.sdbombmodel hide();
   var_0 maps\mp\gametypes\common_bomb_gameobject::onbombexploded(var_6, 300, var_1);
 
-  for (var_7 = 0; var_7 < level.bombzones.size; var_7++)
+  for(var_7 = 0; var_7 < level.bombzones.size; var_7++)
     level.bombzones[var_7] maps\mp\gametypes\_gameobjects::disableobject();
 
   var_5 maps\mp\gametypes\_gameobjects::disableobject();
@@ -380,7 +380,7 @@ onusedefuseobject(var_0) {
 getdefusetype(var_0) {
   var_1 = "defuse";
 
-  if(isdefined(level.bombowner) && maps\mp\_utility::isreallyalive(level.bombowner))
+  if(isDefined(level.bombowner) && maps\mp\_utility::isreallyalive(level.bombowner))
     var_1 = "ninja_defuse";
 
   if(islastplayeralive(var_0))
@@ -428,12 +428,12 @@ sd_endgame(var_0, var_1) {
   level.finalkillcam_winner = var_0;
 
   if(var_0 == game["attackers"]) {
-    if(!isdefined(game["attackerWinCount"]))
+    if(!isDefined(game["attackerWinCount"]))
       game["attackerWinCount"] = 0;
 
     game["attackerWinCount"]++;
   } else if(var_0 == game["defenders"]) {
-    if(!isdefined(game["defenderWinCount"]))
+    if(!isDefined(game["defenderWinCount"]))
       game["defenderWinCount"] = 0;
 
     game["defenderWinCount"]++;
@@ -443,7 +443,7 @@ sd_endgame(var_0, var_1) {
     var_2 = 1;
 
     foreach(var_4 in level.bombzones) {
-      if(isdefined(level.finalkillcam_killcamentityindex[var_0]) && level.finalkillcam_killcamentityindex[var_0] == var_4.killcamentnum) {
+      if(isDefined(level.finalkillcam_killcamentityindex[var_0]) && level.finalkillcam_killcamentityindex[var_0] == var_4.killcamentnum) {
         var_2 = 0;
         break;
       }

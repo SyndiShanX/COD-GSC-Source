@@ -27,9 +27,7 @@ init() {
 
 setup_nesting_dolls_data() {
   if(isDefined(level.nesting_dolls_override_setup)) {
-    [
-      [level.nesting_dolls_override_setup]
-    ]();
+    [[level.nesting_dolls_override_setup]]();
     return;
   }
   level._effect["nesting_doll_trail_blue"] = loadFx("maps/zombie/fx_zmb_trail_doll_blue");
@@ -37,19 +35,19 @@ setup_nesting_dolls_data() {
   level._effect["nesting_doll_trail_red"] = loadFx("maps/zombie/fx_zmb_trail_doll_red");
   level._effect["nesting_doll_trail_yellow"] = loadFx("maps/zombie/fx_zmb_trail_doll_yellow");
   level.nesting_dolls_data = [];
-  level.nesting_dolls_data[0] = SpawnStruct();
+  level.nesting_dolls_data[0] = spawnStruct();
   level.nesting_dolls_data[0].name = "dempsey";
   level.nesting_dolls_data[0].id = 16;
   level.nesting_dolls_data[0].trailFx = level._effect["nesting_doll_trail_blue"];
-  level.nesting_dolls_data[1] = SpawnStruct();
+  level.nesting_dolls_data[1] = spawnStruct();
   level.nesting_dolls_data[1].name = "nikolai";
   level.nesting_dolls_data[1].id = 17;
   level.nesting_dolls_data[1].trailFx = level._effect["nesting_doll_trail_red"];
-  level.nesting_dolls_data[2] = SpawnStruct();
+  level.nesting_dolls_data[2] = spawnStruct();
   level.nesting_dolls_data[2].name = "takeo";
   level.nesting_dolls_data[2].id = 18;
   level.nesting_dolls_data[2].trailFx = level._effect["nesting_doll_trail_green"];
-  level.nesting_dolls_data[3] = SpawnStruct();
+  level.nesting_dolls_data[3] = spawnStruct();
   level.nesting_dolls_data[3].name = "richtofen";
   level.nesting_dolls_data[3].id = 19;
   level.nesting_dolls_data[3].trailFx = level._effect["nesting_doll_trail_yellow"];
@@ -143,7 +141,7 @@ doll_spawner_cluster(start_grenade) {
     grenade_vel = self get_cluster_launch_velocity(angles, num_dolls);
     grenade = self MagicGrenadeType("zombie_nesting_doll_single", origin, grenade_vel);
     grenade spawn_doll_model(self.doll_id, num_dolls, self);
-    grenade PlaySound("wpn_nesting_pop_npc");
+    grenade playSound("wpn_nesting_pop_npc");
     grenade thread doll_behavior_explode_when_stopped(self, self.doll_id, num_dolls);
     num_dolls++;
     wait(0.25);
@@ -179,7 +177,7 @@ get_random_launch_velocity(doll_origin, angles) {
   angles = randomize_angles(angles);
   trace_dist = level.nesting_dolls_launch_speed * level.nesting_dolls_launch_peak_time;
   for(i = 0; i < 4; i++) {
-    dir = AnglesToForward(angles);
+    dir = anglesToForward(angles);
     if(BulletTracePassed(doll_origin, doll_origin + dir * trace_dist, false, undefined)) {
       grenade_vel = dir * level.nesting_dolls_launch_speed;
       return grenade_vel;
@@ -194,7 +192,7 @@ get_cluster_launch_velocity(angles, index) {
   random_pitch = RandomIntRange(-45, -35);
   offsets = array(45, 0, -45);
   angles = angles + (random_pitch, offsets[index - 1], 0);
-  dir = AnglesToForward(angles);
+  dir = anglesToForward(angles);
   grenade_vel = dir * level.nesting_dolls_launch_speed;
   return grenade_vel;
 }
@@ -206,7 +204,7 @@ get_launch_velocity(doll_origin, range) {
     target_origin = target get_target_leading_pos();
     dir = VectorToAngles(target_origin - doll_origin);
     dir = (dir[0] - level.nesting_dolls_launch_angle, dir[1], dir[2]);
-    dir = AnglesToForward(dir);
+    dir = anglesToForward(dir);
     velocity = dir * level.nesting_dolls_launch_speed;
   }
   return velocity;
@@ -228,7 +226,7 @@ spawn_doll_model(id, index, parent) {
   self.doll_model UseAnimTree(#animtree);
   self.doll_model LinkTo(self);
   self.doll_model.angles = self.angles;
-  PlayFxOnTag(level.nesting_dolls_data[data_index].trailFx, self.doll_model, "tag_origin");
+  playFXOnTag(level.nesting_dolls_data[data_index].trailFx, self.doll_model, "tag_origin");
   self.doll_model thread nesting_dolls_cleanup(self);
 }
 
@@ -330,7 +328,7 @@ do_nesting_dolls_sound(model, info) {
   monk_scream_vox = false;
   if(level.music_override == false) {
     monk_scream_vox = false;
-    self playsound("zmb_monkey_song");
+    self playSound("zmb_monkey_song");
   }
   self waittill("explode", position);
   if(isDefined(model)) {}
@@ -366,7 +364,7 @@ nesting_dolls_tesla_nearby_zombies(doll) {
 nesting_dolls_play_tesla_bolt(origin, target_origin) {
   fxOrg = spawn("script_model", origin);
   fxOrg setModel("tag_origin");
-  fx = PlayFxOnTag(level._effect["tesla_bolt"], fxOrg, "tag_origin");
+  fx = playFXOnTag(level._effect["tesla_bolt"], fxOrg, "tag_origin");
   playsoundatposition("wpn_tesla_bounce", fxOrg.origin);
   fxOrg moveTo(target_origin, 0.25);
   fxOrg waittill("movedone");

@@ -18,11 +18,11 @@ cover() {
 
   var_1 = undefined;
 
-  if(isdefined(self.animname) && isdefined(level.scr_anim[self.animname]))
+  if(isDefined(self.animname) && isDefined(level.scr_anim[self.animname]))
     var_1 = level.scr_anim[self.animname][var_0];
 
-  if(!isdefined(var_1)) {
-    if(!isdefined(level.scr_anim["default_civilian"])) {
+  if(!isDefined(var_1)) {
+    if(!isDefined(level.scr_anim["default_civilian"])) {
       return;
     }
     var_1 = level.scr_anim["default_civilian"][var_0];
@@ -30,7 +30,7 @@ cover() {
 
   thread move_check();
 
-  for (;;) {
+  for(;;) {
     self setflaggedanimknoball("idle", common_scripts\utility::random(var_1), % animscript_root, 1, 0.2, 1);
     self waittillmatch("idle", "end");
   }
@@ -39,7 +39,7 @@ cover() {
 move_check() {
   self endon("killanimscript");
 
-  while (!isdefined(self.champion))
+  while(!isDefined(self.champion))
     wait 1;
 }
 

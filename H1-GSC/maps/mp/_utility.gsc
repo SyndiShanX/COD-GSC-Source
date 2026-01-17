@@ -5,10 +5,10 @@
 ********************************/
 
 exploder_sound() {
-  if(isdefined(self.script_delay))
+  if(isDefined(self.script_delay))
     wait(self.script_delay);
 
-  self playsound(level.scr_sound[self.script_sound]);
+  self playSound(level.scr_sound[self.script_sound]);
 }
 
 _beginlocationselection(var_0, var_1, var_2, var_3) {
@@ -28,7 +28,7 @@ _beginlocationselection(var_0, var_1, var_2, var_3) {
 }
 
 stoplocationselection(var_0, var_1) {
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     var_1 = "generic";
 
   if(!var_0) {
@@ -44,7 +44,7 @@ stoplocationselection(var_0, var_1) {
 endselectiononemp() {
   self endon("stop_location_selection");
 
-  for (;;) {
+  for(;;) {
     level waittill("emp_update");
 
     if(!isemped()) {
@@ -58,10 +58,10 @@ endselectiononemp() {
 endselectiononaction(var_0, var_1) {
   self endon("stop_location_selection");
 
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     var_1 = 1;
 
-  while (var_1 > 0) {
+  while(var_1 > 0) {
     self waittill(var_0);
     var_1--;
   }
@@ -84,7 +84,7 @@ endselectionohostmigration() {
 isattachment(var_0) {
   var_1 = tablelookup("mp\attachmentTable.csv", 3, var_0, 0);
 
-  if(isdefined(var_1) && var_1 != "")
+  if(isDefined(var_1) && var_1 != "")
     return 1;
   else
     return 0;
@@ -102,15 +102,15 @@ delaythread(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 delaythread_proc(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   wait(var_1);
 
-  if(!isdefined(var_2))
+  if(!isDefined(var_2))
     thread[[var_0]]();
-  else if(!isdefined(var_3))
+  else if(!isDefined(var_3))
     thread[[var_0]](var_2);
-  else if(!isdefined(var_4))
+  else if(!isDefined(var_4))
     thread[[var_0]](var_2, var_3);
-  else if(!isdefined(var_5))
+  else if(!isDefined(var_5))
     thread[[var_0]](var_2, var_3, var_4);
-  else if(!isdefined(var_6))
+  else if(!isDefined(var_6))
     thread[[var_0]](var_2, var_3, var_4, var_5);
   else
     thread[[var_0]](var_2, var_3, var_4, var_5, var_6);
@@ -119,23 +119,23 @@ delaythread_proc(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 getplant() {
   var_0 = self.origin + (0, 0, 10);
   var_1 = 11;
-  var_2 = anglestoforward(self.angles);
+  var_2 = anglesToForward(self.angles);
   var_2 = var_2 * var_1;
   var_3[0] = var_0 + var_2;
   var_3[1] = var_0;
-  var_4 = bullettrace(var_3[0], var_3[0] + (0, 0, -18), 0, undefined);
+  var_4 = bulletTrace(var_3[0], var_3[0] + (0, 0, -18), 0, undefined);
 
   if(var_4["fraction"] < 1) {
-    var_5 = spawnstruct();
+    var_5 = spawnStruct();
     var_5.origin = var_4["position"];
     var_5.angles = orienttonormal(var_4["normal"]);
     return var_5;
   }
 
-  var_4 = bullettrace(var_3[1], var_3[1] + (0, 0, -18), 0, undefined);
+  var_4 = bulletTrace(var_3[1], var_3[1] + (0, 0, -18), 0, undefined);
 
   if(var_4["fraction"] < 1) {
-    var_5 = spawnstruct();
+    var_5 = spawnStruct();
     var_5.origin = var_4["position"];
     var_5.angles = orienttonormal(var_4["normal"]);
     return var_5;
@@ -148,10 +148,10 @@ getplant() {
   var_6 = undefined;
   var_7 = undefined;
 
-  for (var_8 = 0; var_8 < var_3.size; var_8++) {
-    var_4 = bullettrace(var_3[var_8], var_3[var_8] + (0, 0, -1000), 0, undefined);
+  for(var_8 = 0; var_8 < var_3.size; var_8++) {
+    var_4 = bulletTrace(var_3[var_8], var_3[var_8] + (0, 0, -1000), 0, undefined);
 
-    if(!isdefined(var_6) || var_4["fraction"] < var_6) {
+    if(!isDefined(var_6) || var_4["fraction"] < var_6) {
       var_6 = var_4["fraction"];
       var_7 = var_4["position"];
     }
@@ -160,7 +160,7 @@ getplant() {
   if(var_6 == 1)
     var_7 = self.origin;
 
-  var_5 = spawnstruct();
+  var_5 = spawnStruct();
   var_5.origin = var_7;
   var_5.angles = orienttonormal(var_4["normal"]);
   return var_5;
@@ -181,9 +181,9 @@ orienttonormal(var_0) {
 }
 
 deleteplacedentity(var_0) {
-  var_1 = getentarray(var_0, "classname");
+  var_1 = getEntArray(var_0, "classname");
 
-  for (var_2 = 0; var_2 < var_1.size; var_2++)
+  for(var_2 = 0; var_2 < var_1.size; var_2++)
     var_1[var_2] delete();
 }
 
@@ -196,32 +196,32 @@ issecondarysplitscreenplayer() {
 
 playsoundonplayers(var_0, var_1, var_2) {
   if(level.splitscreen) {
-    if(isdefined(level.players[0]))
+    if(isDefined(level.players[0]))
       level.players[0] playlocalsound(var_0);
-  } else if(isdefined(var_1)) {
-    if(isdefined(var_2)) {
-      for (var_3 = 0; var_3 < level.players.size; var_3++) {
+  } else if(isDefined(var_1)) {
+    if(isDefined(var_2)) {
+      for(var_3 = 0; var_3 < level.players.size; var_3++) {
         var_4 = level.players[var_3];
 
         if(var_4 issecondarysplitscreenplayer()) {
           continue;
         }
-        if(isdefined(var_4.pers["team"]) && var_4.pers["team"] == var_1 && !isexcluded(var_4, var_2))
+        if(isDefined(var_4.pers["team"]) && var_4.pers["team"] == var_1 && !isexcluded(var_4, var_2))
           var_4 playlocalsound(var_0);
       }
     } else {
-      for (var_3 = 0; var_3 < level.players.size; var_3++) {
+      for(var_3 = 0; var_3 < level.players.size; var_3++) {
         var_4 = level.players[var_3];
 
         if(var_4 issecondarysplitscreenplayer()) {
           continue;
         }
-        if(isdefined(var_4.pers["team"]) && var_4.pers["team"] == var_1)
+        if(isDefined(var_4.pers["team"]) && var_4.pers["team"] == var_1)
           var_4 playlocalsound(var_0);
       }
     }
-  } else if(isdefined(var_2)) {
-    for (var_3 = 0; var_3 < level.players.size; var_3++) {
+  } else if(isDefined(var_2)) {
+    for(var_3 = 0; var_3 < level.players.size; var_3++) {
       var_4 = level.players[var_3];
 
       if(var_4 issecondarysplitscreenplayer()) {
@@ -231,7 +231,7 @@ playsoundonplayers(var_0, var_1, var_2) {
         var_4 playlocalsound(var_0);
     }
   } else {
-    for (var_3 = 0; var_3 < level.players.size; var_3++) {
+    for(var_3 = 0; var_3 < level.players.size; var_3++) {
       var_4 = level.players[var_3];
 
       if(var_4 issecondarysplitscreenplayer()) {
@@ -250,14 +250,14 @@ playloopsoundtoplayers(var_0, var_1, var_2) {
   var_3 endon("death");
   thread common_scripts\utility::delete_on_death(var_3);
 
-  if(isdefined(var_2)) {
+  if(isDefined(var_2)) {
     var_3 hide();
 
     foreach(var_5 in var_2)
     var_3 showtoplayer(var_5);
   }
 
-  if(isdefined(var_1)) {
+  if(isDefined(var_1)) {
     var_3.origin = self.origin + var_1;
     var_3.angles = self.angles;
     var_3 linktosynchronizedparent(self);
@@ -267,18 +267,18 @@ playloopsoundtoplayers(var_0, var_1, var_2) {
     var_3 linktosynchronizedparent(self);
   }
 
-  var_3 playloopsound(var_0);
+  var_3 playLoopSound(var_0);
   self waittill("stop sound" + var_0);
   var_3 stoploopsound(var_0);
   var_3 delete();
 }
 
 sortlowermessages() {
-  for (var_0 = 1; var_0 < self.lowermessages.size; var_0++) {
+  for(var_0 = 1; var_0 < self.lowermessages.size; var_0++) {
     var_1 = self.lowermessages[var_0];
     var_2 = var_1.priority;
 
-    for (var_3 = var_0 - 1; var_3 >= 0 && var_2 > self.lowermessages[var_3].priority; var_3--)
+    for(var_3 = var_0 - 1; var_3 >= 0 && var_2 > self.lowermessages[var_3].priority; var_3--)
       self.lowermessages[var_3 + 1] = self.lowermessages[var_3];
 
     self.lowermessages[var_3 + 1] = var_1;
@@ -298,8 +298,8 @@ addlowermessage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     }
   }
 
-  if(!isdefined(var_9)) {
-    var_9 = spawnstruct();
+  if(!isDefined(var_9)) {
+    var_9 = spawnStruct();
     self.lowermessages[self.lowermessages.size] = var_9;
   }
 
@@ -317,15 +317,15 @@ addlowermessage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
 }
 
 removelowermessage(var_0) {
-  if(isdefined(self.lowermessages)) {
-    for (var_1 = self.lowermessages.size; var_1 > 0; var_1--) {
+  if(isDefined(self.lowermessages)) {
+    for(var_1 = self.lowermessages.size; var_1 > 0; var_1--) {
       if(self.lowermessages[var_1 - 1].name != var_0) {
         continue;
       }
       var_2 = self.lowermessages[var_1 - 1];
 
-      for (var_3 = var_1; var_3 < self.lowermessages.size; var_3++) {
-        if(isdefined(self.lowermessages[var_3]))
+      for(var_3 = var_1; var_3 < self.lowermessages.size; var_3++) {
+        if(isDefined(self.lowermessages[var_3]))
           self.lowermessages[var_3 - 1] = self.lowermessages[var_3];
       }
 
@@ -341,25 +341,25 @@ getlowermessage() {
 }
 
 setlowermessage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
-  if(!isdefined(var_3))
+  if(!isDefined(var_3))
     var_3 = 1;
 
-  if(!isdefined(var_2))
+  if(!isDefined(var_2))
     var_2 = 0;
 
-  if(!isdefined(var_4))
+  if(!isDefined(var_4))
     var_4 = 0;
 
-  if(!isdefined(var_5))
+  if(!isDefined(var_5))
     var_5 = 0;
 
-  if(!isdefined(var_6))
+  if(!isDefined(var_6))
     var_6 = 0.85;
 
-  if(!isdefined(var_7))
+  if(!isDefined(var_7))
     var_7 = 3.0;
 
-  if(!isdefined(var_8))
+  if(!isDefined(var_8))
     var_8 = 0;
 
   addlowermessage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
@@ -367,13 +367,13 @@ setlowermessage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
 }
 
 updatelowermessage() {
-  if(!isdefined(self.lowermessage)) {
+  if(!isDefined(self.lowermessage)) {
     return;
   }
   var_0 = getlowermessage();
 
-  if(!isdefined(var_0)) {
-    if(isdefined(self.lowermessage) && isdefined(self.lowertimer)) {
+  if(!isDefined(var_0)) {
+    if(isDefined(self.lowermessage) && isDefined(self.lowertimer)) {
       self.lowermessage.alpha = 0;
       self.lowertimer.alpha = 0;
     }
@@ -426,10 +426,10 @@ clearlowermessage(var_0) {
 }
 
 clearlowermessages() {
-  for (var_0 = 0; var_0 < self.lowermessages.size; var_0++)
+  for(var_0 = 0; var_0 < self.lowermessages.size; var_0++)
     self.lowermessages[var_0] = undefined;
 
-  if(!isdefined(self.lowermessage)) {
+  if(!isDefined(self.lowermessage)) {
     return;
   }
   updatelowermessage();
@@ -445,28 +445,28 @@ printonteam(var_0, var_1) {
 }
 
 printboldonteam(var_0, var_1) {
-  for (var_2 = 0; var_2 < level.players.size; var_2++) {
+  for(var_2 = 0; var_2 < level.players.size; var_2++) {
     var_3 = level.players[var_2];
 
-    if(isdefined(var_3.pers["team"]) && var_3.pers["team"] == var_1)
+    if(isDefined(var_3.pers["team"]) && var_3.pers["team"] == var_1)
       var_3 iprintlnbold(var_0);
   }
 }
 
 printboldonteamarg(var_0, var_1, var_2) {
-  for (var_3 = 0; var_3 < level.players.size; var_3++) {
+  for(var_3 = 0; var_3 < level.players.size; var_3++) {
     var_4 = level.players[var_3];
 
-    if(isdefined(var_4.pers["team"]) && var_4.pers["team"] == var_1)
+    if(isDefined(var_4.pers["team"]) && var_4.pers["team"] == var_1)
       var_4 iprintlnbold(var_0, var_2);
   }
 }
 
 printonteamarg(var_0, var_1, var_2) {
-  for (var_3 = 0; var_3 < level.players.size; var_3++) {
+  for(var_3 = 0; var_3 < level.players.size; var_3++) {
     var_4 = level.players[var_3];
 
-    if(isdefined(var_4.pers["team"]) && var_4.pers["team"] == var_1)
+    if(isDefined(var_4.pers["team"]) && var_4.pers["team"] == var_1)
       var_4 iprintln(var_0, var_2);
   }
 }
@@ -474,9 +474,9 @@ printonteamarg(var_0, var_1, var_2) {
 printonplayers(var_0, var_1) {
   var_2 = level.players;
 
-  for (var_3 = 0; var_3 < var_2.size; var_3++) {
-    if(isdefined(var_1)) {
-      if(isdefined(var_2[var_3].pers["team"]) && var_2[var_3].pers["team"] == var_1)
+  for(var_3 = 0; var_3 < var_2.size; var_3++) {
+    if(isDefined(var_1)) {
+      if(isDefined(var_2[var_3].pers["team"]) && var_2[var_3].pers["team"] == var_1)
         var_2[var_3] iprintln(var_0);
 
       continue;
@@ -487,29 +487,29 @@ printonplayers(var_0, var_1) {
 }
 
 printandsoundoneveryone(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  var_7 = isdefined(var_4);
+  var_7 = isDefined(var_4);
   var_8 = 0;
 
-  if(isdefined(var_5))
+  if(isDefined(var_5))
     var_8 = 1;
 
   if(!var_7) {
-    for (var_9 = 0; var_9 < level.players.size; var_9++) {
+    for(var_9 = 0; var_9 < level.players.size; var_9++) {
       var_10 = level.players[var_9];
       var_11 = var_10.team;
 
-      if(isdefined(var_11)) {
-        if(var_11 == var_0 && isdefined(var_2)) {
+      if(isDefined(var_11)) {
+        if(var_11 == var_0 && isDefined(var_2)) {
           var_10 iprintln(var_2, var_6);
           continue;
         }
 
-        if(var_11 == var_1 && isdefined(var_3))
+        if(var_11 == var_1 && isDefined(var_3))
           var_10 iprintln(var_3, var_6);
       }
     }
   } else if(var_8) {
-    for (var_9 = 0; var_9 < level.players.size; var_9++) {
+    for(var_9 = 0; var_9 < level.players.size; var_9++) {
       var_10 = level.players[var_9];
 
       if(var_10 issecondarysplitscreenplayer()) {
@@ -517,9 +517,9 @@ printandsoundoneveryone(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       }
       var_11 = var_10.team;
 
-      if(isdefined(var_11)) {
+      if(isDefined(var_11)) {
         if(var_11 == var_0) {
-          if(isdefined(var_2))
+          if(isDefined(var_2))
             var_10 iprintln(var_2, var_6);
 
           var_10 playlocalsound(var_4);
@@ -527,7 +527,7 @@ printandsoundoneveryone(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
         }
 
         if(var_11 == var_1) {
-          if(isdefined(var_3))
+          if(isDefined(var_3))
             var_10 iprintln(var_3, var_6);
 
           var_10 playlocalsound(var_5);
@@ -535,7 +535,7 @@ printandsoundoneveryone(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       }
     }
   } else {
-    for (var_9 = 0; var_9 < level.players.size; var_9++) {
+    for(var_9 = 0; var_9 < level.players.size; var_9++) {
       var_10 = level.players[var_9];
 
       if(var_10 issecondarysplitscreenplayer()) {
@@ -543,9 +543,9 @@ printandsoundoneveryone(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       }
       var_11 = var_10.team;
 
-      if(isdefined(var_11)) {
+      if(isDefined(var_11)) {
         if(var_11 == var_0) {
-          if(isdefined(var_2))
+          if(isDefined(var_2))
             var_10 iprintln(var_2, var_6);
 
           var_10 playlocalsound(var_4);
@@ -553,7 +553,7 @@ printandsoundoneveryone(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
         }
 
         if(var_11 == var_1) {
-          if(isdefined(var_3))
+          if(isDefined(var_3))
             var_10 iprintln(var_3, var_6);
         }
       }
@@ -625,7 +625,7 @@ dvarfloatvalue(var_0, var_1, var_2, var_3) {
 }
 
 play_sound_on_tag(var_0, var_1) {
-  if(isdefined(var_1))
+  if(isDefined(var_1))
     playsoundatpos(self gettagorigin(var_1), var_0);
   else
     playsoundatpos(self.origin, var_0);
@@ -645,17 +645,17 @@ getotherteam(var_0) {
 wait_endon(var_0, var_1, var_2, var_3) {
   self endon(var_1);
 
-  if(isdefined(var_2))
+  if(isDefined(var_2))
     self endon(var_2);
 
-  if(isdefined(var_3))
+  if(isDefined(var_3))
     self endon(var_3);
 
   wait(var_0);
 }
 
 initpersstat(var_0) {
-  if(!isdefined(self.pers[var_0]))
+  if(!isDefined(self.pers[var_0]))
     self.pers[var_0] = 0;
 }
 
@@ -664,7 +664,7 @@ getpersstat(var_0) {
 }
 
 incpersstat(var_0, var_1) {
-  if(isdefined(self) && isdefined(self.pers) && isdefined(self.pers[var_0])) {
+  if(isDefined(self) && isDefined(self.pers) && isDefined(self.pers[var_0])) {
     self.pers[var_0] = self.pers[var_0] + var_1;
     maps\mp\gametypes\_persistence::statadd(var_0, var_1);
   }
@@ -675,11 +675,11 @@ setpersstat(var_0, var_1) {
 }
 
 initplayerstat(var_0, var_1) {
-  if(!isdefined(self.stats["stats_" + var_0])) {
-    if(!isdefined(var_1))
+  if(!isDefined(self.stats["stats_" + var_0])) {
+    if(!isDefined(var_1))
       var_1 = 0;
 
-    self.stats["stats_" + var_0] = spawnstruct();
+    self.stats["stats_" + var_0] = spawnStruct();
     self.stats["stats_" + var_0].value = var_1;
 
     if(rankingenabled())
@@ -751,8 +751,8 @@ updatepersratiobuffered(var_0, var_1, var_2) {
 
 waittillslowprocessallowed(var_0) {
   if(level.lastslowprocessframe == gettime()) {
-    if(isdefined(var_0) && var_0) {
-      while (level.lastslowprocessframe == gettime())
+    if(isDefined(var_0) && var_0) {
+      while(level.lastslowprocessframe == gettime())
         wait 0.05;
     } else {
       wait 0.05;
@@ -779,17 +779,17 @@ waitfortimeornotify(var_0, var_1) {
 }
 
 waitfortimeornotifies(var_0, var_1) {
-  if(isdefined(var_1)) {
+  if(isDefined(var_1)) {
     foreach(var_3 in var_1)
     self endon(var_3);
   }
 
-  if(isdefined(var_0) && var_0 > 0)
+  if(isDefined(var_0) && var_0 > 0)
     wait(var_0);
 }
 
 isexcluded(var_0, var_1) {
-  for (var_2 = 0; var_2 < var_1.size; var_2++) {
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
     if(var_0 == var_1[var_2])
       return 1;
   }
@@ -798,20 +798,20 @@ isexcluded(var_0, var_1) {
 }
 
 leaderdialog(var_0, var_1, var_2, var_3, var_4) {
-  if(isdefined(level.iszombiegame) && level.iszombiegame) {
+  if(isDefined(level.iszombiegame) && level.iszombiegame) {
     return;
   }
   if(var_0 == "null") {
     return;
   }
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     leaderdialogbothteams(var_0, "allies", var_0, "axis", var_2, var_3, var_4);
   else {
-    if(isdefined(var_3)) {
-      for (var_5 = 0; var_5 < level.players.size; var_5++) {
+    if(isDefined(var_3)) {
+      for(var_5 = 0; var_5 < level.players.size; var_5++) {
         var_6 = level.players[var_5];
 
-        if(isdefined(var_6.pers["team"]) && var_6.pers["team"] == var_1 && !isexcluded(var_6, var_3)) {
+        if(isDefined(var_6.pers["team"]) && var_6.pers["team"] == var_1 && !isexcluded(var_6, var_3)) {
           if(var_6 issecondarysplitscreenplayer()) {
             continue;
           }
@@ -822,10 +822,10 @@ leaderdialog(var_0, var_1, var_2, var_3, var_4) {
       return;
     }
 
-    for (var_5 = 0; var_5 < level.players.size; var_5++) {
+    for(var_5 = 0; var_5 < level.players.size; var_5++) {
       var_6 = level.players[var_5];
 
-      if(isdefined(var_6.pers["team"]) && var_6.pers["team"] == var_1) {
+      if(isDefined(var_6.pers["team"]) && var_6.pers["team"] == var_1) {
         if(var_6 issecondarysplitscreenplayer()) {
           continue;
         }
@@ -836,18 +836,18 @@ leaderdialog(var_0, var_1, var_2, var_3, var_4) {
 }
 
 leaderdialogbothteams(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  if(isdefined(level.iszombiegame) && level.iszombiegame) {
+  if(isDefined(level.iszombiegame) && level.iszombiegame) {
     return;
   }
   if(level.splitscreen) {
     return;
   }
-  if(isdefined(var_5)) {
-    for (var_7 = 0; var_7 < level.players.size; var_7++) {
+  if(isDefined(var_5)) {
+    for(var_7 = 0; var_7 < level.players.size; var_7++) {
       var_8 = level.players[var_7];
       var_9 = var_8.pers["team"];
 
-      if(!isdefined(var_9)) {
+      if(!isDefined(var_9)) {
         continue;
       }
       if(isexcluded(var_8, var_5)) {
@@ -865,11 +865,11 @@ leaderdialogbothteams(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
         var_8 leaderdialogonplayer(var_2, var_4, undefined, var_6);
     }
   } else {
-    for (var_7 = 0; var_7 < level.players.size; var_7++) {
+    for(var_7 = 0; var_7 < level.players.size; var_7++) {
       var_8 = level.players[var_7];
       var_9 = var_8.pers["team"];
 
-      if(!isdefined(var_9)) {
+      if(!isDefined(var_9)) {
         continue;
       }
       if(var_8 issecondarysplitscreenplayer()) {
@@ -887,7 +887,7 @@ leaderdialogbothteams(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 }
 
 leaderdialogonplayers(var_0, var_1, var_2, var_3) {
-  if(isdefined(level.iszombiegame) && level.iszombiegame) {
+  if(isDefined(level.iszombiegame) && level.iszombiegame) {
     return;
   }
   foreach(var_5 in var_1)
@@ -895,21 +895,21 @@ leaderdialogonplayers(var_0, var_1, var_2, var_3) {
 }
 
 leaderdialogonplayer(var_0, var_1, var_2, var_3) {
-  if(isdefined(level.iszombiegame) && level.iszombiegame) {
+  if(isDefined(level.iszombiegame) && level.iszombiegame) {
     return;
   }
-  if(!isdefined(var_2))
+  if(!isDefined(var_2))
     var_2 = 0;
 
   var_4 = self.pers["team"];
 
-  if(isdefined(level.ishorde) && issecondarysplitscreenplayer()) {
+  if(isDefined(level.ishorde) && issecondarysplitscreenplayer()) {
     return;
   }
-  if(isdefined(level.announcerdisabled) && level.announcerdisabled) {
+  if(isDefined(level.announcerdisabled) && level.announcerdisabled) {
     return;
   }
-  if(!isdefined(var_4)) {
+  if(!isDefined(var_4)) {
     return;
   }
   if(var_4 != "allies" && var_4 != "axis") {
@@ -918,10 +918,10 @@ leaderdialogonplayer(var_0, var_1, var_2, var_3) {
   if(issecondarysplitscreenplayer()) {
     return;
   }
-  if(!isdefined(var_3))
+  if(!isDefined(var_3))
     var_3 = (0, 0, 0);
 
-  if(isdefined(var_1)) {
+  if(isDefined(var_1)) {
     if(self.leaderdialoggroup == var_1) {
       if(var_2) {
         if(self.leaderdialogactive != "")
@@ -933,7 +933,7 @@ leaderdialogonplayer(var_0, var_1, var_2, var_3) {
       return;
     }
 
-    var_5 = isdefined(self.leaderdialoggroups[var_1]);
+    var_5 = isDefined(self.leaderdialoggroups[var_1]);
     self.leaderdialoggroups[var_1] = var_0;
     var_0 = var_1;
 
@@ -952,14 +952,14 @@ leaderdialogonplayer(var_0, var_1, var_2, var_3) {
 leaderdialog_trylockout(var_0, var_1) {
   var_2 = 2;
 
-  if(isdefined(game["dialog"]["lockouts"][var_0])) {
+  if(isDefined(game["dialog"]["lockouts"][var_0])) {
     var_2 = game["dialog"]["lockouts"][var_0];
 
     if(var_2 == 0)
       return;
   }
 
-  if(!isdefined(var_1.active_vo_lockouts))
+  if(!isDefined(var_1.active_vo_lockouts))
     var_1.active_vo_lockouts = [];
 
   var_1.active_vo_lockouts[var_0] = 1;
@@ -973,9 +973,9 @@ leaderdialog_lockoutcleardelayed(var_0, var_1, var_2) {
 }
 
 leaderdialog_islockedout(var_0, var_1) {
-  if(isdefined(var_1.active_vo_lockouts)) {
-    if(isdefined(var_1.active_vo_lockouts[var_0])) {
-      if(isdefined(var_1.active_vo_lockouts[var_0] == 1))
+  if(isDefined(var_1.active_vo_lockouts)) {
+    if(isDefined(var_1.active_vo_lockouts[var_0])) {
+      if(isDefined(var_1.active_vo_lockouts[var_0] == 1))
         return 1;
     }
   }
@@ -988,23 +988,23 @@ leaderdialogonplayer_internal(var_0, var_1, var_2) {
   self notify("playLeaderDialogOnPlayer");
   self endon("playLeaderDialogOnPlayer");
 
-  if(isdefined(self.leaderdialoggroups[var_0])) {
+  if(isDefined(self.leaderdialoggroups[var_0])) {
     var_3 = var_0;
     var_0 = self.leaderdialoggroups[var_3];
     self.leaderdialoggroups[var_3] = undefined;
     self.leaderdialoggroup = var_3;
   }
 
-  if(!isdefined(game["dialog"][var_0])) {
+  if(!isDefined(game["dialog"][var_0])) {
     return;
   }
-  if(isai(self) && isdefined(level.bot_funcs) && isdefined(level.bot_funcs["leader_dialog"]))
+  if(isai(self) && isDefined(level.bot_funcs) && isDefined(level.bot_funcs["leader_dialog"]))
     self[[level.bot_funcs["leader_dialog"]]](var_0, var_2);
 
   if(issubstr(game["dialog"][var_0], "null")) {
     return;
   }
-  if(isdefined(level.ishorde) && level.ishorde) {
+  if(isDefined(level.ishorde) && level.ishorde) {
     if(issubstr(var_0, "coop_gdn"))
       var_4 = var_0;
     else
@@ -1025,11 +1025,7 @@ leaderdialogonplayer_internal(var_0, var_1, var_2) {
     self playlocalannouncersound(var_4);
     leaderdialog_trylockout(game["dialog"][var_0], self);
   } else if(level.classicgamemode) {
-    if(soundexists(var_5)) {
-
-    } else {
-
-    }
+    if(soundexists(var_5)) {} else {}
   } else {}
 
   wait 2.0;
@@ -1041,10 +1037,10 @@ leaderdialogonplayer_internal(var_0, var_1, var_2) {
     var_6 = self.leaderdialogqueue[0];
     var_7 = self.leaderdialoglocqueue[0];
 
-    for (var_8 = 1; var_8 < self.leaderdialogqueue.size; var_8++)
+    for(var_8 = 1; var_8 < self.leaderdialogqueue.size; var_8++)
       self.leaderdialogqueue[var_8 - 1] = self.leaderdialogqueue[var_8];
 
-    for (var_8 = 1; var_8 < self.leaderdialoglocqueue.size; var_8++)
+    for(var_8 = 1; var_8 < self.leaderdialoglocqueue.size; var_8++)
       self.leaderdialoglocqueue[var_8 - 1] = self.leaderdialoglocqueue[var_8];
 
     self.leaderdialogqueue[var_8 - 1] = undefined;
@@ -1054,7 +1050,7 @@ leaderdialogonplayer_internal(var_0, var_1, var_2) {
 }
 
 getnextrelevantdialog() {
-  for (var_0 = 0; var_0 < self.leaderdialogqueue.size; var_0++) {
+  for(var_0 = 0; var_0 < self.leaderdialogqueue.size; var_0++) {
     if(issubstr(self.leaderdialogqueue[var_0], "losing")) {
       if(self.team == "allies") {
         if(issubstr(level.axiscapturing, self.leaderdialogqueue[var_0]))
@@ -1078,9 +1074,9 @@ orderonqueueddialog() {
   var_0 = [];
   var_0 = self.leaderdialogqueue;
 
-  for (var_1 = 0; var_1 < self.leaderdialogqueue.size; var_1++) {
+  for(var_1 = 0; var_1 < self.leaderdialogqueue.size; var_1++) {
     if(issubstr(self.leaderdialogqueue[var_1], "losing")) {
-      for (var_2 = var_1; var_2 >= 0; var_2--) {
+      for(var_2 = var_1; var_2 >= 0; var_2--) {
         if(!issubstr(self.leaderdialogqueue[var_2], "losing") && var_2 != 0) {
           continue;
         }
@@ -1113,7 +1109,7 @@ arrayremovevalue(var_0, var_1) {
   var_2 = 0;
   var_3 = 0;
 
-  while (var_2 < var_0.size) {
+  while(var_2 < var_0.size) {
     if(var_0[var_2] == var_1) {
       var_2++;
       continue;
@@ -1126,7 +1122,7 @@ arrayremovevalue(var_0, var_1) {
     var_3++;
   }
 
-  while (var_3 < var_0.size) {
+  while(var_3 < var_0.size) {
     var_0[var_3] = undefined;
     var_3++;
   }
@@ -1191,7 +1187,7 @@ getobjectivehinttext(var_0) {
 }
 
 gettimepassed() {
-  if(!isdefined(level.starttime) || !isdefined(level.discardtime))
+  if(!isDefined(level.starttime) || !isDefined(level.discardtime))
     return 0;
 
   if(level.timerstopped)
@@ -1201,7 +1197,7 @@ gettimepassed() {
 }
 
 getunpausedtimepassedraw() {
-  if(!isdefined(level.matchdurationstarttime))
+  if(!isDefined(level.matchdurationstarttime))
     return 0;
 
   return gettime() - level.matchdurationstarttime;
@@ -1285,7 +1281,7 @@ isinkillcam() {
 }
 
 isvalidclass(var_0) {
-  return isdefined(var_0) && var_0 != "";
+  return isDefined(var_0) && var_0 != "";
 }
 
 getvalueinrange(var_0, var_1, var_2) {
@@ -1298,7 +1294,7 @@ getvalueinrange(var_0, var_1, var_2) {
 }
 
 logxpgains() {
-  if(!isdefined(self.pers["summary"])) {
+  if(!isDefined(self.pers["summary"])) {
     return;
   }
   if(isai(self)) {
@@ -1306,7 +1302,7 @@ logxpgains() {
   }
   var_0 = 0;
 
-  if(isdefined(self.timeplayed["total"]))
+  if(isDefined(self.timeplayed["total"]))
     var_0 = self.timeplayed["total"];
 
   reconevent("script_EarnedXP: totalXP %d, timeplayed %d, score %d, challenge %d, match %d, misc %d, gamemode %s", self.pers["summary"]["xp"], var_0, self.pers["summary"]["score"], self.pers["summary"]["challenge"], self.pers["summary"]["match"], self.pers["summary"]["misc"], level.gametype);
@@ -1361,7 +1357,7 @@ setovertimelimitdvar(var_0) {
 }
 
 get_damageable_player(var_0, var_1) {
-  var_2 = spawnstruct();
+  var_2 = spawnStruct();
   var_2.isplayer = 1;
   var_2.isadestructable = 0;
   var_2.entity = var_0;
@@ -1370,7 +1366,7 @@ get_damageable_player(var_0, var_1) {
 }
 
 get_damageable_sentry(var_0, var_1) {
-  var_2 = spawnstruct();
+  var_2 = spawnStruct();
   var_2.isplayer = 0;
   var_2.isadestructable = 0;
   var_2.issentry = 1;
@@ -1380,7 +1376,7 @@ get_damageable_sentry(var_0, var_1) {
 }
 
 get_damageable_grenade(var_0, var_1) {
-  var_2 = spawnstruct();
+  var_2 = spawnStruct();
   var_2.isplayer = 0;
   var_2.isadestructable = 0;
   var_2.entity = var_0;
@@ -1389,7 +1385,7 @@ get_damageable_grenade(var_0, var_1) {
 }
 
 get_damageable_mine(var_0, var_1) {
-  var_2 = spawnstruct();
+  var_2 = spawnStruct();
   var_2.isplayer = 0;
   var_2.isadestructable = 0;
   var_2.entity = var_0;
@@ -1455,7 +1451,7 @@ _takeweaponsexcept(var_0) {
 }
 
 savedata() {
-  var_0 = spawnstruct();
+  var_0 = spawnStruct();
   var_0.offhandclass = self gettacticalweapon();
   var_0.actionslots = self.saved_actionslotdata;
   var_0.currentweapon = self getcurrentweapon();
@@ -1469,13 +1465,13 @@ savedata() {
     if(weaponinventorytype(var_3) == "altmode") {
       continue;
     }
-    var_4 = spawnstruct();
+    var_4 = spawnStruct();
     var_4.name = var_3;
     var_4.clipammor = self getweaponammoclip(var_3, "right");
     var_4.clipammol = self getweaponammoclip(var_3, "left");
     var_4.stockammo = self getweaponammostock(var_3);
 
-    if(isdefined(self.throwinggrenade) && self.throwinggrenade == var_3)
+    if(isDefined(self.throwinggrenade) && self.throwinggrenade == var_3)
       var_4.stockammo--;
 
     var_0.weapons[var_0.weapons.size] = var_4;
@@ -1537,7 +1533,7 @@ isfloat(var_0) {
 
 registerwatchdvarint(var_0, var_1) {
   var_2 = "scr_" + level.gametype + "_" + var_0;
-  level.watchdvars[var_2] = spawnstruct();
+  level.watchdvars[var_2] = spawnStruct();
   level.watchdvars[var_2].value = getdvarint(var_2, var_1);
   level.watchdvars[var_2].type = "int";
   level.watchdvars[var_2].notifystring = "update_" + var_0;
@@ -1545,7 +1541,7 @@ registerwatchdvarint(var_0, var_1) {
 
 registerwatchdvarfloat(var_0, var_1) {
   var_2 = "scr_" + level.gametype + "_" + var_0;
-  level.watchdvars[var_2] = spawnstruct();
+  level.watchdvars[var_2] = spawnStruct();
   level.watchdvars[var_2].value = getdvarfloat(var_2, var_1);
   level.watchdvars[var_2].type = "float";
   level.watchdvars[var_2].notifystring = "update_" + var_0;
@@ -1553,7 +1549,7 @@ registerwatchdvarfloat(var_0, var_1) {
 
 registerwatchdvar(var_0, var_1) {
   var_2 = "scr_" + level.gametype + "_" + var_0;
-  level.watchdvars[var_2] = spawnstruct();
+  level.watchdvars[var_2] = spawnStruct();
   level.watchdvars[var_2].value = getdvar(var_2, var_1);
   level.watchdvars[var_2].type = "string";
   level.watchdvars[var_2].notifystring = "update_" + var_0;
@@ -1567,14 +1563,14 @@ setoverridewatchdvar(var_0, var_1) {
 getwatcheddvar(var_0) {
   var_0 = "scr_" + level.gametype + "_" + var_0;
 
-  if(isdefined(level.overridewatchdvars) && isdefined(level.overridewatchdvars[var_0]))
+  if(isDefined(level.overridewatchdvars) && isDefined(level.overridewatchdvars[var_0]))
     return level.overridewatchdvars[var_0];
 
   return level.watchdvars[var_0].value;
 }
 
 updatewatcheddvars() {
-  while (game["state"] == "playing") {
+  while(game["state"] == "playing") {
     var_0 = getarraykeys(level.watchdvars);
 
     foreach(var_2 in var_0) {
@@ -1635,7 +1631,7 @@ wasonlyround() {
   if(!level.teambased)
     return 1;
 
-  if(isdefined(level.onlyroundoverride))
+  if(isDefined(level.onlyroundoverride))
     return 0;
 
   if(getwatcheddvar("winlimit") == 1 && hitwinlimit())
@@ -1644,7 +1640,7 @@ wasonlyround() {
   if(getwatcheddvar("roundlimit") == 1)
     return 1;
 
-  if(isdefined(level.overridewasonlyround)) {
+  if(isDefined(level.overridewasonlyround)) {
     if([
         [level.overridewasonlyround]
       ]())
@@ -1685,10 +1681,10 @@ hitscorelimit() {
     if(game["teamScores"]["allies"] >= getwatcheddvar("scorelimit") || game["teamScores"]["axis"] >= getwatcheddvar("scorelimit"))
       return 1;
   } else {
-    for (var_0 = 0; var_0 < level.players.size; var_0++) {
+    for(var_0 = 0; var_0 < level.players.size; var_0++) {
       var_1 = level.players[var_0];
 
-      if(isdefined(var_1.score) && var_1.score >= getwatcheddvar("scorelimit"))
+      if(isDefined(var_1.score) && var_1.score >= getwatcheddvar("scorelimit"))
         return 1;
     }
   }
@@ -1731,7 +1727,7 @@ gettimelimit() {
   if(inovertime()) {
     var_0 = float(getdvar("overtimeTimeLimit"));
 
-    if(!isdefined(var_0))
+    if(!isDefined(var_0))
       var_0 = 1;
 
     return var_0;
@@ -1748,7 +1744,7 @@ gethalftime() {
 }
 
 inovertime() {
-  return isdefined(game["status"]) && isovertimetext(game["status"]);
+  return isDefined(game["status"]) && isovertimetext(game["status"]);
 }
 
 isovertimetext(var_0) {
@@ -1756,7 +1752,7 @@ isovertimetext(var_0) {
 }
 
 gamehasstarted() {
-  if(isdefined(level.gamehasstarted))
+  if(isDefined(level.gamehasstarted))
     return level.gamehasstarted;
 
   if(level.teambased)
@@ -1788,7 +1784,7 @@ getlivingplayers(var_0) {
     if(!isalive(var_3)) {
       continue;
     }
-    if(level.teambased && isdefined(var_0)) {
+    if(level.teambased && isDefined(var_0)) {
       if(var_0 == var_3.pers["team"])
         var_1[var_1.size] = var_3;
 
@@ -1802,7 +1798,7 @@ getlivingplayers(var_0) {
 }
 
 setusingremote(var_0) {
-  if(isdefined(self.carryicon))
+  if(isDefined(self.carryicon))
     self.carryicon.alpha = 0;
 
   self.usingremote = var_0;
@@ -1815,7 +1811,7 @@ getremotename() {
 }
 
 freezecontrolswrapper(var_0) {
-  if(isdefined(level.hostmigrationtimer) || is_true(self.phfrozen)) {
+  if(isDefined(level.hostmigrationtimer) || is_true(self.phfrozen)) {
     self freezecontrols(1);
     return;
   }
@@ -1827,12 +1823,12 @@ freezecontrolswrapper(var_0) {
 freezecontrolswrapperwithdelay(var_0, var_1) {
   wait(var_1);
 
-  if(isdefined(self))
+  if(isDefined(self))
     freezecontrolswrapper(var_0);
 }
 
 clearusingremote() {
-  if(isdefined(self.carryicon))
+  if(isDefined(self.carryicon))
     self.carryicon.alpha = 1;
 
   self.usingremote = undefined;
@@ -1856,14 +1852,14 @@ playerremotekillstreakshowhud() {
 }
 
 get_water_weapon() {
-  if(isdefined(self.underwatermotiontype)) {
-    if(self.underwatermotiontype == "shallow" && isdefined(level.shallow_water_weapon))
+  if(isDefined(self.underwatermotiontype)) {
+    if(self.underwatermotiontype == "shallow" && isDefined(level.shallow_water_weapon))
       return level.shallow_water_weapon;
 
-    if(self.underwatermotiontype == "deep" && isdefined(level.deep_water_weapon))
+    if(self.underwatermotiontype == "deep" && isDefined(level.deep_water_weapon))
       return level.deep_water_weapon;
 
-    if(self.underwatermotiontype != "none" && isdefined(level.shallow_water_weapon))
+    if(self.underwatermotiontype != "none" && isDefined(level.shallow_water_weapon))
       return level.shallow_water_weapon;
   }
 
@@ -1871,19 +1867,19 @@ get_water_weapon() {
 }
 
 isusingremote() {
-  return isdefined(self.usingremote);
+  return isDefined(self.usingremote);
 }
 
 isinremotetransition() {
-  return isdefined(self.remoteridetransition);
+  return isDefined(self.remoteridetransition);
 }
 
 isrocketcorpse() {
-  return isdefined(self.isrocketcorpse) && self.isrocketcorpse;
+  return isDefined(self.isrocketcorpse) && self.isrocketcorpse;
 }
 
 queuecreate(var_0) {
-  if(!isdefined(level.queues))
+  if(!isDefined(level.queues))
     level.queues = [];
 
   level.queues[var_0] = [];
@@ -1898,10 +1894,10 @@ queueremovefirst(var_0) {
   var_2 = [];
 
   foreach(var_4 in level.queues[var_0]) {
-    if(!isdefined(var_4)) {
+    if(!isDefined(var_4)) {
       continue;
     }
-    if(!isdefined(var_1)) {
+    if(!isDefined(var_1)) {
       var_1 = var_4;
       continue;
     }
@@ -1914,15 +1910,15 @@ queueremovefirst(var_0) {
 }
 
 _giveweapon(var_0, var_1, var_2) {
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     var_1 = -1;
 
   var_3 = 0;
 
-  if(isdefined(self.pers["toggleScopeStates"]) && isdefined(self.pers["toggleScopeStates"][var_0]))
+  if(isDefined(self.pers["toggleScopeStates"]) && isDefined(self.pers["toggleScopeStates"][var_0]))
     var_3 = self.pers["toggleScopeStates"][var_0];
 
-  if(issubstr(var_0, "akimbo") || isdefined(var_2) && var_2 == 1) {
+  if(issubstr(var_0, "akimbo") || isDefined(var_2) && var_2 == 1) {
     if(isagent(self))
       self giveweapon(var_0, var_1, 1, -1, 0);
     else
@@ -1934,7 +1930,7 @@ _giveweapon(var_0, var_1, var_2) {
 }
 
 _hasperk(var_0) {
-  if(isdefined(self.perks) && isdefined(self.perks[var_0]))
+  if(isDefined(self.perks) && isDefined(self.perks[var_0]))
     return 1;
 
   return 0;
@@ -1949,15 +1945,15 @@ _setperk(var_0, var_1, var_2) {
   self.perksperkname[var_0] = var_0;
   self.perksuseslot[var_0] = var_1;
 
-  if(isdefined(level.perksetfuncs[var_0]))
+  if(isDefined(level.perksetfuncs[var_0]))
     self thread[[level.perksetfuncs[var_0]]]();
 
   var_3 = strip_suffix(var_0, "_lefthand");
 
-  if(isdefined(var_2))
-    self setperk(var_0, !isdefined(level.scriptperks[var_3]), var_1, var_2);
+  if(isDefined(var_2))
+    self setperk(var_0, !isDefined(level.scriptperks[var_3]), var_1, var_2);
   else
-    self setperk(var_0, !isdefined(level.scriptperks[var_3]), var_1);
+    self setperk(var_0, !isDefined(level.scriptperks[var_3]), var_1);
 }
 
 _unsetperk(var_0) {
@@ -1966,16 +1962,16 @@ _unsetperk(var_0) {
   self.perksuseslot[var_0] = undefined;
   self.perksperkpower[var_0] = undefined;
 
-  if(isdefined(level.perkunsetfuncs[var_0]))
+  if(isDefined(level.perkunsetfuncs[var_0]))
     self thread[[level.perkunsetfuncs[var_0]]]();
 
   var_1 = strip_suffix(var_0, "_lefthand");
-  self unsetperk(var_0, !isdefined(level.scriptperks[var_1]));
+  self unsetperk(var_0, !isDefined(level.scriptperks[var_1]));
 }
 
 _clearperks() {
   foreach(var_2, var_1 in self.perks) {
-    if(isdefined(level.perkunsetfuncs[var_2]))
+    if(isDefined(level.perkunsetfuncs[var_2]))
       self[[level.perkunsetfuncs[var_2]]]();
   }
 
@@ -1992,7 +1988,7 @@ cangiveability(var_0) {
 }
 
 _cangiveability(var_0) {
-  if(!isdefined(level.abilitycansetfuncs) || !isdefined(level.abilitycansetfuncs[var_0]))
+  if(!isDefined(level.abilitycansetfuncs) || !isDefined(level.abilitycansetfuncs[var_0]))
     return 1;
 
   return self[[level.abilitycansetfuncs[var_0]]]();
@@ -2006,27 +2002,27 @@ _setability(var_0, var_1) {
   self.abilities[var_0] = 1;
 
   if(isplayer(self)) {
-    if(isdefined(level.abilitysetfuncs[var_0]))
+    if(isDefined(level.abilitysetfuncs[var_0]))
       self thread[[level.abilitysetfuncs[var_0]]]();
   }
 
-  self setperk(var_0, !isdefined(level.scriptabilities[var_0]), var_1);
+  self setperk(var_0, !isDefined(level.scriptabilities[var_0]), var_1);
 }
 
 _unsetability(var_0) {
   self.abilities[var_0] = undefined;
 
   if(isplayer(self)) {
-    if(isdefined(level.abilityunsetfuncs[var_0]))
+    if(isDefined(level.abilityunsetfuncs[var_0]))
       self thread[[level.abilityunsetfuncs[var_0]]]();
   }
 
-  self unsetperk(var_0, !isdefined(level.scriptabilities[var_0]));
+  self unsetperk(var_0, !isDefined(level.scriptabilities[var_0]));
 }
 
 _clearabilities() {
   if(isplayer(self)) {
-    if(isdefined(level.abilityunsetfuncs[self.pers["ability"]]))
+    if(isDefined(level.abilityunsetfuncs[self.pers["ability"]]))
       self[[level.abilityunsetfuncs[self.pers["ability"]]]]();
   }
 
@@ -2035,13 +2031,13 @@ _clearabilities() {
 }
 
 _hasability(var_0, var_1) {
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     var_1 = 0;
 
   if(var_1) {
-    if(isdefined(self.abilities[var_0]) && self.abilities[var_0])
+    if(isDefined(self.abilities[var_0]) && self.abilities[var_0])
       return 1;
-  } else if(isdefined(self.pers["ability"]) && self.pers["ability"] == var_0 && isdefined(self.pers["abilityOn"]) && self.pers["abilityOn"])
+  } else if(isDefined(self.pers["ability"]) && self.pers["ability"] == var_0 && isDefined(self.pers["abilityOn"]) && self.pers["abilityOn"])
     return 1;
 
   return 0;
@@ -2055,21 +2051,17 @@ quicksortmid(var_0, var_1, var_2, var_3) {
   var_4 = var_1;
   var_5 = var_2;
 
-  if(!isdefined(var_3))
+  if(!isDefined(var_3))
     var_3 = ::quicksort_compare;
 
   if(var_2 - var_1 >= 1) {
     var_6 = var_0[var_1];
 
-    while (var_5 > var_4) {
-      while ([
-          [var_3]
-        ](var_0[var_4], var_6) && var_4 <= var_2 && var_5 > var_4)
+    while(var_5 > var_4) {
+      while([[var_3]](var_0[var_4], var_6) && var_4 <= var_2 && var_5 > var_4)
         var_4++;
 
-      while (![
-          [var_3]
-        ](var_0[var_5], var_6) && var_5 >= var_1 && var_5 >= var_4)
+      while(![[var_3]](var_0[var_5], var_6) && var_5 >= var_1 && var_5 >= var_4)
         var_5--;
 
       if(var_5 > var_4)
@@ -2097,35 +2089,35 @@ swap(var_0, var_1, var_2) {
 }
 
 _suicide() {
-  if(isusingremote() && !isdefined(self.fauxdead))
+  if(isusingremote() && !isDefined(self.fauxdead))
     thread maps\mp\gametypes\_damage::playerkilled_internal(self, self, self, 10000, "MOD_SUICIDE", "h1_fraggrenade_mp", (0, 0, 0), "none", 0, 1116, 1, 0);
-  else if(!isusingremote() && !isdefined(self.fauxdead))
+  else if(!isusingremote() && !isDefined(self.fauxdead))
     self suicide();
 }
 
 isreallyalive(var_0) {
-  if(isalive(var_0) && !isdefined(var_0.fauxdead))
+  if(isalive(var_0) && !isDefined(var_0.fauxdead))
     return 1;
 
   return 0;
 }
 
 waittill_any_timeout_pause_on_death_and_prematch(var_0, var_1, var_2, var_3, var_4, var_5) {
-  var_6 = spawnstruct();
+  var_6 = spawnStruct();
 
-  if(isdefined(var_1))
+  if(isDefined(var_1))
     thread common_scripts\utility::waittill_string_no_endon_death(var_1, var_6);
 
-  if(isdefined(var_2))
+  if(isDefined(var_2))
     thread common_scripts\utility::waittill_string_no_endon_death(var_2, var_6);
 
-  if(isdefined(var_3))
+  if(isDefined(var_3))
     thread common_scripts\utility::waittill_string_no_endon_death(var_3, var_6);
 
-  if(isdefined(var_4))
+  if(isDefined(var_4))
     thread common_scripts\utility::waittill_string_no_endon_death(var_4, var_6);
 
-  if(isdefined(var_5))
+  if(isDefined(var_5))
     thread common_scripts\utility::waittill_string_no_endon_death(var_5, var_6);
 
   var_6 thread _timeout_pause_on_death_and_prematch(var_0, self);
@@ -2137,7 +2129,7 @@ waittill_any_timeout_pause_on_death_and_prematch(var_0, var_1, var_2, var_3, var
 _timeout_pause_on_death_and_prematch(var_0, var_1) {
   self endon("die");
 
-  for (var_2 = 0.05; var_0 > 0; var_0 = var_0 - var_2) {
+  for(var_2 = 0.05; var_0 > 0; var_0 = var_0 - var_2) {
     if(isplayer(var_1) && !isreallyalive(var_1))
       var_1 waittill("spawned_player");
 
@@ -2151,23 +2143,23 @@ _timeout_pause_on_death_and_prematch(var_0, var_1) {
 }
 
 playdeathsound() {
-  if(isdefined(level.customplaydeathsound))
+  if(isDefined(level.customplaydeathsound))
     self thread[[level.customplaydeathsound]]();
   else {
     var_0 = randomintrange(1, 8);
 
     if(self.team == "axis") {
       if(self hasfemalecustomizationmodel())
-        self playsound("generic_death_enemy_fm_" + var_0);
+        self playSound("generic_death_enemy_fm_" + var_0);
       else
-        self playsound("generic_death_enemy_" + var_0);
+        self playSound("generic_death_enemy_" + var_0);
     } else {
       if(self hasfemalecustomizationmodel()) {
-        self playsound("generic_death_friendly_fm_" + var_0);
+        self playSound("generic_death_friendly_fm_" + var_0);
         return;
       }
 
-      self playsound("generic_death_friendly_" + var_0);
+      self playSound("generic_death_friendly_" + var_0);
     }
   }
 }
@@ -2205,7 +2197,7 @@ getgametypenumlives() {
 
 arrayinsertion(var_0, var_1, var_2) {
   if(var_0.size != 0) {
-    for (var_3 = var_0.size; var_3 >= var_2; var_3--)
+    for(var_3 = var_0.size; var_3 >= var_2; var_3--)
       var_0[var_3 + 1] = var_0[var_3];
   }
 
@@ -2231,37 +2223,37 @@ getfloatproperty(var_0, var_1) {
 }
 
 ischangingweapon() {
-  return isdefined(self.changingweapon);
+  return isDefined(self.changingweapon);
 }
 
 killshouldaddtokillstreak(var_0, var_1) {
-  if(isdefined(var_0) && isdefined(var_0.requireddeathcount) && isdefined(self.deaths) && self.deaths != var_0.requireddeathcount)
+  if(isDefined(var_0) && isDefined(var_0.requireddeathcount) && isDefined(self.deaths) && self.deaths != var_0.requireddeathcount)
     return 0;
 
   return 1;
 }
 
 isjuggernaut() {
-  if(isdefined(self.isjuggernaut) && self.isjuggernaut == 1)
+  if(isDefined(self.isjuggernaut) && self.isjuggernaut == 1)
     return 1;
 
-  if(isdefined(self.isjuggernautdef) && self.isjuggernautdef == 1)
+  if(isDefined(self.isjuggernautdef) && self.isjuggernautdef == 1)
     return 1;
 
-  if(isdefined(self.isjuggernautgl) && self.isjuggernautgl == 1)
+  if(isDefined(self.isjuggernautgl) && self.isjuggernautgl == 1)
     return 1;
 
-  if(isdefined(self.isjuggernautrecon) && self.isjuggernautrecon == 1)
+  if(isDefined(self.isjuggernautrecon) && self.isjuggernautrecon == 1)
     return 1;
 
-  if(isdefined(self.isjuggernautmaniac) && self.isjuggernautmaniac == 1)
+  if(isDefined(self.isjuggernautmaniac) && self.isjuggernautmaniac == 1)
     return 1;
 
   return 0;
 }
 
 iskillstreakweapon(var_0) {
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     return 0;
 
   if(var_0 == "none")
@@ -2284,7 +2276,7 @@ iskillstreakweapon(var_0) {
 }
 
 isdestructibleweapon(var_0) {
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     return 0;
 
   switch (var_0) {
@@ -2307,7 +2299,7 @@ isdivisionmode() {
 }
 
 isbombsiteweapon(var_0) {
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     return 0;
 
   switch (var_0) {
@@ -2321,7 +2313,7 @@ isbombsiteweapon(var_0) {
 }
 
 isenvironmentweapon(var_0) {
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     return 0;
 
   if(var_0 == "turret_minigun_mp")
@@ -2380,10 +2372,10 @@ getweaponclass(var_0) {
 getweaponattachmentarrayfromstats(var_0) {
   var_0 = getbaseweaponname(var_0);
 
-  if(!isdefined(level.weaponattachments[var_0])) {
+  if(!isDefined(level.weaponattachments[var_0])) {
     var_1 = [];
 
-    for (var_2 = 0; var_2 <= 29; var_2++) {
+    for(var_2 = 0; var_2 <= 29; var_2++) {
       var_3 = tablelookup("mp\statsTable.csv", 4, var_0, 11 + var_2);
 
       if(var_3 == "") {
@@ -2405,16 +2397,16 @@ getweaponattachmentfromstats(var_0, var_1) {
 }
 
 getbasearrayforattachkit(var_0) {
-  if(!isdefined(level.baseattachkits))
+  if(!isDefined(level.baseattachkits))
     level.baseattachkits = [];
 
-  if(!isdefined(level.baseattachkits[var_0])) {
+  if(!isDefined(level.baseattachkits[var_0])) {
     var_1 = 2;
     var_2 = 5;
     var_3 = tablelookuprownum("mp\attachkits.csv", 1, var_0);
     var_4 = [];
 
-    for (var_5 = var_1; var_5 <= var_2; var_5++) {
+    for(var_5 = var_1; var_5 <= var_2; var_5++) {
       var_6 = tablelookupbyrow("mp\attachkits.csv", var_3, var_5);
 
       if(var_6 != "")
@@ -2428,10 +2420,10 @@ getbasearrayforattachkit(var_0) {
 }
 
 getgroupforattachkitbase(var_0) {
-  if(!isdefined(level.attachkitgroup))
+  if(!isDefined(level.attachkitgroup))
     level.attachkitgroup = [];
 
-  if(!isdefined(level.attachkitgroup[var_0])) {
+  if(!isDefined(level.attachkitgroup[var_0])) {
     var_1 = 2;
     var_2 = tablelookuprownum("mp\attachmentbase.csv", 1, var_0);
     level.attachkitgroup[var_0] = tablelookupbyrow("mp\attachmentbase.csv", var_2, var_1);
@@ -2441,7 +2433,7 @@ getgroupforattachkitbase(var_0) {
 }
 
 getbaseweaponname(var_0) {
-  if(!isdefined(var_0) || var_0 == "none" || var_0 == "")
+  if(!isDefined(var_0) || var_0 == "none" || var_0 == "")
     return var_0;
 
   var_1 = getweaponnametokens(var_0);
@@ -2466,7 +2458,7 @@ playsoundinspace(var_0, var_1) {
 limitdecimalplaces(var_0, var_1) {
   var_2 = 1;
 
-  for (var_3 = 0; var_3 < var_1; var_3++)
+  for(var_3 = 0; var_3 < var_1; var_3++)
     var_2 = var_2 * 10;
 
   var_4 = var_0 * var_2;
@@ -2476,12 +2468,12 @@ limitdecimalplaces(var_0, var_1) {
 }
 
 rounddecimalplaces(var_0, var_1, var_2) {
-  if(!isdefined(var_2))
+  if(!isDefined(var_2))
     var_2 = "nearest";
 
   var_3 = 1;
 
-  for (var_4 = 0; var_4 < var_1; var_4++)
+  for(var_4 = 0; var_4 < var_1; var_4++)
     var_3 = var_3 * 10;
 
   var_5 = var_0 * var_3;
@@ -2511,10 +2503,10 @@ stringtofloat(var_0) {
   var_1 = strtok(var_0, ".");
   var_2 = int(var_1[0]);
 
-  if(isdefined(var_1[1])) {
+  if(isDefined(var_1[1])) {
     var_3 = 1;
 
-    for (var_4 = 0; var_4 < var_1[1].size; var_4++)
+    for(var_4 = 0; var_4 < var_1[1].size; var_4++)
       var_3 = var_3 * 0.1;
 
     var_2 = var_2 + int(var_1[1]) * var_3;
@@ -2551,7 +2543,7 @@ maketeamusable(var_0) {
 _updateteamusable(var_0) {
   self endon("death");
 
-  for (;;) {
+  for(;;) {
     foreach(var_2 in level.players) {
       if(var_2.team == var_0) {
         self enableplayeruse(var_2);
@@ -2574,7 +2566,7 @@ _updateenemyusable(var_0) {
   self endon("death");
   var_1 = var_0.team;
 
-  for (;;) {
+  for(;;) {
     if(level.teambased) {
       foreach(var_3 in level.players) {
         if(var_3.team != var_1) {
@@ -2610,7 +2602,7 @@ getnextlifeid() {
 }
 
 initgameflags() {
-  if(!isdefined(game["flags"]))
+  if(!isDefined(game["flags"]))
     game["flags"] = [];
 }
 
@@ -2623,7 +2615,7 @@ gameflag(var_0) {
 }
 
 gameflagexists(var_0) {
-  return isdefined(game["flags"][var_0]);
+  return isDefined(game["flags"][var_0]);
 }
 
 gameflagset(var_0) {
@@ -2636,7 +2628,7 @@ gameflagclear(var_0) {
 }
 
 gameflagwait(var_0) {
-  while (!gameflag(var_0))
+  while(!gameflag(var_0))
     level waittill(var_0);
 }
 
@@ -2650,11 +2642,11 @@ isbulletdamage(var_0) {
 }
 
 isfmjdamage(var_0, var_1, var_2) {
-  return isdefined(var_2) && isplayer(var_2) && var_2 _hasperk("specialty_bulletpenetration") && isdefined(var_1) && isbulletdamage(var_1);
+  return isDefined(var_2) && isplayer(var_2) && var_2 _hasperk("specialty_bulletpenetration") && isDefined(var_1) && isbulletdamage(var_1);
 }
 
 initlevelflags() {
-  if(!isdefined(level.levelflags))
+  if(!isDefined(level.levelflags))
     level.levelflags = [];
 }
 
@@ -2677,25 +2669,25 @@ levelflagclear(var_0) {
 }
 
 levelflagwait(var_0) {
-  while (!levelflag(var_0))
+  while(!levelflag(var_0))
     level waittill(var_0);
 }
 
 levelflagwaitopen(var_0) {
-  while (levelflag(var_0))
+  while(levelflag(var_0))
     level waittill(var_0);
 }
 
 invirtuallobby() {
-  if(!isdefined(level.virtuallobbyactive) || level.virtuallobbyactive == 0)
+  if(!isDefined(level.virtuallobbyactive) || level.virtuallobbyactive == 0)
     return 0;
 
   return 1;
 }
 
 initglobals() {
-  if(!isdefined(level.global_tables)) {
-    level.global_tables["killstreakTable"] = spawnstruct();
+  if(!isDefined(level.global_tables)) {
+    level.global_tables["killstreakTable"] = spawnStruct();
     level.global_tables["killstreakTable"].path = "mp\killstreakTable.csv";
     level.global_tables["killstreakTable"].index_col = 0;
     level.global_tables["killstreakTable"].ref_col = 1;
@@ -2755,7 +2747,7 @@ isnuked() {
   if(self.team == "spectator")
     return 0;
 
-  return isdefined(self.nuked);
+  return isDefined(self.nuked);
 }
 
 getplayerforguid(var_0) {
@@ -2772,7 +2764,7 @@ teamplayercardsplash(var_0, var_1, var_2, var_3) {
     return;
   }
   foreach(var_5 in level.players) {
-    if(isdefined(var_2) && var_5.team != var_2) {
+    if(isDefined(var_2) && var_5.team != var_2) {
       continue;
     }
     if(!isplayer(var_5)) {
@@ -2826,7 +2818,7 @@ getlastlivingplayer(var_0) {
   var_1 = undefined;
 
   foreach(var_3 in level.players) {
-    if(isdefined(var_0) && var_3.team != var_0) {
+    if(isDefined(var_0) && var_3.team != var_0) {
       continue;
     }
     if(!isreallyalive(var_3) && !var_3 maps\mp\gametypes\_playerlogic::mayspawn()) {
@@ -2856,13 +2848,13 @@ waittillrecoveredhealth(var_0, var_1) {
   self endon("disconnect");
   var_2 = 0;
 
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     var_1 = 0.05;
 
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     var_0 = 0;
 
-  for (;;) {
+  for(;;) {
     if(self.health != self.maxhealth)
       var_2 = 0;
     else
@@ -2886,7 +2878,7 @@ isattachmentsniperscopedefault(var_0, var_1) {
 isattachmentsniperscopedefaulttokenized(var_0, var_1) {
   var_2 = 0;
 
-  if(var_0.size && isdefined(var_1)) {
+  if(var_0.size && isDefined(var_1)) {
     var_3 = 0;
 
     if(var_0[0] == "alt")
@@ -2914,7 +2906,7 @@ getattachmentlistbasenames() {
   var_0 = [];
   var_1 = 0;
 
-  for (var_2 = tablelookup("mp\attachmentTable.csv", 0, var_1, 4); var_2 != ""; var_2 = tablelookup("mp\attachmentTable.csv", 0, var_1, 4)) {
+  for(var_2 = tablelookup("mp\attachmentTable.csv", 0, var_1, 4); var_2 != ""; var_2 = tablelookup("mp\attachmentTable.csv", 0, var_1, 4)) {
     if(!common_scripts\utility::array_contains(var_0, var_2))
       var_0[var_0.size] = var_2;
 
@@ -2928,7 +2920,7 @@ getattachmentlistuniqenames() {
   var_0 = [];
   var_1 = 0;
 
-  for (var_2 = tablelookupbyrow("mp\attachoverrides.csv", var_1, 2); var_2 != ""; var_2 = tablelookupbyrow("mp\attachoverrides.csv", var_1, 2)) {
+  for(var_2 = tablelookupbyrow("mp\attachoverrides.csv", var_1, 2); var_2 != ""; var_2 = tablelookupbyrow("mp\attachoverrides.csv", var_1, 2)) {
     var_0[var_0.size] = var_2;
     var_1++;
   }
@@ -2951,7 +2943,7 @@ buildattachmentmaps() {
 }
 
 attachmentmap_tobase(var_0) {
-  if(isdefined(level.attachmentmap_uniquetobase[var_0]))
+  if(isDefined(level.attachmentmap_uniquetobase[var_0]))
     var_0 = level.attachmentmap_uniquetobase[var_0];
 
   return var_0;
@@ -2960,7 +2952,7 @@ attachmentmap_tobase(var_0) {
 _objective_delete(var_0) {
   objective_delete(var_0);
 
-  if(!isdefined(level.reclaimedreservedobjectives)) {
+  if(!isDefined(level.reclaimedreservedobjectives)) {
     level.reclaimedreservedobjectives = [];
     level.reclaimedreservedobjectives[0] = var_0;
   } else
@@ -2968,24 +2960,24 @@ _objective_delete(var_0) {
 }
 
 touchingbadtrigger() {
-  var_0 = getentarray("trigger_hurt", "classname");
+  var_0 = getEntArray("trigger_hurt", "classname");
 
   foreach(var_2 in var_0) {
     if(self istouching(var_2))
       return 1;
   }
 
-  var_4 = getentarray("radiation", "targetname");
+  var_4 = getEntArray("radiation", "targetname");
 
   foreach(var_2 in var_4) {
     if(self istouching(var_2))
       return 1;
   }
 
-  if(isdefined(level.ishorde) && level.ishorde) {
+  if(isDefined(level.ishorde) && level.ishorde) {
     if(getmapname() == "mp_torqued") {
-      if(isdefined(level.hordeavalanche) && level.hordeavalanche && isdefined(level.dyneventavalanche.status) && level.dyneventavalanche.status != "post_avalanche") {
-        var_7 = getentarray("quake_kill_volume01", "targetname");
+      if(isDefined(level.hordeavalanche) && level.hordeavalanche && isDefined(level.dyneventavalanche.status) && level.dyneventavalanche.status != "post_avalanche") {
+        var_7 = getEntArray("quake_kill_volume01", "targetname");
 
         foreach(var_9 in var_7) {
           if(self istouching(var_9))
@@ -3000,7 +2992,7 @@ touchingbadtrigger() {
     }
   }
 
-  if(getdvar("g_gametype") == "hp" && isdefined(level.zone) && isdefined(level.zone.trig) && self istouching(level.zone.trig))
+  if(getdvar("g_gametype") == "hp" && isDefined(level.zone) && isDefined(level.zone.trig) && self istouching(level.zone.trig))
     return 1;
 
   return 0;
@@ -3016,7 +3008,7 @@ setthirdpersondof(var_0) {
 killtrigger(var_0, var_1, var_2) {
   var_3 = spawn("trigger_radius", var_0, 0, var_1, var_2);
 
-  for (;;) {
+  for(;;) {
     var_3 waittill("trigger", var_4);
 
     if(!isplayer(var_4)) {
@@ -3028,7 +3020,7 @@ killtrigger(var_0, var_1, var_2) {
 
 findisfacing(var_0, var_1, var_2) {
   var_3 = cos(var_2);
-  var_4 = anglestoforward(var_0.angles);
+  var_4 = anglesToForward(var_0.angles);
   var_5 = var_1.origin - var_0.origin;
   var_4 = var_4 * (1, 1, 0);
   var_5 = var_5 * (1, 1, 0);
@@ -3045,28 +3037,28 @@ findisfacing(var_0, var_1, var_2) {
 drawline(var_0, var_1, var_2, var_3) {
   var_4 = int(var_2 * 20);
 
-  for (var_5 = 0; var_5 < var_4; var_5++)
+  for(var_5 = 0; var_5 < var_4; var_5++)
     wait 0.05;
 }
 
 drawsphere(var_0, var_1, var_2, var_3) {
   var_4 = int(var_2 * 20);
 
-  for (var_5 = 0; var_5 < var_4; var_5++)
+  for(var_5 = 0; var_5 < var_4; var_5++)
     wait 0.05;
 }
 
 setrecoilscale(var_0, var_1) {
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     var_0 = 0;
 
-  if(!isdefined(self.recoilscale))
+  if(!isDefined(self.recoilscale))
     self.recoilscale = var_0;
   else
     self.recoilscale = self.recoilscale + var_0;
 
-  if(isdefined(var_1)) {
-    if(isdefined(self.recoilscale) && var_1 < self.recoilscale)
+  if(isDefined(var_1)) {
+    if(isDefined(self.recoilscale) && var_1 < self.recoilscale)
       var_1 = self.recoilscale;
 
     var_2 = 100 - var_1;
@@ -3091,7 +3083,7 @@ cleanarray(var_0) {
   var_1 = [];
 
   foreach(var_4, var_3 in var_0) {
-    if(!isdefined(var_3)) {
+    if(!isDefined(var_3)) {
       continue;
     }
     var_1[var_1.size] = var_0[var_4];
@@ -3108,10 +3100,10 @@ notusableforjoiningplayers(var_0) {
   var_0 endon("death");
   self endon("notusablejoiningplayers");
 
-  for (;;) {
+  for(;;) {
     level waittill("player_spawned", var_1);
 
-    if(isdefined(var_1) && var_1 != var_0)
+    if(isDefined(var_1) && var_1 != var_0)
       self disableplayeruse(var_1);
   }
 }
@@ -3129,14 +3121,14 @@ enableallstreaks() {
 }
 
 validateusestreak(var_0, var_1) {
-  if(isdefined(var_0))
+  if(isDefined(var_0))
     var_2 = var_0;
   else {
     var_3 = self.pers["killstreaks"];
     var_2 = var_3[self.killstreakindexweapon].streakname;
   }
 
-  if(isdefined(level.killstreaksdisabled) && level.killstreaksdisabled)
+  if(isDefined(level.killstreaksdisabled) && level.killstreaksdisabled)
     return 0;
 
   if(!self isonground() && isridekillstreak(var_2))
@@ -3145,13 +3137,13 @@ validateusestreak(var_0, var_1) {
   if(isusingremote() || isinremotetransition())
     return 0;
 
-  if(isdefined(self.selectinglocation))
+  if(isDefined(self.selectinglocation))
     return 0;
 
   if(shouldpreventearlyuse(var_2) && level.killstreakrounddelay) {
     var_4 = 0;
 
-    if(isdefined(level.prematch_done_time))
+    if(isDefined(level.prematch_done_time))
       var_4 = (gettime() - level.prematch_done_time) / 1000;
 
     if(var_4 < level.killstreakrounddelay) {
@@ -3160,18 +3152,18 @@ validateusestreak(var_0, var_1) {
       if(!var_5)
         var_5 = 1;
 
-      if(!(isdefined(var_1) && var_1))
+      if(!(isDefined(var_1) && var_1))
         self iprintlnbold(&"MP_UNAVAILABLE_FOR_N", var_5);
 
       return 0;
     }
   }
 
-  if(isemped() && (!isdefined(level.iszombiegame) || !level.iszombiegame)) {
-    if(!(isdefined(var_1) && var_1)) {
-      if(isdefined(level.emptimeremaining) && level.emptimeremaining > 0)
+  if(isemped() && (!isDefined(level.iszombiegame) || !level.iszombiegame)) {
+    if(!(isDefined(var_1) && var_1)) {
+      if(isDefined(level.emptimeremaining) && level.emptimeremaining > 0)
         self iprintlnbold(&"MP_UNAVAILABLE_FOR_N_WHEN_EMP", level.emptimeremaining);
-      else if(isdefined(self.empendtime) && int((self.empendtime - gettime()) / 1000) > 0)
+      else if(isDefined(self.empendtime) && int((self.empendtime - gettime()) / 1000) > 0)
         self iprintlnbold(&"MP_UNAVAILABLE_FOR_N", int((self.empendtime - gettime()) / 1000));
     }
 
@@ -3179,14 +3171,14 @@ validateusestreak(var_0, var_1) {
   }
 
   if(self isusingturret() && (isridekillstreak(var_2) || iscarrykillstreak(var_2))) {
-    if(!(isdefined(var_1) && var_1))
+    if(!(isDefined(var_1) && var_1))
       self iprintlnbold(&"MP_UNAVAILABLE_USING_TURRET");
 
     return 0;
   }
 
-  if(isdefined(self.laststand) && !_hasperk("specialty_finalstand")) {
-    if(!(isdefined(var_1) && var_1))
+  if(isDefined(self.laststand) && !_hasperk("specialty_finalstand")) {
+    if(!(isDefined(var_1) && var_1))
       self iprintlnbold(&"MP_UNAVILABLE_IN_LASTSTAND");
 
     return 0;
@@ -3237,7 +3229,7 @@ isflyingkillstreak(var_0) {
 isallteamstreak(var_0) {
   var_1 = getkillstreakallteamstreak(var_0);
 
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     return 0;
 
   if(int(var_1) == 1)
@@ -3305,10 +3297,10 @@ getkillstreakenemyusedialog(var_0) {
 }
 
 getkillstreakweapon(var_0, var_1) {
-  if(isdefined(var_1) && var_1.size > 0) {
+  if(isDefined(var_1) && var_1.size > 0) {
     var_2 = _getmodulekillstreakweapon(var_0, var_1);
 
-    if(isdefined(var_2))
+    if(isDefined(var_2))
       return var_2;
   }
 
@@ -3342,25 +3334,25 @@ getkillstreakallteamstreak(var_0) {
 }
 
 currentactivevehiclecount(var_0) {
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     var_0 = 0;
 
   var_1 = var_0;
 
-  if(isdefined(level.helis))
+  if(isDefined(level.helis))
     var_1 = var_1 + level.helis.size;
 
-  if(isdefined(level.littlebirds))
+  if(isDefined(level.littlebirds))
     var_1 = var_1 + level.littlebirds.size;
 
-  if(isdefined(level.ugvs))
+  if(isDefined(level.ugvs))
     var_1 = var_1 + level.ugvs.size;
 
-  if(isdefined(level.ishorde) && level.ishorde) {
-    if(isdefined(level.flying_attack_drones))
+  if(isDefined(level.ishorde) && level.ishorde) {
+    if(isDefined(level.flying_attack_drones))
       var_1 = var_1 + level.flying_attack_drones.size;
 
-    if(isdefined(level.trackingdrones))
+    if(isDefined(level.trackingdrones))
       var_1 = var_1 + level.trackingdrones.size;
   }
 
@@ -3407,7 +3399,7 @@ allowclasschoice() {
   if(ishodgepodgemm() || ishodgepodgerpgonly())
     return 0;
 
-  if(ishodgepodgeph() && (!level.madpropsmode || isdefined(self.team) && level.madpropsmode && self.team == game["defenders"]))
+  if(ishodgepodgeph() && (!level.madpropsmode || isDefined(self.team) && level.madpropsmode && self.team == game["defenders"]))
     return 0;
 
   var_0 = int(tablelookup("mp\gametypesTable.csv", 0, level.gametype, 5));
@@ -3490,7 +3482,7 @@ setcommonrulesfrommatchrulesdata(var_0) {
   setdynamicdvar("camera_thirdPerson", getmatchrulesdata("commonOption", "forceThirdPersonView"));
   setdynamicdvar("scr_game_onlyheadshots", getmatchrulesdata("commonOption", "headshotsOnly"));
 
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     setdynamicdvar("scr_team_fftype", getmatchrulesdata("commonOption", "ffType"));
 
   setdynamicdvar("scr_game_killstreakdelay", getmatchrulesdata("commonOption", "streakGracePeriod"));
@@ -3508,24 +3500,22 @@ setcommonrulesfrommatchrulesdata(var_0) {
 }
 
 reinitializematchrulesonmigration() {
-  for (;;) {
+  for(;;) {
     level waittill("host_migration_begin");
-    [
-      [level.initializematchrules]
-    ]();
+    [[level.initializematchrules]]();
   }
 }
 
 reinitializethermal(var_0) {
   self endon("disconnect");
 
-  if(isdefined(var_0))
+  if(isDefined(var_0))
     var_0 endon("death");
 
-  for (;;) {
+  for(;;) {
     level waittill("host_migration_begin");
 
-    if(isdefined(self.lastvisionsetthermal))
+    if(isDefined(self.lastvisionsetthermal))
       self visionsetthermalforplayer(self.lastvisionsetthermal, 0);
   }
 }
@@ -3549,7 +3539,7 @@ getmatchrulesspecialclass(var_0, var_1) {
   var_2["loadoutEquipment"] = getmatchrulesdata("defaultClasses", var_0, "defaultClass", var_1, "class", "equipment", 0);
   var_2["loadoutOffhand"] = getmatchrulesdata("defaultClasses", var_0, "defaultClass", var_1, "class", "equipment", 1);
 
-  for (var_5 = 0; var_5 < 3; var_5++)
+  for(var_5 = 0; var_5 < 3; var_5++)
     var_2["loadoutPerks"][var_5] = getmatchrulesdata("defaultClasses", var_0, "defaultClass", var_1, "class", "perkSlots", var_5);
 
   var_2["loadoutMelee"] = "none";
@@ -3560,7 +3550,7 @@ recipeclassapplyjuggernaut(var_0) {
   level endon("game_ended");
   self endon("disconnect");
 
-  if(!isdefined(level.ishorde)) {
+  if(!isDefined(level.ishorde)) {
     if(level.ingraceperiod && !self.hasdonecombat)
       self waittill("applyLoadout");
     else
@@ -3573,7 +3563,7 @@ recipeclassapplyjuggernaut(var_0) {
     wait 0.5;
   }
 
-  if(!isdefined(self.isjuiced)) {
+  if(!isDefined(self.isjuiced)) {
     self.movespeedscaler = 0.7;
     maps\mp\gametypes\_weapons::updatemovespeedscale();
   }
@@ -3581,7 +3571,7 @@ recipeclassapplyjuggernaut(var_0) {
   self.juggmovespeedscaler = 0.7;
   self disableweaponpickup();
 
-  if(!getdvarint("camera_thirdPerson") && !isdefined(level.ishorde)) {
+  if(!getdvarint("camera_thirdPerson") && !isDefined(level.ishorde)) {
     self.juggernautoverlay = newclienthudelem(self);
     self.juggernautoverlay.x = 0;
     self.juggernautoverlay.y = 0;
@@ -3595,10 +3585,10 @@ recipeclassapplyjuggernaut(var_0) {
     self.juggernautoverlay.hidein3rdperson = 1;
   }
 
-  if(level.gametype != "jugg" || isdefined(level.matchrules_showjuggradaricon) && level.matchrules_showjuggradaricon)
+  if(level.gametype != "jugg" || isDefined(level.matchrules_showjuggradaricon) && level.matchrules_showjuggradaricon)
     self setperk("specialty_radarjuggernaut", 1, 0);
 
-  if(isdefined(self.isjuggmodejuggernaut) && self.isjuggmodejuggernaut) {
+  if(isDefined(self.isjuggmodejuggernaut) && self.isjuggmodejuggernaut) {
     var_1 = spawn("script_model", self.origin);
     var_1.team = self.team;
     var_1 makeportableradar(self);
@@ -3618,7 +3608,7 @@ updatesessionstate(var_0) {
 }
 
 cac_getcustomclassloc() {
-  if(isdefined(level.forcecustomclassloc))
+  if(isDefined(level.forcecustomclassloc))
     return level.forcecustomclassloc;
 
   if(getdvarint("xblive_privatematch") || issystemlink())
@@ -3635,7 +3625,7 @@ isteaminlaststand() {
   var_0 = getlivingplayers(self.team);
 
   foreach(var_2 in var_0) {
-    if(var_2 != self && (!isdefined(var_2.laststand) || !var_2.laststand))
+    if(var_2 != self && (!isDefined(var_2.laststand) || !var_2.laststand))
       return 0;
   }
 
@@ -3646,7 +3636,7 @@ killteaminlaststand(var_0) {
   var_1 = getlivingplayers(var_0);
 
   foreach(var_3 in var_1) {
-    if(isdefined(var_3.laststand) && var_3.laststand)
+    if(isDefined(var_3.laststand) && var_3.laststand)
       var_3 thread maps\mp\gametypes\_damage::dieaftertime(randomintrange(1, 3));
   }
 }
@@ -3720,8 +3710,8 @@ ismeleemod(var_0) {
 }
 
 isheadshot(var_0, var_1, var_2, var_3) {
-  if(isdefined(var_3)) {
-    if(isdefined(var_3.owner)) {
+  if(isDefined(var_3)) {
+    if(isDefined(var_3.owner)) {
       if(var_3.code_classname == "script_vehicle")
         return 0;
 
@@ -3732,7 +3722,7 @@ isheadshot(var_0, var_1, var_2, var_3) {
         return 0;
     }
 
-    if(isdefined(var_3.agent_type)) {
+    if(isDefined(var_3.agent_type)) {
       if(var_3.agent_type == "dog" || var_3.agent_type == "alien")
         return 0;
     }
@@ -3744,15 +3734,15 @@ isheadshot(var_0, var_1, var_2, var_3) {
 attackerishittingteam(var_0, var_1) {
   if(!level.teambased)
     return 0;
-  else if(!isdefined(var_1) || !isdefined(var_0))
+  else if(!isDefined(var_1) || !isDefined(var_0))
     return 0;
-  else if(!isdefined(var_0.team) || !isdefined(var_1.team))
+  else if(!isDefined(var_0.team) || !isDefined(var_1.team))
     return 0;
   else if(var_0 == var_1)
     return 0;
-  else if(var_0.pers["team"] == var_1.team && isdefined(var_1.teamchangedthisframe))
+  else if(var_0.pers["team"] == var_1.team && isDefined(var_1.teamchangedthisframe))
     return 0;
-  else if(isdefined(var_1.scrambled) && var_1.scrambled)
+  else if(isDefined(var_1.scrambled) && var_1.scrambled)
     return 0;
   else if(var_0.team == var_1.team)
     return 1;
@@ -3761,55 +3751,51 @@ attackerishittingteam(var_0, var_1) {
 }
 
 set_high_priority_target_for_bot(var_0) {
-  if(!(isdefined(self.high_priority_for) && common_scripts\utility::array_contains(self.high_priority_for, var_0))) {
+  if(!(isDefined(self.high_priority_for) && common_scripts\utility::array_contains(self.high_priority_for, var_0))) {
     self.high_priority_for = common_scripts\utility::array_add(self.high_priority_for, var_0);
     var_0 notify("calculate_new_level_targets");
   }
 }
 
 add_to_bot_use_targets(var_0, var_1) {
-  if(isdefined(level.bot_funcs) && isdefined(level.bot_funcs["bots_add_to_level_targets"])) {
+  if(isDefined(level.bot_funcs) && isDefined(level.bot_funcs["bots_add_to_level_targets"])) {
     var_0.use_time = var_1;
     var_0.bot_interaction_type = "use";
-    [
-      [level.bot_funcs["bots_add_to_level_targets"]]
-    ](var_0);
+    [[level.bot_funcs["bots_add_to_level_targets"]]](var_0);
   }
 }
 
 remove_from_bot_use_targets(var_0) {
-  if(isdefined(level.bot_funcs) && isdefined(level.bot_funcs["bots_remove_from_level_targets"]))
+  if(isDefined(level.bot_funcs) && isDefined(level.bot_funcs["bots_remove_from_level_targets"]))
     [[level.bot_funcs["bots_remove_from_level_targets"]]](var_0);
 }
 
 add_to_bot_damage_targets(var_0) {
-  if(isdefined(level.bot_funcs) && isdefined(level.bot_funcs["bots_add_to_level_targets"])) {
+  if(isDefined(level.bot_funcs) && isDefined(level.bot_funcs["bots_add_to_level_targets"])) {
     var_0.bot_interaction_type = "damage";
-    [
-      [level.bot_funcs["bots_add_to_level_targets"]]
-    ](var_0);
+    [[level.bot_funcs["bots_add_to_level_targets"]]](var_0);
   }
 }
 
 remove_from_bot_damage_targets(var_0) {
-  if(isdefined(level.bot_funcs) && isdefined(level.bot_funcs["bots_remove_from_level_targets"]))
+  if(isDefined(level.bot_funcs) && isDefined(level.bot_funcs["bots_remove_from_level_targets"]))
     [[level.bot_funcs["bots_remove_from_level_targets"]]](var_0);
 }
 
 notify_enemy_bots_bomb_used(var_0) {
-  if(isdefined(level.bot_funcs) && isdefined(level.bot_funcs["notify_enemy_bots_bomb_used"]))
+  if(isDefined(level.bot_funcs) && isDefined(level.bot_funcs["notify_enemy_bots_bomb_used"]))
     self[[level.bot_funcs["notify_enemy_bots_bomb_used"]]](var_0);
 }
 
 get_rank_xp_and_prestige_for_bot() {
-  if(isdefined(level.bot_funcs) && isdefined(level.bot_funcs["bot_get_rank_xp_and_prestige"]))
+  if(isDefined(level.bot_funcs) && isDefined(level.bot_funcs["bot_get_rank_xp_and_prestige"]))
     return self[[level.bot_funcs["bot_get_rank_xp_and_prestige"]]]();
 }
 
 set_rank_xp_and_prestige_for_bot() {
   var_0 = get_rank_xp_and_prestige_for_bot();
 
-  if(isdefined(var_0)) {
+  if(isDefined(var_0)) {
     self.pers["rankxp"] = var_0.rankxp;
     self.pers["prestige"] = var_0.prestige;
     self.pers["prestige_fake"] = var_0.prestige;
@@ -3817,28 +3803,28 @@ set_rank_xp_and_prestige_for_bot() {
 }
 
 set_rank_options_for_bot() {
-  if(isdefined(level.bot_funcs) && isdefined(level.bot_funcs["bot_set_rank_options"]))
+  if(isDefined(level.bot_funcs) && isDefined(level.bot_funcs["bot_set_rank_options"]))
     self[[level.bot_funcs["bot_set_rank_options"]]]();
 }
 
 set_console_status() {
-  if(!isdefined(level.console))
+  if(!isDefined(level.console))
     level.console = getdvar("consoleGame") == "true";
   else {}
 
-  if(!isdefined(level.xenon))
+  if(!isDefined(level.xenon))
     level.xenon = getdvar("xenonGame") == "true";
   else {}
 
-  if(!isdefined(level.ps3))
+  if(!isDefined(level.ps3))
     level.ps3 = getdvar("ps3Game") == "true";
   else {}
 
-  if(!isdefined(level.xb3))
+  if(!isDefined(level.xb3))
     level.xb3 = getdvar("xb3Game") == "true";
   else {}
 
-  if(!isdefined(level.ps4))
+  if(!isDefined(level.ps4))
     level.ps4 = getdvar("ps4Game") == "true";
   else {}
 }
@@ -3851,7 +3837,7 @@ is_gen4() {
 }
 
 setdvar_cg_ng(var_0, var_1, var_2) {
-  if(!isdefined(level.console) || !isdefined(level.xb3) || !isdefined(level.ps4))
+  if(!isDefined(level.console) || !isDefined(level.xb3) || !isDefined(level.ps4))
     set_console_status();
 
   if(is_gen4())
@@ -3861,11 +3847,11 @@ setdvar_cg_ng(var_0, var_1, var_2) {
 }
 
 isvalidteamtarget(var_0, var_1) {
-  return isdefined(var_1.team) && var_1.team != var_0.team;
+  return isDefined(var_1.team) && var_1.team != var_0.team;
 }
 
 isvalidffatarget(var_0, var_1) {
-  return isdefined(var_1.owner) && var_1.owner != var_0;
+  return isDefined(var_1.owner) && var_1.owner != var_0;
 }
 
 gethelipilotmeshoffset() {
@@ -3877,14 +3863,14 @@ gethelipilottraceoffset() {
 }
 
 revertvisionsetforplayer(var_0) {
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     var_0 = 1;
 
-  if(isdefined(level.nukedetonated) && isdefined(level.nukevisionset)) {
+  if(isDefined(level.nukedetonated) && isDefined(level.nukevisionset)) {
     self setclienttriggervisionset(level.nukevisionset, var_0);
     self visionsetnakedforplayer(level.nukevisionset, var_0);
     set_visionset_for_watching_players(level.nukevisionset, var_0);
-  } else if(isdefined(self.usingremote) && isdefined(self.ridevisionset)) {
+  } else if(isDefined(self.usingremote) && isDefined(self.ridevisionset)) {
     self setclienttriggervisionset(self.ridevisionset, var_0);
     self visionsetnakedforplayer(self.ridevisionset, var_0);
     set_visionset_for_watching_players(self.ridevisionset, var_0);
@@ -3899,7 +3885,7 @@ set_light_set_for_player(var_0) {
   if(!isplayer(self)) {
     return;
   }
-  if(isdefined(level.lightset_current))
+  if(isDefined(level.lightset_current))
     level.lightset_previous = level.lightset_current;
 
   level.lightset_current = var_0;
@@ -3912,7 +3898,7 @@ clear_light_set_for_player() {
   }
   var_0 = getmapcustom("map");
 
-  if(isdefined(level.lightset_previous)) {
+  if(isDefined(level.lightset_previous)) {
     var_0 = level.lightset_previous;
     level.lightset_previous = undefined;
   }
@@ -3928,18 +3914,18 @@ light_set_override_for_player(var_0, var_1, var_2, var_3) {
   self lightsetoverrideenableforplayer(var_0, var_1);
   waitfortimeornotifies(var_2, ["death", "disconnect"]);
 
-  if(isdefined(self))
+  if(isDefined(self))
     self lightsetoverridedisableforplayer(var_3);
 }
 
 getuniqueid() {
-  if(isdefined(self.pers["guid"]))
+  if(isDefined(self.pers["guid"]))
     return self.pers["guid"];
 
   var_0 = self getguid();
 
   if(var_0 == "0000000000000000") {
-    if(isdefined(level.guidgen))
+    if(isDefined(level.guidgen))
       level.guidgen++;
     else
       level.guidgen = 1;
@@ -3952,26 +3938,26 @@ getuniqueid() {
 }
 
 get_players_watching(var_0, var_1) {
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     var_0 = 0;
 
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     var_1 = 0;
 
   var_2 = self getentitynumber();
   var_3 = [];
 
   foreach(var_5 in level.players) {
-    if(!isdefined(var_5) || var_5 == self) {
+    if(!isDefined(var_5) || var_5 == self) {
       continue;
     }
     var_6 = 0;
 
     if(!var_1) {
-      if(isdefined(var_5.team) && var_5.team == "spectator" || var_5.sessionstate == "spectator") {
+      if(isDefined(var_5.team) && var_5.team == "spectator" || var_5.sessionstate == "spectator") {
         var_7 = var_5 getspectatingplayer();
 
-        if(isdefined(var_7) && var_7 == self)
+        if(isDefined(var_7) && var_7 == self)
           var_6 = 1;
       }
 
@@ -3997,14 +3983,14 @@ set_visionset_for_watching_players(var_0, var_1, var_2, var_3, var_4, var_5, var
   foreach(var_9 in var_7) {
     var_9 notify("changing_watching_visionset");
 
-    if(isdefined(var_3) && var_3)
+    if(isDefined(var_3) && var_3)
       var_9 visionsetmissilecamforplayer(var_0, var_1);
-    else if(isdefined(var_6) && var_6)
+    else if(isDefined(var_6) && var_6)
       var_9 visionsetpostapplyforplayer(var_0, var_1);
     else
       var_9 visionsetnakedforplayer(var_0, var_1);
 
-    if(var_0 != "" && isdefined(var_2)) {
+    if(var_0 != "" && isDefined(var_2)) {
       var_9 thread reset_visionset_on_team_change(self, var_1 + var_2, var_6);
       var_9 thread reset_visionset_on_disconnect(self, var_6);
 
@@ -4027,9 +4013,9 @@ reset_visionset_on_team_change(var_0, var_1, var_2) {
   var_3 = gettime();
   var_4 = self.team;
 
-  while (gettime() - var_3 < var_1 * 1000) {
+  while(gettime() - var_3 < var_1 * 1000) {
     if(self.team != var_4 || !common_scripts\utility::array_contains(var_0 get_players_watching(), self)) {
-      if(isdefined(var_2) && var_2)
+      if(isDefined(var_2) && var_2)
         self visionsetpostapplyforplayer("", 0.0);
       else
         self visionsetnakedforplayer("", 0.0);
@@ -4046,21 +4032,21 @@ reset_visionset_on_disconnect(var_0, var_1) {
   self endon("changing_watching_visionset");
   var_0 waittill("disconnect");
 
-  if(isdefined(var_1) && var_1)
+  if(isDefined(var_1) && var_1)
     self visionsetpostapplyforplayer("", 0.0);
   else
     self visionsetnakedforplayer("", 0.0);
 }
 
 _validateattacker(var_0) {
-  if(isagent(var_0) && (!isdefined(var_0.isactive) || !var_0.isactive))
+  if(isagent(var_0) && (!isDefined(var_0.isactive) || !var_0.isactive))
     return undefined;
 
   return var_0;
 }
 
 _setnameplatematerial(var_0, var_1) {
-  if(!isdefined(self.nameplatematerial)) {
+  if(!isDefined(self.nameplatematerial)) {
     self.nameplatematerial = [];
     self.prevnameplatematerial = [];
   } else {
@@ -4074,7 +4060,7 @@ _setnameplatematerial(var_0, var_1) {
 }
 
 _restorepreviousnameplatematerial() {
-  if(isdefined(self.prevnameplatematerial))
+  if(isDefined(self.prevnameplatematerial))
     self setnameplatematerial(self.prevnameplatematerial[0], self.prevnameplatematerial[1]);
   else
     self setnameplatematerial("", "");
@@ -4084,14 +4070,14 @@ _restorepreviousnameplatematerial() {
 }
 
 findandplayanims(var_0, var_1) {
-  var_2 = getentarray(var_0, "targetname");
+  var_2 = getEntArray(var_0, "targetname");
 
   if(var_2.size > 0) {
     foreach(var_4 in var_2) {
       var_5 = 0;
 
-      if(isdefined(var_4.script_animation)) {
-        if(isdefined(var_4.script_parameters) && var_4.script_parameters == "delta_anim")
+      if(isDefined(var_4.script_animation)) {
+        if(isDefined(var_4.script_parameters) && var_4.script_parameters == "delta_anim")
           var_5 = 1;
 
         var_4 thread playanim(var_1, var_5);
@@ -4131,16 +4117,16 @@ playerallowdodge(var_0, var_1) {
 }
 
 _playerallow(var_0, var_1, var_2, var_3, var_4) {
-  if(!isdefined(self.playerdisableabilitytypes))
+  if(!isDefined(self.playerdisableabilitytypes))
     self.playerdisableabilitytypes = [];
 
-  if(!isdefined(self.playerdisableabilitytypes[var_0]))
+  if(!isDefined(self.playerdisableabilitytypes[var_0]))
     self.playerdisableabilitytypes[var_0] = [];
 
-  if(!isdefined(var_2))
+  if(!isDefined(var_2))
     var_2 = "default";
 
-  if(!isdefined(var_4))
+  if(!isDefined(var_4))
     var_4 = 1;
 
   if(var_1) {
@@ -4153,7 +4139,7 @@ _playerallow(var_0, var_1, var_2, var_3, var_4) {
         self[[var_3]](1);
     }
   } else {
-    if(!isdefined(common_scripts\utility::array_find(self.playerdisableabilitytypes[var_0], var_2)))
+    if(!isDefined(common_scripts\utility::array_find(self.playerdisableabilitytypes[var_0], var_2)))
       self.playerdisableabilitytypes[var_0] = common_scripts\utility::array_add(self.playerdisableabilitytypes[var_0], var_2);
 
     if(var_4)
@@ -4184,12 +4170,12 @@ makegloballyusablebytype(var_0, var_1, var_2, var_3) {
 }
 
 _insertintoglobalusablelist(var_0, var_1, var_2, var_3) {
-  if(!isdefined(level.globalusableents))
+  if(!isDefined(level.globalusableents))
     level.globalusableents = [];
 
   var_4 = -1;
 
-  for (var_5 = 0; var_5 < level.globalusableents.size; var_5++) {
+  for(var_5 = 0; var_5 < level.globalusableents.size; var_5++) {
     var_6 = level.globalusableents[var_5];
 
     if(var_6.priority > var_0) {
@@ -4213,7 +4199,7 @@ _insertintoglobalusablelist(var_0, var_1, var_2, var_3) {
   if(var_4 == -1)
     var_4 = 0;
 
-  var_7 = spawnstruct();
+  var_7 = spawnStruct();
   var_7.ent = self;
   var_7.priority = var_0;
   var_7.type = var_1;
@@ -4233,7 +4219,7 @@ makegloballyunusablebytype() {
     }
   }
 
-  if(isdefined(var_0)) {
+  if(isDefined(var_0)) {
     var_4 = var_0.priority;
     level.globalusableents = common_scripts\utility::array_remove(level.globalusableents, var_0);
     self makeglobalunusable();
@@ -4291,7 +4277,7 @@ isplayeronenemyteam(var_0) {
 }
 
 isplayerffaenemy(var_0) {
-  if(isdefined(var_0.owner))
+  if(isDefined(var_0.owner))
     return var_0.owner != self;
   else
     return var_0 != self;
@@ -4342,7 +4328,7 @@ showfxtoteam(var_0) {
   self endon("stopShowFXToTeam");
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     self hide();
 
     foreach(var_2 in level.players) {
@@ -4362,9 +4348,9 @@ showfxtoteam(var_0) {
 get_spawn_weapon_name(var_0) {
   var_1 = "h1_ak47_mp";
 
-  if(isdefined(var_0.primaryname) && var_0.primaryname != "none")
+  if(isDefined(var_0.primaryname) && var_0.primaryname != "none")
     var_1 = var_0.primaryname;
-  else if(isdefined(var_0.secondaryname) && var_0.secondaryname != "none")
+  else if(isDefined(var_0.secondaryname) && var_0.secondaryname != "none")
     var_1 = var_0.secondaryname;
 
   return var_1;
@@ -4375,7 +4361,7 @@ playersaveangles() {
 }
 
 playerrestoreangles() {
-  if(isdefined(self.restoreangles)) {
+  if(isDefined(self.restoreangles)) {
     if(self.team != "spectator")
       self setplayerangles(self.restoreangles);
 
@@ -4391,7 +4377,7 @@ setmlgicons(var_0, var_1) {
 spawnpatchclip(var_0, var_1, var_2) {
   var_3 = getent(var_0, "targetname");
 
-  if(!isdefined(var_3))
+  if(!isDefined(var_3))
     return undefined;
 
   var_4 = spawn("script_model", var_1);
@@ -4401,13 +4387,13 @@ spawnpatchclip(var_0, var_1, var_2) {
 }
 
 hardpointvisualsswap(var_0, var_1) {
-  var_2 = getentarray(var_0, "targetname");
+  var_2 = getEntArray(var_0, "targetname");
 
   foreach(var_4 in var_2) {
     var_5 = var_1 + "_" + var_4.script_noteworthy;
     var_6 = getent(var_5, "targetname");
 
-    if(!isdefined(var_6)) {
+    if(!isDefined(var_6)) {
       continue;
     }
     var_6.script_noteworthy = var_4.script_noteworthy;
@@ -4419,7 +4405,7 @@ hardpointvisualsswap(var_0, var_1) {
 
 hardpointtriggerswap(var_0, var_1) {
   var_2 = getent(var_1, "targetname");
-  var_3 = getentarray("hp_zone_trigger", "targetname");
+  var_3 = getEntArray("hp_zone_trigger", "targetname");
   var_4 = undefined;
 
   foreach(var_6 in var_3) {
@@ -4431,7 +4417,7 @@ hardpointtriggerswap(var_0, var_1) {
     }
   }
 
-  var_9 = getentarray("hp_zone_center", "targetname");
+  var_9 = getEntArray("hp_zone_center", "targetname");
   var_10 = undefined;
 
   foreach(var_12 in var_9) {
@@ -4450,7 +4436,7 @@ hardpointtriggerswap(var_0, var_1) {
 
 headquarterstriggerswap(var_0, var_1) {
   var_2 = getent(var_1, "targetname");
-  var_3 = getentarray("radiotrigger", "targetname");
+  var_3 = getEntArray("radiotrigger", "targetname");
   var_4 = undefined;
 
   foreach(var_6 in var_3) {
@@ -4462,7 +4448,7 @@ headquarterstriggerswap(var_0, var_1) {
     }
   }
 
-  var_9 = getentarray("hq_hardpoint", "targetname");
+  var_9 = getEntArray("hq_hardpoint", "targetname");
   var_10 = undefined;
 
   foreach(var_12 in var_9) {
@@ -4480,10 +4466,10 @@ headquarterstriggerswap(var_0, var_1) {
 }
 
 headquartersradiomove(var_0, var_1, var_2) {
-  var_3 = getentarray("hq_hardpoint", "targetname");
+  var_3 = getEntArray("hq_hardpoint", "targetname");
   var_4 = undefined;
-  var_5 = isdefined(var_1);
-  var_6 = isdefined(var_2);
+  var_5 = isDefined(var_1);
+  var_6 = isDefined(var_2);
   var_7 = (0, 0, 0);
   var_8 = (0, 0, 0);
 
@@ -4509,7 +4495,7 @@ headquartersradiomove(var_0, var_1, var_2) {
   if(var_6)
     var_4.angles = var_2;
 
-  var_13 = getentarray(var_4.target, "targetname");
+  var_13 = getEntArray(var_4.target, "targetname");
 
   foreach(var_15 in var_13) {
     if(var_5)
@@ -4521,16 +4507,16 @@ headquartersradiomove(var_0, var_1, var_2) {
 }
 
 demolitiontriggermove(var_0, var_1, var_2) {
-  var_3 = getentarray("dd_bombzone", "targetname");
+  var_3 = getEntArray("dd_bombzone", "targetname");
 
   foreach(var_5 in var_3) {
     var_6 = distancesquared(var_5.origin, var_0);
 
     if(var_6 < 1) {
-      if(isdefined(var_1))
+      if(isDefined(var_1))
         var_5.origin = var_1;
 
-      if(isdefined(var_2))
+      if(isDefined(var_2))
         var_5.angles = var_2;
 
       return;
@@ -4539,15 +4525,15 @@ demolitiontriggermove(var_0, var_1, var_2) {
 }
 
 demolitionsitemove(var_0, var_1, var_2) {
-  var_3 = getentarray("dd_bombzone", "targetname");
-  var_4 = isdefined(var_1);
-  var_5 = isdefined(var_2);
+  var_3 = getEntArray("dd_bombzone", "targetname");
+  var_4 = isDefined(var_1);
+  var_5 = isDefined(var_2);
   var_6 = (0, 0, 0);
   var_7 = (0, 0, 0);
   var_8 = undefined;
 
   foreach(var_10 in var_3) {
-    if(isdefined(var_10.script_label) && var_10.script_label == var_0) {
+    if(isDefined(var_10.script_label) && var_10.script_label == var_0) {
       var_8 = var_10;
 
       if(var_4)
@@ -4560,26 +4546,26 @@ demolitionsitemove(var_0, var_1, var_2) {
     }
   }
 
-  if(!isdefined(var_8)) {
+  if(!isDefined(var_8)) {
     return;
   }
-  var_12 = getentarray(var_8.target, "targetname");
+  var_12 = getEntArray(var_8.target, "targetname");
   var_13 = getent(var_12[0].target, "targetname");
   var_14 = getent("dd_bombzone_clip" + var_0, "targetname");
   var_15 = undefined;
   var_16 = undefined;
 
-  for (var_17 = 0; var_17 < var_12.size; var_17++) {
-    if(isdefined(var_12[var_17].script_exploder)) {
+  for(var_17 = 0; var_17 < var_12.size; var_17++) {
+    if(isDefined(var_12[var_17].script_exploder)) {
       var_16 = var_12[var_17].script_exploder;
       break;
     }
   }
 
-  if(!isdefined(var_16)) {
+  if(!isDefined(var_16)) {
     return;
   }
-  var_18 = getentarray("exploder", "targetname");
+  var_18 = getEntArray("exploder", "targetname");
 
   foreach(var_20 in var_18) {
     if(var_20.script_exploder == var_16) {
@@ -4588,7 +4574,7 @@ demolitionsitemove(var_0, var_1, var_2) {
     }
   }
 
-  if(!isdefined(var_15)) {
+  if(!isDefined(var_15)) {
     return;
   }
   if(var_4) {
@@ -4615,22 +4601,22 @@ demolitionsitemove(var_0, var_1, var_2) {
 }
 
 iscoop() {
-  if(isdefined(level.ishorde) && level.ishorde)
+  if(isDefined(level.ishorde) && level.ishorde)
     return 1;
 
-  if(isdefined(level.iszombiegame) && level.iszombiegame)
+  if(isDefined(level.iszombiegame) && level.iszombiegame)
     return 1;
 
   return 0;
 }
 
 setlightingstate_patched(var_0) {
-  var_1 = getentarray();
+  var_1 = getEntArray();
   setomnvar("lighting_state", var_0);
 
   if(!getdvarint("r_reflectionProbeGenerate")) {
     foreach(var_3 in var_1) {
-      if(isdefined(var_3.lightingstate) && (var_3.classname == "script_brushmodel" || var_3.classname == "script_model")) {
+      if(isDefined(var_3.lightingstate) && (var_3.classname == "script_brushmodel" || var_3.classname == "script_model")) {
         if(var_3.lightingstate == 0) {
           continue;
         }
@@ -4652,21 +4638,21 @@ gettimeutc_for_stat_recording() {
 }
 
 is_true(var_0) {
-  return isdefined(var_0) && var_0;
+  return isDefined(var_0) && var_0;
 }
 
 waittillplayersnextsnapshot(var_0) {
   var_0 endon("disconnect");
   var_1 = var_0 getsnapshotindexforclient();
 
-  if(!isdefined(var_1)) {
+  if(!isDefined(var_1)) {
     return;
   }
-  for (;;) {
+  for(;;) {
     waitframe();
     var_2 = var_0 getsnapshotacknowledgedindexforclient();
 
-    if(!isdefined(var_2)) {
+    if(!isDefined(var_2)) {
       return;
     }
     if(var_2 > var_1) {
@@ -4682,12 +4668,12 @@ setgameplayactive(var_0) {
 gameplayactivewatch() {
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     var_0 = 0;
 
-    if(isdefined(level.players)) {
+    if(isDefined(level.players)) {
       foreach(var_2 in level.players) {
-        var_3 = isdefined(var_2.sessionstate) && (var_2.sessionstate == "playing" || var_2.sessionstate == "dead");
+        var_3 = isDefined(var_2.sessionstate) && (var_2.sessionstate == "playing" || var_2.sessionstate == "dead");
 
         if(var_3 && !isai(var_2) && !istestclient(var_2))
           var_0++;
@@ -4713,12 +4699,12 @@ applycarrierclass() {
   self endon("disconnect");
   level endon("game_ended");
 
-  if(isdefined(self.iscarrying) && self.iscarrying == 1) {
+  if(isDefined(self.iscarrying) && self.iscarrying == 1) {
     self notify("force_cancel_placement");
     wait 0.05;
   }
 
-  while (self ismantling() || !self isonground())
+  while(self ismantling() || !self isonground())
     wait 0.05;
 
   if(isjuggernaut()) {
@@ -4742,15 +4728,15 @@ removecarrierclass() {
   self endon("disconnect");
   level endon("game_ended");
 
-  if(isdefined(self.iscarrying) && self.iscarrying == 1) {
+  if(isDefined(self.iscarrying) && self.iscarrying == 1) {
     self notify("force_cancel_placement");
     wait 0.05;
   }
 
-  while (self ismantling() || !self isonground())
+  while(self ismantling() || !self isonground())
     wait 0.05;
 
-  while (isbombsiteweapon(self getcurrentweapon()))
+  while(isbombsiteweapon(self getcurrentweapon()))
     wait 0.05;
 
   if(isjuggernaut()) {
@@ -4766,10 +4752,10 @@ removecarrierclass() {
 streamcarrierweaponstoplayers(var_0, var_1, var_2) {
   level endon("game_ended");
 
-  if(!isdefined(level.carrierloadouts)) {
+  if(!isDefined(level.carrierloadouts)) {
     wait 1.0;
 
-    if(!isdefined(level.carrierloadouts))
+    if(!isDefined(level.carrierloadouts))
       return;
   }
 
@@ -4792,7 +4778,7 @@ streamcarrierweaponstoplayers(var_0, var_1, var_2) {
     var_15 = maps\mp\gametypes\_class::buildweaponname(var_8, var_9, var_10, var_13, var_14, 0);
     var_4[var_18] = [var_15];
     var_16 = weaponclass(var_15);
-    var_17 = spawnstruct();
+    var_17 = spawnStruct();
     var_17.team = var_18;
     var_17.weapon = var_15;
     var_3[var_18][var_16] = var_17;
@@ -4801,22 +4787,20 @@ streamcarrierweaponstoplayers(var_0, var_1, var_2) {
   if(var_5.size == 0) {
     return;
   }
-  for (;;) {
+  for(;;) {
     foreach(var_20 in level.players) {
-      if(!isalive(var_20) || !isdefined(var_20.team)) {
+      if(!isalive(var_20) || !isDefined(var_20.team)) {
         continue;
       }
       if(!common_scripts\utility::array_contains(var_5, var_20.team)) {
         continue;
       }
-      if(![
-          [var_2]
-        ](var_0, var_20)) {
+      if(![[var_2]](var_0, var_20)) {
         continue;
       }
       var_21 = var_0.curorigin;
 
-      if(isdefined(var_0.carrier))
+      if(isDefined(var_0.carrier))
         var_21 = var_0.carrier.origin;
 
       if(distancesquared(var_20.origin, var_21) > 90000) {
@@ -4830,7 +4814,7 @@ streamcarrierweaponstoplayers(var_0, var_1, var_2) {
 }
 
 array_remove_index(var_0, var_1) {
-  for (var_2 = 0; var_2 < var_0.size - 1; var_2++) {
+  for(var_2 = 0; var_2 < var_0.size - 1; var_2++) {
     if(var_2 == var_1) {
       var_0[var_2] = var_0[var_2 + 1];
       var_1++;
@@ -4850,7 +4834,7 @@ streamnextspectatorweaponsifnecessary(var_0) {
   if(canspectatesometeam() && !(self isspectating("freelook") && var_0))
     var_1 = getnextspectateclient();
 
-  if(isdefined(var_1))
+  if(isDefined(var_1))
     streamspectatorweaponsforclient(var_1);
 }
 
@@ -4868,7 +4852,7 @@ getnextspectateclient() {
   var_0 = getnumberofclients();
   var_1 = self getentitynumber();
 
-  for (var_2 = common_scripts\utility::mod(var_1 + 1, var_0); var_2 != var_1; var_2 = common_scripts\utility::mod(var_2 + 1, var_0)) {
+  for(var_2 = common_scripts\utility::mod(var_1 + 1, var_0); var_2 != var_1; var_2 = common_scripts\utility::mod(var_2 + 1, var_0)) {
     if(self _meth_857E(var_2)) {
       break;
     }
@@ -4885,7 +4869,7 @@ getnextspectateclient() {
 }
 
 streamspectatorweaponsforclient(var_0) {
-  var_1 = spawnstruct();
+  var_1 = spawnStruct();
   var_1.team = var_0.team;
   var_1.weapon = var_0.primaryweapon;
   var_2 = var_0 _meth_857F();
@@ -4893,13 +4877,13 @@ streamspectatorweaponsforclient(var_0) {
 }
 
 ishodgepodgemm() {
-  return isdefined(level.hodgepodgemode) && level.hodgepodgemode == 2;
+  return isDefined(level.hodgepodgemode) && level.hodgepodgemode == 2;
 }
 
 ishodgepodgerpgonly() {
-  return isdefined(level.hodgepodgemode) && (level.hodgepodgemode == 6 || level.hodgepodgemode == 7);
+  return isDefined(level.hodgepodgemode) && (level.hodgepodgemode == 6 || level.hodgepodgemode == 7);
 }
 
 ishodgepodgeph() {
-  return isdefined(level.hodgepodgemode) && level.hodgepodgemode == 9;
+  return isDefined(level.hodgepodgemode) && level.hodgepodgemode == 9;
 }

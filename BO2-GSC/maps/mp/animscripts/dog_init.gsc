@@ -26,7 +26,7 @@ main() {
   level.dogrunpainspeed = 20;
   self.meleeattackdist = 0;
   self thread setmeleeattackdist();
-  self.a = spawnstruct();
+  self.a = spawnStruct();
   self.a.pose = "stand";
   self.a.nextstandinghitdying = 0;
   self.a.movement = "run";

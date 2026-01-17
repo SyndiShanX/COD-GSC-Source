@@ -47,7 +47,6 @@
 #include scripts\mp_common\player\player_killed;
 #include scripts\mp_common\player\player_utils;
 #include scripts\mp_common\util;
-
 #namespace bounty;
 
 event_handler[gametype_init] main(eventstruct) {
@@ -158,12 +157,12 @@ function_41c54fc4() {
   }
 }
 
-private onconnect() {
+onconnect() {
   waitframe(1);
 
-  if(!isDefined(self.pers[#"money"])) {
-    self.pers[#"money"] = level.var_6fb8c585;
-    self.pers[#"money_earned"] = 0;
+  if(!isDefined(self.pers[# "money"])) {
+    self.pers[# "money"] = level.var_6fb8c585;
+    self.pers[# "money_earned"] = 0;
 
     if(game.roundsplayed > 0) {
       numteammates = 0;
@@ -174,13 +173,13 @@ private onconnect() {
           continue;
         }
 
-        if(!isDefined(player.pers[#"money_earned"])) {
+        if(!isDefined(player.pers[# "money_earned"])) {
           continue;
         }
 
         if(player.team == self.team) {
           numteammates++;
-          var_69c2bc0d += player.pers[#"money_earned"];
+          var_69c2bc0d += player.pers[# "money_earned"];
         }
       }
 
@@ -190,16 +189,16 @@ private onconnect() {
     }
   }
 
-  if(level.var_aad2ad58 && !isDefined(self.pers[#"dynamic_loadout"].weapons[1])) {
-    self.pers[#"dynamic_loadout"].weapons[1] = spawnStruct();
-    self.pers[#"dynamic_loadout"].weapons[1].name = #"pistol_standard_t8";
-    self.pers[#"dynamic_loadout"].weapons[1].attachments = [];
-    self.pers[#"dynamic_loadout"].weapons[1].ammo = -1;
-    self.pers[#"dynamic_loadout"].weapons[1].startammo = level.var_2f990fc4;
+  if(level.var_aad2ad58 && !isDefined(self.pers[# "dynamic_loadout"].weapons[1])) {
+    self.pers[# "dynamic_loadout"].weapons[1] = spawnStruct();
+    self.pers[# "dynamic_loadout"].weapons[1].name = # "pistol_standard_t8";
+    self.pers[# "dynamic_loadout"].weapons[1].attachments = [];
+    self.pers[# "dynamic_loadout"].weapons[1].ammo = -1;
+    self.pers[# "dynamic_loadout"].weapons[1].startammo = level.var_2f990fc4;
     dynamic_loadout::function_ff8ef46b(1, "luielement.BountyHunterLoadout.secondary", 7);
   }
 
-  self clientfield::set_to_player("bountyMoney", self.pers[#"money"]);
+  self clientfield::set_to_player("bountyMoney", self.pers[# "money"]);
 
   if(level.ingraceperiod === 1 && level.draftstage != 3) {
     wait 1;
@@ -222,8 +221,8 @@ function_feeebad() {
   }
 }
 
-private onspawned() {
-  self clientfield::set_to_player("bountyMoney", self.pers[#"money"]);
+onspawned() {
+  self clientfield::set_to_player("bountyMoney", self.pers[# "money"]);
 
   if(isDefined(level.purchasephase) && level.purchasephase) {
     self freezecontrols(1);
@@ -237,13 +236,13 @@ private onspawned() {
   }
 }
 
-private function_9b85340e() {
-  self endon(#"death", #"disconnect");
+function_9b85340e() {
+  self endon(#"death", # "disconnect");
   waitframe(1);
   self buy_menu_open();
 }
 
-private onstartgametype() {
+onstartgametype() {
   level.graceperiod = isDefined(level.var_b9aad767) ? level.var_b9aad767 : level.graceperiod;
   level.alwaysusestartspawns = 1;
 
@@ -265,26 +264,25 @@ private onstartgametype() {
   thread function_c04cc87c();
 
   if(level.scoreroundwinbased) {
-    [[level._setteamscore]](#"allies", game.stat[#"roundswon"][#"allies"]);
-    [[level._setteamscore]](#"axis", game.stat[#"roundswon"][#"axis"]);
+    [[level._setteamscore]](#"allies", game.stat[# "roundswon"][# "allies"]);
+    [[level._setteamscore]](#"axis", game.stat[# "roundswon"][# "axis"]);
   }
 
   laststand_mp::function_414115a0(level.laststandtimer, level.laststandhealth);
-  level.var_4cfc17cc = struct::get_script_bundle("killstreak", #"killstreak_bounty_deposit_site_heli");
+  level.var_4cfc17cc = struct::get_script_bundle("killstreak", # "killstreak_bounty_deposit_site_heli");
   function_fb6f71d5();
   function_9f5ae64d();
   level thread function_7cb5420e(level.var_b9aad767);
 
   level thread function_b968a61c();
-
 }
 
-private onspawnplayer(predictedspawn) {
+onspawnplayer(predictedspawn) {
   spawning::onspawnplayer(predictedspawn);
 }
 
 function_5439aa67() {
-  self endon(#"death", #"revived");
+  self endon(#"death", # "revived");
 
   while(isDefined(self)) {
     if(self function_cf8de58d()) {
@@ -296,7 +294,7 @@ function_5439aa67() {
   }
 }
 
-private function_95002a59(attacker, victim, inflictor, weapon, meansofdeath) {
+function_95002a59(attacker, victim, inflictor, weapon, meansofdeath) {
   if(attacker == self) {
     return;
   }
@@ -316,17 +314,17 @@ private function_95002a59(attacker, victim, inflictor, weapon, meansofdeath) {
 
   if(isDefined(attacker)) {
     [[level.var_37d62931]](attacker, 1);
-    attacker.pers[#"downs"] = (isDefined(attacker.pers[#"downs"]) ? attacker.pers[#"downs"] : 0) + 1;
-    attacker.downs = attacker.pers[#"downs"];
+    attacker.pers[# "downs"] = (isDefined(attacker.pers[# "downs"]) ? attacker.pers[# "downs"] : 0) + 1;
+    attacker.downs = attacker.pers[# "downs"];
   }
 
   self thread function_5439aa67();
 }
 
-private onplayerrevived(revivee, reviver) {
+onplayerrevived(revivee, reviver) {
   [[level.var_37d62931]](reviver, 1);
-  reviver.pers[#"revives"] = (isDefined(reviver.pers[#"revives"]) ? reviver.pers[#"revives"] : 0) + 1;
-  reviver.revives = reviver.pers[#"revives"];
+  reviver.pers[# "revives"] = (isDefined(reviver.pers[# "revives"]) ? reviver.pers[# "revives"] : 0) + 1;
+  reviver.revives = reviver.pers[# "revives"];
   revivee notify(#"revived");
 }
 
@@ -348,7 +346,7 @@ buy_menu_close() {
   level.var_7e7897b8 gameobjects::set_visible_team(#"any");
 }
 
-private function_c04cc87c() {
+function_c04cc87c() {
   level.var_324e2795 = 1;
   level.var_7aa0d894 = 1;
   objective_setinvisibletoall(level.var_7e7897b8.objectiveid);
@@ -448,7 +446,7 @@ private function_c04cc87c() {
   thread radar_sweeps::radarsweeps();
 }
 
-private ondeadevent(team) {
+ondeadevent(team) {
   if(team == "all") {
     if(isDefined(level.var_a379a090)) {
       function_36f8016e(level.var_a379a090, 6);
@@ -469,7 +467,7 @@ private ondeadevent(team) {
     challenges::last_man_defeat_3_enemies(level.var_a379a090);
   }
 
-  if(game.stat[#"roundswon"][level.var_a379a090] >= level.roundwinlimit - 1) {
+  if(game.stat[# "roundswon"][level.var_a379a090] >= level.roundwinlimit - 1) {
     function_36f8016e(level.var_a379a090, 6);
     return;
   }
@@ -478,7 +476,7 @@ private ondeadevent(team) {
   level thread function_30b3b16e(level.var_a379a090);
 }
 
-private function_a981417() {
+function_a981417() {
   level endon(#"game_ended");
   level.var_6938f270 = 1;
 
@@ -500,7 +498,7 @@ private function_a981417() {
   }
 }
 
-private function_acf3ff19() {
+function_acf3ff19() {
   level endon(#"game_ended");
   level.timerpaused = 0;
 
@@ -521,7 +519,7 @@ private function_acf3ff19() {
   }
 }
 
-private function_30b3b16e(winner) {
+function_30b3b16e(winner) {
   if(isDefined(level.var_18823aed) && level.var_18823aed > 0) {
     thread globallogic_audio::leader_dialog("bountyCashTimerStart", winner);
     level.timelimitoverride = 1;
@@ -538,7 +536,7 @@ private function_30b3b16e(winner) {
   function_36f8016e(winner, 6);
 }
 
-private ontimelimit() {
+ontimelimit() {
   function_b8793906(2);
 }
 
@@ -554,7 +552,7 @@ function_36f8016e(winning_team, var_c1e98979) {
   thread globallogic::function_a3e3bd39(winning_team, var_c1e98979);
 }
 
-private ononeleftevent(team) {
+ononeleftevent(team) {
   if(!isDefined(level.warnedlastplayer)) {
     level.warnedlastplayer = [];
   }
@@ -569,7 +567,7 @@ private ononeleftevent(team) {
   for(i = 0; i < players.size; i++) {
     player = players[i];
 
-    if(isDefined(player.pers[#"team"]) && player.pers[#"team"] == team && isDefined(player.pers[#"class"])) {
+    if(isDefined(player.pers[# "team"]) && player.pers[# "team"] == team && isDefined(player.pers[# "class"])) {
       if(player.sessionstate == "playing" && !player.afk) {
         break;
       }
@@ -584,11 +582,11 @@ private ononeleftevent(team) {
   util::function_5a68c330(17, player.team, player getentitynumber());
 }
 
-private onroundswitch() {
+onroundswitch() {
   gametype::on_round_switch();
 }
 
-private onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
+onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
   if(isDefined(level.numlives) ? level.numlives : 0) {
     clientfield::set_player_uimodel("hudItems.playerLivesCount", level.numlives - self.var_a7d7e50a);
     enemy_team = util::getotherteam(self.team);
@@ -620,7 +618,7 @@ private onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdi
   self function_4f2c425d();
 }
 
-private onscoreevent(params) {
+onscoreevent(params) {
   if(self laststand_mp::is_cheating()) {
     return;
   }
@@ -639,7 +637,7 @@ private onscoreevent(params) {
   }
 }
 
-private onplayerdamage(params) {
+onplayerdamage(params) {
   if(isDefined(params) && isDefined(params.eattacker) && isplayer(params.eattacker) && isDefined(params.idamage)) {
     if(params.eattacker.team == self.team) {
       return;
@@ -666,9 +664,9 @@ private onplayerdamage(params) {
   }
 }
 
-private function_f7b64ada() {
+function_f7b64ada() {
   if(game.state == "playing") {
-    foreach(weapondata in self.pers[#"dynamic_loadout"].weapons) {
+    foreach(weapondata in self.pers[# "dynamic_loadout"].weapons) {
       weapondata.ammo = -1;
     }
   }
@@ -676,7 +674,7 @@ private function_f7b64ada() {
   self thread function_f7ef4642();
 }
 
-private function_f7ef4642() {
+function_f7ef4642() {
   waitframe(1);
 
   if(isDefined(self) && isalive(self)) {
@@ -684,19 +682,19 @@ private function_f7ef4642() {
   }
 }
 
-private function_1a0c2b72(revivedplayer) {
+function_1a0c2b72(revivedplayer) {
   if(isDefined(self) && isalive(self) && isDefined(revivedplayer)) {
     level thread popups::displayteammessagetoteam(#"hash_17c6b0524e578976", self, self.team, revivedplayer.entnum, undefined);
   }
 }
 
-private function_8cac4c76() {
+function_8cac4c76() {
   waitframe(1);
   clientfield::set_world_uimodel("hudItems.team1.noRespawnsLeft", 1);
   clientfield::set_world_uimodel("hudItems.team2.noRespawnsLeft", 1);
 }
 
-private function_4f2c425d() {
+function_4f2c425d() {
   if(!isDefined(level.var_7e7897b8)) {
     return;
   }
@@ -726,8 +724,8 @@ private function_4f2c425d() {
   }
 }
 
-private givelastattackerwarning(team) {
-  self endon(#"death", #"disconnect");
+givelastattackerwarning(team) {
+  self endon(#"death", # "disconnect");
   fullhealthtime = 0;
   interval = 0.05;
   self.lastmansd = 1;
@@ -764,10 +762,10 @@ function_c04436fc() {
   }
 }
 
-private function_9698aa74(winner) {
+function_9698aa74(winner) {
   foreach(player in level.players) {
     if(isalive(player)) {
-      foreach(weapondata in player.pers[#"dynamic_loadout"].weapons) {
+      foreach(weapondata in player.pers[# "dynamic_loadout"].weapons) {
         weapondata.ammo = -1;
       }
     }
@@ -776,7 +774,7 @@ private function_9698aa74(winner) {
     player dynamic_loadout::removearmor();
 
     if(!level.var_59e1bdd9) {
-      player.pers[#"pickup_health"] = 0;
+      player.pers[# "pickup_health"] = 0;
     }
 
     if(!player laststand_mp::is_cheating()) {
@@ -790,7 +788,7 @@ private function_9698aa74(winner) {
   }
 }
 
-private function_b3faa437() {
+function_b3faa437() {
   var_fa06e6b7 = struct::get_array("bounty_bag_o_money", "variantname");
   var_85b31568 = var_fa06e6b7[randomint(var_fa06e6b7.size)].origin;
   usetrigger = spawn("trigger_radius_use", var_85b31568 + (0, 0, 15), 0, 80, 60);
@@ -802,7 +800,7 @@ private function_b3faa437() {
   var_8b6f8e45 = [];
   var_8b6f8e45[0] = spawn("script_model", var_85b31568);
   var_8b6f8e45[0] setModel("p8_heist_duffel_bag_set_open");
-  var_7e7897b8 = gameobjects::create_carry_object(#"neutral", usetrigger, var_8b6f8e45, (0, 0, 0), #"bag_o_money");
+  var_7e7897b8 = gameobjects::create_carry_object(#"neutral", usetrigger, var_8b6f8e45, (0, 0, 0), # "bag_o_money");
   var_7e7897b8 gameobjects::set_use_hint_text(#"hash_ee4d709a0f80280");
   var_7e7897b8 gameobjects::allow_carry(#"any");
   var_7e7897b8 gameobjects::set_visible_team(#"any");
@@ -815,14 +813,14 @@ private function_b3faa437() {
   var_7e7897b8.ondrop = &function_62d627a0;
   var_7e7897b8.var_22389d70 = 0;
   var_7e7897b8.var_78149e41 = gameobjects::get_next_obj_id();
-  objective_add(var_7e7897b8.var_78149e41, "invisible", var_7e7897b8, #"hash_34a0ac740c9d0bc2");
+  objective_add(var_7e7897b8.var_78149e41, "invisible", var_7e7897b8, # "hash_34a0ac740c9d0bc2");
   objective_onentity(var_7e7897b8.var_78149e41, var_7e7897b8);
   var_7e7897b8 gameobjects::set_visible_team(#"none");
   level.var_7e7897b8 = var_7e7897b8;
   return var_7e7897b8;
 }
 
-private function_cd23eebc(player) {
+function_cd23eebc(player) {
   level.var_a5221eec = player.team;
   enemy_team = gameobjects::get_enemy_team(player.team);
   self gameobjects::set_visible_team(#"none");
@@ -854,7 +852,7 @@ private function_cd23eebc(player) {
   player clientfield::set_to_player("bountyBagMoney", 1);
 }
 
-private function_319af5a2(player) {
+function_319af5a2(player) {
   self endon(#"hash_1af469c6cd76e56b");
   objective_setprogress(self.var_78149e41, float(level.var_3e14d8dd) / level.var_b2a8558a);
   player clientfield::set_to_player("bountyBagMoney", int(float(level.var_3e14d8dd) / level.var_16fd9420));
@@ -883,14 +881,14 @@ private function_319af5a2(player) {
   player clientfield::set_to_player("bountyBagMoney", int(float(level.var_3e14d8dd) / level.var_16fd9420));
 }
 
-private function_62d627a0(player) {
+function_62d627a0(player) {
   self notify(#"hash_1af469c6cd76e56b");
   self.visuals[0] solid();
 
   if(isDefined(self.var_78149e41)) {
     objective_setstate(self.var_78149e41, "invisible");
     objective_onentity(self.var_78149e41, self);
-    objective_setteam(self.var_78149e41, #"none");
+    objective_setteam(self.var_78149e41, # "none");
     objective_setvisibletoplayer(self.var_78149e41, player);
     function_3ae6fa3(self.var_78149e41, player.team, 0);
   }
@@ -905,7 +903,7 @@ private function_62d627a0(player) {
   self playSound(#"hash_6f33c21d562757a1");
 }
 
-private function_7f8c4043() {
+function_7f8c4043() {
   if(isDefined(level.var_a740d54d)) {
     return level.var_a740d54d;
   }
@@ -958,18 +956,18 @@ private function_7f8c4043() {
   return level.var_a740d54d;
 }
 
-private function_fb6f71d5() {
+function_fb6f71d5() {
   level.var_a740d54d = undefined;
 }
 
-private function_9f5ae64d() {
+function_9f5ae64d() {
   if(isDefined(level.var_8fcae189)) {
     level.var_8fcae189 notify(#"strobe_stop");
     level.var_8fcae189 = undefined;
   }
 }
 
-private function_7cb5420e(delay) {
+function_7cb5420e(delay) {
   while(game.state != "playing") {
     waitframe(1);
   }
@@ -983,13 +981,13 @@ private function_7cb5420e(delay) {
   }
 
   var_fa5724d5 = function_7f8c4043();
-  level.var_8fcae189 = ir_strobe::function_284b1d4c(var_fa5724d5, #"wpn_t8_eqp_grenade_smoke_world");
+  level.var_8fcae189 = ir_strobe::function_284b1d4c(var_fa5724d5, # "wpn_t8_eqp_grenade_smoke_world");
   level.var_b167ae9a = gameobjects::get_next_obj_id();
-  objective_add(level.var_b167ae9a, "active", level.var_8fcae189, #"hash_7e7657e9c8f441eb");
+  objective_add(level.var_b167ae9a, "active", level.var_8fcae189, # "hash_7e7657e9c8f441eb");
   function_da7940a3(level.var_b167ae9a, 1);
 }
 
-private function_2ad9733b() {
+function_2ad9733b() {
   if(isDefined(level.var_1f3975e4)) {
     return;
   }
@@ -1000,15 +998,15 @@ private function_2ad9733b() {
   function_f878f4bf(function_7f8c4043(), tempcontext);
 }
 
-private function_f878f4bf(var_fa5724d5, context) {
+function_f878f4bf(var_fa5724d5, context) {
   assert(isDefined(var_fa5724d5));
-  level.var_8fcae189 = ir_strobe::function_284b1d4c(var_fa5724d5, #"wpn_t8_eqp_grenade_smoke_world");
+  level.var_8fcae189 = ir_strobe::function_284b1d4c(var_fa5724d5, # "wpn_t8_eqp_grenade_smoke_world");
   var_8ff770b8 = randomfloatrange(level.var_aad1f6f2, level.var_8ce231e3);
   wait var_8ff770b8;
-  destination = getstartorigin(var_fa5724d5, (0, 0, 0), #"ai_swat_rifle_ent_litlbird_rappel_stn_vehicle2");
+  destination = getstartorigin(var_fa5724d5, (0, 0, 0), # "ai_swat_rifle_ent_litlbird_rappel_stn_vehicle2");
   var_6aa266d6 = helicopter::getvalidrandomstartnode(destination).origin;
   helicopter = function_d23cf101(var_6aa266d6, vectortoangles(destination - var_6aa266d6), context);
-  helicopter endon(#"death", #"hash_69d2c68fdf86b6d7");
+  helicopter endon(#"death", # "hash_69d2c68fdf86b6d7");
   helicopter.hardpointtype = undefined;
   waitframe(1);
   function_554b5692(helicopter);
@@ -1033,7 +1031,7 @@ private function_f878f4bf(var_fa5724d5, context) {
   waitresult = level.var_ad7774db waittill(#"hash_5677d0c5246418e5");
 
   for(prevprogress = 0; waitresult._notify == "timeout" && level.var_ad7774db.curprogress > prevprogress; prevprogress = level.var_ad7774db.curprogress) {
-    waitresult = level.var_ad7774db waittilltimeout(0.25, #"hash_5677d0c5246418e5");
+    waitresult = level.var_ad7774db waittilltimeout(0.25, # "hash_5677d0c5246418e5");
   }
 
   if(!isDefined(level.var_ad7774db)) {
@@ -1050,8 +1048,8 @@ private function_f878f4bf(var_fa5724d5, context) {
   helicopter thread function_36f403(helicopter);
 }
 
-private function_4af1c786(helicopter, var_5ad5316d) {
-  helicopter endon(#"death", #"hash_589604da14bd8976");
+function_4af1c786(helicopter, var_5ad5316d) {
+  helicopter endon(#"death", # "hash_589604da14bd8976");
   var_45d0806d = var_5ad5316d;
   lerp_duration = max((helicopter.origin[2] - var_5ad5316d[2] - 600) / 625, 0.8);
   helicopter animation::play(#"ai_swat_rifle_ent_litlbird_rappel_stn_vehicle2", var_45d0806d, (0, helicopter.angles[1], 0), 1, 0.1, 0.2, lerp_duration);
@@ -1061,7 +1059,7 @@ private function_4af1c786(helicopter, var_5ad5316d) {
   }
 }
 
-private function_554b5692(helicopter) {
+function_554b5692(helicopter) {
   assert(!isDefined(helicopter.rope));
   helicopter.rope = spawn("script_model", helicopter.origin);
   assert(isDefined(helicopter.rope));
@@ -1071,16 +1069,16 @@ private function_554b5692(helicopter) {
   helicopter.rope hide();
 }
 
-private function_f9a7a3d8(helicopter) {
+function_f9a7a3d8(helicopter) {
   assert(isDefined(helicopter.rope));
-  helicopter endon(#"death", #"hash_69d2c68fdf86b6d7", #"hash_3478587618f28c8");
+  helicopter endon(#"death", # "hash_69d2c68fdf86b6d7", # "hash_3478587618f28c8");
   helicopter.rope endon(#"death");
   helicopter.rope show();
   helicopter.rope animation::play(#"hash_751de00c6e9e0862", helicopter, "tag_origin_animate", 1, 0.2, 0.1, undefined, undefined, undefined, 0);
   childthread function_5db7fc11(helicopter);
 }
 
-private function_5db7fc11(helicopter) {
+function_5db7fc11(helicopter) {
   assert(isDefined(helicopter.rope));
 
   while(true) {
@@ -1088,12 +1086,12 @@ private function_5db7fc11(helicopter) {
   }
 }
 
-private function_b48e2739(helicopter) {
+function_b48e2739(helicopter) {
   if(!isDefined(helicopter.rope)) {
     return;
   }
 
-  helicopter endon(#"hash_69d2c68fdf86b6d7", #"death");
+  helicopter endon(#"hash_69d2c68fdf86b6d7", # "death");
   helicopter.rope endon(#"death");
   helicopter notify(#"hash_3478587618f28c8");
   helicopter.rope thread animation::play(#"hash_3d52f6faf02fd23", helicopter, "tag_origin_animate", 1, 0.2, 0.1, undefined, undefined, undefined, 0);
@@ -1103,7 +1101,7 @@ private function_b48e2739(helicopter) {
   function_b09faaf8(helicopter);
 }
 
-private function_b09faaf8(helicopter) {
+function_b09faaf8(helicopter) {
   helicopter endon(#"death");
 
   if(isDefined(helicopter.rope)) {
@@ -1142,10 +1140,9 @@ function_36f403(helicopter) {
         helicopter function_9ffc1856(var_a9a839e2, 0);
 
         while(true) {
-
           recordsphere(var_a9a839e2, 8, (0, 0, 1), "<dev string:x38>");
 
-            var_baa92af9 = ispointinnavvolume(helicopter.origin, "navvolume_big");
+          var_baa92af9 = ispointinnavvolume(helicopter.origin, "navvolume_big");
 
           if(var_baa92af9 && !issentient(helicopter)) {
             helicopter makesentient();
@@ -1164,7 +1161,7 @@ function_36f403(helicopter) {
   }
 
   helicopter function_9ffc1856(var_b4c35bb7, 1);
-  helicopter waittilltimeout(20, #"near_goal", #"death");
+  helicopter waittilltimeout(20, # "near_goal", # "death");
 
   if(isDefined(helicopter)) {
     helicopter stoploopsound(1);
@@ -1180,7 +1177,7 @@ function_36f403(helicopter) {
   }
 }
 
-private function_d23cf101(origin, angles, context) {
+function_d23cf101(origin, angles, context) {
   helicopter = spawnvehicle(#"vehicle_t8_mil_helicopter_swat_transport", origin, angles, "bounty_deposit_site_helicopter");
   helicopter.spawntime = gettime();
   helicopter.attackers = [];
@@ -1220,7 +1217,7 @@ private function_d23cf101(origin, angles, context) {
   return helicopter;
 }
 
-private function_1aca4a4e(helicopter, destination) {
+function_1aca4a4e(helicopter, destination) {
   helicopter endon(#"death");
   var_7f4a508d = destination;
 
@@ -1236,7 +1233,7 @@ private function_1aca4a4e(helicopter, destination) {
         helicopter.var_7f4a508d = var_7f4a508d;
 
         if(!ispointinnavvolume(var_7f4a508d, "navvolume_big")) {
-          self waittilltimeout(10, #"hash_340ab3c2b94ff86a");
+          self waittilltimeout(10, # "hash_340ab3c2b94ff86a");
         }
       }
     }
@@ -1282,7 +1279,7 @@ function_b9192530(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
   return weapon_damage;
 }
 
-private destroy_heli(helicopter) {
+destroy_heli(helicopter) {
   if(isDefined(level.var_ad7774db)) {
     level.var_ad7774db function_572ce431();
     level.var_8fcae189 notify(#"strobe_stop");
@@ -1300,7 +1297,7 @@ private destroy_heli(helicopter) {
   }
 }
 
-private function_656691ab() {
+function_656691ab() {
   self endon(#"death");
 
   while(true) {
@@ -1341,7 +1338,7 @@ function_9ffc1856(goalpos, stop) {
   self setgoal(goalpos, stop);
 }
 
-private function_8de67419(leavenode) {
+function_8de67419(leavenode) {
   self endon(#"death");
   radius = distance(self.origin, leavenode.origin);
   var_a9a839e2 = getclosestpointonnavvolume(leavenode.origin, "navvolume_big", radius);
@@ -1350,10 +1347,9 @@ private function_8de67419(leavenode) {
     self function_9ffc1856(var_a9a839e2, 0);
 
     while(true) {
-
       recordsphere(var_a9a839e2, 8, (0, 0, 1), "<dev string:x38>");
 
-        var_baa92af9 = ispointinnavvolume(self.origin, "navvolume_big");
+      var_baa92af9 = ispointinnavvolume(self.origin, "navvolume_big");
 
       if(!var_baa92af9) {
         self function_60d50ea4();
@@ -1375,7 +1371,7 @@ function_8debcb6(origin) {
   objective_delete(level.var_b167ae9a);
   trigger = spawn("trigger_radius_new", origin, 0, 90, 100);
   trigger triggerignoreteam();
-  useobj = gameobjects::create_use_object(#"none", trigger, [], (0, 0, 0), #"hash_7e7657e9c8f441eb");
+  useobj = gameobjects::create_use_object(#"none", trigger, [], (0, 0, 0), # "hash_7e7657e9c8f441eb");
   useobj gameobjects::set_visible_team(#"any");
   useobj gameobjects::allow_use(#"any");
   useobj gameobjects::set_owner_team(#"neutral");
@@ -1415,7 +1411,7 @@ function_d8151863(origin) {
   fwd = (0, 0, 1);
   right = (0, -1, 0);
   useobj.fx = spawnfx(#"ui/fx_dom_marker_team_r90", origin, fwd, right);
-  useobj.fx.team = #"none";
+  useobj.fx.team = # "none";
   triggerfx(useobj.fx, 0.001);
 }
 
@@ -1460,8 +1456,8 @@ function_37e1bbbf(player) {
   useobj function_572ce431();
   player playsoundtoplayer(#"hash_19f756f885db9bb8", player);
   [[level.var_37d62931]](player, 1);
-  player.pers[#"objscore"]++;
-  player.objscore = player.pers[#"objscore"];
+  player.pers[# "objscore"]++;
+  player.objscore = player.pers[# "objscore"];
   level thread popups::displayteammessagetoall(#"hash_6bea5c334a4ab164", player);
   level function_c04436fc();
   team = player getteam();
@@ -1478,7 +1474,7 @@ function_37e1bbbf(player) {
   function_36f8016e(team, 1);
 }
 
-private function_9ef02b1b(sentient) {
+function_9ef02b1b(sentient) {
   useobj = self;
   player = sentient;
 
@@ -1497,7 +1493,7 @@ private function_9ef02b1b(sentient) {
   function_bd4536a2(level.var_5ae8f1c7, var_6f002c17);
 }
 
-private function_bd4536a2(var_e70389e, var_d89c1031) {
+function_bd4536a2(var_e70389e, var_d89c1031) {
   if(!isDefined(var_e70389e)) {
     return;
   }
@@ -1507,13 +1503,13 @@ private function_bd4536a2(var_e70389e, var_d89c1031) {
   }
 }
 
-private function_17debb33() {
+function_17debb33() {
   waitframe(1);
   pickup_health::function_e963e37d();
   pickup_ammo::function_cff1656d();
 }
 
-private function_bdba96e1() {
+function_bdba96e1() {
   waitframe(1);
   droplocations = struct::get_array("bounty_drop", "variantname");
   droppoint = droplocations[randomint(droplocations.size)].origin;
@@ -1544,7 +1540,7 @@ private function_bdba96e1() {
   supplydropveh thread function_6d1352cb(droppoint);
 }
 
-private function_6d1352cb(droppoint) {
+function_6d1352cb(droppoint) {
   self endon(#"death");
   exitpoint = droppoint + droppoint - self.origin;
 
@@ -1570,7 +1566,7 @@ private function_6d1352cb(droppoint) {
   self delete();
 }
 
-private function_9ec1d15() {
+function_9ec1d15() {
   wait 2.01;
   self physicslaunch();
   self waittill(#"stationary");
@@ -1588,7 +1584,7 @@ private function_9ec1d15() {
   thread globallogic_audio::leader_dialog("bountyAirdropDetected");
 }
 
-private function_d4a84cde(team, player, result) {
+function_d4a84cde(team, player, result) {
   self.isdisabled = 0;
 
   if(isDefined(result) && result && isDefined(player) && isplayer(player)) {
@@ -1613,14 +1609,14 @@ private function_d4a84cde(team, player, result) {
 }
 
 function_3a77006e(amount, reason) {
-  if(!isDefined(self.pers[#"money"]) || self laststand_mp::is_cheating()) {
+  if(!isDefined(self.pers[# "money"]) || self laststand_mp::is_cheating()) {
     return;
   }
 
-  self.pers[#"money"] += amount;
-  self.pers[#"money_earned"] += amount;
-  [[level._setplayerscore]](self, self.pers[#"money_earned"]);
-  self clientfield::set_to_player("bountyMoney", self.pers[#"money"]);
+  self.pers[# "money"] += amount;
+  self.pers[# "money_earned"] += amount;
+  [[level._setplayerscore]](self, self.pers[# "money_earned"]);
+  self clientfield::set_to_player("bountyMoney", self.pers[# "money"]);
   bb::function_95a5b5c2(reason, "", self.team, self.origin, self);
 }
 
@@ -1666,11 +1662,10 @@ function_b968a61c() {
     player = level.players[0];
 
     if(isplayer(player)) {
-      player.pers[#"money"] += var_9b37b387;
-      player clientfield::set_to_player("<dev string:xd2>", player.pers[#"money"]);
+      player.pers[# "money"] += var_9b37b387;
+      player clientfield::set_to_player("<dev string:xd2>", player.pers[# "money"]);
     }
 
     setdvar(#"hash_312d65fd43c7008c", 0);
   }
 }
-

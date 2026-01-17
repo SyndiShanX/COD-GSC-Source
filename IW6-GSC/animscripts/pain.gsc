@@ -110,9 +110,7 @@ main() {
     return;
   }
 
-  if([
-      [anim.pain_test]
-    ]()) {
+  if([[anim.pain_test]]()) {
     return;
   }
   if(self.a.disablepain) {

@@ -4,7 +4,7 @@
 ******************************************/
 
 main() {
-  self setmodel("c_usa_navy_body_brn");
+  self setModel("c_usa_navy_body_brn");
   self.headmodel = "c_usa_navy_head3_cin";
   self attach(self.headmodel, "", 1);
   self.voice = "american";

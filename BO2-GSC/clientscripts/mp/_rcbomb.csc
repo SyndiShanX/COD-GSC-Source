@@ -95,16 +95,16 @@ start_light_fx(localclientnum, blink) {
 
   if(friend) {
     if(blink)
-      self.fx = playfxontag(localclientnum, level._effect["rcbomb_friendly_light_blink"], self, "tag_origin");
+      self.fx = playFXOnTag(localclientnum, level._effect["rcbomb_friendly_light_blink"], self, "tag_origin");
     else
-      self.fx = playfxontag(localclientnum, level._effect["rcbomb_friendly_light"], self, "tag_origin");
+      self.fx = playFXOnTag(localclientnum, level._effect["rcbomb_friendly_light"], self, "tag_origin");
 
     self.friend = 1;
   } else {
     if(blink)
-      self.fx = playfxontag(localclientnum, level._effect["rcbomb_enemy_light_blink"], self, "tag_origin");
+      self.fx = playFXOnTag(localclientnum, level._effect["rcbomb_enemy_light_blink"], self, "tag_origin");
     else
-      self.fx = playfxontag(localclientnum, level._effect["rcbomb_enemy_light"], self, "tag_origin");
+      self.fx = playFXOnTag(localclientnum, level._effect["rcbomb_enemy_light"], self, "tag_origin");
 
     self.friend = 0;
   }
@@ -132,7 +132,7 @@ countdown(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwas
   self stop_light_fx(localclientnum);
 
   for(;;) {
-    self playsound(localclientnum, "wpn_crossbow_alert");
+    self playSound(localclientnum, "wpn_crossbow_alert");
     self start_light_fx(localclientnum, 1);
     serverwait(localclientnum, interval);
     interval = clamp(interval / 1.17, 0.1, 1);
@@ -189,12 +189,12 @@ play_driving_fx_firstperson(localclientnum, speed, speed_fraction, surf_type) {
 
   if(self ispeelingout()) {
     play_trail = 1;
-    playfxontag(localclientnum, level._effect[surf_type]["rcbomb_peeling_out_1st"], self, "tag_origin");
+    playFXOnTag(localclientnum, level._effect[surf_type]["rcbomb_peeling_out_1st"], self, "tag_origin");
   }
 
   if(self iswheelsliding("back_left") || self iswheelsliding("back_right")) {
     play_trail = 1;
-    playfxontag(localclientnum, level._effect[surf_type]["rcbomb_sliding_1st"], self, "tag_origin");
+    playFXOnTag(localclientnum, level._effect[surf_type]["rcbomb_sliding_1st"], self, "tag_origin");
   }
 
   slow_speed = 5;
@@ -204,17 +204,17 @@ play_driving_fx_firstperson(localclientnum, speed, speed_fraction, surf_type) {
   throttle = self getthrottle();
 
   if(speed < slow_speed * -1)
-    playfxontag(localclientnum, level._effect[surf_type]["rcbomb_driving_reverse_1st"], self, "tag_origin");
+    playFXOnTag(localclientnum, level._effect[surf_type]["rcbomb_driving_reverse_1st"], self, "tag_origin");
   else if(speed_fraction >= normal_speed_fraction && !(speed_fraction < decelerating_speed_fraction && throttle < decelerating_throttle_fraction))
-    playfxontag(localclientnum, level._effect[surf_type]["rcbomb_driving_1st"], self, "tag_origin");
+    playFXOnTag(localclientnum, level._effect[surf_type]["rcbomb_driving_1st"], self, "tag_origin");
   else if(speed > slow_speed)
-    playfxontag(localclientnum, level._effect[surf_type]["rcbomb_driving_slow_1st"], self, "tag_origin");
+    playFXOnTag(localclientnum, level._effect[surf_type]["rcbomb_driving_slow_1st"], self, "tag_origin");
 
   if(speed_fraction >= 0.75 && speed > 0)
     play_trail = 1;
 
   if(play_trail)
-    playfxontag(localclientnum, level._effect[surf_type]["rcbomb_driving_trail_1st"], self, "tag_origin");
+    playFXOnTag(localclientnum, level._effect[surf_type]["rcbomb_driving_trail_1st"], self, "tag_origin");
 
   if(!issplitscreen() && speed > 0 && speed_fraction >= normal_speed_fraction) {
     viewangles = getlocalclientangles(localclientnum);
@@ -255,29 +255,29 @@ play_driving_fx_thirdperson(localclientnum, speed, speed_fraction, surf_type) {
 
   if(self ispeelingout()) {
     play_trail = 1;
-    playfxontag(localclientnum, level._effect[surf_type]["rcbomb_peeling_out_3rd"], self, "tag_origin");
+    playFXOnTag(localclientnum, level._effect[surf_type]["rcbomb_peeling_out_3rd"], self, "tag_origin");
   }
 
   if(self iswheelsliding("back_left") || self iswheelsliding("back_right")) {
     play_trail = 1;
-    playfxontag(localclientnum, level._effect[surf_type]["rcbomb_sliding_3rd"], self, "tag_origin");
+    playFXOnTag(localclientnum, level._effect[surf_type]["rcbomb_sliding_3rd"], self, "tag_origin");
   }
 
   slow_speed = 5;
   normal_speed_fraction = 0.25;
 
   if(speed < slow_speed * -1)
-    playfxontag(localclientnum, level._effect[surf_type]["rcbomb_driving_reverse_3rd"], self, "tag_origin");
+    playFXOnTag(localclientnum, level._effect[surf_type]["rcbomb_driving_reverse_3rd"], self, "tag_origin");
   else if(speed_fraction >= normal_speed_fraction)
-    playfxontag(localclientnum, level._effect[surf_type]["rcbomb_driving_3rd"], self, "tag_origin");
+    playFXOnTag(localclientnum, level._effect[surf_type]["rcbomb_driving_3rd"], self, "tag_origin");
   else if(speed > slow_speed)
-    playfxontag(localclientnum, level._effect[surf_type]["rcbomb_driving_slow_3rd"], self, "tag_origin");
+    playFXOnTag(localclientnum, level._effect[surf_type]["rcbomb_driving_slow_3rd"], self, "tag_origin");
 
   if(speed_fraction >= 0.75 && speed > 0)
     play_trail = 1;
 
   if(play_trail)
-    playfxontag(localclientnum, level._effect[surf_type]["rcbomb_driving_trail_3rd"], self, "tag_origin");
+    playFXOnTag(localclientnum, level._effect[surf_type]["rcbomb_driving_trail_3rd"], self, "tag_origin");
 }
 
 play_driving_screen_fx(localclientnum) {
@@ -296,8 +296,7 @@ play_driving_screen_fx(localclientnum) {
       speed_fraction = 0;
 
     if(self iswheelcolliding("back_left") || self iswheelcolliding("back_right")) {
-      if(self islocalclientdriver(localclientnum)) {
-      }
+      if(self islocalclientdriver(localclientnum)) {}
     }
   }
 }
@@ -343,7 +342,7 @@ play_boost_fx(localclientnum) {
     speed = self getspeed();
 
     if(speed > 400) {
-      self playsound(localclientnum, "mpl_veh_rc_boost");
+      self playSound(localclientnum, "mpl_veh_rc_boost");
       return;
     }
 
@@ -396,7 +395,7 @@ play_stunned_fx_handler(localclientnum) {
   self endon("not_stunned");
 
   while(true) {
-    playfxontag(localclientnum, level._effect["rcbomb_stunned"], self, "tag_origin");
+    playFXOnTag(localclientnum, level._effect["rcbomb_stunned"], self, "tag_origin");
     wait 0.5;
   }
 }

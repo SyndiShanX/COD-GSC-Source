@@ -6,7 +6,6 @@
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\util_shared;
-
 #namespace clean;
 
 event_handler[gametype_init] main(eventstruct) {
@@ -17,18 +16,18 @@ event_handler[gametype_init] main(eventstruct) {
   clientfield::register("scriptmover", "taco_player_entnum", 14000, 4, "int", &function_568727a2, 0, 0);
   level.var_aaaae0b = "ui/fx8_fracture_plyr_marker";
   level.var_5844252c = "ui/fx8_fracture_drop_marker";
-  level.var_ce64ea3e = #"clean_taco";
+  level.var_ce64ea3e = # "clean_taco";
 
   if(isDefined(getgametypesetting(#"hash_5cc4c3042b7d4935")) && getgametypesetting(#"hash_5cc4c3042b7d4935")) {
     level.var_aaaae0b = "ui/fx8_fracture_plyr_marker_shamrock";
     level.var_5844252c = "ui/fx8_fracture_drop_marker_shamrock";
-    level.var_ce64ea3e = #"hash_3a64e972390f43aa";
+    level.var_ce64ea3e = # "hash_3a64e972390f43aa";
   }
 
   callback::on_localclient_connect(&on_localclient_connect);
 }
 
-private on_localclient_connect(localclientnum) {
+on_localclient_connect(localclientnum) {
   function_d91ca1f1(localclientnum);
 }
 

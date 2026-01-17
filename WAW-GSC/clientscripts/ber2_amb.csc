@@ -99,7 +99,7 @@ main() {
 gramophone() {
   level waittill("requiem");
   gramophone = getstruct("gramophone", "targetname");
-  playsound(0, "gramophone", gramophone.origin);
+  playSound(0, "gramophone", gramophone.origin);
 }
 
 set_wave_bus() {
@@ -122,17 +122,17 @@ start_lights() {
 }
 
 light_sound() {
-  for (;;) {
+  for(;;) {
     e1 = clientscripts\_audio::playloopat(0, "amb_light_hum", self.origin);
     level waittill("arty_light_hit");
     deletefakeent(0, e1);
-    playsound(0, "amb_light_surge", self.origin);
+    playSound(0, "amb_light_surge", self.origin);
     wait randomfloatrange(.2, .6);
-    playsound(0, "amb_light_surge", self.origin);
+    playSound(0, "amb_light_surge", self.origin);
     wait randomfloatrange(.2, .6);
-    playsound(0, "amb_light_surge", self.origin);
+    playSound(0, "amb_light_surge", self.origin);
     wait randomfloatrange(.2, .6);
-    playsound(0, "amb_light_surge", self.origin);
+    playSound(0, "amb_light_surge", self.origin);
     level waittill("f");
     thread one_light_flicker(self);
     level waittill("fs");
@@ -141,32 +141,32 @@ light_sound() {
 
 one_light_flicker(light) {
   level endon("fs");
-  while (1) {
-    playsound(0, "amb_light_surge", self.origin);
+  while(1) {
+    playSound(0, "amb_light_surge", self.origin);
     wait randomfloatrange(.2, .6);
   }
 }
 
 generator_sound() {
-  for (;;) {
+  for(;;) {
     e2 = clientscripts\_audio::playloopat(0, "subway_generator", self.origin);
     level waittill("arty_light_hit");
     deletefakeent(0, e2);
-    playsound(0, "subway_generator_end", self.origin);
+    playSound(0, "subway_generator_end", self.origin);
     level waittill("f");
-    playsound(0, "subway_generator_start", self.origin);
+    playSound(0, "subway_generator_start", self.origin);
     level waittill("fs");
   }
 }
 
 electrical_room_sound() {
-  for (;;) {
+  for(;;) {
     e3 = clientscripts\_audio::playloopat(0, "bgt_small_room", self.origin);
     level waittill("arty_light_hit");
     deletefakeent(0, e3);
-    playsound(0, "bgt_small_room_stop", self.origin);
+    playSound(0, "bgt_small_room_stop", self.origin);
     level waittill("f");
-    playsound(0, "bgt_small_room_start", self.origin);
+    playSound(0, "bgt_small_room_start", self.origin);
     level waittill("fs");
   }
 }

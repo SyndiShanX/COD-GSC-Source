@@ -12,7 +12,7 @@ init() {
 }
 
 onPlayerConnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connecting", player);
     player.selfDeathIcons = [];
   }

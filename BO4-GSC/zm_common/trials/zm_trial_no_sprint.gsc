@@ -7,7 +7,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
-
 #namespace zm_trial_no_sprint;
 
 autoexec __init__system__() {
@@ -22,7 +21,7 @@ __init__() {
   zm_trial::register_challenge(#"no_sprint", &on_begin, &on_end);
 }
 
-private on_begin() {
+on_begin() {
   callback::on_spawned(&function_dc856fd8);
 
   foreach(player in getplayers()) {
@@ -33,7 +32,7 @@ private on_begin() {
   }
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   callback::remove_on_spawned(&function_dc856fd8);
 
   foreach(player in getplayers()) {
@@ -43,14 +42,14 @@ private on_end(round_reset) {
   }
 }
 
-private function_dc856fd8() {
+function_dc856fd8() {
   self notify("374b3a40e7866d07");
   self endon("374b3a40e7866d07");
-  self endon(#"disconnect", #"allow_sprint");
+  self endon(#"disconnect", # "allow_sprint");
   self allowsprint(0);
 
   while(true) {
-    self waittill(#"crafting_fail", #"crafting_success", #"bgb_update");
+    self waittill(#"crafting_fail", # "crafting_success", # "bgb_update");
 
     if(isalive(self)) {
       self allowsprint(0);
@@ -58,8 +57,8 @@ private function_dc856fd8() {
   }
 }
 
-private function_31f500f() {
-  self endon(#"disconnect", #"allow_sprint");
+function_31f500f() {
+  self endon(#"disconnect", # "allow_sprint");
 
   while(true) {
     if(isalive(self) && self sprintbuttonpressed()) {

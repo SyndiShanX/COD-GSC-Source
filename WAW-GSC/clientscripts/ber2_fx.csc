@@ -77,10 +77,10 @@ lightning_flash_func() {
 lingering_smoke_thread(smokeFX) {
   level endon("lsmokedone");
   realWait(RandomFloatRange(0.25, 1.0));
-  while (1) {
+  while(1) {
     players = getlocalplayers();
-    for (j = 0; j < players.size; j++) {
-      playfx(j, smokeFX, self.origin);
+    for(j = 0; j < players.size; j++) {
+      playFX(j, smokeFX, self.origin);
     }
     realwait(0.8);
   }
@@ -103,7 +103,7 @@ building_collapse_setup_anim_pieces() {
   bonePrefix = "tower";
   sbModelPrefix = "sb_model_tower_";
   pieces = [];
-  for (i = startNum; i <= numPieces; i++) {
+  for(i = startNum; i <= numPieces; i++) {
     if(i < 10) {
       tagName = bonePrefix + "0" + i;
       sbModelTNString = sbModelPrefix + "0" + i;
@@ -132,9 +132,9 @@ building_collapse_oneshot_fx_randomchance(chancePercent) {
 building_collapse_oneshot_fx() {
   oneShotFX = level._effect["building_collapse_oneshot"];
   wait(RandomFloat(0.5));
-  for (i = 0; i < getlocalplayers().size; i++) {
+  for(i = 0; i < getlocalplayers().size; i++) {
     angles = VectorToAngles(self.origin - getlocalplayers()[i].origin);
-    PlayFX(i, oneShotFX, self.origin, angles);
+    playFX(i, oneShotFX, self.origin, angles);
   }
 }
 
@@ -147,7 +147,7 @@ building_collapse_hit1_fx() {
 
 event1_building_collapse_fx() {
   level waittill("bcf");
-  playsound(0, "tower1", (28, 225, -112));
+  playSound(0, "tower1", (28, 225, -112));
   pieces = building_collapse_setup_anim_pieces();
   println("*** Client : building collapse fx " + pieces.size + " pieces.");
   array_thread(pieces, ::building_collapse_oneshot_fx_randomchance, 50);
@@ -247,15 +247,15 @@ ambient_fakefire(endonString, delayStart) {
     reloadTimeMin = 5;
     reloadTimeMax = 12;
   }
-  while (1) {
+  while(1) {
     burst = RandomIntRange(burstMin, burstMax);
-    for (i = 0; i < burst; i++) {
+    for(i = 0; i < burst; i++) {
       traceDist = 10000;
-      target = self.origin + vector_multiply(AnglesToForward(self.angles), traceDist);
+      target = self.origin + vector_multiply(anglesToForward(self.angles), traceDist);
       BulletTracer(self.origin, target, false);
-      PlayFX(0, muzzleFlash, self.origin, AnglesToForward(self.angles));
+      playFX(0, muzzleFlash, self.origin, anglesToForward(self.angles));
       if(RandomInt(100) <= soundChance) {
-        playsound(0, fireSound, self.origin);
+        playSound(0, fireSound, self.origin);
       }
       wait(RandomFloatRange(betweenShotsMin, betweenShotsMax));
     }
@@ -346,12 +346,12 @@ ambient_aaa_fx(endonString) {
     level endon(endonString);
   }
   self thread ambient_aaa_fx_rotate(endonString);
-  while (1) {
+  while(1) {
     firetime = RandomIntRange(3, 8);
-    for (i = 0; i < firetime * 5; i++) {
+    for(i = 0; i < firetime * 5; i++) {
       players = getlocalplayers();
-      for (j = 0; j < players.size; j++) {
-        PlayFX(j, level._effect["aaa_tracer"], self.origin, AnglesToForward(self.angles));
+      for(j = 0; j < players.size; j++) {
+        playFX(j, level._effect["aaa_tracer"], self.origin, anglesToForward(self.angles));
       }
       realwait(RandomFloatRange(0.14, 0.19));
     }
@@ -363,7 +363,7 @@ ambient_aaa_fx_rotate(endonString) {
   if(isDefined(endonString)) {
     level endon(endonString);
   }
-  while (1) {
+  while(1) {
     self RotateTo((312.6, 180, -90), RandomFloatRange(3.5, 6));
     self waittill("rotatedone");
     self RotateTo((307.4, 1.7, 90), RandomFloatRange(3.5, 6));
@@ -373,9 +373,9 @@ ambient_aaa_fx_rotate(endonString) {
 
 event1_aaa_tracers() {
   wait(1.0);
-  fxSpots = GetEntArray(0, "origin_e1_ambient_flak", "targetname");
+  fxSpots = getEntArray(0, "origin_e1_ambient_flak", "targetname");
   ASSERTEX(isDefined(fxSpots) && fxSpots.size > 0, "Can't find ambient AAA tracer fxSpots.");
-  for (i = 0; i < fxSpots.size; i++) {
+  for(i = 0; i < fxSpots.size; i++) {
     fxSpots[i] thread ambient_aaa_fx("subway_gate_closed");
   }
 }
@@ -394,16 +394,16 @@ ambient_cloudburst_fx(endonString) {
   burstWaitMax = 0.65;
   pauseMin = 4;
   pauseMax = 10;
-  while (1) {
+  while(1) {
     numBursts = RandomIntRange(burstsMin, burstsMax);
-    for (i = 0; i < numBursts; i++) {
+    for(i = 0; i < numBursts; i++) {
       offsetVec = self.origin +
         (RandomIntRange((offsetX * -1), offsetX),
           RandomIntRange((offsetY * -1), offsetY),
           RandomIntRange((offsetZ * -1), offsetZ));
       players = GetLocalPlayers();
-      for (j = 0; j < players.size; j++) {
-        PlayFX(j, level._effect["cloudburst"], self.origin + offsetVec);
+      for(j = 0; j < players.size; j++) {
+        playFX(j, level._effect["cloudburst"], self.origin + offsetVec);
       }
       realwait(RandomFloatRange(burstWaitMin, burstWaitMax));
     }
@@ -414,7 +414,7 @@ ambient_cloudburst_fx(endonString) {
 event1_cloudbursts() {
   fxSpots = GetStructArray("origin_e1_ambient_cloudburst", "targetname");
   ASSERTEX(isDefined(fxSpots) && fxSpots.size > 0, "Can't find ambient cloudburst fxSpots.");
-  for (i = 0; i < fxSpots.size; i++) {
+  for(i = 0; i < fxSpots.size; i++) {
     fxSpots[i] thread ambient_cloudburst_fx("subway_gate_closed");
   }
 }

@@ -4,7 +4,6 @@
 ********************************************************/
 
 main() {
-
   level._effect["firelp_med_pm"] = loadfx("fire/firelp_med_pm_nodistort");
   level._effect["firelp_small_pm"] = loadfx("fire/firelp_small_pm");
   level._effect["fog_ground_200_heavy_rundown_tropical"] = loadfx("smoke/fog_ground_200_heavy_rundown_tropical");
@@ -31,10 +30,7 @@ main() {
   //level._effect[ "green_flare" ] 								= loadfx( "misc/handflare_green" );
   */
 
-  /#
   if(common_scripts\utility::shouldRunServerSideEffects())
     maps\createfx\mp_crash_tropical_fx::main();
-
-  # /
 
 }

@@ -73,7 +73,7 @@ add_dogfight_pair(str_plane_front_tag_smoke, str_plane_rear_tag_fire_right, str_
   if(!isDefined(level.dogfight_planes))
     level.dogfight_planes = [];
 
-  s_temp = spawnstruct();
+  s_temp = spawnStruct();
   s_temp.plane_front_tag_smoke = str_plane_front_tag_smoke;
   s_temp.plane_rear_tag_fire_right = str_plane_rear_tag_fire_right;
   s_temp.plane_rear_tag_fire_left = str_plane_rear_tag_fire_left;
@@ -101,7 +101,7 @@ play_fx_on_random_unused_dogfight_pair(str_model_name, localclientnumber) {
 
 plane_front_smoke_fx_start(localclientnumber, s_temp) {
   self plane_front_smoke_fx_end(localclientnumber, s_temp);
-  s_temp.plane_front_fx_smoke[localclientnumber] = playfxontag(localclientnumber, level._effect["sky_plane_trail"], self, s_temp.plane_front_tag_smoke);
+  s_temp.plane_front_fx_smoke[localclientnumber] = playFXOnTag(localclientnumber, level._effect["sky_plane_trail"], self, s_temp.plane_front_tag_smoke);
 }
 
 plane_front_smoke_fx_end(localclientnumber, s_temp) {
@@ -114,9 +114,9 @@ plane_front_smoke_fx_end(localclientnumber, s_temp) {
 
 plane_rear_tracer_fx_start(localclientnumber, s_temp) {
   self plane_rear_tracer_fx_end(localclientnumber, s_temp);
-  s_temp.plane_rear_fx_tracer_right[localclientnumber] = playfxontag(localclientnumber, level._effect["sky_plane_tracers"], self, s_temp.plane_rear_tag_fire_right);
+  s_temp.plane_rear_fx_tracer_right[localclientnumber] = playFXOnTag(localclientnumber, level._effect["sky_plane_tracers"], self, s_temp.plane_rear_tag_fire_right);
   wait(randomfloatrange(0.2, 0.5));
-  s_temp.plane_rear_fx_tracer_left[localclientnumber] = playfxontag(localclientnumber, level._effect["sky_plane_tracers"], self, s_temp.plane_rear_tag_fire_left);
+  s_temp.plane_rear_fx_tracer_left[localclientnumber] = playFXOnTag(localclientnumber, level._effect["sky_plane_tracers"], self, s_temp.plane_rear_tag_fire_left);
 }
 
 plane_rear_tracer_fx_end(localclientnumber, s_temp) {
@@ -149,7 +149,7 @@ get_dogfight_plane_model(localclientnumber, str_identifier) {
 }
 
 get_fxanim_from_script_noteworthy(localclientnumber, str_identifier) {
-  a_fxanims = getentarray(localclientnumber, "fxanim", "targetname");
+  a_fxanims = getEntArray(localclientnumber, "fxanim", "targetname");
 
   foreach(ent in a_fxanims) {
     if(isDefined(ent.script_noteworthy) && ent.script_noteworthy == str_identifier)

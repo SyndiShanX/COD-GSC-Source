@@ -5,7 +5,7 @@
 ********************************/
 
 main(var_0) {
-  if(!isdefined(var_0)) {
+  if(!isDefined(var_0)) {
     return;
   }
   switch (var_0) {

@@ -7,7 +7,6 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\exploder_shared;
 #include scripts\core_common\system_shared;
-
 #namespace zm_orange_lights;
 
 autoexec __init__system__() {
@@ -99,7 +98,7 @@ infusion_lights_cold(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
   }
 }
 
-private function_619bb271(string) {
+function_619bb271(string) {
   if(!isDefined(level.var_989f7c7c)) {
     level.var_989f7c7c = [];
   }

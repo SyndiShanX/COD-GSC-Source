@@ -74,7 +74,7 @@ main() {
   init_sounds();
   level thread add_powerups_after_round_1();
   visionSetNaked("zombie_theater", 0);
-  chandelier = getentarray("theater_chandelier", "targetname");
+  chandelier = getEntArray("theater_chandelier", "targetname");
   array_thread(chandelier, ::theater_chandelier_model_scale);
   maps\zombie_theater_teleporter::teleport_pad_hide_use();
 }
@@ -235,11 +235,11 @@ wait_for_power() {
   master_switch notsolid();
   flag_wait("power_on");
   master_switch rotateroll(-90, .3);
-  master_switch playsound("zmb_switch_flip");
+  master_switch playSound("zmb_switch_flip");
   clientnotify("ZPO");
   master_switch waittill("rotatedone");
-  playfx(level._effect["switch_sparks"], getstruct("elec_switch_fx", "targetname").origin);
-  master_switch playsound("zmb_turn_on");
+  playFX(level._effect["switch_sparks"], getstruct("elec_switch_fx", "targetname").origin);
+  master_switch playSound("zmb_turn_on");
   maps\zombie_theater_teleporter::teleporter_init();
   wait_network_frame();
   level notify("revive_on");
@@ -365,7 +365,7 @@ theater_chandelier_model_scale() {
 }
 
 set_rope_collision() {
-  techrope = getentarray("techrope01", "targetname");
+  techrope = getEntArray("techrope01", "targetname");
   if(isDefined(techrope)) {
     for(i = 0; i < techrope.size; i++) {
       ropesetflag(techrope[i], "collide", 1);

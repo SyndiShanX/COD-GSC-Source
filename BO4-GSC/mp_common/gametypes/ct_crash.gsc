@@ -22,7 +22,6 @@
 #include scripts\mp_common\gametypes\globallogic_spawn;
 #include scripts\mp_common\player\player_loadout;
 #include scripts\mp_common\player\player_utils;
-
 #namespace ct_crash;
 
 event_handler[gametype_init] main(eventstruct) {
@@ -96,7 +95,7 @@ function_7c4ef26b(predictedspawn) {
   self thread ct_core::function_d2845186();
   spawning::onspawnplayer(predictedspawn);
 
-  if(self.team == #"allies") {
+  if(self.team == # "allies") {
     if(isDefined(level.var_f78f9034)) {
       self thread function_6b37f8a5();
     }
@@ -115,7 +114,7 @@ function_9d65db70(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
     return;
   }
 
-  if(self.team == #"allies") {
+  if(self.team == # "allies") {
     if(!isbot(self)) {
       self thread ct_utils::function_ee4639dd(-10);
     }
@@ -123,7 +122,7 @@ function_9d65db70(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
     return;
   }
 
-  if(isplayer(einflictor) && einflictor.team == #"allies") {
+  if(isplayer(einflictor) && einflictor.team == # "allies") {
     einflictor thread ct_utils::function_d471f8fa(5, undefined, 1);
 
     if(isDefined(level.var_93f322c9) && level.var_93f322c9) {
@@ -162,21 +161,21 @@ function_ba542258(mode) {
 
 function_9270ab93(var_db89c655, var_27875ecd) {
   var_e7cc5e43 = [];
-  var_e7cc5e43[#"mp_frenetic"][1] = 240000;
-  var_e7cc5e43[#"mp_frenetic"][2] = 180000;
-  var_e7cc5e43[#"mp_frenetic"][3] = 120000;
-  var_e7cc5e43[#"mp_offshore"][1] = 240000;
-  var_e7cc5e43[#"mp_offshore"][2] = 180000;
-  var_e7cc5e43[#"mp_offshore"][3] = 120000;
-  var_e7cc5e43[#"mp_seaside"][1] = 240000;
-  var_e7cc5e43[#"mp_seaside"][2] = 180000;
-  var_e7cc5e43[#"mp_seaside"][3] = 120000;
-  var_e7cc5e43[#"mp_silo"][1] = 240000;
-  var_e7cc5e43[#"mp_silo"][2] = 180000;
-  var_e7cc5e43[#"mp_silo"][3] = 120000;
-  var_e7cc5e43[#"mp_gridlock"][1] = 240000;
-  var_e7cc5e43[#"mp_gridlock"][2] = 180000;
-  var_e7cc5e43[#"mp_gridlock"][3] = 120000;
+  var_e7cc5e43[# "mp_frenetic"][1] = 240000;
+  var_e7cc5e43[# "mp_frenetic"][2] = 180000;
+  var_e7cc5e43[# "mp_frenetic"][3] = 120000;
+  var_e7cc5e43[# "mp_offshore"][1] = 240000;
+  var_e7cc5e43[# "mp_offshore"][2] = 180000;
+  var_e7cc5e43[# "mp_offshore"][3] = 120000;
+  var_e7cc5e43[# "mp_seaside"][1] = 240000;
+  var_e7cc5e43[# "mp_seaside"][2] = 180000;
+  var_e7cc5e43[# "mp_seaside"][3] = 120000;
+  var_e7cc5e43[# "mp_silo"][1] = 240000;
+  var_e7cc5e43[# "mp_silo"][2] = 180000;
+  var_e7cc5e43[# "mp_silo"][3] = 120000;
+  var_e7cc5e43[# "mp_gridlock"][1] = 240000;
+  var_e7cc5e43[# "mp_gridlock"][2] = 180000;
+  var_e7cc5e43[# "mp_gridlock"][3] = 120000;
   str_map = hash(getrootmapname());
   ct_utils::function_7a21ac57(var_db89c655, var_27875ecd, var_e7cc5e43[str_map][1], var_e7cc5e43[str_map][2], var_e7cc5e43[str_map][3]);
 }
@@ -213,7 +212,7 @@ function_cf3224fe(b_success) {
 j_fore_le_01() {
   level endon(#"combattraining_logic_finished");
   level thread intro_msg();
-  level thread ct_bots::activate_bots(8, #"axis");
+  level thread ct_bots::activate_bots(8, # "axis");
   level thread function_836b3d02();
   level thread function_e60bbaf4();
   level thread function_807d5645();
@@ -455,7 +454,7 @@ function_e268297c(e_captive) {
 
     if(n_dist < 256 && !isDefined(level.var_f78f9034) && !(isDefined(level.var_3574b65f) && level.var_3574b65f)) {
       level thread function_1b25b7dc();
-      level.var_f78f9034 = ct_utils::create_waypoint(#"hash_10b60fe281bbfeca", e_captive.origin, e_captive.angles, #"any", undefined, 0, undefined);
+      level.var_f78f9034 = ct_utils::create_waypoint(#"hash_10b60fe281bbfeca", e_captive.origin, e_captive.angles, # "any", undefined, 0, undefined);
       self.var_7630c482 = 1;
       n_start_time = gettime() / 1000;
       e_player = getplayers()[0];

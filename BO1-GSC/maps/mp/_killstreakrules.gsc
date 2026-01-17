@@ -83,7 +83,7 @@ createRule(rule, maxAllowable, maxAllowablePerTeam) {
       maxAllowable = maxAllowablePerTeam;
     }
   }
-  level.killstreakrules[rule] = spawnstruct();
+  level.killstreakrules[rule] = spawnStruct();
   level.killstreakrules[rule].cur = 0;
   level.killstreakrules[rule].curTeam = [];
   level.killstreakrules[rule].max = maxAllowable;
@@ -95,7 +95,7 @@ addKillstreakToRule(hardpointType, rule, countTowards, checkAgainst) {
   keys = GetArrayKeys(level.killstreaktype[hardpointType]);
   assert(isDefined(level.killstreakrules[rule]));
   if(!isDefined(level.killstreaktype[hardpointType][rule]))
-    level.killstreaktype[hardpointType][rule] = spawnstruct();
+    level.killstreaktype[hardpointType][rule] = spawnStruct();
   level.killstreaktype[hardpointType][rule].counts = countTowards;
   level.killstreaktype[hardpointType][rule].checks = checkAgainst;
 }
@@ -112,7 +112,7 @@ killstreakStart(hardpointType, team, hacked, displayTeamMessage) {
       level thread maps\mp\_popups::DisplayKillstreakTeamMessageToAll(hardpointType, self);
   }
   keys = GetArrayKeys(level.killstreaktype[hardpointType]);
-  for (i = 0; i < keys.size; i++) {
+  for(i = 0; i < keys.size; i++) {
     if(!level.killstreaktype[hardpointType][keys[i]].counts)
       continue;
     assert(isDefined(level.killstreakrules[keys[i]]));
@@ -128,7 +128,7 @@ killstreakStart(hardpointType, team, hacked, displayTeamMessage) {
 killstreakStop(hardpointType, team) {
   assert(isDefined(hardpointType));
   keys = GetArrayKeys(level.killstreaktype[hardpointType]);
-  for (i = 0; i < keys.size; i++) {
+  for(i = 0; i < keys.size; i++) {
     if(!level.killstreaktype[hardpointType][keys[i]].counts)
       continue;
     assert(isDefined(level.killstreakrules[keys[i]]));
@@ -146,7 +146,7 @@ isKillstreakAllowed(hardpointType, team) {
   assert(isDefined(hardpointType));
   isAllowed = true;
   keys = GetArrayKeys(level.killstreaktype[hardpointType]);
-  for (i = 0; i < keys.size; i++) {
+  for(i = 0; i < keys.size; i++) {
     if(!level.killstreaktype[hardpointType][keys[i]].checks)
       continue;
     if(level.killstreakrules[keys[i]].max != 0) {

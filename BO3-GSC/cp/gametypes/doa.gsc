@@ -54,21 +54,21 @@ function main() {
   level.teamscoreperheadshot = 0;
   level.teambased = 1;
   level.overrideteamscore = 1;
-  level.onstartgametype = & onstartgametype;
-  level.onspawnplayer = & onspawnplayer;
-  level.onplayerkilled = & onplayerkilled;
-  level.playermayspawn = & may_player_spawn;
-  level.gametypespawnwaiter = & wait_to_spawn;
+  level.onstartgametype = &onstartgametype;
+  level.onspawnplayer = &onspawnplayer;
+  level.onplayerkilled = &onplayerkilled;
+  level.playermayspawn = &may_player_spawn;
+  level.gametypespawnwaiter = &wait_to_spawn;
   level.noscavenger = 1;
   level.disableprematchmessages = 1;
   level.endgameonscorelimit = 0;
   level.endgameontimelimit = 0;
-  level.ontimelimit = & globallogic::blank;
-  level.onscorelimit = & globallogic::blank;
-  level.onendgame = & onendgame;
+  level.ontimelimit = &globallogic::blank;
+  level.onscorelimit = &globallogic::blank;
+  level.onendgame = &onendgame;
   gameobjects::register_allowed_gameobject("coop");
   setscoreboardcolumns("kills", "gems", "skulls", "chickens", "deaths");
-  if(!isdefined(level.gib_throttle)) {
+  if(!isDefined(level.gib_throttle)) {
     level.gib_throttle = new throttle();
   }
   [[level.gib_throttle]] - > initialize(5, 0.2);
@@ -81,9 +81,9 @@ function onstartgametype() {
   level.spawnmins = (0, 0, 0);
   level.spawnmaxs = (0, 0, 0);
   foreach(team in level.playerteams) {
-    util::setobjectivetext(team, & "OBJECTIVES_COOP");
-    util::setobjectivehinttext(team, & "OBJECTIVES_COOP_HINT");
-    util::setobjectivescoretext(team, & "OBJECTIVES_COOP");
+    util::setobjectivetext(team, &"OBJECTIVES_COOP");
+    util::setobjectivehinttext(team, &"OBJECTIVES_COOP_HINT");
+    util::setobjectivescoretext(team, &"OBJECTIVES_COOP");
     spawnlogic::add_spawn_points(team, "cp_coop_spawn");
     spawnlogic::add_spawn_points(team, "cp_coop_respawn");
   }

@@ -30,7 +30,7 @@ hack_powerups() {
     level waittill("powerup_dropped", powerup);
 
     if(!unhackable_powerup(powerup.powerup_name)) {
-      struct = spawnstruct();
+      struct = spawnStruct();
       struct.origin = powerup.origin;
       struct.radius = 65;
       struct.height = 72;

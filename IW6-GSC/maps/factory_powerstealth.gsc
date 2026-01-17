@@ -85,7 +85,7 @@ section_flag_init() {
 }
 
 section_hint_string_init() {
-  maps\_utility::add_hint_string("chair_stab_hint", & "SCRIPT_PLATFORM_OILRIG_HINT_STEALTH_KILL", ::hint_chair_stab_should_break);
+  maps\_utility::add_hint_string("chair_stab_hint", &"SCRIPT_PLATFORM_OILRIG_HINT_STEALTH_KILL", ::hint_chair_stab_should_break);
 }
 
 hint_chair_stab_should_break() {

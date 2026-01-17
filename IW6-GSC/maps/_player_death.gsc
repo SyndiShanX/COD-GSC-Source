@@ -60,7 +60,7 @@ special_death_hint(var_0, var_1, var_2) {
       if(level.player.lastgrenadetime - gettime() > 3500.0) {
         return;
       }
-      thread grenade_death_hint(&"SCRIPT_GRENADE_SUICIDE_LINE1", & "SCRIPT_GRENADE_SUICIDE_LINE2");
+      thread grenade_death_hint(&"SCRIPT_GRENADE_SUICIDE_LINE1", &"SCRIPT_GRENADE_SUICIDE_LINE2");
       break;
     case "MOD_EXPLOSIVE":
       if(level.player destructible_death(var_0)) {

@@ -6,7 +6,7 @@
 #include common_scripts\utility;
 
 main() {
-  if(!isdefined(level.anim_prop_models))
+  if(!isDefined(level.anim_prop_models))
     level.anim_prop_models = [];
 
   model = "foliage_tree_green_pine_lg_a_animated";

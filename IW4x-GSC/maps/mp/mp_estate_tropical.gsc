@@ -4,7 +4,6 @@
 ******************************************/
 
 main() {
-
   maps\mp\_load::main();
 
   maps\mp\mp_estate_tropical_fx::main();
@@ -27,5 +26,4 @@ main() {
   setdvar("r_lightGridEnableTweaks", 1);
   setdvar("r_lightGridIntensity", 1.3);
   setdvar("r_lightGridContrast", 0);
-
 }

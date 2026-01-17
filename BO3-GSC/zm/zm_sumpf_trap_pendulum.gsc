@@ -18,8 +18,8 @@
 #namespace zm_sumpf_trap_pendulum;
 
 function initpendulumtrap() {
-  penbuytrigger = getentarray("pendulum_buy_trigger", "targetname");
-  for (i = 0; i < penbuytrigger.size; i++) {
+  penbuytrigger = getEntArray("pendulum_buy_trigger", "targetname");
+  for(i = 0; i < penbuytrigger.size; i++) {
     penbuytrigger[i].lever = getent(penbuytrigger[i].target, "targetname");
     penbuytrigger[i].pendamagetrig = getent(penbuytrigger[i].lever.target, "targetname");
     penbuytrigger[i].pen = getent(penbuytrigger[i].pendamagetrig.target, "targetname");
@@ -36,8 +36,8 @@ function moveleverdown() {
   soundent_left = getent("switch_left", "targetname");
   soundent_right = getent("switch_right", "targetname");
   self.lever rotatepitch(180, 0.5);
-  soundent_left playsound("zmb_switch_on");
-  soundent_right playsound("zmb_switch_on");
+  soundent_left playSound("zmb_switch_on");
+  soundent_right playSound("zmb_switch_on");
   self.lever waittill("rotatedone");
   self notify("leverdown");
 }
@@ -46,8 +46,8 @@ function moveleverup() {
   soundent_left = getent("switch_left", "targetname");
   soundent_right = getent("switch_right", "targetname");
   self.lever rotatepitch(-180, 0.5);
-  soundent_left playsound("zmb_switch_off");
-  soundent_right playsound("zmb_switch_off");
+  soundent_left playSound("zmb_switch_off");
+  soundent_right playSound("zmb_switch_off");
   self.lever waittill("rotatedone");
   self notify("leverup");
 }
@@ -72,9 +72,9 @@ function penthink() {
   self.zombie_cost = 750;
   self sethintstring(&"ZOMBIE_BUTTON_BUY_TRAP", self.zombie_cost);
   self setcursorhint("HINT_NOICON");
-  triggers = getentarray("pendulum_buy_trigger", "targetname");
-  array::thread_all(triggers, & hint_string, & "ZOMBIE_BUTTON_BUY_TRAP");
-  while (true) {
+  triggers = getEntArray("pendulum_buy_trigger", "targetname");
+  array::thread_all(triggers, &hint_string, &"ZOMBIE_BUTTON_BUY_TRAP");
+  while(true) {
     self waittill("trigger", who);
     self.used_by = who;
     if(who zm_utility::in_revive_trigger() || level.var_99432870) {
@@ -85,7 +85,7 @@ function penthink() {
         if(!level.var_99432870) {
           level.var_99432870 = 1;
           level thread zm_sumpf::turnlightred("pendulum_light");
-          array::thread_all(triggers, & hint_string, & "ZOMBIE_TRAP_ACTIVE");
+          array::thread_all(triggers, &hint_string, &"ZOMBIE_TRAP_ACTIVE");
           zm_utility::play_sound_at_pos("purchase", who.origin);
           who thread zm_audio::create_and_play_dialog("level", "trap_log");
           who zm_score::minus_to_player_score(self.zombie_cost);
@@ -98,14 +98,14 @@ function penthink() {
           wait(0.5);
           self thread activatepen(motor_left, motor_right, who);
           self waittill("pendown");
-          array::thread_all(triggers, & hint_string, & "ZOMBIE_TRAP_COOLDOWN");
+          array::thread_all(triggers, &hint_string, &"ZOMBIE_TRAP_COOLDOWN");
           self thread moveleverup();
           self waittill("leverup");
           wait(45);
-          pa_system playsound("zmb_warning");
+          pa_system playSound("zmb_warning");
           level thread zm_sumpf::turnlightgreen("pendulum_light");
           level.var_99432870 = 0;
-          array::thread_all(triggers, & hint_string, & "ZOMBIE_BUTTON_BUY_TRAP");
+          array::thread_all(triggers, &hint_string, &"ZOMBIE_BUTTON_BUY_TRAP");
         }
       }
     }
@@ -116,11 +116,11 @@ function activatepen(motor_left, motor_right, who) {
   wheel_left = spawn("script_origin", motor_left.origin);
   wheel_right = spawn("script_origin", motor_right.origin);
   util::wait_network_frame();
-  motor_left playloopsound("zmb_motor_loop_left");
-  motor_right playloopsound("zmb_motor_loop_right");
+  motor_left playLoopSound("zmb_motor_loop_left");
+  motor_right playLoopSound("zmb_motor_loop_right");
   util::wait_network_frame();
-  wheel_left playloopsound("zmb_wheel_loop");
-  wheel_right playloopsound("zmb_belt_loop");
+  wheel_left playLoopSound("zmb_wheel_loop");
+  wheel_right playLoopSound("zmb_belt_loop");
   self.pen notify("stopmonitorsolid");
   self.pen notsolid();
   self.pendamagetrig triggerenable(1);
@@ -151,7 +151,7 @@ function blade_sounds() {
   blade_left = getent("blade_left", "targetname");
   blade_right = getent("blade_right", "targetname");
   lastangle = self.angles[0];
-  for (;;) {
+  for(;;) {
     wooshangle = 90;
     wait(0.01);
     angle = self.angles[0];
@@ -163,12 +163,12 @@ function blade_sounds() {
       continue;
     }
     if(relpos > wooshangle && lastrelpos <= wooshangle) {
-      blade_left playsound("zmb_blade_right");
-      blade_right playsound("zmb_blade_right");
+      blade_left playSound("zmb_blade_right");
+      blade_right playSound("zmb_blade_right");
     }
     if(((relpos + 180) % 360) > wooshangle && ((lastrelpos + 180) % 360) <= wooshangle) {
-      blade_left playsound("zmb_blade_right");
-      blade_right playsound("zmb_blade_right");
+      blade_left playSound("zmb_blade_right");
+      blade_right playSound("zmb_blade_right");
     }
     lastangle = angle;
   }
@@ -177,9 +177,9 @@ function blade_sounds() {
 function trap_sounds(motor_left, motor_right, wheel_left, wheel_right) {
   wait(13);
   motor_left stoploopsound(2);
-  motor_left playsound("zmb_motor_stop_left");
+  motor_left playSound("zmb_motor_stop_left");
   motor_right stoploopsound(2);
-  motor_right playsound("zmb_motor_stop_right");
+  motor_right playSound("zmb_motor_stop_right");
   wait(8);
   wheel_left stoploopsound(8);
   wheel_right stoploopsound(8);
@@ -187,7 +187,7 @@ function trap_sounds(motor_left, motor_right, wheel_left, wheel_right) {
 
 function pendamage(parent, who) {
   level thread customtimer();
-  while (true) {
+  while(true) {
     self waittill("trigger", ent);
     if(parent.penactive == 1) {
       if(isplayer(ent)) {
@@ -201,7 +201,7 @@ function pendamage(parent, who) {
 
 function customtimer() {
   level.my_time = 0;
-  while (level.my_time <= 20) {
+  while(level.my_time <= 20) {
     wait(0.1);
     level.my_time = level.my_time + 0.1;
   }
@@ -227,10 +227,10 @@ function zombiependamage(parent, who) {
   if(level flag::get("dog_round")) {
     self.a.nodeath = 1;
   } else {
-    if(!isdefined(level.numlaunched)) {
+    if(!isDefined(level.numlaunched)) {
       level thread launch_monitor();
     }
-    if(!isdefined(self.flung)) {
+    if(!isDefined(self.flung)) {
       if(parent.script_noteworthy == "1") {
         x = randomintrange(200, 250);
         y = randomintrange(-35, 35);
@@ -259,7 +259,7 @@ function zombiependamage(parent, who) {
 
 function launch_monitor() {
   level.numlaunched = 0;
-  while (true) {
+  while(true) {
     util::wait_network_frame();
     util::wait_network_frame();
     level.numlaunched = 0;
@@ -268,7 +268,7 @@ function launch_monitor() {
 
 function do_launch(x, y, z, parent) {
   self.flung = 1;
-  while (level.numlaunched > 4) {
+  while(level.numlaunched > 4) {
     util::wait_network_frame();
   }
   self thread play_imp_sound();
@@ -276,14 +276,14 @@ function do_launch(x, y, z, parent) {
   self launchragdoll((x, y, z));
   util::wait_network_frame();
   self dodamage(self.health, self.origin, parent);
-  if(isdefined(parent.activated_by_player) && isplayer(parent.activated_by_player)) {
+  if(isDefined(parent.activated_by_player) && isplayer(parent.activated_by_player)) {
     parent.activated_by_player zm_stats::increment_challenge_stat("ZOMBIE_HUNTER_KILL_TRAP");
   }
   level.numlaunched++;
 }
 
 function flogger_vocal_monitor() {
-  while (true) {
+  while(true) {
     level.numfloggervox = 0;
     util::wait_network_frame();
     util::wait_network_frame();
@@ -291,12 +291,12 @@ function flogger_vocal_monitor() {
 }
 
 function play_imp_sound() {
-  if(!isdefined(level.numfloggervox)) {
+  if(!isDefined(level.numfloggervox)) {
     level thread flogger_vocal_monitor();
   }
-  self playsound("zmb_flogger_death");
+  self playSound("zmb_flogger_death");
   if(level.numfloggervox < 5) {
-    self playsound("zmb_vocals_zombie_death");
+    self playSound("zmb_vocals_zombie_death");
     self clientfield::set("zombie_flogger_trap", 1);
     level.numfloggervox++;
   }

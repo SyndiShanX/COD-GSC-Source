@@ -57,19 +57,19 @@ MeleeCombat() {
     if(!isDefined(level.zombietron_mode)) {
       switch (self.animname) {
         case "zombie":
-          self PlaySound("zmb_vocals_zombie_attack");
+          self playSound("zmb_vocals_zombie_attack");
           break;
         case "quad_zombie":
-          self PlaySound("zmb_vocals_quad_attack");
+          self playSound("zmb_vocals_quad_attack");
           break;
         case "boss_zombie":
-          self PlaySound("zmb_vocals_boss_attack");
+          self playSound("zmb_vocals_boss_attack");
           break;
         case "napalm_zombie":
-          self PlaySound("zmb_vocals_napalm_attack");
+          self playSound("zmb_vocals_napalm_attack");
           break;
         case "sonic_zombie":
-          self PlaySound("zmb_vocals_sonic_attack");
+          self playSound("zmb_vocals_sonic_attack");
           break;
       }
     }
@@ -295,8 +295,8 @@ isMeleePathClear(vecToEnemy, enemyPoint) {
   if(self maymovetopoint(meleePoint)) {
     return true;
   }
-  trace1 = bullettrace(self.origin + (0, 0, 20), meleePoint + (0, 0, 20), true, self);
-  trace2 = bullettrace(self.origin + (0, 0, 72), meleePoint + (0, 0, 72), true, self);
+  trace1 = bulletTrace(self.origin + (0, 0, 20), meleePoint + (0, 0, 20), true, self);
+  trace2 = bulletTrace(self.origin + (0, 0, 72), meleePoint + (0, 0, 72), true, self);
   if(isDefined(trace1["fraction"]) && trace1["fraction"] == 1 &&
     isDefined(trace2["fraction"]) && trace2["fraction"] == 1) {
     return true;

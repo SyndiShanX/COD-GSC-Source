@@ -49,7 +49,7 @@ artfxprintln(file, string) {
 strtok_loc(string, par1) {
   stringlist = [];
   indexstring = "";
-  for (i = 0; i < string.size; i++) {
+  for(i = 0; i < string.size; i++) {
     if(string[i] == " ") {
       stringlist[stringlist.size] = indexstring;
       indexstring = "";
@@ -113,8 +113,8 @@ tweakart() {
   level.fogfraction = 1.0;
   file = undefined;
   filename = undefined;
-  for (;;) {
-    while (GetDvarint("scr_art_tweak") == 0) {
+  for(;;) {
+    while(GetDvarint("scr_art_tweak") == 0) {
       assertex(GetDvar("scr_art_dump") == "0", "Must Enable Art Tweaks to export _art file.");
       wait .05;
       if(!GetDvarint("scr_art_tweak") == 0) {
@@ -222,14 +222,14 @@ dumpsettings() {
           }
           fc = [];
           larger = 1;
-          for (i = 0; i < color.size; i++) {
+          for(i = 0; i < color.size; i++) {
             fc[i] = fogfraction * color[i];
             if(fc[i] > larger) {
               larger = fc[i];
             }
           }
           if(larger > 1) {
-            for (i = 0; i < fc.size; i++) {
+            for(i = 0; i < fc.size; i++) {
               fc[i] = fc[i] / larger;
             }
           }
@@ -239,7 +239,7 @@ dumpsettings() {
         }
         debug_reflection() {
           level.debug_reflection = 0;
-          while (1) {
+          while(1) {
             wait(0.1);
             if((GetDvar("debug_reflection") == "2" && level.debug_reflection != 2) || (GetDvar("debug_reflection") == "3" && level.debug_reflection != 3)) {
               remove_reflection_objects();
@@ -263,7 +263,7 @@ dumpsettings() {
         }
         remove_reflection_objects() {
           if((level.debug_reflection == 2 || level.debug_reflection == 3) && isDefined(level.debug_reflection_objects)) {
-            for (i = 0; i < level.debug_reflection_objects.size; i++) {
+            for(i = 0; i < level.debug_reflection_objects.size; i++) {
               level.debug_reflection_objects[i] Delete();
             }
             level.debug_reflection_objects = undefined;
@@ -274,21 +274,21 @@ dumpsettings() {
         }
         create_reflection_objects() {
           reflection_locs = GetReflectionLocs();
-          for (i = 0; i < reflection_locs.size; i++) {
-            level.debug_reflection_objects[i] = Spawn("script_model", reflection_locs[i]);
-            level.debug_reflection_objects[i] SetModel("test_sphere_silver");
+          for(i = 0; i < reflection_locs.size; i++) {
+            level.debug_reflection_objects[i] = spawn("script_model", reflection_locs[i]);
+            level.debug_reflection_objects[i] setModel("test_sphere_silver");
           }
         }
         create_reflection_object() {
           players = get_players();
-          while (players.size < 1) {
+          while(players.size < 1) {
             wait(0.5);
             players = get_players();
           }
           player = players[0];
-          level.debug_reflectionobject = Spawn("script_model", player GetEye() + (VectorScale(AnglesToForward(player.angles), 100)));
-          level.debug_reflectionobject SetModel("test_sphere_silver");
-          level.debug_reflectionobject.origin = player geteye() + (VectorScale(anglestoforward(player getplayerangles()), 100));
+          level.debug_reflectionobject = spawn("script_model", player getEye() + (VectorScale(anglesToForward(player.angles), 100)));
+          level.debug_reflectionobject setModel("test_sphere_silver");
+          level.debug_reflectionobject.origin = player getEye() + (VectorScale(anglesToForward(player getplayerangles()), 100));
           player thread debug_reflection_buttons();
         }
         debug_reflection_buttons() {
@@ -296,7 +296,7 @@ dumpsettings() {
           offset = 100;
           lastoffset = offset;
           offsetinc = 50;
-          while (GetDvar("debug_reflection") == "1" || GetDvar("debug_reflection") == "3") {
+          while(GetDvar("debug_reflection") == "1" || GetDvar("debug_reflection") == "3") {
             if(self buttonpressed("BUTTON_X")) {
               offset += offsetinc;
             }
@@ -309,7 +309,7 @@ dumpsettings() {
             if(offset < 64) {
               offset = 64;
             }
-            level.debug_reflectionobject.origin = self GetEye() + (VectorScale(AnglesToForward(self GetPlayerAngles()), offset));
+            level.debug_reflectionobject.origin = self getEye() + (VectorScale(anglesToForward(self GetPlayerAngles()), offset));
             lastoffset = offset;
             line(level.debug_reflectionobject.origin,
               getreflectionorigin(level.debug_reflectionobject.origin),

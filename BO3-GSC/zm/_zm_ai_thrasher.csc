@@ -11,7 +11,7 @@
 #namespace _zm_ai_thrasher;
 
 function autoexec main() {
-  clientfield::register("actor", "thrasher_mouth_cf", 9000, 8, "int", & thrasherclientutils::function_dc24e0f3, 0, 0);
+  clientfield::register("actor", "thrasher_mouth_cf", 9000, 8, "int", &thrasherclientutils::function_dc24e0f3, 0, 0);
 }
 
 #namespace thrasherclientutils;
@@ -19,7 +19,7 @@ function autoexec main() {
 function function_43bf0af5(entity, player, state) {
   entitynumber = player getentitynumber();
   var_a2619f0 = 3 << (entitynumber * 2);
-  return (state & var_a2619f0) >> (entitynumber * 2);
+  return (state &var_a2619f0) >> (entitynumber * 2);
 }
 
 function private function_dc24e0f3(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
@@ -35,10 +35,10 @@ function private function_dc24e0f3(localclientnum, oldvalue, newvalue, bnewent, 
     entity thread function_93c1c40c(localclientnum, entity, localplayer);
     return;
   }
-  if(isdefined(entity.var_9ed023df) && entity.var_9ed023df) {
+  if(isDefined(entity.var_9ed023df) && entity.var_9ed023df) {
     return;
   }
-  if(!isdefined(entity.var_18fd72ff) && state != 0) {
+  if(!isDefined(entity.var_18fd72ff) && state != 0) {
     entity thread function_4cf5760d(localclientnum, entity, localplayer);
     entity thread function_785afcbe(localclientnum, entity, localplayer);
   }
@@ -63,7 +63,7 @@ function private function_dc24e0f3(localclientnum, oldvalue, newvalue, bnewent, 
 }
 
 function private function_51fb721f(localclientnum, thrasher, player) {
-  if(isdefined(thrasher) && isdefined(thrasher.var_18fd72ff)) {
+  if(isDefined(thrasher) && isDefined(thrasher.var_18fd72ff)) {
     thrasher.var_18fd72ff clearanim("p7_fxanim_zm_island_thrasher_stomach_close_anim", 0.2);
     thrasher.var_18fd72ff clearanim("p7_fxanim_zm_island_thrasher_stomach_open_anim", 0.2);
     thrasher.var_18fd72ff setanimrestart("p7_fxanim_zm_island_thrasher_stomach_idle_anim");
@@ -71,7 +71,7 @@ function private function_51fb721f(localclientnum, thrasher, player) {
 }
 
 function private function_48032157(localclientnum, thrasher, player) {
-  if(isdefined(thrasher) && isdefined(thrasher.var_18fd72ff)) {
+  if(isDefined(thrasher) && isDefined(thrasher.var_18fd72ff)) {
     thrasher.var_18fd72ff clearanim("p7_fxanim_zm_island_thrasher_stomach_idle_anim", 0.2);
     thrasher.var_18fd72ff clearanim("p7_fxanim_zm_island_thrasher_stomach_open_anim", 0.2);
     thrasher.var_18fd72ff setanimrestart("p7_fxanim_zm_island_thrasher_stomach_close_anim");
@@ -81,7 +81,7 @@ function private function_48032157(localclientnum, thrasher, player) {
 }
 
 function private function_98817801(localclientnum, thrasher, player) {
-  if(isdefined(thrasher) && isdefined(thrasher.var_18fd72ff)) {
+  if(isDefined(thrasher) && isDefined(thrasher.var_18fd72ff)) {
     thrasher.var_18fd72ff clearanim("p7_fxanim_zm_island_thrasher_stomach_idle_anim", 0.2);
     thrasher.var_18fd72ff clearanim("p7_fxanim_zm_island_thrasher_stomach_close_anim", 0.2);
     thrasher.var_18fd72ff setanimrestart("p7_fxanim_zm_island_thrasher_stomach_open_anim");
@@ -101,10 +101,10 @@ function private function_4cf5760d(localclientnum, thrasher, player) {
   eyeposition = player gettagorigin("tag_eye");
   eyeoffset = (0, 0, (abs((abs(eyeposition[2] - player.origin[2])) - 40)) - 10);
   thrasher.var_18fd72ff = spawn(localclientnum, thrasher.origin, "script_model");
-  thrasher.var_18fd72ff setmodel("p7_fxanim_zm_island_thrasher_stomach_mod");
+  thrasher.var_18fd72ff setModel("p7_fxanim_zm_island_thrasher_stomach_mod");
   thrasher.var_18fd72ff useanimtree($generic);
   var_8cfe2065 = 5;
-  forwardoffset = anglestoforward(thrasher.var_18fd72ff.angles) * var_8cfe2065;
+  forwardoffset = anglesToForward(thrasher.var_18fd72ff.angles) * var_8cfe2065;
   thrasher.var_18fd72ff.origin = getcamposbylocalclientnum(player.localclientnum) - forwardoffset;
   lastposition = thrasher.var_18fd72ff.origin;
   var_2f57a8ba = (0, 0, 0);
@@ -113,8 +113,8 @@ function private function_4cf5760d(localclientnum, thrasher, player) {
   var_11a41486 = 0.1;
   var_3c524399 = var_7b5d5a9 * var_7b5d5a9;
   var_dadc8424 = var_11a41486 * var_11a41486;
-  while (true) {
-    forwardoffset = anglestoforward(thrasher.var_18fd72ff.angles) * var_8cfe2065;
+  while(true) {
+    forwardoffset = anglesToForward(thrasher.var_18fd72ff.angles) * var_8cfe2065;
     desiredposition = (thrasher gettagorigin("tag_camera_thrasher") + eyeoffset) - forwardoffset;
     var_bef3bf12 = getcamposbylocalclientnum(player.localclientnum) - forwardoffset;
     var_622b2c1a = desiredposition - var_bef3bf12;
@@ -144,12 +144,12 @@ function private function_785afcbe(localclientnum, thrasher, player) {
   var_c0756dfb = 2;
   lasttime = player getclienttime() / 1000;
   wait(interpolate);
-  while (isdefined(thrasher.var_18fd72ff)) {
+  while(isDefined(thrasher.var_18fd72ff)) {
     currenttime = player getclienttime() / 1000;
     timedelta = currenttime - lasttime;
     var_50a8bb46 = thrasher.var_18fd72ff.angles[1];
     newyaw = getcamanglesbylocalclientnum(player.localclientnum)[1];
-    while (timedelta > interpolate) {
+    while(timedelta > interpolate) {
       var_50a8bb46 = angleclamp180(anglelerp(var_50a8bb46, newyaw, 0.15));
       timedelta = timedelta - interpolate;
     }
@@ -160,17 +160,17 @@ function private function_785afcbe(localclientnum, thrasher, player) {
 }
 
 function private function_93c1c40c(localclientnum, thrasher, player) {
-  if(isdefined(thrasher)) {
+  if(isDefined(thrasher)) {
     thrasher notify("hash_d53b1d6d");
     thrasher.var_9ed023df = 1;
   }
-  if(isdefined(player)) {
+  if(isDefined(player)) {
     player notify("hash_d53b1d6d");
   }
-  if(isdefined(player)) {
+  if(isDefined(player)) {
     player thread lui::screen_fade_in(2);
   }
-  if(isdefined(thrasher) && isdefined(thrasher.var_18fd72ff)) {
+  if(isDefined(thrasher) && isDefined(thrasher.var_18fd72ff)) {
     thrasher.var_18fd72ff delete();
     thrasher.var_18fd72ff = undefined;
   }

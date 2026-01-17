@@ -26,11 +26,11 @@ function init() {}
 
 function main() {
   cybercom_gadget::registerability(1, 16);
-  level.cybercom.overdrive = spawnstruct();
-  level.cybercom.overdrive._on_give = & _on_give;
-  level.cybercom.overdrive._on_take = & _on_take;
-  level.cybercom.overdrive._on = & _on;
-  level.cybercom.overdrive._off = & _off;
+  level.cybercom.overdrive = spawnStruct();
+  level.cybercom.overdrive._on_give = &_on_give;
+  level.cybercom.overdrive._on_take = &_on_take;
+  level.cybercom.overdrive._on = &_on;
+  level.cybercom.overdrive._off = &_off;
 }
 
 function _on_flicker(slot, weapon) {}
@@ -60,7 +60,7 @@ function _on(slot, weapon) {
   }
   wait(getdvarfloat("scr_overdrive_activationDelay_sec", 0.4));
   self.var_7d73f4ba = self hasperk("specialty_deadshot");
-  if(!(isdefined(self.var_7d73f4ba) && self.var_7d73f4ba)) {
+  if(!(isDefined(self.var_7d73f4ba) && self.var_7d73f4ba)) {
     self setperk("specialty_deadshot");
   }
   self clientfield::set_to_player("overdrive_state", 1);
@@ -73,7 +73,7 @@ function _on(slot, weapon) {
   self playrumbleonentity("tank_rumble");
   if(isplayer(self)) {
     itemindex = getitemindexfromref("cybercom_overdrive");
-    if(isdefined(itemindex)) {
+    if(isDefined(itemindex)) {
       self adddstat("ItemStats", itemindex, "stats", "used", "statValue", 1);
     }
   }
@@ -81,7 +81,7 @@ function _on(slot, weapon) {
 
 function _off(slot, weapon) {
   self notify("hash_3ca9ab77");
-  if(!(isdefined(self.var_7d73f4ba) && self.var_7d73f4ba)) {
+  if(!(isDefined(self.var_7d73f4ba) && self.var_7d73f4ba)) {
     self unsetperk("specialty_deadshot");
   }
   self clientfield::set_to_player("overdrive_state", 0);

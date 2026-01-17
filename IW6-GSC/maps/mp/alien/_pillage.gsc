@@ -54,15 +54,11 @@ build_pillageitem_arrays(category) {
   }
 
   if(isDefined(level.custom_build_pillageitem_array_func)) {
-    [
-      [level.custom_build_pillageitem_array_func]
-    ](category);
+    [[level.custom_build_pillageitem_array_func]](category);
   }
 
   if(isDefined(level.locker_build_pillageitem_array_func)) {
-    [
-      [level.locker_build_pillageitem_array_func]
-    ](category);
+    [[level.locker_build_pillageitem_array_func]](category);
   }
 }
 
@@ -96,15 +92,11 @@ pillage_init() {
   level.offhand_secondaries = ["alienflare_mp", "alienthrowingknife_mp", "alientrophy_mp"];
 
   if(isDefined(level.custom_pillageInitFunc)) {
-    [
-      [level.custom_pillageInitFunc]
-    ]();
+    [[level.custom_pillageInitFunc]]();
   }
 
   if(isDefined(level.custom_LockerPillageInitFunc)) {
-    [
-      [level.custom_LockerPillageInitFunc]
-    ]();
+    [[level.custom_LockerPillageInitFunc]]();
   }
 
   level.alien_crafting_items = undefined;
@@ -215,9 +207,7 @@ get_hintstring_for_pillaged_item(string) {
   }
 
   if(isDefined(level.get_hintstring_for_pillaged_item_func)) {
-    return [
-      [level.get_hintstring_for_pillaged_item_func]
-    ](string);
+    return [[level.get_hintstring_for_pillaged_item_func]](string);
   }
 
 }
@@ -294,9 +284,7 @@ get_hintstring_for_item_pickup(string) {
   }
 
   if(isDefined(level.get_hintstring_for_item_pickup_func)) {
-    return [
-      [level.get_hintstring_for_item_pickup_func]
-    ](string);
+    return [[level.get_hintstring_for_item_pickup_func]](string);
   }
 
 }
@@ -376,17 +364,17 @@ pillage_spot_think() {
       continue;
     }
     if(user is_holding_deployable() || user has_special_weapon()) {
-      user setLowerMessage("cant_buy", & "ALIEN_COLLECTIBLES_PLAYER_HOLDING", 3);
+      user setLowerMessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_HOLDING", 3);
       continue;
     }
 
     if(user maps\mp\alien\_prestige::prestige_getNoDeployables() == 1.0) {
-      user setLowerMessage("cant_buy", & "ALIENS_PRESTIGE_NO_DEPLOYABLES_PICKUP", 3);
+      user setLowerMessage("cant_buy", &"ALIENS_PRESTIGE_NO_DEPLOYABLES_PICKUP", 3);
       continue;
     }
 
     if(!isDefined(user.current_crafting_recipe) && isDefined(self.default_item_type) && self.default_item_type == "crafting") {
-      user setLowerMessage("cant_buy", & "ALIEN_CRAFTING_NO_RECIPE", 3);
+      user setLowerMessage("cant_buy", &"ALIEN_CRAFTING_NO_RECIPE", 3);
       continue;
     }
 
@@ -621,7 +609,7 @@ pillage_spot_think() {
               self delete_pillage_trigger();
             } else {
               self.pillage_trigger makeUsable();
-              user setLowerMessage("max_ammo", & "ALIEN_COLLECTIBLES_AMMO_MAX", 3);
+              user setLowerMessage("max_ammo", &"ALIEN_COLLECTIBLES_AMMO_MAX", 3);
             }
             break;
 
@@ -633,7 +621,7 @@ pillage_spot_think() {
               user thread show_pillage_text(string);
               self delete_pillage_trigger();
             } else {
-              user setLowerMessage("max_money", & "ALIEN_COLLECTIBLES_MONEY_MAX", 3);
+              user setLowerMessage("max_money", &"ALIEN_COLLECTIBLES_MONEY_MAX", 3);
             }
             break;
 
@@ -653,7 +641,7 @@ pillage_spot_think() {
               self delete_pillage_trigger();
             } else {
               self.pillage_trigger makeUsable();
-              user setLowerMessage("max_ammo", & "ALIEN_COLLECTIBLES_AMMO_MAX", 3);
+              user setLowerMessage("max_ammo", &"ALIEN_COLLECTIBLES_AMMO_MAX", 3);
             }
             break;
 
@@ -665,9 +653,9 @@ pillage_spot_think() {
             } else {
               self.pillage_trigger makeUsable();
               if(user hasweapon("aliensoflam_mp")) {
-                user setLowerMessage("have_soflam", & "ALIEN_COLLECTIBLES_SOFLAM_HAD", 3);
+                user setLowerMessage("have_soflam", &"ALIEN_COLLECTIBLES_SOFLAM_HAD", 3);
               } else {
-                user setLowerMessage("too_many", & "ALIEN_COLLECTIBLES_SOFLAM_HAD", 3);
+                user setLowerMessage("too_many", &"ALIEN_COLLECTIBLES_SOFLAM_HAD", 3);
               }
 
             }
@@ -1028,7 +1016,7 @@ try_to_give_player_explosives(pillage_spot) {
       self PlayLocalSound("grenade_pickup");
       pillage_spot delete_pillage_trigger();
     } else
-      self setLowerMessage("max_explosvies", & "ALIEN_COLLECTIBLES_EXPLO_MAX", 3);
+      self setLowerMessage("max_explosvies", &"ALIEN_COLLECTIBLES_EXPLO_MAX", 3);
   } else {
     weapon_to_swap = self should_swap_weapon(level.offhand_explosives);
     self setOffhandPrimaryClass("other");
@@ -1080,7 +1068,7 @@ try_to_give_player_flares(pillage_spot) {
       self SetWeaponAmmoClip(flare, (clip_ammo + stock_ammo + 1));
       pillage_spot delete_pillage_trigger();
     } else
-      self setLowerMessage("max_flares", & "ALIEN_COLLECTIBLES_FLARE_MAX", 3);
+      self setLowerMessage("max_flares", &"ALIEN_COLLECTIBLES_FLARE_MAX", 3);
   } else {
     weapon_to_swap = self should_swap_weapon(level.offhand_secondaries);
     if(!isDefined(weapon_to_swap)) {
@@ -1136,7 +1124,7 @@ try_to_give_player_trophy(pillage_spot) {
   }
 
   if(self hasweapon(trophy) && self GetAmmoCount(trophy) > 0) {
-    self setLowerMessage("max_flares", & "ALIEN_COLLECTIBLES_TROPHY_MAX", 3);
+    self setLowerMessage("max_flares", &"ALIEN_COLLECTIBLES_TROPHY_MAX", 3);
   } else {
     weapon_to_swap = self should_swap_weapon(level.offhand_secondaries);
     if(!isDefined(weapon_to_swap)) {
@@ -1198,7 +1186,7 @@ try_to_give_player_the_leash(pillage_spot) {
       self SetWeaponAmmoClip(leash, (clip_ammo + stock_ammo + 1));
       pillage_spot delete_pillage_trigger();
     } else
-      self setLowerMessage("max_leash", & "ALIENS_PATCH_LEASH_MAX", 3);
+      self setLowerMessage("max_leash", &"ALIENS_PATCH_LEASH_MAX", 3);
   } else {
     weapon_to_swap = self should_swap_weapon(level.offhand_secondaries);
     if(!isDefined(weapon_to_swap)) {
@@ -1367,7 +1355,7 @@ add_attachment_to_weapon(new_attachment, pillage_spot) {
   }
 
   if(!can_use) {
-    self setLowerMessage("cant_attach", & "ALIEN_COLLECTIBLES_CANT_USE", 3);
+    self setLowerMessage("cant_attach", &"ALIEN_COLLECTIBLES_CANT_USE", 3);
     return false;
   }
 
@@ -1418,7 +1406,7 @@ add_attachment_to_weapon(new_attachment, pillage_spot) {
       else if(attachment4 == "none" && new_attachment != attachment1 && new_attachment != attachment2 && new_attachment != attachment3)
         attachment4 = new_attachment;
       else {
-        self setLowerMessage("cant_attach", & "ALIEN_COLLECTIBLES_CANT_USE", 3);
+        self setLowerMessage("cant_attach", &"ALIEN_COLLECTIBLES_CANT_USE", 3);
         return false;
       }
     }
@@ -1927,19 +1915,19 @@ give_soflam() {
 
 cangive_crafting_item(crafting_item) {
   if(!isDefined(self.current_crafting_recipe)) {
-    self setLowerMessage("cant_pickup", & "ALIEN_CRAFTING_NO_RECIPE", 3);
+    self setLowerMessage("cant_pickup", &"ALIEN_CRAFTING_NO_RECIPE", 3);
     self playlocalsound("ui_craft_deny");
     return false;
   }
 
   if(self.craftingItems.size == level.max_crafting_items) {
-    self setLowerMessage("cant_pickup", & "ALIEN_CRAFTING_MAX_CRAFTING_ITEMS", 3);
+    self setLowerMessage("cant_pickup", &"ALIEN_CRAFTING_MAX_CRAFTING_ITEMS", 3);
     return false;
   }
 
   foreach(craftingItem in self.craftingItems) {
     if(craftingItem == crafting_item) {
-      self setLowerMessage("cant_pickup", & "ALIEN_CRAFTING_ALREADY_HAVE", 3);
+      self setLowerMessage("cant_pickup", &"ALIEN_CRAFTING_ALREADY_HAVE", 3);
       return false;
     }
   }
@@ -1950,7 +1938,7 @@ cangive_crafting_item(crafting_item) {
     return true;
   }
 
-  self setLowerMessage("cant_pickup", & "ALIEN_CRAFTING_NO_RECIPE", 3);
+  self setLowerMessage("cant_pickup", &"ALIEN_CRAFTING_NO_RECIPE", 3);
   return false;
 }
 
@@ -2110,9 +2098,7 @@ check_for_existing_pet_bombs() {
   }
 
   if(isDefined(level.custom_pet_bomb_check)) {
-    petbomb_count += [
-      [level.custom_pet_bomb_check]
-    ]();
+    petbomb_count += [[level.custom_pet_bomb_check]]();
   }
 
   return petbomb_count;

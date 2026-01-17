@@ -6,11 +6,11 @@
 #namespace animationselectortable;
 
 function registeranimationselectortableevaluator(functionname, functionptr) {
-  if(!isdefined(level._astevaluatorscriptfunctions)) {
+  if(!isDefined(level._astevaluatorscriptfunctions)) {
     level._astevaluatorscriptfunctions = [];
   }
   functionname = tolower(functionname);
-  assert(isdefined(functionname) && isdefined(functionptr));
-  assert(!isdefined(level._astevaluatorscriptfunctions[functionname]));
+  assert(isDefined(functionname) && isDefined(functionptr));
+  assert(!isDefined(level._astevaluatorscriptfunctions[functionname]));
   level._astevaluatorscriptfunctions[functionname] = functionptr;
 }

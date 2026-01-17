@@ -13,7 +13,6 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\util_shared;
 #include scripts\core_common\values_shared;
-
 #namespace ai;
 
 set_pacifist(val) {
@@ -149,7 +148,7 @@ waittill_dead_or_dying(guys, num, timeoutlength) {
   }
 }
 
-private waittill_dead_thread(ent) {
+waittill_dead_thread(ent) {
   self waittill(#"death");
   ent.count--;
   ent notify(#"waittill_dead guy died");
@@ -166,8 +165,8 @@ waittill_dead_timeout(timeoutlength) {
   self notify(#"thread_timed_out");
 }
 
-private wait_for_shoot() {
-  self endon(#"stop_shoot_at_target", #"death");
+wait_for_shoot() {
+  self endon(#"stop_shoot_at_target", # "death");
 
   if(isvehicle(self) || isbot(self)) {
     self waittill(#"weapon_fired");
@@ -179,7 +178,7 @@ private wait_for_shoot() {
 }
 
 shoot_at_target(mode, target, tag, duration, sethealth, ignorefirstshotwait) {
-  self endon(#"death", #"stop_shoot_at_target");
+  self endon(#"death", # "stop_shoot_at_target");
   assert(isDefined(target), "<dev string:xfb>");
   assert(isDefined(mode), "<dev string:x12c>");
   mode_flag = mode === "normal" || mode === "shoot_until_target_dead" || mode === "kill_within_time";
@@ -208,12 +207,12 @@ shoot_at_target(mode, target, tag, duration, sethealth, ignorefirstshotwait) {
   self.start_duration_comp = 0;
 
   switch (mode) {
-    case #"normal":
+    case # "normal":
       break;
-    case #"shoot_until_target_dead":
+    case # "shoot_until_target_dead":
       duration = -1;
       break;
-    case #"kill_within_time":
+    case # "kill_within_time":
       target damagemode("next_shot_kills");
       break;
   }
@@ -345,7 +344,7 @@ _force_goal(s_tracker, goto, b_shoot = 1, str_end_on, b_keep_colors = 0, b_shoul
     self setgoal(goto, 1);
   }
 
-  self waittill(#"goal", #"new_force_goal", str_end_on);
+  self waittill(#"goal", # "new_force_goal", str_end_on);
 
   if(color_enabled) {
     colors::enable();
@@ -381,16 +380,16 @@ stoppainwaitinterval() {
   self notify(#"painwaitintervalremove");
 }
 
-private _allowpainrestore() {
+_allowpainrestore() {
   self endon(#"death");
-  self waittill(#"painwaitintervalremove", #"painwaitinterval");
+  self waittill(#"painwaitintervalremove", # "painwaitinterval");
   self.allowpain = 1;
 }
 
 painwaitinterval(msec) {
   self endon(#"death");
   self notify(#"painwaitinterval");
-  self endon(#"painwaitinterval", #"painwaitintervalremove");
+  self endon(#"painwaitinterval", # "painwaitintervalremove");
   self thread _allowpainrestore();
 
   if(!isDefined(msec) || msec < 20) {
@@ -406,17 +405,17 @@ painwaitinterval(msec) {
 }
 
 patrol(start_path_node) {
-  self endon(#"death", #"stop_patrolling");
+  self endon(#"death", # "stop_patrolling");
   assert(isDefined(start_path_node), self.targetname + "<dev string:x1f3>");
 
-  if(start_path_node.type === #"bad node") {
+  if(start_path_node.type === # "bad node") {
     errormsg = "<dev string:x24f>" + start_path_node.targetname + "<dev string:x266>" + int(start_path_node.origin[0]) + "<dev string:x26c>" + int(start_path_node.origin[1]) + "<dev string:x26c>" + int(start_path_node.origin[2]) + "<dev string:x270>";
     iprintln(errormsg);
 
     return;
   }
 
-  assert(start_path_node.type === #"path" || isDefined(start_path_node.scriptbundlename), "<dev string:x282>" + start_path_node.targetname + "<dev string:x299>");
+  assert(start_path_node.type === # "path" || isDefined(start_path_node.scriptbundlename), "<dev string:x282>" + start_path_node.targetname + "<dev string:x299>");
   self notify(#"go_to_spawner_target");
   self.target = undefined;
   self.old_goal_radius = self.goalradius;
@@ -506,7 +505,7 @@ patrol_next_node() {
 }
 
 end_patrol_on_enemy_targetting() {
-  self endon(#"death", #"alerted");
+  self endon(#"death", # "alerted");
 
   while(true) {
     if(isDefined(self.should_stop_patrolling) && self.should_stop_patrolling) {
@@ -680,7 +679,7 @@ function_aa4579e2(fovcosine, maxsightdistsqrd) {
 }
 
 function_1628d95b(cansee = 0, var_9a21f98d = 1, overrideorigin = self.origin) {
-  var_56203bf4 = function_4d8c71ce(util::get_enemy_team(self.team), #"team3");
+  var_56203bf4 = function_4d8c71ce(util::get_enemy_team(self.team), # "team3");
   nearesttarget = undefined;
   var_46e1d165 = undefined;
 

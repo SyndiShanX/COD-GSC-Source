@@ -38,12 +38,12 @@ function init() {
   level.melee_range_sav = getdvarstring("ai_meleeRange");
   level.melee_width_sav = getdvarstring("ai_meleeWidth");
   level.melee_height_sav = getdvarstring("ai_meleeHeight");
-  if(!isdefined(level.vsmgr_prio_overlay_zm_raps_round)) {
+  if(!isDefined(level.vsmgr_prio_overlay_zm_raps_round)) {
     level.vsmgr_prio_overlay_zm_raps_round = 21;
   }
   clientfield::register("toplayer", "elemental_round_fx", 1, 1, "counter");
   clientfield::register("toplayer", "elemental_round_ring_fx", 1, 1, "counter");
-  visionset_mgr::register_info("visionset", "zm_elemental_round_visionset", 1, level.vsmgr_prio_overlay_zm_raps_round, 31, 0, & visionset_mgr::ramp_in_out_thread, 0);
+  visionset_mgr::register_info("visionset", "zm_elemental_round_visionset", 1, level.vsmgr_prio_overlay_zm_raps_round, 31, 0, &visionset_mgr::ramp_in_out_thread, 0);
   level._effect["raps_meteor_fire"] = "zombie/fx_meatball_trail_sky_zod_zmb";
   level._effect["raps_ground_spawn"] = "zombie/fx_meatball_impact_ground_tell_zod_zmb";
   level._effect["raps_portal"] = "zombie/fx_meatball_portal_sky_zod_zmb";
@@ -60,20 +60,20 @@ function init() {
 
 function enable_raps_rounds() {
   level.raps_rounds_enabled = 1;
-  if(!isdefined(level.raps_round_track_override)) {
-    level.raps_round_track_override = & raps_round_tracker;
+  if(!isDefined(level.raps_round_track_override)) {
+    level.raps_round_track_override = &raps_round_tracker;
   }
   level thread[[level.raps_round_track_override]]();
 }
 
 function raps_spawner_init() {
-  level.raps_spawners = getentarray("zombie_raps_spawner", "script_noteworthy");
-  later_raps = getentarray("later_round_raps_spawners", "script_noteworthy");
+  level.raps_spawners = getEntArray("zombie_raps_spawner", "script_noteworthy");
+  later_raps = getEntArray("later_round_raps_spawners", "script_noteworthy");
   level.raps_spawners = arraycombine(level.raps_spawners, later_raps, 1, 0);
   if(level.raps_spawners.size == 0) {
     return;
   }
-  for (i = 0; i < level.raps_spawners.size; i++) {
+  for(i = 0; i < level.raps_spawners.size; i++) {
     if(zm_spawner::is_spawner_targeted_by_blocker(level.raps_spawners[i])) {
       level.raps_spawners[i].is_enabled = 0;
       continue;
@@ -83,7 +83,7 @@ function raps_spawner_init() {
   }
   assert(level.raps_spawners.size > 0);
   level.n_raps_health = 100;
-  vehicle::add_main_callback("spawner_enemy_zombie_vehicle_raps_suicide", & raps_init);
+  vehicle::add_main_callback("spawner_enemy_zombie_vehicle_raps_suicide", &raps_init);
 }
 
 function raps_round_tracker() {
@@ -91,7 +91,7 @@ function raps_round_tracker() {
   level.n_next_raps_round = randomintrange(9, 11);
   old_spawn_func = level.round_spawn_func;
   old_wait_func = level.round_wait_func;
-  while (true) {
+  while(true) {
     level waittill("between_round_over");
     if(getdvarint("") > 0) {
       level.n_next_raps_round = level.round_number;
@@ -101,12 +101,10 @@ function raps_round_tracker() {
       old_spawn_func = level.round_spawn_func;
       old_wait_func = level.round_wait_func;
       raps_round_start();
-      level.round_spawn_func = & raps_round_spawning;
-      level.round_wait_func = & raps_round_wait_func;
-      if(isdefined(level.zm_custom_get_next_raps_round)) {
-        level.n_next_raps_round = [
-          [level.zm_custom_get_next_raps_round]
-        ]();
+      level.round_spawn_func = &raps_round_spawning;
+      level.round_wait_func = &raps_round_wait_func;
+      if(isDefined(level.zm_custom_get_next_raps_round)) {
+        level.n_next_raps_round = [[level.zm_custom_get_next_raps_round]]();
       } else {
         level.n_next_raps_round = (10 + (level.raps_round_count * 10)) + (randomintrange(-1, 1));
       }
@@ -123,13 +121,13 @@ function raps_round_tracker() {
 function raps_round_start() {
   level flag::set("raps_round");
   level flag::set("special_round");
-  if(!isdefined(level.rapsround_nomusic)) {
+  if(!isDefined(level.rapsround_nomusic)) {
     level.rapsround_nomusic = 0;
   }
   level.rapsround_nomusic = 1;
   level notify("raps_round_starting");
   level thread zm_audio::sndmusicsystem_playstate("meatball_start");
-  if(isdefined(level.raps_melee_range)) {
+  if(isDefined(level.raps_melee_range)) {
     setdvar("ai_meleeRange", level.raps_melee_range);
   } else {
     setdvar("ai_meleeRange", 100);
@@ -139,7 +137,7 @@ function raps_round_start() {
 function raps_round_stop() {
   level flag::clear("raps_round");
   level flag::clear("special_round");
-  if(!isdefined(level.rapsround_nomusic)) {
+  if(!isDefined(level.rapsround_nomusic)) {
     level.rapsround_nomusic = 0;
   }
   level.rapsround_nomusic = 0;
@@ -153,7 +151,7 @@ function raps_round_spawning() {
   level endon("intermission");
   level endon("raps_round");
   level.raps_targets = getplayers();
-  for (i = 0; i < level.raps_targets.size; i++) {
+  for(i = 0; i < level.raps_targets.size; i++) {
     level.raps_targets[i].hunted_by = 0;
   }
   level endon("restart_round");
@@ -164,7 +162,7 @@ function raps_round_spawning() {
   if(level.intermission) {
     return;
   }
-  array::thread_all(level.players, & play_raps_round);
+  array::thread_all(level.players, &play_raps_round);
   n_wave_count = get_raps_spawn_total();
   raps_health_increase();
   level.zombie_total = int(n_wave_count);
@@ -181,16 +179,14 @@ function raps_round_spawning() {
   level flag::set("raps_round_in_progress");
   level endon("last_ai_down");
   level thread raps_round_aftermath();
-  while (true) {
-    while (level.zombie_total > 0) {
-      if(isdefined(level.bzm_worldpaused) && level.bzm_worldpaused) {
+  while(true) {
+    while(level.zombie_total > 0) {
+      if(isDefined(level.bzm_worldpaused) && level.bzm_worldpaused) {
         util::wait_network_frame();
         continue;
       }
-      if(isdefined(level.zm_mixed_wasp_raps_spawning)) {
-        [
-          [level.zm_mixed_wasp_raps_spawning]
-        ]();
+      if(isDefined(level.zm_mixed_wasp_raps_spawning)) {
+        [[level.zm_mixed_wasp_raps_spawning]]();
       } else {
         spawn_raps();
       }
@@ -201,28 +197,26 @@ function raps_round_spawning() {
 }
 
 function spawn_raps() {
-  while (!can_we_spawn_raps()) {
+  while(!can_we_spawn_raps()) {
     wait(0.1);
   }
   s_spawn_loc = undefined;
   favorite_enemy = get_favorite_enemy();
-  if(!isdefined(favorite_enemy)) {
+  if(!isDefined(favorite_enemy)) {
     wait(randomfloatrange(0.3333333, 0.6666667));
     return;
   }
-  if(isdefined(level.raps_spawn_func)) {
-    s_spawn_loc = [
-      [level.raps_spawn_func]
-    ](favorite_enemy);
+  if(isDefined(level.raps_spawn_func)) {
+    s_spawn_loc = [[level.raps_spawn_func]](favorite_enemy);
   } else {
     s_spawn_loc = calculate_spawn_position(favorite_enemy);
   }
-  if(!isdefined(s_spawn_loc)) {
+  if(!isDefined(s_spawn_loc)) {
     wait(randomfloatrange(0.3333333, 0.6666667));
     return;
   }
   ai = zombie_utility::spawn_zombie(level.raps_spawners[0]);
-  if(isdefined(ai)) {
+  if(isDefined(ai)) {
     ai.favoriteenemy = favorite_enemy;
     ai.favoriteenemy.hunted_by++;
     s_spawn_loc thread raps_spawn_fx(ai, s_spawn_loc);
@@ -265,7 +259,7 @@ function raps_round_wait_func() {
 }
 
 function get_current_raps_count() {
-  raps = getentarray("zombie_raps", "targetname");
+  raps = getEntArray("zombie_raps", "targetname");
   num_alive_raps = raps.size;
   foreach(rapsai in raps) {
     if(!isalive(rapsai)) {
@@ -283,7 +277,7 @@ function elemental_round_fx() {
 }
 
 function show_hit_marker() {
-  if(isdefined(self) && isdefined(self.hud_damagefeedback)) {
+  if(isDefined(self) && isDefined(self.hud_damagefeedback)) {
     self.hud_damagefeedback setshader("damage_feedback", 24, 48);
     self.hud_damagefeedback.alpha = 1;
     self.hud_damagefeedback fadeovertime(1);
@@ -292,7 +286,7 @@ function show_hit_marker() {
 }
 
 function rapsdamage(inflictor, attacker, damage, dflags, mod, weapon, point, dir, hitloc, offsettime, boneindex, modelindex) {
-  if(isdefined(attacker)) {
+  if(isDefined(attacker)) {
     attacker show_hit_marker();
   }
   return damage;
@@ -333,15 +327,13 @@ function waiting_for_next_raps_spawn() {
 function raps_round_aftermath() {
   level waittill("last_ai_down", e_enemy_ai);
   level thread zm_audio::sndmusicsystem_playstate("meatball_over");
-  if(isdefined(level.zm_override_ai_aftermath_powerup_drop)) {
-    [
-      [level.zm_override_ai_aftermath_powerup_drop]
-    ](e_enemy_ai, level.last_ai_origin);
+  if(isDefined(level.zm_override_ai_aftermath_powerup_drop)) {
+    [[level.zm_override_ai_aftermath_powerup_drop]](e_enemy_ai, level.last_ai_origin);
   } else {
     power_up_origin = level.last_ai_origin;
     trace = groundtrace(power_up_origin + vectorscale((0, 0, 1), 100), power_up_origin + (vectorscale((0, 0, -1), 1000)), 0, undefined);
     power_up_origin = trace["position"];
-    if(isdefined(power_up_origin)) {
+    if(isDefined(power_up_origin)) {
       level thread zm_powerups::specific_powerup_drop("full_ammo", power_up_origin);
     }
   }
@@ -353,11 +345,11 @@ function raps_round_aftermath() {
 
 function raps_spawn_fx(ai, ent) {
   ai endon("death");
-  if(!isdefined(ent)) {
+  if(!isDefined(ent)) {
     ent = self;
   }
   ai vehicle_ai::set_state("scripted");
-  trace = bullettrace(ent.origin, ent.origin + (vectorscale((0, 0, -1), 720)), 0, ai);
+  trace = bulletTrace(ent.origin, ent.origin + (vectorscale((0, 0, -1), 720)), 0, ai);
   raps_impact_location = trace["position"];
   angle = vectortoangles(ai.favoriteenemy.origin - ent.origin);
   angles = (ai.angles[0], angle[1], ai.angles[2]);
@@ -366,25 +358,25 @@ function raps_spawn_fx(ai, ent) {
   ai hide();
   pos = raps_impact_location + vectorscale((0, 0, 1), 720);
   if(!bullettracepassed(ent.origin, pos, 0, ai)) {
-    trace = bullettrace(ent.origin, pos, 0, ai);
+    trace = bulletTrace(ent.origin, pos, 0, ai);
     pos = trace["position"];
   }
   portal_fx_location = spawn("script_model", pos);
-  portal_fx_location setmodel("tag_origin");
-  playfxontag(level._effect["raps_portal"], portal_fx_location, "tag_origin");
+  portal_fx_location setModel("tag_origin");
+  playFXOnTag(level._effect["raps_portal"], portal_fx_location, "tag_origin");
   ground_tell_location = spawn("script_model", raps_impact_location);
-  ground_tell_location setmodel("tag_origin");
-  playfxontag(level._effect["raps_ground_spawn"], ground_tell_location, "tag_origin");
-  ground_tell_location playsound("zmb_meatball_spawn_tell");
+  ground_tell_location setModel("tag_origin");
+  playFXOnTag(level._effect["raps_ground_spawn"], ground_tell_location, "tag_origin");
+  ground_tell_location playSound("zmb_meatball_spawn_tell");
   playsoundatposition("zmb_meatball_spawn_rise", pos);
   ai thread cleanup_meteor_fx(portal_fx_location, ground_tell_location);
   wait(0.5);
   raps_meteor = spawn("script_model", pos);
   model = ai.model;
-  raps_meteor setmodel(model);
+  raps_meteor setModel(model);
   raps_meteor.angles = angles;
-  raps_meteor playloopsound("zmb_meatball_spawn_loop", 0.25);
-  playfxontag(level._effect["raps_meteor_fire"], raps_meteor, "tag_origin");
+  raps_meteor playLoopSound("zmb_meatball_spawn_loop", 0.25);
+  playFXOnTag(level._effect["raps_meteor_fire"], raps_meteor, "tag_origin");
   fall_dist = sqrt(distancesquared(pos, raps_impact_location));
   fall_time = fall_dist / 720;
   raps_meteor moveto(raps_impact_location, fall_time);
@@ -392,20 +384,20 @@ function raps_spawn_fx(ai, ent) {
   raps_meteor thread cleanup_meteor();
   wait(fall_time);
   raps_meteor delete();
-  if(isdefined(portal_fx_location)) {
+  if(isDefined(portal_fx_location)) {
     portal_fx_location delete();
   }
-  if(isdefined(ground_tell_location)) {
+  if(isDefined(ground_tell_location)) {
     ground_tell_location delete();
   }
   ai vehicle_ai::set_state("combat");
   ai.origin = raps_impact_location;
   ai.angles = angles;
   ai show();
-  playfx(level._effect["raps_impact"], raps_impact_location);
+  playFX(level._effect["raps_impact"], raps_impact_location);
   playsoundatposition("zmb_meatball_spawn_impact", raps_impact_location);
   earthquake(0.3, 0.75, raps_impact_location, 512);
-  assert(isdefined(ai), "");
+  assert(isDefined(ai), "");
   assert(isalive(ai), "");
   ai zombie_setup_attack_properties_raps();
   ai setvisibletoall();
@@ -421,22 +413,22 @@ function cleanup_meteor() {
 
 function cleanup_meteor_fx(portal_fx, ground_tell) {
   self waittill("death");
-  if(isdefined(portal_fx)) {
+  if(isDefined(portal_fx)) {
     portal_fx delete();
   }
-  if(isdefined(ground_tell)) {
+  if(isDefined(ground_tell)) {
     ground_tell delete();
   }
 }
 
 function create_global_raps_spawn_locations_list() {
-  if(!isdefined(level.enemy_raps_global_locations)) {
+  if(!isDefined(level.enemy_raps_global_locations)) {
     level.enemy_raps_global_locations = [];
     keys = getarraykeys(level.zones);
-    for (i = 0; i < keys.size; i++) {
+    for(i = 0; i < keys.size; i++) {
       zone = level.zones[keys[i]];
       foreach(loc in zone.a_locs["raps_location"]) {
-        if(!isdefined(level.enemy_raps_global_locations)) {
+        if(!isDefined(level.enemy_raps_global_locations)) {
           level.enemy_raps_global_locations = [];
         } else if(!isarray(level.enemy_raps_global_locations)) {
           level.enemy_raps_global_locations = array(level.enemy_raps_global_locations);
@@ -450,7 +442,7 @@ function create_global_raps_spawn_locations_list() {
 function raps_find_closest_in_global_pool(favorite_enemy) {
   index_to_use = 0;
   closest_distance_squared = distancesquared(level.enemy_raps_global_locations[index_to_use].origin, favorite_enemy.origin);
-  for (i = 0; i < level.enemy_raps_global_locations.size; i++) {
+  for(i = 0; i < level.enemy_raps_global_locations.size; i++) {
     if(level.enemy_raps_global_locations[i].is_enabled) {
       dist_squared = distancesquared(level.enemy_raps_global_locations[i].origin, favorite_enemy.origin);
       if(dist_squared < closest_distance_squared) {
@@ -464,7 +456,7 @@ function raps_find_closest_in_global_pool(favorite_enemy) {
 
 function calculate_spawn_position(favorite_enemy) {
   position = favorite_enemy.last_valid_position;
-  if(!isdefined(position)) {
+  if(!isDefined(position)) {
     position = favorite_enemy.origin;
   }
   if(level.players.size == 1) {
@@ -487,7 +479,7 @@ function calculate_spawn_position(favorite_enemy) {
   query_result = positionquery_source_navigation(position, n_raps_spawn_dist_min, n_raps_spawn_dist_max, 200, 32, 16);
   if(query_result.data.size) {
     a_s_locs = array::randomize(query_result.data);
-    if(isdefined(a_s_locs)) {
+    if(isDefined(a_s_locs)) {
       foreach(s_loc in a_s_locs) {
         if(zm_utility::check_point_in_enabled_zone(s_loc.origin, 1, level.active_zones)) {
           s_loc.origin = s_loc.origin + vectorscale((0, 0, 1), 16);
@@ -502,20 +494,20 @@ function calculate_spawn_position(favorite_enemy) {
 function get_favorite_enemy() {
   raps_targets = getplayers();
   e_least_hunted = undefined;
-  for (i = 0; i < raps_targets.size; i++) {
+  for(i = 0; i < raps_targets.size; i++) {
     e_target = raps_targets[i];
-    if(!isdefined(e_target.hunted_by)) {
+    if(!isDefined(e_target.hunted_by)) {
       e_target.hunted_by = 0;
     }
     if(!zm_utility::is_player_valid(e_target)) {
       continue;
     }
-    if(isdefined(level.is_player_accessible_to_raps) && ![
+    if(isDefined(level.is_player_accessible_to_raps) && ![
         [level.is_player_accessible_to_raps]
       ](e_target)) {
       continue;
     }
-    if(!isdefined(e_least_hunted)) {
+    if(!isDefined(e_least_hunted)) {
       e_least_hunted = e_target;
       continue;
     }
@@ -575,7 +567,7 @@ function raps_init() {
   self.missinglegs = 0;
   self.isdog = 0;
   self.teslafxtag = "tag_origin";
-  self.custom_player_shellshock = & raps_custom_player_shellshock;
+  self.custom_player_shellshock = &raps_custom_player_shellshock;
   self.grapple_type = 2;
   self setgrapplabletype(self.grapple_type);
   self.team = level.zombie_team;
@@ -585,7 +577,7 @@ function raps_init() {
     health_multiplier = getdvarfloat("scr_raps_health_walk_multiplier");
   }
   self.maxhealth = int(level.n_raps_health * health_multiplier);
-  if(isdefined(level.a_zombie_respawn_health[self.archetype]) && level.a_zombie_respawn_health[self.archetype].size > 0) {
+  if(isDefined(level.a_zombie_respawn_health[self.archetype]) && level.a_zombie_respawn_health[self.archetype].size > 0) {
     self.health = level.a_zombie_respawn_health[self.archetype][0];
     arrayremovevalue(level.a_zombie_respawn_health[self.archetype], level.a_zombie_respawn_health[self.archetype][0]);
   } else {
@@ -598,7 +590,7 @@ function raps_init() {
   level thread zm_spawner::zombie_death_event(self);
   self thread zm_spawner::enemy_death_detection();
   self zm_spawner::zombie_history(("zombie_raps_spawn_init -> Spawned = ") + self.origin);
-  if(isdefined(level.achievement_monitor_func)) {
+  if(isDefined(level.achievement_monitor_func)) {
     self[[level.achievement_monitor_func]]();
   }
 }
@@ -612,7 +604,7 @@ function raps_timeout_after_xsec(timeout) {
 function raps_death() {
   self waittill("death", attacker);
   if(get_current_raps_count() == 0 && level.zombie_total == 0) {
-    if(!isdefined(level.zm_ai_round_over) || [
+    if(!isDefined(level.zm_ai_round_over) || [
         [level.zm_ai_round_over]
       ]()) {
       level.last_ai_origin = self.origin;
@@ -620,10 +612,10 @@ function raps_death() {
     }
   }
   if(isplayer(attacker)) {
-    if(!(isdefined(self.deathpoints_already_given) && self.deathpoints_already_given)) {
+    if(!(isDefined(self.deathpoints_already_given) && self.deathpoints_already_given)) {
       attacker zm_score::player_add_points("death_raps", 70);
     }
-    if(isdefined(level.hero_power_update)) {
+    if(isDefined(level.hero_power_update)) {
       [
         [level.hero_power_update]
       ](attacker, self);
@@ -634,10 +626,10 @@ function raps_death() {
     attacker zm_stats::increment_client_stat("zraps_killed");
     attacker zm_stats::increment_player_stat("zraps_killed");
   }
-  if(isdefined(attacker) && isai(attacker)) {
+  if(isDefined(attacker) && isai(attacker)) {
     attacker notify("killed", self);
   }
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     self stoploopsound();
     self thread raps_explode_fx(self.origin);
   }
@@ -651,7 +643,7 @@ function raps_custom_player_shellshock(damage, attacker, direction_vec, point, m
 
 function player_watch_shellshock_accumulation() {
   self endon("death");
-  if(!isdefined(self.raps_recent_explosions)) {
+  if(!isDefined(self.raps_recent_explosions)) {
     self.raps_recent_explosions = 0;
   }
   self.raps_recent_explosions++;
@@ -663,7 +655,7 @@ function player_watch_shellshock_accumulation() {
 }
 
 function raps_explode_fx(origin) {
-  playfx(level._effect["raps_gib"], origin);
+  playFX(level._effect["raps_gib"], origin);
 }
 
 function zombie_setup_attack_properties_raps() {
@@ -680,36 +672,36 @@ function stop_raps_sound_on_death() {
 }
 
 function special_raps_spawn(n_to_spawn = 1, s_spawn_loc, fn_on_spawned) {
-  raps = getentarray("zombie_raps", "targetname");
-  if(isdefined(raps) && raps.size >= 9) {
+  raps = getEntArray("zombie_raps", "targetname");
+  if(isDefined(raps) && raps.size >= 9) {
     return false;
   }
   count = 0;
-  while (count < n_to_spawn) {
+  while(count < n_to_spawn) {
     players = getplayers();
     favorite_enemy = get_favorite_enemy();
-    if(!isdefined(favorite_enemy)) {
+    if(!isDefined(favorite_enemy)) {
       wait(randomfloatrange(0.6666666, 1.333333));
       continue;
     }
-    if(isdefined(level.raps_spawn_func)) {
+    if(isDefined(level.raps_spawn_func)) {
       s_spawn_loc = [
         [level.raps_spawn_func]
       ](favorite_enemy);
     } else {
       s_spawn_loc = calculate_spawn_position(favorite_enemy);
     }
-    if(!isdefined(s_spawn_loc)) {
+    if(!isDefined(s_spawn_loc)) {
       wait(randomfloatrange(0.6666666, 1.333333));
       continue;
     }
     ai = zombie_utility::spawn_zombie(level.raps_spawners[0]);
-    if(isdefined(ai)) {
+    if(isDefined(ai)) {
       ai.favoriteenemy = favorite_enemy;
       ai.favoriteenemy.hunted_by++;
       s_spawn_loc thread raps_spawn_fx(ai, s_spawn_loc);
       count++;
-      if(isdefined(fn_on_spawned)) {
+      if(isDefined(fn_on_spawned)) {
         ai thread[[fn_on_spawned]]();
       }
     }
@@ -725,10 +717,10 @@ function raps_run_think() {
     self.maxhealth = level.n_raps_health;
     self.health = level.n_raps_health;
   }
-  while (true) {
+  while(true) {
     if(!zm_utility::is_player_valid(self.favoriteenemy) && self.b_attracted_to_octobomb !== 1 || self should_raps_giveup_inaccessible_player(self.favoriteenemy)) {
       potential_target = get_favorite_enemy();
-      if(isdefined(potential_target)) {
+      if(isDefined(potential_target)) {
         self.favoriteenemy = potential_target;
         self.favoriteenemy.hunted_by++;
         self.raps_force_patrol_behavior = undefined;
@@ -741,12 +733,10 @@ function raps_run_think() {
 }
 
 function should_raps_giveup_inaccessible_player(player) {
-  if(isdefined(level.raps_can_reach_inaccessible_location) && self[[level.raps_can_reach_inaccessible_location]]()) {
+  if(isDefined(level.raps_can_reach_inaccessible_location) && self[[level.raps_can_reach_inaccessible_location]]()) {
     return false;
   }
-  if(isdefined(level.is_player_accessible_to_raps) && ![
-      [level.is_player_accessible_to_raps]
-    ](player)) {
+  if(isDefined(level.is_player_accessible_to_raps) && ![[level.is_player_accessible_to_raps]](player)) {
     return true;
   }
   return false;
@@ -754,8 +744,8 @@ function should_raps_giveup_inaccessible_player(player) {
 
 function raps_stalk_audio() {
   self endon("death");
-  while (true) {
-    self playsound("zmb_hellhound_vocals_amb");
+  while(true) {
+    self playSound("zmb_hellhound_vocals_amb");
     wait(randomfloatrange(3, 6));
   }
 }

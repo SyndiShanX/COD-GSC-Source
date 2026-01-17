@@ -14,21 +14,21 @@
 #namespace zm_bgb_soda_fountain;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_soda_fountain", & __init__, undefined, "bgb");
+  system::register("zm_bgb_soda_fountain", &__init__, undefined, "bgb");
 }
 
 function __init__() {
-  if(!(isdefined(level.bgb_in_use) && level.bgb_in_use)) {
+  if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
-  bgb::register("zm_bgb_soda_fountain", "event", & event, undefined, undefined, undefined);
+  bgb::register("zm_bgb_soda_fountain", "event", &event, undefined, undefined, undefined);
 }
 
 function event() {
   self endon("disconnect");
   self endon("bgb_update");
   self.var_76382430 = 5;
-  while (self.var_76382430 > 0) {
+  while(self.var_76382430 > 0) {
     self waittill("perk_purchased", str_perk);
     self bgb::do_one_shot_use();
     a_str_perks = getarraykeys(level._custom_perks);
@@ -36,7 +36,7 @@ function event() {
       arrayremovevalue(a_str_perks, str_perk);
     }
     a_str_perks = array::randomize(a_str_perks);
-    for (i = 0; i < a_str_perks.size; i++) {
+    for(i = 0; i < a_str_perks.size; i++) {
       if(!self hasperk(a_str_perks[i])) {
         self zm_perks::give_perk(a_str_perks[i], 0);
         break;

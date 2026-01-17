@@ -22,12 +22,12 @@
 #namespace zm_moon_amb;
 
 function main() {
-  level._audio_custom_weapon_check = & weapon_type_check_custom;
-  level._custom_intro_vox = & no_intro_vox;
-  level._do_player_or_npc_playvox_override = & do_player_playvox_custom;
+  level._audio_custom_weapon_check = &weapon_type_check_custom;
+  level._custom_intro_vox = &no_intro_vox;
+  level._do_player_or_npc_playvox_override = &do_player_playvox_custom;
   level.player_4_vox_override = 0;
   level.been_to_moon_before = 0;
-  level.var_61f315ab = & function_3630300b;
+  level.var_61f315ab = &function_3630300b;
   level.audio_zones_breached = [];
   level.audio_zones_breached["1"] = 0;
   level.audio_zones_breached["2a"] = 0;
@@ -46,13 +46,13 @@ function main() {
   level thread radio_setup();
   level thread function_45b4acf2();
   level thread function_c844cebe();
-  callback::on_spawned( & function_10ffc7d7);
+  callback::on_spawned(&function_10ffc7d7);
   clientfield::register("allplayers", "beam_fx_audio", 21000, 1, "counter");
   clientfield::register("world", "teleporter_audio_sfx", 21000, 1, "counter");
 }
 
 function function_10ffc7d7() {
-  if(!isdefined(self.var_626b83bf)) {
+  if(!isDefined(self.var_626b83bf)) {
     self.var_626b83bf = 1;
     level thread zm_audio::sndmusicsystem_playstate("none");
   }
@@ -60,15 +60,15 @@ function function_10ffc7d7() {
 
 function radio_setup() {
   var_1a5f0b42 = struct::get_array("egg_radios", "targetname");
-  array::thread_all(var_1a5f0b42, & play_radio_eastereggs);
+  array::thread_all(var_1a5f0b42, &play_radio_eastereggs);
 }
 
 function play_radio_eastereggs() {
   self zm_unitrigger::create_unitrigger();
   self thread zm_utility::print3d_ent("", (0, 1, 0), 3, vectorscale((0, 0, 1), 24));
-  while (true) {
+  while(true) {
     self waittill("trigger_activated");
-    if(isdefined(self.script_noteworthy)) {
+    if(isDefined(self.script_noteworthy)) {
       breakout = self checkfor_radio_override();
       if(breakout) {
         break;
@@ -83,12 +83,12 @@ function play_radio_eastereggs() {
 }
 
 function checkfor_radio_override() {
-  if(!isdefined(level.glass)) {
+  if(!isDefined(level.glass)) {
     return true;
   }
-  for (i = 0; i < level.glass.size; i++) {
+  for(i = 0; i < level.glass.size; i++) {
     if(level.glass[i].damage_state == 1) {
-      for (j = 0; j < level.glass[i].fxpos_array.size; j++) {
+      for(j = 0; j < level.glass[i].fxpos_array.size; j++) {
         glass_origin = level.glass[i].fxpos_array[j].origin;
         if(distancesquared(glass_origin, self.origin) < 2500) {
           return true;
@@ -101,7 +101,7 @@ function checkfor_radio_override() {
 
 function eight_bit_easteregg() {
   structs = struct::get_array("8bitsongs", "targetname");
-  array::thread_all(structs, & waitfor_eightbit_use);
+  array::thread_all(structs, &waitfor_eightbit_use);
 }
 
 function waitfor_eightbit_use() {
@@ -109,7 +109,7 @@ function waitfor_eightbit_use() {
   self zm_unitrigger::create_unitrigger();
   self thread zm_utility::print3d_ent("", (1, 0, 1), 3, vectorscale((0, 0, 1), 24));
   n_count = 0;
-  while (true) {
+  while(true) {
     self waittill("trigger_activated");
     if(!zm_audio_zhd::function_8090042c()) {
       continue;
@@ -208,7 +208,7 @@ function player_4_override() {
   level.player_4_vox_override = 1;
   level.zmannouncerprefix = "vox_zmbar_";
   foreach(player in level.players) {
-    if(isdefined(player.characterindex) && player.characterindex == 2) {
+    if(isDefined(player.characterindex) && player.characterindex == 2) {
       player.issamantha = 1;
     }
   }
@@ -216,13 +216,13 @@ function player_4_override() {
 
 function do_player_playvox_custom(sound_to_play, waittime, category, type, override) {
   players = getplayers();
-  if(!isdefined(level.player_is_speaking)) {
+  if(!isDefined(level.player_is_speaking)) {
     level.player_is_speaking = 0;
   }
-  if(isdefined(level.skit_vox_override) && level.skit_vox_override && (!(isdefined(override) && override))) {
+  if(isDefined(level.skit_vox_override) && level.skit_vox_override && (!(isDefined(override) && override))) {
     return;
   }
-  if(isdefined(self.in_low_gravity) && self.in_low_gravity && !self zm_equip_gasmask::gasmask_active()) {
+  if(isDefined(self.in_low_gravity) && self.in_low_gravity && !self zm_equip_gasmask::gasmask_active()) {
     return;
   }
   if(level.player_is_speaking != 1) {
@@ -237,7 +237,7 @@ function play_futz_or_not_moonvox(sound_to_play) {
   if(self.sessionstate == "spectator") {
     return;
   }
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(self zm_equipment::is_active(level.var_f486078e)) {
       if(self == players[i]) {
         self playsoundwithnotify(sound_to_play + "_f", "sound_done" + sound_to_play);
@@ -252,7 +252,7 @@ function play_futz_or_not_moonvox(sound_to_play) {
 }
 
 function weapon_type_check_custom(weapon, magic_box) {
-  if(!isdefined(self.entity_num)) {
+  if(!isDefined(self.entity_num)) {
     return "crappy";
   }
   switch (self.entity_num) {
@@ -281,7 +281,7 @@ function weapon_type_check_custom(weapon, magic_box) {
       break;
     }
     case 3: {
-      if(!(isdefined(level.player_4_vox_override) && level.player_4_vox_override)) {
+      if(!(isDefined(level.player_4_vox_override) && level.player_4_vox_override)) {
         if(weapon == getweapon("spectre")) {
           return "favorite";
         } else if(weapon == getweapon("g11_lps_upgraded")) {
@@ -311,21 +311,21 @@ function setup_music_egg() {
 }
 
 function waitfor_override() {
-  if(isdefined(level.music_override) && level.music_override) {
+  if(isDefined(level.music_override) && level.music_override) {
     return false;
   }
   return true;
 }
 
 function play_mooncomp_vox(alias, digger) {
-  if(!isdefined(alias)) {
+  if(!isDefined(alias)) {
     return;
   }
   if(!level.on_the_moon) {
     return;
   }
   num = 0;
-  if(isdefined(digger)) {
+  if(isDefined(digger)) {
     switch (digger) {
       case "hangar": {
         num = 1;
@@ -343,7 +343,7 @@ function play_mooncomp_vox(alias, digger) {
   } else {
     num = "";
   }
-  if(!isdefined(level.mooncomp_is_speaking)) {
+  if(!isDefined(level.mooncomp_is_speaking)) {
     level.mooncomp_is_speaking = 0;
   }
   if(level.mooncomp_is_speaking == 0) {
@@ -355,12 +355,12 @@ function play_mooncomp_vox(alias, digger) {
 
 function do_mooncomp_vox(alias) {
   players = getplayers();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(players[i] zm_equipment::is_active(level.var_f486078e)) {
       players[i] playsoundtoplayer(alias + "_f", players[i]);
     }
   }
-  if(!isdefined(level.var_2ff0efb3)) {
+  if(!isDefined(level.var_2ff0efb3)) {
     return;
   }
   foreach(speaker in level.var_2ff0efb3) {
@@ -371,18 +371,18 @@ function do_mooncomp_vox(alias) {
 
 function function_c844cebe() {
   level.var_2ff0efb3 = struct::get_array("sndMoonPa", "targetname");
-  if(!isdefined(level.var_2ff0efb3)) {
+  if(!isDefined(level.var_2ff0efb3)) {
     return;
   }
 }
 
 function waitfor_forest_zone_entry() {
   level waittill("forest_zone");
-  while (true) {
+  while(true) {
     zone = level.zones["forest_zone"];
     players = getplayers();
-    for (i = 0; i < zone.volumes.size; i++) {
-      for (j = 0; j < players.size; j++) {
+    for(i = 0; i < zone.volumes.size; i++) {
+      for(j = 0; j < players.size; j++) {
         if(players[j] istouching(zone.volumes[i]) && !players[j].sessionstate == "spectator") {
           players[j] thread zm_audio::create_and_play_dialog("general", "biodome");
           return;
@@ -397,7 +397,7 @@ function setup_moon_visit_vox() {
   wait(5);
   level flag::wait_till("start_zombie_round_logic");
   players = getplayers();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i] thread play_delayed_first_time_vox();
   }
   level thread waitfor_first_player();
@@ -425,7 +425,7 @@ function waitfor_first_player() {
 function play_maskon_vox() {
   self endon("death");
   self endon("disconnect");
-  while (true) {
+  while(true) {
     self waittill("equip_gasmask_activate");
     self waittill("weapon_change_complete");
     self stopsounds();
@@ -437,15 +437,15 @@ function play_maskon_vox() {
 function play_warning_vox() {
   self endon("death");
   self endon("disconnect");
-  while (true) {
-    while (!self.in_low_gravity) {
+  while(true) {
+    while(!self.in_low_gravity) {
       wait(0.1);
     }
-    if(isdefined(self.in_low_gravity && self hasweapon(level.var_f486078e) && !self zm_equip_gasmask::gasmask_active()) && self.in_low_gravity && self hasweapon(level.var_f486078e) && !self zm_equip_gasmask::gasmask_active()) {
+    if(isDefined(self.in_low_gravity && self hasweapon(level.var_f486078e) && !self zm_equip_gasmask::gasmask_active()) && self.in_low_gravity && self hasweapon(level.var_f486078e) && !self zm_equip_gasmask::gasmask_active()) {
       self stopsounds();
       wait(0.05);
       self playsoundtoplayer("vox_mcomp_suit_reminder", self);
-      while (self.in_low_gravity) {
+      while(self.in_low_gravity) {
         if(self zm_equip_gasmask::gasmask_active()) {
           break;
         }
@@ -458,11 +458,11 @@ function play_warning_vox() {
 
 function function_45b4acf2() {
   var_757351da = struct::get_array("zhdbuttons", "targetname");
-  array::thread_all(var_757351da, & function_1d6f553d);
+  array::thread_all(var_757351da, &function_1d6f553d);
   level thread function_e091daa4();
   var_22ee0088 = array(1, 2, 2, 3, 3, 2, 3, 4, 3, 4, 3, 2, 2, 4, 1);
   var_c957db9f = 0;
-  while (var_c957db9f < var_22ee0088.size) {
+  while(var_c957db9f < var_22ee0088.size) {
     level waittill("hash_351576b1", var_333c1c87);
     if(var_333c1c87 == var_22ee0088[var_c957db9f]) {
       var_c957db9f++;
@@ -476,7 +476,7 @@ function function_45b4acf2() {
 function function_1d6f553d() {
   level endon("snd_zhdegg_activate");
   self zm_unitrigger::create_unitrigger();
-  while (true) {
+  while(true) {
     self waittill("trigger_activated");
     playsoundatposition("zmb_zhdmoon_button_" + self.script_int, self.origin);
     level notify("hash_351576b1", self.script_int);
@@ -487,7 +487,7 @@ function function_1d6f553d() {
 function function_e091daa4() {
   level endon("snd_zhdegg_activate");
   var_924a65e5 = spawn("script_origin", (919, -303, -171));
-  while (true) {
+  while(true) {
     wait(randomfloatrange(60, 120));
     var_924a65e5 playsoundwithnotify("zmb_zhdmoon_voices", "sounddone");
     var_924a65e5 waittill("sounddone");
@@ -503,7 +503,7 @@ function function_3630300b() {
     var_6d450235 thread function_b8227f87();
     wait(1);
   }
-  while (level.var_aa39de8 < var_d1f154fd.size) {
+  while(level.var_aa39de8 < var_d1f154fd.size) {
     wait(0.1);
   }
   wait(1);
@@ -513,7 +513,7 @@ function function_3630300b() {
 function function_b8227f87() {
   self.var_ac086ffb = util::spawn_model(self.model, self.origin, self.angles);
   self.var_ac086ffb clientfield::set("snd_zhdegg", 1);
-  self.var_ac086ffb playloopsound("mus_musicbox_lp", 2);
+  self.var_ac086ffb playLoopSound("mus_musicbox_lp", 2);
   self thread zm_audio_zhd::function_9d55fd08();
   self thread zm_audio_zhd::function_2fdaabf3();
   self util::waittill_any("ballerina_destroyed");

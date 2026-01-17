@@ -29,7 +29,7 @@ quad_prespawn() {
   self.a.idleAnimOverrideWeights["stand"][0][1] = 10;
   self maps\_zombietron_spawner::zombie_spawn_init("quad_zombie");
   self setTeamForEntity("axis");
-  self playsound("zmb_quad_spawn");
+  self playSound("zmb_quad_spawn");
   self thread quad_vox();
   self thread quad_close();
   self set_default_attack_properties();
@@ -111,9 +111,7 @@ init_quad_zombie_anims() {
   level._zombie_melee["quad_zombie"][10] = % ai_zombie_quad_attack_double_5;
   level._zombie_melee["quad_zombie"][11] = % ai_zombie_quad_attack_double_6;
   if(isDefined(level.quad_zombie_anim_override)) {
-    [
-      [level.quad_zombie_anim_override]
-    ]();
+    [[level.quad_zombie_anim_override]]();
   }
   if(!isDefined(level._zombie_melee_crawl)) {
     level._zombie_melee_crawl = [];
@@ -195,10 +193,10 @@ quad_vox() {
     players = getplayers();
     for(i = 0; i < players.size; i++) {
       if(distanceSquared(self.origin, players[i].origin) > 1200 * 1200) {
-        self playsound("zmb_quad_amb");
+        self playSound("zmb_quad_amb");
         quad_wait = 7;
       } else if(distanceSquared(self.origin, players[i].origin) > 200 * 200) {
-        self playsound("zmb_quad_vox");
+        self playSound("zmb_quad_vox");
         quad_wait = 5;
       } else if(distanceSquared(self.origin, players[i].origin) < 150 * 150) {
         wait(.05);
@@ -215,7 +213,7 @@ quad_close() {
     for(i = 0; i < players.size; i++) {
       if(is_player_valid(players[i], true)) {
         if(distanceSquared(self.origin, players[i].origin) < 150 * 150) {
-          self playsound("zmb_quad_close");
+          self playSound("zmb_quad_close");
           wait randomfloatrange(1, 2);
         }
       }

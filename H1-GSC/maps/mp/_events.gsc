@@ -26,8 +26,8 @@ init() {
   var_2["sab"] = 19;
   var_2["mugger"] = 20;
 
-  for (;;) {
-    if(!isdefined(var_2[var_0]))
+  for(;;) {
+    if(!isDefined(var_2[var_0]))
       var_0 = "war";
 
     var_3 = tablelookupbyrow("mp\xp_event_table.csv", var_1, 0);
@@ -35,7 +35,7 @@ init() {
     var_5 = tablelookupbyrow("mp\xp_event_table.csv", var_1, 2);
     var_6 = tablelookupbyrow("mp\xp_event_table.csv", var_1, var_2[var_0]);
 
-    if(!isdefined(var_3) || var_3 == "") {
+    if(!isDefined(var_3) || var_3 == "") {
       break;
     }
 
@@ -58,7 +58,7 @@ init() {
 }
 
 onplayerconnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connected", var_0);
     var_0.killedplayerscurrent = [];
     var_0.damagedplayers = [];
@@ -71,7 +71,7 @@ onplayerconnect() {
 }
 
 addnemesisscoreforplayer(var_0, var_1) {
-  if(!isdefined(self.pers["nemesis_tracking"][var_0]))
+  if(!isDefined(self.pers["nemesis_tracking"][var_0]))
     self.pers["nemesis_tracking"][var_0] = 0.0;
 
   self.pers["nemesis_tracking"][var_0] = self.pers["nemesis_tracking"][var_0] + var_1;
@@ -105,7 +105,7 @@ killedplayer(var_0, var_1, var_2, var_3, var_4) {
     if(var_2 == "none")
       return 0;
 
-    if(isdefined(var_1.throwinggrenade)) {
+    if(isDefined(var_1.throwinggrenade)) {
       if(var_1.throwinggrenade == "h1_fraggrenade_mp")
         self.modifiers["cooking"] = 1;
     }
@@ -124,13 +124,13 @@ killedplayer(var_0, var_1, var_2, var_3, var_4) {
     if(level.teambased && var_8 - var_1.lastkilltime < 3000 && var_1.lastkilledplayer != self)
       avengedplayerevent(var_0, var_2, var_3);
 
-    if(!isalive(self) && self != var_1 && isdefined(self.deathtime) && self.deathtime + 1200 < gettime())
+    if(!isalive(self) && self != var_1 && isDefined(self.deathtime) && self.deathtime + 1200 < gettime())
       postdeathkillevent(var_0);
 
     if(self.pers["cur_death_streak"] > 3)
       comebackevent(var_0, var_2, var_3);
 
-    if(isdefined(self.assistedsuicide) && self.assistedsuicide)
+    if(isDefined(self.assistedsuicide) && self.assistedsuicide)
       assistedsuicideevent(var_0, var_2, var_3);
 
     if(islongshot(self, var_2, var_3, var_1))
@@ -145,10 +145,10 @@ killedplayer(var_0, var_1, var_2, var_3, var_4) {
     if(isoneshotkill(var_1, var_2, var_3))
       oneshotkillevent(var_0, var_2, var_3);
 
-    if(isdefined(self.lastkilledby) && self.lastkilledby == var_1)
+    if(isDefined(self.lastkilledby) && self.lastkilledby == var_1)
       revengeevent(var_0);
 
-    if(var_1.idflags & level.idflags_penetration)
+    if(var_1.idflags &level.idflags_penetration)
       bulletpenetrationevent(var_0, var_2);
 
     if(ispointblank(var_1, var_3))
@@ -172,10 +172,10 @@ killedplayer(var_0, var_1, var_2, var_3, var_4) {
     if(isthrowbackevent(var_1, var_2, var_3))
       throwbackkillevent();
 
-    if(isdefined(self.pickedupweaponfrom[var_2]) && self.pickedupweaponfrom[var_2] == var_1 && !maps\mp\_utility::ismeleemod(var_3))
+    if(isDefined(self.pickedupweaponfrom[var_2]) && self.pickedupweaponfrom[var_2] == var_1 && !maps\mp\_utility::ismeleemod(var_3))
       takeandkillevent();
 
-    if(maps\mp\_utility::isbulletdamage(var_3) && !isdefined(self.assistedsuicide)) {
+    if(maps\mp\_utility::isbulletdamage(var_3) && !isDefined(self.assistedsuicide)) {
       if(maps\mp\_utility::_hasperk("specialty_bulletdamage"))
         stoppingpowerevent();
 
@@ -213,13 +213,13 @@ killedplayer(var_0, var_1, var_2, var_3, var_4) {
 
   checkstreakingevents(var_1);
 
-  if(!isdefined(self.pers["killed_players"][var_5]))
+  if(!isDefined(self.pers["killed_players"][var_5]))
     self.pers["killed_players"][var_5] = 0;
 
-  if(!isdefined(self.killedplayerscurrent[var_5]))
+  if(!isDefined(self.killedplayerscurrent[var_5]))
     self.killedplayerscurrent[var_5] = 0;
 
-  if(!isdefined(var_1.pers["killed_by"][var_7]))
+  if(!isDefined(var_1.pers["killed_by"][var_7]))
     var_1.pers["killed_by"][var_7] = 0;
 
   self.pers["killed_players"][var_5]++;
@@ -238,7 +238,7 @@ ispointblank(var_0, var_1) {
     var_2 = self.origin;
     var_3 = 9216;
 
-    if(isdefined(var_0.attackerposition))
+    if(isDefined(var_0.attackerposition))
       var_2 = var_0.attackerposition;
 
     if(distancesquared(var_2, var_0.origin) < var_3)
@@ -351,7 +351,7 @@ isoneshotkill(var_0, var_1, var_2) {
   if(var_0.attackers.size != 1)
     return 0;
 
-  if(!isdefined(var_0.attackers[self.guid]))
+  if(!isDefined(var_0.attackers[self.guid]))
     return 0;
 
   if(maps\mp\_utility::ismeleemod(var_2))
@@ -369,15 +369,15 @@ isoneshotkill(var_0, var_1, var_2) {
 }
 
 islongshot(var_0, var_1, var_2, var_3) {
-  if(isdefined(var_3.agentbody))
+  if(isDefined(var_3.agentbody))
     return 0;
 
   var_4 = self.origin;
 
-  if(isdefined(var_3.attackerposition))
+  if(isDefined(var_3.attackerposition))
     var_4 = var_3.attackerposition;
 
-  if(isalive(var_0) && !var_0 maps\mp\_utility::isusingremote() && (var_2 == "MOD_RIFLE_BULLET" || var_2 == "MOD_PISTOL_BULLET" || var_2 == "MOD_HEAD_SHOT" || issubstr(var_1, "exocrossbow") || issubstr(var_1, "m990")) && !maps\mp\_utility::iskillstreakweapon(var_1) && !isdefined(var_0.assistedsuicide)) {
+  if(isalive(var_0) && !var_0 maps\mp\_utility::isusingremote() && (var_2 == "MOD_RIFLE_BULLET" || var_2 == "MOD_PISTOL_BULLET" || var_2 == "MOD_HEAD_SHOT" || issubstr(var_1, "exocrossbow") || issubstr(var_1, "m990")) && !maps\mp\_utility::iskillstreakweapon(var_1) && !isDefined(var_0.assistedsuicide)) {
     var_5 = maps\mp\_utility::getweaponclass(var_1);
 
     switch (var_5) {
@@ -443,10 +443,10 @@ headshotevent(var_0, var_1, var_2) {
   level thread maps\mp\gametypes\_rank::awardgameevent("headshot", self, var_1, undefined, var_2);
   thread maps\mp\_matchdata::logkillevent(var_0, "headshot");
 
-  if(!isdefined(self.headhuntercounter))
+  if(!isDefined(self.headhuntercounter))
     self.headhuntercounter = 1;
 
-  if(isdefined(self.headshots) && self.headshots >= self.headhuntercounter * 10) {
+  if(isDefined(self.headshots) && self.headshots >= self.headhuntercounter * 10) {
     maps\mp\gametypes\_missions::processchallenge("ch_headhunter");
     self.headhuntercounter++;
   }
@@ -459,7 +459,7 @@ isthrowbackevent(var_0, var_1, var_2) {
   if(!issubstr(var_1, "h1_frag"))
     return 0;
 
-  if(isdefined(var_0) && isdefined(var_0.explosiveinfo) && isdefined(var_0.explosiveinfo["throwbackKill"]) && var_0.explosiveinfo["throwbackKill"])
+  if(isDefined(var_0) && isDefined(var_0.explosiveinfo) && isDefined(var_0.explosiveinfo["throwbackKill"]) && var_0.explosiveinfo["throwbackKill"])
     return 1;
 
   return 0;
@@ -548,7 +548,7 @@ revengeevent(var_0) {
 }
 
 multikillevent(var_0, var_1, var_2, var_3) {
-  if(!isdefined(var_3))
+  if(!isDefined(var_3))
     var_3 = 0;
 
   var_4 = maps\mp\gametypes\_missions::get_challenge_weapon_class(var_2);
@@ -712,7 +712,7 @@ monitortagcollector(var_0) {
   var_0 notify("tagCollector");
   var_0 endon("tagCollector");
 
-  if(!isdefined(var_0.tagcollectortotal))
+  if(!isDefined(var_0.tagcollectortotal))
     var_0.tagcollectortotal = 0;
 
   var_0.tagcollectortotal++;
@@ -724,7 +724,7 @@ monitortagcollector(var_0) {
 
   wait 2.5;
 
-  if(isdefined(var_0))
+  if(isDefined(var_0))
     var_0.tagcollectortotal = 0;
 }
 
@@ -748,7 +748,7 @@ bombdefuseevent(var_0) {
   if(var_0 == "ninja_defuse" || var_0 == "last_man_defuse") {
     maps\mp\_utility::incplayerstat(var_0, 1);
 
-    if(var_0 == "ninja_defuse" && isdefined(level.bombowner) && level.bombowner.bombplantedtime + 6000 + level.defusetime * 1000 > gettime())
+    if(var_0 == "ninja_defuse" && isDefined(level.bombowner) && level.bombowner.bombplantedtime + 6000 + level.defusetime * 1000 > gettime())
       maps\mp\gametypes\_missions::processchallenge("ch_ninja");
   }
 
@@ -945,38 +945,38 @@ choosenextbestprey() {
 disconnected() {
   var_0 = self.guid;
 
-  for (var_1 = 0; var_1 < level.players.size; var_1++) {
-    if(isdefined(level.players[var_1].pers["killed_players"][var_0]))
+  for(var_1 = 0; var_1 < level.players.size; var_1++) {
+    if(isDefined(level.players[var_1].pers["killed_players"][var_0]))
       level.players[var_1].pers["killed_players"][var_0] = undefined;
 
-    if(isdefined(level.players[var_1].killedplayerscurrent[var_0]))
+    if(isDefined(level.players[var_1].killedplayerscurrent[var_0]))
       level.players[var_1].killedplayerscurrent[var_0] = undefined;
 
-    if(isdefined(level.players[var_1].pers["killed_by"][var_0]))
+    if(isDefined(level.players[var_1].pers["killed_by"][var_0]))
       level.players[var_1].pers["killed_by"][var_0] = undefined;
 
-    if(isdefined(level.players[var_1].pers["nemesis_tracking"][var_0]))
+    if(isDefined(level.players[var_1].pers["nemesis_tracking"][var_0]))
       level.players[var_1].pers["nemesis_tracking"][var_0] = undefined;
 
-    if(isdefined(level.players[var_1].pers["nemesis_guid"]) && level.players[var_1].pers["nemesis_guid"] == var_0)
+    if(isDefined(level.players[var_1].pers["nemesis_guid"]) && level.players[var_1].pers["nemesis_guid"] == var_0)
       level.players[var_1] choosenextbestnemesis();
 
-    if(isdefined(level.players[var_1].pers["prey_guid"]) && level.players[var_1].pers["prey_guid"] == var_0)
+    if(isDefined(level.players[var_1].pers["prey_guid"]) && level.players[var_1].pers["prey_guid"] == var_0)
       level.players[var_1] choosenextbestprey();
 
-    if(isdefined(level.players[var_1].attackers) && isdefined(level.players[var_1].attackers[var_0]))
+    if(isDefined(level.players[var_1].attackers) && isDefined(level.players[var_1].attackers[var_0]))
       level.players[var_1].attackers[var_0] = undefined;
 
-    if(isdefined(level.players[var_1].attackerdata) && isdefined(level.players[var_1].attackerdata[var_0]))
+    if(isDefined(level.players[var_1].attackerdata) && isDefined(level.players[var_1].attackerdata[var_0]))
       level.players[var_1].attackerdata[var_0] = undefined;
 
-    if(isdefined(level.players[var_1].enemyhitcounts) && isdefined(level.players[var_1].enemyhitcounts[var_0]))
+    if(isDefined(level.players[var_1].enemyhitcounts) && isDefined(level.players[var_1].enemyhitcounts[var_0]))
       level.players[var_1].enemyhitcounts[var_0] = undefined;
   }
 }
 
 updaterecentkills(var_0, var_1) {
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     var_1 = "";
 
   self endon("disconnect");
@@ -998,22 +998,22 @@ updaterecentkills(var_0, var_1) {
 }
 
 checkvandalismmedal(var_0) {
-  if(isdefined(level.ishorde)) {
+  if(isDefined(level.ishorde)) {
     return;
   }
-  if(!isdefined(self.attackerlist)) {
+  if(!isDefined(self.attackerlist)) {
     return;
   }
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     var_0 = self;
 
   var_1 = self.owner;
 
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     var_1 = self;
 
   foreach(var_3 in self.attackerlist) {
-    if(!isdefined(var_3)) {
+    if(!isDefined(var_3)) {
       continue;
     }
     if(var_3 == var_1) {
@@ -1090,7 +1090,7 @@ checkhigherrankkillevents(var_0) {
   }
   var_2 = common_scripts\utility::array_sort_with_func(var_1, ::is_score_a_greater_than_b);
 
-  if(isdefined(var_2[0]) && var_0 == var_2[0]) {
+  if(isDefined(var_2[0]) && var_0 == var_2[0]) {
     maps\mp\_utility::incplayerstat("firstplacekill", 1);
     level thread maps\mp\gametypes\_rank::awardgameevent("firstplacekill", self);
     maps\mp\gametypes\_missions::processchallenge("ch_kingslayer");
@@ -1102,12 +1102,12 @@ is_score_a_greater_than_b(var_0, var_1) {
 }
 
 processassistevent(var_0, var_1) {
-  if(isdefined(level.assists_disabled) && level.assists_disabled) {
+  if(isDefined(level.assists_disabled) && level.assists_disabled) {
     return;
   }
   var_2 = "assist";
 
-  if(isdefined(var_1))
+  if(isDefined(var_1))
     var_2 = var_1;
 
   self endon("disconnect");
@@ -1160,7 +1160,7 @@ sleightofhandtimer() {
   level endon("game_ended");
   wait 3;
 
-  if(isdefined(self))
+  if(isDefined(self))
     self notify("sleightOfHandEventFailed");
 }
 
@@ -1173,12 +1173,12 @@ sleightofhandreloadwatch(var_0) {
   thread sleightofhandtimer();
   self waittill("reload");
 
-  if(isdefined(self))
+  if(isDefined(self))
     self.sleightofhandeventweap = var_0;
 }
 
 sleightofhandevent(var_0, var_1) {
-  if(!isdefined(self.sleightofhandeventweap)) {
+  if(!isDefined(self.sleightofhandeventweap)) {
     self notify("sleightOfHandEventEnd");
     thread sleightofhandeventwatcher();
     thread sleightofhandreloadwatch(var_0);

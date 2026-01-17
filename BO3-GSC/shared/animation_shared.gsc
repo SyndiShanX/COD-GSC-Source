@@ -15,7 +15,7 @@
 #namespace animation;
 
 function autoexec __init__sytem__() {
-  system::register("animation", & __init__, undefined, undefined);
+  system::register("animation", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -55,7 +55,7 @@ function debug_print(str_animation, str_msg) {
       if(int(str_dvar) > 0) {
         b_print = 1;
       }
-    } else if(issubstr(str_animation, str_dvar) || (isdefined(self.animname) && issubstr(self.animname, str_dvar))) {
+    } else if(issubstr(str_animation, str_dvar) || (isDefined(self.animname) && issubstr(self.animname, str_dvar))) {
       b_print = 1;
     }
     if(b_print) {
@@ -72,25 +72,25 @@ function _play(animation, v_origin_or_ent, v_angles_or_tag, n_rate, n_blend_in, 
   flagsys::set_val("firstframe", n_rate == 0);
   flagsys::set("scripted_anim_this_frame");
   flagsys::set("scriptedanim");
-  if(!isdefined(v_origin_or_ent)) {
+  if(!isDefined(v_origin_or_ent)) {
     v_origin_or_ent = self;
   }
   b_link = 0;
-  if(isdefined(self.n_script_anim_rate)) {
+  if(isDefined(self.n_script_anim_rate)) {
     n_rate = self.n_script_anim_rate;
   }
   if(isvec(v_origin_or_ent) && isvec(v_angles_or_tag)) {
     self animscripted(animation, v_origin_or_ent, v_angles_or_tag, animation, "normal", undefined, n_rate, n_blend_in, n_lerp, n_start_time, 1, b_show_player_firstperson_weapon);
   } else {
     if(isstring(v_angles_or_tag)) {
-      assert(isdefined(v_origin_or_ent.model), ((("" + animation) + "") + v_angles_or_tag) + "");
+      assert(isDefined(v_origin_or_ent.model), ((("" + animation) + "") + v_angles_or_tag) + "");
       v_pos = v_origin_or_ent gettagorigin(v_angles_or_tag);
       v_ang = v_origin_or_ent gettagangles(v_angles_or_tag);
       if(n_lerp > 0) {
         prevorigin = self.origin;
         prevangles = self.angles;
       }
-      if(!isdefined(v_pos)) {
+      if(!isDefined(v_pos)) {
         v_pos = v_origin_or_ent.origin;
         v_ang = v_origin_or_ent.angles;
       }
@@ -112,7 +112,7 @@ function _play(animation, v_origin_or_ent, v_angles_or_tag, n_rate, n_blend_in, 
       }
       self animscripted(animation, v_pos, v_ang, animation, "normal", undefined, n_rate, n_blend_in, n_lerp, n_start_time, 1, b_show_player_firstperson_weapon);
     } else {
-      v_angles = (isdefined(v_origin_or_ent.angles) ? v_origin_or_ent.angles : (0, 0, 0));
+      v_angles = (isDefined(v_origin_or_ent.angles) ? v_origin_or_ent.angles : (0, 0, 0));
       self animscripted(animation, v_origin_or_ent.origin, v_angles, animation, "normal", undefined, n_rate, n_blend_in, n_lerp, n_start_time, 1, b_show_player_firstperson_weapon);
     }
   }
@@ -131,7 +131,7 @@ function _play(animation, v_origin_or_ent, v_angles_or_tag, n_rate, n_blend_in, 
   } else {
     wait(0.05);
   }
-  if(b_link && (isdefined(b_unlink_after_completed) && b_unlink_after_completed)) {
+  if(b_link && (isDefined(b_unlink_after_completed) && b_unlink_after_completed)) {
     self unlink();
   }
   flagsys::clear("scriptedanim");
@@ -147,7 +147,7 @@ function _blend_out(animation, n_blend, n_rate, n_start_time) {
   self endon("scriptedanim");
   self endon("new_scripted_anim");
   n_server_length = (floor(getanimlength(animation) / 0.05)) * 0.05;
-  while (true) {
+  while(true) {
     n_current_time = self getanimtime(animation) * n_server_length;
     n_time_left = n_server_length - n_current_time;
     if(n_time_left <= n_blend) {
@@ -160,17 +160,17 @@ function _blend_out(animation, n_blend, n_rate, n_start_time) {
 
 function _get_align_ent(e_align) {
   e = self;
-  if(isdefined(e_align)) {
+  if(isDefined(e_align)) {
     e = e_align;
   }
-  if(!isdefined(e.angles)) {
+  if(!isDefined(e.angles)) {
     e.angles = (0, 0, 0);
   }
   return e;
 }
 
-function _get_align_pos(v_origin_or_ent = self.origin, v_angles_or_tag = (isdefined(self.angles) ? self.angles : (0, 0, 0))) {
-  s = spawnstruct();
+function _get_align_pos(v_origin_or_ent = self.origin, v_angles_or_tag = (isDefined(self.angles) ? self.angles : (0, 0, 0))) {
+  s = spawnStruct();
   if(isvec(v_origin_or_ent)) {
     assert(isvec(v_angles_or_tag), "");
     s.origin = v_origin_or_ent;
@@ -185,7 +185,7 @@ function _get_align_pos(v_origin_or_ent = self.origin, v_angles_or_tag = (isdefi
       s.angles = e_align.angles;
     }
   }
-  if(!isdefined(s.angles)) {
+  if(!isDefined(s.angles)) {
     s.angles = (0, 0, 0);
   }
   return s;
@@ -205,7 +205,7 @@ function teleport(animation, v_origin_or_ent, v_angles_or_tag, time = 0) {
 
 function reach(animation, v_origin_or_ent, v_angles_or_tag, b_disable_arrivals = 0) {
   self endon("death");
-  s_tracker = spawnstruct();
+  s_tracker = spawnStruct();
   self thread _reach(s_tracker, animation, v_origin_or_ent, v_angles_or_tag, b_disable_arrivals);
   s_tracker waittill("done");
 }
@@ -227,9 +227,9 @@ function _reach(s_tracker, animation, v_origin_or_ent, v_angles_or_tag, b_disabl
       }
       self.stopanimdistsq = 0.0001;
     }
-    if(isdefined(self.archetype) && self.archetype == "robot") {
+    if(isDefined(self.archetype) && self.archetype == "robot") {
       ai::set_behavior_attribute("rogue_control_force_goal", goal);
-    } else if(ai::has_behavior_attribute("vignette_mode") && (!(isdefined(self.ignorevignettemodeforanimreach) && self.ignorevignettemodeforanimreach))) {
+    } else if(ai::has_behavior_attribute("vignette_mode") && (!(isDefined(self.ignorevignettemodeforanimreach) && self.ignorevignettemodeforanimreach))) {
       ai::set_behavior_attribute("vignette_mode", "fast");
     }
     self thread ai::force_goal(goal, 15, 1, undefined, 0, 1);
@@ -242,7 +242,7 @@ function _reach(s_tracker, animation, v_origin_or_ent, v_angles_or_tag, b_disabl
   } else {
     waittillframeend();
   }
-  if(!(isdefined(self.archetype) && self.archetype == "robot") && ai::has_behavior_attribute("vignette_mode")) {
+  if(!(isDefined(self.archetype) && self.archetype == "robot") && ai::has_behavior_attribute("vignette_mode")) {
     ai::set_behavior_attribute("vignette_mode", "off");
   }
   flagsys::clear("anim_reach");
@@ -256,7 +256,7 @@ function debug_anim_reach() {
   self endon("new_anim_reach");
   self endon("new_scripted_anim");
   self endon("stop_scripted_anim");
-  while (true) {
+  while(true) {
     level flagsys::wait_till("");
     print3d(self.origin, "", (1, 0, 0), 1, 1, 1);
     wait(0.05);
@@ -265,7 +265,7 @@ function debug_anim_reach() {
 
 function set_death_anim(animation, v_origin_or_ent, v_angles_or_tag, n_rate, n_blend_in, n_blend_out, n_lerp) {
   self notify("new_death_anim");
-  if(isdefined(animation)) {
+  if(isDefined(animation)) {
     self.skipdeath = 1;
     self thread _do_death_anim(animation, v_origin_or_ent, v_angles_or_tag, n_rate, n_blend_in, n_blend_out, n_lerp);
   } else {
@@ -276,33 +276,33 @@ function set_death_anim(animation, v_origin_or_ent, v_angles_or_tag, n_rate, n_b
 function _do_death_anim(animation, v_origin_or_ent, v_angles_or_tag, n_rate, n_blend_in, n_blend_out, n_lerp) {
   self endon("new_death_anim");
   self waittill("death");
-  if(isdefined(self) && !self isragdoll()) {
+  if(isDefined(self) && !self isragdoll()) {
     self play(animation, v_origin_or_ent, v_angles_or_tag, n_rate, n_blend_in, n_blend_out, n_lerp);
   }
 }
 
 function set_player_clamps() {
-  if(isdefined(self.player_anim_look_enabled) && self.player_anim_look_enabled) {
+  if(isDefined(self.player_anim_look_enabled) && self.player_anim_look_enabled) {
     self setviewclamp(self.player_anim_clamp_right, self.player_anim_clamp_left, self.player_anim_clamp_top, self.player_anim_clamp_bottom);
   }
 }
 
 function add_notetrack_func(funcname, func) {
-  if(!isdefined(level._animnotifyfuncs)) {
+  if(!isDefined(level._animnotifyfuncs)) {
     level._animnotifyfuncs = [];
   }
-  assert(!isdefined(level._animnotifyfuncs[funcname]), "");
+  assert(!isDefined(level._animnotifyfuncs[funcname]), "");
   level._animnotifyfuncs[funcname] = func;
 }
 
 function add_global_notetrack_handler(str_note, func, pass_notify_params, ...) {
-  if(!isdefined(level._animnotetrackhandlers)) {
+  if(!isDefined(level._animnotetrackhandlers)) {
     level._animnotetrackhandlers = [];
   }
-  if(!isdefined(level._animnotetrackhandlers[str_note])) {
+  if(!isDefined(level._animnotetrackhandlers[str_note])) {
     level._animnotetrackhandlers[str_note] = [];
   }
-  if(!isdefined(level._animnotetrackhandlers[str_note])) {
+  if(!isDefined(level._animnotetrackhandlers[str_note])) {
     level._animnotetrackhandlers[str_note] = [];
   } else if(!isarray(level._animnotetrackhandlers[str_note])) {
     level._animnotetrackhandlers[str_note] = array(level._animnotetrackhandlers[str_note]);
@@ -311,7 +311,7 @@ function add_global_notetrack_handler(str_note, func, pass_notify_params, ...) {
 }
 
 function call_notetrack_handler(str_note, param1, param2) {
-  if(isdefined(level._animnotetrackhandlers[str_note])) {
+  if(isDefined(level._animnotetrackhandlers[str_note])) {
     foreach(handler in level._animnotetrackhandlers[str_note]) {
       func = handler[0];
       passnotifyparams = handler[1];
@@ -358,34 +358,34 @@ function call_notetrack_handler(str_note, param1, param2) {
 }
 
 function setup_notetracks() {
-  add_notetrack_func("flag::set", & flag::set);
-  add_notetrack_func("flag::clear", & flag::clear);
-  add_notetrack_func("util::break_glass", & util::break_glass);
+  add_notetrack_func("flag::set", &flag::set);
+  add_notetrack_func("flag::clear", &flag::clear);
+  add_notetrack_func("util::break_glass", &util::break_glass);
   clientfield::register("scriptmover", "cracks_on", 1, getminbitcountfornum(4), "int");
   clientfield::register("scriptmover", "cracks_off", 1, getminbitcountfornum(4), "int");
-  add_global_notetrack_handler("red_cracks_on", & cracks_on, 0, "red");
-  add_global_notetrack_handler("green_cracks_on", & cracks_on, 0, "green");
-  add_global_notetrack_handler("blue_cracks_on", & cracks_on, 0, "blue");
-  add_global_notetrack_handler("all_cracks_on", & cracks_on, 0, "all");
-  add_global_notetrack_handler("red_cracks_off", & cracks_off, 0, "red");
-  add_global_notetrack_handler("green_cracks_off", & cracks_off, 0, "green");
-  add_global_notetrack_handler("blue_cracks_off", & cracks_off, 0, "blue");
-  add_global_notetrack_handler("all_cracks_off", & cracks_off, 0, "all");
-  add_global_notetrack_handler("headlook_on", & enable_headlook, 0, 1);
-  add_global_notetrack_handler("headlook_off", & enable_headlook, 0, 0);
-  add_global_notetrack_handler("headlook_notorso_on", & enable_headlook_notorso, 0, 1);
-  add_global_notetrack_handler("headlook_notorso_off", & enable_headlook_notorso, 0, 0);
-  add_global_notetrack_handler("attach weapon", & attach_weapon, 1);
-  add_global_notetrack_handler("detach weapon", & detach_weapon, 1);
-  add_global_notetrack_handler("fire", & fire_weapon, 0);
+  add_global_notetrack_handler("red_cracks_on", &cracks_on, 0, "red");
+  add_global_notetrack_handler("green_cracks_on", &cracks_on, 0, "green");
+  add_global_notetrack_handler("blue_cracks_on", &cracks_on, 0, "blue");
+  add_global_notetrack_handler("all_cracks_on", &cracks_on, 0, "all");
+  add_global_notetrack_handler("red_cracks_off", &cracks_off, 0, "red");
+  add_global_notetrack_handler("green_cracks_off", &cracks_off, 0, "green");
+  add_global_notetrack_handler("blue_cracks_off", &cracks_off, 0, "blue");
+  add_global_notetrack_handler("all_cracks_off", &cracks_off, 0, "all");
+  add_global_notetrack_handler("headlook_on", &enable_headlook, 0, 1);
+  add_global_notetrack_handler("headlook_off", &enable_headlook, 0, 0);
+  add_global_notetrack_handler("headlook_notorso_on", &enable_headlook_notorso, 0, 1);
+  add_global_notetrack_handler("headlook_notorso_off", &enable_headlook_notorso, 0, 0);
+  add_global_notetrack_handler("attach weapon", &attach_weapon, 1);
+  add_global_notetrack_handler("detach weapon", &detach_weapon, 1);
+  add_global_notetrack_handler("fire", &fire_weapon, 0);
 }
 
 function handle_notetracks(animation) {
   self endon("death");
   self endon("new_scripted_anim");
-  while (true) {
+  while(true) {
     self waittill(animation, str_note, param1, param2);
-    if(isdefined(str_note)) {
+    if(isDefined(str_note)) {
       if(str_note != "end" && str_note != "loop_end") {
         self thread call_notetrack_handler(str_note, param1, param2);
       } else {
@@ -458,7 +458,7 @@ function enable_headlook_notorso(b_on = 1) {
 }
 
 function is_valid_weapon(weaponobject) {
-  return isdefined(weaponobject) && weaponobject != level.weaponnone;
+  return isDefined(weaponobject) && weaponobject != level.weaponnone;
 }
 
 function attach_weapon(weaponobject, tag = "tag_weapon_right") {
@@ -476,7 +476,7 @@ function attach_weapon(weaponobject, tag = "tag_weapon_right") {
       if(self.item != level.weaponnone) {
         detach_weapon();
       }
-      assert(isdefined(weaponobject.worldmodel));
+      assert(isDefined(weaponobject.worldmodel));
       self attach(weaponobject.worldmodel, tag);
       self setentityweapon(weaponobject);
       self.gun_removed = undefined;
@@ -504,7 +504,7 @@ function fire_weapon() {
   if(!isai(self)) {
     if(self.item != level.weaponnone) {
       startpos = self gettagorigin("tag_flash");
-      endpos = startpos + vectorscale(anglestoforward(self gettagangles("tag_flash")), 100);
+      endpos = startpos + vectorscale(anglesToForward(self gettagangles("tag_flash")), 100);
       magicbullet(self.item, startpos, endpos, self);
     }
   }

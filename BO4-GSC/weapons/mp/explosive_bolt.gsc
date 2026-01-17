@@ -7,7 +7,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\weapons\weapons;
-
 #namespace explosive_bolt;
 
 autoexec __init__system__() {

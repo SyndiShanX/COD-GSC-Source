@@ -25,7 +25,6 @@
 #include scripts\zm_common\zm_score;
 #include scripts\zm_common\zm_spawner;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_ai_weeping_angel;
 
 autoexec __init__system__() {
@@ -44,29 +43,28 @@ __init__() {
   adddebugcommand("<dev string:x48>");
   adddebugcommand("<dev string:x78>");
 
-    level thread aat::register_immunity("zm_aat_brain_decay", #"weeping_angel", 1, 1, 1);
-  level thread aat::register_immunity("zm_aat_frostbite", #"weeping_angel", 1, 1, 1);
-  level thread aat::register_immunity("zm_aat_kill_o_watt", #"weeping_angel", 1, 1, 1);
-  level thread aat::register_immunity("zm_aat_plasmatic_burst", #"weeping_angel", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_brain_decay", # "weeping_angel", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_frostbite", # "weeping_angel", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_kill_o_watt", # "weeping_angel", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_plasmatic_burst", # "weeping_angel", 1, 1, 1);
 }
 
 __main__() {}
 
-private function_d8a99ae2() {
+function_d8a99ae2() {
   blackboard::createblackboardforentity(self);
   ai::createinterfaceforentity(self);
   self zombie_utility::set_zombie_run_cycle("super_sprint");
   self thread function_487069e4();
 }
 
-private function_487069e4() {
+function_487069e4() {
   self endon(#"death");
   wait 1;
   self disableaimassist();
 }
 
-private function_b6824ff0(entity, player, duration, color) {
-
+function_b6824ff0(entity, player, duration, color) {
   enabled = getdvarint(#"hash_46b9af6724aa7968", 0);
 
   if(enabled) {
@@ -76,7 +74,7 @@ private function_b6824ff0(entity, player, duration, color) {
 
 }
 
-private function_e5ffb77c(start, end, duration, color) {
+function_e5ffb77c(start, end, duration, color) {
   current_time = duration * 20;
 
   while(current_time > 0) {
@@ -89,14 +87,14 @@ private function_e5ffb77c(start, end, duration, color) {
   }
 }
 
-  function private function_78910888(player) {
-    angles = player getplayerangles();
-    forward = anglesToForward(angles);
-    result = player.origin + (0, 0, 30) + forward * 100;
-    return result;
-  }
+function private function_78910888(player) {
+  angles = player getplayerangles();
+  forward = anglesToForward(angles);
+  result = player.origin + (0, 0, 30) + forward * 100;
+  return result;
+}
 
-private function_ad034041(entity) {
+function_ad034041(entity) {
   players = getplayers();
   var_de85d14d = [];
 
@@ -131,7 +129,7 @@ private function_ad034041(entity) {
   entity zm_behavior::zombiefindflesh(entity);
 }
 
-private function_f5d43a20(entity) {
+function_f5d43a20(entity) {
   result = zombiebehavior::zombieshouldmeleecondition(entity);
 
   if(result && isDefined(entity.enemy) && entity.enemy cansee(entity)) {

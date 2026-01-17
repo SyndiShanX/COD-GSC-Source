@@ -15,14 +15,14 @@ music_init() {
 }
 
 musicSaveWait() {
-  for (;;) {
+  for(;;) {
     level waittill("save_restore");
     if(level.nextMusicState == "")
       level.nextMusicState = level.activeMusicState;
     level.activeMusicState = "";
     println("resetting music state to " + level.nextMusicState);
     states = getArrayKeys(level.musicStates);
-    for (i = 0; i < states.size; i++) {
+    for(i = 0; i < states.size; i++) {
       stopLoopSound(0, level.musicStates[states[i]].aliasEnt, 0);
     }
     thread updateMusic();
@@ -31,7 +31,7 @@ musicSaveWait() {
 
 realWait(seconds) {
   start = GetRealTime();
-  while (GetRealTime() - start < seconds * 1000) {
+  while(GetRealTime() - start < seconds * 1000) {
     wait(.01);
   }
 }
@@ -47,7 +47,7 @@ musicCmdHandler(clientNum, state, oldState) {
 
 updateMusic() {
   level endon("save_restore");
-  while (1) {
+  while(1) {
     if(level.activeMusicState == level.nextMusicState)
       level waittill("new_music");
     if(level.activeMusicState == level.nextMusicState) {
@@ -74,7 +74,7 @@ fadeOutAndStopSound(id, time) {
     rate = 1.0 / time;
   setSoundVolumeRate(id, rate);
   setSoundVolume(id, 0.0);
-  while (getSoundVolume(id) > .0001) {
+  while(getSoundVolume(id) > .0001) {
     wait(.1);
   }
   stopSound(id);
@@ -121,17 +121,17 @@ transitionOut(previous, next) {
     } else {}
   } else {
     if(waittilldone) {
-      while (SoundPlaying(id)) {
+      while(SoundPlaying(id)) {
         wait(.01);
       }
     } else {
       thread fadeOutAndStopSound(id, fadeout);
     }
   }
-  while (startDelay > 0 && SoundPlaying(stingerid) && GetPlaybackTime(stingerid) < startDelay * 1000)
+  while(startDelay > 0 && SoundPlaying(stingerid) && GetPlaybackTime(stingerid) < startDelay * 1000)
     wait(.01);
   if(waittillstingerdone) {
-    while (SoundPlaying(stingerid))
+    while(SoundPlaying(stingerid))
       wait(.01);
   }
   if(loopalias != nextloopalias)
@@ -159,7 +159,7 @@ transitionIn(previous, next) {
   if(oneshotalias != "") {
     level.musicStates[next].id = playSound(0, oneshotalias, (0, 0, 0));
     if(loopalias != "") {
-      while (SoundPlaying(level.musicStates[next].id)) {
+      while(SoundPlaying(level.musicStates[next].id)) {
         length = GetKnownLength(level.musicStates[next].id);
         time = 0;
         if(length != 0) {

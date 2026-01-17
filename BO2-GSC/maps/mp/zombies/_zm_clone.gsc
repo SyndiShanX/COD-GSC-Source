@@ -37,9 +37,9 @@ spawn_player_clone(player, origin, forceweapon, forcemodel) {
   }
 
   if(isDefined(forcemodel))
-    clone setmodel(forcemodel);
+    clone setModel(forcemodel);
   else {
-    clone setmodel(self.model);
+    clone setModel(self.model);
 
     if(isDefined(player.headmodel)) {
       clone.headmodel = player.headmodel;

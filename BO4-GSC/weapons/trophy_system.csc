@@ -5,7 +5,6 @@
 
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\util_shared;
-
 #namespace trophy_system;
 
 init_shared() {

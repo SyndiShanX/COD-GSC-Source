@@ -17,7 +17,6 @@
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_vo;
 #include scripts\zm_common\zm_zonemgr;
-
 #namespace zm_red_zones;
 
 init() {
@@ -77,45 +76,45 @@ zone_init() {
   zm_zonemgr::add_adjacent_zone("zone_temple_of_apollo", "zone_eastern_plaza", "connect_apollo_temple_to_eastern_plaza", 0);
   zm_zonemgr::add_adjacent_zone("zone_temple_of_apollo_back", "zone_western_plaza", "connect_apollo_temple_to_western_plaza", 0);
   zm_zonemgr::add_adjacent_zone("zone_western_plaza", "zone_monument_of_craterus_lower", "connect_western_plaza_to_monument_of_craterus", 0);
-  zm_zonemgr::add_adjacent_zone("zone_monument_of_craterus_lower", "zone_monument_of_craterus_upper", #"connect_craterus_zones", 0);
+  zm_zonemgr::add_adjacent_zone("zone_monument_of_craterus_lower", "zone_monument_of_craterus_upper", # "connect_craterus_zones", 0);
   zm_zonemgr::add_adjacent_zone("zone_eastern_plaza", "zone_upper_road_east", "connect_eastern_plaza_to_upper_road", 0);
-  zm_zonemgr::add_adjacent_zone("zone_upper_road_east", "zone_upper_road_west", #"hash_1a0eac015c92f665", 0);
-  zm_zonemgr::add_adjacent_zone("zone_portico", "zone_upper_road_east", #"connect_portico_zones", 0);
-  zm_zonemgr::add_adjacent_zone("zone_portico", "zone_upper_road_west", #"connect_portico_zones", 0);
-  zm_zonemgr::add_adjacent_zone("zone_portico", "zone_amphitheater_backstage", #"connect_portico_zones", 0);
+  zm_zonemgr::add_adjacent_zone("zone_upper_road_east", "zone_upper_road_west", # "hash_1a0eac015c92f665", 0);
+  zm_zonemgr::add_adjacent_zone("zone_portico", "zone_upper_road_east", # "connect_portico_zones", 0);
+  zm_zonemgr::add_adjacent_zone("zone_portico", "zone_upper_road_west", # "connect_portico_zones", 0);
+  zm_zonemgr::add_adjacent_zone("zone_portico", "zone_amphitheater_backstage", # "connect_portico_zones", 0);
   zm_zonemgr::add_adjacent_zone("zone_upper_road_west", "zone_amphitheater_backstage", "connect_amphitheater_backstage_to_stage", 0);
   zm_zonemgr::add_adjacent_zone("zone_monument_of_craterus_upper", "zone_amphitheater_backstage", "connect_amphitheater_backstage_to_stage", 0);
   zm_zonemgr::add_adjacent_zone("zone_amphitheater_backstage", "zone_amphitheater", "connect_amphitheater_backstage_to_stage", 0);
   zm_zonemgr::add_adjacent_zone("zone_amphitheater", "zone_amphitheater_house", "connect_amphitheater_backstage_to_stage", 0);
   zm_zonemgr::add_adjacent_zone("zone_eastern_plaza", "zone_offering", "connect_eastern_plaza_to_temple_terrace", 0);
-  zm_zonemgr::add_adjacent_zone("zone_offering", "zone_temple_to_stoa_of_the_athenians", #"hash_6d71447c1ac2346a", 0);
-  zm_zonemgr::add_adjacent_zone("zone_offering", "zone_temple_to_stoa_of_the_athenians", #"hash_319f89db9006c766", 0);
+  zm_zonemgr::add_adjacent_zone("zone_offering", "zone_temple_to_stoa_of_the_athenians", # "hash_6d71447c1ac2346a", 0);
+  zm_zonemgr::add_adjacent_zone("zone_offering", "zone_temple_to_stoa_of_the_athenians", # "hash_319f89db9006c766", 0);
   zm_zonemgr::add_adjacent_zone("zone_western_plaza", "zone_bathhouse_outside", "connect_western_plaza_to_bathhouse_upper", 0);
-  zm_zonemgr::add_adjacent_zone("zone_bathhouse_outside", "zone_bathhouse_inside", #"connect_bathhouse_zones", 0);
-  zm_zonemgr::add_adjacent_zone("zone_intersection_of_treasuries_upper", "zone_bathhouse_inside", #"hash_72cec88da65c292d", 0);
-  zm_zonemgr::add_adjacent_zone("zone_intersection_of_treasuries_upper", "zone_bathhouse_inside", #"hash_17525acf356976a1", 0);
+  zm_zonemgr::add_adjacent_zone("zone_bathhouse_outside", "zone_bathhouse_inside", # "connect_bathhouse_zones", 0);
+  zm_zonemgr::add_adjacent_zone("zone_intersection_of_treasuries_upper", "zone_bathhouse_inside", # "hash_72cec88da65c292d", 0);
+  zm_zonemgr::add_adjacent_zone("zone_intersection_of_treasuries_upper", "zone_bathhouse_inside", # "hash_17525acf356976a1", 0);
   zm_zonemgr::add_adjacent_zone("zone_intersection_of_treasuries_lower", "zone_spartan_east_to_treasuries", "connect_spartan_to_treasuries", 0);
   zm_zonemgr::add_adjacent_zone("zone_intersection_of_treasuries_lower", "zone_stoa_of_the_athenians_west", "connect_stoa_of_athenians_to_treasuries", 0);
-  zm_zonemgr::add_adjacent_zone("zone_intersection_of_treasuries_lower", "zone_intersection_of_treasuries_upper", #"connect_treasuries_zones", 0);
-  zm_zonemgr::add_adjacent_zone("zone_stoa_of_the_athenians_east", "zone_temple_to_stoa_of_the_athenians", #"hash_6d71447c1ac2346a", 0);
-  zm_zonemgr::add_adjacent_zone("zone_stoa_of_the_athenians_east", "zone_temple_to_stoa_of_the_athenians", #"hash_319f89db9006c766", 0);
+  zm_zonemgr::add_adjacent_zone("zone_intersection_of_treasuries_lower", "zone_intersection_of_treasuries_upper", # "connect_treasuries_zones", 0);
+  zm_zonemgr::add_adjacent_zone("zone_stoa_of_the_athenians_east", "zone_temple_to_stoa_of_the_athenians", # "hash_6d71447c1ac2346a", 0);
+  zm_zonemgr::add_adjacent_zone("zone_stoa_of_the_athenians_east", "zone_temple_to_stoa_of_the_athenians", # "hash_319f89db9006c766", 0);
   zm_zonemgr::add_adjacent_zone("zone_stoa_of_the_athenians_east", "zone_stoa_of_athenians_to_spartan_upper", "connect_stoa_of_athenians_to_spartan", 0);
-  zm_zonemgr::add_adjacent_zone("zone_stoa_of_the_athenians_east", "zone_stoa_of_the_athenians_west", #"connect_stoa_zones", 0);
+  zm_zonemgr::add_adjacent_zone("zone_stoa_of_the_athenians_east", "zone_stoa_of_the_athenians_west", # "connect_stoa_zones", 0);
   zm_zonemgr::add_adjacent_zone("zone_stoa_of_athenians_to_spartan_upper", "zone_spartan_monument_upper", "connect_stoa_of_athenians_to_spartan", 0);
   zm_zonemgr::add_adjacent_zone("zone_spartan_monument_west", "zone_spartan_east_to_treasuries", "connect_spartan_to_treasuries", 0);
-  zm_zonemgr::add_adjacent_zone("zone_spartan_monument_east", "zone_spartan_monument_upper", #"hash_cfcbf5509bfbc1b", 0);
-  zm_zonemgr::add_adjacent_zone("zone_spartan_monument_east", "zone_spartan_monument_west", #"hash_cfcbf5509bfbc1b", 0);
-  zm_zonemgr::add_adjacent_zone("zone_spartan_monument_upper", "zone_spartan_monument_west", #"hash_cfcbf5509bfbc1b", 0);
-  zm_zonemgr::add_adjacent_zone("zone_river_upper", "zone_river_lower", #"hash_4083e9da0ba41dec", 0);
+  zm_zonemgr::add_adjacent_zone("zone_spartan_monument_east", "zone_spartan_monument_upper", # "hash_cfcbf5509bfbc1b", 0);
+  zm_zonemgr::add_adjacent_zone("zone_spartan_monument_east", "zone_spartan_monument_west", # "hash_cfcbf5509bfbc1b", 0);
+  zm_zonemgr::add_adjacent_zone("zone_spartan_monument_upper", "zone_spartan_monument_west", # "hash_cfcbf5509bfbc1b", 0);
+  zm_zonemgr::add_adjacent_zone("zone_river_upper", "zone_river_lower", # "hash_4083e9da0ba41dec", 0);
   zm_zonemgr::add_adjacent_zone("zone_river_lower", "zone_cliff_tombs_upper", "connect_river_acheron_to_cliff_tombs", 0);
-  zm_zonemgr::add_adjacent_zone("zone_cliff_tombs_upper", "zone_cliff_tombs_forge", #"connect_cliff_zones", 0);
-  zm_zonemgr::add_adjacent_zone("zone_cliff_tombs_upper", "zone_cliff_tombs_center", #"connect_cliff_zones", 0);
-  zm_zonemgr::add_adjacent_zone("zone_cliff_tombs_center", "zone_cliff_tombs_lower", #"connect_cliff_zones", 0);
-  zm_zonemgr::add_adjacent_zone("zone_cliff_tombs_forge", "zone_cliff_tombs_center", #"connect_cliff_zones", 0);
-  zm_zonemgr::add_adjacent_zone("zone_cliff_tombs_center", "zone_cliff_tombs_lower", #"connect_cliff_zones", 0);
+  zm_zonemgr::add_adjacent_zone("zone_cliff_tombs_upper", "zone_cliff_tombs_forge", # "connect_cliff_zones", 0);
+  zm_zonemgr::add_adjacent_zone("zone_cliff_tombs_upper", "zone_cliff_tombs_center", # "connect_cliff_zones", 0);
+  zm_zonemgr::add_adjacent_zone("zone_cliff_tombs_center", "zone_cliff_tombs_lower", # "connect_cliff_zones", 0);
+  zm_zonemgr::add_adjacent_zone("zone_cliff_tombs_forge", "zone_cliff_tombs_center", # "connect_cliff_zones", 0);
+  zm_zonemgr::add_adjacent_zone("zone_cliff_tombs_center", "zone_cliff_tombs_lower", # "connect_cliff_zones", 0);
   zm_zonemgr::add_adjacent_zone("zone_river_lower", "zone_serpent_pass_upper", "connect_river_acheron_to_serpents_pass", 0);
-  zm_zonemgr::add_adjacent_zone("zone_serpent_pass_center", "zone_serpent_pass_upper", #"connect_serpent_zones", 0);
-  zm_zonemgr::add_adjacent_zone("zone_serpent_pass_lower", "zone_serpent_pass_center", #"connect_serpent_zones", 0);
+  zm_zonemgr::add_adjacent_zone("zone_serpent_pass_center", "zone_serpent_pass_upper", # "connect_serpent_zones", 0);
+  zm_zonemgr::add_adjacent_zone("zone_serpent_pass_lower", "zone_serpent_pass_center", # "connect_serpent_zones", 0);
   zm_zonemgr::add_adjacent_zone("zone_serpent_pass_lower", "zone_drakaina_arena", "connect_serpents_pass_to_drakaina_arena", 0);
   zm_zonemgr::add_adjacent_zone("zone_serpent_pass_bridge", "zone_drakaina_arena", "connect_serpents_pass_to_drakaina_arena", 0);
   zm_zonemgr::add_adjacent_zone("zone_serpent_pass_lower", "zone_serpent_pass_bridge", "connect_serpents_pass_to_drakaina_arena", 0);
@@ -161,7 +160,7 @@ connect_bathhouse_zones() {
 connect_treasuries_zones() {
   level endon(#"end_game");
   level flag::wait_till("start_zombie_round_logic");
-  level flag::wait_till_any(array("connect_stoa_of_athenians_to_treasuries", "connect_spartan_to_treasuries", #"hash_17525acf356976a1"));
+  level flag::wait_till_any(array("connect_stoa_of_athenians_to_treasuries", "connect_spartan_to_treasuries", # "hash_17525acf356976a1"));
   level flag::set(#"connect_treasuries_zones");
 }
 
@@ -241,9 +240,9 @@ on_player_spawned() {
 function_a929cb60(s_spot) {
   if(isDefined(s_spot.var_4e469313) && s_spot.var_4e469313) {
     self thread hide_pop();
-    str_anim = #"ai_t8_zombie_traverse_ground_dugup";
+    str_anim = # "ai_t8_zombie_traverse_ground_dugup";
   } else {
-    str_anim = #"ai_zombie_base_traverse_ground_climbout_fast";
+    str_anim = # "ai_zombie_base_traverse_ground_climbout_fast";
   }
 
   self animscripted("rise_anim", self.origin, s_spot.angles, str_anim, "normal");
@@ -264,7 +263,7 @@ function_8e0b371() {
   while(true) {
     if(isalive(self)) {
       str_location = function_ab7f70b9(self);
-      self zm_hud::function_29780fb5(isDefined(str_location) ? str_location : #"");
+      self zm_hud::function_29780fb5(isDefined(str_location) ? str_location : # "");
     } else {
       self zm_hud::function_29780fb5(#"");
     }
@@ -294,98 +293,98 @@ function_27028b8e(str_zone) {
   }
 
   switch (str_zone) {
-    case #"zone_amphitheater":
-      str_display = #"hash_654702bdca18105";
+    case # "zone_amphitheater":
+      str_display = # "hash_654702bdca18105";
       break;
-    case #"zone_amphitheater_backstage":
-      str_display = #"hash_10a873392c5d4565";
+    case # "zone_amphitheater_backstage":
+      str_display = # "hash_10a873392c5d4565";
       break;
-    case #"zone_cliff_tombs_lower":
-    case #"zone_cliff_tombs_forge":
-    case #"zone_cliff_tombs_center":
-    case #"zone_cliff_tombs_bridge":
-    case #"zone_cliff_tombs_upper":
-      str_display = #"hash_50916c74fe22e63b";
+    case # "zone_cliff_tombs_lower":
+    case # "zone_cliff_tombs_forge":
+    case # "zone_cliff_tombs_center":
+    case # "zone_cliff_tombs_bridge":
+    case # "zone_cliff_tombs_upper":
+      str_display = # "hash_50916c74fe22e63b";
       break;
-    case #"zone_drakaina_arena":
-      str_display = #"hash_78d4c8eb48aabd66";
+    case # "zone_drakaina_arena":
+      str_display = # "hash_78d4c8eb48aabd66";
       break;
-    case #"zone_eastern_plaza":
-      str_display = #"hash_65a67d1c5af364c7";
+    case # "zone_eastern_plaza":
+      str_display = # "hash_65a67d1c5af364c7";
       break;
-    case #"zone_bathhouse_outside":
-    case #"zone_bathhouse_inside":
-      str_display = #"hash_27a6b15e094c02f1";
+    case # "zone_bathhouse_outside":
+    case # "zone_bathhouse_inside":
+      str_display = # "hash_27a6b15e094c02f1";
       break;
-    case #"zone_spartan_east_to_treasuries":
-    case #"zone_intersection_of_treasuries_upper":
-    case #"zone_intersection_of_treasuries_lower":
-      str_display = #"hash_4785d4d350f36326";
+    case # "zone_spartan_east_to_treasuries":
+    case # "zone_intersection_of_treasuries_upper":
+    case # "zone_intersection_of_treasuries_lower":
+      str_display = # "hash_4785d4d350f36326";
       break;
-    case #"zone_monument_of_craterus_lower":
-    case #"zone_monument_of_craterus_upper":
-      str_display = #"hash_70363674b3e9a47c";
+    case # "zone_monument_of_craterus_lower":
+    case # "zone_monument_of_craterus_upper":
+      str_display = # "hash_70363674b3e9a47c";
       break;
-    case #"zone_river_lower":
-    case #"zone_river_upper":
-      str_display = #"hash_3a319fea8f608182";
+    case # "zone_river_lower":
+    case # "zone_river_upper":
+      str_display = # "hash_3a319fea8f608182";
       break;
-    case #"zone_serpent_pass_upper":
-    case #"zone_serpent_pass_bridge":
-    case #"zone_serpent_pass_center":
-    case #"zone_serpent_pass_lower":
-      str_display = #"hash_4f55839413fe0046";
+    case # "zone_serpent_pass_upper":
+    case # "zone_serpent_pass_bridge":
+    case # "zone_serpent_pass_center":
+    case # "zone_serpent_pass_lower":
+      str_display = # "hash_4f55839413fe0046";
       break;
-    case #"zone_stoa_of_athenians_to_spartan_upper":
-    case #"zone_spartan_monument_west":
-    case #"zone_spartan_monument_east":
-    case #"zone_spartan_monument_upper":
-      str_display = #"hash_303ce0aa4cf6a23e";
+    case # "zone_stoa_of_athenians_to_spartan_upper":
+    case # "zone_spartan_monument_west":
+    case # "zone_spartan_monument_east":
+    case # "zone_spartan_monument_upper":
+      str_display = # "hash_303ce0aa4cf6a23e";
       break;
-    case #"zone_stoa_of_the_athenians_east":
-    case #"zone_stoa_of_the_athenians_west":
-      str_display = #"hash_12a9743a3b9f2236";
+    case # "zone_stoa_of_the_athenians_east":
+    case # "zone_stoa_of_the_athenians_west":
+      str_display = # "hash_12a9743a3b9f2236";
       break;
-    case #"zone_temple_to_stoa_of_the_athenians":
-      str_display = #"hash_2910970920dd3ee3";
+    case # "zone_temple_to_stoa_of_the_athenians":
+      str_display = # "hash_2910970920dd3ee3";
       break;
-    case #"zone_temple_of_apollo_left_path":
-    case #"zone_temple_of_apollo_right_path":
-    case #"zone_temple_of_apollo_back":
-    case #"zone_temple_of_apollo":
-      str_display = #"hash_106d425e41e8c240";
+    case # "zone_temple_of_apollo_left_path":
+    case # "zone_temple_of_apollo_right_path":
+    case # "zone_temple_of_apollo_back":
+    case # "zone_temple_of_apollo":
+      str_display = # "hash_106d425e41e8c240";
       break;
-    case #"zone_offering":
-      str_display = #"hash_6268d50ff53b29d4";
+    case # "zone_offering":
+      str_display = # "hash_6268d50ff53b29d4";
       break;
-    case #"zone_upper_road_west":
-    case #"zone_upper_road_east":
-    case #"zone_portico":
-      str_display = #"hash_32a859886bcbfb10";
+    case # "zone_upper_road_west":
+    case # "zone_upper_road_east":
+    case # "zone_portico":
+      str_display = # "hash_32a859886bcbfb10";
       break;
-    case #"zone_western_plaza":
-      str_display = #"hash_187fe3987a160b42";
+    case # "zone_western_plaza":
+      str_display = # "hash_187fe3987a160b42";
       break;
-    case #"zone_boss_plateau_1":
-      str_display = #"hash_63b3c5fb5611240f";
+    case # "zone_boss_plateau_1":
+      str_display = # "hash_63b3c5fb5611240f";
       break;
-    case #"zone_boss_plateau_2":
-      str_display = #"hash_63b3c4fb5611225c";
+    case # "zone_boss_plateau_2":
+      str_display = # "hash_63b3c4fb5611225c";
       break;
-    case #"zone_boss_plateau_3":
-      str_display = #"hash_63b3c6fb561125c2";
+    case # "zone_boss_plateau_3":
+      str_display = # "hash_63b3c6fb561125c2";
       break;
-    case #"zone_ww_quest_earth":
-      str_display = #"hash_4903463b3bfd1f8f";
+    case # "zone_ww_quest_earth":
+      str_display = # "hash_4903463b3bfd1f8f";
       break;
-    case #"zone_ww_quest_death":
-      str_display = #"hash_77ea88b9440ad045";
+    case # "zone_ww_quest_death":
+      str_display = # "hash_77ea88b9440ad045";
       break;
-    case #"zone_ww_quest_light":
-      str_display = #"hash_5e05f18694a561c7";
+    case # "zone_ww_quest_light":
+      str_display = # "hash_5e05f18694a561c7";
       break;
-    case #"zone_ww_quest_air":
-      str_display = #"hash_286cefa4bc6e994f";
+    case # "zone_ww_quest_air":
+      str_display = # "hash_286cefa4bc6e994f";
       break;
     default:
       str_display = undefined;
@@ -400,17 +399,17 @@ function_27028b8e(str_zone) {
 }
 
 function_17ac86f7() {
-  self thread zm_audio::function_713192b1(#"hash_187fe3987a160b42", #"market");
-  self thread zm_audio::function_713192b1(#"hash_70363674b3e9a47c", #"hash_237b36f7aeb1a896");
-  self thread zm_audio::function_713192b1(#"hash_6268d50ff53b29d4", #"hash_4576fb3345db827b");
-  self thread zm_audio::function_713192b1(#"hash_27a6b15e094c02f1", #"bathhouse");
-  self thread zm_audio::function_713192b1(#"hash_4785d4d350f36326", #"treasur");
-  self thread zm_audio::function_713192b1(#"hash_12a9743a3b9f2236", #"hash_2d65510066aca8d");
-  self thread zm_audio::function_713192b1(#"hash_303ce0aa4cf6a23e", #"hash_1b3475683eff03ae");
-  self thread function_f7a190a8(undefined, 60, #"hash_106d425e41e8c240", #"temp_apollo");
-  self thread function_f7a190a8(#"hash_3dba794053dea40e", 60, #"hash_654702bdca18105", #"amphi");
-  self thread zm_audio::function_713192b1(#"hash_4f55839413fe0046", #"hash_185c7ca2794dd39");
-  self thread function_f7a190a8(#"pap_quest_completed", 30, #"hash_78d4c8eb48aabd66", #"center_world");
+  self thread zm_audio::function_713192b1(#"hash_187fe3987a160b42", # "market");
+  self thread zm_audio::function_713192b1(#"hash_70363674b3e9a47c", # "hash_237b36f7aeb1a896");
+  self thread zm_audio::function_713192b1(#"hash_6268d50ff53b29d4", # "hash_4576fb3345db827b");
+  self thread zm_audio::function_713192b1(#"hash_27a6b15e094c02f1", # "bathhouse");
+  self thread zm_audio::function_713192b1(#"hash_4785d4d350f36326", # "treasur");
+  self thread zm_audio::function_713192b1(#"hash_12a9743a3b9f2236", # "hash_2d65510066aca8d");
+  self thread zm_audio::function_713192b1(#"hash_303ce0aa4cf6a23e", # "hash_1b3475683eff03ae");
+  self thread function_f7a190a8(undefined, 60, # "hash_106d425e41e8c240", # "temp_apollo");
+  self thread function_f7a190a8(#"hash_3dba794053dea40e", 60, # "hash_654702bdca18105", # "amphi");
+  self thread zm_audio::function_713192b1(#"hash_4f55839413fe0046", # "hash_185c7ca2794dd39");
+  self thread function_f7a190a8(#"pap_quest_completed", 30, # "hash_78d4c8eb48aabd66", # "center_world");
 }
 
 function_f7a190a8(str_wait_flag, var_ab660f9a, str_location, var_39acfdda) {

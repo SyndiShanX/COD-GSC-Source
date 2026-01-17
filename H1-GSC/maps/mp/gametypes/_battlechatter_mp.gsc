@@ -43,7 +43,7 @@ init() {
 }
 
 onplayerconnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connected", var_0);
     var_0 thread onplayerspawned();
   }
@@ -52,7 +52,7 @@ onplayerconnect() {
 onplayerspawned() {
   self endon("disconnect");
 
-  for (;;) {
+  for(;;) {
     self waittill("spawned_player");
 
     if(maps\mp\_utility::is_true(level.virtuallobbyactive)) {
@@ -61,7 +61,7 @@ onplayerspawned() {
     self.bcinfo = [];
     var_0 = maps\mp\gametypes\_teams::getteamvoiceprefix(self.team);
 
-    if(!isdefined(self.pers["voiceIndex"])) {
+    if(!isDefined(self.pers["voiceIndex"])) {
       var_1 = 4;
       var_2 = 4;
       var_3 = "m";
@@ -96,7 +96,7 @@ reloadtracking() {
   self endon("disconnect");
   self endon("faux_spawn");
 
-  for (;;) {
+  for(;;) {
     self waittill("reload_start");
     level thread saylocalsound(self, "reload", 0);
   }
@@ -107,7 +107,7 @@ grenadetracking() {
   self endon("disconnect");
   self endon("faux_spawn");
 
-  for (;;) {
+  for(;;) {
     self waittill("grenade_fire", var_0, var_1);
 
     if(var_1 == "h1_fraggrenade_mp") {
@@ -140,7 +140,7 @@ claymoretracking() {
   self endon("disconnect");
   self endon("faux_spawn");
 
-  for (;;) {
+  for(;;) {
     self waittill("begin_firing");
     var_0 = self getcurrentweapon();
 
@@ -154,7 +154,7 @@ saylocalsounddelayed(var_0, var_1, var_2, var_3, var_4) {
   var_0 endon("disconnect");
   wait(var_2);
 
-  if(!isdefined(var_3) && isdefined(0))
+  if(!isDefined(var_3) && isDefined(0))
     var_3 = 0;
 
   saylocalsound(var_0, var_1, var_3, var_4);
@@ -164,10 +164,10 @@ saylocalsound(var_0, var_1, var_2, var_3) {
   var_0 endon("death");
   var_0 endon("disconnect");
 
-  if(isdefined(level.chatterdisabled) && level.chatterdisabled) {
+  if(isDefined(level.chatterdisabled) && level.chatterdisabled) {
     return;
   }
-  if(isdefined(var_0.bcdisabled) && var_0.bcdisabled == 1) {
+  if(isDefined(var_0.bcdisabled) && var_0.bcdisabled == 1) {
     return;
   }
   if(isspeakerinrange(var_0)) {
@@ -176,7 +176,7 @@ saylocalsound(var_0, var_1, var_2, var_3) {
   if(var_0.team != "spectator") {
     var_4 = var_0.pers["voicePrefix"];
 
-    if(isdefined(level.bcsounds[var_1])) {
+    if(isDefined(level.bcsounds[var_1])) {
       var_5 = var_4 + level.bcsounds[var_1];
 
       switch (var_1) {
@@ -201,7 +201,7 @@ saylocalsound(var_0, var_1, var_2, var_3) {
 }
 
 dosound(var_0, var_1, var_2) {
-  if(!isdefined(var_2))
+  if(!isDefined(var_2))
     var_2 = 0;
 
   var_3 = self.pers["team"];
@@ -217,7 +217,7 @@ dosound(var_0, var_1, var_2) {
     return;
   }
 
-  if(isagent(self) || isdefined(var_1) && var_1)
+  if(isagent(self) || isDefined(var_1) && var_1)
     self playsoundtoteam(var_0, var_3);
   else
     self playsoundtoteam(var_0, var_3, self);
@@ -252,7 +252,7 @@ dothreatcalloutresponse(var_0, var_1) {
     wait 0.5;
 
     foreach(var_8 in level.participants) {
-      if(!isdefined(var_8)) {
+      if(!isDefined(var_8)) {
         continue;
       }
       if(var_8 == self) {
@@ -296,19 +296,19 @@ isspeakerinrange(var_0, var_1) {
   var_0 endon("death");
   var_0 endon("disconnect");
 
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     var_1 = 1000;
 
   var_2 = var_1 * var_1;
 
-  if(isdefined(var_0) && isdefined(var_0.team) && var_0.team != "spectator") {
-    for (var_3 = 0; var_3 < level.speakers[var_0.team].size; var_3++) {
+  if(isDefined(var_0) && isDefined(var_0.team) && var_0.team != "spectator") {
+    for(var_3 = 0; var_3 < level.speakers[var_0.team].size; var_3++) {
       var_4 = level.speakers[var_0.team][var_3];
 
       if(var_4 == var_0)
         return 1;
 
-      if(!isdefined(var_4)) {
+      if(!isDefined(var_4)) {
         continue;
       }
       if(distancesquared(var_4.origin, var_0.origin) < var_2)
@@ -326,7 +326,7 @@ addspeaker(var_0, var_1) {
 removespeaker(var_0, var_1) {
   var_2 = [];
 
-  for (var_3 = 0; var_3 < level.speakers[var_1].size; var_3++) {
+  for(var_3 = 0; var_3 < level.speakers[var_1].size; var_3++) {
     if(level.speakers[var_1][var_3] == var_0) {
       continue;
     }
@@ -395,7 +395,7 @@ get_all_my_locations() {
   var_2 = [];
 
   foreach(var_4 in var_1) {
-    if(isdefined(var_4.locationaliases))
+    if(isDefined(var_4.locationaliases))
       var_2[var_2.size] = var_4;
   }
 
@@ -403,7 +403,7 @@ get_all_my_locations() {
 }
 
 update_bcs_locations() {
-  if(isdefined(anim.bcs_locations))
+  if(isDefined(anim.bcs_locations))
     anim.bcs_locations = common_scripts\utility::array_removeundefined(anim.bcs_locations);
 }
 
@@ -421,7 +421,7 @@ is_in_callable_location() {
 location_called_out_ever(var_0) {
   var_1 = location_get_last_callout_time(var_0.locationaliases[0]);
 
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     return 0;
 
   return 1;
@@ -430,7 +430,7 @@ location_called_out_ever(var_0) {
 location_called_out_recently(var_0) {
   var_1 = location_get_last_callout_time(var_0.locationaliases[0]);
 
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     return 0;
 
   var_2 = var_1 + 25000;
@@ -446,7 +446,7 @@ location_add_last_callout_time(var_0) {
 }
 
 location_get_last_callout_time(var_0) {
-  if(isdefined(anim.locationlastcallouttimes[var_0]))
+  if(isDefined(anim.locationlastcallouttimes[var_0]))
     return anim.locationlastcallouttimes[var_0];
 
   return undefined;
@@ -482,7 +482,7 @@ getcannedresponse(var_0) {
   var_2 = self.locationaliases;
 
   foreach(var_4 in var_2) {
-    if(iscallouttypeqa(var_4, var_0) && !isdefined(self.qafinished)) {
+    if(iscallouttypeqa(var_4, var_0) && !isDefined(self.qafinished)) {
       var_1 = var_4;
       break;
     }
@@ -549,7 +549,7 @@ getaliastypefromsoundalias(var_0) {}
 battlechatter_printdumpline(var_0, var_1, var_2) {}
 
 friendly_nearby(var_0) {
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     var_0 = 262144;
 
   foreach(var_2 in level.players) {

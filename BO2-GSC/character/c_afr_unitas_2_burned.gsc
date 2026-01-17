@@ -4,7 +4,7 @@
 ***********************************************/
 
 main() {
-  self setmodel("c_afr_unitas_body2_burned");
+  self setModel("c_afr_unitas_body2_burned");
   self.headmodel = "c_afr_unitas_head1_burned";
   self attach(self.headmodel, "", 1);
   self.gearmodel = "c_afr_unitas_gear1";

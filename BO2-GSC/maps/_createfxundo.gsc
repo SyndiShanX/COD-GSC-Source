@@ -12,7 +12,7 @@ store_undo_state(change_type, ents) {
   if(!isDefined(level.cfx_undo_states)) {
     level.cfx_undo_states = [];
     level.cfx_redo_states = [];
-    level.cfx_limbo_state = spawnstruct();
+    level.cfx_limbo_state = spawnStruct();
     level.cfx_max_states = 10;
   }
 
@@ -24,7 +24,7 @@ store_undo_state(change_type, ents) {
   for(i = 0; i < ents.size; i++)
     temp_array[i] = copy_fx_ent(ents[i]);
 
-  state = spawnstruct();
+  state = spawnStruct();
   state.operation = change_type;
   state.last_action = level.cfx_last_action;
   state.ent_array = temp_array;
@@ -345,7 +345,7 @@ reorder_ent_array_by_uniqueid(ent_array) {
 }
 
 copy_fx_ent(ent) {
-  temp_ent = spawnstruct();
+  temp_ent = spawnStruct();
   temp_ent.drawn = ent.drawn;
   temp_ent.drawn_axis_model = ent.drawn_axis_model;
   temp_ent.last_fx_index = ent.last_fx_index;

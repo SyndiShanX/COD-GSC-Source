@@ -14,9 +14,7 @@ create_animation_list() {
   var_0[var_0.size] = "smoke_balcony";
 
   if(isDefined(level.idle_animation_list_func))
-    var_0 = [
-      [level.idle_animation_list_func]
-    ](var_0);
+    var_0 = [[level.idle_animation_list_func]](var_0);
 
   return var_0;
 }

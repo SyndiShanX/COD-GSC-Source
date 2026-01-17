@@ -23,26 +23,26 @@
 #namespace zm_powerup_weapon_minigun;
 
 function autoexec __init__sytem__() {
-  system::register("zm_powerup_weapon_minigun", & __init__, undefined, undefined);
+  system::register("zm_powerup_weapon_minigun", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  zm_powerups::register_powerup("minigun", & grab_minigun);
-  zm_powerups::register_powerup_weapon("minigun", & minigun_countdown);
+  zm_powerups::register_powerup("minigun", &grab_minigun);
+  zm_powerups::register_powerup_weapon("minigun", &minigun_countdown);
   zm_powerups::powerup_set_prevent_pick_up_if_drinking("minigun", 1);
   zm_powerups::set_weapon_ignore_max_ammo("minigun");
   if(tolower(getdvarstring("g_gametype")) != "zcleansed") {
-    zm_powerups::add_zombie_powerup("minigun", "zombie_pickup_minigun", & "ZOMBIE_POWERUP_MINIGUN", & func_should_drop_minigun, 1, 0, 0, undefined, "powerup_mini_gun", "zombie_powerup_minigun_time", "zombie_powerup_minigun_on");
+    zm_powerups::add_zombie_powerup("minigun", "zombie_pickup_minigun", &"ZOMBIE_POWERUP_MINIGUN", &func_should_drop_minigun, 1, 0, 0, undefined, "powerup_mini_gun", "zombie_powerup_minigun_time", "zombie_powerup_minigun_on");
     level.zombie_powerup_weapon["minigun"] = getweapon("minigun");
   }
-  callback::on_connect( & init_player_zombie_vars);
-  zm::register_actor_damage_callback( & minigun_damage_adjust);
+  callback::on_connect(&init_player_zombie_vars);
+  zm::register_actor_damage_callback(&minigun_damage_adjust);
 }
 
 function grab_minigun(player) {
   level thread minigun_weapon_powerup(player);
   player thread zm_powerups::powerup_vo("minigun");
-  if(isdefined(level._grab_minigun)) {
+  if(isDefined(level._grab_minigun)) {
     level thread[[level._grab_minigun]](player);
   }
 }
@@ -63,25 +63,25 @@ function minigun_weapon_powerup(ent_player, time) {
   ent_player endon("disconnect");
   ent_player endon("death");
   ent_player endon("player_downed");
-  if(!isdefined(time)) {
+  if(!isDefined(time)) {
     time = 30;
   }
-  if(isdefined(level._minigun_time_override)) {
+  if(isDefined(level._minigun_time_override)) {
     time = level._minigun_time_override;
   }
-  if(ent_player.zombie_vars["zombie_powerup_minigun_on"] && (level.zombie_powerup_weapon["minigun"] == ent_player getcurrentweapon() || (isdefined(ent_player.has_powerup_weapon["minigun"]) && ent_player.has_powerup_weapon["minigun"]))) {
+  if(ent_player.zombie_vars["zombie_powerup_minigun_on"] && (level.zombie_powerup_weapon["minigun"] == ent_player getcurrentweapon() || (isDefined(ent_player.has_powerup_weapon["minigun"]) && ent_player.has_powerup_weapon["minigun"]))) {
     if(ent_player.zombie_vars["zombie_powerup_minigun_time"] < time) {
       ent_player.zombie_vars["zombie_powerup_minigun_time"] = time;
     }
     return;
   }
-  level._zombie_minigun_powerup_last_stand_func = & minigun_powerup_last_stand;
+  level._zombie_minigun_powerup_last_stand_func = &minigun_powerup_last_stand;
   stance_disabled = 0;
   if(ent_player getstance() === "prone") {
     ent_player allowcrouch(0);
     ent_player allowprone(0);
     stance_disabled = 1;
-    while (ent_player getstance() != "stand") {
+    while(ent_player getstance() != "stand") {
       wait(0.05);
     }
   }
@@ -97,7 +97,7 @@ function minigun_powerup_last_stand() {
 }
 
 function minigun_countdown(ent_player, str_weapon_time) {
-  while (ent_player.zombie_vars[str_weapon_time] > 0) {
+  while(ent_player.zombie_vars[str_weapon_time] > 0) {
     wait(0.05);
     ent_player.zombie_vars[str_weapon_time] = ent_player.zombie_vars[str_weapon_time] - 0.05;
   }
@@ -114,13 +114,13 @@ function minigun_damage_adjust(inflictor, attacker, damage, flags, meansofdeath,
   if(self.archetype == "zombie" || self.archetype == "zombie_dog" || self.archetype == "zombie_quad") {
     n_percent_damage = self.health * randomfloatrange(0.34, 0.75);
   }
-  if(isdefined(level.minigun_damage_adjust_override)) {
+  if(isDefined(level.minigun_damage_adjust_override)) {
     n_override_damage = thread[[level.minigun_damage_adjust_override]](inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype);
-    if(isdefined(n_override_damage)) {
+    if(isDefined(n_override_damage)) {
       n_percent_damage = n_override_damage;
     }
   }
-  if(isdefined(n_percent_damage)) {
+  if(isDefined(n_percent_damage)) {
     damage = damage + n_percent_damage;
   }
   return damage;

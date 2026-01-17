@@ -42,7 +42,7 @@ getstructarray(name, type) {
 }
 
 play_sound_in_space(localclientnum, alias, origin) {
-  playsound(localclientnum, alias, origin);
+  playSound(localclientnum, alias, origin);
 }
 
 vector_compare(vec1, vec2) {
@@ -124,7 +124,7 @@ registersystem(ssysname, cbfunc) {
 
     return;
   } else {
-    level._systemstates[ssysname] = spawnstruct();
+    level._systemstates[ssysname] = spawnStruct();
     level._systemstates[ssysname].callback = cbfunc;
   }
 }
@@ -143,7 +143,7 @@ loop_fx_sound(clientnum, alias, origin, ender) {
   }
 
   setfakeentorg(clientnum, entid, origin);
-  playloopsound(clientnum, entid, alias);
+  playLoopSound(clientnum, entid, alias);
 }
 
 waitforallclients() {
@@ -183,7 +183,7 @@ waittill_any_return(string1, string2, string3, string4, string5, string6) {
   if((!isDefined(string1) || string1 != "death") && (!isDefined(string2) || string2 != "death") && (!isDefined(string3) || string3 != "death") && (!isDefined(string4) || string4 != "death") && (!isDefined(string5) || string5 != "death") && (!isDefined(string6) || string6 != "death"))
     self endon("death");
 
-  ent = spawnstruct();
+  ent = spawnStruct();
 
   if(isDefined(string1))
     self thread waittill_string(string1, ent);
@@ -228,7 +228,7 @@ waittill_any(string1, string2, string3, string4, string5) {
 
 within_fov(start_origin, start_angles, end_origin, fov) {
   normal = vectornormalize(end_origin - start_origin);
-  forward = anglestoforward(start_angles);
+  forward = anglesToForward(start_angles);
   dot = vectordot(forward, normal);
   return dot >= fov;
 }
@@ -427,7 +427,7 @@ array_wait(array, msg, timeout) {
 
   for(i = 0; i < keys.size; i++) {
     key = keys[i];
-    structs[key] = spawnstruct();
+    structs[key] = spawnStruct();
     structs[key]._array_wait = 1;
     structs[key] thread array_waitlogic1(array[key], msg, timeout);
   }
@@ -860,7 +860,7 @@ clamp(val, val_min, val_max) {
 }
 
 newtimer() {
-  s_timer = spawnstruct();
+  s_timer = spawnStruct();
   s_timer.n_time_created = gettime();
   return s_timer;
 }
@@ -898,7 +898,7 @@ lerpdvar(str_dvar, n_val, n_lerp_time, b_saved_dvar) {
 }
 
 newservertimer() {
-  s_timer = spawnstruct();
+  s_timer = spawnStruct();
   s_timer.n_time_created = level.servertime;
   return s_timer;
 }

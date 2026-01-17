@@ -273,7 +273,7 @@ speech_anims() {
 fire_rock_at_vtol_defalco(guy) {
   vtol_rpg = get_model_or_models_from_scene("speech_walk_with_defalco_defalco", "vtol_rpg");
   m_rocket = spawn_model("projectile_at4", vtol_rpg.origin, vtol_rpg.angles);
-  playfxontag(getfx("morals_fhj_rocket_trail"), m_rocket, "tag_fx");
+  playFXOnTag(getfx("morals_fhj_rocket_trail"), m_rocket, "tag_fx");
   m_rocket moveto(level.veh_crashed_vtol.origin - vectorscale((0, 0, 1), 128.0), 0.5);
   m_rocket waittill("movedone");
   m_rocket delete();
@@ -282,7 +282,7 @@ fire_rock_at_vtol_defalco(guy) {
 fire_rock_at_vtol_nodefalco(guy) {
   vtol_rpg = get_model_or_models_from_scene("stage_backup_guards", "vtol_rpg");
   m_rocket = spawn_model("projectile_at4", vtol_rpg gettagorigin("tag_flash"), vtol_rpg.angles);
-  playfxontag(getfx("morals_fhj_rocket_trail"), m_rocket, "tag_fx");
+  playFXOnTag(getfx("morals_fhj_rocket_trail"), m_rocket, "tag_fx");
   m_rocket moveto(level.veh_crashed_vtol.origin - vectorscale((0, 0, 1), 128.0), 0.5);
   m_rocket waittill("movedone");
   m_rocket delete();
@@ -340,8 +340,7 @@ market_anims() {
   precache_assets(1);
 }
 
-terrorist_hunt_anims() {
-}
+terrorist_hunt_anims() {}
 
 metal_storms_anims() {
   add_scene("courtyard_balcony_deaths", "metalstorms_align");
@@ -556,8 +555,7 @@ moral_rail_player_body_anim() {
   precache_assets(1);
 }
 
-hijacked_anims() {
-}
+hijacked_anims() {}
 
 #using_animtree("player");
 #using_animtree("generic_human");

@@ -141,17 +141,17 @@ stairupdatepos(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_7 = var_2["stairEdgeDir"];
   var_8 = length(var_2["trans"]);
 
-  if(isdefined(var_2["startTime"])) {
+  if(isDefined(var_2["startTime"])) {
     var_9 = var_2["startTime"];
     var_10 = getmovedelta(var_0, 0, var_9);
     var_8 = var_8 - length(var_10);
   } else
     var_9 = 0;
 
-  for (;;) {
+  for(;;) {
     if(var_4) {
       if(lengthsquared(var_7) <= 0.001) {
-        if(!isdefined(self.stairstransition["wantedPos"]))
+        if(!isDefined(self.stairstransition["wantedPos"]))
           self.stairstransition["wantedPos"] = var_6;
       } else {
         var_11 = vectornormalize((self.lookaheaddir[0], self.lookaheaddir[1], 0));
@@ -163,7 +163,7 @@ stairupdatepos(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_13 = var_9 + var_5;
 
     if(var_13 >= var_3) {
-      var_14 = anglestoforward(self.angles);
+      var_14 = anglesToForward(self.angles);
       var_15 = getmovedelta(var_0, var_3, var_13);
       var_16 = var_15[0] * var_14 + (0, 0, var_15[2]);
       var_17 = self.stairstransition["wantedPos"] + var_16;
@@ -219,7 +219,7 @@ waitforstairedge(var_0, var_1) {
   thread poststairsedge_cleanup(var_0);
   var_2 = 0;
 
-  for (;;) {
+  for(;;) {
     waitframe();
     var_3 = self getanimtime(var_0);
 
@@ -241,13 +241,13 @@ waitforstairedge(var_0, var_1) {
     return;
   }
 
-  if(!isdefined(self.stairstransition)) {
+  if(!isDefined(self.stairstransition)) {
     return;
   }
   var_4 = self.stairstransition["wantedPos"];
 
-  if(isdefined(var_4)) {
-    var_5 = anglestoforward(self.angles);
+  if(isDefined(var_4)) {
+    var_5 = anglesToForward(self.angles);
     var_6 = getmovedelta(var_0, var_1, var_3);
     var_7 = var_6[0] * var_5 + (0, 0, var_6[2]);
     var_8 = var_4 + var_7;
@@ -283,7 +283,7 @@ gettracecontactpos(var_0, var_1, var_2, var_3, var_4) {
 }
 
 getstairstransition(var_0, var_1, var_2) {
-  if(!isdefined(self.detectedstairstransitiontime) || self.detectedstairstransitiontime != gettime()) {
+  if(!isDefined(self.detectedstairstransitiontime) || self.detectedstairstransitiontime != gettime()) {
     if(!checkshouldstairstransition(var_0, var_1, var_2))
       return undefined;
   }
@@ -294,7 +294,7 @@ getstairstransition(var_0, var_1, var_2) {
 preparedetectedstairstransition() {
   self.stairstransition = self.detectedstairstransition;
 
-  if(isdefined(self.stairs_old_moveplaybackrate))
+  if(isDefined(self.stairs_old_moveplaybackrate))
     self notify("stair_transition_to_transition");
   else
     self.stairs_old_moveplaybackrate = self.stairstransition["stairs_old_moveplaybackrate"];
@@ -321,7 +321,7 @@ getanimstarttime(var_0, var_1, var_2) {
   var_10 = 0;
   var_11 = var_5[0];
 
-  for (;;) {
+  for(;;) {
     var_12 = getmovedelta(var_0, 0, var_9);
     var_13 = length(var_12) / var_6;
 
@@ -338,14 +338,14 @@ getanimstarttime(var_0, var_1, var_2) {
 }
 
 checktransition_up_in(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(isdefined(var_0["stairs"])) {
+  if(isDefined(var_0["stairs"])) {
     var_6 = getstairtypefromnormal(var_0["normal"]);
     var_7 = animscripts\run::getstairstransitionanim(var_5, "up", var_6);
     var_8 = getstairanimtranslationtoedge(var_7);
     var_9 = gettracecontactpos(var_2, var_4, var_0, 15, 48);
     var_10 = getprecisegroundnear(var_9);
 
-    if(!isdefined(var_10))
+    if(!isDefined(var_10))
       return undefined;
 
     if(vectordot(var_10["normal"], var_3) > 0)
@@ -384,7 +384,7 @@ checktransition_down_in(var_0, var_1, var_2, var_3) {
   if(var_8["fraction"] >= 1)
     return undefined;
 
-  if(!isdefined(var_8["stairs"]))
+  if(!isDefined(var_8["stairs"]))
     return undefined;
 
   if(var_8["normal"][2] > 0.9962) {
@@ -395,7 +395,7 @@ checktransition_down_in(var_0, var_1, var_2, var_3) {
     if(var_8["fraction"] >= 1)
       return undefined;
 
-    if(!isdefined(var_8["stairs"]))
+    if(!isDefined(var_8["stairs"]))
       return undefined;
 
     if(var_8["normal"][2] > 0.9962) {
@@ -452,7 +452,7 @@ checktransition_up_out(var_0) {
   if(var_12["fraction"] <= 0 || var_12["fraction"] >= 1)
     return undefined;
 
-  if(isdefined(var_12["stairs"]) && abs(var_12["normal"][2]) < 0.9962)
+  if(isDefined(var_12["stairs"]) && abs(var_12["normal"][2]) < 0.9962)
     return undefined;
 
   var_13 = vectorlerp(var_10, var_11, var_12["fraction"]);
@@ -492,7 +492,7 @@ checktransition_down_out(var_0) {
   if(var_12["fraction"] <= 0 || var_12["fraction"] >= 1)
     return undefined;
 
-  if(isdefined(var_12["stairs"]))
+  if(isDefined(var_12["stairs"]))
     return undefined;
 
   var_13 = vectorlerp(var_10, var_11, var_12["fraction"]);
@@ -518,13 +518,13 @@ checktransition_down_out(var_0) {
 getexpectedstairstransition(var_0, var_1, var_2, var_3) {
   var_4 = undefined;
 
-  if(!isdefined(self.lookaheaddir))
+  if(!isDefined(self.lookaheaddir))
     return undefined;
 
   var_5 = getanimationcontext(var_0);
   var_6 = vectornormalize((self.lookaheaddir[0], self.lookaheaddir[1], 0));
-  var_7 = !isdefined(var_3) || var_3 == "inOnly";
-  var_8 = !isdefined(var_3) || var_3 == "outOnly";
+  var_7 = !isDefined(var_3) || var_3 == "inOnly";
+  var_8 = !isDefined(var_3) || var_3 == "outOnly";
 
   if(self.stairsstate == "none" && var_7) {
     var_9 = getcurrentanimdisplacement(var_0, var_1, var_2);
@@ -543,7 +543,7 @@ getexpectedstairstransition(var_0, var_1, var_2, var_3) {
       var_4 = checktransition_down_out(var_6);
   }
 
-  if(isdefined(var_4)) {
+  if(isDefined(var_4)) {
     var_13 = length(var_4["trans"]);
 
     if(var_13 <= 0)
@@ -577,7 +577,7 @@ checkshouldstairstransition(var_0, var_1, var_2, var_3) {
 
   var_4 = getexpectedstairstransition(var_0, var_1, var_2, var_3);
 
-  if(!isdefined(var_4))
+  if(!isDefined(var_4))
     return 0;
 
   self.detectedstairstransition = var_4;
@@ -592,9 +592,9 @@ threadcheckstairstransition(var_0, var_1, var_2, var_3, var_4) {
   self endon("death");
   self endon("killThreadCheckStairsTransition");
 
-  for (;;) {
+  for(;;) {
     if(checkshouldstairstransition(var_0, var_1, var_2, var_4)) {
-      if(isdefined(var_3))
+      if(isDefined(var_3))
         [[var_3]]();
 
       self notify("should_stairs_transition");
@@ -606,20 +606,20 @@ threadcheckstairstransition(var_0, var_1, var_2, var_3, var_4) {
 }
 
 stairstransitionpendingsince(var_0) {
-  if(!isdefined(self.detectedstairstransitiontime))
+  if(!isDefined(self.detectedstairstransitiontime))
     return 0;
 
   return gettime() - self.detectedstairstransitiontime <= var_0;
 }
 
 isinstairstransition() {
-  return isdefined(self.isinstairstransition);
+  return isDefined(self.isinstairstransition);
 }
 
 shouldstairstransitionnow() {
   var_0 = animscripts\move::getexpectedcurrentmoveanim();
 
-  if(!isdefined(var_0["anim"]))
+  if(!isDefined(var_0["anim"]))
     return 0;
 
   var_1 = getanimlength(var_0["anim"]);
@@ -634,7 +634,7 @@ lookaheadhitstairslistener() {
   self endon("death");
   self endon("killanimscript");
 
-  for (;;) {
+  for(;;) {
     self waittill("lookahead_hit_stairs");
 
     if(isinstairstransition()) {
@@ -651,14 +651,14 @@ lookaheadhitstairslistener() {
 }
 
 getstairtransitionfinishedthisframe() {
-  if(isdefined(self.lastfinishedstairtransitiontime) && self.lastfinishedstairtransitiontime == gettime())
+  if(isDefined(self.lastfinishedstairtransitiontime) && self.lastfinishedstairtransitiontime == gettime())
     return self.lastfinishedstairtransitiontype;
 
   return "none";
 }
 
 using_h1_stairs_system() {
-  return !isdefined(self.disablestairsanims) || !self.disablestairsanims;
+  return !isDefined(self.disablestairsanims) || !self.disablestairsanims;
 }
 
 isonstairs() {
@@ -666,7 +666,7 @@ isonstairs() {
 }
 
 getstairtypefromtraceresult(var_0, var_1) {
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     return getstairtypefromnormal((0, 0, 1));
 
   return getstairtypefromnormal(var_0["normal"]);

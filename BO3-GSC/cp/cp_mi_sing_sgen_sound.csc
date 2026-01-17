@@ -56,7 +56,7 @@ function sndjumplandtrig() {
   // Unsupported VM revision (1B).
 }
 
-function sndjumplandtrigplaysound() {
+function sndjumplandtrigplaySound() {
   // Unsupported VM revision (1B).
 }
 

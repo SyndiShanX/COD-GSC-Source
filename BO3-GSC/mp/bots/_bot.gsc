@@ -39,23 +39,23 @@
 #namespace bot;
 
 function autoexec __init__sytem__() {
-  system::register("bot_mp", & __init__, undefined, undefined);
+  system::register("bot_mp", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype( & init);
-  level.getbotsettings = & get_bot_settings;
-  level.onbotconnect = & on_bot_connect;
-  level.onbotspawned = & on_bot_spawned;
-  level.onbotkilled = & on_bot_killed;
-  level.botidle = & bot_idle;
-  level.botthreatlost = & bot_combat::chase_threat;
-  level.botprecombat = & bot_combat::mp_pre_combat;
-  level.botcombat = & bot_combat::combat_think;
-  level.botpostcombat = & bot_combat::mp_post_combat;
-  level.botignorethreat = & bot_combat::bot_ignore_threat;
-  level.enemyempactive = & emp::enemyempactive;
-  level.botdevguicmd = & function_682f20bc;
+  callback::on_start_gametype(&init);
+  level.getbotsettings = &get_bot_settings;
+  level.onbotconnect = &on_bot_connect;
+  level.onbotspawned = &on_bot_spawned;
+  level.onbotkilled = &on_bot_killed;
+  level.botidle = &bot_idle;
+  level.botthreatlost = &bot_combat::chase_threat;
+  level.botprecombat = &bot_combat::mp_pre_combat;
+  level.botcombat = &bot_combat::combat_think;
+  level.botpostcombat = &bot_combat::mp_post_combat;
+  level.botignorethreat = &bot_combat::bot_ignore_threat;
+  level.enemyempactive = &emp::enemyempactive;
+  level.botdevguicmd = &function_682f20bc;
   level thread system_devgui_gadget_think();
 }
 
@@ -79,7 +79,7 @@ function wait_for_host() {
     return;
   }
   host = util::gethostplayerforbots();
-  while (!isdefined(host)) {
+  while(!isDefined(host)) {
     wait(0.25);
     host = util::gethostplayerforbots();
   }
@@ -87,7 +87,7 @@ function wait_for_host() {
 
 function get_host_team() {
   host = util::gethostplayerforbots();
-  if(!isdefined(host) || host.team == "spectator") {
+  if(!isDefined(host) || host.team == "spectator") {
     return "allies";
   }
   return host.team;
@@ -100,13 +100,13 @@ function is_bot_comp_stomp() {
 function on_bot_connect() {
   self endon("disconnect");
   level endon("game_ended");
-  if(isdefined(level.disableclassselection) && level.disableclassselection) {
+  if(isDefined(level.disableclassselection) && level.disableclassselection) {
     self set_rank();
     self bot_loadout::pick_hero_gadget();
     self bot_loadout::pick_killstreaks();
     return;
   }
-  if(!(isdefined(self.pers["bot_loadout"]) && self.pers["bot_loadout"])) {
+  if(!(isDefined(self.pers["bot_loadout"]) && self.pers["bot_loadout"])) {
     self set_rank();
     self bot_loadout::build_classes();
     self bot_loadout::pick_hero_gadget();
@@ -127,7 +127,7 @@ function on_bot_spawned() {
   if(getdvarstring("", "") != "") {
     weapon = getweapon(getdvarstring(""));
   }
-  if(isdefined(weapon) && level.weaponnone != weapon) {
+  if(isDefined(weapon) && level.weaponnone != weapon) {
     self weapons::detach_all_weapons();
     self takeallweapons();
     self giveweapon(weapon);
@@ -153,7 +153,7 @@ function respawn() {
   self endon("spawned");
   self endon("disconnect");
   level endon("game_ended");
-  while (true) {
+  while(true) {
     self tap_use_button();
     wait(0.1);
   }
@@ -168,7 +168,7 @@ function bot_idle() {
 }
 
 function do_supplydrop(maxrange = 1400) {
-  crates = getentarray("care_package", "script_noteworthy");
+  crates = getEntArray("care_package", "script_noteworthy");
   maxrangesq = maxrange * maxrange;
   useradiussq = 3844;
   closestcrate = undefined;
@@ -181,7 +181,7 @@ function do_supplydrop(maxrange = 1400) {
     if(cratedistsq > maxrangesq) {
       continue;
     }
-    inuse = isdefined(crate.useent) && (isdefined(crate.useent.inuse) && crate.useent.inuse);
+    inuse = isDefined(crate.useent) && (isDefined(crate.useent.inuse) && crate.useent.inuse);
     if(cratedistsq <= useradiussq) {
       if(inuse && !self usebuttonpressed()) {
         continue;
@@ -192,14 +192,14 @@ function do_supplydrop(maxrange = 1400) {
     if(!self has_minimap() && !self botsighttracepassed(crate)) {
       continue;
     }
-    if(!isdefined(closestcrate) || cratedistsq < closestcratedistsq) {
+    if(!isDefined(closestcrate) || cratedistsq < closestcratedistsq) {
       closestcrate = crate;
       closestcratedistsq = cratedistsq;
     }
   }
-  if(isdefined(closestcrate)) {
+  if(isDefined(closestcrate)) {
     randomangle = (0, randomint(360), 0);
-    randomvec = anglestoforward(randomangle);
+    randomvec = anglesToForward(randomangle);
     point = closestcrate.origin + (randomvec * 39);
     if(self botsetgoal(point)) {
       self thread watch_crate(closestcrate);
@@ -213,7 +213,7 @@ function watch_crate(crate) {
   self endon("death");
   self endon("bot_goal_reached");
   level endon("game_ended");
-  while (isdefined(crate) && !self bot_combat::has_threat()) {
+  while(isDefined(crate) && !self bot_combat::has_threat()) {
     wait(level.botsettings.thinkinterval);
   }
   self botsetgoal(self.origin);
@@ -237,7 +237,7 @@ function monitor_bot_team_population(maxallies, maxaxis) {
     return;
   }
   fill_balanced_teams(maxallies, maxaxis);
-  while (true) {
+  while(true) {
     wait(3);
     allies = getplayers("allies");
     axis = getplayers("axis");
@@ -256,7 +256,7 @@ function monitor_bot_team_population(maxallies, maxaxis) {
 function fill_balanced_teams(maxallies, maxaxis) {
   allies = getplayers("allies");
   axis = getplayers("axis");
-  while (allies.size < maxallies || axis.size < maxaxis && add_balanced_bot(allies, maxallies, axis, maxaxis)) {
+  while(allies.size < maxallies || axis.size < maxaxis && add_balanced_bot(allies, maxallies, axis, maxaxis)) {
     wait(0.05);
     allies = getplayers("allies");
     axis = getplayers("axis");
@@ -270,7 +270,7 @@ function add_balanced_bot(allies, maxallies, axis, maxaxis) {
   } else if(axis.size < maxaxis) {
     bot = add_bot("axis");
   }
-  return isdefined(bot);
+  return isDefined(bot);
 }
 
 function monitor_bot_population(maxfree) {
@@ -279,12 +279,12 @@ function monitor_bot_population(maxfree) {
     return;
   }
   players = getplayers();
-  while (players.size < maxfree) {
+  while(players.size < maxfree) {
     add_bot();
     wait(0.05);
     players = getplayers();
   }
-  while (true) {
+  while(true) {
     wait(3);
     players = getplayers();
     if(players.size < maxfree) {
@@ -318,15 +318,15 @@ function remove_best_bot(players) {
 }
 
 function choose_class() {
-  if(isdefined(level.disableclassselection) && level.disableclassselection) {
+  if(isDefined(level.disableclassselection) && level.disableclassselection) {
     return false;
   }
   currclass = self bot_loadout::get_current_class();
-  if(!isdefined(currclass) || randomint(100) < (isdefined(level.botsettings.changeclassweight) ? level.botsettings.changeclassweight : 0)) {
+  if(!isDefined(currclass) || randomint(100) < (isDefined(level.botsettings.changeclassweight) ? level.botsettings.changeclassweight : 0)) {
     classindex = randomint(self.loadoutclasses.size);
     classname = self.loadoutclasses[classindex].name;
   }
-  if(!isdefined(classname) || classname === currclass) {
+  if(!isDefined(classname) || classname === currclass) {
     return false;
   }
   self notify("menuresponse", "ChooseClass_InGame", classname);
@@ -341,7 +341,7 @@ function use_killstreak() {
   inventoryweapon = self getinventoryweapon();
   foreach(weapon in weapons) {
     killstreak = killstreaks::get_killstreak_for_weapon(weapon);
-    if(!isdefined(killstreak)) {
+    if(!isDefined(killstreak)) {
       continue;
     }
     if(weapon != inventoryweapon && !self getweaponammoclip(weapon)) {
@@ -352,7 +352,7 @@ function use_killstreak() {
       break;
     }
   }
-  if(!isdefined(useweapon)) {
+  if(!isDefined(useweapon)) {
     return;
   }
   killstreak_ref = killstreaks::get_menu_name(killstreak);
@@ -380,7 +380,7 @@ function has_minimap() {
   if(self isempjammed()) {
     return 0;
   }
-  if(isdefined(level.hardcoremode) && level.hardcoremode) {
+  if(isDefined(level.hardcoremode) && level.hardcoremode) {
     return self has_radar();
   }
   return 1;
@@ -388,15 +388,15 @@ function has_minimap() {
 
 function get_enemies(on_radar = 0) {
   enemies = self getenemies();
-  for (i = 0; i < enemies.size; i++) {
+  for(i = 0; i < enemies.size; i++) {
     if(isplayer(enemies[i]) && enemies[i] isinmovemode("", "")) {
       arrayremoveindex(enemies, i);
       i--;
     }
   }
   if(on_radar && !self has_radar()) {
-    for (i = 0; i < enemies.size; i++) {
-      if(!isdefined(enemies[i].lastfiretime)) {
+    for(i = 0; i < enemies.size; i++) {
+      if(!isDefined(enemies[i].lastfiretime)) {
         arrayremoveindex(enemies, i);
         i--;
         continue;
@@ -415,11 +415,11 @@ function set_rank() {
   ranks = [];
   bot_ranks = [];
   human_ranks = [];
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(players[i] == self) {
       continue;
     }
-    if(isdefined(players[i].pers["rank"])) {
+    if(isDefined(players[i].pers["rank"])) {
       if(players[i] util::is_bot()) {
         bot_ranks[bot_ranks.size] = players[i].pers["rank"];
         continue;
@@ -431,7 +431,7 @@ function set_rank() {
     human_ranks[human_ranks.size] = 10;
   }
   human_avg = math::array_average(human_ranks);
-  while ((bot_ranks.size + human_ranks.size) < 5) {
+  while((bot_ranks.size + human_ranks.size) < 5) {
     r = human_avg + (randomintrange(-5, 5));
     rank = math::clamp(r, 0, level.maxrank);
     human_ranks[human_ranks.size] = rank;
@@ -440,7 +440,7 @@ function set_rank() {
   avg = math::array_average(ranks);
   s = math::array_std_deviation(ranks, avg);
   rank = int(math::random_normal_distribution(avg, s, 0, level.maxrank));
-  while (!isdefined(self.pers["codpoints"])) {
+  while(!isDefined(self.pers["codpoints"])) {
     wait(0.1);
   }
   self.pers["rank"] = rank;
@@ -568,7 +568,7 @@ function function_682f20bc(cmd) {
       if(var_d03a6f21.size > 1) {
         count = int(var_d03a6f21[1]);
       }
-      for (i = 0; i < count; i++) {
+      for(i = 0; i < count; i++) {
         add_bot(team);
       }
       return true;
@@ -585,7 +585,7 @@ function function_682f20bc(cmd) {
     }
     case "": {
       bot = add_bot_at_eye_trace(team);
-      if(isdefined(bot)) {
+      if(isDefined(bot)) {
         bot thread fixed_spawn_override();
       }
       return true;
@@ -612,7 +612,7 @@ function function_682f20bc(cmd) {
 
 function system_devgui_gadget_think() {
   setdvar("", "");
-  for (;;) {
+  for(;;) {
     wait(1);
     gadget = getdvarstring("");
     if(gadget != "") {
@@ -630,7 +630,7 @@ function bot_turn_on_gadget(gadget) {
     }
     host = util::gethostplayer();
     weapon = host getcurrentweapon();
-    if(!isdefined(weapon) || weapon == level.weaponnone || weapon == level.weaponnull) {
+    if(!isDefined(weapon) || weapon == level.weaponnone || weapon == level.weaponnull) {
       weapon = getweapon("");
     }
     player weapons::detach_all_weapons();
@@ -650,7 +650,7 @@ function fixed_spawn_override() {
   self endon("disconnect");
   spawnorigin = self.origin;
   spawnangles = self.angles;
-  while (true) {
+  while(true) {
     self waittill("spawned_player");
     self setorigin(spawnorigin);
     self setplayerangles(spawnangles);

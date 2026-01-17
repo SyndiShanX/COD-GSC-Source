@@ -107,7 +107,7 @@ all_chunks_destroyed(barrier_chunks) {
 }
 
 check_point_in_playable_area(origin) {
-  playable_area = getentarray("player_volume", "script_noteworthy");
+  playable_area = getEntArray("player_volume", "script_noteworthy");
   check_model = spawn("script_model", origin + (0, 0, 40));
   valid_point = false;
   for(i = 0; i < playable_area.size; i++) {
@@ -120,7 +120,7 @@ check_point_in_playable_area(origin) {
 }
 
 check_point_in_active_zone(origin) {
-  player_zones = getentarray("player_volume", "script_noteworthy");
+  player_zones = getEntArray("player_volume", "script_noteworthy");
   if(!isDefined(level.zones) || !isDefined(player_zones)) {
     return true;
   }
@@ -936,7 +936,7 @@ enable_trigger() {
 }
 
 in_playable_area() {
-  playable_area = getentarray("player_volume", "script_noteworthy");
+  playable_area = getEntArray("player_volume", "script_noteworthy");
   if(!isDefined(playable_area)) {
     println("No playable area playable_area found! Assume EVERYWHERE is PLAYABLE");
     return true;
@@ -1351,7 +1351,7 @@ play_sound_at_pos(ref, pos, ent) {
 
 play_sound_on_ent(ref) {
   if(isDefined(self.script_soundalias)) {
-    self PlaySound(self.script_soundalias);
+    self playSound(self.script_soundalias);
     return;
   }
   if(isDefined(self.script_sound)) {
@@ -1364,7 +1364,7 @@ play_sound_on_ent(ref) {
     AssertMsg("Sound \"" + ref + "\" was not put to the zombie sounds list, please use add_sound( ref, alias ) at the start of your level.");
     return;
   }
-  self PlaySound(level.zombie_sounds[ref]);
+  self playSound(level.zombie_sounds[ref]);
 }
 
 play_loopsound_on_ent(ref) {
@@ -1378,7 +1378,7 @@ play_loopsound_on_ent(ref) {
     AssertMsg("Sound \"" + ref + "\" was not put to the zombie sounds list, please use add_sound( ref, alias ) at the start of your level.");
     return;
   }
-  self PlaySound(level.zombie_sounds[ref]);
+  self playSound(level.zombie_sounds[ref]);
 }
 
 string_to_float(string) {
@@ -1479,7 +1479,7 @@ do_player_vo(snd, variation_count) {
   }
   if(level.player_is_speaking == 0) {
     level.player_is_speaking = 1;
-    self playsound(sound, "sound_done");
+    self playSound(sound, "sound_done");
     self waittill("sound_done");
     wait(2);
     level.player_is_speaking = 0;
@@ -1494,7 +1494,7 @@ is_magic_bullet_shield_enabled(ent) {
 
 really_play_2D_sound(sound) {
   temp_ent = spawn("script_origin", (0, 0, 0));
-  temp_ent playsound(sound, sound + "wait");
+  temp_ent playSound(sound, sound + "wait");
   temp_ent waittill(sound + "wait");
   wait(0.05);
   temp_ent delete();

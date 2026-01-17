@@ -30,8 +30,8 @@ function main() {
   s_left = struct::get("bridge_trigger_left");
   e_gate = getent("powered_bridge_gate", "targetname");
   e_gate disconnectpaths();
-  var_efdf0fee = getentarray("bridge_light_on", "targetname");
-  array::run_all(var_efdf0fee, & hide);
+  var_efdf0fee = getEntArray("bridge_light_on", "targetname");
+  array::run_all(var_efdf0fee, &hide);
   s_right function_e457f1d();
   s_left function_e457f1d();
   var_cefeeda4 = getnodearray("powered_bridge_door", "targetname");
@@ -46,8 +46,8 @@ function function_e457f1d() {
   self.require_look_at = 0;
   self.radius = 64;
   self.height = 64;
-  self.prompt_and_visibility_func = & function_87d1b410;
-  zm_unitrigger::register_static_unitrigger(self, & function_5156e4d8);
+  self.prompt_and_visibility_func = &function_87d1b410;
+  zm_unitrigger::register_static_unitrigger(self, &function_5156e4d8);
 }
 
 function function_87d1b410(e_player) {
@@ -64,7 +64,7 @@ function function_87d1b410(e_player) {
 }
 
 function function_5156e4d8() {
-  while (true) {
+  while(true) {
     self waittill("trigger", e_player);
     if(!level flag::get("bridge_in_use")) {
       if(e_player zm_score::can_player_purchase(500)) {
@@ -73,7 +73,7 @@ function function_5156e4d8() {
         level thread activate_bridge(e_player);
       } else {
         zm_utility::play_sound_at_pos("no_purchase", self.origin);
-        if(isdefined(level.custom_generic_deny_vo_func)) {
+        if(isDefined(level.custom_generic_deny_vo_func)) {
           e_player thread[[level.custom_generic_deny_vo_func]](1);
         } else {
           e_player zm_audio::create_and_play_dialog("general", "outofmoney");
@@ -142,14 +142,14 @@ function function_ef72d561() {
 }
 
 function function_40ac3c12(e_player) {
-  var_efdf0fee = getentarray("bridge_light_on", "targetname");
-  array::run_all(var_efdf0fee, & show);
-  var_da999e54 = getentarray("bridge_light_off", "targetname");
-  array::run_all(var_da999e54, & hide);
+  var_efdf0fee = getEntArray("bridge_light_on", "targetname");
+  array::run_all(var_efdf0fee, &show);
+  var_da999e54 = getEntArray("bridge_light_off", "targetname");
+  array::run_all(var_da999e54, &hide);
   level thread exploder::exploder("bridge_lights_exploder");
   var_fa30b172 = getent("bridge_left", "targetname");
   var_c83a1961 = getent("bridge_right", "targetname");
-  while (!level flag::get("bridge_jitter_stop")) {
+  while(!level flag::get("bridge_jitter_stop")) {
     var_fa30b172 movez(2 * -1, 0.05);
     var_c83a1961 movez(2 * -1, 0.05);
     var_fa30b172 waittill("movedone");
@@ -165,10 +165,10 @@ function function_40ac3c12(e_player) {
   var_c83a1961 rotatepitch(90, 0.25);
   wait(0.5);
   level flag::clear("bridge_jitter_stop");
-  var_efdf0fee = getentarray("bridge_light_on", "targetname");
-  array::run_all(var_efdf0fee, & hide);
-  var_da999e54 = getentarray("bridge_light_off", "targetname");
-  array::run_all(var_da999e54, & show);
+  var_efdf0fee = getEntArray("bridge_light_on", "targetname");
+  array::run_all(var_efdf0fee, &hide);
+  var_da999e54 = getEntArray("bridge_light_off", "targetname");
+  array::run_all(var_da999e54, &show);
   exploder::kill_exploder("bridge_lights_exploder");
 }
 
@@ -191,7 +191,7 @@ function function_fce6cca8(str_side) {
   v_left = var_9439ece6.origin;
   v_right = var_7bb55377.origin;
   var_848f1155 = spawn("script_model", self.origin);
-  var_848f1155 setmodel("tag_origin");
+  var_848f1155 setModel("tag_origin");
   self playerlinkto(var_848f1155, "tag_origin");
   self notsolid();
   var_848f1155 notsolid();
@@ -214,7 +214,7 @@ function function_54227761(var_fa30b172, var_c83a1961, e_player) {
   foreach(ai_zombie in a_zombies) {
     if(ai_zombie istouching(var_fa30b172)) {
       ai_zombie thread function_d2f913f5("left");
-      if(isdefined(e_player)) {
+      if(isDefined(e_player)) {
         e_player zm_stats::increment_challenge_stat("ZOMBIE_HUNTER_KILL_TRAP");
       }
       n_count++;
@@ -236,7 +236,7 @@ function function_54227761(var_fa30b172, var_c83a1961, e_player) {
       }
     }
   }
-  if(isdefined(e_player)) {
+  if(isDefined(e_player)) {
     e_player notify("hash_f7608efe", n_kill_count);
   }
 }

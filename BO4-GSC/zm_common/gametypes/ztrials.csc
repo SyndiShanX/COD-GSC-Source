@@ -13,7 +13,6 @@
 #include scripts\zm_common\trials\zm_trial_disable_hud;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
-
 #namespace ztrials;
 
 event_handler[gametype_init] main(eventstruct) {
@@ -31,7 +30,7 @@ onstartgametype() {
   println("<dev string:x76>");
 }
 
-private event_handler[event_b72c1844] function_df05c5d(eventstruct) {
+event_handler[event_b72c1844] function_df05c5d(eventstruct) {
   if(namespace_fcd611c3::is_active() && self namespace_fcd611c3::function_26f124d8()) {
     return;
   }

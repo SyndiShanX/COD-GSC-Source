@@ -149,7 +149,7 @@ lerp_sun_direction(v_pos, n_lerp_time) {
 }
 
 jungle_stealth() {
-  vs_trigs = getentarray("visionset", "targetname");
+  vs_trigs = getEntArray("visionset", "targetname");
   array_thread(vs_trigs, ::vision_set);
   visionsetnaked("sp_angola_2_jungle_stealth", 0.5);
   setdvar("r_rimIntensity_debug", 1);
@@ -159,7 +159,7 @@ jungle_stealth() {
 }
 
 village() {
-  vs_trigs = getentarray("visionset", "targetname");
+  vs_trigs = getEntArray("visionset", "targetname");
   array_thread(vs_trigs, ::vision_set);
   visionsetnaked("sp_angola_2_village", 0.5);
   setdvar("r_rimIntensity_debug", 1);
@@ -169,7 +169,7 @@ village() {
 }
 
 jungle_escape() {
-  vs_trigs = getentarray("visionset", "targetname");
+  vs_trigs = getEntArray("visionset", "targetname");
   array_thread(vs_trigs, ::vision_set);
   visionsetnaked("sp_angola_2_jungle_escape", 0.5);
   setdvar("r_rimIntensity_debug", 1);

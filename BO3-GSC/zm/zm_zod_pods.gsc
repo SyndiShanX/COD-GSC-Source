@@ -37,7 +37,7 @@
 #namespace zm_zod_pods;
 
 function autoexec __init__sytem__() {
-  system::register("zm_zod_pods", & __init__, & __main__, undefined);
+  system::register("zm_zod_pods", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -49,7 +49,7 @@ function __init__() {
   clientfield::register("scriptmover", "pod_self_destruct", 1, 1, "counter");
   clientfield::register("toplayer", "pod_sprayer_held", 1, 1, "int");
   clientfield::register("toplayer", "pod_sprayer_hint_range", 1, 1, "int");
-  level.fungus_pods = spawnstruct();
+  level.fungus_pods = spawnStruct();
   level.fungus_pods.upgrade_odds = array(0, 0, 0, 0.25, 0.25, 0.5, 0.5, 1);
   a_table = table::load("gamedata/tables/zm/zm_zod_pods.csv", "ScriptID");
   level.fungus_pods.rewards = [];
@@ -57,19 +57,19 @@ function __init__() {
   level.fungus_pods.rewards[2] = [];
   level.fungus_pods.rewards[3] = [];
   level.fungus_pods.bonus_points_amount = 100;
-  level.bonus_points_powerup_override = & fungus_pod_bonus_points_override;
+  level.bonus_points_powerup_override = &fungus_pod_bonus_points_override;
   level.fungus_pods.debug_reward_list = [];
   wpn_none = getweapon("none");
   a_keys = getarraykeys(a_table);
-  for (i = 0; i < a_keys.size; i++) {
+  for(i = 0; i < a_keys.size; i++) {
     str_key = a_keys[i];
-    s_reward = spawnstruct();
+    s_reward = spawnStruct();
     s_reward.reward_level = a_table[str_key]["Level"];
     s_reward.type = a_table[str_key]["Type"];
     if(s_reward.type == "weapon") {
       s_reward.item = getweapon(a_table[str_key]["Item"]);
       if(s_reward.item == wpn_none) {
-        /# /
+        /
         #
         assertmsg(("" + a_table[str_key][""]) + "");
         continue;
@@ -79,7 +79,7 @@ function __init__() {
     }
     s_reward.count = a_table[str_key]["Count"];
     s_reward.chance = a_table[str_key]["Weight"];
-    if(!isdefined(level.fungus_pods.rewards[s_reward.reward_level])) {
+    if(!isDefined(level.fungus_pods.rewards[s_reward.reward_level])) {
       level.fungus_pods.rewards[s_reward.reward_level] = [];
     } else if(!isarray(level.fungus_pods.rewards[s_reward.reward_level])) {
       level.fungus_pods.rewards[s_reward.reward_level] = array(level.fungus_pods.rewards[s_reward.reward_level]);
@@ -104,7 +104,7 @@ function __main__() {
   level.fungus_pods.a_e_spawned = [];
   foreach(e_fungus_pod in level.fungus_pods.a_e_unspawned) {
     e_fungus_pod.model = util::spawn_model("tag_origin", e_fungus_pod.origin, e_fungus_pod.angles);
-    if(isdefined(e_fungus_pod.script_noteworthy) && e_fungus_pod.script_noteworthy == "active") {
+    if(isDefined(e_fungus_pod.script_noteworthy) && e_fungus_pod.script_noteworthy == "active") {
       e_fungus_pod.n_pod_level = 1;
     } else {
       e_fungus_pod.n_pod_level = 0;
@@ -116,7 +116,7 @@ function __main__() {
   a_sprayers = array::randomize(a_sprayers);
   a_chosen = [];
   foreach(s_sprayer in a_sprayers) {
-    if(isdefined(a_chosen[s_sprayer.script_int])) {
+    if(isDefined(a_chosen[s_sprayer.script_int])) {
       continue;
     }
     a_chosen[s_sprayer.script_int] = s_sprayer;
@@ -134,12 +134,12 @@ function fungus_pods_devgui() {
   adddebugcommand("");
   adddebugcommand("");
   a_keys = getarraykeys(level.fungus_pods.debug_reward_list);
-  for (i = 0; i < a_keys.size; i++) {
+  for(i = 0; i < a_keys.size; i++) {
     str_id = a_keys[i];
     adddebugcommand(((("" + str_id) + "") + str_id) + "");
   }
   s_sword_rock = struct::get("", "");
-  while (true) {
+  while(true) {
     cmd = getdvarstring("");
     if(cmd != "") {
       switch (cmd) {
@@ -187,17 +187,17 @@ function function_77d7e068() {
 
 function private pod_sprayer_pickup_msg(e_player) {
   if(e_player clientfield::get_to_player("pod_sprayer_held")) {
-    return & "";
+    return &"";
   }
-  return & "ZM_ZOD_PICKUP_SPRAYER";
+  return &"ZM_ZOD_PICKUP_SPRAYER";
 }
 
 function private pod_sprayer_think() {
-  while (true) {
+  while(true) {
     self.model = util::spawn_model("p7_zm_zod_bug_sprayer", self.origin, self.angles);
     self.model clientfield::set("pod_sprayer_glint", 1);
-    self.trigger = zm_zod_util::spawn_trigger_radius(self.origin, 50, 1, & pod_sprayer_pickup_msg);
-    while (true) {
+    self.trigger = zm_zod_util::spawn_trigger_radius(self.origin, 50, 1, &pod_sprayer_pickup_msg);
+    while(true) {
       self.trigger waittill("trigger", e_who);
       if(e_who clientfield::get_to_player("pod_sprayer_held")) {
         continue;
@@ -223,14 +223,14 @@ function private fungus_pod_think() {
   self thread fungus_pod_upgrade_think();
   self thread function_42bd572d();
   if(1) {
-    for (;;) {
+    for(;;) {
       self.trigger waittill("trigger", e_who);
       assert(self.n_pod_level > 0);
     }
-    for (;;) {
+    for(;;) {
       e_who thread function_8d53a342(0);
     }
-    if(isdefined(level.bzm_worldpaused) && level.bzm_worldpaused) {}
+    if(isDefined(level.bzm_worldpaused) && level.bzm_worldpaused) {}
     if(e_who clientfield::get_to_player("pod_sprayer_held") == 0) {}
     playsoundatposition("zmb_zod_sprayer_use", self.origin);
     e_who thread function_8d53a342(1);
@@ -250,7 +250,7 @@ function private function_8d53a342(b_success) {
 }
 
 function fungus_pod_clip_init() {
-  var_15c80043 = getentarray("fungus_pod_clip", "targetname");
+  var_15c80043 = getEntArray("fungus_pod_clip", "targetname");
   level.fungus_pods.a_e_fungus_pod_clips = array::sort_by_script_int(var_15c80043, 1);
   foreach(e_clip in level.fungus_pods.a_e_fungus_pod_clips) {
     e_clip thread fungus_pod_clip_think();
@@ -259,7 +259,7 @@ function fungus_pod_clip_init() {
 
 function fungus_pod_clip_think() {
   level endon("_zombie_game_over");
-  while (true) {
+  while(true) {
     self.origin = self.origin - vectorscale((0, 0, 1), 5000);
     level waittill(("pod_" + self.script_int) + "_hatched");
     self.origin = self.origin + vectorscale((0, 0, 1), 5000);
@@ -269,7 +269,7 @@ function fungus_pod_clip_think() {
 
 function private fungus_pod_upgrade(n_pod_level = undefined) {
   if(self.n_pod_level < 3) {
-    if(isdefined(n_pod_level)) {
+    if(isDefined(n_pod_level)) {
       self.n_pod_level = n_pod_level;
     } else {
       self.n_pod_level++;
@@ -287,20 +287,20 @@ function function_be2abe() {
 function private fungus_pod_upgrade_think() {
   self endon("harvested");
   rounds_since_upgrade = 0;
-  if(isdefined(self.zone)) {
+  if(isDefined(self.zone)) {
     zm_zonemgr::zone_wait_till_enabled(self.zone);
   }
   if(level clientfield::get("bm_superbeast")) {
     self fungus_pod_upgrade(3);
   }
-  while (true) {
+  while(true) {
     level util::waittill_any("between_round_over", "debug_pod_spawn");
     rounds_since_upgrade++;
     n_upgrade_odds = level.fungus_pods.upgrade_odds[rounds_since_upgrade];
-    if(!isdefined(n_upgrade_odds)) {
+    if(!isDefined(n_upgrade_odds)) {
       n_upgrade_odds = 1;
     } else {
-      if(isdefined(level.debug_pod_spawn_all) && level.debug_pod_spawn_all) {
+      if(isDefined(level.debug_pod_spawn_all) && level.debug_pod_spawn_all) {
         n_upgrade_odds = 1;
       } else if(n_upgrade_odds == 0) {
         continue;
@@ -319,14 +319,14 @@ function private fungus_pod_upgrade_think() {
 function private function_42bd572d() {
   self endon("harvested");
   level flag::wait_till("all_players_spawned");
-  while (true) {
+  while(true) {
     level waittill("kill_round");
     if(self.n_pod_level == 3) {
       self.model clientfield::increment("pod_harvest");
       wait(0.05);
       zm_unitrigger::unregister_unitrigger(self.trigger);
       arrayremovevalue(level.fungus_pods.a_e_spawned, self);
-      if(!isdefined(level.fungus_pods.a_e_unspawned)) {
+      if(!isDefined(level.fungus_pods.a_e_unspawned)) {
         level.fungus_pods.a_e_unspawned = [];
       } else if(!isarray(level.fungus_pods.a_e_unspawned)) {
         level.fungus_pods.a_e_unspawned = array(level.fungus_pods.a_e_unspawned);
@@ -340,23 +340,23 @@ function private function_42bd572d() {
 
 function private respawn_fungus_pods() {
   level flag::wait_till("start_zombie_round_logic");
-  for (i = 0; i < level.fungus_pods.a_e_unspawned.size; i++) {
+  for(i = 0; i < level.fungus_pods.a_e_unspawned.size; i++) {
     e_pod = level.fungus_pods.a_e_unspawned[i];
     e_pod.zone = zm_zonemgr::get_zone_from_position(e_pod.origin + vectorscale((0, 0, 1), 20), 1);
-    if(!isdefined(e_pod.zone)) {
+    if(!isDefined(e_pod.zone)) {
       println(("" + zm_zod_util::vec_to_string(e_pod.origin)) + "");
       arrayremovevalue(level.fungus_pods.a_e_unspawned, e_pod);
     }
   }
   n_pods = int(0.4 * level.fungus_pods.a_e_unspawned.size);
   spawn_fungus_pods(n_pods);
-  while (true) {
+  while(true) {
     level util::waittill_any("between_round_over", "debug_pod_spawn");
-    if(level.round_number < 4 && !level flag::get("any_player_has_pod_sprayer") && (!(isdefined(level.debug_pod_spawn_all) && level.debug_pod_spawn_all))) {
+    if(level.round_number < 4 && !level flag::get("any_player_has_pod_sprayer") && (!(isDefined(level.debug_pod_spawn_all) && level.debug_pod_spawn_all))) {
       continue;
     }
     n_pods = randomintrange(3, 6);
-    if(isdefined(level.debug_pod_spawn_all) && level.debug_pod_spawn_all) {
+    if(isDefined(level.debug_pod_spawn_all) && level.debug_pod_spawn_all) {
       n_pods = 1000;
     }
     spawn_fungus_pods(n_pods);
@@ -382,7 +382,7 @@ function harvest_fungus_pod(e_harvester) {
   var_68a89987 = 0;
   foreach(s_reward in level.fungus_pods.rewards[var_785a5f87]) {
     str_forced = getdvarstring("");
-    if(isdefined(str_forced) && str_forced != "") {
+    if(isDefined(str_forced) && str_forced != "") {
       s_reward_forced = 1;
       s_reward = level.fungus_pods.debug_reward_list[str_forced];
       setdvar("", "");
@@ -390,11 +390,11 @@ function harvest_fungus_pod(e_harvester) {
     if(s_reward.type == "weapon") {
       s_reward.do_not_consider = function_b0138b1(s_reward.item);
     }
-    if(isdefined(s_reward.do_not_consider) && s_reward.do_not_consider) {
+    if(isDefined(s_reward.do_not_consider) && s_reward.do_not_consider) {
       continue;
     }
     n_cumulation = n_cumulation + s_reward.chance;
-    if(n_cumulation >= n_roll || (isdefined(s_reward_forced) && s_reward_forced)) {
+    if(n_cumulation >= n_roll || (isDefined(s_reward_forced) && s_reward_forced)) {
       var_68a89987 = 1;
       switch (s_reward.type) {
         case "craftable": {
@@ -429,15 +429,15 @@ function harvest_fungus_pod(e_harvester) {
           break;
         }
         case "parasite": {
-          if(isdefined(e_harvester)) {
+          if(isDefined(e_harvester)) {
             array::add(level.a_wasp_priority_targets, e_harvester);
           }
-          s_temp = spawnstruct();
+          s_temp = spawnStruct();
           s_temp.origin = self.origin + vectorscale((0, 0, 1), 30);
           var_b20468d0 = zm_ai_wasp::special_wasp_spawn(1, s_temp, 32, 32, 1, 1, 1);
           if(!ispointinnavvolume(var_b20468d0.origin, "navvolume_small")) {
             v_nearest_navmesh_point = var_b20468d0 getclosestpointonnavvolume(s_temp.origin, 100);
-            if(isdefined(v_nearest_navmesh_point)) {
+            if(isDefined(v_nearest_navmesh_point)) {
               var_b20468d0.origin = v_nearest_navmesh_point;
             }
           }
@@ -445,10 +445,10 @@ function harvest_fungus_pod(e_harvester) {
         }
         case "powerup": {
           str_item = s_reward.item;
-          while (!isdefined(str_item) || (str_item === "full_ammo" && var_785a5f87 != 3)) {
+          while(!isDefined(str_item) || (str_item === "full_ammo" && var_785a5f87 != 3)) {
             str_item = zm_powerups::get_valid_powerup();
           }
-          if(isdefined(s_reward.count) && str_item == "bonus_points_team") {
+          if(isDefined(s_reward.count) && str_item == "bonus_points_team") {
             level.fungus_pods.bonus_points_amount = s_reward.count;
           }
           zm_powerups::specific_powerup_drop(str_item, self.origin, undefined, undefined, 1);
@@ -460,9 +460,9 @@ function harvest_fungus_pod(e_harvester) {
           break;
         }
         case "zombie": {
-          s_temp = spawnstruct();
+          s_temp = spawnStruct();
           s_temp.origin = function_c9466e61(self.origin, 20);
-          if(!isdefined(s_temp.origin)) {
+          if(!isDefined(s_temp.origin)) {
             s_temp.origin = self.origin;
           }
           s_temp.script_noteworthy = "riser_location";
@@ -488,7 +488,7 @@ function harvest_fungus_pod(e_harvester) {
     zm_powerups::specific_powerup_drop(str_item, self.origin, undefined, undefined, 1);
   }
   arrayremovevalue(level.fungus_pods.a_e_spawned, self);
-  if(!isdefined(level.fungus_pods.a_e_unspawned)) {
+  if(!isDefined(level.fungus_pods.a_e_unspawned)) {
     level.fungus_pods.a_e_unspawned = [];
   } else if(!isarray(level.fungus_pods.a_e_unspawned)) {
     level.fungus_pods.a_e_unspawned = array(level.fungus_pods.a_e_unspawned);
@@ -498,11 +498,11 @@ function harvest_fungus_pod(e_harvester) {
 
 function function_c9466e61(v_pos, radius) {
   v_origin = getclosestpointonnavmesh(v_pos, radius);
-  if(!isdefined(v_origin)) {
+  if(!isDefined(v_origin)) {
     e_player = zm_utility::get_closest_player(v_pos);
     v_origin = getclosestpointonnavmesh(e_player.origin, radius);
   }
-  if(!isdefined(v_origin)) {
+  if(!isDefined(v_origin)) {
     v_origin = v_pos;
   }
   return v_origin;
@@ -511,7 +511,7 @@ function function_c9466e61(v_pos, radius) {
 function function_92f587b4() {
   self endon("bottle_collected");
   wait(15);
-  for (i = 0; i < 40; i++) {
+  for(i = 0; i < 40; i++) {
     if(i % 2) {
       self.mdl_shield_recharge ghost();
     } else {
@@ -533,12 +533,12 @@ function function_92f587b4() {
 
 function pod_player_msg(e_player) {
   if(e_player clientfield::get_to_player("pod_sprayer_held")) {
-    return & "ZM_ZOD_POD_HARVEST";
+    return &"ZM_ZOD_POD_HARVEST";
   }
   if(e_player clientfield::get_to_player("pod_sprayer_hint_range") == 0) {
     e_player thread function_3f5779c4();
   }
-  return & "";
+  return &"";
 }
 
 function function_3f5779c4() {
@@ -554,9 +554,9 @@ function spawn_fungus_pods(n_pods) {
   }
   a_available = [];
   foreach(e_pod in level.fungus_pods.a_e_unspawned) {
-    if(isdefined(e_pod.harvested_in_round)) {
+    if(isDefined(e_pod.harvested_in_round)) {
       n_rounds_since_spawn = level.round_number - e_pod.harvested_in_round;
-      if(n_rounds_since_spawn < 2 && (!(isdefined(level.debug_pod_spawn_all) && level.debug_pod_spawn_all))) {
+      if(n_rounds_since_spawn < 2 && (!(isDefined(level.debug_pod_spawn_all) && level.debug_pod_spawn_all))) {
         continue;
       }
     }
@@ -571,7 +571,7 @@ function spawn_fungus_pods(n_pods) {
     if(b_skip_pod) {
       continue;
     }
-    if(!isdefined(a_available)) {
+    if(!isDefined(a_available)) {
       a_available = [];
     } else if(!isarray(a_available)) {
       a_available = array(a_available);
@@ -580,15 +580,15 @@ function spawn_fungus_pods(n_pods) {
   }
   a_available = array::randomize(a_available);
   a_spawned_zones = [];
-  for (i = 0; i < n_pods && a_available.size > 0; i++) {
+  for(i = 0; i < n_pods && a_available.size > 0; i++) {
     n_index = a_available.size - 1;
     s_pod = a_available[n_index];
-    if(n_pods <= 5 && isdefined(s_pod.zone) && isdefined(a_spawned_zones[s_pod.zone])) {
+    if(n_pods <= 5 && isDefined(s_pod.zone) && isDefined(a_spawned_zones[s_pod.zone])) {
       continue;
     }
     arrayremovevalue(level.fungus_pods.a_e_unspawned, s_pod);
     arrayremoveindex(a_available, n_index);
-    if(!isdefined(level.fungus_pods.a_e_spawned)) {
+    if(!isDefined(level.fungus_pods.a_e_spawned)) {
       level.fungus_pods.a_e_spawned = [];
     } else if(!isarray(level.fungus_pods.a_e_spawned)) {
       level.fungus_pods.a_e_spawned = array(level.fungus_pods.a_e_spawned);
@@ -599,8 +599,8 @@ function spawn_fungus_pods(n_pods) {
     s_pod.model clientfield::set("update_fungus_pod_level", s_pod.n_pod_level);
     s_pod thread function_e1065706();
     s_pod thread fungus_pod_think();
-    if(isdefined(s_pod.zone)) {
-      if(!isdefined(a_spawned_zones[s_pod.zone])) {
+    if(isDefined(s_pod.zone)) {
+      if(!isDefined(a_spawned_zones[s_pod.zone])) {
         a_spawned_zones[s_pod.zone] = 0;
       }
       a_spawned_zones[s_pod.zone]++;
@@ -610,7 +610,7 @@ function spawn_fungus_pods(n_pods) {
 
 function function_e1065706() {
   wait(getanimlength("p7_fxanim_zm_zod_fungus_pod_base_birth_anim"));
-  self.trigger = zm_zod_util::spawn_trigger_radius(self.origin + (anglestoup(self.angles) * 8), 50, 1, & pod_player_msg);
+  self.trigger = zm_zod_util::spawn_trigger_radius(self.origin + (anglestoup(self.angles) * 8), 50, 1, &pod_player_msg);
   self notify("hash_e446a51c");
 }
 
@@ -628,7 +628,7 @@ function function_b0138b1(w_weapon) {
   var_272e7943 = zm_weapons::get_base_weapon(w_weapon);
   players = getplayers();
   foreach(player in players) {
-    if(!isdefined(player) || !isalive(player)) {
+    if(!isDefined(player) || !isalive(player)) {
       continue;
     }
     if(player zm_weapons::has_weapon_or_upgrade(var_272e7943)) {
@@ -649,15 +649,15 @@ function dig_up_weapon(e_digger, wpn_to_spawn) {
   m_weapon endon("dig_up_weapon_timed_out");
   m_weapon.trigger = zm_zod_util::spawn_trigger_radius(v_spawnpt, 100, 1);
   m_weapon.trigger.wpn = wpn_to_spawn;
-  m_weapon.trigger.prompt_and_visibility_func = & weapon_trigger_update_prompt;
+  m_weapon.trigger.prompt_and_visibility_func = &weapon_trigger_update_prompt;
   m_weapon.trigger waittill("trigger", player);
   m_weapon.trigger notify("weapon_grabbed");
   m_weapon.trigger thread swap_weapon(wpn_to_spawn, player);
-  if(isdefined(m_weapon.trigger)) {
+  if(isDefined(m_weapon.trigger)) {
     zm_unitrigger::unregister_unitrigger(m_weapon.trigger);
     m_weapon.trigger = undefined;
   }
-  if(isdefined(m_weapon)) {
+  if(isDefined(m_weapon)) {
     m_weapon delete();
   }
   if(player != e_digger) {
@@ -685,7 +685,7 @@ function swap_weapon(wpn_new, e_player) {
 
 function take_old_weapon_and_give_new(current_weapon, weapon) {
   a_weapons = self getweaponslistprimaries();
-  if(isdefined(a_weapons) && a_weapons.size >= zm_utility::get_player_weapon_limit(self)) {
+  if(isDefined(a_weapons) && a_weapons.size >= zm_utility::get_player_weapon_limit(self)) {
     self takeweapon(current_weapon);
   }
   var_7b9ca68 = self zm_weapons::give_build_kit_weapon(weapon);
@@ -699,11 +699,11 @@ function timer_til_despawn(v_float, n_dist) {
   self movez(n_dist, putbacktime, putbacktime * 0.5);
   self waittill("movedone");
   self notify("dig_up_weapon_timed_out");
-  if(isdefined(self.trigger)) {
+  if(isDefined(self.trigger)) {
     zm_unitrigger::unregister_unitrigger(self.trigger);
     self.trigger = undefined;
   }
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     self delete();
   }
 }
@@ -713,16 +713,16 @@ function fungus_pod_bonus_points_override() {
 }
 
 function normalize_reward_chances() {
-  for (i = 1; i <= 3; i++) {
+  for(i = 1; i <= 3; i++) {
     n_total = 0;
     foreach(reward in level.fungus_pods.rewards[i]) {
-      if(!(isdefined(reward.do_not_consider) && reward.do_not_consider)) {
+      if(!(isDefined(reward.do_not_consider) && reward.do_not_consider)) {
         n_total = n_total + float(reward.chance);
       }
     }
     assert(reward.chance > 0);
     foreach(reward in level.fungus_pods.rewards[i]) {
-      if(!(isdefined(reward.do_not_consider) && reward.do_not_consider)) {
+      if(!(isDefined(reward.do_not_consider) && reward.do_not_consider)) {
         reward.chance = (reward.chance / n_total) * 100;
       }
     }
@@ -735,7 +735,7 @@ function function_2947f395() {
     pod.buff = 0;
     pod.var_70ac16f8 = 0;
     zm_unitrigger::unregister_unitrigger(pod.trigger);
-    if(isdefined(self.e_fx_origin)) {
+    if(isDefined(self.e_fx_origin)) {
       pod.e_fx_origin delete();
     }
     arrayremovevalue(level.fungus_pods.spawned, self);

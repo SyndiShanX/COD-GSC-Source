@@ -16,8 +16,8 @@ checkforlevelprogressionchallenges() {
   maps\mp\_utility::gameflagwait("prematch_done");
   var_0 = undefined;
 
-  while (!isdefined(var_0)) {
-    if(!isdefined(self)) {
+  while(!isDefined(var_0)) {
+    if(!isDefined(self)) {
       return;
     }
     if(maps\mp\_utility::invirtuallobby()) {
@@ -30,22 +30,22 @@ checkforlevelprogressionchallenges() {
   var_1 = int((var_0 + 1) / 50);
 
   if(var_1 > 1) {
-    for (var_2 = var_1; var_2 > 1; var_2--) {
+    for(var_2 = var_1; var_2 > 1; var_2--) {
       var_3 = var_2 * 50;
       var_4 = "ch_" + var_3 + "_paragon";
       var_5 = self.challengedata[var_4];
 
-      if(isdefined(var_5) && var_5 == 1)
+      if(isDefined(var_5) && var_5 == 1)
         maps\mp\gametypes\_missions::processchallenge(var_4);
     }
   }
 }
 
 onplayerconnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connected", var_0);
 
-    if(!isdefined(var_0.pers["stats"]))
+    if(!isDefined(var_0.pers["stats"]))
       var_0.pers["stats"] = [];
 
     var_0.stats = var_0.pers["stats"];
@@ -153,16 +153,16 @@ initawards() {
 }
 
 initstataward(var_0, var_1, var_2, var_3, var_4) {
-  level.awards[var_0] = spawnstruct();
+  level.awards[var_0] = spawnStruct();
   level.awards[var_0].defaultvalue = var_1;
 
-  if(isdefined(var_2))
+  if(isDefined(var_2))
     level.awards[var_0].process = var_2;
 
-  if(isdefined(var_3))
+  if(isDefined(var_3))
     level.awards[var_0].var1 = var_3;
 
-  if(isdefined(var_4))
+  if(isDefined(var_4))
     level.awards[var_0].var2 = var_4;
 }
 
@@ -225,30 +225,28 @@ assignawards() {
   }
 
   foreach(var_8, var_4 in level.awards) {
-    if(!isdefined(level.awards[var_8].process)) {
+    if(!isDefined(level.awards[var_8].process)) {
       continue;
     }
     var_5 = level.awards[var_8].process;
     var_6 = level.awards[var_8].var1;
     var_7 = level.awards[var_8].var2;
 
-    if(isdefined(var_6) && isdefined(var_7)) {
+    if(isDefined(var_6) && isDefined(var_7)) {
       [
         [var_5]
       ](var_8, var_6, var_7);
       continue;
     }
 
-    if(isdefined(var_6)) {
+    if(isDefined(var_6)) {
       [
         [var_5]
       ](var_8, var_6);
       continue;
     }
 
-    [
-      [var_5]
-    ](var_8);
+    [[var_5]](var_8);
   }
 }
 
@@ -270,14 +268,14 @@ giveaward(var_0) {
 
   var_7 = 0;
 
-  for (var_8 = 0; var_8 < 3; var_8++) {
+  for(var_8 = 0; var_8 < 3; var_8++) {
     if(self.recentawards[var_8] == var_0)
       var_7 = 1;
   }
 
   var_9 = int(tablelookup("mp\awardTable.csv", 1, var_0, 0));
 
-  if(var_7 == 0 && isdefined(var_9) && var_9 == 1 && var_1 != 0) {
+  if(var_7 == 0 && isDefined(var_9) && var_9 == 1 && var_1 != 0) {
     self.recentawards[2] = self.recentawards[1];
     self.recentawards[1] = self.recentawards[0];
     self.recentawards[0] = var_0;
@@ -321,7 +319,7 @@ getformattedvalue(var_0, var_1) {
 
 highestwins(var_0, var_1) {
   foreach(var_3 in level.players) {
-    if(var_3 maps\mp\_utility::rankingenabled() && var_3 statvaluechanged(var_0) && (!isdefined(var_1) || var_3 maps\mp\_utility::getplayerstat(var_0) >= var_1)) {
+    if(var_3 maps\mp\_utility::rankingenabled() && var_3 statvaluechanged(var_0) && (!isDefined(var_1) || var_3 maps\mp\_utility::getplayerstat(var_0) >= var_1)) {
       var_3 giveaward(var_0);
       var_3 setpersonalbestifgreater(var_0);
     }
@@ -330,7 +328,7 @@ highestwins(var_0, var_1) {
 
 lowestwins(var_0, var_1) {
   foreach(var_3 in level.players) {
-    if(var_3 maps\mp\_utility::rankingenabled() && var_3 statvaluechanged(var_0) && (!isdefined(var_1) || var_3 maps\mp\_utility::getplayerstat(var_0) <= var_1)) {
+    if(var_3 maps\mp\_utility::rankingenabled() && var_3 statvaluechanged(var_0) && (!isDefined(var_1) || var_3 maps\mp\_utility::getplayerstat(var_0) <= var_1)) {
       var_3 giveaward(var_0);
       var_3 setpersonalbestiflower(var_0);
     }

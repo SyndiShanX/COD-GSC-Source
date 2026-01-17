@@ -54,7 +54,7 @@ function robot_defend_main(b_starting) {
   level thread function_21c12b92();
   level.var_27b46342 = arraycombine(getaiteamarray("allies"), level.activeplayers, 0, 0);
   level flag::wait_till("pod_go");
-  if(isdefined(level.bzm_prologuedialogue6_2callback)) {
+  if(isDefined(level.bzm_prologuedialogue6_2callback)) {
     level thread[[level.bzm_prologuedialogue6_2callback]]();
   }
   level flag::wait_till("pod_gone");
@@ -73,7 +73,7 @@ function function_ae9ce6f0() {
   self endon("disconnect");
   self endon("hash_99343b5f");
   level endon("hash_9d83ef5");
-  while (true) {
+  while(true) {
     self waittill("weapon_fired", wpn_current);
     if(wpn_current.weapclass !== "pistol") {
       self.var_c34702c6 = 1;
@@ -93,7 +93,7 @@ function function_bfce7c2a() {
 
 function function_fe88fdb1() {
   foreach(player in level.activeplayers) {
-    if(!(isdefined(player.var_c34702c6) && player.var_c34702c6)) {
+    if(!(isDefined(player.var_c34702c6) && player.var_c34702c6)) {
       namespace_61c634f2::function_51c49e5(player);
     }
   }
@@ -122,7 +122,7 @@ function function_9716eddb() {
   level endon("hash_2e90f258");
   var_fccc406f = struct::get_array("rpg_begin");
   var_90911853 = getweapon("launcher_standard_magic_bullet");
-  while (true) {
+  while(true) {
     foreach(s_rpg in var_fccc406f) {
       v_offset = (randomintrange(-100, 100), randomintrange(-100, 100), randomintrange(-100, 100));
       magicbullet(var_90911853, s_rpg.origin, struct::get(s_rpg.target).origin + v_offset);
@@ -145,7 +145,7 @@ function function_d8ccdb23() {
 }
 
 function function_637fae36() {
-  var_27606155 = getentarray("trigger_ob_defend", "targetname");
+  var_27606155 = getEntArray("trigger_ob_defend", "targetname");
   foreach(var_a57773f5 in var_27606155) {
     var_a57773f5 triggerenable(1);
   }
@@ -164,7 +164,7 @@ function function_a4e4e77d() {
   }
   foreach(player in level.players) {
     player shellshock("default", 5);
-    player.overrideplayerdamage = & function_947bfdac;
+    player.overrideplayerdamage = &function_947bfdac;
   }
 }
 
@@ -213,7 +213,7 @@ function spawn_handler_main() {
 function function_633f337() {
   level flag::wait_till("minister_pos");
   spawn_manager::enable("sm_robot_defend_tower");
-  util::delay(5, undefined, & spawn_manager::disable, "sm_robot_defend_tower");
+  util::delay(5, undefined, &spawn_manager::disable, "sm_robot_defend_tower");
   wait(5);
   spawn_manager::enable("sm_apc_reinforce");
   level flag::wait_till("start_defend_countdown");
@@ -257,17 +257,17 @@ function function_ff1a7b45() {
   var_413044a1 = getent("defend_truck_4_vh", "targetname");
   var_977a939e = vh_truck3 vehicle::get_rider("gunner1");
   var_d96e2f91 = var_413044a1 vehicle::get_rider("gunner1");
-  while (isalive(var_977a939e) || isalive(var_d96e2f91)) {
+  while(isalive(var_977a939e) || isalive(var_d96e2f91)) {
     wait(1);
   }
   level flag::set("shift_defend");
 }
 
 function function_2d1c6af3() {
-  self setcandamage(0);
+  self setCanDamage(0);
   self waittill("reached_end_node");
   wait(5);
-  self setcandamage(1);
+  self setCanDamage(1);
 }
 
 function function_40fd81b() {
@@ -278,9 +278,9 @@ function function_40fd81b() {
   wait(randomfloatrange(2, 3.5));
   var_90911853 = getweapon("launcher_standard_magic_bullet");
   var_f8e04bb3 = self gettagorigin("tag_flash");
-  while (true) {
+  while(true) {
     var_5aebca26 = level.var_27b46342[randomint(level.var_27b46342.size)];
-    if(isdefined(var_5aebca26)) {
+    if(isDefined(var_5aebca26)) {
       v_offset = (randomintrange(-100, 100), randomintrange(-100, 100), randomintrange(90, 100));
       e_target = util::spawn_model("tag_origin", var_5aebca26.origin + v_offset);
       e_target.health = 100;
@@ -311,7 +311,7 @@ function function_54454538() {
   var_90911853 = getweapon("launcher_standard_magic_bullet");
   var_f8e04bb3 = self gettagorigin("tag_flash");
   wait(1);
-  if(!isdefined(var_f8e04bb3)) {
+  if(!isDefined(var_f8e04bb3)) {
     var_f8e04bb3 = self.origin;
   }
   e_projectile = magicbullet(var_90911853, var_f8e04bb3, var_5aebca26.origin);
@@ -462,7 +462,7 @@ function function_9d374() {
   self cp_prologue_util::set_robot_unarmed();
   s_goal = struct::get("pod_pos");
   a_v_points = [];
-  while (a_v_points.size == 0) {
+  while(a_v_points.size == 0) {
     a_v_points = util::positionquery_pointarray(s_goal.origin, 64, 400, 70, 40);
     wait(0.25);
   }
@@ -495,9 +495,9 @@ function allied_ai_movements() {
 }
 
 function function_f76b808e() {
-  level scene::add_scene_func("cin_pro_17_02_robotdefend_vign_hookup_minsterlloop", & function_4dc9c2f9, "play");
-  level scene::add_scene_func("cin_pro_17_02_robotdefend_vign_hookup_khalilloop", & function_4e2b6779, "play");
-  level scene::add_scene_func("cin_pro_17_02_robotdefend_vign_hookup_hendricksloop", & function_8600d87b, "play");
+  level scene::add_scene_func("cin_pro_17_02_robotdefend_vign_hookup_minsterlloop", &function_4dc9c2f9, "play");
+  level scene::add_scene_func("cin_pro_17_02_robotdefend_vign_hookup_khalilloop", &function_4e2b6779, "play");
+  level scene::add_scene_func("cin_pro_17_02_robotdefend_vign_hookup_hendricksloop", &function_8600d87b, "play");
   level thread scene::play("cin_pro_17_02_robotdefend_vign_hookup_minsterlloop");
   level thread scene::play("cin_pro_17_02_robotdefend_vign_hookup_khalilloop");
   level thread scene::play("cin_pro_17_02_robotdefend_vign_hookup_hendricksloop");
@@ -571,7 +571,7 @@ function function_a950a3ec() {
     self thread function_cd56c2cf(player);
   }
   level.var_fc71d8f = 0;
-  while (level.var_fc71d8f < level.players.size) {
+  while(level.var_fc71d8f < level.players.size) {
     wait(0.5);
   }
   level flag::set("goto_pod");
@@ -579,7 +579,7 @@ function function_a950a3ec() {
 
 function function_cd56c2cf(player) {
   level endon("hash_2ef4a1f0");
-  while (true) {
+  while(true) {
     self waittill("trigger", e_entity);
     if(e_entity == player) {
       level.var_fc71d8f++;
@@ -589,8 +589,8 @@ function function_cd56c2cf(player) {
 
 function pod_handler() {
   level.e_blocker = getent("brush_pod", "targetname");
-  vehicle::add_spawn_function("fxanim_vtol_pod", & function_de0720c1);
-  vehicle::add_spawn_function("fxanim_pod", & function_52d9a509);
+  vehicle::add_spawn_function("fxanim_vtol_pod", &function_de0720c1);
+  vehicle::add_spawn_function("fxanim_pod", &function_52d9a509);
   level thread scene::play("p7_fxanim_cp_prologue_vtol_pod_drop_off_bundle");
   level thread function_45756e82();
   level thread function_aba4324();
@@ -635,15 +635,15 @@ function function_2063548d() {
   level flag::wait_till("pod_loaded");
   objectives::complete("cp_level_prologue_defend_pod");
   objectives::set("cp_level_prologue_get_out_alive");
-  level.activeplayers[0] playloopsound("evt_outro_tinnitus_lp", 4);
+  level.activeplayers[0] playLoopSound("evt_outro_tinnitus_lp", 4);
   level thread function_e7a97be1();
-  array::run_all(level.players, & util::set_low_ready, 1);
+  array::run_all(level.players, &util::set_low_ready, 1);
   function_657fb683();
   level thread util::screen_fade_in(1, "black", "cinematic_fader");
   level flag::set("pod_go");
   level thread function_f7af5999();
   function_a43cf0f6();
-  scene::add_scene_func("cin_pro_17_02_robotdefend_vign_hookup_player", & function_6e3b3bec, "play");
+  scene::add_scene_func("cin_pro_17_02_robotdefend_vign_hookup_player", &function_6e3b3bec, "play");
   level thread scene::play("cin_pro_17_02_robotdefend_vign_hookup_player");
   level util::clientnotify("sndOS1");
   level waittill("hash_7176ec93");
@@ -683,7 +683,7 @@ function function_a43cf0f6() {
 function function_c794d3c2(n_height = 300, var_7ad049d6 = 100, b_do_rumble = 1, var_688fa2d2 = 1) {
   self endon("death");
   self enableinvulnerability();
-  v_player_fwd = anglestoforward(self.angles);
+  v_player_fwd = anglesToForward(self.angles);
   var_652493a5 = v_player_fwd * var_7ad049d6;
   var_f720f8d7 = (self.origin + (0, 0, n_height)) + var_652493a5;
   var_f9f8910c = self.origin + var_652493a5;
@@ -746,7 +746,7 @@ function function_aba4324() {
 function function_3df1f906(s_rpg) {
   self endon("death");
   var_90911853 = getweapon("launcher_standard");
-  for (i = 0; i < 8; i++) {
+  for(i = 0; i < 8; i++) {
     v_offset = (randomintrange(-1500, -1300), randomintrange(-100, 100), randomintrange(-100, 100));
     magicbullet(var_90911853, s_rpg.origin, self.origin + v_offset);
     wait(randomfloatrange(1, 2));
@@ -765,7 +765,7 @@ function function_94856821() {
   n_dist_sq = 902500;
   s_pos = struct::get("pod_pos");
   a_e_targets = getaiarchetypearray("robot");
-  for (i = 0; i < a_e_targets.size; i++) {
+  for(i = 0; i < a_e_targets.size; i++) {
     if(distance2dsquared(s_pos.origin, a_e_targets[i].origin) <= n_dist_sq) {
       if(isalive(a_e_targets[i])) {
         a_e_targets[i] ai::set_behavior_attribute("force_crawler", "gib_legs");
@@ -776,14 +776,14 @@ function function_94856821() {
 
 function function_34d9d6a7() {
   level waittill("hash_2ac435dc");
-  level scene::add_scene_func("p7_fxanim_cp_prologue_tower_vtol_collapse_v2_bundle", & function_4f43b0cc);
+  level scene::add_scene_func("p7_fxanim_cp_prologue_tower_vtol_collapse_v2_bundle", &function_4f43b0cc);
   level thread scene::play("p7_fxanim_cp_prologue_tower_vtol_collapse_v2_bundle");
   exploder::exploder_stop("light_exploder_defend_radio_tower");
   var_28ca079b = 360000;
   var_ace21635 = 1000000;
   s_pos = struct::get("pod_pos");
   a_e_targets = getaiteamarray("axis");
-  for (i = 0; i < a_e_targets.size; i++) {
+  for(i = 0; i < a_e_targets.size; i++) {
     if(isalive(a_e_targets[i])) {
       n_dist = distance2dsquared(s_pos.origin, a_e_targets[i].origin);
       if(a_e_targets[i].archetype === "human" && n_dist >= var_28ca079b && n_dist <= var_ace21635) {
@@ -821,29 +821,29 @@ function function_c0fa2edc() {
 }
 
 function setup_defend_spawn_funcs() {
-  vehicle::add_spawn_function("defend_truck_1", & function_45c35350);
-  vehicle::add_spawn_function("defend_truck_2", & function_45c35350);
-  vehicle::add_spawn_function("defend_truck_3", & function_b2d7edae);
-  vehicle::add_spawn_function("defend_truck_4", & function_b2d7edae);
-  vehicle::add_spawn_function("defend_apc_2", & function_c3228115, 1, 2);
-  vehicle::add_spawn_function("defend_apc_3", & function_c3228115, 1, 2);
-  spawner::add_spawn_function_group("ridge_guy", "targetname", & function_64dd8530);
-  spawner::add_spawn_function_group("apc3_crew", "targetname", & function_4b1fb716);
-  spawner::add_spawn_function_group("apc_reinforce", "targetname", & function_4b1fb716);
-  spawner::add_spawn_function_group("group_defend_1", "script_aigroup", & function_96551790);
-  spawner::add_spawn_function_group("rpg_intro", "script_aigroup", & function_54454538);
-  spawner::add_spawn_function_group("group_apc", "script_aigroup", & function_b9081af);
-  spawner::add_spawn_function_group("group_reinforce_1", "script_aigroup", & function_7f708ee);
-  spawner::add_spawn_function_group("group_reinforce_2", "script_aigroup", & function_bf932181);
-  spawner::add_spawn_function_group("group_reinforce_3", "script_aigroup", & function_7f708ee);
-  spawner::add_spawn_function_group("group_defend_2", "script_aigroup", & function_b9081af);
-  spawner::add_spawn_function_group("group_defend_3", "script_aigroup", & function_b9081af);
-  spawner::add_spawn_function_group("group_pod_right", "script_aigroup", & function_b9081af);
-  spawner::add_spawn_function_group("group_pod_left", "script_aigroup", & function_b9081af);
-  spawner::add_spawn_function_group("group_pod_robot", "script_aigroup", & function_98ae774);
-  spawner::add_spawn_function_group("defend_rpg", "targetname", & function_40fd81b);
-  spawner::add_spawn_function_group("robot_swarm", "targetname", & function_9d374);
-  spawner::add_spawn_function_group("group_tower_defender", "script_aigroup", & function_7f708ee);
+  vehicle::add_spawn_function("defend_truck_1", &function_45c35350);
+  vehicle::add_spawn_function("defend_truck_2", &function_45c35350);
+  vehicle::add_spawn_function("defend_truck_3", &function_b2d7edae);
+  vehicle::add_spawn_function("defend_truck_4", &function_b2d7edae);
+  vehicle::add_spawn_function("defend_apc_2", &function_c3228115, 1, 2);
+  vehicle::add_spawn_function("defend_apc_3", &function_c3228115, 1, 2);
+  spawner::add_spawn_function_group("ridge_guy", "targetname", &function_64dd8530);
+  spawner::add_spawn_function_group("apc3_crew", "targetname", &function_4b1fb716);
+  spawner::add_spawn_function_group("apc_reinforce", "targetname", &function_4b1fb716);
+  spawner::add_spawn_function_group("group_defend_1", "script_aigroup", &function_96551790);
+  spawner::add_spawn_function_group("rpg_intro", "script_aigroup", &function_54454538);
+  spawner::add_spawn_function_group("group_apc", "script_aigroup", &function_b9081af);
+  spawner::add_spawn_function_group("group_reinforce_1", "script_aigroup", &function_7f708ee);
+  spawner::add_spawn_function_group("group_reinforce_2", "script_aigroup", &function_bf932181);
+  spawner::add_spawn_function_group("group_reinforce_3", "script_aigroup", &function_7f708ee);
+  spawner::add_spawn_function_group("group_defend_2", "script_aigroup", &function_b9081af);
+  spawner::add_spawn_function_group("group_defend_3", "script_aigroup", &function_b9081af);
+  spawner::add_spawn_function_group("group_pod_right", "script_aigroup", &function_b9081af);
+  spawner::add_spawn_function_group("group_pod_left", "script_aigroup", &function_b9081af);
+  spawner::add_spawn_function_group("group_pod_robot", "script_aigroup", &function_98ae774);
+  spawner::add_spawn_function_group("defend_rpg", "targetname", &function_40fd81b);
+  spawner::add_spawn_function_group("robot_swarm", "targetname", &function_9d374);
+  spawner::add_spawn_function_group("group_tower_defender", "script_aigroup", &function_7f708ee);
 }
 
 function background_effects() {
@@ -917,7 +917,7 @@ function vo_end() {
 }
 
 function function_947bfdac(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, modelindex, psoffsettime, vsurfacenormal) {
-  if(isdefined(weapon) && isdefined(weapon.name)) {
+  if(isDefined(weapon) && isDefined(weapon.name)) {
     if(weapon.name == "turret_bo3_mil_macv_gunner3" || weapon.name == "turret_bo3_mil_macv_gunner4") {
       idamage = idamage * 0.05;
     }
@@ -928,7 +928,7 @@ function function_947bfdac(einflictor, eattacker, idamage, idflags, smeansofdeat
 function function_45756e82(var_1fd9b48b = "chicken_zone") {
   level endon("robot_defend_done");
   var_e512db80 = getent(var_1fd9b48b + "_trigger", "targetname");
-  while (true) {
+  while(true) {
     var_e512db80 waittill("trigger", e_who);
     e_who function_d311c75a(var_1fd9b48b);
   }
@@ -945,15 +945,15 @@ function function_d311c75a(var_1fd9b48b) {
   var_9a93fef1 = struct::get_array(var_1fd9b48b + "_src2");
   a_s_targets = struct::get_array(str_target_name, "targetname");
   var_60057f63 = getweapon("launcher_standard");
-  while (true) {
+  while(true) {
     var_51b841d8 = array::random(var_9a93fef1);
     magicbullet(var_60057f63, var_51b841d8.origin, self.origin);
-    for (i = 0; i < 3; i++) {
+    for(i = 0; i < 3; i++) {
       function_e78f61a0(var_60057f63, var_592faea1, a_s_targets);
       wait(1);
     }
     wait(1);
-    for (i = 0; i < 4; i++) {
+    for(i = 0; i < 4; i++) {
       var_55ad5a1e = array::random(var_592faea1);
       magicbullet(var_60057f63, var_55ad5a1e.origin, self.origin);
       wait(1);

@@ -9,32 +9,32 @@
 #namespace spectating;
 
 function autoexec __init__sytem__() {
-  system::register("spectating", & __init__, undefined, undefined);
+  system::register("spectating", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype( & init);
-  callback::on_spawned( & set_permissions);
-  callback::on_joined_team( & set_permissions_for_machine);
-  callback::on_joined_spectate( & set_permissions_for_machine);
+  callback::on_start_gametype(&init);
+  callback::on_spawned(&set_permissions);
+  callback::on_joined_team(&set_permissions_for_machine);
+  callback::on_joined_spectate(&set_permissions_for_machine);
 }
 
 function init() {
   foreach(team in level.teams) {
-    level.spectateoverride[team] = spawnstruct();
+    level.spectateoverride[team] = spawnStruct();
   }
 }
 
 function update_settings() {
   level endon("game_ended");
-  for (index = 0; index < level.players.size; index++) {
+  for(index = 0; index < level.players.size; index++) {
     level.players[index] set_permissions();
   }
 }
 
 function get_splitscreen_team() {
-  for (index = 0; index < level.players.size; index++) {
-    if(!isdefined(level.players[index])) {
+  for(index = 0; index < level.players.size; index++) {
+    if(!isDefined(level.players[index])) {
       continue;
     }
     if(level.players[index] == self) {
@@ -52,8 +52,8 @@ function get_splitscreen_team() {
 }
 
 function other_local_player_still_alive() {
-  for (index = 0; index < level.players.size; index++) {
-    if(!isdefined(level.players[index])) {
+  for(index = 0; index < level.players.size; index++) {
+    if(!isDefined(level.players[index])) {
       continue;
     }
     if(level.players[index] == self) {
@@ -123,7 +123,7 @@ function set_permissions() {
         self allowspectateteam("freelook", 0);
         self allowspectateteam("localplayers", 1);
       } else {
-        if(isdefined(team) && isdefined(level.teams[team])) {
+        if(isDefined(team) && isDefined(level.teams[team])) {
           self allowspectateteam(team, 1);
           self allow_all_teams_except(team, 0);
           self allowspectateteam("freelook", 0);
@@ -146,11 +146,11 @@ function set_permissions() {
       break;
     }
   }
-  if(isdefined(team) && isdefined(level.teams[team])) {
-    if(isdefined(level.spectateoverride[team].allowfreespectate)) {
+  if(isDefined(team) && isDefined(level.teams[team])) {
+    if(isDefined(level.spectateoverride[team].allowfreespectate)) {
       self allowspectateteam("freelook", 1);
     }
-    if(isdefined(level.spectateoverride[team].allowenemyspectate)) {
+    if(isDefined(level.spectateoverride[team].allowenemyspectate)) {
       self allow_all_teams_except(team, 1);
     }
   }
@@ -161,8 +161,8 @@ function set_permissions_for_machine() {
   if(!self issplitscreen()) {
     return;
   }
-  for (index = 0; index < level.players.size; index++) {
-    if(!isdefined(level.players[index])) {
+  for(index = 0; index < level.players.size; index++) {
+    if(!isDefined(level.players[index])) {
       continue;
     }
     if(level.players[index] == self) {

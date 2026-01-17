@@ -39,7 +39,6 @@
 #include scripts\zm_common\zm_spawner;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_zonemgr;
-
 #namespace zm_ai_gegenees;
 
 autoexec __init__system__() {
@@ -58,17 +57,16 @@ __init__() {
   clientfield::register("toplayer", "gegenees_damage_cf", 16000, 1, "counter");
   clientfield::register("scriptmover", "gegenees_spear_miss_cf", 16000, 1, "counter");
   clientfield::register("actor", "gegenees_helmet_explosion_cf", 16000, 1, "int");
-  level thread aat::register_immunity("zm_aat_brain_decay", #"gegenees", 1, 1, 1);
-  level thread aat::register_immunity("zm_aat_frostbite", #"gegenees", 1, 1, 1);
-  level thread aat::register_immunity("zm_aat_kill_o_watt", #"gegenees", 1, 1, 1);
-  level thread aat::register_immunity("zm_aat_plasmatic_burst", #"gegenees", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_brain_decay", # "gegenees", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_frostbite", # "gegenees", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_kill_o_watt", # "gegenees", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_plasmatic_burst", # "gegenees", 1, 1, 1);
 
   if(isarchetypeloaded(#"gegenees")) {
     level thread function_c03e8d05();
   }
 
   spawner::add_archetype_spawn_function(#"gegenees", &zombie_utility::updateanimationrate);
-
 }
 
 __main__() {
@@ -85,7 +83,7 @@ function_aad04bcc() {
   self.___archetypeonanimscriptedcallback = &function_a6dba7fd;
 }
 
-private function_a6dba7fd(entity) {
+function_a6dba7fd(entity) {
   entity.__blackboard = undefined;
   entity function_aad04bcc();
 }
@@ -136,7 +134,7 @@ registerbehaviorscriptfunctions() {
   animationstatenetwork::registernotetrackhandlerfunction("gegenees_weapon_drop", &function_43104218);
 }
 
-private function_d4f5b993(entity, eventname) {
+function_d4f5b993(entity, eventname) {
   if(!isDefined(entity.favoriteenemy)) {
     return false;
   }
@@ -154,7 +152,7 @@ private function_d4f5b993(entity, eventname) {
   return true;
 }
 
-private function_697a9b7f(entity, minrange, maxrange) {
+function_697a9b7f(entity, minrange, maxrange) {
   if(!isDefined(entity.favoriteenemy)) {
     return 0;
   }
@@ -176,7 +174,7 @@ private function_697a9b7f(entity, minrange, maxrange) {
   return withinrange;
 }
 
-private function_180db9a7(entity) {
+function_180db9a7(entity) {
   if(!isDefined(entity.favoriteenemy)) {
     return 0;
   }
@@ -189,7 +187,7 @@ private function_180db9a7(entity) {
   return can_see;
 }
 
-private function_4b8e0aab(entity) {
+function_4b8e0aab(entity) {
   if(!isDefined(entity.favoriteenemy)) {
     return 0;
   }
@@ -201,7 +199,7 @@ private function_4b8e0aab(entity) {
   can_see = 0;
   trace = physicstrace(entity.origin + (0, 0, 48), entity.favoriteenemy.origin + (0, 0, 36), (-16, -16, -12), (16, 16, 12), entity);
 
-  if(trace[#"fraction"] == 1 || trace[#"entity"] === entity.favoriteenemy) {
+  if(trace[# "fraction"] == 1 || trace[# "entity"] === entity.favoriteenemy) {
     can_see = 1;
   }
 
@@ -251,8 +249,8 @@ function_7fe60e9e(entity) {
   var_872c6826 = vectortoangles(targetpos - launchpos);
   angles = function_cc68801f(launchpos, targetpos, 1110, getdvarfloat(#"bg_lowgravity", 0));
 
-  if(isDefined(angles) && angles[#"lowangle"] > 0) {
-    dir = anglesToForward((-1 * angles[#"lowangle"], var_872c6826[1], var_872c6826[2]));
+  if(isDefined(angles) && angles[# "lowangle"] > 0) {
+    dir = anglesToForward((-1 * angles[# "lowangle"], var_872c6826[1], var_872c6826[2]));
   } else {
     dir = anglesToForward(var_872c6826);
   }
@@ -272,19 +270,19 @@ function_7fe60e9e(entity) {
   entity function_59e9f77b();
 }
 
-private function_61d12301(projectile) {
+function_61d12301(projectile) {
   projectile endon(#"death");
   result = projectile waittill(#"damage");
   projectile.isdamaged = 1;
 }
 
-private watch_for_death(projectile) {
+watch_for_death(projectile) {
   projectile waittill(#"death");
   waittillframeend();
   projectile notify(#"spear_death");
 }
 
-private function_a1fce938() {
+function_a1fce938() {
   foreach(var_b12a43cc in level.var_8c5f46f1) {
     if(!(isDefined(var_b12a43cc.in_use) && var_b12a43cc.in_use)) {
       var_b12a43cc.in_use = 1;
@@ -295,7 +293,7 @@ private function_a1fce938() {
   return undefined;
 }
 
-private function_7e633e59() {
+function_7e633e59() {
   zombies = getaiteamarray(level.zombie_team);
   src_origin = self.origin;
 
@@ -304,7 +302,7 @@ private function_7e633e59() {
       continue;
     }
 
-    if(zombie.archetype === #"gegenees") {
+    if(zombie.archetype === # "gegenees") {
       continue;
     }
 
@@ -317,9 +315,9 @@ private function_7e633e59() {
   }
 }
 
-private function_7d162bd0(projectile, entity) {
+function_7d162bd0(projectile, entity) {
   projectile endon(#"spear_death");
-  result = projectile waittill(#"projectile_impact_player", #"death");
+  result = projectile waittill(#"projectile_impact_player", # "death");
 
   if(result._notify != "projectile_impact_player") {
     var_b12a43cc = function_a1fce938();
@@ -346,17 +344,17 @@ private function_7d162bd0(projectile, entity) {
   }
 }
 
-private function_4d6e95b6(entity) {
+function_4d6e95b6(entity) {
   entity function_d06af584();
 }
 
-private function_43104218(entity) {
+function_43104218(entity) {
   destructserverutils::function_9885f550(entity, "left_hand", "tag_weapon_left");
   destructserverutils::function_9885f550(entity, "right_hand", "tag_weapon_right");
   destructserverutils::function_9885f550(entity, "right_arm_upper", "tag_inhand");
 }
 
-private function_e0b648bb(entity) {
+function_e0b648bb(entity) {
   if(isDefined(entity.var_d7e69143) && entity.var_d7e69143) {
     if(isDefined(entity.zombie_poi) && isDefined(entity.zombie_poi[1])) {
       dist_sq = distancesquared(entity.origin, entity.zombie_poi[1].origin);
@@ -371,7 +369,7 @@ private function_e0b648bb(entity) {
   return false;
 }
 
-private function_d344063a(entity) {
+function_d344063a(entity) {
   if(isDefined(entity.var_d64b7af0) && entity.var_d64b7af0) {
     return true;
   }
@@ -379,16 +377,16 @@ private function_d344063a(entity) {
   return false;
 }
 
-private function_47fdaf31(entity) {
+function_47fdaf31(entity) {
   entity.var_d64b7af0 = 0;
 }
 
-private gegeneesstunstart(entity) {
+gegeneesstunstart(entity) {
   entity function_d06af584();
   zm_behavior::zombiestunstart(entity);
 }
 
-private function_3839537e(entity) {
+function_3839537e(entity) {
   if(!isDefined(entity.zombie_poi)) {
     return;
   }
@@ -402,13 +400,12 @@ private function_3839537e(entity) {
   poi_ent delete();
 }
 
-private function_75db4aba(entity) {
-
+function_75db4aba(entity) {
   if(isDefined(entity.var_89b5e1e) && entity.var_89b5e1e) {
     return true;
   }
 
-    var_98c55679 = 0;
+  var_98c55679 = 0;
   var_a4017acd = 0.1 * entity.maxhealth;
 
   if(isDefined(entity.shielddamage)) {
@@ -428,12 +425,12 @@ private function_75db4aba(entity) {
   return false;
 }
 
-private function_3133f922(entity) {
+function_3133f922(entity) {
   entity.var_7b0667d9 = 1;
   entity.locked_enemy = entity.favoriteenemy;
 }
 
-private function_d82de95f(entity) {
+function_d82de95f(entity) {
   var_d7c9d429 = spawnStruct();
   var_d7c9d429.favoriteenemy = entity.locked_enemy;
   blackboard::addblackboardevent("geg_shield_attack", var_d7c9d429, randomintrange(2000, 3000));
@@ -469,8 +466,8 @@ private function_d82de95f(entity) {
   entity.locked_enemy = undefined;
 }
 
-private function_60164697() {
-  self endon(#"death", #"disconnect");
+function_60164697() {
+  self endon(#"death", # "disconnect");
   time = gettime() + 2000;
 
   while(true) {
@@ -483,11 +480,11 @@ private function_60164697() {
   }
 }
 
-private function_564b9cf5(entity) {
+function_564b9cf5(entity) {
   entity.var_7b0667d9 = 0;
 }
 
-private function_2301c0a7(entity, asmstatename) {
+function_2301c0a7(entity, asmstatename) {
   entity.track_enemy = 1;
   entity.var_1ec6ea5d = gettime() + int(entity ai::function_9139c839().var_3422adfd * 1000);
   entity.var_292d3a3b = gettime() + int(entity ai::function_9139c839().var_5d9f2696 * 1000);
@@ -495,11 +492,11 @@ private function_2301c0a7(entity, asmstatename) {
 
   entity.var_89b5e1e = 0;
 
-    animationstatenetworkutility::requeststate(entity, asmstatename);
+  animationstatenetworkutility::requeststate(entity, asmstatename);
   return 5;
 }
 
-private function_c2155e05(entity, asmstatename) {
+function_c2155e05(entity, asmstatename) {
   if(isDefined(entity.track_enemy) && entity.track_enemy) {
     if(isDefined(entity.var_292d3a3b)) {
       if(gettime() > entity.var_292d3a3b) {
@@ -517,19 +514,19 @@ private function_c2155e05(entity, asmstatename) {
   return 4;
 }
 
-private function_15502a5(entity, asmstatename) {
+function_15502a5(entity, asmstatename) {
   entity clientfield::set("gegenees_shield_guard_effect", 0);
   return 4;
 }
 
-private function_7505908b(entity) {
+function_7505908b(entity) {
   entity.var_7b0667d9 = 1;
   entity clientfield::set("gegenees_spear_tip_tell_effect", 1);
   entity.tell_fx = 1;
   entity.tell_off = gettime() + 250;
 }
 
-private function_9175e656(entity) {
+function_9175e656(entity) {
   if(isDefined(entity.tell_fx) && entity.tell_fx) {
     if(gettime() > entity.tell_off) {
       entity.tell_fx = 0;
@@ -538,11 +535,11 @@ private function_9175e656(entity) {
   }
 }
 
-private function_c81af561(entity) {
+function_c81af561(entity) {
   entity.var_7b0667d9 = 0;
 }
 
-private gegeneestargetservice(entity) {
+gegeneestargetservice(entity) {
   if(isDefined(entity.ignoreall) && entity.ignoreall) {
     return false;
   }
@@ -556,7 +553,7 @@ private gegeneestargetservice(entity) {
     return false;
   }
 
-    entity.zombie_poi = entity zm_utility::get_zombie_point_of_interest(entity.origin);
+  entity.zombie_poi = entity zm_utility::get_zombie_point_of_interest(entity.origin);
   entity zombie_utility::run_ignore_player_handler();
   entity.favoriteenemy = entity.var_93a62fe;
   entity.var_d7e69143 = 0;
@@ -565,7 +562,7 @@ private gegeneestargetservice(entity) {
     var_eee191fa = 1;
 
     if(isDefined(entity.zombie_poi[1].var_8305fd51)) {
-      if(entity.zombie_poi[1].var_8305fd51 == #"thunderstorm" || entity.zombie_poi[1].var_8305fd51 == #"charon_pool") {
+      if(entity.zombie_poi[1].var_8305fd51 == # "thunderstorm" || entity.zombie_poi[1].var_8305fd51 == # "charon_pool") {
         var_eee191fa = 0;
         entity.zombie_poi = undefined;
       }
@@ -583,7 +580,7 @@ private gegeneestargetservice(entity) {
     zone = zm_utility::get_current_zone();
 
     if(isDefined(zone)) {
-      wait_locations = level.zones[zone].a_loc_types[#"wait_location"];
+      wait_locations = level.zones[zone].a_loc_types[# "wait_location"];
 
       if(isDefined(wait_locations) && wait_locations.size > 0) {
         return zm_utility::function_64259898(wait_locations[0].origin);
@@ -599,7 +596,7 @@ private gegeneestargetservice(entity) {
     return false;
   }
 
-    goalent = entity.favoriteenemy;
+  goalent = entity.favoriteenemy;
 
   if(isplayer(goalent)) {
     goalent = zm_ai_utility::function_a2e8fd7b(entity, entity.favoriteenemy);
@@ -608,7 +605,7 @@ private gegeneestargetservice(entity) {
   return entity zm_utility::function_64259898(goalent.origin);
 }
 
-private function_d5d3aa77(entity) {
+function_d5d3aa77(entity) {
   enemy = entity.favoriteenemy;
 
   if(isDefined(enemy) && isalive(enemy)) {
@@ -624,7 +621,7 @@ private function_d5d3aa77(entity) {
   }
 }
 
-private function_4334cc3b(entity) {
+function_4334cc3b(entity) {
   if(self.var_c63e2811 > gettime()) {
     self setblackboardattribute("_gegenees_shield", "shield_up");
     return;
@@ -633,7 +630,7 @@ private function_4334cc3b(entity) {
   self setblackboardattribute("_gegenees_shield", "shield_down");
 }
 
-private function_a953d80d(entity) {
+function_a953d80d(entity) {
   enemies = getaiarchetypearray(#"zombie");
   enemies = arraycombine(enemies, getaiarchetypearray(#"catalyst"), 0, 0);
   enemies = array::filter(enemies, 0, &function_3d752709, entity);
@@ -644,7 +641,7 @@ private function_a953d80d(entity) {
   }
 }
 
-private function_3d752709(enemy, target) {
+function_3d752709(enemy, target) {
   if(isDefined(enemy.knockdown) && enemy.knockdown) {
     return false;
   }
@@ -701,15 +698,15 @@ function_64c4573(entity, mocompanim, mocompanimblendouttime, mocompanimflag, moc
   entity orientmode("face default");
 }
 
-private function_c3c86ec1(entity) {
+function_c3c86ec1(entity) {
   hitent = entity melee();
 
   record3dtext("<dev string:x38>", self.origin, (1, 0, 0), "<dev string:x40>", entity);
 
-    if(isDefined(hitent) && isplayer(hitent)) {
-      entity function_376a5549(hitent);
-      hitent clientfield::increment_to_player("gegenees_damage_cf");
-    }
+  if(isDefined(hitent) && isplayer(hitent)) {
+    entity function_376a5549(hitent);
+    hitent clientfield::increment_to_player("gegenees_damage_cf");
+  }
 
   if(isDefined(entity.var_d7e69143) && entity.var_d7e69143) {
     if(isDefined(entity.zombie_poi) && isDefined(entity.zombie_poi[1])) {
@@ -720,7 +717,7 @@ private function_c3c86ec1(entity) {
   }
 }
 
-private function_376a5549(enemy) {
+function_376a5549(enemy) {
   forward = anglesToForward(self.angles);
   velocity = enemy getvelocity();
   push_strength = 500;
@@ -728,7 +725,7 @@ private function_376a5549(enemy) {
   enemy setvelocity(velocity + forward * push_strength);
 }
 
-private supplypodtank() {
+supplypodtank() {
   self.var_126d7bef = 1;
   self.ignore_nuke = 1;
 
@@ -758,7 +755,7 @@ private supplypodtank() {
   self.var_68139d12 = 1;
 }
 
-private function_3f8833df() {
+function_3f8833df() {
   self attach("c_t8_zmb_dlc2_gegenees_shield", "tag_weapon_left");
   self attach("c_t8_zmb_dlc2_gegenees_sword", "tag_weapon_right");
   self attach("c_t8_zmb_dlc2_gegenees_helmet1", "j_head");
@@ -793,7 +790,7 @@ function_d06af584() {
   }
 }
 
-private function_ca5688e3(inflictor, attacker, damage, idflags, meansofdeath, weapon, point, dir, hitloc, offsettime, boneindex, modelindex) {
+function_ca5688e3(inflictor, attacker, damage, idflags, meansofdeath, weapon, point, dir, hitloc, offsettime, boneindex, modelindex) {
   if(isDefined(boneindex)) {
     bonename = getpartname(self, boneindex);
 
@@ -827,32 +824,31 @@ private function_ca5688e3(inflictor, attacker, damage, idflags, meansofdeath, we
         iprintlnbold("<dev string:x49>" + var_dd54fdb1.health);
       }
 
-        if(namespace_81245006::function_f29756fe(var_dd54fdb1) === 3) {
-
-          if(getdvarint(#"scr_weakpoint_debug", 0) > 0) {
-            iprintlnbold("<dev string:x5e>");
-          }
-
-            self destructserverutils::handledamage(inflictor, attacker, damage, idflags, meansofdeath, weapon, point, dir, hitloc, offsettime, boneindex, modelindex);
-
-          if(var_dd54fdb1.hitloc === "helmet") {
-            var_465efe42 = namespace_81245006::function_37e3f011(self, "j_head", 2);
-            namespace_81245006::function_6c64ebd3(var_465efe42, 1);
-            self.var_d64b7af0 = 1;
-
-            if(self isattached("c_t8_zmb_dlc2_gegenees_helmet1", "j_head")) {
-              self detach("c_t8_zmb_dlc2_gegenees_helmet1", "j_head");
-            }
-
-            self clientfield::set("gegenees_helmet_explosion_cf", 1);
-          }
-
-          if(isDefined(var_dd54fdb1.var_641ce20e) && var_dd54fdb1.var_641ce20e) {
-            namespace_81245006::function_6742b846(self, var_dd54fdb1);
-          }
+      if(namespace_81245006::function_f29756fe(var_dd54fdb1) === 3) {
+        if(getdvarint(#"scr_weakpoint_debug", 0) > 0) {
+          iprintlnbold("<dev string:x5e>");
         }
 
-      if(var_dd54fdb1.type === #"armor") {
+        self destructserverutils::handledamage(inflictor, attacker, damage, idflags, meansofdeath, weapon, point, dir, hitloc, offsettime, boneindex, modelindex);
+
+        if(var_dd54fdb1.hitloc === "helmet") {
+          var_465efe42 = namespace_81245006::function_37e3f011(self, "j_head", 2);
+          namespace_81245006::function_6c64ebd3(var_465efe42, 1);
+          self.var_d64b7af0 = 1;
+
+          if(self isattached("c_t8_zmb_dlc2_gegenees_helmet1", "j_head")) {
+            self detach("c_t8_zmb_dlc2_gegenees_helmet1", "j_head");
+          }
+
+          self clientfield::set("gegenees_helmet_explosion_cf", 1);
+        }
+
+        if(isDefined(var_dd54fdb1.var_641ce20e) && var_dd54fdb1.var_641ce20e) {
+          namespace_81245006::function_6742b846(self, var_dd54fdb1);
+        }
+      }
+
+      if(var_dd54fdb1.type === # "armor") {
         attacker util::show_hit_marker(!isalive(self));
 
         if(isDefined(dir)) {
@@ -884,8 +880,8 @@ private function_ca5688e3(inflictor, attacker, damage, idflags, meansofdeath, we
   return adjusted_damage;
 }
 
-private function_a231dd3b(s_params) {
-  if(self.archetype != #"gegenees") {
+function_a231dd3b(s_params) {
+  if(self.archetype != # "gegenees") {
     return;
   }
 
@@ -919,12 +915,12 @@ private function_a231dd3b(s_params) {
     }
 
     self.var_d0686fde = [];
-    self.var_d0686fde[self.var_d0686fde.size] = #"fire_sale";
-    self.var_d0686fde[self.var_d0686fde.size] = #"nuke";
+    self.var_d0686fde[self.var_d0686fde.size] = # "fire_sale";
+    self.var_d0686fde[self.var_d0686fde.size] = # "nuke";
 
     if(var_67a1b262) {
-      self.var_d0686fde[self.var_d0686fde.size] = #"full_ammo";
-      self.var_d0686fde[self.var_d0686fde.size] = #"full_ammo";
+      self.var_d0686fde[self.var_d0686fde.size] = # "full_ammo";
+      self.var_d0686fde[self.var_d0686fde.size] = # "full_ammo";
     }
 
     level.var_51c8013a = n_time;
@@ -941,7 +937,7 @@ function_9a05389e() {
   self.var_c63e2811 = gettime() + 4000;
 }
 
-private function_c03e8d05() {
+function_c03e8d05() {
   adddebugcommand("<dev string:x74>");
   adddebugcommand("<dev string:xbb>");
   adddebugcommand("<dev string:x104>");
@@ -955,19 +951,19 @@ private function_c03e8d05() {
 
     if(cmd.size > 0) {
       switch (cmd[0]) {
-        case #"spawn":
+        case # "spawn":
           zm_devgui::spawn_archetype("<dev string:x1b1>");
           break;
-        case #"kill":
+        case # "kill":
           zm_devgui::kill_archetype(#"gegenees");
           break;
-        case #"shield_attack":
+        case # "shield_attack":
           if(isDefined(gegenees[0])) {
             gegenees[0].var_89b5e1e = 1;
           }
 
           break;
-        case #"stop_move":
+        case # "stop_move":
           if(isDefined(gegenees[0])) {
             if(!isDefined(gegenees[0].devgui_stop_move)) {
               gegenees[0].devgui_stop_move = 1;
@@ -985,4 +981,3 @@ private function_c03e8d05() {
     setdvar(#"hash_6e55ca7eb0bc5180", "<dev string:x1aa>");
   }
 }
-

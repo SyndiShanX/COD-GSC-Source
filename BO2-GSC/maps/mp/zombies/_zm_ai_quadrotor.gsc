@@ -22,7 +22,7 @@ precache() {
 init() {
   level._effect["quadrotor_nudge"] = loadfx("destructibles/fx_quadrotor_nudge01");
   level._effect["qd_revive"] = loadfx("maps/zombie_tomb/fx_tomb_veh_quadrotor_revive_health");
-  maps\mp\zombies\_zm_equipment::register_equipment("equip_dieseldrone_zm", & "ZM_TOMB_DIHS", & "ZM_TOMB_DIHO", "riotshield_zm_icon", "riotshield");
+  maps\mp\zombies\_zm_equipment::register_equipment("equip_dieseldrone_zm", &"ZM_TOMB_DIHS", &"ZM_TOMB_DIHO", "riotshield_zm_icon", "riotshield");
 }
 
 quadrotor_dealt_no_damage_to_player(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime) {
@@ -61,7 +61,7 @@ follow_ent(e_followee) {
   while(isDefined(e_followee)) {
     if(!self.returning_home) {
       v_facing = e_followee getplayerangles();
-      v_forward = anglestoforward((0, v_facing[1], 0));
+      v_forward = anglesToForward((0, v_facing[1], 0));
       candidate_goalpos = e_followee.origin + v_forward * 128;
       trace_goalpos = physicstrace(self.origin, candidate_goalpos);
 
@@ -186,8 +186,8 @@ quadrotor_watch_for_game_end() {
   level waittill("end_game");
 
   if(isDefined(self)) {
-    playfx(level._effect["tesla_elec_kill"], self.origin);
-    self playsound("zmb_qrdrone_leave");
+    playFX(level._effect["tesla_elec_kill"], self.origin);
+    self playSound("zmb_qrdrone_leave");
     self delete();
 
     iprintln("Maxis deleted");
@@ -230,7 +230,7 @@ quadrotor_adjust_goal_for_enemy_height(goalpos) {
 make_sure_goal_is_well_above_ground(pos) {
   start = pos + (0, 0, self.flyheight);
   end = pos + (0, 0, self.flyheight * -1);
-  trace = bullettrace(start, end, 0, self, 0, 0);
+  trace = bulletTrace(start, end, 0, self, 0, 0);
   end = trace["position"];
   pos = end + (0, 0, self.flyheight);
   z = self getheliheightlockheight(pos);
@@ -305,23 +305,20 @@ quadrotor_movementupdate() {
           if(flag("activate_zone_nml")) {
             exit_path = getvehiclenode("quadrotor_bunker_north_exit_path", "targetname");
             is_valid_exit_path_found = self setvehgoalpos(exit_path.origin, 1, 2, 1);
-          } else {
-          }
+          } else {}
 
           if(!is_valid_exit_path_found) {
             if(flag("activate_zone_bunker_3b")) {
               exit_path = getvehiclenode("quadrotor_bunker_west_exit_path", "targetname");
               is_valid_exit_path_found = self setvehgoalpos(exit_path.origin, 1, 2, 1);
-            } else {
-            }
+            } else {}
           }
 
           if(!is_valid_exit_path_found) {
             if(flag("activate_zone_bunker_4b")) {
               exit_path = getvehiclenode("quadrotor_bunker_south_exit_path", "targetname");
               is_valid_exit_path_found = self setvehgoalpos(exit_path.origin, 1, 2, 1);
-            } else {
-            }
+            } else {}
           }
 
           break;
@@ -372,7 +369,7 @@ quadrotor_movementupdate() {
         wait 1;
 
         if(isDefined(self.revive_target) && self.revive_target maps\mp\zombies\_zm_laststand::player_is_in_laststand()) {
-          playfxontag(level._effect["staff_charge"], self.revive_target, "tag_origin");
+          playFXOnTag(level._effect["staff_charge"], self.revive_target, "tag_origin");
           self.revive_target notify("remote_revive", self.player_owner);
           self.revive_target do_player_general_vox("quadrotor", "rspnd_drone_revive", undefined, 100);
           self.player_owner notify("revived_player_with_quadrotor");
@@ -416,7 +413,7 @@ quadrotor_movementupdate() {
       wait 0.1;
     }
 
-    a_special_items = getentarray("quad_special_item", "script_noteworthy");
+    a_special_items = getEntArray("quad_special_item", "script_noteworthy");
 
     if(level.n_ee_medallions > 0 && isDefined(self.player_owner)) {
       e_special_item = getclosest(self.player_owner.origin, a_special_items, 500);
@@ -433,7 +430,7 @@ quadrotor_movementupdate() {
         self setvehgoalpos(e_special_item.origin + vectorscale((0, 0, 1), 30.0), 1, 0, 1);
         self waittill_any("near_goal", "force_goal", "reached_end_node");
         wait 1;
-        playfx(level._effect["staff_charge"], e_special_item.origin);
+        playFX(level._effect["staff_charge"], e_special_item.origin);
         e_special_item hide();
         level.n_ee_medallions--;
         level notify("quadrotor_medallion_found", self);
@@ -449,8 +446,8 @@ quadrotor_movementupdate() {
           self setvehgoalpos(s_mg_spawn.origin + vectorscale((0, 0, 1), 30.0), 1, 0, 1);
           self waittill_any("near_goal", "force_goal", "reached_end_node");
           wait 1;
-          playfx(level._effect["staff_charge"], s_mg_spawn.origin);
-          e_special_item playsound("zmb_perks_packa_ready");
+          playFX(level._effect["staff_charge"], s_mg_spawn.origin);
+          e_special_item playSound("zmb_perks_packa_ready");
           flag_set("ee_medallions_collected");
         }
 
@@ -544,8 +541,8 @@ quadrotor_escape_into_air() {
     iprintln("Failed pathing straight up");
 
     self notify("attempting_return");
-    playfx(level._effect["tesla_elec_kill"], self.origin);
-    self playsound("zmb_qrdrone_leave");
+    playFX(level._effect["tesla_elec_kill"], self.origin);
+    self playSound("zmb_qrdrone_leave");
     self delete();
     level notify("drone_available");
   }
@@ -684,9 +681,9 @@ quadrotor_death() {
 
 death_fx() {
   if(isDefined(self.deathfx))
-    playfxontag(self.deathfx, self, self.deathfxtag);
+    playFXOnTag(self.deathfx, self, self.deathfxtag);
 
-  self playsound("veh_qrdrone_sparks");
+  self playSound("veh_qrdrone_sparks");
 }
 
 quadrotor_crash_movement(attacker, hitdir) {
@@ -719,7 +716,7 @@ quadrotor_crash_movement(attacker, hitdir) {
     self thread quadrotor_crash_accel();
 
   self thread quadrotor_collision();
-  self playsound("veh_qrdrone_dmg_hit");
+  self playSound("veh_qrdrone_dmg_hit");
 
   if(!isDefined(self.off))
     self thread qrotor_dmg_snd();
@@ -736,7 +733,7 @@ quadrotor_crash_movement(attacker, hitdir) {
 qrotor_dmg_snd() {
   dmg_ent = spawn("script_origin", self.origin);
   dmg_ent linkto(self);
-  dmg_ent playloopsound("veh_qrdrone_dmg_loop");
+  dmg_ent playLoopSound("veh_qrdrone_dmg_loop");
   self waittill_any("crash_done", "death");
   dmg_ent stoploopsound(1);
   wait 2;
@@ -845,14 +842,14 @@ quadrotor_collision() {
 
     if(normal[2] < 0.6 || isalive(self) && !isDefined(self.emped)) {
       self setvehvelocity(self.velocity + normal * 90);
-      self playsound("veh_qrdrone_wall");
+      self playSound("veh_qrdrone_wall");
 
       if(normal[2] < 0.6)
         fx_origin = self.origin - normal * 28;
       else
         fx_origin = self.origin - normal * 10;
 
-      playfx(level._effect["quadrotor_nudge"], fx_origin, normal);
+      playFX(level._effect["quadrotor_nudge"], fx_origin, normal);
       current_time = gettime();
 
       if(current_time - time_of_last_bounce < 1000) {
@@ -868,7 +865,7 @@ quadrotor_collision() {
       time_of_last_bounce = gettime();
     } else if(isDefined(self.emped)) {
       if(isDefined(self.bounced)) {
-        self playsound("veh_qrdrone_wall");
+        self playSound("veh_qrdrone_wall");
         self setvehvelocity((0, 0, 0));
         self setangularvelocity((0, 0, 0));
 
@@ -888,18 +885,18 @@ quadrotor_collision() {
       } else {
         self.bounced = 1;
         self setvehvelocity(self.velocity + normal * 120);
-        self playsound("veh_qrdrone_wall");
+        self playSound("veh_qrdrone_wall");
 
         if(normal[2] < 0.6)
           fx_origin = self.origin - normal * 28;
         else
           fx_origin = self.origin - normal * 10;
 
-        playfx(level._effect["quadrotor_nudge"], fx_origin, normal);
+        playFX(level._effect["quadrotor_nudge"], fx_origin, normal);
       }
     } else {
       createdynentandlaunch(self.deathmodel, self.origin, self.angles, self.origin, self.velocity * 0.01);
-      self playsound("veh_qrdrone_explo");
+      self playSound("veh_qrdrone_explo");
       self thread death_fire_loop_audio();
       self notify("crash_done");
     }
@@ -908,7 +905,7 @@ quadrotor_collision() {
 
 death_fire_loop_audio() {
   sound_ent = spawn("script_origin", self.origin);
-  sound_ent playloopsound("veh_qrdrone_death_fire_loop", 0.1);
+  sound_ent playLoopSound("veh_qrdrone_death_fire_loop", 0.1);
   wait 11;
   sound_ent stoploopsound(1);
   sound_ent delete();
@@ -1029,7 +1026,7 @@ set_death_model(smodel, fdelay) {
   if(isDefined(self.deathmodel_attached)) {
     return;
   }
-  self setmodel(smodel);
+  self setModel(smodel);
 }
 
 player_in_last_stand_within_range(range) {
@@ -1061,10 +1058,10 @@ watch_for_fail_revive(quad_rotor) {
 
 kill_fx_if_target_revive(quadrotor, revive_target) {
   e_fx = spawn("script_model", quadrotor gettagorigin("tag_origin"));
-  e_fx setmodel("tag_origin");
-  e_fx playsound("zmb_drone_revive_fire");
-  e_fx playloopsound("zmb_drone_revive_loop", 0.2);
-  playfxontag(level._effect["qd_revive"], e_fx, "tag_origin");
+  e_fx setModel("tag_origin");
+  e_fx playSound("zmb_drone_revive_fire");
+  e_fx playLoopSound("zmb_drone_revive_loop", 0.2);
+  playFXOnTag(level._effect["qd_revive"], e_fx, "tag_origin");
   e_fx moveto(revive_target.origin, 1);
   timer = 0;
 
@@ -1074,9 +1071,9 @@ kill_fx_if_target_revive(quadrotor, revive_target) {
       timer = timer + 0.1;
 
       if(timer >= 1) {
-        playfxontag(level._effect["staff_soul"], e_fx, "tag_origin");
+        playFXOnTag(level._effect["staff_soul"], e_fx, "tag_origin");
         e_fx stoploopsound(0.1);
-        e_fx playsound("zmb_drone_revive_revive_3d");
+        e_fx playSound("zmb_drone_revive_revive_3d");
         revive_target playsoundtoplayer("zmb_drone_revive_revive_plr", revive_target);
         break;
       }

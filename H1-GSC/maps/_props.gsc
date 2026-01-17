@@ -5,13 +5,13 @@
 ********************************/
 
 prop_notetrack_exist(var_0, var_1) {
-  if(!isdefined(level.prop_notetracks))
+  if(!isDefined(level.prop_notetracks))
     level.prop_notetracks = [];
 
-  if(!isdefined(level.prop_notetracks[var_0]))
+  if(!isDefined(level.prop_notetracks[var_0]))
     level.prop_notetracks[var_0] = [];
 
-  if(isdefined(level.prop_notetracks[var_0][var_1]))
+  if(isDefined(level.prop_notetracks[var_0][var_1]))
     return 1;
 
   level.prop_notetracks[var_0][var_1] = 1;
@@ -34,7 +34,7 @@ add_smoking_notetracks(var_0) {
 }
 
 detach_idle_clip(var_0) {
-  if(isdefined(var_0.clip))
+  if(isDefined(var_0.clip))
     var_0.clip delete();
 }
 
@@ -51,7 +51,7 @@ attach_clip(var_0) {
   var_0 notify("new_prop_rotation");
   var_1 = spawn("script_model", (0, 0, 0));
   var_1 linkto(var_0, "tag_inhand", (0, 0, 0), (0, 0, 0));
-  var_1 setmodel(maps\_utility::getmodel("clip"));
+  var_1 setModel(maps\_utility::getmodel("clip"));
   var_0.clip = var_1;
   thread prop_delete(var_1, var_0);
 }
@@ -69,13 +69,13 @@ attach_phone(var_0) {
   var_0 notify("new_phone_rotation");
   var_1 = spawn("script_model", (0, 0, 0));
   var_1 linkto(var_0, "tag_inhand", (0, 0, 0), (0, 0, 0));
-  var_1 setmodel(maps\_utility::getmodel("cellphone"));
+  var_1 setModel(maps\_utility::getmodel("cellphone"));
   var_0.phone = var_1;
   thread prop_delete(var_1, var_0);
 }
 
 detach_phone(var_0) {
-  if(isdefined(var_0.phone))
+  if(isDefined(var_0.phone))
     var_0.phone delete();
 }
 
@@ -83,14 +83,14 @@ attach_cig(var_0) {
   var_0 notify("new_cigar_rotation");
   var_1 = spawn("script_model", (0, 0, 0));
   var_1 linkto(var_0, "tag_inhand", (0, 0, 0), (0, 0, 0));
-  var_1 setmodel(maps\_utility::getmodel("cigar"));
-  playfxontag(common_scripts\utility::getfx("cigar_glow"), var_1, "tag_cigarglow");
+  var_1 setModel(maps\_utility::getmodel("cigar"));
+  playFXOnTag(common_scripts\utility::getfx("cigar_glow"), var_1, "tag_cigarglow");
   var_0.cigar = var_1;
   thread prop_delete_cig(var_1, var_0);
 }
 
 detach_cig(var_0) {
-  if(isdefined(var_0.cigar))
+  if(isDefined(var_0.cigar))
     var_0.cigar thread prop_cig_throw();
 }
 
@@ -121,16 +121,16 @@ prop_delete_cig(var_0, var_1) {
 prop_cig_throw() {
   self endon("death");
 
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
-  if(isdefined(self.cig_throwing) && self.cig_throwing) {
+  if(isDefined(self.cig_throwing) && self.cig_throwing) {
     return;
   }
   self.cig_throwing = 1;
-  stopfxontag(common_scripts\utility::getfx("cigar_glow"), self, "tag_cigarglow");
+  stopFXOnTag(common_scripts\utility::getfx("cigar_glow"), self, "tag_cigarglow");
   var_0 = 3;
-  var_1 = anglestoforward(self.angles);
+  var_1 = anglesToForward(self.angles);
   self unlink();
   self movegravity(var_1 * 100, var_0);
   self rotatevelocity((400, 0, 0), var_0, 0, var_0);
@@ -139,21 +139,21 @@ prop_cig_throw() {
 }
 
 smoke_puff(var_0) {
-  if(!isdefined(var_0.cigar)) {
+  if(!isDefined(var_0.cigar)) {
     return;
   }
   var_0 endon("death");
   var_0.cigar endon("death");
-  playfxontag(common_scripts\utility::getfx("cigar_glow_puff"), var_0.cigar, "tag_cigarglow");
+  playFXOnTag(common_scripts\utility::getfx("cigar_glow_puff"), var_0.cigar, "tag_cigarglow");
   wait 1;
-  playfxontag(common_scripts\utility::getfx("cigar_smoke_puff"), var_0, "tag_eye");
+  playFXOnTag(common_scripts\utility::getfx("cigar_smoke_puff"), var_0, "tag_eye");
 }
 
 smoke_exhale(var_0) {
-  if(!isdefined(var_0.cigar)) {
+  if(!isDefined(var_0.cigar)) {
     return;
   }
-  playfxontag(common_scripts\utility::getfx("cigar_exhale"), var_0, "tag_eye");
+  playFXOnTag(common_scripts\utility::getfx("cigar_exhale"), var_0, "tag_eye");
 }
 
 ghillie_leaves() {
@@ -178,13 +178,13 @@ ghillie_leaves() {
   var_0[var_0.size] = "J_Wrist_RI";
   self endon("death");
 
-  for (;;) {
-    while (self.movemode != "run") {
+  for(;;) {
+    while(self.movemode != "run") {
       wait 0.2;
       continue;
     }
 
-    playfxontag(level._effect["ghillie_leaves"], self, common_scripts\utility::random(var_0));
+    playFXOnTag(level._effect["ghillie_leaves"], self, common_scripts\utility::random(var_0));
     wait(randomfloatrange(0.1, 2.5));
   }
 }

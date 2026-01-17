@@ -57,7 +57,7 @@ defuse_setup() {
 
   // delete some spawners if not coop
   if(!is_coop()) {
-    spawners = getentarray("coop_only", "script_noteworthy");
+    spawners = getEntArray("coop_only", "script_noteworthy");
     array_call(spawners, ::delete);
   }
 
@@ -85,11 +85,11 @@ defuse_objectives() {
 
   // each index corresponds to a script_index key on the bomb in radiant.
   level.objective_arr = [];
-  level.objective_arr[0] = & "SO_DEFUSE_FAVELA_ESCAPE_OBJ_BOMB_MARKET";
-  level.objective_arr[1] = & "SO_DEFUSE_FAVELA_ESCAPE_OBJ_BOMB_APARTMENT";
-  level.objective_arr[2] = & "SO_DEFUSE_FAVELA_ESCAPE_OBJ_BOMB_STORE";
+  level.objective_arr[0] = &"SO_DEFUSE_FAVELA_ESCAPE_OBJ_BOMB_MARKET";
+  level.objective_arr[1] = &"SO_DEFUSE_FAVELA_ESCAPE_OBJ_BOMB_APARTMENT";
+  level.objective_arr[2] = &"SO_DEFUSE_FAVELA_ESCAPE_OBJ_BOMB_STORE";
 
-  defuse_location_arr = getentarray("defuse_briefcase", "targetname");
+  defuse_location_arr = getEntArray("defuse_briefcase", "targetname");
   array_thread(defuse_location_arr, ::defuse_location_handler);
 
   foreach(location in defuse_location_arr) {
@@ -98,11 +98,11 @@ defuse_objectives() {
     location thread obj_switch_text(400, obj_id);
   }
 
-  while (level.defuse_count != 0) {
+  while(level.defuse_count != 0) {
     obj_id = flag_wait("defuse_update_score"); // obj_id passed from ::briefcase_defuse( ... )
     flag_clear("defuse_update_score");
 
-    if(isdefined(obj_id))
+    if(isDefined(obj_id))
       objective_state(obj_id, "done");
   }
 
@@ -113,7 +113,7 @@ obj_switch_text(dist, obj_id) {
   // stop switching text once the bomb is defused
   self endon("briefcase_bomb_defused");
 
-  while (true) {
+  while(true) {
     wait 0.05;
 
     close = false;
@@ -125,7 +125,7 @@ obj_switch_text(dist, obj_id) {
     }
 
     if(close) {
-      Objective_SetPointerTextOverride(obj_id, & "SO_DEFUSE_FAVELA_ESCAPE_OBJ_TEXT");
+      Objective_SetPointerTextOverride(obj_id, &"SO_DEFUSE_FAVELA_ESCAPE_OBJ_TEXT");
       dist = 800;
     } else {
       Objective_SetPointerTextOverride(obj_id, "");
@@ -149,10 +149,10 @@ defuse_location_handler() {
 
   level.defuse_count++;
 
-  bomb_array = getentarray(self.target, "targetname");
+  bomb_array = getEntArray(self.target, "targetname");
   array_thread(bomb_array, ::defuse_c4_light, self);
 
-  while (!self ent_flag("briefcase_bomb_defused")) {
+  while(!self ent_flag("briefcase_bomb_defused")) {
     self makeusable();
     self sethintstring(&"SO_DEFUSE_FAVELA_ESCAPE_DEFUSE_HINT");
 
@@ -175,7 +175,7 @@ change_combatmode_setup() {
   array = getstructarray("change_combatmode_node", "script_noteworthy");
   array_thread(array, ::change_combatmode_node);
 
-  array = getentarray("change_combatmode_trigger", "targetname");
+  array = getEntArray("change_combatmode_trigger", "targetname");
   array_thread(array, ::change_combatmode_trigger);
 }
 
@@ -184,15 +184,15 @@ change_combatmode_trigger() {
 
   dist_sqrd = origin_ent.radius * origin_ent.radius;
 
-  while (true) {
+  while(true) {
     self waittill("trigger", player);
     assert(isplayer(player));
 
     ai_array = getaiarray("axis");
     foreach(ai in ai_array) {
-      if(distancesquared(ai.origin, origin_ent.origin) > dist_sqrd)
+      if(distancesquared(ai.origin, origin_ent.origin) > dist_sqrd) {
         continue;
-
+      }
       ai notify("stop_going_to_node");
       ai.combatMode = "cover";
       ai.goalradius = 640;
@@ -203,9 +203,9 @@ change_combatmode_trigger() {
 }
 
 change_combatmode_node() {
-  assert(isdefined(self.script_combatmode));
+  assert(isDefined(self.script_combatmode));
 
-  while (true) {
+  while(true) {
     self waittill("trigger", ai);
     assert(isai(ai));
     ai.combatMode = self.script_combatmode;
@@ -215,20 +215,19 @@ change_combatmode_node() {
 clean_up_setup() {
   add_global_spawn_function("axis", ::clean_up_spawnfunc);
 
-  array = getentarray("clean_up_volume", "targetname");
+  array = getEntArray("clean_up_volume", "targetname");
   array_thread(array, ::clean_up_volume);
 
-  array = getentarray("clean_up_respawn_trigger", "script_noteworthy");
+  array = getEntArray("clean_up_respawn_trigger", "script_noteworthy");
   array_thread(array, ::clean_up_respawn_trigger);
-
 }
 
 clean_up_volume() {
-  assert(isdefined(self.script_group));
+  assert(isDefined(self.script_group));
 
   volume = self;
 
-  while (true) {
+  while(true) {
     wait 1;
     player_in_volume = false;
     foreach(player in level.players) {
@@ -246,22 +245,22 @@ clean_up_volume() {
 clean_up_spawnfunc() {
   self endon("death");
 
-  if(!isdefined(self.script_group))
+  if(!isDefined(self.script_group)) {
     return;
-
+  }
   spawner = self.spawner;
 
-  while (true) {
+  while(true) {
     level waittill("clean_up", script_group);
-    if(self.script_group != script_group)
+    if(self.script_group != script_group) {
       continue;
-
+    }
     // to avoid multiple traces on the same frame
     wait randomfloat(.3);
 
     can_be_seen = false;
     foreach(player in level.players) {
-      if(self SightConeTrace(player geteye(), player)) {
+      if(self SightConeTrace(player getEye(), player)) {
         can_be_seen = true;
         break;
       }
@@ -275,16 +274,16 @@ clean_up_spawnfunc() {
 }
 
 clean_up_respawn_trigger() {
-  assert(isdefined(self.script_group));
+  assert(isDefined(self.script_group));
 
-  while (true) {
+  while(true) {
     self waittill("trigger");
-    while (true) {
+    while(true) {
       level waittill("clean_up", script_group);
 
-      if(self.script_group != script_group)
+      if(self.script_group != script_group) {
         continue;
-
+      }
       self thread maps\_spawner::trigger_spawner(self);
       break;
     }
@@ -301,7 +300,7 @@ civilian() {
   timer = 0;
   dist = 2000 * 2000;
 
-  while (timer < 10) {
+  while(timer < 10) {
     is_safe = true;
     foreach(player in level.players) {
       if(DistanceSquared(self.origin, player.origin) < dist) {
@@ -334,9 +333,9 @@ civilian_death() {
 
   self waittill("death", killer, type);
 
-  if(!isplayer(killer))
+  if(!isplayer(killer)) {
     return;
-
+  }
   so_force_deadquote("@SO_DEFUSE_FAVELA_ESCAPE_MISSION_FAILED_CIVILIAN");
   thread missionfailedwrapper();
 }
@@ -344,9 +343,9 @@ civilian_death() {
 ai_on_death() {
   self waittill("death", attacker, cause);
 
-  if(!isplayer(attacker))
+  if(!isplayer(attacker)) {
     return;
-
+  }
   attacker.defuse_kills++;
   if(self isFlashed())
     attacker.defuse_flashed_kills++;
@@ -447,7 +446,7 @@ defuse_use_bar(fill_time, briefcase) {
   text setPoint("CENTER", undefined, 0, 45); // old 20
   text settext(&"SO_DEFUSE_FAVELA_ESCAPE_DEFUSING");
 
-  while (self use_active()) {
+  while(self use_active()) {
     bar updateBar(buttonTime / totalTime);
     wait(0.05);
     buttonTime += 0.05;
@@ -467,7 +466,7 @@ defuse_use_bar(fill_time, briefcase) {
 }
 
 notify_area_clear() {
-  if(isdefined(level.area_clear_time)) {
+  if(isDefined(level.area_clear_time)) {
     if((level.area_clear_time + 5000) > gettime())
       return;
   }
@@ -498,6 +497,6 @@ detach_briefcase_model() {
 }
 
 airliner_delete() {
-  ents = GetEntArray("sbmodel_airliner_flyby", "targetname");
+  ents = getEntArray("sbmodel_airliner_flyby", "targetname");
   array_call(ents, ::delete);
 }

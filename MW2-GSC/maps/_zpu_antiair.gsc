@@ -27,7 +27,6 @@ main(model, type) {
   build_team("axis");
   build_aianims(::setanims, ::set_vehicle_anims);
   build_compassicon("", false);
-
 }
 
 init_local() {}
@@ -41,8 +40,8 @@ set_vehicle_anims(positions) {
 
 setanims() {
   positions = [];
-  for (i = 0; i < 1; i++)
-    positions[i] = spawnstruct();
+  for(i = 0; i < 1; i++)
+    positions[i] = spawnStruct();
 
   positions[0].sittag = "tag_driver";
   //	positions[ 0 ].turret_fire = %zpu_gunner_fire_a;
@@ -58,7 +57,6 @@ maps\_zpu_antiair::main( "vehicle_zpu4" );
 
 and these lines in your CSV:
 include,vehicle_zpu4_zpu_antiair
-
 
 defaultmdl="vehicle_zpu4"
 default:"vehicletype" "zpu_antiair"

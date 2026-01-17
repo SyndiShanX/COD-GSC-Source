@@ -17,7 +17,7 @@ bot_koth_think() {
 
     println("distance: " + level.zone.trig.goal_radius);
 
-    ground = bullettrace(level.zone.gameobject.curorigin, level.zone.gameobject.curorigin - vectorscale((0, 0, 1), 1024.0), 0, undefined);
+    ground = bulletTrace(level.zone.gameobject.curorigin, level.zone.gameobject.curorigin - vectorscale((0, 0, 1), 1024.0), 0, undefined);
     level.zone.trig.goal = ground["position"] + vectorscale((0, 0, 1), 8.0);
   }
 

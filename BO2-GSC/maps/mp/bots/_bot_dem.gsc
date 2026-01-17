@@ -259,7 +259,7 @@ dem_get_bomb_goal(ent) {
   if(!isDefined(ent.bot_goals)) {
     goals = [];
     ent.bot_goals = [];
-    dir = anglestoforward(ent.angles);
+    dir = anglesToForward(ent.angles);
     dir = vectorscale(dir, 32);
     goals[0] = ent.origin + dir;
     goals[1] = ent.origin - dir;
@@ -270,7 +270,7 @@ dem_get_bomb_goal(ent) {
 
     foreach(goal in goals) {
       start = goal + vectorscale((0, 0, 1), 128.0);
-      trace = bullettrace(start, goal, 0, undefined);
+      trace = bulletTrace(start, goal, 0, undefined);
       ent.bot_goals[ent.bot_goals.size] = trace["position"];
     }
   }

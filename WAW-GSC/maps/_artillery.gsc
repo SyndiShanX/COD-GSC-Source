@@ -54,16 +54,16 @@ init_local() {
 }
 
 arty_crew_init(vehicle) {
-  arty_targets = getentarray(self.target, "targetname");
+  arty_targets = getEntArray(self.target, "targetname");
   arty_spawners = [];
   vehicle.arty_crew = [];
-  for (i = 0; i < arty_targets.size; i++) {
+  for(i = 0; i < arty_targets.size; i++) {
     arty_target = arty_targets[i];
     if(issubstr(arty_target.classname, "actor")) {
       arty_spawners[arty_spawners.size] = arty_target;
     }
   }
-  for (i = 0; i < arty_spawners.size; i++) {
+  for(i = 0; i < arty_spawners.size; i++) {
     vehicle.arty_crew[self.arty_crew.size] = arty_spawners[i] spawn_crewmember();
     vehicle.arty_crew[i].position = i;
     vehicle.arty_crew[i].animname = vehicle.arty_crew_info["animname"][i];
@@ -102,7 +102,7 @@ artycrew_animation_think(vehicle, tag) {
   vehicle endon("changing positions");
   vehicle endon("shut down arty");
   self endon("death");
-  for (;;) {
+  for(;;) {
     self thread arty_crew_play_anim(vehicle, vehicle.state, tag);
     self waittill("artycrew animation done");
   }
@@ -126,7 +126,7 @@ arty_crew_play_anim(vehicle, animname, tag) {
 arty_fire_loop() {
   self endon("shut down arty");
   self endon("stop_arty_fire_loop");
-  while (1) {
+  while(1) {
     if(self.state == "arty_fire") {
       self waittill("artycrew animation done");
       self notify("arty_fire");
@@ -139,17 +139,17 @@ arty_fire_loop() {
 
 arty_fire_without_move() {
   self disconnectpaths();
-  for (i = 0; i < self.arty_crew.size; i++) {
+  for(i = 0; i < self.arty_crew.size; i++) {
     if(isalive(self.arty_crew[i])) {
       self.arty_crew[i] animscripts\shared::placeWeaponOn(self.arty_crew[i].primaryweapon, "none");
     }
   }
-  for (i = 0; i < self.arty_crew.size; i++) {
+  for(i = 0; i < self.arty_crew.size; i++) {
     if(isalive(self.arty_crew[i])) {
       self.arty_crew[i] linkto(self, self.arty_crew[i].tag_b);
     }
   }
-  for (i = 0; i < self.arty_crew.size; i++) {
+  for(i = 0; i < self.arty_crew.size; i++) {
     if(isalive(self.arty_crew[i])) {
       self.arty_crew[i] thread artycrew_animation_think(self, self.arty_crew[i].tag_b);
     }
@@ -162,7 +162,7 @@ arty_move(goal_pos, stopAtGoal) {
   self endon("shut down arty");
   self endon("death");
   self notify("changing positions");
-  for (i = 0; i < self.arty_crew.size; i++) {
+  for(i = 0; i < self.arty_crew.size; i++) {
     self.arty_crew[i] unlink();
     self.arty_crew[i] endon("death");
   }
@@ -179,18 +179,18 @@ arty_move(goal_pos, stopAtGoal) {
   if(isDefined(self.arty_crew[3])) {
     self thread anim_reach_for_all("arty_start", "tag_handle_left", self.arty_crew[3]);
   }
-  for (i = 0; i < self.arty_crew.size; i++) {
+  for(i = 0; i < self.arty_crew.size; i++) {
     self.arty_crew[i] animscripts\shared::placeWeaponOn(self.arty_crew[i].primaryweapon, "right");
   }
   self waittill_multiple("arty crew 1 in place", "arty crew 2 in place", "arty crew 3 in place", "arty crew 4 in place");
-  for (i = 0; i < self.arty_crew.size; i++) {
+  for(i = 0; i < self.arty_crew.size; i++) {
     self.arty_crew[i] animscripts\shared::placeWeaponOn(self.arty_crew[i].primaryweapon, "none");
   }
   self disconnectpaths();
-  for (i = 0; i < self.arty_crew.size; i++) {
+  for(i = 0; i < self.arty_crew.size; i++) {
     self.arty_crew[i] linkto(self, self.arty_crew[i].tag_a);
   }
-  for (i = 0; i < self.arty_crew.size; i++) {
+  for(i = 0; i < self.arty_crew.size; i++) {
     self.arty_crew[i] thread artycrew_animation_think(self, self.arty_crew[i].tag_a);
   }
   self waittill("artycrew animation done");
@@ -203,11 +203,11 @@ arty_move(goal_pos, stopAtGoal) {
   self waittill("goal");
   self notify("changing positions");
   self.state = "arty_stop";
-  for (i = 0; i < self.arty_crew.size; i++) {
+  for(i = 0; i < self.arty_crew.size; i++) {
     self.arty_crew[i] unlink();
   }
   self connectpaths();
-  for (i = 0; i < self.arty_crew.size; i++) {
+  for(i = 0; i < self.arty_crew.size; i++) {
     self.arty_crew[i] animscripts\shared::placeWeaponOn(self.arty_crew[i].primaryweapon, "right");
   }
   self thread anim_reach_for_all("arty_stop", "tag_commander", self.arty_crew[0]);
@@ -215,14 +215,14 @@ arty_move(goal_pos, stopAtGoal) {
   self thread anim_reach_for_all("arty_stop", "tag_shield_right", self.arty_crew[2]);
   self thread anim_reach_for_all("arty_stop", "tag_loader", self.arty_crew[3]);
   self waittill_multiple("arty crew 1 in place", "arty crew 2 in place", "arty crew 3 in place", "arty crew 4 in place");
-  for (i = 0; i < self.arty_crew.size; i++) {
+  for(i = 0; i < self.arty_crew.size; i++) {
     self.arty_crew[i] animscripts\shared::placeWeaponOn(self.arty_crew[i].primaryweapon, "none");
   }
   self disconnectpaths();
-  for (i = 0; i < self.arty_crew.size; i++) {
+  for(i = 0; i < self.arty_crew.size; i++) {
     self.arty_crew[i] linkto(self, self.arty_crew[i].tag_b);
   }
-  for (i = 0; i < self.arty_crew.size; i++) {
+  for(i = 0; i < self.arty_crew.size; i++) {
     self.arty_crew[i] thread artycrew_animation_think(self, self.arty_crew[i].tag_b);
   }
   self waittill("artycrew animation done");
@@ -241,7 +241,7 @@ arty_fire() {
 }
 
 spawn_crewmember() {
-  while (!OkTospawn()) {
+  while(!OkTospawn()) {
     wait(0.05);
   }
   spawn = self spawn_ai();

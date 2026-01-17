@@ -4,7 +4,6 @@
 ********************************************************/
 
 main() {
-
   switch (codescripts\character::get_random_character(2)) {
     case 0:
       character\mp_character_militia_shotgun_aa_blk::main();

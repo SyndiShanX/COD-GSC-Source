@@ -5,7 +5,6 @@
 
 #include scripts\core_common\system_shared;
 #include scripts\weapons\tacticalinsertion;
-
 #namespace tacticalinsertion;
 
 autoexec __init__system__() {

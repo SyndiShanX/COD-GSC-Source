@@ -8,7 +8,7 @@
 #include maps\_sandstorm;
 
 main() {
-  if(!isdefined(level.script))
+  if(!isDefined(level.script))
     level.script = ToLower(GetDvar("mapname"));
 
   PreCacheModel("fog_blackout");
@@ -79,11 +79,11 @@ main() {
   level._effect["zodiac_sway_right"] = LoadFX("water/zodiac_splash_turn_hard");
   level._effect_tag["zodiac_sway_right"] = "TAG_FX_RF";
 
-  //Zodiac Turn Light Left 
+  //Zodiac Turn Light Left
   level._effect["zodiac_sway_left_light"] = LoadFX("water/zodiac_splash_turn_light");
   level._effect_tag["zodiac_sway_left_light"] = "TAG_FX_LF";
 
-  //Zodiac Turn Light Right 
+  //Zodiac Turn Light Right
   level._effect["zodiac_sway_right_light"] = LoadFX("water/zodiac_splash_turn_light");
   level._effect_tag["zodiac_sway_right_light"] = "TAG_FX_RF";
 
@@ -96,7 +96,7 @@ main() {
   level.zodiac_fx_sound["player_zodiac_bump"] = "water_boat_splash_small_plr";
   level.zodiac_fx_sound["player_zodiac_bumpbig"] = "water_boat_splash_plr";
 
-  //two bumps small and big. change them at points in the level to allow more or less visibility. 
+  //two bumps small and big. change them at points in the level to allow more or less visibility.
   level.water_sheating_time["bump_big_start"] = 2;
   level.water_sheating_time["bump_small_start"] = 1;
 
@@ -181,20 +181,19 @@ main() {
 
   level._effect["bloodpool_ending"] = Loadfx("impacts/deathfx_bloodpool_ending");
 
-  if(GetDvarInt("r_reflectionProbeGenerate"))
+  if(GetDvarInt("r_reflectionProbeGenerate")) {
     return;
-
+  }
   //fake blizzard in createfx
   //thread createfx_stuff();
   treadfx_override();
   maps\createfx\af_chase_fx::main();
-
 }
 
 createfx_stuff() {
   if(GetDvar("createfx") != "") {
     waittillframeend; // let _load run
-    level.sandstorm_time = spawnstruct();
+    level.sandstorm_time = spawnStruct();
     level.sandstorm_time.min = 0.3;
     level.sandstorm_time.max = 0.5;
 
@@ -231,8 +230,8 @@ sunlight_restore(fTime) {
 }
 
 block_out_the_sky() {
-  fogent = Spawn("script_model", level.player GetEye());
-  fogent SetModel("fog_blackout");
+  fogent = spawn("script_model", level.player getEye());
+  fogent setModel("fog_blackout");
   fogent LinkTo(level.player);
   level.fogent = fogent;
   flag_set("sandstorm_fully_masked"); // lets script know effects are good to go.
@@ -240,8 +239,8 @@ block_out_the_sky() {
 
 sand_storm_effect() {
   level endon("stop_sandstorm_effect");
-  player = GetEntArray("player", "classname")[0];
-  for (;;) {
+  player = getEntArray("player", "classname")[0];
+  for(;;) {
     timer = randomfloatrange(level.sandstorm_time.min, level.sandstorm_time.max);
     timer *= 0.5;
 
@@ -249,7 +248,7 @@ sand_storm_effect() {
       timer = 0.5;
     wait(timer);
 
-    PlayFX(level._effect["sand_storm_player"], player.origin + (0, 0, 100));
+    playFX(level._effect["sand_storm_player"], player.origin + (0, 0, 100));
   }
 }
 
@@ -271,8 +270,7 @@ stop_sandstorm_effect() {
   // order them based on price's origin
   near_fx = SortByDistance(near_fx, level.price.origin);
 
-  for (;;) {
-
+  for(;;) {
     if(level.sandstorm_time.min >= 1.5 && near_fx.size) {
       foreach(fx in near_fx)
       fx pauseeffect();
@@ -280,8 +278,9 @@ stop_sandstorm_effect() {
       near_fx = [];
     }
 
-    if(level.sandstorm_time.min >= 2.0)
+    if(level.sandstorm_time.min >= 2.0) {
       break;
+    }
 
     level.sandstorm_time.min += 0.1;
     level.sandstorm_time.max += 0.15;
@@ -316,7 +315,7 @@ sandstorm_fog_management() {
 
   level.sandstorm_min_dist = 500;
   shepherd_stumble = false;
-  for (;;) {
+  for(;;) {
     player_dist = Distance(level.player.origin, targ.origin);
     player_dist -= offset_dist;
     player_dist *= 0.25;
@@ -359,7 +358,7 @@ sandstorm_fog_management() {
     wait(0.2);
 
     angles = VectorToAngles(struct.origin - level.player.origin);
-    forward = AnglesToForward(angles);
+    forward = anglesToForward(angles);
     //		Line( level.player.origin, level.player.origin + forward * player_dist, (1,0,0), 1, 0, 4 );
   }
 }
@@ -367,16 +366,15 @@ sandstorm_fog_management() {
 blood_pulse() {
   fx = getfx("player_knife_wound");
   knife = maps\af_chase_knife_fight_code::get_knife();
-  PlayFXOnTag(fx, knife, "TAG_FX");
+  playFXOnTag(fx, knife, "TAG_FX");
 }
 
 play_underwater_fx() {
   //play bubble fx as the player hits the water.
-  PlayFX(getfx("splash_underwater_afchase"), (25590.3, 26824, -10008.9));
+  playFX(getfx("splash_underwater_afchase"), (25590.3, 26824, -10008.9));
 }
 
 treadfx_override() {
-
   maps\_treadfx::setvehiclefx("pavelow", "brick", "treadfx/heli_sand_large");
   maps\_treadfx::setvehiclefx("pavelow", "bark", "treadfx/heli_sand_large");
   maps\_treadfx::setvehiclefx("pavelow", "carpet", "treadfx/heli_sand_large");
@@ -438,5 +436,4 @@ treadfx_override() {
   maps\_treadfx::setvehiclefx("littlebird", "painted metal", "treadfx/heli_sand_default");
   maps\_treadfx::setvehiclefx("littlebird", "default", "treadfx/heli_sand_default");
   maps\_treadfx::setvehiclefx("littlebird", "none", "treadfx/heli_sand_default");
-
 }

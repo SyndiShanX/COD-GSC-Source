@@ -19,7 +19,7 @@ gunner_think(turret) {
   }
   self.last_enemy_sighting_position = undefined;
   thread record_enemy_sightings();
-  forward = anglestoforward(turret.angles);
+  forward = anglesToForward(turret.angles);
   ent = spawn("script_origin", (0, 0, 0));
   thread target_ent_cleanup(ent);
   ent.origin = turret.origin + vector_scale(forward, 500);
@@ -54,16 +54,16 @@ shoot_enemy_until_he_hides_then_shoot_wall(ent) {
   self.current_enemy endon("death");
   enemy = self.current_enemy;
   while(self canSee(enemy)) {
-    angles = vectortoangles(enemy geteye() - ent.origin);
-    angles = anglestoforward(angles);
+    angles = vectortoangles(enemy getEye() - ent.origin);
+    angles = anglesToForward(angles);
     ent moveTo(ent.origin + vector_scale(angles, 12), 0.1);
     wait(0.1);
   }
   if(isplayer(enemy)) {
     self endon("saw_enemy");
-    eye = enemy geteye();
+    eye = enemy getEye();
     angles = vectortoangles(eye - ent.origin);
-    angles = anglestoforward(angles);
+    angles = anglesToForward(angles);
     units_per_second = 150;
     timer = distance(ent.origin, self.last_enemy_sighting_position) / units_per_second;
     if(timer > 0) {
@@ -71,7 +71,7 @@ shoot_enemy_until_he_hides_then_shoot_wall(ent) {
       wait(timer);
     }
     org = ent.origin + vector_scale(angles, 180);
-    oldOrigin = get_suppress_point(self geteye(), ent.origin, org);
+    oldOrigin = get_suppress_point(self getEye(), ent.origin, org);
     if(!isDefined(oldOrigin))
       oldOrigin = ent.origin;
     ent moveTo(ent.origin + vector_scale(angles, 80) + (0, 0, randomfloatrange(15, 50) * -1), 3, 1, 1);
@@ -114,7 +114,7 @@ create_mg_team() {
   level.mg_gunner_team = [];
   level.mg_gunner_team[level.mg_gunner_team.size] = self;
   waittillframeend;
-  ent = spawnstruct();
+  ent = spawnStruct();
   array_thread(level.mg_gunner_team, ::mg_gunner_death_notify, ent);
   array = level.mg_gunner_team;
   level.mg_gunner_team = undefined;
@@ -192,7 +192,7 @@ get_suppress_point(origin, trace_start, trace_end) {
   offset = (0, 0, 0);
   hit_pos = undefined;
   for(i = 0; i < traces + 2; i++) {
-    trace = bullettrace(origin, trace_start + offset, false, undefined);
+    trace = bulletTrace(origin, trace_start + offset, false, undefined);
     if(trace["fraction"] < 1) {
       hit_pos = trace["position"];
       break;
@@ -217,7 +217,7 @@ record_sighting() {
     return;
   if(!(self canSee(self.enemy)))
     return;
-  self.last_enemy_sighting_position = self.enemy geteye();
+  self.last_enemy_sighting_position = self.enemy getEye();
   self notify("saw_enemy");
   if(!isalive(self.current_enemy) || self.current_enemy != self.enemy) {
     self.current_enemy = self.enemy;

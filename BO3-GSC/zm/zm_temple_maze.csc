@@ -6,18 +6,18 @@
 #namespace zm_temple_maze;
 
 function maze_trap_move_wall(localclientnum, active) {
-  if(!isdefined(self.wall)) {
+  if(!isDefined(self.wall)) {
     self set_maze_trap_wall(localclientnum);
   }
   wall = self.wall;
-  if(isdefined(wall)) {
+  if(isDefined(wall)) {
     wall thread maze_wall_init(localclientnum);
     wall thread move_maze_wall(active);
   }
 }
 
 function maze_wall_init(localclientnum) {
-  if(!isdefined(self.init) || !self.init) {
+  if(!isDefined(self.init) || !self.init) {
     self init_maze_mover(-128, 0.25, 1, 1, "evt_maze_wall_down", "evt_maze_wall_up");
     self.script_fxid = level._effect["maze_wall_impact"];
     self.var_f88b106c = level._effect["maze_wall_raise"];
@@ -58,28 +58,28 @@ function move_maze_wall(active) {
     ratio = (abs(goalz - currentz)) / abs(self.movedist);
     movetime = movetime * ratio;
   }
-  self notify("stop_maze_mover", !active && isdefined(self.movedownsound), active && isdefined(self.moveupsound));
+  self notify("stop_maze_mover", !active && isDefined(self.movedownsound), active && isDefined(self.moveupsound));
   self.isactive = active;
   self thread _maze_mover_move(goalpos, movetime);
 }
 
 function set_maze_trap_wall(localclientnum) {
-  walls = getentarray(localclientnum, "maze_trap_wall", "targetname");
+  walls = getEntArray(localclientnum, "maze_trap_wall", "targetname");
   bestwall = undefined;
   bestdist = undefined;
-  for (i = 0; i < walls.size; i++) {
+  for(i = 0; i < walls.size; i++) {
     wall = walls[i];
-    if(isdefined(wall.assigned)) {
+    if(isDefined(wall.assigned)) {
       continue;
     }
     dist = distancesquared(self.origin, wall.origin);
-    if(!isdefined(bestdist) || dist < bestdist) {
+    if(!isDefined(bestdist) || dist < bestdist) {
       bestdist = dist;
       bestwall = wall;
     }
   }
   self.wall = bestwall;
-  if(isdefined(self.wall)) {
+  if(isDefined(self.wall)) {
     self.wall.assigned = 1;
   }
 }
@@ -102,12 +102,12 @@ function _maze_mover_move(goal, time) {
 }
 
 function _maze_mover_play_fx(fx_name, offset) {
-  if(isdefined(fx_name)) {
-    vfwd = anglestoforward(self.angles);
+  if(isDefined(fx_name)) {
+    vfwd = anglesToForward(self.angles);
     org = self.origin;
-    if(isdefined(offset)) {
+    if(isDefined(offset)) {
       org = org + offset;
     }
-    playfx(self.client_num, fx_name, org, vfwd, (0, 0, 1));
+    playFX(self.client_num, fx_name, org, vfwd, (0, 0, 1));
   }
 }

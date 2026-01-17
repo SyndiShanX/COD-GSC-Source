@@ -920,5 +920,4 @@ main() {
   ent.v["angles"] = (0, 270, 0);
   ent.v["fxid"] = "snow_spray_detail_oriented_runner_sh";
   ent.v["delay"] = -15;
-
 }

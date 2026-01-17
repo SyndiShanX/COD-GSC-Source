@@ -10,7 +10,6 @@
 #include scripts\core_common\string_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace val;
 
 autoexec __init__system__() {
@@ -82,7 +81,7 @@ register(str_name, var_3509ed3e, call_on = "$self", func, ...) {
   level.values[str_name] = s_value;
 }
 
-private assert_registered(str_name) {
+assert_registered(str_name) {
   a_registered = getarraykeys(level.values);
 
   if(!isinarray(a_registered, hash(str_name))) {
@@ -145,7 +144,7 @@ nuke(str_name) {
   _set_default(str_name);
 }
 
-private _push_value(str_id, str_name, value) {
+_push_value(str_id, str_name, value) {
   _remove_value(str_id, str_name);
 
   if(!isDefined(self.values)) {
@@ -157,12 +156,12 @@ private _push_value(str_id, str_name, value) {
   }
 
   arrayinsert(self.values[str_name], {
-    #str_id: str_id, 
+    #str_id: str_id,
     #value: value
   }, 0);
 }
 
-private _remove_value(str_id, str_name) {
+_remove_value(str_id, str_name) {
   if(!isDefined(self)) {
     return -1;
   }
@@ -187,7 +186,7 @@ private _remove_value(str_id, str_name) {
   return isDefined(n_index) ? n_index : -1;
 }
 
-private _set_value(str_name, value) {
+_set_value(str_name, value) {
   s_value = level.values[str_name];
 
   if(isDefined(s_value) && isDefined(s_value.func)) {
@@ -199,7 +198,7 @@ private _set_value(str_name, value) {
   self.(str_name) = value;
 }
 
-private _set_default(str_name) {
+_set_default(str_name) {
   s_value = level.values[str_name];
 
   if(isDefined(s_value.default_value)) {
@@ -214,13 +213,13 @@ private _set_default(str_name) {
   }
 }
 
-private _replace_values(a_args, value) {
+_replace_values(a_args, value) {
   a_args = array::replace(a_args, "$self", self);
   a_args = array::replace(a_args, "$value", value);
   return a_args;
 }
 
-private set_takedamage(b_value = 1) {
+set_takedamage(b_value = 1) {
   if(isplayer(self)) {
     if(b_value) {
       self disableinvulnerability();
@@ -242,7 +241,7 @@ default_allowdeath() {
   return issentient(self) || isvehicle(self);
 }
 
-private validate_takedamage() {
+validate_takedamage() {
   if(isplayer(self)) {
     return !self getinvulnerability();
   }
@@ -250,7 +249,7 @@ private validate_takedamage() {
   return self.takedamage;
 }
 
-private set_takeweapons(b_value = 1) {
+set_takeweapons(b_value = 1) {
   if(b_value) {
     if(!(isDefined(self.gun_removed) && self.gun_removed)) {
       if(isplayer(self)) {
@@ -271,7 +270,7 @@ private set_takeweapons(b_value = 1) {
   self animation::attach_weapon();
 }
 
-private set_disableweapons(b_value = 1) {
+set_disableweapons(b_value = 1) {
   if(b_value) {
     self disableweapons();
     return;
@@ -280,7 +279,7 @@ private set_disableweapons(b_value = 1) {
   self enableweapons();
 }
 
-private set_disableoffhandweapons(b_value = 1) {
+set_disableoffhandweapons(b_value = 1) {
   if(b_value) {
     self disableoffhandweapons();
     return;
@@ -289,7 +288,7 @@ private set_disableoffhandweapons(b_value = 1) {
   self enableoffhandweapons();
 }
 
-private set_ignoreme(b_value = 1) {
+set_ignoreme(b_value = 1) {
   if(b_value) {
     if(function_ffa5b184(self)) {
       self.var_becd4d91 = 1;
@@ -308,13 +307,13 @@ private set_ignoreme(b_value = 1) {
   self.ignoreme = 0;
 }
 
-private set_disablegestures(b_value = 1) {
+set_disablegestures(b_value = 1) {
   if(isplayer(self)) {
     self.disablegestures = b_value;
   }
 }
 
-private set_hide(b_value = 1) {
+set_hide(b_value = 1) {
   if(b_value) {
     if(b_value == 1) {
       self hide();
@@ -328,7 +327,7 @@ private set_hide(b_value = 1) {
   self show();
 }
 
-private set_health_regen(b_value = 1) {
+set_health_regen(b_value = 1) {
   if(b_value) {
     self.heal.enabled = 1;
     return;
@@ -337,7 +336,7 @@ private set_health_regen(b_value = 1) {
   self.heal.enabled = 0;
 }
 
-private set_disable_health_regen_delay(b_value = 1) {
+set_disable_health_regen_delay(b_value = 1) {
   if(b_value) {
     self.disable_health_regen_delay = 1;
     return;
@@ -346,7 +345,7 @@ private set_disable_health_regen_delay(b_value = 1) {
   self.disable_health_regen_delay = 0;
 }
 
-private set_ignore_health_regen_delay(b_value = 1) {
+set_ignore_health_regen_delay(b_value = 1) {
   if(b_value) {
     self.ignore_health_regen_delay = 1;
     return;
@@ -355,7 +354,7 @@ private set_ignore_health_regen_delay(b_value = 1) {
   self.ignore_health_regen_delay = 0;
 }
 
-private validate(str_name, call_on, func, ...) {
+validate(str_name, call_on, func, ...) {
   a_registered = getarraykeys(level.values);
 
   if(!isinarray(a_registered, hash(str_name))) {
@@ -370,7 +369,7 @@ private validate(str_name, call_on, func, ...) {
   s_value.validate_args = vararg;
 }
 
-private _validate_value(str_name, value, b_assert) {
+_validate_value(str_name, value, b_assert) {
   if(!isDefined(b_assert)) {
     b_assert = 0;
   }
@@ -393,7 +392,7 @@ private _validate_value(str_name, value, b_assert) {
   return b_match;
 }
 
-private debug_values() {
+debug_values() {
   level flagsys::init_dvar("<dev string:xfe>");
   level flagsys::wait_till("<dev string:x111>");
 
@@ -489,4 +488,3 @@ display_value(index, str_name, str_id, value, b_valid, on_hud) {
 
   print3d(self.origin - (0, 0, index * 8), str_value, color, 1, 0.3, 1);
 }
-

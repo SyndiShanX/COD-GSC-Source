@@ -12,11 +12,11 @@
 #namespace zm_bgb_dead_of_nuclear_winter;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_dead_of_nuclear_winter", & __init__, undefined, undefined);
+  system::register("zm_bgb_dead_of_nuclear_winter", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  if(!(isdefined(level.bgb_in_use) && level.bgb_in_use)) {
+  if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
   bgb::register("zm_bgb_dead_of_nuclear_winter", "activated");

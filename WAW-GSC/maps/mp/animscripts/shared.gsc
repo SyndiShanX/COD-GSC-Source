@@ -50,7 +50,7 @@ HandleNoteTrack(note, flagName, customFunction, var1) {
 }
 
 DoNoteTracks(flagName, customFunction, var1) {
-  for (;;) {
+  for(;;) {
     self waittill(flagName, note);
     if(!isDefined(note))
       note = "undefined";
@@ -64,11 +64,9 @@ DoNoteTracksForeverProc(notetracksFunc, flagName, killString, customFunction, va
   if(isDefined(killString))
     self endon(killString);
   self endon("killanimscript");
-  for (;;) {
+  for(;;) {
     time = GetTime();
-    returnedNote = [
-      [notetracksFunc]
-    ](flagName, customFunction, var1);
+    returnedNote = [[notetracksFunc]](flagName, customFunction, var1);
     timetaken = GetTime() - time;
     if(timetaken < 0.05) {
       time = GetTime();
@@ -94,7 +92,7 @@ DoNoteTracksForTimeProc(doNoteTracksForeverFunc, time, flagName, customFunction,
 }
 
 DoNoteTracksForTime(time, flagName, customFunction, var1) {
-  ent = spawnstruct();
+  ent = spawnStruct();
   ent thread doNoteTracksForTimeEndNotify(time);
   DoNoteTracksForTimeProc(::DoNoteTracksForever, time, flagName, customFunction, ent, var1);
 }
@@ -127,7 +125,7 @@ trackLoop() {
   yawDelta = 0;
   pitchDelta = 0;
   firstFrame = true;
-  for (;;) {
+  for(;;) {
     incrAnimAimWeight();
     selfShootAtPos = (self.origin[0], self.origin[1], self getEye()[2]);
     shootPos = undefined;

@@ -13,12 +13,12 @@ bunker_wait_for_flame(bnkr, fire_fx, flame_guys, flame_guys_func, exploderID) {
   trig = getent("bunker" + bnkr + "_dmg_trig", "targetname");
   dmg = 0;
   level thread bunker_wait_for_explosives(bnkr, trig, exploderID);
-  support_trigs = getentarray("bunker_" + bnkr + "_support", "script_noteworthy");
+  support_trigs = getEntArray("bunker_" + bnkr + "_support", "script_noteworthy");
   if(isDefined(support_trigs)) {
     array_thread(support_trigs, ::add_support_spawn_functions);
   }
   strNotify = bnkr + "_flamed";
-  while (dmg < 500) {
+  while(dmg < 500) {
     trig waittill("damage", amount, attacker, direction_vec, P, type);
     if(type != "MOD_BURNED") {
       continue;
@@ -27,7 +27,7 @@ bunker_wait_for_flame(bnkr, fire_fx, flame_guys, flame_guys_func, exploderID) {
     }
   }
   if(isDefined(support_trigs)) {
-    for (i = 0; i < support_trigs.size; i++) {
+    for(i = 0; i < support_trigs.size; i++) {
       if(isDefined(support_trigs[i])) {
         support_trigs[i] trigger_off();
       }
@@ -35,7 +35,7 @@ bunker_wait_for_flame(bnkr, fire_fx, flame_guys, flame_guys_func, exploderID) {
   }
   kill_guys_in_bunker(bnkr);
   if(isDefined(flame_guys)) {
-    flamers = getentarray(flame_guys, "targetname");
+    flamers = getEntArray(flame_guys, "targetname");
     array_thread(flamers, flame_guys_func);
   }
   level notify(strNotify);
@@ -85,9 +85,9 @@ bunker_wait_for_explosives(bnkr, trig, exploderID) {
   level notify(bnkr + "_destroyed");
   level notify("stop_" + bnkr);
   level notify(bnkr + "_cleared");
-  support_trigs = getentarray("bunker_" + bnkr + "_support", "script_noteworthy");
+  support_trigs = getEntArray("bunker_" + bnkr + "_support", "script_noteworthy");
   if(isDefined(support_trigs)) {
-    for (i = 0; i < support_trigs.size; i++) {
+    for(i = 0; i < support_trigs.size; i++) {
       support_trigs[i] trigger_off();
     }
   }
@@ -95,8 +95,8 @@ bunker_wait_for_explosives(bnkr, trig, exploderID) {
 
 add_support_spawn_functions() {
   target = self.target;
-  spawners = getentarray(target, "targetname");
-  for (i = 0; i < spawners.size; i++) {
+  spawners = getEntArray(target, "targetname");
+  for(i = 0; i < spawners.size; i++) {
     spawners[i] add_spawn_function(::guy_to_goal_blind);
   }
 }
@@ -104,7 +104,7 @@ add_support_spawn_functions() {
 kill_guys_in_bunker(bnkr) {
   trig = getent("bunker_" + bnkr + "_radius", "targetname");
   bunker_guys = getaiarray("axis");
-  for (i = 0; i < bunker_guys.size; i++) {
+  for(i = 0; i < bunker_guys.size; i++) {
     if(bunker_guys[i] istouching(trig)) {
       bunker_guys[i] thread flamedeath();
     }
@@ -113,8 +113,8 @@ kill_guys_in_bunker(bnkr) {
 
 bunker_interior_fire(bnkr, fx) {
   spots = getstructarray("bunker_" + bnkr + "_fire", "targetname");
-  for (i = 0; i < spots.size; i++) {
-    playfx(level._effect[fx], spots[i].origin);
+  for(i = 0; i < spots.size; i++) {
+    playFX(level._effect[fx], spots[i].origin);
   }
 }
 
@@ -151,9 +151,9 @@ death_flame_fx() {
   tagArray[tagArray.size] = "J_Knee_LE";
   tagArray[tagArray.size] = "J_Ankle_RI";
   tagArray[tagArray.size] = "J_Ankle_LE";
-  for (i = 0; i < 3; i++) {
-    PlayFxOnTag(level._effect["flame_death1"], self, tagArray[randomint(tagArray.size)]);
-    PlayFxOnTag(level._effect["flame_death2"], self, "J_SpineLower");
+  for(i = 0; i < 3; i++) {
+    playFXOnTag(level._effect["flame_death1"], self, tagArray[randomint(tagArray.size)]);
+    playFXOnTag(level._effect["flame_death2"], self, "J_SpineLower");
   }
 }
 
@@ -219,8 +219,8 @@ bunker_dialogue_explosives_thrown(bnkr) {
 
 nag_throw_satchel(bnkr) {
   level endon(bnkr + "_destroyed");
-  while (1) {
-    for (i = 1; i < 4; i++) {
+  while(1) {
+    for(i = 1; i < 4; i++) {
       wait(10);
       if(i == 1) {
         level.polonsky dialogue("hurryitup");
@@ -251,7 +251,7 @@ nag_clear_bunker(bnkr) {
   level endon(bnkr + "_flamed");
   players = get_players();
   p1 = players[0];
-  while (1) {
+  while(1) {
     wait(10);
     if(p1 hasWeapon("m2_flamethrower_wet")) {
       switch (randomint(8)) {
@@ -345,16 +345,16 @@ update_gun_objectives() {
   }
   switch (guns) {
     case 1:
-      objective_string(1, & "OKI2_OBJ_2_1");
+      objective_string(1, &"OKI2_OBJ_2_1");
       break;
     case 2:
-      objective_string(1, & "OKI2_OBJ_2_2");
+      objective_string(1, &"OKI2_OBJ_2_2");
       break;
     case 3:
-      objective_string(1, & "OKI2_OBJ_2_3");
+      objective_string(1, &"OKI2_OBJ_2_3");
       break;
     case 4:
-      objective_string(1, & "OKI2_OBJ_2_4");
+      objective_string(1, &"OKI2_OBJ_2_4");
       break;
   }
   autosave_by_name(guns + " guns remaining");
@@ -391,10 +391,10 @@ guns_remaining() {
 bunker_waitfor_cleared(bnkr) {
   trig = getent("bunker_" + bnkr + "_radius", "targetname");
   bunker_cleared = false;
-  while (!bunker_cleared) {
+  while(!bunker_cleared) {
     guys = 0;
     enemies = getaiarray("axis");
-    for (i = 0; i < enemies.size; i++) {
+    for(i = 0; i < enemies.size; i++) {
       if(enemies[i] istouching(trig)) {
         guys++;
       }

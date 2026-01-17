@@ -5,7 +5,7 @@
 *****************************************/
 
 init_battlechatter() {
-  if(isdefined(anim.chatinitialized) && anim.chatinitialized) {
+  if(isDefined(anim.chatinitialized) && anim.chatinitialized) {
     return;
   }
   if(getdvar("bcs_enable") == "")
@@ -71,49 +71,49 @@ init_battlechatter() {
   anim.countryids["arab"] = "AB";
   anim.usedids = [];
   anim.usedids["russian"] = [];
-  anim.usedids["russian"][0] = spawnstruct();
+  anim.usedids["russian"][0] = spawnStruct();
   anim.usedids["russian"][0].count = 0;
   anim.usedids["russian"][0].npcid = "0";
-  anim.usedids["russian"][1] = spawnstruct();
+  anim.usedids["russian"][1] = spawnStruct();
   anim.usedids["russian"][1].count = 0;
   anim.usedids["russian"][1].npcid = "1";
-  anim.usedids["russian"][2] = spawnstruct();
+  anim.usedids["russian"][2] = spawnStruct();
   anim.usedids["russian"][2].count = 0;
   anim.usedids["russian"][2].npcid = "3";
   anim.usedids["british"] = [];
-  anim.usedids["british"][0] = spawnstruct();
+  anim.usedids["british"][0] = spawnStruct();
   anim.usedids["british"][0].count = 0;
   anim.usedids["british"][0].npcid = "0";
-  anim.usedids["british"][1] = spawnstruct();
+  anim.usedids["british"][1] = spawnStruct();
   anim.usedids["british"][1].count = 0;
   anim.usedids["british"][1].npcid = "1";
-  anim.usedids["british"][2] = spawnstruct();
+  anim.usedids["british"][2] = spawnStruct();
   anim.usedids["british"][2].count = 0;
   anim.usedids["british"][2].npcid = "2";
-  anim.usedids["british"][3] = spawnstruct();
+  anim.usedids["british"][3] = spawnStruct();
   anim.usedids["british"][3].count = 0;
   anim.usedids["british"][3].npcid = "3";
   anim.usedids["american"] = [];
-  anim.usedids["american"][0] = spawnstruct();
+  anim.usedids["american"][0] = spawnStruct();
   anim.usedids["american"][0].count = 0;
   anim.usedids["american"][0].npcid = "0";
-  anim.usedids["american"][1] = spawnstruct();
+  anim.usedids["american"][1] = spawnStruct();
   anim.usedids["american"][1].count = 0;
   anim.usedids["american"][1].npcid = "1";
-  anim.usedids["american"][2] = spawnstruct();
+  anim.usedids["american"][2] = spawnStruct();
   anim.usedids["american"][2].count = 0;
   anim.usedids["american"][2].npcid = "2";
   anim.usedids["arab"] = [];
-  anim.usedids["arab"][0] = spawnstruct();
+  anim.usedids["arab"][0] = spawnStruct();
   anim.usedids["arab"][0].count = 0;
   anim.usedids["arab"][0].npcid = "0";
-  anim.usedids["arab"][1] = spawnstruct();
+  anim.usedids["arab"][1] = spawnStruct();
   anim.usedids["arab"][1].count = 0;
   anim.usedids["arab"][1].npcid = "1";
-  anim.usedids["arab"][2] = spawnstruct();
+  anim.usedids["arab"][2] = spawnStruct();
   anim.usedids["arab"][2].count = 0;
   anim.usedids["arab"][2].npcid = "2";
-  anim.usedids["arab"][3] = spawnstruct();
+  anim.usedids["arab"][3] = spawnStruct();
   anim.usedids["arab"][3].count = 0;
   anim.usedids["arab"][3].npcid = "3";
   anim.eventtypeminwait = [];
@@ -125,7 +125,7 @@ init_battlechatter() {
   anim.eventtypeminwait["custom"] = [];
   anim.eventtypeminwait["direction"] = [];
 
-  if(isdefined(level._stealth)) {
+  if(isDefined(level._stealth)) {
     anim.eventactionminwait["threat"]["self"] = 20000;
     anim.eventactionminwait["threat"]["squad"] = 30000;
   } else {
@@ -180,9 +180,9 @@ init_battlechatter() {
   anim.eventduration["custom"]["generic"] = 1000;
   anim.chatcount = 0;
   anim.moveorigin = spawn("script_origin", (0, 0, 0));
-  anim.areas = getentarray("trigger_location", "targetname");
-  anim.locations = getentarray("trigger_location", "targetname");
-  anim.landmarks = getentarray("trigger_landmark", "targetname");
+  anim.areas = getEntArray("trigger_location", "targetname");
+  anim.locations = getEntArray("trigger_location", "targetname");
+  anim.landmarks = getEntArray("trigger_landmark", "targetname");
   anim.squadcreatefuncs[anim.squadcreatefuncs.size] = ::init_squadbattlechatter;
   anim.squadcreatestrings[anim.squadcreatestrings.size] = "::init_squadBattleChatter";
   anim.isteamspeaking["allies"] = 0;
@@ -207,7 +207,7 @@ init_battlechatter() {
   anim.isteamsaying["neutral"]["inform"] = 0;
   anim.isteamsaying["neutral"]["custom"] = 0;
 
-  if(!isdefined(level.battlechatter)) {
+  if(!isDefined(level.battlechatter)) {
     level.battlechatter = [];
     level.battlechatter["allies"] = 1;
     level.battlechatter["axis"] = 1;
@@ -218,8 +218,8 @@ init_battlechatter() {
   anim.lastteamspeaktime["allies"] = -5000;
   anim.lastteamspeaktime["axis"] = -5000;
 
-  for (var_0 = 0; var_0 < anim.squadindex.size; var_0++) {
-    if(isdefined(anim.squadindex[var_0].chatinitialized) && anim.squadindex[var_0].chatinitialized) {
+  for(var_0 = 0; var_0 < anim.squadindex.size; var_0++) {
+    if(isDefined(anim.squadindex[var_0].chatinitialized) && anim.squadindex[var_0].chatinitialized) {
       continue;
     }
     anim.squadindex[var_0] init_squadbattlechatter();
@@ -246,7 +246,7 @@ shutdown_battlechatter() {
   anim.player.chatinitialized = 0;
   level.battlechatter = undefined;
 
-  for (var_0 = 0; var_0 < anim.squadcreatefuncs.size; var_0++) {
+  for(var_0 = 0; var_0 < anim.squadcreatefuncs.size; var_0++) {
     if(anim.squadcreatestrings[var_0] != "::init_squadBattleChatter") {
       continue;
     }
@@ -294,7 +294,7 @@ init_squadbattlechatter() {
   var_0.squadupdatefuncs[var_0.squadupdatefuncs.size] = ::initcontact;
   var_0.squadupdatestrings[var_0.squadupdatestrings.size] = "::initContact";
 
-  for (var_1 = 0; var_1 < anim.squadindex.size; var_1++)
+  for(var_1 = 0; var_1 < anim.squadindex.size; var_1++)
     var_0 thread initcontact(anim.squadindex[var_1].squadname);
 
   var_0 thread animscripts\battlechatter_ai::squadthreatwaiter();
@@ -312,7 +312,7 @@ shutdown_squadbattlechatter() {
   var_0.nexttypesaytimes = undefined;
   var_0.ismembersaying = undefined;
 
-  for (var_1 = 0; var_1 < var_0.memberaddfuncs.size; var_1++) {
+  for(var_1 = 0; var_1 < var_0.memberaddfuncs.size; var_1++) {
     if(var_0.memberaddstrings[var_1] != "::addToSystem") {
       continue;
     }
@@ -325,7 +325,7 @@ shutdown_squadbattlechatter() {
     var_0.memberaddstrings[var_0.memberaddstrings.size - 1] = undefined;
   }
 
-  for (var_1 = 0; var_1 < var_0.memberremovefuncs.size; var_1++) {
+  for(var_1 = 0; var_1 < var_0.memberremovefuncs.size; var_1++) {
     if(var_0.memberremovestrings[var_1] != "::removeFromSystem") {
       continue;
     }
@@ -338,7 +338,7 @@ shutdown_squadbattlechatter() {
     var_0.memberremovestrings[var_0.memberremovestrings.size - 1] = undefined;
   }
 
-  for (var_1 = 0; var_1 < var_0.squadupdatefuncs.size; var_1++) {
+  for(var_1 = 0; var_1 < var_0.squadupdatefuncs.size; var_1++) {
     if(var_0.squadupdatestrings[var_1] != "::initContact") {
       continue;
     }
@@ -351,7 +351,7 @@ shutdown_squadbattlechatter() {
     var_0.squadupdatestrings[var_0.squadupdatestrings.size - 1] = undefined;
   }
 
-  for (var_1 = 0; var_1 < anim.squadindex.size; var_1++)
+  for(var_1 = 0; var_1 < anim.squadindex.size; var_1++)
     var_0 shutdowncontact(anim.squadindex[var_1].squadname);
 
   var_0.chatinitialized = 0;
@@ -364,7 +364,7 @@ bcsenabled() {
 bcsdebugwaiter() {
   var_0 = getdvar("bcs_enable");
 
-  for (;;) {
+  for(;;) {
     var_1 = getdvar("bcs_enable");
 
     if(var_1 != var_0) {
@@ -393,7 +393,7 @@ enablebattlechatter() {
   anim.player thread animscripts\battlechatter_ai::addtosystem();
   var_0 = getaiarray();
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++)
     var_0[var_1] animscripts\battlechatter_ai::addtosystem();
 }
 
@@ -401,8 +401,8 @@ disablebattlechatter() {
   shutdown_battlechatter();
   var_0 = getaiarray();
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++) {
-    if(isdefined(var_0[var_1].squad) && var_0[var_1].squad.chatinitialized)
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+    if(isDefined(var_0[var_1].squad) && var_0[var_1].squad.chatinitialized)
       var_0[var_1].squad shutdown_squadbattlechatter();
 
     var_0[var_1] animscripts\battlechatter_ai::removefromsystem();
@@ -434,7 +434,7 @@ playbattlechatter() {
   self endon("death");
   var_0 = gethighestpriorityevent();
 
-  if(!isdefined(var_0)) {
+  if(!isDefined(var_0)) {
     return;
   }
   switch (var_0) {
@@ -466,14 +466,14 @@ playthreatevent() {
   self.curevent = self.chatqueue["threat"];
   var_0 = self.chatqueue["threat"].threat;
 
-  if(!isalive(var_0) || isdefined(var_0.calledout) && isdefined(var_0.calledout[self.squad.squadname])) {
+  if(!isalive(var_0) || isDefined(var_0.calledout) && isDefined(var_0.calledout[self.squad.squadname])) {
     return;
   }
   anim thread lockaction(self, "threat");
 
   switch (self.chatqueue["threat"].eventtype) {
     case "infantry":
-      if(var_0 == level.player || !isdefined(var_0 getturret()))
+      if(var_0 == level.player || !isDefined(var_0 getturret()))
         threatinfantry(var_0);
 
       break;
@@ -489,12 +489,12 @@ playthreatevent() {
   if(!isalive(var_0)) {
     return;
   }
-  var_0.calledout[self.squad.squadname] = spawnstruct();
+  var_0.calledout[self.squad.squadname] = spawnStruct();
   var_0.calledout[self.squad.squadname].spotter = self;
   var_0.calledout[self.squad.squadname].threattype = self.chatqueue["threat"].eventtype;
   var_0.calledout[self.squad.squadname].expiretime = gettime() + 3000;
 
-  if(isdefined(var_0.squad))
+  if(isDefined(var_0.squad))
     self.squad.squadlist[var_0.squad.squadname].calledout = 1;
 }
 
@@ -503,7 +503,7 @@ threatinfantry(var_0, var_1) {
   var_2 = createchatphrase();
   var_2.master = 1;
 
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     var_2.forcedetail = 0;
   else
     var_2.forcedetail = var_1;
@@ -556,9 +556,9 @@ threatinfantry(var_0, var_1) {
     var_2 threatinfantryrpg(var_0);
   else if(var_0 animscripts\pain::weaponanims() == "mg")
     var_2 threatinfantrymg(var_0);
-  else if(var_0 isexposed() && !isdefined(var_0 getlandmark()))
+  else if(var_0 isexposed() && !isDefined(var_0 getlandmark()))
     var_2 threatinfantryexposed(var_0);
-  else if(!isdefined(var_0 getlocation()) && !isdefined(var_0 getlandmark())) {
+  else if(!isDefined(var_0 getlocation()) && !isDefined(var_0 getlandmark())) {
     var_2 addthreatalias(1.0, "infantry", "generic");
     var_2 adddirectionalias(1.0, "relative", var_0);
     var_2 addareaalias(0.5, var_0);
@@ -568,11 +568,11 @@ threatinfantry(var_0, var_1) {
     if(var_2 addlocationalias(1.0, var_0)) {
       var_4 = gettargettingai(var_0);
 
-      if(isdefined(var_4)) {
-        if(isdefined(var_4.bcname) && cansayname(var_4.bcname)) {
+      if(isDefined(var_4)) {
+        if(isDefined(var_4.bcname) && cansayname(var_4.bcname)) {
           var_2 addnamealias(var_4.bcname);
           var_2.looktarget = var_4;
-        } else if(isdefined(var_4.bcrank)) {
+        } else if(isDefined(var_4.bcrank)) {
           var_2 addrankalias(var_4.bcrank);
           var_2.looktarget = var_4;
         }
@@ -592,11 +592,11 @@ threatinfantry(var_0, var_1) {
     } else if(var_2 addlandmarkalias(1.0, var_0)) {
       var_4 = gettargettingai(var_0);
 
-      if(isdefined(var_4)) {
-        if(isdefined(var_4.bcname) && cansayname(var_4.bcname)) {
+      if(isDefined(var_4)) {
+        if(isDefined(var_4.bcname) && cansayname(var_4.bcname)) {
           var_2 addnamealias(var_4.bcname);
           var_2.looktarget = var_4;
-        } else if(isdefined(var_4.bcrank)) {
+        } else if(isDefined(var_4.bcrank)) {
           var_2 addrankalias(var_4.bcrank);
           var_2.looktarget = var_4;
         }
@@ -624,7 +624,7 @@ threatdog(var_0, var_1) {
   var_2 = createchatphrase();
   var_2.master = 1;
 
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     var_2.forcedetail = 0;
   else
     var_2.forcedetail = var_1;
@@ -661,7 +661,7 @@ threatdog(var_0, var_1) {
 }
 
 threatinfantryexposed(var_0) {
-  if(!isdefined(var_0 getlandmark()))
+  if(!isDefined(var_0 getlandmark()))
     addthreatalias(1.0, "infantry", "exposed");
   else
     addthreatalias(1.0, "infantry", "generic");
@@ -812,7 +812,7 @@ ordermove(var_0, var_1) {
     var_3 = getaiarray(self.team);
     var_1 = undefined;
 
-    for (var_4 = 0; var_4 < var_3.size; var_4++) {
+    for(var_4 = 0; var_4 < var_3.size; var_4++) {
       if(var_3[var_4] == self) {
         continue;
       }
@@ -820,11 +820,11 @@ ordermove(var_0, var_1) {
         var_1 = var_3[var_4];
     }
 
-    if(isdefined(var_1) && isdefined(var_1.bcname) && cansayname(var_1.bcname)) {
+    if(isDefined(var_1) && isDefined(var_1.bcname) && cansayname(var_1.bcname)) {
       var_2 addnamealias(var_1.bcname);
       var_2.looktarget = var_1;
       var_1 animscripts\battlechatter_ai::addresponseevent("ack", "follow", self, 1.0);
-    } else if(isdefined(var_1) && isdefined(var_1.bcrank)) {
+    } else if(isDefined(var_1) && isDefined(var_1.bcrank)) {
       var_2 addrankalias(var_1.bcrank);
       var_2.looktarget = var_1;
       var_1 animscripts\battlechatter_ai::addresponseevent("ack", "follow", self, 1.0);
@@ -860,14 +860,14 @@ ordercover(var_0, var_1) {
   var_2 = createchatphrase();
 
   if(randomfloat(1) < 0.5 && isofficer()) {
-    if(isdefined(var_1) && isdefined(var_1.bcrank)) {
+    if(isDefined(var_1) && isDefined(var_1.bcrank)) {
       var_2 addrankalias(var_1.bcrank);
       var_2.looktarget = var_1;
     }
-  } else if(isdefined(var_1) && isdefined(var_1.bcname) && cansayname(var_1.bcname)) {
+  } else if(isDefined(var_1) && isDefined(var_1.bcname) && cansayname(var_1.bcname)) {
     var_2 addnamealias(var_1.bcname);
     var_2.looktarget = var_1;
-  } else if(isdefined(var_1) && isdefined(var_1.bcrank)) {
+  } else if(isDefined(var_1) && isDefined(var_1.bcrank)) {
     var_2 addrankalias(var_1.bcrank);
     var_2.looktarget = var_1;
   }
@@ -908,7 +908,7 @@ informreloading(var_0, var_1) {
   self endon("removed from battleChatter");
   var_2 = createchatphrase();
 
-  if(var_1 == "coverme" && isalive(var_0) && isdefined(var_0.bcname) && cansayname(var_0.bcname)) {
+  if(var_1 == "coverme" && isalive(var_0) && isDefined(var_0.bcname) && cansayname(var_0.bcname)) {
     if(var_0 == level.player || self.countryid != "US")
       var_1 = "generic";
     else {
@@ -974,16 +974,16 @@ playphrase(var_0, var_1) {
   anim endon("battlechatter disabled");
   self endon("death");
 
-  if(isdefined(var_1)) {
+  if(isDefined(var_1)) {
     return;
   }
-  if(isdefined(level._stealth) && self.voice == "british") {
-    for (var_2 = 0; var_2 < var_0.soundaliases.size; var_2++)
+  if(isDefined(level._stealth) && self.voice == "british") {
+    for(var_2 = 0; var_2 < var_0.soundaliases.size; var_2++)
       var_0.soundaliases[var_2] = var_0.soundaliases[var_2] + "_s";
   }
 
   if(battlechatter_canprint()) {
-    for (var_2 = 0; var_2 < var_0.soundaliases.size; var_2++)
+    for(var_2 = 0; var_2 < var_0.soundaliases.size; var_2++)
       battlechatter_print(var_0.soundaliases[var_2]);
 
     battlechatter_println("");
@@ -991,7 +991,7 @@ playphrase(var_0, var_1) {
 
   thread battlechatter_printdump(var_0.soundaliases);
 
-  for (var_2 = 0; var_2 < var_0.soundaliases.size; var_2++) {
+  for(var_2 = 0; var_2 < var_0.soundaliases.size; var_2++) {
     if(!self.battlechatter) {
       continue;
     }
@@ -1008,7 +1008,7 @@ playphrase(var_0, var_1) {
     if(var_0.master && self.team == "allies") {
       if(getdvar("bcs_threatPlayerRelative") == "on") {
         if(strfind(var_0.soundaliases[var_2], "_direction_")) {
-          if(isdefined(var_0.threatent))
+          if(isDefined(var_0.threatent))
             var_0.soundaliases[var_2] = var_0 getdirectionaliasplayerrelative(var_0.threatent);
         }
       }
@@ -1019,7 +1019,7 @@ playphrase(var_0, var_1) {
       continue;
     }
 
-    self playsound(var_0.soundaliases[var_2], var_0.soundaliases[var_2], 1);
+    self playSound(var_0.soundaliases[var_2], var_0.soundaliases[var_2], 1);
     thread maps\_anim::anim_facialfiller(var_0.soundaliases[var_2], var_0.looktarget);
     self waittill(var_0.soundaliases[var_2]);
   }
@@ -1070,8 +1070,8 @@ updatecontact(var_0, var_1) {
   if(gettime() - self.squadlist[var_0].lastcontact > 10000) {
     var_2 = 0;
 
-    for (var_3 = 0; var_3 < self.members.size; var_3++) {
-      if(self.members[var_3] != var_1 && isalive(self.members[var_3].enemy) && isdefined(self.members[var_3].enemy.squad) && self.members[var_3].enemy.squad.squadname == var_0)
+    for(var_3 = 0; var_3 < self.members.size; var_3++) {
+      if(self.members[var_3] != var_1 && isalive(self.members[var_3].enemy) && isDefined(self.members[var_3].enemy.squad) && self.members[var_3].enemy.squad.squadname == var_0)
         var_2 = 1;
     }
 
@@ -1091,10 +1091,10 @@ cansay(var_0, var_1, var_2, var_3) {
   if(self == level.player)
     return 0;
 
-  if(!isdefined(self.battlechatter) || !self.battlechatter)
+  if(!isDefined(self.battlechatter) || !self.battlechatter)
     return 0;
 
-  if(isdefined(var_2) && var_2 >= 1)
+  if(isDefined(var_2) && var_2 >= 1)
     return 1;
 
   if(gettime() + anim.eventactionminwait[var_0]["self"] < self.nextsaytimes[var_0])
@@ -1103,10 +1103,10 @@ cansay(var_0, var_1, var_2, var_3) {
   if(gettime() + anim.eventactionminwait[var_0]["squad"] < self.squad.nextsaytimes[var_0])
     return 0;
 
-  if(isdefined(var_1) && typelimited(var_0, var_1))
+  if(isDefined(var_1) && typelimited(var_0, var_1))
     return 0;
 
-  if(isdefined(var_1) && anim.eventpriority[var_0][var_1] < self.bcs_minpriority)
+  if(isDefined(var_1) && anim.eventpriority[var_0][var_1] < self.bcs_minpriority)
     return 0;
 
   if(self.voice == "british")
@@ -1116,10 +1116,10 @@ cansay(var_0, var_1, var_2, var_3) {
 }
 
 britfilter(var_0, var_1, var_2) {
-  if(!isdefined(var_2))
+  if(!isDefined(var_2))
     var_2 = "";
 
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     return 0;
 
   switch (var_0) {
@@ -1207,17 +1207,17 @@ gettargettingai(var_0) {
   var_1 = self.squad;
   var_2 = [];
 
-  for (var_3 = 0; var_3 < var_1.members.size; var_3++) {
-    if(isdefined(var_1.members[var_3].enemy) && var_1.members[var_3].enemy == var_0)
+  for(var_3 = 0; var_3 < var_1.members.size; var_3++) {
+    if(isDefined(var_1.members[var_3].enemy) && var_1.members[var_3].enemy == var_0)
       var_2[var_2.size] = var_1.members[var_3];
   }
 
-  if(!isdefined(var_2[0]))
+  if(!isDefined(var_2[0]))
     return undefined;
 
   var_4 = undefined;
 
-  for (var_3 = 0; var_3 < var_2.size; var_3++) {
+  for(var_3 = 0; var_3 < var_2.size; var_3++) {
     if(var_2[var_3] cansay("response"))
       return var_4;
   }
@@ -1234,8 +1234,8 @@ getqueueevents() {
   var_0[3] = "threat";
   var_0[4] = "inform";
 
-  for (var_2 = var_0.size - 1; var_2 >= 0; var_2--) {
-    for (var_3 = 1; var_3 <= var_2; var_3++) {
+  for(var_2 = var_0.size - 1; var_2 >= 0; var_2--) {
+    for(var_3 = 1; var_3 <= var_2; var_3++) {
       if(self.chatqueue[var_0[var_3 - 1]].priority < self.chatqueue[var_0[var_3]].priority) {
         var_4 = var_0[var_3 - 1];
         var_0[var_3 - 1] = var_0[var_3];
@@ -1246,7 +1246,7 @@ getqueueevents() {
 
   var_5 = 0;
 
-  for (var_2 = 0; var_2 < var_0.size; var_2++) {
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
     var_6 = geteventstate(var_0[var_2]);
 
     if(var_6 == " valid" && !var_5) {
@@ -1306,10 +1306,10 @@ isvalidevent(var_0) {
 }
 
 typelimited(var_0, var_1) {
-  if(!isdefined(anim.eventtypeminwait[var_0][var_1]))
+  if(!isDefined(anim.eventtypeminwait[var_0][var_1]))
     return 0;
 
-  if(!isdefined(self.squad.nexttypesaytimes[var_0][var_1]))
+  if(!isDefined(self.squad.nexttypesaytimes[var_0][var_1]))
     return 0;
 
   if(gettime() > self.squad.nexttypesaytimes[var_0][var_1])
@@ -1319,7 +1319,7 @@ typelimited(var_0, var_1) {
 }
 
 dotypelimit(var_0, var_1) {
-  if(!isdefined(anim.eventtypeminwait[var_0][var_1])) {
+  if(!isDefined(anim.eventtypeminwait[var_0][var_1])) {
     return;
   }
   self.squad.nexttypesaytimes[var_0][var_1] = gettime() + anim.eventtypeminwait[var_0][var_1];
@@ -1336,12 +1336,12 @@ bcissniper() {
 }
 
 isexposed() {
-  if(isdefined(getlocation()))
+  if(isDefined(getlocation()))
     return 0;
 
   var_0 = bcgetclaimednode();
 
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     return 1;
 
   if(var_0.type[0] == "C" && var_0.type[1] == "o" && var_0.type[2] == "v")
@@ -1353,7 +1353,7 @@ isexposed() {
 isclaimednodecover() {
   var_0 = bcgetclaimednode();
 
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     return 0;
 
   if(var_0.type[0] == "C" && var_0.type[1] == "o" && var_0.type[2] == "v")
@@ -1365,10 +1365,10 @@ isclaimednodecover() {
 isclaimednodewindow() {
   var_0 = bcgetclaimednode();
 
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     return 0;
 
-  if(!isdefined(var_0.script_location))
+  if(!isDefined(var_0.script_location))
     return 0;
 
   if(var_0.script_location == "window")
@@ -1380,7 +1380,7 @@ isclaimednodewindow() {
 isnodecover() {
   var_0 = self.node;
 
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     return 0;
 
   if(var_0.type[0] == "C" && var_0.type[1] == "o" && var_0.type[2] == "v")
@@ -1413,7 +1413,7 @@ getname() {
   else
     var_0 = undefined;
 
-  if(!isdefined(var_0) || self.voice == "british")
+  if(!isDefined(var_0) || self.voice == "british")
     return undefined;
 
   var_1 = strtok(var_0, " ");
@@ -1438,10 +1438,10 @@ getspeakers(var_0, var_1) {
   var_2 = [];
   var_3 = getaiarray(self.team);
 
-  if(isdefined(var_1) && var_1) {
+  if(isDefined(var_1) && var_1) {
     var_4 = [];
 
-    for (var_5 = 0; var_5 < var_3.size; var_5++) {
+    for(var_5 = 0; var_5 < var_3.size; var_5++) {
       if(var_3[var_5] isofficer())
         var_4[var_4.size] = var_3[var_5];
     }
@@ -1449,7 +1449,7 @@ getspeakers(var_0, var_1) {
     var_3 = var_4;
   }
 
-  for (var_5 = 0; var_5 < var_3.size; var_5++) {
+  for(var_5 = 0; var_5 < var_3.size; var_5++) {
     if(var_3[var_5] == self) {
       continue;
     }
@@ -1465,8 +1465,8 @@ getspeakers(var_0, var_1) {
 getarea() {
   var_0 = anim.areas;
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++) {
-    if(self istouching(var_0[var_1]) && isdefined(var_0[var_1].script_area))
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+    if(self istouching(var_0[var_1]) && isDefined(var_0[var_1].script_area))
       return var_0[var_1];
   }
 
@@ -1476,8 +1476,8 @@ getarea() {
 getlocation() {
   var_0 = anim.locations;
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++) {
-    if(self istouching(var_0[var_1]) && isdefined(var_0[var_1].script_location))
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+    if(self istouching(var_0[var_1]) && isDefined(var_0[var_1].script_location))
       return var_0[var_1];
   }
 
@@ -1487,8 +1487,8 @@ getlocation() {
 getlandmark() {
   var_0 = anim.landmarks;
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++) {
-    if(self istouching(var_0[var_1]) && isdefined(var_0[var_1].script_landmark))
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+    if(self istouching(var_0[var_1]) && isDefined(var_0[var_1].script_landmark))
       return var_0[var_1];
   }
 
@@ -1576,7 +1576,7 @@ getvectorrightangle(var_0) {
 getvectorarrayaverage(var_0) {
   var_1 = (0, 0, 0);
 
-  for (var_2 = 0; var_2 < var_0.size; var_2++)
+  for(var_2 = 0; var_2 < var_0.size; var_2++)
     var_1 = var_1 + var_0[var_2];
 
   return (var_1[0] / var_0.size, var_1[1] / var_0.size, var_1[2] / var_0.size);
@@ -1605,7 +1605,7 @@ addareaalias(var_0, var_1) {
 
   self.areaent = var_1 getarea();
 
-  if(!isdefined(self.areaent))
+  if(!isDefined(self.areaent))
     return 0;
 
   if(self.areaent.script_area == "window" || self.areaent.script_area == "doorway") {}
@@ -1613,7 +1613,7 @@ addareaalias(var_0, var_1) {
   var_2 = self.areaent.script_area;
   var_3 = var_1 bcgetclaimednode();
 
-  if(isdefined(var_3) && isdefined(var_3.script_area)) {
+  if(isDefined(var_3) && isDefined(var_3.script_area)) {
     var_2 = var_2 + var_3.script_area;
     self.areadetail = 1;
   } else {
@@ -1632,13 +1632,13 @@ addlocationalias(var_0, var_1) {
 
   self.locationent = var_1 getlocation();
 
-  if(!isdefined(self.locationent))
+  if(!isDefined(self.locationent))
     return 0;
 
   var_2 = self.locationent.script_location;
   var_3 = var_1 bcgetclaimednode();
 
-  if(isdefined(var_3) && isdefined(var_3.script_location))
+  if(isDefined(var_3) && isDefined(var_3.script_location))
     var_2 = var_2 + ("_" + var_3.script_location);
   else
     var_2 = var_2 + "_generic";
@@ -1654,7 +1654,7 @@ addlandmarkalias(var_0, var_1) {
 
   self.landmarkent = var_1 getlandmark();
 
-  if(!isdefined(self.landmarkent))
+  if(!isDefined(self.landmarkent))
     return 0;
 
   var_2 = self.landmarkent.script_landmark;
@@ -1691,7 +1691,7 @@ adddirectionalias(var_0, var_1, var_2, var_3, var_4) {
       var_5 = var_1 + "_" + var_5;
       break;
     case "relative":
-      if(isdefined(var_4)) {
+      if(isDefined(var_4)) {
         if(var_4 == "clock")
           var_6 = 0;
         else if(var_4 == "flank")
@@ -1726,7 +1726,7 @@ adddirectionalias(var_0, var_1, var_2, var_3, var_4) {
 }
 
 getdirectionaliasplayerrelative(var_0) {
-  var_1 = getdirectionreferenceside(level.player.origin, var_0.origin, anglestoforward(level.player.angles));
+  var_1 = getdirectionreferenceside(level.player.origin, var_0.origin, anglesToForward(level.player.angles));
   var_1 = "relative_" + var_1;
   self.direction = self.owner.countryid + "_" + self.owner.npcid + "_direction_" + var_1;
   return self.direction;
@@ -1769,13 +1769,13 @@ addorderalias(var_0, var_1, var_2) {
 }
 
 initcontact(var_0) {
-  if(!isdefined(self.squadlist[var_0].calledout))
+  if(!isDefined(self.squadlist[var_0].calledout))
     self.squadlist[var_0].calledout = 0;
 
-  if(!isdefined(self.squadlist[var_0].firstcontact))
+  if(!isDefined(self.squadlist[var_0].firstcontact))
     self.squadlist[var_0].firstcontact = 2000000000;
 
-  if(!isdefined(self.squadlist[var_0].lastcontact))
+  if(!isDefined(self.squadlist[var_0].lastcontact))
     self.squadlist[var_0].lastcontact = 0;
 }
 
@@ -1786,12 +1786,12 @@ shutdowncontact(var_0) {
 }
 
 createchatevent(var_0, var_1, var_2) {
-  var_3 = spawnstruct();
+  var_3 = spawnStruct();
   var_3.owner = self;
   var_3.eventtype = var_1;
   var_3.eventaction = var_0;
 
-  if(isdefined(var_2))
+  if(isDefined(var_2))
     var_3.priority = var_2;
   else
     var_3.priority = anim.eventpriority[var_0][var_1];
@@ -1801,7 +1801,7 @@ createchatevent(var_0, var_1, var_2) {
 }
 
 createchatphrase() {
-  var_0 = spawnstruct();
+  var_0 = spawnStruct();
   var_0.owner = self;
   var_0.soundaliases = [];
   var_0.master = 0;
@@ -1809,12 +1809,12 @@ createchatphrase() {
 }
 
 canseepoint(var_0) {
-  var_1 = anglestoforward(self.angles);
+  var_1 = anglesToForward(self.angles);
   return vectordot(var_1, var_0 - self.origin) > 0.766;
 }
 
 pointinfov(var_0) {
-  var_1 = anglestoforward(self.angles);
+  var_1 = anglesToForward(self.angles);
   return vectordot(var_1, var_0 - self.origin) > 0.766;
 }
 
@@ -1850,14 +1850,14 @@ battlechatter_printdump(var_0) {}
 battlechatter_printdumpline(var_0, var_1, var_2) {}
 
 strfind(var_0, var_1) {
-  for (var_2 = 0; var_2 < var_0.size; var_2++) {
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
     if(var_0[var_2] != var_1[0]) {
       continue;
     }
     if(var_1.size > var_0.size - var_2)
       return 0;
 
-    for (var_3 = 0; var_3 < var_1.size; var_3++) {
+    for(var_3 = 0; var_3 < var_1.size; var_3++) {
       if(var_0[var_2 + var_3] != var_1[var_3]) {
         break;
       }
@@ -1869,12 +1869,12 @@ strfind(var_0, var_1) {
 }
 
 threattracker() {
-  for (;;) {
+  for(;;) {
     var_0 = getaiarray("axis");
     var_1 = getaiarray("allies");
     var_2 = [];
 
-    for (var_3 = 0; var_3 < var_0.size; var_3++) {
+    for(var_3 = 0; var_3 < var_0.size; var_3++) {
       if(!level.player pointinfov(var_0[var_3].origin)) {
         continue;
       }
@@ -1884,10 +1884,10 @@ threattracker() {
       var_4 = "";
       var_5 = var_0[var_3] getlocation();
 
-      if(!isdefined(var_5)) {
+      if(!isDefined(var_5)) {
         var_5 = var_0[var_3] getlandmark();
 
-        if(!isdefined(var_5)) {
+        if(!isDefined(var_5)) {
           continue;
         }
         var_4 = var_5.script_landmark;
@@ -1896,8 +1896,8 @@ threattracker() {
 
       var_6 = 0;
 
-      for (var_7 = 0; var_7 < var_1.size; var_7++) {
-        if(isdefined(var_1[var_7].enemy) && var_1[var_7].enemy == var_0[var_3])
+      for(var_7 = 0; var_7 < var_1.size; var_7++) {
+        if(isDefined(var_1[var_7].enemy) && var_1[var_7].enemy == var_0[var_3])
           var_6 = 1;
       }
 
@@ -1909,31 +1909,29 @@ threattracker() {
       var_2[var_2.size] = "^1" + var_4;
     }
 
-    for (var_3 = 0; var_3 < var_2.size; var_3++) {
-
-    }
+    for(var_3 = 0; var_3 < var_2.size; var_3++) {}
 
     wait 0.5;
   }
 }
 
 bcdrawobjects() {
-  for (var_0 = 0; var_0 < anim.areas.size; var_0++) {
-    if(!isdefined(anim.areas[var_0].script_area)) {
+  for(var_0 = 0; var_0 < anim.areas.size; var_0++) {
+    if(!isDefined(anim.areas[var_0].script_area)) {
       continue;
     }
     thread drawbcobject("Area: " + anim.areas[var_0].script_area, anim.areas[var_0] getorigin(), (0, 0, 16), (1, 1, 1));
   }
 
-  for (var_0 = 0; var_0 < anim.locations.size; var_0++) {
-    if(!isdefined(anim.locations[var_0].script_location)) {
+  for(var_0 = 0; var_0 < anim.locations.size; var_0++) {
+    if(!isDefined(anim.locations[var_0].script_location)) {
       continue;
     }
     thread drawbcobject("Location: " + anim.locations[var_0].script_location, anim.locations[var_0] getorigin(), (0, 0, 8), (1, 1, 1));
   }
 
-  for (var_0 = 0; var_0 < anim.landmarks.size; var_0++) {
-    if(!isdefined(anim.landmarks[var_0].script_landmark)) {
+  for(var_0 = 0; var_0 < anim.landmarks.size; var_0++) {
+    if(!isDefined(anim.landmarks[var_0].script_landmark)) {
       continue;
     }
     thread drawbcobject("Landmark: " + anim.landmarks[var_0].script_landmark, anim.landmarks[var_0] getorigin(), (0, 0, 0), (1, 1, 1));
@@ -1942,15 +1940,15 @@ bcdrawobjects() {
 
   var_1 = getallnodes();
 
-  for (var_0 = 0; var_0 < var_1.size; var_0++) {
-    if(!isdefined(var_1[var_0].script_location)) {
+  for(var_0 = 0; var_0 < var_1.size; var_0++) {
+    if(!isDefined(var_1[var_0].script_location)) {
       continue;
     }
     anim.moveorigin.origin = var_1[var_0].origin;
     anim.moveorigin.origin = anim.moveorigin.origin + (0, 0, 10);
     var_2 = anim.moveorigin getlocation();
 
-    if(isdefined(var_2)) {
+    if(isDefined(var_2)) {
       thread drawbcobject(var_1[var_0].script_location + " @ " + var_2.script_location, var_1[var_0].origin, (0, 0, 0), (0, 1, 0));
       continue;
     }
@@ -1962,7 +1960,7 @@ bcdrawobjects() {
 }
 
 drawbcobject(var_0, var_1, var_2, var_3) {
-  for (;;) {
+  for(;;) {
     if(distance(level.player.origin, var_1) > 2048) {
       wait 0.1;
       continue;
@@ -1973,7 +1971,7 @@ drawbcobject(var_0, var_1, var_2, var_3) {
 }
 
 drawbcdirections(var_0, var_1, var_2) {
-  for (;;) {
+  for(;;) {
     if(distance(level.player.origin, var_0) > 2048) {
       wait 0.1;
       continue;
@@ -1987,13 +1985,13 @@ drawbcdirections(var_0, var_1, var_2) {
 resetnextsaytimes(var_0, var_1) {
   var_2 = getaiarray(var_0);
 
-  for (var_3 = 0; var_3 < var_2.size; var_3++) {
+  for(var_3 = 0; var_3 < var_2.size; var_3++) {
     var_4 = var_2[var_3];
 
     if(!isalive(var_4)) {
       continue;
     }
-    if(!isdefined(var_4.battlechatter)) {
+    if(!isDefined(var_4.battlechatter)) {
       continue;
     }
     var_4.nextsaytimes[var_1] = gettime() + 350;
@@ -2033,7 +2031,7 @@ getdirectionfacingclockgivenangle(var_0) {
 }
 
 getdirectionfacingangle(var_0, var_1, var_2) {
-  var_3 = anglestoforward(var_0);
+  var_3 = anglesToForward(var_0);
   var_4 = vectornormalize(var_3);
   var_5 = vectortoangles(var_4);
   var_6 = vectortoangles(var_2 - var_1);
@@ -2049,7 +2047,7 @@ getrelativeangles(var_0) {
   if(!isplayer(var_0)) {
     var_2 = var_0 bcgetclaimednode();
 
-    if(isdefined(var_2))
+    if(isDefined(var_2))
       var_1 = var_2.angles;
   }
 
@@ -2059,17 +2057,17 @@ getrelativeangles(var_0) {
 get_all_my_locations() {
   var_0 = [];
 
-  if(!isdefined(self))
+  if(!isDefined(self))
     return var_0;
 
   var_1 = anim.bcs_locations;
   var_2 = self getistouchingentities(var_1);
 
-  if(!isdefined(var_2))
+  if(!isDefined(var_2))
     return var_0;
 
   foreach(var_4 in var_2) {
-    if(isdefined(var_4.locationaliases))
+    if(isDefined(var_4.locationaliases))
       var_0[var_0.size] = var_4;
   }
 

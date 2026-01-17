@@ -42,7 +42,7 @@ main() {
 
 init_standard_farm() {
   maps\mp\zombies\_zm_game_module::set_current_game_module(level.game_module_standard_index);
-  ents = getentarray();
+  ents = getEntArray();
 
   foreach(ent in ents) {
     if(isDefined(ent.script_flag) && ent.script_flag == "OnFarm_enter") {

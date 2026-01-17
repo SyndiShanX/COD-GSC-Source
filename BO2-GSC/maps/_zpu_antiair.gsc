@@ -16,7 +16,7 @@ setanims() {
   positions = [];
 
   for(i = 0; i < 1; i++)
-    positions[i] = spawnstruct();
+    positions[i] = spawnStruct();
 
   positions[0].sittag = "tag_driver";
   positions[0].idle = % crew_zpu4_idle;

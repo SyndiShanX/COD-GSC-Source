@@ -169,8 +169,7 @@ run_player_intro() {
 }
 
 menendez_intro_hallway() {
-  if(level.is_defalco_alive == 1) {
-  } else
+  if(level.is_defalco_alive == 1) {} else
     level thread menendez_greeters_animate("speech_greeter_intro_1");
 
   level thread menendez_greeters_animate("speech_greeter_intro_2");
@@ -224,7 +223,7 @@ menendez_intro_cleanup() {
   wait_network_frame();
   end_scene("speech_opendoors_doors");
   delete_scene("speech_opendoors_doors", 1);
-  a_fans = getentarray("hallway_fan", "script_noteworthy");
+  a_fans = getEntArray("hallway_fan", "script_noteworthy");
 
   foreach(fan in a_fans)
   fan delete();
@@ -426,9 +425,9 @@ speech_vtol() {
   magicbullet("usrpg_magic_bullet_sp", getstruct("speech_rpg_start").origin, veh_vtol.origin - (0, 50, -50));
   wait 2.6;
   stop_exploder(27);
-  playfxontag(getfx("speech_vtol_exp"), veh_vtol, "tag_origin");
-  veh_vtol playsound("evt_vtol_rocket_hit");
-  veh_vtol playsound("evt_vtol_down");
+  playFXOnTag(getfx("speech_vtol_exp"), veh_vtol, "tag_origin");
+  veh_vtol playSound("evt_vtol_rocket_hit");
+  veh_vtol playSound("evt_vtol_down");
   playrumbleonposition("artillery_rumble", level.player.origin);
   earthquake(0.35, 4, veh_vtol.origin, 2000);
   run_scene_and_delete("speech_vtol_crash");

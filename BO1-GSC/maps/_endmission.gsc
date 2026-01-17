@@ -221,7 +221,7 @@ get_lowest_skill() {
 }
 
 create_mission() {
-  mission = SpawnStruct();
+  mission = spawnStruct();
   mission.levels = [];
   return (mission);
 }
@@ -229,7 +229,7 @@ create_mission() {
 add_level(levelName, keepWeapons, achievement, skip_success, veteran_achievement, campaign, coop) {
   assert(isDefined(keepweapons));
   level_index = self.levels.size;
-  self.levels[level_index] = SpawnStruct();
+  self.levels[level_index] = spawnStruct();
   self.levels[level_index].name = levelName;
   self.levels[level_index].keepWeapons = keepWeapons;
   self.levels[level_index].achievement = achievement;

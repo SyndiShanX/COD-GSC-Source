@@ -7,7 +7,6 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\mp_common\item_world;
-
 #namespace wz_asylum;
 
 autoexec __init__system__() {
@@ -41,7 +40,7 @@ function_6e7c4665() {
   }
 }
 
-private event_handler[event_9673dc9a] function_3981d015(eventstruct) {
+event_handler[event_9673dc9a] function_3981d015(eventstruct) {
   if(isDefined(level.var_7ad3f6a0) && !level.var_7ad3f6a0) {
     return;
   }

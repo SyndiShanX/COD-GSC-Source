@@ -13,10 +13,10 @@
 #namespace dev;
 
 function debug_sphere(origin, radius, color, alpha, time) {
-  if(!isdefined(time)) {
+  if(!isDefined(time)) {
     time = 1000;
   }
-  if(!isdefined(color)) {
+  if(!isDefined(color)) {
     color = (1, 1, 1);
   }
   sides = int(10 * (1 + (int(radius) % 100)));
@@ -25,7 +25,7 @@ function debug_sphere(origin, radius, color, alpha, time) {
 
 function updateminimapsetting() {
   requiredmapaspectratio = getdvarfloat("");
-  if(!isdefined(level.minimapheight)) {
+  if(!isDefined(level.minimapheight)) {
     setdvar("", "");
     level.minimapheight = 0;
   }
@@ -41,7 +41,7 @@ function updateminimapsetting() {
       players = getplayers();
       if(players.size > 0) {
         player = util::gethostplayer();
-        corners = getentarray("", "");
+        corners = getEntArray("", "");
         if(corners.size == 2) {
           viewpos = corners[0].origin + corners[1].origin;
           viewpos = (viewpos[0] * 0.5, viewpos[1] * 0.5, viewpos[2] * 0.5);
@@ -127,9 +127,9 @@ function updateminimapsetting() {
           setdvar("", 0);
           setdvar("", 0);
           setdvar("", "");
-          if(isdefined(level.objpoints)) {
-            for (i = 0; i < level.objpointnames.size; i++) {
-              if(isdefined(level.objpoints[level.objpointnames[i]])) {
+          if(isDefined(level.objpoints)) {
+            for(i = 0; i < level.objpointnames.size; i++) {
+              if(isDefined(level.objpoints[level.objpointnames[i]])) {
                 level.objpoints[level.objpointnames[i]] destroy();
               }
             }
@@ -172,7 +172,7 @@ function drawminimapbounds(viewpos, mincorner, maxcorner) {
   corner3 = maxcorner - side;
   toppos = (vecscale(mincorner + maxcorner, 0.5)) + vecscale(sidenorth, 0.51);
   textscale = diaglen * 0.003;
-  while (true) {
+  while(true) {
     line(corner0, corner1);
     line(corner1, corner2);
     line(corner2, corner3);
@@ -189,7 +189,7 @@ function minimapwarn(corners) {
   height = abs(corners[0].origin[1] - corners[1].origin[1]);
   height = int(height);
   if((abs(width - height)) > threshold) {
-    for (;;) {
+    for(;;) {
       iprintln(((("" + width) + "") + height) + "");
       if(height > width) {
         scale = height / width;
@@ -251,11 +251,11 @@ function body_customization_populate(mode) {
   foreach(playerbodytype in bodies) {
     body_name = (makelocalizedstring(getcharacterdisplayname(playerbodytype, mode)) + "") + getcharacterassetname(playerbodytype, mode) + "";
     adddebugcommand((((((((body_customization_devgui_base + body_name) + "") + "") + "") + "") + "") + playerbodytype) + "");
-    for (i = 0; i < getcharacterbodymodelcount(playerbodytype, mode); i++) {
+    for(i = 0; i < getcharacterbodymodelcount(playerbodytype, mode); i++) {
       adddebugcommand((((((((((((body_customization_devgui_base + body_name) + "") + i) + "") + "") + "") + "") + playerbodytype) + "") + "") + i) + "");
       wait(0.05);
     }
-    for (i = 0; i < getcharacterhelmetmodelcount(playerbodytype, mode); i++) {
+    for(i = 0; i < getcharacterhelmetmodelcount(playerbodytype, mode); i++) {
       adddebugcommand((((((((((((body_customization_devgui_base + body_name) + "") + i) + "") + "") + "") + "") + playerbodytype) + "") + "") + i) + "");
       wait(0.05);
     }
@@ -265,7 +265,7 @@ function body_customization_populate(mode) {
 
 function body_customization_devgui(mode) {
   thread body_customization_populate(mode);
-  for (;;) {
+  for(;;) {
     character_index = getdvarstring("");
     if(character_index != "") {
       body_customization_process_command(character_index);

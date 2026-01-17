@@ -59,7 +59,7 @@ setDeadQuote_so() {
   if(!maps\_utility::is_coop_online()) {
     keep_searching = (deadquotes.size > 1);
     original_i = i;
-    while (keep_searching) {
+    while(keep_searching) {
       if(deadquote_recently_used(deadquotes[i])) {
         i++;
         if(i >= deadquotes.size)
@@ -132,7 +132,7 @@ so_buildDeadQuote() {
   deadquotes[deadquotes.size] = "@DEADQUOTE_SO_ICON_OBJ";
   //	deadquotes[ deadquotes.size ]= "@DEADQUOTE_SO_ICON_OBJ_OFFSCREEN";
 
-  if(isdefined(self.so_infohud_toggle_state) && self.so_infohud_toggle_state != "none") {
+  if(isDefined(self.so_infohud_toggle_state) && self.so_infohud_toggle_state != "none") {
     deadquotes[deadquotes.size] = "@DEADQUOTE_SO_TOGGLE_TIMER";
   }
 
@@ -147,13 +147,13 @@ so_buildDeadQuote() {
 }
 
 should_use_custom_deadquotes() {
-  if(!isdefined(level.so_deadquotes))
+  if(!isDefined(level.so_deadquotes))
     return false;
 
   if(level.so_deadquotes.size <= 0)
     return false;
 
-  assertex(isdefined(level.so_deadquotes_chance), "level.so_deadquotes had contents, but level.so_deadquote_chance was undefined.");
+  assertex(isDefined(level.so_deadquotes_chance), "level.so_deadquotes had contents, but level.so_deadquote_chance was undefined.");
 
   // Set level.so_deadquotes_chance to 1.0 to guarantee the contents will be used.
   return (level.so_deadquotes_chance >= randomfloat(1.0));

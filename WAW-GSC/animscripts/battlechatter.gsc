@@ -73,55 +73,55 @@ init_battleChatter() {
   anim.countryIDs["japanese"] = "JA";
   anim.usedIDs = [];
   anim.usedIDs["russian"] = [];
-  anim.usedIDs["russian"][0] = spawnstruct();
+  anim.usedIDs["russian"][0] = spawnStruct();
   anim.usedIDs["russian"][0].count = 0;
   anim.usedIDs["russian"][0].npcID = "0";
-  anim.usedIDs["russian"][1] = spawnstruct();
+  anim.usedIDs["russian"][1] = spawnStruct();
   anim.usedIDs["russian"][1].count = 0;
   anim.usedIDs["russian"][1].npcID = "1";
-  anim.usedIDs["russian"][2] = spawnstruct();
+  anim.usedIDs["russian"][2] = spawnStruct();
   anim.usedIDs["russian"][2].count = 0;
   anim.usedIDs["russian"][2].npcID = "2";
-  anim.usedIDs["russian"][2] = spawnstruct();
+  anim.usedIDs["russian"][2] = spawnStruct();
   anim.usedIDs["russian"][2].count = 0;
   anim.usedIDs["russian"][2].npcID = "3";
   anim.usedIDs["american"] = [];
-  anim.usedIDs["american"][0] = spawnstruct();
+  anim.usedIDs["american"][0] = spawnStruct();
   anim.usedIDs["american"][0].count = 0;
   anim.usedIDs["american"][0].npcID = "0";
-  anim.usedIDs["american"][1] = spawnstruct();
+  anim.usedIDs["american"][1] = spawnStruct();
   anim.usedIDs["american"][1].count = 0;
   anim.usedIDs["american"][1].npcID = "1";
-  anim.usedIDs["american"][2] = spawnstruct();
+  anim.usedIDs["american"][2] = spawnStruct();
   anim.usedIDs["american"][2].count = 0;
   anim.usedIDs["american"][2].npcID = "2";
-  anim.usedIDs["american"][3] = spawnstruct();
+  anim.usedIDs["american"][3] = spawnStruct();
   anim.usedIDs["american"][3].count = 0;
   anim.usedIDs["american"][3].npcID = "3";
   anim.usedIDs["german"] = [];
-  anim.usedIDs["german"][0] = spawnstruct();
+  anim.usedIDs["german"][0] = spawnStruct();
   anim.usedIDs["german"][0].count = 0;
   anim.usedIDs["german"][0].npcID = "0";
-  anim.usedIDs["german"][1] = spawnstruct();
+  anim.usedIDs["german"][1] = spawnStruct();
   anim.usedIDs["german"][1].count = 0;
   anim.usedIDs["german"][1].npcID = "1";
-  anim.usedIDs["german"][2] = spawnstruct();
+  anim.usedIDs["german"][2] = spawnStruct();
   anim.usedIDs["german"][2].count = 0;
   anim.usedIDs["german"][2].npcID = "2";
-  anim.usedIDs["german"][3] = spawnstruct();
+  anim.usedIDs["german"][3] = spawnStruct();
   anim.usedIDs["german"][3].count = 0;
   anim.usedIDs["german"][3].npcID = "3";
   anim.usedIDs["japanese"] = [];
-  anim.usedIDs["japanese"][0] = spawnstruct();
+  anim.usedIDs["japanese"][0] = spawnStruct();
   anim.usedIDs["japanese"][0].count = 0;
   anim.usedIDs["japanese"][0].npcID = "0";
-  anim.usedIDs["japanese"][1] = spawnstruct();
+  anim.usedIDs["japanese"][1] = spawnStruct();
   anim.usedIDs["japanese"][1].count = 0;
   anim.usedIDs["japanese"][1].npcID = "1";
-  anim.usedIDs["japanese"][2] = spawnstruct();
+  anim.usedIDs["japanese"][2] = spawnStruct();
   anim.usedIDs["japanese"][2].count = 0;
   anim.usedIDs["japanese"][2].npcID = "2";
-  anim.usedIDs["japanese"][3] = spawnstruct();
+  anim.usedIDs["japanese"][3] = spawnStruct();
   anim.usedIDs["japanese"][3].count = 0;
   anim.usedIDs["japanese"][3].npcID = "3";
   anim.eventTypeMinWait = [];
@@ -189,9 +189,9 @@ init_battleChatter() {
   anim.minTalkTime = 3000;
   anim.chatCount = 0;
   anim.moveOrigin = spawn("script_origin", (0, 0, 0));
-  anim.areas = getentarray("trigger_location", "targetname");
-  anim.locations = getentarray("trigger_location", "targetname");
-  anim.landmarks = getentarray("trigger_landmark", "targetname");
+  anim.areas = getEntArray("trigger_location", "targetname");
+  anim.locations = getEntArray("trigger_location", "targetname");
+  anim.landmarks = getEntArray("trigger_landmark", "targetname");
   anim.squadCreateFuncs[anim.squadCreateFuncs.size] = ::init_squadBattleChatter;
   anim.squadCreateStrings[anim.squadCreateStrings.size] = "::init_squadBattleChatter";
   if(!isDefined(level.battlechatter)) {
@@ -200,7 +200,7 @@ init_battleChatter() {
     level.battlechatter["axis"] = true;
     level.battlechatter["neutral"] = true;
   }
-  for (index = 0; index < anim.squadIndex.size; index++) {
+  for(index = 0; index < anim.squadIndex.size; index++) {
     if(isDefined(anim.squadIndex[index].chatInitialized) && anim.squadIndex[index].chatInitialized) {
       continue;
     }
@@ -231,7 +231,7 @@ shutdown_battleChatter() {
   anim.usedIDs = undefined;
   anim.chatInitialized = false;
   level.battlechatter = undefined;
-  for (i = 0; i < anim.squadCreateFuncs.size; i++) {
+  for(i = 0; i < anim.squadCreateFuncs.size; i++) {
     if(anim.squadCreateStrings[i] != "::init_squadBattleChatter") {
       continue;
     }
@@ -261,7 +261,7 @@ resetSayTimes() {
 }
 
 resetAllSayTimes() {
-  for (index = 0; index < anim.squadIndex.size; index++) {
+  for(index = 0; index < anim.squadIndex.size; index++) {
     anim.squadIndex[index] resetSayTimes();
   }
 }
@@ -283,7 +283,7 @@ init_squadBattleChatter() {
   squad.memberRemoveStrings[squad.memberRemoveStrings.size] = "::removeFromSystem";
   squad.squadUpdateFuncs[squad.squadUpdateFuncs.size] = ::initContact;
   squad.squadUpdateStrings[squad.squadUpdateStrings.size] = "::initContact";
-  for (i = 0; i < anim.squadIndex.size; i++)
+  for(i = 0; i < anim.squadIndex.size; i++)
     squad thread initContact(anim.squadIndex[i].squadName);
   squad thread squadThreatWaiter();
   squad thread squadOfficerWaiter();
@@ -298,7 +298,7 @@ shutdown_squadBattleChatter() {
   squad.nextSayTimes = undefined;
   squad.nextTypeSayTimes = undefined;
   squad.isMemberSaying = undefined;
-  for (i = 0; i < squad.memberAddFuncs.size; i++) {
+  for(i = 0; i < squad.memberAddFuncs.size; i++) {
     if(squad.memberAddStrings[i] != "::addToSystem") {
       continue;
     }
@@ -309,7 +309,7 @@ shutdown_squadBattleChatter() {
     squad.memberAddFuncs[squad.memberAddFuncs.size - 1] = undefined;
     squad.memberAddStrings[squad.memberAddStrings.size - 1] = undefined;
   }
-  for (i = 0; i < squad.memberRemoveFuncs.size; i++) {
+  for(i = 0; i < squad.memberRemoveFuncs.size; i++) {
     if(squad.memberRemoveStrings[i] != "::removeFromSystem") {
       continue;
     }
@@ -320,7 +320,7 @@ shutdown_squadBattleChatter() {
     squad.memberRemoveFuncs[squad.memberRemoveFuncs.size - 1] = undefined;
     squad.memberRemoveStrings[squad.memberRemoveStrings.size - 1] = undefined;
   }
-  for (i = 0; i < squad.squadUpdateFuncs.size; i++) {
+  for(i = 0; i < squad.squadUpdateFuncs.size; i++) {
     if(squad.squadUpdateStrings[i] != "::initContact") {
       continue;
     }
@@ -331,7 +331,7 @@ shutdown_squadBattleChatter() {
     squad.squadUpdateFuncs[squad.squadUpdateFuncs.size - 1] = undefined;
     squad.squadUpdateStrings[squad.squadUpdateStrings.size - 1] = undefined;
   }
-  for (i = 0; i < anim.squadIndex.size; i++)
+  for(i = 0; i < anim.squadIndex.size; i++)
     squad shutdownContact(anim.squadIndex[i].squadName);
   squad.chatInitialized = false;
 }
@@ -357,7 +357,7 @@ bcsEnabled() {
 
 bcsDebugWaiter() {
   lastState = getdvar("bcs_enable");
-  while (1) {
+  while(1) {
     state = getdvar("bcs_enable");
     if(state != lastState) {
       switch (state) {
@@ -379,11 +379,11 @@ bcsDebugWaiter() {
 enableBattleChatter() {
   init_battleChatter();
   players = GetPlayers();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i] thread animscripts\battleChatter_ai::addToSystem();
   }
   ai = getaiarray();
-  for (i = 0; i < ai.size; i++) {
+  for(i = 0; i < ai.size; i++) {
     ai[i] addToSystem();
   }
 }
@@ -391,7 +391,7 @@ enableBattleChatter() {
 disableBattleChatter() {
   shutdown_battleChatter();
   ai = getaiarray();
-  for (i = 0; i < ai.size; i++) {
+  for(i = 0; i < ai.size; i++) {
     if(isDefined(ai[i].squad) && ai[i].squad.chatInitialized)
       ai[i].squad shutdown_squadBattleChatter();
     ai[i] removeFromSystem();
@@ -404,7 +404,7 @@ samePhrase(a, b) {
   assert(isDefined(b));
   if(a.soundAliases.size != b.soundAliases.size)
     return false;
-  for (i = 0; i < a.soundAliases.size; i++) {
+  for(i = 0; i < a.soundAliases.size; i++) {
     if(a.soundAliases[i] != b.soundAliases[i])
       return false;
   }
@@ -429,7 +429,7 @@ addPhraseToHistory(phrase) {
 }
 
 isDupePhrase(phrase, threshold) {
-  for (i = 0; i < level.bcHistoryCount; i++) {
+  for(i = 0; i < level.bcHistoryCount; i++) {
     if(isDefined(level.bcHistoryPhrases[i]) &&
       samePhrase(level.bcHistoryPhrases[i], phrase) &&
       gettime() - level.bcHistoryTimes[i] < threshold) {
@@ -455,7 +455,7 @@ nearestPlayer() {
     return undefined;
   distance = distanceSquared(players[0].origin, self.origin);
   player = players[0];
-  for (i = 1; i < players.size; i++) {
+  for(i = 1; i < players.size; i++) {
     d = distanceSquared(players[i].origin, self.origin);
     if(d < distance) {
       distance = d;
@@ -587,13 +587,13 @@ getSpeakers(strAction, strType, officersOnly) {
   soldiers = getaiarray(self.team);
   if(isDefined(officersOnly) && officersOnly) {
     officers = [];
-    for (i = 0; i < soldiers.size; i++) {
+    for(i = 0; i < soldiers.size; i++) {
       if(soldiers[i] isOfficer())
         officers[officers.size] = soldiers[i];
     }
     soldiers = officers;
   }
-  for (i = 0; i < soldiers.size; i++) {
+  for(i = 0; i < soldiers.size; i++) {
     if(soldiers[i] == self) {
       continue;
     }
@@ -607,7 +607,7 @@ getSpeakers(strAction, strType, officersOnly) {
 
 getArea() {
   areas = anim.areas;
-  for (i = 0; i < areas.size; i++) {
+  for(i = 0; i < areas.size; i++) {
     if(self istouching(areas[i]) && isDefined(areas[i].script_area))
       return (areas[i]);
   }
@@ -616,7 +616,7 @@ getArea() {
 
 getLocation() {
   locations = anim.locations;
-  for (i = 0; i < locations.size; i++) {
+  for(i = 0; i < locations.size; i++) {
     if(self istouching(locations[i]) && isDefined(locations[i].script_location))
       return (locations[i]);
   }
@@ -625,7 +625,7 @@ getLocation() {
 
 getLandmark() {
   landmarks = anim.landmarks;
-  for (i = 0; i < landmarks.size; i++) {
+  for(i = 0; i < landmarks.size; i++) {
     if(self istouching(landmarks[i]) && isDefined(landmarks[i].script_landmark))
       return (landmarks[i]);
   }
@@ -706,7 +706,7 @@ getVectorRightAngle(vDir) {
 
 getVectorArrayAverage(avAngles) {
   vDominantDir = (0, 0, 0);
-  for (i = 0; i < avAngles.size; i++)
+  for(i = 0; i < avAngles.size; i++)
     vDominantDir += avAngles[i];
   return (vDominantDir[0] / avAngles.size, vDominantDir[1] / avAngles.size, vDominantDir[2] / avAngles.size);
 }
@@ -722,7 +722,7 @@ addAlias(name) {
 }
 
 createChatEvent(eventAction, eventType, priority) {
-  chatEvent = spawnstruct();
+  chatEvent = spawnStruct();
   chatEvent.owner = self;
   chatEvent.eventType = eventType;
   chatEvent.eventAction = eventAction;
@@ -739,7 +739,7 @@ createChatEvent(eventAction, eventType, priority) {
 }
 
 createChatPhrase() {
-  chatPhrase = spawnstruct();
+  chatPhrase = spawnStruct();
   chatPhrase.owner = self;
   chatPhrase.soundAliases = [];
   chatPhrase.master = false;
@@ -757,13 +757,13 @@ pointInFov(origin) {
 }
 
 strfind(string, findString) {
-  for (i = 0; i < string.size; i++) {
+  for(i = 0; i < string.size; i++) {
     if(string[i] != findString[0]) {
       continue;
     }
     if(findString.size > (string.size - i))
       return (false);
-    for (p = 0; p < findString.size; p++) {
+    for(p = 0; p < findString.size; p++) {
       if(string[i + p] != findString[p]) {
         break;
       }
@@ -775,7 +775,7 @@ strfind(string, findString) {
 
 resetNextSayTimes(team, action) {
   soldiers = getAIArray(team);
-  for (index = 0; index < soldiers.size; index++) {
+  for(index = 0; index < soldiers.size; index++) {
     soldier = soldiers[index];
     if(!isAlive(soldier)) {
       continue;
@@ -920,7 +920,7 @@ bcPlayPhrase(eventAction, eventType, chatPhrase, decCallCount) {
     decCallCount = false;
   if(getdvar("debug_bclotsoprint") == "on") {
     a = "";
-    for (i = 0; i < chatPhrase.soundAliases.size; i++) {
+    for(i = 0; i < chatPhrase.soundAliases.size; i++) {
       a += chatPhrase.soundAliases[i] + " ";
     }
     println("BC DEBUG saying " + a);
@@ -940,7 +940,7 @@ bcPlayPhrase(eventAction, eventType, chatPhrase, decCallCount) {
   self.isSpeaking = true;
   self.nextSayTimes[eventAction] = gettime() + anim.eventActionMinWait[eventAction]["self"];
   squad.nextSayTimes[eventAction] = gettime() + anim.eventActionMinWait[eventAction]["squad"];
-  for (i = 0; i < chatPhrase.soundAliases.size; i++) {
+  for(i = 0; i < chatPhrase.soundAliases.size; i++) {
     if(SoundExists(chatPhrase.soundAliases[i])) {
       self animscripts\face::PlayFaceThread(undefined, chatPhrase.soundAliases[i], .5, chatPhrase.soundAliases[i]);
       if(!isDefined(self)) {
@@ -953,7 +953,7 @@ bcPlayPhrase(eventAction, eventType, chatPhrase, decCallCount) {
   }
   if(getdvar("debug_bclotsoprint") == "on") {
     a = "";
-    for (i = 0; i < chatPhrase.soundAliases.size; i++) {
+    for(i = 0; i < chatPhrase.soundAliases.size; i++) {
       a += chatPhrase.soundAliases[i] + " ";
     }
     println("BC DEBUG done saying " + a);
@@ -969,12 +969,10 @@ bcPlayPhrase(eventAction, eventType, chatPhrase, decCallCount) {
 
 filter(potentialThreats, isThreat) {
   threats = [];
-  for (i = 0; i < potentialThreats.size; i++) {
+  for(i = 0; i < potentialThreats.size; i++) {
     players = GetPlayers();
-    for (p = 0; p < players.size; p++) {
-      if(potentialThreats[i][
-          [isThreat]
-        ](players[p])) {
+    for(p = 0; p < players.size; p++) {
+      if(potentialThreats[i][[isThreat]](players[p])) {
         threats[threats.size] = potentialThreats[i];
         break;
       }
@@ -987,13 +985,13 @@ getThreat(team, threats, threatDistance, callCount) {
   players = GetPlayers();
   closest = threatDistance;
   threat = undefined;
-  for (i = 0; i < threats.size; i++) {
+  for(i = 0; i < threats.size; i++) {
     if(!isDefined(threats[i].bcCallCount)) {
       threats[i].bcCallCount = [];
       threats[i].bcCallCount["axis"] = 0;
       threats[i].bcCallCount["allies"] = 0;
     }
-    for (p = 0; p < players.size; p++) {
+    for(p = 0; p < players.size; p++) {
       d = distance(threats[i].origin, players[p].origin);
       if(d < closest &&
         (callCount == 0 || threats[i].bcCallCount[team] < callCount)) {
@@ -1010,8 +1008,8 @@ getClosestToPlayer(list) {
   players = GetPlayers();
   closest = 0;
   obj = undefined;
-  for (i = 0; i < list.size; i++) {
-    for (p = 0; p < players.size; p++) {
+  for(i = 0; i < list.size; i++) {
+    for(p = 0; p < players.size; p++) {
       d = distance(list[i].origin, players[p].origin);
       if(d < 1)
         continue;
@@ -1026,7 +1024,7 @@ getClosestToPlayer(list) {
 
 getNearestTalker(origin, threat, friends, action, type, modifier) {
   talkers = [];
-  for (i = 0; i < friends.size; i++) {
+  for(i = 0; i < friends.size; i++) {
     if(isDefined(threat) && isDefined(friends[i].bcCalling) && friends[i].bcCalling == threat) {
       continue;
     }
@@ -1055,7 +1053,7 @@ getBCLocation() {
     return self.node.script_area;
   }
   triggers = array_combine(anim.locations, anim.landmarks);
-  for (i = 0; i < triggers.size; i++) {
+  for(i = 0; i < triggers.size; i++) {
     if(self istouching(triggers[i])) {
       if(isDefined(triggers[i].script_area))
         return triggers[i].script_area;
@@ -1160,8 +1158,8 @@ isInfantry(player) {
 
 getAllTurrets(team) {
   t = [];
-  turrets = array_combine(getentarray("misc_mg42", "classname"), getentarray("misc_turret", "classname"));
-  for (i = 0; i < turrets.size; i++) {
+  turrets = array_combine(getEntArray("misc_mg42", "classname"), getEntArray("misc_turret", "classname"));
+  for(i = 0; i < turrets.size; i++) {
     dude = turrets[i] getturretowner();
     if(isDefined(dude) && dude.team == team) {
       t[t.size] = dude;
@@ -1198,7 +1196,7 @@ trySurpressed(team) {
 }
 
 findGuyToYellAt(team, notme) {
-  for (i = 0; i < team.size; i++) {
+  for(i = 0; i < team.size; i++) {
     if(notme.npcID == team[i].npcID)
       continue;
     if(notme cansee(team[i]))
@@ -1210,7 +1208,7 @@ findGuyToYellAt(team, notme) {
 }
 
 canSeeAny(team) {
-  for (i = 0; i < team.size; i++)
+  for(i = 0; i < team.size; i++)
     if(isDefined(team[i]) && team[i] cansee(self))
       return true;
   return false;
@@ -1232,7 +1230,7 @@ doReload(otherteam, talker, yellat) {
 }
 
 tryReload(team, otherteam) {
-  for (i = 0; i < team.size; i++) {
+  for(i = 0; i < team.size; i++) {
     if(isDefined(team[i].bcReloadTime) &&
       (gettime() - team[i].bcReloadTime) < 2000 &&
       team[i] bcCanSay("order", "action")
@@ -1261,7 +1259,7 @@ doOrder(talker, yellat, type, modifier) {
 }
 
 tryOrder(team) {
-  for (i = 0; i < team.size; i++) {
+  for(i = 0; i < team.size; i++) {
     if(isDefined(team[i].bcOrderTime) &&
       (gettime() - team[i].bcOrderTime) > 2000
     ) {
@@ -1356,7 +1354,7 @@ tryFireInform(team, others) {
 bccycle(team, otherteam) {
   if(!bcsEnabled())
     return false;
-  if(tryThreat(getaiarray(team), getentarray("grenade", "classname"), 300, 1, ::isGrenade, "inform", "incoming", "grenade", true))
+  if(tryThreat(getaiarray(team), getEntArray("grenade", "classname"), 300, 1, ::isGrenade, "inform", "incoming", "grenade", true))
     return true;
   if(team == "allies" && tryThreat(getaiarray(team), getaiarray(otherteam), 1000, 3, ::isBanzai, "threat", "banzai", undefined, false))
     return true;
@@ -1389,9 +1387,9 @@ bccycle(team, otherteam) {
 }
 
 bcthread(us, them, talkdelay, nontalkdelay) {
-  while (1) {
+  while(1) {
     wait(nontalkdelay);
-    while (bccycle(us, them))
+    while(bccycle(us, them))
       wait(randomfloat(2 * talkdelay));
   }
 }

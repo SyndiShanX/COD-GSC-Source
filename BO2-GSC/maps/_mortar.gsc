@@ -159,7 +159,7 @@ mortar_loop(mortar_name, barrage_amount, no_terrain) {
     level._explosion_stop_barrage[mortar_name] = 0;
 
   explosion_points = [];
-  explosion_points = getentarray(mortar_name, "targetname");
+  explosion_points = getEntArray(mortar_name, "targetname");
   explosion_points_structs = [];
   explosion_points_structs = getstructarray(mortar_name, "targetname");
 
@@ -173,7 +173,7 @@ mortar_loop(mortar_name, barrage_amount, no_terrain) {
 
   if(isDefined(level._explosion_dust_name[mortar_name])) {
     dust_name = level._explosion_dust_name[mortar_name];
-    dust_points = getentarray(dust_name, "targetname");
+    dust_points = getEntArray(dust_name, "targetname");
     dust_points_structs = [];
     dust_points_structs = getstructarray(dust_name, "targetname");
 
@@ -263,7 +263,7 @@ player_view_chance(view_chance, explosion_point) {
   chance = randomfloat(1);
 
   if(chance <= view_chance) {
-    if(within_fov(self geteye(), self getplayerangles(), explosion_point, cos(30)))
+    if(within_fov(self getEye(), self getplayerangles(), explosion_point, cos(30)))
       return true;
   }
 
@@ -332,11 +332,11 @@ explosion_activate(mortar_name, blast_radius, min_damage, max_damage, quake_powe
     for(i = 0; i < dust_points.size; i++) {
       if(distancesquared(dust_points[i].origin, self.origin) < max_range * max_range) {
         if(isDefined(dust_points[i].script_fxid)) {
-          playfx(level._effect[dust_points[i].script_fxid], dust_points[i].origin);
+          playFX(level._effect[dust_points[i].script_fxid], dust_points[i].origin);
           continue;
         }
 
-        playfx(level._effect[level._explosion_dust_name[mortar_name]], dust_points[i].origin);
+        playFX(level._effect[level._explosion_dust_name[mortar_name]], dust_points[i].origin);
       }
     }
   }
@@ -369,7 +369,7 @@ explosion_boom(mortar_name, power, time, radius, is_struct) {
   }
 
   explosion_origin = self.origin;
-  playfx(level._effect[mortar_name], explosion_origin);
+  playFX(level._effect[mortar_name], explosion_origin);
   earthquake(power, time, explosion_origin, radius);
   thread mortar_rumble_on_all_players("damage_light", "damage_heavy", explosion_origin, radius * 0.75, radius * 1.25);
   physradius = radius;
@@ -400,28 +400,28 @@ explosion_boom(mortar_name, power, time, radius, is_struct) {
 
 explosion_sound(mortar_name) {
   if(level._effecttype[mortar_name] == "mortar") {
-    self playsound("exp_mortar");
-    self playsound("exp_mortar_dirt_plume");
+    self playSound("exp_mortar");
+    self playSound("exp_mortar_dirt_plume");
   }
 
   if(level._effecttype[mortar_name] == "mortar_water")
-    self playsound("exp_mortar_water");
+    self playSound("exp_mortar_water");
   else if(level._effecttype[mortar_name] == "artillery")
-    self playsound("exp_mortar");
+    self playSound("exp_mortar");
   else if(level._effecttype[mortar_name] == "bomb")
-    self playsound("exp_mortar");
+    self playSound("exp_mortar");
 }
 
 explosion_incoming(mortar_name) {
   if(level._effecttype[mortar_name] == "mortar")
-    self playsound("prj_mortar_incoming", "sounddone");
+    self playSound("prj_mortar_incoming", "sounddone");
 
   if(level._effecttype[mortar_name] == "mortar_water")
-    self playsound("prj_mortar_incoming", "sounddone");
+    self playSound("prj_mortar_incoming", "sounddone");
   else if(level._effecttype[mortar_name] == "artillery")
-    self playsound("prj_mortar_incoming", "sounddone");
+    self playSound("prj_mortar_incoming", "sounddone");
   else if(level._effecttype[mortar_name] == "bomb")
-    self playsound("prj_mortar_incoming", "sounddone");
+    self playSound("prj_mortar_incoming", "sounddone");
 
   self waittill("sounddone");
 }
@@ -430,7 +430,7 @@ setup_mortar_terrain() {
   self.has_terrain = 0;
 
   if(isDefined(self.target)) {
-    self.terrain = getentarray(self.target, "targetname");
+    self.terrain = getEntArray(self.target, "targetname");
     self.has_terrain = 1;
   } else {
     println("z:mortar entity has no target: ", self.origin);
@@ -509,9 +509,9 @@ mortar_boom(origin, power, time, radius, effect, bisstruct, bshellshock, custom_
   thread mortar_sound(bisstruct, custom_sound);
 
   if(isDefined(effect))
-    playfx(effect, origin);
+    playFX(effect, origin);
   else
-    playfx(level.mortar, origin);
+    playFX(level.mortar, origin);
 
   earthquake(power, time, origin, radius);
   thread mortar_rumble_on_all_players("damage_light", "damage_heavy", origin, radius * 0.75, radius * 1.25);
@@ -554,10 +554,10 @@ mortar_sound(bisstruct, custom_sound) {
     if(isDefined(custom_sound))
       sound = custom_sound;
 
-    temp_ent playsound(sound);
+    temp_ent playSound(sound);
     temp_ent thread delete_temp_ent();
   } else
-    self playsound("exp_mortar");
+    self playSound("exp_mortar");
 }
 
 incoming_sound(soundnum, bisstruct) {
@@ -573,12 +573,12 @@ incoming_sound(soundnum, bisstruct) {
 
   if(isDefined(bisstruct) && bisstruct == 1) {
     temp_ent = spawn("script_origin", self.origin);
-    temp_ent playsound("prj_mortar_incoming", "sounddone");
+    temp_ent playSound("prj_mortar_incoming", "sounddone");
     wait 0.3;
     level notify("mortar_inc_done");
     temp_ent thread delete_temp_ent();
   } else {
-    self playsound("prj_mortar_incoming", "sounddone");
+    self playSound("prj_mortar_incoming", "sounddone");
     wait 0.3;
     level notify("mortar_inc_done");
   }

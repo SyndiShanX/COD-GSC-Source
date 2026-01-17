@@ -6,11 +6,10 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace supplypod;
 
 autoexec __init__system__() {
-  system::register(#"supplypod", &__init__, undefined, #"killstreaks");
+  system::register(#"supplypod", &__init__, undefined, # "killstreaks");
 }
 
 __init__() {
@@ -18,7 +17,7 @@ __init__() {
   clientfield::register("clientuimodel", "hudItems.goldenBullet", 1, 1, "int", undefined, 0, 0);
 }
 
-private supplypod_placed(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+supplypod_placed(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self endon(#"death");
   self util::waittill_dobj(localclientnum);
 

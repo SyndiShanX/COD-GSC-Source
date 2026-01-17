@@ -18,16 +18,16 @@ init() {
 
 magicbox_show_sounds_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
-    playsound(localclientnum, "zmb_box_poof_land", self.origin);
-    playsound(localclientnum, "zmb_couch_slam", self.origin);
-    playsound(localclientnum, "zmb_box_poof", self.origin);
+    playSound(localclientnum, "zmb_box_poof_land", self.origin);
+    playSound(localclientnum, "zmb_couch_slam", self.origin);
+    playSound(localclientnum, "zmb_box_poof", self.origin);
   }
 }
 
 magicbox_leave_sounds_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
-    playsound(localclientnum, "zmb_box_move", self.origin);
-    playsound(localclientnum, "zmb_whoosh", self.origin);
+    playSound(localclientnum, "zmb_box_move", self.origin);
+    playSound(localclientnum, "zmb_whoosh", self.origin);
   }
 }
 
@@ -37,9 +37,9 @@ magicbox_glow_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fi
 
   if(newval && !isDefined(self.glow_obj_array[localclientnum])) {
     fx_obj = spawn(localclientnum, self.origin, "script_model");
-    fx_obj setmodel("tag_origin");
+    fx_obj setModel("tag_origin");
     fx_obj.angles = vectortoangles(anglestoup(self.angles)) + vectorscale((1, 0, 0), 180.0);
-    playfxontag(localclientnum, level._effect["chest_light"], fx_obj, "tag_origin");
+    playFXOnTag(localclientnum, level._effect["chest_light"], fx_obj, "tag_origin");
     self.glow_obj_array[localclientnum] = fx_obj;
     self glow_obj_demo_jump_listener(localclientnum);
   } else if(!newval && isDefined(self.glow_obj_array[localclientnum]))

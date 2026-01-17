@@ -12,7 +12,7 @@ main(model, type, no_destroyed) {
   build_template("stryker", model, type);
   build_localinit(::init_local);
 
-  if(!isdefined(no_destroyed)) {
+  if(!isDefined(no_destroyed)) {
     // dont blow up in roadkill
     build_deathmodel("vehicle_stryker", "vehicle_stryker_destroyed");
     build_deathfx("explosions/large_vehicle_explosion", undefined, "exp_armor_vehicle");
@@ -42,13 +42,13 @@ additional_firing_anims() {
 
   fx = getfx("stryker_shell");
 
-  for (;;) {
+  for(;;) {
     self waittill("weapon_fired"); // waits for Code notify when FireWeapon() is called.
     foreach(animation in anims) {
       self SetAnimRestart(animation, 1, 0, 1);
     }
 
-    PlayFXOnTag(fx, self, "tag_ammo_fx");
+    playFXOnTag(fx, self, "tag_ammo_fx");
   }
 }
 
@@ -64,8 +64,8 @@ set_vehicle_anims(positions) {
 
 setanims() {
   positions = [];
-  for (i = 0; i < 11; i++)
-    positions[i] = spawnstruct();
+  for(i = 0; i < 11; i++)
+    positions[i] = spawnStruct();
 
   positions[0].getout_delete = true;
   return positions;

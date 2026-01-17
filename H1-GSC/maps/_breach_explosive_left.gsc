@@ -25,19 +25,19 @@ main() {
   level.scr_anim["generic"]["exposed_flashbang_v1"] = % exposed_flashbang_v1;
   level.scr_anim["generic"]["exposed_flashbang_v2"] = % exposed_flashbang_v2;
 
-  if(isdefined(level.override_breach_explosive_left_audio)) {
+  if(isDefined(level.override_breach_explosive_left_audio)) {
     maps\_anim::addnotetrack_customfunction("generic", "audio_start_mix", ::audio_start_mix, "detcord_stack_leftbreach_01");
     maps\_anim::addnotetrack_customfunction("generic", "audio_stop_mix", ::audio_stop_mix, "detcord_stack_leftbreach_01");
     maps\_anim::addnotetrack_customfunction("generic", "audio_custom_fire", ::audio_custom_fire, "detcord_stack_leftbreach_01");
     maps\_anim::addnotetrack_customfunction("generic", "audio_custom_fire", ::audio_custom_fire, "detcord_stack_leftbreach_02");
   }
 
-  if(isdefined(level.breach_play_door_animation) && level.breach_play_door_animation)
+  if(isDefined(level.breach_play_door_animation) && level.breach_play_door_animation)
     setup_door_animation();
 }
 
 audio_custom_fire(var_0) {
-  if(isdefined(var_0.breachdonotfire)) {
+  if(isDefined(var_0.breachdonotfire)) {
     return;
   }
   var_0 thread maps\_utility::play_sound_on_entity("sp_breach_explosive_left_fire_npc");

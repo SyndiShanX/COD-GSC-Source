@@ -4,13 +4,11 @@
 ***********************************************************************/
 
 #include scripts\core_common\lui_shared;
-
 #namespace ct_crash_kill_remaining_enemy;
 
 class cct_crash_kill_remaining_enemy: cluielem {
-
   function open(localclientnum) {
-    cluielem::open(localclientnum, #"ct_crash_kill_remaining_enemy");
+    cluielem::open(localclientnum, # "ct_crash_kill_remaining_enemy");
   }
 
   function function_fa582112(localclientnum) {

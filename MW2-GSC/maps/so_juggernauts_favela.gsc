@@ -22,12 +22,12 @@ main() {
   so_delete_all_spawntriggers();
   so_delete_all_triggers();
   so_delete_all_spawners();
-  array_call(getentarray("placed_weapon", "script_noteworthy"), ::delete);
+  array_call(getEntArray("placed_weapon", "script_noteworthy"), ::delete);
 
   level.disable_interactive_tv_use_triggers = true;
 
-  array_call(getentarray("hiding_door_part", "script_noteworthy"), ::delete);
-  array_thread(getentarray("hiding_door_part_disconnect", "script_noteworthy"), ::delete_hiding_door_disconnect);
+  array_call(getEntArray("hiding_door_part", "script_noteworthy"), ::delete);
+  array_thread(getEntArray("hiding_door_part_disconnect", "script_noteworthy"), ::delete_hiding_door_disconnect);
 
   maps\createart\favela_fog::main();
   maps\createart\favela_art::main();
@@ -54,7 +54,7 @@ delete_hiding_door_disconnect() {
 }
 
 scale_juggernaut_enemies() {
-  for (;;) {
+  for(;;) {
     level waittill("update_enemies_remaining_count");
 
     if(level.pmc.enemies_remaining >= 9)

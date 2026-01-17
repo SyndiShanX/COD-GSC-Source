@@ -8,10 +8,9 @@
 
 radiation() {
   precacheString(&"SCRIPT_RADIATION_DEATH");
-  radiationFields = getentarray("radiation", "targetname");
+  radiationFields = getEntArray("radiation", "targetname");
 
   if(radiationFields.size > 0) {
-
     precacheshellshock("mp_radiation_low");
     precacheshellshock("mp_radiation_med");
     precacheshellshock("mp_radiation_high");
@@ -25,7 +24,7 @@ radiation() {
 }
 
 onPlayerConnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connected", player);
     player.numAreas = 0;
   }
@@ -42,9 +41,9 @@ playerLeaveArea(trigger) {
   self.numAreas--;
   assert(self.numAreas >= 0);
 
-  if(self.numAreas != 0)
+  if(self.numAreas != 0) {
     return;
-
+  }
   self.poison = 0;
   self notify("leftTrigger");
 
@@ -67,7 +66,7 @@ radiationEffect() {
   self.poison = 0;
   self thread soundWatcher(self);
 
-  while (1) {
+  while(1) {
     self.poison++;
 
     switch (self.poison) {
@@ -143,8 +142,8 @@ blackout() {
 
   fraction = 0;
 
-  for (;;) {
-    while (self.poison > 1) {
+  for(;;) {
+    while(self.poison > 1) {
       percent_range = max_percent - min_percent;
       fraction = (self.poison - min_percent) / percent_range;
 
@@ -161,8 +160,9 @@ blackout() {
 
       end_alpha = fraction * 0.5;
 
-      if(fraction == 1)
+      if(fraction == 1) {
         break;
+      }
 
       duration = length / 2;
 
@@ -174,8 +174,9 @@ blackout() {
       wait(fraction * 0.5);
     }
 
-    if(fraction == 1)
+    if(fraction == 1) {
       break;
+    }
 
     if(self.radiationOverlay.alpha != 0)
       self.radiationOverlay fadeoutBlackOut(1, 0);
@@ -186,7 +187,6 @@ blackout() {
 }
 
 doRadiationdamage(iDamage) {
-
   self thread[[level.callbackPlayerDamage]](
     self, // eInflictor The entity that causes the damage.( e.g. a turret )
     self, // eAttacker The entity that is attacking.

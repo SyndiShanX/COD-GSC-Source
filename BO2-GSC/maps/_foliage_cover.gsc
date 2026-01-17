@@ -12,9 +12,9 @@ init_foliage_cover() {
 }
 
 init_foliage_triggers() {
-  prone_triggers = getentarray("foliage_cover_prone", "script_noteworthy");
-  crouch_triggers = getentarray("foliage_cover_crouch", "script_noteworthy");
-  stand_triggers = getentarray("foliage_cover_stand", "script_noteworthy");
+  prone_triggers = getEntArray("foliage_cover_prone", "script_noteworthy");
+  crouch_triggers = getEntArray("foliage_cover_crouch", "script_noteworthy");
+  stand_triggers = getEntArray("foliage_cover_stand", "script_noteworthy");
   array_thread(prone_triggers, ::foliage_cover_watch_trigger);
   array_thread(crouch_triggers, ::foliage_cover_watch_trigger);
   array_thread(stand_triggers, ::foliage_cover_watch_trigger);
@@ -50,9 +50,7 @@ calculate_foliage_cover(stance) {
   dist = level.foliage_cover.sight_dist["no_cover"];
 
   if(isDefined(current_trig))
-    dist = [
-      [level.foliage_cover.cover_think[current_trig.script_noteworthy]]
-    ]();
+    dist = [[level.foliage_cover.cover_think[current_trig.script_noteworthy]]]();
 
   return dist;
 }

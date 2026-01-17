@@ -19,7 +19,7 @@ function init_shared() {
   level._effect["prox_grenade_enemy_default"] = "weapon/fx_prox_grenade_scan_orng";
   level._effect["prox_grenade_enemy_warning"] = "weapon/fx_prox_grenade_wrn_red";
   level._effect["prox_grenade_player_shock"] = "weapon/fx_prox_grenade_impact_player_spwner";
-  callback::add_weapon_type("proximity_grenade", & proximity_spawned);
+  callback::add_weapon_type("proximity_grenade", &proximity_spawned);
   level thread watchforproximityexplosion();
 }
 
@@ -38,7 +38,7 @@ function watchforproximityexplosion() {
     return;
   }
   weapon_proximity = getweapon("proximity_grenade");
-  while (true) {
+  while(true) {
     level waittill("explode", localclientnum, position, mod, weapon, owner_cent);
     if(weapon.rootweapon != weapon_proximity) {
       continue;
@@ -47,7 +47,7 @@ function watchforproximityexplosion() {
     if(!localplayer util::is_player_view_linked_to_entity(localclientnum)) {
       explosionradius = weapon.explosionradius;
       if(distancesquared(localplayer.origin, position) < (explosionradius * explosionradius)) {
-        if(isdefined(owner_cent)) {
+        if(isDefined(owner_cent)) {
           if(owner_cent == localplayer || !owner_cent util::friend_not_foe(localclientnum, 1)) {
             localplayer thread postfx::playpostfxbundle("pstfx_shock_charge");
           }

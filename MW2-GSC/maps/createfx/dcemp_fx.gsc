@@ -5117,5 +5117,4 @@ main() {
   ent.v["fxid"] = "space_nuke_crashsite";
   ent.v["delay"] = 0;
   ent.v["exploder"] = "emp_flash";
-
 }

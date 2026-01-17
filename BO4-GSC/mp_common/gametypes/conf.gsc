@@ -18,7 +18,6 @@
 #include scripts\mp_common\gametypes\spawning;
 #include scripts\mp_common\player\player_utils;
 #include scripts\mp_common\util;
-
 #namespace conf;
 
 event_handler[gametype_init] main(eventstruct) {
@@ -79,14 +78,14 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitl
 
 onuse(player) {
   tacinsertboost = 0;
-  player.pers[#"objectives"]++;
-  player.objectives = player.pers[#"objectives"];
+  player.pers[# "objectives"]++;
+  player.objectives = player.pers[# "objectives"];
 
   if(player.team != self.attackerteam) {
     tacinsertboost = self.tacinsert;
 
     if(isDefined(self.attacker) && self.attacker.team == self.attackerteam) {
-      self.attacker luinotifyevent(#"player_callout", 2, #"mp/kill_denied", player.entnum);
+      self.attacker luinotifyevent(#"player_callout", 2, # "mp/kill_denied", player.entnum);
     }
 
     if(!tacinsertboost) {
@@ -99,8 +98,8 @@ onuse(player) {
   assert(isDefined(player.lastkillconfirmedtime));
   assert(isDefined(player.lastkillconfirmedcount));
 
-    player.pers[#"killsconfirmed"]++;
-  player.killsconfirmed = player.pers[#"killsconfirmed"];
+  player.pers[# "killsconfirmed"]++;
+  player.killsconfirmed = player.pers[# "killsconfirmed"];
   player globallogic_score::giveteamscoreforobjective(player.team, level.teamscoreperkillconfirmed);
 
   if(!tacinsertboost) {

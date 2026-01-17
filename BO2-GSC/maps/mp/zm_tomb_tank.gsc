@@ -198,7 +198,7 @@ tank_debug_tags() {
 tank_jump_down_store_offset(s_pos) {
   v_up = anglestoup(self.angles);
   v_right = anglestoright(self.angles);
-  v_fwd = anglestoforward(self.angles);
+  v_fwd = anglesToForward(self.angles);
   offset = s_pos.origin - self.origin;
   s_pos.tank_offset = (vectordot(v_fwd, offset), vectordot(v_right, offset), vectordot(v_up, offset));
 }
@@ -206,7 +206,7 @@ tank_jump_down_store_offset(s_pos) {
 tank_get_jump_down_offset(s_pos) {
   v_up = anglestoup(self.angles);
   v_right = anglestoright(self.angles);
-  v_fwd = anglestoforward(self.angles);
+  v_fwd = anglesToForward(self.angles);
   v_offset = s_pos.tank_offset;
   return self.origin + v_offset[0] * v_fwd + v_offset[1] * v_right + v_offset[2] * v_up;
 }
@@ -249,7 +249,7 @@ tank_setup() {
 
   self thread tank_debug_tags();
 
-  self playloopsound("zmb_tank_idle", 0.5);
+  self playLoopSound("zmb_tank_idle", 0.5);
 }
 
 do_cooldown_fx() {
@@ -381,7 +381,7 @@ entity_on_tank() {
 tank_station() {
   self thread tank_watch_use();
   self thread tank_movement();
-  a_call_boxes = getentarray("trig_tank_station_call", "targetname");
+  a_call_boxes = getEntArray("trig_tank_station_call", "targetname");
 
   foreach(t_call_box in a_call_boxes)
   t_call_box thread tank_call_box();
@@ -401,7 +401,7 @@ tank_left_behind() {
   e_rider = random(a_riders);
   a_players = getplayers();
   a_victims = [];
-  v_tank_fwd = anglestoforward(self.angles);
+  v_tank_fwd = anglesToForward(self.angles);
 
   foreach(e_player in a_players) {
     if(isDefined(e_player.b_already_on_tank) && e_player.b_already_on_tank) {
@@ -416,7 +416,7 @@ tank_left_behind() {
     if(vectordot(v_to_tank, v_tank_fwd) < 0) {
       continue;
     }
-    v_player_fwd = anglestoforward(e_player.angles);
+    v_player_fwd = anglesToForward(e_player.angles);
 
     if(vectordot(v_player_fwd, v_to_tank) < 0) {
       continue;
@@ -444,7 +444,7 @@ tank_watch_use() {
       self thread tank_left_behind();
       e_player maps\mp\zombies\_zm_score::minus_to_player_score(500);
       self waittill("tank_stop");
-      self playsound("zmb_tank_stop");
+      self playSound("zmb_tank_stop");
       self stoploopsound(1.5);
 
       if(isDefined(self.b_call_box_used) && self.b_call_box_used) {
@@ -486,7 +486,7 @@ tank_call_box() {
 
 tank_call_boxes_update() {
   str_loc = level.vh_tank.str_location_current;
-  a_trigs = getentarray("trig_tank_station_call", "targetname");
+  a_trigs = getEntArray("trig_tank_station_call", "targetname");
   moving = level.vh_tank ent_flag("tank_moving");
   cooling = level.vh_tank ent_flag("tank_cooldown");
 
@@ -532,7 +532,7 @@ tank_movement() {
     iprintln("The tank is moving.");
 
     self thread tank_connect_paths();
-    self playsound("evt_tank_call");
+    self playSound("evt_tank_call");
     self setspeedimmediate(8);
     self.t_use setinvisibletoall();
     tank_call_boxes_update();
@@ -627,10 +627,10 @@ wait_to_unlink(player) {
 tank_cooldown_timer() {
   self.n_cooldown_timer = 0;
   str_location_original = self.str_location_current;
-  self playsound("zmb_tank_start");
+  self playSound("zmb_tank_start");
   self stoploopsound(0.4);
   wait 0.4;
-  self playloopsound("zmb_tank_loop", 1);
+  self playLoopSound("zmb_tank_loop", 1);
 
   while(str_location_original == self.str_location_current) {
     self.n_cooldown_timer = self.n_cooldown_timer + self.n_players_on * 0.05;
@@ -648,20 +648,20 @@ wait_for_tank_cooldown() {
 
   wait(self.n_cooldown_timer);
   level notify("stp_cd");
-  self playsound("zmb_tank_ready");
-  self playloopsound("zmb_tank_idle");
+  self playSound("zmb_tank_ready");
+  self playLoopSound("zmb_tank_idle");
 }
 
 snd_fuel() {
   snd_cd_ent = spawn("script_origin", self.origin);
   snd_cd_ent linkto(self);
   wait 4;
-  snd_cd_ent playsound("zmb_tank_fuel_start");
+  snd_cd_ent playSound("zmb_tank_fuel_start");
   wait 0.5;
-  snd_cd_ent playloopsound("zmb_tank_fuel_loop");
+  snd_cd_ent playLoopSound("zmb_tank_fuel_loop");
   level waittill("stp_cd");
   snd_cd_ent stoploopsound(0.5);
-  snd_cd_ent playsound("zmb_tank_fuel_end");
+  snd_cd_ent playSound("zmb_tank_fuel_end");
   wait 2;
   snd_cd_ent delete();
 }
@@ -690,36 +690,36 @@ follow_path(n_path_start) {
 
 tank_tag_array_setup() {
   a_tank_tags = [];
-  a_tank_tags[0] = spawnstruct();
+  a_tank_tags[0] = spawnStruct();
   a_tank_tags[0].str_tag = "window_left_1_jmp_jnt";
   a_tank_tags[0].disabled_at_bunker = 1;
   a_tank_tags[0].disabled_at_church = 1;
   a_tank_tags[0].side = "left";
-  a_tank_tags[1] = spawnstruct();
+  a_tank_tags[1] = spawnStruct();
   a_tank_tags[1].str_tag = "window_left_2_jmp_jnt";
   a_tank_tags[1].disabled_at_bunker = 1;
   a_tank_tags[1].disabled_at_church = 1;
   a_tank_tags[1].side = "left";
-  a_tank_tags[2] = spawnstruct();
+  a_tank_tags[2] = spawnStruct();
   a_tank_tags[2].str_tag = "window_left_3_jmp_jnt";
   a_tank_tags[2].disabled_at_bunker = 1;
   a_tank_tags[2].disabled_at_church = 1;
   a_tank_tags[2].side = "left";
-  a_tank_tags[3] = spawnstruct();
+  a_tank_tags[3] = spawnStruct();
   a_tank_tags[3].str_tag = "window_right_front_jmp_jnt";
   a_tank_tags[3].side = "front";
-  a_tank_tags[4] = spawnstruct();
+  a_tank_tags[4] = spawnStruct();
   a_tank_tags[4].str_tag = "window_right_1_jmp_jnt";
   a_tank_tags[4].side = "right";
-  a_tank_tags[5] = spawnstruct();
+  a_tank_tags[5] = spawnStruct();
   a_tank_tags[5].str_tag = "window_right_2_jmp_jnt";
   a_tank_tags[5].disabled_at_church = 1;
   a_tank_tags[5].side = "right";
-  a_tank_tags[6] = spawnstruct();
+  a_tank_tags[6] = spawnStruct();
   a_tank_tags[6].str_tag = "window_right_3_jmp_jnt";
   a_tank_tags[6].disabled_at_church = 1;
   a_tank_tags[6].side = "right";
-  a_tank_tags[7] = spawnstruct();
+  a_tank_tags[7] = spawnStruct();
   a_tank_tags[7].str_tag = "window_left_rear_jmp_jnt";
   a_tank_tags[7].side = "rear";
   return a_tank_tags;
@@ -744,19 +744,19 @@ get_players_on_tank(valid_targets_only) {
 
 mechz_tag_array_setup() {
   a_mechz_tags = [];
-  a_mechz_tags[0] = spawnstruct();
+  a_mechz_tags[0] = spawnStruct();
   a_mechz_tags[0].str_tag = "tag_mechz_1";
   a_mechz_tags[0].in_use = 0;
   a_mechz_tags[0].in_use_by = undefined;
-  a_mechz_tags[1] = spawnstruct();
+  a_mechz_tags[1] = spawnStruct();
   a_mechz_tags[1].str_tag = "tag_mechz_2";
   a_mechz_tags[1].in_use = 0;
   a_mechz_tags[1].in_use_by = undefined;
-  a_mechz_tags[2] = spawnstruct();
+  a_mechz_tags[2] = spawnStruct();
   a_mechz_tags[2].str_tag = "tag_mechz_3";
   a_mechz_tags[2].in_use = 0;
   a_mechz_tags[2].in_use_by = undefined;
-  a_mechz_tags[3] = spawnstruct();
+  a_mechz_tags[3] = spawnStruct();
   a_mechz_tags[3].str_tag = "tag_mechz_4";
   a_mechz_tags[3].in_use = 0;
   a_mechz_tags[3].in_use_by = undefined;
@@ -1265,7 +1265,7 @@ tank_flamethrower_get_targets(str_tag, n_flamethrower_id) {
   a_targets = [];
   v_tag_pos = self gettagorigin(str_tag);
   v_tag_angles = self gettagangles(str_tag);
-  v_tag_fwd = anglestoforward(v_tag_angles);
+  v_tag_fwd = anglesToForward(v_tag_angles);
   v_kill_pos = v_tag_pos + v_tag_fwd * 80;
 
   foreach(ai_zombie in a_zombies) {
@@ -1316,7 +1316,7 @@ tank_flamethrower(str_tag, n_flamethrower_id) {
     wait 1.0;
 
     if(n_flamethrower_id == 1)
-      self setturrettargetvec(self.origin + anglestoforward(self.angles) * 1000);
+      self setturrettargetvec(self.origin + anglesToForward(self.angles) * 1000);
 
     self ent_flag_wait("tank_moving");
     a_targets = tank_flamethrower_get_targets(str_tag, n_flamethrower_id);
@@ -1405,7 +1405,7 @@ enemy_location_override() {
           if(gettime() != tank.chase_pos_time) {
             tank.chase_pos_time = gettime();
             tank.chase_pos_index = 0;
-            tank_forward = vectornormalize(anglestoforward(level.vh_tank.angles));
+            tank_forward = vectornormalize(anglesToForward(level.vh_tank.angles));
             tank_right = vectornormalize(anglestoright(level.vh_tank.angles));
             tank.chase_pos = [];
             tank.chase_pos[0] = level.vh_tank.origin + vectorscale(tank_forward, -164);

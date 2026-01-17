@@ -12,7 +12,6 @@
 #include scripts\core_common\scene_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace callback;
 
 callback(event, localclientnum, params) {
@@ -420,9 +419,9 @@ event_handler[exit_vehicle] codecallback_exitvehicle(eventstruct) {
 
 event_handler[sound_notify] codecallback_soundnotify(eventstruct) {
   switch (eventstruct.notetrack) {
-    case #"scr_bomb_beep":
+    case # "scr_bomb_beep":
       if(getgametypesetting(#"silentplant") == 0) {
-        self playSound(eventstruct.localclientnum, #"fly_bomb_buttons_npc");
+        self playSound(eventstruct.localclientnum, # "fly_bomb_buttons_npc");
       }
 
       break;
@@ -720,7 +719,7 @@ event_handler[gadget_visionpulsereveal] codecallback_gadgetvisionpulse_reveal(ev
   }
 }
 
-private fade_to_black_for_x_sec(startwait, blackscreenwait, fadeintime, fadeouttime, shadername) {
+fade_to_black_for_x_sec(startwait, blackscreenwait, fadeintime, fadeouttime, shadername) {
   self endon(#"disconnect");
   wait startwait;
   self lui::screen_fade_out(fadeintime, shadername);

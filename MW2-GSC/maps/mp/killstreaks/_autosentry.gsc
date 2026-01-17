@@ -97,21 +97,21 @@ setCarryingSentry(sentryGun, allowCancel) {
   self notifyOnPlayerCommand("place_sentry", "+attack");
   self notifyOnPlayerCommand("cancel_sentry", "+actionslot 4");
 
-  for (;;) {
+  for(;;) {
     result = waittill_any_return("place_sentry", "cancel_sentry");
 
     if(result == "cancel_sentry") {
-      if(!allowCancel)
+      if(!allowCancel) {
         continue;
-
+      }
       sentryGun sentry_setCancelled();
       self _enableWeapon();
       return false;
     }
 
-    if(!sentryGun.canBePlaced)
+    if(!sentryGun.canBePlaced) {
       continue;
-
+    }
     sentryGun sentry_setPlaced();
     self _enableWeapon();
 
@@ -168,7 +168,7 @@ sentry_handleDamage() {
   healthBuffer = 20000;
   self.health += healthbuffer;
 
-  while (self.health > 0) {
+  while(self.health > 0) {
     self waittill("damage", amount, attacker, dir, point, type);
 
     if(isDefined(attacker) && isPlayer(attacker) && attacker != self.owner && attacker isFriendlyToSentry(self) && !isDefined(level.nukeDetonated)) {
@@ -218,9 +218,9 @@ sentry_handleDeath() {
 
   self removeFromTurretList(entNum);
   // this handles cases of deletion
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
-
+  }
   self setModel(level.sentrySettings[self.sentryType].modelDestroyed);
 
   self sentry_setInactive();
@@ -229,7 +229,7 @@ sentry_handleDeath() {
   self SetTurretMinimapVisible(false);
 
   self playSound("sentry_explode");
-  playFxOnTag(getFx("sentry_explode_mp"), self, "tag_aim");
+  playFXOnTag(getFx("sentry_explode_mp"), self, "tag_aim");
 
   // don't try to delete ourselves if we're deleted by other means
   self endon("death");
@@ -237,8 +237,8 @@ sentry_handleDeath() {
   wait(1.5);
 
   self playSound("sentry_explode_smoke");
-  for (smokeTime = 8; smokeTime > 0; smokeTime -= 0.4) {
-    playFxOnTag(getFx("sentry_smoke_mp"), self, "tag_aim");
+  for(smokeTime = 8; smokeTime > 0; smokeTime -= 0.4) {
+    playFXOnTag(getFx("sentry_smoke_mp"), self, "tag_aim");
     wait(0.4);
   }
 
@@ -249,15 +249,15 @@ sentry_handleUse() {
   self endon("death");
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     self waittill("trigger", player);
 
     assert(player == self.owner);
     assert(!isDefined(self.carriedBy));
 
-    if(!isReallyAlive(player))
+    if(!isReallyAlive(player)) {
       continue;
-
+    }
     player setCarryingSentry(self, false);
   }
 }
@@ -352,7 +352,7 @@ updateSentryPlacement(sentryGun) {
   sentryGun.canBePlaced = true;
   lastCanPlaceSentry = -1; // force initial update
 
-  for (;;) {
+  for(;;) {
     placement = self canPlayerPlaceSentry();
 
     sentryGun.origin = placement["origin"];
@@ -472,7 +472,7 @@ sentry_attackTargets() {
 
   self thread sentry_heatMonitor();
 
-  for (;;) {
+  for(;;) {
     self waittill_either("turretstatechange", "cooled");
 
     if(self isFiringTurret()) {
@@ -490,7 +490,7 @@ sentry_timeOut() {
 
   lifeSpan = SENTRY_TIME_OUT;
 
-  while (lifeSpan) {
+  while(lifeSpan) {
     wait(1.0);
     maps\mp\gametypes\_hostmigration::waitTillHostMigrationDone();
 
@@ -517,7 +517,7 @@ sentry_targetLockSound() {
 sentry_spinUp() {
   self thread sentry_targetLockSound();
 
-  while (self.momentum < SENTRY_SPINUP_TIME) {
+  while(self.momentum < SENTRY_SPINUP_TIME) {
     self.momentum += 0.1;
 
     wait(0.1);
@@ -542,10 +542,10 @@ sentry_burstFireStart() {
   minPause = level.sentrySettings[self.sentryType].pauseMin;
   maxPause = level.sentrySettings[self.sentryType].pauseMax;
 
-  for (;;) {
+  for(;;) {
     numShots = randomIntRange(minShots, maxShots + 1);
 
-    for (i = 0; i < numShots && !self.overheated; i++) {
+    for(i = 0; i < numShots && !self.overheated; i++) {
       self shootTurret();
       self.heatLevel += fireTime;
       wait(fireTime);
@@ -567,7 +567,7 @@ sentry_heatMonitor() {
   lastHeatLevel = 0;
   lastFxTime = 0;
 
-  for (;;) {
+  for(;;) {
     if(self.heatLevel != lastHeatLevel)
       wait(fireTime);
     else
@@ -577,7 +577,7 @@ sentry_heatMonitor() {
       self.overheated = true;
       self thread PlayHeatFX();
 
-      while (self.heatLevel) {
+      while(self.heatLevel) {
         self.heatLevel = max(0, self.heatLevel - 0.1);
         wait(0.1);
       }
@@ -596,8 +596,8 @@ playHeatFX() {
   self endon("not_overheated");
   level endon("game_ended");
 
-  for (;;) {
-    playFxOnTag(getFx("sentry_overheat_mp"), self, "tag_flash");
+  for(;;) {
+    playFXOnTag(getFx("sentry_overheat_mp"), self, "tag_flash");
 
     wait(SENTRY_FX_TIME);
   }
@@ -607,7 +607,7 @@ sentry_beepSounds() {
   self endon("death");
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     wait(3.0);
 
     if(!isDefined(self.carriedBy))

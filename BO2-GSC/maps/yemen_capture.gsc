@@ -23,8 +23,7 @@ init_flags() {
   flag_init("obj_capture_menendez");
 }
 
-init_spawn_funcs() {
-}
+init_spawn_funcs() {}
 
 skipto_capture() {
   capture_skipto_setup();
@@ -356,7 +355,7 @@ capture_spawn_fake_qrotors_at_structs_and_move(str_drone_pos, n_move_time) {
 
   foreach(s_drone_pos in a_drone_pos) {
     m_drone = spawn("script_model", s_drone_pos.origin);
-    m_drone setmodel("veh_t6_drone_quad_rotor_sp");
+    m_drone setModel("veh_t6_drone_quad_rotor_sp");
     s_drone_target = getstruct(s_drone_pos.target, "targetname");
     m_drone moveto(s_drone_target.origin, n_move_time);
     m_drone waittill("movedone");
@@ -381,7 +380,7 @@ debug_get_player_position() {
     v_player_pos = level.player.origin;
     v_player_angles = level.player.angles;
     v_player_angles2 = level.player getplayerangles();
-    v_player_eye = level.player geteye();
+    v_player_eye = level.player getEye();
     wait 0.05;
   }
 }

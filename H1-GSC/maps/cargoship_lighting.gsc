@@ -29,12 +29,12 @@ init_level_lighting_flags() {}
 setup_dof_presets() {}
 
 setup_lighting_triggers() {
-  var_0 = getentarray("script_lightset_change", "targetname");
+  var_0 = getEntArray("script_lightset_change", "targetname");
   common_scripts\utility::array_thread(var_0, ::lighting_trigger_think);
 }
 
 lighting_trigger_think() {
-  if(!isdefined(self.script_noteworthy)) {
+  if(!isDefined(self.script_noteworthy)) {
     return;
   }
   if(self.script_noteworthy == "special") {
@@ -42,7 +42,7 @@ lighting_trigger_think() {
     return;
   }
 
-  for (;;) {
+  for(;;) {
     self waittill("trigger");
 
     if(self.script_noteworthy != level.current_light_set)
@@ -61,12 +61,12 @@ set_level_lighting_values() {
 }
 
 apply_lighting_pass_cargoship(var_0, var_1) {
-  if(!isdefined(var_0)) {
+  if(!isDefined(var_0)) {
     return;
   }
   switch (var_0) {
     case "cargoship_intro":
-      if(!isdefined(var_1))
+      if(!isDefined(var_1))
         var_1 = 0.0;
 
       maps\_utility::set_vision_set("cargoship_intro", var_1);
@@ -75,7 +75,7 @@ apply_lighting_pass_cargoship(var_0, var_1) {
       level.player setclutforplayer("clut_cargoship", var_1);
       break;
     case "cargoship_exterior":
-      if(!isdefined(var_1))
+      if(!isDefined(var_1))
         var_1 = 1.0;
 
       maps\_utility::set_vision_set("cargoship_exterior", var_1);
@@ -84,7 +84,7 @@ apply_lighting_pass_cargoship(var_0, var_1) {
       level.player setclutforplayer("clut_cargoship", var_1);
       break;
     case "cargoship_exterior_helitrans_vision":
-      if(!isdefined(var_1))
+      if(!isDefined(var_1))
         var_1 = 1.0;
 
       maps\_utility::set_vision_set("cargoship_introtransit", var_1);
@@ -92,7 +92,7 @@ apply_lighting_pass_cargoship(var_0, var_1) {
       level.player setclutforplayer("clut_cargoship", var_1);
       break;
     case "cargoship_interior":
-      if(!isdefined(var_1))
+      if(!isDefined(var_1))
         var_1 = 3.0;
 
       maps\_utility::set_vision_set("cargoship_interior_upperdeck", var_1);
@@ -101,7 +101,7 @@ apply_lighting_pass_cargoship(var_0, var_1) {
       level.player setclutforplayer("clut_cargoship", var_1);
       break;
     case "cargoship_interior_transition":
-      if(!isdefined(var_1))
+      if(!isDefined(var_1))
         var_1 = 2.0;
 
       maps\_utility::set_vision_set("cargoship_interior_transition", var_1);
@@ -110,7 +110,7 @@ apply_lighting_pass_cargoship(var_0, var_1) {
       level.player setclutforplayer("clut_cargoship", var_1);
       break;
     case "cargoship_explosion":
-      if(!isdefined(var_1))
+      if(!isDefined(var_1))
         var_1 = 2.0;
 
       maps\_utility::set_vision_set("cargoship_explosion", 0.2);
@@ -121,7 +121,7 @@ apply_lighting_pass_cargoship(var_0, var_1) {
       level.player setclutforplayer("clut_cargoship", var_1);
       break;
     case "cargoship_escape":
-      if(!isdefined(var_1))
+      if(!isDefined(var_1))
         var_1 = 2.0;
 
       maps\_utility::set_vision_set("cargoship_interior_cargohold_alert", var_1);
@@ -130,7 +130,7 @@ apply_lighting_pass_cargoship(var_0, var_1) {
       level.player setclutforplayer("clut_cargoship", var_1);
       break;
     case "cargoship_exterior_outro":
-      if(!isdefined(var_1))
+      if(!isDefined(var_1))
         var_1 = 2.0;
 
       maps\_utility::set_vision_set("cargoship_exterior_outro", var_1);
@@ -139,7 +139,7 @@ apply_lighting_pass_cargoship(var_0, var_1) {
       level.player setclutforplayer("clut_cargoship", var_1);
       break;
     case "cargoship_outro":
-      if(!isdefined(var_1))
+      if(!isDefined(var_1))
         var_1 = 2.0;
 
       maps\_utility::set_vision_set("cargoship_outro", var_1);
@@ -148,7 +148,7 @@ apply_lighting_pass_cargoship(var_0, var_1) {
       level.player setclutforplayer("clut_cargoship", var_1);
       break;
     default:
-      if(!isdefined(var_1))
+      if(!isDefined(var_1))
         var_1 = 1.0;
 
       maps\_utility::vision_set_fog_changes("cargoship_exterior", var_1);
@@ -169,10 +169,10 @@ activate_outside_lights() {
 }
 
 activate_lights(var_0, var_1, var_2) {
-  if(!isdefined(var_0) || !isdefined(var_1)) {
+  if(!isDefined(var_0) || !isDefined(var_1)) {
     return;
   }
-  var_3 = getentarray(var_0, "targetname");
+  var_3 = getEntArray(var_0, "targetname");
   var_4 = common_scripts\utility::getstructarray(var_0, "targetname");
 
   foreach(var_6 in var_3)
@@ -184,39 +184,39 @@ activate_lights(var_0, var_1, var_2) {
 
 set_light_intensity(var_0, var_1) {
   var_2 = self;
-  var_3 = getentarray(self.target, "targetname");
+  var_3 = getEntArray(self.target, "targetname");
 
-  for (var_4 = 0; var_4 < var_3.size; var_4++) {
+  for(var_4 = 0; var_4 < var_3.size; var_4++) {
     var_5 = var_3[var_4];
 
-    if(isdefined(var_5.script_parameters) && var_5.script_parameters == "light") {
+    if(isDefined(var_5.script_parameters) && var_5.script_parameters == "light") {
       var_2 = var_5;
       break;
     }
   }
 
-  if(isdefined(var_2) && (!isdefined(var_2.tv) || var_2.tv maps\_interactive_objects::is_tv_emitting_light())) {
-    if(!isdefined(var_2.old_light_intensity))
+  if(isDefined(var_2) && (!isDefined(var_2.tv) || var_2.tv maps\_interactive_objects::is_tv_emitting_light())) {
+    if(!isDefined(var_2.old_light_intensity))
       var_2.old_light_intensity = var_2 getlightintensity();
 
     var_2 setlightintensity(common_scripts\utility::ter_op(var_0, 0.0, var_2.old_light_intensity));
 
-    if(isdefined(var_1))
+    if(isDefined(var_1))
       var_2 setlightshadowstate(var_1);
   }
 }
 
 setup_lights_triggers() {
   activate_outside_lights();
-  var_0 = getentarray("script_lights_change", "targetname");
+  var_0 = getEntArray("script_lights_change", "targetname");
   common_scripts\utility::array_thread(var_0, ::lights_trigger_think);
 }
 
 lights_trigger_think() {
-  if(!isdefined(self.script_noteworthy)) {
+  if(!isDefined(self.script_noteworthy)) {
     return;
   }
-  for (;;) {
+  for(;;) {
     self waittill("trigger");
 
     if(self.script_noteworthy != level.current_lights)
@@ -225,12 +225,12 @@ lights_trigger_think() {
 }
 
 apply_lights_change(var_0) {
-  if(!isdefined(var_0)) {
+  if(!isDefined(var_0)) {
     return;
   }
   var_1 = strtok(self.script_parameters, ":; ");
 
-  for (var_2 = 0; var_2 < var_1.size; var_2++) {
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
     var_3 = var_1[var_2];
     var_4 = tolower(var_3);
     var_5 = var_4 == "on";
@@ -240,7 +240,7 @@ apply_lights_change(var_0) {
       var_2++;
       var_7 = strtok(var_1[var_2], ", ");
 
-      for (var_8 = 0; var_8 < var_7.size; var_8++) {
+      for(var_8 = 0; var_8 < var_7.size; var_8++) {
         var_9 = var_7[var_8];
         activate_lights(var_9, var_5);
       }
@@ -267,7 +267,7 @@ sinking_ship_lights_flickering() {
 }
 
 init_emergency_lights() {
-  var_0 = getentarray("emergency_light", "targetname");
+  var_0 = getEntArray("emergency_light", "targetname");
 
   foreach(var_2 in var_0) {
     if(var_2.code_classname == "light")
@@ -276,15 +276,15 @@ init_emergency_lights() {
 }
 
 activate_emergency_lights() {
-  var_0 = getentarray("emergency_light", "targetname");
-  var_1 = getentarray("emergency_light_rotator", "script_noteworthy");
+  var_0 = getEntArray("emergency_light", "targetname");
+  var_1 = getEntArray("emergency_light_rotator", "script_noteworthy");
 
   foreach(var_3 in var_1) {
     var_4 = common_scripts\utility::spawn_tag_origin();
     var_4.origin = var_3.origin;
     var_4.angles = var_3.angles;
     var_4 linkto(var_3);
-    playfxontag(common_scripts\utility::getfx("emergency_light"), var_4, "tag_origin");
+    playFXOnTag(common_scripts\utility::getfx("emergency_light"), var_4, "tag_origin");
   }
 
   foreach(var_7 in var_0) {
@@ -293,10 +293,10 @@ activate_emergency_lights() {
 
     var_8 = undefined;
 
-    if(isdefined(var_7.script_linkto))
+    if(isDefined(var_7.script_linkto))
       var_8 = getent(var_7.script_linkto, "script_linkname");
 
-    if(!isdefined(var_8))
+    if(!isDefined(var_8))
       var_8 = var_7;
 
     var_7 thread emergency_light_rotation(anglestoup(var_8.angles));
@@ -306,7 +306,7 @@ activate_emergency_lights() {
 emergency_light_rotation(var_0) {
   var_1 = 18;
 
-  for (;;) {
+  for(;;) {
     var_2 = anglestoaxis(self.angles);
     var_2["forward"] = rotatepointaroundvector(var_0, var_2["forward"], var_1);
     var_2["right"] = rotatepointaroundvector(var_0, var_2["right"], var_1);
@@ -336,7 +336,7 @@ explosion_lerping() {
 }
 
 special_lighting_trigger_think() {
-  for (;;) {
+  for(;;) {
     self waittill("trigger");
 
     if(common_scripts\utility::flag("escape_exterior_visionset"))

@@ -50,7 +50,7 @@ corpse_adder(guy) {
   corpse.fresh = 1;
   time = 0;
   level.corpsecount = array_add(level.corpsecount, corpse);
-  while (isDefined(guy) && time < .7) {
+  while(isDefined(guy) && time < .7) {
     if(corpse.origin != guy.origin) {
       corpse.origin = guy.origin;
     }
@@ -66,8 +66,8 @@ corpsefind_wait() {
   level endon("player_broke_stealth");
   level endon("player_broke_stealth_inshop");
   foundcorpse = false;
-  while (foundcorpse == false) {
-    for (i = 0; i < level.corpsecount.size; i++) {
+  while(foundcorpse == false) {
+    for(i = 0; i < level.corpsecount.size; i++) {
       corpse = level.corpsecount[i];
       dist = distance(corpse.origin, self.origin);
       corpse_in_front = self entity_is_in_front_of_me(corpse);
@@ -119,7 +119,7 @@ found_corpse_notify() {
   level endon("player_spotted");
   level endon("player_broke_stealth");
   level endon("player_broke_stealth_inshop");
-  while (1) {
+  while(1) {
     level waittill("corpse_found");
     if(!flag("bombers_passing") || flag("outof_fountain")) {
       break;
@@ -151,7 +151,7 @@ found_corpse_behavior() {
   self.animname = "generic";
   self set_run_anim(myrunanim);
   counter = 1;
-  while (1) {
+  while(1) {
     self.animname = "generic";
     nodes = getnodearray("searching_for_player_nodes" + counter, "script_noteworthy");
     anime = initial_reactions[randomint(initial_reactions.size)];
@@ -160,7 +160,7 @@ found_corpse_behavior() {
     } else {
       self anim_single_solo(self, anime);
     }
-    for (i = 0; i < nodes.size; i++) {
+    for(i = 0; i < nodes.size; i++) {
       if(!isDefined(nodes[i].isacquired)) {
         self thread maps\_spawner::go_to_node(nodes[i]);
         if(isDefined(lastnode))
@@ -186,7 +186,7 @@ found_corpse_behavior() {
   if(flag("outof_event1")) {
     self.animname = "generic";
     self set_run_anim("_stealth_patrol_walk");
-    for (i = 0; i < level.e1_return_nodes.size; i++) {
+    for(i = 0; i < level.e1_return_nodes.size; i++) {
       if(!isDefined(level.e1_return_nodes[i].seatstaken)) {
         self thread maps\_spawner::go_to_node(level.e1_return_nodes[i]);
         self.goalradius = 32;
@@ -227,7 +227,7 @@ entity_is_in_front_of_me(target_entity) {
   right_vector = anglestoright(self.angles);
   point2 = point1 + right_vector;
   vector_to_target = VectorFromLineToPoint(point1, point2, target_entity.origin);
-  forward_vector = anglestoforward(self.angles);
+  forward_vector = anglesToForward(self.angles);
   dot_product = vectordot(forward_vector, vector_to_target);
   if(dot_product >= 0) {
     return true;
@@ -239,9 +239,9 @@ isspotting_player() {
   self endon("death");
   level endon("player_broke_stealth");
   level endon("player_broke_stealth_inshop");
-  while (1) {
+  while(1) {
     players = get_players();
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       dist = distance(self.origin, players[i].origin);
       player_infront = self entity_is_in_front_of_me(players[i]);
       if(dist < 800 && self cansee(players[i]) && player_infront == true) {

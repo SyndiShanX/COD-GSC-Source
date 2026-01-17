@@ -58,28 +58,28 @@ function autoexec init() {
   level.var_af2fbbad = spawn("script_origin", (0, 0, 0));
   level.var_e96fb1cb = spawn("script_origin", (0, 0, 0));
   level.var_971e6055 = spawn("script_origin", (0, 0, 0));
-  level.var_c9205007 = & function_cf21d35c;
-  level.var_9b1300c2 = & function_ef0ce9fb;
-  level.var_c75c7dba = & function_b4a3e925;
-  level.var_4f24fec0 = & function_45809471;
-  level.bzm_sceneseqendedcallback = & bzm_sceneseqended;
+  level.var_c9205007 = &function_cf21d35c;
+  level.var_9b1300c2 = &function_ef0ce9fb;
+  level.var_c75c7dba = &function_b4a3e925;
+  level.var_4f24fec0 = &function_45809471;
+  level.bzm_sceneseqendedcallback = &bzm_sceneseqended;
 }
 
 function bzm_sceneseqended(scenename) {
   level notify("bzm_sceneseqended");
-  if(isdefined(level.var_5de673a6.var_478c7e3e)) {
+  if(isDefined(level.var_5de673a6.var_478c7e3e)) {
     level.var_5de673a6 stopsound(level.var_5de673a6.var_478c7e3e);
   }
   level.var_5de673a6 notify("hash_2d8828d0");
-  if(isdefined(level.var_af2fbbad.var_478c7e3e)) {
+  if(isDefined(level.var_af2fbbad.var_478c7e3e)) {
     level.var_af2fbbad stopsound(level.var_af2fbbad.var_478c7e3e);
   }
   level.var_af2fbbad notify("hash_2d8828d0");
-  if(isdefined(level.var_e96fb1cb.var_478c7e3e)) {
+  if(isDefined(level.var_e96fb1cb.var_478c7e3e)) {
     level.var_e96fb1cb stopsound(level.var_e96fb1cb.var_478c7e3e);
   }
   level.var_e96fb1cb notify("hash_2d8828d0");
-  if(isdefined(level.var_971e6055.var_478c7e3e)) {
+  if(isDefined(level.var_971e6055.var_478c7e3e)) {
     level.var_971e6055 stopsound(level.var_971e6055.var_478c7e3e);
   }
   level.var_971e6055 notify("hash_2d8828d0");
@@ -88,18 +88,18 @@ function bzm_sceneseqended(scenename) {
 function private say(alias) {
   self notify("hash_2d8828d0");
   self endon("hash_2d8828d0");
-  if(isdefined(self.var_478c7e3e)) {
+  if(isDefined(self.var_478c7e3e)) {
     self stopsound(self.var_478c7e3e);
   }
   wait(0.1);
   uniquenotify = (alias + " ") + level.var_a5375ea0;
   level.var_a5375ea0 = level.var_a5375ea0 + 1;
-  if(isdefined(level.scr_sound) && isdefined(level.scr_sound["generic"])) {
+  if(isDefined(level.scr_sound) && isDefined(level.scr_sound["generic"])) {
     str_vox_file = level.scr_sound["generic"][alias];
   } else {
     return;
   }
-  if(!isdefined(str_vox_file)) {
+  if(!isDefined(str_vox_file)) {
     return;
   }
   self.var_478c7e3e = str_vox_file;
@@ -109,7 +109,7 @@ function private say(alias) {
 
 function function_cf21d35c(alias, blocking = 1) {
   assert(sessionmodeiscampaignzombiesgame());
-  assert(isdefined(level.var_5de673a6));
+  assert(isDefined(level.var_5de673a6));
   if(blocking) {
     level.var_5de673a6 say(alias);
   } else {
@@ -154,9 +154,9 @@ function function_f46e57be() {
 
 function function_b7efd00a() {
   self endon("death");
-  while (true) {
+  while(true) {
     self waittill("bhtn_action_notify", notify_string);
-    if(isdefined(level.bzm_worldpaused) && level.bzm_worldpaused) {
+    if(isDefined(level.bzm_worldpaused) && level.bzm_worldpaused) {
       continue;
     }
     if(self isinscriptedstate()) {
@@ -180,8 +180,8 @@ function function_b7efd00a() {
         break;
       }
       default: {
-        if(isdefined(level.var_61e4e12e)) {
-          if(isdefined(level.var_61e4e12e[notify_string])) {
+        if(isDefined(level.var_61e4e12e)) {
+          if(isDefined(level.var_61e4e12e[notify_string])) {
             level thread function_dc28c71b(self, notify_string, 0);
           }
         }
@@ -193,21 +193,21 @@ function function_b7efd00a() {
 
 function function_dc28c71b(zombie, type, override) {
   zombie endon("death");
-  if(!isdefined(zombie)) {
+  if(!isDefined(zombie)) {
     return;
   }
-  if(!isdefined(zombie.voiceprefix)) {
+  if(!isDefined(zombie.voiceprefix)) {
     return;
   }
   alias = (("zmb_vocals_" + zombie.voiceprefix) + "_") + type;
   if(sndisnetworksafe()) {
-    if(isdefined(override) && override) {
+    if(isDefined(override) && override) {
       if(type == "death") {
-        zombie playsound(alias);
+        zombie playSound(alias);
       } else {
         zombie playsoundontag(alias, "j_neck");
       }
-    } else if(!(isdefined(zombie.talking) && zombie.talking)) {
+    } else if(!(isDefined(zombie.talking) && zombie.talking)) {
       zombie.talking = 1;
       zombie playsoundwithnotify(alias, "sounddone", "j_neck");
       zombie waittill("sounddone");
@@ -219,9 +219,9 @@ function function_dc28c71b(zombie, type, override) {
 function function_f93398c4() {
   self endon("death");
   wait(randomfloatrange(1, 3));
-  while (true) {
+  while(true) {
     type = "ambient";
-    if(!isdefined(self.zombie_move_speed)) {
+    if(!isDefined(self.zombie_move_speed)) {
       wait(0.5);
       continue;
     }
@@ -239,7 +239,7 @@ function function_f93398c4() {
         break;
       }
     }
-    if(isdefined(self.missinglegs) && self.missinglegs) {
+    if(isDefined(self.missinglegs) && self.missinglegs) {
       type = "crawler";
     }
     self notify("bhtn_action_notify", type);
@@ -250,20 +250,20 @@ function function_f93398c4() {
 function function_acd6c6f8() {
   self endon("disconnect");
   self waittill("death", attacker, meansofdeath);
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     level thread function_dc28c71b(self, "death", 1);
   }
 }
 
 function networksafereset() {
-  while (true) {
+  while(true) {
     level.var_384c508a = 0;
     util::wait_network_frame();
   }
 }
 
 function sndisnetworksafe() {
-  if(!isdefined(level.var_384c508a)) {
+  if(!isDefined(level.var_384c508a)) {
     level thread networksafereset();
   }
   if(level.var_384c508a >= 2) {
@@ -276,11 +276,11 @@ function sndisnetworksafe() {
 function function_b80a73a4() {
   level endon("unloaded");
   self endon("death_or_disconnect");
-  if(!isdefined(level._zbv_vox_last_update_time)) {
+  if(!isDefined(level._zbv_vox_last_update_time)) {
     level._zbv_vox_last_update_time = 0;
     level._audio_zbv_shared_ent_list = getaiteamarray("axis");
   }
-  while (true) {
+  while(true) {
     wait(1);
     t = gettime();
     if(t > (level._zbv_vox_last_update_time + 1000)) {
@@ -289,11 +289,11 @@ function function_b80a73a4() {
     }
     zombs = level._audio_zbv_shared_ent_list;
     played_sound = 0;
-    for (i = 0; i < zombs.size; i++) {
-      if(!isdefined(zombs[i])) {
+    for(i = 0; i < zombs.size; i++) {
+      if(!isDefined(zombs[i])) {
         continue;
       }
-      if(isdefined(self.archetype) && self.archetype != "zombie") {
+      if(isDefined(self.archetype) && self.archetype != "zombie") {
         level._audio_zbv_shared_ent_list = array::remove_index(level._audio_zbv_shared_ent_list, i);
         continue;
       }

@@ -4,7 +4,7 @@
 **************************************************/
 
 main() {
-  self setmodel("c_usa_cia_combat_masonjr_fb");
+  self setModel("c_usa_cia_combat_masonjr_fb");
   self.voice = "american";
   self.skeleton = "base";
 }

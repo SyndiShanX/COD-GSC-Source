@@ -17,7 +17,7 @@ main() {
 setanims() {
   positions = [];
   for(i = 0; i < 9; i++) {
-    positions[i] = spawnstruct();
+    positions[i] = spawnStruct();
   }
   positions[0].sittag = "tag_driver";
   positions[0].idle = % crew_bike_m72_drive_straight;
@@ -390,7 +390,7 @@ ai_ride_and_shoot_damage_override(eInflictor, eAttacker, iDamage, iDFlags, sMean
 ai_ride_and_shoot_ragdoll_death() {
   self.a.doingRagdollDeath = true;
   self animscripts\shared::DropAllAIWeapons();
-  velocity = AnglesToForward(self.angles);
+  velocity = anglesToForward(self.angles);
   assert(isDefined(level.ai_motorcycle_death_launch_vector));
   velocity = (velocity[0] * level.ai_motorcycle_death_launch_vector[0],
     velocity[1] * level.ai_motorcycle_death_launch_vector[1],

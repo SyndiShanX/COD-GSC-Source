@@ -41,7 +41,7 @@ hudelem_count() {
   clientmax = 0;
   totalmax = 0;
   curr_total = 0;
-  while (1) {
+  while(1) {
     if(level.hudelem_count > max) {
       max = level.hudelem_count;
     }
@@ -1265,7 +1265,7 @@ add_title(title, textscale) {
   if(!isDefined(textscale)) {
     textscale = level.linesize;
   }
-  temp = SpawnStruct();
+  temp = spawnStruct();
   temp.type = "title";
   temp.textscale = textscale;
   temp.list = init_strings(array(title));
@@ -1276,7 +1276,7 @@ add_heading(heading, textscale) {
   if(!isDefined(textscale)) {
     textscale = level.linesize;
   }
-  temp = SpawnStruct();
+  temp = spawnStruct();
   temp.type = "heading";
   temp.list = init_strings(array(heading));
   temp.textscale = textscale;
@@ -1287,7 +1287,7 @@ add_credit(credit1, credit2, credit3, textscale) {
   if(!isDefined(textscale)) {
     textscale = level.linesize;
   }
-  temp = SpawnStruct();
+  temp = spawnStruct();
   temp.type = "credit";
   temp.textscale = textscale;
   temp.list = init_strings(array(credit1, credit2, credit3));
@@ -1295,7 +1295,7 @@ add_credit(credit1, credit2, credit3, textscale) {
 }
 
 init_strings(strings) {
-  for (i = 0; i < strings.size; i++) {
+  for(i = 0; i < strings.size; i++) {
     PrecacheString(strings[i]);
   }
   return strings;
@@ -1334,20 +1334,20 @@ array(a, b, c, d, e, f, g, h, i, j, k, l, m, n) {
 }
 
 add_space(small) {
-  temp = SpawnStruct();
+  temp = spawnStruct();
   temp.type = "space";
   add_to_credit_list(temp);
 }
 
 add_space_small() {
-  temp = SpawnStruct();
+  temp = spawnStruct();
   temp.type = "spacesmall";
   add_to_credit_list(temp);
 }
 
 add_image(image, width, height, delay) {
   PrecacheShader(image);
-  temp = SpawnStruct();
+  temp = spawnStruct();
   temp.type = "image";
   temp.image = image;
   temp.width = width;
@@ -1365,7 +1365,7 @@ add_to_credit_list(credit) {
 create_hudelems(amount, x_offset, x_align) {
   huds = [];
   y_start = 430;
-  for (i = 0; i < amount; i++) {
+  for(i = 0; i < amount; i++) {
     if(level.hudelem_count < 30) {
       level.hudelem_count++;
       hud = NewHudElem();
@@ -1419,7 +1419,7 @@ create_hudelems(amount, x_offset, x_align) {
 
 play_credits() {
   previous_time = 0;
-  for (i = 0; i < level.credit_list.size; i++) {
+  for(i = 0; i < level.credit_list.size; i++) {
     delay = level.default_line_delay;
     type = level.credit_list[i].type;
     count = 0;
@@ -1448,7 +1448,7 @@ play_credits() {
     if(count > 0) {
       huds = create_hudelems(count, x_offset, x_align);
     }
-    for (q = 0; q < huds.size; q++) {
+    for(q = 0; q < huds.size; q++) {
       switch (type) {
         case "image":
           image = level.credit_list[i].image;

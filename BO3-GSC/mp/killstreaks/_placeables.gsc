@@ -43,26 +43,26 @@ function spawnplaceable(killstreakref, killstreakid, onplacecallback, oncancelca
   placeable.angles = (0, player.angles[1], 0);
   placeable.placehintstring = placehintstring;
   placeable.invalidlocationhintstring = invalidlocationhintstring;
-  if(!isdefined(placeable.placehintstring)) {
+  if(!isDefined(placeable.placehintstring)) {
     placeable.placehintstring = "";
   }
-  if(!isdefined(placeable.invalidlocationhintstring)) {
+  if(!isDefined(placeable.invalidlocationhintstring)) {
     placeable.invalidlocationhintstring = "";
   }
   placeable notsolid();
-  if(isdefined(placeable.vehicle)) {
+  if(isDefined(placeable.vehicle)) {
     placeable.vehicle notsolid();
   }
   placeable.othermodel = spawn("script_model", player.origin);
-  placeable.othermodel setmodel(placeable.placedmodel);
+  placeable.othermodel setModel(placeable.placedmodel);
   placeable.othermodel setinvisibletoplayer(player);
   placeable.othermodel notsolid();
   placeable.othermodel clientfield::set("enemyvehicle", 1);
   placeable killstreaks::configure_team(killstreakref, killstreakid, player);
-  if(isdefined(health) && health > 0) {
+  if(isDefined(health) && health > 0) {
     placeable.health = health;
-    placeable setcandamage(0);
-    placeable thread killstreaks::monitordamage(killstreakref, health, & ondeath, 0, undefined, empdamage, & onemp, 1);
+    placeable setCanDamage(0);
+    placeable thread killstreaks::monitordamage(killstreakref, health, &ondeath, 0, undefined, empdamage, &onemp, 1);
   }
   player thread carryplaceable(placeable);
   level thread cancelongameend(placeable);
@@ -83,10 +83,10 @@ function carryplaceable(placeable) {
   player = self;
   placeable show();
   placeable notsolid();
-  if(isdefined(placeable.vehicle)) {
+  if(isDefined(placeable.vehicle)) {
     placeable.vehicle notsolid();
   }
-  if(isdefined(placeable.othermodel)) {
+  if(isDefined(placeable.othermodel)) {
     placeable thread util::ghost_wait_show_to_player(player, 0.05, "abort_ghost_wait_show");
     placeable.othermodel thread util::ghost_wait_show_to_others(player, 0.05, "abort_ghost_wait_show");
     placeable.othermodel notsolid();
@@ -100,15 +100,15 @@ function carryplaceable(placeable) {
 
 function innoplacementtrigger() {
   placeable = self;
-  if(isdefined(level.noturretplacementtriggers)) {
-    for (i = 0; i < level.noturretplacementtriggers.size; i++) {
+  if(isDefined(level.noturretplacementtriggers)) {
+    for(i = 0; i < level.noturretplacementtriggers.size; i++) {
       if(placeable istouching(level.noturretplacementtriggers[i])) {
         return true;
       }
     }
   }
-  if(isdefined(level.fatal_triggers)) {
-    for (i = 0; i < level.fatal_triggers.size; i++) {
+  if(isDefined(level.fatal_triggers)) {
+    for(i = 0; i < level.fatal_triggers.size; i++) {
       if(placeable istouching(level.fatal_triggers[i])) {
         return true;
       }
@@ -130,7 +130,7 @@ function watchplacement(placeable) {
   lastattempt = -1;
   placeable.canbeplaced = 0;
   waitingforattackbuttonrelease = 1;
-  while (true) {
+  while(true) {
     placement = player canplayerplaceturret();
     placeable.origin = placement["origin"];
     placeable.angles = placement["angles"];
@@ -138,21 +138,21 @@ function watchplacement(placeable) {
     if(player.laststand === 1) {
       placeable.canbeplaced = 0;
     }
-    if(isdefined(placeable.othermodel)) {
+    if(isDefined(placeable.othermodel)) {
       placeable.othermodel.origin = placement["origin"];
       placeable.othermodel.angles = placement["angles"];
     }
     if(placeable.canbeplaced != lastattempt) {
       if(placeable.canbeplaced) {
-        placeable setmodel(placeable.validmodel);
+        placeable setModel(placeable.validmodel);
         player sethintstring(istring(placeable.placehintstring));
       } else {
-        placeable setmodel(placeable.invalidmodel);
+        placeable setModel(placeable.invalidmodel);
         player sethintstring(istring(placeable.invalidlocationhintstring));
       }
       lastattempt = placeable.canbeplaced;
     }
-    while (waitingforattackbuttonrelease && !player attackbuttonpressed()) {
+    while(waitingforattackbuttonrelease && !player attackbuttonpressed()) {
       waitingforattackbuttonrelease = 0;
     }
     if(!waitingforattackbuttonrelease && placeable.canbeplaced && player attackbuttonpressed()) {
@@ -167,39 +167,39 @@ function watchplacement(placeable) {
         placeable.held = 0;
         player.holding_placeable = undefined;
         placeable.cancelable = 0;
-        if(isdefined(placeable.health) && placeable.health) {
-          placeable setcandamage(1);
+        if(isDefined(placeable.health) && placeable.health) {
+          placeable setCanDamage(1);
           placeable solid();
         }
-        if(isdefined(placeable.vehicle)) {
-          placeable.vehicle setcandamage(1);
+        if(isDefined(placeable.vehicle)) {
+          placeable.vehicle setCanDamage(1);
           placeable.vehicle solid();
         }
-        if(isdefined(placeable.placedmodel) && !placeable.spawnsvehicle) {
-          placeable setmodel(placeable.placedmodel);
+        if(isDefined(placeable.placedmodel) && !placeable.spawnsvehicle) {
+          placeable setModel(placeable.placedmodel);
         } else {
           placeable notify("abort_ghost_wait_show");
           placeable.abort_ghost_wait_show_to_player = 1;
           placeable.abort_ghost_wait_show_to_others = 1;
           placeable ghost();
-          if(isdefined(placeable.othermodel)) {
+          if(isDefined(placeable.othermodel)) {
             placeable.othermodel notify("abort_ghost_wait_show");
             placeable.othermodel.abort_ghost_wait_show_to_player = 1;
             placeable.othermodel.abort_ghost_wait_show_to_others = 1;
             placeable.othermodel ghost();
           }
         }
-        if(isdefined(placeable.timeout)) {
+        if(isDefined(placeable.timeout)) {
           if(!placeable.timeoutstarted) {
             placeable.timeoutstarted = 1;
-            placeable thread killstreaks::waitfortimeout(placeable.killstreakref, placeable.timeout, & ontimeout, "death", "cancelled");
+            placeable thread killstreaks::waitfortimeout(placeable.killstreakref, placeable.timeout, &ontimeout, "death", "cancelled");
           } else if(placeable.timedout) {
-            placeable thread killstreaks::waitfortimeout(placeable.killstreakref, 5000, & ontimeout, "cancelled");
+            placeable thread killstreaks::waitfortimeout(placeable.killstreakref, 5000, &ontimeout, "cancelled");
           }
         }
-        if(isdefined(placeable.onplace)) {
+        if(isDefined(placeable.onplace)) {
           player[[placeable.onplace]](placeable);
-          if(isdefined(placeable.onmove) && !placeable.timedout) {
+          if(isDefined(placeable.onmove) && !placeable.timedout) {
             spawnmovetrigger(placeable, player);
           }
         }
@@ -224,27 +224,25 @@ function watchcarrycancelevents(placeable) {
 
 function ontimeout() {
   placeable = self;
-  if(isdefined(placeable.held) && placeable.held) {
+  if(isDefined(placeable.held) && placeable.held) {
     placeable.timedout = 1;
     return;
   }
   placeable notify("delete_placeable_trigger");
-  placeable thread killstreaks::waitfortimeout(placeable.killstreakref, 5000, & forceshutdown, "cancelled");
+  placeable thread killstreaks::waitfortimeout(placeable.killstreakref, 5000, &forceshutdown, "cancelled");
 }
 
 function ondeath(attacker, weapon) {
   placeable = self;
-  if(isdefined(placeable.ondeath)) {
-    [
-      [placeable.ondeath]
-    ](attacker, weapon);
+  if(isDefined(placeable.ondeath)) {
+    [[placeable.ondeath]](attacker, weapon);
   }
   placeable notify("cancelled");
 }
 
 function onemp(attacker) {
   placeable = self;
-  if(isdefined(placeable.onemp)) {
+  if(isDefined(placeable.onemp)) {
     placeable[[placeable.onemp]](attacker);
   }
 }
@@ -287,9 +285,9 @@ function watchpickup(player) {
   placeable = self;
   placeable endon("death");
   placeable endon("cancelled");
-  assert(isdefined(placeable.pickuptrigger));
+  assert(isDefined(placeable.pickuptrigger));
   trigger = placeable.pickuptrigger;
-  while (true) {
+  while(true) {
     trigger waittill("trigger", player);
     if(!isalive(player)) {
       continue;
@@ -300,23 +298,23 @@ function watchpickup(player) {
     if(!player isonground()) {
       continue;
     }
-    if(isdefined(placeable.vehicle) && placeable.vehicle.control_initiated === 1) {
+    if(isDefined(placeable.vehicle) && placeable.vehicle.control_initiated === 1) {
       continue;
     }
-    if(isdefined(player.carryobject) && player.carryobject.disallowplaceablepickup === 1) {
+    if(isDefined(player.carryobject) && player.carryobject.disallowplaceablepickup === 1) {
       continue;
     }
-    if(isdefined(trigger.triggerteam) && player.team != trigger.triggerteam) {
+    if(isDefined(trigger.triggerteam) && player.team != trigger.triggerteam) {
       continue;
     }
-    if(isdefined(trigger.claimedby) && player != trigger.claimedby) {
+    if(isDefined(trigger.claimedby) && player != trigger.claimedby) {
       continue;
     }
-    if(player usebuttonpressed() && !player.throwinggrenade && !player meleebuttonpressed() && !player attackbuttonpressed() && (!(isdefined(player.isplanting) && player.isplanting)) && (!(isdefined(player.isdefusing) && player.isdefusing)) && !player isremotecontrolling() && !isdefined(player.holding_placeable)) {
+    if(player usebuttonpressed() && !player.throwinggrenade && !player meleebuttonpressed() && !player attackbuttonpressed() && (!(isDefined(player.isplanting) && player.isplanting)) && (!(isDefined(player.isdefusing) && player.isdefusing)) && !player isremotecontrolling() && !isDefined(player.holding_placeable)) {
       placeable notify("picked_up");
       placeable.held = 1;
-      placeable setcandamage(0);
-      assert(isdefined(placeable.onmove));
+      placeable setCanDamage(0);
+      assert(isDefined(placeable.onmove));
       player[[placeable.onmove]](placeable);
       player thread carryplaceable(placeable);
       return;
@@ -336,7 +334,7 @@ function watchownergameevents() {
   placeable = self;
   placeable endon("cancelled");
   placeable.owner util::waittill_any("joined_team", "disconnect", "joined_spectators");
-  if(isdefined(placeable)) {
+  if(isDefined(placeable)) {
     placeable.abandoned = 1;
     placeable forceshutdown();
   }
@@ -347,27 +345,25 @@ function shutdownoncancelevent(placeable) {
   player = self;
   assert(isplayer(player));
   placeable util::waittill_any("cancelled", "death");
-  if(isdefined(player) && isdefined(placeable) && placeable.held === 1) {
+  if(isDefined(player) && isDefined(placeable) && placeable.held === 1) {
     player sethintstring("");
     player stopcarryturret(placeable);
     if(!player util::isweaponenabled()) {
       player util::_enableweapon();
     }
   }
-  if(isdefined(placeable)) {
+  if(isDefined(placeable)) {
     if(placeable.cancelable) {
-      if(isdefined(placeable.oncancel)) {
-        [
-          [placeable.oncancel]
-        ](placeable);
+      if(isDefined(placeable.oncancel)) {
+        [[placeable.oncancel]](placeable);
       }
-    } else if(isdefined(placeable.onshutdown)) {
+    } else if(isDefined(placeable.onshutdown)) {
       [
         [placeable.onshutdown]
       ](placeable);
     }
-    if(isdefined(placeable)) {
-      if(isdefined(placeable.vehicle)) {
+    if(isDefined(placeable)) {
+      if(isDefined(placeable.vehicle)) {
         vehicle_to_kill = placeable.vehicle;
         vehicle_to_kill.selfdestruct = 1;
         vehicle_to_kill kill();

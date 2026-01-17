@@ -151,16 +151,16 @@ claw_grapple() {
   self.m_claw unlink();
   self.m_claw.fx_ent = spawn("script_model", self.m_claw gettagorigin("tag_claw"));
   self.m_claw.fx_ent.angles = self.m_claw gettagangles("tag_claw");
-  self.m_claw.fx_ent setmodel("tag_origin");
+  self.m_claw.fx_ent setModel("tag_origin");
   self.m_claw.fx_ent linkto(self.m_claw, "tag_claw");
   network_safe_play_fx_on_tag("mech_claw", 1, level._effect["mechz_claw"], self.m_claw.fx_ent, "tag_origin");
   v_enemy_origin = self.favoriteenemy.origin + vectorscale((0, 0, 1), 36.0);
   n_dist = distance(v_claw_origin, v_enemy_origin);
   n_time = n_dist / 1200;
-  self playsound("zmb_ai_mechz_claw_fire");
+  self playSound("zmb_ai_mechz_claw_fire");
   self.m_claw moveto(v_enemy_origin, n_time);
   self.m_claw thread check_for_claw_move_complete();
-  self.m_claw playloopsound("zmb_ai_mechz_claw_loop_out", 0.1);
+  self.m_claw playLoopSound("zmb_ai_mechz_claw_loop_out", 0.1);
   self.e_grabbed = undefined;
 
   do {
@@ -183,7 +183,7 @@ claw_grapple() {
           self.e_grabbed setclientfieldtoplayer("mechz_grab", 1);
           self.e_grabbed playerlinktodelta(self.m_claw, "tag_attach_player");
           self.e_grabbed setplayerangles(vectortoangles(self.origin - self.e_grabbed.origin));
-          self.e_grabbed playsound("zmb_ai_mechz_claw_grab");
+          self.e_grabbed playSound("zmb_ai_mechz_claw_grab");
           self.e_grabbed setstance("stand");
           self.e_grabbed allowcrouch(0);
           self.e_grabbed allowprone(0);
@@ -233,15 +233,15 @@ claw_grapple() {
   v_claw_origin = self gettagorigin("tag_claw");
   v_claw_angles = self gettagangles("tag_claw");
   self.m_claw moveto(v_claw_origin, max(0.05, n_time));
-  self.m_claw playloopsound("zmb_ai_mechz_claw_loop_in", 0.1);
+  self.m_claw playLoopSound("zmb_ai_mechz_claw_loop_in", 0.1);
   self.m_claw waittill("movedone");
   v_claw_origin = self gettagorigin("tag_claw");
   v_claw_angles = self gettagangles("tag_claw");
-  self.m_claw playsound("zmb_ai_mechz_claw_back");
+  self.m_claw playSound("zmb_ai_mechz_claw_back");
   self.m_claw stoploopsound(1);
 
   if(maps\mp\zombies\_zm_ai_mechz::sndmechzisnetworksafe("angry"))
-    self playsound("zmb_ai_mechz_vox_angry");
+    self playSound("zmb_ai_mechz_vox_angry");
 
   self.m_claw.origin = v_claw_origin;
   self.m_claw.angles = v_claw_angles;
@@ -250,7 +250,7 @@ claw_grapple() {
   self.m_claw setanim( % ai_zombie_mech_grapple_arm_closed_idle, 1, 0.2, 1);
   self.m_claw.fx_ent delete();
   self.m_claw.fx_ent = undefined;
-  self.fx_field = self.fx_field & ~256;
+  self.fx_field = self.fx_field &~256;
   self setclientfield("mechz_fx", self.fx_field);
   flag_clear("mechz_launching_claw");
 
@@ -285,14 +285,14 @@ check_for_claw_damaged(player) {
   self endon("kill_claw");
   self thread claw_damaged_mechz_endon_watcher(player);
   player thread claw_damaged_player_endon_watcher(self);
-  self.m_claw setcandamage(1);
+  self.m_claw setCanDamage(1);
 
   while(isDefined(self.e_grabbed)) {
     self.m_claw waittill("damage", amount, inflictor, direction, point, type, tagname, modelname, partname, weaponname, idflags);
 
     if(is_player_valid(inflictor)) {
       self dodamage(1, inflictor.origin, inflictor, inflictor, "left_hand", type);
-      self.m_claw setcandamage(0);
+      self.m_claw setCanDamage(0);
       self notify("claw_damaged");
       break;
     }
@@ -306,7 +306,7 @@ claw_damaged_mechz_endon_watcher(player) {
   self waittill_any("death", "claw_complete", "kill_claw");
 
   if(isDefined(self) && isDefined(self.m_claw))
-    self.m_claw setcandamage(0);
+    self.m_claw setCanDamage(0);
 }
 
 claw_damaged_player_endon_watcher(mechz) {
@@ -317,7 +317,7 @@ claw_damaged_player_endon_watcher(mechz) {
   self waittill_any("death", "disconnect");
 
   if(isDefined(mechz) && isDefined(mechz.m_claw))
-    mechz.m_claw setcandamage(0);
+    mechz.m_claw setCanDamage(0);
 }
 
 check_for_players_mid_grapple() {
@@ -467,8 +467,8 @@ mechz_kill_claw_watcher() {
 }
 
 mechz_claw_cleanup() {
-  self.fx_field = self.fx_field & ~256;
-  self.fx_field = self.fx_field & ~64;
+  self.fx_field = self.fx_field &~256;
+  self.fx_field = self.fx_field &~64;
   self setclientfield("mechz_fx", self.fx_field);
   self mechz_claw_release();
 
@@ -490,11 +490,11 @@ mechz_claw_cleanup() {
         n_dist = distance(self.m_claw.origin, v_claw_origin);
         n_time = n_dist / 1000;
         self.m_claw moveto(v_claw_origin, max(0.05, n_time));
-        self.m_claw playloopsound("zmb_ai_mechz_claw_loop_in", 0.1);
+        self.m_claw playLoopSound("zmb_ai_mechz_claw_loop_in", 0.1);
         self.m_claw waittill("movedone");
         v_claw_origin = self gettagorigin("tag_claw");
         v_claw_angles = self gettagangles("tag_claw");
-        self.m_claw playsound("zmb_ai_mechz_claw_back");
+        self.m_claw playSound("zmb_ai_mechz_claw_back");
         self.m_claw stoploopsound(1);
         self.m_claw.origin = v_claw_origin;
         self.m_claw.angles = v_claw_angles;
@@ -521,7 +521,7 @@ mechz_claw_damage_trigger_thread() {
     }
     if(is_player_valid(inflictor)) {
       self dodamage(1, inflictor.origin, inflictor, inflictor, "left_hand", type);
-      self.m_claw setcandamage(0);
+      self.m_claw setCanDamage(0);
       self notify("claw_damaged");
     }
   }

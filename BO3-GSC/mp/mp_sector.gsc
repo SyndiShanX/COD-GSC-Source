@@ -19,8 +19,8 @@ function main() {
   trigger thread oob::run_oob_trigger();
   mp_sector_fx::main();
   mp_sector_sound::main();
-  level.add_raps_omit_locations = & add_raps_omit_locations;
-  level.add_raps_drop_locations = & add_raps_drop_locations;
+  level.add_raps_omit_locations = &add_raps_omit_locations;
+  level.add_raps_drop_locations = &add_raps_drop_locations;
   level.remotemissile_kill_z = -680;
   load::main();
   setdvar("compassmaxrange", "2100");
@@ -44,14 +44,14 @@ function link_traversals(str_value, str_key, b_enable) {
 
 function precache() {}
 
-function add_raps_omit_locations( & omit_locations) {
-  if(!isdefined(omit_locations)) {
+function add_raps_omit_locations(&omit_locations) {
+  if(!isDefined(omit_locations)) {
     omit_locations = [];
   } else if(!isarray(omit_locations)) {
     omit_locations = array(omit_locations);
   }
   omit_locations[omit_locations.size] = (32, 710, 189);
-  if(!isdefined(omit_locations)) {
+  if(!isDefined(omit_locations)) {
     omit_locations = [];
   } else if(!isarray(omit_locations)) {
     omit_locations = array(omit_locations);
@@ -59,14 +59,14 @@ function add_raps_omit_locations( & omit_locations) {
   omit_locations[omit_locations.size] = (-960, 1020, 168);
 }
 
-function add_raps_drop_locations( & drop_candidate_array) {
-  if(!isdefined(drop_candidate_array)) {
+function add_raps_drop_locations(&drop_candidate_array) {
+  if(!isDefined(drop_candidate_array)) {
     drop_candidate_array = [];
   } else if(!isarray(drop_candidate_array)) {
     drop_candidate_array = array(drop_candidate_array);
   }
   drop_candidate_array[drop_candidate_array.size] = (-1100, 860, 145);
-  if(!isdefined(drop_candidate_array)) {
+  if(!isDefined(drop_candidate_array)) {
     drop_candidate_array = [];
   } else if(!isarray(drop_candidate_array)) {
     drop_candidate_array = array(drop_candidate_array);
@@ -84,7 +84,7 @@ function spawnkilltrigger() {
 function watchkilltrigger() {
   level endon("game_ended");
   trigger = self;
-  while (true) {
+  while(true) {
     trigger waittill("trigger", player);
     player dodamage(1000, trigger.origin + (0, 0, 0), trigger, trigger, "none", "MOD_SUICIDE", 0);
   }

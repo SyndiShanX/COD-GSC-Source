@@ -22,7 +22,7 @@ rocket_barrage_init() {
   level.rocket_barrage_allowed = false;
   level.friendly_check_radius = 500;
   level.rocket_barrage_firing_positions = [];
-  level.rocket_barrage_no_zones = getentarray("rocket_barrage_no_zone", "targetname");
+  level.rocket_barrage_no_zones = getEntArray("rocket_barrage_no_zone", "targetname");
   level.rocket_barrage_first_barrage = true;
   level.rocket_barrage_max_x = 5000;
   level.rocket_barrage_min_x = -800;
@@ -55,7 +55,7 @@ rocket_barrage_watcher() {
   if(!isDefined(level.rocket_barrage_allowed)) {
     return;
   }
-  for (;;) {
+  for(;;) {
     if(!self.is_firing_rocket_barrage && level.rocket_barrage_allowed) {
       weap = self getcurrentweapon();
       if(self getcurrentweapon() == "rocket_barrage" && !self.rocket_targeting_on && !self.usingturret) {
@@ -91,15 +91,15 @@ rocket_barrage_targeting() {
   self notify("start rocket barrage targeting");
   targetpoint = spawn("script_model", get_players()[0].origin);
   targetpoint.angles += (270, 0, 0);
-  targetpoint setmodel("tag_origin");
+  targetpoint setModel("tag_origin");
   self.rocket_barrage_target = targetpoint;
   self thread draw_smoke(targetpoint);
-  for (;;) {
+  for(;;) {
     direction = self getPlayerAngles();
     direction_vec = anglesToForward(direction);
     eye = self getEye();
-    trace = bullettrace(eye, eye + vector_multiply(direction_vec, level.rocketbarrage_traceLength), 0, undefined);
-    trace2 = bullettrace(trace["position"] + (0, 0, 2), trace["position"] - (0, 0, 100000), 0, undefined);
+    trace = bulletTrace(eye, eye + vector_multiply(direction_vec, level.rocketbarrage_traceLength), 0, undefined);
+    trace2 = bulletTrace(trace["position"] + (0, 0, 2), trace["position"] - (0, 0, 100000), 0, undefined);
     tracepos = trace2["position"];
     if(tracepos[2] < -650) {
       tracepos = (tracepos[0], tracepos[1], -650);
@@ -113,12 +113,12 @@ rocket_barrage_targeting() {
     players = get_players();
     friends = array_merge(friends, players);
     touching_no_zone = false;
-    for (i = 0; i < level.rocket_barrage_no_zones.size; i++) {
+    for(i = 0; i < level.rocket_barrage_no_zones.size; i++) {
       if(targetpoint istouching(level.rocket_barrage_no_zones[i])) {
         touching_no_zone = true;
       }
     }
-    for (i = 0; i < friends.size; i++) {
+    for(i = 0; i < friends.size; i++) {
       if(distance(targetpoint.origin, friends[i].origin) > level.friendly_check_radius) {
         if(self.usingturret) {
           self.rocket_barrage_ok = false;
@@ -138,7 +138,7 @@ rocket_barrage_targeting() {
       }
     }
     self.rocket_barrage_at_major_target = false;
-    for (i = 0; i < level.rocket_barrage_targets.size; i++) {
+    for(i = 0; i < level.rocket_barrage_targets.size; i++) {
       if(level.rocket_barrage_targets[i] istouching(self.rocket_barrage_target)) {
         self.rocket_barrage_at_major_target = true;
       }
@@ -152,15 +152,15 @@ draw_smoke(targetpoint) {
   self endon("target smoke deleted");
   self endon("death");
   self endon("disconnect");
-  while (1) {
+  while(1) {
     playercolor0 = getdvar("cg_ScoresColor_Player_0");
     playercolor1 = getdvar("cg_ScoresColor_Player_1");
     playercolor2 = getdvar("cg_ScoresColor_Player_2");
     playercolor3 = getdvar("cg_ScoresColor_Player_3");
     if(self.rocket_barrage_ok) {
-      playfxontag(level._effect["target_arrow_yellow"], targetpoint, "tag_origin");
+      playFXOnTag(level._effect["target_arrow_yellow"], targetpoint, "tag_origin");
     } else {
-      playfxontag(level._effect["target_arrow_red"], targetpoint, "tag_origin");
+      playFXOnTag(level._effect["target_arrow_red"], targetpoint, "tag_origin");
     }
     wait 0.1;
   }
@@ -175,7 +175,7 @@ rocket_barrage_fire_watch(fire_point) {
     self notify("rocket barrage firing");
     level notify("used rocket once");
     self.rocket_barrage_confirm = spawn("script_model", fire_point);
-    self.rocket_barrage_confirm setmodel("tag_origin");
+    self.rocket_barrage_confirm setModel("tag_origin");
     self.rocket_barrage_confirm.angles = self.rocket_barrage_target.angles;
     self.rocket_barrage_confirm thread play_confirm();
     thread delete_confirm_arrow();
@@ -188,7 +188,7 @@ rocket_barrage_fire_watch(fire_point) {
     level.rocket_barrage_first_barrage = false;
     self.is_firing_rocket_barrage = false;
     wait 0.1;
-    while (self maps\_laststand::player_is_in_laststand()) {
+    while(self maps\_laststand::player_is_in_laststand()) {
       wait 0.1;
     }
     self giveweapon("rocket_barrage");
@@ -240,8 +240,8 @@ delete_confirm_arrow() {
 
 play_confirm() {
   self endon("end_confirm");
-  while (1) {
-    playfxontag(level._effect["target_arrow_green"], self, "tag_origin");
+  while(1) {
+    playFXOnTag(level._effect["target_arrow_green"], self, "tag_origin");
     wait 0.1;
   }
 }
@@ -255,7 +255,7 @@ rocket_barrage_fire(fire_point) {
   }
   self thread populate_and_fire_lci_rockets(fire_point);
   self.rocket_barrage_confirm = spawn("script_model", fire_point);
-  self.rocket_barrage_confirm setmodel("tag_origin");
+  self.rocket_barrage_confirm setModel("tag_origin");
   self.rocket_barrage_confirm.angles = self.rocket_barrage_target.angles;
   self.rocket_barrage_confirm thread play_confirm();
   thread delete_confirm_arrow();
@@ -265,7 +265,7 @@ rocket_barrage_fire(fire_point) {
   self thread monitor_charge_time(level.barrage_charge_time);
   wait(level.barrage_charge_time);
   self notify("rockets_recharged");
-  while (self maps\_laststand::player_is_in_laststand()) {
+  while(self maps\_laststand::player_is_in_laststand()) {
     wait 0.1;
   }
   self giveweapon("rocket_barrage");
@@ -354,7 +354,7 @@ rocket_barrage_hud_elements_think() {
   self.rocket_hud_elem_foreground.foreground = true;
   self.rocket_hud_elem_foreground.sort = 2;
   thread rocket_barrage_hud_elements_show();
-  while (1) {
+  while(1) {
     self waittill("rocket barrage firing");
     self.rocket_hud_elem_foreground ScaleOverTime(0.05, 1, (barsize_y - bar_difference_y));
     self.rocket_hud_elem_foreground.color = (1, 0, 0);
@@ -372,7 +372,7 @@ rocket_barrage_hud_elements_think() {
 rocket_barrage_hud_elements_show() {
   self endon("death");
   self endon("disconnect");
-  while (1) {
+  while(1) {
     self.rocket_hud_elem_background.alpha = 0;
     self.rocket_hud_elem_foreground.alpha = 0;
     self waittill_any("start rocket barrage targeting", "activate pressed during barage");
@@ -539,7 +539,7 @@ populate_and_fire_lci_rockets(fire_point) {
   ship = level.rocket_barrage_firing_positions[randomint(level.rocket_barrage_firing_positions.size)];
   start_points = [];
   orgs = getstructarray(ship, "targetname");
-  for (i = 0; i < num_rockets; i++) {
+  for(i = 0; i < num_rockets; i++) {
     start_points[i] = orgs[i].origin;
   }
   if(level.script == "pel1") {
@@ -547,7 +547,7 @@ populate_and_fire_lci_rockets(fire_point) {
     playsoundatposition("pa_fire", pa_fire.origin);
     wait(0.4);
     pa_fire_b = getent("pa_fire_left", "targetname");
-    pa_fire_b playsound("pa_fire");
+    pa_fire_b playSound("pa_fire");
   }
   self thread lci_rocket_fire(fire_point, start_points, 1, self);
 }
@@ -555,10 +555,10 @@ populate_and_fire_lci_rockets(fire_point) {
 lci_player_rocket_fly_think(destination_pos, which_player) {
   thread throw_object_with_gravity(self, destination_pos);
   wait(0.5);
-  while (1) {
+  while(1) {
     if(self.origin[2] <= destination_pos[2]) {
       damageradius = 300;
-      playfx(level._effect["lci_rocket_impact"], self.origin);
+      playFX(level._effect["lci_rocket_impact"], self.origin);
       playsoundatposition("rocket_impact", self.origin);
       earthquake(0.5, 3, self.origin, 2050);
       thread rocket_rumble_on_all_players("damage_light", "damage_heavy", self.origin, 400, 800);
@@ -584,7 +584,7 @@ lci_player_rocket_fly_think(destination_pos, which_player) {
 rocket_barrage_check_if_ai_hit(damageradius, hitpoint, which_player) {
   ai = getaiarray("axis");
   killed_ai = 0;
-  for (i = 0; i < ai.size; i++) {
+  for(i = 0; i < ai.size; i++) {
     if(isDefined(ai[i])) {
       if(distance(hitpoint, ai[i].origin) <= damageradius) {
         if(isDefined(which_player)) {
@@ -605,9 +605,9 @@ rocket_barrage_check_if_ai_hit(damageradius, hitpoint, which_player) {
 }
 
 rocket_barrage_check_if_vehicle_hit(damageradius, hitpoint, which_player) {
-  vehicles = getentarray("script_vehicle", "classname");
+  vehicles = getEntArray("script_vehicle", "classname");
   hit_vehicles = 0;
-  for (i = 0; i < vehicles.size; i++) {
+  for(i = 0; i < vehicles.size; i++) {
     if(isDefined(vehicles[i])) {
       if(distance(hitpoint, vehicles[i].origin) <= damageradius) {
         if(vehicles[i].model == "vehicle_jap_tracked_type97shinhoto" || vehicles[i].model == "vehicle_jap_wheeled_type94") {
@@ -624,7 +624,7 @@ rocket_barrage_check_if_vehicle_hit(damageradius, hitpoint, which_player) {
 
 rocket_barrage_check_if_bunker_hit(damageradius, hitpoint, which_player) {
   targets = level.rocket_barrage_targets;
-  for (i = 0; i < targets.size; i++) {
+  for(i = 0; i < targets.size; i++) {
     if(isDefined(targets[i])) {
       if(distance(hitpoint, targets[i].origin) <= damageradius) {
         if(isDefined(which_player)) {
@@ -662,13 +662,13 @@ throw_object_with_gravity(object, target_pos, velocity_strength) {
 
 lci_rocket_fire(dest_point, start_points, is_player_controlled, which_player) {
   thread play_sound_in_space("rocket_launch", start_points[0]);
-  for (i = 0; i < start_points.size; i++) {
+  for(i = 0; i < start_points.size; i++) {
     rocket = spawn("script_model", start_points[i]);
-    rocket setmodel("peleliu_aerial_rocket");
+    rocket setModel("peleliu_aerial_rocket");
     yaw_vec = vectortoangles(dest_point - rocket.origin);
     rocket.angles = (315, yaw_vec[1], 0);
-    playfx(level._effect["rocket_launch"], rocket.origin, anglestoforward(rocket.angles + (20, 0, 0)));
-    playfxontag(level._effect["rocket_trail"], rocket, "tag_origin");
+    playFX(level._effect["rocket_launch"], rocket.origin, anglesToForward(rocket.angles + (20, 0, 0)));
+    playFXOnTag(level._effect["rocket_trail"], rocket, "tag_origin");
     if(level.script == "pel1") {
       level thread maps\pel1_amb::play_rocket_sound(rocket);
     }
@@ -679,7 +679,7 @@ lci_rocket_fire(dest_point, start_points, is_player_controlled, which_player) {
 
 rocket_rumble_on_all_players(high_rumble_string, low_rumble_string, rumble_org, high_rumble_range, low_rumble_range) {
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(isDefined(high_rumble_range) && isDefined(low_rumble_range) && isDefined(rumble_org)) {
       if(distance(players[i].origin, rumble_org) < high_rumble_range) {
         players[i] playrumbleonentity(high_rumble_string);

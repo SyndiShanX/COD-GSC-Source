@@ -115,10 +115,10 @@ start_light_fx(localclientnum) {
     return;
   }
   if(friend) {
-    self.fx = playfxontag(localclientnum, level._ai_tank_fx["light_green"], self, "tag_scanner");
+    self.fx = playFXOnTag(localclientnum, level._ai_tank_fx["light_green"], self, "tag_scanner");
     self.friend = 1;
   } else {
-    self.fx = playfxontag(localclientnum, level._ai_tank_fx["light_red"], self, "tag_scanner");
+    self.fx = playFXOnTag(localclientnum, level._ai_tank_fx["light_red"], self, "tag_scanner");
     self.friend = 0;
   }
 }
@@ -131,8 +131,8 @@ stop_light_fx(localclientnum) {
 }
 
 start_stun_fx(localclientnum) {
-  self.stun_fx = playfxontag(localclientnum, level._ai_tank_fx["stun"], self, "tag_origin");
-  playsound(localclientnum, "veh_talon_shutdown", self.origin);
+  self.stun_fx = playFXOnTag(localclientnum, level._ai_tank_fx["stun"], self, "tag_origin");
+  playSound(localclientnum, "veh_talon_shutdown", self.origin);
 }
 
 stop_stun_fx(localclientnum) {
@@ -149,10 +149,10 @@ play_driving_fx(localclientnum) {
 
   for(;;) {
     if(self getspeed() >= 40) {
-      forward = anglestoforward(self.angles);
+      forward = anglesToForward(self.angles);
       up = anglestoup(self.angles);
       fx = self get_surface_fx();
-      playfx(localclientnum, fx, self.origin, forward, up);
+      playFX(localclientnum, fx, self.origin, forward, up);
       wait 0.5;
       continue;
     }

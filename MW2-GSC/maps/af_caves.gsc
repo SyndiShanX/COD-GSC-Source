@@ -69,7 +69,7 @@ main() {
   maps\createart\af_caves_fog::main();
   maps\_load::main();
 
-  array_thread(GetEntArray("steamroom_c4", "targetname"), maps\_load::ammo_pickup, "c4");
+  array_thread(getEntArray("steamroom_c4", "targetname"), maps\_load::ammo_pickup, "c4");
 
   maps\af_caves_backhalf::main_af_caves_backhalf_postload();
   maps\_load::set_player_viewhand_model("viewhands_player_us_army");
@@ -95,11 +95,11 @@ main() {
   thread maps\_mortar::bunker_style_mortar();
   level thread maps\af_caves_amb::main();
 
-  add_hint_string("begin_descent", & "AF_CAVES_DESCEND", ::should_stop_descend_hint);
+  add_hint_string("begin_descent", &"AF_CAVES_DESCEND", ::should_stop_descend_hint);
 
   // Press^3 [{+actionslot 1}] ^7to use Night Vision Goggles.
-  add_hint_string("nvg", & "SCRIPT_NIGHTVISION_USE", maps\_nightvision::ShouldBreakNVGHintPrint);
-  add_hint_string("rappel_melee", & "SCRIPT_PLATFORM_OILRIG_HINT_STEALTH_KILL", ::should_not_do_melee_rappel_hint);
+  add_hint_string("nvg", &"SCRIPT_NIGHTVISION_USE", maps\_nightvision::ShouldBreakNVGHintPrint);
+  add_hint_string("rappel_melee", &"SCRIPT_PLATFORM_OILRIG_HINT_STEALTH_KILL", ::should_not_do_melee_rappel_hint);
 
   maps\_compass::setupMiniMap("compass_map_afghan_caves");
 
@@ -113,13 +113,13 @@ main() {
 
   level.player setthreatbiasgroup("player");
 
-  //airstrip_tower_enemy = getentarray( "tower_gunners", "script_noteworthy" );
+  //airstrip_tower_enemy = getEntArray( "tower_gunners", "script_noteworthy" );
   //array_thread( airstrip_tower_enemy, ::add_spawn_function, ::set_threatbiasgroup, "airstrip_tower_enemy" );
 
-  road_dogs = GetEntArray("enemy_road_patrollers_dogs", "script_noteworthy");
+  road_dogs = getEntArray("enemy_road_patrollers_dogs", "script_noteworthy");
   array_thread(road_dogs, ::add_spawn_function, ::road_dog_think);
 
-  road_patrollers = GetEntArray("enemy_road_patrollers", "targetname");
+  road_patrollers = getEntArray("enemy_road_patrollers", "targetname");
   array_thread(road_patrollers, ::add_spawn_function, ::road_patroller_spawnfunc);
 
   // spawn and setup Price
@@ -132,7 +132,7 @@ main() {
   SetSavedDvar("ai_friendlyFireBlockDuration", "0");
 
   //	Misc
-  array_thread(getentarray("clip_nosight", "targetname"), ::clip_nosight_logic);
+  array_thread(getEntArray("clip_nosight", "targetname"), ::clip_nosight_logic);
 
   player_rope = getent("player_rope", "targetname");
   player_rope hide();
@@ -431,7 +431,6 @@ start_overlook() {
 }
 
 start_control_room() {
-
   control_room_player = getent("control_room_player", "targetname");
   level.player setorigin(control_room_player.origin);
   level.player setplayerangles(control_room_player.angles);
@@ -479,14 +478,14 @@ start_airstrip() {
   thread maps\af_caves_backhalf::AA_airstrip_init();
 }
 
-//****** OBJECTIVES****** // 
+//****** OBJECTIVES****** //
 
 //****** 1st Objective, Follow Cpt. Price****** //
 objective_follow_price() {
   objective_number = 0;
   obj_position = level.price.origin;
 
-  objective_add(objective_number, "active", & "AF_CAVES_FOLLOW_PRICE", obj_position);
+  objective_add(objective_number, "active", &"AF_CAVES_FOLLOW_PRICE", obj_position);
   objective_current(objective_number);
   Objective_OnEntity(objective_number, level.price, (0, 0, 70));
 
@@ -502,7 +501,7 @@ objective_follow_price() {
 objective_rappel() {
   objective_number = 1;
 
-  objective_add(objective_number, "active", & "AF_CAVES_RAPPEL", (3006, 11756, -1834));
+  objective_add(objective_number, "active", &"AF_CAVES_RAPPEL", (3006, 11756, -1834));
   objective_current(objective_number);
 
   flag_wait("player_hooking_up");
@@ -521,12 +520,12 @@ objective_follow_price_again() {
 
   flag_wait("steamroom_ambush_started");
 
-  Objective_String(0, & "AF_CAVES_SUPPORT_PRICE");
-  Objective_SetPointerTextOverride(0, & "AF_CAVES_OBJ_MARKER_SUPPORT");
+  Objective_String(0, &"AF_CAVES_SUPPORT_PRICE");
+  Objective_SetPointerTextOverride(0, &"AF_CAVES_OBJ_MARKER_SUPPORT");
 
   flag_wait("steamroom_ambush_done");
 
-  Objective_String(0, & "AF_CAVES_FOLLOW_PRICE");
+  Objective_String(0, &"AF_CAVES_FOLLOW_PRICE");
   Objective_SetPointerTextOverride(0, "");
 
   flag_wait("obj_ledge_traverse_given");
@@ -550,7 +549,7 @@ objective_regroup_on_price() {
   objective_number = 4;
   obj_position = level.price.origin;
 
-  objective_add(objective_number, "active", & "AF_CAVES_REGROUP_WITH_PRICE", obj_position);
+  objective_add(objective_number, "active", &"AF_CAVES_REGROUP_WITH_PRICE", obj_position);
   objective_current(objective_number);
   Objective_OnEntity(objective_number, level.price, (0, 0, 70));
 
@@ -607,7 +606,7 @@ intro_player() {
 intro_player_catch_movement() {
   // waittill after the player moves
   distsqrd = 15 * 15;
-  while (DistanceSquared(level.player.origin, level.player.levelStartPos) < distsqrd) {
+  while(DistanceSquared(level.player.origin, level.player.levelStartPos) < distsqrd) {
     wait(0.05);
   }
 
@@ -726,7 +725,6 @@ road_setup() {
   thread road_clear();
 }
 
-
 road_stealth_settings() {
   // whizby type stuff
   ai_event = [];
@@ -772,7 +770,7 @@ road_patroller_spawnfunc() {
     self maps\_stealth_event_enemy::stealth_event_mod(key, value);
   }
 
-  if(IsDefined(self.script_parameters) && IsSubStr(self.script_parameters, "group2")) {
+  if(isDefined(self.script_parameters) && IsSubStr(self.script_parameters, "group2")) {
     self thread road_group2_member_alerted_tracker();
   }
 
@@ -799,7 +797,7 @@ road_group2_member_alerted_tracker() {
 road_group2_member_catch_stealth_not_normal() {
   self endon("death");
 
-  while (self ent_flag("_stealth_normal")) {
+  while(self ent_flag("_stealth_normal")) {
     wait(0.05);
   }
 
@@ -850,7 +848,7 @@ small_goal_attack_behavior() {
 
   self ent_flag_set("_stealth_override_goalpos");
 
-  while (IsDefined(self.enemy) && self ent_flag("_stealth_enabled")) {
+  while(isDefined(self.enemy) && self ent_flag("_stealth_enabled")) {
     gr = self.goalradius - 150;
     if(gr < minGoalRadius) {
       gr = minGoalRadius;
@@ -943,7 +941,7 @@ road_price_hillside_nag()
 	
 	wait 30;
 	
-	while ( !flag( "player_at_overlook" ) )
+	while( !flag( "player_at_overlook" ) )
 	{
 		wait( randomintrange( 25, 35 ) );
 		if( flag( "player_at_overlook" ) )
@@ -1002,7 +1000,7 @@ road_price_hillside_dialogue() {
 road_price_hillside_dialogue_stopper() {
   level endon("price_hillside_dialogue_done");
 
-  while (stealth_is_everything_normal()) {
+  while(stealth_is_everything_normal()) {
     wait(0.05);
   }
 
@@ -1050,7 +1048,7 @@ road_enemy_wiretap_dialogue() {
 }
 
 wiretap_dialogue_wait() {
-  while (1) {
+  while(1) {
     startTime = GetTime();
 
     flag_waitopen("scripted_dialogue");
@@ -1075,7 +1073,7 @@ road_humans_cleared_tracker() {
 
   allguys = array_combine(group1, group2);
 
-  while (group_has_live_human(allguys)) {
+  while(group_has_live_human(allguys)) {
     wait(0.05);
   }
 
@@ -1126,7 +1124,7 @@ road_playerslide_stealthbreak() {
     }
   }
 
-  if(!IsDefined(alerter)) {
+  if(!isDefined(alerter)) {
     return;
   }
 
@@ -1148,7 +1146,7 @@ road_stealthbreak_price_dialogue() {
   // "We're compromised - go loud."
   lines[1] = "afcaves_pri_compromisedgoloud";
 
-  while (!flag("road_patrol_cleared")) {
+  while(!flag("road_patrol_cleared")) {
     flag_wait("_stealth_spotted");
 
     if(flag("road_patrol_humans_cleared")) {
@@ -1177,8 +1175,8 @@ road_price_stealthbreak_think() {
   thread road_price_stealthbreak_adjust_behavior();
   level.price thread force_weapon_when_player_not_looking("scar_h_thermal_silencer");
 
-  if(IsDefined(level.price.og_goalradius)) {
-    while (level.price._animActive > 0) {
+  if(isDefined(level.price.og_goalradius)) {
+    while(level.price._animActive > 0) {
       wait(0.05);
     }
     level.price.goalradius = level.price.og_goalradius;
@@ -1193,7 +1191,7 @@ road_price_stealthbreak_adjust_behavior() {
   og_baseaccuracy = level.price.baseaccuracy;
   level.price.baseaccuracy = 100;
 
-  while (!stealth_is_everything_normal()) {
+  while(!stealth_is_everything_normal()) {
     wait(0.05);
   }
 
@@ -1224,7 +1222,7 @@ road_group2_moveout_aithink(group2) {
 
   if(!self is_dog()) {
     // dog handler should go immediately
-    if(!IsDefined(self.script_pet)) {
+    if(!isDefined(self.script_pet)) {
       wait(RandomFloatRange(2, 3.5));
       self notify("end_patrol");
       self force_180turn();
@@ -1242,13 +1240,13 @@ road_group2_moveout_aithink(group2) {
     self.script_pet = -1;
     handler = undefined;
     foreach(guy in group2) {
-      if(!guy is_dog() && IsDefined(guy.script_pet) && guy.script_pet == 2) {
+      if(!guy is_dog() && isDefined(guy.script_pet) && guy.script_pet == 2) {
         handler = guy;
         break;
       }
     }
 
-    if(!IsDefined(handler)) {
+    if(!isDefined(handler)) {
       // player killed handler - dog will bark
       return;
     }
@@ -1266,13 +1264,13 @@ road_group2_moveout_aithink(group2) {
   trig = GetEnt("trig_road_group2_nearendpath", "targetname");
   numReqHits = 2;
   numHits = 0;
-  while (numHits < numReqHits) {
+  while(numHits < numReqHits) {
     trig waittill("trigger", other);
 
     if(other == self) {
       numHits++;
 
-      while (self IsTouching(trig)) {
+      while(self IsTouching(trig)) {
         wait(0.1);
       }
     }
@@ -1294,7 +1292,7 @@ road_group2_moveout_aithink(group2) {
 road_group2_ai_alert_when_find_bodies() {
   self endon("death");
 
-  while (!self ent_flag("_stealth_found_corpse")) {
+  while(!self ent_flag("_stealth_found_corpse")) {
     wait(0.1);
   }
 
@@ -1316,7 +1314,7 @@ road_group2_monitor_distance() {
   dist = 500;
   org = (2408, 13424, -1840);
 
-  while (Distance2D(self.origin, org) < dist) {
+  while(Distance2D(self.origin, org) < dist) {
     wait(0.05);
   }
 
@@ -1326,7 +1324,7 @@ road_group2_monitor_distance() {
 road_group2_walkaway_wait(group2) {
   numGuys = group2.size;
 
-  while (group2.size > level.road_group2_newgroup) {
+  while(group2.size > level.road_group2_newgroup) {
     wait(0.05);
   }
 
@@ -1342,7 +1340,7 @@ road_group1_countdown_kill() {
   flag_wait("road_group2_walked_away");
   flag_wait("road_enemy_wiretap_dialogue_done");
 
-  while (!stealth_is_everything_normal()) {
+  while(!stealth_is_everything_normal()) {
     wait(0.1);
   }
 
@@ -1371,7 +1369,7 @@ road_group1_countdown_kill() {
       }
     }
 
-    if(IsDefined(guy.script_parameters)) {
+    if(isDefined(guy.script_parameters)) {
       if(guy.script_parameters == "leftside") {
         left[left.size] = guy;
       } else if(guy.script_parameters == "rightside") {
@@ -1380,7 +1378,7 @@ road_group1_countdown_kill() {
     }
   }
 
-  ASSERT(left.size == 2, right.size == 2, IsDefined(dog));
+  ASSERT(left.size == 2, right.size == 2, isDefined(dog));
 
   priceVictims = left;
   playerVictims = right;
@@ -1391,12 +1389,12 @@ road_group1_countdown_kill() {
   msg = level waittill_any_return("player_shot_someone_in_group1", "countdown_kill_dialogue_done");
 
   playerTimedOut = false;
-  if(IsDefined(msg) && msg == "countdown_kill_dialogue_done") {
+  if(isDefined(msg) && msg == "countdown_kill_dialogue_done") {
     playerTimedOut = true;
   }
 
   // trade target groups if the player shot the "wrong" guy
-  if(IsDefined(level.playerShotCorrectVictim) && !level.playerShotCorrectVictim) {
+  if(isDefined(level.playerShotCorrectVictim) && !level.playerShotCorrectVictim) {
     temp = priceVictims;
     priceVictims = playerVictims;
     playerVictims = temp;
@@ -1405,7 +1403,7 @@ road_group1_countdown_kill() {
   price_be_lethal();
   level.price ClearEnemy();
 
-  while (!all_dead(priceVictims)) {
+  while(!all_dead(priceVictims)) {
     foreach(guy in priceVictims) {
       if(!IsAlive(guy)) {
         wait(0.05);
@@ -1570,7 +1568,7 @@ road_moveup_to_kill_group2() {
     }
   }
 
-  while (!stealth_is_everything_normal()) {
+  while(!stealth_is_everything_normal()) {
     wait(0.05);
   }
 
@@ -1663,7 +1661,7 @@ road_moveup_to_kill_group2_nag_player() {
   // Move up! The other group's coming back!
   lines[lines.size] = "afcaves_pri_groupsback";
 
-  while (!flag("player_slid_downhill")) {
+  while(!flag("player_slid_downhill")) {
     foreach(line in lines) {
       wait(10);
 
@@ -1675,7 +1673,7 @@ road_moveup_to_kill_group2_nag_player() {
 }
 
 road_remove_hillside_clip() {
-  if(IsDefined(level.removed_hillside_clip)) {
+  if(isDefined(level.removed_hillside_clip)) {
     return;
   } else {
     level.removed_hillside_clip = true;
@@ -1780,7 +1778,7 @@ road_group2_price_shoot_with_player(group2) {
   level.price ClearEnemy();
 
   // Price shoots with the player
-  while (!all_dead(group2)) {
+  while(!all_dead(group2)) {
     foreach(ai in group2) {
       if(!IsAlive(ai)) {
         wait(0.05);
@@ -1872,7 +1870,7 @@ rappel_zodiacs() {
 
 rappel_guard_weapons() //
 {
-  guards_guns = getentarray("guard_weapons", "targetname");
+  guards_guns = getEntArray("guard_weapons", "targetname");
   foreach(gun in guards_guns) {
     gun makeunusable();
     gun hide();
@@ -1881,7 +1879,7 @@ rappel_guard_weapons() //
   flag_wait("player_killing_guard");
 
   wait 1.75;
-  guards_guns = getentarray("guard_weapons", "targetname");
+  guards_guns = getEntArray("guard_weapons", "targetname");
   foreach(gun in guards_guns) {
     gun show();
   }
@@ -1889,7 +1887,7 @@ rappel_guard_weapons() //
   flag_wait("end_of_rappel_scene");
 
   wait 1;
-  guards_guns = getentarray("guard_weapons", "targetname");
+  guards_guns = getEntArray("guard_weapons", "targetname");
   foreach(gun in guards_guns) {
     gun makeusable();
   }
@@ -1901,9 +1899,9 @@ rappel_player_rappel_setup() {
   wait(0.5);
 
   rappel_trigger = getent("player_rappel_trigger", "targetname");
-  rappel_trigger sethintstring(&"AF_CAVES_RAPPEL_HINT"); // Press and hold^3 &&1 ^7to rappel
+  rappel_trigger sethintstring(&"AF_CAVES_RAPPEL_HINT"); // Press and hold^3 && 1 ^7to rappel
 
-  for (;;) {
+  for(;;) {
     rappel_trigger waittill("trigger");
     if(level.player isthrowinggrenade())
       continue;
@@ -2133,7 +2131,7 @@ rappel_dialogue() {
 
   if(!flag("player_killing_guard")) {
     endTime = GetTime() + milliseconds(DO_IT_TIME);
-    while (GetTime() < endTime && !flag("player_killing_guard")) {
+    while(GetTime() < endTime && !flag("player_killing_guard")) {
       wait(0.05);
     }
   }
@@ -2148,24 +2146,27 @@ rappel_price_hookup_nag() {
   flag_wait("price_hooksup");
   level endon("player_hooking_up");
 
-  while (!flag("player_hooking_up")) {
+  while(!flag("player_hooking_up")) {
     wait(randomintrange(24, 34));
-    if(flag("player_hooking_up"))
+    if(flag("player_hooking_up")) {
       break;
+    }
 
     //* Price: "Soap, hook up."
     radio_dialogue("pri_soaphookup");
 
     wait(randomintrange(20, 30));
-    if(flag("player_hooking_up"))
+    if(flag("player_hooking_up")) {
       break;
+    }
 
     //* Price: "Soap, what's the problem? Hook up to the railing."
     radio_dialogue("pri_whatstheproblem");
 
     wait(randomintrange(20, 30));
-    if(flag("player_hooking_up"))
+    if(flag("player_hooking_up")) {
       break;
+    }
 
     //* Price: "Soap, hook up, let's go."
     radio_dialogue("pri_hookupletsgo");
@@ -2195,7 +2196,7 @@ rappel_price_setup_at_cave() {
   level.price set_ignoreall(true);
   level.price set_ignoreme(true);
   level.price.dontshootwhilemoving = undefined;
-  level.price.baseAccuracy = 25; // I want him to take out a some enemies, but not all of them. 
+  level.price.baseAccuracy = 25; // I want him to take out a some enemies, but not all of them.
 }
 
 // -------------------------
@@ -2207,15 +2208,15 @@ barracks_setup() {
   first_patroller thread add_spawn_function(::barracks_firstpatroller_spawnfunc);
   first_patroller thread add_spawn_function(::barracks_stealthsettings_spawnfunc);
 
-  biggroup = GetEntArray("barracks_biggroup", "targetname");
+  biggroup = getEntArray("barracks_biggroup", "targetname");
   array_thread(biggroup, ::add_spawn_function, ::barracks_biggroup_spawnfunc);
   array_thread(biggroup, ::add_spawn_function, ::barracks_stealthsettings_spawnfunc);
 
-  centerstanders = GetEntArray("barracks_center_stander", "targetname");
+  centerstanders = getEntArray("barracks_center_stander", "targetname");
   array_thread(centerstanders, ::add_spawn_function, ::restrict_fov_until_stealth_broken);
   array_thread(centerstanders, ::add_spawn_function, ::barracks_stealthsettings_spawnfunc);
 
-  chessplayers = GetEntArray("backdoor_barracks_chess_player", "targetname");
+  chessplayers = getEntArray("backdoor_barracks_chess_player", "targetname");
   array_thread(chessplayers, ::add_spawn_function, ::restrict_fov_until_stealth_broken);
   array_thread(chessplayers, ::add_spawn_function, ::barracks_stealthsettings_spawnfunc);
 
@@ -2225,11 +2226,11 @@ barracks_setup() {
   fridgeguy = GetEnt("barracks_center_standing_fridge", "targetname");
   fridgeguy thread add_spawn_function(::barracks_stealthsettings_spawnfunc);
 
-  nearleftguys = GetEntArray("barracks_nearleft_guy", "targetname");
+  nearleftguys = getEntArray("barracks_nearleft_guy", "targetname");
   array_thread(nearleftguys, ::add_spawn_function, ::barracks_nearleftguy_spawnfunc);
   array_thread(nearleftguys, ::add_spawn_function, ::barracks_stealthsettings_spawnfunc);
 
-  stairguys = GetEntArray("barracks_stairguys", "targetname");
+  stairguys = getEntArray("barracks_stairguys", "targetname");
   array_thread(stairguys, ::add_spawn_function, ::barracks_stairguys_spawnfunc);
   //array_thread( stairguys, ::add_spawn_function, ::barracks_stealthsettings_spawnfunc );
   // END SPAWNFUNCS
@@ -2317,7 +2318,7 @@ barracks_nearleftguy_alertondeath() {
   notified = 0;
   numToNotify = 3;
   foreach(guy in axis) {
-    if(IsAlive(guy) && IsDefined(guy._stealth)) {
+    if(IsAlive(guy) && isDefined(guy._stealth)) {
       guy notify("heard_scream", level.player.origin);
       notified++;
 
@@ -2352,11 +2353,11 @@ barracks_firstpatroller_spawnfunc() {
 barracks_biggroup_spawnfunc() {
   parameters = self.script_parameters;
 
-  if(RandomInt(100) < 25 || (IsDefined(parameters) && IsSubStr(parameters, "flashlight"))) {
+  if(RandomInt(100) < 25 || (isDefined(parameters) && IsSubStr(parameters, "flashlight"))) {
     self thread give_flashlight();
   }
 
-  if(IsDefined(parameters)) {
+  if(isDefined(parameters)) {
     if(IsSubStr(parameters, "flashlight") && RandomInt(100) < 25) {
       self thread give_flashlight();
     }
@@ -2409,7 +2410,7 @@ barracks_action() {
 
   thread barracks_rightside_warning();
 
-  //Price: "Let's go." 
+  //Price: "Let's go."
   thread radio_dialogue("pri_letsgo");
   flag_set("barracks_follow_price");
 
@@ -2452,7 +2453,7 @@ barracks_action() {
 
   if(flag("backdoor_firstpatroller_deathflag")) {
     // add spawnfunc to have them look for the player if he killed the first guard
-    biggroupSpawners = GetEntArray("barracks_biggroup", "targetname");
+    biggroupSpawners = getEntArray("barracks_biggroup", "targetname");
     array_thread(biggroupSpawners, ::add_spawn_function, ::alert_heard_scream);
 
     // "The guards know something's not right. Get out of sight and stay quiet."
@@ -2513,7 +2514,7 @@ barracks_action() {
 
   SetSavedDvar("aim_aimAssistRangeScale", "1");
 
-  //Price: "Let's go." 
+  //Price: "Let's go."
   thread radio_dialogue("pri_letsgo");
 
   thread barracks_nearleft_dialogue();
@@ -2612,7 +2613,7 @@ barracks_waittill_stealth_normal() {
     // "The guards know something's not right. Get out of sight and stay quiet."
     thread radio_dialogue("afcaves_pri_guardsknow");
 
-    while (!stealth_is_everything_normal()) {
+    while(!stealth_is_everything_normal()) {
       wait(0.05);
     }
   }
@@ -2636,8 +2637,8 @@ barracks_rightside_warning() {
 
   trig = GetEnt("trig_script_color_alies_r18", "targetname");
 
-  while (1) {
-    while (!stealth_is_everything_normal()) {
+  while(1) {
+    while(!stealth_is_everything_normal()) {
       wait(0.05);
     }
 
@@ -2742,7 +2743,7 @@ barracks_stair_guys_coop_kill() {
     level.price thread move_fast_til_goal();
   }
 
-  spawners = GetEntArray("barracks_stairguys", "targetname");
+  spawners = getEntArray("barracks_stairguys", "targetname");
   guys = spawn_ai_group(spawners, true);
   ASSERT(guys.size == 2);
 
@@ -2752,7 +2753,7 @@ barracks_stair_guys_coop_kill() {
   playerVictim = undefined;
   priceVictim = undefined;
   foreach(guy in guys) {
-    ASSERT(IsDefined(guy.script_parameters));
+    ASSERT(isDefined(guy.script_parameters));
 
     if(guy.script_parameters == "left") {
       playerVictim = guy;
@@ -2760,7 +2761,7 @@ barracks_stair_guys_coop_kill() {
       priceVictim = guy;
     }
   }
-  ASSERT(IsDefined(playerVictim), IsDefined(priceVictim));
+  ASSERT(isDefined(playerVictim), isDefined(priceVictim));
 
   level endon("_stealth_spotted"); // end if we're not stealthy anymore
   thread barracks_stairguys_countdown_kill_spottedflag();
@@ -2773,12 +2774,12 @@ barracks_stair_guys_coop_kill() {
   msg = level waittill_any_return("player_shot_someone_on_stairs", "barracks_stairguys_countdown_dialogue_done");
 
   playerTimedOut = false;
-  if(IsDefined(msg) && msg == "barracks_stairguys_countdown_dialogue_done") {
+  if(isDefined(msg) && msg == "barracks_stairguys_countdown_dialogue_done") {
     playerTimedOut = true;
   }
 
   // trade target groups if the player shot the "wrong" guy
-  if(IsDefined(level.playerShotCorrectVictim) && !level.playerShotCorrectVictim) {
+  if(isDefined(level.playerShotCorrectVictim) && !level.playerShotCorrectVictim) {
     temp = priceVictim;
     priceVictim = playerVictim;
     playerVictim = temp;
@@ -2910,7 +2911,7 @@ barracks_stairguy_see_price() {
 
   trig = GetEnt("trig_barracks_stairguy_seeprice", "targetname");
 
-  while (!trig IsTouching(self)) {
+  while(!trig IsTouching(self)) {
     wait(0.05);
   }
 
@@ -2946,12 +2947,12 @@ barracks_biggroup_waittill_gone() {
   // the guys spawn in staggered so we have to account for them not all being there at the start
   aigroup = "barracks_biggroup";
   guys = [];
-  while (!guys.size) {
+  while(!guys.size) {
     wait(0.1);
     guys = get_ai_group_ai(aigroup);
   }
 
-  while (guys.size) {
+  while(guys.size) {
     guys = get_ai_group_ai(aigroup);
 
     foundOne = false;
@@ -3001,7 +3002,7 @@ barracks_stealthbreak_action() {
   axis = GetAiArray("axis");
   closest = get_array_of_closest(level.player.origin, axis);
   foreach(guy in axis) {
-    if(IsAlive(guy) && IsDefined(guy._stealth)) {
+    if(IsAlive(guy) && isDefined(guy._stealth)) {
       wait(0.5);
       guy notify("heard_scream", level.player.origin);
       break;
@@ -3042,7 +3043,7 @@ barracks_stealthbreak_action() {
 }
 
 barracks_stealthbreak_steamroom_defenders() {
-  spawners = GetEntArray("barracks_steamroom_defenders", "targetname");
+  spawners = getEntArray("barracks_steamroom_defenders", "targetname");
   if(!flag("player_pre_steamroom_stairs")) {
     guys = spawn_ai_group(spawners);
   } else {
@@ -3060,7 +3061,7 @@ barracks_stealthbreak_abandoned_price_watcher() {
 
   playerWarned = false;
 
-  while (1) {
+  while(1) {
     trig waittill("trigger", other);
 
     if(!IsPlayer(other)) {
@@ -3069,7 +3070,7 @@ barracks_stealthbreak_abandoned_price_watcher() {
     }
 
     // wait until warning time
-    while (level.player IsTouching(trig) && !flag("barracks_stealthbreak_survived") && GetTime() < warnTime) {
+    while(level.player IsTouching(trig) && !flag("barracks_stealthbreak_survived") && GetTime() < warnTime) {
       wait(0.05);
     }
 
@@ -3087,7 +3088,7 @@ barracks_stealthbreak_abandoned_price_watcher() {
     }
 
     // wait until ending time
-    while (level.player IsTouching(trig) && !flag("barracks_stealthbreak_survived") && GetTime() < failTime) {
+    while(level.player IsTouching(trig) && !flag("barracks_stealthbreak_survived") && GetTime() < failTime) {
       wait(0.05);
     }
 
@@ -3118,7 +3119,7 @@ barracks_stealthbreak_enemies_cleanup() {
 
   axis = GetAiArray("axis");
 
-  while (axis.size > numRemaining && !flag("player_at_stairs_before_steamroom")) {
+  while(axis.size > numRemaining && !flag("player_at_stairs_before_steamroom")) {
     wait(0.1);
     axis = GetAiArray("axis");
     axis = array_removedead(axis);
@@ -3158,7 +3159,7 @@ barracks_kill_when_player_not_looking() {
   minDistSqrd = 256 * 256;
 
   //while( within_fov( level.player.origin, level.player GetPlayerAngles(), self.origin, level.cosine[ "45" ] ) )
-  while (players_looking_at(self.origin + (0, 0, 48), undefined, true) || DistanceSquared(level.player.origin, self.origin) <= minDistSqrd) {
+  while(players_looking_at(self.origin + (0, 0, 48), undefined, true) || DistanceSquared(level.player.origin, self.origin) <= minDistSqrd) {
     if(!flag("steamroom_entrance")) {
       wait(RandomFloatRange(0.5, 2));
     } else {
@@ -3190,7 +3191,7 @@ barracks_stealthbreak_dialogue() {
   // "That was close."
   recover[1] = "afcaves_pri_thatwasclose";
 
-  while (!flag("steamroom_start")) {
+  while(!flag("steamroom_start")) {
     flag_wait("_stealth_spotted");
 
     barracks_stealthbreak_enemy_dialogue();
@@ -3220,7 +3221,7 @@ barracks_stealthbreak_enemy_dialogue() {
   axis = GetAiArray("axis");
   closest = get_array_of_closest(level.player.origin, axis);
   foreach(guy in axis) {
-    if(IsAlive(guy) && IsDefined(guy._stealth)) {
+    if(IsAlive(guy) && isDefined(guy._stealth)) {
       guy thread radio_dialogue(random(lines));
       wait(0.05); // let the dialogue get into the queue before anything after this returns
       break;
@@ -3354,7 +3355,7 @@ steamroom_gate_swap() {
   yLimit = 9200;
   distSqrd = 512;
 
-  while (1) {
+  while(1) {
     wait(0.05);
 
     if(level.player.origin[1] > yLimit) {
@@ -3370,7 +3371,7 @@ steamroom_gate_swap() {
     {
     	continue;
     }
-		
+    		
     if( within_fov( level.player.origin, level.player GetPlayerAngles(), level.steamroom_gate_closed.origin, level.cosine[ "45" ] ) )
     {
     	continue;
@@ -3381,7 +3382,7 @@ steamroom_gate_swap() {
   }
 
   level.steamroom_gate_open hide_entity();
-  level.steamroom_gate_closed PlaySound("gate_iron_open");
+  level.steamroom_gate_closed playSound("gate_iron_open");
   level.steamroom_gate_closed show_entity();
 }
 
@@ -3469,7 +3470,7 @@ steamroom_enemies_cleanup() {
 
   axis = GetAiArray("axis");
 
-  while (axis.size > numRemaining && !flag("steamroom_exit")) {
+  while(axis.size > numRemaining && !flag("steamroom_exit")) {
     wait(0.1);
     axis = GetAiArray("axis");
     axis = array_removedead(axis);
@@ -3518,7 +3519,7 @@ steamroom_kill_when_player_not_looking() {
   minDistSqrd = 256 * 256;
 
   //while( within_fov( level.player.origin, level.player GetPlayerAngles(), self.origin, level.cosine[ "45" ] ) )
-  while (players_looking_at(self.origin + (0, 0, 48), undefined, true) || DistanceSquared(level.player.origin, self.origin) <= minDistSqrd) {
+  while(players_looking_at(self.origin + (0, 0, 48), undefined, true) || DistanceSquared(level.player.origin, self.origin) <= minDistSqrd) {
     if(!flag("steamroom_exit")) {
       wait(RandomFloatRange(0.5, 2));
     } else {
@@ -3556,7 +3557,7 @@ steamroom_price_combat_think() {
 
   level.price disable_ai_color();
 
-  colortrigs = GetEntArray("trig_steamroom_allies_color", "script_noteworthy");
+  colortrigs = getEntArray("trig_steamroom_allies_color", "script_noteworthy");
   array_call(colortrigs, ::Delete);
 }
 
@@ -3602,7 +3603,7 @@ steamroom_knifekill_setup() {
 
   spawner = GetEnt(animref.target, "targetname");
   guy = spawner spawn_ai(true);
-  ASSERT(IsDefined(guy));
+  ASSERT(isDefined(guy));
 
   guy.ignoreme = false;
   guy.ignoreall = true;
@@ -3709,10 +3710,10 @@ steamroom_price_knifekill() {
 }
 
 steamroom_price_knifekill_foley() {
-  ent = Spawn("script_origin", level.price.origin);
+  ent = spawn("script_origin", level.price.origin);
   ent LinkTo(level.price);
 
-  ent PlaySound("scn_afcaves_knife_kill_behind");
+  ent playSound("scn_afcaves_knife_kill_behind");
 
   flag_wait_any("steamroom_price_knifekill_abort", "steamroom_price_knifekill_walkup_abort", "steamroom_price_knifekill_done");
 
@@ -3763,7 +3764,7 @@ steamroom_price_knifekill_guard_fake_dropweapon(guard) {
   wait(3);
 
   classname = "weapon_" + weapon;
-  Spawn(classname, groundpos(level.price GetTagOrigin("tag_inhand")));
+  spawn(classname, groundpos(level.price GetTagOrigin("tag_inhand")));
 }
 
 steamroom_price_knifekill_guard_handlephone(guardReactAnime) {
@@ -3783,7 +3784,6 @@ steamroom_price_knifekill_guard_handlephone(guardReactAnime) {
   }
 
   self Detach(phoneModel, linkTag);
-
 }
 
 steamroom_price_knifekill_guard_idleinterrupt(animref, guardReactAnime) {
@@ -3822,7 +3822,7 @@ steamroom_price_knifekill_guard_catch_gunshot() {
 
   self addAIEventListener("gunshot");
 
-  while (1) {
+  while(1) {
     self waittill("ai_event", msg);
 
     if(msg == "gunshot") {
@@ -3849,7 +3849,7 @@ steamroom_price_knifekill_catch_player_movement_nearby() {
   thread player_jump_watcher();
   thread player_jump_watcher_ender();
 
-  while (1) {
+  while(1) {
     wait(0.05);
 
     if(!flag("steamroom_stealthkill_player_in_awareness_zone")) {
@@ -3882,7 +3882,7 @@ player_jump_watcher() {
   NotifyOnCommand("playerjump", "+gostand");
   NotifyOnCommand("playerjump", "+moveup");
 
-  while (1) {
+  while(1) {
     level.player waittill("playerjump");
     wait(0.1); // jumps don't happen immediately
 
@@ -3891,7 +3891,7 @@ player_jump_watcher() {
       println("jumping");
     }
 
-    while (!level.player IsOnGround()) {
+    while(!level.player IsOnGround()) {
       wait(0.05);
     }
     flag_clear(jumpflag);
@@ -3956,7 +3956,7 @@ steamroom_price_knifekill_bloodfx(stabWaitTime) {
   fxTag = "tag_knife_fx";
 
   wait(stabWaitTime);
-  PlayFX(bloodfx, level.price GetTagOrigin(fxTag));
+  playFX(bloodfx, level.price GetTagOrigin(fxTag));
 }
 // --- END KNIFE KILL SEQUENCE --
 
@@ -4016,9 +4016,9 @@ steamroom_blow_door() {
 
   spots = [];
   spots[0] = org;
-  spots = array_combine(spots, GetEntArray("steamroom_fake_c4_spot", "targetname"));
+  spots = array_combine(spots, getEntArray("steamroom_fake_c4_spot", "targetname"));
   foreach(spot in spots) {
-    PlayFX(level._effect["c4_explosion"], spot.origin);
+    playFX(level._effect["c4_explosion"], spot.origin);
     spot RadiusDamage(spot.origin, 256, 200, 50);
   }
 
@@ -4066,7 +4066,7 @@ steamroom_price_start_ambush() {
   /*
   vol = GetEnt( "goalvolume_steamroom_patrollers", "targetname" );
   numGuysNeeded = 7;
-	
+  	
   guys = get_ai_group_ai( "steamroom_patrollers" );
   while( guys.size && !all_dead( guys ) )
   {
@@ -4099,7 +4099,7 @@ steamroom_price_start_ambush() {
 steamroom_patrollers() {
   flag_wait("steamroom_door_preblow");
 
-  spawnersExtra = GetEntArray("steamroom_patroller_extraguy", "targetname");
+  spawnersExtra = getEntArray("steamroom_patroller_extraguy", "targetname");
   guysExtra = spawn_ai_group(spawnersExtra, true);
   array_thread(guysExtra, ::steamroom_patroller_think);
 
@@ -4107,7 +4107,7 @@ steamroom_patrollers() {
 
   spawners = [];
   guys = [];
-  spawners = GetEntArray("steamroom_patroller", "targetname");
+  spawners = getEntArray("steamroom_patroller", "targetname");
   guys = spawn_ai_group(spawners, true);
   array_thread(guys, ::steamroom_patroller_think);
 
@@ -4115,12 +4115,12 @@ steamroom_patrollers() {
     thread steamroom_patrollers_pre_ambush_dialogue();
   }
 
-  spawners2 = GetEntArray("steamroom_patroller_group2", "targetname");
+  spawners2 = getEntArray("steamroom_patroller_group2", "targetname");
   ASSERT(spawners2.size);
   guys2 = spawn_ai_group(spawners2, true);
   array_thread(guys2, ::steamroom_patroller_group2_wait);
 
-  spawners3 = GetEntArray("steamroom_patroller_doorguard", "targetname");
+  spawners3 = getEntArray("steamroom_patroller_doorguard", "targetname");
   ASSERT(spawners3.size);
   guys3 = spawn_ai_group(spawners3, true);
   array_call(guys3, ::LaserForceOn);
@@ -4262,50 +4262,49 @@ steamroom_patroller_deathwait() {
 
 steamroom_lighting_setup() {
   //group 1
-  lights_out_grp1 = getentarray("lights_off_grp1", "targetname");
+  lights_out_grp1 = getEntArray("lights_off_grp1", "targetname");
   array_thread(lights_out_grp1, ::_setLightIntensity, 1.5);
 
-  light_models_off_grp1 = getentarray("security_lights_off_grp1", "targetname");
+  light_models_off_grp1 = getEntArray("security_lights_off_grp1", "targetname");
   array_call(light_models_off_grp1, ::hide);
 
-  light_models_on_grp1 = getentarray("security_lights_on_grp1", "targetname");
+  light_models_on_grp1 = getEntArray("security_lights_on_grp1", "targetname");
   array_thread(light_models_on_grp1, ::steamroom_light_glow_fx);
 
   //group 2
-  lights_out_grp2 = getentarray("lights_off_grp2", "targetname");
+  lights_out_grp2 = getEntArray("lights_off_grp2", "targetname");
   array_thread(lights_out_grp2, ::_setLightIntensity, 1.7);
 
-  light_models_off_grp2 = getentarray("security_lights_off_grp2", "targetname");
+  light_models_off_grp2 = getEntArray("security_lights_off_grp2", "targetname");
   array_call(light_models_off_grp2, ::hide);
 
-  light_models_on_grp2 = getentarray("security_lights_on_grp2", "targetname");
+  light_models_on_grp2 = getEntArray("security_lights_on_grp2", "targetname");
   array_thread(light_models_on_grp2, ::steamroom_light_glow_fx);
 
   //group 3
-  lights_out_grp3 = getentarray("lights_off_grp3", "targetname");
+  lights_out_grp3 = getEntArray("lights_off_grp3", "targetname");
   array_thread(lights_out_grp3, ::_setLightIntensity, 1.7);
 
-  light_models_off_grp3 = getentarray("security_lights_off_grp3", "targetname");
+  light_models_off_grp3 = getEntArray("security_lights_off_grp3", "targetname");
   array_call(light_models_off_grp3, ::hide);
 
-  light_models_on_grp3 = getentarray("security_lights_on_grp3", "targetname");
+  light_models_on_grp3 = getEntArray("security_lights_on_grp3", "targetname");
   array_thread(light_models_on_grp3, ::steamroom_light_glow_fx);
 
   //group 4
-  lights_out_grp4 = getentarray("lights_off_grp4", "targetname");
+  lights_out_grp4 = getEntArray("lights_off_grp4", "targetname");
   array_thread(lights_out_grp4, ::_setLightIntensity, 1.5);
 
-  light_models_off_grp4 = getentarray("security_lights_off_grp4", "targetname");
+  light_models_off_grp4 = getEntArray("security_lights_off_grp4", "targetname");
   array_call(light_models_off_grp4, ::hide);
 
-  light_models_on_grp4 = getentarray("security_lights_on_grp4", "targetname");
+  light_models_on_grp4 = getEntArray("security_lights_on_grp4", "targetname");
   array_thread(light_models_on_grp4, ::steamroom_light_glow_fx);
-
 }
 
 steamroom_light_glow_fx() {
   if(self.model == "dt_light_on" || self.model == "com_utility_light_on") {
-    PlayFXOnTag(getfx("light_glow_white_bulb"), self, "tag_fx");
+    playFXOnTag(getfx("light_glow_white_bulb"), self, "tag_fx");
   }
 }
 
@@ -4324,17 +4323,17 @@ steamroom_door_setup() {
 steamroom_door_lightswap() {
   level.steamroom_doorlight SetLightIntensity(0);
 
-  if(IsDefined(level.steamroom_door)) {
+  if(isDefined(level.steamroom_door)) {
     level.steamroom_door.lightOnModel Hide();
     level.steamroom_door.lightOffModel Show();
   }
 
   wait(0.25);
-  level.player playsound("scn_blackout_breaker_box");
+  level.player playSound("scn_blackout_breaker_box");
 
   glowspots = GetStructArray("cave_red_light_glowspot", "targetname");
   foreach(spot in glowspots) {
-    PlayFX(getfx("redlight_glow"), spot.origin);
+    playFX(getfx("redlight_glow"), spot.origin);
   }
 
   dlightspots = GetStructArray("cave_red_light_dlight_spot", "targetname");
@@ -4346,58 +4345,58 @@ steamroom_door_lightswap() {
 steamroom_lights_go_out() {
   thread steamroom_steam_fx_swap();
 
-  level.player playsound("scn_blackout_breaker_box");
+  level.player playSound("scn_blackout_breaker_box");
 
   thread vision_set_fog_changes("af_caves_outdoors", 2.25);
 
   //group 1
-  lights_out_grp1 = getentarray("lights_off_grp1", "targetname");
+  lights_out_grp1 = getEntArray("lights_off_grp1", "targetname");
   array_thread(lights_out_grp1, ::_setLightIntensity, 0);
 
-  light_models_on_grp1 = getentarray("security_lights_on_grp1", "targetname");
+  light_models_on_grp1 = getEntArray("security_lights_on_grp1", "targetname");
   array_call(light_models_on_grp1, ::delete);
 
-  light_models_off_grp1 = getentarray("security_lights_off_grp1", "targetname");
+  light_models_off_grp1 = getEntArray("security_lights_off_grp1", "targetname");
   array_call(light_models_off_grp1, ::show);
 
   wait .75;
 
-  level.player playsound("scn_blackout_breaker_box");
+  level.player playSound("scn_blackout_breaker_box");
 
   //group 2
-  lights_out_grp2 = getentarray("lights_off_grp2", "targetname");
+  lights_out_grp2 = getEntArray("lights_off_grp2", "targetname");
   array_thread(lights_out_grp2, ::_setLightIntensity, 0);
 
-  light_models_on_grp2 = getentarray("security_lights_on_grp2", "targetname");
+  light_models_on_grp2 = getEntArray("security_lights_on_grp2", "targetname");
   array_call(light_models_on_grp2, ::delete);
 
-  light_models_off_grp2 = getentarray("security_lights_off_grp2", "targetname");
+  light_models_off_grp2 = getEntArray("security_lights_off_grp2", "targetname");
   array_call(light_models_off_grp2, ::show);
 
   wait .75;
-  level.player playsound("scn_blackout_breaker_box");
+  level.player playSound("scn_blackout_breaker_box");
 
   //group 3
-  lights_out_grp3 = getentarray("lights_off_grp3", "targetname");
+  lights_out_grp3 = getEntArray("lights_off_grp3", "targetname");
   array_thread(lights_out_grp3, ::_setLightIntensity, 0);
 
-  light_models_on_grp3 = getentarray("security_lights_on_grp3", "targetname");
+  light_models_on_grp3 = getEntArray("security_lights_on_grp3", "targetname");
   array_call(light_models_on_grp3, ::delete);
 
-  light_models_off_grp3 = getentarray("security_lights_off_grp3", "targetname");
+  light_models_off_grp3 = getEntArray("security_lights_off_grp3", "targetname");
   array_call(light_models_off_grp3, ::show);
 
   wait .75;
-  level.player playsound("scn_blackout_breaker_box");
+  level.player playSound("scn_blackout_breaker_box");
 
   //group 4
-  lights_out_grp4 = getentarray("lights_off_grp4", "targetname");
+  lights_out_grp4 = getEntArray("lights_off_grp4", "targetname");
   array_thread(lights_out_grp4, ::_setLightIntensity, 0);
 
-  light_models_on_grp4 = getentarray("security_lights_on_grp4", "targetname");
+  light_models_on_grp4 = getEntArray("security_lights_on_grp4", "targetname");
   array_call(light_models_on_grp4, ::delete);
 
-  light_models_off_grp4 = getentarray("security_lights_off_grp4", "targetname");
+  light_models_off_grp4 = getEntArray("security_lights_off_grp4", "targetname");
   array_call(light_models_off_grp4, ::show);
 
   thread steamroom_door_lightswap();

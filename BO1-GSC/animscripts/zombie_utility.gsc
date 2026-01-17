@@ -45,9 +45,7 @@ initialize(animscript) {
   if(isDefined(self.a.postScriptFunc)) {
     scriptFunc = self.a.postScriptFunc;
     self.a.postScriptFunc = undefined;
-    [
-      [scriptFunc]
-    ](animscript);
+    [[scriptFunc]](animscript);
   }
   if(animscript != "death") {
     self.a.nodeath = false;
@@ -80,7 +78,7 @@ badplacer(time, org, radius) {
   for(i = 0; i < time * 20; i++) {
     for(p = 0; p < 10; p++) {
       angles = (0, randomInt(360), 0);
-      forward = AnglesToForward(angles);
+      forward = anglesToForward(angles);
       scale = vector_scale(forward, radius);
       line(org, org + scale, (1, 0.3, 0.3));
     }
@@ -130,9 +128,9 @@ GetNodeYawToEnemy() {
     pos = self.enemy.origin;
   } else {
     if(isDefined(self.node)) {
-      forward = AnglesToForward(self.node.angles);
+      forward = anglesToForward(self.node.angles);
     } else {
-      forward = AnglesToForward(self.angles);
+      forward = anglesToForward(self.angles);
     }
     forward = vector_scale(forward, 150);
     pos = self.origin + forward;
@@ -151,7 +149,7 @@ GetCoverNodeYawToEnemy() {
   if(isValidEnemy(self.enemy)) {
     pos = self.enemy.origin;
   } else {
-    forward = AnglesToForward(self.coverNode.angles + self.animarray["angle_step_out"][self.a.cornerMode]);
+    forward = anglesToForward(self.coverNode.angles + self.animarray["angle_step_out"][self.a.cornerMode]);
     forward = vector_scale(forward, 150);
     pos = self.origin + forward;
   }
@@ -172,7 +170,7 @@ GetYawToEnemy() {
   if(isValidEnemy(self.enemy)) {
     pos = self.enemy.origin;
   } else {
-    forward = AnglesToForward(self.angles);
+    forward = anglesToForward(self.angles);
     forward = vector_scale(forward, 150);
     pos = self.origin + forward;
   }
@@ -374,9 +372,9 @@ GetNodeDirection() {
 GetNodeForward() {
   myNode = GetClaimedNode();
   if(isDefined(myNode)) {
-    return AnglesToForward(myNode.angles);
+    return anglesToForward(myNode.angles);
   }
-  return AnglesToForward(self.angles);
+  return anglesToForward(self.angles);
 }
 
 GetNodeOrigin() {
@@ -550,7 +548,7 @@ debugPosInternal(org, string, size) {
   self endon("death");
   self notify("stop debug " + org);
   self endon("stop debug " + org);
-  ent = SpawnStruct();
+  ent = spawnStruct();
   ent thread debugTimeout();
   ent endon("timeout");
   if(self.enemy.team == "allies") {
@@ -645,7 +643,7 @@ PersonalColdBreath() {
   self endon("stop personal effect");
   for(;;) {
     if(self.a.movement != "run") {
-      playfxOnTag(level._effect["cold_breath"], self, tag);
+      playFXOnTag(level._effect["cold_breath"], self, tag);
       wait(2.5 + RandomFloat(3));
     } else {
       wait(0.5);
@@ -679,7 +677,7 @@ getNodeOffset(node) {
   cornernode = false;
   nodeOffset = (0, 0, 0);
   right = AnglesToRight(node.angles);
-  forward = AnglesToForward(node.angles);
+  forward = anglesToForward(node.angles);
   switch (node.type) {
     case "Cover Left":
     case "Cover Left Wide":

@@ -27,18 +27,18 @@ idle_main() {
 
 idle() {
   //->since this system works with the stealth system - we want to make sure that _stealth has had a chance
-  //to be initialized...if it's done through radient it will be, but if it's done through script with a 
+  //to be initialized...if it's done through radient it will be, but if it's done through script with a
   //spawn_func, then it will initalize after this causing problems...this waittillframeend insures that the
   //spawn_func for stealth apps has a chance to run before this does.
   waittillframeend;
 
   //the waittillframeend ( which is necessary ) is just enough time for this guy to be deleted from max 32 ai over-spawning.
-  if(!isalive(self))
+  if(!isalive(self)) {
     return;
-
+  }
   node = undefined;
 
-  if(!isdefined(self.target))
+  if(!isDefined(self.target))
     node = self;
   else {
     node = getnode(self.target, "targetname");
@@ -46,30 +46,28 @@ idle() {
     struct = getstruct(self.target, "targetname");
     getfunc = undefined;
 
-    if(isdefined(node))
+    if(isDefined(node))
       getfunc = ::get_node;
-    else if(isdefined(ent))
+    else if(isDefined(ent))
       getfunc = ::get_ent;
-    else if(isdefined(struct))
+    else if(isDefined(struct))
       getfunc = ::getstruct;
 
-    node = [
-      [getfunc]
-    ](self.target, "targetname");
+    node = [[getfunc]](self.target, "targetname");
 
-    while (isdefined(node.target))
+    while(isDefined(node.target))
       node = [
         [getfunc]
       ](node.target, "targetname");
   }
 
   anime = node.script_animation;
-  if(!isdefined(anime))
+  if(!isDefined(anime))
     anime = "random";
 
-  if(!check_animation(anime, node))
+  if(!check_animation(anime, node)) {
     return;
-
+  }
   if(anime == "random") {
     anime = create_random_animation();
     node.script_animation = anime;
@@ -84,9 +82,9 @@ idle_reach_node(node, idle_anim) {
   self endon("death");
   self endon("stop_idle_proc");
 
-  if(isdefined(self._stealth)) {
+  if(isDefined(self._stealth)) {
     level add_wait(::flag_wait, self stealth_get_group_spotted_flag());
-    if(isdefined(self._stealth.plugins.corpse)) {
+    if(isDefined(self._stealth.plugins.corpse)) {
       level add_wait(::flag_wait, self stealth_get_group_corpse_flag());
       self add_wait(::ent_flag_wait, "_stealth_saw_corpse");
     }
@@ -96,7 +94,7 @@ idle_reach_node(node, idle_anim) {
   self add_func(::send_notify, "stop_idle_proc");
   self thread do_wait_any();
 
-  if(isdefined(self.script_patroller))
+  if(isDefined(self.script_patroller))
     self waittill("_patrol_reached_path_end");
   else
     node anim_generic_reach(self, idle_anim);
@@ -107,12 +105,12 @@ idle_proc(node, idle_anim, react_anim) {
 
   self endon("death");
 
-  if(isdefined(self.script_idlereach)) {
+  if(isDefined(self.script_idlereach)) {
     self endon("stop_idle_proc");
     self idle_reach_node(node, idle_anim);
   }
 
-  if(isdefined(self.script_idlereach)) {
+  if(isDefined(self.script_idlereach)) {
     self.script_animation = node.script_animation;
     node = self;
   }
@@ -137,7 +135,7 @@ idle_proc(node, idle_anim, react_anim) {
 
   node script_delay();
 
-  if(isdefined(self._stealth)) {
+  if(isDefined(self._stealth)) {
     node stealth_ai_idle_and_react(self, idle_anim, react_anim);
     return;
   }
@@ -161,7 +159,7 @@ reaction_sleep() {
 reaction_sleep_wait_wakeup() {
   self endon("death");
 
-  if(isdefined(self._stealth)) {
+  if(isDefined(self._stealth)) {
     self thread stealth_enemy_endon_alert();
     self endon("stealth_enemy_endon_alert");
   }
@@ -180,12 +178,12 @@ reaction_sleep_wait_wakeup_dist(guy, dist) {
 
   distsqrd = dist * dist;
 
-  while (1) {
-    while (distancesquared(self.origin, guy.origin) > distsqrd)
+  while(1) {
+    while(distancesquared(self.origin, guy.origin) > distsqrd)
       wait .1;
     guy.ignoreall = false;
 
-    while (distancesquared(self.origin, guy.origin) <= distsqrd)
+    while(distancesquared(self.origin, guy.origin) <= distsqrd)
       wait .1;
     guy.ignoreall = true;
   }
@@ -206,7 +204,7 @@ reaction_proc(node, ender, react_anim, tag) {
   // cut the loop
   node notify(ender);
 
-  if(isdefined(self.anim_props)) {
+  if(isDefined(self.anim_props)) {
     self.anim_props_animated = true;
     node thread anim_single(self.anim_props, react_anim);
   }
@@ -218,7 +216,7 @@ reaction_proc(node, ender, react_anim, tag) {
 
   if(type != "doFlashBanged") {
     // this is the reaction
-    if(isdefined(tag) || isdefined(self.has_delta))
+    if(isDefined(tag) || isDefined(self.has_delta))
       node anim_generic(self, react_anim, tag);
     else
       node anim_generic_custom_animmode(self, "gravity", react_anim);
@@ -231,16 +229,16 @@ reaction_wait(msg) {
 }
 
 animate_props_on_death(node, anime) {
-  if(!isdefined(self.anim_props))
+  if(!isDefined(self.anim_props)) {
     return;
-
+  }
   prop = self.anim_props;
 
   self waittill("death");
 
-  if(isdefined(self.anim_props_animated))
+  if(isDefined(self.anim_props_animated)) {
     return;
-
+  }
   node thread anim_single(prop, anime);
 }
 
@@ -255,8 +253,8 @@ check_animation(anime, node) {
 
   if(anime == "random") {
     array2 = [];
-    for (i = 0; i < array.size; i++) {
-      if(!isdefined(level.scr_anim["generic"][array[i] + "_react"]))
+    for(i = 0; i < array.size; i++) {
+      if(!isDefined(level.scr_anim["generic"][array[i] + "_react"]))
         array2[array2.size] = array[i];
     }
 
@@ -266,7 +264,7 @@ check_animation(anime, node) {
     println(" -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- ");
     println(" -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- ");
     println(" -- -- - add these lines to your level script AFTER maps\\\_load::main(); -- -- -- -- -- -- - ");
-    for (i = 0; i < array2.size; i++)
+    for(i = 0; i < array2.size; i++)
       println("maps\\\_idle_" + array2[i] + "::main();");
     println(" -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- ");
     println(" -- -- -- -- -- -- -- -- -- -- -- -- - hint copy paste them from console.log -- -- -- -- -- -- -- -- -- -- ");
@@ -276,9 +274,9 @@ check_animation(anime, node) {
     return false;
   }
 
-  for (i = 0; i < array.size; i++) {
+  for(i = 0; i < array.size; i++) {
     if(array[i] == anime) {
-      if(!isdefined(level.scr_anim["generic"][anime + "_react"])) {
+      if(!isDefined(level.scr_anim["generic"][anime + "_react"])) {
         println(" -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- ");
         println(" -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- ");
         println(" -- -- - add these lines to your level script AFTER maps\\\_load::main(); -- -- -- -- -- -- - ");
@@ -296,7 +294,7 @@ check_animation(anime, node) {
   }
 
   msg = "";
-  for (i = 0; i < array.size; i++)
+  for(i = 0; i < array.size; i++)
     msg = msg + array[i] + ", ";
   msg = msg + "and random.";
 

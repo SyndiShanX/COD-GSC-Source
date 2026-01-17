@@ -40,7 +40,7 @@ main(bScriptgened, bCSVgened, bsgenabled) {
   if(isDefined(level.createFXent))
     script_gen_dump_addline("maps\\mp\\createfx\\" + level.script + "_fx::main();", level.script + "_fx");
   if(isDefined(level.script_gen_dump_preload))
-    for (i = 0; i < level.script_gen_dump_preload.size; i++)
+    for(i = 0; i < level.script_gen_dump_preload.size; i++)
       script_gen_dump_addline(level.script_gen_dump_preload[i].string, level.script_gen_dump_preload[i].signature);
   if(getDvar("scr_RequiredMapAspectratio") == "")
     setDvar("scr_RequiredMapAspectratio", "1");
@@ -61,7 +61,7 @@ main(bScriptgened, bCSVgened, bsgenabled) {
   thread maps\mp\_busing::busInit();
   thread maps\mp\_music::music_init();
   VisionSetNight("default_night");
-  lanterns = getentarray("lantern_glowFX_origin", "targetname");
+  lanterns = getEntArray("lantern_glowFX_origin", "targetname");
   array_thread(lanterns, ::lanterns);
   array_thread(GetNodeArray("traverse", "targetname"), ::traverseThink);
   flicker_lights = getEntArray("flicker_light", "targetname");
@@ -84,7 +84,7 @@ main(bScriptgened, bCSVgened, bsgenabled) {
   }
   thread maps\mp\_global_fx::main();
   thread maps\mp\_gib::precache_gib_fx();
-  for (p = 0; p < 6; p++) {
+  for(p = 0; p < 6; p++) {
     switch (p) {
       case 0:
         triggertype = "trigger_multiple";
@@ -106,15 +106,15 @@ main(bScriptgened, bCSVgened, bsgenabled) {
         triggertype = "trigger_damage";
         break;
     }
-    triggers = getentarray(triggertype, "classname");
-    for (i = 0; i < triggers.size; i++) {
+    triggers = getEntArray(triggertype, "classname");
+    for(i = 0; i < triggers.size; i++) {
       if(isDefined(triggers[i].script_prefab_exploder))
         triggers[i].script_exploder = triggers[i].script_prefab_exploder;
       if(isDefined(triggers[i].script_exploder))
         level thread maps\mp\_load::exploder_load(triggers[i]);
     }
   }
-  array_thread(GetEntArray("ambient_package", "targetname"), maps\mp\_ambientpackage::ambientPackageTrigger);
+  array_thread(getEntArray("ambient_package", "targetname"), maps\mp\_ambientpackage::ambientPackageTrigger);
 }
 
 footsteps() {
@@ -138,7 +138,7 @@ footsteps() {
 }
 
 parse_structs() {
-  for (i = 0; i < level.struct.size; i++) {
+  for(i = 0; i < level.struct.size; i++) {
     if(isDefined(level.struct[i].targetname)) {
       if(level.struct[i].targetname == "flak_fire_fx") {
         level._effect["flak20_fire_fx"] = loadFX("weapon/tracer/fx_tracer_flak_single_noExp");
@@ -172,11 +172,11 @@ exploder_load(trigger) {
 }
 
 setupExploders() {
-  ents = getentarray("script_brushmodel", "classname");
-  smodels = getentarray("script_model", "classname");
-  for (i = 0; i < smodels.size; i++)
+  ents = getEntArray("script_brushmodel", "classname");
+  smodels = getEntArray("script_model", "classname");
+  for(i = 0; i < smodels.size; i++)
     ents[ents.size] = smodels[i];
-  for (i = 0; i < ents.size; i++) {
+  for(i = 0; i < ents.size; i++) {
     if(isDefined(ents[i].script_prefab_exploder))
       ents[i].script_exploder = ents[i].script_prefab_exploder;
     if(isDefined(ents[i].script_exploder)) {
@@ -192,22 +192,22 @@ setupExploders() {
     }
   }
   script_exploders = [];
-  potentialExploders = getentarray("script_brushmodel", "classname");
-  for (i = 0; i < potentialExploders.size; i++) {
+  potentialExploders = getEntArray("script_brushmodel", "classname");
+  for(i = 0; i < potentialExploders.size; i++) {
     if(isDefined(potentialExploders[i].script_prefab_exploder))
       potentialExploders[i].script_exploder = potentialExploders[i].script_prefab_exploder;
     if(isDefined(potentialExploders[i].script_exploder))
       script_exploders[script_exploders.size] = potentialExploders[i];
   }
-  potentialExploders = getentarray("script_model", "classname");
-  for (i = 0; i < potentialExploders.size; i++) {
+  potentialExploders = getEntArray("script_model", "classname");
+  for(i = 0; i < potentialExploders.size; i++) {
     if(isDefined(potentialExploders[i].script_prefab_exploder))
       potentialExploders[i].script_exploder = potentialExploders[i].script_prefab_exploder;
     if(isDefined(potentialExploders[i].script_exploder))
       script_exploders[script_exploders.size] = potentialExploders[i];
   }
-  potentialExploders = getentarray("item_health", "classname");
-  for (i = 0; i < potentialExploders.size; i++) {
+  potentialExploders = getEntArray("item_health", "classname");
+  for(i = 0; i < potentialExploders.size; i++) {
     if(isDefined(potentialExploders[i].script_prefab_exploder))
       potentialExploders[i].script_exploder = potentialExploders[i].script_prefab_exploder;
     if(isDefined(potentialExploders[i].script_exploder))
@@ -219,7 +219,7 @@ setupExploders() {
   acceptableTargetnames["exploderchunk visible"] = true;
   acceptableTargetnames["exploderchunk"] = true;
   acceptableTargetnames["exploder"] = true;
-  for (i = 0; i < script_exploders.size; i++) {
+  for(i = 0; i < script_exploders.size; i++) {
     exploder = script_exploders[i];
     ent = createExploder(exploder.script_fxid);
     ent.v = [];
@@ -273,7 +273,7 @@ lanterns() {
 
 script_gen_dump_checksaved() {
   signatures = getarraykeys(level.script_gen_dump);
-  for (i = 0; i < signatures.size; i++)
+  for(i = 0; i < signatures.size; i++)
     if(!isDefined(level.script_gen_dump2[signatures[i]])) {
       level.script_gen_dump[signatures[i]] = undefined;
       level.script_gen_dump_reasons[level.script_gen_dump_reasons.size] = "Signature unmatched( removed feature ): " + signatures[i];
@@ -294,7 +294,7 @@ script_gen_dump() {
       println("^2 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- ");
       println("^3Dumping scriptgen dump for these reasons");
       println("^2 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- ");
-      for (i = 0; i < level.script_gen_dump_reasons.size; i++) {
+      for(i = 0; i < level.script_gen_dump_reasons.size; i++) {
         if(issubstr(level.script_gen_dump_reasons[i], "nowrite")) {
           substr = getsubstr(level.script_gen_dump_reasons[i], 15);
           println(i + ". ) " + substr);
@@ -333,10 +333,10 @@ script_gen_dump() {
     assertex(file != -1, "File not writeable( check it and and restart the map ): " + filename);
     script_gen_dumpprintln(file, "
       script_gen_dumpprintln(file, "main()"); script_gen_dumpprintln(file, "{"); script_gen_dumpprintln(file, ""); script_gen_dumpprintln(file, "\tlevel.script_gen_dump = [];"); script_gen_dumpprintln(file, ""); signatures = getarraykeys(level.script_gen_dump);
-      for (i = 0; i < signatures.size; i++)
+      for(i = 0; i < signatures.size; i++)
         if(!issubstr(level.script_gen_dump[signatures[i]], "nowrite"))
           script_gen_dumpprintln(file, "\t" + level.script_gen_dump[signatures[i]]);
-      for (i = 0; i < signatures.size; i++)
+      for(i = 0; i < signatures.size; i++)
         if(!issubstr(level.script_gen_dump[signatures[i]], "nowrite"))
           script_gen_dumpprintln(file, "\tlevel.script_gen_dump[ " + "\"" + signatures[i] + "\"" + " ] = " + "\"" + signatures[i] + "\"" + ";");
         else
@@ -344,12 +344,12 @@ script_gen_dump() {
       if(isDefined(level.sg_precacheanims))
         keys1 = getarraykeys(level.sg_precacheanims);
       if(isDefined(keys1))
-        for (i = 0; i < keys1.size; i++)
+        for(i = 0; i < keys1.size; i++)
           script_gen_dumpprintln(file, "\tanim_precach_" + keys1[i] + "();"); script_gen_dumpprintln(file, "\tmaps\\\_load::main( 1, " + level.bCSVgened + ", 1 );"); script_gen_dumpprintln(file, "}"); script_gen_dumpprintln(file, "");
       if(isDefined(level.sg_precacheanims))
         keys1 = getarraykeys(level.sg_precacheanims);
       if(isDefined(keys1))
-        for (i = 0; i < keys1.size; i++) {
+        for(i = 0; i < keys1.size; i++) {
           script_gen_dumpprintln(file, "#using_animtree( \"" + keys1[i] + "\" );");
 
           script_gen_dumpprintln(file, "anim_precach_" + keys1[i] + "()");
@@ -357,7 +357,7 @@ script_gen_dump() {
           script_gen_dumpprintln(file, "\tlevel.sg_animtree[ \"" + keys1[i] + "\" ] = #animtree;");
           keys2 = getarraykeys(level.sg_precacheanims[keys1[i]]);
           if(isDefined(keys2))
-            for (j = 0; j < keys2.size; j++) {
+            for(j = 0; j < keys2.size; j++) {
               script_gen_dumpprintln(file, "\tlevel.sg_anim[ \"" + keys2[j] + "\" ] = %" + keys2[j] + ";");
             }
           script_gen_dumpprintln(file, "}");
@@ -371,7 +371,7 @@ script_gen_dump() {
         csvfile = openfile(csvfilename, "write");
       else
         csvfile = 0; assertex(csvfile != -1, "File not writeable( check it and and restart the map ): " + csvfilename); signatures = getarraykeys(level.script_gen_dump);
-      for (i = 0; i < signatures.size; i++)
+      for(i = 0; i < signatures.size; i++)
         script_gen_csvdumpprintln(csvfile, signatures[i]);
       if(level.bCSVgened)
         csvfilesaved = closefile(csvfile);

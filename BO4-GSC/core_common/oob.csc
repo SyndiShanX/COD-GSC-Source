@@ -8,7 +8,6 @@
 #include scripts\core_common\filter_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace oob;
 
 autoexec __init__system__() {
@@ -76,7 +75,7 @@ onoutofboundschange(localclientnum, oldval, newval, bnewent, binitialsnap, field
   }
 
   self callback::entity_callback(#"oob", localclientnum, {
-    #old_val: oldval, 
+    #old_val: oldval,
     #new_val: newval
   });
 
@@ -86,7 +85,7 @@ onoutofboundschange(localclientnum, oldval, newval, bnewent, binitialsnap, field
       filter::enable_filter_oob(localclientnum, 0);
       localplayer.oob_effect_enabled = 1;
 
-      if(util::get_game_type() === #"zstandard") {
+      if(util::get_game_type() === # "zstandard") {
         level.oob_sound_ent[localclientnum] playLoopSound(#"hash_6da7ae12f538ef5e", 0.5);
       } else {
         level.oob_sound_ent[localclientnum] playLoopSound(#"uin_out_of_bounds_loop", 0.5);

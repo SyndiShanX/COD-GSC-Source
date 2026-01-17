@@ -41,17 +41,17 @@ main() {
   else
     maps\_utility::default_start(::look_training);
 
-  maps\_utility::add_start("inside", ::inside_start, & "STARTS_INSIDE");
-  maps\_utility::add_start("shoot", ::rifle_start, & "STARTS_SHOOT");
-  maps\_utility::add_start("timed", ::rifle_timed_start, & "STARTS_TIMED");
-  maps\_utility::add_start("sidearm", ::sidearm_start, & "STARTS_SIDEARM");
-  maps\_utility::add_start("frag", ::frag_start, & "STARTS_FRAG");
-  maps\_utility::add_start("launcher", ::launcher_start, & "STARTS_LAUNCHER");
-  maps\_utility::add_start("explosives", ::explosives_start, & "STARTS_C4");
-  maps\_utility::add_start("course", ::obstacle_start, & "STARTS_OBSTACLE");
-  maps\_utility::add_start("ship", ::reveal_start, & "STARTS_SHIP");
-  maps\_utility::add_start("mp5", ::cargoship_start, & "STARTS_MP5");
-  maps\_utility::add_start("debrief", ::debrief_start, & "STARTS_DEBRIEF");
+  maps\_utility::add_start("inside", ::inside_start, &"STARTS_INSIDE");
+  maps\_utility::add_start("shoot", ::rifle_start, &"STARTS_SHOOT");
+  maps\_utility::add_start("timed", ::rifle_timed_start, &"STARTS_TIMED");
+  maps\_utility::add_start("sidearm", ::sidearm_start, &"STARTS_SIDEARM");
+  maps\_utility::add_start("frag", ::frag_start, &"STARTS_FRAG");
+  maps\_utility::add_start("launcher", ::launcher_start, &"STARTS_LAUNCHER");
+  maps\_utility::add_start("explosives", ::explosives_start, &"STARTS_C4");
+  maps\_utility::add_start("course", ::obstacle_start, &"STARTS_OBSTACLE");
+  maps\_utility::add_start("ship", ::reveal_start, &"STARTS_SHIP");
+  maps\_utility::add_start("mp5", ::cargoship_start, &"STARTS_MP5");
+  maps\_utility::add_start("debrief", ::debrief_start, &"STARTS_DEBRIEF");
   precacheshader("objective");
   precacheshader("hud_icon_c4");
   precacheshader("hud_dpad");
@@ -329,36 +329,36 @@ main() {
   common_scripts\utility::flag_init("spawn_sidearms");
   common_scripts\utility::flag_init("spawn_frags");
   common_scripts\utility::flag_init("spawn_launcher");
-  var_0 = getentarray("pickup_flash", "targetname");
-  var_1 = getentarray("frag_ammoitem", "targetname");
-  var_2 = getentarray("launcher_ammoitem", "targetname");
+  var_0 = getEntArray("pickup_flash", "targetname");
+  var_1 = getEntArray("frag_ammoitem", "targetname");
+  var_2 = getEntArray("launcher_ammoitem", "targetname");
 
   foreach(var_4 in var_0)
   var_4 thread maps\killhouse_code::ammorespawnthink(undefined, "flash_grenade", "got_flashes");
 
-  var_6 = getentarray("pickup_mp5", "targetname");
+  var_6 = getEntArray("pickup_mp5", "targetname");
 
   foreach(var_8 in var_6)
   var_8 thread maps\killhouse_code::ammorespawnthink(undefined, "mp5");
 
-  var_6 = getentarray("pickup_rifle", "targetname");
+  var_6 = getEntArray("pickup_rifle", "targetname");
 
   foreach(var_8 in var_6)
   var_8 thread maps\killhouse_code::ammorespawnthink(undefined, "g36c");
 
-  var_6 = getentarray("pickup_pistol", "targetname");
+  var_6 = getEntArray("pickup_pistol", "targetname");
 
   foreach(var_8 in var_6)
   var_8 thread maps\killhouse_code::ammorespawnthink(undefined, "usp");
 
-  common_scripts\utility::array_thread(getentarray("pickup_sidearm", "targetname"), maps\killhouse_code::ammorespawnthink, "spawn_sidearms", "usp");
+  common_scripts\utility::array_thread(getEntArray("pickup_sidearm", "targetname"), maps\killhouse_code::ammorespawnthink, "spawn_sidearms", "usp");
   common_scripts\utility::array_thread(var_1, maps\killhouse_code::ammorespawnthink, "spawn_frags", "fraggrenade", "got_frags");
   common_scripts\utility::array_thread(var_2, maps\killhouse_code::ammorespawnthink, "spawn_launcher", "alt_m16_grenadier");
   level.gunprimary = "g36c";
   level.gunprimaryclipammo = 30;
   level.gunsidearm = "usp";
   maps\killhouse_code::silently_lowerplywoodwalls();
-  level.plywoodextensioncoll = getentarray("PlywoodExtensionColl", "targetname");
+  level.plywoodextensioncoll = getEntArray("PlywoodExtensionColl", "targetname");
 
   foreach(var_15 in level.plywoodextensioncoll)
   var_15 notsolid();
@@ -381,9 +381,9 @@ main() {
   var_17 maps\_utility::destructible_disable_explosion();
   var_18 = getent("c4_pickup", "targetname");
   var_18 common_scripts\utility::trigger_off();
-  var_19 = getentarray(var_18.target, "targetname");
+  var_19 = getEntArray(var_18.target, "targetname");
 
-  for (var_20 = 0; var_20 < var_19.size; var_20++)
+  for(var_20 = 0; var_20 < var_19.size; var_20++)
     var_19[var_20] hide();
 
   common_scripts\utility::flag_init("start_deck");
@@ -394,11 +394,11 @@ main() {
   foreach(var_23 in var_21)
   var_23 maps\_vehicle::vehicle_lights_on("running");
 
-  common_scripts\utility::array_thread(getentarray("level_scripted_unloadnode", "script_noteworthy"), maps\killhouse_code::level_scripted_unloadnode);
+  common_scripts\utility::array_thread(getEntArray("level_scripted_unloadnode", "script_noteworthy"), maps\killhouse_code::level_scripted_unloadnode);
   thread maps\killhouse_code::setup_player_action_notifies();
-  var_25 = getentarray("launcher_aim_assist", "script_noteworthy");
+  var_25 = getEntArray("launcher_aim_assist", "script_noteworthy");
 
-  for (var_20 = 0; var_20 < var_25.size; var_20++) {
+  for(var_20 = 0; var_20 < var_25.size; var_20++) {
     var_25[var_20] hide();
     var_25[var_20] notsolid();
   }
@@ -421,12 +421,12 @@ main() {
   ai_spectator_setup();
   level.ai_in_training_left = getent("ai_training", "targetname");
 
-  if(isdefined(level.ai_in_training_left))
+  if(isDefined(level.ai_in_training_left))
     level.ai_in_training_left thread ai_rifle_training_loop(level.aim_targets_left);
 
   level.ai_in_training_right = getent("ai_training_right", "targetname");
 
-  if(isdefined(level.ai_in_training_right))
+  if(isDefined(level.ai_in_training_right))
     level.ai_in_training_right thread ai_rifle_training_loop(level.aim_targets_right);
 
   level.gaz_talk_anim_chance = 0;
@@ -470,7 +470,7 @@ levelstart_lighteffects() {
 shootingrange_vo_togetback() {
   var_0 = 3;
 
-  for (;;) {
+  for(;;) {
     if(common_scripts\utility::flag("spawn_sidearms")) {
       return;
     }
@@ -492,10 +492,10 @@ shootingrange_vo_togetback() {
 }
 
 shootingrange_1stlanelightoff() {
-  var_0 = getentarray("Light_Activation_01", "targetname");
-  var_1 = getentarray("Light_Activation_02", "targetname");
-  var_2 = getentarray("Light_Activation_03", "targetname");
-  var_3 = getentarray("Light_Activation_04", "targetname");
+  var_0 = getEntArray("Light_Activation_01", "targetname");
+  var_1 = getEntArray("Light_Activation_02", "targetname");
+  var_2 = getEntArray("Light_Activation_03", "targetname");
+  var_3 = getEntArray("Light_Activation_04", "targetname");
 
   foreach(var_5 in var_0)
   var_5 setlightintensity(0);
@@ -511,13 +511,13 @@ shootingrange_1stlanelightoff() {
 }
 
 shootingrange_1stlanelighton() {
-  var_0 = getentarray("Light_Activation_01", "targetname");
-  var_1 = getentarray("Light_Activation_02", "targetname");
-  var_2 = getentarray("Light_Activation_03", "targetname");
-  var_3 = getentarray("Light_Activation_04", "targetname");
+  var_0 = getEntArray("Light_Activation_01", "targetname");
+  var_1 = getEntArray("Light_Activation_02", "targetname");
+  var_2 = getEntArray("Light_Activation_03", "targetname");
+  var_3 = getEntArray("Light_Activation_04", "targetname");
 
   foreach(var_5 in var_0) {
-    if(isdefined(var_5.script_noteworthy)) {
+    if(isDefined(var_5.script_noteworthy)) {
       if(var_5.script_noteworthy == "Small_Target_Up") {
         var_5 setlightintensity(100);
         var_5 thread maps\_utility::play_sound_on_entity("scn_spotlight_open");
@@ -552,7 +552,7 @@ shootingrange_1stlanelighton() {
   wait 0.5;
 
   foreach(var_5 in var_1) {
-    if(isdefined(var_5.script_noteworthy)) {
+    if(isDefined(var_5.script_noteworthy)) {
       if(var_5.script_noteworthy == "Target_Dummy_01") {
         var_5 setlightintensity(100);
         var_5 thread maps\_utility::play_sound_on_entity("scn_spotlight_open");
@@ -577,7 +577,7 @@ shootingrange_1stlanelighton() {
   wait 0.5;
 
   foreach(var_5 in var_2) {
-    if(isdefined(var_5.script_noteworthy)) {
+    if(isDefined(var_5.script_noteworthy)) {
       if(var_5.script_noteworthy == "Target_Dummy_02") {
         var_5 setlightintensity(70);
         var_5 thread maps\_utility::play_sound_on_entity("scn_spotlight_open");
@@ -602,7 +602,7 @@ shootingrange_1stlanelighton() {
   wait 0.5;
 
   foreach(var_5 in var_3) {
-    if(isdefined(var_5.script_noteworthy)) {
+    if(isDefined(var_5.script_noteworthy)) {
       if(var_5.script_noteworthy == "Target_Dummy_03") {
         var_5 setlightintensity(35);
         var_5 thread maps\_utility::play_sound_on_entity("scn_spotlight_open");
@@ -640,14 +640,14 @@ fng_shadowlightbyzone() {
   var_11 = getent("ShipDeckLight_03", "targetname");
   var_12 = getent("ShipDeckLight_04", "targetname");
 
-  for (;;) {
+  for(;;) {
     if(common_scripts\utility::flag("in_firerange_lighting_zone1")) {
       var_0 setlightshadowstate("force_on");
       var_1 setlightshadowstate("force_on");
       var_2 setlightshadowstate("force_off");
       var_3 setlightshadowstate("force_off");
 
-      while (common_scripts\utility::flag("in_firerange_lighting_zone1"))
+      while(common_scripts\utility::flag("in_firerange_lighting_zone1"))
         wait 0.5;
     } else if(common_scripts\utility::flag("in_firerange_lighting_zone2")) {
       var_0 setlightshadowstate("force_on");
@@ -655,7 +655,7 @@ fng_shadowlightbyzone() {
       var_2 setlightshadowstate("normal");
       var_3 setlightshadowstate("normal");
 
-      while (common_scripts\utility::flag("in_firerange_lighting_zone2"))
+      while(common_scripts\utility::flag("in_firerange_lighting_zone2"))
         wait 0.5;
     } else if(common_scripts\utility::flag("in_hangar3_lighting_zoneTower")) {
       var_4 setlightshadowstate("force_on");
@@ -668,7 +668,7 @@ fng_shadowlightbyzone() {
       var_11 setlightshadowstate("force_off");
       var_12 setlightshadowstate("force_off");
 
-      while (common_scripts\utility::flag("in_hangar3_lighting_zoneTower"))
+      while(common_scripts\utility::flag("in_hangar3_lighting_zoneTower"))
         wait 0.5;
     } else if(common_scripts\utility::flag("in_hangar3_lighting_zoneHangarFloor")) {
       var_4 setlightshadowstate("normal");
@@ -681,7 +681,7 @@ fng_shadowlightbyzone() {
       var_11 setlightshadowstate("normal");
       var_12 setlightshadowstate("normal");
 
-      while (common_scripts\utility::flag("in_hangar3_lighting_zoneHangarFloor"))
+      while(common_scripts\utility::flag("in_hangar3_lighting_zoneHangarFloor"))
         wait 0.1;
     } else if(common_scripts\utility::flag("in_hangar3_lighting_zoneShipTopDeck")) {
       var_4 setlightshadowstate("force_off");
@@ -694,7 +694,7 @@ fng_shadowlightbyzone() {
       var_11 setlightshadowstate("force_off");
       var_12 setlightshadowstate("force_off");
 
-      while (common_scripts\utility::flag("in_hangar3_lighting_zoneShipTopDeck"))
+      while(common_scripts\utility::flag("in_hangar3_lighting_zoneShipTopDeck"))
         wait 0.5;
     } else if(common_scripts\utility::flag("in_hangar3_lighting_zoneShipInterior1")) {
       var_4 setlightshadowstate("force_off");
@@ -707,7 +707,7 @@ fng_shadowlightbyzone() {
       var_11 setlightshadowstate("force_on");
       var_12 setlightshadowstate("normal");
 
-      while (common_scripts\utility::flag("in_hangar3_lighting_zoneShipInterior1"))
+      while(common_scripts\utility::flag("in_hangar3_lighting_zoneShipInterior1"))
         wait 0.5;
     } else if(common_scripts\utility::flag("in_hangar3_lighting_zoneShipInterior2")) {
       var_4 setlightshadowstate("normal");
@@ -720,7 +720,7 @@ fng_shadowlightbyzone() {
       var_11 setlightshadowstate("force_on");
       var_12 setlightshadowstate("force_on");
 
-      while (common_scripts\utility::flag("in_hangar3_lighting_zoneShipInterior2"))
+      while(common_scripts\utility::flag("in_hangar3_lighting_zoneShipInterior2"))
         wait 0.5;
     } else {
       var_0 setlightshadowstate("normal");
@@ -737,7 +737,7 @@ fng_shadowlightbyzone() {
       var_11 setlightshadowstate("normal");
       var_12 setlightshadowstate("normal");
 
-      while (!common_scripts\utility::flag("in_firerange_lighting_zone1") && !common_scripts\utility::flag("in_firerange_lighting_zone2") && !common_scripts\utility::flag("in_hangar3_lighting_zoneTower") && !common_scripts\utility::flag("in_hangar3_lighting_zoneHangarFloor") && !common_scripts\utility::flag("in_hangar3_lighting_zoneShipTopDeck") && !common_scripts\utility::flag("in_hangar3_lighting_zoneShipInterior1") && !common_scripts\utility::flag("in_hangar3_lighting_zoneShipInterior2"))
+      while(!common_scripts\utility::flag("in_firerange_lighting_zone1") && !common_scripts\utility::flag("in_firerange_lighting_zone2") && !common_scripts\utility::flag("in_hangar3_lighting_zoneTower") && !common_scripts\utility::flag("in_hangar3_lighting_zoneHangarFloor") && !common_scripts\utility::flag("in_hangar3_lighting_zoneShipTopDeck") && !common_scripts\utility::flag("in_hangar3_lighting_zoneShipInterior1") && !common_scripts\utility::flag("in_hangar3_lighting_zoneShipInterior2"))
         wait 0.5;
     }
 
@@ -746,7 +746,7 @@ fng_shadowlightbyzone() {
 }
 
 anim_chance_debug() {
-  for (;;) {
+  for(;;) {
     iprintlnbold(common_scripts\utility::tostring(level.gaz_talk_anim_chance));
     wait 0.05;
   }
@@ -790,7 +790,7 @@ humvee_walkers() {
 humvee_walker_think() {
   var_0 = getent("walker_inside_trigger", "targetname");
 
-  for (;;) {
+  for(;;) {
     wait 0.1;
 
     if(self istouching(var_0)) {
@@ -805,7 +805,7 @@ look_training() {
   common_scripts\utility::flag_set("aa_look_training");
   thread maps\killhouse_code::killhouse_hint(&"KILLHOUSE_LOOK_UP", 9999);
 
-  for (;;) {
+  for(;;) {
     var_0 = level.player getplayerangles();
 
     if(var_0[0] < -40) {
@@ -819,7 +819,7 @@ look_training() {
   wait 0.5;
   thread maps\killhouse_code::killhouse_hint(&"KILLHOUSE_LOOK_DOWN", 9999);
 
-  for (;;) {
+  for(;;) {
     var_0 = level.player getplayerangles();
 
     if(var_0[0] > 0) {
@@ -833,9 +833,9 @@ look_training() {
   setdvar("ui_start_inverted", 0);
 
   if(level.console) {
-    if(isdefined(getdvar("input_invertPitch")) && getdvar("input_invertPitch") == "1")
+    if(isDefined(getdvar("input_invertPitch")) && getdvar("input_invertPitch") == "1")
       setdvar("ui_start_inverted", 1);
-  } else if(isdefined(getdvar("ui_mousepitch")) && getdvar("ui_mousepitch") == "1")
+  } else if(isDefined(getdvar("ui_mousepitch")) && getdvar("ui_mousepitch") == "1")
     setdvar("ui_start_inverted", 1);
 
   wait 0.1;
@@ -849,7 +849,7 @@ look_training() {
   if(var_2 == "try_invert") {
     thread maps\killhouse_code::killhouse_hint(&"KILLHOUSE_LOOK_UP", 9999);
 
-    for (;;) {
+    for(;;) {
       var_0 = level.player getplayerangles();
 
       if(var_0[0] < -40) {
@@ -863,7 +863,7 @@ look_training() {
     wait 0.5;
     thread maps\killhouse_code::killhouse_hint(&"KILLHOUSE_LOOK_DOWN", 9999);
 
-    for (;;) {
+    for(;;) {
       var_0 = level.player getplayerangles();
 
       if(var_0[0] > 0) {
@@ -891,7 +891,7 @@ rappel_heli_loop_system() {
   var_0 = getent("rappel_heli_start_trigger", "targetname");
   var_0 waittill("trigger");
 
-  for (;;) {
+  for(;;) {
     var_1 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("rappel_heli_spawner_a");
     var_1 maps\_vehicle::vehicle_lights_on("running");
     wait 1;
@@ -907,10 +907,10 @@ heli_runner_despawn_system() {
   var_0 = getent("runners_start_trigger", "targetname");
   var_1 = [];
 
-  for (;;) {
+  for(;;) {
     var_0 waittill("trigger");
     common_scripts\utility::flag_clear("waiting_for_rappel_runners");
-    var_1 = getentarray("heli_runner", "script_noteworthy");
+    var_1 = getEntArray("heli_runner", "script_noteworthy");
 
     foreach(var_3 in var_1) {
       if(isalive(var_3))
@@ -922,7 +922,7 @@ heli_runner_despawn_system() {
 heli_runner_think() {
   var_0 = getent("runner_despawner", "targetname");
 
-  for (;;) {
+  for(;;) {
     wait 2;
 
     if(self istouching(var_0)) {
@@ -936,7 +936,7 @@ navigationtraining() {
   common_scripts\utility::flag_set("aa_obj_training");
   level notify("navigationTraining_start");
   level.waters thread maps\killhouse_code::execdialog("illletyouin");
-  maps\killhouse_code::registerobjective("obj_enter_range", & "KILLHOUSE_USE_YOUR_OBJECTIVE_INDICATOR", getent("rifle_range_obj", "targetname"));
+  maps\killhouse_code::registerobjective("obj_enter_range", &"KILLHOUSE_USE_YOUR_OBJECTIVE_INDICATOR", getent("rifle_range_obj", "targetname"));
   maps\killhouse_code::setobjectivestate("obj_enter_range", "current");
   wait 3;
   thread maps\killhouse_code::objective_hints("at_rifle_range");
@@ -957,7 +957,7 @@ inside_start() {
   wait 2.5;
   thread maps\_introscreen::introscreen_generic_fade_in("white", 0.1, 1.5);
   common_scripts\utility::flag_set("inside_firing_range");
-  savegame("levelstart", & "AUTOSAVE_LEVELSTART", "whatever", 1);
+  savegame("levelstart", &"AUTOSAVE_LEVELSTART", "whatever", 1);
   thread door_to_rifle_handler();
 }
 
@@ -998,7 +998,7 @@ rifletraining() {
   thread maps\killhouse_code::delay_objective_after_intro();
   thread maps\killhouse_code::move_gaz_once_player_past();
 
-  while (!level.player getweaponammostock(level.gunprimary))
+  while(!level.player getweaponammostock(level.gunprimary))
     wait 0.05;
 
   common_scripts\utility::flag_set("rifle_picked_up");
@@ -1007,12 +1007,12 @@ rifletraining() {
   close_firing_range_door();
   maps\_utility::autosave_by_name("rifle_training");
   maps\killhouse_code::setobjectivestate("obj_rifle", "current");
-  maps\killhouse_code::setobjectivestring("obj_rifle", & "KILLHOUSE_ENTER_STATION_NUMBER");
+  maps\killhouse_code::setobjectivestring("obj_rifle", &"KILLHOUSE_ENTER_STATION_NUMBER");
   maps\killhouse_code::setobjectivelocation("obj_rifle", getent("obj_rifle_stall", "targetname"));
   thread maps\killhouse_code::gaz_animation("killhouse_gaz_idleA", 1.5);
   level.waters maps\killhouse_code::execdialog("youknowdrill");
 
-  while (!common_scripts\utility::flag("player_at_rifle_stall"))
+  while(!common_scripts\utility::flag("player_at_rifle_stall"))
     wait 0.05;
 
   if(level.short_training) {
@@ -1040,13 +1040,13 @@ player_look_problem_checker(var_0) {
   var_2 = 0;
   var_3 = 9;
   var_4 = -1 * var_3;
-  var_5 = level.player geteye();
+  var_5 = level.player getEye();
   var_6 = anglestoup(level.player getplayerangles());
   var_7 = var_0.origin - var_5;
   var_8 = vectordot(var_7, var_6);
   var_9 = var_8 > 0;
 
-  while (var_9 && var_2 > var_4 || !var_9 && var_2 < var_3) {
+  while(var_9 && var_2 > var_4 || !var_9 && var_2 < var_3) {
     var_10 = level.player getplayerangles()[0];
     var_2 = var_10 - var_1;
 
@@ -1076,7 +1076,7 @@ new_look_training_handler() {
     level.waters maps\killhouse_code::execdialog("rifledownrange");
   }
 
-  while (!level.player maps\_utility::isads())
+  while(!level.player maps\_utility::isads())
     wait 0.05;
 
   if(level.xenon)
@@ -1121,7 +1121,7 @@ shoot_ads_handler() {
   wait 0.1;
   maps\killhouse_code::raisetargetdummies("rifle", undefined, undefined);
   maps\killhouse_code::setobjectivestate("obj_rifle", "current");
-  thread maps\killhouse_code::setobjectivestring("obj_rifle", & "KILLHOUSE_SHOOT_EACH_TARGET_WHILE");
+  thread maps\killhouse_code::setobjectivestring("obj_rifle", &"KILLHOUSE_SHOOT_EACH_TARGET_WHILE");
   thread maps\killhouse_code::flag_when_lowered("ADS_targets_shot");
   common_scripts\utility::flag_wait("ADS_targets_shot");
   common_scripts\utility::flag_wait("ADS_shoot_dialog");
@@ -1135,14 +1135,14 @@ rifle_hip_shooting() {
   level.waters maps\killhouse_code::execdialog("firingfromhip");
   gaz_maybe_play_talk_anim();
   maps\killhouse_code::setobjectivestate_nomessage("obj_rifle", "current");
-  maps\killhouse_code::setobjectivestring("obj_rifle", & "KILLHOUSE_SHOOT_EACH_TARGET_WHILE1");
+  maps\killhouse_code::setobjectivestring("obj_rifle", &"KILLHOUSE_SHOOT_EACH_TARGET_WHILE1");
   wait 1;
   var_0 = 1;
 
   if(level.player maps\_utility::isads())
     thread maps\killhouse_code::keyhint("stop_ads", undefined, var_0);
 
-  while (level.player maps\_utility::isads())
+  while(level.player maps\_utility::isads())
     wait 0.05;
 
   level.waters setlookatentity(level.player, 1);
@@ -1155,7 +1155,7 @@ rifle_hip_shooting() {
   else
     maps\killhouse_code::keyhint("pc_hip_attack");
 
-  while (level.targets_hit == 0)
+  while(level.targets_hit == 0)
     wait 0.1;
 
   var_0 = 1;
@@ -1163,7 +1163,7 @@ rifle_hip_shooting() {
   common_scripts\utility::flag_wait("hip_targets_shot");
   level.hip_fire_required = 0;
   maps\killhouse_code::setobjectivestate("obj_rifle", "current");
-  maps\killhouse_code::setobjectivestring("obj_rifle", & "KILLHOUSE_SHOOT_EACH_TARGET_WHILE");
+  maps\killhouse_code::setobjectivestring("obj_rifle", &"KILLHOUSE_SHOOT_EACH_TARGET_WHILE");
   thread new_look_training_handler();
 }
 
@@ -1195,12 +1195,12 @@ rifle_penetration_shooting() {
   wait 0.5;
   maps\killhouse_code::raisetargetdummies_noassist("rifle", undefined, undefined);
   maps\killhouse_code::setobjectivestate_nomessage("obj_rifle", "current");
-  maps\killhouse_code::setobjectivestring("obj_rifle", & "KILLHOUSE_SHOOT_EACH_TARGET_THROUGH");
+  maps\killhouse_code::setobjectivestring("obj_rifle", &"KILLHOUSE_SHOOT_EACH_TARGET_THROUGH");
   wait 0.2;
   var_3 = maps\killhouse_code::gettargetdummies("rifle");
   var_4 = var_3.size;
 
-  while (level.targets_hit < var_4 - 1)
+  while(level.targets_hit < var_4 - 1)
     wait 0.1;
 
   wait 0.5;
@@ -1234,7 +1234,7 @@ rifle_timed_shooting() {
   level.waters maps\killhouse_code::execdialog("targetspop");
   gaz_maybe_play_talk_anim();
   level.waters maps\killhouse_code::execdialog("hitall");
-  maps\killhouse_code::registerobjective("obj_timed_rifle", & "KILLHOUSE_SHOOT_EACH_TARGET_AS", getent("obj_rifle_stall", "targetname"));
+  maps\killhouse_code::registerobjective("obj_timed_rifle", &"KILLHOUSE_SHOOT_EACH_TARGET_AS", getent("obj_rifle_stall", "targetname"));
   maps\killhouse_code::setobjectivestate("obj_timed_rifle", "current");
 
   if(maps\killhouse_code::auto_aim()) {
@@ -1260,7 +1260,7 @@ rifle_timed_shooting() {
   var_2[3] = "walkinpark";
   var_3 = 0;
 
-  for (;;) {
+  for(;;) {
     maps\killhouse_code::lowertargetdummies("rifle");
 
     if(maps\killhouse_code::auto_aim() && var_3 != 0) {
@@ -1298,7 +1298,7 @@ rifle_timed_shooting() {
     if(level.player getweaponammoclip(level.gunprimary) < level.gunprimaryclipammo) {
       thread maps\killhouse_code::keyhint("reload");
 
-      while (level.player getweaponammoclip(level.gunprimary) < level.gunprimaryclipammo)
+      while(level.player getweaponammoclip(level.gunprimary) < level.gunprimaryclipammo)
         wait 0.1;
 
       maps\killhouse_code::clear_hints();
@@ -1321,11 +1321,11 @@ rifle_timed_shooting() {
 
 timedtargets() {
   level endon("times_up");
-  var_0 = getentarray("rifle_target_dummy", "script_noteworthy");
+  var_0 = getEntArray("rifle_target_dummy", "script_noteworthy");
   var_1 = -1;
 
-  for (;;) {
-    for (;;) {
+  for(;;) {
+    for(;;) {
       var_2 = randomint(var_0.size);
 
       if(var_2 != var_1) {
@@ -1362,13 +1362,13 @@ sidearm_training() {
   common_scripts\utility::flag_set("spawn_sidearms");
   thread maps\killhouse_code::gaz_animation("killhouse_gaz_point_side");
   level.waters maps\killhouse_code::execdialog("getasidearm");
-  maps\killhouse_code::registerobjective("obj_sidearm", & "KILLHOUSE_GET_A_PISTOL_FROM_THE", getent("obj_rifle_ammo", "targetname"));
+  maps\killhouse_code::registerobjective("obj_sidearm", &"KILLHOUSE_GET_A_PISTOL_FROM_THE", getent("obj_rifle_ammo", "targetname"));
   maps\killhouse_code::setobjectivestate("obj_sidearm", "current");
 
-  while (!level.player hasweapon("usp"))
+  while(!level.player hasweapon("usp"))
     wait 0.05;
 
-  maps\killhouse_code::setobjectivestring("obj_sidearm", & "KILLHOUSE_SWITCH_TO_YOUR_RIFLE");
+  maps\killhouse_code::setobjectivestring("obj_sidearm", &"KILLHOUSE_SWITCH_TO_YOUR_RIFLE");
   maps\killhouse_code::setobjectivestate("obj_sidearm", "current");
   level.waters maps\killhouse_code::execdialog("switchtorifle");
   gaz_maybe_play_talk_anim();
@@ -1376,7 +1376,7 @@ sidearm_training() {
   if(level.player getcurrentweapon() != level.gunprimary)
     thread maps\killhouse_code::keyhint("primary");
 
-  while (level.player getcurrentweapon() != level.gunprimary)
+  while(level.player getcurrentweapon() != level.gunprimary)
     wait 0.05;
 
   maps\killhouse_code::clear_hints();
@@ -1385,7 +1385,7 @@ sidearm_training() {
   if(level.player getcurrentweapon() != level.gunsidearm)
     thread maps\killhouse_code::keyhint("sidearm");
 
-  while (level.player getcurrentweapon() != level.gunsidearm)
+  while(level.player getcurrentweapon() != level.gunsidearm)
     wait 0.05;
 
   maps\killhouse_code::clear_hints();
@@ -1401,7 +1401,7 @@ sidearm_training() {
 
 melee_training() {
   level notify("melee_training");
-  maps\killhouse_code::registerobjective("obj_melee", & "KILLHOUSE_MELEE_THE_WATERMELON", getent("scr_watermelon", "targetname"));
+  maps\killhouse_code::registerobjective("obj_melee", &"KILLHOUSE_MELEE_THE_WATERMELON", getent("scr_watermelon", "targetname"));
   maps\killhouse_code::setobjectivestate("obj_melee", "current");
 
   if(!common_scripts\utility::flag("melee_complete"))
@@ -1423,7 +1423,7 @@ melee_training() {
   if(!common_scripts\utility::flag("melee_complete"))
     common_scripts\utility::flag_wait("near_melee");
 
-  while (!common_scripts\utility::flag("melee_complete"))
+  while(!common_scripts\utility::flag("melee_complete"))
     maps\killhouse_code::keyhint("melee");
 
   common_scripts\utility::flag_wait("melee_complete");
@@ -1451,16 +1451,16 @@ melee_training() {
     level.waters setlookatentity(level.player, 1);
     thread frag_training();
     thread obstacle_training();
-    var_1 = getentarray("m203_ammo_obj", "script_noteworthy");
+    var_1 = getEntArray("m203_ammo_obj", "script_noteworthy");
 
     foreach(var_3 in var_1)
     var_3 hide();
 
-    maps\killhouse_code::registerobjective("obj_demolitions", & "KILLHOUSE_DEMOLITIONS_TRAINING", getent("obj_frag_ammo", "targetname"));
+    maps\killhouse_code::registerobjective("obj_demolitions", &"KILLHOUSE_DEMOLITIONS_TRAINING", getent("obj_frag_ammo", "targetname"));
     maps\killhouse_code::setobjectivestate("obj_demolitions", "active");
-    level thread optional_training_objective_manager("in_explosives_area", "obj_demolitions_subobj", getent("obj_frag_ammo", "targetname"), & "KILLHOUSE_PICK_UP_THE_FRAG_GRENADES");
+    level thread optional_training_objective_manager("in_explosives_area", "obj_demolitions_subobj", getent("obj_frag_ammo", "targetname"), &"KILLHOUSE_PICK_UP_THE_FRAG_GRENADES");
     maps\killhouse_code::setassubobjective("obj_demolitions_subobj", 2);
-    maps\killhouse_code::registerobjective("obj_obstacle", & "KILLHOUSE_RUN_THE_OBSTACLE_COURSE", getent("obstacleTraining_objective", "targetname"));
+    maps\killhouse_code::registerobjective("obj_obstacle", &"KILLHOUSE_RUN_THE_OBSTACLE_COURSE", getent("obstacleTraining_objective", "targetname"));
     maps\killhouse_code::setobjectivestate("obj_obstacle", "active");
   } else {
     level.waters maps\killhouse_code::execdialog("allgoodhere");
@@ -1472,8 +1472,8 @@ infrontofvehiclescheckplayerdist() {
   var_0 = 62500;
   self.playerinfront = 0;
 
-  for (;;) {
-    var_1 = anglestoforward(self.angles);
+  for(;;) {
+    var_1 = anglesToForward(self.angles);
     var_2 = self.origin + var_1 * 250;
 
     if(distance2dsquared(var_2, level.player.origin) < var_0) {
@@ -1502,7 +1502,7 @@ infrontofvehiclescheck() {
 
   common_scripts\utility::array_thread(level.vehicletocheckarray, ::infrontofvehiclescheckplayerdist);
 
-  for (;;) {
+  for(;;) {
     common_scripts\utility::flag_wait("infront_of_vehicle");
 
     foreach(var_1 in level.vehicletocheckarray) {
@@ -1522,7 +1522,7 @@ infrontofvehiclescheck() {
 whileplayerinfrontofvehicles(var_0) {
   wait 1;
 
-  while (common_scripts\utility::flag("infront_of_vehicle")) {
+  while(common_scripts\utility::flag("infront_of_vehicle")) {
     var_0 maps\_vehicle::vehicle_lights_on();
     wait(randomfloatrange(0.4, 0.6));
     var_0 maps\_vehicle::vehicle_lights_off();
@@ -1535,7 +1535,7 @@ whileplayerinfrontofvehicles(var_0) {
 }
 
 waittodeletegaz() {
-  for (;;) {
+  for(;;) {
     if(common_scripts\utility::flag("in_NoReminder_Compass")) {
       level.waters maps\_utility::stop_magic_bullet_shield();
       level.waters delete();
@@ -1556,20 +1556,20 @@ spawnwhendooropen() {
   var_0 delete();
   var_1 delete();
   thread outside_blur();
-  common_scripts\utility::array_thread(getentarray("ai_ambient", "script_noteworthy"), maps\_utility::add_spawn_function, ::ai_ambient_noprop_think);
+  common_scripts\utility::array_thread(getEntArray("ai_ambient", "script_noteworthy"), maps\_utility::add_spawn_function, ::ai_ambient_noprop_think);
   maps\_utility::array_spawn_function_noteworthy("patrol1", ::ai_patrol_think, 0, 1);
   maps\_utility::array_spawn_function_noteworthy("jog1", ::ai_patrol_think, 1, 0);
   get_joggers_start_pos();
   thread maps\killhouse_aud::aud_disable_bm21_idle();
   level.patroldudes = [];
-  var_2 = getentarray("friendlies_ambient", "targetname");
-  var_2 = common_scripts\utility::array_combine(var_2, getentarray("friendlies_ambient_drill", "targetname"));
-  var_2 = common_scripts\utility::array_combine(var_2, getentarray("friendlies_ambient_guard", "targetname"));
+  var_2 = getEntArray("friendlies_ambient", "targetname");
+  var_2 = common_scripts\utility::array_combine(var_2, getEntArray("friendlies_ambient_drill", "targetname"));
+  var_2 = common_scripts\utility::array_combine(var_2, getEntArray("friendlies_ambient_guard", "targetname"));
   var_3 = getent("ExplosiveTutoChecker", "targetname");
   maps\_utility::dronespawn(var_3, 1);
 
   foreach(var_5 in var_2) {
-    if(isdefined(var_5.script_drone)) {
+    if(isDefined(var_5.script_drone)) {
       maps\_utility::dronespawn(var_5, 1);
       continue;
     }
@@ -1600,7 +1600,7 @@ spawnwhendooropen() {
 }
 
 check_if_weapon_allowed() {
-  for (;;) {
+  for(;;) {
     if(common_scripts\utility::flag("in_explosives_area") || common_scripts\utility::flag("in_obstacle_area") || common_scripts\utility::flag("in_lastTraining_area_A") || common_scripts\utility::flag("in_lastTraining_area_B")) {
       if(common_scripts\utility::flag("in_lastTraining_area_A") || common_scripts\utility::flag("in_lastTraining_area_B")) {
         level.player setweaponammoclip("c4", 0);
@@ -1609,7 +1609,7 @@ check_if_weapon_allowed() {
 
       level.player enableweapons();
 
-      while (common_scripts\utility::flag("in_explosives_area") || common_scripts\utility::flag("in_obstacle_area") || common_scripts\utility::flag("in_lastTraining_area_A") || common_scripts\utility::flag("in_lastTraining_area_B"))
+      while(common_scripts\utility::flag("in_explosives_area") || common_scripts\utility::flag("in_obstacle_area") || common_scripts\utility::flag("in_lastTraining_area_A") || common_scripts\utility::flag("in_lastTraining_area_B"))
         wait 1;
 
       wait 0.1;
@@ -1679,7 +1679,7 @@ beforeopenning_firing_range_door() {
   var_1 connectpaths();
   var_2 = getent("rifle_range_doorGlass", "targetname");
   var_2 linkto(var_0);
-  var_0 playsound("h1_metal_door_open");
+  var_0 playSound("h1_metal_door_open");
   var_0 rotateto(var_0.angles + (0, 18, 0), 1, 0.5, 0);
   common_scripts\_exploder::exploder(101);
   wait 1;
@@ -1697,7 +1697,7 @@ open_firing_range_door() {
   level.player allowlean(0);
   wait 0.25;
 
-  for (;;) {
+  for(;;) {
     if(!level.player isleaning()) {
       var_2 = getgroundposition(level.player.origin, 2);
 
@@ -1709,7 +1709,7 @@ open_firing_range_door() {
     waitframe();
   }
 
-  var_0 playsound("scn_killhouse_door_open");
+  var_0 playSound("scn_killhouse_door_open");
   thread bodysense_shootingrangedooropening();
   thread dooropening_lighteffects();
   wait 0.1;
@@ -1745,7 +1745,7 @@ close_firing_range_door() {
     return;
   }
   var_0 = getent("rifle_range_door", "targetname");
-  var_0 playsound("scn_killhouse_door_close");
+  var_0 playSound("scn_killhouse_door_close");
   var_0 rotateto(var_0.angles + (0, -88, 0), 1, 0.5, 0);
   level.firing_range_door_open = 0;
   var_1 = getent("rifle_range_door_coll", "targetname");
@@ -1767,7 +1767,7 @@ melee_run_dialog() {
 
 frag_start() {
   soundscripts\_snd::snd_message("start_frag_start_checkpoint");
-  maps\killhouse_code::registerobjective("obj_price", & "KILLHOUSE_REPORT_TO_CAPTAIN_PRICE", getent("obj_price", "targetname"));
+  maps\killhouse_code::registerobjective("obj_price", &"KILLHOUSE_REPORT_TO_CAPTAIN_PRICE", getent("obj_price", "targetname"));
   maps\killhouse_code::setobjectivestate("obj_price", "current");
   var_0 = getent("frag_start", "targetname");
   level.player setorigin(var_0.origin);
@@ -1787,9 +1787,9 @@ explosive_flag_think() {
   self waittill("flip_to_red");
   var_0 rotateto(var_0.init_angles + (0, 0, 180), 0.25, 0, 0);
   wait 0.25;
-  self playsound("killhouse_target_up_metal");
+  self playSound("killhouse_target_up_metal");
 
-  for (;;) {
+  for(;;) {
     var_1 waittill("trigger");
 
     if(!common_scripts\utility::flag("in_safety_pit")) {
@@ -1797,7 +1797,7 @@ explosive_flag_think() {
     }
     var_0 rotateto(var_0.init_angles + (0, 0, -1), 0.25, 0, 0);
     wait 0.25;
-    self playsound("killhouse_target_up_metal");
+    self playSound("killhouse_target_up_metal");
     break;
   }
 }
@@ -1806,7 +1806,7 @@ explosive_flags_setup() {
   level.explosive_flags = [];
   var_0 = 2;
   var_1 = 7;
-  level.explosive_flags = getentarray("explosive_flag", "targetname");
+  level.explosive_flags = getEntArray("explosive_flag", "targetname");
 
   foreach(var_3 in level.explosive_flags)
   var_3 thread explosive_flag_think();
@@ -1816,7 +1816,7 @@ optional_training_objective_manager(var_0, var_1, var_2, var_3) {
   maps\killhouse_code::registerobjective(var_1, var_3, var_2);
   maps\killhouse_code::setobjectivestate(var_1, "active");
 
-  while (level.objectives[var_1].state != "done") {
+  while(level.objectives[var_1].state != "done") {
     if(common_scripts\utility::flag(var_0) && level.objectives[var_1].state != "current") {
       maps\killhouse_code::setobjectivestate_nomessage("obj_price", "active");
       maps\killhouse_code::clear_hints();
@@ -1859,7 +1859,7 @@ frag_training() {
   if(!level.player getweaponammostock("fraggrenade") && !maps\killhouse_code::in_pit() && common_scripts\utility::flag("in_explosives_area"))
     level.newcastle maps\killhouse_code::nwc_talk_animation("pickupfrag");
 
-  while (level.player getweaponammostock("fraggrenade") < 3)
+  while(level.player getweaponammostock("fraggrenade") < 3)
     wait 0.05;
 
   common_scripts\utility::flag_set("got_frags");
@@ -1868,7 +1868,7 @@ frag_training() {
   thread maps\killhouse_code::frag_trigger_think("frag_target_2", getent("grenade_damage_trigger2", "targetname"));
   thread maps\killhouse_code::frag_trigger_think("frag_target_3", getent("grenade_damage_trigger3", "targetname"));
   maps\killhouse_code::setobjectivelocation("obj_demolitions_subobj", getent("safety_pit", "targetname"));
-  maps\killhouse_code::setobjectivestring("obj_demolitions_subobj", & "KILLHOUSE_ENTER_THE_SAFETY_PIT");
+  maps\killhouse_code::setobjectivestring("obj_demolitions_subobj", &"KILLHOUSE_ENTER_THE_SAFETY_PIT");
   thread maps\killhouse_code::dialog_nag_till_in_pit();
   getent("safety_pit", "targetname") waittill("trigger");
   common_scripts\utility::flag_set("in_pit_with_frags");
@@ -1882,19 +1882,19 @@ frag_training() {
       var_2 notify("flip_to_red");
   }
 
-  maps\killhouse_code::setobjectivestring("obj_demolitions_subobj", & "KILLHOUSE_THROW_A_GRENADE_INTO");
+  maps\killhouse_code::setobjectivestring("obj_demolitions_subobj", &"KILLHOUSE_THROW_A_GRENADE_INTO");
   maps\killhouse_code::setobjectivelocation("obj_demolitions_subobj", getent("safety_pit", "targetname"));
   wait 0.1;
   var_4 = 0;
 
-  for (var_5 = 1; var_5 < 4; var_5++) {
+  for(var_5 = 1; var_5 < 4; var_5++) {
     if(common_scripts\utility::flag("frag_target_" + var_5)) {
       continue;
     }
     var_4++;
   }
 
-  while (var_4) {
+  while(var_4) {
     if(!common_scripts\utility::flag("in_safety_pit")) {
       common_scripts\utility::flag_clear("in_pit_with_frags");
       waitframe();
@@ -1928,11 +1928,7 @@ frag_training() {
       break;
     }
 
-    if(var_6 != var_4) {
-
-    } else {
-
-    }
+    if(var_6 != var_4) {} else {}
 
     var_4 = var_6;
     wait 0.05;
@@ -1952,17 +1948,17 @@ launcher_trigger_think(var_0, var_1, var_2) {
   var_1.light = getent(var_1.target, "targetname");
   var_1.aim_assist enableaimassist();
 
-  if(!isdefined(var_2))
+  if(!isDefined(var_2))
     var_2 = 0;
 
-  for (;;) {
+  for(;;) {
     var_1 waittill("trigger");
 
     if(!common_scripts\utility::flag("in_safety_pit")) {
       continue;
     }
     common_scripts\utility::flag_set(var_0);
-    level.player playsound("killhouse_buzzer");
+    level.player playSound("killhouse_buzzer");
     var_1.aim_assist disableaimassist();
     return var_1;
   }
@@ -1971,7 +1967,7 @@ launcher_trigger_think(var_0, var_1, var_2) {
 gl_too_low_hint() {
   level endon("launcherTraining_end");
 
-  for (;;) {
+  for(;;) {
     self waittill("trigger");
     maps\killhouse_code::clear_hints();
     level.currentkeyhintactionname = "";
@@ -1981,7 +1977,7 @@ gl_too_low_hint() {
 
 launcher_start() {
   soundscripts\_snd::snd_message("start_launcher_start_checkpoint");
-  maps\killhouse_code::registerobjective("obj_price", & "KILLHOUSE_REPORT_TO_CAPTAIN_PRICE", getent("obj_price", "targetname"));
+  maps\killhouse_code::registerobjective("obj_price", &"KILLHOUSE_REPORT_TO_CAPTAIN_PRICE", getent("obj_price", "targetname"));
   maps\killhouse_code::setobjectivestate("obj_price", "current");
   var_0 = getent("frag_start", "targetname");
   level.player setorigin(var_0.origin);
@@ -1998,19 +1994,19 @@ launcher_start() {
 
 launcherammocheck() {
   var_0 = 1;
-  var_1 = getentarray("m203_ammo", "script_noteworthy");
-  var_2 = getentarray("m203_ammo_obj", "script_noteworthy");
+  var_1 = getEntArray("m203_ammo", "script_noteworthy");
+  var_2 = getEntArray("m203_ammo_obj", "script_noteworthy");
 
   foreach(var_4 in var_2)
   var_4 show();
 
-  for (;;) {
+  for(;;) {
     var_6 = level.player getweaponammostock("alt_m16_grenadier") + level.player getweaponammoclip("alt_m16_grenadier");
     var_7 = 4 - var_6;
 
     if(level.player hasweapon("m16_grenadier") && var_7 > 0 && common_scripts\utility::flag("grenadeAmmoFlag")) {
       if(var_0) {
-        for (var_8 = 0; var_8 < var_7; var_8++)
+        for(var_8 = 0; var_8 < var_7; var_8++)
           var_1[var_8] delete();
 
         foreach(var_4 in var_2)
@@ -2041,16 +2037,16 @@ launchertraining() {
     level.newcastle maps\killhouse_code::nwc_talk_animation("pickuplauncher");
 
   maps\_utility::flag_trigger_init("launcher_wall_target", getent("launcher_wall_trigger", "script_noteworthy"));
-  maps\killhouse_code::setobjectivestring("obj_demolitions_subobj", & "KILLHOUSE_PICK_UP_THE_RIFLE_WITH");
+  maps\killhouse_code::setobjectivestring("obj_demolitions_subobj", &"KILLHOUSE_PICK_UP_THE_RIFLE_WITH");
   maps\killhouse_code::setobjectivelocation("obj_demolitions_subobj", getent("obj_frag_ammo", "targetname"));
 
-  while (!level.player hasweapon("m16_grenadier"))
+  while(!level.player hasweapon("m16_grenadier"))
     wait 0.05;
 
   level.player givemaxammo("alt_m16_grenadier");
   refreshhudammocounter();
   thread launcherammocheck();
-  maps\killhouse_code::setobjectivestring("obj_demolitions_subobj", & "KILLHOUSE_RETURN_TO_THE_SAFETY");
+  maps\killhouse_code::setobjectivestring("obj_demolitions_subobj", &"KILLHOUSE_RETURN_TO_THE_SAFETY");
   maps\killhouse_code::setobjectivelocation("obj_demolitions_subobj", getent("safety_pit", "targetname"));
 
   if(!level.player istouching(getent("safety_pit", "targetname")))
@@ -2065,12 +2061,12 @@ launchertraining() {
     level.currentkeyhintactionname = "firemode";
   }
 
-  while (!(level.player getcurrentweapon() == "alt_m16_grenadier") || !common_scripts\utility::flag("in_explosives_area"))
+  while(!(level.player getcurrentweapon() == "alt_m16_grenadier") || !common_scripts\utility::flag("in_explosives_area"))
     wait 1.0;
 
   maps\killhouse_code::clear_hints();
   level.currentkeyhintactionname = "";
-  maps\killhouse_code::setobjectivestring("obj_demolitions_subobj", & "KILLHOUSE_FIRE_AT_THE_WALL_WITH");
+  maps\killhouse_code::setobjectivestring("obj_demolitions_subobj", &"KILLHOUSE_FIRE_AT_THE_WALL_WITH");
   maps\killhouse_code::setobjectivelocation("obj_demolitions_subobj", getent("safety_pit", "targetname"));
   wait 0.1;
   level.newcastle maps\killhouse_code::nwc_talk_animation("firewall1");
@@ -2083,7 +2079,7 @@ launchertraining() {
     level.currentkeyhintactionname = "pc_attack_launcher";
   }
 
-  while (!common_scripts\utility::flag("launcher_wall_target"))
+  while(!common_scripts\utility::flag("launcher_wall_target"))
     wait 1;
 
   maps\killhouse_code::clear_hints();
@@ -2098,24 +2094,24 @@ launchertraining() {
       var_1 notify("flip_to_red");
   }
 
-  common_scripts\utility::array_thread(getentarray("gl_too_low", "targetname"), ::gl_too_low_hint);
+  common_scripts\utility::array_thread(getEntArray("gl_too_low", "targetname"), ::gl_too_low_hint);
   var_3 = getent("launcher_damage_trigger1", "targetname");
   var_4 = getent("launcher_damage_trigger2", "targetname");
   var_5 = getent("launcher_damage_trigger3", "targetname");
   thread launcher_trigger_think("launcher_target_1", var_3, 0);
   thread launcher_trigger_think("launcher_target_2", var_4, 0);
   thread launcher_trigger_think("launcher_target_3", var_5, 0);
-  maps\killhouse_code::setobjectivestring("obj_demolitions_subobj", & "KILLHOUSE_FIRE_YOUR_GRENADE_LAUNCHER");
+  maps\killhouse_code::setobjectivestring("obj_demolitions_subobj", &"KILLHOUSE_FIRE_YOUR_GRENADE_LAUNCHER");
   var_6 = 0;
 
-  for (var_7 = 1; var_7 < 4; var_7++) {
+  for(var_7 = 1; var_7 < 4; var_7++) {
     if(common_scripts\utility::flag("launcher_target_" + var_7)) {
       continue;
     }
     var_6++;
   }
 
-  while (var_6) {
+  while(var_6) {
     if(!common_scripts\utility::flag("in_safety_pit")) {
       common_scripts\utility::flag_clear("in_pit_with_frags");
       waitframe();
@@ -2149,11 +2145,7 @@ launchertraining() {
       break;
     }
 
-    if(var_8 != var_6) {
-
-    } else {
-
-    }
+    if(var_8 != var_6) {} else {}
 
     var_6 = var_8;
     wait 0.05;
@@ -2162,7 +2154,7 @@ launchertraining() {
   level.currentkeyhintactionname = "";
   wait 1.0;
   wait 1.0;
-  var_10 = getentarray("m203_ammo_obj", "script_noteworthy");
+  var_10 = getEntArray("m203_ammo_obj", "script_noteworthy");
 
   foreach(var_12 in var_10)
   var_12 hide();
@@ -2173,7 +2165,7 @@ launchertraining() {
 
 explosives_start() {
   soundscripts\_snd::snd_message("start_explosives_start_checkpoint");
-  maps\killhouse_code::registerobjective("obj_price", & "KILLHOUSE_REPORT_TO_CAPTAIN_PRICE", getent("obj_price", "targetname"));
+  maps\killhouse_code::registerobjective("obj_price", &"KILLHOUSE_REPORT_TO_CAPTAIN_PRICE", getent("obj_price", "targetname"));
   maps\killhouse_code::setobjectivestate("obj_price", "current");
   var_0 = getent("c4_start", "targetname");
   level.player setorigin(var_0.origin);
@@ -2194,24 +2186,24 @@ c4_training() {
     maps\_utility::autosave_by_name("c4_training");
 
   var_0 = maps\_utility::flag_trigger_init("explosives_pickup", getent("c4_pickup", "targetname"));
-  var_1 = getentarray(var_0.target, "targetname");
+  var_1 = getEntArray(var_0.target, "targetname");
   var_0 sethintstring(&"KILLHOUSE_C4_PICKUP");
   var_0 common_scripts\utility::trigger_on();
 
-  for (var_2 = 0; var_2 < var_1.size; var_2++)
+  for(var_2 = 0; var_2 < var_1.size; var_2++)
     var_1[var_2] show();
 
-  maps\killhouse_code::setobjectivestring("obj_demolitions_subobj", & "KILLHOUSE_PICK_UP_THE_C4_EXPLOSIVE");
+  maps\killhouse_code::setobjectivestring("obj_demolitions_subobj", &"KILLHOUSE_PICK_UP_THE_C4_EXPLOSIVE");
   maps\killhouse_code::setobjectivelocation("obj_demolitions_subobj", var_0);
   level.newcastle thread maps\killhouse_code::nwc_talk_animation("c4offtable");
   level.newcastle thread maps\killhouse_code::jog_to(getnode("c4_give_node", "script_noteworthy"));
 
-  while (!common_scripts\utility::flag("explosives_pickup"))
+  while(!common_scripts\utility::flag("explosives_pickup"))
     wait 0.05;
 
-  level.player playsound("detpack_pickup");
+  level.player playSound("detpack_pickup");
 
-  for (var_2 = 0; var_2 < var_1.size; var_2++)
+  for(var_2 = 0; var_2 < var_1.size; var_2++)
     var_1[var_2] hide();
 
   var_0 common_scripts\utility::trigger_off();
@@ -2219,7 +2211,7 @@ c4_training() {
   level.player giveweapon("c4");
   level.player setweaponammoclip("c4", 1);
   level.player setactionslot(2, "weapon", "c4");
-  maps\killhouse_code::setobjectivestring("obj_demolitions_subobj", & "KILLHOUSE_EQUIP_C4");
+  maps\killhouse_code::setobjectivestring("obj_demolitions_subobj", &"KILLHOUSE_EQUIP_C4");
   maps\killhouse_code::setobjectivelocation("obj_demolitions_subobj", level.newcastle);
   refreshhudammocounter();
   thread flag_when_c4_thrown();
@@ -2232,7 +2224,7 @@ c4_training() {
     refreshhudammocounter();
   }
 
-  while (!(level.player getcurrentweapon() == "c4") || !common_scripts\utility::flag("in_explosives_area"))
+  while(!(level.player getcurrentweapon() == "c4") || !common_scripts\utility::flag("in_explosives_area"))
     wait 1.0;
 
   maps\killhouse_code::clear_hints();
@@ -2241,7 +2233,7 @@ c4_training() {
   level.newcastle thread maps\killhouse_code::jog_to(getnode("c4_carshow_node", "script_noteworthy"));
   wait 0.5;
   level.newcastle thread maps\killhouse_code::nwc_talk_animation("followme2");
-  maps\killhouse_code::setobjectivestring("obj_demolitions_subobj", & "KILLHOUSE_FOLLOW_SGTNEWCASTLE");
+  maps\killhouse_code::setobjectivestring("obj_demolitions_subobj", &"KILLHOUSE_FOLLOW_SGTNEWCASTLE");
   maps\killhouse_code::setobjectivelocation("obj_demolitions_subobj", getnode("c4_carshow_node", "script_noteworthy"));
   common_scripts\utility::flag_set("c4_equiped");
   level.currentkeyhintactionname = "";
@@ -2257,7 +2249,7 @@ c4_training() {
   var_6 maps\_c4::c4_location(undefined, undefined, undefined, var_6.origin);
   level thread maps\_utility::do_in_order(maps\_utility::waittill_msg, "c4_in_place", common_scripts\utility::flag_set, "C4_planted");
   wait 1.0;
-  maps\killhouse_code::setobjectivestring("obj_demolitions_subobj", & "KILLHOUSE_PLANT_THE_C4_EXPLOSIVE");
+  maps\killhouse_code::setobjectivestring("obj_demolitions_subobj", &"KILLHOUSE_PLANT_THE_C4_EXPLOSIVE");
   maps\killhouse_code::setobjectivelocation("obj_demolitions_subobj", var_6);
   thread maps\killhouse_code::keyhint("plant_explosives", 9999, 1);
   level.currentkeyhintactionname = "plant_explosives";
@@ -2265,14 +2257,14 @@ c4_training() {
   level.currentkeyhintactionname = "";
   level.player setweaponammoclip("c4", 0);
   var_6 thread force_detonation();
-  maps\killhouse_code::setobjectivestring("obj_demolitions_subobj", & "KILLHOUSE_SAFE_DISTANCE");
+  maps\killhouse_code::setobjectivestring("obj_demolitions_subobj", &"KILLHOUSE_SAFE_DISTANCE");
   maps\killhouse_code::setobjectivelocation("obj_demolitions_subobj", var_6);
   maps\killhouse_code::clear_hints();
 
   if(!common_scripts\utility::flag("car_destroyed"))
     level.newcastle maps\killhouse_code::nwc_talk_animation("safedistance");
 
-  while (distance(var_6.origin, level.player.origin) <= 256 && !common_scripts\utility::flag("car_destroyed"))
+  while(distance(var_6.origin, level.player.origin) <= 256 && !common_scripts\utility::flag("car_destroyed"))
     wait 0.05;
 
   if(!common_scripts\utility::flag("car_destroyed")) {
@@ -2307,7 +2299,7 @@ force_detonation() {
 }
 
 flag_when_c4_thrown() {
-  for (;;) {
+  for(;;) {
     level.player waittill("grenade_fire", var_0);
 
     if(level.player getcurrentweapon() == "c4") {
@@ -2327,7 +2319,7 @@ c4_complete_dialog() {
 
 obstacle_start() {
   soundscripts\_snd::snd_message("start_course_start_checkpoint");
-  maps\killhouse_code::registerobjective("obj_price", & "KILLHOUSE_REPORT_TO_CAPTAIN_PRICE", getent("obj_price", "targetname"));
+  maps\killhouse_code::registerobjective("obj_price", &"KILLHOUSE_REPORT_TO_CAPTAIN_PRICE", getent("obj_price", "targetname"));
   maps\killhouse_code::setobjectivestate("obj_price", "current");
   var_0 = getent("start_obstacle_course", "targetname");
   level.player setorigin(var_0.origin);
@@ -2375,7 +2367,7 @@ obstacle_training() {
   var_7 = getent("ai_obstacle_shooter", "targetname");
   common_scripts\utility::flag_set("aa_obstacle");
   level notify("obstacleTraining_start");
-  level thread optional_training_objective_manager("in_obstacle_area", "obj_obstacle_subobj", getent("obstacleTraining_objective", "targetname"), & "KILLHOUSE_LINE_UP_AND_RUN_TO_THE_END");
+  level thread optional_training_objective_manager("in_obstacle_area", "obj_obstacle_subobj", getent("obstacleTraining_objective", "targetname"), &"KILLHOUSE_LINE_UP_AND_RUN_TO_THE_END");
   maps\killhouse_code::setassubobjective("obj_obstacle_subobj", 2);
   common_scripts\utility::flag_set("start_obstacle");
   maps\_utility::flag_trigger_init("prone_entered", getent("obstacleTraining_prone", "targetname"));
@@ -2384,7 +2376,7 @@ obstacle_training() {
   common_scripts\utility::flag_wait("start_course");
   var_7 thread ai_obstacle_course_shooter();
   maps\killhouse_code::setobjectivelocation("obj_obstacle", getent("obj_course_end", "targetname"));
-  var_8 = getentarray("move_mac", "targetname");
+  var_8 = getEntArray("move_mac", "targetname");
   common_scripts\utility::array_thread(var_8, maps\killhouse_code::move_mac);
   getent("obstacleTraining_mantle", "targetname") waittill("trigger");
   thread maps\killhouse_code::keyhintmantle(5.0);
@@ -2426,11 +2418,11 @@ ai_obstacle_course_shooter() {
   var_0.target_dummy = getent("obstacle_shoot_target", "targetname");
   thread ai_obstacle_course_target_think();
 
-  for (;;) {
-    while (common_scripts\utility::flag("people_crawling")) {
+  for(;;) {
+    while(common_scripts\utility::flag("people_crawling")) {
       var_1 = randomintrange(10, 15);
 
-      for (var_2 = 0; var_2 < var_1; var_2++) {
+      for(var_2 = 0; var_2 < var_1; var_2++) {
         var_0.shootpos = var_0.target_dummy.origin;
         var_0 shoot(0.9, var_0.target_dummy.origin);
         wait 0.1;
@@ -2448,8 +2440,8 @@ ai_obstacle_course_target_think() {
   var_1 = getent(var_0.target, "targetname");
   var_0.init_pos = var_0.origin;
 
-  while (common_scripts\utility::flag("start_obstacle")) {
-    while (common_scripts\utility::flag("people_crawling")) {
+  while(common_scripts\utility::flag("start_obstacle")) {
+    while(common_scripts\utility::flag("people_crawling")) {
       if(distance(var_0.origin, var_1.origin) <= 0.1)
         var_0 moveto(var_0.init_pos, randomfloatrange(1, 2));
       else if(distance(var_0.origin, var_0.init_pos) <= 0.1)
@@ -2472,7 +2464,7 @@ obstacletraining_dialog() {
     common_scripts\utility::flag_set("start_course");
   }
 
-  level.mac playsound("killhouse_mcm_go");
+  level.mac playSound("killhouse_mcm_go");
   common_scripts\utility::flag_set("start_course");
   wait 2;
   level.mac maps\killhouse_code::execdialog("isntcharitywalk");
@@ -2508,9 +2500,9 @@ reveal_start() {
 report_to_price() {
   common_scripts\utility::flag_set("aa_cargoship");
   wait 0.1;
-  maps\killhouse_code::registerobjective("obj_price", & "KILLHOUSE_REPORT_TO_CAPTAIN_PRICE", getent("obj_price", "targetname"));
+  maps\killhouse_code::registerobjective("obj_price", &"KILLHOUSE_REPORT_TO_CAPTAIN_PRICE", getent("obj_price", "targetname"));
   maps\killhouse_code::setobjectivestate("obj_price", "current");
-  var_0 = getentarray("ship_hanger_door", "targetname");
+  var_0 = getEntArray("ship_hanger_door", "targetname");
   level.price maps\_utility::gun_remove();
   var_1 = getent("sas1", "script_noteworthy");
   var_2 = getent("sas2", "script_noteworthy");
@@ -2536,9 +2528,9 @@ report_to_price() {
   level.mocaporiginhangar3 notify("stop_before_reveal");
   var_5 thread reveal_anims(level.sas_blackkits, var_2);
   common_scripts\utility::flag_wait("open_ship_hanger");
-  var_0[0] playsound("door_hanger_metal_open");
+  var_0[0] playSound("door_hanger_metal_open");
   maps\killhouse_code::cqb_timer_setup();
-  thread maps\_utility::do_in_order(common_scripts\utility::flag_wait, "at_ladder", maps\killhouse_code::killhouse_hint, & "KILLHOUSE_HINT_LADDER");
+  thread maps\_utility::do_in_order(common_scripts\utility::flag_wait, "at_ladder", maps\killhouse_code::killhouse_hint, &"KILLHOUSE_HINT_LADDER");
 
   foreach(var_7 in var_0)
   var_7 movex(137.5, 10, 0.3, 0);
@@ -2572,9 +2564,9 @@ reveal_anims(var_0, var_1) {
 
 reveal_dialog_ladder(var_0) {
   if(!common_scripts\utility::flag("at_ladder"))
-    level.price playsound("killhouse_pri_ladderthere");
+    level.price playSound("killhouse_pri_ladderthere");
 
-  maps\killhouse_code::setobjectivestring("obj_price", & "KILLHOUSE_CLIMB_THE_LADDER1");
+  maps\killhouse_code::setobjectivestring("obj_price", &"KILLHOUSE_CLIMB_THE_LADDER1");
   maps\killhouse_code::setobjectivelocation("obj_price", getent("top_of_ladder_trigger", "targetname"));
   maps\killhouse_code::setobjectivestate("obj_price", "current");
   common_scripts\utility::flag_set("reveal_dialog_done");
@@ -2592,7 +2584,7 @@ cargoship_start() {
   level.player giveweapon("g36c");
   level.player giveweapon("m16_grenadier");
   level.player switchtoweapon("m16_grenadier");
-  maps\killhouse_code::registerobjective("obj_price", & "KILLHOUSE_CLIMB_THE_LADDER", getent("top_of_rope_trigger", "targetname"));
+  maps\killhouse_code::registerobjective("obj_price", &"KILLHOUSE_CLIMB_THE_LADDER", getent("top_of_rope_trigger", "targetname"));
   maps\killhouse_code::setobjectivestate("obj_price", "current");
   common_scripts\utility::flag_set("reveal_dialog_done");
   maps\killhouse_code::cqb_timer_setup();
@@ -2602,7 +2594,7 @@ cargoship_start() {
 cargoship_training() {
   level endon("clear_course");
   level endon("mission failed");
-  var_0 = getentarray("cargoship_target", "script_noteworthy");
+  var_0 = getEntArray("cargoship_target", "script_noteworthy");
   common_scripts\utility::array_thread(var_0, maps\killhouse_code::cargoship_targets);
   thread maps\killhouse_code::rope();
   thread maps\killhouse_code::timer_think();
@@ -2625,7 +2617,7 @@ cargoship_training() {
   var_15 = 1;
   var_16 = 0;
   var_17 = "none";
-  var_18 = getentarray("flash_volume", "script_noteworthy");
+  var_18 = getEntArray("flash_volume", "script_noteworthy");
   var_19 = getent("jump_off_trigger", "targetname");
   common_scripts\utility::flag_wait("at_top_of_ladder");
   maps\killhouse_code::clear_hints();
@@ -2634,11 +2626,11 @@ cargoship_training() {
   thread maps\_utility::autosave_by_name("ladder_top");
   var_19 thread maps\killhouse_code::jumpoff_monitor();
 
-  for (;;) {
+  for(;;) {
     if(var_15) {
       if(!(level.player getcurrentweapon() == "mp5") || level.player getweaponammostock("flash_grenade") < 4) {
         level.price thread maps\killhouse_code::execdialog("pickupmp5");
-        maps\killhouse_code::setobjectivestring("obj_price", & "KILLHOUSE_EQUIP_THE_MP5_AND_PICK");
+        maps\killhouse_code::setobjectivestring("obj_price", &"KILLHOUSE_EQUIP_THE_MP5_AND_PICK");
         maps\killhouse_code::setobjectivelocation("obj_price", getent("obj_flashes", "targetname"));
       }
     } else {
@@ -2649,7 +2641,7 @@ cargoship_training() {
         level.price maps\killhouse_code::execdialog("equipmp5");
     }
 
-    for (var_20 = 0; !(level.player getcurrentweapon() == "mp5"); var_20++) {
+    for(var_20 = 0; !(level.player getcurrentweapon() == "mp5"); var_20++) {
       if(level.player istouching(var_2) && var_20 > 8) {
         level.price thread maps\killhouse_code::execdialog("soapequipmp5");
         var_20 = 0;
@@ -2658,7 +2650,7 @@ cargoship_training() {
       wait 1.0;
     }
 
-    for (var_20 = 0; level.player getweaponammostock("flash_grenade") < 4; var_20++) {
+    for(var_20 = 0; level.player getweaponammostock("flash_grenade") < 4; var_20++) {
       if(level.player istouching(var_2) && var_20 > 8) {
         level.price thread maps\killhouse_code::execdialog("soap4flash");
         var_20 = 0;
@@ -2693,7 +2685,7 @@ cargoship_training() {
 
     if(var_15) {
       thread movies_on_tvs();
-      maps\killhouse_code::setobjectivestring("obj_price", & "KILLHOUSE_CLEAR_THE_CARGOSHIP_BRIDGE");
+      maps\killhouse_code::setobjectivestring("obj_price", &"KILLHOUSE_CLEAR_THE_CARGOSHIP_BRIDGE");
       maps\killhouse_code::setobjectivelocation("obj_price", var_5);
       common_scripts\utility::flag_set("cargoshipTutoDone");
     }
@@ -2704,7 +2696,7 @@ cargoship_training() {
     thread maps\killhouse_code::mission_failed_quit_training();
     thread maps\killhouse_code::accuracy_bonus();
 
-    if(isdefined(level.iw_deck))
+    if(isDefined(level.iw_deck))
       level.iw_deck destroy();
 
     var_5 maps\killhouse_code::wait_till_pos_cleared();
@@ -2787,7 +2779,7 @@ cargoship_training() {
     }
 
     var_15 = 0;
-    var_25 = getentarray("cargoship_target", "script_noteworthy");
+    var_25 = getEntArray("cargoship_target", "script_noteworthy");
 
     foreach(var_27 in var_25)
     var_27 notify("want_newMelon");
@@ -2874,7 +2866,7 @@ debrief_start() {
 
 debrief() {
   var_0 = getent("debrief_trigger", "targetname");
-  maps\killhouse_code::registerobjective("obj_debrief", & "KILLHOUSE_DEBRIEF_WITH_CPT_PRICE", var_0);
+  maps\killhouse_code::registerobjective("obj_debrief", &"KILLHOUSE_DEBRIEF_WITH_CPT_PRICE", var_0);
   maps\killhouse_code::setobjectivestate("obj_debrief", "current");
   var_0 waittill("trigger");
   thread maps\killhouse_code::fail_if_friendlies_in_line_of_fire();
@@ -2896,7 +2888,7 @@ debrief() {
   level notify("okay_if_friendlies_in_line_of_fire");
 
   if(var_2 == "try_again") {
-    setdvar("ui_deadquote", & "KILLHOUSE_SHIP_TRY_AGAIN");
+    setdvar("ui_deadquote", &"KILLHOUSE_SHIP_TRY_AGAIN");
     maps\_utility::missionfailedwrapper();
   }
 
@@ -2923,7 +2915,7 @@ h1_fadetoblackdifficultyselect(var_0) {
 debrief_anims() {
   var_0 = getnode("SAS_blackkit_node_debrief", "targetname");
 
-  for (var_1 = 0; var_1 < level.sas_blackkits.size; var_1++) {
+  for(var_1 = 0; var_1 < level.sas_blackkits.size; var_1++) {
     var_0 thread maps\_anim::anim_single_solo(level.sas_blackkits[var_1], "debrief_S" + (var_1 + 1));
     level.sas_blackkits[var_1] maps\_utility::clear_force_color();
     level.sas_blackkits[var_1].currentcolorcode = undefined;
@@ -2985,13 +2977,13 @@ convoy_gate_pass(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_11 = getvehiclenode(var_4, "targetname");
   var_12 = getvehiclenode(var_5, "targetname");
 
-  while (var_6[0] vehicle_getcurrentnode() != var_10)
+  while(var_6[0] vehicle_getcurrentnode() != var_10)
     wait 0.2;
 
   thread open_gate(var_1);
   level.convoyatgate = 1;
 
-  while (var_6[0] vehicle_getcurrentnode() != var_12)
+  while(var_6[0] vehicle_getcurrentnode() != var_12)
     wait 0.1;
 
   if(!var_1.is_open) {
@@ -3000,7 +2992,7 @@ convoy_gate_pass(var_0, var_1, var_2, var_3, var_4, var_5) {
       wait(randomfloatrange(0.2, 0.4));
     }
 
-    while (!var_1.is_open)
+    while(!var_1.is_open)
       wait 0.5;
 
     foreach(var_14 in var_6) {
@@ -3009,10 +3001,10 @@ convoy_gate_pass(var_0, var_1, var_2, var_3, var_4, var_5) {
     }
   }
 
-  while (var_6[var_6.size - 1] vehicle_getcurrentnode() != var_11)
+  while(var_6[var_6.size - 1] vehicle_getcurrentnode() != var_11)
     wait 0.2;
 
-  while (level.loopingtrucksatgate)
+  while(level.loopingtrucksatgate)
     wait 0.25;
 
   thread close_gate(var_1);
@@ -3020,8 +3012,8 @@ convoy_gate_pass(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 gate_setup(var_0, var_1, var_2) {
-  var_3 = spawnstruct();
-  var_3.gate_parts = getentarray(var_0, "targetname");
+  var_3 = spawnStruct();
+  var_3.gate_parts = getEntArray(var_0, "targetname");
   var_3.mover = getent(var_1, "targetname");
   var_3.mover.destination = getent(var_2, "targetname").origin;
 
@@ -3053,14 +3045,14 @@ checkgate_needopenorclose(var_0) {
   level.convoyatgate = 0;
   level.loopingtrucksatgate = 0;
 
-  for (;;) {
+  for(;;) {
     foreach(var_4 in level.vehicletocheckarray) {
       if(var_4.classname == "script_vehicle_corpse") {
         continue;
       }
       var_5 = var_4 vehicle_getcurrentnode();
 
-      if(isdefined(var_5) && isdefined(var_5.script_noteworthy)) {
+      if(isDefined(var_5) && isDefined(var_5.script_noteworthy)) {
         if(var_0.mover.targetname == "gate_mover_01") {
           switch (var_5.script_noteworthy) {
             case "gate1_open_node":
@@ -3120,10 +3112,10 @@ checkgate_needopenorclose(var_0) {
 
 setup_ai_aim_targets() {
   level.aim_targets_left = [];
-  level.aim_targets_left = getentarray("aim_target", "targetname");
+  level.aim_targets_left = getEntArray("aim_target", "targetname");
   setup_targets_rotate(level.aim_targets_left);
   level.aim_targets_right = [];
-  level.aim_targets_right = getentarray("aim_target_right", "targetname");
+  level.aim_targets_right = getEntArray("aim_target_right", "targetname");
   setup_targets_rotate(level.aim_targets_right);
 }
 
@@ -3131,15 +3123,15 @@ setup_targets_rotate(var_0) {
   foreach(var_2 in var_0) {
     var_3 = getent(var_2.target, "targetname");
 
-    if(isdefined(var_3)) {
+    if(isDefined(var_3)) {
       var_2.linked_ent = var_3;
       var_2.init_angles = var_3.angles;
       var_2 linkto(var_3);
-      var_2 setcandamage(1);
+      var_2 setCanDamage(1);
       var_2.raised = 1;
       var_4 = getent(var_2.linked_ent.target, "targetname");
 
-      if(isdefined(var_4))
+      if(isDefined(var_4))
         var_2.aimed_pos_ent = var_4;
 
       var_2 thread ai_rifle_training_aim_target_think();
@@ -3148,12 +3140,10 @@ setup_targets_rotate(var_0) {
 }
 
 print_target() {
-  for (;;) {
+  for(;;) {
     wait 0.05;
 
-    if(isdefined(self.target_dummy)) {
-
-    }
+    if(isDefined(self.target_dummy)) {}
   }
 }
 
@@ -3177,24 +3167,24 @@ ai_rifle_training_loop(var_0) {
   var_1.target_dummy = undefined;
   thread ai_rifle_training_targetpop_think(var_0);
 
-  for (;;) {
+  for(;;) {
     wait 0.05;
 
-    if(!isdefined(var_1)) {
+    if(!isDefined(var_1)) {
       return;
     }
     var_1.noreload = common_scripts\utility::ter_op(var_1.bulletsinclip < 15, undefined, 1);
 
-    if(isdefined(var_1.a.exposedreloading) && var_1.a.exposedreloading) {
+    if(isDefined(var_1.a.exposedreloading) && var_1.a.exposedreloading) {
       wait 0.3;
       continue;
     }
 
-    if(isdefined(var_1.target_dummy) && var_1.target_dummy.raised) {
+    if(isDefined(var_1.target_dummy) && var_1.target_dummy.raised) {
       var_2 = 1;
 
-      for (var_3 = 0; var_3 < var_2; var_3++) {
-        if(var_1.bulletsinclip == 0 || isdefined(var_1.a.exposedreloading) && var_1.a.exposedreloading) {
+      for(var_3 = 0; var_3 < var_2; var_3++) {
+        if(var_1.bulletsinclip == 0 || isDefined(var_1.a.exposedreloading) && var_1.a.exposedreloading) {
           break;
         }
 
@@ -3212,7 +3202,7 @@ ai_rifle_training_loop(var_0) {
     var_1.target_dummy = undefined;
 
     if(var_0.size > 0) {
-      while (!isdefined(var_1.target_dummy)) {
+      while(!isDefined(var_1.target_dummy)) {
         wait 0.05;
         var_6 = randomintrange(0, var_0.size);
 
@@ -3229,18 +3219,18 @@ ai_rifle_training_loop(var_0) {
 }
 
 ai_rifle_training_aim_target_think() {
-  for (;;) {
+  for(;;) {
     self waittill("damage");
-    self playsound("killhouse_target_up_quiet");
+    self playSound("killhouse_target_up_quiet");
     self.linked_ent rotateto(self.init_angles + (0, 0, -90), 0.25, 0, 0);
-    self setcandamage(0);
+    self setCanDamage(0);
     self.raised = 0;
     self waittill("raise");
     wait 2.0;
     self notify("want_newMelon");
     self.linked_ent rotateto(self.init_angles, 0.25, 0, 0);
     thread maps\_utility::play_sound_on_entity("killhouse_target_up_wood_npc");
-    self setcandamage(1);
+    self setCanDamage(1);
     self.raised = 1;
   }
 }
@@ -3248,11 +3238,11 @@ ai_rifle_training_aim_target_think() {
 ai_rifle_training_targetpop_think(var_0) {
   var_1 = 1;
 
-  for (;;) {
+  for(;;) {
     wait 0.05;
 
-    if(isdefined(var_0) && var_0.size > 0) {
-      for (var_2 = 0; var_2 < var_0.size; var_2++) {
+    if(isDefined(var_0) && var_0.size > 0) {
+      for(var_2 = 0; var_2 < var_0.size; var_2++) {
         if(var_0[var_2].raised) {
           var_1 = 0;
           break;
@@ -3263,7 +3253,7 @@ ai_rifle_training_targetpop_think(var_0) {
       }
 
       if(var_1) {
-        for (var_3 = 0; var_3 < var_0.size; var_3++) {
+        for(var_3 = 0; var_3 < var_0.size; var_3++) {
           if(randomint(2) == 1) {
             var_0[var_3] notify("raise");
             var_1 = 0;
@@ -3291,7 +3281,7 @@ tower_guard_think() {
   var_1 = getnodearray("tower_node_l_" + self.script_noteworthy, "targetname");
   var_2 = 1;
 
-  for (;;) {
+  for(;;) {
     if(var_2)
       self setgoalnode(var_1[randomintrange(0, var_1.size)]);
     else
@@ -3310,7 +3300,7 @@ ai_ambient_think(var_0, var_1) {
   var_3 = undefined;
   var_4 = 0;
 
-  if(isdefined(self.target))
+  if(isDefined(self.target))
     var_2 = getnode(self.target, "targetname");
 
   thread ai_ambient_cleanup();
@@ -3335,14 +3325,14 @@ ai_ambient_think(var_0, var_1) {
   } else
     self.eaniment maps\_anim::anim_generic_first_frame(self, var_0);
 
-  if(isdefined(self.script_flag)) {
-    if(isdefined(var_1))
+  if(isDefined(self.script_flag)) {
+    if(isDefined(var_1))
       common_scripts\utility::flag_wait_either(self.script_flag, var_1);
     else
       common_scripts\utility::flag_wait(self.script_flag);
   }
 
-  if(isdefined(var_2)) {
+  if(isDefined(var_2)) {
     self.disablearrivals = 1;
     self.disableexits = 1;
   }
@@ -3350,7 +3340,7 @@ ai_ambient_think(var_0, var_1) {
   if(!var_4)
     self.eaniment maps\_anim::anim_generic(self, var_0);
 
-  if(isdefined(var_3)) {
+  if(isDefined(var_3)) {
     self.eaniment notify("stop_idle");
     self.eaniment maps\_anim::anim_generic(self, var_3);
   }
@@ -3361,16 +3351,16 @@ ai_ambient_think(var_0, var_1) {
       break;
   }
 
-  if(isdefined(var_2)) {
+  if(isDefined(var_2)) {
     self setgoalnode(var_2);
     wait 1;
     self.disablearrivals = 0;
     self.disableexits = 0;
     self waittill("goal");
 
-    if(isdefined(self.cqbwalking) && self.cqbwalking)
+    if(isDefined(self.cqbwalking) && self.cqbwalking)
       maps\_utility::cqb_walk("off");
-  } else if(isdefined(level.scr_anim["generic"][var_0 + "_idle"]))
+  } else if(isDefined(level.scr_anim["generic"][var_0 + "_idle"]))
     self.eaniment thread maps\_anim::anim_generic_loop(self, var_0 + "_idle", "stop_idle");
 
   if(anim_exists(var_0 + "_react")) {
@@ -3384,7 +3374,7 @@ ai_ambient_think(var_0, var_1) {
     else
       var_7 = var_6;
 
-    while (isdefined(self)) {
+    while(isDefined(self)) {
       level waittill("mortar_hit");
       self.eaniment notify("stop_idle");
       self notify("stop_idle");
@@ -3403,7 +3393,7 @@ ai_ambient_think(var_0, var_1) {
 ai_ambient_cleanup() {
   self waittill("death");
 
-  if(isdefined(self.eaniment) && !isspawner(self.eaniment))
+  if(isDefined(self.eaniment) && !isspawner(self.eaniment))
     self.eaniment delete();
 }
 
@@ -3412,7 +3402,7 @@ ai_ambient_noprop_think() {
   var_0 = self.animation;
   var_1 = 0;
 
-  if(!isdefined(self.eaniment))
+  if(!isDefined(self.eaniment))
     self.eaniment = self.spawner;
 
   var_2 = 0;
@@ -3430,7 +3420,7 @@ ai_ambient_noprop_think() {
     case "training_locals_kneel":
       maps\_utility::gun_remove();
       self.m4 = spawn("script_model", (0, 0, 0));
-      self.m4 setmodel("weapon_m4");
+      self.m4 setModel("weapon_m4");
       self.m4 hidepart("TAG_THERMAL_SCOPE");
       self.m4 hidepart("TAG_FOREGRIP");
       self.m4 hidepart("TAG_ACOG_2");
@@ -3496,10 +3486,10 @@ ai_ambient_noprop_think() {
       var_1 = 1;
       var_6 = getent(self.script_linkto, "script_linkname");
 
-      if(isdefined(self.script_flag))
+      if(isDefined(self.script_flag))
         common_scripts\utility::flag_wait(self.script_flag);
 
-      while (distance(var_6.origin, self.origin) > 128) {
+      while(distance(var_6.origin, self.origin) > 128) {
         thread maps\_anim::anim_generic(self, var_0);
         maps\_anim::anim_generic(var_5, "wounded_carry_fastwalk_wounded");
       }
@@ -3516,7 +3506,7 @@ ai_ambient_noprop_think() {
     case "civilian_texting_sitting":
     case "civilian_texting_standing":
       maps\_utility::gun_remove();
-      self setmodel("body_sp_sas_woodland_golden@sitting");
+      self setModel("body_sp_sas_woodland_golden@sitting");
       self attach("electronics_pda", "tag_inhand");
       break;
     case "civilian_sitting_talking_A_2_Idle":
@@ -3565,17 +3555,17 @@ ai_ambient_facial() {
   self endon("death");
   waitframe();
 
-  for (;;)
+  for(;;)
     maps\killhouse_anim::play_idle_facial_anim(0);
 }
 
 ai_ambient_ignored() {
   self endon("death");
 
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
-  if(isdefined(self.code_classname) && self.code_classname == "script_model") {
+  if(isDefined(self.code_classname) && self.code_classname == "script_model") {
     return;
   }
   maps\_utility::setflashbangimmunity(1);
@@ -3585,10 +3575,10 @@ ai_ambient_ignored() {
 }
 
 anim_exists(var_0, var_1) {
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     var_1 = "generic";
 
-  if(isdefined(level.scr_anim[var_1][var_0]))
+  if(isDefined(level.scr_anim[var_1][var_0]))
     return 1;
   else
     return 0;
@@ -3597,14 +3587,14 @@ anim_exists(var_0, var_1) {
 mechanic_sound_loop() {
   self endon("death");
 
-  for (;;)
+  for(;;)
     self waittillmatch("looping anim", "end");
 }
 
 pushup_guy_sound_loop(var_0) {
   self endon("death");
 
-  for (;;) {
+  for(;;) {
     self waittillmatch("looping anim", "end");
     thread common_scripts\utility::play_sound_in_space(var_0);
   }
@@ -3614,7 +3604,7 @@ flashing_welding() {
   self endon("death");
   thread stop_sparks();
 
-  for (;;) {
+  for(;;) {
     self waittillmatch("looping anim", "spark on");
     thread start_sparks();
   }
@@ -3626,9 +3616,9 @@ start_sparks() {
   self endon("starting sparks");
   self endon("spark off");
 
-  for (;;) {
-    playfxontag(level._effect["welding_runner"], self, "tag_tip_fx");
-    self playsound("elec_spark_welding_bursts");
+  for(;;) {
+    playFXOnTag(level._effect["welding_runner"], self, "tag_tip_fx");
+    self playSound("elec_spark_welding_bursts");
     wait(randomfloatrange(0.25, 0.5));
   }
 }
@@ -3636,7 +3626,7 @@ start_sparks() {
 stop_sparks() {
   self endon("death");
 
-  for (;;) {
+  for(;;) {
     self waittillmatch("looping anim", "spark off");
     self notify("spark off");
   }
@@ -3663,20 +3653,20 @@ patrol_simple(var_0, var_1) {
 
   var_2 = "patrol_walk";
 
-  if(isdefined(self.patrol_walk_anim))
+  if(isDefined(self.patrol_walk_anim))
     var_2 = self.patrol_walk_anim;
 
   maps\_utility::set_generic_run_anim(var_2, 1, !var_1);
   thread maps\_patrol::patrol_walk_twitch_loop();
 
-  if(isdefined(var_0))
+  if(isDefined(var_0))
     self.target = var_0;
 
   var_3 = getnode(self.target, "targetname");
   var_4 = var_3;
 
-  for (;;) {
-    if(isdefined(var_3.radius) && var_3.radius > 0)
+  for(;;) {
+    if(isDefined(var_3.radius) && var_3.radius > 0)
       self.goalradius = var_3.radius;
     else
       self.goalradius = 32;
@@ -3684,7 +3674,7 @@ patrol_simple(var_0, var_1) {
     self waittill("goal");
     var_3 notify("trigger", self);
 
-    if(isdefined(var_3.script_animation)) {
+    if(isDefined(var_3.script_animation)) {
       var_5 = "patrol_stop";
       maps\_anim::anim_generic_custom_animmode(self, "gravity", var_5);
 
@@ -3732,11 +3722,11 @@ patrol_simple(var_0, var_1) {
 }
 
 get_joggers_start_pos() {
-  var_0 = getentarray("jog1", "script_noteworthy");
+  var_0 = getEntArray("jog1", "script_noteworthy");
   level.joggers_start_pos = [];
 
   foreach(var_2 in var_0) {
-    var_3 = spawnstruct();
+    var_3 = spawnStruct();
     var_3.start_origin = var_2.origin;
     var_3.start_angles = var_2.angles;
     level.joggers_start_pos[level.joggers_start_pos.size] = var_3;
@@ -3744,11 +3734,11 @@ get_joggers_start_pos() {
 }
 
 teleport_joggers() {
-  var_0 = getentarray("jog1", "script_noteworthy");
+  var_0 = getEntArray("jog1", "script_noteworthy");
   var_1 = 0;
 
-  for (var_2 = 0; var_2 < var_0.size; var_2++) {
-    if(isdefined(var_0[var_2].spawner)) {
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
+    if(isDefined(var_0[var_2].spawner)) {
       var_0[var_2] forceteleport(level.joggers_start_pos[var_1].start_origin, level.joggers_start_pos[var_1].start_angles);
       var_1++;
     }
@@ -3757,7 +3747,7 @@ teleport_joggers() {
 
 joggers_formation() {
   level endon("mission failed");
-  var_0 = getentarray("jog1", "script_noteworthy");
+  var_0 = getEntArray("jog1", "script_noteworthy");
   var_1 = undefined;
   var_2 = undefined;
   var_3 = undefined;
@@ -3794,7 +3784,7 @@ joggers_formation() {
   var_11 = distancesquared(var_4.origin, var_2.origin);
   var_12 = distancesquared(var_5.origin, var_3.origin);
 
-  for (;;) {
+  for(;;) {
     var_13 = distancesquared(var_1.origin, var_2.origin);
     var_14 = distancesquared(var_1.origin, var_3.origin);
     var_15 = distancesquared(var_4.origin, var_2.origin);
@@ -3891,12 +3881,12 @@ ai_specific_facial_anim(var_0, var_1) {
   self endon("death");
   var_2 = level.scr_anim[var_0][var_1];
 
-  if(!isdefined(var_2)) {
+  if(!isDefined(var_2)) {
     return;
   }
   waitframe();
 
-  for (;;) {
+  for(;;) {
     self setanimknoballrestart(var_2, % head, 1);
     self setanimlimited( % head, 1);
     wait(getanimlength(var_2));

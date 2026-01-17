@@ -190,7 +190,7 @@ frontend_init_common() {
   trigger_off("table_interact_trigger");
   table_trig = getent("table_interact_trigger", "targetname");
   table_trig sethintstring(&"FRONTEND_USE_STRIKEFORCE");
-  level.m_drone_collision = getentarray("drone_collision", "targetname");
+  level.m_drone_collision = getEntArray("drone_collision", "targetname");
   level thread frontend_init_shaders();
   globe = build_globe();
   float_pos = getent("holo_table_floating", "targetname");
@@ -199,14 +199,14 @@ frontend_init_common() {
 
 frontend_init_shaders() {
   wait_for_first_player();
-  clock_list = getentarray("world_clock", "targetname");
+  clock_list = getEntArray("world_clock", "targetname");
 
   foreach(clock in clock_list) {
     clock ignorecheapentityflag(1);
     clock setclientflag(12);
   }
 
-  monitor_list = getentarray("world_map", "targetname");
+  monitor_list = getEntArray("world_map", "targetname");
 
   foreach(monitor in monitor_list) {
     monitor ignorecheapentityflag(1);

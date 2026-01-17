@@ -55,7 +55,7 @@ transit_navcomputer_remove_card_on_success() {
   wait_for_buildable("sq_common");
   wait_network_frame();
   trig_pos = getstruct("sq_common_key", "targetname");
-  trigs = getentarray("trigger_radius_use", "classname");
+  trigs = getEntArray("trigger_radius_use", "classname");
   nav_trig = undefined;
 
   foreach(trig in trigs) {

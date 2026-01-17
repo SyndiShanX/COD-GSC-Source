@@ -161,7 +161,7 @@ init() {
   level.hardcorecostumetablename = "mp\hardcoreCostumeTable.csv";
   level.classpickcount = 13;
 
-  if(!isdefined(level.customclasspickcount))
+  if(!isDefined(level.customclasspickcount))
     level.customclasspickcount = 13;
 
   level thread onplayerconnecting();
@@ -205,7 +205,7 @@ logclasschoice(var_0, var_1, var_2, var_3) {
   }
   self logstring("choseclass: " + var_0 + " weapon: " + var_1 + " special: " + var_2);
 
-  for (var_4 = 0; var_4 < var_3.size; var_4++)
+  for(var_4 = 0; var_4 < var_3.size; var_4++)
     self logstring("perk" + var_4 + ": " + var_3[var_4]);
 
   self.lastclass = var_0;
@@ -218,7 +218,7 @@ usevirtuallobbyfunction() {
 cac_getweapon(var_0, var_1, var_2) {
   if(usevirtuallobbyfunction())
     return getcacplayerdata(var_2, maps\mp\_utility::cac_getcustomclassloc(), var_0, "weaponSetups", var_1, "weapon");
-  else if(isdefined(level.forcecustomclassloc))
+  else if(isDefined(level.forcecustomclassloc))
     return self getcacplayerdataforgroup(level.forcecustomclassloc, var_0, "weaponSetups", var_1, "weapon");
   else
     return self getcacplayerdata(var_0, "weaponSetups", var_1, "weapon");
@@ -227,7 +227,7 @@ cac_getweapon(var_0, var_1, var_2) {
 cac_getweaponcamo(var_0, var_1, var_2) {
   if(usevirtuallobbyfunction())
     return getcacplayerdata(var_2, maps\mp\_utility::cac_getcustomclassloc(), var_0, "weaponSetups", var_1, "camo");
-  else if(isdefined(level.forcecustomclassloc))
+  else if(isDefined(level.forcecustomclassloc))
     return self getcacplayerdataforgroup(level.forcecustomclassloc, var_0, "weaponSetups", var_1, "camo");
   else
     return self getcacplayerdata(var_0, "weaponSetups", var_1, "camo");
@@ -236,7 +236,7 @@ cac_getweaponcamo(var_0, var_1, var_2) {
 cac_getweaponreticle(var_0, var_1, var_2) {
   if(usevirtuallobbyfunction())
     return getcacplayerdata(var_2, maps\mp\_utility::cac_getcustomclassloc(), var_0, "weaponSetups", var_1, "reticle");
-  else if(isdefined(level.forcecustomclassloc))
+  else if(isDefined(level.forcecustomclassloc))
     return self getcacplayerdataforgroup(level.forcecustomclassloc, var_0, "weaponSetups", var_1, "reticle");
   else
     return self getcacplayerdata(var_0, "weaponSetups", var_1, "reticle");
@@ -245,7 +245,7 @@ cac_getweaponreticle(var_0, var_1, var_2) {
 cac_getweaponattachkitid(var_0, var_1, var_2) {
   if(usevirtuallobbyfunction())
     return getcacplayerdata(var_2, maps\mp\_utility::cac_getcustomclassloc(), var_0, "weaponSetups", var_1, "kit", "attachKit");
-  else if(isdefined(level.forcecustomclassloc))
+  else if(isDefined(level.forcecustomclassloc))
     var_3 = self getcacplayerdataforgroup(level.forcecustomclassloc, var_0, "weaponSetups", var_1, "kit", "attachKit");
   else
     var_3 = self getcacplayerdata(var_0, "weaponSetups", var_1, "kit", "attachKit");
@@ -262,7 +262,7 @@ cac_getweaponattachkit(var_0, var_1, var_2) {
 cac_getweaponfurniturekitid(var_0, var_1, var_2) {
   if(usevirtuallobbyfunction())
     return getcacplayerdata(var_2, maps\mp\_utility::cac_getcustomclassloc(), var_0, "weaponSetups", var_1, "kit", "furnitureKit");
-  else if(isdefined(level.forcecustomclassloc))
+  else if(isDefined(level.forcecustomclassloc))
     var_3 = self getcacplayerdataforgroup(level.forcecustomclassloc, var_0, "weaponSetups", var_1, "kit", "furnitureKit");
   else
     var_3 = self getcacplayerdata(var_0, "weaponSetups", var_1, "kit", "furnitureKit");
@@ -279,7 +279,7 @@ cac_getweaponfurniturekit(var_0, var_1, var_2) {
 cac_getmeleeweapon(var_0, var_1) {
   if(usevirtuallobbyfunction())
     return getcacplayerdata(var_1, maps\mp\_utility::cac_getcustomclassloc(), var_0, "meleeWeapon");
-  else if(isdefined(level.forcecustomclassloc))
+  else if(isDefined(level.forcecustomclassloc))
     return self getcacplayerdataforgroup(level.forcecustomclassloc, var_0, "meleeWeapon");
   else
     return self getcacplayerdata(var_0, "meleeWeapon");
@@ -288,7 +288,7 @@ cac_getmeleeweapon(var_0, var_1) {
 cac_getperk(var_0, var_1, var_2) {
   if(usevirtuallobbyfunction())
     return getcacplayerdata(var_2, maps\mp\_utility::cac_getcustomclassloc(), var_0, "perkSlots", var_1);
-  else if(isdefined(level.forcecustomclassloc))
+  else if(isDefined(level.forcecustomclassloc))
     return self getcacplayerdataforgroup(level.forcecustomclassloc, var_0, "perkSlots", var_1);
   else
     return self getcacplayerdata(var_0, "perkSlots", var_1);
@@ -297,7 +297,7 @@ cac_getperk(var_0, var_1, var_2) {
 cac_getequipment(var_0, var_1, var_2) {
   if(usevirtuallobbyfunction())
     return getcacplayerdata(var_2, maps\mp\_utility::cac_getcustomclassloc(), var_0, "equipment", var_1);
-  else if(isdefined(level.forcecustomclassloc))
+  else if(isDefined(level.forcecustomclassloc))
     return self getcacplayerdataforgroup(level.forcecustomclassloc, var_0, "equipment", var_1);
   else
     return self getcacplayerdata(var_0, "equipment", var_1);
@@ -312,14 +312,14 @@ cao_isglobalcostumecategory(var_0) {
 }
 
 cao_getglobalcostumecategory(var_0, var_1) {
-  if(maps\mp\_utility::invirtuallobby() && isdefined(var_1))
+  if(maps\mp\_utility::invirtuallobby() && isDefined(var_1))
     return getcacplayerdataforgroup(var_1, common_scripts\utility::getstatsgroup_common(), "globalCostume", var_0);
   else
     return self getplayerdata(common_scripts\utility::getstatsgroup_common(), "globalCostume", var_0);
 }
 
 cao_getpercostumecategory(var_0, var_1, var_2) {
-  if(maps\mp\_utility::invirtuallobby() && isdefined(var_2))
+  if(maps\mp\_utility::invirtuallobby() && isDefined(var_2))
     return getcacplayerdataforgroup(var_2, common_scripts\utility::getstatsgroup_common(), "costumes", var_1, var_0);
   else
     return self getplayerdata(common_scripts\utility::getstatsgroup_common(), "costumes", var_1, var_0);
@@ -334,14 +334,14 @@ cao_setpercostumecategory(var_0, var_1, var_2) {
 }
 
 cao_getactivecostumeindex(var_0) {
-  if(maps\mp\_utility::invirtuallobby() && isdefined(var_0))
+  if(maps\mp\_utility::invirtuallobby() && isDefined(var_0))
     return getcacplayerdataforgroup(var_0, common_scripts\utility::getstatsgroup_common(), "activeCostume");
   else
     return self getplayerdata(common_scripts\utility::getstatsgroup_common(), "activeCostume");
 }
 
 cao_getcharactercamoindex(var_0) {
-  if(maps\mp\_utility::invirtuallobby() && isdefined(var_0))
+  if(maps\mp\_utility::invirtuallobby() && isDefined(var_0))
     return getcacplayerdataforgroup(var_0, common_scripts\utility::getstatsgroup_common(), "characterCamoIndex");
   else
     return self getplayerdata(common_scripts\utility::getstatsgroup_common(), "characterCamoIndex");
@@ -350,7 +350,7 @@ cao_getcharactercamoindex(var_0) {
 cao_getcostumebyindex(var_0, var_1) {
   var_2 = [];
 
-  for (var_3 = 0; var_3 < level.costumecategories.size; var_3++) {
+  for(var_3 = 0; var_3 < level.costumecategories.size; var_3++) {
     var_4 = level.costumecategories[var_3];
 
     if(cao_isglobalcostumecategory(var_4)) {
@@ -372,7 +372,7 @@ cao_getactivecostume(var_0) {
 cao_setcostumebyindex(var_0, var_1) {
   var_0 = validatecostume(var_0);
 
-  for (var_2 = 0; var_2 < level.costumecategories.size; var_2++) {
+  for(var_2 = 0; var_2 < level.costumecategories.size; var_2++) {
     var_3 = level.costumecategories[var_2];
 
     if(cao_isglobalcostumecategory(var_3)) {
@@ -576,7 +576,7 @@ cloneloadout() {
     var_17 = getmatchrulesdata("defaultClasses", var_0, "defaultClass", var_4, "class", "equipment", 0);
     var_18 = getmatchrulesdata("defaultClasses", var_0, "defaultClass", var_4, "class", "equipment", 1);
 
-    for (var_19 = 0; var_19 < 3; var_19++)
+    for(var_19 = 0; var_19 < 3; var_19++)
       var_3[var_19] = getmatchrulesdata("defaultClasses", var_0, "defaultClass", var_4, "class", "perkSlots", var_19);
 
     var_20 = "none";
@@ -595,19 +595,17 @@ cloneloadout() {
     var_17 = cac_getequipment(var_21, 0);
     var_18 = cac_getequipment(var_21, 1);
 
-    for (var_19 = 0; var_19 < 3; var_19++)
+    for(var_19 = 0; var_19 < 3; var_19++)
       var_3[var_19] = cac_getperk(var_21, var_19);
 
     var_20 = cac_getmeleeweapon(var_21);
   } else if(var_1 == "callback") {
-    if(!isdefined(var_2))
+    if(!isDefined(var_2))
       common_scripts\utility::error("self.classCallback function reference required for class 'callback'");
 
-    var_22 = [
-      [var_2]
-    ](1);
+    var_22 = [[var_2]](1);
 
-    if(!isdefined(var_22))
+    if(!isDefined(var_22))
       common_scripts\utility::error("array required from self.classCallback for class 'callback'");
 
     var_5 = var_22["loadoutPrimary"];
@@ -641,7 +639,7 @@ cloneloadout() {
     var_17 = table_getequipment(level.classtablename, var_21);
     var_18 = table_getoffhand(level.classtablename, var_21);
 
-    for (var_19 = 0; var_19 < 3; var_19++)
+    for(var_19 = 0; var_19 < 3; var_19++)
       var_3[var_19] = table_getperk(level.classtablename, var_21, var_19);
 
     var_20 = "none";
@@ -651,7 +649,7 @@ cloneloadout() {
   var_23["inUse"] = 0;
   var_23["className"] = var_1;
 
-  if(var_1 == "callback" && isdefined(var_2))
+  if(var_1 == "callback" && isDefined(var_2))
     var_23["classCallbackFunc"] = var_2;
 
   var_23["loadoutPrimary"] = var_5;
@@ -667,7 +665,7 @@ cloneloadout() {
   var_23["loadoutEquipment"] = var_17;
   var_23["loadoutOffhand"] = var_18;
 
-  for (var_19 = 0; var_19 < 3; var_19++)
+  for(var_19 = 0; var_19 < 3; var_19++)
     var_23["loadoutPerks"][var_19] = var_3[var_19];
 
   var_23["loadoutMelee"] = var_20;
@@ -675,10 +673,10 @@ cloneloadout() {
 }
 
 getloadout(var_0, var_1, var_2, var_3, var_4) {
-  if(!isdefined(var_3))
+  if(!isDefined(var_3))
     var_3 = 1;
 
-  if(!isdefined(var_2))
+  if(!isDefined(var_2))
     var_2 = 1;
 
   var_5 = 0;
@@ -699,7 +697,7 @@ getloadout(var_0, var_1, var_2, var_3, var_4) {
 
   var_14 = [];
 
-  if(isdefined(self.pers["copyCatLoadout"]) && self.pers["copyCatLoadout"]["inUse"] && var_2) {
+  if(isDefined(self.pers["copyCatLoadout"]) && self.pers["copyCatLoadout"]["inUse"] && var_2) {
     var_10 = 1;
     var_9 = 0;
     var_6 = maps\mp\_utility::getclassindex("copycat");
@@ -717,7 +715,7 @@ getloadout(var_0, var_1, var_2, var_3, var_4) {
     var_25 = var_14["loadoutEquipment"];
     var_26 = var_14["loadoutOffhand"];
 
-    for (var_27 = 0; var_27 < 3; var_27++)
+    for(var_27 = 0; var_27 < 3; var_27++)
       var_11[var_27] = var_14["loadoutPerks"][var_27];
 
     var_28 = var_14["loadoutMelee"];
@@ -751,7 +749,7 @@ getloadout(var_0, var_1, var_2, var_3, var_4) {
     var_25 = getmatchrulesdata("defaultClasses", var_13, "defaultClass", var_29, "class", "equipment", 0);
     var_26 = getmatchrulesdata("defaultClasses", var_13, "defaultClass", var_29, "class", "equipment", 1);
 
-    for (var_27 = 0; var_27 < 3; var_27++)
+    for(var_27 = 0; var_27 < 3; var_27++)
       var_11[var_27] = getmatchrulesdata("defaultClasses", var_13, "defaultClass", var_29, "class", "perkSlots", var_27);
 
     var_28 = getmatchrulesdata("defaultClasses", var_13, "defaultClass", var_29, "class", "meleeWeapon");
@@ -788,16 +786,14 @@ getloadout(var_0, var_1, var_2, var_3, var_4) {
     var_25 = cac_getequipment(var_6, 0);
     var_26 = cac_getequipment(var_6, 1);
 
-    for (var_27 = 0; var_27 < 3; var_27++)
+    for(var_27 = 0; var_27 < 3; var_27++)
       var_11[var_27] = cac_getperk(var_6, var_27);
 
     var_28 = cac_getmeleeweapon(var_6);
   } else if(issubstr(var_1, "lobby")) {
     var_6 = maps\mp\_utility::getclassindex(var_1);
     var_32 = maps\mp\_utility::cac_getcustomclassloc();
-    var_33 = [
-      [level.vl_loadoutfunc]
-    ](var_32, var_6);
+    var_33 = [[level.vl_loadoutfunc]](var_32, var_6);
     var_15 = var_33["primary"];
     var_16 = var_33["primaryAttachKit"];
     var_17 = var_33["primaryFurnitureKit"];
@@ -811,7 +807,7 @@ getloadout(var_0, var_1, var_2, var_3, var_4) {
     var_25 = var_33["equipment"];
     var_26 = var_33["offhand"];
 
-    for (var_27 = 0; var_27 < 3; var_27++)
+    for(var_27 = 0; var_27 < 3; var_27++)
       var_11[var_27] = var_33["perk" + var_27];
 
     var_28 = var_33["meleeWeapon"];
@@ -833,19 +829,17 @@ getloadout(var_0, var_1, var_2, var_3, var_4) {
     if(var_26 == "specialty_null")
       var_26 = "none";
 
-    for (var_27 = 0; var_27 < 3; var_27++)
+    for(var_27 = 0; var_27 < 3; var_27++)
       var_11[var_27] = var_34["loadoutPerks"][var_27];
 
     var_28 = var_34["loadoutMelee"];
   } else if(var_1 == "callback") {
-    if(!isdefined(self.classcallback))
+    if(!isDefined(self.classcallback))
       common_scripts\utility::error("self.classCallback function reference required for class 'callback'");
 
-    var_35 = [
-      [self.classcallback]
-    ](var_4);
+    var_35 = [[self.classcallback]](var_4);
 
-    if(!isdefined(var_35))
+    if(!isDefined(var_35))
       common_scripts\utility::error("array required from self.classCallback for class 'callback'");
 
     var_15 = var_35["loadoutPrimary"];
@@ -888,7 +882,7 @@ getloadout(var_0, var_1, var_2, var_3, var_4) {
   var_37 = issubstr(var_1, "recipe");
   var_38 = 0;
 
-  if(!var_12 && !var_37 && !level.oldschool && !(isdefined(self.pers["copyCatLoadout"]) && self.pers["copyCatLoadout"]["inUse"] && var_2)) {
+  if(!var_12 && !var_37 && !level.oldschool && !(isDefined(self.pers["copyCatLoadout"]) && self.pers["copyCatLoadout"]["inUse"] && var_2)) {
     if(!isvalidprimary(var_15, 1) || level.rankedmatch && var_36 && !var_38 && !self isitemunlocked(var_15)) {
       var_15 = table_getweapon(level.classtablename, 10, 0);
       var_18 = "none";
@@ -944,7 +938,7 @@ getloadout(var_0, var_1, var_2, var_3, var_4) {
       var_28 = "none";
   }
 
-  for (var_27 = 0; var_27 < 3; var_27++) {
+  for(var_27 = 0; var_27 < 3; var_27++) {
     if(var_11[var_27] == "specialty_null") {
       continue;
     }
@@ -1002,7 +996,7 @@ getloadout(var_0, var_1, var_2, var_3, var_4) {
   else
     var_46 = self getplayerdata(common_scripts\utility::getstatsgroup_common(), "characterCamoIndex");
 
-  var_33 = spawnstruct();
+  var_33 = spawnStruct();
   var_33.class = var_1;
   var_33.class_num = var_6;
   var_33.teamname = var_13;
@@ -1042,7 +1036,7 @@ getloadout(var_0, var_1, var_2, var_3, var_4) {
   var_33._id_A7EC = var_44;
   var_33._id_A7ED = var_46;
 
-  if(maps\mp\_utility::is_true(level.movecompareactive) && isdefined(level.movecompareloadoutfunc))
+  if(maps\mp\_utility::is_true(level.movecompareactive) && isDefined(level.movecompareloadoutfunc))
     var_33 = self[[level.movecompareloadoutfunc]]();
 
   return var_33;
@@ -1055,7 +1049,7 @@ giveloadout(var_0, var_1, var_2, var_3) {
 applyloadout() {
   var_0 = self.loadout;
 
-  if(!isdefined(self.loadout)) {
+  if(!isDefined(self.loadout)) {
     return;
   }
   self.loadout = undefined;
@@ -1091,7 +1085,7 @@ applyloadout() {
 
   self.loadoutmelee = var_0.meleeweapon;
 
-  if(isdefined(var_0.juggernaut) && var_0.juggernaut) {
+  if(isDefined(var_0.juggernaut) && var_0.juggernaut) {
     self.health = self.maxhealth;
     thread maps\mp\_utility::recipeclassapplyjuggernaut(maps\mp\_utility::isjuggernaut());
     self.isjuggernaut = 1;
@@ -1129,7 +1123,7 @@ applyloadout() {
   } else
     giveoffhand(var_0.equipment);
 
-  if(var_0.equipment != "specialty_null" && isdefined(self.perkscustom["grenades_count"])) {
+  if(var_0.equipment != "specialty_null" && isDefined(self.perkscustom["grenades_count"])) {
     var_4 = self.perkscustom["grenades_count"];
     self setweaponammoclip(var_0.equipment, var_4);
   }
@@ -1156,7 +1150,7 @@ applyloadout() {
   if(level.oldschool)
     self setweaponammoclip(var_0.offhand, 0);
 
-  if(var_0.offhand != "specialty_null" && isdefined(self.perkscustom["specialgrenades_count"])) {
+  if(var_0.offhand != "specialty_null" && isDefined(self.perkscustom["specialgrenades_count"])) {
     var_4 = self.perkscustom["specialgrenades_count"];
     self setweaponammoclip(var_0.offhand, var_4);
   }
@@ -1191,19 +1185,19 @@ applyloadout() {
   }
 
   if(!issubstr(var_0.class, "juggernaut")) {
-    if(isdefined(self.lastclass) && self.lastclass != "" && self.lastclass != self.class)
+    if(isDefined(self.lastclass) && self.lastclass != "" && self.lastclass != self.class)
       self notify("changed_class");
 
     self.pers["lastClass"] = self.class;
     self.lastclass = self.class;
   }
 
-  if(isdefined(self.gamemode_chosenclass)) {
+  if(isDefined(self.gamemode_chosenclass)) {
     self.pers["class"] = self.gamemode_chosenclass;
     self.pers["lastClass"] = self.gamemode_chosenclass;
     self.class = self.gamemode_chosenclass;
 
-    if(!isdefined(self.gamemode_carrierclass))
+    if(!isDefined(self.gamemode_carrierclass))
       self.lastclass = self.gamemode_chosenclass;
 
     self.gamemode_chosenclass = undefined;
@@ -1211,15 +1205,15 @@ applyloadout() {
 
   self.gamemode_carrierclass = undefined;
 
-  if(!isdefined(level.iszombiegame) || !level.iszombiegame) {
-    if(!isdefined(self.costume)) {
+  if(!isDefined(level.iszombiegame) || !level.iszombiegame) {
+    if(!isDefined(self.costume)) {
       if(isplayer(self))
         self.costume = cao_getactivecostume();
       else if(isagent(self) && self.agent_type == "player")
         self.costume = maps\mp\gametypes\_teams::getdefaultcostume();
     }
 
-    if(maps\mp\_utility::invirtuallobby() && isdefined(level.vl_cac_getfactionteam) && isdefined(level.vl_cac_getfactionenvironment)) {
+    if(maps\mp\_utility::invirtuallobby() && isDefined(level.vl_cac_getfactionteam) && isDefined(level.vl_cac_getfactionenvironment)) {
       var_7 = [
         [level.vl_cac_getfactionteam]
       ]();
@@ -1266,7 +1260,7 @@ logplayercostume() {
   if(isagent(self)) {
     return;
   }
-  if(!isdefined(self.costumelogged)) {
+  if(!isDefined(self.costumelogged)) {
     var_0 = cao_getglobalcostumecategory("gender");
     var_1 = cao_getglobalcostumecategory("head");
     var_2 = cao_getactivecostumeindex();
@@ -1293,7 +1287,7 @@ givedefaultperks() {
 }
 
 recordvalidationinfraction() {
-  if(isdefined(self) && isdefined(self.pers) && isdefined(self.pers["validationInfractions"]))
+  if(isDefined(self) && isDefined(self.pers) && isDefined(self.pers["validationInfractions"]))
     self.pers["validationInfractions"] = self.pers["validationInfractions"] + 1;
 }
 
@@ -1341,10 +1335,10 @@ takeoffhand(var_0) {
 loadoutallperks(var_0) {
   var_1 = var_0.perks;
 
-  for (var_2 = 0; var_2 < 3; var_2++)
+  for(var_2 = 0; var_2 < 3; var_2++)
     var_1[var_2] = maps\mp\perks\_perks::validateperk(var_2, var_1[var_2]);
 
-  for (var_2 = 0; var_2 < 3; var_2++) {
+  for(var_2 = 0; var_2 < 3; var_2++) {
     var_3 = var_1[var_2];
 
     if(var_3 == "specialty_null") {
@@ -1430,7 +1424,7 @@ processattachments(var_0, var_1) {
 }
 
 array_checkaddattachment(var_0, var_1) {
-  if(isdefined(var_1) && var_1 != "none")
+  if(isDefined(var_1) && var_1 != "none")
     var_0[var_0.size] = var_1;
 
   return var_0;
@@ -1446,7 +1440,7 @@ getbasefromlootversion(var_0) {
   var_2[4] = "ghosts";
 
   foreach(var_4 in var_2) {
-    for (var_5 = 0; var_5 < var_0.size; var_5++) {
+    for(var_5 = 0; var_5 < var_0.size; var_5++) {
       if(tolower(var_0[var_5]) != tolower(var_4[var_1])) {
         var_5 = var_5 - var_1;
         var_1 = 0;
@@ -1471,10 +1465,10 @@ getbasefromlootversion(var_0) {
 }
 
 buildweaponname(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(!isdefined(var_0) || var_0 == "none" || var_0 == "")
+  if(!isDefined(var_0) || var_0 == "none" || var_0 == "")
     return var_0;
 
-  if(!isdefined(level.lettertonumber))
+  if(!isDefined(level.lettertonumber))
     level.lettertonumber = makeletterstonumbers();
 
   var_6 = "";
@@ -1495,8 +1489,8 @@ buildweaponname(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(var_7 == "h1_junsho_mp")
     var_1 = "akimbohidden";
 
-  var_9 = isdefined(var_1) && var_1 != "none";
-  var_10 = isdefined(var_2) && var_2 != "none";
+  var_9 = isDefined(var_1) && var_1 != "none";
+  var_10 = isDefined(var_2) && var_2 != "none";
 
   if(!var_10) {
     var_11 = tablelookuprownum("mp\furniturekits\base.csv", 0, var_7);
@@ -1534,7 +1528,7 @@ buildweaponname(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 buildweaponnamecamo(var_0, var_1) {
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     return var_0;
 
   if(var_1 <= 0)
@@ -1552,7 +1546,7 @@ buildweaponnamecamo(var_0, var_1) {
 }
 
 buildweaponnamereticle(var_0, var_1) {
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     return var_0;
 
   if(var_1 <= 0)
@@ -1564,7 +1558,7 @@ buildweaponnamereticle(var_0, var_1) {
 }
 
 buildweaponnameemblem(var_0, var_1) {
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     return var_0;
 
   if(var_1 < 0)
@@ -1611,7 +1605,7 @@ replenishloadout() {
   var_1 = self.pers["class"];
   var_2 = self getweaponslistall();
 
-  for (var_3 = 0; var_3 < var_2.size; var_3++) {
+  for(var_3 = 0; var_3 < var_2.size; var_3++) {
     var_4 = var_2[var_3];
     self givemaxammo(var_4);
     self setweaponammoclip(var_4, 9999);
@@ -1628,13 +1622,13 @@ replenishloadout() {
 }
 
 onplayerconnecting() {
-  for (;;) {
+  for(;;) {
     level waittill("connected", var_0);
 
-    if(!isdefined(var_0.pers["class"]))
+    if(!isDefined(var_0.pers["class"]))
       var_0.pers["class"] = "";
 
-    if(!isdefined(var_0.pers["lastClass"]))
+    if(!isDefined(var_0.pers["lastClass"]))
       var_0.pers["lastClass"] = "";
 
     var_0.class = var_0.pers["class"];
@@ -2739,14 +2733,14 @@ isvalidoffhand(var_0, var_1) {
 }
 
 isvalidweapon(var_0, var_1) {
-  if(!isdefined(level.weaponrefs)) {
+  if(!isDefined(level.weaponrefs)) {
     level.weaponrefs = [];
 
     foreach(var_3 in level.weaponlist)
     level.weaponrefs[var_3] = 1;
   }
 
-  if(isdefined(level.weaponrefs[var_0]))
+  if(isDefined(level.weaponrefs[var_0]))
     return 1;
 
   if(maps\mp\_utility::is_true(var_1))

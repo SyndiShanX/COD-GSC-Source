@@ -5,7 +5,6 @@
 
 #include scripts\core_common\system_shared;
 #include scripts\mp_common\item_world;
-
 #namespace namespace_518109fe;
 
 autoexec __init__system__() {
@@ -21,7 +20,7 @@ __init__() {
   }
 }
 
-private function_5d709b7() {
+function_5d709b7() {
   item_world::function_4de3ca98();
   var_fcfd8449 = getdynentarray(#"hash_25e69fa10c944661");
 

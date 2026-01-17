@@ -4,8 +4,8 @@
 **************************************/
 
 section_main() {
-  maps\_utility::add_hint_string("set_charge_hint", & "LOKI_PLANT_CHARGE", ::hint_button_press);
-  maps\_utility::add_hint_string("set_charge_hint_pc", & "LOKI_PLANT_CHARGE_PC", ::hint_button_press_pc);
+  maps\_utility::add_hint_string("set_charge_hint", &"LOKI_PLANT_CHARGE", ::hint_button_press);
+  maps\_utility::add_hint_string("set_charge_hint_pc", &"LOKI_PLANT_CHARGE_PC", ::hint_button_press_pc);
 }
 
 hint_button_press() {

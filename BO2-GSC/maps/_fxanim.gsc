@@ -9,7 +9,7 @@
 
 fxanim_init() {
   flag_init("fxanim_setup_complete");
-  a_fxanims = getentarray("fxanim", "script_noteworthy");
+  a_fxanims = getEntArray("fxanim", "script_noteworthy");
 
   foreach(m_fxanim in a_fxanims) {
     m_fxanim disableclientlinkto();
@@ -32,7 +32,7 @@ _fxanim_setup_parent() {
   struct_or_ent = self;
 
   if(is_true(self.fxanim_hide)) {
-    struct_or_ent = spawnstruct();
+    struct_or_ent = spawnStruct();
     self _fxanim_copy_kvps(struct_or_ent);
     self delete();
   }
@@ -143,7 +143,7 @@ _fxanim_change_anim(n_fxanim_id) {
       is_ready_to_change = 0;
 
       while(!is_ready_to_change) {
-        self setcandamage(1);
+        self setCanDamage(1);
         self.health = 9999;
         self waittill("damage", undefined, undefined, undefined, undefined, str_mod);
 
@@ -229,27 +229,27 @@ _fxanim_animate(str_scene) {
 _fxanim_play_fx() {
   if(isDefined(self.fxanim_fx_1)) {
     assert(isDefined(self.fxanim_fx_1_tag), "KVP fxanim_fx_1_tag must be set on fxanim at " + self.origin);
-    playfxontag(getfx(self.fxanim_fx_1), self, self.fxanim_fx_1_tag);
+    playFXOnTag(getfx(self.fxanim_fx_1), self, self.fxanim_fx_1_tag);
   }
 
   if(isDefined(self.fxanim_fx_2)) {
     assert(isDefined(self.fxanim_fx_2_tag), "KVP fxanim_fx_2_tag must be set on fxanim at " + self.origin);
-    playfxontag(getfx(self.fxanim_fx_2), self, self.fxanim_fx_2_tag);
+    playFXOnTag(getfx(self.fxanim_fx_2), self, self.fxanim_fx_2_tag);
   }
 
   if(isDefined(self.fxanim_fx_3)) {
     assert(isDefined(self.fxanim_fx_3_tag), "KVP fxanim_fx_3_tag must be set on fxanim at " + self.origin);
-    playfxontag(getfx(self.fxanim_fx_3), self, self.fxanim_fx_3_tag);
+    playFXOnTag(getfx(self.fxanim_fx_3), self, self.fxanim_fx_3_tag);
   }
 
   if(isDefined(self.fxanim_fx_4)) {
     assert(isDefined(self.fxanim_fx_4_tag), "KVP fxanim_fx_4_tag must be set on fxanim at " + self.origin);
-    playfxontag(getfx(self.fxanim_fx_4), self, self.fxanim_fx_4_tag);
+    playFXOnTag(getfx(self.fxanim_fx_4), self, self.fxanim_fx_4_tag);
   }
 
   if(isDefined(self.fxanim_fx_5)) {
     assert(isDefined(self.fxanim_fx_5_tag), "KVP fxanim_fx_5_tag must be set on fxanim at " + self.origin);
-    playfxontag(getfx(self.fxanim_fx_5), self, self.fxanim_fx_5_tag);
+    playFXOnTag(getfx(self.fxanim_fx_5), self, self.fxanim_fx_5_tag);
   }
 }
 
@@ -410,7 +410,7 @@ _fxanim_can_attach_model() {
 }
 
 _fxanim_add_attached_model(str_model_child, str_tag) {
-  s_attached_model = spawnstruct();
+  s_attached_model = spawnStruct();
   s_attached_model.str_model_child = str_model_child;
   s_attached_model.str_tag = str_tag;
   self.a_attached_models[self.a_attached_models.size] = s_attached_model;
@@ -492,7 +492,7 @@ _fxanim_copy_kvps(target) {
 
   if(isDefined(self.model_name)) {
     if(isDefined(target.classname) && target.classname == "script_model")
-      target setmodel(self.model_name);
+      target setModel(self.model_name);
   }
 
   if(isDefined(self.a_fxanim_child_models))
@@ -600,7 +600,7 @@ fxanim_delete(str_script_string, b_assert_if_missing) {
     b_assert_if_missing = 0;
 
   assert(isDefined(str_script_string), "str_script_string is a required argument for fxanim_delete");
-  a_fxanims = arraycombine(getentarray("fxanim", "script_noteworthy"), getstructarray("fxanim", "script_noteworthy"), 0, 0);
+  a_fxanims = arraycombine(getEntArray("fxanim", "script_noteworthy"), getstructarray("fxanim", "script_noteworthy"), 0, 0);
   n_delete_counter = 0;
 
   foreach(object in a_fxanims) {
@@ -623,20 +623,20 @@ fxanim_delete(str_script_string, b_assert_if_missing) {
 
 fxanim_deconstruct(str_fxanim) {
   flag_wait("fxanim_setup_complete");
-  a_m_parent_fxanim = getentarray(str_fxanim, "targetname");
+  a_m_parent_fxanim = getEntArray(str_fxanim, "targetname");
   assert(a_m_parent_fxanim.size > 0, "FX anim parent entity not found, make sure the parent entity has a targetname.");
-  a_fxanims = getentarray("fxanim", "script_noteworthy");
+  a_fxanims = getEntArray("fxanim", "script_noteworthy");
 
   foreach(m_parent_fxanim in a_m_parent_fxanim) {
     m_parent_fxanim notify("fxanim_delete");
-    s_parent_fxanim = spawnstruct();
+    s_parent_fxanim = spawnStruct();
     m_parent_fxanim _fxanim_copy_kvps(s_parent_fxanim);
     m_parent_fxanim delete();
     a_child_fxanims = [];
 
     for(i = a_fxanims.size - 1; i > 0; i--) {
       if(isDefined(a_fxanims[i].fxanim_parent) && a_fxanims[i].fxanim_parent == str_fxanim) {
-        s_child = spawnstruct();
+        s_child = spawnStruct();
         a_fxanims[i] _fxanim_copy_kvps(s_child);
         a_fxanims[i] delete();
         a_child_fxanims = add_to_array(a_child_fxanims, s_child, 1);

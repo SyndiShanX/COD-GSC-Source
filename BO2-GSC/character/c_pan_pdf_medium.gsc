@@ -7,7 +7,7 @@
 #include xmodelalias\c_pan_pdf_gear_als;
 
 main() {
-  self setmodel("c_pan_pdf_body1");
+  self setModel("c_pan_pdf_body1");
   self.headmodel = "c_pan_pdf_head2";
   self attach(self.headmodel, "", 1);
   self.gearmodel = codescripts\character::randomelement(xmodelalias\c_pan_pdf_gear_als::main());

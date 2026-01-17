@@ -23,19 +23,19 @@ spawned(localclientnum, play_sound) {
     if(play_sound)
       self thread loop_local_sound(localclientnum, "wpn_semtex_alert", 0.3, level._effect["grenade_enemy_light"]);
     else
-      playfxontag(localclientnum, level._effect["grenade_enemy_light"], self, self.fxtagname);
+      playFXOnTag(localclientnum, level._effect["grenade_enemy_light"], self, self.fxtagname);
   } else if(play_sound)
     self thread loop_local_sound(localclientnum, "wpn_semtex_alert", 0.3, level._effect["grenade_friendly_light"]);
   else
-    playfxontag(localclientnum, level._effect["grenade_friendly_light"], self, self.fxtagname);
+    playFXOnTag(localclientnum, level._effect["grenade_friendly_light"], self, self.fxtagname);
 }
 
 loop_local_sound(localclientnum, alias, interval, fx) {
   self endon("entityshutdown");
 
   while(true) {
-    self playsound(localclientnum, alias);
-    playfxontag(localclientnum, fx, self, self.fxtagname);
+    self playSound(localclientnum, alias);
+    playFXOnTag(localclientnum, fx, self, self.fxtagname);
     wait(interval);
     interval = interval / 1.2;
 

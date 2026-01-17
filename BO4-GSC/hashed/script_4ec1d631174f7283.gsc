@@ -13,7 +13,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_behavior;
 #include scripts\zm_common\zm_devgui;
-
 #namespace namespace_3b9dec72;
 
 autoexec __init__system__() {
@@ -29,12 +28,12 @@ __init__() {
   adddebugcommand("<dev string:x43>");
   adddebugcommand("<dev string:x73>");
 
-    level thread function_2165e851();
+  level thread function_2165e851();
 }
 
 __main__() {}
 
-private function_4d231aa() {
+function_4d231aa() {
   self endon(#"death");
 
   while(true) {
@@ -47,7 +46,7 @@ private function_4d231aa() {
   }
 }
 
-private function_e5ba4473() {
+function_e5ba4473() {
   self.goalradius = 15;
   self.pushable = 0;
   self collidewithactors(0);
@@ -70,7 +69,6 @@ private function_e5ba4473() {
   }
 
   self thread function_b7f08e2d();
-
 }
 
 function_1c989dc4() {
@@ -85,7 +83,7 @@ function_1c989dc4() {
   }
 }
 
-private function_b7f08e2d() {
+function_b7f08e2d() {
   self endon(#"death");
 
   while(true) {
@@ -97,7 +95,6 @@ private function_b7f08e2d() {
       goalinfo = self function_4794d6a3();
 
       if(isDefined(goalinfo.goalpos)) {
-
         sphere(goalinfo.goalpos, 5, (0, 1, 0), 0.5, 0, 8, 1);
 
       }
@@ -105,7 +102,7 @@ private function_b7f08e2d() {
   }
 }
 
-private function_dca53f1f(player_index) {
+function_dca53f1f(player_index) {
   var_9a149315 = (0, 0, 0);
 
   if(isDefined(level.var_8a8728c6)) {
@@ -167,7 +164,7 @@ function_ddbe2dbb(distance) {
   }
 }
 
-private function_ae4d6b1b() {
+function_ae4d6b1b() {
   players = getplayers();
 
   foreach(player in players) {
@@ -177,7 +174,7 @@ private function_ae4d6b1b() {
   level.var_41c80f7d = 0;
 }
 
-private function_2165e851() {
+function_2165e851() {
   level endon(#"end_game");
 
   while(true) {
@@ -221,7 +218,7 @@ private function_2165e851() {
   }
 }
 
-private function_b4b7cd20(entity) {
+function_b4b7cd20(entity) {
   result = 0;
 
   if(isDefined(entity.var_f6f10811) && entity.var_f6f10811) {

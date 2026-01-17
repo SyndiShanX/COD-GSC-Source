@@ -9,7 +9,6 @@
 #include scripts\zm\zm_red_main_quest;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_ui_inventory;
-
 #namespace namespace_efec71f7;
 
 autoexec __init__system__() {
@@ -24,7 +23,7 @@ __init__() {
   zm_trial::register_challenge(#"hash_285312733a97eea3", &on_begin, &on_end);
 }
 
-private on_begin() {
+on_begin() {
   level zm_ui_inventory::function_7df6bb60(#"zm_red_objective_progress", 5);
 
   if(!(isDefined(level.var_4e4909a6) && level.var_4e4909a6)) {
@@ -32,7 +31,7 @@ private on_begin() {
   }
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   if(!round_reset) {
     if(!(isDefined(level.var_84199d1) && level.var_84199d1)) {
       zm_trial::fail(undefined, getplayers());

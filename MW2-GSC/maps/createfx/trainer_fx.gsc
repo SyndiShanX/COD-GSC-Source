@@ -468,5 +468,4 @@ main() {
   ent.v["angles"] = (10.0046, 271.931, -2.28298);
   ent.v["fxid"] = "sand_storm_distant";
   ent.v["delay"] = -15;
-
 }

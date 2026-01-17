@@ -157,7 +157,7 @@ preplacedPostScriptFunc(animscript) {
 
 within_fov(start_origin, start_angles, end_origin, fov) {
   normal = vectorNormalize(end_origin - start_origin);
-  forward = anglestoforward(start_angles);
+  forward = anglesToForward(start_angles);
   dot = vectorDot(forward, normal);
   return dot >= fov;
 }

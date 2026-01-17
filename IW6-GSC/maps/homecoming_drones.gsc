@@ -83,9 +83,7 @@ drone_move_custom(var_0) {
   var_5 = var_3.anim_relative;
 
   if(isDefined(self.drone_move_callback)) {
-    var_3 = [
-      [self.drone_move_callback]
-    ]();
+    var_3 = [[self.drone_move_callback]]();
 
     if(isDefined(var_3)) {
       var_2 = var_3.runanim;
@@ -807,7 +805,7 @@ drone_bloodfx(var_0) {
 
 drone_removename() {
   self.name = "";
-  self setlookattext("", & "");
+  self setlookattext("", &"");
 }
 
 isdrone() {
@@ -832,5 +830,5 @@ give_drone_deathanim() {
 
 drone_setname(var_0) {
   self.name = var_0;
-  self setlookattext(var_0, & "");
+  self setlookattext(var_0, &"");
 }

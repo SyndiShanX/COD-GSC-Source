@@ -2879,5 +2879,4 @@ main() {
   ent.v["exploder"] = "roof_slide";
   ent.v["soundalias"] = "nil";
   ent.v["loopsound"] = "nil";
-
 }

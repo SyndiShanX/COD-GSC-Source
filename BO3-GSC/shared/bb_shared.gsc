@@ -10,12 +10,12 @@
 #namespace bb;
 
 function init_shared() {
-  callback::on_start_gametype( & init);
+  callback::on_start_gametype(&init);
 }
 
 function init() {
-  callback::on_connect( & player_init);
-  callback::on_spawned( & on_player_spawned);
+  callback::on_connect(&player_init);
+  callback::on_spawned(&on_player_spawned);
 }
 
 function player_init() {
@@ -33,7 +33,7 @@ function on_player_spawned() {
 }
 
 function on_player_disconnect() {
-  for (;;) {
+  for(;;) {
     self waittill("disconnect");
     self commit_spawn_data();
     break;
@@ -42,27 +42,27 @@ function on_player_disconnect() {
 
 function on_player_death() {
   self endon("disconnect");
-  for (;;) {
+  for(;;) {
     self waittill("death");
     self commit_spawn_data();
   }
 }
 
 function commit_spawn_data() {
-  /# /
+  /
   #
-  assert(isdefined(self._bbdata));
-  if(!isdefined(self._bbdata)) {
+  assert(isDefined(self._bbdata));
+  if(!isDefined(self._bbdata)) {
     return;
   }
   bbprint("mpplayerlives", "gametime %d spawnid %d lifescore %d lifemomentum %d lifetime %d name %s", gettime(), getplayerspawnid(self), self._bbdata["score"], self._bbdata["momentum"], gettime() - self._bbdata["spawntime"], self.name);
 }
 
 function commit_weapon_data(spawnid, currentweapon, time0) {
-  /# /
+  /
   #
-  assert(isdefined(self._bbdata));
-  if(!isdefined(self._bbdata)) {
+  assert(isDefined(self._bbdata));
+  if(!isDefined(self._bbdata)) {
     return;
   }
   time1 = gettime();
@@ -78,13 +78,13 @@ function commit_weapon_data(spawnid, currentweapon, time0) {
 }
 
 function add_to_stat(statname, delta) {
-  if(isdefined(self._bbdata) && isdefined(self._bbdata[statname])) {
+  if(isDefined(self._bbdata) && isDefined(self._bbdata[statname])) {
     self._bbdata[statname] = self._bbdata[statname] + delta;
   }
 }
 
 function recordbbdataforplayer(breadcrumb_table) {
-  if(isdefined(level.gametype) && level.gametype === "doa") {
+  if(isDefined(level.gametype) && level.gametype === "doa") {
     return;
   }
   playerlifeidx = self getmatchrecordlifeindex();
@@ -98,11 +98,11 @@ function recordbbdataforplayer(breadcrumb_table) {
 
 function recordblackboxbreadcrumbdata(breadcrumb_table) {
   level endon("game_ended");
-  if(!sessionmodeisonlinegame() || (isdefined(level.gametype) && level.gametype === "doa")) {
+  if(!sessionmodeisonlinegame() || (isDefined(level.gametype) && level.gametype === "doa")) {
     return;
   }
-  while (true) {
-    for (i = 0; i < level.players.size; i++) {
+  while(true) {
+    for(i = 0; i < level.players.size; i++) {
       player = level.players[i];
       if(isalive(player)) {
         player recordbbdataforplayer(breadcrumb_table);

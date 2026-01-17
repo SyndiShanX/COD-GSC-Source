@@ -80,5 +80,4 @@ refillclip() {
     return true;
 }
 
-precacheweaponswitchfx() {
-}
+precacheweaponswitchfx() {}

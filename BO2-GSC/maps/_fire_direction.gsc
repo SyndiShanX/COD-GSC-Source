@@ -22,12 +22,12 @@ precache() {
   init_fire_direction_vars();
 
   if(!isDefined(level._fire_direction.a_weapons["quadrotor_glove_sp"])) {
-    s_data = spawnstruct();
+    s_data = spawnStruct();
     s_data.a_shooters = [];
     s_data.fire_func = ::quadrotors_find_player_target;
     s_data.valid_target_func = ::_is_target_area_valid;
     s_data.time_last_used = 0;
-    s_data.str_hint = & "SCRIPT_FIRE_DIRECTION";
+    s_data.str_hint = &"SCRIPT_FIRE_DIRECTION";
     s_data.notify_grid_on = "grid_shader_on";
     s_data.notify_grid_off = "grid_shader_off";
     level._fire_direction.a_weapons["quadrotor_glove_sp"] = s_data;
@@ -43,12 +43,12 @@ claw_precache() {
   init_fire_direction_vars();
 
   if(!isDefined(level._fire_direction.a_weapons["claw_glove_sp"])) {
-    s_data = spawnstruct();
+    s_data = spawnStruct();
     s_data.a_shooters = [];
     s_data.fire_func = undefined;
     s_data.valid_target_func = ::_is_target_area_valid;
     s_data.time_last_used = 0;
-    s_data.str_hint = & "SCRIPT_FIRE_DIRECTION_CLAW";
+    s_data.str_hint = &"SCRIPT_FIRE_DIRECTION_CLAW";
     s_data.notify_grid_on = "grid_shader_on";
     s_data.notify_grid_off = "grid_shader_off";
     level._fire_direction.a_weapons["claw_glove_sp"] = s_data;
@@ -64,7 +64,7 @@ rod_precache() {
   init_fire_direction_vars();
 
   if(!isDefined(level._fire_direction.a_weapons["god_rod_glove_sp"])) {
-    s_data = spawnstruct();
+    s_data = spawnStruct();
     s_data.a_shooters = [];
     s_data.fire_func = ::_rod_fire;
     s_data.valid_target_func = ::_rod_is_target_area_valid;
@@ -74,9 +74,9 @@ rod_precache() {
     s_data.notify_grid_off = "grid_shader_off_god_rod";
 
     if(isDefined(level.wiiu))
-      s_data.str_hint = & "SCRIPT_GOD_ROD_WIIU";
+      s_data.str_hint = &"SCRIPT_GOD_ROD_WIIU";
     else
-      s_data.str_hint = & "SCRIPT_GOD_ROD";
+      s_data.str_hint = &"SCRIPT_GOD_ROD";
 
     level._fire_direction.a_weapons["god_rod_glove_sp"] = s_data;
   }
@@ -86,7 +86,7 @@ rod_precache() {
 
 init_fire_direction_vars() {
   if(!isDefined(level._fire_direction)) {
-    level._fire_direction = spawnstruct();
+    level._fire_direction = spawnStruct();
     level._fire_direction.active = 0;
     level._fire_direction.hint_active = 0;
     level._fire_direction.a_weapons = [];
@@ -121,7 +121,7 @@ init_fire_direction(str_weapon) {
 
   if(!isDefined(level._fire_direction.m_aimpoint)) {
     level._fire_direction.m_aimpoint = spawn("script_model", (0, 0, 0));
-    level._fire_direction.m_aimpoint setmodel("tag_origin");
+    level._fire_direction.m_aimpoint setModel("tag_origin");
     level._fire_direction.m_aimpoint setclientflag(10);
     self thread _handle_shader();
   }
@@ -310,9 +310,7 @@ _switch_to_weapon() {
 
       if(b_pressed_attack) {
         weapon_info = level._fire_direction.a_weapons[str_weapon_current];
-        b_using_valid_area = [
-          [weapon_info.valid_target_func]
-        ]();
+        b_using_valid_area = [[weapon_info.valid_target_func]]();
 
         if(isDefined(v_aim_pos) && b_using_valid_area)
           flag_set("fire_direction_target_confirmed");
@@ -348,7 +346,7 @@ cooldown_weapon(str_weapon_current) {
   if(!flag("fire_direction_disabled")) {
     if(str_weapon_current == "god_rod_glove_sp" || level._fire_direction.a_weapons[str_weapon_current].a_shooters.size > 0) {
       self giveweapon(str_weapon_current);
-      self playsound("uin_perk_ready");
+      self playSound("uin_perk_ready");
     }
   }
 }
@@ -383,16 +381,16 @@ _take_weapon(str_weapon_disable, b_immediate) {
 }
 
 _get_aim_position() {
-  v_eye_pos = level.player geteye();
+  v_eye_pos = level.player getEye();
 
   if(level.wiiu)
     v_player_eye = level.player getgunangles();
   else
     v_player_eye = level.player getplayerangles();
 
-  v_player_eye = vectornormalize(anglestoforward(v_player_eye));
+  v_player_eye = vectornormalize(anglesToForward(v_player_eye));
   v_trace_to_point = v_eye_pos + v_player_eye * 4000;
-  a_trace = bullettrace(v_eye_pos, v_trace_to_point, 0, level.player);
+  a_trace = bulletTrace(v_eye_pos, v_trace_to_point, 0, level.player);
   return a_trace["position"];
 }
 
@@ -539,7 +537,7 @@ _rod_is_target_area_valid() {
 
 _rod_fire() {
   v_impact_origin = level._fire_direction.m_aimpoint.origin;
-  s_trace = bullettrace(v_impact_origin + vectorscale((0, 0, 1), 10000.0), v_impact_origin, 0, undefined);
+  s_trace = bulletTrace(v_impact_origin + vectorscale((0, 0, 1), 10000.0), v_impact_origin, 0, undefined);
   badplace_cylinder("rod", 7, s_trace["position"] - vectorscale((0, 0, 1), 750.0), 512, 1500, "allies");
   wait 5;
   level.player thread _rod_impact();
@@ -575,14 +573,14 @@ _rod_impact() {
   v_to_player = missile.origin - level.player.origin;
   v_to_player = (v_to_player[0], v_to_player[1], 0);
   v_to_player = vectornormalize(v_to_player);
-  playfx(level._effect["rod_impact"], missile.origin, v_to_player);
+  playFX(level._effect["rod_impact"], missile.origin, v_to_player);
   weaponinfo = level._fire_direction.a_weapons["god_rod_glove_sp"];
   weaponinfo.a_e_rod_victims = [];
   a_e_check = getaiarray();
   a_e_check[a_e_check.size] = level.player;
   _rod_add_entities_in_range(missile, a_e_check);
-  _rod_add_entities_in_range(missile, getentarray("script_vehicle", "classname"));
-  _rod_add_entities_in_range(missile, getentarray("script_model", "classname"));
+  _rod_add_entities_in_range(missile, getEntArray("script_vehicle", "classname"));
+  _rod_add_entities_in_range(missile, getEntArray("script_model", "classname"));
 
   foreach(e_victim in weaponinfo.a_e_rod_victims) {
     n_rod_damage = (262144 - e_victim.n_dist_sq) / 262144 * 1690 + 10;

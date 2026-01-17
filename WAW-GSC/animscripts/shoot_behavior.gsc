@@ -37,7 +37,7 @@ decideWhatAndHowToShoot(objective) {
   thread runOnShootBehaviorEnd();
   self.ambushEndTime = undefined;
   prof_begin("decideWhatAndHowToShoot");
-  while (1) {
+  while(1) {
     assert(self.shootObjective == "normal" || self.shootObjective == "suppress" || self.shootObjective == "ambush");
     assert(!isDefined(self.shootEnt) || isDefined(self.shootPos));
     result = undefined;
@@ -77,7 +77,7 @@ WaitABit() {
     self.shootEnt endon("death");
     self endon("do_slow_things");
     wait .05;
-    while (isDefined(self.shootEnt)) {
+    while(isDefined(self.shootEnt)) {
       self.shootPos = self.shootEnt getShootAtPos();
       wait .05;
     }
@@ -269,7 +269,7 @@ markEnemyPosInvisible() {
 watchForIncomingFire() {
   self endon("killanimscript");
   self endon("stop_deciding_how_to_shoot");
-  while (1) {
+  while(1) {
     self waittill("suppression");
     if(self.suppressionMeter > self.suppressionThreshold) {
       if(self readyToReturnToCover()) {

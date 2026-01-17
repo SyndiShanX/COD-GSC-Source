@@ -13,9 +13,7 @@ main() {
 
   if(isUsingMatchRulesData()) {
     level.initializeMatchRules = ::initializeMatchRules;
-    [
-      [level.initializeMatchRules]
-    ]();
+    [[level.initializeMatchRules]]();
     level thread reInitializeMatchRulesOnMigration();
   } else {
     registerTimeLimitDvar(level.gameType, 10);
@@ -68,18 +66,18 @@ initializeMatchRules() {
 onStartGameType() {
   setClientNameMode("auto_change");
 
-  setObjectiveText("allies", & "OBJECTIVES_DM");
-  setObjectiveText("axis", & "OBJECTIVES_DM");
+  setObjectiveText("allies", &"OBJECTIVES_DM");
+  setObjectiveText("axis", &"OBJECTIVES_DM");
 
   if(level.splitscreen) {
-    setObjectiveScoreText("allies", & "OBJECTIVES_DM");
-    setObjectiveScoreText("axis", & "OBJECTIVES_DM");
+    setObjectiveScoreText("allies", &"OBJECTIVES_DM");
+    setObjectiveScoreText("axis", &"OBJECTIVES_DM");
   } else {
-    setObjectiveScoreText("allies", & "OBJECTIVES_DM_SCORE");
-    setObjectiveScoreText("axis", & "OBJECTIVES_DM_SCORE");
+    setObjectiveScoreText("allies", &"OBJECTIVES_DM_SCORE");
+    setObjectiveScoreText("axis", &"OBJECTIVES_DM_SCORE");
   }
-  setObjectiveHintText("allies", & "OBJECTIVES_DM_HINT");
-  setObjectiveHintText("axis", & "OBJECTIVES_DM_HINT");
+  setObjectiveHintText("allies", &"OBJECTIVES_DM_HINT");
+  setObjectiveHintText("axis", &"OBJECTIVES_DM_HINT");
 
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);

@@ -12,7 +12,6 @@
 #include scripts\zm_common\zm_contracts;
 #include scripts\zm_common\zm_stats;
 #include scripts\zm_common\zm_traps;
-
 #namespace zm_trap_electric;
 
 autoexec __init__system__() {
@@ -54,7 +53,7 @@ trap_activate_electric() {
   }
 
   self thread zm_traps::trap_damage();
-  self waittilltimeout(self._trap_duration, #"trap_deactivate");
+  self waittilltimeout(self._trap_duration, # "trap_deactivate");
   self notify(#"trap_done");
   level clientfield::set(self.target, 0);
 }
@@ -64,7 +63,7 @@ trap_audio(trap) {
   sound_origin playSound(#"hash_1fb395621513432f");
   sound_origin playLoopSound(#"hash_177d7a6df8ed0d7b");
   self thread play_electrical_sound(trap);
-  trap waittilltimeout(trap._trap_duration, #"trap_done");
+  trap waittilltimeout(trap._trap_duration, # "trap_done");
 
   if(isDefined(sound_origin)) {
     playsoundatposition(#"hash_3819c6cd06a27f15", sound_origin.origin);
@@ -112,13 +111,13 @@ damage(trap) {
     }
   }
 
-  if(!(self.archetype === #"zombie_dog") && isactor(self)) {
+  if(!(self.archetype === # "zombie_dog") && isactor(self)) {
     if(n_param > 90 && level.burning_zombies.size < 6) {
       level.burning_zombies[level.burning_zombies.size] = self;
       self thread zm_traps::zombie_flame_watch();
       self playSound(#"hash_5183b687ad8d715a");
       self thread zombie_death::flame_death_fx();
-      playFXOnTag(level._effect[#"character_fire_death_torso"], self, "J_SpineLower");
+      playFXOnTag(level._effect[# "character_fire_death_torso"], self, "J_SpineLower");
       wait randomfloat(1.25);
     } else {
       refs[0] = "guts";
@@ -150,7 +149,7 @@ damage(trap) {
   }
 
   level notify(#"trap_kill", {
-    #victim: self, 
+    #victim: self,
     #trap: trap
   });
   self dodamage(self.health + 666, self.origin, trap);

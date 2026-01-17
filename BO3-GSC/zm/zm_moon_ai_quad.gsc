@@ -29,23 +29,23 @@
 
 function autoexec init() {
   function_e9b3dfb0();
-  spawner::add_archetype_spawn_function("zombie_quad", & function_5076473f);
+  spawner::add_archetype_spawn_function("zombie_quad", &function_5076473f);
 }
 
 function private function_e9b3dfb0() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("quadPhasingService", & quadphasingservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldPhase", & shouldphase);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("phaseActionStart", & phaseactionstart);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("phaseActionTerminate", & phaseactionterminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("moonQuadKilledByMicrowaveGunDw", & killedbymicrowavegundw);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("moonQuadKilledByMicrowaveGun", & killedbymicrowavegun);
-  animationstatenetwork::registernotetrackhandlerfunction("phase_start", & function_51ab54f7);
-  animationstatenetwork::registernotetrackhandlerfunction("phase_end", & function_428f351c);
-  animationstatenetwork::registeranimationmocomp("quad_phase", & function_4e0a671e, undefined, undefined);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("quadPhasingService", &quadphasingservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldPhase", &shouldphase);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("phaseActionStart", &phaseactionstart);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("phaseActionTerminate", &phaseactionterminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("moonQuadKilledByMicrowaveGunDw", &killedbymicrowavegundw);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("moonQuadKilledByMicrowaveGun", &killedbymicrowavegun);
+  animationstatenetwork::registernotetrackhandlerfunction("phase_start", &function_51ab54f7);
+  animationstatenetwork::registernotetrackhandlerfunction("phase_end", &function_428f351c);
+  animationstatenetwork::registeranimationmocomp("quad_phase", &function_4e0a671e, undefined, undefined);
 }
 
 function private quadphasingservice(entity) {
-  if(isdefined(entity.is_phasing) && entity.is_phasing) {
+  if(isDefined(entity.is_phasing) && entity.is_phasing) {
     return false;
   }
   entity.var_662afd11 = 0;
@@ -73,13 +73,13 @@ function private quadphasingservice(entity) {
       entity.var_662afd11 = 1;
     }
   }
-  if(!(isdefined(entity.var_662afd11) && entity.var_662afd11)) {
+  if(!(isDefined(entity.var_662afd11) && entity.var_662afd11)) {
     if(entity maymovefrompointtopoint(entity.origin, zombie_utility::getanimendpos(level.var_9fcbbc83["phase_forward"]))) {
       entity.var_662afd11 = 1;
       entity.var_3b07930a = "quad_phase_forward";
     }
   }
-  if(isdefined(entity.var_662afd11) && entity.var_662afd11) {
+  if(isDefined(entity.var_662afd11) && entity.var_662afd11) {
     blackboard::setblackboardattribute(entity, "_quad_phase_direction", entity.var_3b07930a);
     if(math::cointoss()) {
       blackboard::setblackboardattribute(entity, "_quad_phase_distance", "quad_phase_short");
@@ -92,16 +92,16 @@ function private quadphasingservice(entity) {
 }
 
 function private shouldphase(entity) {
-  if(!(isdefined(entity.var_662afd11) && entity.var_662afd11)) {
+  if(!(isDefined(entity.var_662afd11) && entity.var_662afd11)) {
     return false;
   }
-  if(isdefined(entity.is_phasing) && entity.is_phasing) {
+  if(isDefined(entity.is_phasing) && entity.is_phasing) {
     return false;
   }
   if((gettime() - entity.var_b7d765b3) < 2000) {
     return false;
   }
-  if(!isdefined(entity.enemy)) {
+  if(!isDefined(entity.enemy)) {
     return false;
   }
   dist_sq = distancesquared(entity.origin, entity.enemy.origin);
@@ -117,7 +117,7 @@ function private shouldphase(entity) {
   if(dist_sq > max_dist_sq) {
     return false;
   }
-  if(!isdefined(entity.pathgoalpos) || distancesquared(entity.origin, entity.pathgoalpos) < min_dist_sq) {
+  if(!isDefined(entity.pathgoalpos) || distancesquared(entity.origin, entity.pathgoalpos) < min_dist_sq) {
     return false;
   }
   if(abs(entity getmotionangle()) > 15) {
@@ -145,11 +145,11 @@ function private phaseactionterminate(entity) {
 }
 
 function private killedbymicrowavegundw(entity) {
-  return isdefined(entity.microwavegun_dw_death) && entity.microwavegun_dw_death;
+  return isDefined(entity.microwavegun_dw_death) && entity.microwavegun_dw_death;
 }
 
 function private killedbymicrowavegun(entity) {
-  return isdefined(entity.microwavegun_death) && entity.microwavegun_death;
+  return isDefined(entity.microwavegun_death) && entity.microwavegun_death;
 }
 
 function private function_51ab54f7(entity) {
@@ -170,7 +170,7 @@ function function_5076473f() {
   self.var_662afd11 = 0;
   self.var_b7d765b3 = gettime();
   self.var_20535e44 = 0;
-  if(!isdefined(level.var_9fcbbc83)) {
+  if(!isDefined(level.var_9fcbbc83)) {
     level.var_9fcbbc83 = [];
     level.var_9fcbbc83["phase_forward"] = self animmappingsearch(istring("anim_zombie_phase_f_long_b"));
     level.var_9fcbbc83["phase_left_long"] = self animmappingsearch(istring("anim_zombie_phase_l_long_b"));
@@ -184,8 +184,8 @@ function moon_quad_prespawn() {
   self.no_gib = 1;
   self.zombie_can_sidestep = 1;
   self.zombie_can_forwardstep = 1;
-  self.sidestepfunc = & moon_quad_sidestep;
-  self.fastsprintfunc = & moon_quad_fastsprint;
+  self.sidestepfunc = &moon_quad_sidestep;
+  self.fastsprintfunc = &moon_quad_fastsprint;
 }
 
 function moon_quad_sidestep(animname, stepanim) {
@@ -193,24 +193,24 @@ function moon_quad_sidestep(animname, stepanim) {
   self endon("stop_sidestep");
   self thread moon_quad_wait_phase_end(stepanim);
   self thread moon_quad_exit_align(stepanim);
-  while (true) {
+  while(true) {
     self waittill(animname, note);
     if(note == "phase_start") {
       self thread moon_quad_phase_fx("quad_phasing_out");
-      self playsound("zmb_quad_phase_out");
+      self playSound("zmb_quad_phase_out");
       self ghost();
     } else if(note == "phase_end") {
       self notify("stop_wait_phase_end");
       self thread moon_quad_phase_fx("quad_phasing_in");
       self show();
-      self playsound("zmb_quad_phase_in");
+      self playSound("zmb_quad_phase_in");
       break;
     }
   }
 }
 
 function moon_quad_fastsprint() {
-  if(isdefined(self.in_low_gravity) && self.in_low_gravity) {
+  if(isDefined(self.in_low_gravity) && self.in_low_gravity) {
     return "low_g_super_sprint";
   }
   return "super_sprint";
@@ -230,15 +230,15 @@ function moon_quad_exit_align(stepanim) {
   self endon("death");
   anim_length = getanimlength(stepanim);
   wait(anim_length);
-  if(!(isdefined(self.exit_align) && self.exit_align)) {
+  if(!(isDefined(self.exit_align) && self.exit_align)) {
     self notify("stepanim", "exit_align");
   }
 }
 
 function moon_quad_phase_fx(var_99a8589b) {
   self endon("death");
-  if(isdefined(level._effect[var_99a8589b])) {
-    playfxontag(level._effect[var_99a8589b], self, "j_spine4");
+  if(isDefined(level._effect[var_99a8589b])) {
+    playFXOnTag(level._effect[var_99a8589b], self, "j_spine4");
   }
 }
 

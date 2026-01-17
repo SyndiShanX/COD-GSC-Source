@@ -128,7 +128,7 @@ cull_dist_adjustment() {
   trigger1 = getent("cull_set_forest_trench", "targetname");
   trigger2 = getent("cull_set_forest_entrance", "targetname");
   current_cull = 15000;
-  while (1) {
+  while(1) {
     if(any_player_touching(trigger1)) {
       if(current_cull != 5000) {
         SetCullDist(5000);

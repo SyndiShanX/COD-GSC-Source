@@ -19,7 +19,7 @@
 #namespace resurrect;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_resurrect", & __init__, undefined, undefined);
+  system::register("gadget_resurrect", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -27,23 +27,23 @@ function __init__() {
   clientfield::register("toplayer", "resurrect_state", 1, 2, "int");
   clientfield::register("clientuimodel", "hudItems.rejack.activationWindowEntered", 1, 1, "int");
   clientfield::register("clientuimodel", "hudItems.rejack.rejackActivated", 1, 1, "int");
-  ability_player::register_gadget_activation_callbacks(40, & gadget_resurrect_on, & gadget_resurrect_off);
-  ability_player::register_gadget_possession_callbacks(40, & gadget_resurrect_on_give, & gadget_resurrect_on_take);
-  ability_player::register_gadget_flicker_callbacks(40, & gadget_resurrect_on_flicker);
-  ability_player::register_gadget_is_inuse_callbacks(40, & gadget_resurrect_is_inuse);
-  ability_player::register_gadget_is_flickering_callbacks(40, & gadget_resurrect_is_flickering);
-  ability_player::register_gadget_primed_callbacks(40, & gadget_resurrect_is_primed);
-  ability_player::register_gadget_ready_callbacks(40, & gadget_resurrect_is_ready);
-  callback::on_connect( & gadget_resurrect_on_connect);
-  callback::on_spawned( & gadget_resurrect_on_spawned);
-  if(!isdefined(level.vsmgr_prio_visionset_resurrect)) {
+  ability_player::register_gadget_activation_callbacks(40, &gadget_resurrect_on, &gadget_resurrect_off);
+  ability_player::register_gadget_possession_callbacks(40, &gadget_resurrect_on_give, &gadget_resurrect_on_take);
+  ability_player::register_gadget_flicker_callbacks(40, &gadget_resurrect_on_flicker);
+  ability_player::register_gadget_is_inuse_callbacks(40, &gadget_resurrect_is_inuse);
+  ability_player::register_gadget_is_flickering_callbacks(40, &gadget_resurrect_is_flickering);
+  ability_player::register_gadget_primed_callbacks(40, &gadget_resurrect_is_primed);
+  ability_player::register_gadget_ready_callbacks(40, &gadget_resurrect_is_ready);
+  callback::on_connect(&gadget_resurrect_on_connect);
+  callback::on_spawned(&gadget_resurrect_on_spawned);
+  if(!isDefined(level.vsmgr_prio_visionset_resurrect)) {
     level.vsmgr_prio_visionset_resurrect = 62;
   }
-  if(!isdefined(level.vsmgr_prio_visionset_resurrect_up)) {
+  if(!isDefined(level.vsmgr_prio_visionset_resurrect_up)) {
     level.vsmgr_prio_visionset_resurrect_up = 63;
   }
-  visionset_mgr::register_info("visionset", "resurrect", 1, level.vsmgr_prio_visionset_resurrect, 16, 1, & visionset_mgr::ramp_in_out_thread_per_player_death_shutdown, 0);
-  visionset_mgr::register_info("visionset", "resurrect_up", 1, level.vsmgr_prio_visionset_resurrect_up, 16, 1, & visionset_mgr::ramp_in_out_thread_per_player_death_shutdown, 0);
+  visionset_mgr::register_info("visionset", "resurrect", 1, level.vsmgr_prio_visionset_resurrect, 16, 1, &visionset_mgr::ramp_in_out_thread_per_player_death_shutdown, 0);
+  visionset_mgr::register_info("visionset", "resurrect_up", 1, level.vsmgr_prio_visionset_resurrect_up, 16, 1, &visionset_mgr::ramp_in_out_thread_per_player_death_shutdown, 0);
 }
 
 function gadget_resurrect_is_inuse(slot) {
@@ -82,10 +82,10 @@ function gadget_resurrect_on_spawned() {
 }
 
 function resurrect_drain_power(amount) {
-  if(isdefined(self.resurrect_weapon)) {
+  if(isDefined(self.resurrect_weapon)) {
     slot = self gadgetgetslot(self.resurrect_weapon);
     if(slot >= 0 && slot < 3) {
-      if(isdefined(amount)) {
+      if(isDefined(amount)) {
         self gadgetpowerchange(slot, amount);
       } else {
         self gadgetstatechange(slot, self.resurrect_weapon, 3);
@@ -104,7 +104,7 @@ function watch_smoke_detonate() {
   self endon("disconnect");
   self endon("death");
   level endon("game_ended");
-  while (true) {
+  while(true) {
     if(self isplayerswimming() || self isonground() && !self iswallrunning() && !self istraversing()) {
       smoke_weapon = getweapon("gadget_resurrect_smoke_grenade");
       stat_weapon = getweapon("gadget_resurrect");
@@ -138,7 +138,7 @@ function watch_smoke_effect_watch_resurrect(player) {
 }
 
 function gadget_resurrect_is_primed(slot, weapon) {
-  if(isdefined(self.resurrect_not_allowed_by)) {
+  if(isDefined(self.resurrect_not_allowed_by)) {
     return;
   }
   self startresurrectviewangletransition();
@@ -178,7 +178,7 @@ function overridespawn(ispredictedspawn) {
   if(!self flagsys::get("gadget_resurrect_activated")) {
     return false;
   }
-  if(!isdefined(self.resurrect_origin)) {
+  if(!isDefined(self.resurrect_origin)) {
     self.resurrect_origin = self.origin;
     self.resurrect_angles = self.angles;
   }
@@ -187,7 +187,7 @@ function overridespawn(ispredictedspawn) {
 
 function is_jumping() {
   ground_ent = self getgroundent();
-  return !isdefined(ground_ent);
+  return !isDefined(ground_ent);
 }
 
 function player_position_valid() {
@@ -202,7 +202,7 @@ function resurrect_breadcrumbs(slot) {
   self endon("game_ended");
   self endon("resurrect_taken");
   self.resurrect_slot = slot;
-  while (true) {
+  while(true) {
     if(isalive(self) && self player_position_valid()) {
       self.resurrect_origin = self.origin;
       self.resurrect_angles = self.angles;
@@ -230,7 +230,7 @@ function wait_for_activate(msg) {
   self endon("disconnect");
   self endon("game_ended");
   self endon(msg);
-  while (true) {
+  while(true) {
     if(self offhandspecialbuttonpressed()) {
       self flagsys::set("gadget_resurrect_activated");
       self notify(msg);
@@ -256,15 +256,15 @@ function bot_wait_for_activate(msg, time) {
 function do_resurrect_hint_fx() {
   offset = vectorscale((0, 0, 1), 40);
   fxorg = spawn("script_model", self.resurrect_origin + offset);
-  fxorg setmodel("tag_origin");
-  fx = playfxontag("player/fx_plyr_revive", fxorg, "tag_origin");
+  fxorg setModel("tag_origin");
+  fx = playFXOnTag("player/fx_plyr_revive", fxorg, "tag_origin");
   self waittill("resurrect_time_or_activate");
   fxorg delete();
 }
 
 function do_resurrected_on_dead_body_fx() {
-  if(isdefined(self.body)) {
-    fx = playfx("player/fx_plyr_revive_demat", self.body.origin);
+  if(isDefined(self.body)) {
+    fx = playFX("player/fx_plyr_revive_demat", self.body.origin);
     self.body notsolid();
     self.body ghost();
   }
@@ -272,7 +272,7 @@ function do_resurrected_on_dead_body_fx() {
 
 function do_resurrected_on_spawned_player_fx() {
   playsoundatposition("mpl_resurrect_npc", self.origin);
-  fx = playfx("player/fx_plyr_rejack_light", self.origin);
+  fx = playFX("player/fx_plyr_rejack_light", self.origin);
 }
 
 function resurrect_watch_for_death(slot, weapon) {
@@ -280,7 +280,7 @@ function resurrect_watch_for_death(slot, weapon) {
   self endon("game_ended");
   self waittill("death");
   resurrect_time = 3;
-  if(isdefined(weapon.gadget_resurrect_duration)) {
+  if(isDefined(weapon.gadget_resurrect_duration)) {
     resurrect_time = weapon.gadget_resurrect_duration / 1000;
   }
   self.usedresurrect = 0;
@@ -301,10 +301,10 @@ function resurrect_watch_for_death(slot, weapon) {
     self.usedresurrect = 1;
     self notify("end_death_delay");
     self notify("force_spawn");
-    if(!(isdefined(1) && 1)) {
+    if(!(isDefined(1) && 1)) {
       self.pers["resetMomentumOnSpawn"] = 0;
     }
-    if(isdefined(level.playgadgetsuccess)) {
+    if(isDefined(level.playgadgetsuccess)) {
       self[[level.playgadgetsuccess]](weapon, "resurrectSuccessDelay");
     }
   }
@@ -329,10 +329,10 @@ function gadget_resurrect_is_player_predead() {
 }
 
 function gadget_resurrect_secondary_deathcam_time() {
-  if(self flagsys::get("gadget_resurrect_pending") && isdefined(self.resurrect_available_time)) {
+  if(self flagsys::get("gadget_resurrect_pending") && isDefined(self.resurrect_available_time)) {
     resurrect_time = 3000;
     weapon = self.resurrect_weapon;
-    if(isdefined(weapon.gadget_resurrect_duration)) {
+    if(isDefined(weapon.gadget_resurrect_duration)) {
       resurrect_time = weapon.gadget_resurrect_duration;
     }
     time_left = resurrect_time - (gettime() - self.resurrect_available_time);
@@ -348,10 +348,8 @@ function enter_rejack_standby() {
   self endon("death");
   level endon("game_ended");
   self.rejack_activate_requested = 0;
-  if(isdefined(level.resetplayerscorestreaks)) {
-    [
-      [level.resetplayerscorestreaks]
-    ](self);
+  if(isDefined(level.resetplayerscorestreaks)) {
+    [[level.resetplayerscorestreaks]](self);
   }
   self init_rejack_ui();
   self thread watch_rejack_activate_requested();
@@ -376,10 +374,10 @@ function watch_bad_trigger_touch() {
   self endon("disconnect");
   self endon("death");
   level endon("game_ended");
-  a_killbrushes = getentarray("trigger_hurt", "classname");
-  while (true) {
-    a_killbrushes = getentarray("trigger_hurt", "classname");
-    for (i = 0; i < a_killbrushes.size; i++) {
+  a_killbrushes = getEntArray("trigger_hurt", "classname");
+  while(true) {
+    a_killbrushes = getEntArray("trigger_hurt", "classname");
+    for(i = 0; i < a_killbrushes.size; i++) {
       if(self istouching(a_killbrushes[i])) {
         if(!a_killbrushes[i] istriggerenabled()) {
           continue;
@@ -401,7 +399,7 @@ function watch_rejack_timeout() {
   self endon("death");
   level endon("game_ended");
   wait(4);
-  self playsound("mpl_rejack_suicide_timeout");
+  self playSound("mpl_rejack_suicide_timeout");
   self thread resurrect_drain_power(-30);
   self rejack_suicide();
 }
@@ -411,18 +409,18 @@ function watch_rejack_suicide() {
   self endon("disconnect");
   self endon("death");
   level endon("game_ended");
-  while (self usebuttonpressed()) {
+  while(self usebuttonpressed()) {
     wait(1);
   }
-  if(isdefined(self.laststand) && self.laststand) {
+  if(isDefined(self.laststand) && self.laststand) {
     starttime = gettime();
-    while (true) {
+    while(true) {
       if(!self usebuttonpressed()) {
         starttime = gettime();
       }
       if((starttime + 500) < gettime()) {
         self rejack_suicide();
-        self playsound("mpl_rejack_suicide");
+        self playSound("mpl_rejack_suicide");
         return;
       }
       wait(0.01);
@@ -432,7 +430,7 @@ function watch_rejack_suicide() {
 
 function reload_clip_on_stand() {
   weapons = self getweaponslistprimaries();
-  for (i = 0; i < weapons.size; i++) {
+  for(i = 0; i < weapons.size; i++) {
     self reloadweaponammo(weapons[i]);
   }
 }
@@ -443,11 +441,11 @@ function watch_rejack_activate_requested() {
   self endon("disconnect");
   self endon("death");
   level endon("game_ended");
-  while (self offhandspecialbuttonpressed()) {
+  while(self offhandspecialbuttonpressed()) {
     wait(0.05);
   }
   self.rejack_activate_requested = 0;
-  while (!self.rejack_activate_requested) {
+  while(!self.rejack_activate_requested) {
     if(self offhandspecialbuttonpressed()) {
       self.rejack_activate_requested = 1;
     }
@@ -460,12 +458,12 @@ function watch_rejack_activate() {
   self endon("disconnect");
   self endon("death");
   level endon("game_ended");
-  if(isdefined(self.laststand) && self.laststand) {
-    while (true) {
+  if(isDefined(self.laststand) && self.laststand) {
+    while(true) {
       wait(0.05);
-      if(isdefined(self.rejack_activate_requested) && self.rejack_activate_requested) {
+      if(isDefined(self.rejack_activate_requested) && self.rejack_activate_requested) {
         self notify("player_input_revive");
-        if(isdefined(level.start_player_health_regen)) {
+        if(isDefined(level.start_player_health_regen)) {
           self thread[[level.start_player_health_regen]]();
         }
         self._disable_proximity_alarms = 0;

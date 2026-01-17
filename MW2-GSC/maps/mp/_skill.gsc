@@ -13,7 +13,7 @@ init() {
 }
 
 onPlayerConnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connected", player);
 
     // look at how spawning works
@@ -26,7 +26,7 @@ onPlayerConnect() {
 }
 
 onPlayerDisconnect() {
-  for (;;) {
+  for(;;) {
     level waittill("disconnected", player);
 
     player.targets = [];
@@ -37,12 +37,12 @@ onWeaponFired() {
   level endon("game_ended");
   self endon("disconnected");
 
-  for (;;) {
+  for(;;) {
     self waittill("weapon_fired");
 
     // find likely target
     // find target and tag when they shot me.
-    //self.target 
+    //self.target
   }
 }
 
@@ -50,12 +50,12 @@ onDeath() {
   level endon("game_ended");
   self endon("disconnected");
 
-  for (;;) {
+  for(;;) {
     self waittill("death");
 
     //
     // find target and tag when they shot me.
-    //self.target 
+    //self.target
   }
 }
 

@@ -14,8 +14,7 @@ main() {
   level.do_not_use_dof = 1;
 }
 
-dof_frontend() {
-}
+dof_frontend() {}
 
 run_war_room_mixers() {
   clientnotify("dim_cic_lights");

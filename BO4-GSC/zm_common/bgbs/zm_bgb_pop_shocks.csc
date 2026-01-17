@@ -6,11 +6,10 @@
 #include scripts\core_common\system_shared;
 #include scripts\zm\zm_lightning_chain;
 #include scripts\zm_common\zm_bgb;
-
 #namespace zm_bgb_pop_shocks;
 
 autoexec __init__system__() {
-  system::register(#"zm_bgb_pop_shocks", &__init__, undefined, #"bgb");
+  system::register(#"zm_bgb_pop_shocks", &__init__, undefined, # "bgb");
 }
 
 __init__() {

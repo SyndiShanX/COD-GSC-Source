@@ -11,9 +11,9 @@
 
 // initializes the squad management system
 init_squadManager() {
-  if(isdefined(anim.squadInitialized) && anim.squadInitialized)
+  if(isDefined(anim.squadInitialized) && anim.squadInitialized) {
     return;
-
+  }
   anim.squadCreateFuncs = [];
   anim.squadCreateStrings = [];
 
@@ -29,11 +29,11 @@ init_squadManager() {
 *****************************************************************************/
 
 createSquad(squadName, squadCreator) {
-  assertex(!isdefined(anim.squads[squadName]), "createSquad attempted to create a squad with the same name as an existing squad");
+  assertex(!isDefined(anim.squads[squadName]), "createSquad attempted to create a squad with the same name as an existing squad");
 
   //prof_begin( "createSquad" );
 
-  anim.squads[squadName] = spawnstruct();
+  anim.squads[squadName] = spawnStruct();
   squad = anim.squads[squadName];
   squad.squadName = squadName;
 
@@ -78,7 +78,7 @@ createSquad(squadName, squadCreator) {
   level notify("squad created " + squadName);
   anim notify("squad created " + squadName);
 
-  for (i = 0; i < anim.squadCreateFuncs.size; i++) {
+  for(i = 0; i < anim.squadCreateFuncs.size; i++) {
     squadCreateFunc = anim.squadCreateFuncs[i];
     squad thread[[squadCreateFunc]]();
   }
@@ -87,7 +87,7 @@ createSquad(squadName, squadCreator) {
   //	squad animscripts\battlechatter::init_squadBattleChatter();
 
   // tell all other squads to add us to their lists
-  for (i = 0; i < anim.squadIndex.size; i++)
+  for(i = 0; i < anim.squadIndex.size; i++)
     anim.squadIndex[i] updateSquadList();
 
   squad thread updateWaiter();
@@ -100,18 +100,18 @@ createSquad(squadName, squadCreator) {
 }
 
 deleteSquad(squadName) {
-  assertex(isdefined(anim.squads[squadName]), "deleteSquad attempted to delete a squad that does not exist");
+  assertex(isDefined(anim.squads[squadName]), "deleteSquad attempted to delete a squad that does not exist");
 
-  if(squadName == "axis" || squadName == "team3" || squadName == "allies")
+  if(squadName == "axis" || squadName == "team3" || squadName == "allies") {
     return;
-
+  }
   squadID = anim.squads[squadName].squadID;
   squad = anim.squads[squadName];
 
   squad notify("squad_deleting");
 
-  //	for (i = 0; i < squad.members.size; i++)
-  while (squad.members.size)
+  //	for(i = 0; i < squad.members.size; i++)
+  while(squad.members.size)
     squad.members[0] addToSquad(squad.members[0].team);
 
   anim.squadIndex[squadID] = anim.squadIndex[anim.squadIndex.size - 1];
@@ -123,7 +123,7 @@ deleteSquad(squadName) {
   level notify("squad deleted " + squadName);
   anim notify("squad deleted " + squadName);
 
-  for (i = 0; i < anim.squadIndex.size; i++)
+  for(i = 0; i < anim.squadIndex.size; i++)
     anim.squadIndex[i] updateSquadList();
 }
 
@@ -135,14 +135,14 @@ generateSquadName() {
 }
 
 addPlayerToSquad(squadName) {
-  if(!isdefined(squadName)) {
-    if(isdefined(self.script_squadname))
+  if(!isDefined(squadName)) {
+    if(isDefined(self.script_squadname))
       squadName = self.script_squadname;
     else
       squadName = self.team;
   }
 
-  if(!isdefined(anim.squads[squadName])) {
+  if(!isDefined(anim.squads[squadName])) {
     anim createSquad(squadName, self);
   }
 
@@ -159,7 +159,7 @@ squadChange() {
   self endon("death");
   wait(10.0); // ???
 
-  if(!isdefined(self.script_squadname))
+  if(!isDefined(self.script_squadname))
     squadName = (self.team + self.script_flanker);
   else
     squadName = (self.script_squadname + self.script_flanker);
@@ -181,21 +181,21 @@ addToSquad(squadName) {
 
   //prof_begin( "addToSquad" );
 
-  if(!isdefined(squadName)) {
-    if(isdefined(self.script_flanker))
+  if(!isDefined(squadName)) {
+    if(isDefined(self.script_flanker))
       self thread squadChange();
 
-    if(isdefined(self.script_squadname))
+    if(isDefined(self.script_squadname))
       squadName = self.script_squadname;
     else
       squadName = self.team;
   }
-  if(!isdefined(anim.squads[squadName]))
+  if(!isDefined(anim.squads[squadName]))
     anim createSquad(squadName, self);
 
   squad = anim.squads[squadName];
 
-  if(isdefined(self.squad)) {
+  if(isDefined(self.squad)) {
     if(self.squad == squad)
       return;
     else
@@ -213,7 +213,7 @@ addToSquad(squadName) {
   squad.memberCount = squad.members.size;
 
   // this is handled in wait for loadout function
-  if(isdefined(level.loadoutComplete)) {
+  if(isDefined(level.loadoutComplete)) {
     if(self.team == "allies" && self animscripts\battlechatter::isOfficer()) {
       self addOfficerToSquad();
     }
@@ -221,7 +221,7 @@ addToSquad(squadName) {
 
   //	self.squad updateOrigin();
 
-  for (i = 0; i < self.squad.memberAddFuncs.size; i++) {
+  for(i = 0; i < self.squad.memberAddFuncs.size; i++) {
     memberAddFunc = self.squad.memberAddFuncs[i];
     self thread[[memberAddFunc]](self.squad.squadName);
   }
@@ -234,15 +234,15 @@ addToSquad(squadName) {
 
 removeFromSquad() {
   //prof_begin( "removeFromSquad" );
-  ASSERTEX(IsDefined(self.squad), "removeFromSquad attempted to remove a member who was not part of a squad (self.squad == undefined)");
+  ASSERTEX(isDefined(self.squad), "removeFromSquad attempted to remove a member who was not part of a squad (self.squad == undefined)");
 
   squad = self.squad;
   memberID = -1;
 
-  if(IsDefined(self)) {
+  if(isDefined(self)) {
     memberID = self.memberID;
   } else {
-    for (i = 0; i < squad.members.size; i++) {
+    for(i = 0; i < squad.members.size; i++) {
       if(squad.members[i] == self)
         memberID = i;
     }
@@ -253,18 +253,18 @@ removeFromSquad() {
   if(memberID != squad.members.size - 1) {
     other = squad.members[squad.members.size - 1];
     squad.members[memberID] = other;
-    if(isdefined(other))
+    if(isDefined(other))
       other.memberID = memberID;
   }
 
   squad.members[squad.members.size - 1] = undefined;
   squad.memberCount = squad.members.size;
 
-  if(IsDefined(self.officerID)) {
+  if(isDefined(self.officerID)) {
     self removeOfficerFromSquad();
   }
 
-  for (i = 0; i < self.squad.memberRemoveFuncs.size; i++) {
+  for(i = 0; i < self.squad.memberRemoveFuncs.size; i++) {
     memberRemoveFunc = self.squad.memberRemoveFuncs[i];
     self thread[[memberRemoveFunc]](squad.squadName);
   }
@@ -275,7 +275,7 @@ removeFromSquad() {
     deleteSquad(squad.squadName);
   }
 
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     self.squad = undefined;
     self.memberID = undefined;
   }
@@ -288,10 +288,10 @@ removeFromSquad() {
 addOfficerToSquad() {
   squad = self.squad;
 
-  if(isdefined(self.officerID))
+  if(isDefined(self.officerID)) {
     return;
-
-  assertex(!isdefined(self.officerID), "addOfficerToSquad attempted to add a member that is already in an officers");
+  }
+  assertex(!isDefined(self.officerID), "addOfficerToSquad attempted to add a member that is already in an officers");
 
   self.officerID = squad.officers.size;
   squad.officers[self.officerID] = self;
@@ -304,10 +304,10 @@ removeOfficerFromSquad() {
   squad = self.squad;
   officerID = -1;
 
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     officerID = self.officerID;
   } else {
-    for (i = 0; i < squad.officers.size; i++) {
+    for(i = 0; i < squad.officers.size; i++) {
       if(squad.officers[i] == self)
         officerID = i;
     }
@@ -318,7 +318,7 @@ removeOfficerFromSquad() {
   if(officerID != squad.officers.size - 1) {
     other = squad.officers[squad.officers.size - 1];
     squad.officers[officerID] = other;
-    if(isdefined(other))
+    if(isDefined(other))
       other.officerID = officerID;
   }
 
@@ -327,11 +327,10 @@ removeOfficerFromSquad() {
 
   assert(squad.officers.size == squad.officerCount);
 
-  if(isdefined(self))
+  if(isDefined(self))
     self.officerID = undefined;
 
   //prof_end( "removeOfficerFromSquad" );
-
 }
 
 /****************************************************************************
@@ -339,11 +338,11 @@ removeOfficerFromSquad() {
 *****************************************************************************/
 
 officerWaiter() {
-  if(!isdefined(level.loadoutComplete)) {
+  if(!isDefined(level.loadoutComplete)) {
     anim waittill("loadout complete");
   }
 
-  for (i = 0; i < self.members.size; i++) {
+  for(i = 0; i < self.members.size; i++) {
     if(self.members[i] animscripts\battlechatter::isOfficer()) {
       self.members[i] addOfficerToSquad();
     }
@@ -351,7 +350,7 @@ officerWaiter() {
 }
 
 updateWaiter() {
-  while (1) {
+  while(1) {
     anim waittill("squadupdate", action);
 
     //prof_begin( "updateWaiter" );
@@ -380,7 +379,7 @@ squadTracker() {
   // even with the long wait time, this is a crappy way to track things
   // ideally the updateFunctions would only be called when another function needs to know the status of something
   // rather than polling like it's doing now.
-  while (1) {
+  while(1) {
     // combat can be removed
     self updateAll();
 
@@ -394,7 +393,7 @@ memberDeathWaiter() {
 
   self waittill("death", attacker);
 
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     self.attacker = attacker;
   }
 
@@ -405,10 +404,10 @@ memberCombatWaiter() {
   //	self notify ("squad change");
   self endon("removed from squad");
 
-  while (1) {
+  while(1) {
     self waittill("enemy");
 
-    if(!isdefined(self.enemy))
+    if(!isDefined(self.enemy))
       self.squad notify("squadupdate", "combat");
     else
       self.squad.isInCombat = true;
@@ -422,7 +421,7 @@ memberCombatWaiter() {
 *****************************************************************************/
 
 updateHeading() {
-  if(isdefined(self.enemy)) {
+  if(isDefined(self.enemy)) {
     self.forward = vectornormalize(self.enemy.origin - self.origin);
     return;
   }
@@ -430,11 +429,11 @@ updateHeading() {
   newHeading = (0, 0, 0);
   numInfluences = 0;
 
-  for (i = 0; i < self.members.size; i++) {
+  for(i = 0; i < self.members.size; i++) {
     if(!isalive(self.members[i]))
       continue;
     // logic here to prune out separated members... otherwise origin could be too vague
-    newHeading += anglestoforward(self.members[i].angles);
+    newHeading += anglesToForward(self.members[i].angles);
     numInfluences++;
   }
 
@@ -449,13 +448,13 @@ updateOrigin() {
   newOrigin = (0, 0, 0);
   numInfluences = 0;
 
-  for (i = 0; i < self.members.size; i++) {
+  for(i = 0; i < self.members.size; i++) {
     // logic here to prune out separated members... otherwise origin could be too vague
 
     //		assertex (isdefined (self.members[i]), "updateOrigin run while a squad member was undefined");		
-    if(!isalive(self.members[i]))
+    if(!isalive(self.members[i])) {
       continue;
-
+    }
     newOrigin += self.members[i].origin;
     numInfluences++;
   }
@@ -474,11 +473,11 @@ updateCombat() {
   self.isInCombat = false;
 
   // reset squad contact status
-  for (i = 0; i < anim.squadIndex.size; i++)
+  for(i = 0; i < anim.squadIndex.size; i++)
     self.squadList[anim.squadIndex[i].squadName].isInContact = false;
 
-  for (i = 0; i < self.members.size; i++) {
-    if(isdefined(self.members[i].enemy) && isdefined(self.members[i].enemy.squad) && self.members[i].combatTime > 0)
+  for(i = 0; i < self.members.size; i++) {
+    if(isDefined(self.members[i].enemy) && isDefined(self.members[i].enemy.squad) && self.members[i].combatTime > 0)
       self.squadList[self.members[i].enemy.squad.squadName].isInContact = true;
   }
 
@@ -488,9 +487,9 @@ updateCombat() {
 updateEnemy() {
   //prof_begin( "updateEnemy" );
   curEnemy = undefined;
-  for (i = 0; i < self.members.size; i++) {
-    if(isdefined(self.members[i].enemy) && isdefined(self.members[i].enemy.squad)) {
-      if(!isdefined(curEnemy))
+  for(i = 0; i < self.members.size; i++) {
+    if(isDefined(self.members[i].enemy) && isDefined(self.members[i].enemy.squad)) {
+      if(!isDefined(curEnemy))
         curEnemy = self.members[i].enemy.squad;
       else if(self.members[i].enemy.squad.memberCount > curEnemy.memberCount)
         curEnemy = self.members[i].enemy.squad;
@@ -511,16 +510,16 @@ updateAll() {
 
   self updateCombat();
 
-  for (i = 0; i < self.members.size; i++) {
-    if(!isalive(self.members[i]))
+  for(i = 0; i < self.members.size; i++) {
+    if(!isalive(self.members[i])) {
       continue;
-
+    }
     // logic here to prune out separated members... otherwise origin could be too vague
     newOrigin += self.members[i].origin;
     numInfluences++;
 
-    if(isdefined(self.members[i].enemy) && isdefined(self.members[i].enemy.squad)) {
-      if(!isdefined(curEnemy))
+    if(isDefined(self.members[i].enemy) && isDefined(self.members[i].enemy.squad)) {
+      if(!isDefined(curEnemy))
         curEnemy = self.members[i].enemy.squad;
       else if(self.members[i].enemy.squad.memberCount > curEnemy.memberCount)
         curEnemy = self.members[i].enemy.squad;
@@ -544,13 +543,13 @@ updateAll() {
 updateSquadList() {
   //prof_begin( "updateSquadList" );
 
-  for (i = 0; i < anim.squadIndex.size; i++) {
-    if(!isdefined(self.squadList[anim.squadIndex[i].squadName])) {
-      self.squadList[anim.squadIndex[i].squadName] = spawnstruct();
+  for(i = 0; i < anim.squadIndex.size; i++) {
+    if(!isDefined(self.squadList[anim.squadIndex[i].squadName])) {
+      self.squadList[anim.squadIndex[i].squadName] = spawnStruct();
       self.squadList[anim.squadIndex[i].squadName].isInContact = false;
     }
 
-    for (j = 0; j < self.squadUpdateFuncs.size; j++) {
+    for(j = 0; j < self.squadUpdateFuncs.size; j++) {
       squadUpdateFunc = self.squadUpdateFuncs[j];
       self thread[[squadUpdateFunc]](anim.squadIndex[i].squadName);
     }
@@ -562,15 +561,15 @@ updateSquadList() {
 printAboveHead(string, duration, offset, color) {
   self endon("death");
 
-  if(!isdefined(offset))
+  if(!isDefined(offset))
     offset = (0, 0, 0);
-  if(!isdefined(color))
+  if(!isDefined(color))
     color = (1, 0, 0);
 
-  for (i = 0; i < (duration * 2); i++) {
-    if(!isalive(self))
+  for(i = 0; i < (duration * 2); i++) {
+    if(!isalive(self)) {
       return;
-
+    }
     aboveHead = self getshootatpos() + (0, 0, 10) + offset;
     print3d(aboveHead, string, color, 1, 0.5); // origin, text, RGB, alpha, scale
     wait(0.05);
@@ -632,10 +631,10 @@ updateStates() {
   self resetState("suppressed");
   self resetState("attacking");
 
-  for (i = 0; i < self.members.size; i++) {
-    if(!isalive(self.members[i]))
+  for(i = 0; i < self.members.size; i++) {
+    if(!isalive(self.members[i])) {
       continue;
-
+    }
     self queryMemberAnimState(self.members[i]);
     self queryMemberState(self.members[i], "suppressed");
     self queryMemberState(self.members[i], "combat");
@@ -648,13 +647,13 @@ updateMemberStates() {
   anim endon("squad deleted " + self.squadName);
 
   timeSlice = 0.05;
-  while (1) {
+  while(1) {
     //prof_begin( "updateMemberStates" );
 
-    for (i = 0; i < self.members.size; i++) {
-      if(!isalive(self.members[i]))
+    for(i = 0; i < self.members.size; i++) {
+      if(!isalive(self.members[i])) {
         continue;
-
+      }
       self.members[i] aiUpdateCombat(timeSlice);
       self.members[i] aiUpdateSuppressed(timeSlice);
     }
@@ -665,7 +664,7 @@ updateMemberStates() {
 }
 
 aiUpdateCombat(timeSlice) {
-  if(isdefined(self.lastEnemySightPos)) {
+  if(isDefined(self.lastEnemySightPos)) {
     if(self.combatTime < 0)
       self.combatTime = timeSlice;
     else
@@ -701,7 +700,7 @@ aiUpdateSuppressed(timeSlice) {
 }
 
 initState(state, activateRatio) {
-  self.squadStates[state] = spawnstruct();
+  self.squadStates[state] = spawnStruct();
   self.squadStates[state].activateRatio = activateRatio;
   self.squadStates[state].isActive = false;
   self.squadStates[state].numActive = 0;

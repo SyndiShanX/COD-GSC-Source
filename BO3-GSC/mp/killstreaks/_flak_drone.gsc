@@ -28,7 +28,7 @@
 
 function init() {
   clientfield::register("vehicle", "flak_drone_camo", 1, 3, "int");
-  vehicle::add_main_callback("veh_flak_drone_mp", & initflakdrone);
+  vehicle::add_main_callback("veh_flak_drone_mp", &initflakdrone);
 }
 
 function initflakdrone() {
@@ -45,13 +45,13 @@ function initflakdrone() {
   self.goalheight = 999999;
   self setgoal(self.origin, 0, self.goalradius, self.goalheight);
   self thread vehicle_ai::nudge_collision();
-  self.overridevehicledamage = & flakdronedamageoverride;
+  self.overridevehicledamage = &flakdronedamageoverride;
   self vehicle_ai::init_state_machine_for_role("default");
-  self vehicle_ai::get_state_callbacks("combat").enter_func = & state_combat_enter;
-  self vehicle_ai::get_state_callbacks("combat").update_func = & state_combat_update;
-  self vehicle_ai::get_state_callbacks("off").enter_func = & state_off_enter;
-  self vehicle_ai::get_state_callbacks("off").update_func = & state_off_update;
-  self vehicle_ai::get_state_callbacks("death").update_func = & state_death_update;
+  self vehicle_ai::get_state_callbacks("combat").enter_func = &state_combat_enter;
+  self vehicle_ai::get_state_callbacks("combat").update_func = &state_combat_update;
+  self vehicle_ai::get_state_callbacks("off").enter_func = &state_off_enter;
+  self vehicle_ai::get_state_callbacks("off").update_func = &state_off_update;
+  self vehicle_ai::get_state_callbacks("death").update_func = &state_death_update;
   self vehicle_ai::startinitialstate("off");
 }
 
@@ -60,20 +60,20 @@ function state_off_enter(params) {}
 function state_off_update(params) {
   self endon("change_state");
   self endon("death");
-  while (!isdefined(self.parent)) {
+  while(!isDefined(self.parent)) {
     wait(0.1);
   }
   self.parent endon("death");
-  while (true) {
+  while(true) {
     self setspeed(400);
-    if(isdefined(self.inpain) && self.inpain) {
+    if(isDefined(self.inpain) && self.inpain) {
       wait(0.1);
     }
     self clearlookatent();
     self.current_pathto_pos = undefined;
     queryorigin = self.parent.origin + (0, 0, -75);
     queryresult = positionquery_source_navigation(queryorigin, 25, 75, 40, 40, self);
-    if(isdefined(queryresult)) {
+    if(isDefined(queryresult)) {
       positionquery_filter_distancetogoal(queryresult, self);
       vehicle_ai::positionquery_filter_outofgoalanchor(queryresult);
       best_point = undefined;
@@ -82,7 +82,7 @@ function state_off_update(params) {
         randomscore = randomfloatrange(0, 100);
         disttooriginscore = point.disttoorigin2d * 0.2;
         point.score = point.score + (randomscore + disttooriginscore);
-        if(!isdefined(point._scoredebug)) {
+        if(!isDefined(point._scoredebug)) {
           point._scoredebug = [];
         }
         point._scoredebug[""] = disttooriginscore;
@@ -93,21 +93,21 @@ function state_off_update(params) {
         }
       }
       self vehicle_ai::positionquery_debugscores(queryresult);
-      if(isdefined(best_point)) {
+      if(isDefined(best_point)) {
         self.current_pathto_pos = best_point.origin;
       }
     }
-    if(isdefined(self.current_pathto_pos)) {
+    if(isDefined(self.current_pathto_pos)) {
       self updateflakdronespeed();
       if(self setvehgoalpos(self.current_pathto_pos, 1, 0)) {
-        self playsound("veh_wasp_vox");
+        self playSound("veh_wasp_vox");
       } else {
         self setspeed(400 * 3);
         self.current_pathto_pos = self getclosestpointonnavvolume(self.origin, 999999);
         self setvehgoalpos(self.current_pathto_pos, 1, 0);
       }
     } else {
-      if(isdefined(self.parent.heligoalpos)) {
+      if(isDefined(self.parent.heligoalpos)) {
         self.current_pathto_pos = self.parent.heligoalpos;
       } else {
         self.current_pathto_pos = queryorigin;
@@ -121,11 +121,11 @@ function state_off_update(params) {
 
 function updateflakdronespeed() {
   desiredspeed = 400;
-  if(isdefined(self.parent)) {
+  if(isDefined(self.parent)) {
     parentspeed = self.parent getspeed();
     desiredspeed = parentspeed * 0.9;
     if(distance2dsquared(self.parent.origin, self.origin) > (36 * 36)) {
-      if(isdefined(self.current_pathto_pos)) {
+      if(isDefined(self.current_pathto_pos)) {
         flakdronedistancetogoalsquared = distance2dsquared(self.origin, self.current_pathto_pos);
         parentdistancetogoalsquared = distance2dsquared(self.parent.origin, self.current_pathto_pos);
         if(flakdronedistancetogoalsquared > parentdistancetogoalsquared) {
@@ -163,21 +163,21 @@ function spawnflakrocket(missile, spawnpos, parent) {
   tooclosetopredictedparent = 0;
   debug_draw = getdvarint("", 0);
   debug_duration = getdvarint("", 400);
-  while (true) {
+  while(true) {
     wait(0.05);
     prevdist = curdist;
-    if(isdefined(rocket)) {
+    if(isDefined(rocket)) {
       curdist = distance(missile.origin, rocket.origin);
       distdelta = prevdist - curdist;
       predicteddist = curdist - distdelta;
     }
-    if(debug_draw && isdefined(missile)) {
+    if(debug_draw && isDefined(missile)) {
       util::debug_sphere(missile.origin, 6, vectorscale((1, 0, 0), 0.9), 0.9, debug_duration);
     }
-    if(debug_draw && isdefined(rocket)) {
+    if(debug_draw && isDefined(rocket)) {
       util::debug_sphere(rocket.origin, 6, vectorscale((0, 0, 1), 0.9), 0.9, debug_duration);
     }
-    if(isdefined(parent)) {
+    if(isDefined(parent)) {
       parentvelocity = parent getvelocity();
       parentpredictedlocation = parent.origin + (parentvelocity * 0.05);
       missilevelocity = missile getvelocity();
@@ -186,15 +186,15 @@ function spawnflakrocket(missile, spawnpos, parent) {
         tooclosetopredictedparent = 1;
       }
     }
-    if(predicteddist < 0 || curdist > prevdist || tooclosetopredictedparent || !isdefined(rocket)) {
-      if(debug_draw && isdefined(parent)) {
+    if(predicteddist < 0 || curdist > prevdist || tooclosetopredictedparent || !isDefined(rocket)) {
+      if(debug_draw && isDefined(parent)) {
         if(tooclosetopredictedparent && (!(predicteddist < 0 || curdist > prevdist))) {
           util::debug_sphere(parent.origin, 18, vectorscale((1, 0, 1), 0.9), 0.9, debug_duration);
         } else {
           util::debug_sphere(parent.origin, 18, vectorscale((0, 1, 0), 0.9), 0.9, debug_duration);
         }
       }
-      if(isdefined(rocket)) {
+      if(isDefined(rocket)) {
         rocket detonate();
       }
       missile thread heatseekingmissile::_missiledetonate(missile.target_attacker, missile.target_weapon, missile.target_weapon.explosionradius, 10, 20);
@@ -207,10 +207,10 @@ function cleanupaftermissiledeath(rocket, flak_drone) {
   missile = self;
   missile waittill("death");
   wait(0.5);
-  if(isdefined(rocket)) {
+  if(isDefined(rocket)) {
     rocket delete();
   }
-  if(isdefined(flak_drone)) {
+  if(isDefined(flak_drone)) {
     flak_drone delete();
   }
 }
@@ -218,13 +218,13 @@ function cleanupaftermissiledeath(rocket, flak_drone) {
 function state_death_update(params) {
   self endon("death");
   dogibbeddeath = 0;
-  if(isdefined(self.death_info)) {
-    if(isdefined(self.death_info.weapon)) {
+  if(isDefined(self.death_info)) {
+    if(isDefined(self.death_info.weapon)) {
       if(self.death_info.weapon.dogibbing || self.death_info.weapon.doannihilate) {
         dogibbeddeath = 1;
       }
     }
-    if(isdefined(self.death_info.meansofdeath)) {
+    if(isDefined(self.death_info.meansofdeath)) {
       meansofdeath = self.death_info.meansofdeath;
       if(meansofdeath == "MOD_EXPLOSIVE" || meansofdeath == "MOD_GRENADE_SPLASH" || meansofdeath == "MOD_PROJECTILE_SPLASH" || meansofdeath == "MOD_PROJECTILE") {
         dogibbeddeath = 1;
@@ -232,12 +232,12 @@ function state_death_update(params) {
     }
   }
   if(dogibbeddeath) {
-    self playsound("veh_wasp_gibbed");
-    playfxontag("explosions/fx_vexp_wasp_gibb_death", self, "tag_origin");
+    self playSound("veh_wasp_gibbed");
+    playFXOnTag("explosions/fx_vexp_wasp_gibb_death", self, "tag_origin");
     self ghost();
     self notsolid();
     wait(5);
-    if(isdefined(self)) {
+    if(isDefined(self)) {
       self delete();
     }
   } else {
@@ -248,16 +248,16 @@ function state_death_update(params) {
 function drone_pain_for_time(time, stablizeparam, restorelookpoint) {
   self endon("death");
   self.painstarttime = gettime();
-  if(!(isdefined(self.inpain) && self.inpain)) {
+  if(!(isDefined(self.inpain) && self.inpain)) {
     self.inpain = 1;
-    while (gettime() < (self.painstarttime + (time * 1000))) {
+    while(gettime() < (self.painstarttime + (time * 1000))) {
       self setvehvelocity(self.velocity * stablizeparam);
       self setangularvelocity(self getangularvelocity() * stablizeparam);
       wait(0.1);
     }
-    if(isdefined(restorelookpoint)) {
+    if(isDefined(restorelookpoint)) {
       restorelookent = spawn("script_model", restorelookpoint);
-      restorelookent setmodel("tag_origin");
+      restorelookent setModel("tag_origin");
       self clearlookatent();
       self setlookatent(restorelookent);
       self setturrettargetent(restorelookent);
@@ -271,7 +271,7 @@ function drone_pain_for_time(time, stablizeparam, restorelookpoint) {
 }
 
 function drone_pain(eattacker, damagetype, hitpoint, hitdirection, hitlocationinfo, partname) {
-  if(!(isdefined(self.inpain) && self.inpain)) {
+  if(!(isDefined(self.inpain) && self.inpain)) {
     yaw_vel = math::randomsign() * randomfloatrange(280, 320);
     ang_vel = self getangularvelocity();
     ang_vel = ang_vel + (randomfloatrange(-120, -100), yaw_vel, randomfloatrange(-200, 200));
@@ -284,7 +284,7 @@ function flakdronedamageoverride(einflictor, eattacker, idamage, idflags, smeans
   if(smeansofdeath == "MOD_TRIGGER_HURT") {
     return 0;
   }
-  if(isdefined(eattacker) && isdefined(eattacker.team) && eattacker.team != self.team) {
+  if(isDefined(eattacker) && isDefined(eattacker.team) && eattacker.team != self.team) {
     drone_pain(eattacker, smeansofdeath, vpoint, vdir, shitloc, partname);
   }
   return idamage;
@@ -356,18 +356,18 @@ function setcamostate(state) {
 
 function shutdown(explode) {
   drone = self;
-  if(isdefined(drone.death_callback)) {
+  if(isDefined(drone.death_callback)) {
     drone.parent thread[[drone.death_callback]]();
   }
-  if(isdefined(drone) && !isdefined(drone.parent)) {
+  if(isDefined(drone) && !isDefined(drone.parent)) {
     drone ghost();
     drone notsolid();
     wait(5);
-    if(isdefined(drone)) {
+    if(isDefined(drone)) {
       drone delete();
     }
   }
-  if(isdefined(drone)) {
+  if(isDefined(drone)) {
     if(explode) {
       drone dodamage(drone.health + 1000, drone.origin, drone, drone, "none", "MOD_EXPLOSIVE");
     } else {

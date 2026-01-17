@@ -127,7 +127,7 @@ randomize_maze_perms() {
 }
 
 init() {
-  level._maze = spawnstruct();
+  level._maze = spawnStruct();
   level._maze.players_in_maze_volume = getent("maze_player_volume", "targetname");
   level._maze.players_can_see_maze_volume = getent("maze_player_can_see_volume", "targetname");
   init_maze_clientfields();
@@ -174,7 +174,7 @@ maze_blocker_rises_thread() {
   self unlink_nodes_for_blocker_location();
   blocker.origin = self.origin - vectorscale((0, 0, 1), 96.0);
   blocker.angles = self.angles;
-  blocker setmodel(self.model);
+  blocker setModel(self.model);
   blocker dontinterpolate();
   blocker show();
   wait 0.05;

@@ -16,18 +16,18 @@
 #namespace scoreevents;
 
 function autoexec __init__sytem__() {
-  system::register("scoreevents", & __init__, undefined, undefined);
+  system::register("scoreevents", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype( & main);
+  callback::on_start_gametype(&main);
 }
 
 function main() {
   level.scoreeventcallbacks = [];
-  level.scoreeventgameendcallback = & ongameend;
-  registerscoreeventcallback("playerKilled", & scoreeventplayerkill);
-  registerscoreeventcallback("actorKilled", & scoreeventactorkill);
+  level.scoreeventgameendcallback = &ongameend;
+  registerscoreeventcallback("playerKilled", &scoreeventplayerkill);
+  registerscoreeventcallback("actorKilled", &scoreeventactorkill);
 }
 
 function scoreeventtablelookupint(index, scoreeventcolumn) {
@@ -42,13 +42,13 @@ function processteamscoreevent(event) {
   foreach(e_player in level.players) {
     processscoreevent(event, e_player);
   }
-  if(isdefined(level.teamscoreuicallback)) {
+  if(isDefined(level.teamscoreuicallback)) {
     level thread[[level.teamscoreuicallback]](event);
   }
 }
 
 function registerscoreeventcallback(callback, func) {
-  if(!isdefined(level.scoreeventcallbacks[callback])) {
+  if(!isDefined(level.scoreeventcallbacks[callback])) {
     level.scoreeventcallbacks[callback] = [];
   }
   level.scoreeventcallbacks[callback][level.scoreeventcallbacks[callback].size] = func;
@@ -64,13 +64,13 @@ function scoreeventactorkill(data, time) {
   if(!level.gametype === "raid") {
     return;
   }
-  if(!isdefined(attacker)) {
+  if(!isDefined(attacker)) {
     return;
   }
   if(!isplayer(attacker)) {
     return;
   }
-  if(isdefined(data.weapon)) {
+  if(isDefined(data.weapon)) {
     weapon = data.weapon;
     weaponclass = util::getweaponclass(data.weapon);
   }
@@ -89,32 +89,32 @@ function scoreeventplayerkill(data, time) {
   wasonground = data.victimonground;
   meansofdeath = data.smeansofdeath;
   weapon = level.weaponnone;
-  if(isdefined(data.weapon)) {
+  if(isDefined(data.weapon)) {
     weapon = data.weapon;
     weaponclass = util::getweaponclass(data.weapon);
   }
   victim.anglesondeath = victim getplayerangles();
   if(meansofdeath == "MOD_GRENADE" || meansofdeath == "MOD_GRENADE_SPLASH" || meansofdeath == "MOD_EXPLOSIVE" || meansofdeath == "MOD_EXPLOSIVE_SPLASH" || meansofdeath == "MOD_PROJECTILE" || meansofdeath == "MOD_PROJECTILE_SPLASH") {
-    if(weapon == level.weaponnone && isdefined(data.victim.explosiveinfo["weapon"])) {
+    if(weapon == level.weaponnone && isDefined(data.victim.explosiveinfo["weapon"])) {
       weapon = data.victim.explosiveinfo["weapon"];
     }
   }
   if(level.teambased) {
     attacker.lastkilltime = time;
-    if(isdefined(victim.lastkilltime) && victim.lastkilltime > (time - 3000)) {
-      if(isdefined(victim.lastkilledplayer) && victim.lastkilledplayer util::isenemyplayer(attacker) == 0 && attacker != victim.lastkilledplayer) {
+    if(isDefined(victim.lastkilltime) && victim.lastkilltime > (time - 3000)) {
+      if(isDefined(victim.lastkilledplayer) && victim.lastkilledplayer util::isenemyplayer(attacker) == 0 && attacker != victim.lastkilledplayer) {
         processscoreevent("kill_enemy_who_killed_teammate", attacker, victim, weapon);
         victim recordkillmodifier("avenger");
       }
     }
-    if(isdefined(victim.damagedplayers)) {
+    if(isDefined(victim.damagedplayers)) {
       keys = getarraykeys(victim.damagedplayers);
-      for (i = 0; i < keys.size; i++) {
+      for(i = 0; i < keys.size; i++) {
         key = keys[i];
         if(key == attacker.clientid) {
           continue;
         }
-        if(!isdefined(victim.damagedplayers[key].entity)) {
+        if(!isDefined(victim.damagedplayers[key].entity)) {
           continue;
         }
         if(attacker util::isenemyplayer(victim.damagedplayers[key].entity)) {
@@ -122,7 +122,7 @@ function scoreeventplayerkill(data, time) {
         }
         if((time - victim.damagedplayers[key].time) < 1000) {
           processscoreevent("kill_enemy_injuring_teammate", attacker, victim, weapon);
-          if(isdefined(victim.damagedplayers[key].entity)) {
+          if(isDefined(victim.damagedplayers[key].entity)) {
             victim.damagedplayers[key].entity.lastrescuedby = attacker;
             victim.damagedplayers[key].entity.lastrescuedtime = time;
           }
@@ -136,7 +136,7 @@ function scoreeventplayerkill(data, time) {
       attacker.pers["tomahawks"]++;
       attacker.tomahawks = attacker.pers["tomahawks"];
       processscoreevent("hatchet_kill", attacker, victim, weapon);
-      if(isdefined(data.victim.explosiveinfo["projectile_bounced"]) && data.victim.explosiveinfo["projectile_bounced"] == 1) {
+      if(isDefined(data.victim.explosiveinfo["projectile_bounced"]) && data.victim.explosiveinfo["projectile_bounced"] == 1) {
         level.globalbankshots++;
         processscoreevent("bounce_hatchet_kill", attacker, victim, weapon);
       }
@@ -152,7 +152,7 @@ function scoreeventplayerkill(data, time) {
       break;
     }
   }
-  if(isdefined(data.victimweapon)) {
+  if(isDefined(data.victimweapon)) {
     if(data.victimweapon.name == "minigun") {
       processscoreevent("killed_death_machine_enemy", attacker, victim, weapon);
     } else if(data.victimweapon.name == "m32") {
@@ -164,7 +164,7 @@ function scoreeventplayerkill(data, time) {
     victim recordkillmodifier("firstblood");
     processscoreevent("first_kill", attacker, victim, weapon);
   } else {
-    if(isdefined(attacker.lastkilledby)) {
+    if(isDefined(attacker.lastkilledby)) {
       if(attacker.lastkilledby == victim) {
         level.globalpaybacks++;
         processscoreevent("revenge_kill", attacker, victim, weapon);
@@ -173,15 +173,15 @@ function scoreeventplayerkill(data, time) {
         attacker.lastkilledby = undefined;
       }
     }
-    if(isdefined(victim.lastmansd) && victim.lastmansd == 1) {
+    if(isDefined(victim.lastmansd) && victim.lastmansd == 1) {
       processscoreevent("final_kill_elimination", attacker, victim, weapon);
-      if(isdefined(attacker.lastmansd) && attacker.lastmansd == 1) {
+      if(isDefined(attacker.lastmansd) && attacker.lastmansd == 1) {
         processscoreevent("elimination_and_last_player_alive", attacker, victim, weapon);
       }
     }
   }
   if(is_weapon_valid(meansofdeath, weapon, weaponclass)) {
-    if(isdefined(victim.vattackerorigin)) {
+    if(isDefined(victim.vattackerorigin)) {
       attackerorigin = victim.vattackerorigin;
     } else {
       attackerorigin = attacker.origin;
@@ -209,7 +209,7 @@ function scoreeventplayerkill(data, time) {
         attacker addplayerstat("perk_bulletflinch_kills", 1);
       }
     }
-  } else if(isdefined(attacker.deathtime) && (attacker.deathtime + 800) < time && !attacker isinvehicle()) {
+  } else if(isDefined(attacker.deathtime) && (attacker.deathtime + 800) < time && !attacker isinvehicle()) {
     level.globalafterlifes++;
     processscoreevent("kill_enemy_after_death", attacker, victim, weapon);
     victim recordkillmodifier("posthumous");
@@ -233,18 +233,18 @@ function scoreeventplayerkill(data, time) {
       attacker.backstabs = attacker.pers["backstabs"];
     }
   } else {
-    if(isdefined(victim.firsttimedamaged) && victim.firsttimedamaged == time) {
+    if(isDefined(victim.firsttimedamaged) && victim.firsttimedamaged == time) {
       if(weaponclass == "weapon_sniper") {
         attacker thread updateoneshotmultikills(victim, weapon, victim.firsttimedamaged);
         attacker addweaponstat(weapon, "kill_enemy_one_bullet", 1);
       }
     }
-    if(isdefined(attacker.tookweaponfrom[weapon]) && isdefined(attacker.tookweaponfrom[weapon].previousowner)) {
+    if(isDefined(attacker.tookweaponfrom[weapon]) && isDefined(attacker.tookweaponfrom[weapon].previousowner)) {
       pickedupweapon = attacker.tookweaponfrom[weapon];
       if(pickedupweapon.previousowner == victim) {
         processscoreevent("kill_enemy_with_their_weapon", attacker, victim, weapon);
         attacker addweaponstat(weapon, "kill_enemy_with_their_weapon", 1);
-        if(isdefined(pickedupweapon.weapon) && isdefined(pickedupweapon.smeansofdeath)) {
+        if(isDefined(pickedupweapon.weapon) && isDefined(pickedupweapon.smeansofdeath)) {
           if(pickedupweapon.weapon == level.weaponbasemeleeheld && (pickedupweapon.smeansofdeath == "MOD_MELEE" || pickedupweapon.smeansofdeath == "MOD_MELEE_ASSASSINATE")) {
             attacker addweaponstat(level.weaponbasemeleeheld, "kill_enemy_with_their_weapon", 1);
           }
@@ -299,37 +299,37 @@ function updatemultikills(weapon, weaponclass, killstreak) {
   self notify("updaterecentkills");
   self endon("updaterecentkills");
   baseweapon = getweapon(getreffromitemindex(getbaseweaponitemindex(weapon)));
-  if(!isdefined(self.recentkillcount)) {
+  if(!isDefined(self.recentkillcount)) {
     self.recentkillcount = 0;
   }
-  if(!isdefined(self.recentkillcountweapon) || self.recentkillcountweapon != baseweapon) {
+  if(!isDefined(self.recentkillcountweapon) || self.recentkillcountweapon != baseweapon) {
     self.recentkillcountsameweapon = 0;
     self.recentkillcountweapon = baseweapon;
   }
-  if(!isdefined(killstreak)) {
+  if(!isDefined(killstreak)) {
     self.recentkillcountsameweapon++;
     self.recentkillcount++;
   }
-  if(!isdefined(self.recent_lmg_smg_killcount)) {
+  if(!isDefined(self.recent_lmg_smg_killcount)) {
     self.recent_lmg_smg_killcount = 0;
   }
-  if(!isdefined(self.recentremotemissilekillcount)) {
+  if(!isDefined(self.recentremotemissilekillcount)) {
     self.recentremotemissilekillcount = 0;
   }
-  if(!isdefined(self.recentrcbombkillcount)) {
+  if(!isDefined(self.recentrcbombkillcount)) {
     self.recentrcbombkillcount = 0;
   }
-  if(!isdefined(self.recentmglkillcount)) {
+  if(!isDefined(self.recentmglkillcount)) {
     self.recentmglkillcount = 0;
   }
-  if(isdefined(weaponclass)) {
+  if(isDefined(weaponclass)) {
     if(weaponclass == "weapon_lmg" || weaponclass == "weapon_smg") {
       if(self playerads() < 1) {
         self.recent_lmg_smg_killcount++;
       }
     }
   }
-  if(isdefined(killstreak)) {
+  if(isDefined(killstreak)) {
     switch (killstreak) {
       case "remote_missile": {
         self.recentremotemissilekillcount++;
@@ -386,7 +386,7 @@ function updateoneshotmultikills(victim, weapon, firsttimedamaged) {
   self endon("disconnect");
   self notify("updateoneshotmultikills" + firsttimedamaged);
   self endon("updateoneshotmultikills" + firsttimedamaged);
-  if(!isdefined(self.oneshotmultikills)) {
+  if(!isDefined(self.oneshotmultikills)) {
     self.oneshotmultikills = 0;
   }
   self.oneshotmultikills++;
@@ -449,7 +449,7 @@ function get_distance_for_weapon(weapon, weaponclass) {
 function ongameend(data) {
   player = data.player;
   winner = data.winner;
-  if(isdefined(winner)) {
+  if(isDefined(winner)) {
     if(level.teambased) {
       if(winner != "tie" && player.team == winner) {
         processscoreevent("won_match", player);
@@ -458,7 +458,7 @@ function ongameend(data) {
     } else {
       placement = level.placement["all"];
       topthreeplayers = min(3, placement.size);
-      for (index = 0; index < topthreeplayers; index++) {
+      for(index = 0; index < topthreeplayers; index++) {
         if(level.placement["all"][index] == player) {
           processscoreevent("won_match", player);
           return;

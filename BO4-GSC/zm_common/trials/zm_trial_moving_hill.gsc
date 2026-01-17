@@ -17,7 +17,6 @@
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_zonemgr;
-
 #namespace zm_trial_moving_hill;
 
 autoexec __init__system__() {
@@ -32,7 +31,7 @@ __init__() {
   zm_trial::register_challenge(#"moving_hill", &on_begin, &on_end);
 }
 
-private on_begin(var_ed49e96e, var_ea5e88ac, str_return, var_c728f1dd, var_aed178c2) {
+on_begin(var_ed49e96e, var_ea5e88ac, str_return, var_c728f1dd, var_aed178c2) {
   callback::add_callback(#"on_host_migration_end", &function_ff66b979);
   level flag::set(#"infinite_round_spawning");
   level flag::set(#"pause_round_timeout");
@@ -45,7 +44,7 @@ private on_begin(var_ed49e96e, var_ea5e88ac, str_return, var_c728f1dd, var_aed17
   self thread function_452ec7b3();
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   callback::remove_callback(#"on_host_migration_end", &function_ff66b979);
   arrayremovevalue(level.var_2bb6b2ba, undefined);
   array::delete_all(level.var_2bb6b2ba);
@@ -58,7 +57,7 @@ private on_end(round_reset) {
   }
 }
 
-private function_452ec7b3() {
+function_452ec7b3() {
   level endon(#"end_of_round");
   wait 12;
   var_2fe28f97 = 1;
@@ -72,7 +71,7 @@ private function_452ec7b3() {
       level.var_c8b84806[str_zone] = 1;
     }
 
-    self.var_df62490a = zm_utility::function_d7db256e(s_hill.targetname, #"hash_28d5f57c2309090", 0);
+    self.var_df62490a = zm_utility::function_d7db256e(s_hill.targetname, # "hash_28d5f57c2309090", 0);
     self.var_f7f308cd = s_hill.targetname;
     self thread function_492f4c79();
 
@@ -186,12 +185,12 @@ private function_452ec7b3() {
   level notify(#"kill_round_wait");
 }
 
-private function_492f4c79() {
-  level endon(#"hash_7646638df88a3656", #"hill_moving");
+function_492f4c79() {
+  level endon(#"hash_7646638df88a3656", # "hill_moving");
   zm_utility::function_75fd65f9(self.var_f7f308cd, 1);
 }
 
-private start_timer(n_timeout, str_return) {
+start_timer(n_timeout, str_return) {
   if(!level.var_f995ece6 zm_trial_timer::is_open(self)) {
     level.var_f995ece6 zm_trial_timer::open(self);
     level.var_f995ece6 zm_trial_timer::set_timer_text(self, str_return);
@@ -201,27 +200,27 @@ private start_timer(n_timeout, str_return) {
   }
 }
 
-private stop_timer() {
+stop_timer() {
   if(level.var_f995ece6 zm_trial_timer::is_open(self)) {
     level.var_f995ece6 zm_trial_timer::close(self);
     self zm_trial_util::stop_timer();
   }
 }
 
-private function_2191cc5d() {
+function_2191cc5d() {
   zone = self zm_zonemgr::get_player_zone();
   assert(isDefined(level.var_c8b84806));
   return isDefined(zone) && isDefined(level.var_c8b84806[zone]) && level.var_c8b84806[zone];
 }
 
-private zone_watcher(challenge, var_2d5ebf67, var_530e040f, timeout) {
+zone_watcher(challenge, var_2d5ebf67, var_530e040f, timeout) {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656", #"hill_moving", #"host_migration_begin");
+  level endon(#"hash_7646638df88a3656", # "hill_moving", # "host_migration_begin");
   self.var_356935bb = {
-    #start_time: level.time, 
-    #timeout: timeout, 
-    #challenge: challenge, 
-    #var_2d5ebf67: var_2d5ebf67, 
+    #start_time: level.time,
+    #timeout: timeout,
+    #challenge: challenge,
+    #var_2d5ebf67: var_2d5ebf67,
     #var_530e040f: var_530e040f
   };
   self.var_4cb0b91f = 0;
@@ -254,30 +253,29 @@ private zone_watcher(challenge, var_2d5ebf67, var_530e040f, timeout) {
   }
 }
 
-private damage_watcher() {
+damage_watcher() {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656", #"hill_moving", #"host_migration_begin");
+  level endon(#"hash_7646638df88a3656", # "hill_moving", # "host_migration_begin");
 
   while(true) {
-
     if(isgodmode(self) || self isinmovemode("<dev string:x38>", "<dev string:x41>")) {
       waitframe(1);
       continue;
     }
 
-      if(!self function_2191cc5d() && !level.var_f995ece6 zm_trial_timer::is_open(self) && self.sessionstate != "spectator" && !self laststand::player_is_in_laststand() && !(isDefined(self.var_eb319d10) && self.var_eb319d10) && !(isDefined(level.intermission) && level.intermission)) {
-        var_16e6b8ea = self zm_utility::function_7618c8ef(0.0667);
+    if(!self function_2191cc5d() && !level.var_f995ece6 zm_trial_timer::is_open(self) && self.sessionstate != "spectator" && !self laststand::player_is_in_laststand() && !(isDefined(self.var_eb319d10) && self.var_eb319d10) && !(isDefined(level.intermission) && level.intermission)) {
+      var_16e6b8ea = self zm_utility::function_7618c8ef(0.0667);
 
-        if(self.health <= var_16e6b8ea) {
-          if(zm_utility::is_magic_bullet_shield_enabled(self)) {
-            self util::stop_magic_bullet_shield();
-          }
-
-          self dodamage(self.health + 1000, self.origin);
-        } else {
-          self dodamage(var_16e6b8ea, self.origin);
+      if(self.health <= var_16e6b8ea) {
+        if(zm_utility::is_magic_bullet_shield_enabled(self)) {
+          self util::stop_magic_bullet_shield();
         }
+
+        self dodamage(self.health + 1000, self.origin);
+      } else {
+        self dodamage(var_16e6b8ea, self.origin);
       }
+    }
 
     wait 1;
   }
@@ -317,7 +315,7 @@ function_c30f9a6e(v_start_pos, n_radius = 500) {
   return var_5579e5fa;
 }
 
-private function_ff66b979() {
+function_ff66b979() {
   level endon(#"end_of_round");
 
   foreach(player in getplayers()) {

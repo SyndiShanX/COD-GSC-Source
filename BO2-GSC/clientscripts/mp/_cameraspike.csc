@@ -57,10 +57,10 @@ setcameraspikeactive(localclientnum, active) {
   if(active != wasactive) {
     if(active) {
       animatecameramenus(localclientnum, "spike_cam_on", int(staticseconds * 1000));
-      playsound(0, "fly_camera_on", (0, 0, 0));
+      playSound(0, "fly_camera_on", (0, 0, 0));
     } else {
       animatecameramenus(localclientnum, "Default", int(staticseconds * 1000));
-      playsound(0, "fly_camera_off", (0, 0, 0));
+      playSound(0, "fly_camera_off", (0, 0, 0));
     }
 
     activatecamerastatic(localclientnum, staticseconds);
@@ -79,7 +79,7 @@ animatecameramenus(localclientnum, statename, duration) {
 }
 
 addcameraspike(handle, cameraent) {
-  cameraspike = spawnstruct();
+  cameraspike = spawnStruct();
   cameraspike.handle = handle;
   cameraspike.cameraent = cameraent;
   size = level.cameraspikes.size;

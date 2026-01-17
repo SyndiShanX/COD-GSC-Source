@@ -24,7 +24,7 @@ init(localclientnum) {
 }
 
 addacousticsensor(handle, sensorent, owner) {
-  acousticsensor = spawnstruct();
+  acousticsensor = spawnStruct();
   acousticsensor.handle = handle;
   acousticsensor.sensorent = sensorent;
   acousticsensor.owner = owner;

@@ -11,16 +11,16 @@ initAirsupport() {
     level.airsupportHeightScale = 1;
   level.airsupportHeightScale = getDvarIntDefault(#"scr_airsupportHeightScale", level.airsupportHeightScale);
   level.noFlyZones = [];
-  level.noFlyZones = GetEntArray("no_fly_zone", "targetname");
+  level.noFlyZones = getEntArray("no_fly_zone", "targetname");
   airsupport_heights = getstructarray("air_support_height", "targetname");
   if(airsupport_heights.size > 1) {
     error("Found more then one 'air_support_height' structs in the map");
   }
-  airsupport_heights = GetEntArray("air_support_height", "targetname");
+  airsupport_heights = getEntArray("air_support_height", "targetname");
   if(airsupport_heights.size > 0) {
     error("Found an entity in the map with an 'air_support_height' targetname.There should be only structs.");
   }
-  heli_height_meshes = GetEntArray("heli_height_lock", "classname");
+  heli_height_meshes = getEntArray("heli_height_lock", "classname");
   if(heli_height_meshes.size > 1) {
     error("Found more then one 'heli_height_lock' classname in the map");
   }
@@ -115,7 +115,7 @@ callStrike(flightPlan) {
   assert(flyTime > bombTime);
   flightPlan.owner endon("disconnect");
   requiredDeathCount = flightPlan.owner.deathCount;
-  side = vectorcross(anglestoforward(direction), (0, 0, 1));
+  side = vectorcross(anglesToForward(direction), (0, 0, 1));
   plane_seperation = 25;
   side_offset = vector_scale(side, plane_seperation);
   level thread planeStrike(flightPlan.owner, requiredDeathCount, startPoint, endPoint, bombTime, flyTime, flightPlan.speed, flightPlan.bombSpeedScale, direction, flightPlan.planeSpawnCallback);
@@ -141,7 +141,7 @@ planeStrike(owner, requiredDeathCount, pathStart, pathEnd, bombTime, flyTime, fl
 }
 determineGroundPoint(player, position) {
   ground = (position[0], position[1], player.origin[2]);
-  trace = bullettrace(ground + (0, 0, 10000), ground, false, undefined);
+  trace = bulletTrace(ground + (0, 0, 10000), ground, false, undefined);
   return trace["position"];
 }
 determineTargetPoint(player, position) {
@@ -182,7 +182,7 @@ _insideNoFlyZoneByIndex(point, index, disregardHeight) {
 getNoFlyZoneHeight(point) {
   height = point[2];
   origin = undefined;
-  for (i = 0; i < level.noFlyZones.size; i++) {
+  for(i = 0; i < level.noFlyZones.size; i++) {
     if(_insideNoFlyZoneByIndex(point, i)) {
       if(height < level.noFlyZones[i].height) {
         height = level.noFlyZones[i].height;
@@ -196,7 +196,7 @@ getNoFlyZoneHeight(point) {
 }
 insideNoFlyZones(point, disregardHeight) {
   noFlyZones = [];
-  for (i = 0; i < level.noFlyZones.size; i++) {
+  for(i = 0; i < level.noFlyZones.size; i++) {
     if(_insideNoFlyZoneByIndex(point, i, disregardHeight)) {
       noFlyZones[noFlyZones.size] = i;
     }
@@ -204,7 +204,7 @@ insideNoFlyZones(point, disregardHeight) {
   return noFlyZones;
 }
 crossesNoFlyZone(start, end) {
-  for (i = 0; i < level.noFlyZones.size; i++) {
+  for(i = 0; i < level.noFlyZones.size; i++) {
     point = closestPointOnLine(level.noFlyZones[i].origin, start, end);
     dist = Distance2D(point, level.noFlyZones[i].origin);
     if(point[2] > (level.noFlyZones[i].origin[2] + level.noFlyZones[i].height))
@@ -217,7 +217,7 @@ crossesNoFlyZone(start, end) {
 }
 crossesNoFlyZones(start, end) {
   zones = [];
-  for (i = 0; i < level.noFlyZones.size; i++) {
+  for(i = 0; i < level.noFlyZones.size; i++) {
     point = closestPointOnLine(level.noFlyZones[i].origin, start, end);
     dist = Distance2D(point, level.noFlyZones[i].origin);
     if(point[2] > (level.noFlyZones[i].origin[2] + level.noFlyZones[i].height))
@@ -230,7 +230,7 @@ crossesNoFlyZones(start, end) {
 }
 getNoFlyZoneHeightCrossed(start, end, minHeight) {
   height = minHeight;
-  for (i = 0; i < level.noFlyZones.size; i++) {
+  for(i = 0; i < level.noFlyZones.size; i++) {
     point = closestPointOnLine(level.noFlyZones[i].origin, start, end);
     dist = Distance2D(point, level.noFlyZones[i].origin);
     if(dist < level.noFlyZones[i].radius) {
@@ -243,7 +243,7 @@ getNoFlyZoneHeightCrossed(start, end, minHeight) {
 _shouldIgnoreNoFlyZone(noFlyZone, noFlyZones) {
   if(!isDefined(noFlyZone))
     return true;
-  for (i = 0; i < noFlyZones.size; i++) {
+  for(i = 0; i < noFlyZones.size; i++) {
     if(isDefined(noFlyZones[i]) && noFlyZones[i] == noFlyZone)
       return true;
   }
@@ -272,7 +272,7 @@ getHeliPath(start, goal) {
   return goal_points;
 }
 followPath(path, doneNotify, stopAtGoal) {
-  for (i = 0; i < (path.size - 1); i++) {
+  for(i = 0; i < (path.size - 1); i++) {
     self SetVehGoalPos(path[i], false);
     thread debug_line(self.origin, path[i], (1, 1, 0));
     self waittill("goal");
@@ -297,7 +297,7 @@ setGoalPosition(goal, doneNotify, stopAtGoal) {
 }
 clearPath(start, end, startNoFlyZone, goalNoFlyZone) {
   noFlyZones = crossesNoFlyZones(start, end);
-  for (i = 0; i < noFlyZones.size; i++) {
+  for(i = 0; i < noFlyZones.size; i++) {
     if(!_shouldIgnoreStartGoalNoFlyZone(noFlyZones[i], startNoFlyZone, goalNoFlyZone)) {
       return false;
     }
@@ -305,7 +305,7 @@ clearPath(start, end, startNoFlyZone, goalNoFlyZone) {
   return true;
 }
 append_array(dst, src) {
-  for (i = 0; i < src.size; i++) {
+  for(i = 0; i < src.size; i++) {
     dst[dst.size] = src[i];
   }
 }
@@ -316,7 +316,7 @@ calculatePath_r(start, end, points, startNoFlyZones, goalNoFlyZones, depth) {
     return points;
   }
   noFlyZones = crossesNoFlyZones(start, end);
-  for (i = 0; i < noFlyZones.size; i++) {
+  for(i = 0; i < noFlyZones.size; i++) {
     noFlyZone = noFlyZones[i];
     if(!_shouldIgnoreStartGoalNoFlyZone(noFlyZone, startNoFlyZones, goalNoFlyZones)) {
       return undefined;
@@ -333,7 +333,7 @@ calculatePath(start, end, startNoFlyZones, goalNoFlyZones) {
   Assert(points.size >= 1);
   debug_sphere(points[points.size - 1], 10, (1, 0, 0), 1, 1000);
   point = start;
-  for (i = 0; i < points.size; i++) {
+  for(i = 0; i < points.size; i++) {
     thread debug_line(point, points[i], (0, 1, 0));
     debug_sphere(points[i], 10, (0, 0, 1), 1, 1000);
     point = points[i];
@@ -342,8 +342,8 @@ calculatePath(start, end, startNoFlyZones, goalNoFlyZones) {
 }
 _getStrikePathStartAndEnd(goal, yaw, halfDistance) {
   direction = (0, yaw, 0);
-  startPoint = goal + vector_scale(anglestoforward(direction), -1 * halfDistance);
-  endPoint = goal + vector_scale(anglestoforward(direction), halfDistance);
+  startPoint = goal + vector_scale(anglesToForward(direction), -1 * halfDistance);
+  endPoint = goal + vector_scale(anglesToForward(direction), halfDistance);
   noFlyZone = crossesNoFlyZone(startPoint, endPoint);
   path = [];
   if(isDefined(noFlyZone)) {
@@ -367,7 +367,7 @@ getStrikePath(target, height, halfDistance, yaw) {
   goal = (target[0], target[1], worldHeight);
   path = [];
   if(!isDefined(yaw) || yaw != "random") {
-    for (i = 0; i < 3; i++) {
+    for(i = 0; i < 3; i++) {
       path = _getStrikePathStartAndEnd(goal, randomint(360), halfDistance);
       if(!isDefined(path["noFlyZone"])) {
         break;
@@ -387,7 +387,7 @@ entLOSRadiusDamage(ent, pos, radius, max, min, owner, eInflictor) {
   dist = distance(pos, ent.damageCenter);
   if(ent.isPlayer || ent.isActor) {
     assumed_ceiling_height = 800;
-    eye_position = ent.entity GetEye();
+    eye_position = ent.entity getEye();
     head_height = eye_position[2];
     debug_display_time = 40 * 100;
     trace = maps\mp\gametypes\_weapons::weaponDamageTrace(ent.entity.origin, ent.entity.origin + (0, 0, assumed_ceiling_height), 0, undefined);
@@ -428,7 +428,7 @@ entLOSRadiusDamage(ent, pos, radius, max, min, owner, eInflictor) {
 debug_plane_line(flyTime, flyspeed, pathStart, pathEnd) {
   thread debug_line(pathStart, pathEnd, (1, 1, 1));
   delta = VectorNormalize(pathEnd - pathStart);
-  for (i = 0; i < flyTime; i++) {
+  for(i = 0; i < flyTime; i++) {
     thread debug_star(pathStart + vector_scale(delta, i * flyspeed), (1, 0, 0));
   }
 }
@@ -444,12 +444,12 @@ debug_draw_bomb_path(projectile, color, time) {}
 debug_print3d_simple(message, ent, offset, frames) {}
 draw_text(msg, color, ent, offset, frames) {
   if(frames == 0) {
-    while (isDefined(ent)) {
+    while(isDefined(ent)) {
       print3d(ent.origin + offset, msg, color, 0.5, 4);
       wait 0.05;
     }
   } else {
-    for (i = 0; i < frames; i++) {
+    for(i = 0; i < frames; i++) {
       if(!isDefined(ent)) {
         break;
       }

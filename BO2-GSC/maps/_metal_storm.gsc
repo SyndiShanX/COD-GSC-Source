@@ -137,7 +137,7 @@ metalstorm_off() {
   self vehicle_toggle_sounds(0);
   self veh_toggle_exhaust_fx(0);
   angles = self gettagangles("tag_flash");
-  target_vec = self.origin + anglestoforward((0, angles[1], 0)) * 1000;
+  target_vec = self.origin + anglesToForward((0, angles[1], 0)) * 1000;
   target_vec = target_vec + vectorscale((0, 0, -1), 700.0);
   self settargetorigin(target_vec);
   self.off = 1;
@@ -152,7 +152,7 @@ metalstorm_on() {
   self enableaimassist();
   self vehicle_toggle_sounds(1);
   self bootup();
-  self playsound("veh_metalstorm_boot_up");
+  self playSound("veh_metalstorm_boot_up");
   self veh_toggle_exhaust_fx(1);
   self.off = undefined;
   metalstorm_start_ai();
@@ -167,7 +167,7 @@ bootup() {
   }
 
   angles = self gettagangles("tag_flash");
-  target_vec = self.origin + anglestoforward((0, angles[1], 0)) * 1000;
+  target_vec = self.origin + anglesToForward((0, angles[1], 0)) * 1000;
   self.turretrotscale = 0.3;
   driver = self getseatoccupant(0);
 
@@ -226,16 +226,16 @@ metalstorm_turret_scan(scan_forever) {
           break;
         }
       case 1:
-        target_vec = self.origin + anglestoforward((0, self.angles[1], 0)) * 1000;
+        target_vec = self.origin + anglesToForward((0, self.angles[1], 0)) * 1000;
         break;
       case 2:
-        target_vec = self.origin + anglestoforward((0, self.angles[1] + 90, 0)) * 1000;
+        target_vec = self.origin + anglesToForward((0, self.angles[1] + 90, 0)) * 1000;
         break;
       case 3:
-        target_vec = self.origin + anglestoforward((0, self.angles[1], 0)) * 1000;
+        target_vec = self.origin + anglesToForward((0, self.angles[1], 0)) * 1000;
         break;
       case 4:
-        target_vec = self.origin + anglestoforward((0, self.angles[1] - 90, 0)) * 1000;
+        target_vec = self.origin + anglesToForward((0, self.angles[1] - 90, 0)) * 1000;
         break;
     }
 
@@ -328,7 +328,7 @@ metalstorm_weapon_think() {
       cant_see_enemy_count = 0;
 
       if(isplayer(self.enemy))
-        self playsound("wpn_metalstorm_lock_on");
+        self playSound("wpn_metalstorm_lock_on");
 
       self thread metalstorm_blink_lights();
       self laseron();
@@ -673,7 +673,7 @@ metalstorm_update_damage_fx() {
   if(next_damage_state != self.current_damage_state) {
     if(isDefined(level.fx_damage_effects[self.vehicletype][next_damage_state - 1])) {
       fx_ent = self get_damage_fx_ent();
-      playfxontag(level.fx_damage_effects[self.vehicletype][next_damage_state - 1], fx_ent, "tag_origin");
+      playFXOnTag(level.fx_damage_effects[self.vehicletype][next_damage_state - 1], fx_ent, "tag_origin");
     } else
       get_damage_fx_ent();
 
@@ -696,9 +696,9 @@ update_damage_states() {
     }
     if(mod == "MOD_RIFLE_BULLET" || mod == "MOD_PISTOL_BULLET" || mod == "MOD_MELEE") {
       if(part == "tag_control_panel" || part == "tag_body_panel")
-        playfx(level._effect["metalstorm_hit_back"], point, dir);
+        playFX(level._effect["metalstorm_hit_back"], point, dir);
       else
-        playfx(level._effect["metalstorm_hit"], point, dir);
+        playFX(level._effect["metalstorm_hit"], point, dir);
     }
 
     self.turret_state = 0;
@@ -713,7 +713,7 @@ get_damage_fx_ent() {
     self.damage_fx_ent delete();
 
   self.damage_fx_ent = spawn("script_model", (0, 0, 0));
-  self.damage_fx_ent setmodel("tag_origin");
+  self.damage_fx_ent setModel("tag_origin");
   self.damage_fx_ent.origin = self.origin;
   self.damage_fx_ent.angles = self.angles;
   self.damage_fx_ent linkto(self, "tag_turret", (0, 0, 0), (0, 0, 0));
@@ -750,9 +750,9 @@ metalstorm_freeze_death(attacker, mod) {
   level notify("asd_freezed");
   level.player inc_general_stat("mechanicalkills");
   goaldist = randomfloatrange(350, 450);
-  deathgoal = self.origin + anglestoforward(self.angles) * goaldist;
-  playfxontag(level._effect["freeze_short_circuit"], self, "tag_origin");
-  self setmodel("veh_t6_drone_tank_freeze");
+  deathgoal = self.origin + anglesToForward(self.angles) * goaldist;
+  playFXOnTag(level._effect["freeze_short_circuit"], self, "tag_origin");
+  self setModel("veh_t6_drone_tank_freeze");
   self setvehgoalpos(deathgoal, 0);
   self thread metalstorm_freeze_blink_lights();
   self setclientflag(12);
@@ -761,9 +761,9 @@ metalstorm_freeze_death(attacker, mod) {
 
   if(!isDefined(self.stun_fx)) {
     self.stun_fx = spawn("script_model", self.origin);
-    self.stun_fx setmodel("tag_origin");
+    self.stun_fx setModel("tag_origin");
     self.stun_fx linkto(self, "tag_turret", (0, 0, 0), (0, 0, 0));
-    playfxontag(level._effect["metalstorm_stun"], self.stun_fx, "tag_origin");
+    playFXOnTag(level._effect["metalstorm_stun"], self.stun_fx, "tag_origin");
   }
 
   wait 1;
@@ -813,8 +813,8 @@ metalstorm_death() {
     self metalstorm_freeze_death(attacker, mod);
   else {
     fx_ent = self get_damage_fx_ent();
-    playfxontag(level._effect["metalstorm_explo"], fx_ent, "tag_origin");
-    self playsound("veh_metalstorm_dying");
+    playFXOnTag(level._effect["metalstorm_explo"], fx_ent, "tag_origin");
+    self playSound("veh_metalstorm_dying");
     self metalstorm_crash_movement(attacker);
   }
 
@@ -834,8 +834,8 @@ metalstorm_death() {
 }
 
 death_fx() {
-  playfxontag(self.deathfx, self, self.deathfxtag);
-  self playsound("veh_metalstorm_sparks");
+  playFXOnTag(self.deathfx, self, self.deathfxtag);
+  self playSound("veh_metalstorm_sparks");
 }
 
 metalstorm_crash_movement(attacker) {
@@ -848,17 +848,17 @@ metalstorm_crash_movement(attacker) {
   if(!isDefined(self.off)) {
     self thread death_turret_rotate();
     self.turretrotscale = 1.0;
-    self playsound("wpn_turret_alert");
+    self playSound("wpn_turret_alert");
     self thread metalstorm_fire_for_time(randomfloatrange(1.5, 4.0));
     self setspeed(7);
     deathmove = randomint(8);
 
     if(deathmove == 0) {
       goaldist = randomfloatrange(350, 450);
-      deathgoal = self.origin + anglestoforward(self.angles) * goaldist;
+      deathgoal = self.origin + anglesToForward(self.angles) * goaldist;
     } else if(deathmove == 1) {
       goaldist = randomfloatrange(350, 450);
-      deathgoal = self.origin + anglestoforward(self.angles) * (goaldist * -1);
+      deathgoal = self.origin + anglesToForward(self.angles) * (goaldist * -1);
     } else if(deathmove <= 4)
       self thread spin_crash();
     else if(isDefined(attacker))
@@ -889,7 +889,7 @@ metalstorm_crash_movement(attacker) {
 
   self death_fx();
   self launchvehicle((randomfloatrange(-20, 20), randomfloatrange(-20, 20), 32), (randomfloatrange(-5, 5), randomfloatrange(-5, 5), 0), 1, 0);
-  self playsound("exp_metalstorm_vehicle");
+  self playSound("exp_metalstorm_vehicle");
   self notify("crash_done");
 }
 
@@ -903,7 +903,7 @@ spin_crash() {
   count = 0;
 
   while(isDefined(self)) {
-    deathgoal = self.origin + anglestoforward((0, self.angles[1] + turn_rate, 0)) * 300;
+    deathgoal = self.origin + anglesToForward((0, self.angles[1] + turn_rate, 0)) * 300;
     self setvehgoalpos(deathgoal, 0);
     wait 0.05;
     count++;
@@ -920,7 +920,7 @@ death_turret_rotate() {
 
   while(true) {
     pitch = randomfloatrange(-60, 20);
-    target_vec = self.origin + anglestoforward((pitch, randomfloat(360), 0)) * 1000;
+    target_vec = self.origin + anglesToForward((pitch, randomfloat(360), 0)) * 1000;
     driver = self getseatoccupant(0);
 
     if(!isDefined(driver))
@@ -944,16 +944,16 @@ metalstorm_emped() {
 
   if(!isDefined(self.stun_fx)) {
     self.stun_fx = spawn("script_model", self.origin);
-    self.stun_fx setmodel("tag_origin");
+    self.stun_fx setModel("tag_origin");
     self.stun_fx linkto(self, "tag_turret", (0, 0, 0), (0, 0, 0));
-    playfxontag(level._effect["metalstorm_stun"], self.stun_fx, "tag_origin");
+    playFXOnTag(level._effect["metalstorm_stun"], self.stun_fx, "tag_origin");
   }
 
   wait(randomfloatrange(4, 8));
   self.stun_fx delete();
   self.emped = undefined;
   self metalstorm_on();
-  self playsound("veh_qrdrone_boot_asd");
+  self playSound("veh_qrdrone_boot_asd");
 }
 
 metalstormcallback_vehicledamage(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime, damagefromunderneath, modelindex, partname) {
@@ -988,9 +988,9 @@ metalstorm_set_team(team) {
 
   if(isDefined(self.vehmodelenemy)) {
     if(team == "allies")
-      self setmodel(self.vehmodel);
+      self setModel(self.vehmodel);
     else
-      self setmodel(self.vehmodelenemy);
+      self setModel(self.vehmodelenemy);
   }
 
   if(!isDefined(self.off))
@@ -1015,7 +1015,7 @@ metalstorm_player_bullet_shake(player) {
   while(true) {
     self waittill("turret_fire");
     angles = self gettagangles("tag_barrel");
-    dir = anglestoforward(angles);
+    dir = anglesToForward(angles);
     self launchvehicle(dir * -5, self.origin + vectorscale((0, 0, 1), 30.0), 0);
     earthquake(0.2, 0.2, player.origin, 200);
   }
@@ -1031,7 +1031,7 @@ metalstorm_player_rocket_recoil(player) {
   while(true) {
     player waittill("missile_fire");
     angles = self gettagangles("tag_barrel");
-    dir = anglestoforward(angles);
+    dir = anglesToForward(angles);
     self launchvehicle(dir * -30, self.origin + vectorscale((0, 0, 1), 70.0), 0);
     earthquake(0.4, 0.3, player.origin, 200);
     self setanimrestart( % o_drone_tank_missile_fire_sp, 1, 0, 0.4);
@@ -1046,7 +1046,7 @@ metalstorm_rocket_recoil() {
   while(true) {
     self waittill("missile_fire");
     angles = self gettagangles("tag_barrel");
-    dir = anglestoforward(angles);
+    dir = anglesToForward(angles);
     self launchvehicle(dir * -30, self.origin + vectorscale((0, 0, 1), 70.0), 0);
     self setanimrestart( % o_drone_tank_missile_fire_sp, 1, 0, 0.4);
   }
@@ -1060,7 +1060,7 @@ metalstorm_player_hit_dudes_sound() {
     self waittill("touch", enemy);
 
     if(isDefined(enemy) && isai(enemy)) {
-      self playsound("veh_rts_hit_npc");
+      self playSound("veh_rts_hit_npc");
       wait 0.3;
     }
   }

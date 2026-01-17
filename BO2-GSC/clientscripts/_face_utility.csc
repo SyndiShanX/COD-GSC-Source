@@ -140,7 +140,7 @@ shouldplayfaceevent(player, face_state) {
   if(level.facestates[self.face_anim_tree][face_state]["statetype"] == "exitstate")
     return true;
 
-  if(isDefined(player) && distancesquared(self.origin, player.origin) < 40000.0 && vectordot(anglestoforward(player.angles), vectornormalize(self.origin - player.origin)) >= cos(35))
+  if(isDefined(player) && distancesquared(self.origin, player.origin) < 40000.0 && vectordot(anglesToForward(player.angles), vectornormalize(self.origin - player.origin)) >= cos(35))
     return true;
 
   return false;

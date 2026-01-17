@@ -31,5 +31,4 @@ main() {
 
   level.scr_anim["generic"]["exposed_flashbang_v1"] = % exposed_flashbang_v1;
   level.scr_anim["generic"]["exposed_flashbang_v2"] = % exposed_flashbang_v2;
-
 }

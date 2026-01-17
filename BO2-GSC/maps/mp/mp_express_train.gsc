@@ -20,10 +20,10 @@ init() {
   precacheshader("compass_train_carriage");
   precachestring(&"traincar");
   precachestring(&"trainengine");
-  gates = getentarray("train_gate_rail", "targetname");
-  brushes = getentarray("train_gate_rail_brush", "targetname");
-  triggers = getentarray("train_gate_kill_trigger", "targetname");
-  traintriggers = getentarray("train_kill_trigger", "targetname");
+  gates = getEntArray("train_gate_rail", "targetname");
+  brushes = getEntArray("train_gate_rail_brush", "targetname");
+  triggers = getEntArray("train_gate_kill_trigger", "targetname");
+  traintriggers = getEntArray("train_kill_trigger", "targetname");
 
   foreach(brush in brushes)
   brush disconnectpaths();
@@ -45,7 +45,7 @@ init() {
   }
 
   start = getvehiclenode("train_start", "targetname");
-  endgates = getentarray("train_gate_rail_end", "targetname");
+  endgates = getEntArray("train_gate_rail_end", "targetname");
   entrygate = getclosest(start.origin, endgates);
 
   for(i = 0; i < endgates.size; i++) {
@@ -74,13 +74,13 @@ init() {
 
   for(i = 1; i < 20; i++) {
     cars[i] = spawn("script_model", start.origin);
-    cars[i] setmodel("p6_bullet_train_car_phys");
+    cars[i] setModel("p6_bullet_train_car_phys");
     cars[i] ghost();
     cars[i] setcheapflag(1);
   }
 
   cars[20] = spawn("script_model", start.origin);
-  cars[20] setmodel("p6_bullet_train_engine_rev");
+  cars[20] setModel("p6_bullet_train_engine_rev");
   cars[20] ghost();
   cars[20] setcheapflag(1);
   waittillframeend;
@@ -113,8 +113,8 @@ train_think(gates, entrygate, exitgate, cars, start, killcam) {
     array_func(gates, ::gate_move, -172);
 
     foreach(gate in gates) {
-      gate playloopsound("amb_train_incomming_beep");
-      gate playsound("amb_gate_move");
+      gate playLoopSound("amb_train_incomming_beep");
+      gate playSound("amb_gate_move");
     }
 
     gatedownwait = getdvarintdefault("scr_express_gateDownWait", 2);
@@ -134,7 +134,7 @@ train_think(gates, entrygate, exitgate, cars, start, killcam) {
     cars[0] showaftertime(0.2);
     cars[0] thread record_positions();
     cars[0] thread watch_end();
-    cars[0] playloopsound("amb_train_lp");
+    cars[0] playLoopSound("amb_train_lp");
     cars[0] setclientfield("train_moving", 1);
     cars[0] thread watch_player_touch();
     killcam.starttime = gettime();
@@ -148,7 +148,7 @@ train_think(gates, entrygate, exitgate, cars, start, killcam) {
         wait 0.35;
 
       if(i >= 3 && i % 3 == 0) {
-        cars[i] playloopsound("amb_train_lp" + next);
+        cars[i] playLoopSound("amb_train_lp" + next);
 
         switch (next) {
           case "_b":
@@ -184,7 +184,7 @@ train_think(gates, entrygate, exitgate, cars, start, killcam) {
     array_func(gates, ::gate_move);
 
     foreach(gate in gates)
-    gate playsound("amb_gate_move");
+    gate playSound("amb_gate_move");
 
     wait 6;
   }
@@ -230,7 +230,7 @@ watch_end() {
   self ghost();
   self setclientfield("train_moving", 0);
   self stoploopsound(0.2);
-  self playsound("amb_train_end");
+  self playSound("amb_train_end");
 }
 
 car_move() {
@@ -249,7 +249,7 @@ car_move() {
   self ghost();
   self setclientfield("train_moving", 0);
   self stoploopsound(0.2);
-  self playsound("amb_train_end");
+  self playSound("amb_train_end");
 }
 
 gate_rotate(yaw) {
@@ -490,12 +490,12 @@ getwatcherforweapon(weapname) {
 }
 
 destroy_supply_crates() {
-  crates = getentarray("care_package", "script_noteworthy");
+  crates = getEntArray("care_package", "script_noteworthy");
 
   foreach(crate in crates) {
     if(distancesquared(crate.origin, self.origin) < 10000) {
       if(crate istouching(self)) {
-        playfx(level._supply_drop_explosion_fx, crate.origin);
+        playFX(level._supply_drop_explosion_fx, crate.origin);
         playsoundatposition("wpn_grenade_explode", crate.origin);
         wait 0.1;
         crate maps\mp\killstreaks\_supplydrop::cratedelete();

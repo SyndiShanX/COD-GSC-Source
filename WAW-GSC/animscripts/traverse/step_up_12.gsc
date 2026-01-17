@@ -15,7 +15,7 @@ main() {
   reps = 6;
   offset = (0, 0, destination / reps);
   self traverseMode("noclip");
-  for (i = 0; i < reps; i++) {
+  for(i = 0; i < reps; i++) {
     self teleport(self.origin + offset);
     wait(0.05);
   }

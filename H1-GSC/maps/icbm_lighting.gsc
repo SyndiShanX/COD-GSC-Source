@@ -77,7 +77,7 @@ stop_snow() {
 remove_cloud_cover() {
   var_0 = maps\_utility::getfxarraybyid("cloud_cover");
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++)
     var_0[var_1] common_scripts\utility::pauseeffect();
 }
 
@@ -151,7 +151,7 @@ handle_launch_cinematic_effects() {
 }
 
 set_interior_vision() {
-  for (;;) {
+  for(;;) {
     common_scripts\utility::flag_wait("player_is_inside");
     maps\_utility::set_vision_set("icbm_village_interior", 2);
     maps\_utility::vision_set_fog_changes("icbm_village_interior", 2);
@@ -210,7 +210,7 @@ sun_set_lerp_parameters(var_0, var_1, var_2) {
 sunrise_lerp_loop() {
   var_0 = 0.05;
 
-  for (;;) {
+  for(;;) {
     var_1 = lerp_sun_color("sun", var_0);
     setsunlight(var_1[0], var_1[1], var_1[2]);
     wait(var_0);

@@ -33,8 +33,8 @@ set_vehicle_anims(positions) {
 setanims() {
   max_positions = 8;
   positions = [];
-  for (i = 0; i < max_positions; i++)
-    positions[i] = spawnstruct();
+  for(i = 0; i < max_positions; i++)
+    positions[i] = spawnStruct();
   positions[0].sittag = "tag_passenger2";
   positions[1].sittag = "tag_passenger3";
   positions[2].sittag = "tag_passenger4";
@@ -93,7 +93,7 @@ fire_loop_toggle(on_off) {
   self notify("fire change");
   self endon("fire change");
   if(on_off) {
-    while (1) {
+    while(1) {
       wait(randomfloatrange(5, 8));
       self fireweapon();
     }

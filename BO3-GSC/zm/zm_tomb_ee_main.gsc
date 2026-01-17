@@ -54,7 +54,7 @@ function init() {
     return;
   }
   level thread setup_ee_main_devgui();
-  zm_sidequests::declare_sidequest("little_girl_lost", & init_sidequest, & sidequest_logic, & complete_sidequest, & generic_stage_start, & generic_stage_end);
+  zm_sidequests::declare_sidequest("little_girl_lost", &init_sidequest, &sidequest_logic, &complete_sidequest, &generic_stage_start, &generic_stage_end);
   zm_tomb_ee_main_step_1::init();
   zm_tomb_ee_main_step_2::init();
   zm_tomb_ee_main_step_3::init();
@@ -111,23 +111,23 @@ function zombie_blood_hint_watch() {
   a_player_hint[1] = 0;
   a_player_hint[2] = 0;
   a_player_hint[3] = 0;
-  while (!level flag::get("ee_samantha_released")) {
+  while(!level flag::get("ee_samantha_released")) {
     level waittill("player_zombie_blood", e_player);
     if(n_curr_step != level.n_ee_step) {
       n_curr_step = level.n_ee_step;
-      for (i = 0; i < a_player_hint.size; i++) {
+      for(i = 0; i < a_player_hint.size; i++) {
         a_player_hint[i] = 0;
       }
     }
     if(!a_player_hint[e_player.characterindex]) {
       wait(randomfloatrange(3, 7));
-      if(isdefined(e_player.vo_promises_playing) && e_player.vo_promises_playing) {
+      if(isDefined(e_player.vo_promises_playing) && e_player.vo_promises_playing) {
         continue;
       }
-      while (isdefined(level.sam_talking) && level.sam_talking) {
+      while(isDefined(level.sam_talking) && level.sam_talking) {
         wait(0.05);
       }
-      if(isdefined(e_player) && isplayer(e_player) && e_player.zombie_vars["zombie_powerup_zombie_blood_on"]) {
+      if(isDefined(e_player) && isplayer(e_player) && e_player.zombie_vars["zombie_powerup_zombie_blood_on"]) {
         a_player_hint[e_player.characterindex] = 1;
         zm_tomb_vo::set_players_dontspeak(1);
         level.sam_talking = 1;
@@ -140,15 +140,15 @@ function zombie_blood_hint_watch() {
       }
     } else if(randomint(100) < 20) {
       wait(randomfloatrange(3, 7));
-      if(isdefined(e_player.vo_promises_playing) && e_player.vo_promises_playing) {
+      if(isDefined(e_player.vo_promises_playing) && e_player.vo_promises_playing) {
         continue;
       }
-      while (isdefined(level.sam_talking) && level.sam_talking) {
+      while(isDefined(level.sam_talking) && level.sam_talking) {
         wait(0.05);
       }
-      if(isdefined(e_player) && isplayer(e_player) && e_player.zombie_vars["zombie_powerup_zombie_blood_on"]) {
+      if(isDefined(e_player) && isplayer(e_player) && e_player.zombie_vars["zombie_powerup_zombie_blood_on"]) {
         str_vox = get_zombie_blood_hint_generic_vox();
-        if(isdefined(str_vox)) {
+        if(isDefined(str_vox)) {
           zm_tomb_vo::set_players_dontspeak(1);
           level.sam_talking = 1;
           e_player playsoundtoplayer(str_vox, e_player);
@@ -199,7 +199,7 @@ function get_zombie_blood_hint_vox() {
 }
 
 function get_zombie_blood_hint_generic_vox() {
-  if(!isdefined(level.generic_clue_index)) {
+  if(!isDefined(level.generic_clue_index)) {
     level.generic_clue_index = 0;
   }
   vo_array[0] = "vox_sam_heard_by_all_1_0";
@@ -228,11 +228,11 @@ function complete_sidequest() {
   level thread function_ab51bfd();
   playsoundatposition("zmb_squest_whiteout", (0, 0, 0));
   level lui::screen_fade_out(1, "white", "starting_ee_screen");
-  util::delay(0.5, undefined, & remove_portal_beam);
+  util::delay(0.5, undefined, &remove_portal_beam);
   level thread lui::play_movie("zm_outro_tomb", "fullscreen", 0, 0, "");
   level lui::screen_fade_out(0, "black", "starting_ee_screen");
   level waittill("movie_done");
-  level.custom_intermission = & player_intermission_ee;
+  level.custom_intermission = &player_intermission_ee;
   level notify("end_game");
   level thread lui::screen_fade_in(2, "black", "starting_ee_screen");
   wait(1.5);
@@ -248,14 +248,14 @@ function function_202bf99e(var_87423d00) {
 }
 
 function remove_portal_beam() {
-  if(isdefined(level.ee_ending_beam_fx)) {
+  if(isDefined(level.ee_ending_beam_fx)) {
     level.ee_ending_beam_fx delete();
   }
 }
 
 function generic_stage_start() {
   str_vox = get_step_announce_vox();
-  if(isdefined(str_vox)) {
+  if(isDefined(str_vox)) {
     level thread ee_samantha_say(str_vox);
   }
 }
@@ -305,8 +305,8 @@ function player_intermission_ee() {
   self.psoffsettime = 0;
   self.friendlydamage = undefined;
   points = struct::get_array("ee_cam", "targetname");
-  if(!isdefined(points) || points.size == 0) {
-    points = getentarray("info_intermission", "classname");
+  if(!isDefined(points) || points.size == 0) {
+    points = getEntArray("info_intermission", "classname");
     if(points.size < 1) {
       println("");
       return;
@@ -319,28 +319,28 @@ function player_intermission_ee() {
   self.game_over_bg.alpha = 1;
   visionsetnaked("cheat_bw", 0.05);
   org = undefined;
-  while (true) {
+  while(true) {
     points = array::randomize(points);
-    for (i = 0; i < points.size; i++) {
+    for(i = 0; i < points.size; i++) {
       point = points[i];
-      if(!isdefined(org)) {
+      if(!isDefined(org)) {
         self spawn(point.origin, point.angles);
       }
-      if(isdefined(points[i].target)) {
-        if(!isdefined(org)) {
+      if(isDefined(points[i].target)) {
+        if(!isDefined(org)) {
           org = spawn("script_model", self.origin + (vectorscale((0, 0, -1), 60)));
-          org setmodel("tag_origin");
+          org setModel("tag_origin");
         }
         org.origin = points[i].origin;
         org.angles = points[i].angles;
-        for (j = 0; j < getplayers().size; j++) {
+        for(j = 0; j < getplayers().size; j++) {
           player = getplayers()[j];
           player camerasetposition(org);
           player camerasetlookat();
           player cameraactivate(1);
         }
         speed = 20;
-        if(isdefined(points[i].speed)) {
+        if(isDefined(points[i].speed)) {
           speed = points[i].speed;
         }
         target_point = struct::get(points[i].target, "targetname");
@@ -371,7 +371,7 @@ function player_intermission_ee() {
 function setup_ee_main_devgui() {
   wait(5);
   b_activated = 0;
-  while (!b_activated) {
+  while(!b_activated) {
     foreach(player in getplayers()) {
       if((distance2d(player.origin, (2904, 5040, -336))) < 100 && player usebuttonpressed()) {
         wait(2);
@@ -392,7 +392,7 @@ function setup_ee_main_devgui() {
 }
 
 function watch_devgui_ee_main() {
-  while (true) {
+  while(true) {
     if(getdvarstring("") == "") {
       setdvar("", "");
       level.ee_debug = 1;
@@ -416,7 +416,7 @@ function watch_devgui_ee_main() {
         case "": {
           level flag::set("");
           m_floor = getent("", "");
-          if(isdefined(m_floor)) {
+          if(isDefined(m_floor)) {
             m_floor delete();
           }
           level waittill("little_girl_lost_step_3_over");
@@ -463,7 +463,7 @@ function watch_devgui_ee_main() {
       setdvar("", "");
       setdvar("", "");
       level flag::set("");
-      array::thread_all(getplayers(), & zm_weapons::weapon_give, "");
+      array::thread_all(getplayers(), &zm_weapons::weapon_give, "");
     }
     wait(0.05);
   }

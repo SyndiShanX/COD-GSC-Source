@@ -10,7 +10,6 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\util_shared;
 #include scripts\weapons\weaponobjects;
-
 #namespace tracker;
 
 init_shared() {

@@ -6,7 +6,7 @@
 #include common_scripts\utility;
 #include maps\mp\_utility;
 
-TimeUntilSpawn(includeTeamkillDelay) {
+TimeUntilspawn(includeTeamkillDelay) {
   if(level.inGracePeriod && !self.hasSpawned)
     return 0;
   respawnDelay = 0;
@@ -21,10 +21,10 @@ TimeUntilSpawn(includeTeamkillDelay) {
   }
   waveBased = (GetDvarInt("scr_" + level.gameType + "_waverespawndelay") > 0);
   if(waveBased)
-    return self TimeUntilWaveSpawn(respawnDelay);
+    return self TimeUntilWavespawn(respawnDelay);
   return respawnDelay;
 }
-maySpawn() {
+mayspawn() {
   if(isDefined(level.maySpawn) && !(self[[level.maySpawn]]())) {
     return false;
   }
@@ -44,7 +44,7 @@ maySpawn() {
   }
   return true;
 }
-TimeUntilWaveSpawn(minimumWait) {
+TimeUntilWavespawn(minimumWait) {
   earliestSpawnTime = gettime() + minimumWait * 1000;
   lastWaveTime = level.lastWave[self.pers["team"]];
   waveDelay = level.waveDelay[self.pers["team"]] * 1000;
@@ -57,7 +57,7 @@ TimeUntilWaveSpawn(minimumWait) {
     timeOfSpawn += 50 * self.waveSpawnIndex;
   return (timeOfSpawn - gettime()) / 1000;
 }
-stopPoisoningAndFlareOnSpawn() {
+stopPoisoningAndFlareOnspawn() {
   self endon("disconnect");
   self.inPoisonArea = false;
   self.inBurnArea = false;
@@ -135,7 +135,7 @@ spawnPlayer() {
   pixendevent("END: spawnPlayer_preUTS");
   level thread maps\mp\gametypes\_globallogic::updateTeamStatus();
   pixbeginevent("spawnPlayer_postUTS");
-  self thread stopPoisoningAndFlareOnSpawn();
+  self thread stopPoisoningAndFlareOnspawn();
   self StopBurning();
   assert(maps\mp\gametypes\_globallogic_utils::isValidClass(self.class));
   self maps\mp\gametypes\_class::setClass(self.class);
@@ -223,7 +223,7 @@ spawnPlayer() {
   pixendevent("END: spawnPlayer_postUTS");
   waittillframeend;
   self notify("spawned_player");
-  self maps\mp\gametypes\_gametype_variants::onPlayerSpawn();
+  self maps\mp\gametypes\_gametype_variants::onPlayerspawn();
   self logstring("S " + self.origin[0] + " " + self.origin[1] + " " + self.origin[2]);
   setdvar("scr_selecting_location", "");
   self thread maps\mp\gametypes\_hardpoints::killstreakWaiter();
@@ -275,13 +275,13 @@ spectatorThirdPersonness() {
 getPlayerFromClientNum(clientNum) {
   if(clientNum < 0)
     return undefined;
-  for (i = 0; i < level.players.size; i++) {
+  for(i = 0; i < level.players.size; i++) {
     if(level.players[i] getEntityNumber() == clientNum)
       return level.players[i];
   }
   return undefined;
 }
-forceSpawn() {
+forcespawn() {
   self endon("death");
   self endon("disconnect");
   self endon("spawned");
@@ -297,7 +297,7 @@ forceSpawn() {
   self maps\mp\gametypes\_globallogic_ui::closeMenus();
   self thread[[level.spawnClient]]();
 }
-kickIfDontSpawn() {
+kickIfDontspawn() {
   if(self IsHost()) {
     return;
   }
@@ -371,7 +371,7 @@ spawnIntermission(useDefaultCallback) {
       self closeInGameMenu();
       self openMenu(game["menu_endgameupdate"]);
       waitTime = 4.0;
-      while (waitTime) {
+      while(waitTime) {
         wait(0.25);
         waitTime -= 0.25;
         self openMenu(game["menu_endgameupdate"]);
@@ -388,16 +388,14 @@ spawnIntermission(useDefaultCallback) {
   if(isDefined(useDefaultCallback) && useDefaultCallback)
     maps\mp\gametypes\_globallogic_defaults::default_onSpawnIntermission();
   else
-    [
-      [level.onSpawnIntermission]
-    ]();
+    [[level.onSpawnIntermission]]();
   self setDepthOfField(0, 128, 512, 4000, 6, 1.8);
 }
 spawnClient(timeAlreadyPassed) {
   pixbeginevent("spawnClient");
   assert(isDefined(self.team));
   assert(maps\mp\gametypes\_globallogic_utils::isValidClass(self.class));
-  if(!self maySpawn()) {
+  if(!self mayspawn()) {
     currentorigin = self.origin;
     currentangles = self.angles;
     shouldShowRespawnMessage = true;
@@ -451,7 +449,7 @@ waitAndSpawnClient(timeAlreadyPassed) {
     self.waveSpawnIndex = level.wavePlayerSpawnIndex[self.team];
     level.wavePlayerSpawnIndex[self.team]++;
   }
-  timeUntilSpawn = TimeUntilSpawn(false);
+  timeUntilSpawn = TimeUntilspawn(false);
   if(timeUntilSpawn > timeAlreadyPassed) {
     timeUntilSpawn -= timeAlreadyPassed;
     timeAlreadyPassed = 0;
@@ -486,7 +484,7 @@ waitAndSpawnClient(timeAlreadyPassed) {
 waitRespawnOrSafeSpawnButton() {
   self endon("disconnect");
   self endon("end_respawn");
-  while (1) {
+  while(1) {
     if(self useButtonPressed()) {
       break;
     }

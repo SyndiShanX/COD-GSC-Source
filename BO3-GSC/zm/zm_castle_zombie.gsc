@@ -33,7 +33,7 @@ function autoexec init() {
   level.var_4fb25bb9["crawl"] = 3;
   setdvar("tu5_zmPathDistanceCheckTolarance", 20);
   setdvar("scr_zm_use_code_enemy_selection", 0);
-  level.closest_player_override = & castle_closest_player;
+  level.closest_player_override = &castle_closest_player;
   level thread update_closest_player();
   thread castle_zombie_devgui();
   level.move_valid_poi_to_navmesh = 1;
@@ -41,15 +41,15 @@ function autoexec init() {
 }
 
 function private initzmcastlebehaviorsandasm() {
-  animationstatenetwork::registeranimationmocomp("mocomp_teleport_traversal@zombie", & teleporttraversalmocompstart, undefined, undefined);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldMoveLowg", & shouldmovelowg);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zodShouldMove", & zodshouldmove);
+  animationstatenetwork::registeranimationmocomp("mocomp_teleport_traversal@zombie", &teleporttraversalmocompstart, undefined, undefined);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldMoveLowg", &shouldmovelowg);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zodShouldMove", &zodshouldmove);
 }
 
 function teleporttraversalmocompstart(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
   entity orientmode("face angle", entity.angles[1]);
   entity animmode("normal");
-  if(isdefined(entity.traverseendnode)) {
+  if(isDefined(entity.traverseendnode)) {
     print3d(entity.traversestartnode.origin, "", (1, 0, 0), 1, 1, 60);
     print3d(entity.traverseendnode.origin, "", (0, 1, 0), 1, 1, 60);
     line(entity.traversestartnode.origin, entity.traverseendnode.origin, (0, 1, 0), 1, 0, 60);
@@ -58,24 +58,24 @@ function teleporttraversalmocompstart(entity, mocompanim, mocompanimblendouttime
 }
 
 function zodshouldmove(entity) {
-  if(isdefined(entity.zombie_tesla_hit) && entity.zombie_tesla_hit && (!(isdefined(entity.tesla_death) && entity.tesla_death))) {
+  if(isDefined(entity.zombie_tesla_hit) && entity.zombie_tesla_hit && (!(isDefined(entity.tesla_death) && entity.tesla_death))) {
     return false;
   }
-  if(isdefined(entity.pushed) && entity.pushed) {
+  if(isDefined(entity.pushed) && entity.pushed) {
     return false;
   }
-  if(isdefined(entity.knockdown) && entity.knockdown) {
+  if(isDefined(entity.knockdown) && entity.knockdown) {
     return false;
   }
-  if(isdefined(entity.grapple_is_fatal) && entity.grapple_is_fatal) {
+  if(isDefined(entity.grapple_is_fatal) && entity.grapple_is_fatal) {
     return false;
   }
   if(level.wait_and_revive) {
-    if(!(isdefined(entity.var_1e3fb1c) && entity.var_1e3fb1c)) {
+    if(!(isDefined(entity.var_1e3fb1c) && entity.var_1e3fb1c)) {
       return false;
     }
   }
-  if(isdefined(entity.stumble)) {
+  if(isDefined(entity.stumble)) {
     return false;
   }
   if(zombiebehavior::zombieshouldmeleecondition(entity)) {
@@ -84,20 +84,20 @@ function zodshouldmove(entity) {
   if(entity haspath()) {
     return true;
   }
-  if(isdefined(entity.keep_moving) && entity.keep_moving) {
+  if(isDefined(entity.keep_moving) && entity.keep_moving) {
     return true;
   }
   return false;
 }
 
 function shouldmovelowg(entity) {
-  return isdefined(entity.low_gravity) && entity.low_gravity;
+  return isDefined(entity.low_gravity) && entity.low_gravity;
 }
 
 function set_gravity(gravity) {
   if(gravity == "low") {
     self.low_gravity = 1;
-    if(isdefined(self.missinglegs) && self.missinglegs) {
+    if(isDefined(self.missinglegs) && self.missinglegs) {
       self.low_gravity_variant = randomint(level.var_4fb25bb9["crawl"]);
     } else {
       self.low_gravity_variant = randomint(level.var_4fb25bb9[self.zombie_move_speed]);
@@ -129,10 +129,10 @@ function function_7b63bf24(player) {
     }
     return true;
   }
-  if(isdefined(self.zone_name)) {
+  if(isDefined(self.zone_name)) {
     if(self.zone_name == "zone_v10_pad" || self.zone_name == "zone_v10_pad_door" || self.zone_name == "zone_v10_pad_exterior") {
       var_b9ec9b33 = 1;
-      if(!(isdefined(level.zones["zone_v10_pad_door"].is_spawning_allowed) && level.zones["zone_v10_pad_door"].is_spawning_allowed)) {
+      if(!(isDefined(level.zones["zone_v10_pad_door"].is_spawning_allowed) && level.zones["zone_v10_pad_door"].is_spawning_allowed)) {
         var_2d8a543 = getent("zone_v10_pad", "targetname");
         if(!self istouching(var_2d8a543)) {
           return false;
@@ -140,7 +140,7 @@ function function_7b63bf24(player) {
       }
     }
   }
-  if(isdefined(player.zone_name)) {
+  if(isDefined(player.zone_name)) {
     if(player.zone_name == "zone_v10_pad" || player.zone_name == "zone_v10_pad_door" || player.zone_name == "zone_v10_pad_exterior") {
       var_ef36a2fe = 1;
     }
@@ -152,7 +152,7 @@ function function_7b63bf24(player) {
 }
 
 function private castle_validate_last_closest_player(players) {
-  if(isdefined(self.last_closest_player) && (isdefined(self.last_closest_player.am_i_valid) && self.last_closest_player.am_i_valid)) {
+  if(isDefined(self.last_closest_player) && (isDefined(self.last_closest_player.am_i_valid) && self.last_closest_player.am_i_valid)) {
     return;
   }
   self.need_closest_player = 1;
@@ -166,7 +166,7 @@ function private castle_validate_last_closest_player(players) {
 }
 
 function private function_ca4f6cd2(player) {
-  if(isdefined(player.zone_name)) {
+  if(isDefined(player.zone_name)) {
     if(player.zone_name == "zone_v10_pad") {
       dist = distance(player.origin, self.origin);
       return dist;
@@ -178,12 +178,12 @@ function private function_ca4f6cd2(player) {
 
 function private castle_closest_player(origin, var_6c55ba74) {
   aiprofile_beginentry("castle_closest_player");
-  players = array::filter(var_6c55ba74, 0, & function_4fee0339);
+  players = array::filter(var_6c55ba74, 0, &function_4fee0339);
   if(players.size == 0) {
     aiprofile_endentry();
     return undefined;
   }
-  if(isdefined(self.zombie_poi)) {
+  if(isDefined(self.zombie_poi)) {
     aiprofile_endentry();
     return undefined;
   }
@@ -196,18 +196,18 @@ function private castle_closest_player(origin, var_6c55ba74) {
     aiprofile_endentry();
     return undefined;
   }
-  if(!isdefined(self.last_closest_player)) {
+  if(!isDefined(self.last_closest_player)) {
     self.last_closest_player = players[0];
   }
-  if(!isdefined(self.need_closest_player)) {
+  if(!isDefined(self.need_closest_player)) {
     self.need_closest_player = 1;
   }
-  if(isdefined(level.last_closest_time) && level.last_closest_time >= level.time) {
+  if(isDefined(level.last_closest_time) && level.last_closest_time >= level.time) {
     self castle_validate_last_closest_player(players);
     aiprofile_endentry();
     return self.last_closest_player;
   }
-  if(isdefined(self.need_closest_player) && self.need_closest_player) {
+  if(isDefined(self.need_closest_player) && self.need_closest_player) {
     level.last_closest_time = level.time;
     self.need_closest_player = 0;
     closest = players[0];
@@ -215,16 +215,16 @@ function private castle_closest_player(origin, var_6c55ba74) {
     if(self function_7b63bf24(players[0])) {
       closest_dist = self function_ca4f6cd2(closest);
     }
-    if(!isdefined(closest_dist)) {
+    if(!isDefined(closest_dist)) {
       closest = undefined;
     }
-    for (index = 1; index < players.size; index++) {
+    for(index = 1; index < players.size; index++) {
       dist = undefined;
       if(self function_7b63bf24(players[index])) {
         dist = self function_ca4f6cd2(players[index]);
       }
-      if(isdefined(dist)) {
-        if(isdefined(closest_dist)) {
+      if(isDefined(dist)) {
+        if(isDefined(closest_dist)) {
           if(dist < closest_dist) {
             closest = players[index];
             closest_dist = dist;
@@ -237,7 +237,7 @@ function private castle_closest_player(origin, var_6c55ba74) {
     }
     self.last_closest_player = closest;
   }
-  if(players.size > 1 && isdefined(closest)) {
+  if(players.size > 1 && isDefined(closest)) {
     self zm_utility::approximate_path_dist(closest);
   }
   self castle_validate_last_closest_player(players);
@@ -246,7 +246,7 @@ function private castle_closest_player(origin, var_6c55ba74) {
 }
 
 function private function_4fee0339(player) {
-  if(!isdefined(player) || !isalive(player) || !isplayer(player) || player.sessionstate == "spectator" || player.sessionstate == "intermission" || player laststand::player_is_in_laststand() || player.ignoreme) {
+  if(!isDefined(player) || !isalive(player) || !isplayer(player) || player.sessionstate == "spectator" || player.sessionstate == "intermission" || player laststand::player_is_in_laststand() || player.ignoreme) {
     return false;
   }
   return true;
@@ -254,7 +254,7 @@ function private function_4fee0339(player) {
 
 function private update_closest_player() {
   level waittill("start_of_round");
-  while (true) {
+  while(true) {
     reset_closest_player = 1;
     zombies = zombie_utility::get_round_enemy_array();
     var_6aad1b23 = getaiarchetypearray("mechz", level.zombie_team);
@@ -262,14 +262,14 @@ function private update_closest_player() {
       zombies = arraycombine(zombies, var_6aad1b23, 0, 0);
     }
     foreach(zombie in zombies) {
-      if(isdefined(zombie.need_closest_player) && zombie.need_closest_player) {
+      if(isDefined(zombie.need_closest_player) && zombie.need_closest_player) {
         reset_closest_player = 0;
         break;
       }
     }
     if(reset_closest_player) {
       foreach(zombie in zombies) {
-        if(isdefined(zombie.need_closest_player)) {
+        if(isDefined(zombie.need_closest_player)) {
           zombie.need_closest_player = 1;
         }
       }
@@ -280,21 +280,21 @@ function private update_closest_player() {
 
 function private castle_zombie_devgui() {
   level flagsys::wait_till("");
-  zm_devgui::add_custom_devgui_callback( & castle_zombie_devgui_callback);
+  zm_devgui::add_custom_devgui_callback(&castle_zombie_devgui_callback);
   adddebugcommand("");
 }
 
 function private castle_zombie_devgui_callback(cmd) {
   switch (cmd) {
     case "": {
-      if(!isdefined(level.var_c43a1504)) {
+      if(!isDefined(level.var_c43a1504)) {
         level.var_c43a1504 = 1;
       } else {
         level.var_c43a1504 = !level.var_c43a1504;
       }
       zombies = getaispeciesarray(level.zombie_team, "");
       foreach(zombie in zombies) {
-        if(isdefined(level.var_c43a1504) && level.var_c43a1504) {
+        if(isDefined(level.var_c43a1504) && level.var_c43a1504) {
           zombie set_gravity("");
           if(zombie ai::has_behavior_attribute("")) {
             zombie ai::set_behavior_attribute("", "");

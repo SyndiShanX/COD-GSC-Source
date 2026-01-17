@@ -7,8 +7,7 @@
 #include clientscripts\mp\createfx\zm_nuked_fx;
 #include clientscripts\mp\_fx;
 
-precache_util_fx() {
-}
+precache_util_fx() {}
 
 precache_scripted_fx() {
   level._effect["eye_glow"] = loadfx("misc/fx_zombie_eye_single");
@@ -122,9 +121,9 @@ precache_fxanim_props() {
 }
 
 play_fx_prop_anims(localclientnum) {
-  fxanim_dustdevils = getentarray(localclientnum, "fxanim_mp_dustdevil", "targetname");
+  fxanim_dustdevils = getEntArray(localclientnum, "fxanim_mp_dustdevil", "targetname");
   array_thread(fxanim_dustdevils, ::fxanim_think, localclientnum);
-  fxanim_props = getentarray(localclientnum, "fxanim", "targetname");
+  fxanim_props = getEntArray(localclientnum, "fxanim", "targetname");
   array_thread(fxanim_props, ::fxanim_props_think, localclientnum);
 }
 
@@ -142,7 +141,7 @@ fxanim_think(localclientnum) {
     wait_time = randomfloatrange(15, 30);
     wait(wait_time);
     self setanimrestart(level.nuked_fxanims["fxanim_mp_dustdevil_anim"], 1.0, 0.0, 1.0);
-    sound_id = ent playsound(0, "amb_fire_tornado");
+    sound_id = ent playSound(0, "amb_fire_tornado");
     effect_to_use = undefined;
 
     switch (randomint(2)) {
@@ -156,7 +155,7 @@ fxanim_think(localclientnum) {
         effect_to_use = level._effect["fire_devil_lg"];
     }
 
-    dust = playfxontag(localclientnum, effect_to_use, self, "dervish_jnt");
+    dust = playFXOnTag(localclientnum, effect_to_use, self, "dervish_jnt");
     wait 12;
     stopsound(sound_id);
     stopfx(localclientnum, dust);
@@ -176,7 +175,7 @@ fxanim_props_think(localclientnum) {
 
   if(isDefined(self.fxanim_scene_1) && self.fxanim_scene_1 == "porch") {
     wait(randomintrange(5, 10) * 1000);
-    playsound(0, "zmb_porch_collapse", self.origin);
+    playSound(0, "zmb_porch_collapse", self.origin);
   }
 
   self useanimtree(#animtree);
@@ -202,12 +201,12 @@ fxanim_wire_think(localclientnum) {
     wait(randomintrange(4, 5));
 
     if(self.fxanim_scene_1 == "wirespark_long") {
-      playfxontag(localclientnum, level._effect["wire_spark"], self, "long_spark_06_jnt");
+      playFXOnTag(localclientnum, level._effect["wire_spark"], self, "long_spark_06_jnt");
       continue;
     }
 
     if(self.fxanim_scene_1 == "wirespark_med")
-      playfxontag(localclientnum, level._effect["wire_spark"], self, "med_spark_06_jnt");
+      playFXOnTag(localclientnum, level._effect["wire_spark"], self, "med_spark_06_jnt");
   }
 }
 

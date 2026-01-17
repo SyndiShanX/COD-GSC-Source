@@ -4,7 +4,6 @@
 ***********************************************/
 
 #include scripts\core_common\util_shared;
-
 #namespace zm_maptable;
 
 function_10672567() {
@@ -36,14 +35,14 @@ function_10672567() {
       fields = getmapfields(mapname, "<dev string:x38>");
     }
 
-      level.maptableentry = fields;
+    level.maptableentry = fields;
   }
 
   return level.maptableentry;
 }
 
 get_cast() {
-  cast = #"other";
+  cast = # "other";
   fields = function_10672567();
 
   if(isDefined(fields)) {
@@ -56,7 +55,7 @@ get_cast() {
 get_story() {
   var_26ea2807 = get_cast();
 
-  if(var_26ea2807 === #"story1") {
+  if(var_26ea2807 === # "story1") {
     return 1;
   }
 

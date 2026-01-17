@@ -13,7 +13,7 @@ function map_material_helper_by_localclientnum(localclientnum, materialname) {
 }
 
 function map_material_if_undefined(localclientnum, materialname) {
-  if(isdefined(mapped_material_id(materialname))) {
+  if(isDefined(mapped_material_id(materialname))) {
     return;
   }
   map_material_helper_by_localclientnum(localclientnum, materialname);
@@ -24,7 +24,7 @@ function map_material_helper(player, materialname) {
 }
 
 function mapped_material_id(materialname) {
-  if(!isdefined(level.filter_matid)) {
+  if(!isDefined(level.filter_matid)) {
     level.filter_matid = [];
   }
   return level.filter_matid[materialname];
@@ -244,7 +244,7 @@ function disable_filter_radialblur(player, filterid) {
 
 function init_filter_vehicle_damage(player, materialname) {
   init_filter_indices();
-  if(!isdefined(level.filter_matid[materialname])) {
+  if(!isDefined(level.filter_matid[materialname])) {
     map_material_helper(player, materialname);
   }
 }
@@ -259,7 +259,7 @@ function set_filter_vehicle_sun_position(player, filterid, x, y) {
 }
 
 function enable_filter_vehicle_damage(player, filterid, materialname) {
-  if(isdefined(level.filter_matid[materialname])) {
+  if(isDefined(level.filter_matid[materialname])) {
     setfilterpassmaterial(player.localclientnum, filterid, 0, level.filter_matid[materialname]);
     setfilterpassenabled(player.localclientnum, filterid, 0, 1);
   }

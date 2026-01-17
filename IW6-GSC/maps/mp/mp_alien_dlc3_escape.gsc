@@ -590,14 +590,14 @@ check_for_player_near_spot_with_cortex(var_0) {
 
     if(distancesquared(var_2.origin, self.origin) < var_1) {
       if(!isDefined(level.cortex_carrier) || isDefined(level.cortex_carrier) && level.cortex_carrier != self) {
-        maps\mp\_utility::setlowermessage("plant_cortex", & "MP_ALIEN_DESCENT_CORTEX_HINT", undefined, 10);
+        maps\mp\_utility::setlowermessage("plant_cortex", &"MP_ALIEN_DESCENT_CORTEX_HINT", undefined, 10);
 
         while(player_should_see_cortex_hint(var_2, var_1, 1))
           wait 0.05;
 
         maps\mp\_utility::clearlowermessage("plant_cortex");
       } else {
-        maps\mp\_utility::setlowermessage("plant_cortex", & "MP_ALIEN_DESCENT_CORTEX_PLANT", undefined, 10);
+        maps\mp\_utility::setlowermessage("plant_cortex", &"MP_ALIEN_DESCENT_CORTEX_PLANT", undefined, 10);
 
         while(player_should_see_cortex_hint(var_2, var_1, 0))
           wait 0.05;

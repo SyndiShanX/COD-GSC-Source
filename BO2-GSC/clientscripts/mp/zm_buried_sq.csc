@@ -121,22 +121,22 @@ _enable_wisp_fx(localclientnumber) {
 
   if(!isDefined(self.m_client)) {
     self.m_client = spawn(localclientnumber, self.origin, "script_model");
-    self.m_client setmodel(self.model);
+    self.m_client setModel(self.model);
     self.m_client linkto(self);
     self.m_client cleanup_m_client(self);
   }
 
   self.m_client useanimtree(#animtree);
   self.m_client setflaggedanim("buried_fxanim", level.scr_anim["fxanim_props"]["sq_orbs"], 1.0, 0.0, 1.0);
-  self.m_client playloopsound("zmb_sq_wisp_loop_guillotine");
+  self.m_client playLoopSound("zmb_sq_wisp_loop_guillotine");
 
   while(isDefined(self)) {
     if(clientscripts\mp\zombies\_zm_perk_vulture::_player_has_vulture(localclientnumber)) {
       if(!level.sq_wisp_at_tower)
-        playfxontag(localclientnumber, level._effect["vulture_fx_wisp"], self, "tag_origin");
+        playFXOnTag(localclientnumber, level._effect["vulture_fx_wisp"], self, "tag_origin");
 
       for(i = 1; i <= level.sq_wisp_orb_count; i++)
-        playfxontag(localclientnumber, level._effect["vulture_fx_wisp_orb"], self.m_client, "tag_orb_fx" + i);
+        playFXOnTag(localclientnumber, level._effect["vulture_fx_wisp_orb"], self.m_client, "tag_orb_fx" + i);
     }
 
     wait 0.25;
@@ -182,7 +182,7 @@ sq_bp_spawn_button(clientnum) {
 
   m_button = spawn(clientnum, self.origin, "script_model");
   m_button.angles = self.angles;
-  m_button setmodel("p6_zm_bu_button");
+  m_button setModel("p6_zm_bu_button");
   m_button.targetname = "sq_bp_button";
   m_button.script_string = self.script_string;
 }
@@ -195,7 +195,7 @@ sq_spawn_model_at_struct(clientnum, str_struct, str_model) {
 
   m_prop = spawn(clientnum, s_struct.origin, "script_model");
   m_prop.angles = s_struct.angles;
-  m_prop setmodel(str_model);
+  m_prop setModel(str_model);
   m_prop.targetname = str_struct;
   return m_prop;
 }
@@ -223,9 +223,9 @@ ctw_light_tube_think(clientnum, newval) {
   str_tag = "j_vaccume_0" + newval;
 
   while(true) {
-    playfx(clientnum, level._effect["fx_wisp_m"], m_gallows gettagorigin(str_tag));
+    playFX(clientnum, level._effect["fx_wisp_m"], m_gallows gettagorigin(str_tag));
     waitrealtime(0.5);
-    m_gallows playloopsound("zmb_sq_wisp_loop");
+    m_gallows playLoopSound("zmb_sq_wisp_loop");
   }
 }
 
@@ -277,7 +277,7 @@ build_tower_think(clientnum, event) {
 sq_tower_spawn_attachment(clientnum, str_model, str_tag) {
   m_part = spawn(clientnum, self gettagorigin(str_tag), "script_model");
   m_part.angles = self gettagangles(str_tag);
-  m_part setmodel(str_model);
+  m_part setModel(str_model);
 }
 
 sq_endgamemachine_animate(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -286,11 +286,11 @@ sq_endgamemachine_animate(localclientnum, oldval, newval, bnewent, binitialsnap,
   if(!oldval && newval) {
     endgamemachine useanimtree(#animtree);
     endgamemachine setflaggedanim("buried_fxanim", level.scr_anim["fxanim_props"]["endgame_machine_open"], 1.0, 0.0, 1.0);
-    playsound(localclientnum, "zmb_endgame_mach_open", endgamemachine.origin);
+    playSound(localclientnum, "zmb_endgame_mach_open", endgamemachine.origin);
   } else if(oldval && !newval) {
     endgamemachine useanimtree(#animtree);
     endgamemachine setflaggedanim("buried_fxanim", level.scr_anim["fxanim_props"]["endgame_machine_close"], 1.0, 0.0, 1.0);
-    playsound(localclientnum, "zmb_endgame_mach_open", endgamemachine.origin);
+    playSound(localclientnum, "zmb_endgame_mach_open", endgamemachine.origin);
   }
 }
 
@@ -315,7 +315,7 @@ sq_endgamemachine_toggle_light(localclientnum, fxbit, tag) {
   if(issubstr(tag, "TAG_BULB_"))
     fx = "sq_bulb_yellow";
 
-  endgamemachine._lights[tag] = playfxontag(localclientnum, level._effect[fx], endgamemachine, tag);
+  endgamemachine._lights[tag] = playFXOnTag(localclientnum, level._effect[fx], endgamemachine, tag);
 }
 
 sq_endgamemachine_bulb_0(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -397,7 +397,7 @@ sq_bp_toggle_light(localclientnum, fxbit, tag) {
   if(fxbit == 2)
     fx = "sq_bulb_green";
 
-  level.m_lightboard._lights[tag][localclientnum] = playfxontag(localclientnum, level._effect[fx], level.m_lightboard, tag);
+  level.m_lightboard._lights[tag][localclientnum] = playFXOnTag(localclientnum, level._effect[fx], level.m_lightboard, tag);
 }
 
 sq_bp_set_lightboard(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -452,7 +452,7 @@ run_richtofen_earthquake_and_rumble(localclientnumber) {
   self endon("richtofen_ending_done");
   a_rumbles = get_rumble_array();
   a_players = getlocalplayers();
-  playsound(0, "zmb_sq_endgame_earthquake_rich", (0, 0, 0));
+  playSound(0, "zmb_sq_endgame_earthquake_rich", (0, 0, 0));
 
   foreach(player in a_players)
   player earthquake(0.5, 12, player.origin, 99999);
@@ -491,7 +491,7 @@ run_maxis_earthquake_and_rumble(localclientnumber) {
     wait(randomfloatrange(3.0, 7.0));
     size = randomfloatrange(0.2, 0.4);
     duration = randomfloatrange(1.5, 3);
-    playsound(0, "zmb_sq_endgame_earthquake_max", (0, 0, 0));
+    playSound(0, "zmb_sq_endgame_earthquake_max", (0, 0, 0));
     a_players = getlocalplayers();
 
     foreach(player in a_players) {

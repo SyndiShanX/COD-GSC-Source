@@ -966,7 +966,7 @@ snowCustomCrateFunc() {
   if(!level.snow_satellite_allowed || game["player_holding_level_killstrek"]) {
     return;
   }
-  maps\mp\killstreaks\_airdrop::addCrateType("airdrop_assault", "snow_satellite", SNOW_SATELLITE_WEIGHT, maps\mp\killstreaks\_airdrop::killstreakCrateThink, maps\mp\killstreaks\_airdrop::get_friendly_crate_model(), maps\mp\killstreaks\_airdrop::get_enemy_crate_model(), & "KILLSTREAKS_HINTS_SNOW_SATELLITE");
+  maps\mp\killstreaks\_airdrop::addCrateType("airdrop_assault", "snow_satellite", SNOW_SATELLITE_WEIGHT, maps\mp\killstreaks\_airdrop::killstreakCrateThink, maps\mp\killstreaks\_airdrop::get_friendly_crate_model(), maps\mp\killstreaks\_airdrop::get_enemy_crate_model(), &"KILLSTREAKS_HINTS_SNOW_SATELLITE");
   level thread watch_for_snow_satellite_crate();
 }
 

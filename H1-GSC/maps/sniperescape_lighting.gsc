@@ -36,7 +36,7 @@ handle_player_on_sniper_rifle() {
   common_scripts\utility::flag_wait("player_is_on_turret");
   setsaveddvar("sv_znear", "100");
   setsaveddvar("sm_sunShadowCenter", getent("blood_pool", "targetname").origin);
-  var_0 = getentarray("zakhaev_light", "targetname");
+  var_0 = getEntArray("zakhaev_light", "targetname");
 
   foreach(var_2 in var_0)
   var_2 setlightshadowstate("force_on");
@@ -46,7 +46,7 @@ handle_player_on_sniper_rifle() {
   common_scripts\utility::flag_wait("player_gets_off_turret");
   setsaveddvar("sv_znear", "1.0");
   setsaveddvar("sm_sunShadowCenter", (0, 0, 0));
-  var_0 = getentarray("zakhaev_light", "targetname");
+  var_0 = getEntArray("zakhaev_light", "targetname");
 
   foreach(var_2 in var_0)
   var_2 setlightshadowstate("normal");
@@ -149,7 +149,7 @@ loop_camera_shake() {
   var_0[1].frequency_roll = 2;
   var_0[1].frequency_yaw = 0;
 
-  for (;;) {
+  for(;;) {
     var_1 = randomintrange(0, var_0.size);
     var_2 = var_0[var_1];
     level.player screenshakeonentity(var_2.pitch_scale, var_2.yaw_scale, var_2.roll_scale, var_2.duration, var_2.duration_fade_up, var_2.duration_fade_down, var_2.radius, var_2.frequency_pitch, var_2.frequency_roll, var_2.frequency_yaw, var_2.exponent);
@@ -172,7 +172,7 @@ snipe_vision_adjust() {
   if(1) {
     return;
   }
-  for (;;) {
+  for(;;) {
     common_scripts\utility::flag_wait("near_window");
     var_0 = 1.25;
     var_1 = 1.25;

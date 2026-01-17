@@ -50,7 +50,7 @@ init() {
 
 tank_mantle_think() {
   self endon("death");
-  while (1) {
+  while(1) {
     self waittill("trigger", other, side);
     if(side == "invalid") {
       continue;
@@ -121,9 +121,9 @@ recenter_turret() {
   self endon("death_finished");
   turret_origin = self GetTagOrigin("turret_recoil");
   z_offset = turret_origin[2] - self.origin[2];
-  temp = Spawn("script_origin", self.origin);
+  temp = spawn("script_origin", self.origin);
   temp thread temp_target_think(self);
-  forward = AnglesToForward(self.angles + (0, 0, 0));
+  forward = anglesToForward(self.angles + (0, 0, 0));
   origin = self.origin + (0, 0, z_offset) + vectorscale(forward, 500);
   temp.origin = origin;
   temp LinkTo(self);
@@ -144,8 +144,8 @@ tank_mantle_death(attacker) {
   self.mantled = true;
   tank_model = self.model;
   wait(2);
-  PlayFX(level.vehicle_mantlefx[tank_model]["implode"], self.origin, AnglesToForward(self.angles));
-  self PlaySound("implosion");
+  playFX(level.vehicle_mantlefx[tank_model]["implode"], self.origin, anglesToForward(self.angles));
+  self playSound("implosion");
   RadiusDamage(self.origin, 1, self.health + 10, self.health);
   if(!isDefined(self.cook_off_chance)) {
     self.cook_off_chance = 50;
@@ -154,12 +154,12 @@ tank_mantle_death(attacker) {
     arcademode_assignpoints("arcademode_score_tankmantle", attacker);
   }
   if(RandomInt(100) > self.cook_off_chance) {
-    PlayFX(level.vehicle_mantlefx[tank_model]["smoke"], self.origin, AnglesToForward(self.angles));
+    playFX(level.vehicle_mantlefx[tank_model]["smoke"], self.origin, anglesToForward(self.angles));
     wait(20);
-    PlayFX(level.vehicle_mantlefx[tank_model]["smolder"], self.origin, AnglesToForward(self.angles));
+    playFX(level.vehicle_mantlefx[tank_model]["smolder"], self.origin, anglesToForward(self.angles));
   } else {
     wait(3 + RandomFloat(3));
-    PlayFX(level.vehicle_mantlefx[tank_model]["cookoff"], self.origin, AnglesToForward(self.angles));
+    playFX(level.vehicle_mantlefx[tank_model]["cookoff"], self.origin, anglesToForward(self.angles));
   }
 }
 
@@ -173,7 +173,7 @@ throwback_grenade(side) {
   } else if(side == "right") {
     forward = AnglesToRight(self.angles);
   } else {
-    forward = AnglesToForward(self.angles + (0, 180, 0));
+    forward = anglesToForward(self.angles + (0, 180, 0));
   }
   target_pos = self.origin + vectorscale(forward, 120);
   gravity = GetDvarInt("g_gravity");
@@ -192,7 +192,7 @@ do_notetracks(tank, msg, side) {
   self endon("death");
   grenade_model = GetWeaponModel(level.tankmantle_grenade, 0, true);
   AssertEx(grenade_model != "", "Could not find the Model for Weapon: " + level.tankmantle_grenade);
-  while (1) {
+  while(1) {
     self waittill(msg, notetrack);
     if(notetrack == "end") {
       return;
@@ -201,14 +201,14 @@ do_notetracks(tank, msg, side) {
       case "pull":
         break;
       case "tinktink":
-        tank PlaySound("gren_drop_bounce");
+        tank playSound("gren_drop_bounce");
         tank thread scream_sounds();
         break;
       case "open":
-        tank PlaySound("hatch_open");
+        tank playSound("hatch_open");
         break;
       case "close":
-        tank PlaySound("hatch_close");
+        tank playSound("hatch_close");
         break;
       case "attach":
         self Attach(grenade_model, "tag_weapon");
@@ -226,9 +226,9 @@ scream_sounds() {
   nums[0] = 1;
   nums[1] = 2;
   nums = array_randomize(nums);
-  self PlaySound("scream_" + nums[0]);
+  self playSound("scream_" + nums[0]);
   wait(1.5 + RandomFloat(1));
-  self PlaySound("scream_" + nums[1]);
+  self playSound("scream_" + nums[1]);
 }
 
 #using_animtree("player");

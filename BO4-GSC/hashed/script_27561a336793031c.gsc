@@ -9,7 +9,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
-
 #namespace namespace_980ebe0;
 
 autoexec __init__system__() {
@@ -24,7 +23,7 @@ __init__() {
   zm_trial::register_challenge(#"hash_3493e071de24d8a1", &on_begin, &on_end);
 }
 
-private on_begin(var_53c7b205 = #"1") {
+on_begin(var_53c7b205 = # "1") {
   level.var_53c7b205 = zm_trial::function_5769f26a(var_53c7b205);
 
   foreach(player in getplayers()) {
@@ -34,20 +33,20 @@ private on_begin(var_53c7b205 = #"1") {
   callback::on_spawned(&on_player_spawned);
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   callback::remove_on_spawned(&on_player_spawned);
   level.var_53c7b205 = undefined;
 }
 
-private on_player_spawned() {
+on_player_spawned() {
   self thread function_13db986c(level.var_53c7b205);
 }
 
-private function_13db986c(var_53c7b205) {
+function_13db986c(var_53c7b205) {
   self notify("48c46c9de397db92");
   self endon("48c46c9de397db92");
   self endon(#"death");
-  level endon(#"hash_7646638df88a3656", #"end_game");
+  level endon(#"hash_7646638df88a3656", # "end_game");
   self waittill(#"hash_7a32b2af2eef5415");
 
   while(true) {

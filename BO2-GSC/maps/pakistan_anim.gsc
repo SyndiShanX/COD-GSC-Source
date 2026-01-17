@@ -685,8 +685,7 @@ vo_corpse_alley() {
   level.harper queue_dialog("harp_shit_look_must_0", 1);
 }
 
-vo_avoid_spotlight_detected() {
-}
+vo_avoid_spotlight_detected() {}
 
 vo_sewer_exterior() {
   if(!flag("drone_intro_attack") && !flag("drone_searcher_attack") && !flag("drone_bank_attack")) {

@@ -8,8 +8,8 @@
 #include maps\_zombiemode_utility;
 
 initPendulumTrap() {
-  penBuyTrigger = getentarray("pendulum_buy_trigger", "targetname");
-  for (i = 0; i < penBuyTrigger.size; i++) {
+  penBuyTrigger = getEntArray("pendulum_buy_trigger", "targetname");
+  for(i = 0; i < penBuyTrigger.size; i++) {
     penBuyTrigger[i].lever = getent(penBuyTrigger[i].target, "targetname");
     penBuyTrigger[i].penDamageTrig = getent((penBuyTrigger[i].lever).target, "targetname");
     penBuyTrigger[i].pen = getent((penBuyTrigger[i].penDamageTrig).target, "targetname");
@@ -24,8 +24,8 @@ moveLeverDown() {
   soundent_left = getent("switch_left", "targetname");
   soundent_right = getent("switch_right", "targetname");
   self.lever rotatepitch(180, .5);
-  soundent_left playsound("switch");
-  soundent_right playsound("switch");
+  soundent_left playSound("switch");
+  soundent_right playSound("switch");
   self.lever waittill("rotatedone");
   self notify("leverDown");
 }
@@ -34,8 +34,8 @@ moveLeverUp() {
   soundent_left = getent("switch_left", "targetname");
   soundent_right = getent("switch_right", "targetname");
   self.lever rotatepitch(-180, .5);
-  soundent_left playsound("switch");
-  soundent_right playsound("switch");
+  soundent_left playSound("switch");
+  soundent_right playSound("switch");
   self.lever waittill("rotatedone");
   self notify("leverUp");
 }
@@ -47,7 +47,7 @@ play_trap_dialog() {
   if(!isDefined(self.vox_trap_log)) {
     num_variants = maps\_zombiemode_spawner::get_number_variants(player_index + "vox_trap_log");
     self.vox_trap_log = [];
-    for (i = 0; i < num_variants; i++) {
+    for(i = 0; i < num_variants; i++) {
       self.vox_trap_log[self.vox_trap_log.size] = "vox_trap_log_" + i;
     }
     self.vox_trap_log_available = self.vox_trap_log;
@@ -67,7 +67,7 @@ penThink() {
   self sethintstring(&"ZOMBIE_ACTIVATE_TRAP");
   self.zombie_cost = 750;
   self.in_use = 0;
-  while (1) {
+  while(1) {
     self waittill("trigger", who);
     self.used_by = who;
     if(who in_revive_trigger()) {
@@ -77,7 +77,7 @@ penThink() {
       if(who.score >= self.zombie_cost) {
         if(!self.in_use) {
           self.in_use = 1;
-          penBuyTrigger = getentarray("pendulum_buy_trigger", "targetname");
+          penBuyTrigger = getEntArray("pendulum_buy_trigger", "targetname");
           level thread maps\nazi_zombie_sumpf::turnLightRed("pendulum_light");
           array_thread(penBuyTrigger, ::trigger_off);
           play_sound_at_pos("purchase", who.origin);
@@ -95,7 +95,7 @@ penThink() {
           self thread moveLeverUp();
           self waittill("leverUp");
           wait(45.0);
-          pa_system playsound("warning");
+          pa_system playSound("warning");
           array_thread(penBuyTrigger, ::trigger_on);
           level thread maps\nazi_zombie_sumpf::turnLightGreen("pendulum_light");
           self.in_use = 0;
@@ -109,11 +109,11 @@ activatePen(motor_left, motor_right, who) {
   wheel_left = spawn("script_origin", motor_left.origin);
   wheel_right = spawn("script_origin", motor_right.origin);
   wait_network_frame();
-  motor_left playloopsound("motor_loop_left");
-  motor_right playloopsound("motor_loop_right");
+  motor_left playLoopSound("motor_loop_left");
+  motor_right playLoopSound("motor_loop_right");
   wait_network_frame();
-  wheel_left playloopsound("wheel_loop");
-  wheel_right playloopsound("belt_loop");
+  wheel_left playLoopSound("wheel_loop");
+  wheel_right playLoopSound("belt_loop");
   self.pen notify("stopmonitorsolid");
   self.pen notsolid();
   self.penDamageTrig trigger_on();
@@ -144,7 +144,7 @@ blade_sounds() {
   blade_left = getent("blade_left", "targetname");
   blade_right = getent("blade_right", "targetname");
   lastAngle = self.angles[0];
-  for (;;) {
+  for(;;) {
     wooshAngle = 90;
     wait(.01);
     angle = self.angles[0];
@@ -156,12 +156,12 @@ blade_sounds() {
       continue;
     }
     if(relPos > wooshAngle && lastRelPos <= wooshAngle) {
-      blade_left playsound("blade_right");
-      blade_right playsound("blade_right");
+      blade_left playSound("blade_right");
+      blade_right playSound("blade_right");
     }
     if((relPos + 180) % 360 > wooshAngle && ((lastRelPos + 180) % 360) <= wooshAngle) {
-      blade_left playsound("blade_right");
-      blade_right playsound("blade_right");
+      blade_left playSound("blade_right");
+      blade_right playSound("blade_right");
     }
     lastAngle = angle;
   }
@@ -170,9 +170,9 @@ blade_sounds() {
 trap_sounds(motor_left, motor_right, wheel_left, wheel_right) {
   wait(11);
   motor_left stoploopsound(2);
-  motor_left playsound("motor_stop_left");
+  motor_left playSound("motor_stop_left");
   motor_right stoploopsound(2);
-  motor_right playsound("motor_stop_right");
+  motor_right playSound("motor_stop_right");
   wait(6);
   wheel_left stoploopsound(4);
   wheel_right stoploopsound(4);
@@ -180,7 +180,7 @@ trap_sounds(motor_left, motor_right, wheel_left, wheel_right) {
 
 penDamage(parent, who) {
   thread customTimer();
-  while (1) {
+  while(1) {
     self waittill("trigger", ent);
     if(parent.penactive == true) {
       if(isplayer(ent)) {
@@ -195,7 +195,7 @@ penDamage(parent, who) {
 
 customTimer() {
   level.my_time = 0;
-  while (level.my_time <= 20) {
+  while(level.my_time <= 20) {
     wait(.1);
     level.my_time = level.my_time + 0.1;
   }
@@ -248,7 +248,7 @@ zombiePenDamage(parent, time) {
 
 launch_monitor() {
   level.numLaunched = 0;
-  while (1) {
+  while(1) {
     wait_network_frame();
     wait_network_frame();
     level.numLaunched = 0;
@@ -257,7 +257,7 @@ launch_monitor() {
 
 do_launch(x, y, z) {
   self.flung = 1;
-  while (level.numLaunched > 4) {
+  while(level.numLaunched > 4) {
     wait_network_frame();
   }
   self thread play_imp_sound();
@@ -267,7 +267,7 @@ do_launch(x, y, z) {
 }
 
 flogger_vocal_monitor() {
-  while (1) {
+  while(1) {
     level.numFloggerVox = 0;
     wait_network_frame();
     wait_network_frame();
@@ -279,8 +279,8 @@ play_imp_sound() {
     level thread flogger_vocal_monitor();
   }
   if((level.numFloggerVox < 5) && oktospawn()) {
-    self playsound("flogger_vocals");
-    playfxontag(level._effect["trap_log"], self, "tag_origin");
+    self playSound("flogger_vocals");
+    playFXOnTag(level._effect["trap_log"], self, "tag_origin");
     level.numFloggerVox++;
   }
   wait(0.75);

@@ -5,13 +5,13 @@
 *********************************************/
 
 init() {
-  level.spectateoverride["allies"] = spawnstruct();
-  level.spectateoverride["axis"] = spawnstruct();
+  level.spectateoverride["allies"] = spawnStruct();
+  level.spectateoverride["axis"] = spawnStruct();
   level thread onplayerconnect();
 }
 
 onplayerconnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connected", var_0);
     var_0 thread onjoinedteam();
     var_0 thread onjoinedspectators();
@@ -22,7 +22,7 @@ onplayerconnect() {
 onjoinedteam() {
   self endon("disconnect");
 
-  for (;;) {
+  for(;;) {
     self waittill("joined_team");
     setspectatepermissions();
   }
@@ -31,11 +31,11 @@ onjoinedteam() {
 onjoinedspectators() {
   self endon("disconnect");
 
-  for (;;) {
+  for(;;) {
     self waittill("joined_spectators");
     setspectatepermissions();
 
-    if(!maps\mp\_utility::invirtuallobby() && (self ismlgspectator() || isdefined(self.pers["mlgSpectator"]) && self.pers["mlgSpectator"])) {
+    if(!maps\mp\_utility::invirtuallobby() && (self ismlgspectator() || isDefined(self.pers["mlgSpectator"]) && self.pers["mlgSpectator"])) {
       self setmlgspectator(1);
 
       if(game["roundsPlayed"] > 0)
@@ -48,15 +48,15 @@ updatemlgicons() {
   self endon("disconnect");
 
   if(self ismlgspectator()) {
-    for (;;) {
+    for(;;) {
       level waittill("player_spawned", var_0);
       var_1 = var_0.spectatorviewloadout;
 
-      if(isdefined(var_1)) {
-        if(isdefined(var_1.primary))
+      if(isDefined(var_1)) {
+        if(isDefined(var_1.primary))
           self precachekillcamiconforweapon(var_1.primary);
 
-        if(isdefined(var_1.secondary))
+        if(isDefined(var_1.secondary))
           self precachekillcamiconforweapon(var_1.secondary);
       }
     }
@@ -67,11 +67,11 @@ onspectatingclient() {
   self endon("disconnect");
   thread updatemlgicons();
 
-  for (;;) {
+  for(;;) {
     self waittill("spectating_cycle");
     var_0 = self getspectatingplayer();
 
-    if(isdefined(var_0)) {
+    if(isDefined(var_0)) {
       self setcarddisplayslot(var_0, 6);
 
       if(self ismlgspectator())
@@ -81,7 +81,7 @@ onspectatingclient() {
 }
 
 allowallyteamspectating() {
-  while (!isdefined(level.spectateoverride))
+  while(!isDefined(level.spectateoverride))
     wait 0.05;
 
   level.spectateoverride["allies"].allowallyspectate = 1;
@@ -92,14 +92,14 @@ allowallyteamspectating() {
 updatespectatesettings() {
   level endon("game_ended");
 
-  for (var_0 = 0; var_0 < level.players.size; var_0++)
+  for(var_0 = 0; var_0 < level.players.size; var_0++)
     level.players[var_0] setspectatepermissions();
 }
 
 setspectatepermissions() {
   if(level.gameended && gettime() - level.gameendtime >= 2000) {
     if(level.multiteambased) {
-      for (var_0 = 0; var_0 < level.teamnamelist.size; var_0++)
+      for(var_0 = 0; var_0 < level.teamnamelist.size; var_0++)
         self allowspectateteam(level.teamnamelist[var_0], 0);
     } else {
       self allowspectateteam("allies", 0);
@@ -118,20 +118,20 @@ setspectatepermissions() {
   if(var_1 == 1) {
     var_4 = self.lastgameteamchosen;
 
-    if(isdefined(var_4))
+    if(isDefined(var_4))
       var_3 = var_4;
   }
 
   if(self ismlgspectator() && !maps\mp\_utility::invirtuallobby())
     var_1 = 2;
 
-  if(isdefined(level.iszombiegame) && level.iszombiegame)
+  if(isDefined(level.iszombiegame) && level.iszombiegame)
     var_1 = 1;
 
   switch (var_1) {
     case 0:
       if(level.multiteambased) {
-        for (var_0 = 0; var_0 < level.teamnamelist.size; var_0++)
+        for(var_0 = 0; var_0 < level.teamnamelist.size; var_0++)
           self allowspectateteam(level.teamnamelist[var_0], 0);
       } else {
         self allowspectateteam("allies", 0);
@@ -147,13 +147,13 @@ setspectatepermissions() {
         self allowspectateteam("axis", 1);
         self allowspectateteam("none", 1);
         self allowspectateteam("freelook", 0);
-      } else if(isdefined(var_3) && (var_3 == "allies" || var_3 == "axis") && !level.multiteambased) {
+      } else if(isDefined(var_3) && (var_3 == "allies" || var_3 == "axis") && !level.multiteambased) {
         self allowspectateteam(var_3, 1);
         self allowspectateteam(maps\mp\_utility::getotherteam(var_3), 0);
         self allowspectateteam("freelook", 0);
         self allowspectateteam("none", 0);
-      } else if(isdefined(var_3) && issubstr(var_3, "team_") && level.multiteambased) {
-        for (var_0 = 0; var_0 < level.teamnamelist.size; var_0++) {
+      } else if(isDefined(var_3) && issubstr(var_3, "team_") && level.multiteambased) {
+        for(var_0 = 0; var_0 < level.teamnamelist.size; var_0++) {
           if(var_3 == level.teamnamelist[var_0]) {
             self allowspectateteam(level.teamnamelist[var_0], 1);
             continue;
@@ -166,7 +166,7 @@ setspectatepermissions() {
         self allowspectateteam("none", 0);
       } else {
         if(level.multiteambased) {
-          for (var_0 = 0; var_0 < level.teamnamelist.size; var_0++)
+          for(var_0 = 0; var_0 < level.teamnamelist.size; var_0++)
             self allowspectateteam(level.teamnamelist[var_0], 0);
         } else {
           self allowspectateteam("allies", 0);
@@ -180,7 +180,7 @@ setspectatepermissions() {
       break;
     case 2:
       if(level.multiteambased) {
-        for (var_0 = 0; var_0 < level.teamnamelist.size; var_0++)
+        for(var_0 = 0; var_0 < level.teamnamelist.size; var_0++)
           self allowspectateteam(level.teamnamelist[var_0], 1);
       } else {
         self allowspectateteam("allies", 1);
@@ -216,7 +216,7 @@ setspectatepermissions() {
     }
   }
 
-  if(isdefined(var_3) && (var_3 == "axis" || var_3 == "allies")) {
+  if(isDefined(var_3) && (var_3 == "axis" || var_3 == "allies")) {
     if(maps\mp\_utility::is_true(level.spectateoverride[var_3].allowfreespectate))
       self allowspectateteam("freelook", 1);
 
@@ -229,12 +229,12 @@ setspectatepermissions() {
 }
 
 updatespectatedloadoutweapon(var_0, var_1, var_2, var_3, var_4) {
-  if(isdefined(var_1)) {
+  if(isDefined(var_1)) {
     var_1 = maps\mp\_utility::strip_suffix(var_1, "_mp");
     var_1 = tablelookuprownum("mp\statsTable.csv", 4, var_1);
   }
 
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     var_1 = 0;
 
   self setclientomnvar(var_0 + "weapon", var_1);
@@ -245,15 +245,15 @@ updatespectatedloadoutweapon(var_0, var_1, var_2, var_3, var_4) {
   } else {
     self setclientomnvar(var_0 + "attachkit", 0);
 
-    for (var_6 = 0; var_6 < var_2.size; var_6++) {
+    for(var_6 = 0; var_6 < var_2.size; var_6++) {
       var_7 = undefined;
 
-      if(isdefined(var_2[var_6])) {
+      if(isDefined(var_2[var_6])) {
         var_7 = maps\mp\_utility::attachmentmap_tobase(var_2[var_6]);
         var_7 = tablelookuprownum("mp\attachmentTable.csv", 3, var_7);
       }
 
-      if(!isdefined(var_7))
+      if(!isDefined(var_7))
         var_7 = 0;
 
       self setclientomnvar(var_0 + "attachment_" + var_6, var_7);
@@ -273,31 +273,31 @@ updatespectatedloadout(var_0) {
   updatespectatedloadoutweapon("ui_mlg_loadout_secondary_", var_1.secondary, [var_1.secondaryattachment, var_1.secondaryattachment2], var_1.secondaryattachkit, var_1.secondaryfurniturekit);
   var_2 = var_1.offhand;
 
-  if(isdefined(var_2))
+  if(isDefined(var_2))
     var_2 = tablelookuprownum("mp\perkTable.csv", 1, var_2);
 
-  if(!isdefined(var_2))
+  if(!isDefined(var_2))
     var_2 = 0;
 
   self setclientomnvar("ui_mlg_loadout_equipment_0", var_2);
   var_3 = var_1.equipment;
 
-  if(isdefined(var_3))
+  if(isDefined(var_3))
     var_3 = tablelookuprownum("mp\perkTable.csv", 1, var_3);
 
-  if(!isdefined(var_3))
+  if(!isDefined(var_3))
     var_3 = 0;
 
   self setclientomnvar("ui_mlg_loadout_equipment_1", var_3);
   self setclientomnvar("ui_mlg_loadout_equipment_2", -1);
 
-  for (var_4 = 0; var_4 < 3; var_4++) {
+  for(var_4 = 0; var_4 < 3; var_4++) {
     var_5 = var_1.perks[var_4];
 
-    if(isdefined(var_5))
+    if(isDefined(var_5))
       var_5 = tablelookuprownum("mp\perkTable.csv", 1, var_5);
 
-    if(!isdefined(var_5))
+    if(!isDefined(var_5))
       var_5 = 0;
 
     self setclientomnvar("ui_mlg_loadout_perk_" + var_4, var_5);

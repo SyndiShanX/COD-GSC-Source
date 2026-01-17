@@ -103,10 +103,10 @@ so_killspree_init() {
   Objective_Add(1, "current", level.challenge_objective);
 
   // Remove unwanted weapons
-  sentries = getentarray("misc_turret", "classname");
+  sentries = getEntArray("misc_turret", "classname");
   foreach(sentry in sentries)
   sentry Delete();
-  stingers = getentarray("weapon_stinger", "classname");
+  stingers = getEntArray("weapon_stinger", "classname");
   foreach(stinger in stingers)
   stinger Delete();
 
@@ -155,10 +155,10 @@ so_killspree_init() {
   ladder_clip Delete();
 
   // Remove ladders entirely
-  ladder_ents = getentarray("inv_ladders", "script_noteworthy");
+  ladder_ents = getEntArray("inv_ladders", "script_noteworthy");
   foreach(ent in ladder_ents)
   ent Delete();
-  ladder_ents = getentarray("inv_ladders_pathblocker", "script_noteworthy");
+  ladder_ents = getEntArray("inv_ladders_pathblocker", "script_noteworthy");
   foreach(ent in ladder_ents)
   ent disconnectpaths();
 
@@ -192,15 +192,15 @@ so_killspree_init() {
   // Clear out some flags on enemies being used in the level.
   // Enable when burger_town enemies are brought over, and spawn function updated
   // to send back how many were *actually* spawned so refill can work properly.
-  /*	convert_enemies = getentarray( "gas_station_enemies", "targetname" );
-  	convert_enemies = array_merge( convert_enemies, getentarray( "bank_enemies", "targetname" ) );
-  	convert_enemies = array_merge( convert_enemies, getentarray( "taco_enemies", "targetname" ) );
-  	convert_enemies = array_merge( convert_enemies, getentarray( "burger_town_enemies", "targetname" ) );
+  /*	convert_enemies = getEntArray( "gas_station_enemies", "targetname" );
+  	convert_enemies = array_merge( convert_enemies, getEntArray( "bank_enemies", "targetname" ) );
+  	convert_enemies = array_merge( convert_enemies, getEntArray( "taco_enemies", "targetname" ) );
+  	convert_enemies = array_merge( convert_enemies, getEntArray( "burger_town_enemies", "targetname" ) );
   	foreach ( guy in convert_enemies )
   	{
-  		if( isdefined( guy.script_goalvolume ) )
+  		if( isDefined( guy.script_goalvolume ) )
   			guy.script_goalvolume = undefined;
-  		if( isdefined( guy.script_forcespawn ) )
+  		if( isDefined( guy.script_forcespawn ) )
   			guy.script_forcespawn = undefined;
   	}*/
 }
@@ -211,17 +211,17 @@ scale_value(value) {
 
 so_killspree_setup_regular() {
   level.points_goal = 300;
-  level.challenge_objective = & "SO_KILLSPREE_INVASION_OBJ_REGULAR";
+  level.challenge_objective = &"SO_KILLSPREE_INVASION_OBJ_REGULAR";
 }
 
 so_killspree_setup_hardened() {
   level.points_goal = 300;
-  level.challenge_objective = & "SO_KILLSPREE_INVASION_OBJ_HARDENED";
+  level.challenge_objective = &"SO_KILLSPREE_INVASION_OBJ_HARDENED";
 }
 
 so_killspree_setup_veteran() {
   level.points_goal = 300;
-  level.challenge_objective = & "SO_KILLSPREE_INVASION_OBJ_VETERAN";
+  level.challenge_objective = &"SO_KILLSPREE_INVASION_OBJ_VETERAN";
 }
 
 so_killspree_setup_radio_dialog() {

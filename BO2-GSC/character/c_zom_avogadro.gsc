@@ -4,7 +4,7 @@
 ****************************************/
 
 main() {
-  self setmodel("c_zom_avagadro_fb");
+  self setModel("c_zom_avagadro_fb");
   self.voice = "american";
   self.skeleton = "base";
 }

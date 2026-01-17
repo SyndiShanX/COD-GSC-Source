@@ -17,24 +17,24 @@ wait_timeout2(var_0, var_1) {
 }
 
 get_ai(var_0, var_1, var_2) {
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     var_1 = "allies";
 
-  if(!isdefined(var_2))
+  if(!isDefined(var_2))
     var_2 = "targetname";
 
   var_3 = getaiarray(var_1);
   var_4 = [];
 
-  for (var_5 = 0; var_5 < var_3.size; var_5++) {
+  for(var_5 = 0; var_5 < var_3.size; var_5++) {
     switch (var_2) {
       case "targetname":
-        if(isdefined(var_3[var_5].targetname) && var_3[var_5].targetname == var_0)
+        if(isDefined(var_3[var_5].targetname) && var_3[var_5].targetname == var_0)
           var_4[var_4.size] = var_3[var_5];
 
         break;
       case "script_noteworthy":
-        if(isdefined(var_3[var_5].script_noteworthy) && var_3[var_5].script_noteworthy == var_0)
+        if(isDefined(var_3[var_5].script_noteworthy) && var_3[var_5].script_noteworthy == var_0)
           var_4[var_4.size] = var_3[var_5];
 
         break;
@@ -56,7 +56,7 @@ get_closest(var_0, var_1, var_2) {
   var_3 = distancesquared(var_1[0].origin, var_0);
   var_4 = var_1[0];
 
-  for (var_5 = 0; var_5 < var_1.size; var_5++) {
+  for(var_5 = 0; var_5 < var_1.size; var_5++) {
     var_6 = distancesquared(var_1[var_5].origin, var_0);
 
     if(var_6 >= var_3) {
@@ -66,7 +66,7 @@ get_closest(var_0, var_1, var_2) {
     var_4 = var_1[var_5];
   }
 
-  if(isdefined(var_2) && distance(var_0, var_4.origin) > var_2)
+  if(isDefined(var_2) && distance(var_0, var_4.origin) > var_2)
     var_4 = undefined;
 
   return var_4;
@@ -81,7 +81,7 @@ get_closest_ent(var_0, var_1, var_2) {
   var_3 = distancesquared(var_1[0] getorigin(), var_0);
   var_4 = var_1[0];
 
-  for (var_5 = 0; var_5 < var_1.size; var_5++) {
+  for(var_5 = 0; var_5 < var_1.size; var_5++) {
     var_6 = distancesquared(var_1[var_5] getorigin(), var_0);
 
     if(var_6 >= var_3) {
@@ -91,7 +91,7 @@ get_closest_ent(var_0, var_1, var_2) {
     var_4 = var_1[var_5];
   }
 
-  if(isdefined(var_2) && distance(var_0, var_4 getorigin()) > var_2)
+  if(isDefined(var_2) && distance(var_0, var_4 getorigin()) > var_2)
     var_4 = undefined;
 
   return var_4;
@@ -103,7 +103,7 @@ get_ents_within_dist(var_0, var_1, var_2) {
   }
   var_3 = [];
 
-  for (var_4 = 0; var_4 < var_1.size; var_4++) {
+  for(var_4 = 0; var_4 < var_1.size; var_4++) {
     var_5 = distance(var_1[var_4] getorigin(), var_0);
 
     if(var_5 > var_2) {
@@ -122,10 +122,10 @@ door_breach(var_0, var_1, var_2, var_3) {
   var_4 = 0;
   var_5 = 0;
 
-  if(isdefined(var_1.set_forcedgoal))
+  if(isDefined(var_1.set_forcedgoal))
     var_4 = 1;
 
-  if(isdefined(var_1.magic_bullet_shield))
+  if(isDefined(var_1.magic_bullet_shield))
     var_5 = 1;
 
   if(!var_4)
@@ -135,7 +135,7 @@ door_breach(var_0, var_1, var_2, var_3) {
     var_1 thread maps\_utility::magic_bullet_shield();
 
   if(var_3 == "kick") {
-    var_6 = anglestoforward(var_0.angles);
+    var_6 = anglesToForward(var_0.angles);
     var_6 = maps\_utility::vector_multiply(var_6, 20);
     var_7 = spawn("script_origin", var_0.origin + var_6);
     var_7.angles = var_0.angles;
@@ -218,11 +218,11 @@ floodspawner_switch(var_0, var_1) {
   if(var_0.size > var_1.size)
     var_2 = var_1.size;
 
-  for (var_3 = 0; var_3 < var_2; var_3++)
+  for(var_3 = 0; var_3 < var_2; var_3++)
     var_0[var_3] thread spawner_switch_think(var_1[var_3]);
 
   if(var_3 < var_1.size) {
-    for (var_4 = var_3; var_4 < var_1.size; var_4++)
+    for(var_4 = var_3; var_4 < var_1.size; var_4++)
       var_1[var_4] thread spawner_switch_think2();
   }
 }
@@ -241,7 +241,7 @@ spawner_switch_think2() {
   if(!maps\_utility::script_wait())
     wait(randomfloatrange(2, 4));
 
-  for (;;) {
+  for(;;) {
     var_0 = self dospawn();
 
     if(!maps\_utility::spawn_failed(var_0)) {
@@ -256,7 +256,7 @@ spawner_switch_think2() {
 
 player_fastrope_go(var_0) {
   var_1 = spawn("script_model", var_0.origin);
-  var_1 setmodel("fastrope_arms");
+  var_1 setModel("fastrope_arms");
   var_1.angles = var_0.angles;
   var_2 = spawn("script_origin", var_0.origin);
   var_2.angles = level.player.angles;
@@ -282,7 +282,7 @@ player_fastrope_go(var_0) {
 }
 
 ai_clear_dialog(var_0, var_1, var_2, var_3, var_4) {
-  if(!isdefined(level.ai_clear_dialog_last))
+  if(!isDefined(level.ai_clear_dialog_last))
     level.ai_clear_dialog_last = 0;
 
   var_5 = getaiarray("axis");
@@ -299,7 +299,7 @@ ai_clear_dialog_logic_check() {
   self endon("death");
   self.ready = 0;
 
-  while (self.count)
+  while(self.count)
     self waittill("ai_death");
 
   self.ready = 1;
@@ -307,13 +307,13 @@ ai_clear_dialog_logic_check() {
 }
 
 ai_clear_dialog_logic(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(isdefined(var_2))
+  if(isDefined(var_2))
     var_2 endon(var_3);
 
-  var_6 = spawnstruct();
+  var_6 = spawnStruct();
   var_6.ready = 1;
 
-  if(isdefined(var_1)) {
+  if(isDefined(var_1)) {
     var_6.count = var_1.size;
     var_6 thread ai_clear_dialog_logic_check();
     common_scripts\utility::array_thread(var_1, maps\_utility::add_spawn_function, ::ai_clear_dialog_logic_guy, var_6);
@@ -326,7 +326,7 @@ ai_clear_dialog_logic(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   var_6 notify("death");
 
-  if(isdefined(var_4)) {
+  if(isDefined(var_4)) {
     wait 0.5;
 
     if(var_4 == level.player)
@@ -338,16 +338,14 @@ ai_clear_dialog_logic(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_8 = [];
     var_9 = maps\_utility::get_closest_living(level.player.origin, var_7, 1024);
 
-    if(!isdefined(var_9)) {
+    if(!isDefined(var_9)) {
       level notify("ai_clear_dialog_done");
       return;
     }
 
     var_10 = 2;
 
-    for (var_11 = level.ai_clear_dialog_last; var_11 == level.ai_clear_dialog_last; var_11 = randomint(var_10)) {
-
-    }
+    for(var_11 = level.ai_clear_dialog_last; var_11 == level.ai_clear_dialog_last; var_11 = randomint(var_10)) {}
 
     level.ai_clear_dialog_last = var_11;
     wait 0.5;
@@ -374,7 +372,7 @@ playerweapontake() {
 }
 
 playerweapontakelogic() {
-  if(isdefined(level.player.weaponstaken)) {
+  if(isDefined(level.player.weaponstaken)) {
     return;
   }
   level.player.weaponstaken = 1;
@@ -385,19 +383,19 @@ playerweapontakelogic() {
 }
 
 anim_single_stack(var_0, var_1) {
-  var_2 = spawnstruct();
+  var_2 = spawnStruct();
   var_2 thread anim_single_stack_proc(var_0, var_1);
   var_2 waittill("anim_single_done");
 }
 
 anim_single_stack_proc(var_0, var_1) {
-  if(!isdefined(level.anim_stack))
+  if(!isDefined(level.anim_stack))
     level.anim_stack = [];
 
   var_2 = "" + var_0.ai_number + var_1;
   level.anim_stack[level.anim_stack.size] = var_2;
 
-  while (level.anim_stack[0] != var_2)
+  while(level.anim_stack[0] != var_2)
     level waittill("level_anim_stack_ready");
 
   maps\_anim::anim_single_solo(var_0, var_1);
@@ -407,18 +405,18 @@ anim_single_stack_proc(var_0, var_1) {
 }
 
 radio_msg_stack(var_0) {
-  var_1 = spawnstruct();
+  var_1 = spawnStruct();
   var_1 thread radio_msg_stack_proc(var_0);
   var_1 waittill("radio_dialogue_done");
 }
 
 radio_msg_stack_proc(var_0) {
-  if(!isdefined(level.radio_stack))
+  if(!isDefined(level.radio_stack))
     level.radio_stack = [];
 
   level.radio_stack[level.radio_stack.size] = var_0;
 
-  while (level.radio_stack[0] != var_0)
+  while(level.radio_stack[0] != var_0)
     level waittill("level_radio_stack_ready");
 
   maps\_utility::radio_dialogue(var_0);
@@ -430,13 +428,13 @@ radio_msg_stack_proc(var_0) {
 disable_cqbwalk_ign_demo_wrapper() {
   maps\_utility::disable_cqbwalk();
 
-  if(!isdefined(self.a.cqbchangedontmodifyinterval) || !self.a.cqbchangedontmodifyinterval)
+  if(!isDefined(self.a.cqbchangedontmodifyinterval) || !self.a.cqbchangedontmodifyinterval)
     self.interval = 96;
 }
 
 enable_cqbwalk_ign_demo_wrapper() {
   maps\_utility::enable_cqbwalk();
 
-  if(!isdefined(self.a.cqbchangedontmodifyinterval) || !self.a.cqbchangedontmodifyinterval)
+  if(!isDefined(self.a.cqbchangedontmodifyinterval) || !self.a.cqbchangedontmodifyinterval)
     self.interval = 50;
 }

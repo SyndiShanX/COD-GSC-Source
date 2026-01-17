@@ -17,31 +17,31 @@ init() {
   precacheString(&"MP_WAGER_WINNINGS_ARE");
   precacheString(&"MP_WAGER_SIDEBET_WINNINGS_ARE");
   precacheString(&"MP_WAGER_IN_THE_MONEY");
-  game["strings"]["draw"] = & "MP_DRAW_CAPS";
-  game["strings"]["round_draw"] = & "MP_ROUND_DRAW_CAPS";
-  game["strings"]["round_win"] = & "MP_ROUND_WIN_CAPS";
-  game["strings"]["round_loss"] = & "MP_ROUND_LOSS_CAPS";
-  game["strings"]["victory"] = & "MP_VICTORY_CAPS";
-  game["strings"]["defeat"] = & "MP_DEFEAT_CAPS";
-  game["strings"]["game_over"] = & "MP_GAME_OVER_CAPS";
-  game["strings"]["halftime"] = & "MP_HALFTIME_CAPS";
-  game["strings"]["overtime"] = & "MP_OVERTIME_CAPS";
-  game["strings"]["roundend"] = & "MP_ROUNDEND_CAPS";
-  game["strings"]["intermission"] = & "MP_INTERMISSION_CAPS";
-  game["strings"]["side_switch"] = & "MP_SWITCHING_SIDES_CAPS";
-  game["strings"]["match_bonus"] = & "MP_MATCH_BONUS_IS";
-  game["strings"]["codpoints_match_bonus"] = & "MP_CODPOINTS_MATCH_BONUS_IS";
-  game["strings"]["wager_winnings"] = & "MP_WAGER_WINNINGS_ARE";
-  game["strings"]["wager_sidebet_winnings"] = & "MP_WAGER_SIDEBET_WINNINGS_ARE";
-  game["strings"]["wager_inthemoney"] = & "MP_WAGER_IN_THE_MONEY_CAPS";
-  game["strings"]["wager_loss"] = & "MP_WAGER_LOSS_CAPS";
-  game["strings"]["wager_topwinners"] = & "MP_WAGER_TOPWINNERS";
+  game["strings"]["draw"] = &"MP_DRAW_CAPS";
+  game["strings"]["round_draw"] = &"MP_ROUND_DRAW_CAPS";
+  game["strings"]["round_win"] = &"MP_ROUND_WIN_CAPS";
+  game["strings"]["round_loss"] = &"MP_ROUND_LOSS_CAPS";
+  game["strings"]["victory"] = &"MP_VICTORY_CAPS";
+  game["strings"]["defeat"] = &"MP_DEFEAT_CAPS";
+  game["strings"]["game_over"] = &"MP_GAME_OVER_CAPS";
+  game["strings"]["halftime"] = &"MP_HALFTIME_CAPS";
+  game["strings"]["overtime"] = &"MP_OVERTIME_CAPS";
+  game["strings"]["roundend"] = &"MP_ROUNDEND_CAPS";
+  game["strings"]["intermission"] = &"MP_INTERMISSION_CAPS";
+  game["strings"]["side_switch"] = &"MP_SWITCHING_SIDES_CAPS";
+  game["strings"]["match_bonus"] = &"MP_MATCH_BONUS_IS";
+  game["strings"]["codpoints_match_bonus"] = &"MP_CODPOINTS_MATCH_BONUS_IS";
+  game["strings"]["wager_winnings"] = &"MP_WAGER_WINNINGS_ARE";
+  game["strings"]["wager_sidebet_winnings"] = &"MP_WAGER_SIDEBET_WINNINGS_ARE";
+  game["strings"]["wager_inthemoney"] = &"MP_WAGER_IN_THE_MONEY_CAPS";
+  game["strings"]["wager_loss"] = &"MP_WAGER_LOSS_CAPS";
+  game["strings"]["wager_topwinners"] = &"MP_WAGER_TOPWINNERS";
   game["menu_endgameupdate"] = "endgameupdate";
   precacheMenu(game["menu_endgameupdate"]);
   level thread onPlayerConnect();
 }
 onPlayerConnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connecting", player);
     player thread hintMessageDeathThink();
     player thread lowerMessageThink();
@@ -70,16 +70,16 @@ initCustomGametypeHeader() {
   self.customGametypeSubHeader.alpha = 1;
 }
 hintMessage(hintText, duration) {
-  notifyData = spawnstruct();
+  notifyData = spawnStruct();
   notifyData.notifyText = hintText;
   notifyData.duration = duration;
   notifyMessage(notifyData);
 }
 hintMessagePlayers(players, hintText, duration) {
-  notifyData = spawnstruct();
+  notifyData = spawnStruct();
   notifyData.notifyText = hintText;
   notifyData.duration = duration;
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i] notifyMessage(notifyData);
   }
 }
@@ -135,7 +135,7 @@ initNotifyMessage() {
 oldNotifyMessage(titleText, notifyText, iconName, glowColor, sound, duration) {
   if(level.wagerMatch && !level.teamBased)
     return;
-  notifyData = spawnstruct();
+  notifyData = spawnStruct();
   notifyData.titleText = titleText;
   notifyData.notifyText = notifyText;
   notifyData.iconName = iconName;
@@ -171,7 +171,7 @@ showNotifyMessage(notifyData, duration) {
     if(isDefined(notifyData.titleLabel))
       self.notifyTitle.label = notifyData.titleLabel;
     else
-      self.notifyTitle.label = & "";
+      self.notifyTitle.label = &"";
     if(isDefined(notifyData.titleLabel) && !isDefined(notifyData.titleIsString))
       self.notifyTitle setValue(notifyData.titleText);
     else
@@ -184,7 +184,7 @@ showNotifyMessage(notifyData, duration) {
     if(isDefined(notifyData.textLabel))
       self.notifyText.label = notifyData.textLabel;
     else
-      self.notifyText.label = & "";
+      self.notifyText.label = &"";
     if(isDefined(notifyData.textLabel) && !isDefined(notifyData.textIsString))
       self.notifyText setValue(notifyData.notifyText);
     else
@@ -205,7 +205,7 @@ showNotifyMessage(notifyData, duration) {
       if(isDefined(notifyData.text2Label))
         self.notifyText2.label = notifyData.text2Label;
       else
-        self.notifyText2.label = & "";
+        self.notifyText2.label = &"";
       self.notifyText2 setText(notifyData.notifyText2);
       self.notifyText2 setPulseFX(100, int(duration * 1000), 1000);
       self.notifyText2.glowColor = glowColor;
@@ -238,9 +238,9 @@ showNotifyMessage(notifyData, duration) {
 }
 waitRequireVisibility(waitTime) {
   interval = .05;
-  while (!self canReadText())
+  while(!self canReadText())
     wait interval;
-  while (waitTime > 0) {
+  while(waitTime > 0) {
     wait interval;
     if(self canReadText())
       waitTime -= interval;
@@ -274,7 +274,7 @@ resetNotify() {
 }
 hintMessageDeathThink() {
   self endon("disconnect");
-  for (;;) {
+  for(;;) {
     self waittill("death");
     if(isDefined(self.hintMessage))
       self.hintMessage destroyElem();
@@ -301,7 +301,7 @@ teamOutcomeNotify(winner, isRound, endReasonText) {
   team = self.pers["team"];
   if(!isDefined(team) || (team != "allies" && team != "axis"))
     team = "allies";
-  while (self.doingNotify)
+  while(self.doingNotify)
     wait 0.05;
   self endon("reset_outcome");
   headerFont = "extrabig";
@@ -417,7 +417,7 @@ teamOutcomeNotify(winner, isRound, endReasonText) {
 outcomeNotify(winner, isRoundEnd, endReasonText) {
   self endon("disconnect");
   self notify("reset_outcome");
-  while (self.doingNotify)
+  while(self.doingNotify)
     wait 0.05;
   self endon("reset_outcome");
   headerFont = "extrabig";
@@ -470,7 +470,7 @@ outcomeNotify(winner, isRoundEnd, endReasonText) {
   firstTitle.hideWhenInMenu = false;
   firstTitle.archived = false;
   if(isDefined(players[0])) {
-    firstTitle.label = & "MP_FIRSTPLACE_NAME";
+    firstTitle.label = &"MP_FIRSTPLACE_NAME";
     firstTitle setPlayerNameString(players[0]);
     firstTitle setCOD7DecodeFX(175, duration, 600);
   }
@@ -481,7 +481,7 @@ outcomeNotify(winner, isRoundEnd, endReasonText) {
   secondTitle.hideWhenInMenu = false;
   secondTitle.archived = false;
   if(isDefined(players[1])) {
-    secondTitle.label = & "MP_SECONDPLACE_NAME";
+    secondTitle.label = &"MP_SECONDPLACE_NAME";
     secondTitle setPlayerNameString(players[1]);
     secondTitle setCOD7DecodeFX(175, duration, 600);
   }
@@ -493,7 +493,7 @@ outcomeNotify(winner, isRoundEnd, endReasonText) {
   thirdTitle.hideWhenInMenu = false;
   thirdTitle.archived = false;
   if(isDefined(players[2])) {
-    thirdTitle.label = & "MP_THIRDPLACE_NAME";
+    thirdTitle.label = &"MP_THIRDPLACE_NAME";
     thirdTitle setPlayerNameString(players[2]);
     thirdTitle setCOD7DecodeFX(175, duration, 600);
   }
@@ -513,7 +513,7 @@ outcomeNotify(winner, isRoundEnd, endReasonText) {
 wagerOutcomeNotify(winner, endReasonText) {
   self endon("disconnect");
   self notify("reset_outcome");
-  while (self.doingNotify)
+  while(self.doingNotify)
     wait 0.05;
   setMatchFlag("enable_popups", 0);
   self endon("reset_outcome");
@@ -569,7 +569,7 @@ wagerOutcomeNotify(winner, endReasonText) {
   playerNameHudElems = [];
   playerCPHudElems = [];
   numPlayers = players.size;
-  for (i = 0; i < numPlayers; i++) {
+  for(i = 0; i < numPlayers; i++) {
     if(!halftime && isDefined(players[i])) {
       secondTitle = createFontString(font, otherSize);
       if(playerNameHudElems.size == 0) {
@@ -582,7 +582,7 @@ wagerOutcomeNotify(winner, endReasonText) {
       secondTitle.glowAlpha = 1;
       secondTitle.hideWhenInMenu = false;
       secondTitle.archived = false;
-      secondTitle.label = & "MP_WAGER_PLACE_NAME";
+      secondTitle.label = &"MP_WAGER_PLACE_NAME";
       secondTitle.playerNum = i;
       secondTitle setPlayerNameString(players[i]);
       playerNameHudElems[playerNameHudElems.size] = secondTitle;
@@ -592,7 +592,7 @@ wagerOutcomeNotify(winner, endReasonText) {
       secondCP.glowAlpha = 1;
       secondCP.hideWhenInMenu = false;
       secondCP.archived = false;
-      secondCP.label = & "MENU_POINTS";
+      secondCP.label = &"MENU_POINTS";
       secondCP.currentValue = 0;
       if(isDefined(players[i].wagerWinnings))
         secondCP.targetValue = players[i].wagerWinnings;
@@ -616,9 +616,9 @@ wagerOutcomeNotify(winner, endReasonText) {
     if(CPIncrement < 1)
       CPIncrement = 1;
   }
-  while (stillUpdating) {
+  while(stillUpdating) {
     stillUpdating = false;
-    for (i = 0; i < playerCPHudElems.size; i++) {
+    for(i = 0; i < playerCPHudElems.size; i++) {
       if(isDefined(playerCPHudElems[i]) && (playerCPHudElems[i].currentValue < playerCPHudElems[i].targetValue)) {
         playerCPHudElems[i].currentValue += CPIncrement;
         if(playerCPHudElems[i].currentValue > playerCPHudElems[i].targetValue)
@@ -637,7 +637,7 @@ teamWagerOutcomeNotify(winner, isRoundEnd, endReasonText) {
   if(!isDefined(team) || (team != "allies" && team != "axis"))
     team = "allies";
   wait 0.05;
-  while (self.doingNotify)
+  while(self.doingNotify)
     wait 0.05;
   self endon("reset_outcome");
   headerFont = "extrabig";
@@ -777,11 +777,11 @@ resetOutcomeNotify(hudElem1, hudElem2, hudElem3, hudElem4, hudElem5, hudElem6, h
 resetWagerOutcomeNotify(playerNameHudElems, playerCPHudElems, outcomeTitle, outcomeText) {
   self endon("disconnect");
   self waittill("reset_outcome");
-  for (i = playerNameHudElems.size - 1; i >= 0; i--) {
+  for(i = playerNameHudElems.size - 1; i >= 0; i--) {
     if(isDefined(playerNameHudElems[i]))
       playerNameHudElems[i] destroy();
   }
-  for (i = playerCPHudElems.size - 1; i >= 0; i--) {
+  for(i = playerCPHudElems.size - 1; i >= 0; i--) {
     if(isDefined(playerCPHudElems[i]))
       playerCPHudElems[i] destroy();
   }
@@ -793,7 +793,7 @@ resetWagerOutcomeNotify(playerNameHudElems, playerCPHudElems, outcomeTitle, outc
 updateOutcome(firstTitle, secondTitle, thirdTitle) {
   self endon("disconnect");
   self endon("reset_outcome");
-  while (true) {
+  while(true) {
     self waittill("update_outcome");
     players = level.placement["all"];
     if(isDefined(firstTitle) && isDefined(players[0]))
@@ -813,10 +813,10 @@ updateOutcome(firstTitle, secondTitle, thirdTitle) {
 updateWagerOutcome(playerNameHudElems, playerCPHudElems) {
   self endon("disconnect");
   self endon("reset_outcome");
-  while (true) {
+  while(true) {
     self waittill("update_outcome");
     players = level.placement["all"];
-    for (i = 0; i < playerNameHudElems.size; i++) {
+    for(i = 0; i < playerNameHudElems.size; i++) {
       if(isDefined(playerNameHudElems[i]) && isDefined(players[playerNameHudElems[i].playerNum]))
         playerNameHudElems[i] SetPlayerNameString(players[playerNameHudElems[i].playerNum]);
       else {

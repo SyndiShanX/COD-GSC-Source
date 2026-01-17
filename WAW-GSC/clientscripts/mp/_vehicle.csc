@@ -75,7 +75,7 @@ vehicle_rumble(localClientNum) {
     self.rumble_randomaditionaltime = 1;
   self.player_touching = 0;
   radius_squared = rumblestruct.radius * rumblestruct.radius;
-  while (1) {
+  while(1) {
     if((distancesquared(self.origin, getlocalplayers()[localClientNum].origin) > radius_squared) || self getspeed() < 35) {
       wait(0.2);
       continue;
@@ -91,7 +91,7 @@ vehicle_rumble(localClientNum) {
     } else {
       self PlayRumbleLoopOnEntity(localClientNum, level.vehicle_rumble[type].rumble);
     }
-    while ((distancesquared(self.origin, getlocalplayers()[localClientNum].origin) < radius_squared) && (self getspeed() > 5)) {
+    while((distancesquared(self.origin, getlocalplayers()[localClientNum].origin) < radius_squared) && (self getspeed() > 5)) {
       wait(self.rumble_basetime + randomfloat(self.rumble_randomaditionaltime));
     }
     self StopRumble(localClientNum, level.vehicle_rumble[type].rumble);
@@ -131,7 +131,7 @@ tread(localClientNum, tagname, side, relativeOffset) {
   if(treadfx == -1) {
     return;
   }
-  for (;;) {
+  for(;;) {
     speed = self getspeed();
     if(speed < 25) {
       wait 0.1;
@@ -148,10 +148,10 @@ tread(localClientNum, tagname, side, relativeOffset) {
     treadfx = treadget(self, side);
     if(treadfx != -1) {
       ang = self getTagAngles(tagname);
-      forwardVec = anglestoforward(ang);
+      forwardVec = anglesToForward(ang);
       effectOrigin = self getTagOrigin(tagname);
       forwardVec = vector_multiply(forwardVec, waitTime);
-      playfx(localClientNum, treadfx, effectOrigin, (0, 0, 0) - forwardVec);
+      playFX(localClientNum, treadfx, effectOrigin, (0, 0, 0) - forwardVec);
     }
   }
 }
@@ -192,7 +192,7 @@ vehicle_watch_damage(localClientNum) {
   lastLeftTreadHealth = 0;
   lastRightTreadHealth = 0;
   minSparkSpeed = 25;
-  while (self GetVehicleHealth() > 0) {
+  while(self GetVehicleHealth() > 0) {
     vehiclespeed = self getspeed();
     leftTreadHealth = self getlefttreadhealth();
     rightTreadHealth = self getrighttreadhealth();
@@ -206,39 +206,39 @@ vehicle_watch_damage(localClientNum) {
     tag = "tag_treads_left";
     if(leftTreadHealth <= 0.4) {
       if(isDefined(level.tread_damage_fx[self.vehicletype][0]) && isDefined(level.tread_damage_fx[self.vehicletype][0][1])) {
-        playfxontag(localClientNum, level.tread_damage_fx[self.vehicletype][0][1], self, tag);
+        playFXOnTag(localClientNum, level.tread_damage_fx[self.vehicletype][0][1], self, tag);
       }
       if(keepWatchingLeftTread && leftTreadHealth <= 0) {
         keepWatchingLeftTread = false;
         if(isDefined(level.tread_damage_fx[self.vehicletype][0]) && isDefined(level.tread_damage_fx[self.vehicletype][0][2])) {
-          playfxontag(localClientNum, level.tread_damage_fx[self.vehicletype][0][2], self, tag);
+          playFXOnTag(localClientNum, level.tread_damage_fx[self.vehicletype][0][2], self, tag);
         }
       }
     } else if(leftTreadHealth < 0.7) {
       if(isDefined(level.tread_damage_fx[self.vehicletype][0]) && isDefined(level.tread_damage_fx[self.vehicletype][0][0])) {
-        playfxontag(localClientNum, level.tread_damage_fx[self.vehicletype][0][0], self, tag);
+        playFXOnTag(localClientNum, level.tread_damage_fx[self.vehicletype][0][0], self, tag);
       }
       if(isDefined(level.tread_grind_fx[self.vehicletype][0]) && vehiclespeed > minSparkSpeed) {
-        playfxontag(localClientNum, level.tread_grind_fx[self.vehicletype][0], self, tag);
+        playFXOnTag(localClientNum, level.tread_grind_fx[self.vehicletype][0], self, tag);
       }
     }
     tag = "tag_treads_right";
     if(rightTreadHealth <= 0.4) {
       if(isDefined(level.tread_damage_fx[self.vehicletype][1]) && isDefined(level.tread_damage_fx[self.vehicletype][1][1])) {
-        playfxontag(localClientNum, level.tread_damage_fx[self.vehicletype][1][1], self, tag);
+        playFXOnTag(localClientNum, level.tread_damage_fx[self.vehicletype][1][1], self, tag);
       }
       if(keepWatchingRightTread && leftTreadHealth <= 0) {
         keepWatchingRightTread = false;
         if(isDefined(level.tread_damage_fx[self.vehicletype][1]) && isDefined(level.tread_damage_fx[self.vehicletype][1][2])) {
-          playfxontag(localClientNum, level.tread_damage_fx[self.vehicletype][1][2], self, tag);
+          playFXOnTag(localClientNum, level.tread_damage_fx[self.vehicletype][1][2], self, tag);
         }
       }
     } else if(rightTreadHealth < 0.7) {
       if(isDefined(level.tread_damage_fx[self.vehicletype][1]) && isDefined(level.tread_damage_fx[self.vehicletype][1][0])) {
-        playfxontag(localClientNum, level.tread_damage_fx[self.vehicletype][1][0], self, tag);
+        playFXOnTag(localClientNum, level.tread_damage_fx[self.vehicletype][1][0], self, tag);
       }
       if(isDefined(level.tread_grind_fx[self.vehicletype][1]) && vehiclespeed > minSparkSpeed) {
-        playfxontag(localClientNum, level.tread_grind_fx[self.vehicletype][1], self, tag);
+        playFXOnTag(localClientNum, level.tread_grind_fx[self.vehicletype][1], self, tag);
       }
     }
     wait(0.1);
@@ -250,7 +250,7 @@ playTankExhaust(localClientNum) {
   self endon("stop_exhaust_fx");
   level endon("stop_exhaust_fx");
   exhaustDelay = 0.1;
-  for (;;) {
+  for(;;) {
     if(!isDefined(self) || !(self isalive())) {
       return;
     } else if(!isDefined(level.vehicle_exhaust) || !isDefined(level.vehicle_exhaust[self.model])) {
@@ -260,11 +260,11 @@ playTankExhaust(localClientNum) {
     tag_left_orig = self gettagorigin("tag_engine_left");
     tag_left_angles = self gettagangles("tag_engine_left");
     if(self getspeed() > 0) {
-      playfx(localClientNum, level.vehicle_exhaust[self.model].exhaust_fx, tag_left_orig, anglestoforward(tag_left_angles));
+      playFX(localClientNum, level.vehicle_exhaust[self.model].exhaust_fx, tag_left_orig, anglesToForward(tag_left_angles));
       if(!level.vehicle_exhaust[self.model].one_exhaust) {
         tag_right_orig = self gettagorigin("tag_engine_right");
         tag_right_angles = self gettagangles("tag_engine_right");
-        playfx(localClientNum, level.vehicle_exhaust[self.model].exhaust_fx, tag_right_orig, anglestoforward(tag_right_angles));
+        playFX(localClientNum, level.vehicle_exhaust[self.model].exhaust_fx, tag_right_orig, anglesToForward(tag_right_angles));
       }
     }
     wait exhaustDelay;
@@ -280,7 +280,7 @@ build_exhaust(model, effect, one_exhaust) {
   if(!isDefined(level.vehicle_exhaust)) {
     level.vehicle_exhaust = [];
   }
-  level.vehicle_exhaust[model] = spawnstruct();
+  level.vehicle_exhaust[model] = spawnStruct();
   level.vehicle_exhaust[model].exhaust_fx = loadfx(effect);
   if(isDefined(one_exhaust) && one_exhaust) {
     level.vehicle_exhaust[model].one_exhaust = true;
@@ -301,7 +301,7 @@ build_gear(vehicletype, model, tag) {
 }
 
 build_quake(scale, duration, radius, basetime, randomaditionaltime) {
-  struct = spawnstruct();
+  struct = spawnStruct();
   struct.scale = scale;
   struct.duration = duration;
   struct.radius = radius;

@@ -8,8 +8,8 @@
 #include maps\_drones;
 
 autoexec _init_turrets() {
-  level._turrets = spawnstruct();
-  a_turrets = getentarray("misc_turret", "classname");
+  level._turrets = spawnStruct();
+  a_turrets = getEntArray("misc_turret", "classname");
 
   foreach(e_turret in a_turrets)
   e_turret thread _auto_init_misc_turret();
@@ -350,8 +350,7 @@ _animscripts_init(ai_user) {
 }
 
 stop_use_turret() {
-  if(isDefined(self.classname) && self.classname == "script_vehicle") {
-  } else {
+  if(isDefined(self.classname) && self.classname == "script_vehicle") {} else {
     e_turret = self getturret();
 
     if(isDefined(e_turret)) {
@@ -476,7 +475,7 @@ set_turret_target_flags(n_flags, n_index) {
 
 _has_target_flags(n_flags, n_index) {
   n_current_flags = _get_turret_data(n_index).n_target_flags;
-  return (n_current_flags & n_flags) == n_flags;
+  return (n_current_flags &n_flags) == n_flags;
 }
 
 set_turret_max_target_distance(n_distance, n_index) {
@@ -779,8 +778,7 @@ _turret_new_user_think(n_index) {
       else if(has_spawnflag(2)) {
         str_team = get_turret_team(n_index);
 
-        if(isDefined(self.classname) && self.classname == "script_vehicle") {
-        } else {
+        if(isDefined(self.classname) && self.classname == "script_vehicle") {} else {
           a_users = getaiarray(str_team);
 
           if(a_users.size > 0) {
@@ -916,7 +914,7 @@ create_turret(position, angles, team, weaponinfo, turret_model, offset) {
     origin = origin + offset;
 
   e_turret = spawnturret("misc_turret", origin, weaponinfo);
-  e_turret setmodel(turret_model);
+  e_turret setModel(turret_model);
   e_turret.angles = angles;
   e_turret.weaponinfo = weaponinfo;
   e_turret setdefaultdroppitch(0);
@@ -1029,7 +1027,7 @@ set_turret_best_target_func(func_get_best_target, n_index) {
 _init_misc_turret() {
   self useanimtree(#animtree);
   _init_animations();
-  s_turret = spawnstruct();
+  s_turret = spawnStruct();
 
   if(isDefined(self.script_team))
     s_turret.str_team = self.script_team;
@@ -1055,7 +1053,7 @@ _init_misc_turret() {
 
 _init_vehicle_turret(n_index) {
   assert(isDefined(n_index) && n_index >= 0, "Invalid index specified to initialize vehicle turret.");
-  s_turret = spawnstruct();
+  s_turret = spawnStruct();
   v_angles = self getseatfiringangles(n_index);
 
   if(isDefined(v_angles)) {
@@ -1422,7 +1420,7 @@ turret_trace_test(e_target, v_offset, n_index) {
     if(e_target sightconetrace(v_start_org, self) > 0.2) {
       v_target = e_target.origin + v_offset;
       v_start_org = v_start_org + vectornormalize(v_target - v_start_org) * 15;
-      a_trace = bullettrace(v_start_org, v_target, 1, s_turret.e_trace_ignore, 1, 1, e_target);
+      a_trace = bulletTrace(v_start_org, v_target, 1, s_turret.e_trace_ignore, 1, 1, e_target);
 
       if(a_trace["fraction"] > 0.6)
         return true;
@@ -1443,7 +1441,7 @@ turret_trace_test(e_target, v_offset, n_index) {
   v_target = v_target - v_dir_to_target * 75;
 
   if(sighttracepassed(v_start_org, v_target, 0, self)) {
-    a_trace = bullettrace(v_start_org, v_target, 1, s_turret.e_trace_ignore, 1, 1, e_target);
+    a_trace = bulletTrace(v_start_org, v_target, 1, s_turret.e_trace_ignore, 1, 1, e_target);
 
     if(a_trace["fraction"] > 0.6)
       return true;
@@ -1507,8 +1505,7 @@ _get_turret_index_for_tag(str_tag) {
 }
 
 _init_animations(ai_user, n_index) {
-  if(isDefined(self.classname) && self.classname == "script_vehicle") {
-  } else if(isDefined(ai_user) && ai_user.desired_anim_pose == "stand") {
+  if(isDefined(self.classname) && self.classname == "script_vehicle") {} else if(isDefined(ai_user) && ai_user.desired_anim_pose == "stand") {
     self setanimknoblimitedrestart( % saw_gunner_idle_mg);
     self setanimknoblimitedrestart( % saw_gunner_firing_mg_add);
   } else {
@@ -1518,24 +1515,21 @@ _init_animations(ai_user, n_index) {
 }
 
 _animate_idle(n_index) {
-  if(isDefined(self.classname) && self.classname == "script_vehicle") {
-  } else if(_user_check(n_index)) {
+  if(isDefined(self.classname) && self.classname == "script_vehicle") {} else if(_user_check(n_index)) {
     self setanim( % additive_idle, 1, 0.1);
     self setanim( % additive_fire, 0, 0.1);
   }
 }
 
 _animate_fire(n_index) {
-  if(isDefined(self.classname) && self.classname == "script_vehicle") {
-  } else if(_user_check(n_index)) {
+  if(isDefined(self.classname) && self.classname == "script_vehicle") {} else if(_user_check(n_index)) {
     self setanim( % additive_idle, 0, 0.1);
     self setanim( % additive_fire, 1, 0.1);
   }
 }
 
 _clear_animations(n_index) {
-  if(isDefined(self.classname) && self.classname == "script_vehicle") {
-  } else {
+  if(isDefined(self.classname) && self.classname == "script_vehicle") {} else {
     self setanim( % additive_idle, 0, 0.1);
     self setanim( % additive_fire, 0, 0.1);
   }

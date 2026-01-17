@@ -46,18 +46,18 @@ stopmonitordamage() {
 damagefeedback_took_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   var_10 = 0;
 
-  if(isdefined(self.bullet_resistance)) {
+  if(isDefined(self.bullet_resistance)) {
     var_11 = [];
     var_11["MOD_PISTOL_BULLET"] = 1;
     var_11["MOD_RIFLE_BULLET"] = 1;
 
-    if(isdefined(var_11[var_4])) {
-      if(var_0 <= self.bullet_resistance && (!isdefined(self.mech) || !self.mech || !isdefined(var_9) || !issubstr(var_9, "iw5_em1")))
+    if(isDefined(var_11[var_4])) {
+      if(var_0 <= self.bullet_resistance && (!isDefined(self.mech) || !self.mech || !isDefined(var_9) || !issubstr(var_9, "iw5_em1")))
         return;
     }
   }
 
-  if(isdefined(self.damagelocation) && (self.damagelocation == "head" || self.damagelocation == "helmet"))
+  if(isDefined(self.damagelocation) && (self.damagelocation == "head" || self.damagelocation == "helmet"))
     var_10 = 1;
 
   var_1 updatedamagefeedback(self, var_10);
@@ -66,24 +66,24 @@ damagefeedback_took_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_
 updatedamagefeedback(var_0, var_1) {
   var_2 = undefined;
 
-  if(isdefined(var_0.team))
+  if(isDefined(var_0.team))
     var_2 = var_0.team;
-  else if(isdefined(var_0.script_team))
+  else if(isDefined(var_0.script_team))
     var_2 = var_0.script_team;
 
-  if(!isdefined(var_2)) {
+  if(!isDefined(var_2)) {
     return;
   }
-  if(var_2 == "neutral" || isdefined(self.team) && var_2 == self.team) {
+  if(var_2 == "neutral" || isDefined(self.team) && var_2 == self.team) {
     return;
   }
-  if(isdefined(var_0.magic_bullet_shield) && var_0.magic_bullet_shield) {
+  if(isDefined(var_0.magic_bullet_shield) && var_0.magic_bullet_shield) {
     return;
   }
-  if(isdefined(var_0.godmode) && var_0.godmode) {
+  if(isDefined(var_0.godmode) && var_0.godmode) {
     return;
   }
-  if(isdefined(var_0.script_godmode) && var_0.script_godmode) {
+  if(isDefined(var_0.script_godmode) && var_0.script_godmode) {
     return;
   }
   updatedamagefeedbacksnd(var_0);
@@ -94,7 +94,7 @@ updatedamagefeedbacksnd(var_0) {
   if(!maps\_utility::is_damagefeedback_snd_enabled()) {
     return;
   }
-  if(isdefined(var_0) && isdefined(var_0.disabledamagefeedbacksnd) && var_0.disabledamagefeedbacksnd) {
+  if(isDefined(var_0) && isDefined(var_0.disabledamagefeedbacksnd) && var_0.disabledamagefeedbacksnd) {
     return;
   }
   if(isplayer(self)) {
@@ -117,10 +117,10 @@ updatedamagefeedbackhud(var_0, var_1) {
   }
   var_2 = 1;
 
-  if(isdefined(level.slowmo.speed_slow))
+  if(isDefined(level.slowmo.speed_slow))
     var_2 = level.slowmo.speed_slow;
 
-  if(0 && isdefined(var_0) && var_0 && isdefined(var_1) && !isalive(var_1)) {
+  if(0 && isDefined(var_0) && var_0 && isDefined(var_1) && !isalive(var_1)) {
     self.hud_damagefeedback_headshot.alpha = 1;
     self.hud_damagefeedback_headshot fadeovertime(var_2);
     self.hud_damagefeedback_headshot.alpha = 0;

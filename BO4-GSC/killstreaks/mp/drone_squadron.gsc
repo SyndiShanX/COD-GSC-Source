@@ -32,11 +32,10 @@
 #include scripts\mp_common\gametypes\battlechatter;
 #include scripts\mp_common\gametypes\globallogic_audio;
 #include scripts\weapons\heatseekingmissile;
-
 #namespace drone_squadron;
 
 autoexec __init__system__() {
-  system::register(#"drone_squadron", &__init__, undefined, #"killstreaks");
+  system::register(#"drone_squadron", &__init__, undefined, # "killstreaks");
 }
 
 __init__() {
@@ -45,8 +44,8 @@ __init__() {
   killstreaks::register_alt_weapon("drone_squadron", getweapon(#"killstreak_remote"));
   killstreaks::register_alt_weapon("drone_squadron", getweapon(#"hash_26ffb92552ae26be"));
   killstreaks::register_alt_weapon("drone_squadron", getweapon(#"hash_5fbda3ef4b135b49"));
-  remote_weapons::registerremoteweapon("drone_squadron", #"hash_7c833954874f735d", &function_97bbef8, &function_d9733cc9, 0);
-  level.killstreaks[#"drone_squadron"].threatonkill = 1;
+  remote_weapons::registerremoteweapon("drone_squadron", # "hash_7c833954874f735d", &function_97bbef8, &function_d9733cc9, 0);
+  level.killstreaks[# "drone_squadron"].threatonkill = 1;
   visionset_mgr::register_info("visionset", "drone_squadron_visionset", 1, 120, 16, 1, &visionset_mgr::ramp_in_out_thread_per_player_death_shutdown, 0);
   callback::on_joined_team(&function_a9737855);
   callback::on_joined_spectate(&function_a9737855);
@@ -63,7 +62,7 @@ calcspawnorigin(origin, angles) {
     dir = vectornormalize(origin - var_109e505c[0].origin);
     angles = vectortoangles(dir);
     return {
-      #origin: var_109e505c[0].origin, 
+      #origin: var_109e505c[0].origin,
       #angles: angles
     };
   }
@@ -112,13 +111,13 @@ calcspawnorigin(origin, angles) {
       mask = 1 | 2;
       trace = physicstrace(startpoint, endpoint, mins, maxs, self, mask);
 
-      if(isDefined(trace[#"entity"]) && isplayer(trace[#"entity"])) {
+      if(isDefined(trace[# "entity"]) && isplayer(trace[# "entity"])) {
         continue;
       }
 
-      if(trace[#"fraction"] > bestfrac) {
-        bestfrac = trace[#"fraction"];
-        bestorigin = trace[#"position"];
+      if(trace[# "fraction"] > bestfrac) {
+        bestfrac = trace[# "fraction"];
+        bestorigin = trace[# "position"];
         bestangles = (0, angles[1], 0) + testangles[i];
 
         if(bestfrac == 1) {
@@ -133,7 +132,7 @@ calcspawnorigin(origin, angles) {
       }
 
       trace = physicstrace(bestorigin, bestorigin + (0, 0, 50), mins, maxs, self, mask);
-      var_b34db008 = trace[#"position"];
+      var_b34db008 = trace[# "position"];
       var_27f435a7 = getclosestpointonnavvolume(bestorigin, "navvolume_big", 2000);
 
       if(isDefined(var_27f435a7)) {
@@ -154,7 +153,6 @@ calcspawnorigin(origin, angles) {
     spawnloc = getclosestpointonnavvolume(pos, "navvolume_small", 2000);
 
     if(isDefined(spawnloc)) {
-
       recordline(startnode.origin, origin, (0, 1, 1), "<dev string:x67>");
       recordline(startnode.origin, spawnloc, (0, 0, 1), "<dev string:x67>");
       recordline(origin, spawnloc, (0, 0, 1), "<dev string:x67>");
@@ -162,10 +160,10 @@ calcspawnorigin(origin, angles) {
       recordsphere(startnode.origin, 100, (0, 1, 1), "<dev string:x70>");
       recordsphere(spawnloc, 5, (0, 0, 1), "<dev string:x70>");
 
-        return {
-          #origin: spawnloc, 
-          #angles: vectortoangles(dir * -1)
-        };
+      return {
+        #origin: spawnloc,
+        #angles: vectortoangles(dir * -1)
+      };
     }
   }
 
@@ -177,10 +175,9 @@ function_d52c51c6(killstreaktype) {
   player = self;
 
   if(!isnavvolumeloaded()) {
-
     iprintlnbold("<dev string:x79>");
 
-      self iprintlnbold(#"hash_62ced7a8acdaa034");
+    self iprintlnbold(#"hash_62ced7a8acdaa034");
     return false;
   }
 
@@ -202,7 +199,7 @@ function_d52c51c6(killstreaktype) {
     return false;
   }
 
-  player stats::function_e24eec31(getweapon(#"drone_squadron"), #"used", 1);
+  player stats::function_e24eec31(getweapon(#"drone_squadron"), # "used", 1);
   drone_squadron = spawnvehicle("veh_drone_squadron_mp", spawnpos.origin, spawnpos.angles, "dynamic_spawn_ai");
   drone_squadron killstreaks::configure_team("drone_squadron", killstreak_id, player, "small_vehicle", undefined, &configureteampost);
   drone_squadron killstreak_hacking::enable_hacking("drone_squadron", &hackedcallbackpre, &hackedcallbackpost);
@@ -235,7 +232,7 @@ function_d52c51c6(killstreaktype) {
   drone_squadron vehicle::add_to_target_group(drone_squadron);
   drone_squadron setrotorspeed(1);
   drone_squadron.protectent = self;
-  params = level.killstreakbundle[#"drone_squadron"];
+  params = level.killstreakbundle[# "drone_squadron"];
   immediate_use = isDefined(params.ksuseimmediately) ? params.ksuseimmediately : 0;
 
   if(!isDefined(drone_squadron.wing_drone)) {
@@ -310,7 +307,7 @@ function_1c601b99() {
   }
 }
 
-private function_576084fa(drone, attackingplayer) {
+function_576084fa(drone, attackingplayer) {
   drone.team = attackingplayer.team;
   drone setteam(attackingplayer.team);
   drone setowner(attackingplayer);
@@ -413,7 +410,7 @@ function_d9733cc9(drone_squadron, exitrequestedbyowner) {
     }
   }
 
-  params = level.killstreakbundle[#"drone_squadron"];
+  params = level.killstreakbundle[# "drone_squadron"];
   shutdown_on_exit = isDefined(params.ksshutdownonexit) ? params.ksshutdownonexit : 0;
 
   if(exitrequestedbyowner || shutdown_on_exit) {
@@ -440,7 +437,7 @@ ontimeout() {
   drone_squadron = self;
   drone_squadron.owner globallogic_audio::play_taacom_dialog("timeout", "drone_squadron");
   function_35909ca6(drone_squadron.owner);
-  params = level.killstreakbundle[#"drone_squadron"];
+  params = level.killstreakbundle[# "drone_squadron"];
 
   if(isDefined(drone_squadron.owner)) {
     radiusdamage(drone_squadron.origin, params.ksexplosionouterradius, params.ksexplosioninnerdamage, params.ksexplosionouterdamage, drone_squadron.owner, "MOD_EXPLOSIVE", getweapon("drone_squadron"));
@@ -495,7 +492,7 @@ watchdeath() {
 
       if(modtype == "MOD_RIFLE_BULLET" || modtype == "MOD_PISTOL_BULLET") {}
 
-      luinotifyevent(#"player_callout", 2, #"hash_32fcc2097e294f0a", attacker.entnum);
+      luinotifyevent(#"player_callout", 2, # "hash_32fcc2097e294f0a", attacker.entnum);
     }
 
     if(isDefined(drone_squadron) && isDefined(drone_squadron.owner)) {
@@ -509,7 +506,7 @@ watchteamchange() {
   self endon(#"hash_7e3a7db8b681733");
   drone_squadron = self;
   drone_squadron endon(#"drone_squadron_shutdown");
-  drone_squadron.owner waittill(#"joined_team", #"disconnect", #"joined_spectators");
+  drone_squadron.owner waittill(#"joined_team", # "disconnect", # "joined_spectators");
 
   if(isDefined(drone_squadron)) {
     drone_squadron notify(#"drone_squadron_shutdown");
@@ -524,7 +521,7 @@ watchwater() {
     wait 0.1;
     trace = physicstrace(self.origin + (0, 0, 10), self.origin + (0, 0, 6), (-2, -2, -2), (2, 2, 2), self, 4);
 
-    if(trace[#"fraction"] < 1) {
+    if(trace[# "fraction"] < 1) {
       break;
     }
   }
@@ -540,7 +537,7 @@ function_89609eb8(origin, angles) {
     dir = vectornormalize(origin - var_109e505c[0].origin);
     angles = vectortoangles(dir);
     return {
-      #origin: var_109e505c[0].origin, 
+      #origin: var_109e505c[0].origin,
       #angles: angles
     };
   }
@@ -565,7 +562,6 @@ function_89609eb8(origin, angles) {
     spawnloc = getclosestpointonnavvolume(leavenode.origin, "navvolume_small", 2000);
 
     if(isDefined(spawnloc)) {
-
       recordline(leavenode.origin, origin, (0, 1, 1), "<dev string:x67>");
       recordline(leavenode.origin, spawnloc, (0, 0, 1), "<dev string:x67>");
       recordline(origin, spawnloc, (0, 0, 1), "<dev string:x67>");
@@ -573,10 +569,10 @@ function_89609eb8(origin, angles) {
       recordsphere(leavenode.origin, 100, (0, 1, 1), "<dev string:x70>");
       recordsphere(spawnloc, 5, (0, 0, 1), "<dev string:x70>");
 
-        return {
-          #origin: spawnloc, 
-          #angles: (0, 0, 0)
-        };
+      return {
+        #origin: spawnloc,
+        #angles: (0, 0, 0)
+      };
     }
   }
 
@@ -588,7 +584,7 @@ function_f9ec0116(drone, leavenode) {
   drone.ignoreall = 1;
   drone setneargoalnotifydist(40);
   drone function_a57c34b7(leavenode.origin, 1, 1);
-  drone waittilltimeout(8, #"near_goal");
+  drone waittilltimeout(8, # "near_goal");
   drone kill();
 }
 
@@ -649,7 +645,7 @@ watchshutdown() {
 }
 
 function_da3b4d35() {
-  self endon(#"death", #"drone_squadron_shutdown");
+  self endon(#"death", # "drone_squadron_shutdown");
   self thread function_c7284de2();
 
   while(true) {
@@ -674,7 +670,7 @@ function_da3b4d35() {
       eye_pos = self.owner getplayercamerapos();
       direction_vec = (direction_vec[0] * 5000, direction_vec[1] * 5000, direction_vec[2] * 5000);
       trace = bulletTrace(eye_pos, eye_pos + direction_vec, 1, self.owner, 1, 1, self);
-      var_31491620 = trace[#"position"];
+      var_31491620 = trace[# "position"];
       var_468f300e = vectornormalize(anglesToForward(direction));
       var_b7e30855 = 5000 * 5000;
 
@@ -696,7 +692,7 @@ function_c7284de2() {
   player = self.owner;
   leaddrone = self;
   player endon(#"death");
-  leaddrone endon(#"death", #"drone_squadron_shutdown");
+  leaddrone endon(#"death", # "drone_squadron_shutdown");
   function_47a6b2ec(player);
   function_d0eb04e9(player);
   assert(isDefined(player.var_99033e70));
@@ -748,7 +744,7 @@ function_c7284de2() {
   }
 }
 
-private function_410e488d(leaddrone, target) {
+function_410e488d(leaddrone, target) {
   foreach(drone in leaddrone.wing_drone) {
     if(isDefined(drone)) {
       drone.favoriteenemy = target;
@@ -756,7 +752,7 @@ private function_410e488d(leaddrone, target) {
   }
 }
 
-private function_74ceb0a5(leaddrone) {
+function_74ceb0a5(leaddrone) {
   var_c479f7cf = leaddrone.wing_drone.size;
   validcount = 0;
 
@@ -773,15 +769,15 @@ private function_74ceb0a5(leaddrone) {
   return false;
 }
 
-private function_47a6b2ec(player) {
+function_47a6b2ec(player) {
   player.var_99033e70 = gameobjects::get_next_obj_id();
-  objective_add(player.var_99033e70, "active", undefined, #"hash_19883df3d28a354a");
+  objective_add(player.var_99033e70, "active", undefined, # "hash_19883df3d28a354a");
   objective_setprogress(player.var_99033e70, 1);
   function_da7940a3(player.var_99033e70, 1);
   objective_setinvisibletoall(player.var_99033e70);
 }
 
-private function_bef71297(player, target) {
+function_bef71297(player, target) {
   assert(isDefined(player.var_99033e70));
 
   if(isDefined(target)) {
@@ -796,15 +792,15 @@ private function_bef71297(player, target) {
   objective_setinvisibletoall(player.var_99033e70);
 }
 
-private function_d0eb04e9(player) {
+function_d0eb04e9(player) {
   player.var_ce69b6d1 = gameobjects::get_next_obj_id();
-  objective_add(player.var_ce69b6d1, "active", undefined, #"hash_247ae058537c8726");
+  objective_add(player.var_ce69b6d1, "active", undefined, # "hash_247ae058537c8726");
   objective_setprogress(player.var_ce69b6d1, 1);
   function_da7940a3(player.var_ce69b6d1, 1);
   objective_setinvisibletoall(player.var_ce69b6d1);
 }
 
-private function_d43ba50b(player, target) {
+function_d43ba50b(player, target) {
   assert(isDefined(player.var_ce69b6d1));
 
   if(isDefined(target)) {
@@ -819,7 +815,7 @@ private function_d43ba50b(player, target) {
   objective_setinvisibletoall(player.var_ce69b6d1);
 }
 
-private function_35909ca6(player) {
+function_35909ca6(player) {
   if(isDefined(player.var_ce69b6d1)) {
     objective_delete(player.var_ce69b6d1);
     gameobjects::release_obj_id(player.var_ce69b6d1);
@@ -837,7 +833,7 @@ private function_35909ca6(player) {
   player.var_e80d9471 = undefined;
 }
 
-private function_a9737855(params) {
+function_a9737855(params) {
   player = self;
 
   if(isDefined(player.var_e80d9471) && player.var_e80d9471) {

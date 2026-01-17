@@ -4,10 +4,9 @@
 ***********************************************/
 
 #include scripts\core_common\ai\systems\planner_blackboard;
-
 #namespace planner;
 
-private _blackboardsapplyundostate(planner, state) {
+_blackboardsapplyundostate(planner, state) {
   assert(isstruct(planner));
   assert(isarray(planner.blackboards));
 
@@ -21,7 +20,7 @@ private _blackboardsapplyundostate(planner, state) {
   }
 }
 
-private _blackboardscalculateundostate(planner) {
+_blackboardscalculateundostate(planner) {
   assert(isstruct(planner));
   assert(isarray(planner.blackboards));
   state = [];
@@ -33,7 +32,7 @@ private _blackboardscalculateundostate(planner) {
   return state;
 }
 
-private _blackboardsreadmode(planner) {
+_blackboardsreadmode(planner) {
   assert(isstruct(planner));
   assert(isarray(planner.blackboards));
 
@@ -42,7 +41,7 @@ private _blackboardsreadmode(planner) {
   }
 }
 
-private _blackboardsreadwritemode(planner) {
+_blackboardsreadwritemode(planner) {
   assert(isstruct(planner));
   assert(isarray(planner.blackboards));
 
@@ -51,7 +50,7 @@ private _blackboardsreadwritemode(planner) {
   }
 }
 
-private _initializeplannerfunctions(functype) {
+_initializeplannerfunctions(functype) {
   if(!isDefined(level._plannerscriptfunctions)) {
     level._plannerscriptfunctions = [];
   }
@@ -61,11 +60,11 @@ private _initializeplannerfunctions(functype) {
   }
 }
 
-private _plancalculateplanindex(planner) {
+_plancalculateplanindex(planner) {
   return planner.plan.size - 1;
 }
 
-private _planexpandaction(planner, action) {
+_planexpandaction(planner, action) {
   planner.api = action.api;
   pixbeginevent(action.api);
   aiprofile_beginentry(action.api);
@@ -77,9 +76,9 @@ private _planexpandaction(planner, action) {
   actioninfo = spawnStruct();
   actioninfo.name = action.api;
 
-  if(isDefined(actionfuncs[#"parameterize"])) {
+  if(isDefined(actionfuncs[# "parameterize"])) {
     _blackboardsreadwritemode(planner);
-    actioninfo.params = [[actionfuncs[#"parameterize"]]](planner, action.constants);
+    actioninfo.params = [[actionfuncs[# "parameterize"]]](planner, action.constants);
     assert(isstruct(actioninfo.params), "<dev string:x41>" + action.api + "<dev string:x69>");
     _blackboardsreadmode(planner);
   } else {
@@ -93,7 +92,7 @@ private _planexpandaction(planner, action) {
   return true;
 }
 
-private _planexpandpostcondition(planner, postcondition) {
+_planexpandpostcondition(planner, postcondition) {
   planner.api = postcondition.api;
   pixbeginevent(postcondition.api);
   aiprofile_beginentry(postcondition.api);
@@ -110,7 +109,7 @@ private _planexpandpostcondition(planner, postcondition) {
   return true;
 }
 
-private _planexpandprecondition(planner, precondition) {
+_planexpandprecondition(planner, precondition) {
   planner.api = precondition.api;
   pixbeginevent(precondition.api);
   aiprofile_beginentry(precondition.api);
@@ -126,24 +125,24 @@ private _planexpandprecondition(planner, precondition) {
   return result;
 }
 
-private _planfindnextsibling(planner, parentnodeentry, currentchildindex) {
+_planfindnextsibling(planner, parentnodeentry, currentchildindex) {
   assert(isstruct(planner));
   return parentnodeentry.node.children[currentchildindex + 1];
 }
 
-private _planstackhasnodes(planner) {
+_planstackhasnodes(planner) {
   assert(isstruct(planner));
   return planner.nodestack.size > 0;
 }
 
-private _planstackpeeknode(planner) {
+_planstackpeeknode(planner) {
   assert(isstruct(planner));
   assert(planner.nodestack.size > 0);
   nodeentry = planner.nodestack[planner.nodestack.size - 1];
   return nodeentry;
 }
 
-private _planstackpopnode(planner) {
+_planstackpopnode(planner) {
   assert(isstruct(planner));
   assert(planner.nodestack.size > 0);
   nodeentry = planner.nodestack[planner.nodestack.size - 1];
@@ -151,7 +150,7 @@ private _planstackpopnode(planner) {
   return nodeentry;
 }
 
-private _planstackpushnode(planner, node, childindex = undefined) {
+_planstackpushnode(planner, node, childindex = undefined) {
   assert(isstruct(planner));
   assert(isstruct(node));
   nodeentry = spawnStruct();
@@ -162,13 +161,13 @@ private _planstackpushnode(planner, node, childindex = undefined) {
   planner.nodestack[planner.nodestack.size] = nodeentry;
 }
 
-private _planpushvalidparent(planner, childnodeentry, result) {
+_planpushvalidparent(planner, childnodeentry, result) {
   while(_planstackhasnodes(planner)) {
     parentnodeentry = _planstackpeeknode(planner);
     assert(isDefined(parentnodeentry));
 
     switch (parentnodeentry.node.type) {
-      case #"sequence":
+      case # "sequence":
         if(result) {
           nextchildnode = _planfindnextsibling(planner, parentnodeentry, childnodeentry.childindex);
 
@@ -183,8 +182,8 @@ private _planpushvalidparent(planner, childnodeentry, result) {
 
         _planstackpopnode(planner);
         break;
-      case #"selector":
-      case #"planner":
+      case # "selector":
+      case # "planner":
         if(!result) {
           _undoplan(planner, parentnodeentry.planindex);
           _blackboardsapplyundostate(planner, parentnodeentry.undostate);
@@ -209,7 +208,7 @@ private _planpushvalidparent(planner, childnodeentry, result) {
   return result;
 }
 
-private _planprocessstack(planner) {
+_planprocessstack(planner) {
   assert(isstruct(planner));
   result = 1;
   waitedinthrottle = 0;
@@ -219,18 +218,18 @@ private _planprocessstack(planner) {
     nodeentry = _planstackpeeknode(planner);
 
     switch (nodeentry.node.type) {
-      case #"action":
+      case # "action":
         result = _planexpandaction(planner, nodeentry.node);
         break;
-      case #"postcondition":
+      case # "postcondition":
         result = _planexpandpostcondition(planner, nodeentry.node);
         break;
-      case #"precondition":
+      case # "precondition":
         result = _planexpandprecondition(planner, nodeentry.node);
         break;
-      case #"selector":
-      case #"sequence":
-      case #"planner":
+      case # "selector":
+      case # "sequence":
+      case # "planner":
         _planstackpushnode(planner, nodeentry.node.children[0], 0);
         continue;
       default:
@@ -242,7 +241,7 @@ private _planprocessstack(planner) {
   }
 }
 
-private _undoplan(planner, planindex) {
+_undoplan(planner, planindex) {
   assert(isstruct(planner));
   assert(isarray(planner.plan));
   assert(planindex < planner.plan.size);
@@ -433,7 +432,7 @@ printplanner(planner, filename) {
   closefile(file);
 }
 
-private _printclearprintid(plannernode) {
+_printclearprintid(plannernode) {
   plannernode.printid = undefined;
 
   if(isDefined(plannernode.children)) {
@@ -445,7 +444,7 @@ private _printclearprintid(plannernode) {
   }
 }
 
-private function_3af5bab0(node) {
+function_3af5bab0(node) {
   text = node.type;
 
   if(isDefined(node.name)) {
@@ -486,7 +485,7 @@ private function_3af5bab0(node) {
   return text;
 }
 
-private _printplannernode(file, plannernode, indent, printid) {
+_printplannernode(file, plannernode, indent, printid) {
   assert(isstruct(plannernode));
   indentspace = "<dev string:x138>";
 
@@ -545,25 +544,25 @@ createplannerfromasset(assetname) {
       node = htnasset.nodes[nodeindex];
 
       switch (node.type) {
-        case #"action":
+        case # "action":
           plannernodes[nodeindex] = planner::createaction(node.name, node.constants);
           break;
-        case #"postcondition":
+        case # "postcondition":
           plannernodes[nodeindex] = planner::createpostcondition(node.name, node.constants);
           break;
-        case #"precondition":
+        case # "precondition":
           plannernodes[nodeindex] = planner::createprecondition(node.name, node.constants);
           break;
-        case #"planner":
+        case # "planner":
           plannernodes[nodeindex] = planner::createplanner(node.name);
           break;
-        case #"selector":
+        case # "selector":
           plannernodes[nodeindex] = planner::createselector();
           break;
-        case #"sequence":
+        case # "sequence":
           plannernodes[nodeindex] = planner::createsequence();
           break;
-        case #"goto":
+        case # "goto":
           plannernodes[nodeindex] = spawnStruct();
           break;
       }
@@ -573,7 +572,7 @@ createplannerfromasset(assetname) {
       parentnode = plannernodes[nodeindex];
       htnnode = htnasset.nodes[nodeindex];
 
-      if(!isDefined(htnnode.childindexes) || htnnode.type == #"goto") {
+      if(!isDefined(htnnode.childindexes) || htnnode.type == # "goto") {
         continue;
       }
 
@@ -582,7 +581,7 @@ createplannerfromasset(assetname) {
         childnum = htnnode.childindexes[childindex];
         childnode = plannernodes[childnum];
 
-        for(htnchildnode = htnasset.nodes[childnum]; htnchildnode.type === #"goto"; htnchildnode = htnasset.nodes[childnum]) {
+        for(htnchildnode = htnasset.nodes[childnum]; htnchildnode.type === # "goto"; htnchildnode = htnasset.nodes[childnum]) {
           assert(isDefined(htnchildnode.childindexes));
           assert(htnchildnode.childindexes.size == 1);
           childnum = htnchildnode.childindexes[0];
@@ -599,43 +598,43 @@ createplannerfromasset(assetname) {
 
 getplannerapifunction(functionname) {
   assert(ishash(functionname) && functionname != "<dev string:x138>", "<dev string:x14c>");
-  assert(isDefined(level._plannerscriptfunctions[#"api"][functionname]), "<dev string:x186>" + function_9e72a96(functionname) + "<dev string:x1a5>");
-  return level._plannerscriptfunctions[#"api"][functionname];
+  assert(isDefined(level._plannerscriptfunctions[# "api"][functionname]), "<dev string:x186>" + function_9e72a96(functionname) + "<dev string:x1a5>");
+  return level._plannerscriptfunctions[# "api"][functionname];
 }
 
 getplanneractionfunctions(actionname) {
   assert(ishash(actionname) && actionname != "<dev string:x138>", "<dev string:x1bd>");
-  assert(isDefined(level._plannerscriptfunctions[#"action"][actionname]), "<dev string:x1f5>" + function_9e72a96(actionname) + "<dev string:x1a5>");
-  return level._plannerscriptfunctions[#"action"][actionname];
+  assert(isDefined(level._plannerscriptfunctions[# "action"][actionname]), "<dev string:x1f5>" + function_9e72a96(actionname) + "<dev string:x1a5>");
+  return level._plannerscriptfunctions[# "action"][actionname];
 }
 
 registerplannerapi(functionname, functionptr) {
   assert(ishash(functionname) && functionname != "<dev string:x138>", "<dev string:x212>");
   assert(isfunctionptr(functionptr), "<dev string:x251>" + function_9e72a96(functionname) + "<dev string:x280>");
   planner::_initializeplannerfunctions(#"api");
-  assert(!isDefined(level._plannerscriptfunctions[#"api"][functionname]), "<dev string:x186>" + functionname + "<dev string:x2a1>");
-  level._plannerscriptfunctions[#"api"][functionname] = functionptr;
+  assert(!isDefined(level._plannerscriptfunctions[# "api"][functionname]), "<dev string:x186>" + functionname + "<dev string:x2a1>");
+  level._plannerscriptfunctions[# "api"][functionname] = functionptr;
 }
 
 registerplanneraction(actionname, paramfuncptr, initializefuncptr, updatefuncptr, terminatefuncptr) {
   assert(ishash(actionname) && actionname != "<dev string:x138>", "<dev string:x2b7>");
   planner::_initializeplannerfunctions("Action");
-  assert(!isDefined(level._plannerscriptfunctions[#"action"][actionname]), "<dev string:x1f5>" + function_9e72a96(actionname) + "<dev string:x2a1>");
-  level._plannerscriptfunctions[#"action"][actionname] = [];
+  assert(!isDefined(level._plannerscriptfunctions[# "action"][actionname]), "<dev string:x1f5>" + function_9e72a96(actionname) + "<dev string:x2a1>");
+  level._plannerscriptfunctions[# "action"][actionname] = [];
 
   if(isfunctionptr(paramfuncptr)) {
-    level._plannerscriptfunctions[#"action"][actionname][#"parameterize"] = paramfuncptr;
+    level._plannerscriptfunctions[# "action"][actionname][# "parameterize"] = paramfuncptr;
   }
 
   if(isfunctionptr(initializefuncptr)) {
-    level._plannerscriptfunctions[#"action"][actionname][#"initialize"] = initializefuncptr;
+    level._plannerscriptfunctions[# "action"][actionname][# "initialize"] = initializefuncptr;
   }
 
   if(isfunctionptr(updatefuncptr)) {
-    level._plannerscriptfunctions[#"action"][actionname][#"update"] = updatefuncptr;
+    level._plannerscriptfunctions[# "action"][actionname][# "update"] = updatefuncptr;
   }
 
   if(isfunctionptr(terminatefuncptr)) {
-    level._plannerscriptfunctions[#"action"][actionname][#"terminate"] = terminatefuncptr;
+    level._plannerscriptfunctions[# "action"][actionname][# "terminate"] = terminatefuncptr;
   }
 }

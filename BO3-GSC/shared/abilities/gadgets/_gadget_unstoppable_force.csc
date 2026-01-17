@@ -16,12 +16,12 @@
 #namespace _gadget_unstoppable_force;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_unstoppable_force", & __init__, undefined, undefined);
+  system::register("gadget_unstoppable_force", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_localclient_shutdown( & on_localplayer_shutdown);
-  clientfield::register("toplayer", "unstoppableforce_state", 1, 1, "int", & player_unstoppableforce_handler, 0, 1);
+  callback::on_localclient_shutdown(&on_localplayer_shutdown);
+  clientfield::register("toplayer", "unstoppableforce_state", 1, 1, "int", &player_unstoppableforce_handler, 0, 1);
 }
 
 function on_localplayer_shutdown(localclientnum) {
@@ -29,7 +29,7 @@ function on_localplayer_shutdown(localclientnum) {
 }
 
 function player_unstoppableforce_handler(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(!self islocalplayer() || isspectating(localclientnum, 0) || (isdefined(level.localplayers[localclientnum]) && self getentitynumber() != level.localplayers[localclientnum] getentitynumber())) {
+  if(!self islocalplayer() || isspectating(localclientnum, 0) || (isDefined(level.localplayers[localclientnum]) && self getentitynumber() != level.localplayers[localclientnum] getentitynumber())) {
     return;
   }
   if(newval != oldval && newval) {
@@ -55,7 +55,7 @@ function enable_boost_camera_fx(localclientnum) {
 }
 
 function stop_boost_camera_fx(localclientnum) {
-  if(isdefined(self.firstperson_fx_unstoppableforce)) {
+  if(isDefined(self.firstperson_fx_unstoppableforce)) {
     stopfx(localclientnum, self.firstperson_fx_unstoppableforce);
     self.firstperson_fx_unstoppableforce = undefined;
   }
@@ -74,16 +74,16 @@ function boost_fx_on_velocity(localclientnum) {
   self endon("end_unstoppableforce_boost_fx");
   self endon("disconnect");
   self thread boost_fx_interrupt_handler(localclientnum);
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     v_player_velocity = self getvelocity();
-    v_player_forward = anglestoforward(self.angles);
+    v_player_forward = anglesToForward(self.angles);
     n_dot = vectordot(vectornormalize(v_player_velocity), v_player_forward);
     n_speed = length(v_player_velocity);
     if(n_speed >= getdvarint("scr_unstoppableforce_boost_speed_tol", 320) && n_dot > 0.8) {
-      if(!isdefined(self.firstperson_fx_unstoppableforce)) {
+      if(!isDefined(self.firstperson_fx_unstoppableforce)) {
         self enable_boost_camera_fx(localclientnum);
       }
-    } else if(isdefined(self.firstperson_fx_unstoppableforce)) {
+    } else if(isDefined(self.firstperson_fx_unstoppableforce)) {
       self stop_boost_camera_fx(localclientnum);
     }
     wait(0.016);

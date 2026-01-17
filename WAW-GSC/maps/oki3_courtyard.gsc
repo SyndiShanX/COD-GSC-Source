@@ -49,23 +49,23 @@ courtyard_upstairs_dialog() {
 }
 
 courtyard_objectives() {
-  objective_add(6, "current", & "OKI3_OBJ1");
+  objective_add(6, "current", &"OKI3_OBJ1");
   objective_position(6, (8203, -2236, 157));
   getent("planter_door_end", "targetname") notify("trigger");
   trigger_Wait("stairs_down_objective", "targetname");
   objective_position(6, (8424, -6856, 122));
   trigger_wait("secure_courtyard_drop_objective", "targetname");
-  objective_add(6, "current", & "OKI3_OBJ7", (7321, -5726, 139));
+  objective_add(6, "current", &"OKI3_OBJ7", (7321, -5726, 139));
   level thread monitor_volume_for_enemies("drop_volume", "drop_secured", "enter_courtyard");
   level waittill("drop_secured");
   objective_state(6, "done");
-  objective_add(7, "current", & "OKI3_OBJ8_A");
+  objective_add(7, "current", &"OKI3_OBJ8_A");
   house_guys_playerseek();
 }
 
 house_guys_playerseek() {
-  guys = getentarray("house_guys", "targetname");
-  for (i = 0; i < guys.size; i++) {
+  guys = getEntArray("house_guys", "targetname");
+  for(i = 0; i < guys.size; i++) {
     guys[i] SetGoalEntity(get_closest_player(guys[i].origin));
     guys[i] thread rush_player();
   }
@@ -88,7 +88,7 @@ give_air_strike() {
 monitor_radio_usage() {
   self endon("death");
   self endon("disconnect");
-  while (1) {
+  while(1) {
     self waittill("weapon_change");
     if(self getcurrentweapon() == "air_support") {
       available = is_radio_available(self);
@@ -106,7 +106,7 @@ monitor_radio_usage() {
 hud_radio_in_use() {
   self endon("death");
   self endon("disconnect");
-  text = & "OKI3_RADIO_INUSE";
+  text = &"OKI3_RADIO_INUSE";
   self setup_client_hintelem();
   self.hintelem setText(text);
   wait(3.5);
@@ -120,7 +120,7 @@ air_support_objective() {
   level.last_hero do_dialogue("call_in_planes");
   wait(.5);
   level.last_hero do_dialogue("kingdom_come");
-  objective_add(9, "current", & "OKI3_OBJ8", (7858, -2737.5, 558.5));
+  objective_add(9, "current", &"OKI3_OBJ8", (7858, -2737.5, 558.5));
   objective_icon(9, "hud_icon_airstrike");
   wait(1);
   level thread air_support_nag();
@@ -145,7 +145,7 @@ air_support_nag() {
     dialog[2] = "need_airstrike";
   }
   tick = 0;
-  while (!isDefined(level.north_buildings_targeted)) {
+  while(!isDefined(level.north_buildings_targeted)) {
     wait(.5);
     tick++;
     if(tick > 30 && !isDefined(level.no_nag_dialogue)) {
@@ -160,14 +160,14 @@ air_support_nag() {
       tick = 0;
     }
   }
-  while (1) {
+  while(1) {
     if(isDefined(level.nag_castle)) {
       break;
     }
     wait(1);
   }
   tick = 0;
-  while (!isDefined(level.castle_targeted)) {
+  while(!isDefined(level.castle_targeted)) {
     wait(.5);
     tick++;
     if(tick > 30 && !isDefined(level.no_nag_dialogue)) {
@@ -187,7 +187,7 @@ air_support_nag() {
   level thread magic_grenades_from_hell();
   wait(15);
   tick = 0;
-  while (!isDefined(level.castle_targeted_2)) {
+  while(!isDefined(level.castle_targeted_2)) {
     wait(.5);
     tick++;
     if(tick > 30 && !isDefined(level.no_nag_dialogue)) {
@@ -196,7 +196,7 @@ air_support_nag() {
     }
   }
   level notify("stop_grenades");
-  while (!isDefined(level.castle_destroyed)) {
+  while(!isDefined(level.castle_destroyed)) {
     wait_network_frame();
   }
   objective_state(7, "done");
@@ -205,7 +205,7 @@ air_support_nag() {
   getent("use_mortars_courtyard", "targetname") trigger_off();
   getent("use_mortars_courtyard", "targetname") notify("stop_thinking");
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(players[i] getcurrentweapon() == "mortar_round") {
       players[i] takeweapon("mortar_round");
       primaryWeapons = players[i] GetWeaponsListPrimaries();
@@ -234,17 +234,17 @@ air_support_nag() {
   guy do_dialogue("its_over");
   wait(1);
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i] thread hud_fade_to_black(2);
   }
   thread maps\oki3_util::disable_player_weapons();
   wait(2);
   axis = getaiarray("axis");
-  for (i = 0; i < axis.size; i++) {
+  for(i = 0; i < axis.size; i++) {
     axis[i] delete();
   }
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i] thread player_prevent_bleedout();
     players[i] thread outro_delete_grenade();
     players[i] setclientdvar("miniscoreboardhide", "1");
@@ -261,7 +261,7 @@ air_support_nag() {
 
 clean_middle_ai() {
   ai = getaiarray("axis");
-  for (i = 0; i < ai.size; i++) {
+  for(i = 0; i < ai.size; i++) {
     if(isAlive(ai[i]) && ai[i].origin[1] < 6318.5) {
       ai[i] thread random_death(3, 10);
     }
@@ -275,7 +275,7 @@ final_banzai_charge() {
   level notify("b1_spawners");
   wait(3);
   ai = getaiarray("axis");
-  for (i = 0; i < ai.size; i++) {
+  for(i = 0; i < ai.size; i++) {
     ai[i] thread bloody_death(true, randomint(4));
   }
   wait(2);
@@ -286,18 +286,18 @@ init_courtyard_envfx() {
   exploder(500);
   ent1 = spawn("script_model", (7137, -3138, 91));
   ent2 = spawn("script_model", (8767, -5283, 45));
-  ent1 setmodel("tag_origin");
-  ent2 setmodel("tag_origin");
+  ent1 setModel("tag_origin");
+  ent2 setModel("tag_origin");
   ent1.angles = (277.5, 90, -6.81);
   ent2.angles = (277.5, 90, -6.81023);
-  forward = anglestoforward(ent1.angles);
-  forward2 = anglestoforward(ent2.angles);
-  playfxontag(level._effect["after_mortars"], ent1, "tag_origin");
-  playfxontag(level._effect["after_mortars"], ent2, "tag_origin");
+  forward = anglesToForward(ent1.angles);
+  forward2 = anglesToForward(ent2.angles);
+  playFXOnTag(level._effect["after_mortars"], ent1, "tag_origin");
+  playFXOnTag(level._effect["after_mortars"], ent2, "tag_origin");
 }
 
 dvar_watcher() {
-  while (1) {
+  while(1) {
     if(getdvarint("oki3_courtyard") == 1) {
       if(getdvarint("show_1") == 1) {
         show_damaged(1, 1);
@@ -406,7 +406,7 @@ hide_mghut_dmg() {
   chunks[3] = getent("mortarpit_mghut_wrecked_chunk_4", "script_noteworthy");
   chunks[4] = getent("mortarpit_mghut_wrecked_chunk_5", "script_noteworthy");
   chunks[5] = getent("mortarpit_mghut_wrecked_chunk_6", "script_noteworthy");
-  for (i = 0; i < chunks.size; i++) {
+  for(i = 0; i < chunks.size; i++) {
     chunks[i] hide();
   }
   curtains = getent("event1_mg_curtains", "targetname");
@@ -426,7 +426,7 @@ show_mghut_dmg() {
   chunks[3] = getent("mortarpit_mghut_wrecked_chunk_4", "script_noteworthy");
   chunks[4] = getent("mortarpit_mghut_wrecked_chunk_5", "script_noteworthy");
   chunks[5] = getent("mortarpit_mghut_wrecked_chunk_6", "script_noteworthy");
-  for (i = 0; i < chunks.size; i++) {
+  for(i = 0; i < chunks.size; i++) {
     chunks[i] hide();
   }
   curtains = getent("event1_mg_curtains", "targetname");
@@ -469,8 +469,8 @@ show_bunker_explode() {
       level.anim_setup_complete = true;
     }
     level.mortarhut_pieces SetFlaggedAnimKnobRestart("pit_explodes", level.scr_anim["mortarpit_bunker"]["explode"], 1.0, 0.05, 1.0);
-    bigbits = getentarray("bigbits", "script_noteworthy");
-    loose_boards = getentarray("loose_boards", "script_noteworthy");
+    bigbits = getEntArray("bigbits", "script_noteworthy");
+    loose_boards = getEntArray("loose_boards", "script_noteworthy");
     wait(10);
     level.is_exploding = undefined;
   }
@@ -540,14 +540,14 @@ courtyard_north_spawners() {
   level notify("b1_spawners");
   objective_state(8, "done");
   objective_state(9, "done");
-  objective_add(10, "current", & "OKI3_OBJ9", (9223.5, -4690, 742));
+  objective_add(10, "current", &"OKI3_OBJ9", (9223.5, -4690, 742));
   objective_icon(10, "hud_icon_airstrike");
   autosave_by_name("building1_destroyed");
 }
 
 courtyard_dialog_think() {
   level endon("stop_dialog");
-  while (1) {
+  while(1) {
     level waittill("do_dialog", dialog, guy);
     guy do_dialogue(dialog);
     wait(.25);
@@ -573,7 +573,7 @@ banzai_wave_spawner_think(location, ender) {
       wave_loc = (8504, -5332, 55.8);
       break;
   }
-  while (1) {
+  while(1) {
     wait(40);
     rnd = randomint(org1.size);
     ent1 = spawn("script_origin", org1[rnd]);
@@ -591,11 +591,11 @@ banzai_wave_spawner_think(location, ender) {
 
 north_mg_gunner() {
   self endon("death");
-  self setcandamage(false);
+  self setCanDamage(false);
   turret = getent("north_MG", "targetname");
   turret setturretignoregoals(true);
   level waittill("building1_destroyed");
-  self setcandamage(true);
+  self setCanDamage(true);
   self random_death(.2, .5);
 }
 
@@ -649,13 +649,13 @@ spawnfunc_front_line() {
 }
 
 front_line_spawner_think() {
-  while (1) {
+  while(1) {
     wait(30);
     count = 0;
     chargers = [];
-    guys = getentarray("front_line_guy", "script_noteworthy");
+    guys = getEntArray("front_line_guy", "script_noteworthy");
     if(guys.size > 2) {
-      for (i = 0; i < guys.size; i++) {
+      for(i = 0; i < guys.size; i++) {
         if(isDefined(guys[i].ready_to_charge)) {
           chargers[count] = guys[i];
           count++;
@@ -680,9 +680,9 @@ front_line_charge() {
 }
 
 get_frontline_guys() {
-  guys = getentarray("front_line_guy", "script_noteworthy");
+  guys = getEntArray("front_line_guy", "script_noteworthy");
   count = 0;
-  for (i = 0; i < guys.size; i++) {
+  for(i = 0; i < guys.size; i++) {
     if(isDefined(guys[i].ready_to_charge)) {
       guys[i] thread maps\_banzai::banzai_force();
       if(count > 3) {
@@ -698,9 +698,9 @@ hide_damaged(building, dmgstate) {
   if(!isDefined(dmgstate)) {
     dmgstate = "";
   }
-  ent = getentarray("roof_building_" + building + "_dmg_" + dmgstate, "targetname");
+  ent = getEntArray("roof_building_" + building + "_dmg_" + dmgstate, "targetname");
   if(ent.size) {
-    for (i = 0; i < ent.size; i++) {
+    for(i = 0; i < ent.size; i++) {
       ent[i] hide();
       ent[i] notsolid();
     }
@@ -710,9 +710,9 @@ hide_damaged(building, dmgstate) {
       ent hide();
       ent notsolid();
     } else {
-      ent = getentarray("roof_building_" + building + "_dmg_" + dmgstate, "targetname");
+      ent = getEntArray("roof_building_" + building + "_dmg_" + dmgstate, "targetname");
       if(isDefined(ent.size)) {
-        for (i = 0; i < ent.size; i++) {
+        for(i = 0; i < ent.size; i++) {
           ent[i] hide();
           ent[i] notsolid();
         }
@@ -725,9 +725,9 @@ show_damaged(building, dmgstate) {
   if(!isDefined(dmgstate)) {
     dmgstate = "";
   }
-  ent = getentarray("roof_building_" + building + "_dmg_" + dmgstate, "targetname");
+  ent = getEntArray("roof_building_" + building + "_dmg_" + dmgstate, "targetname");
   if(ent.size) {
-    for (i = 0; i < ent.size; i++) {
+    for(i = 0; i < ent.size; i++) {
       ent[i] show();
       ent[i] solid();
     }
@@ -750,9 +750,9 @@ hide_intact(building, dmgstate) {
   if(!isDefined(dmgstate)) {
     dmgstate = "";
   }
-  ent = getentarray("roof_building_" + building + "_intact", "targetname");
+  ent = getEntArray("roof_building_" + building + "_intact", "targetname");
   if(ent.size) {
-    for (i = 0; i < ent.size; i++) {
+    for(i = 0; i < ent.size; i++) {
       ent[i] hide();
       ent[i] notsolid();
     }
@@ -781,9 +781,9 @@ show_intact(building, dmgstate) {
   if(!isDefined(dmgstate)) {
     dmgstate = "";
   }
-  ent = getentarray("roof_building_" + building + "_intact", "targetname");
+  ent = getEntArray("roof_building_" + building + "_intact", "targetname");
   if(ent.size) {
-    for (i = 0; i < ent.size; i++) {
+    for(i = 0; i < ent.size; i++) {
       ent[i] show();
       ent[i] solid();
     }
@@ -810,7 +810,7 @@ courtyard_prespawn_smoke(min_force, max_force, orgs) {
     max_force = 800;
   }
   ents = getstructarray(orgs, "targetname");
-  for (i = 0; i < ents.size; i++) {
+  for(i = 0; i < ents.size; i++) {
     if(!isDefined(ents[i].original_angles)) {
       ents[i].original_angles = ents[i].angles;
     }
@@ -843,14 +843,14 @@ destroy_building1() {
   trig = getent("courtyard_ne", "script_noteworthy");
   trig2 = getent("courtyard_nw", "script_noteworthy");
   dudes = getaiarray("axis");
-  for (i = 0; i < dudes.size; i++) {
+  for(i = 0; i < dudes.size; i++) {
     if(dudes[i] istouching(trig) || dudes[i] istouching(trig2)) {
       dudes[i] thread flamedeath();
     }
   }
   trig = getent("courtyard_se", "script_noteworthy");
   dudes = getaiarray("axis");
-  for (i = 0; i < dudes.size; i++) {
+  for(i = 0; i < dudes.size; i++) {
     if(dudes[i] istouching(trig)) {
       dudes[i] thread maps\_banzai::banzai_force();
     }
@@ -908,8 +908,8 @@ destroy_building4() {
     show_damaged(4, 1);
     hide_intact(4, 1);
     playsoundatposition("courtyard_building_explo", (9800, -4376, 968));
-    dragons = getentarray("roof_building_4_dragons", "targetname");
-    for (i = 0; i < dragons.size; i++) {
+    dragons = getEntArray("roof_building_4_dragons", "targetname");
+    for(i = 0; i < dragons.size; i++) {
       dragons[i] hide();
     }
     level.building4_1_destroyed = true;
@@ -986,7 +986,7 @@ destroy_building7() {
   if(!isDefined(level.building7_destroyed)) {
     wait(13);
     earthquake(0.43, randomfloatrange(1, 2.5), (7712, -6384, 432), 4048);
-    playfx(level._effect["courtyard_ambient_roof"], (7712, -6384, 432));
+    playFX(level._effect["courtyard_ambient_roof"], (7712, -6384, 432));
     exploder(701);
     show_damaged(7, 1);
     hide_intact(7);
@@ -1011,7 +1011,7 @@ too_think() {
   level waittill("too_cleared");
   simple_spawn("too_friends_b", ::spawnfunc_too_friends);
   wait(.5);
-  ai = getentarray("too_friend", "script_noteworthy");
+  ai = getEntArray("too_friend", "script_noteworthy");
   array_thread(ai, ::too_advance);
 }
 
@@ -1019,7 +1019,7 @@ monitor_too_mg() {
   level endon("stop_too_mg");
   mg = getent("auto3946", "targetname");
   firing = false;
-  while (!firing) {
+  while(!firing) {
     wait(1);
     owner = mg getturretowner();
     if(isDefined(owner)) {
@@ -1062,7 +1062,7 @@ courtyard_spawn_bomber_test(iplane_spline, offset_vector, noFX) {
   plane_spline = [];
   plane_spline[0] = spline_array[randomint(spline_array.size)];
   x = 0;
-  while (1) {
+  while(1) {
     if(isDefined(plane_spline[x].target)) {
       target = getstruct(plane_spline[x].target, "targetname");
       target.origin = target.origin + (0, 0, 150);
@@ -1095,7 +1095,7 @@ courtyard_spawn_bomber_test(iplane_spline, offset_vector, noFX) {
 }
 
 drop_bombs(plane_spline, offset_vector) {
-  self playsound("final_bombers");
+  self playSound("final_bombers");
   self setplanegoalpos(plane_spline[1].origin + offset_vector, plane_spline[2].origin + offset_vector, plane_spline[3].origin + offset_vector, plane_spline[4].origin + offset_vector, plane_spline[5].origin + offset_vector, plane_spline[6].origin + offset_vector, 180);
   wait(12.15);
   self thread maps\_planeweapons::drop_bombs(2, .4, 1.2, 500);
@@ -1113,9 +1113,9 @@ setup_bomber() {
 
 attach_bombs_p51() {
   self.bomb = [];
-  for (i = 0; i < self.bomb_count; i++) {
-    self.bomb[i] = Spawn("script_model", (self.origin));
-    self.bomb[i] SetModel(level.plane_bomb_model[self.vehicletype]);
+  for(i = 0; i < self.bomb_count; i++) {
+    self.bomb[i] = spawn("script_model", (self.origin));
+    self.bomb[i] setModel(level.plane_bomb_model[self.vehicletype]);
     self.bomb[i].dropped = false;
     wait(.5);
     if(i == 0) {
@@ -1140,7 +1140,7 @@ building_l_spawners() {
 spawn_shadow_guys() {
   ent = getent("shadow_guy_test", "targetname");
   ent.count = 5;
-  for (i = 0; i < 6; i++) {
+  for(i = 0; i < 6; i++) {
     simple_spawn("shadow_guy_test", ::spawnfunc_shadow_runners);
     wait(randomfloatrange(.23, .7));
   }
@@ -1221,16 +1221,16 @@ exit_dialogue() {
 castle_front_fall() {
   level notify("stop_air_support");
   front = undefined;
-  pieces = getentarray("roof_building_4_front_dragon", "targetname");
-  for (i = 0; i < pieces.size; i++) {
+  pieces = getEntArray("roof_building_4_front_dragon", "targetname");
+  for(i = 0; i < pieces.size; i++) {
     if(pieces[i].model == "anim_okinawa_castlefront") {
       front = pieces[i];
     } else {
       pieces[i] delete();
     }
   }
-  front playsound("courtyard_building_collapse");
-  playfx(level._effect["a_shuri_collapse_gate"], front.origin);
+  front playSound("courtyard_building_collapse");
+  playFX(level._effect["a_shuri_collapse_gate"], front.origin);
   front useanimtree(#animtree);
   front.animname = "castle";
   PlayRumbleOnPosition("oki3_castle_fall", front.origin);
@@ -1241,14 +1241,14 @@ castle_front_fall() {
 
 monitor_mg_usage() {
   mg = getent("courtyard_mg", "targetname");
-  while (1) {
+  while(1) {
     owner = undefined;
-    while (!isDefined(owner)) {
+    while(!isDefined(owner)) {
       owner = mg getturretowner();
       wait(.1);
     }
     flag_set("mg_mounted");
-    while (isDefined(owner)) {
+    while(isDefined(owner)) {
       owner = mg getturretowner();
       wait(.1);
     }
@@ -1259,7 +1259,7 @@ monitor_mg_usage() {
 
 grenade_watcher() {
   level endon("stop_grenade_watch");
-  while (1) {
+  while(1) {
     if(flag("mg_mounted")) {
       enemy = getaiarray("axis");
       array_thread(enemy, ::remove_grenades);
@@ -1299,8 +1299,8 @@ courtyard_dragon_falls() {
   broken_dragon hide();
   broken_dragon notsolid();
   level waittill("dragon falls");
-  dragon = getentarray("courtyard_dragon", "targetname");
-  for (i = 0; i < dragon.size; i++) {
+  dragon = getEntArray("courtyard_dragon", "targetname");
+  for(i = 0; i < dragon.size; i++) {
     if(dragon[i].model == "static_okinawa_dragonpost") {
       dragon[i] moveto((7278, -4068, 54), 1);
       dragon[i] rotateto((90, 122.462, 122.461), .8);
@@ -1315,7 +1315,7 @@ courtyard_dragon_falls() {
 
 courtyard_mg_stuff() {
   mg = getent("courtyard_mg2", "targetname");
-  while (1) {
+  while(1) {
     guy = mg getturretowner();
     if(!isDefined(guy)) {
       get_closest_2_mg(mg);
@@ -1326,7 +1326,7 @@ courtyard_mg_stuff() {
 
 get_closest_2_mg(mg) {
   ai = getaiarray("axis");
-  for (i = 0; i < ai.size; i++) {
+  for(i = 0; i < ai.size; i++) {
     if(distance(ai[i].origin, mg.origin) < 128) {
       ai[i] useturret(mg);
       break;
@@ -1342,12 +1342,12 @@ fake_surrender_guys() {
   level.sarge thread sarge_waittill_death();
   level.polonsky thread sarge_waittill_death();
   axis = getaiarray("axis");
-  for (i = 0; i < axis.size; i++) {
+  for(i = 0; i < axis.size; i++) {
     axis[i] bloody_death();
   }
   spawners = getspawnerarray();
   count = 0;
-  for (i = 0; i < spawners.size; i++) {
+  for(i = 0; i < spawners.size; i++) {
     if(isDefined(spawners[i].script_spiderhole)) {
       spawners[i] delete();
       count++;
@@ -1381,14 +1381,14 @@ fake_surrender_guys() {
     }
   }
   count = 0;
-  volumes = getentarray("info_volume", "classname");
-  rads = getentarray("trigger_radius", "classname");
-  trigs = getentarray("trigger_multiple", "classname");
-  mods = getentarray("script_model", "classname");
+  volumes = getEntArray("info_volume", "classname");
+  rads = getEntArray("trigger_radius", "classname");
+  trigs = getEntArray("trigger_multiple", "classname");
+  mods = getEntArray("script_model", "classname");
   com1 = array_combine(volumes, rads);
   com2 = array_combine(trigs, mods);
   ents = array_combine(com1, com2);
-  for (i = 0; i < ents.size; i++) {
+  for(i = 0; i < ents.size; i++) {
     if(isDefined(ents[i].script_string) && ents[i].script_string == "delete_me") {
       ents[i] delete();
       count++;
@@ -1396,11 +1396,11 @@ fake_surrender_guys() {
   }
   wait(4);
   guys = getaiarray("axis");
-  for (i = 0; i < guys.size; i++) {
+  for(i = 0; i < guys.size; i++) {
     guys[i] bloody_death();
   }
   fakers = simple_spawn("fake_surrender_guy");
-  for (i = 0; i < fakers.size; i++) {
+  for(i = 0; i < fakers.size; i++) {
     fakers[i].animname = fakers[i].script_noteworthy;
     if(fakers[i].animname == "surrender_2") {
       level.fakers_dialog_guy = fakers[i];
@@ -1429,7 +1429,7 @@ fake_surrender_guys() {
       level.last_hero = level.sarge;
       setmusicstate("POLONSKY_DIED");
       players = get_players();
-      for (i = 0; i < players.size; i++) {
+      for(i = 0; i < players.size; i++) {
         players[i] GiveAchievement("OKI3_ACHIEVEMENT_ANGEL");
       }
     }
@@ -1465,7 +1465,7 @@ fake_surrender_guys() {
   getent("enter_courtyard", "targetname") notify("trigger");
   level.last_hero.grenadeawareness = 1;
   level.last_hero.ignoreall = false;
-  level.last_hero setcandamage(true);
+  level.last_hero setCanDamage(true);
   level.last_hero.goalradius = 512;
   warp_players_to_courtyard();
   autosave_by_name("courtyard_death");
@@ -1481,14 +1481,14 @@ warp_players_to_courtyard() {
   spots = getstructarray("courtyard_players", "targetname");
   players = get_players();
   players_2_warp = [];
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(players[i] istouching(vol1) || players[i] istouching(vol2)) {
       continue;
     } else {
       players_2_warp[players_2_warp.size] = players[i];
     }
   }
-  for (i = 0; i < players_2_warp.size; i++) {
+  for(i = 0; i < players_2_warp.size; i++) {
     players_2_warp[i] thread warp_player(spots[i]);
   }
 }
@@ -1499,7 +1499,7 @@ start_courtyard_ambush(wait_time) {
 }
 
 sarge_waittill_death() {
-  while (isDefined(self)) {
+  while(isDefined(self)) {
     level.death_org = self.origin;
     wait_network_frame();
   }
@@ -1549,7 +1549,7 @@ do_death_dialogue(initial_dialogue) {
 
 surrender_guy_dialog_loop() {
   self endon("death");
-  while (!isDefined(level.stop_surrender_dialog)) {
+  while(!isDefined(level.stop_surrender_dialog)) {
     wait(randomfloatrange(.5, 2.5));
     self animscripts\face::SaySpecificDialogue(undefined, level.scr_sound["surrender_2"]["dont_shoot" + randomint(10)], 1.0, "dialogue_done");
     self waittill("dialogue_done");
@@ -1558,7 +1558,7 @@ surrender_guy_dialog_loop() {
 
 feign_death() {
   guys = simple_spawn("feign_death_guys");
-  for (i = 0; i < guys.size; i++) {
+  for(i = 0; i < guys.size; i++) {
     anim_org = getnode("feign_death_org_" + i, "targetname");
     if(!isDefined(anim_org)) {
       guys[i] delete();
@@ -1581,7 +1581,7 @@ feign_death() {
 
 feigners_ambush(guys) {
   level waittill("stop_feign");
-  for (i = 0; i < guys.size; i++) {
+  for(i = 0; i < guys.size; i++) {
     if(isAlive(guys[i])) {
       if(i == 5 || i == 3) {
         guys[i] notify("stop_feigning");
@@ -1589,7 +1589,7 @@ feigners_ambush(guys) {
     }
   }
   wait(7);
-  for (i = 0; i < guys.size; i++) {
+  for(i = 0; i < guys.size; i++) {
     if(isAlive(guys[i])) {
       guys[i] notify("stop_feigning");
     }
@@ -1666,13 +1666,13 @@ kick_courtyard_door() {
   guys[1].grenadeawareness = 0;
   guys[0].ignoreall = true;
   guys[1].ignoreall = true;
-  guys[1] setcandamage(false);
-  guys[0] setcandamage(false);
+  guys[1] setCanDamage(false);
+  guys[0] setCanDamage(false);
   level thread heros_getto_position();
   level waittill_multiple("sarge_ready", "polonsky_ready");
   surrender_node = getnode("courtyard_anim", "targetname");
-  surrender_guys = getentarray("surrender_guy", "script_noteworthy");
-  for (i = 0; i < surrender_guys.size; i++) {
+  surrender_guys = getEntArray("surrender_guy", "script_noteworthy");
+  for(i = 0; i < surrender_guys.size; i++) {
     surrender_guys[i] notify("stop_surrender");
     guys[guys.size] = surrender_guys[i];
   }
@@ -1716,7 +1716,7 @@ courtyard_death_scene() {
 
 open_courtyard_door(guy) {
   door = getent("upstairs_door", "targetname");
-  door playsound("door_kick");
+  door playSound("door_kick");
   door connectpaths();
   wait_network_frame();
   door rotateyaw(-105, 1, 0.25, 0.25);
@@ -1731,8 +1731,8 @@ surrender_death(guy) {
   guys = [];
   if(!isDefined(level.sarge_dead)) {
     level.sarge notify("_disable_reinforcement");
-    surrender_guys = getentarray("surrender_guy", "script_noteworthy");
-    for (i = 0; i < surrender_guys.size; i++) {
+    surrender_guys = getEntArray("surrender_guy", "script_noteworthy");
+    for(i = 0; i < surrender_guys.size; i++) {
       if(isDefined(surrender_guys[i]) && isDefined(surrender_guys[i].animname) && surrender_guys[i].animname == "surrender_3" && isAlive(surrender_guys[i])) {
         surrender_guys[i].deathanim = % ch_oki3_outro_japanese3_dead;
         surrender_guys[i].nodeathragdoll = true;
@@ -1752,7 +1752,7 @@ surrender_death(guy) {
     surrender_node thread maps\_anim::anim_single(guys, "fake_surrender_death");
     level.sarge thread play_sarge_death(surrender_node);
     level.sarge magicgrenadetype("fraggrenade", org, (0, 0, -1), .05);
-    for (i = 0; i < guys.size; i++) {
+    for(i = 0; i < guys.size; i++) {
       guys[i].allowdeath = true;
     }
     level.sarge_dead = true;
@@ -1771,7 +1771,7 @@ play_sarge_death(animnode) {
   self.nodeathragdoll = true;
   self.allowdeath = true;
   self stop_magic_bullet_shield();
-  self SetCanDamage(true);
+  self setCanDamage(true);
   self.health = 1;
   self.a.nodeath = true;
   self DoDamage(self.health + 1000, self.origin);
@@ -1782,8 +1782,8 @@ handle_fake_surrender(guy) {
   level thread enable_player_weapons();
   level thread roebuck_attackers_think();
   level.stop_surrender_dialog = true;
-  surrender_guys = getentarray("surrender_guy", "script_noteworthy");
-  for (i = 0; i < surrender_guys.size; i++) {
+  surrender_guys = getEntArray("surrender_guy", "script_noteworthy");
+  for(i = 0; i < surrender_guys.size; i++) {
     if(surrender_guys[i].animname == "surrender_3") {
       surrender_guys[i] thread roebuck_attacker1_think();
     }
@@ -1840,7 +1840,7 @@ polonsky_attacker_think() {
     level.polonsky.health = 1;
     self.health = 1;
     level.polonsky.allowdeath = false;
-    level.polonsky setcandamage(true);
+    level.polonsky setCanDamage(true);
     level.polonsky.nodeathragdoll = true;
     level.polonsky.deathanim = level.scr_anim["polonsky"]["fake_surrender_death"];
     level.polonsky notify("_disable_reinforcement");
@@ -1872,8 +1872,8 @@ kill_sarge_if_me_is_killed() {
   if(!isDefined(level.sarge_dead)) {
     level.attacker_shot = true;
     level.sarge notify("_disable_reinforcement");
-    surrender_guys = getentarray("surrender_guy", "script_noteworthy");
-    for (i = 0; i < surrender_guys.size; i++) {
+    surrender_guys = getEntArray("surrender_guy", "script_noteworthy");
+    for(i = 0; i < surrender_guys.size; i++) {
       if(isDefined(surrender_guys[i]) && isDefined(surrender_guys[i].animname) && surrender_guys[i].animname == "surrender_3" && isAlive(surrender_guys[i])) {
         surrender_guys[i].deathanim = % ch_oki3_outro_japanese3_dead;
         surrender_guys[i].nodeathragdoll = true;
@@ -1893,7 +1893,7 @@ kill_sarge_if_me_is_killed() {
     level.sarge thread play_sarge_death(surrender_node);
     surrender_node thread maps\_anim::anim_single(guys, "fake_surrender_death");
     level.sarge magicgrenadetype("fraggrenade", org, (0, 0, -1), .05);
-    for (i = 0; i < guys.size; i++) {
+    for(i = 0; i < guys.size; i++) {
       guys[i].allowdeath = true;
     }
     level notify("polonsky_saved");
@@ -1909,7 +1909,7 @@ kill_sarge_if_me_is_killed() {
 spawn_banzai_wave(location, vertical) {
   spawners = GetSpawnerArray();
   spawner = [];
-  for (i = 0; i < spawners.size; i++) {
+  for(i = 0; i < spawners.size; i++) {
     if(isDefined(spawners[i].targetname) && spawners[i].targetname == "feign_death_guys") {
       spawner[spawner.size] = spawners[i];
     }
@@ -1921,7 +1921,7 @@ spawn_banzai_wave(location, vertical) {
   } else if(size >= wave_size) {
     wave_size = 0;
   }
-  for (i = 0; i < wave_size; i++) {
+  for(i = 0; i < wave_size; i++) {
     spawner[i] add_spawn_function(::banzai_wave_spawnfunc);
     spawner[i].origin = location + (randomintrange(-50, 50), randomintrange(-50, 50), 0);
     spawner[i].count = 1;
@@ -1940,7 +1940,7 @@ banzai_wave_spawnfunc() {
 
 airstrike_radio_dialogue() {
   level endon("stop_air_support");
-  while (1) {
+  while(1) {
     level waittill("airstrike_used", target);
     switch (target) {
       case "building_1":
@@ -1974,15 +1974,15 @@ magic_grenades_from_hell(time) {
   if(!isDefined(time)) {
     time = 180;
   }
-  while (k < time) {
+  while(k < time) {
     wait(1);
     k++;
   }
   x = 0;
   time = 10;
-  while (1) {
+  while(1) {
     players = get_players();
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       players[i] MagicGrenadeType("type97_frag", players[i].origin + (0, 0, 150), (0, 0, -150), 3);
     }
     wait(time);

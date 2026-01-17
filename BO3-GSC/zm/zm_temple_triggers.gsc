@@ -23,20 +23,20 @@ function main() {
 }
 
 function init_code_triggers() {
-  triggers = getentarray("code_trigger", "targetname");
-  array::thread_all(triggers, & trigger_code);
+  triggers = getEntArray("code_trigger", "targetname");
+  array::thread_all(triggers, &trigger_code);
 }
 
 function trigger_code() {
   code = self.script_noteworthy;
-  if(!isdefined(code)) {
+  if(!isDefined(code)) {
     code = "DPAD_UP DPAD_UP DPAD_DOWN DPAD_DOWN DPAD_LEFT DPAD_RIGHT DPAD_LEFT DPAD_RIGHT BUTTON_B BUTTON_A";
   }
-  if(!isdefined(self.script_string)) {
+  if(!isDefined(self.script_string)) {
     self.script_string = "cash";
   }
   self.players = [];
-  while (true) {
+  while(true) {
     self waittill("trigger", who);
     if(is_in_array(self.players, who)) {
       continue;
@@ -46,7 +46,7 @@ function trigger_code() {
 }
 
 function watch_for_code_touching_trigger(code, trigger) {
-  if(!isdefined(trigger.players)) {
+  if(!isDefined(trigger.players)) {
     trigger.players = [];
   } else if(!isarray(trigger.players)) {
     trigger.players = array(trigger.players);
@@ -73,13 +73,13 @@ function is_in_array(array, item) {
 }
 
 function array_remove(array, object) {
-  if(!isdefined(array) && !isdefined(object)) {
+  if(!isDefined(array) && !isDefined(object)) {
     return;
   }
   new_array = [];
   foreach(item in array) {
     if(item != object) {
-      if(!isdefined(new_array)) {
+      if(!isDefined(new_array)) {
         new_array = [];
       } else if(!isarray(new_array)) {
         new_array = array(new_array);
@@ -91,13 +91,13 @@ function array_remove(array, object) {
 }
 
 function array_removeundefined(array) {
-  if(!isdefined(array)) {
+  if(!isDefined(array)) {
     return;
   }
   new_array = [];
   foreach(item in array) {
-    if(isdefined(item)) {
-      if(!isdefined(new_array)) {
+    if(isDefined(item)) {
+      if(!isDefined(new_array)) {
         new_array = [];
       } else if(!isarray(new_array)) {
         new_array = array(new_array);
@@ -120,7 +120,7 @@ function code_trigger_activated(who) {
 
 function touching_trigger(trigger) {
   self endon("code_trigger_end");
-  while (self istouching(trigger)) {
+  while(self istouching(trigger)) {
     wait(0.1);
   }
   self notify("stopped_touching_trigger");
@@ -129,8 +129,8 @@ function touching_trigger(trigger) {
 function watch_for_code(code) {
   self endon("code_trigger_end");
   codes = strtok(code, " ");
-  while (true) {
-    for (i = 0; i < codes.size; i++) {
+  while(true) {
+    for(i = 0; i < codes.size; i++) {
       button = codes[i];
       if(!self button_pressed(button, 0.3)) {
         break;
@@ -149,7 +149,7 @@ function watch_for_code(code) {
 
 function button_not_pressed(button, time) {
   endtime = gettime() + (time * 1000);
-  while (gettime() < endtime) {
+  while(gettime() < endtime) {
     if(!self buttonpressed(button)) {
       return true;
     }
@@ -160,7 +160,7 @@ function button_not_pressed(button, time) {
 
 function button_pressed(button, time) {
   endtime = gettime() + (time * 1000);
-  while (gettime() < endtime) {
+  while(gettime() < endtime) {
     if(self buttonpressed(button)) {
       return true;
     }
@@ -171,10 +171,10 @@ function button_pressed(button, time) {
 
 function init_slow_trigger() {
   level flag::wait_till("initial_players_connected");
-  slowtriggers = getentarray("slow_trigger", "targetname");
-  for (t = 0; t < slowtriggers.size; t++) {
+  slowtriggers = getEntArray("slow_trigger", "targetname");
+  for(t = 0; t < slowtriggers.size; t++) {
     trig = slowtriggers[t];
-    if(!isdefined(trig.script_float)) {
+    if(!isDefined(trig.script_float)) {
       trig.script_float = 0.5;
     }
     trig.inturp_time = 1;
@@ -184,19 +184,19 @@ function init_slow_trigger() {
 }
 
 function trigger_slow_touched_wait() {
-  while (true) {
+  while(true) {
     self waittill("trigger", player);
     player notify("enter_slowtrigger");
-    self trigger::function_d1278be0(player, & trigger_slow_ent, & trigger_unslow_ent);
+    self trigger::function_d1278be0(player, &trigger_slow_ent, &trigger_unslow_ent);
     wait(0.1);
   }
 }
 
 function trigger_slow_ent(player, endon_condition) {
   player endon(endon_condition);
-  if(isdefined(player)) {
+  if(isDefined(player)) {
     prevtime = gettime();
-    while (player.movespeedscale > self.script_float) {
+    while(player.movespeedscale > self.script_float) {
       wait(0.05);
       delta = gettime() - prevtime;
       player.movespeedscale = player.movespeedscale - ((delta / 1000) * self.inturp_rate);
@@ -213,9 +213,9 @@ function trigger_slow_ent(player, endon_condition) {
 
 function trigger_unslow_ent(player) {
   player endon("enter_slowtrigger");
-  if(isdefined(player)) {
+  if(isDefined(player)) {
     prevtime = gettime();
-    while (player.movespeedscale < 1) {
+    while(player.movespeedscale < 1) {
       wait(0.05);
       delta = gettime() - prevtime;
       player.movespeedscale = player.movespeedscale + ((delta / 1000) * self.inturp_rate);
@@ -230,13 +230,13 @@ function trigger_unslow_ent(player) {
 }
 
 function trigger_corpse() {
-  if(!isdefined(self.script_string)) {
+  if(!isDefined(self.script_string)) {
     self.script_string = "";
   }
-  while (true) {
+  while(true) {
     box(self.origin, self.mins, self.maxs, 0, (1, 0, 0));
     corpses = getcorpsearray();
-    for (i = 0; i < corpses.size; i++) {
+    for(i = 0; i < corpses.size; i++) {
       corpse = corpses[i];
       box(corpse.orign, corpse.mins, corpse.maxs, 0, (1, 1, 0));
       if(corpse istouching(self)) {
@@ -253,13 +253,13 @@ function trigger_corpse_activated() {
 }
 
 function init_water_drop_triggers() {
-  triggers = getentarray("water_drop_trigger", "script_noteworthy");
-  for (i = 0; i < triggers.size; i++) {
+  triggers = getEntArray("water_drop_trigger", "script_noteworthy");
+  for(i = 0; i < triggers.size; i++) {
     trig = triggers[i];
     trig.water_drop_time = 0.5;
     trig.waterdrops = 1;
     trig.watersheeting = 1;
-    if(isdefined(trig.script_string)) {
+    if(isDefined(trig.script_string)) {
       if(trig.script_string == "sheetingonly") {
         trig.waterdrops = 0;
       } else if(trig.script_string == "dropsonly") {
@@ -273,24 +273,24 @@ function init_water_drop_triggers() {
 function water_drop_trigger_think() {
   level flag::wait_till("initial_players_connected");
   wait(1);
-  if(isdefined(self.script_flag)) {
+  if(isDefined(self.script_flag)) {
     level flag::wait_till(self.script_flag);
   }
-  if(isdefined(self.script_float)) {
+  if(isDefined(self.script_float)) {
     wait(self.script_float);
   }
-  while (true) {
+  while(true) {
     self waittill("trigger", who);
     if(isplayer(who)) {
-      self trigger::function_d1278be0(who, & water_drop_trig_entered, & water_drop_trig_exit);
-    } else if(isdefined(who.water_trigger_func)) {
+      self trigger::function_d1278be0(who, &water_drop_trig_entered, &water_drop_trig_exit);
+    } else if(isDefined(who.water_trigger_func)) {
       who thread[[who.water_trigger_func]](self);
     }
   }
 }
 
 function water_drop_trig_entered(player, endon_string) {
-  if(isdefined(endon_string)) {
+  if(isDefined(endon_string)) {
     player endon(endon_string);
   }
   player notify("water_drop_trig_enter");
@@ -300,14 +300,14 @@ function water_drop_trig_entered(player, endon_string) {
   if(player.sessionstate == "spectator") {
     return;
   }
-  if(!isdefined(player.water_drop_ents)) {
+  if(!isDefined(player.water_drop_ents)) {
     player.water_drop_ents = [];
   }
-  if(isdefined(self.script_sound)) {
-    player playsound(self.script_sound);
+  if(isDefined(self.script_sound)) {
+    player playSound(self.script_sound);
   }
   if(self.waterdrops) {
-    if(!isdefined(player.water_drop_ents)) {
+    if(!isDefined(player.water_drop_ents)) {
       player.water_drop_ents = [];
     } else if(!isarray(player.water_drop_ents)) {
       player.water_drop_ents = array(player.water_drop_ents);
@@ -334,7 +334,7 @@ function function_4dedd2e(player) {
 }
 
 function water_drop_trig_exit(player) {
-  if(!isdefined(player.water_drop_ents)) {
+  if(!isDefined(player.water_drop_ents)) {
     player.water_drop_ents = [];
   }
   if(self.waterdrops) {
@@ -370,30 +370,30 @@ function player_get_num_water_drops() {
 
 function init_code_structs() {
   structs = struct::get_array("code_struct", "targetname");
-  array::thread_all(structs, & structs_code);
+  array::thread_all(structs, &structs_code);
 }
 
 function structs_code() {
   code = self.script_noteworthy;
-  if(!isdefined(code)) {
+  if(!isDefined(code)) {
     code = "DPAD_UP DPAD_DOWN DPAD_LEFT DPAD_RIGHT BUTTON_B BUTTON_A";
   }
   self.codes = strtok(code, " ");
-  if(!isdefined(self.script_string)) {
+  if(!isDefined(self.script_string)) {
     self.script_string = "cash";
   }
   self.reward = self.script_string;
-  if(!isdefined(self.radius)) {
+  if(!isDefined(self.radius)) {
     self.radius = 32;
   }
   self.radiussq = self.radius * self.radius;
   playersinradius = [];
-  while (true) {
+  while(true) {
     players = getplayers();
-    for (i = playersinradius.size - 1; i >= 0; i--) {
+    for(i = playersinradius.size - 1; i >= 0; i--) {
       player = playersinradius[i];
       if(!self is_player_in_radius(player)) {
-        if(isdefined(player)) {
+        if(isDefined(player)) {
           playersinradius = array_remove(playersinradius, player);
           self notify("end_code_struct");
         } else {
@@ -402,7 +402,7 @@ function structs_code() {
       }
       players = array_remove(players, player);
     }
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       player = players[i];
       if(self is_player_in_radius(player)) {
         self thread code_entry(player);
@@ -417,8 +417,8 @@ function code_entry(player) {
   self endon("end_code_struct");
   player endon("death");
   player endon("disconnect");
-  while (true) {
-    for (i = 0; i < self.codes.size; i++) {
+  while(true) {
+    for(i = 0; i < self.codes.size; i++) {
       button = self.codes[i];
       if(!player button_pressed(button, 0.3)) {
         break;

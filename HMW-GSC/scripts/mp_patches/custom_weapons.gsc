@@ -34,7 +34,7 @@ is_perk_actually_weapon(perk) {
 applyloadout() {
   var_0 = self.loadout;
 
-  if(!isdefined(self.loadout)) {
+  if(!isDefined(self.loadout)) {
     return;
   }
   self.loadout = undefined;
@@ -70,7 +70,7 @@ applyloadout() {
 
   self.loadoutmelee = var_0.meleeweapon;
 
-  if(isdefined(var_0.juggernaut) && var_0.juggernaut) {
+  if(isDefined(var_0.juggernaut) && var_0.juggernaut) {
     self.health = self.maxhealth;
     thread maps\mp\_utility::recipeclassapplyjuggernaut(maps\mp\_utility::isjuggernaut());
     self.isjuggernaut = 1;
@@ -87,7 +87,7 @@ applyloadout() {
     // Liam - 21/02/2024 onemanarmy implementation
     can_give_secondary = true;
 
-    if(isdefined(var_0.perks) && var_0.perks.size > 0) {
+    if(isDefined(var_0.perks) && var_0.perks.size > 0) {
       if(var_0.perks[0] == "specialty_onemanarmy" || var_0.perks[0] == "specialty_omaquickchange") {
         can_give_secondary = false;
 
@@ -118,7 +118,7 @@ applyloadout() {
   } else
     self setlethalweapon(var_0.equipment);
 
-  if(isdefined(var_0.equipment) && var_0.equipment != "specialty_null" &&
+  if(isDefined(var_0.equipment) && var_0.equipment != "specialty_null" &&
     (is_perk_actually_weapon(var_0.equipment) && self hasweapon(var_0.equipment))) {
     self setweaponammoclip(var_0.equipment, weaponStartAmmo(var_0.equipment));
   } else
@@ -176,19 +176,19 @@ applyloadout() {
   }
 
   if(!issubstr(var_0.class, "juggernaut")) {
-    if(isdefined(self.lastclass) && self.lastclass != "" && self.lastclass != self.class)
+    if(isDefined(self.lastclass) && self.lastclass != "" && self.lastclass != self.class)
       self notify("changed_class");
 
     self.pers["lastClass"] = self.class;
     self.lastclass = self.class;
   }
 
-  if(isdefined(self.gamemode_chosenclass)) {
+  if(isDefined(self.gamemode_chosenclass)) {
     self.pers["class"] = self.gamemode_chosenclass;
     self.pers["lastClass"] = self.gamemode_chosenclass;
     self.class = self.gamemode_chosenclass;
 
-    if(!isdefined(self.gamemode_carrierclass))
+    if(!isDefined(self.gamemode_carrierclass))
       self.lastclass = self.gamemode_chosenclass;
 
     self.gamemode_chosenclass = undefined;
@@ -196,15 +196,15 @@ applyloadout() {
 
   self.gamemode_carrierclass = undefined;
 
-  if(!isdefined(level.iszombiegame) || !level.iszombiegame) {
-    if(!isdefined(self.costume)) {
+  if(!isDefined(level.iszombiegame) || !level.iszombiegame) {
+    if(!isDefined(self.costume)) {
       if(isplayer(self))
         self.costume = maps\mp\gametypes\_class::cao_getactivecostume();
       else if(isagent(self) && self.agent_type == "player")
         self.costume = maps\mp\gametypes\_teams::getdefaultcostume();
     }
 
-    if(maps\mp\_utility::invirtuallobby() && isdefined(level.vl_cac_getfactionteam) && isdefined(level.vl_cac_getfactionenvironment)) {
+    if(maps\mp\_utility::invirtuallobby() && isDefined(level.vl_cac_getfactionteam) && isDefined(level.vl_cac_getfactionenvironment)) {
       var_7 = [
         [level.vl_cac_getfactionteam]
       ]();
@@ -228,7 +228,7 @@ applyloadout() {
   loadoutDeathStreak = var_0.deathstreak;
 
   // only give the deathstreak for the initial spawn for this life.
-  if(isdefined(loadoutDeathStreak) && loadoutDeathStreak != "specialty_null" && gettime() == self.spawnTime) {
+  if(isDefined(loadoutDeathStreak) && loadoutDeathStreak != "specialty_null" && gettime() == self.spawnTime) {
     if(loadoutDeathStreak == "specialty_copycat")
       deathVal = 3;
     else if(loadoutDeathStreak == "specialty_combathigh")
@@ -239,7 +239,7 @@ applyloadout() {
     if(self maps\mp\_utility::_hasPerk("specialty_rollover"))
       deathVal -= 1;
 
-    if(isdefined(self.pers["cur_death_streak"]) && self.pers["cur_death_streak"] >= deathVal) {
+    if(isDefined(self.pers["cur_death_streak"]) && self.pers["cur_death_streak"] >= deathVal) {
       self thread maps\mp\_utility::givePerk(loadoutDeathStreak);
     }
   }
@@ -253,7 +253,7 @@ table_getweaponfurniturekit(var_0, var_1, var_2) {
 }
 
 isvalidattachkit(var_0, var_1, var_2) {
-  if(!isdefined(var_0) || var_0 == "" || var_0 == "none")
+  if(!isDefined(var_0) || var_0 == "" || var_0 == "none")
     return 1;
 
   var_3 = _func_304("mp/attachkits.csv", 1, var_0);
@@ -333,10 +333,10 @@ isvalidattachkit(var_0, var_1, var_2) {
 }
 
 getloadout(var_0, var_1, var_2, var_3, var_4) {
-  if(!isdefined(var_3))
+  if(!isDefined(var_3))
     var_3 = 1;
 
-  if(!isdefined(var_2))
+  if(!isDefined(var_2))
     var_2 = 1;
 
   var_5 = 0;
@@ -357,7 +357,7 @@ getloadout(var_0, var_1, var_2, var_3, var_4) {
 
   var_14 = [];
 
-  if(isdefined(self.pers["copyCatLoadout"]) && self.pers["copyCatLoadout"]["inUse"] && var_2) {
+  if(isDefined(self.pers["copyCatLoadout"]) && self.pers["copyCatLoadout"]["inUse"] && var_2) {
     var_10 = 1;
     var_9 = 0;
     var_6 = maps\mp\_utility::getclassindex("copycat");
@@ -375,7 +375,7 @@ getloadout(var_0, var_1, var_2, var_3, var_4) {
     var_25 = var_14["loadoutEquipment"];
     var_26 = var_14["loadoutOffhand"];
 
-    for (var_27 = 0; var_27 < 3; var_27++)
+    for(var_27 = 0; var_27 < 3; var_27++)
       var_11[var_27] = var_14["loadoutPerks"][var_27];
 
     var_28 = var_14["loadoutMelee"];
@@ -409,7 +409,7 @@ getloadout(var_0, var_1, var_2, var_3, var_4) {
     var_25 = getmatchrulesdata("defaultClasses", var_13, "defaultClass", var_29, "class", "equipment", 0);
     var_26 = getmatchrulesdata("defaultClasses", var_13, "defaultClass", var_29, "class", "equipment", 1);
 
-    for (var_27 = 0; var_27 < 3; var_27++)
+    for(var_27 = 0; var_27 < 3; var_27++)
       var_11[var_27] = getmatchrulesdata("defaultClasses", var_13, "defaultClass", var_29, "class", "perkSlots", var_27);
 
     var_28 = getmatchrulesdata("defaultClasses", var_13, "defaultClass", var_29, "class", "meleeWeapon");
@@ -446,16 +446,14 @@ getloadout(var_0, var_1, var_2, var_3, var_4) {
     var_25 = maps\mp\gametypes\_class::cac_getequipment(var_6, 0);
     var_26 = maps\mp\gametypes\_class::cac_getequipment(var_6, 1);
 
-    for (var_27 = 0; var_27 < 3; var_27++)
+    for(var_27 = 0; var_27 < 3; var_27++)
       var_11[var_27] = maps\mp\gametypes\_class::cac_getperk(var_6, var_27);
 
     var_28 = maps\mp\gametypes\_class::cac_getmeleeweapon(var_6);
   } else if(issubstr(var_1, "lobby")) {
     var_6 = maps\mp\_utility::getclassindex(var_1);
     var_32 = maps\mp\_utility::cac_getcustomclassloc();
-    var_33 = [
-      [level.vl_loadoutfunc]
-    ](var_32, var_6);
+    var_33 = [[level.vl_loadoutfunc]](var_32, var_6);
     var_15 = var_33["primary"];
     var_16 = var_33["primaryAttachKit"];
     var_17 = var_33["primaryFurnitureKit"];
@@ -469,7 +467,7 @@ getloadout(var_0, var_1, var_2, var_3, var_4) {
     var_25 = var_33["equipment"];
     var_26 = var_33["offhand"];
 
-    for (var_27 = 0; var_27 < 3; var_27++)
+    for(var_27 = 0; var_27 < 3; var_27++)
       var_11[var_27] = var_33["perk" + var_27];
 
     var_28 = var_33["meleeWeapon"];
@@ -491,19 +489,17 @@ getloadout(var_0, var_1, var_2, var_3, var_4) {
     if(var_26 == "specialty_null")
       var_26 = "none";
 
-    for (var_27 = 0; var_27 < 3; var_27++)
+    for(var_27 = 0; var_27 < 3; var_27++)
       var_11[var_27] = var_34["loadoutPerks"][var_27];
 
     var_28 = var_34["loadoutMelee"];
   } else if(var_1 == "callback") {
-    if(!isdefined(self.classcallback))
+    if(!isDefined(self.classcallback))
       common_scripts\utility::error("self.classCallback function reference required for class 'callback'");
 
-    var_35 = [
-      [self.classcallback]
-    ](var_4);
+    var_35 = [[self.classcallback]](var_4);
 
-    if(!isdefined(var_35))
+    if(!isDefined(var_35))
       common_scripts\utility::error("array required from self.classCallback for class 'callback'");
 
     var_15 = var_35["loadoutPrimary"];
@@ -546,7 +542,7 @@ getloadout(var_0, var_1, var_2, var_3, var_4) {
   var_37 = issubstr(var_1, "recipe");
   var_38 = 0;
 
-  if(!var_12 && !var_37 && !level.oldschool && !(isdefined(self.pers["copyCatLoadout"]) && self.pers["copyCatLoadout"]["inUse"] && var_2)) {
+  if(!var_12 && !var_37 && !level.oldschool && !(isDefined(self.pers["copyCatLoadout"]) && self.pers["copyCatLoadout"]["inUse"] && var_2)) {
     if(!isvalidprimary(var_15, 1) || level.rankedmatch && var_36 && !var_38 && !self isitemunlocked(var_15)) {
       var_15 = maps\mp\gametypes\_class::table_getweapon(level.classtablename, 10, 0);
       var_18 = "none";
@@ -602,7 +598,7 @@ getloadout(var_0, var_1, var_2, var_3, var_4) {
       var_28 = "none";
   }
 
-  for (var_27 = 0; var_27 < 3; var_27++) {
+  for(var_27 = 0; var_27 < 3; var_27++) {
     if(var_11[var_27] == "specialty_null") {
       continue;
     }
@@ -660,7 +656,7 @@ getloadout(var_0, var_1, var_2, var_3, var_4) {
   else
     var_46 = self getplayerdata(common_scripts\utility::getstatsgroup_common(), "characterCamoIndex");
 
-  var_33 = spawnstruct();
+  var_33 = spawnStruct();
   var_33.class = var_1;
   var_33.class_num = var_6;
   var_33.teamname = var_13;
@@ -695,7 +691,7 @@ getloadout(var_0, var_1, var_2, var_3, var_4) {
   var_33._id_A7EC = var_44;
   var_33._id_A7ED = var_46;
 
-  if(maps\mp\_utility::is_true(level.movecompareactive) && isdefined(level.movecompareloadoutfunc))
+  if(maps\mp\_utility::is_true(level.movecompareactive) && isDefined(level.movecompareloadoutfunc))
     var_33 = self[[level.movecompareloadoutfunc]]();
 
   return var_33;
@@ -740,7 +736,7 @@ getmatchrulesspecialclass(var_0, var_1) {
   var_2["loadoutEquipment"] = getmatchrulesdata("defaultClasses", var_0, "defaultClass", var_1, "class", "equipment", 0);
   var_2["loadoutOffhand"] = getmatchrulesdata("defaultClasses", var_0, "defaultClass", var_1, "class", "equipment", 1);
 
-  for (var_5 = 0; var_5 < 3; var_5++)
+  for(var_5 = 0; var_5 < 3; var_5++)
     var_2["loadoutPerks"][var_5] = getmatchrulesdata("defaultClasses", var_0, "defaultClass", var_1, "class", "perkSlots", var_5);
 
   var_2["loadoutMelee"] = "none";
@@ -807,7 +803,7 @@ isvalidcamo(var_0, var_1) {
 find_in_table(csv, weap) {
   rows = tablegetrowcount(csv);
 
-  for (i = 0; i < rows; i++) {
+  for(i = 0; i < rows; i++) {
     if(tablelookupbyrow(csv, i, 0) == weap) {
       return true;
     }
@@ -824,7 +820,7 @@ get_attachment_override(weapon, attachment) {
     weapon += "_mp";
   }
 
-  for (i = 0; i < rows; i++) {
+  for(i = 0; i < rows; i++) {
     if(tablelookupbyrow(csv, i, 0) == weapon && tablelookupbyrow(csv, i, 1) == attachment) {
       return tablelookupbyrow(csv, i, 2);
     }
@@ -835,7 +831,7 @@ get_attachment_name(weapon, attachment) {
   name = tablelookup("mp/attachkits.csv", 1, attachment, 2);
   override = get_attachment_override(weapon, name);
 
-  if(isdefined(override) && override != "") {
+  if(isDefined(override) && override != "") {
     return override;
   }
 
@@ -853,7 +849,7 @@ h2_buildweaponname(baseName, attachment1, attachment2, camo, perks) {
   attachments[attachments.size] = attachment1;
 
   perk1 = "";
-  if(isdefined(perks) && typeof(perks) == "array" && perks.size > 0) {
+  if(isDefined(perks) && typeof(perks) == "array" && perks.size > 0) {
     perk1 = perks[0];
   }
 
@@ -864,9 +860,9 @@ h2_buildweaponname(baseName, attachment1, attachment2, camo, perks) {
 
   weapon_class = maps\mp\_utility::getweaponclass(weaponName);
   if(weapon_class == "weapon_sniper") {
-    if(isdefined(self.pers["class"])) {
+    if(isDefined(self.pers["class"])) {
       class_index = maps\mp\_utility::getclassindex(self.pers["class"]);
-      if(isdefined(class_index)) {
+      if(isDefined(class_index)) {
         should_use_classic = self getcacplayerdata(class_index, "use2dScopes");
         if(should_use_classic) {
           attachments = common_scripts\utility::array_remove(attachments, "acogh2");
@@ -877,13 +873,13 @@ h2_buildweaponname(baseName, attachment1, attachment2, camo, perks) {
     }
   }
 
-  if(IsDefined(attachments.size) && attachments.size) {
+  if(isDefined(attachments.size) && attachments.size) {
     attachments = common_scripts\utility::alphabetize(attachments);
   }
 
   foreach(attachment in attachments) {
     name = get_attachment_name(baseName, attachment);
-    if(isdefined(name) && name != "")
+    if(isDefined(name) && name != "")
       attachment = name;
 
     if(issubstr(weaponName, "_" + attachment))
@@ -911,11 +907,11 @@ h2_buildweaponname(baseName, attachment1, attachment2, camo, perks) {
 }
 
 buildweaponname(var_0, var_1, var_2, var_3, perks, var_5) {
-  if(!isdefined(var_0) || var_0 == "none" || var_0 == "") {
+  if(!isDefined(var_0) || var_0 == "none" || var_0 == "") {
     return var_0;
   }
 
-  if(!isdefined(level.lettertonumber)) {
+  if(!isDefined(level.lettertonumber)) {
     level.lettertonumber = maps\mp\gametypes\_class::makeletterstonumbers();
   }
 
@@ -939,8 +935,8 @@ buildweaponname(var_0, var_1, var_2, var_3, perks, var_5) {
     var_1 = "akimbohidden";
   }
 
-  var_9 = isdefined(var_1) && var_1 != "none";
-  var_10 = isdefined(var_2) && var_2 != "none";
+  var_9 = isDefined(var_1) && var_1 != "none";
+  var_10 = isDefined(var_2) && var_2 != "none";
 
   if(!var_10) {
     var_11 = tablelookuprownum("mp/furniturekits/base.csv", 0, var_7);
@@ -960,7 +956,7 @@ buildweaponname(var_0, var_1, var_2, var_3, perks, var_5) {
   if(!issubstr(var_0, "h1_") && !issubstr(var_0, "h2_")) {
     if(var_9) {
       name = get_attachment_name(var_0, var_1);
-      if(isdefined(name) && name != "") {
+      if(isDefined(name) && name != "") {
         var_7 += "_" + name;
       }
     }
@@ -996,7 +992,7 @@ buildweaponname(var_0, var_1, var_2, var_3, perks, var_5) {
 }
 
 isvalidweapon(var_0, var_1) {
-  if(!isdefined(level.weaponrefs)) {
+  if(!isDefined(level.weaponrefs)) {
     level.weaponrefs = [];
 
     foreach(var_3 in level.weaponlist) {
@@ -1004,7 +1000,7 @@ isvalidweapon(var_0, var_1) {
     }
   }
 
-  if(isdefined(level.weaponrefs[var_0])) {
+  if(isDefined(level.weaponrefs[var_0])) {
     return 1;
   }
 
@@ -1155,7 +1151,7 @@ takeoffhand(var_0) {
 }
 
 is_lethal_equipment(var_0) {
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     return 0;
 
   switch (var_0) {

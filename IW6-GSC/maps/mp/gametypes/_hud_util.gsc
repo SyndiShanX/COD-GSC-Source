@@ -611,7 +611,7 @@ transitionReset() {
   self.y = self.yOffset;
   if(self.elemType == "font") {
     self.fontScale = self.baseFontScale;
-    self.label = & "";
+    self.label = &"";
   } else if(self.elemType == "icon") {
     self setShader(self.shader, self.width, self.height);
   }

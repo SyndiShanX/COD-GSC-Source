@@ -4,12 +4,12 @@
 *********************************************/
 
 init() {
-  level.spectateOverride["allies"] = spawnstruct();
-  level.spectateOverride["axis"] = spawnstruct();
+  level.spectateOverride["allies"] = spawnStruct();
+  level.spectateOverride["axis"] = spawnStruct();
   level thread onPlayerConnect();
 }
 onPlayerConnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connecting", player);
     player thread onJoinedTeam();
     player thread onJoinedSpectators();
@@ -18,28 +18,28 @@ onPlayerConnect() {
 }
 onPlayerSpawned() {
   self endon("disconnect");
-  for (;;) {
+  for(;;) {
     self waittill("spawned_player");
     self setSpectatePermissions();
   }
 }
 onJoinedTeam() {
   self endon("disconnect");
-  for (;;) {
+  for(;;) {
     self waittill("joined_team");
     self setSpectatePermissionsForMachine();
   }
 }
 onJoinedSpectators() {
   self endon("disconnect");
-  for (;;) {
+  for(;;) {
     self waittill("joined_spectators");
     self setSpectatePermissionsForMachine();
   }
 }
 updateSpectateSettings() {
   level endon("game_ended");
-  for (index = 0; index < level.players.size; index++)
+  for(index = 0; index < level.players.size; index++)
     level.players[index] setSpectatePermissions();
 }
 getOtherTeam(team) {
@@ -51,7 +51,7 @@ getOtherTeam(team) {
     return "none";
 }
 getSplitscreenTeam() {
-  for (index = 0; index < level.players.size; index++) {
+  for(index = 0; index < level.players.size; index++) {
     if(!isDefined(level.players[index]))
       continue;
     if(level.players[index] == self)
@@ -65,7 +65,7 @@ getSplitscreenTeam() {
   return self.sessionteam;
 }
 OtherLocalPlayerStillAlive() {
-  for (index = 0; index < level.players.size; index++) {
+  for(index = 0; index < level.players.size; index++) {
     if(!isDefined(level.players[index]))
       continue;
     if(level.players[index] == self)
@@ -150,7 +150,7 @@ setSpectatePermissionsForMachine() {
   self setSpectatePermissions();
   if(!self IsSplitScreen())
     return;
-  for (index = 0; index < level.players.size; index++) {
+  for(index = 0; index < level.players.size; index++) {
     if(!isDefined(level.players[index]))
       continue;
     if(level.players[index] == self)

@@ -57,8 +57,8 @@ init() {
     level.drones["allies"] = struct_arrayspawn();
   }
   init_struct_targeted_origins();
-  array_thread(getentarray("drone_axis", "targetname"), ::drone_triggers_think);
-  array_thread(getentarray("drone_allies", "targetname"), ::drone_triggers_think);
+  array_thread(getEntArray("drone_axis", "targetname"), ::drone_triggers_think);
+  array_thread(getEntArray("drone_allies", "targetname"), ::drone_triggers_think);
   if(getdebugdvar("replay_debug") == "1") {
     println("File: _drones.gsc. Function: init() - COMPLETE\n");
   }
@@ -77,7 +77,7 @@ build_struct_targeted_origins() {
 init_struct_targeted_origins() {
   level.struct_targetname = [];
   count = level.struct.size;
-  for (i = 0; i < count; i++) {
+  for(i = 0; i < count; i++) {
     struct = level.struct[i];
     if(!isDefined(struct.targetname)) {
       continue;
@@ -90,7 +90,7 @@ init_struct_targeted_origins() {
     }
     level.struct_targetname[struct.targetname][targetname_count] = struct;
   }
-  for (i = 0; i < count; i++) {
+  for(i = 0; i < count; i++) {
     struct = level.struct[i];
     if(!isDefined(struct.target)) {
       continue;
@@ -129,7 +129,7 @@ drone_triggers_think() {
   if(((isDefined(self.script_noteworthy)) && (self.script_noteworthy == "looping")) || ((isDefined(self.script_looping)) && (self.script_looping > 0))) {
     assert(isDefined(self.script_delay) || (isDefined(self.script_delay_min) && isDefined(self.script_delay_max)));
     self endon("stop_drone_loop");
-    for (i = 0; i < repeat_times; i++) {
+    for(i = 0; i < repeat_times; i++) {
       level notify("new drone spawn wave");
       spawnSize = undefined;
       if(isDefined(self.script_drones_min)) {
@@ -203,11 +203,11 @@ drone_spawngroup(spawnpoint, qFakeDeath, spawnSize, qSightTrace, team) {
   if(spawncount > spawnpoint.size) {
     spawncount = spawnpoint.size;
   }
-  for (i = 0; i < spawncount; i++) {
+  for(i = 0; i < spawncount; i++) {
     if(isDefined(self.script_int)) {
       wait randomfloat(0.1, 1.0);
     }
-    while (!self ok_to_trigger_spawn()) {
+    while(!self ok_to_trigger_spawn()) {
       wait_network_frame();
     }
     spawnpoint[i] thread drone_spawn(qFakeDeath, qSightTrace, team);
@@ -225,7 +225,7 @@ drone_spawn(qFakeDeath, qSightTrace, team) {
   if(!isDefined(qSightTrace)) {
     qSightTrace = false;
   }
-  while ((qSightTrace) && (self spawnpoint_playersView())) {
+  while((qSightTrace) && (self spawnpoint_playersView())) {
     wait 0.2;
   }
   if(level.drones[team].lastindex > level.max_drones[team]) {
@@ -259,15 +259,15 @@ spawnpoint_playersView() {
   players = get_players();
   player_view_count = 0;
   success = false;
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     prof_begin("drone_math");
-    forwardvec = anglestoforward(players[i].angles);
+    forwardvec = anglesToForward(players[i].angles);
     normalvec = vectorNormalize(self.origin - players[i] GetOrigin());
     vecdot = vectordot(forwardvec, normalvec);
     prof_end("drone_math");
     if(vecdot > level.cos80) {
       prof_begin("drone_math");
-      success = bullettracepassed(players[i] GetEye(), self.origin + (0, 0, 48), false, self);
+      success = bullettracepassed(players[i] getEye(), self.origin + (0, 0, 48), false, self);
       prof_end("drone_math");
       if(success) {
         player_view_count++;
@@ -445,7 +445,7 @@ drone_think(firstNode) {
   idleAnim[0] = % stand_alert_1;
   idleAnim[1] = % stand_alert_2;
   idleAnim[2] = % stand_alert_3;
-  while (isDefined(self)) {
+  while(isDefined(self)) {
     self AnimScripted("drone_idle_anim", idle_org, idle_ang, idleAnim[randomint(idleAnim.size)]);
     self waittillmatch("drone_idle_anim", "end");
   }
@@ -485,7 +485,7 @@ drone_fakeDeath(instant) {
   explosivedeath = false;
   explosion_ori = (0, 0, 0);
   flamedeath = false;
-  while (isDefined(self)) {
+  while(isDefined(self)) {
     if(!instant) {
       self setCanDamage(true);
       self waittill("damage", amount, attacker, direction_vec, damage_ori, type);
@@ -590,7 +590,7 @@ drone_doDeath(deathAnim, deathRemoveNotify) {
     if(d1 > 20) {
       cancelRunningDeath = true;
     } else {
-      forwardVec = anglestoforward(self.angles);
+      forwardVec = anglesToForward(self.angles);
       rightVec = anglestoright(self.angles);
       upVec = anglestoup(self.angles);
       relativeOffset = (50, 0, 0);
@@ -654,9 +654,9 @@ drone_doDeath_impacts() {
   bone[3] = "J_Shoulder_LE";
   bone[4] = "J_Elbow_LE";
   impacts = (1 + randomint(2));
-  for (i = 0; i < impacts; i++) {
-    playfxontag(level.drone_impact, self, bone[randomint(bone.size)]);
-    self playsound("bullet_small_flesh");
+  for(i = 0; i < impacts; i++) {
+    playFXOnTag(level.drone_impact, self, bone[randomint(bone.size)]);
+    self playSound("bullet_small_flesh");
     wait(0.05);
   }
 }
@@ -665,7 +665,7 @@ drone_runChain(point_start) {
   self endon("drone_death");
   self endon("drone_shooting");
   runPos = undefined;
-  while (isDefined(self)) {
+  while(isDefined(self)) {
     if(isDefined(point_start.script_death)) {
       self.dontDelete = true;
       self thread drone_delayed_bulletdeath(0);
@@ -695,7 +695,7 @@ drone_runChain(point_start) {
         point_end[index].angles = (0, 0, 0);
       }
       prof_begin("drone_math");
-      forwardVec = anglestoforward(point_end[index].angles);
+      forwardVec = anglesToForward(point_end[index].angles);
       rightVec = anglestoright(point_end[index].angles);
       upVec = anglestoup(point_end[index].angles);
       relativeOffset = (0, (self.droneRunOffset * point_end[index].radius), 0);
@@ -807,7 +807,7 @@ ShooterRun(destinationPoint, event) {
         self thread drone_mortarDeath("right");
         return;
       case "shoot":
-        forwardVec = anglestoforward(self.angles);
+        forwardVec = anglesToForward(self.angles);
         rightVec = anglestoright(self.angles);
         upVec = anglestoup(self.angles);
         relativeOffset = (300, 0, 64);
@@ -819,7 +819,7 @@ ShooterRun(destinationPoint, event) {
         self thread ShooterShoot(self.shootTarget);
         return;
       case "shoot_then_run_after_notify":
-        forwardVec = anglestoforward(self.angles);
+        forwardVec = anglesToForward(self.angles);
         rightVec = anglestoright(self.angles);
         upVec = anglestoup(self.angles);
         relativeOffset = (300, 0, 64);
@@ -943,7 +943,7 @@ drone_runto(destinationPoint, totalMoveTime) {
   dividedMoveTime = (totalMoveTime * percentIncrement);
   startingPos = self.origin;
   oldZ = startingPos[2];
-  for (i = 0; i < incements; i++) {
+  for(i = 0; i < incements; i++) {
     prof_begin("drone_math");
     percentage += percentIncrement;
     x = (destinationPoint[0] - startingPos[0]) * percentage + startingPos[0];
@@ -981,7 +981,7 @@ ShooterShootThread(target) {
   self.running = undefined;
   self thread aimAtTargetThread(target, "Stop shooting");
   shootAnimLength = 0;
-  while (isDefined(self)) {
+  while(isDefined(self)) {
     if(self.bulletsInClip <= 0) {
       weaponModel = getWeaponModel(self.weapon);
       if(isDefined(self.weaponModel)) {
@@ -989,7 +989,7 @@ ShooterShootThread(target) {
       }
       numAttached = self getattachsize();
       attachName = [];
-      for (i = 0; i < numAttached; i++) {
+      for(i = 0; i < numAttached; i++) {
         attachName[i] = self getattachmodelname(i);
       }
       self setflaggedanimknoballrestart("reloadanim", % exposed_reload, % root, 1, 0.4);
@@ -1005,33 +1005,33 @@ ShooterShootThread(target) {
     if(numShots > self.bulletsInClip) {
       numShots = self.bulletsInClip;
     }
-    for (i = 0; i < numShots; i++) {
+    for(i = 0; i < numShots; i++) {
       if(!isDefined(self)) {
         return;
       }
       self Set3FlaggedAnimKnobsRestart("shootinganim", "shoot", "stand", 1, 0.05, 1);
-      playfxontag(level.drone_muzzleflash, self, "tag_flash");
+      playFXOnTag(level.drone_muzzleflash, self, "tag_flash");
       if(self.team == "axis") {
         switch (level.campaign) {
           case "american":
             break;
           case "russian":
-            self playsound("weap_kar98k_fire");
+            self playSound("weap_kar98k_fire");
             break;
           case "british":
-            self playsound("weap_kar98k_fire");
+            self playSound("weap_kar98k_fire");
             break;
         }
       } else {
         switch (level.campaign) {
           case "american":
-            self playsound("weap_m1garand_fire");
+            self playSound("weap_m1garand_fire");
             break;
           case "russian":
-            self playsound("weap_nagant_fire");
+            self playSound("weap_nagant_fire");
             break;
           case "british":
-            self playsound("weap_enfield_fire");
+            self playSound("weap_enfield_fire");
             break;
         }
       }
@@ -1062,7 +1062,7 @@ ShooterRun_doRunAnim(animRateMod) {
   }
   self endon("stop_run_anim");
   adjustAnimRate = true;
-  while ((isDefined(self.running)) && (self.running == true)) {
+  while((isDefined(self.running)) && (self.running == true)) {
     animRate = (self.droneRunRate / 200);
     if(adjustAnimRate) {
       animRate = (animRate * animRateMod);
@@ -1077,7 +1077,7 @@ ShooterRun_doRunAnim(animRateMod) {
 }
 
 drone_debugLine(fromPoint, toPoint, color, durationFrames) {
-  for (i = 0; i < durationFrames * 20; i++) {
+  for(i = 0; i < durationFrames * 20; i++) {
     line(fromPoint, toPoint, color);
     wait(0.05);
   }
@@ -1142,7 +1142,7 @@ applyBlend(offset) {
 
 aimAtTargetThread(target, stopString) {
   self endon(stopString);
-  while (isDefined(self)) {
+  while(isDefined(self)) {
     targetPos = target.origin;
     turnToFacePoint(targetPos);
     offset = getTargetUpDownOffset(targetPos);
@@ -1182,7 +1182,7 @@ setAnimArray() {
 drone_cover(type) {
   self endon("drone_stop_cover");
   if(!isDefined(self.a)) {
-    self.a = SpawnStruct();
+    self.a = spawnStruct();
   }
   self.running = undefined;
   anim_array = [];
@@ -1222,7 +1222,7 @@ drone_cover(type) {
 
 drone_cover_think() {
   self endon("drone_stop_cover");
-  while (1) {
+  while(1) {
     useTwitch = (randomint(2) == 0);
     if(useTwitch) {
       idleanim = animArrayPickRandom("hide_idle_twitch");
@@ -1248,14 +1248,14 @@ drone_get_explosion_death_dir(self_pos, self_angle, explosion_pos, up_distance) 
   if(Distance2D(self_pos, explosion_pos) < up_distance) {
     return "up";
   }
-  p1 = self_pos - vectornormalize(AnglesToForward(self_angle)) * 10000;
-  p2 = self_pos + vectornormalize(AnglesToForward(self_angle)) * 10000;
+  p1 = self_pos - vectornormalize(anglesToForward(self_angle)) * 10000;
+  p2 = self_pos + vectornormalize(anglesToForward(self_angle)) * 10000;
   p_intersect = PointOnSegmentNearestToPoint(p1, p2, explosion_pos);
   side_away_dist = Distance2D(p_intersect, explosion_pos);
   side_close_dist = Distance2D(p_intersect, self_pos);
   if(side_close_dist != 0) {
     angle = ATan(side_away_dist / side_close_dist);
-    dot_product = vectordot(anglestoforward(self_angle), vectornormalize(explosion_pos - self_pos));
+    dot_product = vectordot(anglesToForward(self_angle), vectornormalize(explosion_pos - self_pos));
     if(dot_product < 0) {
       angle = 180 - angle;
     }

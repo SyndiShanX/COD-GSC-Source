@@ -26,7 +26,7 @@
 function main() {
   var_565a8d95 = struct::get_array("flinger_trigger", "targetname");
   foreach(var_a3ed6ea in var_565a8d95) {
-    var_66e182a0 = getentarray(var_a3ed6ea.target, "targetname");
+    var_66e182a0 = getEntArray(var_a3ed6ea.target, "targetname");
     var_a3ed6ea.var_66e182a0 = var_66e182a0;
     foreach(var_a70a7d09 in var_66e182a0) {
       var_a3ed6ea.var_a70a7d09 = var_a70a7d09;
@@ -42,8 +42,8 @@ function function_41b278b3() {
   self.script_width = 32;
   self.script_height = 128;
   self.script_length = 32;
-  self.prompt_and_visibility_func = & function_fbea6a64;
-  zm_unitrigger::register_static_unitrigger(self, & function_335dff5e);
+  self.prompt_and_visibility_func = &function_fbea6a64;
+  zm_unitrigger::register_static_unitrigger(self, &function_335dff5e);
 }
 
 function function_fbea6a64(e_player) {
@@ -55,7 +55,7 @@ function function_fbea6a64(e_player) {
     self sethintstring(&"ZM_STALINGRAD_FLINGER_DISABLED");
     return false;
   }
-  if(isdefined(self.stub.var_66a9cd70) && self.stub.var_66a9cd70) {
+  if(isDefined(self.stub.var_66a9cd70) && self.stub.var_66a9cd70) {
     self sethintstring(&"ZOMBIE_TRAP_ACTIVE");
     return false;
   }
@@ -81,7 +81,7 @@ function function_335dff5e() {
     }
   } else {
     zm_utility::play_sound_at_pos("no_purchase", self.origin);
-    if(isdefined(level.custom_generic_deny_vo_func)) {
+    if(isDefined(level.custom_generic_deny_vo_func)) {
       e_player thread[[level.custom_generic_deny_vo_func]](1);
     } else {
       e_player zm_audio::create_and_play_dialog("general", "outofmoney");
@@ -101,15 +101,15 @@ function function_d9a07413(e_player, var_a70a7d09) {
   self zm_stalingrad_util::function_903f6b36(1);
   var_b4f536a1 = struct::get(var_a70a7d09.target);
   var_ebbae7d4 = getent(var_b4f536a1.target, "targetname");
-  v_fling = anglestoforward(var_b4f536a1.angles);
+  v_fling = anglesToForward(var_b4f536a1.angles);
   n_rotate_angle = var_ebbae7d4.script_int;
-  if(isdefined(var_ebbae7d4.target)) {
+  if(isDefined(var_ebbae7d4.target)) {
     var_d617e29b = getent(var_ebbae7d4.target, "targetname");
   }
   n_start_time = gettime();
   n_total_time = 0;
   e_player thread zm_stalingrad_vo::function_96153834();
-  while (30 > n_total_time) {
+  while(30 > n_total_time) {
     function_e0c7ad1e(var_a70a7d09);
     function_54227761(var_a70a7d09, v_fling, e_player);
     playrumbleonposition("zm_stalingrad_bridge_closing", var_d617e29b.origin);
@@ -143,7 +143,7 @@ function function_54227761(var_a70a7d09, v_fling, e_player) {
   foreach(ai_zombie in a_zombies) {
     if(ai_zombie istouching(var_a70a7d09)) {
       ai_zombie thread function_d2f913f5(v_fling);
-      if(isdefined(e_player)) {
+      if(isDefined(e_player)) {
         e_player zm_stats::increment_challenge_stat("ZOMBIE_HUNTER_KILL_TRAP");
       }
       n_count++;
@@ -154,7 +154,7 @@ function function_54227761(var_a70a7d09, v_fling, e_player) {
       }
     }
   }
-  if(isdefined(e_player)) {
+  if(isDefined(e_player)) {
     e_player notify("hash_e442448", n_kill_count, self.script_noteworthy);
   }
 }

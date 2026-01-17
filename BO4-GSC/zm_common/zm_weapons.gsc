@@ -42,7 +42,6 @@
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_wallbuy;
-
 #namespace zm_weapons;
 
 autoexec __init__system__() {
@@ -129,11 +128,11 @@ event_handler[player_gunchallengecomplete] player_gunchallengecomplete(s_event) 
     foreach(weapon in a_w_guns) {
       str_weapon = weapon.name;
       n_item_index = getbaseweaponitemindex(weapon);
-      var_cc074f5b = stats::get_stat(#"ranked_item_stats", str_weapon, #"xp");
+      var_cc074f5b = stats::get_stat(#"ranked_item_stats", str_weapon, # "xp");
 
       if(isDefined(var_cc074f5b)) {
         var_6b792d1d = function_33cc663e(str_weapon);
-        var_56ccc9fe = stats::get_stat(#"ranked_item_stats", str_weapon, #"plevel");
+        var_56ccc9fe = stats::get_stat(#"ranked_item_stats", str_weapon, # "plevel");
 
         if(var_cc074f5b >= var_6b792d1d || var_56ccc9fe >= 1) {
           var_8e617ca1++;
@@ -153,9 +152,9 @@ get_guns() {
   foreach(s_weapon in level.zombie_weapons) {
     switch (s_weapon.weapon_classname) {
       case 0:
-      case #"equipment":
-      case #"shield":
-      case #"melee":
+      case # "equipment":
+      case # "shield":
+      case # "melee":
         continue;
     }
 
@@ -197,7 +196,7 @@ function_33cc663e(str_weapon) {
 }
 
 watchforgrenadeduds() {
-  self endon(#"death", #"disconnect");
+  self endon(#"death", # "disconnect");
 
   while(true) {
     waitresult = self waittill(#"grenade_fire");
@@ -211,7 +210,7 @@ watchforgrenadeduds() {
 }
 
 watchforgrenadelauncherduds() {
-  self endon(#"death", #"disconnect");
+  self endon(#"death", # "disconnect");
 
   while(true) {
     waitresult = self waittill(#"grenade_launcher_fire");
@@ -262,7 +261,7 @@ checkgrenadefordud(weapon, isthrowngrenade, player) {
   }
 
   for(;;) {
-    self waittilltimeout(0.25, #"grenade_bounce", #"stationary", #"death", #"zombify");
+    self waittilltimeout(0.25, # "grenade_bounce", # "stationary", # "death", # "zombify");
 
     if(!self grenade_safe_to_bounce(player, weapon)) {
       self thread makegrenadedudanddestroy();
@@ -315,7 +314,7 @@ switch_from_alt_weapon(weapon) {
   if(alt != weapon) {
     if(!weaponhasattachment(weapon, "dualoptic")) {
       self switchtoweaponimmediate(alt);
-      self waittilltimeout(1, #"weapon_change_complete");
+      self waittilltimeout(1, # "weapon_change_complete");
     }
 
     return alt;
@@ -385,7 +384,7 @@ updatelastheldweapontimingszm(newtime) {
     totaltime = int((newtime - self.currenttime) / 1000);
 
     if(totaltime > 0) {
-      self stats::function_e24eec31(curweapon, #"timeused", totaltime);
+      self stats::function_e24eec31(curweapon, # "timeused", totaltime);
     }
   }
 }
@@ -445,9 +444,9 @@ add_zombie_weapon(weapon_name, upgrade_name, is_ee, cost, weaponvo, weaponvoresp
   struct.weapon_classname = weapon_class;
 
   if(function_8b1a219a()) {
-    struct.hint = #"hash_2791ecebb85142c4";
+    struct.hint = # "hash_2791ecebb85142c4";
   } else {
-    struct.hint = #"hash_60606b68e93a29c8";
+    struct.hint = # "hash_60606b68e93a29c8";
   }
 
   struct.cost = cost;
@@ -511,13 +510,13 @@ init_weapons() {
 
   switch (var_8e01336) {
     case 1:
-      var_4ef031c9 = #"hash_5694d3fa5334f8fe";
+      var_4ef031c9 = # "hash_5694d3fa5334f8fe";
       break;
     case 2:
-      var_4ef031c9 = #"hash_3f8d28bb3d9e9bec";
+      var_4ef031c9 = # "hash_3f8d28bb3d9e9bec";
       break;
     default:
-      var_4ef031c9 = #"hash_7bda40310359350e";
+      var_4ef031c9 = # "hash_7bda40310359350e";
       break;
   }
 
@@ -613,9 +612,7 @@ limited_weapon_below_quota(weapon, ignore_player) {
 
     if(isDefined(level.custom_limited_weapon_checks)) {
       foreach(check in level.custom_limited_weapon_checks) {
-        count += [
-          [check]
-        ](weapon);
+        count += [[check]](weapon);
       }
 
       if(count >= limit) {
@@ -730,7 +727,6 @@ function_603af7a8(weapon) {
   }
 
   level thread zm_devgui::function_bcc8843e(getweaponname(weapon), "<dev string:xb0>", "<dev string:xb0>");
-
 }
 
 function_f1114209(weapon) {
@@ -864,10 +860,10 @@ get_upgrade_weapon(weapon, add_attachment) {
     return newweapon;
   }
 
-    if(isDefined(level.zombie_weapons[rootweapon]) && isDefined(level.zombie_weapons[rootweapon].default_attachment)) {
-      att = level.zombie_weapons[rootweapon].default_attachment;
-      newweapon = getweapon(newweapon.name, att);
-    }
+  if(isDefined(level.zombie_weapons[rootweapon]) && isDefined(level.zombie_weapons[rootweapon].default_attachment)) {
+    att = level.zombie_weapons[rootweapon].default_attachment;
+    newweapon = getweapon(newweapon.name, att);
+  }
 
   return newweapon;
 }
@@ -934,12 +930,11 @@ get_weapon_with_attachments(weapon) {
   rootweapon = function_386dacbc(weapon);
 
   if(self has_weapon_or_attachments(rootweapon)) {
-
     if(isDefined(self.var_8d5839f4) && isinarray(self.var_8d5839f4, weapon) && weapon.attachments.size) {
       return weapon;
     }
 
-      return self getbuildkitweapon(rootweapon);
+    return self getbuildkitweapon(rootweapon);
   }
 
   return undefined;
@@ -1051,10 +1046,10 @@ get_player_weapon_with_same_base(weapon) {
 
 get_weapon_hint_ammo() {
   if(function_8b1a219a()) {
-    return #"hash_2791ecebb85142c4";
+    return # "hash_2791ecebb85142c4";
   }
 
-  return #"hash_60606b68e93a29c8";
+  return # "hash_60606b68e93a29c8";
 }
 
 weapon_set_first_time_hint(cost, ammo_cost) {
@@ -1088,7 +1083,7 @@ get_pack_a_punch_weapon_options(weapon) {
     reticle_index = getdvarint(#"scr_force_reticle_index", 0);
   }
 
-    self.pack_a_punch_weapon_options[weapon] = self calcweaponoptions(camo_index, reticle_index, var_eb2e3f90);
+  self.pack_a_punch_weapon_options[weapon] = self calcweaponoptions(camo_index, reticle_index, var_eb2e3f90);
   return self.pack_a_punch_weapon_options[weapon];
 }
 
@@ -1114,7 +1109,7 @@ give_build_kit_weapon(weapon, var_51ec4e93, var_bd5d43c6, b_switch_weapon = 1) {
 
   if(is_weapon_upgraded(weapon)) {
     level notify(#"hash_6dead3931d3e708a", {
-      #player: self, 
+      #player: self,
       #weapon: weapon
     });
 
@@ -1135,7 +1130,7 @@ give_build_kit_weapon(weapon, var_51ec4e93, var_bd5d43c6, b_switch_weapon = 1) {
     return weapon;
   }
 
-    weapon = self getbuildkitweapon(weapon);
+  weapon = self getbuildkitweapon(weapon);
   weapon = function_1242e467(weapon);
   w_root = function_386dacbc(weapon);
   weapon_options = self getbuildkitweaponoptions(w_root, n_camo, var_bd5d43c6);
@@ -1224,7 +1219,7 @@ play_weapon_vo(weapon) {
   }
 
   if(type == "upgrade") {
-    self zm_audio::create_and_play_dialog(#"weapon_pickup", #"upgrade");
+    self zm_audio::create_and_play_dialog(#"weapon_pickup", # "upgrade");
     return;
   }
 
@@ -1233,7 +1228,7 @@ play_weapon_vo(weapon) {
     return;
   }
 
-  self zm_audio::create_and_play_dialog(#"weapon_pickup", #"generic");
+  self zm_audio::create_and_play_dialog(#"weapon_pickup", # "generic");
 }
 
 weapon_type_check(weapon) {
@@ -1336,7 +1331,7 @@ ammo_give(weapon, b_purchased = 1) {
 
 get_default_weapondata(weapon) {
   weapondata = [];
-  weapondata[#"weapon"] = weapon;
+  weapondata[# "weapon"] = weapon;
   dw_weapon = weapon.dualwieldweapon;
   alt_weapon = weapon.altweapon;
   weaponnone = getweapon(#"none");
@@ -1346,25 +1341,25 @@ get_default_weapondata(weapon) {
   }
 
   if(weapon != weaponnone) {
-    weapondata[#"clip"] = weapon.clipsize;
-    weapondata[#"stock"] = weapon.maxammo;
-    weapondata[#"fuel"] = weapon.fuellife;
-    weapondata[#"heat"] = 0;
-    weapondata[#"overheat"] = 0;
+    weapondata[# "clip"] = weapon.clipsize;
+    weapondata[# "stock"] = weapon.maxammo;
+    weapondata[# "fuel"] = weapon.fuellife;
+    weapondata[# "heat"] = 0;
+    weapondata[# "overheat"] = 0;
   }
 
   if(dw_weapon != weaponnone) {
-    weapondata[#"lh_clip"] = dw_weapon.clipsize;
+    weapondata[# "lh_clip"] = dw_weapon.clipsize;
   } else {
-    weapondata[#"lh_clip"] = 0;
+    weapondata[# "lh_clip"] = 0;
   }
 
   if(alt_weapon != weaponnone) {
-    weapondata[#"alt_clip"] = alt_weapon.clipsize;
-    weapondata[#"alt_stock"] = alt_weapon.maxammo;
+    weapondata[# "alt_clip"] = alt_weapon.clipsize;
+    weapondata[# "alt_stock"] = alt_weapon.maxammo;
   } else {
-    weapondata[#"alt_clip"] = 0;
-    weapondata[#"alt_stock"] = 0;
+    weapondata[# "alt_clip"] = 0;
+    weapondata[# "alt_stock"] = 0;
   }
 
   return weapondata;
@@ -1377,55 +1372,55 @@ get_player_weapondata(weapon) {
     weapon = self getcurrentweapon();
   }
 
-  weapondata[#"weapon"] = weapon;
+  weapondata[# "weapon"] = weapon;
 
-  if(weapondata[#"weapon"] != level.weaponnone) {
-    weapondata[#"clip"] = self getweaponammoclip(weapon);
-    weapondata[#"stock"] = self getweaponammostock(weapon);
-    weapondata[#"fuel"] = self getweaponammofuel(weapon);
-    weapondata[#"heat"] = self isweaponoverheating(1, weapon);
-    weapondata[#"overheat"] = self isweaponoverheating(0, weapon);
+  if(weapondata[# "weapon"] != level.weaponnone) {
+    weapondata[# "clip"] = self getweaponammoclip(weapon);
+    weapondata[# "stock"] = self getweaponammostock(weapon);
+    weapondata[# "fuel"] = self getweaponammofuel(weapon);
+    weapondata[# "heat"] = self isweaponoverheating(1, weapon);
+    weapondata[# "overheat"] = self isweaponoverheating(0, weapon);
 
     if(weapon.isgadget) {
       slot = self gadgetgetslot(weapon);
-      weapondata[#"power"] = self gadgetpowerget(slot);
+      weapondata[# "power"] = self gadgetpowerget(slot);
     }
 
     if(weapon.isriotshield) {
-      weapondata[#"health"] = self.weaponhealth;
+      weapondata[# "health"] = self.weaponhealth;
     }
   } else {
-    weapondata[#"clip"] = 0;
-    weapondata[#"stock"] = 0;
-    weapondata[#"fuel"] = 0;
-    weapondata[#"heat"] = 0;
-    weapondata[#"overheat"] = 0;
-    weapondata[#"power"] = undefined;
+    weapondata[# "clip"] = 0;
+    weapondata[# "stock"] = 0;
+    weapondata[# "fuel"] = 0;
+    weapondata[# "heat"] = 0;
+    weapondata[# "overheat"] = 0;
+    weapondata[# "power"] = undefined;
   }
 
   dw_weapon = weapon.dualwieldweapon;
 
   if(dw_weapon != level.weaponnone) {
-    weapondata[#"lh_clip"] = self getweaponammoclip(dw_weapon);
+    weapondata[# "lh_clip"] = self getweaponammoclip(dw_weapon);
   } else {
-    weapondata[#"lh_clip"] = 0;
+    weapondata[# "lh_clip"] = 0;
   }
 
   alt_weapon = weapon.altweapon;
 
   if(alt_weapon != level.weaponnone) {
-    weapondata[#"alt_clip"] = self getweaponammoclip(alt_weapon);
-    weapondata[#"alt_stock"] = self getweaponammostock(alt_weapon);
+    weapondata[# "alt_clip"] = self getweaponammoclip(alt_weapon);
+    weapondata[# "alt_stock"] = self getweaponammostock(alt_weapon);
   } else {
-    weapondata[#"alt_clip"] = 0;
-    weapondata[#"alt_stock"] = 0;
+    weapondata[# "alt_clip"] = 0;
+    weapondata[# "alt_stock"] = 0;
   }
 
   if(self aat::has_aat(weapon)) {
-    weapondata[#"aat"] = self aat::getaatonweapon(weapon, 1);
+    weapondata[# "aat"] = self aat::getaatonweapon(weapon, 1);
   }
 
-  weapondata[#"repacks"] = self zm_pap_util::function_83c29ddb(weapon);
+  weapondata[# "repacks"] = self zm_pap_util::function_83c29ddb(weapon);
   return weapondata;
 }
 
@@ -1453,45 +1448,45 @@ merge_weapons(oldweapondata, newweapondata) {
     }
   }
 
-  if(weapon_is_better(oldweapondata[#"weapon"], newweapondata[#"weapon"])) {
-    weapondata[#"weapon"] = oldweapondata[#"weapon"];
+  if(weapon_is_better(oldweapondata[# "weapon"], newweapondata[# "weapon"])) {
+    weapondata[# "weapon"] = oldweapondata[# "weapon"];
   } else {
-    weapondata[#"weapon"] = newweapondata[#"weapon"];
+    weapondata[# "weapon"] = newweapondata[# "weapon"];
   }
 
-  weapon = weapondata[#"weapon"];
+  weapon = weapondata[# "weapon"];
   dw_weapon = weapon.dualwieldweapon;
   alt_weapon = weapon.altweapon;
 
   if(weapon != level.weaponnone) {
-    weapondata[#"clip"] = newweapondata[#"clip"] + oldweapondata[#"clip"];
-    weapondata[#"clip"] = int(min(weapondata[#"clip"], weapon.clipsize));
-    weapondata[#"stock"] = newweapondata[#"stock"] + oldweapondata[#"stock"];
-    weapondata[#"stock"] = int(min(weapondata[#"stock"], weapon.maxammo));
-    weapondata[#"fuel"] = newweapondata[#"fuel"] + oldweapondata[#"fuel"];
-    weapondata[#"fuel"] = int(min(weapondata[#"fuel"], weapon.fuellife));
-    weapondata[#"heat"] = int(min(newweapondata[#"heat"], oldweapondata[#"heat"]));
-    weapondata[#"overheat"] = int(min(newweapondata[#"overheat"], oldweapondata[#"overheat"]));
-    weapondata[#"power"] = int(max(isDefined(newweapondata[#"power"]) ? newweapondata[#"power"] : 0, isDefined(oldweapondata[#"power"]) ? oldweapondata[#"power"] : 0));
+    weapondata[# "clip"] = newweapondata[# "clip"] + oldweapondata[# "clip"];
+    weapondata[# "clip"] = int(min(weapondata[# "clip"], weapon.clipsize));
+    weapondata[# "stock"] = newweapondata[# "stock"] + oldweapondata[# "stock"];
+    weapondata[# "stock"] = int(min(weapondata[# "stock"], weapon.maxammo));
+    weapondata[# "fuel"] = newweapondata[# "fuel"] + oldweapondata[# "fuel"];
+    weapondata[# "fuel"] = int(min(weapondata[# "fuel"], weapon.fuellife));
+    weapondata[# "heat"] = int(min(newweapondata[# "heat"], oldweapondata[# "heat"]));
+    weapondata[# "overheat"] = int(min(newweapondata[# "overheat"], oldweapondata[# "overheat"]));
+    weapondata[# "power"] = int(max(isDefined(newweapondata[# "power"]) ? newweapondata[# "power"] : 0, isDefined(oldweapondata[# "power"]) ? oldweapondata[# "power"] : 0));
   }
 
   if(dw_weapon != level.weaponnone) {
-    weapondata[#"lh_clip"] = newweapondata[#"lh_clip"] + oldweapondata[#"lh_clip"];
-    weapondata[#"lh_clip"] = int(min(weapondata[#"lh_clip"], dw_weapon.clipsize));
+    weapondata[# "lh_clip"] = newweapondata[# "lh_clip"] + oldweapondata[# "lh_clip"];
+    weapondata[# "lh_clip"] = int(min(weapondata[# "lh_clip"], dw_weapon.clipsize));
   }
 
   if(alt_weapon != level.weaponnone) {
-    weapondata[#"alt_clip"] = newweapondata[#"alt_clip"] + oldweapondata[#"alt_clip"];
-    weapondata[#"alt_clip"] = int(min(weapondata[#"alt_clip"], alt_weapon.clipsize));
-    weapondata[#"alt_stock"] = newweapondata[#"alt_stock"] + oldweapondata[#"alt_stock"];
-    weapondata[#"alt_stock"] = int(min(weapondata[#"alt_stock"], alt_weapon.maxammo));
+    weapondata[# "alt_clip"] = newweapondata[# "alt_clip"] + oldweapondata[# "alt_clip"];
+    weapondata[# "alt_clip"] = int(min(weapondata[# "alt_clip"], alt_weapon.clipsize));
+    weapondata[# "alt_stock"] = newweapondata[# "alt_stock"] + oldweapondata[# "alt_stock"];
+    weapondata[# "alt_stock"] = int(min(weapondata[# "alt_stock"], alt_weapon.maxammo));
   }
 
   return weapondata;
 }
 
 weapondata_give(weapondata) {
-  current = self get_player_weapon_with_same_base(weapondata[#"weapon"]);
+  current = self get_player_weapon_with_same_base(weapondata[# "weapon"]);
 
   if(isDefined(current)) {
     curweapondata = self get_player_weapondata(current);
@@ -1499,36 +1494,36 @@ weapondata_give(weapondata) {
     weapondata = merge_weapons(curweapondata, weapondata);
   }
 
-  weapon = weapondata[#"weapon"];
+  weapon = weapondata[# "weapon"];
   weapon_give(weapon, 1);
 
   if(weapon != level.weaponnone) {
-    if(weapondata[#"clip"] + weapondata[#"stock"] <= weapon.clipsize) {
+    if(weapondata[# "clip"] + weapondata[# "stock"] <= weapon.clipsize) {
       self setweaponammoclip(weapon, weapon.clipsize);
       self setweaponammostock(weapon, 0);
     } else {
-      self setweaponammoclip(weapon, weapondata[#"clip"]);
-      self setweaponammostock(weapon, weapondata[#"stock"]);
+      self setweaponammoclip(weapon, weapondata[# "clip"]);
+      self setweaponammostock(weapon, weapondata[# "stock"]);
     }
 
-    if(isDefined(weapondata[#"fuel"])) {
-      self setweaponammofuel(weapon, weapondata[#"fuel"]);
+    if(isDefined(weapondata[# "fuel"])) {
+      self setweaponammofuel(weapon, weapondata[# "fuel"]);
     }
 
-    if(isDefined(weapondata[#"heat"]) && isDefined(weapondata[#"overheat"])) {
-      self setweaponoverheating(weapondata[#"overheat"], weapondata[#"heat"], weapon);
+    if(isDefined(weapondata[# "heat"]) && isDefined(weapondata[# "overheat"])) {
+      self setweaponoverheating(weapondata[# "overheat"], weapondata[# "heat"], weapon);
     }
 
-    if(weapon.isgadget && isDefined(weapondata[#"power"])) {
+    if(weapon.isgadget && isDefined(weapondata[# "power"])) {
       slot = self gadgetgetslot(weapon);
 
       if(slot >= 0) {
-        self gadgetpowerset(slot, weapondata[#"power"]);
+        self gadgetpowerset(slot, weapondata[# "power"]);
       }
     }
 
-    if(weapon.isriotshield && isDefined(weapondata[#"health"])) {
-      self.weaponhealth = weapondata[#"health"];
+    if(weapon.isriotshield && isDefined(weapondata[# "health"])) {
+      self.weaponhealth = weapondata[# "health"];
     }
   }
 
@@ -1539,7 +1534,7 @@ weapondata_give(weapondata) {
       self giveweapon(dw_weapon);
     }
 
-    self setweaponammoclip(dw_weapon, weapondata[#"lh_clip"]);
+    self setweaponammoclip(dw_weapon, weapondata[# "lh_clip"]);
   }
 
   alt_weapon = weapon.altweapon;
@@ -1549,23 +1544,23 @@ weapondata_give(weapondata) {
       self giveweapon(alt_weapon);
     }
 
-    self setweaponammoclip(alt_weapon, weapondata[#"alt_clip"]);
-    self setweaponammostock(alt_weapon, weapondata[#"alt_stock"]);
+    self setweaponammoclip(alt_weapon, weapondata[# "alt_clip"]);
+    self setweaponammostock(alt_weapon, weapondata[# "alt_stock"]);
   }
 
-  if(isDefined(weapondata[#"aat"])) {
-    self aat::acquire(weapon, weapondata[#"aat"]);
+  if(isDefined(weapondata[# "aat"])) {
+    self aat::acquire(weapon, weapondata[# "aat"]);
   }
 
-  if(isDefined(weapondata[#"repacks"]) && weapondata[#"repacks"] > 0) {
-    self zm_pap_util::repack_weapon(weapon, weapondata[#"repacks"]);
+  if(isDefined(weapondata[# "repacks"]) && weapondata[# "repacks"] > 0) {
+    self zm_pap_util::repack_weapon(weapon, weapondata[# "repacks"]);
   }
 
   return weapon;
 }
 
 weapondata_take(weapondata) {
-  weapon = weapondata[#"weapon"];
+  weapon = weapondata[# "weapon"];
 
   if(weapon != level.weaponnone) {
     if(self hasweapon(weapon)) {
@@ -1656,15 +1651,15 @@ player_give_loadout(loadout, replace_existing = 1, immediate_switch = 0) {
   }
 
   foreach(weapondata in loadout.weapons) {
-    if(isDefined(weapondata[#"weapon"].isheroweapon) && weapondata[#"weapon"].isheroweapon) {
+    if(isDefined(weapondata[# "weapon"].isheroweapon) && weapondata[# "weapon"].isheroweapon) {
       self zm_hero_weapon::hero_give_weapon(self.var_fd05e363, 0);
-      w_weapon = weapondata[#"weapon"];
+      w_weapon = weapondata[# "weapon"];
 
-      if(w_weapon.isgadget && isDefined(weapondata[#"power"])) {
+      if(w_weapon.isgadget && isDefined(weapondata[# "power"])) {
         slot = self gadgetgetslot(w_weapon);
 
         if(slot >= 0) {
-          self gadgetpowerset(slot, weapondata[#"power"]);
+          self gadgetpowerset(slot, weapondata[# "power"]);
         }
       }
 
@@ -1880,10 +1875,10 @@ function_7c5dd4bd(w_weapon) {
   self givestartammo(w_weapon);
 }
 
-private function_7f7c1226(weapon) {
+function_7f7c1226(weapon) {
   waittillframeend();
 
-  if(weaponhasattachment(weapon, "uber") && weapon.statname == #"smg_capacity_t8" || isDefined(weapon.isriotshield) && weapon.isriotshield) {
+  if(weaponhasattachment(weapon, "uber") && weapon.statname == # "smg_capacity_t8" || isDefined(weapon.isriotshield) && weapon.isriotshield) {
     n_stock = weapon.clipsize;
   } else {
     n_stock = 0;

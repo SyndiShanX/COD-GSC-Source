@@ -17,37 +17,37 @@
 #namespace popups;
 
 function autoexec __init__sytem__() {
-  system::register("popups", & __init__, undefined, undefined);
+  system::register("popups", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype( & init);
+  callback::on_start_gametype(&init);
 }
 
 function init() {
-  level.contractsettings = spawnstruct();
+  level.contractsettings = spawnStruct();
   level.contractsettings.waittime = 4.2;
-  level.killstreaksettings = spawnstruct();
+  level.killstreaksettings = spawnStruct();
   level.killstreaksettings.waittime = 3;
-  level.ranksettings = spawnstruct();
+  level.ranksettings = spawnStruct();
   level.ranksettings.waittime = 3;
-  level.startmessage = spawnstruct();
+  level.startmessage = spawnStruct();
   level.startmessagedefaultduration = 2;
   level.endmessagedefaultduration = 2;
-  level.challengesettings = spawnstruct();
+  level.challengesettings = spawnStruct();
   level.challengesettings.waittime = 3;
-  level.teammessage = spawnstruct();
+  level.teammessage = spawnStruct();
   level.teammessage.waittime = 3;
-  level.regulargamemessages = spawnstruct();
+  level.regulargamemessages = spawnStruct();
   level.regulargamemessages.waittime = 6;
-  level.wagersettings = spawnstruct();
+  level.wagersettings = spawnStruct();
   level.wagersettings.waittime = 3;
   level.momentumnotifywaittime = 0;
   level.momentumnotifywaitlasttime = 0;
   level.teammessagequeuemax = 8;
   level thread popupsfromconsole();
   level thread function_9a14a686();
-  callback::on_connecting( & on_player_connect);
+  callback::on_connecting(&on_player_connect);
 }
 
 function on_player_connect() {
@@ -89,7 +89,7 @@ function devgui_notif_getchallengestablename(tableid) {
 }
 
 function set_statstable_id() {
-  if(!isdefined(level.statstableid)) {
+  if(!isDefined(level.statstableid)) {
     level.statstableid = tablelookupfindcoreasset(util::getstatstablename());
   }
 }
@@ -97,10 +97,10 @@ function set_statstable_id() {
 function devgui_create_weapon_levels_table() {
   level.tbl_weaponids = [];
   set_statstable_id();
-  if(!isdefined(level.statstableid)) {
+  if(!isDefined(level.statstableid)) {
     return;
   }
-  for (i = 0; i < 256; i++) {
+  for(i = 0; i < 256; i++) {
     itemrow = tablelookuprownum(level.statstableid, 0, i);
     if(itemrow > -1) {
       group_s = tablelookupcolumnforrow(level.statstableid, itemrow, 2);
@@ -127,7 +127,7 @@ function function_9a14a686() {
   }
   var_deda26ca = "";
   util::function_e2ac06bb(var_deda26ca + "", ("" + "") + "");
-  while (true) {
+  while(true) {
     if(getdvarint("", 0) > 0) {
       util::function_181cbd1a(var_deda26ca);
       level thread devgui_notif_init();
@@ -154,11 +154,11 @@ function devgui_notif_init() {
 }
 
 function notif_devgui_rank() {
-  if(!isdefined(level.ranktable)) {
+  if(!isDefined(level.ranktable)) {
     return;
   }
   notif_rank_devgui_base = "";
-  for (i = 1; i < level.ranktable.size; i++) {
+  for(i = 1; i < level.ranktable.size; i++) {
     display_level = i + 1;
     if(display_level < 10) {
       display_level = "" + display_level;
@@ -173,7 +173,7 @@ function notif_devgui_rank() {
 }
 
 function notif_devgui_rank_up_think() {
-  for (;;) {
+  for(;;) {
     rank_number = getdvarint("");
     if(rank_number == 0) {
       wait(0.05);
@@ -192,10 +192,10 @@ function notif_devgui_gun_rank() {
   gunlevel_attachment_unlock_col = 3;
   gunlevel_xpgained_col = 4;
   level flag::wait_till("");
-  if(!isdefined(level.tbl_weaponids)) {
+  if(!isDefined(level.tbl_weaponids)) {
     devgui_create_weapon_levels_table();
   }
-  if(!isdefined(level.tbl_weaponids)) {
+  if(!isDefined(level.tbl_weaponids)) {
     return;
   }
   a_weapons = [];
@@ -273,7 +273,7 @@ function notif_devgui_gun_rank() {
 }
 
 function notif_devgui_gun_level_think() {
-  for (;;) {
+  for(;;) {
     weapon_item_index = getdvarint("");
     if(weapon_item_index == 0) {
       wait(0.05);
@@ -293,10 +293,10 @@ function notif_devgui_gun_level_think() {
 
 function notif_devgui_challenges() {
   notif_challenges_devgui_base = "";
-  for (i = 1; i <= devgui_notif_getchallengestablecount(); i++) {
+  for(i = 1; i <= devgui_notif_getchallengestablecount(); i++) {
     tablename = devgui_notif_getchallengestablename(i);
     rows = tablelookuprowcount(tablename);
-    for (j = 1; j < rows; j++) {
+    for(j = 1; j < rows; j++) {
       challengeid = tablelookupcolumnforrow(tablename, j, 0);
       if(challengeid != "" && strisint(tablelookupcolumnforrow(tablename, j, 0))) {
         challengestring = tablelookupcolumnforrow(tablename, j, 5);
@@ -321,7 +321,7 @@ function notif_devgui_challenges() {
 function notif_devgui_challenges_think() {
   setdvar("", 0);
   setdvar("", 0);
-  for (;;) {
+  for(;;) {
     row = getdvarint("");
     table = getdvarint("");
     if(table < 1 || table > devgui_notif_getchallengestablecount()) {
@@ -370,7 +370,7 @@ function notif_devgui_challenges_think() {
 }
 
 function popupsfromconsole() {
-  while (true) {
+  while(true) {
     timeout = getdvarfloat("", 1);
     if(timeout == 0) {
       timeout = 1;
@@ -385,10 +385,10 @@ function popupsfromconsole() {
     gamemodemsg = getdvarint("", 0);
     teammsg = getdvarint("", 0);
     challengeindex = getdvarint("", 1);
-    for (i = 0; i < medal; i++) {
+    for(i = 0; i < medal; i++) {
       level.players[0] medals::codecallback_medal(86);
     }
-    for (i = 0; i < challenge; i++) {
+    for(i = 0; i < challenge; i++) {
       level.players[0] persistence::codecallback_challengecomplete(1000, 10, 19, 0, 0, 0, 18);
       level.players[0] persistence::codecallback_challengecomplete(1000, 1, 21, 0, 0, 0, 20);
       rewardxp = 500;
@@ -412,21 +412,21 @@ function popupsfromconsole() {
       challengeindex = 611;
       level.players[0] persistence::codecallback_challengecomplete(rewardxp, maxval, row, tablenumber, challengetype, itemindex, challengeindex);
     }
-    for (i = 0; i < rank; i++) {
+    for(i = 0; i < rank; i++) {
       level.players[0] rank::codecallback_rankup(4, 0, 1);
     }
-    for (i = 0; i < gun; i++) {
+    for(i = 0; i < gun; i++) {
       level.players[0] persistence::codecallback_gunchallengecomplete(0, 20, 25, 0);
     }
-    for (i = 0; i < contractpass; i++) {
+    for(i = 0; i < contractpass; i++) {
       level.players[0] persistence::add_contract_to_queue(12, 1);
     }
-    for (i = 0; i < contractfail; i++) {
+    for(i = 0; i < contractfail; i++) {
       level.players[0] persistence::add_contract_to_queue(12, 0);
     }
-    for (i = 0; i < teammsg; i++) {
+    for(i = 0; i < teammsg; i++) {
       player = level.players[0];
-      if(isdefined(level.players[1])) {
+      if(isDefined(level.players[1])) {
         player = level.players[1];
       }
       level.players[0] displayteammessagetoall(&"", player);
@@ -462,10 +462,10 @@ function popupsfromconsole() {
 }
 
 function displaykillstreakteammessagetoall(killstreak, player) {
-  if(!isdefined(level.killstreaks[killstreak])) {
+  if(!isDefined(level.killstreaks[killstreak])) {
     return;
   }
-  if(!isdefined(level.killstreaks[killstreak].inboundtext)) {
+  if(!isDefined(level.killstreaks[killstreak].inboundtext)) {
     return;
   }
   message = level.killstreaks[killstreak].inboundtext;
@@ -473,10 +473,10 @@ function displaykillstreakteammessagetoall(killstreak, player) {
 }
 
 function displaykillstreakhackedteammessagetoall(killstreak, player) {
-  if(!isdefined(level.killstreaks[killstreak])) {
+  if(!isDefined(level.killstreaks[killstreak])) {
     return;
   }
-  if(!isdefined(level.killstreaks[killstreak].hackedtext)) {
+  if(!isDefined(level.killstreaks[killstreak].hackedtext)) {
     return;
   }
   message = level.killstreaks[killstreak].hackedtext;
@@ -494,7 +494,7 @@ function displayteammessagetoall(message, player) {
   if(!shoulddisplayteammessages()) {
     return;
   }
-  for (i = 0; i < level.players.size; i++) {
+  for(i = 0; i < level.players.size; i++) {
     cur_player = level.players[i];
     if(cur_player isempjammed()) {
       continue;
@@ -503,7 +503,7 @@ function displayteammessagetoall(message, player) {
     if(size >= level.teammessagequeuemax) {
       continue;
     }
-    cur_player.teammessagequeue[size] = spawnstruct();
+    cur_player.teammessagequeue[size] = spawnStruct();
     cur_player.teammessagequeue[size].message = message;
     cur_player.teammessagequeue[size].player = player;
     cur_player notify("hash_f0fa2450");
@@ -514,7 +514,7 @@ function displayteammessagetoteam(message, player, team) {
   if(!shoulddisplayteammessages()) {
     return;
   }
-  for (i = 0; i < level.players.size; i++) {
+  for(i = 0; i < level.players.size; i++) {
     cur_player = level.players[i];
     if(cur_player.team != team) {
       continue;
@@ -526,7 +526,7 @@ function displayteammessagetoteam(message, player, team) {
     if(size >= level.teammessagequeuemax) {
       continue;
     }
-    cur_player.teammessagequeue[size] = spawnstruct();
+    cur_player.teammessagequeue[size] = spawnStruct();
     cur_player.teammessagequeue[size].message = message;
     cur_player.teammessagequeue[size].player = player;
     cur_player notify("hash_f0fa2450");
@@ -540,14 +540,14 @@ function displayteammessagewaiter() {
   self endon("disconnect");
   level endon("game_ended");
   self.teammessagequeue = [];
-  for (;;) {
+  for(;;) {
     if(self.teammessagequeue.size == 0) {
       self waittill("hash_f0fa2450");
     }
     if(self.teammessagequeue.size > 0) {
       nextnotifydata = self.teammessagequeue[0];
       arrayremoveindex(self.teammessagequeue, 0, 0);
-      if(!isdefined(nextnotifydata.player) || !isplayer(nextnotifydata.player)) {
+      if(!isDefined(nextnotifydata.player) || !isplayer(nextnotifydata.player)) {
         continue;
       }
       if(self isempjammed()) {
@@ -562,27 +562,27 @@ function displayteammessagewaiter() {
 function displaypopupswaiter() {
   self endon("disconnect");
   self.ranknotifyqueue = [];
-  if(!isdefined(self.pers["challengeNotifyQueue"])) {
+  if(!isDefined(self.pers["challengeNotifyQueue"])) {
     self.pers["challengeNotifyQueue"] = [];
   }
-  if(!isdefined(self.pers["contractNotifyQueue"])) {
+  if(!isDefined(self.pers["contractNotifyQueue"])) {
     self.pers["contractNotifyQueue"] = [];
   }
   self.messagenotifyqueue = [];
   self.startmessagenotifyqueue = [];
   self.wagernotifyqueue = [];
-  while (isdefined(level) && isdefined(level.gameended) && !level.gameended) {
-    if(!isdefined(self) || !isdefined(self.startmessagenotifyqueue) || !isdefined(self.messagenotifyqueue)) {
+  while(isDefined(level) && isDefined(level.gameended) && !level.gameended) {
+    if(!isDefined(self) || !isDefined(self.startmessagenotifyqueue) || !isDefined(self.messagenotifyqueue)) {
       break;
     }
     if(self.startmessagenotifyqueue.size == 0 && self.messagenotifyqueue.size == 0) {
       self waittill("hash_2528173");
     }
     waittillframeend();
-    if(!isdefined(level)) {
+    if(!isDefined(level)) {
       break;
     }
-    if(!isdefined(level.gameended)) {
+    if(!isDefined(level.gameended)) {
       break;
     }
     if(level.gameended) {
@@ -591,7 +591,7 @@ function displaypopupswaiter() {
     if(self.startmessagenotifyqueue.size > 0) {
       nextnotifydata = self.startmessagenotifyqueue[0];
       arrayremoveindex(self.startmessagenotifyqueue, 0, 0);
-      if(isdefined(nextnotifydata.duration)) {
+      if(isDefined(nextnotifydata.duration)) {
         duration = nextnotifydata.duration;
       } else {
         duration = level.startmessagedefaultduration;
@@ -602,7 +602,7 @@ function displaypopupswaiter() {
       if(self.messagenotifyqueue.size > 0) {
         nextnotifydata = self.messagenotifyqueue[0];
         arrayremoveindex(self.messagenotifyqueue, 0, 0);
-        if(isdefined(nextnotifydata.duration)) {
+        if(isDefined(nextnotifydata.duration)) {
           duration = nextnotifydata.duration;
         } else {
           duration = level.regulargamemessages.waittime;
@@ -617,7 +617,7 @@ function displaypopupswaiter() {
 
 function milestonenotify(index, itemindex, type, tier) {
   level.globalchallenges++;
-  if(!isdefined(type)) {
+  if(!isDefined(type)) {
     type = "global";
   }
   size = self.pers["challengeNotifyQueue"].size;

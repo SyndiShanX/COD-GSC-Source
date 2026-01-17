@@ -19,34 +19,34 @@
 #namespace end_game_taunts;
 
 function autoexec __init__sytem__() {
-  system::register("end_game_taunts", & __init__, undefined, undefined);
+  system::register("end_game_taunts", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  animation::add_notetrack_func("taunts::hide", & hidemodel);
-  animation::add_notetrack_func("taunts::show", & showmodel);
-  animation::add_notetrack_func("taunts::cloneshaderon", & cloneshaderon);
-  animation::add_notetrack_func("taunts::cloneshaderoff", & cloneshaderoff);
-  animation::add_notetrack_func("taunts::camoshaderon", & camoshaderon);
-  animation::add_notetrack_func("taunts::camoshaderoff", & camoshaderoff);
-  animation::add_notetrack_func("taunts::spawncameraglass", & spawncameraglass);
-  animation::add_notetrack_func("taunts::deletecameraglass", & deletecameraglass);
-  animation::add_notetrack_func("taunts::reaperbulletglass", & reaperbulletglass);
-  animation::add_notetrack_func("taunts::centerbulletglass", & centerbulletglass);
-  animation::add_notetrack_func("taunts::talonbulletglassleft", & talonbulletglassleft);
-  animation::add_notetrack_func("taunts::talonbulletglassright", & talonbulletglassright);
-  animation::add_notetrack_func("taunts::fireweapon", & fireweapon);
-  animation::add_notetrack_func("taunts::stopfireweapon", & stopfireweapon);
-  animation::add_notetrack_func("taunts::firebeam", & firebeam);
-  animation::add_notetrack_func("taunts::stopfirebeam", & stopfirebeam);
-  animation::add_notetrack_func("taunts::playwinnerteamfx", & playwinnerteamfx);
-  animation::add_notetrack_func("taunts::playlocalteamfx", & playlocalteamfx);
+  animation::add_notetrack_func("taunts::hide", &hidemodel);
+  animation::add_notetrack_func("taunts::show", &showmodel);
+  animation::add_notetrack_func("taunts::cloneshaderon", &cloneshaderon);
+  animation::add_notetrack_func("taunts::cloneshaderoff", &cloneshaderoff);
+  animation::add_notetrack_func("taunts::camoshaderon", &camoshaderon);
+  animation::add_notetrack_func("taunts::camoshaderoff", &camoshaderoff);
+  animation::add_notetrack_func("taunts::spawncameraglass", &spawncameraglass);
+  animation::add_notetrack_func("taunts::deletecameraglass", &deletecameraglass);
+  animation::add_notetrack_func("taunts::reaperbulletglass", &reaperbulletglass);
+  animation::add_notetrack_func("taunts::centerbulletglass", &centerbulletglass);
+  animation::add_notetrack_func("taunts::talonbulletglassleft", &talonbulletglassleft);
+  animation::add_notetrack_func("taunts::talonbulletglassright", &talonbulletglassright);
+  animation::add_notetrack_func("taunts::fireweapon", &fireweapon);
+  animation::add_notetrack_func("taunts::stopfireweapon", &stopfireweapon);
+  animation::add_notetrack_func("taunts::firebeam", &firebeam);
+  animation::add_notetrack_func("taunts::stopfirebeam", &stopfirebeam);
+  animation::add_notetrack_func("taunts::playwinnerteamfx", &playwinnerteamfx);
+  animation::add_notetrack_func("taunts::playlocalteamfx", &playlocalteamfx);
   level.epictauntxmodels = array("gfx_p7_zm_asc_data_recorder_glass", "wpn_t7_hero_reaper_minigun_prop", "wpn_t7_loot_hero_reaper3_minigun_prop", "c_zsf_robot_grunt_body", "c_zsf_robot_grunt_head", "veh_t7_drone_raps_mp_lite", "veh_t7_drone_raps_mp_dark", "veh_t7_drone_attack_gun_litecolor", "veh_t7_drone_attack_gun_darkcolor", "wpn_t7_arm_blade_prop", "wpn_t7_hero_annihilator_prop", "wpn_t7_hero_bow_prop", "wpn_t7_hero_electro_prop_animate", "wpn_t7_hero_flamethrower_world", "wpn_t7_hero_mgl_world", "wpn_t7_hero_mgl_prop", "wpn_t7_hero_spike_prop", "wpn_t7_hero_seraph_machete_prop", "wpn_t7_loot_crowbar_world", "wpn_t7_spider_mine_world", "wpn_t7_zmb_katana_prop");
   stop_stream_epic_models();
 }
 
 function check_force_taunt() {
-  while (true) {
+  while(true) {
     setdvar("", "");
     wait(0.05);
     taunt = getdvarstring("");
@@ -54,7 +54,7 @@ function check_force_taunt() {
       continue;
     }
     model = level.topplayercharacters[0];
-    if(!isdefined(model) || isdefined(model.playingtaunt) || (isdefined(model.playinggesture) && model.playinggesture)) {
+    if(!isDefined(model) || isDefined(model.playingtaunt) || (isDefined(model.playinggesture) && model.playinggesture)) {
       continue;
     }
     bodytype = getdvarint("", -1);
@@ -75,7 +75,7 @@ function check_force_taunt() {
 }
 
 function check_force_gesture() {
-  while (true) {
+  while(true) {
     setdvar("", "");
     wait(0.05);
     gesture = getdvarstring("");
@@ -83,7 +83,7 @@ function check_force_gesture() {
       continue;
     }
     model = level.topplayercharacters[0];
-    if(!isdefined(model) || isdefined(model.playingtaunt) || (isdefined(model.playinggesture) && model.playinggesture)) {
+    if(!isDefined(model) || isDefined(model.playingtaunt) || (isDefined(model.playinggesture) && model.playinggesture)) {
       continue;
     }
     idleanimname = getidleanimname(model.localclientnum, model, 0);
@@ -92,12 +92,12 @@ function check_force_gesture() {
 }
 
 function draw_runner_up_bounds() {
-  while (true) {
+  while(true) {
     wait(0.016);
     if(!getdvarint("", 0)) {
       continue;
     }
-    for (i = 1; i < 3; i++) {
+    for(i = 1; i < 3; i++) {
       model = level.topplayercharacters[i];
       box(model.origin, vectorscale((-1, -1, 0), 15), (15, 15, 72), model.angles[1], (0, 0, 1), 0, 1);
     }
@@ -110,7 +110,7 @@ function spawn_temp_specialist_model(localclientnum, characterindex, origin, ang
   tempmodel.showcaseweapon = showcaseweapon;
   tempmodel.bodymodel = getcharacterbodymodel(characterindex, 0, currentsessionmode());
   tempmodel.helmetmodel = getcharacterhelmetmodel(characterindex, 0, currentsessionmode());
-  tempmodel setmodel(tempmodel.bodymodel);
+  tempmodel setModel(tempmodel.bodymodel);
   tempmodel attach(tempmodel.helmetmodel, "");
   tempmodel.moderenderoptions = getcharactermoderenderoptions(currentsessionmode());
   tempmodel.bodyrenderoptions = getcharacterbodyrenderoptions(characterindex, 0, 0, 0, 0);
@@ -132,7 +132,7 @@ function previewtaunt(localclientnum, charactermodel, idleanimname, tauntanimnam
 }
 
 function playtaunt(localclientnum, charactermodel, topplayerindex, idleanimname, tauntanimname, totauntblendtime = 0, playtransitions = 1) {
-  if(!isdefined(tauntanimname) || tauntanimname == "") {
+  if(!isDefined(tauntanimname) || tauntanimname == "") {
     return;
   }
   canceltaunt(localclientnum, charactermodel);
@@ -149,7 +149,7 @@ function playtaunt(localclientnum, charactermodel, topplayerindex, idleanimname,
   hideweapon(charactermodel);
   charactermodel thread playepictauntscene(localclientnum, tauntanimname);
   charactermodel animation::play(tauntanimname, undefined, undefined, 1, totauntblendtime, 0.4);
-  if(isdefined(playtransitions) && playtransitions) {
+  if(isDefined(playtransitions) && playtransitions) {
     self thread waitappearweapon(charactermodel);
     playtransitionanim(charactermodel, idleinanimname, 0.4, 0.4);
   }
@@ -161,7 +161,7 @@ function playtaunt(localclientnum, charactermodel, topplayerindex, idleanimname,
 }
 
 function canceltaunt(localclientnum, charactermodel) {
-  if(isdefined(charactermodel.playingtaunt)) {
+  if(isDefined(charactermodel.playingtaunt)) {
     charactermodel cloneshaderoff();
     charactermodel shutdownepictauntmodels();
     charactermodel stopepictauntscene(localclientnum, charactermodel.playingtaunt);
@@ -185,7 +185,7 @@ function previewgesture(localclientnum, charactermodel, idleanimname, gestureani
 }
 
 function playgesture(localclientnum, charactermodel, topplayerindex, idleanimname, gestureanimname, playtransitions = 1) {
-  if(!isdefined(gestureanimname) || gestureanimname == "") {
+  if(!isDefined(gestureanimname) || gestureanimname == "") {
     return;
   }
   cancelgesture(charactermodel);
@@ -199,13 +199,13 @@ function playgesture(localclientnum, charactermodel, topplayerindex, idleanimnam
   charactermodel clearanim(idleanimname, 0.4);
   idleoutanimname = getidleoutanimname(charactermodel, topplayerindex);
   idleinanimname = getidleinanimname(charactermodel, topplayerindex);
-  if(isdefined(playtransitions) && playtransitions) {
+  if(isDefined(playtransitions) && playtransitions) {
     self thread waitremoveweapon(charactermodel);
     playtransitionanim(charactermodel, idleoutanimname, 0.4, 0.4);
   }
   hideweapon(charactermodel);
   charactermodel animation::play(gestureanimname, undefined, undefined, 1, 0.4, 0.4);
-  if(isdefined(playtransitions) && playtransitions) {
+  if(isDefined(playtransitions) && playtransitions) {
     self thread waitappearweapon(charactermodel);
     playtransitionanim(charactermodel, idleinanimname, 0.4, 0.4);
   }
@@ -222,7 +222,7 @@ function cancelgesture(charactermodel) {
 
 function playtransitionanim(charactermodel, transitionanimname, blendintime = 0, blendouttime = 0) {
   charactermodel endon("canceltaunt");
-  if(!isdefined(transitionanimname) || transitionanimname == "") {
+  if(!isDefined(transitionanimname) || transitionanimname == "") {
     return;
   }
   charactermodel animation::play(transitionanimname, undefined, undefined, 1, blendintime, blendouttime);
@@ -230,7 +230,7 @@ function playtransitionanim(charactermodel, transitionanimname, blendintime = 0,
 
 function waitremoveweapon(charactermodel) {
   charactermodel endon("weaponhidden");
-  while (true) {
+  while(true) {
     charactermodel waittill("_anim_notify_", param1);
     if(param1 == "remove_from_hand") {
       hideweapon(charactermodel);
@@ -241,7 +241,7 @@ function waitremoveweapon(charactermodel) {
 
 function waitappearweapon(charactermodel) {
   charactermodel endon("weaponshown");
-  while (true) {
+  while(true) {
     charactermodel waittill("_anim_notify_", param1);
     if(param1 == "appear_in_hand") {
       showweapon(charactermodel);
@@ -261,11 +261,11 @@ function hideweapon(charactermodel) {
 }
 
 function showweapon(charactermodel) {
-  if(!isdefined(charactermodel.showcaseweapon) || charactermodel.weapon != level.weaponnone) {
+  if(!isDefined(charactermodel.showcaseweapon) || charactermodel.weapon != level.weaponnone) {
     return;
   }
   markasdirty(charactermodel);
-  if(isdefined(charactermodel.showcaseweaponrenderoptions)) {
+  if(isDefined(charactermodel.showcaseweaponrenderoptions)) {
     charactermodel attachweapon(charactermodel.showcaseweapon, charactermodel.showcaseweaponrenderoptions, charactermodel.showcaseweaponacvi);
     charactermodel useweaponhidetags(charactermodel.showcaseweapon);
   } else {
@@ -275,7 +275,7 @@ function showweapon(charactermodel) {
 }
 
 function getidleanimname(localclientnum, charactermodel, topplayerindex) {
-  if(isdefined(charactermodel.weapon)) {
+  if(isDefined(charactermodel.weapon)) {
     weapon_group = getitemgroupforweaponname(charactermodel.weapon.rootweapon.name);
     if(weapon_group == "weapon_launcher") {
       if(charactermodel.weapon.rootweapon.name == "launcher_lockonly" || charactermodel.weapon.rootweapon.name == "launcher_multi") {
@@ -346,11 +346,11 @@ function getidleanimname(localclientnum, charactermodel, topplayerindex) {
         }
       }
     }
-    if(isdefined(associativearray("weapon_smg", array("pb_smg_endgame_1stplace_idle", "pb_smg_endgame_2ndplace_idle", "pb_smg_endgame_3rdplace_idle"), "weapon_assault", array("pb_rifle_endgame_1stplace_idle", "pb_rifle_endgame_2ndplace_idle", "pb_rifle_endgame_3rdplace_idle"), "weapon_cqb", array("pb_shotgun_endgame_1stplace_idle", "pb_shotgun_endgame_2ndplace_idle", "pb_shotgun_endgame_3rdplace_idle"), "weapon_lmg", array("pb_lmg_endgame_1stplace_idle", "pb_lmg_endgame_2ndplace_idle", "pb_lmg_endgame_3rdplace_idle"), "weapon_sniper", array("pb_sniper_endgame_1stplace_idle", "pb_sniper_endgame_2ndplace_idle", "pb_sniper_endgame_3rdplace_idle"), "weapon_pistol", array("pb_pistol_endgame_1stplace_idle", "pb_pistol_endgame_2ndplace_idle", "pb_pistol_endgame_3rdplace_idle"), "weapon_pistol_dw", array("pb_pistol_dw_endgame_1stplace_idle", "pb_pistol_dw_endgame_2ndplace_idle", "pb_pistol_dw_endgame_3rdplace_idle"), "weapon_launcher", array("pb_launcher_endgame_1stplace_idle", "pb_launcher_endgame_2ndplace_idle", "pb_launcher_endgame_3rdplace_idle"), "weapon_launcher_alt", array("pb_launcher_alt_endgame_1stplace_idle", "pb_launcher_alt_endgame_2ndplace_idle", "pb_launcher_alt_endgame_3rdplace_idle"), "weapon_knife", array("pb_knife_endgame_1stplace_idle", "pb_knife_endgame_2ndplace_idle", "pb_knife_endgame_3rdplace_idle"), "weapon_knuckles", array("pb_brass_knuckles_endgame_1stplace_idle", "pb_brass_knuckles_endgame_2ndplace_idle", "pb_brass_knuckles_endgame_3rdplace_idle"), "weapon_boxing", array("pb_boxing_gloves_endgame_1stplace_idle", "pb_boxing_gloves_endgame_2ndplace_idle", "pb_boxing_gloves_endgame_3rdplace_idle"), "weapon_wrench", array("pb_wrench_endgame_1stplace_idle", "pb_wrench_endgame_2ndplace_idle", "pb_wrench_endgame_3rdplace_idle"), "weapon_sword", array("pb_sword_endgame_1stplace_idle", "pb_sword_endgame_2ndplace_idle", "pb_sword_endgame_3rdplace_idle"), "weapon_nunchucks", array("pb_nunchucks_endgame_1stplace_idle", "pb_nunchucks_endgame_2ndplace_idle", "pb_nunchucks_endgame_3rdplace_idle"), "weapon_mace", array("pb_mace_endgame_1stplace_idle", "pb_mace_endgame_2ndplace_idle", "pb_mace_endgame_3rdplace_idle"), "brawler", array("pb_brawler_endgame_1stplace_idle", "pb_brawler_endgame_2ndplace_idle", "pb_brawler_endgame_3rdplace_idle"), "weapon_prosthetic", array("pb_prosthetic_arm_endgame_1stplace_idle", "pb_prosthetic_arm_endgame_2ndplace_idle", "pb_prosthetic_arm_endgame_3rdplace_idle"), "weapon_chainsaw", array("pb_chainsaw_endgame_1stplace_idle", "pb_chainsaw_endgame_1stplace_idle", "pb_chainsaw_endgame_1stplace_idle"), "weapon_smg_ppsh", array("pb_smg_ppsh_endgame_1stplace_idle", "pb_smg_ppsh_endgame_1stplace_idle", "pb_smg_ppsh_endgame_1stplace_idle"), "weapon_knife_ballistic", array("pb_b_knife_endgame_1stplace_idle", "pb_b_knife_endgame_2ndplace_idle", "pb_b_knife_endgame_3rdplace_idle"))[weapon_group])) {
+    if(isDefined(associativearray("weapon_smg", array("pb_smg_endgame_1stplace_idle", "pb_smg_endgame_2ndplace_idle", "pb_smg_endgame_3rdplace_idle"), "weapon_assault", array("pb_rifle_endgame_1stplace_idle", "pb_rifle_endgame_2ndplace_idle", "pb_rifle_endgame_3rdplace_idle"), "weapon_cqb", array("pb_shotgun_endgame_1stplace_idle", "pb_shotgun_endgame_2ndplace_idle", "pb_shotgun_endgame_3rdplace_idle"), "weapon_lmg", array("pb_lmg_endgame_1stplace_idle", "pb_lmg_endgame_2ndplace_idle", "pb_lmg_endgame_3rdplace_idle"), "weapon_sniper", array("pb_sniper_endgame_1stplace_idle", "pb_sniper_endgame_2ndplace_idle", "pb_sniper_endgame_3rdplace_idle"), "weapon_pistol", array("pb_pistol_endgame_1stplace_idle", "pb_pistol_endgame_2ndplace_idle", "pb_pistol_endgame_3rdplace_idle"), "weapon_pistol_dw", array("pb_pistol_dw_endgame_1stplace_idle", "pb_pistol_dw_endgame_2ndplace_idle", "pb_pistol_dw_endgame_3rdplace_idle"), "weapon_launcher", array("pb_launcher_endgame_1stplace_idle", "pb_launcher_endgame_2ndplace_idle", "pb_launcher_endgame_3rdplace_idle"), "weapon_launcher_alt", array("pb_launcher_alt_endgame_1stplace_idle", "pb_launcher_alt_endgame_2ndplace_idle", "pb_launcher_alt_endgame_3rdplace_idle"), "weapon_knife", array("pb_knife_endgame_1stplace_idle", "pb_knife_endgame_2ndplace_idle", "pb_knife_endgame_3rdplace_idle"), "weapon_knuckles", array("pb_brass_knuckles_endgame_1stplace_idle", "pb_brass_knuckles_endgame_2ndplace_idle", "pb_brass_knuckles_endgame_3rdplace_idle"), "weapon_boxing", array("pb_boxing_gloves_endgame_1stplace_idle", "pb_boxing_gloves_endgame_2ndplace_idle", "pb_boxing_gloves_endgame_3rdplace_idle"), "weapon_wrench", array("pb_wrench_endgame_1stplace_idle", "pb_wrench_endgame_2ndplace_idle", "pb_wrench_endgame_3rdplace_idle"), "weapon_sword", array("pb_sword_endgame_1stplace_idle", "pb_sword_endgame_2ndplace_idle", "pb_sword_endgame_3rdplace_idle"), "weapon_nunchucks", array("pb_nunchucks_endgame_1stplace_idle", "pb_nunchucks_endgame_2ndplace_idle", "pb_nunchucks_endgame_3rdplace_idle"), "weapon_mace", array("pb_mace_endgame_1stplace_idle", "pb_mace_endgame_2ndplace_idle", "pb_mace_endgame_3rdplace_idle"), "brawler", array("pb_brawler_endgame_1stplace_idle", "pb_brawler_endgame_2ndplace_idle", "pb_brawler_endgame_3rdplace_idle"), "weapon_prosthetic", array("pb_prosthetic_arm_endgame_1stplace_idle", "pb_prosthetic_arm_endgame_2ndplace_idle", "pb_prosthetic_arm_endgame_3rdplace_idle"), "weapon_chainsaw", array("pb_chainsaw_endgame_1stplace_idle", "pb_chainsaw_endgame_1stplace_idle", "pb_chainsaw_endgame_1stplace_idle"), "weapon_smg_ppsh", array("pb_smg_ppsh_endgame_1stplace_idle", "pb_smg_ppsh_endgame_1stplace_idle", "pb_smg_ppsh_endgame_1stplace_idle"), "weapon_knife_ballistic", array("pb_b_knife_endgame_1stplace_idle", "pb_b_knife_endgame_2ndplace_idle", "pb_b_knife_endgame_3rdplace_idle"))[weapon_group])) {
       anim_name = associativearray("weapon_smg", array("pb_smg_endgame_1stplace_idle", "pb_smg_endgame_2ndplace_idle", "pb_smg_endgame_3rdplace_idle"), "weapon_assault", array("pb_rifle_endgame_1stplace_idle", "pb_rifle_endgame_2ndplace_idle", "pb_rifle_endgame_3rdplace_idle"), "weapon_cqb", array("pb_shotgun_endgame_1stplace_idle", "pb_shotgun_endgame_2ndplace_idle", "pb_shotgun_endgame_3rdplace_idle"), "weapon_lmg", array("pb_lmg_endgame_1stplace_idle", "pb_lmg_endgame_2ndplace_idle", "pb_lmg_endgame_3rdplace_idle"), "weapon_sniper", array("pb_sniper_endgame_1stplace_idle", "pb_sniper_endgame_2ndplace_idle", "pb_sniper_endgame_3rdplace_idle"), "weapon_pistol", array("pb_pistol_endgame_1stplace_idle", "pb_pistol_endgame_2ndplace_idle", "pb_pistol_endgame_3rdplace_idle"), "weapon_pistol_dw", array("pb_pistol_dw_endgame_1stplace_idle", "pb_pistol_dw_endgame_2ndplace_idle", "pb_pistol_dw_endgame_3rdplace_idle"), "weapon_launcher", array("pb_launcher_endgame_1stplace_idle", "pb_launcher_endgame_2ndplace_idle", "pb_launcher_endgame_3rdplace_idle"), "weapon_launcher_alt", array("pb_launcher_alt_endgame_1stplace_idle", "pb_launcher_alt_endgame_2ndplace_idle", "pb_launcher_alt_endgame_3rdplace_idle"), "weapon_knife", array("pb_knife_endgame_1stplace_idle", "pb_knife_endgame_2ndplace_idle", "pb_knife_endgame_3rdplace_idle"), "weapon_knuckles", array("pb_brass_knuckles_endgame_1stplace_idle", "pb_brass_knuckles_endgame_2ndplace_idle", "pb_brass_knuckles_endgame_3rdplace_idle"), "weapon_boxing", array("pb_boxing_gloves_endgame_1stplace_idle", "pb_boxing_gloves_endgame_2ndplace_idle", "pb_boxing_gloves_endgame_3rdplace_idle"), "weapon_wrench", array("pb_wrench_endgame_1stplace_idle", "pb_wrench_endgame_2ndplace_idle", "pb_wrench_endgame_3rdplace_idle"), "weapon_sword", array("pb_sword_endgame_1stplace_idle", "pb_sword_endgame_2ndplace_idle", "pb_sword_endgame_3rdplace_idle"), "weapon_nunchucks", array("pb_nunchucks_endgame_1stplace_idle", "pb_nunchucks_endgame_2ndplace_idle", "pb_nunchucks_endgame_3rdplace_idle"), "weapon_mace", array("pb_mace_endgame_1stplace_idle", "pb_mace_endgame_2ndplace_idle", "pb_mace_endgame_3rdplace_idle"), "brawler", array("pb_brawler_endgame_1stplace_idle", "pb_brawler_endgame_2ndplace_idle", "pb_brawler_endgame_3rdplace_idle"), "weapon_prosthetic", array("pb_prosthetic_arm_endgame_1stplace_idle", "pb_prosthetic_arm_endgame_2ndplace_idle", "pb_prosthetic_arm_endgame_3rdplace_idle"), "weapon_chainsaw", array("pb_chainsaw_endgame_1stplace_idle", "pb_chainsaw_endgame_1stplace_idle", "pb_chainsaw_endgame_1stplace_idle"), "weapon_smg_ppsh", array("pb_smg_ppsh_endgame_1stplace_idle", "pb_smg_ppsh_endgame_1stplace_idle", "pb_smg_ppsh_endgame_1stplace_idle"), "weapon_knife_ballistic", array("pb_b_knife_endgame_1stplace_idle", "pb_b_knife_endgame_2ndplace_idle", "pb_b_knife_endgame_3rdplace_idle"))[weapon_group][topplayerindex];
     }
   }
-  if(!isdefined(anim_name)) {
+  if(!isDefined(anim_name)) {
     anim_name = array("pb_brawler_endgame_1stplace_idle", "pb_brawler_endgame_2ndplace_idle", "pb_brawler_endgame_3rdplace_idle")[topplayerindex];
   }
   return anim_name;
@@ -491,11 +491,11 @@ function getidleinanimname(charactermodel, topplayerindex) {
 }
 
 function getweapongroup(charactermodel) {
-  if(!isdefined(charactermodel.weapon)) {
+  if(!isDefined(charactermodel.weapon)) {
     return "";
   }
   weapon = charactermodel.weapon;
-  if(weapon == level.weaponnone && isdefined(charactermodel.showcaseweapon)) {
+  if(weapon == level.weaponnone && isDefined(charactermodel.showcaseweapon)) {
     weapon = charactermodel.showcaseweapon;
   }
   weapon_group = getitemgroupforweaponname(weapon.rootweapon.name);
@@ -581,7 +581,7 @@ function stop_stream_epic_models() {
 
 function playepictauntscene(localclientnum, tauntanimname) {
   scenebundle = struct::get_script_bundle("scene", tauntanimname);
-  if(!isdefined(scenebundle)) {
+  if(!isDefined(scenebundle)) {
     return false;
   }
   switch (tauntanimname) {
@@ -625,7 +625,7 @@ function playepictauntscene(localclientnum, tauntanimname) {
 
 function stopepictauntscene(localclientnum, tauntanimname) {
   scenebundle = struct::get_script_bundle("scene", tauntanimname);
-  if(!isdefined(scenebundle)) {
+  if(!isDefined(scenebundle)) {
     return;
   }
   switch (tauntanimname) {
@@ -641,16 +641,16 @@ function stopepictauntscene(localclientnum, tauntanimname) {
 
 function addepicscenefunc(tauntanimname, func, state) {
   scenebundle = struct::get_script_bundle("scene", tauntanimname);
-  if(!isdefined(scenebundle)) {
+  if(!isDefined(scenebundle)) {
     return;
   }
   scene::add_scene_func(tauntanimname, func, state);
 }
 
 function shutdownepictauntmodels() {
-  if(isdefined(self.epictauntmodels)) {
+  if(isDefined(self.epictauntmodels)) {
     foreach(model in self.epictauntmodels) {
-      if(isdefined(model)) {
+      if(isDefined(model)) {
         model stopsounds();
         model delete();
       }
@@ -668,21 +668,21 @@ function showmodel(param) {
 }
 
 function spawncameraglass(param) {
-  if(isdefined(level.cameraglass)) {
+  if(isDefined(level.cameraglass)) {
     deletecameraglass(param);
   }
   level.cameraglass = spawn(self.localclientnum, (0, 0, 0), "script_model");
-  level.cameraglass setmodel("gfx_p7_zm_asc_data_recorder_glass");
+  level.cameraglass setModel("gfx_p7_zm_asc_data_recorder_glass");
   level.cameraglass setscale(2);
   level.cameraglass thread updateglassposition();
 }
 
 function updateglassposition() {
   self endon("entityshutdown");
-  while (true) {
+  while(true) {
     camangles = getcamanglesbylocalclientnum(self.localclientnum);
     campos = getcamposbylocalclientnum(self.localclientnum);
-    fwd = anglestoforward(camangles);
+    fwd = anglesToForward(camangles);
     self.origin = campos + (fwd * 60);
     self.angles = camangles + vectorscale((0, 1, 0), 180);
     wait(0.016);
@@ -690,7 +690,7 @@ function updateglassposition() {
 }
 
 function deletecameraglass(param) {
-  if(!isdefined(level.cameraglass)) {
+  if(!isDefined(level.cameraglass)) {
     return;
   }
   level.cameraglass delete();
@@ -701,12 +701,12 @@ function reaperbulletglass(param) {
   waittillframeend();
   minigun = getweapon("hero_minigun");
   i = 30;
-  while (i > -30) {
-    if(!isdefined(self)) {
+  while(i > -30) {
+    if(!isDefined(self)) {
       return;
     }
     self magicglassbullet(self.localclientnum, minigun, randomfloatrange(2, 12), i);
-    self playsound(0, "pfx_magic_bullet_glass");
+    self playSound(0, "pfx_magic_bullet_glass");
     wait(minigun.firetime);
     i = i - 7;
   }
@@ -719,7 +719,7 @@ function centerbulletglass(weaponname) {
     return;
   }
   self magicglassbullet(self.localclientnum, weapon, 4, -2);
-  self playsound(0, "pfx_magic_bullet_glass");
+  self playSound(0, "pfx_magic_bullet_glass");
 }
 
 function talonbulletglassleft(param) {
@@ -733,12 +733,12 @@ function talonbulletglassright(param) {
 function talonbulletglass(yawmin, yawmax) {
   waittillframeend();
   minigun = getweapon("hero_minigun");
-  for (i = 0; i < 15; i++) {
-    if(!isdefined(self)) {
+  for(i = 0; i < 15; i++) {
+    if(!isDefined(self)) {
       return;
     }
     self magicglassbullet(self.localclientnum, minigun, randomfloatrange(4, 16), randomfloatrange(yawmin, yawmax));
-    self playsound(0, "pfx_magic_bullet_glass");
+    self playSound(0, "pfx_magic_bullet_glass");
     wait(minigun.firetime);
   }
 }
@@ -796,13 +796,13 @@ function camoshaderoff(param) {
 }
 
 function fireweapon(weaponname) {
-  if(!isdefined(weaponname)) {
+  if(!isDefined(weaponname)) {
     return;
   }
   self endon("stopfireweapon");
   weapon = getweapon(weaponname);
   waittillframeend();
-  while (1 && isdefined(self)) {
+  while(1 && isDefined(self)) {
     self magicbullet(weapon, (0, 0, 0), (0, 0, 0));
     wait(weapon.firetime);
   }
@@ -813,14 +813,14 @@ function stopfireweapon(param) {
 }
 
 function firebeam(beam) {
-  if(isdefined(self.beamfx)) {
+  if(isDefined(self.beamfx)) {
     return;
   }
   self.beamfx = beamlaunch(self.localclientnum, self, "tag_flash", undefined, "none", beam);
 }
 
 function stopfirebeam(param) {
-  if(!isdefined(self.beamfx)) {
+  if(!isDefined(self.beamfx)) {
     return;
   }
   beamkill(self.localclientnum, self.beamfx);
@@ -830,11 +830,11 @@ function stopfirebeam(param) {
 function playwinnerteamfx(fxname) {
   waittillframeend();
   topplayerteam = gettopplayersteam(self.localclientnum, 0);
-  if(!isdefined(topplayerteam)) {
+  if(!isDefined(topplayerteam)) {
     topplayerteam = getlocalplayerteam(self.localclientnum);
   }
-  fxhandle = playfxontag(self.localclientnum, fxname, self, "tag_origin");
-  if(isdefined(fxhandle)) {
+  fxhandle = playFXOnTag(self.localclientnum, fxname, self, "tag_origin");
+  if(isDefined(fxhandle)) {
     setfxteam(self.localclientnum, fxhandle, topplayerteam);
   }
 }
@@ -842,8 +842,8 @@ function playwinnerteamfx(fxname) {
 function playlocalteamfx(fxname) {
   waittillframeend();
   localplayerteam = getlocalplayerteam(self.localclientnum);
-  fxhandle = playfxontag(self.localclientnum, fxname, self, "tag_origin");
-  if(isdefined(fxhandle)) {
+  fxhandle = playFXOnTag(self.localclientnum, fxname, self, "tag_origin");
+  if(isDefined(fxhandle)) {
     setfxteam(self.localclientnum, fxhandle, localplayerteam);
   }
 }
@@ -857,11 +857,11 @@ function magicglassbullet(localclientnum, weapon, pitchangle, yawangle) {
 
 function launchprojectile(localclientnum, projectilemodel, projectiletrail) {
   launchorigin = self gettagorigin("tag_flash");
-  if(!isdefined(launchorigin)) {
+  if(!isDefined(launchorigin)) {
     return;
   }
   launchangles = self gettagangles("tag_flash");
-  launchdir = anglestoforward(launchangles);
+  launchdir = anglesToForward(launchangles);
   createdynentandlaunch(localclientnum, projectilemodel, launchorigin, (0, 0, 0), launchorigin, launchdir * getdvarfloat("launchspeed", 3.5), projectiletrail);
 }
 
@@ -871,15 +871,15 @@ function setupreaperminigun(localclientnum) {
   model.targetname = "scythe_prop";
   model sethighdetail(1);
   scythemodel = "wpn_t7_hero_reaper_minigun_prop";
-  if(isdefined(self.bodymodel)) {
+  if(isDefined(self.bodymodel)) {
     if(strstartswith(self.bodymodel, "c_t7_mp_reaper_mpc_body3")) {
       scythemodel = "wpn_t7_loot_hero_reaper3_minigun_prop";
     }
   }
-  model setmodel(scythemodel);
+  model setModel(scythemodel);
   model setbodyrenderoptions(self.moderenderoptions, self.bodyrenderoptions, self.helmetrenderoptions, self.helmetrenderoptions);
   self hidepart(localclientnum, "tag_minigun_flaps");
-  if(!isdefined(self.epictauntmodels)) {
+  if(!isDefined(self.epictauntmodels)) {
     self.epictauntmodels = [];
   } else if(!isarray(self.epictauntmodels)) {
     self.epictauntmodels = array(self.epictauntmodels);
@@ -893,7 +893,7 @@ function spawnhiddenclone(localclientnum, targetname) {
   wait(0.016);
   clone hide();
   clone setscale(1);
-  if(!isdefined(self.epictauntmodels)) {
+  if(!isDefined(self.epictauntmodels)) {
     self.epictauntmodels = [];
   } else if(!isarray(self.epictauntmodels)) {
     self.epictauntmodels = array(self.epictauntmodels);
@@ -915,7 +915,7 @@ function spawnplayermodel(localclientnum, targetname, origin, angles, bodymodel,
   model.angles = angles;
   model.targetname = targetname;
   model sethighdetail(1);
-  model setmodel(bodymodel);
+  model setModel(bodymodel);
   model attach(helmetmodel, "");
   model setbodyrenderoptions(moderenderoptions, bodyrenderoptions, helmetrenderoptions, helmetrenderoptions);
   model hide();
@@ -928,9 +928,9 @@ function spawngiunit(localclientnum, targetname) {
   model.angles = self.angles;
   model.targetname = targetname;
   model sethighdetail(1);
-  model setmodel("c_zsf_robot_grunt_body");
+  model setModel("c_zsf_robot_grunt_body");
   model attach("c_zsf_robot_grunt_head", "");
-  if(!isdefined(self.epictauntmodels)) {
+  if(!isDefined(self.epictauntmodels)) {
     self.epictauntmodels = [];
   } else if(!isarray(self.epictauntmodels)) {
     self.epictauntmodels = array(self.epictauntmodels);
@@ -944,15 +944,15 @@ function spawnrap(localclientnum, targetname) {
   model.targetname = targetname;
   localplayerteam = getlocalplayerteam(self.localclientnum);
   topplayerteam = gettopplayersteam(localclientnum, 0);
-  if(!isdefined(topplayerteam) || localplayerteam == topplayerteam) {
-    model setmodel("veh_t7_drone_raps_mp_lite");
+  if(!isDefined(topplayerteam) || localplayerteam == topplayerteam) {
+    model setModel("veh_t7_drone_raps_mp_lite");
     fxteam = localplayerteam;
   } else {
-    model setmodel("veh_t7_drone_raps_mp_dark");
+    model setModel("veh_t7_drone_raps_mp_dark");
     fxteam = topplayerteam;
   }
   model util::waittill_dobj(localclientnum);
-  if(!isdefined(self.epictauntmodels)) {
+  if(!isDefined(self.epictauntmodels)) {
     self.epictauntmodels = [];
   } else if(!isarray(self.epictauntmodels)) {
     self.epictauntmodels = array(self.epictauntmodels);
@@ -966,18 +966,18 @@ function spawntalon(localclientnum, targetname, scale = 1) {
   model.targetname = targetname;
   localplayerteam = getlocalplayerteam(self.localclientnum);
   topplayerteam = gettopplayersteam(localclientnum, 0);
-  if(!isdefined(topplayerteam) || localplayerteam == topplayerteam) {
-    model setmodel("veh_t7_drone_attack_gun_litecolor");
+  if(!isDefined(topplayerteam) || localplayerteam == topplayerteam) {
+    model setModel("veh_t7_drone_attack_gun_litecolor");
     fxteam = localplayerteam;
   } else {
-    model setmodel("veh_t7_drone_attack_gun_darkcolor");
+    model setModel("veh_t7_drone_attack_gun_darkcolor");
     fxteam = topplayerteam;
   }
   model setscale(scale);
   model util::waittill_dobj(localclientnum);
-  fxhandle = playfxontag(localclientnum, "player/fx_loot_taunt_outrider_talon_lights", model, "tag_body");
+  fxhandle = playFXOnTag(localclientnum, "player/fx_loot_taunt_outrider_talon_lights", model, "tag_body");
   setfxteam(localclientnum, fxhandle, fxteam);
-  if(!isdefined(self.epictauntmodels)) {
+  if(!isDefined(self.epictauntmodels)) {
     self.epictauntmodels = [];
   } else if(!isarray(self.epictauntmodels)) {
     self.epictauntmodels = array(self.epictauntmodels);

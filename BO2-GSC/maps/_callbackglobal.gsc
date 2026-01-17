@@ -86,15 +86,13 @@ callback(event) {
   }
 }
 
-blank(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) {
-}
+blank(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) {}
 
 callback_curvenotify(string, curveid, nodeindex) {
   level notify(string, curveid, nodeindex);
 }
 
-callback_startgametype() {
-}
+callback_startgametype() {}
 
 checkpoint_invulnerability() {
   self endon("disconnect");
@@ -145,7 +143,7 @@ player_breadcrumb_reset(position, angles) {
       level._player_breadcrumbs[i] = [];
 
       for(j = 0; j < 4; j++)
-        level._player_breadcrumbs[i][j] = spawnstruct();
+        level._player_breadcrumbs[i][j] = spawnStruct();
     }
   }
 
@@ -206,7 +204,7 @@ setplayerspawnpos() {
   player = players[0];
 
   if(!isDefined(level._player_breadcrumbs)) {
-    spawnpoints = getentarray("info_player_deathmatch", "classname");
+    spawnpoints = getEntArray("info_player_deathmatch", "classname");
 
     if(player.origin == (0, 0, 0) && isDefined(spawnpoints) && spawnpoints.size > 0)
       player_breadcrumb_reset(spawnpoints[0].origin, spawnpoints[0].angles);
@@ -245,7 +243,7 @@ callback_playerconnect() {
   self thread maps\_load_common::player_special_death_hint();
   self thread maps\_empgrenade::monitorempgrenade();
   self thread maps\_flashgrenades::monitorflash();
-  info_player_spawn = getentarray("info_player_deathmatch", "classname");
+  info_player_spawn = getEntArray("info_player_deathmatch", "classname");
 
   if(isDefined(info_player_spawn) && info_player_spawn.size > 0) {
     players = get_players("all");
@@ -375,7 +373,7 @@ callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, sw
       dist = distance2d(vpoint, self.origin);
 
       if(dist > 32) {
-        dot_product = vectordot(anglestoforward(self.angles), vdir);
+        dot_product = vectordot(anglesToForward(self.angles), vdir);
 
         if(dot_product > 0)
           idamage = int(idamage * 0.5);
@@ -911,18 +909,15 @@ spawnintermission() {
   self setdepthoffield(0, 128, 512, 4000, 6, 1.8);
 }
 
-default_onspawnplayer() {
-}
+default_onspawnplayer() {}
 
-default_onpostspawnplayer() {
-}
+default_onpostspawnplayer() {}
 
-default_onspawnspectator() {
-}
+default_onspawnspectator() {}
 
 default_onspawnintermission() {
   spawnpointname = "info_intermission";
-  spawnpoints = getentarray(spawnpointname, "classname");
+  spawnpoints = getEntArray(spawnpointname, "classname");
 
   if(spawnpoints.size < 1) {
     println("NO " + spawnpointname + " SPAWNPOINTS IN MAP");

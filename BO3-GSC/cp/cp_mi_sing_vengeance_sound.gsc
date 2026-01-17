@@ -86,7 +86,7 @@ function function_677a24e2() {
 
 function function_13172f06() {
   trigger = getent("trigger_wood_creak", "targetname");
-  if(!isdefined(trigger)) {
+  if(!isDefined(trigger)) {
     return;
   }
   trigger waittill("trigger");
@@ -118,7 +118,7 @@ function function_a66aea7e(player) {
   player endon("death");
   player endon("disconnect");
   player waittill("hash_b8988b75");
-  if(!isdefined(player.anim_debug_name)) {
+  if(!isDefined(player.anim_debug_name)) {
     return;
   }
   if(player.anim_debug_name == "player 1") {
@@ -140,7 +140,7 @@ function function_fe8ea4c4(player) {
   player endon("death");
   player endon("disconnect");
   level.ai_hendricks waittill("takedown_start");
-  if(!isdefined(player.anim_debug_name)) {
+  if(!isDefined(player.anim_debug_name)) {
     return;
   }
   if(player.anim_debug_name == "player 1") {
@@ -256,7 +256,7 @@ function function_a34878f1(player) {
 function backdraft(org) {
   playsoundatposition("amb_fire_burst", org);
   ent = spawn("script_origin", org);
-  ent playloopsound("amb_fire_medium");
+  ent playLoopSound("amb_fire_medium");
 }
 
 function function_c4ece2ab() {
@@ -305,10 +305,10 @@ function function_47d9d5db() {
 function function_9d83fdd3(alias, is_loop, var_aa56a49b) {
   if(is_loop) {
     fade = 0;
-    if(isdefined(var_aa56a49b)) {
+    if(isDefined(var_aa56a49b)) {
       fade = var_aa56a49b;
     }
-    level.music_ent playloopsound(alias, fade);
+    level.music_ent playLoopSound(alias, fade);
   } else {
     foreach(player in getplayers()) {
       player playsoundtoplayer(alias, player);
@@ -416,11 +416,11 @@ function function_e6a33cb1() {
 
 function function_dad71f51(state) {
   level endon("hash_d3bbbf2c");
-  if(isdefined(state)) {
+  if(isDefined(state)) {
     music::setmusicstate(state);
   }
   level thread function_484281f1();
-  while (true) {
+  while(true) {
     level flag::wait_till_any(array("stealth_combat", "stealth_alert", "stealth_discovered"));
     wait(0.05);
     if(level flag::get("stealth_discovered")) {
@@ -445,14 +445,14 @@ function function_dad71f51(state) {
 
 function function_f64b08fb(state) {
   level notify("hash_d3bbbf2c");
-  if(isdefined(state)) {
+  if(isDefined(state)) {
     music::setmusicstate(state);
   }
 }
 
 function function_484281f1() {
   level endon("hash_d3bbbf2c");
-  while (true) {
+  while(true) {
     level flag::wait_till_clear_all(array("stealth_combat", "stealth_alert", "stealth_discovered"));
     wait(2);
     if(level flag::get("stealth_combat") || level flag::get("stealth_alert") || level flag::get("stealth_discovered")) {

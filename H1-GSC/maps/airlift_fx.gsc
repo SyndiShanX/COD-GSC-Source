@@ -216,9 +216,9 @@ main() {
   destructiblefx_overide();
   maps\createfx\airlift_fx::main();
   maps\createfx\airlift_sound::main();
-  var_0 = getentarray("oil_well_on_fire", "targetname");
+  var_0 = getEntArray("oil_well_on_fire", "targetname");
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++)
     var_0[var_1] spawnoilwellsonfire();
 }
 
@@ -292,7 +292,7 @@ globalfx_override() {
 
 spawnoilwellsonfire() {
   var_0 = self.origin + (0, 0, 1350);
-  playfx(common_scripts\utility::getfx("oil_field_fire"), var_0, anglestoup(self.angles), anglestoforward(self.angles));
+  playFX(common_scripts\utility::getfx("oil_field_fire"), var_0, anglestoup(self.angles), anglesToForward(self.angles));
 }
 
 bmp_deathfx_override() {

@@ -14,7 +14,7 @@
 #include maps\mp\zombies\_zm_ai_brutus;
 
 init_fan_trap_trigs() {
-  trap_trigs = getentarray("fan_trap_use_trigger", "targetname");
+  trap_trigs = getEntArray("fan_trap_use_trigger", "targetname");
   array_thread(trap_trigs, ::fan_trap_think);
   init_fan_fxanim("wardens_office");
 }
@@ -34,7 +34,7 @@ init_fan_fxanim(str_loc) {
 }
 
 fan_trap_think() {
-  triggers = getentarray(self.targetname, "targetname");
+  triggers = getEntArray(self.targetname, "targetname");
   self.cost = 1000;
   self.in_use = 0;
   self.is_available = 1;
@@ -71,14 +71,14 @@ fan_trap_think() {
 
           self.zombie_dmg_trig.in_use = 1;
           self.zombie_dmg_trig.active = 1;
-          self playsound("zmb_trap_activate");
+          self playSound("zmb_trap_activate");
           self thread fan_trap_move_switch(self);
           self waittill("switch_activated");
           who minus_to_player_score(self.cost);
           level.trapped_track["fan"] = 1;
           level notify("trap_activated");
           who maps\mp\zombies\_zm_stats::increment_client_stat("prison_fan_trap_used", 0);
-          array_thread(triggers, ::hint_string, & "ZOMBIE_TRAP_ACTIVE");
+          array_thread(triggers, ::hint_string, &"ZOMBIE_TRAP_ACTIVE");
           self.zombie_dmg_trig setvisibletoall();
           self thread activate_fan_trap();
           self.zombie_dmg_trig waittill("trap_finished_" + self.script_string);
@@ -86,12 +86,12 @@ fan_trap_think() {
           self.zombie_dmg_trig notify("fan_trap_finished");
           self.zombie_dmg_trig.active = 0;
           self.zombie_dmg_trig setinvisibletoall();
-          array_thread(triggers, ::hint_string, & "ZOMBIE_TRAP_COOLDOWN");
+          array_thread(triggers, ::hint_string, &"ZOMBIE_TRAP_COOLDOWN");
           wait 25;
-          self playsound("zmb_trap_available");
+          self playSound("zmb_trap_available");
           self notify("available");
           self.zombie_dmg_trig.in_use = 0;
-          array_thread(triggers, ::hint_string, & "ZM_PRISON_FAN_TRAP", self.cost);
+          array_thread(triggers, ::hint_string, &"ZM_PRISON_FAN_TRAP", self.cost);
         }
       }
     }
@@ -102,8 +102,8 @@ activate_fan_trap() {
   self.zombie_dmg_trig thread fan_trap_damage(self);
   e_fan = getent("fxanim_fan_" + self.script_string, "targetname");
   e_fan useanimtree(#animtree);
-  e_fan playsound("zmb_trap_fan_start");
-  e_fan playloopsound("zmb_trap_fan_loop", 2);
+  e_fan playSound("zmb_trap_fan_start");
+  e_fan playLoopSound("zmb_trap_fan_loop", 2);
   n_start_time = getanimlength(level.fan_trap_fxanims["fan_trap_start"]);
   n_idle_time = getanimlength(level.fan_trap_fxanims["fan_trap_idle"]);
   n_end_time = getanimlength(level.fan_trap_fxanims["fan_trap_end"]);
@@ -124,7 +124,7 @@ activate_fan_trap() {
   }
 
   e_fan stoploopsound(0.75);
-  e_fan playsound("zmb_trap_fan_end");
+  e_fan playSound("zmb_trap_fan_end");
   wait(n_end_time);
 }
 
@@ -201,7 +201,7 @@ fan_trap_move_switch(parent) {
   light_name = parent get_trap_light_name();
   zapper_light_red(light_name);
   tswitch rotatepitch(-180, 0.5);
-  tswitch playsound("amb_sparks_l_b");
+  tswitch playSound("amb_sparks_l_b");
   tswitch waittill("rotatedone");
   self notify("switch_activated");
   self waittill("available");
@@ -238,13 +238,13 @@ stop_fan_trap_blood_fx() {
 }
 
 init_acid_trap_trigs() {
-  trap_trigs = getentarray("acid_trap_trigger", "targetname");
+  trap_trigs = getEntArray("acid_trap_trigger", "targetname");
   array_thread(trap_trigs, ::acid_trap_think);
   level thread acid_trap_host_migration_listener();
 }
 
 acid_trap_think() {
-  triggers = getentarray(self.targetname, "targetname");
+  triggers = getEntArray(self.targetname, "targetname");
   self.is_available = 1;
   self.has_been_used = 0;
   self.cost = 1000;
@@ -279,14 +279,14 @@ acid_trap_think() {
 
           self.zombie_dmg_trig.in_use = 1;
           self.zombie_dmg_trig.active = 1;
-          self playsound("zmb_trap_activate");
+          self playSound("zmb_trap_activate");
           self thread acid_trap_move_switch(self);
           self waittill("switch_activated");
           who minus_to_player_score(self.cost);
           level.trapped_track["acid"] = 1;
           level notify("trap_activated");
           who maps\mp\zombies\_zm_stats::increment_client_stat("prison_acid_trap_used", 0);
-          array_thread(triggers, ::hint_string, & "ZOMBIE_TRAP_ACTIVE");
+          array_thread(triggers, ::hint_string, &"ZOMBIE_TRAP_ACTIVE");
           self thread activate_acid_trap();
           self.zombie_dmg_trig waittill("acid_trap_fx_done");
           clientnotify(self.script_string + "off");
@@ -302,12 +302,12 @@ acid_trap_think() {
 
           self.zombie_dmg_trig notify("acid_trap_finished");
           self.zombie_dmg_trig.active = 0;
-          array_thread(triggers, ::hint_string, & "ZOMBIE_TRAP_COOLDOWN");
+          array_thread(triggers, ::hint_string, &"ZOMBIE_TRAP_COOLDOWN");
           wait 25;
-          self playsound("zmb_trap_available");
+          self playSound("zmb_trap_available");
           self notify("available");
           self.zombie_dmg_trig.in_use = 0;
-          array_thread(triggers, ::hint_string, & "ZM_PRISON_ACID_TRAP", self.cost);
+          array_thread(triggers, ::hint_string, &"ZM_PRISON_ACID_TRAP", self.cost);
         }
       }
     }
@@ -320,7 +320,7 @@ acid_trap_move_switch(parent) {
   light_name = parent get_trap_light_name();
   zapper_light_red(light_name);
   tswitch rotatepitch(-180, 0.5);
-  tswitch playsound("amb_sparks_l_b");
+  tswitch playSound("amb_sparks_l_b");
   tswitch waittill("rotatedone");
   self notify("switch_activated");
   self waittill("available");
@@ -421,7 +421,7 @@ acid_trap_host_migration_listener() {
 
   while(true) {
     level waittill("host_migration_end");
-    trap_trigs = getentarray("acid_trap_trigger", "targetname");
+    trap_trigs = getEntArray("acid_trap_trigger", "targetname");
 
     foreach(trigger in trap_trigs) {
       if(isDefined(trigger.zombie_dmg_trig) && isDefined(trigger.zombie_dmg_trig.active)) {
@@ -435,7 +435,7 @@ acid_trap_host_migration_listener() {
 }
 
 init_tower_trap_trigs() {
-  trap_trigs = getentarray("tower_trap_activate_trigger", "targetname");
+  trap_trigs = getEntArray("tower_trap_activate_trigger", "targetname");
 
   foreach(trigger in trap_trigs)
   trigger thread tower_trap_trigger_think();
@@ -475,15 +475,15 @@ tower_trap_trigger_think() {
           self.active = 1;
           play_sound_at_pos("purchase", who.origin);
           self thread tower_trap_move_switch(self);
-          self playsound("zmb_trap_activate");
+          self playSound("zmb_trap_activate");
           self waittill("switch_activated");
           who minus_to_player_score(self.cost);
           level.trapped_track["tower"] = 1;
           level notify("trap_activated");
           who maps\mp\zombies\_zm_stats::increment_client_stat("prison_sniper_tower_used", 0);
           self hint_string(&"ZOMBIE_TRAP_ACTIVE");
-          self.sndtowerent playsound("zmb_trap_tower_start");
-          self.sndtowerent playloopsound("zmb_trap_tower_loop", 1);
+          self.sndtowerent playSound("zmb_trap_tower_start");
+          self.sndtowerent playLoopSound("zmb_trap_tower_loop", 1);
           self thread activate_tower_trap();
           self thread tower_trap_timer();
           self thread tower_upgrade_trigger_think();
@@ -491,13 +491,13 @@ tower_trap_trigger_think() {
           level thread tower_trap_upgrade_panel_closes_early();
           self waittill("tower_trap_off");
           self.sndtowerent stoploopsound(1);
-          self.sndtowerent playsound("zmb_trap_tower_end");
+          self.sndtowerent playSound("zmb_trap_tower_end");
           self.upgrade_trigger notify("afterlife_interact_reset");
           self.active = 0;
           self sethintstring(&"ZOMBIE_TRAP_COOLDOWN");
           zapper_light_red(light_name);
           wait 25;
-          self playsound("zmb_trap_available");
+          self playSound("zmb_trap_available");
           self notify("available");
           self.in_use = 0;
           self.upgrade_trigger notify("available");
@@ -547,7 +547,7 @@ tower_trap_move_switch(parent) {
   light_name = parent get_trap_light_name();
   zapper_light_red(light_name);
   tswitch rotatepitch(-180, 0.5);
-  tswitch playsound("amb_sparks_l_b");
+  tswitch playSound("amb_sparks_l_b");
   tswitch waittill("rotatedone");
   self notify("switch_activated");
   self waittill("available");
@@ -647,17 +647,17 @@ hint_string(string, cost) {
 }
 
 zapper_light_red(lightname) {
-  zapper_lights = getentarray(lightname, "targetname");
+  zapper_lights = getEntArray(lightname, "targetname");
 
   for(i = 0; i < zapper_lights.size; i++)
-    zapper_lights[i] setmodel("p6_zm_al_wall_trap_control_red");
+    zapper_lights[i] setModel("p6_zm_al_wall_trap_control_red");
 }
 
 zapper_light_green(lightname) {
-  zapper_lights = getentarray(lightname, "targetname");
+  zapper_lights = getEntArray(lightname, "targetname");
 
   for(i = 0; i < zapper_lights.size; i++)
-    zapper_lights[i] setmodel("p6_zm_al_wall_trap_control");
+    zapper_lights[i] setModel("p6_zm_al_wall_trap_control");
 }
 
 get_trap_light_name() {

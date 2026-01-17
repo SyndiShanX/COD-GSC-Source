@@ -203,7 +203,7 @@ testMenu() {
     wait(10.0);
 
     notifyData = spawnStruct();
-    notifyData.titleText = & "MP_CHALLENGE_COMPLETED";
+    notifyData.titleText = &"MP_CHALLENGE_COMPLETED";
     notifyData.notifyText = "wheee";
     notifyData.sound = "mp_challenge_complete";
 

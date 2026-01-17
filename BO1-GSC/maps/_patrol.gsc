@@ -113,9 +113,7 @@ patrol(start_target) {
       currentgoal.patrol_claimed = true;
     }
     self.last_patrol_goal = currentgoal;
-    [
-      [set_goal_func[goal_type]]
-    ](currentgoal);
+    [[set_goal_func[goal_type]]](currentgoal);
     if(isDefined(currentgoal.radius) && currentgoal.radius > 0) {
       self.goalradius = currentgoal.radius;
     } else {
@@ -263,7 +261,7 @@ waittill_combat() {
 get_target_ents() {
   array = [];
   if(isDefined(self.target)) {
-    array = getentarray(self.target, "targetname");
+    array = getEntArray(self.target, "targetname");
   }
   return array;
 }

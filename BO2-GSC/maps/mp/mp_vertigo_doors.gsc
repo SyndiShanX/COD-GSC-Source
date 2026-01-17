@@ -9,7 +9,7 @@
 #include maps\mp\_tacticalinsertion;
 
 init() {
-  triggers = getentarray("trigger_multiple", "classname");
+  triggers = getEntArray("trigger_multiple", "classname");
 
   for(i = 0; i < 2; i++) {
     door = getent("vertigo_door" + i, "targetname");
@@ -19,7 +19,7 @@ init() {
     if(!isDefined(door)) {
       continue;
     }
-    right = anglestoforward(door.angles);
+    right = anglesToForward(door.angles);
     right = vectorscale(right, 54);
     door.opened = 1;
     door.origin_opened = door.origin;
@@ -35,7 +35,7 @@ init() {
     pointb = door getpointinbounds(-1, -1, -1);
     door.mins = getminpoint(pointa, pointb) - door.origin;
     door.maxs = getmaxpoint(pointa, pointb) - door.origin;
-    door setcandamage(1);
+    door setCanDamage(1);
     door allowbottargetting(0);
     door.triggers = [];
 
@@ -146,7 +146,7 @@ door_open() {
   frac = dist / 54;
   time = clamp(frac * 0.3, 0.1, 0.3);
   self moveto(self.origin_opened, time);
-  self playsound("mpl_drone_door_open");
+  self playSound("mpl_drone_door_open");
   self.opened = 1;
 }
 
@@ -158,7 +158,7 @@ door_close() {
   frac = dist / 54;
   time = clamp(frac * 0.3, 0.1, 0.3);
   self moveto(self.origin_closed, time);
-  self playsound("mpl_drone_door_close");
+  self playSound("mpl_drone_door_close");
   self.opened = 0;
 }
 

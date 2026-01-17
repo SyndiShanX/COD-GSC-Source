@@ -8,7 +8,6 @@
 #include common_scripts\utility;
 
 init() {
-  /#
   setDevDvarIfUninitialized("scr_showspawns", "0");
 
   precacheItem("defaultweapon_mp");
@@ -53,14 +52,13 @@ init() {
 
   level thread onPlayerConnect();
 
-  for (;;) {
+  for(;;) {
     updateDevSettings();
     wait .05;
   }
-  # /
+
 }
 
-/#
 updateDevSettings() {
   showspawns = getdvarInt("scr_showspawns");
   if(showspawns > 1)
@@ -68,7 +66,7 @@ updateDevSettings() {
   else if(showspawns < 0)
     showspawns = 0;
 
-  if(!isdefined(level.showspawns) || level.showspawns != showspawns) {
+  if(!isDefined(level.showspawns) || level.showspawns != showspawns) {
     level.showspawns = showspawns;
     setDevDvar("scr_showspawns", level.showspawns);
 
@@ -90,10 +88,9 @@ updateDevSettings() {
   }
 
   if(getDvar("scr_dump_ranks") != "") {
-
     setDevDvar("scr_dump_ranks", "");
 
-    for (rId = 0; rId <= level.maxRank; rId++) {
+    for(rId = 0; rId <= level.maxRank; rId++) {
       rankName = tableLookupIString("mp/rankTable.csv", 0, rId, 5);
       iprintln("REFERENCE UNLOCKED_AT_LV" + (rId + 1));
       iprintln("LANG_ENGLISHUnlocked at ", rankName, " (Lv" + (rId + 1) + ")");
@@ -303,14 +300,14 @@ updateDevSettings() {
   if(getdvar("scr_giveperk") != "") {
     perk = getdvar("scr_giveperk");
 
-    for (i = 0; i < level.players.size; i++)
+    for(i = 0; i < level.players.size; i++)
       level.players[i] thread maps\mp\perks\_perks::givePerk(perk);
 
     setDevDvar("scr_giveperk", "");
   }
   if(getdvar("scr_takeperk") != "") {
     perk = getdvar("scr_takeperk");
-    for (i = 0; i < level.players.size; i++) {
+    for(i = 0; i < level.players.size; i++) {
       level.players[i] unsetPerk(perk, true);
       level.players[i].extraPerks[perk] = undefined;
     }
@@ -329,24 +326,24 @@ updateDevSettings() {
     hostPlayer = undefined;
     enemyPlayer = undefined;
     foreach(player in level.players) {
-      if(!player isHost())
+      if(!player isHost()) {
         continue;
-
+      }
       hostPlayer = player;
       break;
     }
 
     foreach(player in level.players) {
       if(level.teamBased) {
-        if(player.team == hostPlayer.team)
+        if(player.team == hostPlayer.team) {
           continue;
-
+        }
         enemyPlayer = player;
         break;
       } else {
-        if(player isHost())
+        if(player isHost()) {
           continue;
-
+        }
         enemyPlayer = player;
         break;
       }
@@ -380,7 +377,7 @@ updateDevSettings() {
     level.players[0] setPlayerData("restXPGoal", 0);
 
     lastXp = 0;
-    for (index = 0; index <= newRank; index++) {
+    for(index = 0; index <= newRank; index++) {
       newXp = maps\mp\gametypes\_rank::getRankInfoMinXP(index);
       level.players[0] thread maps\mp\gametypes\_rank::giveRankXP("kill", newXp - lastXp);
       lastXp = newXp;
@@ -396,7 +393,7 @@ updateDevSettings() {
   }
 
   if(getDvar("scr_do_notify") != "") {
-    for (i = 0; i < level.players.size; i++)
+    for(i = 0; i < level.players.size; i++)
       level.players[i] maps\mp\gametypes\_hud_message::oldNotifyMessage(getDvar("scr_do_notify"), getDvar("scr_do_notify"), game["icons"]["allies"]);
 
     announcement(getDvar("scr_do_notify"));
@@ -466,7 +463,7 @@ updateDevSettings() {
     level.entArray = [];
     level.entCounts = [];
     level.entGroups = [];
-    for (index = 0; index < ents.size; index++) {
+    for(index = 0; index < ents.size; index++) {
       classname = ents[index].classname;
       if(!isSubStr(classname, "_spawn")) {
         curEnt = ents[index];
@@ -527,7 +524,7 @@ testEndGameUpdate(promotion) {
   self openMenu(game["menu_endgameupdate"]);
 
   waitTime = 4.0 + min(7, 3);
-  while (waitTime) {
+  while(waitTime) {
     wait(0.25);
     waitTime -= 0.25;
 
@@ -547,7 +544,7 @@ testLowerMessage() {
   self setLowerMessage("spawn_info", game["strings"]["waiting_to_spawn"], 10);
   wait(3.0);
 
-  self setLowerMessage("last_stand", & "PLATFORM_COWARDS_WAY_OUT", undefined, 50);
+  self setLowerMessage("last_stand", &"PLATFORM_COWARDS_WAY_OUT", undefined, 50);
   wait(3.0);
 
   self clearLowerMessage("last_stand");
@@ -557,12 +554,12 @@ testLowerMessage() {
 }
 
 giveExtraPerks() {
-  if(!isdefined(self.extraPerks))
+  if(!isDefined(self.extraPerks)) {
     return;
-
+  }
   perks = getArrayKeys(self.extraPerks);
 
-  for (i = 0; i < perks.size; i++)
+  for(i = 0; i < perks.size; i++)
     self setPerk(perks[i], true);
 }
 
@@ -570,16 +567,16 @@ xKillsY(attackerName, victimName) {
   attacker = undefined;
   victim = undefined;
 
-  for (index = 0; index < level.players.size; index++) {
+  for(index = 0; index < level.players.size; index++) {
     if(level.players[index].name == attackerName)
       attacker = level.players[index];
     else if(level.players[index].name == victimName)
       victim = level.players[index];
   }
 
-  if(!isAlive(attacker) || !isAlive(victim))
+  if(!isAlive(attacker) || !isAlive(victim)) {
     return;
-
+  }
   victim thread[[level.callbackPlayerDamage]](
     attacker, // eInflictor The entity that causes the damage.(e.g. a turret)
     attacker, // eAttacker The entity that is attacking.
@@ -598,13 +595,13 @@ updateMinimapSetting() {
   // use 0 for no required map aspect ratio.
   requiredMapAspectRatio = getdvarfloat("scr_requiredMapAspectRatio", 1);
 
-  if(!isdefined(level.minimapheight)) {
+  if(!isDefined(level.minimapheight)) {
     setDevDvar("scr_minimap_height", "0");
     level.minimapheight = 0;
   }
   minimapheight = getdvarfloat("scr_minimap_height");
   if(minimapheight != level.minimapheight) {
-    if(isdefined(level.minimaporigin)) {
+    if(isDefined(level.minimaporigin)) {
       level.minimapplayer unlink();
       level.minimaporigin delete();
       level notify("end_draw_map_bounds");
@@ -613,11 +610,11 @@ updateMinimapSetting() {
     if(minimapheight > 0) {
       level.minimapheight = minimapheight;
 
-      players = getentarray("player", "classname");
+      players = getEntArray("player", "classname");
       if(players.size > 0) {
         player = players[0];
 
-        corners = getentarray("minimap_corner", "targetname");
+        corners = getEntArray("minimap_corner", "targetname");
         if(corners.size == 2) {
           viewpos = (corners[0].origin + corners[1].origin);
           viewpos = (viewpos[0] * .5, viewpos[1] * .5, viewpos[2] * .5);
@@ -706,9 +703,9 @@ updateMinimapSetting() {
           player setclientdvar("cg_fovmin", "1");
 
           // hide 3D icons
-          if(isdefined(level.objPoints)) {
-            for (i = 0; i < level.objPointNames.size; i++) {
-              if(isdefined(level.objPoints[level.objPointNames[i]]))
+          if(isDefined(level.objPoints)) {
+            for(i = 0; i < level.objPointNames.size; i++) {
+              if(isDefined(level.objPoints[level.objPointNames[i]]))
                 level.objPoints[level.objPointNames[i]] destroy();
             }
             level.objPoints = [];
@@ -747,7 +744,7 @@ drawMiniMapBounds(viewpos, mincorner, maxcorner) {
 
   /*diagonal = maxcorner - mincorner;
   side = vecscale(north, vectordot(diagonal, north));
-	
+  	
   origcorner0 = mincorner;
   origcorner1 = mincorner + side;
   origcorner2 = maxcorner;
@@ -772,7 +769,7 @@ drawMiniMapBounds(viewpos, mincorner, maxcorner) {
   toppos = vecscale(mincorner + maxcorner, .5) + vecscale(sidenorth, .51);
   textscale = diaglen * .003;
 
-  while (1) {
+  while(1) {
     line(corner0, corner1, (0, 1, 0));
     line(corner1, corner2, (0, 1, 0));
     line(corner2, corner3, (0, 1, 0));
@@ -792,21 +789,22 @@ drawMiniMapBounds(viewpos, mincorner, maxcorner) {
 addTestClients() {
   wait 5;
 
-  for (;;) {
-    if(getdvarInt("scr_testclients") > 0)
+  for(;;) {
+    if(getdvarInt("scr_testclients") > 0) {
       break;
+    }
     wait 1;
   }
 
-  //	for ( index = 1; index < 24; index++ )
+  //	for( index = 1; index < 24; index++ )
   //		kick( index );
 
   testclients = getdvarInt("scr_testclients");
   setDevDvar("scr_testclients", 0);
-  for (i = 0; i < testclients; i++) {
+  for(i = 0; i < testclients; i++) {
     ent[i] = addtestclient();
 
-    if(!isdefined(ent[i])) {
+    if(!isDefined(ent[i])) {
       println("Could not add test client");
       wait 1;
       continue;
@@ -825,13 +823,13 @@ addTestClients() {
 TestClient(team) {
   self endon("disconnect");
 
-  while (!isdefined(self.pers["team"]))
+  while(!isDefined(self.pers["team"]))
     wait .05;
 
   self notify("menuresponse", game["menu_team"], team);
   wait 0.5;
 
-  while (1) {
+  while(1) {
     //class = level.classMap[randomInt( level.classMap.size )];
     class = "class" + randomInt(5);
 
@@ -844,7 +842,7 @@ TestClient(team) {
 
 showSpawnpoint(spawnpoint, classname, color) {
   center = spawnpoint.origin;
-  forward = anglestoforward(spawnpoint.angles);
+  forward = anglesToForward(spawnpoint.angles);
   right = anglestoright(spawnpoint.angles);
 
   forward = common_scripts\utility::vector_multiply(forward, 16);
@@ -876,8 +874,8 @@ showSpawnpoint(spawnpoint, classname, color) {
   thread lineUntilNotified(d, a, color, 0);
 
   center = center + (0, 0, 36);
-  arrow_forward = anglestoforward(spawnpoint.angles);
-  arrowhead_forward = anglestoforward(spawnpoint.angles);
+  arrow_forward = anglesToForward(spawnpoint.angles);
+  arrowhead_forward = anglesToForward(spawnpoint.angles);
   arrowhead_right = anglestoright(spawnpoint.angles);
 
   arrow_forward = common_scripts\utility::vector_multiply(arrow_forward, 32);
@@ -900,12 +898,12 @@ showSpawnpoint(spawnpoint, classname, color) {
 }
 
 showSpawnpoints() {
-  if(isdefined(level.spawnpoints)) {
+  if(isDefined(level.spawnpoints)) {
     foreach(spawnpoint in level.spawnpoints) {
       showSpawnpoint(spawnpoint, spawnpoint.classname, (1, 1, 1));
     }
   }
-  if(isdefined(level.extraspawnpointsused)) {
+  if(isDefined(level.extraspawnpointsused)) {
     foreach(spawnpoint in level.extraspawnpointsused) {
       showSpawnpoint(spawnpoint, spawnpoint.fakeclassname, (.5, .5, .5));
     }
@@ -915,7 +913,7 @@ showSpawnpoints() {
 print3DUntilNotified(origin, text, color, alpha, scale) {
   level endon("hide_spawnpoints");
 
-  for (;;) {
+  for(;;) {
     print3d(origin, text, color, alpha, scale);
     wait .05;
   }
@@ -924,7 +922,7 @@ print3DUntilNotified(origin, text, color, alpha, scale) {
 lineUntilNotified(start, end, color, depthTest) {
   level endon("hide_spawnpoints");
 
-  for (;;) {
+  for(;;) {
     line(start, end, color, depthTest);
     wait .05;
   }
@@ -935,9 +933,9 @@ hideSpawnpoints() {
 }
 
 initForWeaponTests() {
-  if(isDefined(self.initForWeaponTests))
+  if(isDefined(self.initForWeaponTests)) {
     return;
-
+  }
   self.initForWeaponTests = true;
 
   self thread changeCamoListener();
@@ -969,7 +967,7 @@ thirdPersonToggle() {
   thirdPersonElem setText("3rd Person: " + getDvarInt("camera_thirdPerson") + "[{+actionslot 2}]");
   self thread destroyOnDeath(thirdPersonElem);
 
-  for (;;) {
+  for(;;) {
     self waittill("dpad_down");
 
     setDvar("camera_thirdPerson", !getDvarInt("camera_thirdPerson"));
@@ -984,7 +982,7 @@ changeCamoListener() {
 
   camoList = [];
 
-  for (rowIndex = 0; tableLookupByRow("mp/camoTable.csv", rowIndex, 1) != ""; rowIndex++)
+  for(rowIndex = 0; tableLookupByRow("mp/camoTable.csv", rowIndex, 1) != ""; rowIndex++)
     camoList[camoList.size] = tableLookupByRow("mp/camoTable.csv", rowIndex, 1);
 
   self.camoIndex = 0;
@@ -994,7 +992,7 @@ changeCamoListener() {
   camoElem setText("Camo: " + tableLookup("mp/camoTable.csv", 0, self.camoIndex, 1) + "[{+actionslot 1}]");
   self thread destroyOnDeath(camoElem);
 
-  for (;;) {
+  for(;;) {
     self waittill("dpad_up");
 
     self.camoIndex++;
@@ -1021,7 +1019,7 @@ weaponChangeListener() {
 
   self.weaponElem setText("Weapon: " + level.baseWeaponList[self.baseWeapon].variants[self.variantIndex] + "[{weapnext}]");
 
-  for (;;) {
+  for(;;) {
     self waittill("next_weapon");
 
     self.variantIndex++;
@@ -1051,24 +1049,21 @@ updateTestWeapon() {
   self giveMaxAmmo(weaponName);
 }
 
-# /
+onPlayerConnect() {
+  for(;;) {
+    level waittill("connected", player);
 
-  onPlayerConnect() {
-    for (;;) {
-      level waittill("connected", player);
-
-      player thread updateReflectionProbe();
-    }
+    player thread updateReflectionProbe();
   }
+}
 
 updateReflectionProbe() {
-  /#
-  for (;;) {
+  for(;;) {
     if(getDvarInt("debug_reflection") == 1) {
       if(!isDefined(self.debug_reflectionobject)) {
-        self.debug_reflectionobject = spawn("script_model", self geteye() + (vector_multiply(anglestoforward(self.angles), 100)));
-        self.debug_reflectionobject setmodel("test_sphere_silver");
-        self.debug_reflectionobject.origin = self geteye() + (vector_multiply(anglestoforward(self getplayerangles()), 100));
+        self.debug_reflectionobject = spawn("script_model", self getEye() + (vector_multiply(anglesToForward(self.angles), 100)));
+        self.debug_reflectionobject setModel("test_sphere_silver");
+        self.debug_reflectionobject.origin = self getEye() + (vector_multiply(anglesToForward(self getplayerangles()), 100));
         self thread reflectionProbeButtons();
       }
     } else if(getDvarInt("debug_reflection") == 0) {
@@ -1078,15 +1073,14 @@ updateReflectionProbe() {
 
     wait(0.05);
   }
-  # /
+
 }
 
 reflectionProbeButtons() {
-  /#
   offset = 100;
   offsetinc = 50;
 
-  while (getDvarInt("debug_reflection") == 1) {
+  while(getDvarInt("debug_reflection") == 1) {
     if(self buttonpressed("BUTTON_X"))
       offset += offsetinc;
     if(self buttonpressed("BUTTON_Y"))
@@ -1096,9 +1090,9 @@ reflectionProbeButtons() {
     if(offset < 64)
       offset = 64;
 
-    self.debug_reflectionobject.origin = self geteye() + (vector_multiply(anglestoforward(self getplayerangles()), offset));
+    self.debug_reflectionobject.origin = self getEye() + (vector_multiply(anglesToForward(self getplayerangles()), offset));
 
     wait .05;
   }
-  # /
+
 }

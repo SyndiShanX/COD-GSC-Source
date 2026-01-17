@@ -16,7 +16,7 @@ debugPrintln(channel, msg) {
 }
 
 draw_debug_line(start, end, timer) {
-  for (i = 0; i < timer * 20; i++) {
+  for(i = 0; i < timer * 20; i++) {
     line(start, end, (1, 1, 0.5));
     wait(0.05);
   }
@@ -33,13 +33,13 @@ randomvector(num) {
 angle_dif(oldangle, newangle) {
   if(oldangle == newangle)
     return 0;
-  while (newangle > 360)
+  while(newangle > 360)
     newangle -= 360;
-  while (newangle < 0)
+  while(newangle < 0)
     newangle += 360;
-  while (oldangle > 360)
+  while(oldangle > 360)
     oldangle -= 360;
-  while (oldangle < 0)
+  while(oldangle < 0)
     oldangle += 360;
   olddif = undefined;
   newdif = undefined;
@@ -102,7 +102,7 @@ set_exception(type, func) {
 
 set_all_exceptions(exceptionFunc) {
   keys = getArrayKeys(self.exception);
-  for (i = 0; i < keys.size; i++) {
+  for(i = 0; i < keys.size; i++) {
     self.exception[keys[i]] = exceptionFunc;
   }
 }
@@ -125,7 +125,7 @@ waittill_string(msg, ent) {
 
 waittill_multiple(string1, string2, string3, string4, string5) {
   self endon("death");
-  ent = spawnstruct();
+  ent = spawnStruct();
   ent.threads = 0;
   if(isDefined(string1)) {
     self thread waittill_string(string1, ent);
@@ -147,7 +147,7 @@ waittill_multiple(string1, string2, string3, string4, string5) {
     self thread waittill_string(string5, ent);
     ent.threads++;
   }
-  while (ent.threads) {
+  while(ent.threads) {
     ent waittill("returned");
     ent.threads--;
   }
@@ -156,7 +156,7 @@ waittill_multiple(string1, string2, string3, string4, string5) {
 
 waittill_multiple_ents(ent1, string1, ent2, string2, ent3, string3, ent4, string4) {
   self endon("death");
-  ent = spawnstruct();
+  ent = spawnStruct();
   ent.threads = 0;
   if(isDefined(ent1)) {
     assert(isDefined(string1));
@@ -178,7 +178,7 @@ waittill_multiple_ents(ent1, string1, ent2, string2, ent3, string3, ent4, string
     ent4 thread waittill_string(string4, ent);
     ent.threads++;
   }
-  while (ent.threads) {
+  while(ent.threads) {
     ent waittill("returned");
     ent.threads--;
   }
@@ -192,7 +192,7 @@ waittill_any_return(string1, string2, string3, string4, string5) {
     (!isDefined(string4) || string4 != "death") &&
     (!isDefined(string5) || string5 != "death"))
     self endon("death");
-  ent = spawnstruct();
+  ent = spawnStruct();
   if(isDefined(string1))
     self thread waittill_string(string1, ent);
   if(isDefined(string2))
@@ -280,7 +280,7 @@ empty_init_func(empty) {}
 issuffix(msg, suffix) {
   if(suffix.size > msg.size)
     return false;
-  for (i = 0; i < suffix.size; i++) {
+  for(i = 0; i < suffix.size; i++) {
     if(msg[i] != suffix[i])
       return false;
   }
@@ -297,7 +297,7 @@ flag_set(message) {
 }
 
 flag_wait(msg) {
-  while (!level.flag[msg])
+  while(!level.flag[msg])
     level waittill(msg);
 }
 
@@ -313,7 +313,7 @@ flag_clear(message) {
 }
 
 flag_waitopen(msg) {
-  while (level.flag[msg])
+  while(level.flag[msg])
     level waittill(msg);
 }
 
@@ -323,7 +323,7 @@ script_gen_dump_addline(string, signature) {
   if(!isDefined(level._loadstarted)) {
     if(!isDefined(level.script_gen_dump_preload))
       level.script_gen_dump_preload = [];
-    struct = spawnstruct();
+    struct = spawnStruct();
     struct.string = string;
     struct.signature = signature;
     level.script_gen_dump_preload[level.script_gen_dump_preload.size] = struct;
@@ -338,39 +338,39 @@ script_gen_dump_addline(string, signature) {
 array_thread(entities, process, var1, var2, var3) {
   keys = getArrayKeys(entities);
   if(isDefined(var3)) {
-    for (i = 0; i < keys.size; i++)
+    for(i = 0; i < keys.size; i++)
       entities[keys[i]] thread[[process]](var1, var2, var3);
     return;
   }
   if(isDefined(var2)) {
-    for (i = 0; i < keys.size; i++)
+    for(i = 0; i < keys.size; i++)
       entities[keys[i]] thread[[process]](var1, var2);
     return;
   }
   if(isDefined(var1)) {
-    for (i = 0; i < keys.size; i++)
+    for(i = 0; i < keys.size; i++)
       entities[keys[i]] thread[[process]](var1);
     return;
   }
-  for (i = 0; i < keys.size; i++)
+  for(i = 0; i < keys.size; i++)
     entities[keys[i]] thread[[process]]();
 }
 
 array_thread4(entities, process, var1, var2, var3, var4) {
   keys = getArrayKeys(entities);
-  for (i = 0; i < keys.size; i++)
+  for(i = 0; i < keys.size; i++)
     entities[keys[i]] thread[[process]](var1, var2, var3, var4);
 }
 
 array_thread5(entities, process, var1, var2, var3, var4, var5) {
   keys = getArrayKeys(entities);
-  for (i = 0; i < keys.size; i++)
+  for(i = 0; i < keys.size; i++)
     entities[keys[i]] thread[[process]](var1, var2, var3, var4, var5);
 }
 
 remove_undefined_from_array(array) {
   newarray = [];
-  for (i = 0; i < array.size; i++) {
+  for(i = 0; i < array.size; i++) {
     if(!isDefined(array[i]))
       continue;
     newarray[newarray.size] = array[i];
@@ -380,7 +380,7 @@ remove_undefined_from_array(array) {
 
 trigger_on(name, type) {
   if(isDefined(name) && isDefined(type)) {
-    ents = getentarray(name, type);
+    ents = getEntArray(name, type);
     array_thread(ents, ::trigger_on_proc);
   } else
     self trigger_on_proc();
@@ -394,7 +394,7 @@ trigger_on_proc() {
 
 trigger_off(name, type) {
   if(isDefined(name) && isDefined(type)) {
-    ents = getentarray(name, type);
+    ents = getEntArray(name, type);
     array_thread(ents, ::trigger_off_proc);
   } else
     self trigger_off_proc();
@@ -421,7 +421,7 @@ update_trigger_based_on_flags() {
   if(isDefined(self.script_flag_true)) {
     true_on = false;
     tokens = create_flags_and_return_tokens(self.script_flag_true);
-    for (i = 0; i < tokens.size; i++) {
+    for(i = 0; i < tokens.size; i++) {
       if(flag(tokens[i])) {
         true_on = true;
         break;
@@ -431,7 +431,7 @@ update_trigger_based_on_flags() {
   false_on = true;
   if(isDefined(self.script_flag_false)) {
     tokens = create_flags_and_return_tokens(self.script_flag_false);
-    for (i = 0; i < tokens.size; i++) {
+    for(i = 0; i < tokens.size; i++) {
       if(flag(tokens[i])) {
         false_on = false;
         break;
@@ -443,7 +443,7 @@ update_trigger_based_on_flags() {
 
 create_flags_and_return_tokens(flags) {
   tokens = strtok(flags, " ");
-  for (i = 0; i < tokens.size; i++) {
+  for(i = 0; i < tokens.size; i++) {
     if(!isDefined(level.flag[tokens[i]])) {
       flag_init(tokens[i]);
     }
@@ -472,7 +472,7 @@ struct_class_init() {
   level.struct_class_names["targetname"] = [];
   level.struct_class_names["script_noteworthy"] = [];
   level.struct_class_names["script_linkname"] = [];
-  for (i = 0; i < level.struct.size; i++) {
+  for(i = 0; i < level.struct.size; i++) {
     if(isDefined(level.struct[i].targetname)) {
       if(!isDefined(level.struct_class_names["targetname"][level.struct[i].targetname]))
         level.struct_class_names["targetname"][level.struct[i].targetname] = [];

@@ -18,7 +18,7 @@
 #include maps\mp\zombies\_zm_perk_vulture;
 
 enable_vulture_perk_for_level() {
-  maps\mp\zombies\_zm_perks::register_perk_basic_info("specialty_nomotionsensor", "vulture", 3000, & "ZOMBIE_PERK_VULTURE", "zombie_perk_bottle_vulture");
+  maps\mp\zombies\_zm_perks::register_perk_basic_info("specialty_nomotionsensor", "vulture", 3000, &"ZOMBIE_PERK_VULTURE", "zombie_perk_bottle_vulture");
   maps\mp\zombies\_zm_perks::register_perk_precache_func("specialty_nomotionsensor", ::vulture_precache);
   maps\mp\zombies\_zm_perks::register_perk_clientfields("specialty_nomotionsensor", ::vulture_register_clientfield, ::vulture_set_clientfield);
   maps\mp\zombies\_zm_perks::register_perk_threads("specialty_nomotionsensor", ::give_vulture_perk, ::take_vulture_perk);
@@ -77,13 +77,13 @@ init_vulture() {
   setdvarint("zombies_perk_vulture_network_time_frame", 250);
   setdvarint("zombies_perk_vulture_spawn_stink_zombie_cooldown", 12);
   setdvarint("zombies_perk_vulture_max_stink_zombies", 4);
-  level.perk_vulture = spawnstruct();
+  level.perk_vulture = spawnStruct();
   level.perk_vulture.zombie_stink_array = [];
   level.perk_vulture.drop_time_last = 0;
   level.perk_vulture.drop_slots_for_network = 0;
   level.perk_vulture.last_stink_zombie_spawned = 0;
   level.perk_vulture.use_exit_behavior = 0;
-  level.perk_vulture.clientfields = spawnstruct();
+  level.perk_vulture.clientfields = spawnStruct();
   level.perk_vulture.clientfields.scriptmovers = [];
   level.perk_vulture.clientfields.scriptmovers["vulture_stink_fx"] = 0;
   level.perk_vulture.clientfields.scriptmovers["vulture_drop_fx"] = 1;
@@ -141,7 +141,7 @@ give_vulture_perk() {
   vulture_debug_text("player " + self getentitynumber() + " has vulture perk!");
 
   if(!isDefined(self.perk_vulture))
-    self.perk_vulture = spawnstruct();
+    self.perk_vulture = spawnStruct();
 
   self.perk_vulture.active = 1;
   self vulture_vision_toggle(1);
@@ -167,7 +167,7 @@ take_vulture_perk() {
 }
 
 vulture_host_migration_func() {
-  a_vulture_perk_machines = getentarray("vending_vulture", "targetname");
+  a_vulture_perk_machines = getEntArray("vending_vulture", "targetname");
 
   foreach(perk_machine in a_vulture_perk_machines) {
     if(isDefined(perk_machine.model) && perk_machine.model == "p6_zm_vending_vultureaid_on") {
@@ -208,20 +208,20 @@ vulture_perk_machine_think() {
   init_vulture();
 
   while(true) {
-    machine = getentarray("vending_vulture", "targetname");
-    machine_triggers = getentarray("vending_vulture", "target");
+    machine = getEntArray("vending_vulture", "targetname");
+    machine_triggers = getEntArray("vending_vulture", "target");
     array_thread(machine_triggers, maps\mp\zombies\_zm_perks::set_power_on, 0);
 
     for(i = 0; i < machine.size; i++)
-      machine[i] setmodel("p6_zm_vending_vultureaid");
+      machine[i] setModel("p6_zm_vending_vultureaid");
 
     level waittill("specialty_nomotionsensor" + "_on");
     level notify("specialty_nomotionsensor" + "_power_on");
 
     for(i = 0; i < machine.size; i++) {
-      machine[i] setmodel("p6_zm_vending_vultureaid_on");
+      machine[i] setModel("p6_zm_vending_vultureaid_on");
       machine[i] vibrate(vectorscale((0, -1, 0), 100.0), 0.3, 0.4, 3);
-      machine[i] playsound("zmb_perks_power_on");
+      machine[i] playSound("zmb_perks_power_on");
       machine[i] thread maps\mp\zombies\_zm_perks::perk_fx("vulture_light");
       machine[i] thread maps\mp\zombies\_zm_perks::play_loop_on_machine();
     }
@@ -292,7 +292,7 @@ delay_showing_vulture_ent(player, v_moveto_pos, str_model, func) {
   wait_network_frame();
 
   if(isDefined(str_model))
-    self setmodel(str_model);
+    self setModel(str_model);
 
   self show();
 
@@ -935,7 +935,7 @@ vulture_clientfield_scriptmover_set(str_field_name) {
 vulture_clientfield_scriptmover_clear(str_field_name) {
   assert(isDefined(level.perk_vulture.clientfields.scriptmovers[str_field_name]), str_field_name + " is not a valid client field for vulture perk!");
   n_value = self getclientfield("vulture_perk_scriptmover");
-  n_value = n_value & ~(1 << level.perk_vulture.clientfields.scriptmovers[str_field_name]);
+  n_value = n_value &~(1 << level.perk_vulture.clientfields.scriptmovers[str_field_name]);
   self setclientfield("vulture_perk_scriptmover", n_value);
 }
 
@@ -949,7 +949,7 @@ vulture_clientfield_actor_set(str_field_name) {
 vulture_clientfield_actor_clear(str_field_name) {
   assert(isDefined(level.perk_vulture.clientfields.actors[str_field_name]), str_field_name + " is not a valid field for vulture_clientfield_actor_clear!");
   n_value = getclientfield("vulture_perk_actor");
-  n_value = n_value & ~(1 << level.perk_vulture.clientfields.actors[str_field_name]);
+  n_value = n_value &~(1 << level.perk_vulture.clientfields.actors[str_field_name]);
   self setclientfield("vulture_perk_actor", n_value);
 }
 
@@ -963,7 +963,7 @@ vulture_clientfield_toplayer_set(str_field_name) {
 vulture_clientfield_toplayer_clear(str_field_name) {
   assert(isDefined(level.perk_vulture.clientfields.toplayer[str_field_name]), str_field_name + " is not a valid client field for vulture perk!");
   n_value = self getclientfieldtoplayer("vulture_perk_toplayer");
-  n_value = n_value & ~(1 << level.perk_vulture.clientfields.toplayer[str_field_name]);
+  n_value = n_value &~(1 << level.perk_vulture.clientfields.toplayer[str_field_name]);
   self setclientfieldtoplayer("vulture_perk_toplayer", n_value);
 }
 
@@ -1022,7 +1022,7 @@ vulture_perk_watch_powerup_drops() {
 
 _powerup_drop_think() {
   e_temp = spawn("script_model", self.origin);
-  e_temp setmodel("tag_origin");
+  e_temp setModel("tag_origin");
   e_temp vulture_clientfield_scriptmover_set("vulture_powerup_drop");
   self waittill_any("powerup_timedout", "powerup_grabbed", "death");
   e_temp vulture_clientfield_scriptmover_clear("vulture_powerup_drop");
@@ -1129,8 +1129,7 @@ get_zone_dog_locations(str_zone) {
   return a_dog_locations;
 }
 
-vulture_vision_toggle(b_enable) {
-}
+vulture_vision_toggle(b_enable) {}
 
 vulture_handle_solo_quick_revive() {
   flag_wait("initial_blackscreen_passed");
@@ -1143,7 +1142,7 @@ vulture_handle_solo_quick_revive() {
 
 vulture_devgui_spawn_stink() {
   player = gethostplayer();
-  forward_dir = vectornormalize(anglestoforward(player.angles));
+  forward_dir = vectornormalize(anglesToForward(player.angles));
   target_pos = player.origin + forward_dir * 100 + vectorscale((0, 0, 1), 50.0);
   target_pos_down = target_pos + vectorscale((0, 0, -1), 150.0);
   str_bonus = "stink";
@@ -1170,7 +1169,7 @@ initialize_bonus_entity_pool() {
 
   for(i = 0; i < n_ent_pool_size; i++) {
     e_temp = spawn("script_model", (0, 0, 0));
-    e_temp setmodel("tag_origin");
+    e_temp setModel("tag_origin");
     e_temp.targetname = "vulture_perk_bonus_pool_ent";
     e_temp.in_use = 0;
     level.perk_vulture.bonus_drop_ent_pool[level.perk_vulture.bonus_drop_ent_pool.size] = e_temp;
@@ -1205,7 +1204,7 @@ clear_bonus_ent() {
   self notify("stop_vulture_behavior");
   self vulture_clientfield_scriptmover_clear("vulture_drop_fx");
   self.in_use = 0;
-  self setmodel("tag_origin");
+  self setModel("tag_origin");
   self ghost();
 }
 
@@ -1215,7 +1214,7 @@ initialize_stink_entity_pool() {
 
   for(i = 0; i < n_ent_pool_size; i++) {
     e_temp = spawn("script_model", (0, 0, 0));
-    e_temp setmodel("tag_origin");
+    e_temp setModel("tag_origin");
     e_temp.targetname = "vulture_perk_bonus_pool_ent";
     e_temp.in_use = 0;
     level.perk_vulture.stink_ent_pool[level.perk_vulture.stink_ent_pool.size] = e_temp;
@@ -1261,7 +1260,7 @@ clear_stink_ent() {
   self.in_use = 0;
   self.drop_time = undefined;
   self.owner = undefined;
-  self setmodel("tag_origin");
+  self setModel("tag_origin");
   self ghost();
 }
 

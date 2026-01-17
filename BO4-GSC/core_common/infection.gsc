@@ -8,7 +8,6 @@
 #include scripts\core_common\spectating;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\teams;
-
 #namespace infection;
 
 autoexec __init__system__() {
@@ -23,13 +22,13 @@ __init__() {
 
 initialize() {
   level.infection = {
-    #perks: [], 
-    #bodies: [], 
-    #primary_weapon: undefined, 
-    #offhand_weapon: undefined, 
-    #team: #"none", 
-    #platoon: #"invalid", 
-    #var_c4b373ef: [], 
+    #perks: [],
+    #bodies: [],
+    #primary_weapon: undefined,
+    #offhand_weapon: undefined,
+    #team: # "none",
+    #platoon: # "invalid",
+    #var_c4b373ef: [],
     #platoon_team: []
   };
 }
@@ -70,7 +69,7 @@ function_153000d0(male, female) {
   function_e8cc8373(male_index, female_index);
 }
 
-private function_e8cc8373(male, female) {
+function_e8cc8373(male, female) {
   assert(isDefined(male));
   assert(isDefined(female));
 
@@ -159,12 +158,12 @@ function_da08f4d0() {
   wait randomintrange(2, 4);
 
   while(true) {
-    str_alias = #"hash_61fc4fa3eeafcf07";
+    str_alias = # "hash_61fc4fa3eeafcf07";
     n_wait_min = 2;
     n_wait_max = 5;
 
     if(self issprinting()) {
-      str_alias = #"hash_64441bbb83e130e9";
+      str_alias = # "hash_64441bbb83e130e9";
       n_wait_min = 4;
       n_wait_max = 7;
     }
@@ -192,8 +191,8 @@ function_687661ea() {
   return false;
 }
 
-private get_infected_team() {
-  if(level.infection.platoon != #"invalid") {
+get_infected_team() {
+  if(level.infection.platoon != # "invalid") {
     if(self is_infected()) {
       return self.team;
     }
@@ -204,7 +203,7 @@ private get_infected_team() {
 
     team = self.team;
 
-    if(team != #"spectator") {
+    if(team != # "spectator") {
       players_on_team = getplayers(team);
 
       if(players_on_team.size <= 1) {
@@ -227,7 +226,7 @@ function_d3da95cf() {
   team = self get_infected_team();
   platoon = function_76601b7d();
 
-  if(platoon != #"invalid") {
+  if(platoon != # "invalid") {
     level.infection.platoon_team[self.team] = team;
     platoons::function_334c4bec(team, platoon);
   }
@@ -240,14 +239,14 @@ function_d3da95cf() {
     self.switching_teams = 1;
     self.switchedteamsresetgadgets = 1;
     self.joining_team = team;
-    self.leaving_team = self.pers[#"team"];
+    self.leaving_team = self.pers[# "team"];
   }
 
   self teams::function_dc7eaabd(team);
-  self.pers[#"weapon"] = undefined;
-  self.pers[#"spawnweapon"] = undefined;
-  self.pers[#"savedmodel"] = undefined;
-  self.pers[#"teamtime"] = undefined;
+  self.pers[# "weapon"] = undefined;
+  self.pers[# "spawnweapon"] = undefined;
+  self.pers[# "savedmodel"] = undefined;
+  self.pers[# "teamtime"] = undefined;
   self.infected = 1;
   self spectating::set_permissions();
 }

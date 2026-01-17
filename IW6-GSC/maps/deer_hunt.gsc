@@ -27,25 +27,25 @@ main() {
   setup_flags();
   maps\_utility::transient_init("deer_hunt_intro_tr");
   maps\_utility::transient_init("deer_hunt_beach_tr");
-  maps\_utility::intro_screen_create(&"DEER_HUNT_INTROSCREEN_LINE_4", & "DEER_HUNT_INTROSCREEN_LINE_2", & "DEER_HUNT_INTROSCREEN_LINE_5");
+  maps\_utility::intro_screen_create(&"DEER_HUNT_INTROSCREEN_LINE_4", &"DEER_HUNT_INTROSCREEN_LINE_2", &"DEER_HUNT_INTROSCREEN_LINE_5");
   maps\_utility::intro_screen_custom_func(::custom_intro_screen_func);
   maps\_utility::intro_screen_custom_timing(0.05, 3);
   level.actionbinds = [];
-  maps\deer_hunt_util::registeractionbinding("matv_enter", "+activate", & "DEER_HUNT_MATV_HINT");
-  maps\deer_hunt_util::registeractionbinding("matv_enter", "+usereload", & "DEER_HUNT_MATV_HINT_RELOAD");
-  maps\deer_hunt_util::registeractionbinding("slide", "+gocrouch", & "DEER_HUNT_SLIDE_CROUCH");
-  maps\deer_hunt_util::registeractionbinding("slide", "+stance", & "DEER_HUNT_SLIDE_CROUCH_STANCE");
-  maps\deer_hunt_util::registeractionbinding("slide", "+togglecrouch", & "DEER_HUNT_SLIDE_CROUCH_TOGGLE");
-  maps\deer_hunt_util::registeractionbinding("slide", "+movedown", & "DEER_HUNT_SLIDE_CROUCH_HOLD");
-  maps\deer_hunt_util::registeractionbinding("crouch", "+gocrouch", & "DEER_HUNT_CROUCH");
-  maps\deer_hunt_util::registeractionbinding("crouch", "+stance", & "DEER_HUNT_CROUCH_STANCE");
-  maps\deer_hunt_util::registeractionbinding("crouch", "+togglecrouch", & "DEER_HUNT_CROUCH_TOGGLE");
-  maps\deer_hunt_util::registeractionbinding("crouch", "+movedown", & "DEER_HUNT_CROUCH_HOLD");
+  maps\deer_hunt_util::registeractionbinding("matv_enter", "+activate", &"DEER_HUNT_MATV_HINT");
+  maps\deer_hunt_util::registeractionbinding("matv_enter", "+usereload", &"DEER_HUNT_MATV_HINT_RELOAD");
+  maps\deer_hunt_util::registeractionbinding("slide", "+gocrouch", &"DEER_HUNT_SLIDE_CROUCH");
+  maps\deer_hunt_util::registeractionbinding("slide", "+stance", &"DEER_HUNT_SLIDE_CROUCH_STANCE");
+  maps\deer_hunt_util::registeractionbinding("slide", "+togglecrouch", &"DEER_HUNT_SLIDE_CROUCH_TOGGLE");
+  maps\deer_hunt_util::registeractionbinding("slide", "+movedown", &"DEER_HUNT_SLIDE_CROUCH_HOLD");
+  maps\deer_hunt_util::registeractionbinding("crouch", "+gocrouch", &"DEER_HUNT_CROUCH");
+  maps\deer_hunt_util::registeractionbinding("crouch", "+stance", &"DEER_HUNT_CROUCH_STANCE");
+  maps\deer_hunt_util::registeractionbinding("crouch", "+togglecrouch", &"DEER_HUNT_CROUCH_TOGGLE");
+  maps\deer_hunt_util::registeractionbinding("crouch", "+movedown", &"DEER_HUNT_CROUCH_HOLD");
   var_0 = maps\deer_hunt_util::getactionbind("slide");
   maps\_utility::add_hint_string("slide_hint", var_0.hint, ::player_slide_check);
   var_1 = maps\deer_hunt_util::getactionbind("crouch");
   maps\_utility::add_hint_string("crouch_hint", var_1.hint, ::player_crouch_check);
-  maps\_utility::add_hint_string("laser_hint", & "DEER_HUNT_LASER_HINT", maps\deer_hunt_util::player_is_using_missile_launcher);
+  maps\_utility::add_hint_string("laser_hint", &"DEER_HUNT_LASER_HINT", maps\deer_hunt_util::player_is_using_missile_launcher);
   maps\_load::main();
   maps\_utility::setsaveddvar_cg_ng("r_specularColorScale", 2.5, 9);
   setup_motion_blur();
@@ -172,13 +172,13 @@ objectives() {
     case "intro":
     case "default":
       common_scripts\utility::flag_wait("player_up");
-      objective_add(maps\_utility::obj("finish_sweep"), "current", & "DEER_HUNT_FINISH_PATROL");
+      objective_add(maps\_utility::obj("finish_sweep"), "current", &"DEER_HUNT_FINISH_PATROL");
     case "outside":
     case "lobby":
       common_scripts\utility::flag_wait("lobby_exit");
       thread maps\deer_hunt_util::try_slide_hint("lobby_exit", "promenade_exit_halfway");
       wait 15;
-      objective_add(maps\_utility::obj("meet_charlie"), "current", & "DEER_HUNT_MEET_CHARLIE_TEAM");
+      objective_add(maps\_utility::obj("meet_charlie"), "current", &"DEER_HUNT_MEET_CHARLIE_TEAM");
     case "street":
       common_scripts\utility::flag_wait("road_chasm_approach");
       maps\_utility::objective_complete(maps\_utility::obj("meet_charlie"));
@@ -192,7 +192,7 @@ objectives() {
       wait 15;
       maps\_utility::objective_complete(maps\_utility::obj("finish_sweep"));
       wait 2;
-      objective_add(maps\_utility::obj("la_river"), "current", & "DEER_HUNT_BACKUP_LARIVER");
+      objective_add(maps\_utility::obj("la_river"), "current", &"DEER_HUNT_BACKUP_LARIVER");
       common_scripts\utility::flag_wait("pipe_enter");
 
       if(!common_scripts\utility::flag("did_slide_hint"))
@@ -201,16 +201,16 @@ objectives() {
     case "lariver":
       common_scripts\utility::flag_wait("drag_complete");
       wait 4;
-      objective_string(maps\_utility::obj("la_river"), & "DEER_HUNT_DEFEND_OBJ");
+      objective_string(maps\_utility::obj("la_river"), &"DEER_HUNT_DEFEND_OBJ");
       common_scripts\utility::flag_wait("defend_chopp2_dead");
       maps\_utility::objective_complete(maps\_utility::obj("la_river"));
       common_scripts\utility::flag_wait("load_matv");
       wait 2;
       maps\_utility::objective_complete(maps\_utility::obj("finish_sweep"));
       wait 2;
-      objective_add(maps\_utility::obj("go_to_base"), "current", & "DEER_HUNT_MISSION_BRIEF");
+      objective_add(maps\_utility::obj("go_to_base"), "current", &"DEER_HUNT_MISSION_BRIEF");
       wait 2;
-      objective_add(maps\_utility::obj("matv"), "current", & "DEER_HUNT_BACK_MATV");
+      objective_add(maps\_utility::obj("matv"), "current", &"DEER_HUNT_BACK_MATV");
       common_scripts\utility::flag_wait("matv_loaded");
       maps\_utility::objective_complete(maps\_utility::obj("matv"));
     case "ride":
@@ -219,7 +219,7 @@ objectives() {
       maps\_utility::objective_complete(maps\_utility::obj("go_to_base"));
       wait 2;
     case "house":
-      objective_add(maps\_utility::obj("elias"), "current", & "DEER_HUNT_REPORT_TO_ELIAS");
+      objective_add(maps\_utility::obj("elias"), "current", &"DEER_HUNT_REPORT_TO_ELIAS");
       common_scripts\utility::flag_wait("2nd_floor_start");
       maps\_utility::objective_complete(maps\_utility::obj("elias"));
     default:

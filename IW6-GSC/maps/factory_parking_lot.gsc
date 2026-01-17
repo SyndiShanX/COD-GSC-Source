@@ -191,7 +191,7 @@ parking_lot_blockade_vehicle_death_radius() {
 
     if(var_0 < 256) {
       level notify("new_quote_string");
-      setdvar("ui_deadquote", & "FACTORY_FAIL_HIT_BY_TRAILER");
+      setdvar("ui_deadquote", &"FACTORY_FAIL_HIT_BY_TRAILER");
       level.player kill();
       maps\_utility::missionfailedwrapper();
     }

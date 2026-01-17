@@ -17,7 +17,7 @@ set_id_shader(localclientnum, set, newent) {
 }
 
 screen_flash() {
-  playsound(0, "evt_smashcut_flash", (0, 0, 0));
+  playSound(0, "evt_smashcut_flash", (0, 0, 0));
   screen_flash_dvar();
 }
 

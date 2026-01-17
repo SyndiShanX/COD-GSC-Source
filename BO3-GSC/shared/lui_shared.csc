@@ -14,12 +14,12 @@
 #namespace lui;
 
 function autoexec __init__sytem__() {
-  system::register("lui_shared", & __init__, undefined, undefined);
+  system::register("lui_shared", &__init__, undefined, undefined);
 }
 
 function __init__() {
   level.client_menus = associativearray();
-  callback::on_localclient_connect( & on_player_connect);
+  callback::on_localclient_connect(&on_player_connect);
 }
 
 function on_player_connect(localclientnum) {
@@ -27,20 +27,20 @@ function on_player_connect(localclientnum) {
 }
 
 function initmenudata(localclientnum) {
-  assert(!isdefined(level.client_menus[localclientnum]));
+  assert(!isDefined(level.client_menus[localclientnum]));
   level.client_menus[localclientnum] = associativearray();
 }
 
 function createextracamxcamdata(menu_name, localclientnum, extracam_index, target_name, xcam, sub_xcam, xcam_frame) {
-  assert(isdefined(level.client_menus[localclientnum][menu_name]));
+  assert(isDefined(level.client_menus[localclientnum][menu_name]));
   menu_data = level.client_menus[localclientnum][menu_name];
-  extracam_data = spawnstruct();
+  extracam_data = spawnStruct();
   extracam_data.extracam_index = extracam_index;
   extracam_data.target_name = target_name;
   extracam_data.xcam = xcam;
   extracam_data.sub_xcam = sub_xcam;
   extracam_data.xcam_frame = xcam_frame;
-  if(!isdefined(menu_data.extra_cams)) {
+  if(!isDefined(menu_data.extra_cams)) {
     menu_data.extra_cams = [];
   } else if(!isarray(menu_data.extra_cams)) {
     menu_data.extra_cams = array(menu_data.extra_cams);
@@ -49,12 +49,12 @@ function createextracamxcamdata(menu_name, localclientnum, extracam_index, targe
 }
 
 function createcustomextracamxcamdata(menu_name, localclientnum, extracam_index, camera_function) {
-  assert(isdefined(level.client_menus[localclientnum][menu_name]));
+  assert(isDefined(level.client_menus[localclientnum][menu_name]));
   menu_data = level.client_menus[localclientnum][menu_name];
-  extracam_data = spawnstruct();
+  extracam_data = spawnStruct();
   extracam_data.extracam_index = extracam_index;
   extracam_data.camera_function = camera_function;
-  if(!isdefined(menu_data.extra_cams)) {
+  if(!isDefined(menu_data.extra_cams)) {
     menu_data.extra_cams = [];
   } else if(!isarray(menu_data.extra_cams)) {
     menu_data.extra_cams = array(menu_data.extra_cams);
@@ -63,11 +63,11 @@ function createcustomextracamxcamdata(menu_name, localclientnum, extracam_index,
 }
 
 function addmenuexploders(menu_name, localclientnum, exploder) {
-  assert(isdefined(level.client_menus[localclientnum][menu_name]));
+  assert(isDefined(level.client_menus[localclientnum][menu_name]));
   menu_data = level.client_menus[localclientnum][menu_name];
   if(isarray(exploder)) {
     foreach(expl in exploder) {
-      if(!isdefined(menu_data.exploders)) {
+      if(!isDefined(menu_data.exploders)) {
         menu_data.exploders = [];
       } else if(!isarray(menu_data.exploders)) {
         menu_data.exploders = array(menu_data.exploders);
@@ -75,7 +75,7 @@ function addmenuexploders(menu_name, localclientnum, exploder) {
       menu_data.exploders[menu_data.exploders.size] = expl;
     }
   } else {
-    if(!isdefined(menu_data.exploders)) {
+    if(!isDefined(menu_data.exploders)) {
       menu_data.exploders = [];
     } else if(!isarray(menu_data.exploders)) {
       menu_data.exploders = array(menu_data.exploders);
@@ -85,11 +85,11 @@ function addmenuexploders(menu_name, localclientnum, exploder) {
 }
 
 function linktocustomcharacter(menu_name, localclientnum, target_name) {
-  assert(isdefined(level.client_menus[localclientnum][menu_name]));
+  assert(isDefined(level.client_menus[localclientnum][menu_name]));
   menu_data = level.client_menus[localclientnum][menu_name];
-  assert(!isdefined(menu_data.custom_character));
+  assert(!isDefined(menu_data.custom_character));
   model = getent(localclientnum, target_name, "targetname");
-  if(!isdefined(model)) {
+  if(!isDefined(model)) {
     model = util::spawn_model(localclientnum, "tag_origin");
     model.targetname = target_name;
   }
@@ -99,15 +99,15 @@ function linktocustomcharacter(menu_name, localclientnum, target_name) {
 }
 
 function getcharacterdataformenu(menu_name, localclientnum) {
-  if(isdefined(level.client_menus[localclientnum][menu_name])) {
+  if(isDefined(level.client_menus[localclientnum][menu_name])) {
     return level.client_menus[localclientnum][menu_name].custom_character;
   }
   return undefined;
 }
 
 function createcameramenu(menu_name, localclientnum, target_name, xcam, sub_xcam, xcam_frame = undefined, custom_open_fn = undefined, custom_close_fn = undefined) {
-  assert(!isdefined(level.client_menus[localclientnum][menu_name]));
-  level.client_menus[localclientnum][menu_name] = spawnstruct();
+  assert(!isDefined(level.client_menus[localclientnum][menu_name]));
+  level.client_menus[localclientnum][menu_name] = spawnStruct();
   menu_data = level.client_menus[localclientnum][menu_name];
   menu_data.target_name = target_name;
   menu_data.xcam = xcam;
@@ -119,8 +119,8 @@ function createcameramenu(menu_name, localclientnum, target_name, xcam, sub_xcam
 }
 
 function createcustomcameramenu(menu_name, localclientnum, camera_function, has_state, custom_open_fn = undefined, custom_close_fn = undefined) {
-  assert(!isdefined(level.client_menus[localclientnum][menu_name]));
-  level.client_menus[localclientnum][menu_name] = spawnstruct();
+  assert(!isDefined(level.client_menus[localclientnum][menu_name]));
+  level.client_menus[localclientnum][menu_name] = spawnStruct();
   menu_data = level.client_menus[localclientnum][menu_name];
   menu_data.camera_function = camera_function;
   menu_data.has_state = has_state;
@@ -130,9 +130,9 @@ function createcustomcameramenu(menu_name, localclientnum, camera_function, has_
 }
 
 function setup_menu(localclientnum, menu_data, previous_menu) {
-  if(isdefined(previous_menu) && isdefined(level.client_menus[localclientnum][previous_menu.menu_name])) {
+  if(isDefined(previous_menu) && isDefined(level.client_menus[localclientnum][previous_menu.menu_name])) {
     previous_menu_info = level.client_menus[localclientnum][previous_menu.menu_name];
-    if(isdefined(previous_menu_info.custom_close_fn)) {
+    if(isDefined(previous_menu_info.custom_close_fn)) {
       if(isarray(previous_menu_info.custom_close_fn)) {
         foreach(fn in previous_menu_info.custom_close_fn) {
           [
@@ -140,54 +140,52 @@ function setup_menu(localclientnum, menu_data, previous_menu) {
           ](localclientnum, previous_menu_info);
         }
       } else {
-        [
-          [previous_menu_info.custom_close_fn]
-        ](localclientnum, previous_menu_info);
+        [[previous_menu_info.custom_close_fn]](localclientnum, previous_menu_info);
       }
     }
-    if(isdefined(previous_menu_info.extra_cams)) {
+    if(isDefined(previous_menu_info.extra_cams)) {
       foreach(extracam_data in previous_menu_info.extra_cams) {
         multi_extracam::extracam_reset_index(localclientnum, extracam_data.extracam_index);
       }
     }
     level notify(previous_menu.menu_name + "_closed");
-    if(isdefined(previous_menu_info.camera_function)) {
+    if(isDefined(previous_menu_info.camera_function)) {
       stopmaincamxcam(localclientnum);
-    } else if(isdefined(previous_menu_info.xcam)) {
+    } else if(isDefined(previous_menu_info.xcam)) {
       stopmaincamxcam(localclientnum);
     }
-    if(isdefined(previous_menu_info.custom_character)) {
+    if(isDefined(previous_menu_info.custom_character)) {
       previous_menu_info.custom_character.charactermodel hide();
     }
-    if(isdefined(previous_menu_info.exploders)) {
+    if(isDefined(previous_menu_info.exploders)) {
       foreach(exploder in previous_menu_info.exploders) {
         killradiantexploder(localclientnum, exploder);
       }
     }
   }
-  if(isdefined(menu_data) && isdefined(level.client_menus[localclientnum][menu_data.menu_name])) {
+  if(isDefined(menu_data) && isDefined(level.client_menus[localclientnum][menu_data.menu_name])) {
     new_menu = level.client_menus[localclientnum][menu_data.menu_name];
-    if(isdefined(new_menu.custom_character)) {
+    if(isDefined(new_menu.custom_character)) {
       new_menu.custom_character.charactermodel show();
     }
-    if(isdefined(new_menu.exploders)) {
+    if(isDefined(new_menu.exploders)) {
       foreach(exploder in new_menu.exploders) {
         playradiantexploder(localclientnum, exploder);
       }
     }
-    if(isdefined(new_menu.camera_function)) {
+    if(isDefined(new_menu.camera_function)) {
       if(new_menu.has_state === 1) {
         level thread[[new_menu.camera_function]](localclientnum, menu_data.menu_name, menu_data.state);
       } else {
         level thread[[new_menu.camera_function]](localclientnum, menu_data.menu_name);
       }
-    } else if(isdefined(new_menu.xcam)) {
+    } else if(isDefined(new_menu.xcam)) {
       camera_ent = struct::get(new_menu.target_name);
-      if(isdefined(camera_ent)) {
+      if(isDefined(camera_ent)) {
         playmaincamxcam(localclientnum, new_menu.xcam, 0, new_menu.sub_xcam, "", camera_ent.origin, camera_ent.angles);
       }
     }
-    if(isdefined(new_menu.custom_open_fn)) {
+    if(isDefined(new_menu.custom_open_fn)) {
       if(isarray(new_menu.custom_open_fn)) {
         foreach(fn in new_menu.custom_open_fn) {
           [
@@ -195,14 +193,12 @@ function setup_menu(localclientnum, menu_data, previous_menu) {
           ](localclientnum, new_menu);
         }
       } else {
-        [
-          [new_menu.custom_open_fn]
-        ](localclientnum, new_menu);
+        [[new_menu.custom_open_fn]](localclientnum, new_menu);
       }
     }
-    if(isdefined(new_menu.extra_cams)) {
+    if(isDefined(new_menu.extra_cams)) {
       foreach(extracam_data in new_menu.extra_cams) {
-        if(isdefined(extracam_data.camera_function)) {
+        if(isDefined(extracam_data.camera_function)) {
           if(new_menu.has_state === 1) {
             level thread[[extracam_data.camera_function]](localclientnum, menu_data.menu_name, extracam_data, menu_data.state);
           } else {
@@ -211,8 +207,8 @@ function setup_menu(localclientnum, menu_data, previous_menu) {
           continue;
         }
         camera_ent = multi_extracam::extracam_init_index(localclientnum, extracam_data.target_name, extracam_data.extracam_index);
-        if(isdefined(camera_ent)) {
-          if(isdefined(extracam_data.xcam_frame)) {
+        if(isDefined(camera_ent)) {
+          if(isDefined(extracam_data.xcam_frame)) {
             camera_ent playextracamxcam(extracam_data.xcam, 0, extracam_data.sub_xcam, extracam_data.xcam_frame);
             continue;
           }
@@ -226,36 +222,36 @@ function setup_menu(localclientnum, menu_data, previous_menu) {
 function client_menus(localclientnum) {
   level endon("disconnect");
   clientmenustack = array();
-  while (true) {
+  while(true) {
     level waittill("menu_change" + localclientnum, menu_name, status, state);
     menu_index = undefined;
-    for (i = 0; i < clientmenustack.size; i++) {
+    for(i = 0; i < clientmenustack.size; i++) {
       if(clientmenustack[i].menu_name == menu_name) {
         menu_index = i;
         break;
       }
     }
-    if(status === "closeToMenu" && isdefined(menu_index)) {
+    if(status === "closeToMenu" && isDefined(menu_index)) {
       topmenu = undefined;
-      for (i = 0; i < menu_index; i++) {
+      for(i = 0; i < menu_index; i++) {
         popped = array::pop_front(clientmenustack, 0);
-        if(!isdefined(topmenu)) {
+        if(!isDefined(topmenu)) {
           topmenu = popped;
         }
       }
       setup_menu(localclientnum, clientmenustack[0], topmenu);
       continue;
     }
-    statechange = isdefined(menu_index) && status !== "closed" && clientmenustack[menu_index].state !== state && (!(!isdefined(clientmenustack[menu_index].state) && !isdefined(state)));
+    statechange = isDefined(menu_index) && status !== "closed" && clientmenustack[menu_index].state !== state && (!(!isDefined(clientmenustack[menu_index].state) && !isDefined(state)));
     updateonly = statechange && menu_index !== 0;
     if(updateonly) {
       clientmenustack[i].state = state;
     } else {
-      if(status === "closed" || statechange && isdefined(menu_index)) {
+      if(status === "closed" || statechange && isDefined(menu_index)) {
         popped = undefined;
         if(getdvarint("ui_execdemo_e3") == 1) {
-          while (menu_index >= 0) {
-            if(!isdefined(popped)) {
+          while(menu_index >= 0) {
+            if(!isDefined(popped)) {
               popped = array::pop_front(clientmenustack, 0);
             }
             menu_index--;
@@ -266,8 +262,8 @@ function client_menus(localclientnum) {
         }
         setup_menu(localclientnum, clientmenustack[0], popped);
       }
-      if(status === "opened" && (!isdefined(menu_index) || statechange)) {
-        menu_data = spawnstruct();
+      if(status === "opened" && (!isDefined(menu_index) || statechange)) {
+        menu_data = spawnStruct();
         menu_data.menu_name = menu_name;
         menu_data.state = state;
         lastmenu = (clientmenustack.size > 0 ? clientmenustack[0] : undefined);
@@ -312,14 +308,14 @@ function private _screen_close_menu() {
   self notify("_screen_fade");
   self endon("_screen_fade");
   self endon("disconnect");
-  if(isdefined(self.screen_fade_menus)) {
+  if(isDefined(self.screen_fade_menus)) {
     str_menu = "FullScreenBlack";
-    if(isdefined(self.screen_fade_menus[str_menu])) {
+    if(isDefined(self.screen_fade_menus[str_menu])) {
       closeluimenu(self.localclientnum, self.screen_fade_menus[str_menu].lui_menu);
       self.screen_fade_menus[str_menu] = undefined;
     }
     str_menu = "FullScreenWhite";
-    if(isdefined(self.screen_fade_menus[str_menu])) {
+    if(isDefined(self.screen_fade_menus[str_menu])) {
       closeluimenu(self.localclientnum, self.screen_fade_menus[str_menu].lui_menu);
       self.screen_fade_menus[str_menu] = undefined;
     }
@@ -331,10 +327,10 @@ function private _screen_fade(n_time, n_target_alpha, n_start_alpha, v_color, b_
   self endon("_screen_fade");
   self endon("disconnect");
   self endon("entityshutdown");
-  if(!isdefined(self.screen_fade_menus)) {
+  if(!isDefined(self.screen_fade_menus)) {
     self.screen_fade_menus = [];
   }
-  if(!isdefined(v_color)) {
+  if(!isDefined(v_color)) {
     v_color = (0, 0, 0);
   }
   n_time_ms = int(n_time * 1000);
@@ -355,14 +351,14 @@ function private _screen_fade(n_time, n_target_alpha, n_start_alpha, v_color, b_
     }
   }
   lui_menu = "";
-  if(isdefined(self.screen_fade_menus[str_menu])) {
+  if(isDefined(self.screen_fade_menus[str_menu])) {
     s_menu = self.screen_fade_menus[str_menu];
     lui_menu = s_menu.lui_menu;
     closeluimenu(self.localclientnum, lui_menu);
     n_start_alpha = lerpfloat(s_menu.n_start_alpha, s_menu.n_target_alpha, gettime() - s_menu.n_start_time);
   }
   lui_menu = createluimenu(self.localclientnum, str_menu);
-  self.screen_fade_menus[str_menu] = spawnstruct();
+  self.screen_fade_menus[str_menu] = spawnStruct();
   self.screen_fade_menus[str_menu].lui_menu = lui_menu;
   self.screen_fade_menus[str_menu].n_start_alpha = n_start_alpha;
   self.screen_fade_menus[str_menu].n_target_alpha = n_target_alpha;

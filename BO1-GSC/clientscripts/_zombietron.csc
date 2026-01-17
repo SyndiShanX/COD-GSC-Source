@@ -86,7 +86,7 @@ lighting_flash_cycle(intensity_low, intensity_high, min_flash_time, max_flash_ti
   lightningdir = (RandomFloatRange(-60, -20), RandomFloatRange(0, 360), 0);
   while(flash_time > 0.0) {
     lightning_flash(intensity_low, intensity_high, lightningdir);
-    PlaySound(0, "amb_thunder_clap", (0, 0, 0));
+    playSound(0, "amb_thunder_clap", (0, 0, 0));
     flash_wait_time = RandomFloatRange(flash_wait_time_min, flash_wait_time_max);
     wait(flash_wait_time);
     SetSavedDvar("r_lightTweakSunLight", oldlight);
@@ -144,14 +144,14 @@ zombie_helicopter_kill(localClientNum, set, newEnt) {
     launch_dir = VectorNormalize(launch_dir);
     launch_dir *= 100;
     self LaunchRagdoll(launch_dir);
-    PlaySound(0, "zmb_ragdoll_launched", self.origin);
+    playSound(0, "zmb_ragdoll_launched", self.origin);
     origin = self GetTagOrigin("j_head");
     angles = self GetTagAngles("j_head");
     forcex = RandomFloatRange(-200, 200);
     forcey = RandomFloatRange(-200, 200);
     forcez = RandomFloatRange(1300, 3100);
     camera_angles = GetDvarVector("player_TopDownCamAngles");
-    launchDir = AnglesToForward(camera_angles);
+    launchDir = anglesToForward(camera_angles);
     launchDir = launchDir * forcez * -1;
     launchDir += (forcex, forcey, 0);
     contactPoint = origin + (RandomFloatRange(-1, 1), RandomFloatRange(-1, 1), RandomFloatRange(-1, 1)) * 5;
@@ -210,7 +210,7 @@ flame_death_fx() {
   }
   self.is_on_fire = true;
   if(isDefined(level._effect) && isDefined(level._effect["character_fire_death_torso"])) {
-    PlayFxOnTag(0, level._effect["character_fire_death_torso"], self, "J_SpineLower");
+    playFXOnTag(0, level._effect["character_fire_death_torso"], self, "J_SpineLower");
   }
   if(isDefined(level._effect) && isDefined(level._effect["character_fire_death_sm"])) {
     wait 1;
@@ -220,15 +220,15 @@ flame_death_fx() {
     tagArray[2] = "J_Knee_RI";
     tagArray[3] = "J_Knee_LE";
     tagArray = randomize_array(tagArray);
-    PlayFxOnTag(0, level._effect["character_fire_death_sm"], self, tagArray[0]);
+    playFXOnTag(0, level._effect["character_fire_death_sm"], self, tagArray[0]);
     wait 1;
     tagArray[0] = "J_Wrist_RI";
     tagArray[1] = "J_Wrist_LE";
     tagArray[2] = "J_Ankle_RI";
     tagArray[3] = "J_Ankle_LE";
     tagArray = randomize_array(tagArray);
-    PlayFxOnTag(0, level._effect["character_fire_death_sm"], self, tagArray[0]);
-    PlayFxOnTag(0, level._effect["character_fire_death_sm"], self, tagArray[1]);
+    playFXOnTag(0, level._effect["character_fire_death_sm"], self, tagArray[0]);
+    playFXOnTag(0, level._effect["character_fire_death_sm"], self, tagArray[1]);
   }
 }
 
@@ -271,10 +271,10 @@ smartbomb_handler(localClientNum, set, newEnt) {
   bomb setModel(level.bomb_model);
   bomb.angles = (90, 0, 0);
   bomb moveTo(self.origin, 0.3, 0, 0);
-  PlaySound(0, "zmb_nuke_incoming", self.origin);
+  playSound(0, "zmb_nuke_incoming", self.origin);
   bomb waittill("movedone");
-  PlaySound(0, "zmb_nuke_impact", self.origin);
-  PlayFX(0, level._effect["bomb"], self.origin);
+  playSound(0, "zmb_nuke_impact", self.origin);
+  playFX(0, level._effect["bomb"], self.origin);
   bomb Delete();
   players = getLocalPlayers();
   for(i = 0; i < players.size; i++) {
@@ -471,21 +471,21 @@ powerup(localClientNum, set, newEnt) {
       case "extra_life":
       case "extra_life_directed":
         loop_sound = "zmb_pickup_life_shimmer";
-        playfxontag(localClientNum, level._effect["powerup_on"], self, "tag_origin");
+        playFXOnTag(localClientNum, level._effect["powerup_on"], self, "tag_origin");
         break;
       case "money":
         loop_sound = "zmb_pickup_money_shimmer";
         model = self.model;
         if(model == "zombietron_ruby") {
-          PlayFxOnTag(localClientNum, level._effect["red_gem"], self, "tag_origin");
+          playFXOnTag(localClientNum, level._effect["red_gem"], self, "tag_origin");
         } else if(model == "zombietron_sapphire") {
-          PlayFxOnTag(localClientNum, level._effect["blue_gem"], self, "tag_origin");
+          playFXOnTag(localClientNum, level._effect["blue_gem"], self, "tag_origin");
         } else if(model == "zombietron_diamond") {
-          PlayFxOnTag(localClientNum, level._effect["white_gem"], self, "tag_origin");
+          playFXOnTag(localClientNum, level._effect["white_gem"], self, "tag_origin");
         } else if(issubstr(self.model, "silver")) {
-          playfxontag(localClientNum, level._effect["powerup_on_silver"], self, "tag_origin");
+          playFXOnTag(localClientNum, level._effect["powerup_on_silver"], self, "tag_origin");
         } else {
-          playfxontag(localClientNum, level._effect["powerup_on"], self, "tag_origin");
+          playFXOnTag(localClientNum, level._effect["powerup_on"], self, "tag_origin");
         }
         break;
       case "speed":
@@ -499,7 +499,7 @@ powerup(localClientNum, set, newEnt) {
         loop_sound = "zmb_pickup_powerup_shimmer";
         break;
       case "double_shot":
-        PlaySound(localClientNum, "zmb_dblshot_spawn", self.origin);
+        playSound(localClientNum, "zmb_dblshot_spawn", self.origin);
         loop_sound = "zmb_pickup_powerup_shimmer";
         break;
       case "weapon":
@@ -515,7 +515,7 @@ powerup(localClientNum, set, newEnt) {
         break;
     }
     if(play_sound) {
-      PlaySound(localClientNum, "zmb_pickup_spawn", self.origin);
+      playSound(localClientNum, "zmb_pickup_spawn", self.origin);
     }
     if(loop_sound != "") {
       self.loopsound = spawn(0, self.origin, "script_origin");
@@ -525,18 +525,18 @@ powerup(localClientNum, set, newEnt) {
     if(isDefined(self.loopsound)) {
       self.loopsound notify("picked_up");
     }
-    PlayFx(0, level._effect["powerup_grabbed"], self.origin, AnglesToForward(self.angles));
+    playFX(0, level._effect["powerup_grabbed"], self.origin, anglesToForward(self.angles));
     switch (get_pickup_type_from_model(self.model)) {
       case "extra_life":
       case "extra_life_directed":
-        PlaySound(localClientNum, "zmb_pickup_life", self.origin);
+        playSound(localClientNum, "zmb_pickup_life", self.origin);
         break;
       case "money":
-        PlaySound(localClientNum, "zmb_pickup_money", self.origin);
+        playSound(localClientNum, "zmb_pickup_money", self.origin);
         break;
       case "tank":
       case "heli":
-        PlaySound(localClientNum, "zmb_pickup_vehicle", self.origin);
+        playSound(localClientNum, "zmb_pickup_vehicle", self.origin);
         break;
       case "spinning_blockers":
       case "tesla_blockers":
@@ -545,12 +545,12 @@ powerup(localClientNum, set, newEnt) {
       case "bomb":
       case "booster":
       case "speed":
-        PlaySound(localClientNum, "zmb_pickup_powerup", self.origin);
+        playSound(localClientNum, "zmb_pickup_powerup", self.origin);
         break;
       case "weapon":
       case "mini_turret":
       case "monkey":
-        PlaySound(localClientNum, "zmb_pickup_weapon", self.origin);
+        playSound(localClientNum, "zmb_pickup_weapon", self.origin);
         break;
       default:
         PrintLn("Grabbed " + self.model);
@@ -564,11 +564,11 @@ sacred_cow(localClientNum, set, newEnt) {
     return;
   }
   self playLoopSound("zmb_pickup_money_shimmer");
-  playfxontag(localClientNum, level._effect["powerup_on"], self, "J_Ankle_LE");
-  playfxontag(localClientNum, level._effect["powerup_on"], self, "J_Ankle_RI");
-  playfxontag(localClientNum, level._effect["powerup_on"], self, "J_Wrist_LE");
-  playfxontag(localClientNum, level._effect["powerup_on"], self, "J_Wrist_RI");
-  playfxontag(localClientNum, level._effect["torch_light"], self, "J_Tail2");
+  playFXOnTag(localClientNum, level._effect["powerup_on"], self, "J_Ankle_LE");
+  playFXOnTag(localClientNum, level._effect["powerup_on"], self, "J_Ankle_RI");
+  playFXOnTag(localClientNum, level._effect["powerup_on"], self, "J_Wrist_LE");
+  playFXOnTag(localClientNum, level._effect["powerup_on"], self, "J_Wrist_RI");
+  playFXOnTag(localClientNum, level._effect["torch_light"], self, "J_Tail2");
 }
 
 zombie_blood(localClientNum, set, newEnt) {
@@ -577,7 +577,7 @@ zombie_blood(localClientNum, set, newEnt) {
   }
   if(set) {
     if(is_mature()) {
-      PlayFX(localClientNum, level._effect["big_blood"], self.origin, AnglesToForward(self.angles) * -1);
+      playFX(localClientNum, level._effect["big_blood"], self.origin, anglesToForward(self.angles) * -1);
     }
   }
 }
@@ -585,7 +585,7 @@ zombie_blood(localClientNum, set, newEnt) {
 gib_death(localClientNum, set, newEnt, player) {
   if(set) {
     if(is_mature()) {
-      PlayFX(localClientNum, level._effect["gib_death"], self.origin, AnglesToForward(self.angles));
+      playFX(localClientNum, level._effect["gib_death"], self.origin, anglesToForward(self.angles));
     }
   }
 }
@@ -640,7 +640,7 @@ createZombieEyes(localClientNum) {
   if(isDefined(self._eyeArray)) {
     if(!isDefined(self._eyeArray[localClientNum])) {
       linkTag = "J_Eyeball_LE";
-      self._eyeArray[localClientNum] = PlayFxOnTag(localClientNum, level._effect["eye_glow"], self, linkTag);
+      self._eyeArray[localClientNum] = playFXOnTag(localClientNum, level._effect["eye_glow"], self, linkTag);
     }
   }
 }
@@ -708,9 +708,9 @@ has_gibbed_piece(piece_index) {
 do_gib_fx(tag) {
   players = getLocalPlayers();
   for(i = 0; i < players.size; i++) {
-    PlayFxOnTag(i, level._effect["animscript_gib_fx"], self, tag);
+    playFXOnTag(i, level._effect["animscript_gib_fx"], self, tag);
   }
-  PlaySound(0, "zmb_death_gibs", self gettagorigin(tag));
+  playSound(0, "zmb_death_gibs", self gettagorigin(tag));
 }
 
 do_gib(model, tag) {

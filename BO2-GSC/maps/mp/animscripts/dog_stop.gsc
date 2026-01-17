@@ -38,7 +38,7 @@ isfacingenemy(tolerancecosangle) {
   if(disttoenemy < 1)
     return true;
 
-  forward = anglestoforward(self.angles);
+  forward = anglesToForward(self.angles);
   val1 = forward[0] * vectoenemy[0] + forward[1] * vectoenemy[1];
   val2 = (forward[0] * vectoenemy[0] + forward[1] * vectoenemy[1]) / disttoenemy;
   return (forward[0] * vectoenemy[0] + forward[1] * vectoenemy[1]) / disttoenemy > tolerancecosangle;

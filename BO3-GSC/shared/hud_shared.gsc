@@ -10,15 +10,15 @@
 #namespace hud;
 
 function autoexec __init__sytem__() {
-  system::register("hud", & __init__, undefined, undefined);
+  system::register("hud", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype( & init);
+  callback::on_start_gametype(&init);
 }
 
 function init() {
-  level.uiparent = spawnstruct();
+  level.uiparent = spawnStruct();
   level.uiparent.horzalign = "left";
   level.uiparent.vertalign = "top";
   level.uiparent.alignx = "left";
@@ -30,7 +30,7 @@ function init() {
   level.uiparent.children = [];
   level.fontheight = 12;
   foreach(team in level.teams) {
-    level.hud[team] = spawnstruct();
+    level.hud[team] = spawnStruct();
   }
   level.primaryprogressbary = -61;
   level.primaryprogressbarx = 0;

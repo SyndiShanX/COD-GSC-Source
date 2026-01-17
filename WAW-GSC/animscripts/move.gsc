@@ -70,7 +70,7 @@ MoveMainLoop() {
   moveMode = self.moveMode;
   if(isDefined(self.pathGoalPos) && distanceSquared(self.origin, self.pathGoalPos) < 4096)
     moveMode = "walk";
-  for (;;) {
+  for(;;) {
     loopTime = self getAnimTime( % walk_and_run_loops);
     if(loopTime < prevLoopTime)
       self.a.runLoopCount++;
@@ -147,7 +147,7 @@ shootWhileMoving() {
   }
   if(isDefined(self.weapon) && weaponClass(self.weapon) == "spread")
     self.a.array["single"] = array( % shotgun_stand_fire_1A, % shotgun_stand_fire_1B);
-  while (1) {
+  while(1) {
     if(!self.bulletsInClip) {
       if(self isCQBWalking()) {
         cheatAmmoIfNecessary();
@@ -167,7 +167,7 @@ shootWhileMoving() {
 
 combatBreaker() {
   self endon("killanimscript");
-  while (isalive(self.enemy) && isDefined(self.node) && self canSee(self.enemy)) {
+  while(isalive(self.enemy) && isDefined(self.node) && self canSee(self.enemy)) {
     if(seekingCoverInMyFov()) {
       break;
     }
@@ -195,7 +195,7 @@ seekingCoverInMyFov() {
 
 RunBreaker() {
   self endon("killanimscript");
-  for (;;) {
+  for(;;) {
     if(isalive(self.enemy) && isDefined(self.node) && self canSee(self.enemy)) {
       if(!seekingCoverInMyFov()) {
         break;
@@ -208,7 +208,7 @@ RunBreaker() {
 
 drawLookaheadDir() {
   self endon("killanimscript");
-  for (;;) {
+  for(;;) {
     line(self.origin + (0, 0, 20), (self.origin + vectorscale(self.lookaheaddir, 64)) + (0, 0, 20));
     wait(0.05);
   }

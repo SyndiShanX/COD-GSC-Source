@@ -7,7 +7,6 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_weap_thundergun;
 
 autoexec __init__system__() {
@@ -17,7 +16,7 @@ autoexec __init__system__() {
 __init__() {
   level.w_thundergun = getweapon(#"thundergun");
   level.w_thundergun_upgraded = getweapon(#"thundergun_upgraded");
-  clientfield::register("actor", "" + #"hash_7549405bcfcbcfb", 24000, 1, "counter", &function_5059c81b, 0, 0);
+  clientfield::register("actor", "" + # "hash_7549405bcfcbcfb", 24000, 1, "counter", &function_5059c81b, 0, 0);
 }
 
 __main__() {
@@ -29,17 +28,16 @@ on_weapon_change(s_params) {
   w_old_weapon = s_params.last_weapon;
 
   if(w_new_weapon == level.w_thundergun || w_new_weapon == level.w_thundergun_upgraded) {
-
     iprintlnbold("<dev string:x38>");
 
   }
 }
 
 thundergun_fx_fire(localclientnum) {
-  playSound(localclientnum, #"wpn_thunder_breath", (0, 0, 0));
+  playSound(localclientnum, # "wpn_thunder_breath", (0, 0, 0));
 }
 
-private function_5059c81b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+function_5059c81b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(isDefined(self)) {
     v_fx_origin = self gettagorigin(self zm_utility::function_467efa7b(1));
 

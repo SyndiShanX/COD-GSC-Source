@@ -20,7 +20,7 @@ flashRumbleLoop(duration) {
   self endon("flash_rumble_loop");
   self notify("flash_rumble_loop");
   goalTime = getTime() + duration * 1000;
-  while (getTime() < goalTime) {
+  while(getTime() < goalTime) {
     self PlayRumbleOnEntity("damage_heavy");
     wait(0.05);
   }
@@ -29,7 +29,7 @@ flashRumbleLoop(duration) {
 monitorFlash() {
   self endon("disconnect");
   self.flashEndTime = 0;
-  while (1) {
+  while(1) {
     self waittill("flashbang", amount_distance, amount_angle, attacker);
     if(!isalive(self)) {
       continue;

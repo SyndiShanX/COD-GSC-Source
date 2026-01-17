@@ -113,7 +113,7 @@ fail_player_for_leaving_hudson_and_woods_wave_2() {
 }
 
 jungle_escape_spawn_func() {
-  a_escape_rpg_enemies = getentarray("escape_rpg_enemy", "script_noteworthy");
+  a_escape_rpg_enemies = getEntArray("escape_rpg_enemy", "script_noteworthy");
   array_thread(a_escape_rpg_enemies, ::add_spawn_function, ::escape_rpg_enemy_logic);
   add_spawn_function_veh("truck_0", ::truck_spawn_func);
   add_spawn_function_veh("truck_1", ::truck01_spawn_func);
@@ -131,7 +131,7 @@ truck_spawn_func() {
   self maps\_vehicle::lights_off();
   ai_gunner = getent("truck_0_gunner_ai", "targetname");
   ai_gunner thread truck_0_gunner_logic();
-  self playsound("evt_turret_truck_arrive");
+  self playSound("evt_turret_truck_arrive");
   self thread truck_mortar_death();
   self thread delete_truck_riders_when_end_scene_starts();
 }
@@ -141,7 +141,7 @@ truck01_spawn_func() {
   self set_turret_burst_parameters(1, 2, 1, 2, 1);
   self.health = 500;
   self maps\_vehicle::lights_off();
-  self playsound("evt_turret_truck_arrive");
+  self playSound("evt_turret_truck_arrive");
   self thread delete_truck_riders_when_end_scene_starts();
 }
 
@@ -158,7 +158,7 @@ truck_mortar_death() {
   flag_set("waterfall_mg_truck_destroyed");
   m_truck = spawn("script_model", self.origin);
   m_truck.angles = self.angles;
-  m_truck setmodel("veh_iw_pickup_technical");
+  m_truck setModel("veh_iw_pickup_technical");
   m_truck.animname = "truck_0_model";
   self.delete_on_death = 1;
   self notify("death");
@@ -297,7 +297,7 @@ jungle_escape_wave_3_vo(delay) {
 }
 
 activate_the_wrong_exit_from_village_trigger() {
-  a_volumes = getentarray("exit_village_wrong_way_info_volume", "targetname");
+  a_volumes = getEntArray("exit_village_wrong_way_info_volume", "targetname");
 
   while(true) {
     for(i = 0; i < a_volumes.size; i++) {
@@ -492,7 +492,7 @@ wait_for_3rd_battle_to_complete() {
 }
 
 angola_jungle_wave_spawning() {
-  triggers = getentarray("player_escaping_village_trigger", "targetname");
+  triggers = getEntArray("player_escaping_village_trigger", "targetname");
 
   foreach(trigger in triggers)
   trigger trigger_on();
@@ -537,7 +537,7 @@ angola_jungle_wave_spawning() {
 
 je_battle1_jungle_chasers(str_category) {
   trigger_wait_or_time("start_the_ai_chase", 15.0);
-  a_spawners = getentarray("je_village_chasers_wave1_regular_spawner", "targetname");
+  a_spawners = getEntArray("je_village_chasers_wave1_regular_spawner", "targetname");
 
   if(isDefined(a_spawners))
     simple_spawn_script_delay(a_spawners, ::spawn_fn_ai_run_to_target, 1, str_category, 1, 0, 0);
@@ -551,7 +551,7 @@ je_battle1_jungle_chasers(str_category) {
     dt = (time - start_time) / 1000;
 
     if(dt > wave2_wait_time) {
-      a_spawners = getentarray("je_village_chasers_wave2_regular_spawner", "targetname");
+      a_spawners = getEntArray("je_village_chasers_wave2_regular_spawner", "targetname");
 
       if(isDefined(a_spawners))
         simple_spawn_script_delay(a_spawners, ::spawn_fn_ai_run_to_target, 1, str_category, 1, 0, 0);
@@ -661,7 +661,7 @@ kill_player_battle_1_for_not_advancing(b_wait_time) {
 }
 
 force_player_to_battle_2() {
-  a_spawners = getentarray("je_battle1_force_player_back_spawners", "targetname");
+  a_spawners = getEntArray("je_battle1_force_player_back_spawners", "targetname");
   array_thread(a_spawners, ::add_spawn_function, ::je_retreat_and_delete);
   trigger_use("trig_je_battle1_force_player_back", "script_noteworthy");
 }
@@ -669,7 +669,7 @@ force_player_to_battle_2() {
 je_retreat_and_delete() {
   self endon("death");
   trigger_wait("defend2_chaser_spawners_trigger", "targetname");
-  a_volumes = getentarray("vol_battle_1_retreat_and_delete", "targetname");
+  a_volumes = getEntArray("vol_battle_1_retreat_and_delete", "targetname");
   wait(randomfloatrange(0.5, 3.0));
   self set_goal_pos(self.origin);
   self setgoalvolumeauto(a_volumes[randomint(a_volumes.size)]);
@@ -788,7 +788,7 @@ kill_player_regular_logic(s_spawner, a_s_trigger) {
   self set_goalradius(2048);
   self thread shoot_and_kill(level.player);
   self waittill("death");
-  spawn_array = getentarray(s_spawner, "targetname");
+  spawn_array = getEntArray(s_spawner, "targetname");
   ai = spawn_array[0] spawn_ai(1);
   ai thread kill_player_regular_logic(s_spawner, a_s_trigger);
 }
@@ -815,7 +815,7 @@ je_battle1_start_trigger(str_category) {
     autosave_by_name("player_enters_1st_defend_area");
 
   wait 4;
-  a_spawners = getentarray("je_battle1_start_regular_spawner", "targetname");
+  a_spawners = getEntArray("je_battle1_start_regular_spawner", "targetname");
 
   if(isDefined(a_spawners))
     simple_spawn_script_delay(a_spawners, ::spawn_fn_ai_run_to_target, 1, str_category, 0, 0, 0);
@@ -858,7 +858,7 @@ je_battle1_wave3_trigger(str_category) {
   if(jungle_escape_can_do_autosave())
     autosave_by_name("battle_1_wave_3");
 
-  a_spawners = getentarray("je_battle1_wave3_regular_launcher_spawner", "targetname");
+  a_spawners = getEntArray("je_battle1_wave3_regular_launcher_spawner", "targetname");
 
   if(isDefined(a_spawners))
     simple_spawn_script_delay(a_spawners, ::spawn_fn_ai_run_to_target, 1, str_category, 0, 0, 0);
@@ -922,7 +922,7 @@ defend1_set_ai_pathing_distances(delay) {
 je_battle2_chasers(str_category) {
   e_trigger = getent("defend2_chaser_spawners_trigger", "targetname");
   e_trigger waittill("trigger");
-  a_spawners = getentarray("je_defend2_chaser_spawner", "targetname");
+  a_spawners = getEntArray("je_defend2_chaser_spawner", "targetname");
 
   if(isDefined(a_spawners))
     simple_spawn_script_delay(a_spawners, ::spawn_fn_ai_run_to_target, 1, str_category, 1, 0, 0);
@@ -964,12 +964,12 @@ je_battle2_wave1_trigger(str_category) {
   str_start_notify = "mike_is_cool_2";
   level thread maps\angola_2_util::wait_time_and_enemies(min_start_time, max_start_time, min_enemies, str_start_notify);
   level waittill(str_start_notify);
-  a_spawners = getentarray("je_battle2_wave1_regular_spawner", "targetname");
+  a_spawners = getEntArray("je_battle2_wave1_regular_spawner", "targetname");
 
   if(isDefined(a_spawners))
     simple_spawn_script_delay(a_spawners, ::spawn_fn_ai_run_to_target, 1, str_category, 0, 1, 0);
 
-  a_spawners = getentarray("je_battle2_wave1_launcher_spawner", "targetname");
+  a_spawners = getEntArray("je_battle2_wave1_launcher_spawner", "targetname");
 
   if(isDefined(a_spawners))
     simple_spawn_script_delay(a_spawners, ::spawn_fn_ai_run_to_target, 1, str_category, 0, 1, 1);
@@ -994,7 +994,7 @@ je_battle2_wave2_trigger(str_category) {
   level waittill(str_start_notify);
   flag_set("je_battle_2_wave2_started");
   flag_set("je_force_squad_to_move_to_battle_3");
-  a_spawners = getentarray("je_battle2_wave2_regular_spawner", "targetname");
+  a_spawners = getEntArray("je_battle2_wave2_regular_spawner", "targetname");
 
   if(isDefined(a_spawners))
     simple_spawn_script_delay(a_spawners, ::spawn_fn_ai_run_to_target, 1, str_category, 0, 0, 0);
@@ -1007,7 +1007,7 @@ je_battle2_wave3_trigger(str_category, delay) {
   if(isDefined(delay))
     wait(delay);
 
-  a_spawners = getentarray("je_battle2_wave3_regular_spawner", "targetname");
+  a_spawners = getEntArray("je_battle2_wave3_regular_spawner", "targetname");
 
   if(isDefined(a_spawners))
     simple_spawn_script_delay(a_spawners, ::spawn_fn_ai_run_to_target, 1, str_category, 0, 0, 0);
@@ -1017,7 +1017,7 @@ je_battle2_wave3_trigger(str_category, delay) {
 
 behind_us_vo_node() {
   nd_node = getnode("behind_us_vo_node", "targetname");
-  v_forward = anglestoforward(nd_node.angles);
+  v_forward = anglesToForward(nd_node.angles);
 
   while(true) {
     v_dir = vectornormalize(level.player.origin - nd_node.origin);
@@ -1034,7 +1034,7 @@ behind_us_vo_node() {
 je_battle3_chasers(str_category) {
   flag_wait("je_hudson_heads_to_battle_3");
   wait 1;
-  a_spawners = getentarray("je_defend3_chaser_spawner", "targetname");
+  a_spawners = getEntArray("je_defend3_chaser_spawner", "targetname");
 
   if(isDefined(a_spawners))
     simple_spawn_script_delay(a_spawners, ::spawn_fn_ai_run_to_target, 1, str_category, 1, 0, 0);
@@ -1046,7 +1046,7 @@ je_battle3_wave1_trigger(str_category) {
   if(jungle_escape_can_do_autosave())
     autosave_by_name("battle_3_wave_1");
 
-  a_spawners = getentarray("je_battle3_wave1_regular_spawner", "targetname");
+  a_spawners = getEntArray("je_battle3_wave1_regular_spawner", "targetname");
 
   if(isDefined(a_spawners))
     simple_spawn_script_delay(a_spawners, ::spawn_fn_ai_run_to_target, 1, str_category, 0, 0, 0);
@@ -1065,7 +1065,7 @@ je_battle3_wave2_trigger(str_category) {
     autosave_by_name("battle_3_wave_2");
 
   flag_set("je_battle_3_wave2_started");
-  a_spawners = getentarray("je_battle3_wave2_regular_spawner", "targetname");
+  a_spawners = getEntArray("je_battle3_wave2_regular_spawner", "targetname");
 
   if(isDefined(a_spawners))
     simple_spawn_script_delay(a_spawners, ::spawn_fn_ai_run_to_target, 1, str_category, 0, 0, 0);
@@ -1082,7 +1082,7 @@ je_battle3_wave3_trigger(str_category) {
   if(jungle_escape_can_do_autosave())
     autosave_by_name("battle_3_wave_3");
 
-  a_spawners = getentarray("je_battle3_wave3_regular_spawner", "targetname");
+  a_spawners = getEntArray("je_battle3_wave3_regular_spawner", "targetname");
 
   if(isDefined(a_spawners)) {
     array_thread(a_spawners, ::add_spawn_function, ::spawn_fn_ai_run_to_target, 1, str_category, 0, 0, 0);
@@ -1096,7 +1096,7 @@ je_battle3_wave3_trigger(str_category) {
 je_battle3_wave4_trigger(str_category) {
   flag_wait("je_hudson_heads_to_beach");
   wait 8;
-  a_spawners = getentarray("je_battle3_wave4_regular_spawner", "targetname");
+  a_spawners = getEntArray("je_battle3_wave4_regular_spawner", "targetname");
 
   if(isDefined(a_spawners)) {
     array_thread(a_spawners, ::add_spawn_function, ::spawn_fn_ai_run_to_target, 1, str_category, 0, 0, 0);
@@ -1333,7 +1333,7 @@ je_1st_battle_advance_nag_lines() {
 
 tree_sniper_initialization() {
   level.player thread sniper_tree_logic();
-  a_sniper_tree_triggers = getentarray("trig_sniper_tree", "targetname");
+  a_sniper_tree_triggers = getEntArray("trig_sniper_tree", "targetname");
 
   foreach(t_sniper_tree in a_sniper_tree_triggers)
   t_sniper_tree thread is_player_on_sniper_tree_logic();

@@ -7,7 +7,6 @@
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\scoreevents_shared;
-
 #namespace gravity_spikes;
 
 init_shared() {

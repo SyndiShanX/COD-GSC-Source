@@ -26,16 +26,16 @@ tombstone_player_init() {
   while(!isDefined(self.tombstone_index))
     wait 0.1;
 
-  level.tombstones[self.tombstone_index] = spawnstruct();
+  level.tombstones[self.tombstone_index] = spawnStruct();
 }
 
 tombstone_spawn() {
   dc = spawn("script_model", self.origin + vectorscale((0, 0, 1), 40.0));
   dc.angles = self.angles;
-  dc setmodel("tag_origin");
+  dc setModel("tag_origin");
   dc_icon = spawn("script_model", self.origin + vectorscale((0, 0, 1), 40.0));
   dc_icon.angles = self.angles;
-  dc_icon setmodel("ch_tombstone1");
+  dc_icon setModel("ch_tombstone1");
   dc_icon linkto(dc);
   dc.icon = dc_icon;
   dc.script_noteworthy = "player_tombstone_model";
@@ -59,7 +59,7 @@ tombstone_spawn() {
 
 tombstone_clear() {
   result = self waittill_any_return("tombstone_timedout", "tombstone_grabbed");
-  level.tombstones[self.tombstone_index] = spawnstruct();
+  level.tombstones[self.tombstone_index] = spawnStruct();
 }
 
 tombstone_revived(player) {
@@ -164,7 +164,7 @@ tombstone_grab() {
         continue;
       }
       if(isDefined(self.player) && players[i] == self.player) {
-        tombstone_machine_triggers = getentarray("specialty_scavenger", "script_noteworthy");
+        tombstone_machine_triggers = getEntArray("specialty_scavenger", "script_noteworthy");
         istombstonepowered = 0;
 
         foreach(trigger in tombstone_machine_triggers) {
@@ -176,8 +176,8 @@ tombstone_grab() {
           dist = distance(players[i].origin, self.origin);
 
           if(dist < 64) {
-            playfx(level._effect["powerup_grabbed"], self.origin);
-            playfx(level._effect["powerup_grabbed_wave"], self.origin);
+            playFX(level._effect["powerup_grabbed"], self.origin);
+            playFX(level._effect["powerup_grabbed_wave"], self.origin);
             players[i] tombstone_give();
             wait 0.1;
             playsoundatposition("zmb_tombstone_grab", self.origin);
@@ -287,9 +287,9 @@ tombstone_wobble() {
 
   if(isDefined(self)) {
     wait 1;
-    playfxontag(level._effect["powerup_on"], self, "tag_origin");
-    self playsound("zmb_tombstone_spawn");
-    self playloopsound("zmb_tombstone_looper");
+    playFXOnTag(level._effect["powerup_on"], self, "tag_origin");
+    self playSound("zmb_tombstone_spawn");
+    self playLoopSound("zmb_tombstone_looper");
   }
 
   while(isDefined(self)) {
@@ -383,10 +383,10 @@ tombstone_hostmigration() {
 
   while(true) {
     level waittill("host_migration_end");
-    tombstones = getentarray("player_tombstone_model", "script_noteworthy");
+    tombstones = getEntArray("player_tombstone_model", "script_noteworthy");
 
     foreach(model in tombstones)
-    playfxontag(level._effect["powerup_on"], model, "tag_origin");
+    playFXOnTag(level._effect["powerup_on"], model, "tag_origin");
   }
 }
 

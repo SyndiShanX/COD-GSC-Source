@@ -57,11 +57,11 @@ main() {
   level._effect["zodiac_sway_right"] = LoadFX("water/zodiac_splash_turn_hard");
   level._effect_tag["zodiac_sway_right"] = "TAG_FX_RF";
 
-  //Zodiac Turn Light Left 
+  //Zodiac Turn Light Left
   level._effect["zodiac_sway_left_light"] = LoadFX("water/zodiac_splash_turn_light");
   level._effect_tag["zodiac_sway_left_light"] = "TAG_FX_LF";
 
-  //Zodiac Turn Light Right 
+  //Zodiac Turn Light Right
   level._effect["zodiac_sway_right_light"] = LoadFX("water/zodiac_splash_turn_light");
   level._effect_tag["zodiac_sway_right_light"] = "TAG_FX_RF";
 
@@ -72,7 +72,7 @@ main() {
   level.zodiac_fx_sound["player_zodiac_bump"] = "water_boat_splash_small_plr";
   level.zodiac_fx_sound["player_zodiac_bumpbig"] = "water_boat_splash_plr";
 
-  //two bumps small and big. change them at points in the level to allow more or less visibility. 
+  //two bumps small and big. change them at points in the level to allow more or less visibility.
   level.water_sheating_time["bump_big_start"] = 2;
   level.water_sheating_time["bump_small_start"] = 1;
 
@@ -161,5 +161,4 @@ main() {
     return;
   }
   maps\createfx\af_chase_fx::main();
-
 }

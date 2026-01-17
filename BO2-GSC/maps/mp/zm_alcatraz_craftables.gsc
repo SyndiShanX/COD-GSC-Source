@@ -18,22 +18,22 @@ init_craftables() {
   precachestring(&"ZM_PRISON_KEY_DOOR");
   level.craftable_piece_count = 10;
   register_clientfields();
-  add_zombie_craftable("alcatraz_shield_zm", & "ZM_PRISON_CRAFT_RIOT", undefined, & "ZOMBIE_BOUGHT_RIOT", undefined, 1);
+  add_zombie_craftable("alcatraz_shield_zm", &"ZM_PRISON_CRAFT_RIOT", undefined, &"ZOMBIE_BOUGHT_RIOT", undefined, 1);
   add_zombie_craftable_vox_category("alcatraz_shield_zm", "build_zs");
   make_zombie_craftable_open("alcatraz_shield_zm", "t6_wpn_zmb_shield_dlc2_dmg0_world", vectorscale((0, -1, 0), 90.0), (0, 0, level.riotshield_placement_zoffset));
-  add_zombie_craftable("packasplat", & "ZM_PRISON_CRAFT_PACKASPLAT", undefined, undefined, ::onfullycrafted_packasplat, 1);
+  add_zombie_craftable("packasplat", &"ZM_PRISON_CRAFT_PACKASPLAT", undefined, undefined, ::onfullycrafted_packasplat, 1);
   add_zombie_craftable_vox_category("packasplat", "build_bsm");
   make_zombie_craftable_open("packasplat", "p6_anim_zm_al_packasplat", vectorscale((0, -1, 0), 90.0));
   level.craftable_piece_swap_allowed = 0;
   add_zombie_craftable("quest_key1");
-  add_zombie_craftable("plane", & "ZM_PRISON_CRAFT_PLANE", & "ZM_PRISON_CRAFTING_PLANE", undefined, ::onfullycrafted_plane);
-  add_zombie_craftable("refuelable_plane", & "ZM_PRISON_REFUEL_PLANE", & "ZM_PRISON_REFUELING_PLANE", undefined, ::onfullycrafted_refueled);
+  add_zombie_craftable("plane", &"ZM_PRISON_CRAFT_PLANE", &"ZM_PRISON_CRAFTING_PLANE", undefined, ::onfullycrafted_plane);
+  add_zombie_craftable("refuelable_plane", &"ZM_PRISON_REFUEL_PLANE", &"ZM_PRISON_REFUELING_PLANE", undefined, ::onfullycrafted_refueled);
   in_game_checklist_setup();
 }
 
 include_key_craftable(craftable_name, model_name) {
   part_key = generate_zombie_craftable_piece(craftable_name, undefined, model_name, 32, 15, 0, undefined, ::onpickup_key, undefined, undefined, undefined, undefined, undefined, undefined, 1);
-  part = spawnstruct();
+  part = spawnStruct();
   part.name = craftable_name;
   part add_craftable_piece(part_key);
   part.triggerthink = maps\mp\zombies\_zm_craftables::setup_craftable_pieces;
@@ -46,7 +46,7 @@ include_craftables() {
   riotshield_dolly = generate_zombie_craftable_piece(craftable_name, "dolly", "t6_wpn_zmb_shield_dlc2_dolly", 32, 64, 0, undefined, ::onpickup_common, ::ondrop_common, undefined, undefined, undefined, undefined, "piece_riotshield_dolly", 1, "build_zs");
   riotshield_door = generate_zombie_craftable_piece(craftable_name, "door", "t6_wpn_zmb_shield_dlc2_door", 48, 15, 25, undefined, ::onpickup_common, ::ondrop_common, undefined, undefined, undefined, undefined, "piece_riotshield_door", 1, "build_zs");
   riotshield_clamp = generate_zombie_craftable_piece(craftable_name, "clamp", "t6_wpn_zmb_shield_dlc2_shackles", 32, 15, 0, undefined, ::onpickup_common, ::ondrop_common, undefined, undefined, undefined, undefined, "piece_riotshield_clamp", 1, "build_zs");
-  riotshield = spawnstruct();
+  riotshield = spawnStruct();
   riotshield.name = craftable_name;
   riotshield add_craftable_piece(riotshield_dolly);
   riotshield add_craftable_piece(riotshield_door);
@@ -58,7 +58,7 @@ include_craftables() {
   packasplat_case = generate_zombie_craftable_piece(craftable_name, "case", "p6_zm_al_packasplat_suitcase", 48, 36, 0, undefined, ::onpickup_common, ::ondrop_common, undefined, undefined, undefined, undefined, "piece_packasplat_case", 1, "build_bsm");
   packasplat_fuse = generate_zombie_craftable_piece(craftable_name, "fuse", "p6_zm_al_packasplat_engine", 32, 36, 0, undefined, ::onpickup_common, ::ondrop_common, undefined, undefined, undefined, undefined, "piece_packasplat_fuse", 1, "build_bsm");
   packasplat_blood = generate_zombie_craftable_piece(craftable_name, "blood", "p6_zm_al_packasplat_iv", 32, 15, 0, undefined, ::onpickup_common, ::ondrop_common, undefined, undefined, undefined, undefined, "piece_packasplat_blood", 1, "build_bsm");
-  packasplat = spawnstruct();
+  packasplat = spawnStruct();
   packasplat.name = craftable_name;
   packasplat add_craftable_piece(packasplat_case);
   packasplat add_craftable_piece(packasplat_fuse);
@@ -91,7 +91,7 @@ include_craftables() {
   plane_engine.pickup_alias = "sidequest_engine";
   plane_steering.pickup_alias = "sidequest_valves";
   plane_rigging.pickup_alias = "sidequest_rigging";
-  plane = spawnstruct();
+  plane = spawnStruct();
   plane.name = craftable_name;
   plane add_craftable_piece(plane_cloth);
   plane add_craftable_piece(plane_engine);
@@ -121,7 +121,7 @@ include_craftables() {
     refuelable_plane_gas5.client_field_state = undefined;
   }
 
-  refuelable_plane = spawnstruct();
+  refuelable_plane = spawnStruct();
   refuelable_plane.name = craftable_name;
   refuelable_plane add_craftable_piece(refuelable_plane_gas1);
   refuelable_plane add_craftable_piece(refuelable_plane_gas2);
@@ -158,7 +158,7 @@ register_clientfields() {
 }
 
 riotshieldcraftable() {
-  maps\mp\zombies\_zm_craftables::craftable_trigger_think("riotshield_zm_craftable_trigger", "alcatraz_shield_zm", "alcatraz_shield_zm", & "ZOMBIE_GRAB_RIOTSHIELD", 1, 1);
+  maps\mp\zombies\_zm_craftables::craftable_trigger_think("riotshield_zm_craftable_trigger", "alcatraz_shield_zm", "alcatraz_shield_zm", &"ZOMBIE_GRAB_RIOTSHIELD", 1, 1);
 }
 
 packasplatcraftable() {
@@ -198,7 +198,7 @@ ondrop_common(player) {
 onpickup_common(player) {
   println("ZM >> Common part callback onPickup()");
 
-  player playsound("zmb_craftable_pickup");
+  player playSound("zmb_craftable_pickup");
   self pickupfrommover();
   self.piece_owner = player;
 }
@@ -237,12 +237,12 @@ ondisconnect_common(player) {
   m_plane_piece = get_craftable_piece_model("plane", self.piecename);
 
   if(isDefined(m_plane_piece))
-    playfxontag(level._effect["quest_item_glow"], m_plane_piece, "tag_origin");
+    playFXOnTag(level._effect["quest_item_glow"], m_plane_piece, "tag_origin");
 
   m_fuel_can = get_craftable_piece_model("refuelable_plane", self.piecename);
 
   if(isDefined(m_fuel_can))
-    playfxontag(level._effect["quest_item_glow"], m_fuel_can, "tag_origin");
+    playFXOnTag(level._effect["quest_item_glow"], m_fuel_can, "tag_origin");
 }
 
 prison_open_craftablestub_update_prompt(player, b_set_hint_string_now, trigger) {
@@ -258,7 +258,7 @@ onpickup_key(player) {
   else
     level clientnotify("fxanim_east_pulley_up_start");
 
-  a_m_checklist = getentarray("plane_checklist", "targetname");
+  a_m_checklist = getEntArray("plane_checklist", "targetname");
 
   foreach(m_checklist in a_m_checklist) {
     m_checklist showpart("j_check_key");
@@ -272,7 +272,7 @@ onpickup_key(player) {
       struct.unitrigger_stub maps\mp\zombies\_zm_unitrigger::run_visibility_function_for_all_triggers();
   }
 
-  player playsound("evt_key_pickup");
+  player playSound("evt_key_pickup");
   player thread do_player_general_vox("quest", "sidequest_key_response", undefined, 100);
   level setclientfield("piece_key_warden", 1);
 }
@@ -288,7 +288,7 @@ ondrop_plane(player) {
   level.plane_pieces_picked_up = level.plane_pieces_picked_up - 1;
   self droponmover(player);
   self.piece_owner = undefined;
-  playfxontag(level._effect["quest_item_glow"], self.model, "tag_origin");
+  playFXOnTag(level._effect["quest_item_glow"], self.model, "tag_origin");
 
   switch (self.piecename) {
     case "cloth":
@@ -339,7 +339,7 @@ onpickup_plane(player) {
     level.sndplanepieces++;
   }
 
-  player playsound("zmb_craftable_pickup");
+  player playSound("zmb_craftable_pickup");
   vo_alias_call = undefined;
   vo_alias_response = undefined;
   self pickupfrommover();
@@ -559,7 +559,7 @@ oncrafted_plane(player) {
 ondrop_fuel(player) {
   level notify("dropped_" + self.piecename);
   self.piece_owner = undefined;
-  playfxontag(level._effect["quest_item_glow"], self.model, "tag_origin");
+  playFXOnTag(level._effect["quest_item_glow"], self.model, "tag_origin");
 
   if(isDefined(level.sndfuelpieces))
     level.sndfuelpieces--;
@@ -591,7 +591,7 @@ ondrop_fuel(player) {
 }
 
 onpickup_fuel(player) {
-  player playsound("zmb_craftable_pickup");
+  player playSound("zmb_craftable_pickup");
 
   if(!isDefined(level.sndfuelpieces) || level.sndfuelpieces >= 5)
     level.sndfuelpieces = 0;
@@ -749,7 +749,7 @@ pickupfrommover() {
 }
 
 in_game_checklist_setup() {
-  a_m_checklist = getentarray("plane_checklist", "targetname");
+  a_m_checklist = getEntArray("plane_checklist", "targetname");
   a_str_partnames = [];
   a_str_partnames[0] = "sheets";
   a_str_partnames[1] = "fueltank";
@@ -767,21 +767,21 @@ in_game_checklist_setup() {
 }
 
 in_game_checklist_plane_piece_picked_up(str_partname) {
-  a_m_checklist = getentarray("plane_checklist", "targetname");
+  a_m_checklist = getEntArray("plane_checklist", "targetname");
 
   foreach(m_checklist in a_m_checklist)
   m_checklist showpart("j_check_" + str_partname);
 }
 
 in_game_checklist_plane_piece_dropped(str_partname) {
-  a_m_checklist = getentarray("plane_checklist", "targetname");
+  a_m_checklist = getEntArray("plane_checklist", "targetname");
 
   foreach(m_checklist in a_m_checklist)
   m_checklist hidepart("j_check_" + str_partname);
 }
 
 in_game_checklist_plane_piece_crafted(str_partname) {
-  a_m_checklist = getentarray("plane_checklist", "targetname");
+  a_m_checklist = getEntArray("plane_checklist", "targetname");
 
   foreach(m_checklist in a_m_checklist)
   m_checklist showpart("j_strike_" + str_partname);
@@ -805,7 +805,7 @@ alcatraz_setup_unitrigger_craftable_internal(trig, equipname, weaponname, trigge
   if(!isDefined(trig)) {
     return;
   }
-  unitrigger_stub = spawnstruct();
+  unitrigger_stub = spawnStruct();
   unitrigger_stub.craftablestub = level.zombie_include_craftables[equipname];
   angles = trig.script_angles;
 

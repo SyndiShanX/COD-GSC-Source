@@ -225,7 +225,7 @@ machete_blackscreen_end(guy) {
 
 machete_punch(guy) {
   ai_guy = get_ais_from_scene("machete_jump", "machete_dude");
-  playfxontag(getfx("punch_sweat"), ai_guy, "j_head");
+  playFXOnTag(getfx("punch_sweat"), ai_guy, "j_head");
   level.player playrumbleonentity("damage_light");
 }
 
@@ -282,9 +282,9 @@ hind_hit_run_scene(guy) {
   level.player takeallweapons();
   level.player playersetgroundreferenceent(undefined);
   level thread run_scene("heli_hit_by_missile");
-  playfxontag(getfx("intro_heli_smoke"), vh_heli, "tag_origin");
-  playfxontag(getfx("intro_heli_missle_exp"), vh_heli, "tag_origin");
-  playfxontag(getfx("intro_heli_damage"), vh_heli, "tag_origin");
+  playFXOnTag(getfx("intro_heli_smoke"), vh_heli, "tag_origin");
+  playFXOnTag(getfx("intro_heli_missle_exp"), vh_heli, "tag_origin");
+  playFXOnTag(getfx("intro_heli_damage"), vh_heli, "tag_origin");
   level notify("intro_heli_hit_by_missile");
 }
 
@@ -490,7 +490,7 @@ play_bubbles(ent) {
   level.player startcameratween(1);
   level.player shellshock("default", 2);
   earthquake(1, 2, level.player.origin, 128, level.player);
-  playfxontag(getfx("water_bubbles_player"), ent, "tag_camera");
+  playFXOnTag(getfx("water_bubbles_player"), ent, "tag_camera");
 }
 
 ignore_vo_notetracks(ent) {
@@ -519,7 +519,7 @@ backstroke_swim_fx(guy) {
 start_barge_sinking(guy) {
   level.main_barge notify("end_rotate_barge");
   level thread run_scene("barge_sinking");
-  a_cover = getentarray("barge_cover_back", "targetname");
+  a_cover = getEntArray("barge_cover_back", "targetname");
   array_delete(a_cover);
   m_barrel_parent = spawn_model("fxanim_angola_barge_barrels_side_mod", level.main_barge.origin, level.main_barge.angles);
   m_barrel_parent linkto(level.main_barge);
@@ -562,11 +562,11 @@ boat_explosive_death() {
 }
 
 play_woods_water_fx(guy) {
-  playfxontag(level._effect["woods_cough_water"], guy, "j_lip_top_ri");
+  playFXOnTag(level._effect["woods_cough_water"], guy, "j_lip_top_ri");
 }
 
 play_blood_on_machete_dude(guy) {
-  playfxontag(level._effect["head_blood"], guy, "J_neck");
+  playFXOnTag(level._effect["head_blood"], guy, "J_neck");
   level.player playrumbleonentity("angola_hind_ride");
   wait 8;
   level notify("machete_guy_dead");
@@ -835,10 +835,10 @@ village_anims() {
 
 player_shoots_menendez(guy) {
   pistol = get_model_or_models_from_scene("pistol_meatshield_part_2", "player_pistol");
-  playfxontag(level._effect["menendez_fight_muzzle_flash"], pistol, "TAG_FX");
+  playFXOnTag(level._effect["menendez_fight_muzzle_flash"], pistol, "TAG_FX");
   angles = pistol gettagangles("TAG_FX");
   fire_from = pistol gettagorigin("TAG_FX");
-  fire_at = anglestoforward(angles) * 10 + fire_from;
+  fire_at = anglesToForward(angles) * 10 + fire_from;
   magicbullet("browninghp_sp", fire_from, fire_at);
 
   if(is_mature()) {
@@ -857,7 +857,7 @@ slow_motion_off(guy) {
 }
 
 shoot_menendez_muzzle_flash(guy) {
-  playfxontag(level._effect["def_muzzle_flash"], level.mason_meatshield_weapon, "tag_fx");
+  playFXOnTag(level._effect["def_muzzle_flash"], level.mason_meatshield_weapon, "tag_fx");
 }
 
 meatshield_grenade_explosion(guy) {
@@ -901,7 +901,7 @@ barge_panel_anims() {
 }
 
 panel_fall_splash(m_panel) {
-  playfxontag(getfx("panel_splash"), m_panel, "tag_fx_splash");
+  playFXOnTag(getfx("panel_splash"), m_panel, "tag_fx_splash");
 }
 
 #using_animtree("player");
@@ -974,12 +974,12 @@ jungle_escape_anims() {
 }
 
 soldier_shoots_hudson(guy) {
-  playfxontag(getfx("hudson_shot_tracer"), guy, "tag_flash");
+  playFXOnTag(getfx("hudson_shot_tracer"), guy, "tag_flash");
 }
 
 woods_shoots_pistol_effect(guy) {
   ai = getent("hind_dummy_pilot_ai", "targetname");
-  playfxontag(level._effect["fx_ango_blood_outro"], ai, "J_spineUpper");
+  playFXOnTag(level._effect["fx_ango_blood_outro"], ai, "J_spineUpper");
   tag_origin = ai gettagorigin("J_spineUpper");
   tag_angles = ai gettagangles("J_spineUpper");
   ai play_fx("fx_ango_blood_outro", tag_origin, tag_angles, undefined, 1, "J_spineUpper");
@@ -1033,8 +1033,7 @@ woods_stealth_carry_anims() {
   level.scr_anim["generic"]["ai_beartrap_caught_loop"][0] = % ai_wounded_beartrap_pain_idle;
 }
 
-sndplayexplosionatposition(player) {
-}
+sndplayexplosionatposition(player) {}
 
 sndslowmosnapshoton(player) {
   rpc("clientscripts/angola_2_amb", "sndSlowMoSnapshotOn");

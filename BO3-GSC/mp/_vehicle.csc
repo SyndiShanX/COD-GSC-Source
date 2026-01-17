@@ -14,70 +14,70 @@
 #namespace vehicle;
 
 function autoexec __init__sytem__() {
-  system::register("vehicle", & __init__, undefined, undefined);
+  system::register("vehicle", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  if(!isdefined(level._effect)) {
+  if(!isDefined(level._effect)) {
     level._effect = [];
   }
   level.vehicles_inited = 1;
-  clientfield::register("vehicle", "timeout_beep", 1, 2, "int", & timeout_beep, 0, 0);
+  clientfield::register("vehicle", "timeout_beep", 1, 2, "int", &timeout_beep, 0, 0);
 }
 
 function vehicle_rumble(localclientnum) {
   self endon("entityshutdown");
-  if(!isdefined(level.vehicle_rumble)) {
+  if(!isDefined(level.vehicle_rumble)) {
     return;
   }
   type = self.vehicletype;
-  if(!isdefined(level.vehicle_rumble[type])) {
+  if(!isDefined(level.vehicle_rumble[type])) {
     return;
   }
   rumblestruct = level.vehicle_rumble[type];
   height = rumblestruct.radius * 2;
   zoffset = -1 * rumblestruct.radius;
-  if(!isdefined(self.rumbleon)) {
+  if(!isDefined(self.rumbleon)) {
     self.rumbleon = 1;
   }
-  if(isdefined(rumblestruct.scale)) {
+  if(isDefined(rumblestruct.scale)) {
     self.rumble_scale = rumblestruct.scale;
   } else {
     self.rumble_scale = 0.15;
   }
-  if(isdefined(rumblestruct.duration)) {
+  if(isDefined(rumblestruct.duration)) {
     self.rumble_duration = rumblestruct.duration;
   } else {
     self.rumble_duration = 4.5;
   }
-  if(isdefined(rumblestruct.radius)) {
+  if(isDefined(rumblestruct.radius)) {
     self.rumble_radius = rumblestruct.radius;
   } else {
     self.rumble_radius = 600;
   }
-  if(isdefined(rumblestruct.basetime)) {
+  if(isDefined(rumblestruct.basetime)) {
     self.rumble_basetime = rumblestruct.basetime;
   } else {
     self.rumble_basetime = 1;
   }
-  if(isdefined(rumblestruct.randomaditionaltime)) {
+  if(isDefined(rumblestruct.randomaditionaltime)) {
     self.rumble_randomaditionaltime = rumblestruct.randomaditionaltime;
   } else {
     self.rumble_randomaditionaltime = 1;
   }
   self.player_touching = 0;
   radius_squared = rumblestruct.radius * rumblestruct.radius;
-  while (true) {
+  while(true) {
     if(distancesquared(self.origin, level.localplayers[localclientnum].origin) > radius_squared || self getspeed() < 35) {
       wait(0.2);
       continue;
     }
-    if(isdefined(self.rumbleon) && !self.rumbleon) {
+    if(isDefined(self.rumbleon) && !self.rumbleon) {
       wait(0.2);
       continue;
     }
     self playrumblelooponentity(localclientnum, level.vehicle_rumble[type].rumble);
-    while (distancesquared(self.origin, level.localplayers[localclientnum].origin) < radius_squared && self getspeed() > 5) {
+    while(distancesquared(self.origin, level.localplayers[localclientnum].origin) < radius_squared && self getspeed() > 5) {
       wait(self.rumble_basetime + randomfloat(self.rumble_randomaditionaltime));
     }
     self stoprumble(localclientnum, level.vehicle_rumble[type].rumble);
@@ -86,9 +86,9 @@ function vehicle_rumble(localclientnum) {
 
 function set_static_amount(staticamount) {
   driverlocalclient = self getlocalclientdriver();
-  if(isdefined(driverlocalclient)) {
+  if(isDefined(driverlocalclient)) {
     driver = getlocalplayer(driverlocalclient);
-    if(isdefined(driver)) {
+    if(isDefined(driver)) {
       setfilterpassconstant(driver.localclientnum, 4, 0, 1, staticamount);
     }
   }
@@ -101,7 +101,7 @@ function timeout_beep(localclientnum, oldval, newval, bnewent, binitialsnap, fie
   if(!newval) {
     return;
   }
-  if(isdefined(self.killstreakbundle)) {
+  if(isDefined(self.killstreakbundle)) {
     beepalias = self.killstreakbundle.kstimeoutbeepalias;
   }
   self endon("entityshutdown");
@@ -110,9 +110,9 @@ function timeout_beep(localclientnum, oldval, newval, bnewent, binitialsnap, fie
   if(newval == 2) {
     interval = 0.133;
   }
-  while (true) {
-    if(isdefined(beepalias)) {
-      self playsound(localclientnum, beepalias);
+  while(true) {
+    if(isDefined(beepalias)) {
+      self playSound(localclientnum, beepalias);
     }
     if(self.timeoutlightsoff === 1) {
       self lights_on(localclientnum);

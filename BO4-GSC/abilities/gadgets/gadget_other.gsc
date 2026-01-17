@@ -5,7 +5,6 @@
 
 #include scripts\abilities\ability_player;
 #include scripts\core_common\system_shared;
-
 #namespace gadget_other;
 
 autoexec __init__system__() {
@@ -36,4 +35,3 @@ set_gadget_other_status(weapon, status, time) {
     self iprintlnbold("<dev string:x4b>" + weapon.name + "<dev string:x5b>" + status + timestr);
   }
 }
-

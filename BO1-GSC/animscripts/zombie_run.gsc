@@ -282,9 +282,9 @@ MakeRunSounds(notifyString) {
   self endon(notifyString);
   for(;;) {
     wait .5;
-    self PlaySound("fly_step_run_npc_concrete");
+    self playSound("fly_step_run_npc_concrete");
     wait .5;
-    self PlaySound("fly_step_run_npc_concrete");
+    self playSound("fly_step_run_npc_concrete");
   }
 }
 

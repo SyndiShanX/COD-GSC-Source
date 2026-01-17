@@ -7,7 +7,6 @@
 #include scripts\core_common\array_shared;
 #include scripts\core_common\spawner_shared;
 #include scripts\core_common\system_shared;
-
 #namespace aisquads;
 
 class squad {
@@ -46,7 +45,7 @@ class squad {
 
   function addaitosquad(ai) {
     if(!isinarray(squadmembers, ai)) {
-      if(ai.archetype == #"robot") {
+      if(ai.archetype == # "robot") {
         ai ai::set_behavior_attribute("move_mode", "squadmember");
       }
 
@@ -88,22 +87,22 @@ __init__() {
   array::run_all(actorspawnerarray, &spawner::add_spawn_function, &squadmemberthink);
 }
 
-private createsquad(squadname) {
+createsquad(squadname) {
   level._squads[squadname] = new squad();
   return level._squads[squadname];
 }
 
-private removesquad(squadname) {
+removesquad(squadname) {
   if(isDefined(level._squads) && isDefined(level._squads[squadname])) {
     level._squads[squadname] = undefined;
   }
 }
 
-private getsquad(squadname) {
+getsquad(squadname) {
   return level._squads[squadname];
 }
 
-private thinksquad(squadname) {
+thinksquad(squadname) {
   while(true) {
     if([
         [level._squads[squadname]]
@@ -117,7 +116,7 @@ private thinksquad(squadname) {
   }
 }
 
-private squadmemberdeath() {
+squadmemberdeath() {
   self waittill(#"death");
 
   if(isDefined(self.squadname) && isDefined(level._squads[self.squadname])) {
@@ -125,7 +124,7 @@ private squadmemberdeath() {
   }
 }
 
-private squadmemberthink() {
+squadmemberthink() {
   self endon(#"death");
 
   if(!isDefined(self.script_aisquadname)) {

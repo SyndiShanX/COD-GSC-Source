@@ -17,14 +17,14 @@ main() {
 }
 
 getdescription() {
-  return & "AUTOSAVE_AUTOSAVE";
+  return &"AUTOSAVE_AUTOSAVE";
 }
 
 getnames(var_0) {
   if(var_0 == 0)
-    var_1 = & "AUTOSAVE_GAME";
+    var_1 = &"AUTOSAVE_GAME";
   else
-    var_1 = & "AUTOSAVE_NOGAME";
+    var_1 = &"AUTOSAVE_NOGAME";
 
   return var_1;
 }
@@ -43,7 +43,7 @@ beginningoflevelsave() {
   }
   common_scripts\utility::flag_set("game_saving");
   var_0 = "levelshots / autosave / autosave_" + level.script + "start";
-  savegame("levelstart", & "AUTOSAVE_LEVELSTART", var_0, 1);
+  savegame("levelstart", &"AUTOSAVE_LEVELSTART", var_0, 1);
   setdvar("ui_grenade_death", "0");
   common_scripts\utility::flag_clear("game_saving");
 }
@@ -125,7 +125,7 @@ autosave_timeout(var_0) {
 
 _autosave_game_now_nochecks() {
   var_0 = "levelshots / autosave / autosave_" + level.script + "start";
-  savegame("levelstart", & "AUTOSAVE_LEVELSTART", var_0, 1);
+  savegame("levelstart", &"AUTOSAVE_LEVELSTART", var_0, 1);
   autosave_recon(0);
 }
 
@@ -133,7 +133,7 @@ _autosave_game_now_notrestart() {
   var_0 = "levelshots / autosave / autosave_" + level.script + "start";
 
   if(getdvarint("g_reloading") == 0) {
-    savegame("levelstart", & "AUTOSAVE_LEVELSTART", var_0, 1);
+    savegame("levelstart", &"AUTOSAVE_LEVELSTART", var_0, 1);
     autosave_recon(0);
   }
 }
@@ -323,13 +323,9 @@ autosavecheck_not_picky() {
 
 autosavecheck(var_0, var_1) {
   if(isDefined(level.autosave_check_override))
-    return [
-      [level.autosave_check_override]
-    ]();
+    return [[level.autosave_check_override]]();
 
-  if(isDefined(level.special_autosavecondition) && ![
-      [level.special_autosavecondition]
-    ]())
+  if(isDefined(level.special_autosavecondition) && ![[level.special_autosavecondition]]())
     return 0;
 
   if(level.missionfailed)
@@ -479,9 +475,7 @@ autosavethreatcheck(var_0) {
     if(isDefined(var_3.melee) && isDefined(var_3.melee.target) && isplayer(var_3.melee.target))
       return 0;
 
-    var_7 = [
-      [level.autosave_proximity_threat_func]
-    ](var_3);
+    var_7 = [[level.autosave_proximity_threat_func]](var_3);
 
     if(var_7 == "return_even_if_low_accuracy")
       return 0;

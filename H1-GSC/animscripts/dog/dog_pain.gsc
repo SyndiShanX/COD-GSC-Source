@@ -9,7 +9,7 @@
 main() {
   self endon("killanimscript");
 
-  if(isdefined(self.enemy) && isdefined(self.enemy.syncedmeleetarget) && self.enemy.syncedmeleetarget == self) {
+  if(isDefined(self.enemy) && isDefined(self.enemy.syncedmeleetarget) && self.enemy.syncedmeleetarget == self) {
     self unlink();
     self.enemy.syncedmeleetarget = undefined;
   }

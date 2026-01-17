@@ -5,7 +5,6 @@
 
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\system_shared;
-
 #namespace wz_perk_bloody_tracker;
 
 autoexec __init__system__() {
@@ -28,7 +27,7 @@ bloody_tracker(localclientnum) {
   while(true) {
     wait 0.2;
 
-    if(!function_5778f82(localclientnum, #"specialty_tracker")) {
+    if(!function_5778f82(localclientnum, # "specialty_tracker")) {
       continue;
     }
 
@@ -77,8 +76,8 @@ gettrackerfxposition(localclientnum) {
   if(distancesquared(self.tracker_last_pos, pos) > dist2) {
     trace = physicstraceex(pos, pos + (0, 0, -10), (0, 0, 0), (0, 0, 0), self, 1);
 
-    if(trace[#"fraction"] < 1) {
-      up = trace[#"normal"];
+    if(trace[# "fraction"] < 1) {
+      up = trace[# "normal"];
       up = (0, 0, 0) - up;
 
       if(lengthsquared(up) <= 0) {
@@ -99,7 +98,7 @@ gettrackerfxposition(localclientnum) {
       }
 
       fwd = vectorcross(up, right);
-      pos = trace[#"position"] + trace[#"normal"];
+      pos = trace[# "position"] + trace[# "normal"];
       positionandrotation = spawnStruct();
       positionandrotation.fx = fx;
       positionandrotation.pos = pos;

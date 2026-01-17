@@ -46,7 +46,7 @@ screecher_should_burrow() {
     self.state = "burrow_started";
     self setfreecameralockonallowed(0);
     self animscripted(ground_pos, self.angles, "zm_burrow");
-    self playsound("zmb_screecher_dig");
+    self playSound("zmb_screecher_dig");
 
     if(!(isDefined(green_light.burrow_active) && green_light.burrow_active) && (isDefined(green_light.power_on) && green_light.power_on))
       green_light thread create_portal();
@@ -69,26 +69,26 @@ create_portal() {
   if(!isDefined(self.hole)) {
     self.hole = spawn("script_model", ground_pos + vectorscale((0, 0, -1), 20.0));
     self.hole.start_origin = self.hole.origin;
-    self.hole setmodel("p6_zm_screecher_hole");
-    self.hole playsound("zmb_screecher_portal_spawn");
+    self.hole setModel("p6_zm_screecher_hole");
+    self.hole playSound("zmb_screecher_portal_spawn");
   }
 
   if(!isDefined(self.hole_fx)) {
     self.hole_fx = spawn("script_model", ground_pos);
-    self.hole_fx setmodel("tag_origin");
+    self.hole_fx setModel("tag_origin");
   }
 
   wait 0.1;
-  playfxontag(level._effect["screecher_hole"], self.hole_fx, "tag_origin");
+  playFXOnTag(level._effect["screecher_hole"], self.hole_fx, "tag_origin");
   self.hole moveto(self.hole.origin + vectorscale((0, 0, 1), 20.0), 1.0);
   self waittill("burrow_done");
   self thread portal_think();
 }
 
 portal_think() {
-  playfxontag(level._effect["screecher_vortex"], self.hole, "tag_origin");
+  playFXOnTag(level._effect["screecher_vortex"], self.hole, "tag_origin");
   self.hole_fx delete();
-  self.hole playloopsound("zmb_screecher_portal_loop", 2);
+  self.hole playLoopSound("zmb_screecher_portal_loop", 2);
   level.portals[level.portals.size] = self;
 }
 

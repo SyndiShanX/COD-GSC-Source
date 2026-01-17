@@ -20,7 +20,7 @@
 function init() {
   level thread achievement_moon_sidequest();
   level thread achievement_ground_control();
-  callback::on_connect( & onplayerconnect);
+  callback::on_connect(&onplayerconnect);
 }
 
 function onplayerconnect() {
@@ -38,7 +38,7 @@ function achievement_set_interim_sidequest_stat_for_all_players(stat_name) {
     return;
   }
   players = getplayers();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i] zm_stats::add_global_stat(stat_name, 1);
   }
 }
@@ -74,7 +74,7 @@ function achievement_one_giant_leap() {
   level endon("end_game");
   self endon("disconnect");
   self waittill("one_giant_leap");
-  if(!(isdefined(level.played_extra_song_a7x) && level.played_extra_song_a7x)) {
+  if(!(isDefined(level.played_extra_song_a7x) && level.played_extra_song_a7x)) {
     level thread zm_audio::sndmusicsystem_playstate("nightmare");
     level.played_extra_song_a7x = 1;
   }
@@ -84,15 +84,15 @@ function achievement_perks_in_space() {
   level endon("end_game");
   self endon("disconnect");
   self.perks_in_space_list = [];
-  vending_triggers = getentarray("zombie_vending", "targetname");
-  for (i = 0; i < vending_triggers.size; i++) {
+  vending_triggers = getEntArray("zombie_vending", "targetname");
+  for(i = 0; i < vending_triggers.size; i++) {
     self.perks_in_space_purchased_list[vending_triggers[i].script_noteworthy + "_purchased"] = 0;
   }
-  while (true) {
+  while(true) {
     self waittill("perk_bought", perk);
     self.perks_in_space_purchased_list[perk + "_purchased"] = 1;
     keys = getarraykeys(self.perks_in_space_purchased_list);
-    for (i = 0; i < keys.size; i++) {
+    for(i = 0; i < keys.size; i++) {
       if(!self.perks_in_space_purchased_list[keys[i]]) {
         break;
       }
@@ -106,16 +106,16 @@ function achievement_perks_in_space() {
 function achievement_fully_armed() {
   level endon("end_game");
   self endon("disconnect");
-  while (true) {
+  while(true) {
     self waittill("pap_taken");
     if(!self hasperk("specialty_additionalprimaryweapon")) {
       continue;
     }
     primaries = self getweaponslistprimaries();
-    if(!isdefined(primaries) || primaries.size != 3) {
+    if(!isDefined(primaries) || primaries.size != 3) {
       continue;
     }
-    for (i = 0; i < primaries.size; i++) {
+    for(i = 0; i < primaries.size; i++) {
       if(!zm_weapons::is_weapon_upgraded(primaries[i])) {
         break;
       }

@@ -170,7 +170,7 @@ tc6_mine_detonation() {
   damagearea = spawn("trigger_radius", self.origin + (0, 0, 0 - 25), 23, 25, 100);
   ai_damagearea = spawn("trigger_radius", self.origin + (0, 0, 0 - 36), 3, 36, 36 * 2);
   wait 0.5;
-  self playsound("wpn_claymore_alert");
+  self playSound("wpn_claymore_alert");
   wait 0.2;
 
   while(true) {
@@ -237,7 +237,7 @@ claymore_detonation() {
       continue;
     }
     if(ent damageconetrace(self.origin, self) > 0) {
-      self playsound("wpn_claymore_alert");
+      self playSound("wpn_claymore_alert");
       wait 0.4;
 
       if(isDefined(self.owner))
@@ -287,7 +287,7 @@ wait_and_detonate(delay) {
 
 satchel_damage() {
   self.health = 100;
-  self setcandamage(1);
+  self setCanDamage(1);
   self.maxhealth = 100000;
   self.health = self.maxhealth;
   attacker = undefined;
@@ -330,7 +330,7 @@ saydamaged(orig, amount) {
 play_claymore_effects() {
   self endon("death");
   self waittill_not_moving();
-  playfxontag(level._effect["claymore_laser"], self, "tag_fx");
+  playFXOnTag(level._effect["claymore_laser"], self, "tag_fx");
 }
 
 getdamageableents(pos, radius, dolos, startradius) {
@@ -352,7 +352,7 @@ getdamageableents(pos, radius, dolos, startradius) {
     distsq = distancesquared(pos, playerpos);
 
     if(distsq < radius * radius && (!dolos || weapondamagetracepassed(pos, playerpos, startradius, undefined))) {
-      newent = spawnstruct();
+      newent = spawnStruct();
       newent.isplayer = 1;
       newent.isadestructable = 0;
       newent.entity = players[i];
@@ -361,14 +361,14 @@ getdamageableents(pos, radius, dolos, startradius) {
     }
   }
 
-  grenades = getentarray("grenade", "classname");
+  grenades = getEntArray("grenade", "classname");
 
   for(i = 0; i < grenades.size; i++) {
     entpos = grenades[i].origin;
     distsq = distancesquared(pos, entpos);
 
     if(distsq < radius * radius && (!dolos || weapondamagetracepassed(pos, entpos, startradius, grenades[i]))) {
-      newent = spawnstruct();
+      newent = spawnStruct();
       newent.isplayer = 0;
       newent.isadestructable = 0;
       newent.entity = grenades[i];
@@ -377,14 +377,14 @@ getdamageableents(pos, radius, dolos, startradius) {
     }
   }
 
-  destructables = getentarray("destructable", "targetname");
+  destructables = getEntArray("destructable", "targetname");
 
   for(i = 0; i < destructables.size; i++) {
     entpos = destructables[i].origin;
     distsq = distancesquared(pos, entpos);
 
     if(distsq < radius * radius && (!dolos || weapondamagetracepassed(pos, entpos, startradius, destructables[i]))) {
-      newent = spawnstruct();
+      newent = spawnStruct();
       newent.isplayer = 0;
       newent.isadestructable = 1;
       newent.entity = destructables[i];
@@ -405,7 +405,7 @@ weapondamagetracepassed(from, to, startradius, ignore) {
 
   dir = vectornormalize(diff);
   midpos = from + (dir[0] * startradius, dir[1] * startradius, dir[2] * startradius);
-  trace = bullettrace(midpos, to, 0, ignore);
+  trace = bulletTrace(midpos, to, 0, ignore);
 
   if(getdvarint(#"_id_0A1C40B1") != 0) {
     if(trace["fraction"] == 1)
@@ -464,7 +464,7 @@ watch_proximity_grenade() {
 proximity_grenade_damage() {
   self endon("death");
   self.health = 100;
-  self setcandamage(1);
+  self setCanDamage(1);
   self.maxhealth = 100000;
   self.health = self.maxhealth;
 
@@ -479,7 +479,7 @@ proximity_grenade_damage() {
 proximity_grenade_fx() {
   self endon("death");
   self waittill_not_moving();
-  playfxontag(level._effect["prox_grenade_fx"], self, "tag_fx");
+  playFXOnTag(level._effect["prox_grenade_fx"], self, "tag_fx");
 }
 
 proximity_grenade_detonation() {
@@ -549,7 +549,7 @@ proximity_grenade_player_effect(v_origin) {
   n_start_time = gettime();
   saved_vision = self getvisionsetnaked();
   toggle = 1;
-  self playsound("wpn_taser_mine_zap");
+  self playSound("wpn_taser_mine_zap");
   self shellshock("death", n_duration + 0.5);
   n_duration_ms = n_duration * 1000;
   wait 0.1;

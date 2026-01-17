@@ -418,9 +418,7 @@ ondamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) 
     var_2 = var_2 * 1.15;
 
   if(isDefined(level.custom_scale_alien_damage_func))
-    var_2 = [
-      [level.custom_scale_alien_damage_func]
-    ](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
+    var_2 = [[level.custom_scale_alien_damage_func]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 
   if(var_5 == "alienthrowingknife_mp") {
     if(isDefined(level.achievement_you_wish_cb) && isplayer(var_1))

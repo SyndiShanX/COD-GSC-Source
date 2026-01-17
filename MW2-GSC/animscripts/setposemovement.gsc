@@ -4,8 +4,8 @@
 ********************************************************/
 
 //================================================================================
-// SetPoseMovement - Sets the pose (stand, crouch, prone) and movement (run, walk, 
-// crawl, stop) to the specified values.Accounts for all possible starting poses 
+// SetPoseMovement - Sets the pose (stand, crouch, prone) and movement (run, walk,
+// crawl, stop) to the specified values.Accounts for all possible starting poses
 // and movements.
 //================================================================================
 
@@ -22,7 +22,7 @@ SetPoseMovement(desiredPose, desiredMovement) {
     else
       desiredPose = self.a.pose;
   }
-  if(!IsDefined(desiredMovement) || desiredMovement == "") {
+  if(!isDefined(desiredMovement) || desiredMovement == "") {
     desiredMovement = self.a.movement;
   }
 
@@ -548,7 +548,7 @@ BlendIntoStandRun() {
   if(self.a.movement != "stop" && self.stairsState == "none")
     runAnimTransTime = 0.5;
 
-  if(isdefined(self.sprint))
+  if(isDefined(self.sprint))
     self setAnimKnobLimited(moveAnim("sprint"), 1, runAnimTransTime, 1);
   else
     self setAnimKnobLimited(animscripts\run::GetRunAnim(), 1, runAnimTransTime, 1);
@@ -565,7 +565,7 @@ BlendIntoStandWalk() {
   if(self.a.movement != "stop")
     self endon("movemode");
 
-  if(!isdefined(self.alwaysRunForward) && self.a.pose != "prone")
+  if(!isDefined(self.alwaysRunForward) && self.a.pose != "prone")
     self animscripts\run::SetMoveNonForwardAnims(moveAnim("move_b"), moveAnim("move_l"), moveAnim("move_r"));
 
   self.a.pose = "stand";
@@ -577,7 +577,7 @@ CrouchToStand() {
   assertEX(self.a.movement == "stop", "SetPoseMovement::CrouchToStand " + self.a.movement);
 
   standSpeed = 1;
-  if(isdefined(self.fastStand)) {
+  if(isDefined(self.fastStand)) {
     standSpeed = 1.8;
     self.fastStand = undefined;
   }
@@ -702,7 +702,7 @@ StandToCrouch() {
   self randomizeIdleSet();
 
   crouchSpeed = 1;
-  if(isdefined(self.fastCrouch)) {
+  if(isDefined(self.fastCrouch)) {
     crouchSpeed = 1.8;
     self.fastCrouch = undefined;
   }
@@ -787,7 +787,7 @@ ProneCrawlToProne() {
 
 CrouchToProne() {
   assertEX(self.a.pose == "crouch", "SetPoseMovement::CrouchToProne " + self.a.pose);
-  // I'd like to be able to assert that I'm stopped at this point, but until I get a better solution for 
+  // I'd like to be able to assert that I'm stopped at this point, but until I get a better solution for
   // guys who are walking and running, this is used for them too.
   //	assertEX(self.a.movement == "stop", "SetPoseMovement::CrouchToProne "+self.a.movement);
 
@@ -821,7 +821,7 @@ CrouchToProneRun() {
 
 StandToProne() {
   assertEX(self.a.pose == "stand", "SetPoseMovement::StandToProne " + self.a.pose);
-  // I'd like to be able to assert that I'm stopped at this point, but until I get a better solution for 
+  // I'd like to be able to assert that I'm stopped at this point, but until I get a better solution for
   // guys who are walking and running, this is used for them too.
   //	assertEX(self.a.movement == "stop", "SetPoseMovement::StandToProne "+self.a.movement);
   self endon("entered_pose" + "prone");
@@ -881,7 +881,7 @@ CrouchRunToProne() {
   if(self maymovetopoint(endPoint)) {
     PlayTransitionAnimation(diveanim, "prone", "stop", undefined, pronetime);
   } else {
-    //thread [[anim.println]]("Can't dive to prone.");#/
+    //thread [[anim.println]]("Can't dive to prone.");
     PlayTransitionAnimation( % crouch_2_prone_firing, "prone", "stop", undefined, pronetime);
   }
 }
@@ -911,10 +911,9 @@ PlayTransitionAnimation(transAnim, endPose, endMovement, finalAnim, rate) {
 }
 
 PlayTransitionAnimationFunc(transAnim, endPose, endMovement, finalAnim, rate, waitSetStatesEnabled) {
-  if(!isdefined(rate))
+  if(!isDefined(rate))
     rate = 1;
 
-  /#
   if(getdebugdvar("debug_grenadehand") == "on") {
     if(endPose != self.a.pose) {
       if(!animhasnotetrack(transAnim, "anim_pose = \"" + endPose + "\"")) {
@@ -929,24 +928,23 @@ PlayTransitionAnimationFunc(transAnim, endPose, endMovement, finalAnim, rate, wa
       }
     }
   }
-  # /
 
-    // Use a second thread to set the anim state halfway through the animation
-    if(waitSetStatesEnabled)
-      self thread waitSetStates(getanimlength(transAnim) / 2.0, "killtimerscript", endPose);
+  // Use a second thread to set the anim state halfway through the animation
+  if(waitSetStatesEnabled)
+    self thread waitSetStates(getanimlength(transAnim) / 2.0, "killtimerscript", endPose);
 
   // Play the anim
-  // setflaggedanimknoball(notifyName, anim, rootAnim, goalWeight, goalTime, rate) 
+  // setflaggedanimknoball(notifyName, anim, rootAnim, goalWeight, goalTime, rate)
   self setflaggedanimknoballrestart("transAnimDone2", transAnim, % body, 1, .2, rate);
   if(!isDefined(self.a.pose))
     self.pose = "undefined";
   if(!isDefined(self.a.movement))
     self.movement = "undefined";
   debugIdentifier = "";
-  /#debugIdentifier = self.script + ", " + self.a.pose + " to " + endPose + ", " + self.a.movement + " to " + endMovement;#/
+  /#debugIdentifier = self.script + ", " + self.a.pose + " to " + endPose + ", " + self.a.movement + " to " + endMovement;
   self animscripts\shared::DoNoteTracks("transAnimDone2", undefined, debugIdentifier);
 
-  // In case we finished earlier than we expected (eg the animation was already playing before we started), 
+  // In case we finished earlier than we expected (eg the animation was already playing before we started),
   // set the variables and kill the other thread.
   self notify("killtimerscript");
   self.a.pose = endPose;
@@ -955,7 +953,7 @@ PlayTransitionAnimationFunc(transAnim, endPose, endMovement, finalAnim, rate, wa
   self.a.movement = endMovement;
 
   if(isDefined(finalAnim)) {
-    // setflaggedanimknoball(notifyName, anim, rootAnim, goalWeight, goalTime, rate) 
+    // setflaggedanimknoball(notifyName, anim, rootAnim, goalWeight, goalTime, rate)
     self setanimknoball(finalAnim, % body, 1, 0.3, rate); // Set the animation instantly
   }
 }
@@ -967,8 +965,8 @@ waitSetStates(timetowait, killmestring, endPose) {
   oldpose = self.a.pose;
   wait timetowait;
 
-  // We called Enter/ExitProne before this function was called.These lines should not be necessary, but 
-  // for some reason the code is picking up that I'm setting pose from prone to crouch without calling 
+  // We called Enter/ExitProne before this function was called.These lines should not be necessary, but
+  // for some reason the code is picking up that I'm setting pose from prone to crouch without calling
   // exitprone().I just hope it's not a thread leak I've missed.
   if(oldpose != "prone" && endPose == "prone") {
     self animscripts\cover_prone::UpdateProneWrapper(0.1);

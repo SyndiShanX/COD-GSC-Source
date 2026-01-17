@@ -17,7 +17,7 @@ InitJavelinUsage() {
 }
 
 ResetJavelinLocking() {
-  if(!IsDefined(self.javelinUseEntered))
+  if(!isDefined(self.javelinUseEntered))
     return;
   self.javelinUseEntered = undefined;
 
@@ -36,45 +36,43 @@ ResetJavelinLocking() {
   InitJavelinUsage();
 }
 
-/#
 DrawStar(point, color) {
   Line(point + (10, 0, 0), point - (10, 0, 0), color);
   Line(point + (0, 10, 0), point - (0, 10, 0), color);
   Line(point + (0, 0, 10), point - (0, 0, 10), color);
 }
-# /
 
-  EyeTraceForward() {
-    origin = self GetEye();
-    angles = self GetPlayerAngles();
-    forward = AnglesToForward(angles);
-    endpoint = origin + forward * 15000;
+EyeTraceForward() {
+  origin = self getEye();
+  angles = self GetPlayerAngles();
+  forward = anglesToForward(angles);
+  endpoint = origin + forward * 15000;
 
-    res = BulletTrace(origin, endpoint, false, undefined);
+  res = bulletTrace(origin, endpoint, false, undefined);
 
-    if(res["surfacetype"] == "none")
+  if(res["surfacetype"] == "none")
+    return undefined;
+  if(res["surfacetype"] == "default")
+    return undefined;
+
+  ent = res["entity"];
+  if(isDefined(ent)) {
+    if(ent == level.ac130.planeModel)
       return undefined;
-    if(res["surfacetype"] == "default")
-      return undefined;
-
-    ent = res["entity"];
-    if(IsDefined(ent)) {
-      if(ent == level.ac130.planeModel)
-        return undefined;
-    }
-
-    results = [];
-    results[0] = res["position"];
-    results[1] = res["normal"];
-    return results;
   }
+
+  results = [];
+  results[0] = res["position"];
+  results[1] = res["normal"];
+  return results;
+}
 
 LockMissesReset() {
   self.javelinLockMisses = undefined;
 }
 
 LockMissesIncr() {
-  if(!IsDefined(self.javelinLockMisses))
+  if(!isDefined(self.javelinLockMisses))
     self.javelinLockMisses = 1;
   else
     self.javelinLockMisses++;
@@ -83,7 +81,7 @@ LockMissesIncr() {
 LockMissesPassedThreshold() {
   MAX_MISSES = 4;
 
-  if(IsDefined(self.javelinLockMisses) && (self.javelinLockMisses >= MAX_MISSES))
+  if(isDefined(self.javelinLockMisses) && (self.javelinLockMisses >= MAX_MISSES))
     return true;
   return false;
 }
@@ -103,7 +101,7 @@ LoopLocalSeekSound(alias, interval) {
   self endon("disconnect");
   self endon("stop_lockon_sound");
 
-  for (;;) {
+  for(;;) {
     self PlayLocalSound(alias);
     wait interval;
   }
@@ -113,7 +111,7 @@ TopAttackPasses(targPoint, targNormal) {
   origin = targPoint + (targNormal * 10.0);
   endpoint = origin + (0, 0, 2000);
 
-  result = BulletTrace(origin, endpoint, false, undefined);
+  result = bulletTrace(origin, endpoint, false, undefined);
 
   if(BulletTracePassed(origin, endpoint, false, undefined))
     return true;
@@ -136,7 +134,7 @@ JavelinUsageLoop() {
 
   InitJavelinUsage();
 
-  for (;;) {
+  for(;;) {
     wait 0.05;
 
     debugDraw = false;
@@ -160,15 +158,13 @@ JavelinUsageLoop() {
     }
 
     self.javelinUseEntered = true;
-    if(!IsDefined(self.javelinStage))
+    if(!isDefined(self.javelinStage))
       self.javelinStage = 1;
 
     if(self.javelinStage == 1) // SCANNING: try to find a good point to lock to
     {
-
       targets = GetTargetList();
       if(targets.size != 0) {
-
         targetsInReticle = [];
         foreach(target in targets) {
           insideReticle = self WorldPointInReticle_Circle(target.origin, 65, 40);
@@ -177,12 +173,11 @@ JavelinUsageLoop() {
         }
 
         if(targetsInReticle.size != 0) {
-
           sortedTargets = SortByDistance(targetsInReticle, self.origin);
 
-          if(!(self VehicleLockSightTest(sortedTargets[0])))
+          if(!(self VehicleLockSightTest(sortedTargets[0]))) {
             continue;
-
+          }
           if(debugText)
             PrintLn("Javeling found a vehicle target to lock to.");
 
@@ -207,25 +202,24 @@ JavelinUsageLoop() {
       }
 
       timePassed = GetTime() - lastOutOfADS;
-      if(timePassed < ADS_DELAY)
+      if(timePassed < ADS_DELAY) {
         continue;
+      }
 
-      /#
-      if(debugDraw && IsDefined(self.javelinPoints)) {
+      if(debugDraw && isDefined(self.javelinPoints)) {
         foreach(javPoint in self.javelinPoints)
         DrawStar(javPoint, (0.8, 1.0, 0.8));
         DrawStar(self.javelinPoints[self.javelinPoints.size - 1], (1, 1, 0.2));
         DrawStar(AveragePoint(self.javelinPoints), (0.2, 0.2, 1));
       }
-      # /
 
-        timePassed = GetTime() - lastGatherTime;
+      timePassed = GetTime() - lastGatherTime;
       if(timePassed < GATHER_DELAY)
         continue;
       lastGatherTime = GetTime();
 
       traceRes = (self EyeTraceForward());
-      if(!IsDefined(traceRes)) {
+      if(!isDefined(traceRes)) {
         self LockMissesIncr();
         continue;
       }
@@ -238,7 +232,7 @@ JavelinUsageLoop() {
       }
 
       // make sure we haven't strayed too far
-      if(IsDefined(self.javelinPoints)) {
+      if(isDefined(self.javelinPoints)) {
         prevAvgPoint = AveragePoint(self.javelinPoints);
         dist = Distance(prevAvgPoint, traceRes[0]);
         //PrintLn( "[", self.javelinPoints.size, "] - Dist: ", dist );
@@ -256,9 +250,9 @@ JavelinUsageLoop() {
       self.javelinNormals[self.javelinNormals.size] = traceRes[1];
 
       self LockMissesReset();
-      if(self.javelinPoints.size < POINTS_NEEDED_TO_START_LOCK)
+      if(self.javelinPoints.size < POINTS_NEEDED_TO_START_LOCK) {
         continue;
-
+      }
       // Go to stage 2:
       self.javelinTargetPoint = AveragePoint(self.javelinPoints);;
       self.javelinTargetNormal = AverageNormal(self.javelinNormals);;
@@ -275,12 +269,10 @@ JavelinUsageLoop() {
 
     if(self.javelinStage == 2) // LOCKING: complete lockon to point
     {
-      /#
       if(debugDraw)
         DrawStar(self.javelinTargetPoint, (0.5, 1.0, 0.6));
-      # /
 
-        insideReticle = self WorldPointInReticle_Circle(self.javelinTargetPoint, 65, 45);
+      insideReticle = self WorldPointInReticle_Circle(self.javelinTargetPoint, 65, 45);
       if(!insideReticle) {
         ResetJavelinLocking();
         continue;
@@ -293,9 +285,9 @@ JavelinUsageLoop() {
 
       timePassed = getTime() - self.javelinLockStartTime;
       //PrintLn( "Locking [", timePassed, "]..." );
-      if(timePassed < LOCK_LENGTH)
+      if(timePassed < LOCK_LENGTH) {
         continue;
-
+      }
       self WeaponLockFinalize(self.javelinTargetPoint, (0, 0, 0), true);
       self notify("stop_lockon_sound");
       self PlayLocalSound("javelin_clu_lock");
@@ -304,12 +296,10 @@ JavelinUsageLoop() {
 
     if(self.javelinStage == 3) // LOCKED: try and hold it
     {
-      /#
       if(debugDraw)
         DrawStar(self.javelinTargetPoint, (0.1, 0.15, 1.0));
-      # /
 
-        insideReticle = self WorldPointInReticle_Circle(self.javelinTargetPoint, 65, 45);
+      insideReticle = self WorldPointInReticle_Circle(self.javelinTargetPoint, 65, 45);
       if(!insideReticle) {
         ResetJavelinLocking();
         continue;
@@ -329,7 +319,7 @@ GetTargetList() {
   targets = [];
 
   if(level.teamBased) {
-    if(IsDefined(level.chopper) && (level.chopper.team != self.team || level.chopper.owner == self)) ///check for teams
+    if(isDefined(level.chopper) && (level.chopper.team != self.team || level.chopper.owner == self)) ///check for teams
       targets[targets.size] = level.chopper;
 
     if(isDefined(level.harriers)) {
@@ -347,7 +337,7 @@ GetTargetList() {
     if(isDefined(level.ac130player) && (level.ac130player.team != self.team))
       targets[targets.size] = level.ac130.planeModel;
   } else {
-    if(IsDefined(level.chopper) && (level.chopper.owner != self)) ///check for teams
+    if(isDefined(level.chopper) && (level.chopper.owner != self)) ///check for teams
       targets[targets.size] = level.chopper;
 
     if(isDefined(level.ac130player))
@@ -362,9 +352,9 @@ GetTargetList() {
 
     if(level.UAVModels.size) {
       foreach(ownerGuid, UAV in level.UAVModels) {
-        if(isDefined(UAV.owner) && UAV.owner == self)
+        if(isDefined(UAV.owner) && UAV.owner == self) {
           continue;
-
+        }
         targets[targets.size] = UAV;
       }
     }
@@ -374,10 +364,9 @@ GetTargetList() {
 }
 
 DebugSightLine(start, end, passed) {
-  /#
-  if(GetDVar("missileDebugDraw") != "1")
+  if(GetDVar("missileDebugDraw") != "1") {
     return;
-
+  }
   if(passed)
     color = (0.3, 1.0, 0.3);
   else
@@ -386,11 +375,10 @@ DebugSightLine(start, end, passed) {
   MY_OFFSET = (0, 0, 5);
 
   Line(start + MY_OFFSET, end, color);
-  # /
 }
 
 VehicleLockSightTest(target) {
-  eyePos = self GetEye();
+  eyePos = self getEye();
 
   center = target GetPointInBounds(0, 0, 0);
   passed = BulletTracePassed(eyePos, center, false, target);
@@ -437,9 +425,9 @@ javelinLockVehicle(lockLength) {
 
     timePassed = getTime() - self.javelinLockStartTime;
 
-    if(timePassed < lockLength)
+    if(timePassed < lockLength) {
       return;
-
+    }
     //strangely buggy with the moving target...
     //javTarg = eyeTraceForward();
     //if( !isDefined( javTarg ) )
@@ -462,9 +450,9 @@ javelinLockVehicle(lockLength) {
   if(self.javelinStage == 3) // target locked
   {
     passed = SoftSightTest();
-    if(!passed)
+    if(!passed) {
       return;
-
+    }
     if(!(self StillValidJavelinLock(self.javelinTarget))) {
       ResetJavelinLocking();
       return;
@@ -473,9 +461,9 @@ javelinLockVehicle(lockLength) {
 }
 
 StillValidJavelinLock(ent) {
-  assert(IsDefined(self));
+  assert(isDefined(self));
 
-  if(!IsDefined(ent))
+  if(!isDefined(ent))
     return false;
   if(!(self WorldPointInReticle_Circle(ent.origin, 65, 85)))
     return false;

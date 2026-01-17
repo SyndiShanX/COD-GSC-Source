@@ -14,7 +14,6 @@
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm_audio;
 #include scripts\zm_common\zm_weapons;
-
 #namespace zm_weap_thundergun;
 
 autoexec __init__system__() {
@@ -24,12 +23,12 @@ autoexec __init__system__() {
 __init__() {
   level.w_thundergun = getweapon(#"thundergun");
   level.w_thundergun_upgraded = getweapon(#"thundergun_upgraded");
-  clientfield::register("actor", "" + #"hash_7549405bcfcbcfb", 24000, 1, "counter");
+  clientfield::register("actor", "" + # "hash_7549405bcfcbcfb", 24000, 1, "counter");
 }
 
 __main__() {
-  level._effect[#"thundergun_knockdown_ground"] = "tools/fx_null";
-  level._effect[#"thundergun_smoke_cloud"] = "tools/fx_null";
+  level._effect[# "thundergun_knockdown_ground"] = "tools/fx_null";
+  level._effect[# "thundergun_smoke_cloud"] = "tools/fx_null";
   zombie_utility::set_zombie_var(#"thundergun_cylinder_radius", 180);
   zombie_utility::set_zombie_var(#"thundergun_fling_range", 480);
   zombie_utility::set_zombie_var(#"thundergun_gib_range", 900);
@@ -44,7 +43,7 @@ __main__() {
 
   level thread thundergun_devgui_dvar_think();
 
-    callback::on_connect(&thundergun_on_player_connect);
+  callback::on_connect(&thundergun_on_player_connect);
 }
 
 thundergun_devgui_dvar_think() {
@@ -70,9 +69,9 @@ thundergun_devgui_dvar_think() {
   }
 }
 
-  function thundergun_on_player_connect() {
-    self thread wait_for_thundergun_fired();
-  }
+function thundergun_on_player_connect() {
+  self thread wait_for_thundergun_fired();
+}
 
 wait_for_thundergun_fired() {
   self endon(#"disconnect");
@@ -86,7 +85,7 @@ wait_for_thundergun_fired() {
       self thread thundergun_fired();
       view_pos = self gettagorigin("tag_flash") - self getplayerviewheight();
       view_angles = self gettagangles("tag_flash");
-      playFX(level._effect[#"thundergun_smoke_cloud"], view_pos, anglesToForward(view_angles), anglestoup(view_angles));
+      playFX(level._effect[# "thundergun_smoke_cloud"], view_pos, anglesToForward(view_angles), anglestoup(view_angles));
     }
   }
 }
@@ -154,66 +153,66 @@ thundergun_get_enemies_in_range() {
     circle(end_pos, zombie_utility::get_zombie_var(#"thundergun_cylinder_radius"), (1, 0, 0), 0, 0, 100);
   }
 
-    for(i = 0; i < zombies.size; i++) {
-      if(!isDefined(zombies[i]) || !isalive(zombies[i])) {
-        continue;
-      }
-
-      test_origin = zombies[i] getcentroid();
-      test_range_squared = distancesquared(view_pos, test_origin);
-
-      if(test_range_squared > knockdown_range_squared) {
-        zombies[i] thundergun_debug_print("range", (1, 0, 0));
-        return;
-      }
-
-      normal = vectornormalize(test_origin - view_pos);
-      dot = vectordot(forward_view_angles, normal);
-
-      if(0 > dot) {
-        zombies[i] thundergun_debug_print("dot", (1, 0, 0));
-        continue;
-      }
-
-      radial_origin = pointonsegmentnearesttopoint(view_pos, end_pos, test_origin);
-
-      if(distancesquared(test_origin, radial_origin) > cylinder_radius_squared) {
-        zombies[i] thundergun_debug_print("cylinder", (1, 0, 0));
-        continue;
-      }
-
-      if(0 == zombies[i] damageconetrace(view_pos, self)) {
-        zombies[i] thundergun_debug_print("cone", (1, 0, 0));
-        continue;
-      }
-
-      if(test_range_squared < fling_range_squared) {
-        level.thundergun_fling_enemies[level.thundergun_fling_enemies.size] = zombies[i];
-        dist_mult = (fling_range_squared - test_range_squared) / fling_range_squared;
-        fling_vec = vectornormalize(test_origin - view_pos);
-
-        if(5000 < test_range_squared) {
-          fling_vec += vectornormalize(test_origin - radial_origin);
-        }
-
-        fling_vec = (fling_vec[0], fling_vec[1], abs(fling_vec[2]));
-        fling_vec = vectorscale(fling_vec, 100 + 100 * dist_mult);
-        level.thundergun_fling_vecs[level.thundergun_fling_vecs.size] = fling_vec;
-        zombies[i] thread setup_thundergun_vox(self, 1, 0, 0);
-        continue;
-      }
-
-      if(test_range_squared < gib_range_squared) {
-        level.thundergun_knockdown_enemies[level.thundergun_knockdown_enemies.size] = zombies[i];
-        level.thundergun_knockdown_gib[level.thundergun_knockdown_gib.size] = 1;
-        zombies[i] thread setup_thundergun_vox(self, 0, 1, 0);
-        continue;
-      }
-
-      level.thundergun_knockdown_enemies[level.thundergun_knockdown_enemies.size] = zombies[i];
-      level.thundergun_knockdown_gib[level.thundergun_knockdown_gib.size] = 0;
-      zombies[i] thread setup_thundergun_vox(self, 0, 0, 1);
+  for(i = 0; i < zombies.size; i++) {
+    if(!isDefined(zombies[i]) || !isalive(zombies[i])) {
+      continue;
     }
+
+    test_origin = zombies[i] getcentroid();
+    test_range_squared = distancesquared(view_pos, test_origin);
+
+    if(test_range_squared > knockdown_range_squared) {
+      zombies[i] thundergun_debug_print("range", (1, 0, 0));
+      return;
+    }
+
+    normal = vectornormalize(test_origin - view_pos);
+    dot = vectordot(forward_view_angles, normal);
+
+    if(0 > dot) {
+      zombies[i] thundergun_debug_print("dot", (1, 0, 0));
+      continue;
+    }
+
+    radial_origin = pointonsegmentnearesttopoint(view_pos, end_pos, test_origin);
+
+    if(distancesquared(test_origin, radial_origin) > cylinder_radius_squared) {
+      zombies[i] thundergun_debug_print("cylinder", (1, 0, 0));
+      continue;
+    }
+
+    if(0 == zombies[i] damageconetrace(view_pos, self)) {
+      zombies[i] thundergun_debug_print("cone", (1, 0, 0));
+      continue;
+    }
+
+    if(test_range_squared < fling_range_squared) {
+      level.thundergun_fling_enemies[level.thundergun_fling_enemies.size] = zombies[i];
+      dist_mult = (fling_range_squared - test_range_squared) / fling_range_squared;
+      fling_vec = vectornormalize(test_origin - view_pos);
+
+      if(5000 < test_range_squared) {
+        fling_vec += vectornormalize(test_origin - radial_origin);
+      }
+
+      fling_vec = (fling_vec[0], fling_vec[1], abs(fling_vec[2]));
+      fling_vec = vectorscale(fling_vec, 100 + 100 * dist_mult);
+      level.thundergun_fling_vecs[level.thundergun_fling_vecs.size] = fling_vec;
+      zombies[i] thread setup_thundergun_vox(self, 1, 0, 0);
+      continue;
+    }
+
+    if(test_range_squared < gib_range_squared) {
+      level.thundergun_knockdown_enemies[level.thundergun_knockdown_enemies.size] = zombies[i];
+      level.thundergun_knockdown_gib[level.thundergun_knockdown_gib.size] = 1;
+      zombies[i] thread setup_thundergun_vox(self, 0, 1, 0);
+      continue;
+    }
+
+    level.thundergun_knockdown_enemies[level.thundergun_knockdown_enemies.size] = zombies[i];
+    level.thundergun_knockdown_gib[level.thundergun_knockdown_gib.size] = 0;
+    zombies[i] thread setup_thundergun_vox(self, 0, 0, 1);
+  }
 }
 
 function_742cb66e() {
@@ -253,7 +252,6 @@ function_742cb66e() {
 }
 
 thundergun_debug_print(msg, color) {
-
   if(!getdvarint(#"scr_thundergun_debug", 0)) {
     return;
   }
@@ -263,7 +261,6 @@ thundergun_debug_print(msg, color) {
   }
 
   print3d(self.origin + (0, 0, 60), msg, color, 1, 1, 40);
-
 }
 
 thundergun_fling_zombie(player, fling_vec, index) {
@@ -289,7 +286,7 @@ thundergun_fling_zombie(player, fling_vec, index) {
     self.thundergun_death = 1;
   }
 
-  self clientfield::increment("" + #"hash_7549405bcfcbcfb", 1);
+  self clientfield::increment("" + # "hash_7549405bcfcbcfb", 1);
 }
 
 zombie_knockdown(player, gib) {
@@ -313,7 +310,7 @@ zombie_knockdown(player, gib) {
 
 playthundergunpainanim() {
   self notify(#"end_play_thundergun_pain_anim");
-  self endon(#"killanimscript", #"death", #"end_play_thundergun_pain_anim");
+  self endon(#"killanimscript", # "death", # "end_play_thundergun_pain_anim");
 
   if(isDefined(self.marked_for_death) && self.marked_for_death) {
     return;
@@ -364,13 +361,13 @@ thundergun_knockdown_zombie(player, gib) {
 
   if(isDefined(self.thundergun_knockdown_func)) {
     self[[self.thundergun_knockdown_func]](player, gib);
-    self clientfield::increment("" + #"hash_7549405bcfcbcfb", 1);
+    self clientfield::increment("" + # "hash_7549405bcfcbcfb", 1);
   }
 }
 
 handle_thundergun_pain_notetracks(note) {
   if(note == "zombie_knockdown_ground_impact") {
-    playFX(level._effect[#"thundergun_knockdown_ground"], self.origin, anglesToForward(self.angles), anglestoup(self.angles));
+    playFX(level._effect[# "thundergun_knockdown_ground"], self.origin, anglesToForward(self.angles), anglestoup(self.angles));
     self playSound(#"fly_thundergun_forcehit");
   }
 }
@@ -388,7 +385,7 @@ thundergun_sound_thread() {
   self waittill(#"spawned_player");
 
   for(;;) {
-    result = self waittill(#"grenade_fire", #"death", #"player_downed", #"weapon_change", #"grenade_pullback", #"disconnect");
+    result = self waittill(#"grenade_fire", # "death", # "player_downed", # "weapon_change", # "grenade_pullback", # "disconnect");
 
     if((result._notify == "weapon_change" || result._notify == "grenade_fire") && self getcurrentweapon() == level.w_thundergun) {
       self playLoopSound(#"tesla_idle", 0.25);
@@ -411,7 +408,7 @@ setup_thundergun_vox(player, fling, gib, knockdown) {
 
   if(fling) {
     if(30 > randomintrange(1, 100)) {
-      player zm_audio::create_and_play_dialog(#"kill", #"thundergun");
+      player zm_audio::create_and_play_dialog(#"kill", # "thundergun");
     }
   }
 }

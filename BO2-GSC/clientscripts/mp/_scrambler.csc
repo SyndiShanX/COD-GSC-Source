@@ -58,7 +58,7 @@ spawned(localclientnum, set, islocalized) {
   scramblerhandle = level.scramblerhandle;
   level.scramblerhandle++;
   size = level.scramblers.size;
-  level.scramblers[size] = spawnstruct();
+  level.scramblers[size] = spawnStruct();
   level.scramblers[size].scramblerhandle = scramblerhandle;
   level.scramblers[size].cent = self;
   level.scramblers[size].team = self.team;
@@ -95,12 +95,12 @@ spawnedperclient(localclientnum, islocalized, scramblerhandle) {
         player addfriendlyscrambler(self.origin[0], self.origin[1], scramblerhandle);
 
       if(isDefined(level.scramblers[scramblerindex].sndent)) {
-        level.scramblers[scramblerindex].sndid = level.scramblers[scramblerindex].sndent playloopsound(level.scramblesoundalert);
-        playsound(0, level.scramblesoundburst, level.scramblers[scramblerindex].sndent.origin);
+        level.scramblers[scramblerindex].sndid = level.scramblers[scramblerindex].sndent playLoopSound(level.scramblesoundalert);
+        playSound(0, level.scramblesoundburst, level.scramblers[scramblerindex].sndent.origin);
       }
 
       if(isDefined(level.scramblers[scramblerindex].sndpingent))
-        level.scramblers[scramblerindex].sndpingid = level.scramblers[scramblerindex].sndpingent playloopsound(level.scramblesoundping);
+        level.scramblers[scramblerindex].sndpingid = level.scramblers[scramblerindex].sndpingent playLoopSound(level.scramblesoundping);
     }
   } else {
     scramblesound = level.scramblesound;
@@ -109,7 +109,7 @@ spawnedperclient(localclientnum, islocalized, scramblerhandle) {
       scramblesound = level.globalscramblesound;
 
     if(isDefined(level.scramblers[scramblerindex].sndent))
-      level.scramblers[scramblerindex].sndid = level.scramblers[scramblerindex].sndent playloopsound(scramblesound);
+      level.scramblers[scramblerindex].sndid = level.scramblers[scramblerindex].sndent playLoopSound(scramblesound);
   }
 
   self thread clientscripts\mp\_fx::blinky_light(localclientnum, "tag_light", level._effect["scrambler_friendly_light"], level._effect["scrambler_enemy_light"]);
@@ -129,7 +129,7 @@ scramblerupdate(localclientnum) {
         continue;
       }
       if(!isDefined(level.playerpersistent[localclientnum])) {
-        level.playerpersistent[localclientnum] = spawnstruct();
+        level.playerpersistent[localclientnum] = spawnStruct();
         level.playerpersistent[localclientnum].previousteam = player.team;
         player removeallfriendlyscramblers();
       }
@@ -245,7 +245,7 @@ cleanupscramblerondelete(scramblerent, scramblerhandle, islocalized, localclient
     size = level.scramblers.size;
 
     if(scramblerhandle == level.scramblers[j].scramblerhandle) {
-      playsound(0, level.scramblesoundburst, level.scramblers[j].sndent.origin);
+      playSound(0, level.scramblesoundburst, level.scramblers[j].sndent.origin);
       level.scramblers[j].sndent delete();
       level.scramblers[j].sndent = self.scramblers[size - 1].sndent;
       level.scramblers[j].sndpingent delete();
@@ -299,7 +299,7 @@ restartsound(isenemy) {
 
   if(!isenemy) {
     if(self.islocalized)
-      self.sndid = self.sndent playloopsound(level.scramblesoundalert);
+      self.sndid = self.sndent playLoopSound(level.scramblesoundalert);
   } else {
     islocalized = self.islocalized;
     scramblesound = level.scramblesound;
@@ -307,6 +307,6 @@ restartsound(isenemy) {
     if(islocalized == 0)
       scramblesound = level.globalscramblesound;
 
-    self.sndid = self.sndent playloopsound(scramblesound);
+    self.sndid = self.sndent playLoopSound(scramblesound);
   }
 }

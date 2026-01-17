@@ -12,7 +12,7 @@
 
 zombMeleeMonitor() {
   level.numZombsMeleeThisFrame = 0;
-  while (1) {
+  while(1) {
     wait_network_frame();
     level.numZombsMeleeThisFrame = 0;
   }
@@ -41,7 +41,7 @@ MeleeCombat() {
   MeleeDebugPrint("Melee begin");
   self animMode("zonly_physics");
   resetGiveUpTime();
-  for (;;) {
+  for(;;) {
     if(!PrepareToMelee()) {
       self.lastMeleeGiveUpTime = gettime();
       break;
@@ -68,7 +68,7 @@ MeleeCombat() {
       if(!isDefined(level.numZombsMeleeThisFrame)) {
         level thread zombMeleeMonitor();
       }
-      while (level.numZombsMeleeThisFrame > 2) {
+      while(level.numZombsMeleeThisFrame > 2) {
         wait_network_frame();
       }
       self animscripts\face::SaySpecificDialogue(undefined, "attack_vocals", 1);
@@ -80,7 +80,7 @@ MeleeCombat() {
     } else {
       self setflaggedanimknoballrestart("meleeanim", % melee_1, % body, 1, .2, 1);
     }
-    while (1) {
+    while(1) {
       self waittill("meleeanim", note);
       if(note == "end") {
         break;
@@ -135,7 +135,7 @@ meleeDebugPrintThread() {
   self endon("death");
   self endon("killanimscript");
   self endon("stop_melee_debug_print");
-  while (1) {
+  while(1) {
     print3d(self.origin + (0, 0, 60), self.meleedebugprint, (1, 1, 1), 1, .1);
     wait .05;
   }
@@ -282,7 +282,7 @@ PrepareToMelee() {
   runAnim = % run_lowready_F;
   self SetFlaggedAnimKnobAll("chargeanim", runAnim, % body, 1, .3, 1);
   raisingGun = false;
-  while (1) {
+  while(1) {
     MeleeDebugPrint("PrepareToMelee loop" + randomint(100));
     time = gettime();
     willBeWithinRangeWhenGunIsRaised = (isDefined(predictedEnemyDistSqAfterRaiseGun) && predictedEnemyDistSqAfterRaiseGun <= shouldRaiseGunDistSq);
@@ -361,7 +361,7 @@ AiVsAiMeleeCombat() {
 AiVsAiMeleeCharge(desiredDistSqrd) {
   giveUpTime = gettime() + 2500;
   self setAnimKnobAll( % run_lowready_F, % body, 1, 0.2);
-  while (distanceSquared(self.origin, self.enemy.origin) > desiredDistSqrd && gettime() < giveUpTime) {
+  while(distanceSquared(self.origin, self.enemy.origin) > desiredDistSqrd && gettime() < giveUpTime) {
     wait .05;
   }
 }

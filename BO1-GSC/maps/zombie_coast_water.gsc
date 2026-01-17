@@ -8,7 +8,7 @@
 #include maps\_zombiemode_utility;
 
 init() {
-  level.water = getentarray("waterdamage", "targetname");
+  level.water = getEntArray("waterdamage", "targetname");
   level.water_zombie_damage_max = 650;
   level.water_zombie_time = 5;
   level.water_zombie_damage = level.water_zombie_damage_max / level.water_zombie_time;
@@ -434,7 +434,7 @@ water_player_free(ice_trigger) {
   self endon("death");
   self endon("disconnect");
   ice_trigger waittill("damage");
-  self PlaySound("zmb_ice_shatter");
+  self playSound("zmb_ice_shatter");
   self.is_frozen = false;
   self DisableInvulnerability();
   self FreezeControls(false);

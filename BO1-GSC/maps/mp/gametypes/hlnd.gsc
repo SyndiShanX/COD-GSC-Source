@@ -76,8 +76,8 @@ onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHit
       self.humiliated = self.pers["humiliated"];
       attacker thread maps\mp\gametypes\_globallogic_score::givePlayerScore("hatchet_kill", attacker, self);
       maps\mp\gametypes\_globallogic_score::_setPlayerScore(self, 0);
-      self thread maps\mp\gametypes\_wager::queueWagerPopup(&"MP_HUMILIATED", 0, & "MP_BANKRUPTED", "wm_humiliated");
-      attacker thread maps\mp\gametypes\_wager::queueWagerPopup(&"MP_HUMILIATION", 0, & "MP_BANKRUPTED_OTHER", "wm_humiliation");
+      self thread maps\mp\gametypes\_wager::queueWagerPopup(&"MP_HUMILIATED", 0, &"MP_BANKRUPTED", "wm_humiliated");
+      attacker thread maps\mp\gametypes\_wager::queueWagerPopup(&"MP_HUMILIATION", 0, &"MP_BANKRUPTED_OTHER", "wm_humiliation");
     } else {
       attacker thread maps\mp\gametypes\_globallogic_score::givePlayerScore("other_kill", attacker, self);
     }
@@ -85,7 +85,7 @@ onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHit
     self.pers["humiliated"]++;
     self.humiliated = self.pers["humiliated"];
     maps\mp\gametypes\_globallogic_score::_setPlayerScore(self, 0);
-    self thread maps\mp\gametypes\_wager::queueWagerPopup(&"MP_HUMILIATED", 0, & "MP_BANKRUPTED", "wm_humiliated");
+    self thread maps\mp\gametypes\_wager::queueWagerPopup(&"MP_HUMILIATED", 0, &"MP_BANKRUPTED", "wm_humiliated");
   }
 }
 onStartGameType() {
@@ -96,20 +96,20 @@ onStartGameType() {
   setDvar("scr_xpscale", 0);
   makedvarserverinfo("ui_allow_teamchange", 0);
   setClientNameMode("auto_change");
-  maps\mp\gametypes\_globallogic_ui::setObjectiveText("allies", & "OBJECTIVES_HLND");
-  maps\mp\gametypes\_globallogic_ui::setObjectiveText("axis", & "OBJECTIVES_HLND");
+  maps\mp\gametypes\_globallogic_ui::setObjectiveText("allies", &"OBJECTIVES_HLND");
+  maps\mp\gametypes\_globallogic_ui::setObjectiveText("axis", &"OBJECTIVES_HLND");
   if(level.splitscreen) {
-    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("allies", & "OBJECTIVES_HLND");
-    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("axis", & "OBJECTIVES_HLND");
+    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("allies", &"OBJECTIVES_HLND");
+    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("axis", &"OBJECTIVES_HLND");
   } else {
-    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("allies", & "OBJECTIVES_HLND_SCORE");
-    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("axis", & "OBJECTIVES_HLND_SCORE");
+    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("allies", &"OBJECTIVES_HLND_SCORE");
+    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("axis", &"OBJECTIVES_HLND_SCORE");
   }
-  maps\mp\gametypes\_globallogic_ui::setObjectiveHintText("allies", & "OBJECTIVES_HLND_HINT");
-  maps\mp\gametypes\_globallogic_ui::setObjectiveHintText("axis", & "OBJECTIVES_HLND_HINT");
+  maps\mp\gametypes\_globallogic_ui::setObjectiveHintText("allies", &"OBJECTIVES_HLND_HINT");
+  maps\mp\gametypes\_globallogic_ui::setObjectiveHintText("axis", &"OBJECTIVES_HLND_HINT");
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);
-  newSpawns = GetEntArray("mp_wager_spawn", "classname");
+  newSpawns = getEntArray("mp_wager_spawn", "classname");
   if(newSpawns.size > 0) {
     maps\mp\gametypes\_spawnlogic::addSpawnPoints("allies", "mp_wager_spawn");
     maps\mp\gametypes\_spawnlogic::addSpawnPoints("axis", "mp_wager_spawn");
@@ -166,4 +166,3 @@ onWagerAwards() {
     bestKillstreak = 0;
   self maps\mp\gametypes\_persistence::setAfterActionReportStat("wagerAwards", bestKillstreak, 2);
 }
-

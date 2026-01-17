@@ -24,7 +24,7 @@
 #namespace globallogic_ui;
 
 function init() {
-  callback::add_callback("hash_bc12b61f", & on_player_spawn);
+  callback::add_callback("hash_bc12b61f", &on_player_spawn);
   clientfield::register("clientuimodel", "hudItems.cybercoreSelectMenuDisabled", 1, 1, "int");
   clientfield::register("clientuimodel", "hudItems.playerInCombat", 1, 1, "int");
   clientfield::register("clientuimodel", "playerAbilities.repulsorIndicatorDirection", 1, 2, "int");
@@ -36,7 +36,7 @@ function init() {
 
 function on_player_spawn() {
   self thread watch_player_in_combat();
-  assert(isdefined(level.gameskill));
+  assert(isDefined(level.gameskill));
   self clientfield::set_player_uimodel("serverDifficulty", level.gameskill);
 }
 
@@ -48,7 +48,7 @@ function isanyaiattackingtheplayer(playerent) {
       if(ai attackedrecently(playerent, 10)) {
         return true;
       }
-      if(ai.enemy === playerent && isdefined(ai.weapon) && ai.weapon.name === "none" && distancesquared(ai.origin, playerent.origin) < (240 * 240)) {
+      if(ai.enemy === playerent && isDefined(ai.weapon) && ai.weapon.name === "none" && distancesquared(ai.origin, playerent.origin) < (240 * 240)) {
         return true;
       }
     }
@@ -76,7 +76,7 @@ function isplayerhurt(playerent) {
 function watch_player_in_combat() {
   self endon("kill_watch_player_in_combat");
   self endon("disconnect");
-  while (true) {
+  while(true) {
     if(isplayerhurt(self) || isanyaiattackingtheplayer(self)) {
       self clientfield::set_player_uimodel("hudItems.playerInCombat", 1);
     } else {
@@ -87,54 +87,54 @@ function watch_player_in_combat() {
 }
 
 function setupcallbacks() {
-  level.autoassign = & menuautoassign;
-  level.spectator = & menuspectator;
-  level.curclass = & menuclass;
-  level.teammenu = & menuteam;
+  level.autoassign = &menuautoassign;
+  level.spectator = &menuspectator;
+  level.curclass = &menuclass;
+  level.teammenu = &menuteam;
 }
 
 function freegameplayhudelems() {
-  if(isdefined(self.perkicon)) {
-    for (numspecialties = 0; numspecialties < level.maxspecialties; numspecialties++) {
-      if(isdefined(self.perkicon[numspecialties])) {
+  if(isDefined(self.perkicon)) {
+    for(numspecialties = 0; numspecialties < level.maxspecialties; numspecialties++) {
+      if(isDefined(self.perkicon[numspecialties])) {
         self.perkicon[numspecialties] hud::destroyelem();
         self.perkname[numspecialties] hud::destroyelem();
       }
     }
   }
-  if(isdefined(self.perkhudelem)) {
+  if(isDefined(self.perkhudelem)) {
     self.perkhudelem hud::destroyelem();
   }
-  if(isdefined(self.killstreakicon)) {
-    if(isdefined(self.killstreakicon[0])) {
+  if(isDefined(self.killstreakicon)) {
+    if(isDefined(self.killstreakicon[0])) {
       self.killstreakicon[0] hud::destroyelem();
     }
-    if(isdefined(self.killstreakicon[1])) {
+    if(isDefined(self.killstreakicon[1])) {
       self.killstreakicon[1] hud::destroyelem();
     }
-    if(isdefined(self.killstreakicon[2])) {
+    if(isDefined(self.killstreakicon[2])) {
       self.killstreakicon[2] hud::destroyelem();
     }
-    if(isdefined(self.killstreakicon[3])) {
+    if(isDefined(self.killstreakicon[3])) {
       self.killstreakicon[3] hud::destroyelem();
     }
-    if(isdefined(self.killstreakicon[4])) {
+    if(isDefined(self.killstreakicon[4])) {
       self.killstreakicon[4] hud::destroyelem();
     }
   }
-  if(isdefined(self.lowermessage)) {
+  if(isDefined(self.lowermessage)) {
     self.lowermessage hud::destroyelem();
   }
-  if(isdefined(self.lowertimer)) {
+  if(isDefined(self.lowertimer)) {
     self.lowertimer hud::destroyelem();
   }
-  if(isdefined(self.proxbar)) {
+  if(isDefined(self.proxbar)) {
     self.proxbar hud::destroyelem();
   }
-  if(isdefined(self.proxbartext)) {
+  if(isDefined(self.proxbartext)) {
     self.proxbartext hud::destroyelem();
   }
-  if(isdefined(self.carryicon)) {
+  if(isDefined(self.carryicon)) {
     self.carryicon hud::destroyelem();
   }
 }
@@ -142,7 +142,7 @@ function freegameplayhudelems() {
 function teamplayercountsequal(playercounts) {
   count = undefined;
   foreach(team in level.teams) {
-    if(!isdefined(count)) {
+    if(!isDefined(count)) {
       count = playercounts[team];
       continue;
     }
@@ -178,7 +178,7 @@ function menuautoassign(comingfrommenu) {
   } else if(getdvarint("party_autoteams") == 1) {
     if(level.allow_teamchange != "1" || (!self.hasspawned && !comingfrommenu)) {
       team = getassignedteam(self);
-      if(isdefined(level.teams[team])) {
+      if(isDefined(level.teams[team])) {
         assignment = team;
       } else if(team == "spectator" && !level.forceautoassign) {
         self setclientscriptmainmenu(game["menu_start_menu"]);
@@ -215,7 +215,7 @@ function menuautoassign(comingfrommenu) {
 function teamscoresequal() {
   score = undefined;
   foreach(team in level.teams) {
-    if(!isdefined(score)) {
+    if(!isDefined(score)) {
       score = getteamscore(team);
       continue;
     }
@@ -248,8 +248,8 @@ function pickteamfromscores(teams) {
 }
 
 function get_splitscreen_team() {
-  for (index = 0; index < level.players.size; index++) {
-    if(!isdefined(level.players[index])) {
+  for(index = 0; index < level.players.size; index++) {
+    if(!isDefined(level.players[index])) {
       continue;
     }
     if(level.players[index] == self) {
@@ -283,7 +283,7 @@ function closemenus() {
 }
 
 function beginclasschoice() {
-  assert(isdefined(level.teams[self.pers[""]]));
+  assert(isDefined(level.teams[self.pers[""]]));
   team = self.pers["team"];
   self closemenu(game["menu_start_menu"]);
   if(!getdvarint("art_review", 0)) {
@@ -293,8 +293,8 @@ function beginclasschoice() {
   if(!getdvarint("force_cac", 0) || b_disable_cac) {
     prevclass = self savegame::get_player_data("playerClass", undefined);
     var_d47d35d1 = self savegame::get_player_data(savegame::get_mission_name() + "hero_weapon", undefined);
-    if(isdefined(prevclass) || b_disable_cac || (isdefined(level.disableclassselection) && level.disableclassselection) || (isdefined(self.disableclassselection) && self.disableclassselection) || getdvarint("migration_soak") == 1) {
-      self.curclass = (isdefined(prevclass) ? prevclass : level.defaultclass);
+    if(isDefined(prevclass) || b_disable_cac || (isDefined(level.disableclassselection) && level.disableclassselection) || (isDefined(self.disableclassselection) && self.disableclassselection) || getdvarint("migration_soak") == 1) {
+      self.curclass = (isDefined(prevclass) ? prevclass : level.defaultclass);
       self.pers["class"] = self.curclass;
       wait(0.05);
       if(self.sessionstate != "playing" && game["state"] == "playing") {
@@ -322,22 +322,22 @@ function fullscreen_black() {
   self thread fullscreen_black_checkpoint_restore();
   self hide();
   wait(0.05);
-  if(isdefined(level.str_level_start_flag) || isdefined(level.str_player_start_flag)) {
+  if(isDefined(level.str_level_start_flag) || isDefined(level.str_player_start_flag)) {
     init_start_flags();
     self thread fullscreen_black_freeze_controls();
-    if(isdefined(level.str_level_start_flag)) {
+    if(isDefined(level.str_level_start_flag)) {
       level flag::wait_till(level.str_level_start_flag);
     }
-    if(isdefined(level.str_player_start_flag)) {
+    if(isDefined(level.str_player_start_flag)) {
       self flag::wait_till(level.str_player_start_flag);
     }
   }
-  if(b_hot_joining && (!(isdefined(level.is_safehouse) && level.is_safehouse))) {
-    while (self.sessionstate !== "playing") {
+  if(b_hot_joining && (!(isDefined(level.is_safehouse) && level.is_safehouse))) {
+    while(self.sessionstate !== "playing") {
       wait(0.05);
     }
     self thread fullscreen_black_freeze_controls();
-    while (self isloadingcinematicplaying()) {
+    while(self isloadingcinematicplaying()) {
       wait(0.05);
     }
     self flag::wait_till("loadout_given");
@@ -363,17 +363,17 @@ function fullscreen_black_checkpoint_restore() {
   self endon("kill_fullscreen_black");
   b_fullscreen_black = self.fullscreen_black_active;
   level waittill("save_restore");
-  if(isdefined(b_fullscreen_black) && b_fullscreen_black) {
+  if(isDefined(b_fullscreen_black) && b_fullscreen_black) {
     self closemenu("InitialBlack");
     self openmenu("InitialBlack");
   }
 }
 
 function init_start_flags() {
-  if(isdefined(level.str_player_start_flag) && !self flag::exists(level.str_player_start_flag)) {
+  if(isDefined(level.str_player_start_flag) && !self flag::exists(level.str_player_start_flag)) {
     self flag::init(level.str_player_start_flag);
   }
-  if(isdefined(level.str_level_start_flag) && !level flag::exists(level.str_level_start_flag)) {
+  if(isDefined(level.str_level_start_flag) && !level flag::exists(level.str_level_start_flag)) {
     level flag::init(level.str_level_start_flag);
   }
 }
@@ -395,18 +395,18 @@ function fullscreen_black_freeze_controls() {
 }
 
 function showmainmenuforteam() {
-  assert(isdefined(level.teams[self.pers[""]]));
+  assert(isDefined(level.teams[self.pers[""]]));
   team = self.pers["team"];
   self openmenu(game["menu_changeclass_" + team]);
 }
 
 function menuteam(team) {
   self closemenus();
-  if(!level.console && level.allow_teamchange == "0" && (isdefined(self.hasdonecombat) && self.hasdonecombat)) {
+  if(!level.console && level.allow_teamchange == "0" && (isDefined(self.hasdonecombat) && self.hasdonecombat)) {
     return;
   }
   if(self.pers["team"] != team) {
-    if(level.ingraceperiod && (!isdefined(self.hasdonecombat) || !self.hasdonecombat)) {
+    if(level.ingraceperiod && (!isDefined(self.hasdonecombat) || !self.hasdonecombat)) {
       self.hasspawned = 0;
     }
     if(self.sessionstate == "playing") {
@@ -454,9 +454,7 @@ function menuspectator() {
     self.pers["savedmodel"] = undefined;
     self updateobjectivetext();
     self.sessionteam = "spectator";
-    [
-      [level.spawnspectator]
-    ]();
+    [[level.spawnspectator]]();
     self thread globallogic_player::spectate_player_watcher();
     self setclientscriptmainmenu(game["menu_start_menu"]);
     self notify("joined_spectators");
@@ -466,7 +464,7 @@ function menuspectator() {
 
 function menuclass(response) {
   self closemenus();
-  if(!isdefined(self.pers["team"]) || !isdefined(level.teams[self.pers["team"]])) {
+  if(!isDefined(self.pers["team"]) || !isDefined(level.teams[self.pers["team"]])) {
     return;
   }
   if(flagsys::get("mobile_armory_in_use")) {
@@ -475,7 +473,7 @@ function menuclass(response) {
   playerclass = "";
   if(response == "cancel") {
     prevclass = self savegame::get_player_data("playerClass", undefined);
-    if(isdefined(prevclass)) {
+    if(isDefined(prevclass)) {
       playerclass = prevclass;
     } else {
       playerclass = level.defaultclass;
@@ -490,7 +488,7 @@ function menuclass(response) {
       str_class_chosen = response;
     }
     playerclass = self loadout::getclasschoice(str_class_chosen);
-    if(isdefined(altplayer)) {
+    if(isDefined(altplayer)) {
       xuid = altplayer getxuid();
       self savegame::set_player_data("altPlayerID", xuid);
     } else {
@@ -504,13 +502,13 @@ function menuclass(response) {
     self savegame::set_player_data("saved_rig2", undefined);
     self savegame::set_player_data("saved_rig2_upgraded", undefined);
   }
-  if(isdefined(self.pers["class"]) && self.pers["class"] == playerclass) {
+  if(isDefined(self.pers["class"]) && self.pers["class"] == playerclass) {
     return;
   }
   self.pers["changed_class"] = 1;
   self notify("changed_class");
   waittillframeend();
-  if(isdefined(self.curclass) && self.curclass == playerclass) {
+  if(isDefined(self.curclass) && self.curclass == playerclass) {
     self.pers["changed_class"] = 0;
   }
   if(self.sessionstate == "playing") {
@@ -521,7 +519,7 @@ function menuclass(response) {
     if(game["state"] == "postgame") {
       return;
     }
-    supplystationclasschange = isdefined(self.usingsupplystation) && self.usingsupplystation;
+    supplystationclasschange = isDefined(self.usingsupplystation) && self.usingsupplystation;
     self.usingsupplystation = 0;
     if(level.ingraceperiod && !self.hasdonecombat || supplystationclasschange) {
       self loadout::setclass(self.pers["class"]);
@@ -552,7 +550,7 @@ function menuclass(response) {
     }
     if(game["state"] == "playing") {
       timepassed = undefined;
-      if(isdefined(self.respawntimerstarttime)) {
+      if(isDefined(self.respawntimerstarttime)) {
         timepassed = (gettime() - self.respawntimerstarttime) / 1000;
       }
       self thread[[level.spawnclient]](timepassed);
@@ -575,7 +573,7 @@ function removespawnmessageshortly(delay) {
 function weakpoint_anim_watch(precachedbonename) {
   self endon("death");
   self endon("weakpoint_destroyed");
-  while (true) {
+  while(true) {
     self waittill("weakpoint_update", bonename, event);
     if(bonename == precachedbonename) {
       if(event == "damage") {

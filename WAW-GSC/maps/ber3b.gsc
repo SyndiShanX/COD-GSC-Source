@@ -66,14 +66,14 @@ precache_assets() {
 }
 
 build_starts() {
-  add_start("intro", maps\ber3b_event_foyer::event_intro_start, & "STARTS_BER3B_INTRO");
-  add_start("foyer", maps\ber3b_event_foyer::event_foyer_start, & "STARTS_BER3B_FOYER");
-  add_start("foyer_pacing", maps\ber3b_event_foyer::event_foyer_pacing_start, & "STARTS_BER3B_FOYER_PACING");
-  add_start("parliament", maps\ber3b_event_parliament::event_parliament_start, & "STARTS_BER3B_PARLIAMENT");
-  add_start("parliament_doors", maps\ber3b_event_parliament::event_parliament_doors_start, & "STARTS_BER3B_PARLIAMENT_DOORS");
-  add_start("roof", maps\ber3b_event_roof::event_roof_start, & "STARTS_BER3B_ROOF");
-  add_start("roof_midpoint", maps\ber3b_event_roof::event_roof_midpoint_start, & "STARTS_BER3B_ROOF_MIDPOINT");
-  add_start("roof_flagplant", maps\ber3b_event_roof::event_roof_flagplant_start, & "STARTS_BER3B_ROOF_FLAGPLANT");
+  add_start("intro", maps\ber3b_event_foyer::event_intro_start, &"STARTS_BER3B_INTRO");
+  add_start("foyer", maps\ber3b_event_foyer::event_foyer_start, &"STARTS_BER3B_FOYER");
+  add_start("foyer_pacing", maps\ber3b_event_foyer::event_foyer_pacing_start, &"STARTS_BER3B_FOYER_PACING");
+  add_start("parliament", maps\ber3b_event_parliament::event_parliament_start, &"STARTS_BER3B_PARLIAMENT");
+  add_start("parliament_doors", maps\ber3b_event_parliament::event_parliament_doors_start, &"STARTS_BER3B_PARLIAMENT_DOORS");
+  add_start("roof", maps\ber3b_event_roof::event_roof_start, &"STARTS_BER3B_ROOF");
+  add_start("roof_midpoint", maps\ber3b_event_roof::event_roof_midpoint_start, &"STARTS_BER3B_ROOF_MIDPOINT");
+  add_start("roof_flagplant", maps\ber3b_event_roof::event_roof_flagplant_start, &"STARTS_BER3B_ROOF_FLAGPLANT");
   add_start("default", level.start_functions["intro"]);
   default_start(level.start_functions["intro"]);
 }
@@ -83,7 +83,7 @@ introscreen_override() {
     return;
   }
   start = undefined;
-  while (!isDefined(start)) {
+  while(!isDefined(start)) {
     waittillframeend;
     start = level.start_point;
   }
@@ -125,21 +125,21 @@ init_flags() {
 }
 
 setup_strings() {
-  level.obj1_string = & "BER3B_OBJ_1";
-  level.obj2_string = & "BER3B_OBJ_2A";
-  level.obj2b_string = & "BER3B_OBJ_2B";
-  level.obj3_string = & "BER3B_OBJ_2";
-  level.obj4_string = & "BER3B_OBJ_3";
-  level.obj5_string = & "BER3B_OBJ_4";
-  level.obj6_string = & "BER3B_OBJ_5";
-  level.diary_skip = & "BER3B_DIARY_SKIP";
-  level.obj_flag_carry_string = & "BER3B_OBJ_FLAG_CARRY";
-  level.obj_flag_retrieve_string = & "BER3B_OBJ_FLAG_RETRIEVE";
-  level.hint_flag_pickup_string = & "BER3B_HINT_FLAG_PICKUP";
-  level.hint_flag_drop_string = & "BER3B_HINT_FLAG_DROP";
-  level.flag_fail_warning = & "BER3B_FLAG_FAIL_WARNING";
-  level.flag_fail_deadquote = & "BER3B_FLAG_FAIL_DEADQUOTE";
-  level.flag_plant_trigger_string = & "BER3B_FLAG_PLANT_TRIGGER_HINT";
+  level.obj1_string = &"BER3B_OBJ_1";
+  level.obj2_string = &"BER3B_OBJ_2A";
+  level.obj2b_string = &"BER3B_OBJ_2B";
+  level.obj3_string = &"BER3B_OBJ_2";
+  level.obj4_string = &"BER3B_OBJ_3";
+  level.obj5_string = &"BER3B_OBJ_4";
+  level.obj6_string = &"BER3B_OBJ_5";
+  level.diary_skip = &"BER3B_DIARY_SKIP";
+  level.obj_flag_carry_string = &"BER3B_OBJ_FLAG_CARRY";
+  level.obj_flag_retrieve_string = &"BER3B_OBJ_FLAG_RETRIEVE";
+  level.hint_flag_pickup_string = &"BER3B_HINT_FLAG_PICKUP";
+  level.hint_flag_drop_string = &"BER3B_HINT_FLAG_DROP";
+  level.flag_fail_warning = &"BER3B_FLAG_FAIL_WARNING";
+  level.flag_fail_deadquote = &"BER3B_FLAG_FAIL_DEADQUOTE";
+  level.flag_plant_trigger_string = &"BER3B_FLAG_PLANT_TRIGGER_HINT";
 }
 
 set_objective(num) {
@@ -182,7 +182,7 @@ set_objective(num) {
 }
 
 objectives_skip(numToSkipPast) {
-  for (i = 1; i <= numToSkipPast; i++) {
+  for(i = 1; i <= numToSkipPast; i++) {
     set_objective(i);
   }
 }
@@ -194,7 +194,7 @@ warp_players_underworld() {
     return;
   }
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i] SetOrigin(underworld.origin);
   }
 }
@@ -203,7 +203,7 @@ warp_players(startValue, startKey) {
   starts = GetStructArray(startValue, startKey);
   ASSERT(starts.size == 4);
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i] setOrigin(starts[i].origin);
     players[i] setPlayerAngles(starts[i].angles);
   }
@@ -215,7 +215,7 @@ setup_friendlies() {
   level.friendly_startup_thread = ::ber3b_friendly_startup_thread;
   friends = grab_starting_friends();
   ASSERTEX(isDefined(friends) && friends.size > 0, "setup_friendlies(): can't find any friendlies!");
-  for (i = 0; i < friends.size; i++) {
+  for(i = 0; i < friends.size; i++) {
     guy = friends[i];
     guy.followmin = -1;
     guy friend_add();
@@ -241,7 +241,7 @@ warp_friendlies(startValue, startKey) {
   ASSERTEX(flag("friends_setup"), "warp_friendlies(): level.friends needs to be set up before this runs.");
   friendlyStarts = GetStructArray(startValue, startKey);
   ASSERTEX(friendlyStarts.size > 0, "warp_friendlies(): didn't find enough friendly start points!");
-  for (i = 0; i < level.friends.size; i++) {
+  for(i = 0; i < level.friends.size; i++) {
     level.friends[i] Teleport(groundpos(friendlyStarts[i].origin), friendlyStarts[i].angles);
   }
 }
@@ -263,7 +263,7 @@ random_arty_strikes() {
   minWait = 15;
   maxWait = 35;
   thread random_arty_strikes_sound(ender);
-  while (1) {
+  while(1) {
     wait(RandomIntRange(minWait, maxWait));
     if(!level.pauseArtyStrikes) {
       thread arty_strike_on_players(RandomFloatRange(.2, .3), 3, 500);
@@ -280,7 +280,7 @@ arty_strike_on_players(intensity, duration, radius, switchLevelVar) {
   }
   players = get_players();
   level notify("arty_strike");
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i] thread arty_strike_rumble(duration * 0.5);
     Earthquake(intensity, duration, players[i].origin, radius);
   }
@@ -296,7 +296,7 @@ arty_strike_rumble(duration) {
   self PlayRumbleOnEntity("explosion_generic");
   wait(0.2);
   stopTime = GetTime() + (duration * 1000);
-  while (GetTime() <= stopTime) {
+  while(GetTime() <= stopTime) {
     self PlayRumbleOnEntity("damage_light");
     wait(0.05);
   }
@@ -304,11 +304,11 @@ arty_strike_rumble(duration) {
 
 random_arty_strikes_sound(ender) {
   level endon(ender);
-  level.arty_soundSpot = Spawn("script_origin", (872, 14728, 3064));
+  level.arty_soundSpot = spawn("script_origin", (872, 14728, 3064));
   level.arty_soundSpot thread random_arty_strikes_cleanup_soundspot(ender);
-  while (1) {
+  while(1) {
     level waittill("arty_strike");
-    level.arty_soundSpot PlaySound("art_int");
+    level.arty_soundSpot playSound("art_int");
   }
 }
 
@@ -324,18 +324,18 @@ chandeliers_shake() {
   level endon("stop_chandeliers_shake");
   animDistance = 1500;
   shake_maxWait = 0.25;
-  chandeliers = GetEntArray("smodel_chandelier", "targetname");
+  chandeliers = getEntArray("smodel_chandelier", "targetname");
   if(!isDefined(chandeliers) || chandeliers.size <= 0) {
     return;
   }
   array_thread(chandeliers, ::chandelier_rotate_random);
-  while (1) {
+  while(1) {
     level waittill("arty_strike");
-    for (i = 0; i < chandeliers.size; i++) {
+    for(i = 0; i < chandeliers.size; i++) {
       chandelier = chandeliers[i];
       isCloseEnough = false;
       players = get_players();
-      for (j = 0; j < players.size; j++) {
+      for(j = 0; j < players.size; j++) {
         if(Distance(chandelier.origin, players[j].origin) <= animDistance) {
           isCloseEnough = true;
           break;
@@ -364,7 +364,7 @@ eagle_setup() {
 collectible_corpse() {
   orig = getstruct_safe("struct_collectible_loop", "targetname");
   orig.origin = groundpos(orig.origin);
-  corpse = Spawn("script_model", orig.origin);
+  corpse = spawn("script_model", orig.origin);
   corpse.angles = orig.angles;
   corpse maps\ber3b_anim::setup_axis_char_model();
   corpse Detach(corpse.gearModel);
@@ -385,10 +385,10 @@ russian_flag_init() {
   level.russianFlagOriginOffset = (0, 0, 27);
   level.russianFlagAnglesOffset = (270, 0, 0);
   russian_flag_hud_init();
-  russianFlag = Spawn("script_model", (1136, 13288, 392));
+  russianFlag = spawn("script_model", (1136, 13288, 392));
   russianFlag.origin += level.russianFlagOriginOffset;
   russianFlag.angles += level.russianFlagAnglesOffset;
-  russianFlag SetModel("anim_berlin_rus_flag_rolled");
+  russianFlag setModel("anim_berlin_rus_flag_rolled");
   russianFlag Hide();
   level.russianFlag = russianFlag;
   flag_set("russian_flag_setup");
@@ -409,7 +409,7 @@ russian_flag_startthink() {
 russian_flag_hud_init() {
   level.russianFlagHudFadeTime = 0.1;
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i].russian_flag_hud = NewClientHudElem(players[i]);
     players[i].russian_flag_hud.alignX = "left";
     players[i].russian_flag_hud.fontScale = 1.5;
@@ -442,7 +442,7 @@ russian_flag_objectives(russianFlag) {
   objective_state(4, "done");
   objective_state(5, "done");
   objective_add(6, "active", level.obj_flag_retrieve_string, russianFlag get_offset_origin());
-  while (1) {
+  while(1) {
     level waittill("russian_flag_dropped");
     if(!flag("russian_flag_dropped")) {
       objective_string_nomessage(6, level.obj_flag_carry_string);
@@ -459,13 +459,13 @@ russian_flag_objectives(russianFlag) {
 
 russian_flag_proxcheck(russianFlag) {
   timer = undefined;
-  while (1) {
-    while (!flag("russian_flag_dropped")) {
+  while(1) {
+    while(!flag("russian_flag_dropped")) {
       wait(0.5);
     }
     players = get_players();
     playerInRange = false;
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       player = players[i];
       if(Distance(player.origin, russianFlag get_offset_origin()) <= level.requiredFlagProximity) {
         playerInRange = true;
@@ -500,16 +500,16 @@ russian_flag_mission_fail() {
 russian_flag_think() {
   level endon("kill_flagcarry");
   level thread kill_enemies_in_dome_after_flag_pickup();
-  while (1) {
-    while (!flag("russian_flag_dropped")) {
+  while(1) {
+    while(!flag("russian_flag_dropped")) {
       wait(0.1);
     }
-    flagtrig = Spawn("trigger_radius", self get_offset_origin(), 0, 64, 200);
+    flagtrig = spawn("trigger_radius", self get_offset_origin(), 0, 64, 200);
     flagtrig EnableLinkTo();
     flagtrig LinkTo(self);
-    while (flag("russian_flag_dropped")) {
+    while(flag("russian_flag_dropped")) {
       players = get_players();
-      for (i = 0; i < players.size; i++) {
+      for(i = 0; i < players.size; i++) {
         player = players[i];
         if(isDefined(player.allowFlagPickup) && !player.allowFlagPickup) {
           continue;
@@ -539,7 +539,7 @@ russian_flag_think() {
               flag_clear("russian_flag_dropped");
               flagtrig Unlink();
               flagtrig Delete();
-              while (player UseButtonPressed()) {
+              while(player UseButtonPressed()) {
                 wait(0.05);
               }
               array_thread(get_players(), ::russian_flag_hud_fadeout);
@@ -559,7 +559,7 @@ russian_flag_think() {
 
 kill_enemies_in_dome_after_flag_pickup() {
   level waittill("russian_flag_dropped");
-  while (flag("russian_flag_dropped")) {
+  while(flag("russian_flag_dropped")) {
     wait(0.1);
   }
   tags = [];
@@ -572,7 +572,7 @@ kill_enemies_in_dome_after_flag_pickup() {
   tags[6] = "j_clavicle_le";
   tags[7] = "j_clavicle_ri";
   axis_ai = GetAiArray("axis");
-  while (axis_ai.size > 0) {
+  while(axis_ai.size > 0) {
     i = randomint(axis_ai.size);
     tag = get_random(tags);
     if(is_mature()) {
@@ -604,7 +604,7 @@ russian_flag_player_carry(player) {
     level thread fail_mission_on_flag_carrier_death(player);
   }
   arcademode_assignpoints("arcademode_score_generic500", player);
-  while (player UseButtonPressed()) {
+  while(player UseButtonPressed()) {
     wait(0.05);
   }
 }
@@ -620,9 +620,9 @@ fail_mission_on_flag_carrier_death(player) {
 }
 
 spawn_highlight() {
-  highlight = Spawn("script_model", self.origin);
+  highlight = spawn("script_model", self.origin);
   highlight.angles = self.angles;
-  highlight SetModel("anim_berlin_rus_flag_rolled_obj");
+  highlight setModel("anim_berlin_rus_flag_rolled_obj");
   self.highlight = highlight;
 }
 
@@ -648,15 +648,15 @@ setup_spawn_functions() {
   group_add_spawn_function("spawner_foyer_redshirts_1", ::ai_safe_until_trigger, "trig_foyer_entrance", "targetname", 5);
   group_add_spawn_function("spawner_foyer_flagbearer_buddy", maps\ber3b_event_foyer::foyer_flagbearer_buddies_spawnfunc);
   group_add_spawn_function("spawner_foyer_pacing_friendly_hallrunners", maps\ber3b_event_foyer::foyer_pacing_friendly_hallrunners_spawnfunc);
-  array_thread(GetEntArray("spawner_parliament_enemy", "script_noteworthy"), ::add_spawn_function, maps\ber3b_event_parliament::parliament_enemy_spawnfunc);
+  array_thread(getEntArray("spawner_parliament_enemy", "script_noteworthy"), ::add_spawn_function, maps\ber3b_event_parliament::parliament_enemy_spawnfunc);
   group_add_spawn_function("spawner_parliament_flamer", maps\ber3b_event_parliament::flamer_setup);
-  array_thread(GetEntArray("spawner_parliament_flamer", "script_noteworthy"), ::add_spawn_function, maps\ber3b_event_parliament::flamer_setup);
+  array_thread(getEntArray("spawner_parliament_flamer", "script_noteworthy"), ::add_spawn_function, maps\ber3b_event_parliament::flamer_setup);
 }
 
 group_add_spawn_function(groupTN, spawnFunc, param1, param2, param3) {
-  group = GetEntArray(groupTN, "targetname");
+  group = getEntArray(groupTN, "targetname");
   ASSERTEX(isDefined(group) && group.size > 0, "Couldn't find group with targetname of '" + groupTN + "'.");
-  for (i = 0; i < group.size; i++) {
+  for(i = 0; i < group.size; i++) {
     group[i] add_spawn_function(spawnFunc, param1, param2, param3);
   }
 }
@@ -692,7 +692,7 @@ difficulty_scale() {
       break;
   }
   if(removeWeapons) {
-    pickups = GetEntArray("weapon_diff_remove", "targetname");
+    pickups = getEntArray("weapon_diff_remove", "targetname");
     array_thread(pickups, ::scr_delete);
   }
   array_thread(get_players(), ::player_set_threatbias);
@@ -701,7 +701,7 @@ difficulty_scale() {
 }
 
 player_set_threatbias() {
-  while (!isDefined(level.ber3b_player_threatbias)) {
+  while(!isDefined(level.ber3b_player_threatbias)) {
     wait(0.05);
   }
   self.threatbias = level.ber3b_player_threatbias;
@@ -710,10 +710,10 @@ player_set_threatbias() {
 super_enemies() {
   level endon("stop_super_enemies");
   level.superenemies = [];
-  while (1) {
+  while(1) {
     ais = GetAIArray("axis");
     if(array_validate(ais)) {
-      while (level.superenemies.size < (ais.size * level.ber3b_superenemy_frac)) {
+      while(level.superenemies.size < (ais.size * level.ber3b_superenemy_frac)) {
         level thread superenemy_create(ais);
       }
     }
@@ -723,7 +723,7 @@ super_enemies() {
 
 superenemy_create(ais) {
   guy = undefined;
-  for (i = 0; i < ais.size; i++) {
+  for(i = 0; i < ais.size; i++) {
     if(!isDefined(ais[i]) || isDefined(ais[i].isSuperEnemy)) {
       continue;
     } else {
@@ -744,10 +744,10 @@ superenemy_remove_on_death() {
 
 gimp_friendlies() {
   level endon("stop_gimping_friendlies");
-  while (1) {
+  while(1) {
     ais = GetAIArray("allies");
     if(array_validate(ais)) {
-      for (i = 0; i < ais.size; i++) {
+      for(i = 0; i < ais.size; i++) {
         if(ais[i].suppressionwait != level.ber3b_friendly_suppression_wait) {
           ais[i].suppressionwait = level.ber3b_friendly_suppression_wait;
         }
@@ -771,9 +771,9 @@ honorguard_combat_dialogue() {
   lines[6] = "berlin_never_yours";
   lines[7] = "take_them_with_you";
   lines_ogsize = lines.size;
-  while (1) {
+  while(1) {
     temp_lines = lines;
-    while (array_validate(temp_lines)) {
+    while(array_validate(temp_lines)) {
       theLine = temp_lines[RandomInt(temp_lines.size)];
       enemy = waittill_enemy_in_range_of_player(375);
       enemy say_dialogue("honorguard_misc", theLine, true, false);
@@ -784,14 +784,14 @@ honorguard_combat_dialogue() {
 }
 
 onPlayerConnect() {
-  while (1) {
+  while(1) {
     level waittill("connecting", player);
     player thread onPlayerSpawned();
   }
 }
 
 onPlayerSpawned() {
-  while (1) {
+  while(1) {
     self waittill("spawned_player");
     self thread player_set_threatbias();
   }

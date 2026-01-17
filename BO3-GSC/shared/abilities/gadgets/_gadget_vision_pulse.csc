@@ -17,16 +17,16 @@
 #namespace gadget_vision_pulse;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_vision_pulse", & __init__, undefined, undefined);
+  system::register("gadget_vision_pulse", &__init__, undefined, undefined);
 }
 
 function __init__() {
   if(!sessionmodeiscampaigngame()) {
-    callback::on_localplayer_spawned( & on_localplayer_spawned);
+    callback::on_localplayer_spawned(&on_localplayer_spawned);
     duplicate_render::set_dr_filter_offscreen("reveal_en", 50, "reveal_enemy", undefined, 2, "mc/hud_outline_model_z_red", 1);
     duplicate_render::set_dr_filter_offscreen("reveal_self", 50, "reveal_self", undefined, 2, "mc/hud_outline_model_z_red_alpha", 1);
   }
-  clientfield::register("toplayer", "vision_pulse_active", 1, 1, "int", & vision_pulse_changed, 0, 1);
+  clientfield::register("toplayer", "vision_pulse_active", 1, 1, "int", &vision_pulse_changed, 0, 1);
   visionset_mgr::register_visionset_info("vision_pulse", 1, 12, undefined, "vision_puls_bw");
 }
 
@@ -43,7 +43,7 @@ function on_localplayer_spawned(localclientnum) {
 
 function watch_emped(localclientnum) {
   self endon("entityshutdown");
-  while (true) {
+  while(true) {
     if(self isempjammed()) {
       self thread disableshader(localclientnum, 0);
       self notify("emp_jammed_vp");
@@ -85,7 +85,7 @@ function do_vision_world_pulse(localclientnum) {
   amount = 1;
   irisamount = 0;
   pulsemaxradius = 0;
-  while ((getservertime(localclientnum) - starttime) < 2000) {
+  while((getservertime(localclientnum) - starttime) < 2000) {
     elapsedtime = (getservertime(localclientnum) - starttime) * 1;
     if(elapsedtime < 200) {
       irisamount = elapsedtime / 200;
@@ -109,7 +109,7 @@ function do_vision_world_pulse(localclientnum) {
 }
 
 function vision_pulse_owner_valid(owner) {
-  if(isdefined(owner) && owner isplayer() && isalive(owner)) {
+  if(isDefined(owner) && owner isplayer() && isalive(owner)) {
     return true;
   }
   return false;
@@ -147,7 +147,7 @@ function do_vision_local_pulse(localclientnum) {
   filter::set_filter_vision_pulse_constant(localclientnum, 3, 9, origin[1]);
   filter::set_filter_vision_pulse_constant(localclientnum, 3, 7, 1);
   starttime = getservertime(localclientnum);
-  while ((getservertime(localclientnum) - starttime) < 4000) {
+  while((getservertime(localclientnum) - starttime) < 4000) {
     if((getservertime(localclientnum) - starttime) < 2000) {
       pulseradius = ((getservertime(localclientnum) - starttime) / 2000) * 2000;
     }
@@ -179,7 +179,7 @@ function do_reveal_enemy_pulse(localclientnum) {
   starttime = getservertime(localclientnum);
   currtime = starttime;
   self mapshaderconstant(localclientnum, 0, "scriptVector7", 0, 0, 0, 0);
-  while ((currtime - starttime) < 4000) {
+  while((currtime - starttime) < 4000) {
     if((currtime - starttime) > 3500) {
       value = float(((currtime - starttime) - 3500) / 500);
       self mapshaderconstant(localclientnum, 0, "scriptVector7", value, 0, 0, 0);
@@ -207,15 +207,15 @@ function set_reveal_self(localclientnum, on_off) {
 function gadget_visionpulse_reveal(localclientnum, breveal) {
   self notify("gadget_visionpulse_changed");
   player = getlocalplayer(localclientnum);
-  if(!isdefined(self.visionpulserevealself) && player == self) {
+  if(!isDefined(self.visionpulserevealself) && player == self) {
     self.visionpulserevealself = 0;
   }
-  if(!isdefined(self.visionpulsereveal)) {
+  if(!isDefined(self.visionpulsereveal)) {
     self.visionpulsereveal = 0;
   }
   if(player == self) {
     owner = self gadgetpulsegetowner(localclientnum);
-    if(self.visionpulserevealself != breveal || (isdefined(self.vision_pulse_owner) && isdefined(owner) && self.vision_pulse_owner != owner)) {
+    if(self.visionpulserevealself != breveal || (isDefined(self.vision_pulse_owner) && isDefined(owner) && self.vision_pulse_owner != owner)) {
       self.vision_pulse_owner = owner;
       self.visionpulserevealself = breveal;
       self set_reveal_self(localclientnum, breveal);

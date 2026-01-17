@@ -5,7 +5,6 @@
 
 #include scripts\core_common\compass;
 #include scripts\mp_common\load;
-
 #namespace mp_austria;
 
 event_handler[level_init] main(eventstruct) {

@@ -36,7 +36,7 @@ getstructarray(name, type) {
 }
 
 play_sound_in_space(localClientNum, alias, origin) {
-  PlaySound(localClientNum, alias, origin);
+  playSound(localClientNum, alias, origin);
 }
 
 vectorScale(vector, scale) {
@@ -52,21 +52,21 @@ vector_multiply(vec, dif) {
 array_thread(entities, process, var1, var2, var3) {
   keys = getArrayKeys(entities);
   if(isDefined(var3)) {
-    for (i = 0; i < keys.size; i++)
+    for(i = 0; i < keys.size; i++)
       entities[keys[i]] thread[[process]](var1, var2, var3);
     return;
   }
   if(isDefined(var2)) {
-    for (i = 0; i < keys.size; i++)
+    for(i = 0; i < keys.size; i++)
       entities[keys[i]] thread[[process]](var1, var2);
     return;
   }
   if(isDefined(var1)) {
-    for (i = 0; i < keys.size; i++)
+    for(i = 0; i < keys.size; i++)
       entities[keys[i]] thread[[process]](var1);
     return;
   }
-  for (i = 0; i < keys.size; i++)
+  for(i = 0; i < keys.size; i++)
     entities[keys[i]] thread[[process]]();
 }
 
@@ -82,7 +82,7 @@ registerSystem(sSysName, cbFunc) {
     error("Attempt to re-register client system : " + sSysName);
     return;
   } else {
-    level._systemStates[sSysName] = spawnstruct();
+    level._systemStates[sSysName] = spawnStruct();
     level._systemStates[sSysName].callback = cbFunc;
   }
 }
@@ -99,11 +99,11 @@ loop_fx_sound(clientNum, alias, origin, ender) {
     self endon(ender);
   }
   setfakeentorg(clientNum, entId, origin);
-  playloopsound(clientNum, entId, alias);
+  playLoopSound(clientNum, entId, alias);
 }
 
 waitforclient(client) {
-  while (!clienthassnapshot(client)) {
+  while(!clienthassnapshot(client)) {
     wait(0.01);
   }
   syncsystemstates(client);
@@ -111,7 +111,7 @@ waitforclient(client) {
 
 within_fov(start_origin, start_angles, end_origin, fov) {
   normal = VectorNormalize(end_origin - start_origin);
-  forward = AnglesToForward(start_angles);
+  forward = anglesToForward(start_angles);
   dot = VectorDot(forward, normal);
   return dot >= fov;
 }

@@ -54,7 +54,7 @@ start_ai_rappel(time_to_rappel, rappel_point_struct, create_rope, delete_rope) {
     rappel_end = getstruct(rappel_start.target, "targetname");
   else {
     rappel_end_pos = physicstrace(rappel_start.origin, rappel_start.origin - vectorscale((0, 0, 1), 10000.0));
-    rappel_end = spawnstruct();
+    rappel_end = spawnStruct();
     rappel_end.origin = rappel_end_pos;
     rappel_face_player = 1;
   }

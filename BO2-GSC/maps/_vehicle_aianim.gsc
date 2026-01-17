@@ -292,7 +292,7 @@ vehicle_get_riders() {
 get_my_vehicleride() {
   array = [];
   assert(isDefined(self.script_vehicleride), "Tried to get my ride but I have no .script_vehicleride");
-  vehicles = getentarray("script_vehicle", "classname");
+  vehicles = getEntArray("script_vehicle", "classname");
 
   for(i = 0; i < vehicles.size; i++) {
     vehicle = vehicles[i];
@@ -1099,7 +1099,7 @@ getout_rigspawn(animatemodel, pos, bidletillunload) {
   getoutrig_model = spawn("script_model", origin);
   getoutrig_model.angles = angles;
   getoutrig_model.origin = origin;
-  getoutrig_model setmodel(level.vehicle_attachedmodels[type][animpos.getoutrig].model);
+  getoutrig_model setModel(level.vehicle_attachedmodels[type][animpos.getoutrig].model);
   self.getoutrig[animpos.getoutrig] = getoutrig_model;
   getoutrig_model useanimtree(#animtree);
   getoutrig_model setforcenocull();
@@ -1465,7 +1465,7 @@ animontag_ragdoll_death(guy, vehicle) {
     return;
   }
   if(!isai(guy))
-    guy setcandamage(1);
+    guy setCanDamage(1);
 
   guy endon("anim_on_tag_done");
   guy thread animontag_ragdoll_death_watch_for_damage();
@@ -1585,9 +1585,7 @@ guy_vehicle_death(guy) {
   if(isDefined(guy)) {
     origin = guy.origin;
     guy delete();
-    [
-      [level.global_kill_func]
-    ]("MOD_RIFLE_BULLET", "torso_upper", origin);
+    [[level.global_kill_func]]("MOD_RIFLE_BULLET", "torso_upper", origin);
   }
 }
 
@@ -1845,7 +1843,7 @@ guy_blowup(guy) {
   origin = guy.origin;
 
   if(isDefined(anim_pos.explosion_death_offset)) {
-    origin = origin + vectorscale(anglestoforward(angles), anim_pos.explosion_death_offset[0]);
+    origin = origin + vectorscale(anglesToForward(angles), anim_pos.explosion_death_offset[0]);
     origin = origin + vectorscale(anglestoright(angles), anim_pos.explosion_death_offset[1]);
     origin = origin + vectorscale(anglestoup(angles), anim_pos.explosion_death_offset[2]);
   }
@@ -1904,7 +1902,7 @@ convert_guy_to_drone(guy, bkeepguy) {
 
   model = spawn("script_model", guy.origin);
   model.angles = guy.angles;
-  model setmodel(guy.model);
+  model setModel(guy.model);
   size = guy getattachsize();
 
   for(i = 0; i < size; i++)
@@ -1933,7 +1931,7 @@ vehicle_getinstart(pos) {
 }
 
 vehicle_getanimstart(animation, tag, pos) {
-  struct = spawnstruct();
+  struct = spawnStruct();
   origin = undefined;
   angles = undefined;
   assert(isDefined(animation));
@@ -1963,7 +1961,7 @@ get_availablepositions() {
     }
   }
 
-  struct = spawnstruct();
+  struct = spawnStruct();
   struct.availablepositions = availablepositions;
   struct.nonanimatedpositions = nonanimatedpositions;
   return struct;
@@ -2151,7 +2149,7 @@ vehiclewalker_updategoalpos(tank, option) {
     }
 
     if(isDefined(option) && option == "once") {
-      trace = bullettrace(position + vectorscale((0, 0, 1), 100.0), position - vectorscale((0, 0, 1), 500.0), 0, undefined);
+      trace = bulletTrace(position + vectorscale((0, 0, 1), 100.0), position - vectorscale((0, 0, 1), 500.0), 0, undefined);
 
       if(self.followmode == "close")
         self teleport(trace["position"]);
@@ -2163,7 +2161,7 @@ vehiclewalker_updategoalpos(tank, option) {
     tankspeed = tank getspeedmph();
 
     if(tankspeed > 0) {
-      trace = bullettrace(position + vectorscale((0, 0, 1), 100.0), position - vectorscale((0, 0, 1), 500.0), 0, undefined);
+      trace = bulletTrace(position + vectorscale((0, 0, 1), 100.0), position - vectorscale((0, 0, 1), 500.0), 0, undefined);
       self setgoalpos(trace["position"]);
     }
 
@@ -2246,7 +2244,7 @@ override_anim(action, tag, animation) {
   assert(isDefined(pos), "_vehicle_aianim::override_anim - No valid position set up for tag '" + tag + "' on vehicle of type '" + self.vehicletype + "'.");
 
   if(!isDefined(self.vehicle_aianims) || !isDefined(self.vehicle_aianims[pos]))
-    self.vehicle_aianims[pos] = spawnstruct();
+    self.vehicle_aianims[pos] = spawnStruct();
 
   switch (action) {
     case "getin":

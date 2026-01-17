@@ -8,7 +8,7 @@
 #namespace demo;
 
 function autoexec __init__sytem__() {
-  system::register("demo", & __init__, undefined, undefined);
+  system::register("demo", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -30,26 +30,26 @@ function bookmark(type, time, mainclientent, otherclientent, eventpriority, infl
   inflictorbirthtime = 0;
   actorentnum = undefined;
   scoreeventpriority = 0;
-  if(isdefined(mainclientent)) {
+  if(isDefined(mainclientent)) {
     mainclientnum = mainclientent getentitynumber();
   }
-  if(isdefined(otherclientent)) {
+  if(isDefined(otherclientent)) {
     otherclientnum = otherclientent getentitynumber();
   }
-  if(isdefined(eventpriority)) {
+  if(isDefined(eventpriority)) {
     scoreeventpriority = eventpriority;
   }
-  if(isdefined(inflictorent)) {
+  if(isDefined(inflictorent)) {
     inflictorentnum = inflictorent getentitynumber();
     inflictorenttype = inflictorent getentitytype();
-    if(isdefined(inflictorent.birthtime)) {
+    if(isDefined(inflictorent.birthtime)) {
       inflictorbirthtime = inflictorent.birthtime;
     }
   }
-  if(!isdefined(overrideentitycamera)) {
+  if(!isDefined(overrideentitycamera)) {
     overrideentitycamera = 0;
   }
-  if(isdefined(actorent)) {
+  if(isDefined(actorent)) {
     actorentnum = actorent getentitynumber();
   }
   adddemobookmark(type, time, mainclientnum, otherclientnum, scoreeventpriority, inflictorentnum, inflictorenttype, inflictorbirthtime, overrideentitycamera, actorentnum);
@@ -64,30 +64,30 @@ function gameresultbookmark(type, winningteamindex, losingteamindex) {
   inflictorbirthtime = 0;
   overrideentitycamera = 0;
   actorentnum = undefined;
-  if(isdefined(winningteamindex)) {
+  if(isDefined(winningteamindex)) {
     mainclientnum = winningteamindex;
   }
-  if(isdefined(losingteamindex)) {
+  if(isDefined(losingteamindex)) {
     otherclientnum = losingteamindex;
   }
   adddemobookmark(type, gettime(), mainclientnum, otherclientnum, scoreeventpriority, inflictorentnum, inflictorenttype, inflictorbirthtime, overrideentitycamera, actorentnum);
 }
 
 function reset_actor_bookmark_kill_times() {
-  if(!isdefined(level.actorbookmarkparamsinitialized)) {
+  if(!isDefined(level.actorbookmarkparamsinitialized)) {
     return;
   }
-  if(!isdefined(self.actor_bookmark_kill_times)) {
+  if(!isDefined(self.actor_bookmark_kill_times)) {
     self.actor_bookmark_kill_times = [];
     self.ignore_actor_kill_times = 0;
   }
-  for (i = 0; i < level.actor_bookmark_kill_times_count; i++) {
+  for(i = 0; i < level.actor_bookmark_kill_times_count; i++) {
     self.actor_bookmark_kill_times[i] = 0;
   }
 }
 
 function add_actor_bookmark_kill_time() {
-  if(!isdefined(level.actorbookmarkparamsinitialized)) {
+  if(!isDefined(level.actorbookmarkparamsinitialized)) {
     return;
   }
   now = gettime();
@@ -96,7 +96,7 @@ function add_actor_bookmark_kill_time() {
   }
   oldest_index = 0;
   oldest_time = now + 1;
-  for (i = 0; i < level.actor_bookmark_kill_times_count; i++) {
+  for(i = 0; i < level.actor_bookmark_kill_times_count; i++) {
     if(!self.actor_bookmark_kill_times[i]) {
       oldest_index = i;
       break;
@@ -111,8 +111,8 @@ function add_actor_bookmark_kill_time() {
 }
 
 function watch_actor_bookmarks() {
-  while (true) {
-    if(!isdefined(level.actorbookmarkparamsinitialized)) {
+  while(true) {
+    if(!isDefined(level.actorbookmarkparamsinitialized)) {
       wait(0.5);
       continue;
     }
@@ -121,13 +121,13 @@ function watch_actor_bookmarks() {
     now = gettime();
     oldest_allowed = now - level.actor_bookmark_kill_times_msec;
     players = getplayers();
-    for (player_index = 0; player_index < players.size; player_index++) {
+    for(player_index = 0; player_index < players.size; player_index++) {
       player = players[player_index];
-      if(isdefined(player.pers[""]) && player.pers[""]) {
+      if(isDefined(player.pers[""]) && player.pers[""]) {
         continue;
       }
-      for (time_index = 0; time_index < level.actor_bookmark_kill_times_count; time_index++) {
-        if(!isdefined(player.actor_bookmark_kill_times) || !player.actor_bookmark_kill_times[time_index]) {
+      for(time_index = 0; time_index < level.actor_bookmark_kill_times_count; time_index++) {
+        if(!isDefined(player.actor_bookmark_kill_times) || !player.actor_bookmark_kill_times[time_index]) {
           break;
           continue;
         }

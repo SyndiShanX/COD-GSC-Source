@@ -39,7 +39,7 @@ init_game_mode_objects(mode, location) {
         players = getlocalplayers();
 
         for(i = 0; i < players.size; i++) {
-          trigs = getentarray(i, "vision_trig", "targetname");
+          trigs = getEntArray(i, "vision_trig", "targetname");
 
           foreach(trig in trigs)
           trig delete();
@@ -87,7 +87,7 @@ setup_game_mode_objects(mode, location) {
         object.angles = structs[i].angles;
 
       if(isDefined(structs[i].script_parameters))
-        object setmodel(structs[i].script_parameters);
+        object setModel(structs[i].script_parameters);
 
       spawned++;
       object.local_owner = x;
@@ -149,7 +149,7 @@ door_init(team, doornum) {
           door.angles = spot.angles;
 
         if(isDefined(spot.script_parameters)) {
-          door setmodel(spot.script_parameters);
+          door setModel(spot.script_parameters);
           door thread door_wobble();
         }
 
@@ -171,7 +171,7 @@ door_init(team, doornum) {
           arrow.angles = spot.angles;
 
         if(isDefined(spot.script_parameters))
-          arrow setmodel(spot.script_parameters);
+          arrow setModel(spot.script_parameters);
 
         if(isDefined(spot.targetname))
           arrow._start_scroll = 1;
@@ -227,7 +227,7 @@ door_monitor(team, doornum, spots, doors, signs) {
           door.angles = spots[i].angles;
 
         if(isDefined(spots[i].script_parameters)) {
-          door setmodel("pb_couch");
+          door setModel("pb_couch");
           door thread door_wobble(x);
         }
 
@@ -285,10 +285,10 @@ clean_up_doors_and_signs_on_race_end() {
 
 set_arrow_model(arrows, model) {
   for(i = 0; i < arrows.size; i++) {
-    arrows[i] setmodel(model);
+    arrows[i] setModel(model);
 
     if(model == "p6_zm_sign_neon_arrow_on_green")
-      arrows[i] playsound(0, "zmb_arrow_buzz");
+      arrows[i] playSound(0, "zmb_arrow_buzz");
   }
 }
 
@@ -321,9 +321,9 @@ zombie_soul_runner(localclientnum, fx_name, dest) {
     return;
   }
   level.current_soul_runners++;
-  playfxontag(localclientnum, level._effect[fx_name], self, "tag_origin");
-  playsound(0, "zmb_souls_start", self.origin);
-  self playloopsound("zmb_souls_loop", 0.75);
+  playFXOnTag(localclientnum, level._effect[fx_name], self, "tag_origin");
+  playSound(0, "zmb_souls_start", self.origin);
+  self playLoopSound("zmb_souls_loop", 0.75);
   dist = distance(dest.origin, self.origin);
   time = dist / 700;
   self moveto(dest.origin, time);
@@ -338,7 +338,7 @@ zombie_soul_runner(localclientnum, fx_name, dest) {
     self waittill("movedone");
   }
 
-  playsound(0, "zmb_souls_end", self.origin);
+  playSound(0, "zmb_souls_end", self.origin);
   self delete();
   level.current_soul_runners--;
 }
@@ -352,12 +352,12 @@ team_1_zombie_release_soul(localclientnum, set, newent) {
 
   for(i = 0; i < players.size; i++) {
     if(!isDefined(door)) {
-      playfx(i, level._effect["zomb_gib"], self.origin);
+      playFX(i, level._effect["zomb_gib"], self.origin);
       continue;
     }
 
     e = spawn(i, self.origin + vectorscale((0, 0, 1), 40.0), "script_model");
-    e setmodel("tag_origin");
+    e setModel("tag_origin");
     e thread zombie_soul_runner(i, "race_soul_trail", door);
   }
 }
@@ -371,12 +371,12 @@ team_2_zombie_release_soul(localclientnum, set, newent) {
 
   for(i = 0; i < players.size; i++) {
     if(!isDefined(door)) {
-      playfx(i, level._effect["zomb_gib"], self.origin);
+      playFX(i, level._effect["zomb_gib"], self.origin);
       continue;
     }
 
     e = spawn(i, self.origin + vectorscale((0, 0, 1), 40.0), "script_model");
-    e setmodel("tag_origin");
+    e setModel("tag_origin");
     e thread zombie_soul_runner(i, "race_soul_trail", door);
   }
 }
@@ -390,12 +390,12 @@ team_1_zombie_release_grief_soul(localclientnum, set, newent) {
 
   for(i = 0; i < players.size; i++) {
     if(!isDefined(door)) {
-      playfx(i, level._effect["zomb_gib"], self.origin);
+      playFX(i, level._effect["zomb_gib"], self.origin);
       continue;
     }
 
     e = spawn(i, self.origin + vectorscale((0, 0, 1), 40.0), "script_model");
-    e setmodel("tag_origin");
+    e setModel("tag_origin");
     e thread zombie_soul_runner(i, "race_soul_trail_green", door);
   }
 }
@@ -409,12 +409,12 @@ team_2_zombie_release_grief_soul(localclientnum, set, newent) {
 
   for(i = 0; i < players.size; i++) {
     if(!isDefined(door)) {
-      playfx(i, level._effect["zomb_gib"], self.origin);
+      playFX(i, level._effect["zomb_gib"], self.origin);
       continue;
     }
 
     e = spawn(i, self.origin + vectorscale((0, 0, 1), 40.0), "script_model");
-    e setmodel("tag_origin");
+    e setModel("tag_origin");
     e thread zombie_soul_runner(i, "race_soul_trail_green", door);
   }
 }
@@ -511,7 +511,7 @@ animate_sign(animated_panels) {
 
   while(true) {
     for(i = 1; i < 5; i++) {
-      self setmodel("p6_zm_sign_" + mode + "_0" + sign_variant + "_step" + i);
+      self setModel("p6_zm_sign_" + mode + "_0" + sign_variant + "_step" + i);
       wait(randomfloatrange(0.75, 1.5));
     }
 

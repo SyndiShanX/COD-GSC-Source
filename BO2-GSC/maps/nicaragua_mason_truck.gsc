@@ -140,7 +140,7 @@ mason_truck_player_uses_turret(vh_truck) {
   self waittill("exit_vehicle");
   flag_clear("player_using_truck_turret");
   spawn_manager_disable("mason_truck_turret_enemies_sm");
-  a_s_spawner = getentarray("mason_truck_turret_enemies", "targetname");
+  a_s_spawner = getEntArray("mason_truck_turret_enemies", "targetname");
 
   foreach(spawner in a_s_spawner) {
     if(isDefined(spawner))
@@ -188,7 +188,7 @@ mason_truck_begin() {
   vh_truck.overridevehicledamage = ::mason_truck_damage_override;
   vh_truck mason_truck_add_occupants();
   vh_truck thread go_path(getnode("mason_truck_path", "targetname"));
-  vh_truck playsound("evt_mason_truck_approach");
+  vh_truck playSound("evt_mason_truck_approach");
   vh_truck thread mason_truck_shoots();
   level.player thread mason_truck_player_uses_turret(vh_truck);
   vh_truck waittill("mason_truck_decision_point");
@@ -233,7 +233,7 @@ mason_truck_turnout_explode() {
 
 truck_horn_sound(ent) {
   wait 1.5;
-  ent playloopsound("amb_pickup_horn");
+  ent playLoopSound("amb_pickup_horn");
   wait 25;
   ent stoploopsound(3);
   wait 4;
@@ -386,7 +386,7 @@ re_link_passenger_to_truck() {
 
 mason_truck_passengers_getout() {
   self vehicle_unload(0.1);
-  a_ai_passengers = getentarray("mason_truck_occupant_ai", "targetname");
+  a_ai_passengers = getEntArray("mason_truck_occupant_ai", "targetname");
   e_goalvolume = getent("mason_truck_riders_goalvolume", "targetname");
 
   foreach(guy in a_ai_passengers) {

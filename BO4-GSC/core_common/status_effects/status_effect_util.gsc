@@ -10,10 +10,9 @@
 #include scripts\core_common\globallogic\globallogic_score;
 #include scripts\core_common\player\player_role;
 #include scripts\core_common\util_shared;
-
 #namespace status_effect;
 
-private register_status_effect(status_effect_type) {
+register_status_effect(status_effect_type) {
   if(!isDefined(level._status_effects)) {
     level._status_effects = [];
   }
@@ -45,7 +44,7 @@ register_status_effect_callback_apply(status_effect, apply_func) {
   }
 }
 
-private function_b24f18a1() {
+function_b24f18a1() {
   if(isDefined(self.owner)) {
     if(function_7d17822(self.setype)) {
       self.owner function_89ae38c1(self.namehash);
@@ -94,7 +93,7 @@ function_e2bff3ce(status_effect_type, weapon, applicant) {
   }
 }
 
-private function_91a9db75(sourcetype, setype, namehash) {
+function_91a9db75(sourcetype, setype, namehash) {
   if(!isDefined(self.var_121392a1)) {
     self.var_121392a1 = [];
   }
@@ -252,7 +251,7 @@ status_effect_apply(var_756fda07, weapon, applicant, isadditive, durationoverrid
   }
 }
 
-private function_35d7925d(effect) {
+function_35d7925d(effect) {
   effect endon(#"endstatuseffect");
   self endon(#"death");
 
@@ -269,7 +268,7 @@ private function_35d7925d(effect) {
   }
 }
 
-private function_47cad1aa(var_756fda07, isadditive) {
+function_47cad1aa(var_756fda07, isadditive) {
   var_18d16a6b = var_756fda07.var_18d16a6b;
   setype = var_756fda07.setype;
 
@@ -283,13 +282,13 @@ private function_47cad1aa(var_756fda07, isadditive) {
   }
 }
 
-private function_89ae38c1(sename) {
+function_89ae38c1(sename) {
   if(isplayer(self)) {
     self endstatuseffect(sename);
   }
 }
 
-private function_52969ffe(var_756fda07) {
+function_52969ffe(var_756fda07) {
   player = self;
 
   if(isDefined(var_756fda07.var_3edb6e25) && var_756fda07.var_3edb6e25 && isplayer(player)) {
@@ -298,7 +297,7 @@ private function_52969ffe(var_756fda07) {
   }
 }
 
-private function_14fdd7e2(var_756fda07) {
+function_14fdd7e2(var_756fda07) {
   player = self;
 
   if(isDefined(var_756fda07.var_3edb6e25) && var_756fda07.var_3edb6e25 && isplayer(player)) {
@@ -307,7 +306,7 @@ private function_14fdd7e2(var_756fda07) {
   }
 }
 
-private function_6bf7c434(status_effect_type) {
+function_6bf7c434(status_effect_type) {
   if(isDefined(self.var_b5207a36)) {
     self.owner stopgestureviewmodel(self.var_b5207a36, 1, 0);
     self.var_b5207a36 = undefined;
@@ -333,13 +332,13 @@ private function_6bf7c434(status_effect_type) {
   self notify(#"endstatuseffect");
 }
 
-private wait_for_end() {
+wait_for_end() {
   if(0 && self.setype == 6) {
     return;
   }
 
   self notify(#"endwaiter");
-  self endon(#"endwaiter", #"endstatuseffect");
+  self endon(#"endwaiter", # "endstatuseffect");
   self.owner endon(#"disconnect");
 
   while(self.endtime > level.time) {
@@ -373,7 +372,7 @@ function_6519f95f() {
   }
 }
 
-private handle_sounds(var_756fda07) {
+handle_sounds(var_756fda07) {
   endtime = self.endtime;
 
   if(isDefined(var_756fda07.var_b86e9a5e)) {
@@ -441,7 +440,7 @@ function_4617032e(status_effect_type) {
   return false;
 }
 
-private function_40293e80(status_effect_type) {
+function_40293e80(status_effect_type) {
   if(status_effect_type == 3) {
     return "flakjacket";
   }
@@ -449,7 +448,7 @@ private function_40293e80(status_effect_type) {
   return "resistance";
 }
 
-private update_duration(var_756fda07, var_b0144580, durationoverride, applicant, var_f8f8abaa, weapon) {
+update_duration(var_756fda07, var_b0144580, durationoverride, applicant, var_f8f8abaa, weapon) {
   setype = var_756fda07.setype;
   resistance = self function_a6613b51(var_756fda07);
   var_fb887b00 = var_b0144580 ? self.owner function_37683813() : 1;
@@ -502,7 +501,7 @@ private update_duration(var_756fda07, var_b0144580, durationoverride, applicant,
   self.endtime = time + self.duration;
 }
 
-private function_57f33b96(var_756fda07, var_b0144580, durationoverride, applicant, var_f8f8abaa, weapon) {
+function_57f33b96(var_756fda07, var_b0144580, durationoverride, applicant, var_f8f8abaa, weapon) {
   setype = var_756fda07.setype;
   resistance = self function_a6613b51(var_756fda07);
 
@@ -564,15 +563,15 @@ private function_57f33b96(var_756fda07, var_b0144580, durationoverride, applican
   self.endtime = time + newduration;
 }
 
-private function_5d973c5f() {
+function_5d973c5f() {
   self thread function_72886b31();
   self thread function_150a8541();
 }
 
 function_150a8541() {
   self notify(#"loadoutwatcher");
-  self endon(#"loadoutwatcher", #"endstatuseffect");
-  self.owner endon(#"death", #"disconnect");
+  self endon(#"loadoutwatcher", # "endstatuseffect");
+  self.owner endon(#"death", # "disconnect");
   var_eff9d37f = self.owner function_3c54ae98(self.setype);
 
   while(true) {
@@ -591,7 +590,7 @@ function_150a8541() {
 
 function_72886b31() {
   self notify(#"deathwatcher");
-  self endon(#"deathwatcher", #"endstatuseffect");
+  self endon(#"deathwatcher", # "endstatuseffect");
   self.owner waittill(#"death");
 
   if(isDefined(self.var_4b22e697)) {
@@ -627,7 +626,7 @@ function_37683813() {
   return scalar;
 }
 
-private function_a6613b51(var_756fda07) {
+function_a6613b51(var_756fda07) {
   effect = self;
   setype = var_756fda07.setype;
   resistance = effect.owner function_3c54ae98(setype);
@@ -643,14 +642,14 @@ private function_a6613b51(var_756fda07) {
   return resistance;
 }
 
-private function_f9ca1b6a(var_756fda07) {
+function_f9ca1b6a(var_756fda07) {
   effect = self;
   resistance = effect function_a6613b51(var_756fda07);
   maxduration = int(var_756fda07.var_ca171ecc * (1 - resistance));
   return maxduration;
 }
 
-private function_7d17822(status_effect_type) {
+function_7d17822(status_effect_type) {
   return status_effect_type < 9;
 }
 
@@ -666,7 +665,7 @@ function_86c0eb67(status_effect, var_3bc85d80) {
   [[level.var_90391bcc]](status_effect, var_3bc85d80);
 }
 
-private function_4aac137f(var_19201a97, sourcetype) {
+function_4aac137f(var_19201a97, sourcetype) {
   gametime = level.time;
   endtime = function_2ba2756c(sourcetype);
   isactive = function_2ba2756c(sourcetype) > gametime;

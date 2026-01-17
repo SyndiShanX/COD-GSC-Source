@@ -8,7 +8,7 @@
 main() {
   self endon("killanimscript");
 
-  if(isdefined(self.enemy) && isdefined(self.enemy.syncedMeleeTarget) && self.enemy.syncedMeleeTarget == self) {
+  if(isDefined(self.enemy) && isDefined(self.enemy.syncedMeleeTarget) && self.enemy.syncedMeleeTarget == self) {
     self unlink();
     self.enemy.syncedMeleeTarget = undefined;
   }

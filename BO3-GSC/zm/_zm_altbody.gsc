@@ -27,7 +27,7 @@
 #namespace zm_altbody;
 
 function autoexec __init__sytem__() {
-  system::register("zm_altbody", & __init__, undefined, undefined);
+  system::register("zm_altbody", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -38,25 +38,25 @@ function __init__() {
 }
 
 function init(name, kiosk_name, trigger_hint, visionset_name, visionset_priority, loadout, character_index, enter_callback, exit_callback, allow_callback, notrigger_hint, var_1982079a) {
-  if(!isdefined(level.altbody_enter_callbacks)) {
+  if(!isDefined(level.altbody_enter_callbacks)) {
     level.altbody_enter_callbacks = [];
   }
-  if(!isdefined(level.altbody_exit_callbacks)) {
+  if(!isDefined(level.altbody_exit_callbacks)) {
     level.altbody_exit_callbacks = [];
   }
-  if(!isdefined(level.altbody_allow_callbacks)) {
+  if(!isDefined(level.altbody_allow_callbacks)) {
     level.altbody_allow_callbacks = [];
   }
-  if(!isdefined(level.altbody_loadouts)) {
+  if(!isDefined(level.altbody_loadouts)) {
     level.altbody_loadouts = [];
   }
-  if(!isdefined(level.altbody_visionsets)) {
+  if(!isDefined(level.altbody_visionsets)) {
     level.altbody_visionsets = [];
   }
-  if(!isdefined(level.altbody_charindexes)) {
+  if(!isDefined(level.altbody_charindexes)) {
     level.altbody_charindexes = [];
   }
-  if(isdefined(visionset_name)) {
+  if(isDefined(visionset_name)) {
     level.altbody_visionsets[name] = visionset_name;
     visionset_mgr::register_info("visionset", visionset_name, 1, visionset_priority, 1, 1);
   }
@@ -73,7 +73,7 @@ function init(name, kiosk_name, trigger_hint, visionset_name, visionset_priority
 function function_a2c7acf5() {
   level waittill("end_game");
   players = getplayers();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i] notify("altbody_end");
   }
 }
@@ -83,7 +83,7 @@ function devgui_start_altbody(name) {
 }
 
 function private function_3c17a460(trigger, name) {
-  if(self.is_drinking > 0 && (!(isdefined(self.trigger_kiosks_in_altbody) && self.trigger_kiosks_in_altbody))) {
+  if(self.is_drinking > 0 && (!(isDefined(self.trigger_kiosks_in_altbody) && self.trigger_kiosks_in_altbody))) {
     return false;
   }
   if(self zm_utility::in_revive_trigger()) {
@@ -99,7 +99,7 @@ function private function_3c17a460(trigger, name) {
     return false;
   }
   callback = level.altbody_allow_callbacks[name];
-  if(isdefined(callback)) {
+  if(isDefined(callback)) {
     if(!self[[callback]](name, trigger.kiosk)) {
       return false;
     }
@@ -108,10 +108,10 @@ function private function_3c17a460(trigger, name) {
 }
 
 function private player_can_altbody(kiosk, name) {
-  if(isdefined(self.altbody) && self.altbody) {
+  if(isDefined(self.altbody) && self.altbody) {
     return false;
   }
-  if(self.is_drinking > 0 && (!(isdefined(self.trigger_kiosks_in_altbody) && self.trigger_kiosks_in_altbody))) {
+  if(self.is_drinking > 0 && (!(isDefined(self.trigger_kiosks_in_altbody) && self.trigger_kiosks_in_altbody))) {
     return false;
   }
   if(self zm_utility::in_revive_trigger()) {
@@ -127,7 +127,7 @@ function private player_can_altbody(kiosk, name) {
     return false;
   }
   callback = level.altbody_allow_callbacks[name];
-  if(isdefined(callback)) {
+  if(isDefined(callback)) {
     if(!self[[callback]](name, kiosk)) {
       return false;
     }
@@ -165,7 +165,7 @@ function private function_1f9554ce() {
   self endon("disconnect");
   was_inv = self enableinvulnerability();
   wait(1);
-  if(isdefined(self) && (!(isdefined(was_inv) && was_inv))) {
+  if(isDefined(self) && (!(isDefined(was_inv) && was_inv))) {
     self disableinvulnerability();
   }
 }
@@ -187,23 +187,23 @@ function private player_enter_altbody(name, trigger) {
   self player_apply_loadout(name);
   self thread player_apply_visionset(name);
   callback = level.altbody_enter_callbacks[name];
-  if(isdefined(callback)) {
+  if(isDefined(callback)) {
     self[[callback]](name, trigger);
   }
   clientfield::set("player_altbody", 1);
 }
 
 function private player_apply_visionset(name) {
-  if(!isdefined(self.altbody_visionset)) {
+  if(!isDefined(self.altbody_visionset)) {
     self.altbody_visionset = [];
   }
   visionset = level.altbody_visionsets[name];
-  if(isdefined(visionset)) {
-    if(isdefined(self.altbody_visionset[name]) && self.altbody_visionset[name]) {
+  if(isDefined(visionset)) {
+    if(isDefined(self.altbody_visionset[name]) && self.altbody_visionset[name]) {
       visionset_mgr::deactivate("visionset", visionset, self);
       util::wait_network_frame();
       util::wait_network_frame();
-      if(!isdefined(self)) {
+      if(!isDefined(self)) {
         return;
       }
     }
@@ -215,16 +215,16 @@ function private player_apply_visionset(name) {
 function private player_apply_loadout(name) {
   self bgb::suspend_weapon_cycling();
   loadout = level.altbody_loadouts[name];
-  if(isdefined(loadout)) {
+  if(isDefined(loadout)) {
     self disableweaponcycling();
-    assert(!isdefined(self.get_player_weapon_limit));
-    self.get_player_weapon_limit = & get_altbody_weapon_limit;
+    assert(!isDefined(self.get_player_weapon_limit));
+    self.get_player_weapon_limit = &get_altbody_weapon_limit;
     self.altbody_loadout[name] = zm_weapons::player_get_loadout();
     self zm_weapons::player_give_loadout(loadout, 0, 1);
-    if(!isdefined(self.altbody_loadout_ever_had)) {
+    if(!isDefined(self.altbody_loadout_ever_had)) {
       self.altbody_loadout_ever_had = [];
     }
-    if(isdefined(self.altbody_loadout_ever_had[name]) && self.altbody_loadout_ever_had[name]) {
+    if(isDefined(self.altbody_loadout_ever_had[name]) && self.altbody_loadout_ever_had[name]) {
       self seteverhadweaponall(1);
     }
     self.altbody_loadout_ever_had[name] = 1;
@@ -237,14 +237,14 @@ function private player_exit_altbody(name, trigger) {
   clientfield::set("player_altbody", 0);
   clientfield::set_to_player("player_in_afterlife", 0);
   callback = level.altbody_exit_callbacks[name];
-  if(isdefined(callback)) {
+  if(isDefined(callback)) {
     self[[callback]](name, trigger);
   }
-  if(!isdefined(self.altbody_visionset)) {
+  if(!isDefined(self.altbody_visionset)) {
     self.altbody_visionset = [];
   }
   visionset = level.altbody_visionsets[name];
-  if(isdefined(visionset)) {
+  if(isDefined(visionset)) {
     visionset_mgr::deactivate("visionset", visionset, self);
     self.altbody_visionset[name] = 0;
   }
@@ -257,14 +257,14 @@ function private player_exit_altbody(name, trigger) {
 
 function private player_restore_loadout(name, trigger) {
   loadout = level.altbody_loadouts[name];
-  if(isdefined(loadout)) {
-    if(isdefined(self.altbody_loadout[name])) {
+  if(isDefined(loadout)) {
+    if(isDefined(self.altbody_loadout[name])) {
       self zm_weapons::switch_back_primary_weapon(self.altbody_loadout[name].current, 1);
       self.altbody_loadout[name] = undefined;
       self util::waittill_any_timeout(1, "weapon_change_complete");
     }
     self zm_weapons::player_take_loadout(loadout);
-    assert(self.get_player_weapon_limit == ( & get_altbody_weapon_limit));
+    assert(self.get_player_weapon_limit == (&get_altbody_weapon_limit));
     self.get_player_weapon_limit = undefined;
     self resetanimations();
     self enableweaponcycling();
@@ -274,16 +274,16 @@ function private player_restore_loadout(name, trigger) {
 
 function function_72c3fae0(washuman) {
   if(washuman) {
-    playfx(level._effect["human_disappears"], self.origin);
+    playFX(level._effect["human_disappears"], self.origin);
   } else {
-    playfx(level._effect["zombie_disappears"], self.origin);
+    playFX(level._effect["zombie_disappears"], self.origin);
     playsoundatposition("zmb_player_disapparate", self.origin);
     self playlocalsound("zmb_player_disapparate_2d");
   }
 }
 
 function function_b32967de(name, kiosk_name, trigger_hint, notrigger_hint) {
-  if(!isdefined(level.altbody_kiosks)) {
+  if(!isDefined(level.altbody_kiosks)) {
     level.altbody_kiosks = [];
   }
   level.altbody_kiosks[name] = struct::get_array(kiosk_name, "targetname");
@@ -297,7 +297,7 @@ function function_9621c06b(kiosk, name, trigger_hint, notrigger_hint) {
   width = 128;
   height = 128;
   length = 128;
-  unitrigger_stub = spawnstruct();
+  unitrigger_stub = spawnStruct();
   unitrigger_stub.origin = kiosk.origin + vectorscale((0, 0, 1), 32);
   unitrigger_stub.angles = kiosk.angles;
   unitrigger_stub.script_unitrigger_type = "unitrigger_radius_use";
@@ -308,12 +308,12 @@ function function_9621c06b(kiosk, name, trigger_hint, notrigger_hint) {
   unitrigger_stub.altbody_name = name;
   unitrigger_stub.trigger_hint = trigger_hint;
   unitrigger_stub.notrigger_hint = notrigger_hint;
-  unitrigger_stub.prompt_and_visibility_func = & kiosk_trigger_visibility;
-  zm_unitrigger::register_static_unitrigger(unitrigger_stub, & kiosk_trigger_think);
+  unitrigger_stub.prompt_and_visibility_func = &kiosk_trigger_visibility;
+  zm_unitrigger::register_static_unitrigger(unitrigger_stub, &kiosk_trigger_think);
 }
 
 function kiosk_trigger_visibility(player) {
-  visible = !(isdefined(player.altbody) && player.altbody) || (isdefined(player.see_kiosks_in_altbody) && player.see_kiosks_in_altbody);
+  visible = !(isDefined(player.altbody) && player.altbody) || (isDefined(player.see_kiosks_in_altbody) && player.see_kiosks_in_altbody);
   self.stub.usable = player player_can_altbody(self.stub.kiosk, self.stub.altbody_name);
   if(self.stub.usable) {
     self.stub.hint_string = self.stub.trigger_hint;
@@ -326,12 +326,12 @@ function kiosk_trigger_visibility(player) {
 }
 
 function kiosk_trigger_think() {
-  while (true) {
+  while(true) {
     self waittill("trigger", player);
-    if(isdefined(self.stub.usable) && self.stub.usable) {
+    if(isDefined(self.stub.usable) && self.stub.usable) {
       self.stub.usable = 0;
       name = self.stub.altbody_name;
-      if(isdefined(player.custom_altbody_callback)) {
+      if(isDefined(player.custom_altbody_callback)) {
         player thread[[player.custom_altbody_callback]](self, name);
       } else {
         player thread player_try_altbody(self, name);
@@ -341,11 +341,11 @@ function kiosk_trigger_think() {
 }
 
 function private watch_kiosk_triggers(name, trigger_name, trigger_hint, whenvisible) {
-  triggers = getentarray(trigger_name, "targetname");
+  triggers = getEntArray(trigger_name, "targetname");
   if(!triggers.size) {
-    triggers = getentarray(trigger_name, "script_noteworthy");
+    triggers = getEntArray(trigger_name, "script_noteworthy");
   }
-  array::thread_all(triggers, & trigger_watch_kiosk, name, trigger_name, trigger_hint, whenvisible);
+  array::thread_all(triggers, &trigger_watch_kiosk, name, trigger_name, trigger_hint, whenvisible);
 }
 
 function private trigger_watch_kiosk(name, trigger_name, trigger_hint, whenvisible) {
@@ -355,13 +355,13 @@ function private trigger_watch_kiosk(name, trigger_name, trigger_hint, whenvisib
   self setvisibletoall();
   self thread trigger_monitor_visibility(name, whenvisible);
   if(whenvisible) {
-    if(isdefined(self.target)) {
+    if(isDefined(self.target)) {
       target = getent(self.target, "targetname");
       self.kiosk = target;
     }
-    while (isdefined(self)) {
+    while(isDefined(self)) {
       self waittill("trigger", player);
-      if(isdefined(player.custom_altbody_callback)) {
+      if(isDefined(player.custom_altbody_callback)) {
         player thread[[player.custom_altbody_callback]](self, name);
       } else {
         player thread player_try_altbody(self, name);
@@ -377,17 +377,17 @@ function trigger_monitor_visibility(name, whenvisible) {
   self setvisibletoall();
   pid = 0;
   self.is_unlocked = 1;
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     players = level.players;
     if(pid >= players.size) {
       pid = 0;
     }
     player = players[pid];
     pid++;
-    if(isdefined(player)) {
+    if(isDefined(player)) {
       visible = 1;
       visible = player player_can_altbody(self, name);
-      if(visible == whenvisible && (!(isdefined(player.altbody) && player.altbody) || (isdefined(player.see_kiosks_in_altbody) && player.see_kiosks_in_altbody)) && (isdefined(self.is_unlocked) && self.is_unlocked)) {
+      if(visible == whenvisible && (!(isDefined(player.altbody) && player.altbody) || (isDefined(player.see_kiosks_in_altbody) && player.see_kiosks_in_altbody)) && (isDefined(self.is_unlocked) && self.is_unlocked)) {
         self setvisibletoplayer(player);
       } else {
         self setinvisibletoplayer(player);

@@ -42,11 +42,9 @@ main(model, type) {
 
   build_light(model, "breaklight_bm21_right", "tag_taillight_right", "misc/car_brakelight_bm21", "brakelights");
   build_light(model, "breaklight_bm21_left", "tag_taillight_left", "misc/car_brakelight_bm21", "brakelights");
-
 }
 
 init_local() {
-
   //	maps\_vehicle::lights_on( "headlights" );
   //	maps\_vehicle::lights_on( "brakelights" );
 

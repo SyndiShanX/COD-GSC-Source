@@ -117,7 +117,7 @@ incrementescrowforplayer(amount) {
   if(!isDefined(playerxuid)) {
     return;
   }
-  escrowstruct = spawnstruct();
+  escrowstruct = spawnStruct();
   escrowstruct.xuid = playerxuid;
   escrowstruct.amount = amount;
   game["escrows"][game["escrows"].size] = escrowstruct;
@@ -411,13 +411,12 @@ setupblankrandomplayer(takeweapons, chooserandombody, weapon) {
   self setradarvisibility();
 }
 
-assignrandombody() {
-}
+assignrandombody() {}
 
 queuewagerpopup(message, points, submessage, announcement) {
   self endon("disconnect");
   size = self.wagernotifyqueue.size;
-  self.wagernotifyqueue[size] = spawnstruct();
+  self.wagernotifyqueue[size] = spawnStruct();
   self.wagernotifyqueue[size].message = message;
   self.wagernotifyqueue[size].points = points;
   self.wagernotifyqueue[size].submessage = submessage;
@@ -445,7 +444,7 @@ helpgameend() {
 
     if(playersleft == 2) {
       for(i = 0; i < players.size; i++) {
-        players[i] queuewagerpopup(&"MP_HEADS_UP", 0, & "MP_U2_ONLINE", "wm_u2_online");
+        players[i] queuewagerpopup(&"MP_HEADS_UP", 0, &"MP_U2_ONLINE", "wm_u2_online");
         players[i].pers["hasRadar"] = 1;
         players[i].hasspyplane = 1;
         level.activeuavs[players[i] getentitynumber()]++;
@@ -510,7 +509,7 @@ wagerannouncer(dialog, group) {
 }
 
 createpowerup(name, type, displayname, iconmaterial) {
-  powerup = spawnstruct();
+  powerup = spawnStruct();
   powerup.name = [];
   powerup.name[0] = name;
   powerup.type = type;
@@ -684,7 +683,7 @@ showpowerupmessage(powerupindex, doanimation) {
   self.powerups[powerupindex].hud_elem_icon.alpha = 1.0;
 
   if(!wasinprematch && doanimation)
-    self thread queuewagerpopup(self.powerups[powerupindex].displayname, 0, & "MP_BONUS_ACQUIRED");
+    self thread queuewagerpopup(self.powerups[powerupindex].displayname, 0, &"MP_BONUS_ACQUIRED");
 
   pulsetime = 0.5;
 
@@ -709,7 +708,7 @@ showpowerupmessage(powerupindex, doanimation) {
     wait(pulsetime);
 
   if(wasinprematch && doanimation)
-    self thread queuewagerpopup(self.powerups[powerupindex].displayname, 0, & "MP_BONUS_ACQUIRED");
+    self thread queuewagerpopup(self.powerups[powerupindex].displayname, 0, &"MP_BONUS_ACQUIRED");
 
   wait 1.5;
 

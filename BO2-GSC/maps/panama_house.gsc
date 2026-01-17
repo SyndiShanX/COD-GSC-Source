@@ -33,7 +33,7 @@ main() {
   level.player_interactive_model = "c_usa_woods_panama_casual_viewbody";
   house_intro_setup();
   level.hummersoundent = spawn("script_origin", (24315, -20231, 111));
-  level.hummersoundent playloopsound("evt_mason_vehicle_idle_loop", 3);
+  level.hummersoundent playLoopSound("evt_mason_vehicle_idle_loop", 3);
   level.player allowcrouch(0);
   level.player allowprone(0);
   player_exits_hummer();
@@ -129,7 +129,7 @@ house_warn_player_logic() {
 
 house_clean_up_and_reset() {
   level notify("hat_off");
-  a_house_vehicles = getentarray("house_vehicles", "script_noteworthy");
+  a_house_vehicles = getEntArray("house_vehicles", "script_noteworthy");
 
   foreach(vehicle in a_house_vehicles) {
     if(isDefined(vehicle)) {
@@ -146,7 +146,7 @@ house_clean_up_and_reset() {
   foreach(ai in a_ai)
   ai delete();
 
-  a_house_triggers = getentarray("house_trigger", "script_noteworthy");
+  a_house_triggers = getEntArray("house_trigger", "script_noteworthy");
 
   foreach(t_house in a_house_triggers)
   t_house delete();
@@ -197,7 +197,7 @@ house_drive_by() {
 
 truck_play_music() {
   music_ent = spawn("script_origin", self.origin);
-  music_ent playloopsound("mus_intro_truck");
+  music_ent playLoopSound("mus_intro_truck");
   music_ent linkto(self);
 }
 
@@ -374,7 +374,7 @@ fade_out_house_end() {
 turn_off_mason_hummer() {
   trigger_wait("trig_turn_off_mason_car");
   level.hummersoundent stoploopsound(0.25);
-  level.hummersoundent playsound("evt_mason_vehicle_idle_stop");
+  level.hummersoundent playSound("evt_mason_vehicle_idle_stop");
   self veh_toggle_tread_fx(0);
   self veh_toggle_exhaust_fx(0);
   wait 4;
@@ -407,7 +407,7 @@ turn_on_reflection_cam(str_extra_cam) {
   setsaveddvar("r_extracam_custom_aspectratio", 1.38636);
   sm_cam_ent = getent(str_extra_cam, "targetname");
   level.e_tag_origin = spawn("script_model", sm_cam_ent.origin);
-  level.e_tag_origin setmodel("tag_origin");
+  level.e_tag_origin setModel("tag_origin");
   level.e_tag_origin.angles = sm_cam_ent.angles;
   level.e_tag_origin setclientflag(1);
 }
@@ -478,7 +478,7 @@ player_woods_dialog() {
 
 paint_spray() {
   paintent = spawn("script_origin", (24362, -20164, 56));
-  paintent playloopsound("evt_spray_paint_loop");
+  paintent playLoopSound("evt_spray_paint_loop");
   level waittill("stop_painting");
   paintent stoploopsound(0.5);
   paintent delete();
@@ -494,7 +494,7 @@ start_mcknight_arguing_vo() {
   skinner_vo say_dialog("jane_i_am_calm_0", 0, 1);
   flag_wait("house_follow_mason");
   wait 5;
-  skinner_vo playsound("fly_pan_house_start");
+  skinner_vo playSound("fly_pan_house_start");
   skinner_vo say_dialog("jane_five_years_mark_w_0", 0, 1);
 }
 
@@ -502,7 +502,7 @@ mcknight_close_the_door_argument_vo(guy) {
   skinner_vo = getent("skinner_vo", "targetname");
   skinner_vo say_dialog("mckn_family_i_thought_th_0", 0, 1);
   skinner_vo say_dialog("jane_it_s_about_everythin_0", 0, 1);
-  skinner_vo playsound("fly_pan_house_end");
+  skinner_vo playSound("fly_pan_house_end");
   skinner_vo say_dialog("jane_i_need_something_mor_0", 0, 1);
   skinner_vo say_dialog("jane_it_s_not_enough_mar_0", 0, 1);
 }

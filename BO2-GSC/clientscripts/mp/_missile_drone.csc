@@ -78,7 +78,7 @@ targetacquired(localclientnum) {
     self.missile_drone_fx = playviewmodelfx(localclientnum, level._effect["missile_drone_enemy_light"], "tag_target");
 
     if(!soundplayed)
-      playsound(localclientnum, "fly_hunter_raise_plr", self.origin);
+      playSound(localclientnum, "fly_hunter_raise_plr", self.origin);
 
     soundplayed = 1;
     waitrealtime(0.5);

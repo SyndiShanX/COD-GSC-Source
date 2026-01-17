@@ -79,19 +79,19 @@ function main_end() {
     spawncollision("collision_utility_wall_128x128x10", "collider", (3156, -5642, 179), vectorscale((0, 1, 0), 315));
   }
   var_970d875d = spawn("script_model", (4423, -3243, 516));
-  var_970d875d setmodel("p7_zm_zod_burlesque_wood_column_01");
+  var_970d875d setModel("p7_zm_zod_burlesque_wood_column_01");
   var_970d875d.angles = vectorscale((0, 1, 0), 45);
   var_d6e7650f = spawn("script_model", (2158, -5517, 253.5));
-  var_d6e7650f setmodel("p7_scaff_plywood_walkway_36x192");
+  var_d6e7650f setModel("p7_scaff_plywood_walkway_36x192");
   var_d6e7650f.angles = (0, 0, 0);
   var_83a52ee1 = spawn("script_model", (2604, -3622, -1199));
-  var_83a52ee1 setmodel("p7_inf_vista_stalingrad_bldg_04_back");
+  var_83a52ee1 setModel("p7_inf_vista_stalingrad_bldg_04_back");
   var_83a52ee1.angles = vectorscale((0, 1, 0), 270);
   var_cc9c38e8 = spawn("script_model", (2498, -4352.25, 130.75));
-  var_cc9c38e8 setmodel("p7_plank_wood_broken_2x4x64_wet");
+  var_cc9c38e8 setModel("p7_plank_wood_broken_2x4x64_wet");
   var_cc9c38e8.angles = vectorscale((0, 1, 0), 180);
   var_3ea3a823 = spawn("script_model", (2498.25, -4354, 132.75));
-  var_3ea3a823 setmodel("p7_plank_wood_broken_sml_2x4x64_wet");
+  var_3ea3a823 setModel("p7_plank_wood_broken_sml_2x4x64_wet");
   var_3ea3a823.angles = vectorscale((0, 0, -1), 180);
   var_31363875 = spawncollision("collision_bullet_wall_128x128x10", "collider", (363, -5228.5, 316.5), (0, 0, 0));
   var_31363875 thread function_320b9477();
@@ -104,10 +104,10 @@ function function_320b9477() {
 }
 
 function function_2cba29a8(zone, pos, radius, height) {
-  if(!isdefined(level.var_e7337b94)) {
+  if(!isDefined(level.var_e7337b94)) {
     level.var_e7337b94 = [];
   }
-  if(!isdefined(level.var_e7337b94[zone])) {
+  if(!isDefined(level.var_e7337b94[zone])) {
     level.var_e7337b94[zone] = [];
   } else if(!isarray(level.var_e7337b94[zone])) {
     level.var_e7337b94[zone] = array(level.var_e7337b94[zone]);
@@ -121,22 +121,22 @@ function function_e7337b94() {
   function_2cba29a8("canal", (818, -1512, 450), 128, 160);
   wait(1);
   level.var_4e5a7cb5 = level.player_out_of_playable_area_monitor_callback;
-  level.player_out_of_playable_area_monitor_callback = & player_out_of_playable_area_monitor_callback;
+  level.player_out_of_playable_area_monitor_callback = &player_out_of_playable_area_monitor_callback;
 }
 
 function player_out_of_playable_area_monitor_callback() {
-  if(isdefined(self.kill_brush)) {
+  if(isDefined(self.kill_brush)) {
     train = level.o_zod_train;
     station = train.var_97fef807;
-    if(isdefined(self.on_train) && self.on_train || !train flag::get("moving")) {
-      if(isdefined(station) && isdefined(level.var_e7337b94[station])) {
+    if(isDefined(self.on_train) && self.on_train || !train flag::get("moving")) {
+      if(isDefined(station) && isDefined(level.var_e7337b94[station])) {
         if(isinarray(level.var_e7337b94[station], self.kill_brush)) {
           return 0;
         }
       }
     }
   }
-  if(isdefined(level.var_4e5a7cb5)) {
+  if(isDefined(level.var_4e5a7cb5)) {
     return self[[level.var_4e5a7cb5]]();
   }
   return 1;

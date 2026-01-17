@@ -51,7 +51,7 @@ exit_stage(success) {
 }
 
 remove_plinth() {
-  playfx(level._effect["teleport_1p"], self.m_plinth.origin);
+  playFX(level._effect["teleport_1p"], self.m_plinth.origin);
   playsoundatposition("zmb_footprintbox_disappear", self.m_plinth.origin);
   wait 3;
 
@@ -69,7 +69,7 @@ remove_plinth() {
 }
 
 create_robot_head_trigger(unitrigger_stub) {
-  playfx(level._effect["teleport_1p"], unitrigger_stub.origin);
+  playFX(level._effect["teleport_1p"], unitrigger_stub.origin);
   playsoundatposition("zmb_footprintbox_disappear", unitrigger_stub.origin);
   wait 3;
   unitrigger_stub.radius = 50;
@@ -78,16 +78,16 @@ create_robot_head_trigger(unitrigger_stub) {
   unitrigger_stub.cursor_hint = "HINT_NOICON";
   unitrigger_stub.require_look_at = 1;
   m_coll = spawn("script_model", unitrigger_stub.origin);
-  m_coll setmodel("drone_collision");
+  m_coll setModel("drone_collision");
   unitrigger_stub.m_coll = m_coll;
   wait_network_frame();
   m_plinth = spawn("script_model", unitrigger_stub.origin);
   m_plinth.angles = unitrigger_stub.angles;
-  m_plinth setmodel("p6_zm_tm_staff_holder");
+  m_plinth setModel("p6_zm_tm_staff_holder");
   unitrigger_stub.m_plinth = m_plinth;
   wait_network_frame();
   m_sign = spawn("script_model", unitrigger_stub.origin);
-  m_sign setmodel("p6_zm_tm_runes");
+  m_sign setModel("p6_zm_tm_runes");
   m_sign linkto(unitrigger_stub.m_plinth, "tag_origin", (0, 15, 40));
   m_sign hidepart("j_fire");
   m_sign hidepart("j_ice");
@@ -145,5 +145,5 @@ place_staff(m_plinth) {
   m_plinth.v_old_origin = m_staff.origin;
   m_staff linkto(m_plinth, "tag_origin", (0, 10, 30), (345, 90, 0));
   m_staff show();
-  m_plinth playsound("zmb_squest_robot_place_staff");
+  m_plinth playSound("zmb_squest_robot_place_staff");
 }

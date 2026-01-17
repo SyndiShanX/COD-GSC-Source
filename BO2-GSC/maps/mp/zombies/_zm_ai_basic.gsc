@@ -210,7 +210,7 @@ start_inert(in_place) {
   self notify("start_inert");
   self maps\mp\zombies\_zm_spawner::zombie_eye_glow_stop();
   self maps\mp\zombies\_zm_spawner::zombie_history("is_inert set " + gettime());
-  self playsound("zmb_zombie_go_inert");
+  self playSound("zmb_zombie_go_inert");
 
   if(isDefined(self.barricade_enter) && self.barricade_enter) {
     while(isDefined(self.barricade_enter) && self.barricade_enter)
@@ -294,7 +294,7 @@ inert_think(in_place) {
   self thread inert_wakeup();
   self waittill("stop_zombie_inert");
   self maps\mp\zombies\_zm_spawner::zombie_history("stop_zombie_inert " + gettime());
-  self playsound("zmb_zombie_end_inert");
+  self playSound("zmb_zombie_end_inert");
   self inert_transition();
   self maps\mp\zombies\_zm_spawner::zombie_history("inert transition done");
 

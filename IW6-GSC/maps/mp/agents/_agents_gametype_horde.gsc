@@ -38,7 +38,7 @@ setup_callbacks() {
 
 onAIConnect() {
   self.gameModefirstSpawn = true;
-  self.agentname = & "HORDE_INFECTED";
+  self.agentname = &"HORDE_INFECTED";
   self.horde_type = "";
 }
 
@@ -354,7 +354,7 @@ allyAgentThink() {
 hordeSetupDogState() {
   self _setNameplateMaterial("player_name_bg_green_dog", "player_name_bg_red_dog");
   self.enableExtendedKill = false;
-  self.agentname = & "HORDE_QUAD";
+  self.agentname = &"HORDE_QUAD";
   self.horde_type = "Quad";
 
   self.lasSetGoalPos = (0, 0, 0);

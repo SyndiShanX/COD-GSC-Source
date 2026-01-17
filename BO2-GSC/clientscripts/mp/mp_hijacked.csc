@@ -41,7 +41,7 @@ overridemapdefinedhardpointsfunc() {
 }
 
 copykothvisual(visual) {
-  copyofvisual = spawnstruct();
+  copyofvisual = spawnStruct();
   copyofvisual.angles = visual.angles;
   copyofvisual.classname = visual.classname;
   copyofvisual.origin = visual.origin;

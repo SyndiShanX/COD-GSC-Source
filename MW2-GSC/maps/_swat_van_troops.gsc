@@ -32,7 +32,6 @@ main(model, type) {
 init_local() {
   // 	maps\_vehicle::lights_on( "headlights" );
   // 	maps\_vehicle::lights_on( "brakelights" );
-
 }
 
 set_vehicle_anims(positions) {
@@ -56,8 +55,8 @@ set_vehicle_anims(positions) {
 
 setanims() {
   positions = [];
-  for (i = 0; i < 9; i++)
-    positions[i] = spawnstruct();
+  for(i = 0; i < 9; i++)
+    positions[i] = spawnStruct();
 
   positions[0].sittag = "tag_driver";
   positions[0].idle = % russian_swat_van_driver_idle;
@@ -112,7 +111,6 @@ setanims() {
   positions[8].explosion_death = % death_explosion_stand_B_v3;
 
   return positions;
-
 }
 
 unload_groups() {

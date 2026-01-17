@@ -36,7 +36,7 @@ statechange(clientnum, system, newstate) {
     level._systemstates = [];
 
   if(!isDefined(level._systemstates[system]))
-    level._systemstates[system] = spawnstruct();
+    level._systemstates[system] = spawnStruct();
 
   level._systemstates[system].state = newstate;
 
@@ -97,8 +97,7 @@ playerspawned(localclientnum) {
   self thread clientscripts\mp\_explode::playerspawned(localclientnum);
   self thread clientscripts\mp\_players::dtp_effects();
 
-  if(!sessionmodeiszombiesgame()) {
-  }
+  if(!sessionmodeiszombiesgame()) {}
 
   if(isDefined(level._faceanimcbfunc))
     self thread[[level._faceanimcbfunc]](localclientnum);
@@ -116,9 +115,7 @@ codecallback_precachegametype() {
 
 codecallback_startgametype() {
   if(isDefined(level.callbackstartgametype) && (!isDefined(level.gametypestarted) || !level.gametypestarted)) {
-    [
-      [level.callbackstartgametype]
-    ]();
+    [[level.callbackstartgametype]]();
     level.gametypestarted = 1;
   }
 }
@@ -206,7 +203,7 @@ codecallback_soundnotify(localclientnum, entity, note) {
   switch (note) {
     case "scr_bomb_beep":
       if(getgametypesetting("silentPlant") == 0)
-        entity playsound(localclientnum, "fly_bomb_buttons_npc");
+        entity playSound(localclientnum, "fly_bomb_buttons_npc");
 
       break;
   }
@@ -272,7 +269,7 @@ airsupport(localclientnum, x, y, z, type, yaw, team, teamfaction, owner, exittyp
       break;
   }
 
-  data = spawnstruct();
+  data = spawnStruct();
   data.team = team;
   data.owner = owner;
   data.bombsite = pos;
@@ -284,8 +281,8 @@ airsupport(localclientnum, x, y, z, type, yaw, team, teamfaction, owner, exittyp
   if(type == "a") {
     planehalfdistance = 12000;
     data.planehalfdistance = planehalfdistance;
-    data.startpoint = pos + vectorscale(anglestoforward(direction), -1 * planehalfdistance);
-    data.endpoint = pos + vectorscale(anglestoforward(direction), planehalfdistance);
+    data.startpoint = pos + vectorscale(anglesToForward(direction), -1 * planehalfdistance);
+    data.endpoint = pos + vectorscale(anglesToForward(direction), planehalfdistance);
     data.planemodel = "t5_veh_air_b52";
     data.flybysound = "null";
     data.washsound = "veh_b52_flyby_wash";
@@ -297,8 +294,8 @@ airsupport(localclientnum, x, y, z, type, yaw, team, teamfaction, owner, exittyp
   } else if(type == "n") {
     planehalfdistance = 24000;
     data.planehalfdistance = planehalfdistance;
-    data.startpoint = pos + vectorscale(anglestoforward(direction), -1 * planehalfdistance);
-    data.endpoint = pos + vectorscale(anglestoforward(direction), planehalfdistance);
+    data.startpoint = pos + vectorscale(anglesToForward(direction), -1 * planehalfdistance);
+    data.endpoint = pos + vectorscale(anglesToForward(direction), planehalfdistance);
     data.planemodel = clientscripts\mp\_airsupport::getplanemodel(teamfaction);
     data.flybysound = "null";
     data.washsound = "evt_us_napalm_wash";

@@ -23,7 +23,7 @@ stealth_init(enviroment) {
     }
   }
 
-  array_thread(getentarray("stealth_clipbrush", "targetname"), ::system_handle_clipbrush);
+  array_thread(getEntArray("stealth_clipbrush", "targetname"), ::system_handle_clipbrush);
 
   level thread debug_stealth();
 }
@@ -106,8 +106,8 @@ system_init(enviroment) {
   flag_init("_stealth_spotted");
   flag_init("_stealth_found_corpse");
   flag_set("_stealth_hidden");
-  level._stealth = spawnstruct();
-  level._stealth.logic = spawnstruct();
+  level._stealth = spawnStruct();
+  level._stealth.logic = spawnStruct();
 
   if(!isDefined(enviroment))
     enviroment = "default";
@@ -156,7 +156,7 @@ system_init(enviroment) {
 }
 
 system_default_corpse_detect_ranges() {
-  level._stealth.logic.corpse = spawnstruct();
+  level._stealth.logic.corpse = spawnStruct();
   level._stealth.logic.corpse.array = [];
   level._stealth.logic.corpse.last_pos = undefined;
   level._stealth.logic.corpse.max_num = int(getdvar(#"ai_corpseCount"));
@@ -173,8 +173,8 @@ system_default_corpse_detect_ranges() {
 }
 
 system_init_shadows() {
-  array_thread(getentarray("_stealth_shadow", "targetname"), ::stealth_shadow_volumes);
-  array_thread(getentarray("stealth_shadow", "targetname"), ::stealth_shadow_volumes);
+  array_thread(getEntArray("_stealth_shadow", "targetname"), ::stealth_shadow_volumes);
+  array_thread(getEntArray("stealth_shadow", "targetname"), ::stealth_shadow_volumes);
 }
 
 stealth_shadow_volumes() {
@@ -312,8 +312,8 @@ friendly_logic() {
 
 friendly_init() {
   assert(!isDefined(self._stealth), "you called maps_stealth_logic::friendly_init() twice on the same ai or player");
-  self._stealth = spawnstruct();
-  self._stealth.logic = spawnstruct();
+  self._stealth = spawnStruct();
+  self._stealth.logic = spawnStruct();
 
   if(isplayer(self)) {
     self._stealth.logic.getstance_func = ::friendly_getstance_player;
@@ -535,18 +535,18 @@ enemy_logic() {
 enemy_init() {
   assert(!isDefined(self._stealth), "you called maps_stealth_logic::enemy_init() twice on the same ai");
   self clearenemy();
-  self._stealth = spawnstruct();
-  self._stealth.logic = spawnstruct();
+  self._stealth = spawnStruct();
+  self._stealth.logic = spawnStruct();
   self._stealth.logic.dog = 0;
 
   if(issubstr(self.classname, "dog"))
     self._stealth.logic.dog = 1;
 
-  self._stealth.logic.alert_level = spawnstruct();
+  self._stealth.logic.alert_level = spawnStruct();
   self._stealth.logic.alert_level.lvl = undefined;
   self._stealth.logic.alert_level.enemy = undefined;
   self._stealth.logic.stoptime = 0;
-  self._stealth.logic.corpse = spawnstruct();
+  self._stealth.logic.corpse = spawnStruct();
   self._stealth.logic.corpse.corpse_entity = undefined;
   self ent_flag_init("_stealth_saw_corpse");
   self ent_flag_init("_stealth_found_corpse");
@@ -557,7 +557,7 @@ enemy_init() {
 
 enemy_event_listeners_init() {
   self ent_flag_init("_stealth_bad_event_listener");
-  self._stealth.logic.event = spawnstruct();
+  self._stealth.logic.event = spawnStruct();
   self._stealth.logic.event.listener = [];
   self._stealth.logic.event.listener[self._stealth.logic.event.listener.size] = "grenade danger";
   self._stealth.logic.event.listener[self._stealth.logic.event.listener.size] = "gunshot";
@@ -875,7 +875,7 @@ enemy_corpse_logic() {
 
         angles = self gettagangles("tag_eye");
         origin = self gettagorigin("tag_eye");
-        sight = anglestoforward(angles);
+        sight = anglesToForward(angles);
         vec_to_corpse = vectornormalize(corpse.origin - origin);
 
         if(vectordot(sight, vec_to_corpse) > 0.55) {
@@ -1062,7 +1062,7 @@ system_handle_clipbrush() {
   spotted_flag = "_stealth_spotted";
   corpse_flag = "_stealth_found_corpse";
   event_flag = "_stealth_event";
-  self setcandamage(1);
+  self setCanDamage(1);
   self add_wait(::waittill_msg, "damage");
   level add_wait(::flag_wait, spotted_flag);
   level add_wait(::flag_wait, corpse_flag);

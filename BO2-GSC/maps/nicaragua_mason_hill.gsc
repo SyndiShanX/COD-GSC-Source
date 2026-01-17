@@ -96,7 +96,7 @@ intruder_perk() {
 }
 
 mason_hill_chicken_setup() {
-  a_e_chickens = getentarray("mason_hill_chicken", "script_noteworthy");
+  a_e_chickens = getEntArray("mason_hill_chicken", "script_noteworthy");
 
   foreach(chicken in a_e_chickens)
   chicken thread chicken_anim_loop();
@@ -111,7 +111,7 @@ mason_hill_setup() {
     add_global_spawn_function("axis", ::make_it_easy);
   }
 
-  a_sp_shotgunners = getentarray("masonhill_cartel_shotgunners", "script_noteworthy");
+  a_sp_shotgunners = getEntArray("masonhill_cartel_shotgunners", "script_noteworthy");
 
   foreach(spawner in a_sp_shotgunners)
   spawner add_spawn_function(::make_ai_aggressive);
@@ -369,7 +369,7 @@ setup_mason_hill_initial_mg_gunners() {
   trigger_wait("mason_hill_start_trigger");
   wait 0.1;
   level notify("initial_cartel_spawned");
-  a_ai_initial_cartel = getentarray("mason_hill_initial_cartel_soldiers_ai", "targetname");
+  a_ai_initial_cartel = getEntArray("mason_hill_initial_cartel_soldiers_ai", "targetname");
   a_ai_gunners = [];
 
   foreach(guy in a_ai_initial_cartel) {
@@ -474,7 +474,7 @@ wait_then_kill_civilian_executioner() {
 }
 
 mason_hill_spawn_molotov_toss_guy() {
-  a_t_hurtriggers = getentarray("mason_hill_firebuilding1_hurttrigger", "targetname");
+  a_t_hurtriggers = getEntArray("mason_hill_firebuilding1_hurttrigger", "targetname");
 
   foreach(trig in a_t_hurtriggers)
   trig trigger_off();
@@ -815,7 +815,7 @@ mason_hill_second_wave() {
 
 red_barrel_porch() {
   level thread red_barrel_porch_failsafe();
-  a_destructibles = getentarray("mason_hill_porch_fxanim", "script_noteworthy");
+  a_destructibles = getEntArray("mason_hill_porch_fxanim", "script_noteworthy");
 
   foreach(barrel in a_destructibles)
   barrel thread barrel_destroy_think();
@@ -871,7 +871,7 @@ red_barrel_porch_failsafe() {
   trigger_wait("mason_hill_porch_fxanim_failsafe");
   s_origin = get_struct("masonhill_wave2_redbarrelporch_fx", "targetname");
   s_origin maps\_mortar::explosion_boom("mason_hill_porchhouse_mortar", 0.5, undefined, undefined, 1);
-  a_destructibles = getentarray("mason_hill_porch_fxanim", "script_noteworthy");
+  a_destructibles = getEntArray("mason_hill_porch_fxanim", "script_noteworthy");
 
   foreach(barrel in a_destructibles) {
     if(isDefined(barrel))
@@ -1273,7 +1273,7 @@ mason_hill_cleanup() {
 
   kill_spawnernum(11);
   cleanup_ents("mason_hill_cleanup");
-  a_e_chickens = getentarray("mason_hill_chicken", "script_noteworthy");
+  a_e_chickens = getEntArray("mason_hill_chicken", "script_noteworthy");
 
   foreach(chicken in a_e_chickens)
   chicken chicken_cleanup();
@@ -1312,11 +1312,11 @@ fake_grenade_toss(str_targetname, v_start, v_end) {
 }
 
 mason_hill_guy_on_fire_fx() {
-  playfxontag(getfx("fire_ai_torso"), self, "J_Spine4");
-  playfxontag(getfx("fire_ai_leg_left"), self, "J_Hip_LE");
-  playfxontag(getfx("fire_ai_leg_right"), self, "J_Hip_RI");
-  playfxontag(getfx("fire_ai_arm_left"), self, "J_Elbow_LE");
-  playfxontag(getfx("fire_ai_arm_right"), self, "J_Elbow_RI");
+  playFXOnTag(getfx("fire_ai_torso"), self, "J_Spine4");
+  playFXOnTag(getfx("fire_ai_leg_left"), self, "J_Hip_LE");
+  playFXOnTag(getfx("fire_ai_leg_right"), self, "J_Hip_RI");
+  playFXOnTag(getfx("fire_ai_arm_left"), self, "J_Elbow_LE");
+  playFXOnTag(getfx("fire_ai_arm_right"), self, "J_Elbow_RI");
 }
 
 mason_intro_mortars() {

@@ -4,22 +4,20 @@
 *****************************************************/
 
 #include scripts\core_common\lui_shared;
-
 #namespace zm_location;
 
 class czm_location: cluielem {
-
   function set_location_name(localclientnum, value) {
     set_data(localclientnum, "location_name", value);
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, #"zm_location");
+    cluielem::open(localclientnum, # "zm_location");
   }
 
   function function_fa582112(localclientnum) {
     cluielem::function_fa582112(localclientnum);
-    set_data(localclientnum, "location_name", #"");
+    set_data(localclientnum, "location_name", # "");
   }
 
   function register_clientside(uid) {

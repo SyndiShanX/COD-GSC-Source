@@ -7,7 +7,6 @@
 #include scripts\zm\perk\zm_perk_death_perception;
 #include scripts\zm_common\zm;
 #include scripts\zm_common\zm_trial;
-
 #namespace zm_trial_disable_hud;
 
 autoexec __init__system__() {
@@ -22,12 +21,12 @@ __init__() {
   zm_trial::register_challenge(#"disable_hud", &on_begin, &on_end);
 }
 
-private on_begin(local_client_num, params) {
+on_begin(local_client_num, params) {
   level thread function_40349f7c();
 }
 
 function_40349f7c(localclientnum) {
-  level endon(#"hash_38932f8deb28b470", #"end_game");
+  level endon(#"hash_38932f8deb28b470", # "end_game");
   wait 12;
   level.var_dc60105c = 1;
   maxclients = getmaxlocalclients();
@@ -45,7 +44,7 @@ function_40349f7c(localclientnum) {
   }
 }
 
-private on_end(local_client_num) {
+on_end(local_client_num) {
   level notify(#"hash_38932f8deb28b470");
   level.var_dc60105c = undefined;
   maxclients = getmaxlocalclients();

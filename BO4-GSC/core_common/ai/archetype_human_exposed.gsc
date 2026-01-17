@@ -5,7 +5,6 @@
 
 #include scripts\core_common\ai\archetype_utility;
 #include scripts\core_common\ai\systems\behavior_tree_utility;
-
 #namespace archetype_human_exposed;
 
 autoexec registerbehaviorscriptfunctions() {
@@ -25,18 +24,18 @@ autoexec registerbehaviorscriptfunctions() {
   behaviortreenetworkutility::registerbehaviortreescriptapi("setPathMoveDelayedRandom", &setpathmovedelayedrandom);
 }
 
-private preparetoreacttoenemy(behaviortreeentity) {
+preparetoreacttoenemy(behaviortreeentity) {
   behaviortreeentity.newenemyreaction = 0;
   behaviortreeentity.malfunctionreaction = 0;
   behaviortreeentity pathmode("move delayed", 1, 3);
 }
 
-private resetreactiontoenemy(behaviortreeentity) {
+resetreactiontoenemy(behaviortreeentity) {
   behaviortreeentity.newenemyreaction = 0;
   behaviortreeentity.malfunctionreaction = 0;
 }
 
-private nocloseenemyservice(behaviortreeentity) {
+nocloseenemyservice(behaviortreeentity) {
   if(isDefined(behaviortreeentity.enemy) && aiutility::hascloseenemytomelee(behaviortreeentity)) {
     behaviortreeentity clearpath();
     return true;
@@ -45,7 +44,7 @@ private nocloseenemyservice(behaviortreeentity) {
   return false;
 }
 
-private hascloseenemy(behaviortreeentity) {
+hascloseenemy(behaviortreeentity) {
   if(!isDefined(behaviortreeentity.enemy)) {
     return false;
   }
@@ -57,17 +56,17 @@ private hascloseenemy(behaviortreeentity) {
   return false;
 }
 
-private setpathmovedelayedrandom(behaviortreeentity, asmstatename) {
+setpathmovedelayedrandom(behaviortreeentity, asmstatename) {
   behaviortreeentity pathmode("move delayed", 0, randomfloatrange(1, 3));
 }
 
-private exposedsetdesiredstancetostand(behaviortreeentity, asmstatename) {
+exposedsetdesiredstancetostand(behaviortreeentity, asmstatename) {
   aiutility::keepclaimnode(behaviortreeentity);
   currentstance = behaviortreeentity getblackboardattribute("_stance");
   behaviortreeentity setblackboardattribute("_desired_stance", "stand");
 }
 
-private tryreacquireservice(behaviortreeentity) {
+tryreacquireservice(behaviortreeentity) {
   if(!isDefined(behaviortreeentity.reacquire_state)) {
     behaviortreeentity.reacquire_state = 0;
   }

@@ -6,7 +6,6 @@
 #include scripts\core_common\ai\archetype_utility;
 #include scripts\core_common\ai\systems\animation_state_machine_mocomp;
 #include scripts\core_common\math_shared;
-
 #namespace archetype_mocomps_utility;
 
 autoexec registerdefaultanimationmocomps() {
@@ -23,7 +22,7 @@ autoexec registerdefaultanimationmocomps() {
   animationstatenetwork::registeranimationmocomp("mocomp_ignore_pain_face_enemy", &mocompignorepainfaceenemyinit, &mocompignorepainfaceenemyupdate, &mocompignorepainfaceenemyterminate);
 }
 
-private drawtraversal(traversal, entity, animation, mocompanimblendouttime, mocompanimflag, mocompduration) {
+drawtraversal(traversal, entity, animation, mocompanimblendouttime, mocompanimflag, mocompduration) {
   if(getdvarint(#"ai_debugvolumetool", 0) <= 1) {
     return;
   }
@@ -79,7 +78,7 @@ private drawtraversal(traversal, entity, animation, mocompanimblendouttime, moco
   }
 }
 
-private drawtraversalsection(section, entity, animation, mocompanimblendouttime, mocompanimflag, mocompduration) {
+drawtraversalsection(section, entity, animation, mocompanimblendouttime, mocompanimflag, mocompduration) {
   if(getdvarint(#"ai_debugvolumetool", 0) <= 1) {
     return;
   }
@@ -128,7 +127,7 @@ private drawtraversalsection(section, entity, animation, mocompanimblendouttime,
   }
 }
 
-private calculatetraveralsection(entity, traversal, animation, starttime, endtime, startposition, endposition, startangles, timescale = 1) {
+calculatetraveralsection(entity, traversal, animation, starttime, endtime, startposition, endposition, startangles, timescale = 1) {
   assert(endtime >= starttime);
   animlength = getanimlength(animation);
   section = spawnStruct();
@@ -284,7 +283,7 @@ calculatepivotoriginfromedge(entity, mantlenode, traversalstart) {
       }
     }
   } else {
-    mantleorigin = physicstraceex(mantleoriginproj + (0, 0, mantlenode.aabb_extents[2]), mantleoriginproj - (0, 0, mantlenode.aabb_extents[2]), (0, 0, 0), (0, 0, 0), entity)[#"position"];
+    mantleorigin = physicstraceex(mantleoriginproj + (0, 0, mantlenode.aabb_extents[2]), mantleoriginproj - (0, 0, mantlenode.aabb_extents[2]), (0, 0, 0), (0, 0, 0), entity)[# "position"];
   }
 
   recordline(mantleoriginproj, mantleendproj, (0, 0, 1), "<dev string:x38>", entity);
@@ -323,7 +322,7 @@ mocomptraversalproceduralinit(entity, mocompanim, mocompanimblendouttime, mocomp
     if(isDefined(traversal.endnodeparent)) {
       traversal.origincontents = entity setcontents(8192);
       traversal.lastendnodeparentorigin = traversal.endnodeparent.origin;
-      traversal.adjustedendposition = physicstraceex(entity.traversalendpos + (0, 0, 24), entity.traversalendpos - (0, 0, 24), (0, 0, 0), (0, 0, 0), entity)[#"position"];
+      traversal.adjustedendposition = physicstraceex(entity.traversalendpos + (0, 0, 24), entity.traversalendpos - (0, 0, 24), (0, 0, 0), (0, 0, 0), entity)[# "position"];
     }
   }
 
@@ -375,7 +374,7 @@ mocomptraversalproceduralpivotinit(entity, mocompanim, mocompanimblendouttime, m
     if(isDefined(traversal.endnodeparent)) {
       traversal.origincontents = entity setcontents(8192);
       traversal.lastendnodeparentorigin = traversal.endnodeparent.origin;
-      traversal.adjustedendposition = physicstraceex(entity.traversalendpos + (0, 0, 24), entity.traversalendpos - (0, 0, 24), (0, 0, 0), (0, 0, 0), entity)[#"position"];
+      traversal.adjustedendposition = physicstraceex(entity.traversalendpos + (0, 0, 24), entity.traversalendpos - (0, 0, 24), (0, 0, 0), (0, 0, 0), entity)[# "position"];
     }
   }
 
@@ -543,7 +542,7 @@ autoexec initadjusttocoverparams() {
   _addadjusttocover("robot", "cover_exposed", "stance_any", 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.9, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8);
 }
 
-private _addadjusttocover(archetype, node, stance, rot2, rot32, rot3, rot36, rot6, rot69, rot9, rot98, rot8, rot87, rot7, rot47, rot4, rot14, rot1, rot21) {
+_addadjusttocover(archetype, node, stance, rot2, rot32, rot3, rot36, rot6, rot69, rot9, rot98, rot8, rot87, rot7, rot47, rot4, rot14, rot1, rot21) {
   if(!isDefined(level.adjusttocover)) {
     level.adjusttocover = [];
   }
@@ -576,7 +575,7 @@ private _addadjusttocover(archetype, node, stance, rot2, rot32, rot3, rot36, rot
   level.adjusttocover[archetype][node][stance] = directions;
 }
 
-private _getadjusttocoverrotation(archetype, node, stance, angletonode) {
+_getadjusttocoverrotation(archetype, node, stance, angletonode) {
   assert(isarray(level.adjusttocover[archetype]));
 
   if(!isDefined(level.adjusttocover[archetype][node])) {
@@ -639,7 +638,7 @@ private _getadjusttocoverrotation(archetype, node, stance, angletonode) {
   return 0.8;
 }
 
-private debuglocoexplosion(entity) {
+debuglocoexplosion(entity) {
   entity endon(#"death");
 
   startorigin = entity.origin;
@@ -656,7 +655,7 @@ private debuglocoexplosion(entity) {
 
 }
 
-private mocompflankstandinit(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
+mocompflankstandinit(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
   entity animmode("nogravity", 0);
   entity orientmode("face angle", entity.angles[1]);
   entity pathmode("move delayed", 0, randomfloatrange(0.5, 1));
@@ -667,7 +666,7 @@ private mocompflankstandinit(entity, mocompanim, mocompanimblendouttime, mocompa
   }
 }
 
-private mocomplocoexplosioninit(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
+mocomplocoexplosioninit(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
   entity animmode("nogravity", 0);
   entity orientmode("face angle", entity.angles[1]);
 
@@ -677,7 +676,7 @@ private mocomplocoexplosioninit(entity, mocompanim, mocompanimblendouttime, moco
 
 }
 
-private mocompadjusttocoverinit(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
+mocompadjusttocoverinit(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
   entity orientmode("face angle", entity.angles[1]);
   entity animmode("angle deltas", 0);
   entity.blockingpain = 1;
@@ -700,7 +699,7 @@ private mocompadjusttocoverinit(entity, mocompanim, mocompanimblendouttime, moco
   }
 }
 
-private mocompadjusttocoverupdate(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
+mocompadjusttocoverupdate(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
   if(!isDefined(entity.adjustnode)) {
     return;
   }
@@ -730,7 +729,7 @@ private mocompadjusttocoverupdate(entity, mocompanim, mocompanimblendouttime, mo
 
 }
 
-private mocompadjusttocoverterminate(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
+mocompadjusttocoverterminate(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
   entity.blockingpain = 0;
   entity.mocompanglestarttime = undefined;
   entity.nodeoffsetangle = undefined;
@@ -751,7 +750,7 @@ private mocompadjusttocoverterminate(entity, mocompanim, mocompanimblendouttime,
   entity.adjustnode = undefined;
 }
 
-private function_82b9d7b7(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
+function_82b9d7b7(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
   entity orientmode("face angle", entity.angles[1]);
   entity animmode("normal");
 
@@ -798,7 +797,7 @@ function_4b95cde(entity, mocompanim, mocompanimblendouttime, mocompanimflag, moc
   entity animmode("normal", 0);
 }
 
-private mocompignorepainfaceenemyinit(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
+mocompignorepainfaceenemyinit(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
   entity.blockingpain = 1;
 
   if(isDefined(entity.enemy)) {
@@ -810,7 +809,7 @@ private mocompignorepainfaceenemyinit(entity, mocompanim, mocompanimblendouttime
   entity animmode("pos deltas");
 }
 
-private mocompignorepainfaceenemyupdate(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
+mocompignorepainfaceenemyupdate(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
   if(isDefined(entity.enemy) && entity getanimtime(mocompanim) < 0.5) {
     entity orientmode("face enemy");
     return;
@@ -819,6 +818,6 @@ private mocompignorepainfaceenemyupdate(entity, mocompanim, mocompanimblendoutti
   entity orientmode("face angle", entity.angles[1]);
 }
 
-private mocompignorepainfaceenemyterminate(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
+mocompignorepainfaceenemyterminate(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
   entity.blockingpain = 0;
 }

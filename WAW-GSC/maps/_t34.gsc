@@ -28,7 +28,7 @@ main(model, type) {
   if(!isDefined(type)) {
     type = "t34";
   }
-  level.vehicletypefancy[type] = & "VEHICLENAME_T34_TANK";
+  level.vehicletypefancy[type] = &"VEHICLENAME_T34_TANK";
 }
 
 init_local() {}
@@ -42,8 +42,8 @@ set_vehicle_anims(positions) {
 
 setanims() {
   positions = [];
-  for (i = 0; i < 9; i++)
-    positions[i] = spawnstruct();
+  for(i = 0; i < 9; i++)
+    positions[i] = spawnStruct();
   positions[0].sittag = "tag_driver";
   positions[1].sittag = "tag_passenger4";
   positions[2].sittag = "tag_passenger5";

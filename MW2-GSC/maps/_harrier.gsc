@@ -31,7 +31,6 @@ main(model, type) {
   build_light(model, "wingtip_red", "tag_light_R_wing", "misc/aircraft_light_wingtip_red", "running", 0.05);
   build_light(model, "white_blink_tail", "TAG_LIGHT_TAIL", "misc/aircraft_light_white_blink", "running", 0.10);
   build_light(model, "white_blink_tail", "TAG_LIGHT_BELLY", "misc/aircraft_light_red_blink", "running", 0.15);
-
 }
 
 init_local() {
@@ -47,8 +46,8 @@ set_vehicle_anims(positions) {
 #using_animtree("generic_human");
 setanims() {
   positions = [];
-  for (i = 0; i < 1; i++)
-    positions[i] = spawnstruct();
+  for(i = 0; i < 1; i++)
+    positions[i] = spawnStruct();
 
   return positions;
 }
@@ -61,24 +60,24 @@ playEngineEffects() {
   self ent_flag_set("engineeffects");
   engineeffects = getfx("engineeffect");
 
-  for (;;) {
+  for(;;) {
     self ent_flag_wait("engineeffects");
-    playfxontag(engineeffects, self, "tag_engine_right");
-    playfxontag(engineeffects, self, "tag_engine_left");
+    playFXOnTag(engineeffects, self, "tag_engine_right");
+    playFXOnTag(engineeffects, self, "tag_engine_left");
     wait .05;
-    playfxontag(engineeffects, self, "tag_engine_right2");
-    playfxontag(engineeffects, self, "tag_engine_left2");
+    playFXOnTag(engineeffects, self, "tag_engine_right2");
+    playFXOnTag(engineeffects, self, "tag_engine_left2");
     self ent_flag_waitopen("engineeffects");
-    StopFXOnTag(engineeffects, self, "tag_engine_left");
-    StopFXOnTag(engineeffects, self, "tag_engine_right");
+    stopFXOnTag(engineeffects, self, "tag_engine_left");
+    stopFXOnTag(engineeffects, self, "tag_engine_right");
     wait .05;
-    StopFXOnTag(engineeffects, self, "tag_engine_left2");
-    StopFXOnTag(engineeffects, self, "tag_engine_right2");
+    stopFXOnTag(engineeffects, self, "tag_engine_left2");
+    stopFXOnTag(engineeffects, self, "tag_engine_right2");
   }
 }
 
 playerisinfront(other) {
-  forwardvec = anglestoforward(flat_angle(other.angles));
+  forwardvec = anglesToForward(flat_angle(other.angles));
   normalvec = vectorNormalize(flat_origin(level.player.origin) - other.origin);
   dot = vectordot(forwardvec, normalvec);
   if(dot > 0)
@@ -92,7 +91,7 @@ plane_sound_node() {
   other endon("death");
   self thread plane_sound_node(); // spawn new thread for next plane that passes through this pathnode
   other thread play_loop_sound_on_entity("veh_mig29_dist_loop");
-  while (playerisinfront(other))
+  while(playerisinfront(other))
     wait .05;
   wait .5; // little delay for the boom
   other thread play_sound_in_space("veh_mig29_sonic_boom");

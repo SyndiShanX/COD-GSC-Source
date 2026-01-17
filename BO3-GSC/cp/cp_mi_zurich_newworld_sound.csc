@@ -16,13 +16,13 @@ function main() {
 
 function function_9f9f219() {
   trigger = getent(0, "security_det", "targetname");
-  if(!isdefined(trigger)) {
+  if(!isDefined(trigger)) {
     return;
   }
-  while (true) {
+  while(true) {
     trigger waittill("trigger", who);
     if(who isplayer()) {
-      playsound(0, "amb_security_detector", (-10363, -24283, 9450));
+      playSound(0, "amb_security_detector", (-10363, -24283, 9450));
       break;
     }
   }
@@ -30,13 +30,13 @@ function function_9f9f219() {
 
 function function_cfd80c1b() {
   trigger = getent(0, "horn", "targetname");
-  if(!isdefined(trigger)) {
+  if(!isDefined(trigger)) {
     return;
   }
-  while (true) {
+  while(true) {
     trigger waittill("trigger", who);
     if(who isplayer()) {
-      playsound(0, "amb_train_horn_distant", (21054, -3421, -6031));
+      playSound(0, "amb_train_horn_distant", (21054, -3421, -6031));
       break;
     }
   }
@@ -44,13 +44,13 @@ function function_cfd80c1b() {
 
 function function_166fca02() {
   trigger = getent(0, "train_horn_dist", "targetname");
-  if(!isdefined(trigger)) {
+  if(!isDefined(trigger)) {
     return;
   }
-  while (true) {
+  while(true) {
     trigger waittill("trigger", who);
     if(who isplayer()) {
-      playsound(0, "amb_train_horn_distant", (-13099, -18453, 10228));
+      playSound(0, "amb_train_horn_distant", (-13099, -18453, 10228));
       break;
     }
   }

@@ -534,9 +534,7 @@ giveLoadout(team, class, setPrimarySpawnWeapon) {
   {
     AssertEx(isDefined(level.mapCustomJuggSetclass), "Must have level.mapCustomJuggSetClass defined to give loadout to " + class + "!\n");
 
-    callbackLoadout = [
-      [level.mapCustomJuggSetclass]
-    ](class);
+    callbackLoadout = [[level.mapCustomJuggSetclass]](class);
 
     loadoutPrimary = ter_op(isDefined(callbackLoadout["loadoutPrimary"]), callbackLoadout["loadoutPrimary"], "none");
     loadoutPrimaryAttachment = ter_op(isDefined(callbackLoadout["loadoutPrimaryAttachment"]), callbackLoadout["loadoutPrimaryAttachment"], "none");
@@ -579,9 +577,7 @@ giveLoadout(team, class, setPrimarySpawnWeapon) {
     if(!isDefined(self.classCallback))
       error("self.classCallback function reference required for class 'callback'");
 
-    callbackLoadout = [
-      [self.classCallback]
-    ]();
+    callbackLoadout = [[self.classCallback]]();
     if(!isDefined(callbackLoadout))
       error("array required from self.classCallback for class 'callback'");
 

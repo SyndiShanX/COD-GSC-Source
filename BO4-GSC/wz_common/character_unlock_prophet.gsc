@@ -9,11 +9,10 @@
 #include scripts\mp_common\gametypes\globallogic;
 #include scripts\wz_common\character_unlock;
 #include scripts\wz_common\character_unlock_fixup;
-
 #namespace character_unlock_prophet;
 
 autoexec __init__system__() {
-  system::register(#"character_unlock_prophet", &__init__, undefined, #"character_unlock_prophet_fixup");
+  system::register(#"character_unlock_prophet", &__init__, undefined, # "character_unlock_prophet_fixup");
 }
 
 __init__() {
@@ -32,7 +31,7 @@ function_2613aeec(enabled) {
 function_1c4b5097(item) {
   itementry = item.itementry;
 
-  if(itementry.name === #"cu10_item") {
+  if(itementry.name === # "cu10_item") {
     self thread function_798820a9(item);
   }
 }
@@ -45,7 +44,7 @@ on_drop_item(params) {
   if(isDefined(params.item) && isDefined(params.item.itementry)) {
     itementry = params.item.itementry;
 
-    if(itementry.name === #"cu10_item" && !self character_unlock::function_f0406288(#"prophet_unlock")) {
+    if(itementry.name === # "cu10_item" && !self character_unlock::function_f0406288(#"prophet_unlock")) {
       self notify(#"dropped_prophet_item");
     }
   }
@@ -54,7 +53,7 @@ on_drop_item(params) {
 function_798820a9(item) {
   self notify("3da3c6e1687182e2");
   self endon("3da3c6e1687182e2");
-  self endon(#"hash_249a493b6d9b422c", #"dropped_prophet_item", #"disonnect", #"death");
+  self endon(#"hash_249a493b6d9b422c", # "dropped_prophet_item", # "disonnect", # "death");
 
   if(!isplayer(self)) {
     return;
@@ -65,9 +64,9 @@ function_798820a9(item) {
   while(isDefined(player)) {
     if(isDefined(player.inventory) && isDefined(player.inventory.consumed)) {
       if((isDefined(player.inventory.consumed.size) ? player.inventory.consumed.size : 0) >= 3) {
-        player character_unlock::function_c8beca5e(#"prophet_unlock", #"hash_63b7bd67a959fc47", 1);
+        player character_unlock::function_c8beca5e(#"prophet_unlock", # "hash_63b7bd67a959fc47", 1);
       } else {
-        player character_unlock::function_c8beca5e(#"prophet_unlock", #"hash_63b7bd67a959fc47", 0);
+        player character_unlock::function_c8beca5e(#"prophet_unlock", # "hash_63b7bd67a959fc47", 0);
       }
     }
 
@@ -81,7 +80,7 @@ function_4ac25840(params) {
 
     foreach(player in players) {
       if(player character_unlock::function_f0406288(#"prophet_unlock")) {
-        player character_unlock::function_c8beca5e(#"prophet_unlock", #"hash_63b7be67a959fdfa", 1);
+        player character_unlock::function_c8beca5e(#"prophet_unlock", # "hash_63b7be67a959fdfa", 1);
         player notify(#"hash_249a493b6d9b422c");
       }
     }

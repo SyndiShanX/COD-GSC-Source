@@ -16,7 +16,7 @@ get_players_avg_origin() {
   meanX = 0;
   meanY = 0;
   meanZ = 0;
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     player = players[i];
     meanX += player.origin[0];
     meanY += player.origin[1];
@@ -32,7 +32,7 @@ take_player_weapons() {
   self.weaponInventory = self GetWeaponsList();
   self.lastActiveWeapon = self GetCurrentWeapon();
   self.weaponAmmo = [];
-  for (i = 0; i < self.weaponInventory.size; i++) {
+  for(i = 0; i < self.weaponInventory.size; i++) {
     weapon = self.weaponInventory[i];
     self.weaponAmmo[weapon]["clip"] = self GetWeaponAmmoClip(weapon);
     self.weaponAmmo[weapon]["stock"] = self GetWeaponAmmoStock(weapon);
@@ -42,7 +42,7 @@ take_player_weapons() {
 
 giveback_player_weapons() {
   ASSERTEX(isDefined(self.weaponInventory), "player.weaponInventory is not defined - did you run take_player_weapons() first?");
-  for (i = 0; i < self.weaponInventory.size; i++) {
+  for(i = 0; i < self.weaponInventory.size; i++) {
     weapon = self.weaponInventory[i];
     self GiveWeapon(weapon);
     self SetWeaponAmmoClip(weapon, self.weaponAmmo[weapon]["clip"]);
@@ -58,8 +58,8 @@ giveback_player_weapons() {
   }
 }
 
-waittill_okToSpawn() {
-  while (!OkToSpawn()) {
+waittill_okTospawn() {
+  while(!OkTospawn()) {
     wait(0.05);
   }
 }
@@ -71,7 +71,7 @@ generic_rumble_explosion() {
 }
 
 grab_starting_friends() {
-  startguys = GetEntArray("starting_allies", "targetname");
+  startguys = getEntArray("starting_allies", "targetname");
   ASSERT(isDefined(startguys) && startguys.size > 0, "grab_starting_guys(): can't find the starting guys!");
   return startguys;
 }
@@ -121,7 +121,7 @@ get_friends(includeSarge) {
     includeSarge = false;
   }
   friends = [];
-  for (i = 0; i < level.friends.size; i++) {
+  for(i = 0; i < level.friends.size; i++) {
     guy = level.friends[i];
     if(is_active_ai(guy)) {
       if(!includeSarge && (guy == level.sarge)) {
@@ -136,7 +136,7 @@ get_friends(includeSarge) {
 
 get_friends_by_color(colorCode) {
   colorguys = [];
-  for (i = 0; i < level.friends.size; i++) {
+  for(i = 0; i < level.friends.size; i++) {
     guy = level.friends[i];
     if(guy check_force_color(colorCode)) {
       colorguys[colorguys.size] = guy;
@@ -148,7 +148,7 @@ get_friends_by_color(colorCode) {
 get_allies_by_color(colorCode) {
   colorguys = [];
   allies = GetAIArray("allies");
-  for (i = 0; i < allies.size; i++) {
+  for(i = 0; i < allies.size; i++) {
     if(allies[i] check_force_color(colorCode)) {
       colorguys[colorguys.size] = allies[i];
     }
@@ -190,7 +190,7 @@ disable_arrivalsandexits_til_lastnode() {
   self.disableExits = true;
   self thread disable_arrivalsandexits_dmg_watcher();
   node = GetNode(self.target, "targetname");
-  while (isDefined(node.target)) {
+  while(isDefined(node.target)) {
     self waittill("goal");
     node = GetNode(node.target, "targetname");
   }
@@ -208,7 +208,7 @@ disable_arrivalsandexits_dmg_watcher() {
 }
 
 get_spawners_and_spawn_group(spawnerVal, spawnerKey) {
-  spawners = GetEntArray(spawnerVal, spawnerKey);
+  spawners = getEntArray(spawnerVal, spawnerKey);
   if(!isDefined(spawners) || spawners.size <= 0) {
     ASSERTMSG("get_spawners_and_spawn_group(): couldn't find spawners with KVP of " + spawnerKey + "/" + spawnerVal);
     return;
@@ -222,7 +222,7 @@ spawn_group(spawners) {
     return;
   }
   guys = [];
-  for (i = 0; i < spawners.size; i++) {
+  for(i = 0; i < spawners.size; i++) {
     if(isDefined(spawners[i])) {
       guy = spawn_guy(spawners[i]);
       if(isDefined(guy)) {
@@ -237,7 +237,7 @@ spawn_group(spawners) {
 }
 
 spawn_guy(spawner) {
-  spawnedGuy = spawner StalingradSpawn();
+  spawnedGuy = spawner Stalingradspawn();
   spawn_failed(spawnedGuy);
   ASSERT(isDefined(spawnedGuy));
   return spawnedGuy;
@@ -246,7 +246,7 @@ spawn_guy(spawner) {
 get_closest_from_group(testOrg, group, excludeMe, backup_spawner) {
   doExclude = isDefined(excludeMe);
   closest = undefined;
-  for (i = 0; i < group.size; i++) {
+  for(i = 0; i < group.size; i++) {
     if(!isDefined(group[i])) {
       continue;
     }
@@ -273,7 +273,7 @@ get_closest_from_group(testOrg, group, excludeMe, backup_spawner) {
   if(!isDefined(closest)) {
     if(isDefined(backup_spawner)) {
       spawner = getent(backup_spawner, "targetname");
-      spawnedGuy = spawner StalingradSpawn();
+      spawnedGuy = spawner Stalingradspawn();
       spawn_failed(spawnedGuy);
       return spawnedGuy;
     }
@@ -282,7 +282,7 @@ get_closest_from_group(testOrg, group, excludeMe, backup_spawner) {
 }
 
 get_randomfriend() {
-  while (1) {
+  while(1) {
     guy = level.friends[RandomInt(level.friends.size)];
     if(is_active_ai(guy)) {
       return guy;
@@ -294,7 +294,7 @@ get_randomfriend() {
 
 get_randomfriend_excluding(thisGuy) {
   newguy = thisGuy;
-  while (newguy == thisGuy && is_active_ai(thisGuy)) {
+  while(newguy == thisGuy && is_active_ai(thisGuy)) {
     newguy = get_randomfriend();
     if(newguy == thisGuy) {
       wait(0.05);
@@ -312,7 +312,7 @@ get_randomfriend_notsarge() {
 
 get_randomfriend_notsarge_excluding(thisGuy) {
   newguy = thisGuy;
-  while (newguy == thisGuy) {
+  while(newguy == thisGuy) {
     newguy = get_randomfriend_excluding(thisGuy);
     if(newguy == level.sarge) {
       newguy = thisGuy;
@@ -444,14 +444,14 @@ scr_reset_goalradius() {
 }
 
 trigger_setup() {
-  fs_trigs = GetEntArray("flood_spawner", "targetname");
-  for (i = 0; i < fs_trigs.size; i++) {
+  fs_trigs = getEntArray("flood_spawner", "targetname");
+  for(i = 0; i < fs_trigs.size; i++) {
     if(isDefined(fs_trigs[i])) {
       fs_trigs[i] thread trigger_floodspawn_think();
     }
   }
-  fc_trigs = GetEntArray("trigger_friendlychain", "classname");
-  for (i = 0; i < fc_trigs.size; i++) {
+  fc_trigs = getEntArray("trigger_friendlychain", "classname");
+  for(i = 0; i < fc_trigs.size; i++) {
     if(isDefined(fc_trigs[i])) {
       fc_trigs[i] thread trigger_friendlychain_think();
     }
@@ -492,13 +492,13 @@ waittill_triggerarea_clear(trig, team, maxWait) {
     println("waittill_triggerarea_clear(): trig is not defined! aborting.");
     return;
   }
-  while (1) {
+  while(1) {
     foundOne = false;
     ais = GetAiArray(team);
     if(ais.size <= 0) {
       return;
     }
-    for (i = 0; i < ais.size; i++) {
+    for(i = 0; i < ais.size; i++) {
       guy = ais[i];
       if(guy IsTouching(trig)) {
         foundOne = true;
@@ -527,11 +527,11 @@ wait_while_players_can_see(proxDist, checkInterval) {
   if(!isDefined(checkInterval)) {
     checkInterval = 5;
   }
-  while (is_active_ai(self)) {
+  while(is_active_ai(self)) {
     playerCanSee = false;
     players = get_players();
-    for (i = 0; i < players.size; i++) {
-      if(SightTracePassed(players[i] GetEye(), self GetEye(), false, players[i]) || Distance(players[i].origin, self.origin) < proxDist) {
+    for(i = 0; i < players.size; i++) {
+      if(SightTracePassed(players[i] getEye(), self getEye(), false, players[i]) || Distance(players[i].origin, self.origin) < proxDist) {
         playerCanSee = true;
         break;
       }
@@ -545,14 +545,14 @@ wait_while_players_can_see(proxDist, checkInterval) {
 }
 
 get_ais(value, key) {
-  ents = GetEntArray(value, key);
+  ents = getEntArray(value, key);
   guys = [];
   endnodes = [];
   if(!isDefined(ents.size) || ents.size <= 0) {
     ASSERTMSG("get_ais(): couldn't find any AIs of key/value " + key + "/" + value);
     return guys;
   }
-  for (i = 0; i < ents.size; i++) {
+  for(i = 0; i < ents.size; i++) {
     ent = ents[i];
     if(is_active_ai(ent)) {
       guys[guys.size] = ent;
@@ -579,12 +579,12 @@ waittill_group_dies(group, maxWait, amount, kill_rest) {
   }
   level.deathWaitTracker = group.size;
   println("^5Waiting for " + level.deathWaitTracker + " AI to die...");
-  for (i = 0; i < group.size; i++) {
+  for(i = 0; i < group.size; i++) {
     if(IsAlive(group[i])) {
       level thread death_wait(group[i], amount, kill_rest, group);
     }
   }
-  while (!level.groupIsDead && !level.groupTimerDone) {
+  while(!level.groupIsDead && !level.groupTimerDone) {
     wait(0.25);
   }
   return;
@@ -592,7 +592,7 @@ waittill_group_dies(group, maxWait, amount, kill_rest) {
 
 waittill_group_dies_timeout(timer) {
   startTime = GetTime();
-  while (!level.groupIsDead && ((GetTime() - startTime) < (timer * 1000))) {
+  while(!level.groupIsDead && ((GetTime() - startTime) < (timer * 1000))) {
     wait(0.25);
   }
   if(!level.groupIsDead) {
@@ -604,7 +604,7 @@ waittill_group_dies_timeout(timer) {
 }
 
 death_wait(ent, amount, kill_rest, group) {
-  while (IsAlive(ent)) {
+  while(IsAlive(ent)) {
     if(!level.groupTimerDone) {
       wait(0.25);
     } else {
@@ -618,7 +618,7 @@ death_wait(ent, amount, kill_rest, group) {
   println("death_wait(): Waiting for " + level.deathWaitTracker + " AI to die... Needs to be: " + amount);
   if(level.deathWaitTracker <= amount) {
     if(kill_rest) {
-      for (i = 0; i < group.size; i++) {
+      for(i = 0; i < group.size; i++) {
         guy = group[i];
         if(is_active_ai(guy)) {
           guy thread bloody_death(true, 3.0);
@@ -636,7 +636,7 @@ death_wait(ent, amount, kill_rest, group) {
 kill_axis_in_trigger(trig, randomDelayFloat) {
   ASSERTEX(isDefined(trig), "kill_axis_in_trigger(): trig is not defined");
   enemies = GetAIArray("axis");
-  for (k = 0; k < enemies.size; k++) {
+  for(k = 0; k < enemies.size; k++) {
     enemy = enemies[k];
     if(enemy IsTouching(trig) && is_active_ai(enemy)) {
       enemy thread bloody_death(true, randomDelayFloat);
@@ -652,7 +652,7 @@ kill_all_axis(delay) {
   if(!isDefined(delay)) {
     delay = 0;
   }
-  for (i = 0; i < axis.size; i++) {
+  for(i = 0; i < axis.size; i++) {
     if(isDefined(axis[i])) {
       axis[i] thread bloody_death(true, delay);
     }
@@ -667,7 +667,7 @@ kill_aigroup(aigroup, maxDelay) {
   if(!isDefined(maxDelay) || maxDelay <= 0) {
     maxDelay = 0;
   }
-  for (i = 0; i < ais.size; i++) {
+  for(i = 0; i < ais.size; i++) {
     ais[i] disable_replace_on_death();
     ais[i] thread kill_aigroup_ai(maxDelay);
   }
@@ -691,7 +691,7 @@ cleanup_forcecolor_redshirts(forcecolor, trigValue, trigKey, waitTime) {
   }
   redshirts = [];
   ais = GetAIArray("allies");
-  for (i = 0; i < ais.size; i++) {
+  for(i = 0; i < ais.size; i++) {
     guy = ais[i];
     if(is_active_ai(guy)) {
       if(isDefined(guy.script_forcecolor) && guy.script_forcecolor == forcecolor) {
@@ -702,7 +702,7 @@ cleanup_forcecolor_redshirts(forcecolor, trigValue, trigKey, waitTime) {
   if(!isDefined(redshirts) || redshirts.size <= 0) {
     return;
   }
-  for (i = 0; i < redshirts.size; i++) {
+  for(i = 0; i < redshirts.size; i++) {
     guy = redshirts[i];
     guy disable_replace_on_death();
     guy thread bloody_death(true, waitTime);
@@ -732,7 +732,7 @@ bloody_death(die, delay) {
   tags[5] = "j_elbow_ri";
   tags[6] = "j_clavicle_le";
   tags[7] = "j_clavicle_ri";
-  for (i = 0; i < 3 + RandomInt(5); i++) {
+  for(i = 0; i < 3 + RandomInt(5); i++) {
     random = RandomIntRange(0, tags.size);
     self thread bloody_death_fx(tags[random], undefined);
     wait(RandomFloat(0.1));
@@ -746,7 +746,7 @@ bloody_death_fx(tag, fxName) {
   if(!isDefined(fxName)) {
     fxName = level._effect["flesh_hit"];
   }
-  PlayFxOnTag(fxName, self, tag);
+  playFXOnTag(fxName, self, tag);
 }
 
 bloody_death_after_wait(minWait, die, delay) {
@@ -787,7 +787,7 @@ guy_stay_on_turret(guy, turret) {
   level thread maps\_mgturret::mg42_setdifficulty(turret, GetDifficulty());
   turret SetMode("auto_ai");
   turret setturretignoregoals(true);
-  while (1) {
+  while(1) {
     if(!isDefined(guy GetTurret())) {
       guy UseTurret(turret);
     }
@@ -800,7 +800,7 @@ draw_line_to_player(color) {
   if(!isDefined(color)) {
     color = (1, 1, 1);
   }
-  while (1) {
+  while(1) {
     players = get_players();
     line(self.origin, players[0].origin, color);
     wait(0.05);
@@ -837,7 +837,7 @@ debug_ai() {
   level.total_count.fontScale = fontScale;
   level.total_count.x = xPos;
   level.total_count.y = yPos;
-  while (1) {
+  while(1) {
     if(isDefined(level.friends)) {
       level.friends_count SetText("level.friends: " + level.friends.size);
     } else {
@@ -916,7 +916,7 @@ getnode_safe(value, key, debugName) {
 }
 
 array_contains_element(element) {
-  for (i = 0; i < self.size; i++) {
+  for(i = 0; i < self.size; i++) {
     if(self[i] == element) {
       return true;
     }
@@ -947,9 +947,9 @@ waittill_player_within_range(testOrigin, playerdist, waitTime) {
     waitTime = 0.1;
   }
   closeEnough = false;
-  while (!closeEnough) {
+  while(!closeEnough) {
     players = get_players();
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       player = players[i];
       if(Distance(player.origin, testOrigin) <= playerdist) {
         closeEnough = true;
@@ -965,12 +965,12 @@ waittill_player_within_range(testOrigin, playerdist, waitTime) {
 }
 
 waittill_enemy_in_range_of_player(enemyRange) {
-  while (1) {
+  while(1) {
     players = get_players();
     axis = GetAIArray("axis");
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       player = players[i];
-      for (j = 0; j < axis.size; j++) {
+      for(j = 0; j < axis.size; j++) {
         badguy = axis[j];
         if(!is_active_ai(badguy)) {
           continue;
@@ -1001,7 +1001,7 @@ scr_delete(waitTime) {
 
 endscripting() {
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i] EnableInvulnerability();
     players[i] FreezeControls(true);
   }

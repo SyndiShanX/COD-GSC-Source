@@ -46,7 +46,7 @@ Callback_ActorDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWe
     else if(isDefined(eInflictor.destructible_type) && isSubStr(eInflictor.destructible_type, "vehicle_"))
       sWeapon = "destructible_car_mp";
   }
-  if(!(iDFlags & level.iDFLAGS_NO_PROTECTION)) {
+  if(!(iDFlags &level.iDFLAGS_NO_PROTECTION)) {
     if(isPlayer(eAttacker))
       eAttacker.pers["participation"]++;
     prevHealthRatio = self.health / self.maxhealth;
@@ -132,4 +132,3 @@ Callback_ActorKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir
     }
   }
 }
-

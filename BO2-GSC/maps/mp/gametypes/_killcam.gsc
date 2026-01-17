@@ -31,7 +31,7 @@ initfinalkillcam() {
 }
 
 initfinalkillcamteam(team) {
-  level.finalkillcamsettings[team] = spawnstruct();
+  level.finalkillcamsettings[team] = spawnStruct();
   clearfinalkillcamteam(team);
 }
 
@@ -140,8 +140,7 @@ dofinalkillcam() {
   level.infinalkillcam = 0;
 }
 
-startlastkillcam() {
-}
+startlastkillcam() {}
 
 areanyplayerswatchingthekillcam() {
   players = level.players;
@@ -596,8 +595,7 @@ addkillcamskiptext(respawn) {
   self.kc_skiptext.alpha = 1;
 }
 
-addkillcamtimer(camtime) {
-}
+addkillcamtimer(camtime) {}
 
 initkcelements() {
   if(!isDefined(self.kc_skiptext)) {

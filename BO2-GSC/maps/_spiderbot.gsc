@@ -53,11 +53,9 @@ build_spiderbot_anims() {
   level.spiderbot_anims[level.jump][2] = % ai_spider_idle;
 }
 
-precache_fx() {
-}
+precache_fx() {}
 
-update_idle_anim() {
-}
+update_idle_anim() {}
 
 spiderbot_animating() {
   self endon("death");
@@ -72,9 +70,7 @@ spiderbot_animating() {
     right = anglestoright(self.angles);
     side_vel = vectordot(right, velocity);
 
-    if(self ent_flag("playing_scripted_anim")) {
-    } else if(self.in_air) {
-    } else if(abs(side_vel) > 0.4 && abs(side_vel) > abs(speed)) {
+    if(self ent_flag("playing_scripted_anim")) {} else if(self.in_air) {} else if(abs(side_vel) > 0.4 && abs(side_vel) > abs(speed)) {
       anim_rate = abs(side_vel) / 15;
       anim_rate = clamp(anim_rate, 0.0, 1.5);
 
@@ -137,7 +133,7 @@ watch_for_jump() {
     if(self.driver jumpbuttonpressed() && !self.in_air && !self ent_flag("playing_scripted_anim")) {
       self.in_air = 1;
       v_movement = vectornormalize(level.player getnormalizedmovement() + (0, 0, 1));
-      v_forward = anglestoforward(self.angles);
+      v_forward = anglesToForward(self.angles);
       v_right = anglestoright(self.angles);
       v_up = anglestoup(self.angles);
 
@@ -153,7 +149,7 @@ watch_for_jump() {
 
       self.driver setclientdvar("phys_vehicleGravityMultiplier", 0.5);
       self launchvehicle(v_force, (0, 0, 0), 0);
-      self playsound("veh_spiderbot_jump");
+      self playSound("veh_spiderbot_jump");
       self.already_landed = 0;
       anim_rate = 1;
       self setanimknoball(level.spiderbot_anims[level.jump][0], % root, 1, 0.1, anim_rate);

@@ -4,7 +4,6 @@
 ***********************************************/
 
 #include scripts\core_common\system_shared;
-
 #namespace voice_events;
 
 autoexec __init__system__() {
@@ -37,8 +36,8 @@ function_840acc1c(event, handlerfunc, priority = 0, var_c10e92a2 = undefined) {
   assert(!isDefined(var_c10e92a2) || isfunctionptr(var_c10e92a2), "<dev string:xab>");
   assert(!isDefined(level.var_a95b39fd[event]), "<dev string:xdf>" + event);
   handler = {
-    #handlerfunc: handlerfunc, 
-    #priority: priority, 
+    #handlerfunc: handlerfunc,
+    #priority: priority,
     #var_c10e92a2: var_c10e92a2
   };
   level.var_a95b39fd[event] = handler;
@@ -119,7 +118,7 @@ function_c710099c(event, params) {
   }
 }
 
-private queue_item(&queue, item) {
+queue_item(&queue, item) {
   for(i = 0; i < queue.size; i++) {
     if(queue[i].priority < item.priority) {
       break;
@@ -129,7 +128,7 @@ private queue_item(&queue, item) {
   arrayinsert(queue, item, i);
 }
 
-private function_accf7a2e(&queue) {
+function_accf7a2e(&queue) {
   level endon(#"game_ended");
 
   while(true) {

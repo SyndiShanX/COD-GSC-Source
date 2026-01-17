@@ -110,7 +110,7 @@ activate_radio_egg(num) {
     }
   }
   radio_trig Delete();
-  radio PlaySound("vox_radio_egg_" + num);
+  radio playSound("vox_radio_egg_" + num);
   if(num == 6) {
     return;
   }
@@ -131,7 +131,7 @@ teddybear_egg() {
   self playLoopSound("zmb_meteor_loop");
   player = self teddybear_egg_wait();
   self stopLoopSound(1);
-  player PlaySound("zmb_meteor_activate");
+  player playSound("zmb_meteor_activate");
   player maps\_zombiemode_audio::create_and_play_dialog("eggs", "meteors", undefined, level.meteor_counter);
   level.teddybear_counter = level.teddybear_counter + 1;
   if(level.teddybear_counter == 3) {
@@ -283,7 +283,7 @@ doll_egg(num) {
         alias = "vox_egg_doll_response_" + num + "_3";
         break;
     }
-    self PlaySound(alias, "sounddone" + alias);
+    self playSound(alias, "sounddone" + alias);
     self waittill("sounddone" + alias);
     player maps\_zombiemode_audio::create_and_play_dialog("weapon_pickup", "dolls");
     wait(8);

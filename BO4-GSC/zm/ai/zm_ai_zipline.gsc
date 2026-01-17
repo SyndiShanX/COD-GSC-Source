@@ -11,7 +11,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\vehicle_shared;
 #include scripts\zm_common\zm_cleanup_mgr;
-
 #namespace zm_ai_zipline;
 
 autoexec __init__system__() {
@@ -35,7 +34,7 @@ __init__() {
   adddebugcommand("<dev string:x38>");
   adddebugcommand("<dev string:x66>");
 
-    zm_cleanup::function_cdf5a512(#"zombie", &function_16f40942);
+  zm_cleanup::function_cdf5a512(#"zombie", &function_16f40942);
   level.var_e5a996e8 = &function_e5a996e8;
 }
 
@@ -85,38 +84,37 @@ function_dc61ccae(vnd_start, var_6f06d19d, var_ca144d1e) {
       line(var_8e89eaf2, var_3573db0e, (1, 1, 0));
       sphere(var_8e89eaf2, 2, (1, 0.5, 0), 0.3, 0, 8, 1);
 
-        if(isDefined(var_6f06d19d) && isDefined(var_ca144d1e)) {
-          var_af2e4b51 = function_61418721(self.var_b20b0960.origin, var_6f06d19d, var_ca144d1e);
-          var_2b30dcba = vectornormalize(self.var_b20b0960.origin - var_af2e4b51);
-          var_41aabd6d = number_b_(self.var_b20b0960.origin, (0, 0, 1), var_af2e4b51, var_2b30dcba);
+      if(isDefined(var_6f06d19d) && isDefined(var_ca144d1e)) {
+        var_af2e4b51 = function_61418721(self.var_b20b0960.origin, var_6f06d19d, var_ca144d1e);
+        var_2b30dcba = vectornormalize(self.var_b20b0960.origin - var_af2e4b51);
+        var_41aabd6d = number_b_(self.var_b20b0960.origin, (0, 0, 1), var_af2e4b51, var_2b30dcba);
 
-          if(isDefined(var_41aabd6d)) {
-            var_b43bc141 = self.var_b20b0960.origin + (0, 0, 1) * var_41aabd6d;
-            height_difference = var_b43bc141[2] - self.var_b20b0960.origin[2];
+        if(isDefined(var_41aabd6d)) {
+          var_b43bc141 = self.var_b20b0960.origin + (0, 0, 1) * var_41aabd6d;
+          height_difference = var_b43bc141[2] - self.var_b20b0960.origin[2];
 
-  
-            line(self.var_b20b0960.origin, var_b43bc141, (1, 0, 1));
-            record3dtext("<dev string:xae>" + height_difference, self.var_b20b0960.origin, (1, 1, 1), "<dev string:xb1>");
-  
-          }
-
-          var_3a080e11 = function_61418721(var_8e89eaf2, var_6f06d19d, var_ca144d1e);
-          var_2eb8d479 = var_3a080e11 + (0, 0, 1);
-          forward = vectornormalize(var_bb4eaebf.origin - vnd_start.origin);
-          right = vectorcross((0, 0, 1), forward);
-          up = vectorcross(forward, right);
-          angles = axistoangles(forward, up);
-          var_c246e8d5 = coordtransformtranspose(var_3a080e11, var_8e89eaf2, angles);
-          var_e941deaa = vectornormalize(var_c246e8d5);
-
-          line(var_8e89eaf2, var_8e89eaf2 + var_c246e8d5, (1, 0, 1));
-          line(var_6f06d19d, var_ca144d1e, (1, 0.5, 0));
-          line(var_8e89eaf2, var_3a080e11, (1, 1, 0));
-          sphere(var_6f06d19d, 8, (1, 0.5, 0), 0.3, 0, 8, 1);
-          sphere(var_ca144d1e, 8, (1, 0.5, 0), 0.3, 0, 8, 1);
-          record3dtext("<dev string:xae>" + var_c246e8d5, var_8e89eaf2 + var_c246e8d5, (1, 1, 1), "<dev string:xb1>");
+          line(self.var_b20b0960.origin, var_b43bc141, (1, 0, 1));
+          record3dtext("<dev string:xae>" + height_difference, self.var_b20b0960.origin, (1, 1, 1), "<dev string:xb1>");
 
         }
+
+        var_3a080e11 = function_61418721(var_8e89eaf2, var_6f06d19d, var_ca144d1e);
+        var_2eb8d479 = var_3a080e11 + (0, 0, 1);
+        forward = vectornormalize(var_bb4eaebf.origin - vnd_start.origin);
+        right = vectorcross((0, 0, 1), forward);
+        up = vectorcross(forward, right);
+        angles = axistoangles(forward, up);
+        var_c246e8d5 = coordtransformtranspose(var_3a080e11, var_8e89eaf2, angles);
+        var_e941deaa = vectornormalize(var_c246e8d5);
+
+        line(var_8e89eaf2, var_8e89eaf2 + var_c246e8d5, (1, 0, 1));
+        line(var_6f06d19d, var_ca144d1e, (1, 0.5, 0));
+        line(var_8e89eaf2, var_3a080e11, (1, 1, 0));
+        sphere(var_6f06d19d, 8, (1, 0.5, 0), 0.3, 0, 8, 1);
+        sphere(var_ca144d1e, 8, (1, 0.5, 0), 0.3, 0, 8, 1);
+        record3dtext("<dev string:xae>" + var_c246e8d5, var_8e89eaf2 + var_c246e8d5, (1, 1, 1), "<dev string:xb1>");
+
+      }
 
       for(var_31120f24 = vnd_start; isDefined(var_31120f24.target); var_31120f24 = var_bb4eaebf) {
         var_bb4eaebf = getvehiclenode(var_31120f24.target, "targetname");
@@ -139,27 +137,26 @@ function_aeb6539c(origin, angles) {
   self linkto(self.var_b20b0960, "tag_origin", (0, 0, 0), angles * (-1, 0, 0));
 }
 
-private function_dedfe444(entity) {
+function_dedfe444(entity) {
   if(isDefined(entity.traversestartnode) && isDefined(entity.traversestartnode.script_noteworthy) && entity.traversestartnode.script_noteworthy == "zipline_traversal" && isDefined(entity.traversestartnode.var_e45a0969) && entity shouldstarttraversal()) {
-
     record3dtext("<dev string:xba>", self.origin, (1, 0, 0), "<dev string:xb1>");
 
-      return true;
+    return true;
   }
 
   return false;
 }
 
-private function_79554a79(entity) {
+function_79554a79(entity) {
   entity.vnd_start = getvehiclenode(entity.traversestartnode.var_e45a0969, "targetname");
 }
 
-private function_4e6fe1be() {
+function_4e6fe1be() {
   self endon(#"death");
   self.var_b20b0960 = spawner::simple_spawn_single(getent("veh_fasttravel", "targetname"));
 }
 
-private function_fc646a7e(entity, asmstatename) {
+function_fc646a7e(entity, asmstatename) {
   animationstatenetworkutility::requeststate(entity, asmstatename);
   entity.var_bf8dfaf4 = 1;
   entity.var_b20b0960 = undefined;
@@ -167,7 +164,7 @@ private function_fc646a7e(entity, asmstatename) {
   return 5;
 }
 
-private function_d31cb502(entity, asmstatename) {
+function_d31cb502(entity, asmstatename) {
   result = 5;
 
   if(isDefined(entity.var_b20b0960)) {
@@ -195,7 +192,7 @@ private function_d31cb502(entity, asmstatename) {
   return result;
 }
 
-private function_1a4b60ca(entity, asmstatename) {
+function_1a4b60ca(entity, asmstatename) {
   entity unlink();
   entity.var_bf8dfaf4 = 0;
   entity.allowpain = 1;
@@ -207,12 +204,12 @@ private function_1a4b60ca(entity, asmstatename) {
   return 4;
 }
 
-private function_a2185434(entity, asmstatename) {
+function_a2185434(entity, asmstatename) {
   animationstatenetworkutility::requeststate(entity, asmstatename);
   return 5;
 }
 
-private function_48ef356e(entity, asmstatename) {
+function_48ef356e(entity, asmstatename) {
   result = 5;
 
   if(entity isonground()) {
@@ -222,7 +219,7 @@ private function_48ef356e(entity, asmstatename) {
   return result;
 }
 
-private function_16f40942() {
+function_16f40942() {
   result = 0;
 
   if(isDefined(self.var_bf8dfaf4) && self.var_bf8dfaf4) {
@@ -232,7 +229,7 @@ private function_16f40942() {
   return result;
 }
 
-private function_e5a996e8(player, zone) {
+function_e5a996e8(player, zone) {
   result = undefined;
 
   if(isDefined(player.last_valid_position)) {

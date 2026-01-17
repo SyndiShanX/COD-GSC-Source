@@ -147,12 +147,12 @@ init_palm_trees() {
 
 init_starts() {
   default_start(::start_outside_castle);
-  add_start("mortar_pits", ::start_by_mortar_pits, & "OKI3_STARTS_MORTARPITS");
-  add_start("planters", ::start_by_planters, & "OKI3_STARTS_PLANTERS");
-  add_start("ambush", ::start_ambush, & "OKI3_STARTS_AMBUSH");
-  add_start("planters_end", ::start_planters_end, & "OKI3_STARTS_PLANTERS_END");
-  add_start("courtyard", ::start_in_courtyard, & "OKI3_STARTS_COURTYARD");
-  add_start("outro", ::start_at_outro, & "OKI3_STARTS_OUTRO");
+  add_start("mortar_pits", ::start_by_mortar_pits, &"OKI3_STARTS_MORTARPITS");
+  add_start("planters", ::start_by_planters, &"OKI3_STARTS_PLANTERS");
+  add_start("ambush", ::start_ambush, &"OKI3_STARTS_AMBUSH");
+  add_start("planters_end", ::start_planters_end, &"OKI3_STARTS_PLANTERS_END");
+  add_start("courtyard", ::start_in_courtyard, &"OKI3_STARTS_COURTYARD");
+  add_start("outro", ::start_at_outro, &"OKI3_STARTS_OUTRO");
 }
 
 init_spawn_functions() {
@@ -164,17 +164,17 @@ init_spawn_functions() {
   upper_mgguy add_spawn_function(::event1_upper_mg);
   gatehouse_mgguy = getent("gatehouse_mg_guy", "script_noteworthy");
   gatehouse_mgguy add_spawn_function(::event3_gatehouse_mg);
-  hole1_guys = getentarray("hole_guys_1", "targetname");
+  hole1_guys = getEntArray("hole_guys_1", "targetname");
   array_thread(hole1_guys, ::add_spawn_function, ::event4_hole1_guys);
-  hole2_guys = getentarray("courtyard_hole2_guys", "targetname");
+  hole2_guys = getEntArray("courtyard_hole2_guys", "targetname");
   array_thread(hole2_guys, ::add_spawn_function, ::event4_hole2_guys);
-  house_guys = getentarray("auto4405", "targetname");
+  house_guys = getEntArray("auto4405", "targetname");
   array_thread(house_guys, ::add_spawn_function, ::event4_house_guys);
-  defender_guys = getentarray("courtyard_defenders", "script_noteworthy");
+  defender_guys = getEntArray("courtyard_defenders", "script_noteworthy");
   array_thread(defender_guys, ::add_spawn_function, ::event4_house_guys);
-  sniper_guys = getentarray("treesniper_climber", "targetname");
+  sniper_guys = getEntArray("treesniper_climber", "targetname");
   array_thread(sniper_guys, ::add_spawn_function, ::tree_sniper_spawner_func);
-  e1_banzai_guys = getentarray("e1_banzai_guys", "targetname");
+  e1_banzai_guys = getEntArray("e1_banzai_guys", "targetname");
   array_thread(e1_banzai_guys, ::add_spawn_function, ::e1_banzai_charge);
 }
 
@@ -251,7 +251,7 @@ event1_spiderhole_ambush_melee() {
   guys[0] = self;
   guys[1] = get_closest_ai_exclude(getent("melee_fight", "targetname").origin, "allies", heros);
   tick = 0;
-  while (!isDefined(guys[1])) {
+  while(!isDefined(guys[1])) {
     guys[1] = get_closest_ai_exclude(getent("melee_fight", "targetname").origin, "allies", heros);
     wait(.05);
     tick++;
@@ -303,21 +303,21 @@ event1_seal_tunnel_entrance() {
   wait(6);
   ent = getent("play_smoke_fx", "targetname");
   playsoundatposition("satchel_down_tunnel", ent.origin);
-  playfx(level._effect["bunker_satchel"], ent.origin);
-  playfx(level._effect["dirt_mortar"], ent.origin);
+  playFX(level._effect["bunker_satchel"], ent.origin);
+  playFX(level._effect["dirt_mortar"], ent.origin);
   players = get_players_in_bunker();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i] enablehealthshield(false);
     players[i] dodamage(players[i].health + 1000, players[i].origin);
   }
-  blockers = getentarray("tunnel_block", "targetname");
-  for (i = 0; i < blockers.size; i++) {
+  blockers = getEntArray("tunnel_block", "targetname");
+  for(i = 0; i < blockers.size; i++) {
     blockers[i].origin = blockers[i].origin + (0, 0, 70);
     blockers[i] show();
     blockers[i] solid();
   }
   earthquake(.45, 3, ent.origin + (0, 0, -50), 1024);
-  while (!isDefined(level.spiderholes_triggered)) {
+  while(!isDefined(level.spiderholes_triggered)) {
     wait 1;
   }
   self.ignoreme = false;
@@ -355,13 +355,13 @@ start_planters_end() {
   level thread do_castle_dialogue();
   level.sarge set_force_color("o");
   level thread maps\oki3_courtyard::main();
-  objective_add(6, "current", & "OKI3_OBJ1");
+  objective_add(6, "current", &"OKI3_OBJ1");
   objective_position(6, (8203, -2236, 157));
   getent("planter_door_end", "targetname") notify("trigger");
   kill_beginning_guys();
   x = 0;
   guys = getaiarray("allies");
-  for (i = 0; i < guys.size; i++) {
+  for(i = 0; i < guys.size; i++) {
     if(guys[i] != level.sarge && guys[i] != level.polonsky && x < 2) {
       guys[i] notify("_disable_reinforcement");
       wait(.1);
@@ -370,7 +370,7 @@ start_planters_end() {
     }
   }
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i] takeweapon("air_support");
   }
 }
@@ -388,7 +388,7 @@ supply_drop_1() {
   level.drop1.anchor moveto(vector, randomintrange(4, 6));
   level.drop1 thread move_drop1();
   level.drop1.anchor waittill("movedone");
-  playfx(level._effect["bunker_dust"], level.drop1.anchor.origin);
+  playFX(level._effect["bunker_dust"], level.drop1.anchor.origin);
   level.drop1 notify("movedone");
   if(randomint(100) > 50) {
     str = "landing";
@@ -409,15 +409,15 @@ move_drop1() {
   self.animname = "drop1";
   self useanimtree(#animtree);
   self endon("movedone");
-  while (1) {
+  while(1) {
     level.drop1 maps\_anim::anim_single_solo(level.drop1, "drop");
     level.drop1 waittill("single anim");
   }
 }
 
 start_ambush() {
-  blockers = getentarray("tunnel_block", "targetname");
-  for (i = 0; i < blockers.size; i++) {
+  blockers = getEntArray("tunnel_block", "targetname");
+  for(i = 0; i < blockers.size; i++) {
     blockers[i] hide();
     blockers[i] notsolid();
     blockers[i] connectpaths();
@@ -445,7 +445,7 @@ start_in_courtyard() {
   wait(1);
   getent("spawn_feigning_guys", "targetname") notify("trigger");
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i] takeweapon("air_support");
   }
 }
@@ -471,8 +471,8 @@ start_outside_castle() {
   battlechatter_off("axis");
   set_player_ammo_loadout();
   level thread do_intro_dialogue();
-  blockers = getentarray("tunnel_block", "targetname");
-  for (i = 0; i < blockers.size; i++) {
+  blockers = getEntArray("tunnel_block", "targetname");
+  for(i = 0; i < blockers.size; i++) {
     blockers[i] hide();
     blockers[i] notsolid();
     blockers[i] connectpaths();
@@ -501,8 +501,8 @@ start_outside_castle() {
 buzzby_sound() {
   wait(.5);
   players = get_players();
-  planes = getentarray("buzzby_planes", "targetname");
-  for (i = 0; i < planes.size; i++) {
+  planes = getEntArray("buzzby_planes", "targetname");
+  for(i = 0; i < planes.size; i++) {
     planes[i] thread plane_loop_sound();
     planes[i] thread delete_plane();
   }
@@ -510,7 +510,7 @@ buzzby_sound() {
 
 plane_loop_sound() {
   wait(randomfloatrange(0.1, 1));
-  self playsound("plane_flyby_" + randomintrange(1, 5));
+  self playSound("plane_flyby_" + randomintrange(1, 5));
 }
 
 delete_plane() {
@@ -554,7 +554,7 @@ event1_regroup() {
   level.sniper_pawn.goalradius = 32;
   level.polonsky setgoalnode(nodes[0]);
   level.sniper_pawn setgoalnode(nodes[1]);
-  objective_add(2, "current", & "OKI3_OBJ4", (5717.5, 3154.5, -754));
+  objective_add(2, "current", &"OKI3_OBJ4", (5717.5, 3154.5, -754));
   level.sarge set_force_color("y");
   level.polonsky set_force_color("y");
   level.sniper_pawn set_force_color("g");
@@ -576,7 +576,7 @@ forward_squad() {
   getent("ai_drop", "targetname") notify("trigger");
   guys = get_ai_group_ai("forward_squad");
   nodes = getnodearray("runto_supplies", "targetname");
-  for (i = 0; i < guys.size; i++) {
+  for(i = 0; i < guys.size; i++) {
     guys[i].goalradius = 64;
     guys[i].pacifist = true;
     guys[i] setgoalnode(nodes[i]);
@@ -584,7 +584,7 @@ forward_squad() {
     guys[i] notify("_disable_reinforcement");
   }
   guys = get_ai_group_ai("friends");
-  for (i = 0; i < guys.size; i++) {
+  for(i = 0; i < guys.size; i++) {
     if(guys[i] != level.polonsky && guys[i] != level.sarge) {
       guys[i] notify("_disable_reinforcement");
     }
@@ -642,12 +642,12 @@ init_bunker_damage() {
   intact = getent("mortar_house_intact", "targetname");
   damage2 = getent("mortar_house_damage_2", "targetname");
   damage3 = getent("mortar_house_damage_3", "targetname");
-  bigbits = getentarray("bigbits", "script_noteworthy");
+  bigbits = getEntArray("bigbits", "script_noteworthy");
   deleted_bits = getent("mortar_house_damage_delete", "targetname");
-  loose_boards = getentarray("loose_boards", "script_noteworthy");
+  loose_boards = getEntArray("loose_boards", "script_noteworthy");
   bits = [];
   bits = array_combine(bigbits, loose_boards);
-  for (i = 0; i < bits.size; i++) {
+  for(i = 0; i < bits.size; i++) {
     bits[i] hide();
     bits[i] notsolid();
   }
@@ -670,7 +670,7 @@ init_bunker_damage() {
   chunks[3] = getent("mortarpit_mghut_wrecked_chunk_4", "script_noteworthy");
   chunks[4] = getent("mortarpit_mghut_wrecked_chunk_5", "script_noteworthy");
   chunks[5] = getent("mortarpit_mghut_wrecked_chunk_6", "script_noteworthy");
-  for (i = 0; i < chunks.size; i++) {
+  for(i = 0; i < chunks.size; i++) {
     chunks[i] hide();
   }
   curtains = getent("event1_mg_curtains", "targetname");
@@ -691,7 +691,7 @@ monitor_bunker_damage() {
   getent("mortarpit_dmg", "targetname") trigger_off();
   dmg2 = false;
   dmg3 = false;
-  while (!dmg2) {
+  while(!dmg2) {
     trig waittill("damage", amount, attacker, dVec, P, type);
     if(is_player(attacker)) {
       if(amount > 400) {
@@ -709,12 +709,12 @@ monitor_bunker_damage() {
         }
         guys = getaiarray("axis");
         players = get_players();
-        for (i = 0; i < guys.size; i++) {
+        for(i = 0; i < guys.size; i++) {
           if(guys[i] istouching(trig)) {
             guys[i] thread flamedeath(attacker);
           }
         }
-        for (i = 0; i < players.size; i++) {
+        for(i = 0; i < players.size; i++) {
           if(players[i] istouching(trig)) {
             players[i] thread kill_player();
           }
@@ -724,10 +724,10 @@ monitor_bunker_damage() {
         wait(.5);
         wait(.25);
         exploder(21);
-        playfx(level._effect["a_exp_mortarpit_bldg01"], intact.origin);
+        playFX(level._effect["a_exp_mortarpit_bldg01"], intact.origin);
         earthquake(.55, 3, trig.origin, 2000);
-        playfx(level._effect["a_fire_smoke_med_int"], (893, -3908, -120));
-        playfx(level._effect["a_fire_smoke_med_int"], (1008, -3960, -160));
+        playFX(level._effect["a_fire_smoke_med_int"], (893, -3908, -120));
+        playFX(level._effect["a_fire_smoke_med_int"], (1008, -3960, -160));
         bits delete();
         damage2 hide();
         damage2 notsolid();
@@ -753,8 +753,8 @@ kill_player() {
 }
 
 delete_pieces_after_animate() {
-  bigbits = getentarray("bigbits", "script_noteworthy");
-  loose_boards = getentarray("loose_boards", "script_noteworthy");
+  bigbits = getEntArray("bigbits", "script_noteworthy");
+  loose_boards = getEntArray("loose_boards", "script_noteworthy");
   pieces = [];
   pieces = array_combine(bigbits, loose_boards);
   delete_pieces(pieces);
@@ -764,7 +764,7 @@ delete_pieces(pieces) {
   wait(6);
   level.mortarhut_pieces moveto(level.mortarhut_pieces.origin + (0, 0, -500), 8);
   level.mortarhut_pieces waittill("movedone");
-  for (i = 0; i < pieces.size; i++) {
+  for(i = 0; i < pieces.size; i++) {
     pieces[i] unlink();
     pieces[i] delete();
   }
@@ -774,15 +774,15 @@ delete_pieces(pieces) {
 setup_mortarhut_anim() {
   ent = getstruct("mortar_hut_anim", "targetname");
   mdl = spawn("script_model", ent.origin);
-  mdlsetmodel(level.scr_model["mortarpit_bunker"]);
+  mdlsetModel(level.scr_model["mortarpit_bunker"]);
   mdl.animname = "mortarpit_bunker";
   mdl SetAnimTree();
   level.mortarhut_pieces = mdl;
-  bigbits = getentarray("bigbits", "script_noteworthy");
-  loose_boards = getentarray("loose_boards", "script_noteworthy");
+  bigbits = getEntArray("bigbits", "script_noteworthy");
+  loose_boards = getEntArray("loose_boards", "script_noteworthy");
   bits = [];
   bits = array_combine(bigbits, loose_boards);
-  for (i = 0; i < bits.size; i++) {
+  for(i = 0; i < bits.size; i++) {
     bits[i] show();
     bits[i] linkto(mdl, trim_targetname(bits[i].targetname));
   }
@@ -791,7 +791,7 @@ setup_mortarhut_anim() {
 trim_targetname(targetname) {
   strng = targetname;
   newstr = "";
-  for (x = strng.size - 1; x > 12; x--) {
+  for(x = strng.size - 1; x > 12; x--) {
     newstr = strng[x] + newstr;
   }
   return (newstr);
@@ -813,7 +813,7 @@ monitor_mg_bunker_damage() {
   trig = getent("mg_hut_dmg", "targetname");
   dmg1 = false;
   mg_gunner = false;
-  while (!dmg1) {
+  while(!dmg1) {
     trig waittill("damage", amount, attacker, dVec, P, type);
     if(is_player(attacker)) {
       if(amount > 400) {
@@ -830,17 +830,17 @@ monitor_mg_bunker_damage() {
         earthquake(.51, 3, mg.origin, 1200);
         players = get_players();
         guys = getaiarray("axis");
-        for (i = 0; i < guys.size; i++) {
+        for(i = 0; i < guys.size; i++) {
           if(guys[i] istouching(trig)) {
             guys[i] thread flamedeath(attacker);
           }
         }
-        for (i = 0; i < players.size; i++) {
+        for(i = 0; i < players.size; i++) {
           if(players[i] istouching(trig)) {
             players[i] thread kill_player();
           }
         }
-        for (x = 0; x < chunks.size; x++) {
+        for(x = 0; x < chunks.size; x++) {
           chunks[x] delete();
         }
         clipper trigger_on();
@@ -878,7 +878,7 @@ start_by_mortar_pits() {
   level thread e3_save_stairs();
   wait(1);
   kill_beginning_guys();
-  trigs = getentarray("mortar_team", "targetname");
+  trigs = getEntArray("mortar_team", "targetname");
   array_thread(trigs, maps\oki3_util::trigger_array_notify);
   level.player_move_speed = 180;
   setup_friendlies("mortar_pits");
@@ -920,7 +920,7 @@ spawn_mortarpit_dudes() {
 
 cleanup_front_ai() {
   ai = getaiarray("axis");
-  for (i = 0; i < ai.size; i++) {
+  for(i = 0; i < ai.size; i++) {
     if(ai[i].origin[1] > -1869.5) {
       ai[i] thread random_death(3, 10);
     }
@@ -937,7 +937,7 @@ spawn_mortarpit_ai() {
   trig waittill("trigger");
   level.polonsky thread do_dialogue("stairs");
   wait(1);
-  trigs = getentarray("mortar_team", "targetname");
+  trigs = getEntArray("mortar_team", "targetname");
   array_thread(trigs, maps\oki3_util::trigger_array_notify);
   flag_set("stop_fake_mortar");
   wait(1);
@@ -957,10 +957,10 @@ planter_battle() {
   trig notify("trigger");
   setmusicstate("PLANTERS_CLEARED");
   friends = getaiarray("allies");
-  for (i = 0; i < friends.size; i++) {
+  for(i = 0; i < friends.size; i++) {
     friends[i] set_force_color("o");
   }
-  objective_add(5, "current", & "OKI3_REGROUP", (6031, -4012.5, 128));
+  objective_add(5, "current", &"OKI3_REGROUP", (6031, -4012.5, 128));
   trig notify("trigger");
   getent("regroup_after_planters", "targetname") trigger_on();
   getent("regroup_after_planters", "targetname") waittill("trigger");
@@ -984,7 +984,7 @@ do_planter_dialogue() {
   level.sarge do_dialogue("both_sides");
   level.sarge do_dialogue("hunt_down");
   battlechatter_on("allies");
-  objective_add(5, "current", & "OKI3_OBJ6A", (5694, -4694.5, 160.8));
+  objective_add(5, "current", &"OKI3_OBJ6A", (5694, -4694.5, 160.8));
   objective_ring(5);
   setmusicstate("PLANTERS");
 }
@@ -1052,7 +1052,7 @@ monitor_ai_group(enemy_aigroup, next_enemy_spawners, friendly_advance_chain, guy
 
 waitfor_death(aigroup, numleft) {
   level endon("planter_battle_finished");
-  while (1) {
+  while(1) {
     enemies = get_ai_group_ai(aigroup);
     if(isDefined(enemies) && enemies.size > numleft) {
       wait .05;
@@ -1064,7 +1064,7 @@ waitfor_death(aigroup, numleft) {
 
 setup_planter_squads() {
   guys = getaiarray("allies");
-  for (i = 0; i < guys.size; i++) {
+  for(i = 0; i < guys.size; i++) {
     if(i % 2) {
       guys[i] set_force_color("p");
       guys[i].purplesquad = true;
@@ -1079,7 +1079,7 @@ remove_guy_from_squad() {
   guys = getaiarray("allies");
   psquad = false;
   bsquad = false;
-  for (i = 0; i < guys.size; i++) {
+  for(i = 0; i < guys.size; i++) {
     if(isDefined(guys[i].purplesquad) && !psquad) {
       if(guys[i] != level.sarge && guys[i] != level.polonsky) {
         guys[i] notify("_disable_reinforcement");
@@ -1103,10 +1103,10 @@ planter_battle_end() {
   planters_fall_back();
   radius = getent("planter_end_radius", "script_noteworthy");
   end = false;
-  while (!end) {
+  while(!end) {
     alive = false;
     guys = getaiarray("axis");
-    for (i = 0; i < guys.size; i++) {
+    for(i = 0; i < guys.size; i++) {
       if(guys[i] istouching(radius)) {
         alive = true;
       }
@@ -1123,7 +1123,7 @@ planters_fall_back() {
   radi = getent("planter_end_radius", "script_noteworthy");
   nodes = getnodearray("510_fallback", "script_noteworthy");
   guys = getaiarray("axis");
-  for (i = 0; i < guys.size; i++) {
+  for(i = 0; i < guys.size; i++) {
     if(guys[i] istouching(radi)) {
       guys[i] thread fallback_planters(nodes[randomint(nodes.size)]);
     }
@@ -1141,11 +1141,11 @@ fallback_planters(spot) {
 }
 
 banzai_wave_think() {
-  while (1) {
+  while(1) {
     wait(1);
     ai = getaiarray("axis");
     chargers = 0;
-    for (i = 0; i < ai.size; i++) {
+    for(i = 0; i < ai.size; i++) {
       if(isAlive(ai[i]) && isDefined(ai[i].ready_to_charge) && chargers < 4) {
         self.banzai_no_wait = 1;
         self thread maps\_banzai::banzai_force();
@@ -1197,7 +1197,7 @@ sarge_kick_door() {
 
 open_planter_door(guy) {
   door = getent("door_right", "targetname");
-  door playsound("door_kick");
+  door playSound("door_kick");
   door connectpaths();
   waittillframeend;
   door rotateyaw(-115, 1, 0.25, 0.25);
@@ -1225,7 +1225,7 @@ mortar_objective() {
   trig = getent("mortar_objective", "targetname");
   trig waittill("trigger");
   ai = getaiarray("axis");
-  for (i = 0; i < ai.size; i++) {
+  for(i = 0; i < ai.size; i++) {
     if(isDefined(ai[i].script_spiderhole)) {
       ai[i] stopanimscripted();
       ai[i] delete();
@@ -1239,9 +1239,9 @@ mortar_objective() {
   level thread dialogue_more_mortars();
   level thread spawn_grass_guys();
   level waittill("mortar_guys_dead");
-  objective_string(5, & "OKI3_OBJ2");
+  objective_string(5, &"OKI3_OBJ2");
   objective_state(5, "done");
-  objective_add(6, "current", & "OKI3_OBJ1", (6031, -4012.5, 128));
+  objective_add(6, "current", &"OKI3_OBJ1", (6031, -4012.5, 128));
   level notify("stop_trench_mortars");
   autosave_by_name("mortarpits_cleared");
 }
@@ -1258,19 +1258,19 @@ update_mortar_objectives() {
   if(isDefined(guys) && guys.size > 0) {
     switch (guys.size) {
       case 1:
-        objective_string(5, & "OKI3_OBJ2_1");
+        objective_string(5, &"OKI3_OBJ2_1");
         break;
       case 2:
-        objective_string(5, & "OKI3_OBJ2_2");
+        objective_string(5, &"OKI3_OBJ2_2");
         break;
       case 3:
-        objective_string(5, & "OKI3_OBJ2_3");
+        objective_string(5, &"OKI3_OBJ2_3");
         break;
       case 4:
-        objective_string(5, & "OKI3_OBJ2_4");
+        objective_string(5, &"OKI3_OBJ2_4");
         break;
     }
-    for (i = 0; i < guys.size; i++) {
+    for(i = 0; i < guys.size; i++) {
       if(i == 0) {
         objective_position(5, guys[i].origin);
       } else {
@@ -1310,7 +1310,7 @@ update_mortar_objectives() {
 last_mortar_nag() {
   level endon("mortar_guys_dead");
   level.sarge endon("death");
-  while (!flag("mortars_cleared")) {
+  while(!flag("mortars_cleared")) {
     wait(Randomintrange(15, 30));
     if(randomint(100) > 50) {
       level.sarge do_dialogue("do_it" + randomint(3));
@@ -1322,7 +1322,7 @@ last_mortar_nag() {
 
 monitor_mortar_guys() {
   self thread mortar_guy_alert();
-  while (isAlive(self)) {
+  while(isAlive(self)) {
     wait(1);
   }
   update_mortar_objectives();
@@ -1330,8 +1330,8 @@ monitor_mortar_guys() {
 
 monitor_banzai_chargers() {
   guys_alive = true;
-  while (guys_alive) {
-    guys = getentarray("banzai_guy", "targetname");
+  while(guys_alive) {
+    guys = getEntArray("banzai_guy", "targetname");
     if(guys.size < 1) {
       guys_alive = false;
     }
@@ -1350,7 +1350,7 @@ supply_drop() {
   level thread drop_supplies(4);
   level thread drop_supplies(6);
   wait(.25);
-  for (i = 1; i < 5; i++) {
+  for(i = 1; i < 5; i++) {
     plane = getent("drop_plane" + i, "targetname");
     plane thread plane_loop_sound();
   }
@@ -1439,22 +1439,22 @@ ambient_mortars() {
 }
 
 motar_pit_damage() {
-  trigs = getentarray("mortar_pit_damage", "targetname");
+  trigs = getEntArray("mortar_pit_damage", "targetname");
   array_thread(trigs, ::mortar_pit_damage_think);
 }
 
 mortar_pit_damage_think() {
   self endon("stop_damage");
-  while (1) {
+  while(1) {
     self waittill("damage", dmg, attacker, vDir, vPoint, dmgType);
     if(is_player(attacker) && dmgType == "MOD_EXPLOSIVE") {
       earthquake(.55, 3, self.origin, 1000);
       if(dmg > 440) {
-        playfx(level._effect["mortar_pit_debris"], self.origin + (0, 0, 15));
+        playFX(level._effect["mortar_pit_debris"], self.origin + (0, 0, 15));
         ent = getent(self.script_noteworthy + "_radiusdamage", "targetname");
         if(isDefined(ent)) {
           guys = getaiarray("axis");
-          for (i = 0; i < guys.size; i++) {
+          for(i = 0; i < guys.size; i++) {
             if(distancesquared(guys[i].origin, ent.origin) < (256 * 256)) {
               guys[i] thread flamedeath(attacker);
             }
@@ -1496,7 +1496,7 @@ event1_tree_sniper_ambush() {
   wait(1.5);
   simple_spawn("treesniper_climber", undefined, 1);
   snipers = getaiarray("axis");
-  for (i = 0; i < snipers.size; i++) {
+  for(i = 0; i < snipers.size; i++) {
     if(isAlive(snipers[i])) {
       snipers[i] notify("enemy");
     }
@@ -1514,7 +1514,7 @@ event1_tree_sniper_ambush() {
   level.sarge do_dialogue("incoming");
   if(!flag("bunker_entered")) {
     objective_state(2, "done");
-    objective_add(3, "current", & "OKI3_TAKE_COVER", getent("bunker_entered", "targetname").origin);
+    objective_add(3, "current", &"OKI3_TAKE_COVER", getent("bunker_entered", "targetname").origin);
     level.bunker_objective = true;
   }
   level thread find_bunker_tunnel();
@@ -1539,7 +1539,7 @@ get_to_bunker() {
 
 kill_squad() {
   ai = getaiarray("allies");
-  for (i = 0; i < ai.size; i++) {
+  for(i = 0; i < ai.size; i++) {
     if(ai[i] != level.polonsky && ai[i] != level.sarge) {
       ai[i] thread random_death(1, 3);
     }
@@ -1551,7 +1551,7 @@ friends_engage_snipers() {
   cover_nodes = getnodearray("sniper_cover", "targetname");
   nodecount = 0;
   friends = getaiarray("allies");
-  for (i = 0; i < friends.size; i++) {
+  for(i = 0; i < friends.size; i++) {
     if(friends[i] istouching(trig) && friends[i] != level.waver) {
       friends[i] thread runto_sniper_cover(cover_nodes[nodecount]);
       nodecount++;
@@ -1562,9 +1562,9 @@ friends_engage_snipers() {
 setup_waving_guy() {
   trig = getent("sniper_cover", "targetname");
   waver = false;
-  while (!waver) {
+  while(!waver) {
     friends = getaiarray("allies");
-    for (i = 0; i < friends.size; i++) {
+    for(i = 0; i < friends.size; i++) {
       if(friends[i] istouching(trig)) {
         if(!waver) {
           level.waver = friends[i];
@@ -1611,7 +1611,7 @@ e1_mortar_threshold() {
 
 blow_up_waver() {
   trigger_wait("kill_waver", "targetname");
-  while (!isDefined(level.waver.is_at_goal)) {
+  while(!isDefined(level.waver.is_at_goal)) {
     wait_network_frame();
   }
   anim_node = getnode("waving_guy_anim", "targetname");
@@ -1674,7 +1674,7 @@ event1_tree_snipers() {
   wait(.15);
   level thread sniper_leafy_conceal();
   guys = getaiarray("axis");
-  for (i = 0; i < guys.size; i++) {
+  for(i = 0; i < guys.size; i++) {
     guys[i] ClearEnemy();
     guys[i].ignoreme = true;
     guys[i].ignoreall = true;
@@ -1735,12 +1735,12 @@ spawn_func_tunnel_defender() {
 }
 
 kill_tree_snipers() {
-  spawners = getentarray("outer_guys", "targetname");
-  for (i = 0; i < spawners.size; i++) {
+  spawners = getEntArray("outer_guys", "targetname");
+  for(i = 0; i < spawners.size; i++) {
     spawners[i].count = 0;
   }
   guys = getaiarray("axis");
-  for (i = 0; i < guys.size; i++) {
+  for(i = 0; i < guys.size; i++) {
     if(!isDefined(guys[i].is_tunnelguy)) {
       guys[i] thread random_death(1, 8);
     }
@@ -1780,7 +1780,7 @@ event1_tunnel_dialogue() {
 
 enter_tunnel_nag() {
   wait(3);
-  while (!flag("tunnel_entered")) {
+  while(!flag("tunnel_entered")) {
     level.polonsky do_dialogue("miller");
     wait(randomintrange(7, 13));
   }
@@ -1789,7 +1789,7 @@ enter_tunnel_nag() {
 wakeup_tunnel_guys() {
   org_trigger((3793, 2329, -1030.5), 71);
   guys = get_ai_group_ai("e1_tunnel_guys");
-  for (i = 0; i < guys.size; i++) {
+  for(i = 0; i < guys.size; i++) {
     if(guys[i].script_noteworthy == "guard_guy") {
       guys[i].pacifist = false;
     }
@@ -1803,7 +1803,7 @@ setup_tunnel_guys() {
   wait(.5);
   guys = get_ai_group_ai("e1_tunnel_guys");
   table_guys = [];
-  for (i = 0; i < guys.size; i++) {
+  for(i = 0; i < guys.size; i++) {
     if(isDefined(guys[i].script_noteworthy)) {
       guys[i] clearenemy();
       switch (guys[i].script_noteworthy) {
@@ -1851,7 +1851,7 @@ setup_tunnel_guys() {
 
 table_dialog(guys) {
   level endon("tunnel_guys_alerted");
-  while (!isDefined(level.tunnel_guys_alerted)) {
+  while(!isDefined(level.tunnel_guys_alerted)) {
     guys[1] animscripts\face::SaySpecificDialogue(undefined, level.scr_sound["table_guy2"]["contact"], 1.0, "dialogue_done");
     guys[1] waittill("dialogue_done");
     guys[0] animscripts\face::SaySpecificDialogue(undefined, level.scr_sound["table_guy1"]["good"], 1.0, "dialogue_done");
@@ -1875,7 +1875,7 @@ guy_detect_enemy() {
   self.is_tunnelguy = true;
   self waittill_any("enemy", "damage", "death", "bulletwhizby");
   guys = get_ai_group_ai("e1_tunnel_guys");
-  for (i = 0; i < guys.size; i++) {
+  for(i = 0; i < guys.size; i++) {
     if(isDefined(guys[i].script_noteworthy) && guys[i].script_noteworthy == "guard_guy") {
       guys[i] notify("enemy");
     }
@@ -1948,25 +1948,25 @@ setup_tunnel_radio() {
   level endon("tunnel_exited");
   broken_radio = "radio_jap_bro";
   radio = getent("tunnel_radio", "targetname");
-  radio playloopsound("oki3_radio");
+  radio playLoopSound("oki3_radio");
   broken = false;
-  radio setcandamage(true);
-  while (!broken) {
+  radio setCanDamage(true);
+  while(!broken) {
     radio waittill("damage", amt, attacker);
     if(isplayer(attacker)) {
-      playfx(level._effect["zort"], radio.origin + (randomintrange(-10, 10), randomintrange(-10, 10), randomintrange(1, 10)));
+      playFX(level._effect["zort"], radio.origin + (randomintrange(-10, 10), randomintrange(-10, 10), randomintrange(1, 10)));
       radio stoploopsound();
-      radio playsound("radio_destroyed");
-      radio setmodel(broken_radio);
+      radio playSound("radio_destroyed");
+      radio setModel(broken_radio);
       maps\_utility::arcademode_assignpoints("arcademode_score_generic250", attacker);
       broken = true;
     }
   }
   x = 0;
-  while (x < 12) {
+  while(x < 12) {
     wait(randomfloatrange(.5, 2));
-    playfx(level._effect["zort"], radio.origin + (randomintrange(-10, 10), randomintrange(-10, 10), randomintrange(1, 10)));
-    radio playsound("radio_destroyed");
+    playFX(level._effect["zort"], radio.origin + (randomintrange(-10, 10), randomintrange(-10, 10), randomintrange(1, 10)));
+    radio playSound("radio_destroyed");
     x++;
   }
 }
@@ -1983,10 +1983,10 @@ event1_treesniper_pawn() {
   magicbullet("type99_rifle_scoped", (5757, 1697, -275), self gettagorigin("J_HEAD"));
   bullettracer((5757, 1697, -275), self gettagorigin("J_HEAD"), true);
   playsoundatposition("weap_arisaka_fire", (5757, 1697, -275));
-  forward = AnglesToForward((0, 90, 0));
+  forward = anglesToForward((0, 90, 0));
   self thread oki3_pop_helmet();
   if(is_mature()) {
-    PlayFX(level._effect["headshot"], self GetTagOrigin("J_HEAD"), forward);
+    playFX(level._effect["headshot"], self GetTagOrigin("J_HEAD"), forward);
   }
   if(isDefined(self.magic_bullet_shield)) {
     self stop_magic_bullet_shield();
@@ -2036,16 +2036,16 @@ wait_for_trigger_snipe() {
 
 post_sniper_mortars() {
   level waittill("first_mortar");
-  pre1 = spawnstruct();
+  pre1 = spawnStruct();
   pre1.origin = (4010.5, 3338, -775.9);
   pre1.is_struct = true;
-  pre2 = spawnstruct();
+  pre2 = spawnStruct();
   pre2.origin = (5044.5, 2548.5, -758.4);
   pre2.is_struct = true;
   pre1 maps\_mortar::explosion_activate("first_mortar", 128, 25, 50);
   pre2 thread maps\_mortar::explosion_activate("first_mortar", 236, 25, 50);
   wait(randomfloatrange(.2, 1.2));
-  pre3 = spawnstruct();
+  pre3 = spawnStruct();
   pre3.origin = (5293.4, 2676.2, -745.4);
   pre3.is_struct = true;
   pre3 thread maps\_mortar::explosion_activate("first_mortar", 128, 25, 50);
@@ -2058,16 +2058,16 @@ post_sniper_mortars() {
 }
 
 burst_tree(tree_intact, tree_destroyed) {
-  ent = spawnstruct();
+  ent = spawnStruct();
   ent.origin = (tree_intact.origin);
   ent.is_struct = true;
   ent thread maps\_mortar::explosion_activate("first_mortar", 128, 25, 50);
-  while (1) {
+  while(1) {
     level waittill("explosion", exp_name);
     if(exp_name == "first_mortar") {
       tree_intact hide();
       tree_destroyed show();
-      playfx(level._effect["tree_burst"], tree_destroyed.origin);
+      playFX(level._effect["tree_burst"], tree_destroyed.origin);
       break;
     }
   }
@@ -2091,7 +2091,7 @@ mortar_push() {
     battlechatter_on("allies");
   }
   wait(10);
-  while (level.mortars_falling) {
+  while(level.mortars_falling) {
     wait(2);
     check_players_in_bunker();
   }
@@ -2103,7 +2103,7 @@ supply_drop_objective() {
   level thread take_ammo_from_supplydrop();
   event1_warp_supplydrop();
   level notify("safe_to_snipe");
-  objective_string(2, & "OKI3_OBJ5");
+  objective_string(2, &"OKI3_OBJ5");
   objective_current(2);
   autosave_by_name("supply_drop_secured");
   level thread setup_waving_guy();
@@ -2214,8 +2214,8 @@ post_spiderhole_think() {
 }
 
 post_spiderhole_floodspawner() {
-  defenders = getentarray("auto3792", "targetname");
-  for (i = 0; i < defenders.size; i++) {
+  defenders = getEntArray("auto3792", "targetname");
+  for(i = 0; i < defenders.size; i++) {
     defenders[i] thread maps\_spawner::flood_spawner_think();
     wait(.15);
   }
@@ -2230,13 +2230,13 @@ spiderhole_ambush_flipover() {
   guy1.goalradius = 96;
   guy1 setgoalnode(temp_node);
   guy1 set_force_color("g");
-  while (!isDefined(level.spiderholes_triggered)) {
+  while(!isDefined(level.spiderholes_triggered)) {
     wait .05;
   }
   guy2 = undefined;
-  while (!isDefined(guy2)) {
+  while(!isDefined(guy2)) {
     guys = get_ai_group_ai("spiderhole_ambushers");
-    for (i = 0; i < guys.size; i++) {
+    for(i = 0; i < guys.size; i++) {
       if(isDefined(guys[i].script_noteworthy) && guys[i].script_noteworthy == "flipover") {
         guy2 = guys[i];
         guy2 thread magic_bullet_shield();
@@ -2299,9 +2299,9 @@ arcademode_kill_staber() {
 open_spiderhole() {
   wait(.15);
   lid = getent("stabber_lid", "script_noteworthy");
-  lid playsound("spider_hole_open");
-  tag_origin = Spawn("script_model", lid.origin);
-  tag_origin SetModel("tag_origin_animate");
+  lid playSound("spider_hole_open");
+  tag_origin = spawn("script_model", lid.origin);
+  tag_origin setModel("tag_origin_animate");
   tag_origin.angles = (0, 135, 0);
   lid LinkTo(tag_origin, "origin_animate_jnt");
   tag_origin assign_animtree("spiderhole_lid");
@@ -2319,7 +2319,7 @@ setup_stabber() {
 
 spiderhole_ambush_jumpin() {
   guy2 = undefined;
-  while (!isDefined(guy2)) {
+  while(!isDefined(guy2)) {
     guy2 = choose_random_redshirt("bayonet_stab", 512);
     wait(.05);
   }
@@ -2333,13 +2333,13 @@ spiderhole_ambush_jumpin() {
   guy2.goalradius = 8;
   guy2 setgoalnode(temp_node);
   guy2 set_force_color("g");
-  while (!isDefined(level.spiderholes_triggered)) {
+  while(!isDefined(level.spiderholes_triggered)) {
     wait .05;
   }
   guy1 = undefined;
-  while (!isDefined(guy1)) {
+  while(!isDefined(guy1)) {
     guys = get_ai_group_ai("spiderhole_ambushers");
-    for (i = 0; i < guys.size; i++) {
+    for(i = 0; i < guys.size; i++) {
       if(isDefined(guys[i].script_noteworthy) && guys[i].script_noteworthy == "bayonet_guy1") {
         guy1 = guys[i];
         break;
@@ -2394,12 +2394,12 @@ ambush_movement() {
 post_mortar_fx() {
   ent1 = spawn("script_model", (3544.4, 907.352, -654.782));
   ent2 = spawn("script_model", (4023.26, 2967.62, -825.312));
-  ent1 setmodel("tag_origin");
-  ent2 setmodel("tag_origin");
+  ent1 setModel("tag_origin");
+  ent2 setModel("tag_origin");
   ent1.angles = (277.5, 90, -6.81);
   ent2.angles = (277.5, 90, -6.81023);
-  forward = anglestoforward(ent1.angles);
-  forward2 = anglestoforward(ent2.angles);
+  forward = anglesToForward(ent1.angles);
+  forward2 = anglesToForward(ent2.angles);
   level waittill("stop_mortar_fx");
   ent1 delete();
   ent2 delete();
@@ -2410,7 +2410,7 @@ post_mortar_fx() {
 setup_supply_guys() {
   wait(3);
   guys = get_ai_group_ai("supply_guys");
-  for (i = 0; i < guys.size; i++) {
+  for(i = 0; i < guys.size; i++) {
     guys[i].animname = "redshirt";
     guys[i] thread anim_loop_solo(guys[i], "gather_supplies", undefined, "stop_gathering");
   }
@@ -2419,17 +2419,17 @@ setup_supply_guys() {
 over_wall_think() {
   level thread players_over_wall();
   trig = getent("over_wall", "targetname");
-  while (1) {
+  while(1) {
     trig waittill("trigger", user);
     user.a.overwall = true;
   }
 }
 
 players_over_wall() {
-  while (1) {
+  while(1) {
     over = true;
     players = get_players();
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       if(!isDefined(players[i].a.overwall)) {
         over = false;
       }
@@ -2474,7 +2474,7 @@ do_supply_drop_anim() {
 
 supply_dialog() {
   wait(1);
-  self playsound(level.scr_sound["sarge"]["this_is_it"]);
+  self playSound(level.scr_sound["sarge"]["this_is_it"]);
 }
 
 event1_warp_supplydrop() {
@@ -2482,7 +2482,7 @@ event1_warp_supplydrop() {
   volume = getent("gate_check", "targetname");
   ents = getstructarray("warp_supplies", "targetname");
   count = 0;
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(players[i] istouching(volume)) {} else {
       players[i] thread warp_player(ents[count]);
       players[i].a.overwall = true;
@@ -2498,16 +2498,16 @@ bunker_cleared_think() {
   players = get_players();
   ents = getstructarray("tunnel_exit", "targetname");
   warp_players("tunnel_exit", user);
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i].a.clearbunker = true;
   }
 }
 
 players_cleared_bunker() {
-  while (1) {
+  while(1) {
     clear = true;
     players = get_players();
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       if(!isDefined(players[i].a.clearbunker)) {
         clear = false;
       }
@@ -2520,7 +2520,7 @@ players_cleared_bunker() {
   level notify("all_out_bunker");
   autosave_by_name("all_out_bunker");
   objective_state(4, "done");
-  objective_add(5, "current", & "OKI3_OBJ1", (3626.5, -91.5, -449.3));
+  objective_add(5, "current", &"OKI3_OBJ1", (3626.5, -91.5, -449.3));
   objective_ring(5);
 }
 
@@ -2531,7 +2531,7 @@ guard_shack() {
   shutter[0] = 2;
   shutter[1] = 3;
   shutters = array_randomize(shutter);
-  for (i = 0; i < shutters.size; i++) {
+  for(i = 0; i < shutters.size; i++) {
     getent("shack_shutter" + shutters[i] + "_left", "targetname") rotateyaw(-120, randomfloatrange(.1, .4), 0, .0);
     getent("shack_shutter" + shutters[i] + "_right", "targetname") rotateyaw(120, randomfloatrange(.1, .4), 0, 0);
     wait randomfloatrange(.2, .5);
@@ -2541,12 +2541,12 @@ guard_shack() {
 take_ammo_from_supplydrop() {
   trig = getent("take_ammo", "targetname");
   trig sethintstring(&"OKI3_TAKE_AMMO");
-  while (1) {
+  while(1) {
     trig waittill("trigger", user);
     setmusicstate("AMBUSH");
-    user playsound("gren_pickup_plr");
+    user playSound("gren_pickup_plr");
     weapons = user GetWeaponsList();
-    for (i = 0; i < weapons.size; i++) {
+    for(i = 0; i < weapons.size; i++) {
       weapon = weapons[i];
       if(weapon != "type100_smg" && weapon != "type99_rifle" && weapon != "type99_rifle_bayonet" && weapon != "type99_rifle_scoped" && weapon != "type97_frag") {
         user setweaponammostock(weapon, 500);
@@ -2562,7 +2562,7 @@ event1_rear_fallback() {
   nodes = getnodearray("castle_wall_retreat", "script_noteworthy");
   retreaters = get_ai_group_ai("rear_defenders");
   nodecount = 0;
-  for (i = 0; i < retreaters.size; i++) {
+  for(i = 0; i < retreaters.size; i++) {
     guy = retreaters[i];
     if(nodecount < nodes.size) {
       guy thread guy_retreats(nodes[nodecount], 107);
@@ -2583,15 +2583,15 @@ event1_rear_fallback() {
 event1_front_fallback() {
   getent("front_guys_retreat", "targetname") waittill("trigger", user);
   level thread monitor_castle_stairs_defenders();
-  volumes = getentarray("info_volume", "classname");
+  volumes = getEntArray("info_volume", "classname");
   nodes = getnodearray("castle_front_retreat", "script_noteworthy");
   nodecount = 0;
-  for (i = 0; i < volumes.size; i++) {
+  for(i = 0; i < volumes.size; i++) {
     vol = volumes[i];
     if(isDefined(vol.script_goalvolume)) {
       if(vol.script_goalvolume == 101 || vol.script_goalvolume == 102) {
         ai = getaiarray("axis");
-        for (j = 0; j < ai.size; j++) {
+        for(j = 0; j < ai.size; j++) {
           if(ai[j] istouching(vol)) {
             if(nodecount < nodes.size) {
               ai[j] thread guy_retreats(nodes[nodecount], 107);
@@ -2608,15 +2608,15 @@ event1_front_fallback() {
 }
 
 handle_ai_stairs() {
-  trigs = getentarray("stairs_up", "targetname");
+  trigs = getEntArray("stairs_up", "targetname");
   array_thread(trigs, ::ai_upstairs);
-  trigs = getentarray("stairs_down", "targetname");
+  trigs = getEntArray("stairs_down", "targetname");
   array_thread(trigs, ::ai_downstairs);
 }
 
 ai_upstairs() {
   level thread ai_stop_stairs(getent(self.target, "targetname"));
-  while (1) {
+  while(1) {
     self waittill("trigger", user);
     if(!isDefined(user.stairs)) {
       user.stairs = 1;
@@ -2629,7 +2629,7 @@ ai_upstairs() {
 }
 
 ai_stop_stairs(trig) {
-  while (1) {
+  while(1) {
     trig waittill("trigger", user);
     {
       if(isDefined(user.stairs)) {
@@ -2645,7 +2645,7 @@ ai_stop_stairs(trig) {
 
 ai_downstairs() {
   level thread ai_stop_stairs(getent(self.target, "targetname"));
-  while (1) {
+  while(1) {
     self waittill("trigger", user);
     if(!isDefined(user.stairs)) {
       user.stairs = 1;
@@ -2698,10 +2698,10 @@ e2_dialogue() {
 
 monitor_grass_guys() {
   alive = true;
-  while (alive) {
+  while(alive) {
     count = 0;
     guys = getaiarray("axis");
-    for (i = 0; i < guys.size; i++) {
+    for(i = 0; i < guys.size; i++) {
       if(isAlive(guys[i]) && isDefined(guys[i].script_string) && guys[i].script_string == "grass_guy") {
         count++;
       }
@@ -2810,8 +2810,8 @@ tree_sniper_spawner_func() {
 }
 
 event3_front_planter_guys() {
-  spawners = getentarray("auto3630", "targetname");
-  for (i = 0; i < spawners.size; i++) {
+  spawners = getEntArray("auto3630", "targetname");
+  for(i = 0; i < spawners.size; i++) {
     if(i % 2) {
       wait_network_frame();
     }
@@ -2885,7 +2885,7 @@ do_ambush() {
 
 oki3_achievement_setup() {
   spawners = getspawnerarray();
-  for (i = 0; i < spawners.size; i++) {
+  for(i = 0; i < spawners.size; i++) {
     if(isSubstr(spawners[i].classname, "actor_axis")) {
       spawners[i] add_spawn_function(::wait_for_death);
     }
@@ -2920,14 +2920,14 @@ wait_for_death() {
 }
 
 oki3_give_achievement() {
-  while (1) {
+  while(1) {
     level waittill("no_tube", player);
     player GiveAchievement("OKI3_ACHIEVEMENT_KILL8");
   }
 }
 
 oki3_grass_guy_achievement() {
-  while (1) {
+  while(1) {
     self waittill("damage", damage_amount, attacker, direction_vec, point, type);
     if(self.health <= 0 && !self.surprisedplayer) {
       if(isDefined(attacker) && isplayer(attacker))
@@ -2963,7 +2963,7 @@ shoulder_mortar_boards(guy) {
 
 shoulder_mortar_door(guy) {
   door = getent("mortarpit_door", "targetname");
-  door playsound("door_kick");
+  door playSound("door_kick");
   door connectpaths();
   waittillframeend;
   door rotateyaw(-135, 1, 0.25, 0.25);

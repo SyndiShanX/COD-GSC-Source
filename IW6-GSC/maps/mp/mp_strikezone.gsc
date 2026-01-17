@@ -693,7 +693,7 @@ strikezoneCustomCrateFunc() {
   if(!level.allow_level_killstreak || game["player_holding_level_killstrek"]) {
     return;
   }
-  maps\mp\killstreaks\_airdrop::addCrateType("airdrop_assault", "nuke", STRIKEZONE_ROG_WEIGHT, maps\mp\killstreaks\_airdrop::killstreakCrateThink, maps\mp\killstreaks\_airdrop::get_friendly_crate_model(), maps\mp\killstreaks\_airdrop::get_enemy_crate_model(), & "KILLSTREAKS_HINTS_STRIKEZONE_ROG");
+  maps\mp\killstreaks\_airdrop::addCrateType("airdrop_assault", "nuke", STRIKEZONE_ROG_WEIGHT, maps\mp\killstreaks\_airdrop::killstreakCrateThink, maps\mp\killstreaks\_airdrop::get_friendly_crate_model(), maps\mp\killstreaks\_airdrop::get_enemy_crate_model(), &"KILLSTREAKS_HINTS_STRIKEZONE_ROG");
   level thread strikezone_rog_post_teleport_init();
 }
 

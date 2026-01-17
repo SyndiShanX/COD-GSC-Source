@@ -82,7 +82,7 @@ init() {
 }
 
 onPlayerConnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connected", player);
 
     player thread onMenuResponse();
@@ -108,7 +108,7 @@ isOptionsMenu(menu) {
 onMenuResponse() {
   self endon("disconnect");
 
-  for (;;) {
+  for(;;) {
     self waittill("menuresponse", menu, response);
 
     if(response == "back") {
@@ -296,7 +296,6 @@ beginTeamChoice() {
     self notify("menuresponse", game["menu_team"], "autoassign");
   else
     self openpopupMenu(game["menu_team"]);
-
 }
 
 showMainMenuForTeam() {

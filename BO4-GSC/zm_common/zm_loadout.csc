@@ -18,7 +18,6 @@
 #include scripts\zm_common\zm_score;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
-
 #namespace zm_loadout;
 
 autoexec __init__system__() {
@@ -26,7 +25,6 @@ autoexec __init__system__() {
 }
 
 __init__() {
-
   if(!isdemoplaying()) {
     callback::on_localplayer_spawned(&on_localplayer_spawned);
   }
@@ -42,17 +40,17 @@ on_localplayer_spawned(localclientnum) {
 
   self.loadout = [];
   var_cd6fae8c = self get_loadout_item(localclientnum, "primarygrenade");
-  self.loadout[#"lethal"] = getunlockableiteminfofromindex(var_cd6fae8c, 1);
+  self.loadout[# "lethal"] = getunlockableiteminfofromindex(var_cd6fae8c, 1);
   var_9aeb4447 = self get_loadout_item(localclientnum, "primary");
-  self.loadout[#"primary"] = getunlockableiteminfofromindex(var_9aeb4447, 1);
-  self.loadout[#"perks"] = [];
+  self.loadout[# "primary"] = getunlockableiteminfofromindex(var_9aeb4447, 1);
+  self.loadout[# "perks"] = [];
 
   for(i = 1; i <= 4; i++) {
     var_96861ec8 = self get_loadout_item(localclientnum, "specialty" + i);
-    self.loadout[#"perks"][i] = getunlockableiteminfofromindex(var_96861ec8, 3);
+    self.loadout[# "perks"][i] = getunlockableiteminfofromindex(var_96861ec8, 3);
   }
 
-  self.loadout[#"hero"] = self function_439b009a(localclientnum, "herogadget");
+  self.loadout[# "hero"] = self function_439b009a(localclientnum, "herogadget");
 }
 
 function_622d8349(localclientnum) {

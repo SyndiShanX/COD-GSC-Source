@@ -107,9 +107,9 @@ _titus_locate_target() {
     }
   }
 
-  vec = anglestoforward(fire_angles);
+  vec = anglesToForward(fire_angles);
   trace_end = fire_origin + vec * 20000;
-  trace = bullettrace(fire_origin, trace_end, 1, self);
+  trace = bulletTrace(fire_origin, trace_end, 1, self);
   offsetpos = trace["position"] + _titus_get_spread(40);
   e_dart = magicbullet("exptitus6_bullet_sp", fire_origin, offsetpos, self);
   e_dart thread _titus_reset_grenade_fuse();
@@ -137,7 +137,7 @@ _titus_reset_grenade_fuse(n_fuse_min, n_fuse_max) {
     n_fuse_max = 3;
 
   self waittill("death");
-  a_grenades = getentarray("grenade", "classname");
+  a_grenades = getEntArray("grenade", "classname");
 
   foreach(e_grenade in a_grenades) {
     if(e_grenade.model == "t6_wpn_projectile_titus" && !isDefined(e_grenade.fuse_reset)) {

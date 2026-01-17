@@ -5,16 +5,16 @@
 ********************************/
 
 main(var_0) {
-  var_1 = getentarray("zpu", "targetname");
+  var_1 = getEntArray("zpu", "targetname");
   var_2 = [];
 
-  for (var_3 = 0; var_3 < var_1.size; var_3++)
+  for(var_3 = 0; var_3 < var_1.size; var_3++)
     var_2[var_3] = var_1[var_3].script_flag;
 
-  for (var_4 = 0; var_4 < var_2.size; var_4++) {
+  for(var_4 = 0; var_4 < var_2.size; var_4++) {
     var_5 = var_2.size - 1;
 
-    for (var_6 = var_4; var_6 < var_5; var_6++)
+    for(var_6 = var_4; var_6 < var_5; var_6++)
       waittillframeend;
   }
 
@@ -27,14 +27,14 @@ main(var_0) {
 
 per_zpu_init() {
   self endon("death");
-  var_0 = getentarray(self.target, "targetname");
+  var_0 = getEntArray(self.target, "targetname");
   var_1 = [];
   common_scripts\utility::flag_init(self.script_flag);
   var_2 = undefined;
   var_3 = undefined;
   var_4 = 0;
 
-  for (var_5 = 0; var_5 < var_0.size; var_5++) {
+  for(var_5 = 0; var_5 < var_0.size; var_5++) {
     var_6 = var_0[var_5];
 
     if(issubstr(var_6.classname, "actor")) {
@@ -42,12 +42,12 @@ per_zpu_init() {
       continue;
     }
 
-    if(isdefined(var_6.script_noteworthy) && var_6.script_noteworthy == "dismount") {
+    if(isDefined(var_6.script_noteworthy) && var_6.script_noteworthy == "dismount") {
       var_3 = var_6;
       continue;
     }
 
-    if(isdefined(var_6.script_noteworthy) && var_6.script_noteworthy == "kill_zpu_spawner") {
+    if(isDefined(var_6.script_noteworthy) && var_6.script_noteworthy == "kill_zpu_spawner") {
       var_7 = var_6;
       var_7 thread zpu_cancel(self.script_flag);
       continue;
@@ -62,7 +62,7 @@ per_zpu_init() {
   if(var_4)
     waittill_trigger_array(var_1);
 
-  for (;;) {
+  for(;;) {
     if(var_2.count > 0) {
       var_8 = var_2 spawn_gunner();
       var_8 linkto(self, "tag_driver", (0, 0, 0), (0, 0, 0));
@@ -70,7 +70,7 @@ per_zpu_init() {
       var_8 thread monitor_gunner(self);
       var_8 thread gunner_death_think(self);
 
-      if(isdefined(var_3)) {
+      if(isDefined(var_3)) {
         waittill_death_or_dismount(var_3, var_8, self);
         zpu_recycle(self.script_flag);
 
@@ -120,7 +120,7 @@ gunner_death_think(var_0) {
   self endon("dismount");
   self waittill("damage");
 
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   self notify("dying_damage");
@@ -143,7 +143,7 @@ spawn_gunner() {
 }
 
 waittill_trigger_array(var_0) {
-  for (var_1 = 1; var_1 < var_0.size; var_1++)
+  for(var_1 = 1; var_1 < var_0.size; var_1++)
     var_0[var_1] endon("trigger");
 
   var_0[0] waittill("trigger");
@@ -170,16 +170,16 @@ load_zpugunner_anims() {
 }
 
 zpu_shoot1(var_0) {
-  playfxontag(level.zpu_fx, var_0, "tag_flash");
-  playfxontag(level.zpu_fx, var_0, "tag_flash2");
-  var_0 playsound("zpu_fire1");
+  playFXOnTag(level.zpu_fx, var_0, "tag_flash");
+  playFXOnTag(level.zpu_fx, var_0, "tag_flash2");
+  var_0 playSound("zpu_fire1");
   playrumbleonposition("zpu_rumble", self.origin);
 }
 
 zpu_shoot2(var_0) {
-  playfxontag(level.zpu_fx, var_0, "tag_flash1");
-  playfxontag(level.zpu_fx, var_0, "tag_flash3");
-  var_0 playsound("zpu_fire2");
+  playFXOnTag(level.zpu_fx, var_0, "tag_flash1");
+  playFXOnTag(level.zpu_fx, var_0, "tag_flash3");
+  var_0 playSound("zpu_fire2");
   playrumbleonposition("zpu_rumble", self.origin);
 }
 

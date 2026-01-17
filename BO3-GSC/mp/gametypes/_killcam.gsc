@@ -21,11 +21,11 @@
 #namespace killcam;
 
 function autoexec __init__sytem__() {
-  system::register("killcam", & __init__, undefined, undefined);
+  system::register("killcam", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype( & init);
+  callback::on_start_gametype(&init);
   clientfield::register("clientuimodel", "hudItems.killcamAllowRespawn", 1, 1, "int");
 }
 
@@ -46,7 +46,7 @@ function init_final_killcam() {
 }
 
 function init_final_killcam_team(team) {
-  level.finalkillcamsettings[team] = spawnstruct();
+  level.finalkillcamsettings[team] = spawnStruct();
   clear_final_killcam_team(team);
 }
 
@@ -65,7 +65,7 @@ function clear_final_killcam_team(team) {
 }
 
 function record_settings(spectatorclient, targetentityindex, weapon, meansofdeath, deathtime, deathtimeoffset, offsettime, killcam_entity_info, perks, killstreaks, attacker) {
-  if(isdefined(attacker) && isdefined(attacker.team) && isdefined(level.teams[attacker.team])) {
+  if(isDefined(attacker) && isDefined(attacker.team) && isDefined(level.teams[attacker.team])) {
     team = attacker.team;
     level.finalkillcamsettings[team].spectatorclient = spectatorclient;
     level.finalkillcamsettings[team].weapon = weapon;
@@ -108,7 +108,7 @@ function final_killcam_waiter() {
 }
 
 function post_round_final_killcam() {
-  if(isdefined(level.sidebet) && level.sidebet) {
+  if(isDefined(level.sidebet) && level.sidebet) {
     return;
   }
   level notify("play_final_killcam");
@@ -122,33 +122,33 @@ function do_final_killcam() {
   wait(0.35);
   level.infinalkillcam = 1;
   winner = "none";
-  if(isdefined(level.finalkillcam_winner)) {
+  if(isDefined(level.finalkillcam_winner)) {
     winner = level.finalkillcam_winner;
   }
   winning_team = globallogic::figureoutwinningteam(winner);
-  if(!isdefined(level.finalkillcamsettings[winning_team].targetentityindex)) {
+  if(!isDefined(level.finalkillcamsettings[winning_team].targetentityindex)) {
     level.infinalkillcam = 0;
     level notify("final_killcam_done");
     return;
   }
   attacker = level.finalkillcamsettings[winning_team].attacker;
-  if(isdefined(attacker) && isdefined(attacker.archetype) && attacker.archetype == "mannequin") {
+  if(isDefined(attacker) && isDefined(attacker.archetype) && attacker.archetype == "mannequin") {
     level.infinalkillcam = 0;
     level notify("final_killcam_done");
     return;
   }
-  if(isdefined(attacker)) {
+  if(isDefined(attacker)) {
     challenges::getfinalkill(attacker);
   }
   visionsetnaked(getdvarstring("mapname"), 0);
   players = level.players;
-  for (index = 0; index < players.size; index++) {
+  for(index = 0; index < players.size; index++) {
     player = players[index];
     player closeingamemenu();
     player thread final_killcam(winner);
   }
   wait(0.1);
-  while (are_any_players_watching()) {
+  while(are_any_players_watching()) {
     wait(0.05);
   }
   level notify("final_killcam_done");
@@ -159,9 +159,9 @@ function startlastkillcam() {}
 
 function are_any_players_watching() {
   players = level.players;
-  for (index = 0; index < players.size; index++) {
+  for(index = 0; index < players.size; index++) {
     player = players[index];
-    if(isdefined(player.killcam)) {
+    if(isDefined(player.killcam)) {
       return true;
     }
   }
@@ -198,7 +198,7 @@ function killcam(attackernum, targetnum, killcam_entity_info, weapon, meansofdea
   camtime = calc_time(weapon, killcamentitystarttime, predelay, respawn, maxtime);
   postdelay = calc_post_delay();
   killcamlength = camtime + postdelay;
-  if(isdefined(maxtime) && killcamlength > maxtime) {
+  if(isDefined(maxtime) && killcamlength > maxtime) {
     if(maxtime < 2) {
       return;
     }
@@ -256,7 +256,7 @@ function killcam(attackernum, targetnum, killcam_entity_info, weapon, meansofdea
   self thread tacticalinsertion::cancel_button_think();
   self waittill("end_killcam");
   self end(0);
-  if(isdefined(keep_deathcam) && keep_deathcam) {
+  if(isDefined(keep_deathcam) && keep_deathcam) {
     return;
   }
   self.sessionstate = "dead";
@@ -278,7 +278,7 @@ function set_entity(killcamentityindex, delayms) {
 }
 
 function set_killcam_entities(entity_info, killcamstarttime) {
-  for (index = 0; index < entity_info.entity_indexes.size; index++) {
+  for(index = 0; index < entity_info.entity_indexes.size; index++) {
     delayms = (entity_info.entity_spawntimes[index] - killcamstarttime) - 100;
     thread set_entity(entity_info.entity_indexes[index], delayms);
     if(delayms <= 0) {
@@ -297,7 +297,7 @@ function wait_killcam_time() {
 function wait_final_killcam_slowdown(deathtime, starttime) {
   self endon("disconnect");
   self endon("end_killcam");
-  if(isdefined(level.var_fb8e299e) && level.var_fb8e299e) {
+  if(isDefined(level.var_fb8e299e) && level.var_fb8e299e) {
     return;
   }
   secondsuntildeath = (deathtime - starttime) / 1000;
@@ -314,13 +314,13 @@ function wait_final_killcam_slowdown(deathtime, starttime) {
 function wait_skip_killcam_button() {
   self endon("disconnect");
   self endon("end_killcam");
-  while (self usebuttonpressed()) {
+  while(self usebuttonpressed()) {
     wait(0.05);
   }
-  while (!self usebuttonpressed()) {
+  while(!self usebuttonpressed()) {
     wait(0.05);
   }
-  if(isdefined(self.killcamsskipped)) {
+  if(isDefined(self.killcamsskipped)) {
     self.killcamsskipped++;
   } else {
     self.killcamsskipped = 1;
@@ -339,10 +339,10 @@ function wait_team_change_end_killcam() {
 function wait_skip_killcam_safe_spawn_button() {
   self endon("disconnect");
   self endon("end_killcam");
-  while (self fragbuttonpressed()) {
+  while(self fragbuttonpressed()) {
     wait(0.05);
   }
-  while (!self fragbuttonpressed()) {
+  while(!self fragbuttonpressed()) {
     wait(0.05);
   }
   self.wantsafespawn = 1;
@@ -350,10 +350,10 @@ function wait_skip_killcam_safe_spawn_button() {
 }
 
 function end(final) {
-  if(isdefined(self.kc_skiptext)) {
+  if(isDefined(self.kc_skiptext)) {
     self.kc_skiptext.alpha = 0;
   }
-  if(isdefined(self.kc_timer)) {
+  if(isDefined(self.kc_timer)) {
     self.kc_timer.alpha = 0;
   }
   self.killcam = undefined;
@@ -363,7 +363,7 @@ function end(final) {
 function check_for_abrupt_end() {
   self endon("disconnect");
   self endon("end_killcam");
-  while (true) {
+  while(true) {
     if(self.archivetime <= 0) {
       break;
     }
@@ -422,20 +422,20 @@ function cancel_safe_spawn_callback() {
 }
 
 function cancel_on_use() {
-  self thread cancel_on_use_specific_button( & cancel_use_button, & cancel_callback);
+  self thread cancel_on_use_specific_button(&cancel_use_button, &cancel_callback);
 }
 
 function cancel_on_use_specific_button(pressingbuttonfunc, finishedfunc) {
   self endon("death_delay_finished");
   self endon("disconnect");
   level endon("game_ended");
-  for (;;) {
+  for(;;) {
     if(!self[[pressingbuttonfunc]]()) {
       wait(0.05);
       continue;
     }
     buttontime = 0;
-    while (self[[pressingbuttonfunc]]()) {
+    while(self[[pressingbuttonfunc]]()) {
       buttontime = buttontime + 0.05;
       wait(0.05);
     }
@@ -443,7 +443,7 @@ function cancel_on_use_specific_button(pressingbuttonfunc, finishedfunc) {
       continue;
     }
     buttontime = 0;
-    while (!self[[pressingbuttonfunc]]() && buttontime < 0.5) {
+    while(!self[[pressingbuttonfunc]]() && buttontime < 0.5) {
       buttontime = buttontime + 0.05;
       wait(0.05);
     }
@@ -521,7 +521,7 @@ function final_killcam(winner) {
   if(!util::isprophuntgametype() && level.console) {
     self globallogic_spawn::setthirdperson(0);
   }
-  while (getdvarint("") == 1) {
+  while(getdvarint("") == 1) {
     final_killcam_internal(winner);
   }
   final_killcam_internal(winner);
@@ -567,7 +567,7 @@ function calc_time(weapon, entitystarttime, predelay, respawn, maxtime) {
   } else {
     camtime = getdvarfloat("scr_killcam_time");
   }
-  if(isdefined(maxtime)) {
+  if(isDefined(maxtime)) {
     if(camtime > maxtime) {
       camtime = maxtime;
     }
@@ -598,7 +598,7 @@ function add_skip_text(respawn) {
 function add_timer(camtime) {}
 
 function init_kc_elements() {
-  if(!isdefined(self.kc_skiptext)) {
+  if(!isDefined(self.kc_skiptext)) {
     self.kc_skiptext = newclienthudelem(self);
     self.kc_skiptext.archived = 0;
     self.kc_skiptext.x = 0;
@@ -618,7 +618,7 @@ function init_kc_elements() {
       self.kc_skiptext.fontscale = 1.8;
     }
   }
-  if(!isdefined(self.kc_othertext)) {
+  if(!isDefined(self.kc_othertext)) {
     self.kc_othertext = newclienthudelem(self);
     self.kc_othertext.archived = 0;
     self.kc_othertext.y = 48;
@@ -638,7 +638,7 @@ function init_kc_elements() {
       self.kc_othertext.fontscale = 1.6;
     }
   }
-  if(!isdefined(self.kc_icon)) {
+  if(!isDefined(self.kc_icon)) {
     self.kc_icon = newclienthudelem(self);
     self.kc_icon.archived = 0;
     self.kc_icon.x = 16;
@@ -652,7 +652,7 @@ function init_kc_elements() {
     self.kc_icon.hidewheninmenu = 1;
   }
   if(!self issplitscreen()) {
-    if(!isdefined(self.kc_timer)) {
+    if(!isDefined(self.kc_timer)) {
       self.kc_timer = hud::createfontstring("hudbig", 1);
       self.kc_timer.archived = 0;
       self.kc_timer.x = 0;
@@ -680,21 +680,21 @@ function get_closest_killcam_entity(attacker, killcamentities, depth = 0) {
       continue;
     }
     origin = killcament.origin;
-    if(isdefined(killcament.offsetpoint)) {
+    if(isDefined(killcament.offsetpoint)) {
       origin = origin + killcament.offsetpoint;
     }
     dist = distancesquared(self.origin, origin);
-    if(!isdefined(closestkillcament) || dist < closestkillcamentdist) {
+    if(!isDefined(closestkillcament) || dist < closestkillcamentdist) {
       closestkillcament = killcament;
       closestkillcamentdist = dist;
       closestkillcamentindex = killcamentindex;
     }
   }
-  if(depth < 3 && isdefined(closestkillcament)) {
+  if(depth < 3 && isDefined(closestkillcament)) {
     if(!bullettracepassed(closestkillcament.origin, self.origin, 0, self)) {
       killcamentities[closestkillcamentindex] = undefined;
       betterkillcament = get_closest_killcam_entity(attacker, killcamentities, depth + 1);
-      if(isdefined(betterkillcament)) {
+      if(isDefined(betterkillcament)) {
         closestkillcament = betterkillcament;
       }
     }
@@ -703,29 +703,29 @@ function get_closest_killcam_entity(attacker, killcamentities, depth = 0) {
 }
 
 function get_killcam_entity(attacker, einflictor, weapon) {
-  if(!isdefined(einflictor)) {
+  if(!isDefined(einflictor)) {
     return undefined;
   }
-  if(isdefined(self.killcamkilledbyent)) {
+  if(isDefined(self.killcamkilledbyent)) {
     return self.killcamkilledbyent;
   }
   if(einflictor == attacker) {
-    if(!isdefined(einflictor.ismagicbullet)) {
+    if(!isDefined(einflictor.ismagicbullet)) {
       return undefined;
     }
-    if(isdefined(einflictor.ismagicbullet) && !einflictor.ismagicbullet) {
+    if(isDefined(einflictor.ismagicbullet) && !einflictor.ismagicbullet) {
       return undefined;
     }
-  } else if(isdefined(level.levelspecifickillcam)) {
+  } else if(isDefined(level.levelspecifickillcam)) {
     levelspecifickillcament = self[[level.levelspecifickillcam]]();
-    if(isdefined(levelspecifickillcament)) {
+    if(isDefined(levelspecifickillcament)) {
       return levelspecifickillcament;
     }
   }
   if(weapon.name == "hero_gravityspikes") {
     return undefined;
   }
-  if(isdefined(attacker) && isplayer(attacker) && attacker isremotecontrolling() && (einflictor.controlled === 1 || einflictor.occupied === 1)) {
+  if(isDefined(attacker) && isplayer(attacker) && attacker isremotecontrolling() && (einflictor.controlled === 1 || einflictor.occupied === 1)) {
     if(weapon.name == "sentinel_turret" || weapon.name == "helicopter_gunner_turret_primary" || weapon.name == "helicopter_gunner_turret_secondary" || weapon.name == "helicopter_gunner_turret_tertiary" || weapon.name == "amws_gun_turret_mp_player" || weapon.name == "auto_gun_turret") {
       return undefined;
     }
@@ -733,23 +733,23 @@ function get_killcam_entity(attacker, einflictor, weapon) {
   if(weapon.name == "dart") {
     return undefined;
   }
-  if(isdefined(einflictor.killcament)) {
+  if(isDefined(einflictor.killcament)) {
     if(einflictor.killcament == attacker) {
       return undefined;
     }
     return einflictor.killcament;
   }
-  if(isdefined(einflictor.killcamentities)) {
+  if(isDefined(einflictor.killcamentities)) {
     return get_closest_killcam_entity(attacker, einflictor.killcamentities);
   }
-  if(isdefined(einflictor.script_gameobjectname) && einflictor.script_gameobjectname == "bombzone") {
+  if(isDefined(einflictor.script_gameobjectname) && einflictor.script_gameobjectname == "bombzone") {
     return einflictor.killcament;
   }
   return einflictor;
 }
 
 function get_secondary_killcam_entity(entity, entity_info) {
-  if(!isdefined(entity) || !isdefined(entity.killcamentityindex)) {
+  if(!isDefined(entity) || !isDefined(entity.killcamentityindex)) {
     return;
   }
   entity_info.entity_indexes[entity_info.entity_indexes.size] = entity.killcamentityindex;
@@ -760,7 +760,7 @@ function get_primary_killcam_entity(attacker, einflictor, weapon, entity_info) {
   killcamentity = self get_killcam_entity(attacker, einflictor, weapon);
   killcamentitystarttime = get_killcam_entity_start_time(killcamentity);
   killcamentityindex = -1;
-  if(isdefined(killcamentity)) {
+  if(isDefined(killcamentity)) {
     killcamentityindex = killcamentity getentitynumber();
   }
   entity_info.entity_indexes[entity_info.entity_indexes.size] = killcamentityindex;
@@ -769,7 +769,7 @@ function get_primary_killcam_entity(attacker, einflictor, weapon, entity_info) {
 }
 
 function get_killcam_entity_info(attacker, einflictor, weapon) {
-  entity_info = spawnstruct();
+  entity_info = spawnStruct();
   entity_info.entity_indexes = [];
   entity_info.entity_spawntimes = [];
   get_primary_killcam_entity(attacker, einflictor, weapon, entity_info);

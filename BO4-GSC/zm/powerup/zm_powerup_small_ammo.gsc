@@ -18,7 +18,6 @@
 #include scripts\zm_common\zm_spawner;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
-
 #namespace zm_powerup_small_ammo;
 
 autoexec __init__system__() {
@@ -29,7 +28,7 @@ __init__() {
   zm_powerups::register_powerup("small_ammo", &function_81558cdf);
 
   if(zm_powerups::function_cc33adc8()) {
-    zm_powerups::add_zombie_powerup("small_ammo", "p7_zm_power_up_max_ammo", #"hash_69256172c78db147", &zm_powerups::func_should_never_drop, 1, 0, 0);
+    zm_powerups::add_zombie_powerup("small_ammo", "p7_zm_power_up_max_ammo", # "hash_69256172c78db147", &zm_powerups::func_should_never_drop, 1, 0, 0);
   }
 }
 
@@ -66,9 +65,7 @@ function_8be02874(drop_item, player) {
 
   foreach(player in players) {
     if(isDefined(level.check_player_is_ready_for_ammo)) {
-      if([
-          [level.check_player_is_ready_for_ammo]
-        ](player) == 0) {
+      if([[level.check_player_is_ready_for_ammo]](player) == 0) {
         continue;
       }
     }
@@ -190,7 +187,7 @@ give_clip_of_ammo(w_weapon) {
     n_pool = w_weapon.startammo;
   }
 
-  if(weaponhasattachment(w_weapon, "uber") && w_weapon.statname == #"smg_capacity_t8" || isDefined(w_weapon.isriotshield) && w_weapon.isriotshield) {
+  if(weaponhasattachment(w_weapon, "uber") && w_weapon.statname == # "smg_capacity_t8" || isDefined(w_weapon.isriotshield) && w_weapon.isriotshield) {
     n_clip = w_weapon.clipsize / 4;
   } else {
     n_clip = w_weapon.clipsize;
@@ -200,10 +197,10 @@ give_clip_of_ammo(w_weapon) {
   self setweaponammostock(w_weapon, n_stock);
 }
 
-private function_7f7c1226(weapon) {
+function_7f7c1226(weapon) {
   waittillframeend();
 
-  if(weaponhasattachment(weapon, "uber") && weapon.statname == #"smg_capacity_t8" || isDefined(weapon.isriotshield) && weapon.isriotshield) {
+  if(weaponhasattachment(weapon, "uber") && weapon.statname == # "smg_capacity_t8" || isDefined(weapon.isriotshield) && weapon.isriotshield) {
     n_stock = weapon.clipsize / 4;
   } else {
     n_stock = 0;

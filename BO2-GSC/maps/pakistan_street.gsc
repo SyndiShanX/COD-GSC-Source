@@ -133,7 +133,7 @@ turn_off_claw_firing() {
 }
 
 cleanup_market() {
-  a_e_market_ents = getentarray("market_ent", "script_noteworthy");
+  a_e_market_ents = getEntArray("market_ent", "script_noteworthy");
   a_s_structs = getstructarray("market_struct", "script_noteworthy");
   array_delete(a_e_market_ents);
 
@@ -142,7 +142,7 @@ cleanup_market() {
 
   flag_wait("approach_bus_dam");
   delete_scene_all("bus_smash_damage_ai", 1, 0, 1);
-  a_t_market_triggers = getentarray("market_trigger", "script_noteworthy");
+  a_t_market_triggers = getEntArray("market_trigger", "script_noteworthy");
   array_delete(a_t_market_triggers);
 }
 
@@ -559,7 +559,7 @@ _wave_hits_player() {
   level notify("bus_dam_wave_at_player");
 
   if(b_should_play_anim) {
-    level.player playsound("evt_wave_hit");
+    level.player playSound("evt_wave_hit");
     level.player look_at(m_bus, 0.15, 1);
     level thread run_scene("bus_dam_wave_push_player");
     level.harper thread _bus_dam_warp_harper_in_front_of_player();
@@ -588,7 +588,7 @@ bus_event_failure() {
   m_bus = get_ent("bus_dam_bus", "targetname", 1);
   t_bus_kill = get_ent("bus_dam_damage_trigger", "targetname", 1);
   t_bus_kill thread maps\pakistan_market::trigger_kill_ai_on_contact("bus_dam_done");
-  setdvar("ui_deadquote", & "PAKISTAN_SHARED_BUS_FAIL");
+  setdvar("ui_deadquote", &"PAKISTAN_SHARED_BUS_FAIL");
   level thread bus_death_hud(level.player, 5.3);
   level thread run_scene("bus_dam_exit");
   wait 5.1;
@@ -735,7 +735,7 @@ bus_dam() {
   if(!flag("player_at_bus_gate"))
     bus_event_failure();
   else {
-    level.player playsound("evt_bus_gate_extra");
+    level.player playSound("evt_bus_gate_extra");
 
     if(bus_dam_strength_test()) {
       level thread load_gump("pakistan_gump_alley");
@@ -755,7 +755,7 @@ monitor_bus_kill_player() {
 
   while(true) {
     if(distance2d(level.player.origin, self.origin) < 128 || level.player istouching(self)) {
-      setdvar("ui_deadquote", & "PAKISTAN_SHARED_BUS_FAIL");
+      setdvar("ui_deadquote", &"PAKISTAN_SHARED_BUS_FAIL");
       level thread bus_death_hud(level.player, 0.5);
       wait 0.2;
       missionfailed();
@@ -771,8 +771,8 @@ make_dam_bus() {
   m_bus_model.angles = s_bus_spot.angles;
   m_bus_model.script_animname = "dam_bus";
   m_bus_model.targetname = "bus_dam_bus";
-  m_bus_model setmodel("veh_t6_civ_bus_pakistan_sp");
-  m_bus_model playsound("evt_bus_distant");
+  m_bus_model setModel("veh_t6_civ_bus_pakistan_sp");
+  m_bus_model playSound("evt_bus_distant");
   m_bus_model hidepart("tag_window_side_11");
   m_bus_model hidepart("tag_window_side_9");
   s_bus_spot structdelete();
@@ -780,12 +780,12 @@ make_dam_bus() {
 }
 
 play_audio_one_shot(delay) {
-  self playloopsound("evt_bus_idle_loop", 0.5);
+  self playLoopSound("evt_bus_idle_loop", 0.5);
   self thread bus_audio_watcher(delay);
   flag_wait("player_at_bus_gate");
   self notify("stop_bus_wait");
   level waittill("bus_sound_oneshot");
-  self playsound("evt_bus_idle_build", "sounddone");
+  self playSound("evt_bus_idle_build", "sounddone");
   self waittill("sounddone");
   self stoploopsound(1);
   wait 10;
@@ -799,7 +799,7 @@ bus_audio_watcher(delay) {
   if(delay > 0)
     wait(delay);
 
-  self playsound("evt_bus_idle_build", "sounddone");
+  self playSound("evt_bus_idle_build", "sounddone");
   self waittill("sounddone");
   self stoploopsound(1);
 }
@@ -1078,9 +1078,9 @@ _frogger_fx_play_on_object() {
 
   if(self.model == "veh_iw_civ_car_hatch") {
     self play_fx("frogger_car_interior_light", undefined, undefined, undefined, 1, "origin_animate_jnt");
-    self playloopsound("amb_debris_car_radio_loop");
+    self playLoopSound("amb_debris_car_radio_loop");
   } else
-    self playloopsound("amb_debris_car_loop");
+    self playLoopSound("amb_debris_car_loop");
 }
 
 _find_float_angles_offset(b_should_flip) {
@@ -1145,7 +1145,7 @@ debris_collision(vh_ent) {
 
         if(n_current_time_ms - level.player._last_collision_time > 1000) {
           if(level.player.health < 20)
-            setdvar("ui_deadquote", & "PAKISTAN_SHARED_FROGGER_FAIL");
+            setdvar("ui_deadquote", &"PAKISTAN_SHARED_FROGGER_FAIL");
 
           level.player dodamage(20, self.origin, self);
           level.player._last_collision_time = n_current_time_ms;
@@ -1167,17 +1167,17 @@ debris_collision(vh_ent) {
 
 frogger_debris_audio() {
   if(self.model == "p_glo_crate02" || self.model == "ch_crate48x64" || self.model == "furniture_cabinet_console_b")
-    self playsound("fly_bump_wood");
+    self playSound("fly_bump_wood");
   else if(self.model == "veh_iw_civ_car_hatch")
-    self playsound("fly_bump_veh");
+    self playSound("fly_bump_veh");
   else if(self.model == "furniture_couch_leather2_dust" || self.model == "dub_lounge_sofa_02")
-    self playsound("fly_bump_couch");
+    self playSound("fly_bump_couch");
   else if(self.model == "p6_chair_damaged_panama" || self.model == "berlin_furniture_chair1_dusty")
-    self playsound("fly_bump_chair");
+    self playSound("fly_bump_chair");
   else if(self.model == "me_refrigerator_d" || self.model == "machinery_washer_blue")
-    self playsound("fly_bump_fridge");
+    self playSound("fly_bump_fridge");
   else
-    self playsound("fly_bump_plr");
+    self playSound("fly_bump_plr");
 }
 
 #using_animtree("generic_human");
@@ -1215,7 +1215,7 @@ _get_best_frogger_pain_anim() {
 car_corner_crash_think(m_car) {
   m_car thread car_crash_corner_rumble();
   wait 3;
-  m_corner_collision = getentarray("car_corner_crash_collision", "targetname");
+  m_corner_collision = getEntArray("car_corner_crash_collision", "targetname");
   array_delete(m_corner_collision);
 }
 

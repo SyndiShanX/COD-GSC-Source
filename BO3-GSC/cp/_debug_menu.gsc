@@ -6,24 +6,24 @@
 #namespace debug_menu;
 
 function add_menu(menu_name, title) {
-  if(isdefined(level.menu_sys[menu_name])) {
+  if(isDefined(level.menu_sys[menu_name])) {
     println(("" + menu_name) + "");
     return;
   }
-  level.menu_sys[menu_name] = spawnstruct();
+  level.menu_sys[menu_name] = spawnStruct();
   level.menu_sys[menu_name].title = "";
   level.menu_sys[menu_name].title = title;
 }
 
 function add_menuoptions(menu_name, option_text, func, key) {
-  if(!isdefined(level.menu_sys[menu_name].options)) {
+  if(!isDefined(level.menu_sys[menu_name].options)) {
     level.menu_sys[menu_name].options = [];
   }
   num = level.menu_sys[menu_name].options.size;
   level.menu_sys[menu_name].options[num] = option_text;
   level.menu_sys[menu_name].func[num] = func;
-  if(isdefined(key)) {
-    if(!isdefined(level.menu_sys[menu_name].func_key)) {
+  if(isDefined(key)) {
+    if(!isDefined(level.menu_sys[menu_name].func_key)) {
       level.menu_sys[menu_name].func_key = [];
     }
     level.menu_sys[menu_name].func_key[num] = key;
@@ -31,21 +31,21 @@ function add_menuoptions(menu_name, option_text, func, key) {
 }
 
 function add_menu_child(parent_menu, child_menu, child_title, child_number_override, func) {
-  if(!isdefined(level.menu_sys[child_menu])) {
+  if(!isDefined(level.menu_sys[child_menu])) {
     add_menu(child_menu, child_title);
   }
   level.menu_sys[child_menu].parent_menu = parent_menu;
-  if(!isdefined(level.menu_sys[parent_menu].children_menu)) {
+  if(!isDefined(level.menu_sys[parent_menu].children_menu)) {
     level.menu_sys[parent_menu].children_menu = [];
   }
-  if(!isdefined(child_number_override)) {
+  if(!isDefined(child_number_override)) {
     size = level.menu_sys[parent_menu].children_menu.size;
   } else {
     size = child_number_override;
   }
   level.menu_sys[parent_menu].children_menu[size] = child_menu;
-  if(isdefined(func)) {
-    if(!isdefined(level.menu_sys[parent_menu].children_func)) {
+  if(isDefined(func)) {
+    if(!isDefined(level.menu_sys[parent_menu].children_func)) {
       level.menu_sys[parent_menu].children_func = [];
     }
     level.menu_sys[parent_menu].children_func[size] = func;
@@ -58,22 +58,22 @@ function set_no_back_menu(menu_name) {
 
 function enable_menu(menu_name) {
   disable_menu("");
-  if(isdefined(level.menu_cursor)) {
+  if(isDefined(level.menu_cursor)) {
     level.menu_cursor.y = 130;
     level.menu_cursor.current_pos = 0;
   }
   level.menu_sys[""].title = set_menu_hudelem(level.menu_sys[menu_name].title, "");
   level.menu_sys[""].menu_name = menu_name;
   back_option_num = 0;
-  if(isdefined(level.menu_sys[menu_name].options)) {
+  if(isDefined(level.menu_sys[menu_name].options)) {
     options = level.menu_sys[menu_name].options;
-    for (i = 0; i < options.size; i++) {
+    for(i = 0; i < options.size; i++) {
       text = ((i + 1) + "") + options[i];
       level.menu_sys[""].options[i] = set_menu_hudelem(text, "", 20 * i);
       back_option_num = i;
     }
   }
-  if(isdefined(level.menu_sys[menu_name].parent_menu) && !isdefined(level.menu_sys[menu_name].no_back)) {
+  if(isDefined(level.menu_sys[menu_name].parent_menu) && !isDefined(level.menu_sys[menu_name].no_back)) {
     back_option_num++;
     text = ((back_option_num + 1) + "") + "";
     level.menu_sys[""].options[back_option_num] = set_menu_hudelem(text, "", 20 * back_option_num);
@@ -81,13 +81,13 @@ function enable_menu(menu_name) {
 }
 
 function disable_menu(menu_name) {
-  if(isdefined(level.menu_sys[menu_name])) {
-    if(isdefined(level.menu_sys[menu_name].title)) {
+  if(isDefined(level.menu_sys[menu_name])) {
+    if(isDefined(level.menu_sys[menu_name].title)) {
       level.menu_sys[menu_name].title destroy();
     }
-    if(isdefined(level.menu_sys[menu_name].options)) {
+    if(isDefined(level.menu_sys[menu_name].options)) {
       options = level.menu_sys[menu_name].options;
-      for (i = 0; i < options.size; i++) {
+      for(i = 0; i < options.size; i++) {
         options[i] destroy();
       }
     }
@@ -98,13 +98,13 @@ function disable_menu(menu_name) {
 
 function set_menu_hudelem(text, type, y_offset) {
   y = 100;
-  if(isdefined(type) && type == "") {
+  if(isDefined(type) && type == "") {
     scale = 2;
   } else {
     scale = 1.3;
     y = y + 30;
   }
-  if(!isdefined(y_offset)) {
+  if(!isDefined(y_offset)) {
     y_offset = 0;
   }
   y = y + y_offset;
@@ -112,16 +112,16 @@ function set_menu_hudelem(text, type, y_offset) {
 }
 
 function set_hudelem(text, x, y, scale, alpha, sort, debug_hudelem) {
-  if(!isdefined(alpha)) {
+  if(!isDefined(alpha)) {
     alpha = 1;
   }
-  if(!isdefined(scale)) {
+  if(!isDefined(scale)) {
     scale = 1;
   }
-  if(!isdefined(sort)) {
+  if(!isDefined(sort)) {
     sort = 20;
   }
-  if(isdefined(level.player) && !isdefined(debug_hudelem)) {
+  if(isDefined(level.player) && !isDefined(debug_hudelem)) {
     hud = newclienthudelem(level.player);
   } else {
     hud = newdebughudelem();
@@ -137,14 +137,14 @@ function set_hudelem(text, x, y, scale, alpha, sort, debug_hudelem) {
   hud.x = x;
   hud.y = y;
   hud.og_scale = scale;
-  if(isdefined(text)) {
+  if(isDefined(text)) {
     hud settext(text);
   }
   return hud;
 }
 
 function menu_input() {
-  while (true) {
+  while(true) {
     level waittill("menu_button_pressed", keystring);
     menu_name = level.menu_sys[""].menu_name;
     if(keystring == "" || keystring == "") {
@@ -179,40 +179,40 @@ function menu_input() {
     if(key > level.menu_sys[menu_name].options.size) {
       continue;
     } else {
-      if(isdefined(level.menu_sys[menu_name].parent_menu) && key == level.menu_sys[menu_name].options.size) {
+      if(isDefined(level.menu_sys[menu_name].parent_menu) && key == level.menu_sys[menu_name].options.size) {
         level notify("" + menu_name);
         level enable_menu(level.menu_sys[menu_name].parent_menu);
-      } else if(isdefined(level.menu_sys[menu_name].func) && isdefined(level.menu_sys[menu_name].func[key])) {
+      } else if(isDefined(level.menu_sys[menu_name].func) && isDefined(level.menu_sys[menu_name].func[key])) {
         level.menu_sys[""].options[key] thread hud_selector(level.menu_sys[""].options[key].x, level.menu_sys[""].options[key].y);
-        if(isdefined(level.menu_sys[menu_name].func_key) && isdefined(level.menu_sys[menu_name].func_key[key]) && level.menu_sys[menu_name].func_key[key] == keystring) {
+        if(isDefined(level.menu_sys[menu_name].func_key) && isDefined(level.menu_sys[menu_name].func_key[key]) && level.menu_sys[menu_name].func_key[key] == keystring) {
           error_msg = level[[level.menu_sys[menu_name].func[key]]]();
         } else {
           error_msg = level[[level.menu_sys[menu_name].func[key]]]();
         }
         level thread hud_selector_fade_out();
-        if(isdefined(error_msg)) {
+        if(isDefined(error_msg)) {
           level thread selection_error(error_msg, level.menu_sys[""].options[key].x, level.menu_sys[""].options[key].y);
         }
       }
     }
-    if(!isdefined(level.menu_sys[menu_name].children_menu)) {
+    if(!isDefined(level.menu_sys[menu_name].children_menu)) {
       println(("" + menu_name) + "");
       continue;
     } else {
-      if(!isdefined(level.menu_sys[menu_name].children_menu[key])) {
+      if(!isDefined(level.menu_sys[menu_name].children_menu[key])) {
         println(((("" + menu_name) + "") + key) + "");
         continue;
-      } else if(!isdefined(level.menu_sys[level.menu_sys[menu_name].children_menu[key]])) {
+      } else if(!isDefined(level.menu_sys[level.menu_sys[menu_name].children_menu[key]])) {
         println(("" + level.menu_sys[menu_name].options[key]) + "");
         continue;
       }
     }
-    if(isdefined(level.menu_sys[menu_name].children_func) && isdefined(level.menu_sys[menu_name].children_func[key])) {
+    if(isDefined(level.menu_sys[menu_name].children_func) && isDefined(level.menu_sys[menu_name].children_func[key])) {
       func = level.menu_sys[menu_name].children_func[key];
       error_msg = [
         [func]
       ]();
-      if(isdefined(error_msg)) {
+      if(isDefined(error_msg)) {
         level thread selection_error(error_msg, level.menu_sys[""].options[key].x, level.menu_sys[""].options[key].y);
         continue;
       }
@@ -223,7 +223,7 @@ function menu_input() {
 }
 
 function force_menu_back(waittill_msg) {
-  if(isdefined(waittill_msg)) {
+  if(isDefined(waittill_msg)) {
     level waittill(waittill_msg);
   }
   wait(0.1);
@@ -267,11 +267,11 @@ function force_menu_back(waittill_msg) {
 }
 
 function list_menu(list, x, y, scale, func, sort, start_num) {
-  if(!isdefined(list) || list.size == 0) {
+  if(!isDefined(list) || list.size == 0) {
     return -1;
   }
   hud_array = [];
-  for (i = 0; i < 5; i++) {
+  for(i = 0; i < 5; i++) {
     if(i == 0) {
       alpha = 0.3;
     } else {
@@ -290,26 +290,24 @@ function list_menu(list, x, y, scale, func, sort, start_num) {
       }
     }
     hud = set_hudelem(list[i], x, y + ((i - 2) * 15), scale, alpha, sort);
-    if(!isdefined(hud_array)) {
+    if(!isDefined(hud_array)) {
       hud_array = [];
     } else if(!isarray(hud_array)) {
       hud_array = array(hud_array);
     }
     hud_array[hud_array.size] = hud;
   }
-  if(isdefined(start_num)) {
+  if(isDefined(start_num)) {
     new_move_list_menu(hud_array, list, start_num);
   }
   current_num = 0;
   old_num = 0;
   selected = 0;
   level.menu_list_selected = 0;
-  if(isdefined(func)) {
-    [
-      [func]
-    ](list[current_num]);
+  if(isDefined(func)) {
+    [[func]](list[current_num]);
   }
-  while (true) {
+  while(true) {
     level waittill("menu_button_pressed", key);
     level.menu_list_selected = 1;
     if(any_button_hit(key, "")) {
@@ -342,15 +340,13 @@ function list_menu(list, x, y, scale, func, sort, start_num) {
     level notify("scroll_list");
     if(current_num != old_num) {
       old_num = current_num;
-      if(isdefined(func)) {
-        [
-          [func]
-        ](list[current_num]);
+      if(isDefined(func)) {
+        [[func]](list[current_num]);
       }
     }
     wait(0.1);
   }
-  for (i = 0; i < hud_array.size; i++) {
+  for(i = 0; i < hud_array.size; i++) {
     hud_array[i] destroy();
   }
   if(selected) {
@@ -359,8 +355,8 @@ function list_menu(list, x, y, scale, func, sort, start_num) {
 }
 
 function new_move_list_menu(hud_array, list, num) {
-  for (i = 0; i < hud_array.size; i++) {
-    if(isdefined(list[i + (num - 2)])) {
+  for(i = 0; i < hud_array.size; i++) {
+    if(isDefined(list[i + (num - 2)])) {
       text = list[i + (num - 2)];
     } else {
       text = "";
@@ -370,10 +366,10 @@ function new_move_list_menu(hud_array, list, num) {
 }
 
 function move_list_menu(hud_array, dir, space, num, min_alpha, num_of_fades) {
-  if(!isdefined(min_alpha)) {
+  if(!isDefined(min_alpha)) {
     min_alpha = 0;
   }
-  if(!isdefined(num_of_fades)) {
+  if(!isDefined(num_of_fades)) {
     num_of_fades = 3;
   }
   side_movement = 0;
@@ -392,7 +388,7 @@ function move_list_menu(hud_array, dir, space, num, min_alpha, num_of_fades) {
       }
     }
   }
-  for (i = 0; i < hud_array.size; i++) {
+  for(i = 0; i < hud_array.size; i++) {
     hud_array[i] moveovertime(0.1);
     if(side_movement) {
       hud_array[i].x = hud_array[i].x + movement;
@@ -407,7 +403,7 @@ function move_list_menu(hud_array, dir, space, num, min_alpha, num_of_fades) {
     if(alpha < (1 / num_of_fades)) {
       alpha = min_alpha;
     }
-    if(!isdefined(hud_array[i].debug_hudelem)) {
+    if(!isDefined(hud_array[i].debug_hudelem)) {
       hud_array[i] fadeovertime(0.1);
     }
     hud_array[i].alpha = alpha;
@@ -415,7 +411,7 @@ function move_list_menu(hud_array, dir, space, num, min_alpha, num_of_fades) {
 }
 
 function hud_selector(x, y) {
-  if(isdefined(level.hud_selector)) {
+  if(isDefined(level.hud_selector)) {
     level thread hud_selector_fade_out();
   }
   level.menu_cursor.alpha = 0;
@@ -427,13 +423,13 @@ function hud_selector(x, y) {
 }
 
 function hud_selector_fade_out(time) {
-  if(!isdefined(time)) {
+  if(!isDefined(time)) {
     time = 0.25;
   }
   level.menu_cursor.alpha = 0.5;
   hud = level.hud_selector;
   level.hud_selector = undefined;
-  if(!isdefined(hud.debug_hudelem)) {
+  if(!isDefined(hud.debug_hudelem)) {
     hud fadeovertime(time);
   }
   hud.alpha = 0;
@@ -448,11 +444,11 @@ function selection_error(msg, x, y) {
   hud.alpha = 0.7;
   error_hud = set_hudelem(msg, x + 125, y, 1);
   error_hud.color = (1, 0, 0);
-  if(!isdefined(hud.debug_hudelem)) {
+  if(!isDefined(hud.debug_hudelem)) {
     hud fadeovertime(3);
   }
   hud.alpha = 0;
-  if(!isdefined(error_hud.debug_hudelem)) {
+  if(!isDefined(error_hud.debug_hudelem)) {
     error_hud fadeovertime(3);
   }
   error_hud.alpha = 0;
@@ -466,13 +462,13 @@ function hud_font_scaler(mult) {
   self endon("death");
   self endon("stop_fontscaler");
   og_scale = self.og_scale;
-  if(!isdefined(mult)) {
+  if(!isDefined(mult)) {
     mult = 1.5;
   }
   self.fontscale = og_scale * mult;
   dif = og_scale - self.fontscale;
   dif = dif / (1 * 20);
-  for (i = 0; i < (1 * 20); i++) {
+  for(i = 0; i < (1 * 20); i++) {
     self.fontscale = self.fontscale + dif;
     wait(0.05);
   }
@@ -488,10 +484,10 @@ function menu_cursor() {
 }
 
 function new_hud(hud_name, msg, x, y, scale) {
-  if(!isdefined(level.hud_array)) {
+  if(!isDefined(level.hud_array)) {
     level.hud_array = [];
   }
-  if(!isdefined(level.hud_array[hud_name])) {
+  if(!isDefined(level.hud_array[hud_name])) {
     level.hud_array[hud_name] = [];
   }
   hud = set_hudelem(msg, x, y, scale);
@@ -500,30 +496,30 @@ function new_hud(hud_name, msg, x, y, scale) {
 }
 
 function remove_hud(hud_name) {
-  if(!isdefined(level.hud_array[hud_name])) {
+  if(!isDefined(level.hud_array[hud_name])) {
     return;
   }
   huds = level.hud_array[hud_name];
-  for (i = 0; i < huds.size; i++) {
+  for(i = 0; i < huds.size; i++) {
     destroy_hud(huds[i]);
   }
   level.hud_array[hud_name] = undefined;
 }
 
 function destroy_hud(hud) {
-  if(isdefined(hud)) {
+  if(isDefined(hud)) {
     hud destroy();
   }
 }
 
 function set_menus_pos_by_num(hud_array, num, x, y, space, min_alpha, num_of_fades) {
-  if(!isdefined(min_alpha)) {
+  if(!isDefined(min_alpha)) {
     min_alpha = 0.1;
   }
-  if(!isdefined(num_of_fades)) {
+  if(!isDefined(num_of_fades)) {
     num_of_fades = 3;
   }
-  for (i = 0; i < hud_array.size; i++) {
+  for(i = 0; i < hud_array.size; i++) {
     temp = i - num;
     hud_array[i].y = y + (temp * space);
     if(temp < 0) {
@@ -538,13 +534,13 @@ function set_menus_pos_by_num(hud_array, num, x, y, space, min_alpha, num_of_fad
 }
 
 function popup_box(x, y, width, height, time, color, alpha) {
-  if(!isdefined(alpha)) {
+  if(!isDefined(alpha)) {
     alpha = 0.5;
   }
-  if(!isdefined(color)) {
+  if(!isDefined(color)) {
     color = vectorscale((0, 0, 1), 0.5);
   }
-  if(isdefined(level.player)) {
+  if(isDefined(level.player)) {
     hud = newclienthudelem(level.player);
   } else {
     hud = newdebughudelem();
@@ -558,7 +554,7 @@ function popup_box(x, y, width, height, time, color, alpha) {
   hud.y = y;
   hud.alpha = alpha;
   hud.color = color;
-  if(isdefined(level.player)) {
+  if(isDefined(level.player)) {
     hud.background = newclienthudelem(level.player);
   } else {
     hud.background = newdebughudelem();
@@ -584,10 +580,10 @@ function destroy_popup() {
   self.background scaleovertime(0.25, 0, 0);
   self scaleovertime(0.25, 0, 0);
   wait(0.1);
-  if(isdefined(self.background)) {
+  if(isDefined(self.background)) {
     self.background destroy();
   }
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     self destroy();
   }
 }
@@ -602,7 +598,7 @@ function dialog_text_box(dialog_msg, dialog_msg2, word_length) {
   hud.sort = 20;
   hud = new_hud("", dialog_msg, (320 - (300 * 0.5)) + 10, y + 10, 1.25);
   hud.sort = 25;
-  if(isdefined(dialog_msg2)) {
+  if(isDefined(dialog_msg2)) {
     hud = new_hud("", dialog_msg2, (320 - (300 * 0.5)) + 10, y + 30, 1.1);
     hud.sort = 25;
   }
@@ -645,7 +641,7 @@ function dialog_text_box_input(cursor_x, cursor_y, word_length) {
   hud_word.sort = 75;
   hud_letters = [];
   word = "";
-  while (true) {
+  while(true) {
     level waittill("dialog_box_button_pressed", button);
     if(button == "" || button == "") {
       word = "";
@@ -656,7 +652,7 @@ function dialog_text_box_input(cursor_x, cursor_y, word_length) {
       } else {
         if(button == "" || button == "") {
           new_word = "";
-          for (i = 0; i < (word.size - 1); i++) {
+          for(i = 0; i < (word.size - 1); i++) {
             new_word = new_word + word[i];
           }
           word = new_word;
@@ -667,7 +663,7 @@ function dialog_text_box_input(cursor_x, cursor_y, word_length) {
     }
     hud_word settext(word);
     x = cursor_x;
-    for (i = 0; i < word.size; i++) {
+    for(i = 0; i < word.size; i++) {
       x = x + get_letter_space(word[i]);
     }
     level.dialog_box_cursor.x = x;
@@ -731,7 +727,7 @@ function dialog_text_box_buttons() {
 
 function dialog_text_box_cursor() {
   level endon("stop_dialog_text_box_cursor");
-  while (true) {
+  while(true) {
     level.dialog_box_cursor.alpha = 0;
     wait(0.5);
     level.dialog_box_cursor.alpha = 1;
@@ -765,7 +761,7 @@ function get_letter_space(letter) {
 }
 
 function add_universal_button(button_group, name) {
-  if(!isdefined(level.u_buttons[button_group])) {
+  if(!isDefined(level.u_buttons[button_group])) {
     level.u_buttons[button_group] = [];
   }
   if(!isinarray(level.u_buttons[button_group], name)) {
@@ -779,21 +775,21 @@ function clear_universal_buttons(button_group) {
 
 function universal_input_loop(button_group, end_on, use_attackbutton, mod_button, no_mod_button) {
   level endon(end_on);
-  if(!isdefined(use_attackbutton)) {
+  if(!isDefined(use_attackbutton)) {
     use_attackbutton = 0;
   }
   notify_name = button_group + "";
   buttons = level.u_buttons[button_group];
   level.u_buttons_disable[button_group] = 0;
-  while (true) {
+  while(true) {
     if(level.u_buttons_disable[button_group]) {
       wait(0.05);
       continue;
     }
-    if(isdefined(mod_button) && !level.player buttonpressed(mod_button)) {
+    if(isDefined(mod_button) && !level.player buttonpressed(mod_button)) {
       wait(0.05);
       continue;
-    } else if(isdefined(no_mod_button) && level.player buttonpressed(no_mod_button)) {
+    } else if(isDefined(no_mod_button) && level.player buttonpressed(no_mod_button)) {
       wait(0.05);
       continue;
     }
@@ -802,7 +798,7 @@ function universal_input_loop(button_group, end_on, use_attackbutton, mod_button
       wait(0.1);
       continue;
     }
-    for (i = 0; i < buttons.size; i++) {
+    for(i = 0; i < buttons.size; i++) {
       if(level.player buttonpressed(buttons[i])) {
         level notify(notify_name, buttons[i]);
         wait(0.1);
@@ -838,7 +834,7 @@ function any_button_hit(button_hit, type) {
   } else {
     buttons = level.buttons;
   }
-  for (i = 0; i < buttons.size; i++) {
+  for(i = 0; i < buttons.size; i++) {
     if(button_hit == buttons[i]) {
       return true;
     }

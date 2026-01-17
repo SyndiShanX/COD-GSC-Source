@@ -143,7 +143,7 @@ set_banzai_melee_distance(distance) {
 
 melee_attack_dist_thread() {
   self endon("death");
-  while (1) {
+  while(1) {
     set_banzai_melee_distance(64);
     self waittill("enemy");
   }
@@ -252,7 +252,7 @@ banzai_attack() {
 report_damage() {
   self notify("end_report_damage");
   self endon("end_report_damage");
-  while (1) {
+  while(1) {
     self waittill("damage", amount, inflictor, direction, point, type, modelName, tagName);
     banzai_print(undefined, undefined, "Damage: sufferer=" + self GetEntityNumber() + " amount=" + amount + " type=" + type);
   }
@@ -308,9 +308,9 @@ banzai_melee_ai_seq(attacker, defender) {
   defender.inBanzaiMelee = true;
   attacker.disableArrivals = true;
   defender.disableArrivals = true;
-  attackerForward = VectorNormalize(AnglesToForward(attacker.angles));
+  attackerForward = VectorNormalize(anglesToForward(attacker.angles));
   attackerRight = VectorNormalize(AnglesToRight(attacker.angles));
-  defenderForward = VectorNormalize(AnglesToForward(defender.angles));
+  defenderForward = VectorNormalize(anglesToForward(defender.angles));
   defenderRight = VectorNormalize(AnglesToRight(attacker.angles));
   attackerToDefender = VectorNormalize(defender.origin - attacker.origin);
   defenderToAttacker = VectorNormalize(attacker.origin - defender.origin);
@@ -468,7 +468,7 @@ notify_when_melee_over(meleeLength) {
 
 debug_banzai_link(enemy) {
   elapsed = 0;
-  while (elapsed <= level.banzai_unlink_time + 0.25) {
+  while(elapsed <= level.banzai_unlink_time + 0.25) {
     print_entities(self, enemy, elapsed);
     elapsed += 0.05;
     wait 0.05;
@@ -502,7 +502,7 @@ print_position(label, index) {
 
 print_script_origin(scriptOrigin, label, duration) {
   elapsed = 0;
-  while (elapsed <= duration) {
+  while(elapsed <= duration) {
     pos = scriptOrigin.origin;
     rot = scriptOrigin.angles;
     banzai_print(undefined, undefined, "Banzai " + label + " script origin " + elapsed + ": " + pos + "/" + rot);
@@ -786,7 +786,7 @@ has_banzai_attacker() {
 }
 
 banzai_attacked_by(attacker) {
-  for (i = 0; i < self.banzaiAttackers.size; i++) {
+  for(i = 0; i < self.banzaiAttackers.size; i++) {
     if(self.banzaiAttackers[i] == attacker) {
       return true;
     }
@@ -985,7 +985,7 @@ handleBanzaiFailedNoteTracks(note) {
   switch (note) {
     case "stab_wound": {
       if(is_mature())
-        playfxontag(level._effects["stab_wound"], self, "j_neck");
+        playFXOnTag(level._effects["stab_wound"], self, "j_neck");
     }
     break;
   }
@@ -1010,11 +1010,11 @@ banzai_last_stand(attacker, player) {
       return;
     }
   }
-  while (player_attacking(player)) {
+  while(player_attacking(player)) {
     wait(0.05);
   }
   player.attackedBanzai = false;
-  while (IsAlive(attacker) && isDefined(attacker.inBanzaiMelee) && attacker.inBanzaiMelee) {
+  while(IsAlive(attacker) && isDefined(attacker.inBanzaiMelee) && attacker.inBanzaiMelee) {
     if(player_attacking(player)) {
       level thread hideBanzaiHint(player);
       player notify("timescale_off");
@@ -1040,13 +1040,13 @@ last_stand_attacker_failed(attacker, player) {
 }
 
 kill_attacker(attacker, player) {
-  attacker setcandamage(true);
+  attacker setCanDamage(true);
   attacker.a.nodeath = true;
   attacker DropAllAIWeapons();
   dif = player.origin - attacker.origin;
   dif = (dif[0], dif[1], 0);
   arcademode_assignpoints("arcademode_score_banzai", player);
-  attacker do_kill_damage(attacker geteye() - dif, player);
+  attacker do_kill_damage(attacker getEye() - dif, player);
   player giveAchievement("ANY_ACHIEVEMENT_BANZAI");
 }
 
@@ -1075,8 +1075,8 @@ last_stand_player_failed(attacker, player) {
 }
 
 play_thrust_sound() {
-  self PlaySound("generic_thrust_japanese");
-  self PlaySound("melee_swing");
+  self playSound("generic_thrust_japanese");
+  self playSound("melee_swing");
 }
 
 play_banzai_rumble() {
@@ -1085,7 +1085,7 @@ play_banzai_rumble() {
 
 record_early_attacks(attacker, player) {
   attacker endon("startBanzaiLastStand");
-  while (1) {
+  while(1) {
     if(player_attacking(player)) {
       player.banzaiAttackedTooEarly = true;
       break;
@@ -1096,7 +1096,7 @@ record_early_attacks(attacker, player) {
 
 record_late_attacks(attacker, player) {
   attacker endon("killanimscript");
-  while (1) {
+  while(1) {
     if(player_attacking(player)) {
       player.banzaiAttackedTooLate = true;
       break;
@@ -1122,7 +1122,7 @@ do_start_synchronized_melee(attacker, player) {
     return false;
   }
   attacker OrientMode("face enemy");
-  attacker setcandamage(false);
+  attacker setCanDamage(false);
   if(!allow_mashing()) {
     player.banzaiAttackedTooEarly = false;
     player.banzaiAttackedTooLate = false;
@@ -1133,7 +1133,7 @@ do_start_synchronized_melee(attacker, player) {
   attacker.syncedMeleeTarget = player;
   if(!isDefined(player.player_view)) {
     banzai_print(attacker, player, "Spawning banzai player view.");
-    player.player_view = PlayerView_Spawn(player);
+    player.player_view = PlayerView_spawn(player);
   }
   player notify("banzai_attacks_player");
   player.player_view.inSeq = true;
@@ -1304,11 +1304,11 @@ kill_player(player, delay) {
   waittillframeend;
   setDvar("ui_deadquote", "");
   wait(1.6);
-  level.banzaiDeathHint = & "SCRIPT_PLATFORM_BANZAI_DEATH_DO_NOTHING";
+  level.banzaiDeathHint = &"SCRIPT_PLATFORM_BANZAI_DEATH_DO_NOTHING";
   if(isDefined(player.banzaiAttackedTooEarly) && player.banzaiAttackedTooEarly) {
-    level.banzaiDeathHint = & "SCRIPT_PLATFORM_BANZAI_DEATH_TOO_SOON";
+    level.banzaiDeathHint = &"SCRIPT_PLATFORM_BANZAI_DEATH_TOO_SOON";
   } else if(isDefined(player.banzaiAttackedTooLate) && player.banzaiAttackedTooLate) {
-    level.banzaiDeathHint = & "SCRIPT_PLATFORM_BANZAI_DEATH_TOO_LATE";
+    level.banzaiDeathHint = &"SCRIPT_PLATFORM_BANZAI_DEATH_TOO_LATE";
   }
   thread banzai_deathquote(player);
 }
@@ -1385,13 +1385,13 @@ banzai_init_player_anims() {
   anim.banzai_meleeseq_player[anim.banzai_meleeseq_player.size] = % int_bonzai_attack_player_success;
 }
 
-PlayerView_Spawn(player) {
+PlayerView_spawn(player) {
   playerView = spawn("script_model", player.origin);
   playerView.angles = player.angles;
   playerView setModel(level.player_interactive_hands);
   playerView useAnimTree(#animtree);
   weapon = spawn("script_model", playerView gettagorigin("tag_weapon"));
-  weapon setmodel("weapon_usa_kbar_knife");
+  weapon setModel("weapon_usa_kbar_knife");
   weapon linkto(playerView, "tag_weapon", (0, 0, 0), (0, 0, 0));
   player.banzaiDefenseWeapon = weapon;
   playerView hide();

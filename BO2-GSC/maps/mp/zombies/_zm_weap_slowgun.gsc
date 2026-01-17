@@ -297,7 +297,7 @@ zombie_slow_for_time(time, multiplier) {
   }
   self.slowing = 1;
   self.preserve_asd_substates = 1;
-  self playloopsound("wpn_paralyzer_slowed_loop", 0.1);
+  self playLoopSound("wpn_paralyzer_slowed_loop", 0.1);
 
   while(self.paralyzer_slowtime > 0 && isalive(self)) {
     if(self.paralyzer_slowtime < 0.1)
@@ -622,7 +622,7 @@ player_paralyzed(byplayer, upgraded) {
       sizzle = "player_slowgun_sizzle_ug";
 
     if(isDefined(level._effect[sizzle]))
-      playfxontag(level._effect[sizzle], self, "J_SpineLower");
+      playFXOnTag(level._effect[sizzle], self, "J_SpineLower");
   }
 
   self thread player_slow_for_time(0.25);

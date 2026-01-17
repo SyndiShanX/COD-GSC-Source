@@ -13,13 +13,11 @@ statechange(clientNum, system, newState) {
     level._systemStates = [];
   }
   if(!isDefined(level._systemStates[system])) {
-    level._systemStates[system] = spawnstruct();
+    level._systemStates[system] = spawnStruct();
   }
   level._systemStates[system].state = newState;
   if(isDefined(level._systemStates[system].callback)) {
-    [
-      [level._systemStates[system].callback]
-    ](clientNum, newState);
+    [[level._systemStates[system].callback]](clientNum, newState);
   } else {
     println("*** Unhandled client system state change - " + system + " - has no registered callback function.");
   }
@@ -62,7 +60,7 @@ entityspawned(localClientNum) {
     }
     if(isDefined(level._customVehicleCB)) {
       keys = getarraykeys(level._customVehicleCB);
-      for (i = 0; i < keys.size; i++) {
+      for(i = 0; i < keys.size; i++) {
         if(self.vehicletype == keys[i]) {
           self thread[[level._customVehicleCB[keys[i]]]](localClientNum);
         }
@@ -89,7 +87,7 @@ scriptmodelspawned(local_client_num, ent, destructable_index) {
     return;
   }
   fixed = false;
-  for (i = 0; i < level.createFXent.size; i++) {
+  for(i = 0; i < level.createFXent.size; i++) {
     if(level.createFXent[i].v["type"] != "exploder") {
       continue;
     }
@@ -112,7 +110,7 @@ callback_activate_exploder(exploder_id) {
   }
   keys = getarraykeys(level._exploder_ids);
   exploder = undefined;
-  for (i = 0; i < keys.size; i++) {
+  for(i = 0; i < keys.size; i++) {
     if(level._exploder_ids[keys[i]] == exploder_id) {
       exploder = keys[i];
       break;
@@ -132,7 +130,7 @@ callback_deactivate_exploder(exploder_id) {
   }
   keys = getarraykeys(level._exploder_ids);
   exploder = undefined;
-  for (i = 0; i < keys.size; i++) {
+  for(i = 0; i < keys.size; i++) {
     if(level._exploder_ids[keys[i]] == exploder_id) {
       exploder = keys[i];
       break;
@@ -152,7 +150,7 @@ level_notify(notify_name, param1, param2) {
 
 sound_notify(client_num, entity, note) {
   if(note == "sound_dogstep_run_default") {
-    entity playsound(client_num, "dogstep_run_default");
+    entity playSound(client_num, "dogstep_run_default");
     return true;
   }
   prefix = getsubstr(note, 0, 5);
@@ -173,7 +171,7 @@ dog_sound_print(message) {
 play_dog_sound(localClientNum, sound, position) {
   dog_sound_print("SOUND " + sound);
   if(isDefined(position)) {
-    return self playsound(localClientNum, sound, position);
+    return self playSound(localClientNum, sound, position);
   }
-  return self playsound(localClientNum, sound);
+  return self playSound(localClientNum, sound);
 }

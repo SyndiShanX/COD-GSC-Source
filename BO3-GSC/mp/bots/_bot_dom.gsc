@@ -15,10 +15,10 @@
 #namespace bot_dom;
 
 function init() {
-  level.botupdate = & bot_update;
-  level.botprecombat = & bot_pre_combat;
-  level.botupdatethreatgoal = & bot_update_threat_goal;
-  level.botidle = & bot_idle;
+  level.botupdate = &bot_update;
+  level.botprecombat = &bot_pre_combat;
+  level.botupdatethreatgoal = &bot_update_threat_goal;
+  level.botidle = &bot_idle;
 }
 
 function bot_update() {
@@ -36,19 +36,19 @@ function bot_update() {
 }
 
 function bot_pre_combat() {
-  if(!self bot_combat::has_threat() && isdefined(self.bot.goalflag) && self.bot.goalflag gameobjects::get_owner_team() == self.team) {
+  if(!self bot_combat::has_threat() && isDefined(self.bot.goalflag) && self.bot.goalflag gameobjects::get_owner_team() == self.team) {
     self botsetgoal(self.origin);
   }
   self bot_combat::mp_pre_combat();
 }
 
 function bot_idle() {
-  if(isdefined(self.bot.capturingflag)) {
+  if(isDefined(self.bot.capturingflag)) {
     self bot::path_to_point_in_trigger(self.bot.capturingflag.trigger);
     return;
   }
   bestflag = get_best_flag();
-  if(isdefined(bestflag)) {
+  if(isDefined(bestflag)) {
     self bot::approach_goal_trigger(bestflag.trigger);
     self bot::sprint_to_goal();
     return;
@@ -57,7 +57,7 @@ function bot_idle() {
 }
 
 function bot_update_threat_goal() {
-  if(isdefined(self.bot.capturingflag)) {
+  if(isDefined(self.bot.capturingflag)) {
     if(self botgoalreached()) {
       self bot::path_to_point_in_trigger(self.bot.capturingflag.trigger);
     }
@@ -85,7 +85,7 @@ function get_best_flag() {
     if(ownerteam == self.team && !contested) {
       continue;
     }
-    if(!isdefined(bestflag) || distsq < bestflagdistsq) {
+    if(!isDefined(bestflag) || distsq < bestflagdistsq) {
       bestflag = flag;
       bestflagdistsq = distsq;
     }

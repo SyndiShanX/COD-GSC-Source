@@ -199,7 +199,7 @@ fade_fov_lerp(n_fov_1, n_fov_2, n_fade_time, n_time_increment) {
 
 setuprageloopid() {
   level.rageloopent = spawn(0, (0, 0, 0), "script_origin");
-  level.rageloopid = level.rageloopent playloopsound("evt_menendez_rage_loop");
+  level.rageloopid = level.rageloopent playLoopSound("evt_menendez_rage_loop");
   setsoundvolume(level.rageloopid, 0);
   setsoundvolumerate(level.rageloopid, 3);
 }
@@ -276,7 +276,7 @@ blood_splat(n_time_max, n_alpha_max, n_alpha_reset) {
     set_filter_blood_droplets_count(e_player, 5, n_alpha_max);
     set_filter_blood_splats_amount(e_player, 6, n_alpha_max);
     set_filter_blood_splats_count(e_player, 6, n_alpha_max);
-    playsound(0, "evt_menendez_rage_blood_splat", (0, 0, 0));
+    playSound(0, "evt_menendez_rage_blood_splat", (0, 0, 0));
     wait 0.15;
 
     for(i = n_alpha_reset; i < n_time_max; i = i + 0.05) {

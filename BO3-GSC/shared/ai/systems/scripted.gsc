@@ -19,9 +19,7 @@ function main() {
 function init(notifyname, origin, angles, theanim, animmode, root, rate, goaltime, lerptime) {}
 
 function end_script() {
-  if(isdefined(self.___archetypeonbehavecallback)) {
-    [
-      [self.___archetypeonbehavecallback]
-    ](self);
+  if(isDefined(self.___archetypeonbehavecallback)) {
+    [[self.___archetypeonbehavecallback]](self);
   }
 }

@@ -73,7 +73,7 @@ moveinit() {
 }
 
 moveglobalsinit() {
-  anim.moveglobals = spawnstruct();
+  anim.moveglobals = spawnStruct();
   anim.moveglobals.max_distance_to_shoot_sq = 2250000;
   anim.moveglobals.motion_angle_offset = 60;
   anim.moveglobals.aim_yaw_threshold = 45;
@@ -450,7 +450,7 @@ movecovertocover() {
     return;
   }
   movedir = vectornormalize(movedir);
-  forward = anglestoforward(node.angles);
+  forward = anglesToForward(node.angles);
   shuffleleft = forward[0] * movedir[1] - forward[1] * movedir[0] > 0;
 
   if(movedoorsidetoside(shuffleleft, startnode, node)) {

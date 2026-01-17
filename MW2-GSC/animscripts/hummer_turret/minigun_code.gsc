@@ -26,12 +26,12 @@ minigun_cleanup_func(gunner, turret) {
   }
 }
 
-// controls spinning & firing the minigun, responding to commands from fireDirector()
+// controls spinning &firing the minigun, responding to commands from fireDirector()
 fireController_minigun(turret) {
   self endon("death");
   self endon("dismount");
 
-  assert(isdefined(turret));
+  assert(isDefined(turret));
 
   turret endon("kill_fireController");
   turret endon("death");
@@ -58,7 +58,7 @@ fireController_minigun(turret) {
 
   self DoAim(turret);
 
-  while (1) {
+  while(1) {
     // if we're supposed to be firing but we're not, and if we're not doing a custom anim...
     if(turret.doFiring && !isFiring && !self.isCustomAnimating) {
       isFiring = true;
@@ -79,11 +79,11 @@ fireController_minigun(turret) {
     }
     // if we're currently not supposed to be firing but still actually are...
     else if(!turret.doFiring && isFiring) {
-      if(!IsDefined(ceaseFireTime)) {
+      if(!isDefined(ceaseFireTime)) {
         ceaseFireTime = GetTime(); // time when the turret stops firing
       }
 
-      if(!IsDefined(extraFireTime)) {
+      if(!isDefined(extraFireTime)) {
         extraFireTime = RandomFloatRange(turret.extraFireTime_min, turret.extraFireTime_max);
       }
 
@@ -102,7 +102,7 @@ fireController_minigun(turret) {
     }
     // if all we're still doing is spinning...
     else if(!turret.doFiring && !isFiring && isSpinning) {
-      if(!IsDefined(extraSpinTime)) {
+      if(!isDefined(extraSpinTime)) {
         extraSpinTime = RandomFloatRange(turret.extraSpinTime_min, turret.extraSpinTime_max);
       }
 
@@ -134,8 +134,9 @@ fireController_minigun(turret) {
 
     wait(0.05);
 
-    if(!isdefined(turret))
+    if(!isDefined(turret)) {
       break;
+    }
   }
 }
 
@@ -147,7 +148,7 @@ minigun_spinup() {
 
   self StartBarrelSpin();
 
-  while (self GetBarrelSpinRate() < 1) {
+  while(self GetBarrelSpinRate() < 1) {
     wait(0.05);
   }
 }

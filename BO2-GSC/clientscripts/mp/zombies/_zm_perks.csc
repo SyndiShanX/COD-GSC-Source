@@ -137,12 +137,12 @@ _register_undefined_perk(str_perk) {
     level._custom_perks = [];
 
   if(!isDefined(level._custom_perks[str_perk]))
-    level._custom_perks[str_perk] = spawnstruct();
+    level._custom_perks[str_perk] = spawnStruct();
 }
 
 perk_meteor_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval)
-    self.meteor_fx = playfxontag(localclientnum, level._effect["perk_meteor"], self, "tag_origin");
+    self.meteor_fx = playFXOnTag(localclientnum, level._effect["perk_meteor"], self, "tag_origin");
   else if(isDefined(self.meteor_fx))
     stopfx(localclientnum, self.meteor_fx);
 }

@@ -32,7 +32,7 @@ stage_vo_max() {
   s_struct = getstruct("sq_gallows", "targetname");
   trigger = spawn("trigger_radius", s_struct.origin, 0, 128, 72);
   m_maxis_vo_spot = spawn("script_model", s_struct.origin);
-  m_maxis_vo_spot setmodel("tag_origin");
+  m_maxis_vo_spot setModel("tag_origin");
   maxissay("vox_maxi_sidequest_ip_0", m_maxis_vo_spot);
   maxissay("vox_maxi_sidequest_ip_1", m_maxis_vo_spot);
   m_lightboard = getent("sq_bp_board", "targetname");
@@ -77,7 +77,7 @@ stage_logic() {
     }
   } else {
     sq_ml_spawn_levers();
-    a_levers = getentarray("sq_ml_lever", "targetname");
+    a_levers = getEntArray("sq_ml_lever", "targetname");
     array_thread(a_levers, ::sq_ml_spawn_trigger);
     level thread sq_ml_puzzle_logic();
     flag_wait("sq_ip_puzzle_complete");
@@ -87,8 +87,7 @@ stage_logic() {
   stage_completed("sq", level._cur_stage_name);
 }
 
-exit_stage(success) {
-}
+exit_stage(success) {}
 
 sq_bp_spawn_trigger() {
   level endon("sq_ip_puzzle_complete");
@@ -110,24 +109,24 @@ sq_bp_spawn_trigger() {
 sq_bp_spawn_board() {
   m_board = spawn("script_model", self.origin);
   m_board.angles = self.angles;
-  m_board setmodel("p6_zm_bu_bulb_puzzle_machine");
+  m_board setModel("p6_zm_bu_bulb_puzzle_machine");
   m_board.targetname = "sq_bp_board";
 }
 
 sq_bp_button_pressed(str_tag, trig) {
   if(isDefined(level.str_sq_bp_active_light)) {
     if(level.str_sq_bp_active_light == str_tag) {
-      trig playsound("zmb_sq_bell_yes");
+      trig playSound("zmb_sq_bell_yes");
       sq_bp_light_on(str_tag, "green");
       level notify("sq_bp_correct_button");
     } else {
-      trig playsound("zmb_sq_bell_no");
+      trig playSound("zmb_sq_bell_no");
       level notify("sq_bp_wrong_button");
       m_light = sq_bp_light_on(str_tag, "yellow");
     }
   } else {
     m_light = sq_bp_light_on(str_tag, "yellow");
-    trig playsound("zmb_sq_bell_no");
+    trig playSound("zmb_sq_bell_no");
   }
 
   wait 1;
@@ -225,7 +224,7 @@ debug_tag(str_tag) {
 
 sq_ml_spawn_lever(n_index) {
   m_lever = spawn("script_model", (0, 0, 0));
-  m_lever setmodel(self.model);
+  m_lever setModel(self.model);
   m_lever.targetname = "sq_ml_lever";
 
   while(true) {
@@ -271,7 +270,7 @@ sq_ml_show_lever_debug(v_spot, n_index) {
 #using_animtree("fxanim_props_dlc3");
 
 sq_ml_spawn_trigger() {
-  v_right = anglestoforward(self.angles);
+  v_right = anglesToForward(self.angles);
   v_offset = vectornormalize(v_right) * 8;
   self.trig = spawn("trigger_box_use", self.origin - v_offset, 0, 16, 16, 16);
   self.trig enablelinkto();
@@ -290,7 +289,7 @@ sq_ml_spawn_trigger() {
     self.is_flipped = 1;
     self.n_flip_number = level.sq_ml_curr_lever;
     level.sq_ml_curr_lever++;
-    self.trig playsound("zmb_sq_maze_switch");
+    self.trig playSound("zmb_sq_maze_switch");
     level waittill("sq_ml_reset_levers");
     self setanim(level.maze_switch_anim["switch_up"]);
     self.trig sethintstring(&"ZM_BURIED_SQ_SWIT_U");
@@ -309,7 +308,7 @@ sq_ml_spawn_levers() {
 }
 
 sq_ml_puzzle_logic() {
-  a_levers = getentarray("sq_ml_lever", "targetname");
+  a_levers = getEntArray("sq_ml_lever", "targetname");
   level.sq_ml_curr_lever = 0;
   a_levers = array_randomize(a_levers);
 
@@ -323,9 +322,9 @@ sq_ml_puzzle_logic() {
 
     foreach(m_lever in a_levers) {
       if(m_lever.n_flip_number == m_lever.n_lever_order) {
-        playfxontag(level._effect["sq_spark"], m_lever, "tag_origin");
+        playFXOnTag(level._effect["sq_spark"], m_lever, "tag_origin");
         n_correct++;
-        m_lever playsound("zmb_sq_maze_correct_spark");
+        m_lever playSound("zmb_sq_maze_correct_spark");
       }
     }
 
@@ -341,7 +340,7 @@ sq_ml_puzzle_logic() {
 }
 
 sq_ml_puzzle_wait_for_levers() {
-  a_levers = getentarray("sq_ml_lever", "targetname");
+  a_levers = getEntArray("sq_ml_lever", "targetname");
   are_all_flipped = 0;
 
   while(!are_all_flipped) {

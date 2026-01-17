@@ -258,7 +258,7 @@ set_gunner_anims() {
   positions = [];
 
   for(i = 0; i < 3; i++)
-    positions[i] = spawnstruct();
+    positions[i] = spawnStruct();
 
   positions[0].sittag = "tag_driver";
   positions[1].sittag = "tag_passenger";
@@ -291,7 +291,7 @@ set_50cal_gunner_anims() {
   positions = [];
 
   for(i = 0; i < 3; i++)
-    positions[i] = spawnstruct();
+    positions[i] = spawnStruct();
 
   positions[0].sittag = "tag_driver";
   positions[1].sittag = "tag_passenger";
@@ -315,7 +315,7 @@ setanims() {
   positions = [];
 
   for(i = 0; i < 10; i++)
-    positions[i] = spawnstruct();
+    positions[i] = spawnStruct();
 
   positions[0].sittag = "tag_driver";
   positions[1].sittag = "tag_passenger";

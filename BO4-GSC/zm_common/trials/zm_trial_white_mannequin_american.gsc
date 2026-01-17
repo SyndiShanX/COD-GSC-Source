@@ -11,7 +11,6 @@
 #include scripts\zm_common\zm_loadout;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
-
 #namespace zm_trial_white_mannequin_american;
 
 autoexec __init__system__() {
@@ -26,7 +25,7 @@ __init__() {
   zm_trial::register_challenge("mannequin_american", &on_begin, &on_end);
 }
 
-private on_begin() {
+on_begin() {
   var_a2c75164 = getent("mannequin_ally_door", "targetname");
   var_a2c75164 zm_white_private_mannequin::function_a51b6403(1);
   wait 1;
@@ -52,7 +51,7 @@ private on_begin() {
   }
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   callback::function_824d206(&function_33f0ddd3);
   level zm_trial::function_25ee130(0);
 
@@ -71,7 +70,7 @@ function_26edbcdc(inflictor, attacker, damage, flags, meansofdeath, weapon, poin
   return false;
 }
 
-private function_545d53bf() {
+function_545d53bf() {
   self endon(#"disconnect");
   level endon(#"hash_7646638df88a3656");
   var_407eb07 = 0;
@@ -96,7 +95,7 @@ private function_545d53bf() {
   }
 }
 
-private function_33f0ddd3(s_event) {
+function_33f0ddd3(s_event) {
   if(s_event.event === "give_weapon") {
     var_972e1f84 = 0;
     dist = distancesquared(self.origin, level.mannequin_ally.origin);
@@ -126,7 +125,7 @@ function_7532e17c(ai_mannequin) {
   }
 
   self.a_n_objective_ids[self.a_n_objective_ids.size] = obj_id;
-  objective_add(obj_id, "active", ai_mannequin, #"hash_423a75e2700a53ab");
+  objective_add(obj_id, "active", ai_mannequin, # "hash_423a75e2700a53ab");
   function_da7940a3(obj_id, 1);
 
   while(isDefined(ai_mannequin)) {

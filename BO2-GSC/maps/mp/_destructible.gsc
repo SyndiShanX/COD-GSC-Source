@@ -11,7 +11,7 @@
 
 init() {
   level.destructible_callbacks = [];
-  destructibles = getentarray("destructible", "targetname");
+  destructibles = getEntArray("destructible", "targetname");
 
   if(destructibles.size <= 0) {
     return;

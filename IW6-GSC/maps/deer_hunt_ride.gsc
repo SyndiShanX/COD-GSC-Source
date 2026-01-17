@@ -6,7 +6,7 @@
 jeep_ride_setup() {
   common_scripts\utility::flag_clear("introscreen_complete");
   maps\_utility::delaythread(0.25, maps\_utility::music_play, "mus_deer_jeep_ride");
-  var_0 = [ & "DEER_HUNT_JEEP_INTROLINE_1", & "DEER_HUNT_JEEP_INTROLINE_2"];
+  var_0 = [ &"DEER_HUNT_JEEP_INTROLINE_1", &"DEER_HUNT_JEEP_INTROLINE_2"];
   thread display_stylized_message();
   level.player thread maps\_utility::play_sound_on_entity("scn_deer_jeep_drive_stop");
 
@@ -27,7 +27,7 @@ jeep_ride_setup() {
 
 display_stylized_message() {
   wait 1;
-  var_0 = [ & "DEER_HUNT_JEEP_INTROLINE_1", & "DEER_HUNT_JEEP_INTROLINE_2"];
+  var_0 = [ &"DEER_HUNT_JEEP_INTROLINE_1", &"DEER_HUNT_JEEP_INTROLINE_2"];
   maps\_utility::stylized_center_text(var_0, 4.5);
   common_scripts\utility::flag_set("jeep_ride_message_displayed");
   common_scripts\utility::flag_wait("player_in_jeep");
@@ -658,7 +658,7 @@ setup_house() {
 
   for(var_5 = 0; var_5 < var_4.size; var_5++) {
     var_0[var_5].name = "";
-    var_0[var_5] setlookattext(common_scripts\utility::random(var_3) + var_4[var_5], & "");
+    var_0[var_5] setlookattext(common_scripts\utility::random(var_3) + var_4[var_5], &"");
   }
 
   thread balcony_read();
@@ -840,8 +840,8 @@ level_end() {
   thread maps\deer_hunt_util::fade_out_in("black", "never", undefined, 3);
   wait 6;
   level.player freezecontrols(1);
-  level.elias setlookattext("", & "");
-  level.hesh setlookattext("", & "");
+  level.elias setlookattext("", &"");
+  level.hesh setlookattext("", &"");
   maps\_utility::nextmission();
 }
 

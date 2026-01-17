@@ -47,10 +47,10 @@ setskill(var_0) {
     level.difficultytype[1] = "normal";
     level.difficultytype[2] = "hardened";
     level.difficultytype[3] = "veteran";
-    level.difficultystring["easy"] = & "GAMESKILL_EASY";
-    level.difficultystring["normal"] = & "GAMESKILL_NORMAL";
-    level.difficultystring["hardened"] = & "GAMESKILL_HARDENED";
-    level.difficultystring["veteran"] = & "GAMESKILL_VETERAN";
+    level.difficultystring["easy"] = &"GAMESKILL_EASY";
+    level.difficultystring["normal"] = &"GAMESKILL_NORMAL";
+    level.difficultystring["hardened"] = &"GAMESKILL_HARDENED";
+    level.difficultystring["veteran"] = &"GAMESKILL_VETERAN";
     thread gameskill_change_monitor();
   }
 
@@ -791,9 +791,9 @@ player_health_packets() {
 playerhealthregeninit() {
   wait 0.05;
   level.strings["take_cover"] = spawnStruct();
-  level.strings["take_cover"].text = & "GAME_GET_TO_COVER";
+  level.strings["take_cover"].text = &"GAME_GET_TO_COVER";
   level.strings["get_back_up"] = spawnStruct();
-  level.strings["get_back_up"].text = & "GAME_LAST_STAND_GET_BACK_UP";
+  level.strings["get_back_up"].text = &"GAME_LAST_STAND_GET_BACK_UP";
 }
 
 playerhealthregen() {
@@ -1763,9 +1763,7 @@ return_false(var_0) {
 }
 
 player_attacker(var_0) {
-  if([
-      [level.custom_player_attacker]
-    ](var_0))
+  if([[level.custom_player_attacker]](var_0))
     return 1;
 
   if(isplayer(var_0))
@@ -1812,16 +1810,12 @@ aa_player_attacks_enemy_with_ads(var_0, var_1, var_2) {
   aa_add_event("aa_player_damage_dealt", var_0);
 
   if(!level.player maps\_utility::isads()) {
-    [
-      [level.global_damage_func]
-    ](var_1, self.damagelocation, var_2);
+    [[level.global_damage_func]](var_1, self.damagelocation, var_2);
     return 0;
   }
 
   if(!bullet_attack(var_1)) {
-    [
-      [level.global_damage_func]
-    ](var_1, self.damagelocation, var_2);
+    [[level.global_damage_func]](var_1, self.damagelocation, var_2);
     return 0;
   }
 

@@ -8,7 +8,6 @@
 #include scripts\core_common\player\player_stats;
 #include scripts\core_common\postfx_shared;
 #include scripts\core_common\system_shared;
-
 #namespace wz_snowball_fx;
 
 autoexec __init__system__() {
@@ -38,7 +37,7 @@ function_b6992be(localclientnum) {
 
       if(var_965f0bef === 1 && !var_d5823792) {
         var_d5823792 = 1;
-        function_a837926b(localclientnum, #"pstfx_wz_snowball_hit");
+        function_a837926b(localclientnum, # "pstfx_wz_snowball_hit");
         waitframe(1);
 
         if(!isDefined(local_player)) {
@@ -49,45 +48,45 @@ function_b6992be(localclientnum) {
 
         switch (var_494e2f9b) {
           case 1:
-            local_player postfx::function_c8b5f318(#"pstfx_wz_snowball_hit", #"screen position x", 0);
-            local_player postfx::function_c8b5f318(#"pstfx_wz_snowball_hit", #"screen position y", 0);
+            local_player postfx::function_c8b5f318(#"pstfx_wz_snowball_hit", # "screen position x", 0);
+            local_player postfx::function_c8b5f318(#"pstfx_wz_snowball_hit", # "screen position y", 0);
             break;
           case 2:
-            local_player postfx::function_c8b5f318(#"pstfx_wz_snowball_hit", #"screen position x", -1);
-            local_player postfx::function_c8b5f318(#"pstfx_wz_snowball_hit", #"screen position y", 0);
+            local_player postfx::function_c8b5f318(#"pstfx_wz_snowball_hit", # "screen position x", -1);
+            local_player postfx::function_c8b5f318(#"pstfx_wz_snowball_hit", # "screen position y", 0);
             break;
           case 3:
-            local_player postfx::function_c8b5f318(#"pstfx_wz_snowball_hit", #"screen position x", 1);
-            local_player postfx::function_c8b5f318(#"pstfx_wz_snowball_hit", #"screen position y", 0);
+            local_player postfx::function_c8b5f318(#"pstfx_wz_snowball_hit", # "screen position x", 1);
+            local_player postfx::function_c8b5f318(#"pstfx_wz_snowball_hit", # "screen position y", 0);
             break;
           case 4:
-            local_player postfx::function_c8b5f318(#"pstfx_wz_snowball_hit", #"screen position x", 0);
-            local_player postfx::function_c8b5f318(#"pstfx_wz_snowball_hit", #"screen position y", -1);
+            local_player postfx::function_c8b5f318(#"pstfx_wz_snowball_hit", # "screen position x", 0);
+            local_player postfx::function_c8b5f318(#"pstfx_wz_snowball_hit", # "screen position y", -1);
             break;
           case 5:
-            local_player postfx::function_c8b5f318(#"pstfx_wz_snowball_hit", #"screen position x", 0);
-            local_player postfx::function_c8b5f318(#"pstfx_wz_snowball_hit", #"screen position y", 1);
+            local_player postfx::function_c8b5f318(#"pstfx_wz_snowball_hit", # "screen position x", 0);
+            local_player postfx::function_c8b5f318(#"pstfx_wz_snowball_hit", # "screen position y", 1);
             break;
           case 6:
-            local_player postfx::function_c8b5f318(#"pstfx_wz_snowball_hit", #"screen position x", -1);
-            local_player postfx::function_c8b5f318(#"pstfx_wz_snowball_hit", #"screen position y", -1);
+            local_player postfx::function_c8b5f318(#"pstfx_wz_snowball_hit", # "screen position x", -1);
+            local_player postfx::function_c8b5f318(#"pstfx_wz_snowball_hit", # "screen position y", -1);
             break;
           case 8:
-            local_player postfx::function_c8b5f318(#"pstfx_wz_snowball_hit", #"screen position x", 1);
-            local_player postfx::function_c8b5f318(#"pstfx_wz_snowball_hit", #"screen position y", -1);
+            local_player postfx::function_c8b5f318(#"pstfx_wz_snowball_hit", # "screen position x", 1);
+            local_player postfx::function_c8b5f318(#"pstfx_wz_snowball_hit", # "screen position y", -1);
             break;
           case 9:
-            local_player postfx::function_c8b5f318(#"pstfx_wz_snowball_hit", #"screen position x", -1);
-            local_player postfx::function_c8b5f318(#"pstfx_wz_snowball_hit", #"screen position y", 1);
+            local_player postfx::function_c8b5f318(#"pstfx_wz_snowball_hit", # "screen position x", -1);
+            local_player postfx::function_c8b5f318(#"pstfx_wz_snowball_hit", # "screen position y", 1);
             break;
           case 10:
-            local_player postfx::function_c8b5f318(#"pstfx_wz_snowball_hit", #"screen position x", 1);
-            local_player postfx::function_c8b5f318(#"pstfx_wz_snowball_hit", #"screen position y", 1);
+            local_player postfx::function_c8b5f318(#"pstfx_wz_snowball_hit", # "screen position x", 1);
+            local_player postfx::function_c8b5f318(#"pstfx_wz_snowball_hit", # "screen position y", 1);
             break;
         }
       } else if(var_965f0bef === 0 && var_d5823792) {
         var_d5823792 = 0;
-        function_24cd4cfb(localclientnum, #"pstfx_wz_snowball_hit");
+        function_24cd4cfb(localclientnum, # "pstfx_wz_snowball_hit");
       }
     } else {
       return;

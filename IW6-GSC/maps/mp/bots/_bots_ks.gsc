@@ -595,9 +595,7 @@ try_place_global_badplace(killstreak_unique_name, killstreak_exists_func) {
 monitor_enemy_dangerous_killstreak(my_team, killstreak_unique_name, killstreak_exists_func) {
   Assert(SCR_CONST_GLOBAL_BP_DURATION_S > (SCR_CONST_GLOBAL_BP_TIME_BETWEEN_PLACING_MS / 1000));
   wait_time = (SCR_CONST_GLOBAL_BP_DURATION_S - (SCR_CONST_GLOBAL_BP_TIME_BETWEEN_PLACING_MS / 1000)) * 0.5;
-  while([
-      [killstreak_exists_func]
-    ](my_team)) {
+  while([[killstreak_exists_func]](my_team)) {
     if(GetTime() > level.last_global_badplace_time + SCR_CONST_GLOBAL_BP_TIME_BETWEEN_PLACING_MS) {
       BadPlace_Global("", SCR_CONST_GLOBAL_BP_DURATION_S, my_team, "only_sky");
       level.last_global_badplace_time = GetTime();

@@ -588,7 +588,7 @@ struggle_mud_vo_cooldown() {
 discover_dig_site_vo() {
   flag_wait("activate_zone_nml");
   s_origin = getstruct("discover_dig_site_vo_trigger", "targetname");
-  s_origin.unitrigger_stub = spawnstruct();
+  s_origin.unitrigger_stub = spawnStruct();
   s_origin.unitrigger_stub.origin = s_origin.origin;
   s_origin.unitrigger_stub.script_width = 320;
   s_origin.unitrigger_stub.script_length = 88;
@@ -616,12 +616,12 @@ maxis_audio_logs() {
   a_s_radios = getstructarray("maxis_audio_log", "targetname");
 
   foreach(s_origin in a_s_radios) {
-    s_origin.unitrigger_stub = spawnstruct();
+    s_origin.unitrigger_stub = spawnStruct();
     s_origin.unitrigger_stub.origin = s_origin.origin;
     s_origin.unitrigger_stub.radius = 36;
     s_origin.unitrigger_stub.height = 256;
     s_origin.unitrigger_stub.script_unitrigger_type = "unitrigger_radius_use";
-    s_origin.unitrigger_stub.hint_string = & "ZM_TOMB_MAXIS_AUDIOLOG";
+    s_origin.unitrigger_stub.hint_string = &"ZM_TOMB_MAXIS_AUDIOLOG";
     s_origin.unitrigger_stub.cursor_hint = "HINT_NOICON";
     s_origin.unitrigger_stub.require_look_at = 1;
     s_origin.unitrigger_stub.script_int = s_origin.script_int;
@@ -644,7 +644,7 @@ discover_pack_a_punch() {
       e_player.discover_pap_vo_played = 0;
 
     if(!e_player.discover_pap_vo_played) {
-      if(vectordot(anglestoforward(e_player getplayerangles()), vectornormalize(s_lookat.origin - e_player.origin)) > 0.8 && e_player can_player_speak()) {
+      if(vectordot(anglesToForward(e_player getplayerangles()), vectornormalize(s_lookat.origin - e_player.origin)) > 0.8 && e_player can_player_speak()) {
         e_player.discover_pap_vo_played = 1;
         e_player create_and_play_dialog("general", "pap_discovered");
 

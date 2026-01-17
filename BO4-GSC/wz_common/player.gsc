@@ -6,7 +6,6 @@
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\system_shared;
 #include scripts\mp_common\item_supply_drop;
-
 #namespace wz_player;
 
 autoexec __init__system__() {
@@ -26,11 +25,11 @@ on_grenade_fired(params) {
   weapon = params.weapon;
 
   switch (weapon.name) {
-    case #"flare_gun":
+    case # "flare_gun":
       grenade function_4861487f(weapon, self);
       grenade thread function_cd8ee3c5();
       break;
-    case #"flare_gun_veh":
+    case # "flare_gun_veh":
       grenade function_4861487f(weapon, self);
       grenade thread function_f3edce9a();
     default:
@@ -51,13 +50,13 @@ function_4861487f(weapon, player) {
 
 function_cd8ee3c5() {
   self endon(#"grenade_dud");
-  waitresult = self waittill(#"explode", #"death");
+  waitresult = self waittill(#"explode", # "death");
 
-  if(waitresult._notify == #"explode") {
+  if(waitresult._notify == # "explode") {
     trace = groundtrace(waitresult.position, waitresult.position + (0, 0, -20000), 0, self, 0);
 
-    if(isDefined(trace[#"position"]) && trace[#"surfacetype"] != #"none") {
-      org = trace[#"position"];
+    if(isDefined(trace[# "position"]) && trace[# "surfacetype"] != # "none") {
+      org = trace[# "position"];
       item_supply_drop::drop_supply_drop(org, 1);
     }
   }
@@ -65,15 +64,15 @@ function_cd8ee3c5() {
 
 function_f3edce9a() {
   self endon(#"grenade_dud");
-  waitresult = self waittill(#"explode", #"death");
+  waitresult = self waittill(#"explode", # "death");
 
-  if(waitresult._notify == #"explode") {
+  if(waitresult._notify == # "explode") {
     position = isDefined(waitresult.position) ? waitresult.position : waitresult.attacker.origin;
     trace = groundtrace(position, position + (0, 0, -20000), 0, self, 0);
 
-    if(isDefined(trace[#"position"]) && trace[#"surfacetype"] != #"none") {
-      org = trace[#"position"];
-      vehicletypes = array(#"vehicle_t8_mil_tank_wz_black", #"vehicle_t8_mil_tank_wz_green", #"vehicle_t8_mil_tank_wz_grey", #"vehicle_t8_mil_tank_wz_tan");
+    if(isDefined(trace[# "position"]) && trace[# "surfacetype"] != # "none") {
+      org = trace[# "position"];
+      vehicletypes = array(#"vehicle_t8_mil_tank_wz_black", # "vehicle_t8_mil_tank_wz_green", # "vehicle_t8_mil_tank_wz_grey", # "vehicle_t8_mil_tank_wz_tan");
       item_supply_drop::drop_supply_drop(org, 1, 1, vehicletypes[randomint(vehicletypes.size)]);
     }
   }
@@ -106,4 +105,3 @@ debug_star(origin, seconds, color) {
   frames = int(20 * seconds);
   debugstar(origin, frames, color);
 }
-

@@ -403,13 +403,9 @@ alien_main_loop() {
       self.downed_enemy_location = undefined;
     } else if(IsAlive(enemy)) {
       if(self.badpath) {
-        [
-          [level.alien_funcs[get_alien_type()]["badpath"]]
-        ](enemy);
+        [[level.alien_funcs[get_alien_type()]["badpath"]]](enemy);
       } else {
-        [
-          [level.alien_funcs[get_alien_type()]["combat"]]
-        ](enemy);
+        [[level.alien_funcs[get_alien_type()]["combat"]]](enemy);
       }
     } else {
       if(isDefined(self.pet) && self.pet) {

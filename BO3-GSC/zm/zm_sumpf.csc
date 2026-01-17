@@ -53,13 +53,13 @@ function main() {
   zm_sumpf_fx::main();
   start_zombie_stuff();
   level thread zm_sumpf_amb::main();
-  clientfield::register("world", "SUMPF_VISIONSET_DOGS", 21000, 1, "int", & function_166277c8, 0, 0);
-  clientfield::register("actor", "zombie_flogger_trap", 21000, 1, "int", & function_f79e9b4f, 0, 0);
-  clientfield::register("allplayers", "player_legs_hide", 21000, 1, "int", & player_legs_hide, 0, 0);
+  clientfield::register("world", "SUMPF_VISIONSET_DOGS", 21000, 1, "int", &function_166277c8, 0, 0);
+  clientfield::register("actor", "zombie_flogger_trap", 21000, 1, "int", &function_f79e9b4f, 0, 0);
+  clientfield::register("allplayers", "player_legs_hide", 21000, 1, "int", &player_legs_hide, 0, 0);
   load::main();
   util::waitforclient(0);
   _zm_weap_tesla::init();
-  callback::on_localclient_connect( & function_794950d2);
+  callback::on_localclient_connect(&function_794950d2);
   setdvar("player_shallowWaterWadeScale", 0.5);
   setdvar("player_waistWaterWadeScale", 0.5);
   level thread function_4e327cec();
@@ -89,7 +89,7 @@ function function_166277c8(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_f79e9b4f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
-    playfxontag(localclientnum, level._effect["trap_log"], self, "tag_origin");
+    playFXOnTag(localclientnum, level._effect["trap_log"], self, "tag_origin");
   }
 }
 
@@ -103,19 +103,19 @@ function include_weapons() {
 }
 
 function function_4e327cec() {
-  steptrigs = getentarray(0, "audio_step_trigger", "targetname");
+  steptrigs = getEntArray(0, "audio_step_trigger", "targetname");
   foreach(trig in steptrigs) {
-    if(isdefined(trig.script_label) && trig.script_label == "fly_water_wade") {
+    if(isDefined(trig.script_label) && trig.script_label == "fly_water_wade") {
       trig thread function_938d448f();
     }
   }
 }
 
 function function_938d448f() {
-  while (true) {
+  while(true) {
     self waittill("trigger", who);
     if(who isplayer()) {
-      if(!(isdefined(who.var_b115a3e6) && who.var_b115a3e6)) {
+      if(!(isDefined(who.var_b115a3e6) && who.var_b115a3e6)) {
         who.var_b115a3e6 = 1;
         who thread function_387efde5(self);
       }
@@ -127,9 +127,9 @@ function function_938d448f() {
 function function_387efde5(trigger) {
   self endon("death");
   self endon("disconnect");
-  while (self istouching(trigger)) {
+  while(self istouching(trigger)) {
     if(self getspeed() > 5) {
-      playsound(0, "fly_water_wade_plr", (0, 0, 0));
+      playSound(0, "fly_water_wade_plr", (0, 0, 0));
     }
     wait(randomfloatrange(0.5, 1));
   }

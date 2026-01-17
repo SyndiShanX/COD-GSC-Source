@@ -12,11 +12,11 @@
 #namespace zm_equip_shield;
 
 function autoexec __init__sytem__() {
-  system::register("zm_equip_shield", & __init__, undefined, undefined);
+  system::register("zm_equip_shield", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_spawned( & player_on_spawned);
+  callback::on_spawned(&player_on_spawned);
   clientfield::register("clientuimodel", "zmInventory.shield_health", 11000, 4, "float", undefined, 0, 0);
 }
 
@@ -27,7 +27,7 @@ function player_on_spawned(localclientnum) {
 function watch_weapon_changes(localclientnum) {
   self endon("disconnect");
   self endon("entityshutdown");
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     self waittill("weapon_change", weapon);
     if(weapon.isriotshield) {
       self thread lock_weapon_models(localclientnum, weapon);
@@ -36,11 +36,11 @@ function watch_weapon_changes(localclientnum) {
 }
 
 function lock_weapon_model(model) {
-  if(isdefined(model)) {
-    if(!isdefined(level.model_locks)) {
+  if(isDefined(model)) {
+    if(!isDefined(level.model_locks)) {
       level.model_locks = [];
     }
-    if(!isdefined(level.model_locks[model])) {
+    if(!isDefined(level.model_locks[model])) {
       level.model_locks[model] = 0;
     }
     if(level.model_locks[model] < 1) {
@@ -51,11 +51,11 @@ function lock_weapon_model(model) {
 }
 
 function unlock_weapon_model(model) {
-  if(isdefined(model)) {
-    if(!isdefined(level.model_locks)) {
+  if(isDefined(model)) {
+    if(!isDefined(level.model_locks)) {
       level.model_locks = [];
     }
-    if(!isdefined(level.model_locks[model])) {
+    if(!isDefined(level.model_locks[model])) {
       level.model_locks[model] = 0;
     }
     level.model_locks[model]--;

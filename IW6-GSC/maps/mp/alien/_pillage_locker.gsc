@@ -213,7 +213,7 @@ give_player_max_ammo(var_0, var_1, var_2) {
 
 try_to_give_player_the_locker_key(var_0) {
   if(isDefined(self.locker_key))
-    maps\mp\_utility::setlowermessage("max_leash", & "ALIEN_PILLAGE_LOCKER_LOCKER_KEY_MAX", 3);
+    maps\mp\_utility::setlowermessage("max_leash", &"ALIEN_PILLAGE_LOCKER_LOCKER_KEY_MAX", 3);
   else {
     self.locker_key = 1;
     self playlocalsound("plr_keys_pckup");
@@ -260,7 +260,7 @@ build_locker_pillageitem_arrays(var_0) {
 
 locker_key_check(var_0) {
   if(isDefined(self.is_locker) && self.is_locker && (!isDefined(var_0.locker_key) || !var_0.locker_key)) {
-    var_0 maps\mp\_utility::setlowermessage("need_key", & "ALIEN_PILLAGE_LOCKER_NEED_LOCKER_KEY", 3);
+    var_0 maps\mp\_utility::setlowermessage("need_key", &"ALIEN_PILLAGE_LOCKER_NEED_LOCKER_KEY", 3);
     return 1;
   }
 
@@ -272,9 +272,9 @@ get_locker_hintstring_for_pillaged_item(var_0) {
 
   switch (var_0) {
     case "locker_key":
-      return & "ALIEN_PILLAGE_LOCKER_FOUND_LOCKER_KEY";
+      return &"ALIEN_PILLAGE_LOCKER_FOUND_LOCKER_KEY";
     case "locker_weapon":
-      return & "ALIEN_PILLAGE_LOCKER_FOUND_LOCKER_WEAPON";
+      return &"ALIEN_PILLAGE_LOCKER_FOUND_LOCKER_WEAPON";
   }
 }
 
@@ -283,15 +283,13 @@ get_hintstring_for_locker_item_pickup(var_0) {
 
   switch (var_0) {
     case "locker_key":
-      return & "ALIEN_PILLAGE_LOCKER_PICKUP_LOCKER_KEY";
+      return &"ALIEN_PILLAGE_LOCKER_PICKUP_LOCKER_KEY";
     case "locker_weapon":
-      return & "ALIEN_PILLAGE_LOCKER_PICKUP_LOCKER_WEAPON";
+      return &"ALIEN_PILLAGE_LOCKER_PICKUP_LOCKER_WEAPON";
   }
 
   if(isDefined(level.level_locker_weapon_pickup_string_func))
-    return [
-      [level.level_locker_weapon_pickup_string_func]
-    ](var_0);
+    return [[level.level_locker_weapon_pickup_string_func]](var_0);
 }
 
 drop_locker_pillage_item_on_ground(var_0) {

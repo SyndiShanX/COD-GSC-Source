@@ -278,8 +278,7 @@ executegametypeeventrule(rule) {
   thread internalexecuterule(rule);
 }
 
-internalexecuterule(rule) {
-}
+internalexecuterule(rule) {}
 
 aregametypeeventruleconditionalsmet(rule) {
   if(!isDefined(rule.conditionals) || rule.conditionals.size == 0)
@@ -351,9 +350,7 @@ gettargetsforgametypeeventrule(rule) {
   if(isDefined(rule.target[rule.targetname]))
     targets[targets.size] = rule.target[rule.targetname];
   else if(isDefined(level.targets[rule.targetname]))
-    targets = [
-      [level.targets[rule.targetname]]
-    ](rule);
+    targets = [[level.targets[rule.targetname]]](rule);
 
   return targets;
 }
@@ -410,7 +407,7 @@ doremoveammo(rule) {
   giveammo(targets, 0 - rule.params[0]);
 }
 
-doplaysound(rule) {
+doplaySound(rule) {
   if(doesrulehavevalidparam(rule))
     playsoundonplayers(rule.params[0]);
 }
@@ -675,8 +672,7 @@ doremoveperk(rule) {
   setorunsetperk(gettargetsforgametypeeventrule(rule), rule.params, 0);
 }
 
-giveorremovekillstreak(rule, shouldgive) {
-}
+giveorremovekillstreak(rule, shouldgive) {}
 
 dogivekillstreak(rule) {
   giveorremovekillstreak(rule, 1);

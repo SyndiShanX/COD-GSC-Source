@@ -391,8 +391,8 @@ setup_camo_suit_ai() {
   self ent_flag_set("camo_suit_on");
   self.camo_sound_ent = spawn("script_origin", self.origin);
   self.camo_sound_ent linkto(self, "tag_origin");
-  self playsound("fly_camo_suit_npc_on", self.origin);
-  self.camo_sound_ent playloopsound("fly_camo_suit_npc_loop", 0.5);
+  self playSound("fly_camo_suit_npc_on", self.origin);
+  self.camo_sound_ent playLoopSound("fly_camo_suit_npc_loop", 0.5);
   self.canflank = 1;
   self.aggressivemode = 1;
   self.moveplaybackrate = 1.3;
@@ -407,7 +407,7 @@ setup_camo_suit_ai() {
 deathfunction_clear_camo() {
   if(self ent_flag_exist("camo_suit_on") && self ent_flag("camo_suit_on")) {
     self toggle_camo_suit(1);
-    self playsound("fly_camo_suit_npc_off", self.origin);
+    self playSound("fly_camo_suit_npc_off", self.origin);
 
     if(isDefined(self.camo_sound_ent)) {
       self.camo_sound_ent stoploopsound(1);
@@ -465,7 +465,7 @@ toggle_camo_suit(b_on, b_play_fx) {
   }
 
   if(b_play_fx)
-    playfxontag(getfx("camo_transition"), self, "J_SpineLower");
+    playFXOnTag(getfx("camo_transition"), self, "J_SpineLower");
 }
 
 lerp_vision(n_lerp_time, n_fov, n_near_start, n_near_end, n_far_start, n_far_end, n_near_blur, n_far_blur) {
@@ -606,8 +606,8 @@ _ai_rain_thread() {
   self endon("death");
 
   while(true) {
-    playfxontag(getfx("ai_rain"), self, "j_spine4");
-    playfxontag(getfx("ai_rain_helmet"), self, "j_head_end");
+    playFXOnTag(getfx("ai_rain"), self, "j_spine4");
+    playFXOnTag(getfx("ai_rain_helmet"), self, "j_head_end");
     wait(randomfloatrange(0.1, 0.2));
   }
 }
@@ -617,13 +617,13 @@ hero_rain_thread() {
   self endon("stop_hero_rain");
 
   while(true) {
-    tracedata = bullettrace(self geteye(), self geteye() + vectorscale((0, 0, 1), 500.0), 0, self);
+    tracedata = bulletTrace(self getEye(), self getEye() + vectorscale((0, 0, 1), 500.0), 0, self);
 
     if(tracedata["fraction"] == 1) {
-      playfxontag(getfx("ai_rain"), self, "j_spine4");
+      playFXOnTag(getfx("ai_rain"), self, "j_spine4");
 
       if(self == level.crosby)
-        playfxontag(getfx("ai_rain_helmet"), self, "j_head_end");
+        playFXOnTag(getfx("ai_rain_helmet"), self, "j_head_end");
     }
 
     wait(randomfloatrange(0.1, 0.2));
@@ -643,11 +643,11 @@ _rain_thread(n_level) {
 
   while(true) {
     if(!flag("intro_goggles_off"))
-      playfx(getfx("player_rain_binoc"), level.player getorigin());
+      playFX(getfx("player_rain_binoc"), level.player getorigin());
     else if(flag("ruins_door_destroyed"))
-      playfx(getfx("player_rain_temple"), level.player getorigin());
+      playFX(getfx("player_rain_temple"), level.player getorigin());
     else
-      playfx(getfx("player_rain"), level.player getorigin());
+      playFX(getfx("player_rain"), level.player getorigin());
 
     wait(n_wait);
   }
@@ -664,7 +664,7 @@ _wind_shake() {
       n_wind_time = randomfloatrange(2.0, 3.0);
       earthquake(0.1, n_wind_time + 2.0, level.player.origin, 500, level.player);
       level.player playrumblelooponentity("tank_rumble");
-      level.player playsound("evt_wind_shake");
+      level.player playSound("evt_wind_shake");
       wait(n_wind_time);
       level.player stoprumble("tank_rumble");
     }
@@ -675,7 +675,7 @@ _rain_drops() {
   level endon("_rain_drops");
 
   while(isalive(level.player)) {
-    tracedata = bullettrace(level.player geteye(), level.player geteye() + vectorscale((0, 0, 1), 500.0), 0, level.player);
+    tracedata = bulletTrace(level.player getEye(), level.player getEye() + vectorscale((0, 0, 1), 500.0), 0, level.player);
 
     if(tracedata["fraction"] == 1 && !flag("player_flying_wingsuit"))
       level.player setclientflag(6);
@@ -763,25 +763,25 @@ outside_lift_move_down() {
   m_door_north_r unlink();
   m_door_north_l movey(-60, 2, 0.5);
   m_door_north_r movey(60, 2, 0.5);
-  m_door_north_l playsound("evt_lift_close");
-  m_door_north_r playsound("evt_lift_close");
+  m_door_north_l playSound("evt_lift_close");
+  m_door_north_r playSound("evt_lift_close");
   m_door_north_r waittill("movedone");
   m_door_north_l linkto(m_lift);
   m_door_north_r linkto(m_lift);
   m_lift moveto(m_lift.v_lift_bottom, 6, 1.2, 1.2);
-  m_lift playsound("evt_lift_start_3d");
-  m_lift playloopsound("evt_lift_loop_3d", 1);
+  m_lift playSound("evt_lift_start_3d");
+  m_lift playLoopSound("evt_lift_loop_3d", 1);
   m_lift waittill("movedone");
   m_lift stoploopsound(1);
-  m_lift playsound("evt_lift_stop_3d");
+  m_lift playSound("evt_lift_stop_3d");
   m_door_south_l = getent("lift_ruins_door_1_left", "targetname");
   m_door_south_r = getent("lift_ruins_door_1_right", "targetname");
   m_door_south_l unlink();
   m_door_south_r unlink();
   m_door_south_l movey(60, 2, 0.5);
   m_door_south_r movey(-60, 2, 0.5);
-  m_door_north_l playsound("evt_lift_open");
-  m_door_north_r playsound("evt_lift_open");
+  m_door_north_l playSound("evt_lift_open");
+  m_door_north_r playSound("evt_lift_open");
   m_door_south_r waittill("movedone");
   m_door_south_l linkto(m_lift);
   m_door_south_r linkto(m_lift);
@@ -801,25 +801,25 @@ outside_lift_move_up() {
   m_door_south_r unlink();
   m_door_south_l movey(-60, 2, 0.5);
   m_door_south_r movey(60, 2, 0.5);
-  m_door_south_l playsound("evt_lift_close");
-  m_door_south_r playsound("evt_lift_close");
+  m_door_south_l playSound("evt_lift_close");
+  m_door_south_r playSound("evt_lift_close");
   m_door_south_r waittill("movedone");
   m_door_south_l linkto(m_lift);
   m_door_south_r linkto(m_lift);
   m_lift moveto(m_lift.v_lift_top, 6, 1.2, 1.2);
-  m_lift playsound("evt_lift_start_3d");
-  m_lift playloopsound("evt_lift_loop_3d", 1);
+  m_lift playSound("evt_lift_start_3d");
+  m_lift playLoopSound("evt_lift_loop_3d", 1);
   m_lift waittill("movedone");
   m_lift stoploopsound(1);
-  m_lift playsound("evt_lift_stop_3d");
+  m_lift playSound("evt_lift_stop_3d");
   m_door_north_l = getent("lift_ruins_door_2_left", "targetname");
   m_door_north_r = getent("lift_ruins_door_2_right", "targetname");
   m_door_north_l unlink();
   m_door_north_r unlink();
   m_door_north_l movey(60, 2, 0.5);
   m_door_north_r movey(-60, 2, 0.5);
-  m_door_north_l playsound("evt_lift_open");
-  m_door_north_r playsound("evt_lift_open");
+  m_door_north_l playSound("evt_lift_open");
+  m_door_north_r playSound("evt_lift_open");
   m_door_north_r waittill("movedone");
   m_door_north_l linkto(m_lift);
   m_door_north_r linkto(m_lift);
@@ -1129,7 +1129,7 @@ sway_init() {
     wait 0.05;
   }
 
-  a_models = getentarray("sway", "targetname");
+  a_models = getEntArray("sway", "targetname");
 
   foreach(model in a_models) {
     model _sway_attach_vines();
@@ -1139,7 +1139,7 @@ sway_init() {
 }
 
 _sway_fx(str_fx_name, str_tag) {
-  playfxontag(getfx(str_fx_name), self, str_tag);
+  playFXOnTag(getfx(str_fx_name), self, str_tag);
 }
 
 _sway_tree_think() {
@@ -1261,12 +1261,12 @@ plant_c4_spawn(s_pos) {
 plant_c4_think() {
   level endon("remove_c4");
   self.targetname = "planted_c4";
-  self setcandamage(1);
-  playfxontag(getfx("c4_blink"), self, "tag_fx");
+  self setCanDamage(1);
+  playFXOnTag(getfx("c4_blink"), self, "tag_fx");
   self waittill("damage", damage, attacker);
   v_origin = self gettagorigin("tag_fx");
   self playsoundontag("wpn_c4_explode", "tag_fx");
-  playfx(getfx("c4_explode"), v_origin);
+  playFX(getfx("c4_explode"), v_origin);
 
   if(isDefined(attacker) && isplayer(attacker))
     radiusdamage(v_origin, 200, 300, 50, attacker, "MOD_EXPLOSIVE");
@@ -1389,7 +1389,7 @@ set_low_ready_false(guy) {
 }
 
 play_single_spark(guy) {
-  playfxontag(level._effect["single_weld_spark"], guy, "fx_sparks");
+  playFXOnTag(level._effect["single_weld_spark"], guy, "fx_sparks");
 }
 
 play_loop_spark(guy) {

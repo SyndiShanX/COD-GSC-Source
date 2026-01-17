@@ -14,7 +14,7 @@ main() {
 
   self thread lookAtTarget("attackIdle");
 
-  while (1) {
+  while(1) {
     if(shouldAttackIdle()) {
       self clearanim( % german_shepherd_idle, 0.2);
       self randomAttackIdle();
@@ -29,7 +29,7 @@ main() {
 }
 
 isFacingEnemy(toleranceCosAngle) {
-  assert(isdefined(self.enemy));
+  assert(isDefined(self.enemy));
 
   vecToEnemy = self.enemy.origin - self.origin;
   distToEnemy = length(vecToEnemy);
@@ -59,7 +59,7 @@ randomAttackIdle() {
   idleChance = 33;
   barkChance = 66;
 
-  if(isdefined(self.mode)) {
+  if(isDefined(self.mode)) {
     if(self.mode == "growl") {
       idleChance = 15;
       barkChance = 30;
@@ -79,11 +79,11 @@ randomAttackIdle() {
 }
 
 shouldAttackIdle() {
-  return (isdefined(self.enemy) && isalive(self.enemy) && distanceSquared(self.origin, self.enemy.origin) < 1000000);
+  return (isDefined(self.enemy) && isalive(self.enemy) && distanceSquared(self.origin, self.enemy.origin) < 1000000);
 }
 
 should_growl() {
-  if(isdefined(self.script_growl))
+  if(isDefined(self.script_growl))
     return true;
   if(!isalive(self.enemy))
     return true;
@@ -111,10 +111,9 @@ lookAtTarget(lookPoseSet) {
   self animscripts\shared::setAnimAimWeight(1, 0.2);
 
   /#	
-  assert(!isdefined(self.trackLoopThread));
+  assert(!isDefined(self.trackLoopThread));
   self.trackLoopThread = thisthread;
   self.trackLoopThreadType = "lookAtTarget";
-  # /
 
-    self animscripts\shared::trackLoop( % german_shepherd_look_2, % german_shepherd_look_4, % german_shepherd_look_6, % german_shepherd_look_8);
+  self animscripts\shared::trackLoop( % german_shepherd_look_2, % german_shepherd_look_4, % german_shepherd_look_6, % german_shepherd_look_8);
 }

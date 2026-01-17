@@ -18,7 +18,7 @@ init() {
     game.carry_icon = [];
   }
 
-  game.flagmodels[#"neutral"] = "p8_mp_flag_pole_1";
+  game.flagmodels[# "neutral"] = "p8_mp_flag_pole_1";
 }
 
 customteam_init() {

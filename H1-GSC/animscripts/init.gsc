@@ -5,7 +5,7 @@
 ********************************/
 
 initweapon(var_0) {
-  self.weaponinfo[var_0] = spawnstruct();
+  self.weaponinfo[var_0] = spawnStruct();
   self.weaponinfo[var_0].position = "none";
   self.weaponinfo[var_0].hasclip = 1;
 
@@ -16,7 +16,7 @@ initweapon(var_0) {
 }
 
 isweaponinitialized(var_0) {
-  return isdefined(self.weaponinfo[var_0]);
+  return isDefined(self.weaponinfo[var_0]);
 }
 
 setglobalaimsettings() {
@@ -48,12 +48,12 @@ everusessecondaryweapon() {
 #using_animtree("generic_human");
 
 main() {
-  self.a = spawnstruct();
+  self.a = spawnStruct();
   self.a.laseron = 0;
   self.primaryweapon = self.weapon;
   firstinit();
 
-  if(!isdefined(self.primaryweapon) || self.primaryweapon == "")
+  if(!isDefined(self.primaryweapon) || self.primaryweapon == "")
     self.primaryweapon = "none";
 
   if(self.secondaryweapon == "")
@@ -135,7 +135,7 @@ main() {
   self.defaultturnthreshold = 55;
   self.a.nextstandinghitdying = 0;
 
-  if(!isdefined(self.script_forcegrenade))
+  if(!isDefined(self.script_forcegrenade))
     self.script_forcegrenade = 0;
 
   setupuniqueanims();
@@ -168,14 +168,14 @@ main() {
   self.exception["corner_normal"] = 1;
   var_1 = getarraykeys(self.exception);
 
-  for (var_2 = 0; var_2 < var_1.size; var_2++)
+  for(var_2 = 0; var_2 < var_1.size; var_2++)
     common_scripts\utility::clear_exception(var_1[var_2]);
 
   self.reacquire_state = 0;
   thread setnameandrank_andaddtosquad();
   self.shouldconserveammotime = 0;
 
-  if(isdefined(level.h1_bullet_whizby_enabled) && level.h1_bullet_whizby_enabled) {
+  if(isDefined(level.h1_bullet_whizby_enabled) && level.h1_bullet_whizby_enabled) {
     self.disablebulletwhizbyreaction = undefined;
     self.disable_dive_whizby_react = 1;
   } else
@@ -183,22 +183,22 @@ main() {
 
   self.noruntwitch = 1;
 
-  if(isdefined(level.h1_team_run_twitch_enabled)) {
-    if(isdefined(level.h1_team_run_twitch_enabled[self.team]))
+  if(isDefined(level.h1_team_run_twitch_enabled)) {
+    if(isDefined(level.h1_team_run_twitch_enabled[self.team]))
       self.noruntwitch = !level.h1_team_run_twitch_enabled[self.team];
   }
 
-  self.proneaimlimits = spawnstruct();
+  self.proneaimlimits = spawnStruct();
   self.proneaimlimits.rightaimlimit = 45;
   self.proneaimlimits.leftaimlimit = -45;
   self.proneaimlimits.upaimlimit = 35;
   self.proneaimlimits.downaimlimit = -35;
-  self.animaimlimit = spawnstruct();
+  self.animaimlimit = spawnStruct();
   self.animaimlimit.rightaimlimit = 45;
   self.animaimlimit.leftaimlimit = -45;
   self.doaimidlethread = 1;
 
-  if(!isdefined(level.disablemonitorflash))
+  if(!isDefined(level.disablemonitorflash))
     thread animscripts\combat_utility::monitorflash();
 
   thread ondeath();
@@ -212,7 +212,7 @@ handleikevent() {
   self setanimlimited( % stand_exposed_ik_add, 1);
   var_1 = 0;
 
-  for (;;) {
+  for(;;) {
     self waittill("actorik", var_2, var_3, var_4, var_5, var_6, var_7, var_8);
 
     if(var_2 <= 0.01) {
@@ -266,7 +266,7 @@ handleikevent() {
     var_17[2] = 0;
     var_17[3] = 0;
 
-    for (var_18 = 0; var_18 < 4; var_18++) {
+    for(var_18 = 0; var_18 < 4; var_18++) {
       var_19 = var_13[var_18] + (0, 0, 30);
       var_20 = var_13[var_18] - (0, 0, 30);
       var_21 = self aiphysicstrace(var_19, var_20, 1.5, 3, 1, 1, 0, 1, 1, 1);
@@ -308,7 +308,7 @@ handleikevent() {
 }
 
 allies_with_ir() {
-  if(!isdefined(self.script_friendname))
+  if(!isDefined(self.script_friendname))
     return 1;
 
   var_0[0] = "Griggs";
@@ -328,10 +328,10 @@ weapons_with_ir(var_0) {
   var_1[2] = "m4_silencer";
   var_1[3] = "m4m203";
 
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     return 0;
 
-  for (var_2 = 0; var_2 < var_1.size; var_2++) {
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
     if(issubstr(var_0, var_1[var_2]))
       return 1;
   }
@@ -342,7 +342,7 @@ weapons_with_ir(var_0) {
 setnameandrank_andaddtosquad() {
   self endon("death");
 
-  if(!isdefined(level.loadoutcomplete))
+  if(!isDefined(level.loadoutcomplete))
     level waittill("loadout complete");
 
   maps\_names::get_name();
@@ -350,7 +350,7 @@ setnameandrank_andaddtosquad() {
 }
 
 pollallowedstancesthread() {
-  for (;;) {
+  for(;;) {
     if(self isstanceallowed("stand")) {
       var_0[0] = "stand allowed";
       var_1[0] = (0, 1, 0);
@@ -378,7 +378,7 @@ pollallowedstancesthread() {
     var_2 = self getshootatpos() + (0, 0, 30);
     var_3 = (0, 0, -10);
 
-    for (var_4 = 0; var_4 < var_0.size; var_4++)
+    for(var_4 = 0; var_4 < var_0.size; var_4++)
       var_5 = (var_2[0] + var_3[0] * var_4, var_2[1] + var_3[1] * var_4, var_2[2] + var_3[2] * var_4);
 
     wait 0.05;
@@ -386,7 +386,7 @@ pollallowedstancesthread() {
 }
 
 setupuniqueanims() {
-  if(!isdefined(self.animplaybackrate) || !isdefined(self.moveplaybackrate))
+  if(!isDefined(self.animplaybackrate) || !isDefined(self.moveplaybackrate))
     set_anim_playback_rate();
 }
 
@@ -409,13 +409,13 @@ enemynotify() {
   if(1) {
     return;
   }
-  for (;;) {
+  for(;;) {
     self waittill("enemy");
 
     if(!isalive(self.enemy)) {
       continue;
     }
-    while (isplayer(self.enemy)) {
+    while(isplayer(self.enemy)) {
       if(animscripts\utility::hasenemysightpos())
         level.lastplayersighted = gettime();
 
@@ -440,7 +440,7 @@ initwindowtraverse() {
 }
 
 firstinit() {
-  if(isdefined(anim.notfirsttime)) {
+  if(isDefined(anim.notfirsttime)) {
     return;
   }
   anim.notfirsttime = 1;
@@ -461,21 +461,21 @@ firstinit() {
   initgrenades();
   initadvancetoenemy();
 
-  if(!isdefined(anim.optionalstepeffectfunction)) {
+  if(!isDefined(anim.optionalstepeffectfunction)) {
     anim.optionalstepeffectsmallfunction = animscripts\notetracks::playfootstepeffectsmall;
     anim.optionalstepeffectfunction = animscripts\notetracks::playfootstepeffect;
   }
 
-  if(!isdefined(anim.optionalstepeffects))
+  if(!isDefined(anim.optionalstepeffects))
     anim.optionalstepeffects = [];
 
-  if(!isdefined(anim.optionalstepeffectssmall))
+  if(!isDefined(anim.optionalstepeffectssmall))
     anim.optionalstepeffectssmall = [];
 
-  if(!isdefined(anim.shootenemywrapper_func))
+  if(!isDefined(anim.shootenemywrapper_func))
     anim.shootenemywrapper_func = animscripts\utility::shootenemywrapper_shootnotify;
 
-  if(!isdefined(anim.shootposwrapper_func))
+  if(!isDefined(anim.shootposwrapper_func))
     anim.shootposwrapper_func = animscripts\utility::shootposwrapper;
 
   anim.fire_notetrack_functions["scripted"] = animscripts\notetracks::fire_straight;
@@ -486,7 +486,7 @@ firstinit() {
   anim.fire_notetrack_functions["move"] = animscripts\notetracks::shootnotetrack;
   animscripts\notetracks::registernotetracks();
 
-  if(!isdefined(level.flag))
+  if(!isDefined(level.flag))
     common_scripts\utility::init_flags();
 
   maps\_gameskill::setskill();
@@ -498,7 +498,7 @@ firstinit() {
   anim.semifirenumshots = animscripts\utility::array(1, 2, 2, 3, 3, 4, 4, 4, 4, 5, 5, 5);
   anim.badplaces = [];
   anim.badplaceint = 0;
-  anim.player = getentarray("player", "classname")[0];
+  anim.player = getEntArray("player", "classname")[0];
   initbattlechatter();
   initwindowtraverse();
   animscripts\cqb::setupcqbpointsofinterest();
@@ -529,7 +529,7 @@ initdeaths() {
 }
 
 initgrenades() {
-  for (var_0 = 0; var_0 < level.players.size; var_0++) {
+  for(var_0 = 0; var_0 < level.players.size; var_0++) {
     var_1 = level.players[var_0];
     var_1.grenadetimers["fraggrenade"] = randomintrange(1000, 20000);
     var_1.grenadetimers["flash_grenade"] = randomintrange(1000, 20000);
@@ -578,7 +578,7 @@ aiturnnotifies() {
   var_0 = 0;
   var_1 = 3;
 
-  for (;;) {
+  for(;;) {
     var_2 = getaiarray();
 
     if(var_2.size == 0) {
@@ -587,8 +587,8 @@ aiturnnotifies() {
       continue;
     }
 
-    for (var_3 = 0; var_3 < var_2.size; var_3++) {
-      if(!isdefined(var_2[var_3])) {
+    for(var_3 = 0; var_3 < var_2.size; var_3++) {
+      if(!isDefined(var_2[var_3])) {
         continue;
       }
       var_2[var_3] notify("do_slow_things");
@@ -605,7 +605,7 @@ aiturnnotifies() {
 setnextplayergrenadetime() {
   waittillframeend;
 
-  if(isdefined(self.gs.playergrenaderangetime)) {
+  if(isDefined(self.gs.playergrenaderangetime)) {
     var_0 = int(self.gs.playergrenaderangetime * 0.7);
 
     if(var_0 < 1)
@@ -616,7 +616,7 @@ setnextplayergrenadetime() {
     self.grenadetimers["microwave_grenade"] = randomintrange(0, var_0);
   }
 
-  if(isdefined(self.gs.playerdoublegrenadetime)) {
+  if(isDefined(self.gs.playerdoublegrenadetime)) {
     var_0 = int(self.gs.playerdoublegrenadetime);
     var_1 = int(var_0 / 2);
 
@@ -628,12 +628,12 @@ setnextplayergrenadetime() {
 }
 
 begingrenadetracking() {
-  if(isdefined(level.disablegrenadetracking)) {
+  if(isDefined(level.disablegrenadetracking)) {
     return;
   }
   self endon("death");
 
-  for (;;) {
+  for(;;) {
     self waittill("grenade_fire", var_0, var_1);
     var_0 thread maps\_utility::grenade_earthquake();
   }
@@ -643,10 +643,10 @@ setuprandomtable() {
   anim.randominttablesize = 60;
   anim.randominttable = [];
 
-  for (var_0 = 0; var_0 < anim.randominttablesize; var_0++)
+  for(var_0 = 0; var_0 < anim.randominttablesize; var_0++)
     anim.randominttable[var_0] = var_0;
 
-  for (var_0 = 0; var_0 < anim.randominttablesize; var_0++) {
+  for(var_0 = 0; var_0 < anim.randominttablesize; var_0++) {
     var_1 = randomint(anim.randominttablesize);
     var_2 = anim.randominttable[var_0];
     anim.randominttable[var_0] = anim.randominttable[var_1];
@@ -655,13 +655,13 @@ setuprandomtable() {
 }
 
 ondeath() {
-  if(isdefined(level.disablestrangeondeath)) {
+  if(isDefined(level.disablestrangeondeath)) {
     return;
   }
   self waittill("death");
 
-  if(!isdefined(self)) {
-    if(isdefined(self.a.usingturret))
+  if(!isDefined(self)) {
+    if(isDefined(self.a.usingturret))
       self.a.usingturret delete();
   }
 }

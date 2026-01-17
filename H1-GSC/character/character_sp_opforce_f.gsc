@@ -5,7 +5,7 @@
 ************************************************/
 
 main() {
-  self setmodel("body_ultra_nationalist_assault_f");
+  self setModel("body_ultra_nationalist_assault_f");
   self attach("head_ultra_nationalist_gasmask", "", 1);
   self.headmodel = "head_ultra_nationalist_gasmask";
   self.voice = "russian";

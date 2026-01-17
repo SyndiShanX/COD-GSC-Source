@@ -15,7 +15,7 @@ h2_randomHarrierMovement() {
 
   pos = self.defendloc;
 
-  for (;;) {
+  for(;;) {
     newpos = self GetNewPoint(self.origin); //crazy blocking call
     self setVehGoalPos(newpos, 1);
     self waittill("goal");
@@ -61,9 +61,9 @@ spawnDefensiveHarrier(lifeId, owner, pathStart, pathGoal) {
 
   harrier = spawnHelicopter(owner, pathStart, forward, "harrier_mp", "vehicle_av8b_harrier_jet_mp");
 
-  if(!isDefined(harrier))
+  if(!isDefined(harrier)) {
     return;
-
+  }
   harrier addToHeliList();
   harrier thread removeFromHeliListOnDeath();
 
@@ -117,7 +117,7 @@ closeToGoalCheck(pathGoal) {
   self endon("death");
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     if(distance2d(self.origin, pathGoal) < 768) {
       self SetMaxPitchRoll(45, 25);
       break;
@@ -151,14 +151,15 @@ harrierLeave() {
   self breakTarget(true);
   self notify("stopRand");
 
-  for (;;) {
+  for(;;) {
     self Vehicle_SetSpeed(35, 25);
-    pathGoal = self.origin + (vector_multiply(anglestoforward((0, RandomInt(360), 0)), 500));
+    pathGoal = self.origin + (vector_multiply(anglesToForward((0, RandomInt(360), 0)), 500));
     pathGoal += (0, 0, 900);
 
-    leaveTrace = BulletTrace(self.origin, self.origin + (0, 0, 900), false, self);
-    if(leaveTrace["surfacetype"] == "none")
+    leaveTrace = bulletTrace(self.origin, self.origin + (0, 0, 900), false, self);
+    if(leaveTrace["surfacetype"] == "none") {
       break;
+    }
 
     wait(0.10);
   }
@@ -178,7 +179,6 @@ harrierLeave() {
   self notify("harrier_gone");
   self thread harrierDelete();
 }
-
 
 harrierDelete() {
   self delete();
@@ -208,9 +208,9 @@ getNewPoint(pos, targ) {
     enemyPoints = [];
 
     foreach(player in level.players) {
-      if(player == self)
+      if(player == self) {
         continue;
-
+      }
       if(!level.teambased || player.team != self.team)
         enemyPoints[enemyPoints.size] = player.origin;
     }
@@ -243,19 +243,19 @@ getNewPoint(pos, targ) {
         perpendicularVector = (pointY, pointX, newHeight);
       }
     } else {
-      if(distance2D(self.origin, self.bestTarget.origin) < 200)
+      if(distance2D(self.origin, self.bestTarget.origin) < 200) {
         return;
-
+      }
       yaw = self.angles[1];
       direction = (0, yaw, 0);
-      moveToPoint = self.origin + vector_multiply(anglestoforward(direction), randomIntRange(200, 400));
+      moveToPoint = self.origin + vector_multiply(anglesToForward(direction), randomIntRange(200, 400));
       newHeight = self getCorrectHeight(moveToPoint[0], moveToPoint[1], 20);
 
       pointX = moveToPoint[0];
       pointY = moveToPoint[1];
     }
   }
-  for (;;) {
+  for(;;) {
     point = traceNewPoint(pointX, PointY, newHeight);
 
     if(point != 0)
@@ -276,50 +276,49 @@ traceNewPoint(x, y, z) {
   level endon("game_ended");
   level endon("shutdownGame_called");
 
-  for (i = 1; i <= 10; i++) {
-
+  for(i = 1; i <= 10; i++) {
     switch (i) {
       case 1:
-        trc = BulletTrace(self.origin, (x, y, z), false, self);
+        trc = bulletTrace(self.origin, (x, y, z), false, self);
         break;
       case 2:
-        trc = BulletTrace((self getTagOrigin("tag_left_wingtip")), (x, y, z), false, self);
+        trc = bulletTrace((self getTagOrigin("tag_left_wingtip")), (x, y, z), false, self);
         //self thread drawLine( (self getTagOrigin( "tag_left_wingtip" )), (x,y,z), 4 );
         break;
       case 3:
-        trc = BulletTrace((self getTagOrigin("tag_right_wingtip")), (x, y, z), false, self);
+        trc = bulletTrace((self getTagOrigin("tag_right_wingtip")), (x, y, z), false, self);
         //self thread drawLine( (self getTagOrigin( "tag_right_wingtip" )), (x,y,z), 4 );
         break;
       case 4:
-        trc = BulletTrace((self getTagOrigin("tag_engine_left2")), (x, y, z), false, self);
+        trc = bulletTrace((self getTagOrigin("tag_engine_left2")), (x, y, z), false, self);
         //self thread drawLine( (self getTagOrigin( "tag_engine_left2" )), (x,y,z), 4 );
         break;
       case 5:
-        trc = BulletTrace((self getTagOrigin("tag_engine_right2")), (x, y, z), false, self);
+        trc = bulletTrace((self getTagOrigin("tag_engine_right2")), (x, y, z), false, self);
         //self thread drawLine( (self getTagOrigin( "tag_engine_right2" )), (x,y,z), 4 );
         break;
       case 6:
-        trc = BulletTrace((self getTagOrigin("tag_right_alamo_missile")), (x, y, z), false, self);
+        trc = bulletTrace((self getTagOrigin("tag_right_alamo_missile")), (x, y, z), false, self);
         //self thread drawLine( (self getTagOrigin( "tag_right_alamo_missile" )), (x,y,z), 4 );
         break;
       case 7:
-        trc = BulletTrace((self getTagOrigin("tag_left_alamo_missile")), (x, y, z), false, self);
+        trc = bulletTrace((self getTagOrigin("tag_left_alamo_missile")), (x, y, z), false, self);
         //self thread drawLine( (self getTagOrigin( "tag_left_alamo_missile" )), (x,y,z), 4 );
         break;
       case 8:
-        trc = BulletTrace((self getTagOrigin("tag_right_archer_missile")), (x, y, z), false, self);
+        trc = bulletTrace((self getTagOrigin("tag_right_archer_missile")), (x, y, z), false, self);
         //self thread drawLine( (self getTagOrigin( "tag_right_archer_missile" )), (x,y,z), 4 );
         break;
       case 9:
-        trc = BulletTrace((self getTagOrigin("tag_left_archer_missile")), (x, y, z), false, self);
+        trc = bulletTrace((self getTagOrigin("tag_left_archer_missile")), (x, y, z), false, self);
         //self thread drawLine( (self getTagOrigin( "tag_left_archer_missile" )), (x,y,z), 4 );
         break;
       case 10:
-        trc = BulletTrace((self getTagOrigin("tag_light_tail")), (x, y, z), false, self);
+        trc = bulletTrace((self getTagOrigin("tag_light_tail")), (x, y, z), false, self);
         //self thread drawLine( (self getTagOrigin( "tag_light_tail" )), (x,y,z), 4 );
         break;
       default:
-        trc = BulletTrace(self.origin, (x, y, z), false, self);
+        trc = bulletTrace(self.origin, (x, y, z), false, self);
     }
 
     if(trc["surfacetype"] != "none") {
@@ -332,7 +331,6 @@ traceNewPoint(x, y, z) {
   pathGoal = (x, y, z);
   return pathGoal;
 }
-
 
 traceGroundPoint(x, y) {
   self endon("death");
@@ -349,31 +347,30 @@ traceGroundPoint(x, y) {
   trace = undefined;
   lTrace = undefined;
 
-  for (i = 1; i <= 5; i++) {
-
+  for(i = 1; i <= 5; i++) {
     switch (i) {
       case 1:
-        trc = BulletTrace((x, y, highz), (x, y, z), false, self);
+        trc = bulletTrace((x, y, highz), (x, y, z), false, self);
         //self thread drawLine( ( x,y,highz ), (x,y,z), 4 );
         break;
       case 2:
-        trc = BulletTrace((x + 20, y + 20, highz), (x + 20, y + 20, z), false, self);
+        trc = bulletTrace((x + 20, y + 20, highz), (x + 20, y + 20, z), false, self);
         //self thread drawLine( ( x+20,y+20,highz ), (x+20,y+20,z), 4 );
         break;
       case 3:
-        trc = BulletTrace((x - 20, y - 20, highz), (x - 20, y - 20, z), false, self);
+        trc = bulletTrace((x - 20, y - 20, highz), (x - 20, y - 20, z), false, self);
         //self thread drawLine( ( x-20,y-20,highz ), (x-20,y-20,z), 4 );
         break;
       case 4:
-        trc = BulletTrace((x + 20, y - 20, highz), (x + 20, y - 20, z), false, self);
+        trc = bulletTrace((x + 20, y - 20, highz), (x + 20, y - 20, z), false, self);
         //self thread drawLine( ( x+20,y-20,highz ), (x+20,y-20,z), 4 );
         break;
       case 5:
-        trc = BulletTrace((x - 20, y + 20, highz), (x - 20, y + 20, z), false, self);
+        trc = bulletTrace((x - 20, y + 20, highz), (x - 20, y + 20, z), false, self);
         //self thread drawLine( ( x-20,y+20,highz ), (x-20,y+20,z), 4 );
         break;
       default:
-        trc = BulletTrace(self.origin, (x, y, z), false, self);
+        trc = bulletTrace(self.origin, (x, y, z), false, self);
     }
 
     if(trc["position"][2] > highTrace) {
@@ -393,19 +390,18 @@ traceGroundPoint(x, y) {
   return highTrace;
 }
 
-
 playHarrierFx() {
   self endon("death");
 
   wait(0.2);
-  playfxontag(level.fx_airstrike_contrail, self, "tag_right_wingtip");
-  playfxontag(level.fx_airstrike_contrail, self, "tag_left_wingtip");
+  playFXOnTag(level.fx_airstrike_contrail, self, "tag_right_wingtip");
+  playFXOnTag(level.fx_airstrike_contrail, self, "tag_left_wingtip");
   wait(0.2);
-  playfxontag(level.harrier_afterburnerfx, self, "tag_engine_right");
-  playfxontag(level.harrier_afterburnerfx, self, "tag_engine_left");
+  playFXOnTag(level.harrier_afterburnerfx, self, "tag_engine_right");
+  playFXOnTag(level.harrier_afterburnerfx, self, "tag_engine_left");
   wait(0.2);
-  playfxontag(level.harrier_afterburnerfx, self, "tag_engine_right2");
-  playfxontag(level.harrier_afterburnerfx, self, "tag_engine_left2");
+  playFXOnTag(level.harrier_afterburnerfx, self, "tag_engine_right2");
+  playFXOnTag(level.harrier_afterburnerfx, self, "tag_engine_left2");
   wait(0.2);
   playFXOnTag(level.chopper_fx["light"]["left"], self, "tag_light_L_wing");
   wait(0.2);
@@ -414,22 +410,21 @@ playHarrierFx() {
   playFXOnTag(level.chopper_fx["light"]["belly"], self, "tag_light_belly");
   wait(0.2);
   playFXOnTag(level.chopper_fx["light"]["tail"], self, "tag_light_tail");
-
 }
 
 stopHarrierWingFx() {
-  stopfxontag(level.fx_airstrike_contrail, self, "tag_right_wingtip");
-  stopfxontag(level.fx_airstrike_contrail, self, "tag_left_wingtip");
+  stopFXOnTag(level.fx_airstrike_contrail, self, "tag_right_wingtip");
+  stopFXOnTag(level.fx_airstrike_contrail, self, "tag_left_wingtip");
 }
 
 startHarrierWingFx() {
   wait(3.0);
 
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
-
-  playfxontag(level.fx_airstrike_contrail, self, "tag_right_wingtip");
-  playfxontag(level.fx_airstrike_contrail, self, "tag_left_wingtip");
+  }
+  playFXOnTag(level.fx_airstrike_contrail, self, "tag_right_wingtip");
+  playFXOnTag(level.fx_airstrike_contrail, self, "tag_left_wingtip");
 }
 
 getPathStart(coord) {
@@ -440,7 +435,7 @@ getPathStart(coord) {
   yaw = randomFloat(360);
   direction = (0, yaw, 0);
 
-  startPoint = coord + vector_multiply(anglestoforward(direction), -1 * harrierHalfDistance);
+  startPoint = coord + vector_multiply(anglesToForward(direction), -1 * harrierHalfDistance);
   startPoint += ((randomfloat(2) - 1) * pathRandomness, (randomfloat(2) - 1) * pathRandomness, 0);
 
   return startPoint;
@@ -454,7 +449,7 @@ getPathEnd() {
   yaw = self.angles[1];
   direction = (0, yaw, 0);
 
-  endPoint = self.origin + vector_multiply(anglestoforward(direction), harrierHalfDistance);
+  endPoint = self.origin + vector_multiply(anglesToForward(direction), harrierHalfDistance);
   return endPoint;
 }
 
@@ -475,17 +470,17 @@ fireOnTarget(facingTolerance, zOffset) {
   if(!isDefined(zOffset))
     zOffset = 50;
 
-  for (;;) {
-    if(self isReadyToFire(facingTolerance))
+  for(;;) {
+    if(self isReadyToFire(facingTolerance)) {
       break;
-    else
+    } else
       wait(.25);
   }
   self SetTurretTargetEnt(self.bestTarget, (0, 0, 50));
 
   numShots = 25;
 
-  for (;;) {
+  for(;;) {
     if(numShots == 25)
       self playLoopSound("h2_harrier_fire");
 
@@ -505,7 +500,7 @@ isReadyToFire(tolerance) {
   self endon("death");
   self endon("leaving");
 
-  if(!isdefined(tolerance))
+  if(!isDefined(tolerance))
     tolerance = 10;
 
   harrierForwardVector = anglesToForward(self.angles);
@@ -558,9 +553,8 @@ backToDefendLocation(forced) {
     self waittill("goal");
 }
 
-
 wouldCollide(destination) {
-  trace = BulletTrace(self.origin, destination, true, self);
+  trace = bulletTrace(self.origin, destination, true, self);
 
   if(trace["position"] == destination)
     return false;
@@ -593,7 +587,7 @@ watchTargetLOS(tolerance) {
   if(!isDefined(tolerance))
     tolerance = 1000;
 
-  for (;;) {
+  for(;;) {
     if(!isTarget(self.bestTarget)) {
       self thread breakTarget();
       return;
@@ -628,13 +622,12 @@ breakTarget(noNewTarget) {
   self stopLoopSound();
   self notify("stopfiring");
 
-  if(isDefined(noNewTarget) && noNewTarget)
+  if(isDefined(noNewTarget) && noNewTarget) {
     return;
-
+  }
   self thread h2_randomHarrierMovement();
   self notify("newTarget");
   self thread harrierGetTargets();
-
 }
 
 harrierGetTargets() {
@@ -647,7 +640,7 @@ harrierGetTargets() {
 
   targets = [];
 
-  for (;;) {
+  for(;;) {
     targets = [];
     players = level.players;
 
@@ -660,10 +653,10 @@ harrierGetTargets() {
       }
     }
 
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       potentialTarget = players[i];
       if(isTarget(potentialTarget)) {
-        if(isdefined(players[i]))
+        if(isDefined(players[i]))
           targets[targets.size] = players[i];
       } else
         continue;
@@ -693,7 +686,7 @@ isTarget(potentialTarget) {
   if(Distance2D(potentialTarget.origin, self.origin) < 768)
     return false;
 
-  if(!isdefined(potentialTarget.pers["team"]))
+  if(!isDefined(potentialTarget.pers["team"]))
     return false;
 
   if(level.teamBased && potentialTarget.pers["team"] == self.team)
@@ -702,14 +695,14 @@ isTarget(potentialTarget) {
   if(potentialTarget.pers["team"] == "spectator")
     return false;
 
-  if(isdefined(potentialTarget.spawntime) && (gettime() - potentialTarget.spawntime) / 1000 <= 5)
+  if(isDefined(potentialTarget.spawntime) && (gettime() - potentialTarget.spawntime) / 1000 <= 5)
     return false;
 
   if(potentialTarget _hasPerk("specialty_radarimmune"))
     return false;
 
   harrier_centroid = self.origin + (0, 0, -160);
-  harrier_forward_norm = anglestoforward(self.angles);
+  harrier_forward_norm = anglesToForward(self.angles);
   harrier_turret_point = harrier_centroid + 144 * harrier_forward_norm;
   harrier_canSeeTarget = potentialTarget sightConeTrace(self.origin, self);
 
@@ -723,7 +716,7 @@ getBestTarget(targets) {
   self endon("death");
   mainGunPointOrigin = self getTagOrigin("tag_flash");
   harrierOrigin = self.origin;
-  harrier_forward_norm = anglestoforward(self.angles);
+  harrier_forward_norm = anglesToForward(self.angles);
 
   bestYaw = undefined;
   bestTarget = undefined;
@@ -763,20 +756,20 @@ fireMissile(missileTarget) {
 
   assert(self.health > 0);
 
-  if(self.missiles <= 0)
+  if(self.missiles <= 0) {
     return;
-
+  }
   friendlyInRadius = self checkForFriendlies(missileTarget, 256);
 
-  if(!isdefined(missileTarget))
+  if(!isDefined(missileTarget)) {
     return;
-
-  if(Distance2D(self.origin, missileTarget.origin) < 512)
+  }
+  if(Distance2D(self.origin, missileTarget.origin) < 512) {
     return;
-
-  if(isDefined(friendlyInRadius) && friendlyInRadius)
+  }
+  if(isDefined(friendlyInRadius) && friendlyInRadius) {
     return;
-
+  }
   self.missiles--;
   self setVehWeapon("harrier_FFAR_mp");
 
@@ -797,12 +790,12 @@ checkForFriendlies(missileTarget, radiusSize) {
   players = level.players;
   strikePosition = missileTarget.origin;
 
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     potentialCollateral = players[i];
 
-    if(potentialCollateral.team != self.team)
+    if(potentialCollateral.team != self.team) {
       continue;
-
+    }
     potentialPosition = potentialCollateral.origin;
 
     if(distance2D(potentialPosition, strikePosition) < 512)
@@ -817,14 +810,13 @@ checkForFriendlies(missileTarget, radiusSize) {
 //
 ///------------------------------------------------------
 
-
 Callback_VehicleDamage(inflictor, attacker, damage, dFlags, meansOfDeath, weapon, point, dir, hitLoc, timeOffset, modelIndex, partName) {
-  if((attacker == self || (isDefined(attacker.pers) && attacker.pers["team"] == self.team) && level.teamBased) && (attacker != self.owner))
+  if((attacker == self || (isDefined(attacker.pers) && attacker.pers["team"] == self.team) && level.teamBased) && (attacker != self.owner)) {
     return;
-
-  if(self.health <= 0)
+  }
+  if(self.health <= 0) {
     return;
-
+  }
   switch (weapon) {
     case "ac130_105mm_mp":
     case "ac130_40mm_mp":
@@ -875,19 +867,19 @@ Callback_VehicleDamage(inflictor, attacker, damage, dFlags, meansOfDeath, weapon
 playDamageEfx() {
   self endon("death");
 
-  stopFxOnTag(level.harrier_afterburnerfx, self, "tag_engine_left");
-  playFxOnTag(level.harrier_smoke, self, "tag_engine_left");
+  stopFXOnTag(level.harrier_afterburnerfx, self, "tag_engine_left");
+  playFXOnTag(level.harrier_smoke, self, "tag_engine_left");
 
-  stopFxOnTag(level.harrier_afterburnerfx, self, "tag_engine_right");
-  playFxOnTag(level.harrier_smoke, self, "tag_engine_right");
+  stopFXOnTag(level.harrier_afterburnerfx, self, "tag_engine_right");
+  playFXOnTag(level.harrier_smoke, self, "tag_engine_right");
   wait(0.15);
 
-  stopFxOnTag(level.harrier_afterburnerfx, self, "tag_engine_left2");
-  playFxontag(level.harrier_smoke, self, "tag_engine_left2");
+  stopFXOnTag(level.harrier_afterburnerfx, self, "tag_engine_left2");
+  playFXOnTag(level.harrier_smoke, self, "tag_engine_left2");
 
-  stopFxOnTag(level.harrier_afterburnerfx, self, "tag_engine_right2");
-  playFxontag(level.harrier_smoke, self, "tag_engine_right2");
-  playFxOnTag(level.chopper_fx["damage"]["heavy_smoke"], self, "tag_engine_left");
+  stopFXOnTag(level.harrier_afterburnerfx, self, "tag_engine_right2");
+  playFXOnTag(level.harrier_smoke, self, "tag_engine_right2");
+  playFXOnTag(level.chopper_fx["damage"]["heavy_smoke"], self, "tag_engine_left");
 }
 
 harrierDestroyed() {
@@ -895,9 +887,9 @@ harrierDestroyed() {
 
   self waittill("death");
 
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
-
+  }
   if(!isDefined(self.largeProjectileDamage)) {
     self Vehicle_SetSpeed(25, 5);
     self thread harrierSpin(RandomIntRange(180, 220));
@@ -914,7 +906,7 @@ harrierExplode() {
   level.airPlane[level.airPlane.size - 1] = undefined;
 
   deathAngles = self getTagAngles("tag_deathfx");
-  playFx(level.harrier_deathfx, self getTagOrigin("tag_deathfx"), anglesToForward(deathAngles), anglesToUp(deathAngles));
+  playFX(level.harrier_deathfx, self getTagOrigin("tag_deathfx"), anglesToForward(deathAngles), anglesToUp(deathAngles));
 
   self notify("explode");
 
@@ -923,14 +915,13 @@ harrierExplode() {
   self thread harrierDelete();
 }
 
-
 harrierSpin(speed) {
   self endon("explode");
 
-  playfxontag(level.chopper_fx["explode"]["medium"], self, "tag_origin");
+  playFXOnTag(level.chopper_fx["explode"]["medium"], self, "tag_origin");
 
   self setyawspeed(speed, speed, speed);
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     self settargetyaw(self.angles[1] + (speed * 0.9));
     wait(1);
   }
@@ -961,7 +952,7 @@ fireOnVehicleTarget() {
   if(isDefined(self.bestTarget) && self.bestTarget.classname == "script_vehicle") {
     self SetTurretTargetEnt(self.bestTarget);
 
-    for (;;) {
+    for(;;) {
       curDist = distance2D(self.origin, self.bestTarget.origin);
 
       if(getTime() - acquiredTime > 2500 && curDist > 1000) {
@@ -1033,7 +1024,7 @@ evasiveManuverOne() {
   else
     direction = (0, yaw - 90, 0);
 
-  moveToPoint = self.origin + vector_multiply(anglestoforward(direction), 500);
+  moveToPoint = self.origin + vector_multiply(anglesToForward(direction), 500);
 
   self setVehGoalPos(moveToPoint, 1);
   //println( "evasive manuver one" );
@@ -1041,11 +1032,11 @@ evasiveManuverOne() {
 }
 
 drawLine(start, end, timeSlice, color) {
-  if(!isdefined(color))
+  if(!isDefined(color))
     color = (1, 1, 1);
 
   drawTime = int(timeSlice * 20);
-  for (time = 0; time < drawTime; time++) {
+  for(time = 0; time < drawTime; time++) {
     line(start, end, color, false, 1);
     wait(0.05);
   }

@@ -68,7 +68,7 @@ subwoofer_fling_zombie(localclientnum) {
 
   if(isDefined(sub)) {
     flat_angle = (0, sub.angles[1], 0);
-    direction_forward = anglestoforward(flat_angle + vectorscale((-1, 0, 0), 30.0));
+    direction_forward = anglesToForward(flat_angle + vectorscale((-1, 0, 0), 30.0));
     direction_vector = vectorscale(direction_forward, 512);
     self launchragdoll(direction_vector / 4);
   }
@@ -84,9 +84,9 @@ subwoofer_activated_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fi
       physicsexplosioncylinder(i, self.origin, 600, 240, 1);
     }
 
-    self playsound(0, "zmb_subwoofer_layer1");
+    self playSound(0, "zmb_subwoofer_layer1");
     flat_angle = (0, self.angles[1], 0);
-    self clientscripts\mp\zombies\_zm_equipment::play_fx_for_all_clients(level._effect["subwoofer_audio_wave"], undefined, 0, anglestoforward(flat_angle));
+    self clientscripts\mp\zombies\_zm_equipment::play_fx_for_all_clients(level._effect["subwoofer_audio_wave"], undefined, 0, anglesToForward(flat_angle));
     self notify("subwoofer_activated");
   } else
     self thread subwoofer_delayed_removal_from_active_list();
@@ -102,5 +102,4 @@ subwoofer_delayed_removal_from_active_list() {
   level._active_subwoofers["" + self getentitynumber()] = undefined;
 }
 
-init_animtree() {
-}
+init_animtree() {}

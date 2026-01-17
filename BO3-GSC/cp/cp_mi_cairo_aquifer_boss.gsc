@@ -49,10 +49,10 @@ function start_boss() {
 
 function defend_obj_hack(ent) {
   ent endon("death");
-  while (!level flag::get("end_battle")) {
+  while(!level flag::get("end_battle")) {
     offset = vectorscale((0, 0, 1), 60);
     icon_type = "defend";
-    if(isdefined(ent._laststand) && ent._laststand) {
+    if(isDefined(ent._laststand) && ent._laststand) {
       offset = vectorscale((0, 0, 1), 30);
       icon_type = "return";
     }
@@ -76,7 +76,7 @@ function init_ally_sniper_route(name) {
 }
 
 function play_all_vo_in_array(arr) {
-  for (i = 0; i < arr.size; i++) {
+  for(i = 0; i < arr.size; i++) {
     level.ally_target play_vo_from_array(arr, i);
   }
 }
@@ -94,13 +94,13 @@ function function_f9d87307(name) {
   var_52aea43b = struct::get(name, "targetname");
   points = [];
   start = var_52aea43b;
-  while (isdefined(var_52aea43b)) {
+  while(isDefined(var_52aea43b)) {
     points[points.size] = var_52aea43b.origin;
-    if(!isdefined(var_52aea43b.target)) {
+    if(!isDefined(var_52aea43b.target)) {
       break;
     }
     var_52aea43b = struct::get(var_52aea43b.target, "targetname");
-    if(isdefined(var_52aea43b) && var_52aea43b == start) {
+    if(isDefined(var_52aea43b) && var_52aea43b == start) {
       break;
     }
   }
@@ -158,16 +158,16 @@ function init_sniper_boss() {
   level.var_c987bca = 1;
   level.sniper_boss function_479d0795(level.sniper_boss.origin);
   wait(2);
-  var_66ab2260 = getentarray("1st_barrel", "script_noteworthy");
+  var_66ab2260 = getEntArray("1st_barrel", "script_noteworthy");
   foreach(sm in var_66ab2260) {
     if(sm.targetname == "destructible") {
       shootme = sm;
       continue;
     }
   }
-  if(isdefined(shootme)) {
+  if(isDefined(shootme)) {
     level.sniper_boss.lase_ent notify("target_lase_transition");
-    level.sniper_boss.lase_ent thread ai_sniper::target_lase_override(level.sniper_boss geteye(), shootme, 1, level.sniper_boss, 1, 0);
+    level.sniper_boss.lase_ent thread ai_sniper::target_lase_override(level.sniper_boss getEye(), shootme, 1, level.sniper_boss, 1, 0);
     thread function_60e39f29(shootme);
     shootme waittill("broken");
     level.sniper_boss.lase_ent notify("target_lase_override");
@@ -180,7 +180,7 @@ function init_sniper_boss() {
   function_e9aa8887();
   thread function_6ea369f7();
   reset = 1;
-  while (!level flag::get("end_battle")) {
+  while(!level flag::get("end_battle")) {
     if(new_spot) {
       switch (level.var_f1ee7b0e) {
         case 1: {
@@ -218,9 +218,9 @@ function function_60e39f29(shootme) {
 }
 
 function function_479d0795(var_81c506ec) {
-  if(!isdefined(self.lase_ent)) {
+  if(!isDefined(self.lase_ent)) {
     self.lase_ent = spawn("script_model", var_81c506ec);
-    self.lase_ent setmodel("tag_origin");
+    self.lase_ent setModel("tag_origin");
     self.lase_ent.velocity = vectorscale((1, 0, 0), 100);
     self thread util::delete_on_death(self.lase_ent);
   }
@@ -241,7 +241,7 @@ function function_e9aa8887() {
   loc = getnode(spots[level.var_d56cb109], "targetname");
   level.var_1d4f0308 = loc;
   level.sniper_boss forceteleport(loc.origin, loc.angles);
-  if(isdefined(loc.target)) {
+  if(isDefined(loc.target)) {
     function_f9d87307(loc.target);
   }
   level.sniper_boss thread function_7c54d87d();
@@ -281,7 +281,7 @@ function choose_best_player_target(origin) {
 function choose_sniper_location() {
   loc = randomint(level.sniper_origins.size);
   loc_ent = level.sniper_origins[loc];
-  if(!isdefined(level.sniper_loc) || loc_ent == level.sniper_loc) {
+  if(!isDefined(level.sniper_loc) || loc_ent == level.sniper_loc) {
     loc = loc + 1;
     if(loc >= level.sniper_origins.size) {
       loc = 0;
@@ -298,7 +298,7 @@ function set_up_sniper_location(index) {
     level.sniper_loc = level.sniper_origins[index];
     level.sniper_hit_trigger = getent(level.sniper_loc.target, "targetname");
     level.turret.origin = level.sniper_loc.origin - vectorscale((0, 0, 1), 32);
-    if(!isdefined(level.sniper_hit_trigger)) {
+    if(!isDefined(level.sniper_hit_trigger)) {
       assertmsg("");
     }
   }
@@ -318,17 +318,17 @@ function sniper_suppression_monitor() {
 }
 
 function function_6485b136(player, delay = 0) {
-  if(!level.sniper_boss.retargeting && (!isdefined(level.sniper_boss.player_target) || level.sniper_boss.player_target != player)) {
+  if(!level.sniper_boss.retargeting && (!isDefined(level.sniper_boss.player_target) || level.sniper_boss.player_target != player)) {
     var_833c5770 = level.sniper_boss.var_dfa3c2cb;
     level.sniper_boss.var_dfa3c2cb = delay;
-    level.sniper_boss.lase_ent ai_sniper::target_lase_override(level.sniper_boss geteye(), player, 1, level.sniper_boss, 1, 0);
+    level.sniper_boss.lase_ent ai_sniper::target_lase_override(level.sniper_boss getEye(), player, 1, level.sniper_boss, 1, 0);
     level.sniper_boss.var_dfa3c2cb = var_833c5770;
     level.sniper_boss.player_target = undefined;
   }
 }
 
 function function_fe242426() {
-  while (true) {
+  while(true) {
     debug::debug_sphere(level.sniper_boss.lase_ent.origin, 20, vectorscale((1, 0, 1), 255), 10, 10);
     wait(0.1);
   }
@@ -363,7 +363,7 @@ function end_battle() {
   level flag::set("boss_finale_ready");
   trig = getent("boss_finale_trigger", "targetname");
   trig triggerenable(1);
-  trig.var_611ccff1 = util::init_interactive_gameobject(trig, & "cp_level_aquifer_capture_door", & "CP_MI_CAIRO_AQUIFER_BREACH", & function_479374a3);
+  trig.var_611ccff1 = util::init_interactive_gameobject(trig, &"cp_level_aquifer_capture_door", &"CP_MI_CAIRO_AQUIFER_BREACH", &function_479374a3);
   trig.var_611ccff1 gameobjects::set_use_time(0.35);
   level waittill("start_finale");
   trig.var_611ccff1 gameobjects::disable_object();
@@ -378,63 +378,53 @@ function function_479374a3() {
   level.sniper_boss util::stop_magic_bullet_shield();
   guys = getaiteamarray("axis");
   guys = array::exclude(guys, array(level.sniper_boss));
-  if(isdefined(level.bzm_forceaicleanup)) {
-    [
-      [level.bzm_forceaicleanup]
-    ]();
+  if(isDefined(level.bzm_forceaicleanup)) {
+    [[level.bzm_forceaicleanup]]();
   }
-  array::thread_all(guys, & aquifer_util::delete_me);
+  array::thread_all(guys, &aquifer_util::delete_me);
   struct = getent("hyperion_death_origin", "targetname");
-  if(isdefined(level.bzm_aquiferdialogue6callback)) {
+  if(isDefined(level.bzm_aquiferdialogue6callback)) {
     level thread[[level.bzm_aquiferdialogue6callback]]();
   }
   ent = getent("control_window_shatter_01", "targetname");
-  if(isdefined(ent)) {
+  if(isDefined(ent)) {
     ent hide();
   }
   door = getent("boss_hideaway_door", "targetname");
   level thread namespace_71a63eac::function_e0e00797();
   a_ents = [];
-  if(!isdefined(a_ents)) {
+  if(!isDefined(a_ents)) {
     a_ents = [];
   } else if(!isarray(a_ents)) {
     a_ents = array(a_ents);
   }
   a_ents[a_ents.size] = self.trigger.who;
   a_ents["hyperion"] = level.sniper_boss;
-  scene::add_scene_func("cin_aqu_07_01_maretti_1st_dropit", & function_f3ee81ce, "skip_started");
+  scene::add_scene_func("cin_aqu_07_01_maretti_1st_dropit", &function_f3ee81ce, "skip_started");
   struct scene::play("cin_aqu_07_01_maretti_1st_dropit", a_ents);
   aquifer_util::toggle_door("boss_death_models", 1);
   thread function_2a39915e();
   level util::clientnotify("start_boss_tree");
   exploder::exploder("lgt_tree_glow_01");
   if(!level flag::get("sniper_boss_skipped")) {
-    array::thread_all(level.activeplayers, & aquifer_util::function_89eaa1b3, 0.5);
+    array::thread_all(level.activeplayers, &aquifer_util::function_89eaa1b3, 0.5);
   }
-  if(isdefined(level.bzm_forceaicleanup)) {
-    [
-      [level.bzm_forceaicleanup]
-    ]();
+  if(isDefined(level.bzm_forceaicleanup)) {
+    [[level.bzm_forceaicleanup]]();
   }
   struct scene::play("cin_aqu_05_20_boss_3rd_death_sh010", level.sniper_boss);
-  if(isdefined(level.bzm_forceaicleanup)) {
-    [
-      [level.bzm_forceaicleanup]
-    ]();
+  if(isDefined(level.bzm_forceaicleanup)) {
+    [[level.bzm_forceaicleanup]]();
   }
   level waittill("hash_94cdf46c");
-  if(isdefined(level.bzm_forceaicleanup)) {
-    [
-      [level.bzm_forceaicleanup]
-    ]();
+  if(isDefined(level.bzm_forceaicleanup)) {
+    [[level.bzm_forceaicleanup]]();
   }
   thread util::screen_fade_out(0.75);
   exploder::stop_exploder("lgt_tree_glow_01");
   level waittill("hash_595107d2");
-  if(isdefined(level.bzm_forceaicleanup)) {
-    [
-      [level.bzm_forceaicleanup]
-    ]();
+  if(isDefined(level.bzm_forceaicleanup)) {
+    [[level.bzm_forceaicleanup]]();
   }
   exploder::stop_exploder("lighting_turbine_boss_emergency");
   level clientfield::set("toggle_fog_banks", 0);
@@ -454,12 +444,12 @@ function function_f3ee81ce(a_ents) {
 function function_2a39915e() {
   level waittill("hash_6f76bd0d");
   if(!level flag::get("sniper_boss_skipped")) {
-    array::thread_all(level.activeplayers, & aquifer_util::function_89eaa1b3, 1);
+    array::thread_all(level.activeplayers, &aquifer_util::function_89eaa1b3, 1);
   }
 }
 
 function function_510d0407() {
-  ents = getentarray("fire_maker", "script_noteworthy");
+  ents = getEntArray("fire_maker", "script_noteworthy");
   level.var_510d0407 = ents;
   foreach(ent in ents) {
     ent thread function_d1b143ce();
@@ -468,26 +458,26 @@ function function_510d0407() {
 
 function function_d1b143ce() {
   var_e42db353 = undefined;
-  if(isdefined(self.target)) {
+  if(isDefined(self.target)) {
     var_e42db353 = getent(self.target, "targetname");
     var_e42db353 triggerenable(0);
     self.target = undefined;
   }
-  ent = spawnstruct();
+  ent = spawnStruct();
   ent.origin = self.origin;
   ent.angles = self.angles;
   fx = "boss_fire";
-  if(isdefined(self.script_parameters)) {
+  if(isDefined(self.script_parameters)) {
     fx = self.script_parameters;
   }
   self waittill("broken");
   arrayremovevalue(level.var_510d0407, self);
-  if(isdefined(var_e42db353)) {
+  if(isDefined(var_e42db353)) {
     var_e42db353 triggerenable(1);
     badplace_cylinder(var_e42db353.targetname, -1, ent.origin, 110, 64, "all");
   }
   if(fx == "boss_fire") {
-    playfx(level._effect[fx], ent.origin, anglestoforward(ent.angles), anglestoup(ent.angles));
+    playFX(level._effect[fx], ent.origin, anglesToForward(ent.angles), anglestoup(ent.angles));
   } else {
     exploder::exploder(fx);
   }
@@ -496,9 +486,9 @@ function function_d1b143ce() {
 function function_e146f6ef() {
   best_dist = 0;
   shootme = undefined;
-  eyepos = level.sniper_boss geteye();
+  eyepos = level.sniper_boss getEye();
   foreach(ent in level.var_510d0407) {
-    if(isdefined(ent) && isalive(ent)) {
+    if(isDefined(ent) && isalive(ent)) {
       dist = function_ca9c8f2b(ent.origin);
       if(level.var_c987bca && (best_dist == 0 || dist < best_dist) && sighttracepassed(eyepos, ent.origin, 0, undefined)) {
         best_dist = dist;
@@ -506,13 +496,13 @@ function function_e146f6ef() {
       }
     }
   }
-  if(isdefined(shootme)) {
+  if(isDefined(shootme)) {
     level.sniper_boss.lase_ent notify("lase_points");
     level.sniper_boss.lase_ent notify("target_lase_override");
     level.sniper_boss.lase_ent notify("target_lase_transition");
     wait(0.1);
-    if(isdefined(shootme)) {
-      level.sniper_boss.lase_ent ai_sniper::target_lase_override(level.sniper_boss geteye(), shootme, 1, level.sniper_boss, 1, 0);
+    if(isDefined(shootme)) {
+      level.sniper_boss.lase_ent ai_sniper::target_lase_override(level.sniper_boss getEye(), shootme, 1, level.sniper_boss, 1, 0);
       return true;
     }
   }
@@ -531,9 +521,9 @@ function function_ca9c8f2b(org) {
 }
 
 function function_329f82a0() {
-  if(isdefined(level.sniper_boss.lase_ent.lase_override)) {
+  if(isDefined(level.sniper_boss.lase_ent.lase_override)) {
     target = level.sniper_boss.lase_ent.lase_override;
-    fwd = anglestoforward(level.sniper_boss.angles);
+    fwd = anglesToForward(level.sniper_boss.angles);
     target_org = target.origin + vectorscale((0, 0, 1), 10);
     if(isplayer(target)) {
       var_f769885c = (0, 0, 0);
@@ -542,9 +532,9 @@ function function_329f82a0() {
       if(accuracy < randomfloat(100)) {
         var_f769885c = (randomfloat(100) - 50, 0, 16);
       }
-      target_org = (target geteye() + (vectorscale((0, 0, -1), 6))) + var_f769885c;
+      target_org = (target getEye() + (vectorscale((0, 0, -1), 6))) + var_f769885c;
     }
-    magicbullet(getweapon("sniper_hyperion"), level.sniper_boss geteye() + (fwd * 20), target_org, level.sniper_boss);
+    magicbullet(getweapon("sniper_hyperion"), level.sniper_boss getEye() + (fwd * 20), target_org, level.sniper_boss);
     return true;
   }
   return false;
@@ -552,10 +542,10 @@ function function_329f82a0() {
 
 function function_6ea369f7() {
   trig = getent("sniper_alley", "targetname");
-  while (!level flag::get("end_battle")) {
+  while(!level flag::get("end_battle")) {
     trig waittill("trigger", who);
     if(isplayer(who) && isalive(who)) {
-      if(!isdefined(level.sniper_boss.player_target)) {
+      if(!isDefined(level.sniper_boss.player_target)) {
         function_6485b136(who, 2);
       }
     }
@@ -568,13 +558,13 @@ function function_6800ac1d() {
   trig triggerenable(1);
   trig2 triggerenable(0);
   aquifer_obj::objectives_set("cp_level_aquifer_boss");
-  trig.var_611ccff1 = trig hacking::init_hack_trigger(5, & "cp_level_aquifer_boss_gen1", & "CP_MI_CAIRO_AQUIFER_HOLD_OVERLOAD", & function_e9c4785f);
+  trig.var_611ccff1 = trig hacking::init_hack_trigger(5, &"cp_level_aquifer_boss_gen1", &"CP_MI_CAIRO_AQUIFER_HOLD_OVERLOAD", &function_e9c4785f);
   thread function_a354fb63(1);
   level.var_fc9a3509 = 1;
   level waittill("hash_e9c4785f");
   thread savegame::checkpoint_save();
   trig.var_611ccff1 gameobjects::disable_object();
-  trig2.var_611ccff1 = trig2 hacking::init_hack_trigger(5, & "cp_level_aquifer_boss_gen2", & "CP_MI_CAIRO_AQUIFER_HOLD_OVERLOAD", & function_e9c4785f);
+  trig2.var_611ccff1 = trig2 hacking::init_hack_trigger(5, &"cp_level_aquifer_boss_gen2", &"CP_MI_CAIRO_AQUIFER_HOLD_OVERLOAD", &function_e9c4785f);
   thread function_a354fb63(2);
   scene::init("cin_aqu_07_01_maretti_1st_dropit");
   level waittill("hash_e9c4785f");
@@ -598,15 +588,15 @@ function function_e9c4785f(gameobj) {
 
 function function_dae6fcbf(name) {
   level endon("hacking_complete");
-  panels = getentarray(name, "targetname");
+  panels = getEntArray(name, "targetname");
   delay = 3;
-  while (true) {
+  while(true) {
     wait(delay);
     flickers = randomint(5) + 2;
-    for (i = 0; i < flickers; i++) {
-      array::run_all(panels, & hide);
+    for(i = 0; i < flickers; i++) {
+      array::run_all(panels, &hide);
       wait(randomfloatrange(0.05, 0.2));
-      array::run_all(panels, & show);
+      array::run_all(panels, &show);
       wait(randomfloatrange(0.05, 0.2));
     }
     delay = delay / 2;
@@ -615,15 +605,15 @@ function function_dae6fcbf(name) {
 
 function function_a354fb63(num) {
   b_success = 0;
-  trig = getent("boss_hack" + (isdefined(num) ? "" + num : ""), "targetname");
-  while (!b_success) {
+  trig = getent("boss_hack" + (isDefined(num) ? "" + num : ""), "targetname");
+  while(!b_success) {
     level.hacking flag::wait_till("in_progress");
     thread function_41ca61ef(num);
     level waittill("hacking_complete", b_success);
     if(!b_success) {
       level notify("hash_90029dea");
     }
-    surge = "surge0" + (isdefined(num) ? "" + num : "");
+    surge = "surge0" + (isDefined(num) ? "" + num : "");
     if(b_success) {
       level notify("hash_6ca7aa5d");
       exploder::exploder(surge + "_stage05");
@@ -637,8 +627,8 @@ function function_a354fb63(num) {
       switch (num) {
         case 1: {
           exploder::exploder("lighting_sniper_boss_off_set01");
-          panels = getentarray("reactor_lights_01", "targetname");
-          array::run_all(panels, & hide);
+          panels = getEntArray("reactor_lights_01", "targetname");
+          array::run_all(panels, &hide);
           wait(1);
           function_339776e2("bossbarrel_right01");
           wait(1.5);
@@ -650,8 +640,8 @@ function function_a354fb63(num) {
           exploder::exploder("lighting_boss_fire_transition");
           clientfield::set("toggle_fog_banks", 1);
           clientfield::set("toggle_pbg_banks", 1);
-          panels = getentarray("reactor_lights_02", "targetname");
-          array::run_all(panels, & hide);
+          panels = getEntArray("reactor_lights_02", "targetname");
+          array::run_all(panels, &hide);
           wait(1.5);
           function_339776e2("bossbarrel_left03");
           wait(1);
@@ -672,16 +662,16 @@ function function_a354fb63(num) {
 
 function function_339776e2(name) {
   ent = getent(name, "script_parameters");
-  if(isdefined(ent)) {
+  if(isDefined(ent)) {
     ent kill();
   }
 }
 
 function function_41ca61ef(num) {
   level endon("hash_90029dea");
-  thread function_dae6fcbf("reactor_lights_0" + (isdefined(num) ? "" + num : ""));
+  thread function_dae6fcbf("reactor_lights_0" + (isDefined(num) ? "" + num : ""));
   level thread cp_mi_cairo_aquifer_sound::function_ad15f6f5();
-  surge = "surge0" + (isdefined(num) ? "" + num : "");
+  surge = "surge0" + (isDefined(num) ? "" + num : "");
   exploder::exploder(surge + "_stage01");
   wait(1);
   exploder::exploder(surge + "_stage02");
@@ -764,7 +754,7 @@ function function_4463326b(a_str_nags, var_aa750b18 = 10, n_timeout, str_endon_n
   level endon(str_endon_notify);
   n_waittime = var_aa750b18;
   n_line = 0;
-  while (n_line < a_str_nags.size) {
+  while(n_line < a_str_nags.size) {
     wait(n_waittime);
     level.hendricks boss_vo(a_str_nags[n_line], n_timeout);
     n_line++;
@@ -774,19 +764,19 @@ function function_4463326b(a_str_nags, var_aa750b18 = 10, n_timeout, str_endon_n
 
 function function_269260a3() {
   var_3d2aa310 = [];
-  if(!isdefined(var_3d2aa310)) {
+  if(!isDefined(var_3d2aa310)) {
     var_3d2aa310 = [];
   } else if(!isarray(var_3d2aa310)) {
     var_3d2aa310 = array(var_3d2aa310);
   }
   var_3d2aa310[var_3d2aa310.size] = "hend_overload_that_genera_0";
-  if(!isdefined(var_3d2aa310)) {
+  if(!isDefined(var_3d2aa310)) {
     var_3d2aa310 = [];
   } else if(!isarray(var_3d2aa310)) {
     var_3d2aa310 = array(var_3d2aa310);
   }
   var_3d2aa310[var_3d2aa310.size] = "hend_we_need_that_generat_0";
-  if(!isdefined(var_3d2aa310)) {
+  if(!isDefined(var_3d2aa310)) {
     var_3d2aa310 = [];
   } else if(!isarray(var_3d2aa310)) {
     var_3d2aa310 = array(var_3d2aa310);
@@ -799,13 +789,13 @@ function function_269260a3() {
 
 function function_86fc21bb() {
   var_3d2aa310 = [];
-  if(!isdefined(var_3d2aa310)) {
+  if(!isDefined(var_3d2aa310)) {
     var_3d2aa310 = [];
   } else if(!isarray(var_3d2aa310)) {
     var_3d2aa310 = array(var_3d2aa310);
   }
   var_3d2aa310[var_3d2aa310.size] = "hend_one_down_2";
-  if(!isdefined(var_3d2aa310)) {
+  if(!isDefined(var_3d2aa310)) {
     var_3d2aa310 = [];
   } else if(!isarray(var_3d2aa310)) {
     var_3d2aa310 = array(var_3d2aa310);
@@ -816,13 +806,13 @@ function function_86fc21bb() {
 
 function function_c3af0181() {
   var_3d2aa310 = [];
-  if(!isdefined(var_3d2aa310)) {
+  if(!isDefined(var_3d2aa310)) {
     var_3d2aa310 = [];
   } else if(!isarray(var_3d2aa310)) {
     var_3d2aa310 = array(var_3d2aa310);
   }
   var_3d2aa310[var_3d2aa310.size] = "hend_get_up_there_and_sec_0";
-  if(!isdefined(var_3d2aa310)) {
+  if(!isDefined(var_3d2aa310)) {
     var_3d2aa310 = [];
   } else if(!isarray(var_3d2aa310)) {
     var_3d2aa310 = array(var_3d2aa310);
@@ -838,7 +828,7 @@ function function_ae438739(var_ecd4dcd7) {
   nags[0] = "hend_keep_your_head_down_1";
   nags[1] = "hend_watch_it_1";
   nags[2] = "hend_watch_that_laser_1";
-  while (level.var_6343f89f < nags.size) {
+  while(level.var_6343f89f < nags.size) {
     self waittill("damage", amount, attacker, dir, point, mod);
     if(attacker == level.sniper_boss && gettime() > (level.var_9ef3831c + (var_ecd4dcd7 * 1000))) {
       var_f0c8f3cf = level.hendricks boss_vo(nags[level.var_6343f89f], 2);
@@ -870,7 +860,7 @@ function function_3375c23() {
   speed = length(player_vec);
   if(speed > 100) {
     player_vec = self getnormalizedmovement();
-    var_8aeaad8d = anglestoforward(level.sniper_boss.angles);
+    var_8aeaad8d = anglesToForward(level.sniper_boss.angles);
     dot = abs(vectordot(player_vec, var_8aeaad8d));
     accuracy = accuracy - ((1 - dot) * 0.1);
   }

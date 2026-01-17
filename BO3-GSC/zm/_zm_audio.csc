@@ -13,13 +13,13 @@
 #namespace zm_audio;
 
 function autoexec __init__sytem__() {
-  system::register("zm_audio", & __init__, undefined, undefined);
+  system::register("zm_audio", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("allplayers", "charindex", 1, 3, "int", & charindex_cb, 0, 1);
-  clientfield::register("toplayer", "isspeaking", 1, 1, "int", & isspeaking_cb, 0, 1);
-  if(!isdefined(level.exert_sounds)) {
+  clientfield::register("allplayers", "charindex", 1, 3, "int", &charindex_cb, 0, 1);
+  clientfield::register("toplayer", "isspeaking", 1, 1, "int", &isspeaking_cb, 0, 1);
+  if(!isDefined(level.exert_sounds)) {
     level.exert_sounds = [];
   }
   level.exert_sounds[0]["playerbreathinsound"] = "vox_exert_generic_inhale";
@@ -30,7 +30,7 @@ function __init__() {
   level.exert_sounds[0]["meleeswipesoundplayer"] = "vox_exert_generic_knifeswipe";
   level.exert_sounds[0]["dtplandsoundplayer"] = "vox_exert_generic_pain";
   level thread gameover_snapshot();
-  callback::on_spawned( & on_player_spawned);
+  callback::on_spawned(&on_player_spawned);
 }
 
 function on_player_spawned(localclientnum) {}
@@ -47,7 +47,7 @@ function charindex_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fie
     self.player_exert_id = newval;
     self._first_frame_exert_id_recieved = 1;
     self notify("sndendexertoverride");
-  } else if(!isdefined(self._first_frame_exert_id_recieved)) {
+  } else if(!isDefined(self._first_frame_exert_id_recieved)) {
     self._first_frame_exert_id_recieved = 1;
     self thread delay_set_exert_id(newval);
   }
@@ -63,16 +63,16 @@ function isspeaking_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fi
 
 function zmbmuslooper() {
   ent = spawn(0, (0, 0, 0), "script_origin");
-  playsound(0, "mus_zmb_gamemode_start", (0, 0, 0));
+  playSound(0, "mus_zmb_gamemode_start", (0, 0, 0));
   wait(10);
-  ent playloopsound("mus_zmb_gamemode_loop", 0.05);
+  ent playLoopSound("mus_zmb_gamemode_loop", 0.05);
   ent thread waitfor_music_stop();
 }
 
 function waitfor_music_stop() {
   level waittill("stpm");
   self stopallloopsounds(0.1);
-  playsound(0, "mus_zmb_gamemode_end", (0, 0, 0));
+  playSound(0, "mus_zmb_gamemode_end", (0, 0, 0));
   wait(1);
   self delete();
 }
@@ -82,9 +82,9 @@ function playerfalldamagesound(client_num, firstperson) {
 }
 
 function clientvoicesetup() {
-  callback::on_localclient_connect( & audio_player_connect);
+  callback::on_localclient_connect(&audio_player_connect);
   players = getlocalplayers();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     thread audio_player_connect(i);
   }
 }
@@ -99,25 +99,25 @@ function audio_player_connect(localclientnum) {
 }
 
 function playerexert(localclientnum, exert) {
-  if(isdefined(self.isspeaking) && self.isspeaking == 1) {
+  if(isDefined(self.isspeaking) && self.isspeaking == 1) {
     return;
   }
-  if(isdefined(self.beast_mode) && self.beast_mode) {
+  if(isDefined(self.beast_mode) && self.beast_mode) {
     return;
   }
   id = level.exert_sounds[0][exert];
   if(isarray(level.exert_sounds[0][exert])) {
     id = array::random(level.exert_sounds[0][exert]);
   }
-  if(isdefined(self.player_exert_id)) {
+  if(isDefined(self.player_exert_id)) {
     if(isarray(level.exert_sounds[self.player_exert_id][exert])) {
       id = array::random(level.exert_sounds[self.player_exert_id][exert]);
     } else {
       id = level.exert_sounds[self.player_exert_id][exert];
     }
   }
-  if(isdefined(id)) {
-    self playsound(localclientnum, id);
+  if(isDefined(id)) {
+    self playSound(localclientnum, id);
   }
 }
 
@@ -125,12 +125,12 @@ function sndvonotifydtp(localclientnum, notifystring) {
   level notify(("kill_sndVoNotifyDTP" + localclientnum) + notifystring);
   level endon(("kill_sndVoNotifyDTP" + localclientnum) + notifystring);
   player = undefined;
-  while (!isdefined(player)) {
+  while(!isDefined(player)) {
     player = getnonpredictedlocalplayer(localclientnum);
     wait(0.05);
   }
   player endon("disconnect");
-  for (;;) {
+  for(;;) {
     player waittill(notifystring, surfacetype);
     player playerexert(localclientnum, notifystring);
   }
@@ -138,34 +138,34 @@ function sndvonotifydtp(localclientnum, notifystring) {
 
 function sndmeleeswipe(localclientnum, notifystring) {
   player = undefined;
-  while (!isdefined(player)) {
+  while(!isDefined(player)) {
     player = getnonpredictedlocalplayer(localclientnum);
     wait(0.05);
   }
   player endon("disconnect");
-  for (;;) {
+  for(;;) {
     player waittill(notifystring);
     currentweapon = getcurrentweapon(localclientnum);
-    if(isdefined(level.sndnomeleeonclient) && level.sndnomeleeonclient) {
+    if(isDefined(level.sndnomeleeonclient) && level.sndnomeleeonclient) {
       return;
     }
-    if(isdefined(player.is_player_zombie) && player.is_player_zombie) {
-      playsound(0, "zmb_melee_whoosh_zmb_plr", player.origin);
+    if(isDefined(player.is_player_zombie) && player.is_player_zombie) {
+      playSound(0, "zmb_melee_whoosh_zmb_plr", player.origin);
       continue;
     }
     if(currentweapon.name == "bowie_knife") {
-      playsound(0, "zmb_bowie_swing_plr", player.origin);
+      playSound(0, "zmb_bowie_swing_plr", player.origin);
       continue;
     }
     if(currentweapon.name == "spoon_zm_alcatraz") {
-      playsound(0, "zmb_spoon_swing_plr", player.origin);
+      playSound(0, "zmb_spoon_swing_plr", player.origin);
       continue;
     }
     if(currentweapon.name == "spork_zm_alcatraz") {
-      playsound(0, "zmb_spork_swing_plr", player.origin);
+      playSound(0, "zmb_spork_swing_plr", player.origin);
       continue;
     }
-    playsound(0, "zmb_melee_whoosh_plr", player.origin);
+    playSound(0, "zmb_melee_whoosh_plr", player.origin);
   }
 }
 
@@ -173,14 +173,14 @@ function sndvonotifyplain(localclientnum, notifystring) {
   level notify(("kill_sndVoNotifyPlain" + localclientnum) + notifystring);
   level endon(("kill_sndVoNotifyPlain" + localclientnum) + notifystring);
   player = undefined;
-  while (!isdefined(player)) {
+  while(!isDefined(player)) {
     player = getnonpredictedlocalplayer(localclientnum);
     wait(0.05);
   }
   player endon("disconnect");
-  for (;;) {
+  for(;;) {
     player waittill(notifystring);
-    if(isdefined(player.is_player_zombie) && player.is_player_zombie) {
+    if(isDefined(player.is_player_zombie) && player.is_player_zombie) {
       continue;
     }
     player playerexert(localclientnum, notifystring);
@@ -210,15 +210,15 @@ function sndsetzombiecontext(localclientnum, oldval, newval, bnewent, binitialsn
 
 function sndzmblaststand(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    playsound(localclientnum, "chr_health_laststand_enter", (0, 0, 0));
+    playSound(localclientnum, "chr_health_laststand_enter", (0, 0, 0));
     self.inlaststand = 1;
     setsoundcontext("laststand", "active");
     if(!issplitscreen()) {
       forceambientroom("sndHealth_LastStand");
     }
   } else {
-    if(isdefined(self.inlaststand) && self.inlaststand) {
-      playsound(localclientnum, "chr_health_laststand_exit", (0, 0, 0));
+    if(isDefined(self.inlaststand) && self.inlaststand) {
+      playSound(localclientnum, "chr_health_laststand_exit", (0, 0, 0));
       self.inlaststand = 0;
       if(!issplitscreen()) {
         forceambientroom("");

@@ -13,7 +13,7 @@ main() {
   if(getdvar(#"_id_55B6AAF4") == "")
     setdvar("animated_trees_enabled", "1");
 
-  level.wind = spawnstruct();
+  level.wind = spawnStruct();
   level.wind.rate = 0.4;
   level.wind.weight = 1;
   level.wind.variance = 0.2;
@@ -24,7 +24,7 @@ main() {
     level.anim_prop_models = [];
 
   level.init_animatedmodels = [];
-  animated_models = getentarray("animated_model", "targetname");
+  animated_models = getEntArray("animated_model", "targetname");
 
   if(getdvar(#"_id_55B6AAF4") == "1")
     array_thread(animated_models, ::model_init);
@@ -159,37 +159,37 @@ model_init() {
 model_disable() {
   switch (self.model) {
     case "foliage_tree_desertpalm01_animated":
-      self setmodel("foliage_tree_desertpalm01");
+      self setModel("foliage_tree_desertpalm01");
       break;
     case "foliage_tree_desertpalm02_animated":
-      self setmodel("foliage_tree_desertpalm02");
+      self setModel("foliage_tree_desertpalm02");
       break;
     case "foliage_tree_desertpalm03_animated":
-      self setmodel("foliage_tree_desertpalm03");
+      self setModel("foliage_tree_desertpalm03");
       break;
     case "foliage_tree_palm_tall_1":
-      self setmodel("foliage_tree_palm_tall_1_static");
+      self setModel("foliage_tree_palm_tall_1_static");
       break;
     case "foliage_tree_palm_tall_2":
-      self setmodel("foliage_tree_palm_tall_2_static");
+      self setModel("foliage_tree_palm_tall_2_static");
       break;
     case "foliage_tree_palm_tall_3":
-      self setmodel("foliage_tree_palm_tall_3_static");
+      self setModel("foliage_tree_palm_tall_3_static");
       break;
     case "foliage_tree_palm_bushy_1":
-      self setmodel("foliage_tree_palm_bushy_1_static");
+      self setModel("foliage_tree_palm_bushy_1_static");
       break;
     case "foliage_tree_palm_bushy_2":
-      self setmodel("foliage_tree_palm_bushy_2_static");
+      self setModel("foliage_tree_palm_bushy_2_static");
       break;
     case "foliage_tree_palm_bushy_3":
-      self setmodel("foliage_tree_palm_bushy_3_static");
+      self setModel("foliage_tree_palm_bushy_3_static");
       break;
     case "foliage_tree_palm_med_1":
-      self setmodel("foliage_tree_palm_med_1_static");
+      self setModel("foliage_tree_palm_med_1_static");
       break;
     case "foliage_tree_palm_med_2":
-      self setmodel("foliage_tree_palm_med_2_static");
+      self setModel("foliage_tree_palm_med_2_static");
       break;
     default:
 

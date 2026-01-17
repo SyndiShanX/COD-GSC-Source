@@ -19,24 +19,23 @@
 #include scripts\zm_common\zm_loadout;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
-
 #namespace zm_weap_thunderstorm;
 
 autoexec __init__system__() {
-  system::register(#"zm_weap_thunderstorm", &__init__, &__main__, #"zm_weapons");
+  system::register(#"zm_weap_thunderstorm", &__init__, &__main__, # "zm_weapons");
 }
 
 __init__() {
   zm_loadout::register_lethal_grenade_for_level(#"thunderstorm");
-  clientfield::register("scriptmover", "" + #"aoe_indicator", 16000, 1, "counter");
-  clientfield::register("scriptmover", "" + #"electric_storm", 16000, 1, "int");
-  clientfield::register("scriptmover", "" + #"hash_7006a7d528a6f05c", 16000, 3, "int");
-  clientfield::register("actor", "" + #"hash_51b05e5d116438a9", 16000, 3, "int");
-  clientfield::register("actor", "" + #"hash_561a1fd86bc1a53a", 16000, 1, "int");
-  clientfield::register("scriptmover", "" + #"hash_43cf6c236d2e9ba", 16000, 1, "counter");
-  clientfield::register("scriptmover", "" + #"hash_1187b848bf7868c5", 16000, 1, "int");
+  clientfield::register("scriptmover", "" + # "aoe_indicator", 16000, 1, "counter");
+  clientfield::register("scriptmover", "" + # "electric_storm", 16000, 1, "int");
+  clientfield::register("scriptmover", "" + # "hash_7006a7d528a6f05c", 16000, 3, "int");
+  clientfield::register("actor", "" + # "hash_51b05e5d116438a9", 16000, 3, "int");
+  clientfield::register("actor", "" + # "hash_561a1fd86bc1a53a", 16000, 1, "int");
+  clientfield::register("scriptmover", "" + # "hash_43cf6c236d2e9ba", 16000, 1, "counter");
+  clientfield::register("scriptmover", "" + # "hash_1187b848bf7868c5", 16000, 1, "int");
   weaponobjects::function_e6400478(#"thunderstorm", &function_72e5d54f, undefined);
-  deployable::register_deployable(getweapon(#"thunderstorm"), &function_3b0168a9, undefined, undefined, #"hash_3b6c37d4718707a2");
+  deployable::register_deployable(getweapon(#"thunderstorm"), &function_3b0168a9, undefined, undefined, # "hash_3b6c37d4718707a2");
   level.a_mdl_pegasus = [];
   level.var_b3b0d9d7 = &function_cd366cf2;
   callback::on_connect(&function_6c5cb6e);
@@ -50,12 +49,12 @@ __main__() {
     return;
   }
 
-  level._effect[#"grenade_samantha_steal"] = #"zombie/fx_monkey_lightning_zmb";
+  level._effect[# "grenade_samantha_steal"] = # "zombie/fx_monkey_lightning_zmb";
   scene::add_scene_func("p8_fxanim_zm_zod_staff_ra_bundle", &function_f2cc0ca9, "play");
 }
 
 function_f2cc0ca9(entities) {
-  level.var_bc5fecf1 = entities[#"prop 1"];
+  level.var_bc5fecf1 = entities[# "prop 1"];
 }
 
 function_72e5d54f(watcher) {
@@ -83,10 +82,10 @@ function_6c5cb6e() {
 
 function_feb1573e() {
   self notify(#"hash_2938992396267cf3");
-  self endon(#"disconnect", #"hash_2938992396267cf3");
+  self endon(#"disconnect", # "hash_2938992396267cf3");
 
   while(true) {
-    s_result = self waittill(#"grenade_fire", #"grenade_throw_cancelled");
+    s_result = self waittill(#"grenade_fire", # "grenade_throw_cancelled");
 
     if(s_result.weapon == getweapon(#"thunderstorm")) {
       self val::reset(#"pegasus_strike", "freezecontrols");
@@ -125,7 +124,7 @@ function_3b0168a9(v_origin, v_angles, player) {
   var_78e5d9d1 = (v_origin[0], v_origin[1], v_origin[2] + 40);
   trace = bulletTrace(var_78e5d9d1, var_78e5d9d1 + (0, 0, 300 - 40), 0, player);
 
-  if(trace[#"fraction"] < 1) {
+  if(trace[# "fraction"] < 1) {
     return false;
   }
 
@@ -168,7 +167,7 @@ function_5f724c2e(e_grenade) {
     return;
   }
 
-  self endon(#"death", #"disconnect");
+  self endon(#"death", # "disconnect");
 
   if(self laststand::player_is_in_laststand()) {
     level thread function_5abeb589(e_grenade);
@@ -218,11 +217,11 @@ function_5f724c2e(e_grenade) {
 
   if(isDefined(var_dd83e2c2)) {
     v_ground = undefined;
-    v_trace = groundtrace(var_dd83e2c2 + (0, 0, 200), var_dd83e2c2 + (0, 0, -2000), 0, self, 1)[#"position"];
+    v_trace = groundtrace(var_dd83e2c2 + (0, 0, 200), var_dd83e2c2 + (0, 0, -2000), 0, self, 1)[# "position"];
     v_on_navmesh = zm_utility::function_b0eeaada(v_trace);
 
     if(isDefined(v_on_navmesh)) {
-      v_ground = v_on_navmesh[#"point"];
+      v_ground = v_on_navmesh[# "point"];
     }
 
     if(isDefined(v_ground)) {
@@ -283,7 +282,7 @@ function_5d44b698(v_origin) {
     mdl_poi.var_abfcb0d9 = 1;
     mdl_poi zm_utility::create_zombie_point_of_interest(undefined, 16, 10000);
     mdl_poi zm_utility::create_zombie_point_of_interest_attractor_positions(undefined, 8, 400, 1);
-    mdl_poi.var_8305fd51 = #"thunderstorm";
+    mdl_poi.var_8305fd51 = # "thunderstorm";
     self waittill(#"hash_7a19b162c9e303dc");
     mdl_poi delete();
   }
@@ -302,7 +301,7 @@ function_b603ab34(e_player, var_10d4f67d) {
   v_pos = util::ground_position(v_pos + (0, 0, 30), 1000, 12);
   mdl_temp = util::spawn_model(#"hash_30b0badbca0a10de", v_pos + (0, 0, -5), (0, 0, 0));
   waitframe(1);
-  mdl_temp clientfield::set("" + #"hash_1187b848bf7868c5", 1);
+  mdl_temp clientfield::set("" + # "hash_1187b848bf7868c5", 1);
   var_10d4f67d waittill(#"hash_7a19b162c9e303dc");
   mdl_temp delete();
 }
@@ -317,18 +316,18 @@ function_57011892(e_player) {
 }
 
 pegasus_think() {
-  self clientfield::set("" + #"hash_7006a7d528a6f05c", self.player getentitynumber() + 1);
+  self clientfield::set("" + # "hash_7006a7d528a6f05c", self.player getentitynumber() + 1);
   self thread scene::play("aib_zm_red_vign_peg_inair_flapattack_01", "loop", self);
-  self clientfield::set("" + #"electric_storm", 1);
+  self clientfield::set("" + # "electric_storm", 1);
   self waittill(#"hash_7a19b162c9e303dc");
-  self clientfield::set("" + #"electric_storm", 0);
-  self clientfield::set("" + #"hash_7006a7d528a6f05c", 5);
+  self clientfield::set("" + # "electric_storm", 0);
+  self clientfield::set("" + # "hash_7006a7d528a6f05c", 5);
   wait 0.1;
   self delete();
 }
 
 function_4b198b8f(a_ents) {
-  var_10d4f67d = a_ents[#"prop 1"];
+  var_10d4f67d = a_ents[# "prop 1"];
 
   if(isDefined(var_10d4f67d)) {
     var_10d4f67d thread scene::play("aib_zm_red_vign_peg_inair_flapattack_01", "loop", var_10d4f67d);
@@ -375,8 +374,8 @@ function_9c1450b8(var_10d4f67d, n_player_index) {
   self.var_45bfef99 = 1;
 
   switch (self.zm_ai_category) {
-    case #"heavy":
-    case #"miniboss":
+    case # "heavy":
+    case # "miniboss":
       var_b1c1c5cf = zm_equipment::function_7d948481(0.1, 0.25, 0.25, 1);
       var_5d7b4163 = zm_equipment::function_379f6b5d(500, var_b1c1c5cf, 1, 4, 50);
       self thread function_7c333a0f(var_10d4f67d, var_5d7b4163, n_player_index);
@@ -397,7 +396,7 @@ function_90c53706(var_10d4f67d, n_player_index) {
 
   self function_97429d68(n_player_index);
 
-  if(self.archetype == #"zombie" || self.archetype == #"skeleton" || self.archetype == #"catalyst") {
+  if(self.archetype == # "zombie" || self.archetype == # "skeleton" || self.archetype == # "catalyst") {
     self playSound(#"hash_3fbc22745dc90009");
     gibserverutils::annihilate(self);
     self dodamage(self.health + 999, self.origin, e_player, e_player, "none", "MOD_UNKNOWN", 0, level.w_thunderstorm);
@@ -461,12 +460,11 @@ function_32b5113(ai_zombie) {
   }
 
   if(!isDefined(ai_zombie.zm_ai_category)) {
-
     if(isDefined(ai_zombie.archetype)) {
       println("<dev string:x38>" + ai_zombie.archetype + "<dev string:x5f>");
     }
 
-      return false;
+    return false;
   }
 
   return true;
@@ -482,15 +480,15 @@ function_97429d68(n_player_index) {
   if(!(isDefined(self.var_c6aafbdb) && self.var_c6aafbdb)) {
     self ai::stun();
 
-    if(self.archetype == #"zombie") {
+    if(self.archetype == # "zombie") {
       bhtnactionstartevent(self, "electrocute");
     }
   }
 
   self.var_c6aafbdb = 1;
-  self clientfield::set("" + #"hash_51b05e5d116438a9", n_player_index);
+  self clientfield::set("" + # "hash_51b05e5d116438a9", n_player_index);
   wait 0.3;
-  self clientfield::set("" + #"hash_51b05e5d116438a9", 0);
+  self clientfield::set("" + # "hash_51b05e5d116438a9", 0);
   self.var_c6aafbdb = 0;
   self ai::clear_stun();
 }
@@ -507,7 +505,7 @@ grenade_stolen_by_sam(weapon) {
 }
 
 function_72085d9() {
-  self waittilltimeout(30, #"hash_90cfd38343f41f2", #"death");
+  self waittilltimeout(30, # "hash_90cfd38343f41f2", # "death");
   self zm_utility::deactivate_zombie_point_of_interest();
   self notify(#"hash_7a19b162c9e303dc");
   arrayremovevalue(level.a_mdl_pegasus, self);

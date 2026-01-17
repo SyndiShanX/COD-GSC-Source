@@ -15,16 +15,16 @@
 #namespace achievements;
 
 function autoexec __init__sytem__() {
-  system::register("achievements", & __init__, undefined, undefined);
+  system::register("achievements", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_connect( & on_player_connect);
-  callback::on_ai_spawned( & on_ai_spawned);
-  callback::on_ai_damage( & on_ai_damage);
-  callback::on_ai_killed( & on_ai_killed);
-  callback::on_player_killed( & on_player_death);
-  spawner::add_archetype_spawn_function("wasp", & function_632712d7, 3);
+  callback::on_connect(&on_player_connect);
+  callback::on_ai_spawned(&on_ai_spawned);
+  callback::on_ai_damage(&on_ai_damage);
+  callback::on_ai_killed(&on_ai_killed);
+  callback::on_player_killed(&on_player_death);
+  spawner::add_archetype_spawn_function("wasp", &function_632712d7, 3);
   function_4462a8b7();
 }
 
@@ -52,21 +52,21 @@ function give_achievement(str_id, var_56503a18 = 0) {
 
 function on_player_connect() {
   self endon("disconnect");
-  self.var_75cf9e2e = spawnstruct();
+  self.var_75cf9e2e = spawnStruct();
   self.var_75cf9e2e.killindex = 0;
   self.var_75cf9e2e.var_940a9f6e = 0;
   self.var_75cf9e2e.kills = [];
   self.var_75cf9e2e.var_43311285 = [];
   self thread function_34eaa01b();
   self thread function_e587e1f2();
-  while (true) {
+  while(true) {
     self waittill("give_achievement", str_id);
     give_achievement(str_id);
   }
 }
 
 function function_5f2f7800(eplayer, levelname, difficulty) {
-  if(!isdefined(levelname) || !isdefined(level.var_a4d4c1e3[levelname])) {
+  if(!isDefined(levelname) || !isDefined(level.var_a4d4c1e3[levelname])) {
     return;
   }
   if(difficulty < 2) {
@@ -77,7 +77,7 @@ function function_5f2f7800(eplayer, levelname, difficulty) {
 
 function function_c3e7ff05(eplayer) {
   var_44a14bc7 = [];
-  for (index = 0; index <= 4; index++) {
+  for(index = 0; index <= 4; index++) {
     var_44a14bc7[index] = 0;
   }
   mission_list = skipto::function_23eda99c();
@@ -87,7 +87,7 @@ function function_c3e7ff05(eplayer) {
       continue;
     }
     highestdifficulty = eplayer getdstat("PlayerStatsByMap", mission, "highestStats", "HIGHEST_DIFFICULTY");
-    if(!isdefined(var_44a14bc7[highestdifficulty])) {
+    if(!isDefined(var_44a14bc7[highestdifficulty])) {
       var_44a14bc7[highestdifficulty] = 0;
     }
     var_44a14bc7[highestdifficulty]++;
@@ -114,7 +114,7 @@ function function_733a6065(eplayer, levelname, difficulty, var_10c5a3ef) {
 
 function function_34eaa01b() {
   self endon("disconnect");
-  while (true) {
+  while(true) {
     self waittill("wallrun_begin");
     v_start = self.origin;
     self waittill("wallrun_end");
@@ -149,7 +149,7 @@ function on_player_death(s_params) {
 }
 
 function private function_1121f26a(var_c856ad1d, evictim) {
-  if(isdefined(var_c856ad1d.hijacked_vehicle_entity)) {
+  if(isDefined(var_c856ad1d.hijacked_vehicle_entity)) {
     var_1efe785f = distance(var_c856ad1d.hijacked_vehicle_entity.origin, evictim.origin);
   } else {
     var_1efe785f = distance(var_c856ad1d.origin, evictim.origin);
@@ -167,10 +167,10 @@ function private function_1121f26a(var_c856ad1d, evictim) {
 }
 
 function private function_914b8688(player, evictim, weapon, einflictor) {
-  if(!isdefined(weapon)) {
+  if(!isDefined(weapon)) {
     return;
   }
-  if(!isdefined(player.var_58477d59)) {
+  if(!isDefined(player.var_58477d59)) {
     player.var_58477d59 = [];
     player.var_58477d59["CP_FLYING_WASP_KILL"] = 0;
     player.var_58477d59["CP_COMBAT_ROBOT_KILL"] = 0;
@@ -180,14 +180,14 @@ function private function_914b8688(player, evictim, weapon, einflictor) {
     function_9dab90e7(player);
     var_9663b3f1 = 1;
   } else {
-    if(isdefined(player.var_75cf9e2e.var_6ce188b0) && weapon.name == "gadget_unstoppable_force" || weapon.name == "gadget_unstoppable_force_upgraded") {
+    if(isDefined(player.var_75cf9e2e.var_6ce188b0) && weapon.name == "gadget_unstoppable_force" || weapon.name == "gadget_unstoppable_force_upgraded") {
       player.var_75cf9e2e.var_6ce188b0++;
       if(player.var_75cf9e2e.var_6ce188b0 >= 5) {
         player give_achievement("CP_UNSTOPPABLE_KILL");
       }
     } else {
-      if(isdefined(player.hijacked_vehicle_entity)) {
-        if(isdefined(player.hijacked_vehicle_entity.killcount)) {
+      if(isDefined(player.hijacked_vehicle_entity)) {
+        if(isDefined(player.hijacked_vehicle_entity.killcount)) {
           player.hijacked_vehicle_entity.killcount++;
         } else {
           player.hijacked_vehicle_entity.killcount = 1;
@@ -204,8 +204,8 @@ function private function_914b8688(player, evictim, weapon, einflictor) {
             player.var_58477d59["CP_COMBAT_ROBOT_KILL"] = 1;
           }
         }
-      } else if(isai(einflictor) && isdefined(einflictor.remote_owner) && einflictor.remote_owner == player) {
-        if(isdefined(einflictor.killcount)) {
+      } else if(isai(einflictor) && isDefined(einflictor.remote_owner) && einflictor.remote_owner == player) {
+        if(isDefined(einflictor.killcount)) {
           einflictor.killcount++;
         } else {
           einflictor.killcount = 1;
@@ -219,10 +219,10 @@ function private function_914b8688(player, evictim, weapon, einflictor) {
       }
     }
   }
-  if(isdefined(evictim.swarm) && !var_9663b3f1) {
+  if(isDefined(evictim.swarm) && !var_9663b3f1) {
     function_9dab90e7(player);
   }
-  if(isdefined(player.var_75cf9e2e.var_a4fb0163) && player.var_75cf9e2e.var_a4fb0163 >= 6) {
+  if(isDefined(player.var_75cf9e2e.var_a4fb0163) && player.var_75cf9e2e.var_a4fb0163 >= 6) {
     player give_achievement("CP_FIREFLIES_KILL");
   }
 }
@@ -245,7 +245,7 @@ function private function_2b2fb40b(player, var_aae1ed0d, weapon) {
 
 function private function_b1d71bd3(player, weapon) {
   var_4c26012 = getbaseweaponitemindex(weapon);
-  if(!isdefined(var_4c26012) || (var_4c26012 < 1 || var_4c26012 > 60)) {
+  if(!isDefined(var_4c26012) || (var_4c26012 < 1 || var_4c26012 > 60)) {
     return;
   }
   player.var_75cf9e2e.var_43311285[weapon.rootweapon.name] = gettime();
@@ -268,10 +268,10 @@ function private function_307b3ac3(eplayer, evictim, var_433291aa) {
   if(!evictim util::isentstunned() || evictim.team !== "axis") {
     return;
   }
-  if(!isdefined(eplayer.var_75cf9e2e.var_6a670270)) {
+  if(!isDefined(eplayer.var_75cf9e2e.var_6a670270)) {
     eplayer.var_75cf9e2e.var_6a670270 = [];
   }
-  if(!isdefined(eplayer.var_75cf9e2e.var_6a670270)) {
+  if(!isDefined(eplayer.var_75cf9e2e.var_6a670270)) {
     eplayer.var_75cf9e2e.var_6a670270 = [];
   } else if(!isarray(eplayer.var_75cf9e2e.var_6a670270)) {
     eplayer.var_75cf9e2e.var_6a670270 = array(eplayer.var_75cf9e2e.var_6a670270);
@@ -279,7 +279,7 @@ function private function_307b3ac3(eplayer, evictim, var_433291aa) {
   eplayer.var_75cf9e2e.var_6a670270[eplayer.var_75cf9e2e.var_6a670270.size] = gettime();
   startindex = eplayer.var_75cf9e2e.var_6a670270.size - 1;
   maxtime = gettime() - 3000;
-  for (var_7b5c89e6 = startindex; var_7b5c89e6 >= 0; var_7b5c89e6--) {
+  for(var_7b5c89e6 = startindex; var_7b5c89e6 >= 0; var_7b5c89e6--) {
     if(eplayer.var_75cf9e2e.var_6a670270[var_7b5c89e6] < maxtime) {
       arrayremoveindex(eplayer.var_75cf9e2e.var_6a670270, var_7b5c89e6);
     }
@@ -290,10 +290,10 @@ function private function_307b3ac3(eplayer, evictim, var_433291aa) {
 }
 
 function private function_c4f2de38(player, victim, inflictor) {
-  if(!isdefined(inflictor.weapon) || !isdefined(self.scriptvehicletype) || self.scriptvehicletype != "wasp" || inflictor.weapon.type != "grenade") {
+  if(!isDefined(inflictor.weapon) || !isDefined(self.scriptvehicletype) || self.scriptvehicletype != "wasp" || inflictor.weapon.type != "grenade") {
     return;
   }
-  if(!isdefined(inflictor.var_9bbaef3)) {
+  if(!isDefined(inflictor.var_9bbaef3)) {
     inflictor.var_9bbaef3 = 1;
   } else {
     inflictor.var_9bbaef3++;
@@ -304,8 +304,8 @@ function private function_c4f2de38(player, victim, inflictor) {
 }
 
 function function_17ec453c(eattacker, evictim, var_433291aa) {
-  if(isdefined(eattacker.iffowner) && isplayer(eattacker.iffowner)) {
-    if(isdefined(eattacker.killcount)) {
+  if(isDefined(eattacker.iffowner) && isplayer(eattacker.iffowner)) {
+    if(isDefined(eattacker.killcount)) {
       eattacker.killcount++;
     } else {
       eattacker.killcount = 1;
@@ -317,7 +317,7 @@ function function_17ec453c(eattacker, evictim, var_433291aa) {
 }
 
 function function_99d6210d(eplayer, evictim) {
-  if(isdefined(evictim.var_74390712) && evictim.var_74390712 == eplayer && evictim.team !== "allies") {
+  if(isDefined(evictim.var_74390712) && evictim.var_74390712 == eplayer && evictim.team !== "allies") {
     eplayer give_achievement("CP_OBSTRUCTED_KILL");
   }
 }
@@ -348,7 +348,7 @@ function on_ai_killed(s_params) {
 function function_632712d7(n_count) {}
 
 function private function_9dab90e7(player) {
-  if(!isdefined(player.var_75cf9e2e.var_a4fb0163)) {
+  if(!isDefined(player.var_75cf9e2e.var_a4fb0163)) {
     player.var_75cf9e2e.var_a4fb0163 = 1;
   } else {
     player.var_75cf9e2e.var_a4fb0163++;
@@ -357,7 +357,7 @@ function private function_9dab90e7(player) {
 
 function private function_e587e1f2() {
   self endon("disconnect");
-  while (true) {
+  while(true) {
     self waittill("gun_level_complete", rewardxp, attachmentindex, itemindex, rankid, islastrank);
     if(islastrank && (itemindex >= 1 && itemindex <= 60)) {
       self give_achievement("CP_ALL_WEAPON_ATTACHMENTS");
@@ -375,7 +375,7 @@ function checkweaponchallengecomplete(var_e9af7d73) {
 function function_b2d1aafa() {
   if(level.cybercom.var_12f85dec == 0) {
     foreach(player in level.players) {
-      if(!isdefined(player.var_75cf9e2e.var_a4fb0163)) {
+      if(!isDefined(player.var_75cf9e2e.var_a4fb0163)) {
         continue;
       }
       player.var_75cf9e2e.var_a4fb0163 = undefined;
@@ -388,7 +388,7 @@ function function_386309ce(player) {
 }
 
 function function_6903d776(var_44c1c544) {
-  if(isdefined(var_44c1c544.killcount)) {
+  if(isDefined(var_44c1c544.killcount)) {
     var_44c1c544.killcount = undefined;
   }
 }

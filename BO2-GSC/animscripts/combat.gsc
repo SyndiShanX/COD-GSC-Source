@@ -40,7 +40,7 @@ combatinit() {
 
 combatglobalsinit() {
   if(!isDefined(anim.combatglobals)) {
-    anim.combatglobals = spawnstruct();
+    anim.combatglobals = spawnStruct();
     anim.combatglobals.min_exposed_grenade_dist = 750;
     anim.combatglobals.min_exposed_grenade_dist_player = 500;
     anim.combatglobals.min_exposed_grenade_distsq = 250000;
@@ -186,8 +186,7 @@ exposedcombatmainloop() {
       continue;
     }
     if(aimedatshootentorpos()) {
-      if(exposedcombatrambo()) {
-      } else {
+      if(exposedcombatrambo()) {} else {
         self animscripts\debug::debugpushstate("exposedCombatShootUntilNeedToTurn");
 
         self exposedcombatshootuntilneedtoturn();
@@ -674,7 +673,7 @@ tryexposedreacquire() {
   }
 
   dirtoenemy = vectornormalize(self.enemy.origin - self.origin);
-  forward = anglestoforward(self.angles);
+  forward = anglesToForward(self.angles);
 
   if(vectordot(dirtoenemy, forward) < 0.5) {
     self.reacquire_state = 0;

@@ -9,7 +9,6 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_weapons;
-
 #namespace zm_trial_wallbuy_count;
 
 autoexec __init__system__() {
@@ -24,7 +23,7 @@ __init__() {
   zm_trial::register_challenge(#"wallbuy_count", &on_begin, &on_end);
 }
 
-private on_begin(var_b3d469ae) {
+on_begin(var_b3d469ae) {
   level.var_21c2f32a = zm_trial::function_5769f26a(var_b3d469ae);
   level.var_943b6e2b = array();
 
@@ -37,7 +36,7 @@ private on_begin(var_b3d469ae) {
   level thread wallbuy_watcher();
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   if(!round_reset) {
     var_696c3b4 = array();
 
@@ -74,8 +73,8 @@ is_active() {
   return isDefined(challenge);
 }
 
-private wallbuy_watcher() {
-  level endon(#"hash_31c14df051f6c165", #"game_ended");
+wallbuy_watcher() {
+  level endon(#"hash_31c14df051f6c165", # "game_ended");
 
   while(true) {
     s_notify = level waittill(#"weapon_bought");

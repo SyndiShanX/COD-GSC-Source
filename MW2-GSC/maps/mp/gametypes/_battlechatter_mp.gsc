@@ -29,7 +29,7 @@ init() {
 }
 
 onPlayerConnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connected", player);
 
     player thread onPlayerSpawned();
@@ -39,13 +39,13 @@ onPlayerConnect() {
 onPlayerSpawned() {
   self endon("disconnect");
 
-  for (;;) {
+  for(;;) {
     self waittill("spawned_player");
 
     // help players be stealthy in splitscreen by not announcing their intentions
-    if(level.splitscreen)
+    if(level.splitscreen) {
       continue;
-
+    }
     self thread claymoreTracking();
     self thread reloadTracking();
     self thread grenadeTracking();
@@ -56,7 +56,7 @@ claymoreTracking() {
   self endon("death");
   self endon("disconnect");
 
-  while (1) {
+  while(1) {
     self waittill("begin_firing");
     weaponName = self getCurrentWeapon();
     if(weaponName == "claymore_mp")
@@ -68,7 +68,7 @@ reloadTracking() {
   self endon("death");
   self endon("disconnect");
 
-  for (;;) {
+  for(;;) {
     self waittill("reload_start");
     level thread sayLocalSound(self, "reload");
   }
@@ -78,7 +78,7 @@ grenadeTracking() {
   self endon("death");
   self endon("disconnect");
 
-  for (;;) {
+  for(;;) {
     self waittill("grenade_fire", grenade, weaponName);
 
     if(weaponName == "frag_grenade_mp")
@@ -107,9 +107,9 @@ sayLocalSound(player, soundType) {
   player endon("death");
   player endon("disconnect");
 
-  if(isSpeakerInRange(player))
+  if(isSpeakerInRange(player)) {
     return;
-
+  }
   if(player.team != "spectator") {
     prefix = maps\mp\gametypes\_teams::getTeamVoicePrefix(player.team) + "1_";
     soundAlias = prefix + level.bcSounds[soundType];
@@ -141,8 +141,8 @@ isSpeakerInRange(player) {
   distSq = 1000 * 1000;
 
   // to prevent player switch to spectator after throwing a granade causing damage to someone and result in attacker.pers["team"] = "spectator"
-  if(isdefined(player) && isdefined(player.pers["team"]) && player.pers["team"] != "spectator") {
-    for (index = 0; index < level.speakers[player.pers["team"]].size; index++) {
+  if(isDefined(player) && isDefined(player.pers["team"]) && player.pers["team"] != "spectator") {
+    for(index = 0; index < level.speakers[player.pers["team"]].size; index++) {
       teammate = level.speakers[player.pers["team"]][index];
       if(teammate == player)
         return true;
@@ -162,10 +162,10 @@ addSpeaker(player, team) {
 // this is lazy... fix up later by tracking ID's and doing array slot swapping
 removeSpeaker(player, team) {
   newSpeakers = [];
-  for (index = 0; index < level.speakers[team].size; index++) {
-    if(level.speakers[team][index] == player)
+  for(index = 0; index < level.speakers[team].size; index++) {
+    if(level.speakers[team][index] == player) {
       continue;
-
+    }
     newSpeakers[newSpeakers.size] = level.speakers[team][index];
   }
 

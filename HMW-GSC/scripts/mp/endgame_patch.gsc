@@ -6,7 +6,7 @@ init() {
 }
 
 endgame_stub(var_0, var_1, var_2) {
-  if(!isdefined(var_2))
+  if(!isDefined(var_2))
     var_2 = 0;
 
   if(game["state"] == "postgame" || level.gameended || (isDefined(level.nukeIncoming) && !var_2) && (!isDefined(level.gtnw) || !level.gtnw)) {
@@ -29,21 +29,21 @@ endgame_stub(var_0, var_1, var_2) {
   setmatchdata("endTimeUTC", getsystemtime());
   maps\mp\gametypes\_gamelogic::checkgameendchallenges();
 
-  if(isdefined(var_0) && isstring(var_0) && maps\mp\_utility::isovertimetext(var_0)) {
+  if(isDefined(var_0) && isstring(var_0) && maps\mp\_utility::isovertimetext(var_0)) {
     level.finalkillcam_winner = "none";
     level.finalkillcam_timegameended[level.finalkillcam_winner] = maps\mp\_utility::getsecondspassed();
     maps\mp\gametypes\_gamelogic::endgameovertime(var_0, var_1);
     return;
   }
 
-  if(isdefined(var_0) && isstring(var_0) && var_0 == "halftime") {
+  if(isDefined(var_0) && isstring(var_0) && var_0 == "halftime") {
     level.finalkillcam_winner = "none";
     level.finalkillcam_timegameended[level.finalkillcam_winner] = maps\mp\_utility::getsecondspassed();
     maps\mp\gametypes\_gamelogic::endgamehalftime(var_1);
     return;
   }
 
-  if(isdefined(level.finalkillcam_winner))
+  if(isDefined(level.finalkillcam_winner))
     level.finalkillcam_timegameended[level.finalkillcam_winner] = maps\mp\_utility::getsecondspassed();
 
   game["roundsPlayed"]++;
@@ -57,7 +57,7 @@ endgame_stub(var_0, var_1, var_2) {
 
     maps\mp\gametypes\_gamescore::updateteamscore("axis");
     maps\mp\gametypes\_gamescore::updateteamscore("allies");
-  } else if(isdefined(var_0) && isplayer(var_0))
+  } else if(isDefined(var_0) && isplayer(var_0))
     game["roundsWon"][var_0.guid]++;
 
   maps\mp\gametypes\_gamescore::updateplacement();
@@ -73,7 +73,7 @@ endgame_stub(var_0, var_1, var_2) {
   if(!maps\mp\_utility::wasonlyround() && !var_2) {
     maps\mp\gametypes\_gamelogic::displayroundend(var_0, var_1);
 
-    if(isdefined(level.finalkillcam_winner)) {
+    if(isDefined(level.finalkillcam_winner)) {
       foreach(var_5 in level.players)
       var_5 notify("reset_outcome");
 
@@ -103,7 +103,7 @@ endgame_stub(var_0, var_1, var_2) {
       var_1 = maps\mp\gametypes\_gamelogic::updateendreasontext(var_0);
   }
 
-  if(!isdefined(game["clientMatchDataDef"])) {
+  if(!isDefined(game["clientMatchDataDef"])) {
     game["clientMatchDataDef"] = "mp/clientmatchdata.ddl";
     setclientmatchdatadef(game["clientMatchDataDef"]);
   }
@@ -123,7 +123,7 @@ endgame_stub(var_0, var_1, var_2) {
   maps\mp\gametypes\_gamelogic::displaygameend(var_0, var_1);
   var_12 = gettime();
 
-  if(isdefined(level.finalkillcam_winner) && maps\mp\_utility::wasonlyround()) {
+  if(isDefined(level.finalkillcam_winner) && maps\mp\_utility::wasonlyround()) {
     foreach(var_5 in level.players)
     var_5 notify("reset_outcome");
 
@@ -191,7 +191,7 @@ endgame_stub(var_0, var_1, var_2) {
   tournamentreportendofgame();
   var_22 = 0;
 
-  if(isdefined(level.endgamewaitfunc))
+  if(isDefined(level.endgamewaitfunc))
     [[level.endgamewaitfunc]](var_2, level.postgamenotifies, var_22, var_0);
   else if(!var_2 && !level.postgamenotifies) {
     if(!maps\mp\_utility::wasonlyround())
@@ -204,12 +204,12 @@ endgame_stub(var_0, var_1, var_2) {
   var_23 = "_gamelogic.gsc";
   var_24 = "all";
 
-  if(level.teambased && isdefined(var_0))
+  if(level.teambased && isDefined(var_0))
     var_24 = var_0;
 
   var_25 = "undefined";
 
-  if(isdefined(var_1)) {
+  if(isDefined(var_1)) {
     switch (var_1) {
       case 1:
         var_25 = "MP_SCORE_LIMIT_REACHED";
@@ -276,7 +276,7 @@ endgame_stub(var_0, var_1, var_2) {
     }
   }
 
-  if(!isdefined(var_12))
+  if(!isDefined(var_12))
     var_12 = -1;
 
   var_26 = 15;
@@ -284,7 +284,7 @@ endgame_stub(var_0, var_1, var_2) {
   var_28 = getmatchdata("playerCount");
   var_29 = getmatchdata("lifeCount");
 
-  if(!isdefined(level.matchdata)) {
+  if(!isDefined(level.matchdata)) {
     var_30 = 0;
     var_31 = 0;
     var_32 = 0;
@@ -293,37 +293,37 @@ endgame_stub(var_0, var_1, var_2) {
     var_35 = 0;
     var_36 = 0;
   } else {
-    if(isdefined(level.matchdata["botJoinCount"]))
+    if(isDefined(level.matchdata["botJoinCount"]))
       var_30 = level.matchdata["botJoinCount"];
     else
       var_30 = 0;
 
-    if(isdefined(level.matchdata["deathCount"]))
+    if(isDefined(level.matchdata["deathCount"]))
       var_31 = level.matchdata["deathCount"];
     else
       var_31 = 0;
 
-    if(isdefined(level.matchdata["badSpawnDiedTooFastCount"]))
+    if(isDefined(level.matchdata["badSpawnDiedTooFastCount"]))
       var_32 = level.matchdata["badSpawnDiedTooFastCount"];
     else
       var_32 = 0;
 
-    if(isdefined(level.matchdata["badSpawnKilledTooFastCount"]))
+    if(isDefined(level.matchdata["badSpawnKilledTooFastCount"]))
       var_33 = level.matchdata["badSpawnKilledTooFastCount"];
     else
       var_33 = 0;
 
-    if(isdefined(level.matchdata["badSpawnDmgDealtCount"]))
+    if(isDefined(level.matchdata["badSpawnDmgDealtCount"]))
       var_34 = level.matchdata["badSpawnDmgDealtCount"];
     else
       var_34 = 0;
 
-    if(isdefined(level.matchdata["badSpawnDmgReceivedCount"]))
+    if(isDefined(level.matchdata["badSpawnDmgReceivedCount"]))
       var_35 = level.matchdata["badSpawnDmgReceivedCount"];
     else
       var_35 = 0;
 
-    if(isdefined(level.matchdata["badSpawnByAnyMeansCount"]))
+    if(isDefined(level.matchdata["badSpawnByAnyMeansCount"]))
       var_36 = level.matchdata["badSpawnByAnyMeansCount"];
     else
       var_36 = 0;
@@ -332,8 +332,8 @@ endgame_stub(var_0, var_1, var_2) {
   var_37 = 0;
   reconevent("script_mp_match_end: script_file %s, gameTime %d, match_winner %s, win_reason %s, version %d, joinCount %d, botJoinCount %d, spawnCount %d, deathCount %d, badSpawnDiedTooFastCount %d, badSpawnKilledTooFastCount %d, badSpawnDmgDealtCount %d, badSpawnDmgReceivedCount %d, badSpawnByAnyMeansCount %d, sightTraceMethodsUsed %d", var_23, var_12, var_24, var_25, var_27, var_28, var_30, var_29, var_31, var_32, var_33, var_34, var_35, var_36, var_37);
 
-  if(isdefined(level.ishorde) && level.ishorde) {
-    if(isdefined(level.zombiescompleted) && level.zombiescompleted)
+  if(isDefined(level.ishorde) && level.ishorde) {
+    if(isDefined(level.zombiescompleted) && level.zombiescompleted)
       setdvar("cg_drawCrosshair", 1);
   }
 
@@ -345,7 +345,7 @@ giveplayerscore_stub(var_0, var_1, var_2) {
   if(isDefined(level.nukeIncoming)) {
     return;
   }
-  if(isdefined(var_1.owner))
+  if(isDefined(var_1.owner))
     var_1 = var_1.owner;
 
   if(!isplayer(var_1)) {
@@ -385,7 +385,7 @@ _setteamscore_stub(var_0, var_1) {
   game["teamScores"][var_0] = var_1;
   maps\mp\gametypes\_gamescore::updateteamscore(var_0);
 
-  if(maps\mp\_utility::inovertime() && !isdefined(level.overtimescorewinoverride) || isdefined(level.overtimescorewinoverride) && !level.overtimescorewinoverride)
+  if(maps\mp\_utility::inovertime() && !isDefined(level.overtimescorewinoverride) || isDefined(level.overtimescorewinoverride) && !level.overtimescorewinoverride)
     thread maps\mp\gametypes\_gamelogic::onscorelimit();
   else {
     thread maps\mp\gametypes\_gamelogic::checkteamscorelimitsoon(var_0);

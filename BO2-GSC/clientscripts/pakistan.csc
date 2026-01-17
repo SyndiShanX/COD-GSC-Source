@@ -127,7 +127,7 @@ toggle_flame_char_actor(localclientnum, set, newent) {
 
 toggle_water_fx_actor(localclientnum, set, newent) {
   if(set)
-    self.fx_handle = playfxontag(localclientnum, level._effect["water_loop"], self, "tag_origin");
+    self.fx_handle = playFXOnTag(localclientnum, level._effect["water_loop"], self, "tag_origin");
   else
     deletefx(localclientnum, self.fx_handle);
 }

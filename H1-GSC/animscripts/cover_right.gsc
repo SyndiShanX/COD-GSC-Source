@@ -103,7 +103,7 @@ set_animarray_standing_right() {
   self.hideyawoffset = -90;
   self.a.array = animscripts\utility::lookupanimarray("cover_right_stand");
 
-  if(isdefined(anim.ramboanims)) {
+  if(isDefined(anim.ramboanims)) {
     self.a.array["rambo90"] = anim.ramboanims.coverright90;
     self.a.array["rambo45"] = anim.ramboanims.coverright45;
     self.a.array["grenade_rambo"] = anim.ramboanims.coverrightgrenade;

@@ -35,7 +35,7 @@ escape_setup(is_not_intro) {
   level.vh_player_soct.z_target_offset_override = 40;
 
   if(level.player get_temp_stat(1)) {
-    level.vh_player_soct setmodel("veh_t6_mil_super_soc_t");
+    level.vh_player_soct setModel("veh_t6_mil_super_soc_t");
     level.vh_player_soct.n_intensity_min = 6;
   }
 
@@ -207,10 +207,10 @@ vehicle_switch(nd_start) {
 
       if(level.player.vehicle_state == 1) {
         soct_to_drone_setup(nd_start);
-        level.player playsound("uin_fire_scout_transition");
+        level.player playSound("uin_fire_scout_transition");
       } else if(level.player.vehicle_state == 2) {
         drone_to_soct_setup(nd_start);
-        level.player playsound("uin_fire_scout_transition_b");
+        level.player playSound("uin_fire_scout_transition_b");
       }
 
       flag_set("vehicle_switch_fade_in_started");
@@ -251,7 +251,7 @@ player_soct_switch_setup(nd_start) {
   self.driver = level.player;
 
   if(isDefined(level.override_player_scot_node)) {
-    self launchvehicle(anglestoforward(self.angles) * 50 * 17.6);
+    self launchvehicle(anglesToForward(self.angles) * 50 * 17.6);
     level.override_player_scot_node = undefined;
   }
 
@@ -329,7 +329,7 @@ salazar_soct_speed_control() {
   self.n_speed_max = 71;
 
   while(true) {
-    v_player_forward = anglestoforward(level.vh_player_soct.angles);
+    v_player_forward = anglesToForward(level.vh_player_soct.angles);
     v_salazar_pos = (self.origin[0], self.origin[1], level.vh_player_soct.origin[2]);
     n_dot_to_player = vectordot(v_player_forward, vectornormalize(v_salazar_pos - level.vh_player_soct.origin));
 
@@ -377,14 +377,14 @@ player_in_soct() {
   if(flag("player_drone_death_collision")) {
     return;
   }
-  v_player_forward = anglestoforward(level.vh_player_soct.angles);
+  v_player_forward = anglesToForward(level.vh_player_soct.angles);
   v_heli_pos = (self.origin[0], self.origin[1], level.vh_player_soct.origin[2]);
   n_dot_to_heli = vectordot(v_player_forward, vectornormalize(v_heli_pos - level.vh_player_soct.origin));
 
   if(n_dot_to_heli > 0.4)
     n_speed_new = self _normal_speed_control();
   else if(n_dot_to_heli < -0.4) {
-    v_heli_forward = anglestoforward(self.angles);
+    v_heli_forward = anglesToForward(self.angles);
     n_dot_directions = vectordot(v_player_forward, v_heli_forward);
 
     if(n_dot_directions > 0)
@@ -428,7 +428,7 @@ _back_on_track_wait() {
 
 _drone_dot_to_player() {
   self endon("death");
-  v_drone_forward = anglestoforward(self.angles);
+  v_drone_forward = anglesToForward(self.angles);
   v_heli_pos = (self.origin[0], self.origin[1], level.vh_player_soct.origin[2]);
   n_dot_to_player = vectordot(v_drone_forward, vectornormalize(level.vh_player_soct.origin - v_heli_pos));
   return n_dot_to_player;
@@ -504,7 +504,7 @@ watch_for_boost() {
 
   while(true) {
     speed = self getspeedmph();
-    forward = anglestoforward(self.angles);
+    forward = anglesToForward(self.angles);
     bcansprint = bmeterempty == 0 && speed >= boost_min_start_speed && (isDefined(self.driver) && self.driver == level.player);
     bpressingsprint = level.player jumpbuttonpressed();
 
@@ -519,7 +519,7 @@ watch_for_boost() {
 
         if(speed < self.max_sprint_speed) {
           self launchvehicle(forward * 400 * 0.05);
-          self playsound("veh_soct_boost");
+          self playSound("veh_soct_boost");
         }
 
         if(!level.player_soct_sprint_fx_active) {
@@ -584,7 +584,7 @@ boost_fx_loop() {
   self endon("done_boosting");
 
   while(true) {
-    playfxontag(level._effect["soct_boost_fx"], self, "tag_origin");
+    playFXOnTag(level._effect["soct_boost_fx"], self, "tag_origin");
     wait 0.2;
   }
 }
@@ -752,7 +752,7 @@ temp_magic_bullet_shield(n_seconds_to_wait) {
 }
 
 enemy_respawn() {
-  a_respawn_triggers = getentarray("enemy_soct_respawn", "targetname");
+  a_respawn_triggers = getEntArray("enemy_soct_respawn", "targetname");
   array_thread(a_respawn_triggers, ::enemy_respawn_listener);
 }
 
@@ -760,7 +760,7 @@ enemy_respawn_listener() {
   self waittill("trigger");
 
   while(level.player istouching(self)) {
-    a_soct = getentarray("generic_enemy_soct", "script_noteworthy");
+    a_soct = getEntArray("generic_enemy_soct", "script_noteworthy");
     a_soct = array_removedead(a_soct);
 
     if(a_soct.size < 3 && !is_lane_occupied(self.script_noteworthy)) {
@@ -814,13 +814,13 @@ vehicle_collision_watcher() {
           if(ent == level.vh_player_soct)
             level notify("takedown");
 
-          self setmodel("veh_t6_mil_soc_t_dead");
+          self setModel("veh_t6_mil_soc_t_dead");
           self clearvehgoalpos();
           self.dontfreeme = 1;
           level.vh_player_soct dodamage(200, level.vh_player_soct.origin);
           self launchvehicle(vectornormalize(level.vh_player_soct.velocity) * 75, location, 0, 1);
           earthquake(0.75, 1.0, self.origin, 512, level.player);
-          self playsound("evt_soct_vehicle_hit");
+          self playSound("evt_soct_vehicle_hit");
 
           if(isDefined(self.impact_slows_player_scale))
             level thread vehicle_collision_slows_down_player(self.impact_slows_player_scale);
@@ -903,7 +903,7 @@ soct_death_launch() {
     self.dontfreeme = 1;
     self getoffpath();
     self launchvehicle(vectornormalize(self.velocity) * 100 + vectorscale((0, 0, 1), 50.0), point, 0, 1);
-    self playsound("evt_enemy_soct_flip");
+    self playSound("evt_enemy_soct_flip");
     wait 1.5;
     self.dontfreeme = 0;
   }
@@ -954,8 +954,8 @@ firescout_fire_missiles() {
 }
 
 get_player_aim_pos(n_range, e_to_ignore) {
-  v_start_pos = level.player geteye();
-  v_dir = anglestoforward(self gettagangles("tag_flash"));
+  v_start_pos = level.player getEye();
+  v_dir = anglesToForward(self gettagangles("tag_flash"));
   v_end_pos = v_start_pos + v_dir * n_range;
   v_hit_pos = v_end_pos;
   return v_hit_pos;
@@ -989,12 +989,12 @@ run_over() {
 run_over_override(e_inflictor, e_attacker, n_damage, n_flags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, n_model_index, psoffsettime, str_bone_name) {
   if(str_means_of_death == "MOD_CRUSH") {
     if(!isDefined(self.alreadylaunched)) {
-      level.player playsound("evt_soct_ai_hit");
+      level.player playSound("evt_soct_ai_hit");
       self.alreadylaunched = 1;
       self startragdoll(1);
       v_launch = vectorscale((0, 0, 1), 100.0);
       v_up = (0, 0, 1);
-      v_dir = anglestoforward(e_inflictor.angles);
+      v_dir = anglesToForward(e_inflictor.angles);
       dp = vectordot(v_up, v_dir);
 
       if(dp < 0) {
@@ -1005,7 +1005,7 @@ run_over_override(e_inflictor, e_attacker, n_damage, n_flags, str_means_of_death
         v_up = undefined;
 
       if(randomint(100) < 40)
-        v_launch = v_launch + anglestoforward(e_inflictor.angles) * 300;
+        v_launch = v_launch + anglesToForward(e_inflictor.angles) * 300;
 
       if(isDefined(v_up))
         v_launch = v_launch + v_up;
@@ -1233,10 +1233,10 @@ soct_behind_the_player_logic(a_soct_behind_the_player) {
 }
 
 can_intersect_player(vh_enemy) {
-  n_player_start = self.origin - anglestoforward(self.angles) * 2048;
-  n_player_end = self.origin + anglestoforward(self.angles) * 2048;
-  n_enemy_start = vh_enemy.origin - anglestoforward(vh_enemy.angles) * 2048;
-  n_enemy_end = vh_enemy.origin + anglestoforward(vh_enemy.angles) * 2048;
+  n_player_start = self.origin - anglesToForward(self.angles) * 2048;
+  n_player_end = self.origin + anglesToForward(self.angles) * 2048;
+  n_enemy_start = vh_enemy.origin - anglesToForward(vh_enemy.angles) * 2048;
+  n_enemy_end = vh_enemy.origin + anglesToForward(vh_enemy.angles) * 2048;
   n_denominator = (n_enemy_end[1] - n_enemy_start[1]) * (n_player_end[0] - n_player_start[0]) - (n_enemy_end[0] - n_enemy_start[0]) * (n_player_end[1] - n_player_start[1]);
 
   if(n_denominator != 0) {
@@ -1253,7 +1253,7 @@ can_intersect_player(vh_enemy) {
 }
 
 is_soct_in_front_of_player() {
-  v_player_forward = anglestoforward(level.player.angles);
+  v_player_forward = anglesToForward(level.player.angles);
   v_enemy_pos = (self.origin[0], self.origin[1], level.player.origin[2]);
   n_dot_to_player = vectordot(v_player_forward, vectornormalize(v_enemy_pos - level.player.origin));
 
@@ -1264,7 +1264,7 @@ is_soct_in_front_of_player() {
 }
 
 is_soct_behind_the_player() {
-  v_player_forward = anglestoforward(level.player.angles);
+  v_player_forward = anglesToForward(level.player.angles);
   v_enemy_pos = (self.origin[0], self.origin[1], level.player.origin[2]);
   n_dot_to_player = vectordot(v_player_forward, vectornormalize(v_enemy_pos - level.player.origin));
 
@@ -1277,12 +1277,12 @@ is_soct_behind_the_player() {
 is_player_looking_at_soct(vh_soct) {
   v_eye = level.player get_eye();
   v_origin = vh_soct.origin + vectorscale((0, 0, 1), 32.0);
-  v_delta = anglestoforward(vectortoangles(v_origin - v_eye));
-  v_view = anglestoforward(level.player getplayerangles());
+  v_delta = anglesToForward(vectortoangles(v_origin - v_eye));
+  v_view = anglesToForward(level.player getplayerangles());
   n_dot = vectordot(v_delta, v_view);
 
   if(n_dot >= 0.95) {
-    a_bullet_trace_info = bullettrace(v_eye, v_origin, 0, level.vh_player_soct, 1, 1);
+    a_bullet_trace_info = bulletTrace(v_eye, v_origin, 0, level.vh_player_soct, 1, 1);
 
     if(isDefined(a_bullet_trace_info["entity"]) && vh_soct == a_bullet_trace_info["entity"])
       return true;
@@ -1341,7 +1341,7 @@ enemy_soct_speed_control(override_max_speed_ahead) {
     if(level.player.vehicle_state != 2) {
       dist = distance(level.player.origin, self.origin);
       v_dir = vectornormalize(level.player.origin - self.origin);
-      v_forward = anglestoforward(self.angles);
+      v_forward = anglesToForward(self.angles);
       dp = vectordot(v_dir, v_forward);
     }
 
@@ -1392,7 +1392,7 @@ enemy_soct_speed_control(override_max_speed_ahead) {
     }
 
     if(level.player.vehicle_state == 2 || isDefined(override_max_speed_ahead)) {
-      v_player_forward = anglestoforward(level.player.angles);
+      v_player_forward = anglesToForward(level.player.angles);
       v_enemy_pos = (self.origin[0], self.origin[1], level.player.origin[2]);
       n_dot_to_player = vectordot(v_player_forward, vectornormalize(v_enemy_pos - level.player.origin));
 
@@ -1426,7 +1426,7 @@ npc_soct_rams_player_soct(player_soct) {
 
   for(i = 0; i < 3; i++) {
     level.player playrumbleonentity("damage_heavy");
-    level.player playsound("exp_veh_large");
+    level.player playSound("exp_veh_large");
     player_soct launchvehicle(vectornormalize(player_soct.velocity) * 30.0);
     player_soct launchvehicle(up * 100.0);
     wait 0.1;
@@ -1588,7 +1588,7 @@ print_speed_in_mph() {
 
 print_number_respawners() {
   while(true) {
-    a_soct = getentarray("generic_enemy_soct", "script_noteworthy");
+    a_soct = getEntArray("generic_enemy_soct", "script_noteworthy");
     a_soct = array_removedead(a_soct);
     iprintlnbold(a_soct.size);
     wait 0.05;
@@ -1647,7 +1647,7 @@ wait_restore_player_soct(nd_start) {
   wait 0.05;
 
   if(isDefined(level.player.watch_for_boost))
-    level.vh_player_soct launchvehicle(anglestoforward(level.vh_player_soct.angles) * 22 * 17.6);
+    level.vh_player_soct launchvehicle(anglesToForward(level.vh_player_soct.angles) * 22 * 17.6);
 
   clientnotify("enter_soct");
 }
@@ -1903,7 +1903,7 @@ update_vehicle_damage_timer() {
         missionfailedwrapper();
       } else {
         soct_swap_to_dead_version();
-        playfxontag(level._effect["soct_player_exp"], level.vh_player_soct, "body_animate_jnt");
+        playFXOnTag(level._effect["soct_player_exp"], level.vh_player_soct, "body_animate_jnt");
         playsoundatposition("evt_soct_explo_long", (0, 0, 0));
         wait 2.0;
         missionfailedwrapper();
@@ -1955,7 +1955,7 @@ begin_armor_regen() {
 }
 
 fx_exp_model_triggered(str_model_name, v_origin, fx_name, fx_dir, player_collision, str_play_sound, a_str_more_models_to_delete, exploder_id) {
-  a_ents = getentarray(str_model_name, "targetname");
+  a_ents = getEntArray(str_model_name, "targetname");
 
   for(i = 0; i < a_ents.size; i++)
     a_ents[i] delete();
@@ -1972,7 +1972,7 @@ fx_exp_model_triggered(str_model_name, v_origin, fx_name, fx_dir, player_collisi
     if(exploder_id == 732)
       exploder(733);
   } else if(isDefined(fx_name))
-    playfx(level._effect[fx_name], v_origin, fx_dir);
+    playFX(level._effect[fx_name], v_origin, fx_dir);
 
   if(!isDefined(str_play_sound))
     str_play_sound = "evt_soct_window_explode_2";
@@ -2202,7 +2202,7 @@ drone_follow_linked_structs(str_struct, start_speed, use_near_goal, only_use_tur
 }
 
 multiple_trigger_waits(str_trigger_name, str_trigger_notify) {
-  a_triggers = getentarray(str_trigger_name, "targetname");
+  a_triggers = getEntArray(str_trigger_name, "targetname");
 
   for(i = 0; i < a_triggers.size; i++)
     a_triggers[i] thread multiple_trigger_wait(str_trigger_notify);
@@ -2492,7 +2492,7 @@ bounce_player_after_water_sheeting(bounce_scale) {
   if(!isDefined(bounce_scale))
     bounce_scale = 1.0;
 
-  v_dir = vectornormalize(anglestoforward(level.vh_player_soct.angles));
+  v_dir = vectornormalize(anglesToForward(level.vh_player_soct.angles));
   v_down = (0, 0, -1);
   dp = vectordot(v_dir, v_down);
 
@@ -2601,15 +2601,15 @@ player_drone_damage_states() {
   loop_time = 2.0;
   self thread oxygen_mask_crack_watcher();
   damage = [];
-  damage[1] = spawnstruct();
+  damage[1] = spawnStruct();
   damage[1].frac = 0.9;
   damage[1].start_time = undefined;
   damage[1].client_effect_on_id = 5;
-  damage[2] = spawnstruct();
+  damage[2] = spawnStruct();
   damage[2].frac = 0.65;
   damage[2].start_time = undefined;
   damage[2].client_effect_on_id = 7;
-  damage[3] = spawnstruct();
+  damage[3] = spawnStruct();
   damage[3].frac = 0.4;
   damage[3].start_time = undefined;
   damage[3].client_effect_on_id = 9;
@@ -2654,15 +2654,15 @@ player_soct_damage_states() {
   self endon("death");
   loop_time = 4.0;
   damage = [];
-  damage[1] = spawnstruct();
+  damage[1] = spawnStruct();
   damage[1].frac = 0.8;
   damage[1].start_time = undefined;
   damage[1].client_effect_on_id = 13;
-  damage[2] = spawnstruct();
+  damage[2] = spawnStruct();
   damage[2].frac = 0.65;
   damage[2].start_time = undefined;
   damage[2].client_effect_on_id = 14;
-  damage[3] = spawnstruct();
+  damage[3] = spawnStruct();
   damage[3].frac = 0.35;
   damage[3].start_time = undefined;
   damage[3].client_effect_on_id = 15;
@@ -2802,7 +2802,7 @@ player_soct_damage_override(einflictor, eattacker, idamage, idflags, smeansofdea
     }
 
     v_dir = vectornormalize(eattacker.origin - self.origin);
-    v_forward = anglestoforward(self.angles);
+    v_forward = anglesToForward(self.angles);
     dot = vectordot(v_dir, v_forward);
 
     if(dot < reject_dot) {
@@ -2820,8 +2820,7 @@ player_soct_damage_override(einflictor, eattacker, idamage, idflags, smeansofdea
   if(isgodmode(level.player))
     idamage = 0;
 
-  if(idamage > 30) {
-  }
+  if(idamage > 30) {}
 
   self.vehicle_health = self.vehicle_health - idamage;
 
@@ -2870,7 +2869,7 @@ player_drone_damage_override(einflictor, eattacker, idamage, idflags, smeansofde
       }
 
       v_dir = vectornormalize(eattacker.origin - self.origin);
-      v_forward = anglestoforward(self.angles);
+      v_forward = anglesToForward(self.angles);
       dot = vectordot(v_dir, v_forward);
 
       if(dot < reject_dot) {
@@ -3003,9 +3002,9 @@ soct_swap_to_damged_version() {
     level.using_damaged_soct = 1;
 
     if(level.player get_temp_stat(1))
-      level.vh_player_soct setmodel("veh_t6_mil_super_soc_t_damaged");
+      level.vh_player_soct setModel("veh_t6_mil_super_soc_t_damaged");
     else
-      level.vh_player_soct setmodel("veh_t6_mil_soc_t_damaged");
+      level.vh_player_soct setModel("veh_t6_mil_soc_t_damaged");
 
     level notify("player_soct_is_damaged");
   }
@@ -3018,9 +3017,9 @@ soct_swap_to_dead_version() {
     level.using_dead_soct = 1;
 
     if(level.player get_temp_stat(1))
-      level.vh_player_soct setmodel("veh_t6_mil_super_soc_t_dead");
+      level.vh_player_soct setModel("veh_t6_mil_super_soc_t_dead");
     else
-      level.vh_player_soct setmodel("veh_t6_mil_soc_t_dead");
+      level.vh_player_soct setModel("veh_t6_mil_soc_t_dead");
   }
 }
 

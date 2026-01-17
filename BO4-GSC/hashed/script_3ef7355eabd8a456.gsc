@@ -19,7 +19,6 @@
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_vo;
-
 #namespace namespace_87e11242;
 
 autoexec __init__system__() {
@@ -33,10 +32,10 @@ init() {
 }
 
 init_clientfields() {
-  clientfield::register("world", "" + #"hash_31a98ee76e835504", 1, 1, "int");
-  clientfield::register("world", "" + #"hash_3284b0cf34bfe44e", 1, 1, "int");
-  clientfield::register("world", "" + #"hash_b143d97bf92fc66", 1, 1, "counter");
-  clientfield::register("world", "" + #"hash_28f972533bb468fd", 1, 1, "int");
+  clientfield::register("world", "" + # "hash_31a98ee76e835504", 1, 1, "int");
+  clientfield::register("world", "" + # "hash_3284b0cf34bfe44e", 1, 1, "int");
+  clientfield::register("world", "" + # "hash_b143d97bf92fc66", 1, 1, "counter");
+  clientfield::register("world", "" + # "hash_28f972533bb468fd", 1, 1, "int");
 }
 
 init_flags() {
@@ -65,38 +64,38 @@ init_quest() {
   var_b3edfb92 hide();
   var_240bceab = array(#"hash_1a4bbbe1a3b57e4f");
   var_e4158c30 = array(#"hash_7544aa4a3281de20");
-  var_19bb8831 = array(#"hash_cfe3836bc9ca39", #"hash_4b18b104deb5d028");
-  var_17b5a12 = array(#"hash_ebea45d703b1ed2", #"hash_2c58be4a6b26629b", #"hash_3db46912689769f0", #"hash_1152f3ac3dddade1");
+  var_19bb8831 = array(#"hash_cfe3836bc9ca39", # "hash_4b18b104deb5d028");
+  var_17b5a12 = array(#"hash_ebea45d703b1ed2", # "hash_2c58be4a6b26629b", # "hash_3db46912689769f0", # "hash_1152f3ac3dddade1");
   var_b37ebf6 = array(#"hash_4768d4b244860f63");
   var_4e4ef50e = array(#"hash_217e6ae56b61ad3b");
   var_2c28b1bb = array(#"hash_2747b199d121f40b");
   level.var_5a599dbf = [];
   level.var_5a599dbf[0] = {
-    #in_inventory: 0, 
+    #in_inventory: 0,
     #vo_line: var_240bceab
   };
   level.var_5a599dbf[1] = {
-    #in_inventory: 0, 
+    #in_inventory: 0,
     #vo_line: var_e4158c30
   };
   level.var_5a599dbf[2] = {
-    #in_inventory: 0, 
+    #in_inventory: 0,
     #vo_line: var_19bb8831
   };
   level.var_5a599dbf[3] = {
-    #in_inventory: 0, 
+    #in_inventory: 0,
     #vo_line: var_17b5a12
   };
   level.var_5a599dbf[4] = {
-    #in_inventory: 0, 
+    #in_inventory: 0,
     #vo_line: var_b37ebf6
   };
   level.var_5a599dbf[5] = {
-    #in_inventory: 0, 
+    #in_inventory: 0,
     #vo_line: var_4e4ef50e
   };
   level.var_5a599dbf[6] = {
-    #in_inventory: 0, 
+    #in_inventory: 0,
     #vo_line: var_2c28b1bb
   };
   level.var_a035a0b9 = zm_hms_util::function_bffcedde("office_punch_card", "targetname", "script_int");
@@ -109,16 +108,16 @@ init_quest() {
   var_453ce50f = getent("punch_card_anim", "targetname");
   assert(isDefined(var_453ce50f), "<dev string:x38>");
   var_453ce50f hide();
-  zm_sq::register(#"pernell_archive", #"step_1", #"pernell_archive_step1", &pernell_archive_step1_setup, &pernell_archive_step1_cleanup);
-  zm_sq::register(#"pernell_archive", #"step_2", #"pernell_archive_step2", &pernell_archive_step2_setup, &pernell_archive_step2_cleanup);
+  zm_sq::register(#"pernell_archive", # "step_1", # "pernell_archive_step1", &pernell_archive_step1_setup, &pernell_archive_step1_cleanup);
+  zm_sq::register(#"pernell_archive", # "step_2", # "pernell_archive_step2", &pernell_archive_step2_setup, &pernell_archive_step2_cleanup);
   zm_sq::start(#"pernell_archive");
   level thread function_afb5905e();
 }
 
 function_afb5905e() {
   level waittill(#"all_players_spawned");
-  level clientfield::set("" + #"hash_3284b0cf34bfe44e", 1);
-  level clientfield::set("" + #"hash_31a98ee76e835504", 1);
+  level clientfield::set("" + # "hash_3284b0cf34bfe44e", 1);
+  level clientfield::set("" + # "hash_31a98ee76e835504", 1);
 }
 
 pernell_archive_step1_setup(var_5ea5c94d) {
@@ -135,8 +134,8 @@ pernell_archive_step1_setup(var_5ea5c94d) {
     level.var_595db1e1 zm_unitrigger::create(#"", 64, &function_e4fcfb0a);
     level flag::wait_till(#"hash_5516784173c2ee27");
     playsoundatposition(#"hash_359664e44a2bb635", level.var_595db1e1.origin);
-    level clientfield::set("" + #"hash_3284b0cf34bfe44e", 0);
-    level clientfield::increment("" + #"hash_b143d97bf92fc66", 1);
+    level clientfield::set("" + # "hash_3284b0cf34bfe44e", 0);
+    level clientfield::increment("" + # "hash_b143d97bf92fc66", 1);
     level.var_67599dfe[0] = 1;
     zm_unitrigger::unregister_unitrigger(level.var_595db1e1.s_unitrigger);
     var_ae88db53 = getent("server_damage_trigger", "targetname");
@@ -165,7 +164,6 @@ function_8703c1fe() {
   level flag::set(#"hash_4c30d0428f1d4060");
 
   iprintlnbold("<dev string:x65>");
-
 }
 
 function_e4fcfb0a() {
@@ -190,7 +188,7 @@ function_a546fd97() {
       for(i = 0; i < var_5c3100f7; i++) {
         if(!level.var_67599dfe[i]) {
           level.var_67599dfe[i] = 1;
-          level clientfield::increment("" + #"hash_b143d97bf92fc66", 1);
+          level clientfield::increment("" + # "hash_b143d97bf92fc66", 1);
           waitframe(1);
         }
       }
@@ -198,12 +196,12 @@ function_a546fd97() {
       if(var_863c08bb >= 15000) {
         var_c327a579 = 1;
         level flag::set(#"server_fixed");
-        level clientfield::set("" + #"hash_28f972533bb468fd", 1);
+        level clientfield::set("" + # "hash_28f972533bb468fd", 1);
 
         iprintlnbold("<dev string:x7d>");
 
-          self playSound(#"hash_4f1f1f9762add0a3");
-        s_notify.attacker thread zm_audio::create_and_play_dialog(#"generic", #"response_positive");
+        self playSound(#"hash_4f1f1f9762add0a3");
+        s_notify.attacker thread zm_audio::create_and_play_dialog(#"generic", # "response_positive");
       }
     }
   }
@@ -286,7 +284,7 @@ function_54db89ef() {
       level flag::wait_till("card_inserted");
       zm_hms_util::function_52c3fe8d(s_card.vo_line, level.var_a73534b7.origin);
 
-      if(s_card.vo_line[0] == #"hash_217e6ae56b61ad3b") {
+      if(s_card.vo_line[0] == # "hash_217e6ae56b61ad3b") {
         level flag::set(#"hash_5df188993c013698");
       }
 
@@ -306,7 +304,7 @@ function_54db89ef() {
 
 function_24510350() {
   level.var_af224340 show();
-  level clientfield::set("" + #"hash_31a98ee76e835504", 0);
+  level clientfield::set("" + # "hash_31a98ee76e835504", 0);
   s_unitrigger = level.var_a73534b7 zm_unitrigger::create(&function_814ee815, 64, &function_445e3d3d);
   s_unitrigger thread function_54db89ef();
 }

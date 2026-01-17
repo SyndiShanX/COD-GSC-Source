@@ -104,12 +104,12 @@ custom_end_screen() {
       players[i].survived_hud.y = players[i].survived_hud.y + 40;
     }
 
-    winner_text = & "ZOMBIE_GRIEF_WIN";
-    loser_text = & "ZOMBIE_GRIEF_LOSE";
+    winner_text = &"ZOMBIE_GRIEF_WIN";
+    loser_text = &"ZOMBIE_GRIEF_LOSE";
 
     if(level.round_number < 2) {
-      winner_text = & "ZOMBIE_GRIEF_WIN_SINGLE";
-      loser_text = & "ZOMBIE_GRIEF_LOSE_SINGLE";
+      winner_text = &"ZOMBIE_GRIEF_WIN_SINGLE";
+      loser_text = &"ZOMBIE_GRIEF_LOSE_SINGLE";
     }
 
     if(isDefined(level.host_ended_game) && level.host_ended_game)
@@ -140,7 +140,7 @@ postinit_func() {
   level._effect["meat_stink_camera"] = loadfx("maps/zombie/fx_zmb_meat_stink_camera");
   level._effect["meat_stink_torso"] = loadfx("maps/zombie/fx_zmb_meat_stink_torso");
   include_powerup("meat_stink");
-  maps\mp\zombies\_zm_powerups::add_zombie_powerup("meat_stink", "t6_wpn_zmb_meat_world", & "ZOMBIE_POWERUP_MAX_AMMO", ::func_should_drop_meat, 0, 0, 0);
+  maps\mp\zombies\_zm_powerups::add_zombie_powerup("meat_stink", "t6_wpn_zmb_meat_world", &"ZOMBIE_POWERUP_MAX_AMMO", ::func_should_drop_meat, 0, 0, 0);
   setmatchtalkflag("DeadChatWithDead", 1);
   setmatchtalkflag("DeadChatWithTeam", 1);
   setmatchtalkflag("DeadHearTeamLiving", 1);
@@ -261,7 +261,7 @@ meat_stink(who) {
   who.pre_meat_weapon = who getcurrentweapon();
   level notify("meat_grabbed");
   who notify("meat_grabbed");
-  who playsound("zmb_pickup_meat");
+  who playSound("zmb_pickup_meat");
   who increment_is_drinking();
   who giveweapon("item_meat_zm");
   who switchtoweapon("item_meat_zm");
@@ -271,11 +271,11 @@ meat_stink(who) {
 meat_stink_on_ground(position_to_play) {
   level.meat_on_ground = 1;
   attractor_point = spawn("script_model", position_to_play);
-  attractor_point setmodel("tag_origin");
-  attractor_point playsound("zmb_land_meat");
+  attractor_point setModel("tag_origin");
+  attractor_point playSound("zmb_land_meat");
   wait 0.2;
-  playfxontag(level._effect["meat_stink_torso"], attractor_point, "tag_origin");
-  attractor_point playloopsound("zmb_meat_flies");
+  playFXOnTag(level._effect["meat_stink_torso"], attractor_point, "tag_origin");
+  attractor_point playLoopSound("zmb_meat_flies");
   attractor_point create_zombie_point_of_interest(1536, 32, 10000);
   attractor_point.attract_to_origin = 1;
   attractor_point thread create_zombie_point_of_interest_attractor_positions(4, 45);
@@ -333,7 +333,7 @@ meat_bounce_override(pos, normal, ent) {
       }
     }
 
-    playfx(level._effect["meat_impact"], self.origin);
+    playFX(level._effect["meat_impact"], self.origin);
   }
 
   self delete();
@@ -368,10 +368,10 @@ meat_stink_player_create() {
   self endon("death");
   tagname = "J_SpineLower";
   self.meat_stink_3p = spawn("script_model", self gettagorigin(tagname));
-  self.meat_stink_3p setmodel("tag_origin");
+  self.meat_stink_3p setModel("tag_origin");
   self.meat_stink_3p linkto(self, tagname);
   wait 0.5;
-  playfxontag(level._effect["meat_stink_torso"], self.meat_stink_3p, "tag_origin");
+  playFXOnTag(level._effect["meat_stink_torso"], self.meat_stink_3p, "tag_origin");
   self setclientfieldtoplayer("meat_stink", 1);
 }
 
@@ -417,7 +417,7 @@ door_close_zombie_think() {
 
 silentlyremovezombie() {
   level.zombie_total++;
-  playfx(level._effect["spawn_cloud"], self.origin);
+  playFX(level._effect["spawn_cloud"], self.origin);
   self.skip_death_notetracks = 1;
   self.nodeathragdoll = 1;
   self dodamage(self.maxhealth * 2, self.origin, self, self, "none", "MOD_SUICIDE");
@@ -495,7 +495,7 @@ show_grief_hud_msg_cleanup() {
 }
 
 grief_reset_message() {
-  msg = & "ZOMBIE_GRIEF_RESET";
+  msg = &"ZOMBIE_GRIEF_RESET";
   players = get_players();
 
   if(isDefined(level.hostmigrationtimer)) {
@@ -680,7 +680,7 @@ update_players_on_bleedout_or_disconnect(excluded_player) {
 
       if(players_remaining < 1) {
         player thread show_grief_hud_msg(&"ZOMBIE_ZGRIEF_ALL_PLAYERS_DOWN", undefined, undefined, 1);
-        player delay_thread_watch_host_migrate(2, ::show_grief_hud_msg, & "ZOMBIE_ZGRIEF_SURVIVE", undefined, 30, 1);
+        player delay_thread_watch_host_migrate(2, ::show_grief_hud_msg, &"ZOMBIE_ZGRIEF_SURVIVE", undefined, 30, 1);
         continue;
       }
 

@@ -7,7 +7,7 @@
 #include maps\mp\gametypes\_hud_util;
 #include common_scripts\utility;
 
-TimeUntilWaveSpawn(minimumWait) {
+TimeUntilWavespawn(minimumWait) {
   if(!self.hasSpawned)
     return 0;
 
@@ -33,7 +33,7 @@ TimeUntilWaveSpawn(minimumWait) {
   }
 
   // avoid spawning everyone on the same frame
-  if(isdefined(self.waveSpawnIndex))
+  if(isDefined(self.waveSpawnIndex))
     timeOfSpawn += 50 * self.waveSpawnIndex;
 
   return (timeOfSpawn - gettime()) / 1000;
@@ -49,7 +49,7 @@ TeamKillDelay() {
   return maps\mp\gametypes\_tweakables::getTweakableValue("team", "teamkillspawndelay") * exceeded;
 }
 
-TimeUntilSpawn(includeTeamkillDelay) {
+TimeUntilspawn(includeTeamkillDelay) {
   if((level.inGracePeriod && !self.hasSpawned) || level.gameended)
     return 0;
 
@@ -80,12 +80,12 @@ TimeUntilSpawn(includeTeamkillDelay) {
   waveBased = (getDvarInt("scr_" + level.gameType + "_waverespawndelay") > 0);
 
   if(waveBased)
-    return self TimeUntilWaveSpawn(respawnDelay);
+    return self TimeUntilWavespawn(respawnDelay);
 
   return respawnDelay;
 }
 
-maySpawn() {
+mayspawn() {
   if(getGametypeNumLives() || isDefined(level.disableSpawning)) {
     if(isDefined(level.disableSpawning) && level.disableSpawning)
       return false;
@@ -108,7 +108,7 @@ spawnClient() {
   assert(isDefined(self.team));
   assert(isValidClass(self.class));
 
-  if(!self maySpawn()) {
+  if(!self mayspawn()) {
     currentorigin = self.origin;
     currentangles = self.angles;
 
@@ -116,7 +116,7 @@ spawnClient() {
 
     if(self.pers["teamKillPunish"]) {
       self.pers["teamkills"] = max(self.pers["teamkills"] - 1, 0);
-      setLowerMessage("friendly_fire", & "MP_FRIENDLY_FIRE_WILL_NOT");
+      setLowerMessage("friendly_fire", &"MP_FRIENDLY_FIRE_WILL_NOT");
 
       if(!self.hasSpawned && self.pers["teamkills"] <= level.maxAllowedTeamkills)
         self.pers["teamKillPunish"] = false;
@@ -130,14 +130,14 @@ spawnClient() {
     return;
   }
 
-  if(self.waitingToSpawn)
+  if(self.waitingToSpawn) {
     return;
-
+  }
   self.waitingToSpawn = true;
 
   self waitAndSpawnClient();
 
-  if(isdefined(self))
+  if(isDefined(self))
     self.waitingToSpawn = false;
 }
 
@@ -154,7 +154,7 @@ waitAndSpawnClient() {
     teamKillDelay = TeamKillDelay();
 
     if(teamKillDelay > 0) {
-      setLowerMessage("friendly_fire", & "MP_FRIENDLY_FIRE_WILL_NOT", teamKillDelay);
+      setLowerMessage("friendly_fire", &"MP_FRIENDLY_FIRE_WILL_NOT", teamKillDelay);
 
       self thread respawn_asSpectator(self.origin + (0, 0, 60), self.angles);
       spawnedAsSpectator = true;
@@ -174,12 +174,12 @@ waitAndSpawnClient() {
     self waittill("stopped_using_remote");
   }
 
-  if(!isdefined(self.waveSpawnIndex) && isdefined(level.wavePlayerSpawnIndex[self.team])) {
+  if(!isDefined(self.waveSpawnIndex) && isDefined(level.wavePlayerSpawnIndex[self.team])) {
     self.waveSpawnIndex = level.wavePlayerSpawnIndex[self.team];
     level.wavePlayerSpawnIndex[self.team]++;
   }
 
-  timeUntilSpawn = TimeUntilSpawn(false);
+  timeUntilSpawn = TimeUntilspawn(false);
 
   self thread predictAboutToSpawnPlayerOverTime(timeUntilSpawn);
 
@@ -222,9 +222,10 @@ waitRespawnButton() {
   self endon("disconnect");
   self endon("end_respawn");
 
-  while (1) {
-    if(self useButtonPressed())
+  while(1) {
+    if(self useButtonPressed()) {
       break;
+    }
 
     wait .05;
   }
@@ -276,7 +277,6 @@ getDeathSpawnPoint() {
   spawnpoint hide();
   spawnpoint.angles = self.angles;
   return spawnpoint;
-
 }
 
 showSpawnNotifies() {
@@ -305,7 +305,7 @@ predictAboutToSpawnPlayerOverTime(preduration) {
   self PredictStreamPos(self.predictedSpawnPoint.origin + (0, 0, 60), self.predictedSpawnPoint.angles);
   self.predictedSpawnPointTime = gettime();
 
-  for (i = 0; i < 30; i++) {
+  for(i = 0; i < 30; i++) {
     wait .4; // this time is carefully selected: we want it as long as possible, but we want the loop to iterate about .1 to .3 seconds before people spawn for our final check
 
     prevPredictedSpawnPoint = self.predictedSpawnPoint;
@@ -323,9 +323,9 @@ predictAboutToSpawnPlayer() {
 
   // test predicting spawnpoints to see if we can eliminate streaming pops
 
-  if(self TimeUntilSpawn(true) > 1.0) {
+  if(self TimeUntilspawn(true) > 1.0) {
     spawnpointname = "mp_global_intermission";
-    spawnpoints = getentarray(spawnpointname, "classname");
+    spawnpoints = getEntArray(spawnpointname, "classname");
     assert(spawnpoints.size);
     self.predictedSpawnPoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_Random(spawnpoints);
     return;
@@ -340,15 +340,14 @@ predictAboutToSpawnPlayer() {
 }
 
 checkPredictedSpawnpointCorrectness(spawnpointorigin) {
-  /#
-  if(!isdefined(level.spawnpointPrediction)) {
-    level.spawnpointPrediction = spawnstruct();
+  if(!isDefined(level.spawnpointPrediction)) {
+    level.spawnpointPrediction = spawnStruct();
     level.spawnpointPrediction.failures = 0;
-    for (i = 0; i < 7; i++)
+    for(i = 0; i < 7; i++)
       level.spawnpointPrediction.buckets[i] = 0;
   }
 
-  if(!isdefined(self.predictedSpawnPoint)) {
+  if(!isDefined(self.predictedSpawnPoint)) {
     println("Failed to predict spawn for player " + self.name + " at " + spawnpointorigin);
     level.spawnpointPrediction.failures++;
   } else {
@@ -373,9 +372,8 @@ checkPredictedSpawnpointCorrectness(spawnpointorigin) {
     else
       println("Predicted " + self.name + "'s spawn " + ((gettime() - self.predictedSpawnPointTime) / 1000) + " seconds ahead of time");
   }
-  # /
 
-    self notify("used_predicted_spawnpoint");
+  self notify("used_predicted_spawnpoint");
   self.predictedSpawnPoint = undefined;
 }
 
@@ -384,17 +382,16 @@ percentage(a, b) {
 }
 
 printPredictedSpawnpointCorrectness() {
-  /#
-  if(!isdefined(level.spawnpointPrediction))
+  if(!isDefined(level.spawnpointPrediction)) {
     return;
-
+  }
   total = level.spawnpointPrediction.failures;
-  for (i = 0; i < 7; i++)
+  for(i = 0; i < 7; i++)
     total += level.spawnpointPrediction.buckets[i];
 
-  if(total <= 0)
+  if(total <= 0) {
     return;
-
+  }
   println("****** Spawnpoint Prediction*******");
   println("There were " + total + " spawns. " + percentage(level.spawnpointPrediction.failures, total) + " failed to be predicted.");
 
@@ -412,14 +409,13 @@ printPredictedSpawnpointCorrectness() {
   }
 
   println("*************");
-  # /
 }
 
 getSpawnOrigin(spawnpoint) {
   if(!positionWouldTelefrag(spawnpoint.origin))
     return spawnpoint.origin;
 
-  if(!isdefined(spawnpoint.alternates))
+  if(!isDefined(spawnpoint.alternates))
     return spawnpoint.origin;
 
   foreach(alternate in spawnpoint.alternates) {
@@ -437,9 +433,9 @@ tiValidationCheck() {
   carePackages = getEntArray("care_package", "targetname");
 
   foreach(package in carePackages) {
-    if(distance(package.origin, self.setSpawnPoint.playerSpawnPos) > 64)
+    if(distance(package.origin, self.setSpawnPoint.playerSpawnPos) > 64) {
       continue;
-
+    }
     if(isDefined(package.owner))
       self maps\mp\gametypes\_hud_message::playerCardSplashNotify("destroyed_insertion", package.owner);
 
@@ -491,12 +487,10 @@ spawnPlayer() {
 
   self setSpawnVariables();
 
-  /#
   if(!getDvarInt("scr_forcerankedmatch"))
     assert((level.teamBased && self.sessionteam == self.team) || (!level.teamBased && self.sessionteam == "none"));
-  # /
 
-    hadSpawned = self.hasSpawned;
+  hadSpawned = self.hasSpawned;
 
   self.fauxDead = undefined;
 
@@ -708,7 +702,7 @@ getPlayerFromClientNum(clientNum) {
   if(clientNum < 0)
     return undefined;
 
-  for (i = 0; i < level.players.size; i++) {
+  for(i = 0; i < level.players.size; i++) {
     if(level.players[i] getEntityNumber() == clientNum)
       return level.players[i];
   }
@@ -725,7 +719,7 @@ onSpawnSpectator(origin, angles) {
   }
 
   spawnpointname = "mp_global_intermission";
-  spawnpoints = getentarray(spawnpointname, "classname");
+  spawnpoints = getEntArray(spawnpointname, "classname");
   assert(spawnpoints.size);
   spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_Random(spawnpoints);
 
@@ -769,7 +763,7 @@ spawnIntermission() {
     self openMenu(game["menu_endgameupdate"]);
 
     waitTime = 4.0 + min(self.pers["postGameChallenges"], 3);
-    while (waitTime) {
+    while(waitTime) {
       wait(0.25);
       waitTime -= 0.25;
 
@@ -850,9 +844,9 @@ notifyConnecting() {
 }
 
 Callback_PlayerDisconnect() {
-  if(!isDefined(self.connected))
+  if(!isDefined(self.connected)) {
     return;
-
+  }
   self removePlayerOnDisconnect();
 
   if(!level.teamBased)
@@ -892,10 +886,10 @@ Callback_PlayerDisconnect() {
 
 removePlayerOnDisconnect() {
   found = false;
-  for (entry = 0; entry < level.players.size; entry++) {
+  for(entry = 0; entry < level.players.size; entry++) {
     if(level.players[entry] == self) {
       found = true;
-      while (entry < level.players.size - 1) {
+      while(entry < level.players.size - 1) {
         level.players[entry] = level.players[entry + 1];
         assert(level.players[entry] != self);
         entry++;
@@ -960,7 +954,7 @@ initClientDvars() {
   self setClientDvar("ui_altscene", 0);
 
   if(getdvarint("scr_hitloc_debug")) {
-    for (i = 0; i < 6; i++) {
+    for(i = 0; i < 6; i++) {
       self setClientDvar("ui_hitloc_" + i, "");
     }
     self.hitlocInited = true;
@@ -975,11 +969,10 @@ Callback_PlayerConnect() {
   self.statusicon = "";
 
   connectTime = undefined;
-  /#
-  connectTime = getTime();
-  # /
 
-    level notify("connected", self);
+  connectTime = getTime();
+
+  level notify("connected", self);
   self.connected = true;
 
   if(self isHost())
@@ -1013,11 +1006,11 @@ Callback_PlayerConnect() {
   if(matchMakingGame() && game["clientid"] <= 24 && game["clientid"] != getMatchData("playerCount")) {
     setMatchData("playerCount", game["clientid"]);
     setMatchData("players", self.clientid, "xuid", self getXuid());
-    /#
+
     if((getDvarInt("scr_forcerankedmatch") && level.teamBased) || (isDefined(self.pers["isBot"]) && level.teamBased))
       self.sessionteam = maps\mp\gametypes\_menus::getTeamAssignment();
-    # /
-      assert(getdvarint("scr_runlevelandquit") == 1 || (level.teamBased && (self.sessionteam == "allies" || self.sessionteam == "axis")) || (!level.teamBased && self.sessionteam == "none"));
+
+    assert(getdvarint("scr_runlevelandquit") == 1 || (level.teamBased && (self.sessionteam == "allies" || self.sessionteam == "axis")) || (!level.teamBased && self.sessionteam == "none"));
     //assert( (level.teamBased && self.sessionteam == self.team) || (!level.teamBased && self.sessionteam == "none") );
     setMatchData("players", self.clientid, "team", self.sessionteam);
   }
@@ -1056,7 +1049,7 @@ Callback_PlayerConnect() {
 
   self setRestXPGoal();
 
-  for (slotID = 1; slotID <= 4; slotID++) {
+  for(slotID = 1; slotID <= 4; slotID++) {
     self.saved_actionSlotData[slotID] = spawnStruct();
     self.saved_actionSlotData[slotID].type = "";
     self.saved_actionSlotData[slotID].item = undefined;
@@ -1067,11 +1060,11 @@ Callback_PlayerConnect() {
   // give any threads waiting on the "connected" notify a chance to process before we are added to level.players
   // this should ensure that all . variables on the player are correctly initialized by this point
   waittillframeend;
-  /#
+
   foreach(player in level.players)
   assert(player != self);
-  # /
-    level.players[level.players.size] = self;
+
+  level.players[level.players.size] = self;
 
   if(level.teambased)
     self updateScores();
@@ -1091,7 +1084,6 @@ Callback_PlayerConnect() {
     return;
   }
 
-  /#
   if(getDvarInt("scr_debug_postgameconnect")) {
     self.pers["class"] = "";
     self.class = "";
@@ -1099,11 +1091,10 @@ Callback_PlayerConnect() {
       self.pers["team"] = self.sessionteam;
     self.team = undefined;
   }
-  # /
 
-    // only give a loss on the first connect
-    if(firstConnect)
-      maps\mp\gametypes\_gamelogic::updateLossStats(self);
+  // only give a loss on the first connect
+  if(firstConnect)
+    maps\mp\gametypes\_gamelogic::updateLossStats(self);
 
   level endon("game_ended");
 
@@ -1115,7 +1106,7 @@ Callback_PlayerConnect() {
     if(matchMakingGame()) {
       self thread spawnSpectator();
       self[[level.autoassign]]();
-      self thread kickIfDontSpawn();
+      self thread kickIfDontspawn();
       return;
     }
 
@@ -1139,7 +1130,6 @@ Callback_PlayerConnect() {
 
   /#	
   assert(connectTime == getTime());
-  # /
 }
 
 Callback_PlayerMigrated() {
@@ -1200,11 +1190,9 @@ setRestXPGoal() {
   secondsSinceLastGame = self getRestedTime();
   hoursSinceLastGame = secondsSinceLastGame / 3600;
 
-  /#
   hoursSinceLastGame *= getDvarFloat("scr_restxp_timescale");
-  # /
 
-    experience = self getPlayerData("experience");
+  experience = self getPlayerData("experience");
 
   minRestXPTime = getDvarFloat("scr_restxp_minRestTime"); // hours
   restXPGainRate = getDvarFloat("scr_restxp_levelsPerDay") / 24.0;
@@ -1234,19 +1222,19 @@ setRestXPGoal() {
   self setPlayerData("restXPGoal", restXPGoal);
 }
 
-forceSpawn() {
+forcespawn() {
   self endon("death");
   self endon("disconnect");
   self endon("spawned");
 
   wait(60.0);
 
-  if(self.hasSpawned)
+  if(self.hasSpawned) {
     return;
-
-  if(self.pers["team"] == "spectator")
+  }
+  if(self.pers["team"] == "spectator") {
     return;
-
+  }
   if(!isValidClass(self.pers["class"])) {
     self.pers["class"] = "CLASS_CUSTOM1";
 
@@ -1257,7 +1245,7 @@ forceSpawn() {
   self thread spawnClient();
 }
 
-kickIfDontSpawn() {
+kickIfDontspawn() {
   self endon("death");
   self endon("disconnect");
   self endon("spawned");
@@ -1274,15 +1262,15 @@ kickIfDontSpawn() {
     kickWait(waittime);
 
   timePassed = (gettime() - starttime) / 1000;
-  if(timePassed < waittime - .1 && timePassed < mintime)
+  if(timePassed < waittime - .1 && timePassed < mintime) {
     return;
-
-  if(self.hasSpawned)
+  }
+  if(self.hasSpawned) {
     return;
-
-  if(self.pers["team"] == "spectator")
+  }
+  if(self.pers["team"] == "spectator") {
     return;
-
+  }
   kick(self getEntityNumber(), "EXE_PLAYERKICKED_INACTIVE");
 
   level thread maps\mp\gametypes\_gamelogic::updateGameEvents();

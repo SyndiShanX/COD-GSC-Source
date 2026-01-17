@@ -28,8 +28,8 @@ set_vehicle_anims(positions) {
 
 setanims() {
   positions = [];
-  for (i = 0; i < 6; i++)
-    positions[i] = spawnstruct();
+  for(i = 0; i < 6; i++)
+    positions[i] = spawnStruct();
 
   positions[0].sittag = "tag_body";
   positions[1].sittag = "tag_body";
@@ -93,7 +93,6 @@ defaultmdl="vehicle_zodiac"
 default:"vehicletype" "zodiac"
 default:"script_team" "allies"
 */
-
 
 /*QUAKED script_vehicle_zodiac_physics (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 

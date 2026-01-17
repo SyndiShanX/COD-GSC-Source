@@ -20,8 +20,7 @@ main(model, type, no_death) {
 
   build_bulletshield(false); //no bullet shield for cliffhanger -z
 
-  if(!isdefined(no_death)) {
-
+  if(!isDefined(no_death)) {
     build_deathmodel("vehicle_uaz_light", "vehicle_uaz_light_dsr");
     build_deathmodel("vehicle_uaz_winter", "vehicle_uaz_winter_destroy");
     build_deathmodel("vehicle_uaz_fabric", "vehicle_uaz_fabric_dsr");
@@ -42,12 +41,11 @@ main(model, type, no_death) {
   build_team("axis");
   build_aianims(::setanims, ::set_vehicle_anims);
   build_compassicon("uaz", false);
-
 }
 
 init_local() {
   self.clear_anims_on_death = true; // hackery workaround for strange anim differences in the variety of uaz models. clears driving and possibly door openning animations upon death.
-  if(!isdefined(self.script_allow_rider_deaths))
+  if(!isDefined(self.script_allow_rider_deaths))
     self.script_allow_rider_deaths = false; // this added at the end of the project some people wanted deathanims and some scripts assumed death would never happen.
 }
 
@@ -58,11 +56,11 @@ set_vehicle_anims(positions) {
   //tag_guy0(behind driver)
   //tag_guy1(behind passenger)	
 
-  //positions[ 0 ].sittag = "tag_driver"; 
+  //positions[ 0 ].sittag = "tag_driver";
   //positions[ 1 ].sittag = "tag_passenger";
   //positions[ 2 ].sittag = "tag_guy0"; //driver_side_rear
   //positions[ 3 ].sittag = "tag_guy1";//passenger_side_rear
-  //positions[ 4 ].sittag = "tag_guy2"; //driver_far_rear 
+  //positions[ 4 ].sittag = "tag_guy2"; //driver_far_rear
   //positions[ 5 ].sittag = "tag_guy3";//passenger_side_far_rear
 
   positions[0].vehicle_getoutanim = % uaz_driver_exit_into_stand_door;
@@ -98,14 +96,12 @@ set_vehicle_anims(positions) {
   return positions;
 }
 
-
 #using_animtree("generic_human");
 
 setanims() {
-
   positions = [];
-  for (i = 0; i < 6; i++)
-    positions[i] = spawnstruct();
+  for(i = 0; i < 6; i++)
+    positions[i] = spawnStruct();
 
   positions[0].sittag = "tag_driver";
   positions[1].sittag = "tag_passenger";
@@ -142,7 +138,6 @@ setanims() {
   positions[3].death_no_ragdoll = true;
 
   return positions;
-
 }
 
 /*QUAKED script_vehicle_uaz_fabric (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER

@@ -27,8 +27,8 @@
 #namespace namespace_693feb87;
 
 function main() {
-  level.doa = spawnstruct();
-  callback::on_spawned( & on_player_spawned);
+  level.doa = spawnStruct();
+  callback::on_spawned(&on_player_spawned);
   namespace_3ca3c537::init();
   namespace_eaa992c::init();
   namespace_1a381543::init();
@@ -49,70 +49,70 @@ function main() {
   level.var_46418da4 = 2;
   level.var_bd436f37 = 0.5;
   level.var_e3119165 = array("zombietron_gib_chunk_fat", "zombietron_gib_chunk_bone_01", "zombietron_gib_chunk_bone_02", "zombietron_gib_chunk_bone_03", "zombietron_gib_chunk_flesh_01", "zombietron_gib_chunk_flesh_02", "zombietron_gib_chunk_flesh_03", "zombietron_gib_chunk_meat_01", "zombietron_gib_chunk_meat_02", "zombietron_gib_chunk_meat_03");
-  clientfield::register("world", "podiumEvent", 1, 1, "int", & function_10093dd7, 0, 0);
-  clientfield::register("world", "overworld", 1, 1, "int", & function_a6c926fc, 0, 0);
-  clientfield::register("world", "scoreMenu", 1, 1, "int", & function_d3b4c89d, 0, 0);
-  clientfield::register("world", "overworldlevel", 1, 5, "int", & function_22de3f7, 0, 0);
-  clientfield::register("world", "roundnumber", 1, 10, "int", & function_e3bb35e, 0, 0);
-  clientfield::register("world", "roundMenu", 1, 1, "int", & function_2eaf8a3f, 0, 0);
-  clientfield::register("world", "teleportMenu", 1, 1, "int", & function_c97b97ae, 0, 0);
-  clientfield::register("world", "numexits", 1, 3, "int", & function_c86d63f6, 0, 0);
-  clientfield::register("world", "gameover", 1, 1, "int", & function_91976e37, 0, 0);
-  clientfield::register("world", "doafps", 1, 1, "int", & function_e63081e8, 0, 0);
-  clientfield::register("scriptmover", "play_fx", 1, 7, "int", & function_351aa01c, 0, 0);
-  clientfield::register("allplayers", "play_fx", 1, 7, "int", & function_351aa01c, 0, 0);
-  clientfield::register("actor", "play_fx", 1, 7, "int", & function_351aa01c, 0, 0);
-  clientfield::register("vehicle", "play_fx", 1, 7, "int", & function_351aa01c, 0, 0);
-  clientfield::register("scriptmover", "off_fx", 1, 7, "int", & function_33760903, 0, 0);
-  clientfield::register("allplayers", "off_fx", 1, 7, "int", & function_33760903, 0, 0);
-  clientfield::register("actor", "off_fx", 1, 7, "int", & function_33760903, 0, 0);
-  clientfield::register("vehicle", "off_fx", 1, 7, "int", & function_33760903, 0, 0);
-  clientfield::register("scriptmover", "play_sfx", 1, 7, "int", & function_68503cb7, 0, 0);
-  clientfield::register("allplayers", "play_sfx", 1, 7, "int", & function_68503cb7, 0, 0);
-  clientfield::register("actor", "play_sfx", 1, 7, "int", & function_68503cb7, 0, 0);
-  clientfield::register("vehicle", "play_sfx", 1, 7, "int", & function_68503cb7, 0, 0);
-  clientfield::register("scriptmover", "off_sfx", 1, 7, "int", & function_9bf26aa6, 0, 0);
-  clientfield::register("allplayers", "off_sfx", 1, 7, "int", & function_9bf26aa6, 0, 0);
-  clientfield::register("actor", "off_sfx", 1, 7, "int", & function_9bf26aa6, 0, 0);
-  clientfield::register("vehicle", "off_sfx", 1, 7, "int", & function_9bf26aa6, 0, 0);
-  clientfield::register("allplayers", "fated_boost", 1, 1, "int", & function_409fa9ce, 0, 0);
-  clientfield::register("allplayers", "bombDrop", 1, 1, "int", & function_f87ff72d, 0, 0);
-  clientfield::register("toplayer", "controlBinding", 1, 1, "counter", & function_f8c69ca4, 0, 0);
-  clientfield::register("toplayer", "goFPS", 1, 1, "counter", & function_ca593121, 0, 0);
-  clientfield::register("toplayer", "exitFPS", 1, 1, "counter", & function_9e1eca0b, 0, 0);
-  clientfield::register("world", "cleanUpGibs", 1, 1, "counter", & function_efeeaa92, 0, 0);
-  clientfield::register("world", "killweather", 1, 1, "counter", & namespace_3ca3c537::function_22f2039b, 0, 0);
-  clientfield::register("world", "killfog", 1, 1, "counter", & namespace_3ca3c537::function_9977953, 0, 0);
-  clientfield::register("world", "flipCamera", 1, 2, "int", & namespace_3ca3c537::flipcamera, 0, 0);
-  clientfield::register("world", "arenaUpdate", 1, 8, "int", & namespace_3ca3c537::setarena, 0, 0);
-  clientfield::register("world", "arenaRound", 1, 3, "int", & namespace_3ca3c537::function_836d1e22, 0, 0);
-  clientfield::register("actor", "enemy_ragdoll_explode", 1, 1, "int", & zombie_ragdoll_explode_cb, 0, 0);
-  clientfield::register("actor", "zombie_gut_explosion", 1, 1, "int", & zombie_gut_explosion_cb, 0, 0);
-  clientfield::register("actor", "zombie_chunk", 1, 1, "counter", & function_3a1ccea7, 0, 0);
-  clientfield::register("actor", "zombie_saw_explosion", 1, 1, "int", & function_15b503eb, 0, 0);
-  clientfield::register("actor", "zombie_rhino_explosion", 1, 1, "int", & function_8b8f5cb4, 0, 0);
-  clientfield::register("world", "restart_doa", 1, 1, "counter", & function_4ac9a8ba, 0, 0);
-  clientfield::register("scriptmover", "hazard_type", 1, 4, "int", & function_20671f0, 0, 0);
-  clientfield::register("scriptmover", "hazard_activated", 1, 4, "int", & function_ec2caec3, 0, 0);
-  clientfield::register("actor", "zombie_riser_fx", 1, 1, "int", & handle_zombie_risers, 0, 0);
-  clientfield::register("actor", "zombie_bloodriser_fx", 1, 1, "int", & function_cb806a9b, 0, 0);
-  clientfield::register("scriptmover", "heartbeat", 1, 3, "int", & function_d277a961, 0, 0);
-  clientfield::register("actor", "burnType", 1, 2, "int", & namespace_eaa992c::function_7aac5112, 0, 0);
-  clientfield::register("actor", "burnZombie", 1, 1, "counter", & namespace_eaa992c::function_f6008bb4, 0, 0);
-  clientfield::register("actor", "burnCorpse", 1, 1, "counter", & namespace_eaa992c::burncorpse, 0, 0);
-  clientfield::register("toplayer", "changeCamera", 1, 1, "counter", & changecamera, 0, 0);
-  clientfield::register("actor", "zombie_has_eyes", 1, 1, "int", & namespace_eaa992c::zombie_eyes_clientfield_cb, 0, 0);
-  clientfield::register("world", "cameraHeight", 1, 3, "int", & function_b868b40f, 0, 0);
-  clientfield::register("world", "cleanupGiblets", 1, 1, "int", & function_23f655ed, 0, 0);
-  clientfield::register("scriptmover", "camera_focus_item", 1, 1, "int", & function_354ec425, 0, 0);
-  clientfield::register("actor", "camera_focus_item", 1, 1, "int", & function_354ec425, 0, 0);
-  clientfield::register("vehicle", "camera_focus_item", 1, 1, "int", & function_354ec425, 0, 0);
-  callback::on_spawned( & on_player_spawn);
-  callback::on_shutdown( & on_player_shutdown);
-  callback::on_localclient_connect( & player_on_connect);
-  clientfield::register("", "", 1, 1, "", & function_bbb7743c, 0, 0);
-  clientfield::register("", "", 1, 2, "", & function_cee29ae7, 0, 0);
-  clientfield::register("", "", 1, 30, "", & function_cd844947, 0, 0);
+  clientfield::register("world", "podiumEvent", 1, 1, "int", &function_10093dd7, 0, 0);
+  clientfield::register("world", "overworld", 1, 1, "int", &function_a6c926fc, 0, 0);
+  clientfield::register("world", "scoreMenu", 1, 1, "int", &function_d3b4c89d, 0, 0);
+  clientfield::register("world", "overworldlevel", 1, 5, "int", &function_22de3f7, 0, 0);
+  clientfield::register("world", "roundnumber", 1, 10, "int", &function_e3bb35e, 0, 0);
+  clientfield::register("world", "roundMenu", 1, 1, "int", &function_2eaf8a3f, 0, 0);
+  clientfield::register("world", "teleportMenu", 1, 1, "int", &function_c97b97ae, 0, 0);
+  clientfield::register("world", "numexits", 1, 3, "int", &function_c86d63f6, 0, 0);
+  clientfield::register("world", "gameover", 1, 1, "int", &function_91976e37, 0, 0);
+  clientfield::register("world", "doafps", 1, 1, "int", &function_e63081e8, 0, 0);
+  clientfield::register("scriptmover", "play_fx", 1, 7, "int", &function_351aa01c, 0, 0);
+  clientfield::register("allplayers", "play_fx", 1, 7, "int", &function_351aa01c, 0, 0);
+  clientfield::register("actor", "play_fx", 1, 7, "int", &function_351aa01c, 0, 0);
+  clientfield::register("vehicle", "play_fx", 1, 7, "int", &function_351aa01c, 0, 0);
+  clientfield::register("scriptmover", "off_fx", 1, 7, "int", &function_33760903, 0, 0);
+  clientfield::register("allplayers", "off_fx", 1, 7, "int", &function_33760903, 0, 0);
+  clientfield::register("actor", "off_fx", 1, 7, "int", &function_33760903, 0, 0);
+  clientfield::register("vehicle", "off_fx", 1, 7, "int", &function_33760903, 0, 0);
+  clientfield::register("scriptmover", "play_sfx", 1, 7, "int", &function_68503cb7, 0, 0);
+  clientfield::register("allplayers", "play_sfx", 1, 7, "int", &function_68503cb7, 0, 0);
+  clientfield::register("actor", "play_sfx", 1, 7, "int", &function_68503cb7, 0, 0);
+  clientfield::register("vehicle", "play_sfx", 1, 7, "int", &function_68503cb7, 0, 0);
+  clientfield::register("scriptmover", "off_sfx", 1, 7, "int", &function_9bf26aa6, 0, 0);
+  clientfield::register("allplayers", "off_sfx", 1, 7, "int", &function_9bf26aa6, 0, 0);
+  clientfield::register("actor", "off_sfx", 1, 7, "int", &function_9bf26aa6, 0, 0);
+  clientfield::register("vehicle", "off_sfx", 1, 7, "int", &function_9bf26aa6, 0, 0);
+  clientfield::register("allplayers", "fated_boost", 1, 1, "int", &function_409fa9ce, 0, 0);
+  clientfield::register("allplayers", "bombDrop", 1, 1, "int", &function_f87ff72d, 0, 0);
+  clientfield::register("toplayer", "controlBinding", 1, 1, "counter", &function_f8c69ca4, 0, 0);
+  clientfield::register("toplayer", "goFPS", 1, 1, "counter", &function_ca593121, 0, 0);
+  clientfield::register("toplayer", "exitFPS", 1, 1, "counter", &function_9e1eca0b, 0, 0);
+  clientfield::register("world", "cleanUpGibs", 1, 1, "counter", &function_efeeaa92, 0, 0);
+  clientfield::register("world", "killweather", 1, 1, "counter", &namespace_3ca3c537::function_22f2039b, 0, 0);
+  clientfield::register("world", "killfog", 1, 1, "counter", &namespace_3ca3c537::function_9977953, 0, 0);
+  clientfield::register("world", "flipCamera", 1, 2, "int", &namespace_3ca3c537::flipcamera, 0, 0);
+  clientfield::register("world", "arenaUpdate", 1, 8, "int", &namespace_3ca3c537::setarena, 0, 0);
+  clientfield::register("world", "arenaRound", 1, 3, "int", &namespace_3ca3c537::function_836d1e22, 0, 0);
+  clientfield::register("actor", "enemy_ragdoll_explode", 1, 1, "int", &zombie_ragdoll_explode_cb, 0, 0);
+  clientfield::register("actor", "zombie_gut_explosion", 1, 1, "int", &zombie_gut_explosion_cb, 0, 0);
+  clientfield::register("actor", "zombie_chunk", 1, 1, "counter", &function_3a1ccea7, 0, 0);
+  clientfield::register("actor", "zombie_saw_explosion", 1, 1, "int", &function_15b503eb, 0, 0);
+  clientfield::register("actor", "zombie_rhino_explosion", 1, 1, "int", &function_8b8f5cb4, 0, 0);
+  clientfield::register("world", "restart_doa", 1, 1, "counter", &function_4ac9a8ba, 0, 0);
+  clientfield::register("scriptmover", "hazard_type", 1, 4, "int", &function_20671f0, 0, 0);
+  clientfield::register("scriptmover", "hazard_activated", 1, 4, "int", &function_ec2caec3, 0, 0);
+  clientfield::register("actor", "zombie_riser_fx", 1, 1, "int", &handle_zombie_risers, 0, 0);
+  clientfield::register("actor", "zombie_bloodriser_fx", 1, 1, "int", &function_cb806a9b, 0, 0);
+  clientfield::register("scriptmover", "heartbeat", 1, 3, "int", &function_d277a961, 0, 0);
+  clientfield::register("actor", "burnType", 1, 2, "int", &namespace_eaa992c::function_7aac5112, 0, 0);
+  clientfield::register("actor", "burnZombie", 1, 1, "counter", &namespace_eaa992c::function_f6008bb4, 0, 0);
+  clientfield::register("actor", "burnCorpse", 1, 1, "counter", &namespace_eaa992c::burncorpse, 0, 0);
+  clientfield::register("toplayer", "changeCamera", 1, 1, "counter", &changecamera, 0, 0);
+  clientfield::register("actor", "zombie_has_eyes", 1, 1, "int", &namespace_eaa992c::zombie_eyes_clientfield_cb, 0, 0);
+  clientfield::register("world", "cameraHeight", 1, 3, "int", &function_b868b40f, 0, 0);
+  clientfield::register("world", "cleanupGiblets", 1, 1, "int", &function_23f655ed, 0, 0);
+  clientfield::register("scriptmover", "camera_focus_item", 1, 1, "int", &function_354ec425, 0, 0);
+  clientfield::register("actor", "camera_focus_item", 1, 1, "int", &function_354ec425, 0, 0);
+  clientfield::register("vehicle", "camera_focus_item", 1, 1, "int", &function_354ec425, 0, 0);
+  callback::on_spawned(&on_player_spawn);
+  callback::on_shutdown(&on_player_shutdown);
+  callback::on_localclient_connect(&player_on_connect);
+  clientfield::register("", "", 1, 1, "", &function_bbb7743c, 0, 0);
+  clientfield::register("", "", 1, 2, "", &function_cee29ae7, 0, 0);
+  clientfield::register("", "", 1, 30, "", &function_cd844947, 0, 0);
   level.var_83a34f19 = 0;
   level.var_e9c73e06 = 0;
   level.var_7a6087fd = 0;
@@ -137,28 +137,28 @@ function on_player_spawned(localclientnum) {
 function function_d5eb029a() {
   level notify("hash_d5eb029a");
   level endon("hash_d5eb029a");
-  while (true) {
+  while(true) {
     level waittill("hash_aae01d5a", playernum, newstate);
     players = getplayers(0);
     foreach(player in players) {
-      if(!isdefined(player.entnum)) {
+      if(!isDefined(player.entnum)) {
         player.entnum = player getentitynumber();
       }
       if(playernum != player.entnum) {
         continue;
       }
-      if(!isdefined(player.var_4abf708a)) {
+      if(!isDefined(player.var_4abf708a)) {
         player.var_4abf708a = [];
-        for (localclientnum = 0; localclientnum < 2; localclientnum++) {
+        for(localclientnum = 0; localclientnum < 2; localclientnum++) {
           player.var_4abf708a[localclientnum] = 0;
         }
       }
       var_36ffb352 = "player_trail_" + function_ee495f41(player.entnum);
-      for (localclientnum = 0; localclientnum < 2; localclientnum++) {
+      for(localclientnum = 0; localclientnum < 2; localclientnum++) {
         if(localclientnum >= getlocalplayers().size) {
           continue;
         }
-        if(isdefined(player.var_4abf708a[localclientnum]) && player.var_4abf708a[localclientnum] != 0) {
+        if(isDefined(player.var_4abf708a[localclientnum]) && player.var_4abf708a[localclientnum] != 0) {
           killfx(localclientnum, player.var_4abf708a[localclientnum]);
           player.var_4abf708a[localclientnum] = 0;
         }
@@ -170,7 +170,7 @@ function function_d5eb029a() {
         }
         case 1:
         case 2: {
-          for (localclientnum = 0; localclientnum < 2; localclientnum++) {
+          for(localclientnum = 0; localclientnum < 2; localclientnum++) {
             if(localclientnum >= getlocalplayers().size) {
               continue;
             }
@@ -178,7 +178,7 @@ function function_d5eb029a() {
               player.var_8064cb04 = 0;
               continue;
             }
-            player.var_4abf708a[localclientnum] = playfxontag(localclientnum, level._effect[var_36ffb352], player, "tag_origin");
+            player.var_4abf708a[localclientnum] = playFXOnTag(localclientnum, level._effect[var_36ffb352], player, "tag_origin");
           }
           break;
         }
@@ -193,10 +193,10 @@ function function_d5eb029a() {
 function function_ae0a4fc5() {
   self notify("hash_ae0a4fc5");
   self endon("hash_ae0a4fc5");
-  while (true) {
+  while(true) {
     players = getplayers(0);
     foreach(player in players) {
-      if(isdefined(player.doa)) {
+      if(isDefined(player.doa)) {
         continue;
       }
       if(!player isplayer()) {
@@ -205,14 +205,14 @@ function function_ae0a4fc5() {
       if(player islocalplayer() && isspectating(player getlocalclientnumber())) {
         continue;
       }
-      if(!isdefined(player.name)) {
+      if(!isDefined(player.name)) {
         continue;
       }
       doa = level.var_29e6f519[player getentitynumber()];
-      if(!isdefined(doa)) {
+      if(!isDefined(doa)) {
         continue;
       }
-      if(isdefined(doa.player) && doa.player != player) {
+      if(isDefined(doa.player) && doa.player != player) {
         debugmsg(((((("" + player.name) + "") + doa.player.name) + "") + player getentitynumber() + "") + doa.player getentitynumber());
         continue;
       }
@@ -233,11 +233,11 @@ function on_player_spawn(localclientnum) {
 }
 
 function on_player_shutdown(localclientnum) {
-  for (localclientnum = 0; localclientnum < 2; localclientnum++) {
+  for(localclientnum = 0; localclientnum < 2; localclientnum++) {
     if(localclientnum >= getlocalplayers().size) {
       continue;
     }
-    if(isdefined(self.var_4abf708a[localclientnum]) && self.var_4abf708a[localclientnum] != 0) {
+    if(isDefined(self.var_4abf708a[localclientnum]) && self.var_4abf708a[localclientnum] != 0) {
       killfx(localclientnum, self.var_4abf708a[localclientnum]);
       self.var_4abf708a[localclientnum] = 0;
     }
@@ -289,7 +289,7 @@ function function_e63081e8(localclientnum, oldval, newval, bnewent, binitialsnap
     if(newval && getlocalplayers().size > 1) {
       setdvar("r_splitScreenExpandFull", 0);
     }
-    if(isdefined(level.doa.var_6e0195ea)) {
+    if(isDefined(level.doa.var_6e0195ea)) {
       stopradiantexploder(localclientnum, level.doa.var_6e0195ea);
       level.doa.var_6e0195ea = undefined;
     }
@@ -298,7 +298,7 @@ function function_e63081e8(localclientnum, oldval, newval, bnewent, binitialsnap
     playradiantexploder(localclientnum, level.doa.var_6e0195ea);
   } else {
     setdvar("r_splitScreenExpandFull", 1);
-    if(isdefined(level.doa.var_6e0195ea)) {
+    if(isDefined(level.doa.var_6e0195ea)) {
       stopradiantexploder(localclientnum, level.doa.var_6e0195ea);
       level.doa.var_6e0195ea = undefined;
     }
@@ -307,45 +307,45 @@ function function_e63081e8(localclientnum, oldval, newval, bnewent, binitialsnap
 }
 
 function function_9e1eca0b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(isdefined(self.var_4f118af8)) {
+  if(isDefined(self.var_4f118af8)) {
     self.var_44509e49 = self.var_4f118af8;
     self.var_4f118af8 = undefined;
   }
-  if(isdefined(self.var_bf81deea) && self.var_bf81deea && self islocalplayer()) {
+  if(isDefined(self.var_bf81deea) && self.var_bf81deea && self islocalplayer()) {
     self.var_bf81deea = undefined;
     level.var_6383030e = self.origin + vectorscale((0, 0, 1), 72);
     self cameraforcedisablescriptcam(0);
   }
-  if(isdefined(self.laserfx)) {
+  if(isDefined(self.laserfx)) {
     killfx(localclientnum, self.laserfx);
     self.laserfx = undefined;
   }
 }
 
 function function_ca593121(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(!(isdefined(self.var_bf81deea) && self.var_bf81deea) && !isdefined(level.doa.var_db180da)) {
-    if(!isdefined(level.var_6383030e)) {
+  if(!(isDefined(self.var_bf81deea) && self.var_bf81deea) && !isDefined(level.doa.var_db180da)) {
+    if(!isDefined(level.var_6383030e)) {
       level.var_6383030e = self.origin;
     }
     level.doa.var_db180da = spawn(localclientnum, level.var_6383030e, "script_model");
-    level.doa.var_db180da setmodel("tag_origin");
+    level.doa.var_db180da setModel("tag_origin");
     level.doa.var_db180da moveto(self.origin + vectorscale((0, 0, 1), 72), 0.15);
     wait(0.1);
-    playfx(localclientnum, level._effect["bomb"], self.origin);
+    playFX(localclientnum, level._effect["bomb"], self.origin);
     level.doa.var_db180da util::waittill_any_timeout(0.1, "movedone");
-    playfx(localclientnum, level._effect["turret_impact"], self.origin);
+    playFX(localclientnum, level._effect["turret_impact"], self.origin);
     self earthquake(1, 0.8, self.origin, 1000);
     playrumbleonposition(localclientnum, "damage_heavy", self.origin);
     wait(0.1);
-    if(isdefined(level.doa.var_db180da)) {
+    if(isDefined(level.doa.var_db180da)) {
       level.doa.var_db180da delete();
       level.doa.var_db180da = undefined;
     }
   }
-  if(!isdefined(self.var_4f118af8)) {
+  if(!isDefined(self.var_4f118af8)) {
     self.var_4f118af8 = self.var_44509e49;
   }
-  if(!(isdefined(self.var_bf81deea) && self.var_bf81deea) && self islocalplayer()) {
+  if(!(isDefined(self.var_bf81deea) && self.var_bf81deea) && self islocalplayer()) {
     self cameraforcedisablescriptcam(1);
     self.var_bf81deea = 1;
   }
@@ -362,7 +362,7 @@ function function_d3b4c89d(localclientnum, oldval, newval, bnewent, binitialsnap
     return;
   }
   player = getlocalplayer(localclientnum);
-  if(!isdefined(player)) {
+  if(!isDefined(player)) {
     return;
   }
   setuimodelvalue(createuimodel(getuimodelforcontroller(localclientnum), "forceScoreboard"), newval);
@@ -373,17 +373,17 @@ function function_a6c926fc(localclientnum, oldval, newval, bnewent, binitialsnap
     return;
   }
   player = getlocalplayer(localclientnum);
-  if(!isdefined(player)) {
+  if(!isDefined(player)) {
     return;
   }
   if(newval) {
     setuimodelvalue(getuimodel(level.var_7e2a814c, "level"), level.doa.var_160ae6c6);
     setuimodelvalue(createuimodel(level.var_7e2a814c, "changingLevel"), 1);
-    if(!isdefined(player.var_336bed9c)) {
+    if(!isDefined(player.var_336bed9c)) {
       player.var_336bed9c = createluimenu(localclientnum, "DOA_overworld");
     }
     openluimenu(localclientnum, player.var_336bed9c);
-  } else if(isdefined(player.var_336bed9c)) {
+  } else if(isDefined(player.var_336bed9c)) {
     setuimodelvalue(createuimodel(level.var_7e2a814c, "changingLevel"), 0);
     closeluimenu(localclientnum, player.var_336bed9c);
     player.var_336bed9c = undefined;
@@ -391,7 +391,7 @@ function function_a6c926fc(localclientnum, oldval, newval, bnewent, binitialsnap
 }
 
 function function_10093dd7(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(isdefined(level.weatherfx) && isdefined(level.weatherfx[localclientnum])) {
+  if(isDefined(level.weatherfx) && isDefined(level.weatherfx[localclientnum])) {
     stopfx(localclientnum, level.weatherfx[localclientnum]);
     level.weatherfx[localclientnum] = 0;
   }
@@ -400,11 +400,11 @@ function function_10093dd7(localclientnum, oldval, newval, bnewent, binitialsnap
   }
   players = getlocalplayers();
   if(newval) {
-    if(!isdefined(level.var_45fd31cd)) {
+    if(!isDefined(level.var_45fd31cd)) {
       level.var_45fd31cd = createluimenu(localclientnum, "DOA_outro_frame");
     }
     openluimenu(localclientnum, level.var_45fd31cd);
-    if(isdefined(level.var_ba533099)) {
+    if(isDefined(level.var_ba533099)) {
       exploder::kill_exploder(level.var_ba533099);
       level.var_ba533099 = undefined;
     }
@@ -412,7 +412,7 @@ function function_10093dd7(localclientnum, oldval, newval, bnewent, binitialsnap
     players[0] camerasetposition(level.var_b62087b0.origin);
     players[0] camerasetlookat(level.var_b62087b0.angles);
   } else {
-    if(isdefined(level.var_45fd31cd)) {
+    if(isDefined(level.var_45fd31cd)) {
       closeluimenu(localclientnum, level.var_45fd31cd);
       level.var_45fd31cd = undefined;
     }
@@ -422,16 +422,16 @@ function function_10093dd7(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_354ec425(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    if(!(isdefined(self.var_354ec425) && self.var_354ec425)) {
+    if(!(isDefined(self.var_354ec425) && self.var_354ec425)) {
       self.var_354ec425 = 1;
-      if(!isdefined(level.var_172ed9a1)) {
+      if(!isDefined(level.var_172ed9a1)) {
         level.var_172ed9a1 = [];
       } else if(!isarray(level.var_172ed9a1)) {
         level.var_172ed9a1 = array(level.var_172ed9a1);
       }
       level.var_172ed9a1[level.var_172ed9a1.size] = self;
     }
-  } else if(isdefined(self.var_354ec425) && self.var_354ec425) {
+  } else if(isDefined(self.var_354ec425) && self.var_354ec425) {
     self.var_354ec425 = undefined;
     arrayremovevalue(level.var_172ed9a1, self);
   }
@@ -464,7 +464,7 @@ function function_ee495f41(num) {
 function function_351aa01c(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval != 0) {
     name = namespace_eaa992c::function_9e6fe7c3(newval);
-    if(isdefined(self.var_ec1cda64) && namespace_eaa992c::function_7664cc94(newval) && isdefined(self.var_ec1cda64[name])) {
+    if(isDefined(self.var_ec1cda64) && namespace_eaa992c::function_7664cc94(newval) && isDefined(self.var_ec1cda64[name])) {
       self thread namespace_eaa992c::function_e68e3c0d(localclientnum, name, 1);
     }
     self thread namespace_eaa992c::function_e68e3c0d(localclientnum, name, 0, namespace_eaa992c::function_28a90644(newval));
@@ -496,7 +496,7 @@ function function_9bf26aa6(localclientnum, oldval, newval, bnewent, binitialsnap
 }
 
 function onground() {
-  a_trace = bullettrace(self.origin, self.origin + (vectorscale((0, 0, -1), 5000)), 0, self, 1);
+  a_trace = bulletTrace(self.origin, self.origin + (vectorscale((0, 0, -1), 5000)), 0, self, 1);
   v_ground = a_trace["position"];
   distance_squared = distancesquared(self.origin, v_ground);
   if(distance_squared > 576) {
@@ -511,13 +511,13 @@ function function_10477d98(localclientnum) {
   self endon("hash_7f60c43e");
   self endon("entityshutdown");
   endtime = gettime() + 600;
-  self playsound(0, "zmb_fated_boost_activate");
+  self playSound(0, "zmb_fated_boost_activate");
   lastposition = self.origin;
   stepsize = 20;
-  while (gettime() < endtime) {
+  while(gettime() < endtime) {
     if(self onground()) {
       wait(0.2);
-      if(!(isdefined(level.doa.var_2836c8ee) && level.doa.var_2836c8ee) && localclientnum != 0) {
+      if(!(isDefined(level.doa.var_2836c8ee) && level.doa.var_2836c8ee) && localclientnum != 0) {
         continue;
       }
       normal = vectornormalize(self.origin - lastposition);
@@ -527,9 +527,9 @@ function function_10477d98(localclientnum) {
         continue;
       }
       steps = int((dist / stepsize) + 0.5);
-      for (i = 0; i < steps; i++) {
-        playfx(localclientnum, level._effect["fury_boost"], lastposition, anglestoforward(self.angles), (0, 0, 1));
-        playfx(localclientnum, level._effect["fury_patch"], lastposition, anglestoforward(self.angles), (0, 0, 1));
+      for(i = 0; i < steps; i++) {
+        playFX(localclientnum, level._effect["fury_boost"], lastposition, anglesToForward(self.angles), (0, 0, 1));
+        playFX(localclientnum, level._effect["fury_patch"], lastposition, anglesToForward(self.angles), (0, 0, 1));
         lastposition = lastposition + step;
       }
       lastposition = self.origin;
@@ -549,7 +549,7 @@ function function_b868b40f(localclientnum, oldval, newval, bnewent, binitialsnap
 }
 
 function function_409fa9ce(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  debugmsg((((("" + (isdefined(self.name) ? self.name : "")) + "") + newval) + "") + localclientnum);
+  debugmsg((((("" + (isDefined(self.name) ? self.name : "")) + "") + newval) + "") + localclientnum);
   if(newval) {
     self thread function_10477d98(localclientnum);
   } else {
@@ -566,8 +566,8 @@ function function_cb806a9b(localclientnum, oldval, newval, bnewent, binitialsnap
     billow_fx = level._effect["rise_blood_billow"];
     var_cf929ddb = level._effect["rise_blood_dust"];
     type = "dirt";
-    playsound(0, sound, self.origin);
-    for (i = 0; i < localplayers.size; i++) {
+    playSound(0, sound, self.origin);
+    for(i = 0; i < localplayers.size; i++) {
       self thread rise_dust_fx(i, type, billow_fx, burst_fx, var_cf929ddb);
     }
   }
@@ -582,8 +582,8 @@ function handle_zombie_risers(localclientnum, oldval, newval, bnewent, binitials
     billow_fx = level._effect["rise_billow"];
     var_cf929ddb = level._effect["rise_dust"];
     type = "dirt";
-    playsound(0, sound, self.origin);
-    for (i = 0; i < localplayers.size; i++) {
+    playSound(0, sound, self.origin);
+    for(i = 0; i < localplayers.size; i++) {
       self thread rise_dust_fx(i, type, billow_fx, burst_fx, var_cf929ddb);
     }
   }
@@ -592,21 +592,21 @@ function handle_zombie_risers(localclientnum, oldval, newval, bnewent, binitials
 function rise_dust_fx(localclientnum, type, billow_fx, burst_fx, var_cf929ddb) {
   dust_tag = "J_SpineUpper";
   self endon("entityshutdown");
-  if(isdefined(burst_fx)) {
-    playfx(localclientnum, burst_fx, self.origin + (0, 0, randomintrange(5, 10)));
+  if(isDefined(burst_fx)) {
+    playFX(localclientnum, burst_fx, self.origin + (0, 0, randomintrange(5, 10)));
   }
   wait(0.25);
-  if(isdefined(billow_fx)) {
-    playfx(localclientnum, billow_fx, self.origin + (randomintrange(-10, 10), randomintrange(-10, 10), randomintrange(5, 10)));
+  if(isDefined(billow_fx)) {
+    playFX(localclientnum, billow_fx, self.origin + (randomintrange(-10, 10), randomintrange(-10, 10), randomintrange(5, 10)));
   }
   wait(2);
   dust_time = 5.5;
   dust_interval = 0.3;
   self util::waittill_dobj(localclientnum);
   t = 0;
-  while (t < dust_time) {
+  while(t < dust_time) {
     if(self hasdobj(localclientnum)) {
-      playfxontag(localclientnum, var_cf929ddb, self, dust_tag);
+      playFXOnTag(localclientnum, var_cf929ddb, self, dust_tag);
     }
     wait(dust_interval);
     t = t + dust_interval;
@@ -621,7 +621,7 @@ function function_20671f0(localclientnum, oldval, newval, bnewent, binitialsnap,
 }
 
 function function_ec2caec3(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(!isdefined(self.var_d05d7e08)) {
+  if(!isDefined(self.var_d05d7e08)) {
     self.var_d05d7e08 = 0;
   }
   switch (self.var_d05d7e08) {
@@ -643,11 +643,11 @@ function private function_38452435(localclientnum) {
   self notify("hash_38452435");
   self endon("hash_38452435");
   self waittill("entityshutdown");
-  if(isdefined(self.fx)) {
+  if(isDefined(self.fx)) {
     deletefx(localclientnum, self.fx);
     self.fx = undefined;
   }
-  if(isdefined(self.fx2)) {
+  if(isDefined(self.fx2)) {
     deletefx(localclientnum, self.fx2);
     self.fx2 = undefined;
   }
@@ -656,7 +656,7 @@ function private function_38452435(localclientnum) {
 function function_b54615b2() {
   arrayremovevalue(level.doa.hazards, undefined);
   foreach(hazard in level.doa.hazards) {
-    if(!isdefined(hazard)) {
+    if(!isDefined(hazard)) {
       continue;
     }
     if(hazard == self) {
@@ -667,7 +667,7 @@ function function_b54615b2() {
     }
     distsq = distancesquared(hazard.origin, self.origin);
     if(distsq < (72 * 72)) {
-      if(isdefined(hazard.activefx) && hazard.activefx == level._effect["electric_trap"]) {
+      if(isDefined(hazard.activefx) && hazard.activefx == level._effect["electric_trap"]) {
         return level._effect["electric_trap2"];
       }
     }
@@ -682,53 +682,53 @@ function function_e41e6611(localclientnum, value) {
       break;
     }
     case 1: {
-      if(isdefined(self.fx)) {
+      if(isDefined(self.fx)) {
         deletefx(localclientnum, self.fx);
         self.fx = undefined;
       }
-      if(isdefined(self.fx2)) {
+      if(isDefined(self.fx2)) {
         deletefx(localclientnum, self.fx2);
         self.fx2 = undefined;
       }
-      self.fx2 = playfx(localclientnum, level._effect["trap_green"], self.origin + vectorscale((0, 0, 1), 124));
+      self.fx2 = playFX(localclientnum, level._effect["trap_green"], self.origin + vectorscale((0, 0, 1), 124));
       break;
     }
     case 2: {
-      if(isdefined(self.fx)) {
+      if(isDefined(self.fx)) {
         deletefx(localclientnum, self.fx);
         self.fx = undefined;
       }
-      if(isdefined(self.fx2)) {
+      if(isDefined(self.fx2)) {
         deletefx(localclientnum, self.fx2);
         self.fx2 = undefined;
       }
-      self.fx2 = playfx(localclientnum, level._effect["trap_red"], self.origin + vectorscale((0, 0, 1), 124));
+      self.fx2 = playFX(localclientnum, level._effect["trap_red"], self.origin + vectorscale((0, 0, 1), 124));
       break;
     }
     case 3: {
-      if(isdefined(self.fx)) {
+      if(isDefined(self.fx)) {
         deletefx(localclientnum, self.fx);
         self.fx = undefined;
       }
-      if(isdefined(self.fx2)) {
+      if(isDefined(self.fx2)) {
         deletefx(localclientnum, self.fx2);
         self.fx2 = undefined;
       }
-      if(!isdefined(self.activefx)) {
+      if(!isDefined(self.activefx)) {
         self.activefx = self function_b54615b2();
       }
-      if(isdefined(self.var_5ad223cf) && self.var_5ad223cf) {
+      if(isDefined(self.var_5ad223cf) && self.var_5ad223cf) {
         level thread drawcylinder(self.origin, 40, 20, 180, (0, 0, 1));
       }
-      self.fx = playfx(localclientnum, self.activefx, self.origin + vectorscale((0, 0, 1), 100));
-      self.fx2 = playfx(localclientnum, level._effect["hazard_electric"], self.origin + vectorscale((0, 0, 1), 124));
+      self.fx = playFX(localclientnum, self.activefx, self.origin + vectorscale((0, 0, 1), 100));
+      self.fx2 = playFX(localclientnum, level._effect["hazard_electric"], self.origin + vectorscale((0, 0, 1), 124));
       break;
     }
     case 9: {
-      if(isdefined(self.fx)) {
+      if(isDefined(self.fx)) {
         deletefx(localclientnum, self.fx);
       }
-      if(isdefined(self.fx2)) {
+      if(isDefined(self.fx2)) {
         deletefx(localclientnum, self.fx2);
       }
       break;
@@ -740,18 +740,18 @@ function function_d8d20160(localclientnum, value) {
   self util::waittill_dobj(localclientnum);
   switch (value) {
     case 3: {
-      self.fx = playfxontag(localclientnum, level._effect["trashcan_active"], self, "tag_origin");
+      self.fx = playFXOnTag(localclientnum, level._effect["trashcan_active"], self, "tag_origin");
       break;
     }
     case 4:
     case 5:
     case 6: {
-      playfx(localclientnum, level._effect["trashcan_damaged"], self.origin + vectorscale((0, 0, 1), 32));
+      playFX(localclientnum, level._effect["trashcan_damaged"], self.origin + vectorscale((0, 0, 1), 32));
       break;
     }
     case 9: {
-      playfx(localclientnum, level._effect["trashcan_destroyed"], self.origin + vectorscale((0, 0, 1), 32));
-      if(isdefined(self.fx)) {
+      playFX(localclientnum, level._effect["trashcan_destroyed"], self.origin + vectorscale((0, 0, 1), 32));
+      if(isDefined(self.fx)) {
         deletefx(localclientnum, self.fx);
       }
       break;
@@ -781,7 +781,7 @@ function function_f7c0d598(mapping = "zombietron") {
   self endon("entityshutdown");
   self endon("disconnect");
   loc_00004FA8:
-    debugmsg((((("" + (isdefined(self.name) ? self.name : "")) + "") + mapping) + "") + (self islocalplayer() ? "" : ""));
+    debugmsg((((("" + (isDefined(self.name) ? self.name : "")) + "") + mapping) + "") + (self islocalplayer() ? "" : ""));
   if(self islocalplayer()) {
     clientnum = self getlocalclientnumber();
     debugmsg("" + clientnum);
@@ -799,31 +799,31 @@ function function_f87ff72d(localclientnum, oldval, newval, bnewent, binitialsnap
   if(newval == 0) {
     return;
   }
-  if(isdefined(level.doa.var_2836c8ee) && level.doa.var_2836c8ee) {
-    forward = anglestoforward(self.angles);
+  if(isDefined(level.doa.var_2836c8ee) && level.doa.var_2836c8ee) {
+    forward = anglesToForward(self.angles);
     var_ec8a4984 = self.origin + (forward * 100);
   } else {
     var_ec8a4984 = self.origin;
   }
   origin = var_ec8a4984 + (20, 0, 2000);
   bomb = spawn(localclientnum, origin, "script_model");
-  bomb setmodel("zombietron_nuke");
+  bomb setModel("zombietron_nuke");
   bomb.angles = vectorscale((1, 0, 0), 90);
   bomb moveto(var_ec8a4984, 0.3, 0, 0);
-  playsound(0, "zmb_nuke_incoming", self.origin);
+  playSound(0, "zmb_nuke_incoming", self.origin);
   bomb waittill("movedone");
-  playsound(localclientnum, "zmb_nuke_impact", var_ec8a4984);
-  playfx(localclientnum, level._effect["bomb"], var_ec8a4984);
+  playSound(localclientnum, "zmb_nuke_impact", var_ec8a4984);
+  playFX(localclientnum, level._effect["bomb"], var_ec8a4984);
   foreach(player in getlocalplayers()) {
     player earthquake(1, 0.8, var_ec8a4984, 1000);
   }
   bomb delete();
   wait(0.2);
-  playfx(localclientnum, level._effect["nuke_dust"], var_ec8a4984);
+  playFX(localclientnum, level._effect["nuke_dust"], var_ec8a4984);
 }
 
 function randomize_array(array) {
-  for (i = 0; i < array.size; i++) {
+  for(i = 0; i < array.size; i++) {
     j = randomint(array.size);
     temp = array[i];
     array[i] = array[j];
@@ -833,8 +833,8 @@ function randomize_array(array) {
 }
 
 function function_ef1ad359(origin, count = 3, dir) {
-  while (count) {
-    if(!isdefined(dir)) {
+  while(count) {
+    if(!isDefined(dir)) {
       dir = (level.var_ff8aba3b + (randomfloatrange((level.var_46418da4 * -1) - count, level.var_46418da4 + count), randomfloatrange((level.var_46418da4 * -1) - count, level.var_46418da4 + count), randomintrange((level.var_96344b03 * -1) - count, level.var_96344b03 + count))) * level.var_bd436f37;
     }
     model = level.var_e3119165[randomint(level.var_e3119165.size)];
@@ -845,24 +845,24 @@ function function_ef1ad359(origin, count = 3, dir) {
 }
 
 function function_3a1ccea7(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(isdefined(level._effect["zombie_guts_explosion"]) && util::is_mature()) {
+  if(isDefined(level._effect["zombie_guts_explosion"]) && util::is_mature()) {
     where = self gettagorigin("J_SpineLower");
-    if(!isdefined(where)) {
+    if(!isDefined(where)) {
       where = self.origin;
     }
-    playfx(localclientnum, level._effect["zombie_guts_explosion"], where);
+    playFX(localclientnum, level._effect["zombie_guts_explosion"], where);
     level thread function_ef1ad359(where, 1);
   }
 }
 
 function zombie_gut_explosion_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    if(isdefined(level._effect["zombie_guts_explosion"]) && util::is_mature()) {
+    if(isDefined(level._effect["zombie_guts_explosion"]) && util::is_mature()) {
       where = self gettagorigin("J_SpineLower");
-      if(!isdefined(where)) {
+      if(!isDefined(where)) {
         where = self.origin;
       }
-      playfx(localclientnum, level._effect["zombie_guts_explosion"], where);
+      playFX(localclientnum, level._effect["zombie_guts_explosion"], where);
       level thread function_ef1ad359(where, 6);
     }
   }
@@ -872,12 +872,12 @@ function function_15b503eb(localclientnum, oldval, newval, bnewent, binitialsnap
   if(!newval) {
     return;
   }
-  if(isdefined(level._effect["zombie_guts_explosion"]) && util::is_mature()) {
+  if(isDefined(level._effect["zombie_guts_explosion"]) && util::is_mature()) {
     where = self gettagorigin("J_SpineLower");
-    if(!isdefined(where)) {
+    if(!isDefined(where)) {
       where = self.origin;
     }
-    playfx(localclientnum, level._effect["zombie_guts_explosion"], where);
+    playFX(localclientnum, level._effect["zombie_guts_explosion"], where);
     level thread function_ef1ad359(where);
   }
 }
@@ -886,12 +886,12 @@ function function_8b8f5cb4(localclientnum, oldval, newval, bnewent, binitialsnap
   if(!newval) {
     return;
   }
-  if(isdefined(level._effect["zombie_guts_explosion"]) && util::is_mature()) {
+  if(isDefined(level._effect["zombie_guts_explosion"]) && util::is_mature()) {
     where = self gettagorigin("J_SpineLower");
-    if(!isdefined(where)) {
+    if(!isDefined(where)) {
       where = self.origin;
     }
-    playfx(localclientnum, level._effect["zombie_guts_explosion"], where);
+    playFX(localclientnum, level._effect["zombie_guts_explosion"], where);
     level thread function_ef1ad359(where, 5);
   }
 }
@@ -904,21 +904,21 @@ function zombie_ragdoll_explode_cb(localclientnum, oldval, newval, bnewent, bini
 
 function zombie_wait_explode(localclientnum) {
   where = self gettagorigin("J_SpineLower");
-  if(!isdefined(where)) {
+  if(!isDefined(where)) {
     where = self.origin;
   }
   start = gettime();
-  while ((gettime() - start) < 2000) {
-    if(isdefined(self)) {
+  while((gettime() - start) < 2000) {
+    if(isDefined(self)) {
       where = self gettagorigin("J_SpineLower");
-      if(!isdefined(where)) {
+      if(!isDefined(where)) {
         where = self.origin;
       }
     }
     wait(0.05);
   }
-  if(isdefined(level._effect["zombie_guts_explosion"]) && util::is_mature()) {
-    playfx(localclientnum, level._effect["zombie_guts_explosion"], where);
+  if(isDefined(level._effect["zombie_guts_explosion"]) && util::is_mature()) {
+    playFX(localclientnum, level._effect["zombie_guts_explosion"], where);
   }
 }
 
@@ -931,9 +931,9 @@ function function_36c61ba6(localclientnum, var_4faf5231 = 1, var_ad5de66e = 1) {
   var_ba7af42 = var_711842d8;
   baseangles = self.angles;
   self.rate = 1;
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     var_ba7af42 = var_711842d8;
-    while (currentscale < var_c316c8b8) {
+    while(currentscale < var_c316c8b8) {
       currentscale = currentscale + var_ba7af42;
       var_ba7af42 = var_ba7af42 + (var_fa7c415 * self.rate);
       if(currentscale > var_c316c8b8) {
@@ -945,7 +945,7 @@ function function_36c61ba6(localclientnum, var_4faf5231 = 1, var_ad5de66e = 1) {
       }
       wait(0.016);
     }
-    while (currentscale > var_ad5de66e) {
+    while(currentscale > var_ad5de66e) {
       currentscale = currentscale - var_ba7af42;
       var_ba7af42 = var_ba7af42 - (var_fa7c415 * self.rate);
       if(var_ba7af42 < 0.0125) {
@@ -967,7 +967,7 @@ function function_36c61ba6(localclientnum, var_4faf5231 = 1, var_ad5de66e = 1) {
 
 function function_455fa2fe(localclientnum, owner, fx) {
   owner waittill("entityshutdown");
-  playfx(localclientnum, level._effect[fx], self.origin);
+  playFX(localclientnum, level._effect[fx], self.origin);
   self delete();
 }
 
@@ -975,7 +975,7 @@ function function_d277a961(localclientnum, oldval, newval, bnewent, binitialsnap
   switch (newval) {
     case 1: {
       self.fakemodel = spawn(localclientnum, self.origin, "script_model");
-      self.fakemodel setmodel("zombietron_heart");
+      self.fakemodel setModel("zombietron_heart");
       self.fakemodel thread function_455fa2fe(localclientnum, self, "heart_explode");
       self.fakemodel thread function_36c61ba6(localclientnum);
       self.fakemodel.rate = newval;
@@ -985,22 +985,22 @@ function function_d277a961(localclientnum, oldval, newval, bnewent, binitialsnap
     case 3:
     case 4:
     case 5: {
-      if(isdefined(self.fakemodel)) {
+      if(isDefined(self.fakemodel)) {
         self.fakemodel.rate = newval;
       }
       break;
     }
     case 6: {
       self.fakemodel = spawn(localclientnum, self.origin, "script_model");
-      if(isdefined(self.fakemodel)) {
-        self.fakemodel setmodel("zombietron_spider_egg");
+      if(isDefined(self.fakemodel)) {
+        self.fakemodel setModel("zombietron_spider_egg");
         self.fakemodel setscale(0.5);
         self.fakemodel thread function_455fa2fe(localclientnum, self, "egg_explode");
       }
       break;
     }
     case 7: {
-      if(isdefined(self.fakemodel)) {
+      if(isDefined(self.fakemodel)) {
         self.fakemodel thread function_36c61ba6(localclientnum, 0, 0.5);
       }
       break;
@@ -1010,7 +1010,7 @@ function function_d277a961(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function delay_for_clients_then_execute(func) {
   wait(0.1);
-  while (!clienthassnapshot(self.localclientnum)) {
+  while(!clienthassnapshot(self.localclientnum)) {
     wait(0.016);
   }
   wait(0.1);
@@ -1021,7 +1021,7 @@ function function_ddbc17b4(localclientnum, var_bac17ccf, var_2ca34dda) {
   if(var_bac17ccf == 1 && getplayers(localclientnum).size == level.localplayers.size) {
     var_bac17ccf++;
   }
-  if(var_bac17ccf == 4 && isdefined(level.doa.var_708cc739) && level.doa.var_708cc739 != 1) {
+  if(var_bac17ccf == 4 && isDefined(level.doa.var_708cc739) && level.doa.var_708cc739 != 1) {
     var_bac17ccf++;
   }
   if(var_bac17ccf == 3 && level.localplayers.size > 1) {
@@ -1033,7 +1033,7 @@ function function_ddbc17b4(localclientnum, var_bac17ccf, var_2ca34dda) {
   if(var_bac17ccf == var_2ca34dda) {
     return var_2ca34dda;
   }
-  if(level.doa.arenas[level.doa.current_arena].var_dd94482c & (1 << var_bac17ccf)) {
+  if(level.doa.arenas[level.doa.current_arena].var_dd94482c &(1 << var_bac17ccf)) {
     return var_bac17ccf;
   }
   return function_ddbc17b4(localclientnum, var_bac17ccf + 1, var_2ca34dda);
@@ -1047,16 +1047,16 @@ function changecamera(localclientnum, oldval, newval, bnewent, binitialsnap, fie
   setdvar("g_vrGameMode", 2);
   setdvar("cg_disableearthquake", 1);
   setdvar("vr_eyeScale", 0.3);
-  if(!isdefined(self.var_44509e49)) {
+  if(!isDefined(self.var_44509e49)) {
     self.var_44509e49 = 0;
   }
   var_f855b918 = self.var_44509e49;
   self.var_44509e49 = function_ddbc17b4(localclientnum, self.var_44509e49 + 1, self.var_44509e49);
-  if(isdefined(self.var_4f118af8)) {
+  if(isDefined(self.var_4f118af8)) {
     self.var_44509e49 = self.var_4f118af8;
   }
   self cameraforcedisablescriptcam(0);
-  if(isdefined(level.doa.var_20e9a021) && level.doa.var_20e9a021) {
+  if(isDefined(level.doa.var_20e9a021) && level.doa.var_20e9a021) {
     self.var_44509e49 = 2;
   }
   if(self.var_44509e49 == 4) {
@@ -1067,7 +1067,7 @@ function changecamera(localclientnum, oldval, newval, bnewent, binitialsnap, fie
     self cameraforcedisablescriptcam(1);
   }
   if(var_f855b918 == 4 && self.var_44509e49 != var_f855b918) {
-    if(isdefined(level.doa.var_708cc739) && level.doa.var_708cc739 == 1) {
+    if(isDefined(level.doa.var_708cc739) && level.doa.var_708cc739 == 1) {
       level.doa.var_708cc739 = undefined;
       namespace_3ca3c537::function_986ae2b3(localclientnum);
     }
@@ -1099,7 +1099,7 @@ function function_cee29ae7(localclientnum, oldval, newval, bnewent, binitialsnap
 function function_cd844947(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   low = newval & 65535;
   high = newval >> 16;
-  forward = anglestoforward(level.var_a32fbbc0);
+  forward = anglesToForward(level.var_a32fbbc0);
   right = anglestoright(level.var_a32fbbc0);
   level.var_191c8154 = (0, 0, 0);
   if(low & 1) {
@@ -1143,22 +1143,22 @@ function debugmsg(txt) {
 }
 
 function function_12c2fbcb() {
-  if(!isdefined(self.var_ec1cda64)) {
+  if(!isDefined(self.var_ec1cda64)) {
     self.var_ec1cda64 = [];
   }
-  if(!isdefined(self.doa)) {
+  if(!isDefined(self.doa)) {
     self.entnum = self getentitynumber();
     self.doa = level.var_29e6f519[self.entnum];
-    if(isdefined(self.doa.player)) {
-      loc_00006CBC: loc_00006CFC: debugmsg((((("" + (isdefined(self.name) ? self.name : "")) + "") + (isdefined(self.doa.player) ? self.doa.player.name : "") + "") + self getentitynumber() + "") + (isdefined(self.doa.player) ? self.doa.player getentitynumber() : -1));
+    if(isDefined(self.doa.player)) {
+      loc_00006CBC: loc_00006CFC: debugmsg((((("" + (isDefined(self.name) ? self.name : "")) + "") + (isDefined(self.doa.player) ? self.doa.player.name : "") + "") + self getentitynumber() + "") + (isDefined(self.doa.player) ? self.doa.player getentitynumber() : -1));
       assert(self.doa.player == self);
     }
     namespace_64c6b720::function_e06716c7(self.doa);
     self.doa.player = self;
     loc_00006DF4:
-      debugmsg((((("" + (isdefined(self.name) ? self.name : "")) + "") + self.entnum) + "") + (isdefined(self.doa.player) ? self.doa.player getentitynumber() : -1));
+      debugmsg((((("" + (isDefined(self.name) ? self.name : "")) + "") + self.entnum) + "") + (isDefined(self.doa.player) ? self.doa.player getentitynumber() : -1));
     self cameraforcedisablescriptcam(0);
-    self camerasetupdatecallback( & namespace_ad544aeb::function_d207ecc1);
+    self camerasetupdatecallback(&namespace_ad544aeb::function_d207ecc1);
     setdvar("vr_playerScale", 30);
     setfriendlynamedraw(0);
     if(self islocalplayer()) {
@@ -1192,39 +1192,39 @@ function function_12c2fbcb() {
 
 function function_c33d3992(localclientnum) {
   if(!clienthassnapshot(localclientnum)) {
-    debugmsg(("" + (isdefined(self.name) ? self.name : "")) + "");
+    debugmsg(("" + (isDefined(self.name) ? self.name : "")) + "");
     return false;
   }
   if(!self isplayer()) {
-    debugmsg(("" + (isdefined(self.name) ? self.name : "")) + "");
+    debugmsg(("" + (isDefined(self.name) ? self.name : "")) + "");
     return false;
   }
   if(!self hasdobj(localclientnum)) {
-    debugmsg(("" + (isdefined(self.name) ? self.name : "")) + "");
+    debugmsg(("" + (isDefined(self.name) ? self.name : "")) + "");
     return false;
   }
-  if(self islocalplayer() && !isdefined(self getlocalclientnumber())) {
-    debugmsg(("" + (isdefined(self.name) ? self.name : "")) + "");
+  if(self islocalplayer() && !isDefined(self getlocalclientnumber())) {
+    debugmsg(("" + (isDefined(self.name) ? self.name : "")) + "");
     return false;
   }
   if(isspectating(localclientnum)) {
-    debugmsg(("" + (isdefined(self.name) ? self.name : "")) + "");
+    debugmsg(("" + (isDefined(self.name) ? self.name : "")) + "");
     return false;
   }
   if(isdemoplaying()) {
-    debugmsg(("" + (isdefined(self.name) ? self.name : "")) + "");
+    debugmsg(("" + (isDefined(self.name) ? self.name : "")) + "");
     return false;
   }
-  if(self islocalplayer() && isdefined(self getlocalclientnumber())) {
+  if(self islocalplayer() && isDefined(self getlocalclientnumber())) {
     spectated = playerbeingspectated(self getlocalclientnumber());
     if(self != spectated) {
-      debugmsg(("" + (isdefined(self.name) ? self.name : "")) + "");
+      debugmsg(("" + (isDefined(self.name) ? self.name : "")) + "");
       return false;
     }
   }
   doa = level.var_29e6f519[self getentitynumber()];
-  if(isdefined(doa.player) && doa.player != self) {
-    debugmsg(((((("" + (isdefined(self.name) ? self.name : "")) + "") + doa.player.name) + "") + self getentitynumber() + "") + doa.player getentitynumber());
+  if(isDefined(doa.player) && doa.player != self) {
+    debugmsg(((((("" + (isDefined(self.name) ? self.name : "")) + "") + doa.player.name) + "") + self getentitynumber() + "") + doa.player getentitynumber());
     return false;
   }
   return true;
@@ -1232,7 +1232,7 @@ function function_c33d3992(localclientnum) {
 
 function function_5c2a88d5() {
   level endon("hash_a2a24535");
-  while (true) {
+  while(true) {
     setsoundcontext("water", "over");
     foreach(player in getlocalplayers()) {
       player setsoundentcontext("water", "over");
@@ -1253,8 +1253,8 @@ function drawcylinder(pos, rad, height, frames = 60, color = (0, 0, 0)) {
   self endon("entityshutdown");
   currad = rad;
   curheight = height;
-  for (frames = int(frames); frames; frames--) {
-    for (r = 0; r < 20; r++) {
+  for(frames = int(frames); frames; frames--) {
+    for(r = 0; r < 20; r++) {
       theta = (r / 20) * 360;
       theta2 = ((r + 1) / 20) * 360;
       line(pos + (cos(theta) * currad, sin(theta) * currad, 0), pos + (cos(theta2) * currad, sin(theta2) * currad, 0), color);

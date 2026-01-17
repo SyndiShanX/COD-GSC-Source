@@ -34,8 +34,8 @@ set_vehicle_anims(var_0) {
 setanims() {
   var_0 = [];
 
-  for (var_1 = 0; var_1 < 11; var_1++)
-    var_0[var_1] = spawnstruct();
+  for(var_1 = 0; var_1 < 11; var_1++)
+    var_0[var_1] = spawnStruct();
 
   var_0[0].getout_delete = 1;
   return var_0;

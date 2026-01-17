@@ -617,7 +617,7 @@ kill_backtrackers() {
   thread maps\_utility::smart_radio_dialogue("factory_mrk_adamgetbackhere");
   maps\_utility::trigger_wait_targetname("ambush_escape_backtrack_trigger");
   level notify("new_quote_string");
-  setdvar("ui_deadquote", & "FACTORY_FAIL_BACKTRACKING");
+  setdvar("ui_deadquote", &"FACTORY_FAIL_BACKTRACKING");
   playFX(level._effect["101ton_bomb"], level.player.origin);
   level.player kill();
   maps\_utility::missionfailedwrapper();

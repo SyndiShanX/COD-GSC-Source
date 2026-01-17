@@ -9,7 +9,6 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_weapons;
-
 #namespace zm_trial_use_pack_a_punch;
 
 autoexec __init__system__() {
@@ -24,7 +23,7 @@ __init__() {
   zm_trial::register_challenge(#"use_pack_a_punch", &on_begin, &on_end);
 }
 
-private on_begin(n_count) {
+on_begin(n_count) {
   callback::function_aebeafc0(&function_aebeafc0);
   level.var_195590fb = zm_trial::function_5769f26a(n_count);
 
@@ -35,7 +34,7 @@ private on_begin(n_count) {
   }
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   foreach(player in getplayers()) {
     player zm_trial_util::function_f3aacffb();
   }
@@ -62,7 +61,7 @@ private on_end(round_reset) {
   callback::function_3e2ed898(&function_aebeafc0);
 }
 
-private function_aebeafc0(upgraded_weapon) {
+function_aebeafc0(upgraded_weapon) {
   w_base = zm_weapons::get_base_weapon(upgraded_weapon);
 
   if(!isDefined(self.var_92cd5237)) {

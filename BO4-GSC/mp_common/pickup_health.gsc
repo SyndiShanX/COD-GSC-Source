@@ -11,14 +11,13 @@
 #include scripts\core_common\gestures;
 #include scripts\core_common\player\player_shared;
 #include scripts\core_common\system_shared;
-
 #namespace pickup_health;
 
 autoexec __init__system__() {
-  system::register(#"pickup_health", &__init__, undefined, #"weapons");
+  system::register(#"pickup_health", &__init__, undefined, # "weapons");
 }
 
-private __init__() {
+__init__() {
   callback::on_connect(&onconnect);
   callback::on_spawned(&onspawned);
   ability_player::register_gadget_activation_callbacks(23, &onhealthregen, &offhealthregen);
@@ -48,8 +47,8 @@ function_e963e37d() {
 }
 
 function_dd4bf8ac(num) {
-  if(self.pers[#"pickup_health"] < level.var_99a34951) {
-    self.pers[#"pickup_health"] += num;
+  if(self.pers[# "pickup_health"] < level.var_99a34951) {
+    self.pers[# "pickup_health"] += num;
     self function_2bcfabea();
     return true;
   }
@@ -57,13 +56,13 @@ function_dd4bf8ac(num) {
   return false;
 }
 
-private onconnect() {
-  if(!isDefined(self.pers[#"pickup_health"])) {
-    self.pers[#"pickup_health"] = 0;
+onconnect() {
+  if(!isDefined(self.pers[# "pickup_health"])) {
+    self.pers[# "pickup_health"] = 0;
   }
 }
 
-private onspawned() {
+onspawned() {
   self function_3fbb0e22();
 }
 
@@ -72,21 +71,21 @@ function_3fbb0e22() {
   self function_2bcfabea();
 }
 
-private onhealthregen(slot, weapon) {
-  self.pers[#"pickup_health"]--;
+onhealthregen(slot, weapon) {
+  self.pers[# "pickup_health"]--;
 }
 
-private offhealthregen(slot, weapon) {
+offhealthregen(slot, weapon) {
   self gadgetdeactivate(self.gadget_health_regen_slot, self.gadget_health_regen_weapon);
   thread healingdone();
 }
 
-private healingdone() {
+healingdone() {
   wait 0.5;
   self function_2bcfabea();
 }
 
-private function_5bb13b48(player) {
+function_5bb13b48(player) {
   if(isDefined(player) && isplayer(player)) {
     if(player function_dd4bf8ac(1)) {
       if(isDefined(self.objectiveid)) {
@@ -114,7 +113,7 @@ private function_5bb13b48(player) {
   }
 }
 
-private function_7a80944d(player) {
+function_7a80944d(player) {
   level endon(#"game_ended");
   self endon(#"death");
   player endon(#"disconnect");
@@ -128,28 +127,28 @@ private function_7a80944d(player) {
   self.trigger setvisibletoplayer(player);
 }
 
-private function_2bcfabea() {
-  if(!isDefined(self) || !isDefined(self.pers[#"pickup_health"])) {
+function_2bcfabea() {
+  if(!isDefined(self) || !isDefined(self.pers[# "pickup_health"])) {
     return;
   }
 
-  if(self.pers[#"pickup_health"] <= 0) {
+  if(self.pers[# "pickup_health"] <= 0) {
     self gadget_health_regen::power_off();
 
     if(isDefined(self.gadget_health_regen_slot)) {
       self function_19ed70ca(self.gadget_health_regen_slot, 1);
     }
 
-    if(self.pers[#"pickup_health"] < 0) {
-      self.pers[#"pickup_health"] = 0;
+    if(self.pers[# "pickup_health"] < 0) {
+      self.pers[# "pickup_health"] = 0;
     }
   } else {
     self gadget_health_regen::power_on();
 
-    if(self.pers[#"pickup_health"] > level.var_99a34951) {
-      self.pers[#"pickup_health"] = level.var_99a34951;
+    if(self.pers[# "pickup_health"] > level.var_99a34951) {
+      self.pers[# "pickup_health"] = level.var_99a34951;
     }
   }
 
-  self clientfield::set_player_uimodel("hudItems.numHealthPickups", self.pers[#"pickup_health"]);
+  self clientfield::set_player_uimodel("hudItems.numHealthPickups", self.pers[# "pickup_health"]);
 }

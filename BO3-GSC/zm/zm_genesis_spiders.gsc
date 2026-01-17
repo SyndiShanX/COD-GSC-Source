@@ -31,16 +31,16 @@ function function_56aaef97() {
   level.var_adca2f3c = 0;
   level.var_7cba7005 = 0;
   level.var_a3ad836b = 50;
-  level.fn_custom_round_ai_spawn = & function_33aa4940;
+  level.fn_custom_round_ai_spawn = &function_33aa4940;
 }
 
 function function_33aa4940() {
   var_c0692329 = 0;
-  if(isdefined(level.var_7cba7005) && level.var_7cba7005) {
+  if(isDefined(level.var_7cba7005) && level.var_7cba7005) {
     if(randomint(100) < level.var_a3ad836b) {
       var_c0692329 = 1;
     }
-  } else if(isdefined(level.var_adca2f3c) && level.var_adca2f3c) {
+  } else if(isDefined(level.var_adca2f3c) && level.var_adca2f3c) {
     if(zm_zonemgr::any_player_in_zone("apothicon_interior_zone")) {
       if(randomint(100) < level.var_a3ad836b) {
         var_c0692329 = 1;
@@ -50,7 +50,7 @@ function function_33aa4940() {
   }
   if(var_c0692329) {
     s_spawn_point = function_99f6dbf1(var_aa671dd4);
-    assert(isdefined(s_spawn_point), "");
+    assert(isDefined(s_spawn_point), "");
     level.var_718361fb = function_3f180afe();
     zm_ai_spiders::function_f4bd92a2(1, s_spawn_point);
   }
@@ -62,8 +62,8 @@ function function_33aa4940() {
 
 function function_99f6dbf1(var_aa671dd4) {
   a_s_locs = array::randomize(level.zm_loc_types["spider_location"]);
-  for (i = 0; i < a_s_locs.size; i++) {
-    if(isdefined(var_aa671dd4)) {
+  for(i = 0; i < a_s_locs.size; i++) {
+    if(isDefined(var_aa671dd4)) {
       if(a_s_locs[i].targetname === var_aa671dd4) {
         return a_s_locs[i];
       }

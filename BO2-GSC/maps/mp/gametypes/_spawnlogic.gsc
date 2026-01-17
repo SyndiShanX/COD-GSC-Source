@@ -153,7 +153,7 @@ addspawnpointteamclassname(team, spawnpointclassname) {
 }
 
 getspawnpointarray(classname) {
-  spawnpoints = getentarray(classname, "classname");
+  spawnpoints = getEntArray(classname, "classname");
 
   if(!isDefined(level.extraspawnpoints) || !isDefined(level.extraspawnpoints[classname]))
     return spawnpoints;
@@ -178,7 +178,7 @@ spawnpointinit() {
   }
 
   spawnpoint placespawnpoint();
-  spawnpoint.forward = anglestoforward(spawnpoint.angles);
+  spawnpoint.forward = anglesToForward(spawnpoint.angles);
   spawnpoint.sighttracepoint = spawnpoint.origin + vectorscale((0, 0, 1), 50.0);
   spawnpoint.inited = 1;
 }
@@ -383,7 +383,7 @@ storespawndata(spawnpoints, useweights, bestspawnpoint) {
     fprintfields(file, str);
   }
 
-  obj = spawnstruct();
+  obj = spawnStruct();
   getallalliedandenemyplayers(obj);
   numallies = 0;
   numenemies = 0;
@@ -408,12 +408,12 @@ storespawndata(spawnpoints, useweights, bestspawnpoint) {
 
   if(isDefined(level.bombguy)) {
     index = otherdata.size;
-    otherdata[index] = spawnstruct();
+    otherdata[index] = spawnStruct();
     otherdata[index].origin = level.bombguy.origin + vectorscale((0, 0, 1), 20.0);
     otherdata[index].text = "Bomb holder";
   } else if(isDefined(level.bombpos)) {
     index = otherdata.size;
-    otherdata[index] = spawnstruct();
+    otherdata[index] = spawnStruct();
     otherdata[index].origin = level.bombpos;
     otherdata[index].text = "Bomb";
   }
@@ -421,7 +421,7 @@ storespawndata(spawnpoints, useweights, bestspawnpoint) {
   if(isDefined(level.flags)) {
     for(i = 0; i < level.flags.size; i++) {
       index = otherdata.size;
-      otherdata[index] = spawnstruct();
+      otherdata[index] = spawnStruct();
       otherdata[index].origin = level.flags[i].origin;
       otherdata[index].text = level.flags[i].useobj maps\mp\gametypes\_gameobjects::getownerteam() + " flag";
     }
@@ -436,8 +436,7 @@ storespawndata(spawnpoints, useweights, bestspawnpoint) {
   closefile(file);
   thisspawnid = level.spawngameid + "." + level.spawnid;
 
-  if(isDefined(self.thisspawnid)) {
-  }
+  if(isDefined(self.thisspawnid)) {}
 
   self.thisspawnid = thisspawnid;
 }
@@ -463,7 +462,7 @@ readspawndata(desiredid, relativepos) {
       break;
     }
 
-    data = spawnstruct();
+    data = spawnStruct();
     data.id = fgetarg(file, 0);
     numspawns = int(fgetarg(file, 1));
 
@@ -482,7 +481,7 @@ readspawndata(desiredid, relativepos) {
         break;
       }
 
-      spawnpoint = spawnstruct();
+      spawnpoint = spawnStruct();
       spawnpoint.origin = strtovec(fgetarg(file, 0));
       spawnpoint.winner = int(fgetarg(file, 1));
       spawnpoint.weight = int(fgetarg(file, 2));
@@ -521,7 +520,7 @@ readspawndata(desiredid, relativepos) {
 
       for(j = 0; j < numsightchecks; j++) {
         index = spawnpoint.sightchecks.size;
-        spawnpoint.sightchecks[index] = spawnstruct();
+        spawnpoint.sightchecks[index] = spawnStruct();
         spawnpoint.sightchecks[index].penalty = int(fgetarg(file, argnum));
         argnum++;
         spawnpoint.sightchecks[index].origin = strtovec(fgetarg(file, argnum));
@@ -570,7 +569,7 @@ readspawndata(desiredid, relativepos) {
     argnum = 1;
 
     for(i = 0; i < numotherdata; i++) {
-      otherdata = spawnstruct();
+      otherdata = spawnStruct();
       otherdata.origin = strtovec(fgetarg(file, argnum));
       argnum++;
       otherdata.text = fgetarg(file, argnum);
@@ -763,7 +762,7 @@ getspawnpoint_nearteam(spawnpoints, favoredspawnpoints) {
   spawnlogic_begin();
   k_favored_spawn_point_bonus = 25000;
   initweights(spawnpoints);
-  obj = spawnstruct();
+  obj = spawnStruct();
   getallalliedandenemyplayers(obj);
   numplayers = obj.allies.size + obj.enemies.size;
   allieddistanceweight = 2;
@@ -984,7 +983,7 @@ spawngraph() {
   h = 20;
   weightscale = 0.1;
   fakespawnpoints = [];
-  corners = getentarray("minimap_corner", "targetname");
+  corners = getEntArray("minimap_corner", "targetname");
 
   if(corners.size != 2) {
     println("^1 can't spawn graph: no minimap corners");
@@ -1011,10 +1010,10 @@ spawngraph() {
 
     for(x = 0; x < w; x++) {
       xamnt = x / (w - 1);
-      fakespawnpoints[i] = spawnstruct();
+      fakespawnpoints[i] = spawnStruct();
       fakespawnpoints[i].origin = (min[0] * xamnt + max[0] * (1 - xamnt), min[1] * yamnt + max[1] * (1 - yamnt), min[2]);
       fakespawnpoints[i].angles = (0, 0, 0);
-      fakespawnpoints[i].forward = anglestoforward(fakespawnpoints[i].angles);
+      fakespawnpoints[i].forward = anglesToForward(fakespawnpoints[i].angles);
       fakespawnpoints[i].sighttracepoint = fakespawnpoints[i].origin;
       i++;
     }
@@ -1135,8 +1134,7 @@ loopbotspawns() {
         for(index = 0; index < numkills; index++) {
           killer = bots[randomint(bots.size)];
 
-          for(victim = bots[randomint(bots.size)]; isDefined(lastvictim) && victim == lastvictim; victim = bots[randomint(bots.size)]) {
-          }
+          for(victim = bots[randomint(bots.size)]; isDefined(lastvictim) && victim == lastvictim; victim = bots[randomint(bots.size)]) {}
 
           victim thread[[level.callbackplayerdamage]](killer, killer, 1000, 0, "MOD_RIFLE_BULLET", "none", (0, 0, 0), (0, 0, 0), "none", 0, 0);
           lastvictim = victim;
@@ -1336,8 +1334,7 @@ debugnearbyplayers(players, origin) {
 
 }
 
-deathoccured(dier, killer) {
-}
+deathoccured(dier, killer) {}
 
 checkforsimilardeaths(deathinfo) {
   for(i = 0; i < level.spawnlogic_deaths.size; i++) {
@@ -1384,7 +1381,7 @@ ispointvulnerable(playerorigin) {
   pos = self.origin + level.bettymodelcenteroffset;
   playerpos = playerorigin + vectorscale((0, 0, 1), 32.0);
   distsqrd = distancesquared(pos, playerpos);
-  forward = anglestoforward(self.angles);
+  forward = anglesToForward(self.angles);
 
   if(distsqrd < level.bettydetectionradius * level.bettydetectionradius) {
     playerdir = vectornormalize(playerpos - pos);
@@ -1522,7 +1519,7 @@ spawnpointupdate(spawnpoint) {
 
     distsum[team] = distsum[team] + dist;
     spawnpoint.numplayersatlastupdate++;
-    pdir = anglestoforward(player.angles);
+    pdir = anglesToForward(player.angles);
 
     if(vectordot(spawnpointdir, diff) < 0 && vectordot(pdir, diff) > 0) {
       continue;
@@ -1635,7 +1632,7 @@ avoidvisibleenemies(spawnpoints, teambased) {
 
       if(level.storespawndata || level.debugspawning) {
         index = spawnpoints[i].sightchecks.size;
-        spawnpoints[i].sightchecks[index] = spawnstruct();
+        spawnpoints[i].sightchecks[index] = spawnStruct();
         spawnpoints[i].sightchecks[index].penalty = penalty;
       }
 
@@ -1650,7 +1647,7 @@ avoidvisibleenemies(spawnpoints, teambased) {
 
       if(level.storespawndata || level.debugspawning) {
         index = spawnpoints[i].sightchecks.size;
-        spawnpoints[i].sightchecks[index] = spawnstruct();
+        spawnpoints[i].sightchecks[index] = spawnStruct();
         spawnpoints[i].sightchecks[index].penalty = penalty;
       }
 
@@ -1758,10 +1755,10 @@ avoidsamespawn(spawnpoints) {
 }
 
 getrandomintermissionpoint() {
-  spawnpoints = getentarray("mp_global_intermission", "classname");
+  spawnpoints = getEntArray("mp_global_intermission", "classname");
 
   if(!spawnpoints.size)
-    spawnpoints = getentarray("info_player_start", "classname");
+    spawnpoints = getEntArray("info_player_start", "classname");
 
   assert(spawnpoints.size);
   spawnpoint = maps\mp\gametypes\_spawnlogic::getspawnpoint_random(spawnpoints);

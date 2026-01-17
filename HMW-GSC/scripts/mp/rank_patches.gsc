@@ -9,7 +9,7 @@ updaterankannouncehud_stub() {
   self endon("update_rank");
   var_0 = self.pers["team"];
 
-  if(!isdefined(var_0)) {
+  if(!isDefined(var_0)) {
     return;
   }
   if(!maps\mp\_utility::levelflag("game_over"))

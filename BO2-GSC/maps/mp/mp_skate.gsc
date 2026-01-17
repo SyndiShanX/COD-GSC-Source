@@ -23,11 +23,11 @@ main() {
   maps\mp\_compass::setupminimap("compass_map_mp_skate");
   visionsetnaked("mp_skate", 1);
   setdvar("compassmaxrange", "2100");
-  game["strings"]["war_callsign_a"] = & "MPUI_CALLSIGN_MAPNAME_A";
-  game["strings"]["war_callsign_b"] = & "MPUI_CALLSIGN_MAPNAME_B";
-  game["strings"]["war_callsign_c"] = & "MPUI_CALLSIGN_MAPNAME_C";
-  game["strings"]["war_callsign_d"] = & "MPUI_CALLSIGN_MAPNAME_D";
-  game["strings"]["war_callsign_e"] = & "MPUI_CALLSIGN_MAPNAME_E";
+  game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_MAPNAME_A";
+  game["strings"]["war_callsign_b"] = &"MPUI_CALLSIGN_MAPNAME_B";
+  game["strings"]["war_callsign_c"] = &"MPUI_CALLSIGN_MAPNAME_C";
+  game["strings"]["war_callsign_d"] = &"MPUI_CALLSIGN_MAPNAME_D";
+  game["strings"]["war_callsign_e"] = &"MPUI_CALLSIGN_MAPNAME_E";
   game["strings_menu"]["war_callsign_a"] = "@MPUI_CALLSIGN_MAPNAME_A";
   game["strings_menu"]["war_callsign_b"] = "@MPUI_CALLSIGN_MAPNAME_B";
   game["strings_menu"]["war_callsign_c"] = "@MPUI_CALLSIGN_MAPNAME_C";
@@ -45,7 +45,7 @@ main() {
   spawncollision("collision_clip_64x64x10", "collider", (684.5, 182.5, 200.5), (1.048, 270, 42));
   pipe1 = spawn("script_model", (-1368, -1541, 257));
   pipe1.angles = vectorscale((0, 1, 0), 90.0);
-  pipe1 setmodel("paris_construction_scaffold_piece_01");
+  pipe1 setModel("paris_construction_scaffold_piece_01");
   maps\mp\gametypes\_spawning::level_use_unified_spawning(1);
   level.remotemotarviewleft = 40;
   level.remotemotarviewright = 40;

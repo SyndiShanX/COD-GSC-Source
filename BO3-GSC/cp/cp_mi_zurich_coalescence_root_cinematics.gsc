@@ -31,14 +31,14 @@ function init_clientfields() {
 
 function play_scene(str_objective, e_player) {
   a_ai = getaiteamarray("axis");
-  array::thread_all(a_ai, & zurich_util::function_48463818);
-  if(isdefined(level.var_65070634)) {
+  array::thread_all(a_ai, &zurich_util::function_48463818);
+  if(isDefined(level.var_65070634)) {
     level.var_65070634 notify("hash_11a8c313");
   }
   function_32b529d8(str_objective, e_player);
   switch (str_objective) {
     case "root_zurich_vortex": {
-      if(isdefined(level.bzm_zurichdialogue12callback)) {
+      if(isDefined(level.bzm_zurichdialogue12callback)) {
         level thread[[level.bzm_zurichdialogue12callback]]();
       }
       str_movie = "cp_zurich_fs_SgenTestChamber";
@@ -46,7 +46,7 @@ function play_scene(str_objective, e_player) {
       break;
     }
     case "root_cairo_vortex": {
-      if(isdefined(level.bzm_zurichdialogue16callback)) {
+      if(isDefined(level.bzm_zurichdialogue16callback)) {
         level thread[[level.bzm_zurichdialogue16callback]]();
       }
       str_movie = "cp_zurich_fs_SgenServerRoom";
@@ -54,7 +54,7 @@ function play_scene(str_objective, e_player) {
       break;
     }
     case "root_singapore_vortex": {
-      if(isdefined(level.bzm_zurichdialogue20callback)) {
+      if(isDefined(level.bzm_zurichdialogue20callback)) {
         level thread[[level.bzm_zurichdialogue20callback]]();
       }
       str_movie = "cp_zurich_fs_interrogation";
@@ -80,7 +80,7 @@ function function_c7ab7e12(str_movie) {
     }
   }
   level waittill("movie_done");
-  array::thread_all(level.players, & scene::clear_scene_skipping_ui);
+  array::thread_all(level.players, &scene::clear_scene_skipping_ui);
 }
 
 function function_4b299142(str_movie) {
@@ -91,7 +91,7 @@ function function_4b299142(str_movie) {
   level endon("movie_done");
   b_skip_scene = 0;
   foreach(player in level.players) {
-    if(isdefined(player.skip_scene_menu_handle)) {
+    if(isDefined(player.skip_scene_menu_handle)) {
       player closeluimenu(player.skip_scene_menu_handle);
     }
     player.skip_scene_menu_handle = player openluimenu("CPSkipSceneMenu");
@@ -99,26 +99,26 @@ function function_4b299142(str_movie) {
     player setluimenudata(player.skip_scene_menu_handle, "hostIsSkipping", 0);
     player setluimenudata(player.skip_scene_menu_handle, "sceneSkipEndTime", 0);
   }
-  while (!b_skip_scene) {
+  while(!b_skip_scene) {
     if(self scene::any_button_pressed()) {
-      if(!isdefined(self.scene_skip_timer)) {
+      if(!isDefined(self.scene_skip_timer)) {
         self setluimenudata(self.skip_scene_menu_handle, "showSkipButton", 1);
       }
       self.scene_skip_timer = gettime();
-    } else if(isdefined(self.scene_skip_timer)) {
+    } else if(isDefined(self.scene_skip_timer)) {
       if((gettime() - self.scene_skip_timer) > 3000) {
         self setluimenudata(self.skip_scene_menu_handle, "showSkipButton", 2);
         self.scene_skip_timer = undefined;
       }
     }
     if(self primarybuttonpressedlocal()) {
-      if(!isdefined(self.scene_skip_start_time)) {
+      if(!isDefined(self.scene_skip_start_time)) {
         foreach(player in level.players) {
           if(player ishost()) {
             player setluimenudata(player.skip_scene_menu_handle, "sceneSkipEndTime", gettime() + 2500);
             continue;
           }
-          if(isdefined(player.skip_scene_menu_handle)) {
+          if(isDefined(player.skip_scene_menu_handle)) {
             player setluimenudata(player.skip_scene_menu_handle, "hostIsSkipping", 1);
           }
         }
@@ -127,13 +127,13 @@ function function_4b299142(str_movie) {
         b_skip_scene = 1;
         break;
       }
-    } else if(isdefined(self.scene_skip_start_time)) {
+    } else if(isDefined(self.scene_skip_start_time)) {
       foreach(player in level.players) {
         if(player ishost()) {
           player setluimenudata(player.skip_scene_menu_handle, "sceneSkipEndTime", 0);
           continue;
         }
-        if(isdefined(player.skip_scene_menu_handle)) {
+        if(isDefined(player.skip_scene_menu_handle)) {
           player setluimenudata(player.skip_scene_menu_handle, "hostIsSkipping", 2);
         }
       }
@@ -142,7 +142,7 @@ function function_4b299142(str_movie) {
     wait(0.05);
   }
   if(b_skip_scene) {
-    self playsound("uin_igc_skip");
+    self playSound("uin_igc_skip");
     if(str_movie === "cp_zurich_fs_interrogation") {
       level.var_a2c60984 = 1;
     }
@@ -190,7 +190,7 @@ function function_6cc3b883() {
 }
 
 function function_33367f39() {
-  level.overrideplayerdamage = & player_callback_damage;
+  level.overrideplayerdamage = &player_callback_damage;
   level thread zurich_util::delete_all_ai();
   foreach(player in level.players) {
     player.e_anchor = util::spawn_model("tag_origin", player.origin, player.angles);
@@ -201,7 +201,7 @@ function function_33367f39() {
   level.overrideplayerdamage = undefined;
   foreach(player in level.players) {
     player freezecontrols(0);
-    if(isdefined(player.e_anchor)) {
+    if(isDefined(player.e_anchor)) {
       player.e_anchor delete();
     }
   }
@@ -231,8 +231,8 @@ function function_32b529d8(str_objective, e_player) {
       break;
     }
   }
-  scene::add_scene_func(var_470af250, & function_2fbd0bea, "play");
-  scene::add_scene_func(var_470af250, & zurich_util::function_9f90bc0f, "done", "root_scene_completed");
+  scene::add_scene_func(var_470af250, &function_2fbd0bea, "play");
+  scene::add_scene_func(var_470af250, &zurich_util::function_9f90bc0f, "done", "root_scene_completed");
   level scene::init(var_470af250);
   level thread function_98192f84(var_f9202c4e, var_470af250, str_exploder);
   level thread scene::play(str_player_scene, e_player);

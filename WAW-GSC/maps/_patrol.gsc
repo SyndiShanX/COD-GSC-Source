@@ -65,8 +65,8 @@ patrol(start_target) {
   }
   assertex(isDefined(currentgoal), "Initial goal for patroller is undefined");
   nextgoal = currentgoal;
-  for (;;) {
-    while (isDefined(nextgoal.patrol_claimed)) {
+  for(;;) {
+    while(isDefined(nextgoal.patrol_claimed)) {
       wait 0.05;
     }
     currentgoal.patrol_claimed = undefined;
@@ -75,9 +75,7 @@ patrol(start_target) {
     assertex(!isDefined(currentgoal.patrol_claimed), "Goal was already claimed");
     currentgoal.patrol_claimed = true;
     self.last_patrol_goal = currentgoal;
-    [
-      [set_goal_func[goal_type]]
-    ](currentgoal);
+    [[set_goal_func[goal_type]]](currentgoal);
     if(isDefined(currentgoal.radius) && currentgoal.radius > 0)
       self.goalradius = currentgoal.radius;
     else
@@ -144,7 +142,7 @@ patrol_walk_twitch_loop() {
   if(isDefined(self.patrol_walk_anim) && !isDefined(self.patrol_walk_twitch)) {
     return;
   }
-  while (1) {
+  while(1) {
     wait randomfloatrange(8, 20);
     walkanim = "patrol_walk_twitch";
     if(isDefined(self.patrol_walk_twitch))
@@ -204,7 +202,7 @@ waittill_combat() {
 get_target_ents() {
   array = [];
   if(isDefined(self.target))
-    array = getentarray(self.target, "targetname");
+    array = getEntArray(self.target, "targetname");
   return array;
 }
 
@@ -219,7 +217,7 @@ get_linked_nodes() {
   array = [];
   if(isDefined(self.script_linkto)) {
     linknames = strtok(self.script_linkto, " ");
-    for (i = 0; i < linknames.size; i++) {
+    for(i = 0; i < linknames.size; i++) {
       ent = getnode(linknames[i], "script_linkname");
       if(isDefined(ent))
         array[array.size] = ent;
@@ -230,7 +228,7 @@ get_linked_nodes() {
 
 showclaimed(goal) {
   self endon("release_node");
-  for (;;) {
+  for(;;) {
     entnum = self getentnum();
     print3d(goal.origin, entnum, (1.0, 1.0, 0.0), 1);
     wait 0.05;

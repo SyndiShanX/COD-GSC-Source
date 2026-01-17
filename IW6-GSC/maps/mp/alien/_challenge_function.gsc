@@ -29,9 +29,7 @@ init_challenge_type() {
     level.challenge_scalar_func = ::default_challenge_scalar_func;
 
   if(isDefined(level.challenge_registration_func)) {
-    [
-      [level.challenge_registration_func]
-    ]();
+    [[level.challenge_registration_func]]();
   }
 
   if(is_true(level.include_default_challenges)) {
@@ -1320,9 +1318,7 @@ hide_barrier_hive_intel() {
 
 get_challenge_ring_location(hive_name) {
   if(isDefined(level.challenge_ring_location_func))
-    return [
-      [level.challenge_ring_location_func]
-    ](hive_name);
+    return [[level.challenge_ring_location_func]](hive_name);
 
   return undefined;
 }

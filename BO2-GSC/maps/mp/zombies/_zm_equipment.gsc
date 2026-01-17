@@ -53,7 +53,7 @@ register_equipment(equipment_name, hint, howto_hint, hint_icon, equipmentvo, wat
   if(isDefined(hint_icon))
     precacheshader(hint_icon);
 
-  struct = spawnstruct();
+  struct = spawnStruct();
 
   if(!isDefined(level.zombie_equipment))
     level.zombie_equipment = [];
@@ -100,7 +100,7 @@ limit_zombie_equipment(equipment_name, limited) {
 
 init_equipment_upgrade() {
   equipment_spawns = [];
-  equipment_spawns = getentarray("zombie_equipment_upgrade", "targetname");
+  equipment_spawns = getEntArray("zombie_equipment_upgrade", "targetname");
 
   for(i = 0; i < equipment_spawns.size; i++) {
     hint_string = get_equipment_hint(equipment_spawns[i].zombie_equipment_upgrade);
@@ -745,7 +745,7 @@ generate_equipment_unitrigger(classname, origin, angles, flags, radius, script_h
   if(!isDefined(script_length))
     script_length = 64;
 
-  unitrigger_stub = spawnstruct();
+  unitrigger_stub = spawnStruct();
   unitrigger_stub.origin = origin;
 
   if(isDefined(angles))
@@ -839,7 +839,7 @@ placed_equipment_think(model, equipname, origin, angles, tradius, toffset) {
   if(isDefined(angles))
     pickupmodel.angles = angles;
 
-  pickupmodel setmodel(model);
+  pickupmodel setModel(model);
 
   if(isDefined(level.equipment_safe_to_drop)) {
     if(!self[[level.equipment_safe_to_drop]](pickupmodel)) {
@@ -855,7 +855,7 @@ placed_equipment_think(model, equipname, origin, angles, tradius, toffset) {
   if(isDefined(level.retrievehints[watchername]))
     hint = level.retrievehints[watchername].hint;
   else
-    hint = & "MP_GENERIC_PICKUP";
+    hint = &"MP_GENERIC_PICKUP";
 
   icon = get_equipment_icon(equipname);
 
@@ -865,7 +865,7 @@ placed_equipment_think(model, equipname, origin, angles, tradius, toffset) {
   torigin = origin;
 
   if(isDefined(toffset)) {
-    tforward = anglestoforward(angles);
+    tforward = anglesToForward(angles);
     torigin = torigin + toffset * tforward;
   }
 
@@ -957,7 +957,7 @@ dropped_equipment_think(model, equipname, origin, angles, tradius, toffset) {
   if(isDefined(angles))
     pickupmodel.angles = angles;
 
-  pickupmodel setmodel(model);
+  pickupmodel setModel(model);
 
   if(isDefined(level.equipment_safe_to_drop)) {
     if(!self[[level.equipment_safe_to_drop]](pickupmodel)) {
@@ -973,7 +973,7 @@ dropped_equipment_think(model, equipname, origin, angles, tradius, toffset) {
   if(isDefined(level.retrievehints[watchername]))
     hint = level.retrievehints[watchername].hint;
   else
-    hint = & "MP_GENERIC_PICKUP";
+    hint = &"MP_GENERIC_PICKUP";
 
   icon = get_equipment_icon(equipname);
 
@@ -984,7 +984,7 @@ dropped_equipment_think(model, equipname, origin, angles, tradius, toffset) {
 
   if(isDefined(toffset)) {
     offset = 64;
-    tforward = anglestoforward(angles);
+    tforward = anglesToForward(angles);
     torigin = torigin + toffset * tforward + vectorscale((0, 0, 1), 8.0);
   }
 
@@ -1097,7 +1097,7 @@ equipment_watch_placement(equipment) {
   carry_angles = (0, 0, 0);
   placeturret = spawnturret("auto_turret", self.origin, equipment + "_turret");
   placeturret.angles = self.angles;
-  placeturret setmodel(level.placeable_equipment[equipment]);
+  placeturret setModel(level.placeable_equipment[equipment]);
   placeturret setturretcarried(1);
   placeturret setturretowner(self);
 
@@ -1215,7 +1215,7 @@ item_damage(damage) {
 
 item_watch_damage() {
   self endon("death");
-  self setcandamage(1);
+  self setCanDamage(1);
   self.health = 1500;
 
   while(true) {
@@ -1431,7 +1431,7 @@ attack_item(item) {
   else
     item thread item_damage(100);
 
-  item playsound("fly_riotshield_zm_impact_flesh");
+  item playSound("fly_riotshield_zm_impact_flesh");
   wait(randomint(100) / 100.0);
   self.doing_equipment_attack = 0;
   self maps\mp\zombies\_zm_spawner::zombie_history("doing equipment attack 0 from wait - " + gettime());
@@ -1515,9 +1515,9 @@ equipment_disappear_fx(origin, fx, angles) {
     effect = fx;
 
   if(isDefined(angles))
-    playfx(effect, origin, anglestoforward(angles));
+    playFX(effect, origin, anglesToForward(angles));
   else
-    playfx(effect, origin);
+    playFX(effect, origin);
 
   wait 1.1;
 }

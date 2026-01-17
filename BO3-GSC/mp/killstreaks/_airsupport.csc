@@ -12,11 +12,11 @@
 
 function planesounds(localclientnum, spawnsound, flybysound, flybysoundloop) {
   self endon("delete");
-  playsound(0, spawnsound, (0, 0, 0));
-  if(isdefined(flybysound)) {
-    self playsound(0, flybysound);
+  playSound(0, spawnsound, (0, 0, 0));
+  if(isDefined(flybysound)) {
+    self playSound(0, flybysound);
   }
-  self playloopsound(flybysoundloop, 0);
+  self playLoopSound(flybysoundloop, 0);
 }
 
 function getplanemodel(teamfaction) {
@@ -60,7 +60,7 @@ function planeturn(localclientnum, plane, yaw, halflife, starttime, isturningrig
   looptime = 0.1;
   waitamount = 0.1;
   waitformovedone = 0;
-  while (looptime <= halflife) {
+  while(looptime <= halflife) {
     if(plane.angles[1] == 360) {
       plane.angles = (plane.angles[0], 0, plane.angles[2]);
     }
@@ -97,7 +97,7 @@ function planeturn(localclientnum, plane, yaw, halflife, starttime, isturningrig
   z = getdvarfloat("scr_planez2", -1.5);
   maxy = getdvarfloat("scr_max_planey2", 90);
   accumturn = 0;
-  while (looptime < (halflife + halflife)) {
+  while(looptime < (halflife + halflife)) {
     if(plane.angles[1] == 360) {
       plane.angles = (plane.angles[0], 0, plane.angles[2]);
     }
@@ -145,7 +145,7 @@ function doabarrelroll(localclientnum, plane, endpoint, flytime, starttime) {
   waitformovedone = 0;
   angles = plane.angles;
   originalroll = plane.angles[2];
-  while (timeelapsed < flytime) {
+  while(timeelapsed < flytime) {
     timeelapsed = timeelapsed + waitamount;
     if(timeelapsed > loopwaittime && degreesrolled < degreestoroll) {
       pitch = degreesrolled / 8;

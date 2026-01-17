@@ -14,13 +14,13 @@
 #namespace tomb_shield;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_tomb_shield", & __init__, & __main__, undefined);
+  system::register("zm_weap_tomb_shield", &__init__, &__main__, undefined);
 }
 
 function __init__() {
   zm_craft_shield::init("craft_shield_zm", "tomb_shield", "wpn_t7_zmb_hd_origins_shield_dmg00_world");
   level.weaponriotshield = getweapon("tomb_shield");
-  zm_equipment::register("tomb_shield", & "ZOMBIE_EQUIP_RIOTSHIELD_PICKUP_HINT_STRING", & "ZOMBIE_EQUIP_RIOTSHIELD_HOWTO", undefined, "riotshield");
+  zm_equipment::register("tomb_shield", &"ZOMBIE_EQUIP_RIOTSHIELD_PICKUP_HINT_STRING", &"ZOMBIE_EQUIP_RIOTSHIELD_HOWTO", undefined, "riotshield");
 }
 
 function __main__() {

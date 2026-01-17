@@ -169,7 +169,7 @@ tweakart() {
       setdvar("scr_art_sun_fog_dir_set", "0");
       println("Setting sun fog direction to facing of player");
       players = get_players();
-      dir = vectornormalize(anglestoforward(players[0] getplayerangles()));
+      dir = vectornormalize(anglesToForward(players[0] getplayerangles()));
       level.fogsundir = [];
       level.fogsundir[0] = dir[0];
       level.fogsundir[1] = dir[1];
@@ -308,7 +308,7 @@ create_reflection_objects() {
 
   for(i = 0; i < reflection_locs.size; i++) {
     level.debug_reflection_objects[i] = spawn("script_model", reflection_locs[i]);
-    level.debug_reflection_objects[i] setmodel("test_sphere_silver");
+    level.debug_reflection_objects[i] setModel("test_sphere_silver");
   }
 
 }
@@ -322,9 +322,9 @@ create_reflection_object(model) {
 
   players = get_players();
   player = players[0];
-  level.debug_reflectionobject = spawn("script_model", player geteye() + vectorscale(anglestoforward(player.angles), 100));
-  level.debug_reflectionobject setmodel(model);
-  level.debug_reflectionobject.origin = player geteye() + vectorscale(anglestoforward(player getplayerangles()), 100);
+  level.debug_reflectionobject = spawn("script_model", player getEye() + vectorscale(anglesToForward(player.angles), 100));
+  level.debug_reflectionobject setModel(model);
+  level.debug_reflectionobject.origin = player getEye() + vectorscale(anglesToForward(player getplayerangles()), 100);
   level.debug_reflectionobject linkto(player);
   thread debug_reflection_buttons();
 }
@@ -352,7 +352,7 @@ debug_reflection_buttons() {
       offset = 64;
 
     level.debug_reflectionobject unlink();
-    level.debug_reflectionobject.origin = players[0] geteye() + vectorscale(anglestoforward(players[0] getplayerangles()), offset);
+    level.debug_reflectionobject.origin = players[0] getEye() + vectorscale(anglesToForward(players[0] getplayerangles()), offset);
     temp_angles = vectortoangles(players[0].origin - level.debug_reflectionobject.origin);
     level.debug_reflectionobject.angles = (0, temp_angles[1], 0);
     lastoffset = offset;

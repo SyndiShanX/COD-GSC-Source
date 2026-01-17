@@ -40,7 +40,7 @@ tryUseThumper() {
 }
 
 onPlayerConnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connected", player);
 
     player thread onPlayerSpawned();
@@ -50,12 +50,12 @@ onPlayerConnect() {
 onPlayerSpawned() {
   self endon("disconnect");
 
-  for (;;) {
+  for(;;) {
     self waittill("spawned_player");
 
-    if(!isDefined(self.pers["ksWeapon_clip_ammo"]) || !isDefined(self.pers["ksWeapon_name"]))
+    if(!isDefined(self.pers["ksWeapon_clip_ammo"]) || !isDefined(self.pers["ksWeapon_name"])) {
       continue;
-
+    }
     weaponName = self.pers["ksWeapon_name"];
 
     if(isDefined(self.pers["killstreak"]) && maps\mp\killstreaks\_killstreaks::getKillstreakWeapon(self.pers["killstreak"]) != weaponName) {
@@ -88,9 +88,9 @@ saveWeaponAmmoOnDeath(weaponName) {
 
   self waittill("death");
 
-  if(!self hasWeapon(weaponName))
+  if(!self hasWeapon(weaponName)) {
     return;
-
+  }
   self.pers["ksWeapon_name"] = weaponName;
   self.pers["ksWeapon_clip_ammo"] = self getWeaponAmmoClip(weaponName);
   self.pers["ksWeapon_stock_ammo"] = self getWeaponAmmoStock(weaponName);
@@ -103,16 +103,16 @@ removeWeaponOnOutOfAmmo(weaponName) {
   self notify(weaponName + "_ammo_monitor");
   self endon(weaponName + "_ammo_monitor");
 
-  while (1) {
+  while(1) {
     self waittill("end_firing");
 
-    if(self getCurrentWeapon() != weaponName)
+    if(self getCurrentWeapon() != weaponName) {
       continue;
-
+    }
     total_ammo = self getWeaponAmmoClip(weaponName) + self getWeaponAmmoStock(weaponName);
-    if(total_ammo)
+    if(total_ammo) {
       continue;
-
+    }
     self takeWeapon(weaponName);
     return;
   }

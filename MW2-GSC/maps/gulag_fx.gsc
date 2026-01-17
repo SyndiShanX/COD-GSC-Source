@@ -18,7 +18,6 @@ main() {
   level._effect["grenade_wood"] = LoadFX("explosions/grenadeExp_wood");
   level._effect["headshot"] = LoadFX("impacts/flesh_hit_head_fatal_exit");
 
-
   level._effect["hallway_collapsing"] = LoadFX("misc/hallway_collapsing");
   level._effect["hallway_collapsing_big"] = LoadFX("misc/hallway_collapsing_big");
   level._effect["hallway_collapsing_huge"] = LoadFX("misc/hallway_collapsing_huge");
@@ -86,7 +85,7 @@ main() {
   level._effect["debri_explosion"] = LoadFX("explosions/debri_explosion");
   level._effect["falling_debrigulag_evac"] = LoadFX("misc/falling_debris_gulag_evac");
 
-  //Scripted Lights & Stuff
+  //Scripted Lights &Stuff
   level._effect["dlight_blue"] = LoadFX("misc/dlight_blue");
   level._effect["dlight_blue_flicker"] = LoadFX("misc/dlight_blue_flicker");
   level._effect["dlight_red"] = LoadFX("misc/dlight_red");
@@ -96,7 +95,6 @@ main() {
 
   level._effect["minigun_shell_eject"] = LoadFX("shellejects/20mm_mp");
   level._effect["f15_missile"] = LoadFX("smoke/smoke_geotrail_sidewinder");
-
 
   level._effect["missile_brackets"] = LoadFX("misc/missile_brackets");
   level._effect["javelin_ignition"] = LoadFX("misc/javelin_ignition_gulag");
@@ -163,7 +161,7 @@ main() {
   level._effect["cloud_bank_cloud_filler_light_gulag"] = LoadFX("weather/cloud_bank_cloud_filler_light_gulag");
   level._effect["gulag_clouds"] = LoadFX("weather/gulag_clouds");
 
-  if(!isdefined(level.script))
+  if(!isDefined(level.script))
     level.script = ToLower(GetDvar("mapname"));
 
   if(!getdvarint("r_reflectionProbeGenerate"))
@@ -173,10 +171,10 @@ main() {
 
   /*
   // a way to move a bunch of fx!
-	
+  	
   // the old location minus the new location
   vec = ( 115877, 30087.7, -1328 ) - ( 94224, 24518.2, -1328 );
-	
+  	
   foreach ( fx in level.createFxEnt )
   {
   	if( fx.v[ "origin" ][ 0 ] > 50063 )
@@ -191,15 +189,14 @@ f15_smoke() {
   self endon("death");
   smoke = getfx("f15_smoke");
 
-  for (;;) {
-    PlayFXOnTag(smoke, self, "tag_engine_left");
-    StopFXOnTag(smoke, self, "tag_engine_right");
+  for(;;) {
+    playFXOnTag(smoke, self, "tag_engine_left");
+    stopFXOnTag(smoke, self, "tag_engine_right");
     wait(0.01);
   }
 }
 
 treadfx_override() {
-
   flying_tread_fx = "treadfx/heli_snow_default";
 
   maps\_treadfx::setvehiclefx("littlebird", "brick", flying_tread_fx);
@@ -329,5 +326,4 @@ treadfx_override() {
   maps\_treadfx::setvehiclefx("f15", "painted metal", flying_tread_fx);
   maps\_treadfx::setvehiclefx("f15", "default", flying_tread_fx);
   maps\_treadfx::setvehiclefx("f15", "none", flying_tread_fx);
-
 }

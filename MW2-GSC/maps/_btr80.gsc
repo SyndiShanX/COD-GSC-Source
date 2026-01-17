@@ -56,7 +56,6 @@ main(model, type) {
   build_bulletshield(true);
 
   build_grenadeshield(true);
-
 }
 
 init_local() {
@@ -67,7 +66,7 @@ init_local() {
 
 test_brake_lights() {
   self endon("death");
-  while (true) {
+  while(true) {
     wait 5;
     maps\_vehicle::lights_on("brake");
     wait 3;
@@ -76,7 +75,6 @@ test_brake_lights() {
 }
 
 set_vehicle_anims(positions) {
-
   // positions[ 0 ].vehicle_getinanim = %tigertank_hatch_open;
   // positions[ 1 ].vehicle_getoutanim = %tigertank_hatch_open;
 
@@ -91,8 +89,8 @@ set_vehicle_anims(positions) {
 
 setanims() {
   positions = [];
-  for (i = 0; i < 4; i++)
-    positions[i] = spawnstruct();
+  for(i = 0; i < 4; i++)
+    positions[i] = spawnStruct();
 
   positions[0].sittag = "tag_detach";
   positions[1].sittag = "tag_detach";

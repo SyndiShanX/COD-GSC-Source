@@ -3,8 +3,8 @@
  * Script: animscripts\stop.gsc
 ********************************************************/
 
-// "Stop" makes the character not walk, run or fight.He can be standing, crouching or lying 
-// prone; he can be alert or idle. 
+// "Stop" makes the character not walk, run or fight.He can be standing, crouching or lying
+// prone; he can be alert or idle.
 
 #include animscripts\combat_utility;
 #include animscripts\Utility;
@@ -12,24 +12,22 @@
 #using_animtree("generic_human");
 
 main() {
-  if(isdefined(self.no_ai))
+  if(isDefined(self.no_ai)) {
     return;
-
-  if(isdefined(self.onSnowMobile)) {
+  }
+  if(isDefined(self.onSnowMobile)) {
     animscripts\snowmobile::main();
     return;
   }
 
   self notify("stopScript");
   self endon("killanimscript");
-  /#
-  if(getdebugdvar("anim_preview") != "")
-    return;
-  # /
 
-    [
-      [self.exception["stop_immediate"]]
-    ]();
+  if(getdebugdvar("anim_preview") != "") {
+    return;
+  }
+
+  [[self.exception["stop_immediate"]]]();
   // We do the exception_stop script a little late so that the AI has some animation they're playing
   // otherwise they'd go into basepose.
   thread delayedException();
@@ -43,7 +41,7 @@ main() {
   self thread setLastStoppedTime();
   self thread animscripts\reactions::reactionsCheckLoop();
 
-  transitionedToIdle = isdefined(self.customIdleAnimSet);
+  transitionedToIdle = isDefined(self.customIdleAnimSet);
   if(!transitionedToIdle) {
     if(self.a.weaponPos["right"] == "none" && self.a.weaponPos["left"] == "none")
       transitionedToIdle = true;
@@ -51,7 +49,7 @@ main() {
       transitionedToIdle = true;
   }
 
-  for (;;) {
+  for(;;) {
     desiredPose = getDesiredIdlePose();
 
     if(desiredPose == "prone") {
@@ -85,7 +83,7 @@ setLastStoppedTime() {
 specialIdleLoop() {
   self endon("stop_specialidle");
 
-  if(isdefined(self.specialIdleAnim)) {
+  if(isDefined(self.specialIdleAnim)) {
     idleAnimArray = self.specialIdleAnim;
     self.specialIdleAnim = undefined;
     self notify("clearing_specialIdleAnim");
@@ -95,7 +93,7 @@ specialIdleLoop() {
 
     self clearAnim( % root, .2);
 
-    while (1) {
+    while(1) {
       self setflaggedanimrestart("special_idle", idleAnimArray[randomint(idleAnimArray.size)], 1, 0.2, 1);
       self waittillmatch("special_idle", "end");
     }
@@ -135,8 +133,8 @@ transitionToIdle(pose, idleSet) {
   if(self isCQBWalking() && self.a.pose == "stand")
     pose = "stand_cqb";
 
-  if(isdefined(anim.idleAnimTransition[pose])) {
-    assert(isdefined(anim.idleAnimTransition[pose]["in"]));
+  if(isDefined(anim.idleAnimTransition[pose])) {
+    assert(isDefined(anim.idleAnimTransition[pose]["in"]));
 
     // idles and transitions should have no tag origin movement
     //self animmode( "zonly_physics", false );
@@ -153,11 +151,11 @@ playIdle(pose, idleSet) {
 
   idleAddAnim = undefined;
 
-  if(isdefined(self.customIdleAnimSet) && isdefined(self.customIdleAnimSet[pose])) {
+  if(isDefined(self.customIdleAnimSet) && isDefined(self.customIdleAnimSet[pose])) {
     idleAnim = self.customIdleAnimSet[pose];
 
     additive = pose + "_add";
-    if(isdefined(self.customIdleAnimSet[additive]))
+    if(isDefined(self.customIdleAnimSet[additive]))
       idleAddAnim = self.customIdleAnimSet[additive];
   } else {
     idleSet = idleSet % anim.idleAnimArray[pose].size;
@@ -169,7 +167,7 @@ playIdle(pose, idleSet) {
   if(gettime() == self.a.scriptStartTime)
     transTime = 0.5;
 
-  if(isdefined(idleAddAnim)) {
+  if(isDefined(idleAddAnim)) {
     self setAnimKnobAll(idleAnim, % body, 1, transTime, 1);
     self setAnim( % add_idle);
     self setFlaggedAnimKnobAllRestart("idle", idleAddAnim, % add_idle, 1, transTime, self.animplaybackrate);
@@ -186,7 +184,7 @@ ProneStill() {
     anim_array["crouch_2_prone"] = % crouch_2_prone;
 
     transAnim = anim_array[self.a.pose + "_2_prone"];
-    assertex(isdefined(transAnim), self.a.pose);
+    assertex(isDefined(transAnim), self.a.pose);
     assert(animHasNotetrack(transAnim, "anim_pose = \"prone\""));
 
     self setFlaggedAnimKnobAllRestart("trans", transAnim, % body, 1, .2, 1.0);
@@ -228,7 +226,7 @@ UpdateProneThread() {
   self endon("killanimscript");
   self endon("kill UpdateProneThread");
 
-  for (;;) {
+  for(;;) {
     self animscripts\cover_prone::UpdateProneWrapper(0.1);
     wait 0.1;
   }

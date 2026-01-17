@@ -54,7 +54,7 @@ patrol_loop(path1start, path1end, path2start, path2end, speed, accel) {
   self attachPath(goalnodes[0]);
   self.attachedpath = goalnodes[0];
   self thread goPath(self);
-  while (1) {
+  while(1) {
     wait(0.05);
     self setswitchnode(goalnodes[currNode], goalnodes[nextNode]);
     self setWaitNode(goalnodes[nextNode]);
@@ -86,7 +86,7 @@ switch_path_when_node_reached(reachNode, switchNode, speed, accel) {
   self endon("death");
   distanceSq = 25.0 * 25.0;
   goal_pos = reachNode.origin;
-  while (1) {
+  while(1) {
     if(distanceSquared(self.origin, goal_pos) < distanceSq) {
       self setSpeed(speed, accel);
       self SetVehGoalPos(goal_pos);
@@ -102,7 +102,7 @@ switch_path_when_node_reached(reachNode, switchNode, speed, accel) {
 
 check_for_damage_notify(damage_percent) {
   self endon("death");
-  while (1) {
+  while(1) {
     if((self.health / self.maxhealth) <= damage_percent) {
       self notify("damage reached");
       return;

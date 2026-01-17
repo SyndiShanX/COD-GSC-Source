@@ -64,7 +64,6 @@ init_local() {
 }
 
 set_vehicle_anims(positions) {
-
   // positions[ 0 ].vehicle_getinanim = %tigertank_hatch_open;
   // positions[ 1 ].vehicle_getoutanim = %tigertank_hatch_open;
 
@@ -77,8 +76,8 @@ set_vehicle_anims(positions) {
 
 setanims() {
   positions = [];
-  for (i = 0; i < 4; i++)
-    positions[i] = spawnstruct();
+  for(i = 0; i < 4; i++)
+    positions[i] = spawnStruct();
 
   positions[0].sittag = "tag_guy1";
   positions[1].sittag = "tag_guy2";

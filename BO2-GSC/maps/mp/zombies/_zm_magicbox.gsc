@@ -145,7 +145,7 @@ set_treasure_chest_cost(cost) {
 get_chest_pieces() {
   self.chest_box = getent(self.script_noteworthy + "_zbarrier", "script_noteworthy");
   self.chest_rubble = [];
-  rubble = getentarray(self.script_noteworthy + "_rubble", "script_noteworthy");
+  rubble = getEntArray(self.script_noteworthy + "_rubble", "script_noteworthy");
 
   for(i = 0; i < rubble.size; i++) {
     if(distancesquared(self.origin, rubble[i].origin) < 10000)
@@ -159,7 +159,7 @@ get_chest_pieces() {
     self.zbarrier zbarrierpieceuseboxriselogic(4);
   }
 
-  self.unitrigger_stub = spawnstruct();
+  self.unitrigger_stub = spawnStruct();
   self.unitrigger_stub.origin = self.origin + anglestoright(self.angles) * -22.5;
   self.unitrigger_stub.angles = self.angles;
   self.unitrigger_stub.script_unitrigger_type = "unitrigger_box_use";
@@ -197,9 +197,9 @@ boxstub_update_prompt(player) {
     if(isDefined(level.magic_box_check_equipment) && [
         [level.magic_box_check_equipment]
       ](self.stub.trigger_target.grab_weapon_name))
-      self.hint_string = & "ZOMBIE_TRADE_EQUIP";
+      self.hint_string = &"ZOMBIE_TRADE_EQUIP";
     else
-      self.hint_string = & "ZOMBIE_TRADE_WEAPON";
+      self.hint_string = &"ZOMBIE_TRADE_WEAPON";
   } else if(isDefined(level.using_locked_magicbox) && level.using_locked_magicbox && (isDefined(self.stub.trigger_target.is_locked) && self.stub.trigger_target.is_locked))
     self.hint_string = get_hint_string(self, "locked_magic_box_cost");
   else {
@@ -286,7 +286,7 @@ hide_chest(doboxleave) {
       level thread maps\mp\zombies\_zm_audio_announcer::leaderdialog("boxmove");
       self.zbarrier thread magic_box_zbarrier_leave();
       self.zbarrier waittill("left");
-      playfx(level._effect["poltergeist"], self.zbarrier.origin, anglestoup(self.angles), anglestoforward(self.angles));
+      playFX(level._effect["poltergeist"], self.zbarrier.origin, anglestoup(self.angles), anglesToForward(self.angles));
       playsoundatposition("zmb_box_poof", self.zbarrier.origin);
     } else
       self.zbarrier thread set_magic_box_zbarrier_state("away");
@@ -303,7 +303,7 @@ default_pandora_fx_func() {
   self endon("death");
   self.pandora_light = spawn("script_model", self.zbarrier.origin);
   self.pandora_light.angles = self.zbarrier.angles + vectorscale((-1, 0, -1), 90.0);
-  self.pandora_light setmodel("tag_origin");
+  self.pandora_light setModel("tag_origin");
 
   if(!(isDefined(level._box_initialized) && level._box_initialized)) {
     flag_wait("start_zombie_round_logic");
@@ -313,7 +313,7 @@ default_pandora_fx_func() {
   wait 1;
 
   if(isDefined(self) && isDefined(self.pandora_light))
-    playfxontag(level._effect["lght_marker"], self.pandora_light, "tag_origin");
+    playFXOnTag(level._effect["lght_marker"], self.pandora_light, "tag_origin");
 }
 
 default_pandora_show_func(anchor, anchortarget, pieces) {
@@ -324,7 +324,7 @@ default_pandora_show_func(anchor, anchortarget, pieces) {
     self thread[[level.pandora_fx_func]]();
   }
 
-  playfx(level._effect["lght_marker_flare"], self.pandora_light.origin);
+  playFX(level._effect["lght_marker_flare"], self.pandora_light.origin);
 }
 
 unregister_unitrigger_on_kill_think() {
@@ -673,12 +673,10 @@ treasure_chest_move(player_vox) {
     default_box_move_logic();
 
   if(isDefined(level.chests[level.chest_index].box_hacks["summon_box"]))
-    level.chests[level.chest_index][
-      [level.chests[level.chest_index].box_hacks["summon_box"]]
-    ](0);
+    level.chests[level.chest_index][[level.chests[level.chest_index].box_hacks["summon_box"]]](0);
 
   wait(post_selection_wait_duration);
-  playfx(level._effect["poltergeist"], level.chests[level.chest_index].zbarrier.origin);
+  playFX(level._effect["poltergeist"], level.chests[level.chest_index].zbarrier.origin);
   level.chests[level.chest_index] show_chest();
   flag_clear("moving_chest_now");
   self.zbarrier.chest_moving = 0;
@@ -818,7 +816,7 @@ treasure_chest_chooseweightedrandomweapon(player) {
   if(forced_weapon != "" && isDefined(level.zombie_weapons[forced_weapon]))
     arrayinsert(keys, forced_weapon, 0);
 
-  pap_triggers = getentarray("specialty_weapupgrade", "script_noteworthy");
+  pap_triggers = getEntArray("specialty_weapupgrade", "script_noteworthy");
 
   for(i = 0; i < keys.size; i++) {
     if(treasure_chest_canplayerreceiveweapon(player, keys[i], pap_triggers))
@@ -1049,7 +1047,7 @@ treasure_chest_weapon_spawn(chest, player, respin) {
 
     if(chance_of_joker > random) {
       self.weapon_string = undefined;
-      self.weapon_model setmodel(level.chest_joker_model);
+      self.weapon_model setModel(level.chest_joker_model);
       self.weapon_model.angles = self.angles + vectorscale((0, 1, 0), 90.0);
 
       if(isDefined(self.weapon_model_dw)) {
@@ -1347,7 +1345,7 @@ magicbox_host_migration() {
     foreach(chest in level.chests) {
       if(!is_true(chest.hidden)) {
         if(isDefined(chest) && isDefined(chest.pandora_light))
-          playfxontag(level._effect["lght_marker"], chest.pandora_light, "tag_origin");
+          playFXOnTag(level._effect["lght_marker"], chest.pandora_light, "tag_origin");
       }
 
       wait_network_frame();

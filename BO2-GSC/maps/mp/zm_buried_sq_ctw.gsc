@@ -38,8 +38,7 @@ stage_logic() {
   stage_completed("sq", level._cur_stage_name);
 }
 
-exit_stage(success) {
-}
+exit_stage(success) {}
 
 stage_vo_max() {
   level endon("sq_wisp_failed");
@@ -167,13 +166,13 @@ ctw_ric_guillotine_glow(v_spot) {
 
   if(!isDefined(self.m_glow)) {
     self.m_glow = spawn("script_model", v_spot);
-    self.m_glow setmodel("tag_origin");
+    self.m_glow setModel("tag_origin");
   }
 
   while(true) {
-    playfxontag(level._effect["vulture_fx_wisp"], self.m_glow, "tag_origin");
+    playFXOnTag(level._effect["vulture_fx_wisp"], self.m_glow, "tag_origin");
     wait 0.25;
-    self.m_glow playloopsound("zmb_sq_wisp_loop_guillotine");
+    self.m_glow playLoopSound("zmb_sq_wisp_loop_guillotine");
   }
 }
 
@@ -213,7 +212,7 @@ ctw_max_start_wisp() {
   vh_wisp.n_sq_energy = vh_wisp.n_sq_max_energy;
   vh_wisp thread ctw_max_wisp_play_fx();
   vh_wisp_mover = spawn("script_model", vh_wisp.origin);
-  vh_wisp_mover setmodel("tag_origin");
+  vh_wisp_mover setModel("tag_origin");
   vh_wisp linkto(vh_wisp_mover);
   vh_wisp_mover wisp_move_from_sign_to_start(nd_start);
   vh_wisp unlink();
@@ -234,13 +233,13 @@ ctw_max_start_wisp() {
 }
 
 ctw_max_wisp_play_fx() {
-  self playloopsound("zmb_sq_wisp_loop");
+  self playLoopSound("zmb_sq_wisp_loop");
 
   while(isDefined(self)) {
-    playfxontag(level._effect["fx_wisp_m"], self, "tag_origin");
+    playFXOnTag(level._effect["fx_wisp_m"], self, "tag_origin");
 
     if(!flag("sq_m_wisp_weak"))
-      playfxontag(level._effect["fx_wisp_lg_m"], self, "tag_origin");
+      playFXOnTag(level._effect["fx_wisp_lg_m"], self, "tag_origin");
 
     wait 0.3;
   }
@@ -373,10 +372,10 @@ ctw_power_up_zombie_m_fx(str_fx) {
   self endon("death");
 
   while(isDefined(self) && isalive(self)) {
-    playfxontag(level._effect[str_fx], self, "J_Wrist_RI");
+    playFXOnTag(level._effect[str_fx], self, "J_Wrist_RI");
     wait 0.25;
-    playfxontag(level._effect[str_fx], self, "J_Wrist_LE");
+    playFXOnTag(level._effect[str_fx], self, "J_Wrist_LE");
     wait 0.25;
-    self playloopsound("zmb_sq_wisp_possess");
+    self playLoopSound("zmb_sq_wisp_possess");
   }
 }

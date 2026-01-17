@@ -4,7 +4,6 @@
 ********************************************************/
 
 main() {
-
   character\mp_character_us_army_riot::main();
 }
 

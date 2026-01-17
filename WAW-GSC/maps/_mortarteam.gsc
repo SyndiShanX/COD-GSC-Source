@@ -14,14 +14,14 @@ main(team) {
   precachemodel(level.prop_mortar_ammunition);
   precachemodel(level.prop_mortar);
   anims();
-  array_thread(getentarray("mortar_team", "targetname"), ::mortarTrigger);
+  array_thread(getEntArray("mortar_team", "targetname"), ::mortarTrigger);
 }
 
 mortarTeam(spawners, node, mortar_targets, delay_base, delay_range) {
   ent = spawnStruct();
   ent.delay_base = delay_base;
   ent.delay_range = delay_range;
-  ent thread mortarTeamSpawn(spawners, node, mortar_targets);
+  ent thread mortarTeamspawn(spawners, node, mortar_targets);
   return ent;
 }
 
@@ -36,8 +36,8 @@ mortarSpawner(delayEnt) {
   if(!isDefined(delayEnt))
     delayEnt = self;
   spawners[0] = self;
-  ents = getentarray(self.target, "targetname");
-  for (i = 0; i < ents.size; i++) {
+  ents = getEntArray(self.target, "targetname");
+  for(i = 0; i < ents.size; i++) {
     if(issubstr(ents[i].classname, "actor")) {
       spawners[1] = ents[i];
     }
@@ -59,7 +59,7 @@ mortarSpawner(delayEnt) {
   return ent;
 }
 
-mortarTeamSpawn(spawners, node, mortar_targets) {
+mortarTeamspawn(spawners, node, mortar_targets) {
   assertex(isDefined(level.scr_anim["loadguy"]), "Add maps\_mortarteam::anims(); to the top of your script");
   assertex(isDefined(level.mortar), "Define the level.mortar effect that should be used");
   assertex(spawners.size <= 2, "Mortarteams can't support more than 2 spawners");
@@ -77,7 +77,7 @@ mortarTeamSpawn(spawners, node, mortar_targets) {
     node.mortarTeamActive = false;
   assertEx(!node.mortarTeamActive, "Mortarteam that runs to " + node.origin + " has multiple mortar teams active on it. Can only have 1 team at a time operating each unique mortar.");
   index = 0;
-  for (;;) {
+  for(;;) {
     spawners[index].count = 1;
     spawners[index].script_moveoverride = 1;
     spawn = undefined;
@@ -119,7 +119,7 @@ mortarTeamSpawn(spawners, node, mortar_targets) {
   node.mortar_targets = mortar_targets;
   if(isalive(self.aimGuy))
     self thread transferObjectivePositionEntity();
-  for (;;) {
+  for(;;) {
     if(isalive(self.loadGuy)) {
       if(isalive(self.aimGuy) && self.aimGuy.ready)
         dualMortarUntilDeath(node);
@@ -171,7 +171,7 @@ aimGuyMortarsUntilDeath(node) {
   node anim_reach_solo(aimGuy, "pickup");
   aimGuy animscripts\shared::placeWeaponOn(aimGuy.weapon, "none");
   aimGuy.deathanim = % crouch_death_clutchchest;
-  for (;;) {
+  for(;;) {
     node notify("stopIdle");
     node thread anim_loop_solo(aimGuy, "wait_idle", undefined, "stopIdle");
     wait(self.delay_base + randomfloat(self.delay_range));
@@ -200,7 +200,7 @@ dualMortarUntilDeath(node) {
   loadGuy animscripts\shared::placeWeaponOn(loadGuy.weapon, "none");
   aimGuy animscripts\shared::placeWeaponOn(aimGuy.weapon, "none");
   aimGuy.deathanim = % crouch_death_clutchchest;
-  for (;;) {
+  for(;;) {
     node thread anim_loop(guy, "wait_idle", undefined, "stopIdle");
     wait(self.delay_base + randomfloat(self.delay_range));
     node notify("stopIdle");
@@ -256,11 +256,11 @@ loadGuy(ent, node) {
     animscripts\shared::placeWeaponOn(self.weapon, "none");
     self attach(level.prop_mortar, "TAG_WEAPON_LEFT");
     dist = undefined;
-    for (i = 0; i < setupAnim.size; i++)
+    for(i = 0; i < setupAnim.size; i++)
       dist[i] = distance(self.origin, getstartorigin(node.origin, node.angles, setupAnim[i]));
     index = 0;
     current_dist = dist[0];
-    for (i = 1; i < dist.size; i++) {
+    for(i = 1; i < dist.size; i++) {
       if(dist[i] >= current_dist)
         continue;
       index = i;
@@ -279,7 +279,7 @@ loadGuy(ent, node) {
   mortar = spawn("script_model", (0, 0, 0));
   mortar.origin = self gettagorigin("TAG_WEAPON_LEFT");
   mortar.angles = self gettagangles("TAG_WEAPON_LEFT");
-  mortar setmodel(level.prop_mortar);
+  mortar setModel(level.prop_mortar);
   node.mortarSetup = true;
   ent.mortar = mortar;
   node.mortar = mortar;
@@ -313,10 +313,10 @@ fire(guy) {
   }
   wait(0.4);
   if(isDefined(level._effect["mortar_flash"])) {
-    PlayFxonTag(level._effect["mortar_flash"], mortar, "TAG_flash");
+    playFXOnTag(level._effect["mortar_flash"], mortar, "TAG_flash");
   }
   if(isDefined(level.scr_sound["mortar_flash"])) {
-    mortar Playsound(level.scr_sound["mortar_flash"]);
+    mortar playSound(level.scr_sound["mortar_flash"]);
   }
   target = random(mortar_targets);
   if(isDefined(mortarEnt))
@@ -343,7 +343,7 @@ fire(guy) {
   }
   if(!isDefined(level.explosionhide)) {
     thread play_sound_in_space("mortar_explosion", target.origin);
-    playfx(level.mortar, target.origin);
+    playFX(level.mortar, target.origin);
   }
 }
 

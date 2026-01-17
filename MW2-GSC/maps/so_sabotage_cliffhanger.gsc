@@ -13,9 +13,9 @@
 //	Tweakables
 // ---------------------------------------------------------------------------------
 
-CONST_regular_obj = & "SO_SABOTAGE_CLIFFHANGER_OBJ_REGULAR";
-CONST_hardened_obj = & "SO_SABOTAGE_CLIFFHANGER_OBJ_HARDENED";
-CONST_veteran_obj = & "SO_SABOTAGE_CLIFFHANGER_OBJ_VETERAN";
+CONST_regular_obj = &"SO_SABOTAGE_CLIFFHANGER_OBJ_REGULAR";
+CONST_hardened_obj = &"SO_SABOTAGE_CLIFFHANGER_OBJ_HARDENED";
+CONST_veteran_obj = &"SO_SABOTAGE_CLIFFHANGER_OBJ_VETERAN";
 
 CONST_regular_accuracy = 2; // accuracy modifier
 CONST_hardened_accuracy = 2; // accuracy modifier
@@ -34,7 +34,7 @@ main() {
   PreCacheShader("overlay_frozen");
   PreCacheItem("c4");
 
-  level.strings["hint_c4_plant"] = & "SCRIPT_PLATFORM_HINTSTR_PLANTEXPLOSIVES";
+  level.strings["hint_c4_plant"] = &"SCRIPT_PLATFORM_HINTSTR_PLANTEXPLOSIVES";
 
   level._effect["extraction_smoke"] = loadfx("smoke/signal_smoke_green");
 
@@ -45,8 +45,8 @@ main() {
   so_delete_all_by_type(::type_spawn_trigger, ::type_vehicle_special, ::type_spawners_special);
 
   // delete chad's new snowmobiles
-  voltron_array = getentarray("script_vehicle_snowmobile_coop_alt", "classname");
-  voltron_array = array_combine(voltron_array, getentarray("script_vehicle_snowmobile_coop", "classname"));
+  voltron_array = getEntArray("script_vehicle_snowmobile_coop_alt", "classname");
+  voltron_array = array_combine(voltron_array, getEntArray("script_vehicle_snowmobile_coop", "classname"));
   foreach(sm in voltron_array)
   sm delete();
 
@@ -93,7 +93,7 @@ main() {
 start_so_sabotage() {
   spawn_funcs();
 
-  assert(isdefined(level.gameskill));
+  assert(isDefined(level.gameskill));
   switch (level.gameSkill) {
     case 0: // Easy
     case 1:
@@ -106,7 +106,7 @@ start_so_sabotage() {
       so_setup_veteran();
       break; // Veteran
   }
-  level.challenge_objective_escape = & "SO_SABOTAGE_CLIFFHANGER_OBJ_ESCAPE";
+  level.challenge_objective_escape = &"SO_SABOTAGE_CLIFFHANGER_OBJ_ESCAPE";
 
   deadquotes = [];
   deadquotes[deadquotes.size] = "@DEADQUOTE_SO_STEALTH_LOOK_FOR_ENEMIES";

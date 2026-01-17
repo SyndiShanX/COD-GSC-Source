@@ -30,7 +30,6 @@
 #include scripts\zm_common\zm_pack_a_punch;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
-
 #namespace zm_zodt8;
 
 autoexec opt_in() {
@@ -46,10 +45,10 @@ event_handler[level_init] main(eventstruct) {
   clientfield::register("world", "narrative_trigger", 1, 1, "int", &function_94a217a5, 0, 0);
   clientfield::register("world", "sfx_waterdrain_fore", 1, 1, "int", &sfx_waterdrain_fore, 0, 0);
   clientfield::register("world", "sfx_waterdrain_aft", 1, 1, "int", &sfx_waterdrain_aft, 0, 0);
-  clientfield::register("world", "" + #"hash_2994a957c49bf321", 1, 1, "int", &function_f31c22d6, 0, 0);
-  clientfield::register("world", "" + #"hash_7e91637e80ad93", 1, 1, "int", &function_1e917f6a, 0, 0);
-  clientfield::register("world", "" + #"hash_16cc25b3f87f06ad", 1, 1, "int", &function_53da552d, 0, 0);
-  clientfield::register("world", "" + #"hash_7f2f74f05d1f1b75", 1, 2, "int", &function_5b0384a, 0, 0);
+  clientfield::register("world", "" + # "hash_2994a957c49bf321", 1, 1, "int", &function_f31c22d6, 0, 0);
+  clientfield::register("world", "" + # "hash_7e91637e80ad93", 1, 1, "int", &function_1e917f6a, 0, 0);
+  clientfield::register("world", "" + # "hash_16cc25b3f87f06ad", 1, 1, "int", &function_53da552d, 0, 0);
+  clientfield::register("world", "" + # "hash_7f2f74f05d1f1b75", 1, 2, "int", &function_5b0384a, 0, 0);
   clientfield::register("scriptmover", "tilt", 1, 1, "int", &tilt, 0, 0);
   clientfield::register("scriptmover", "change_wave_water_height", 1, 1, "int", &change_wave_water_height, 0, 0);
   clientfield::register("scriptmover", "update_wave_water_height", 1, 1, "counter", &update_wave_water_height, 0, 0);
@@ -61,17 +60,17 @@ event_handler[level_init] main(eventstruct) {
   setdvar(#"player_shallowwaterwadescale", 1);
   setdvar(#"player_waistwaterwadescale", 1);
   setdvar(#"player_deepwaterwadescale", 1);
-  level._effect[#"headshot"] = #"zombie/fx_bul_flesh_head_fatal_zmb";
-  level._effect[#"headshot_nochunks"] = #"zombie/fx_bul_flesh_head_nochunks_zmb";
-  level._effect[#"bloodspurt"] = #"zombie/fx_bul_flesh_neck_spurt_zmb";
-  level._effect[#"animscript_gib_fx"] = #"zombie/fx_blood_torso_explo_zmb";
-  level._effect[#"animscript_gibtrail_fx"] = #"blood/fx_blood_gib_limb_trail";
-  level._effect[#"pap_projectile"] = #"hash_6009053e911b946a";
-  level._effect[#"pap_projectile_end"] = #"hash_6c0eb029adb5f6c6";
+  level._effect[# "headshot"] = # "zombie/fx_bul_flesh_head_fatal_zmb";
+  level._effect[# "headshot_nochunks"] = # "zombie/fx_bul_flesh_head_nochunks_zmb";
+  level._effect[# "bloodspurt"] = # "zombie/fx_bul_flesh_neck_spurt_zmb";
+  level._effect[# "animscript_gib_fx"] = # "zombie/fx_blood_torso_explo_zmb";
+  level._effect[# "animscript_gibtrail_fx"] = # "blood/fx_blood_gib_limb_trail";
+  level._effect[# "pap_projectile"] = # "hash_6009053e911b946a";
+  level._effect[# "pap_projectile_end"] = # "hash_6c0eb029adb5f6c6";
   level.var_24cb6ae8 = findvolumedecalindexarray("cargo_hold_water_puddles");
   level.var_ec4c3b67 = findvolumedecalindexarray("engine_room_water_puddles");
-  level.var_59d3631c = #"hash_129339f4a4da8ea2";
-  level.var_d0ab70a2 = #"gamedata/weapons/zm/zm_zodt8_weapons.csv";
+  level.var_59d3631c = # "hash_129339f4a4da8ea2";
+  level.var_d0ab70a2 = # "gamedata/weapons/zm/zm_zodt8_weapons.csv";
   zodt8_pap_quest::init();
   zodt8_sentinel::init();
   namespace_4a807bff::init();
@@ -102,7 +101,7 @@ on_localplayer_spawned(localclientnum) {
 
 function_2dca9b5b(localclientnum, var_630fc8b) {
   level endon(#"game_ended");
-  self endoncallback(&function_853e8354, #"death");
+  self endoncallback(&function_853e8354, # "death");
   b_underwater = var_630fc8b;
 
   while(isalive(self)) {
@@ -124,7 +123,7 @@ function_efae9657(localclientnum, var_630fc8b) {
   self notify("505c3419935f4f3e");
   self endon("505c3419935f4f3e");
   level endon(#"game_ended");
-  self endoncallback(&function_853e8354, #"death");
+  self endoncallback(&function_853e8354, # "death");
   b_underwater = var_630fc8b;
 
   if(isalive(self)) {
@@ -137,7 +136,7 @@ function_efae9657(localclientnum, var_630fc8b) {
         self thread postfx::playpostfxbundle(#"hash_5249b3ef8b2f1988");
       }
     } else {
-      if(self clientfield::get_to_player("" + #"boiler_fx")) {
+      if(self clientfield::get_to_player("" + # "boiler_fx")) {
         setpbgactivebank(localclientnum, 4);
       } else {
         setpbgactivebank(localclientnum, 1);
@@ -174,7 +173,7 @@ function_33eae096(localclientnum, b_underwater) {
 
   self notify(#"hash_32c7af154e6c4ded");
 
-  if(self clientfield::get_to_player("" + #"boiler_fx")) {
+  if(self clientfield::get_to_player("" + # "boiler_fx")) {
     setpbgactivebank(localclientnum, 4);
   } else {
     setpbgactivebank(localclientnum, 1);
@@ -188,14 +187,14 @@ function_24f8e5f9() {
   self.var_655d9e4b = 0;
   self.var_25e6f383 = 0;
   self.var_e95193b8 = [];
-  self.var_e95193b8[0] = array(#"hash_505479d5e2f48a6", #"hash_505489d5e2f4a59", #"hash_505459d5e2f4540", #"hash_505469d5e2f46f3", #"hash_5054b9d5e2f4f72", #"hash_5054c9d5e2f5125", #"hash_505499d5e2f4c0c", #"hash_5054a9d5e2f4dbf", #"hash_5054f9d5e2f563e", #"hash_505509d5e2f57f1", #"hash_3744cc670a5b706b");
-  self.var_e95193b8[1] = array(#"hash_3ecc851af829fe68", #"hash_3ecc861af82a001b", #"hash_3ecc871af82a01ce", #"hash_3ecc881af82a0381", #"hash_3ecc891af82a0534", #"hash_3ecc8a1af82a06e7", #"hash_3ecc8b1af82a089a", #"hash_3ecc8c1af82a0a4d", #"hash_3ecc7d1af829f0d0", #"hash_3ecc7e1af829f283", #"hash_5f880ad3af5e4911");
-  self.var_e95193b8[2] = array(#"hash_5edf278d3c3f5192", #"hash_5edf288d3c3f5345", #"hash_5edf258d3c3f4e2c", #"hash_5edf268d3c3f4fdf", #"hash_5edf238d3c3f4ac6", #"hash_5edf248d3c3f4c79", #"hash_5edf218d3c3f4760", #"hash_5edf228d3c3f4913", #"hash_5edf2f8d3c3f5f2a", #"hash_5edf308d3c3f60dd", #"hash_74855cfd5f9acfcf");
+  self.var_e95193b8[0] = array(#"hash_505479d5e2f48a6", # "hash_505489d5e2f4a59", # "hash_505459d5e2f4540", # "hash_505469d5e2f46f3", # "hash_5054b9d5e2f4f72", # "hash_5054c9d5e2f5125", # "hash_505499d5e2f4c0c", # "hash_5054a9d5e2f4dbf", # "hash_5054f9d5e2f563e", # "hash_505509d5e2f57f1", # "hash_3744cc670a5b706b");
+  self.var_e95193b8[1] = array(#"hash_3ecc851af829fe68", # "hash_3ecc861af82a001b", # "hash_3ecc871af82a01ce", # "hash_3ecc881af82a0381", # "hash_3ecc891af82a0534", # "hash_3ecc8a1af82a06e7", # "hash_3ecc8b1af82a089a", # "hash_3ecc8c1af82a0a4d", # "hash_3ecc7d1af829f0d0", # "hash_3ecc7e1af829f283", # "hash_5f880ad3af5e4911");
+  self.var_e95193b8[2] = array(#"hash_5edf278d3c3f5192", # "hash_5edf288d3c3f5345", # "hash_5edf258d3c3f4e2c", # "hash_5edf268d3c3f4fdf", # "hash_5edf238d3c3f4ac6", # "hash_5edf248d3c3f4c79", # "hash_5edf218d3c3f4760", # "hash_5edf228d3c3f4913", # "hash_5edf2f8d3c3f5f2a", # "hash_5edf308d3c3f60dd", # "hash_74855cfd5f9acfcf");
 }
 
 function_3353845b(localclientnum) {
   level endon(#"game_ended");
-  self endoncallback(&function_853e8354, #"death");
+  self endoncallback(&function_853e8354, # "death");
   self endon(#"hash_32c7af154e6c4ded");
   n_waittime = 5;
   var_d82f94cd = int(180 * 1000);
@@ -234,7 +233,7 @@ function_5b0384a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
   switch (newval) {
     case 0:
       level scene::stop(#"p8_fxanim_zm_zod_cargo_hold_net_bundle", 1);
-      level scene::delete_scene_spawned_ents(localclientnum, #"p8_fxanim_zm_zod_cargo_hold_net_bundle");
+      level scene::delete_scene_spawned_ents(localclientnum, # "p8_fxanim_zm_zod_cargo_hold_net_bundle");
       break;
     case 1:
       level thread scene::init(#"p8_fxanim_zm_zod_cargo_hold_net_bundle");
@@ -249,7 +248,7 @@ function_5b0384a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
 }
 
 function_53da552d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  var_a1b31107 = #"hash_d3b7cb6eb2177fb";
+  var_a1b31107 = # "hash_d3b7cb6eb2177fb";
   ww_base = getweapon(#"ww_tricannon_t8");
   addzombieboxweapon(ww_base, var_a1b31107, 0);
 }
@@ -454,7 +453,7 @@ function_f1d5b30a(str_suffix, str_notify, a_origin) {
 pap_projectile_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
     if(!isDefined(self.var_4b7a5b1b)) {
-      self.var_4b7a5b1b = util::playFXOnTag(localclientnum, level._effect[#"pap_projectile"], self, "tag_origin");
+      self.var_4b7a5b1b = util::playFXOnTag(localclientnum, level._effect[# "pap_projectile"], self, "tag_origin");
     }
 
     if(!isDefined(self.var_353ff2a)) {
@@ -477,7 +476,7 @@ pap_projectile_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 pap_projectile_end_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
-    util::playFXOnTag(localclientnum, level._effect[#"pap_projectile_end"], self, "tag_origin");
+    util::playFXOnTag(localclientnum, level._effect[# "pap_projectile_end"], self, "tag_origin");
   }
 }
 
@@ -485,7 +484,7 @@ sentinel_artifact_activated(localclientnum, oldval, newval, bnewent, binitialsna
   self endon(#"death");
 
   if(newval == 1) {
-    self.fx = util::playFXOnTag(localclientnum, level._effect[#"sentinel_aura"], self, "tag_fx_x_pos");
+    self.fx = util::playFXOnTag(localclientnum, level._effect[# "sentinel_aura"], self, "tag_fx_x_pos");
     self playrenderoverridebundle(#"hash_1589a47f2fdc6c67");
     self.sfx_id = self playLoopSound(#"hash_66df9cab2c64f968");
     return;
@@ -496,7 +495,7 @@ sentinel_artifact_activated(localclientnum, oldval, newval, bnewent, binitialsna
       self stoploopsound(self.sfx_id);
     }
 
-    self playSound(localclientnum, #"hash_75b9c9ad6ebe8af2");
+    self playSound(localclientnum, # "hash_75b9c9ad6ebe8af2");
     self stoprenderoverridebundle(#"hash_1589a47f2fdc6c67");
 
     if(isDefined(self.fx)) {
@@ -504,13 +503,13 @@ sentinel_artifact_activated(localclientnum, oldval, newval, bnewent, binitialsna
       self.fx = undefined;
     }
 
-    util::playFXOnTag(localclientnum, level._effect[#"sentinel_activate"], self, "tag_fx_x_pos");
+    util::playFXOnTag(localclientnum, level._effect[# "sentinel_activate"], self, "tag_fx_x_pos");
 
-    while(isDefined(self) && self.model !== #"hash_2c0078538e398b4f") {
+    while(isDefined(self) && self.model !== # "hash_2c0078538e398b4f") {
       waitframe(1);
     }
 
-    self.fx = util::playFXOnTag(localclientnum, level._effect[#"sentinel_glow"], self, "tag_fx_x_pos");
+    self.fx = util::playFXOnTag(localclientnum, level._effect[# "sentinel_glow"], self, "tag_fx_x_pos");
     waitframe(1);
     self playrenderoverridebundle(#"hash_111d3e86bf2007e4");
     return;
@@ -521,8 +520,8 @@ sentinel_artifact_activated(localclientnum, oldval, newval, bnewent, binitialsna
     self.fx = undefined;
   }
 
-  self playSound(localclientnum, #"hash_5de064f33e9e49b8");
-  self playSound(localclientnum, #"hash_3d8fef5997663b17");
+  self playSound(localclientnum, # "hash_5de064f33e9e49b8");
+  self playSound(localclientnum, # "hash_3d8fef5997663b17");
 }
 
 sndactorunderwater(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -535,22 +534,22 @@ sndactorunderwater(localclientnum, oldval, newval, bnewent, binitialsnap, fieldn
 }
 
 setup_personality_character_exerts() {
-  level.exert_sounds[1][#"playerbreathinsound"] = "vox_plr_1_exert_sniper_hold";
-  level.exert_sounds[2][#"playerbreathinsound"] = "vox_plr_2_exert_sniper_hold";
-  level.exert_sounds[3][#"playerbreathinsound"] = "vox_plr_3_exert_sniper_hold";
-  level.exert_sounds[4][#"playerbreathinsound"] = "vox_plr_4_exert_sniper_hold";
-  level.exert_sounds[1][#"playerbreathoutsound"] = "vox_plr_1_exert_sniper_exhale";
-  level.exert_sounds[2][#"playerbreathoutsound"] = "vox_plr_2_exert_sniper_exhale";
-  level.exert_sounds[3][#"playerbreathoutsound"] = "vox_plr_3_exert_sniper_exhale";
-  level.exert_sounds[4][#"playerbreathoutsound"] = "vox_plr_4_exert_sniper_exhale";
-  level.exert_sounds[1][#"playerbreathgaspsound"] = "vox_plr_1_exert_sniper_gasp";
-  level.exert_sounds[2][#"playerbreathgaspsound"] = "vox_plr_2_exert_sniper_gasp";
-  level.exert_sounds[3][#"playerbreathgaspsound"] = "vox_plr_3_exert_sniper_gasp";
-  level.exert_sounds[4][#"playerbreathgaspsound"] = "vox_plr_4_exert_sniper_gasp";
-  level.exert_sounds[1][#"meleeswipesoundplayer"] = "vox_plr_1_exert_punch_give";
-  level.exert_sounds[2][#"meleeswipesoundplayer"] = "vox_plr_2_exert_punch_give";
-  level.exert_sounds[3][#"meleeswipesoundplayer"] = "vox_plr_3_exert_punch_give";
-  level.exert_sounds[4][#"meleeswipesoundplayer"] = "vox_plr_4_exert_punch_give";
+  level.exert_sounds[1][# "playerbreathinsound"] = "vox_plr_1_exert_sniper_hold";
+  level.exert_sounds[2][# "playerbreathinsound"] = "vox_plr_2_exert_sniper_hold";
+  level.exert_sounds[3][# "playerbreathinsound"] = "vox_plr_3_exert_sniper_hold";
+  level.exert_sounds[4][# "playerbreathinsound"] = "vox_plr_4_exert_sniper_hold";
+  level.exert_sounds[1][# "playerbreathoutsound"] = "vox_plr_1_exert_sniper_exhale";
+  level.exert_sounds[2][# "playerbreathoutsound"] = "vox_plr_2_exert_sniper_exhale";
+  level.exert_sounds[3][# "playerbreathoutsound"] = "vox_plr_3_exert_sniper_exhale";
+  level.exert_sounds[4][# "playerbreathoutsound"] = "vox_plr_4_exert_sniper_exhale";
+  level.exert_sounds[1][# "playerbreathgaspsound"] = "vox_plr_1_exert_sniper_gasp";
+  level.exert_sounds[2][# "playerbreathgaspsound"] = "vox_plr_2_exert_sniper_gasp";
+  level.exert_sounds[3][# "playerbreathgaspsound"] = "vox_plr_3_exert_sniper_gasp";
+  level.exert_sounds[4][# "playerbreathgaspsound"] = "vox_plr_4_exert_sniper_gasp";
+  level.exert_sounds[1][# "meleeswipesoundplayer"] = "vox_plr_1_exert_punch_give";
+  level.exert_sounds[2][# "meleeswipesoundplayer"] = "vox_plr_2_exert_punch_give";
+  level.exert_sounds[3][# "meleeswipesoundplayer"] = "vox_plr_3_exert_punch_give";
+  level.exert_sounds[4][# "meleeswipesoundplayer"] = "vox_plr_4_exert_punch_give";
 }
 
 function_b7fc06b2(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

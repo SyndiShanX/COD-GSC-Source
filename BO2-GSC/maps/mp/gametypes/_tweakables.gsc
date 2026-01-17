@@ -230,7 +230,7 @@ registertweakable(category, name, dvar, value) {
   switch (category) {
     case "rule":
       if(!isDefined(level.rules[name]))
-        level.rules[name] = spawnstruct();
+        level.rules[name] = spawnStruct();
 
       level.rules[name].value = value;
       level.rules[name].lastvalue = value;
@@ -238,7 +238,7 @@ registertweakable(category, name, dvar, value) {
       break;
     case "game":
       if(!isDefined(level.gametweaks[name]))
-        level.gametweaks[name] = spawnstruct();
+        level.gametweaks[name] = spawnStruct();
 
       level.gametweaks[name].value = value;
       level.gametweaks[name].lastvalue = value;
@@ -246,7 +246,7 @@ registertweakable(category, name, dvar, value) {
       break;
     case "team":
       if(!isDefined(level.teamtweaks[name]))
-        level.teamtweaks[name] = spawnstruct();
+        level.teamtweaks[name] = spawnStruct();
 
       level.teamtweaks[name].value = value;
       level.teamtweaks[name].lastvalue = value;
@@ -254,7 +254,7 @@ registertweakable(category, name, dvar, value) {
       break;
     case "player":
       if(!isDefined(level.playertweaks[name]))
-        level.playertweaks[name] = spawnstruct();
+        level.playertweaks[name] = spawnStruct();
 
       level.playertweaks[name].value = value;
       level.playertweaks[name].lastvalue = value;
@@ -262,7 +262,7 @@ registertweakable(category, name, dvar, value) {
       break;
     case "class":
       if(!isDefined(level.classtweaks[name]))
-        level.classtweaks[name] = spawnstruct();
+        level.classtweaks[name] = spawnStruct();
 
       level.classtweaks[name].value = value;
       level.classtweaks[name].lastvalue = value;
@@ -270,7 +270,7 @@ registertweakable(category, name, dvar, value) {
       break;
     case "weapon":
       if(!isDefined(level.weapontweaks[name]))
-        level.weapontweaks[name] = spawnstruct();
+        level.weapontweaks[name] = spawnStruct();
 
       level.weapontweaks[name].value = value;
       level.weapontweaks[name].lastvalue = value;
@@ -278,7 +278,7 @@ registertweakable(category, name, dvar, value) {
       break;
     case "killstreak":
       if(!isDefined(level.hardpointtweaks[name]))
-        level.hardpointtweaks[name] = spawnstruct();
+        level.hardpointtweaks[name] = spawnStruct();
 
       level.hardpointtweaks[name].value = value;
       level.hardpointtweaks[name].lastvalue = value;
@@ -286,7 +286,7 @@ registertweakable(category, name, dvar, value) {
       break;
     case "hud":
       if(!isDefined(level.hudtweaks[name]))
-        level.hudtweaks[name] = spawnstruct();
+        level.hudtweaks[name] = spawnStruct();
 
       level.hudtweaks[name].value = value;
       level.hudtweaks[name].lastvalue = value;

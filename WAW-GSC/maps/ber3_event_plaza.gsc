@@ -17,18 +17,18 @@ event_plaza_start() {
   GetEnt("trig_spawn_basement_friendlies", "script_noteworthy") notify("trigger");
   GetEnt("trig_e2_friendlies_start", "script_noteworthy") notify("trigger");
   getent("e2_trig_spawn_plaza_mgs", "script_noteworthy") notify("trigger");
-  for (i = 0; i < 4; i++) {
+  for(i = 0; i < 4; i++) {
     if(i != 1) {
       thread wait_repopulate_flak(i + 10);
     }
   }
-  flak_trigs = getentarray("trig_e2_spawn_flak", "script_noteworthy");
-  for (i = 0; i < flak_trigs.size; i++) {
+  flak_trigs = getEntArray("trig_e2_spawn_flak", "script_noteworthy");
+  for(i = 0; i < flak_trigs.size; i++) {
     flak_trigs[i] notify("trigger");
     wait_network_frame();
   }
-  remove_allies = getentarray("rus_leave_at_library", "script_noteworthy");
-  for (i = 0; i < remove_allies.size; i++) {
+  remove_allies = getEntArray("rus_leave_at_library", "script_noteworthy");
+  for(i = 0; i < remove_allies.size; i++) {
     remove_allies[i] notify("_disable_reinforcement");
     remove_allies[i] delete();
   }
@@ -57,7 +57,7 @@ e2_init_charge() {
   getent("trig_leaving_basement", "targetname") waittill("trigger");
   thread first_mortar();
   thread e2_charge_drones();
-  while (!level.e1_rez_10_done) {
+  while(!level.e1_rez_10_done) {
     wait(.1);
   }
   wait(1);
@@ -79,7 +79,7 @@ e2_init_charge() {
 
 lower_veteran_nade_count() {
   if(getDifficulty() == "fu") {
-    germs = getentarray("veteran_remove_grenades", "script_noteworthy");
+    germs = getEntArray("veteran_remove_grenades", "script_noteworthy");
     array_thread(germs, ::add_spawn_function, ::veteran_remove_grenades);
   }
 }
@@ -89,8 +89,8 @@ veteran_remove_grenades() {
 }
 
 e2_charge_drones() {
-  for (i = 0; i < level.trig_charge_drones.size; i++) {
-    while (!OkToSpawn()) {
+  for(i = 0; i < level.trig_charge_drones.size; i++) {
+    while(!OkTospawn()) {
       wait_network_frame();
     }
     if(NumRemoteClients()) {
@@ -148,7 +148,7 @@ move_street_tanks() {
 move_charging_tanks() {
   getent("e2_start_charge", "targetname") waittill("trigger");
   tank_nodes = getvehiclenodearray("e2_charge_tanks", "targetname");
-  for (i = 0; i < tank_nodes.size; i++) {
+  for(i = 0; i < tank_nodes.size; i++) {
     newTank = spawn_tank("vehicle_rus_tracked_t34", tank_nodes[i], false);
     newTank thread e2_charge_tanks_shoot();
     wait_network_frame();
@@ -158,7 +158,7 @@ move_charging_tanks() {
 e2_charge_tanks_shoot() {
   self endon("death");
   tank_targs = getstructarray("e2_charge_tank_targ", "targetname");
-  while (true) {
+  while(true) {
     wait(randomintrange(2, 6));
     targ = tank_targs[randomint(tank_targs.size)];
     self setturrettargetvec(targ.origin);
@@ -169,8 +169,8 @@ e2_charge_tanks_shoot() {
 }
 
 remove_e1_friendlies() {
-  guys = getentarray("e1_friendly_fodder", "script_noteworthy");
-  for (i = 0; i < guys.size; i++) {
+  guys = getEntArray("e1_friendly_fodder", "script_noteworthy");
+  for(i = 0; i < guys.size; i++) {
     if(isDefined(guys[i]) && isalive(guys[i])) {
       guys[i] delete();
     }
@@ -186,8 +186,8 @@ blow_whistle() {
 }
 
 e2_friendly_fodder() {
-  guys = getentarray("friendly_charge_fodder", "script_noteworthy");
-  for (i = 0; i < guys.size; i++) {
+  guys = getEntArray("friendly_charge_fodder", "script_noteworthy");
+  for(i = 0; i < guys.size; i++) {
     if(isDefined(guys[i]) && isalive(guys[i])) {
       guys[i] thread bloody_death_after_wait(5, true, 5);
     }
@@ -205,7 +205,7 @@ e2_objectives() {
   level.flak1_destroyed = false;
   level.flak2_destroyed = false;
   level.flak3_destroyed = false;
-  objective_add(3, "current", & "BER3_OBJ3_4", obj_struct0.origin);
+  objective_add(3, "current", &"BER3_OBJ3_4", obj_struct0.origin);
   objective_AdditionalPosition(3, 1, obj_struct1.origin);
   objective_AdditionalPosition(3, 2, obj_struct2.origin);
   objective_AdditionalPosition(3, 3, obj_struct3.origin);
@@ -217,20 +217,20 @@ e2_objectives_update_flak88() {
   if(isDefined(level.flaks_alive) && level.flaks_alive) {
     switch (level.flaks_alive) {
       case 1:
-        objective_string(3, & "BER3_OBJ3_1");
+        objective_string(3, &"BER3_OBJ3_1");
         thread e2_flak88_vo(level.flaks_alive);
         break;
       case 2:
-        objective_string(3, & "BER3_OBJ3_2");
+        objective_string(3, &"BER3_OBJ3_2");
         autosave_by_name("ber3 two flaks destroyed");
         thread e2_flak88_vo(level.flaks_alive);
         break;
       case 3:
-        objective_string(3, & "BER3_OBJ3_3");
+        objective_string(3, &"BER3_OBJ3_3");
         thread e2_flak88_vo(level.flaks_alive);
         break;
       case 4:
-        objective_string(3, & "BER3_OBJ3_4");
+        objective_string(3, &"BER3_OBJ3_4");
         thread e2_flak88_vo(level.flaks_alive);
         break;
     }
@@ -257,7 +257,7 @@ e2_objectives_update_flak88() {
       obj_index++;
     }
   } else {
-    objective_string(3, & "BER3_OBJ3");
+    objective_string(3, &"BER3_OBJ3");
     objective_state(3, "done");
     autosave_by_name("ber3 flaks destroyed");
   }
@@ -320,7 +320,7 @@ e2_tank_plaza_logic() {
   tank resumespeed(8);
   tank thread e2_tank_plaza_shoot();
   tank veh_stop_at_node("e2_plaza_tank_stop2");
-  while (!level.plaza_tank_move) {
+  while(!level.plaza_tank_move) {
     wait(.5);
   }
   tank resumespeed(8);
@@ -338,10 +338,10 @@ e2_tank_plaza_shoot() {
   self waittill("turret_on_target");
   self fireWeapon();
   wait(.5);
-  playfx(level._effect["e2_statue_explode"], statue_targ.origin);
+  playFX(level._effect["e2_statue_explode"], statue_targ.origin);
   statue = getent("ber3_plaza_statue", "targetname");
   statue delete();
-  while (true) {
+  while(true) {
     wait(randomintrange(4, 7));
     targ = tank_targs[randomint(tank_targs.size)];
     self setturrettargetvec(targ.origin);
@@ -406,8 +406,8 @@ wait_stop_flak_firing() {
 }
 
 e2_satchel_init() {
-  trigs = getentarray("trig_flak_objective", "script_noteworthy");
-  for (i = 0; i < trigs.size; i++) {
+  trigs = getEntArray("trig_flak_objective", "script_noteworthy");
+  for(i = 0; i < trigs.size; i++) {
     trigs[i] SetHintString(&"BER3_HINT_PLANT_CHARGE");
   }
   flak0 = getent("flak88_10", "targetname");
@@ -433,11 +433,11 @@ wait_repopulate_flak(spawn_group) {
 
 repopulate_flak() {
   self endon("death");
-  while (true) {
+  while(true) {
     self waittill("crew dead");
     wait(5);
     new_flak_gunners = [];
-    for (; new_flak_gunners.size < 4;) {
+    for(; new_flak_gunners.size < 4;) {
       guy = get_closest_ai_exclude(self.origin, "axis", new_flak_gunners);
       if(isDefined(guy) && isalive(guy)) {
         guy.script_ignoreme = 1;
@@ -458,7 +458,7 @@ first_mortar() {
   launchers = getstructarray("e2_mortar_start", "targetname");
   targ = getstruct("e2_mortar_targ_first", "targetname");
   launchers[0] thread fire_mortar(targ);
-  for (i = 0; i < launchers.size; i++) {
+  for(i = 0; i < launchers.size; i++) {
     launchers[i] thread e2_mortar_looping();
     wait(2);
   }
@@ -468,7 +468,7 @@ e2_mortar_looping() {
   thread e2_mortar_looping2();
   level endon("stop first mortar set");
   targs = getstructarray("e2_mortar_targ", "targetname");
-  while (true) {
+  while(true) {
     self thread fire_mortar(targs[randomint(targs.size)]);
     wait(randomintrange(4, 7));
   }
@@ -478,7 +478,7 @@ e2_mortar_looping2() {
   getent("trig_vo_destroy_flaks", "targetname") waittill("trigger");
   level notify("stop first mortar set");
   targs = getstructarray("e2_mortar_targ2", "targetname");
-  while (true) {
+  while(true) {
     self thread fire_mortar(targs[randomint(targs.size)]);
     wait(randomintrange(4, 7));
   }
@@ -491,10 +491,10 @@ fake_launch(org) {
 
 fire_mortar(targ_struct) {
   playsoundatposition(level.scr_sound["mortar_flash"], self.origin);
-  playfx(level._effect["mortar_flash"], self.origin, anglestoforward(self.angles));
+  playFX(level._effect["mortar_flash"], self.origin, anglesToForward(self.angles));
   wait(randomintrange(4, 7));
   playsoundatposition("mortar_dirt", targ_struct.origin);
-  playfx(level._effect["dirt_mortar"], targ_struct.origin);
+  playFX(level._effect["dirt_mortar"], targ_struct.origin);
   earthquake(0.5, 2.5, targ_struct.origin, 512);
   radiusDamage(targ_struct.origin, 128, 300, 35);
   physicsExplosionSphere(targ_struct.origin, 160, 100, 1);
@@ -504,12 +504,12 @@ e2_plaza_planes_init() {
   if(!NumRemoteClients()) {
     il2_nodes = getvehiclenodearray("e2_plaza_planes", "targetname");
     il2_nodes2 = getvehiclenodearray("e2_plaza_planes2", "targetname");
-    while (true) {
-      for (i = 0; i < il2_nodes.size; i++) {
+    while(true) {
+      for(i = 0; i < il2_nodes.size; i++) {
         thread spawn_plane("vehicle_rus_airplane_il2", il2_nodes[i]);
       }
       wait(5);
-      for (i = 0; i < il2_nodes2.size; i++) {
+      for(i = 0; i < il2_nodes2.size; i++) {
         thread spawn_plane("vehicle_rus_airplane_il2", il2_nodes2[i]);
       }
       wait(10);

@@ -28,7 +28,7 @@ main() {
   station_treasure_chest_init();
   level.enemy_location_override_func = ::enemy_location_override;
   collision = spawn("script_model", (-6896, 4744, 0), 1);
-  collision setmodel("zm_collision_transit_busdepot_survival");
+  collision setModel("zm_collision_transit_busdepot_survival");
   collision disconnectpaths();
   flag_wait("initial_blackscreen_passed");
   nodes = getnodearray("classic_only_traversal", "targetname");

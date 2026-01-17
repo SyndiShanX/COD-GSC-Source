@@ -5,7 +5,7 @@
 ***************************************************/
 
 main() {
-  self setmodel("body_usmc_desert_assault_vasquez");
+  self setModel("body_usmc_desert_assault_vasquez");
   self attach("head_usmc_marine_vazquez", "", 1);
   self.headmodel = "head_usmc_marine_vazquez";
   self.voice = "american";

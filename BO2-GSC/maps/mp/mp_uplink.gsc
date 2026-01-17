@@ -25,11 +25,11 @@ main() {
   maps\mp\_compass::setupminimap("compass_map_mp_uplink");
   setdvar("compassmaxrange", "2100");
   registerclientfield("world", "trigger_lightning", 1, 1, "int");
-  game["strings"]["war_callsign_a"] = & "MPUI_CALLSIGN_MAPNAME_A";
-  game["strings"]["war_callsign_b"] = & "MPUI_CALLSIGN_MAPNAME_B";
-  game["strings"]["war_callsign_c"] = & "MPUI_CALLSIGN_MAPNAME_C";
-  game["strings"]["war_callsign_d"] = & "MPUI_CALLSIGN_MAPNAME_D";
-  game["strings"]["war_callsign_e"] = & "MPUI_CALLSIGN_MAPNAME_E";
+  game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_MAPNAME_A";
+  game["strings"]["war_callsign_b"] = &"MPUI_CALLSIGN_MAPNAME_B";
+  game["strings"]["war_callsign_c"] = &"MPUI_CALLSIGN_MAPNAME_C";
+  game["strings"]["war_callsign_d"] = &"MPUI_CALLSIGN_MAPNAME_D";
+  game["strings"]["war_callsign_e"] = &"MPUI_CALLSIGN_MAPNAME_E";
   game["strings_menu"]["war_callsign_a"] = "@MPUI_CALLSIGN_MAPNAME_A";
   game["strings_menu"]["war_callsign_b"] = "@MPUI_CALLSIGN_MAPNAME_B";
   game["strings_menu"]["war_callsign_c"] = "@MPUI_CALLSIGN_MAPNAME_C";
@@ -72,10 +72,10 @@ gondola_sway() {
     randomswingangle = randomfloatrange(0.25, 0.5);
     randomswingtime = randomfloatrange(2.5, 4.0);
     gondola_cab rotateto((randomswingangle * 0.5, randomswingangle * 0.6, randomswingangle * 0.8), randomswingtime, randomswingtime * 0.3, randomswingtime * 0.3);
-    gondola_cab playsound("amb_gondola_swing");
+    gondola_cab playSound("amb_gondola_swing");
     wait(randomswingtime);
     gondola_cab rotateto((randomswingangle * 0.5 * -1, randomswingangle * -1 * 0.6, randomswingangle * 0.8 * -1), randomswingtime, randomswingtime * 0.3, randomswingtime * 0.3);
-    gondola_cab playsound("amb_gondola_swing_back");
+    gondola_cab playSound("amb_gondola_swing_back");
     wait(randomswingtime);
     gondola_cab destroy_corpses();
   }

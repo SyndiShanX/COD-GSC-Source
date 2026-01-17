@@ -98,7 +98,7 @@ precache_perk_anims() {
 }
 
 swap_tablet(m_prop) {
-  m_prop setmodel("p6_gods_rod_tablet_online");
+  m_prop setModel("p6_gods_rod_tablet_online");
 }
 
 quadrotor_glove_on(m_player_body) {
@@ -114,8 +114,7 @@ intruder_fx(m_prop) {
   m_prop play_fx("cutter_on", undefined, undefined, 1.3, 1, "tag_fx");
 }
 
-precache_intro_anims() {
-}
+precache_intro_anims() {}
 
 #using_animtree("generic_human");
 #using_animtree("animated_props");
@@ -277,14 +276,14 @@ start_planes(ent) {
   vtol_1 = getent("vtol_explode", "targetname");
   wait 1;
   vtol_10 = getent("intro_v78_10", "targetname");
-  playfxontag(level._effect["vtol_chaff"], vtol_10, "tag_origin");
+  playFXOnTag(level._effect["vtol_chaff"], vtol_10, "tag_origin");
   vtol_23 = getent("intro_v78_23", "targetname");
-  playfxontag(level._effect["vtol_chaff"], vtol_23, "tag_origin");
+  playFXOnTag(level._effect["vtol_chaff"], vtol_23, "tag_origin");
   vtol_1 thread do_vtol_halo_jump();
   vtol_1 waittill("halo_jump_go");
   wait 4;
   vtol_10 = getent("intro_v78_10", "targetname");
-  playfxontag(level._effect["vtol_chaff"], vtol_10, "tag_origin");
+  playFXOnTag(level._effect["vtol_chaff"], vtol_10, "tag_origin");
   vtol_16 = getent("intro_v78_16", "targetname");
   vtol_16 thread do_vtol_halo_jump();
   wait 2;
@@ -292,7 +291,7 @@ start_planes(ent) {
 
 jetwing_audio(ent) {
   level.jetwing_sound_ent = spawn("script_origin", ent.origin);
-  level.jetwing_sound_ent playloopsound("veh_jetwing_wing_loop", 1);
+  level.jetwing_sound_ent playLoopSound("veh_jetwing_wing_loop", 1);
 }
 
 jetwing_audio_fade(ent) {
@@ -300,7 +299,7 @@ jetwing_audio_fade(ent) {
 }
 
 vtol_explode_trail(ent) {
-  ent playsound("exp_intro_vtol_explo");
+  ent playSound("exp_intro_vtol_explo");
   ent hide();
 }
 
@@ -322,21 +321,21 @@ show_numbers() {
 play_vtol_exhaust() {
   vtol_explode = getent("vtol_explode", "targetname");
   vtol_explode thread play_vtol_lights();
-  playfxontag(level._effect["vtol_exhaust"], vtol_explode, "tag_engine_left");
+  playFXOnTag(level._effect["vtol_exhaust"], vtol_explode, "tag_engine_left");
 
   for(i = 0; i < 26; i++) {
     vtol = getent("intro_v78_" + (i + 1), "targetname");
 
     if(isDefined(vtol)) {
       vtol thread play_vtol_lights();
-      playfxontag(level._effect["vtol_exhaust"], vtol, "tag_engine_left");
+      playFXOnTag(level._effect["vtol_exhaust"], vtol, "tag_engine_left");
     }
   }
 }
 
 play_vtol_lights() {
   wait(randomfloatrange(0.1, 0.5));
-  playfxontag(level._effect["vtol_lights"], self, "tag_origin");
+  playFXOnTag(level._effect["vtol_lights"], self, "tag_origin");
 }
 
 take_off_mask(ent) {
@@ -350,9 +349,9 @@ swap_vtol(ent) {
   exploder(125);
   spawn_clouds("intro_cloud_struct", "avoid_missiles", getvehiclenode("path_jetwing", "targetname").angles);
   harper_intro_jetwing = getent("intro_jetwing_1", "targetname");
-  playfxontag(level._effect["jetwing_hero_exhaust"], harper_intro_jetwing, "tag_engine_left");
+  playFXOnTag(level._effect["jetwing_hero_exhaust"], harper_intro_jetwing, "tag_engine_left");
   redshirt_intro_jetwing = getent("intro_jetwing_3", "targetname");
-  playfxontag(level._effect["jetwing_hero_exhaust"], redshirt_intro_jetwing, "tag_engine_left");
+  playFXOnTag(level._effect["jetwing_hero_exhaust"], redshirt_intro_jetwing, "tag_engine_left");
   level.player freezecontrols(1);
   level thread vtol_swap();
   level thread vtol_explosion();
@@ -401,9 +400,9 @@ intro_flak(ent) {
   index = 0;
 
   while(true) {
-    playfx(level._effect["flak_explode"], structs[index].origin);
+    playFX(level._effect["flak_explode"], structs[index].origin);
     earthquake(0.35, 1, structs[index].origin, 1500, level.player);
-    level.player playsound("exp_flak_on_plane");
+    level.player playSound("exp_flak_on_plane");
     level.player thread rumble_loop(3, 0.1);
     wait(randomfloatrange(3, 4));
     index++;
@@ -418,10 +417,10 @@ intro_flak_hatch_open() {
   level waittill("fxanim_vtol_int_open_start");
   structs = getstructarray("intro_flak_struct", "script_noteworthy");
   index = 0;
-  playfx(level._effect["flak_explode"], structs[index].origin);
+  playFX(level._effect["flak_explode"], structs[index].origin);
   earthquake(0.35, 1, structs[index].origin, 1500, level.player);
-  level.player playsound("exp_flak_on_plane");
-  level.player playsound("exp_intro_flak");
+  level.player playSound("exp_flak_on_plane");
+  level.player playSound("exp_intro_flak");
   level.player thread rumble_loop(3, 0.1);
   index++;
 
@@ -429,10 +428,10 @@ intro_flak_hatch_open() {
     index = 0;
 
   wait 3;
-  playfx(level._effect["flak_explode"], structs[index].origin);
+  playFX(level._effect["flak_explode"], structs[index].origin);
   earthquake(0.35, 1, structs[index].origin, 1500, level.player);
-  level.player playsound("exp_flak_on_plane");
-  level.player playsound("exp_intro_flak");
+  level.player playSound("exp_flak_on_plane");
+  level.player playSound("exp_intro_flak");
   level.player thread rumble_loop(3, 0.1);
   index++;
 
@@ -440,10 +439,10 @@ intro_flak_hatch_open() {
     index = 0;
 
   wait 1;
-  playfx(level._effect["flak_explode"], structs[index].origin);
+  playFX(level._effect["flak_explode"], structs[index].origin);
   earthquake(0.35, 1, structs[index].origin, 1500, level.player);
-  level.player playsound("exp_flak_on_plane");
-  level.player playsound("exp_intro_flak");
+  level.player playSound("exp_flak_on_plane");
+  level.player playSound("exp_intro_flak");
   level.player thread rumble_loop(3, 0.1);
   index++;
 
@@ -451,10 +450,10 @@ intro_flak_hatch_open() {
     index = 0;
 
   wait 2;
-  playfx(level._effect["flak_explode"], structs[index].origin);
+  playFX(level._effect["flak_explode"], structs[index].origin);
   earthquake(0.35, 1, structs[index].origin, 1500, level.player);
-  level.player playsound("exp_flak_on_plane");
-  level.player playsound("exp_intro_flak");
+  level.player playSound("exp_flak_on_plane");
+  level.player playSound("exp_intro_flak");
   level.player thread rumble_loop(3, 0.1);
   index++;
 
@@ -465,9 +464,9 @@ intro_flak_hatch_open() {
   wait 5;
 
   while(true) {
-    playfx(level._effect["flak_explode"], structs[index].origin);
+    playFX(level._effect["flak_explode"], structs[index].origin);
     earthquake(0.35, 1, structs[index].origin, 1500, level.player);
-    level.player playsound("exp_flak_on_plane");
+    level.player playSound("exp_flak_on_plane");
     level.player thread rumble_loop(3, 0.1);
     wait(randomfloatrange(3, 4));
     index++;
@@ -484,17 +483,17 @@ delay_notify(time, str_notify) {
 
 intro_flak_knockdown(ent) {
   stop_exploder(102);
-  level.player playsound("exp_vtol_imp");
+  level.player playSound("exp_vtol_imp");
   vtol_interior = getent("fxanim_vtol_interior", "targetname");
-  playfxontag(level._effect["wire_sparks"], vtol_interior, "tag_fx_wire1");
-  playfxontag(level._effect["wire_sparks"], vtol_interior, "tag_fx_wire2");
+  playFXOnTag(level._effect["wire_sparks"], vtol_interior, "tag_fx_wire1");
+  playFXOnTag(level._effect["wire_sparks"], vtol_interior, "tag_fx_wire2");
   struct = getstruct("intro_flak_struct_knockdown", "targetname");
-  playfx(level._effect["flak_explode"], struct.origin);
+  playFX(level._effect["flak_explode"], struct.origin);
   earthquake(1.5, 1, struct.origin, 512, level.player);
   level.player thread rumble_loop(10, 0.1);
   wait 3;
   struct = getstruct("intro_flak_struct_window", "script_noteworthy");
-  playfx(level._effect["flak_explode"], struct.origin);
+  playFX(level._effect["flak_explode"], struct.origin);
   level.player playrumbleonentity("damage_heavy");
 }
 
@@ -503,7 +502,7 @@ intro_impact_missile() {
   wait 12.2;
   missile = getent("intro_impact_missile", "targetname");
   end = getstruct("intro_impact_end", "targetname");
-  playfxontag(level._effect["missile_trail"], missile, "tag_origin");
+  playFXOnTag(level._effect["missile_trail"], missile, "tag_origin");
   missile moveto(end.origin, 0.5, 0.05);
   missile waittill("movedone");
   earthquake(0.5, 2, level.player.origin, 512);
@@ -524,7 +523,7 @@ intro_vtol_pieces() {
 }
 
 setup_vtol_pieces(str_pieces, str_parent) {
-  pieces = getentarray(str_pieces, "script_noteworthy");
+  pieces = getEntArray(str_pieces, "script_noteworthy");
   parent = getent(str_parent, "targetname");
   parent.pieces = [];
   parent maps\haiti_util::add_cleanup_ent("cleanup_intro");
@@ -540,7 +539,7 @@ setup_vtol_pieces(str_pieces, str_parent) {
 
 vtol_piece_think(str_end, time, accel, fx_tag) {
   end_point = getstruct(str_end, "targetname");
-  playfxontag(level._effect["vtol_trail_cheap"], self, fx_tag);
+  playFXOnTag(level._effect["vtol_trail_cheap"], self, fx_tag);
   self moveto(end_point.origin, time, accel);
   self waittill("movedone");
   wait 3;
@@ -548,8 +547,7 @@ vtol_piece_think(str_end, time, accel, fx_tag) {
   self delete();
 }
 
-precahce_front_door_anims() {
-}
+precahce_front_door_anims() {}
 
 #using_animtree("animated_props");
 
@@ -561,8 +559,7 @@ front_door_anims() {
   precache_assets(1);
 }
 
-precahce_interior_anims() {
-}
+precahce_interior_anims() {}
 
 #using_animtree("generic_human");
 #using_animtree("animated_props");
@@ -635,8 +632,7 @@ interior_anims() {
   precache_assets(1);
 }
 
-precache_endings_anims() {
-}
+precache_endings_anims() {}
 
 #using_animtree("player");
 #using_animtree("generic_human");

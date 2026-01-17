@@ -17,7 +17,7 @@ init() {
 }
 
 zombie_devgui_think() {
-  for (;;) {
+  for(;;) {
     cmd = GetDvar("zombie_devgui");
     switch (cmd) {
       case "money":
@@ -81,7 +81,7 @@ zombie_devgui_tesla_think() {
   SetDvar("scr_tesla_radius_decay", level.zombie_vars["tesla_radius_decay"]);
   SetDvar("scr_tesla_head_gib_chance", level.zombie_vars["tesla_head_gib_chance"]);
   SetDvar("scr_tesla_arc_travel_time", level.zombie_vars["tesla_arc_travel_time"]);
-  for (;;) {
+  for(;;) {
     level.zombie_vars["tesla_max_arcs"] = GetDvarInt("scr_tesla_max_arcs");
     level.zombie_vars["tesla_max_enemies_killed"] = GetDvarInt("scr_tesla_max_enemies");
     level.zombie_vars["tesla_radius_start"] = GetDvarInt("scr_tesla_radius_start");
@@ -113,13 +113,13 @@ zombie_devgui_give_power() {
 }
 
 zombie_devgui_give_perk(perk) {
-  vending_triggers = GetEntArray("zombie_vending", "targetname");
+  vending_triggers = getEntArray("zombie_vending", "targetname");
   player = get_players()[0];
   if(vending_triggers.size < 1) {
     iprintln("Map does not contain any perks machines");
     return;
   }
-  for (i = 0; i < vending_triggers.size; i++) {
+  for(i = 0; i < vending_triggers.size; i++) {
     if(vending_triggers[i].script_noteworthy == perk) {
       vending_triggers[i] notify("trigger", player);
       return;
@@ -131,7 +131,7 @@ zombie_devgui_give_perk(perk) {
 zombie_devgui_give_powerup(powerup_name) {
   player = get_players()[0];
   found = false;
-  for (i = 0; i < level.zombie_powerup_array.size; i++) {
+  for(i = 0; i < level.zombie_powerup_array.size; i++) {
     if(level.zombie_powerup_array[i] == powerup_name) {
       level.zombie_powerup_index = i;
       found = true;
@@ -143,11 +143,11 @@ zombie_devgui_give_powerup(powerup_name) {
     return;
   }
   direction = player GetPlayerAngles();
-  direction_vec = AnglesToForward(direction);
-  eye = player GetEye();
+  direction_vec = anglesToForward(direction);
+  eye = player getEye();
   scale = 8000;
   direction_vec = (direction_vec[0] * scale, direction_vec[1] * scale, direction_vec[2] * scale);
-  trace = bullettrace(eye, eye + direction_vec, 0, undefined);
+  trace = bulletTrace(eye, eye + direction_vec, 0, undefined);
   level.zombie_vars["zombie_drop_item"] = 1;
   level.powerup_drop_count = 0;
   level thread maps\_zombiemode_powerups::powerup_drop(trace["position"]);
@@ -161,7 +161,7 @@ zombie_devgui_goto_round(target_round) {
   level.zombie_health = level.zombie_vars["zombie_health_start"];
   level.round_number = 1;
   level.zombie_total = 0;
-  while (level.round_number < target_round) {
+  while(level.round_number < target_round) {
     maps\_zombiemode::ai_calculate_health();
     level.round_number++;
   }
@@ -199,7 +199,7 @@ zombie_devgui_goto_round(target_round) {
   wait(1);
   zombies = GetAiSpeciesArray("axis", "all");
   if(isDefined(zombies)) {
-    for (i = 0; i < zombies.size; i++) {
+    for(i = 0; i < zombies.size; i++) {
       zombies[i] dodamage(zombies[i].health + 666, zombies[i].origin);
     }
   }
@@ -234,7 +234,7 @@ zombie_devgui_dump_zombie_vars() {
     return;
   }
   var_names = GetArrayKeys(level.zombie_vars);
-  for (i = 0; i < level.zombie_vars.size; i++) {
+  for(i = 0; i < level.zombie_vars.size; i++) {
     key = var_names[i];
     println(key + ": " + level.zombie_vars[key]);
   }

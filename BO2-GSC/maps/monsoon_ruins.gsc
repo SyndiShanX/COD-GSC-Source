@@ -231,7 +231,7 @@ camo_mighty_mason_fx() {
   s_fx = getstruct("mighty_fx", "targetname");
 
   while(!flag("mighty_mason_done")) {
-    playfx(getfx("mighty_fx"), s_fx.origin);
+    playFX(getfx("mighty_fx"), s_fx.origin);
     wait 3;
   }
 }
@@ -329,12 +329,12 @@ camo_battle_stealth_assist() {
   self endon("assisted_kill");
   self waittill("death", attacker);
 
-  if(isplayer(attacker) & !flag("ruins_stealth_over")) {
+  if(isplayer(attacker) &!flag("ruins_stealth_over")) {
     ai_close = get_closest_ai(self.origin, "axis");
 
     if(isDefined(ai_close) && distancesquared(self.origin, ai_close.origin) < 62500) {
       wait(randomfloatrange(0.4, 0.8));
-      magicbullet("scar_silencer_sp", ai_close.origin + vectorscale((0, 0, 1), 80.0), ai_close geteye(), level.harper);
+      magicbullet("scar_silencer_sp", ai_close.origin + vectorscale((0, 0, 1), 80.0), ai_close getEye(), level.harper);
       ai_close notify("assisted_kill");
 
       if(cointoss())
@@ -523,7 +523,7 @@ helipad_battle_main() {
 
 helipad_clean_up() {
   flag_wait("squad_reached_outer_ruins");
-  a_t_color = getentarray("helipad_color_trigger", "script_noteworthy");
+  a_t_color = getEntArray("helipad_color_trigger", "script_noteworthy");
 
   foreach(color in a_t_color)
   color delete();
@@ -685,7 +685,7 @@ deploy_shield() {
   self useanimtree(#animtree);
   self setanim( % o_mon_04_06_riot_shield_plant, 1.0, 0.0, 1.0);
   wait 0.8;
-  playfxontag(getfx("shield_lights"), self, "tag_fx");
+  playFXOnTag(getfx("shield_lights"), self, "tag_fx");
 }
 
 helipad_ai_detach_shield_early() {
@@ -793,7 +793,7 @@ heli_turret_think() {
   self useby(player);
   self makevehicleunusable();
   self unlink();
-  level.player playsound("evt_static");
+  level.player playSound("evt_static");
   luinotifyevent(&"hud_expand_ammo");
   player.overrideplayerdamage = undefined;
   self showpart("body_animate_jnt");
@@ -954,8 +954,8 @@ heli_killed_think() {
 helipad_startup_sound() {
   wait 1;
   snd_ent = spawn("script_origin", self.origin);
-  snd_ent playsound("evt_helipad_startup");
-  snd_ent playloopsound("evt_helipad_startup_lfe", 10);
+  snd_ent playSound("evt_helipad_startup");
+  snd_ent playLoopSound("evt_helipad_startup_lfe", 10);
   flag_wait_either("salazar_destroyed_heli", "helicopter_destroyed_early");
   snd_ent stopsound("evt_helipad_startup");
   snd_ent stoploopsound(0.5);
@@ -1004,7 +1004,7 @@ heli_killed_fake() {
   self useanimtree(#animtree);
   self setflaggedanim("notetrack", % fxanim_monsoon_heli_explode_anim, 1.0, 0.0, 1.0);
   wait 0.05;
-  self setmodel("veh_t6_air_future_attack_heli_drone_dead");
+  self setModel("veh_t6_air_future_attack_heli_drone_dead");
 
   while(true) {
     self waittill("notetrack", note);
@@ -1166,7 +1166,7 @@ outer_ruins_plant_turret() {
   end_scene("plant_turret");
   trace_start = turret.origin + vectorscale((0, 0, 1), 100.0);
   trace_end = turret.origin + vectorscale((0, 0, -1), 100.0);
-  turret_trace = bullettrace(trace_start, trace_end, 0, turret);
+  turret_trace = bulletTrace(trace_start, trace_end, 0, turret);
   anchor = spawn("script_origin", turret.origin);
   anchor.angles = turret.angles;
   turret linkto(anchor);
@@ -1216,9 +1216,9 @@ inner_ruins_main() {
 }
 
 inner_ruins_kill_spawners() {
-  a_triggers = getentarray("inner_ruins_spawn_trigger", "targetname");
+  a_triggers = getEntArray("inner_ruins_spawn_trigger", "targetname");
   array_delete(a_triggers);
-  a_t_color = getentarray("inner_ruins_color_trigger", "script_noteworthy");
+  a_t_color = getEntArray("inner_ruins_color_trigger", "script_noteworthy");
 
   foreach(color in a_t_color)
   color delete();
@@ -1494,7 +1494,7 @@ ruins_interior_seal() {
 
   set_rain_level(0);
   setsaveddvar("wind_global_vector", "-180 -180 40");
-  a_turrets = getentarray("outer_ruins_turret", "targetname");
+  a_turrets = getEntArray("outer_ruins_turret", "targetname");
   a_turrets = add_to_array(a_turrets, getent("inner_ruins_turret", "targetname"), 0);
   array_delete(a_turrets);
   veh_heli_turret = getent("heli_turret", "targetname");
@@ -1518,7 +1518,7 @@ ruins_interior_seal() {
   }
 
   level notify("remove_c4");
-  a_c4 = getentarray("planted_c4", "targetname");
+  a_c4 = getEntArray("planted_c4", "targetname");
   array_delete(a_c4);
   m_collapse = getent("ruins_blocker", "targetname");
   m_collapse solid();
@@ -1527,7 +1527,7 @@ ruins_interior_seal() {
   earthquake(0.4, 2, level.player.origin, 500);
   level.player playrumblelooponentity("damage_light");
   playsoundatposition("evt_ruin_collapse", (6545, 53569, -493));
-  level.player playsound("evt_ruin_shake");
+  level.player playSound("evt_ruin_shake");
   level clientnotify("snoff");
   wait 2;
   level.player stoprumble("damage_light");

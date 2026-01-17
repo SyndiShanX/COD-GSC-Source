@@ -6,32 +6,32 @@
 #namespace behaviortreenetwork;
 
 function registerbehaviortreescriptapiinternal(functionname, functionptr) {
-  if(!isdefined(level._behaviortreescriptfunctions)) {
+  if(!isDefined(level._behaviortreescriptfunctions)) {
     level._behaviortreescriptfunctions = [];
   }
   functionname = tolower(functionname);
-  assert(isdefined(functionname) && isdefined(functionptr), "");
-  assert(!isdefined(level._behaviortreescriptfunctions[functionname]), "");
+  assert(isDefined(functionname) && isDefined(functionptr), "");
+  assert(!isDefined(level._behaviortreescriptfunctions[functionname]), "");
   level._behaviortreescriptfunctions[functionname] = functionptr;
 }
 
 function registerbehaviortreeactioninternal(actionname, startfuncptr, updatefuncptr, terminatefuncptr) {
-  if(!isdefined(level._behaviortreeactions)) {
+  if(!isDefined(level._behaviortreeactions)) {
     level._behaviortreeactions = [];
   }
   actionname = tolower(actionname);
   assert(isstring(actionname), "");
-  assert(!isdefined(level._behaviortreeactions[actionname]), ("" + actionname) + "");
+  assert(!isDefined(level._behaviortreeactions[actionname]), ("" + actionname) + "");
   level._behaviortreeactions[actionname] = array();
-  if(isdefined(startfuncptr)) {
+  if(isDefined(startfuncptr)) {
     assert(isfunctionptr(startfuncptr), "");
     level._behaviortreeactions[actionname]["bhtn_action_start"] = startfuncptr;
   }
-  if(isdefined(updatefuncptr)) {
+  if(isDefined(updatefuncptr)) {
     assert(isfunctionptr(updatefuncptr), "");
     level._behaviortreeactions[actionname]["bhtn_action_update"] = updatefuncptr;
   }
-  if(isdefined(terminatefuncptr)) {
+  if(isDefined(terminatefuncptr)) {
     assert(isfunctionptr(terminatefuncptr), "");
     level._behaviortreeactions[actionname]["bhtn_action_terminate"] = terminatefuncptr;
   }

@@ -965,9 +965,7 @@ get_alive_enemies() {
   alive_agents = get_alive_agents();
 
   if(isDefined(level.dlc_get_non_agent_enemies))
-    alive_non_agents = [
-      [level.dlc_get_non_agent_enemies]
-    ]();
+    alive_non_agents = [[level.dlc_get_non_agent_enemies]]();
 
   alive_enemies = array_combine(alive_agents, alive_non_agents);
 
@@ -1738,9 +1736,7 @@ encounter_cycle_spawn(force_cycle_start_notify, endon_notify) {
 
   cycle = level.cycle_count;
   if(isDefined(level.get_custom_cycle_func))
-    cycle = [
-      [level.get_custom_cycle_func]
-    ]();
+    cycle = [[level.get_custom_cycle_func]]();
 
   maps\mp\alien\_spawn_director::start_cycle(cycle);
   level.cycle_count++;

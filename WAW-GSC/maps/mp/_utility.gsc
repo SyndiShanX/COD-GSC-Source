@@ -42,14 +42,14 @@ array_remove(ents, remover, keepArrayKeys) {
   newents = [];
   keys = getArrayKeys(ents);
   if(isDefined(keepArrayKeys)) {
-    for (i = keys.size - 1; i >= 0; i--) {
+    for(i = keys.size - 1; i >= 0; i--) {
       if(ents[keys[i]] != remover) {
         newents[keys[i]] = ents[keys[i]];
       }
     }
     return newents;
   }
-  for (i = keys.size - 1; i >= 0; i--) {
+  for(i = keys.size - 1; i >= 0; i--) {
     if(ents[keys[i]] != remover) {
       newents[newents.size] = ents[keys[i]];
     }
@@ -70,7 +70,7 @@ add_to_array(array, ent) {
 }
 
 array_randomize(array) {
-  for (i = 0; i < array.size; i++) {
+  for(i = 0; i < array.size; i++) {
     j = RandomInt(array.size);
     temp = array[i];
     array[i] = array[j];
@@ -80,7 +80,7 @@ array_randomize(array) {
 }
 
 spawn_array_struct() {
-  s = SpawnStruct();
+  s = spawnStruct();
   s.a = [];
   return s;
 }
@@ -88,7 +88,7 @@ spawn_array_struct() {
 append_array_struct(
   dst_s,
   src_s) {
-  for (i = 0; i < src_s.a.size; i++) {
+  for(i = 0; i < src_s.a.size; i++) {
     dst_s.a[dst_s.a.size] = src_s.a[i];
   }
 }
@@ -120,8 +120,8 @@ cannon_effect() {
     wait(randomfloatrange(min_delay, max_delay));
   }
   if(isDefined(self.v["repeat"])) {
-    for (i = 0; i < self.v["repeat"]; i++) {
-      playfx(level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
+    for(i = 0; i < self.v["repeat"]; i++) {
+      playFX(level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
       exploder_playSound();
       if(min_delay > 0) {
         wait(randomfloatrange(min_delay, max_delay));
@@ -129,7 +129,7 @@ cannon_effect() {
     }
     return;
   }
-  playfx(level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
+  playFX(level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
   exploder_playSound();
 }
 
@@ -238,14 +238,14 @@ getPlant() {
   traceorigins[1] = start;
   trace = bulletTrace(traceorigins[0], (traceorigins[0] + (0, 0, -18)), false, undefined);
   if(trace["fraction"] < 1) {
-    temp = spawnstruct();
+    temp = spawnStruct();
     temp.origin = trace["position"];
     temp.angles = orientToNormal(trace["normal"]);
     return temp;
   }
   trace = bulletTrace(traceorigins[1], (traceorigins[1] + (0, 0, -18)), false, undefined);
   if(trace["fraction"] < 1) {
-    temp = spawnstruct();
+    temp = spawnStruct();
     temp.origin = trace["position"];
     temp.angles = orientToNormal(trace["normal"]);
     return temp;
@@ -256,7 +256,7 @@ getPlant() {
   traceorigins[5] = start + (-16, 16, 0);
   besttracefraction = undefined;
   besttraceposition = undefined;
-  for (i = 0; i < traceorigins.size; i++) {
+  for(i = 0; i < traceorigins.size; i++) {
     trace = bulletTrace(traceorigins[i], (traceorigins[i] + (0, 0, -1000)), false, undefined);
     if(!isDefined(besttracefraction) || (trace["fraction"] < besttracefraction)) {
       besttracefraction = trace["fraction"];
@@ -265,7 +265,7 @@ getPlant() {
   }
   if(besttracefraction == 1)
     besttraceposition = self.origin;
-  temp = spawnstruct();
+  temp = spawnStruct();
   temp.origin = besttraceposition;
   temp.angles = orientToNormal(trace["normal"]);
   return temp;
@@ -286,15 +286,15 @@ orientToNormal(normal) {
 array_levelthread(ents, process,
   var, excluders) {
   exclude = [];
-  for (i = 0; i < ents.size; i++)
+  for(i = 0; i < ents.size; i++)
     exclude[i] = false;
   if(isDefined(excluders)) {
-    for (i = 0; i < ents.size; i++)
-      for (p = 0; p < excluders.size; p++)
+    for(i = 0; i < ents.size; i++)
+      for(p = 0; p < excluders.size; p++)
         if(ents[i] == excluders[p])
           exclude[i] = true;
   }
-  for (i = 0; i < ents.size; i++) {
+  for(i = 0; i < ents.size; i++) {
     if(!exclude[i]) {
       if(isDefined(var))
         level thread[[process]](ents[i],
@@ -314,8 +314,8 @@ set_ambient(track) {
 }
 
 deletePlacedEntity(entity) {
-  entities = getentarray(entity, "classname");
-  for (i = 0; i < entities.size; i++) {
+  entities = getEntArray(entity, "classname");
+  for(i = 0; i < entities.size; i++) {
     entities[i] delete();
   }
 }
@@ -327,13 +327,13 @@ playSoundOnPlayers(sound, team) {
       level.players[0] playLocalSound(sound);
   } else {
     if(isDefined(team)) {
-      for (i = 0; i < level.players.size; i++) {
+      for(i = 0; i < level.players.size; i++) {
         player = level.players[i];
         if(isDefined(player.pers["team"]) && (player.pers["team"] == team))
           player playLocalSound(sound);
       }
     } else {
-      for (i = 0; i < level.players.size; i++)
+      for(i = 0; i < level.players.size; i++)
         level.players[i] playLocalSound(sound);
     }
   }
@@ -352,7 +352,7 @@ get_team_alive_players_s(teamName) {
   if(isDefined(teamName) &&
     isDefined(level.alivePlayers) &&
     isDefined(level.alivePlayers[teamName])) {
-    for (i = 0; i < level.alivePlayers[teamName].size; i++) {
+    for(i = 0; i < level.alivePlayers[teamName].size; i++) {
       teamPlayers_s.a[teamPlayers_s.a.size] = level.alivePlayers[teamName][i];
     }
   }
@@ -363,9 +363,9 @@ get_all_alive_players_s() {
   allPlayers_s = spawn_array_struct();
   if(isDefined(level.alivePlayers)) {
     keys = GetArrayKeys(level.alivePlayers);
-    for (i = 0; i < keys.size; i++) {
+    for(i = 0; i < keys.size; i++) {
       team = keys[i];
-      for (j = 0; j < level.alivePlayers[team].size; j++) {
+      for(j = 0; j < level.alivePlayers[team].size; j++) {
         allPlayers_s.a[allPlayers_s.a.size] = level.alivePlayers[team][j];
       }
     }
@@ -376,7 +376,7 @@ get_all_alive_players_s() {
 waitRespawnButton() {
   self endon("disconnect");
   self endon("end_respawn");
-  while (self useButtonPressed() != true)
+  while(self useButtonPressed() != true)
     wait .05;
 }
 
@@ -384,7 +384,7 @@ setLowerMessage(text, time) {
   if(!isDefined(self.lowerMessage)) {
     return;
   }
-  if(isDefined(self.lowerMessageOverride) && text != & "") {
+  if(isDefined(self.lowerMessageOverride) && text != &"") {
     text = self.lowerMessageOverride;
     time = undefined;
   }
@@ -421,7 +421,7 @@ clearLowerMessage(fadetime) {
 
 printOnTeam(text, team) {
   assert(isDefined(level.players));
-  for (i = 0; i < level.players.size; i++) {
+  for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
     if((isDefined(player.pers["team"])) && (player.pers["team"] == team))
       player iprintln(text);
@@ -430,7 +430,7 @@ printOnTeam(text, team) {
 
 printBoldOnTeam(text, team) {
   assert(isDefined(level.players));
-  for (i = 0; i < level.players.size; i++) {
+  for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
     if((isDefined(player.pers["team"])) && (player.pers["team"] == team))
       player iprintlnbold(text);
@@ -439,7 +439,7 @@ printBoldOnTeam(text, team) {
 
 printBoldOnTeamArg(text, team, arg) {
   assert(isDefined(level.players));
-  for (i = 0; i < level.players.size; i++) {
+  for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
     if((isDefined(player.pers["team"])) && (player.pers["team"] == team))
       player iprintlnbold(text, arg);
@@ -448,7 +448,7 @@ printBoldOnTeamArg(text, team, arg) {
 
 printOnTeamArg(text, team, arg) {
   assert(isDefined(level.players));
-  for (i = 0; i < level.players.size; i++) {
+  for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
     if((isDefined(player.pers["team"])) && (player.pers["team"] == team))
       player iprintln(text, arg);
@@ -457,7 +457,7 @@ printOnTeamArg(text, team, arg) {
 
 printOnPlayers(text, team) {
   players = level.players;
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(isDefined(team)) {
       if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == team))
         players[i] iprintln(text);
@@ -475,7 +475,7 @@ printAndSoundOnEveryone(team, otherteam, printFriendly, printEnemy, soundFriendl
     shouldDoEnemySounds = true;
   }
   if(level.splitscreen || !shouldDoSounds) {
-    for (i = 0; i < level.players.size; i++) {
+    for(i = 0; i < level.players.size; i++) {
       player = level.players[i];
       playerteam = player.pers["team"];
       if(isDefined(playerteam)) {
@@ -492,7 +492,7 @@ printAndSoundOnEveryone(team, otherteam, printFriendly, printEnemy, soundFriendl
   } else {
     assert(shouldDoSounds);
     if(shouldDoEnemySounds) {
-      for (i = 0; i < level.players.size; i++) {
+      for(i = 0; i < level.players.size; i++) {
         player = level.players[i];
         playerteam = player.pers["team"];
         if(isDefined(playerteam)) {
@@ -506,7 +506,7 @@ printAndSoundOnEveryone(team, otherteam, printFriendly, printEnemy, soundFriendl
         }
       }
     } else {
-      for (i = 0; i < level.players.size; i++) {
+      for(i = 0; i < level.players.size; i++) {
         player = level.players[i];
         playerteam = player.pers["team"];
         if(isDefined(playerteam)) {
@@ -573,7 +573,7 @@ play_sound_on_tag(alias, tag) {
     org.angles = self.angles;
     org linkto(self);
   }
-  org playsound(alias);
+  org playSound(alias);
   wait(5.0);
   org delete();
 }
@@ -597,7 +597,7 @@ loop_fx_sound(alias, origin, ender, timeout) {
     self endon(ender);
   }
   org.origin = origin;
-  org playloopsound(alias);
+  org playLoopSound(alias);
   if(!isDefined(timeout)) {
     return;
   }
@@ -631,7 +631,7 @@ exploder_after_load(num) {
 
 activate_exploder(num) {
   num = int(num);
-  for (i = 0; i < level.createFXent.size; i++) {
+  for(i = 0; i < level.createFXent.size; i++) {
     ent = level.createFXent[i];
     if(!isDefined(ent)) {
       continue;
@@ -692,7 +692,7 @@ play_sound_in_space(alias, origin, master) {
   if(isDefined(master) && master)
     org playsoundasmaster(alias);
   else
-    org playsound(alias);
+    org playSound(alias);
   wait(10.0);
   org delete();
 }
@@ -732,7 +732,7 @@ fire_effect() {
   wait(delay);
   if(isDefined(firefxSound))
     level thread loop_fx_sound(firefxSound, origin, ender, timeout);
-  playfx(level._effect[firefx], self.v["origin"], forward, up);
+  playFX(level._effect[firefx], self.v["origin"], forward, up);
 }
 
 loop_sound_delete(ender, ent) {
@@ -779,7 +779,7 @@ plot_points(plotpoints, r, g, b, timer) {
     b = 1;
   if(!isDefined(timer))
     timer = 0.05;
-  for (i = 1; i < plotpoints.size; i++) {
+  for(i = 1; i < plotpoints.size; i++) {
     thread draw_line_for_time(lastpoint, plotpoints[i], r, g, b, timer);
     lastpoint = plotpoints[i];
   }
@@ -787,7 +787,7 @@ plot_points(plotpoints, r, g, b, timer) {
 
 draw_line_for_time(org1, org2, r, g, b, timer) {
   timer = gettime() + (timer * 1000);
-  while (GetTime() < timer) {
+  while(GetTime() < timer) {
     line(org1, org2, (r, g, b), 1);
     wait .05;
   }
@@ -805,7 +805,7 @@ registerClientSys(sSysName) {
     error("Attempt to re-register client system : " + sSysName);
     return;
   } else {
-    level._clientSys[sSysName] = spawnstruct();
+    level._clientSys[sSysName] = spawnStruct();
     level._clientSys[sSysName].sysID = ClientSysRegister(sSysName);
   }
 }
@@ -938,7 +938,7 @@ is_later_in_alphabet(string1, string2) {
   count = string1.size;
   if(count >= string2.size)
     count = string2.size;
-  for (i = 0; i < count; i++) {
+  for(i = 0; i < count; i++) {
     val = alphabet_compare(string1[i], string2[i]);
     if(val == "1st")
       return true;
@@ -952,9 +952,9 @@ alphabetize(array) {
   if(array.size <= 1)
     return array;
   count = 0;
-  for (;;) {
+  for(;;) {
     changed = false;
-    for (i = 0; i < array.size - 1; i++) {
+    for(i = 0; i < array.size - 1; i++) {
       if(is_later_in_alphabet(array[i], array[i + 1])) {
         val = array[i];
         array[i] = array[i + 1];
@@ -974,7 +974,7 @@ alphabetize(array) {
 }
 
 get_players() {
-  players = GetEntArray("player", "classname");
+  players = getEntArray("player", "classname");
   return players;
 }
 
@@ -991,8 +991,8 @@ getstruct(name, type) {
   return array[0];
 }
 
-struct_arraySpawn() {
-  struct = SpawnStruct();
+struct_arrayspawn() {
+  struct = spawnStruct();
   struct.array = [];
   struct.lastindex = 0;
   return struct;
@@ -1016,7 +1016,7 @@ structarray_swaptolast(struct, object) {
 }
 
 structarray_shuffle(struct, shuffle) {
-  for (i = 0; i < shuffle; i++)
+  for(i = 0; i < shuffle; i++)
     struct structarray_swap(struct.array[i], struct.array[randomint(struct.lastindex)]);
 }
 
@@ -1039,12 +1039,12 @@ array_combine(array1, array2) {
     return array2;
   array3 = [];
   keys = getarraykeys(array1);
-  for (i = 0; i < keys.size; i++) {
+  for(i = 0; i < keys.size; i++) {
     key = keys[i];
     array3[array3.size] = array1[key];
   }
   keys = getarraykeys(array2);
-  for (i = 0; i < keys.size; i++) {
+  for(i = 0; i < keys.size; i++) {
     key = keys[i];
     array3[array3.size] = array2[key];
   }
@@ -1070,11 +1070,9 @@ compareSizesFx(org, array, dist, compareFunc) {
     distSqr = dist * dist;
     struct = undefined;
     keys = getArrayKeys(array);
-    for (i = 0; i < keys.size; i++) {
+    for(i = 0; i < keys.size; i++) {
       newdistSqr = DistanceSquared(array[keys[i]].v["origin"], org);
-      if([
-          [compareFunc]
-        ](newdistSqr, distSqr))
+      if([[compareFunc]](newdistSqr, distSqr))
         continue;
       distSqr = newdistSqr;
       struct = array[keys[i]];
@@ -1084,7 +1082,7 @@ compareSizesFx(org, array, dist, compareFunc) {
   keys = getArrayKeys(array);
   struct = array[keys[0]];
   distSqr = DistanceSquared(struct.v["origin"], org);
-  for (i = 1; i < keys.size; i++) {
+  for(i = 1; i < keys.size; i++) {
     newdistSqr = DistanceSquared(array[keys[i]].v["origin"], org);
     if([
         [compareFunc]
@@ -1103,11 +1101,9 @@ compareSizes(org, array, dist, compareFunc) {
     distSqr = dist * dist;
     ent = undefined;
     keys = GetArrayKeys(array);
-    for (i = 0; i < keys.size; i++) {
+    for(i = 0; i < keys.size; i++) {
       newdistSqr = DistanceSquared(array[keys[i]].origin, org);
-      if([
-          [compareFunc]
-        ](newdistSqr, distSqr))
+      if([[compareFunc]](newdistSqr, distSqr))
         continue;
       distSqr = newdistSqr;
       ent = array[keys[i]];
@@ -1117,7 +1113,7 @@ compareSizes(org, array, dist, compareFunc) {
   keys = GetArrayKeys(array);
   ent = array[keys[0]];
   distSqr = DistanceSquared(ent.origin, org);
-  for (i = 1; i < keys.size; i++) {
+  for(i = 1; i < keys.size; i++) {
     newdistSqr = DistanceSquared(array[keys[i]].origin, org);
     if([
         [compareFunc]
@@ -1151,9 +1147,9 @@ get_array_of_closest(org, array, excluders, max, maxdist) {
     maxdists2rd = maxdist * maxdist;
   dist = [];
   index = [];
-  for (i = 0; i < array.size; i++) {
+  for(i = 0; i < array.size; i++) {
     excluded = false;
-    for (p = 0; p < excluders.size; p++) {
+    for(p = 0; p < excluders.size; p++) {
       if(array[i] != excluders[p])
         continue;
       excluded = true;
@@ -1169,9 +1165,9 @@ get_array_of_closest(org, array, excluders, max, maxdist) {
     dist[dist.size] = length;
     index[index.size] = i;
   }
-  for (;;) {
+  for(;;) {
     change = false;
-    for (i = 0; i < dist.size - 1; i++) {
+    for(i = 0; i < dist.size - 1; i++) {
       if(dist[i] <= dist[i + 1])
         continue;
       change = true;
@@ -1189,7 +1185,7 @@ get_array_of_closest(org, array, excluders, max, maxdist) {
   newArray = [];
   if(max > dist.size)
     max = dist.size;
-  for (i = 0; i < max; i++)
+  for(i = 0; i < max; i++)
     newArray[i] = array[index[i]];
   return newArray;
 }

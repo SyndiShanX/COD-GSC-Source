@@ -56,13 +56,11 @@ covermulti_think() {
   else if(var_6 < -12)
     var_8 = ["right", "over", "left"];
   else if(var_6 > 5) {
-    var_8 = [
-      ["left", "over"], "right"
+    var_8 = [["left", "over"], "right"
     ];
     var_7 = 15000;
   } else if(var_6 < -5) {
-    var_8 = [
-      ["right", "over"], "left"
+    var_8 = [["right", "over"], "left"
     ];
     var_7 = 15000;
   } else {

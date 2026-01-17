@@ -23,7 +23,7 @@ event2() {
   maps\_status::scripter_subtask("Objectives", 1, 100);
   maps\_status::scripter_subtask("Gameplay", 1, 100);
   maps\_status::scripter_subtask("Animation", 1, 0, "Waiting for second pass on flame trap to implement anims");
-  maps\_status::scripter_subtask("FX", 1, 100, "Waiting on arty dust clouds & water fx");
+  maps\_status::scripter_subtask("FX", 1, 100, "Waiting on arty dust clouds &water fx");
 }
 
 event3() {

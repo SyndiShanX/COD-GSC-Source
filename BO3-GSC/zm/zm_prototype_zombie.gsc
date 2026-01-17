@@ -28,7 +28,7 @@
 
 function autoexec init() {
   setdvar("scr_zm_use_code_enemy_selection", 0);
-  level.closest_player_override = & zm_remaster_zombie::remaster_closest_player;
+  level.closest_player_override = &zm_remaster_zombie::remaster_closest_player;
   level thread zm_remaster_zombie::update_closest_player();
   level.move_valid_poi_to_navmesh = 1;
   level.pathdist_type = 2;

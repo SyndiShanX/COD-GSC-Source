@@ -25,7 +25,7 @@ statechange(clientnum, system, newstate) {
     level._systemstates = [];
 
   if(!isDefined(level._systemstates[system]))
-    level._systemstates[system] = spawnstruct();
+    level._systemstates[system] = spawnStruct();
 
   level._systemstates[system].state = newstate;
 
@@ -388,7 +388,7 @@ callback_deactivate_exploder(exploder_id) {
 
 sound_notify(client_num, entity, note) {
   if(note == "sound_dogstep_run_default") {
-    entity playsound(client_num, "fly_dog_step_run_default");
+    entity playSound(client_num, "fly_dog_step_run_default");
     return true;
   }
 
@@ -414,9 +414,9 @@ play_dog_sound(localclientnum, sound, position) {
   dog_sound_print("SOUND " + sound);
 
   if(isDefined(position))
-    return self playsound(localclientnum, sound, position);
+    return self playSound(localclientnum, sound, position);
 
-  return self playsound(localclientnum, sound);
+  return self playSound(localclientnum, sound);
 }
 
 client_flag_callback(localclientnum, flag, set, newent) {
@@ -425,8 +425,7 @@ client_flag_callback(localclientnum, flag, set, newent) {
 
   if(isDefined(level._client_flag_callbacks) && isDefined(level._client_flag_callbacks[self.type]) && isDefined(level._client_flag_callbacks[self.type][flag]))
     self thread[[level._client_flag_callbacks[self.type][flag]]](localclientnum, set, newent);
-  else {
-  }
+  else {}
 }
 
 client_flagasval_callback(localclientnum, val) {
@@ -481,9 +480,7 @@ codecallback_suimessage(localclientnum, param1, param2) {
 
 codecallback_argusnotify(localclientnum, argusid, usertag, message) {
   if(isDefined(level.onargusnotify))
-    return [
-      [level.onargusnotify]
-    ](localclientnum, argusid, usertag, message);
+    return [[level.onargusnotify]](localclientnum, argusid, usertag, message);
 
   return 1;
 }

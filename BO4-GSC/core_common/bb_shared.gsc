@@ -4,7 +4,6 @@
 ***********************************************/
 
 #include scripts\core_common\callbacks_shared;
-
 #namespace bb;
 
 init_shared() {
@@ -17,11 +16,11 @@ init() {}
 
 on_player_spawned() {
   self._bbdata = [];
-  self._bbdata[#"score"] = 0;
-  self._bbdata[#"momentum"] = 0;
-  self._bbdata[#"spawntime"] = gettime();
-  self._bbdata[#"shots"] = 0;
-  self._bbdata[#"hits"] = 0;
+  self._bbdata[# "score"] = 0;
+  self._bbdata[# "momentum"] = 0;
+  self._bbdata[# "spawntime"] = gettime();
+  self._bbdata[# "shots"] = 0;
+  self._bbdata[# "hits"] = 0;
 }
 
 commit_weapon_data(spawnid, currentweapon, time0) {
@@ -36,30 +35,30 @@ commit_weapon_data(spawnid, currentweapon, time0) {
   }
 
   time1 = gettime();
-  blackboxeventname = #"mpweapons";
-  eventname = #"hash_41cc1afc10e99541";
+  blackboxeventname = # "mpweapons";
+  eventname = # "hash_41cc1afc10e99541";
 
   if(sessionmodeiscampaigngame()) {
-    blackboxeventname = #"cpweapons";
-    eventname = #"hash_474292d3118817ab";
+    blackboxeventname = # "cpweapons";
+    eventname = # "hash_474292d3118817ab";
   } else if(sessionmodeiszombiesgame()) {
-    blackboxeventname = #"zmweapons";
-    eventname = #"hash_67140d84a7660909";
+    blackboxeventname = # "zmweapons";
+    eventname = # "hash_67140d84a7660909";
   } else if(sessionmodeiswarzonegame()) {
-    blackboxeventname = #"wzweapons";
-    eventname = #"hash_63ec5305e1ef1335";
+    blackboxeventname = # "wzweapons";
+    eventname = # "hash_63ec5305e1ef1335";
   }
 
   event_data = {
-    #spawnid: spawnid, 
-    #name: currentweapon.name, 
-    #duration: time1 - time0, 
-    #shots: self._bbdata[#"shots"], 
-    #hits: self._bbdata[#"hits"]
+    #spawnid: spawnid,
+    #name: currentweapon.name,
+    #duration: time1 - time0,
+    #shots: self._bbdata[# "shots"],
+    #hits: self._bbdata[# "hits"]
   };
   function_92d1707f(eventname, blackboxeventname, event_data);
-  self._bbdata[#"shots"] = 0;
-  self._bbdata[#"hits"] = 0;
+  self._bbdata[# "shots"] = 0;
+  self._bbdata[# "hits"] = 0;
 }
 
 add_to_stat(statname, delta) {
@@ -81,8 +80,8 @@ function_a7ba460f(reason) {
 function_afcc007d(name, clientnum, xuid) {
   var_bd8c7087 = int(xuid);
   function_92d1707f(#"hash_3e5070f3289e386c", {
-    #name: name, 
-    #clientnum: clientnum, 
+    #name: name,
+    #clientnum: clientnum,
     #xuid: var_bd8c7087
   });
 }
@@ -90,8 +89,8 @@ function_afcc007d(name, clientnum, xuid) {
 function_e0dfa262(name, clientnum, xuid) {
   var_bd8c7087 = int(xuid);
   function_92d1707f(#"hash_557aae9aaddeac22", {
-    #name: name, 
-    #clientnum: clientnum, 
+    #name: name,
+    #clientnum: clientnum,
     #xuid: var_bd8c7087
   });
 }

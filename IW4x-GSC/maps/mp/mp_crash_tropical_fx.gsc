@@ -4,7 +4,6 @@
 ********************************************/
 
 main() {
-
   level._effect["firelp_med_pm"] = loadfx("fire/firelp_med_pm_nodistort");
   level._effect["firelp_small_pm"] = loadfx("fire/firelp_small_pm");
   level._effect["fog_ground_200_heavy_rundown_tropical"] = loadfx("smoke/fog_ground_200_heavy_rundown_tropical");
@@ -17,5 +16,4 @@ main() {
   level._effect["battlefield_smokebank_S"] = loadfx("smoke/battlefield_smokebank_S_tropical");
   level._effect["hallway_smoke_light"] = loadfx("smoke/hallway_smoke_light");
   //level._effect[ "extraction_smoke" ] = loadfx( "smoke/signal_smoke_green" );
-
 }

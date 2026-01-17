@@ -10,7 +10,6 @@
 #include scripts\core_common\scoreevents_shared;
 #include scripts\core_common\system_shared;
 #include scripts\wz_common\spawn;
-
 #namespace wave_spawn;
 
 autoexec __init__system__() {
@@ -39,7 +38,7 @@ function_301b775b() {
   }
 }
 
-private function_a27362d0(params) {
+function_a27362d0(params) {
   if(level.deathcircleindex >= level.deathcircles.size - 2) {
     foreach(player in getplayers()) {
       if(isDefined(player) && !infection::function_74650d7()) {
@@ -58,13 +57,13 @@ function_ca1398a7() {
 
   self endon(#"disconnect");
 
-  if(!isDefined(self.pers) || !isDefined(self.pers[#"lives"])) {
+  if(!isDefined(self.pers) || !isDefined(self.pers[# "lives"])) {
     return;
   }
 
   weapon = getweapon(#"bare_hands");
   count = 0;
-  lives = self.pers[#"lives"] - 1;
+  lives = self.pers[# "lives"] - 1;
 
   while(count < lives && isDefined(self)) {
     count++;
@@ -94,12 +93,12 @@ function_832ecb3d(params) {
 function_a7ed6d54(params) {
   player = params.player;
 
-  if(isDefined(player) && isDefined(player.pers) && isDefined(player.pers[#"lives"])) {
-    player spawn::function_1390f875(player.pers[#"lives"]);
+  if(isDefined(player) && isDefined(player.pers) && isDefined(player.pers[# "lives"])) {
+    player spawn::function_1390f875(player.pers[# "lives"]);
   }
 }
 
-private function_14a68e0b() {
+function_14a68e0b() {
   if(isDefined(level.var_1766510) && level.var_1766510) {
     return;
   }

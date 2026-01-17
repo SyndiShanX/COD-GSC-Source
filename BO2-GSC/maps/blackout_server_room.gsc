@@ -254,16 +254,16 @@ notetrack_torch_guy_torch_on(ai_torch_guy) {
   m_torch = get_model_or_models_from_scene("panel_removed_for_vent_access", "torch");
   m_torch play_fx("laser_cutter_sparking", undefined, undefined, "stop_torch_fx", 1, "tag_fx");
   m_torch play_fx("fx_laser_cutter_on", undefined, undefined, "stop_torch_fx", 1, "tag_fx");
-  m_torch playsound("evt_vent_cutter_start");
+  m_torch playSound("evt_vent_cutter_start");
   wait 0.2;
-  m_torch playloopsound("evt_vent_cutter_loop");
+  m_torch playLoopSound("evt_vent_cutter_loop");
 }
 
 notetrack_torch_guy_torch_off(ai_torch_guy) {
   m_torch = get_model_or_models_from_scene("panel_removed_for_vent_access", "torch");
   m_torch notify("stop_torch_fx");
   m_torch stoploopsound(0.1);
-  m_torch playsound("evt_vent_cutter_end");
+  m_torch playSound("evt_vent_cutter_end");
 }
 
 torch_guy_cutting_wall() {

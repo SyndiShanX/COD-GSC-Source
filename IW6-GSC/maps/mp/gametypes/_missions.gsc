@@ -3285,7 +3285,7 @@ checkChallengeIsLeaning(challengeName) {
 }
 
 checkPenetrationChallenge(victim, challengeName) {
-  if(victim.iDFlags & level.iDFLAGS_PENETRATION) {
+  if(victim.iDFlags &level.iDFLAGS_PENETRATION) {
     self processChallenge("ch_" + challengeName + "_penetrate");
   }
 }

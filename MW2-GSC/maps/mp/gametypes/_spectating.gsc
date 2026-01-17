@@ -4,14 +4,14 @@
 ********************************************************/
 
 init() {
-  level.spectateOverride["allies"] = spawnstruct();
-  level.spectateOverride["axis"] = spawnstruct();
+  level.spectateOverride["allies"] = spawnStruct();
+  level.spectateOverride["axis"] = spawnStruct();
 
   level thread onPlayerConnect();
 }
 
 onPlayerConnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connected", player);
 
     player thread onJoinedTeam();
@@ -23,7 +23,7 @@ onPlayerConnect() {
 onJoinedTeam() {
   self endon("disconnect");
 
-  for (;;) {
+  for(;;) {
     self waittill("joined_team");
     self setSpectatePermissions();
   }
@@ -32,7 +32,7 @@ onJoinedTeam() {
 onJoinedSpectators() {
   self endon("disconnect");
 
-  for (;;) {
+  for(;;) {
     self waittill("joined_spectators");
     self setSpectatePermissions();
   }
@@ -41,7 +41,7 @@ onJoinedSpectators() {
 onSpectatingClient() {
   self endon("disconnect");
 
-  for (;;) {
+  for(;;) {
     self waittill("spectating_cycle");
 
     // show the card for the player we're viewing. Could be undefined if the cyling failed
@@ -52,11 +52,10 @@ onSpectatingClient() {
   }
 }
 
-
 updateSpectateSettings() {
   level endon("game_ended");
 
-  for (index = 0; index < level.players.size; index++)
+  for(index = 0; index < level.players.size; index++)
     level.players[index] setSpectatePermissions();
 }
 
@@ -117,10 +116,10 @@ setSpectatePermissions() {
   }
 
   if(isDefined(team) && (team == "axis" || team == "allies")) {
-    if(isdefined(level.spectateOverride[team].allowFreeSpectate))
+    if(isDefined(level.spectateOverride[team].allowFreeSpectate))
       self allowSpectateTeam("freelook", true);
 
-    if(isdefined(level.spectateOverride[team].allowEnemySpectate))
+    if(isDefined(level.spectateOverride[team].allowEnemySpectate))
       self allowSpectateTeam(getOtherTeam(team), true);
   }
 }

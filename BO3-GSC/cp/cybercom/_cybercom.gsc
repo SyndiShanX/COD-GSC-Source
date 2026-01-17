@@ -34,7 +34,7 @@
 #namespace cybercom;
 
 function autoexec __init__sytem__() {
-  system::register("cybercom", & init, & main, undefined);
+  system::register("cybercom", &init, &main, undefined);
 }
 
 function init() {
@@ -63,7 +63,7 @@ function init() {
 }
 
 function function_4ee56464(var_23810282, var_442fb6cd, var_6ee14d17) {
-  var_6a9f2d8 = spawnstruct();
+  var_6a9f2d8 = spawnStruct();
   var_6a9f2d8.var_974cd16f = var_23810282;
   var_6a9f2d8.var_e909f6f0 = var_442fb6cd;
   var_6a9f2d8.var_3d1b9c0c = var_6ee14d17;
@@ -77,14 +77,14 @@ function function_beff8cf9() {
 
 function ability_on(slot, weapon) {
   self gadgetsetactivatetime(slot, gettime());
-  if(!isdefined(self.spawntime) || (gettime() - self.spawntime) > 200) {
-    if(getdvarint("ai_awarenessEnabled") && isdefined(weapon) && issubstr(weapon.name, "hijack")) {
+  if(!isDefined(self.spawntime) || (gettime() - self.spawntime) > 200) {
+    if(getdvarint("ai_awarenessEnabled") && isDefined(weapon) && issubstr(weapon.name, "hijack")) {
       return;
     }
     self generatescriptevent();
   }
   if(isplayer(self)) {
-    if(!isdefined(self.var_1c0132c[weapon.name])) {
+    if(!isDefined(self.var_1c0132c[weapon.name])) {
       self.var_1c0132c[weapon.name] = 0;
     }
     self.var_1c0132c[weapon.name]++;
@@ -95,17 +95,17 @@ function ability_on(slot, weapon) {
 function ability_off(slot, weapon) {}
 
 function initialize() {
-  level.cybercom = spawnstruct();
+  level.cybercom = spawnStruct();
   level.cybercom.abilities = [];
   level.cybercom.swarms_released = 0;
   level.cybercom.var_12f85dec = 0;
-  level.cybercom._ability_turn_on = & ability_on;
-  level.cybercom._ability_turn_off = & ability_off;
-  level.vehicle_initializer_cb = & vehicle_init_cybercom;
-  level.vehicle_destructer_cb = & function_79bafe1d;
-  level.vehicle_defense_cb = & function_fabadf47;
-  level.cybercom.overrideactordamage = & function_25889576;
-  level.cybercom.overridevehicledamage = & function_17136681;
+  level.cybercom._ability_turn_on = &ability_on;
+  level.cybercom._ability_turn_off = &ability_off;
+  level.vehicle_initializer_cb = &vehicle_init_cybercom;
+  level.vehicle_destructer_cb = &function_79bafe1d;
+  level.vehicle_defense_cb = &function_fabadf47;
+  level.cybercom.overrideactordamage = &function_25889576;
+  level.cybercom.overridevehicledamage = &function_17136681;
 }
 
 function function_25889576(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, boneindex, modelindex, surfacetype, surfacenormal) {
@@ -113,13 +113,13 @@ function function_25889576(einflictor, eattacker, idamage, idflags, smeansofdeat
     self notify("hash_95cdc515");
     if(weapon == getweapon("gadget_es_strike") || weapon == getweapon("gadget_es_strike_upgraded")) {
       idamage = 0;
-      if(!isdefined(shitloc) || shitloc == "none") {
+      if(!isDefined(shitloc) || shitloc == "none") {
         return idamage;
       }
       level notify("hash_63acb616", self, eattacker, idamage, weapon, vpoint);
       var_2d399bc8 = 1;
     }
-    if(weapon == getweapon("gadget_ravage_core") || (weapon == getweapon("gadget_ravage_core_upgraded") && isdefined(self.archetype) && self.archetype == "robot")) {
+    if(weapon == getweapon("gadget_ravage_core") || (weapon == getweapon("gadget_ravage_core_upgraded") && isDefined(self.archetype) && self.archetype == "robot")) {
       self ai::set_behavior_attribute("can_gib", 0);
       level notify("ravage_core", self, eattacker, idamage, weapon, vpoint);
       var_2d399bc8 = 1;
@@ -130,12 +130,12 @@ function function_25889576(einflictor, eattacker, idamage, idflags, smeansofdeat
     }
   } else if(smeansofdeath == "MOD_GRENADE_SPLASH") {
     if(weapon.name == "ravage_core_emp_grenade") {
-      if(isdefined(self.archetype) && (self.archetype == "human" || self.archetype == "zombie")) {
+      if(isDefined(self.archetype) && (self.archetype == "human" || self.archetype == "zombie")) {
         idamage = 60;
       }
     }
   }
-  if(isdefined(self.tokubetsukogekita) && self.tokubetsukogekita && isdefined(eattacker) && !isplayer(eattacker)) {
+  if(isDefined(self.tokubetsukogekita) && self.tokubetsukogekita && isDefined(eattacker) && !isplayer(eattacker)) {
     idamage = 1;
   }
   if(idamage > 30) {
@@ -157,9 +157,9 @@ function function_17136681(einflictor, eattacker, idamage, idflags, smeansofdeat
 }
 
 function main() {
-  callback::on_connect( & on_player_connect);
-  callback::on_spawned( & on_player_spawned);
-  if(!isdefined(level.cybercom)) {
+  callback::on_connect(&on_player_connect);
+  callback::on_spawned(&on_player_spawned);
+  if(!isDefined(level.cybercom)) {
     initialize();
   }
   cybercom_gadget::main();
@@ -169,8 +169,8 @@ function main() {
 }
 
 function on_player_connect() {
-  self.cybercom = spawnstruct();
-  self.cybercom.flags = spawnstruct();
+  self.cybercom = spawnStruct();
+  self.cybercom.flags = spawnStruct();
   self.cybercom.var_b766574c = 0;
   self.var_1c0132c = [];
   self getcybercomflags();
@@ -217,13 +217,13 @@ function on_menu_response() {
   self endon("disconnect");
   self notify("start_ccom_menu_response");
   self endon("start_ccom_menu_response");
-  for (;;) {
+  for(;;) {
     self waittill("menuresponse", menu, response);
-    if(isdefined(self.cybercom.menu) && menu == self.cybercom.menu) {
-      if(isdefined(self.cybercom.is_primed) && self.cybercom.is_primed) {
+    if(isDefined(self.cybercom.menu) && menu == self.cybercom.menu) {
+      if(isDefined(self.cybercom.is_primed) && self.cybercom.is_primed) {
         continue;
       }
-      if(isdefined(self.cybercom.var_dd2f3b84) && self.cybercom.var_dd2f3b84) {
+      if(isDefined(self.cybercom.var_dd2f3b84) && self.cybercom.var_dd2f3b84) {
         continue;
       }
       responsearray = strtok(response, ",");
@@ -236,7 +236,7 @@ function on_menu_response() {
         ability = self cybercom_gadget::equipability(responsearray[0]);
         self clientfield::set_to_player("resetAbilityWheel", 0);
         self notify("hash_9a680733");
-        if(isdefined(ability)) {
+        if(isDefined(ability)) {
           switch (ability.type) {
             case 0: {
               self cybercom_gadget::meleeabilitygiven(cybercom_gadget::getabilitybyname("cybercom_ravagecore"));
@@ -265,12 +265,12 @@ function disablecybercom(var_1e41d598) {
   self.cybercom.var_647643c2 = self gadgetpowerget(1);
   self.cybercom.var_384c5e6e = var_1e41d598;
   self notify("cybercom_disabled");
-  if(isdefined(self.cybercom.activecybercommeleeweapon) && self hasweapon(self.cybercom.activecybercommeleeweapon)) {
+  if(isDefined(self.cybercom.activecybercommeleeweapon) && self hasweapon(self.cybercom.activecybercommeleeweapon)) {
     self.cybercom.var_7116dac7 = self.cybercom.activecybercommeleeweapon;
     self takeweapon(self.cybercom.activecybercommeleeweapon);
     self.cybercom.activecybercommeleeweapon = undefined;
   }
-  if(isdefined(self.cybercom.activecybercomweapon)) {
+  if(isDefined(self.cybercom.activecybercomweapon)) {
     self takeweapon(self.cybercom.activecybercomweapon);
     self notify("weapon_taken", self.cybercom.activecybercomweapon);
     self.cybercom.activecybercomweapon = undefined;
@@ -282,22 +282,22 @@ function disablecybercom(var_1e41d598) {
 function enablecybercom() {
   assert(isplayer(self));
   self clientfield::set_to_player("cybercom_disabled", 0);
-  if(isdefined(self.cybercom.lastequipped)) {
+  if(isDefined(self.cybercom.lastequipped)) {
     self cybercom_gadget::equipability(self.cybercom.lastequipped.name);
   }
-  if(isdefined(self.cybercom.var_7116dac7)) {
+  if(isDefined(self.cybercom.var_7116dac7)) {
     self giveweapon(self.cybercom.var_7116dac7);
     self.cybercom.activecybercommeleeweapon = self.cybercom.var_7116dac7;
     self.cybercom.var_7116dac7 = undefined;
   }
-  if(isdefined(self.cybercom.var_384c5e6e) && self.cybercom.var_384c5e6e) {
-    if(isdefined(self.cybercom.var_18714ef0)) {
+  if(isDefined(self.cybercom.var_384c5e6e) && self.cybercom.var_384c5e6e) {
+    if(isDefined(self.cybercom.var_18714ef0)) {
       self gadgetpowerset(0, self.cybercom.var_18714ef0);
     }
-    if(isdefined(self.cybercom.var_3e73c959)) {
+    if(isDefined(self.cybercom.var_3e73c959)) {
       self gadgetpowerset(1, self.cybercom.var_3e73c959);
     }
-    if(isdefined(self.cybercom.var_647643c2)) {
+    if(isDefined(self.cybercom.var_647643c2)) {
       self gadgetpowerset(2, self.cybercom.var_647643c2);
     }
     self.cybercom.var_18714ef0 = undefined;
@@ -316,9 +316,9 @@ function _cybercom_notify_toggle() {
 function _cybercom_notify_toggle_on() {
   level notify("_cybercom_notify_toggle_on");
   level endon("_cybercom_notify_toggle_on");
-  while (true) {
+  while(true) {
     level waittill("enable_cybercom", player);
-    if(isdefined(player)) {
+    if(isDefined(player)) {
       player enablecybercom();
     } else {
       level clientfield::set("cybercom_disabled", 0);
@@ -333,9 +333,9 @@ function _cybercom_notify_toggle_on() {
 function _cybercom_notify_toggle_off() {
   level notify("_cybercom_notify_toggle_off");
   level endon("_cybercom_notify_toggle_off");
-  while (true) {
+  while(true) {
     level waittill("disable_cybercom", player, var_1e41d598);
-    if(isdefined(player)) {
+    if(isDefined(player)) {
       player disablecybercom(var_1e41d598);
     } else {
       level clientfield::set("cybercom_disabled", 1);
@@ -349,7 +349,7 @@ function _cybercom_notify_toggle_off() {
 
 function cybercom_getadjusteddamage(player, eattacker, einflictor, idamage, weapon, shitloc, smeansofdamage) {
   if(player hascybercomrig("cybercom_proximitydeterrent") != 0) {
-    if(isdefined(eattacker) && eattacker.classname != "trigger_hurt" && eattacker.classname != "worldspawn") {
+    if(isDefined(eattacker) && eattacker.classname != "trigger_hurt" && eattacker.classname != "worldspawn") {
       idamage = player cybercom_tacrig_proximitydeterrent::function_327bda1e(idamage, smeansofdamage);
     }
   }
@@ -358,7 +358,7 @@ function cybercom_getadjusteddamage(player, eattacker, einflictor, idamage, weap
 
 function function_d240e350(var_7872e02, target, var_9bc2efcb = 1, upgraded = 0) {
   self endon("death");
-  while (var_9bc2efcb && self isplayinganimscripted()) {
+  while(var_9bc2efcb && self isplayinganimscripted()) {
     wait(0.1);
   }
   switch (var_7872e02) {
@@ -419,5 +419,5 @@ function function_d240e350(var_7872e02, target, var_9bc2efcb = 1, upgraded = 0) 
       break;
     }
   }
-  self playsound("gdt_cybercore_activate_ai");
+  self playSound("gdt_cybercore_activate_ai");
 }

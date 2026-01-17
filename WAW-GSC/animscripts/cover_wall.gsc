@@ -131,7 +131,7 @@ cover_wall_think(coverType) {
     self.a.special = "cover_stand";
   else
     self.a.special = "cover_crouch";
-  behaviorCallbacks = spawnstruct();
+  behaviorCallbacks = spawnStruct();
   behaviorCallbacks.reload = ::coverReload;
   behaviorCallbacks.leaveCoverAndShoot = ::leaveCoverAndShoot;
   behaviorCallbacks.look = ::look;
@@ -197,7 +197,7 @@ leaveCoverAndShoot(theWeaponType, mode, suppressSpot) {
 shootAsTold() {
   self endon("return_to_cover");
   self maps\_gameskill::didSomethingOtherThanShooting();
-  while (1) {
+  while(1) {
     if(self.shouldReturnToCover) {
       break;
     }
@@ -235,7 +235,7 @@ shootUntilShootBehaviorChange_coverWall() {
 
 idle() {
   self endon("end_idle");
-  while (1) {
+  while(1) {
     useTwitch = (randomint(2) == 0 && animArrayAnyExist("hide_idle_twitch"));
     if(useTwitch)
       idleanim = animArrayPickRandom("hide_idle_twitch");
@@ -315,7 +315,7 @@ endStandIdleThread() {
 standIdleThreadInternal() {
   self endon("killanimscript");
   self endon("end_stand_idle_thread");
-  for (i = 0;; i++) {
+  for(i = 0;; i++) {
     flagname = "idle" + i;
     idleanim = animArrayPickRandom("exposed_idle");
     self setFlaggedAnimKnobLimitedRestart(flagname, idleanim, 1, 0.2);
@@ -648,7 +648,7 @@ angleRangeThread() {
   self notify("newAngleRangeCheck");
   self endon("newAngleRangeCheck");
   self endon("return_to_cover");
-  while (1) {
+  while(1) {
     if(needToChangeCoverMode()) {
       break;
     }

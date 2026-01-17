@@ -89,8 +89,8 @@ watch_first_move_trig() {
 }
 
 e1_rus_listeners() {
-  listeners = getentarray("e1_rus_listener", "targetname");
-  for (i = 0; i < listeners.size; i++) {
+  listeners = getEntArray("e1_rus_listener", "targetname");
+  for(i = 0; i < listeners.size; i++) {
     listeners[i].animname = "redshirt";
     if(randomint(2) == 0) {
       listeners[i] thread anim_loop_solo(listeners[i], "comm_listen_idle");
@@ -101,9 +101,9 @@ e1_rus_listeners() {
 }
 
 e1_drones() {
-  drone_trigs = getentarray("drone_allies", "targetname");
-  drone_trigs_axis = getentarray("drone_axis", "targetname");
-  for (i = 0; i < drone_trigs_axis.size; i++) {
+  drone_trigs = getEntArray("drone_allies", "targetname");
+  drone_trigs_axis = getEntArray("drone_axis", "targetname");
+  for(i = 0; i < drone_trigs_axis.size; i++) {
     drone_trigs = array_add(drone_trigs, drone_trigs_axis[i]);
   }
   trig_int_drones = undefined;
@@ -112,7 +112,7 @@ e1_drones() {
   level.trig_alley1_drones = [];
   level.trig_plaza_drones = [];
   level.trig_reich_drones = [];
-  for (i = 0; i < drone_trigs.size; i++) {
+  for(i = 0; i < drone_trigs.size; i++) {
     if(isDefined(drone_trigs[i].script_string) && drone_trigs[i].script_string == "intro_drones") {
       trig_int_drones = drone_trigs[i];
     } else if(isDefined(drone_trigs[i].script_string) && drone_trigs[i].script_string == "charge_drones") {
@@ -130,13 +130,13 @@ e1_drones() {
     }
   }
   if(NumRemoteClients()) {
-    for (i = 0; i < level.trig_alley1_drones.size; i++) {
+    for(i = 0; i < level.trig_alley1_drones.size; i++) {
       level.trig_alley1_drones[i] delete();
     }
-    for (i = 0; i < level.trig_plaza_drones.size; i++) {
+    for(i = 0; i < level.trig_plaza_drones.size; i++) {
       level.trig_plaza_drones[i] delete();
     }
-    for (i = 0; i < level.trig_reich_drones.size; i++) {
+    for(i = 0; i < level.trig_reich_drones.size; i++) {
       level.trig_reich_drones[i] delete();
     }
     ent = getent("e2_spawn_right_tanks", "targetname");
@@ -178,7 +178,7 @@ e1_intro_scene() {
 
 add_flag_to_chernov() {
   level.cher_rus_flag = spawn("script_model", level.chernov.origin);
-  level.cher_rus_flag setmodel("anim_berlin_rus_flag_rolled_sm");
+  level.cher_rus_flag setModel("anim_berlin_rus_flag_rolled_sm");
   level.cher_rus_flag linkto(level.chernov, "TAG_STOWED_BACK", (10, 1.5, 0), (16, 178, 0));
 }
 
@@ -188,10 +188,10 @@ play_intro_on_all_players(anode) {
   flag_wait("all_players_spawned");
   players = get_players();
   lerp_nodes = getstructarray("intro_coop_starts", "targetname");
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i] thread play_intro_on_player("intro", anode, i, lerp_nodes[i]);
   }
-  for (i = 0; i < 18; i++) {
+  for(i = 0; i < 18; i++) {
     rumble_all_players("damage_light");
     earthquake(.2, 1, players[0].origin, 128);
     wait(1);
@@ -221,7 +221,7 @@ play_intro_on_player(anime, node, index, lerp_node) {
 play_player_lerp_to_pos(index, lerp_node) {
   level notify("intro_restore_share_screen");
   if(index != 0) {
-    org = Spawn("script_origin", self.origin);
+    org = spawn("script_origin", self.origin);
     org.angles = self.angles;
     self PlayerLinkTo(org, "", 1, 5, 5, 5, 5);
     org MoveTo(lerp_node.origin + (0, 0, 5), .5, 0, .5);
@@ -231,7 +231,7 @@ play_player_lerp_to_pos(index, lerp_node) {
     self show();
     org Delete();
   } else {
-    org = Spawn("script_origin", self.origin);
+    org = spawn("script_origin", self.origin);
     org.angles = self.angles;
     self PlayerLinkTo(org, "", 1, 5, 5, 5, 5);
     org MoveTo(self.origin + (0, 0, 4), .5, 0, .5);
@@ -281,7 +281,7 @@ wakeup_in_fountain() {
 
 turn_off_vision_settings() {
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i] allowprone(true);
     players[i] allowcrouch(true);
     players[i] allowsprint(true);
@@ -301,7 +301,7 @@ player_speed_set(speed, time) {
   interval = .05;
   numcycles = time / interval;
   fraction = range / numcycles;
-  while (abs(goalspeed - currspeed) > abs(fraction * 1.1)) {
+  while(abs(goalspeed - currspeed) > abs(fraction * 1.1)) {
     currspeed += fraction;
     setsaveddvar("g_speed", int(currspeed));
     wait interval;
@@ -312,7 +312,7 @@ player_speed_set(speed, time) {
 hud_hide() {
   wait 0.1;
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     player = players[i];
     player SetClientDvar("hud_showStance", "0");
     player SetClientDvar("compass", "0");
@@ -323,7 +323,7 @@ hud_hide() {
 hud_show() {
   wait 0.1;
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     player = players[i];
     player SetClientDvar("hud_showStance", "1");
     player SetClientDvar("compass", "1");
@@ -344,7 +344,7 @@ fadeOverlay(duration, alpha, blur) {
 
 do_custom_introscreen() {
   wait(1);
-  custom_introscreen(&"BER3_INTROSCREEN_TITLE", & "BER3_INTROSCREEN_DATE", & "BER3_INTROSCREEN_PLACE", & "BER3_INTROSCREEN_NAME", & "BER3_INTROSCREEN_INFO");
+  custom_introscreen(&"BER3_INTROSCREEN_TITLE", &"BER3_INTROSCREEN_DATE", &"BER3_INTROSCREEN_PLACE", &"BER3_INTROSCREEN_NAME", &"BER3_INTROSCREEN_INFO");
 }
 
 custom_introscreen(string1, string2, string3, string4, string5) {
@@ -423,7 +423,7 @@ e1_pak2_animate() {
   level endon("delete street allies");
   art2 = getent("e1_art2", "targetname");
   anode = getstruct("intro_pak2_struct", "targetname");
-  crew = getentarray("e1_art2_crew", "targetname");
+  crew = getEntArray("e1_art2_crew", "targetname");
   art2 thread e1_pak_shoot(art2, anode);
   crew thread e1_pak_crew_shoot(crew, anode);
 }
@@ -442,7 +442,7 @@ loop_fire_katyusha() {
   targets = getstructarray("e1_katyusha_target", "targetname");
   kat1 thread katyusha_trucks_fire(targets, 2500, 150);
   kat2 thread katyusha_trucks_fire(targets, 2500, 150);
-  while (level.loop_katyusha) {
+  while(level.loop_katyusha) {
     kat1 notify("fire rockets");
     wait(7);
     kat2 notify("fire rockets");
@@ -455,21 +455,21 @@ delete_street_allies() {
   wait(.25);
   level notify("delete street allies");
   level notify("stop katyusha");
-  street_vehicles = getentarray("rus_street_vehicles", "script_noteworthy");
-  street_allies = getentarray("rus_street_soldiers", "script_noteworthy");
+  street_vehicles = getEntArray("rus_street_vehicles", "script_noteworthy");
+  street_allies = getEntArray("rus_street_soldiers", "script_noteworthy");
   wait(2);
-  for (i = 0; i < street_allies.size; i++) {
+  for(i = 0; i < street_allies.size; i++) {
     if(isDefined(street_allies[i])) {
       street_allies[i] thread bloody_death(true);
     }
   }
   wait(1);
-  for (i = 0; i < street_vehicles.size; i++) {
+  for(i = 0; i < street_vehicles.size; i++) {
     if(isDefined(street_vehicles[i])) {
       street_vehicles[i] delete();
     }
   }
-  for (i = 0; i < street_allies.size; i++) {
+  for(i = 0; i < street_allies.size; i++) {
     if(isDefined(street_allies[i])) {
       street_allies[i] delete();
     }
@@ -481,11 +481,11 @@ delete_street_allies() {
 overhead_planes() {
   stuka_nodes = getvehiclenodearray("e1_stuka_start", "targetname");
   il2_nodes = getvehiclenodearray("e1_il2_start", "targetname");
-  for (i = 0; i < stuka_nodes.size; i++) {
+  for(i = 0; i < stuka_nodes.size; i++) {
     thread spawn_plane("vehicle_stuka_flying", stuka_nodes[i]);
     wait_network_frame();
   }
-  for (i = 0; i < il2_nodes.size; i++) {
+  for(i = 0; i < il2_nodes.size; i++) {
     thread spawn_plane("vehicle_rus_airplane_il2", il2_nodes[i]);
     wait_network_frame();
   }
@@ -493,8 +493,8 @@ overhead_planes() {
 
 hanged_germans_init() {
   wait(1);
-  hanged_ger = getentarray("hanged_ger", "script_noteworthy");
-  for (i = 0; i < hanged_ger.size; i++) {
+  hanged_ger = getEntArray("hanged_ger", "script_noteworthy");
+  for(i = 0; i < hanged_ger.size; i++) {
     hanged_ger[i] hangguy_with_ragdoll("J_Neck", hanged_ger[i].script_int);
     wait_network_frame();
   }
@@ -509,9 +509,9 @@ drop_bodies() {
   getent("temp_trig_drop_body3", "targetname") waittill("trigger");
   level.sarge thread anim_single_solo(level.sarge, "intro_rez_11");
   drop_guy3 startragdoll();
-  drop_guy3 playsound("german_fall_scream");
+  drop_guy3 playSound("german_fall_scream");
   wait 1.5;
-  drop_guy3 playsound("german_fall_smack");
+  drop_guy3 playSound("german_fall_smack");
   getent("temp_trig_drop_body4", "targetname") waittill("trigger");
   drop_guy4 startragdoll();
 }
@@ -527,7 +527,7 @@ e1_alley() {
   thread e1_exiting_library_vo();
   thread e2_alley_tanks();
   thread e1_entering_house_vo();
-  for (i = 0; i < 4; i++) {
+  for(i = 0; i < 4; i++) {
     thread maps\ber3_event_plaza::wait_repopulate_flak(i + 10);
   }
 }
@@ -582,7 +582,7 @@ overhead_fire_start() {
 
 loop_tracers(startPoint, endPoint) {
   level endon("stop_tracers");
-  while (true) {
+  while(true) {
     wait(randomFloatRange(0.1, 0.5));
     bulletTracer(startPoint, endPoint);
   }
@@ -595,9 +595,9 @@ overhead_fire_end() {
 }
 
 overhead_german_firing() {
-  shooting_ai = getentarray("e1_ger_upstairs", "script_noteworthy");
-  amb_target = getentarray("e1_ger_target", "targetname");
-  for (i = 0; i < shooting_ai.size; i++) {
+  shooting_ai = getEntArray("e1_ger_upstairs", "script_noteworthy");
+  amb_target = getEntArray("e1_ger_target", "targetname");
+  for(i = 0; i < shooting_ai.size; i++) {
     if(isDefined(shooting_ai[i])) {
       shooting_ai[i] thread add_spawn_function(::ai_set_target, amb_target[i]);
     }
@@ -637,7 +637,7 @@ delete_house_allies() {
   getent("trig_exited_library", "targetname") waittill("trigger");
   setmusicstate("POST_LIBRARY");
   remove_allies = get_ai_group_ai("house_ai");
-  for (i = 0; i < remove_allies.size; i++) {
+  for(i = 0; i < remove_allies.size; i++) {
     remove_allies[i] notify("_disable_reinforcement");
     remove_allies[i].script_no_respawn = 1;
     remove_allies[i] thread bloody_death(true);
@@ -651,8 +651,8 @@ amb_alley() {
   thread amb_alley_katyusha();
   wait(1);
   thread amb_alley_planes();
-  guys = getentarray("rus_leave_at_library", "script_noteworthy");
-  for (i = 0; i < guys.size; i++) {
+  guys = getEntArray("rus_leave_at_library", "script_noteworthy");
+  for(i = 0; i < guys.size; i++) {
     if(isDefined(guys[i]) && isalive(guys[i])) {
       guys[i] set_force_color("o");
       guys[i].script_noteworthy = "e1_friendly_fodder";
@@ -673,8 +673,8 @@ amb_alley() {
 
 remove_friendly_fodder() {
   getent("trig_exited_library", "targetname") waittill("trigger");
-  guys = getentarray("e1_friendly_fodder", "script_noteworthy");
-  for (i = 0; i < guys.size; i++) {
+  guys = getEntArray("e1_friendly_fodder", "script_noteworthy");
+  for(i = 0; i < guys.size; i++) {
     if(isDefined(guys[i]) && isalive(guys[i])) {
       guys[i] delete();
     }
@@ -709,7 +709,7 @@ warp_players_after_library() {
   volume = getent("trig_trap_warpto_check", "targetname");
   warpto_spots = getstructarray("struct_warp_after_library", "targetname");
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(!(players[i] istouching(volume))) {
       players[i] warp_player(warpto_spots[i].origin);
     }
@@ -721,17 +721,17 @@ amb_alley_planes() {
     plane_nodes1 = getvehiclenodearray("e1_il2_alley1", "targetname");
     plane_nodes2 = getvehiclenodearray("e1_il2_alley2", "targetname");
     plane_nodes3 = getvehiclenodearray("e1_il2_alley3", "targetname");
-    for (i = 0; i < plane_nodes1.size; i++) {
+    for(i = 0; i < plane_nodes1.size; i++) {
       thread spawn_plane("vehicle_rus_airplane_il2", plane_nodes1[i]);
       wait_network_frame();
     }
     wait(2);
-    for (i = 0; i < plane_nodes2.size; i++) {
+    for(i = 0; i < plane_nodes2.size; i++) {
       thread spawn_plane("vehicle_rus_airplane_il2", plane_nodes2[i]);
       wait_network_frame();
     }
     wait(4);
-    for (i = 0; i < plane_nodes3.size; i++) {
+    for(i = 0; i < plane_nodes3.size; i++) {
       thread spawn_plane("vehicle_rus_airplane_il2", plane_nodes3[i]);
       wait_network_frame();
     }
@@ -744,7 +744,7 @@ amb_alley_katyusha() {
   kat = getent("e1_alley_katyusha", "targetname");
   targets = getstructarray("e1_katyusha_target", "targetname");
   kat thread katyusha_trucks_fire(targets, 2500, 150);
-  while (level.loop_katyusha) {
+  while(level.loop_katyusha) {
     kat notify("fire rockets");
     wait(15);
   }
@@ -753,7 +753,7 @@ amb_alley_katyusha() {
 katyusha_trucks_fire(targets, catenary, z_moveto_offset) {
   self endon("stop firing");
   self endon("death");
-  while (true) {
+  while(true) {
     truck_rockets = [];
     tag = undefined;
     tag_pos = undefined;
@@ -764,8 +764,8 @@ katyusha_trucks_fire(targets, catenary, z_moveto_offset) {
       numRockets = 12;
     }
     self waittill("fire rockets");
-    for (i = 0; i < numRockets; i++) {
-      while (!OkToSpawn()) {
+    for(i = 0; i < numRockets; i++) {
+      while(!OkTospawn()) {
         wait_network_frame();
       }
       if(i <= 9) {
@@ -778,21 +778,21 @@ katyusha_trucks_fire(targets, catenary, z_moveto_offset) {
         tag_angles = self getTagAngles(tag);
       }
       if(isDefined(tag_pos)) {
-        while (!oktospawn()) {
+        while(!oktospawn()) {
           wait(0.1);
         }
         rocket = spawn("script_model", tag_pos);
         rocket.angles = (tag_angles);
-        rocket setmodel("katyusha_rocket");
+        rocket setModel("katyusha_rocket");
         truck_rockets[truck_rockets.size] = rocket;
       }
     }
     target = targets[randomInt(targets.size)];
     close_targets = [];
-    for (i = 0; i < targets.size; i++) {
+    for(i = 0; i < targets.size; i++) {
       close_targets[close_targets.size] = targets[i];
     }
-    for (i = 0; i < truck_rockets.size; i++) {
+    for(i = 0; i < truck_rockets.size; i++) {
       target_pos = targets[randomInt(close_targets.size)];
       truck_rockets[i] thread katyusha_rocket_fire(target_pos, self, tag_pos, catenary, z_moveto_offset);
     }
@@ -802,19 +802,19 @@ katyusha_trucks_fire(targets, catenary, z_moveto_offset) {
 katyusha_rocket_fire(target_pos, truck, tag_pos, catenary, z_moveto_offset) {
   wait(randomfloatrange(1, 3));
   self thread fire_rocket(target_pos.origin, tag_pos, false, catenary, z_moveto_offset);
-  self playsound("katyusha_launch_rocket");
-  playFxOnTag(level._effect["rocket_launch"], self, "tag_fx");
+  self playSound("katyusha_launch_rocket");
+  playFXOnTag(level._effect["rocket_launch"], self, "tag_fx");
   level thread rumble_all_players("damage_light", "damage_heavy", self.origin, 256, 128);
   earthquake(.25, .5, self.origin, 512);
   wait(0.1);
-  playFxOnTag(level._effect["rocket_trail"], self, "tag_fx");
+  playFXOnTag(level._effect["rocket_trail"], self, "tag_fx");
 }
 
 fire_rocket(target_pos, tag_org, far, catenary, z_moveto_offset) {
   if(!isDefined(z_moveto_offset)) {
     z_moveto_offset = 110;
   }
-  forwardVec = anglestoforward(self.angles);
+  forwardVec = anglesToForward(self.angles);
   normal = VectorNormalize(forwardVec);
   vecScale = vectorScale(normal, 200);
   moveto_pos = self.origin + vecScale;
@@ -829,7 +829,7 @@ fire_rocket(target_pos, tag_org, far, catenary, z_moveto_offset) {
   drop = 0.5 * gravity * (time * time);
   velocity = ((delta[0] / time), (delta[1] / time), (delta[2] - drop) / time);
   self MoveGravity(velocity, time);
-  self playloopsound("katy_rocket_run", .1);
+  self playLoopSound("katy_rocket_run", .1);
   self rotatepitch(100, time);
   self thread rotate_rocket_at_midpoint(time_to_wait);
   wait(time);
@@ -864,19 +864,19 @@ move_tank_1() {
   thread fire_shrecks(shreck_start_pos, tank1, 1.5);
   wait(1.5);
   tank1 notify("death");
-  tank1 setmodel("vehicle_rus_tracked_t34_dmg");
+  tank1 setModel("vehicle_rus_tracked_t34_dmg");
 }
 
 fire_shrecks(spwn, targit, time) {
   shreck = spawn("script_model", spwn.origin);
   shreck.angles = targit.angles;
-  shreck setmodel("weapon_ger_panzershreck_rocket");
+  shreck setModel("weapon_ger_panzershreck_rocket");
   dest = targit.origin;
   shreck moveTo(dest, time);
-  playFxOnTag(level._effect["shreck_trail"], shreck, "tag_fx");
+  playFXOnTag(level._effect["shreck_trail"], shreck, "tag_fx");
   wait time;
   shreck hide();
-  playfx(level._effect["shreck_explode"], shreck.origin);
+  playFX(level._effect["shreck_explode"], shreck.origin);
   targit notify("shreck_hit");
   radiusdamage(shreck.origin, 180, 300, 35);
   earthquake(0.7, 1.5, shreck.origin, 512);
@@ -885,25 +885,25 @@ fire_shrecks(spwn, targit, time) {
 
 e1_objectives() {
   obj_struct = getstruct("obj_gather_in_house", "targetname");
-  objective_add(0, "current", & "BER3_OBJ0", obj_struct.origin);
+  objective_add(0, "current", &"BER3_OBJ0", obj_struct.origin);
   getent("e1_shreck_to_house", "targetname") waittill("trigger");
   wait(3);
   objective_state(0, "done");
   obj_struct = getstruct("obj_clear_library", "targetname");
-  objective_add(1, "current", & "BER3_OBJ1", obj_struct.origin);
+  objective_add(1, "current", &"BER3_OBJ1", obj_struct.origin);
   getent("trig_exiting_library", "targetname") waittill("trigger");
   objective_state(1, "done");
   obj_struct = getstruct("obj_storm_konigsplatz", "targetname");
-  objective_add(2, "current", & "BER3_OBJ2", obj_struct.origin);
+  objective_add(2, "current", &"BER3_OBJ2", obj_struct.origin);
   getent("e2_tank1_destroy", "targetname") waittill("trigger");
   objective_state(2, "done");
 }
 
 e1_init_molotov_throwers() {
   getent("trig_entering_alley", "targetname") waittill("trigger");
-  spawners = getentarray("e1_molotov_thrower", "targetname");
+  spawners = getEntArray("e1_molotov_thrower", "targetname");
   array_thread(spawners, ::add_spawn_function, ::e1_molotov_thrower_think);
-  for (i = 0; i < spawners.size; i++) {
+  for(i = 0; i < spawners.size; i++) {
     russian = spawners[i] stalingradspawn();
     if(i % 2) {
       wait_network_frame();
@@ -935,10 +935,10 @@ e1_molotov_thrower_think() {
 fake_throw_molotov() {
   self endon("death");
   molotov = spawn("script_model", self gettagorigin("tag_weapon_right"));
-  molotov setmodel("weapon_rus_molotov_grenade");
+  molotov setModel("weapon_rus_molotov_grenade");
   molotov linkto(self, "tag_weapon_left");
   wait(3.5);
-  playfxontag(level._effect["molotov_trail_fire"], molotov, "tag_flash");
+  playFXOnTag(level._effect["molotov_trail_fire"], molotov, "tag_flash");
   wait(2);
   molotov unlink();
   molotov_target = getstruct(self.script_noteworthy, "targetname");
@@ -946,7 +946,7 @@ fake_throw_molotov() {
   velocities = forward * 15000;
   molotov physicslaunch((molotov.origin), velocities);
   wait(2);
-  playfx(level._effect["molotov_explosion"], molotov_target.origin);
+  playFX(level._effect["molotov_explosion"], molotov_target.origin);
   molotov delete();
 }
 
@@ -976,14 +976,14 @@ e2_alley_tanks() {
 e1_alley_bricks() {
   anode = getnode("ber3_alley_bricks_chunks_anim", "targetname");
   amodel = spawn("script_model", anode.origin);
-  amodel setmodel(level.scr_model["e1_wall_bricks"]);
+  amodel setModel(level.scr_model["e1_wall_bricks"]);
   amodel.animname = "e1_wall_bricks";
   amodel useanimtree(level.scr_animtree["e1_wall_bricks"]);
   bricks = [];
   bricks[0] = getent("ber3_alley_bricks_chunk_01", "targetname");
   bricks[1] = getent("ber3_alley_bricks_chunk_02", "targetname");
   bricks[2] = getent("ber3_alley_bricks_chunk_03", "targetname");
-  for (i = 0; i < bricks.size; i++) {
+  for(i = 0; i < bricks.size; i++) {
     bricks[i] linkto(amodel, "chunk" + (i + 1));
   }
   anode anim_single_solo(amodel, "e1_alley_brick_chunks");
@@ -994,7 +994,7 @@ e1_alley_bricks() {
 reich_flag_waving() {
   anode = getnode("ber3_stag_flag_anim", "targetname");
   amodel = spawn("script_model", anode.origin);
-  amodel setmodel(level.scr_model["reich_flag"]);
+  amodel setModel(level.scr_model["reich_flag"]);
   amodel.animname = "reich_flag";
   amodel useanimtree(level.scr_animtree["reich_flag"]);
   anode anim_single_solo(amodel, "flag_wave");
@@ -1005,7 +1005,7 @@ reich_flag_waving() {
 intro_rus_flag() {
   anode = getent("e1_anim_intro_struct", "targetname");
   amodel = spawn("script_model", anode.origin);
-  amodel setmodel(level.scr_model["rus_flag"]);
+  amodel setModel(level.scr_model["rus_flag"]);
   amodel.animname = "rus_flag";
   amodel useanimtree(level.scr_animtree["rus_flag"]);
   amodel linkto(self, "tag_inhand", (0, 0, 0), (0, 0, 0));
@@ -1040,7 +1040,7 @@ e1_pak_shoot(pak43, anode) {
 e1_pak_crew_move() {
   level endon("delete street allies");
   pak_struct = getstruct("intro_road_pak_struct", "targetname");
-  pak_crew = getentarray("e1_art1_crew", "targetname");
+  pak_crew = getEntArray("e1_art1_crew", "targetname");
   ASSERTEX(pak_crew.size == 4, "Need exactly 4 actors with targetname e1_art1_crew");
   pak_crew[0].animname = "lbrace_pusher";
   pak_crew[1].animname = "lwheel_pusher";
@@ -1063,8 +1063,8 @@ e1_pak_crew_shoot(pak_crew, anode) {
 }
 
 e1_pak_fire(guy) {
-  playfxontag(level._effect["pak43_muzzleflash"], guy, "tag_barrel");
-  guy playsound("pak43_fire_scripted");
+  playFXOnTag(level._effect["pak43_muzzleflash"], guy, "tag_barrel");
+  guy playSound("pak43_fire_scripted");
   earthquake(.3, 1, guy.origin, 1024);
   level thread rumble_all_players("damage_light", "damage_heavy", guy.origin, 523, 256);
 }
@@ -1076,7 +1076,7 @@ e1_tank_into_trap() {
   self doDamage(self.health + 10, self.origin);
   self delete();
   tankModel = spawn("script_model", org);
-  tankModel setmodel("vehicle_rus_tracked_t34");
+  tankModel setModel("vehicle_rus_tracked_t34");
   anode = getnode("ber3_tank_trap", "targetname");
   tankModel.animname = "ber3_dtank";
   tankModel useanimtree(level.scr_animtree["ber3_dtank"]);

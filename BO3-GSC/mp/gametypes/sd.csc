@@ -9,7 +9,7 @@
 #namespace sd;
 
 function main() {
-  callback::on_spawned( & on_player_spawned);
+  callback::on_spawned(&on_player_spawned);
   if(getgametypesetting("silentPlant") != 0) {
     setsoundcontext("bomb_plant", "silent");
   }
@@ -27,7 +27,7 @@ function player_sound_context_hack() {
     self endon("entityshutdown");
     self notify("player_sound_context_hack");
     self endon("player_sound_context_hack");
-    while (true) {
+    while(true) {
       self setsoundentcontext("bomb_plant", "silent");
       wait(1);
     }

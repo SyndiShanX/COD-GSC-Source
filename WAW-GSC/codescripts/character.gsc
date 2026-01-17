@@ -8,7 +8,7 @@ setModelFromArray(a) {
 }
 
 precacheModelArray(a) {
-  for (i = 0; i < a.size; i++)
+  for(i = 0; i < a.size; i++)
     precacheModel(a[i]);
 }
 
@@ -45,7 +45,7 @@ save() {
   } else
     println("save: Guy had no name!");
   attachSize = self getAttachSize();
-  for (i = 0; i < attachSize; i++) {
+  for(i = 0; i < attachSize; i++) {
     info["attach"][i]["model"] = self getAttachModelName(i);
     info["attach"][i]["tag"] = self getAttachTagName(i);
   }
@@ -66,7 +66,7 @@ load(info) {
     println("Load: Guy had no name!");
   attachInfo = info["attach"];
   attachSize = attachInfo.size;
-  for (i = 0; i < attachSize; i++)
+  for(i = 0; i < attachSize; i++)
     self attach(attachInfo[i]["model"], attachInfo[i]["tag"]);
 }
 
@@ -78,7 +78,7 @@ precache(info) {
   precacheModel(info["model"]);
   attachInfo = info["attach"];
   attachSize = attachInfo.size;
-  for (i = 0; i < attachSize; i++)
+  for(i = 0; i < attachSize; i++)
     precacheModel(attachInfo[i]["model"]);
 }
 
@@ -112,7 +112,7 @@ get_random_character(amount) {
       index = randomint(5000);
     }
   }
-  while (index >= amount) {
+  while(index >= amount) {
     index -= amount;
   }
   level.character_index_cache[prefix][group][index]++;
@@ -123,7 +123,7 @@ get_least_used_index(prefix, group) {
   lowest_indices = [];
   lowest_use = level.character_index_cache[prefix][group][0];
   lowest_indices[0] = 0;
-  for (i = 1; i < level.character_index_cache[prefix][group].size; i++) {
+  for(i = 1; i < level.character_index_cache[prefix][group].size; i++) {
     if(level.character_index_cache[prefix][group][i] > lowest_use) {
       continue;
     }
@@ -138,7 +138,7 @@ get_least_used_index(prefix, group) {
 }
 
 initialize_character_group(prefix, group, amount) {
-  for (i = 0; i < amount; i++) {
+  for(i = 0; i < amount; i++) {
     level.character_index_cache[prefix][group][i] = 0;
   }
 }

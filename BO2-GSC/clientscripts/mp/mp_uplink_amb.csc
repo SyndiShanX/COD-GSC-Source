@@ -56,21 +56,21 @@ main() {
 vox_comp_radio() {
   while(true) {
     wait(randomintrange(12, 30));
-    playsound(0, "vox_comp_radio", (2635, 1596, 406));
+    playSound(0, "vox_comp_radio", (2635, 1596, 406));
   }
 }
 
 vox_comp_radio_mainframe() {
   while(true) {
     wait(randomintrange(12, 30));
-    playsound(0, "vox_comp_radio", (2734, -842, 379));
+    playSound(0, "vox_comp_radio", (2734, -842, 379));
   }
 }
 
 snd_random(min, max, position, alias) {
   while(true) {
     wait(randomintrange(min, max));
-    playsound(0, alias, position);
+    playSound(0, alias, position);
   }
 }
 

@@ -39,7 +39,7 @@ add_zombie_weapon(weapon_name, upgrade_name, hint, cost, weaponVO, weaponVOresp,
     ammo_cost = round_up_to_ten(int(table_ammo_cost));
   }
   PrecacheString(hint);
-  struct = SpawnStruct();
+  struct = spawnStruct();
   if(!isDefined(level.zombie_weapons)) {
     level.zombie_weapons = [];
   }
@@ -143,52 +143,50 @@ include_zombie_weapon(weapon_name, in_box, collector, weighting_func) {
 }
 
 init_weapons() {
-  add_zombie_weapon("m1911_zm", "m1911_upgraded_zm", & "ZOMBIE_WEAPON_M1911", 50, "pistol", "", undefined);
-  add_zombie_weapon("python_zm", "python_upgraded_zm", & "ZOMBIE_WEAPON_PYTHON", 2200, "pistol", "", undefined);
-  add_zombie_weapon("cz75_zm", "cz75_upgraded_zm", & "ZOMBIE_WEAPON_CZ75", 50, "pistol", "", undefined);
-  add_zombie_weapon("ak74u_zm", "ak74u_upgraded_zm", & "ZOMBIE_WEAPON_AK74U", 1200, "smg", "", undefined);
-  add_zombie_weapon("mp5k_zm", "mp5k_upgraded_zm", & "ZOMBIE_WEAPON_MP5K", 1000, "smg", "", undefined);
-  add_zombie_weapon("mp40_zm", "mp40_upgraded_zm", & "ZOMBIE_WEAPON_MP40", 1000, "smg", "", undefined);
-  add_zombie_weapon("mpl_zm", "mpl_upgraded_zm", & "ZOMBIE_WEAPON_MPL", 1000, "smg", "", undefined);
-  add_zombie_weapon("pm63_zm", "pm63_upgraded_zm", & "ZOMBIE_WEAPON_PM63", 1000, "smg", "", undefined);
-  add_zombie_weapon("spectre_zm", "spectre_upgraded_zm", & "ZOMBIE_WEAPON_SPECTRE", 50, "smg", "", undefined);
-  add_zombie_weapon("cz75dw_zm", "cz75dw_upgraded_zm", & "ZOMBIE_WEAPON_CZ75DW", 50, "dualwield", "", undefined);
-  add_zombie_weapon("ithaca_zm", "ithaca_upgraded_zm", & "ZOMBIE_WEAPON_ITHACA", 1500, "shotgun", "", undefined);
-  add_zombie_weapon("spas_zm", "spas_upgraded_zm", & "ZOMBIE_WEAPON_SPAS", 2000, "shotgun", "", undefined);
-  add_zombie_weapon("rottweil72_zm", "rottweil72_upgraded_zm", & "ZOMBIE_WEAPON_ROTTWEIL72", 500, "shotgun", "", undefined);
-  add_zombie_weapon("hs10_zm", "hs10_upgraded_zm", & "ZOMBIE_WEAPON_HS10", 50, "shotgun", "", undefined);
-  add_zombie_weapon("m14_zm", "m14_upgraded_zm", & "ZOMBIE_WEAPON_M14", 500, "rifle", "", undefined);
-  add_zombie_weapon("m16_zm", "m16_gl_upgraded_zm", & "ZOMBIE_WEAPON_M16", 1200, "burstrifle", "", undefined);
-  add_zombie_weapon("g11_lps_zm", "g11_lps_upgraded_zm", & "ZOMBIE_WEAPON_G11", 900, "burstrifle", "", undefined);
-  add_zombie_weapon("famas_zm", "famas_upgraded_zm", & "ZOMBIE_WEAPON_FAMAS", 50, "burstrifle", "", undefined);
-  add_zombie_weapon("aug_acog_zm", "aug_acog_mk_upgraded_zm", & "ZOMBIE_WEAPON_AUG", 1200, "assault", "", undefined);
-  add_zombie_weapon("galil_zm", "galil_upgraded_zm", & "ZOMBIE_WEAPON_GALIL", 100, "assault", "", undefined);
-  add_zombie_weapon("commando_zm", "commando_upgraded_zm", & "ZOMBIE_WEAPON_COMMANDO", 100, "assault", "", undefined);
-  add_zombie_weapon("fnfal_zm", "fnfal_upgraded_zm", & "ZOMBIE_WEAPON_FNFAL", 100, "burstrifle", "", undefined);
-  add_zombie_weapon("dragunov_zm", "dragunov_upgraded_zm", & "ZOMBIE_WEAPON_DRAGUNOV", 2500, "sniper", "", undefined);
-  add_zombie_weapon("l96a1_zm", "l96a1_upgraded_zm", & "ZOMBIE_WEAPON_L96A1", 50, "sniper", "", undefined);
-  add_zombie_weapon("rpk_zm", "rpk_upgraded_zm", & "ZOMBIE_WEAPON_RPK", 4000, "mg", "", undefined);
-  add_zombie_weapon("hk21_zm", "hk21_upgraded_zm", & "ZOMBIE_WEAPON_HK21", 50, "mg", "", undefined);
-  add_zombie_weapon("frag_grenade_zm", undefined, & "ZOMBIE_WEAPON_FRAG_GRENADE", 250, "grenade", "", undefined);
-  add_zombie_weapon("sticky_grenade_zm", undefined, & "ZOMBIE_WEAPON_STICKY_GRENADE", 250, "grenade", "", undefined);
-  add_zombie_weapon("claymore_zm", undefined, & "ZOMBIE_WEAPON_CLAYMORE", 1000, "grenade", "", undefined);
-  add_zombie_weapon("m72_law_zm", "m72_law_upgraded_zm", & "ZOMBIE_WEAPON_M72_LAW", 2000, "launcher", "", undefined);
-  add_zombie_weapon("china_lake_zm", "china_lake_upgraded_zm", & "ZOMBIE_WEAPON_CHINA_LAKE", 2000, "launcher", "", undefined);
-  add_zombie_weapon("zombie_cymbal_monkey", undefined, & "ZOMBIE_WEAPON_SATCHEL_2000", 2000, "monkey", "", undefined);
-  add_zombie_weapon("ray_gun_zm", "ray_gun_upgraded_zm", & "ZOMBIE_WEAPON_RAYGUN", 10000, "raygun", "", undefined);
-  add_zombie_weapon("tesla_gun_zm", "tesla_gun_upgraded_zm", & "ZOMBIE_WEAPON_TESLA", 10, "tesla", "", undefined);
-  add_zombie_weapon("thundergun_zm", "thundergun_upgraded_zm", & "ZOMBIE_WEAPON_THUNDERGUN", 10, "thunder", "", undefined);
-  add_zombie_weapon("crossbow_explosive_zm", "crossbow_explosive_upgraded_zm", & "ZOMBIE_WEAPON_CROSSBOW_EXPOLOSIVE", 10, "crossbow", "", undefined);
-  add_zombie_weapon("knife_ballistic_zm", "knife_ballistic_upgraded_zm", & "ZOMBIE_WEAPON_KNIFE_BALLISTIC", 10, "bowie", "", undefined);
-  add_zombie_weapon("knife_ballistic_bowie_zm", "knife_ballistic_bowie_upgraded_zm", & "ZOMBIE_WEAPON_KNIFE_BALLISTIC", 10, "bowie", "", undefined);
-  add_zombie_weapon("knife_ballistic_sickle_zm", "knife_ballistic_sickle_upgraded_zm", & "ZOMBIE_WEAPON_KNIFE_BALLISTIC", 10, "sickle", "", undefined);
-  add_zombie_weapon("freezegun_zm", "freezegun_upgraded_zm", & "ZOMBIE_WEAPON_FREEZEGUN", 10, "freezegun", "", undefined);
-  add_zombie_weapon("zombie_black_hole_bomb", undefined, & "ZOMBIE_WEAPON_SATCHEL_2000", 2000, "gersh", "", undefined);
-  add_zombie_weapon("zombie_nesting_dolls", undefined, & "ZOMBIE_WEAPON_NESTING_DOLLS", 2000, "dolls", "", undefined);
+  add_zombie_weapon("m1911_zm", "m1911_upgraded_zm", &"ZOMBIE_WEAPON_M1911", 50, "pistol", "", undefined);
+  add_zombie_weapon("python_zm", "python_upgraded_zm", &"ZOMBIE_WEAPON_PYTHON", 2200, "pistol", "", undefined);
+  add_zombie_weapon("cz75_zm", "cz75_upgraded_zm", &"ZOMBIE_WEAPON_CZ75", 50, "pistol", "", undefined);
+  add_zombie_weapon("ak74u_zm", "ak74u_upgraded_zm", &"ZOMBIE_WEAPON_AK74U", 1200, "smg", "", undefined);
+  add_zombie_weapon("mp5k_zm", "mp5k_upgraded_zm", &"ZOMBIE_WEAPON_MP5K", 1000, "smg", "", undefined);
+  add_zombie_weapon("mp40_zm", "mp40_upgraded_zm", &"ZOMBIE_WEAPON_MP40", 1000, "smg", "", undefined);
+  add_zombie_weapon("mpl_zm", "mpl_upgraded_zm", &"ZOMBIE_WEAPON_MPL", 1000, "smg", "", undefined);
+  add_zombie_weapon("pm63_zm", "pm63_upgraded_zm", &"ZOMBIE_WEAPON_PM63", 1000, "smg", "", undefined);
+  add_zombie_weapon("spectre_zm", "spectre_upgraded_zm", &"ZOMBIE_WEAPON_SPECTRE", 50, "smg", "", undefined);
+  add_zombie_weapon("cz75dw_zm", "cz75dw_upgraded_zm", &"ZOMBIE_WEAPON_CZ75DW", 50, "dualwield", "", undefined);
+  add_zombie_weapon("ithaca_zm", "ithaca_upgraded_zm", &"ZOMBIE_WEAPON_ITHACA", 1500, "shotgun", "", undefined);
+  add_zombie_weapon("spas_zm", "spas_upgraded_zm", &"ZOMBIE_WEAPON_SPAS", 2000, "shotgun", "", undefined);
+  add_zombie_weapon("rottweil72_zm", "rottweil72_upgraded_zm", &"ZOMBIE_WEAPON_ROTTWEIL72", 500, "shotgun", "", undefined);
+  add_zombie_weapon("hs10_zm", "hs10_upgraded_zm", &"ZOMBIE_WEAPON_HS10", 50, "shotgun", "", undefined);
+  add_zombie_weapon("m14_zm", "m14_upgraded_zm", &"ZOMBIE_WEAPON_M14", 500, "rifle", "", undefined);
+  add_zombie_weapon("m16_zm", "m16_gl_upgraded_zm", &"ZOMBIE_WEAPON_M16", 1200, "burstrifle", "", undefined);
+  add_zombie_weapon("g11_lps_zm", "g11_lps_upgraded_zm", &"ZOMBIE_WEAPON_G11", 900, "burstrifle", "", undefined);
+  add_zombie_weapon("famas_zm", "famas_upgraded_zm", &"ZOMBIE_WEAPON_FAMAS", 50, "burstrifle", "", undefined);
+  add_zombie_weapon("aug_acog_zm", "aug_acog_mk_upgraded_zm", &"ZOMBIE_WEAPON_AUG", 1200, "assault", "", undefined);
+  add_zombie_weapon("galil_zm", "galil_upgraded_zm", &"ZOMBIE_WEAPON_GALIL", 100, "assault", "", undefined);
+  add_zombie_weapon("commando_zm", "commando_upgraded_zm", &"ZOMBIE_WEAPON_COMMANDO", 100, "assault", "", undefined);
+  add_zombie_weapon("fnfal_zm", "fnfal_upgraded_zm", &"ZOMBIE_WEAPON_FNFAL", 100, "burstrifle", "", undefined);
+  add_zombie_weapon("dragunov_zm", "dragunov_upgraded_zm", &"ZOMBIE_WEAPON_DRAGUNOV", 2500, "sniper", "", undefined);
+  add_zombie_weapon("l96a1_zm", "l96a1_upgraded_zm", &"ZOMBIE_WEAPON_L96A1", 50, "sniper", "", undefined);
+  add_zombie_weapon("rpk_zm", "rpk_upgraded_zm", &"ZOMBIE_WEAPON_RPK", 4000, "mg", "", undefined);
+  add_zombie_weapon("hk21_zm", "hk21_upgraded_zm", &"ZOMBIE_WEAPON_HK21", 50, "mg", "", undefined);
+  add_zombie_weapon("frag_grenade_zm", undefined, &"ZOMBIE_WEAPON_FRAG_GRENADE", 250, "grenade", "", undefined);
+  add_zombie_weapon("sticky_grenade_zm", undefined, &"ZOMBIE_WEAPON_STICKY_GRENADE", 250, "grenade", "", undefined);
+  add_zombie_weapon("claymore_zm", undefined, &"ZOMBIE_WEAPON_CLAYMORE", 1000, "grenade", "", undefined);
+  add_zombie_weapon("m72_law_zm", "m72_law_upgraded_zm", &"ZOMBIE_WEAPON_M72_LAW", 2000, "launcher", "", undefined);
+  add_zombie_weapon("china_lake_zm", "china_lake_upgraded_zm", &"ZOMBIE_WEAPON_CHINA_LAKE", 2000, "launcher", "", undefined);
+  add_zombie_weapon("zombie_cymbal_monkey", undefined, &"ZOMBIE_WEAPON_SATCHEL_2000", 2000, "monkey", "", undefined);
+  add_zombie_weapon("ray_gun_zm", "ray_gun_upgraded_zm", &"ZOMBIE_WEAPON_RAYGUN", 10000, "raygun", "", undefined);
+  add_zombie_weapon("tesla_gun_zm", "tesla_gun_upgraded_zm", &"ZOMBIE_WEAPON_TESLA", 10, "tesla", "", undefined);
+  add_zombie_weapon("thundergun_zm", "thundergun_upgraded_zm", &"ZOMBIE_WEAPON_THUNDERGUN", 10, "thunder", "", undefined);
+  add_zombie_weapon("crossbow_explosive_zm", "crossbow_explosive_upgraded_zm", &"ZOMBIE_WEAPON_CROSSBOW_EXPOLOSIVE", 10, "crossbow", "", undefined);
+  add_zombie_weapon("knife_ballistic_zm", "knife_ballistic_upgraded_zm", &"ZOMBIE_WEAPON_KNIFE_BALLISTIC", 10, "bowie", "", undefined);
+  add_zombie_weapon("knife_ballistic_bowie_zm", "knife_ballistic_bowie_upgraded_zm", &"ZOMBIE_WEAPON_KNIFE_BALLISTIC", 10, "bowie", "", undefined);
+  add_zombie_weapon("knife_ballistic_sickle_zm", "knife_ballistic_sickle_upgraded_zm", &"ZOMBIE_WEAPON_KNIFE_BALLISTIC", 10, "sickle", "", undefined);
+  add_zombie_weapon("freezegun_zm", "freezegun_upgraded_zm", &"ZOMBIE_WEAPON_FREEZEGUN", 10, "freezegun", "", undefined);
+  add_zombie_weapon("zombie_black_hole_bomb", undefined, &"ZOMBIE_WEAPON_SATCHEL_2000", 2000, "gersh", "", undefined);
+  add_zombie_weapon("zombie_nesting_dolls", undefined, &"ZOMBIE_WEAPON_NESTING_DOLLS", 2000, "dolls", "", undefined);
   if(isDefined(level._zombie_custom_add_weapons)) {
-    [
-      [level._zombie_custom_add_weapons]
-    ]();
+    [[level._zombie_custom_add_weapons]]();
   }
   Precachemodel("zombie_teddybear");
 }
@@ -254,10 +252,10 @@ init_weapon_toggle() {
   PrecacheString(&"ZOMBIE_WEAPON_TOGGLE_ACTIVATE");
   PrecacheString(&"ZOMBIE_WEAPON_TOGGLE_DEACTIVATE");
   PrecacheString(&"ZOMBIE_WEAPON_TOGGLE_ACQUIRED");
-  level.zombie_weapon_toggle_disabled_hint = & "ZOMBIE_WEAPON_TOGGLE_DISABLED";
-  level.zombie_weapon_toggle_activate_hint = & "ZOMBIE_WEAPON_TOGGLE_ACTIVATE";
-  level.zombie_weapon_toggle_deactivate_hint = & "ZOMBIE_WEAPON_TOGGLE_DEACTIVATE";
-  level.zombie_weapon_toggle_acquired_hint = & "ZOMBIE_WEAPON_TOGGLE_ACQUIRED";
+  level.zombie_weapon_toggle_disabled_hint = &"ZOMBIE_WEAPON_TOGGLE_DISABLED";
+  level.zombie_weapon_toggle_activate_hint = &"ZOMBIE_WEAPON_TOGGLE_ACTIVATE";
+  level.zombie_weapon_toggle_deactivate_hint = &"ZOMBIE_WEAPON_TOGGLE_DEACTIVATE";
+  level.zombie_weapon_toggle_acquired_hint = &"ZOMBIE_WEAPON_TOGGLE_ACQUIRED";
   PrecacheModel("zombie_zapper_cagelight");
   PrecacheModel("zombie_zapper_cagelight_green");
   PrecacheModel("zombie_zapper_cagelight_red");
@@ -269,7 +267,7 @@ init_weapon_toggle() {
   weapon_toggle_ents = [];
   weapon_toggle_ents = getEntArray("magic_box_weapon_toggle", "targetname");
   for(i = 0; i < weapon_toggle_ents.size; i++) {
-    struct = SpawnStruct();
+    struct = spawnStruct();
     struct.trigger = weapon_toggle_ents[i];
     struct.weapon_name = struct.trigger.script_string;
     struct.upgrade_name = level.zombie_weapons[struct.trigger.script_string].upgrade_name;
@@ -570,7 +568,7 @@ init_starting_chest_location() {
 }
 
 hide_rubble() {
-  rubble = getentarray(self.script_noteworthy + "_rubble", "script_noteworthy");
+  rubble = getEntArray(self.script_noteworthy + "_rubble", "script_noteworthy");
   if(isDefined(rubble)) {
     for(x = 0; x < rubble.size; x++) {
       rubble[x] hide();
@@ -620,8 +618,8 @@ show_chest() {
   self enable_trigger();
   self.chest_lid show();
   self.chest_box show();
-  self.chest_lid playsound("zmb_box_poof_land");
-  self.chest_lid playsound("zmb_couch_slam");
+  self.chest_lid playSound("zmb_box_poof_land");
+  self.chest_lid playSound("zmb_couch_slam");
   self.hidden = false;
   if(isDefined(self.box_hacks["summon_box"])) {
     self[[self.box_hacks["summon_box"]]](false);
@@ -645,7 +643,7 @@ default_pandora_fx_func() {
   self.pandora_light = spawn("script_model", self.chest_origin.origin);
   self.pandora_light.angles = self.chest_origin.angles + (-90, 0, 0);
   self.pandora_light setModel("tag_origin");
-  playfxontag(level._effect["lght_marker"], self.pandora_light, "tag_origin");
+  playFXOnTag(level._effect["lght_marker"], self.pandora_light, "tag_origin");
 }
 
 default_pandora_show_func(anchor, anchorTarget, pieces) {
@@ -657,7 +655,7 @@ default_pandora_show_func(anchor, anchorTarget, pieces) {
   }
   playsoundatposition("zmb_box_poof", self.chest_lid.origin);
   wait(0.5);
-  playfx(level._effect["lght_marker_flare"], self.pandora_light.origin);
+  playFX(level._effect["lght_marker_flare"], self.pandora_light.origin);
 }
 
 treasure_chest_think() {
@@ -931,7 +929,7 @@ treasure_chest_move(player_vox) {
   fake_pieces[1] setModel(self.chest_box.model);
   anchor = spawn("script_origin", fake_pieces[0].origin);
   soundpoint = spawn("script_origin", self.chest_origin.origin);
-  anchor playsound("zmb_box_move");
+  anchor playSound("zmb_box_move");
   for(i = 0; i < fake_pieces.size; i++) {
     fake_pieces[i] linkto(anchor);
   }
@@ -943,9 +941,7 @@ treasure_chest_move(player_vox) {
   }
   anchor moveTo(anchor.origin + (0, 0, 50), 5);
   if(isDefined(level.custom_vibrate_func)) {
-    [
-      [level.custom_vibrate_func]
-    ](anchor);
+    [[level.custom_vibrate_func]](anchor);
   } else {
     direction = self.chest_box.origin - self.chest_lid.origin;
     direction = (direction[1], direction[0], 0);
@@ -957,7 +953,7 @@ treasure_chest_move(player_vox) {
     anchor Vibrate(direction, 10, 0.5, 5);
   }
   anchor waittill("movedone");
-  playfx(level._effect["poltergeist"], self.chest_origin.origin);
+  playFX(level._effect["poltergeist"], self.chest_origin.origin);
   playsoundatposition("zmb_box_poof", soundpoint.origin);
   for(i = 0; i < fake_pieces.size; i++) {
     fake_pieces[i] delete();
@@ -983,19 +979,15 @@ treasure_chest_move(player_vox) {
   }
   level.verify_chest = false;
   if(isDefined(level._zombiemode_custom_box_move_logic)) {
-    [
-      [level._zombiemode_custom_box_move_logic]
-    ]();
+    [[level._zombiemode_custom_box_move_logic]]();
   } else {
     default_box_move_logic();
   }
   if(isDefined(level.chests[level.chest_index].box_hacks["summon_box"])) {
-    level.chests[level.chest_index][
-      [level.chests[level.chest_index].box_hacks["summon_box"]]
-    ](false);
+    level.chests[level.chest_index][[level.chests[level.chest_index].box_hacks["summon_box"]]](false);
   }
   wait(post_selection_wait_duration);
-  playfx(level._effect["poltergeist"], level.chests[level.chest_index].chest_origin.origin);
+  playFX(level._effect["poltergeist"], level.chests[level.chest_index].chest_origin.origin);
   level.chests[level.chest_index] show_chest();
   level.chests[level.chest_index] hide_rubble();
   flag_clear("moving_chest_now");
@@ -1017,9 +1009,9 @@ fire_sale_fix() {
     while(is_true(self._box_open)) {
       wait(.1);
     }
-    playfx(level._effect["poltergeist"], self.origin);
-    self playsound("zmb_box_poof_land");
-    self playsound("zmb_couch_slam");
+    playFX(level._effect["poltergeist"], self.origin);
+    self playSound("zmb_box_poof_land");
+    self playSound("zmb_couch_slam");
     self thread hide_chest();
     self thread show_rubble();
     self.zombie_cost = self.old_cost;
@@ -1114,9 +1106,7 @@ treasure_chest_ChooseWeightedRandomWeapon(player) {
     if(!isDefined(keys[i])) {
       continue;
     }
-    num_entries = [
-      [level.weapon_weighting_funcs[keys[i]]]
-    ]();
+    num_entries = [[level.weapon_weighting_funcs[keys[i]]]]();
     for(j = 0; j < num_entries; j++) {
       filtered[filtered.size] = keys[i];
     }
@@ -1411,7 +1401,7 @@ treasure_chest_glowfx() {
   fxObj = spawn("script_model", self.origin + (0, 0, 0));
   fxobj setModel("tag_origin");
   fxobj.angles = self.angles + (90, 0, 0);
-  playfxontag(level._effect["chest_light"], fxObj, "tag_origin");
+  playFXOnTag(level._effect["chest_light"], fxObj, "tag_origin");
   self waittill_any("weapon_grabbed", "box_moving");
   fxobj delete();
 }
@@ -1697,7 +1687,7 @@ weapon_show(player) {
     yaw = weapon_yaw + 90;
   }
   self.og_origin = self.origin;
-  self.origin = self.origin + (AnglesToForward((0, yaw, 0)) * 8);
+  self.origin = self.origin + (anglesToForward((0, yaw, 0)) * 8);
   wait(0.05);
   self Show();
   play_sound_at_pos("weapon_show", self.origin, self);

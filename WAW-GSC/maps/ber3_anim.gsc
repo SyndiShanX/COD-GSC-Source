@@ -161,7 +161,7 @@ preview_anim_single(triggerTN, animname, anime, isAxis) {
   ASSERTEX(isDefined(animSpot), "anim spot (targetname " + trig.target + ") can't be found.");
   trig waittill("trigger");
   trig Delete();
-  guy = Spawn("script_model", animSpot.origin);
+  guy = spawn("script_model", animSpot.origin);
   guy.angles = animSpot.angles;
   if(!isDefined(isAxis)) {
     isAxis = false;

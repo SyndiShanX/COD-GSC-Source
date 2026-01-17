@@ -148,8 +148,8 @@ zombie_unlock_all() {
 }
 
 custom_add_weapons() {
-  maps\_zombiemode_weapons::add_zombie_weapon("humangun_zm", "humangun_upgraded_zm", & "ZOMBIE_WEAPON_HUMANGUN", 10, "human", "", undefined);
-  maps\_zombiemode_weapons::add_zombie_weapon("sniper_explosive_zm", "sniper_explosive_upgraded_zm", & "ZOMBIE_WEAPON_SNIPER_EXPLOSIVE", 2500, "ubersniper", "", undefined);
+  maps\_zombiemode_weapons::add_zombie_weapon("humangun_zm", "humangun_upgraded_zm", &"ZOMBIE_WEAPON_HUMANGUN", 10, "human", "", undefined);
+  maps\_zombiemode_weapons::add_zombie_weapon("sniper_explosive_zm", "sniper_explosive_upgraded_zm", &"ZOMBIE_WEAPON_SNIPER_EXPLOSIVE", 2500, "ubersniper", "", undefined);
 }
 
 coast_spawn_init_delay(director) {
@@ -386,7 +386,7 @@ wait_for_power() {
   master_switch notsolid();
   flag_wait("power_on");
   master_switch rotateroll(-90, .3);
-  master_switch playsound("zmb_switch_flip");
+  master_switch playSound("zmb_switch_flip");
   level notify("revive_on");
   wait_network_frame();
   level notify("juggernog_on");
@@ -406,12 +406,12 @@ wait_for_power() {
   level notify("electric_door");
   clientnotify("ZPO");
   master_switch waittill("rotatedone");
-  playfx(level._effect["switch_sparks"], getstruct("elec_switch_fx", "targetname").origin);
-  master_switch playsound("zmb_turn_on");
+  playFX(level._effect["switch_sparks"], getstruct("elec_switch_fx", "targetname").origin);
+  master_switch playSound("zmb_turn_on");
 }
 
 electric_door_function() {
-  door_trigs = getentarray("electric_door", "script_noteworthy");
+  door_trigs = getEntArray("electric_door", "script_noteworthy");
   array_thread(door_trigs, ::set_door_unusable);
   array_thread(door_trigs, ::play_door_dialog);
   level waittill("electric_door");
@@ -427,7 +427,7 @@ set_door_unusable() {
 open_electric_doors(door_trigs) {
   time = 1;
   for(i = 0; i < door_trigs.size; i++) {
-    doors = getentarray(door_trigs[i].target, "targetname");
+    doors = getEntArray(door_trigs[i].target, "targetname");
     for(j = 0; j < doors.size; j++) {
       doors[j] NotSolid();
       time = 1;
@@ -444,7 +444,7 @@ open_electric_doors(door_trigs) {
         play_sound_at_pos("door_rotate_open", doors[j].origin);
         doors[j] RotateTo(doors[j].script_angles, time, 0, 0);
         doors[j] thread maps\_zombiemode_blockers::door_solid_thread();
-        doors[j] playsound("door_slide_open");
+        doors[j] playSound("door_slide_open");
       } else if(door_trigs[i].type == "move" || door_trigs[i].type == "slide_apart") {
         doors[j] NotSolid();
         time = 1;
@@ -454,7 +454,7 @@ open_electric_doors(door_trigs) {
         play_sound_at_pos("door_slide_open", doors[j].origin);
         doors[j] moveTo(doors[j].origin + doors[j].script_vector, time, time * 0.25, time * 0.25);
         doors[j] thread maps\_zombiemode_blockers::door_solid_thread();
-        doors[j] playsound("door_slide_open");
+        doors[j] playSound("door_slide_open");
       }
       wait(randomfloat(.15));
     }
@@ -478,7 +478,7 @@ play_door_dialog() {
         timer++;
       }
       if(dist > 70 * 70 && timer >= 3) {
-        self playsound("door_deny");
+        self playSound("door_deny");
         players[i] thread do_player_vo("vox_start", 5);
         wait(3);
         self notify("warning_dialog");
@@ -536,7 +536,7 @@ wait_for_respawn() {
 }
 
 stairs_blocker_buyable() {
-  trigger = getentarray("buyable_stairs", "targetname");
+  trigger = getEntArray("buyable_stairs", "targetname");
   for(i = 0; i < trigger.size; i++) {
     trigger[i] thread stairs_init();
   }
@@ -555,7 +555,7 @@ stairs_init() {
   self UseTriggerRequireLookAt();
   clip = undefined;
   debris = undefined;
-  planks = getentarray(self.target, "targetname");
+  planks = getEntArray(self.target, "targetname");
   for(i = 0; i < planks.size; i++) {
     if(isDefined(planks[i].script_noteworthy)) {
       if(planks[i].script_noteworthy == "clip") {
@@ -626,7 +626,7 @@ stairs_move(struct, planks, trigger) {
   self play_sound_on_ent("debris_move");
   playsoundatposition("lightning_l", self.origin);
   if(isDefined(self.script_firefx)) {
-    PlayFX(level._effect[self.script_firefx], self.origin);
+    playFX(level._effect[self.script_firefx], self.origin);
   }
   if(isDefined(self.script_noteworthy)) {
     if(self.script_noteworthy == "jiggle") {
@@ -652,7 +652,7 @@ stairs_move(struct, planks, trigger) {
     trigger notify("stairs_complete");
   }
   if(isDefined(self.script_fxid)) {
-    PlayFX(level._effect[self.script_fxid], self.origin);
+    playFX(level._effect[self.script_fxid], self.origin);
     playsoundatposition("zombie_spawn", self.origin);
   }
 }
@@ -663,7 +663,7 @@ special_debris_move(struct) {
   self play_sound_on_ent("debris_move");
   playsoundatposition("lightning_l", self.origin);
   if(isDefined(self.script_firefx)) {
-    PlayFX(level._effect[self.script_firefx], self.origin);
+    playFX(level._effect[self.script_firefx], self.origin);
   }
   num = RandomIntRange(3, 5);
   og_angles = self.angles;
@@ -678,7 +678,7 @@ special_debris_move(struct) {
   self RotateTo(struct.angles, time * 0.75);
   self waittill("movedone");
   if(isDefined(self.script_fxid)) {
-    PlayFX(level._effect[self.script_fxid], self.origin);
+    playFX(level._effect[self.script_fxid], self.origin);
     playsoundatposition("zombie_spawn", self.origin);
   }
   self Delete();
@@ -768,7 +768,7 @@ rock_wall_barricade() {
 }
 
 coast_revive_solo_fx() {
-  vending_triggers = getentarray("zombie_vending", "targetname");
+  vending_triggers = getEntArray("zombie_vending", "targetname");
   for(i = 0; i < vending_triggers.size; i++) {
     if(vending_triggers[i].script_noteworthy == "specialty_quickrevive") {
       vending_triggers[i] delete();

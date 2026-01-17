@@ -4,7 +4,6 @@
 ********************************************************/
 
 main() {
-
   character\mp_character_tf_141_desert_shotgun::main();
 }
 

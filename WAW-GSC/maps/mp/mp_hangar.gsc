@@ -20,11 +20,11 @@ main() {
   game["axis_soldiertype"] = "pacific";
   setdvar("r_specularcolorscale", "1");
   setdvar("compassmaxrange", "2100");
-  game["strings"]["war_callsign_a"] = & "MPUI_CALLSIGN_HANGAR_A";
-  game["strings"]["war_callsign_b"] = & "MPUI_CALLSIGN_HANGAR_B";
-  game["strings"]["war_callsign_c"] = & "MPUI_CALLSIGN_HANGAR_C";
-  game["strings"]["war_callsign_d"] = & "MPUI_CALLSIGN_HANGAR_D";
-  game["strings"]["war_callsign_e"] = & "MPUI_CALLSIGN_HANGAR_E";
+  game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_HANGAR_A";
+  game["strings"]["war_callsign_b"] = &"MPUI_CALLSIGN_HANGAR_B";
+  game["strings"]["war_callsign_c"] = &"MPUI_CALLSIGN_HANGAR_C";
+  game["strings"]["war_callsign_d"] = &"MPUI_CALLSIGN_HANGAR_D";
+  game["strings"]["war_callsign_e"] = &"MPUI_CALLSIGN_HANGAR_E";
   game["strings_menu"]["war_callsign_a"] = "@MPUI_CALLSIGN_HANGAR_A";
   game["strings_menu"]["war_callsign_b"] = "@MPUI_CALLSIGN_HANGAR_B";
   game["strings_menu"]["war_callsign_c"] = "@MPUI_CALLSIGN_HANGAR_C";

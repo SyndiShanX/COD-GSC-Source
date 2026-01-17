@@ -7,7 +7,6 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace acid_bomb;
 
 autoexec __init__system__() {
@@ -15,7 +14,7 @@ autoexec __init__system__() {
 }
 
 __main__() {
-  level._effect[#"grenade_light"] = #"weapon/fx8_equip_light_os";
+  level._effect[# "grenade_light"] = # "weapon/fx8_equip_light_os";
 }
 
 spawned(localclientnum) {
@@ -28,7 +27,7 @@ spawned(localclientnum) {
 
 fx_think(localclientnum) {
   self notify(#"light_disable");
-  self endon(#"death", #"light_disable");
+  self endon(#"death", # "light_disable");
   self util::waittill_dobj(localclientnum);
   var_18407835 = self.origin;
 
@@ -36,13 +35,13 @@ fx_think(localclientnum) {
     self stop_light_fx(localclientnum);
     self start_light_fx(localclientnum);
     self fullscreen_fx(localclientnum);
-    playSound(localclientnum, #"hash_2bb4a8b02a0d697", var_18407835);
+    playSound(localclientnum, # "hash_2bb4a8b02a0d697", var_18407835);
     util::server_wait(localclientnum, interval, 0.01, "player_switch");
   }
 }
 
 start_light_fx(localclientnum) {
-  self.fx = util::playFXOnTag(localclientnum, level._effect[#"grenade_light"], self, "tag_fx");
+  self.fx = util::playFXOnTag(localclientnum, level._effect[# "grenade_light"], self, "tag_fx");
 }
 
 stop_light_fx(localclientnum) {

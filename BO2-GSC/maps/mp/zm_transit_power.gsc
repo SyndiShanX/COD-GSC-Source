@@ -24,8 +24,7 @@ initializepower() {
   maps\mp\_visionset_mgr::vsmgr_register_info("visionset", "zm_power_high_low", 1, level.vsmgr_prio_visionset_zm_transit_power_high_low, 7, 1, ::vsmgr_lerp_power_up_down, 0);
 }
 
-precache_models() {
-}
+precache_models() {}
 
 elecswitchbuildable() {
   lever = getent("powerswitch_p6_zm_buildable_pswitch_lever", "targetname");
@@ -51,10 +50,10 @@ electricswitch() {
     trig waittill("trigger", user);
     trig setinvisibletoall();
     master_switch rotateroll(-90, 0.3);
-    master_switch playsound("zmb_switch_flip");
+    master_switch playSound("zmb_switch_flip");
     master_switch waittill("rotatedone");
-    playfx(level._effect["switch_sparks"], getstruct("elec_switch_fx", "targetname").origin);
-    master_switch playsound("zmb_turn_on");
+    playFX(level._effect["switch_sparks"], getstruct("elec_switch_fx", "targetname").origin);
+    master_switch playSound("zmb_turn_on");
     level.power_event_in_progress = 1;
     level thread power_event_rumble_and_quake();
     flag_set("switches_on");
@@ -76,7 +75,7 @@ electricswitch() {
     trig waittill("trigger", user);
     trig setinvisibletoall();
     master_switch rotateroll(90, 0.3);
-    master_switch playsound("zmb_switch_flip");
+    master_switch playSound("zmb_switch_flip");
     master_switch waittill("rotatedone");
     level.power_event_in_progress = 1;
     level thread power_event_rumble_and_quake();
@@ -319,8 +318,8 @@ wait_for_power() {
 raisepowerplantgates() {
   gate1 = [];
   gate2 = [];
-  gate1 = getentarray("security_booth_gate", "targetname");
-  gate2 = getentarray("security_booth_gate_2", "targetname");
+  gate1 = getEntArray("security_booth_gate", "targetname");
+  gate2 = getEntArray("security_booth_gate_2", "targetname");
 
   if(isDefined(gate1)) {
     for(i = 0; i < gate1.size; i++)
@@ -354,8 +353,8 @@ powerevent() {
     thread dropreactordoors();
     thread raisereactordoors();
     power_event_time = 30;
-    reactor_core_mover playsound("zmb_power_rise_start");
-    reactor_core_mover playloopsound("zmb_power_rise_loop", 0.75);
+    reactor_core_mover playSound("zmb_power_rise_start");
+    reactor_core_mover playLoopSound("zmb_power_rise_loop", 0.75);
     reactor_core_mover thread coremove(power_event_time);
 
     if(isDefined(level.avogadro) && isDefined(level.avogadro.state) && level.avogadro.state == "chamber")
@@ -363,20 +362,20 @@ powerevent() {
 
     wait(power_event_time);
     reactor_core_mover stoploopsound(0.5);
-    reactor_core_audio playloopsound("zmb_power_on_loop", 2);
-    reactor_core_mover playsound("zmb_power_rise_stop");
+    reactor_core_audio playLoopSound("zmb_power_on_loop", 2);
+    reactor_core_mover playSound("zmb_power_rise_stop");
     level notify("power_event_complete");
     flag_waitopen("switches_on");
     thread dropreactordoors();
     thread raisereactordoors();
     playsoundatposition("zmb_power_off_quad", (0, 0, 0));
-    reactor_core_mover playsound("zmb_power_rise_start");
-    reactor_core_mover playloopsound("zmb_power_rise_loop", 0.75);
+    reactor_core_mover playSound("zmb_power_rise_start");
+    reactor_core_mover playLoopSound("zmb_power_rise_loop", 0.75);
     reactor_core_mover thread coremove(power_event_time, 1);
     wait(power_event_time);
     reactor_core_mover stoploopsound(0.5);
     reactor_core_audio stoploopsound(0.5);
-    reactor_core_mover playsound("zmb_power_rise_stop");
+    reactor_core_mover playSound("zmb_power_rise_stop");
     level notify("power_event_complete");
   }
 }
@@ -402,7 +401,7 @@ blockstairs() {
 }
 
 linkentitiestocoremover(reactor_core_mover) {
-  core_entities = getentarray("core_entity", "script_noteworthy");
+  core_entities = getEntArray("core_entity", "script_noteworthy");
 
   for(i = 0; i < core_entities.size; i++) {
     next_ent = core_entities[i];
@@ -415,7 +414,7 @@ linkentitiestocoremover(reactor_core_mover) {
 }
 
 dropreactordoors() {
-  doors = getentarray("reactor_core_door", "targetname");
+  doors = getEntArray("reactor_core_door", "targetname");
 
   if(doors.size == 0) {
     return;
@@ -429,7 +428,7 @@ dropreactordoors() {
 
 raisereactordoors() {
   level waittill("power_event_complete");
-  doors = getentarray("reactor_core_door", "targetname");
+  doors = getEntArray("reactor_core_door", "targetname");
 
   if(doors.size == 0) {
     return;

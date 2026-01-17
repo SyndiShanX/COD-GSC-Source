@@ -5,7 +5,6 @@
 
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\system_shared;
-
 #namespace zm_white_debris_buys;
 
 autoexec __init__system__() {
@@ -13,7 +12,7 @@ autoexec __init__system__() {
 }
 
 init() {
-  clientfield::register("zbarrier", "" + #"hash_7e15d8abc4d6c79a", 1, 1, "int", &function_32f95e3f, 0, 0);
+  clientfield::register("zbarrier", "" + # "hash_7e15d8abc4d6c79a", 1, 1, "int", &function_32f95e3f, 0, 0);
 }
 
 function_32f95e3f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

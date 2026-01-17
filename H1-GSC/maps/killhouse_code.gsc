@@ -18,11 +18,11 @@ new_look_training_setup() {
 }
 
 new_look_wait_for_target(var_0, var_1) {
-  self setcandamage(1);
+  self setCanDamage(1);
   self rotateto(self.angles + (0, 0, var_0), 0.25, 0, 0);
-  self playsound("killhouse_target_up");
+  self playSound("killhouse_target_up");
 
-  for (;;) {
+  for(;;) {
     self waittill("damage", var_2, var_3, var_4, var_5, var_6);
 
     if(level.player maps\_utility::isads()) {
@@ -37,8 +37,8 @@ new_look_wait_for_target(var_0, var_1) {
     }
   }
 
-  self playsound("killhouse_buzzer");
-  self playsound("killhouse_target_up");
+  self playSound("killhouse_buzzer");
+  self playSound("killhouse_target_up");
   self rotateto(self.angles + (0, 0, var_1), 0.25, 0, 0);
 }
 
@@ -46,7 +46,7 @@ rope_obj(var_0) {
   level endon("starting_cargoship_obj");
 
   if(var_0) {
-    setobjectivestring("obj_price", & "KILLHOUSE_SLIDE_DOWN_THE_ROPE");
+    setobjectivestring("obj_price", &"KILLHOUSE_SLIDE_DOWN_THE_ROPE");
     setobjectivestate("obj_price", "current");
     var_1 = getent("top_of_rope", "targetname");
     setobjectivelocation("obj_price", var_1);
@@ -54,7 +54,7 @@ rope_obj(var_0) {
 }
 
 level_scripted_unloadnode() {
-  for (;;) {
+  for(;;) {
     self waittill("trigger", var_0);
     var_0 maps\_utility::vehicle_detachfrompath();
     var_0 vehicle_setspeed(20, 20);
@@ -67,14 +67,14 @@ level_scripted_unloadnode() {
 ambient_trucks() {
   var_0 = getent("se_truck_trigger", "targetname");
 
-  for (;;) {
+  for(;;) {
     var_1 = randomint(8);
     var_2 = maps\_vehicle::create_vehicle_from_spawngroup_and_gopath(var_1);
 
     foreach(var_4 in var_2)
     var_4.veh_pathtype = "constrained";
 
-    for (var_6 = 0; var_6 < var_2.size; var_6++) {
+    for(var_6 = 0; var_6 < var_2.size; var_6++) {
       var_7 = randomintrange(30, 50);
       var_2[var_6] vehicle_setspeed(var_7, 30, 30);
     }
@@ -84,7 +84,7 @@ ambient_trucks() {
 }
 
 delay_objective_after_intro() {
-  registerobjective("obj_rifle", & "KILLHOUSE_PICK_UP_A_RIFLE_FROM", getent("obj_rifle_ammo", "targetname"));
+  registerobjective("obj_rifle", &"KILLHOUSE_PICK_UP_A_RIFLE_FROM", getent("obj_rifle_ammo", "targetname"));
   wait 3;
   setobjectivestate("obj_rifle", "current");
 }
@@ -156,7 +156,7 @@ generic_compass_hint_reminder(var_0, var_1) {
   wait 2;
   var_2 = 6;
 
-  for (;;) {
+  for(;;) {
     if(var_2 > 20.0) {
       thread compass_reminder();
       refreshhudcompass();
@@ -184,7 +184,7 @@ objective_hints(var_0) {
   var_2 = 20;
   var_3 = 0.2;
 
-  for (;;) {
+  for(;;) {
     if(!common_scripts\utility::flag(var_0) && var_1 > var_2) {
       thread compass_reminder();
       refreshhudcompass();
@@ -225,7 +225,7 @@ compass_reminder() {
   level.iconelem.hidewheninmenu = 1;
   level.iconelem maps\_hud_util::setpoint("TOP", undefined, 0, 155);
 
-  for (var_0 = 0; var_0 < 5; var_0++) {
+  for(var_0 = 0; var_0 < 5; var_0++) {
     wait 1;
 
     if(common_scripts\utility::flag("in_explosives_area") || common_scripts\utility::flag("in_obstacle_area") || common_scripts\utility::flag("in_NoReminder_Compass")) {
@@ -270,7 +270,7 @@ move_gaz_fake() {
 }
 
 fail_on_damage() {
-  for (;;) {
+  for(;;) {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4);
 
     if(isplayer(var_1))
@@ -283,10 +283,10 @@ fail_if_friendlies_in_line_of_fire() {
   var_1 = 1;
   level endon("okay_if_friendlies_in_line_of_fire");
 
-  for (;;) {
+  for(;;) {
     var_2 = level.player common_scripts\utility::waittill_any_return("weapon_fired", "player_flash", "player_frag");
 
-    if(!isdefined(var_2)) {
+    if(!isDefined(var_2)) {
       break;
     }
 
@@ -297,14 +297,14 @@ fail_if_friendlies_in_line_of_fire() {
         continue;
     }
 
-    if(var_2 == "player_frag" && isdefined(var_0)) {
+    if(var_2 == "player_frag" && isDefined(var_0)) {
       if(!level.player isthrowinggrenade()) {
         continue;
       }
       wait 1;
     }
 
-    if(var_2 == "player_flash" && isdefined(var_1)) {
+    if(var_2 == "player_flash" && isDefined(var_1)) {
       if(!level.player isthrowinggrenade()) {
         continue;
       }
@@ -313,13 +313,13 @@ fail_if_friendlies_in_line_of_fire() {
 
     var_4 = getaiarray("allies");
 
-    for (var_5 = 0; var_5 < var_4.size; var_5++) {
+    for(var_5 = 0; var_5 < var_4.size; var_5++) {
       var_6 = common_scripts\utility::within_fov(level.player.origin, level.player.angles, var_4[var_5].origin, cos(25));
       var_7 = distance(level.player.origin, var_4[var_5].origin);
 
       if(var_6 && var_7 < 1000) {
         level notify("mission failed");
-        setdvar("ui_deadquote", & "KILLHOUSE_FIRED_NEAR_FRIENDLY");
+        setdvar("ui_deadquote", &"KILLHOUSE_FIRED_NEAR_FRIENDLY");
         maps\_utility::missionfailedwrapper();
       }
     }
@@ -333,17 +333,17 @@ setup_player_action_notifies() {
 }
 
 vision_trigger(var_0) {
-  for (;;) {
+  for(;;) {
     self waittill("trigger");
     maps\_utility::set_vision_set(var_0, 1);
 
-    while (level.player istouching(self))
+    while(level.player istouching(self))
       wait 0.1;
   }
 }
 
 flashed_hud_elem() {
-  for (;;) {
+  for(;;) {
     if(level.player common_scripts\utility::isflashed())
       level notify("flashed");
     else
@@ -354,7 +354,7 @@ flashed_hud_elem() {
 }
 
 flashed_debug() {
-  for (;;) {
+  for(;;) {
     level waittill("flashed");
     var_0 = maps\_hud_util::get_stats_display_hud();
     var_0.y = 130;
@@ -369,7 +369,7 @@ flag_when_lowered(var_0) {
   var_1 = gettargetdummies("rifle");
   var_2 = var_1.size;
 
-  while (level.targets_hit < var_2)
+  while(level.targets_hit < var_2)
     wait 0.05;
 
   common_scripts\utility::flag_set(var_0);
@@ -401,7 +401,7 @@ deck_start() {
 }
 
 deck_training() {
-  var_0 = getentarray("deck_target", "script_noteworthy");
+  var_0 = getEntArray("deck_target", "script_noteworthy");
   common_scripts\utility::array_thread(var_0, ::cargoship_targets);
   common_scripts\utility::flag_wait("start_deck");
   var_1 = getent("area_two_one", "targetname");
@@ -413,13 +413,13 @@ deck_training() {
   var_7 = getent("area_two_quit", "targetname");
   var_8 = 1;
 
-  for (;;) {
+  for(;;) {
     common_scripts\utility::flag_wait("price_reveal_done");
     var_1 waittill("trigger");
     thread maps\_utility::autosave_by_name("starting_deck_attack");
 
     if(var_8) {
-      registerobjective("obj_deck", & "KILLHOUSE_COMPLETE_THE_DECK_MOCKUP", getent("area_two_one", "targetname"));
+      registerobjective("obj_deck", &"KILLHOUSE_COMPLETE_THE_DECK_MOCKUP", getent("area_two_one", "targetname"));
       var_8 = 0;
     }
 
@@ -430,7 +430,7 @@ deck_training() {
     thread accuracy_bonus();
     thread starttimer(60);
 
-    if(isdefined(level.iw_best))
+    if(isDefined(level.iw_best))
       level.iw_best destroy();
 
     var_7 thread check_deck_training_quit();
@@ -461,7 +461,7 @@ check_deck_training_quit() {
   level endon("test_cleared");
   self waittill("trigger");
   level notify("mission failed");
-  setdvar("ui_deadquote", & "KILLHOUSE_SHIP_MUST_CLEAR_DECK_MOCK_UP");
+  setdvar("ui_deadquote", &"KILLHOUSE_SHIP_MUST_CLEAR_DECK_MOCK_UP");
   maps\_utility::missionfailedwrapper();
 }
 
@@ -469,11 +469,11 @@ get_randomized_targets() {
   var_0 = strtok(self.script_linkto, " ");
   var_1 = [];
 
-  for (var_2 = 0; var_2 < var_0.size; var_2++) {
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
     var_3 = var_0[var_2];
     var_4 = getent(var_3, "script_linkname");
 
-    if(isdefined(var_4)) {
+    if(isDefined(var_4)) {
       var_1 = common_scripts\utility::add_to_array(var_1, var_4);
       continue;
     }
@@ -491,7 +491,7 @@ pop_up_and_wait() {
   var_2 = [];
   var_3 = 0;
 
-  for (var_4 = 0; var_1 < 3; var_4++) {
+  for(var_4 = 0; var_1 < 3; var_4++) {
     wait(randomfloatrange(0.25, 0.4));
     var_0[var_4] notify("pop_up");
 
@@ -504,11 +504,11 @@ pop_up_and_wait() {
     var_3++;
   }
 
-  while (level.targets_hit != var_1)
+  while(level.targets_hit != var_1)
     wait 0.05;
 
   if(var_2.size > 0) {
-    for (var_5 = 0; var_5 < var_2.size; var_5++)
+    for(var_5 = 0; var_5 < var_2.size; var_5++)
       var_2[var_5] notify("pop_down");
   }
 }
@@ -522,9 +522,9 @@ jumpoff_monitor() {
   level notify("mission failed");
 
   if(common_scripts\utility::flag("activate_rope"))
-    setdvar("ui_deadquote", & "KILLHOUSE_SHIP_JUMPED_OFF");
+    setdvar("ui_deadquote", &"KILLHOUSE_SHIP_JUMPED_OFF");
   else
-    setdvar("ui_deadquote", & "KILLHOUSE_SHIP_JUMPED_TOO_EARLY");
+    setdvar("ui_deadquote", &"KILLHOUSE_SHIP_JUMPED_TOO_EARLY");
 
   maps\_utility::missionfailedwrapper();
 }
@@ -533,7 +533,7 @@ flashbang_ammo_monitor(var_0) {
   level endon("test_cleared");
   level.volumes_flashed = 0;
 
-  for (;;) {
+  for(;;) {
     level.player waittill("grenade_fire", var_1, var_2);
     var_1 waittill("death");
     waittillframeend;
@@ -541,7 +541,7 @@ flashbang_ammo_monitor(var_0) {
 
     if(level.player getweaponammostock("flash_grenade") < var_3) {
       level notify("mission failed");
-      setdvar("ui_deadquote", & "KILLHOUSE_SHIP_OUT_OF_FLASH");
+      setdvar("ui_deadquote", &"KILLHOUSE_SHIP_OUT_OF_FLASH");
       maps\_utility::missionfailedwrapper();
     }
   }
@@ -560,7 +560,7 @@ track_grenade_origin(var_0, var_1) {
   self endon("death");
   var_1 endon("flashed");
 
-  for (;;) {
+  for(;;) {
     var_0.origin = self.origin;
     wait 0.05;
   }
@@ -572,7 +572,7 @@ flash_dialog_three(var_0) {
   self waittill("trigger");
   var_1 = 1;
 
-  for (;;) {
+  for(;;) {
     if(!level.player istouching(self)) {
       if(var_1) {
         level.price thread execdialog("3");
@@ -597,7 +597,7 @@ flash_dialog_six(var_0) {
   self waittill("trigger");
   var_1 = 1;
 
-  for (;;) {
+  for(;;) {
     if(!level.player istouching(self)) {
       if(var_1) {
         level.price thread execdialog("goback");
@@ -618,7 +618,7 @@ flash_dialog_six(var_0) {
 wait_till_flashed(var_0) {
   var_0 endon("flashed");
 
-  for (;;) {
+  for(;;) {
     level.player waittill("grenade_fire", var_1, var_2);
 
     if(var_2 == "flash_grenade") {
@@ -632,21 +632,21 @@ wait_till_flashed(var_0) {
 wait_till_pos_cleared(var_0) {
   level endon("clear_course");
 
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     self waittill("trigger");
 
   level.targets_hit = 0;
 
-  if(isdefined(self.target)) {
-    var_1 = getentarray(self.target, "targetname");
+  if(isDefined(self.target)) {
+    var_1 = getEntArray(self.target, "targetname");
 
-    for (var_2 = 0; var_2 < var_1.size; var_2++)
+    for(var_2 = 0; var_2 < var_1.size; var_2++)
       var_1[var_2] notify("pop_up");
 
     level.price thread execdialog("hittargets");
     var_3 = 0;
 
-    while (level.targets_hit != var_1.size) {
+    while(level.targets_hit != var_1.size) {
       if(var_3 > 5) {
         if(!level.player istouching(self)) {
           var_4 = [];
@@ -683,7 +683,7 @@ rope_triggercheck_playerisinvalidstate() {
   level endon("starting_rope");
   var_0 = getent("top_of_rope_trigger", "targetname");
 
-  for (;;) {
+  for(;;) {
     if(level.player isonground() && !level.player isleaning())
       var_0 common_scripts\utility::trigger_on();
     else
@@ -701,12 +701,12 @@ rope() {
   var_2 = getent("bottom_of_rope", "targetname");
   level.jumpoff = 0;
 
-  for (;;) {
+  for(;;) {
     common_scripts\utility::flag_wait("activate_rope");
     thread rope_triggercheck_playerisinvalidstate();
     var_0 sethintstring(&"KILLHOUSE_USE_ROPE");
 
-    for (;;) {
+    for(;;) {
       var_0 waittill("trigger");
       waitframe();
 
@@ -749,12 +749,12 @@ rope() {
 fail_if_damage_waiter() {
   self endon("pop_down");
   self waittill("damage", var_0, var_1, var_2, var_3, var_4);
-  setdvar("ui_deadquote", & "KILLHOUSE_HIT_FRIENDLY");
+  setdvar("ui_deadquote", &"KILLHOUSE_HIT_FRIENDLY");
   maps\_utility::missionfailedwrapper();
 }
 
 timer_think() {
-  for (;;) {
+  for(;;) {
     common_scripts\utility::flag_wait("start_timer");
     var_0 = 60;
 
@@ -772,7 +772,7 @@ starttimer(var_0) {
   level.hudtimerindex = 20;
   thread cqb_timer_think();
   level.updated_timer = maps\_hud_util::get_countdown_hud();
-  level.updated_timer.text.label = & "KILLHOUSE_YOUR_TIME";
+  level.updated_timer.text.label = &"KILLHOUSE_YOUR_TIME";
   level.updated_timer settenthstimerup(0.05);
   wait(var_0);
   maps\_hud_util::destroy_countdown_hud(level.updated_timer);
@@ -791,14 +791,14 @@ cqb_timer_setup() {
 cqb_timer_get_planes(var_0) {
   var_1 = [];
 
-  for (var_2 = 0; var_2 <= 9; var_2++)
+  for(var_2 = 0; var_2 <= 9; var_2++)
     var_1[var_2] = getent(var_0 + "_" + common_scripts\utility::tostring(var_2), "targetname");
 
   return var_1;
 }
 
 cqb_digit_reset(var_0) {
-  for (var_1 = 1; var_1 <= 9; var_1++)
+  for(var_1 = 1; var_1 <= 9; var_1++)
     var_0[var_1] hide();
 
   var_0[0] show();
@@ -815,7 +815,7 @@ cqb_timer_think() {
   var_1 = 9;
   var_2 = 9;
 
-  for (;;) {
+  for(;;) {
     var_3 = (gettime() - level.start_time) * 0.001;
     var_4 = floor(var_3);
     var_5 = int((var_3 - var_4) * 10);
@@ -889,7 +889,7 @@ cqb_timer_change_digit(var_0, var_1) {
 dialog_sprint_reminders() {
   level endon("sprinted");
 
-  for (;;) {
+  for(;;) {
     wait 8;
     level.price thread execdialog("sprint");
   }
@@ -909,20 +909,20 @@ mission_failed_out_of_time() {
   level notify("mission failed");
 
   if(!common_scripts\utility::flag("at_finish"))
-    setdvar("ui_deadquote", & "KILLHOUSE_SHIP_TOO_SLOW");
+    setdvar("ui_deadquote", &"KILLHOUSE_SHIP_TOO_SLOW");
   else
-    setdvar("ui_deadquote", & "KILLHOUSE_SHIP_DIDNT_SPRINT");
+    setdvar("ui_deadquote", &"KILLHOUSE_SHIP_DIDNT_SPRINT");
 
   maps\_utility::missionfailedwrapper();
 }
 
 mission_failed_quit_training() {
-  while (common_scripts\utility::flag("cargoshipTrainingOn")) {
+  while(common_scripts\utility::flag("cargoshipTrainingOn")) {
     if(common_scripts\utility::flag("in_quit_cargoship_tutorial")) {
       level.player endon("death");
       level endon("kill_timer");
       level notify("mission failed");
-      setdvar("ui_deadquote", & "KILLHOUSE_SHIP_MUST_CLEAR_DECK_MOCK_UP");
+      setdvar("ui_deadquote", &"KILLHOUSE_SHIP_MUST_CLEAR_DECK_MOCK_UP");
       maps\_utility::missionfailedwrapper();
     }
 
@@ -931,47 +931,47 @@ mission_failed_quit_training() {
 }
 
 clear_timer_elems() {
-  if(isdefined(level.updated_timer))
+  if(isDefined(level.updated_timer))
     maps\_hud_util::destroy_countdown_hud(level.updated_timer);
 
-  if(isdefined(level.time))
+  if(isDefined(level.time))
     level.time destroy();
 
-  if(isdefined(level.final_time))
+  if(isDefined(level.final_time))
     level.final_time destroy();
 
-  if(isdefined(level.bonus))
+  if(isDefined(level.bonus))
     level.bonus destroy();
 
-  if(isdefined(level.label))
+  if(isDefined(level.label))
     level.label destroy();
 
-  if(isdefined(level.iw_best))
+  if(isDefined(level.iw_best))
     level.iw_best destroy();
 
-  if(isdefined(level.recommended_label))
+  if(isDefined(level.recommended_label))
     level.recommended_label destroy();
 
-  if(isdefined(level.recommended_label2))
+  if(isDefined(level.recommended_label2))
     level.recommended_label2 destroy();
 
-  if(isdefined(level.recommended))
+  if(isDefined(level.recommended))
     level.recommended destroy();
 
-  if(isdefined(level.bonus_text))
+  if(isDefined(level.bonus_text))
     level.bonus_text destroy();
 
-  if(isdefined(level.time_text))
+  if(isDefined(level.time_text))
     level.time_text destroy();
 
-  if(isdefined(level.final_time_text))
+  if(isDefined(level.final_time_text))
     level.final_time_text destroy();
 
-  if(isdefined(level.iw_best_text))
+  if(isDefined(level.iw_best_text))
     level.iw_best_text destroy();
 
-  if(isdefined(level.backers)) {
-    for (var_0 = 0; var_0 < level.backers.size; var_0++)
+  if(isDefined(level.backers)) {
+    for(var_0 = 0; var_0 < level.backers.size; var_0++)
       level.backers[var_0] destroy();
 
     level.backers = undefined;
@@ -1033,19 +1033,19 @@ killtimer(var_0, var_1) {
 
   if(getdvarint("loc_language", 0) == 12) {
     level.time = maps\_hud_util::get_stats_display_hud(var_7, 82, undefined, undefined, 1);
-    level.time_text = maps\_hud_util::get_stats_display_hud(var_8, 82, undefined, undefined, 1, & "KILLHOUSE_YOUR_TIME");
+    level.time_text = maps\_hud_util::get_stats_display_hud(var_8, 82, undefined, undefined, 1, &"KILLHOUSE_YOUR_TIME");
     level.time_text.alignx = "right";
   } else {
     level.time = maps\_hud_util::get_stats_display_hud(var_8, 82, undefined, undefined, 1);
     level.time.alignx = "right";
-    level.time_text = maps\_hud_util::get_stats_display_hud(var_7, 82, undefined, undefined, 1, & "KILLHOUSE_YOUR_TIME");
+    level.time_text = maps\_hud_util::get_stats_display_hud(var_7, 82, undefined, undefined, 1, &"KILLHOUSE_YOUR_TIME");
   }
 
   level.time setvalue(var_10);
   level waittill("accuracy_bonus");
   var_11 = var_10 - level.bonus_time;
   level.final_time = maps\_hud_util::get_stats_display_hud(var_9, 146, undefined, undefined, 1.6);
-  level.final_time_text = maps\_hud_util::get_stats_display_hud(var_9, 126, undefined, undefined, 1, & "KILLHOUSE_YOUR_FINAL_TIME");
+  level.final_time_text = maps\_hud_util::get_stats_display_hud(var_9, 126, undefined, undefined, 1, &"KILLHOUSE_YOUR_FINAL_TIME");
   level.final_time_text.alignx = "center";
   level.final_time.alignx = "center";
   level.final_time setvalue(var_11);
@@ -1054,9 +1054,9 @@ killtimer(var_0, var_1) {
     level.iw_best = maps\_hud_util::get_stats_display_hud(var_7, 68, undefined, undefined, 1);
 
     if(var_1)
-      level.iw_best_text = maps\_hud_util::get_stats_display_hud(var_8, 68, undefined, undefined, 1, & "KILLHOUSE_IW_DECK_TIME");
+      level.iw_best_text = maps\_hud_util::get_stats_display_hud(var_8, 68, undefined, undefined, 1, &"KILLHOUSE_IW_DECK_TIME");
     else
-      level.iw_best_text = maps\_hud_util::get_stats_display_hud(var_8, 68, undefined, undefined, 1, & "KILLHOUSE_IW_BEST_TIME");
+      level.iw_best_text = maps\_hud_util::get_stats_display_hud(var_8, 68, undefined, undefined, 1, &"KILLHOUSE_IW_BEST_TIME");
 
     level.iw_best_text.alignx = "right";
   } else {
@@ -1064,9 +1064,9 @@ killtimer(var_0, var_1) {
     level.iw_best.alignx = "right";
 
     if(var_1)
-      level.iw_best_text = maps\_hud_util::get_stats_display_hud(var_7, 68, undefined, undefined, 1, & "KILLHOUSE_IW_DECK_TIME");
+      level.iw_best_text = maps\_hud_util::get_stats_display_hud(var_7, 68, undefined, undefined, 1, &"KILLHOUSE_IW_DECK_TIME");
     else
-      level.iw_best_text = maps\_hud_util::get_stats_display_hud(var_7, 68, undefined, undefined, 1, & "KILLHOUSE_IW_BEST_TIME");
+      level.iw_best_text = maps\_hud_util::get_stats_display_hud(var_7, 68, undefined, undefined, 1, &"KILLHOUSE_IW_BEST_TIME");
   }
 
   level.iw_best setvalue(var_0);
@@ -1075,22 +1075,22 @@ killtimer(var_0, var_1) {
     wait 5;
     clear_timer_elems();
   } else {
-    level.recommended_label = maps\_hud_util::get_stats_display_hud(var_9, 174, undefined, undefined, 1, & "KILLHOUSE_RECOMMENDED_LABEL");
+    level.recommended_label = maps\_hud_util::get_stats_display_hud(var_9, 174, undefined, undefined, 1, &"KILLHOUSE_RECOMMENDED_LABEL");
     level.recommended_label.alignx = "center";
     thread clearhud_after10sec();
 
     if(var_11 > 40) {
       setdvar("recommended_gameskill", "0");
-      level.recommended = maps\_hud_util::get_stats_display_hud(var_9, 192, undefined, undefined, 1.6, & "KILLHOUSE_RECOMMENDED_EASY");
+      level.recommended = maps\_hud_util::get_stats_display_hud(var_9, 192, undefined, undefined, 1.6, &"KILLHOUSE_RECOMMENDED_EASY");
     } else if(var_11 > 26) {
       setdvar("recommended_gameskill", "1");
-      level.recommended = maps\_hud_util::get_stats_display_hud(var_9, 192, undefined, undefined, 1.6, & "KILLHOUSE_RECOMMENDED_NORMAL");
+      level.recommended = maps\_hud_util::get_stats_display_hud(var_9, 192, undefined, undefined, 1.6, &"KILLHOUSE_RECOMMENDED_NORMAL");
     } else if(var_11 > 20) {
       setdvar("recommended_gameskill", "2");
-      level.recommended = maps\_hud_util::get_stats_display_hud(var_9, 192, undefined, undefined, 1.6, & "KILLHOUSE_RECOMMENDED_HARD");
+      level.recommended = maps\_hud_util::get_stats_display_hud(var_9, 192, undefined, undefined, 1.6, &"KILLHOUSE_RECOMMENDED_HARD");
     } else {
       setdvar("recommended_gameskill", "3");
-      level.recommended = maps\_hud_util::get_stats_display_hud(var_9, 192, undefined, undefined, 1.6, & "KILLHOUSE_RECOMMENDED_VETERAN");
+      level.recommended = maps\_hud_util::get_stats_display_hud(var_9, 192, undefined, undefined, 1.6, &"KILLHOUSE_RECOMMENDED_VETERAN");
     }
 
     level.recommended.alignx = "center";
@@ -1129,12 +1129,12 @@ accuracy_bonus() {
   level.bonus_time = common_scripts\utility::ter_op(level.bonus_time > 0, level.bonus_time, 0);
 
   if(getdvarint("loc_language", 0) == 12) {
-    level.bonus_text = maps\_hud_util::get_stats_display_hud(-50, 97, undefined, undefined, 1, & "KILLHOUSE_ACCURACY_BONUS");
+    level.bonus_text = maps\_hud_util::get_stats_display_hud(-50, 97, undefined, undefined, 1, &"KILLHOUSE_ACCURACY_BONUS");
     level.bonus = maps\_hud_util::get_stats_display_hud(-232, 97, undefined, undefined, 1);
     level.bonus.alignx = "left";
     level.bonus_text.alignx = "right";
   } else {
-    level.bonus_text = maps\_hud_util::get_stats_display_hud(-232, 97, undefined, undefined, 1, & "KILLHOUSE_ACCURACY_BONUS");
+    level.bonus_text = maps\_hud_util::get_stats_display_hud(-232, 97, undefined, undefined, 1, &"KILLHOUSE_ACCURACY_BONUS");
     level.bonus = maps\_hud_util::get_stats_display_hud(-50, 97, undefined, undefined, 1);
     level.bonus.alignx = "right";
   }
@@ -1174,7 +1174,7 @@ execdialog(var_0, var_1) {
   self.speaking = 0;
   self.lastspeaktime = gettime();
 
-  if(isdefined(var_1) && var_1 == 1)
+  if(isDefined(var_1) && var_1 == 1)
     thread maps\killhouse_anim::play_idle_facial_anim();
 }
 
@@ -1187,12 +1187,12 @@ actionnodethink(var_0) {
 }
 
 getfreeactionnode(var_0) {
-  for (var_1 = undefined; isdefined(var_0.target); var_0 = var_2) {
+  for(var_1 = undefined; isDefined(var_0.target); var_0 = var_2) {
     var_2 = getnode(var_0.target, "targetname");
 
-    if(isdefined(var_2.script_noteworthy)) {
+    if(isDefined(var_2.script_noteworthy)) {
       if(var_2.inuse) {
-        if(!isdefined(var_1))
+        if(!isDefined(var_1))
           return var_0;
         else
           return var_1;
@@ -1206,7 +1206,7 @@ getfreeactionnode(var_0) {
 }
 
 initactionchain(var_0) {
-  while (isdefined(var_0.target)) {
+  while(isDefined(var_0.target)) {
     var_0.inuse = 0;
     var_0 = getnode(var_0.target, "targetname");
   }
@@ -1218,15 +1218,15 @@ actionchainthink(var_0) {
   var_1 = var_0;
   var_2 = undefined;
 
-  while (!isdefined(var_2)) {
+  while(!isDefined(var_2)) {
     var_2 = getfreeactionnode(var_1);
     wait 0.05;
   }
 
-  while (isdefined(var_2)) {
+  while(isDefined(var_2)) {
     var_2.inuse = 1;
 
-    while (var_1 != var_2) {
+    while(var_1 != var_2) {
       var_1 = getnode(var_1.target, "targetname");
       self setgoalnode(var_1);
       self waittill("goal");
@@ -1234,7 +1234,7 @@ actionchainthink(var_0) {
 
     actionnodethink(var_2);
 
-    while (isdefined(var_2) && var_1 == var_2) {
+    while(isDefined(var_2) && var_1 == var_2) {
       var_2 = getfreeactionnode(var_1);
       wait(randomfloatrange(0.1, 0.5));
     }
@@ -1242,7 +1242,7 @@ actionchainthink(var_0) {
     var_1.inuse = 0;
   }
 
-  while (isdefined(var_1.target)) {
+  while(isDefined(var_1.target)) {
     var_1 = getnode(var_1.target, "targetname");
     self setgoalnode(var_1);
     self waittill("goal");
@@ -1250,40 +1250,40 @@ actionchainthink(var_0) {
 }
 
 raiseplywoodwalls() {
-  var_0 = getentarray("plywood", "script_noteworthy");
+  var_0 = getEntArray("plywood", "script_noteworthy");
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++) {
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_0[var_1] rotateroll(90, 0.25, 0.1, 0.1);
-    var_0[var_1] playsound("killhouse_target_up_wood");
+    var_0[var_1] playSound("killhouse_target_up_wood");
   }
 }
 
 silently_lowerplywoodwalls() {
-  var_0 = getentarray("plywood", "script_noteworthy");
+  var_0 = getEntArray("plywood", "script_noteworthy");
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++)
     var_0[var_1] rotateroll(-90, 0.25, 0.1, 0.1);
 }
 
 lowerplywoodwalls() {
-  var_0 = getentarray("plywood", "script_noteworthy");
+  var_0 = getEntArray("plywood", "script_noteworthy");
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++) {
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_0[var_1] rotateroll(-90, 0.25, 0.1, 0.1);
-    var_0[var_1] playsound("killhouse_target_up_wood");
+    var_0[var_1] playSound("killhouse_target_up_wood");
   }
 }
 
 raisetargetdummies(var_0, var_1, var_2) {
-  var_3 = getentarray(var_0 + "_target_dummy", "script_noteworthy");
+  var_3 = getEntArray(var_0 + "_target_dummy", "script_noteworthy");
 
-  for (var_4 = 0; var_4 < var_3.size; var_4++) {
+  for(var_4 = 0; var_4 < var_3.size; var_4++) {
     var_5 = var_3[var_4];
 
-    if(isdefined(var_2) && var_5.dummyid != var_2) {
+    if(isDefined(var_2) && var_5.dummyid != var_2) {
       continue;
     }
-    if(isdefined(var_1) && var_5.laneid != var_1) {
+    if(isDefined(var_1) && var_5.laneid != var_1) {
       continue;
     }
     if(var_5.raised) {
@@ -1294,15 +1294,15 @@ raisetargetdummies(var_0, var_1, var_2) {
 }
 
 raisetargetdummies_noassist(var_0, var_1, var_2) {
-  var_3 = getentarray(var_0 + "_target_dummy", "script_noteworthy");
+  var_3 = getEntArray(var_0 + "_target_dummy", "script_noteworthy");
 
-  for (var_4 = 0; var_4 < var_3.size; var_4++) {
+  for(var_4 = 0; var_4 < var_3.size; var_4++) {
     var_5 = var_3[var_4];
 
-    if(isdefined(var_2) && var_5.dummyid != var_2) {
+    if(isDefined(var_2) && var_5.dummyid != var_2) {
       continue;
     }
-    if(isdefined(var_1) && var_5.laneid != var_1) {
+    if(isDefined(var_1) && var_5.laneid != var_1) {
       continue;
     }
     if(var_5.raised) {
@@ -1313,9 +1313,9 @@ raisetargetdummies_noassist(var_0, var_1, var_2) {
 }
 
 movetargetdummy(var_0) {
-  self setcandamage(0);
+  self setCanDamage(0);
 
-  while (self.moving)
+  while(self.moving)
     wait 0.05;
 
   switch (var_0) {
@@ -1324,12 +1324,12 @@ movetargetdummy(var_0) {
         self notify("want_newMelon");
         self.aim_assist_target enableaimassist();
         var_1 = 0.25;
-        self playsound("killhouse_target_up_metal");
-        playfxontag(level._effect["dust_poof_radial_dummy_fng"], self, "tag_origin");
+        self playSound("killhouse_target_up_metal");
+        playFXOnTag(level._effect["dust_poof_radial_dummy_fng"], self, "tag_origin");
         self.orgent rotatepitch(90, var_1, 0.1, 0.1);
         wait 0.25;
         self.raised = 1;
-        self setcandamage(1);
+        self setCanDamage(1);
       }
 
       break;
@@ -1337,12 +1337,12 @@ movetargetdummy(var_0) {
       if(!self.raised) {
         self notify("want_newMelon");
         var_1 = 0.25;
-        self playsound("killhouse_target_up_metal");
-        playfxontag(level._effect["dust_poof_radial_dummy_fng"], self, "tag_origin");
+        self playSound("killhouse_target_up_metal");
+        playFXOnTag(level._effect["dust_poof_radial_dummy_fng"], self, "tag_origin");
         self.orgent rotatepitch(90, var_1, 0.1, 0.1);
         wait 0.25;
         self.raised = 1;
-        self setcandamage(1);
+        self setCanDamage(1);
       }
 
       break;
@@ -1352,8 +1352,8 @@ movetargetdummy(var_0) {
         self.orgent rotatepitch(-90, var_1, 0.25, 0.25);
         wait 0.75;
         self.raised = 0;
-        self playsound("killhouse_target_up");
-        playfxontag(level._effect["dust_poof_radial_dummy_fng"], self, "tag_origin");
+        self playSound("killhouse_target_up");
+        playFXOnTag(level._effect["dust_poof_radial_dummy_fng"], self, "tag_origin");
         self.aim_assist_target disableaimassist();
       }
 
@@ -1362,15 +1362,15 @@ movetargetdummy(var_0) {
 }
 
 lowertargetdummies(var_0, var_1, var_2) {
-  var_3 = getentarray(var_0 + "_target_dummy", "script_noteworthy");
+  var_3 = getEntArray(var_0 + "_target_dummy", "script_noteworthy");
 
-  for (var_4 = 0; var_4 < var_3.size; var_4++) {
+  for(var_4 = 0; var_4 < var_3.size; var_4++) {
     var_5 = var_3[var_4];
 
-    if(isdefined(var_2) && var_5.dummyid != var_2) {
+    if(isDefined(var_2) && var_5.dummyid != var_2) {
       continue;
     }
-    if(isdefined(var_1) && var_5.laneid != var_1) {
+    if(isDefined(var_1) && var_5.laneid != var_1) {
       continue;
     }
     if(!var_5.raised) {
@@ -1383,7 +1383,7 @@ lowertargetdummies(var_0, var_1, var_2) {
 training_targetdummies(var_0) {
   var_1 = gettargetdummies(var_0);
 
-  for (var_2 = 0; var_2 < var_1.size; var_2++)
+  for(var_2 = 0; var_2 < var_1.size; var_2++)
     var_1[var_2] thread targetdummythink();
 }
 
@@ -1403,8 +1403,8 @@ targetdummythink() {
   level.waters_speaking = 0;
   level.waters_last_line = 0;
 
-  for (;;) {
-    for (;;) {
+  for(;;) {
+    for(;;) {
       self waittill("damage", var_1, var_2, var_3, var_4, var_5);
 
       if(!level.player istouching(var_0)) {
@@ -1459,17 +1459,17 @@ targetdummythink() {
 
     self notify("hit");
     level.targets_hit++;
-    self playsound("killhouse_buzzer");
+    self playSound("killhouse_buzzer");
     target_down();
   }
 }
 
 target_down() {
   self.health = 10;
-  self playsound("killhouse_target_up");
+  self playSound("killhouse_target_up");
   self.moving = 1;
   self.aim_assist_target disableaimassist();
-  self setcandamage(0);
+  self setCanDamage(0);
   self.orgent rotatepitch(-90, 0.25);
   wait 0.5;
   self.raised = 0;
@@ -1479,17 +1479,17 @@ target_down() {
 cargoship_targets() {
   var_0 = getent(self.target, "targetname");
   var_1 = var_0 common_scripts\utility::spawn_tag_origin();
-  var_2 = anglestoforward(var_1.angles);
+  var_2 = anglesToForward(var_1.angles);
 
-  if(!isdefined(var_0.script_noteworthy))
+  if(!isDefined(var_0.script_noteworthy))
     var_0.script_noteworthy = "standard";
 
   if(var_0.script_noteworthy == "reverse") {
     var_0 rotatepitch(90, 0.25);
-    var_1.origin = var_1.origin + anglestoforward(var_1.angles) * 65;
+    var_1.origin = var_1.origin + anglesToForward(var_1.angles) * 65;
   } else {
     var_0 rotatepitch(-90, 0.25);
-    var_1.origin = var_1.origin - anglestoforward(var_1.angles) * 65;
+    var_1.origin = var_1.origin - anglesToForward(var_1.angles) * 65;
   }
 
   self linkto(var_0);
@@ -1498,13 +1498,13 @@ cargoship_targets() {
   var_3 hide();
   var_3 notsolid();
 
-  for (;;) {
+  for(;;) {
     self waittill("pop_up");
     wait(randomfloatrange(0, 0.2));
     self solid();
-    self playsound("killhouse_target_up_metal");
-    playfxontag(level._effect["dust_poof_radial_dummy_fng"], var_1, "tag_origin");
-    self setcandamage(1);
+    self playSound("killhouse_target_up_metal");
+    playFXOnTag(level._effect["dust_poof_radial_dummy_fng"], var_1, "tag_origin");
+    self setCanDamage(1);
 
     if(self.targetname != "friendly")
       var_3 enableaimassist();
@@ -1519,7 +1519,7 @@ cargoship_targets() {
     if(self.targetname == "friendly")
       fail_if_damage_waiter();
     else {
-      for (;;) {
+      for(;;) {
         self waittill("damage", var_4, var_5, var_6, var_7, var_8);
 
         if(var_8 == "MOD_IMPACT")
@@ -1531,9 +1531,9 @@ cargoship_targets() {
       self notify("hit");
       self.health = 10;
       level.targets_hit++;
-      self playsound("killhouse_buzzer");
-      self playsound("killhouse_target_up");
-      playfxontag(level._effect["dust_puff_radial_dummy_down_fng"], var_1, "tag_origin");
+      self playSound("killhouse_buzzer");
+      self playSound("killhouse_target_up");
+      playFXOnTag(level._effect["dust_puff_radial_dummy_down_fng"], var_1, "tag_origin");
       var_3 disableaimassist();
     }
 
@@ -1544,7 +1544,7 @@ cargoship_targets() {
     else
       var_0 rotatepitch(-90, 0.25);
 
-    self setcandamage(0);
+    self setCanDamage(0);
     wait 0.25;
   }
 
@@ -1552,22 +1552,22 @@ cargoship_targets() {
 }
 
 gettargetdummies(var_0, var_1, var_2) {
-  var_3 = getentarray(var_0 + "_target_dummy", "script_noteworthy");
+  var_3 = getEntArray(var_0 + "_target_dummy", "script_noteworthy");
   var_4 = [];
 
-  for (var_5 = 0; var_5 < var_3.size; var_5++) {
+  for(var_5 = 0; var_5 < var_3.size; var_5++) {
     var_6 = var_3[var_5];
 
-    if(isdefined(var_2) && var_6.dummyid != var_2) {
+    if(isDefined(var_2) && var_6.dummyid != var_2) {
       continue;
     }
-    if(isdefined(var_1) && var_6.laneid != var_1) {
+    if(isDefined(var_1) && var_6.laneid != var_1) {
       continue;
     }
     var_4[var_4.size] = var_6;
   }
 
-  if(isdefined(var_1) && isdefined(var_2)) {}
+  if(isDefined(var_1) && isDefined(var_2)) {}
 
   return var_4;
 }
@@ -1588,7 +1588,7 @@ ammorespawnthink(var_0, var_1, var_2) {
   var_3 set_ammo();
   var_7 = undefined;
 
-  if(isdefined(var_3.target)) {
+  if(isDefined(var_3.target)) {
     var_7 = getent(var_3.target, "targetname");
     var_7.origin = var_3.origin;
     var_7.angles = var_3.angles;
@@ -1599,54 +1599,54 @@ ammorespawnthink(var_0, var_1, var_2) {
   else
     var_8 = 0.2;
 
-  if(isdefined(var_0)) {
+  if(isDefined(var_0)) {
     self.origin = self.origin + (0, 0, -10000);
 
-    if(isdefined(var_7))
+    if(isDefined(var_7))
       var_7 hide();
 
     common_scripts\utility::flag_wait(var_0);
 
-    if(isdefined(var_7))
+    if(isDefined(var_7))
       var_7 show();
 
     self.origin = self.origin + (0, 0, 10000);
     var_3 set_ammo();
   }
 
-  if(isdefined(var_7) && isdefined(var_2))
+  if(isDefined(var_7) && isDefined(var_2))
     var_7 thread delete_if_obj_complete(var_2);
 
   if(var_1 == "alt_m16_grenadier") {
-    while (!level.player hasweapon("m16_grenadier"))
+    while(!level.player hasweapon("m16_grenadier"))
       wait 0.05;
   } else
     var_3 waittill("trigger");
 
-  if(isdefined(var_7))
+  if(isDefined(var_7))
     var_7 delete();
 
   if(var_1 == "alt_m16_grenadier") {
     return;
   }
-  for (;;) {
+  for(;;) {
     wait 1;
 
     if(level.player getfractionmaxammo(var_1) < var_8) {
-      while (distance(level.player.origin, var_5) < 160)
+      while(distance(level.player.origin, var_5) < 160)
         wait 1;
 
       var_3 = spawn(var_4, var_5, 1);
 
       if(var_1 == "alt_m16_grenadier")
-        var_3 setmodel("weapon_m16gr_sp");
+        var_3 setModel("weapon_m16gr_sp");
 
       var_3.angles = var_6;
       var_3 set_ammo();
       wait 0.2;
       var_3.origin = var_5 + (0, 0, -8);
 
-      while (isdefined(var_3))
+      while(isDefined(var_3))
         wait 1;
     }
   }
@@ -1659,19 +1659,19 @@ delete_if_obj_complete(var_0) {
 }
 
 test2(var_0) {
-  for (;;)
+  for(;;)
     wait 1;
 }
 
 pointinfov(var_0) {
-  var_1 = anglestoforward(self.angles);
+  var_1 = anglesToForward(self.angles);
   return vectordot(var_1, var_0 - self.origin) > 0.766;
 }
 
 registerobjective(var_0, var_1, var_2) {
   common_scripts\utility::flag_init(var_0);
   var_3 = level.objectives.size;
-  var_4 = spawnstruct();
+  var_4 = spawnStruct();
   var_4.name = var_0;
   var_4.id = var_3;
   var_4.state = "invisible";
@@ -1739,13 +1739,13 @@ setobjectiveremaining(var_0, var_1, var_2) {
 printabovehead(var_0, var_1, var_2, var_3) {
   self endon("death");
 
-  if(!isdefined(var_2))
+  if(!isDefined(var_2))
     var_2 = (0, 0, 0);
 
-  if(!isdefined(var_3))
+  if(!isDefined(var_3))
     var_3 = (1, 0, 0);
 
-  for (var_4 = 0; var_4 < var_1 * 20; var_4++) {
+  for(var_4 = 0; var_4 < var_1 * 20; var_4++) {
     if(!isalive(self)) {
       return;
     }
@@ -1780,7 +1780,7 @@ firearmdepot_guy_think() {
   var_0 maps\_utility::set_goal_node(var_1[3]);
   wait 7;
 
-  for (;;) {
+  for(;;) {
     var_5 = randomintrange(0, var_1.size);
 
     if(var_5 == 0 && var_2 == 2)
@@ -1800,7 +1800,7 @@ firearmdepot_guy_think() {
       if(var_4 != 0)
         var_4 = 0;
       else {
-        while (var_4 == var_3)
+        while(var_4 == var_3)
           var_4 = randomintrange(1, var_1.size);
       }
 
@@ -1835,7 +1835,7 @@ inventory_guy_setup() {
   var_0 maps\_utility::gun_remove();
   var_0 attach("com_clipboard_mocap", "tag_inhand");
   var_0 attach("characters_accessories_pencil", "tag_weapon_right");
-  var_1 = getentarray("inventoryNode", "targetname");
+  var_1 = getEntArray("inventoryNode", "targetname");
   var_2 = randomintrange(0, var_1.size);
   var_3 = var_1[var_2];
   var_3 thread maps\_anim::anim_loop_solo(var_0, "guy_inventory_idle01", undefined, "1stPosDone");
@@ -1843,7 +1843,7 @@ inventory_guy_setup() {
   var_3 notify("1stPosDone");
   var_3 maps\_utility::anim_stopanimscripted();
 
-  for (var_4 = var_2; var_2 == var_4; var_2 = randomintrange(0, var_1.size)) {}
+  for(var_4 = var_2; var_2 == var_4; var_2 = randomintrange(0, var_1.size)) {}
 
   var_3 = var_1[var_2];
   var_3 thread maps\_anim::anim_loop_solo(var_0, "guy_inventory_idle01", undefined, "2ndPosDone");
@@ -1868,14 +1868,14 @@ chair_guy_think(var_0) {
   var_5 = maps\_utility::spawn_anim_model("chair", var_4.origin);
   var_4 thread maps\_anim::anim_single_solo(var_5, "chair_counting");
 
-  while (!common_scripts\utility::flag("lootz_intro_start"))
+  while(!common_scripts\utility::flag("lootz_intro_start"))
     var_1 maps\_anim::anim_single_solo(var_0, "guy_chair_counting");
 
   var_4 thread maps\_anim::anim_single_solo(var_5, "chair_turnaround");
   var_1 maps\_anim::anim_single_solo(var_0, "guy_chair_turnaround");
   var_4 thread maps\_anim::anim_single_solo(var_5, "chair_idle");
 
-  for (;;) {
+  for(;;) {
     var_6 = "chair_typing";
 
     if(common_scripts\utility::flag("play_nod_01")) {
@@ -1908,7 +1908,7 @@ check_in_front_of_armory() {
   self endon("play_nod_02_called");
   var_0 = 0;
 
-  for (;;) {
+  for(;;) {
     if(level.player istouching(self)) {
       if(!var_0) {
         common_scripts\utility::flag_set("play_nod_01");
@@ -1927,7 +1927,7 @@ glowing_rope() {
   var_0 = getent("glowing_rope", "targetname");
   var_0 hide();
 
-  for (;;) {
+  for(;;) {
     level waittill("show_glowing_rope");
     var_0 show();
     level waittill("hide_glowing_rope");
@@ -1937,93 +1937,93 @@ glowing_rope() {
 
 registeractions() {
   level.actionbinds = [];
-  registeractionbinding("objectives", "pause", & "KILLHOUSE_HINT_CHECK_OBJECTIVES_PAUSED");
-  registeractionbinding("objectives_pc", "+scores", & "KILLHOUSE_HINT_CHECK_OBJECTIVES_SCORES");
-  registeractionbinding("pc_attack", "+attack", & "KILLHOUSE_HINT_ATTACK_PC");
-  registeractionbinding("pc_attack", "+attack_akimbo_accessible", & "TRAINER_HINT_HIP_ATTACK_PC");
-  registeractionbinding("pc_hip_attack", "+attack", & "KILLHOUSE_HINT_HIP_ATTACK_PC");
-  registeractionbinding("pc_hip_attack", "+attack_akimbo_accessible", & "TRAINER_HINT_HIP_ATTACK_PC");
-  registeractionbinding("hip_attack", "+attack", & "KILLHOUSE_HINT_HIP_ATTACK");
-  registeractionbinding("hip_attack", "+attack_akimbo_accessible", & "TRAINER_HINT_HIP_ATTACK_PC");
-  registeractionbinding("attack", "+attack", & "KILLHOUSE_HINT_ATTACK");
-  registeractionbinding("attack", "+attack_akimbo_accessible", & "TRAINER_HINT_HIP_ATTACK_PC");
-  registeractionbinding("stop_ads", "+speed_throw", & "KILLHOUSE_HINT_STOP_ADS_THROW");
-  registeractionbinding("stop_ads", "+speed", & "KILLHOUSE_HINT_STOP_ADS");
-  registeractionbinding("stop_ads", "+toggleads_throw", & "KILLHOUSE_HINT_STOP_ADS_TOGGLE_THROW");
-  registeractionbinding("stop_ads", "toggleads", & "KILLHOUSE_HINT_STOP_ADS_TOGGLE");
-  registeractionbinding("ads_360", "+speed_throw", & "KILLHOUSE_HINT_ADS_THROW_360");
-  registeractionbinding("ads_360", "+speed", & "KILLHOUSE_HINT_ADS_360");
-  registeractionbinding("ads", "+speed_throw", & "KILLHOUSE_HINT_ADS_THROW");
-  registeractionbinding("ads", "+speed", & "KILLHOUSE_HINT_ADS");
-  registeractionbinding("ads", "+toggleads_throw", & "KILLHOUSE_HINT_ADS_TOGGLE_THROW");
-  registeractionbinding("ads", "toggleads", & "KILLHOUSE_HINT_ADS_TOGGLE");
-  registeractionbinding("ads_switch", "+speed_throw", & "KILLHOUSE_HINT_ADS_SWITCH_THROW");
-  registeractionbinding("ads_switch", "+speed", & "KILLHOUSE_HINT_ADS_SWITCH");
-  registeractionbinding("ads_switch_shoulder", "+speed_throw", & "KILLHOUSE_HINT_ADS_SWITCH_THROW_SHOULDER");
-  registeractionbinding("ads_switch_shoulder", "+speed", & "KILLHOUSE_HINT_ADS_SWITCH_SHOULDER");
-  registeractionbinding("breath", "+melee_breath", & "KILLHOUSE_HINT_BREATH_MELEE");
-  registeractionbinding("breath", "+breath_sprint", & "KILLHOUSE_HINT_BREATH_SPRINT");
-  registeractionbinding("breath", "+holdbreath", & "KILLHOUSE_HINT_BREATH");
-  registeractionbinding("melee", "+melee", & "KILLHOUSE_HINT_MELEE");
-  registeractionbinding("melee", "+melee_breath", & "KILLHOUSE_HINT_MELEE");
-  registeractionbinding("melee", "+melee_zoom", & "KILLHOUSE_HINT_MELEE");
-  registeractionbinding("prone", "goprone", & "KILLHOUSE_HINT_PRONE");
-  registeractionbinding("prone", "+stance", & "KILLHOUSE_HINT_PRONE_STANCE");
-  registeractionbinding("prone", "toggleprone", & "KILLHOUSE_HINT_PRONE_TOGGLE");
-  registeractionbinding("prone", "+prone", & "KILLHOUSE_HINT_PRONE_HOLD");
-  registeractionbinding("prone", "lowerstance", & "KILLHOUSE_HINT_PRONE_DOUBLE");
-  registeractionbinding("crouch", "gocrouch", & "KILLHOUSE_HINT_CROUCH");
-  registeractionbinding("crouch", "+stance", & "KILLHOUSE_HINT_CROUCH_STANCE");
+  registeractionbinding("objectives", "pause", &"KILLHOUSE_HINT_CHECK_OBJECTIVES_PAUSED");
+  registeractionbinding("objectives_pc", "+scores", &"KILLHOUSE_HINT_CHECK_OBJECTIVES_SCORES");
+  registeractionbinding("pc_attack", "+attack", &"KILLHOUSE_HINT_ATTACK_PC");
+  registeractionbinding("pc_attack", "+attack_akimbo_accessible", &"TRAINER_HINT_HIP_ATTACK_PC");
+  registeractionbinding("pc_hip_attack", "+attack", &"KILLHOUSE_HINT_HIP_ATTACK_PC");
+  registeractionbinding("pc_hip_attack", "+attack_akimbo_accessible", &"TRAINER_HINT_HIP_ATTACK_PC");
+  registeractionbinding("hip_attack", "+attack", &"KILLHOUSE_HINT_HIP_ATTACK");
+  registeractionbinding("hip_attack", "+attack_akimbo_accessible", &"TRAINER_HINT_HIP_ATTACK_PC");
+  registeractionbinding("attack", "+attack", &"KILLHOUSE_HINT_ATTACK");
+  registeractionbinding("attack", "+attack_akimbo_accessible", &"TRAINER_HINT_HIP_ATTACK_PC");
+  registeractionbinding("stop_ads", "+speed_throw", &"KILLHOUSE_HINT_STOP_ADS_THROW");
+  registeractionbinding("stop_ads", "+speed", &"KILLHOUSE_HINT_STOP_ADS");
+  registeractionbinding("stop_ads", "+toggleads_throw", &"KILLHOUSE_HINT_STOP_ADS_TOGGLE_THROW");
+  registeractionbinding("stop_ads", "toggleads", &"KILLHOUSE_HINT_STOP_ADS_TOGGLE");
+  registeractionbinding("ads_360", "+speed_throw", &"KILLHOUSE_HINT_ADS_THROW_360");
+  registeractionbinding("ads_360", "+speed", &"KILLHOUSE_HINT_ADS_360");
+  registeractionbinding("ads", "+speed_throw", &"KILLHOUSE_HINT_ADS_THROW");
+  registeractionbinding("ads", "+speed", &"KILLHOUSE_HINT_ADS");
+  registeractionbinding("ads", "+toggleads_throw", &"KILLHOUSE_HINT_ADS_TOGGLE_THROW");
+  registeractionbinding("ads", "toggleads", &"KILLHOUSE_HINT_ADS_TOGGLE");
+  registeractionbinding("ads_switch", "+speed_throw", &"KILLHOUSE_HINT_ADS_SWITCH_THROW");
+  registeractionbinding("ads_switch", "+speed", &"KILLHOUSE_HINT_ADS_SWITCH");
+  registeractionbinding("ads_switch_shoulder", "+speed_throw", &"KILLHOUSE_HINT_ADS_SWITCH_THROW_SHOULDER");
+  registeractionbinding("ads_switch_shoulder", "+speed", &"KILLHOUSE_HINT_ADS_SWITCH_SHOULDER");
+  registeractionbinding("breath", "+melee_breath", &"KILLHOUSE_HINT_BREATH_MELEE");
+  registeractionbinding("breath", "+breath_sprint", &"KILLHOUSE_HINT_BREATH_SPRINT");
+  registeractionbinding("breath", "+holdbreath", &"KILLHOUSE_HINT_BREATH");
+  registeractionbinding("melee", "+melee", &"KILLHOUSE_HINT_MELEE");
+  registeractionbinding("melee", "+melee_breath", &"KILLHOUSE_HINT_MELEE");
+  registeractionbinding("melee", "+melee_zoom", &"KILLHOUSE_HINT_MELEE");
+  registeractionbinding("prone", "goprone", &"KILLHOUSE_HINT_PRONE");
+  registeractionbinding("prone", "+stance", &"KILLHOUSE_HINT_PRONE_STANCE");
+  registeractionbinding("prone", "toggleprone", &"KILLHOUSE_HINT_PRONE_TOGGLE");
+  registeractionbinding("prone", "+prone", &"KILLHOUSE_HINT_PRONE_HOLD");
+  registeractionbinding("prone", "lowerstance", &"KILLHOUSE_HINT_PRONE_DOUBLE");
+  registeractionbinding("crouch", "gocrouch", &"KILLHOUSE_HINT_CROUCH");
+  registeractionbinding("crouch", "+stance", &"KILLHOUSE_HINT_CROUCH_STANCE");
 
   if(!level.console) {
-    registeractionbinding("crouch", "+togglecrouch", & "PLATFORM_HINT_CROUCH_TOGGLE_PC");
-    registeractionbinding("crouch", "+movedown", & "PLATFORM_HINT_HOLD_CROUCH");
+    registeractionbinding("crouch", "+togglecrouch", &"PLATFORM_HINT_CROUCH_TOGGLE_PC");
+    registeractionbinding("crouch", "+movedown", &"PLATFORM_HINT_HOLD_CROUCH");
   }
 
-  registeractionbinding("crouch", "togglecrouch", & "KILLHOUSE_HINT_CROUCH_TOGGLE");
-  registeractionbinding("stand", "+gostand", & "KILLHOUSE_HINT_STAND");
-  registeractionbinding("stand", "+stance", & "KILLHOUSE_HINT_STAND_STANCE");
-  registeractionbinding("jump", "+gostand", & "KILLHOUSE_HINT_JUMP_STAND");
-  registeractionbinding("jump", "+moveup", & "KILLHOUSE_HINT_JUMP");
-  registeractionbinding("sprint", "+breath_sprint", & "KILLHOUSE_HINT_SPRINT");
-  registeractionbinding("sprint", "+sprint", & "KILLHOUSE_HINT_SPRINT");
-  registeractionbinding("sprint", "+sprint_zoom", & "KILLHOUSE_HINT_SPRINT");
-  registeractionbinding("sprint_pc", "+breath_sprint", & "KILLHOUSE_HINT_SPRINT_PC");
-  registeractionbinding("sprint_pc", "+sprint", & "KILLHOUSE_HINT_SPRINT_PC");
-  registeractionbinding("sprint_pc", "+sprint_zoom", & "KILLHOUSE_HINT_SPRINT_PC");
-  registeractionbinding("sprint2", "+breath_sprint", & "KILLHOUSE_HINT_HOLDING_SPRINT");
-  registeractionbinding("sprint2", "+sprint", & "KILLHOUSE_HINT_HOLDING_SPRINT");
-  registeractionbinding("sprint2", "+sprint_zoom", & "KILLHOUSE_HINT_HOLDING_SPRINT");
-  registeractionbinding("reload", "+reload", & "KILLHOUSE_HINT_RELOAD");
-  registeractionbinding("reload", "+usereload", & "KILLHOUSE_HINT_RELOAD_USE");
-  registeractionbinding("mantle", "+gostand", & "KILLHOUSE_HINT_MANTLE");
-  registeractionbinding("sidearm", "weapnext", & "KILLHOUSE_HINT_SIDEARM_SWAP");
-  registeractionbinding("primary", "weapnext", & "KILLHOUSE_HINT_PRIMARY_SWAP");
-  registeractionbinding("frag", "+frag", & "KILLHOUSE_HINT_FRAG");
-  registeractionbinding("flash", "+smoke", & "KILLHOUSE_HINT_FLASH");
-  registeractionbinding("swap_launcher", "+activate", & "KILLHOUSE_HINT_SWAP");
-  registeractionbinding("swap_launcher", "+usereload", & "KILLHOUSE_HINT_SWAP_RELOAD");
-  registeractionbinding("firemode", "+actionslot 2", & "KILLHOUSE_HINT_FIREMODE");
-  registeractionbinding("attack_launcher", "+attack", & "KILLHOUSE_HINT_LAUNCHER_ATTACK");
-  registeractionbinding("pc_attack_launcher", "+attack", & "KILLHOUSE_HINT_LAUNCHER_ATTACK_PC");
-  registeractionbinding("swap_explosives", "+activate", & "KILLHOUSE_HINT_EXPLOSIVES");
-  registeractionbinding("swap_explosives", "+usereload", & "KILLHOUSE_HINT_EXPLOSIVES_RELOAD");
-  registeractionbinding("plant_explosives", "+activate", & "KILLHOUSE_HINT_EXPLOSIVES_PLANT");
-  registeractionbinding("plant_explosives", "+usereload", & "KILLHOUSE_HINT_EXPLOSIVES_PLANT");
-  registeractionbinding("equip_C4", "+actionslot 4", & "KILLHOUSE_HINT_EQUIP_C4");
-  registeractionbinding("throw_C4", "+toggleads_throw", & "KILLHOUSE_HINT_THROW_C4_TOGGLE");
-  registeractionbinding("throw_C4", "+speed_throw", & "KILLHOUSE_HINT_THROW_C4_SPEED");
-  registeractionbinding("throw_C4", "+throw", & "KILLHOUSE_HINT_THROW_C4");
-  registeractionbinding("detonate_C4", "+attack", & "KILLHOUSE_DETONATE_C4");
+  registeractionbinding("crouch", "togglecrouch", &"KILLHOUSE_HINT_CROUCH_TOGGLE");
+  registeractionbinding("stand", "+gostand", &"KILLHOUSE_HINT_STAND");
+  registeractionbinding("stand", "+stance", &"KILLHOUSE_HINT_STAND_STANCE");
+  registeractionbinding("jump", "+gostand", &"KILLHOUSE_HINT_JUMP_STAND");
+  registeractionbinding("jump", "+moveup", &"KILLHOUSE_HINT_JUMP");
+  registeractionbinding("sprint", "+breath_sprint", &"KILLHOUSE_HINT_SPRINT");
+  registeractionbinding("sprint", "+sprint", &"KILLHOUSE_HINT_SPRINT");
+  registeractionbinding("sprint", "+sprint_zoom", &"KILLHOUSE_HINT_SPRINT");
+  registeractionbinding("sprint_pc", "+breath_sprint", &"KILLHOUSE_HINT_SPRINT_PC");
+  registeractionbinding("sprint_pc", "+sprint", &"KILLHOUSE_HINT_SPRINT_PC");
+  registeractionbinding("sprint_pc", "+sprint_zoom", &"KILLHOUSE_HINT_SPRINT_PC");
+  registeractionbinding("sprint2", "+breath_sprint", &"KILLHOUSE_HINT_HOLDING_SPRINT");
+  registeractionbinding("sprint2", "+sprint", &"KILLHOUSE_HINT_HOLDING_SPRINT");
+  registeractionbinding("sprint2", "+sprint_zoom", &"KILLHOUSE_HINT_HOLDING_SPRINT");
+  registeractionbinding("reload", "+reload", &"KILLHOUSE_HINT_RELOAD");
+  registeractionbinding("reload", "+usereload", &"KILLHOUSE_HINT_RELOAD_USE");
+  registeractionbinding("mantle", "+gostand", &"KILLHOUSE_HINT_MANTLE");
+  registeractionbinding("sidearm", "weapnext", &"KILLHOUSE_HINT_SIDEARM_SWAP");
+  registeractionbinding("primary", "weapnext", &"KILLHOUSE_HINT_PRIMARY_SWAP");
+  registeractionbinding("frag", "+frag", &"KILLHOUSE_HINT_FRAG");
+  registeractionbinding("flash", "+smoke", &"KILLHOUSE_HINT_FLASH");
+  registeractionbinding("swap_launcher", "+activate", &"KILLHOUSE_HINT_SWAP");
+  registeractionbinding("swap_launcher", "+usereload", &"KILLHOUSE_HINT_SWAP_RELOAD");
+  registeractionbinding("firemode", "+actionslot 2", &"KILLHOUSE_HINT_FIREMODE");
+  registeractionbinding("attack_launcher", "+attack", &"KILLHOUSE_HINT_LAUNCHER_ATTACK");
+  registeractionbinding("pc_attack_launcher", "+attack", &"KILLHOUSE_HINT_LAUNCHER_ATTACK_PC");
+  registeractionbinding("swap_explosives", "+activate", &"KILLHOUSE_HINT_EXPLOSIVES");
+  registeractionbinding("swap_explosives", "+usereload", &"KILLHOUSE_HINT_EXPLOSIVES_RELOAD");
+  registeractionbinding("plant_explosives", "+activate", &"KILLHOUSE_HINT_EXPLOSIVES_PLANT");
+  registeractionbinding("plant_explosives", "+usereload", &"KILLHOUSE_HINT_EXPLOSIVES_PLANT");
+  registeractionbinding("equip_C4", "+actionslot 4", &"KILLHOUSE_HINT_EQUIP_C4");
+  registeractionbinding("throw_C4", "+toggleads_throw", &"KILLHOUSE_HINT_THROW_C4_TOGGLE");
+  registeractionbinding("throw_C4", "+speed_throw", &"KILLHOUSE_HINT_THROW_C4_SPEED");
+  registeractionbinding("throw_C4", "+throw", &"KILLHOUSE_HINT_THROW_C4");
+  registeractionbinding("detonate_C4", "+attack", &"KILLHOUSE_DETONATE_C4");
   initkeys();
   updatekeysforbindings();
 }
 
 registeractionbinding(var_0, var_1, var_2) {
-  if(!isdefined(level.actionbinds[var_0]))
+  if(!isDefined(level.actionbinds[var_0]))
     level.actionbinds[var_0] = [];
 
-  var_3 = spawnstruct();
+  var_3 = spawnStruct();
   var_3.binding = var_1;
   var_3.hint = var_2;
   var_3.keytext = undefined;
@@ -2033,7 +2033,7 @@ registeractionbinding(var_0, var_1, var_2) {
 }
 
 getactionbind(var_0) {
-  for (var_1 = 0; var_1 < level.actionbinds[var_0].size; var_1++) {
+  for(var_1 = 0; var_1 < level.actionbinds[var_0].size; var_1++) {
     var_2 = level.actionbinds[var_0][var_1];
     var_3 = getkeybinding(var_2.binding);
 
@@ -2060,10 +2060,10 @@ updatekeysforbindings() {
     setkeyforbinding(getcommandfromkey("BUTTON_LTRIG"), "BUTTON_LTRIG");
     setkeyforbinding(getcommandfromkey("BUTTON_RTRIG"), "BUTTON_RTRIG");
   } else {
-    for (var_0 = 0; var_0 < level.kbkeys.size; var_0++)
+    for(var_0 = 0; var_0 < level.kbkeys.size; var_0++)
       setkeyforbinding(getcommandfromkey(level.kbkeys[var_0]), level.kbkeys[var_0]);
 
-    for (var_0 = 0; var_0 < level.specialkeys.size; var_0++)
+    for(var_0 = 0; var_0 < level.specialkeys.size; var_0++)
       setkeyforbinding(getcommandfromkey(level.specialkeys[var_0]), level.specialkeys[var_0]);
   }
 }
@@ -2071,10 +2071,10 @@ updatekeysforbindings() {
 getactionforbinding(var_0) {
   var_1 = getarraykeys(level.actionbinds);
 
-  for (var_2 = 0; var_2 < var_1; var_2++) {
+  for(var_2 = 0; var_2 < var_1; var_2++) {
     var_3 = level.actionbinds[var_1[var_2]];
 
-    for (var_4 = 0; var_4 < var_3.size; var_4++) {
+    for(var_4 = 0; var_4 < var_3.size; var_4++) {
       if(var_3[var_4].binding != var_0) {
         continue;
       }
@@ -2089,10 +2089,10 @@ setkeyforbinding(var_0, var_1) {
   }
   var_2 = getarraykeys(level.actionbinds);
 
-  for (var_3 = 0; var_3 < var_2.size; var_3++) {
+  for(var_3 = 0; var_3 < var_2.size; var_3++) {
     var_4 = level.actionbinds[var_2[var_3]];
 
-    for (var_5 = 0; var_5 < var_4.size; var_5++) {
+    for(var_5 = 0; var_5 < var_4.size; var_5++) {
       if(var_4[var_5].binding != var_0) {
         continue;
       }
@@ -2106,10 +2106,10 @@ killhouse_hint(var_0, var_1, var_2) {
   level endon("clearing_hints");
   maps\_utility::hint(var_0, undefined, undefined, var_2);
 
-  if(var_0 == & "KILLHOUSE_HINT_LADDER")
+  if(var_0 == &"KILLHOUSE_HINT_LADDER")
     var_1 = 5;
 
-  if(isdefined(var_1))
+  if(isDefined(var_1))
     wait(var_1);
   else
     return;
@@ -2120,13 +2120,13 @@ killhouse_hint(var_0, var_1, var_2) {
 clear_hints() {
   maps\_utility::hint_fade(0);
 
-  if(isdefined(level.iconelem))
+  if(isDefined(level.iconelem))
     level.iconelem maps\_hud_util::destroyelem();
 
-  if(isdefined(level.iconelem2))
+  if(isDefined(level.iconelem2))
     level.iconelem2 maps\_hud_util::destroyelem();
 
-  if(isdefined(level.iconelem3))
+  if(isDefined(level.iconelem3))
     level.iconelem3 maps\_hud_util::destroyelem();
 
   level notify("clearing_hints");
@@ -2144,12 +2144,12 @@ keyhint(var_0, var_1, var_2) {
 
   var_4 = "did_action_" + var_0;
 
-  for (var_5 = 0; var_5 < level.actionbinds[var_0].size; var_5++) {
+  for(var_5 = 0; var_5 < level.actionbinds[var_0].size; var_5++) {
     var_3 = level.actionbinds[var_0][var_5];
     notifyoncommand(var_4, var_3.binding);
   }
 
-  if(isdefined(var_1))
+  if(isDefined(var_1))
     level.player thread notifyontimeout(var_4, var_1);
 
   level.player waittill(var_4);
@@ -2163,7 +2163,7 @@ keyhintmantle(var_0, var_1) {
   maps\_utility::hint(var_2.hint, undefined, undefined, var_1);
   var_3 = 0.0;
 
-  while (!level.player ismantling() && var_3 < var_0) {
+  while(!level.player ismantling() && var_3 < var_0) {
     var_3 = var_3 + 0.05;
     wait 0.05;
   }
@@ -2178,7 +2178,7 @@ keyhintprone(var_0, var_1) {
   maps\_utility::hint(var_2.hint, undefined, undefined, var_1);
   var_3 = 0.0;
 
-  while (level.player getstance() != "prone" && var_3 < var_0) {
+  while(level.player getstance() != "prone" && var_3 < var_0) {
     var_3 = var_3 + 0.05;
     wait 0.05;
   }
@@ -2200,9 +2200,9 @@ notifyontimeout(var_0, var_1) {
 }
 
 training_stalltriggers(var_0, var_1) {
-  var_2 = getentarray(var_0 + "_stall_trigger", "script_noteworthy");
+  var_2 = getEntArray(var_0 + "_stall_trigger", "script_noteworthy");
 
-  for (var_3 = 0; var_3 < var_2.size; var_3++)
+  for(var_3 = 0; var_3 < var_2.size; var_3++)
     var_2[var_3] thread stalltriggerthink(var_0);
 
   thread wrongstallnag(var_1);
@@ -2211,7 +2211,7 @@ training_stalltriggers(var_0, var_1) {
 wrongstallnag(var_0) {
   level endon(var_0);
 
-  for (;;) {
+  for(;;) {
     level waittill("player_wrong_stall", var_1);
     level.marine2 maps\_anim::anim_single_solo(level.marine2, "gotofour");
     wait 10.0;
@@ -2219,7 +2219,7 @@ wrongstallnag(var_0) {
 }
 
 stalltriggerthink(var_0) {
-  for (;;) {
+  for(;;) {
     self waittill("trigger", var_1);
 
     if(!isplayer(var_1)) {
@@ -2335,24 +2335,24 @@ initkeys() {
 }
 
 turn_off_frag_lights() {
-  var_0 = getentarray("frag_lights", "script_noteworthy");
+  var_0 = getEntArray("frag_lights", "script_noteworthy");
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++)
     var_0[var_1] setlightintensity(0);
 }
 
 blink_primary_lights() {
-  var_0 = getentarray("frag_lights", "script_noteworthy");
+  var_0 = getEntArray("frag_lights", "script_noteworthy");
 
-  for (;;) {
+  for(;;) {
     wait 1;
 
-    for (var_1 = 0; var_1 < var_0.size; var_1++)
+    for(var_1 = 0; var_1 < var_0.size; var_1++)
       var_0[var_1] setlightintensity(1);
 
     wait 1;
 
-    for (var_1 = 0; var_1 < var_0.size; var_1++)
+    for(var_1 = 0; var_1 < var_0.size; var_1++)
       var_0[var_1] setlightintensity(0);
   }
 }
@@ -2367,20 +2367,20 @@ melon_think() {
   var_1 solid();
   var_0 waittill("trigger");
   maps\_cheat::slowmomoderesume();
-  var_0 playsound("melee_knife_hit_watermelon");
+  var_0 playSound("melee_knife_hit_watermelon");
   common_scripts\utility::flag_set("melee_complete");
-  playfx(level._effect["watermelon"], var_1.origin);
+  playFX(level._effect["watermelon"], var_1.origin);
   var_1 hide();
   var_1 notsolid();
 }
 
 test() {
-  for (;;)
+  for(;;)
     wait 1;
 }
 
 clear_hints_on_stand() {
-  while (level.player getstance() != "stand")
+  while(level.player getstance() != "stand")
     wait 0.05;
 
   clear_hints();
@@ -2393,7 +2393,7 @@ move_mac() {
 }
 
 loop_obstacle() {
-  for (var_0 = 0; var_0 < level.buddies.size; var_0++) {
+  for(var_0 = 0; var_0 < level.buddies.size; var_0++) {
     level.mac maps\_utility::set_generic_run_anim("jog");
     level.buddies[var_0] thread obstacletrainingcoursethink(level.buddies[var_0].startnode, level.buddies[var_0].waittime);
   }
@@ -2406,7 +2406,7 @@ loop_obstacle() {
 obstacletraining_buddies() {
   buddiesinit();
 
-  for (var_0 = 0; var_0 < level.buddies.size; var_0++) {
+  for(var_0 = 0; var_0 < level.buddies.size; var_0++) {
     var_1 = level.buddies[var_0];
     var_1.startnode = getnode("obstacle_lane_node" + var_1.buddyid, "targetname");
     level.buddies[var_0] thread obstacletrainingcoursethink(var_1.startnode);
@@ -2414,10 +2414,10 @@ obstacletraining_buddies() {
 }
 
 buddiesinit() {
-  level.buddies = getentarray("buddy", "script_noteworthy");
+  level.buddies = getEntArray("buddy", "script_noteworthy");
   level.buddiesbyid = [];
 
-  for (var_0 = 0; var_0 < level.buddies.size; var_0++) {
+  for(var_0 = 0; var_0 < level.buddies.size; var_0++) {
     level.buddies[var_0].buddyid = int(level.buddies[var_0].targetname[5]);
     level.buddiesbyid[level.buddies[var_0].buddyid] = level.buddies[var_0];
 
@@ -2439,7 +2439,7 @@ obstacletrainingcoursethink(var_0, var_1) {
   level endon("obstacleTraining_end");
   self.goalradius = 32;
 
-  if(isdefined(var_1))
+  if(isDefined(var_1))
     wait(var_1);
 
   self setgoalnode(var_0);
@@ -2452,17 +2452,15 @@ obstacletrainingcoursethink(var_0, var_1) {
   var_2["finishNode"] = ::set_idle_after_course;
   self.disablearrivals = 1;
 
-  while (isdefined(var_0.target)) {
+  while(isDefined(var_0.target)) {
     var_0 = getnode(var_0.target, "targetname");
     self setgoalnode(var_0);
     self waittill("goal");
 
-    if(!isdefined(var_0.script_noteworthy)) {
+    if(!isDefined(var_0.script_noteworthy)) {
       continue;
     }
-    [
-      [var_2[var_0.script_noteworthy]]
-    ]();
+    [[var_2[var_0.script_noteworthy]]]();
   }
 
   self.disablearrivals = 0;
@@ -2496,25 +2494,25 @@ frag_trigger_think(var_0, var_1, var_2) {
   common_scripts\utility::flag_init(var_0);
   var_1 enablegrenadetouchdamage();
 
-  if(isdefined(var_1.target))
+  if(isDefined(var_1.target))
     var_1.light = getent(var_1.target, "targetname");
 
-  if(isdefined(var_1.light))
+  if(isDefined(var_1.light))
     var_1.light thread flicker_on();
 
-  if(!isdefined(var_2))
+  if(!isDefined(var_2))
     var_2 = 0;
 
-  for (;;) {
+  for(;;) {
     var_1 waittill("trigger");
 
     if(!common_scripts\utility::flag("in_safety_pit")) {
       continue;
     }
     common_scripts\utility::flag_set(var_0);
-    level.player playsound("killhouse_buzzer");
+    level.player playSound("killhouse_buzzer");
 
-    if(isdefined(var_1.light))
+    if(isDefined(var_1.light))
       var_1.light thread flicker_off();
 
     return var_1;
@@ -2568,7 +2566,7 @@ frag_too_low_hint() {
   level endon("fragTraining_end");
   self enablegrenadetouchdamage();
 
-  for (;;) {
+  for(;;) {
     self waittill("trigger");
     clear_hints();
     level.currentkeyhintactionname = "";
@@ -2602,7 +2600,7 @@ walk_to_debrief(var_0) {
   var_1[2] = level.sas_blackkits[2];
   var_1[3] = level.price;
 
-  for (var_2 = 0; var_2 < var_1.size; var_2++) {
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
     var_1[var_2] maps\_utility::set_generic_run_anim("jog", 1);
     var_1[var_2] maps\_utility::ai_ignore_everything();
     var_1[var_2] maps\_utility::anim_stopanimscripted();
@@ -2623,8 +2621,8 @@ price_mask_up_gun_spawn() {
 dialog_nag_till_in_pit() {
   level endon("in_pit_nag_finish");
 
-  for (;;) {
-    while (!common_scripts\utility::flag("in_pit_with_frags") && common_scripts\utility::flag("in_explosives_area")) {
+  for(;;) {
+    while(!common_scripts\utility::flag("in_pit_with_frags") && common_scripts\utility::flag("in_explosives_area")) {
       level.newcastle execdialog("getinsafety");
       wait 9;
     }
@@ -2659,7 +2657,7 @@ c4_icon_hint() {
 
 auto_aim() {
   if(level.console) {
-    if(isdefined(getdvar("input_autoaim"))) {
+    if(isDefined(getdvar("input_autoaim"))) {
       if(getdvar("input_autoaim") == "1")
         return 1;
     }
@@ -2672,7 +2670,7 @@ is_ps3_flipped() {
   var_0 = 0;
   var_1 = getdvar("gpad_buttonsConfig");
 
-  if(isdefined(var_1)) {
+  if(isDefined(var_1)) {
     if(issubstr(var_1, "_alt"))
       var_0 = 1;
   }
@@ -2683,7 +2681,7 @@ is_ps3_flipped() {
 gaz_animation(var_0, var_1, var_2, var_3) {
   level.waters setlookatentity();
 
-  if(isdefined(var_1))
+  if(isDefined(var_1))
     wait(var_1);
 
   if(!common_scripts\utility::flag("gaz_in_idle_position")) {
@@ -2695,7 +2693,7 @@ gaz_animation(var_0, var_1, var_2, var_3) {
   level.waters stopanimscripted();
   level.waters.ref_node maps\_anim::anim_single_solo(level.waters, var_0);
 
-  if(isdefined(var_2)) {
+  if(isDefined(var_2)) {
     if(var_3 == 1) {
       level.waters.ref_node notify("stop_loop");
       level.waters.ref_node thread maps\_anim::anim_loop_solo(level.waters, var_2, undefined, "stop_loop");
@@ -2714,10 +2712,10 @@ nwc_talk_animation(var_0) {
 }
 
 melontargetdummies() {
-  var_0 = getentarray("rifle_target_dummy", "script_noteworthy");
-  var_1 = getentarray("aim_target", "targetname");
-  var_2 = getentarray("aim_target_right", "targetname");
-  var_3 = getentarray("cargoship_target", "script_noteworthy");
+  var_0 = getEntArray("rifle_target_dummy", "script_noteworthy");
+  var_1 = getEntArray("aim_target", "targetname");
+  var_2 = getEntArray("aim_target_right", "targetname");
+  var_3 = getEntArray("cargoship_target", "script_noteworthy");
   var_4 = common_scripts\utility::array_combine(var_0, var_1);
   var_4 = common_scripts\utility::array_combine(var_4, var_2);
   var_4 = common_scripts\utility::array_combine(var_4, var_3);
@@ -2729,7 +2727,7 @@ melontargetdummies() {
 melonhead_infinite_melons() {
   self endon("melonhead_infinite_disabled");
 
-  for (;;) {
+  for(;;) {
     self waittill("want_newMelon");
 
     if(!level.melonhead_mode_enabled)
@@ -2744,10 +2742,10 @@ melonhead_monitor_targetdummy() {
   self endon("melonhead_monitor");
   waitframe();
 
-  if(isdefined(self.melonhead_ignore) && self.melonhead_ignore) {
+  if(isDefined(self.melonhead_ignore) && self.melonhead_ignore) {
     return;
   }
-  for (;;) {
+  for(;;) {
     if(level.melonhead_mode_enabled) {
       maps\_cheat::melonhead_add_melon();
       thread melonhead_infinite_melons();

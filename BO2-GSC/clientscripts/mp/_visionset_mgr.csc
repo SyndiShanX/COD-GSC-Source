@@ -114,7 +114,7 @@ vsmgr_is_type_currently_default(localclientnum, type) {
 }
 
 register_type(type, cf_slot_cb, cf_lerp_cb, update_cb) {
-  level.vsmgr[type] = spawnstruct();
+  level.vsmgr[type] = spawnStruct();
   level.vsmgr[type].type = type;
   level.vsmgr[type].in_use = 0;
   level.vsmgr[type].highest_version = 0;
@@ -218,7 +218,7 @@ register_info(type, name, version, lerp_step_count) {
     return false;
 
   add_sorted_name_key(type, lower_name);
-  level.vsmgr[type].info[lower_name] = spawnstruct();
+  level.vsmgr[type].info[lower_name] = spawnStruct();
   level.vsmgr[type].info[lower_name] add_info(type, lower_name, version, lerp_step_count);
 
   if(version > level.vsmgr[type].highest_version)
@@ -292,7 +292,7 @@ init_states(localclientnum) {
     if(!isDefined(level.vsmgr[type].state))
       level.vsmgr[type].state = [];
 
-    level.vsmgr[type].state[localclientnum] = spawnstruct();
+    level.vsmgr[type].state[localclientnum] = spawnStruct();
     level.vsmgr[type].state[localclientnum].prev_slot = level.vsmgr[type].info[level.vsmgr_default_info_name].slot_index;
     level.vsmgr[type].state[localclientnum].curr_slot = level.vsmgr[type].info[level.vsmgr_default_info_name].slot_index;
     level.vsmgr[type].state[localclientnum].prev_lerp = 1;

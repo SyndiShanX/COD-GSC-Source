@@ -9,7 +9,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm_trial;
-
 #namespace zm_trial_door_lockdown;
 
 autoexec __init__system__() {
@@ -21,33 +20,33 @@ __init__() {
     return;
   }
 
-  clientfield::register("scriptmover", "" + #"zm_trial_door_lockdown", 16000, 1, "int", &zm_trial_door_lockdown, 0, 0);
-  level._effect[#"hash_351debe7af1f588b"] = "maps/zm_escape/fx8_flame_wall_64x64";
-  level._effect[#"hash_257bf4ae70b5a852"] = "maps/zm_escape/fx8_flame_wall_128x128";
-  level._effect[#"hash_3ea271ae7eb7fdce"] = "maps/zm_escape/fx8_flame_wall_256x256";
+  clientfield::register("scriptmover", "" + # "zm_trial_door_lockdown", 16000, 1, "int", &zm_trial_door_lockdown, 0, 0);
+  level._effect[# "hash_351debe7af1f588b"] = "maps/zm_escape/fx8_flame_wall_64x64";
+  level._effect[# "hash_257bf4ae70b5a852"] = "maps/zm_escape/fx8_flame_wall_128x128";
+  level._effect[# "hash_3ea271ae7eb7fdce"] = "maps/zm_escape/fx8_flame_wall_256x256";
   zm_trial::register_challenge(#"door_lockdown", &on_begin, &on_end);
 }
 
-private on_begin(localclientnum, a_params) {}
+on_begin(localclientnum, a_params) {}
 
-private on_end(localclientnum) {}
+on_end(localclientnum) {}
 
-private zm_trial_door_lockdown(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+zm_trial_door_lockdown(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     v_forward = anglesToForward(self.angles);
 
     switch (self.model) {
-      case #"collision_player_wall_64x64x10":
-        var_b1e1a2db = level._effect[#"hash_351debe7af1f588b"];
+      case # "collision_player_wall_64x64x10":
+        var_b1e1a2db = level._effect[# "hash_351debe7af1f588b"];
         break;
-      case #"collision_player_wall_128x128x10":
-        var_b1e1a2db = level._effect[#"hash_257bf4ae70b5a852"];
+      case # "collision_player_wall_128x128x10":
+        var_b1e1a2db = level._effect[# "hash_257bf4ae70b5a852"];
         break;
-      case #"collision_player_wall_256x256x10":
-        var_b1e1a2db = level._effect[#"hash_3ea271ae7eb7fdce"];
+      case # "collision_player_wall_256x256x10":
+        var_b1e1a2db = level._effect[# "hash_3ea271ae7eb7fdce"];
         break;
       default:
-        var_b1e1a2db = level._effect[#"hash_257bf4ae70b5a852"];
+        var_b1e1a2db = level._effect[# "hash_257bf4ae70b5a852"];
         break;
     }
 

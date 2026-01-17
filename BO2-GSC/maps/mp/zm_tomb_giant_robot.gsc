@@ -150,7 +150,7 @@ giant_robot_initial_spawns() {
     ai.audio_type = "giant_robot";
     ai.ignoreall = 1;
     ai.ignoreme = 1;
-    ai setcandamage(0);
+    ai setCanDamage(0);
     ai magic_bullet_shield();
     ai setplayercollision(1);
     ai setforcenocull();
@@ -276,7 +276,7 @@ giant_robot_start_walk(n_robot_id, b_has_hatch) {
     m_sole = getent("target_sole_" + n_robot_id, "targetname");
 
   if(isDefined(m_sole) && (isDefined(ai.b_has_hatch) && ai.b_has_hatch)) {
-    m_sole setcandamage(1);
+    m_sole setCanDamage(1);
     m_sole.health = 99999;
     m_sole useanimtree(#animtree);
     m_sole unlink();
@@ -688,7 +688,7 @@ activate_kill_trigger(robot, foot_side) {
         level.maxis_quadrotor thread quadrotor_stomp_death();
     }
 
-    a_boxes = getentarray("foot_box", "script_noteworthy");
+    a_boxes = getEntArray("foot_box", "script_noteworthy");
 
     foreach(m_box in a_boxes) {
       if(m_box istouching(self))
@@ -782,7 +782,7 @@ player_stomp_death(robot) {
   self endon("death");
   self endon("disconnect");
   self.is_stomped = 1;
-  self playsound("zmb_zombie_arc");
+  self playSound("zmb_zombie_arc");
   self freezecontrols(1);
 
   if(self player_is_in_laststand())
@@ -805,7 +805,7 @@ player_stomp_fake_death(robot) {
   self endon("death");
   self endon("disconnect");
   self.is_stomped = 1;
-  self playsound("zmb_zombie_arc");
+  self playSound("zmb_zombie_arc");
   self freezecontrols(1);
   self setstance("prone");
   self shellshock("explosion", 7);
@@ -964,12 +964,12 @@ player_transition_into_robot_head_finish(n_transition_time) {
 }
 
 gr_head_exit_trigger_start(s_origin) {
-  s_origin.unitrigger_stub = spawnstruct();
+  s_origin.unitrigger_stub = spawnStruct();
   s_origin.unitrigger_stub.origin = s_origin.origin;
   s_origin.unitrigger_stub.radius = 36;
   s_origin.unitrigger_stub.height = 256;
   s_origin.unitrigger_stub.script_unitrigger_type = "unitrigger_radius_use";
-  s_origin.unitrigger_stub.hint_string = & "ZM_TOMB_EHT";
+  s_origin.unitrigger_stub.hint_string = &"ZM_TOMB_EHT";
   s_origin.unitrigger_stub.cursor_hint = "HINT_NOICON";
   s_origin.unitrigger_stub.require_look_at = 1;
   s_origin.unitrigger_stub.target = s_origin.target;
@@ -1420,7 +1420,7 @@ spawn_model(model_name, origin, angles, n_spawnflags) {
     origin = (0, 0, 0);
 
   model = spawn("script_model", origin, n_spawnflags);
-  model setmodel(model_name);
+  model setModel(model_name);
 
   if(isDefined(angles))
     model.angles = angles;
@@ -1458,7 +1458,7 @@ tomb_standard_intermission() {
   points = getstructarray("intermission", "targetname");
 
   if(!isDefined(points) || points.size == 0) {
-    points = getentarray("info_intermission", "classname");
+    points = getEntArray("info_intermission", "classname");
 
     if(points.size < 1) {
       println("NO info_intermission POINTS IN MAP");
@@ -1486,7 +1486,7 @@ tomb_standard_intermission() {
       if(isDefined(points[i].target)) {
         if(!isDefined(org)) {
           org = spawn("script_model", self.origin + vectorscale((0, 0, -1), 60.0));
-          org setmodel("tag_origin");
+          org setModel("tag_origin");
         }
 
         org.origin = points[i].origin;

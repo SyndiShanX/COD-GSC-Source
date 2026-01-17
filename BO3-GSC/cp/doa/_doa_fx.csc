@@ -292,7 +292,7 @@ function init() {
   function_6dcb1bbc("teamShift", 120);
   function_6dcb1bbc("teamShift_contact", 119);
   function_6dcb1bbc("web_contact", 121, "fakelink");
-  if(!isdefined(level.var_de2ea8e7)) {
+  if(!isDefined(level.var_de2ea8e7)) {
     level.var_de2ea8e7 = array(level._effect["fire_limb_left"], level._effect["fire_limb_right"], level._effect["fire_torso"], level._effect["fire_limb_left"], level._effect["fire_limb_right"]);
     level.var_8118b8c = array(level._effect["fire_limb_left_red"], level._effect["fire_limb_right_red"], level._effect["fire_torso_red"], level._effect["fire_limb_left_red"], level._effect["fire_limb_right_red"]);
     level.var_56ca9a5 = array(level._effect["fire_limb_left_purple"], level._effect["fire_limb_right_purple"], level._effect["fire_torso_purple"], level._effect["fire_limb_left_purple"], level._effect["fire_limb_right_purple"]);
@@ -302,10 +302,10 @@ function init() {
 
 function function_6dcb1bbc(name, type, tag = "tag_origin", unique = 1) {
   assert(type < 128, "");
-  if(!isdefined(level.var_1142e0a2)) {
+  if(!isDefined(level.var_1142e0a2)) {
     level.var_1142e0a2 = [];
   }
-  fx = spawnstruct();
+  fx = spawnStruct();
   fx.name = name;
   fx.tag = tag;
   fx.unique = unique;
@@ -313,43 +313,43 @@ function function_6dcb1bbc(name, type, tag = "tag_origin", unique = 1) {
 }
 
 function function_9e6fe7c3(type) {
-  assert(isdefined(level.var_1142e0a2[type]), "");
+  assert(isDefined(level.var_1142e0a2[type]), "");
   return level.var_1142e0a2[type].name;
 }
 
 function function_28a90644(type) {
-  assert(isdefined(level.var_1142e0a2[type]), "");
+  assert(isDefined(level.var_1142e0a2[type]), "");
   return level.var_1142e0a2[type].tag;
 }
 
 function function_7664cc94(type) {
-  assert(isdefined(level.var_1142e0a2[type]), "");
+  assert(isDefined(level.var_1142e0a2[type]), "");
   return level.var_1142e0a2[type].unique;
 }
 
 function function_e68e3c0d(localclientnum, name, off, tag, kill = 0) {
   self endon("entityshutdown");
-  while (!clienthassnapshot(localclientnum)) {
+  while(!clienthassnapshot(localclientnum)) {
     wait(0.016);
   }
   self util::waittill_dobj(localclientnum);
-  if(!isdefined(self.var_ec1cda64)) {
+  if(!isDefined(self.var_ec1cda64)) {
     self.var_ec1cda64 = [];
   }
-  if(!isdefined(self.var_ca61d2d6)) {
+  if(!isDefined(self.var_ca61d2d6)) {
     self.var_ca61d2d6 = [];
   }
   assert(!(self isplayer() && name == ""));
   assert(!(self isplayer() && name == ""));
   if(self isplayer()) {
-    loc_000043C8: loc_000043FC: namespace_693feb87::debugmsg((((((("" + (isdefined(self.name) ? self.name : "")) + "") + name) + "") + (isdefined(tag) ? tag : "") + "") + (off ? "" : "") + "") + localclientnum);
+    loc_000043C8: loc_000043FC: namespace_693feb87::debugmsg((((((("" + (isDefined(self.name) ? self.name : "")) + "") + name) + "") + (isDefined(tag) ? tag : "") + "") + (off ? "" : "") + "") + localclientnum);
   }
   if(off) {
-    if(isdefined(self.var_ec1cda64[name])) {
+    if(isDefined(self.var_ec1cda64[name])) {
       stopfx(localclientnum, self.var_ec1cda64[name]);
       self.var_ec1cda64[name] = undefined;
     }
-    if(isdefined(self.var_ca61d2d6[name])) {
+    if(isDefined(self.var_ca61d2d6[name])) {
       self.var_ca61d2d6[name] delete();
       self.var_ca61d2d6[name] = undefined;
     }
@@ -359,12 +359,12 @@ function function_e68e3c0d(localclientnum, name, off, tag, kill = 0) {
     } else {
       if(tag == "fakelink") {
         org = spawn(localclientnum, self.origin, "script_model");
-        org setmodel("tag_origin");
-        org.fx = playfxontag(localclientnum, level._effect[name], org, "tag_origin");
-        if(isdefined(self.var_ec1cda64[name])) {
+        org setModel("tag_origin");
+        org.fx = playFXOnTag(localclientnum, level._effect[name], org, "tag_origin");
+        if(isDefined(self.var_ec1cda64[name])) {
           stopfx(localclientnum, self.var_ec1cda64[name]);
         }
-        if(isdefined(self.var_ca61d2d6[name])) {
+        if(isDefined(self.var_ca61d2d6[name])) {
           self.var_ca61d2d6[name] delete();
         }
         self.var_ec1cda64[name] = org.fx;
@@ -372,16 +372,16 @@ function function_e68e3c0d(localclientnum, name, off, tag, kill = 0) {
         org thread function_1c0d0290(self);
       } else {
         if(tag == "none") {
-          self.var_ec1cda64[name] = playfx(localclientnum, level._effect[name], self.origin);
+          self.var_ec1cda64[name] = playFX(localclientnum, level._effect[name], self.origin);
         } else {
-          if(isdefined(tag) && tag != "tag_origin") {
+          if(isDefined(tag) && tag != "tag_origin") {
             tagorigin = self gettagorigin(tag);
-            if(!isdefined(tagorigin)) {
+            if(!isDefined(tagorigin)) {
               tag = "tag_origin";
             }
           }
-          modelent = (isdefined(self.fakemodel) ? self.fakemodel : self);
-          self.var_ec1cda64[name] = playfxontag(localclientnum, level._effect[name], modelent, tag);
+          modelent = (isDefined(self.fakemodel) ? self.fakemodel : self);
+          self.var_ec1cda64[name] = playFXOnTag(localclientnum, level._effect[name], modelent, tag);
         }
       }
     }
@@ -391,11 +391,11 @@ function function_e68e3c0d(localclientnum, name, off, tag, kill = 0) {
 
 function function_b71a778a(localclientnum, name, off, tag) {
   self endon("entityshutdown");
-  if(!isdefined(self.var_6f5948cb)) {
+  if(!isDefined(self.var_6f5948cb)) {
     self.var_6f5948cb = [];
   }
   if(off) {
-    if(isdefined(self.var_6f5948cb[name])) {
+    if(isDefined(self.var_6f5948cb[name])) {
       foreach(fx in self.var_6f5948cb[name]) {
         stopfx(localclientnum, self.var_ec1cda64[name]);
       }
@@ -404,23 +404,23 @@ function function_b71a778a(localclientnum, name, off, tag) {
     switch (name) {
       case "cow_sacred": {
         self.var_6f5948cb[name] = [];
-        self.var_6f5948cb[name][self.var_6f5948cb[name].size] = playfxontag(localclientnum, level._effect["cow_sacred"], self, "j_belly");
-        self.var_6f5948cb[name][self.var_6f5948cb[name].size] = playfxontag(localclientnum, level._effect["cow_hoof"], self, "j_ankle_le");
-        self.var_6f5948cb[name][self.var_6f5948cb[name].size] = playfxontag(localclientnum, level._effect["cow_hoof"], self, "j_ankle_ri");
-        self.var_6f5948cb[name][self.var_6f5948cb[name].size] = playfxontag(localclientnum, level._effect["cow_hoof"], self, "j_wrist_le");
-        self.var_6f5948cb[name][self.var_6f5948cb[name].size] = playfxontag(localclientnum, level._effect["cow_hoof"], self, "j_wrist_ri");
+        self.var_6f5948cb[name][self.var_6f5948cb[name].size] = playFXOnTag(localclientnum, level._effect["cow_sacred"], self, "j_belly");
+        self.var_6f5948cb[name][self.var_6f5948cb[name].size] = playFXOnTag(localclientnum, level._effect["cow_hoof"], self, "j_ankle_le");
+        self.var_6f5948cb[name][self.var_6f5948cb[name].size] = playFXOnTag(localclientnum, level._effect["cow_hoof"], self, "j_ankle_ri");
+        self.var_6f5948cb[name][self.var_6f5948cb[name].size] = playFXOnTag(localclientnum, level._effect["cow_hoof"], self, "j_wrist_le");
+        self.var_6f5948cb[name][self.var_6f5948cb[name].size] = playFXOnTag(localclientnum, level._effect["cow_hoof"], self, "j_wrist_ri");
         break;
       }
       case "shadow_appear": {
-        playfx(localclientnum, level._effect["shadow_appear"], self.origin);
-        playfx(localclientnum, level._effect["shadow_rez_in"], self.origin);
-        playfx(localclientnum, level._effect["shadow_emerge"], self.origin);
+        playFX(localclientnum, level._effect["shadow_appear"], self.origin);
+        playFX(localclientnum, level._effect["shadow_rez_in"], self.origin);
+        playFX(localclientnum, level._effect["shadow_emerge"], self.origin);
         break;
       }
       case "shadow_die": {
-        playfx(localclientnum, level._effect["shadow_fade"], self.origin);
-        playfx(localclientnum, level._effect["heart_explode"], self.origin);
-        playfx(localclientnum, level._effect["shadow_rez_out"], self.origin);
+        playFX(localclientnum, level._effect["shadow_fade"], self.origin);
+        playFX(localclientnum, level._effect["heart_explode"], self.origin);
+        playFX(localclientnum, level._effect["shadow_rez_out"], self.origin);
         break;
       }
     }
@@ -430,32 +430,32 @@ function function_b71a778a(localclientnum, name, off, tag) {
 function createzombieeyesinternal(localclientnum) {
   self endon("entityshutdown");
   self util::waittill_dobj(localclientnum);
-  if(!isdefined(self._eyearray)) {
+  if(!isDefined(self._eyearray)) {
     self._eyearray = [];
   }
   fxname = "eye_glow";
   if(level.doa.var_d94564a5 == "night") {
     fxname = "eye_glow_night";
   }
-  if(!isdefined(self._eyearray[localclientnum])) {
+  if(!isDefined(self._eyearray[localclientnum])) {
     linktag = "j_eyeball_le";
     effect = level._effect[fxname];
-    if(isdefined(level._override_eye_fx)) {
+    if(isDefined(level._override_eye_fx)) {
       effect = level._override_eye_fx;
     }
-    if(isdefined(self._eyeglow_fx_override)) {
+    if(isDefined(self._eyeglow_fx_override)) {
       effect = self._eyeglow_fx_override;
     }
-    if(isdefined(self._eyeglow_tag_override)) {
+    if(isDefined(self._eyeglow_tag_override)) {
       linktag = self._eyeglow_tag_override;
     }
-    self._eyearray[localclientnum] = playfxontag(localclientnum, effect, self, linktag);
+    self._eyearray[localclientnum] = playFXOnTag(localclientnum, effect, self, linktag);
   }
 }
 
 function function_1c0d0290(parent) {
   self endon("entityshutdown");
-  while (isdefined(parent)) {
+  while(isDefined(parent)) {
     self.origin = parent.origin;
     wait(0.016);
   }
@@ -467,8 +467,8 @@ function createzombieeyes(localclientnum) {
 }
 
 function deletezombieeyes(localclientnum) {
-  if(isdefined(self._eyearray)) {
-    if(isdefined(self._eyearray[localclientnum])) {
+  if(isDefined(self._eyearray)) {
+    if(isDefined(self._eyearray[localclientnum])) {
       deletefx(localclientnum, self._eyearray[localclientnum], 1);
       self._eyearray[localclientnum] = undefined;
     }
@@ -476,14 +476,14 @@ function deletezombieeyes(localclientnum) {
 }
 
 function get_eyeball_on_luminance() {
-  if(isdefined(level.eyeball_on_luminance_override)) {
+  if(isDefined(level.eyeball_on_luminance_override)) {
     return level.eyeball_on_luminance_override;
   }
   return 1;
 }
 
 function get_eyeball_off_luminance() {
-  if(isdefined(level.eyeball_off_luminance_override)) {
+  if(isDefined(level.eyeball_off_luminance_override)) {
     return level.eyeball_off_luminance_override;
   }
   return 0;
@@ -491,17 +491,17 @@ function get_eyeball_off_luminance() {
 
 function get_eyeball_color() {
   val = 0;
-  if(isdefined(level.zombie_eyeball_color_override)) {
+  if(isDefined(level.zombie_eyeball_color_override)) {
     val = level.zombie_eyeball_color_override;
   }
-  if(isdefined(self.zombie_eyeball_color_override)) {
+  if(isDefined(self.zombie_eyeball_color_override)) {
     val = self.zombie_eyeball_color_override;
   }
   return val;
 }
 
 function zombie_eyes_clientfield_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(!isdefined(newval)) {
+  if(!isDefined(newval)) {
     return;
   }
   if(newval) {
@@ -511,16 +511,16 @@ function zombie_eyes_clientfield_cb(localclientnum, oldval, newval, bnewent, bin
     self deletezombieeyes(localclientnum);
     self mapshaderconstant(localclientnum, 0, "scriptVector2", 0, get_eyeball_off_luminance(), self get_eyeball_color());
   }
-  if(isdefined(level.zombie_eyes_clientfield_cb_additional)) {
+  if(isDefined(level.zombie_eyes_clientfield_cb_additional)) {
     self[[level.zombie_eyes_clientfield_cb_additional]](localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump);
   }
 }
 
 function function_7829d7af(localclientnum, mask = randomint(1 << level.var_de2ea8e7.size)) {
   idx = 0;
-  while (mask > 0) {
+  while(mask > 0) {
     if(mask & 1) {
-      playfxontag(localclientnum, (isdefined(self.var_a1063df8) ? self.var_a1063df8[idx] : level.var_de2ea8e7[idx]), self, level.var_c3cfd178[idx]);
+      playFXOnTag(localclientnum, (isDefined(self.var_a1063df8) ? self.var_a1063df8[idx] : level.var_de2ea8e7[idx]), self, level.var_c3cfd178[idx]);
     }
     mask = mask >> 1;
     idx++;
@@ -556,7 +556,7 @@ function function_f6008bb4(localclientnum, oldval, newval, bnewent, binitialsnap
   if(!self hasdobj(localclientnum)) {
     return;
   }
-  if(!isdefined(self.var_c5998995)) {
+  if(!isDefined(self.var_c5998995)) {
     self.var_c5998995 = 0;
   }
   if(gettime() < self.var_c5998995) {

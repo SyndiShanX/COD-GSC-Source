@@ -64,7 +64,7 @@ burstDelay() {
 cheatAmmoIfNecessary() {
   assert(!self.bulletsInClip);
 
-  if(!isdefined(self.enemy))
+  if(!isDefined(self.enemy))
     return false;
 
   if(self.team != "allies") {
@@ -104,10 +104,10 @@ dontShoot_loopCount = dontShoot_totalTime / dontShoot_interval;
 aimButDontShoot() {
   loopCount = int(dontShoot_loopCount);
 
-  while (loopCount > 0) {
-    assert(!isdefined(self.dontEverShoot) || self.dontEverShoot != 0);
+  while(loopCount > 0) {
+    assert(!isDefined(self.dontEverShoot) || self.dontEverShoot != 0);
 
-    if(isdefined(self.dontEverShoot) || (isdefined(self.enemy) && isdefined(self.enemy.dontAttackMe)))
+    if(isDefined(self.dontEverShoot) || (isDefined(self.enemy) && isDefined(self.enemy.dontAttackMe)))
       wait dontShoot_interval;
     else
       return false;
@@ -130,17 +130,18 @@ shootUntilShootBehaviorChange() {
       wait(randomFloat(2.0));
   }
 
-  if(isdefined(self.enemy) && distanceSquared(self.origin, self.enemy.origin) > squared(400))
+  if(isDefined(self.enemy) && distanceSquared(self.origin, self.enemy.origin) > squared(400))
     burstCount = randomintrange(1, 5);
   else
     burstCount = 10;
 
-  while (1) {
+  while(1) {
     burstDelay(); // waits only if necessary
 
     // TODO: This sort of logic should really be in shoot_behavior. This thread is meant to be slave to shootent, shootpos, and shootstyle.
-    if(aimButDontShoot())
+    if(aimButDontShoot()) {
       break;
+    }
 
     if(self.shootStyle == "full") {
       // TODO: get rid of 'stopOnAnimationEnd', makes autofire not work if not enough fire notetracks
@@ -159,8 +160,9 @@ shootUntilShootBehaviorChange() {
       self waittill("hell freezes over"); // waits for the endons to happen
     }
 
-    if(!self.bulletsInClip)
+    if(!self.bulletsInClip) {
       break;
+    }
 
     burstCount--;
     if(burstCount < 0) {
@@ -187,7 +189,7 @@ setupAim(transTime) {
 }
 
 startFireAndAimIdleThread() {
-  if(!isdefined(self.a.aimIdleThread)) {
+  if(!isDefined(self.a.aimIdleThread)) {
     setupAim(0.2);
     self thread aimIdleThread();
     self thread animscripts\shared::trackShootEntOrPos();
@@ -201,14 +203,14 @@ endFireAndAnimIdleThread() {
 }
 
 showFireHideAimIdle() {
-  if(isdefined(self.a.aimIdleThread))
+  if(isDefined(self.a.aimIdleThread))
     self setAnim( % add_idle, 0, .2);
 
   self setAnim( % add_fire, 1, .1);
 }
 
 hideFireShowAimIdle() {
-  if(isdefined(self.a.aimIdleThread))
+  if(isDefined(self.a.aimIdleThread))
     self setAnim( % add_idle, 1, .2);
 
   self setAnim( % add_fire, 0, .1);
@@ -218,7 +220,7 @@ aimIdleThread(lean) {
   self endon("killanimscript");
   self endon("end_aim_idle_thread");
 
-  if(isdefined(self.a.aimIdleThread))
+  if(isDefined(self.a.aimIdleThread))
     return;
   self.a.aimIdleThread = true;
 
@@ -228,10 +230,10 @@ aimIdleThread(lean) {
   // this used to be setAnim, but it caused problems with turning on its parent nodes when they were supposed to be off (like during pistol pullout).
   self setAnimLimited( % add_idle, 1, .2);
 
-  for (i = 0;; i++) {
+  for(i = 0;; i++) {
     flagname = "idle" + i;
 
-    if(isdefined(self.a.leanAim))
+    if(isDefined(self.a.leanAim))
       idleanim = animArrayPickRandom("lean_idle");
     else
       idleanim = animArrayPickRandom("exposed_idle");
@@ -269,14 +271,14 @@ FireUntilOutOfAmmo(fireAnim, stopOnAnimationEnd, maxshots) {
   maps\_gameskill::resetMissTime();
 
   // first, wait until we're aimed right
-  while (!aimedAtShootEntOrPos())
+  while(!aimedAtShootEntOrPos())
     wait .05;
 
   //prof_begin("FireUntilOutOfAmmo");		
   self showFireHideAimIdle();
 
   rate = 1.0;
-  if(isdefined(self.shootRateOverride))
+  if(isDefined(self.shootRateOverride))
     rate = self.shootRateOverride;
   else if(self.shootStyle == "full")
     rate = animscripts\weaponList::autoShootAnimRate() * randomfloatrange(0.5, 1.0);
@@ -310,7 +312,7 @@ FireUntilOutOfAmmoInternal(animName, fireAnim, stopOnAnimationEnd, maxshots) {
     self endon("fireAnimEnd");
   }
 
-  if(!isdefined(maxshots))
+  if(!isDefined(maxshots))
     maxshots = -1;
 
   numshots = 0;
@@ -319,7 +321,7 @@ FireUntilOutOfAmmoInternal(animName, fireAnim, stopOnAnimationEnd, maxshots) {
 
   usingRocketLauncher = (weaponClass(self.weapon) == "rocketlauncher");
 
-  while (numshots < maxshots && maxshots > 0) // note: maxshots == -1 if no limit
+  while(numshots < maxshots && maxshots > 0) // note: maxshots == -1 if no limit
   {
     //prof_begin("FireUntilOutOfAmmoInternal");
 
@@ -327,12 +329,14 @@ FireUntilOutOfAmmoInternal(animName, fireAnim, stopOnAnimationEnd, maxshots) {
       self waittillmatch(animName, "fire");
 
     if(!self.bulletsInClip) {
-      if(!cheatAmmoIfNecessary())
+      if(!cheatAmmoIfNecessary()) {
         break;
+      }
     }
 
-    if(!aimedAtShootEntOrPos())
+    if(!aimedAtShootEntOrPos()) {
       break;
+    }
 
     self shootAtShootEntOrPos();
 
@@ -356,8 +360,9 @@ FireUntilOutOfAmmoInternal(animName, fireAnim, stopOnAnimationEnd, maxshots) {
 
     self thread shotgunPumpSound(animName);
 
-    if(self.fastBurst && numshots == maxshots)
+    if(self.fastBurst && numshots == maxshots) {
       break;
+    }
 
     //prof_end("FireUntilOutOfAmmoInternal");
 
@@ -371,8 +376,8 @@ FireUntilOutOfAmmoInternal(animName, fireAnim, stopOnAnimationEnd, maxshots) {
 
 aimedAtShootEntOrPos() {
   //prof_begin( "aimedAtShootEntOrPos" );
-  if(!isdefined(self.shootPos)) {
-    assert(!isdefined(self.shootEnt));
+  if(!isDefined(self.shootPos)) {
+    assert(!isDefined(self.shootEnt));
 
     //prof_end( "aimedAtShootEntOrPos" );
     return true;
@@ -405,7 +410,7 @@ NotifyOnAnimEnd(animNotify, endNotify) {
 shootAtShootEntOrPos() {
   //prof_begin("shootAtShootEntOrPos");
 
-  if(isdefined(self.shootEnt)) {
+  if(isDefined(self.shootEnt)) {
     if(isDefined(self.enemy) && self.shootEnt == self.enemy)
       self shootEnemyWrapper();
 
@@ -417,7 +422,7 @@ shootAtShootEntOrPos() {
   } else {
     // if self.shootPos isn't defined, "shoot_behavior_change" should
     // have been notified and we shouldn't be firing anymore
-    assert(isdefined(self.shootPos));
+    assert(isDefined(self.shootPos));
 
     self shootPosWrapper(self.shootPos);
   }
@@ -426,18 +431,18 @@ shootAtShootEntOrPos() {
 }
 
 showRocket() {
-  if(self.weapon != "rpg")
+  if(self.weapon != "rpg") {
     return;
-
+  }
   self.a.rocketVisible = true;
   self showpart("tag_rocket");
   self notify("showing_rocket");
 }
 
 showRocketWhenReloadIsDone() {
-  if(self.weapon != "rpg")
+  if(self.weapon != "rpg") {
     return;
-
+  }
   self endon("death");
   self endon("showing_rocket");
   self waittill("killanimscript");
@@ -454,9 +459,9 @@ decrementBulletsInClip() {
 }
 
 shotgunPumpSound(animName) {
-  if(!weapon_pump_action_shotgun())
+  if(!weapon_pump_action_shotgun()) {
     return;
-
+  }
   self endon("killanimscript");
 
   self notify("shotgun_pump_sound_end");
@@ -483,13 +488,13 @@ Rechamber(isExposed) {
   // obsolete...
 }
 
-// Returns true if character has less than thresholdFraction of his total bullets in his clip.Thus, a value 
+// Returns true if character has less than thresholdFraction of his total bullets in his clip.Thus, a value
 // of 1 would always reload, 0 would only reload on an empty clip.
 NeedToReload(thresholdFraction) {
   if(self.weapon == "none")
     return false;
 
-  if(isdefined(self.noreload)) {
+  if(isDefined(self.noreload)) {
     assertex(self.noreload, ".noreload must be true or undefined");
     if(self.bulletsinclip < weaponClipSize(self.weapon) * 0.5)
       self.bulletsinclip = int(weaponClipSize(self.weapon) * 0.5);
@@ -554,7 +559,7 @@ Reload(thresholdFraction, optionalAnimation) {
 }
 
 addGrenadeThrowAnimOffset(throwAnim, offset) {
-  if(!isdefined(anim.grenadeThrowAnims)) {
+  if(!isDefined(anim.grenadeThrowAnims)) {
     anim.grenadeThrowAnims = [];
     anim.grenadeThrowOffsets = [];
   }
@@ -589,7 +594,7 @@ getGrenadeThrowOffset(throwAnim) {
   //prof_begin( "getGrenadeThrowOffset" );
   offset = (0, 0, 64);
 
-  if(isdefined(throwAnim)) {
+  if(isDefined(throwAnim)) {
     foreach(index, grenadeThrowAnim in anim.grenadeThrowAnims) {
       if(throwAnim == grenadeThrowAnim) {
         offset = anim.grenadeThrowOffsets[index];
@@ -599,7 +604,7 @@ getGrenadeThrowOffset(throwAnim) {
   }
 
   if(offset[2] == 64) {
-    if(isdefined(throwAnim))
+    if(isDefined(throwAnim))
       println("^1Warning: undefined grenade throw animation used; hand offset unknown");
     else
       println("^1Warning: grenade throw animation ", throwAnim, " has no recorded hand offset");
@@ -613,7 +618,7 @@ getGrenadeThrowOffset(throwAnim) {
 ThrowGrenadeAtPlayerASAP_combat_utility() {
   assert(self isBadGuy());
 
-  for (i = 0; i < level.players.size; i++) {
+  for(i = 0; i < level.players.size; i++) {
     if(level.players[i].numGrenadesInProgressTowardsPlayer == 0) {
       level.players[i].grenadeTimers["fraggrenade"] = 0;
       level.players[i].grenadeTimers["flash_grenade"] = 0;
@@ -621,30 +626,28 @@ ThrowGrenadeAtPlayerASAP_combat_utility() {
   }
   anim.throwGrenadeAtPlayerASAP = true;
 
-  /#
   enemies = getaiarray("bad_guys");
   if(enemies.size == 0)
     return;
   numwithgrenades = 0;
-  for (i = 0; i < enemies.size; i++) {
+  for(i = 0; i < enemies.size; i++) {
     if(enemies[i].grenadeammo > 0)
       return;
   }
   println("^1Warning: called ThrowGrenadeAtPlayerASAP, but no enemies have any grenadeammo!");
-  # /
 }
 
 setActiveGrenadeTimer(throwingAt) {
-  self.activeGrenadeTimer = spawnstruct();
+  self.activeGrenadeTimer = spawnStruct();
   if(isPlayer(throwingAt)) {
     self.activeGrenadeTimer.isPlayerTimer = true;
     self.activeGrenadeTimer.player = throwingAt;
     self.activeGrenadeTimer.timerName = self.grenadeWeapon;
-    assertex(isdefined(throwingAt.grenadeTimers[self.activeGrenadeTimer.timerName]), "No grenade timer for " + self.activeGrenadeTimer.timerName);
+    assertex(isDefined(throwingAt.grenadeTimers[self.activeGrenadeTimer.timerName]), "No grenade timer for " + self.activeGrenadeTimer.timerName);
   } else {
     self.activeGrenadeTimer.isPlayerTimer = false;
     self.activeGrenadeTimer.timerName = "AI_" + self.grenadeWeapon;
-    assertex(isdefined(anim.grenadeTimers[self.activeGrenadeTimer.timerName]), "No grenade timer for " + self.activeGrenadeTimer.timerName);
+    assertex(isDefined(anim.grenadeTimers[self.activeGrenadeTimer.timerName]), "No grenade timer for " + self.activeGrenadeTimer.timerName);
   }
 }
 
@@ -705,7 +708,7 @@ considerChangingTarget(throwingAt) {
       // can't throw at an AI right now anyway.
       // check if the player is an acceptable target (be careful not to be aware of him when we wouldn't know about him)
       if(self canSee(level.player) || (isAI(throwingAt) && throwingAt canSee(level.player))) {
-        if(isdefined(self.covernode)) {
+        if(isDefined(self.covernode)) {
           angles = VectorToAngles(level.player.origin - self.origin);
           yawDiff = AngleClamp180(self.covernode.angles[1] - angles[1]);
         } else {
@@ -778,12 +781,12 @@ grenadeCoolDownElapsed(throwingAt) {
   return false;
 }
 
-/#
 getGrenadeTimerDebugName(grenadeTimer) {
   if(grenadeTimer.isPlayerTimer) {
-    for (i = 0; i < level.players.size; i++) {
-      if(level.players[i] == grenadeTimer.player)
+    for(i = 0; i < level.players.size; i++) {
+      if(level.players[i] == grenadeTimer.player) {
         break;
+      }
     }
     return "Player " + (i + 1) + " " + grenadeTimer.timerName;
   } else {
@@ -802,17 +805,17 @@ printGrenadeTimers() {
 
   level.grenadeDebugTimers = [];
   keys = getArrayKeys(anim.grenadeTimers);
-  for (i = 0; i < keys.size; i++) {
-    timer = spawnstruct();
+  for(i = 0; i < keys.size; i++) {
+    timer = spawnStruct();
     timer.isPlayerTimer = false;
     timer.timerName = keys[i];
     level.grenadeDebugTimers[level.grenadeDebugTimers.size] = timer;
   }
-  for (i = 0; i < level.players.size; i++) {
+  for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
     keys = getArrayKeys(player.grenadeTimers);
-    for (j = 0; j < keys.size; j++) {
-      timer = spawnstruct();
+    for(j = 0; j < keys.size; j++) {
+      timer = spawnStruct();
       timer.isPlayerTimer = true;
       timer.player = player;
       timer.timerName = keys[j];
@@ -820,7 +823,7 @@ printGrenadeTimers() {
     }
   }
 
-  for (i = 0; i < level.grenadeDebugTimers.size; i++) {
+  for(i = 0; i < level.grenadeDebugTimers.size; i++) {
     textelem = newHudElem();
     textelem.x = x;
     textelem.y = y;
@@ -846,10 +849,10 @@ printGrenadeTimers() {
     level.grenadeDebugTimers[i].textelem = textelem;
   }
 
-  while (1) {
+  while(1) {
     wait .05;
 
-    for (i = 0; i < level.grenadeDebugTimers.size; i++) {
+    for(i = 0; i < level.grenadeDebugTimers.size; i++) {
       timeleft = (getGrenadeTimerTime(level.grenadeDebugTimers[i]) - gettime()) / 1000;
 
       width = max(timeleft * 4, 1);
@@ -862,9 +865,9 @@ printGrenadeTimers() {
 }
 
 destroyGrenadeTimers() {
-  if(!isdefined(level.grenadeDebugTimers))
+  if(!isDefined(level.grenadeDebugTimers))
     return;
-  for (i = 0; i < level.grenadeDebugTimers.size; i++) {
+  for(i = 0; i < level.grenadeDebugTimers.size; i++) {
     level.grenadeDebugTimers[i].textelem.bar destroy();
     level.grenadeDebugTimers[i].textelem destroy();
   }
@@ -874,16 +877,18 @@ destroyGrenadeTimers() {
 grenadeTimerDebug() {
   setDvarIfUninitialized("scr_grenade_debug", "0");
 
-  while (1) {
-    while (1) {
-      if(getdebugdvar("scr_grenade_debug") == "1")
+  while(1) {
+    while(1) {
+      if(getdebugdvar("scr_grenade_debug") == "1") {
         break;
+      }
       wait .5;
     }
     thread printGrenadeTimers();
-    while (1) {
-      if(getdebugdvar("scr_grenade_debug") != "1")
+    while(1) {
+      if(getdebugdvar("scr_grenade_debug") != "1") {
         break;
+      }
       wait .5;
     }
     level notify("stop_printing_grenade_timers");
@@ -892,20 +897,20 @@ grenadeTimerDebug() {
 }
 
 grenadeDebug(state, duration, showMissReason) {
-  if(getdebugdvar("scr_grenade_debug") != "1")
+  if(getdebugdvar("scr_grenade_debug") != "1") {
     return;
-
+  }
   self notify("grenade_debug");
   self endon("grenade_debug");
   self endon("killanimscript");
   self endon("death");
   endtime = gettime() + 1000 * duration;
 
-  while (gettime() < endtime) {
+  while(gettime() < endtime) {
     print3d(self getShootAtPos() + (0, 0, 10), state);
-    if(isdefined(showMissReason) && isdefined(self.grenadeMissReason))
+    if(isDefined(showMissReason) && isDefined(self.grenadeMissReason))
       print3d(self getShootAtPos() + (0, 0, 0), "Failed: " + self.grenadeMissReason);
-    else if(isdefined(self.activeGrenadeTimer))
+    else if(isDefined(self.activeGrenadeTimer))
       print3d(self getShootAtPos() + (0, 0, 0), "Timer: " + getGrenadeTimerDebugName(self.activeGrenadeTimer));
     wait .05;
   }
@@ -916,26 +921,25 @@ setGrenadeMissReason(reason) {
     return;
   self.grenadeMissReason = reason;
 }
-# /
 
-  TryGrenadePosProc(throwingAt, destination, optionalAnimation, armOffset) {
-    // Dont throw a grenade right near you or your buddies
-    if(!(self isGrenadePosSafe(throwingAt, destination)))
-      return false;
-    else if(distanceSquared(self.origin, destination) < 200 * 200)
-      return false;
+TryGrenadePosProc(throwingAt, destination, optionalAnimation, armOffset) {
+  // Dont throw a grenade right near you or your buddies
+  if(!(self isGrenadePosSafe(throwingAt, destination)))
+    return false;
+  else if(distanceSquared(self.origin, destination) < 200 * 200)
+    return false;
 
-    //prof_begin( "TryGrenadePosProc" );	
+  //prof_begin( "TryGrenadePosProc" );	
 
-    trace = physicsTrace(destination + (0, 0, 1), destination + (0, 0, -500));
-    if(trace == destination + (0, 0, -500))
-      return false;
-    trace += (0, 0, .1); // ensure just above ground
+  trace = physicsTrace(destination + (0, 0, 1), destination + (0, 0, -500));
+  if(trace == destination + (0, 0, -500))
+    return false;
+  trace += (0, 0, .1); // ensure just above ground
 
-    //prof_end( "TryGrenadePosProc" );	
+  //prof_end( "TryGrenadePosProc" );	
 
-    return TryGrenadeThrow(throwingAt, trace, optionalAnimation, armOffset);
-  }
+  return TryGrenadeThrow(throwingAt, trace, optionalAnimation, armOffset);
+}
 
 TryGrenade(throwingAt, optionalAnimation) {
   if(self.weapon == "mg42" || self.grenadeammo <= 0)
@@ -948,26 +952,24 @@ TryGrenade(throwingAt, optionalAnimation) {
   if(!grenadeCoolDownElapsed(throwingAt))
     return false;
 
-  /#
   self thread grenadeDebug("Tried grenade throw", 4, true);
-  # /
 
-    armOffset = getGrenadeThrowOffset(optionalAnimation);
+  armOffset = getGrenadeThrowOffset(optionalAnimation);
 
-  if(isdefined(self.enemy) && throwingAt == self.enemy) {
+  if(isDefined(self.enemy) && throwingAt == self.enemy) {
     if(!checkGrenadeThrowDist()) {
-      /# self setGrenadeMissReason( "Too close or too far" ); #/
+      /# self setGrenadeMissReason( "Too close or too far" );
       return false;
     }
 
     if(isPlayer(self.enemy) && self.enemy isPlayerDown()) {
-      /# self setGrenadeMissReason( "Enemy is downed player" ); #/
+      /# self setGrenadeMissReason( "Enemy is downed player" );
       return false;
     }
 
     if(self canSeeEnemyFromExposed()) {
       if(!(self isGrenadePosSafe(throwingAt, throwingAt.origin))) {
-        /# self setGrenadeMissReason( "Teammates near target" ); #/
+        /# self setGrenadeMissReason( "Teammates near target" );
         return false;
       }
       return TryGrenadeThrow(throwingAt, undefined, optionalAnimation, armOffset);
@@ -976,13 +978,13 @@ TryGrenade(throwingAt, optionalAnimation) {
     } else {
       // hopefully we can get through a grenade hint or something
       if(!(self isGrenadePosSafe(throwingAt, throwingAt.origin))) {
-        /# self setGrenadeMissReason( "Teammates near target" ); #/
+        /# self setGrenadeMissReason( "Teammates near target" );
         return false;
       }
       return TryGrenadeThrow(throwingAt, undefined, optionalAnimation, armOffset);
     }
 
-    /# self setGrenadeMissReason( "Don't know where to throw" ); #/
+    /# self setGrenadeMissReason( "Don't know where to throw" );
     return false; // didn't know where to throw!
   } else {
     return TryGrenadePosProc(throwingAt, throwingAt.origin, optionalAnimation, armOffset);
@@ -991,12 +993,12 @@ TryGrenade(throwingAt, optionalAnimation) {
 
 TryGrenadeThrow(throwingAt, destination, optionalAnimation, armOffset, fastThrow, withBounce, throwInThread) {
   // no AI grenade throws in the first 10 seconds, bad during black screen
-  if(gettime() < 10000 && !isdefined(level.ignoreGrenadeSafeTime)) {
-    /# self setGrenadeMissReason( "First 10 seconds of game" ); #/
+  if(gettime() < 10000 && !isDefined(level.ignoreGrenadeSafeTime)) {
+    /# self setGrenadeMissReason( "First 10 seconds of game" );
     return false;
   }
 
-  if(!isdefined(withBounce))
+  if(!isDefined(withBounce))
     withBounce = true;
 
   //prof_begin( "TryGrenadeThrow" );
@@ -1032,9 +1034,9 @@ TryGrenadeThrow(throwingAt, destination, optionalAnimation, armOffset, fastThrow
     return (false);
   }
 
-  if(isdefined(destination)) // Now try to throw it.
+  if(isDefined(destination)) // Now try to throw it.
   {
-    if(!isdefined(fastThrow))
+    if(!isDefined(fastThrow))
       throwvel = self checkGrenadeThrowPos(armOffset, destination, withBounce, "min energy", "min time", "max time");
     else
       throwvel = self checkGrenadeThrowPos(armOffset, destination, withBounce, "min time", "min energy");
@@ -1050,7 +1052,7 @@ TryGrenadeThrow(throwingAt, destination, optionalAnimation, armOffset, fastThrow
     }
 
     assert(self.enemy == throwingAt);
-    if(!isdefined(fastThrow))
+    if(!isDefined(fastThrow))
       throwvel = self checkGrenadeThrow(armOffset, randomRange, "min energy", "min time", "max time");
     else
       throwvel = self checkGrenadeThrow(armOffset, randomRange, "min time", "min energy");
@@ -1059,20 +1061,18 @@ TryGrenadeThrow(throwingAt, destination, optionalAnimation, armOffset, fastThrow
   // the grenade checks are slow. don't do it too often.
   self.a.nextGrenadeTryTime = gettime() + randomintrange(1000, 2000);
 
-  if(isdefined(throwvel)) {
-    if(!isdefined(self.oldGrenAwareness))
+  if(isDefined(throwvel)) {
+    if(!isDefined(self.oldGrenAwareness))
       self.oldGrenAwareness = self.grenadeawareness;
     self.grenadeawareness = 0; // so we dont respond to nearby grenades while throwing one
 
-    /#
     if(getdebugdvar("anim_debug") == "1")
       thread animscripts\utility::debugPos(destination, "O");
-    # /
 
-      // remember the time we want to delay any future grenade throws to, to avoid throwing too many.
-      // however, for now, only set the timer far enough in the future that it will expire when we throw the grenade.
-      // that way, if the throw fails (maybe due to killanimscript), we'll try again soon.
-      nextGrenadeTimeToUse = self getDesiredGrenadeTimerValue();
+    // remember the time we want to delay any future grenade throws to, to avoid throwing too many.
+    // however, for now, only set the timer far enough in the future that it will expire when we throw the grenade.
+    // that way, if the throw fails (maybe due to killanimscript), we'll try again soon.
+    nextGrenadeTimeToUse = self getDesiredGrenadeTimerValue();
     setGrenadeTimer(self.activeGrenadeTimer, min(gettime() + 3000, nextGrenadeTimeToUse));
 
     secondGrenadeOfDouble = false;
@@ -1089,24 +1089,22 @@ TryGrenadeThrow(throwingAt, destination, optionalAnimation, armOffset, fastThrow
       }
     }
 
-    /#
     if(getdvar("grenade_spam") == "on")
       nextGrenadeTimeToUse = 0;
-    # /
 
-      //prof_end( "TryGrenadeThrow" );
-      if(isdefined(throwInThread))
-        thread DoGrenadeThrow(throw_anim, throwVel, nextGrenadeTimeToUse, secondGrenadeOfDouble);
-      else
-        DoGrenadeThrow(throw_anim, throwVel, nextGrenadeTimeToUse, secondGrenadeOfDouble);
+    //prof_end( "TryGrenadeThrow" );
+    if(isDefined(throwInThread))
+      thread DoGrenadeThrow(throw_anim, throwVel, nextGrenadeTimeToUse, secondGrenadeOfDouble);
+    else
+      DoGrenadeThrow(throw_anim, throwVel, nextGrenadeTimeToUse, secondGrenadeOfDouble);
 
     return true;
   } else {
     /# self setGrenadeMissReason( "Couldn't find trajectory" ); #/ /
     #
-    if(getdebugdvar("debug_grenademiss") == "on" && isdefined(destination))
+    if(getdebugdvar("debug_grenademiss") == "on" && isDefined(destination))
       thread grenadeLine(armoffset, destination);
-    # /
+
   }
 
   //prof_end( "TryGrenadeThrow" );
@@ -1121,14 +1119,13 @@ reduceGIPTPOnKillanimscript(throwingAt) {
 
 DoGrenadeThrow(throw_anim, throwVel, nextGrenadeTimeToUse, secondGrenadeOfDouble) {
   self endon("killanimscript");
-  /#
+
   self thread grenadeDebug("Starting throw", 3);
-  # /
 
-    //prof_begin( "DoGrenadeThrow" );
+  //prof_begin( "DoGrenadeThrow" );
 
-    if(self.script == "combat" || self.script == "move")
-      self orientmode("face direction", throwVel);
+  if(self.script == "combat" || self.script == "move")
+    self orientmode("face direction", throwVel);
 
   self animscripts\battleChatter_ai::evaluateAttackEvent(self.grenadeWeapon);
   self notify("stop_aiming_at_enemy");
@@ -1141,15 +1138,16 @@ DoGrenadeThrow(throw_anim, throwVel, nextGrenadeTimeToUse, secondGrenadeOfDouble
   model = getGrenadeModel();
 
   attachside = "none";
-  for (;;) {
+  for(;;) {
     self waittill("throwanim", notetrack);
     //prof_begin( "DoGrenadeThrow" );	
     if(notetrack == "grenade_left" || notetrack == "grenade_right") {
       attachside = attachGrenadeModel(model, "TAG_INHAND");
       self.isHoldingGrenade = true;
     }
-    if(notetrack == "grenade_throw" || notetrack == "grenade throw")
+    if(notetrack == "grenade_throw" || notetrack == "grenade throw") {
       break;
+    }
     assert(notetrack != "end"); // we shouldn't hit "end" until after we've hit "grenade_throw"!
     if(notetrack == "end") // failsafe
     {
@@ -1160,12 +1158,11 @@ DoGrenadeThrow(throw_anim, throwVel, nextGrenadeTimeToUse, secondGrenadeOfDouble
     }
   }
 
-  /#
   if(getdebugdvar("debug_grenadehand") == "on") {
     tags = [];
     numTags = self getAttachSize();
     emptySlot = [];
-    for (i = 0; i < numTags; i++) {
+    for(i = 0; i < numTags; i++) {
       name = self getAttachModelName(i);
       if(issubstr(name, "weapon")) {
         tagName = self getAttachTagname(i);
@@ -1174,7 +1171,7 @@ DoGrenadeThrow(throw_anim, throwVel, nextGrenadeTimeToUse, secondGrenadeOfDouble
       }
     }
 
-    for (i = 0; i < tags.size; i++) {
+    for(i = 0; i < tags.size; i++) {
       emptySlot[tags[i]]++;
       if(emptySlot[tags[i]] < 2)
         continue;
@@ -1183,13 +1180,10 @@ DoGrenadeThrow(throw_anim, throwVel, nextGrenadeTimeToUse, secondGrenadeOfDouble
       break;
     }
   }
-  # /
 
-    /#
   self thread grenadeDebug("Threw", 5);
-  # /
 
-    self notify("dont_reduce_giptp_on_killanimscript");
+  self notify("dont_reduce_giptp_on_killanimscript");
 
   if(self usingPlayerGrenadeTimer()) {
     // give the grenade some time to get to the player.
@@ -1251,25 +1245,23 @@ watchGrenadeTowardsPlayer(player, nextGrenadeTimeToUse) {
 watchGrenadeTowardsPlayerInternal(nextGrenadeTimeToUse) {
   // give the grenade at least 5 seconds to land
   activeGrenadeTimer = self.activeGrenadeTimer;
-  timeoutObj = spawnstruct();
+  timeoutObj = spawnStruct();
   timeoutObj thread watchGrenadeTowardsPlayerTimeout(5);
   timeoutObj endon("watchGrenadeTowardsPlayerTimeout");
 
   type = self.grenadeWeapon;
 
   grenade = self getGrenadeIThrew();
-  if(!isdefined(grenade)) {
+  if(!isDefined(grenade)) {
     // the throw failed. maybe we died. =(
     return;
   }
 
   setGrenadeTimer(activeGrenadeTimer, min(gettime() + 5000, nextGrenadeTimeToUse));
 
-  /#
   grenade thread grenadeDebug("Incoming", 5);
-  # /
 
-    goodRadiusSqrd = 250 * 250;
+  goodRadiusSqrd = 250 * 250;
   giveUpRadiusSqrd = 400 * 400;
   if(type == "flash_grenade") {
     goodRadiusSqrd = 900 * 900;
@@ -1280,35 +1272,34 @@ watchGrenadeTowardsPlayerInternal(nextGrenadeTimeToUse) {
 
   // wait for grenade to settle
   prevorigin = grenade.origin;
-  while (1) {
+  while(1) {
     wait .1;
 
-    if(!isdefined(grenade))
+    if(!isDefined(grenade)) {
       break;
+    }
 
     if(distanceSquared(grenade.origin, prevorigin) < 400) // sqr(20)
     {
-      /#
       grenade thread grenadeDebug("Landed", 5);
-      # /
-        // grenade is stationary. check if it's near any players
-        newPlayersToCheck = [];
-      for (i = 0; i < playersToCheck.size; i++) {
+
+      // grenade is stationary. check if it's near any players
+      newPlayersToCheck = [];
+      for(i = 0; i < playersToCheck.size; i++) {
         player = playersToCheck[i];
         distSqrd = distanceSquared(grenade.origin, player.origin);
         if(distSqrd < goodRadiusSqrd) {
-          /#
           grenade thread grenadeDebug("Landed near player", 5);
-          # /
 
-            player grenadeLandedNearPlayer(activeGrenadeTimer, nextGrenadeTimeToUse);
+          player grenadeLandedNearPlayer(activeGrenadeTimer, nextGrenadeTimeToUse);
         } else if(distSqrd < giveUpRadiusSqrd) {
           newPlayersToCheck[newPlayersToCheck.size] = player;
         }
       }
       playersToCheck = newPlayersToCheck;
-      if(playersToCheck.size == 0)
+      if(playersToCheck.size == 0) {
         break;
+      }
     }
     prevorigin = grenade.origin;
   }
@@ -1353,10 +1344,10 @@ detachGrenadeOnScriptChange(model, tag) {
   self endon("stop grenade check");
   self waittill("killanimscript");
 
-  if(!isdefined(self)) // we may be dead but still defined. if we're not defined, we were probably deleted.
+  if(!isDefined(self)) // we may be dead but still defined. if we're not defined, we were probably deleted.
     return;
 
-  if(isdefined(self.oldGrenAwareness)) {
+  if(isDefined(self.oldGrenAwareness)) {
     self.grenadeawareness = self.oldGrenAwareness;
     self.oldGrenAwareness = undefined;
   }
@@ -1365,7 +1356,7 @@ detachGrenadeOnScriptChange(model, tag) {
 }
 
 offsetToOrigin(start) {
-  forward = anglestoforward(self.angles);
+  forward = anglesToForward(self.angles);
   right = anglestoright(self.angles);
   up = anglestoup(self.angles);
   forward = vector_multiply(forward, start[0]);
@@ -1379,7 +1370,7 @@ grenadeLine(start, end) {
   level endon("armoffset");
 
   start = self.origin + offsetToOrigin(start);
-  for (;;) {
+  for(;;) {
     line(start, end, (1, 0, 1));
     print3d(start, start, (0.2, 0.5, 1.0), 1, 1); // origin, text, RGB, alpha, scale
     print3d(end, end, (0.2, 0.5, 1.0), 1, 1); // origin, text, RGB, alpha, scale
@@ -1411,7 +1402,7 @@ dropGrenade() {
 
 lookForBetterCover() {
   // don't do cover searches if we don't have an enemy.
-  if(!isdefined(self.enemy))
+  if(!isDefined(self.enemy))
     return false;
 
   if(self.fixedNode || self.doingAmbush)
@@ -1421,7 +1412,7 @@ lookForBetterCover() {
 
   node = self getBestCoverNodeIfAvailable();
 
-  if(isdefined(node)) {
+  if(isDefined(node)) {
     //prof_end( "lookForBetterCover" );
     return useCoverNodeIfPossible(node);
   }
@@ -1434,20 +1425,20 @@ getBestCoverNodeIfAvailable() {
   //prof_begin( "getBestCoverNodeIfAvailable" );
   node = self FindBestCoverNode();
 
-  if(!isdefined(node)) {
+  if(!isDefined(node)) {
     //prof_end( "getBestCoverNodeIfAvailable" );
     return undefined;
   }
 
   currentNode = self GetClaimedNode();
-  if(isdefined(currentNode) && node == currentNode) {
+  if(isDefined(currentNode) && node == currentNode) {
     //prof_end( "getBestCoverNodeIfAvailable" );
     return undefined;
   }
 
   // work around FindBestCoverNode() resetting my .node in rare cases involving overlapping nodes
   // This prevents us from thinking we've found a new node somewhere when in reality it's the one we're already at, so we won't abort our script.
-  if(isdefined(self.coverNode) && node == self.coverNode) {
+  if(isDefined(self.coverNode) && node == self.coverNode) {
     //prof_end( "getBestCoverNodeIfAvailable" );
     return undefined;
   }
@@ -1465,7 +1456,7 @@ useCoverNodeIfPossible(node) {
   if(self UseCoverNode(node)) {
     return true;
   } else {
-    /#self thread DebugFailedCoverUsage( node );#/
+    /#self thread DebugFailedCoverUsage( node );
   }
 
   self.keepClaimedNodeIfValid = oldKeepNodeInGoal;
@@ -1474,57 +1465,55 @@ useCoverNodeIfPossible(node) {
   return false;
 }
 
-/#
 DebugFailedCoverUsage(node) {
   if(getdvar("scr_debugfailedcover") == "")
     setdvar("scr_debugfailedcover", "0");
   if(getdebugdvarint("scr_debugfailedcover") == 1) {
     self endon("death");
-    for (i = 0; i < 20; i++) {
+    for(i = 0; i < 20; i++) {
       line(self.origin, node.origin);
       print3d(node.origin, "failed");
       wait .05;
     }
   }
 }
-# /
 
-  // this function seems okish,
-  // but the idea behind FindReacquireNode() is that you call it once,
-  // and then call GetReacquireNode() many times until it returns undefined.
-  // if we're just taking the first node (the best), we might as well just be using
-  // FindBestCoverNode().
-  /*
-  tryReacquireNode()
-  {
-  	self FindReacquireNode();
-  	node = self GetReacquireNode();
-  	if(!isdefined(node))
-  		return false;
-  	return (self UseReacquireNode(node));
-  }
-  */
+// this function seems okish,
+// but the idea behind FindReacquireNode() is that you call it once,
+// and then call GetReacquireNode() many times until it returns undefined.
+// if we're just taking the first node (the best), we might as well just be using
+// FindBestCoverNode().
+/*
+tryReacquireNode()
+{
+	self FindReacquireNode();
+	node = self GetReacquireNode();
+	if(!isDefined(node))
+		return false;
+	return (self UseReacquireNode(node));
+}
+*/
 
-  shouldHelpAdvancingTeammate() {
-    // if teammate advanced recently
-    if(level.advanceToEnemyGroup[self.team] > 0 && level.advanceToEnemyGroup[self.team] < level.advanceToEnemyGroupMax) {
-      if(gettime() - level.lastAdvanceToEnemyTime[self.team] > 4000)
-        return false;
+shouldHelpAdvancingTeammate() {
+  // if teammate advanced recently
+  if(level.advanceToEnemyGroup[self.team] > 0 && level.advanceToEnemyGroup[self.team] < level.advanceToEnemyGroupMax) {
+    if(gettime() - level.lastAdvanceToEnemyTime[self.team] > 4000)
+      return false;
 
-      leadAttacker = level.lastAdvanceToEnemyAttacker[self.team];
-      nearLeadAttacker = isdefined(leadAttacker) && distanceSquared(self.origin, leadAttacker.origin) < 256 * 256;
+    leadAttacker = level.lastAdvanceToEnemyAttacker[self.team];
+    nearLeadAttacker = isDefined(leadAttacker) && distanceSquared(self.origin, leadAttacker.origin) < 256 * 256;
 
-      if((nearLeadAttacker || distanceSquared(self.origin, level.lastAdvanceToEnemySrc[self.team]) < 256 * 256) &&
-        (!isdefined(self.enemy) || distanceSquared(self.enemy.origin, level.lastAdvanceToEnemyDest[self.team]) < 512 * 512)) {
-        return true;
-      }
+    if((nearLeadAttacker || distanceSquared(self.origin, level.lastAdvanceToEnemySrc[self.team]) < 256 * 256) &&
+      (!isDefined(self.enemy) || distanceSquared(self.enemy.origin, level.lastAdvanceToEnemyDest[self.team]) < 512 * 512)) {
+      return true;
     }
-
-    return false;
   }
+
+  return false;
+}
 
 checkAdvanceOnEnemyConditions() {
-  if(!isdefined(level.lastAdvanceToEnemyTime[self.team]))
+  if(!isDefined(level.lastAdvanceToEnemyTime[self.team]))
     return false;
 
   if(shouldHelpAdvancingTeammate())
@@ -1546,7 +1535,7 @@ checkAdvanceOnEnemyConditions() {
 }
 
 tryRunningToEnemy(ignoreSuppression) {
-  if(!isdefined(self.enemy))
+  if(!isDefined(self.enemy))
     return false;
 
   if(self.fixedNode)
@@ -1596,18 +1585,17 @@ tryRunningToEnemy(ignoreSuppression) {
 delayedBadplace(org) {
   self endon("death");
   wait(0.5);
-  /#
+
   if(getdebugdvar("debug_displace") == "on")
     thread badplacer(5, org, 16);
-  # /
 
-    string = "" + anim.badPlaceInt;
+  string = "" + anim.badPlaceInt;
   badplace_cylinder(string, 5, org, 16, 64, self.team);
   anim.badPlaces[anim.badPlaces.size] = string;
   if(anim.badPlaces.size >= 10) // too many badplaces, delete the oldest one and then remove it from the array
   {
     newArray = [];
-    for (i = 1; i < anim.badPlaces.size; i++)
+    for(i = 1; i < anim.badPlaces.size; i++)
       newArray[newArray.size] = anim.badPlaces[i];
     badplace_delete(anim.badPlaces[0]);
     anim.badPlaces = newArray;
@@ -1624,8 +1612,8 @@ valueIsWithin(value, min, max) {
 }
 
 getGunYawToShootEntOrPos() {
-  if(!isdefined(self.shootPos)) {
-    assert(!isdefined(self.shootEnt));
+  if(!isDefined(self.shootPos)) {
+    assert(!isDefined(self.shootEnt));
     return 0;
   }
 
@@ -1635,8 +1623,8 @@ getGunYawToShootEntOrPos() {
 }
 
 getGunPitchToShootEntOrPos() {
-  if(!isdefined(self.shootPos)) {
-    assert(!isdefined(self.shootEnt));
+  if(!isDefined(self.shootPos)) {
+    assert(!isDefined(self.shootEnt));
     return 0;
   }
 
@@ -1646,7 +1634,7 @@ getGunPitchToShootEntOrPos() {
 }
 
 getPitchToEnemy() {
-  if(!isdefined(self.enemy))
+  if(!isDefined(self.enemy))
     return 0;
 
   vectorToEnemy = self.enemy getshootatpos() - self getshootatpos();
@@ -1657,7 +1645,7 @@ getPitchToEnemy() {
 }
 
 getPitchToSpot(spot) {
-  if(!isdefined(spot))
+  if(!isDefined(spot))
     return 0;
 
   vectorToEnemy = spot - self getshootatpos();
@@ -1672,7 +1660,7 @@ watchReloading() {
   self.isreloading = false;
   self.lastReloadStartTime = -1;
 
-  while (1) {
+  while(1) {
     self waittill("reload_start");
     self.isreloading = true;
     self.lastReloadStartTime = GetTime();
@@ -1687,15 +1675,17 @@ waittillReloadFinished() {
   self endon("reloadtimeout");
   self endon("weapon_taken");
 
-  while (1) {
+  while(1) {
     self waittill("reload");
 
     weap = self getCurrentWeapon();
-    if(weap == "none")
+    if(weap == "none") {
       break;
+    }
 
-    if(self getCurrentWeaponClipAmmo() >= weaponClipSize(weap))
+    if(self getCurrentWeaponClipAmmo() >= weaponClipSize(weap)) {
       break;
+    }
   }
   self notify("reloadtimeout");
 }
@@ -1726,27 +1716,27 @@ monitorFlash() {
   self endon("death");
   self endon("stop_monitoring_flash");
 
-  while (1) {
+  while(1) {
     // "flashbang" is code notifying that the AI can be flash banged
     // "doFlashBanged" is sent below if the AI should do flash banged behavior
     self waittill("flashbang", origin, amount_distance, amount_angle, attacker, attackerteam);
 
-    if(isDefined(self.flashBangImmunity) && self.flashBangImmunity)
+    if(isDefined(self.flashBangImmunity) && self.flashBangImmunity) {
       continue;
-
-    if(isdefined(self.script_immunetoflash) && self.script_immunetoflash != 0)
+    }
+    if(isDefined(self.script_immunetoflash) && self.script_immunetoflash != 0) {
       continue;
-
-    if(isdefined(self.onSnowMobile))
+    }
+    if(isDefined(self.onSnowMobile)) {
       continue;
-
-    if(isdefined(self.team) && isdefined(attackerteam) && self.team == attackerteam) {
+    }
+    if(isDefined(self.team) && isDefined(attackerteam) && self.team == attackerteam) {
       // AI get a break when their own team flashbangs them.
       amount_distance = 3 * (amount_distance - .75);
-      if(amount_distance < 0)
+      if(amount_distance < 0) {
         continue;
-
-      if(isdefined(self.teamFlashbangImmunity))
+      }
+      if(isDefined(self.teamFlashbangImmunity))
         continue;
     }
 
@@ -1759,9 +1749,9 @@ monitorFlash() {
 
     duration = 4.5 * amount_distance;
 
-    if(duration < 0.25)
+    if(duration < 0.25) {
       continue;
-
+    }
     self.flashingTeam = attackerteam;
     self flashBangStart(duration);
     self notify("doFlashBanged", origin, attacker);
@@ -1795,7 +1785,7 @@ getRandomCoverMode(modes) {
     return modes[0];
 
   // 20% chance of attempting to repeat same corner mode
-  if(isdefined(self.a.prevAttack) && randomint(100) > 20) {
+  if(isDefined(self.a.prevAttack) && randomint(100) > 20) {
     foreach(i, mode in modes) {
       if(mode == self.a.prevAttack) {
         if(i < modes.size - 1)
@@ -1812,25 +1802,25 @@ getRandomCoverMode(modes) {
 
 player_sees_my_scope() {
   // player sees the scope glint if the dot is within a certain range
-  start = self geteye();
+  start = self getEye();
   foreach(player in level.players) {
-    if(!self cansee(player))
+    if(!self cansee(player)) {
       continue;
-
-    end = player GetEye();
+    }
+    end = player getEye();
 
     angles = VectorToAngles(start - end);
-    forward = AnglesToForward(angles);
+    forward = anglesToForward(angles);
     player_angles = player GetPlayerAngles();
-    player_forward = AnglesToForward(player_angles);
+    player_forward = anglesToForward(player_angles);
 
     dot = VectorDot(forward, player_forward);
-    if(dot < 0.805)
+    if(dot < 0.805) {
       continue;
-
-    if(cointoss() && dot >= 0.996)
+    }
+    if(cointoss() && dot >= 0.996) {
       continue;
-
+    }
     return true;
   }
   return false;

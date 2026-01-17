@@ -2898,5 +2898,4 @@ main() {
   ent.v["delay"] = 3;
   ent.v["exploder"] = "heli_fire";
   ent.v["loopsound"] = "nil";
-
 }

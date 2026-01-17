@@ -92,7 +92,7 @@ init_box_respin(chest, player) {
 }
 
 box_respin_think(chest, player) {
-  respin_hack = spawnstruct();
+  respin_hack = spawnStruct();
   respin_hack.origin = self.origin + vectorscale((0, 0, 1), 24.0);
   respin_hack.radius = 48;
   respin_hack.height = 72;
@@ -142,7 +142,7 @@ init_box_respin_respin(chest, player) {
 }
 
 box_respin_respin_think(chest, player) {
-  respin_hack = spawnstruct();
+  respin_hack = spawnStruct();
   respin_hack.origin = self.origin + vectorscale((0, 0, 1), 24.0);
   respin_hack.radius = 48;
   respin_hack.height = 72;
@@ -177,9 +177,9 @@ respin_respin_box(hacker) {
 
 fake_weapon_powerup_thread(weapon1, weapon2) {
   weapon1 endon("death");
-  playfxontag(level._effect["powerup_on_solo"], weapon1, "tag_origin");
+  playFXOnTag(level._effect["powerup_on_solo"], weapon1, "tag_origin");
   playsoundatposition("zmb_spawn_powerup", weapon1.origin);
-  weapon1 playloopsound("zmb_spawn_powerup_loop");
+  weapon1 playLoopSound("zmb_spawn_powerup_loop");
   self thread fake_weapon_powerup_timeout(weapon1, weapon2);
 
   while(isDefined(weapon1)) {
@@ -256,7 +256,7 @@ init_summon_box(create) {
       self._summon_hack_struct = undefined;
     }
 
-    struct = spawnstruct();
+    struct = spawnStruct();
     struct.origin = self.chest_box.origin + vectorscale((0, 0, 1), 24.0);
     struct.radius = 48;
     struct.height = 72;

@@ -16,11 +16,11 @@ main() {
     maps\mp\_compass::setupMiniMap("compass_map_mp_mountain");
   }
   maps\mp\gametypes\_teamset_winterspecops::level_init();
-  game["strings"]["war_callsign_a"] = & "MPUI_CALLSIGN_MAPNAME_A";
-  game["strings"]["war_callsign_b"] = & "MPUI_CALLSIGN_MAPNAME_B";
-  game["strings"]["war_callsign_c"] = & "MPUI_CALLSIGN_MAPNAME_C";
-  game["strings"]["war_callsign_d"] = & "MPUI_CALLSIGN_MAPNAME_D";
-  game["strings"]["war_callsign_e"] = & "MPUI_CALLSIGN_MAPNAME_E";
+  game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_MAPNAME_A";
+  game["strings"]["war_callsign_b"] = &"MPUI_CALLSIGN_MAPNAME_B";
+  game["strings"]["war_callsign_c"] = &"MPUI_CALLSIGN_MAPNAME_C";
+  game["strings"]["war_callsign_d"] = &"MPUI_CALLSIGN_MAPNAME_D";
+  game["strings"]["war_callsign_e"] = &"MPUI_CALLSIGN_MAPNAME_E";
   game["strings_menu"]["war_callsign_a"] = "@MPUI_CALLSIGN_MAPNAME_A";
   game["strings_menu"]["war_callsign_b"] = "@MPUI_CALLSIGN_MAPNAME_B";
   game["strings_menu"]["war_callsign_c"] = "@MPUI_CALLSIGN_MAPNAME_C";
@@ -58,10 +58,10 @@ gondola_sway() {
     randomSwingAngle = RandomFloatRange(2, 5);
     randomSwingTime = RandomFloatRange(2, 3);
     gondola_cab RotateTo((randomSwingAngle * 0.5, (randomSwingAngle * 0.6) + 90, randomSwingAngle * .8), randomSwingTime, randomSwingTime * 0.3, randomSwingTime * 0.3);
-    gondola_cab playsound("amb_gondola_swing");
+    gondola_cab playSound("amb_gondola_swing");
     wait(randomSwingTime);
     gondola_cab RotateTo(((randomSwingAngle * 0.5) * -1, (randomSwingAngle * -1 * 0.6) + 90, randomSwingAngle * .8 * -1), randomSwingTime, randomSwingTime * 0.3, randomSwingTime * 0.3);
-    gondola_cab playsound("amb_gondola_swing_back");
+    gondola_cab playSound("amb_gondola_swing_back");
     wait(randomSwingTime);
   }
 }

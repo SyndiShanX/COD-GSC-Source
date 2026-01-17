@@ -530,9 +530,7 @@ spawnintermission(usedefaultcallback) {
   if(isDefined(usedefaultcallback) && usedefaultcallback)
     maps\mp\gametypes_zm\_globallogic_defaults::default_onspawnintermission();
   else
-    [
-      [level.onspawnintermission]
-    ]();
+    [[level.onspawnintermission]]();
 
   self setdepthoffield(0, 128, 512, 4000, 6, 1.8);
 }
@@ -708,9 +706,7 @@ waitandspawnclient(timealreadypassed) {
       spawnorigin = self.origin + vectorscale((0, 0, 1), 60.0);
       spawnangles = self.angles;
 
-      if(isDefined(level.useintermissionpointsonwavespawn) && [
-          [level.useintermissionpointsonwavespawn]
-        ]() == 1) {
+      if(isDefined(level.useintermissionpointsonwavespawn) && [[level.useintermissionpointsonwavespawn]]() == 1) {
         spawnpoint = maps\mp\gametypes_zm\_spawnlogic::getrandomintermissionpoint();
 
         if(isDefined(spawnpoint)) {

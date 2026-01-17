@@ -53,7 +53,7 @@ function function_8e835895(einflictor, attacker, idamage, smeansofdeath, weapon,
         if(smeansofdeath === "MOD_DROWN") {
           self thread function_514913aa(einflictor, attacker, idamage, weapon, vdir, shitloc);
         } else {
-          if(isdefined(attacker) && attacker.classname == "trigger_hurt" && isdefined(attacker.script_noteworthy) && attacker.script_noteworthy == "fall_death") {
+          if(isDefined(attacker) && attacker.classname == "trigger_hurt" && isDefined(attacker.script_noteworthy) && attacker.script_noteworthy == "fall_death") {
             self thread function_fd6ad16(einflictor, attacker, idamage, weapon, vdir, shitloc);
           } else {
             if(smeansofdeath === "MOD_MELEE" || smeansofdeath === "MOD_MELEE_WEAPON_BUTT") {
@@ -109,9 +109,9 @@ function function_c003e53f(vdir, var_f120d111, var_f40ed68d, var_9aadeff9, var_9
   position = original_position;
   angles = self getplayerangles();
   angles = (0, absangleclamp360(angles[1]), absangleclamp360(angles[2]));
-  forwarddir = anglestoforward(angles);
+  forwarddir = anglesToForward(angles);
   vector = position + forwarddir;
-  if(isdefined(vdir)) {
+  if(isDefined(vdir)) {
     vdir = vdir * -1;
     target_angles = vectortoangles(vdir);
   } else {
@@ -120,25 +120,25 @@ function function_c003e53f(vdir, var_f120d111, var_f40ed68d, var_9aadeff9, var_9
     vdir = (forwarddir[0], forwarddir[1], -1);
     vdir = vectornormalize(vdir);
   }
-  if(isdefined(lookdir)) {
+  if(isDefined(lookdir)) {
     target_angles = vectortoangles(lookdir);
   }
-  if(!isdefined(var_f06dc6a2)) {
+  if(!isDefined(var_f06dc6a2)) {
     var_f06dc6a2 = absangleclamp360(target_angles[0]);
   }
-  if(!isdefined(var_b633f381)) {
+  if(!isDefined(var_b633f381)) {
     var_b633f381 = absangleclamp360(target_angles[2]);
   }
   target_angles = (var_f06dc6a2, absangleclamp360(target_angles[1]), var_b633f381);
   angles = (absangleclamp360(target_angles[0]), absangleclamp360(target_angles[1]), angleclamp180(target_angles[2]));
-  if(isdefined(var_f40ed68d) && vdir[0] != 0) {
+  if(isDefined(var_f40ed68d) && vdir[0] != 0) {
     var_505f8faa = 0;
   } else {
     var_f40ed68d = 0;
     var_933bfc9b = 0;
     var_505f8faa = 1;
   }
-  if(isdefined(var_9aadeff9) && vdir[2] != 0) {
+  if(isDefined(var_9aadeff9) && vdir[2] != 0) {
     var_582dff76 = 0;
   } else {
     var_9aadeff9 = 0;
@@ -147,8 +147,8 @@ function function_c003e53f(vdir, var_f120d111, var_f40ed68d, var_9aadeff9, var_9
   }
   forwardvec = (vdir[0], vdir[1], 0);
   forwardvec = vectornormalize(forwardvec);
-  while (!(isdefined(var_505f8faa) && var_505f8faa && (isdefined(var_582dff76) && var_582dff76))) {
-    if(!(isdefined(var_505f8faa) && var_505f8faa)) {
+  while(!(isDefined(var_505f8faa) && var_505f8faa && (isDefined(var_582dff76) && var_582dff76))) {
+    if(!(isDefined(var_505f8faa) && var_505f8faa)) {
       var_e79cd0f2 = vectorscale(forwardvec, var_933bfc9b);
       var_cdbed540 = length(var_e79cd0f2);
       var_206341c9 = position - original_position;
@@ -165,7 +165,7 @@ function function_c003e53f(vdir, var_f120d111, var_f40ed68d, var_9aadeff9, var_9
         var_505f8faa = 1;
       }
     }
-    if(!(isdefined(var_582dff76) && var_582dff76)) {
+    if(!(isDefined(var_582dff76) && var_582dff76)) {
       var_553c9550 = var_67ca400f;
       var_6775da6e = abs(original_position[2] - position[2]);
       if((var_6775da6e + var_553c9550) >= var_9aadeff9) {
@@ -186,7 +186,7 @@ function function_c003e53f(vdir, var_f120d111, var_f40ed68d, var_9aadeff9, var_9
   }
   self cameraactivate(1);
   is_falling = is_falling(position);
-  if(isdefined(var_213955be) && var_213955be || (!(isdefined(is_falling) && is_falling))) {
+  if(isDefined(var_213955be) && var_213955be || (!(isDefined(is_falling) && is_falling))) {
     if(var_f120d111 > 0) {
       self startcameratween(var_f120d111, 1);
       self camerasetposition(position, angles);
@@ -195,7 +195,7 @@ function function_c003e53f(vdir, var_f120d111, var_f40ed68d, var_9aadeff9, var_9
       thread function_a0c37dda(position, angles, var_956c7382);
     }
   }
-  if(isdefined(is_falling) && is_falling) {
+  if(isDefined(is_falling) && is_falling) {
     player_speed = self getvelocity()[2];
     var_2fedf129 = length(position - original_position);
     var_e25845de = var_2fedf129 * var_f120d111;
@@ -231,7 +231,7 @@ function function_a0c37dda(position, angles, var_956c7382) {
   self camerasetposition(position, angles);
   self startcameratween(var_2e0ea125, 1);
   wait(var_2e0ea125);
-  if(isdefined(var_956c7382) && var_956c7382) {
+  if(isDefined(var_956c7382) && var_956c7382) {
     function_956c7382(position);
   }
 }
@@ -298,7 +298,7 @@ function function_7a3707a6(einflictor, attacker, idamage, weapon, vdir, shitloc)
   var_f40ed68d = getdvarfloat("cam_explosion_max_f_length", 100);
   var_91ba348e = getdvarfloat("cam_explosion_shake_vector_max", 1);
   lookdir = undefined;
-  if(isdefined(attacker) && attacker != self) {
+  if(isDefined(attacker) && attacker != self) {
     var_7ec6acc8 = (attacker getabsmins() + attacker getabsmaxs()) * 0.5;
     lookdir = var_7ec6acc8 - self.origin;
     lookdir = vectornormalize(lookdir);
@@ -319,7 +319,7 @@ function function_1c006469(einflictor, attacker, idamage, weapon, vdir, shitloc)
   self endon("disconnect");
   self clientfield::set_to_player("player_cam_fire", 1);
   angles = self getplayerangles();
-  forwarddir = anglestoforward(angles);
+  forwarddir = anglesToForward(angles);
   var_9aadeff9 = getdvarfloat("cam_explosion_max_z_length", 50);
   var_67ca400f = getdvarfloat("cam_explosion_position_z_speed", 10);
   sign = self function_22196132();
@@ -335,7 +335,7 @@ function function_514913aa(einflictor, attacker, idamage, weapon, vdir, shitloc)
   self endon("disconnect");
   self clientfield::set_to_player("player_cam_bubbles", 1);
   angles = self getplayerangles();
-  forwarddir = anglestoforward(angles);
+  forwarddir = anglesToForward(angles);
   var_9aadeff9 = getdvarfloat("cam_explosion_max_z_length", 50);
   var_67ca400f = getdvarfloat("cam_explosion_position_z_speed", 10);
   thread function_c003e53f(undefined, 3, 0, var_9aadeff9, 0, var_67ca400f, undefined, undefined, forwarddir);

@@ -52,16 +52,16 @@ isspeaking_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, 
 
 zmbmuslooper() {
   ent = spawn(0, (0, 0, 0), "script_origin");
-  playsound(0, "mus_zmb_gamemode_start", (0, 0, 0));
+  playSound(0, "mus_zmb_gamemode_start", (0, 0, 0));
   wait 10;
-  ent playloopsound("mus_zmb_gamemode_loop", 0.05);
+  ent playLoopSound("mus_zmb_gamemode_loop", 0.05);
   ent thread waitfor_music_stop();
 }
 
 waitfor_music_stop() {
   level waittill("stpm");
   self stoploopsound(0.1);
-  playsound(0, "mus_zmb_gamemode_end", (0, 0, 0));
+  playSound(0, "mus_zmb_gamemode_end", (0, 0, 0));
   wait 1;
   self delete();
 }
@@ -103,7 +103,7 @@ playerexert(localclientnum, exert) {
       id = level.exert_sounds[self.player_exert_id][exert];
   }
 
-  self playsound(localclientnum, id);
+  self playSound(localclientnum, id);
 }
 
 sndvonotifydtp(localclientnum, notifystring) {
@@ -140,26 +140,26 @@ sndmeleeswipe(localclientnum, notifystring) {
       return;
     }
     if(is_true(player.is_player_zombie)) {
-      playsound(0, "zmb_melee_whoosh_zmb_plr", player.origin);
+      playSound(0, "zmb_melee_whoosh_zmb_plr", player.origin);
       continue;
     }
 
     if(currentweapon == "bowie_knife_zm") {
-      playsound(0, "zmb_bowie_swing_plr", player.origin);
+      playSound(0, "zmb_bowie_swing_plr", player.origin);
       continue;
     }
 
     if(currentweapon == "spoon_zm_alcatraz") {
-      playsound(0, "zmb_spoon_swing_plr", player.origin);
+      playSound(0, "zmb_spoon_swing_plr", player.origin);
       continue;
     }
 
     if(currentweapon == "spork_zm_alcatraz") {
-      playsound(0, "zmb_spork_swing_plr", player.origin);
+      playSound(0, "zmb_spork_swing_plr", player.origin);
       continue;
     }
 
-    playsound(0, "zmb_melee_whoosh_plr", player.origin);
+    playSound(0, "zmb_melee_whoosh_plr", player.origin);
   }
 }
 

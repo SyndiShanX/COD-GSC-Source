@@ -10,11 +10,11 @@
 
 function registervehicleblackboardattributes() {
   assert(isvehicle(self), "");
-  registerblackboardattribute(self, "_speed", undefined, & bb_getspeed);
+  registerblackboardattribute(self, "_speed", undefined, &bb_getspeed);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  registerblackboardattribute(self, "_enemy_yaw", undefined, & bb_vehgetenemyyaw);
+  registerblackboardattribute(self, "_enemy_yaw", undefined, &bb_vehgetenemyyaw);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
@@ -27,7 +27,7 @@ function bb_getspeed() {
 
 function bb_vehgetenemyyaw() {
   enemy = self.enemy;
-  if(!isdefined(enemy)) {
+  if(!isDefined(enemy)) {
     return 0;
   }
   toenemyyaw = vehgetpredictedyawtoenemy(self, 0.2);
@@ -35,7 +35,7 @@ function bb_vehgetenemyyaw() {
 }
 
 function vehgetpredictedyawtoenemy(entity, lookaheadtime) {
-  if(isdefined(entity.predictedyawtoenemy) && isdefined(entity.predictedyawtoenemytime) && entity.predictedyawtoenemytime == gettime()) {
+  if(isDefined(entity.predictedyawtoenemy) && isDefined(entity.predictedyawtoenemytime) && entity.predictedyawtoenemytime == gettime()) {
     return entity.predictedyawtoenemy;
   }
   selfpredictedpos = entity.origin;

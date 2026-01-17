@@ -8,7 +8,6 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_trial_white_electric_slide;
 
 autoexec __init__system__() {
@@ -23,7 +22,7 @@ __init__() {
   zm_trial::register_challenge(#"electric_slide", &on_begin, &on_end);
 }
 
-private on_begin(var_b7088c5b, var_5bf91a8, var_d9f1b8f9, var_fc678144) {
+on_begin(var_b7088c5b, var_5bf91a8, var_d9f1b8f9, var_fc678144) {
   switch (getplayers().size) {
     case 1:
       level.var_795dfe46 = zm_trial::function_5769f26a(var_b7088c5b);
@@ -47,7 +46,7 @@ private on_begin(var_b7088c5b, var_5bf91a8, var_d9f1b8f9, var_fc678144) {
   }
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   if(!round_reset) {
     var_696c3b4 = [];
 
@@ -75,7 +74,7 @@ private on_end(round_reset) {
   level.var_795dfe46 = undefined;
 }
 
-private function_729edb5f() {
+function_729edb5f() {
   level endon(#"hash_7646638df88a3656");
 
   while(self.var_795dfe46 < level.var_795dfe46) {

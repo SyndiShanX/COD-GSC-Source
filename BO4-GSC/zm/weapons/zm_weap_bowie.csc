@@ -5,16 +5,15 @@
 
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_maptable;
-
 #namespace zm_weap_bowie;
 
 autoexec __init__system__() {
   system::register(#"bowie_knife", &__init__, &__main__, undefined);
 }
 
-private __init__() {}
+__init__() {}
 
-private __main__() {
+__main__() {
   level.var_8e4168e9 = "bowie_knife";
   level.var_63af3e00 = "bowie_flourish";
   var_57858dd5 = "zombie_fists_bowie";

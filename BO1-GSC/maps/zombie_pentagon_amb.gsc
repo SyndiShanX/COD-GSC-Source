@@ -25,14 +25,14 @@ phone_egg() {
   }
   phone = getEnt(self.target, "targetname");
   if(isDefined(phone)) {
-    blinky = PlayFXOnTag(level._effect["fx_zombie_light_glow_telephone"], phone, "tag_light");
+    blinky = playFXOnTag(level._effect["fx_zombie_light_glow_telephone"], phone, "tag_light");
   }
   self UseTriggerRequireLookAt();
   self SetCursorHint("HINT_NOICON");
   self playLoopSound("zmb_egg_phone_loop");
   self waittill("trigger", player);
   self stopLoopSound(1);
-  player PlaySound("zmb_egg_phone_activate");
+  player playSound("zmb_egg_phone_activate");
   level.phone_counter = level.phone_counter + 1;
   if(level.phone_counter == 3) {
     level pentagon_unlock_doa();

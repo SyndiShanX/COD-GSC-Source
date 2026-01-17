@@ -14,10 +14,10 @@
 #namespace init;
 
 function initweapon(weapon) {
-  self.weaponinfo[weapon.name] = spawnstruct();
+  self.weaponinfo[weapon.name] = spawnStruct();
   self.weaponinfo[weapon.name].position = "none";
   self.weaponinfo[weapon.name].hasclip = 1;
-  if(isdefined(weapon.clipmodel)) {
+  if(isDefined(weapon.clipmodel)) {
     self.weaponinfo[weapon.name].useclip = 1;
   } else {
     self.weaponinfo[weapon.name].useclip = 0;
@@ -25,7 +25,7 @@ function initweapon(weapon) {
 }
 
 function main() {
-  self.a = spawnstruct();
+  self.a = spawnStruct();
   self.a.weaponpos = [];
   if(self.weapon == level.weaponnone) {
     self aiutility::setcurrentweapon(level.weaponnone);
@@ -42,7 +42,7 @@ function main() {
   self initweapon(self.secondaryweapon);
   self initweapon(self.sidearm);
   self.weapon_positions = array("left", "right", "chest", "back");
-  for (i = 0; i < self.weapon_positions.size; i++) {
+  for(i = 0; i < self.weapon_positions.size; i++) {
     self.a.weaponpos[self.weapon_positions[i]] = level.weaponnone;
   }
   self.lastweapon = self.weapon;
@@ -57,7 +57,7 @@ function main() {
   self.a.special = "none";
   self.a.gunhand = "none";
   shared::placeweaponon(self.primaryweapon, "right");
-  if(isdefined(self.secondaryweaponclass) && self.secondaryweaponclass != "none" && self.secondaryweaponclass != "pistol") {
+  if(isDefined(self.secondaryweaponclass) && self.secondaryweaponclass != "none" && self.secondaryweaponclass != "pistol") {
     shared::placeweaponon(self.secondaryweapon, "back");
   }
   self.a.combatendtime = gettime();
@@ -71,7 +71,7 @@ function main() {
   self.sprint = 0;
   self.a.postscriptfunc = undefined;
   self.baseaccuracy = self.accuracy;
-  if(!isdefined(self.script_accuracy)) {
+  if(!isDefined(self.script_accuracy)) {
     self.script_accuracy = 1;
   }
   if(self.team == "axis" || self.team == "team3") {
@@ -112,7 +112,7 @@ function set_anim_playback_rate() {
 
 function trackvelocity() {
   self endon("death");
-  for (;;) {
+  for(;;) {
     self.oldorigin = self.origin;
     wait(0.2);
   }
@@ -128,8 +128,8 @@ function checkapproachangles(transtypes) {
   idealtransangles[8] = 180;
   idealtransangles[9] = -135;
   wait(0.05);
-  for (i = 1; i <= 9; i++) {
-    for (j = 0; j < transtypes.size; j++) {
+  for(i = 1; i <= 9; i++) {
+    for(j = 0; j < transtypes.size; j++) {
       trans = transtypes[j];
       idealadd = 0;
       if(trans == "" || trans == "") {
@@ -137,7 +137,7 @@ function checkapproachangles(transtypes) {
       } else if(trans == "" || trans == "") {
         idealadd = -90;
       }
-      if(isdefined(anim.covertransangles[trans][i])) {
+      if(isDefined(anim.covertransangles[trans][i])) {
         correctangle = angleclamp180(idealtransangles[i] + idealadd);
         actualangle = angleclamp180(anim.covertransangles[trans][i]);
         if((absangleclamp180(actualangle - correctangle)) > 7) {
@@ -146,8 +146,8 @@ function checkapproachangles(transtypes) {
       }
     }
   }
-  for (i = 1; i <= 9; i++) {
-    for (j = 0; j < transtypes.size; j++) {
+  for(i = 1; i <= 9; i++) {
+    for(j = 0; j < transtypes.size; j++) {
       trans = transtypes[j];
       idealadd = 0;
       if(trans == "" || trans == "") {
@@ -155,7 +155,7 @@ function checkapproachangles(transtypes) {
       } else if(trans == "" || trans == "") {
         idealadd = -90;
       }
-      if(isdefined(anim.coverexitangles[trans][i])) {
+      if(isDefined(anim.coverexitangles[trans][i])) {
         correctangle = angleclamp180(-1 * ((idealtransangles[i] + idealadd) + 180));
         actualangle = angleclamp180(anim.coverexitangles[trans][i]);
         if((absangleclamp180(actualangle - correctangle)) > 7) {
@@ -175,7 +175,7 @@ function gettranssplittime(approachtype, dir) {
 }
 
 function firstinit() {
-  if(isdefined(anim.notfirsttime)) {
+  if(isDefined(anim.notfirsttime)) {
     return;
   }
   anim.notfirsttime = 1;
@@ -188,7 +188,7 @@ function firstinit() {
   anim.lastgrenadelandednearplayertime = -1000000;
   anim.lastfraggrenadetoplayerstart = -1000000;
   thread setnextplayergrenadetime();
-  if(!isdefined(level.flag)) {
+  if(!isDefined(level.flag)) {
     level.flag = [];
   }
   level.painai = undefined;
@@ -203,7 +203,7 @@ function onplayerconnect() {
 
 function setnextplayergrenadetime() {
   waittillframeend();
-  if(isdefined(anim.playergrenaderangetime)) {
+  if(isDefined(anim.playergrenaderangetime)) {
     maxtime = int(anim.playergrenaderangetime * 0.7);
     if(maxtime < 1) {
       maxtime = 1;
@@ -211,7 +211,7 @@ function setnextplayergrenadetime() {
     anim.grenadetimers["player_frag_grenade_sp"] = randomintrange(0, maxtime);
     anim.grenadetimers["player_flash_grenade_sp"] = randomintrange(0, maxtime);
   }
-  if(isdefined(anim.playerdoublegrenadetime)) {
+  if(isDefined(anim.playerdoublegrenadetime)) {
     maxtime = int(anim.playerdoublegrenadetime);
     mintime = int(maxtime / 2);
     if(maxtime <= mintime) {
@@ -222,29 +222,29 @@ function setnextplayergrenadetime() {
 }
 
 function addtomissiles(grenade) {
-  if(!isdefined(level.missileentities)) {
+  if(!isDefined(level.missileentities)) {
     level.missileentities = [];
   }
-  if(!isdefined(level.missileentities)) {
+  if(!isDefined(level.missileentities)) {
     level.missileentities = [];
   } else if(!isarray(level.missileentities)) {
     level.missileentities = array(level.missileentities);
   }
   level.missileentities[level.missileentities.size] = grenade;
-  while (isdefined(grenade)) {
+  while(isDefined(grenade)) {
     wait(0.05);
   }
   arrayremovevalue(level.missileentities, grenade);
 }
 
 function globalgrenadetracking() {
-  if(!isdefined(level.missileentities)) {
+  if(!isDefined(level.missileentities)) {
     level.missileentities = [];
   }
   self endon("death");
   self thread globalgrenadelaunchertracking();
   self thread globalmissiletracking();
-  for (;;) {
+  for(;;) {
     self waittill("grenade_fire", grenade, weapon);
     grenade.owner = self;
     grenade.weapon = weapon;
@@ -254,7 +254,7 @@ function globalgrenadetracking() {
 
 function globalgrenadelaunchertracking() {
   self endon("death");
-  for (;;) {
+  for(;;) {
     self waittill("grenade_launcher_fire", grenade, weapon);
     grenade.owner = self;
     grenade.weapon = weapon;
@@ -264,7 +264,7 @@ function globalgrenadelaunchertracking() {
 
 function globalmissiletracking() {
   self endon("death");
-  for (;;) {
+  for(;;) {
     self waittill("missile_fire", grenade, weapon);
     grenade.owner = self;
     grenade.weapon = weapon;
@@ -274,7 +274,7 @@ function globalmissiletracking() {
 
 function begingrenadetracking() {
   self endon("death");
-  for (;;) {
+  for(;;) {
     self waittill("grenade_fire", grenade, weapon);
     grenade thread grenade_earthquake();
   }

@@ -20,22 +20,22 @@ spawned(localClientNum, play_sound) {
     if(play_sound) {
       self thread loop_local_sound(localClientNum, "wpn_crossbow_alert", 0.3, level._effect["crossbow_enemy_light"]);
     } else {
-      PlayFXOnTag(localClientNum, level._effect["crossbow_enemy_light"], self, self.fxTagName);
+      playFXOnTag(localClientNum, level._effect["crossbow_enemy_light"], self, self.fxTagName);
     }
   } else {
     if(play_sound) {
       self thread loop_local_sound(localClientNum, "wpn_crossbow_alert", 0.3, level._effect["crossbow_friendly_light"]);
     } else {
-      PlayFXOnTag(localClientNum, level._effect["crossbow_friendly_light"], self, self.fxTagName);
+      playFXOnTag(localClientNum, level._effect["crossbow_friendly_light"], self, self.fxTagName);
     }
   }
 }
 loop_local_sound(localClientNum, alias, interval, fx) {
   self endon("entityshutdown");
-  while (1) {
+  while(1) {
     self waittill_dobj(localClientNum);
-    self PlaySound(localClientNum, alias);
-    PlayFXOnTag(localClientNum, fx, self, self.fxTagName);
+    self playSound(localClientNum, alias);
+    playFXOnTag(localClientNum, fx, self, self.fxTagName);
     owner = self GetOwner(localClientNum);
     self.stuckToPlayer = self GetParentEntity();
     localPlayer = GetLocalPlayer(localClientNum);

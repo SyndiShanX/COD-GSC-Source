@@ -12,10 +12,10 @@
 function testmenu() {
   self endon("death");
   self endon("disconnect");
-  for (;;) {
+  for(;;) {
     wait(10);
-    notifydata = spawnstruct();
-    notifydata.titletext = & "MP_CHALLENGE_COMPLETED";
+    notifydata = spawnStruct();
+    notifydata.titletext = &"MP_CHALLENGE_COMPLETED";
     notifydata.notifytext = "wheee";
     notifydata.sound = "mp_challenge_complete";
     self thread hud_message::notifymessage(notifydata);
@@ -25,10 +25,10 @@ function testmenu() {
 function testshock() {
   self endon("death");
   self endon("disconnect");
-  for (;;) {
+  for(;;) {
     wait(3);
     numshots = randomint(6);
-    for (i = 0; i < numshots; i++) {
+    for(i = 0; i < numshots; i++) {
       iprintlnbold(numshots);
       self shellshock("frag_grenade_mp", 0.2);
       wait(0.1);
@@ -51,7 +51,7 @@ function timeuntilroundend() {
   if(level.timelimit <= 0) {
     return undefined;
   }
-  if(!isdefined(level.starttime)) {
+  if(!isDefined(level.starttime)) {
     return undefined;
   }
   timepassed = (gettimepassed() - level.starttime) / 1000;
@@ -67,20 +67,18 @@ function gettimeremaining() {
 }
 
 function registerpostroundevent(eventfunc) {
-  if(!isdefined(level.postroundevents)) {
+  if(!isDefined(level.postroundevents)) {
     level.postroundevents = [];
   }
   level.postroundevents[level.postroundevents.size] = eventfunc;
 }
 
 function executepostroundevents() {
-  if(!isdefined(level.postroundevents)) {
+  if(!isDefined(level.postroundevents)) {
     return;
   }
-  for (i = 0; i < level.postroundevents.size; i++) {
-    [
-      [level.postroundevents[i]]
-    ]();
+  for(i = 0; i < level.postroundevents.size; i++) {
+    [[level.postroundevents[i]]]();
   }
 }
 
@@ -97,10 +95,10 @@ function getvalueinrange(value, minvalue, maxvalue) {
 function assertproperplacement() {
   numplayers = level.placement[""].size;
   if(level.teambased) {
-    for (i = 0; i < (numplayers - 1); i++) {
+    for(i = 0; i < (numplayers - 1); i++) {
       if(level.placement[""][i].score < (level.placement[""][i + 1].score)) {
         println("");
-        for (i = 0; i < numplayers; i++) {
+        for(i = 0; i < numplayers; i++) {
           player = level.placement[""][i];
           println((((("" + i) + "") + player.name) + "") + player.score);
         }
@@ -109,10 +107,10 @@ function assertproperplacement() {
       }
     }
   } else {
-    for (i = 0; i < (numplayers - 1); i++) {
+    for(i = 0; i < (numplayers - 1); i++) {
       if(level.placement[""][i].pointstowin < (level.placement[""][i + 1].pointstowin)) {
         println("");
-        for (i = 0; i < numplayers; i++) {
+        for(i = 0; i < numplayers; i++) {
           player = level.placement[""][i];
           println((((("" + i) + "") + player.name) + "") + player.pointstowin);
         }
@@ -125,10 +123,10 @@ function assertproperplacement() {
 
 function isvalidclass(c) {
   if(level.oldschool || sessionmodeiszombiesgame()) {
-    assert(!isdefined(c));
+    assert(!isDefined(c));
     return 1;
   }
-  return isdefined(c) && c != "";
+  return isDefined(c) && c != "";
 }
 
 function playtickingsound(gametype_tick_sound) {
@@ -136,8 +134,8 @@ function playtickingsound(gametype_tick_sound) {
   self endon("stop_ticking");
   level endon("game_ended");
   time = level.bombtimer;
-  while (true) {
-    self playsound(gametype_tick_sound);
+  while(true) {
+    self playSound(gametype_tick_sound);
     if(time > 10) {
       time = time - 1;
       wait(1);
@@ -168,12 +166,12 @@ function gametimer() {
   level waittill("prematch_over");
   level.starttime = gettime();
   level.discardtime = 0;
-  if(isdefined(game["roundMillisecondsAlreadyPassed"])) {
+  if(isDefined(game["roundMillisecondsAlreadyPassed"])) {
     level.starttime = level.starttime - game["roundMillisecondsAlreadyPassed"];
     game["roundMillisecondsAlreadyPassed"] = undefined;
   }
   prevtime = gettime();
-  while (game["state"] == "playing") {
+  while(game["state"] == "playing") {
     if(!level.timerstopped) {
       game["timepassed"] = game["timepassed"] + (gettime() - prevtime);
     }
@@ -183,7 +181,7 @@ function gametimer() {
 }
 
 function gettimepassed() {
-  if(!isdefined(level.starttime)) {
+  if(!isDefined(level.starttime)) {
     return 0;
   }
   if(level.timerstopped) {
@@ -209,7 +207,7 @@ function resumetimer() {
 }
 
 function getscoreremaining(team) {
-  assert(isplayer(self) || isdefined(team));
+  assert(isplayer(self) || isDefined(team));
   scorelimit = level.scorelimit;
   if(isplayer(self)) {
     return scorelimit - globallogic_score::_getplayerscore(self);
@@ -218,14 +216,14 @@ function getscoreremaining(team) {
 }
 
 function getteamscoreforround(team) {
-  if(level.cumulativeroundscores && isdefined(game["lastroundscore"][team])) {
+  if(level.cumulativeroundscores && isDefined(game["lastroundscore"][team])) {
     return getteamscore(team) - game["lastroundscore"][team];
   }
   return getteamscore(team);
 }
 
 function getscoreperminute(team) {
-  assert(isplayer(self) || isdefined(team));
+  assert(isplayer(self) || isDefined(team));
   scorelimit = level.scorelimit;
   timelimit = level.timelimit;
   minutespassed = (gettimepassed() / 60000) + 0.0001;
@@ -236,7 +234,7 @@ function getscoreperminute(team) {
 }
 
 function getestimatedtimeuntilscorelimit(team) {
-  assert(isplayer(self) || isdefined(team));
+  assert(isplayer(self) || isDefined(team));
   scoreperminute = self getscoreperminute(team);
   scoreremaining = self getscoreremaining(team);
   if(!scoreperminute) {
@@ -247,7 +245,7 @@ function getestimatedtimeuntilscorelimit(team) {
 
 function rumbler() {
   self endon("disconnect");
-  while (true) {
+  while(true) {
     wait(0.1);
     self playrumbleonentity("damage_heavy");
   }
@@ -261,7 +259,7 @@ function waitfortimeornotify(time, notifyname) {
 function waitfortimeornotifynoartillery(time, notifyname) {
   self endon(notifyname);
   wait(time);
-  while (isdefined(level.artilleryinprogress)) {
+  while(isDefined(level.artilleryinprogress)) {
     assert(level.artilleryinprogress);
     wait(0.25);
   }
@@ -323,14 +321,14 @@ function gethitlocheight(shitloc) {
 }
 
 function debugline(start, end) {
-  for (i = 0; i < 50; i++) {
+  for(i = 0; i < 50; i++) {
     line(start, end);
     wait(0.05);
   }
 }
 
 function isexcluded(entity, entitylist) {
-  for (index = 0; index < entitylist.size; index++) {
+  for(index = 0; index < entitylist.size; index++) {
     if(entity == entitylist[index]) {
       return true;
     }
@@ -350,7 +348,7 @@ function waitfortimeornotifies(desireddelay) {
 
 function logteamwinstring(wintype, winner) {
   log_string = wintype;
-  if(isdefined(winner)) {
+  if(isDefined(winner)) {
     log_string = (log_string + ", win: ") + winner;
   }
   foreach(team in level.teams) {

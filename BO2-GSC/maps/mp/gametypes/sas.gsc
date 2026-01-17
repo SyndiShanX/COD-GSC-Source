@@ -164,7 +164,7 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shit
     else
       self maps\mp\gametypes\_globallogic_score::givepointstowin(level.setbacks * -1);
 
-    self thread maps\mp\gametypes\_wager::queuewagerpopup(&"MP_HUMILIATED", 0, & "MP_BANKRUPTED", "wm_humiliated");
+    self thread maps\mp\gametypes\_wager::queuewagerpopup(&"MP_HUMILIATED", 0, &"MP_BANKRUPTED", "wm_humiliated");
     self playlocalsound(game["dialog"]["wm_humiliated"]);
   }
 }
@@ -172,25 +172,25 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shit
 onstartgametype() {
   setdvar("scr_xpscale", 0);
   setclientnamemode("auto_change");
-  setobjectivetext("allies", & "OBJECTIVES_SAS");
-  setobjectivetext("axis", & "OBJECTIVES_SAS");
+  setobjectivetext("allies", &"OBJECTIVES_SAS");
+  setobjectivetext("axis", &"OBJECTIVES_SAS");
 
   if(level.splitscreen) {
-    setobjectivescoretext("allies", & "OBJECTIVES_SAS");
-    setobjectivescoretext("axis", & "OBJECTIVES_SAS");
+    setobjectivescoretext("allies", &"OBJECTIVES_SAS");
+    setobjectivescoretext("axis", &"OBJECTIVES_SAS");
   } else {
-    setobjectivescoretext("allies", & "OBJECTIVES_SAS_SCORE");
-    setobjectivescoretext("axis", & "OBJECTIVES_SAS_SCORE");
+    setobjectivescoretext("allies", &"OBJECTIVES_SAS_SCORE");
+    setobjectivescoretext("axis", &"OBJECTIVES_SAS_SCORE");
   }
 
-  setobjectivehinttext("allies", & "OBJECTIVES_SAS_HINT");
-  setobjectivehinttext("axis", & "OBJECTIVES_SAS_HINT");
+  setobjectivehinttext("allies", &"OBJECTIVES_SAS_HINT");
+  setobjectivehinttext("axis", &"OBJECTIVES_SAS_HINT");
   allowed[0] = "sas";
   maps\mp\gametypes\_gameobjects::main(allowed);
   maps\mp\gametypes\_spawning::create_map_placed_influencers();
   level.spawnmins = (0, 0, 0);
   level.spawnmaxs = (0, 0, 0);
-  newspawns = getentarray("mp_wager_spawn", "classname");
+  newspawns = getEntArray("mp_wager_spawn", "classname");
 
   if(newspawns.size > 0) {
     maps\mp\gametypes\_spawnlogic::addspawnpoints("allies", "mp_wager_spawn");

@@ -4,7 +4,6 @@
 ***********************************************/
 
 #include scripts\core_common\system_shared;
-
 #namespace teamset;
 
 autoexec __init__system__() {
@@ -12,6 +11,6 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  level.allies_team = #"allies";
-  level.axis_team = #"axis";
+  level.allies_team = # "allies";
+  level.axis_team = # "axis";
 }

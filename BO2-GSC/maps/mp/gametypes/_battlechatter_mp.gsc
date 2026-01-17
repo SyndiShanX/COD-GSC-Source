@@ -100,7 +100,7 @@ init() {
   level.bcmp_enemy_contact_level_delay = getdvarint(#"bcmp_enemy_contact_level_delay");
   level.bcmp_breathing_probability = getdvarint(#"bcmp_breathing_probability");
   level.allowbattlechatter = getgametypesetting("allowBattleChatter");
-  level.landmarks = getentarray("trigger_landmark", "targetname");
+  level.landmarks = getEntArray("trigger_landmark", "targetname");
   level.enemyspotteddialog = 1;
   level thread enemycontactleveldelay();
   level thread onplayerconnect();
@@ -336,8 +336,7 @@ onplayerkillstreak(player) {
   player endon("disconnect");
 }
 
-onkillstreakused(killstreak, team) {
-}
+onkillstreakused(killstreak, team) {}
 
 onplayernearexplodable(object, type) {
   self endon("disconnect");

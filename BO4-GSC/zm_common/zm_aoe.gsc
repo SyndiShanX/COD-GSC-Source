@@ -11,7 +11,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm;
-
 #namespace zm_aoe;
 
 class areaofeffect {
@@ -45,7 +44,7 @@ __init__() {
   clientfield::register("scriptmover", "aoe_id", 1, getminbitcountfornum(8), "int");
 }
 
-private __main__() {
+__main__() {
   function_15dea507(1, "zm_aoe_spear", 15, 60000, 2000, 5, 15, 40, 80);
   function_15dea507(2, "zm_aoe_spear_small", 15, 60000, 2000, 5, 15, 20, 80);
   function_15dea507(3, "zm_aoe_spear_big", 15, 60000, 2000, 5, 15, 60, 80);
@@ -55,7 +54,7 @@ private __main__() {
   function_15dea507(7, "zm_aoe_chaos_bolt_annihilate", 10, 5000, 2000, 3, 5, 20, 80);
 }
 
-private function_e969e75(type) {
+function_e969e75(type) {
   assert(isDefined(level.var_400ae143));
   arraykeys = getarraykeys(level.var_400ae143);
 
@@ -88,7 +87,6 @@ function_15dea507(aoeid, type, var_3a11a165, lifetime, var_f2cd3aad, damagemin, 
   level thread function_60bb02f3(type);
 
   level thread function_e39c0be4(var_508aaded);
-
 }
 
 function_371b4147(aoeid, type, position, userdata) {
@@ -113,14 +111,14 @@ function_371b4147(aoeid, type, position, userdata) {
   }
 }
 
-private function_668a9b2d(aoe, type) {
+function_668a9b2d(aoe, type) {
   var_46f1b5eb = function_e969e75(type);
   assert(isDefined(var_46f1b5eb), "<dev string:x74>");
   array::add(var_46f1b5eb.var_9a08bb02, aoe);
   assert(var_46f1b5eb.var_9a08bb02.size <= var_46f1b5eb.var_3a11a165);
 }
 
-private function_87bbe4fc(type) {
+function_87bbe4fc(type) {
   var_46f1b5eb = function_e969e75(type);
   assert(isDefined(var_46f1b5eb), "<dev string:x74>");
 
@@ -137,7 +135,7 @@ private function_87bbe4fc(type) {
   }
 }
 
-private function_fa03204a(aoe, type) {
+function_fa03204a(aoe, type) {
   var_46f1b5eb = function_e969e75(type);
   assert(isinarray(var_46f1b5eb.var_9a08bb02, aoe));
 
@@ -150,19 +148,19 @@ private function_fa03204a(aoe, type) {
   thread function_4f0db8cf(aoe.entity);
 }
 
-private function_4f0db8cf(entity) {
+function_4f0db8cf(entity) {
   waitframe(2);
   entity delete();
 }
 
-private function_2c33d107(type) {
+function_2c33d107(type) {
   var_46f1b5eb = function_e969e75(type);
   var_528d5f55 = function_87bbe4fc(type);
   function_ccf8f659(var_528d5f55, 1);
   thread function_fa03204a(var_528d5f55, type);
 }
 
-private function_ccf8f659(aoe, forceend = 0) {
+function_ccf8f659(aoe, forceend = 0) {
   var_46f1b5eb = function_e969e75(aoe.type);
   assert(isDefined(var_46f1b5eb));
 
@@ -216,7 +214,7 @@ function_3690781e() {
   }
 }
 
-private function_e5950b1e(type) {
+function_e5950b1e(type) {
   var_46f1b5eb = function_e969e75(type);
   assert(isDefined(var_46f1b5eb));
   var_2aad0cec = [];
@@ -234,7 +232,7 @@ private function_e5950b1e(type) {
   }
 }
 
-private function_bea2e288(type) {
+function_bea2e288(type) {
   var_46f1b5eb = function_e969e75(type);
   assert(isDefined(var_46f1b5eb));
   players = getplayers();
@@ -260,7 +258,7 @@ private function_bea2e288(type) {
         damage = mapfloat(0, var_46f1b5eb.radius, var_46f1b5eb.damagemin, var_46f1b5eb.damagemax, dist);
         player dodamage(damage, aoe.entity.origin);
         player notify(#"aoe_damage", {
-          #str_source: aoe.type, 
+          #str_source: aoe.type,
           #origin: aoe.entity.origin
         });
       }
@@ -268,7 +266,7 @@ private function_bea2e288(type) {
   }
 }
 
-private function_60bb02f3(type) {
+function_60bb02f3(type) {
   var_46f1b5eb = function_e969e75(type);
   assert(isDefined(var_46f1b5eb));
 
@@ -284,7 +282,7 @@ private function_60bb02f3(type) {
   }
 }
 
-private function_e39c0be4(var_46f1b5eb) {
+function_e39c0be4(var_46f1b5eb) {
   var_46f1b5eb endon(#"hash_343e166e4aa4288e");
 
   while(true) {
@@ -312,4 +310,3 @@ private function_e39c0be4(var_46f1b5eb) {
     waitframe(1);
   }
 }
-

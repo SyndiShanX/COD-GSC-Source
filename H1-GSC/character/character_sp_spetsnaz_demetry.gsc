@@ -5,7 +5,7 @@
 *******************************************************/
 
 main() {
-  self setmodel("body_spetsnaz_assault_demetry");
+  self setModel("body_spetsnaz_assault_demetry");
   self attach("head_spetsnaz_assault_demetry", "", 1);
   self.headmodel = "head_spetsnaz_assault_demetry";
   self.voice = "russian";

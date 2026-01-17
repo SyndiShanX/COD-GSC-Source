@@ -8,7 +8,7 @@ initcharacterface() {
   if(!anim.usefacialanims) {
     return;
   }
-  if(!isdefined(self.a.currentdialogimportance)) {
+  if(!isDefined(self.a.currentdialogimportance)) {
     self.a.currentdialogimportance = 0;
     self.a.idleface = anim.alertface;
     self.facewaiting = [];
@@ -69,7 +69,7 @@ saygenericdialogue(var_0) {
 
   var_6 = undefined;
 
-  if(isdefined(self.generic_voice_override)) {
+  if(isDefined(self.generic_voice_override)) {
     var_6 = self.generic_voice_override + "_" + var_0 + "_" + var_2;
 
     if(!soundexists(var_6))
@@ -110,8 +110,8 @@ playfacethread(var_0, var_1, var_2, var_3, var_4, var_5) {
   self.a.facialanimdone = 1;
   self.a.facialsounddone = 1;
 
-  if(isdefined(var_3)) {
-    if(isdefined(var_1)) {
+  if(isDefined(var_3)) {
+    if(isDefined(var_1)) {
       if(!soundexists(var_1)) {
         wait 0;
         self notify(var_3);
@@ -128,8 +128,8 @@ playfacethread(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
   initcharacterface();
 
-  if(!isdefined(var_0) && !isdefined(var_1)) {
-    if(isdefined(var_3)) {
+  if(!isDefined(var_0) && !isDefined(var_1)) {
+    if(isDefined(var_3)) {
       wait 0;
       self.faceresult = "failed";
       self notify(var_3);
@@ -151,7 +151,7 @@ playfacethread(var_0, var_1, var_2, var_3, var_4, var_5) {
       }
     }
 
-    if(var_2 <= self.a.currentdialogimportance && (isdefined(var_4) && var_4 == "wait")) {
+    if(var_2 <= self.a.currentdialogimportance && (isDefined(var_4) && var_4 == "wait")) {
       var_6 = self.facewaiting.size;
       var_7 = self.facelastnotifynum + 1;
       self.facewaiting[var_6]["facialanim"] = var_0;
@@ -163,13 +163,13 @@ playfacethread(var_0, var_1, var_2, var_3, var_4, var_5) {
       self.facewaiting[var_6]["notifyNum"] = var_7;
       thread playface_waitfornotify("animscript face stop waiting " + self.facewaiting[var_6]["notifyNum"], "Face done waiting", "Face done waiting");
 
-      if(isdefined(var_5))
+      if(isDefined(var_5))
         thread playface_waitfortime(var_5, "Face done waiting", "Face done waiting");
 
       self waittill("Face done waiting");
       var_6 = undefined;
 
-      for (var_8 = 0; var_8 < self.facewaiting.size; var_8++) {
+      for(var_8 = 0; var_8 < self.facewaiting.size; var_8++) {
         if(self.facewaiting[var_8]["notifyNum"] == var_7) {
           var_6 = var_8;
           break;
@@ -178,12 +178,12 @@ playfacethread(var_0, var_1, var_2, var_3, var_4, var_5) {
 
       if(self.a.facewaitforresult == "notify")
         playfacethread(self.facewaiting[var_6]["facialanim"], self.facewaiting[var_6]["soundAlias"], self.facewaiting[var_6]["importance"], self.facewaiting[var_6]["notifyString"]);
-      else if(isdefined(var_3)) {
+      else if(isDefined(var_3)) {
         self.faceresult = "failed";
         self notify(var_3);
       }
 
-      for (var_8 = var_6 + 1; var_8 < self.facewaiting.size; var_8++) {
+      for(var_8 = var_6 + 1; var_8 < self.facewaiting.size; var_8++) {
         self.facewaiting[var_8 - 1]["facialanim"] = self.facewaiting[var_8]["facialanim"];
         self.facewaiting[var_8 - 1]["soundAlias"] = self.facewaiting[var_8]["soundAlias"];
         self.facewaiting[var_8 - 1]["importance"] = self.facewaiting[var_8]["importance"];
@@ -199,8 +199,8 @@ playfacethread(var_0, var_1, var_2, var_3, var_4, var_5) {
         self notify("end current face");
         self endon("end current face");
 
-        if(isdefined(var_3)) {
-          if(isdefined(self.a.currentdialognotifystring)) {
+        if(isDefined(var_3)) {
+          if(isDefined(self.a.currentdialognotifystring)) {
             self.faceresult = "interrupted";
             self notify(self.a.currentdialognotifystring);
           }
@@ -212,7 +212,7 @@ playfacethread(var_0, var_1, var_2, var_3, var_4, var_5) {
         self.a.facialanimdone = 1;
         self.a.facialsounddone = 1;
 
-        if(isdefined(var_0)) {
+        if(isDefined(var_0)) {
           maps\_anim::disabledefaultfacialanims();
           self setflaggedanimknobrestart("animscript faceanim", var_0, 1, 0.1, 1);
           self.a.facialanimdone = 0;
@@ -220,29 +220,29 @@ playfacethread(var_0, var_1, var_2, var_3, var_4, var_5) {
         } else
           maps\_anim::disabledefaultfacialanims(0);
 
-        if(isdefined(var_1)) {
+        if(isDefined(var_1)) {
           self playsoundatviewheight(var_1, "animscript facesound", 1);
           self.a.facialsounddone = 0;
           thread waitforfacesound();
         }
 
-        while (!self.a.facialanimdone || !self.a.facialsounddone)
+        while(!self.a.facialanimdone || !self.a.facialsounddone)
           self waittill("animscript facedone");
 
         self.a.currentdialogimportance = 0;
         self.a.currentdialogsound = undefined;
         self.a.currentdialognotifystring = undefined;
 
-        if(isdefined(var_3)) {
+        if(isDefined(var_3)) {
           self.faceresult = "finished";
           self notify(var_3);
         }
 
-        if(isdefined(self.facewaiting) && self.facewaiting.size > 0) {
+        if(isDefined(self.facewaiting) && self.facewaiting.size > 0) {
           var_9 = 0;
           var_10 = 1;
 
-          for (var_8 = 0; var_8 < self.facewaiting.size; var_8++) {
+          for(var_8 = 0; var_8 < self.facewaiting.size; var_8++) {
             if(self.facewaiting[var_8]["importance"] > var_9) {
               var_9 = self.facewaiting[var_8]["importance"];
               var_10 = var_8;
@@ -262,7 +262,7 @@ playfacethread(var_0, var_1, var_2, var_3, var_4, var_5) {
         return;
       }
 
-      if(isdefined(var_3)) {
+      if(isDefined(var_3)) {
         self.faceresult = "failed";
         self notify(var_3);
       }
@@ -336,13 +336,13 @@ clearfacialanim() {
 }
 
 playfacialanim(var_0, var_1, var_2) {
-  if(!isdefined(self.facialidlemonitor))
+  if(!isDefined(self.facialidlemonitor))
     thread facial_idle_monitor_thread();
 
-  if(isdefined(self.bdisabledefaultfacialanims) && self.bdisabledefaultfacialanims)
+  if(isDefined(self.bdisabledefaultfacialanims) && self.bdisabledefaultfacialanims)
     self clearanim( % head, 0.2);
   else {
-    if(isdefined(var_0) && animhasfacialoverride(var_0)) {
+    if(isDefined(var_0) && animhasfacialoverride(var_0)) {
       self clearanim( % head, 0.2);
       return;
     }
@@ -350,10 +350,10 @@ playfacialanim(var_0, var_1, var_2) {
     if(self hasblendshapes())
       var_1 = var_1 + "_blend";
 
-    if(!isdefined(anim.facial[var_1])) {
+    if(!isDefined(anim.facial[var_1])) {
       return;
     }
-    if(isdefined(var_2) && var_2 >= 0 && var_2 < anim.facial[var_1].size)
+    if(isDefined(var_2) && var_2 >= 0 && var_2 < anim.facial[var_1].size)
       var_3 = var_2;
     else
       var_3 = randomint(anim.facial[var_1].size);
@@ -362,7 +362,7 @@ playfacialanim(var_0, var_1, var_2) {
     self setanimknob(var_4);
 
     if(var_1 == "death") {
-      if(isdefined(var_0))
+      if(isDefined(var_0))
         thread end_facial_on_death(getanimlength(var_0));
       else
         thread end_facial_on_death();
@@ -374,12 +374,12 @@ end_facial_on_death(var_0) {
   var_1 = 1.0;
   var_2 = 0.2;
 
-  if(isdefined(var_0))
+  if(isDefined(var_0))
     var_1 = clamp(var_0, var_2 + 0.5, var_1 + var_2) - var_2;
 
   wait(var_1);
 
-  if(isdefined(self))
+  if(isDefined(self))
     self clearanim( % head, var_2);
 }
 
@@ -396,13 +396,13 @@ get_eye_relative_dir() {
   var_3 = angleclamp180(abs(var_0[0] - var_1[0]));
   var_4 = angleclamp180(abs(var_0[0] - var_2[0]));
 
-  if(!isdefined(self.prev_eyel_diff))
+  if(!isDefined(self.prev_eyel_diff))
     self.prev_eyel_diff = var_3;
 
-  if(!isdefined(self.prev_eyer_diff))
+  if(!isDefined(self.prev_eyer_diff))
     self.prev_eyer_diff = var_4;
 
-  if(!isdefined(self.eye_move_counter))
+  if(!isDefined(self.eye_move_counter))
     self.eye_move_counter = 0;
 
   if(angleclamp180(var_3 - self.prev_eyel_diff) > 5 || angleclamp180(var_4 - self.prev_eyer_diff) > 5) {
@@ -411,10 +411,10 @@ get_eye_relative_dir() {
   } else
     self.eye_move_counter++;
 
-  if(isdefined(self.eye_move_counter) && self.eye_move_counter > 4 && isdefined(self.script) && self.script != "scripted" && self.script != "death") {
+  if(isDefined(self.eye_move_counter) && self.eye_move_counter > 4 && isDefined(self.script) && self.script != "scripted" && self.script != "death") {
     var_5 = playfacialanim(undefined, "idle", undefined);
 
-    if(isdefined(var_5))
+    if(isDefined(var_5))
       wait(getanimlength(anim.facial["idle"][var_5]));
 
     self.eye_move_counter = 0;
@@ -426,7 +426,7 @@ facial_idle_monitor_thread() {
   self endon("killanimscript");
   self.facialidlemonitor = 1;
 
-  for (;;) {
+  for(;;) {
     get_eye_relative_dir();
     wait 0.35;
   }

@@ -82,7 +82,7 @@ PlayFaceThread(facialanim, soundAlias, importance, notifyString, waitOrNot, time
     notifyString = "PlayFaceThread " + soundAlias;
   }
   if(!isDefined(self.a)) {
-    self.a = SpawnStruct();
+    self.a = spawnStruct();
   }
   if(!isDefined(self.a.facialSoundDone)) {
     self.a.facialSoundDone = true;
@@ -145,7 +145,7 @@ PlayFaceThread(facialanim, soundAlias, importance, notifyString, waitOrNot, time
     }
   }
   if(play_sound) {
-    self PlaySound(soundAlias, uniqueNotify, true);
+    self playSound(soundAlias, uniqueNotify, true);
   }
   self waittill_any("death", "cancel speaking", uniqueNotify);
   if(importance == 1.0) {

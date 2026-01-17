@@ -16,7 +16,7 @@ debugPrintln(channel, msg) {
 }
 
 draw_debug_line(start, end, timer) {
-  for (i = 0; i < timer * 20; i++) {
+  for(i = 0; i < timer * 20; i++) {
     line(start, end, (1, 1, 0.5));
     wait(0.05);
   }
@@ -44,25 +44,25 @@ waittillend(msg) {
 =============
 */
 noself_func(func, parm1, parm2, parm3, parm4) {
-  if(!isdefined(level.func))
+  if(!isDefined(level.func))
     return;
-  if(!isdefined(level.func[func]))
+  if(!isDefined(level.func[func])) {
     return;
-
-  if(!isdefined(parm1)) {
+  }
+  if(!isDefined(parm1)) {
     call[[level.func[func]]]();
     return;
   }
 
-  if(!isdefined(parm2)) {
+  if(!isDefined(parm2)) {
     call[[level.func[func]]](parm1);
     return;
   }
-  if(!isdefined(parm3)) {
+  if(!isDefined(parm3)) {
     call[[level.func[func]]](parm1, parm2);
     return;
   }
-  if(!isdefined(parm4)) {
+  if(!isDefined(parm4)) {
     call[[level.func[func]]](parm1, parm2, parm3);
     return;
   }
@@ -88,23 +88,23 @@ noself_func(func, parm1, parm2, parm3, parm4) {
 =============
 */
 self_func(func, parm1, parm2, parm3, parm4) {
-  if(!isdefined(level.func[func]))
+  if(!isDefined(level.func[func])) {
     return;
-
-  if(!isdefined(parm1)) {
+  }
+  if(!isDefined(parm1)) {
     self call[[level.func[func]]]();
     return;
   }
 
-  if(!isdefined(parm2)) {
+  if(!isDefined(parm2)) {
     self call[[level.func[func]]](parm1);
     return;
   }
-  if(!isdefined(parm3)) {
+  if(!isDefined(parm3)) {
     self call[[level.func[func]]](parm1, parm2);
     return;
   }
-  if(!isdefined(parm4)) {
+  if(!isDefined(parm4)) {
     self call[[level.func[func]]](parm1, parm2, parm3);
     return;
   }
@@ -144,8 +144,8 @@ randomvector(num) {
 =============
 */
 randomvectorrange(num_min, num_max) {
-  assert(isdefined(num_min));
-  assert(isdefined(num_max));
+  assert(isDefined(num_min));
+  assert(isDefined(num_max));
 
   x = randomfloatrange(num_min, num_max);
   if(randomint(2) == 0)
@@ -167,16 +167,16 @@ angle_dif(oldangle, newangle) {
   if(oldangle == newangle)
     return 0;
 
-  while (newangle > 360)
+  while(newangle > 360)
     newangle -= 360;
 
-  while (newangle < 0)
+  while(newangle < 0)
     newangle += 360;
 
-  while (oldangle > 360)
+  while(oldangle > 360)
     oldangle -= 360;
 
-  while (oldangle < 0)
+  while(oldangle < 0)
     oldangle += 360;
 
   olddif = undefined;
@@ -213,7 +213,7 @@ sign(x) {
 }
 
 track(spot_to_track) {
-  if(isdefined(self.current_target)) {
+  if(isDefined(self.current_target)) {
     if(spot_to_track == self.current_target)
       return;
   }
@@ -231,18 +231,18 @@ get_enemy_team(team) {
 }
 
 clear_exception(type) {
-  assert(isdefined(self.exception[type]));
+  assert(isDefined(self.exception[type]));
   self.exception[type] = anim.defaultException;
 }
 
 set_exception(type, func) {
-  assert(isdefined(self.exception[type]));
+  assert(isDefined(self.exception[type]));
   self.exception[type] = func;
 }
 
 set_all_exceptions(exceptionFunc) {
   keys = getArrayKeys(self.exception);
-  for (i = 0; i < keys.size; i++) {
+  for(i = 0; i < keys.size; i++) {
     self.exception[keys[i]] = exceptionFunc;
   }
 }
@@ -268,7 +268,7 @@ choose_from_weighted_array(values, weights) {
 
   randomval = randomint(weights[weights.size - 1] + 1);
 
-  for (i = 0; i < weights.size; i++) {
+  for(i = 0; i < weights.size; i++) {
     if(randomval <= weights[i])
       return values[i];
   }
@@ -278,7 +278,7 @@ get_cumulative_weights(weights) {
   cumulative_weights = [];
 
   sum = 0;
-  for (i = 0; i < weights.size; i++) {
+  for(i = 0; i < weights.size; i++) {
     sum += weights[i];
     cumulative_weights[i] = sum;
   }
@@ -297,31 +297,31 @@ waittill_string(msg, ent) {
 
 waittill_multiple(string1, string2, string3, string4, string5) {
   self endon("death");
-  ent = spawnstruct();
+  ent = spawnStruct();
   ent.threads = 0;
 
-  if(isdefined(string1)) {
+  if(isDefined(string1)) {
     self thread waittill_string(string1, ent);
     ent.threads++;
   }
-  if(isdefined(string2)) {
+  if(isDefined(string2)) {
     self thread waittill_string(string2, ent);
     ent.threads++;
   }
-  if(isdefined(string3)) {
+  if(isDefined(string3)) {
     self thread waittill_string(string3, ent);
     ent.threads++;
   }
-  if(isdefined(string4)) {
+  if(isDefined(string4)) {
     self thread waittill_string(string4, ent);
     ent.threads++;
   }
-  if(isdefined(string5)) {
+  if(isDefined(string5)) {
     self thread waittill_string(string5, ent);
     ent.threads++;
   }
 
-  while (ent.threads) {
+  while(ent.threads) {
     ent waittill("returned");
     ent.threads--;
   }
@@ -331,31 +331,31 @@ waittill_multiple(string1, string2, string3, string4, string5) {
 
 waittill_multiple_ents(ent1, string1, ent2, string2, ent3, string3, ent4, string4) {
   self endon("death");
-  ent = spawnstruct();
+  ent = spawnStruct();
   ent.threads = 0;
 
-  if(isdefined(ent1)) {
-    assert(isdefined(string1));
+  if(isDefined(ent1)) {
+    assert(isDefined(string1));
     ent1 thread waittill_string(string1, ent);
     ent.threads++;
   }
-  if(isdefined(ent2)) {
-    assert(isdefined(string2));
+  if(isDefined(ent2)) {
+    assert(isDefined(string2));
     ent2 thread waittill_string(string2, ent);
     ent.threads++;
   }
-  if(isdefined(ent3)) {
-    assert(isdefined(string3));
+  if(isDefined(ent3)) {
+    assert(isDefined(string3));
     ent3 thread waittill_string(string3, ent);
     ent.threads++;
   }
-  if(isdefined(ent4)) {
-    assert(isdefined(string4));
+  if(isDefined(ent4)) {
+    assert(isDefined(string4));
     ent4 thread waittill_string(string4, ent);
     ent.threads++;
   }
 
-  while (ent.threads) {
+  while(ent.threads) {
     ent waittill("returned");
     ent.threads--;
   }
@@ -380,28 +380,28 @@ waittill_multiple_ents(ent1, string1, ent2, string2, ent3, string3, ent4, string
 =============
 */
 waittill_any_return(string1, string2, string3, string4, string5) {
-  if((!isdefined(string1) || string1 != "death") &&
-    (!isdefined(string2) || string2 != "death") &&
-    (!isdefined(string3) || string3 != "death") &&
-    (!isdefined(string4) || string4 != "death") &&
-    (!isdefined(string5) || string5 != "death"))
+  if((!isDefined(string1) || string1 != "death") &&
+    (!isDefined(string2) || string2 != "death") &&
+    (!isDefined(string3) || string3 != "death") &&
+    (!isDefined(string4) || string4 != "death") &&
+    (!isDefined(string5) || string5 != "death"))
     self endon("death");
 
-  ent = spawnstruct();
+  ent = spawnStruct();
 
-  if(isdefined(string1))
+  if(isDefined(string1))
     self thread waittill_string(string1, ent);
 
-  if(isdefined(string2))
+  if(isDefined(string2))
     self thread waittill_string(string2, ent);
 
-  if(isdefined(string3))
+  if(isDefined(string3))
     self thread waittill_string(string3, ent);
 
-  if(isdefined(string4))
+  if(isDefined(string4))
     self thread waittill_string(string4, ent);
 
-  if(isdefined(string5))
+  if(isDefined(string5))
     self thread waittill_string(string5, ent);
 
   ent waittill("returned", msg);
@@ -424,28 +424,28 @@ waittill_any_return(string1, string2, string3, string4, string5) {
 =============
 */
 waittill_any_timeout(timeOut, string1, string2, string3, string4, string5) {
-  if((!isdefined(string1) || string1 != "death") &&
-    (!isdefined(string2) || string2 != "death") &&
-    (!isdefined(string3) || string3 != "death") &&
-    (!isdefined(string4) || string4 != "death") &&
-    (!isdefined(string5) || string5 != "death"))
+  if((!isDefined(string1) || string1 != "death") &&
+    (!isDefined(string2) || string2 != "death") &&
+    (!isDefined(string3) || string3 != "death") &&
+    (!isDefined(string4) || string4 != "death") &&
+    (!isDefined(string5) || string5 != "death"))
     self endon("death");
 
-  ent = spawnstruct();
+  ent = spawnStruct();
 
-  if(isdefined(string1))
+  if(isDefined(string1))
     self thread waittill_string(string1, ent);
 
-  if(isdefined(string2))
+  if(isDefined(string2))
     self thread waittill_string(string2, ent);
 
-  if(isdefined(string3))
+  if(isDefined(string3))
     self thread waittill_string(string3, ent);
 
-  if(isdefined(string4))
+  if(isDefined(string4))
     self thread waittill_string(string4, ent);
 
-  if(isdefined(string5))
+  if(isDefined(string5))
     self thread waittill_string(string5, ent);
 
   ent thread _timeout(timeOut);
@@ -477,52 +477,52 @@ _timeout(delay) {
 =============
 */
 waittill_any(string1, string2, string3, string4, string5, string6, string7, string8) {
-  assert(isdefined(string1));
+  assert(isDefined(string1));
 
-  if(isdefined(string2))
+  if(isDefined(string2))
     self endon(string2);
 
-  if(isdefined(string3))
+  if(isDefined(string3))
     self endon(string3);
 
-  if(isdefined(string4))
+  if(isDefined(string4))
     self endon(string4);
 
-  if(isdefined(string5))
+  if(isDefined(string5))
     self endon(string5);
 
-  if(isdefined(string6))
+  if(isDefined(string6))
     self endon(string6);
 
-  if(isdefined(string7))
+  if(isDefined(string7))
     self endon(string7);
 
-  if(isdefined(string8))
+  if(isDefined(string8))
     self endon(string8);
 
   self waittill(string1);
 }
 
 waittill_any_ents(ent1, string1, ent2, string2, ent3, string3, ent4, string4, ent5, string5, ent6, string6, ent7, string7) {
-  assert(isdefined(ent1));
-  assert(isdefined(string1));
+  assert(isDefined(ent1));
+  assert(isDefined(string1));
 
-  if((isdefined(ent2)) && (isdefined(string2)))
+  if((isDefined(ent2)) && (isDefined(string2)))
     ent2 endon(string2);
 
-  if((isdefined(ent3)) && (isdefined(string3)))
+  if((isDefined(ent3)) && (isDefined(string3)))
     ent3 endon(string3);
 
-  if((isdefined(ent4)) && (isdefined(string4)))
+  if((isDefined(ent4)) && (isDefined(string4)))
     ent4 endon(string4);
 
-  if((isdefined(ent5)) && (isdefined(string5)))
+  if((isDefined(ent5)) && (isDefined(string5)))
     ent5 endon(string5);
 
-  if((isdefined(ent6)) && (isdefined(string6)))
+  if((isDefined(ent6)) && (isDefined(string6)))
     ent6 endon(string6);
 
-  if((isdefined(ent7)) && (isdefined(string7)))
+  if((isDefined(ent7)) && (isDefined(string7)))
     ent7 endon(string7);
 
   ent1 waittill(string1);
@@ -541,14 +541,14 @@ waittill_any_ents(ent1, string1, ent2, string2, ent3, string3, ent4, string4, en
 =============
 */
 isFlashed() {
-  if(!isdefined(self.flashEndTime))
+  if(!isDefined(self.flashEndTime))
     return false;
 
   return gettime() < self.flashEndTime;
 }
 
-/* 
- ============= 
+/*
+ =============
 ///ScriptDocBegin
 "Name: flag_exist( <flagname> )"
 "Summary: checks to see if a flag exists"
@@ -557,14 +557,14 @@ isFlashed() {
 "Example: if( flag_exist( "hq_cleared" ) );"
 "SPMP: both"
 ///ScriptDocEnd
- ============= 
+ =============
  */
 flag_exist(message) {
-  return isdefined(level.flag[message]);
+  return isDefined(level.flag[message]);
 }
 
-/* 
- ============= 
+/*
+ =============
 ///ScriptDocBegin
 "Name: flag( <flagname>, <entity> )"
 "Summary: Checks if the flag is set. Returns true or false."
@@ -574,12 +574,12 @@ flag_exist(message) {
 "Example: if( flag( "hq_cleared" ) )"
 "SPMP: both"
 ///ScriptDocEnd
- ============= 
+ =============
  */
 
 flag(message) {
-  assertEx(isdefined(message), "Tried to check flag but the flag was not defined.");
-  assertEx(isdefined(level.flag[message]), "Tried to check flag " + message + " but the flag was not initialized.");
+  assertEx(isDefined(message), "Tried to check flag but the flag was not defined.");
+  assertEx(isDefined(level.flag[message]), "Tried to check flag " + message + " but the flag was not initialized.");
 
   return level.flag[message];
 }
@@ -589,15 +589,15 @@ init_flags() {
   level.flags_lock = [];
   level.generic_index = 0;
 
-  if(!isdefined(level.sp_stat_tracking_func))
+  if(!isDefined(level.sp_stat_tracking_func))
     level.sp_stat_tracking_func = ::empty_init_func;
 
-  level.flag_struct = spawnstruct();
+  level.flag_struct = spawnStruct();
   level.flag_struct assign_unique_id();
 }
 
-/* 
- ============= 
+/*
+ =============
 ///ScriptDocBegin
 "Name: flag_init( <flagname> )"
 "Summary: Initialize a flag to be used. All flags must be initialized before using flag_set or flag_wait"
@@ -607,28 +607,25 @@ init_flags() {
 "Example: flag_init( "hq_cleared" );"
 "SPMP: both"
 ///ScriptDocEnd
- ============= 
+ =============
  */
 flag_init(message) {
   if(!isDefined(level.flag)) {
     init_flags();
   }
 
-  /#
-  if(isdefined(level.first_frame) && level.first_frame == -1)
+  if(isDefined(level.first_frame) && level.first_frame == -1)
     assertEx(!isDefined(level.flag[message]), "Attempt to reinitialize existing message: " + message);
-  # /
 
-    level.flag[message] = false;
-  /#
+  level.flag[message] = false;
+
   // lock check
-  # /
-    if(!isdefined(level.trigger_flags)) {
-      init_trigger_flags();
-      level.trigger_flags[message] = [];
-    }
-  else
-  if(!isdefined(level.trigger_flags[message])) {
+
+  if(!isDefined(level.trigger_flags)) {
+    init_trigger_flags();
+    level.trigger_flags[message] = [];
+  } else
+  if(!isDefined(level.trigger_flags[message])) {
     level.trigger_flags[message] = [];
   }
 
@@ -643,14 +640,14 @@ issuffix(msg, suffix) {
   if(suffix.size > msg.size)
     return false;
 
-  for (i = 0; i < suffix.size; i++) {
+  for(i = 0; i < suffix.size; i++) {
     if(msg[i] != suffix[i])
       return false;
   }
   return true;
 }
-/* 
- ============= 
+/*
+ =============
 ///ScriptDocBegin
 "Name: flag_set( <flagname>, <setter> )"
 "Summary: Sets the specified flag, all scripts using flag_wait will now continue."
@@ -660,17 +657,15 @@ issuffix(msg, suffix) {
 "Example: flag_set( "hq_broiled" );"
 "SPMP: both"
 ///ScriptDocEnd
- ============= 
+ =============
  */
 flag_set(message, setter) {
-  /#
   assertEx(isDefined(level.flag[message]), "Attempt to set a flag before calling flag_init: " + message);
   //lock check
-  # /
 
-    level.flag[message] = true;
+  level.flag[message] = true;
   set_trigger_flag_permissions(message);
-  if(isdefined(setter)) {
+  if(isDefined(setter)) {
     level notify(message, setter); // notify needs to be very last thing called
   } else {
     level notify(message); // notify needs to be very last thing called
@@ -682,8 +677,8 @@ assign_unique_id() {
   level.generic_index++;
 }
 
-/* 
- ============= 
+/*
+ =============
 ///ScriptDocBegin
 "Name: flag_wait( <flagname>, <entity> )"
 "Summary: Waits until the specified flag is set."
@@ -693,25 +688,26 @@ assign_unique_id() {
 "Example: flag_wait( "hq_cleared" );"
 "SPMP: both"
 ///ScriptDocEnd
- ============= 
+ =============
  */
 flag_wait(msg, entity) {
   other = undefined;
-  while (!flag(msg)) {
+  while(!flag(msg)) {
     other = undefined;
     level waittill(msg, other);
 
     // if we're waiting for the flag on a specific entity then we have to check
     // to see if the flag is set on that specific entity
-    if(isdefined(entity) && flag(msg, entity))
+    if(isDefined(entity) && flag(msg, entity)) {
       break;
+    }
   }
-  if(isdefined(other))
+  if(isDefined(other))
     return other;
 }
 
-/* 
- ============= 
+/*
+ =============
 ///ScriptDocBegin
 "Name: flag_clear( <flagname>, <entity> )"
 "Summary: Clears the specified flag."
@@ -720,17 +716,16 @@ flag_wait(msg, entity) {
 "Example: flag_clear( "hq_cleared" );"
 "SPMP: both"
 ///ScriptDocEnd
- ============= 
+ =============
  */
 flag_clear(message) {
-  /#
   assertEx(isDefined(level.flag[message]), "Attempt to set a flag before calling flag_init: " + message);
   // lock implementation tbd
-  # /
-    //do this check so we don't unneccessarily send a notify
-    if(!flag(message))
-      return;
 
+  //do this check so we don't unneccessarily send a notify
+  if(!flag(message)) {
+    return;
+  }
   level.flag[message] = false;
 
   set_trigger_flag_permissions(message);
@@ -751,7 +746,7 @@ flag_clear(message) {
 */
 
 flag_waitopen(msg) {
-  while (flag(msg))
+  while(flag(msg))
     level waittill(msg);
 }
 
@@ -774,8 +769,8 @@ waittill_either(msg1, msg2) {
   self waittill(msg2);
 }
 
-/* 
- ============= 
+/*
+ =============
 ///ScriptDocBegin
 "Name: array_thread( <entities> , <process> , <var1> , <var2> , <var3> )"
 "Summary: Threads the < process > function on every entity in the < entities > array. The entity will become "self" in the specified function."
@@ -789,58 +784,58 @@ waittill_either(msg1, msg2) {
 "Example: array_thread( array_of_guys, ::set_ignoreme, false );"
 "SPMP: both"
 ///ScriptDocEnd
- ============= 
+ =============
 */
 array_thread(entities, process, var1, var2, var3, var4, var5, var6, var7, var8, var9) {
-  if(!isdefined(var1)) {
+  if(!isDefined(var1)) {
     foreach(ent in entities)
     ent thread[[process]]();
     return;
   }
 
-  if(!isdefined(var2)) {
+  if(!isDefined(var2)) {
     foreach(ent in entities)
     ent thread[[process]](var1);
     return;
   }
 
-  if(!isdefined(var3)) {
+  if(!isDefined(var3)) {
     foreach(ent in entities)
     ent thread[[process]](var1, var2);
     return;
   }
 
-  if(!isdefined(var4)) {
+  if(!isDefined(var4)) {
     foreach(ent in entities)
     ent thread[[process]](var1, var2, var3);
     return;
   }
 
-  if(!isdefined(var5)) {
+  if(!isDefined(var5)) {
     foreach(ent in entities)
     ent thread[[process]](var1, var2, var3, var4);
     return;
   }
 
-  if(!isdefined(var6)) {
+  if(!isDefined(var6)) {
     foreach(ent in entities)
     ent thread[[process]](var1, var2, var3, var4, var5);
     return;
   }
 
-  if(!isdefined(var7)) {
+  if(!isDefined(var7)) {
     foreach(ent in entities)
     ent thread[[process]](var1, var2, var3, var4, var5, var6);
     return;
   }
 
-  if(!isdefined(var8)) {
+  if(!isDefined(var8)) {
     foreach(ent in entities)
     ent thread[[process]](var1, var2, var3, var4, var5, var6, var7);
     return;
   }
 
-  if(!isdefined(var9)) {
+  if(!isDefined(var9)) {
     foreach(ent in entities)
     ent thread[[process]](var1, var2, var3, var4, var5, var6, var7, var8);
     return;
@@ -851,8 +846,8 @@ array_thread(entities, process, var1, var2, var3, var4, var5, var6, var7, var8, 
   return;
 }
 
-/* 
- ============= 
+/*
+ =============
 ///ScriptDocBegin
 "Name: array_call( <entities> , <process> , <var1> , <var2> , <var3> )"
 "Summary: Runs the code < process > function on every entity in the < entities > array. The entity will become "self" in the specified function."
@@ -866,24 +861,24 @@ array_thread(entities, process, var1, var2, var3, var4, var5, var6, var7, var8, 
 "Example: array_call( array_of_guys, ::set_ignoreme, false );"
 "SPMP: both"
 ///ScriptDocEnd
- ============= 
+ =============
 */
 array_call(entities, process, var1, var2, var3) {
-  if(isdefined(var3)) {
+  if(isDefined(var3)) {
     foreach(ent in entities)
     ent call[[process]](var1, var2, var3);
 
     return;
   }
 
-  if(isdefined(var2)) {
+  if(isDefined(var2)) {
     foreach(ent in entities)
     ent call[[process]](var1, var2);
 
     return;
   }
 
-  if(isdefined(var1)) {
+  if(isDefined(var1)) {
     foreach(ent in entities)
     ent call[[process]](var1);
 
@@ -946,16 +941,16 @@ array_thread5(entities, process, var1, var2, var3, var4, var5) {
 
 remove_undefined_from_array(array) {
   newarray = [];
-  for (i = 0; i < array.size; i++) {
-    if(!isdefined(array[i]))
+  for(i = 0; i < array.size; i++) {
+    if(!isDefined(array[i]))
       continue;
     newarray[newarray.size] = array[i];
   }
   return newarray;
 }
 
-/* 
- ============= 
+/*
+ =============
 ///ScriptDocBegin
 "Name: trigger_on( <name>, <type> )"
 "Summary: Turns a trigger on. This only needs to be called if it was previously turned off"
@@ -966,11 +961,11 @@ remove_undefined_from_array(array) {
 "Example: trigger trigger_on(); -or- trigger_on( "base_trigger", "targetname" )"
 "SPMP: both"
 ///ScriptDocEnd
- ============= 
+ =============
  */
 trigger_on(name, type) {
-  if(isdefined(name) && isdefined(type)) {
-    ents = getentarray(name, type);
+  if(isDefined(name) && isDefined(type)) {
+    ents = getEntArray(name, type);
     array_thread(ents, ::trigger_on_proc);
   } else
     self trigger_on_proc();
@@ -982,8 +977,8 @@ trigger_on_proc() {
   self.trigger_off = undefined;
 }
 
-/* 
- ============= 
+/*
+ =============
 ///ScriptDocBegin
 "Name: trigger_off( <name>, <type> )"
 "Summary: Turns a trigger off so it can no longer be triggered."
@@ -994,11 +989,11 @@ trigger_on_proc() {
 "Example: trigger trigger_off();"
 "SPMP: both"
 ///ScriptDocEnd
- ============= 
+ =============
  */
 trigger_off(name, type) {
-  if(isdefined(name) && isdefined(type)) {
-    ents = getentarray(name, type);
+  if(isDefined(name) && isDefined(type)) {
+    ents = getEntArray(name, type);
     array_thread(ents, ::trigger_off_proc);
   } else
     self trigger_off_proc();
@@ -1017,9 +1012,9 @@ set_trigger_flag_permissions(msg) {
   // turns triggers on or off depending on if they have the proper flags set, based on their shift-g menu settings
 
   // this can be init before _load has run, thanks to AI.
-  if(!isdefined(level.trigger_flags))
+  if(!isDefined(level.trigger_flags)) {
     return;
-
+  }
   // cheaper to do the upkeep at this time rather than with endons and waittills on the individual triggers	
   level.trigger_flags[msg] = remove_undefined_from_array(level.trigger_flags[msg]);
   array_thread(level.trigger_flags[msg], ::update_trigger_based_on_flags);
@@ -1027,7 +1022,7 @@ set_trigger_flag_permissions(msg) {
 
 update_trigger_based_on_flags() {
   true_on = true;
-  if(isdefined(self.script_flag_true)) {
+  if(isDefined(self.script_flag_true)) {
     true_on = false;
     tokens = create_flags_and_return_tokens(self.script_flag_true);
 
@@ -1041,7 +1036,7 @@ update_trigger_based_on_flags() {
   }
 
   false_on = true;
-  if(isdefined(self.script_flag_false)) {
+  if(isDefined(self.script_flag_false)) {
     tokens = create_flags_and_return_tokens(self.script_flag_false);
 
     // stay off unless all the flags are false
@@ -1060,8 +1055,8 @@ create_flags_and_return_tokens(flags) {
   tokens = strtok(flags, " ");
 
   // create the flag if level script does not
-  for (i = 0; i < tokens.size; i++) {
-    if(!isdefined(level.flag[tokens[i]])) {
+  for(i = 0; i < tokens.size; i++) {
+    if(!isDefined(level.flag[tokens[i]])) {
       flag_init(tokens[i]);
     }
   }
@@ -1091,11 +1086,11 @@ init_trigger_flags() {
 */
 
 getstruct(name, type) {
-  assertex(isdefined(name) && isdefined(type), "Did not fill in name and type");
-  assertEx(isdefined(level.struct_class_names), "Tried to getstruct before the structs were init");
+  assertex(isDefined(name) && isDefined(type), "Did not fill in name and type");
+  assertEx(isDefined(level.struct_class_names), "Tried to getstruct before the structs were init");
 
   array = level.struct_class_names[type][name];
-  if(!isdefined(array)) {
+  if(!isDefined(array)) {
     return undefined;
   }
 
@@ -1106,8 +1101,8 @@ getstruct(name, type) {
   return array[0];
 }
 
-/* 
- ============= 
+/*
+ =============
 ///ScriptDocBegin
 "Name: getstructarray( <name> , <type )"
 "Summary: gets an array of script_structs"
@@ -1118,20 +1113,20 @@ getstruct(name, type) {
 "Example: fxemitters = getstructarray( "streetlights", "targetname" )"
 "SPMP: both"
 ///ScriptDocEnd
- ============= 
+ =============
  */
 
 getstructarray(name, type) {
-  assertEx(isdefined(level.struct_class_names), "Tried to getstruct before the structs were init");
+  assertEx(isDefined(level.struct_class_names), "Tried to getstruct before the structs were init");
 
   array = level.struct_class_names[type][name];
-  if(!isdefined(array))
+  if(!isDefined(array))
     return [];
   return array;
 }
 
 struct_class_init() {
-  assertEx(!isdefined(level.struct_class_names), "level.struct_class_names is being initialized in the wrong place! It shouldn't be initialized yet.");
+  assertEx(!isDefined(level.struct_class_names), "level.struct_class_names is being initialized in the wrong place! It shouldn't be initialized yet.");
 
   level.struct_class_names = [];
   level.struct_class_names["target"] = [];
@@ -1140,45 +1135,43 @@ struct_class_init() {
   level.struct_class_names["script_linkname"] = [];
 
   foreach(struct in level.struct) {
-    if(isdefined(struct.targetname)) {
-      if(!isdefined(level.struct_class_names["targetname"][struct.targetname]))
+    if(isDefined(struct.targetname)) {
+      if(!isDefined(level.struct_class_names["targetname"][struct.targetname]))
         level.struct_class_names["targetname"][struct.targetname] = [];
 
       size = level.struct_class_names["targetname"][struct.targetname].size;
       level.struct_class_names["targetname"][struct.targetname][size] = struct;
     }
-    if(isdefined(struct.target)) {
-      if(!isdefined(level.struct_class_names["target"][struct.target]))
+    if(isDefined(struct.target)) {
+      if(!isDefined(level.struct_class_names["target"][struct.target]))
         level.struct_class_names["target"][struct.target] = [];
 
       size = level.struct_class_names["target"][struct.target].size;
       level.struct_class_names["target"][struct.target][size] = struct;
     }
-    if(isdefined(struct.script_noteworthy)) {
-      if(!isdefined(level.struct_class_names["script_noteworthy"][struct.script_noteworthy]))
+    if(isDefined(struct.script_noteworthy)) {
+      if(!isDefined(level.struct_class_names["script_noteworthy"][struct.script_noteworthy]))
         level.struct_class_names["script_noteworthy"][struct.script_noteworthy] = [];
 
       size = level.struct_class_names["script_noteworthy"][struct.script_noteworthy].size;
       level.struct_class_names["script_noteworthy"][struct.script_noteworthy][size] = struct;
     }
-    if(isdefined(struct.script_linkname)) {
-      assertex(!isdefined(level.struct_class_names["script_linkname"][struct.script_linkname]), "Two structs have the same linkname");
+    if(isDefined(struct.script_linkname)) {
+      assertex(!isDefined(level.struct_class_names["script_linkname"][struct.script_linkname]), "Two structs have the same linkname");
       level.struct_class_names["script_linkname"][struct.script_linkname][0] = struct;
     }
   }
 }
 
 fileprint_start(file) {
-  /#
   filename = file;
   level.fileprint = 1;
   level.fileprintlinecount = 0;
   level.fileprint_filename = filename;
-  # /
 }
 
-/* 
- ============= 
+/*
+ =============
 ///ScriptDocBegin
 "Name: fileprint_map_start( <filename> )"
 "Summary: starts map export with the file trees\cod3\cod3\map_source\xenon_export\< filename > .map adds header / worldspawn entity to the map.Use this if you want to start a .map export."
@@ -1189,39 +1182,35 @@ fileprint_start(file) {
 "Example: fileprint_map_start( filename );"
 "SPMP: both"
 ///ScriptDocEnd
- ============= 
+ =============
  */
 
 fileprint_map_start() {
-  /#
   // for the entity count
   level.fileprint_mapentcount = 0;
   fileprint_map_header(true);
-  # /
 
 }
 
 fileprint_map_header(bInclude_blank_worldspawn) {
-  if(!isdefined(bInclude_blank_worldspawn))
+  if(!isDefined(bInclude_blank_worldspawn))
     bInclude_blank_worldspawn = false;
 
-  /#
   fileprint_launcher("iwmap 6");
   fileprint_launcher("\"000_Global\" flagsactive");
   fileprint_launcher("\"The Map\" flags");
 
-  if(!bInclude_blank_worldspawn)
+  if(!bInclude_blank_worldspawn) {
     return;
-
+  }
   fileprint_map_entity_start();
   fileprint_map_keypairprint("classname", "worldspawn");
   fileprint_map_entity_end();
 
-  # /
 }
 
-/* 
- ============= 
+/*
+ =============
 ///ScriptDocBegin
 "Name: fileprint_map_keypairprint( <key1> , <key2> )"
 "Summary: prints a pair of keys to the current open map( by fileprint_map_start() )"
@@ -1232,17 +1221,15 @@ fileprint_map_header(bInclude_blank_worldspawn) {
 "Example: fileprint_map_keypairprint( "classname", "script_model" );"
 "SPMP: both"
 ///ScriptDocEnd
- ============= 
+ =============
  */
 
 fileprint_map_keypairprint(key1, key2) {
-  /#
   fileprint_launcher("\"" + key1 + "\" \"" + key2 + "\"");
-  # /
 }
 
-/* 
- ============= 
+/*
+ =============
 ///ScriptDocBegin
 "Name: fileprint_map_entity_start()"
 "Summary: prints entity number and opening bracket to currently opened file"
@@ -1251,22 +1238,20 @@ fileprint_map_keypairprint(key1, key2) {
 "Example: fileprint_map_entity_start();"
 "SPMP: both"
 ///ScriptDocEnd
- ============= 
+ =============
  */
 
 fileprint_map_entity_start() {
-  /#
-  assert(isdefined(level.fileprint_mapentcount), "need to start a map with fileprint_map_start() first");
-  assert(!isdefined(level.fileprint_entitystart));
+  assert(isDefined(level.fileprint_mapentcount), "need to start a map with fileprint_map_start() first");
+  assert(!isDefined(level.fileprint_entitystart));
   level.fileprint_entitystart = true;
   fileprint_launcher("entity " + level.fileprint_mapentcount);
   fileprint_launcher("{");
   level.fileprint_mapentcount++;
-  # /
 }
 
-/* 
- ============= 
+/*
+ =============
 ///ScriptDocBegin
 "Name: fileprint_map_entity_end()"
 "Summary: close brackets an entity, required for the next entity to begin"
@@ -1275,18 +1260,16 @@ fileprint_map_entity_start() {
 "Example: fileprint_map_entity_end();"
 "SPMP: both"
 ///ScriptDocEnd
- ============= 
+ =============
  */
 
 fileprint_map_entity_end() {
-  /#
   fileprint_launcher("}");
   level.fileprint_entitystart = undefined;
-  # /
 }
 
-/* 
- ============= 
+/*
+ =============
 ///ScriptDocBegin
 "Name: fileprint_radiant_vec( <vector> )"
 "Summary: this converts a vector to a .map file readable format"
@@ -1296,14 +1279,12 @@ fileprint_map_entity_end() {
 "Example: origin_string = fileprint_radiant_vec( vehicle.angles )"
 "SPMP: both"
 ///ScriptDocEnd
- ============= 
+ =============
  */
 
 fileprint_radiant_vec(vector) {
-  /#
   string = "" + vector[0] + " " + vector[1] + " " + vector[2] + "";
   return string;
-  # /
 }
 
 /*
@@ -1325,8 +1306,8 @@ vector_multiply(vec, dif) {
   return vec;
 }
 
-/* 
- ============= 
+/*
+ =============
 ///ScriptDocBegin
 "Name: array_remove( <ents> , <remover> )"
 "Summary: Returns < ents > array minus < remover > "
@@ -1337,7 +1318,7 @@ vector_multiply(vec, dif) {
 "Example: ents = array_remove( ents, guy );"
 "SPMP: both"
 ///ScriptDocEnd
- ============= 
+ =============
  */
 array_remove(ents, remover) {
   newents = [];
@@ -1370,8 +1351,8 @@ array_remove_array(ents, remover_array) {
   return ents;
 }
 
-/* 
- ============= 
+/*
+ =============
 ///ScriptDocBegin
 "Name: array_removeUndefined( <array> )"
 "Summary: Returns a new array of < array > minus the undefined indicies"
@@ -1381,12 +1362,12 @@ array_remove_array(ents, remover_array) {
 "Example: ents = array_removeUndefined( ents );"
 "SPMP: both"
 ///ScriptDocEnd
- ============= 
+ =============
  */
 array_removeUndefined(array) {
   newArray = [];
-  for (i = 0; i < array.size; i++) {
-    if(!isdefined(array[i]))
+  for(i = 0; i < array.size; i++) {
+    if(!isDefined(array[i]))
       continue;
     newArray[newArray.size] = array[i];
   }
@@ -1394,8 +1375,8 @@ array_removeUndefined(array) {
   return newArray;
 }
 
-/* 
- ============= 
+/*
+ =============
 ///ScriptDocBegin
 "Name: array_levelthread( <entities> , <process> , <var1> , <var2> , <var3> )"
 "Summary: Threads the < process > function for every entity in the < entities > array. The level calls the function and each entity of the array is passed as the first parameter to the process."
@@ -1406,27 +1387,27 @@ array_removeUndefined(array) {
 "OptionalArg: <var1> : parameter 1 to pass to the process"
 "OptionalArg: <var2> : parameter 2 to pass to the process"
 "OptionalArg: <var3> : parameter 3 to pass to the process"
-"Example: array_levelthread( getentarray( "palm", "targetname" ), ::palmTrees );"
+"Example: array_levelthread( getEntArray( "palm", "targetname" ), ::palmTrees );"
 "SPMP: both"
 ///ScriptDocEnd
- ============= 
+ =============
  */
 array_levelthread(array, process, var1, var2, var3) {
-  if(isdefined(var3)) {
+  if(isDefined(var3)) {
     foreach(ent in array)
     thread[[process]](ent, var1, var2, var3);
 
     return;
   }
 
-  if(isdefined(var2)) {
+  if(isDefined(var2)) {
     foreach(ent in array)
     thread[[process]](ent, var1, var2);
 
     return;
   }
 
-  if(isdefined(var1)) {
+  if(isDefined(var1)) {
     foreach(ent in array)
     thread[[process]](ent, var1);
 
@@ -1437,8 +1418,8 @@ array_levelthread(array, process, var1, var2, var3) {
   thread[[process]](ent);
 }
 
-/* 
- ============= 
+/*
+ =============
 ///ScriptDocBegin
 "Name: array_levelcall( <entities> , <process> , <var1> , <var2> , <var3> )"
 "Summary: Calls the < process > function for every entity in the < entities > array. The level calls the function and each entity of the array is passed as the first parameter to the process."
@@ -1452,24 +1433,24 @@ array_levelthread(array, process, var1, var2, var3) {
 "Example: array_levelthread( array_of_trees, ::palmTrees );"
 "SPMP: both"
 ///ScriptDocEnd
- ============= 
+ =============
  */
 array_levelcall(array, process, var1, var2, var3) {
-  if(isdefined(var3)) {
+  if(isDefined(var3)) {
     foreach(ent in array)
     call[[process]](ent, var1, var2, var3);
 
     return;
   }
 
-  if(isdefined(var2)) {
+  if(isDefined(var2)) {
     foreach(ent in array)
     call[[process]](ent, var1, var2);
 
     return;
   }
 
-  if(isdefined(var1)) {
+  if(isDefined(var1)) {
     foreach(ent in array)
     call[[process]](ent, var1);
 
@@ -1480,8 +1461,8 @@ array_levelcall(array, process, var1, var2, var3) {
   call[[process]](ent);
 }
 
-/* 
-============= 
+/*
+=============
 ///ScriptDocBegin
 "Name: add_to_array( <array> , <ent> )"
 "Summary: Adds < ent > to < array > and returns the new array."
@@ -1492,20 +1473,19 @@ array_levelcall(array, process, var1, var2, var3) {
 "Example: nodes = add_to_array( nodes, new_node );"
 "SPMP: both"
 ///ScriptDocEnd
-============= 
+=============
 */
 add_to_array(array, ent) {
-  if(!isdefined(ent))
+  if(!isDefined(ent))
     return array;
 
-  if(!isdefined(array))
+  if(!isDefined(array))
     array[0] = ent;
   else
     array[array.size] = ent;
 
   return array;
 }
-
 
 /*
 =============
@@ -1524,8 +1504,8 @@ flag_assert(msg) {
   assertEx(!flag(msg), "Flag " + msg + " set too soon!");
 }
 
-/* 
- ============= 
+/*
+ =============
 ///ScriptDocBegin
 "Name: flag_wait_either( <flagname1> , <flagname2> )"
 "Summary: Waits until either of the the specified flags are set."
@@ -1536,21 +1516,21 @@ flag_assert(msg) {
 "Example: flag_wait( "hq_cleared", "hq_destroyed" );"
 "SPMP: both"
 ///ScriptDocEnd
- ============= 
+ =============
  */
 flag_wait_either(flag1, flag2) {
-  for (;;) {
+  for(;;) {
     if(flag(flag1))
       return;
-    if(flag(flag2))
+    if(flag(flag2)) {
       return;
-
+    }
     level waittill_either(flag1, flag2);
   }
 }
 
-/* 
- ============= 
+/*
+ =============
 ///ScriptDocBegin
 "Name: flag_wait_either_return( <flagname1> , <flagname2> )"
 "Summary: Waits until either of the the specified flags are set, and returns the first one it found."
@@ -1561,10 +1541,10 @@ flag_wait_either(flag1, flag2) {
 "Example: flag_wait( "hq_cleared", "hq_destroyed" );"
 "SPMP: both"
 ///ScriptDocEnd
- ============= 
+ =============
  */
 flag_wait_either_return(flag1, flag2) {
-  for (;;) {
+  for(;;) {
     if(flag(flag1))
       return flag1;
     if(flag(flag2))
@@ -1575,8 +1555,8 @@ flag_wait_either_return(flag1, flag2) {
   }
 }
 
-/* 
- ============= 
+/*
+ =============
 ///ScriptDocBegin
 "Name: flag_wait_any( <flagname1> , <flagname2>, <flagname3> , <flagname4> , <flagname5> , <flagname6> )"
 "Summary: Waits until any of the the specified flags are set."
@@ -1589,33 +1569,33 @@ flag_wait_either_return(flag1, flag2) {
 "Example: flag_wait_any( "hq_cleared", "hq_destroyed", "hq_overrun", "hq_skipped" );"
 "SPMP: both"
 ///ScriptDocEnd
- ============= 
+ =============
  */
 flag_wait_any(flag1, flag2, flag3, flag4, flag5, flag6) {
   array = [];
-  if(isdefined(flag6)) {
+  if(isDefined(flag6)) {
     array[array.size] = flag1;
     array[array.size] = flag2;
     array[array.size] = flag3;
     array[array.size] = flag4;
     array[array.size] = flag5;
     array[array.size] = flag6;
-  } else if(isdefined(flag5)) {
+  } else if(isDefined(flag5)) {
     array[array.size] = flag1;
     array[array.size] = flag2;
     array[array.size] = flag3;
     array[array.size] = flag4;
     array[array.size] = flag5;
-  } else if(isdefined(flag4)) {
+  } else if(isDefined(flag4)) {
     array[array.size] = flag1;
     array[array.size] = flag2;
     array[array.size] = flag3;
     array[array.size] = flag4;
-  } else if(isdefined(flag3)) {
+  } else if(isDefined(flag3)) {
     array[array.size] = flag1;
     array[array.size] = flag2;
     array[array.size] = flag3;
-  } else if(isdefined(flag2)) {
+  } else if(isDefined(flag2)) {
     flag_wait_either(flag1, flag2);
     return;
   } else {
@@ -1623,8 +1603,8 @@ flag_wait_any(flag1, flag2, flag3, flag4, flag5, flag6) {
     return;
   }
 
-  for (;;) {
-    for (i = 0; i < array.size; i++) {
+  for(;;) {
+    for(i = 0; i < array.size; i++) {
       if(flag(array[i]))
         return;
     }
@@ -1633,8 +1613,8 @@ flag_wait_any(flag1, flag2, flag3, flag4, flag5, flag6) {
   }
 }
 
-/* 
- ============= 
+/*
+ =============
 ///ScriptDocBegin
 "Name: flag_wait_any_return( <flagname1> , <flagname2>, <flagname3> , <flagname4> , <flagname5> , <flagname6> )"
 "Summary: Waits until any of the the specified flags are set, and returns the first set flag that was found."
@@ -1647,33 +1627,33 @@ flag_wait_any(flag1, flag2, flag3, flag4, flag5, flag6) {
 "Example: returned = flag_wait_any_return( "hq_cleared", "hq_destroyed", "hq_overrun", "hq_skipped" );"
 "SPMP: both"
 ///ScriptDocEnd
- ============= 
+ =============
  */
 flag_wait_any_return(flag1, flag2, flag3, flag4, flag5, flag6) {
   array = [];
-  if(isdefined(flag6)) {
+  if(isDefined(flag6)) {
     array[array.size] = flag1;
     array[array.size] = flag2;
     array[array.size] = flag3;
     array[array.size] = flag4;
     array[array.size] = flag5;
     array[array.size] = flag6;
-  } else if(isdefined(flag5)) {
+  } else if(isDefined(flag5)) {
     array[array.size] = flag1;
     array[array.size] = flag2;
     array[array.size] = flag3;
     array[array.size] = flag4;
     array[array.size] = flag5;
-  } else if(isdefined(flag4)) {
+  } else if(isDefined(flag4)) {
     array[array.size] = flag1;
     array[array.size] = flag2;
     array[array.size] = flag3;
     array[array.size] = flag4;
-  } else if(isdefined(flag3)) {
+  } else if(isDefined(flag3)) {
     array[array.size] = flag1;
     array[array.size] = flag2;
     array[array.size] = flag3;
-  } else if(isdefined(flag2)) {
+  } else if(isDefined(flag2)) {
     msg = flag_wait_either_return(flag1, flag2);
     return msg;
   } else {
@@ -1681,8 +1661,8 @@ flag_wait_any_return(flag1, flag2, flag3, flag4, flag5, flag6) {
     return;
   }
 
-  for (;;) {
-    for (i = 0; i < array.size; i++) {
+  for(;;) {
+    for(i = 0; i < array.size; i++) {
       if(flag(array[i]))
         return array[i];
     }
@@ -1692,8 +1672,8 @@ flag_wait_any_return(flag1, flag2, flag3, flag4, flag5, flag6) {
   }
 }
 
-/* 
- ============= 
+/*
+ =============
 ///ScriptDocBegin
 "Name: flag_wait_all( <flagname1> , <flagname2>, <flagname3> , <flagname4> )"
 "Summary: Waits until all of the the specified flags are set."
@@ -1706,24 +1686,24 @@ flag_wait_any_return(flag1, flag2, flag3, flag4, flag5, flag6) {
 "Example: flag_wait_any( "hq_cleared", "hq_destroyed", "hq_overrun", "hq_skipped" );"
 "SPMP: both"
 ///ScriptDocEnd
- ============= 
+ =============
  */
 flag_wait_all(flag1, flag2, flag3, flag4) {
-  if(isdefined(flag1))
+  if(isDefined(flag1))
     flag_wait(flag1);
 
-  if(isdefined(flag2))
+  if(isDefined(flag2))
     flag_wait(flag2);
 
-  if(isdefined(flag3))
+  if(isDefined(flag3))
     flag_wait(flag3);
 
-  if(isdefined(flag4))
+  if(isDefined(flag4))
     flag_wait(flag4);
 }
 
-/* 
- ============= 
+/*
+ =============
 ///ScriptDocBegin
 "Name: flag_wait_or_timeout( <flagname> , <timer> )"
 "Summary: Waits until either the flag gets set or the timer elapses."
@@ -1734,13 +1714,13 @@ flag_wait_all(flag1, flag2, flag3, flag4) {
 "Example: flag_wait_or_timeout( "time_to_go", 3 );"
 "SPMP: both"
 ///ScriptDocEnd
- ============= 
+ =============
  */
 flag_wait_or_timeout(flagname, timer) {
   timerMS = timer * 1000;
   start_time = GetTime();
 
-  for (;;) {
+  for(;;) {
     if(flag(flagname)) {
       break;
     }
@@ -1755,8 +1735,8 @@ flag_wait_or_timeout(flagname, timer) {
   }
 }
 
-/* 
-============= 
+/*
+=============
 ///ScriptDocBegin
 "Name: flag_waitopen_or_timeout( <flagname> , <timer> )"
 "Summary: Waits until either the flag gets cleared or the timer elapses."
@@ -1767,16 +1747,18 @@ flag_wait_or_timeout(flagname, timer) {
 "Example: flag_waitopen_or_timeout( "time_to_go", 3 );"
 "SPMP: both"
 ///ScriptDocEnd
-============= 
+=============
 */
 flag_waitopen_or_timeout(flagname, timer) {
   start_time = gettime();
-  for (;;) {
-    if(!flag(flagname))
+  for(;;) {
+    if(!flag(flagname)) {
       break;
+    }
 
-    if(gettime() >= start_time + timer * 1000)
+    if(gettime() >= start_time + timer * 1000) {
       break;
+    }
 
     wait_for_flag_or_time_elapses(flagname, timer);
   }
@@ -1787,8 +1769,8 @@ wait_for_flag_or_time_elapses(flagname, timer) {
   wait(timer);
 }
 
-/* 
- ============= 
+/*
+ =============
 ///ScriptDocBegin
 "Name: delayCall( <delay> , <function> , <arg1> , <arg2> , <arg3> )"
 "Summary: delayCall is cool! It saves you from having to write extra script for once off commands. Note you don’t have to thread it off. delaycall is that smart!"
@@ -1802,7 +1784,7 @@ wait_for_flag_or_time_elapses(flagname, timer) {
 "Example: delayCall( ::flag_set, "player_can_rappel", 3 );"
 "SPMP: both"
 ///ScriptDocEnd
- ============= 
+ =============
  */
 
 delayCall(timer, func, param1, param2, param3, param4) {
@@ -1815,23 +1797,23 @@ delayCall_proc(func, timer, param1, param2, param3, param4) {
     self endon("death");
 
   wait(timer);
-  if(isdefined(param4))
+  if(isDefined(param4))
     self call[[func]](param1, param2, param3, param4);
   else
-  if(isdefined(param3))
+  if(isDefined(param3))
     self call[[func]](param1, param2, param3);
   else
-  if(isdefined(param2))
+  if(isDefined(param2))
     self call[[func]](param1, param2);
   else
-  if(isdefined(param1))
+  if(isDefined(param1))
     self call[[func]](param1);
   else
     self call[[func]]();
 }
 
-/* 
- ============= 
+/*
+ =============
 ///ScriptDocBegin
 "Name: noself_delayCall( <delay> , <function> , <arg1> , <arg2> , <arg3>, <arg4> )"
 "Summary: Calls a command with no self (some commands don't support having self)."
@@ -1845,7 +1827,7 @@ delayCall_proc(func, timer, param1, param2, param3, param4) {
 "Example: noself_delayCall( ::setsaveddvar, "player_can_rappel", 1 );"
 "SPMP: both"
 ///ScriptDocEnd
- ============= 
+ =============
  */
 
 noself_delayCall(timer, func, param1, param2, param3, param4) {
@@ -1855,23 +1837,23 @@ noself_delayCall(timer, func, param1, param2, param3, param4) {
 
 noself_delayCall_proc(func, timer, param1, param2, param3, param4) {
   wait(timer);
-  if(isdefined(param4))
+  if(isDefined(param4))
     call[[func]](param1, param2, param3, param4);
   else
-  if(isdefined(param3))
+  if(isDefined(param3))
     call[[func]](param1, param2, param3);
   else
-  if(isdefined(param2))
+  if(isDefined(param2))
     call[[func]](param1, param2);
   else
-  if(isdefined(param1))
+  if(isDefined(param1))
     call[[func]](param1);
   else
     call[[func]]();
 }
 
-/* 
- ============= 
+/*
+ =============
 ///ScriptDocBegin
 "Name: isSP()"
 "Summary: Returns false if the level name begins with mp_"
@@ -1879,10 +1861,10 @@ noself_delayCall_proc(func, timer, param1, param2, param3, param4) {
 "Example: if( isSP() );"
 "SPMP: both"
 ///ScriptDocEnd
- ============= 
+ =============
  */
 isSP() {
-  if(!isdefined(level.isSP))
+  if(!isDefined(level.isSP))
     level.isSP = !(string_starts_with(getdvar("mapname"), "mp_"));
 
   return level.isSP;
@@ -1903,12 +1885,12 @@ isSP() {
 =============
 */
 string_starts_with(string, start) {
-  assert(isdefined(string));
-  assert(isdefined(start));
+  assert(isDefined(string));
+  assert(isDefined(start));
   if(string.size < start.size)
     return false;
 
-  for (i = 0; i < start.size; i++) {
+  for(i = 0; i < start.size; i++) {
     if(tolower(string[i]) != tolower(start[i]))
       return false;
   }
@@ -1918,22 +1900,22 @@ string_starts_with(string, start) {
 
 plot_points(plotpoints, r, g, b, timer) {
   lastpoint = plotpoints[0];
-  if(!isdefined(r))
+  if(!isDefined(r))
     r = 1;
-  if(!isdefined(g))
+  if(!isDefined(g))
     g = 1;
-  if(!isdefined(b))
+  if(!isDefined(b))
     b = 1;
-  if(!isdefined(timer))
+  if(!isDefined(timer))
     timer = 0.05;
-  for (i = 1; i < plotpoints.size; i++) {
+  for(i = 1; i < plotpoints.size; i++) {
     thread draw_line_for_time(lastpoint, plotpoints[i], r, g, b, timer);
     lastpoint = plotpoints[i];
   }
 }
 
-/* 
- ============= 
+/*
+ =============
 ///ScriptDocBegin
 "Name: draw_line_for_time( <org1> , <org2> , <r> , <g> , <b> , <timer> )"
 "Summary: Draws a line from < org1 > to < org2 > in the specified color for the specified duration"
@@ -1948,19 +1930,19 @@ plot_points(plotpoints, r, g, b, timer) {
 "Example: thread draw_line_for_time( level.player.origin, vehicle.origin, 1, 0, 0, 10.0 );"
 "SPMP: both"
 ///ScriptDocEnd
- ============= 
+ =============
  */
 draw_line_for_time(org1, org2, r, g, b, timer) {
   timer = gettime() + (timer * 1000);
-  while (gettime() < timer) {
+  while(gettime() < timer) {
     line(org1, org2, (r, g, b), 1);
     wait .05;
   }
 
 }
 
-/* 
- ============= 
+/*
+ =============
 ///ScriptDocBegin
 "Name: array_combine( <array1> , <array2> )"
 "Summary: Combines the two arrays and returns the resulting array. This function doesn't care if it produces duplicates in the array."
@@ -1971,7 +1953,7 @@ draw_line_for_time(org1, org2, r, g, b, timer) {
 "Example: combinedArray = array_combine( array1, array2 );"
 "SPMP: both"
 ///ScriptDocEnd
- ============= 
+ =============
  */
 array_combine(array1, array2) {
   array3 = [];
@@ -1984,8 +1966,8 @@ array_combine(array1, array2) {
   return array3;
 }
 
-/* 
- ============= 
+/*
+ =============
 ///ScriptDocBegin
 "Name: flat_angle( <angle> )"
 "Summary: Returns the specified angle as a flat angle.( 45, 90, 30 ) becomes( 0, 90, 30 ). Useful if you just need an angle around Y - axis."
@@ -1995,15 +1977,15 @@ array_combine(array1, array2) {
 "Example: yaw = flat_angle( node.angles );"
 "SPMP: both"
 ///ScriptDocEnd
- ============= 
+ =============
  */
 flat_angle(angle) {
   rangle = (0, angle[1], 0);
   return rangle;
 }
 
-/* 
- ============= 
+/*
+ =============
 ///ScriptDocBegin
 "Name: flat_origin( <org> )"
 "Summary: Returns a flat origin of the specified origin. Moves Z corrdinate to 0.( x, y, z ) becomes( x, y, 0 )"
@@ -2013,16 +1995,15 @@ flat_angle(angle) {
 "Example: org = flat_origin( self.origin );"
 "SPMP: both"
 ///ScriptDocEnd
- ============= 
+ =============
  */
 flat_origin(org) {
   rorg = (org[0], org[1], 0);
   return rorg;
-
 }
 
-/* 
- ============= 
+/*
+ =============
 ///ScriptDocBegin
 "Name: draw_arrow_time( <start> , <end> , <color> , <duration> )"
 "Summary: Draws an arrow pointing at < end > in the specified color for < duration > seconds."
@@ -2035,14 +2016,14 @@ flat_origin(org) {
 "Example: thread draw_arrow_time( lasttarg.origin, targ.origin, ( 0, 0, 1 ), 5.0 );"
 "SPMP: both"
 ///ScriptDocEnd
- ============= 
+ =============
  */
 draw_arrow_time(start, end, color, duration) {
   level endon("newpath");
   pts = [];
   angles = vectortoangles(start - end);
   right = anglestoright(angles);
-  forward = anglestoforward(angles);
+  forward = anglesToForward(angles);
   up = anglestoup(angles);
 
   dist = distance(start, end);
@@ -2082,10 +2063,10 @@ draw_arrow_time(start, end, color, duration) {
 get_linked_ents() {
   array = [];
 
-  if(isdefined(self.script_linkto)) {
+  if(isDefined(self.script_linkto)) {
     linknames = get_links();
     foreach(name in linknames) {
-      entities = getentarray(name, "script_linkname");
+      entities = getEntArray(name, "script_linkname");
       if(entities.size > 0)
         array = array_combine(array, entities);
     }
@@ -2109,7 +2090,7 @@ get_linked_ents() {
 get_linked_ent() {
   array = get_linked_ents();
   assert(array.size == 1);
-  assert(isdefined(array[0]));
+  assert(isDefined(array[0]));
   return array[0];
 }
 
@@ -2131,7 +2112,6 @@ get_links() {
   return strtok(self.script_linkTo, " ");
 }
 
-
 /*
 =============
 ///ScriptDocBegin
@@ -2150,7 +2130,7 @@ get_links() {
 */
 
 run_thread_on_targetname(msg, func, param1, param2, param3) {
-  array = getentarray(msg, "targetname");
+  array = getEntArray(msg, "targetname");
   array_thread(array, func, param1, param2, param3);
 
   array = getstructarray(msg, "targetname");
@@ -2181,7 +2161,7 @@ run_thread_on_targetname(msg, func, param1, param2, param3) {
 */
 
 run_thread_on_noteworthy(msg, func, param1, param2, param3) {
-  array = getentarray(msg, "script_noteworthy");
+  array = getEntArray(msg, "script_noteworthy");
   array_thread(array, func, param1, param2, param3);
 
   array = getstructarray(msg, "script_noteworthy");
@@ -2194,8 +2174,8 @@ run_thread_on_noteworthy(msg, func, param1, param2, param3) {
   array_thread(array, func, param1, param2, param3);
 }
 
-/* 
- ============= 
+/*
+ =============
 ///ScriptDocBegin
 "Name: draw_arrow( <start> , <end> , <color> )"
 "Summary: Draws an arrow pointing at < end > in the specified color for < duration > seconds."
@@ -2207,7 +2187,7 @@ run_thread_on_noteworthy(msg, func, param1, param2, param3) {
 "Example: draw_arrow( lasttarg.origin, targ.origin, ( 0, 0, 1 ));"
 "SPMP: both"
 ///ScriptDocEnd
- ============= 
+ =============
  */
 
 draw_arrow(start, end, color) {
@@ -2215,7 +2195,7 @@ draw_arrow(start, end, color) {
   pts = [];
   angles = vectortoangles(start - end);
   right = anglestoright(angles);
-  forward = anglestoforward(angles);
+  forward = anglesToForward(angles);
 
   dist = distance(start, end);
   arrow = [];
@@ -2225,7 +2205,7 @@ draw_arrow(start, end, color) {
   arrow[2] = end;
   arrow[3] = start + vector_multiply(right, dist * (-1 * range)) + vector_multiply(forward, dist * -0.2);
 
-  for (p = 0; p < 4; p++) {
+  for(p = 0; p < 4; p++) {
     nextpoint = p + 1;
     if(nextpoint >= 4)
       nextpoint = 0;
@@ -2248,7 +2228,7 @@ draw_arrow(start, end, color) {
 =============
 */
 cap_value(value, minValue, maxValue) {
-  assert(isdefined(value));
+  assert(isDefined(value));
 
   // handle a min value larger than a max value
   if(minValue > maxValue)
@@ -2256,10 +2236,10 @@ cap_value(value, minValue, maxValue) {
 
   assert(minValue <= maxValue);
 
-  if(isdefined(minValue) && (value < minValue))
+  if(isDefined(minValue) && (value < minValue))
     return minValue;
 
-  if(isdefined(maxValue) && (value > maxValue))
+  if(isDefined(maxValue) && (value > maxValue))
     return maxValue;
 
   return value;
@@ -2278,7 +2258,7 @@ cap_value(value, minValue, maxValue) {
 =============
 */
 getfx(fx) {
-  assertEx(isdefined(level._effect[fx]), "Fx " + fx + " is not defined in level._effect.");
+  assertEx(isDefined(level._effect[fx]), "Fx " + fx + " is not defined in level._effect.");
   return level._effect[fx];
 }
 
@@ -2295,28 +2275,25 @@ getfx(fx) {
 =============
 */
 fxExists(fx) {
-  return isdefined(level._effect[fx]);
+  return isDefined(level._effect[fx]);
 }
 
 print_csv_asset(asset, type) {
   fileline = type + "," + asset;
-  if(isdefined(level.csv_lines[fileline]))
+  if(isDefined(level.csv_lines[fileline]))
     return;
   level.csv_lines[fileline] = true;
   //	fileprint_chk( level.fileprint, fileline );
 }
 
 fileprint_csv_start(file) {
-  /#
   file = "scriptgen/" + file + ".csv";
   level.csv_lines = [];
-  # /
 }
 
 _loadfx(effect) {
   return loadfx(effect);
 }
-
 
 /*
 =============
@@ -2351,20 +2328,19 @@ getLastWeapon() {
 =============
 */
 PlayerUnlimitedAmmoThread() {
-  /#
-  if(!isdefined(self) || self == level || self.code_classname != "player")
+  if(!isDefined(self) || self == level || self.code_classname != "player")
     player = level.player;
   else
     player = self;
 
-  assert(isdefined(player));
+  assert(isDefined(player));
 
-  while (1) {
+  while(1) {
     wait .5;
 
-    if(getdvar("UnlimitedAmmoOff") == "1")
+    if(getdvar("UnlimitedAmmoOff") == "1") {
       continue;
-
+    }
     currentWeapon = player getCurrentWeapon();
     if(currentWeapon != "none") {
       currentAmmo = player GetFractionMaxAmmo(currentWeapon);
@@ -2378,7 +2354,7 @@ PlayerUnlimitedAmmoThread() {
         player GiveMaxAmmo(currentoffhand);
     }
   }
-  # /
+
 }
 
 isUsabilityEnabled() {
@@ -2497,11 +2473,11 @@ random(array) {
 */
 spawn_tag_origin() {
   tag_origin = spawn("script_model", (0, 0, 0));
-  tag_origin setmodel("tag_origin");
+  tag_origin setModel("tag_origin");
   tag_origin hide();
-  if(isdefined(self.origin))
+  if(isDefined(self.origin))
     tag_origin.origin = self.origin;
-  if(isdefined(self.angles))
+  if(isDefined(self.angles))
     tag_origin.angles = self.angles;
 
   return tag_origin;
@@ -2540,7 +2516,7 @@ waittill_notify_or_timeout(msg, timer) {
 */
 
 fileprint_launcher_start_file() {
-  AssertEx(!isdefined(level.fileprint_launcher), "Can't open more than one file at a time to print through launcher.");
+  AssertEx(!isDefined(level.fileprint_launcher), "Can't open more than one file at a time to print through launcher.");
   level.fileprintlauncher_linecount = 0;
   level.fileprint_launcher = true;
   fileprint_launcher("GAMEPRINTSTARTFILE:");
@@ -2561,7 +2537,7 @@ fileprint_launcher_start_file() {
 */
 
 fileprint_launcher(string) {
-  assert(isdefined(level.fileprintlauncher_linecount));
+  assert(isDefined(level.fileprintlauncher_linecount));
   level.fileprintlauncher_linecount++;
   if(level.fileprintlauncher_linecount > 200) {
     wait .05;
@@ -2586,7 +2562,7 @@ fileprint_launcher(string) {
 */
 
 fileprint_launcher_end_file(file_relative_to_game, bIsPerforceEnabled) {
-  if(!isdefined(bIsPerforceEnabled))
+  if(!isDefined(bIsPerforceEnabled))
     bIsPerforceEnabled = false;
 
   setDevDvarIfUninitialized("LAUNCHER_PRINT_FAIL", "0");
@@ -2597,9 +2573,9 @@ fileprint_launcher_end_file(file_relative_to_game, bIsPerforceEnabled) {
   else
     fileprint_launcher("GAMEPRINTENDFILE:" + file_relative_to_game);
 
-  // wait for launcher to tell us that it's done writing the file 
+  // wait for launcher to tell us that it's done writing the file
   TimeOut = gettime() + 4000; // give launcher 4 seconds to print the file.
-  while (getdvarint("LAUNCHER_PRINT_SUCCESS") == 0 && getdvar("LAUNCHER_PRINT_FAIL") == "0" && gettime() < TimeOut)
+  while(getdvarint("LAUNCHER_PRINT_SUCCESS") == 0 && getdvar("LAUNCHER_PRINT_FAIL") == "0" && gettime() < TimeOut)
     wait .05;
 
   if(!(gettime() < TimeOut)) {
@@ -2656,9 +2632,9 @@ launcher_write_clipboard(str) {
 =============
 */
 isDestructible() {
-  if(!isdefined(self))
+  if(!isDefined(self))
     return false;
-  return isdefined(self.destructible_type);
+  return isDefined(self.destructible_type);
 }
 
 /*
@@ -2692,25 +2668,25 @@ pauseEffect() {
 =============
 */
 activate_individual_exploder() {
-  if(IsDefined(self.v["firefx"]))
+  if(isDefined(self.v["firefx"]))
     self thread fire_effect();
 
-  if(IsDefined(self.v["fxid"]) && self.v["fxid"] != "No FX")
+  if(isDefined(self.v["fxid"]) && self.v["fxid"] != "No FX")
     self thread cannon_effect();
   else
-  if(IsDefined(self.v["soundalias"]) && self.v["soundalias"] != "nil")
+  if(isDefined(self.v["soundalias"]) && self.v["soundalias"] != "nil")
     self thread sound_effect();
 
-  if(IsDefined(self.v["loopsound"]) && self.v["loopsound"] != "nil")
+  if(isDefined(self.v["loopsound"]) && self.v["loopsound"] != "nil")
     self thread effect_loopsound();
 
-  if(IsDefined(self.v["damage"]))
+  if(isDefined(self.v["damage"]))
     self thread exploder_damage();
 
-  if(IsDefined(self.v["earthquake"]))
+  if(isDefined(self.v["earthquake"]))
     self thread exploder_earthquake();
 
-  if(IsDefined(self.v["rumble"]))
+  if(isDefined(self.v["rumble"]))
     self thread exploder_rumble();
 
   if(self.v["exploder_type"] == "exploder")
@@ -2727,27 +2703,27 @@ waitframe() {
 }
 
 brush_delete() {
-  // 		if( ent.v[ "exploder_type" ] != "normal" && !isdefined( ent.v[ "fxid" ] ) && !isdefined( ent.v[ "soundalias" ] ) )
-  // 		if( !isdefined( ent.script_fxid ) )
+  // 		if( ent.v[ "exploder_type" ] != "normal" && !isDefined( ent.v[ "fxid" ] ) && !isDefined( ent.v[ "soundalias" ] ) )
+  // 		if( !isDefined( ent.script_fxid ) )
 
   num = self.v["exploder"];
-  if(IsDefined(self.v["delay"]))
+  if(isDefined(self.v["delay"]))
     wait(self.v["delay"]);
   else
     wait(.05); // so it disappears after the replacement appears
 
-  if(!isdefined(self.model))
+  if(!isDefined(self.model)) {
     return;
-
-  Assert(IsDefined(self.model));
+  }
+  Assert(isDefined(self.model));
 
   if(isSP() && (self.model.spawnflags & 1))
     self.model call[[level.connectPathsFunction]]();
 
   if(level.createFX_enabled) {
-    if(IsDefined(self.exploded))
+    if(isDefined(self.exploded)) {
       return;
-
+    }
     self.exploded = true;
     self.model Hide();
     self.model NotSolid();
@@ -2759,7 +2735,7 @@ brush_delete() {
     return;
   }
 
-  if(!isdefined(self.v["fxid"]) || self.v["fxid"] == "No FX")
+  if(!isDefined(self.v["fxid"]) || self.v["fxid"] == "No FX")
     self.v["exploder"] = undefined;
 
   waittillframeend; // so it hides stuff after it shows the new stuff
@@ -2767,21 +2743,21 @@ brush_delete() {
 }
 
 brush_throw() {
-  if(IsDefined(self.v["delay"]))
+  if(isDefined(self.v["delay"]))
     wait(self.v["delay"]);
 
   ent = undefined;
-  if(IsDefined(self.v["target"]))
+  if(isDefined(self.v["target"]))
     ent = get_target_ent(self.v["target"]);
 
-  if(!isdefined(ent)) {
+  if(!isDefined(ent)) {
     self.model Delete();
     return;
   }
 
   self.model Show();
 
-  if(IsDefined(self.v["delay_post"]))
+  if(isDefined(self.v["delay_post"]))
     wait(self.v["delay_post"]);
 
   startorg = self.v["origin"];
@@ -2793,13 +2769,13 @@ brush_throw() {
   y = temp_vec[1];
   z = temp_vec[2];
 
-  physics = IsDefined(self.v["physics"]);
+  physics = isDefined(self.v["physics"]);
   if(physics) {
     target = undefined;
-    if(IsDefined(ent.target))
+    if(isDefined(ent.target))
       target = ent get_target_ent();
 
-    if(!isdefined(target)) {
+    if(!isDefined(target)) {
       contact_point = startorg; // no spin just push it.
       throw_vec = ent.origin;
     } else {
@@ -2808,7 +2784,7 @@ brush_throw() {
 
     }
 
-    // 		model = Spawn( "script_model", startorg );
+    // 		model = spawn( "script_model", startorg );
     // 		model.angles = startang;
     // 		model PhysicsLaunchClient( model.origin, temp_vec );
     self.model PhysicsLaunchClient(contact_point, throw_vec);
@@ -2819,9 +2795,9 @@ brush_throw() {
   }
 
   if(level.createFX_enabled) {
-    if(IsDefined(self.exploded))
+    if(isDefined(self.exploded)) {
       return;
-
+    }
     self.exploded = true;
     wait(3);
     self.exploded = undefined;
@@ -2850,37 +2826,37 @@ brush_throw() {
 =============
 */
 get_target_ent(target) {
-  if(!isdefined(target))
+  if(!isDefined(target))
     target = self.target;
 
-  AssertEx(IsDefined(target), "Self had no target!");
+  AssertEx(isDefined(target), "Self had no target!");
 
   ent = GetEnt(target, "targetname");
-  if(IsDefined(ent))
+  if(isDefined(ent))
     return ent;
 
   if(isSP()) {
     ent = call[[level.getNodeFunction]](target, "targetname");
-    if(IsDefined(ent))
+    if(isDefined(ent))
       return ent;
   }
 
   ent = getstruct(target, "targetname");
-  if(IsDefined(ent))
+  if(isDefined(ent))
     return ent;
 
   ent = GetVehicleNode(target, "targetname");
-  if(IsDefined(ent))
+  if(isDefined(ent))
     return ent;
 
   AssertEx("Tried to get ent, but there was no ent.");
 }
 
 brush_show() {
-  if(IsDefined(self.v["delay"]))
+  if(isDefined(self.v["delay"]))
     wait(self.v["delay"]);
 
-  Assert(IsDefined(self.model));
+  Assert(isDefined(self.model));
 
   self.model Show();
   self.model Solid();
@@ -2888,16 +2864,16 @@ brush_show() {
   self.brush_shown = true; // used for hiding an exploder.
 
   if(isSP() && (self.model.spawnflags & 1)) {
-    if(!isdefined(self.model.disconnect_paths))
+    if(!isDefined(self.model.disconnect_paths))
       self.model call[[level.connectPathsFunction]]();
     else
       self.model call[[level.disconnectPathsFunction]]();
   }
 
   if(level.createFX_enabled) {
-    if(IsDefined(self.exploded))
+    if(isDefined(self.exploded)) {
       return;
-
+    }
     self.exploded = true;
     wait(3);
     self.exploded = undefined;
@@ -2913,23 +2889,23 @@ exploder_earthquake() {
 }
 
 exploder_rumble() {
-  if(!isSP())
+  if(!isSP()) {
     return;
-
+  }
   self exploder_delay();
   level.player PlayRumbleOnEntity(self.v["rumble"]);
 }
 
 exploder_delay() {
-  if(!isdefined(self.v["delay"]))
+  if(!isDefined(self.v["delay"]))
     self.v["delay"] = 0;
 
   min_delay = self.v["delay"];
   max_delay = self.v["delay"] + 0.001; // cant randomfloatrange on the same #
-  if(IsDefined(self.v["delay_min"]))
+  if(isDefined(self.v["delay_min"]))
     min_delay = self.v["delay_min"];
 
-  if(IsDefined(self.v["delay_max"]))
+  if(isDefined(self.v["delay_max"]))
     max_delay = self.v["delay_max"];
 
   if(min_delay > 0)
@@ -2937,12 +2913,12 @@ exploder_delay() {
 }
 
 exploder_damage() {
-  if(IsDefined(self.v["delay"]))
+  if(isDefined(self.v["delay"]))
     delay = self.v["delay"];
   else
     delay = 0;
 
-  if(IsDefined(self.v["damage_radius"]))
+  if(isDefined(self.v["damage_radius"]))
     radius = self.v["damage_radius"];
   else
     radius = 128;
@@ -2956,7 +2932,7 @@ exploder_damage() {
 }
 
 effect_loopsound() {
-  if(IsDefined(self.loopsound_ent)) {
+  if(isDefined(self.loopsound_ent)) {
     self.loopsound_ent Delete();
   }
   // save off this info in case we delete the effect
@@ -2967,8 +2943,8 @@ effect_loopsound() {
   self.loopsound_ent = play_loopsound_in_space(alias, origin);
 }
 
-/* 
- ============= 
+/*
+ =============
 ///ScriptDocBegin
 "Name: play_loopsound_in_space( <alias> , <origin> , <master> )"
 "Summary: Use the PlayLoopSound command at a position in space. Unrelated to caller."
@@ -2979,16 +2955,16 @@ effect_loopsound() {
 "Example: play_loopsound_in_space( "siren", level.speaker.origin );"
 "SPMP: both"
 ///ScriptDocEnd
- ============= 
+ =============
  */
 play_loopsound_in_space(alias, origin) {
-  org = Spawn("script_origin", (0, 0, 0));
-  if(!isdefined(origin))
+  org = spawn("script_origin", (0, 0, 0));
+  if(!isDefined(origin))
     origin = self.origin;
 
   org.origin = origin;
 
-  org PlayLoopSound(alias, "sounddone");
+  org playLoopSound(alias, "sounddone");
   return org;
 }
 
@@ -3004,8 +2980,8 @@ effect_soundalias() {
   play_sound_in_space(alias, origin);
 }
 
-/* 
- ============= 
+/*
+ =============
 ///ScriptDocBegin
 "Name: play_sound_in_space( <alias> , <origin> , <master> )"
 "Summary: Play a sound at an origin, unrelated to caller"
@@ -3017,41 +2993,41 @@ effect_soundalias() {
 "Example: play_sound_in_space( "siren", level.speaker.origin );"
 "SPMP: singleplayer"
 ///ScriptDocEnd
- ============= 
+ =============
  */
 play_sound_in_space(alias, origin, master) {
-  org = Spawn("script_origin", (0, 0, 1));
-  if(!isdefined(origin))
+  org = spawn("script_origin", (0, 0, 1));
+  if(!isDefined(origin))
     origin = self.origin;
   org.origin = origin;
   if(isSP()) {
-    if(IsDefined(master) && master)
+    if(isDefined(master) && master)
       org PlaySoundAsMaster(alias, "sounddone");
     else
-      org PlaySound(alias, "sounddone");
+      org playSound(alias, "sounddone");
   } else {
-    if(IsDefined(master) && master)
+    if(isDefined(master) && master)
       org PlaySoundAsMaster(alias);
     else
-      org PlaySound(alias);
+      org playSound(alias);
   }
   org waittill("sounddone");
   org Delete();
 }
 
 cannon_effect() {
-  if(IsDefined(self.v["repeat"])) {
+  if(isDefined(self.v["repeat"])) {
     thread exploder_playSound();
-    for (i = 0; i < self.v["repeat"]; i++) {
-      PlayFX(level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
+    for(i = 0; i < self.v["repeat"]; i++) {
+      playFX(level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
       self exploder_delay();
     }
     return;
   }
   self exploder_delay();
 
-  //	PlayFX( level._effect[ self.v[ "fxid" ] ], self.v[ "origin" ], self.v[ "forward" ], self.v[ "up" ] );
-  if(IsDefined(self.looper))
+  //	playFX( level._effect[ self.v[ "fxid" ] ], self.v[ "origin" ], self.v[ "forward" ], self.v[ "up" ] );
+  if(isDefined(self.looper))
     self.looper Delete();
 
   self.looper = SpawnFx(getfx(self.v["fxid"]), self.v["origin"], self.v["forward"], self.v["up"]);
@@ -3060,9 +3036,9 @@ cannon_effect() {
 }
 
 exploder_playSound() {
-  if(!isdefined(self.v["soundalias"]) || self.v["soundalias"] == "nil")
+  if(!isDefined(self.v["soundalias"]) || self.v["soundalias"] == "nil") {
     return;
-
+  }
   play_sound_in_space(self.v["soundalias"], self.v["origin"]);
 }
 
@@ -3076,20 +3052,20 @@ fire_effect() {
   origin = self.v["origin"];
   firefx = self.v["firefx"];
   ender = self.v["ender"];
-  if(!isdefined(ender))
+  if(!isDefined(ender))
     ender = "createfx_effectStopper";
   timeout = self.v["firefxtimeout"];
 
   fireFxDelay = 0.5;
-  if(IsDefined(self.v["firefxdelay"]))
+  if(isDefined(self.v["firefxdelay"]))
     fireFxDelay = self.v["firefxdelay"];
 
   self exploder_delay();
 
-  if(IsDefined(firefxSound))
+  if(isDefined(firefxSound))
     level thread loop_fx_sound(firefxSound, origin, ender, timeout);
 
-  PlayFX(level._effect[firefx], self.v["origin"], forward, up);
+  playFX(level._effect[firefx], self.v["origin"], forward, up);
 
   // 	loopfx( 				fxId, 	fxPos, 	waittime, 	fxPos2, 	fxStart, 	fxStop, 	timeout )
   // 	maps\_fx::loopfx( 	firefx, 	origin, 	delay, 		org, 	undefined, 	ender, 	timeout );
@@ -3110,14 +3086,14 @@ fire_effect() {
 =============
 */
 loop_fx_sound(alias, origin, ender, timeout) {
-  org = Spawn("script_origin", (0, 0, 0));
-  if(IsDefined(ender)) {
+  org = spawn("script_origin", (0, 0, 0));
+  if(isDefined(ender)) {
     thread loop_sound_delete(ender, org);
     self endon(ender);
   }
   org.origin = origin;
-  org PlayLoopSound(alias);
-  if(!isdefined(timeout)) {
+  org playLoopSound(alias);
+  if(!isDefined(timeout)) {
     org willNeverChange();
     return;
   }
@@ -3180,21 +3156,21 @@ activate_exploder(num) {
   //here's a hook so you can know when a certain number of an exploder is going off
   level notify("exploding_" + num);
 
-  for (i = 0; i < level.createFXent.size; i++) {
+  for(i = 0; i < level.createFXent.size; i++) {
     ent = level.createFXent[i];
-    if(!isdefined(ent))
+    if(!isDefined(ent)) {
       continue;
-
-    if(ent.v["type"] != "exploder")
+    }
+    if(ent.v["type"] != "exploder") {
       continue;
-
+    }
     // make the exploder actually removed the array instead?
-    if(!isdefined(ent.v["exploder"]))
+    if(!isDefined(ent.v["exploder"])) {
       continue;
-
-    if(ent.v["exploder"] + "" != num)
+    }
+    if(ent.v["exploder"] + "" != num) {
       continue;
-
+    }
     ent activate_individual_exploder();
   }
   prof_end("activate_exploder");
@@ -3285,9 +3261,9 @@ alphabetize(array) {
     addwaits = true;
 
   count = 0;
-  for (;;) {
+  for(;;) {
     changed = false;
-    for (i = 0; i < array.size - 1; i++) {
+    for(i = 0; i < array.size - 1; i++) {
       if(is_later_in_alphabet(array[i], array[i + 1])) {
         val = array[i];
         array[i] = array[i + 1];
@@ -3316,7 +3292,7 @@ is_later_in_alphabet(string1, string2) {
   if(count >= string2.size)
     count = string2.size;
 
-  for (i = 0; i < count; i++) {
+  for(i = 0; i < count; i++) {
     val = alphabet_compare(string1[i], string2[i]);
     if(val == "1st")
       return true;
@@ -3408,11 +3384,11 @@ alphabet_compare(a, b) {
   a = ToLower(a);
   b = ToLower(b);
   val1 = 0;
-  if(IsDefined(list[a]))
+  if(isDefined(list[a]))
     val1 = list[a];
 
   val2 = 0;
-  if(IsDefined(list[b]))
+  if(isDefined(list[b]))
     val2 = list[b];
 
   if(val1 > val2)
@@ -3422,8 +3398,8 @@ alphabet_compare(a, b) {
   return "same";
 }
 
-/* 
-============= 
+/*
+=============
 ///ScriptDocBegin
 "Name: play_loop_sound_on_entity( <alias> , <offset> )"
 "Summary: Play loop sound alias on an entity"
@@ -3434,14 +3410,14 @@ alphabet_compare(a, b) {
 "Example: vehicle thread play_loop_sound_on_entity( "engine_belt_run" );"
 "SPMP: both"
 ///ScriptDocEnd
-============= 
+=============
 */
 play_loop_sound_on_entity(alias, offset) {
-  org = Spawn("script_origin", (0, 0, 0));
+  org = spawn("script_origin", (0, 0, 0));
   org endon("death");
   thread delete_on_death(org);
 
-  if(IsDefined(offset)) {
+  if(isDefined(offset)) {
     org.origin = self.origin + offset;
     org.angles = self.angles;
     org LinkTo(self);
@@ -3452,7 +3428,7 @@ play_loop_sound_on_entity(alias, offset) {
   }
 
   // 	org endon( "death" );
-  org PlayLoopSound(alias);
+  org playLoopSound(alias);
   // 	PrintLn( "playing loop sound ", alias, " on entity at origin ", self.origin, " at ORIGIN ", org.origin );
 
   self waittill("stop sound" + alias);
@@ -3460,8 +3436,8 @@ play_loop_sound_on_entity(alias, offset) {
   org Delete();
 }
 
-/* 
-============= 
+/*
+=============
 ///ScriptDocBegin
 "Name: stop_loop_sound_on_entity( <alias> )"
 "Summary: Stop playing the the loop sound alias on an entity"
@@ -3471,7 +3447,7 @@ play_loop_sound_on_entity(alias, offset) {
 "Example: vehicle thread stop_loop_sound_on_entity( "engine_belt_run" );"
 "SPMP: both"
 ///ScriptDocEnd
-============= 
+=============
 */
 stop_loop_sound_on_entity(alias) {
   self notify("stop sound" + alias);
@@ -3495,7 +3471,7 @@ delete_on_death(ent) {
   //self ==> the entity you want to wait to die before deleting the ent
   ent endon("death");
   self waittill("death");
-  if(IsDefined(ent))
+  if(isDefined(ent))
     ent Delete();
 }
 
@@ -3503,10 +3479,8 @@ error(msg) {
   PrintLn("^c * ERROR * ", msg);
   waitframe();
 
-  /#
   if(GetDvar("debug") != "1")
     AssertMsg("This is a forced error - attach the log file. \n" + msg);
-  # /
 }
 
 /*

@@ -59,7 +59,7 @@ init_serverfaceanim() {
   self addAIEventListener("projectile_impact");
   self.do_face_anims = true;
   if(!isDefined(level.face_event_handler)) {
-    level.face_event_handler = SpawnStruct();
+    level.face_event_handler = spawnStruct();
     level.face_event_handler.events = [];
     level.face_event_handler.events["death"] = "face_death";
     level.face_event_handler.events["grenade danger"] = "face_alert";

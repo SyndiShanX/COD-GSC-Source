@@ -141,13 +141,13 @@ play_death_audio() {
 
     if(self.death_counter == 0) {
       self.death_counter++;
-      self playsound("exp_veh_helicopter_hit");
+      self playSound("exp_veh_helicopter_hit");
     }
   }
 }
 
 play_spinning_plane_sound() {
-  self playloopsound("veh_drone_spin", 0.05);
+  self playLoopSound("veh_drone_spin", 0.05);
   level waittill_any("crash_move_done", "death");
   self stoploopsound(0.02);
 }
@@ -171,7 +171,7 @@ set_death_model(smodel, fdelay) {
   if(!isDefined(emodel.death_anim))
     emodel clearanim( % root, 0);
 
-  emodel setmodel(smodel);
+  emodel setModel(smodel);
   emodel setvehicleattachments(1);
 }
 
@@ -212,11 +212,11 @@ helicopter_crash_movement(point, dir) {
 
   if(isDefined(level.heli_crash_smoke_trail_fx)) {
     if(issubstr(self.vehicletype, "v78"))
-      playfxontag(level.heli_crash_smoke_trail_fx, self, "tag_origin");
+      playFXOnTag(level.heli_crash_smoke_trail_fx, self, "tag_origin");
     else if(self.vehicletype == "drone_firescout_axis" || self.vehicletype == "drone_firescout_isi")
-      playfxontag(level.heli_crash_smoke_trail_fx, self, "tag_main_rotor");
+      playFXOnTag(level.heli_crash_smoke_trail_fx, self, "tag_main_rotor");
     else
-      playfxontag(level.heli_crash_smoke_trail_fx, self, "tag_engine_left");
+      playFXOnTag(level.heli_crash_smoke_trail_fx, self, "tag_engine_left");
   }
 
   crash_zones = getstructarray("heli_crash_zone", "targetname");
@@ -408,7 +408,7 @@ helicopter_collision() {
 play_crashing_loop() {
   ent = spawn("script_origin", self.origin);
   ent linkto(self);
-  ent playloopsound("exp_heli_crash_loop");
+  ent playLoopSound("exp_heli_crash_loop");
   self waittill_any("death", "snd_impact");
   ent delete();
 }
@@ -419,7 +419,7 @@ helicopter_explode(delete_me) {
   fx_angles = self gettagangles(self.death_fx_struct.tag);
 
   if(isDefined(self.death_fx_struct) && isDefined(self.death_fx_struct.effect))
-    playfx(self.death_fx_struct.effect, fx_origin, anglestoforward(fx_angles), anglestoup(fx_angles));
+    playFX(self.death_fx_struct.effect, fx_origin, anglesToForward(fx_angles), anglestoup(fx_angles));
 
   if(abs(fx_origin[0]) > 65000 || abs(fx_origin[1]) > 60000 || abs(fx_origin[2]) > 30000) {
     return;
@@ -486,7 +486,7 @@ aircraft_crash_move(point, dir) {
   if(nodes.size > 0) {
     for(i = 0; i < nodes.size; i++) {
       dir = vectornormalize(nodes[i] - self.origin);
-      forward = anglestoforward(self.angles);
+      forward = anglesToForward(self.angles);
       dot = vectordot(dir, forward);
 
       if(dot < 0.0) {
@@ -665,7 +665,7 @@ crash_collision_test() {
   self notify("crash_move_done");
 
   if(normal[2] > 0.7) {
-    forward = anglestoforward(self.angles);
+    forward = anglesToForward(self.angles);
     right = vectorcross(normal, forward);
     desired_forward = vectorcross(right, normal);
     self setphysangles(vectortoangles(desired_forward));
@@ -759,16 +759,16 @@ death_fx_thread(struct) {
           thread playloopedfxontag(struct.effect, struct.delay, struct.tag);
       } else {
         forward = emodel.origin + vectorscale((0, 0, 1), 100.0) - emodel.origin;
-        playfx(struct.effect, emodel.origin, forward);
+        playFX(struct.effect, emodel.origin, forward);
       }
     } else if(isDefined(struct.tag)) {
       if(isDefined(self.modeldummyon) && self.modeldummyon)
-        playfxontag(struct.effect, deathfx_ent(), struct.tag);
+        playFXOnTag(struct.effect, deathfx_ent(), struct.tag);
       else
-        playfxontag(struct.effect, self, struct.tag);
+        playFXOnTag(struct.effect, self, struct.tag);
     } else {
       forward = emodel.origin + vectorscale((0, 0, 1), 100.0) - emodel.origin;
-      playfx(struct.effect, emodel.origin, forward);
+      playFX(struct.effect, emodel.origin, forward);
     }
   }
 
@@ -790,7 +790,7 @@ build_death_fx(effect, tag, sound, beffectlooping, delay, bsoundlooping, waitdel
   if(!isDefined(delay))
     delay = 1;
 
-  struct = spawnstruct();
+  struct = spawnStruct();
   struct.effect = effect;
   struct.tag = tag;
   struct.sound = sound;
@@ -862,7 +862,7 @@ loop_fx_on_vehicle_tag(effect, looptime, tag) {
   self endon("stop_looping_death_fx");
 
   while(isDefined(self)) {
-    playfxontag(effect, deathfx_ent(), tag);
+    playFXOnTag(effect, deathfx_ent(), tag);
     wait(looptime);
   }
 }
@@ -871,7 +871,7 @@ deathfx_ent() {
   if(!isDefined(self.deathfx_ent)) {
     ent = spawn("script_model", (0, 0, 0));
     emodel = get_dummy();
-    ent setmodel(self.model);
+    ent setModel(self.model);
     ent.origin = emodel.origin;
     ent.angles = emodel.angles;
     ent notsolid();
@@ -879,7 +879,7 @@ deathfx_ent() {
     ent linkto(emodel);
     self.deathfx_ent = ent;
   } else
-    self.deathfx_ent setmodel(self.model);
+    self.deathfx_ent setModel(self.model);
 
   return self.deathfx_ent;
 }
@@ -1027,10 +1027,10 @@ vehicle_damage_filter_damage_watcher(heavy_damage_threshold) {
 
       if(damage > heavy_damage_threshold) {
         rpc("clientscripts/_vehicle", "damage_filter_heavy");
-        level.player playsound("veh_damage_filter_heavy");
+        level.player playSound("veh_damage_filter_heavy");
       } else {
         rpc("clientscripts/_vehicle", "damage_filter_light");
-        level.player playsound("veh_damage_filter_light");
+        level.player playSound("veh_damage_filter_light");
       }
 
       level.n_last_damage_time = gettime();

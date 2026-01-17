@@ -32,11 +32,10 @@
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
-
 #namespace zm_vapor_random;
 
 autoexec __init__system__() {
-  system::register(#"zm_vapor_random", &__init__, undefined, #"load");
+  system::register(#"zm_vapor_random", &__init__, undefined, # "load");
 }
 
 __init__() {
@@ -44,7 +43,7 @@ __init__() {
 
   level thread function_5d55ce5f();
 
-    level thread function_542725a1();
+  level thread function_542725a1();
 }
 
 function_542725a1() {
@@ -107,7 +106,7 @@ function_1a038e0b() {
   unitrigger_stub.script_length = 72;
   unitrigger_stub.require_look_at = 0;
   unitrigger_stub.targetname = "random_vapor_altar_stub";
-  unitrigger_stub.hint_string = #"zombie/need_power";
+  unitrigger_stub.hint_string = # "zombie/need_power";
   unitrigger_stub.script_struct = self;
   zm_unitrigger::unitrigger_force_per_player_triggers(unitrigger_stub, 1);
   unitrigger_stub.prompt_and_visibility_func = &function_6842bdd7;
@@ -179,33 +178,33 @@ function_6842bdd7(player) {
       switch (var_e308e3ba) {
         case 0:
           if(function_8b1a219a()) {
-            str_altar = #"hash_17ff339e7f75ae18";
+            str_altar = # "hash_17ff339e7f75ae18";
           } else {
-            str_altar = #"hash_7e97aa53c3038fb4";
+            str_altar = # "hash_7e97aa53c3038fb4";
           }
 
           break;
         case 1:
           if(function_8b1a219a()) {
-            str_altar = #"hash_5eaee5bec056161d";
+            str_altar = # "hash_5eaee5bec056161d";
           } else {
-            str_altar = #"hash_133c9b7b564b707f";
+            str_altar = # "hash_133c9b7b564b707f";
           }
 
           break;
         case 2:
           if(function_8b1a219a()) {
-            str_altar = #"hash_2599dfad21d29341";
+            str_altar = # "hash_2599dfad21d29341";
           } else {
-            str_altar = #"hash_726a5f9b0d18c78b";
+            str_altar = # "hash_726a5f9b0d18c78b";
           }
 
           break;
         case 3:
           if(function_8b1a219a()) {
-            str_altar = #"hash_497917c49187deea";
+            str_altar = # "hash_497917c49187deea";
           } else {
-            str_altar = #"hash_228c88065496b9fe";
+            str_altar = # "hash_228c88065496b9fe";
           }
 
           break;
@@ -219,80 +218,80 @@ function_6842bdd7(player) {
       return false;
     }
   } else if(!(isDefined(s_altar.b_in_use) && s_altar.b_in_use)) {
-    self sethintstringforplayer(player, #"hash_5d7144cc16556865", 4);
+    self sethintstringforplayer(player, # "hash_5d7144cc16556865", 4);
     player.var_e07e301b = undefined;
     return true;
   } else if(isDefined(s_altar.var_46fe01e2) && s_altar.var_46fe01e2 && s_altar.var_125b20f8 === player && isDefined(s_altar.var_62fef0f1)) {
     switch (s_altar.var_62fef0f1) {
-      case #"specialty_additionalprimaryweapon":
+      case # "specialty_additionalprimaryweapon":
         if(function_8b1a219a()) {
-          var_5137b086 = #"hash_7a82d19279cc6daf";
+          var_5137b086 = # "hash_7a82d19279cc6daf";
         } else {
-          var_5137b086 = #"hash_481e84e3d5747771";
+          var_5137b086 = # "hash_481e84e3d5747771";
         }
 
         break;
-      case #"specialty_armorvest":
+      case # "specialty_armorvest":
         if(function_8b1a219a()) {
-          var_5137b086 = #"hash_58febf66d0aaf436";
+          var_5137b086 = # "hash_58febf66d0aaf436";
         } else {
-          var_5137b086 = #"hash_514ee426b54c1122";
+          var_5137b086 = # "hash_514ee426b54c1122";
         }
 
         break;
-      case #"specialty_cooldown":
+      case # "specialty_cooldown":
         if(function_8b1a219a()) {
-          var_5137b086 = #"hash_279db126c954111";
+          var_5137b086 = # "hash_279db126c954111";
         } else {
-          var_5137b086 = #"hash_c5eaf038e40129b";
+          var_5137b086 = # "hash_c5eaf038e40129b";
         }
 
         break;
-      case #"specialty_deadshot":
+      case # "specialty_deadshot":
         if(function_8b1a219a()) {
-          var_5137b086 = #"hash_2f89c70e07ddab1c";
+          var_5137b086 = # "hash_2f89c70e07ddab1c";
         } else {
-          var_5137b086 = #"hash_554eba058d6a7c30";
+          var_5137b086 = # "hash_554eba058d6a7c30";
         }
 
         break;
-      case #"specialty_electriccherry":
+      case # "specialty_electriccherry":
         if(function_8b1a219a()) {
-          var_5137b086 = #"hash_5fc8f9fbce3e5074";
+          var_5137b086 = # "hash_5fc8f9fbce3e5074";
         } else {
-          var_5137b086 = #"hash_2d6886135fa75f38";
+          var_5137b086 = # "hash_2d6886135fa75f38";
         }
 
         break;
-      case #"specialty_fastreload":
+      case # "specialty_fastreload":
         if(function_8b1a219a()) {
-          var_5137b086 = #"hash_1589f4207559932b";
+          var_5137b086 = # "hash_1589f4207559932b";
         } else {
-          var_5137b086 = #"hash_1c530c71188469b5";
+          var_5137b086 = # "hash_1c530c71188469b5";
         }
 
         break;
-      case #"specialty_quickrevive":
+      case # "specialty_quickrevive":
         if(function_8b1a219a()) {
-          var_5137b086 = #"hash_1c6b895369b478b4";
+          var_5137b086 = # "hash_1c6b895369b478b4";
         } else {
-          var_5137b086 = #"hash_45143147d543f878";
+          var_5137b086 = # "hash_45143147d543f878";
         }
 
         break;
-      case #"specialty_staminup":
+      case # "specialty_staminup":
         if(function_8b1a219a()) {
-          var_5137b086 = #"hash_307615269eadecab";
+          var_5137b086 = # "hash_307615269eadecab";
         } else {
-          var_5137b086 = #"hash_461fdf40d1afda35";
+          var_5137b086 = # "hash_461fdf40d1afda35";
         }
 
         break;
-      case #"specialty_widowswine":
+      case # "specialty_widowswine":
         if(function_8b1a219a()) {
-          var_5137b086 = #"hash_4d8ca83f86b22f28";
+          var_5137b086 = # "hash_4d8ca83f86b22f28";
         } else {
-          var_5137b086 = #"hash_62a4738313dcd9c4";
+          var_5137b086 = # "hash_62a4738313dcd9c4";
         }
 
         break;
@@ -333,7 +332,7 @@ function_20fe0559() {
 
     if(!player zm_score::can_player_purchase(n_cost)) {
       self playSound(#"evt_perk_deny");
-      player zm_audio::create_and_play_dialog(#"general", #"outofmoney");
+      player zm_audio::create_and_play_dialog(#"general", # "outofmoney");
       continue;
     }
 
@@ -387,10 +386,9 @@ function_20fe0559() {
 }
 
 function_44481969() {
-
   iprintlnbold("<dev string:x38>");
 
-    array::thread_all(level.var_93995710, &function_8dd97732);
+  array::thread_all(level.var_93995710, &function_8dd97732);
   var_8dd5d69f = array::exclude(level.var_93995710, level.var_8feb4083);
 
   if(var_8dd5d69f.size) {
@@ -441,7 +439,7 @@ function_2cc4144b(var_83225a27) {
 start_perk_bottle_cycling() {
   self endon(#"done_cycling");
   var_f0f641ad = level.var_b8be892e;
-  var_f0f641ad = array::exclude(var_f0f641ad, #"specialty_mystery");
+  var_f0f641ad = array::exclude(var_f0f641ad, # "specialty_mystery");
 
   if(!var_f0f641ad.size) {
     return;
@@ -493,7 +491,7 @@ perk_bottle_motion() {
 function_42171e41(player) {
   s_altar = self.stub.script_struct;
   s_altar.var_46fe01e2 = 1;
-  s_result = self waittilltimeout(10, #"trigger");
+  s_result = self waittilltimeout(10, # "trigger");
   s_altar.var_46fe01e2 = 0;
 
   if(s_result._notify == "trigger" && s_result.activator === player) {
@@ -504,11 +502,11 @@ function_42171e41(player) {
 }
 
 function_bb1ac745(s_altar) {
-  self waittill(#"perk_acquired", #"death", #"disconnect", #"player_downed");
+  self waittill(#"perk_acquired", # "death", # "disconnect", # "player_downed");
   s_altar.b_in_use = 0;
 }
 
-private function_5d55ce5f() {
+function_5d55ce5f() {
   level waittill(#"start_zombie_round_logic");
   adddebugcommand("<dev string:x53>");
 
@@ -517,7 +515,7 @@ private function_5d55ce5f() {
     setdvar(#"hash_655adfd9dc05d377", "<dev string:xb8>");
 
     switch (cmd) {
-      case #"cycle_altar":
+      case # "cycle_altar":
         function_44481969();
         wait 1;
         break;
@@ -526,4 +524,3 @@ private function_5d55ce5f() {
     waitframe(1);
   }
 }
-

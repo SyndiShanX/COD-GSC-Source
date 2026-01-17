@@ -6,7 +6,6 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_powerups;
-
 #namespace zm_powerup_bonus_points_team;
 
 autoexec __init__system__() {

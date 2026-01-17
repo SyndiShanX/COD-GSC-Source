@@ -630,5 +630,4 @@ main() {
   ent.v["angles"] = (270, 0, 0);
   ent.v["fxid"] = "dust_wind_slow_yel_loop";
   ent.v["delay"] = -15;
-
 }

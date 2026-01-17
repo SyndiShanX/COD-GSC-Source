@@ -159,7 +159,7 @@ check_for_dupes(array, single) {
 
 setup_menus() {
   level.menu_sys = [];
-  level.menu_sys["current_menu"] = spawnstruct();
+  level.menu_sys["current_menu"] = spawnStruct();
   add_menu("choose_mode", "Choose Mode:");
   add_menuoptions("choose_mode", "Dyn Ents Mode");
   add_menuoptions("choose_mode", "Destructibles Mode");
@@ -251,7 +251,7 @@ add_menu(menu_name, title) {
     return;
   }
 
-  level.menu_sys[menu_name] = spawnstruct();
+  level.menu_sys[menu_name] = spawnStruct();
   level.menu_sys[menu_name].title = "none";
   level.menu_sys[menu_name].title = title;
 }
@@ -633,9 +633,9 @@ update_selected_object_position() {
   object = level.selected_object;
 
   if(isDefined(object)) {
-    forward = anglestoforward(level.debug_player getplayerangles());
-    vector = level.debug_player geteye() + vectorscale(forward, 5000);
-    trace = bullettrace(level.debug_player geteye(), vector, 0, self);
+    forward = anglesToForward(level.debug_player getplayerangles());
+    vector = level.debug_player getEye() + vectorscale(forward, 5000);
+    trace = bulletTrace(level.debug_player getEye(), vector, 0, self);
 
     if(trace["fraction"] != 1) {
       vector = trace["position"] + (0, 0, level.selected_object_z_offset);
@@ -662,11 +662,11 @@ move_selected_object(with_trace) {
     with_trace = 0;
 
   while(true) {
-    forward = anglestoforward(level.debug_player getplayerangles());
+    forward = anglesToForward(level.debug_player getplayerangles());
 
     if(with_trace) {
-      vector = level.debug_player geteye() + vectorscale(forward, 5000);
-      trace = bullettrace(level.debug_player geteye(), vector, 0, self);
+      vector = level.debug_player getEye() + vectorscale(forward, 5000);
+      trace = bulletTrace(level.debug_player getEye(), vector, 0, self);
 
       if(trace["fraction"] == 1) {
         wait 0.1;
@@ -676,7 +676,7 @@ move_selected_object(with_trace) {
 
       vector = vector + (0, 0, level.selected_object_z_offset);
     } else
-      vector = level.debug_player geteye() + vectorscale(forward, level.selected_object_dist);
+      vector = level.debug_player getEye() + vectorscale(forward, level.selected_object_dist);
 
     if(vector != self.origin) {
       self moveto(vector, 0.1);
@@ -782,10 +782,10 @@ spray_model() {
 }
 
 do_spray_model() {
-  forward = anglestoforward(level.debug_player getplayerangles());
-  vector = level.debug_player geteye() + vectorscale(forward, 48);
+  forward = anglesToForward(level.debug_player getplayerangles());
+  vector = level.debug_player getEye() + vectorscale(forward, 48);
   object = spawn("script_model", vector);
-  object setmodel(level.spray["model"]);
+  object setModel(level.spray["model"]);
   velocity = vectorscale(forward, level.spray["power"]);
   object physicslaunch(object.origin, velocity);
   object store_model("dynent");
@@ -799,10 +799,10 @@ spray_trajectory() {
 
   while(true) {
     time_inc = og_time_inc;
-    forward = anglestoforward(level.debug_player getplayerangles());
+    forward = anglesToForward(level.debug_player getplayerangles());
     velocity = vectorscale(forward, level.spray["power"]);
     sub_vel = vectorscale(velocity, time_inc);
-    start_pos = level.debug_player geteye() + vectorscale(forward, 48);
+    start_pos = level.debug_player getEye() + vectorscale(forward, 48);
     gravity = getdvarint(#"bg_gravity");
 
     for(i = 1; i < 10 + 1; i++) {
@@ -987,7 +987,7 @@ object_highlight(objects) {
   level endon("stop_select_model");
   dot = 0.85;
   highlighted_object = undefined;
-  forward = anglestoforward(level.debug_player getplayerangles());
+  forward = anglesToForward(level.debug_player getplayerangles());
 
   for(i = 0; i < objects.size; i++) {
     if(!isDefined(objects[i].select_scale))
@@ -1365,14 +1365,14 @@ spawn_selected_object(model_name, with_trace, type) {
   if(isDefined(level.selected_object))
     level.selected_object delete();
 
-  forward = anglestoforward(level.debug_player getplayerangles());
-  vector = level.debug_player geteye() + vectorscale(forward, level.selected_object_dist);
+  forward = anglesToForward(level.debug_player getplayerangles());
+  vector = level.debug_player getEye() + vectorscale(forward, level.selected_object_dist);
 
   if(isDefined(type) && type == "destructible")
     level.selected_object = codespawn("script_model", vector, 0, 0, 0, model_name);
   else {
     level.selected_object = spawn("script_model", vector);
-    level.selected_object setmodel(model_name);
+    level.selected_object setModel(model_name);
   }
 
   level.select_group = undefined;
@@ -1417,7 +1417,7 @@ copy_model(type) {
     } else {
       model_name = level.highlighted_object.model;
       level.selected_object = spawn("script_model", model_origin);
-      level.selected_object setmodel(model_name);
+      level.selected_object setModel(model_name);
     }
 
     level.selected_object.old_origin = level.selected_object.origin;

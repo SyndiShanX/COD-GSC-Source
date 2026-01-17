@@ -7,13 +7,13 @@
 doorenterexitcheck() {
   self endon("killanimscript");
 
-  if(isdefined(self.disabledoorbehavior)) {
+  if(isDefined(self.disabledoorbehavior)) {
     return;
   }
-  for (;;) {
+  for(;;) {
     var_0 = self getdoorpathnode();
 
-    if(isdefined(var_0)) {
+    if(isDefined(var_0)) {
       break;
     }
 
@@ -27,10 +27,10 @@ doorenterexitcheck() {
   else
     doorexit(var_0);
 
-  for (;;) {
+  for(;;) {
     var_2 = self getdoorpathnode();
 
-    if(!isdefined(var_2) || var_2 != var_0) {
+    if(!isDefined(var_2) || var_2 != var_0) {
       break;
     }
 
@@ -77,7 +77,7 @@ doorenter_trygrenade(var_0, var_1, var_2, var_3, var_4) {
   var_6 = 3;
   var_7 = undefined;
   var_7 = % cqb_stand_grenade_throw;
-  var_8 = anglestoforward(var_0.angles);
+  var_8 = anglesToForward(var_0.angles);
 
   if(var_0.type == "Door Interior" && !self comparenodedirtopathdir(var_0))
     var_8 = -1 * var_8;
@@ -98,15 +98,15 @@ doorenter_trygrenade(var_0, var_1, var_2, var_3, var_4) {
     var_10 = var_9 + var_13 * var_11;
   }
 
-  while (var_6 > 0) {
-    if(isdefined(self.grenade) || !isdefined(self.enemy)) {
+  while(var_6 > 0) {
+    if(isDefined(self.grenade) || !isDefined(self.enemy)) {
       return;
     }
     if(onsamesideofdoor(var_0, var_8)) {
       return;
     }
     if(!self seerecently(self.enemy, 0.2) && self.a.pose == "stand" && distance2dandheightcheck(self.enemy.origin - var_0.origin, 360000, 16384)) {
-      if(isdefined(var_0.nextdoorgrenadetime) && var_0.nextdoorgrenadetime > gettime()) {
+      if(isDefined(var_0.nextdoorgrenadetime) && var_0.nextdoorgrenadetime > gettime()) {
         return;
       }
       if(self canshootenemy()) {
@@ -143,7 +143,7 @@ doorenter_trygrenade(var_0, var_1, var_2, var_3, var_4) {
     wait(var_4);
     var_15 = self getdoorpathnode();
 
-    if(!isdefined(var_15) || var_15 != var_0)
+    if(!isDefined(var_15) || var_15 != var_0)
       return;
   }
 }
@@ -151,15 +151,15 @@ doorenter_trygrenade(var_0, var_1, var_2, var_3, var_4) {
 indoorcqbtogglecheck() {
   self endon("killanimscript");
 
-  if(isdefined(self.disabledoorbehavior)) {
+  if(isDefined(self.disabledoorbehavior)) {
     return;
   }
   self.isindoor = 0;
 
-  for (;;) {
+  for(;;) {
     if(self isindoor() && !self.doingambush)
       doorenter_enable_cqbwalk();
-    else if(!isdefined(self.minindoortime) || self.minindoortime < gettime()) {
+    else if(!isDefined(self.minindoortime) || self.minindoortime < gettime()) {
       self.minindoortime = undefined;
       doorexit_disable_cqbwalk();
     }
@@ -169,19 +169,19 @@ indoorcqbtogglecheck() {
 }
 
 doorenter_enable_cqbwalk() {
-  if(!isdefined(self.neverenablecqb) && !self.doingambush) {
+  if(!isDefined(self.neverenablecqb) && !self.doingambush) {
     self.isindoor = 1;
 
-    if(!isdefined(self.cqbwalking) || !self.cqbwalking)
+    if(!isDefined(self.cqbwalking) || !self.cqbwalking)
       maps\_utility::enable_cqbwalk(1);
   }
 }
 
 doorexit_disable_cqbwalk() {
-  if(!isdefined(self.cqbenabled)) {
+  if(!isDefined(self.cqbenabled)) {
     self.isindoor = 0;
 
-    if(isdefined(self.cqbwalking) && self.cqbwalking)
+    if(isDefined(self.cqbwalking) && self.cqbwalking)
       maps\_utility::disable_cqbwalk();
   }
 }
@@ -197,8 +197,8 @@ onsamesideofdoor(var_0, var_1) {
 }
 
 doorenter(var_0) {
-  for (;;) {
-    if(isdefined(self.doorfragchance) && (self.doorfragchance == 0 || self.doorfragchance < randomfloat(1))) {
+  for(;;) {
+    if(isDefined(self.doorfragchance) && (self.doorfragchance == 0 || self.doorfragchance < randomfloat(1))) {
       break;
     }
 
@@ -206,7 +206,7 @@ doorenter(var_0) {
       doorenter_trygrenade(var_0, "fraggrenade", 0, 302500, 0.3);
       var_0 = self getdoorpathnode();
 
-      if(!isdefined(var_0)) {
+      if(!isDefined(var_0)) {
         return;
       }
       break;
@@ -215,12 +215,12 @@ doorenter(var_0) {
     wait 0.1;
   }
 
-  for (;;) {
+  for(;;) {
     if(distance2dandheightcheck(self.origin - var_0.origin, 36864, 6400)) {
       doorenter_enable_cqbwalk();
       self.minindoortime = gettime() + 6000;
 
-      if(isdefined(self.doorflashchance) && (self.doorflashchance == 0 || self.doorflashchance < randomfloat(1))) {
+      if(isDefined(self.doorflashchance) && (self.doorflashchance == 0 || self.doorflashchance < randomfloat(1))) {
         return;
       }
       doorenter_trygrenade(var_0, "flash_grenade", 1, 4096, 0.2);
@@ -232,7 +232,7 @@ doorenter(var_0) {
 }
 
 doorexit(var_0) {
-  for (;;) {
+  for(;;) {
     if(!self.isindoor || distancesquared(self.origin, var_0.origin) < 1024) {
       return;
     }

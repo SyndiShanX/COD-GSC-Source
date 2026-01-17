@@ -8,7 +8,6 @@
 #include scripts\zm\zm_towers_crowd;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
-
 #namespace namespace_8a476bc7;
 
 autoexec __init__system__() {
@@ -23,9 +22,9 @@ __init__() {
   zm_trial::register_challenge(#"hash_1fd6f58939deba71", &on_begin, &on_end);
 }
 
-private on_begin() {}
+on_begin() {}
 
-private on_end(round_reset) {
+on_end(round_reset) {
   if(!round_reset) {
     var_acba5af0 = array();
 

@@ -8,7 +8,7 @@
 #include xmodelalias\c_mul_cartel_gear_char_als;
 
 main() {
-  self setmodel("c_mul_cartel_body1_2_char");
+  self setModel("c_mul_cartel_body1_2_char");
   self.headmodel = codescripts\character::randomelement(xmodelalias\c_mul_cartel_head_char_als::main());
   self attach(self.headmodel, "", 1);
   self.gearmodel = codescripts\character::randomelement(xmodelalias\c_mul_cartel_gear_char_als::main());

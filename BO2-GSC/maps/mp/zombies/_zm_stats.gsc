@@ -288,11 +288,9 @@ update_playing_utc_time(matchendutctime) {
   }
 }
 
-survival_classic_custom_stat_update() {
-}
+survival_classic_custom_stat_update() {}
 
-grief_custom_stat_update() {
-}
+grief_custom_stat_update() {}
 
 add_game_mode_group_stat(game_mode, stat_name, value) {
   if(is_true(level.zm_disable_recording_stats)) {

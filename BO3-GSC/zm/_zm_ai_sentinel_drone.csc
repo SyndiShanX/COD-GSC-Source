@@ -12,15 +12,15 @@
 #namespace zm_ai_sentinel_drone;
 
 function autoexec __init__sytem__() {
-  system::register("zm_ai_sentinel_drone", & __init__, & __main__, undefined);
+  system::register("zm_ai_sentinel_drone", &__init__, &__main__, undefined);
 }
 
 function autoexec __init__() {
-  clientfield::register("world", "sentinel_round_fog", 12000, 1, "int", & sentinel_round_fog, 0, 0);
-  clientfield::register("toplayer", "sentinel_round_fx", 12000, 1, "int", & sentinel_round_fx, 0, 0);
-  clientfield::register("vehicle", "sentinel_spawn_fx", 12000, 1, "int", & sentinel_spawn_fx, 0, 0);
-  clientfield::register("vehicle", "necro_sentinel_fx", 12000, 1, "int", & necro_sentinel_fx, 0, 0);
-  clientfield::register("actor", "sentinel_zombie_spawn_fx", 12000, 1, "int", & function_bc95cac0, 0, 0);
+  clientfield::register("world", "sentinel_round_fog", 12000, 1, "int", &sentinel_round_fog, 0, 0);
+  clientfield::register("toplayer", "sentinel_round_fx", 12000, 1, "int", &sentinel_round_fx, 0, 0);
+  clientfield::register("vehicle", "sentinel_spawn_fx", 12000, 1, "int", &sentinel_spawn_fx, 0, 0);
+  clientfield::register("vehicle", "necro_sentinel_fx", 12000, 1, "int", &necro_sentinel_fx, 0, 0);
+  clientfield::register("actor", "sentinel_zombie_spawn_fx", 12000, 1, "int", &function_bc95cac0, 0, 0);
   level._effect["sentinel_round"] = "zombie/fx_meatball_round_tell_zod_zmb";
   level._effect["sentinel_spawn_in"] = "dlc3/stalingrad/fx_sentinel_drone_spawn_trail";
   level._effect["sentinel_spawn_impact"] = "dlc3/stalingrad/fx_mech_wpn_harpoon_explo";
@@ -29,62 +29,62 @@ function autoexec __init__() {
   level._effect["rezzed_skeleton_sparky"] = "dlc3/stalingrad/fx_elec_sparky_chest";
   level._effect["rezzed_skeleton_spark_light"] = "dlc3/stalingrad/fx_light_sparky_chest";
   level.var_4d7b6b0 = [];
-  if(!isdefined(level.var_4d7b6b0)) {
+  if(!isDefined(level.var_4d7b6b0)) {
     level.var_4d7b6b0 = [];
   } else if(!isarray(level.var_4d7b6b0)) {
     level.var_4d7b6b0 = array(level.var_4d7b6b0);
   }
   level.var_4d7b6b0[level.var_4d7b6b0.size] = "vox_valk_valkyrie_resurrect_0";
-  if(!isdefined(level.var_4d7b6b0)) {
+  if(!isDefined(level.var_4d7b6b0)) {
     level.var_4d7b6b0 = [];
   } else if(!isarray(level.var_4d7b6b0)) {
     level.var_4d7b6b0 = array(level.var_4d7b6b0);
   }
   level.var_4d7b6b0[level.var_4d7b6b0.size] = "vox_valk_valkyrie_resurrect_1";
-  if(!isdefined(level.var_4d7b6b0)) {
+  if(!isDefined(level.var_4d7b6b0)) {
     level.var_4d7b6b0 = [];
   } else if(!isarray(level.var_4d7b6b0)) {
     level.var_4d7b6b0 = array(level.var_4d7b6b0);
   }
   level.var_4d7b6b0[level.var_4d7b6b0.size] = "vox_valk_valkyrie_resurrect_2";
-  if(!isdefined(level.var_4d7b6b0)) {
+  if(!isDefined(level.var_4d7b6b0)) {
     level.var_4d7b6b0 = [];
   } else if(!isarray(level.var_4d7b6b0)) {
     level.var_4d7b6b0 = array(level.var_4d7b6b0);
   }
   level.var_4d7b6b0[level.var_4d7b6b0.size] = "vox_valk_valkyrie_resurrect_3";
-  if(!isdefined(level.var_4d7b6b0)) {
+  if(!isDefined(level.var_4d7b6b0)) {
     level.var_4d7b6b0 = [];
   } else if(!isarray(level.var_4d7b6b0)) {
     level.var_4d7b6b0 = array(level.var_4d7b6b0);
   }
   level.var_4d7b6b0[level.var_4d7b6b0.size] = "vox_valk_valkyrie_resurrect_4";
   level.var_266194a = [];
-  if(!isdefined(level.var_266194a)) {
+  if(!isDefined(level.var_266194a)) {
     level.var_266194a = [];
   } else if(!isarray(level.var_266194a)) {
     level.var_266194a = array(level.var_266194a);
   }
   level.var_266194a[level.var_266194a.size] = "vox_valk_valkyrie_scanner_0";
-  if(!isdefined(level.var_266194a)) {
+  if(!isDefined(level.var_266194a)) {
     level.var_266194a = [];
   } else if(!isarray(level.var_266194a)) {
     level.var_266194a = array(level.var_266194a);
   }
   level.var_266194a[level.var_266194a.size] = "vox_valk_valkyrie_scanner_1";
-  if(!isdefined(level.var_266194a)) {
+  if(!isDefined(level.var_266194a)) {
     level.var_266194a = [];
   } else if(!isarray(level.var_266194a)) {
     level.var_266194a = array(level.var_266194a);
   }
   level.var_266194a[level.var_266194a.size] = "vox_valk_valkyrie_scanner_2";
-  if(!isdefined(level.var_266194a)) {
+  if(!isDefined(level.var_266194a)) {
     level.var_266194a = [];
   } else if(!isarray(level.var_266194a)) {
     level.var_266194a = array(level.var_266194a);
   }
   level.var_266194a[level.var_266194a.size] = "vox_valk_valkyrie_scanner_3";
-  if(!isdefined(level.var_266194a)) {
+  if(!isDefined(level.var_266194a)) {
     level.var_266194a = [];
   } else if(!isarray(level.var_266194a)) {
     level.var_266194a = array(level.var_266194a);
@@ -115,7 +115,7 @@ function sentinel_round_fx(n_local_client, n_val_old, n_val_new, b_ent_new, b_in
     self thread postfx::playpostfxbundle("pstfx_stalingrad_sentinel");
     self.var_8ffc609a = playfxoncamera(n_local_client, level._effect["sentinel_round"]);
     wait(3.5);
-    if(isdefined(self)) {
+    if(isDefined(self)) {
       deletefx(n_local_client, self.var_8ffc609a);
     }
   }
@@ -123,15 +123,15 @@ function sentinel_round_fx(n_local_client, n_val_old, n_val_new, b_ent_new, b_in
 
 function sentinel_spawn_fx(n_local_client, n_val_old, n_val_new, b_ent_new, b_initial_snap, str_field, b_demo_jump) {
   if(n_val_new) {
-    self.var_e43aab07 = playfxontag(n_local_client, level._effect["sentinel_spawn_in"], self, "tag_origin");
+    self.var_e43aab07 = playFXOnTag(n_local_client, level._effect["sentinel_spawn_in"], self, "tag_origin");
     setfxignorepause(n_local_client, self.var_e43aab07, 1);
   } else {
-    if(isdefined(self.var_e43aab07)) {
+    if(isDefined(self.var_e43aab07)) {
       stopfx(n_local_client, self.var_e43aab07);
     }
-    playfxontag(n_local_client, level._effect["sentinel_spawn_impact"], self, "tag_origin");
+    playFXOnTag(n_local_client, level._effect["sentinel_spawn_impact"], self, "tag_origin");
     wait(1);
-    if(isdefined(self)) {
+    if(isDefined(self)) {
       sentinel_play_taunt(n_local_client, level.var_266194a);
     }
   }
@@ -139,10 +139,10 @@ function sentinel_spawn_fx(n_local_client, n_val_old, n_val_new, b_ent_new, b_in
 
 function necro_sentinel_fx(n_local_client, n_val_old, n_val_new, b_ent_new, b_initial_snap, str_field, b_demo_jump) {
   if(n_val_new) {
-    self.var_5ec69ff1 = playfxontag(n_local_client, level._effect["sentinel_ground_radiation"], self, "tag_origin");
+    self.var_5ec69ff1 = playFXOnTag(n_local_client, level._effect["sentinel_ground_radiation"], self, "tag_origin");
     setfxignorepause(n_local_client, self.var_5ec69ff1, 1);
     sentinel_play_taunt(n_local_client, level.var_4d7b6b0);
-  } else if(isdefined(self.var_5ec69ff1)) {
+  } else if(isDefined(self.var_5ec69ff1)) {
     stopfx(n_local_client, self.var_5ec69ff1);
   }
 }
@@ -155,13 +155,13 @@ function function_bc95cac0(n_local_client, n_val_old, n_val_new, b_ent_new, b_in
 }
 
 function sentinel_play_taunt(localclientnum, taunt_arr) {
-  if(isdefined(level._lastplayed_drone_taunt) && (gettime() - level._lastplayed_drone_taunt) < 6000) {
+  if(isDefined(level._lastplayed_drone_taunt) && (gettime() - level._lastplayed_drone_taunt) < 6000) {
     return;
   }
-  if(isdefined(level.voxaideactivate) && level.voxaideactivate) {
+  if(isDefined(level.voxaideactivate) && level.voxaideactivate) {
     return;
   }
   level._lastplayed_drone_taunt = gettime();
   taunt = randomint(taunt_arr.size);
-  self playsound(localclientnum, taunt_arr[taunt]);
+  self playSound(localclientnum, taunt_arr[taunt]);
 }

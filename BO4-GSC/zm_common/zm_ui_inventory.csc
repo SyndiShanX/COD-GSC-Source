@@ -8,14 +8,13 @@
 #include scripts\core_common\flag_shared;
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_inventory;
-
 #namespace zm_ui_inventory;
 
 autoexec __init__system__() {
   system::register(#"zm_ui_inventory", &__init__, undefined, undefined);
 }
 
-private __init__() {
+__init__() {
   clientfield::register_bgcache("clientuimodel", "string", "hudItems.zmFeatureDescription", 1, undefined, 0, 0);
   zm_inventory::function_c7c05a13();
   registeredfields = [];

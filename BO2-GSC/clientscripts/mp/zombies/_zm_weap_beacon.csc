@@ -40,16 +40,16 @@ play_artillery_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     ai_robot = level.a_giant_robots[localclientnum][2];
 
   if(newval == 1) {
-    playfx(localclientnum, level._effect["beacon_launch_fx"], ai_robot gettagorigin("tag_rocketpod"));
+    playFX(localclientnum, level._effect["beacon_launch_fx"], ai_robot gettagorigin("tag_rocketpod"));
     level thread sndfakelaunchaudio(ai_robot gettagorigin("tag_rocketpod"));
   }
 }
 
 sndfakelaunchaudio(origin) {
-  playsound(0, "zmb_homingbeacon_missiile_alarm", origin);
+  playSound(0, "zmb_homingbeacon_missiile_alarm", origin);
 
   for(i = 0; i < 5; i++) {
-    playsound(0, "zmb_homingbeacon_missile_fire", origin);
+    playSound(0, "zmb_homingbeacon_missile_fire", origin);
     wait 0.15;
   }
 }
@@ -58,8 +58,8 @@ play_beacon_glow(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
   self endon("weapon_beacon_destroyed");
 
   while(isDefined(self)) {
-    playsound(0, "evt_beacon_beep", self.origin);
-    playfxontag(localclientnum, level._effect["beacon_glow"], self, "origin_animate_jnt");
+    playSound(0, "evt_beacon_beep", self.origin);
+    playFXOnTag(localclientnum, level._effect["beacon_glow"], self, "origin_animate_jnt");
     wait 1.5;
   }
 }
@@ -106,7 +106,7 @@ play_artillery_barrage(localclientnum, oldval, newval, bnewent, binitialsnap, fi
   v_start = self.origin + self.a_v_start_offsets[localclientnum][n_index];
   shell = spawn(localclientnum, v_start, "script_model");
   shell.angles = vectorscale((-1, 0, 0), 90.0);
-  shell setmodel("jun_missile");
+  shell setModel("jun_missile");
   shell thread shell_logic(self, n_index, v_start, localclientnum);
   self.num_rockets_fired[localclientnum]++;
 }
@@ -174,23 +174,23 @@ build_weap_beacon_start_offsets_ee() {
 shell_logic(model, index, v_start, localclientnum) {
   v_land = model.origin + model.a_v_land_offsets[localclientnum][index];
   v_start_trace = v_start - vectorscale((0, 0, 1), 5000.0);
-  trace = bullettrace(v_start_trace, v_land, 0, undefined);
+  trace = bulletTrace(v_start_trace, v_land, 0, undefined);
   v_land = trace["position"];
   self moveto(v_land, 3);
-  playfxontag(localclientnum, level._effect["beacon_shell_trail"], self, "tag_origin");
-  self playsound(0, "zmb_homingbeacon_missile_boom");
+  playFXOnTag(localclientnum, level._effect["beacon_shell_trail"], self, "tag_origin");
+  self playSound(0, "zmb_homingbeacon_missile_boom");
   self thread sndplayincoming(v_land);
   self waittill("movedone");
 
   if(index == 1)
     model notify("weapon_beacon_destroyed");
 
-  playfx(localclientnum, level._effect["beacon_shell_explosion"], self.origin);
-  playsound(0, "zmb_homingbeacon_missile_impact", self.origin);
+  playFX(localclientnum, level._effect["beacon_shell_explosion"], self.origin);
+  playSound(0, "zmb_homingbeacon_missile_impact", self.origin);
   self delete();
 }
 
 sndplayincoming(origin) {
   wait 2;
-  playsound(0, "zmb_homingbeacon_missile_incoming", origin);
+  playSound(0, "zmb_homingbeacon_missile_incoming", origin);
 }

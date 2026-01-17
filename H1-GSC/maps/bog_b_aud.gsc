@@ -63,8 +63,7 @@ create_level_envelop_arrays() {
     [0.238, 0.736],
     [0.408, 0.844],
     [0.756, 0.953],
-    [1.0, 1.0]
-  ];
+    [1.0, 1.0]];
 }
 
 precache_presets() {}
@@ -260,10 +259,10 @@ abrams_audio_node() {
 }
 
 play_abrams_idle_sound(var_0) {
-  if(isdefined(self.gateopen) && !self.gateopen) {
+  if(isDefined(self.gateopen) && !self.gateopen) {
     var_0 thread common_scripts\utility::play_loop_sound_on_entity("bog_b_m1a1_tank_idle");
 
-    for (;;) {
+    for(;;) {
       if(self.gateopen) {
         break;
       }

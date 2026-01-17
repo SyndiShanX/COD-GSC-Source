@@ -597,7 +597,7 @@ handle_drilling(var_0, var_1) {
           level.player playrumbleonentity("drill_through");
 
           if(level.drill_bink) {
-            setdvar("ui_deadquote", & "CLOCKWORK_QUOTE_BACKPLATE");
+            setdvar("ui_deadquote", &"CLOCKWORK_QUOTE_BACKPLATE");
             maps\_utility::missionfailedwrapper();
           } else
             wait 10;
@@ -1261,14 +1261,14 @@ setup_interior_combat() {
 
 vault_objective() {
   var_0 = maps\_utility::obj("vaultobj");
-  objective_add(var_0, "current", & "CLOCKWORK_DISABLE_THE_SECURITY");
+  objective_add(var_0, "current", &"CLOCKWORK_DISABLE_THE_SECURITY");
   common_scripts\utility::flag_wait("obj_vault_complete");
   maps\_utility::objective_complete(var_0);
 }
 
 fight_objective() {
   var_0 = maps\_utility::obj("fightobj");
-  objective_add(var_0, "current", & "CLOCKWORK_ADVANCE_TO_THE_DATA_CENTER");
+  objective_add(var_0, "current", &"CLOCKWORK_ADVANCE_TO_THE_DATA_CENTER");
   common_scripts\utility::flag_wait("Obj_datacenter_complete");
   maps\_utility::objective_complete(var_0);
 }

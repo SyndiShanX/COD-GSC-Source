@@ -13,13 +13,11 @@ statechange(clientNum, system, newState) {
     level._systemStates = [];
   }
   if(!isDefined(level._systemStates[system])) {
-    level._systemStates[system] = spawnstruct();
+    level._systemStates[system] = spawnStruct();
   }
   level._systemStates[system].state = newState;
   if(isDefined(level._systemStates[system].callback)) {
-    [
-      [level._systemStates[system].callback]
-    ](clientNum, newState);
+    [[level._systemStates[system].callback]](clientNum, newState);
   } else {
     println("*** Unhandled client system state change - " + system + " - has no registered callback function.");
   }
@@ -43,7 +41,7 @@ AddCallback(event, func) {
 }
 Callback(event, clientNum) {
   if(isDefined(level._callbacks) && isDefined(level._callbacks[event])) {
-    for (i = 0; i < level._callbacks[event].size; i++) {
+    for(i = 0; i < level._callbacks[event].size; i++) {
       callback = level._callbacks[event][i];
       if(isDefined(callback)) {
         self thread[[callback]](clientNum);
@@ -97,7 +95,7 @@ get_gib_def() {
   if(!isDefined(level._gibbing_actor_models)) {
     return -1;
   }
-  for (i = 0; i < level._gibbing_actor_models.size; i++) {
+  for(i = 0; i < level._gibbing_actor_models.size; i++) {
     if(self[[level._gibbing_actor_models[i].matches_me]]()) {
       self._original_model = self.model;
       return i;
@@ -179,7 +177,7 @@ entityspawned(localClientNum) {
   } else if(self.type == "actor" && GetDvarInt(#"zombiemode") > 0) {
     if(isDefined(level._zombieCBFunc)) {
       players = GetLocalPlayers();
-      for (i = 0; i < players.size; i++) {
+      for(i = 0; i < players.size; i++) {
         self thread[[level._zombieCBFunc]](i);
       }
     }
@@ -199,9 +197,7 @@ entityspawned(localClientNum) {
 }
 entityshutdown_callback(localClientNum, entity) {
   if(isDefined(level._entityShutDownCBFunc)) {
-    [
-      [level._entityShutDownCBFunc]
-    ](localClientNum, entity);
+    [[level._entityShutDownCBFunc]](localClientNum, entity);
   }
 }
 airsupport(localClientNum, x, y, z, type, yaw, team, teamfaction, owner, exittype) {
@@ -281,7 +277,7 @@ scriptmodelspawned(local_client_num, ent, destructable_index) {
   if(!isDefined(level.createFXent))
     return;
   fixed = false;
-  for (i = 0; i < level.createFXent.size; i++) {
+  for(i = 0; i < level.createFXent.size; i++) {
     if(level.createFXent[i].v["type"] != "exploder")
       continue;
     exploder = level.createFXent[i];
@@ -300,7 +296,7 @@ callback_activate_exploder(exploder_id) {
     return;
   keys = getarraykeys(level._exploder_ids);
   exploder = undefined;
-  for (i = 0; i < keys.size; i++) {
+  for(i = 0; i < keys.size; i++) {
     if(level._exploder_ids[keys[i]] == exploder_id) {
       exploder = keys[i];
       break;
@@ -318,7 +314,7 @@ callback_deactivate_exploder(exploder_id) {
     return;
   keys = getarraykeys(level._exploder_ids);
   exploder = undefined;
-  for (i = 0; i < keys.size; i++) {
+  for(i = 0; i < keys.size; i++) {
     if(level._exploder_ids[keys[i]] == exploder_id) {
       exploder = keys[i];
       break;
@@ -336,7 +332,7 @@ level_notify(notify_name, param1, param2) {
 }
 sound_notify(client_num, entity, note) {
   if(note == "sound_dogstep_run_default") {
-    entity playsound(client_num, "fly_dog_step_run_default");
+    entity playSound(client_num, "fly_dog_step_run_default");
     return true;
   }
   prefix = getsubstr(note, 0, 5);
@@ -349,9 +345,9 @@ dog_sound_print(message) {}
 play_dog_sound(localClientNum, sound, position) {
   dog_sound_print("SOUND " + sound);
   if(isDefined(position)) {
-    return self playsound(localClientNum, sound, position);
+    return self playSound(localClientNum, sound, position);
   }
-  return self playsound(localClientNum, sound);
+  return self playSound(localClientNum, sound);
 }
 client_flag_callback(localClientNum, flag, set, newEnt) {
   if((self.type == "vehicle" || self.type == "actor" || self.type == "missle") && !isDefined(self.entity_spawned)) {

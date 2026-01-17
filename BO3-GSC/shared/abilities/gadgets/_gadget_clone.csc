@@ -18,13 +18,13 @@
 #namespace _gadget_clone;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_clone", & __init__, undefined, undefined);
+  system::register("gadget_clone", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("actor", "clone_activated", 1, 1, "int", & clone_activated, 0, 1);
-  clientfield::register("actor", "clone_damaged", 1, 1, "int", & clone_damaged, 0, 0);
-  clientfield::register("allplayers", "clone_activated", 1, 1, "int", & player_clone_activated, 0, 0);
+  clientfield::register("actor", "clone_activated", 1, 1, "int", &clone_activated, 0, 1);
+  clientfield::register("actor", "clone_damaged", 1, 1, "int", &clone_damaged, 0, 0);
+  clientfield::register("allplayers", "clone_activated", 1, 1, "int", &player_clone_activated, 0, 0);
 }
 
 function set_shader(localclientnum, enabled, entity) {
@@ -39,7 +39,7 @@ function clone_activated(localclientnum, oldval, newval, bnewent, binitialsnap, 
   if(newval) {
     self._isclone = 1;
     self set_shader(localclientnum, 1, self getowner(localclientnum));
-    if(isdefined(level._monitor_tracker)) {
+    if(isDefined(level._monitor_tracker)) {
       self thread[[level._monitor_tracker]](localclientnum);
     }
     self thread gadget_clone_render::transition_shader(localclientnum);
@@ -47,7 +47,7 @@ function clone_activated(localclientnum, oldval, newval, bnewent, binitialsnap, 
 }
 
 function player_clone_activated(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   if(newval) {

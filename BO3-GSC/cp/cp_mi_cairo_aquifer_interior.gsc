@@ -45,13 +45,13 @@ function post_breach_setup() {
 
 function hangar_combat() {
   thread handle_hangar_extras();
-  util::delay(5, undefined, & scene::init, "cin_aqu_07_not_yourself_3rd_shot010");
+  util::delay(5, undefined, &scene::init, "cin_aqu_07_not_yourself_3rd_shot010");
   spawn_manager::wait_till_complete("main_hangar_enemies");
   guys = spawn_manager::get_ai("main_hangar_enemies");
   spawn_manager::wait_till_ai_remaining("main_hangar_enemies", int(max(2, int(guys.size / 3))));
   thread aquifer_util::safe_use_trigger("extras_exposed");
   thread aquifer_util::safe_use_trigger("hendricks_move_up_hangar");
-  util::delay(1, undefined, & trigger::use, "hangar_enemies_exposed", "targetname");
+  util::delay(1, undefined, &trigger::use, "hangar_enemies_exposed", "targetname");
   spawn_manager::wait_till_cleared("main_hangar_enemies");
   level.hendricks.baseaccuracy = 10;
   spawn_manager::wait_till_cleared("hangar_breach_extras");
@@ -67,7 +67,7 @@ function function_2fde871a() {
 }
 
 function function_2fc2978c() {
-  a_spawn_managers = getentarray("spawn_manager", "classname");
+  a_spawn_managers = getEntArray("spawn_manager", "classname");
   foreach(sm in a_spawn_managers) {
     if(sm.name === "pre_boss_enemies") {
       sm.script_wait_min = 1.5;
@@ -99,25 +99,25 @@ function function_3fd5eb17() {
 }
 
 function handle_round_room() {
-  var_87942fa5 = getentarray("icy", "targetname");
-  array::run_all(var_87942fa5, & hide);
+  var_87942fa5 = getEntArray("icy", "targetname");
+  array::run_all(var_87942fa5, &hide);
   level flag::wait_till("snow_vo");
   savegame::checkpoint_save();
   level thread dialog::remote("corv_let_your_mind_relax_2", undefined, "corvus");
   level flag::wait_till("flag_snow_room");
-  if(isdefined(level.bzm_aquiferdialogue3_1callback)) {
+  if(isDefined(level.bzm_aquiferdialogue3_1callback)) {
     level thread[[level.bzm_aquiferdialogue3_1callback]]();
   }
   exploder::exploder("amb_int_tank_room");
-  array::thread_all(level.activeplayers, & aquifer_util::function_89eaa1b3, 1);
+  array::thread_all(level.activeplayers, &aquifer_util::function_89eaa1b3, 1);
   wait(1);
-  array::thread_all(level.activeplayers, & aquifer_util::function_716b5d66, 1);
+  array::thread_all(level.activeplayers, &aquifer_util::function_716b5d66, 1);
   wait(5);
   level flag::wait_till_clear("flag_snow_room");
   exploder::exploder_stop("amb_int_tank_room");
-  array::thread_all(level.activeplayers, & aquifer_util::function_89eaa1b3, 1);
+  array::thread_all(level.activeplayers, &aquifer_util::function_89eaa1b3, 1);
   wait(1);
-  array::thread_all(level.activeplayers, & aquifer_util::function_716b5d66, 0);
+  array::thread_all(level.activeplayers, &aquifer_util::function_716b5d66, 0);
   level.hendricks battlechatter::function_d9f49fba(1);
   level flag::wait_till("exit_round_room");
   level.hendricks battlechatter::function_d9f49fba(0);
@@ -125,7 +125,7 @@ function handle_round_room() {
   guys1 = spawn_manager::get_ai("roundroom_allies");
   guys2 = spawn_manager::get_ai("roundroom_enemies");
   guys = arraycombine(guys1, guys2, 1, 1);
-  array::thread_all(guys, & aquifer_util::delete_me);
+  array::thread_all(guys, &aquifer_util::delete_me);
 }
 
 function handle_hideout(b_starting = 0) {
@@ -133,7 +133,7 @@ function handle_hideout(b_starting = 0) {
     aquifer_util::toggle_door("hideout_door", 1);
     aquifer_util::toggle_door("hideout_doors_closed", 1);
   }
-  if(isdefined(level.bzm_aquiferdialogue7callback)) {
+  if(isDefined(level.bzm_aquiferdialogue7callback)) {
     level thread[[level.bzm_aquiferdialogue7callback]]();
   }
   aquifer_obj::function_f67ca613(1);
@@ -151,7 +151,7 @@ function function_ff024877() {
   thread leave_hideout_scene();
   skipto::objective_completed("hideout");
   savegame::checkpoint_save();
-  array::run_all(level.activeplayers, & setmovespeedscale, 0.7);
+  array::run_all(level.activeplayers, &setmovespeedscale, 0.7);
   thread function_291b34c9();
   thread function_c48c4f99();
   thread escape_vo();
@@ -176,7 +176,7 @@ function function_3a77d1bf() {
 
 function function_64386226() {
   level endon("hash_a384e425");
-  while (true) {
+  while(true) {
     level waittill("collapse");
     iprintlnbold("COLLAPSE START");
   }
@@ -184,38 +184,38 @@ function function_64386226() {
 
 function function_291b34c9() {
   level endon("hash_a384e425");
-  while (true) {
+  while(true) {
     level waittill("shake");
     earthquake(0.5, 2, level.hendricks.origin, 1000);
     level thread cp_mi_cairo_aquifer_sound::function_5d0cee98();
     staggers = array("pb_aqu_07_10_escape_vign_stagger_l_player", "pb_aqu_07_10_escape_vign_stagger_r_player");
-    array::run_all(level.activeplayers, & setmovespeedscale, 0.5);
-    array::run_all(level.activeplayers, & allowsprint, 0);
+    array::run_all(level.activeplayers, &setmovespeedscale, 0.5);
+    array::run_all(level.activeplayers, &allowsprint, 0);
     foreach(player in level.activeplayers) {
       anim_name = array::random(staggers);
       player thread animation::play(anim_name, player.origin, player.angles, 1, 0, 0, 0);
     }
-    array::run_all(level.activeplayers, & setmovespeedscale, 0.2);
+    array::run_all(level.activeplayers, &setmovespeedscale, 0.2);
     wait(0.8);
-    array::run_all(level.activeplayers, & setmovespeedscale, 0.7);
-    array::run_all(level.activeplayers, & allowsprint, 1);
+    array::run_all(level.activeplayers, &setmovespeedscale, 0.7);
+    array::run_all(level.activeplayers, &allowsprint, 1);
   }
 }
 
 function function_c48c4f99() {
   level endon("hash_a384e425");
-  while (true) {
+  while(true) {
     level util::delay_notify(randomfloatrange(2, 5), "minishake", "shake");
     ret = level util::waittill_any_return("shake", "minishake");
     if(ret == "minishake") {
       exploder::exploder("cin_runout_rattles");
       earthquake(randomfloatrange(0.3, 0.4), 1.25, level.hendricks.origin, 1000);
       level thread cp_mi_cairo_aquifer_sound::function_f8835fe9();
-      array::run_all(level.activeplayers, & setmovespeedscale, 0.5);
-      array::run_all(level.activeplayers, & allowsprint, 0);
+      array::run_all(level.activeplayers, &setmovespeedscale, 0.5);
+      array::run_all(level.activeplayers, &allowsprint, 0);
       wait(0.25);
-      array::run_all(level.activeplayers, & setmovespeedscale, 0.7);
-      array::run_all(level.activeplayers, & allowsprint, 1);
+      array::run_all(level.activeplayers, &setmovespeedscale, 0.7);
+      array::run_all(level.activeplayers, &allowsprint, 1);
     } else {
       wait(3);
     }
@@ -242,10 +242,10 @@ function function_246476fd(var_8a6d11, var_f17304b7, var_75422735, var_b6b983f4,
     struct scene::init(var_f17304b7, level.hendricks);
     level waittill("hash_20aa8e12");
   }
-  scene::add_scene_func(var_f17304b7, & function_8ed6a39f, "done");
+  scene::add_scene_func(var_f17304b7, &function_8ed6a39f, "done");
   struct thread scene::play(var_f17304b7, level.hendricks);
   ret = level util::waittill_any_return(waitflag, "splice", "run_scene_done");
-  if(isdefined(var_75422735) && isdefined(var_b6b983f4) && isdefined(waitflag) && (ret == "splice" || ret == "run_scene_done") && !level flag::get(waitflag)) {
+  if(isDefined(var_75422735) && isDefined(var_b6b983f4) && isDefined(waitflag) && (ret == "splice" || ret == "run_scene_done") && !level flag::get(waitflag)) {
     struct scene::stop(var_f17304b7, 0);
     struct scene::play(var_75422735, level.hendricks);
     level.hendricks.n_script_anim_rate = undefined;
@@ -280,43 +280,43 @@ function chase_vo() {
 
 function escape_vo() {
   var_296988d3 = [];
-  if(!isdefined(var_296988d3)) {
+  if(!isDefined(var_296988d3)) {
     var_296988d3 = [];
   } else if(!isarray(var_296988d3)) {
     var_296988d3 = array(var_296988d3);
   }
   var_296988d3[var_296988d3.size] = "plyr_we_need_to_get_back_0";
-  if(!isdefined(var_296988d3)) {
+  if(!isDefined(var_296988d3)) {
     var_296988d3 = [];
   } else if(!isarray(var_296988d3)) {
     var_296988d3 = array(var_296988d3);
   }
   var_296988d3[var_296988d3.size] = "kane_you_need_to_get_out_0";
-  if(!isdefined(var_296988d3)) {
+  if(!isDefined(var_296988d3)) {
     var_296988d3 = [];
   } else if(!isarray(var_296988d3)) {
     var_296988d3 = array(var_296988d3);
   }
   var_296988d3[var_296988d3.size] = "hend_keep_moving_this_pl_0";
-  if(!isdefined(var_296988d3)) {
+  if(!isDefined(var_296988d3)) {
     var_296988d3 = [];
   } else if(!isarray(var_296988d3)) {
     var_296988d3 = array(var_296988d3);
   }
   var_296988d3[var_296988d3.size] = "skip";
-  if(!isdefined(var_296988d3)) {
+  if(!isDefined(var_296988d3)) {
     var_296988d3 = [];
   } else if(!isarray(var_296988d3)) {
     var_296988d3 = array(var_296988d3);
   }
   var_296988d3[var_296988d3.size] = "hend_watch_out_1";
-  if(!isdefined(var_296988d3)) {
+  if(!isDefined(var_296988d3)) {
     var_296988d3 = [];
   } else if(!isarray(var_296988d3)) {
     var_296988d3 = array(var_296988d3);
   }
   var_296988d3[var_296988d3.size] = "hend_keep_up_0";
-  for (i = 0; i < var_296988d3.size; i++) {
+  for(i = 0; i < var_296988d3.size; i++) {
     level waittill("shake");
     wait(2);
     if(var_296988d3[i] != "skip") {

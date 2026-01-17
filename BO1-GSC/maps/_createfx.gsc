@@ -29,19 +29,19 @@ createfx() {
   if(isDefined(level.delete_when_in_createfx)) {
     level[[level.delete_when_in_createfx]]();
   }
-  triggers = getentarray("trigger_multiple", "classname");
+  triggers = getEntArray("trigger_multiple", "classname");
   for(i = 0; i < triggers.size; i++) {
     triggers[i] delete();
   }
-  triggers = getentarray("trigger_radius", "classname");
+  triggers = getEntArray("trigger_radius", "classname");
   for(i = 0; i < triggers.size; i++) {
     triggers[i] delete();
   }
-  triggers = getentarray("trigger_lookat", "classname");
+  triggers = getEntArray("trigger_lookat", "classname");
   for(i = 0; i < triggers.size; i++) {
     triggers[i] delete();
   }
-  triggers = getentarray("trigger_damage", "classname");
+  triggers = getEntArray("trigger_damage", "classname");
   for(i = 0; i < triggers.size; i++) {
     triggers[i] delete();
   }
@@ -98,10 +98,10 @@ createEffect(type, fxid) {
   if(level.createFX_enabled) {
     ent = spawnStruct();
   } else if(type == "exploder") {
-    ent = SpawnStruct();
+    ent = spawnStruct();
   } else {
     if(!isDefined(level._fake_createfx_struct)) {
-      level._fake_createfx_struct = SpawnStruct();
+      level._fake_createfx_struct = spawnStruct();
     }
     ent = level._fake_createfx_struct;
   }
@@ -154,7 +154,7 @@ createNewExploder() {
 
 set_forward_and_up_vectors() {
   self.v["up"] = anglestoup(self.v["angles"]);
-  self.v["forward"] = anglestoforward(self.v["angles"]);
+  self.v["forward"] = anglesToForward(self.v["angles"]);
 }
 
 createFxLogic() {
@@ -297,11 +297,11 @@ createFxLogic() {
     players = get_players();
     changedSelectedEnts = false;
     right = anglestoright(players[0] getplayerangles());
-    forward = anglestoforward(players[0] getplayerangles());
+    forward = anglesToForward(players[0] getplayerangles());
     up = anglestoup(players[0] getplayerangles());
     dot = 0.85;
     placeEnt_vector = vector_scale(forward, 750);
-    level.createfxCursor = bullettrace(players[0] geteye(), players[0] geteye() + placeEnt_vector, false, undefined);
+    level.createfxCursor = bulletTrace(players[0] getEye(), players[0] getEye() + placeEnt_vector, false, undefined);
     highlightedEnt = undefined;
     level.buttonClick = [];
     level.button_is_kb = [];
@@ -734,7 +734,7 @@ get_selected_move_vector() {
   yaw = players[0] getplayerangles()[1];
   angles = (0, yaw, 0);
   right = anglestoright(angles);
-  forward = anglestoforward(angles);
+  forward = anglesToForward(angles);
   up = anglestoup(angles);
   keypressed = false;
   rate = 1;
@@ -1182,7 +1182,7 @@ copy_ents() {
   array = [];
   for(i = 0; i < level.selected_fx_ents.size; i++) {
     ent = level.selected_fx_ents[i];
-    newent = spawnstruct();
+    newent = spawnStruct();
     newent.v = ent.v;
     newent post_entity_creation_function();
     array[array.size] = newent;
@@ -1277,7 +1277,7 @@ createfx_showOrigin(id, org, delay, org2, type, exploder, id2, fireFx, fireFxDel
 drop_selection_to_ground() {
   for(i = 0; i < level.selected_fx_ents.size; i++) {
     ent = level.selected_fx_ents[i];
-    trace = bullettrace(ent.v["origin"], ent.v["origin"] + (0, 0, -2048), false, undefined);
+    trace = bulletTrace(ent.v["origin"], ent.v["origin"] + (0, 0, -2048), false, undefined);
     ent.v["origin"] = trace["position"];
   }
 }
@@ -1367,7 +1367,7 @@ move_player_around_map_fast() {
   direction = player getPlayerAngles();
   direction_vec = anglesToForward(direction);
   eye = player getEye();
-  trace = bullettrace(eye, eye + vector_scale(direction_vec, 8000), 0, undefined);
+  trace = bulletTrace(eye, eye + vector_scale(direction_vec, 8000), 0, undefined);
   dist = distance(eye, trace["position"]);
   position = eye + vector_scale(direction_vec, (dist - 64));
   player setorigin(position);

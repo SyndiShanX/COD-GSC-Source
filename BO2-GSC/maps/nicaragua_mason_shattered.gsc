@@ -49,8 +49,7 @@ main() {
   flag_wait("nicaragua_mason_shattered_compelte");
 }
 
-nicaragua_mason_shattered_objectives() {
-}
+nicaragua_mason_shattered_objectives() {}
 
 shattered_part_two() {
   flag_set("shattered_part_two_scene_started");

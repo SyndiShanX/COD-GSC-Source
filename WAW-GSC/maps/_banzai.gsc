@@ -50,7 +50,7 @@ banzai() {
   others = self get_nearby_banzai_guys();
   self banzai_pump_up();
   self thread staggered_banzai_charge();
-  for (i = 0; i < others.size; i++) {
+  for(i = 0; i < others.size; i++) {
     if(isalive(others[i]) && isDefined(others[i])) {
       others[i] thread staggered_banzai_charge();
     }
@@ -142,14 +142,14 @@ find_enemy() {
     players = get_players();
     enemies = array_combine(players, ais);
     enemies = get_array_of_closest(self.origin, enemies, undefined, undefined, maxDistance);
-    for (numAttackers = 1; numAttackers <= 2; numAttackers++) {
-      for (i = 0; i < enemies.size; i++) {
+    for(numAttackers = 1; numAttackers <= 2; numAttackers++) {
+      for(i = 0; i < enemies.size; i++) {
         if(may_banzai_attack(enemies[i], numAttackers))
           return enemies[i];
       }
     }
     players = get_array_of_closest(self.origin, players, undefined, undefined, maxDistance);
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       if(may_banzai_attack(players[i], numAttackers))
         return players[i];
     }
@@ -158,7 +158,7 @@ find_enemy() {
   if(self.script_player_chance > 0) {
     enemies = get_players();
     enemies = get_array_of_closest(self.origin, enemies, undefined, undefined, maxDistance);
-    for (i = 0; i < enemies.size; i++) {
+    for(i = 0; i < enemies.size; i++) {
       if(may_banzai_attack(enemies[i], 3)) {
         dieRoll = RandomInt(100);
         if(dieRoll < self.script_player_chance) {
@@ -169,7 +169,7 @@ find_enemy() {
   }
   enemies = GetAiArray(opposite_team);
   enemies = get_array_of_closest(self.origin, enemies, undefined, undefined, maxDistance);
-  for (i = 0; i < enemies.size; i++) {
+  for(i = 0; i < enemies.size; i++) {
     if(may_banzai_attack(enemies[i], 2))
       return enemies[i];
   }
@@ -184,7 +184,7 @@ check_player_can_see_me(player) {
 
 player_can_see_me(player) {
   playerAngles = player getplayerangles();
-  playerForwardVec = AnglesToForward(playerAngles);
+  playerForwardVec = anglesToForward(playerAngles);
   playerUnitForwardVec = VectorNormalize(playerForwardVec);
   banzaiPos = self GetOrigin();
   playerPos = player GetOrigin();
@@ -204,7 +204,7 @@ player_can_see_me(player) {
 get_nearby_banzai_guys() {
   guys = GetAiArray(self.team);
   banzai_guys = [];
-  for (i = 0; i < guys.size; i++) {
+  for(i = 0; i < guys.size; i++) {
     if(guys[i] == self) {
       continue;
     }
@@ -240,7 +240,7 @@ banzai_charge(spawned_charge) {
   thread find_closer_enemy();
   thread find_new_enemy_if_blocked();
   wait(0.05);
-  while (1) {
+  while(1) {
     if(isDefined(self.favoriteenemy)) {
       self SetGoalPos(self.favoriteenemy.origin);
     }
@@ -255,7 +255,7 @@ distance_to_enemy_less_than(lessThanThis) {
 
 find_new_enemy_immediately() {
   self endon("death");
-  while (1) {
+  while(1) {
     if(!self animscripts\banzai::in_banzai_attack()) {
       enemy = self.favoriteenemy;
       if(should_switch_immediately(enemy)) {
@@ -269,7 +269,7 @@ find_new_enemy_immediately() {
 find_closer_enemy() {
   self endon("death");
   lastPos = undefined;
-  while (1) {
+  while(1) {
     if(!self animscripts\banzai::in_banzai_attack()) {
       enemy = self.favoriteenemy;
       if(isDefined(enemy)) {
@@ -292,7 +292,7 @@ find_closer_enemy() {
 find_new_enemy_if_blocked() {
   self endon("death");
   lastPos = undefined;
-  while (1) {
+  while(1) {
     if(!self animscripts\banzai::in_banzai_attack()) {
       enemy = self.favoriteenemy;
       if(isDefined(enemy)) {
@@ -322,7 +322,7 @@ switch_enemies() {
 }
 
 keep_trying_find_enemy() {
-  while (1) {
+  while(1) {
     enemy = self find_enemy();
     if(isDefined(enemy) && (!isDefined(self.favoriteenemy) || enemy != self.favoriteenemy)) {
       return enemy;
@@ -332,7 +332,7 @@ keep_trying_find_enemy() {
 }
 
 path_blocked(enemy) {
-  for (i = 0; i < self.blocked_enemies.size; i++) {
+  for(i = 0; i < self.blocked_enemies.size; i++) {
     if(enemy == self.blocked_enemies[i]) {
       return self.blocked_enemy_flags[i];
     }
@@ -367,8 +367,8 @@ draw_forward_line_until_notify(ent, r, g, b, notifyEnt, notifyString) {
   ent endon("death");
   notifyEnt endon("death");
   notifyEnt endon(notifyString);
-  while (1) {
-    forwardVec = VectorNormalize(AnglesToForward(ent.angles));
+  while(1) {
+    forwardVec = VectorNormalize(anglesToForward(ent.angles));
     pointForward = ent.origin + forwardVec * 64;
     line(ent.origin, pointForward, (r, g, b), 0.05);
     wait .05;
@@ -434,7 +434,7 @@ banzai_print(msg) {
   self endon("stop_banzai_print");
   time = GetTime() + (3 * 1000);
   offset = (0, 0, 0);
-  while (GetTime() < time) {
+  while(GetTime() < time) {
     offset = offset + (0, 0, 2);
     print3d(self GetTagOrigin("J_Head") + offset, msg, (1, 1, 1));
     wait(0.05);

@@ -31,11 +31,11 @@ init() {
   level.turretSettings["mg_turret"].modelDestroyed = "mp_remote_turret";
 
   level.turretSettings["mg_turret"].teamSplash = "used_remote_mg_turret";
-  level.turretSettings["mg_turret"].hintEnter = & "KILLSTREAKS_ENTER_REMOTE_TURRET";
-  level.turretSettings["mg_turret"].hintExit = & "KILLSTREAKS_EARLY_EXIT";
-  level.turretSettings["mg_turret"].hintPickUp = & "KILLSTREAKS_DOUBLE_TAP_TO_CARRY";
-  level.turretSettings["mg_turret"].placeString = & "KILLSTREAKS_TURRET_PLACE";
-  level.turretSettings["mg_turret"].cannotPlaceString = & "KILLSTREAKS_TURRET_CANNOT_PLACE";
+  level.turretSettings["mg_turret"].hintEnter = &"KILLSTREAKS_ENTER_REMOTE_TURRET";
+  level.turretSettings["mg_turret"].hintExit = &"KILLSTREAKS_EARLY_EXIT";
+  level.turretSettings["mg_turret"].hintPickUp = &"KILLSTREAKS_DOUBLE_TAP_TO_CARRY";
+  level.turretSettings["mg_turret"].placeString = &"KILLSTREAKS_TURRET_PLACE";
+  level.turretSettings["mg_turret"].cannotPlaceString = &"KILLSTREAKS_TURRET_CANNOT_PLACE";
   level.turretSettings["mg_turret"].voDestroyed = "remote_sentry_destroyed";
   level.turretSettings["mg_turret"].laptopInfo = "killstreak_remote_turret_laptop_mp";
   level.turretSettings["mg_turret"].remoteInfo = "killstreak_remote_turret_remote_mp";
@@ -905,7 +905,7 @@ turret_handleDamage() {
     if(meansOfDeath == "MOD_MELEE")
       self.damageTaken += self.maxHealth;
 
-    if(isDefined(iDFlags) && (iDFlags & level.iDFLAGS_PENETRATION))
+    if(isDefined(iDFlags) && (iDFlags &level.iDFLAGS_PENETRATION))
       self.wasDamagedFromBulletPenetration = true;
 
     self.wasDamaged = true;

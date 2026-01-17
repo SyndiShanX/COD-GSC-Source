@@ -11,7 +11,7 @@ Campaign: Price's PMC on assignment
 Objectives:	
 			1. Climb to the summit.
 			2. Plant C4 on the fuel storage tanks.
-			3. Infiltrate the storage hangar. 
+			3. Infiltrate the storage hangar.
 			4. Extract the nuclear power core from the downed satellite.
 			5. Get to the exfil point.
 			6. Get on the snowmobile.
@@ -35,8 +35,6 @@ Notes on progression:
 #include maps\cliffhanger_code;
 #include maps\cliffhanger_stealth;
 #include maps\cliffhanger_snowmobile;
-
-
 
 main() {
   SetSavedDvar("com_cinematicEndInWhite", 1);
@@ -78,31 +76,29 @@ main() {
   waittillframeend;
 
   thread cliffhanger_objective_main();
-
 }
 
 /************************************************************************************************************/
+
 /*													CLIMB													*/
 /************************************************************************************************************/
+
 cave_main() {
-  /#
   if(level.start_point == "jump") {
     setsaveddvar("g_friendlyNameDist", 0);
     flag_wait("reached_top");
     return;
   }
-  # /
 
-    thread maps\_introscreen::cliffhanger_intro_text();
+  thread maps\_introscreen::cliffhanger_intro_text();
 
-  climb_starts = getentarray("player_climb", "targetname");
+  climb_starts = getEntArray("player_climb", "targetname");
   climb_starts = array_randomize(climb_starts);
   plane_sound_nodes = getvehiclenodearray("plane_sound", "script_noteworthy");
   array_thread(plane_sound_nodes, maps\_mig29::plane_sound_node);
 
   plane_sound_nodes = getvehiclenodearray("cliff_plane_sound", "script_noteworthy");
   array_thread(plane_sound_nodes, maps\_climb::cliff_plane_sound_node);
-
 
   foreach(index, player in level.players) {
     player thread maps\_climb::climb_wall(climb_starts[index].origin, climb_starts[index].angles);
@@ -113,10 +109,11 @@ cave_main() {
   maps\_climb::cliff_scene_with_price();
 }
 
-
 /************************************************************************************************************/
+
 /*												CLIFFTOP													*/
 /************************************************************************************************************/
+
 clifftop_main() {
   level.price pushplayer(true);
   if(is_e3_start()) {
@@ -136,7 +133,7 @@ clifftop_main() {
   //	level.price setgoalpos( level.price.origin );
   //	level.price enable_ai_color();
 
-  activate_trigger_with_targetname("price_start_clifftop"); //tell price to crouch 
+  activate_trigger_with_targetname("price_start_clifftop"); //tell price to crouch
 
   thread maps\_utility::set_ambient("snow_cliff");
 
@@ -153,8 +150,8 @@ clifftop_main() {
   player_weapons_init();
 
   //array_thread( getnodearray( "clifftop_nodes", "script_noteworthy" ), ::clifftop_aim_thread );
-  array_thread(getentarray("patrollers_1_leftguy", "script_noteworthy"), ::add_spawn_function, ::clifftop_patroller1_logic);
-  array_thread(getentarray("patrollers_1_rightguy", "script_noteworthy"), ::add_spawn_function, ::clifftop_patroller1_logic);
+  array_thread(getEntArray("patrollers_1_leftguy", "script_noteworthy"), ::add_spawn_function, ::clifftop_patroller1_logic);
+  array_thread(getEntArray("patrollers_1_rightguy", "script_noteworthy"), ::add_spawn_function, ::clifftop_patroller1_logic);
 
   thread maps\_blizzard::blizzard_level_transition_light(.05);
 
@@ -185,9 +182,9 @@ clifftop_main() {
   thread dialog_setup_heartbeat();
   thread price_starts_moving();
 
-  array_thread(getentarray("clifftop_guys", "targetname"), ::add_spawn_function, ::price_kills_me_if_too_close);
+  array_thread(getEntArray("clifftop_guys", "targetname"), ::add_spawn_function, ::price_kills_me_if_too_close);
   flag_init("player_killed_one_first_two_encounters");
-  array_thread(getentarray("clifftop_guys", "targetname"), ::add_spawn_function, ::flag_if_player_kill);
+  array_thread(getEntArray("clifftop_guys", "targetname"), ::add_spawn_function, ::flag_if_player_kill);
   flag_init("said_dont_alert_them");
   flag_init("said_nicely_done");
   flag_init("interupt_first_encounter");
@@ -220,13 +217,13 @@ clifftop_main() {
   autosave_by_name("first_encounter");
 
   flag_wait("dialog_take_point");
-
 }
 
-
 /************************************************************************************************************/
+
 /*														CAMP												*/
 /************************************************************************************************************/
+
 camp_main() {
   //save
   autosave_stealth();
@@ -238,16 +235,17 @@ camp_main() {
 
   thread camp_flag_save("give_c4_obj");
   thread start_truck_patrol();
-
 }
 
 /************************************************************************************************************/
+
 /*														C4													*/
 /************************************************************************************************************/
+
 c4_main() {
   thread dialog_plant_c4_nag();
   thread dialog_near_fueling_station();
-  array_thread(getentarray("base_c4_models", "targetname"), ::c4_player_obj);
+  array_thread(getEntArray("base_c4_models", "targetname"), ::c4_player_obj);
 
   flag_wait("player_halfway_to_c4");
   autosave_stealth();
@@ -260,8 +258,10 @@ c4_main() {
 }
 
 /************************************************************************************************************/
+
 /*													GOTO HANGER											*/
 /************************************************************************************************************/
+
 goto_hanger_main() {
   //save
   //autosave_stealth();
@@ -288,19 +288,19 @@ goto_hanger_main() {
 }
 
 /************************************************************************************************************/
+
 /*													HANGER PATH											*/
 /************************************************************************************************************/
+
 hangerpath_main() {
   flag_set("price_moving_to_hanger");
   level.price stop_magic_bullet_shield();
   level.price delete();
 
-  /#
   if(level.start_point == "hangerpath")
     wait(0.05); // so spawner will work
-  # /
 
-    price_hanger_start = getent("price_hanger_start", "targetname");
+  price_hanger_start = getent("price_hanger_start", "targetname");
   level.price_spawner.script_stealth = undefined;
   level.price_spawner.origin = price_hanger_start.origin;
   level.price = new_captain_price_spawns();
@@ -354,7 +354,7 @@ hangerpath_main() {
       mf delete();
       continue;
     }
-    if(isdefined(mf.ridingvehicle)) {
+    if(isDefined(mf.ridingvehicle)) {
       mf delete();
       continue;
     }
@@ -370,14 +370,13 @@ hangerpath_main() {
     foreach(mf in surviving_enemies)
     mf thread setup_stealth_enemy_cleanup();
 
-    while (1) {
+    while(1) {
       all_dead = true;
       foreach(mf in surviving_enemies) {
-
         if(isalive(mf)) {
-          if(mf doingLongDeath())
+          if(mf doingLongDeath()) {
             continue;
-
+          }
           mf.goalradius = 400;
           mf.favoriteenemy = level.player;
           mf setgoalentity(level.player);
@@ -395,10 +394,11 @@ hangerpath_main() {
   }
 }
 
-
 /************************************************************************************************************/
+
 /*													HANGER											*/
 /************************************************************************************************************/
+
 hanger_main() {
   flag_wait("player_on_backdoor_path");
 
@@ -419,9 +419,10 @@ hanger_main() {
   level.price SetGoalNode(price_comes_out);
   level.price.goalradius = 16;
 
-  for (;;) {
-    if(Distance(level.player.origin, level.price.origin) < 350)
+  for(;;) {
+    if(Distance(level.player.origin, level.price.origin) < 350) {
       break;
+    }
     wait(0.25);
   }
 
@@ -456,8 +457,8 @@ hanger_main() {
   keyboard_trigger = getEntWithFlag("keyboard_used");
   keyboard_trigger trigger_off();
 
-  // Press and hold ^3&&1^7 to extract the DSM.
-  //keyboard_trigger setHintString( &"CLIFFHANGER_USE_SATELITE" );
+  // Press and hold ^3&& 1^7 to extract the DSM.
+  //keyboard_trigger setHintString(&"CLIFFHANGER_USE_SATELITE" );
 
   //level.price_targets = [];
 
@@ -487,7 +488,7 @@ hanger_main() {
   dsm waittill("trigger");
 
   if(maps\_autosave::autoSaveCheck()) {
-    SaveGame("keyboard_used", & "CLIFFHANGER_USE_SATELITE", "keyboard_used", false);
+    SaveGame("keyboard_used", &"CLIFFHANGER_USE_SATELITE", "keyboard_used", false);
   }
 
   thread play_sound_in_space("dsm_pickup", dsm.origin);
@@ -532,7 +533,7 @@ player_used_computer() {
   thread guards_run_in();
   thread more_guards();
 
-  if(isdefined(level.price._stealth))
+  if(isDefined(level.price._stealth))
     level.price stealth_basic_states_default();
   disable_stealth_system();
   level.player.ignoreme = true;
@@ -542,7 +543,7 @@ player_used_computer() {
   level.player.ignoreme = false;
   flag_wait("player_detonate");
 
-  saveID = SaveGameNoCommit("player_detonate", & "CLIFFHANGER_USE_SATELITE", "player_detonate", false);
+  saveID = SaveGameNoCommit("player_detonate", &"CLIFFHANGER_USE_SATELITE", "player_detonate", false);
   thread save_game_if_safe(saveID);
 
   wait(0.1);
@@ -572,7 +573,7 @@ start_ch_tarmac(e3) {
   flag_set("price_moving_to_hanger");
   flag_set("start_big_explosion");
 
-  if(!isdefined(e3)) {
+  if(!isDefined(e3)) {
     start_common_cliffhanger();
     friendly_init_cliffhanger();
   } else {
@@ -583,14 +584,13 @@ start_ch_tarmac(e3) {
     level.price forceUseWeapon("ak47_arctic", "primary");
   }
 
-  if(isdefined(level.price._stealth))
+  if(isDefined(level.price._stealth))
     level.price stealth_basic_states_default();
   disable_stealth_system();
 
   player_hanger_start = getent("price_capture_node", "targetname");
   level.player teleport_ent(player_hanger_start);
   level.player PlayerLinkTo(player_hanger_start, undefined, 1, 0, 0, 0, 0);
-
 
   node = getnode("price_tarmac_path", "targetname");
   level.price forceTeleport(node.origin, node.angles);
@@ -608,7 +608,7 @@ start_ch_tarmac(e3) {
   black_overlay = create_client_overlay("black", 0, level.player);
   black_overlay.alpha = 1;
 
-  if(isdefined(level.e3_text_overlay)) {
+  if(isDefined(level.e3_text_overlay)) {
     level.e3_text_overlay.alpha = 1;
   }
 
@@ -618,7 +618,7 @@ start_ch_tarmac(e3) {
   black_overlay fadeOverTime(2);
   black_overlay.alpha = 0;
 
-  if(isdefined(level.e3_text_overlay)) {
+  if(isDefined(level.e3_text_overlay)) {
     level.e3_text_overlay fadeOverTime(2);
     level.e3_text_overlay.alpha = 0;
   }
@@ -628,13 +628,12 @@ start_ch_tarmac(e3) {
   wait(1.2);
 
   black_overlay destroy();
-  if(isdefined(level.e3_text_overlay)) {
+  if(isDefined(level.e3_text_overlay)) {
     level.e3_text_overlay destroy();
   }
 }
 
 cliffhanger_tarmac_main() {
-
   if(!isalive(level.price))
     return;
   level.price endon("death");
@@ -660,8 +659,8 @@ cliffhanger_tarmac_main() {
   exploder(56); // tarmac smoking extra jet before it blows
   spawn_vehicle_from_targetname_and_drive("tarmac_bmp_spawner");
 
-  //thread delete_random_vehicles(); // for now, need to do this manually until we add script_random_killspawn to vehicles	hanger_reinforce_spawners = getentarray( "hanger_reinforce_spawner", "targetname" );
-  hanger_reinforce_spawners = getentarray("hanger_reinforce_spawner", "targetname");
+  //thread delete_random_vehicles(); // for now, need to do this manually until we add script_random_killspawn to vehicles	hanger_reinforce_spawners = getEntArray( "hanger_reinforce_spawner", "targetname" );
+  hanger_reinforce_spawners = getEntArray("hanger_reinforce_spawner", "targetname");
   array_thread(hanger_reinforce_spawners, ::spawn_ai);
 
   thread more_reinforcements_spawn();
@@ -683,13 +682,13 @@ cliffhanger_tarmac_main() {
   //thread price_ditches_player_detection();
 
   level notify("stop_price_shield");
-  if(!isdefined(level.price.magic_bullet_shield)) {
+  if(!isDefined(level.price.magic_bullet_shield)) {
     level.price thread magic_bullet_shield();
   }
   //music_loop( "cliffhanger_escape_music", DEFINE_ESCAPE_MUSIC_TIME );
 
-  //	snowmobile_triggers = getentarray( "snowmobile_trigger", "targetname" );
-  //	array_call( snowmobile_triggers, ::setHintString, "Press &&1 to mount" );
+  //	snowmobile_triggers = getEntArray( "snowmobile_trigger", "targetname" );
+  //	array_call( snowmobile_triggers, ::setHintString, "Press && 1 to mount" );
 
   run_thread_on_noteworthy("tarmac_hanger_gate", ::connect_and_delete);
 
@@ -719,8 +718,8 @@ cliffhanger_tarmac_main() {
   hill_attackers_spawn();
 }
 
-
 /************************************************************************************************************/
+
 /*												INITIALIZATIONS												*/
 /************************************************************************************************************/
 
@@ -780,7 +779,7 @@ start_camp(e3) {
   flag_set("said_lets_split_up");
   thread maps\_utility::set_ambient("snow_base_white");
 
-  if(!isdefined(e3)) {
+  if(!isDefined(e3)) {
     start_common_cliffhanger();
     friendly_init_cliffhanger();
   }
@@ -900,8 +899,6 @@ start_common_cliffhanger() {
   thread enemy_init();
 }
 
-
-
 cliffhanger_objective_main() {
   level.curObjective = 1;
   level.objectives = [];
@@ -924,7 +921,7 @@ cliffhanger_objective_main() {
     case "camp":
       objective_enter_camp();
     case "c4":
-      //objective_c4_both();//multiple on compass 
+      //objective_c4_both();//multiple on compass
       //objective_c4_fuel_tanks();
       //objective_c4_mig();
       objective_c4_fuel_station();

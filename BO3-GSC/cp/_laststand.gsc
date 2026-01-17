@@ -24,7 +24,7 @@
 #namespace laststand;
 
 function autoexec __init__sytem__() {
-  system::register("laststand", & __init__, undefined, undefined);
+  system::register("laststand", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -32,15 +32,15 @@ function __init__() {
     return;
   }
   level.laststand_update_clientfields = [];
-  for (i = 0; i < 4; i++) {
+  for(i = 0; i < 4; i++) {
     level.laststand_update_clientfields[i] = "laststand_update" + i;
     clientfield::register("world", level.laststand_update_clientfields[i], 1, 5, "counter");
   }
-  if(!isdefined(level.playerlaststand_func)) {
-    level.playerlaststand_func = & player_laststand;
+  if(!isDefined(level.playerlaststand_func)) {
+    level.playerlaststand_func = &player_laststand;
   }
   level.weaponrevivetool = getweapon("syrette");
-  if(!isdefined(level.laststandpistol)) {
+  if(!isDefined(level.laststandpistol)) {
     level.laststandpistol = getweapon("noweapon");
   }
   level thread revive_hud_think();
@@ -53,7 +53,7 @@ function __init__() {
     setdvar("revive_trigger_radius", "100");
   }
   level.laststandgetupallowed = 0;
-  if(isdefined(level.var_be177839)) {
+  if(isDefined(level.var_be177839)) {
     visionsetlaststand(level.var_be177839);
   } else {
     visionsetlaststand("zombie_last_stand");
@@ -61,9 +61,9 @@ function __init__() {
 }
 
 function player_last_stand_stats(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(isdefined(attacker) && isplayer(attacker) && attacker != self) {
+  if(isDefined(attacker) && isplayer(attacker) && attacker != self) {
     attacker.kills++;
-    if(isdefined(weapon)) {
+    if(isDefined(weapon)) {
       dmgweapon = weapon;
       attacker addweaponstat(dmgweapon, "kills", 1);
     }
@@ -74,7 +74,7 @@ function player_last_stand_stats(einflictor, attacker, idamage, smeansofdeath, w
 function increment_downed_stat() {
   self.downs++;
   self addplayerstat("INCAPS", 1);
-  if(isdefined(getrootmapname())) {
+  if(isDefined(getrootmapname())) {
     var_e7ce5f85 = self getdstat("PlayerStatsList", "INCAPS", "statValue");
     self setnoncheckpointdata("INCAPS", var_e7ce5f85);
     self.incaps = var_e7ce5f85 - self getdstat("PlayerStatsByMap", getrootmapname(), "currentStats", "INCAPS");
@@ -91,11 +91,11 @@ function private function_51061490() {
 }
 
 function playerlaststand(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, delayoverride) {
-  if(isdefined(self.var_32218fc7) && self.var_32218fc7) {
+  if(isDefined(self.var_32218fc7) && self.var_32218fc7) {
     return;
   }
   self notify("entering_last_stand");
-  if(isdefined(level._game_module_player_laststand_callback)) {
+  if(isDefined(level._game_module_player_laststand_callback)) {
     self[[level._game_module_player_laststand_callback]](einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, delayoverride);
   }
   if(self player_is_in_laststand()) {
@@ -109,15 +109,15 @@ function playerlaststand(einflictor, attacker, idamage, smeansofdeath, weapon, v
   if(!self util::isweaponenabled()) {
     self util::_enableweapon();
   }
-  self.laststandparams = spawnstruct();
-  self.var_afe5253c = spawnstruct();
+  self.laststandparams = spawnStruct();
+  self.var_afe5253c = spawnStruct();
   self.laststandparams.einflictor = einflictor;
   self.var_afe5253c.var_a21e8eb8 = -1;
-  if(isdefined(einflictor)) {
+  if(isDefined(einflictor)) {
     self.var_afe5253c.var_a21e8eb8 = einflictor getentitynumber();
   }
   self.var_afe5253c.attackernum = -1;
-  if(isdefined(attacker)) {
+  if(isDefined(attacker)) {
     self.var_afe5253c.attackernum = einflictor getentitynumber();
   }
   self.laststandparams.attacker = attacker;
@@ -130,10 +130,8 @@ function playerlaststand(einflictor, attacker, idamage, smeansofdeath, weapon, v
   self thread player_last_stand_stats(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, delayoverride);
   bb::logplayermapnotification("enter_last_stand", self);
   self recordmapevent(1, gettime(), self.origin, skipto::function_52c50cb8());
-  if(isdefined(level.playerlaststand_func)) {
-    [
-      [level.playerlaststand_func]
-    ](einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, delayoverride);
+  if(isDefined(level.playerlaststand_func)) {
+    [[level.playerlaststand_func]](einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, delayoverride);
   }
   self.health = 1;
   self.laststand = 1;
@@ -142,24 +140,24 @@ function playerlaststand(einflictor, attacker, idamage, smeansofdeath, weapon, v
   self.meleeattackers = undefined;
   self util::show_hud(0);
   callback::callback("hash_6751ab5b");
-  if(!(isdefined(self.no_revive_trigger) && self.no_revive_trigger)) {
+  if(!(isDefined(self.no_revive_trigger) && self.no_revive_trigger)) {
     self revive_trigger_spawn();
   } else {
     self undolaststand();
   }
-  if(!isdefined(level.var_83405e54) || !level.var_83405e54) {
+  if(!isDefined(level.var_83405e54) || !level.var_83405e54) {
     self thread laststand_watch_weapon_switch();
   }
   self laststand_disable_player_weapons();
-  if(!isdefined(level.var_83405e54) || !level.var_83405e54) {
+  if(!isDefined(level.var_83405e54) || !level.var_83405e54) {
     self laststand_give_pistol();
   }
-  if(isdefined(level.playersuicideallowed) && level.playersuicideallowed && getplayers().size > 1) {
-    if(!isdefined(level.canplayersuicide) || self[[level.canplayersuicide]]()) {
+  if(isDefined(level.playersuicideallowed) && level.playersuicideallowed && getplayers().size > 1) {
+    if(!isDefined(level.canplayersuicide) || self[[level.canplayersuicide]]()) {
       self thread suicide_trigger_spawn();
     }
   }
-  if(isdefined(self.disabled_perks)) {
+  if(isDefined(self.disabled_perks)) {
     self.disabled_perks = [];
   }
   if(level.laststandgetupallowed && delayoverride != -1) {
@@ -200,7 +198,7 @@ function refire_player_downed() {
 
 function wait_for_weapon_pullout() {
   self endon("weapon_change");
-  while (!self attackbuttonpressed()) {
+  while(!self attackbuttonpressed()) {
     wait(0.05);
   }
 }
@@ -209,9 +207,9 @@ function laststand_watch_weapon_switch() {
   self endon("bled_out");
   self endon("disconnect");
   self endon("player_revived");
-  while (true) {
+  while(true) {
     self waittill("weapon_change", newweapon);
-    assert(isdefined(self.laststandpistol));
+    assert(isDefined(self.laststandpistol));
     assert(self.laststandpistol != level.weaponnone);
     if(newweapon == self.laststandpistol) {
       break;
@@ -220,7 +218,7 @@ function laststand_watch_weapon_switch() {
       self.lastactiveweapon = self getcurrentweapon();
       if(self isthrowinggrenade() || self cybercom::function_1be27df7()) {
         primaryweapons = self getweaponslistprimaries();
-        if(isdefined(primaryweapons) && primaryweapons.size > 0) {
+        if(isDefined(primaryweapons) && primaryweapons.size > 0) {
           self.lastactiveweapon = primaryweapons[0];
           self switchtoweaponimmediate(self.lastactiveweapon);
         }
@@ -240,29 +238,27 @@ function laststand_disable_player_weapons() {
   self.lastactiveweapon = self getcurrentweapon();
   if(self isthrowinggrenade() || self cybercom::function_1be27df7()) {
     primaryweapons = self getweaponslistprimaries();
-    if(isdefined(primaryweapons) && primaryweapons.size > 0) {
+    if(isDefined(primaryweapons) && primaryweapons.size > 0) {
       self.lastactiveweapon = primaryweapons[0];
       self switchtoweaponimmediate(self.lastactiveweapon);
     }
   }
   self setlaststandprevweap(self.lastactiveweapon);
   self.laststandpistol = undefined;
-  if(!isdefined(self.laststandpistol)) {
+  if(!isDefined(self.laststandpistol)) {
     self.laststandpistol = level.laststandpistol;
   }
-  if(isdefined(self.laststandpistoloverride)) {
+  if(isDefined(self.laststandpistoloverride)) {
     self.laststandpistol = self.laststandpistoloverride;
   }
-  if(isdefined(level.laststandweaponoverride)) {
-    [
-      [level.laststandweaponoverride]
-    ]();
+  if(isDefined(level.laststandweaponoverride)) {
+    [[level.laststandweaponoverride]]();
   }
   self notify("weapons_taken_for_last_stand");
 }
 
 function laststand_enable_player_weapons(b_allow_grenades = 1) {
-  if(isdefined(self.laststandpistol)) {
+  if(isDefined(self.laststandpistol)) {
     self takeweapon(self.laststandpistol);
   }
   self setlowready(0);
@@ -270,18 +266,16 @@ function laststand_enable_player_weapons(b_allow_grenades = 1) {
   if(b_allow_grenades) {
     self enableoffhandweapons();
   }
-  if(isdefined(self.lastactiveweapon) && self.lastactiveweapon != level.weaponnone && self hasweapon(self.lastactiveweapon)) {
+  if(isDefined(self.lastactiveweapon) && self.lastactiveweapon != level.weaponnone && self hasweapon(self.lastactiveweapon)) {
     self switchtoweapon(self.lastactiveweapon);
   } else {
     primaryweapons = self getweaponslistprimaries();
-    if(isdefined(primaryweapons) && primaryweapons.size > 0) {
+    if(isDefined(primaryweapons) && primaryweapons.size > 0) {
       self switchtoweapon(primaryweapons[0]);
     }
   }
-  if(isdefined(level.laststandweaponreturnedoverride)) {
-    [
-      [level.laststandweaponreturnedoverride]
-    ]();
+  if(isDefined(level.laststandweaponreturnedoverride)) {
+    [[level.laststandweaponreturnedoverride]]();
   }
 }
 
@@ -289,14 +283,14 @@ function laststand_clean_up_on_interrupt(playerbeingrevived, revivergun) {
   self endon("do_revive_ended_normally");
   revivetrigger = playerbeingrevived.revivetrigger;
   playerbeingrevived util::waittill_any("disconnect", "game_ended", "death");
-  if(isdefined(revivetrigger)) {
+  if(isDefined(revivetrigger)) {
     revivetrigger delete();
   }
   self cleanup_suicide_hud();
-  if(isdefined(self.reviveprogressbar)) {
+  if(isDefined(self.reviveprogressbar)) {
     self.reviveprogressbar hud::destroyelem();
   }
-  if(isdefined(self.revivetexthud)) {
+  if(isDefined(self.revivetexthud)) {
     self.revivetexthud destroy();
   }
   self revive_give_back_weapons(revivergun);
@@ -312,22 +306,20 @@ function laststand_clean_up_reviving_any(playerbeingrevived) {
 }
 
 function laststand_give_pistol() {
-  assert(isdefined(self.laststandpistol));
+  assert(isDefined(self.laststandpistol));
   assert(self.laststandpistol != level.weaponnone);
   self giveweapon(self.laststandpistol);
   self givemaxammo(self.laststandpistol);
   self switchtoweapon(self.laststandpistol);
-  if(isdefined(level.laststandweapongivenoverride)) {
-    [
-      [level.laststandweapongivenoverride]
-    ]();
+  if(isDefined(level.laststandweapongivenoverride)) {
+    [[level.laststandweapongivenoverride]]();
   }
 }
 
 function laststand_bleedout_decrement() {
   self.bleedout_time = self.bleedout_time - 1;
   wait(1);
-  while (isdefined(self.revivetrigger) && isdefined(self.revivetrigger.beingrevived) && self.revivetrigger.beingrevived == 1) {
+  while(isDefined(self.revivetrigger) && isDefined(self.revivetrigger.beingrevived) && self.revivetrigger.beingrevived == 1) {
     wait(0.1);
   }
 }
@@ -341,7 +333,7 @@ function private check_early_bleedout() {
   } else {
     b_any_standing = 0;
     foreach(player in players) {
-      if(isalive(player) && (!(isdefined(player.laststand) && player.laststand) || player.lives > 0)) {
+      if(isalive(player) && (!(isDefined(player.laststand) && player.laststand) || player.lives > 0)) {
         b_any_standing = 1;
         break;
       }
@@ -363,7 +355,7 @@ function laststand_bleedout_damage() {
   if(level.players.size == 1) {
     return;
   }
-  while (true) {
+  while(true) {
     self waittill("laststand_damage", amt);
     if(!self.ignoreme) {
       self.bleedout_time = self.bleedout_time - (0.02 * amt);
@@ -382,7 +374,7 @@ function laststand_bleedout(delay) {
   if(delay != 0 && !function_51061490()) {
     check_early_bleedout();
   }
-  if(isdefined(level.var_ee7cb602) && level.var_ee7cb602) {
+  if(isDefined(level.var_ee7cb602) && level.var_ee7cb602) {
     playsoundatposition("evt_death_down", (0, 0, 0));
   }
   self thread laststand_bleedout_damage();
@@ -390,7 +382,7 @@ function laststand_bleedout(delay) {
     laststand_bleedout_decrement();
     level clientfield::increment("laststand_update" + self getentitynumber(), self.bleedout_time + 1);
   }
-  while (self.bleedout_time > 0);
+  while(self.bleedout_time > 0);
   self notify("bled_out");
   bb::logplayermapnotification("player_bled_out", self);
   util::wait_network_frame();
@@ -398,7 +390,7 @@ function laststand_bleedout(delay) {
 }
 
 function ensurelaststandparamsvalidity() {
-  if(!isdefined(self.laststandparams.attacker)) {
+  if(!isDefined(self.laststandparams.attacker)) {
     self.laststandparams.attacker = self;
   }
 }
@@ -411,7 +403,7 @@ function bleed_out() {
     wait(var_6afb4351 + 0.2);
   }
   self cleanup_suicide_hud();
-  if(isdefined(self.revivetrigger)) {
+  if(isDefined(self.revivetrigger)) {
     self.revivetrigger delete();
   }
   self.revivetrigger = undefined;
@@ -474,15 +466,15 @@ function suicide_trigger_think() {
   level endon("stop_suicide_trigger");
   self thread clean_up_suicide_hud_on_end_game();
   self thread clean_up_suicide_hud_on_bled_out();
-  while (self usebuttonpressed()) {
+  while(self usebuttonpressed()) {
     wait(1);
   }
-  if(!isdefined(self.suicideprompt)) {
+  if(!isDefined(self.suicideprompt)) {
     return;
   }
-  while (true) {
+  while(true) {
     wait(0.1);
-    if(!isdefined(self.suicideprompt)) {
+    if(!isDefined(self.suicideprompt)) {
       continue;
     }
     self.suicideprompt settext(&"COOP_BUTTON_TO_SUICIDE");
@@ -514,10 +506,10 @@ function suicide_do_suicide(duration) {
   timer = 0;
   suicided = 0;
   self.suicideprompt settext("");
-  if(!isdefined(self.suicideprogressbar)) {
+  if(!isDefined(self.suicideprogressbar)) {
     self.suicideprogressbar = self hud::createprimaryprogressbar();
   }
-  if(!isdefined(self.suicidetexthud)) {
+  if(!isDefined(self.suicidetexthud)) {
     self.suicidetexthud = newclienthudelem(self);
   }
   self.suicideprogressbar hud::updatebar(0.01, 1 / suicidetime);
@@ -537,7 +529,7 @@ function suicide_do_suicide(duration) {
   self.suicidetexthud.hidewheninmenu = 1;
   self.suicidetexthud settext(&"COOP_SUICIDING");
   bb::logplayermapnotification("last_stand_suicide", self);
-  while (self is_suiciding()) {
+  while(self is_suiciding()) {
     wait(0.05);
     timer = timer + 0.05;
     if(timer >= suicidetime) {
@@ -545,13 +537,13 @@ function suicide_do_suicide(duration) {
       break;
     }
   }
-  if(isdefined(self.suicideprogressbar)) {
+  if(isDefined(self.suicideprogressbar)) {
     self.suicideprogressbar hud::destroyelem();
   }
-  if(isdefined(self.suicidetexthud)) {
+  if(isDefined(self.suicidetexthud)) {
     self.suicidetexthud destroy();
   }
-  if(isdefined(self.suicideprompt)) {
+  if(isDefined(self.suicideprompt)) {
     self.suicideprompt settext(&"COOP_BUTTON_TO_SUICIDE");
   }
   return suicided;
@@ -564,10 +556,10 @@ function can_suicide() {
   if(!self player_is_in_laststand()) {
     return false;
   }
-  if(!isdefined(self.suicideprompt)) {
+  if(!isDefined(self.suicideprompt)) {
     return false;
   }
-  if(isdefined(level.intermission) && level.intermission) {
+  if(isDefined(level.intermission) && level.intermission) {
     return false;
   }
   return true;
@@ -578,10 +570,8 @@ function is_suiciding(revivee) {
 }
 
 function revive_trigger_spawn() {
-  if(isdefined(level.revive_trigger_spawn_override_link)) {
-    [
-      [level.revive_trigger_spawn_override_link]
-    ](self);
+  if(isDefined(level.revive_trigger_spawn_override_link)) {
+    [[level.revive_trigger_spawn_override_link]](self);
   } else {
     radius = getdvarint("revive_trigger_radius");
     self.revivetrigger = spawn("trigger_radius", (0, 0, 0), 0, radius, radius);
@@ -602,26 +592,26 @@ function revive_trigger_think() {
   self endon("stop_revive_trigger");
   level endon("game_ended");
   self endon("death");
-  while (true) {
+  while(true) {
     wait(0.1);
-    if(!isdefined(self.revivetrigger)) {
+    if(!isDefined(self.revivetrigger)) {
       self notify("stop_revive_trigger");
     }
     self.revivetrigger sethintstring("");
     players = getplayers();
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       if(players[i] can_revive(self)) {
         self.revivetrigger setrevivehintstring(&"COOP_BUTTON_TO_REVIVE_PLAYER", self.team);
         break;
       }
     }
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       reviver = players[i];
       if(self == reviver || !reviver is_reviving(self)) {
         continue;
       }
       gun = reviver getcurrentweapon();
-      assert(isdefined(gun));
+      assert(isDefined(gun));
       if(gun == level.weaponrevivetool) {
         continue;
       }
@@ -656,14 +646,14 @@ function revive_give_back_weapons(gun) {
     self switchtoweapon(gun);
   } else {
     primaryweapons = self getweaponslistprimaries();
-    if(isdefined(primaryweapons) && primaryweapons.size > 0) {
+    if(isDefined(primaryweapons) && primaryweapons.size > 0) {
       self switchtoweapon(primaryweapons[0]);
     }
   }
 }
 
 function can_revive(revivee) {
-  if(!isdefined(revivee.revivetrigger)) {
+  if(!isDefined(revivee.revivetrigger)) {
     return false;
   }
   if(!isalive(self)) {
@@ -675,23 +665,17 @@ function can_revive(revivee) {
   if(self.team != revivee.team) {
     return false;
   }
-  if(isdefined(level.can_revive) && ![
-      [level.can_revive]
-    ](revivee)) {
+  if(isDefined(level.can_revive) && ![[level.can_revive]](revivee)) {
     return false;
   }
-  if(isdefined(level.can_revive_game_module) && ![
-      [level.can_revive_game_module]
-    ](revivee)) {
+  if(isDefined(level.can_revive_game_module) && ![[level.can_revive_game_module]](revivee)) {
     return false;
   }
   ignore_sight_checks = 0;
   ignore_touch_checks = 0;
-  if(isdefined(level.revive_trigger_should_ignore_sight_checks)) {
-    ignore_sight_checks = [
-      [level.revive_trigger_should_ignore_sight_checks]
-    ](self);
-    if(ignore_sight_checks && isdefined(revivee.revivetrigger.beingrevived) && revivee.revivetrigger.beingrevived == 1) {
+  if(isDefined(level.revive_trigger_should_ignore_sight_checks)) {
+    ignore_sight_checks = [[level.revive_trigger_should_ignore_sight_checks]](self);
+    if(ignore_sight_checks && isDefined(revivee.revivetrigger.beingrevived) && revivee.revivetrigger.beingrevived == 1) {
       ignore_touch_checks = 1;
     }
   }
@@ -719,7 +703,7 @@ function is_reviving(revivee) {
 }
 
 function is_reviving_any() {
-  return isdefined(self.is_reviving_any) && self.is_reviving_any;
+  return isDefined(self.is_reviving_any) && self.is_reviving_any;
 }
 
 function revive_do_revive(playerbeingrevived, revivergun) {
@@ -737,20 +721,20 @@ function revive_do_revive(playerbeingrevived, revivergun) {
   if(isplayer(playerbeingrevived)) {
     playerbeingrevived startrevive(self);
   }
-  if(0 && !isdefined(self.reviveprogressbar)) {
+  if(0 && !isDefined(self.reviveprogressbar)) {
     self.reviveprogressbar = self hud::createprimaryprogressbar();
   }
-  if(!isdefined(self.revivetexthud)) {
+  if(!isDefined(self.revivetexthud)) {
     self.revivetexthud = newclienthudelem(self);
   }
   self cybercom::cybercom_armpulse(2);
   self thread laststand_clean_up_on_interrupt(playerbeingrevived, revivergun);
-  if(!isdefined(self.is_reviving_any)) {
+  if(!isDefined(self.is_reviving_any)) {
     self.is_reviving_any = 0;
   }
   self.is_reviving_any++;
   self thread laststand_clean_up_reviving_any(playerbeingrevived);
-  if(isdefined(self.reviveprogressbar)) {
+  if(isDefined(self.reviveprogressbar)) {
     self.reviveprogressbar hud::updatebar(0.01, 1 / revivetime);
   }
   self.revivetexthud.alignx = "center";
@@ -770,31 +754,31 @@ function revive_do_revive(playerbeingrevived, revivergun) {
   self.revivetexthud settext(&"COOP_REVIVING");
   self thread check_for_failed_revive(playerbeingrevived);
   self playlocalsound("chr_revive_start");
-  while (self is_reviving(playerbeingrevived)) {
+  while(self is_reviving(playerbeingrevived)) {
     wait(0.05);
     timer = timer + 0.05;
     if(self player_is_in_laststand()) {
       break;
     }
-    if(isdefined(playerbeingrevived.revivetrigger.auto_revive) && playerbeingrevived.revivetrigger.auto_revive == 1) {
+    if(isDefined(playerbeingrevived.revivetrigger.auto_revive) && playerbeingrevived.revivetrigger.auto_revive == 1) {
       break;
     }
     if(timer >= revivetime) {
       revived = 1;
-      if(!isdefined(self.revives) || self.revives <= 10) {
+      if(!isDefined(self.revives) || self.revives <= 10) {
         scoreevents::processscoreevent("player_did_revived", self);
       }
       break;
     }
   }
   self playlocalsound("chr_revive_end");
-  if(isdefined(self.reviveprogressbar)) {
+  if(isDefined(self.reviveprogressbar)) {
     self.reviveprogressbar hud::destroyelem();
   }
-  if(isdefined(self.revivetexthud)) {
+  if(isDefined(self.revivetexthud)) {
     self.revivetexthud destroy();
   }
-  if(isdefined(playerbeingrevived.revivetrigger.auto_revive) && playerbeingrevived.revivetrigger.auto_revive == 1) {} else if(!revived) {
+  if(isDefined(playerbeingrevived.revivetrigger.auto_revive) && playerbeingrevived.revivetrigger.auto_revive == 1) {} else if(!revived) {
     if(isplayer(playerbeingrevived)) {
       playerbeingrevived stoprevive(self);
     }
@@ -824,10 +808,10 @@ function auto_revive_on_notify() {
 }
 
 function auto_revive(reviver, dont_enable_weapons) {
-  if(isdefined(self.revivetrigger)) {
+  if(isDefined(self.revivetrigger)) {
     self.revivetrigger.auto_revive = 1;
     if(self.revivetrigger.beingrevived == 1) {
-      while (true) {
+      while(true) {
         if(self.revivetrigger.beingrevived == 0) {
           break;
         }
@@ -839,12 +823,12 @@ function auto_revive(reviver, dont_enable_weapons) {
   self reviveplayer();
   self clientfield::set_to_player("sndHealth", 0);
   self notify("stop_revive_trigger");
-  if(isdefined(self.revivetrigger)) {
+  if(isDefined(self.revivetrigger)) {
     self.revivetrigger delete();
     self.revivetrigger = undefined;
   }
   self cleanup_suicide_hud();
-  if(!isdefined(dont_enable_weapons) || dont_enable_weapons == 0) {
+  if(!isDefined(dont_enable_weapons) || dont_enable_weapons == 0) {
     self laststand_enable_player_weapons();
   }
   self allowjump(1);
@@ -853,9 +837,9 @@ function auto_revive(reviver, dont_enable_weapons) {
   self.laststand = undefined;
   self util::show_hud(1);
   self lui::screen_close_menu();
-  if(!(isdefined(level.isresetting_grief) && level.isresetting_grief)) {
-    if(isdefined(reviver)) {
-      if(isplayer(reviver) && isdefined(getrootmapname())) {
+  if(!(isDefined(level.isresetting_grief) && level.isresetting_grief)) {
+    if(isDefined(reviver)) {
+      if(isplayer(reviver) && isDefined(getrootmapname())) {
         reviver addplayerstat("REVIVES", 1);
         var_8642deaf = reviver getdstat("PlayerStatsList", "REVIVES", "statValue");
         reviver setnoncheckpointdata("REVIVES", var_8642deaf);
@@ -880,7 +864,7 @@ function revive_success(reviver, b_track_stats = 1) {
     self notify("player_revived", reviver);
     return;
   }
-  if(isdefined(b_track_stats) && b_track_stats) {
+  if(isDefined(b_track_stats) && b_track_stats) {
     demo::bookmark("player_revived", gettime(), reviver, self);
   }
   if(isplayer(self)) {
@@ -890,7 +874,7 @@ function revive_success(reviver, b_track_stats = 1) {
   self notify("player_revived", reviver);
   bb::logplayermapnotification("player_revived", self);
   self reviveplayer();
-  if(isplayer(reviver) && isdefined(getrootmapname())) {
+  if(isplayer(reviver) && isDefined(getrootmapname())) {
     reviver addplayerstat("REVIVES", 1);
     var_8642deaf = reviver getdstat("PlayerStatsList", "REVIVES", "statValue");
     reviver setnoncheckpointdata("REVIVES", var_8642deaf);
@@ -899,7 +883,7 @@ function revive_success(reviver, b_track_stats = 1) {
     reviver.pers["revives"] = reviver.revives;
   }
   reviver.upgrade_fx_origin = self.origin;
-  if(isdefined(b_track_stats) && b_track_stats) {
+  if(isDefined(b_track_stats) && b_track_stats) {
     reviver thread check_for_sacrifice();
   }
   self clientfield::set_to_player("sndHealth", 0);
@@ -914,7 +898,7 @@ function revive_success(reviver, b_track_stats = 1) {
 }
 
 function revive_force_revive(reviver) {
-  assert(isdefined(self));
+  assert(isDefined(self));
   assert(isplayer(self));
   assert(self player_is_in_laststand());
   self thread revive_success(reviver);
@@ -922,7 +906,7 @@ function revive_force_revive(reviver) {
 
 function revive_hud_think() {
   level endon("game_ended");
-  while (true) {
+  while(true) {
     wait(0.1);
     if(!player_any_player_in_laststand()) {
       continue;
@@ -931,14 +915,14 @@ function revive_hud_think() {
     foreach(team in level.teams) {
       playertorevive = undefined;
       foreach(player in level.aliveplayers[team]) {
-        if(!isdefined(player.revivetrigger) || !isdefined(player.revivetrigger.createtime)) {
+        if(!isDefined(player.revivetrigger) || !isDefined(player.revivetrigger.createtime)) {
           continue;
         }
-        if(!isdefined(playertorevive) || playertorevive.revivetrigger.createtime > player.revivetrigger.createtime) {
+        if(!isDefined(playertorevive) || playertorevive.revivetrigger.createtime > player.revivetrigger.createtime) {
           playertorevive = player;
         }
       }
-      if(isdefined(playertorevive)) {
+      if(isDefined(playertorevive)) {
         foreach(player in level.aliveplayers[team]) {
           if(player player_is_in_laststand()) {
             continue;
@@ -972,7 +956,7 @@ function laststand_getup() {
   self.laststand_info.getup_bar_value = 0.5;
   self thread laststand_getup_hud();
   self thread laststand_getup_damage_watcher();
-  while (self.laststand_info.getup_bar_value < 1) {
+  while(self.laststand_info.getup_bar_value < 1) {
     self.laststand_info.getup_bar_value = self.laststand_info.getup_bar_value + 0.0025;
     wait(0.05);
   }
@@ -1014,7 +998,7 @@ function wait_and_revive(emergency_reserve = 0) {
   self endon("disconnect");
   self endon("death");
   level flag::set("wait_and_revive");
-  if(isdefined(self.waiting_to_revive) && self.waiting_to_revive == 1) {
+  if(isDefined(self.waiting_to_revive) && self.waiting_to_revive == 1) {
     return;
   }
   self.waiting_to_revive = 1;
@@ -1023,7 +1007,7 @@ function wait_and_revive(emergency_reserve = 0) {
   if(bleedout_time <= solo_revive_time) {
     solo_revive_time = bleedout_time * 0.5;
   }
-  if(isdefined(emergency_reserve) && emergency_reserve) {
+  if(isDefined(emergency_reserve) && emergency_reserve) {
     if(level.players.size == 1) {
       self.revive_hud settext(&"COOP_REVIVE_EMERGENCY_RESERVE_ONCE");
     } else {
@@ -1043,7 +1027,7 @@ function wait_and_revive(emergency_reserve = 0) {
   level flag::clear("wait_and_revive");
   self auto_revive(self);
   self.lives--;
-  if(isdefined(self.infinite_solo_revives) && self.infinite_solo_revives) {
+  if(isDefined(self.infinite_solo_revives) && self.infinite_solo_revives) {
     self.lives = level.numlives;
   }
   self.waiting_to_revive = 0;
@@ -1053,7 +1037,7 @@ function remote_revive_watch() {
   self endon("death");
   self endon("player_revived");
   keep_checking = 1;
-  while (keep_checking) {
+  while(keep_checking) {
     self waittill("remote_revive", reviver);
     if(reviver.team == self.team) {
       keep_checking = 0;
@@ -1067,7 +1051,7 @@ function player_laststand(einflictor, attacker, idamage, smeansofdeath, weapon, 
   self allowjump(0);
   currweapon = self getcurrentweapon();
   statweapon = currweapon;
-  if(isdefined(self.lives) && self.lives > 0) {
+  if(isDefined(self.lives) && self.lives > 0) {
     self thread wait_and_revive(self hascybercomrig("cybercom_emergencyreserve") != 0);
   }
   self thread remote_revive_watch();

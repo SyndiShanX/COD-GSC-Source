@@ -68,7 +68,7 @@ fire_effect() {
   players = getLocalPlayers();
   for(i = 0; i < players.size; i++) {
     println("fire fx " + level._effect[firefx]);
-    playfx(i, level._effect[firefx], self.v["origin"], forward, up);
+    playFX(i, level._effect[firefx], self.v["origin"], forward, up);
   }
 }
 
@@ -119,7 +119,7 @@ cannon_effect() {
       players = getLocalPlayers();
       for(player = 0; player < players.size; player++) {
         println("cannon fx " + level._effect[self.v["fxid"]]);
-        playfx(player, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
+        playFX(player, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
       }
       self exploder_delay();
     }
@@ -324,11 +324,11 @@ createExploder(fxid) {
 
 set_forward_and_up_vectors() {
   self.v["up"] = anglestoup(self.v["angles"]);
-  self.v["forward"] = anglestoforward(self.v["angles"]);
+  self.v["forward"] = anglesToForward(self.v["angles"]);
 }
 
 create_triggerfx(clientNum) {
-  self.looperFX = playFx(clientNum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"], self.v["delay"]);
+  self.looperFX = playFX(clientNum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"], self.v["delay"]);
   create_loopsound(clientNum);
 }
 
@@ -338,13 +338,13 @@ create_looper(clientNum) {
 }
 
 loopfx(clientNum) {
-  self.looperFX = playFx(clientNum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"], self.v["delay"]);
+  self.looperFX = playFX(clientNum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"], self.v["delay"]);
   while(1) {
     if(isDefined(self.v["delay"]))
       realWait(self.v["delay"]);
     while(isfxplaying(clientNum, self.looperFX))
       wait 0.1;
-    self.looperFX = playFx(clientNum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
+    self.looperFX = playFX(clientNum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
   }
 }
 

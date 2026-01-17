@@ -27,7 +27,7 @@ main(shoot, recover, aim, turret) {
   turretState = "start";
   self animscripts\shared::placeWeaponOn(self.weapon, "none");
   self.a.postScriptFunc = ::preplacedPostScriptFunc;
-  for (;;) {
+  for(;;) {
     duration = (pauseUntilTime - getTime()) * 0.001;
     if(turret isFiringTurret() && (duration <= 0)) {
       if(turretState != "fire") {
@@ -41,9 +41,7 @@ main(shoot, recover, aim, turret) {
       pauseUntilTime = getTime() + int(duration * 1000);
       if(isDefined(recover)) {
         turretState = "recover";
-        [
-          [recover]
-        ](turret);
+        [[recover]](turret);
       }
     } else {
       if(turretState != "aim") {

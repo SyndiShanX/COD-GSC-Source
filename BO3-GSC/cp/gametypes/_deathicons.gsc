@@ -11,17 +11,17 @@
 #namespace deathicons;
 
 function autoexec __init__sytem__() {
-  system::register("deathicons", & __init__, undefined, undefined);
+  system::register("deathicons", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype( & init);
-  callback::on_connect( & on_player_connect);
+  callback::on_start_gametype(&init);
+  callback::on_connect(&on_player_connect);
 }
 
 function init() {
-  if(!isdefined(level.ragdoll_override)) {
-    level.ragdoll_override = & ragdoll_override;
+  if(!isDefined(level.ragdoll_override)) {
+    level.ragdoll_override = &ragdoll_override;
   }
   if(!level.teambased) {
     return;
@@ -35,7 +35,7 @@ function on_player_connect() {
 function update_enabled() {}
 
 function add(entity, dyingplayer, team, timeout) {
-  if(!level.teambased || (isdefined(level.is_safehouse) && level.is_safehouse)) {
+  if(!level.teambased || (isDefined(level.is_safehouse) && level.is_safehouse)) {
     return;
   }
   iconorg = entity.origin;
@@ -43,14 +43,14 @@ function add(entity, dyingplayer, team, timeout) {
   dyingplayer endon("disconnect");
   wait(0.05);
   util::waittillslowprocessallowed();
-  assert(isdefined(level.teams[team]));
+  assert(isDefined(level.teams[team]));
   if(getdvarstring("ui_hud_showdeathicons") == "0") {
     return;
   }
   if(level.hardcoremode) {
     return;
   }
-  if(isdefined(self.lastdeathicon)) {
+  if(isDefined(self.lastdeathicon)) {
     self.lastdeathicon destroy();
   }
   newdeathicon = newteamhudelem(team);
@@ -81,7 +81,7 @@ function destroy_slowly(timeout) {
 function ragdoll_override(idamage, smeansofdeath, sweapon, shitloc, vdir, vattackerorigin, deathanimduration, einflictor, ragdoll_jib, body) {
   if(smeansofdeath == "MOD_FALLING" && self isonground() == 1) {
     body startragdoll();
-    if(!isdefined(self.switching_teams)) {
+    if(!isDefined(self.switching_teams)) {
       thread add(body, self, self.team, 5);
     }
     return true;

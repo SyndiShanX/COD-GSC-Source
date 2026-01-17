@@ -23,7 +23,7 @@ make_barbwire_digbat() {
   self animscripts\shared::placeweaponon(self.weapon, "none");
   self.digbat_melee_weapon = spawn("script_model", self gettagorigin("tag_weapon_right"));
   self.digbat_melee_weapon.angles = self gettagangles("tag_weapon_right");
-  self.digbat_melee_weapon setmodel("t6_wpn_bat_barbedwire");
+  self.digbat_melee_weapon setModel("t6_wpn_bat_barbedwire");
   self.digbat_melee_weapon linkto(self, "tag_weapon_right");
 
   recordent(self.digbat_melee_weapon);
@@ -39,7 +39,7 @@ make_machete_digbat() {
   self animscripts\shared::placeweaponon(self.weapon, "none");
   self.digbat_melee_weapon = spawn("script_model", self gettagorigin("tag_weapon_right"));
   self.digbat_melee_weapon.angles = self gettagangles("tag_weapon_right");
-  self.digbat_melee_weapon setmodel("t6_wpn_machete_prop");
+  self.digbat_melee_weapon setModel("t6_wpn_machete_prop");
   self.digbat_melee_weapon linkto(self, "tag_weapon_right");
 
   recordent(self.digbat_melee_weapon);

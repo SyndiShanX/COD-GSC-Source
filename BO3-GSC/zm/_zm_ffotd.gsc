@@ -18,7 +18,7 @@ function main_end() {
 }
 
 function optimize_for_splitscreen() {
-  if(!isdefined(level.var_7064bd2e)) {
+  if(!isDefined(level.var_7064bd2e)) {
     level.var_7064bd2e = 3;
   }
   if(level.var_7064bd2e) {

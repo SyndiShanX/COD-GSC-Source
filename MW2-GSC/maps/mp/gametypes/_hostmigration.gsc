@@ -60,7 +60,7 @@ hostMigrationTimerThink_Internal() {
 
   self.hostMigrationControlsFrozen = false;
 
-  while (!isReallyAlive(self)) {
+  while(!isReallyAlive(self)) {
     self waittill("spawned");
   }
 
@@ -93,9 +93,9 @@ waitTillHostMigrationDone() {
 }
 
 waitTillHostMigrationStarts(duration) {
-  if(isDefined(level.hostMigrationTimer))
+  if(isDefined(level.hostMigrationTimer)) {
     return;
-
+  }
   level endon("host_migration_begin");
   wait duration;
 }
@@ -109,7 +109,7 @@ waitLongDurationWithHostMigrationPause(duration) {
 
   endtime = gettime() + duration * 1000;
 
-  while (gettime() < endtime) {
+  while(gettime() < endtime) {
     waitTillHostMigrationStarts((endtime - gettime()) / 1000);
 
     if(isDefined(level.hostMigrationTimer)) {
@@ -133,10 +133,10 @@ waitLongDurationWithGameEndTimeUpdate(duration) {
 
   endtime = gettime() + duration * 1000;
 
-  while (gettime() < endtime) {
+  while(gettime() < endtime) {
     waitTillHostMigrationStarts((endtime - gettime()) / 1000);
 
-    while (isDefined(level.hostMigrationTimer)) {
+    while(isDefined(level.hostMigrationTimer)) {
       endTime += 1000;
       setGameEndTime(int(endTime));
       wait 1;
@@ -144,7 +144,7 @@ waitLongDurationWithGameEndTimeUpdate(duration) {
   }
 
   assert(gettime() == endtime);
-  while (isDefined(level.hostMigrationTimer)) {
+  while(isDefined(level.hostMigrationTimer)) {
     endTime += 1000;
     setGameEndTime(int(endTime));
     wait 1;

@@ -56,7 +56,7 @@ bot_sd_think() {
   level endon("game_ended");
   self.has_started_thinking = undefined;
 
-  while (!isdefined(level.bot_gametype_precaching_done))
+  while(!isDefined(level.bot_gametype_precaching_done))
     wait 0.05;
 
   self botsetflag("separation", 0);
@@ -65,13 +65,13 @@ bot_sd_think() {
   var_0 = game["attackers"];
   var_1 = 1;
 
-  if(isdefined(level.sdbomb) && isdefined(level.sdbomb.carrier) && level.sdbomb.carrier == self && isdefined(self.role) && self.role == "atk_bomber")
+  if(isDefined(level.sdbomb) && isDefined(level.sdbomb.carrier) && level.sdbomb.carrier == self && isDefined(self.role) && self.role == "atk_bomber")
     var_1 = 0;
 
   if(var_1) {
     self.role = undefined;
 
-    if(isdefined(level.atk_bomber) && level.atk_bomber == self)
+    if(isDefined(level.atk_bomber) && level.atk_bomber == self)
       level.atk_bomber = undefined;
   }
 
@@ -82,12 +82,12 @@ bot_sd_think() {
   self.defender_set_script_pathstyle = undefined;
   self.defuser_bad_path_counter = 0;
 
-  if(!isdefined(level.initial_bomb_location) && !level.multibomb) {
+  if(!isDefined(level.initial_bomb_location) && !level.multibomb) {
     level.initial_bomb_location = level.sdbomb.curorigin;
     level.initial_bomb_location_nearest_node = getclosestnodeinsight(level.sdbomb.curorigin);
   }
 
-  if(self.team == var_0 && !isdefined(level.can_pickup_bomb_time)) {
+  if(self.team == var_0 && !isDefined(level.can_pickup_bomb_time)) {
     var_2 = 0;
 
     if(!level.multibomb) {
@@ -106,7 +106,7 @@ bot_sd_think() {
     }
   }
 
-  for (;;) {
+  for(;;) {
     wait(randomintrange(1, 3) * 0.05);
 
     if(self.health <= 0) {
@@ -114,18 +114,18 @@ bot_sd_think() {
     }
     self.has_started_thinking = 1;
 
-    if(!isdefined(self.role))
+    if(!isDefined(self.role))
       initialize_sd_role();
 
-    if(isdefined(self.suspend_sd_role)) {
+    if(isDefined(self.suspend_sd_role)) {
       continue;
     }
     if(self.team == var_0) {
-      if(!level.multibomb && isdefined(level.can_pickup_bomb_time) && gettime() < level.can_pickup_bomb_time && !isdefined(level.sdbomb.carrier)) {
+      if(!level.multibomb && isDefined(level.can_pickup_bomb_time) && gettime() < level.can_pickup_bomb_time && !isDefined(level.sdbomb.carrier)) {
         if(!maps\mp\bots\_bots_util::bot_is_defending_point(level.sdbomb.curorigin)) {
           var_8 = getclosestnodeinsight(level.sdbomb.curorigin);
 
-          if(isdefined(var_8)) {
+          if(isDefined(var_8)) {
             var_9["nearest_node_to_center"] = var_8;
             maps\mp\bots\_bots_strategy::bot_protect_point(level.sdbomb.curorigin, 900, var_9);
           } else
@@ -139,17 +139,17 @@ bot_sd_think() {
 
     if(level.bombplanted) {
       if(distancesquared(self.origin, level.sdbombmodel.origin) > squared(level.protect_radius * 2)) {
-        if(!isdefined(self.defender_set_script_pathstyle)) {
+        if(!isDefined(self.defender_set_script_pathstyle)) {
           self.defender_set_script_pathstyle = 1;
           self botsetpathingstyle("scripted");
         }
-      } else if(isdefined(self.defender_set_script_pathstyle) && !isdefined(self.scripted_path_style)) {
+      } else if(isDefined(self.defender_set_script_pathstyle) && !isDefined(self.scripted_path_style)) {
         self.defender_set_script_pathstyle = undefined;
         self botsetpathingstyle(undefined);
       }
     }
 
-    if(level.bombplanted && isdefined(level.bomb_defuser) && self.role != "defuser") {
+    if(level.bombplanted && isDefined(level.bomb_defuser) && self.role != "defuser") {
       if(!maps\mp\bots\_bots_util::bot_is_defending_point(level.sdbombmodel.origin)) {
         self botclearscriptgoal();
         maps\mp\bots\_bots_strategy::bot_protect_point(level.sdbombmodel.origin, level.protect_radius);
@@ -179,12 +179,12 @@ atk_bomber_update() {
   if(maps\mp\bots\_bots_util::bot_is_defending())
     maps\mp\bots\_bots_strategy::bot_defend_stop();
 
-  if(isdefined(level.sdbomb) && isdefined(level.sdbomb.carrier) && isalive(level.sdbomb.carrier) && level.sdbomb.carrier != self)
+  if(isDefined(level.sdbomb) && isDefined(level.sdbomb.carrier) && isalive(level.sdbomb.carrier) && level.sdbomb.carrier != self)
     wait 0.7;
 
   if(!self.isbombcarrier && !level.multibomb) {
-    if(isdefined(level.sdbomb)) {
-      if(!isdefined(self.last_bomb_location))
+    if(isDefined(level.sdbomb)) {
+      if(!isDefined(self.last_bomb_location))
         self.last_bomb_location = level.sdbomb.curorigin;
 
       if(distancesquared(self.last_bomb_location, level.sdbomb.curorigin) > 4) {
@@ -204,15 +204,13 @@ atk_bomber_update() {
         }
       }
 
-      if(isdefined(var_2)) {
+      if(isDefined(var_2)) {
         self botsetscriptgoal(var_2.origin, 20, "critical");
         maps\mp\bots\_bots_util::bot_waittill_goal_or_fail();
 
-        if(isdefined(level.sdbomb) && !isdefined(level.sdbomb.carrier))
+        if(isDefined(level.sdbomb) && !isDefined(level.sdbomb.carrier))
           level.sdbomb maps\mp\gametypes\_gameobjects::setpickedup(self);
-      } else {
-
-      }
+      } else {}
 
       return;
     }
@@ -222,7 +220,7 @@ atk_bomber_update() {
       var_7 = 32;
       var_8 = maps\mp\bots\_bots_util::bot_queued_process("BotGetClosestNavigablePoint", maps\mp\bots\_bots_util::func_bot_get_closest_navigable_point, level.sdbomb.curorigin, var_6 + var_7, self);
 
-      if(isdefined(var_8)) {
+      if(isDefined(var_8)) {
         var_9 = self botsetscriptgoal(level.sdbomb.curorigin, 0, "critical");
 
         if(var_9) {
@@ -237,25 +235,25 @@ atk_bomber_update() {
           maps\mp\bots\_bots_util::bot_waittill_goal_or_fail();
         }
 
-        if(isdefined(level.sdbomb) && !isdefined(level.sdbomb.carrier)) {
+        if(isDefined(level.sdbomb) && !isDefined(level.sdbomb.carrier)) {
           var_8 = maps\mp\bots\_bots_util::bot_queued_process("BotGetClosestNavigablePoint", maps\mp\bots\_bots_util::func_bot_get_closest_navigable_point, level.sdbomb.curorigin, var_6 + var_7, self);
 
-          if(!isdefined(var_8))
+          if(!isDefined(var_8))
             level.sdbomb maps\mp\gametypes\_gameobjects::setpickedup(self);
         }
       }
     }
   } else {
-    if(isdefined(self.dont_plant_until_time) && gettime() < self.dont_plant_until_time) {
+    if(isDefined(self.dont_plant_until_time) && gettime() < self.dont_plant_until_time) {
       return;
     }
-    if(!isdefined(level.bomb_zone_assaulting))
+    if(!isDefined(level.bomb_zone_assaulting))
       level.bomb_zone_assaulting = level.bombzones[randomint(level.bombzones.size)];
 
     var_10 = level.bomb_zone_assaulting;
     self.bombzonegoal = var_10;
 
-    if(!isdefined(level.initial_bomb_pickup_time) || gettime() - level.initial_bomb_pickup_time < level.initial_pickup_wait_time) {
+    if(!isDefined(level.initial_bomb_pickup_time) || gettime() - level.initial_bomb_pickup_time < level.initial_pickup_wait_time) {
       level.initial_bomb_pickup_time = gettime() + level.initial_pickup_wait_time;
       thread bomber_disable_movement_for_time(level.initial_pickup_wait_time / 1000);
       wait(level.initial_pickup_wait_time / 1000);
@@ -307,7 +305,7 @@ bomber_monitor_no_path() {
   self endon("bomber_monitor_no_path");
   level.sdbomb endon("pickup_object");
 
-  for (;;) {
+  for(;;) {
     self waittill("no_path");
     self.atk_bomber_no_path_to_bomb_count++;
   }
@@ -316,9 +314,9 @@ bomber_monitor_no_path() {
 clear_target_zone_update() {
   self endon("new_role");
 
-  if(isdefined(level.atk_bomber)) {
+  if(isDefined(level.atk_bomber)) {
     if(level.attack_behavior == "rush") {
-      if(!isdefined(self.set_initial_rush_goal)) {
+      if(!isDefined(self.set_initial_rush_goal)) {
         if(!level.multibomb) {
           var_0["nearest_node_to_center"] = level.initial_bomb_location_nearest_node;
           maps\mp\bots\_bots_strategy::bot_protect_point(level.initial_bomb_location, 900, var_0);
@@ -332,9 +330,9 @@ clear_target_zone_update() {
       if(self botgetdifficultysetting("strategyLevel") > 0)
         set_force_sprint();
 
-      if(isai(level.atk_bomber) && isdefined(level.atk_bomber.bombzonegoal))
+      if(isai(level.atk_bomber) && isDefined(level.atk_bomber.bombzonegoal))
         var_1 = level.atk_bomber.bombzonegoal;
-      else if(isdefined(level.bomb_zone_assaulting))
+      else if(isDefined(level.bomb_zone_assaulting))
         var_1 = level.bomb_zone_assaulting;
       else
         var_1 = maps\mp\bots\_bots_gametype_common::find_closest_bombzone_to_player(level.atk_bomber);
@@ -371,7 +369,7 @@ bomb_defuser_update() {
   }
   var_0 = find_ticking_bomb();
 
-  if(!isdefined(var_0)) {
+  if(!isDefined(var_0)) {
     return;
   }
   var_1 = common_scripts\utility::get_array_of_closest(level.sdbombmodel.origin, var_0.bottargets);
@@ -393,14 +391,14 @@ bomb_defuser_update() {
     self.defuser_bad_path_counter++;
 
     if(self.defuser_bad_path_counter >= 4) {
-      for (;;) {
+      for(;;) {
         var_5 = getnodesinradiussorted(var_2, 50, 0);
         var_6 = self.defuser_bad_path_counter - 4;
 
         if(var_5.size <= var_6) {
           var_7 = botgetclosestnavigablepoint(var_2, 50, self);
 
-          if(isdefined(var_7))
+          if(isDefined(var_7))
             self botsetscriptgoal(var_7, 20, "critical");
           else
             break;
@@ -458,7 +456,7 @@ investigate_someone_using_bomb_update() {
 camp_bomb_update() {
   self endon("new_role");
 
-  if(isdefined(level.sdbomb.carrier)) {
+  if(isDefined(level.sdbomb.carrier)) {
     if(self.prev_role == "defender")
       self.defend_zone = maps\mp\bots\_bots_gametype_common::find_closest_bombzone_to_player(self);
 
@@ -485,7 +483,7 @@ backstabber_update() {
   if(maps\mp\bots\_bots_util::bot_is_defending())
     maps\mp\bots\_bots_strategy::bot_defend_stop();
 
-  if(!isdefined(self.backstabber_stage))
+  if(!isDefined(self.backstabber_stage))
     self.backstabber_stage = "1_move_to_midpoint";
 
   if(self.backstabber_stage == "1_move_to_midpoint") {
@@ -503,7 +501,7 @@ backstabber_update() {
     var_5 = int(var_3.size * (var_3.size + 1) * 0.5);
     var_6 = randomint(var_5);
 
-    for (var_7 = 0; var_7 < var_3.size; var_7++) {
+    for(var_7 = 0; var_7 < var_3.size; var_7++) {
       var_8 = var_3.size - var_7;
 
       if(var_6 < var_8) {
@@ -542,7 +540,7 @@ backstabber_update() {
   }
 
   if(self.backstabber_stage == "3_move_to_bombzone") {
-    if(!isdefined(self.bombzone_num_picked))
+    if(!isDefined(self.bombzone_num_picked))
       self.bombzone_num_picked = randomint(level.bombzones.size);
 
     self botsetpathingstyle(undefined);
@@ -570,21 +568,21 @@ random_killer_update() {
 }
 
 set_force_sprint() {
-  if(!isdefined(self.always_sprint)) {
+  if(!isDefined(self.always_sprint)) {
     self botsetflag("force_sprint", 1);
     self.always_sprint = 1;
   }
 }
 
 disable_force_sprint() {
-  if(isdefined(self.always_sprint)) {
+  if(isDefined(self.always_sprint)) {
     self botsetflag("force_sprint", 0);
     self.always_sprint = undefined;
   }
 }
 
 set_scripted_pathing_style() {
-  if(!isdefined(self.scripted_path_style)) {
+  if(!isDefined(self.scripted_path_style)) {
     self botsetpathingstyle("scripted");
     self.scripted_path_style = 1;
   }
@@ -596,7 +594,7 @@ cautious_approach_till_close(var_0, var_1) {
   maps\mp\bots\_bots_strategy::bot_capture_point(var_0, var_2, var_3);
   wait 0.05;
 
-  while (distancesquared(self.origin, var_0) > var_2 * var_2 && maps\mp\bots\_bots_util::bot_is_defending()) {
+  while(distancesquared(self.origin, var_0) > var_2 * var_2 && maps\mp\bots\_bots_util::bot_is_defending()) {
     if(get_round_end_time() - gettime() < 20000) {
       set_scripted_pathing_style();
       set_force_sprint();
@@ -616,7 +614,7 @@ notify_enemy_team_bomb_used(var_0) {
   var_1 = maps\mp\bots\_bots_gametype_common::get_ai_hearing_bomb_plant_sound(var_0);
 
   foreach(var_3 in var_1) {
-    if(isdefined(var_3.role))
+    if(isDefined(var_3.role))
       var_3 bot_set_role("investigate_someone_using_bomb");
   }
 }
@@ -633,7 +631,7 @@ should_start_cautious_approach_sd(var_0) {
     var_4 = common_scripts\utility::get_enemy_team(self.team);
 
     foreach(var_6 in level.players) {
-      if(!isdefined(var_6.team)) {
+      if(!isDefined(var_6.team)) {
         continue;
       }
       if(isalive(var_6) && var_6.team == var_4)
@@ -650,8 +648,8 @@ get_players_defending_zone(var_0) {
   var_2 = maps\mp\bots\_bots_gametype_common::get_living_players_on_team(game["defenders"]);
 
   foreach(var_4 in var_2) {
-    if(isai(var_4) && isdefined(var_4.role) && var_4.role == "defender") {
-      if(isdefined(var_4.defend_zone) && var_4.defend_zone == var_0)
+    if(isai(var_4) && isDefined(var_4.role) && var_4.role == "defender") {
+      if(isDefined(var_4.defend_zone) && var_4.defend_zone == var_0)
         var_1 = common_scripts\utility::array_add(var_1, var_4);
 
       continue;
@@ -666,7 +664,7 @@ get_players_defending_zone(var_0) {
 
 find_ticking_bomb() {
   foreach(var_1 in level.bombzones) {
-    if(!isdefined(var_1.tickingobject)) {
+    if(!isDefined(var_1.tickingobject)) {
       continue;
     }
     if(distancesquared(var_1.tickingobject.origin, var_1.curorigin) < 90000)
@@ -679,7 +677,7 @@ find_ticking_bomb() {
 get_specific_zone(var_0) {
   var_0 = "_" + tolower(var_0);
 
-  for (var_1 = 0; var_1 < level.bombzones.size; var_1++) {
+  for(var_1 = 0; var_1 < level.bombzones.size; var_1++) {
     if(level.bombzones[var_1].label == var_0)
       return level.bombzones[var_1];
   }
@@ -692,7 +690,7 @@ bomber_wait_for_death() {
   level.atk_bomber = undefined;
   level.last_atk_bomber_death_time = gettime();
 
-  if(isdefined(self))
+  if(isDefined(self))
     self.role = undefined;
 
   var_0 = maps\mp\bots\_bots_gametype_common::get_living_players_on_team(game["attackers"], 1);
@@ -732,7 +730,7 @@ initialize_sd_role() {
   if(self.team == game["attackers"]) {
     if(level.bombplanted)
       bot_set_role("defend_planted_bomb");
-    else if(!isdefined(level.atk_bomber))
+    else if(!isDefined(level.atk_bomber))
       set_new_bomber();
     else if(level.attack_behavior == "rush")
       bot_set_role("clear_target_zone");
@@ -743,7 +741,7 @@ initialize_sd_role() {
     var_3 = self botgetdifficultysetting("strategyLevel");
 
     if(var_2 == "active") {
-      if(!isdefined(self.role) && level.allow_backstabbers && var_3 > 0) {
+      if(!isDefined(self.role) && level.allow_backstabbers && var_3 > 0) {
         if(var_0.size == 0)
           bot_set_role("backstabber");
         else {
@@ -765,12 +763,12 @@ initialize_sd_role() {
         }
       }
 
-      if(!isdefined(self.role)) {
+      if(!isDefined(self.role)) {
         if(var_1.size < 4)
           bot_set_role("defender");
       }
 
-      if(!isdefined(self.role)) {
+      if(!isDefined(self.role)) {
         var_9 = randomint(4);
 
         if(var_9 == 3 && level.allow_random_killers && var_3 > 0)
@@ -781,7 +779,7 @@ initialize_sd_role() {
           bot_set_role("defender");
       }
     } else if(var_2 == "stationary") {
-      if(!isdefined(self.role)) {
+      if(!isDefined(self.role)) {
         if(var_1.size < 4)
           bot_set_role("defender");
         else {
@@ -797,12 +795,12 @@ initialize_sd_role() {
         }
       }
 
-      if(!isdefined(self.role) && level.allow_backstabbers && var_3 > 0) {
+      if(!isDefined(self.role) && level.allow_backstabbers && var_3 > 0) {
         if(var_0.size == 0)
           bot_set_role("backstabber");
       }
 
-      if(!isdefined(self.role))
+      if(!isDefined(self.role))
         bot_set_role("defender");
     }
 
@@ -850,7 +848,7 @@ bot_set_role_delayed(var_0, var_1) {
 
 force_all_players_to_role(var_0, var_1, var_2) {
   foreach(var_4 in var_0) {
-    if(isdefined(var_2)) {
+    if(isDefined(var_2)) {
       var_4 thread bot_set_role_delayed(var_1, randomfloatrange(0.0, var_2));
       continue;
     }
@@ -872,7 +870,7 @@ get_players_by_role(var_0) {
   var_1 = [];
 
   foreach(var_3 in level.participants) {
-    if(isalive(var_3) && maps\mp\_utility::isteamparticipant(var_3) && isdefined(var_3.role) && var_3.role == var_0)
+    if(isalive(var_3) && maps\mp\_utility::isteamparticipant(var_3) && isDefined(var_3.role) && var_3.role == var_0)
       var_1[var_1.size] = var_3;
   }
 
@@ -889,8 +887,8 @@ bot_sd_ai_director_update() {
   level.protect_radius = 725;
   level.capture_radius = 140;
 
-  for (;;) {
-    if(isdefined(level.sdbomb) && isdefined(level.sdbomb.carrier) && !isai(level.sdbomb.carrier))
+  for(;;) {
+    if(isDefined(level.sdbomb) && isDefined(level.sdbomb.carrier) && !isai(level.sdbomb.carrier))
       level.bomb_zone_assaulting = maps\mp\bots\_bots_gametype_common::find_closest_bombzone_to_player(level.sdbomb.carrier);
 
     var_0 = 0;
@@ -902,8 +900,8 @@ bot_sd_ai_director_update() {
         if(var_3.isbombcarrier) {
           level.can_pickup_bomb_time = gettime();
 
-          if(!isdefined(level.atk_bomber) || var_3 != level.atk_bomber) {
-            if(isdefined(level.atk_bomber) && isalive(level.atk_bomber)) {
+          if(!isDefined(level.atk_bomber) || var_3 != level.atk_bomber) {
+            if(isDefined(level.atk_bomber) && isalive(level.atk_bomber)) {
               level.atk_bomber bot_set_role(undefined);
               level.atk_bomber notify("stopped_being_bomb_carrier");
             }
@@ -914,10 +912,10 @@ bot_sd_ai_director_update() {
         }
       }
 
-      if(!level.multibomb && !isdefined(level.sdbomb.carrier)) {
+      if(!level.multibomb && !isDefined(level.sdbomb.carrier)) {
         var_5 = getclosestnodeinsight(level.sdbomb.curorigin);
 
-        if(isdefined(var_5)) {
+        if(isDefined(var_5)) {
           level.sdbomb.nearest_node_for_camping = var_5;
           var_6 = 0;
           var_7 = maps\mp\bots\_bots_gametype_common::get_living_players_on_team(game["defenders"], 1);
@@ -926,7 +924,7 @@ bot_sd_ai_director_update() {
             var_10 = var_9 getnearestnode();
             var_11 = var_9 botgetdifficultysetting("strategyLevel");
 
-            if(var_11 > 0 && var_9.role != "camp_bomb" && isdefined(var_10) && nodesvisible(var_5, var_10, 1)) {
+            if(var_11 > 0 && var_9.role != "camp_bomb" && isDefined(var_10) && nodesvisible(var_5, var_10, 1)) {
               var_12 = var_9 botgetfovdot();
 
               if(common_scripts\utility::within_fov(var_9.origin, var_9 getplayerangles(), level.sdbomb.curorigin, var_12)) {
@@ -952,8 +950,8 @@ bot_sd_ai_director_update() {
       if(has_override_zone_targets(game["defenders"]))
         var_16 = get_override_zone_targets(game["defenders"]);
 
-      for (var_17 = 0; var_17 < var_16.size; var_17++) {
-        for (var_18 = 0; var_18 < var_16.size; var_18++) {
+      for(var_17 = 0; var_17 < var_16.size; var_17++) {
+        for(var_18 = 0; var_18 < var_16.size; var_18++) {
           var_19 = get_players_defending_zone(var_16[var_17]);
           var_20 = get_players_defending_zone(var_16[var_18]);
 
@@ -974,10 +972,10 @@ bot_sd_ai_director_update() {
         }
       }
     } else {
-      if(isdefined(level.atk_bomber))
+      if(isDefined(level.atk_bomber))
         level.atk_bomber = undefined;
 
-      if(!isdefined(level.bomb_defuser) || !isalive(level.bomb_defuser)) {
+      if(!isDefined(level.bomb_defuser) || !isalive(level.bomb_defuser)) {
         var_25 = [];
         var_26 = get_players_by_role("defender");
         var_27 = get_players_by_role("backstabber");
@@ -999,12 +997,12 @@ bot_sd_ai_director_update() {
         }
       }
 
-      if(!isdefined(level.sd_bomb_just_planted)) {
+      if(!isDefined(level.sd_bomb_just_planted)) {
         level.sd_bomb_just_planted = 1;
         var_30 = maps\mp\bots\_bots_gametype_common::get_living_players_on_team(game["attackers"]);
 
         foreach(var_3 in var_30) {
-          if(isdefined(var_3.role)) {
+          if(isDefined(var_3.role)) {
             if(var_3.role == "atk_bomber") {
               var_3 thread bot_set_role(undefined);
               continue;

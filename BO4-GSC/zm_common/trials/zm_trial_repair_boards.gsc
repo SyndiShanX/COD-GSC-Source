@@ -8,7 +8,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
-
 #namespace zm_trial_repair_boards;
 
 autoexec __init__system__() {
@@ -23,7 +22,7 @@ __init__() {
   zm_trial::register_challenge(#"repair_boards", &on_begin, &on_end);
 }
 
-private on_begin(var_60bdad5f, var_36c3cc24, var_4ee27b15, var_3bc46181, var_1f6e1e99) {
+on_begin(var_60bdad5f, var_36c3cc24, var_4ee27b15, var_3bc46181, var_1f6e1e99) {
   switch (level.players.size) {
     case 1:
       self.var_28433a54 = zm_trial::function_5769f26a(var_36c3cc24);
@@ -48,7 +47,7 @@ private on_begin(var_60bdad5f, var_36c3cc24, var_4ee27b15, var_3bc46181, var_1f6
   self thread function_738e3a43();
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   if(!round_reset) {
     if(self.var_28433a54 > 0) {
       zm_trial::fail(self.var_a84ac7c8);
@@ -59,7 +58,7 @@ private on_end(round_reset) {
   zombie_utility::set_zombie_var(#"rebuild_barrier_cap_per_round", self.var_e6e7a65d);
 }
 
-private function_738e3a43() {
+function_738e3a43() {
   level endon(#"hash_7646638df88a3656");
   var_812095a3 = 0;
 

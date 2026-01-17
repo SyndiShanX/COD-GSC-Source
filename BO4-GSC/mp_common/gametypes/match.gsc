@@ -8,7 +8,6 @@
 #include scripts\mp_common\gametypes\outcome;
 #include scripts\mp_common\gametypes\overtime;
 #include scripts\mp_common\gametypes\round;
-
 #namespace match;
 
 autoexec __init__system__() {
@@ -19,14 +18,14 @@ __init__() {
   function_94003d29();
 }
 
-private function_37f04b09() {
+function_37f04b09() {
   if(!isDefined(game.outcome)) {
     game.outcome = outcome::function_a1a81955();
     game.outcome.var_3c5fdf73 = [];
   }
 }
 
-private function_94003d29() {
+function_94003d29() {
   function_37f04b09();
   round::function_37f04b09();
 
@@ -39,7 +38,7 @@ function_f37f02fc() {
   return game.outcome;
 }
 
-private function_b6b94df8() {
+function_b6b94df8() {
   if(overtime::is_overtime_round()) {
     set_overtime();
   }
@@ -95,11 +94,11 @@ is_winning_team(team) {
 }
 
 function_a2b53e17(player) {
-  if(game.outcome.platoon !== #"none" && getteamplatoon(player.pers[#"team"]) === game.outcome.platoon) {
+  if(game.outcome.platoon !== # "none" && getteamplatoon(player.pers[# "team"]) === game.outcome.platoon) {
     return true;
   }
 
-  if(game.outcome.team !== #"free" && player.pers[#"team"] === game.outcome.team) {
+  if(game.outcome.team !== # "free" && player.pers[# "team"] === game.outcome.team) {
     return true;
   }
 

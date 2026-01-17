@@ -16,7 +16,7 @@ FLAG_TIME_VALUE_VETERAN = 3.0;
 
 main() {
   precacheString(&"SO_SNOWRACE1_CLIFFHANGER_COOPFAIL_HINT1");
-  level.objective_desc = & "SO_SNOWRACE1_CLIFFHANGER_OBJ_FINISHLINE_GATES";
+  level.objective_desc = &"SO_SNOWRACE1_CLIFFHANGER_OBJ_FINISHLINE_GATES";
   precacheString(level.objective_desc);
 
   init_snow_race();
@@ -36,7 +36,7 @@ main() {
   time_limit["fu"] = 8;
 
   difficulty = getDifficulty();
-  assert(isdefined(time_limit[difficulty]));
+  assert(isDefined(time_limit[difficulty]));
   level.challenge_time_limit = time_limit[difficulty];
   level.challenge_time_silent = true;
 
@@ -45,7 +45,7 @@ main() {
   level.challenge_time_hurry = 3;
   thread manage_timer();
   level.challenge_time_force_on = true;
-  thread enable_challenge_timer("race_started", "finish_line", & "SO_SNOWRACE1_CLIFFHANGER_SPECOP_TIMER");
+  thread enable_challenge_timer("race_started", "finish_line", &"SO_SNOWRACE1_CLIFFHANGER_SPECOP_TIMER");
 
   thread special_coop_fail_quotes();
 }
@@ -61,7 +61,7 @@ manage_timer() {
 
   timer = 0.1;
 
-  for (;;) {
+  for(;;) {
     level.challenge_time_limit -= timer;
     wait timer;
   }
@@ -69,12 +69,12 @@ manage_timer() {
 
 flag_gates() {
   // allow for different flags to be used for different difficulties or sp/coop
-  array_thread(getentarray("flag_trigger", "targetname"), ::gate_think);
+  array_thread(getEntArray("flag_trigger", "targetname"), ::gate_think);
 }
 
 gate_think() {
-  assert(isdefined(self.target));
-  flags = getentarray(self.target, "targetname");
+  assert(isDefined(self.target));
+  flags = getEntArray(self.target, "targetname");
   assert(flags.size == 2);
 
   flag_time = FLAG_TIME_VALUE;
@@ -88,7 +88,7 @@ gate_think() {
   if(isplayer(ent)) {
     ent.gates_hit++;
   } else {
-    assert(isdefined(ent.player));
+    assert(isDefined(ent.player));
     assert(isplayer(ent.player));
     ent.player.gates_hit++;
   }
@@ -100,15 +100,15 @@ gate_think() {
 
   level notify("new_challenge_timer");
   level.challenge_time_limit += flag_time;
-  thread enable_challenge_timer("race_started", "finish_line", & "SO_SNOWRACE1_CLIFFHANGER_SPECOP_TIMER");
+  thread enable_challenge_timer("race_started", "finish_line", &"SO_SNOWRACE1_CLIFFHANGER_SPECOP_TIMER");
 }
 
 gate_splash() {
   level notify("gate_splash");
   level endon("gate_splash");
 
-  if(!isdefined(level.time_splash)) {
-    level.time_splash = so_create_hud_item(2, 0, & "SO_SNOWRACE1_CLIFFHANGER_TIMESPLASH");
+  if(!isDefined(level.time_splash)) {
+    level.time_splash = so_create_hud_item(2, 0, &"SO_SNOWRACE1_CLIFFHANGER_TIMESPLASH");
     level.time_splash.alignx = "center";
     level.time_splash.horzAlign = "center";
     level.time_splash set_hud_yellow();
@@ -130,7 +130,7 @@ gate_splash() {
 
 finishline() {
   trigger = getent("finishline", "targetname");
-  assert(isdefined(trigger));
+  assert(isDefined(trigger));
 
   trigger waittill("trigger", player);
 
@@ -138,7 +138,7 @@ finishline() {
   player.finish_time = getTime();
 
   assert(isplayer(player));
-  assert(isdefined(player.playername));
+  assert(isDefined(player.playername));
 
   end_race_cleanup();
 
@@ -147,9 +147,9 @@ finishline() {
 }
 
 special_coop_fail_quotes() {
-  if(!is_coop())
+  if(!is_coop()) {
     return;
-
+  }
   level endon("so_snowrace_complete");
   level waittill("challenge_timer_failed");
 

@@ -49,16 +49,16 @@ main() {
   spawncollision("collision_physics_wall_128x128x10", "collider", (640, 1325, 289), (0, 0, 0));
   roofboard1 = spawn("script_model", (-133, 602, 521));
   roofboard1.angles = vectorscale((0, 1, 0), 270.0);
-  roofboard1 setmodel("p6_wood_plank_rustic01_2x12_96");
+  roofboard1 setModel("p6_wood_plank_rustic01_2x12_96");
   roofboard2 = spawn("script_model", (-133, 507, 521));
   roofboard2.angles = vectorscale((0, 1, 0), 270.0);
-  roofboard2 setmodel("p6_wood_plank_rustic01_2x12_96");
+  roofboard2 setModel("p6_wood_plank_rustic01_2x12_96");
   roofboard3 = spawn("script_model", (-133, 412, 521));
   roofboard3.angles = vectorscale((0, 1, 0), 270.0);
-  roofboard3 setmodel("p6_wood_plank_rustic01_2x12_96");
+  roofboard3 setModel("p6_wood_plank_rustic01_2x12_96");
   roofboard4 = spawn("script_model", (-133, 375, 522.5));
   roofboard4.angles = vectorscale((0, 1, 0), 270.0);
-  roofboard4 setmodel("p6_wood_plank_rustic01_2x12_96");
+  roofboard4 setModel("p6_wood_plank_rustic01_2x12_96");
   spawncollision("collision_physics_128x128x128", "collider", (-970, 968.5, 407.5), (0, 0, 0));
   spawncollision("collision_physics_128x128x128", "collider", (-970, 841, 407.5), (0, 0, 0));
   spawncollision("collision_physics_128x128x128", "collider", (-842, 841, 407.5), (0, 0, 0));
@@ -76,7 +76,7 @@ levelspawndvars(reset_dvars) {
 }
 
 rts_remove() {
-  rtsfloors = getentarray("overwatch_floor", "targetname");
+  rtsfloors = getEntArray("overwatch_floor", "targetname");
 
   foreach(rtsfloor in rtsfloors) {
     if(isDefined(rtsfloor))

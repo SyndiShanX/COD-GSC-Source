@@ -168,7 +168,7 @@ delete_ent() {
 }
 
 delete_by_type(type_predicate) {
-  for_each(getentarray(), ::delete_ent, type_predicate);
+  for_each(getEntArray(), ::delete_ent, type_predicate);
 }
 
 noteworthy_check(value) {
@@ -183,5 +183,5 @@ noteworthy_check(value) {
 }
 
 delete_by_noteworthy(level_name) {
-  for_each(getentarray(), ::delete_ent, ::noteworthy_check, level_name);
+  for_each(getEntArray(), ::delete_ent, ::noteworthy_check, level_name);
 }

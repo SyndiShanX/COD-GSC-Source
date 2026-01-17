@@ -23,8 +23,8 @@ precache_zipline_assets() {
 }
 
 init_player_ziplines() {
-  zipline_vehicles = getentarray("zipline_vehicles", "script_noteworthy");
-  zipline_trigs = getentarray("player_zipline", "targetname");
+  zipline_vehicles = getEntArray("zipline_vehicles", "script_noteworthy");
+  zipline_trigs = getEntArray("player_zipline", "targetname");
   array_thread(zipline_trigs, ::monitor_player_zipline, zipline_vehicles);
   flag_wait("all_players_spawned");
   players = get_players();
@@ -33,7 +33,7 @@ init_player_ziplines() {
 
 monitor_player_zipline(zipline_vehicles) {
   zip_path = self.target;
-  targets = getentarray(self.target, "targetname");
+  targets = getEntArray(self.target, "targetname");
   poi = undefined;
   for(i = 0; i < targets.size; i++) {
     if(targets[i].classname == "script_brushmodel" || targets[i].classname == "script_model") {
@@ -50,7 +50,7 @@ monitor_player_zipline(zipline_vehicles) {
       }
       targets[i] ConnectPaths();
       zip_hint_trig delete();
-      playfx(level._effect["poltergeist"], targets[i].origin);
+      playFX(level._effect["poltergeist"], targets[i].origin);
       targets[i] thread move_delete_zipline_gate();
     } else if(targets[i].classname == "script_origin") {
       targets[i] create_zombie_point_of_interest(undefined, 30, 0, false);
@@ -457,6 +457,6 @@ move_delete_zipline_gate() {
   self RotateTo(self.angles + (randomintrange(-20, 20), randomintrange(-20, 20), randomintrange(-20, 20)), time * 0.75);
   self waittill("movedone");
   playsoundatposition("zmb_zombie_spawn", self.origin);
-  playfx(level._effect["large_ceiling_dust"], self.origin);
+  playFX(level._effect["large_ceiling_dust"], self.origin);
   self Delete();
 }

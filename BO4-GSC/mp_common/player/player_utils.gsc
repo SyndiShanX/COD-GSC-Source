@@ -12,7 +12,6 @@
 #include scripts\killstreaks\killstreaks_util;
 #include scripts\killstreaks\mp\killstreaks;
 #include scripts\mp_common\util;
-
 #namespace player;
 
 figure_out_friendly_fire(victim, attacker) {
@@ -25,7 +24,7 @@ figure_out_friendly_fire(victim, attacker) {
   }
 
   if(level.friendlyfire == 4 && isplayer(attacker)) {
-    if(attacker.pers[#"teamkills_nostats"] < level.var_fe3ff9c1) {
+    if(attacker.pers[# "teamkills_nostats"] < level.var_fe3ff9c1) {
       return 1;
     } else {
       return 2;
@@ -74,14 +73,14 @@ function_14e61d05() {
 
 function_cf3aa03d(func, threaded = 1) {
   array::add(level.var_da2045d0, {
-    #callback: func, 
+    #callback: func,
     #threaded: threaded
   });
 }
 
 function_3c5cc656(func, threaded = 1) {
   array::add(level.var_fa66fada, {
-    #callback: func, 
+    #callback: func,
     #threaded: threaded
   });
 }

@@ -288,7 +288,7 @@ on_agent_generic_damaged(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath,
     return false;
 
   if(isDefined(eAttacker) && eAttacker != self && iDamage > 0 && (!isDefined(sHitLoc) || sHitLoc != "shield")) {
-    if(iDFlags & level.iDFLAGS_STUN)
+    if(iDFlags &level.iDFLAGS_STUN)
       typeHit = "stun";
     else if(!shouldWeaponFeedback(sWeapon))
       typeHit = "none";
@@ -299,9 +299,7 @@ on_agent_generic_damaged(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath,
   }
 
   if(isDefined(level.modifyPlayerDamage))
-    iDamage = [
-      [level.modifyPlayerDamage]
-    ](self, eAttacker, iDamage, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc);
+    iDamage = [[level.modifyPlayerDamage]](self, eAttacker, iDamage, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc);
 
   return self[[self agentFunc("on_damaged_finished")]](eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset);
 }

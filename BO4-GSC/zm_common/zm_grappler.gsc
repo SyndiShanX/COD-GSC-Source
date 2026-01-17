@@ -13,7 +13,6 @@
 #include scripts\core_common\util_shared;
 #include scripts\core_common\values_shared;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_grappler;
 
 autoexec __init__system__() {
@@ -32,7 +31,7 @@ __init__() {
 
 __main__() {}
 
-private function_5f5a3405() {
+function_5f5a3405() {
   foreach(key, value in level.grapple_ids) {
     if(value === 0) {
       level.grapple_ids[key] = 1;
@@ -53,7 +52,7 @@ function_56813755() {
   return true;
 }
 
-private function_2772f623(id) {
+function_2772f623(id) {
   assert(isDefined(level.grapple_ids[id]) && level.grapple_ids[id] === 1);
   level.grapple_ids[id] = 0;
 }
@@ -103,7 +102,7 @@ function_c43e7cab() {
   }
 }
 
-private function_1b905efa(e_source, e_target, id) {
+function_1b905efa(e_source, e_target, id) {
   if(isDefined(e_source) && isDefined(e_target)) {
     util::waittill_any_ents_two(e_source, "death", e_target, "death");
   } else if(isDefined(e_source)) {
@@ -136,7 +135,7 @@ function_30a5f5c1(e_source, e_target) {
   level.var_acec7a44 = 0;
 }
 
-private function_b9937e84(e_from, e_to, n_speed) {
+function_b9937e84(e_from, e_to, n_speed) {
   n_distance = distance(e_from function_f21c3519(), e_to function_f21c3519());
   return n_distance / n_speed;
 }

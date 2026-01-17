@@ -11,7 +11,7 @@ main() {
     setdvar("mgTurret", "off");
 
   level.magic_distance = 24;
-  turretinfos = getentarray("turretInfo", "targetname");
+  turretinfos = getEntArray("turretInfo", "targetname");
 
   for(index = 0; index < turretinfos.size; index++)
     turretinfos[index] delete();
@@ -19,7 +19,7 @@ main() {
 
 set_difficulty(difficulty) {
   init_turret_difficulty_settings();
-  turrets = getentarray("misc_turret", "classname");
+  turrets = getEntArray("misc_turret", "classname");
 
   for(index = 0; index < turrets.size; index++) {
     if(isDefined(turrets[index].script_skilloverride)) {
@@ -191,7 +191,7 @@ burst_fire_unmanned() {
     if(self isfiringturret() && duration <= 0) {
       if(turretstate != "fire") {
         turretstate = "fire";
-        self playsound("mpl_turret_alert");
+        self playSound("mpl_turret_alert");
         self thread do_shoot();
         self.script_shooting = 1;
       }

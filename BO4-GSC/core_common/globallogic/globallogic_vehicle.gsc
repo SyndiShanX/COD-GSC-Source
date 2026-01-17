@@ -20,7 +20,6 @@
 #include scripts\core_common\vehicle_shared;
 #include scripts\core_common\weapons_shared;
 #include scripts\weapons\weapon_utils;
-
 #namespace globallogic_vehicle;
 
 callback_vehiclespawned(spawner) {
@@ -50,7 +49,7 @@ callback_vehiclespawned(spawner) {
 
       if(isDefined(str_value) && isDefined(a_key_spawn_funcs[str_value])) {
         foreach(func in a_key_spawn_funcs[str_value]) {
-          util::single_thread(self, func[#"function"], func[#"param1"], func[#"param2"], func[#"param3"], func[#"param4"]);
+          util::single_thread(self, func[# "function"], func[# "param1"], func[# "param2"], func[# "param3"], func[# "param4"]);
         }
       }
     }
@@ -62,7 +61,7 @@ callback_vehiclespawned(spawner) {
     self spawner::spawn_think(spawner);
   }
 
-  if(self.vehicletype != #"zm_zod_train") {
+  if(self.vehicletype != # "zm_zod_train") {
     vehicle::init(self);
   }
 
@@ -144,7 +143,7 @@ callback_vehicledamage(einflictor, eattacker, idamage, idflags, smeansofdeath, w
     }
   }
 
-  if(!(1&idflags)) {
+  if(!(1 &idflags)) {
     idamage = loadout::cac_modified_vehicle_damage(self, eattacker, idamage, smeansofdeath, weapon, einflictor);
   }
 
@@ -203,7 +202,7 @@ callback_vehicledamage(einflictor, eattacker, idamage, idflags, smeansofdeath, w
     }
   }
 
-  if(self.idflags&8192 && idamage < unmodified) {
+  if(self.idflags & 8192 && idamage < unmodified) {
     idamage = unmodified;
   }
 
@@ -215,7 +214,7 @@ callback_vehicledamage(einflictor, eattacker, idamage, idflags, smeansofdeath, w
 
   damageteammates = 0;
 
-  if(!(self.idflags&8192)) {
+  if(!(self.idflags & 8192)) {
     if(self isvehicleimmunetodamage(self.idflags, smeansofdeath, weapon)) {
       return;
     }
@@ -244,12 +243,12 @@ callback_vehicledamage(einflictor, eattacker, idamage, idflags, smeansofdeath, w
   idamage = int(idamage);
 
   if(isDefined(eattacker) && isplayer(eattacker) && isDefined(eattacker.pers)) {
-    if(!isDefined(eattacker.pers[#"participation"])) {
-      eattacker.pers[#"participation"] = 0;
+    if(!isDefined(eattacker.pers[# "participation"])) {
+      eattacker.pers[# "participation"] = 0;
     }
 
     if(gamestate::is_state("playing")) {
-      eattacker.pers[#"participation"]++;
+      eattacker.pers[# "participation"]++;
     }
   }
 
@@ -321,7 +320,7 @@ callback_vehicleradiusdamage(einflictor, eattacker, idamage, finnerdamage, foute
     return;
   }
 
-  if(!(self.idflags&8192)) {
+  if(!(self.idflags & 8192)) {
     if(self isvehicleimmunetodamage(self.idflags, smeansofdeath, weapon)) {
       return;
     }
@@ -408,7 +407,7 @@ callback_vehiclekilled(einflictor, eattacker, idamage, smeansofdeath, weapon, vd
     }
 
     if(isDefined(player) && isplayer(player) && !(isDefined(self.disable_score_events) && self.disable_score_events)) {
-      if(!level.teambased || util::function_fbce7263(self.team, player.pers[#"team"])) {
+      if(!level.teambased || util::function_fbce7263(self.team, player.pers[# "team"])) {
         if(smeansofdeath == "MOD_MELEE" || smeansofdeath == "MOD_MELEE_ASSASSINATE") {
           scoreevents::processscoreevent(#"melee_kill" + self.scoretype, player, self, weapon);
         } else {
@@ -439,8 +438,8 @@ function_67e86f71(vec) {
 vehiclecrush(eattacker, einflictor) {
   self endon(#"disconnect");
 
-  if(isDefined(level._effect) && isDefined(level._effect[#"tanksquish"])) {
-    playFX(level._effect[#"tanksquish"], self.origin + (0, 0, 30));
+  if(isDefined(level._effect) && isDefined(level._effect[# "tanksquish"])) {
+    playFX(level._effect[# "tanksquish"], self.origin + (0, 0, 30));
   }
 
   self playSound(#"chr_crunch");
@@ -467,7 +466,7 @@ vehiclecrush(eattacker, einflictor) {
 }
 
 getvehicleunderneathsplashscalar(weapon) {
-  if(weapon.name == #"satchel_charge") {
+  if(weapon.name == # "satchel_charge") {
     scale = 10;
     scale *= 3;
   } else {

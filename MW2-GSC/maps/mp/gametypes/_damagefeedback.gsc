@@ -13,7 +13,7 @@ init() {
 }
 
 onPlayerConnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connected", player);
 
     player.hud_damagefeedback = newClientHudElem(player);
@@ -28,9 +28,9 @@ onPlayerConnect() {
 }
 
 updateDamageFeedback(typeHit) {
-  if(!isPlayer(self))
+  if(!isPlayer(self)) {
     return;
-
+  }
   x = -12;
   y = -12;
 

@@ -18,17 +18,17 @@ function enemy_highlight_display(localclientnum, materialname, size, fovpercent,
 
 function enemy_highlight_display_pulse(localclientnum, actorsonly, allymaterialname) {
   self endon("enemy_highlight_display");
-  if(!isdefined(actorsonly)) {
+  if(!isDefined(actorsonly)) {
     actorsonly = 0;
   }
-  if(!isdefined(self.enemy_highlight_elems)) {
+  if(!isDefined(self.enemy_highlight_elems)) {
     self.enemy_highlight_elems = [];
   }
-  while (isdefined(self)) {
-    if(!isdefined(getluimenu(localclientnum, "HudElementImage"))) {
+  while(isDefined(self)) {
+    if(!isDefined(getluimenu(localclientnum, "HudElementImage"))) {
       self.enemy_highlight_elems = [];
     }
-    a_all_entities = getentarray(localclientnum);
+    a_all_entities = getEntArray(localclientnum);
     self.enemy_highlight_ents = [];
     foreach(entity in a_all_entities) {
       if(entity.type == "zbarrier") {
@@ -38,16 +38,16 @@ function enemy_highlight_display_pulse(localclientnum, actorsonly, allymaterialn
         continue;
       }
       entnum = entity getentitynumber();
-      isenemy = isdefined(entity.team) && entity.team == "axis";
-      isally = !isenemy && isdefined(allymaterialname);
-      showit = isalive(entity) && (isenemy || isally) && (!(isdefined(entity.no_highlight) && entity.no_highlight));
-      if(showit && !isdefined(self.enemy_highlight_ents[entnum])) {
+      isenemy = isDefined(entity.team) && entity.team == "axis";
+      isally = !isenemy && isDefined(allymaterialname);
+      showit = isalive(entity) && (isenemy || isally) && (!(isDefined(entity.no_highlight) && entity.no_highlight));
+      if(showit && !isDefined(self.enemy_highlight_ents[entnum])) {
         self.enemy_highlight_ents[entnum] = entity;
         continue;
       }
-      if(!showit && isdefined(self.enemy_highlight_ents[entnum])) {
+      if(!showit && isDefined(self.enemy_highlight_ents[entnum])) {
         self.enemy_highlight_ents[entnum] = undefined;
-        if(isdefined(self.enemy_highlight_elems[entnum])) {
+        if(isDefined(self.enemy_highlight_elems[entnum])) {
           closeluimenu(localclientnum, self.enemy_highlight_elems[entnum]);
           self.enemy_highlight_elems[entnum] = undefined;
         }
@@ -59,47 +59,47 @@ function enemy_highlight_display_pulse(localclientnum, actorsonly, allymaterialn
 
 function enemy_highlight_display_frame(localclientnum, materialname, size, fovpercent, tracetimecheck, allymaterialname) {
   self endon("enemy_highlight_display");
-  if(!isdefined(self.enemy_highlight_elems)) {
+  if(!isDefined(self.enemy_highlight_elems)) {
     self.enemy_highlight_elems = [];
   }
-  if(!isdefined(tracetimecheck)) {
+  if(!isDefined(tracetimecheck)) {
     tracetimecheck = 1;
   }
   tracetimecheckhalfms = int(tracetimecheck * 500);
-  while (isdefined(self)) {
-    if(!isdefined(getluimenu(localclientnum, "HudElementImage"))) {
+  while(isDefined(self)) {
+    if(!isDefined(getluimenu(localclientnum, "HudElementImage"))) {
       self.enemy_highlight_elems = [];
     }
     eye = getlocalclienteyepos(localclientnum);
     angles = getlocalclientangles(localclientnum);
-    if(isdefined(self.vehicle_camera_pos)) {
+    if(isDefined(self.vehicle_camera_pos)) {
       eye = self.vehicle_camera_pos;
       angles = self.vehicle_camera_ang;
     }
     dotlimit = cos(getlocalclientfov(localclientnum) * fovpercent);
-    viewdir = anglestoforward(angles);
+    viewdir = anglesToForward(angles);
     visibleents = [];
     foreach(entnum, entity in self.enemy_highlight_ents) {
-      if(!isdefined(entity) || !isdefined(entity.origin)) {
+      if(!isDefined(entity) || !isDefined(entity.origin)) {
         continue;
       }
       entpos = undefined;
       radialcoef = 0;
-      isenemy = isdefined(entity.team) && entity.team == "axis";
-      isally = !isenemy && isdefined(allymaterialname);
-      showit = isalive(entity) && (isenemy || isally) && (!(isdefined(entity.no_highlight) && entity.no_highlight)) && entity != self;
-      if(showit && self.enemy_highlight_elems.size >= 32 && !isdefined(self.enemy_highlight_elems[entnum])) {
+      isenemy = isDefined(entity.team) && entity.team == "axis";
+      isally = !isenemy && isDefined(allymaterialname);
+      showit = isalive(entity) && (isenemy || isally) && (!(isDefined(entity.no_highlight) && entity.no_highlight)) && entity != self;
+      if(showit && self.enemy_highlight_elems.size >= 32 && !isDefined(self.enemy_highlight_elems[entnum])) {
         showit = 0;
       }
       if(showit) {
         if(entity.type == "actor" || entity.type == "player") {
           entpos = entity gettagorigin("J_Spine4");
         }
-        if(!isdefined(entpos)) {
+        if(!isDefined(entpos)) {
           entpos = entity.origin + vectorscale((0, 0, 1), 40);
         }
-        assert(isdefined(entpos));
-        assert(isdefined(eye));
+        assert(isDefined(entpos));
+        assert(isDefined(eye));
         deltadir = vectornormalize(entpos - eye);
         dot = vectordot(deltadir, viewdir);
         if(dot < dotlimit) {
@@ -107,7 +107,7 @@ function enemy_highlight_display_frame(localclientnum, materialname, size, fovpe
         } else {
           radialcoef = max((1 - dot) / (1 - dotlimit) - 0.5, 0);
         }
-        if(showit && (!isdefined(entity.highlight_trace_next) || entity.highlight_trace_next <= getservertime(localclientnum))) {
+        if(showit && (!isDefined(entity.highlight_trace_next) || entity.highlight_trace_next <= getservertime(localclientnum))) {
           from = eye + (deltadir * 100);
           to = entpos + (deltadir * -100);
           trace_point = tracepoint(from, to);
@@ -117,7 +117,7 @@ function enemy_highlight_display_frame(localclientnum, materialname, size, fovpe
       }
       if(showit && entity.highlight_trace_result) {
         screenproj = project3dto2d(localclientnum, entpos);
-        if(!isdefined(self.enemy_highlight_elems[entnum])) {
+        if(!isDefined(self.enemy_highlight_elems[entnum])) {
           if(isenemy) {
             self.enemy_highlight_elems[entnum] = self create_target_indicator(localclientnum, entity, materialname, size);
           } else {
@@ -125,7 +125,7 @@ function enemy_highlight_display_frame(localclientnum, materialname, size, fovpe
           }
         }
         elem = self.enemy_highlight_elems[entnum];
-        if(isdefined(elem)) {
+        if(isDefined(elem)) {
           visibleents[entnum] = elem;
           setluimenudata(localclientnum, elem, "x", screenproj[0] - (size * 0.5));
           setluimenudata(localclientnum, elem, "y", screenproj[1] - (size * 0.5));
@@ -142,7 +142,7 @@ function enemy_highlight_display_frame(localclientnum, materialname, size, fovpe
     }
     removeents = [];
     foreach(entnum, val in self.enemy_highlight_elems) {
-      if(!isdefined(visibleents[entnum])) {
+      if(!isDefined(visibleents[entnum])) {
         removeents[entnum] = entnum;
       }
     }
@@ -158,7 +158,7 @@ function enemy_highlight_display_stop(localclientnum) {
   self notify("enemy_highlight_display");
   self endon("enemy_highlight_display");
   wait(0.016);
-  if(isdefined(self.enemy_highlight_elems)) {
+  if(isDefined(self.enemy_highlight_elems)) {
     foreach(hudelem in self.enemy_highlight_elems) {
       closeluimenu(localclientnum, hudelem);
     }
@@ -169,7 +169,7 @@ function enemy_highlight_display_stop(localclientnum) {
 
 function create_target_indicator(localclientnum, entity, materialname, size) {
   hudelem = createluimenu(localclientnum, "HudElementImage");
-  if(isdefined(hudelem)) {
+  if(isDefined(hudelem)) {
     setluimenudata(localclientnum, hudelem, "x", 0);
     setluimenudata(localclientnum, hudelem, "y", 0);
     setluimenudata(localclientnum, hudelem, "width", size);

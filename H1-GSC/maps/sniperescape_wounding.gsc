@@ -7,10 +7,10 @@
 bring_out_the_hounds() {
   level endon("break_for_apartment");
   wait 20;
-  var_0 = getentarray("kill_dog_spawner", "targetname");
+  var_0 = getEntArray("kill_dog_spawner", "targetname");
   common_scripts\utility::array_thread(var_0, maps\_utility::add_spawn_function, ::seek_player);
 
-  for (;;) {
+  for(;;) {
     if(getaispeciesarray("all", "all").size >= 24) {
       wait 1;
       continue;
@@ -19,7 +19,7 @@ bring_out_the_hounds() {
     var_1 = common_scripts\utility::get_array_of_closest(level.player.origin, var_0);
     var_2 = 0;
 
-    for (var_3 = var_1.size - 1; var_3 >= 0; var_3--) {
+    for(var_3 = var_1.size - 1; var_3 >= 0; var_3--) {
       var_4 = var_1[var_3];
 
       if(bullettracepassed(level.player.origin + (0, 0, 32), var_4.origin + (0, 0, 32), 0, level.player)) {
@@ -42,7 +42,7 @@ bring_out_the_hounds() {
 seek_player() {
   self endon("death");
 
-  for (;;) {
+  for(;;) {
     self setgoalpos(level.player.origin);
     self.goalradius = 512;
     wait 1;
@@ -53,7 +53,7 @@ pool_dog_think(var_0) {
   self.team = "allies";
   var_1 = "dog_food";
 
-  if(!isdefined(level.first_pool_dog)) {
+  if(!isDefined(level.first_pool_dog)) {
     level.first_pool_dog = 1;
     thread dog_loop_sound();
   }
@@ -82,7 +82,7 @@ pool_dog_think(var_0) {
 
 dog_loop_sound() {
   common_scripts\utility::flag_init("dogs_disturbed");
-  self playloopsound("anml_dogs_eating_body_loop");
+  self playLoopSound("anml_dogs_eating_body_loop");
   level maps\_utility::add_wait(common_scripts\utility::flag_wait, "dogs_disturbed");
   maps\_utility::add_wait(maps\_utility::waittill_msg, "death");
   maps\_utility::do_wait_any();
@@ -94,7 +94,7 @@ dog_loop_sound() {
 wait_for_angry_dog() {
   level endon("dog_attack_trigger");
 
-  for (;;) {
+  for(;;) {
     common_scripts\utility::flag_waitopen("price_picked_up");
     common_scripts\utility::flag_wait("pool_lookat");
 
@@ -135,7 +135,7 @@ wait_for_player_to_place_claymores() {
   var_0 = 0;
   var_1 = level.player maps\_utility::getplayerclaymores();
 
-  for (var_2 = 0; var_2 < 30; var_2++) {
+  for(var_2 = 0; var_2 < 30; var_2++) {
     var_3 = level.player maps\_utility::getplayerclaymores();
 
     if(var_3 < var_1)
@@ -151,7 +151,7 @@ wait_for_player_to_place_claymores() {
   }
 
   if(var_0 > 0) {
-    for (var_2 = 0; var_2 < var_0; var_2++) {
+    for(var_2 = 0; var_2 < var_0; var_2++) {
       var_3 = level.player maps\_utility::getplayerclaymores();
 
       if(level.player getstance() == "prone" && var_3 == 0) {
@@ -166,7 +166,7 @@ wait_for_player_to_place_claymores() {
 autosave_on_good_claymore_placement(var_0) {
   var_1 = getent("alt_fair_trigger", "targetname");
 
-  for (var_2 = 0; var_2 < 5; var_2++) {
+  for(var_2 = 0; var_2 < 5; var_2++) {
     if(level.player istouching(var_1)) {
       wait 1;
       continue;
@@ -178,19 +178,19 @@ autosave_on_good_claymore_placement(var_0) {
   if(level.player istouching(var_1))
     return 0;
 
-  var_3 = getentarray("claymore_spot", "targetname");
+  var_3 = getEntArray("claymore_spot", "targetname");
 
   if(var_0 <= 0)
     return 1;
 
   var_4 = var_0 * 0.4;
   var_4 = int(var_4);
-  var_5 = getentarray("grenade", "classname");
+  var_5 = getEntArray("grenade", "classname");
   var_6 = maps\_utility::remove_without_model(var_5, "claymore");
   var_7 = 0;
 
-  for (var_2 = 0; var_2 < var_6.size; var_2++) {
-    for (var_8 = 0; var_8 < var_3.size; var_8++) {
+  for(var_2 = 0; var_2 < var_6.size; var_2++) {
+    for(var_8 = 0; var_8 < var_3.size; var_8++) {
       if(distance(var_6[var_2].origin, var_3[var_8].origin) < var_3[var_8].radius) {
         var_7++;
         break;
@@ -217,7 +217,7 @@ price_says_a_bit_farther() {
   var_1[var_1.size] = "a_bit_farther_north_2";
   var_1[var_1.size] = "check_your_compass";
 
-  for (;;) {
+  for(;;) {
     var_0 waittill("trigger");
 
     if(common_scripts\utility::flag("price_picked_up")) {
@@ -233,7 +233,7 @@ price_says_a_bit_farther() {
 }
 
 fairground_keep_player_out_of_pool() {
-  for (;;) {
+  for(;;) {
     common_scripts\utility::flag_wait("player_goes_to_pool");
     common_scripts\utility::flag_clear("can_save");
     wait(randomfloat(4));
@@ -264,7 +264,7 @@ wait_for_seaknight_to_take_off() {
 player_boards_seaknight(var_0, var_1) {
   var_2 = 0;
 
-  for (;;) {
+  for(;;) {
     if(isalive(level.price))
       objective_position(getobj("seaknight"), level.price.origin);
     else
@@ -320,7 +320,7 @@ player_boards_seaknight(var_0, var_1) {
   level.price = var_4 stalingradspawn();
   maps\_utility::spawn_failed(level.price);
   level.price.animname = "price";
-  level.price setmodel("body_complete_usmc_ghillie_price_damaged");
+  level.price setModel("body_complete_usmc_ghillie_price_damaged");
   level.price thread maps\sniperescape::monitor_macmellon();
   var_5 = [];
   var_5[var_5.size] = var_3;
@@ -354,7 +354,7 @@ update_objective_position_for_fairground(var_0) {
   level endon("price_moves_to_position");
   var_1 = 0;
 
-  for (;;) {
+  for(;;) {
     common_scripts\utility::flag_waitopen("price_picked_up");
     objective_position(var_0, level.price.origin);
     thread price_complains_until_he_is_picked_up();
@@ -369,7 +369,7 @@ price_complains_until_he_is_picked_up() {
   wait 0.5;
   var_0 = getent("price_putdown_hint_trigger", "targetname");
 
-  for (;;) {
+  for(;;) {
     if(level.price istouching(var_0))
       maps\sniperescape_code::price_line("pick_me_up_and_move_me");
     else
@@ -396,8 +396,8 @@ player_gets_on_barret() {
   var_0 setdefaultdroppitch(-30);
   var_0 restoredefaultdroppitch();
 
-  for (;;) {
-    if(isdefined(var_0 getturretowner())) {
+  for(;;) {
+    if(isDefined(var_0 getturretowner())) {
       break;
     }
 
@@ -410,10 +410,10 @@ player_gets_on_barret() {
 }
 
 get_ent_with_key_from_array(var_0, var_1, var_2) {
-  var_3 = getentarray(var_1, var_2);
+  var_3 = getEntArray(var_1, var_2);
 
-  for (var_4 = 0; var_4 < var_0.size; var_4++) {
-    for (var_5 = 0; var_5 < var_3.size; var_5++) {
+  for(var_4 = 0; var_4 < var_0.size; var_4++) {
+    for(var_5 = 0; var_5 < var_3.size; var_5++) {
       if(var_3[var_5] == var_0[var_4])
         return var_3[var_5];
     }
@@ -437,11 +437,11 @@ modify_objective_destination_babystep(var_0) {
   var_8.origin = var_3.origin;
   objective_onentity(var_0, var_8);
 
-  for (;;) {
+  for(;;) {
     var_1 waittill("trigger", var_9);
     var_10 = undefined;
 
-    while (level.player istouching(var_1)) {
+    while(level.player istouching(var_1)) {
       var_10 = maps\_utility::get_progress(var_5, var_6, level.player.origin, var_7);
 
       if(var_10 < 0)
@@ -514,7 +514,7 @@ heat_helis_transport_guys_in() {
   common_scripts\utility::flag_wait("heat_heli_transport");
   level endon("heat_enemies_back_off");
 
-  for (;;) {
+  for(;;) {
     maps\_vehicle::spawn_vehicle_from_targetname_and_drive("heat_transport_1");
     wait 10;
     maps\_vehicle::spawn_vehicle_from_targetname_and_drive("heat_transport_2");
@@ -577,25 +577,25 @@ seaknight_sound() {
   var_2 thread maps\_utility::mix_up(var_0);
   var_3 thread maps\_utility::mix_down(var_1);
   soundscripts\_snd::snd_message("seaknight_rescue_submix_fade_out");
-  level.seaknight playsound("mi17_by_windup_02");
+  level.seaknight playSound("mi17_by_windup_02");
 }
 
 play_extra_seaknight_sound() {
   wait 19.5;
-  level.seaknight playloopsound("seaknight_idle_high");
+  level.seaknight playLoopSound("seaknight_idle_high");
 }
 
 bus_grenade_think() {
   var_0 = common_scripts\utility::getstructarray(self.target, "targetname");
 
-  for (;;) {
+  for(;;) {
     self waittill("trigger");
     wait 4;
 
     if(!common_scripts\utility::flag("kill_heli_attacks")) {
       continue;
     }
-    for (;;) {
+    for(;;) {
       if(!self istouching(level.player)) {
         break;
       }
@@ -610,7 +610,7 @@ bus_grenade_think() {
 
       var_2 = [];
 
-      for (var_3 = 0; var_3 < 3; var_3++) {
+      for(var_3 = 0; var_3 < 3; var_3++) {
         if(var_3 > var_1.size) {
           break;
         }
@@ -639,7 +639,7 @@ spot_launches_grenade() {
 remove_can_sighttrace(var_0, var_1) {
   var_2 = [];
 
-  for (var_3 = 0; var_3 < var_1.size; var_3++) {
+  for(var_3 = 0; var_3 < var_1.size; var_3++) {
     if(!sighttracepassed(var_0, var_1[var_3].origin, 1, undefined))
       var_2[var_2.size] = var_1[var_3];
   }
@@ -656,7 +656,7 @@ fair_grenade_trigger_think() {
   var_1[3] = 15;
   var_2 = 0;
 
-  for (;;) {
+  for(;;) {
     if(!self istouching(level.player))
       self waittill("trigger");
 
@@ -689,23 +689,23 @@ fair_grenade_trigger_think() {
 heli_shoots_targetnamed_rocket(var_0, var_1) {
   var_2 = getent(var_0, "targetname");
   var_3 = spawn("script_model", (0, 0, 0));
-  var_3 setmodel("tag_origin");
-  var_3 playsound("weap_lau61c_fire");
+  var_3 setModel("tag_origin");
+  var_3 playSound("weap_lau61c_fire");
   var_3.origin = var_2.origin;
-  playfx(common_scripts\utility::getfx("heli_missile_launch"), var_3.origin);
-  var_3 playloopsound("h1_scn_se_rocket_trail");
-  playfxontag(common_scripts\utility::getfx("rocket_geo"), var_3, "tag_origin");
+  playFX(common_scripts\utility::getfx("heli_missile_launch"), var_3.origin);
+  var_3 playLoopSound("h1_scn_se_rocket_trail");
+  playFXOnTag(common_scripts\utility::getfx("rocket_geo"), var_3, "tag_origin");
 
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     var_3.units_per_second = 2000;
   else
     var_3 thread wall_explosion_rocket_acceleration(var_1);
 
-  for (;;) {
-    if(isdefined(var_2.script_noteworthy) && isdefined(int(var_2.script_noteworthy)))
+  for(;;) {
+    if(isDefined(var_2.script_noteworthy) && isDefined(int(var_2.script_noteworthy)))
       thread common_scripts\_exploder::exploder(int(var_2.script_noteworthy));
 
-    if(!isdefined(var_2.target)) {
+    if(!isDefined(var_2.target)) {
       break;
     }
 
@@ -725,7 +725,7 @@ wall_explosion_rocket_acceleration(var_0) {
   self endon("death");
   self.units_per_second = var_0.startspeed;
 
-  while (isdefined(self) && self.units_per_second < var_0.finalspeed) {
+  while(isDefined(self) && self.units_per_second < var_0.finalspeed) {
     self.units_per_second = self.units_per_second + var_0.acceleration * 0.05;
 
     if(self.units_per_second >= var_0.finalspeed) {
@@ -766,7 +766,7 @@ spawn_blade(var_0) {
 }
 
 get_blade_clip() {
-  var_0 = getentarray("clip_" + self.animname, "targetname");
+  var_0 = getEntArray("clip_" + self.animname, "targetname");
   var_1 = var_0[0];
   var_1.targetname = "used";
   var_1.origin = self.origin;
@@ -786,7 +786,7 @@ kill_player_on_touch(var_0) {
   level.player endon("death");
   var_0 endon("death");
 
-  for (;;) {
+  for(;;) {
     if(var_0 istouching(level.player) || level.player.origin[2] < -50) {
       level.player enablehealthshield(0);
       level.player maps\_utility::die();
@@ -802,7 +802,7 @@ kill_player_on_touch(var_0) {
 spawn_blades() {
   var_0 = [];
 
-  for (var_1 = 1; var_1 <= 5; var_1++)
+  for(var_1 = 1; var_1 <= 5; var_1++)
     var_0[var_0.size] = spawn_blade("blade" + var_1);
 
   return var_0;
@@ -811,7 +811,7 @@ spawn_blades() {
 remove_blade(var_0) {
   var_1 = var_0.blades[var_0.blades.size - 1];
   var_0.blades[var_0.blades.size - 1] = undefined;
-  playfx(common_scripts\utility::getfx("rotor_smash"), var_1.origin, var_1.angles);
+  playFX(common_scripts\utility::getfx("rotor_smash"), var_1.origin, var_1.angles);
   var_1 delete();
 }
 
@@ -819,7 +819,7 @@ drawpos() {
   var_0 = self.root gettagorigin(self.tag);
   var_1 = self.root gettagangles(self.tag);
 
-  for (;;) {
+  for(;;) {
     maps\_debug::drawarrow(var_0, var_1);
     wait 0.05;
   }
@@ -834,7 +834,7 @@ rotor_blades(var_0) {
 
 rotor_hub(var_0) {
   var_1 = spawn("script_model", (0, 0, 0));
-  var_1 setmodel("vehicle_mi28_center_hub");
+  var_1 setModel("vehicle_mi28_center_hub");
   var_1.origin = var_0 gettagorigin("main_rotor_jnt");
   var_1.angles = var_0 gettagangles("main_rotor_jnt");
   var_1 linkto(var_0, "main_rotor_jnt");
@@ -842,7 +842,7 @@ rotor_hub(var_0) {
 
 add_dirtmodel(var_0, var_1) {
   var_2 = spawn("script_model", (90, 0, 0));
-  var_2 setmodel("tag_origin");
+  var_2 setModel("tag_origin");
   var_2 hide();
   var_2 linkto(self, "tag_body", var_0, var_1);
   return var_2;
@@ -855,7 +855,7 @@ surprisers_die_soon() {
 }
 
 drawatag() {
-  for (;;) {
+  for(;;) {
     var_0 = getdvar("heli_tag");
 
     if(var_0 != "")
@@ -874,7 +874,7 @@ final_heli_clip() {
   if(!level.player istouching(self)) {
     return;
   }
-  for (;;) {
+  for(;;) {
     level.player enablehealthshield(0);
     level.player maps\_utility::die();
     level.player maps\_utility::die();
@@ -916,7 +916,7 @@ heli_attacks_price_new() {
   var_1 thread kill_toucher_until_stop(var_3);
   var_1.clip = var_3;
   var_4 = spawn("script_model", (0, 0, 0));
-  var_4 setmodel("tag_origin");
+  var_4 setModel("tag_origin");
   var_4 hide();
   var_4 linkto(var_1, "tail_rotor_jnt", (0, 0, 0), (0, 90, 0));
   var_5 = [];
@@ -924,7 +924,7 @@ heli_attacks_price_new() {
   var_7 = 230;
   var_8 = var_7 / var_6;
 
-  for (var_9 = 0; var_9 < var_6; var_9++)
+  for(var_9 = 0; var_9 < var_6; var_9++)
     var_5[var_5.size] = var_1 add_dirtmodel((-20 + var_8 * var_9, 0, -70), (0, 90, 0));
 
   level.price_heli = var_1;
@@ -995,13 +995,13 @@ heli_attacks_price_new() {
   var_0 notify("stop_loop");
   var_0 notify("heli_loop");
   var_1 thread enginefirefx();
-  playfxontag(common_scripts\utility::getfx("aerial_explosion_heli"), var_1, "tag_engine_rear_left");
-  var_1 playsound("scn_se_rocket_explode_building");
+  playFXOnTag(common_scripts\utility::getfx("aerial_explosion_heli"), var_1, "tag_engine_rear_left");
+  var_1 playSound("scn_se_rocket_explode_building");
   level.timer = gettime();
   var_13 = getent("crash_missile_org", "targetname");
   var_1 maps\_utility::delaythread(5.6, ::heli_hits_wall);
   var_1 maps\_utility::delaythread(5.65, ::heli_shoots_targetnamed_rocket, "rocket_1_org");
-  var_14 = spawnstruct();
+  var_14 = spawnStruct();
   var_14.startspeed = 1100;
   var_14.finalspeed = 2000;
   var_14.acceleration = 300;
@@ -1031,7 +1031,7 @@ heli_attacks_price_new() {
   common_scripts\utility::flag_set("havoc_hits_ground");
   maps\_utility::delaythread(14.0, common_scripts\utility::flag_set, "heli_swap_dirt");
   maps\_utility::delaythread(15.5, common_scripts\utility::flag_set, "heli_comes_to_rest");
-  var_1 playloopsound("havoc_helicopter_dying_loop");
+  var_1 playLoopSound("havoc_helicopter_dying_loop");
   var_1 thread dead_heli_pilots();
   var_2.snd_disable_vehicle_system = 1;
   var_0 thread maps\_anim::anim_single(var_10, "crash");
@@ -1044,7 +1044,7 @@ heli_attacks_price_new() {
 price_swap_to_damaged_model() {
   level.price endon("death");
   common_scripts\utility::flag_wait("heli_comes_to_rest");
-  level.price setmodel("body_complete_usmc_ghillie_price_damaged");
+  level.price setModel("body_complete_usmc_ghillie_price_damaged");
 }
 
 heli_to_idle_once_in_place(var_0) {
@@ -1086,14 +1086,14 @@ heli_shoots_dirt(var_0) {
 
 dirt_model_shoots_dirt(var_0) {
   var_1 = spawn("script_model", (0, 0, 0));
-  var_1 setmodel("tag_origin");
+  var_1 setModel("tag_origin");
   var_1 hide();
-  playfxontag(common_scripts\utility::getfx("heli_dirt"), var_1, "tag_origin");
+  playFXOnTag(common_scripts\utility::getfx("heli_dirt"), var_1, "tag_origin");
   var_1 linkto(level.price_heli, "tag_deathfx", (0, 0, 0), (0, 0, 0));
   var_2 = spawn("script_model", (0, 0, 0));
-  var_2 setmodel("tag_origin");
+  var_2 setModel("tag_origin");
   var_2 hide();
-  playfxontag(common_scripts\utility::getfx("heli_dirt_rear"), var_2, "tag_origin");
+  playFXOnTag(common_scripts\utility::getfx("heli_dirt_rear"), var_2, "tag_origin");
   var_2 linkto(level.price_heli, "tag_deathfx", (-100, 0, 100), (0, 0, 0));
   self waittill("kill_dirt");
   var_1 delete();
@@ -1102,18 +1102,18 @@ dirt_model_shoots_dirt(var_0) {
   if(1) {
     return;
   }
-  for (;;) {
-    var_3 = anglestoforward(var_0.angles);
+  for(;;) {
+    var_3 = anglesToForward(var_0.angles);
     var_4 = anglestoup(var_0.angles);
     var_5 = var_3 * 500;
-    var_6 = bullettrace(var_0.origin, var_0.origin + var_5, 1, self);
+    var_6 = bulletTrace(var_0.origin, var_0.origin + var_5, 1, self);
     var_7 = var_6["position"];
 
-    if(!isdefined(level.dirtfx_org)) {
+    if(!isDefined(level.dirtfx_org)) {
       var_8 = spawn("script_model", var_7);
-      var_8 setmodel("tag_origin");
+      var_8 setModel("tag_origin");
       var_8 hide();
-      playfxontag(common_scripts\utility::getfx("heli_dirt"), var_8, "tag_origin");
+      playFXOnTag(common_scripts\utility::getfx("heli_dirt"), var_8, "tag_origin");
       level.dirtfx_org = var_8;
     }
 
@@ -1126,9 +1126,9 @@ dirt_model_shoots_dirt(var_0) {
 sparkgen() {
   self endon("death");
 
-  for (;;) {
-    if(isdefined(self.spark))
-      playfx(common_scripts\utility::getfx("helicopter_tail_sparks"), self.origin);
+  for(;;) {
+    if(isDefined(self.spark))
+      playFX(common_scripts\utility::getfx("helicopter_tail_sparks"), self.origin);
 
     wait 0.05;
   }
@@ -1137,19 +1137,19 @@ sparkgen() {
 heli_makes_sparks(var_0) {
   self endon("stop");
   var_1 = getent("spark_org", "targetname");
-  var_2 = anglestoforward(var_1.angles);
+  var_2 = anglesToForward(var_1.angles);
   var_3 = 0;
 
-  for (;;) {
-    var_4 = anglestoforward(self.angles);
+  for(;;) {
+    var_4 = anglesToForward(self.angles);
     var_5 = var_4 * 500;
-    var_6 = bullettrace(self.origin, self.origin + var_5, 1, var_0);
+    var_6 = bulletTrace(self.origin, self.origin + var_5, 1, var_0);
     var_7 = var_6["position"] + (8, 8, 16);
-    playfx(common_scripts\utility::getfx("helicopter_tail_sparks"), var_7, var_2);
+    playFX(common_scripts\utility::getfx("helicopter_tail_sparks"), var_7, var_2);
     var_3--;
 
     if(var_3 <= 0) {
-      playfx(common_scripts\utility::getfx("brick_chunk"), var_7, var_2);
+      playFX(common_scripts\utility::getfx("brick_chunk"), var_7, var_2);
       var_3 = randomintrange(4, 5);
     }
 
@@ -1160,10 +1160,10 @@ heli_makes_sparks(var_0) {
     return;
   }
   var_8 = spawn("script_model", (0, 0, 0));
-  var_8 setmodel("tag_origin");
+  var_8 setModel("tag_origin");
   var_8.origin = var_1.origin;
   var_8.angles = var_1.angles;
-  playfxontag(common_scripts\utility::getfx("rocket_geo"), var_8, "tag_origin");
+  playFXOnTag(common_scripts\utility::getfx("rocket_geo"), var_8, "tag_origin");
   var_9 = spawn("script_model", (0, 0, 0));
   var_9 linkto(var_8, "tag_origin", (0, 0, 0), (0, 0, 0));
   var_10 = 1200;
@@ -1171,11 +1171,11 @@ heli_makes_sparks(var_0) {
   var_8.spark = 1;
   var_8 thread sparkgen();
 
-  for (;;) {
-    if(isdefined(var_1.speed))
+  for(;;) {
+    if(isDefined(var_1.speed))
       var_10 = var_11 * var_1.speed * 0.01;
 
-    playfx(common_scripts\utility::getfx("brick_chunk"), var_8.origin);
+    playFX(common_scripts\utility::getfx("brick_chunk"), var_8.origin);
     var_12 = getent(var_1.target, "targetname");
     var_13 = distance(var_1.origin, var_12.origin);
     var_14 = var_13 / var_10;
@@ -1183,7 +1183,7 @@ heli_makes_sparks(var_0) {
     var_1 = var_12;
     wait(var_14);
 
-    if(!isdefined(var_1.target)) {
+    if(!isDefined(var_1.target)) {
       break;
     }
   }
@@ -1194,7 +1194,7 @@ heli_makes_sparks(var_0) {
 heli_hits_wall() {
   thread common_scripts\_exploder::exploder(66);
   self stoploopsound();
-  self playsound("scn_se_havoc_downed");
+  self playSound("scn_se_havoc_downed");
   maps\_utility::delaythread(0.1, maps\_utility::_earthquake, 0.4, 1.2, self.origin, 6000);
   thread tailfx();
 }
@@ -1224,10 +1224,10 @@ tailfx() {
   var_1 = getarraykeys(var_0);
   var_2 = undefined;
 
-  for (;;) {
-    for (var_3 = 0; var_3 < var_1.size; var_3++) {
+  for(;;) {
+    for(var_3 = 0; var_3 < var_1.size; var_3++) {
       var_4 = self gettagorigin(var_0[var_1[var_3]]);
-      playfx(common_scripts\utility::getfx("smoke_trail_heli"), var_4);
+      playFX(common_scripts\utility::getfx("smoke_trail_heli"), var_4);
     }
 
     wait 0.1;
@@ -1241,10 +1241,10 @@ enginefirefx() {
   var_1 = getarraykeys(var_0);
   var_2 = undefined;
 
-  for (;;) {
-    for (var_3 = 0; var_3 < var_1.size; var_3++) {
+  for(;;) {
+    for(var_3 = 0; var_3 < var_1.size; var_3++) {
       var_4 = self gettagorigin(var_0[var_1[var_3]]);
-      playfx(common_scripts\utility::getfx("fire_trail_heli"), var_4);
+      playFX(common_scripts\utility::getfx("fire_trail_heli"), var_4);
     }
 
     wait 0.1;
@@ -1258,10 +1258,10 @@ enginesmolderfx() {
   var_1 = getarraykeys(var_0);
   var_2 = undefined;
 
-  for (;;) {
-    for (var_3 = 0; var_3 < var_1.size; var_3++) {
+  for(;;) {
+    for(var_3 = 0; var_3 < var_1.size; var_3++) {
       var_4 = self gettagorigin(var_0[var_1[var_3]]);
-      playfx(common_scripts\utility::getfx("heli_engine_smolder"), var_4);
+      playFX(common_scripts\utility::getfx("heli_engine_smolder"), var_4);
     }
 
     wait 0.1;
@@ -1275,10 +1275,10 @@ crash_dust_fx() {
   var_1 = getarraykeys(var_0);
   var_2 = undefined;
 
-  for (;;) {
-    for (var_3 = 0; var_3 < var_1.size; var_3++) {
+  for(;;) {
+    for(var_3 = 0; var_3 < var_1.size; var_3++) {
       var_4 = self gettagorigin(var_0[var_1[var_3]]);
-      playfx(common_scripts\utility::getfx("heli_crash_dust"), var_4);
+      playFX(common_scripts\utility::getfx("heli_crash_dust"), var_4);
       common_scripts\utility::play_loopsound_in_space("fire_wood_small", var_4);
     }
 
@@ -1304,17 +1304,17 @@ kill_toucher_until_stop(var_0) {
 script_animator() {
   common_scripts\utility::flag_init("throw_model" + self.script_noteworthy);
 
-  if(isdefined(self.script_linkto))
+  if(isDefined(self.script_linkto))
     thread clip_setup();
 
   var_0 = self;
   var_0 = getent(var_0.target, "targetname");
 
-  for (;;) {
+  for(;;) {
     var_0.origin = var_0.origin + (0, 0, -5000);
     var_0 hide();
 
-    if(!isdefined(var_0.target)) {
+    if(!isDefined(var_0.target)) {
       break;
     }
 
@@ -1326,10 +1326,10 @@ script_animator() {
   var_0 = self;
   var_0 = getent(var_0.target, "targetname");
 
-  for (;;) {
+  for(;;) {
     var_0.origin = var_0.origin + (0, 0, 5000);
 
-    if(!isdefined(var_0.target)) {
+    if(!isDefined(var_0.target)) {
       break;
     }
 
@@ -1339,8 +1339,8 @@ script_animator() {
   var_1 = 0.15;
   var_0 = self;
 
-  for (;;) {
-    if(!isdefined(var_0.target)) {
+  for(;;) {
+    if(!isDefined(var_0.target)) {
       break;
     }
 
@@ -1360,15 +1360,15 @@ check_for_price() {
   if(!isalive(level.price)) {
     return;
   }
-  setdvar("ui_deadquote", & "SNIPERESCAPE_YOU_LEFT_YOUR_SPOTTER");
+  setdvar("ui_deadquote", &"SNIPERESCAPE_YOU_LEFT_YOUR_SPOTTER");
   maps\_utility::missionfailedwrapper();
 }
 
 grass_obj() {
-  self setmodel("h1_sniperescape_grassobjective");
+  self setModel("h1_sniperescape_grassobjective");
   var_0 = spawn("script_model", self.origin);
   var_0.angles = self.angles;
-  var_0 setmodel("h1_sniperescape_grassobjective_obj");
+  var_0 setModel("h1_sniperescape_grassobjective_obj");
   var_0 hide();
   hide_and_show_glowing_grass(var_0);
   self show();
@@ -1378,7 +1378,7 @@ grass_obj() {
 hide_and_show_glowing_grass(var_0) {
   level endon("price_is_put_down_near_wheel");
 
-  for (;;) {
+  for(;;) {
     common_scripts\utility::flag_wait("put_price_near_wheel");
     self hide();
     var_0 show();
@@ -1389,10 +1389,10 @@ hide_and_show_glowing_grass(var_0) {
 }
 
 ferris_wheel_placement_objective() {
-  var_0 = getentarray("grass_obj", "targetname");
+  var_0 = getEntArray("grass_obj", "targetname");
 
   foreach(var_2 in var_0)
-  var_2 setmodel("h1_sniperescape_grassobjective");
+  var_2 setModel("h1_sniperescape_grassobjective");
 
   common_scripts\utility::flag_wait("put_price_near_wheel");
   thread common_scripts\_exploder::exploder(100);
@@ -1403,7 +1403,7 @@ ferris_wheel_placement_objective() {
 player_is_enemy() {
   var_0 = getaiarray("axis");
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++) {
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     if(isalive(var_0[var_1].enemy)) {
       if(level.player == var_0[var_1].enemy)
         return 1;
@@ -1452,7 +1452,7 @@ price_snipes_heli_until_player_does() {
   common_scripts\utility::flag_assert("heli_shot_down");
   level.price endon("death");
 
-  for (;;) {
+  for(;;) {
     maps\sniperescape_code::price_line("shoot_the_helicopter");
     level.price_heli maps\_utility::add_wait(maps\_utility::waittill_player_lookat, 0.995, 1.0, 1);
     var_0 = randomfloatrange(8, 12);
@@ -1472,12 +1472,12 @@ price_snipes_heli_until_player_does() {
 
 heli_fires_around_price() {
   common_scripts\utility::flag_assert("heli_shot_down");
-  var_0 = getentarray("death_heli_target", "targetname");
+  var_0 = getEntArray("death_heli_target", "targetname");
   var_1 = common_scripts\utility::random(var_0);
   var_2 = var_1;
 
-  for (;;) {
-    while (var_2 == var_1)
+  for(;;) {
+    while(var_2 == var_1)
       var_1 = common_scripts\utility::random(var_0);
 
     var_2 = var_1;
@@ -1494,16 +1494,16 @@ heli_fires(var_0) {
   var_1.origin = self.origin;
   var_2 = randomfloat(1) * 10;
   var_3 = spawn("script_model", (0, 0, 0));
-  var_3 setmodel("tag_origin");
+  var_3 setModel("tag_origin");
 
-  for (var_4 = 0; var_4 < var_2; var_4++) {
-    var_1 playsound("h1_wep_air_cannon_cls");
+  for(var_4 = 0; var_4 < var_2; var_4++) {
+    var_1 playSound("h1_wep_air_cannon_cls");
     var_5 = var_0.origin + common_scripts\utility::randomvector(16);
     var_6 = self gettagorigin("tag_flash");
     var_3.origin = var_6;
     var_7 = vectortoangles(var_5 - var_6);
     var_3.angles = var_7;
-    playfxontag(common_scripts\utility::getfx("hind_fire"), var_3, "tag_origin");
+    playFXOnTag(common_scripts\utility::getfx("hind_fire"), var_3, "tag_origin");
     magicbullet("barrett_fake", self gettagorigin("tag_flash"), var_5);
     wait 0.1;
   }
@@ -1520,16 +1520,16 @@ heli_kills_price() {
   level notify("heli_kills_price");
   level.price.allowdeath = 1;
 
-  if(isdefined(level.price.magic_bullet_shield))
+  if(isDefined(level.price.magic_bullet_shield))
     level.price maps\_utility::stop_magic_bullet_shield();
 
   level.price.health = 150;
 
-  for (;;) {
+  for(;;) {
     var_0 = randomfloatrange(1, 2) * 10;
 
-    for (var_1 = 0; var_1 < var_0; var_1++) {
-      magicbullet("barrett_fake", level.price_heli gettagorigin("tag_flash"), level.price geteye());
+    for(var_1 = 0; var_1 < var_0; var_1++) {
+      magicbullet("barrett_fake", level.price_heli gettagorigin("tag_flash"), level.price getEye());
       wait 0.1;
     }
 
@@ -1542,7 +1542,7 @@ price_death_failure() {
   common_scripts\utility::flag_assert("heli_comes_to_rest");
   level.price waittill("death");
   wait 4;
-  setdvar("ui_deadquote", & "SNIPERESCAPE_CPT_MACMILLAN_DIED");
+  setdvar("ui_deadquote", &"SNIPERESCAPE_CPT_MACMILLAN_DIED");
   maps\_utility::missionfailedwrapper();
 }
 
@@ -1555,7 +1555,7 @@ player_becomes_invul_on_pickup() {
   level endon("player_made_it_to_seaknight");
   var_0 = level.player.deathinvulnerabletime;
 
-  for (;;) {
+  for(;;) {
     common_scripts\utility::flag_wait("price_picked_up");
     level.player.deathinvulnerabletime = 10000;
     common_scripts\utility::flag_waitopen("price_picked_up");
@@ -1567,7 +1567,7 @@ heli_shot_down_detection() {
   level endon("heli_shot_down");
   var_0 = 0;
 
-  for (;;) {
+  for(;;) {
     if(maps\_utility::player_looking_at(level.price_heli.origin, 0.995))
       var_0++;
 
@@ -1622,7 +1622,7 @@ merry_grass_delete() {
 }
 
 wait_for_surprise_guys() {
-  for (;;) {
+  for(;;) {
     if(level.deathflags["surprise_guys_dead"]["spawners"].size > 0) {
       wait 0.05;
       continue;
@@ -1640,7 +1640,7 @@ player_cant_die() {
   maps\_utility::arcademode_stop_timer();
   level.player endon("death");
 
-  for (;;) {
+  for(;;) {
     level.player.deathinvulnerabletime = 70000;
     level.player enableinvulnerability();
     level.player.attackeraccuracy = 0;

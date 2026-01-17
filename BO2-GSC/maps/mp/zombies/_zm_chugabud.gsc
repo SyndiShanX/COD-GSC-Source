@@ -26,8 +26,7 @@ init() {
 
 chugabug_
 
-chugabud_player_init() {
-}
+chugabud_player_init() {}
 
 chugabud_laststand() {
   self endon("player_suicide");
@@ -138,10 +137,10 @@ chugabud_corpse_cleanup(corpse, was_revived) {
 
   if(was_revived) {
     playsoundatposition("evt_ww_appear", corpse.origin);
-    playfx(level._effect["chugabud_revive_fx"], corpse.origin);
+    playFX(level._effect["chugabud_revive_fx"], corpse.origin);
   } else {
     playsoundatposition("evt_ww_disappear", corpse.origin);
-    playfx(level._effect["chugabud_bleedout_fx"], corpse.origin);
+    playFX(level._effect["chugabud_bleedout_fx"], corpse.origin);
     self notify("chugabud_bleedout");
   }
 
@@ -197,7 +196,7 @@ chugabud_revive_hud_create() {
 chugabud_save_loadout() {
   primaries = self getweaponslistprimaries();
   currentweapon = self getcurrentweapon();
-  self.loadout = spawnstruct();
+  self.loadout = spawnStruct();
   self.loadout.player = self;
   self.loadout.weapons = [];
   self.loadout.score = self.score;
@@ -346,7 +345,7 @@ chugabud_fake_revive() {
   level notify("fake_revive");
   self notify("fake_revive");
   playsoundatposition("evt_ww_disappear", self.origin);
-  playfx(level._effect["chugabud_revive_fx"], self.origin);
+  playFX(level._effect["chugabud_revive_fx"], self.origin);
   spawnpoint = chugabud_get_spawnpoint();
 
   if(isDefined(level._chugabud_post_respawn_override_func))
@@ -367,7 +366,7 @@ chugabud_fake_revive() {
   self setorigin(spawnpoint.origin);
   self setplayerangles(spawnpoint.angles);
   playsoundatposition("evt_ww_appear", spawnpoint.origin);
-  playfx(level._effect["chugabud_revive_fx"], spawnpoint.origin);
+  playFX(level._effect["chugabud_revive_fx"], spawnpoint.origin);
   self allowstand(1);
   self allowcrouch(1);
   self allowprone(1);
@@ -440,13 +439,13 @@ chugabud_get_spawnpoint() {
 
 get_chugabug_spawn_point_from_nodes(v_origin, min_radius, max_radius, max_height, ignore_targetted_nodes) {
   if(!isDefined(level.chugabud_spawn_struct))
-    level.chugabud_spawn_struct = spawnstruct();
+    level.chugabud_spawn_struct = spawnStruct();
 
   found_node = undefined;
   a_nodes = getnodesinradiussorted(v_origin, max_radius, min_radius, max_height, "pathnodes");
 
   if(isDefined(a_nodes) && a_nodes.size > 0) {
-    a_player_volumes = getentarray("player_volume", "script_noteworthy");
+    a_player_volumes = getEntArray("player_volume", "script_noteworthy");
     index = a_nodes.size - 1;
 
     for(i = index; i >= 0; i--) {
@@ -461,7 +460,7 @@ get_chugabug_spawn_point_from_nodes(v_origin, min_radius, max_radius, max_height
         if(maps\mp\zombies\_zm_utility::check_point_in_enabled_zone(n_node.origin, 1, a_player_volumes)) {
           v_start = (n_node.origin[0], n_node.origin[1], n_node.origin[2] + 30);
           v_end = (n_node.origin[0], n_node.origin[1], n_node.origin[2] - 30);
-          trace = bullettrace(v_start, v_end, 0, undefined);
+          trace = bulletTrace(v_start, v_end, 0, undefined);
 
           if(trace["fraction"] < 1) {
             override_abort = 0;
@@ -563,15 +562,14 @@ chugabud_hostmigration() {
 
   while(true) {
     level waittill("host_migration_end");
-    chugabuds = getentarray("player_chugabud_model", "script_noteworthy");
+    chugabuds = getEntArray("player_chugabud_model", "script_noteworthy");
 
     foreach(model in chugabuds)
-    playfxontag(level._effect["powerup_on"], model, "tag_origin");
+    playFXOnTag(level._effect["powerup_on"], model, "tag_origin");
   }
 }
 
-player_revived_cleanup_chugabud_corpse() {
-}
+player_revived_cleanup_chugabud_corpse() {}
 
 player_has_chugabud_corpse() {
   if(isDefined(self.e_chugabud_corpse))

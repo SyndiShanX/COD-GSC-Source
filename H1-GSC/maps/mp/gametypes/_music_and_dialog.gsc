@@ -42,10 +42,10 @@ init() {
   game["dialog"]["last_alive"] = "lastalive";
   game["dialog"]["boost"] = "boost";
 
-  if(!isdefined(game["dialog"]["offense_obj"]))
+  if(!isDefined(game["dialog"]["offense_obj"]))
     game["dialog"]["offense_obj"] = "boost";
 
-  if(!isdefined(game["dialog"]["defense_obj"]))
+  if(!isDefined(game["dialog"]["defense_obj"]))
     game["dialog"]["defense_obj"] = "boost";
 
   game["dialog"]["hardcore"] = "hardcore";
@@ -133,7 +133,7 @@ init() {
 }
 
 onplayerconnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connected", var_0);
     var_0 thread onplayerspawned();
     var_0 thread finalkillcammusic();
@@ -145,7 +145,7 @@ onplayerspawned() {
   self waittill("spawned_player");
 
   if(getdvar("virtuallobbyactive") == "0") {
-    if(!level.splitscreen || level.splitscreen && !isdefined(level.playedstartingmusic)) {
+    if(!level.splitscreen || level.splitscreen && !isDefined(level.playedstartingmusic)) {
       if(!maps\mp\_utility::issecondarysplitscreenplayer())
         self playlocalsound(game["music"]["spawn_" + self.team]);
 
@@ -153,10 +153,10 @@ onplayerspawned() {
         level.playedstartingmusic = 1;
     }
 
-    if(isdefined(game["dialog"]["gametype"]) && (!level.splitscreen || self == level.players[0])) {
-      if(isdefined(game["dialog"]["allies_gametype"]) && self.team == "allies")
+    if(isDefined(game["dialog"]["gametype"]) && (!level.splitscreen || self == level.players[0])) {
+      if(isDefined(game["dialog"]["allies_gametype"]) && self.team == "allies")
         maps\mp\_utility::leaderdialogonplayer("allies_gametype");
-      else if(isdefined(game["dialog"]["axis_gametype"]) && self.team == "axis")
+      else if(isDefined(game["dialog"]["axis_gametype"]) && self.team == "axis")
         maps\mp\_utility::leaderdialogonplayer("axis_gametype");
       else if(!maps\mp\_utility::issecondarysplitscreenplayer())
         maps\mp\_utility::leaderdialogonplayer("gametype");
@@ -251,7 +251,7 @@ ongameended() {
         continue;
       }
 
-      if(isdefined(var_0) && isplayer(var_0) && var_2 == var_0) {
+      if(isDefined(var_0) && isplayer(var_0) && var_2 == var_0) {
         var_2 playlocalsound(game["music"]["victory_" + var_2.pers["team"]]);
         continue;
       }
@@ -269,7 +269,7 @@ roundwinnerdialog() {
   if(var_1 > 0)
     wait(var_1);
 
-  if(!isdefined(var_0) || isplayer(var_0)) {
+  if(!isDefined(var_0) || isplayer(var_0)) {
     return;
   }
   if(var_0 == "allies") {
@@ -288,14 +288,14 @@ gamewinnerdialog() {
   if(var_1 > 0)
     wait(var_1);
 
-  if(!isdefined(var_0) || isplayer(var_0)) {
+  if(!isDefined(var_0) || isplayer(var_0)) {
     return;
   }
   if(var_0 == "allies") {
     maps\mp\_utility::leaderdialog("mission_success", "allies");
     maps\mp\_utility::leaderdialog("mission_failure", "axis");
   } else if(var_0 == "axis") {
-    if(isdefined(level.ishorde))
+    if(isDefined(level.ishorde))
       [[level.hordevomissionfail]]();
     else {
       maps\mp\_utility::leaderdialog("mission_success", "axis");
@@ -397,7 +397,7 @@ suspensemusic() {
   var_0 = game["music"]["suspense"].size;
   wait 120;
 
-  for (;;) {
+  for(;;) {
     wait(randomfloatrange(60, 120));
     maps\mp\_utility::playsoundonplayers(game["music"]["suspense"][randomint(var_0)]);
   }

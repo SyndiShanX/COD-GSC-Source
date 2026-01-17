@@ -16,19 +16,19 @@
 #namespace _zm_weap_elemental_bow_rune_prison;
 
 function autoexec __init__sytem__() {
-  system::register("_zm_weap_elemental_bow_rune_prison", & __init__, undefined, undefined);
+  system::register("_zm_weap_elemental_bow_rune_prison", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("toplayer", "elemental_bow_rune_prison" + "_ambient_bow_fx", 5000, 1, "int", & function_8339cd3d, 0, 0);
-  clientfield::register("missile", "elemental_bow_rune_prison" + "_arrow_impact_fx", 5000, 1, "int", & function_4b59f7f4, 0, 0);
-  clientfield::register("missile", "elemental_bow_rune_prison4" + "_arrow_impact_fx", 5000, 1, "int", & function_ed22f261, 0, 0);
-  clientfield::register("scriptmover", "runeprison_rock_fx", 5000, 1, "int", & runeprison_rock_fx, 0, 0);
-  clientfield::register("scriptmover", "runeprison_explode_fx", 5000, 1, "int", & runeprison_explode_fx, 0, 0);
-  clientfield::register("scriptmover", "runeprison_lava_geyser_fx", 5000, 1, "int", & runeprison_lava_geyser_fx, 0, 0);
-  clientfield::register("actor", "runeprison_lava_geyser_dot_fx", 5000, 1, "int", & runeprison_lava_geyser_dot_fx, 0, 0);
-  clientfield::register("actor", "runeprison_zombie_charring", 5000, 1, "int", & runeprison_zombie_charring, 0, 0);
-  clientfield::register("actor", "runeprison_zombie_death_skull", 5000, 1, "int", & runeprison_zombie_death_skull, 0, 0);
+  clientfield::register("toplayer", "elemental_bow_rune_prison" + "_ambient_bow_fx", 5000, 1, "int", &function_8339cd3d, 0, 0);
+  clientfield::register("missile", "elemental_bow_rune_prison" + "_arrow_impact_fx", 5000, 1, "int", &function_4b59f7f4, 0, 0);
+  clientfield::register("missile", "elemental_bow_rune_prison4" + "_arrow_impact_fx", 5000, 1, "int", &function_ed22f261, 0, 0);
+  clientfield::register("scriptmover", "runeprison_rock_fx", 5000, 1, "int", &runeprison_rock_fx, 0, 0);
+  clientfield::register("scriptmover", "runeprison_explode_fx", 5000, 1, "int", &runeprison_explode_fx, 0, 0);
+  clientfield::register("scriptmover", "runeprison_lava_geyser_fx", 5000, 1, "int", &runeprison_lava_geyser_fx, 0, 0);
+  clientfield::register("actor", "runeprison_lava_geyser_dot_fx", 5000, 1, "int", &runeprison_lava_geyser_dot_fx, 0, 0);
+  clientfield::register("actor", "runeprison_zombie_charring", 5000, 1, "int", &runeprison_zombie_charring, 0, 0);
+  clientfield::register("actor", "runeprison_zombie_death_skull", 5000, 1, "int", &runeprison_zombie_death_skull, 0, 0);
   level._effect["rune_ambient_bow"] = "dlc1/zmb_weapon/fx_bow_rune_ambient_1p_zmb";
   level._effect["rune_arrow_impact"] = "dlc1/zmb_weapon/fx_bow_rune_impact_zmb";
   level._effect["rune_fire_pillar"] = "dlc1/zmb_weapon/fx_bow_rune_impact_ug_fire_zmb";
@@ -42,13 +42,13 @@ function function_8339cd3d(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_4b59f7f4(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    playfx(localclientnum, level._effect["rune_arrow_impact"], self.origin);
+    playFX(localclientnum, level._effect["rune_arrow_impact"], self.origin);
   }
 }
 
 function function_ed22f261(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    playfx(localclientnum, level._effect["rune_arrow_impact"], self.origin);
+    playFX(localclientnum, level._effect["rune_arrow_impact"], self.origin);
   }
 }
 
@@ -56,7 +56,7 @@ function runeprison_rock_fx(localclientnum, oldval, newval, bnewent, binitialsna
   switch (newval) {
     case 0: {
       self scene_play("p7_fxanim_zm_bow_rune_prison_01_bundle");
-      if(!isdefined(self)) {
+      if(!isDefined(self)) {
         return;
       }
       self thread scene_play("p7_fxanim_zm_bow_rune_prison_01_dissolve_bundle", self.var_728caca2);
@@ -76,7 +76,7 @@ function scene_play(scene, var_7b98b639) {
   self endon("scene_play");
   self scene::stop();
   self function_6221b6b9(scene, var_7b98b639);
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     self scene::stop();
   }
 }
@@ -91,7 +91,7 @@ function function_79854312(localclientnum) {
   n_start_time = gettime();
   n_end_time = n_start_time + 1633;
   b_is_updating = 1;
-  while (b_is_updating) {
+  while(b_is_updating) {
     n_time = gettime();
     if(n_time >= n_end_time) {
       n_shader_value = mapfloat(n_start_time, n_end_time, 1, 0, n_end_time);
@@ -106,20 +106,20 @@ function function_79854312(localclientnum) {
 
 function runeprison_explode_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    playfx(localclientnum, level._effect["rune_fire_pillar"], self.origin, (0, 0, 1), (1, 0, 0));
+    playFX(localclientnum, level._effect["rune_fire_pillar"], self.origin, (0, 0, 1), (1, 0, 0));
   }
 }
 
 function runeprison_lava_geyser_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    playfx(localclientnum, level._effect["rune_lava_geyser"], self.origin, (0, 0, 1), (1, 0, 0));
-    self playsound(0, "wpn_rune_prison_lava_lump", self.origin);
+    playFX(localclientnum, level._effect["rune_lava_geyser"], self.origin, (0, 0, 1), (1, 0, 0));
+    self playSound(0, "wpn_rune_prison_lava_lump", self.origin);
   }
 }
 
 function runeprison_lava_geyser_dot_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self.var_1892be10 = playfxontag(localclientnum, level._effect["rune_lava_geyser_dot"], self, "j_spine4");
+    self.var_1892be10 = playFXOnTag(localclientnum, level._effect["rune_lava_geyser_dot"], self, "j_spine4");
   } else {
     deletefx(localclientnum, self.var_1892be10, 0);
   }
@@ -131,7 +131,7 @@ function runeprison_zombie_charring(localclientnum, oldval, newval, bnewent, bin
     n_cur_time = gettime();
     n_start_time = n_cur_time;
     var_39255d08 = n_cur_time + 1200;
-    while (n_cur_time < var_39255d08) {
+    while(n_cur_time < var_39255d08) {
       var_dd5c416e = (n_cur_time - n_start_time) / 1200;
       self mapshaderconstant(localclientnum, 0, "scriptVector0", var_dd5c416e, var_dd5c416e, 0);
       wait(0.016);

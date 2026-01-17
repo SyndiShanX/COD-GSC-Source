@@ -14,20 +14,20 @@
 function init() {
   var_b20c97f = getminbitcountfornum(7);
   var_1b7d5552 = getminbitcountfornum(3);
-  clientfield::register("scriptmover", "side_ee_gt_spore_glow_fx", 9000, 1, "int", & side_ee_gt_spore_glow_fx, 0, 0);
-  clientfield::register("scriptmover", "side_ee_gt_spore_cloud_fx", 9000, var_b20c97f, "int", & side_ee_gt_spore_cloud_fx, 0, 0);
-  clientfield::register("actor", "side_ee_gt_spore_trail_enemy_fx", 9000, 1, "int", & function_f68bb4e3, 0, 0);
-  clientfield::register("allplayers", "side_ee_gt_spore_trail_player_fx", 9000, var_1b7d5552, "int", & function_f68bb4e3, 0, 0);
-  clientfield::register("actor", "good_thrasher_fx", 9000, 1, "int", & good_thrasher_fx, 0, 0);
+  clientfield::register("scriptmover", "side_ee_gt_spore_glow_fx", 9000, 1, "int", &side_ee_gt_spore_glow_fx, 0, 0);
+  clientfield::register("scriptmover", "side_ee_gt_spore_cloud_fx", 9000, var_b20c97f, "int", &side_ee_gt_spore_cloud_fx, 0, 0);
+  clientfield::register("actor", "side_ee_gt_spore_trail_enemy_fx", 9000, 1, "int", &function_f68bb4e3, 0, 0);
+  clientfield::register("allplayers", "side_ee_gt_spore_trail_player_fx", 9000, var_1b7d5552, "int", &function_f68bb4e3, 0, 0);
+  clientfield::register("actor", "good_thrasher_fx", 9000, 1, "int", &good_thrasher_fx, 0, 0);
 }
 
 function side_ee_gt_spore_glow_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
-    if(isdefined(self.var_a1aff3d8)) {
+    if(isDefined(self.var_a1aff3d8)) {
       stopfx(localclientnum, self.var_a1aff3d8);
     }
-    self.var_a1aff3d8 = playfx(localclientnum, level._effect["SPORE_GLOW"], self.origin, anglestoforward(self.angles), anglestoup(self.angles));
-  } else if(isdefined(self.var_a1aff3d8)) {
+    self.var_a1aff3d8 = playFX(localclientnum, level._effect["SPORE_GLOW"], self.origin, anglesToForward(self.angles), anglestoup(self.angles));
+  } else if(isDefined(self.var_a1aff3d8)) {
     stopfx(localclientnum, self.var_a1aff3d8);
     self.var_a1aff3d8 = undefined;
   }
@@ -39,9 +39,9 @@ function side_ee_gt_spore_cloud_fx(localclientnum, oldval, newval, bnewent, bini
     var_38c08794 = var_74df34f7;
     var_828d501f = var_74df34f7;
     var_a506772a = var_74df34f7;
-    playfx(localclientnum, level._effect["SPORE_CLOUD_EXP_GOOD_LG"], var_74df34f7.origin, anglestoforward(var_74df34f7.angles));
-    self.var_b76ed967 = playfx(localclientnum, level._effect["SPORE_CLOUD_GOOD_LG"], var_a506772a.origin, anglestoforward(var_a506772a.angles));
-  } else if(isdefined(self.var_b76ed967)) {
+    playFX(localclientnum, level._effect["SPORE_CLOUD_EXP_GOOD_LG"], var_74df34f7.origin, anglesToForward(var_74df34f7.angles));
+    self.var_b76ed967 = playFX(localclientnum, level._effect["SPORE_CLOUD_GOOD_LG"], var_a506772a.origin, anglesToForward(var_a506772a.angles));
+  } else if(isDefined(self.var_b76ed967)) {
     stopfx(localclientnum, self.var_b76ed967);
     self.var_b76ed967 = undefined;
   }
@@ -49,12 +49,12 @@ function side_ee_gt_spore_cloud_fx(localclientnum, oldval, newval, bnewent, bini
 
 function function_f68bb4e3(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval > 0) {
-    if(isdefined(self.var_3ecc4b30)) {
+    if(isDefined(self.var_3ecc4b30)) {
       stopfx(localclientnum, self.var_3ecc4b30);
       self.var_3ecc4b30 = undefined;
     }
-    self.var_3ecc4b30 = playfxontag(localclientnum, level._effect["SPORE_TRAIL_GOOD"], self, "j_spine4");
-  } else if(isdefined(self.var_3ecc4b30)) {
+    self.var_3ecc4b30 = playFXOnTag(localclientnum, level._effect["SPORE_TRAIL_GOOD"], self, "j_spine4");
+  } else if(isDefined(self.var_3ecc4b30)) {
     stopfx(localclientnum, self.var_3ecc4b30);
     self.var_3ecc4b30 = undefined;
   }
@@ -62,17 +62,17 @@ function function_f68bb4e3(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function good_thrasher_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
-    if(isdefined(self.var_ba9281dc)) {
+    if(isDefined(self.var_ba9281dc)) {
       foreach(fx_id in self.var_ba9281dc) {
         stopfx(localclientnum, fx_id);
       }
     }
     self.var_ba9281dc = [];
-    self.var_ba9281dc["eyes"] = playfxontag(localclientnum, level._effect["SIDE_EE_GT_EYES"], self, "j_eyeball_le");
-    self.var_ba9281dc["spine"] = playfxontag(localclientnum, level._effect["SIDE_EE_GT_SPINE"], self, "j_spinelower");
-    self.var_ba9281dc["leg_l"] = playfxontag(localclientnum, level._effect["SIDE_EE_GT_LEG_L"], self, "j_hip_le");
-    self.var_ba9281dc["leg_r"] = playfxontag(localclientnum, level._effect["SIDE_EE_GT_LEG_R"], self, "j_hip_rt");
-  } else if(isdefined(self.var_ba9281dc)) {
+    self.var_ba9281dc["eyes"] = playFXOnTag(localclientnum, level._effect["SIDE_EE_GT_EYES"], self, "j_eyeball_le");
+    self.var_ba9281dc["spine"] = playFXOnTag(localclientnum, level._effect["SIDE_EE_GT_SPINE"], self, "j_spinelower");
+    self.var_ba9281dc["leg_l"] = playFXOnTag(localclientnum, level._effect["SIDE_EE_GT_LEG_L"], self, "j_hip_le");
+    self.var_ba9281dc["leg_r"] = playFXOnTag(localclientnum, level._effect["SIDE_EE_GT_LEG_R"], self, "j_hip_rt");
+  } else if(isDefined(self.var_ba9281dc)) {
     foreach(fx_id in self.var_ba9281dc) {
       stopfx(localclientnum, fx_id);
     }

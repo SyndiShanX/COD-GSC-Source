@@ -78,9 +78,7 @@ vo_listener_init() {
   }
 
   if(isDefined(level.level_specific_vo_callouts))
-    var_0 = [
-      [level.level_specific_vo_callouts]
-    ](var_0);
+    var_0 = [[level.level_specific_vo_callouts]](var_0);
 
   for(;;) {
     level waittill("dlc_vo_notify", var_1, var_2);

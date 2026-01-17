@@ -9,7 +9,7 @@
 #include clientscripts\_destructibles;
 
 createloopsound() {
-  ent = spawnstruct();
+  ent = spawnStruct();
 
   if(!isDefined(level.createfxent))
     level.createfxent = [];
@@ -26,7 +26,7 @@ createloopsound() {
 }
 
 createeffect(type, fxid) {
-  ent = spawnstruct();
+  ent = spawnStruct();
 
   if(!isDefined(level.createfxent))
     level.createfxent = [];
@@ -83,10 +83,10 @@ fire_effect() {
   players = level.localplayers;
 
   for(i = 0; i < players.size; i++)
-    playfx(i, level._effect[firefx], self.v["origin"], forward, up, 0, self.v["primlightfrac"], self.v["lightoriginoffs"]);
+    playFX(i, level._effect[firefx], self.v["origin"], forward, up, 0, self.v["primlightfrac"], self.v["lightoriginoffs"]);
 }
 
-exploder_playsound() {
+exploder_playSound() {
   if(!isDefined(self.v["soundalias"]) || self.v["soundalias"] == "nil") {
     return;
   }
@@ -99,7 +99,7 @@ cannon_effect() {
       players = level.localplayers;
 
       for(player = 0; player < players.size; player++)
-        playfx(player, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
+        playFX(player, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
 
       self exploder_delay();
     }
@@ -128,10 +128,10 @@ cannon_effect() {
 
   for(i = 0; i < players.size; i++) {
     if(isDefined(self.v["fxid"]))
-      self.loopfx[i] = playfx(i, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
+      self.loopfx[i] = playFX(i, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
   }
 
-  self exploder_playsound();
+  self exploder_playSound();
 }
 
 exploder_earthquake() {
@@ -238,7 +238,7 @@ glass_exploder_watcher(num, dist, alias) {
 
         if(isDefined(alias)) {
           sound_ent = spawn(0, pos, "script_origin");
-          sound_ent playloopsound(alias, 0.25);
+          sound_ent playLoopSound(alias, 0.25);
           sound_ent thread delete_window_sound_ent();
         }
 
@@ -301,11 +301,11 @@ createexploder(fxid) {
 
 set_forward_and_up_vectors() {
   self.v["up"] = anglestoup(self.v["angles"]);
-  self.v["forward"] = anglestoforward(self.v["angles"]);
+  self.v["forward"] = anglesToForward(self.v["angles"]);
 }
 
 create_triggerfx(clientnum) {
-  self.looperfx = playfx(clientnum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"], self.v["delay"], self.v["primlightfrac"], self.v["lightoriginoffs"]);
+  self.looperfx = playFX(clientnum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"], self.v["delay"], self.v["primlightfrac"], self.v["lightoriginoffs"]);
   create_loopsound(clientnum);
 }
 
@@ -315,7 +315,7 @@ create_looper(clientnum) {
 }
 
 loopfx(clientnum) {
-  self.looperfx = playfx(clientnum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"], self.v["delay"], self.v["primlightfrac"], self.v["lightoriginoffs"]);
+  self.looperfx = playFX(clientnum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"], self.v["delay"], self.v["primlightfrac"], self.v["lightoriginoffs"]);
 
   while(true) {
     if(isDefined(self.v["delay"]))
@@ -324,7 +324,7 @@ loopfx(clientnum) {
     while(isfxplaying(clientnum, self.looperfx))
       wait 0.1;
 
-    self.looperfx = playfx(clientnum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"], 0, self.v["primlightfrac"], self.v["lightoriginoffs"]);
+    self.looperfx = playFX(clientnum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"], 0, self.v["primlightfrac"], self.v["lightoriginoffs"]);
   }
 }
 
@@ -425,8 +425,7 @@ fx_init(clientnum) {
   level._createfxforwardandupset = 1;
 }
 
-reportnumeffects() {
-}
+reportnumeffects() {}
 
 playlightloopexploder(exploderindex) {
   num = int(exploderindex);
@@ -460,7 +459,7 @@ playexploderfx(clientnum) {
   if(!isDefined(self.v["up"])) {
     return;
   }
-  return playfx(clientnum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"], 0, self.v["primlightfrac"], self.v["lightoriginoffs"]);
+  return playFX(clientnum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"], 0, self.v["primlightfrac"], self.v["lightoriginoffs"]);
 }
 
 stoplightloopexploder(exploderindex) {
@@ -501,7 +500,7 @@ blinky_light(localclientnum, tagname, fx) {
       continue;
     }
 
-    self.blinkylightfx = playfxontag(localclientnum, fx, self, self.lighttagname);
+    self.blinkylightfx = playFXOnTag(localclientnum, fx, self, self.lighttagname);
     wait 0.5;
   }
 }

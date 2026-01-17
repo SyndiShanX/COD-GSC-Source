@@ -224,9 +224,9 @@ skipto_setup() {
 
 turret_lighting_origin_set() {
   str_turret_name = self.targetname;
-  v_spawn = vectorscale((0, 0, 1), 64.0) + bullettrace(self.origin - vectorscale((0, 0, 1), 64.0), self.origin - vectorscale((0, 0, 1), 64.0) + vectorscale((0, 0, -1), 100000.0), 0, self)["position"];
+  v_spawn = vectorscale((0, 0, 1), 64.0) + bulletTrace(self.origin - vectorscale((0, 0, 1), 64.0), self.origin - vectorscale((0, 0, 1), 64.0) + vectorscale((0, 0, -1), 100000.0), 0, self)["position"];
   e_temp = spawn("script_model", v_spawn);
-  e_temp setmodel("tag_origin");
+  e_temp setModel("tag_origin");
   e_temp.targetname = str_turret_name + "_lighting_origin";
   set_lighting_pair(str_turret_name, e_temp.targetname);
   self waittill("death");
@@ -326,7 +326,7 @@ elevator_models_link() {
 }
 
 model_to_struct() {
-  s_temp = spawnstruct();
+  s_temp = spawnStruct();
   self _copy_kvps_to_target(s_temp);
   return s_temp;
 }
@@ -346,7 +346,7 @@ _copy_kvps_to_target(target) {
     target.angles = (0, 0, 0);
 
   if(isDefined(self.model_name))
-    target setmodel(self.model_name);
+    target setModel(self.model_name);
 
   if(isDefined(self.model) && self.classname == "script_model")
     target.model_name = self.model;
@@ -515,7 +515,7 @@ run_distant_explosions() {
     duration = randomfloatrange(1.5, 3);
     level thread light_flicker_fx(duration);
     level thread light_flicker(duration);
-    level.player playsound("exp_carrier_impact");
+    level.player playSound("exp_carrier_impact");
     playrumbleonposition(str_rumble, level.player.origin + vectorscale((1, 0, 0), 256.0));
     earthquake(size, duration, level.player.origin, 100);
     wait(randomfloatrange(10.0, 20.0));
@@ -567,7 +567,7 @@ run_turret_damage() {
 pull_player_off_turret_when_destroyed(turret, original_origin, original_angles) {
   turret endon("turret_exited");
   turret waittill_any("death");
-  level.player playsound("veh_cic_turret_plr_death");
+  level.player playSound("veh_cic_turret_plr_death");
   flag_clear("player_using_turret");
 
   if(isDefined(turret.m_turret_callback))
@@ -692,18 +692,16 @@ turret_hack_rumble() {
   earthquake(0.1, 1, self.origin, 1000, self);
 }
 
-become_vulnerable_callback(ai) {
-}
+become_vulnerable_callback(ai) {}
 
-become_invulnerable_callback(ai) {
-}
+become_invulnerable_callback(ai) {}
 
 #using_animtree("animated_props");
 #using_animtree("player");
 #using_animtree("animated_props");
 
 init_hackable_turrets() {
-  trigs = getentarray("turret_trigger", "targetname");
+  trigs = getEntArray("turret_trigger", "targetname");
 
   for(i = 0; i < trigs.size; i++) {
     turret = getent(trigs[i].target, "targetname");
@@ -780,7 +778,7 @@ precache_player_models() {
 get_furthest_offscreen(array) {
   best_choice_dot = 2.0;
   best_choice = undefined;
-  fvec = anglestoforward(level.player.angles);
+  fvec = anglesToForward(level.player.angles);
 
   foreach(obj in array) {
     to_obj = vectornormalize(obj.origin - level.player.origin);
@@ -807,8 +805,8 @@ set_player_menendez() {
   level.player enableinvulnerability();
   setdvar("scr_damagefeedback", 0);
   setsaveddvar("vc_LUT", 6);
-  mason_trigs = getentarray("mason_only_trigger", "script_noteworthy");
-  menendez_trigs = getentarray("menendez_only_trigger", "script_noteworthy");
+  mason_trigs = getEntArray("mason_only_trigger", "script_noteworthy");
+  menendez_trigs = getEntArray("menendez_only_trigger", "script_noteworthy");
   array_func(mason_trigs, ::trigger_off);
   array_func(menendez_trigs, ::trigger_on);
   mason_nodes = getnodearray("mason_only_node", "script_noteworthy");
@@ -819,7 +817,7 @@ set_player_menendez() {
   level.player_interactive_model = "c_mul_menendez_captured_viewbody";
   level.player_viewmodel = "c_mul_menendez_captured_viewbody";
   level.player setviewmodel("c_mul_menendez_captured_viewhands");
-  luinotifyevent(&"hud_update_vehicle_custom", 2, 1, & "menendez_no_hud");
+  luinotifyevent(&"hud_update_vehicle_custom", 2, 1, &"menendez_no_hud");
   maps\_friendlyfire::turnoff();
 }
 
@@ -834,8 +832,8 @@ set_player_mason(initial_setup) {
   setsaveddvar("g_speed", 190);
   setdvar("scr_damagefeedback", 1);
   setsaveddvar("vc_LUT", 0);
-  mason_trigs = getentarray("mason_only_trigger", "script_noteworthy");
-  menendez_trigs = getentarray("menendez_only_trigger", "script_noteworthy");
+  mason_trigs = getEntArray("mason_only_trigger", "script_noteworthy");
+  menendez_trigs = getEntArray("menendez_only_trigger", "script_noteworthy");
   array_func(mason_trigs, ::trigger_on);
   array_func(menendez_trigs, ::trigger_off);
   mason_nodes = getnodearray("mason_only_node", "script_noteworthy");
@@ -965,7 +963,7 @@ waittill_player_nearby(distance, override_notify, distance_2d, do_trace) {
 kill_behind_player(forward_struct) {
   self endon("death");
   room_dir_struct = getstruct(forward_struct, "targetname");
-  forward = anglestoforward(room_dir_struct.angles);
+  forward = anglesToForward(room_dir_struct.angles);
 
   do {
     wait_network_frame();
@@ -1092,7 +1090,7 @@ init_spawner_teams() {
   team_names[2] = "team3";
 
   for(j = 0; j < team_names.size; j++) {
-    spawners = getentarray(team_names[j], "script_noteworthy");
+    spawners = getEntArray(team_names[j], "script_noteworthy");
 
     for(i = 0; i < spawners.size; i++)
       spawners[i] add_spawn_function(::assign_scripted_team, team_names[j]);
@@ -1105,8 +1103,8 @@ trigger_wait_facing(str_trigger_name, max_facing_angle_degrees) {
 
   do {
     t_trigger waittill("trigger");
-    player_fvec = anglestoforward(level.player.angles);
-    trigger_fvec = anglestoforward(t_trigger.angles);
+    player_fvec = anglesToForward(level.player.angles);
+    trigger_fvec = anglesToForward(t_trigger.angles);
   }
   while(vectordot(player_fvec, trigger_fvec) < max_dot);
 }
@@ -1141,22 +1139,22 @@ min_val(a, b) {
 
 welding_fx(str_wait_scene) {
   fxorg = spawn("script_model", (0, 0, 0));
-  fxorg setmodel("tag_origin");
+  fxorg setModel("tag_origin");
   wait 0.1;
   fxorg.origin = self gettagorigin("tag_fx");
   fxorg.angles = self gettagangles("tag_fx");
   fxorg linkto(self, "tag_fx");
   self play_fx("laser_cutter_sparking", undefined, undefined, "stop_fx", 1, "tag_fx");
   self play_fx("fx_laser_cutter_on", undefined, undefined, "stop_fx", 1, "tag_fx");
-  fxorg playsound("evt_vent_cutter_start");
-  fxorg playloopsound("evt_vent_cutter_loop", 1);
+  fxorg playSound("evt_vent_cutter_start");
+  fxorg playLoopSound("evt_vent_cutter_loop", 1);
 
   if(isDefined(str_wait_scene))
     scene_wait(str_wait_scene);
 
   wait 3;
   fxorg stoploopsound(1);
-  fxorg playsound("evt_vent_cutter_end");
+  fxorg playSound("evt_vent_cutter_end");
   wait 1;
   self notify("stop_fx");
 }
@@ -1251,8 +1249,7 @@ retrieve_story_stats() {
   level.is_farid_alive = !level.player get_story_stat("FARID_DEAD_IN_YEMEN");
   level.is_harper_alive = !level.player get_story_stat("HARPER_DEAD_IN_YEMEN");
 
-  if(level.is_farid_alive == level.is_harper_alive) {
-  }
+  if(level.is_farid_alive == level.is_harper_alive) {}
 
   if(level.is_harper_alive && level.player get_story_stat("HARPER_SCARRED")) {
     sp_harper = get_ent("harper", "targetname", 1);
@@ -1310,7 +1307,7 @@ defalco_knife_bloody() {
 
 defalco_body_bloody() {
   if(is_mature())
-    self setmodel("c_mul_yemen_defalco_bloody_body");
+    self setModel("c_mul_yemen_defalco_bloody_body");
 }
 
 farid_body_shot() {
@@ -1330,7 +1327,7 @@ menendez_bloody_version() {
     }
 
     if(isassetloaded("xmodel", "c_mul_menendez_old_captured_body_bld"))
-      self setmodel("c_mul_menendez_old_captured_body_bld");
+      self setModel("c_mul_menendez_old_captured_body_bld");
   }
 }
 
@@ -1446,7 +1443,7 @@ sea_cowbell() {
   if(flag("sea_cowbell_running")) {
     return;
   }
-  launcher_list = getentarray("launcher", "targetname");
+  launcher_list = getEntArray("launcher", "targetname");
   level.boats_already_spawned = 1;
   array_thread(launcher_list, ::_aircraft_launcher_logic);
 }
@@ -1538,11 +1535,11 @@ _boat_death() {
 _aircraft_launcher_logic() {
   level endon("stop_ambient_shooting_at_boats");
   self veh_magic_bullet_shield();
-  v_launcher_forward = anglestoforward(self.angles);
+  v_launcher_forward = anglesToForward(self.angles);
 
   while(true) {
     if(level.fire_at_drones) {
-      a_drone_vehicles = getentarray("drone_turret_targets", "script_noteworthy");
+      a_drone_vehicles = getEntArray("drone_turret_targets", "script_noteworthy");
 
       if(a_drone_vehicles.size > 0) {
         n_dot_to_drones = 0;
@@ -1639,7 +1636,7 @@ _phalanx_cannon_think(str_target) {
 
   while(true) {
     if(isDefined(str_target)) {
-      a_e_targets = getentarray(str_target, "script_noteworthy");
+      a_e_targets = getEntArray(str_target, "script_noteworthy");
       v_offset = (randomintrange(-16, 16), randomintrange(-16, 16), randomintrange(-64, 128));
     } else {
       a_e_targets = level.a_e_phalanx_cannon_targets;
@@ -1650,7 +1647,7 @@ _phalanx_cannon_think(str_target) {
       e_target = random(a_e_targets);
 
       if(isDefined(e_target)) {
-        if(vectordot(anglestoforward(self.angles), vectornormalize(e_target.origin - self.origin)) > 0.4) {
+        if(vectordot(anglesToForward(self.angles), vectornormalize(e_target.origin - self.origin)) > 0.4) {
           self set_turret_target(e_target, v_offset, 0);
           wait(randomfloatrange(2, 5));
           self fire_turret_for_time(randomfloatrange(0.1, 1), 0);
@@ -1666,8 +1663,8 @@ phalanx_cannon_target_update() {
   level endon("kill_phalanx_cannons");
 
   while(true) {
-    a_e_targets = getentarray("allied_vehicle", "script_noteworthy");
-    a_m_ambient = getentarray("ambient_ship_spot", "script_noteworthy");
+    a_e_targets = getEntArray("allied_vehicle", "script_noteworthy");
+    a_m_ambient = getEntArray("ambient_ship_spot", "script_noteworthy");
     level.a_e_phalanx_cannon_targets = arraycombine(a_e_targets, a_m_ambient, 1, 0);
     wait 0.1;
   }
@@ -1680,7 +1677,7 @@ end_bridge_launchers() {
 
 _bridge_launcher_logic(n_index) {
   level endon("stop_bridge_launchers");
-  v_launcher_forward = anglestoforward(self.angles);
+  v_launcher_forward = anglesToForward(self.angles);
   a_battleship_structs = getstructarray("battleship_end", "targetname");
 
   if(a_battleship_structs.size == 0) {
@@ -1702,7 +1699,7 @@ _bridge_launcher_logic(n_index) {
     n_dot_to_struct = vectordot(v_launcher_forward, vectornormalize(s_battleship_end.origin - self.origin));
 
     if(n_dot_to_struct > 0.4) {
-      v_battleship_forward = anglestoforward(s_battleship_end.angles);
+      v_battleship_forward = anglesToForward(s_battleship_end.angles);
       v_rand_target_pos = s_battleship_end.origin + v_battleship_forward * randomint(11264);
       self settargetorigin(v_rand_target_pos);
       self waittill("turret_on_target");
@@ -1778,14 +1775,14 @@ notetrack_fxanim_f38_fires_guns(m_f38) {
   str_weapon = "f35_side_minigun";
 
   while(isDefined(m_f38)) {
-    v_angles_forward = anglestoforward(m_f38.angles) * 200;
+    v_angles_forward = anglesToForward(m_f38.angles) * 200;
     v_left_start = m_f38 gettagorigin(str_tag_turret_left);
     v_left_end = v_left_start + v_angles_forward;
-    playfxontag(level._effect["fx_f38_turret_flash"], m_f38, str_tag_turret_left);
+    playFXOnTag(level._effect["fx_f38_turret_flash"], m_f38, str_tag_turret_left);
     magicbullet(str_weapon, v_left_start, v_left_end);
     v_right_start = m_f38 gettagorigin(str_tag_turret_right);
     v_right_end = v_right_start + v_angles_forward;
-    playfxontag(level._effect["fx_f38_turret_flash"], m_f38, str_tag_turret_right);
+    playFXOnTag(level._effect["fx_f38_turret_flash"], m_f38, str_tag_turret_right);
     magicbullet(str_weapon, v_right_start, v_right_end);
     wait 0.1;
   }
@@ -1844,12 +1841,12 @@ setup_extra_cams() {
 fxanim_play_fx_think(str_joint, str_notify, str_fx) {
   while(true) {
     self waittill(str_notify);
-    playfxontag(level._effect[str_fx], self, str_joint);
+    playFXOnTag(level._effect[str_fx], self, str_joint);
   }
 }
 
 fxanim_play_fx(str_model_targetname, str_joint, str_notify, str_fx) {
-  e_models = getentarray(str_model_targetname, "targetname");
+  e_models = getEntArray(str_model_targetname, "targetname");
 
   foreach(e_model in e_models)
   e_model thread fxanim_play_fx_think(str_joint, str_notify, str_fx);
@@ -1865,7 +1862,7 @@ play_spark_fx(e_wire) {
 
   }
 
-  playfxontag(level._effect["fx_wire_spark"], e_wire, str_tag);
+  playFXOnTag(level._effect["fx_wire_spark"], e_wire, str_tag);
 }
 
 init_fxanims() {
@@ -1888,14 +1885,14 @@ init_flags() {
 }
 
 hide_fa38_elevator_fxanim_model() {
-  models = getentarray("black_elevator_debris", "script_string");
+  models = getEntArray("black_elevator_debris", "script_string");
 
   for(i = 0; i < models.size; i++)
     models[i] hide();
 }
 
 show_fa38_elevator_fxanim_model() {
-  models = getentarray("black_elevator_debris", "script_string");
+  models = getEntArray("black_elevator_debris", "script_string");
 
   for(i = 0; i < models.size; i++)
     models[i] show();
@@ -2046,7 +2043,7 @@ kill_guys(a_ai, str_targetname) {
 }
 
 cleanup_ents(str_value, str_key) {
-  a_e_ents = getentarray(str_value, str_key);
+  a_e_ents = getEntArray(str_value, str_key);
   array_delete(a_e_ents);
 }
 
@@ -2284,9 +2281,9 @@ init_ambient_oneoff_models(str_start_struct) {
 }
 
 kill_ambient_models() {
-  a_m_ships = getentarray("ambient_ship_spot", "script_noteworthy");
-  a_m_oneoffs = getentarray("oneoff_ambient_ship_spot", "script_noteworthy");
-  a_m_right_oneoffs = getentarray("oneoff_starboard_ambient_ship_spot", "script_noteworthy");
+  a_m_ships = getEntArray("ambient_ship_spot", "script_noteworthy");
+  a_m_oneoffs = getEntArray("oneoff_ambient_ship_spot", "script_noteworthy");
+  a_m_right_oneoffs = getEntArray("oneoff_starboard_ambient_ship_spot", "script_noteworthy");
   a_m_models = arraycombine(a_m_ships, a_m_oneoffs, 1, 0);
   a_m_models = arraycombine(a_m_models, a_m_right_oneoffs, 1, 0);
   level notify("kill_ambient_models");
@@ -2334,13 +2331,13 @@ _create_fake_vehicle_and_go_path() {
 _setup_fake_vehicle_model() {
   assert(isDefined(self.script_string), "script_string value is missing on fake_ambient_vehicle_spline at " + self.origin + ". This is used to determine the model of a fake vehicle spawner.");
   m_temp = spawn("script_model", self.origin);
-  m_temp setmodel(self.script_string);
+  m_temp setModel(self.script_string);
   m_temp setforcenocull();
 
   switch (self.script_string) {
     case "veh_t6_air_fa38":
     case "veh_t6_air_fa38_low":
-      playfxontag(level._effect["f35_exhaust_fly"], m_temp, "origin_animate_jnt");
+      playFXOnTag(level._effect["f35_exhaust_fly"], m_temp, "origin_animate_jnt");
       m_temp playsoundontag("evt_fake_flyby", "origin_animate_jnt");
       break;
     default:
@@ -2533,7 +2530,7 @@ spawn_script_model_at_struct(str_start_struct, s_start_spot) {
     s_start_spot = getstruct(str_start_struct, "targetname");
 
   m_script_model = spawn("script_model", s_start_spot.origin);
-  m_script_model setmodel(s_start_spot.model);
+  m_script_model setModel(s_start_spot.model);
   m_script_model.angles = s_start_spot.angles;
   m_script_model.targetname = s_start_spot.targetname + "_model";
   m_script_model.script_noteworthy = s_start_spot.script_noteworthy;
@@ -2627,7 +2624,7 @@ play_fake_flyby() {
   sound_ent = spawn("script_origin", self.origin);
   sound_ent linkto(self, "tag_body");
   wait(randomfloatrange(1, 3));
-  sound_ent playsound("evt_fake_flyby");
+  sound_ent playSound("evt_fake_flyby");
   self waittill("reached_end_node");
   sound_ent delete();
 }
@@ -2654,7 +2651,7 @@ ambient_drone_die() {
     return;
   }
   if(!isDefined(self.delete_on_death) && isDefined(level._effect["fireball_trail_lg"])) {
-    playfxontag(level._effect["fireball_trail_lg"], self, "tag_origin");
+    playFXOnTag(level._effect["fireball_trail_lg"], self, "tag_origin");
     playsoundatposition("evt_pegasus_explo", self.origin);
     wait 5;
 
@@ -3317,7 +3314,7 @@ save_restored_callback() {
 
   if(isDefined(level.player_is_menendez) && level.player_is_menendez) {
     wait 1;
-    luinotifyevent(&"hud_update_vehicle_custom", 2, 1, & "menendez_no_hud");
+    luinotifyevent(&"hud_update_vehicle_custom", 2, 1, &"menendez_no_hud");
   }
 }
 

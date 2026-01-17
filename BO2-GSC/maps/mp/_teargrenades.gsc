@@ -41,7 +41,7 @@ monitortearusage() {
       num = prevammo - ammo;
 
       for(i = 0; i < num; i++) {
-        grenades = getentarray("grenade", "classname");
+        grenades = getEntArray("grenade", "classname");
         bestdist = undefined;
         bestg = undefined;
 
@@ -70,7 +70,7 @@ monitortearusage() {
 
 teargrenade_think(team) {
   wait(level.teargrenadetimer);
-  ent = spawnstruct();
+  ent = spawnStruct();
   ent thread tear(self.origin);
 }
 

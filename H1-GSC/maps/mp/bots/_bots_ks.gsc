@@ -7,7 +7,7 @@
 bot_killstreak_setup() {
   var_0 = gettime();
 
-  if(!isdefined(level.killstreak_botfunc)) {
+  if(!isDefined(level.killstreak_botfunc)) {
     bot_register_killstreak_func("radar_mp", ::bot_killstreak_simple_use, ::bot_can_use_uav);
     bot_register_killstreak_func("airstrike_mp", ::bot_killstreak_choose_loc_enemies, ::bot_can_use_airstrike);
     bot_register_killstreak_func("helicopter_mp", ::bot_killstreak_simple_use, ::bot_can_use_helicopter);
@@ -15,22 +15,22 @@ bot_killstreak_setup() {
 }
 
 bot_register_killstreak_func(var_0, var_1, var_2, var_3) {
-  if(!isdefined(level.killstreak_botfunc))
+  if(!isDefined(level.killstreak_botfunc))
     level.killstreak_botfunc = [];
 
   level.killstreak_botfunc[var_0] = var_1;
 
-  if(!isdefined(level.killstreak_botcanuse))
+  if(!isDefined(level.killstreak_botcanuse))
     level.killstreak_botcanuse = [];
 
   level.killstreak_botcanuse[var_0] = var_2;
 
-  if(!isdefined(level.killstreak_botparm))
+  if(!isDefined(level.killstreak_botparm))
     level.killstreak_botparm = [];
 
   level.killstreak_botparm[var_0] = var_3;
 
-  if(!isdefined(level.bot_supported_killstreaks))
+  if(!isDefined(level.bot_supported_killstreaks))
     level.bot_supported_killstreaks = [];
 
   level.bot_supported_killstreaks[level.bot_supported_killstreaks.size] = var_0;
@@ -43,38 +43,36 @@ bot_think_killstreak() {
   self endon("disconnect");
   level endon("game_ended");
 
-  while (!isdefined(level.killstreak_botfunc))
+  while(!isDefined(level.killstreak_botfunc))
     wait 0.05;
 
-  for (;;) {
+  for(;;) {
     wait(randomfloatrange(2.0, 4.0));
 
     if(maps\mp\bots\_bots_util::bot_allowed_to_use_killstreaks()) {
       var_0 = self.pers["hardPointItem"];
 
-      if(isdefined(var_0)) {
-        if(isdefined(self.bot_killstreak_wait) && isdefined(self.bot_killstreak_wait[var_0]) && gettime() < self.bot_killstreak_wait[var_0]) {
+      if(isDefined(var_0)) {
+        if(isDefined(self.bot_killstreak_wait) && isDefined(self.bot_killstreak_wait[var_0]) && gettime() < self.bot_killstreak_wait[var_0]) {
           continue;
         }
         var_1 = level.killstreak_botcanuse[var_0];
 
-        if(isdefined(var_1) && !self[[var_1]](var_0)) {
+        if(isDefined(var_1) && !self[[var_1]](var_0)) {
           continue;
         }
         var_2 = level.killstreak_botfunc[var_0];
 
-        if(isdefined(var_2)) {
+        if(isDefined(var_2)) {
           var_3 = self[[var_2]](var_0, var_1);
 
-          if(!isdefined(var_3) || var_3 == 0) {
-            if(!isdefined(self.bot_killstreak_wait))
+          if(!isDefined(var_3) || var_3 == 0) {
+            if(!isDefined(self.bot_killstreak_wait))
               self.bot_killstreak_wait = [];
 
             self.bot_killstreak_wait[var_0] = gettime() + 5000;
           }
-        } else {
-
-        }
+        } else {}
       }
     }
   }
@@ -94,14 +92,14 @@ bot_can_use_uav(var_0) {
 }
 
 bot_can_use_airstrike(var_0) {
-  if(isdefined(level.airstrikeinprogress))
+  if(isDefined(level.airstrikeinprogress))
     return 0;
 
   return 1;
 }
 
 bot_can_use_helicopter(var_0) {
-  if(isdefined(level.chopper))
+  if(isDefined(level.chopper))
     return 0;
 
   return 1;
@@ -113,7 +111,7 @@ bot_killstreak_simple_use(var_0, var_1) {
   if(!maps\mp\bots\_bots_util::bot_allowed_to_use_killstreaks())
     return 1;
 
-  if(isdefined(var_1) && !self[[var_1]](var_0))
+  if(isDefined(var_1) && !self[[var_1]](var_0))
     return 0;
 
   bot_switch_to_killstreak_weapon(var_0);
@@ -134,20 +132,20 @@ bot_killstreak_get_zone_enemies() {
 
   var_4 = [];
 
-  for (var_5 = 0; var_5 < level.zonecount; var_5++)
+  for(var_5 = 0; var_5 < level.zonecount; var_5++)
     var_4[var_5] = [];
 
   foreach(var_7 in var_0) {
     var_8 = var_7 getnearestnode();
 
-    if(!isdefined(var_8)) {
+    if(!isDefined(var_8)) {
       var_9 = getnodesinradiussorted(var_7.origin, 256, 0);
 
       if(var_9.size > 0)
         var_8 = var_9[0];
     }
 
-    if(isdefined(var_8)) {
+    if(isDefined(var_8)) {
       var_10 = getnodezone(var_8);
       var_4[var_10] = common_scripts\utility::array_add(var_4[var_10], var_7);
     }
@@ -164,17 +162,17 @@ bot_killstreak_choose_loc_enemies(var_0, var_1) {
   }
   var_2 = getzonenearest(self.origin);
 
-  if(!isdefined(var_2)) {
+  if(!isDefined(var_2)) {
     return;
   }
-  if(isdefined(var_1) && !self[[var_1]](var_0))
+  if(isDefined(var_1) && !self[[var_1]](var_0))
     return 0;
 
   self botsetflag("disable_movement", 1);
   bot_switch_to_killstreak_weapon(var_0);
   wait 2.0;
 
-  if(!isdefined(self.selectinglocation)) {
+  if(!isDefined(self.selectinglocation)) {
     self botsetflag("disable_movement", 0);
     return;
   }
@@ -188,9 +186,9 @@ bot_killstreak_choose_loc_enemies(var_0, var_1) {
   var_9 = [];
   var_10 = [];
 
-  for (var_11 = 0; var_11 < level.zonecount; var_11++) {
+  for(var_11 = 0; var_11 < level.zonecount; var_11++) {
     if(var_11 != var_2 && botzonegetindoorpercent(var_11) < 0.25) {
-      var_12 = spawnstruct();
+      var_12 = spawnStruct();
       var_12.zonenum = var_11;
       var_12.disttomapcenter = distance(level.bot_map_center, getzoneorigin(var_11));
       var_13 = [];
@@ -202,7 +200,7 @@ bot_killstreak_choose_loc_enemies(var_0, var_1) {
           continue;
         }
 
-        if(isdefined(var_16.lastshotfiredtime) && gettime() - var_16.lastshotfiredtime < 1500) {
+        if(isDefined(var_16.lastshotfiredtime) && gettime() - var_16.lastshotfiredtime < 1500) {
           if(!isweaponsilenced(var_16 getcurrentweapon()))
             var_13[var_13.size] = var_16;
         }
@@ -238,7 +236,7 @@ bot_killstreak_choose_loc_enemies(var_0, var_1) {
     var_27 = randomfloat(var_24);
     var_28 = undefined;
 
-    for (var_29 = 0; var_27 >= 0; var_29++) {
+    for(var_29 = 0; var_27 >= 0; var_29++) {
       var_28 = var_23[var_29];
       var_27 = var_27 - var_28.weight;
     }
@@ -258,7 +256,7 @@ bot_killstreak_choose_loc_enemies(var_0, var_1) {
       var_35 = var_34[0].origin;
     }
 
-    if(isdefined(var_33))
+    if(isDefined(var_33))
       var_35 = var_33.origin;
     else
       var_35 = var_30;
@@ -278,15 +276,15 @@ bot_think_watch_aerial_killstreak() {
   self endon("disconnect");
   level endon("game_ended");
 
-  if(!isdefined(level.last_global_badplace_time))
+  if(!isDefined(level.last_global_badplace_time))
     level.last_global_badplace_time = -10000;
 
-  if(!isdefined(level.killstreak_global_bp_exists_for)) {
+  if(!isDefined(level.killstreak_global_bp_exists_for)) {
     level.killstreak_global_bp_exists_for["allies"] = [];
     level.killstreak_global_bp_exists_for["axis"] = [];
   }
 
-  if(!isdefined(level.aerial_danger_exists_for)) {
+  if(!isDefined(level.aerial_danger_exists_for)) {
     level.aerial_danger_exists_for["allies"] = 0;
     level.aerial_danger_exists_for["axis"] = 0;
   }
@@ -294,7 +292,7 @@ bot_think_watch_aerial_killstreak() {
   var_0 = 0;
   var_1 = randomfloatrange(0.05, 4.0);
 
-  for (;;) {
+  for(;;) {
     wait(var_1);
     var_1 = randomfloatrange(0.05, 4.0);
 
@@ -307,7 +305,7 @@ bot_think_watch_aerial_killstreak() {
     var_2 = 0;
     var_3 = get_enemy_helicopter(self.team);
 
-    if(isdefined(var_3)) {
+    if(isDefined(var_3)) {
       var_2 = 1;
 
       if(!bot_is_monitoring_aerial_danger(var_3))
@@ -336,20 +334,20 @@ bot_think_watch_aerial_killstreak() {
 }
 
 bot_is_monitoring_aerial_danger(var_0) {
-  if(!isdefined(self.aerial_dangers_monitoring))
+  if(!isDefined(self.aerial_dangers_monitoring))
     return 0;
 
   return common_scripts\utility::array_contains(self.aerial_dangers_monitoring, var_0);
 }
 
 monitor_aerial_danger(var_0) {
-  if(!isdefined(self.aerial_dangers_monitoring))
+  if(!isDefined(self.aerial_dangers_monitoring))
     self.aerial_dangers_monitoring = [];
 
   self.aerial_dangers_monitoring[self.aerial_dangers_monitoring.size] = var_0;
   var_1 = vectornormalize((var_0.origin - self.origin) * (1, 1, 0));
 
-  while (isalive(var_0)) {
+  while(isalive(var_0)) {
     var_2 = vectornormalize((var_0.origin - self.origin) * (1, 1, 0));
     var_3 = vectordot(var_1, var_2);
 
@@ -365,7 +363,7 @@ monitor_aerial_danger(var_0) {
 }
 
 try_place_global_badplace(var_0, var_1) {
-  if(!isdefined(level.killstreak_global_bp_exists_for[self.team][var_0]))
+  if(!isDefined(level.killstreak_global_bp_exists_for[self.team][var_0]))
     level.killstreak_global_bp_exists_for[self.team][var_0] = 0;
 
   if(!level.killstreak_global_bp_exists_for[self.team][var_0]) {
@@ -377,9 +375,7 @@ try_place_global_badplace(var_0, var_1) {
 monitor_enemy_dangerous_killstreak(var_0, var_1, var_2) {
   var_3 = 0.5;
 
-  while ([
-      [var_2]
-    ](var_0)) {
+  while([[var_2]](var_0)) {
     if(gettime() > level.last_global_badplace_time + 4000) {
       badplace_global("", 5.0, var_0, "only_sky");
       level.last_global_badplace_time = gettime();
@@ -392,7 +388,7 @@ monitor_enemy_dangerous_killstreak(var_0, var_1, var_2) {
 }
 
 get_enemy_helicopter(var_0) {
-  if(isdefined(level.chopper)) {
+  if(isDefined(level.chopper)) {
     if(level.teambased) {
       if(level.chopper.team != var_0)
         return level.chopper;
@@ -404,7 +400,7 @@ get_enemy_helicopter(var_0) {
 }
 
 enemy_airstrike_exists(var_0) {
-  if(isdefined(level.artillerydangercenters)) {
+  if(isDefined(level.artillerydangercenters)) {
     foreach(var_2 in level.artillerydangercenters) {
       if(level.teambased) {
         if(var_2.team != var_0)

@@ -56,9 +56,7 @@ debug_nuke() {
 
     if(common_scripts\utility::flag_exist("cortex_started") && common_scripts\utility::flag("cortex_started")) {
       if(isDefined(level.add_cortex_charge_func)) {
-        [
-          [level.add_cortex_charge_func]
-        ](amount);
+        [[level.add_cortex_charge_func]](amount);
       }
     }
 
@@ -70,9 +68,7 @@ debug_nuke() {
   }
 
   if(isDefined(level.dlc_get_non_agent_enemies)) {
-    alive_non_agents = [
-      [level.dlc_get_non_agent_enemies]
-    ]();
+    alive_non_agents = [[level.dlc_get_non_agent_enemies]]();
     foreach(alive_enemy in alive_non_agents) {
       alive_enemy notify("death");
     }

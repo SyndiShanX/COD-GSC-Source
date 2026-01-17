@@ -15,7 +15,6 @@
 #include scripts\zm_common\gametypes\globallogic_audio;
 #include scripts\zm_common\gametypes\globallogic_utils;
 #include scripts\zm_common\util;
-
 #namespace globallogic_score;
 
 gethighestscoringplayer() {
@@ -58,7 +57,7 @@ resetscorechain() {
 
 scorechaintimer() {
   self notify(#"score_chain_timer");
-  self endon(#"reset_score_chain", #"score_chain_timer", #"death", #"disconnect");
+  self endon(#"reset_score_chain", # "score_chain_timer", # "death", # "disconnect");
   wait 20;
   self thread resetscorechain();
 }
@@ -103,7 +102,7 @@ giveplayermomentumnotification(score, label, descvalue, countstowardrampage) {
     score = roundtonearestfive(int(score * getdvarfloat(#"perk_killstreakmomentummultiplier", 0) + 0.5));
   }
 
-  _setplayermomentum(self, self.pers[#"momentum"] + score);
+  _setplayermomentum(self, self.pers[# "momentum"] + score);
 }
 
 resetplayermomentumondeath() {
@@ -142,12 +141,12 @@ default_onplayerscore(event, player, victim) {}
 _setplayerscore(player, score) {}
 
 _getplayerscore(player) {
-  return player.pers[#"score"];
+  return player.pers[# "score"];
 }
 
 _setplayermomentum(player, momentum) {
   momentum = math::clamp(momentum, 0, 2000);
-  oldmomentum = player.pers[#"momentum"];
+  oldmomentum = player.pers[# "momentum"];
 
   if(momentum == oldmomentum) {
     return;
@@ -161,8 +160,8 @@ _setplayermomentum(player, momentum) {
     killstreaktypearray = [];
   }
 
-  player.pers[#"momentum"] = momentum;
-  player.momentum = player.pers[#"momentum"];
+  player.pers[# "momentum"] = momentum;
+  player.momentum = player.pers[# "momentum"];
 }
 
 _giveplayerkillstreakinternal(player, momentum, oldmomentum, killstreaktypearray) {}
@@ -188,37 +187,37 @@ setplayermomentumdebug() {
   }
 }
 
-  function giveteamscore(event, team, player, victim) {
-    if(level.overrideteamscore) {
-      return;
-    }
-
-    pixbeginevent(#"hash_66d4a941ef078585");
-    teamscore = game.stat[#"teamscores"][team];
-    [[level.onteamscore]](event, team);
-    pixendevent();
-    newscore = game.stat[#"teamscores"][team];
-    zmteamscores = {
-      #gametime: function_f8d53445(), 
-      #event: event, 
-      #team: team, 
-      #diff: newscore - teamscore, 
-      #score: newscore
-    };
-    function_92d1707f(#"hash_6823717ff11a304a", zmteamscores);
-
-    if(teamscore == newscore) {
-      return;
-    }
-
-    updateteamscores(team);
-    thread globallogic::checkscorelimit();
+function giveteamscore(event, team, player, victim) {
+  if(level.overrideteamscore) {
+    return;
   }
 
+  pixbeginevent(#"hash_66d4a941ef078585");
+  teamscore = game.stat[# "teamscores"][team];
+  [[level.onteamscore]](event, team);
+  pixendevent();
+  newscore = game.stat[# "teamscores"][team];
+  zmteamscores = {
+    #gametime: function_f8d53445(),
+    #event: event,
+    #team: team,
+    #diff: newscore - teamscore,
+    #score: newscore
+  };
+  function_92d1707f(#"hash_6823717ff11a304a", zmteamscores);
+
+  if(teamscore == newscore) {
+    return;
+  }
+
+  updateteamscores(team);
+  thread globallogic::checkscorelimit();
+}
+
 giveteamscoreforobjective(team, score) {
-  teamscore = game.stat[#"teamscores"][team];
+  teamscore = game.stat[# "teamscores"][team];
   onteamscore(score, team);
-  newscore = game.stat[#"teamscores"][team];
+  newscore = game.stat[# "teamscores"][team];
 
   if(teamscore == newscore) {
     return;
@@ -229,11 +228,11 @@ giveteamscoreforobjective(team, score) {
 }
 
 _setteamscore(team, teamscore) {
-  if(teamscore == game.stat[#"teamscores"][team]) {
+  if(teamscore == game.stat[# "teamscores"][team]) {
     return;
   }
 
-  game.stat[#"teamscores"][team] = teamscore;
+  game.stat[# "teamscores"][team] = teamscore;
   updateteamscores(team);
   thread globallogic::checkscorelimit();
 }
@@ -241,7 +240,7 @@ _setteamscore(team, teamscore) {
 resetteamscores() {
   if(level.scoreroundwinbased || util::isfirstround()) {
     foreach(team, _ in level.teams) {
-      game.stat[#"teamscores"][team] = 0;
+      game.stat[# "teamscores"][team] = 0;
     }
   }
 
@@ -259,14 +258,14 @@ resetplayerscores() {
   tie = 0;
 
   for(i = 0; i < players.size; i++) {
-    if(isDefined(players[i].pers[#"score"])) {
+    if(isDefined(players[i].pers[# "score"])) {
       _setplayerscore(players[i], 0);
     }
   }
 }
 
 updateteamscores(team) {
-  setteamscore(team, game.stat[#"teamscores"][team]);
+  setteamscore(team, game.stat[# "teamscores"][team]);
   level thread globallogic::checkteamscorelimitsoon(team);
 }
 
@@ -277,7 +276,7 @@ updateallteamscores() {
 }
 
 _getteamscore(team) {
-  return game.stat[#"teamscores"][team];
+  return game.stat[# "teamscores"][team];
 }
 
 gethighestteamscoreteam() {
@@ -285,7 +284,7 @@ gethighestteamscoreteam() {
   winning_teams = [];
 
   foreach(team, _ in level.teams) {
-    team_score = game.stat[#"teamscores"][team];
+    team_score = game.stat[# "teamscores"][team];
 
     if(team_score > score) {
       score = team_score;
@@ -315,10 +314,10 @@ areteamarraysequal(teamsa, teamsb) {
 }
 
 onteamscore(score, team) {
-  game.stat[#"teamscores"][team] += score;
+  game.stat[# "teamscores"][team] += score;
 
-  if(level.scorelimit && game.stat[#"teamscores"][team] > level.scorelimit) {
-    game.stat[#"teamscores"][team] = level.scorelimit;
+  if(level.scorelimit && game.stat[# "teamscores"][team] > level.scorelimit) {
+    game.stat[# "teamscores"][team] = level.scorelimit;
   }
 
   if(level.splitscreen) {
@@ -378,7 +377,7 @@ initpersstat(dataname, record_stats, init_to_stat_value) {
   }
 
   if(isDefined(init_to_stat_value) && init_to_stat_value == 1) {
-    self.pers[dataname] = self stats::get_stat(#"playerstatslist", dataname, #"statvalue");
+    self.pers[dataname] = self stats::get_stat(#"playerstatslist", dataname, # "statvalue");
   }
 }
 
@@ -409,12 +408,12 @@ inckillstreaktracker(weapon) {
   self endon(#"disconnect");
   waittillframeend();
 
-  if(weapon.name == #"artillery") {
-    self.pers[#"artillery_kills"]++;
+  if(weapon.name == # "artillery") {
+    self.pers[# "artillery_kills"]++;
   }
 
-  if(weapon.name == #"dog_bite") {
-    self.pers[#"dog_kills"]++;
+  if(weapon.name == # "dog_bite") {
+    self.pers[# "dog_kills"]++;
   }
 }
 
@@ -424,35 +423,35 @@ trackattackerkill(name, rank, xp, prestige, xuid) {
   waittillframeend();
   pixbeginevent(#"trackattackerkill");
 
-  if(!isDefined(attacker.pers[#"killed_players"][name])) {
-    attacker.pers[#"killed_players"][name] = 0;
+  if(!isDefined(attacker.pers[# "killed_players"][name])) {
+    attacker.pers[# "killed_players"][name] = 0;
   }
 
   if(!isDefined(attacker.killedplayerscurrent[name])) {
     attacker.killedplayerscurrent[name] = 0;
   }
 
-  if(!isDefined(attacker.pers[#"nemesis_tracking"][name])) {
-    attacker.pers[#"nemesis_tracking"][name] = 0;
+  if(!isDefined(attacker.pers[# "nemesis_tracking"][name])) {
+    attacker.pers[# "nemesis_tracking"][name] = 0;
   }
 
-  attacker.pers[#"killed_players"][name]++;
+  attacker.pers[# "killed_players"][name]++;
   attacker.killedplayerscurrent[name]++;
-  attacker.pers[#"nemesis_tracking"][name] += 1;
+  attacker.pers[# "nemesis_tracking"][name] += 1;
 
-  if(attacker.pers[#"nemesis_name"] == name) {
+  if(attacker.pers[# "nemesis_name"] == name) {
     attacker challenges::killednemesis();
   }
 
-  if(attacker.pers[#"nemesis_name"] == "" || attacker.pers[#"nemesis_tracking"][name] > attacker.pers[#"nemesis_tracking"][attacker.pers[#"nemesis_name"]]) {
-    attacker.pers[#"nemesis_name"] = name;
-    attacker.pers[#"nemesis_rank"] = rank;
-    attacker.pers[#"nemesis_rankicon"] = prestige;
-    attacker.pers[#"nemesis_xp"] = xp;
-    attacker.pers[#"nemesis_xuid"] = xuid;
-  } else if(isDefined(attacker.pers[#"nemesis_name"]) && attacker.pers[#"nemesis_name"] == name) {
-    attacker.pers[#"nemesis_rank"] = rank;
-    attacker.pers[#"nemesis_xp"] = xp;
+  if(attacker.pers[# "nemesis_name"] == "" || attacker.pers[# "nemesis_tracking"][name] > attacker.pers[# "nemesis_tracking"][attacker.pers[# "nemesis_name"]]) {
+    attacker.pers[# "nemesis_name"] = name;
+    attacker.pers[# "nemesis_rank"] = rank;
+    attacker.pers[# "nemesis_rankicon"] = prestige;
+    attacker.pers[# "nemesis_xp"] = xp;
+    attacker.pers[# "nemesis_xuid"] = xuid;
+  } else if(isDefined(attacker.pers[# "nemesis_name"]) && attacker.pers[# "nemesis_name"] == name) {
+    attacker.pers[# "nemesis_rank"] = rank;
+    attacker.pers[# "nemesis_xp"] = xp;
   }
 
   pixendevent();
@@ -463,30 +462,30 @@ trackattackeedeath(attackername, rank, xp, prestige, xuid) {
   waittillframeend();
   pixbeginevent(#"trackattackeedeath");
 
-  if(!isDefined(self.pers[#"killed_by"][attackername])) {
-    self.pers[#"killed_by"][attackername] = 0;
+  if(!isDefined(self.pers[# "killed_by"][attackername])) {
+    self.pers[# "killed_by"][attackername] = 0;
   }
 
-  self.pers[#"killed_by"][attackername]++;
+  self.pers[# "killed_by"][attackername]++;
 
-  if(!isDefined(self.pers[#"nemesis_tracking"][attackername])) {
-    self.pers[#"nemesis_tracking"][attackername] = 0;
+  if(!isDefined(self.pers[# "nemesis_tracking"][attackername])) {
+    self.pers[# "nemesis_tracking"][attackername] = 0;
   }
 
-  self.pers[#"nemesis_tracking"][attackername] += 1.5;
+  self.pers[# "nemesis_tracking"][attackername] += 1.5;
 
-  if(self.pers[#"nemesis_name"] == "" || self.pers[#"nemesis_tracking"][attackername] > self.pers[#"nemesis_tracking"][self.pers[#"nemesis_name"]]) {
-    self.pers[#"nemesis_name"] = attackername;
-    self.pers[#"nemesis_rank"] = rank;
-    self.pers[#"nemesis_rankicon"] = prestige;
-    self.pers[#"nemesis_xp"] = xp;
-    self.pers[#"nemesis_xuid"] = xuid;
-  } else if(isDefined(self.pers[#"nemesis_name"]) && self.pers[#"nemesis_name"] == attackername) {
-    self.pers[#"nemesis_rank"] = rank;
-    self.pers[#"nemesis_xp"] = xp;
+  if(self.pers[# "nemesis_name"] == "" || self.pers[# "nemesis_tracking"][attackername] > self.pers[# "nemesis_tracking"][self.pers[# "nemesis_name"]]) {
+    self.pers[# "nemesis_name"] = attackername;
+    self.pers[# "nemesis_rank"] = rank;
+    self.pers[# "nemesis_rankicon"] = prestige;
+    self.pers[# "nemesis_xp"] = xp;
+    self.pers[# "nemesis_xuid"] = xuid;
+  } else if(isDefined(self.pers[# "nemesis_name"]) && self.pers[# "nemesis_name"] == attackername) {
+    self.pers[# "nemesis_rank"] = rank;
+    self.pers[# "nemesis_xp"] = xp;
   }
 
-  if(self.pers[#"nemesis_name"] == attackername && self.pers[#"nemesis_tracking"][attackername] >= 2) {
+  if(self.pers[# "nemesis_name"] == attackername && self.pers[# "nemesis_tracking"][attackername] >= 2) {
     self setclientuivisibilityflag("killcam_nemesis", 1);
   } else {
     self setclientuivisibilityflag("killcam_nemesis", 0);
@@ -504,10 +503,9 @@ givekillstats(smeansofdeath, weapon, evictim) {
   waittillframeend();
 
   if(level.rankedmatch && self[[level.iskillboosting]]()) {
-
     self iprintlnbold("<dev string:x84>");
 
-      return;
+    return;
   }
 
   pixbeginevent(#"givekillstats");
@@ -518,7 +516,7 @@ givekillstats(smeansofdeath, weapon, evictim) {
 
   if(smeansofdeath == "MOD_HEAD_SHOT") {
     attacker thread incpersstat(#"headshots", 1, 1, 0);
-    attacker.headshots = attacker.pers[#"headshots"];
+    attacker.headshots = attacker.pers[# "headshots"];
     evictim recordkillmodifier("headshot");
   }
 
@@ -539,7 +537,7 @@ setinflictorstat(einflictor, eattacker, weapon) {
   }
 
   if(!isDefined(einflictor)) {
-    eattacker stats::function_e24eec31(weapon, #"hits", 1);
+    eattacker stats::function_e24eec31(weapon, # "hits", 1);
     return;
   }
 
@@ -560,10 +558,10 @@ setinflictorstat(einflictor, eattacker, weapon) {
     einflictor.playeraffectedarray[einflictor.playeraffectedarray.size] = self;
 
     if(weapon == "concussion_grenade" || weapon == "tabun_gas") {
-      eattacker stats::function_e24eec31(weapon, #"used", 1);
+      eattacker stats::function_e24eec31(weapon, # "used", 1);
     }
 
-    eattacker stats::function_e24eec31(weapon, #"hits", 1);
+    eattacker stats::function_e24eec31(weapon, # "hits", 1);
   }
 }
 
@@ -573,11 +571,11 @@ processshieldassist(killedplayer) {
   waitframe(1);
   util::waittillslowprocessallowed();
 
-  if(!isDefined(level.teams[self.pers[#"team"]])) {
+  if(!isDefined(level.teams[self.pers[# "team"]])) {
     return;
   }
 
-  if(self.pers[#"team"] == killedplayer.pers[#"team"]) {
+  if(self.pers[# "team"] == killedplayer.pers[# "team"]) {
     return;
   }
 
@@ -595,11 +593,11 @@ processassist(killedplayer, damagedone, weapon, assist_level = undefined) {
   waitframe(1);
   util::waittillslowprocessallowed();
 
-  if(!isDefined(level.teams[self.pers[#"team"]])) {
+  if(!isDefined(level.teams[self.pers[# "team"]])) {
     return;
   }
 
-  if(self.pers[#"team"] == killedplayer.pers[#"team"]) {
+  if(self.pers[# "team"] == killedplayer.pers[# "team"]) {
     return;
   }
 
@@ -621,17 +619,17 @@ processassist(killedplayer, damagedone, weapon, assist_level = undefined) {
   self.assists = self getpersstat(#"assists");
 
   switch (weapon.name) {
-    case #"concussion_grenade":
+    case # "concussion_grenade":
       assist_level = "assist_concussion";
       break;
-    case #"flash_grenade":
+    case # "flash_grenade":
       assist_level = "assist_flash";
       break;
-    case #"emp_grenade":
+    case # "emp_grenade":
       assist_level = "assist_emp";
       break;
-    case #"proximity_grenade":
-    case #"proximity_grenade_aoe":
+    case # "proximity_grenade":
+    case # "proximity_grenade_aoe":
       assist_level = "assist_proximity";
       break;
   }

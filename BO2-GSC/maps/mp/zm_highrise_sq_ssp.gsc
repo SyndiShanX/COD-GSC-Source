@@ -45,7 +45,7 @@ stage_logic_1() {
 }
 
 ssp1_sliquify_balls() {
-  a_balls = getentarray("sq_sliquify_ball", "targetname");
+  a_balls = getEntArray("sq_sliquify_ball", "targetname");
   level thread vo_sliquify_fail_watch();
   level thread ssp1_advance_dragon();
   level thread vo_richtofen_sliquify_confirm();
@@ -65,7 +65,7 @@ ssp1_sliquify_balls() {
 ssp1_watch_ball(str_complete_flag) {
   self watch_model_sliquification(20, str_complete_flag);
   self thread ssp1_rotate_ball();
-  self playloopsound("zmb_sq_ball_rotate_loop", 0.25);
+  self playLoopSound("zmb_sq_ball_rotate_loop", 0.25);
 }
 
 ssp1_rotate_ball() {
@@ -189,12 +189,11 @@ exit_stage_1(success) {
   flag_set("ssp1_complete");
 }
 
-exit_stage_2(success) {
-}
+exit_stage_2(success) {}
 
 watch_model_sliquification(n_end_limit, str_complete_flag) {
   n_count = 0;
-  self setcandamage(1);
+  self setCanDamage(1);
 
   while(!flag(str_complete_flag)) {
     self waittill("damage", amount, attacker, direction, point, mod, tagname, modelname, partname, weaponname);

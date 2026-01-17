@@ -26,7 +26,7 @@ testAnims() {
   testanims = [];
   self animmode("zonly_physics");
   self orientMode("face current");
-  for (i = 0; i < testanims.size; i++) {
+  for(i = 0; i < testanims.size; i++) {
     println(testanims[i]);
     self thread printAnimDebugLn(i);
     self setFlaggedAnimKnobAllRestart("animtest", testanims[i], % root, 1, 0, 1);
@@ -38,7 +38,7 @@ testAnims() {
 printAnimDebugLn(text) {
   level endon("stopline");
   pos = self.origin + (0, 0, -20);
-  while (1) {
+  while(1) {
     print3d(pos, text);
     wait .05;
   }
@@ -46,7 +46,7 @@ printAnimDebugLn(text) {
 
 lineUntilNotify(a, b) {
   level endon("stopline");
-  while (1) {
+  while(1) {
     line(a, b);
     wait .05;
   }
@@ -70,13 +70,13 @@ testGrenadeThrowAnimOffsets() {
   testanims[13] = % prone_grenade_A;
   model = getGrenadeModel();
   self animmode("zonly_physics");
-  for (i = 0; i < testanims.size; i++) {
-    forward = anglestoforward(self.angles);
+  for(i = 0; i < testanims.size; i++) {
+    forward = anglesToForward(self.angles);
     right = anglestoright(self.angles);
     startpos = self.origin;
     tag = "TAG_INHAND";
     self setFlaggedAnimKnobAllRestart("grenadetest", testanims[i], % root, 1, 0, 1);
-    for (;;) {
+    for(;;) {
       self waittill("grenadetest", notetrack);
       if(notetrack == "grenade_left" || notetrack == "grenade_right")
         self attach(model, tag);
@@ -101,7 +101,7 @@ testGrenadeThrowAnimOffsets() {
 idleThread() {
   self endon("killanimscript");
   self endon("kill_idle_thread");
-  for (;;) {
+  for(;;) {
     idleAnim = animArrayPickRandom("exposed_idle");
     self setflaggedanimlimited("idle", idleAnim);
     self waittillmatch("idle", "end");
@@ -526,7 +526,7 @@ banzai_exposed_monitor() {
   self endon("melee");
   lastPos = self.origin;
   nonmovements = 0;
-  while (1) {
+  while(1) {
     if(self is_banzai()) {
       distance = distanceSquared(lastPos, self.origin);
       if(distance < 36) {
@@ -565,7 +565,7 @@ exposedCombatMainLoop() {
   self resetGiveUpOnEnemyTime();
   self.a.dontCrouchTime = gettime() + randomintrange(500, 1500);
   justWaited = false;
-  for (;;) {
+  for(;;) {
     if(self weaponAnims() == "rocketlauncher")
       self.deathFunction = undefined;
     self IsInCombat();
@@ -833,7 +833,7 @@ watchShootEntVelocity() {
   prevshootent = undefined;
   prevpos = self.origin;
   interval = .15;
-  while (1) {
+  while(1) {
     if(isDefined(self.shootEnt) && isDefined(prevshootent) && self.shootEnt == prevshootent) {
       curpos = self.shootEnt.origin;
       self.shootEntVelocity = vectorScale(curpos - prevpos, 1 / interval);
@@ -870,7 +870,7 @@ faceEnemyImmediately() {
   self notify("facing_enemy_immediately");
   self endon("facing_enemy_immediately");
   maxYawChange = 5;
-  while (1) {
+  while(1) {
     yawChange = 0 - GetYawToEnemy();
     if(abs(yawChange) < 2) {
       break;
@@ -1012,7 +1012,7 @@ watchForNeedToTurnOrTimeout() {
   self endon("killanimscript");
   self endon("stop_watching_for_need_to_turn");
   endtime = gettime() + 4000 + randomint(2000);
-  while (1) {
+  while(1) {
     if(gettime() > endtime || needToTurn()) {
       self notify("need_to_turn");
       break;
@@ -1026,7 +1026,7 @@ considerThrowGrenade() {
     return false;
   self.a.nextGrenadeTryTime = gettime() + 300;
   players = GetPlayers();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(isDefined(players[i]) && isDefined(players[i].throwGrenadeAtPlayerASAP) && isAlive(players[i])) {
       if(tryThrowGrenade(players[i], 200))
         return true;
@@ -1127,7 +1127,7 @@ keepTryingToMelee() {
   self endon("done turning");
   self endon("need_to_turn");
   self endon("shoot_behavior_change");
-  while (1) {
+  while(1) {
     wait .2 + randomfloat(.3);
     if(isDefined(self.enemy) && (distanceSquared(self.enemy.origin, self.origin) < 100 * 100) && TryMelee())
       return;
@@ -1224,7 +1224,7 @@ doReloadAnim(reloadAnim, stopWhenCanShoot) {
 abortReloadWhenCanShoot() {
   self endon("abort_reload");
   self endon("killanimscript");
-  while (1) {
+  while(1) {
     if(isDefined(self.shootEnt) && self canSee(self.shootEnt)) {
       break;
     }
@@ -1353,7 +1353,7 @@ ReacquireWhenNecessary() {
   if(self.fixedNode) {
     return;
   }
-  while (1) {
+  while(1) {
     wait .05;
     if(self.fixedNode) {
       return;

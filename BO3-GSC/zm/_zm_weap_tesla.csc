@@ -12,7 +12,7 @@
 function init() {
   level.weaponzmteslagun = getweapon("tesla_gun");
   level.weaponzmteslagunupgraded = getweapon("tesla_gun_upgraded");
-  if(!zm_weapons::is_weapon_included(level.weaponzmteslagun) && (!(isdefined(level.uses_tesla_powerup) && level.uses_tesla_powerup))) {
+  if(!zm_weapons::is_weapon_included(level.weaponzmteslagun) && (!(isDefined(level.uses_tesla_powerup) && level.uses_tesla_powerup))) {
     return;
   }
   level._effect["tesla_viewmodel_rail"] = "zombie/fx_tesla_rail_view_zmb";
@@ -32,7 +32,7 @@ function player_init() {
   level.tesla_play_fx = [];
   level.tesla_play_rail = 1;
   players = getlocalplayers();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     level.tesla_play_fx[i] = 0;
     players[i] thread tesla_fx_rail(i);
     players[i] thread tesla_fx_tube(i);
@@ -44,7 +44,7 @@ function player_init() {
 function tesla_fx_rail(localclientnum) {
   self endon("disconnect");
   self endon("entityshutdown");
-  for (;;) {
+  for(;;) {
     waitrealtime(randomfloatrange(8, 12));
     if(!level.tesla_play_fx[localclientnum]) {
       continue;
@@ -67,14 +67,14 @@ function tesla_fx_rail(localclientnum) {
       fx = level._effect["tesla_viewmodel_rail_upgraded"];
     }
     playviewmodelfx(localclientnum, fx, "tag_flash");
-    playsound(localclientnum, "wpn_tesla_effects", (0, 0, 0));
+    playSound(localclientnum, "wpn_tesla_effects", (0, 0, 0));
   }
 }
 
 function tesla_fx_tube(localclientnum) {
   self endon("disconnect");
   self endon("entityshutdown");
-  for (;;) {
+  for(;;) {
     waitrealtime(0.1);
     if(!level.tesla_play_fx[localclientnum]) {
       continue;
@@ -135,7 +135,7 @@ function tesla_fx_tube(localclientnum) {
       continue;
       continue;
     }
-    if(isdefined(self.n_tesla_tube_fx_id)) {
+    if(isDefined(self.n_tesla_tube_fx_id)) {
       deletefx(localclientnum, self.n_tesla_tube_fx_id, 1);
     }
     self.str_tesla_current_tube_effect = str_fx;
@@ -145,7 +145,7 @@ function tesla_fx_tube(localclientnum) {
 }
 
 function tesla_notetrack_think() {
-  for (;;) {
+  for(;;) {
     level waittill("notetrack", localclientnum, note);
     switch (note) {
       case "tesla_play_fx_off": {
@@ -161,11 +161,11 @@ function tesla_notetrack_think() {
 }
 
 function tesla_happy(localclientnum) {
-  for (;;) {
+  for(;;) {
     level waittill("tgh");
     currentweapon = getcurrentweapon(localclientnum);
     if(currentweapon == level.weaponzmteslagun || currentweapon == level.weaponzmteslagunupgraded) {
-      playsound(localclientnum, "wpn_tesla_happy", (0, 0, 0));
+      playSound(localclientnum, "wpn_tesla_happy", (0, 0, 0));
       level.tesla_play_rail = 0;
       waitrealtime(2);
       level.tesla_play_rail = 1;
@@ -175,14 +175,14 @@ function tesla_happy(localclientnum) {
 
 function tesla_change_watcher(localclientnum) {
   self endon("disconnect");
-  while (true) {
+  while(true) {
     self waittill("weapon_change");
     self clear_tesla_tube_effect(localclientnum);
   }
 }
 
 function clear_tesla_tube_effect(localclientnum) {
-  if(isdefined(self.n_tesla_tube_fx_id)) {
+  if(isDefined(self.n_tesla_tube_fx_id)) {
     deletefx(localclientnum, self.n_tesla_tube_fx_id, 1);
     self.n_tesla_tube_fx_id = undefined;
     self.str_tesla_current_tube_effect = undefined;

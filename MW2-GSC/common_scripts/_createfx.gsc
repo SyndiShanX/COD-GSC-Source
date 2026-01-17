@@ -9,7 +9,7 @@
 
 createEffect(type, fxid) {
   ent = spawnStruct();
-  if(!isdefined(level.createFXent))
+  if(!isDefined(level.createFXent))
     level.createFXent = [];
 
   level.createFXent[level.createFXent.size] = ent;
@@ -23,7 +23,7 @@ createEffect(type, fxid) {
 }
 
 add_effect(name, effect) {
-  if(!isdefined(level._effect))
+  if(!isDefined(level._effect))
     level._effect = [];
 
   level._effect[name] = loadfx(effect);
@@ -31,7 +31,7 @@ add_effect(name, effect) {
 
 createLoopSound() {
   ent = spawnStruct();
-  if(!isdefined(level.createFXent))
+  if(!isDefined(level.createFXent))
     level.createFXent = [];
 
   level.createFXent[level.createFXent.size] = ent;
@@ -47,7 +47,7 @@ createLoopSound() {
 
 createNewExploder() {
   ent = spawnStruct();
-  if(!isdefined(level.createFXent))
+  if(!isDefined(level.createFXent))
     level.createFXent = [];
 
   level.createFXent[level.createFXent.size] = ent;
@@ -67,7 +67,7 @@ createNewExploder() {
 
 set_forward_and_up_vectors() {
   self.v["up"] = anglestoup(self.v["angles"]);
-  self.v["forward"] = anglestoforward(self.v["angles"]);
+  self.v["forward"] = anglesToForward(self.v["angles"]);
 }
 
 createfx_common() {
@@ -80,16 +80,16 @@ createfx_common() {
 
   flag_init("createfx_saving");
   // Effects placing tool
-  if(!isdefined(level.createFX))
+  if(!isDefined(level.createFX))
     level.createFX = [];
   level.createfx_loopcounter = 0;
 
-  triggers = getentarray("trigger_multiple", "classname");
-  for (i = 0; i < triggers.size; i++)
+  triggers = getEntArray("trigger_multiple", "classname");
+  for(i = 0; i < triggers.size; i++)
     triggers[i] delete();
 
-  triggers = getentarray("trigger_radius", "classname");
-  for (i = 0; i < triggers.size; i++)
+  triggers = getEntArray("trigger_radius", "classname");
+  for(i = 0; i < triggers.size; i++)
     triggers[i] delete();
 }
 
@@ -98,7 +98,7 @@ createFxLogic() {
 
   menu_init();
 
-  if(!isdefined(level._effect))
+  if(!isDefined(level._effect))
     level._effect = [];
 
   if(GetDvar("createfx_map") == "")
@@ -143,9 +143,9 @@ createFxLogic() {
   level.clearTextMarker.alpha = 0;
   level.clearTextMarker setText("marker");
 
-  for (i = 0; i < level.createFx_hudElements; i++) {
+  for(i = 0; i < level.createFx_hudElements; i++) {
     newStrArray = [];
-    for (p = 0; p < 1; p++) {
+    for(p = 0; p < 1; p++) {
       newStr = newHudElem();
       newStr.alignX = "left";
       newStr.location = 0;
@@ -165,7 +165,7 @@ createFxLogic() {
   }
 
   newStrArray = [];
-  for (p = 0; p < 5; p++) {
+  for(p = 0; p < 5; p++) {
     // setup instructional text
     newStr = newHudElem();
     newStr.alignX = "center";
@@ -248,7 +248,7 @@ createFxLogic() {
 
   level.createfx_inputlocked = false;
 
-  for (i = 0; i < level.createFXent.size; i++) {
+  for(i = 0; i < level.createFXent.size; i++) {
     ent = level.createFXent[i];
     ent post_entity_creation_function();
   }
@@ -257,17 +257,17 @@ createFxLogic() {
   lastSelectEntity = undefined;
   thread createfx_autosave();
 
-  for (;;) {
+  for(;;) {
     changedSelectedEnts = false;
 
     // calculate the "cursor"
     right = anglestoright(level.player getplayerangles());
-    forward = anglestoforward(level.player getplayerangles());
+    forward = anglesToForward(level.player getplayerangles());
     up = anglestoup(level.player getplayerangles());
     dot = 0.85;
 
     placeEnt_vector = vector_multiply(forward, 750);
-    level.createfxCursor = bullettrace(level.player geteye(), level.player geteye() + placeEnt_vector, false, undefined);
+    level.createfxCursor = bulletTrace(level.player getEye(), level.player getEye() + placeEnt_vector, false, undefined);
     highlightedEnt = undefined;
 
     //************************************************************
@@ -346,7 +346,7 @@ createFxLogic() {
         paste_ents();
     }
 
-    if(isdefined(level.selected_fx_option_index))
+    if(isDefined(level.selected_fx_option_index))
       menu_fx_option_set();
 
     //************************************************************
@@ -354,21 +354,21 @@ createFxLogic() {
     // 				Highlighted Entity Handling
     //
     //************************************************************
-    for (i = 0; i < level.createFXent.size; i++) {
+    for(i = 0; i < level.createFXent.size; i++) {
       ent = level.createFXent[i];
 
       difference = vectornormalize(ent.v["origin"] - (level.player.origin + (0, 0, 55)));
       newdot = vectordot(forward, difference);
-      if(newdot < dot)
+      if(newdot < dot) {
         continue;
-
+      }
       dot = newdot;
       highlightedEnt = ent;
     }
     level.fx_highLightedEnt = highLightedEnt;
 
-    if(isdefined(highLightedEnt)) {
-      if(isdefined(lastHighlightedEnt)) {
+    if(isDefined(highLightedEnt)) {
+      if(isDefined(lastHighlightedEnt)) {
         if(lastHighlightedEnt != highlightedEnt) {
           // a highlighted ent is no longer highlighted so scale down the text size
           //					lastHighlightedEnt.text = ".";
@@ -408,14 +408,14 @@ createFxLogic() {
       if(button_is_clicked("v"))
         copy_angles_of_selected_ents();
 
-      for (i = 0; i < level.selected_fx_ents.size; i++)
+      for(i = 0; i < level.selected_fx_ents.size; i++)
         level.selected_fx_ents[i] draw_axis();
 
       if(level.selectedRotate_pitch != 0 || level.selectedRotate_yaw != 0 || level.selectedRotate_roll != 0)
         changedSelectedEnts = true;
       wait(0.05);
       /*
-      			for ( i=0; i < level.selected_fx_ents.size; i++)
+      			for( i=0; i < level.selected_fx_ents.size; i++)
       			{
       				ent = level.selected_fx_ents[i];
       				ent.angles = ent.angles + (level.selectedRotate_pitch, level.selectedRotate_yaw, 0);
@@ -427,9 +427,9 @@ createFxLogic() {
       */
     } else {
       selectedMove_vector = get_selected_move_vector();
-      for (i = 0; i < level.selected_fx_ents.size; i++) {
+      for(i = 0; i < level.selected_fx_ents.size; i++) {
         ent = level.selected_fx_ents[i];
-        if(isdefined(ent.model)) // ents with brushmodels are from radiant and dont get moved
+        if(isDefined(ent.model)) // ents with brushmodels are from radiant and dont get moved
           continue;
 
         ent.v["origin"] = ent.v["origin"] + selectedMove_vector;
@@ -468,7 +468,7 @@ copy_angles_of_selected_ents() {
   // so it stops rotating them over time
   level notify("new_ent_selection");
 
-  for (i = 0; i < level.selected_fx_ents.size; i++) {
+  for(i = 0; i < level.selected_fx_ents.size; i++) {
     ent = level.selected_fx_ents[i];
     ent.v["angles"] = level.selected_fx_ents[level.selected_fx_ents.size - 1].v["angles"];
     ent set_forward_and_up_vectors();
@@ -481,7 +481,7 @@ reset_axis_of_selected_ents() {
   // so it stops rotating them over time
   level notify("new_ent_selection");
 
-  for (i = 0; i < level.selected_fx_ents.size; i++) {
+  for(i = 0; i < level.selected_fx_ents.size; i++) {
     ent = level.selected_fx_ents[i];
     ent.v["angles"] = (0, 0, 0);
     ent set_forward_and_up_vectors();
@@ -491,7 +491,7 @@ reset_axis_of_selected_ents() {
 }
 
 last_selected_entity_has_changed(lastSelectEntity) {
-  if(isdefined(lastSelectEntity)) {
+  if(isDefined(lastSelectEntity)) {
     if(!entities_are_selected())
       return true;
   } else
@@ -503,9 +503,9 @@ last_selected_entity_has_changed(lastSelectEntity) {
 createfx_showOrigin(id, org, delay, org2, type, exploder, id2, fireFx, fireFxDelay, fireFxSound, fxSound, fxQuake, fxDamage, soundalias, repeat, delay_min, delay_max, damage_radius, fireFxTimeout) {}
 
 drop_selection_to_ground() {
-  for (i = 0; i < level.selected_fx_ents.size; i++) {
+  for(i = 0; i < level.selected_fx_ents.size; i++) {
     ent = level.selected_fx_ents[i];
-    trace = bullettrace(ent.v["origin"], ent.v["origin"] + (0, 0, -2048), false, undefined);
+    trace = bulletTrace(ent.v["origin"], ent.v["origin"] + (0, 0, -2048), false, undefined);
     ent.v["origin"] = trace["position"];
   }
 }
@@ -513,14 +513,14 @@ drop_selection_to_ground() {
 set_off_exploders() {
   level notify("createfx_exploder_reset");
   exploders = [];
-  for (i = 0; i < level.selected_fx_ents.size; i++) {
+  for(i = 0; i < level.selected_fx_ents.size; i++) {
     ent = level.selected_fx_ents[i];
-    if(isdefined(ent.v["exploder"]))
+    if(isDefined(ent.v["exploder"]))
       exploders[ent.v["exploder"]] = true;
   }
 
   keys = getarraykeys(exploders);
-  for (i = 0; i < keys.size; i++)
+  for(i = 0; i < keys.size; i++)
     exploder(keys[i]);
 }
 
@@ -529,9 +529,9 @@ draw_distance() {
   if(GetDvarInt("createfx_drawdist") == 0)
     SetDevDvar("createfx_drawdist", "1500");
 
-  for (;;) {
+  for(;;) {
     maxDist = GetDvarInt("createfx_drawdist");
-    for (i = 0; i < level.createFXent.size; i++) {
+    for(i = 0; i < level.createFXent.size; i++) {
       ent = level.createFXent[i];
       ent.drawn = distance(level.player.origin, ent.v["origin"]) <= maxDist;
 
@@ -547,7 +547,7 @@ draw_distance() {
 }
 
 createfx_autosave() {
-  for (;;) {
+  for(;;) {
     wait(300);
     flag_waitopen("createfx_saving");
     generate_fx_log(true);
@@ -557,7 +557,7 @@ createfx_autosave() {
 rotate_over_time(org, rotater) {
   level endon("new_ent_selection");
   timer = 0.1;
-  for (p = 0; p < timer * 20; p++) {
+  for(p = 0; p < timer * 20; p++) {
     if(level.selectedRotate_pitch != 0)
       org AddPitch(level.selectedRotate_pitch);
     else
@@ -569,9 +569,9 @@ rotate_over_time(org, rotater) {
     wait(0.05);
     org draw_axis();
 
-    for (i = 0; i < level.selected_fx_ents.size; i++) {
+    for(i = 0; i < level.selected_fx_ents.size; i++) {
       ent = level.selected_fx_ents[i];
-      if(isdefined(ent.model)) // ents with brushmodels are from radiant and dont get moved
+      if(isDefined(ent.model)) // ents with brushmodels are from radiant and dont get moved
         continue;
 
       ent.v["origin"] = rotater[i].origin;
@@ -590,16 +590,16 @@ delete_pressed() {
 }
 
 remove_selected_option() {
-  if(!isdefined(level.selected_fx_option_index)) {
+  if(!isDefined(level.selected_fx_option_index)) {
     return;
   }
 
   name = level.createFX_options[level.selected_fx_option_index]["name"];
-  for (i = 0; i < level.createFXent.size; i++) {
+  for(i = 0; i < level.createFXent.size; i++) {
     ent = level.createFXent[i];
-    if(!ent_is_selected(ent))
+    if(!ent_is_selected(ent)) {
       continue;
-
+    }
     ent remove_option(name);
   }
 
@@ -614,10 +614,10 @@ remove_option(name) {
 delete_selection() {
   newArray = [];
 
-  for (i = 0; i < level.createFXent.size; i++) {
+  for(i = 0; i < level.createFXent.size; i++) {
     ent = level.createFXent[i];
     if(ent_is_selected(ent)) {
-      if(isdefined(ent.looper))
+      if(isDefined(ent.looper))
         ent.looper delete();
 
       ent notify("stop_loop");
@@ -634,14 +634,14 @@ delete_selection() {
 
 move_selection_to_cursor() {
   origin = level.createfxCursor["position"];
-  if(level.selected_fx_ents.size <= 0)
+  if(level.selected_fx_ents.size <= 0) {
     return;
-
+  }
   center = get_center_of_array(level.selected_fx_ents);
   difference = center - origin;
-  for (i = 0; i < level.selected_fx_ents.size; i++) {
+  for(i = 0; i < level.selected_fx_ents.size; i++) {
     ent = level.selected_fx_ents[i];
-    if(isdefined(ent.model)) // ents with brushmodels are from radiant and dont get moved
+    if(isDefined(ent.model)) // ents with brushmodels are from radiant and dont get moved
       continue;
 
     ent.v["origin"] -= difference;
@@ -705,9 +705,9 @@ select_last_entity() {
 select_all_exploders_of_currently_selected(key) {
   selected_exploders = [];
   foreach(ent in level.selected_fx_ents) {
-    if(!isdefined(ent.v[key]))
+    if(!isDefined(ent.v[key])) {
       continue;
-
+    }
     value = ent.v[key];
     selected_exploders[value] = true;
   }
@@ -716,11 +716,11 @@ select_all_exploders_of_currently_selected(key) {
     foreach(index, ent in level.createFXent) {
       if(index_is_selected(index))
         continue;
-      if(!isdefined(ent.v[key]))
+      if(!isDefined(ent.v[key]))
         continue;
-      if(ent.v[key] != value)
+      if(ent.v[key] != value) {
         continue;
-
+      }
       select_entity(index, ent);
     }
   }
@@ -729,13 +729,13 @@ select_all_exploders_of_currently_selected(key) {
 }
 
 copy_ents() {
-  if(level.selected_fx_ents.size <= 0)
+  if(level.selected_fx_ents.size <= 0) {
     return;
-
+  }
   array = [];
-  for (i = 0; i < level.selected_fx_ents.size; i++) {
+  for(i = 0; i < level.selected_fx_ents.size; i++) {
     ent = level.selected_fx_ents[i];
-    newent = spawnstruct();
+    newent = spawnStruct();
 
     newent.v = ent.v;
     newent post_entity_creation_function();
@@ -751,12 +751,12 @@ post_entity_creation_function() {
 }
 
 paste_ents() {
-  if(!isdefined(level.stored_ents))
+  if(!isDefined(level.stored_ents)) {
     return;
-
+  }
   clear_entity_selection();
 
-  for (i = 0; i < level.stored_ents.size; i++)
+  for(i = 0; i < level.stored_ents.size; i++)
     add_and_select_entity(level.stored_ents[i]);
 
   move_selection_to_cursor();
@@ -772,7 +772,7 @@ add_and_select_entity(ent) {
 
 get_center_of_array(array) {
   center = (0, 0, 0);
-  for (i = 0; i < array.size; i++)
+  for(i = 0; i < array.size; i++)
     center = (center[0] + array[i].v["origin"][0], center[1] + array[i].v["origin"][1], center[2] + array[i].v["origin"][2]);
 
   return (center[0] / array.size, center[1] / array.size, center[2] / array.size);
@@ -780,7 +780,7 @@ get_center_of_array(array) {
 
 ent_draw_axis() {
   self endon("death");
-  for (;;) {
+  for(;;) {
     draw_axis();
     wait(0.05);
   }
@@ -795,13 +795,13 @@ rotation_is_occuring() {
 }
 
 print_fx_options(ent, tab, file, autosave) {
-  for (i = 0; i < level.createFX_options.size; i++) {
+  for(i = 0; i < level.createFX_options.size; i++) {
     option = level.createFX_options[i];
-    if(!isdefined(ent.v[option["name"]]))
+    if(!isDefined(ent.v[option["name"]]))
       continue;
-    if(!mask(option["mask"], ent.v["type"]))
+    if(!mask(option["mask"], ent.v["type"])) {
       continue;
-
+    }
     if(option["type"] == "string") {
       //			if( !autosave )
       //				println( "	ent.v[ \"" + option[ "name" ] + "\" ] = \"" + ent.v[ option[ "name" ] ] + "\";" );
@@ -820,11 +820,12 @@ entity_highlight_disable() {
   self notify("highlight change");
   self endon("highlight change");
 
-  for (;;) {
+  for(;;) {
     self.textalpha = self.textalpha * 0.85;
     self.textalpha = self.textalpha - 0.05;
-    if(self.textalpha < 0)
+    if(self.textalpha < 0) {
       break;
+    }
     wait(0.05);
   }
 
@@ -835,17 +836,17 @@ entity_highlight_enable() {
   self notify("highlight change");
   self endon("highlight change");
 
-  for (;;) {
+  for(;;) {
     //		self.textalpha = sin(gettime()) * 0.5 + 0.5;
     self.textalpha = self.textalpha + 0.05;
     self.textalpha = self.textalpha * 1.25;
-    if(self.textalpha > 1)
+    if(self.textalpha > 1) {
       break;
+    }
     wait(0.05);
   }
 
   self.textalpha = 1;
-
 }
 
 toggle_createfx_drawing() {
@@ -853,17 +854,17 @@ toggle_createfx_drawing() {
 }
 
 manipulate_createfx_ents(highlightedEnt, leftClick, leftHeld, ctrlHeld, colors, right) {
-  if(!level.createfx_draw_enabled)
+  if(!level.createfx_draw_enabled) {
     return;
-
-  for (i = 0; i < level.createFXent.size; i++) {
+  }
+  for(i = 0; i < level.createFXent.size; i++) {
     ent = level.createFXent[i];
-    if(!ent.drawn)
+    if(!ent.drawn) {
       continue;
-
+    }
     scale = GetDvarFloat("createfx_scaleid");
 
-    if(isdefined(highlightedEnt) && ent == highlightedEnt) {
+    if(isDefined(highlightedEnt) && ent == highlightedEnt) {
       if(!entities_are_selected())
         display_fx_info(ent);
 
@@ -920,35 +921,35 @@ clear_settable_fx() {
 }
 
 reset_fx_hud_colors() {
-  for (i = 0; i < level.createFx_hudElements; i++)
+  for(i = 0; i < level.createFx_hudElements; i++)
     level.createFxHudElements[i][0].color = (1, 1, 1);
 }
 
 button_is_held(name, name2) {
-  if(isdefined(name2)) {
-    if(isdefined(level.buttonIsHeld[name2]))
+  if(isDefined(name2)) {
+    if(isDefined(level.buttonIsHeld[name2]))
       return true;
   }
-  return isdefined(level.buttonIsHeld[name]);
+  return isDefined(level.buttonIsHeld[name]);
 }
 
 button_is_clicked(name, name2) {
-  if(isdefined(name2)) {
-    if(isdefined(level.buttonClick[name2]))
+  if(isDefined(name2)) {
+    if(isDefined(level.buttonClick[name2]))
       return true;
   }
-  return isdefined(level.buttonClick[name]);
+  return isDefined(level.buttonClick[name]);
 }
 
 toggle_entity_selection(index, ent) {
-  if(isdefined(level.selected_fx[index]))
+  if(isDefined(level.selected_fx[index]))
     deselect_entity(index, ent);
   else
     select_entity(index, ent);
 }
 
 select_entity(index, ent) {
-  if(isdefined(level.selected_fx[index]))
+  if(isDefined(level.selected_fx[index]))
     return;
   clear_settable_fx();
   level notify("new_ent_selection");
@@ -960,15 +961,15 @@ select_entity(index, ent) {
 }
 
 ent_is_highlighted(ent) {
-  if(!isdefined(level.fx_highLightedEnt))
+  if(!isDefined(level.fx_highLightedEnt))
     return false;
   return ent == level.fx_highLightedEnt;
 }
 
 deselect_entity(index, ent) {
-  if(!isdefined(level.selected_fx[index]))
+  if(!isDefined(level.selected_fx[index])) {
     return;
-
+  }
   clear_settable_fx();
   level notify("new_ent_selection");
 
@@ -979,7 +980,7 @@ deselect_entity(index, ent) {
 
   // remove the entity from the array of selected entities
   newArray = [];
-  for (i = 0; i < level.selected_fx_ents.size; i++) {
+  for(i = 0; i < level.selected_fx_ents.size; i++) {
     if(level.selected_fx_ents[i] != ent)
       newArray[newArray.size] = level.selected_fx_ents[i];
   }
@@ -987,11 +988,11 @@ deselect_entity(index, ent) {
 }
 
 index_is_selected(index) {
-  return isdefined(level.selected_fx[index]);
+  return isDefined(level.selected_fx[index]);
 }
 
 ent_is_selected(ent) {
-  for (i = 0; i < level.selected_fx_ents.size; i++) {
+  for(i = 0; i < level.selected_fx_ents.size; i++) {
     if(level.selected_fx_ents[i] == ent)
       return true;
   }
@@ -999,7 +1000,7 @@ ent_is_selected(ent) {
 }
 
 clear_entity_selection() {
-  for (i = 0; i < level.selected_fx_ents.size; i++) {
+  for(i = 0; i < level.selected_fx_ents.size; i++) {
     if(!ent_is_highlighted(level.selected_fx_ents[i]))
       level.selected_fx_ents[i] thread entity_highlight_disable();
   }
@@ -1011,7 +1012,7 @@ draw_axis() {
   range = 25 * GetDvarFloat("createfx_scaleid");
 
   //	range = 25;
-  forward = anglestoforward(self.v["angles"]);
+  forward = anglesToForward(self.v["angles"]);
   forward = vector_multiply(forward, range);
   right = anglestoright(self.v["angles"]);
   right = vector_multiply(right, range);
@@ -1025,15 +1026,15 @@ draw_axis() {
 clear_fx_hudElements() {
   level.clearTextMarker clearAllTextAfterHudElem();
 
-  for (i = 0; i < level.createFx_hudElements; i++) {
-    for (p = 0; p < 1; p++)
+  for(i = 0; i < level.createFx_hudElements; i++) {
+    for(p = 0; p < 1; p++)
       level.createFxHudElements[i][p] setText("");
   }
   level.fxHudElements = 0;
 }
 
 set_fx_hudElement(text) {
-  for (p = 0; p < 1; p++)
+  for(p = 0; p < 1; p++)
     level.createFxHudElements[level.fxHudElements][p] setText(text);
 
   level.fxHudElements++;
@@ -1047,10 +1048,10 @@ createfx_centerprint(text) {
 createfx_centerprint_thread(text) {
   level notify("new_createfx_centerprint");
   level endon("new_createfx_centerprint");
-  for (p = 0; p < 5; p++)
+  for(p = 0; p < 5; p++)
     level.createFX_centerPrint[p] setText(text);
   wait(4.5);
-  for (p = 0; p < 5; p++)
+  for(p = 0; p < 5; p++)
     level.createFX_centerPrint[p] setText("");
 }
 
@@ -1058,9 +1059,8 @@ buttonDown(button, button2) {
   return buttonPressed_internal(button) || buttonPressed_internal(button2);
 }
 
-
 buttonPressed_internal(button) {
-  if(!isdefined(button))
+  if(!isDefined(button))
     return false;
 
   // keyboard buttons can be locked so you can type in the fx info on the keyboard without
@@ -1075,7 +1075,7 @@ get_selected_move_vector() {
   yaw = level.player getplayerangles()[1];
   angles = (0, yaw, 0);
   right = anglestoright(angles);
-  forward = anglestoforward(angles);
+  forward = anglesToForward(angles);
   up = anglestoup(angles);
 
   keypressed = false;
@@ -1181,21 +1181,21 @@ process_button_held_and_clicked() {
 }
 
 locked(name) {
-  if(isdefined(level.createfx_lockedList[name]))
+  if(isDefined(level.createfx_lockedList[name]))
     return false;
 
   return kb_locked(name);
 }
 
 kb_locked(name) {
-  return level.createfx_inputlocked && isdefined(level.button_is_kb[name]);
+  return level.createfx_inputlocked && isDefined(level.button_is_kb[name]);
 }
 
 add_button(name) {
-  if(locked(name))
+  if(locked(name)) {
     return;
-
-  if(!isdefined(level.buttonIsHeld[name])) {
+  }
+  if(!isDefined(level.buttonIsHeld[name])) {
     if(level.player buttonPressed(name)) {
       level.buttonIsHeld[name] = true;
       level.buttonClick[name] = true;
@@ -1212,7 +1212,6 @@ add_kb_button(name) {
   level.button_is_kb[name] = true;
   add_button(name);
 }
-
 
 set_anglemod_move_vector() {
   rate = 2;
@@ -1255,7 +1254,6 @@ set_anglemod_move_vector() {
     level.selectedRotate_roll = level.selectedRotate_roll - rate;
   } else
     level.selectedRotate_roll = 0;
-
 }
 
 cfxprintlnStart() {
@@ -1283,26 +1281,26 @@ cfxprintlnEnd(file, autosave, radiant_exploder_add_string) {
 }
 
 update_selected_entities() {
-  for (i = 0; i < level.selected_fx_ents.size; i++) {
+  for(i = 0; i < level.selected_fx_ents.size; i++) {
     ent = level.selected_fx_ents[i];
     ent[[level.func_updatefx]]();
   }
 }
 
 hack_start(painter_spmp) {
-  if(!isdefined(painter_spmp))
+  if(!isDefined(painter_spmp))
     painter_spmp = "painter_mp";
   precachemenu(painter_spmp);
-  if(painter_spmp == "painter_mp")
+  if(painter_spmp == "painter_mp") {
     return;
-
+  }
   wait .05;
   level.player openpopupmenu(painter_spmp); // painter.menu execs some console commands( ufo mode ).. sneaky hacks.
   level.player closepopupmenu(painter_spmp);
 }
 
 get_player() {
-  return getentarray("player", "classname")[0];
+  return getEntArray("player", "classname")[0];
 }
 
 createfx_orgranize_array() {
@@ -1320,9 +1318,9 @@ createfx_orgranize_array() {
   foreach(ent in level.createFXent) {
     found_type = false;
     foreach(index, type in types) {
-      if(ent.v["type"] != type)
+      if(ent.v["type"] != type) {
         continue;
-
+      }
       found_type = true;
       array[index][array[index].size] = ent;
       break;
@@ -1332,7 +1330,7 @@ createfx_orgranize_array() {
   }
 
   new_array = [];
-  for (i = 0; i < types.size; i++) {
+  for(i = 0; i < types.size; i++) {
     foreach(ent in array[i]) {
       new_array[new_array.size] = ent;
     }
@@ -1342,7 +1340,7 @@ createfx_orgranize_array() {
 }
 
 stop_fx_looper() {
-  if(isdefined(self.looper))
+  if(isDefined(self.looper))
     self.looper delete();
   self stop_loopsound();
 }
@@ -1352,9 +1350,9 @@ stop_loopsound() {
 }
 
 func_get_level_fx() {
-  AssertEx(IsDefined(level._effect), "No effect aliases defined!");
+  AssertEx(isDefined(level._effect), "No effect aliases defined!");
 
-  if(!IsDefined(level._effect_keys)) {
+  if(!isDefined(level._effect_keys)) {
     keys = getarraykeys(level._effect);
   } else {
     keys = getarraykeys(level._effect);
@@ -1390,14 +1388,14 @@ restart_fx_looper() {
 }
 
 process_fx_rotater() {
-  if(level.fx_rotating)
+  if(level.fx_rotating) {
     return;
-
+  }
   set_anglemod_move_vector();
 
-  if(!rotation_is_occuring())
+  if(!rotation_is_occuring()) {
     return;
-
+  }
   level.fx_rotating = true;
 
   if(level.selected_fx_ents.size > 1) {
@@ -1407,7 +1405,7 @@ process_fx_rotater() {
     org.v["origin"] = center;
 
     rotater = [];
-    for (i = 0; i < level.selected_fx_ents.size; i++) {
+    for(i = 0; i < level.selected_fx_ents.size; i++) {
       rotater[i] = spawn("script_origin", level.selected_fx_ents[i].v["origin"]);
       rotater[i].angles = level.selected_fx_ents[i].v["angles"];
       rotater[i] linkto(org);
@@ -1419,7 +1417,7 @@ process_fx_rotater() {
 
     org delete();
 
-    for (i = 0; i < rotater.size; i++)
+    for(i = 0; i < rotater.size; i++)
       rotater[i] delete();
   } else if(level.selected_fx_ents.size == 1) {
     ent = level.selected_fx_ents[0];
@@ -1444,10 +1442,9 @@ generate_fx_log(autosave) {
   // first lets fix all the really small numbers so they dont cause errors because the game will print out
   // 4.2343-7e or whatever but cant accept it back in from script
 
-  /#
   flag_waitopen("createfx_saving");
   flag_set("createfx_saving");
-  autosave = isdefined(autosave);
+  autosave = isDefined(autosave);
   tab = "\t";
 
   radiant_exploder_add_string = "";
@@ -1472,11 +1469,11 @@ generate_fx_log(autosave) {
   createfx_orgranize_array();
 
   limit = 0.1;
-  for (p = 0; p < level.createFXent.size; p++) {
+  for(p = 0; p < level.createFXent.size; p++) {
     ent = level.createFXent[p];
     origin = [];
     angles = [];
-    for (i = 0; i < 3; i++) {
+    for(i = 0; i < 3; i++) {
       origin[i] = ent.v["origin"][i];
       angles[i] = ent.v["angles"][i];
 
@@ -1492,7 +1489,7 @@ generate_fx_log(autosave) {
 
   cfxprintln(file, tab + "// CreateFX entities placed: " + level.createFxEnt.size);
 
-  for (i = 0; i < level.createFXent.size; i++) {
+  for(i = 0; i < level.createFXent.size; i++) {
     if(file != -1 && level.createfx_loopcounter > 32) {
       level.createfx_loopcounter = 0;
       wait .05; // loop protection fails on writing the file
@@ -1500,7 +1497,7 @@ generate_fx_log(autosave) {
     level.createfx_loopcounter++;
 
     e = level.createFXent[i];
-    assertEX(isdefined(e.v["type"]), "effect at origin " + e.v["origin"] + " has no type");
+    assertEX(isDefined(e.v["type"]), "effect at origin " + e.v["origin"] + " has no type");
 
     // don't post .map effects in the script.
     //		if(e.v["worldfx"])
@@ -1508,9 +1505,9 @@ generate_fx_log(autosave) {
 
     // when scr_map_exploder_dump is set just output the exploders from radiant.could output two scripts but keeping it simple.
     if(GetDvarInt("scr_map_exploder_dump")) {
-      if(!isdefined(e.model))
+      if(!isDefined(e.model))
         continue;
-    } else if(isdefined(e.model))
+    } else if(isDefined(e.model))
       continue; // entities with models are from radiant and don't get reported
 
     if(e.v["type"] == "loopfx")
@@ -1538,5 +1535,4 @@ generate_fx_log(autosave) {
   flag_clear("createfx_saving");
 
   //	println( "CreateFX entities placed: " + level.createFxEnt.size );
-  # /
 }

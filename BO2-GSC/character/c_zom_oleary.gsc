@@ -4,7 +4,7 @@
 **************************************/
 
 main() {
-  self setmodel("c_zom_player_oleary_fb");
+  self setModel("c_zom_player_oleary_fb");
   self.voice = "american";
   self.skeleton = "base";
 }

@@ -52,9 +52,7 @@ initialize(var_0) {
   if(isDefined(self.a.postscriptfunc)) {
     var_1 = self.a.postscriptfunc;
     self.a.postscriptfunc = undefined;
-    [
-      [var_1]
-    ](var_0);
+    [[var_1]](var_0);
   }
 
   if(var_0 != "combat" && var_0 != "pain" && var_0 != "death" && usingsidearm())

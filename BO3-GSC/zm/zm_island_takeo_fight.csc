@@ -24,12 +24,12 @@
 #namespace zm_island_takeo_fight;
 
 function autoexec __init__sytem__() {
-  system::register("zm_island_takeo_fight", & __init__, undefined, undefined);
+  system::register("zm_island_takeo_fight", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("toplayer", "takeofight_teleport_fx", 9000, 1, "int", & takeofight_teleport_fx, 0, 0);
-  clientfield::register("scriptmover", "takeo_arm_hit_fx", 1, 3, "int", & takeo_arm_hit_fx, 0, 0);
+  clientfield::register("toplayer", "takeofight_teleport_fx", 9000, 1, "int", &takeofight_teleport_fx, 0, 0);
+  clientfield::register("scriptmover", "takeo_arm_hit_fx", 1, 3, "int", &takeo_arm_hit_fx, 0, 0);
 }
 
 function main() {}
@@ -39,6 +39,6 @@ function takeofight_teleport_fx(localclientnum, oldval, newval, bnewent, binitia
 function takeo_arm_hit_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval > 0) {
     str_tag = ("tag_fx_eye" + newval) + "_jnt";
-    self.var_2c75d806 = playfxontag(localclientnum, level._effect["takeofight_postule_burst"], self, str_tag);
+    self.var_2c75d806 = playFXOnTag(localclientnum, level._effect["takeofight_postule_burst"], self, str_tag);
   }
 }

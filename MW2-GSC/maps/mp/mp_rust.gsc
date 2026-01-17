@@ -6,7 +6,6 @@
 #include maps\mp\_utility;
 
 main() {
-
   maps\mp\mp_rust_precache::main();
   maps\createart\mp_rust_art::main();
   maps\mp\mp_rust_fx::main();

@@ -91,9 +91,7 @@ doNuke(allowCancel) {
       self IPrintLnBold(&"KILLSTREAKS_FRIENDLY_TACTICAL_NUKE");
   }
 
-  if(!isDefined(level.doNuke_fx) || ![
-      [level.doNuke_fx]
-    ]()) {
+  if(!isDefined(level.doNuke_fx) || ![[level.doNuke_fx]]()) {
     if(!isDefined(level.nuke_soundObject)) {
       level.nuke_soundObject = spawn("script_origin", (0, 0, 1));
       level.nuke_soundObject hide();

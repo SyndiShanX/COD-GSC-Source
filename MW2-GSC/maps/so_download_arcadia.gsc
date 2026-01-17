@@ -48,8 +48,8 @@ main() {
 
   common_scripts\_sentry::main();
 
-  add_hint_string("use_laser1", & "SO_DOWNLOAD_ARCADIA_LASER_HINT1", ::so_stop_laser_hint1);
-  add_hint_string("use_laser2", & "SO_DOWNLOAD_ARCADIA_LASER_HINT2", ::so_stop_laser_hint2);
+  add_hint_string("use_laser1", &"SO_DOWNLOAD_ARCADIA_LASER_HINT1", ::so_stop_laser_hint1);
+  add_hint_string("use_laser2", &"SO_DOWNLOAD_ARCADIA_LASER_HINT2", ::so_stop_laser_hint2);
 
   deadquotes = [];
   deadquotes[deadquotes.size] = "@DEADQUOTE_SO_CLAYMORE_POINT_ENEMY";
@@ -121,18 +121,18 @@ so_download_arcadia_init_flags() {
 
 //so_disable_player_laser_init()
 //{
-//	triggers = GetEntArray( "so_disable_player_stryker", "targetname" );
+//	triggers = getEntArray( "so_disable_player_stryker", "targetname" );
 //	array_thread( triggers, ::so_disable_player_laser_think );
 //}
 
 //so_disable_player_laser_think()
 //{
-//	while ( 1 )
+//	while( 1 )
 //	{
 //		self waittill( "trigger", other );
 //
 //		touched = true;
-//		while ( touched )
+//		while( touched )
 //		{
 //			touched = false;
 //
@@ -187,7 +187,7 @@ start_so_download_arcadia() {
   thread enable_challenge_timer("start_challenge", "stryker_extraction_done");
   fade_challenge_in(undefined, false);
 
-  so_download_objective_init(0, & "SO_DOWNLOAD_ARCADIA_OBJ_REGULAR");
+  so_download_objective_init(0, &"SO_DOWNLOAD_ARCADIA_OBJ_REGULAR");
   thread stryker_think();
   thread so_download_arcadia_intro_dialogue();
 
@@ -200,13 +200,13 @@ start_so_download_arcadia() {
 }
 
 so_fake_choppers() {
-  choppers = getentarray("fake_creek_chopper", "targetname");
+  choppers = getEntArray("fake_creek_chopper", "targetname");
   array_call(choppers, ::Delete);
 
-  choppers = getentarray("fake_golf_course_chopper", "targetname");
+  choppers = getEntArray("fake_golf_course_chopper", "targetname");
   array_call(choppers, ::Delete);
 
-  choppers = getentarray("checkpoint_fake_chopper", "targetname");
+  choppers = getEntArray("checkpoint_fake_chopper", "targetname");
   array_call(choppers, ::Hide);
 
   foreach(chopper in choppers) {
@@ -229,7 +229,7 @@ so_fake_choppers() {
   level.chopper_max_count = 10;
   level.chopper_count = 0;
 
-  while (1) {
+  while(1) {
     choppers = array_randomize(choppers);
 
     foreach(idx, chopper in choppers) {
@@ -252,16 +252,16 @@ so_fake_choppers() {
 
 #using_animtree("vehicles");
 so_fake_chopper_create_and_move(moveTime, destination) {
-  assert(isdefined(moveTime));
+  assert(isDefined(moveTime));
   assert(moveTime > 0);
-  assert(isdefined(destination));
+  assert(isDefined(destination));
 
   chopper = spawn("script_model", self.origin);
   chopper endon("delete");
 
   level.chopper_count++;
 
-  chopper PlayLoopSound("veh_helicopter_loop");
+  chopper playLoopSound("veh_helicopter_loop");
 
   chopper.angles = self.angles;
 
@@ -285,7 +285,7 @@ so_fake_chopper_tilt() {
   self endon("death");
   start_angle = self.angles;
 
-  while (1) {
+  while(1) {
     time = RandomFloatRange(2, 3);
     pitch = start_angle[0] + RandomFloatRange(-5, 5);
     yaw = start_angle[1] + RandomFloatRange(-7, 7);
@@ -297,7 +297,6 @@ so_fake_chopper_tilt() {
 }
 
 so_download_arcadia_intro_dialogue() {
-
   //	doExtraDialogue = false;
   //	
   //	dvar = GetDvarInt( "so_download_arcadia_introdialogue", -1 );
@@ -400,7 +399,7 @@ so_mansion_pool() {
 
   trigger = getent("pool", "targetname");
 
-  while (1) {
+  while(1) {
     trigger waittill("trigger");
 
     players_touching = [];
@@ -416,7 +415,7 @@ so_mansion_pool() {
 
 so_mansion_pool_internal(trigger) {
   self.so_in_water = true;
-  while (self IsTouching(trigger)) {
+  while(self IsTouching(trigger)) {
     self SetMoveSpeedScale(0.3);
     self AllowStand(true);
     self AllowCrouch(false);

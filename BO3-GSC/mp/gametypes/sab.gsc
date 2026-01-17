@@ -37,16 +37,16 @@ function main() {
   util::registernumlives(0, 100);
   util::registerroundwinlimit(0, 10);
   globallogic::registerfriendlyfiredelay(level.gametype, 15, 0, 1440);
-  level.onstartgametype = & onstartgametype;
-  level.onspawnplayer = & onspawnplayer;
-  level.onroundendgame = & onroundendgame;
+  level.onstartgametype = &onstartgametype;
+  level.onspawnplayer = &onspawnplayer;
+  level.onroundendgame = &onroundendgame;
   gameobjects::register_allowed_gameobject(level.gametype);
   if(!game["tiebreaker"]) {
-    level.onprecachegametype = & onprecachegametype;
-    level.ontimelimit = & ontimelimit;
-    level.ondeadevent = & ondeadevent;
-    level.onroundswitch = & onroundswitch;
-    level.onplayerkilled = & onplayerkilled;
+    level.onprecachegametype = &onprecachegametype;
+    level.ontimelimit = &ontimelimit;
+    level.ondeadevent = &ondeadevent;
+    level.onroundswitch = &onroundswitch;
+    level.onplayerkilled = &onplayerkilled;
     level.endgameonscorelimit = 0;
     game["dialog"]["gametype"] = "sab_start";
     game["dialog"]["gametype_hardcore"] = "hcsab_start";
@@ -55,7 +55,7 @@ function main() {
     game["dialog"]["sudden_death"] = "suddendeath";
     game["dialog"]["sudden_death_boost"] = "generic_boost";
   } else {
-    level.onendgame = & onendgame;
+    level.onendgame = &onendgame;
     level.endgameonscorelimit = 0;
     game["dialog"]["gametype"] = "sab_start";
     game["dialog"]["gametype_hardcore"] = "hcsab_start";
@@ -67,11 +67,11 @@ function main() {
     util::registertimelimit(0, 0);
   }
   badtrig = getent("sab_bomb_defuse_allies", "targetname");
-  if(isdefined(badtrig)) {
+  if(isDefined(badtrig)) {
     badtrig delete();
   }
   badtrig = getent("sab_bomb_defuse_axis", "targetname");
-  if(isdefined(badtrig)) {
+  if(isDefined(badtrig)) {
     badtrig delete();
   }
   level.lastdialogtime = 0;
@@ -84,12 +84,12 @@ function onprecachegametype() {
 }
 
 function onroundswitch() {
-  if(!isdefined(game["switchedsides"])) {
+  if(!isDefined(game["switchedsides"])) {
     game["switchedsides"] = 0;
   }
   if(game["teamScores"]["allies"] == (level.scorelimit - 1) && game["teamScores"]["axis"] == (level.scorelimit - 1)) {
     level.halftimetype = "overtime";
-    level.halftimesubcaption = & "MP_TIE_BREAKER";
+    level.halftimesubcaption = &"MP_TIE_BREAKER";
     game["tiebreaker"] = 1;
   } else {
     level.halftimetype = "halftime";
@@ -98,35 +98,35 @@ function onroundswitch() {
 }
 
 function onstartgametype() {
-  if(!isdefined(game["switchedsides"])) {
+  if(!isDefined(game["switchedsides"])) {
     game["switchedsides"] = 0;
   }
   setclientnamemode("auto_change");
-  game["strings"]["target_destroyed"] = & "MP_TARGET_DESTROYED";
+  game["strings"]["target_destroyed"] = &"MP_TARGET_DESTROYED";
   if(!game["tiebreaker"]) {
-    util::setobjectivetext("allies", & "OBJECTIVES_SAB");
-    util::setobjectivetext("axis", & "OBJECTIVES_SAB");
+    util::setobjectivetext("allies", &"OBJECTIVES_SAB");
+    util::setobjectivetext("axis", &"OBJECTIVES_SAB");
     if(level.splitscreen) {
-      util::setobjectivescoretext("allies", & "OBJECTIVES_SAB");
-      util::setobjectivescoretext("axis", & "OBJECTIVES_SAB");
+      util::setobjectivescoretext("allies", &"OBJECTIVES_SAB");
+      util::setobjectivescoretext("axis", &"OBJECTIVES_SAB");
     } else {
-      util::setobjectivescoretext("allies", & "OBJECTIVES_SAB_SCORE");
-      util::setobjectivescoretext("axis", & "OBJECTIVES_SAB_SCORE");
+      util::setobjectivescoretext("allies", &"OBJECTIVES_SAB_SCORE");
+      util::setobjectivescoretext("axis", &"OBJECTIVES_SAB_SCORE");
     }
-    util::setobjectivehinttext("allies", & "OBJECTIVES_SAB_HINT");
-    util::setobjectivehinttext("axis", & "OBJECTIVES_SAB_HINT");
+    util::setobjectivehinttext("allies", &"OBJECTIVES_SAB_HINT");
+    util::setobjectivehinttext("axis", &"OBJECTIVES_SAB_HINT");
   } else {
-    util::setobjectivetext("allies", & "OBJECTIVES_TDM");
-    util::setobjectivetext("axis", & "OBJECTIVES_TDM");
+    util::setobjectivetext("allies", &"OBJECTIVES_TDM");
+    util::setobjectivetext("axis", &"OBJECTIVES_TDM");
     if(level.splitscreen) {
-      util::setobjectivescoretext("allies", & "OBJECTIVES_TDM");
-      util::setobjectivescoretext("axis", & "OBJECTIVES_TDM");
+      util::setobjectivescoretext("allies", &"OBJECTIVES_TDM");
+      util::setobjectivescoretext("axis", &"OBJECTIVES_TDM");
     } else {
-      util::setobjectivescoretext("allies", & "OBJECTIVES_TDM_SCORE");
-      util::setobjectivescoretext("axis", & "OBJECTIVES_TDM_SCORE");
+      util::setobjectivescoretext("allies", &"OBJECTIVES_TDM_SCORE");
+      util::setobjectivescoretext("axis", &"OBJECTIVES_TDM_SCORE");
     }
-    util::setobjectivehinttext("allies", & "OBJECTIVES_TDM_HINT");
-    util::setobjectivehinttext("axis", & "OBJECTIVES_TDM_HINT");
+    util::setobjectivehinttext("allies", &"OBJECTIVES_TDM_HINT");
+    util::setobjectivehinttext("axis", &"OBJECTIVES_TDM_HINT");
   }
   spawning::create_map_placed_influencers();
   level.spawnmins = (0, 0, 0);
@@ -163,9 +163,9 @@ function onovertime() {
   level.inovertime = 1;
   globallogic_audio::leader_dialog("sudden_death");
   globallogic_audio::leader_dialog("sudden_death_boost");
-  for (index = 0; index < level.players.size; index++) {
+  for(index = 0; index < level.players.size; index++) {
     level.players[index] notify("force_spawn");
-    level.players[index] thread hud_message::oldnotifymessage(&"MP_SUDDEN_DEATH", & "MP_NO_RESPAWN", undefined, (1, 0, 0), "mp_last_stand");
+    level.players[index] thread hud_message::oldnotifymessage(&"MP_SUDDEN_DEATH", &"MP_NO_RESPAWN", undefined, (1, 0, 0), "mp_last_stand");
     level.players[index] setclientuivisibilityflag("g_compassShowEnemies", 1);
   }
   setmatchtalkflag("DeadChatWithDead", 1);
@@ -174,7 +174,7 @@ function onovertime() {
   setmatchtalkflag("DeadHearAllLiving", 0);
   setmatchtalkflag("EveryoneHearsEveryone", 0);
   waittime = 0;
-  while (waittime < 90) {
+  while(waittime < 90) {
     if(!level.bombplanted) {
       waittime = waittime + 1;
       setgameendtime(gettime() + ((90 - waittime) * 1000));
@@ -217,7 +217,7 @@ function onspawnplayer(predictedspawn) {
   self.isdefusing = 0;
   self.isbombcarrier = 0;
   if(game["tiebreaker"]) {
-    self thread hud_message::oldnotifymessage(&"MP_TIE_BREAKER", & "MP_NO_RESPAWN", undefined, (1, 0, 0), "mp_last_stand");
+    self thread hud_message::oldnotifymessage(&"MP_TIE_BREAKER", &"MP_NO_RESPAWN", undefined, (1, 0, 0), "mp_last_stand");
     self setclientuivisibilityflag("g_compassShowEnemies", 1);
     setmatchtalkflag("DeadChatWithDead", 1);
     setmatchtalkflag("DeadChatWithTeam", 0);
@@ -240,12 +240,12 @@ function sabotage() {
   level.bombexploded = 0;
   level._effect["bombexplosion"] = "_t6/maps/mp_maps/fx_mp_exp_bomb";
   trigger = getent("sab_bomb_pickup_trig", "targetname");
-  if(!isdefined(trigger)) {
+  if(!isDefined(trigger)) {
     util::error("No sab_bomb_pickup_trig trigger found in map.");
     return;
   }
   visuals[0] = getent("sab_bomb", "targetname");
-  if(!isdefined(visuals[0])) {
+  if(!isDefined(visuals[0])) {
     util::error("No sab_bomb script_model found in map.");
     return;
   }
@@ -258,17 +258,17 @@ function sabotage() {
   level.sabbomb gameobjects::set_carry_icon("hud_suitcase_bomb");
   level.sabbomb gameobjects::set_visible_team("any");
   level.sabbomb.objidpingenemy = 1;
-  level.sabbomb.onpickup = & onpickup;
-  level.sabbomb.ondrop = & ondrop;
+  level.sabbomb.onpickup = &onpickup;
+  level.sabbomb.ondrop = &ondrop;
   level.sabbomb.allowweapons = 1;
   level.sabbomb.objpoints["allies"].archived = 1;
   level.sabbomb.objpoints["axis"].archived = 1;
   level.sabbomb.autoresettime = 60;
-  if(!isdefined(getent("sab_bomb_axis", "targetname"))) {
+  if(!isDefined(getent("sab_bomb_axis", "targetname"))) {
     util::error("");
     return;
   }
-  if(!isdefined(getent("sab_bomb_allies", "targetname"))) {
+  if(!isDefined(getent("sab_bomb_allies", "targetname"))) {
     util::error("");
     return;
   }
@@ -282,17 +282,17 @@ function sabotage() {
 }
 
 function createbombzone(team, trigger) {
-  visuals = getentarray(trigger.target, "targetname");
+  visuals = getEntArray(trigger.target, "targetname");
   bombzone = gameobjects::create_use_object(team, trigger, visuals, vectorscale((0, 0, 1), 64));
   bombzone resetbombsite();
-  bombzone.onuse = & onuse;
-  bombzone.onbeginuse = & onbeginuse;
-  bombzone.onenduse = & onenduse;
-  bombzone.oncantuse = & oncantuse;
+  bombzone.onuse = &onuse;
+  bombzone.onbeginuse = &onbeginuse;
+  bombzone.onenduse = &onenduse;
+  bombzone.oncantuse = &oncantuse;
   bombzone.useweapon = getweapon("briefcase_bomb");
   bombzone.visuals[0].killcament = spawn("script_model", bombzone.visuals[0].origin + vectorscale((0, 0, 1), 128));
-  for (i = 0; i < visuals.size; i++) {
-    if(isdefined(visuals[i].script_exploder)) {
+  for(i = 0; i < visuals.size; i++) {
+    if(isDefined(visuals[i].script_exploder)) {
       bombzone.exploderindex = visuals[i].script_exploder;
       break;
     }
@@ -308,7 +308,7 @@ function onbeginuse(player) {
     player.isdefusing = 1;
     player thread battlechatter::gametype_specific_battle_chatter("sd_enemyplant", player.pers["team"]);
   }
-  player playsound("fly_bomb_raise_plr");
+  player playSound("fly_bomb_raise_plr");
 }
 
 function onenduse(team, player, result) {
@@ -366,11 +366,11 @@ function onpickup(player) {
 
 function ondrop(player) {
   if(level.bombplanted) {} else {
-    if(isdefined(player)) {
+    if(isDefined(player)) {
       util::printonteamarg(&"MP_EXPLOSIVES_DROPPED_BY", self gameobjects::get_owner_team(), player);
     }
     sound::play_on_players(game["bomb_dropped_sound"], self gameobjects::get_owner_team());
-    if(isdefined(player)) {
+    if(isDefined(player)) {
       print("");
     } else {
       print("");
@@ -386,7 +386,7 @@ function ondrop(player) {
 function abandonmentthink(delay) {
   level endon("bomb_picked_up");
   wait(delay);
-  if(isdefined(self.carrier)) {
+  if(isDefined(self.carrier)) {
     return;
   }
   if(self gameobjects::get_owner_team() == "allies") {
@@ -411,7 +411,7 @@ function onuse(player) {
   if(!self gameobjects::is_friendly_team(player.pers["team"])) {
     player notify("bomb_planted");
     print("");
-    if(isdefined(player.pers["plants"])) {
+    if(isDefined(player.pers["plants"])) {
       player.pers["plants"]++;
       player.plants = player.pers["plants"];
     }
@@ -435,7 +435,7 @@ function onuse(player) {
   } else {
     player notify("bomb_defused");
     print("");
-    if(isdefined(player.pers["defuses"])) {
+    if(isDefined(player.pers["defuses"])) {
       player.pers["defuses"]++;
       player.defuses = player.pers["defuses"];
     }
@@ -446,7 +446,7 @@ function onuse(player) {
     scoreevents::processscoreevent("defused_bomb", player);
     player recordgameevent("defuse");
     level thread bombdefused(self);
-    if(level.inovertime && isdefined(level.plantingteamdead)) {
+    if(level.inovertime && isDefined(level.plantingteamdead)) {
       thread globallogic::endgame(player.pers["team"], game["strings"][level.bombplantedby + "_eliminated"]);
       return;
     }
@@ -482,7 +482,7 @@ function bombplanted(destroyedobj, team) {
   }
   explosionorigin = level.sabbomb.visuals[0].origin + vectorscale((0, 0, 1), 12);
   level.bombexploded = 1;
-  if(isdefined(level.bombowner)) {
+  if(isDefined(level.bombowner)) {
     destroyedobj.visuals[0] radiusdamage(explosionorigin, 512, 200, 20, level.bombowner, "MOD_EXPLOSIVE", getweapon("briefcase_bomb"));
     level thread popups::displayteammessagetoall(&"MP_EXPLOSIVES_BLOWUP_BY", level.bombowner);
     level.bombowner addplayerstatwithgametype("DESTRUCTIONS", 1);
@@ -494,7 +494,7 @@ function bombplanted(destroyedobj, team) {
   explosioneffect = spawnfx(level._effect["bombexplosion"], explosionorigin + vectorscale((0, 0, 1), 50), (0, 0, 1), (cos(rot), sin(rot), 0));
   triggerfx(explosioneffect);
   thread sound::play_in_space("mpl_sab_exp_suitcase_bomb_main", explosionorigin);
-  if(isdefined(destroyedobj.exploderindex)) {
+  if(isDefined(destroyedobj.exploderindex)) {
     exploder::exploder(destroyedobj.exploderindex);
   }
   [[level._setteamscore]](team, [[level._getteamscore]](team) + 1);
@@ -552,14 +552,14 @@ function bombdefused(object) {
 function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
   inbombzone = 0;
   inbombzoneteam = "none";
-  if(isdefined(level.bombzones["allies"])) {
+  if(isDefined(level.bombzones["allies"])) {
     dist = distance2dsquared(self.origin, level.bombzones["allies"].curorigin);
     if(dist < level.defaultoffenseradiussq) {
       inbombzoneteam = "allies";
       inbombzone = 1;
     }
   }
-  if(isdefined(level.bombzones["axis"])) {
+  if(isDefined(level.bombzones["axis"])) {
     dist = distance2dsquared(self.origin, level.bombzones["axis"].curorigin);
     if(dist < level.defaultoffenseradiussq) {
       inbombzoneteam = "axis";
@@ -571,7 +571,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
       attacker thread challenges::killedbaseoffender(level.bombzones[inbombzoneteam], weapon);
       self recordkillmodifier("defending");
     } else {
-      if(isdefined(attacker.pers["defends"])) {
+      if(isDefined(attacker.pers["defends"])) {
         attacker.pers["defends"]++;
         attacker.defends = attacker.pers["defends"];
       }
@@ -580,7 +580,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
       self recordkillmodifier("assaulting");
     }
   }
-  if(isplayer(attacker) && attacker.pers["team"] != self.pers["team"] && isdefined(self.isbombcarrier) && self.isbombcarrier == 1) {
+  if(isplayer(attacker) && attacker.pers["team"] != self.pers["team"] && isDefined(self.isbombcarrier) && self.isbombcarrier == 1) {
     self recordkillmodifier("carrying");
   }
   if(self.isplanting == 1) {
@@ -592,7 +592,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
 }
 
 function onendgame(winningteam) {
-  if(isdefined(winningteam) && (winningteam == "allies" || winningteam == "axis")) {
+  if(isDefined(winningteam) && (winningteam == "allies" || winningteam == "axis")) {
     globallogic_score::giveteamscoreforobjective(winningteam, 1);
   }
 }

@@ -7,6 +7,6 @@
 main() {
   wait 0;
 
-  if(isdefined(self))
+  if(isDefined(self))
     self delete();
 }

@@ -20,7 +20,7 @@ init() {
 debug_jet() {
   self endon("death");
   struct = getstruct(self.target, "targetname");
-  dir = AnglesToForward(struct.angles);
+  dir = anglesToForward(struct.angles);
   while(1) {
     scale = 0.1;
     offset = (0, 0, 0);
@@ -34,7 +34,7 @@ debug_jet() {
 }
 
 ignite_jet() {
-  self playsound("evt_sq_ptt_gas_ignite");
+  self playSound("evt_sq_ptt_gas_ignite");
   exploder(self.script_int + 10);
   wait(1.0);
   stop_exploder(self.script_int);
@@ -141,7 +141,7 @@ ptt_lever() {
   self.angles = self.original_angles;
   while(level._ptt_num_lit < level._ptt_jets) {
     level waittill("lit");
-    self playsound("evt_sq_ptt_lever_ratchet");
+    self playSound("evt_sq_ptt_lever_ratchet");
     self RotateRoll(-25, 0.25);
     self waittill("rotatedone");
   }
@@ -149,7 +149,7 @@ ptt_lever() {
   use_trigger SetCursorHint("HINT_NOICON");
   use_trigger waittill("trigger", who);
   use_trigger Delete();
-  self playsound("evt_sq_ptt_lever_pull");
+  self playSound("evt_sq_ptt_lever_pull");
   self RotateRoll(100, 0.25);
   self waittill("rotatedone");
   if(isDefined(who)) {}
@@ -164,27 +164,27 @@ ptt_story_vox(player) {
   }
   level._ptt_sound_ent = spawn("script_origin", struct.origin);
   level._ptt_sound_ent_trash = spawn("script_origin", struct.origin);
-  level._ptt_sound_ent playsound("vox_egg_story_3_0", "sounddone");
+  level._ptt_sound_ent playSound("vox_egg_story_3_0", "sounddone");
   level._ptt_sound_ent waittill("sounddone");
-  level._ptt_sound_ent_trash playsound("evt_sq_ptt_trash_start");
+  level._ptt_sound_ent_trash playSound("evt_sq_ptt_trash_start");
   level._ptt_sound_ent_trash playLoopSound("evt_sq_ptt_trash_loop");
-  level._ptt_sound_ent playsound("vox_egg_story_3_1", "sounddone");
+  level._ptt_sound_ent playSound("vox_egg_story_3_1", "sounddone");
   level._ptt_sound_ent waittill("sounddone");
-  level._ptt_sound_ent playsound("vox_egg_story_3_2", "sounddone");
+  level._ptt_sound_ent playSound("vox_egg_story_3_2", "sounddone");
   level._ptt_sound_ent waittill("sounddone");
   if(isDefined(player)) {
     level.skit_vox_override = true;
-    player playsound("vox_egg_story_3_3" + maps\zombie_temple_sq::get_variant_from_entity_num(player getEntityNumber()), "vox_egg_sounddone");
+    player playSound("vox_egg_story_3_3" + maps\zombie_temple_sq::get_variant_from_entity_num(player getEntityNumber()), "vox_egg_sounddone");
     player waittill("vox_egg_sounddone");
     level.skit_vox_override = false;
   }
   level thread ptt_story_reminder_vox(45);
   flag_wait("sq_ptt_level_pulled");
   level._ptt_sound_ent_trash stopLoopSound(2);
-  level._ptt_sound_ent_trash playsound("evt_sq_ptt_trash_end");
-  level._ptt_sound_ent playsound("vox_egg_story_3_8", "sounddone");
+  level._ptt_sound_ent_trash playSound("evt_sq_ptt_trash_end");
+  level._ptt_sound_ent playSound("vox_egg_story_3_8", "sounddone");
   level._ptt_sound_ent waittill("sounddone");
-  level._ptt_sound_ent playsound("vox_egg_story_3_9", "sounddone");
+  level._ptt_sound_ent playSound("vox_egg_story_3_9", "sounddone");
   level._ptt_sound_ent waittill("sounddone");
   flag_set("ptt_plot_vo_done");
   level._ptt_sound_ent_trash delete();
@@ -198,7 +198,7 @@ ptt_story_reminder_vox(waittime) {
   wait(waittime);
   count = 4;
   while(!flag("sq_ptt_level_pulled") && count <= 7) {
-    level._ptt_sound_ent playsound("vox_egg_story_3_" + count, "sounddone");
+    level._ptt_sound_ent playSound("vox_egg_story_3_" + count, "sounddone");
     level._ptt_sound_ent waittill("sounddone");
     count++;
     wait(waittime);
@@ -284,13 +284,13 @@ ptt_dial() {
   self.trigger thread dial_trigger();
   while(num_turned < 4) {
     self waittill("triggered", who);
-    self playsound("evt_sq_ptt_valve");
+    self playSound("evt_sq_ptt_valve");
     self RotateRoll(90, 0.25);
     self waittill("rotatedone");
     num_turned++;
   }
   level thread ptt_story_vox(who);
-  self playsound("evt_sq_ptt_gas_release");
+  self playSound("evt_sq_ptt_gas_release");
   lever = getEnt("sq_ptt_lever", "targetname");
   lever thread ptt_lever();
   flag_set("sq_ptt_dial_dialed");
@@ -301,7 +301,7 @@ dud_dial_handler() {
   self.trigger thread dial_trigger();
   while(1) {
     self waittill("triggered");
-    self playsound("evt_sq_ptt_valve");
+    self playSound("evt_sq_ptt_valve");
     self RotateRoll(90, 0.25);
   }
 }

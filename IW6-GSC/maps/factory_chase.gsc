@@ -226,7 +226,7 @@ chase_airstrike_kills_player() {
   level endon("player_mount_vehicle_start");
   maps\_utility::wait_for_flag_or_timeout("player_left_parking_lot", 6);
   level notify("new_quote_string");
-  setdvar("ui_deadquote", & "FACTORY_FAIL_ESCAPE");
+  setdvar("ui_deadquote", &"FACTORY_FAIL_ESCAPE");
   level.player playSound("scn_factory_end_exp11_lr");
   playFX(level._effect["101ton_bomb"], level.player.origin);
   level.player kill();
@@ -240,7 +240,7 @@ chase_player_falls_off_trailer() {
   var_0 common_scripts\utility::trigger_on();
   common_scripts\utility::flag_wait("player_fell_off_trailer");
   level notify("new_quote_string");
-  setdvar("ui_deadquote", & "FACTORY_FAIL_FELL_OFF_TRAILER");
+  setdvar("ui_deadquote", &"FACTORY_FAIL_FELL_OFF_TRAILER");
   playFX(level._effect["101ton_bomb"], level.player.origin);
   level.player kill();
   maps\_utility::missionfailedwrapper();
@@ -453,7 +453,7 @@ semi_trailer_death_trigger() {
   var_0 thread semi_trailer_death_trigger_delete();
   common_scripts\utility::flag_wait("flag_trailer_intro_kill");
   level notify("new_quote_string");
-  setdvar("ui_deadquote", & "FACTORY_FAIL_HIT_BY_TRAILER");
+  setdvar("ui_deadquote", &"FACTORY_FAIL_HIT_BY_TRAILER");
   level.player kill();
   maps\_utility::missionfailedwrapper();
 }

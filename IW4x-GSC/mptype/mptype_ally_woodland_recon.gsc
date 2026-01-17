@@ -4,7 +4,6 @@
 *************************************************/
 
 main() {
-
   character\character_mp_usmc_woodland_recon::main();
 }
 

@@ -20,7 +20,7 @@ main() {
   level.scr_animtree["dead_guy"] = #animtree;
   level.dead_body_count = 1;
   level.max_number_of_dead_bodies = 10;
-  struct = spawnstruct();
+  struct = spawnStruct();
   struct.bodies = [];
   run_thread_on_targetname("trigger_body", ::trigger_body, struct);
   run_thread_on_targetname("dead_body", ::spawn_dead_body, struct);
@@ -28,7 +28,7 @@ main() {
 
 trigger_body(struct) {
   self waittill("trigger");
-  targets = getentarray(self.target, "targetname");
+  targets = getEntArray(self.target, "targetname");
   array_thread(targets, ::spawn_dead_body, struct);
 }
 
@@ -54,7 +54,7 @@ spawn_dead_body(struct) {
   model[[level.scr_deadbody[index]]]();
   assertex(isDefined(self.script_noteworthy), "Dead guy needs script_noteworthy death1 through 5");
   if(!isDefined(self.script_trace)) {
-    trace = bullettrace(model.origin + (0, 0, 5), model.origin + (0, 0, -64), false, undefined);
+    trace = bulletTrace(model.origin + (0, 0, 5), model.origin + (0, 0, -64), false, undefined);
     model.origin = trace["position"];
   }
   model setflaggedanim("flag", model getanim(self.script_noteworthy), 1, 0, 1);

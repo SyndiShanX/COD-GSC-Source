@@ -9,7 +9,6 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace wz_supply_stash;
 
 autoexec __init__system__() {
@@ -21,7 +20,7 @@ __init__() {
   callback::on_localclient_connect(&on_localclient_connect);
 }
 
-private on_localclient_connect(localclientnum) {
+on_localclient_connect(localclientnum) {
   if(isDefined(getgametypesetting(#"wzenablebountyhuntervehicles")) && getgametypesetting(#"wzenablebountyhuntervehicles") || isDefined(getgametypesetting(#"hash_23e09b48546a7e3b")) && getgametypesetting(#"hash_23e09b48546a7e3b")) {
     level thread function_53d906fd(localclientnum);
     return;
@@ -32,7 +31,7 @@ private on_localclient_connect(localclientnum) {
   }
 }
 
-private function_53d906fd(localclientnum) {
+function_53d906fd(localclientnum) {
   while(true) {
     player = function_5c10bd79(localclientnum);
     playfx = 0;
@@ -44,7 +43,7 @@ private function_53d906fd(localclientnum) {
 
     foreach(stash in level.item_spawn_stashes) {
       if(function_8a8a409b(stash)) {
-        if(stash.var_aa9f8f87 === #"supply_stash_parent_dlc1" || stash.var_aa9f8f87 === #"supply_stash_parent") {
+        if(stash.var_aa9f8f87 === # "supply_stash_parent_dlc1" || stash.var_aa9f8f87 === # "supply_stash_parent") {
           stash update_fx(localclientnum, playfx, function_ffdbe8c2(stash));
         }
       }
@@ -68,7 +67,7 @@ private function_53d906fd(localclientnum) {
   }
 }
 
-private function_fd3f6235(localclientnum) {
+function_fd3f6235(localclientnum) {
   while(true) {
     player = function_5c10bd79(localclientnum);
     playfx = 0;
@@ -98,7 +97,7 @@ private function_fd3f6235(localclientnum) {
 update_fx(localclientnum, playfx, state) {
   if(playfx && state == 0) {
     if(!isDefined(self.var_d3d42148)) {
-      self.var_d3d42148 = playFX(localclientnum, #"hash_6bcc939010112ea", self.origin);
+      self.var_d3d42148 = playFX(localclientnum, # "hash_6bcc939010112ea", self.origin);
     }
 
     return;

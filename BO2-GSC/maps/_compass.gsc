@@ -8,7 +8,7 @@
 
 setupminimap(material) {
   requiredmapaspectratio = getdvarfloat(#"scr_RequiredMapAspectratio");
-  corners = getentarray("minimap_corner", "targetname");
+  corners = getEntArray("minimap_corner", "targetname");
 
   if(corners.size != 2) {
     println("^1Error: There are not exactly two \"minimap_corner\" entities in the map. Could not set up minimap.");

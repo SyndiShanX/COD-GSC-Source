@@ -8,7 +8,7 @@ main() {
   level._effect["ac130_pinetree_trunk"] = loadfx("vfx\map\ac130\ac130_pinetree_trunk");
   precachemodel("ac130_pine01_stump");
   var_0 = 500;
-  var_1 = getentarray("ac130_tree", "targetname");
+  var_1 = getEntArray("ac130_tree", "targetname");
   common_scripts\utility::run_thread_on_targetname("ac130_tree", ::ac130_tree_setup);
 }
 
@@ -24,11 +24,11 @@ ac130_tree_setup() {
   self.ac130_tree_anims["sway"][2] = % ac130_pine01_sway03;
   self.ac130_tree_anims["sway"][3] = % ac130_pine01_sway04;
 
-  if(isdefined(self.target)) {
+  if(isDefined(self.target)) {
     var_0 = getent(self.target, "targetname");
 
-    if(isdefined(var_0)) {
-      var_0 setcandamage(1);
+    if(isDefined(var_0)) {
+      var_0 setCanDamage(1);
       self.ac130_hitbox = var_0;
       thread ac130_tree_think();
     }
@@ -51,9 +51,9 @@ ac130_tree_wobble(var_0) {
 
 ac130_tree_death() {
   var_0 = spawn("script_model", self getorigin());
-  var_0 setmodel("ac130_pine01_stump");
+  var_0 setModel("ac130_pine01_stump");
   self hide();
-  playfx(level._effect["ac130_pinetree_trunk"], self.origin);
+  playFX(level._effect["ac130_pinetree_trunk"], self.origin);
   wait 1.0;
   self.ac130_hitbox delete();
   self notify("death");
@@ -64,10 +64,10 @@ ac130_tree_think() {
   self endon("death");
   self setanim(self.ac130_tree_anims["still"], 1.0, 0.0, 1.0);
 
-  for (;;) {
+  for(;;) {
     self.ac130_hitbox waittill("damage", var_0, var_1, var_2, var_3, var_4);
 
-    if(isdefined(var_1) && isplayer(var_1)) {
+    if(isDefined(var_1) && isplayer(var_1)) {
       var_5 = var_1 getcurrentweapon();
 
       switch (tolower(var_5)) {

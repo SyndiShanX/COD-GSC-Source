@@ -29,7 +29,7 @@ main() {
 }
 
 parse_structs() {
-  for (i = 0; i < level.struct.size; i++) {
+  for(i = 0; i < level.struct.size; i++) {
     if(isDefined(level.struct[i].targetname)) {
       if(level.struct[i].targetname == "flak_fire_fx") {
         fx_id = "flak20_fire_fx";

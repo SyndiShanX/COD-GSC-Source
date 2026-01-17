@@ -11,7 +11,7 @@ SOUND_DELAY_MAX = 1;
 
 init() {
   train = getEnt("the_l_train", "targetname");
-  assertex(isdefined(train), "Calling to setup train in map without having the train in map! [targetname: the_l_train]");
+  assertex(isDefined(train), "Calling to setup train in map without having the train in map! [targetname: the_l_train]");
   train thread train_setup();
 }
 
@@ -35,12 +35,12 @@ train_setup() {
   flag_init("train_running");
 
   yaw = self.angles[1];
-  while (yaw >= 90) {
+  while(yaw >= 90) {
     yaw -= 90;
   }
   assertEx(yaw == 0, "Trains must have a yaw of 0, 90, 180, or 270 currently( for collision purposes )");
 
-  wheels = getentarray("wheel", "targetname");
+  wheels = getEntArray("wheel", "targetname");
   wheel_model = wheels[0].model;
   wheel_offset = [];
   foreach(wheel in wheels) {
@@ -51,15 +51,15 @@ train_setup() {
   //****************
   // Set up the other cars
   //****************	
-  forward = anglestoforward(self.angles);
+  forward = anglesToForward(self.angles);
   forward *= distance_between_cars;
   car_separation_vec = forward;
   cars = [];
-  for (i = 0; i < train_cars - 1; i++) // - 1 car self is the lead car
+  for(i = 0; i < train_cars - 1; i++) // - 1 car self is the lead car
   {
     car = spawn("script_model", self.origin - car_separation_vec);
     car.angles = self.angles;
-    car setmodel(self.model);
+    car setModel(self.model);
     car linkto(self);
     car_separation_vec += forward;
     cars[cars.size] = car;
@@ -67,7 +67,7 @@ train_setup() {
 
     foreach(owner_wheel in wheels) {
       wheel = spawn("script_model", car.origin + owner_wheel.offset);
-      wheel setmodel(wheel_model);
+      wheel setModel(wheel_model);
       wheel.angles = owner_wheel.angles;
       wheel linkto(car);
       car.wheels[car.wheels.size] = wheel;
@@ -82,7 +82,7 @@ train_setup() {
 
   end = getent(start.target, "targetname");
   end.origin = (end.origin[0], end.origin[1], self.origin[2]);
-  forward = anglestoforward(self.angles);
+  forward = anglesToForward(self.angles);
   start.origin = start.origin - forward * lead_in_dist;
   end.origin = end.origin + forward * lead_out_dist;
 
@@ -91,7 +91,6 @@ train_setup() {
   travel_time = travel_dist / Units_per_second;
   track_time = track_dist / Units_per_second;
   full_train_time = train_cars * distance_between_cars / Units_per_second;
-
 
   //****************
   // set up the earthquakes that play to make the train tracks rattle
@@ -110,7 +109,7 @@ train_setup() {
     max_time_between_trains = min_time_between_trains + 0.1;
 
   eq_points = [];
-  for (i = 0; i < eq_count; i++) {
+  for(i = 0; i < eq_count; i++) {
     progress = i / eq_count;
     eq_points[i] = start.origin * (1 - progress) + end.origin * progress;
   }
@@ -121,14 +120,14 @@ train_setup() {
   self.origin = start.origin;
   wait(delay_until_first_train);
 
-  for (;;) {
+  for(;;) {
     hide_trains();
     wait(0.05);
     self.origin = start.origin;
 
     // First there is a lead in of small EQs to shake the platform
     timer = gettime();
-    for (i = 0; i < eq_count; i++) {
+    for(i = 0; i < eq_count; i++) {
       thread train_eq(eq_points[i], eq_radius, track_time, full_train_time);
       wait(delay_between_eqs);
     }
@@ -167,7 +166,7 @@ train_play_sounds(max) {
 
   // dont play sounds on every car
   count = 0;
-  for (i = 0; i < self.cars.size; i++) {
+  for(i = 0; i < self.cars.size; i++) {
     count++;
     if(count < max)
       continue;
@@ -187,7 +186,7 @@ train_stop_sounds(max) {
   self stopLoopSound("veh_train_eng_close2_loop");
 
   count = 0;
-  for (i = 0; i < self.cars.size; i++) {
+  for(i = 0; i < self.cars.size; i++) {
     count++;
     if(count < max)
       continue;
@@ -228,27 +227,27 @@ show_trains() {
 }
 
 train_spawns_dust() {
-  if(!isdefined(level._effect["train_dust"]))
+  if(!isDefined(level._effect["train_dust"])) {
     return;
-
+  }
   range = 40;
   self endon("train_stops_killing_players");
 
-  for (;;) {
+  for(;;) {
     /*
-    for ( i = 0; i < 10; i ++ )
+    for( i = 0; i < 10; i ++ )
     {
     	x = randomfloatrange( self.min_x, self.max_x );
     	y = randomfloatrange( self.min_y, self.max_y );
-    	PlayFX( level._effect[ "train_dust" ], ( x, y, self.origin[ 2 ] - 30 ) );
+    	playFX( level._effect[ "train_dust" ], ( x, y, self.origin[ 2 ] - 30 ) );
     }
     */
 
     count = randomintrange(1, 3); // which means 1 to 2 fx per frame
-    for (i = 0; i < count; i++) {
+    for(i = 0; i < count; i++) {
       x = randomfloatrange(self.min_x - range, self.max_x + range);
       y = randomfloatrange(self.min_y - range, self.max_y + range);
-      PlayFX(level._effect["train_dust_linger"], (x, y, self.origin[2] - 10));
+      playFX(level._effect["train_dust_linger"], (x, y, self.origin[2] - 10));
     }
     wait(0.05);
   }
@@ -260,7 +259,7 @@ train_kills_players(train_cars, distance_between_cars) {
   train_width = 68;
   self endon("train_stops_killing_players");
 
-  forward = anglestoforward(self.angles);
+  forward = anglesToForward(self.angles);
   right = anglestoright(self.angles);
   full_car_vec = forward * distance_between_cars;
   half_car_vec = full_car_vec * 0.5;
@@ -288,7 +287,7 @@ train_kills_players(train_cars, distance_between_cars) {
       min_y = side[1];
   }
 
-  for (;;) {
+  for(;;) {
     dif = start - self.origin;
     start = self.origin;
     max_x -= dif[0];
@@ -314,20 +313,20 @@ train_kills_players(train_cars, distance_between_cars) {
         continue;
       if(player.sessionstate != "playing")
         continue;
-      if(!train_hits(player, min_x, min_y, max_x, max_y))
+      if(!train_hits(player, min_x, min_y, max_x, max_y)) {
         continue;
-
-      player playsound("melee_knife_hit_watermelon");
+      }
+      player playSound("melee_knife_hit_watermelon");
 
       pos = get_damageable_player_pos(player);
       hit_ents[hit_ents.size] = get_damageable_player(player, pos);
     }
 
-    grenades = getentarray("grenade", "classname");
+    grenades = getEntArray("grenade", "classname");
     foreach(grenade in grenades) {
-      if(!train_hits(grenade, min_x, min_y, max_x, max_y))
+      if(!train_hits(grenade, min_x, min_y, max_x, max_y)) {
         continue;
-
+      }
       pos = get_damageable_grenade_pos(grenade);
       hit_ents[hit_ents.size] = get_damageable_grenade(grenade, pos);
     }
@@ -385,7 +384,7 @@ train_eq_for_time(origin, eq, eq_radius, eq_time, eq_time_slice) {
   // are going to do a lot of earthquakes to simulate a steady quake
   //thread print3d_eq( origin, eq );
   steps = int(eq_time / eq_time_slice);
-  for (i = 0; i < steps; i++) {
+  for(i = 0; i < steps; i++) {
     Earthquake(eq, eq_time_slice * 3, origin, eq_radius);
     wait(eq_time_slice);
   }
@@ -400,7 +399,7 @@ train_eq_lerp_for_time(origin, eq1, eq2, eq_radius, eq_time, eq_time_slice) {
   // are going to do a lot of earthquakes to simulate a steady quake
   //thread print3d_eq( origin, eq );
   steps = int(eq_time / eq_time_slice);
-  for (i = 0; i < steps; i++) {
+  for(i = 0; i < steps; i++) {
     progress = i / steps;
     eq = eq2 * progress + eq1 * (1 - progress);
     if(eq > 0)
@@ -416,7 +415,7 @@ train_eq_lerp_for_time(origin, eq1, eq2, eq_radius, eq_time, eq_time_slice) {
 print3d_eq(origin, msg) {
   level notify("stop_train_debug" + origin);
   level endon("stop_train_debug" + origin);
-  for (;;) {
+  for(;;) {
     Print3d(origin, msg);
     wait(0.05);
   }

@@ -9,7 +9,7 @@
 flickerLight(color0, color1, minDelay, maxDelay) {
   toColor = color0;
   delay = 0.0;
-  for (;;) {
+  for(;;) {
     fromColor = toColor;
     toColor = color0 + (color1 - color0) * randomfloat(1.0);
     if(minDelay != maxDelay)
@@ -17,7 +17,7 @@ flickerLight(color0, color1, minDelay, maxDelay) {
     else
       delay += minDelay;
     colorDeltaPerTime = (fromColor - toColor) * (1 / delay);
-    while (delay > 0) {
+    while(delay > 0) {
       self setLightColor(toColor + colorDeltaPerTime * delay);
       wait 0.05;
       delay -= 0.05;
@@ -37,9 +37,9 @@ generic_pulsing() {
   transition_off = .6;
   increment_on = (on - off) / (transition_on / .05);
   increment_off = (on - off) / (transition_off / .05);
-  for (;;) {
+  for(;;) {
     time = 0;
-    while ((time < transition_off)) {
+    while((time < transition_off)) {
       curr -= increment_off;
       self setLightIntensity(curr);
       time += .05;
@@ -47,7 +47,7 @@ generic_pulsing() {
     }
     wait(1);
     time = 0;
-    while (time < transition_on) {
+    while(time < transition_on) {
       curr += increment_on;
       self setLightIntensity(curr);
       time += .05;
@@ -70,8 +70,8 @@ generic_double_strobe() {
   linked_lights = false;
   linked_light_ents = [];
   if(isDefined(self.script_noteworthy)) {
-    linked_things = getentarray(self.script_noteworthy, "targetname");
-    for (i = 0; i < linked_things.size; i++) {
+    linked_things = getEntArray(self.script_noteworthy, "targetname");
+    for(i = 0; i < linked_things.size; i++) {
       if(linked_things[i].classname == "light") {
         linked_lights = true;
         linked_light_ents[linked_light_ents.size] = linked_things[i];
@@ -83,7 +83,7 @@ generic_double_strobe() {
       }
     }
   }
-  for (;;) {
+  for(;;) {
     self setLightIntensity(off);
     if(linked_models) {
       lit_model hide();
@@ -112,7 +112,7 @@ generic_double_strobe() {
 }
 
 getclosests_flickering_model(origin) {
-  array = getentarray("light_flicker_model", "targetname");
+  array = getEntArray("light_flicker_model", "targetname");
   return_array = [];
   model = getclosest(origin, array);
   if(isDefined(model))
@@ -168,12 +168,12 @@ generic_flickering() {
   linked_light_ents = [];
   linked_things = [];
   if(isDefined(self.script_noteworthy)) {
-    linked_things = GetEntArray(self.script_noteworthy, "targetname");
+    linked_things = getEntArray(self.script_noteworthy, "targetname");
   }
   if(!linked_things.size) {
     linked_things = getclosests_flickering_model(self.origin);
   }
-  for (i = 0; i < linked_things.size; i++) {
+  for(i = 0; i < linked_things.size; i++) {
     if(linked_things[i].classname == "light") {
       linked_lights = true;
       linked_light_ents[linked_light_ents.size] = linked_things[i];
@@ -184,9 +184,9 @@ generic_flickering() {
       linked_models = true;
     }
   }
-  for (;;) {
+  for(;;) {
     num = RandomIntRange(min_burst, max_burst);
-    while (num) {
+    while(num) {
       wait(RandomFloatRange(min_flicker_delay, max_flicker_delay));
       if(curr > (on * 0.5)) {
         curr = RandomFloatRange(min_intensity, max_intensity);
@@ -203,7 +203,7 @@ generic_flickering() {
       }
       self SetLightIntensity(curr);
       if(linked_lights) {
-        for (i = 0; i < linked_light_ents.size; i++) {
+        for(i = 0; i < linked_light_ents.size; i++) {
           linked_light_ents[i] SetLightIntensity(curr);
         }
       }
@@ -211,7 +211,7 @@ generic_flickering() {
     }
     self SetLightIntensity(on);
     if(linked_lights) {
-      for (i = 0; i < linked_light_ents.size; i++) {
+      for(i = 0; i < linked_light_ents.size; i++) {
         linked_light_ents[i] SetLightIntensity(on);
       }
     }
@@ -228,9 +228,9 @@ flickerLightIntensity(minDelay, maxDelay) {
   off = 0;
   curr = on;
   num = 0;
-  for (;;) {
+  for(;;) {
     num = randomintrange(1, 10);
-    while (num) {
+    while(num) {
       wait(randomfloatrange(.05, .1));
       if(curr > .2)
         curr = randomfloatrange(0, .3);
@@ -247,11 +247,11 @@ flickerLightIntensity(minDelay, maxDelay) {
 burning_trash_fire() {
   full = self getLightIntensity();
   old_intensity = full;
-  for (;;) {
+  for(;;) {
     intensity = randomfloatrange(full * 0.7, full * 1.2);
     timer = randomfloatrange(0.3, 0.6);
     timer *= 20;
-    for (i = 0; i < timer; i++) {
+    for(i = 0; i < timer; i++) {
       new_intensity = intensity * (i / timer) + old_intensity * ((timer - i) / timer);
       self setLightIntensity(new_intensity);
       wait(0.05);
@@ -263,7 +263,7 @@ burning_trash_fire() {
 strobeLight(intensity0, intensity1, period) {
   frequency = 360 / period;
   time = 0;
-  for (;;) {
+  for(;;) {
     interpolation = sin(time * frequency) * 0.5 + 0.5;
     self setLightIntensity(intensity0 + (intensity1 - intensity0) * interpolation);
     wait 0.05;
@@ -287,14 +287,14 @@ changeLightColorToWorkerThread(targetColor, totalTime, accelTime, decelTime) {
   time = 0;
   if(time < accelTime) {
     halfRate = timeFactor / accelTime;
-    while (time < accelTime) {
+    while(time < accelTime) {
       fraction = halfRate * time * time;
       self setLightColor(vectorlerp(startColor, targetColor, fraction));
       wait 0.05;
       time += 0.05;
     }
   }
-  while (time < totalTime - decelTime) {
+  while(time < totalTime - decelTime) {
     fraction = timeFactor * (2 * time - accelTime);
     self setLightColor(vectorlerp(startColor, targetColor, fraction));
     wait 0.05;
@@ -303,7 +303,7 @@ changeLightColorToWorkerThread(targetColor, totalTime, accelTime, decelTime) {
   time = totalTime - time;
   if(time > 0) {
     halfRate = timeFactor / decelTime;
-    while (time > 0) {
+    while(time > 0) {
       fraction = 1 - halfRate * time * time;
       self setLightColor(vectorlerp(startColor, targetColor, fraction));
       wait 0.05;
@@ -322,11 +322,11 @@ tv_changes_intensity() {
   self endon("light_off");
   full = self getLightIntensity();
   old_intensity = full;
-  for (;;) {
+  for(;;) {
     intensity = randomfloatrange(full * 0.7, full * 1.2);
     timer = randomfloatrange(0.3, 1.2);
     timer *= 20;
-    for (i = 0; i < timer; i++) {
+    for(i = 0; i < timer; i++) {
       new_intensity = intensity * (i / timer) + old_intensity * ((timer - i) / timer);
       self setLightIntensity(new_intensity);
       wait(0.05);
@@ -341,20 +341,20 @@ tv_changes_color() {
   base = 0.5;
   rgb = [];
   old_rgb = [];
-  for (i = 0; i < 3; i++) {
+  for(i = 0; i < 3; i++) {
     rgb[i] = 0;
     old_rgb[i] = 0;
   }
-  for (;;) {
-    for (i = 0; i < rgb.size; i++) {
+  for(;;) {
+    for(i = 0; i < rgb.size; i++) {
       old_rgb[i] = rgb[i];
       rgb[i] = randomfloat(range) + base;
     }
     timer = randomfloatrange(0.3, 1.2);
     timer *= 20;
-    for (i = 0; i < timer; i++) {
+    for(i = 0; i < timer; i++) {
       new_rgb = [];
-      for (p = 0; p < rgb.size; p++) {
+      for(p = 0; p < rgb.size; p++) {
         new_rgb[p] = rgb[p] * (i / timer) + old_rgb[p] * ((timer - i) / timer);
       }
       self setLightColor((new_rgb[0], new_rgb[1], new_rgb[2]));
@@ -400,12 +400,12 @@ fire_flicker() {
   }
   intensity = self GetLightIntensity();
   curr_intensity = intensity;
-  for (;;) {
+  for(;;) {
     temp_intensity = intensity * RandomFloatRange(min_intensity, max_intensity);
     time = RandomFloatRange(min_delay, max_delay);
     steps = time * 20;
     div = (curr_intensity - temp_intensity) / steps;
-    for (i = 0; i < steps; i++) {
+    for(i = 0; i < steps; i++) {
       curr_intensity -= div;
       if(curr_intensity < 0) {
         curr_intensity = 0;

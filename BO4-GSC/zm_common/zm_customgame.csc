@@ -6,7 +6,6 @@
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\util_shared;
-
 #namespace zm_custom;
 
 autoexec function_d776b402() {
@@ -94,7 +93,7 @@ function_e49dbc72() {
   return getdvarfloat(#"player_laststandbleedouttime", 0);
 }
 
-private function_ecc5a0b9(local_client_num, player, damage) {
+function_ecc5a0b9(local_client_num, player, damage) {
   if(int(damage) == 5) {
     return true;
   }

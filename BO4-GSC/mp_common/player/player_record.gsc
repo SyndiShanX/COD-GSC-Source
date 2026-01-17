@@ -14,10 +14,9 @@
 #include scripts\mp_common\gametypes\globallogic;
 #include scripts\mp_common\gametypes\globallogic_score;
 #include scripts\mp_common\player\player_loadout;
-
 #namespace player_record;
 
-private function_685505ce(inputarray) {
+function_685505ce(inputarray) {
   targetstring = "";
 
   if(!isDefined(inputarray)) {
@@ -67,14 +66,14 @@ function_96d38b95(result) {
     prevxp = 0;
   } else {
     currxp = player rank::getrankxpstat();
-    prevxp = player.pers[#"rankxp"];
+    prevxp = player.pers[# "rankxp"];
 
     if(globallogic_score::canupdateweaponcontractstats()) {
       specialcontractid = 1;
       specialcontracttarget = getdvarint(#"weapon_contract_target_value", 100);
-      specialcontractcurent = player stats::get_stat(#"weaponcontractdata", #"currentvalue");
+      specialcontractcurent = player stats::get_stat(#"weaponcontractdata", # "currentvalue");
 
-      if((isDefined(player stats::get_stat(#"weaponcontractdata", #"completetimestamp")) ? player stats::get_stat(#"weaponcontractdata", #"completetimestamp") : 0) != 0) {
+      if((isDefined(player stats::get_stat(#"weaponcontractdata", # "completetimestamp")) ? player stats::get_stat(#"weaponcontractdata", # "completetimestamp") : 0) != 0) {
         specialcontractcompleted = 1;
       }
     }
@@ -87,19 +86,19 @@ function_96d38b95(result) {
   resultstr = result;
 
   if(isDefined(player.team) && result == player.team) {
-    resultstr = #"win";
-  } else if(result == #"allies" || result == #"axis") {
-    resultstr = #"lose";
+    resultstr = # "win";
+  } else if(result == # "allies" || result == # "axis") {
+    resultstr = # "lose";
   }
 
   xpearned = currxp - prevxp;
   perkstr = function_685505ce(player getperks());
-  primaryweaponname = #"";
+  primaryweaponname = # "";
   primaryweaponattachstr = "";
-  secondaryweaponname = #"";
+  secondaryweaponname = # "";
   secondaryweaponattachstr = "";
-  grenadeprimaryname = #"";
-  grenadesecondaryname = #"";
+  grenadeprimaryname = # "";
+  grenadesecondaryname = # "";
 
   if(loadout::function_87bcb1b()) {
     primary_weapon = player loadout::function_18a77b37("primary");
@@ -155,13 +154,13 @@ function_96d38b95(result) {
 
   bestscore = "0";
 
-  if(isDefined(player.pers[#"lasthighestscore"]) && player.score > player.pers[#"lasthighestscore"]) {
+  if(isDefined(player.pers[# "lasthighestscore"]) && player.score > player.pers[# "lasthighestscore"]) {
     bestscore = "1";
   }
 
   bestkills = "0";
 
-  if(isDefined(player.pers[#"lasthighestkills"]) && killcount > player.pers[#"lasthighestkills"]) {
+  if(isDefined(player.pers[# "lasthighestkills"]) && killcount > player.pers[# "lasthighestkills"]) {
     bestkills = "1";
   }
 
@@ -180,7 +179,7 @@ function_96d38b95(result) {
   kdratio = player.kills * 1000 / deaths;
   bestkdratio = "0";
 
-  if(isDefined(player.pers[#"lasthighestkdratio"]) && kdratio > player.pers[#"lasthighestkdratio"]) {
+  if(isDefined(player.pers[# "lasthighestkdratio"]) && kdratio > player.pers[# "lasthighestkdratio"]) {
     bestkdratio = "1";
   }
 
@@ -215,23 +214,23 @@ function_96d38b95(result) {
   var_811ed119.match_deaths = player.deaths;
   var_811ed119.match_xp = xpearned;
   var_811ed119.match_score = player.score;
-  var_811ed119.match_streak = player.pers[#"best_kill_streak"];
-  var_811ed119.match_captures = player.pers[#"captures"];
-  var_811ed119.match_defends = player.pers[#"defends"];
-  var_811ed119.match_headshots = player.pers[#"headshots"];
-  var_811ed119.match_longshots = player.pers[#"longshots"];
-  var_811ed119.match_objtime = player.pers[#"objtime"];
-  var_811ed119.match_plants = player.pers[#"plants"];
-  var_811ed119.match_defuses = player.pers[#"defuses"];
-  var_811ed119.match_throws = player.pers[#"throws"];
-  var_811ed119.match_carries = player.pers[#"carries"];
-  var_811ed119.match_returns = player.pers[#"returns"];
+  var_811ed119.match_streak = player.pers[# "best_kill_streak"];
+  var_811ed119.match_captures = player.pers[# "captures"];
+  var_811ed119.match_defends = player.pers[# "defends"];
+  var_811ed119.match_headshots = player.pers[# "headshots"];
+  var_811ed119.match_longshots = player.pers[# "longshots"];
+  var_811ed119.match_objtime = player.pers[# "objtime"];
+  var_811ed119.match_plants = player.pers[# "plants"];
+  var_811ed119.match_defuses = player.pers[# "defuses"];
+  var_811ed119.match_throws = player.pers[# "throws"];
+  var_811ed119.match_carries = player.pers[# "carries"];
+  var_811ed119.match_returns = player.pers[# "returns"];
   var_811ed119.match_result = resultstr;
   var_811ed119.match_duration = int(timeplayed);
   var_811ed119.match_shots = totalmatchshots;
   var_811ed119.match_hits = hitcount;
-  var_811ed119.prestige_max = player.pers[#"plevel"];
-  var_811ed119.level_max = player.pers[#"rank"];
+  var_811ed119.prestige_max = player.pers[# "plevel"];
+  var_811ed119.level_max = player.pers[# "rank"];
   var_811ed119.specialist_kills = player.heavyweaponkillcount;
   var_a14ea2be = spawnStruct();
   var_a14ea2be.player_gender = player getplayergendertype(currentsessionmode());
@@ -275,7 +274,7 @@ function_96d38b95(result) {
   var_8607894c.specialist_legs = player function_cde23658();
   var_8607894c.specialist_torso = player function_92ea4100();
   var_8607894c.specialist_showcase = showcaseweapon.weapon.name;
-  function_92d1707f(#"hash_4c5946fa1191bc64", #"hash_71960e91f80c3365", var_906bdcf3, #"hash_4682ee0eb5071d2", var_811ed119, #"hash_209c80d657442a83", var_a14ea2be, #"hash_43cb38816354c3aa", var_b65d83f5, #"hash_11fcb8f188ed5050", var_6e81e3c3, #"hash_78a6c018d9f82184", var_8607894c);
+  function_92d1707f(#"hash_4c5946fa1191bc64", # "hash_71960e91f80c3365", var_906bdcf3, # "hash_4682ee0eb5071d2", var_811ed119, # "hash_209c80d657442a83", var_a14ea2be, # "hash_43cb38816354c3aa", var_b65d83f5, # "hash_11fcb8f188ed5050", var_6e81e3c3, # "hash_78a6c018d9f82184", var_8607894c);
 }
 
 record_special_move_data_for_life(killer) {
@@ -391,93 +390,93 @@ record_misc_player_stats() {
     recordplayerstats(self, "escortTime", self.escorts);
   }
 
-  if(isDefined(level.rankedmatch) && level.rankedmatch && isDefined(self.pers) && isDefined(self.pers[#"summary"])) {
-    recordplayerstats(self, "challenge_xp", self.pers[#"summary"][#"challenge"]);
-    recordplayerstats(self, "score_xp", self.pers[#"summary"][#"score"]);
-    recordplayerstats(self, "misc_xp", self.pers[#"summary"][#"misc"]);
+  if(isDefined(level.rankedmatch) && level.rankedmatch && isDefined(self.pers) && isDefined(self.pers[# "summary"])) {
+    recordplayerstats(self, "challenge_xp", self.pers[# "summary"][# "challenge"]);
+    recordplayerstats(self, "score_xp", self.pers[# "summary"][# "score"]);
+    recordplayerstats(self, "misc_xp", self.pers[# "summary"][# "misc"]);
   }
 }
 
 function_ea5da381() {
-  if(!isDefined(self.pers[#"hash_76fbbcf94dab5536"])) {
+  if(!isDefined(self.pers[# "hash_76fbbcf94dab5536"])) {
     self persistence::function_acac764e();
   }
 
   if(sessionmodeiswarzonegame()) {
-    self persistence::set_recent_stat(0, 0, #"placement_team", self.pers[#"placement_team"]);
-    self persistence::set_recent_stat(0, 0, #"placement_player", self.pers[#"placement_player"]);
-    self persistence::set_recent_stat(0, 0, #"timeplayed", self.timeplayed[#"total"]);
+    self persistence::set_recent_stat(0, 0, # "placement_team", self.pers[# "placement_team"]);
+    self persistence::set_recent_stat(0, 0, # "placement_player", self.pers[# "placement_player"]);
+    self persistence::set_recent_stat(0, 0, # "timeplayed", self.timeplayed[# "total"]);
   }
 }
 
 function_7569c0fb() {
-  if(!isDefined(self.pers[#"hash_76fbbcf94dab5536"])) {
+  if(!isDefined(self.pers[# "hash_76fbbcf94dab5536"])) {
     self persistence::function_acac764e();
   }
 
-  self persistence::set_recent_stat(0, 0, #"valid", 1);
-  self persistence::set_recent_stat(0, 0, #"ekia", self.ekia);
-  self persistence::set_recent_stat(0, 0, #"deaths", self.deaths);
-  self persistence::set_recent_stat(0, 0, #"kills", self.kills);
-  self persistence::set_recent_stat(0, 0, #"outcome", self.pers[#"outcome"]);
-  self persistence::set_recent_stat(0, 0, #"timeplayed", self.pers[#"totaltimeplayed"]);
-  self persistence::set_recent_stat(0, 0, #"score", self.pers[#"score"]);
-  self persistence::set_recent_stat(0, 0, #"damage", self.pers[#"damagedone"]);
-  self persistence::set_recent_stat(0, 0, #"objectiveekia", self.pers[#"objectiveekia"]);
-  self persistence::set_recent_stat(0, 0, #"objectivescore", self.pers[#"objectivescore"]);
-  self persistence::set_recent_stat(0, 0, #"objectivedefends", self.pers[#"objectivedefends"]);
-  self persistence::set_recent_stat(0, 0, #"objectivetime", self.pers[#"objectivetime"]);
+  self persistence::set_recent_stat(0, 0, # "valid", 1);
+  self persistence::set_recent_stat(0, 0, # "ekia", self.ekia);
+  self persistence::set_recent_stat(0, 0, # "deaths", self.deaths);
+  self persistence::set_recent_stat(0, 0, # "kills", self.kills);
+  self persistence::set_recent_stat(0, 0, # "outcome", self.pers[# "outcome"]);
+  self persistence::set_recent_stat(0, 0, # "timeplayed", self.pers[# "totaltimeplayed"]);
+  self persistence::set_recent_stat(0, 0, # "score", self.pers[# "score"]);
+  self persistence::set_recent_stat(0, 0, # "damage", self.pers[# "damagedone"]);
+  self persistence::set_recent_stat(0, 0, # "objectiveekia", self.pers[# "objectiveekia"]);
+  self persistence::set_recent_stat(0, 0, # "objectivescore", self.pers[# "objectivescore"]);
+  self persistence::set_recent_stat(0, 0, # "objectivedefends", self.pers[# "objectivedefends"]);
+  self persistence::set_recent_stat(0, 0, # "objectivetime", self.pers[# "objectivetime"]);
   self function_ea5da381();
-  self stats::function_81f5c0fe(self.pers[#"outcome"], 1);
-  self stats::function_81f5c0fe(#"timeplayed", self.pers[#"totaltimeplayed"]);
+  self stats::function_81f5c0fe(self.pers[# "outcome"], 1);
+  self stats::function_81f5c0fe(#"timeplayed", self.pers[# "totaltimeplayed"]);
   self stats::function_81f5c0fe(#"gamesplayed", 1);
 
   switch (level.gametype) {
-    case #"dom_hc":
-    case #"svz":
-    case #"control":
-    case #"dom_bb":
-    case #"sd":
-    case #"dom_snipe_bb":
-    case #"control_bb":
-    case #"control_hc":
-    case #"escort":
-    case #"ctf_bb_hc":
-    case #"dom":
-    case #"bounty":
-    case #"control_cwl":
-    case #"sd_cwl":
-    case #"dom_bb_hc":
-    case #"escort_bb":
-    case #"clean":
-    case #"clean_bb":
-    case #"ctf":
-    case #"sd_bb":
-    case #"sd_hc":
-    case #"ctf_hc":
-    case #"ctf_bb":
-      self stats::function_81f5c0fe(#"stat1", self.pers[#"objectivescore"]);
+    case # "dom_hc":
+    case # "svz":
+    case # "control":
+    case # "dom_bb":
+    case # "sd":
+    case # "dom_snipe_bb":
+    case # "control_bb":
+    case # "control_hc":
+    case # "escort":
+    case # "ctf_bb_hc":
+    case # "dom":
+    case # "bounty":
+    case # "control_cwl":
+    case # "sd_cwl":
+    case # "dom_bb_hc":
+    case # "escort_bb":
+    case # "clean":
+    case # "clean_bb":
+    case # "ctf":
+    case # "sd_bb":
+    case # "sd_hc":
+    case # "ctf_hc":
+    case # "ctf_bb":
+      self stats::function_81f5c0fe(#"stat1", self.pers[# "objectivescore"]);
       self stats::function_81f5c0fe(#"stat2", self.ekia);
       break;
-    case #"koth":
-    case #"koth_cwl":
-    case #"koth_bb":
-      self stats::function_81f5c0fe(#"stat1", self.pers[#"objectivetime"]);
+    case # "koth":
+    case # "koth_cwl":
+    case # "koth_bb":
+      self stats::function_81f5c0fe(#"stat1", self.pers[# "objectivetime"]);
       self stats::function_81f5c0fe(#"stat2", self.ekia);
       break;
-    case #"oic":
-    case #"tdm_bb":
-    case #"tdm_hc":
-    case #"conf_hc":
-    case #"tdm_bb_hc":
-    case #"conf_bb":
-    case #"dm_bb":
-    case #"sas":
-    case #"tdm_snipe_bb":
-    case #"dm":
-    case #"conf":
-    case #"tdm":
-    case #"infect":
+    case # "oic":
+    case # "tdm_bb":
+    case # "tdm_hc":
+    case # "conf_hc":
+    case # "tdm_bb_hc":
+    case # "conf_bb":
+    case # "dm_bb":
+    case # "sas":
+    case # "tdm_snipe_bb":
+    case # "dm":
+    case # "conf":
+    case # "tdm":
+    case # "infect":
       self stats::function_81f5c0fe(#"stat1", self.ekia);
       self stats::function_81f5c0fe(#"stat2", self.deaths);
       break;

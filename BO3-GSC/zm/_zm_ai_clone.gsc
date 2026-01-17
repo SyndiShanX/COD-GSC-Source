@@ -33,7 +33,7 @@
 #namespace zm_ai_clone;
 
 function autoexec __init__sytem__() {
-  system::register("zm_ai_clone", & __init__, & __main__, undefined);
+  system::register("zm_ai_clone", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -57,7 +57,7 @@ function precache() {}
 
 function function_78933fc2() {
   level flagsys::wait_till("");
-  zm_devgui::add_custom_devgui_callback( & clone_devgui_callback);
+  zm_devgui::add_custom_devgui_callback(&clone_devgui_callback);
 }
 
 function clone_devgui_callback(cmd) {
@@ -65,7 +65,7 @@ function clone_devgui_callback(cmd) {
     case "": {
       players = getplayers();
       queryresult = positionquery_source_navigation(players[0].origin, 128, 256, 128, 20);
-      if(isdefined(queryresult) && queryresult.data.size > 0) {
+      if(isDefined(queryresult) && queryresult.data.size > 0) {
         clone = spawnactor("", queryresult.data[0].origin, (0, 0, 0), "", 1);
         clone cloneserverutils::cloneplayerlook(clone, players[0], players[0]);
       }

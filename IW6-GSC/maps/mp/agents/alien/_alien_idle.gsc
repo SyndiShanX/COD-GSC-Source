@@ -111,9 +111,7 @@ faceTarget() {
 
 onDamage(eInflictor, eAttacker, iThatDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset) {
   if(isDefined(level.dlc_can_do_pain_override_func)) {
-    painAllowed = [
-      [level.dlc_can_do_pain_override_func]
-    ]("idle");
+    painAllowed = [[level.dlc_can_do_pain_override_func]]("idle");
     if(!painAllowed)
       return;
   }
@@ -125,7 +123,7 @@ onDamage(eInflictor, eAttacker, iThatDamage, iDFlags, sMeansOfDeath, sWeapon, vP
 DoPain(iDFlags, damageDirection, hitLocation, iDamage, sMeansOfDeath) {
   self endon("killanimscript");
 
-  is_stun = (iDFlags & level.iDFLAGS_STUN);
+  is_stun = (iDFlags &level.iDFLAGS_STUN);
 
   if(sMeansOfDeath == "MOD_MELEE" || is_stun) {
     animState = "pain_pushback";
@@ -160,9 +158,7 @@ DoPain(iDFlags, damageDirection, hitLocation, iDamage, sMeansOfDeath) {
 
 getBasePainAnimState() {
   if(isDefined(level.dlc_alien_pain_anim_state_override_func)) {
-    animState = [
-      [level.dlc_alien_pain_anim_state_override_func]
-    ]("idle");
+    animState = [[level.dlc_alien_pain_anim_state_override_func]]("idle");
     if(isDefined(animState))
       return animState;
   }

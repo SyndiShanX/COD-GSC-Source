@@ -16,7 +16,6 @@
 #include scripts\zm_common\zm_score;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
-
 #namespace namespace_e38c57c1;
 
 autoexec __init__system__() {
@@ -24,7 +23,6 @@ autoexec __init__system__() {
 }
 
 __init__() {
-
   if(getdvarint(#"hash_4894e3a42dd84dfa", 0)) {
     callback::on_connect(&on_player_connect);
   }
@@ -32,7 +30,6 @@ __init__() {
 }
 
 __main__() {
-
   if(getdvarint(#"hash_4894e3a42dd84dfa", 0)) {
     level thread devgui();
   }
@@ -40,12 +37,11 @@ __main__() {
 }
 
 function_9af806be(var_c5b25bc5) {
-
   if(isDefined(self.var_2fe40b9d)) {
     self function_2a94cd59();
   }
 
-    self.var_2fe40b9d = var_c5b25bc5;
+  self.var_2fe40b9d = var_c5b25bc5;
 
   switch (var_c5b25bc5) {
     case 1:
@@ -78,10 +74,9 @@ function_9af806be(var_c5b25bc5) {
 }
 
 function_2a94cd59() {
-
   var_c5b25bc5 = self.var_2fe40b9d;
 
-    self.var_2fe40b9d = undefined;
+  self.var_2fe40b9d = undefined;
 
   switch (var_c5b25bc5) {
     case 1:
@@ -184,7 +179,7 @@ function_3da195ec(weapon) {
   return true;
 }
 
-private function_68992377(var_c5b25bc5, var_97f3fbb7) {
+function_68992377(var_c5b25bc5, var_97f3fbb7) {
   self endon(#"disconnect");
 
   if(self function_6a7a1533(var_c5b25bc5)) {
@@ -202,67 +197,67 @@ devgui() {
   adddebugcommand("<dev string:x22a>");
   adddebugcommand("<dev string:x28d>");
   level.var_8e9d88b6 = [];
-  level.var_8e9d88b6[#"fl1"] = 1;
-  level.var_8e9d88b6[#"tn1"] = 2;
-  level.var_8e9d88b6[#"db1"] = 3;
-  level.var_8e9d88b6[#"bf1"] = 4;
-  level.var_8e9d88b6[#"helmets1"] = 5;
-  level.var_8e9d88b6[#"season1"] = 6;
+  level.var_8e9d88b6[# "fl1"] = 1;
+  level.var_8e9d88b6[# "tn1"] = 2;
+  level.var_8e9d88b6[# "db1"] = 3;
+  level.var_8e9d88b6[# "bf1"] = 4;
+  level.var_8e9d88b6[# "helmets1"] = 5;
+  level.var_8e9d88b6[# "season1"] = 6;
 
   while(true) {
     waitframe(1);
     str_command = getdvarstring(#"hash_443a451d4b2f9de2", "<dev string:x2e0>");
 
     switch (str_command) {
-      case #"bf1":
-      case #"fl1":
-      case #"season1":
-      case #"helmets1":
-      case #"tn1":
-      case #"db1":
+      case # "bf1":
+      case # "fl1":
+      case # "season1":
+      case # "helmets1":
+      case # "tn1":
+      case # "db1":
         foreach(e_player in getplayers()) {
           e_player function_9af806be(level.var_8e9d88b6[str_command]);
         }
 
         break;
-      case #"clear":
+      case # "clear":
         foreach(e_player in getplayers()) {
           e_player function_2a94cd59();
         }
 
         break;
-      case #"player_4_tn1":
-      case #"hash_114b0d4db1699d85":
-      case #"hash_138c6bb93906947e":
-      case #"hash_15ba4b3713a7633c":
-      case #"hash_34fa2d4dc5eb050f":
-      case #"hash_361dd9611538c0df":
-      case #"player_2_tn1":
-      case #"hash_410061a21976fb0d":
-      case #"hash_41af396a9a424584":
-      case #"hash_41e44f4b44ea8a50":
-      case #"hash_42e797318220640c":
-      case #"player_1_tn1":
-      case #"hash_478329f218767aab":
-      case #"hash_481abb611f991c37":
-      case #"player_3_tn1":
-      case #"hash_4ebf4bdbdeca4671":
-      case #"hash_53c07f6aa4b3f3d2":
-      case #"hash_544ef1318c01b458":
-      case #"hash_546d41eb20e9ed47":
-      case #"hash_5642f90448974736":
-      case #"hash_5a4711612a21ad6d":
-      case #"hash_6601596aaf4e0e5e":
-      case #"hash_66603731967362a6":
-      case #"hash_7f4e4b4da709788d":
+      case # "player_4_tn1":
+      case # "hash_114b0d4db1699d85":
+      case # "hash_138c6bb93906947e":
+      case # "hash_15ba4b3713a7633c":
+      case # "hash_34fa2d4dc5eb050f":
+      case # "hash_361dd9611538c0df":
+      case # "player_2_tn1":
+      case # "hash_410061a21976fb0d":
+      case # "hash_41af396a9a424584":
+      case # "hash_41e44f4b44ea8a50":
+      case # "hash_42e797318220640c":
+      case # "player_1_tn1":
+      case # "hash_478329f218767aab":
+      case # "hash_481abb611f991c37":
+      case # "player_3_tn1":
+      case # "hash_4ebf4bdbdeca4671":
+      case # "hash_53c07f6aa4b3f3d2":
+      case # "hash_544ef1318c01b458":
+      case # "hash_546d41eb20e9ed47":
+      case # "hash_5642f90448974736":
+      case # "hash_5a4711612a21ad6d":
+      case # "hash_6601596aaf4e0e5e":
+      case # "hash_66603731967362a6":
+      case # "hash_7f4e4b4da709788d":
         n_player = int(strtok(str_command, "<dev string:x2e3>")[1]);
         var_afaaaae2 = strtok(str_command, "<dev string:x2e3>")[2];
         function_c1ccd7f3(&function_9af806be, n_player, level.var_8e9d88b6[var_afaaaae2]);
         break;
-      case #"hash_39098b3e5f02ee30":
-      case #"hash_3b6473dd2b0c56c7":
-      case #"hash_10e7f44f002ed3c6":
-      case #"hash_33d0946a156bc141":
+      case # "hash_39098b3e5f02ee30":
+      case # "hash_3b6473dd2b0c56c7":
+      case # "hash_10e7f44f002ed3c6":
+      case # "hash_33d0946a156bc141":
         n_player = int(strtok(str_command, "<dev string:x2e3>")[1]);
         function_c1ccd7f3(&function_2a94cd59, n_player);
         break;
@@ -303,4 +298,3 @@ devgui_player_menu() {
 function_1c3ffffd() {
   adddebugcommand("<dev string:x556>" + self.name + "<dev string:x579>");
 }
-

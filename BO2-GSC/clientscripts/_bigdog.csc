@@ -28,7 +28,7 @@ bigdog_feet(localclientnum, note, ground_type) {
   origin = self.origin;
   sound_alias = "fly_step_run_bigdog";
   sound_alias = sound_alias + "_" + ground_type;
-  playsound(localclientnum, sound_alias, origin);
+  playSound(localclientnum, sound_alias, origin);
 
   if(self islocalclientdriver(localclientnum)) {
     player = getlocalplayer(localclientnum);
@@ -51,7 +51,7 @@ bigdog_mount(localclientnum) {
       user = getlocalplayer(localclientnum);
     else {
       self waittill("enter_vehicle", user);
-      playsound(0, "veh_claw_plr_enter");
+      playSound(0, "veh_claw_plr_enter");
     }
 
     soundloopemitter("veh_claw_plr_loop", (0, 0, 0));
@@ -59,7 +59,7 @@ bigdog_mount(localclientnum) {
     if(user isplayer()) {
       wait 0.5;
       self waittill("exit_vehicle");
-      playsound(0, "veh_claw_plr_exit");
+      playSound(0, "veh_claw_plr_exit");
       soundstoploopemitter("veh_claw_plr_loop", (0, 0, 0));
     }
   }

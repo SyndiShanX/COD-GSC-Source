@@ -35,11 +35,11 @@ init_animset_idle() {
 }
 
 main() {
-  if(isdefined(self.no_ai)) {
+  if(isDefined(self.no_ai)) {
     return;
   }
-  if(isdefined(self.custom_animscript)) {
-    if(isdefined(self.custom_animscript["stop"])) {
+  if(isDefined(self.custom_animscript)) {
+    if(isDefined(self.custom_animscript["stop"])) {
       [
         [self.custom_animscript["stop"]]
       ]();
@@ -53,13 +53,13 @@ main() {
   thread delayedexception();
   animscripts\utility::initialize("stop");
 
-  if(isdefined(self.specialidleanim))
+  if(isDefined(self.specialidleanim))
     specialidleloop();
 
   animscripts\utility::randomizeidleset();
   thread setlaststoppedtime();
   thread animscripts\reactions::reactionscheckloop();
-  var_0 = isdefined(self.customidleanimset);
+  var_0 = isDefined(self.customidleanimset);
 
   if(!var_0) {
     if(self.a.weaponpos["right"] == "none" && self.a.weaponpos["left"] == "none")
@@ -68,17 +68,17 @@ main() {
       var_0 = 1;
   }
 
-  if(self.swimmer && !isdefined(self.enemy)) {
+  if(self.swimmer && !isDefined(self.enemy)) {
     var_1 = animscripts\exit_node::getexitnode();
 
-    if(isdefined(var_1)) {
+    if(isDefined(var_1)) {
       self setflaggedanimknoballrestart("idle", self.customidleanimset["stand"], % body, 1, 0.5, self.animplaybackrate);
       turntoangle(var_1.angles[1]);
     } else
       self orientmode("face angle", self.angles[1]);
   }
 
-  for (;;) {
+  for(;;) {
     var_2 = getdesiredidlepose();
 
     if(var_2 == "prone") {
@@ -138,7 +138,7 @@ turntoangle(var_0) {
 rotatetoangle(var_0, var_1) {
   self orientmode("face angle", var_0);
 
-  while (angleclamp(var_0 - self.angles[1]) > var_1)
+  while(angleclamp(var_0 - self.angles[1]) > var_1)
     wait 0.1;
 }
 
@@ -162,7 +162,7 @@ specialidleloop() {
   var_1 = [];
   var_2 = var_0[0];
 
-  for (;;) {
+  for(;;) {
     if(var_1.size == 0)
       var_1 = common_scripts\utility::array_randomize(var_0);
 
@@ -184,7 +184,7 @@ specialidleloop() {
 getdesiredidlepose() {
   var_0 = animscripts\utility::getclaimednode();
 
-  if(isdefined(var_0)) {
+  if(isDefined(var_0)) {
     var_1 = var_0.angles[1];
     var_2 = var_0.type;
   } else {
@@ -208,7 +208,7 @@ getdesiredidlepose() {
 transitiontoidle(var_0, var_1) {
   var_2 = self getisforcedincombat();
 
-  if(isdefined(self.node)) {
+  if(isDefined(self.node)) {
     if(self.node doesnodeforcecombat())
       var_2 = 1;
 
@@ -227,7 +227,7 @@ transitiontoidle(var_0, var_1) {
 
   var_3 = animscripts\utility::lookupanimarray("idle_transitions");
 
-  if(isdefined(var_3[var_0])) {
+  if(isDefined(var_3[var_0])) {
     var_4 = var_3[var_0];
     self setflaggedanimknoballrestart("idle_transition", var_4, % body, 1, 0.2, self.animplaybackrate);
     animscripts\shared::donotetracks("idle_transition");
@@ -237,7 +237,7 @@ transitiontoidle(var_0, var_1) {
 playidle(var_0, var_1) {
   var_2 = self getisforcedincombat();
 
-  if(isdefined(self.node)) {
+  if(isDefined(self.node)) {
     if(self.node doesnodeforcecombat())
       var_2 = 1;
 
@@ -254,17 +254,17 @@ playidle(var_0, var_1) {
 
   var_3 = undefined;
 
-  if(isdefined(self.customidleanimset) && isdefined(self.customidleanimset[var_0])) {
+  if(isDefined(self.customidleanimset) && isDefined(self.customidleanimset[var_0])) {
     if(isarray(self.customidleanimset[var_0]))
       var_4 = animscripts\utility::anim_array(self.customidleanimset[var_0], self.customidleanimweights[var_0]);
     else {
       var_4 = self.customidleanimset[var_0];
       var_5 = var_0 + "_add";
 
-      if(isdefined(self.customidleanimset[var_5]))
+      if(isDefined(self.customidleanimset[var_5]))
         var_3 = self.customidleanimset[var_5];
     }
-  } else if(isdefined(anim.readyanimarray) && (var_0 == "stand" || var_0 == "stand_cqb") && isdefined(self.busereadyidle) && self.busereadyidle == 1)
+  } else if(isDefined(anim.readyanimarray) && (var_0 == "stand" || var_0 == "stand_cqb") && isDefined(self.busereadyidle) && self.busereadyidle == 1)
     var_4 = animscripts\utility::anim_array(anim.readyanimarray["stand"][0], anim.readyanimweights["stand"][0]);
   else {
     var_6 = animscripts\utility::lookupanimarray("idle");
@@ -273,7 +273,7 @@ playidle(var_0, var_1) {
     var_4 = animscripts\utility::anim_array(var_6[var_0][var_1], var_7[var_0][var_1]);
     var_8 = animscripts\utility::lookupanimarray("idle_add");
 
-    if(isdefined(var_8[var_0])) {
+    if(isDefined(var_8[var_0])) {
       var_9 = var_8[var_0].size * 6;
       var_10 = randomint(var_9);
 
@@ -287,7 +287,7 @@ playidle(var_0, var_1) {
   if(gettime() == self.a.scriptstarttime)
     var_11 = 0.5;
 
-  if(isdefined(var_3)) {
+  if(isDefined(var_3)) {
     self setanimknoball(var_4, % body, 1, var_11, 1);
     self setanim( % add_idle);
     self setflaggedanimknoballrestart("idle", var_3, % add_idle, 1, var_11, self.animplaybackrate);
@@ -307,7 +307,7 @@ pronestill() {
     var_0["crouch_2_prone"] = % crouch_2_prone;
     var_1 = var_0[self.a.pose + "_2_prone"];
   } else if(self.a.movement != "stop") {
-    if(self.prevscript == "move" && isdefined(self.movetransitionanimation) && isdefined(self.movetransitionendpose) && self.movetransitionendpose == "prone") {
+    if(self.prevscript == "move" && isDefined(self.movetransitionanimation) && isDefined(self.movetransitionendpose) && self.movetransitionendpose == "prone") {
       var_3 = getanimlength(self.movetransitionanimation) * (1 - self getanimtime(self.movetransitionanimation));
 
       if(var_3 > 0.05) {
@@ -318,10 +318,10 @@ pronestill() {
       var_1 = % h1_crawl_2_prone;
   }
 
-  if(isdefined(var_1)) {
+  if(isDefined(var_1)) {
     self setflaggedanimknoballrestart("trans", var_1, % body, 1, 0.2, 1.0);
 
-    if(isdefined(var_2))
+    if(isDefined(var_2))
       self setanimtime(var_1, var_2);
 
     animscripts\shared::donotetracks("trans");
@@ -349,7 +349,7 @@ updatepronethread() {
   self endon("killanimscript");
   self endon("kill UpdateProneThread");
 
-  for (;;) {
+  for(;;) {
     animscripts\cover_prone::updatepronewrapper(0.1);
     wait 0.1;
   }

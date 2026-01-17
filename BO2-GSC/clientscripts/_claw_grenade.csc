@@ -19,8 +19,8 @@ loop_local_sound(localclientnum, alias, interval, fx, fx2) {
   fusetime = 4.0;
 
   while(true) {
-    self playsound(localclientnum, alias);
-    playfxontag(localclientnum, fxtoplay, self, self.fxtagname);
+    self playSound(localclientnum, alias);
+    playFXOnTag(localclientnum, fxtoplay, self, self.fxtagname);
     wait(interval);
     fusetime = fusetime - interval;
     interval = interval / 1.1;

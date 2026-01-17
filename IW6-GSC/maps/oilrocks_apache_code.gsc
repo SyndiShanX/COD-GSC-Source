@@ -1758,7 +1758,7 @@ objective_protect_start() {
   var_1 = maps\_utility::obj("protect_the_blackhawk");
 
   if(!var_0) {
-    objective_add(var_1, "active", & "OILROCKS_OBJ_PROTECT_THE_BLACKHAWK");
+    objective_add(var_1, "active", &"OILROCKS_OBJ_PROTECT_THE_BLACKHAWK");
     objective_current(var_1);
   } else
     objective_current(var_1);

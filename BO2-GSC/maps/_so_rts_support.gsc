@@ -40,7 +40,7 @@ find_ground_pos(v_current, v_trace_end, checkent) {
     else
       return a_trace["position"];
   } else
-    a_trace = bullettrace(v_current, v_trace_end, 0, level.player);
+    a_trace = bulletTrace(v_current, v_trace_end, 0, level.player);
 
   if(a_trace["fraction"] < 1) {
     v_hit = a_trace["position"];
@@ -151,7 +151,7 @@ show_player_hud() {
 }
 
 mp_ents_cleanup() {
-  entitytypes = getentarray();
+  entitytypes = getEntArray();
 
   for(i = 0; i < entitytypes.size; i++) {
     if(isDefined(entitytypes[i].script_gameobjectname)) {
@@ -230,7 +230,7 @@ playerlinkobj_rotate(amount) {
 
 playerlinkobj_gettargetgroundpos(force) {
   if(isDefined(force) || !isDefined(level.rts.ground)) {
-    forward = anglestoforward(get_player_angles());
+    forward = anglesToForward(get_player_angles());
     projected = forward * 10000 + level.rts.playerlinkobj.origin;
 
     if(level.rts.trace_ents.size > 0) {
@@ -263,7 +263,7 @@ playerlinkobj_getforwardvector(scale) {
   if(!isDefined(scale))
     scale = 5000;
 
-  return anglestoforward(level.rts.playerlinkobj.angles) * scale;
+  return anglesToForward(level.rts.playerlinkobj.angles) * scale;
 }
 
 playerlinkobj_defaultpos() {
@@ -279,7 +279,7 @@ playerlinkobj_defaultpos() {
     a = level.rts.game_rules.default_camera_pitch;
     c = 90 - level.rts.game_rules.default_camera_pitch;
     sidec = height * sin(c) / sin(a);
-    dirvec = anglestoforward(level.rts.player.angles);
+    dirvec = anglesToForward(level.rts.player.angles);
     addvec = dirvec * sidec * -1;
     level.rts.playerlinkobj.origin = level.rts.playerlinkobj.origin + addvec;
   } else {
@@ -296,7 +296,7 @@ playerlinkobj_defaultpos() {
       a = level.rts.game_rules.default_camera_pitch;
       c = 90 - level.rts.game_rules.default_camera_pitch;
       sidec = height * sin(c) / sin(a);
-      dirvec = anglestoforward(level.rts.player.angles);
+      dirvec = anglesToForward(level.rts.player.angles);
       addvec = dirvec * sidec * -1;
       desiredpos = skypos + addvec;
       testpos = movepoint(skypos, addvec);
@@ -309,7 +309,7 @@ playerlinkobj_defaultpos() {
       a = level.rts.game_rules.default_camera_pitch;
       c = 90 - level.rts.game_rules.default_camera_pitch;
       sidec = height * sin(c) / sin(a);
-      dirvec = anglestoforward(level.rts.player.angles);
+      dirvec = anglesToForward(level.rts.player.angles);
       addvec = dirvec * sidec * -1;
       desiredpos = skypos + addvec;
       testpos = movepoint(skypos, addvec);
@@ -344,7 +344,7 @@ playerlinkobj_viewclamp(onlyz) {
 playerlinkobj_moveobj(x, y) {
   if(!isDefined(level.rts.playerlinkobj_moveincforward)) {
     angle = (0, level.rts.playerlinkobj.angles[1], level.rts.playerlinkobj.angles[2]);
-    level.rts.playerlinkobj_moveincforward = anglestoforward(angle) * 64;
+    level.rts.playerlinkobj_moveincforward = anglesToForward(angle) * 64;
     level.rts.playerlinkobj_moveincright = anglestoright(angle) * 64;
   }
 
@@ -359,8 +359,7 @@ playerlinkobj_moveobj(x, y) {
   }
 }
 
-rotate_point_around_point(v_point_to_rotate, v_point_to_rotate_around, delta_angles) {
-}
+rotate_point_around_point(v_point_to_rotate, v_point_to_rotate_around, delta_angles) {}
 
 ally_missile_watcher(ally) {
   if(!isDefined(ally)) {
@@ -405,9 +404,7 @@ missile_out_of_bounds_watcher() {
 
     if(isDefined(rocket) && isDefined(level.rts.bounds)) {
       if(isDefined(level.rts.missile_oob_check))
-        inbounds = [
-          [level.rts.missile_oob_check]
-        ](rocket.origin);
+        inbounds = [[level.rts.missile_oob_check]](rocket.origin);
       else {
         x = rocket.origin[0];
         y = rocket.origin[1];
@@ -431,8 +428,7 @@ missile_out_of_bounds_watcher() {
     if(!inbounds) {
       maps\_so_rts_event::trigger_event("air_strike_aborted");
 
-      if(isDefined(rocket.owner)) {
-      }
+      if(isDefined(rocket.owner)) {}
 
       rocket delete();
       return;
@@ -528,9 +524,9 @@ fire_missile() {
     level.rts.enemy_base.entity.takedamage = 1;
     targeticon = spawn("script_model", level.rts.enemy_base.entity.origin);
     targeticon.angles = level.rts.enemy_base.entity.angles;
-    targeticon setmodel("tag_origin");
+    targeticon setModel("tag_origin");
     targeticon linkto(level.rts.enemy_base.entity);
-    playfxontag(level._effect["missile_reticle"], targeticon, "tag_origin");
+    playFXOnTag(level._effect["missile_reticle"], targeticon, "tag_origin");
   }
 
   level.rts.player waittill("remotemissile_done");
@@ -767,7 +763,7 @@ remapkeybindingparam(binding, param) {
 }
 
 registerkeybinding(binding, callback, param, flag) {
-  keyaction = spawnstruct();
+  keyaction = spawnStruct();
   keyaction.binding = binding;
   keyaction.callback = callback;
   keyaction.param = param;
@@ -796,7 +792,7 @@ getbuttonpress() {
   }
 
   if(!isDefined(level.rts.buttons)) {
-    level.rts.buttons = spawnstruct();
+    level.rts.buttons = spawnStruct();
     tags = [];
     bits = [];
     times = [];
@@ -870,9 +866,7 @@ getbuttonpress() {
         if(flag(action.gateflag))
           [[action.callback]](action.param);
       } else
-        [
-          [action.callback]
-        ](action.param);
+        [[action.callback]](action.param);
     }
   }
 
@@ -1252,7 +1246,7 @@ chopper_drop_smoke_at_unloading() {
     assert(isDefined(rappel_left_origin), "Heli has no rappel tags");
   }
 
-  groundposition = bullettrace(rappel_left_origin, rappel_left_origin + vectorscale((0, 0, -1), 100000.0), 0, self)["position"];
+  groundposition = bulletTrace(rappel_left_origin, rappel_left_origin + vectorscale((0, 0, -1), 100000.0), 0, self)["position"];
   self magicgrenadetype("willy_pete_sp", groundposition, (0, 0, -1), 0);
 }
 
@@ -1296,7 +1290,7 @@ chopper_unload_rope_cargo(cargo, pkg_ref, team, squadid) {
   cargo unlink();
   moverent = spawn("script_origin", cargo.origin);
   cargo linkto(moverent);
-  traceresults = bullettrace(cargo.origin, cargo.origin - vectorscale((0, 0, 1), 2000.0), 0, cargo);
+  traceresults = bulletTrace(cargo.origin, cargo.origin - vectorscale((0, 0, 1), 2000.0), 0, cargo);
   assert(traceresults["fraction"] != 0, "Ground trace didn't hit anything");
   groundpos = traceresults["position"];
   movetime = 3.0;
@@ -1309,7 +1303,7 @@ chopper_unload_rope_cargo(cargo, pkg_ref, team, squadid) {
       cargo maps\_vehicle::defend(cargo.origin, 600);
   } else {
     for(i = 0; i < 10; i++)
-      playfx(level._effect["cargo_box_open"], groundpos + (randomint(20), randomint(20), randomint(30)));
+      playFX(level._effect["cargo_box_open"], groundpos + (randomint(20), randomint(20), randomint(30)));
 
     wait 0.1;
     cargo delete();
@@ -1452,8 +1446,7 @@ time_countdown_delete(luinote) {
   luinotifyevent(istring(luinote), 1, 0);
 }
 
-missioncompletemsg(success) {
-}
+missioncompletemsg(success) {}
 
 missionfailuremenu() {
   luinotifyevent(&"rts_hide_result");
@@ -1737,12 +1730,12 @@ player_plant_network_intruder(poi) {
   poi.intruder_being_planted = 1;
   player_tag_origin = spawn("script_model", self.origin);
   player_tag_origin.angles = self.angles;
-  player_tag_origin setmodel("tag_origin");
+  player_tag_origin setModel("tag_origin");
   player_tag_origin.targetname = "player_tag_origin";
   level thread run_scene("plant_network_intruder");
   wait 0.05;
   network_intruder = spawn("script_model", self.origin);
-  network_intruder setmodel(level.rts.intrudermodel);
+  network_intruder setModel(level.rts.intrudermodel);
   network_intruder.origin = self.m_scene_model gettagorigin("tag_weapon");
   network_intruder.angles = self.m_scene_model gettagangles("tag_weapon");
   network_intruder linkto(self.m_scene_model, "tag_weapon");
@@ -1773,7 +1766,7 @@ ai_intruder_plant() {
   self clearanim( % root, 0.2);
   network_intruder = spawn("script_model", self.origin);
   network_intruder.team = self.team;
-  network_intruder setmodel(level.rts.intrudermodel);
+  network_intruder setModel(level.rts.intrudermodel);
   self thread ai_intruder_plant_cleanup(network_intruder);
   self.a.movement = "stop";
   self setflaggedanimknobrestart("plantAnim", % ai_plant_claymore, 1, 0.2, 1);
@@ -1816,14 +1809,13 @@ setupnetworkintruder(poi) {
   myorigin = self.origin;
   self thread blinky_light(level._effect["network_intruder_blink"], "tag_fx");
   self.sndloopingent = spawn("script_origin", self.origin);
-  self.sndloopingent playloopsound("evt_rts_intruder_loop", 1);
+  self.sndloopingent playLoopSound("evt_rts_intruder_loop", 1);
   fakevehicle = maps\_vehicle::spawn_vehicle_from_targetname("fake_vehicle");
   fakevehicle.team = self.team;
   fakevehicle.vteam = self.team;
   fakevehicle.origin = self.origin + vectorscale((0, 0, 1), 8.0);
 
-  if(self.team == "allies") {
-  } else
+  if(self.team == "allies") {} else
     fakevehicle.threatbias = 6000;
 
   fakevehicle linkto(self);
@@ -1885,7 +1877,7 @@ setupnetworkintruder(poi) {
 }
 
 sfxandfx(origin, sfx_alias, fx_alias) {
-  playfx(level._effect[fx_alias], origin);
+  playFX(level._effect[fx_alias], origin);
   playsoundatposition(sfx_alias, origin);
   return true;
 }
@@ -1894,12 +1886,12 @@ blinky_light(fx, tagname) {
   self endon("death");
 
   while(true) {
-    self playsound("evt_rts_acoustic_sensor_beep");
+    self playSound("evt_rts_acoustic_sensor_beep");
 
     if(isDefined(self gettagorigin(tagname)))
-      playfxontag(fx, self, tagname);
+      playFXOnTag(fx, self, tagname);
     else
-      playfxontag(fx, self, "tag_origin");
+      playFXOnTag(fx, self, "tag_origin");
 
     wait 0.5;
   }
@@ -2052,7 +2044,7 @@ player_takeover_random_dude() {
 }
 
 test_heli_dropoff(type, team, pkg_ref) {
-  availtransport = spawnstruct();
+  availtransport = spawnStruct();
 
   if(type == "quads" || type == "asd" || type == "claw")
     availtransport.cb = maps\_so_rts_ai::spawn_ai_package_cargo;
@@ -2107,7 +2099,7 @@ calcent2dscreen() {
   if(!isDefined(self.next2dcalc) || self.next2dcalc < time) {
     angles = get_player_angles();
     normal = vectornormalize(self.origin - level.rts.player.origin);
-    forward = anglestoforward(angles);
+    forward = anglesToForward(angles);
     dot = vectordot(forward, normal);
 
     if(dot < 0) {
@@ -2116,7 +2108,7 @@ calcent2dscreen() {
     } else {
       up_vec1 = anglestoup(angles);
       right_vec2 = anglestoright(angles);
-      forward_vec3 = anglestoforward(angles);
+      forward_vec3 = anglesToForward(angles);
       p1 = level.rts.player.origin;
       p2 = p1 + vectorscale(up_vec1, 100);
       p3 = p1 + vectorscale(right_vec2, 100);
@@ -2159,7 +2151,7 @@ addadditionaltarget(target, team) {
 
 set_closestunitparams() {
   if(!isDefined(level.rts.closestunitparams)) {
-    level.rts.closestunitparams = spawnstruct();
+    level.rts.closestunitparams = spawnStruct();
     level.rts.closestunitparams.checkaivalid = 1;
     level.rts.closestunitparams.checkignoreme = 1;
     level.rts.closestunitparams.checknotplayerteam = 1;
@@ -2405,7 +2397,7 @@ setupmapboundary() {
     lx = ulxy.origin[0] < lrxy.origin[0] ? lrxy.origin[0] : ulxy.origin[0];
     uy = ulxy.origin[1] < lrxy.origin[1] ? ulxy.origin[1] : lrxy.origin[1];
     ly = ulxy.origin[1] < lrxy.origin[1] ? lrxy.origin[1] : ulxy.origin[1];
-    level.rts.bounds = spawnstruct();
+    level.rts.bounds = spawnStruct();
     level.rts.bounds.ulx = ux;
     level.rts.bounds.uly = uy;
     level.rts.bounds.lrx = lx;
@@ -2461,7 +2453,7 @@ clampenttomapboundary(ent, damage, warnmsg) {
 }
 
 clamporigintomapboundary(origin) {
-  ret = spawnstruct();
+  ret = spawnStruct();
   ret.inbounds = 1;
   ret.origin = origin;
 
@@ -2768,7 +2760,7 @@ turret_createmovewatcher() {
   if(isDefined(self.bad_turret_spot))
     self.bad_turret_spot delete();
 
-  target_vec = self.origin + anglestoforward((0, self.angles[1], 0)) * 1000;
+  target_vec = self.origin + anglesToForward((0, self.angles[1], 0)) * 1000;
   self settargetorigin(target_vec);
   self thread maps\_cic_turret::cic_turret_on();
   self.no_pickup = gettime() + 2000;
@@ -2795,7 +2787,7 @@ turret_createmovewatcher() {
   self notify("scripted");
   self lights_off();
   self laseroff();
-  target_vec = self.origin + anglestoforward((0, self.angles[1], 0)) * 1000;
+  target_vec = self.origin + anglesToForward((0, self.angles[1], 0)) * 1000;
   self settargetorigin(target_vec);
   self.off = 1;
   self makeunusable();
@@ -2803,12 +2795,12 @@ turret_createmovewatcher() {
   self.pickup_trigger delete();
   self.pickup_trigger = spawn("trigger_radius", self.origin, 0, 60, 64);
   self thread turret_linktrigger(self.pickup_trigger);
-  self setmodel(self.modelgoodplacement);
+  self setModel(self.modelgoodplacement);
   level.rts.player thread updateturretplacement(self);
   wait 0.5;
 
   if(isDefined(self.pickup_trigger)) {
-    level thread trigger_use(self.pickup_trigger, & "SO_RTS_PLACE", "turret_place_" + self getentitynumber(), self.use_alt_btn_to_move);
+    level thread trigger_use(self.pickup_trigger, &"SO_RTS_PLACE", "turret_place_" + self getentitynumber(), self.use_alt_btn_to_move);
     self connectpaths();
   }
 }
@@ -2823,7 +2815,7 @@ dropturretonnotify(note, turret) {
   wait 0.05;
   turret.origin = turret.lastgoodspot;
   turret.angles = turret.lastgoodang;
-  turret setmodel(turret.model_base);
+  turret setModel(turret.model_base);
   turret makeusable(turret.team);
 
   if(isDefined(turret.pickup_trigger))
@@ -2852,7 +2844,7 @@ turret_placementwatcher(turret) {
 
     turret.origin = turret.lastgoodspot;
     turret.angles = turret.lastgoodang;
-    turret setmodel(turret.model_base);
+    turret setModel(turret.model_base);
     self playrumbleonentity("damage_heavy");
     self.carrying_turret = undefined;
     self allowjump(1);
@@ -2886,7 +2878,7 @@ updateturretplacement(turret) {
   self thread dropturretonnotify("rts_go", turret);
   self thread turret_placementwatcher(turret);
   self thread turret_weapongivebackwatch(turret);
-  badspots = getentarray("bad_turret_spot", "targetname");
+  badspots = getEntArray("bad_turret_spot", "targetname");
 
   while(true) {
     turret.canbeplaced = 1;
@@ -2909,10 +2901,10 @@ updateturretplacement(turret) {
 
     if(turret.canbeplaced != lastplacedturret) {
       if(turret.canbeplaced) {
-        turret setmodel(turret.modelgoodplacement);
+        turret setModel(turret.modelgoodplacement);
         turret.pickup_trigger.disable_use = undefined;
       } else {
-        turret setmodel(turret.modelbadplacement);
+        turret setModel(turret.modelbadplacement);
         turret.pickup_trigger.disable_use = 1;
       }
 
@@ -2930,9 +2922,7 @@ updateturretplacement(turret) {
 
 turret_deathwatch(einflictor, eattacker, idamage, n_dflags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, psoffsettime, b_damage_from_underneath, n_model_index, str_part_name) {
   if(isDefined(level.rts.turretdamagecb))
-    idamage = [
-      [level.rts.turretdamagecb]
-    ](einflictor, eattacker, idamage, n_dflags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, psoffsettime, b_damage_from_underneath, n_model_index, str_part_name);
+    idamage = [[level.rts.turretdamagecb]](einflictor, eattacker, idamage, n_dflags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, psoffsettime, b_damage_from_underneath, n_model_index, str_part_name);
 
   if(self.health < idamage) {
     self setclientflag(7);
@@ -2942,9 +2932,7 @@ turret_deathwatch(einflictor, eattacker, idamage, n_dflags, str_means_of_death, 
   }
 
   if(isDefined(self.classvehicledamage))
-    return [
-      [self.classvehicledamage]
-    ](einflictor, eattacker, idamage, n_dflags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, psoffsettime, b_damage_from_underneath, n_model_index, str_part_name);
+    return [[self.classvehicledamage]](einflictor, eattacker, idamage, n_dflags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, psoffsettime, b_damage_from_underneath, n_model_index, str_part_name);
   else
     return idamage;
 }
@@ -2957,7 +2945,7 @@ level_create_turrets(usable, hitpoints) {
     hitpoints = 2000;
 
   wait 0.05;
-  turretorigins = getentarray("turret_loc_enemy", "targetname");
+  turretorigins = getEntArray("turret_loc_enemy", "targetname");
 
   foreach(tur in turretorigins) {
     turret = maps\_vehicle::spawn_vehicle_from_targetname("sentry_turret_axis");
@@ -2987,14 +2975,14 @@ level_create_turrets(usable, hitpoints) {
 
     turret.overridevehicledamage = ::turret_deathwatch;
     turret.trigger = spawn("trigger_radius", turret.origin, 0, 80, 64);
-    turret thread trigger_hint(turret.trigger, & "SO_RTS_CANNOT_HACK");
+    turret thread trigger_hint(turret.trigger, &"SO_RTS_CANNOT_HACK");
     level notify("turret_created", turret);
     turret.bad_turret_spot = spawn("trigger_radius", turret.origin, 0, 128, 64);
     turret.bad_turret_spot.targetname = "bad_turret_spot";
     tur delete();
   }
 
-  turretorigins = getentarray("turret_loc_friendly", "targetname");
+  turretorigins = getEntArray("turret_loc_friendly", "targetname");
 
   foreach(tur in turretorigins) {
     turret = maps\_vehicle::spawn_vehicle_from_targetname("sentry_turret_friendly");
@@ -3064,8 +3052,8 @@ claymore_create(origin, angles, team) {
     thread maps\_so_rts_support::debug_sphere(origin, 8, (1, 0, 0), 0.6, 300);
 
     claymore.angles = angles;
-    claymore setmodel("weapon_claymore");
-    playfxontag(getfx("claymore_laser"), claymore, "tag_fx");
+    claymore setModel("weapon_claymore");
+    playFXOnTag(getfx("claymore_laser"), claymore, "tag_fx");
     claymore.team = team;
     claymore thread claymore_damagewatch();
     claymore thread claymore_detonationwatch();
@@ -3083,7 +3071,7 @@ claymore_create(origin, angles, team) {
 
 claymore_damagewatch() {
   self endon("death");
-  self setcandamage(1);
+  self setCanDamage(1);
   self.health = 10000;
   self.maxhealth = self.health;
   self waittill("damage");
@@ -3117,7 +3105,7 @@ claymore_detonate() {
     self.fakevehicle delete();
 
   level notify("badplace_entNum" + self getentitynumber());
-  playfx(getfx("claymore_explode"), self gettagorigin("tag_fx"));
+  playFX(getfx("claymore_explode"), self gettagorigin("tag_fx"));
   radiusdamage(self gettagorigin("tag_fx"), 192, 500, 250);
   self delete();
 }

@@ -3157,7 +3157,7 @@ ending_pt1_sequence() {
   if(!common_scripts\utility::flag("vignette_ending_qte_success")) {
     if(!common_scripts\utility::flag("already_failing")) {
       common_scripts\utility::flag_set("already_failing");
-      setdvar("ui_deadquote", & "FLOOD_ENDING_QTE_0_FAILED");
+      setdvar("ui_deadquote", &"FLOOD_ENDING_QTE_0_FAILED");
       level maps\_utility::missionfailedwrapper();
     }
 

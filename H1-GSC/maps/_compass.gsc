@@ -7,13 +7,13 @@
 setupminimap(var_0, var_1) {
   level.minimap_image = var_0;
 
-  if(!isdefined(level._loadstarted) && !isdefined(var_1)) {}
+  if(!isDefined(level._loadstarted) && !isDefined(var_1)) {}
 
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     var_1 = "minimap_corner";
 
   var_2 = getdvarfloat("scr_requiredMapAspectRatio", 1);
-  var_3 = getentarray(var_1, "targetname");
+  var_3 = getEntArray(var_1, "targetname");
 
   if(var_3.size != 2) {
     return;

@@ -12,7 +12,7 @@
 #namespace trophy_system;
 
 function autoexec __init__sytem__() {
-  system::register("trophy_system", & __init__, undefined, undefined);
+  system::register("trophy_system", &__init__, undefined, undefined);
 }
 
 function __init__() {

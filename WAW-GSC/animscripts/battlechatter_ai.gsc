@@ -87,7 +87,7 @@ setNPCID() {
   numIDs = usedIDs.size;
   startIndex = randomIntRange(0, numIDs);
   lowestID = startIndex;
-  for (index = 0; index <= numIDs; index++) {
+  for(index = 0; index <= numIDs; index++) {
     if(usedIDs[(startIndex + index) % numIDs].count < usedIDs[lowestID].count)
       lowestID = (startIndex + index) % numIDs;
   }
@@ -108,7 +108,7 @@ aiBattleChatterLoop() {}
 aiNameAndRankWaiter() {
   self endon("death");
   self endon("removed from battleChatter");
-  while (1) {
+  while(1) {
     self.bcName = self animscripts\battlechatter::getName();
     self.bcRank = self animscripts\battlechatter::getRank();
     self waittill("set name and rank");
@@ -141,22 +141,22 @@ removeFromSystem(squadName) {
 
 init_aiBattleChatter() {
   self.chatQueue = [];
-  self.chatQueue["threat"] = spawnstruct();
+  self.chatQueue["threat"] = spawnStruct();
   self.chatQueue["threat"].expireTime = 0;
   self.chatQueue["threat"].priority = 0.0;
-  self.chatQueue["response"] = spawnstruct();
+  self.chatQueue["response"] = spawnStruct();
   self.chatQueue["response"].expireTime = 0;
   self.chatQueue["response"].priority = 0.0;
-  self.chatQueue["reaction"] = spawnstruct();
+  self.chatQueue["reaction"] = spawnStruct();
   self.chatQueue["reaction"].expireTime = 0;
   self.chatQueue["reaction"].priority = 0.0;
-  self.chatQueue["inform"] = spawnstruct();
+  self.chatQueue["inform"] = spawnStruct();
   self.chatQueue["inform"].expireTime = 0;
   self.chatQueue["inform"].priority = 0.0;
-  self.chatQueue["order"] = spawnstruct();
+  self.chatQueue["order"] = spawnStruct();
   self.chatQueue["order"].expireTime = 0;
   self.chatQueue["order"].priority = 0.0;
-  self.chatQueue["custom"] = spawnstruct();
+  self.chatQueue["custom"] = spawnStruct();
   self.chatQueue["custom"].expireTime = 0;
   self.chatQueue["custom"].priority = 0.0;
   self.nextSayTime = getTime() + 50;
@@ -195,7 +195,7 @@ addGenericAliasEx(a, b, c) {}
 aiDeathFriendly() {
   attacker = self.attacker;
   if(isDefined(self)) {
-    for (i = 0; i < self.squad.members.size; i++) {
+    for(i = 0; i < self.squad.members.size; i++) {
       if(isalive(self.squad.members[i]) &&
         self.squad.members[i] cansee(self) &&
         distance(self.origin, self.squad.members[i].origin) < 500) {
@@ -336,7 +336,7 @@ addSituationalCombatOrder() {
     closestSoldierInCover = undefined;
     closestSoldierInCoverDistance = 1000000000;
     closestSoldierInCoverLocation = undefined;
-    for (index = 0; index < soldiers.size; index++) {
+    for(index = 0; index < soldiers.size; index++) {
       soldier = soldiers[index];
       distance = DistanceSquared(self.origin, soldier.origin);
       if(closestSoldierDistance > distance) {

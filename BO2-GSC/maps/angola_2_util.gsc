@@ -106,7 +106,7 @@ spawner_set_cleanup_category(str_category) {
 }
 
 multiple_trigger_waits(str_trigger_name, str_trigger_notify) {
-  a_triggers = getentarray(str_trigger_name, "targetname");
+  a_triggers = getEntArray(str_trigger_name, "targetname");
 
   for(i = 0; i < a_triggers.size; i++)
     a_triggers[i] thread multiple_trigger_wait(str_trigger_notify);
@@ -415,7 +415,7 @@ simple_spawn_rusher_single(str_rusher_spawner_targetname, str_category, rusher_d
 }
 
 simple_spawn_rusher(str_rusher_spawner_targetname, str_category, rusher_distance) {
-  a_sp_rusher = getentarray(str_rusher_spawner_targetname, "targetname");
+  a_sp_rusher = getEntArray(str_rusher_spawner_targetname, "targetname");
 
   if(isDefined(a_sp_rusher)) {
     for(i = 0; i < a_sp_rusher.size; i++)
@@ -481,7 +481,7 @@ ai_run_along_node_array(str_ai_targetname, a_str_nodes, ignore_all, teleport_to_
 
 mission_fail_if_not_inside_info_volumes(str_info_targetname, str_end_notify, fail_mission_delay, fail_mission_flag, str_fail_enemy_spawners, b_kill_player) {
   level endon(str_end_notify);
-  a_volumes = getentarray(str_info_targetname, "targetname");
+  a_volumes = getEntArray(str_info_targetname, "targetname");
 
   if(!isDefined(a_volumes)) {
     return;
@@ -585,7 +585,7 @@ fail_mission_if_not_in_crouch_cover(str_endon_notify, delay_fail_time, allow_sta
 }
 
 spawn_in_stealth_failure_guards(str_fail_enemy_spawners) {
-  a_spawners = getentarray(str_fail_enemy_spawners, "targetname");
+  a_spawners = getEntArray(str_fail_enemy_spawners, "targetname");
 
   if(isDefined(a_spawners)) {
     for(i = 0; i < a_spawners.size; i++) {
@@ -655,7 +655,7 @@ fire_weapon_on_target(target) {
 play_damage_fx_on_chase_boat() {
   self endon("death");
   self waittill("damage");
-  playfxontag(level._effect["small_boat_damage_1"], self, "tag_origin");
+  playFXOnTag(level._effect["small_boat_damage_1"], self, "tag_origin");
 
   while(true) {
     if(self.health < 300) {
@@ -665,7 +665,7 @@ play_damage_fx_on_chase_boat() {
     wait 0.1;
   }
 
-  playfxontag(level._effect["small_boat_damage_2"], self, "tag_origin");
+  playFXOnTag(level._effect["small_boat_damage_2"], self, "tag_origin");
 }
 
 hmg_boat_challenge_tracking() {
@@ -854,9 +854,9 @@ mason_protect_nag_think(nag_ent, nag_distance, nag1_time, nag2_time, nag3_time, 
 
 fire_angola_mortar(v_start, v_dest, speed_scale, height_scale, randomize_target_radius) {
   e_missile = spawn("script_model", v_start);
-  e_missile setmodel("t6_wpn_mortar_shell_prop_view");
-  e_missile playsound("prj_mortar_launch");
-  playfxontag(level._effect["smoketrail"], e_missile, "tag_origin");
+  e_missile setModel("t6_wpn_mortar_shell_prop_view");
+  e_missile playSound("prj_mortar_launch");
+  playFXOnTag(level._effect["smoketrail"], e_missile, "tag_origin");
 
   if(isDefined(randomize_target_radius)) {
     dx = randomfloatrange(-1 * randomize_target_radius, randomize_target_radius);
@@ -883,10 +883,10 @@ fire_angola_mortar(v_start, v_dest, speed_scale, height_scale, randomize_target_
 
   e_missile thread angola_mortor_move(v_dest, speed, height);
   e_missile waittill("mortor_strike");
-  playfx(level._effect["def_explosion"], e_missile.origin);
+  playFX(level._effect["def_explosion"], e_missile.origin);
   radiusdamage(e_missile.origin, 672, 15, 3);
   earthquake(0.6, 1.2, e_missile.origin, 3000);
-  e_missile playsound("exp_mortar");
+  e_missile playSound("exp_mortar");
   e_missile delete();
   level notify("angola_mortar_impact");
 }
@@ -952,7 +952,7 @@ angola_mortor_move(target_position, speed, height) {
     last_pos = self.origin;
 
     if(!audio_incomming_played && frac > 0.8) {
-      self playsound("prj_mortar_incoming");
+      self playSound("prj_mortar_incoming");
       audio_incomming_played = 1;
     }
   }
@@ -1152,9 +1152,9 @@ fxanim_grass() {
   flag_init("start_fxanim_grass_house");
   flag_init("start_fxanim_grass_middle");
   flag_init("start_fxanim_grass_end");
-  a_fxanim_grass_house = getentarray("fxanim_cattails_house", "targetname");
-  a_fxanim_grass_middle = getentarray("fxanim_cattails", "targetname");
-  a_fxanim_grass_end = getentarray("fxanim_cattails_end", "targetname");
+  a_fxanim_grass_house = getEntArray("fxanim_cattails_house", "targetname");
+  a_fxanim_grass_middle = getEntArray("fxanim_cattails", "targetname");
+  a_fxanim_grass_end = getEntArray("fxanim_cattails_end", "targetname");
   a_grass_structs = [];
   a_fxanim_grass = arraycombine(a_fxanim_grass_house, a_fxanim_grass_middle, 0, 0);
   a_fxanim_grass = arraycombine(a_fxanim_grass, a_fxanim_grass_end, 0, 0);
@@ -1249,7 +1249,7 @@ fxanim_grass_logic() {
 }
 
 fxanim_grass_delete_until_needed(m_grass) {
-  s_temp_grass = spawnstruct();
+  s_temp_grass = spawnStruct();
   m_grass maps\_fxanim::_fxanim_copy_kvps(s_temp_grass);
   m_grass delete();
   return s_temp_grass;
@@ -1291,12 +1291,12 @@ remove_from_users_array() {
 }
 
 fxanim_beach_grass_logic() {
-  a_beach_grass_fxanim = getentarray("fxanim_beach_grass", "targetname");
+  a_beach_grass_fxanim = getEntArray("fxanim_beach_grass", "targetname");
 
   foreach(e_grass in a_beach_grass_fxanim)
   e_grass hide();
 
-  a_beach_grass_static = getentarray("beach_grass_static", "targetname");
+  a_beach_grass_static = getEntArray("beach_grass_static", "targetname");
 
   foreach(e_grass in a_beach_grass_static)
   e_grass setscale(randomfloatrange(0.27, 0.5));
@@ -1461,12 +1461,12 @@ jungle_stealth_log_skipto_clean_up() {
   sp_enemy delete();
   sp_enemy = getent("house_follow_path_and_die_spawner", "targetname");
   sp_enemy delete();
-  a_spawners = getentarray("enemy_fail_beach", "targetname");
+  a_spawners = getEntArray("enemy_fail_beach", "targetname");
 
   foreach(sp_enemy in a_spawners)
   sp_enemy delete();
 
-  a_spawners = getentarray("enemy_fail_before_log", "targetname");
+  a_spawners = getEntArray("enemy_fail_before_log", "targetname");
 
   foreach(sp_enemy in a_spawners)
   sp_enemy delete();
@@ -1485,7 +1485,7 @@ jungle_stealth_log_ent_clean_up() {
   e_to_be_deleted delete();
   e_to_be_deleted = getent("trig_hudson_in_house", "targetname");
   e_to_be_deleted delete();
-  a_ledge_clips = getentarray("ledge_clip", "targetname");
+  a_ledge_clips = getEntArray("ledge_clip", "targetname");
 
   foreach(m_ledge_clip in a_ledge_clips)
   m_ledge_clip delete();

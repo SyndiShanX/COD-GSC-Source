@@ -4,7 +4,6 @@
 ************************************************/
 
 main() {
-
   character\character_mp_sas_urban_assault::main();
 }
 

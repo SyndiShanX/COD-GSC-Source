@@ -11,7 +11,7 @@ struct_class_init() {
   level.struct_class_names["script_noteworthy"] = [];
   level.struct_class_names["script_label"] = [];
   level.struct_class_names["classname"] = [];
-  for (i = 0; i < level.struct.size; i++) {
+  for(i = 0; i < level.struct.size; i++) {
     if(isDefined(level.struct[i].targetname)) {
       if(!isDefined(level.struct_class_names["targetname"][level.struct[i].targetname]))
         level.struct_class_names["targetname"][level.struct[i].targetname] = [];

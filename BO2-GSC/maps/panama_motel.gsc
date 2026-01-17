@@ -151,7 +151,7 @@ player_breach_fake_fire() {
   while(flag("breach_gun_raised")) {
     if(level.player attackbuttonpressed()) {
       level.player playrumbleonentity("damage_heavy");
-      playfxontag(getfx("maginified_muzzle_flash"), level.ai_thug_4, "tag_flash");
+      playFXOnTag(getfx("maginified_muzzle_flash"), level.ai_thug_4, "tag_flash");
     }
 
     wait 0.05;
@@ -173,11 +173,9 @@ motel_tv_swap(guy) {
   m_motel_tv_broken show();
 }
 
-test_print(guy) {
-}
+test_print(guy) {}
 
-head_shot_bathroom_guy(guy) {
-}
+head_shot_bathroom_guy(guy) {}
 
 player_breach_button_press() {
   screen_message_create(&"PANAMA_MOTEL_BREACH");
@@ -197,7 +195,7 @@ player_breach_button_press() {
 open_motel_door() {
   m_motel_door = getent("motel_door", "targetname");
   m_motel_door rotateyaw(120, 0.3, 0.3, 0);
-  playfx(getfx("door_breach"), m_motel_door.origin);
+  playFX(getfx("door_breach"), m_motel_door.origin);
 }
 
 mason_breach() {
@@ -216,7 +214,7 @@ motel_fail_condition() {
   flag_wait("trig_mason_to_motel");
   trig_motel_fail trigger_on();
   trig_motel_fail waittill("trigger");
-  setdvar("ui_deadquote", & "PANAMA_HANGAR_FAIL");
+  setdvar("ui_deadquote", &"PANAMA_HANGAR_FAIL");
   level notify("mission failed");
   maps\_utility::missionfailedwrapper();
 }

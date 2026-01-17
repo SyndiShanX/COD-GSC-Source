@@ -12,7 +12,6 @@
 #include maps\_vehicle_spline_zodiac;
 
 main() {
-
   enemy_pickup_heli = GetEnt("enemy_pickup_heli", "targetname");
   enemy_pickup_heli add_spawn_function(::setup_enemy_pickup_heli);
 
@@ -59,11 +58,10 @@ init_flags_here() {
 
   flag_init("pickup_heli_ok_to_delete_now");
   flag_init("price_fired_all_his_shots_at_heli");
-
 }
 
 rumbly_rocks_bumps() {
-  while (1) {
+  while(1) {
     wait randomfloatrange(.1, .4);
     if(!flag("rocky_bumps"))
       continue;
@@ -108,7 +106,7 @@ create_ent_for_going_over_edge() {
 boatline() {
   self endon("death");
 
-  for (;;) {
+  for(;;) {
     line(self.origin, level.player.origin);
     wait 0.05;
   }
@@ -138,12 +136,12 @@ rapids_scene() {
   struct = getstruct( trigger.target, "targetname" );
   targ = getstruct( struct.target, "targetname" );
   angles = vectortoangles( targ.origin - struct.origin );
-  forward = anglestoforward( angles );
-	
+  forward = anglesToForward( angles );
+  	
   player_angles = boat.angles;
   player_angles = set_y( (0,0,0), boat.angles[1] );
-  player_forward = anglestoforward( player_angles );
-	
+  player_forward = anglesToForward( player_angles );
+  	
   if( vectordot( player_forward, forward ) < 0.3 )
   {
   	// going backwards or some bs
@@ -215,7 +213,7 @@ rapids_scene() {
 
   was_driving = false;
 
-  for (;;) {
+  for(;;) {
     //line( boat.origin, level.test_boat.origin );
 
     input = level.player GetNormalizedMovement()[1];
@@ -320,7 +318,7 @@ rapids_scene() {
 
   level.rumbler_ent = rumble_ent;
 
-  while (1) {
+  while(1) {
     if(player_steadies_boat()) {
       flag_set("steady_boat_participating");
       level.player thread stop_loop_sound_on_entity("zodiac_waterfall_idle");
@@ -331,7 +329,7 @@ rapids_scene() {
       flag_clear("rocky_bumps");
       rumble_ent.intensity = .225;
       //			level.player stopshellshock();
-      while (player_steadies_boat())
+      while(player_steadies_boat())
         wait .05;
       rumble_ent.intensity = .0001;
       flag_set("rocky_bumps");
@@ -394,7 +392,7 @@ price_snipes_from_boat() {
 
   fx = getfx("explosions/large_vehicle_explosion");
   heli = level.enemy_ending_seaknight;
-  PlayFXOnTag(fx, heli, "tag_guy0");
+  playFXOnTag(fx, heli, "tag_guy0");
 
   level.players_boat anim_generic(level.price, "zodiac_rapids_sniper_fire", "tag_guy2");
 
@@ -429,7 +427,6 @@ trigger_steady_the_boat() {
   self waittill("trigger");
 
   thread miniguns_on_pickup_heli();
-
 }
 
 water_fall_edge() {
@@ -441,7 +438,7 @@ water_fall_edge() {
   level.player AllowCrouch(false);
   level.player AllowProne(false);
 
-  PlayFXOnTag(getfx("splash_over_waterfall"), level.players_boat, "tag_guy2");
+  playFXOnTag(getfx("splash_over_waterfall"), level.players_boat, "tag_guy2");
 
   level.players_boat notify("kill_treadfx");
 
@@ -462,7 +459,7 @@ water_fall_edge() {
   level thread maps\af_chase_knife_fight_code::eq_blender();
   thread maps\_ambient::use_eq_settings("fadeout_noncritical", level.eq_mix_track);
 
-  while (level.player.origin[2] > height)
+  while(level.player.origin[2] > height)
     wait .05;
 
   player_dismount();
@@ -470,7 +467,7 @@ water_fall_edge() {
   flag_set("pickup_heli_ok_to_delete_now");
 
   level notify("stop_music_at_splash");
-  if(isdefined(level.music_emitter)) {
+  if(isDefined(level.music_emitter)) {
     level.music_emitter StopSounds();
     level.music_emitter delaycall(.05, ::delete);
   }
@@ -481,8 +478,8 @@ water_fall_edge() {
 
   level.players_boat Delete();
 
-  script_vehicle_zodiacs = GetEntArray("script_vehicle_zodiac", "classname");
-  script_vehicle_zodiac_physics = GetEntArray("script_vehicle_zodiac_physics", "classname");
+  script_vehicle_zodiacs = getEntArray("script_vehicle_zodiac", "classname");
+  script_vehicle_zodiac_physics = getEntArray("script_vehicle_zodiac_physics", "classname");
   array_call(script_vehicle_zodiacs, ::delete);
   array_call(script_vehicle_zodiac_physics, ::delete);
 
@@ -503,7 +500,7 @@ water_fall_edge() {
   Earthquake(.3, 3.5, level.player.origin, 1000);
   level.player SetWaterSheeting(3, 3);
 
-  if(IsDefined(level.price.function_stack))
+  if(isDefined(level.price.function_stack))
     level.price function_stack_clear(); // mo said too. keep his function stack from continuing after he's dead.
 
   level.price stop_magic_bullet_shield();
@@ -518,7 +515,7 @@ water_fall_edge() {
   wait 1;
   if(!flag("killed_pickup_heli")) {
     // Shepherd escaped on the Helicopter.
-    SetDvar("ui_deadquote", & "AF_CHASE_FAILED_TO_SHOOT_DOWN");
+    SetDvar("ui_deadquote", &"AF_CHASE_FAILED_TO_SHOOT_DOWN");
     missionFailedWrapper();
     return;
   }
@@ -557,7 +554,6 @@ water_fall_edge() {
 }
 
 send_player_to_blend_boat() {
-
   zodiac_blend_target = GetEnt("zodiac_blend_target", "targetname");
   level.players_boat MakeUsable();
   level.player PlayerLinkToBlend(zodiac_blend_target, "tag_player", .05, 0, 0);
@@ -596,7 +592,7 @@ trigger_pre_rapids() {
 player_dismount() {
   level.players_boat Vehicle_TurnEngineOff();
   level.player DismountVehicle();
-  level.players_boat SetModel("vehicle_zodiac");
+  level.players_boat setModel("vehicle_zodiac");
   level.player.drivingVehicle = undefined;
 }
 
@@ -615,8 +611,8 @@ enemy_pickup_boat_spot() {
   enemy_heli.animname = "pavelow";
   boat = level.players_boat;
 
-  boat = Spawn("script_model", level.players_boat.origin);
-  boat SetModel(level.players_boat.model);
+  boat = spawn("script_model", level.players_boat.origin);
+  boat setModel(level.players_boat.model);
   boat.animname = "zodiac_player";
   boat hide();
   boat UseAnimTree(#animtree);
@@ -683,7 +679,7 @@ movetotag_internal(ent, tag, time) {
   tag_origin = ent GetTagOrigin(tag);
   self Unlink();
   self MoveTo(tag_origin, time);
-  while (GetTime() < timer) {
+  while(GetTime() < timer) {
     updated_tag_origin = ent GetTagOrigin(tag);
     if(updated_tag_origin != tag_origin) {
       tag_origin = updated_tag_origin;
@@ -693,13 +689,12 @@ movetotag_internal(ent, tag, time) {
     wait .05;
   }
   self LinkToBlendToTag(ent, tag);
-
 }
 
 setup_enemy_pickup_heli() {
   level.enemy_pickup_heli = self;
   self thread godon();
-  while (!isdefined(level.players_boat))
+  while(!isDefined(level.players_boat))
     wait .05;
   self thread enemy_pickup_boat_spot();
 }
@@ -708,7 +703,7 @@ miniguns_on_pickup_heli() {
   heli = level.enemy_pickup_heli;
 
   turret = SpawnTurret("misc_turret", heli.origin, "minigun_littlebird_spinnup");
-  turret SetModel("vehicle_little_bird_minigun_right");
+  turret setModel("vehicle_little_bird_minigun_right");
   turret LinkTo(heli, "tag_gunner_right", (33, 0, 0), (60, 76, 0));
 
   //		turret.isvehicleattached = true;// lets mgturret know not to mess with this turret
@@ -735,13 +730,12 @@ miniguns_on_pickup_heli() {
 
   heli waittill("death");
   turret Delete();
-
 }
 
 minigun_path() {
   minigun_path = getstruct("minigun_path", "targetname");
-  target_ent = Spawn("script_origin", minigun_path.origin);
-  //	target_ent SetModel( "body_desert_tf141_zodiac" );
+  target_ent = spawn("script_origin", minigun_path.origin);
+  //	target_ent setModel( "body_desert_tf141_zodiac" );
   //	target_ent NotSolid();
 
   minigun_splasher = getent("minigun_splasher", "targetname");
@@ -751,11 +745,11 @@ minigun_path() {
 
   flag_wait("price_steady1");
   self StartFiring();
-  while (!flag("price_fired_all_his_shots_at_heli")) {
-    if(!isdefined(minigun_path.target))
+  while(!flag("price_fired_all_his_shots_at_heli")) {
+    if(!isDefined(minigun_path.target))
       return;
     minigun_path = getstruct(minigun_path.target, "targetname");
-    if(!isdefined(minigun_path))
+    if(!isDefined(minigun_path))
       return;
     target_ent MoveTo(minigun_path.origin, 1, 0, 0);
     target_ent waittill("movedone");
@@ -777,7 +771,6 @@ player_in_sight_of_boarding_trigger() {
   level notify("quit_bread_crumb"); // kills failure from falling behind script.
   remove_extra_autosave_check("boat_check_trailing");
   remove_extra_autosave_check("boat_check_player_speeding_along");
-
 }
 
 trigger_just_before_boatride_end() {
@@ -814,7 +807,7 @@ trigger_over_waterfall() {
   flag_wait("going_over_waterfall");
   thread water_fall_edge();
   boat = level.players_boat;
-  node = Spawn("script_origin", boat.origin);
+  node = spawn("script_origin", boat.origin);
   node.angles = flat_angle(boat.angles);
 
   anim_name = "waterfall_over";
@@ -839,7 +832,7 @@ match_position_of_animated_boat(animated_boat) {
   last_animated_boat_spot = animated_boat GetTagOrigin("tag_body");
   ahead = 2;
   speed_to_go = 45;
-  while (1) {
+  while(1) {
     wait .05;
     origin = animated_boat GetTagOrigin("tag_body"); // cause I don't trust tag_origin
     angles = animated_boat GetTagAngles("tag_body"); // cause I don't trust tag_origin
@@ -865,23 +858,23 @@ match_position_of_animated_boat(animated_boat) {
 
 minigun_splasher_think() {
   effect = getfx("pavelow_minigunner_splash_add");
-  while (1) {
+  while(1) {
     self waittill("damage", amount, attacker, direction_vec, point, type);
     if(attacker.code_classname != "misc_turret")
       continue;
     ang = attacker GetTagAngles("tag_flash");
     org = attacker GetOrigin("tag_flash");
-    vect = AnglesToForward(ang) * 3000;
+    vect = anglesToForward(ang) * 3000;
 
-    trace = BulletTrace(org, org + vect, false, attacker);
+    trace = bulletTrace(org, org + vect, false, attacker);
 
-    if(trace["fraction"] == 1.0)
+    if(trace["fraction"] == 1.0) {
       continue;
-
-    if(isdefined(trace["entity"]))
+    }
+    if(isDefined(trace["entity"])) {
       continue;
-
-    playfx(effect, trace["position"]);
+    }
+    playFX(effect, trace["position"]);
   }
 }
 
@@ -891,7 +884,6 @@ trigger_stop_boat_nagging() {
 }
 
 helicopter_sound_blend() {
-
   fly = "afchase_pavelow_fly";
   idle = "afchase_pavelow_idle";
 
@@ -914,5 +906,4 @@ helicopter_sound_blend() {
 
   idleblend thread mix_down(idle);
   flyblend thread mix_down(fly);
-
 }

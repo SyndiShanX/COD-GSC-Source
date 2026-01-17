@@ -17,7 +17,6 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_trial_white_nukerun;
 
 autoexec __init__system__() {
@@ -33,7 +32,7 @@ __init__() {
   zm_trial::register_challenge("nukerun", &on_begin, &on_end);
 }
 
-private on_begin() {
+on_begin() {
   level.var_8c018a0e = 1;
   level.var_4f7df1ac = 1;
   level flag::clear(#"hash_745ef45972843bd3");
@@ -88,10 +87,10 @@ nuke_loop() {
     str_zone = zone.name;
 
     switch (str_zone) {
-      case #"zone_street_start":
+      case # "zone_street_start":
         str_zone = "zone_street2";
         break;
-      case #"zone_street_mid":
+      case # "zone_street_mid":
         str_zone = "zone_street1";
         break;
     }
@@ -150,7 +149,7 @@ function_fe74909(drop_point) {
     }
 
     self.a_n_objective_ids[self.a_n_objective_ids.size] = level.var_7cd7bd38;
-    objective_add(level.var_7cd7bd38, "active", level.var_7540bc25.origin, #"hash_423a75e2700a53ab");
+    objective_add(level.var_7cd7bd38, "active", level.var_7540bc25.origin, # "hash_423a75e2700a53ab");
     function_da7940a3(level.var_7cd7bd38, 1);
 
     while(isDefined(level.var_7540bc25) && !level flag::get(#"hash_745ef45972843bd3")) {
@@ -166,7 +165,7 @@ function_fe74909(drop_point) {
   level notify(#"hash_4d75b8766027b0f2");
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   level.var_8c018a0e = undefined;
   level.var_4f7df1ac = undefined;
   level flag::set(#"hash_745ef45972843bd3");
@@ -178,7 +177,7 @@ private on_end(round_reset) {
   }
 }
 
-private function_33f0ddd3(s_event) {
+function_33f0ddd3(s_event) {
   if(s_event.event === "give_weapon") {
     if(!zm_loadout::function_2ff6913(s_event.weapon)) {
       self lockweapon(s_event.weapon, 1, 1);

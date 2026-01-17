@@ -8,7 +8,7 @@
 main() {
   level.init_animatedmodels_dump = false;
 
-  if(!isdefined(level.anim_prop_models))
+  if(!isDefined(level.anim_prop_models))
     level.anim_prop_models = []; // this is what the LD puts in their map
 
   // Do special MP anim precaching
@@ -26,7 +26,7 @@ main() {
 
   level.init_animatedmodels = [];
 
-  animated_models = getentarray("animated_model", "targetname");
+  animated_models = getEntArray("animated_model", "targetname");
   array_thread(animated_models, ::model_init);
 
   // one or more of the models initialized by model_init() was not setup by the map
@@ -40,7 +40,7 @@ main() {
 }
 
 model_init() {
-  if(!isdefined(level.anim_prop_models[self.model]))
+  if(!isDefined(level.anim_prop_models[self.model]))
     level.init_animatedmodels_dump = true;
 }
 

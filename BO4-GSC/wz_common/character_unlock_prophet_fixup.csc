@@ -5,15 +5,14 @@
 
 #include scripts\core_common\system_shared;
 #include scripts\wz_common\character_unlock_fixup;
-
 #namespace character_unlock_prophet_fixup;
 
 autoexec __init__system__() {
-  system::register(#"character_unlock_prophet_fixup", &__init__, undefined, #"character_unlock_fixup");
+  system::register(#"character_unlock_prophet_fixup", &__init__, undefined, # "character_unlock_fixup");
 }
 
 __init__() {
-  character_unlock_fixup::register_character_unlock(#"prophet_unlock", #"hash_62361c68e083d401", #"cu10_item", &function_d95e620c, #"hash_63b7bd67a959fc47", #"hash_63b7be67a959fdfa");
+  character_unlock_fixup::register_character_unlock(#"prophet_unlock", # "hash_62361c68e083d401", # "cu10_item", &function_d95e620c, # "hash_63b7bd67a959fc47", # "hash_63b7be67a959fdfa");
 }
 
 function_d95e620c() {

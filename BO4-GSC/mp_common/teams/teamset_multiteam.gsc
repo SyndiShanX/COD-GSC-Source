@@ -4,7 +4,6 @@
 *************************************************/
 
 #include scripts\mp_common\teams\teamset;
-
 #namespace teamset_multiteam;
 
 main() {

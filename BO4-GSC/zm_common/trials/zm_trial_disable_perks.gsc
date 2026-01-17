@@ -13,7 +13,6 @@
 #include scripts\zm_common\zm_perks;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
-
 #namespace zm_trial_disable_perks;
 
 autoexec __init__system__() {
@@ -28,7 +27,7 @@ __init__() {
   zm_trial::register_challenge(#"disable_perks", &on_begin, &on_end);
 }
 
-private on_begin() {
+on_begin() {
   level zm_trial::function_2b3a3307(1);
   assert(isDefined(level.var_b8be892e));
 
@@ -46,7 +45,7 @@ private on_begin() {
   zm_trial_util::function_8036c103();
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   level zm_trial::function_2b3a3307(0);
 
   if(!round_reset) {
@@ -114,17 +113,17 @@ function_551412f6() {
   }
 }
 
-private function_f0b698a7() {
+function_f0b698a7() {
   self player::generate_weapon_data();
   self.var_4a17c2cb = self._generated_weapons;
   self._generated_current_weapon = undefined;
   self._generated_weapons = undefined;
 }
 
-private function_85611c27() {
+function_85611c27() {
   if(isDefined(self.var_7864a0f6.additional_primary_weapon)) {
     foreach(weapondata in self.var_4a17c2cb) {
-      weapon = weapondata[#"weapon"];
+      weapon = weapondata[# "weapon"];
 
       if(weapon === self.var_7864a0f6.additional_primary_weapon) {
         self.var_7864a0f6.var_dd9bd473 = weapondata;
@@ -134,11 +133,11 @@ private function_85611c27() {
   }
 }
 
-private function_2c0ae6d1() {
+function_2c0ae6d1() {
   assert(isDefined(self.var_4a17c2cb));
-  var_4493e3e1 = isarray(self.var_7864a0f6.var_724d826b) && isinarray(self.var_7864a0f6.var_724d826b, #"specialty_additionalprimaryweapon");
+  var_4493e3e1 = isarray(self.var_7864a0f6.var_724d826b) && isinarray(self.var_7864a0f6.var_724d826b, # "specialty_additionalprimaryweapon");
 
-  if((var_4493e3e1 || isinarray(self.var_466b927f, #"specialty_additionalprimaryweapon")) && isDefined(self.var_7864a0f6.additional_primary_weapon) && isDefined(self.var_7864a0f6.var_dd9bd473) && !self hasweapon(self.var_7864a0f6.additional_primary_weapon)) {
+  if((var_4493e3e1 || isinarray(self.var_466b927f, # "specialty_additionalprimaryweapon")) && isDefined(self.var_7864a0f6.additional_primary_weapon) && isDefined(self.var_7864a0f6.var_dd9bd473) && !self hasweapon(self.var_7864a0f6.additional_primary_weapon)) {
     self player::weapondata_give(self.var_7864a0f6.var_dd9bd473);
     self zm_trial_util::function_7f999aa0(self.var_7864a0f6);
   }

@@ -47,12 +47,12 @@ main() {
   prop2.angles = (270, 198.902, 86.0983);
   prop3 = spawn("script_model", (732.49, 381.37, -91.75));
   prop3.angles = (270, 198.902, 86.0983);
-  prop1 setmodel("nt_2020_doorframe_black");
-  prop2 setmodel("nt_2020_doorframe_black");
-  prop3 setmodel("nt_2020_doorframe_black");
+  prop1 setModel("nt_2020_doorframe_black");
+  prop2 setModel("nt_2020_doorframe_black");
+  prop3 setModel("nt_2020_doorframe_black");
   busprop1 = spawn("script_model", (-121.962, 53.5963, -24.241));
   busprop1.angles = (274.162, 199.342, 86.5184);
-  busprop1 setmodel("nt_2020_doorframe_black");
+  busprop1 setModel("nt_2020_doorframe_black");
   spawncollision("collision_clip_32x32x32", "collider", (817.5, 415, 77), vectorscale((0, 1, 0), 15.2));
   spawncollision("collision_clip_32x32x32", "collider", (859, 430, 77.5), vectorscale((0, 1, 0), 15.2));
   spawncollision("collision_clip_32x32x32", "collider", (894, 439.5, 77.5), vectorscale((0, 1, 0), 15.2));
@@ -109,7 +109,7 @@ levelspawndvars(reset_dvars) {
 }
 
 move_spawn_point(targetname, start_point, new_point) {
-  spawn_points = getentarray(targetname, "classname");
+  spawn_points = getEntArray(targetname, "classname");
 
   for(i = 0; i < spawn_points.size; i++) {
     if(distancesquared(spawn_points[i].origin, start_point) < 1) {
@@ -120,7 +120,7 @@ move_spawn_point(targetname, start_point, new_point) {
 }
 
 nuked_mannequin_init() {
-  destructibles = getentarray("destructible", "targetname");
+  destructibles = getEntArray("destructible", "targetname");
   mannequins = nuked_mannequin_filter(destructibles);
   level.mannequin_count = mannequins.size;
 
@@ -187,8 +187,8 @@ nuke_detonation() {
   level notify("bomb_drop_pre");
   clientnotify("bomb_drop_pre");
   bomb_loc = getent("bomb_loc", "targetname");
-  bomb_loc playsound("amb_end_nuke_2d");
-  destructibles = getentarray("destructible", "targetname");
+  bomb_loc playSound("amb_end_nuke_2d");
+  destructibles = getEntArray("destructible", "targetname");
 
   for(i = 0; i < destructibles.size; i++) {
     if(getsubstr(destructibles[i].destructibledef, 0, 4) == "veh_")
@@ -202,7 +202,7 @@ nuke_detonation() {
   wait(bombwaitpretime);
   exploder(level.const_fx_exploder_nuke);
   bomb_loc = getent("bomb_loc", "targetname");
-  bomb_loc playsound("amb_end_nuke");
+  bomb_loc playSound("amb_end_nuke");
   level notify("bomb_drop");
   clientnotify("bomb_drop");
   bombwaittime = getdvarfloatdefault("scr_nuke_car_flip", 3.25);
@@ -228,7 +228,7 @@ nuked_bomb_drop_think() {
   for(;;) {
     camera = spawn("script_model", camerastart.origin);
     camera.angles = camerastart.angles;
-    camera setmodel("tag_origin");
+    camera setModel("tag_origin");
     level waittill("bomb_drop_pre");
     level notify("fxanim_dome_explode_start");
 
@@ -245,7 +245,7 @@ nuked_bomb_drop_think() {
     bombwaittime = getdvarfloatdefault("mp_nuketown_2020_bombwait", 3.0);
     wait(bombwaittime);
     wait(env_destroy_delay);
-    cameraforward = anglestoforward(cameraend.angles);
+    cameraforward = anglesToForward(cameraend.angles);
     physicsexplosionsphere(bomb_loc.origin, 128, 128, 1);
     radiusdamage(bomb_loc.origin, 128, 128, 128);
   }
@@ -321,7 +321,7 @@ do_vcs() {
   level.vcs_trigger sethintstring(&"MPUI_USE_VCS_HINT");
   level.vcs_trigger triggerignoreteam();
   screen = getent("nuketown_tv", "targetname");
-  screen setmodel("nt_sign_population_vcs");
+  screen setModel("nt_sign_population_vcs");
 
   while(true) {
     level.vcs_trigger waittill("trigger", player);

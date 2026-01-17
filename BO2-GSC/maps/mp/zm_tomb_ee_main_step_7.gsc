@@ -31,8 +31,7 @@ stage_logic() {
   stage_completed("little_girl_lost", level._cur_stage_name);
 }
 
-exit_stage(success) {
-}
+exit_stage(success) {}
 
 ee_zombie_killed_override(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime) {
   if(isDefined(attacker) && isplayer(attacker) && maps\mp\zm_tomb_chamber::is_point_in_chamber(self.origin)) {

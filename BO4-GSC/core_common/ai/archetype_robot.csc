@@ -9,7 +9,6 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace archetype_robot;
 
 autoexec __init__system__() {
@@ -17,8 +16,8 @@ autoexec __init__system__() {
 }
 
 autoexec precache() {
-  level._effect[#"fx_ability_elec_surge_short_robot"] = "electric/fx8_surge_short_robot";
-  level._effect[#"fx_exp_robot_stage3_evb"] = "explosions/fx_exp_robot_stage3_evb";
+  level._effect[# "fx_ability_elec_surge_short_robot"] = "electric/fx8_surge_short_robot";
+  level._effect[# "fx_exp_robot_stage3_evb"] = "explosions/fx_exp_robot_stage3_evb";
 }
 
 __init__() {
@@ -34,11 +33,11 @@ __init__() {
 
 #namespace robotclientutils;
 
-private robotsoldierspawnsetup(localclientnum) {
+robotsoldierspawnsetup(localclientnum) {
   entity = self;
 }
 
-private robotlighting(localclientnum, entity, flicker, mindcontrolstate) {
+robotlighting(localclientnum, entity, flicker, mindcontrolstate) {
   switch (mindcontrolstate) {
     case 0:
       if(flicker) {
@@ -58,7 +57,7 @@ private robotlighting(localclientnum, entity, flicker, mindcontrolstate) {
       }
 
       if(!gibclientutils::isgibbed(localclientnum, entity, 8)) {
-        entity playSound(localclientnum, #"fly_bot_ctrl_lvl_01_start", entity.origin);
+        entity playSound(localclientnum, # "fly_bot_ctrl_lvl_01_start", entity.origin);
       }
 
       break;
@@ -72,7 +71,7 @@ private robotlighting(localclientnum, entity, flicker, mindcontrolstate) {
       }
 
       if(!gibclientutils::isgibbed(localclientnum, entity, 8)) {
-        entity playSound(localclientnum, #"fly_bot_ctrl_lvl_02_start", entity.origin);
+        entity playSound(localclientnum, # "fly_bot_ctrl_lvl_02_start", entity.origin);
       }
 
       break;
@@ -85,12 +84,12 @@ private robotlighting(localclientnum, entity, flicker, mindcontrolstate) {
         fxclientutils::playfxbundle(localclientnum, entity, entity.altfxdef2);
       }
 
-      entity playSound(localclientnum, #"fly_bot_ctrl_lvl_03_start", entity.origin);
+      entity playSound(localclientnum, # "fly_bot_ctrl_lvl_03_start", entity.origin);
       break;
   }
 }
 
-private robotlightshandler(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
+robotlightshandler(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   entity = self;
 
   if(!isDefined(entity) || !entity isai() || isDefined(entity.archetype) && entity.archetype != "robot") {
@@ -110,7 +109,7 @@ private robotlightshandler(localclientnum, oldvalue, newvalue, bnewent, binitial
   }
 }
 
-private robotemphandler(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
+robotemphandler(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   entity = self;
 
   if(!isDefined(entity) || !entity isai() || isDefined(entity.archetype) && entity.archetype != "robot") {
@@ -125,12 +124,12 @@ private robotemphandler(localclientnum, oldvalue, newvalue, bnewent, binitialsna
     case 0:
       break;
     case 1:
-      entity.empfx = util::playFXOnTag(localclientnum, level._effect[#"fx_ability_elec_surge_short_robot"], entity, "j_spine4");
+      entity.empfx = util::playFXOnTag(localclientnum, level._effect[# "fx_ability_elec_surge_short_robot"], entity, "j_spine4");
       break;
   }
 }
 
-private robotmindcontrolhandler(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
+robotmindcontrolhandler(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   entity = self;
 
   if(!isDefined(entity) || !entity isai() || isDefined(entity.archetype) && entity.archetype != "robot") {
@@ -154,7 +153,7 @@ robotmindcontrolexplosionhandler(localclientnum, oldvalue, newvalue, bnewent, bi
 
   switch (newvalue) {
     case 1:
-      entity.explosionfx = util::playFXOnTag(localclientnum, level._effect[#"fx_exp_robot_stage3_evb"], entity, "j_spineupper");
+      entity.explosionfx = util::playFXOnTag(localclientnum, level._effect[# "fx_exp_robot_stage3_evb"], entity, "j_spineupper");
       break;
   }
 }

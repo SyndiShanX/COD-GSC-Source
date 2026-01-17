@@ -9,13 +9,12 @@
 #include scripts\core_common\scoreevents_shared;
 #include scripts\core_common\util_shared;
 #include scripts\weapons\weaponobjects;
-
 #namespace bouncingbetty;
 
 init_shared() {
-  level.bettydestroyedfx = #"weapon/fx_betty_exp_destroyed";
-  level._effect[#"fx_betty_friendly_light"] = #"hash_5f76ecd582d98e38";
-  level._effect[#"fx_betty_enemy_light"] = #"hash_330682ff4f12f646";
+  level.bettydestroyedfx = # "weapon/fx_betty_exp_destroyed";
+  level._effect[# "fx_betty_friendly_light"] = # "hash_5f76ecd582d98e38";
+  level._effect[# "fx_betty_enemy_light"] = # "hash_330682ff4f12f646";
   level.bettymindist = 20;
   level.bettystuntime = 1;
   bettyexplodeanim = "o_spider_mine_detonate";
@@ -38,7 +37,7 @@ init_shared() {
 
   level thread bouncingbettydvarupdate();
 
-    weaponobjects::function_e6400478(#"bouncingbetty", &createbouncingbettywatcher, 0);
+  weaponobjects::function_e6400478(#"bouncingbetty", &createbouncingbettywatcher, 0);
 }
 
 register() {
@@ -64,26 +63,26 @@ bouncingbettydvarupdate() {
   }
 }
 
-  function createbouncingbettywatcher(watcher) {
-    watcher.onspawn = &onspawnbouncingbetty;
-    watcher.watchforfire = 1;
-    watcher.ondetonatecallback = &bouncingbettydetonate;
-    watcher.activatesound = #"wpn_betty_alert";
-    watcher.hackable = 1;
-    watcher.hackertoolradius = level.equipmenthackertoolradius;
-    watcher.hackertooltimems = level.equipmenthackertooltimems;
-    watcher.ownergetsassist = 1;
-    watcher.ignoredirection = 1;
-    watcher.immediatedetonation = 1;
-    watcher.immunespecialty = "specialty_immunetriggerbetty";
-    watcher.detectionmindist = level.bettymindist;
-    watcher.detectiongraceperiod = level.bettygraceperiod;
-    watcher.detonateradius = level.bettyradius;
-    watcher.onfizzleout = &onbouncingbettyfizzleout;
-    watcher.stun = &weaponobjects::weaponstun;
-    watcher.stuntime = level.bettystuntime;
-    watcher.activationdelay = level.bettyactivationdelay;
-  }
+function createbouncingbettywatcher(watcher) {
+  watcher.onspawn = &onspawnbouncingbetty;
+  watcher.watchforfire = 1;
+  watcher.ondetonatecallback = &bouncingbettydetonate;
+  watcher.activatesound = # "wpn_betty_alert";
+  watcher.hackable = 1;
+  watcher.hackertoolradius = level.equipmenthackertoolradius;
+  watcher.hackertooltimems = level.equipmenthackertooltimems;
+  watcher.ownergetsassist = 1;
+  watcher.ignoredirection = 1;
+  watcher.immediatedetonation = 1;
+  watcher.immunespecialty = "specialty_immunetriggerbetty";
+  watcher.detectionmindist = level.bettymindist;
+  watcher.detectiongraceperiod = level.bettygraceperiod;
+  watcher.detonateradius = level.bettyradius;
+  watcher.onfizzleout = &onbouncingbettyfizzleout;
+  watcher.stun = &weaponobjects::weaponstun;
+  watcher.stuntime = level.bettystuntime;
+  watcher.activationdelay = level.bettyactivationdelay;
+}
 
 onbouncingbettyfizzleout() {
   if(isDefined(self.minemover)) {
@@ -131,7 +130,7 @@ trackusedonhack() {
 
 trackbouncingbettyasused() {
   if(isplayer(self)) {
-    self stats::function_e24eec31(getweapon(#"bouncingbetty"), #"used", 1);
+    self stats::function_e24eec31(getweapon(#"bouncingbetty"), # "used", 1);
   }
 }
 
@@ -179,7 +178,7 @@ spawnminemover() {
 
 killminemoveronpickup() {
   self.minemover endon(#"death");
-  self waittill(#"picked_up", #"hacked");
+  self waittill(#"picked_up", # "hacked");
   self killminemover();
 }
 

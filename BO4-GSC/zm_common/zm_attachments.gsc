@@ -9,7 +9,6 @@
 #include scripts\core_common\math_shared;
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_attachments;
 
 autoexec __init__system__() {
@@ -27,19 +26,19 @@ actor_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon, 
   if(isplayer(attacker) && isDefined(weapon) && meansofdeath !== "MOD_UNKNOWN") {
     if(weaponhasattachment(weapon, "uber")) {
       switch (weapon.rootweapon.name) {
-        case #"lmg_standard_t8_upgraded":
-        case #"lmg_standard_t8":
+        case # "lmg_standard_t8_upgraded":
+        case # "lmg_standard_t8":
           self function_9f8d8c38();
           break;
-        case #"shotgun_pump_t8_upgraded":
-        case #"shotgun_pump_t8":
+        case # "shotgun_pump_t8_upgraded":
+        case # "shotgun_pump_t8":
           if(meansofdeath !== "MOD_BURNED") {
             damage = self dragons_breath(attacker, damage, weapon);
           }
 
           break;
-        case #"shotgun_semiauto_t8":
-        case #"shotgun_semiauto_t8_upgraded":
+        case # "shotgun_semiauto_t8":
+        case # "shotgun_semiauto_t8_upgraded":
           self function_82bca1c7(attacker);
           break;
       }
@@ -52,16 +51,16 @@ actor_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon, 
 function_9f8d8c38() {
   if(isDefined(self.zm_ai_category)) {
     switch (self.zm_ai_category) {
-      case #"popcorn":
-      case #"basic":
-      case #"enhanced":
-        var_3e5502b5 = #"hash_1c9af7bb427952d";
+      case # "popcorn":
+      case # "basic":
+      case # "enhanced":
+        var_3e5502b5 = # "hash_1c9af7bb427952d";
         break;
-      case #"heavy":
-        var_3e5502b5 = #"hash_1d07249a2211a81d";
+      case # "heavy":
+        var_3e5502b5 = # "hash_1d07249a2211a81d";
         break;
-      case #"miniboss":
-        var_3e5502b5 = #"hash_721bfbe781c0d680";
+      case # "miniboss":
+        var_3e5502b5 = # "hash_721bfbe781c0d680";
         break;
     }
 
@@ -79,7 +78,7 @@ dragons_breath(e_attacker, n_damage, weapon) {
   }
 
   if(isinarray(self.var_f6291271, e_attacker)) {
-    if(self.archetype === #"zombie" && n_damage > self.health) {
+    if(self.archetype === # "zombie" && n_damage > self.health) {
       self.var_b364c165 = 1;
     }
 
@@ -95,7 +94,7 @@ dragons_breath(e_attacker, n_damage, weapon) {
   self.var_f6291271[self.var_f6291271.size] = e_attacker;
   self thread function_ddda26e(e_attacker);
 
-  if(self.archetype === #"zombie") {
+  if(self.archetype === # "zombie") {
     n_damage += 100;
 
     if(n_damage < self.health) {
@@ -110,7 +109,7 @@ dragons_breath(e_attacker, n_damage, weapon) {
   return n_damage;
 }
 
-private function_ddda26e(e_attacker) {
+function_ddda26e(e_attacker) {
   self endon(#"death");
   waitframe(5);
   arrayremovevalue(self.var_f6291271, e_attacker);
@@ -118,7 +117,7 @@ private function_ddda26e(e_attacker) {
 
 function_82bca1c7(e_attacker) {
   if(e_attacker playerads() == 1) {
-    if((self.zm_ai_category === #"basic" || self.zm_ai_category === #"enhanced") && math::cointoss(10) && distancesquared(self.origin, e_attacker.origin) < 40000) {
+    if((self.zm_ai_category === # "basic" || self.zm_ai_category === # "enhanced") && math::cointoss(10) && distancesquared(self.origin, e_attacker.origin) < 40000) {
       self ai::stun(2);
     }
   }

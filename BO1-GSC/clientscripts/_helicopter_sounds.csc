@@ -525,7 +525,7 @@ update_helicopter_sounds() {
           self thread heli_idle_run_transition("hind", "eng_dmg");
         }
         self.low_dmg = true;
-        playsound(0, "veh_hind_alarm_damage_high", (0, 0, 0));
+        playSound(0, "veh_hind_alarm_damage_high", (0, 0, 0));
         level.heliSoundValues["hind"]["cockpit"].volumeMax = 1;
         level.heliSoundValues["hind"]["ext_rotor"].pitchMax = 1.3;
         printLn("^5a activating heli sound damage stage 1");
@@ -552,7 +552,7 @@ update_helicopter_sounds() {
   if(isDefined(self.engine_damage_high) && self.engine_damage_high && isDefined(self.engine_damage_low) && self.engine_damage_low) {
     switch (self.vehicletype) {
       case "heli_hind_player":
-        playsound(0, "veh_hind_alarm_damage_high", (0, 0, 0));
+        playSound(0, "veh_hind_alarm_damage_high", (0, 0, 0));
         level.heliSoundValues["hind"]["eng_dmg"].volumeMax = 1;
         level.heliSoundValues["hind"]["ext_rotor"].pitchMax = 1.5;
         wait(0.1);

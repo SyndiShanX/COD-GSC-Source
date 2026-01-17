@@ -211,8 +211,6 @@ sonar_fade(localclientnum, sonar_turning_on) {
     disable_filter_sonar_glass(level.localplayers[0], 0, 0);
 }
 
-init_sam_hud_damage() {
-}
+init_sam_hud_damage() {}
 
-sam_damage() {
-}
+sam_damage() {}

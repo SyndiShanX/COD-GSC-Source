@@ -9,7 +9,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\weapons\proximity_grenade;
-
 #namespace proximity_grenade;
 
 autoexec __init__system__() {

@@ -17,7 +17,7 @@ main() {
     println("File: _animatedmodels.gsc. Function: main() - STOP WAIT waittillframeend\n");
   if(getdvar("animated_trees_enabled") == "")
     setdvar("animated_trees_enabled", "1");
-  level.wind = spawnstruct();
+  level.wind = spawnStruct();
   level.wind.rate = 0.4;
   level.wind.weight = 1;
   level.wind.variance = 0.2;
@@ -27,7 +27,7 @@ main() {
     level.anim_prop_models = [];
   }
   level.init_animatedmodels = [];
-  animated_models = getentarray("animated_model", "targetname");
+  animated_models = getEntArray("animated_model", "targetname");
   if(getdvar("animated_trees_enabled") == "1") {
     array_thread(animated_models, ::model_init);
   } else {
@@ -49,14 +49,14 @@ main() {
 
     println("animated_model_setup()");
     println("{");
-    for (i = 0; i < keys.size; i++) {
+    for(i = 0; i < keys.size; i++) {
       print_modellist_bykey(keys[i]);
     }
     println("}");
     println("");
     println("make sure these are in your <level>.csv");
     println("");
-    for (i = 0; i < keys.size; i++) {
+    for(i = 0; i < keys.size; i++) {
       print_modelcsv_bykey(keys[i]);
     }
     println("");
@@ -194,7 +194,7 @@ model_disable() {
 animated_model() {
   self UseAnimTree(#animtree);
   wind = "strong";
-  while (1) {
+  while(1) {
     thread tree_animates(wind);
     level waittill("windchange", wind);
   }

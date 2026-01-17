@@ -37,7 +37,7 @@ LastStandTime() {
   return level.howLongToDoLastStandForWithoutRevive;
 }
 PlayerLastStand(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime, deathAnimDuration) {
-  self.lastStandParams = spawnstruct();
+  self.lastStandParams = spawnStruct();
   self.lastStandParams.eInflictor = eInflictor;
   self.lastStandParams.attacker = attacker;
   if(isPlayer(attacker)) {
@@ -77,7 +77,7 @@ PlayerLastStand(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHi
   self.laststandpistol = level.laststandpistol;
   self.previousPrimary = self GetCurrentWeapon();
   self.hadPistol = false;
-  for (i = 0; i < self.previousweaponslist.size; i++) {
+  for(i = 0; i < self.previousweaponslist.size; i++) {
     if(WeaponClass(self.previousweaponslist[i]) == "pistol" &&
       self.previousweaponslist[i] != "knife_ballistic_mp" &&
       !IsSubStr(self.previousweaponslist[i], "_auto_") &&
@@ -97,7 +97,7 @@ PlayerLastStand(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHi
   self DisableOffhandWeapons();
   self DisableWeaponCycling();
   self.previousweaponslist = self getweaponslist();
-  for (i = 0; i < self.previousweaponslist.size; i++) {
+  for(i = 0; i < self.previousweaponslist.size; i++) {
     weapon = self.previousweaponslist[i];
     self.previousAmmoClip[i] = self GetWeaponAmmoClip(weapon);
     self.previousAmmoStock[i] = self GetWeaponAmmoStock(weapon);
@@ -127,7 +127,7 @@ waittillGrenadeThrown() {
   self endon("death");
   self endon("player revived");
   self waittill("grenade_fire", grenade, weapname);
-  for (i = self.previousweaponslist.size - 1; i >= 0; i--) {
+  for(i = self.previousweaponslist.size - 1; i >= 0; i--) {
     weapon = self.previousweaponslist[i];
     if(weapon == weapname) {
       self.previousAmmoClip[i] -= 1;
@@ -210,14 +210,14 @@ lastStandWaittillDeath() {
   if(isDefined(self.revivetrigger)) {
     self.revivetrigger delete();
   }
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(self.team == players[i].team) {
       if(isDefined(players[i].revivetrigger)) {
         teammateNeedsRevive = true;
       }
     }
   }
-  for (index = 0; index < 4; index++) {
+  for(index = 0; index < 4; index++) {
     self.reviveIcons[index].alpha = 0;
     self.reviveIcons[index] setWaypoint(false);
   }
@@ -228,7 +228,7 @@ cleanupTeammateNeedsReviveList() {
     return;
   players = get_players();
   teamMateNeedsRevive = false;
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if("allies" == players[i].team) {
       if(isDefined(players[i].revivetrigger)) {
         teammateNeedsRevive = true;
@@ -237,7 +237,7 @@ cleanupTeammateNeedsReviveList() {
   }
   level.allies_needs_revive = teammateNeedsRevive;
   teamMateNeedsRevive = false;
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if("axis" == players[i].team) {
       if(isDefined(players[i].revivetrigger)) {
         teammateNeedsRevive = true;
@@ -290,7 +290,7 @@ revive_trigger_think() {
   self.currentlyBeingRevived = false;
   self.thisPlayerIsInLastStand = true;
   self detectReviveIconWaiter();
-  while (isDefined(self) && IsAlive(self) && isDefined(self.thisPlayerIsInLastStand) && self.thisPlayerIsInLastStand == true) {
+  while(isDefined(self) && IsAlive(self) && isDefined(self.thisPlayerIsInLastStand) && self.thisPlayerIsInLastStand == true) {
     players = level.aliveplayers[detectTeam];
     if(DistanceSquared(self.revivetrigger.origin, self.origin) > 1) {
       self.revivetrigger delete();
@@ -299,7 +299,7 @@ revive_trigger_think() {
       self.revivetrigger setCursorHint("HINT_NOICON");
       self thread clearUpOnDisconnect(self);
     }
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       if(can_revive(players[i])) {
         if(players[i] != self && !isDefined(players[i].revivetrigger)) {
           if((!isDefined(self.currentlyBeingRevived) || !self.currentlyBeingRevived) && !players[i].revivingTeammate) {
@@ -370,7 +370,7 @@ player_being_revived(playerBeingRevived) {
   if(reviveTime > 0) {
     timer = 0;
     revivetrigger = playerBeingRevived.revivetrigger;
-    while (self.health > 0 && isDefined(revivetrigger) && self istouching(revivetrigger) && self useButtonPressed() && isDefined(playerBeingRevived)) {
+    while(self.health > 0 && isDefined(revivetrigger) && self istouching(revivetrigger) && self useButtonPressed() && isDefined(playerBeingRevived)) {
       playerBeingRevived.currentlyBeingRevived = true;
       wait(0.05);
       timer += 0.05;
@@ -399,7 +399,7 @@ takePlayerOutOfLastStand() {
     if(self.hadPistol == false) {
       self TakeWeapon(self.laststandpistol);
     }
-    for (i = self.previousweaponslist.size - 1; i >= 0; i--) {
+    for(i = self.previousweaponslist.size - 1; i >= 0; i--) {
       weapon = self.previousweaponslist[i];
       self GiveWeapon(weapon);
       self SetWeaponAmmoClip(weapon, self.previousAmmoClip[i]);
@@ -409,7 +409,7 @@ takePlayerOutOfLastStand() {
       if(!IsWeaponEquipment(self.previousPrimary) && !IsWeaponSpecificUse(self.previousPrimary) && !isDefined(level.grenade_array[self.previousPrimary])) {
         self SwitchToWeapon(self.previousPrimary);
       } else {
-        for (i = self.previousweaponslist.size - 1; i >= 0; i--) {
+        for(i = self.previousweaponslist.size - 1; i >= 0; i--) {
           if(!IsWeaponEquipment(self.previousweaponslist[i]) && !IsWeaponSpecificUse(self.previousweaponslist[i]) && IsWeaponPrimary(self.previousweaponslist[i])) {
             self SwitchToWeapon(self.previousweaponslist[i]);
             break;
@@ -417,7 +417,7 @@ takePlayerOutOfLastStand() {
         }
       }
     } else {
-      for (i = self.previousweaponslist.size - 1; i >= 0; i--) {
+      for(i = self.previousweaponslist.size - 1; i >= 0; i--) {
         if(!IsWeaponEquipment(self.previousweaponslist[i]) && !IsWeaponSpecificUse(self.previousweaponslist[i]) && IsWeaponPrimary(self.previousweaponslist[i])) {
           self SwitchToWeapon(self.previousweaponslist[i]);
           break;
@@ -441,7 +441,7 @@ takePlayerOutOfLastStand() {
   self.lastStandParams = undefined;
   players = get_players();
   anyPlayerLeftInLastStand = false;
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(isDefined(players[i].revivetrigger) && players[i].team == self.team) {
       anyPlayerLeftInLastStand = true;
     }
@@ -452,7 +452,7 @@ takePlayerOutOfLastStand() {
 }
 reviveFromConsole() {
   self endon("player revived");
-  for (;;) {
+  for(;;) {
     if(GetDvar(#"scr_reviveme") != "") {
       self.thisPlayerIsInLastStand = false;
       setdvar("scr_reviveme", "");
@@ -473,7 +473,7 @@ lastStandBleedout(delay) {
   wait(level.aboutToBleedOutTime);
   self notify("end coward");
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i] notify("stop revive pulse");
   }
   self needsRevive(false);
@@ -495,10 +495,10 @@ cowardsWayOut() {
   self endon("disconnect");
   self endon("death");
   self endon("end coward");
-  while (1) {
+  while(1) {
     if(self useButtonPressed()) {
       pressStartTime = gettime();
-      while (self useButtonPressed()) {
+      while(self useButtonPressed()) {
         wait .05;
         if(gettime() - pressStartTime > 700) {
           break;
@@ -530,7 +530,7 @@ clearUpOnDisconnect(player) {
   }
   teamMateNeedsRevive = false;
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(self.team == players[i].team) {
       if(isDefined(players[i].revivetrigger)) {
         teammateNeedsRevive = true;
@@ -550,7 +550,7 @@ setupRevive() {
   if(!allowRevive())
     return;
   self.aboutToBleedOut = undefined;
-  for (index = 0; index < 4; index++) {
+  for(index = 0; index < 4; index++) {
     if(!isDefined(self.reviveIcons[index]))
       self.reviveIcons[index] = newClientHudElem(self);
     self.reviveIcons[index].x = 0;
@@ -565,7 +565,7 @@ setupRevive() {
   }
   players = get_players();
   iconCount = 4;
-  for (i = 0; i < players.size && iconCount > 0; i++) {
+  for(i = 0; i < players.size && iconCount > 0; i++) {
     if(!isDefined(players[i].team))
       continue;
     if(self.team != players[i].team)
@@ -581,7 +581,7 @@ lastStandHealthOverlay() {
   self endon("death");
   self endon("disconnect");
   self endon("game_ended");
-  while (1) {
+  while(1) {
     self.health = 2;
     wait .05;
     self.health = 1;
@@ -597,7 +597,7 @@ detectReviveIconWaiter() {
   if(!allowRevive())
     return;
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     player = players[i];
     if(player.team != self.team)
       continue;
@@ -616,7 +616,7 @@ showReviveIcon(lastStandPlayer) {
     return;
   triggerreviveId = lastStandPlayer getentitynumber();
   useId = -1;
-  for (index = 0;
+  for(index = 0;
     (index < 4) && (useId == -1); index++) {
     if(!isDefined(self.reviveIcons) || !isDefined(self.reviveIcons[index]) || !isDefined(self.reviveIcons[index].reviveId))
       continue;
@@ -635,11 +635,11 @@ showReviveIcon(lastStandPlayer) {
   self.reviveIcons[useId].alpha = reviveIconAlpha;
   self.reviveIcons[useId].reviveId = triggerreviveId;
   self.reviveIcons[useId] SetTargetEnt(lastStandPlayer);
-  while (isDefined(laststandplayer.revivetrigger)) {
+  while(isDefined(laststandplayer.revivetrigger)) {
     if(isDefined(laststandplayer.aboutToBleedOut)) {
       self.reviveIcons[useId] fadeOverTime(level.aboutToBleedOutTime);
       self.reviveIcons[useId].alpha = 0;
-      while (isDefined(laststandplayer.revivetrigger)) {
+      while(isDefined(laststandplayer.revivetrigger)) {
         wait(0.1);
       }
       wait(level.aboutToBleedOutTime);

@@ -58,8 +58,7 @@ initreacttimers() {
 playreactanim(reactanim) {
   self.nextallowedreacttime = gettime() + randomintrange(anim.nextreactiontimeforaimin, anim.nextreactiontimeforaimax);
 
-  if(isplayer(self.attacker) && self.team == "allies") {
-  } else
+  if(isplayer(self.attacker) && self.team == "allies") {} else
     anim.lastreactiontime = gettime();
 
   self.a.pose = "stand";
@@ -135,11 +134,11 @@ shouldreact() {
 
     if(dist < anim.reactiondistancesquaredmax && dist > anim.reactiondistancesquaredmin) {
       if(distancesquared(self.reactorigin, self.origin) < 16384) {
-        forwardvec = anglestoforward(self.angles);
+        forwardvec = anglesToForward(self.angles);
         dirtoreactorigin = vectornormalize(self.reactorigin - self.origin);
         isreactoriginfront = vectordot(dirtoreactorigin, forwardvec) >= 0;
 
-        if(isreactoriginfront && sighttracepassed(self geteye(), self.reactorigin, 0, undefined))
+        if(isreactoriginfront && sighttracepassed(self getEye(), self.reactorigin, 0, undefined))
           return true;
       }
     }
@@ -149,7 +148,7 @@ shouldreact() {
     dist = distancesquared(self.attacker.origin, self.origin);
 
     if(dist < anim.reactiondistancesquaredmax && dist > anim.reactiondistancesquaredmin) {
-      if(sighttracepassed(self geteye(), self.reactorigin, 0, undefined))
+      if(sighttracepassed(self getEye(), self.reactorigin, 0, undefined))
         return true;
     }
   }
@@ -300,7 +299,7 @@ getnewenemyreactionanim() {
     if(!animarrayanyexist(self.a.prevscript + "_ne"))
       return reactanim;
 
-    nodeforward = anglestoforward(self.node.angles);
+    nodeforward = anglesToForward(self.node.angles);
     dirtoreactiontarget = vectornormalize(self.newenemyreactionpos - self.origin);
 
     if(vectordot(nodeforward, dirtoreactiontarget) < -0.5) {
@@ -319,7 +318,7 @@ getnewenemyreactionanim() {
 
     if(self.a.pose == "crouch") {
       dirtoreactiontarget = vectornormalize(self.newenemyreactionpos - self.origin);
-      forward = anglestoforward(self.angles);
+      forward = anglesToForward(self.angles);
 
       if(vectordot(forward, dirtoreactiontarget) < -0.5) {
         self orientmode("face current");

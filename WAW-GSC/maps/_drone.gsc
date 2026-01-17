@@ -78,7 +78,7 @@ drone_init() {
   if(self.team == "allies") {
     self.voice = "american";
     self maps\_names::get_name();
-    self setlookattext(self.name, & "");
+    self setlookattext(self.name, &"");
   }
   if(isDefined(level.droneCallbackThread))
     self thread[[level.droneCallbackThread]]();
@@ -93,7 +93,7 @@ drone_init() {
 }
 
 drone_death_thread(drone) {
-  while (isDefined(drone)) {
+  while(isDefined(drone)) {
     drone waittill("damage");
     if(drone.health <= 0) {
       break;
@@ -124,7 +124,7 @@ drone_play_anim(droneAnim) {
 
 drone_notetrack(msg) {
   self endon("stop_droneNoteTrack");
-  while (1) {
+  while(1) {
     self waittill(msg, notetrack);
     if(notetrack == "start_ragdoll") {
       self StartRagdoll();
@@ -145,7 +145,7 @@ drone_idle_row_boat(drones, boat) {
   anims[1] = level.drone_anim["paddle_boat"]["guy2"];
   anims[2] = level.drone_anim["paddle_boat"]["guy3"];
   anims[3] = level.drone_anim["paddle_boat"]["guy4"];
-  for (i = 0; i < drones.size; i++) {
+  for(i = 0; i < drones.size; i++) {
     drones[i] LinkTo(boat);
     drones[i] thread drone_play_paddle_anim(anims[i], boat);
   }
@@ -155,7 +155,7 @@ drone_play_paddle_anim(_anim, boat) {
   self endon("death");
   boat endon("death");
   self endon("stop paddling");
-  while (1) {
+  while(1) {
     startorg = getstartOrigin(boat GetTagOrigin("origin_animate_jnt"), boat GetTagAngles("origin_animate_jnt"), _anim);
     startang = getstartAngles(boat GetTagOrigin("origin_animate_jnt"), boat GetTagAngles("origin_animate_jnt"), _anim);
     self animscripted("drone_anim", startorg, startang, _anim);
@@ -212,7 +212,7 @@ drone_move() {
   prof_begin("drone_math");
   currentNode_LookAhead = 0;
   loopTime = 0.5;
-  for (;;) {
+  for(;;) {
     if(!isDefined(nodes[currentNode_LookAhead])) {
       break;
     }
@@ -227,7 +227,7 @@ drone_move() {
     assert(isDefined(currentNode_LookAhead));
     assert(isDefined(nodes[currentNode_LookAhead]));
     assert(isDefined(nodes[currentNode_LookAhead]["dist"]));
-    while (lookaheadDistanceFromNode > nodes[currentNode_LookAhead]["dist"]) {
+    while(lookaheadDistanceFromNode > nodes[currentNode_LookAhead]["dist"]) {
       lookaheadDistanceFromNode = lookaheadDistanceFromNode - nodes[currentNode_LookAhead]["dist"];
       currentNode_LookAhead++;
       if(!isDefined(nodes[currentNode_LookAhead]["dist"])) {
@@ -290,7 +290,7 @@ getPathArray(firstTargetName, initialPoint) {
   nodes[0]["dist"] = 0;
   nextNodeName = undefined;
   nextNodeName = firstTargetName;
-  for (;;) {
+  for(;;) {
     index = nodes.size;
     node = getstruct(nextNodeName, "targetname");
     if(!isDefined(node)) {
@@ -306,7 +306,7 @@ getPathArray(firstTargetName, initialPoint) {
       if(!isDefined(node.angles))
         node.angles = (0, 0, 0);
       prof_begin("drone_math");
-      forwardVec = anglestoforward(node.angles);
+      forwardVec = anglesToForward(node.angles);
       rightVec = anglestoright(node.angles);
       upVec = anglestoup(node.angles);
       relativeOffset = (0, (self.droneRunOffset * node.radius), 0);
@@ -334,12 +334,12 @@ drone_scripted_spawn(classname, spawn_script_origin) {
   struct = level.dronestruct[classname];
   drone = spawn("script_model", spawn_script_origin.origin);
   drone.angles = spawn_script_origin.angles;
-  drone setmodel(struct.model);
+  drone setModel(struct.model);
   drone UseAnimTree(#animtree);
   drone makefakeai();
   attachedmodels = struct.attachedmodels;
   attachedtags = struct.attachedtags;
-  for (i = 0; i < attachedmodels.size; i++)
+  for(i = 0; i < attachedmodels.size; i++)
     drone attach(attachedmodels[i], attachedtags[i]);
   if(isDefined(spawn_script_origin.script_startingposition))
     drone.script_startingposition = spawn_script_origin.script_startingposition;
@@ -377,7 +377,7 @@ drone_scripted_spawn(classname, spawn_script_origin) {
 drone_hide_weapon() {
   tagname = "j_helmet";
   size = self getattachsize();
-  for (i = 0; i < size; i++) {
+  for(i = 0; i < size; i++) {
     model = self getattachmodelname(i);
     if(issubstr(model, "weapon")) {
       self.hidden_weapon = model;
@@ -405,9 +405,9 @@ drone_fire_at_target(target, was_moving) {
   target endon("death");
   fire_count = RandomIntRange(6, 24);
   temp_count = 0;
-  while (true) {
+  while(true) {
     if(Distance2d(drone.origin, target.origin) < 5000) {
-      playfxontag(level.drone_muzzleflash, self, "tag_flash");
+      playFXOnTag(level.drone_muzzleflash, self, "tag_flash");
       MagicBullet("type99_rifle", drone GetTagOrigin("tag_flash"), target.origin);
       wait(RandomFloatRange(1.0, 2.0));
       temp_count++;
@@ -432,9 +432,9 @@ drone_fire_at_vehicle_type(_vehicletype, _range) {
     _range = 5000;
   }
   my_target = -1;
-  while (1) {
-    target_list = GetEntArray("script_vehicle", "classname");
-    for (i = 0; i < target_list.size; i++) {
+  while(1) {
+    target_list = getEntArray("script_vehicle", "classname");
+    for(i = 0; i < target_list.size; i++) {
       if(target_list[i].vehicletype == _vehicletype) {
         if(distance(self.origin, target_list[i].origin) < _range) {
           my_target = i;
@@ -463,7 +463,7 @@ drone_track_ent(target) {
   drone stopAnimScripted();
   drone drone_play_anim(level.drone_anims["stand"]["aim_straight"]);
   drone.current_aim = "straight";
-  while (1) {
+  while(1) {
     target_org = (target.origin[0], target.origin[1], 0);
     drone_org = (drone.origin[0], drone.origin[1], 0);
     drone.angles = VectorToAngles(target_org - drone_org);
@@ -480,7 +480,7 @@ drone_track_ent_height(target) {
   drone stopAnimScripted();
   drone drone_play_anim(level.drone_anims["stand"]["aim_straight"]);
   drone.current_aim = "straight";
-  while (1) {
+  while(1) {
     if(target.origin[2] - drone.origin[2] > 500) {
       if(drone.current_aim != "up") {
         drone stopAnimScripted();
@@ -539,7 +539,7 @@ trackLoop(aim2, aim4, aim6, aim8) {
   yawDelta = 0;
   pitchDelta = 0;
   firstFrame = true;
-  for (;;) {
+  for(;;) {
     animscripts\shared::incrAnimAimWeight();
     selfShootAtPos = (self.origin[0], self.origin[1], self.origin[2] + 60);
     shootPos = self.shootPos;

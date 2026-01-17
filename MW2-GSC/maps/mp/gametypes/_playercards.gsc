@@ -11,7 +11,7 @@ init() {
 }
 
 onPlayerConnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connected", player);
 
     //@NOTE: Should we make sure they're really unlocked before setting them? Catch cheaters...

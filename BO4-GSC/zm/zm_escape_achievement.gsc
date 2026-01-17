@@ -8,7 +8,6 @@
 #include scripts\zm_common\zm_customgame;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_zonemgr;
-
 #namespace zm_escape_achievement;
 
 init() {
@@ -27,25 +26,25 @@ function_17b76033() {
   self thread function_73fdd23e();
 }
 
-private function_73fdd23e() {
+function_73fdd23e() {
   self endon(#"disconnect");
   self waittill(#"hash_108cb6aa18caf726");
   self zm_utility::giveachievement_wrapper("zm_escape_most_escape");
 }
 
-private function_f47a878a() {
+function_f47a878a() {
   self endon(#"disconnect");
   self waittill(#"hash_6db9af45fe6345fc");
   self zm_utility::giveachievement_wrapper("zm_escape_patch_up");
 }
 
-private function_70003bac() {
+function_70003bac() {
   self endon(#"disconnect");
   self waittill(#"hash_6e0a27b37f225a25");
   self zm_utility::giveachievement_wrapper("zm_escape_hot_stuff");
 }
 
-private function_4f363fd4() {
+function_4f363fd4() {
   self endon(#"disconnect");
   w_blundergat = getweapon(#"ww_blundergat_t8");
   w_blundergat_upgraded = getweapon(#"ww_blundergat_t8_upgraded");
@@ -70,15 +69,15 @@ private function_4f363fd4() {
   self zm_utility::giveachievement_wrapper("zm_escape_hist_reenact");
 }
 
-private function_cf262a06() {
+function_cf262a06() {
   self endon(#"disconnect");
   self waittill(#"hash_7af72088379d7ac6");
   self zm_utility::giveachievement_wrapper("zm_escape_match_made");
 }
 
-private function_e5df009() {
-  self endon(#"disconnect", #"hash_b5d3534da3f4508");
-  level endon(#"end_game", #"activate_catwalk");
+function_e5df009() {
+  self endon(#"disconnect", # "hash_b5d3534da3f4508");
+  level endon(#"end_game", # "activate_catwalk");
 
   if(level flag::get("activate_catwalk")) {
     return;
@@ -109,8 +108,8 @@ private function_e5df009() {
   self zm_utility::giveachievement_wrapper("zm_escape_west_side");
 }
 
-private function_4c6d1750() {
-  self endon(#"disconnect", #"hash_1410cda9f15ef1c3");
+function_4c6d1750() {
+  self endon(#"disconnect", # "hash_1410cda9f15ef1c3");
 
   while(true) {
     s_result = self waittill(#"hash_3669499a148a6d6e");
@@ -122,7 +121,7 @@ private function_4c6d1750() {
   }
 }
 
-private function_8b752e69() {
+function_8b752e69() {
   self endon(#"disconnect");
   self.var_cd7cfb60 = 0;
   self.var_8179ae74 = 0;
@@ -147,7 +146,7 @@ private function_8b752e69() {
   self zm_utility::giveachievement_wrapper("zm_escape_gat");
 }
 
-private function_ce31237b() {
+function_ce31237b() {
   level endon(#"soul_catchers_charged");
   self endon(#"disconnect");
 
@@ -168,15 +167,15 @@ private function_ce31237b() {
     }
 
     switch (str_zone) {
-      case #"zone_model_industries_upper":
+      case # "zone_model_industries_upper":
         self.var_5b73502a = 1;
         break;
-      case #"zone_gondola_ride":
+      case # "zone_gondola_ride":
         self.var_23d1ca17 = 1;
         break;
-      case #"zone_citadel":
-      case #"zone_citadel_shower":
-      case #"zone_citadel_warden":
+      case # "zone_citadel":
+      case # "zone_citadel_shower":
+      case # "zone_citadel_warden":
         self.var_ba2bd447 = 1;
         break;
     }

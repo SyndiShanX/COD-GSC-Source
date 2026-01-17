@@ -22,7 +22,7 @@ skipto_jungle_stealth() {
   level.ai_woods = init_hero("woods");
   level.ai_hudson = init_hero("hudson");
   level.ai_hudson.non_wet_model = level.ai_hudson.model;
-  level.ai_hudson setmodel("c_usa_angola_hudson_wet_fb");
+  level.ai_hudson setModel("c_usa_angola_hudson_wet_fb");
   level.ai_hudson detach("c_usa_angola_hudson_glasses");
   level.ai_hudson detach("c_usa_angola_hudson_hat");
   level notify("fxanim_hind_crash_start");
@@ -42,7 +42,7 @@ skipto_jungle_stealth_log() {
   level.ai_woods = init_hero("woods");
   level.ai_hudson = init_hero("hudson");
   level.ai_hudson.non_wet_model = level.ai_hudson.model;
-  level.ai_hudson setmodel("c_usa_angola_hudson_wet_fb");
+  level.ai_hudson setModel("c_usa_angola_hudson_wet_fb");
   level.ai_hudson detach("c_usa_angola_hudson_glasses");
   level.ai_hudson detach("c_usa_angola_hudson_hat");
   level.ai_hudson unlink();
@@ -164,11 +164,11 @@ jungle_stealth_log_main() {
 }
 
 jungle_stealth_spawn_funcs() {
-  a_fail_beach_enemies = getentarray("enemy_fail_beach", "targetname");
+  a_fail_beach_enemies = getEntArray("enemy_fail_beach", "targetname");
   array_thread(a_fail_beach_enemies, ::add_spawn_function, ::fail_beach_enemy_logic);
-  a_fail_valley_enemies = getentarray("enemy_fail_valley", "targetname");
+  a_fail_valley_enemies = getEntArray("enemy_fail_valley", "targetname");
   array_thread(a_fail_valley_enemies, ::add_spawn_function, ::chase_after_target, level.player);
-  a_fail_before_log_enemies = getentarray("enemy_fail_before_log", "targetname");
+  a_fail_before_log_enemies = getEntArray("enemy_fail_before_log", "targetname");
   array_thread(a_fail_before_log_enemies, ::add_spawn_function, ::chase_after_target, level.player);
   add_spawn_function_veh("radio_tower_heli", ::set_force_no_cull);
 }
@@ -597,7 +597,7 @@ hudson_waiting_for_stealth_move_to_house() {
   level thread run_scene("hudson_church_loop");
   flag_set("js_hudson_in_position_in_building");
   wait 4;
-  level.ai_hudson setmodel(level.ai_hudson.non_wet_model);
+  level.ai_hudson setModel(level.ai_hudson.non_wet_model);
 }
 
 fail_player_if_not_in_house(delay) {
@@ -608,7 +608,7 @@ fail_player_if_not_in_house(delay) {
     wait(delay);
 
   if(!flag("js_player_enters_stealth_house")) {
-    spawners = getentarray("fail_player_outside_house_spawners", "targetname");
+    spawners = getEntArray("fail_player_outside_house_spawners", "targetname");
     array_thread(spawners, ::add_spawn_function, ::chase_after_target, level.player);
     trigger = getent("sm_fail_not_in_house", "targetname");
     trigger activate_trigger();
@@ -682,7 +682,7 @@ begin_monitoring_stealth_house_failure(str_area_safe) {
   level.player endon("death");
   level endon("mason_failed_to_find_cover_in_house");
   level waittill("begin_monitoring_stealth_house_failure");
-  a_triggers = getentarray("trig_fail_stealth_in_house_if_running_around", "targetname");
+  a_triggers = getEntArray("trig_fail_stealth_in_house_if_running_around", "targetname");
   array_thread(a_triggers, ::house_fail_stealth_if_running_around, str_area_safe);
   child_spawner = getent("spawner_child_house_fail", "script_noteworthy");
   child_spawner add_spawn_function(::house_fail_retreat_after_reveal);
@@ -845,7 +845,7 @@ lock_breaker_perk() {
 }
 
 play_sound_on_trap_pickup(guy) {
-  level.player playsound("evt_beartrap_pickup");
+  level.player playSound("evt_beartrap_pickup");
 }
 
 give_beartraps_to_player_wrapper() {
@@ -897,7 +897,7 @@ fail_beach_action() {
   level.ai_hudson say_dialog("huds_shit_they_ve_spott_0");
   end_scene("hudson_mantle_climb_loop");
   flag_set("fail_beach");
-  a_ledge_clips = getentarray("ledge_clip", "targetname");
+  a_ledge_clips = getEntArray("ledge_clip", "targetname");
 
   foreach(m_ledge_clip in a_ledge_clips)
   m_ledge_clip delete();
@@ -1001,7 +1001,7 @@ fail_player_for_moving_to_escape_early() {
 clean_up_fail_valley() {
   t_fail_valley = getent("sm_fail_valley", "targetname");
   t_fail_valley delete();
-  a_spawners = getentarray("enemy_fail_valley", "targetname");
+  a_spawners = getEntArray("enemy_fail_valley", "targetname");
 
   foreach(sp_enemy in a_spawners)
   sp_enemy delete();
@@ -1026,7 +1026,7 @@ clean_up_in_house() {
   e_to_be_deleted delete();
   t_fail_before_log = getent("trig_fail_before_log", "targetname");
   t_fail_before_log delete();
-  a_spawners = getentarray("enemy_fail_before_log", "targetname");
+  a_spawners = getEntArray("enemy_fail_before_log", "targetname");
 
   foreach(sp_enemy in a_spawners)
   sp_enemy delete();

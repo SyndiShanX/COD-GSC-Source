@@ -12,7 +12,7 @@ init() {
 }
 
 onPlayerConnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connected", player);
     player setClientDvar("ui_xpText", "1");
     player.enableText = true;

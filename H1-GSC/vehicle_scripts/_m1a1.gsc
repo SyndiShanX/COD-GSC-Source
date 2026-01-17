@@ -26,7 +26,7 @@ main(var_0, var_1, var_2) {
 }
 
 init_local() {
-  if(!isdefined(level.aud.disable_m1a1_audio))
+  if(!isDefined(level.aud.disable_m1a1_audio))
     handle_audio();
 }
 
@@ -39,8 +39,8 @@ handle_audio() {
   thread monitor_death_stop_sounds();
   self.snd_disable_vehicle_system = self.script_disablevehicleaudio;
 
-  for (;;) {
-    if(!isdefined(self.script_disablevehicleaudio) || !self.script_disablevehicleaudio) {
+  for(;;) {
+    if(!isDefined(self.script_disablevehicleaudio) || !self.script_disablevehicleaudio) {
       var_3 = distance(self.origin, level.player.origin);
 
       if(var_0 && var_3 > var_1) {
@@ -73,8 +73,8 @@ set_vehicle_anims(var_0) {
 setanims() {
   var_0 = [];
 
-  for (var_1 = 0; var_1 < 11; var_1++)
-    var_0[var_1] = spawnstruct();
+  for(var_1 = 0; var_1 < 11; var_1++)
+    var_0[var_1] = spawnStruct();
 
   var_0[0].getout_delete = 1;
   return var_0;

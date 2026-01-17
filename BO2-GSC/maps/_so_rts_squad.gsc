@@ -74,9 +74,9 @@ rts_is_pointok(point) {
 rts_move_squadstocursor(squadid, tracepoint) {
   if(!isDefined(tracepoint)) {
     direction = maps\_so_rts_support::get_player_angles();
-    direction_vec = anglestoforward(direction);
+    direction_vec = anglesToForward(direction);
     eye = level.rts.player.origin + vectorscale((0, 0, 1), 60.0);
-    trace = bullettrace(eye, eye + vectorscale(direction_vec, 100000), 1, level.rts.player);
+    trace = bulletTrace(eye, eye + vectorscale(direction_vec, 100000), 1, level.rts.player);
     tracepoint = trace["position"];
   }
 
@@ -323,7 +323,7 @@ createsquad(center, team, pkg_ref) {
   if(!isDefined(squad)) {
     squadid = level.rts.nextsquadid;
     level.rts.nextsquadid = level.rts.nextsquadid + 1;
-    squad = spawnstruct();
+    squad = spawnStruct();
     squad.members = [];
     squad.state = 1;
     squad.laststate = 0;
@@ -338,7 +338,7 @@ createsquad(center, team, pkg_ref) {
 
     if(isDefined(pkg_ref.marker)) {
       squad.marker = spawn("script_model", center);
-      squad.marker setmodel(pkg_ref.marker);
+      squad.marker setModel(pkg_ref.marker);
       squad.marker hide();
       squad.marker.hidden = 1;
     }
@@ -1196,8 +1196,7 @@ executeordermovewithplayer(squadid) {
   level.rts.squads[squadid].nextstate = 0;
 }
 
-squaddonothing(squadid) {
-}
+squaddonothing(squadid) {}
 
 ordersquadmanaged(squadid) {
   if(isDefined(squadid))

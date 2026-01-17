@@ -59,7 +59,7 @@ set_level_lighting_values() {
 }
 
 setup_fade_angle_lights() {
-  var_0 = getentarray("fade_angle_light", "targetname");
+  var_0 = getEntArray("fade_angle_light", "targetname");
 
   foreach(var_2 in var_0)
   var_2 thread update_fade_angle_lights();
@@ -69,23 +69,23 @@ update_fade_angle_lights() {
   var_0 = 45.0;
   var_1 = 135.0;
 
-  if(isdefined(self.script_noteworthy)) {
+  if(isDefined(self.script_noteworthy)) {
     var_2 = strtok(self.script_noteworthy, "-");
 
-    if(isdefined(var_2[0]))
+    if(isDefined(var_2[0]))
       var_0 = float(var_2[0]);
 
-    if(isdefined(var_2[1]))
+    if(isDefined(var_2[1]))
       var_1 = float(var_2[1]);
   }
 
   var_3 = var_0 / 180.0;
   var_4 = var_1 / 180.0;
   var_5 = (var_1 - var_0) / 180.0;
-  var_6 = anglestoforward(self.angles);
+  var_6 = anglesToForward(self.angles);
   var_7 = vectornormalize((var_6[0], var_6[1], 0.0));
 
-  for (;;) {
+  for(;;) {
     var_8 = level.player.origin - (self.origin + var_6 * self.radius * 0.75);
     var_8 = vectornormalize((var_8[0], var_8[1], 0.0));
     var_9 = vectordot(var_7, var_8);
@@ -100,7 +100,7 @@ handle_heli_flight_lighting_init() {
   var_0 = getent("crash_blackhawk", "targetname");
   var_1 = var_0.last_spawned_vehicle.attachedguys;
 
-  for (var_2 = 0; var_2 < var_1.size; var_2++) {
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
     switch (var_1[var_2].classname) {
       case "actor_ally_hero_price_sas_woodland":
         var_3 = maps\_cinematography::dyndof("price");
@@ -361,7 +361,7 @@ handle_barn_lighting_init() {
   var_0 = getent("farmer", "targetname");
   var_0 waittill("spawned", var_1);
 
-  if(isdefined(var_1)) {
+  if(isDefined(var_1)) {
     var_2 = maps\_cinematography::dyndof("farmer") maps\_cinematography::dyndof_values(4, -1, 5, 4) maps\_cinematography::dyndof_angles(-25, 25) maps\_cinematography::dyndof_priority(2);
     var_2 maps\_cinematography::dyndof_reference_entity(var_1) maps\_cinematography::dyndof_offset((0, 0, 30)) maps\_cinematography::dyndof_require_visible(1);
   }
@@ -380,7 +380,7 @@ handle_field_lighting_init() {
   common_scripts\utility::flag_wait("field_cover");
   wait 1;
 
-  if(isdefined(level.helicopter)) {
+  if(isDefined(level.helicopter)) {
     var_0 = maps\_cinematography::dyndof("heli") maps\_cinematography::dyndof_values(3.2, -1, 20, 5) maps\_cinematography::dyndof_angles(-20, 20) maps\_cinematography::dyndof_priority(2);
     var_0 maps\_cinematography::dyndof_reference_entity(level.helicopter);
   }
@@ -407,7 +407,7 @@ handle_ac130_lighting_init() {
   thread maps\_cinematography::dyndof_system_start(1);
   common_scripts\utility::flag_wait("gasstation_start");
   wait 12;
-  var_0 = getentarray("gasstation_truck", "targetname");
+  var_0 = getEntArray("gasstation_truck", "targetname");
   var_1 = undefined;
 
   foreach(var_3 in var_0) {
@@ -417,7 +417,7 @@ handle_ac130_lighting_init() {
     }
   }
 
-  if(isdefined(var_1)) {
+  if(isDefined(var_1)) {
     var_5 = maps\_cinematography::dyndof("ac130_explosions") maps\_cinematography::dyndof_values(4.5, -1, 5, 2) maps\_cinematography::dyndof_reference_entity(var_1);
     var_5 maps\_cinematography::dyndof_angles(-30, 30) maps\_cinematography::dyndof_priority(2) maps\_cinematography::dyndof_valid_range(40, 2700);
   }
@@ -494,7 +494,7 @@ exp_fade_overlay(var_0, var_1) {
   var_6 = self.alpha;
   var_7 = var_6 - var_0;
 
-  for (var_8 = 0; var_8 < var_2; var_8++) {
+  for(var_8 = 0; var_8 < var_2; var_8++) {
     var_4 = var_4 + var_3;
     self fadeovertime(var_5);
 
@@ -513,13 +513,13 @@ exp_fade_overlay(var_0, var_1) {
 set_specular_scale(var_0, var_1) {
   var_2 = getdvarfloat("r_specularcolorscale");
 
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     var_1 = 0;
 
   var_3 = abs(int(var_1 * 4));
   var_4 = var_0 - var_2;
 
-  for (var_5 = 0; var_5 < var_3; var_5++) {
+  for(var_5 = 0; var_5 < var_3; var_5++) {
     var_2 = var_2 + var_4 / var_3;
     setsaveddvar("r_specularcolorscale", var_2);
     wait 0.25;
@@ -529,13 +529,13 @@ set_specular_scale(var_0, var_1) {
 }
 
 setup_visionset_trigger() {
-  var_0 = spawnstruct();
-  var_1 = getentarray("vision_trigger", "targetname");
+  var_0 = spawnStruct();
+  var_1 = getEntArray("vision_trigger", "targetname");
   common_scripts\utility::array_thread(var_1, ::visionset_trigger, var_0);
 }
 
 visionset_trigger(var_0) {
-  for (;;) {
+  for(;;) {
     self waittill("trigger");
     var_0 notify("new_visionset");
     maps\_utility::set_vision_set(self.script_noteworthy, self.script_delay);
@@ -544,7 +544,7 @@ visionset_trigger(var_0) {
 }
 
 setup_lighting_pass_helicrash() {
-  for (;;) {
+  for(;;) {
     common_scripts\utility::flag_wait("lighting_player_exit_helicrash");
     common_scripts\utility::flag_clear("lighting_player_entered_helicrash");
     apply_lighting_pass_hunted_outside();
@@ -555,7 +555,7 @@ setup_lighting_pass_helicrash() {
 }
 
 setup_lighting_pass_interior() {
-  for (;;) {
+  for(;;) {
     common_scripts\utility::flag_wait("vision_barn_interior");
     apply_lighting_pass_hunted_inside();
     common_scripts\utility::flag_waitopen("vision_barn_interior");
@@ -564,7 +564,7 @@ setup_lighting_pass_interior() {
 }
 
 apply_lighting_pass_hunted_outside(var_0) {
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     var_0 = 5.0;
 
   maps\_utility::vision_set_fog_changes("hunted", 2);

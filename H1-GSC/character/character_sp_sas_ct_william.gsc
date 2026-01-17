@@ -5,7 +5,7 @@
 *****************************************************/
 
 main() {
-  self setmodel("body_sas_ct_assault_william");
+  self setModel("body_sas_ct_assault_william");
   self attach("head_sas_ct_assault_william", "", 1);
   self.headmodel = "head_sas_ct_assault_william";
   self.voice = "british";

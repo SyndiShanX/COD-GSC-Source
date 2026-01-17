@@ -41,7 +41,7 @@ function_b0f112ca(var_55e8adf1, var_d3547bb1, lanenum) {
   return function_afd64b51(var_55e8adf1, var_d3547bb1);
 }
 
-private function_871ecf05() {
+function_871ecf05() {
   for(i = 1; i < 128; i++) {
     info = function_b507a336(i);
 
@@ -53,11 +53,11 @@ private function_871ecf05() {
   }
 }
 
-private function_8373f930(lanenum) {
+function_8373f930(lanenum) {
   return level.lanedata.var_23e0aef1[lanenum];
 }
 
-private function_c5b9e623(volumes, score) {
+function_c5b9e623(volumes, score) {
   if(!isarray(volumes)) {
     return;
   }

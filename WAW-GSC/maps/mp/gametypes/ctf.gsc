@@ -123,7 +123,7 @@ onPrecacheGameType() {
   precacheString(&"MP_SUDDEN_DEATH");
   precacheString(&"MP_CAP_LIMIT_REACHED");
   precacheString(&"MP_CTF_CANT_CAPTURE_FLAG");
-  game["strings"]["score_limit_reached"] = & "MP_CAP_LIMIT_REACHED";
+  game["strings"]["score_limit_reached"] = &"MP_CAP_LIMIT_REACHED";
 }
 
 onStartGameType() {
@@ -133,17 +133,17 @@ onStartGameType() {
   setClientNameMode("auto_change");
   ctf_setTeamScore("allies", 0);
   ctf_setTeamScore("axis", 0);
-  maps\mp\gametypes\_globallogic::setObjectiveText("allies", & "OBJECTIVES_CTF");
-  maps\mp\gametypes\_globallogic::setObjectiveText("axis", & "OBJECTIVES_CTF");
+  maps\mp\gametypes\_globallogic::setObjectiveText("allies", &"OBJECTIVES_CTF");
+  maps\mp\gametypes\_globallogic::setObjectiveText("axis", &"OBJECTIVES_CTF");
   if(level.splitscreen) {
-    maps\mp\gametypes\_globallogic::setObjectiveScoreText("allies", & "OBJECTIVES_CTF");
-    maps\mp\gametypes\_globallogic::setObjectiveScoreText("axis", & "OBJECTIVES_CTF");
+    maps\mp\gametypes\_globallogic::setObjectiveScoreText("allies", &"OBJECTIVES_CTF");
+    maps\mp\gametypes\_globallogic::setObjectiveScoreText("axis", &"OBJECTIVES_CTF");
   } else {
-    maps\mp\gametypes\_globallogic::setObjectiveScoreText("allies", & "OBJECTIVES_CTF_SCORE");
-    maps\mp\gametypes\_globallogic::setObjectiveScoreText("axis", & "OBJECTIVES_CTF_SCORE");
+    maps\mp\gametypes\_globallogic::setObjectiveScoreText("allies", &"OBJECTIVES_CTF_SCORE");
+    maps\mp\gametypes\_globallogic::setObjectiveScoreText("axis", &"OBJECTIVES_CTF_SCORE");
   }
-  maps\mp\gametypes\_globallogic::setObjectiveHintText("allies", & "OBJECTIVES_CTF_HINT");
-  maps\mp\gametypes\_globallogic::setObjectiveHintText("axis", & "OBJECTIVES_CTF_HINT");
+  maps\mp\gametypes\_globallogic::setObjectiveHintText("allies", &"OBJECTIVES_CTF_HINT");
+  maps\mp\gametypes\_globallogic::setObjectiveHintText("axis", &"OBJECTIVES_CTF_HINT");
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);
   maps\mp\gametypes\_spawnlogic::placeSpawnPoints("mp_ctf_spawn_allies_start");
@@ -383,7 +383,7 @@ ctf() {
     maps\mp\_utility::error("Not enough ctf_flag_pickup_trig triggers found in map.Need two.");
     return;
   }
-  for (index = 0; index < flag_triggers.size; index++) {
+  for(index = 0; index < flag_triggers.size; index++) {
     trigger = flag_triggers[index];
     flag = createFlag(trigger);
     team = flag maps\mp\gametypes\_gameobjects::getOwnerTeam();
@@ -395,7 +395,7 @@ ctf() {
     maps\mp\_utility::error("Not enough ctf_flag_zone_trig triggers found in map.Need two.");
     return;
   }
-  for (index = 0; index < flag_zones.size; index++) {
+  for(index = 0; index < flag_zones.size; index++) {
     trigger = flag_zones[index];
     flagZone = createFlagZone(trigger);
     team = flagZone maps\mp\gametypes\_gameobjects::getOwnerTeam();
@@ -414,9 +414,7 @@ ctf() {
 
 ctf_endGame(winningTeam, endReasonText) {
   if(isDefined(winningTeam))
-    [[level._setTeamScore]](winningTeam, [
-      [level._getTeamScore]
-    ](winningTeam) + 1);
+    [[level._setTeamScore]](winningTeam, [[level._getTeamScore]](winningTeam) + 1);
   thread maps\mp\gametypes\_globallogic::endGame(winningTeam, endReasonText);
 }
 
@@ -436,7 +434,7 @@ onDrop(player) {
     self maps\mp\gametypes\_gameobjects::allowCarry("any");
     level.flagHints[otherTeam] turn_off();
   }
-  printAndSoundOnEveryone(team, "none", & "MP_ENEMY_FLAG_DROPPED_BY", "", "mp_war_objective_lost", "", player);
+  printAndSoundOnEveryone(team, "none", &"MP_ENEMY_FLAG_DROPPED_BY", "", "mp_war_objective_lost", "", player);
   if(getTime() - level.lastDialogTime > 1500) {
     maps\mp\gametypes\_globallogic::leaderDialog("wedrop_flag", otherTeam);
     maps\mp\gametypes\_globallogic::leaderDialog("theydrop_flag", team);
@@ -467,7 +465,7 @@ onPickup(player) {
   if(isDefined(player) && player.pers["team"] == team) {
     player setStatLBByName("CTF_Flags", 1, "Returned");
     self notify("picked_up");
-    printAndSoundOnEveryone(team, "none", & "MP_FLAG_RETURNED_BY", "", "mp_obj_returned", "", player);
+    printAndSoundOnEveryone(team, "none", &"MP_FLAG_RETURNED_BY", "", "mp_obj_returned", "", player);
     clearReturnFlagHudElems();
     self returnFlag();
     self maps\mp\gametypes\_gameobjects::returnHome();
@@ -480,7 +478,7 @@ onPickup(player) {
       logString(team + " flag returned");
     return;
   } else {
-    printAndSoundOnEveryone(otherteam, team, & "MP_ENEMY_FLAG_TAKEN_BY", & "MP_FLAG_TAKEN_BY", "mp_obj_taken", "mp_enemy_obj_taken", player);
+    printAndSoundOnEveryone(otherteam, team, &"MP_ENEMY_FLAG_TAKEN_BY", &"MP_FLAG_TAKEN_BY", "mp_obj_taken", "mp_enemy_obj_taken", player);
     player setStatLBByName("CTF_Flags", 1, "Picked Up");
     if(getTime() - level.lastDialogTime > 1500) {
       squadID = getplayersquadid(player);
@@ -538,7 +536,7 @@ onCapture(player) {
   if(playerTeamsFlag maps\mp\gametypes\_gameobjects::isObjectAwayFromHome() && level.touchReturn) {
     return;
   }
-  printAndSoundOnEveryone(team, enemyTeam, & "MP_ENEMY_FLAG_CAPTURED_BY", & "MP_FLAG_CAPTURED_BY", "mp_obj_captured", "mp_enemy_obj_captured", player);
+  printAndSoundOnEveryone(team, enemyTeam, &"MP_ENEMY_FLAG_CAPTURED_BY", &"MP_FLAG_CAPTURED_BY", "mp_obj_captured", "mp_enemy_obj_captured", player);
   thread playSoundOnPlayers("mx_CTF_score" + "_" + level.teamPrefix[team]);
   if(getTime() - level.lastDialogTime > 1500) {
     maps\mp\gametypes\_globallogic::leaderDialog("wecap_flag", team);
@@ -601,22 +599,22 @@ createReturnMessageElems() {
   level.ReturnMessageElems = [];
   level.ReturnMessageElems["allies"]["axis"] = createServerTimer("objective", 1.4, "allies");
   level.ReturnMessageElems["allies"]["axis"] setPoint("TOPRIGHT", "TOPRIGHT", 0, 0);
-  level.ReturnMessageElems["allies"]["axis"].label = & "MP_ENEMY_FLAG_RETURNING_IN";
+  level.ReturnMessageElems["allies"]["axis"].label = &"MP_ENEMY_FLAG_RETURNING_IN";
   level.ReturnMessageElems["allies"]["axis"].alpha = 0;
   level.ReturnMessageElems["allies"]["axis"].archived = false;
   level.ReturnMessageElems["allies"]["allies"] = createServerTimer("objective", 1.4, "allies");
   level.ReturnMessageElems["allies"]["allies"] setPoint("TOPRIGHT", "TOPRIGHT", 0, 20);
-  level.ReturnMessageElems["allies"]["allies"].label = & "MP_YOUR_FLAG_RETURNING_IN";
+  level.ReturnMessageElems["allies"]["allies"].label = &"MP_YOUR_FLAG_RETURNING_IN";
   level.ReturnMessageElems["allies"]["allies"].alpha = 0;
   level.ReturnMessageElems["allies"]["allies"].archived = false;
   level.ReturnMessageElems["axis"]["allies"] = createServerTimer("objective", 1.4, "axis");
   level.ReturnMessageElems["axis"]["allies"] setPoint("TOPRIGHT", "TOPRIGHT", 0, 0);
-  level.ReturnMessageElems["axis"]["allies"].label = & "MP_ENEMY_FLAG_RETURNING_IN";
+  level.ReturnMessageElems["axis"]["allies"].label = &"MP_ENEMY_FLAG_RETURNING_IN";
   level.ReturnMessageElems["axis"]["allies"].alpha = 0;
   level.ReturnMessageElems["axis"]["allies"].archived = false;
   level.ReturnMessageElems["axis"]["axis"] = createServerTimer("objective", 1.4, "axis");
   level.ReturnMessageElems["axis"]["axis"] setPoint("TOPRIGHT", "TOPRIGHT", 0, 20);
-  level.ReturnMessageElems["axis"]["axis"].label = & "MP_YOUR_FLAG_RETURNING_IN";
+  level.ReturnMessageElems["axis"]["axis"].label = &"MP_YOUR_FLAG_RETURNING_IN";
   level.ReturnMessageElems["axis"]["axis"].alpha = 0;
   level.ReturnMessageElems["axis"]["axis"].archived = false;
 }

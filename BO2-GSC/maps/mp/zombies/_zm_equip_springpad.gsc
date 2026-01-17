@@ -104,7 +104,7 @@ watchforcleanup() {
 
 placespringpad(origin, angles) {
   if(isDefined(self.turret_placement) && !self.turret_placement["result"]) {
-    forward = anglestoforward(angles);
+    forward = anglesToForward(angles);
     origin = origin - -24 * forward;
   }
 
@@ -223,14 +223,13 @@ startspringpaddeploy(weapon, armed) {
 
     self thread springpadthink(weapon, electricradius, armed);
 
-    if(!(isDefined(level.equipment_springpad_needs_power) && level.equipment_springpad_needs_power)) {
-    }
+    if(!(isDefined(level.equipment_springpad_needs_power) && level.equipment_springpad_needs_power)) {}
 
     self thread maps\mp\zombies\_zm_buildables::delete_on_disconnect(weapon);
     weapon waittill("death");
 
     if(isDefined(level.springpad_sound_ent)) {
-      level.springpad_sound_ent playsound("wpn_zmb_electrap_stop");
+      level.springpad_sound_ent playSound("wpn_zmb_electrap_stop");
       level.springpad_sound_ent delete();
       level.springpad_sound_ent = undefined;
     }
@@ -296,7 +295,7 @@ springpad_animate(weapon, armed) {
 playspringpadresetaudio(time) {
   self endon("springpadAudioCleanup");
   ent = spawn("script_origin", self.origin);
-  ent playloopsound("zmb_highrise_launcher_reset_loop");
+  ent playLoopSound("zmb_highrise_launcher_reset_loop");
   self thread deleteentwhensounddone(time, ent);
   self waittill("death");
   ent delete();
@@ -311,7 +310,7 @@ deleteentwhensounddone(time, ent) {
 
 springpad_audio() {
   loop_ent = spawn("script_origin", self.origin);
-  loop_ent playloopsound("zmb_highrise_launcher_loop");
+  loop_ent playLoopSound("zmb_highrise_launcher_loop");
   self waittill("death");
   loop_ent delete();
 }
@@ -321,7 +320,7 @@ springpad_fx(weapon) {
   self endon("equip_springpad_zm_taken");
 
   while(isDefined(weapon)) {
-    playfxontag(level._effect["springpade_on"], weapon, "tag_origin");
+    playFXOnTag(level._effect["springpade_on"], weapon, "tag_origin");
     wait 1;
   }
 }
@@ -333,7 +332,7 @@ springpadthink(weapon, electricradius, armed) {
   weapon endon("death");
   radiussquared = electricradius * electricradius;
   trigger = spawn("trigger_box", weapon getcentroid(), 1, 48, 48, 32);
-  trigger.origin = trigger.origin + anglestoforward(flat_angle(weapon.angles)) * -15;
+  trigger.origin = trigger.origin + anglesToForward(flat_angle(weapon.angles)) * -15;
   trigger.angles = weapon.angles;
   trigger enablelinkto();
   trigger linkto(weapon);
@@ -342,7 +341,7 @@ springpadthink(weapon, electricradius, armed) {
   trigger.extent = (24.0, 24.0, 16.0);
 
   weapon thread springpadthinkcleanup(trigger);
-  direction_forward = anglestoforward(flat_angle(weapon.angles) + vectorscale((-1, 0, 0), 60.0));
+  direction_forward = anglesToForward(flat_angle(weapon.angles) + vectorscale((-1, 0, 0), 60.0));
   direction_vector = vectorscale(direction_forward, 1024);
   direction_origin = weapon.origin + direction_vector;
   home_angles = weapon.angles;

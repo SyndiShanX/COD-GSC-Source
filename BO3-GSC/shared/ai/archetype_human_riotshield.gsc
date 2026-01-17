@@ -24,8 +24,8 @@
 #namespace archetype_human_riotshield;
 
 function autoexec main() {
-  spawner::add_archetype_spawn_function("human_riotshield", & humanriotshieldbehavior::archetypehumanriotshieldblackboardinit);
-  spawner::add_archetype_spawn_function("human_riotshield", & humanriotshieldserverutils::humanriotshieldspawnsetup);
+  spawner::add_archetype_spawn_function("human_riotshield", &humanriotshieldbehavior::archetypehumanriotshieldblackboardinit);
+  spawner::add_archetype_spawn_function("human_riotshield", &humanriotshieldserverutils::humanriotshieldspawnsetup);
   humanriotshieldbehavior::registerbehaviorscriptfunctions();
   humanriotshieldinterface::registerhumanriotshieldinterfaceattributes();
 }
@@ -33,16 +33,16 @@ function autoexec main() {
 #namespace humanriotshieldbehavior;
 
 function registerbehaviorscriptfunctions() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("riotshieldShouldTacticalWalk", & riotshieldshouldtacticalwalk);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("riotshieldNonCombatLocomotionCondition", & riotshieldnoncombatlocomotioncondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("unarmedWalkAction", & unarmedwalkactionstart);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("riotshieldTacticalWalkStart", & riotshieldtacticalwalkstart);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("riotshieldAdvanceOnEnemyService", & riotshieldadvanceonenemyservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("riotshieldShouldFlinch", & riotshieldshouldflinch);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("riotshieldIncrementFlinchCount", & riotshieldincrementflinchcount);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("riotshieldClearFlinchCount", & riotshieldclearflinchcount);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("riotshieldUnarmedTargetService", & riotshieldunarmedtargetservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("riotshieldUnarmedAdvanceOnEnemyService", & riotshieldunarmedadvanceonenemyservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("riotshieldShouldTacticalWalk", &riotshieldshouldtacticalwalk);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("riotshieldNonCombatLocomotionCondition", &riotshieldnoncombatlocomotioncondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("unarmedWalkAction", &unarmedwalkactionstart);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("riotshieldTacticalWalkStart", &riotshieldtacticalwalkstart);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("riotshieldAdvanceOnEnemyService", &riotshieldadvanceonenemyservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("riotshieldShouldFlinch", &riotshieldshouldflinch);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("riotshieldIncrementFlinchCount", &riotshieldincrementflinchcount);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("riotshieldClearFlinchCount", &riotshieldclearflinchcount);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("riotshieldUnarmedTargetService", &riotshieldunarmedtargetservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("riotshieldUnarmedAdvanceOnEnemyService", &riotshieldunarmedadvanceonenemyservice);
 }
 
 function private archetypehumanriotshieldblackboardinit() {
@@ -50,9 +50,9 @@ function private archetypehumanriotshieldblackboardinit() {
   blackboard::createblackboardforentity(entity);
   ai::createinterfaceforentity(entity);
   entity aiutility::registerutilityblackboardattributes();
-  self.___archetypeonanimscriptedcallback = & archetypehumanriotshieldonanimscriptedcallback;
+  self.___archetypeonanimscriptedcallback = &archetypehumanriotshieldonanimscriptedcallback;
   entity finalizetrackedblackboardattributes();
-  blackboard::registerblackboardattribute(self, "_move_mode", "normal", & riotshieldmovemode);
+  blackboard::registerblackboardattribute(self, "_move_mode", "normal", &riotshieldmovemode);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
@@ -99,7 +99,7 @@ function private riotshieldshouldtacticalwalk(behaviortreeentity) {
 }
 
 function private riotshieldnoncombatlocomotioncondition(behaviortreeentity) {
-  if(isdefined(behaviortreeentity.enemy)) {
+  if(isDefined(behaviortreeentity.enemy)) {
     if(distancesquared(behaviortreeentity.origin, behaviortreeentity lastknownpos(behaviortreeentity.enemy)) > 490000) {
       return true;
     }
@@ -114,26 +114,26 @@ function private riotshieldadvanceonenemyservice(behaviortreeentity) {
   if(behaviortreeentity ai::get_behavior_attribute("phalanx")) {
     return false;
   }
-  if(isdefined(behaviortreeentity.chosennode)) {
+  if(isDefined(behaviortreeentity.chosennode)) {
     dist_sq = distancesquared(behaviortreeentity.origin, behaviortreeentity.chosennode.origin);
     if(dist_sq < 256) {
-      if(!isdefined(behaviortreeentity.timeatchosennode)) {
+      if(!isDefined(behaviortreeentity.timeatchosennode)) {
         behaviortreeentity.timeatchosennode = gettime();
       }
     }
   }
-  if(isdefined(behaviortreeentity.timeatchosennode)) {
+  if(isDefined(behaviortreeentity.timeatchosennode)) {
     if((gettime() - behaviortreeentity.timeatchosennode) > behaviortreeentity.timeatnodemax) {
       toolongatnode = 1;
       behaviortreeentity.timeatchosennode = undefined;
     }
   }
   shouldlookforbettercover = itsbeenawhile || !isatscriptgoal || toolongatnode;
-  if(shouldlookforbettercover && isdefined(behaviortreeentity.enemy)) {
+  if(shouldlookforbettercover && isDefined(behaviortreeentity.enemy)) {
     closestrandomnode = undefined;
     closestrandomnodes = behaviortreeentity findbestcovernodes(behaviortreeentity.goalradius, behaviortreeentity.goalpos);
     foreach(node in closestrandomnodes) {
-      if(isdefined(behaviortreeentity.chosennode) && behaviortreeentity.chosennode == node) {
+      if(isDefined(behaviortreeentity.chosennode) && behaviortreeentity.chosennode == node) {
         continue;
       }
       if(aiutility::getcovertype(node) == "cover_exposed") {
@@ -141,10 +141,10 @@ function private riotshieldadvanceonenemyservice(behaviortreeentity) {
         break;
       }
     }
-    if(!isdefined(closestrandomnode)) {
+    if(!isDefined(closestrandomnode)) {
       closestrandomnode = closestrandomnodes[0];
     }
-    if(isdefined(closestrandomnode) && behaviortreeentity findpath(behaviortreeentity.origin, closestrandomnode.origin, 1, 0)) {
+    if(isDefined(closestrandomnode) && behaviortreeentity findpath(behaviortreeentity.origin, closestrandomnode.origin, 1, 0)) {
       aiutility::releaseclaimnode(behaviortreeentity);
       aiutility::usecovernodewrapper(behaviortreeentity, closestrandomnode);
       behaviortreeentity.chosennode = closestrandomnode;
@@ -177,14 +177,14 @@ function private riotshieldunarmedtargetservice(behaviortreeentity) {
   if(enemies.size > 0) {
     closestenemy = undefined;
     closestenemydistance = 0;
-    for (index = 0; index < enemies.size; index++) {
+    for(index = 0; index < enemies.size; index++) {
       enemy = enemies[index];
       enemydistance = distancesquared(behaviortreeentity.origin, enemy.origin);
       checkenemy = 0;
       if(enemydistance > (behaviortreeentity.goalradius * behaviortreeentity.goalradius)) {
         continue;
       }
-      if(!isdefined(enemy.targeted_by) || enemy.targeted_by == behaviortreeentity) {
+      if(!isDefined(enemy.targeted_by) || enemy.targeted_by == behaviortreeentity) {
         checkenemy = 1;
       } else {
         targetdistance = distancesquared(enemy.targeted_by.origin, enemy.origin);
@@ -193,17 +193,17 @@ function private riotshieldunarmedtargetservice(behaviortreeentity) {
         }
       }
       if(checkenemy) {
-        if(!isdefined(closestenemy) || enemydistance < closestenemydistance) {
+        if(!isDefined(closestenemy) || enemydistance < closestenemydistance) {
           closestenemydistance = enemydistance;
           closestenemy = enemy;
         }
       }
     }
-    if(isdefined(behaviortreeentity.favoriteenemy)) {
+    if(isDefined(behaviortreeentity.favoriteenemy)) {
       behaviortreeentity.favoriteenemy.targeted_by = undefined;
     }
     behaviortreeentity.favoriteenemy = closestenemy;
-    if(isdefined(behaviortreeentity.favoriteenemy)) {
+    if(isDefined(behaviortreeentity.favoriteenemy)) {
       behaviortreeentity.favoriteenemy.targeted_by = behaviortreeentity;
     }
     return true;
@@ -215,7 +215,7 @@ function private riotshieldunarmedadvanceonenemyservice(behaviortreeentity) {
   if(gettime() < behaviortreeentity.nextfindbestcovertime) {
     return false;
   }
-  if(isdefined(behaviortreeentity.favoriteenemy)) {
+  if(isDefined(behaviortreeentity.favoriteenemy)) {
     recordline(behaviortreeentity.favoriteenemy.origin, behaviortreeentity.origin, (1, 0.5, 0), "", behaviortreeentity);
     enemydistance = distancesquared(behaviortreeentity.favoriteenemy.origin, behaviortreeentity.origin);
     if(enemydistance < (behaviortreeentity.goalradius * behaviortreeentity.goalradius)) {
@@ -259,7 +259,7 @@ function humanriotshieldspawnsetup() {
   entity.movedelaymin = 2500;
   entity.movedelaymax = 5000;
   entity.ignorerunandgundist = 1;
-  aiutility::addaioverridedamagecallback(entity, & humanriotshieldbehavior::riotshielddamageoverride);
-  aiutility::addaioverridekilledcallback(entity, & humanriotshieldbehavior::riotshieldkilledoverride);
+  aiutility::addaioverridedamagecallback(entity, &humanriotshieldbehavior::riotshielddamageoverride);
+  aiutility::addaioverridekilledcallback(entity, &humanriotshieldbehavior::riotshieldkilledoverride);
   humanriotshieldbehavior::riotshieldclearflinchcount(entity);
 }

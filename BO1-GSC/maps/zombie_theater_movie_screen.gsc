@@ -14,7 +14,7 @@ initMovieScreen() {
 
 set_up_images() {
   level.images = [];
-  level.images = getentarray("screen_image", "targetname");
+  level.images = getEntArray("screen_image", "targetname");
   level.images = mergeSort(level.images);
   for(x = 0; x < level.images.size; x++)
     level.images[x] hide();
@@ -82,7 +82,7 @@ moveCurtains(curtent) {
   curtain thread monitorCurtain(curtorg);
   curtain connectpaths();
   curtain moveTo(curtain.origin + curtain.script_vector, time, time * 0.25, time * 0.25);
-  curtain playsound("curtain_open");
+  curtain playSound("curtain_open");
 }
 
 monitorCurtain(curtorg) {
@@ -105,7 +105,7 @@ open_left_curtain() {
   curtain = getEnt("left_curtain", "targetname");
   if(isDefined(curtain)) {
     wait(2);
-    curtain_clip = getentarray("left_curtain_clip", "targetname");
+    curtain_clip = getEntArray("left_curtain_clip", "targetname");
     for(i = 0; i < curtain_clip.size; i++) {
       curtain_clip[i] connectpaths();
       curtain_clip[i] notsolid();
@@ -120,7 +120,7 @@ open_right_curtain() {
   curtain = getEnt("right_curtain", "targetname");
   if(isDefined(curtain)) {
     wait(2);
-    curtain_clip = getentarray("right_curtain_clip", "targetname");
+    curtain_clip = getEntArray("right_curtain_clip", "targetname");
     for(i = 0; i < curtain_clip.size; i++) {
       curtain_clip[i] connectpaths();
       curtain_clip[i] notsolid();
@@ -134,7 +134,7 @@ lower_movie_screen() {
   screen = getEnt("movie_screen", "targetname");
   if(isDefined(screen)) {
     screen movez(-466, 6);
-    screen playsound("evt_screen_lower");
+    screen playSound("evt_screen_lower");
   }
   screen waittill("movedone");
   wait(2);
@@ -208,7 +208,7 @@ movie_reels() {
   }
   flag_wait("power_on");
   self waittill("trigger", who);
-  who PlaySound("zmb_reel_pickup");
+  who playSound("zmb_reel_pickup");
   self.reel_model hide();
   self trigger_off();
   who.reel = self.script_string;
@@ -229,7 +229,7 @@ movie_projector_reel_change() {
       who notify("reel_set");
       who thread theater_remove_reel_hud();
       who thread maps\zombie_theater_amb::play_radio_egg(2);
-      who PlaySound("zmb_reel_place");
+      who playSound("zmb_reel_place");
       who.reel = undefined;
       wait(3);
     } else {

@@ -18,14 +18,14 @@
 #namespace zm_aat_thunder_wall;
 
 function autoexec __init__sytem__() {
-  system::register("zm_aat_thunder_wall", & __init__, undefined, "aat");
+  system::register("zm_aat_thunder_wall", &__init__, undefined, "aat");
 }
 
 function __init__() {
-  if(!(isdefined(level.aat_in_use) && level.aat_in_use)) {
+  if(!(isDefined(level.aat_in_use) && level.aat_in_use)) {
     return;
   }
-  aat::register("zm_aat_thunder_wall", 0.25, 0, 10, 0, 1, & result, "t7_hud_zm_aat_thunderwall", "wpn_aat_thunder_wall_plr");
+  aat::register("zm_aat_thunder_wall", 0.25, 0, 10, 0, 1, &result, "t7_hud_zm_aat_thunderwall", "wpn_aat_thunder_wall_plr");
   level._effect["zm_aat_thunder_wall" + "_break_fx"] = "zombie/fx_aat_thunderwall_zmb";
 }
 
@@ -39,20 +39,20 @@ function thunder_wall_blast(attacker) {
   v_attacker_facing = attacker getweaponforwarddir();
   v_attacker_orientation = attacker.angles;
   a_ai_zombies = array::get_all_closest(v_thunder_wall_blast_pos, getaiteamarray("axis"), undefined, undefined, 360);
-  if(!isdefined(a_ai_zombies)) {
+  if(!isDefined(a_ai_zombies)) {
     return;
   }
   f_thunder_wall_range_sq = 32400;
   f_thunder_wall_effect_area_sq = 291600;
   end_pos = v_thunder_wall_blast_pos + vectorscale(v_attacker_facing, 180);
-  self playsound("wpn_aat_thunderwall_impact");
+  self playSound("wpn_aat_thunderwall_impact");
   level thread thunder_wall_blast_fx(v_thunder_wall_blast_pos, v_attacker_orientation);
   n_flung_zombies = 0;
-  for (i = 0; i < a_ai_zombies.size; i++) {
-    if(!isdefined(a_ai_zombies[i]) || !isalive(a_ai_zombies[i])) {
+  for(i = 0; i < a_ai_zombies.size; i++) {
+    if(!isDefined(a_ai_zombies[i]) || !isalive(a_ai_zombies[i])) {
       continue;
     }
-    if(isdefined(level.aat["zm_aat_thunder_wall"].immune_result_direct[a_ai_zombies[i].archetype]) && level.aat["zm_aat_thunder_wall"].immune_result_direct[a_ai_zombies[i].archetype]) {
+    if(isDefined(level.aat["zm_aat_thunder_wall"].immune_result_direct[a_ai_zombies[i].archetype]) && level.aat["zm_aat_thunder_wall"].immune_result_direct[a_ai_zombies[i].archetype]) {
       continue;
     }
     if(a_ai_zombies[i] == self) {
@@ -73,10 +73,10 @@ function thunder_wall_blast(attacker) {
     }
     if(v_curr_zombie_origin_sq < f_thunder_wall_range_sq) {
       a_ai_zombies[i] dodamage(a_ai_zombies[i].health, v_curr_zombie_origin, attacker, attacker, "none", "MOD_IMPACT");
-      if(isdefined(attacker) && isplayer(attacker)) {
+      if(isDefined(attacker) && isplayer(attacker)) {
         attacker zm_stats::increment_challenge_stat("ZOMBIE_HUNTER_THUNDER_WALL");
       }
-      if(!(isdefined(level.aat["zm_aat_thunder_wall"].immune_result_indirect[self.archetype]) && level.aat["zm_aat_thunder_wall"].immune_result_indirect[self.archetype])) {
+      if(!(isDefined(level.aat["zm_aat_thunder_wall"].immune_result_indirect[self.archetype]) && level.aat["zm_aat_thunder_wall"].immune_result_indirect[self.archetype])) {
         n_random_x = randomfloatrange(-3, 3);
         n_random_y = randomfloatrange(-3, 3);
         a_ai_zombies[i] startragdoll(1);

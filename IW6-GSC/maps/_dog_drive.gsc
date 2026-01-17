@@ -273,8 +273,8 @@ nearby_enemy_tracking(var_0) {
   var_0 endon("death");
   var_1 = 0;
   var_2 = 0;
-  var_3 = & "NML_DOGCAM_TARGET";
-  var_4 = & "NML_DOGCAM_METERS";
+  var_3 = &"NML_DOGCAM_TARGET";
+  var_4 = &"NML_DOGCAM_METERS";
 
   for(;;) {
     var_5 = self getplayerangles();
@@ -1214,21 +1214,21 @@ getdirectioncompass(var_0) {
     var_0 = var_0 - 360;
 
   if(var_0 < 22.5 || var_0 > 337.5)
-    var_2 = & "NML_DOGCAM_NORTH";
+    var_2 = &"NML_DOGCAM_NORTH";
   else if(var_0 < 67.5)
-    var_2 = & "NML_DOGCAM_NORTHWEST";
+    var_2 = &"NML_DOGCAM_NORTHWEST";
   else if(var_0 < 112.5)
-    var_2 = & "NML_DOGCAM_WEST";
+    var_2 = &"NML_DOGCAM_WEST";
   else if(var_0 < 157.5)
-    var_2 = & "NML_DOGCAM_SOUTHWEST";
+    var_2 = &"NML_DOGCAM_SOUTHWEST";
   else if(var_0 < 202.5)
-    var_2 = & "NML_DOGCAM_SOUTH";
+    var_2 = &"NML_DOGCAM_SOUTH";
   else if(var_0 < 247.5)
-    var_2 = & "NML_DOGCAM_SOUTHEAST";
+    var_2 = &"NML_DOGCAM_SOUTHEAST";
   else if(var_0 < 292.5)
-    var_2 = & "NML_DOGCAM_EAST";
+    var_2 = &"NML_DOGCAM_EAST";
   else if(var_0 < 337.5)
-    var_2 = & "NML_DOGCAM_NORTHEAST";
+    var_2 = &"NML_DOGCAM_NORTHEAST";
   else
     var_2 = "";
 

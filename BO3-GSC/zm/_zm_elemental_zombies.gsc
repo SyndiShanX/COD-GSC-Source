@@ -28,7 +28,7 @@
 #namespace zm_elemental_zombie;
 
 function autoexec __init__sytem__() {
-  system::register("zm_elemental_zombie", & __init__, undefined, undefined);
+  system::register("zm_elemental_zombie", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -52,8 +52,8 @@ function function_1b1bb1b() {
     return;
   }
   var_199ecc3a = function_4aeed0a5("sparky");
-  if(!isdefined(level.var_1ae26ca5) || var_199ecc3a < level.var_1ae26ca5) {
-    if(!isdefined(ai_zombie.is_elemental_zombie) || ai_zombie.is_elemental_zombie == 0) {
+  if(!isDefined(level.var_1ae26ca5) || var_199ecc3a < level.var_1ae26ca5) {
+    if(!isDefined(ai_zombie.is_elemental_zombie) || ai_zombie.is_elemental_zombie == 0) {
       ai_zombie.is_elemental_zombie = 1;
       ai_zombie.var_9a02a614 = "sparky";
       ai_zombie clientfield::set("sparky_zombie_spark_fx", 1);
@@ -65,7 +65,7 @@ function function_1b1bb1b() {
       } else {
         var_f4a5c99 = array("ai_zm_dlc1_zombie_turn_sparky_a", "ai_zm_dlc1_zombie_turn_sparky_b", "ai_zm_dlc1_zombie_turn_sparky_c", "ai_zm_dlc1_zombie_turn_sparky_d", "ai_zm_dlc1_zombie_turn_sparky_e");
       }
-      if(isdefined(ai_zombie) && !isdefined(ai_zombie.traversestartnode) && (!(isdefined(self.var_bb98125f) && self.var_bb98125f))) {
+      if(isDefined(ai_zombie) && !isDefined(ai_zombie.traversestartnode) && (!(isDefined(self.var_bb98125f) && self.var_bb98125f))) {
         ai_zombie animation::play(array::random(var_f4a5c99), ai_zombie, undefined, 1, 0.2, 0.2);
       }
     }
@@ -73,11 +73,11 @@ function function_1b1bb1b() {
 }
 
 function function_f4defbc2() {
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     ai_zombie = self;
     var_ac4641b = function_4aeed0a5("napalm");
-    if(!isdefined(level.var_bd64e31e) || var_ac4641b < level.var_bd64e31e) {
-      if(!isdefined(ai_zombie.is_elemental_zombie) || ai_zombie.is_elemental_zombie == 0) {
+    if(!isDefined(level.var_bd64e31e) || var_ac4641b < level.var_bd64e31e) {
+      if(!isDefined(ai_zombie.is_elemental_zombie) || ai_zombie.is_elemental_zombie == 0) {
         ai_zombie.is_elemental_zombie = 1;
         ai_zombie.var_9a02a614 = "napalm";
         ai_zombie clientfield::set("arch_actor_fire_fx", 1);
@@ -94,7 +94,7 @@ function function_f4defbc2() {
 function function_2987b6dc() {
   self endon("entityshutdown");
   self endon("death");
-  while (true) {
+  while(true) {
     self waittill("damage");
     if(randomint(100) < 50) {
       self clientfield::increment("sparky_damaged_fx");
@@ -106,7 +106,7 @@ function function_2987b6dc() {
 function function_d070bfba() {
   self endon("entityshutdown");
   self endon("death");
-  while (true) {
+  while(true) {
     self waittill("damage");
     if(randomint(100) < 50) {
       self clientfield::increment("napalm_damaged_fx");
@@ -118,7 +118,7 @@ function function_d070bfba() {
 function function_d9226011() {
   ai_zombie = self;
   ai_zombie waittill("death", attacker);
-  if(!isdefined(ai_zombie) || ai_zombie.nuked === 1) {
+  if(!isDefined(ai_zombie) || ai_zombie.nuked === 1) {
     return;
   }
   ai_zombie clientfield::set("sparky_zombie_death_fx", 1);
@@ -130,14 +130,14 @@ function function_d9226011() {
 function napalm_zombie_death() {
   ai_zombie = self;
   ai_zombie waittill("death", attacker);
-  if(!isdefined(ai_zombie) || ai_zombie.nuked === 1) {
+  if(!isDefined(ai_zombie) || ai_zombie.nuked === 1) {
     return;
   }
   ai_zombie clientfield::set("napalm_zombie_death_fx", 1);
   ai_zombie zombie_utility::gib_random_parts();
   gibserverutils::annihilate(ai_zombie);
-  if(isdefined(level.var_36b5dab) && level.var_36b5dab || (isdefined(ai_zombie.var_36b5dab) && ai_zombie.var_36b5dab)) {
-    ai_zombie.custom_player_shellshock = & function_e6cd7e78;
+  if(isDefined(level.var_36b5dab) && level.var_36b5dab || (isDefined(ai_zombie.var_36b5dab) && ai_zombie.var_36b5dab)) {
+    ai_zombie.custom_player_shellshock = &function_e6cd7e78;
   }
   radiusdamage(ai_zombie.origin + vectorscale((0, 0, 1), 35), 128, 70, 30, self, "MOD_EXPLOSIVE");
 }
@@ -150,13 +150,13 @@ function function_e6cd7e78(damage, attacker, direction_vec, point, mod) {
 
 function function_d41418b8() {
   a_zombies = getaiarchetypearray("zombie");
-  a_filtered_zombies = array::filter(a_zombies, 0, & function_b804eb62);
+  a_filtered_zombies = array::filter(a_zombies, 0, &function_b804eb62);
   return a_filtered_zombies;
 }
 
 function function_c50e890f(type) {
   a_zombies = getaiarchetypearray("zombie");
-  a_filtered_zombies = array::filter(a_zombies, 0, & function_361f6caa, type);
+  a_filtered_zombies = array::filter(a_zombies, 0, &function_361f6caa, type);
   return a_filtered_zombies;
 }
 
@@ -175,7 +175,7 @@ function function_b804eb62(ai_zombie) {
 
 function function_f6901b6a() {
   level flagsys::wait_till("");
-  zm_devgui::add_custom_devgui_callback( & function_2d0e7f4);
+  zm_devgui::add_custom_devgui_callback(&function_2d0e7f4);
 }
 
 function function_2d0e7f4(cmd) {

@@ -6,7 +6,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
-
 #namespace zm_trial_activate_hazards;
 
 autoexec __init__system__() {
@@ -21,10 +20,10 @@ __init__() {
   zm_trial::register_challenge(#"activate_hazards", &on_begin, &on_end);
 }
 
-private on_begin() {
+on_begin() {
   level.var_2d307e50 = 1;
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   level.var_2d307e50 = undefined;
 }

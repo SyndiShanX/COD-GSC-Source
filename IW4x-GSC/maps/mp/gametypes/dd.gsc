@@ -110,26 +110,26 @@ onStartGameType() {
 
   setClientNameMode("manual_change");
 
-  game["strings"]["target_destroyed"] = & "MP_TARGET_DESTROYED";
-  game["strings"]["bomb_defused"] = & "MP_BOMB_DEFUSED";
+  game["strings"]["target_destroyed"] = &"MP_TARGET_DESTROYED";
+  game["strings"]["bomb_defused"] = &"MP_BOMB_DEFUSED";
 
   precacheString(game["strings"]["target_destroyed"]);
   precacheString(game["strings"]["bomb_defused"]);
 
   level._effect["bombexplosion"] = loadfx("explosions/tanker_explosion");
 
-  setObjectiveText(game["attackers"], & "OBJECTIVES_DD_ATTACKER");
-  setObjectiveText(game["defenders"], & "OBJECTIVES_DD_DEFENDER");
+  setObjectiveText(game["attackers"], &"OBJECTIVES_DD_ATTACKER");
+  setObjectiveText(game["defenders"], &"OBJECTIVES_DD_DEFENDER");
 
   if(level.splitscreen) {
-    setObjectiveScoreText(game["attackers"], & "OBJECTIVES_DD_ATTACKER");
-    setObjectiveScoreText(game["defenders"], & "OBJECTIVES_DD_DEFENDER");
+    setObjectiveScoreText(game["attackers"], &"OBJECTIVES_DD_ATTACKER");
+    setObjectiveScoreText(game["defenders"], &"OBJECTIVES_DD_DEFENDER");
   } else {
-    setObjectiveScoreText(game["attackers"], & "OBJECTIVES_DD_ATTACKER_SCORE");
-    setObjectiveScoreText(game["defenders"], & "OBJECTIVES_DD_DEFENDER_SCORE");
+    setObjectiveScoreText(game["attackers"], &"OBJECTIVES_DD_ATTACKER_SCORE");
+    setObjectiveScoreText(game["defenders"], &"OBJECTIVES_DD_DEFENDER_SCORE");
   }
-  setObjectiveHintText(game["attackers"], & "OBJECTIVES_DD_ATTACKER_HINT");
-  setObjectiveHintText(game["defenders"], & "OBJECTIVES_DD_DEFENDER_HINT");
+  setObjectiveHintText(game["attackers"], &"OBJECTIVES_DD_ATTACKER_HINT");
+  setObjectiveHintText(game["defenders"], &"OBJECTIVES_DD_DEFENDER_HINT");
 
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);
@@ -224,7 +224,7 @@ onStartGameType() {
 waitToProcess() {
   level endon("game_end");
 
-  for (;;) {
+  for(;;) {
     if(level.inGracePeriod == 0) {
       break;
     }
@@ -233,7 +233,6 @@ waitToProcess() {
   }
 
   level.useStartSpawns = false;
-
 }
 
 getSpawnPoint() {
@@ -276,7 +275,6 @@ getSpawnPoint() {
 }
 
 onSpawnPlayer() {
-
   if(self.pers["team"] == game["attackers"]) {
     self.isPlanting = false;
     self.isDefusing = false;
@@ -365,7 +363,7 @@ bombs() {
   if(!bombZones.size)
     bombZones = getEntArray("bombzone", "targetname");
 
-  for (index = 0; index < bombZones.size; index++) {
+  for(index = 0; index < bombZones.size; index++) {
     trigger = bombZones[index];
     visuals = getEntArray(bombZones[index].target, "targetname");
 
@@ -391,7 +389,7 @@ bombs() {
     bombZone.useWeapon = "briefcase_bomb_mp";
     bombZone.visuals[0].killCamEnt = spawn("script_model", bombZone.visuals[0].origin + (0, 0, 128));
 
-    for (i = 0; i < visuals.size; i++) {
+    for(i = 0; i < visuals.size; i++) {
       if(isDefined(visuals[i].script_exploder)) {
         bombZone.exploderIndex = visuals[i].script_exploder;
         break;
@@ -401,14 +399,14 @@ bombs() {
     level.bombZones[level.bombZones.size] = bombZone;
 
     bombZone.bombDefuseTrig = getent(visuals[0].target, "targetname");
-    assert(isdefined(bombZone.bombDefuseTrig));
+    assert(isDefined(bombZone.bombDefuseTrig));
     bombZone.bombDefuseTrig.origin += (0, 0, -10000);
     bombZone.bombDefuseTrig.label = label;
   }
 
-  for (index = 0; index < level.bombZones.size; index++) {
+  for(index = 0; index < level.bombZones.size; index++) {
     array = [];
-    for (otherindex = 0; otherindex < level.bombZones.size; otherindex++) {
+    for(otherindex = 0; otherindex < level.bombZones.size; otherindex++) {
       if(otherindex != index)
         array[array.size] = level.bombZones[otherindex];
     }
@@ -425,7 +423,7 @@ onUseObject(player) {
     player playSound("mp_bomb_plant");
 
     thread teamPlayerCardSplash("callout_bombplanted", player);
-    //iPrintLn( &"MP_EXPLOSIVES_PLANTED_BY", player );
+    //iPrintLn(&"MP_EXPLOSIVES_PLANTED_BY", player );
     leaderDialog("bomb_planted");
 
     player thread maps\mp\gametypes\_hud_message::SplashNotify("plant", maps\mp\gametypes\_rank::getScoreInfoValue("plant"));
@@ -556,7 +554,6 @@ bombPlanted(destroyedObj, player) {
   destroyedObj BombTimerWait(destroyedObj); //waits for bomb to explode!
 
   destroyedObj thread bombHandler(player, "explode");
-
 }
 
 bombHandler(player, destType) {
@@ -585,7 +582,7 @@ bombHandler(player, destType) {
     explosionOrigin = self.curorigin;
     level.ddBombModel[self.label] Delete();
 
-    if(isdefined(player)) {
+    if(isDefined(player)) {
       self.visuals[0] radiusDamage(explosionOrigin, 512, 200, 20, player);
       player incPlayerStat("targetsdestroyed", 1);
     } else {
@@ -626,7 +623,7 @@ bombHandler(player, destType) {
     self notify("defused");
 
     //		if( !level.hardcoreMode )
-    //			iPrintLn( &"MP_EXPLOSIVES_DEFUSED_BY", player );
+    //			iPrintLn(&"MP_EXPLOSIVES_DEFUSED_BY", player );
 
     leaderDialog("bomb_defused");
 
@@ -653,7 +650,7 @@ playDemolitionTickingSound(site) {
   self endon("stopTicking");
   level endon("game_ended");
 
-  while (1) {
+  while(1) {
     self playSound("ui_mp_suitcasebomb_timer");
 
     if(!isDefined(site.waitTime) || site.waitTime > 10)
@@ -704,7 +701,7 @@ BombTimerWait(siteLoc) {
 
   siteLoc.waitTime = level.bombTimer;
 
-  while (siteLoc.waitTime >= 0) {
+  while(siteLoc.waitTime >= 0) {
     siteLoc.waitTime--;
     setDvar("ui_bombtimer" + siteLoc.label, siteLoc.waitTime);
 

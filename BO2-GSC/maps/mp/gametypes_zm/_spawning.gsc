@@ -34,11 +34,10 @@ init() {
   setdvar("scr_debug_render_spawn_text", "1");
 }
 
-default_gamemodespawndvars(reset_dvars) {
-}
+default_gamemodespawndvars(reset_dvars) {}
 
 init_spawn_system() {
-  level.spawnsystem = spawnstruct();
+  level.spawnsystem = spawnStruct();
   spawnsystem = level.spawnsystem;
   level get_player_spawning_dvars(1);
   level thread initialize_player_spawning_dvars();
@@ -153,8 +152,7 @@ get_score_curve_index(curve) {
   }
 }
 
-get_influencer_type_index(curve) {
-}
+get_influencer_type_index(curve) {}
 
 create_player_influencers() {
   assert(!isDefined(self.influencer_enemy_sphere));
@@ -310,7 +308,7 @@ create_grenade_influencers(parent_team, weaponname, grenade) {
 create_napalm_fire_influencers(point, direction, parent_team, duration) {
   timeout = duration;
   weapon_team_mask = 0;
-  offset = vectorscale(anglestoforward(direction), 1100);
+  offset = vectorscale(anglesToForward(direction), 1100);
   addsphereinfluencer(level.spawnsystem.einfluencer_type_normal, point + 2.0 * offset, level.spawnsystem.napalm_influencer_radius, level.spawnsystem.napalm_influencer_score, weapon_team_mask, "napalm,r,s", get_score_curve_index(level.spawnsystem.napalm_influencer_score_curve), timeout);
   addsphereinfluencer(level.spawnsystem.einfluencer_type_normal, point + offset, level.spawnsystem.napalm_influencer_radius, level.spawnsystem.napalm_influencer_score, weapon_team_mask, "napalm,r,s", get_score_curve_index(level.spawnsystem.napalm_influencer_score_curve), timeout);
   addsphereinfluencer(level.spawnsystem.einfluencer_type_normal, point, level.spawnsystem.napalm_influencer_radius, level.spawnsystem.napalm_influencer_score, weapon_team_mask, "napalm,r,s", get_score_curve_index(level.spawnsystem.napalm_influencer_score_curve), timeout);
@@ -323,7 +321,7 @@ create_auto_turret_influencer(point, parent_team, angles) {
   else
     weapon_team_mask = getotherteamsmask(parent_team);
 
-  projected_point = point + vectorscale(anglestoforward(angles), level.spawnsystem.auto_turret_influencer_radius * 0.7);
+  projected_point = point + vectorscale(anglesToForward(angles), level.spawnsystem.auto_turret_influencer_radius * 0.7);
   influencerid = addsphereinfluencer(level.spawnsystem.einfluencer_type_normal, projected_point, level.spawnsystem.auto_turret_influencer_radius, level.spawnsystem.auto_turret_influencer_score, weapon_team_mask, "auto_turret,r,s", get_score_curve_index(level.spawnsystem.auto_turret_influencer_score_curve));
   return influencerid;
 }
@@ -429,7 +427,7 @@ create_pegasus_influencer(origin, team) {
 }
 
 create_map_placed_influencers() {
-  staticinfluencerents = getentarray("mp_uspawn_influencer", "classname");
+  staticinfluencerents = getEntArray("mp_uspawn_influencer", "classname");
 
   for(i = 0; i < staticinfluencerents.size; i++) {
     staticinfluencerent = staticinfluencerents[i];
@@ -467,7 +465,7 @@ create_map_placed_influencer(influencer_entity, optional_score_override) {
           else
             score = influencer_entity.script_score;
 
-          influencer_id = addcylinderinfluencer(level.spawnsystem.einfluencer_type_game_mode, influencer_entity.origin, anglestoforward(influencer_entity.angles), anglestoup(influencer_entity.angles), influencer_entity.radius, influencer_entity.height, score, getteammask(influencer_entity.script_team), "*map_defined", get_score_curve_index(influencer_entity.script_score_curve));
+          influencer_id = addcylinderinfluencer(level.spawnsystem.einfluencer_type_game_mode, influencer_entity.origin, anglesToForward(influencer_entity.angles), anglestoup(influencer_entity.angles), influencer_entity.radius, influencer_entity.height, score, getteammask(influencer_entity.script_team), "*map_defined", get_score_curve_index(influencer_entity.script_score_curve));
         } else {
           assertmsg("Radiant-placed cylinder spawn influencers require 'radius' and 'height' parameters");
 
@@ -618,8 +616,7 @@ get_player_spawning_dvars(reset_dvars) {
   setspawnpointrandomvariation(ss.randomness_range);
 }
 
-level_use_unified_spawning(use) {
-}
+level_use_unified_spawning(use) {}
 
 onspawnplayer_unified(predictedspawn) {
   if(!isDefined(predictedspawn))
@@ -732,7 +729,7 @@ gatherspawnentities(player_team) {
     return level.unified_spawn_points[player_team];
 
   spawn_entities_s = spawn_array_struct();
-  spawn_entities_s.a = getentarray("mp_uspawn_point", "classname");
+  spawn_entities_s.a = getEntArray("mp_uspawn_point", "classname");
 
   if(!isDefined(spawn_entities_s.a))
     spawn_entities_s.a = [];

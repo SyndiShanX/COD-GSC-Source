@@ -19,7 +19,6 @@
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_utility_zstandard;
 #include scripts\zm_common\zm_zonemgr;
-
 #namespace zm_orange_zones;
 
 main() {
@@ -92,31 +91,31 @@ zone_init() {
   zm_zonemgr::add_adjacent_zone("artifact_storage", "forecastle", "artifact_storage_to_forecastle", 0);
   zm_zonemgr::add_adjacent_zone("hidden_path", "cargo_hold", "hidden_path_open", 0);
   zm_zonemgr::add_adjacent_zone("hidden_path", "beach", "hidden_path_open", 1);
-  zm_zonemgr::add_adjacent_zone("main_entrance", "security_lobby", #"facility_available", 0);
+  zm_zonemgr::add_adjacent_zone("main_entrance", "security_lobby", # "facility_available", 0);
   zm_zonemgr::add_adjacent_zone("security_lobby", "geological_processing", "geological_processing_doors", 0);
   zm_zonemgr::add_adjacent_zone("security_lobby", "decontamination", "decontamination_doors", 0);
   zm_zonemgr::add_adjacent_zone("decontamination", "upper_catwalk", "decontamination_doors", 0);
   zm_zonemgr::add_adjacent_zone("geological_processing", "upper_catwalk", "geological_processing_doors", 0);
   zm_zonemgr::add_adjacent_zone("upper_catwalk", "human_infusion", "upper_catwalk_to_human_infusion", 0);
   zm_zonemgr::add_adjacent_zone("upper_catwalk", "specimen_storage", "specimen_storage_doors", 0);
-  zm_zonemgr::add_adjacent_zone("specimen_storage", "loading_platform", #"facility_available", 0);
-  zm_zonemgr::add_adjacent_zone("sunken_path", "artifact_storage", #"hash_6f7fd3d4d070db87", 0);
+  zm_zonemgr::add_adjacent_zone("specimen_storage", "loading_platform", # "facility_available", 0);
+  zm_zonemgr::add_adjacent_zone("sunken_path", "artifact_storage", # "hash_6f7fd3d4d070db87", 0);
 
   if(zm_custom::function_901b751c(#"zmpowerdoorstate") == 2) {
     zm_zonemgr::add_adjacent_zone("lagoon", "sunken_path", "frozen_crevasse_open", 0);
-    zm_zonemgr::add_adjacent_zone("lagoon", "sunken_path", #"hash_6f7fd3d4d070db87", 0);
+    zm_zonemgr::add_adjacent_zone("lagoon", "sunken_path", # "hash_6f7fd3d4d070db87", 0);
     zm_zonemgr::add_adjacent_zone("lagoon", "sunken_path", "docks_to_boathouse", 0);
-    zm_zonemgr::add_adjacent_zone("main_entrance", "outer_walkway", #"facility_available", 0);
-    zm_zonemgr::add_adjacent_zone("outer_walkway", "loading_platform", #"facility_available", 0);
+    zm_zonemgr::add_adjacent_zone("main_entrance", "outer_walkway", # "facility_available", 0);
+    zm_zonemgr::add_adjacent_zone("outer_walkway", "loading_platform", # "facility_available", 0);
     zm_zonemgr::add_adjacent_zone("beach", "lighthouse_cove", "frozen_crevasse_open", 0);
     zm_zonemgr::add_adjacent_zone("beach", "lighthouse_cove", "beach_to_lighthouse_approach", 0);
     zm_zonemgr::add_adjacent_zone("beach", "lighthouse_cove", "beach_to_gangway", 0);
     zm_zonemgr::add_adjacent_zone("beach", "lighthouse_cove", "docks_to_boathouse", 0);
   } else {
-    zm_zonemgr::add_adjacent_zone("lagoon", "sunken_path", #"hash_48e7d63b38c5e2da", 0);
-    zm_zonemgr::add_adjacent_zone("main_entrance", "outer_walkway", #"hash_52d967f4fc8b12fc", 0);
-    zm_zonemgr::add_adjacent_zone("outer_walkway", "loading_platform", #"hash_52d967f4fc8b12fc", 0);
-    zm_zonemgr::add_adjacent_zone("beach", "lighthouse_cove", #"hash_38c97197db36afb7", 0);
+    zm_zonemgr::add_adjacent_zone("lagoon", "sunken_path", # "hash_48e7d63b38c5e2da", 0);
+    zm_zonemgr::add_adjacent_zone("main_entrance", "outer_walkway", # "hash_52d967f4fc8b12fc", 0);
+    zm_zonemgr::add_adjacent_zone("outer_walkway", "loading_platform", # "hash_52d967f4fc8b12fc", 0);
+    zm_zonemgr::add_adjacent_zone("beach", "lighthouse_cove", # "hash_38c97197db36afb7", 0);
   }
 
   level.custom_dog_target_validity_check = &function_502f97fa;
@@ -154,7 +153,7 @@ function_734d8b08() {
 }
 
 function_3b77181c(b_enable = 1) {
-  level.zones[#"ice_floe"].is_enabled = b_enable;
+  level.zones[# "ice_floe"].is_enabled = b_enable;
 }
 
 function_49054104() {
@@ -254,7 +253,7 @@ function_94b7a4bd(str_zone) {
   return 0;
 }
 
-private function_502f97fa() {
+function_502f97fa() {
   if(!isDefined(self.favoriteenemy) || isDefined(self.favoriteenemy) && self function_8a80437(self.favoriteenemy) !== 1) {
     a_valid_targets = [];
 
@@ -305,10 +304,10 @@ private function_502f97fa() {
   }
 }
 
-private function_8a80437(target) {
+function_8a80437(target) {
   result = 1;
 
-  if(isDefined(self) && isDefined(target) && isDefined(self.archetype) && self.archetype == #"zombie_dog") {
+  if(isDefined(self) && isDefined(target) && isDefined(self.archetype) && self.archetype == # "zombie_dog") {
     var_3eb6a47a = target function_cbaec34a();
     var_970d35d = self function_8355a4a8();
 
@@ -334,7 +333,7 @@ function_8e0b371() {
   while(true) {
     if(isalive(self)) {
       str_location = function_ab7f70b9(self);
-      self zm_hud::function_29780fb5(isDefined(str_location) ? str_location : #"");
+      self zm_hud::function_29780fb5(isDefined(str_location) ? str_location : # "");
     } else {
       self zm_hud::function_29780fb5(#"");
     }
@@ -353,111 +352,111 @@ function_ab7f70b9(e_player, str_zone) {
   }
 
   switch (str_zone) {
-    case #"docks_1":
-    case #"docks_2":
-      str_display = #"hash_99011c41f3d5380";
+    case # "docks_1":
+    case # "docks_2":
+      str_display = # "hash_99011c41f3d5380";
       break;
-    case #"boathouse":
-      str_display = #"hash_6b2f9edfc77ea9b2";
+    case # "boathouse":
+      str_display = # "hash_6b2f9edfc77ea9b2";
       break;
-    case #"frozen_crevasse":
-      str_display = #"hash_1e6b498a976cdcb5";
+    case # "frozen_crevasse":
+      str_display = # "hash_1e6b498a976cdcb5";
       break;
-    case #"ice_grotto":
-      str_display = #"hash_3461ddd73c20a747";
+    case # "ice_grotto":
+      str_display = # "hash_3461ddd73c20a747";
       break;
-    case #"lighthouse_annex":
-      str_display = #"hash_43a7944f79cf9bf1";
+    case # "lighthouse_annex":
+      str_display = # "hash_43a7944f79cf9bf1";
       break;
-    case #"lagoon":
-      str_display = #"hash_381e2912fb0376dc";
+    case # "lagoon":
+      str_display = # "hash_381e2912fb0376dc";
       break;
-    case #"lighthouse_cove":
-      str_display = #"hash_2fb0927a65d8a9e";
+    case # "lighthouse_cove":
+      str_display = # "hash_2fb0927a65d8a9e";
       break;
-    case #"lighthouse_station":
-      str_display = #"hash_1424b8bac646249f";
+    case # "lighthouse_station":
+      str_display = # "hash_1424b8bac646249f";
       break;
-    case #"lighthouse_level_1":
-      str_display = #"hash_7957c402b1b2ef31";
+    case # "lighthouse_level_1":
+      str_display = # "hash_7957c402b1b2ef31";
       break;
-    case #"lighthouse_level_2":
-      str_display = #"hash_7957c102b1b2ea18";
+    case # "lighthouse_level_2":
+      str_display = # "hash_7957c102b1b2ea18";
       break;
-    case #"lighthouse_level_3":
-      str_display = #"hash_7957c202b1b2ebcb";
+    case # "lighthouse_level_3":
+      str_display = # "hash_7957c202b1b2ebcb";
       break;
-    case #"lighthouse_level_4":
-      str_display = #"hash_7957c702b1b2f44a";
+    case # "lighthouse_level_4":
+      str_display = # "hash_7957c702b1b2f44a";
       break;
-    case #"lighthouse_approach":
-      str_display = #"hash_39b4e46fd4bebad5";
+    case # "lighthouse_approach":
+      str_display = # "hash_39b4e46fd4bebad5";
       break;
-    case #"beach":
-      str_display = #"hash_75f05448c75c06f";
+    case # "beach":
+      str_display = # "hash_75f05448c75c06f";
       break;
-    case #"hidden_path":
-      str_display = #"hash_3a98581b802c0296";
+    case # "hidden_path":
+      str_display = # "hash_3a98581b802c0296";
       break;
-    case #"gangway":
-      str_display = #"hash_1797071bcd3e6fe6";
+    case # "gangway":
+      str_display = # "hash_1797071bcd3e6fe6";
       break;
-    case #"stern":
-      str_display = #"hash_4c328e01a462f48a";
+    case # "stern":
+      str_display = # "hash_4c328e01a462f48a";
       break;
-    case #"navigation":
-      str_display = #"hash_3d82a67e307a0426";
+    case # "navigation":
+      str_display = # "hash_3d82a67e307a0426";
       break;
-    case #"sun_deck":
-      str_display = #"hash_38990c0828e68602";
+    case # "sun_deck":
+      str_display = # "hash_38990c0828e68602";
       break;
-    case #"bridge":
-      str_display = #"hash_5dbcb178cb1573c1";
+    case # "bridge":
+      str_display = # "hash_5dbcb178cb1573c1";
       break;
-    case #"cargo_hold":
-      str_display = #"hash_335d7ee067ac0e68";
+    case # "cargo_hold":
+      str_display = # "hash_335d7ee067ac0e68";
       break;
-    case #"artifact_storage":
-      str_display = #"hash_63f7af429c316620";
+    case # "artifact_storage":
+      str_display = # "hash_63f7af429c316620";
       break;
-    case #"main_deck":
-      str_display = #"hash_75d26f96a738d2a3";
+    case # "main_deck":
+      str_display = # "hash_75d26f96a738d2a3";
       break;
-    case #"forecastle":
-      str_display = #"hash_3befc74a37bbeb9e";
+    case # "forecastle":
+      str_display = # "hash_3befc74a37bbeb9e";
       break;
-    case #"main_entrance":
-      str_display = #"hash_520e403cdf1ae8";
+    case # "main_entrance":
+      str_display = # "hash_520e403cdf1ae8";
       break;
-    case #"security_lobby":
-      str_display = #"hash_19a2493217019135";
+    case # "security_lobby":
+      str_display = # "hash_19a2493217019135";
       break;
-    case #"geological_processing":
-      str_display = #"hash_21450c4a4a6646d6";
+    case # "geological_processing":
+      str_display = # "hash_21450c4a4a6646d6";
       break;
-    case #"upper_catwalk":
-      str_display = #"hash_65457ae6fbfe6c32";
+    case # "upper_catwalk":
+      str_display = # "hash_65457ae6fbfe6c32";
       break;
-    case #"human_infusion":
-      str_display = #"hash_46ef5a594e42c371";
+    case # "human_infusion":
+      str_display = # "hash_46ef5a594e42c371";
       break;
-    case #"decontamination":
-      str_display = #"hash_6571eafdcddb13ab";
+    case # "decontamination":
+      str_display = # "hash_6571eafdcddb13ab";
       break;
-    case #"specimen_storage":
-      str_display = #"hash_12750e3f1d3659e4";
+    case # "specimen_storage":
+      str_display = # "hash_12750e3f1d3659e4";
       break;
-    case #"loading_platform":
-      str_display = #"hash_4f2b74b3fea599ba";
+    case # "loading_platform":
+      str_display = # "hash_4f2b74b3fea599ba";
       break;
-    case #"outer_walkway":
-      str_display = #"hash_778497a569854310";
+    case # "outer_walkway":
+      str_display = # "hash_778497a569854310";
       break;
-    case #"ice_floe":
-      str_display = #"hash_550cd5295ec40e4a";
+    case # "ice_floe":
+      str_display = # "hash_550cd5295ec40e4a";
       break;
-    case #"sunken_path":
-      str_display = #"hash_18aaabdeba54214a";
+    case # "sunken_path":
+      str_display = # "hash_18aaabdeba54214a";
       break;
     default:
       str_display = undefined;
@@ -468,21 +467,21 @@ function_ab7f70b9(e_player, str_zone) {
 }
 
 function_17ac86f7() {
-  self thread zm_audio::function_713192b1(#"hash_6b2f9edfc77ea9b2", #"boathouse");
-  self thread zm_audio::function_713192b1(#"hash_2fb0927a65d8a9e", #"lighthouse_cove");
-  self thread zm_audio::function_713192b1(#"hash_75f05448c75c06f", #"beach");
-  self thread zm_audio::function_713192b1(#"hash_4c328e01a462f48a", #"ship_stern");
-  self thread zm_audio::function_713192b1(#"hash_5dbcb178cb1573c1", #"ship_bridge");
-  self thread zm_audio::function_713192b1(#"hash_38990c0828e68602", #"ship_bridge");
-  self thread zm_audio::function_713192b1(#"hash_75d26f96a738d2a3", #"ship_main");
-  self thread zm_audio::function_713192b1(#"hash_335d7ee067ac0e68", #"ship_cargo");
-  self thread zm_audio::function_713192b1(#"hash_520e403cdf1ae8", #"facility_main");
-  self thread zm_audio::function_713192b1(#"hash_12750e3f1d3659e4", #"facility_specimen");
-  self thread zm_audio::function_713192b1(#"hash_6571eafdcddb13ab", #"hash_2781f0de96fa6e4e");
-  self thread zm_audio::function_713192b1(#"hash_46ef5a594e42c371", #"facility_infusion");
-  self thread zm_audio::function_713192b1(#"hash_65457ae6fbfe6c32", #"facility_infusion");
-  self thread zm_audio::function_713192b1(#"hash_21450c4a4a6646d6", #"facility_geological");
-  self thread function_f7a190a8(undefined, 15, #"hash_99011c41f3d5380", #"docks");
+  self thread zm_audio::function_713192b1(#"hash_6b2f9edfc77ea9b2", # "boathouse");
+  self thread zm_audio::function_713192b1(#"hash_2fb0927a65d8a9e", # "lighthouse_cove");
+  self thread zm_audio::function_713192b1(#"hash_75f05448c75c06f", # "beach");
+  self thread zm_audio::function_713192b1(#"hash_4c328e01a462f48a", # "ship_stern");
+  self thread zm_audio::function_713192b1(#"hash_5dbcb178cb1573c1", # "ship_bridge");
+  self thread zm_audio::function_713192b1(#"hash_38990c0828e68602", # "ship_bridge");
+  self thread zm_audio::function_713192b1(#"hash_75d26f96a738d2a3", # "ship_main");
+  self thread zm_audio::function_713192b1(#"hash_335d7ee067ac0e68", # "ship_cargo");
+  self thread zm_audio::function_713192b1(#"hash_520e403cdf1ae8", # "facility_main");
+  self thread zm_audio::function_713192b1(#"hash_12750e3f1d3659e4", # "facility_specimen");
+  self thread zm_audio::function_713192b1(#"hash_6571eafdcddb13ab", # "hash_2781f0de96fa6e4e");
+  self thread zm_audio::function_713192b1(#"hash_46ef5a594e42c371", # "facility_infusion");
+  self thread zm_audio::function_713192b1(#"hash_65457ae6fbfe6c32", # "facility_infusion");
+  self thread zm_audio::function_713192b1(#"hash_21450c4a4a6646d6", # "facility_geological");
+  self thread function_f7a190a8(undefined, 15, # "hash_99011c41f3d5380", # "docks");
 }
 
 function_f7a190a8(str_wait_flag, var_ab660f9a, str_location, var_39acfdda) {
@@ -557,7 +556,7 @@ function_58db1b78() {
     foreach(vol_ext in var_4d44c98e) {
       foreach(player in getplayers()) {
         if(player istouching(vol_ext)) {
-          b_played = player zm_audio::create_and_play_dialog(#"location_enter", #"lighthouse_ext");
+          b_played = player zm_audio::create_and_play_dialog(#"location_enter", # "lighthouse_ext");
 
           if(b_played) {
             return;

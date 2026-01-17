@@ -5,16 +5,16 @@
 ********************************/
 
 setparent(var_0) {
-  if(isdefined(self.parent) && self.parent == var_0) {
+  if(isDefined(self.parent) && self.parent == var_0) {
     return;
   }
-  if(isdefined(self.parent))
+  if(isDefined(self.parent))
     self.parent removechild(self);
 
   self.parent = var_0;
   self.parent addchild(self);
 
-  if(isdefined(self.point))
+  if(isDefined(self.point))
     setpoint(self.point, self.relativepoint, self.xoffset, self.yoffset);
   else
     setpoint("TOPLEFT");
@@ -25,14 +25,14 @@ getparent() {
 }
 
 removedestroyedchildren() {
-  if(isdefined(self.childchecktime) && self.childchecktime == gettime()) {
+  if(isDefined(self.childchecktime) && self.childchecktime == gettime()) {
     return;
   }
   self.childchecktime = gettime();
   var_0 = [];
 
   foreach(var_3, var_2 in self.children) {
-    if(!isdefined(var_2)) {
+    if(!isDefined(var_2)) {
       continue;
     }
     var_2.index = var_0.size;
@@ -61,7 +61,7 @@ removechild(var_0) {
 }
 
 setpoint(var_0, var_1, var_2, var_3, var_4) {
-  if(!isdefined(var_4))
+  if(!isDefined(var_4))
     var_4 = 0;
 
   var_5 = getparent();
@@ -69,12 +69,12 @@ setpoint(var_0, var_1, var_2, var_3, var_4) {
   if(var_4)
     self moveovertime(var_4);
 
-  if(!isdefined(var_2))
+  if(!isDefined(var_2))
     var_2 = 0;
 
   self.xoffset = var_2;
 
-  if(!isdefined(var_3))
+  if(!isDefined(var_3))
     var_3 = 0;
 
   self.yoffset = var_3;
@@ -94,7 +94,7 @@ setpoint(var_0, var_1, var_2, var_3, var_4) {
   if(issubstr(var_0, "RIGHT"))
     self.alignx = "right";
 
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     var_1 = var_0;
 
   self.relativepoint = var_1;
@@ -188,7 +188,7 @@ setpointbar(var_0, var_1, var_2, var_3) {
   else
     self.bar.x = self.bar.offset_x + self.x - int((self.width - self.xpadding * 2) / 2);
 
-  if(isdefined(self.progress_bg_distort)) {
+  if(isDefined(self.progress_bg_distort)) {
     self.progress_bg_distort.x = self.x;
     self.progress_bg_distort.y = self.y;
     self.progress_bg_distort.horzalign = self.horzalign;
@@ -211,9 +211,9 @@ updatebar(var_0) {
 }
 
 hidebar(var_0) {
-  var_0 = common_scripts\utility::ter_op(isdefined(var_0), var_0, 1);
+  var_0 = common_scripts\utility::ter_op(isDefined(var_0), var_0, 1);
 
-  if(var_0 || !isdefined(self.orig_alpha) || !isdefined(self.bar.orig_alpha)) {
+  if(var_0 || !isDefined(self.orig_alpha) || !isDefined(self.bar.orig_alpha)) {
     self.orig_alpha = self.alpha;
     self.bar.orig_alpha = self.bar.alpha;
   }
@@ -323,7 +323,7 @@ createicon_hudelem(var_0, var_1, var_2, var_3) {
   var_0.children = [];
   var_0 setparent(level.uiparent);
 
-  if(isdefined(var_1))
+  if(isDefined(var_1))
     var_0 setshader(var_1, var_2, var_3);
 
   return var_0;
@@ -376,16 +376,16 @@ h1_createbar(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 }
 
 createbar(var_0, var_1, var_2, var_3, var_4) {
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     var_0 = "white";
 
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     var_1 = "black";
 
-  if(!isdefined(var_2))
+  if(!isDefined(var_2))
     var_2 = 100;
 
-  if(!isdefined(var_3))
+  if(!isDefined(var_3))
     var_3 = 9;
 
   var_5 = newhudelem();
@@ -396,7 +396,7 @@ createbar(var_0, var_1, var_2, var_3, var_4) {
   var_5.sort = -1;
   var_5 setshader(var_0, var_2 - 2, var_3 - 2);
 
-  if(isdefined(var_4)) {
+  if(isDefined(var_4)) {
     var_5.flashfrac = var_4;
     var_5 thread flashthread();
   }
@@ -423,24 +423,24 @@ createbar(var_0, var_1, var_2, var_3, var_4) {
 }
 
 createclientprogressbar(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
-  var_0 = common_scripts\utility::ter_op(isdefined(var_0), var_0, level.player);
-  var_1 = common_scripts\utility::ter_op(isdefined(var_1), var_1, 90);
-  var_2 = common_scripts\utility::ter_op(isdefined(var_2), var_2, "white");
-  var_3 = common_scripts\utility::ter_op(isdefined(var_3), var_3, "black");
-  var_4 = common_scripts\utility::ter_op(isdefined(var_4), var_4, 100);
-  var_5 = common_scripts\utility::ter_op(isdefined(var_5), var_5, 9);
-  var_6 = common_scripts\utility::ter_op(isdefined(var_6), var_6, 2);
-  var_7 = common_scripts\utility::ter_op(isdefined(var_7), var_7, 2);
+  var_0 = common_scripts\utility::ter_op(isDefined(var_0), var_0, level.player);
+  var_1 = common_scripts\utility::ter_op(isDefined(var_1), var_1, 90);
+  var_2 = common_scripts\utility::ter_op(isDefined(var_2), var_2, "white");
+  var_3 = common_scripts\utility::ter_op(isDefined(var_3), var_3, "black");
+  var_4 = common_scripts\utility::ter_op(isDefined(var_4), var_4, 100);
+  var_5 = common_scripts\utility::ter_op(isDefined(var_5), var_5, 9);
+  var_6 = common_scripts\utility::ter_op(isDefined(var_6), var_6, 2);
+  var_7 = common_scripts\utility::ter_op(isDefined(var_7), var_7, 2);
   var_8 = var_0 createclientbar(var_2, var_3, var_4, var_5, undefined, var_6, var_7);
   var_8 setpoint("CENTER", undefined, 0, var_1);
   return var_8;
 }
 
 createclientbar(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  if(!isdefined(var_5))
+  if(!isDefined(var_5))
     var_5 = 2;
 
-  if(!isdefined(var_6))
+  if(!isDefined(var_6))
     var_6 = 2;
 
   var_7 = newclienthudelem(self);
@@ -451,7 +451,7 @@ createclientbar(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7.sort = -1;
   var_7 setshader(var_0, var_2 - var_5 * 2, var_3 - var_6 * 2);
 
-  if(isdefined(var_4)) {
+  if(isDefined(var_4)) {
     var_7.flashfrac = var_4;
     var_7 thread flashthread();
   }
@@ -480,12 +480,12 @@ setflashfrac(var_0) {
 }
 
 fade_over_time(var_0, var_1) {
-  if(isdefined(var_1) && var_1 > 0)
+  if(isDefined(var_1) && var_1 > 0)
     self fadeovertime(var_1);
 
   self.alpha = var_0;
 
-  if(isdefined(var_1) && var_1 > 0)
+  if(isDefined(var_1) && var_1 > 0)
     wait(var_1);
 }
 
@@ -493,7 +493,7 @@ flashthread() {
   self endon("death");
   self.alpha = 1;
 
-  for (;;) {
+  for(;;) {
     if(self.frac >= self.flashfrac) {
       self fadeovertime(0.3);
       self.alpha = 0.2;
@@ -510,20 +510,20 @@ flashthread() {
 }
 
 destroyelem() {
-  if(isdefined(self.children) && self.children.size) {
+  if(isDefined(self.children) && self.children.size) {
     var_0 = [];
 
-    for (var_1 = 0; var_1 < self.children.size; var_1++)
+    for(var_1 = 0; var_1 < self.children.size; var_1++)
       var_0[var_1] = self.children[var_1];
 
-    for (var_1 = 0; var_1 < var_0.size; var_1++)
+    for(var_1 = 0; var_1 < var_0.size; var_1++)
       var_0[var_1] setparent(getparent());
   }
 
-  if(isdefined(self.elemtype) && self.elemtype == "bar") {
+  if(isDefined(self.elemtype) && self.elemtype == "bar") {
     self.bar destroy();
 
-    if(isdefined(self.progress_bg_distort))
+    if(isDefined(self.progress_bg_distort))
       self.progress_bg_distort destroy();
   }
 
@@ -548,14 +548,14 @@ setsize(var_0, var_1) {
 }
 
 updatechildren(var_0) {
-  for (var_1 = 0; var_1 < self.children.size; var_1++) {
+  for(var_1 = 0; var_1 < self.children.size; var_1++) {
     var_2 = self.children[var_1];
     var_2 setpoint(var_2.point, var_2.relativepoint, var_2.xoffset, var_2.yoffset, var_0);
   }
 }
 
 stance_carry_icon_enable(var_0) {
-  if(isdefined(var_0) && var_0 == 0) {
+  if(isDefined(var_0) && var_0 == 0) {
     stance_carry_icon_disable();
     return;
   }
@@ -586,13 +586,13 @@ create_mantle() {
 add_hint_background(var_0, var_1, var_2) {
   clear_hint_background();
 
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     var_1 = 0.0;
 
-  if(!isdefined(var_2))
+  if(!isDefined(var_2))
     var_2 = 0.0;
 
-  if(isdefined(var_0)) {
+  if(isDefined(var_0)) {
     var_3 = 121;
     var_4 = 38;
     level.hintbackground = createicon("h1_hud_tutorial_blur", 560, 39);
@@ -637,21 +637,21 @@ add_hint_background(var_0, var_1, var_2) {
 }
 
 fade_hint_background(var_0) {
-  if(isdefined(level.hintbackground)) {
+  if(isDefined(level.hintbackground)) {
     if(var_0 > 0)
       level.hintbackground fadeovertime(var_0);
 
     level.hintbackground.alpha = 0;
   }
 
-  if(isdefined(level.hintbordertop)) {
+  if(isDefined(level.hintbordertop)) {
     if(var_0 > 0)
       level.hintbordertop fadeovertime(var_0);
 
     level.hintbordertop.alpha = 0;
   }
 
-  if(isdefined(level.hintborderbottom)) {
+  if(isDefined(level.hintborderbottom)) {
     if(var_0 > 0)
       level.hintborderbottom fadeovertime(var_0);
 
@@ -660,25 +660,25 @@ fade_hint_background(var_0) {
 }
 
 clear_hint_background() {
-  if(isdefined(level.hintbackground))
+  if(isDefined(level.hintbackground))
     level.hintbackground destroyelem();
 
-  if(isdefined(level.hintbordertop))
+  if(isDefined(level.hintbordertop))
     level.hintbordertop destroyelem();
 
-  if(isdefined(level.hintborderbottom))
+  if(isDefined(level.hintborderbottom))
     level.hintborderbottom destroyelem();
 }
 
 get_stats_display_hud(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(!isdefined(var_3))
+  if(!isDefined(var_3))
     var_3 = 0;
 
-  var_6 = common_scripts\utility::ter_op(!isdefined(var_0) || var_3, -225, var_0);
-  var_7 = common_scripts\utility::ter_op(!isdefined(var_1), 10.5, var_1);
-  var_4 = common_scripts\utility::ter_op(!isdefined(var_4), 1.6, var_4);
+  var_6 = common_scripts\utility::ter_op(!isDefined(var_0) || var_3, -225, var_0);
+  var_7 = common_scripts\utility::ter_op(!isDefined(var_1), 10.5, var_1);
+  var_4 = common_scripts\utility::ter_op(!isDefined(var_4), 1.6, var_4);
 
-  if(isdefined(var_2))
+  if(isDefined(var_2))
     var_8 = newclienthudelem(var_2);
   else
     var_8 = newhudelem();
@@ -707,7 +707,7 @@ get_stats_display_hud(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_8.hidewheninmenu = 1;
   var_8.hidewhendead = 1;
 
-  if(isdefined(var_5))
+  if(isDefined(var_5))
     var_8 settext(var_5);
 
   return var_8;
@@ -716,7 +716,7 @@ get_stats_display_hud(var_0, var_1, var_2, var_3, var_4, var_5) {
 add_countdown_flourish_flash_timer(var_0, var_1, var_2, var_3) {
   level endon("kill_timer_flourish");
 
-  for (;;) {
+  for(;;) {
     var_0.color = var_2;
     wait(var_1);
     var_0.color = var_3;
@@ -796,7 +796,7 @@ add_countdown_flourish(var_0, var_1, var_2, var_3) {
   thread add_countdown_flourish_flash_timer(var_3, var_11, var_5, var_12);
   var_18 = var_3.y;
 
-  for (;;) {
+  for(;;) {
     var_15.alpha = 1;
     var_15 scaleovertime(0.05, var_6, var_4);
     var_3.y = var_18 + var_10;
@@ -811,13 +811,13 @@ add_countdown_flourish(var_0, var_1, var_2, var_3) {
 }
 
 get_countdown_hud(var_0, var_1, var_2, var_3, var_4) {
-  if(!isdefined(var_3))
+  if(!isDefined(var_3))
     var_3 = 0;
 
-  var_5 = common_scripts\utility::ter_op(!isdefined(var_0) || var_3, 0, var_0);
-  var_6 = common_scripts\utility::ter_op(!isdefined(var_1), 10.5, var_1);
+  var_5 = common_scripts\utility::ter_op(!isDefined(var_0) || var_3, 0, var_0);
+  var_6 = common_scripts\utility::ter_op(!isDefined(var_1), 10.5, var_1);
 
-  if(isdefined(var_2))
+  if(isDefined(var_2))
     var_7 = newclienthudelem(var_2);
   else
     var_7 = newhudelem();
@@ -892,7 +892,7 @@ get_countdown_hud(var_0, var_1, var_2, var_3, var_4) {
   var_7.border.hidewheninmenu = 1;
   var_7.border.hidewhendead = 1;
 
-  if(isdefined(var_4))
+  if(isDefined(var_4))
     thread add_countdown_flourish(var_5, var_6, var_4, var_7);
 
   return var_7;
@@ -901,30 +901,30 @@ get_countdown_hud(var_0, var_1, var_2, var_3, var_4) {
 destroy_countdown_hud(var_0) {
   level notify("kill_timer_flourish");
 
-  if(!isdefined(var_0)) {
+  if(!isDefined(var_0)) {
     return;
   }
-  if(isdefined(var_0.text))
+  if(isDefined(var_0.text))
     var_0.text destroy();
 
-  if(isdefined(var_0.blur))
+  if(isDefined(var_0.blur))
     var_0.blur destroy();
 
-  if(isdefined(var_0.border))
+  if(isDefined(var_0.border))
     var_0.border destroy();
 
   var_0 destroy();
 }
 
 get_download_state_hud(var_0, var_1, var_2, var_3) {
-  if(!isdefined(var_3))
+  if(!isDefined(var_3))
     var_3 = 0;
 
   var_4 = undefined;
 
   if(!level.console)
     var_4 = -250;
-  else if(!isdefined(var_0))
+  else if(!isDefined(var_0))
     var_4 = -170;
   else
     var_4 = var_0;
@@ -932,12 +932,12 @@ get_download_state_hud(var_0, var_1, var_2, var_3) {
   if(var_3)
     var_4 = var_0;
 
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     var_5 = 100;
   else
     var_5 = var_1;
 
-  if(isdefined(var_2))
+  if(isDefined(var_2))
     var_6 = newclienthudelem(var_2);
   else
     var_6 = newhudelem();
@@ -960,7 +960,7 @@ get_download_state_hud(var_0, var_1, var_2, var_3) {
 }
 
 create_client_overlay(var_0, var_1, var_2) {
-  if(isdefined(var_2))
+  if(isDefined(var_2))
     var_3 = newclienthudelem(var_2);
   else
     var_3 = newhudelem();
@@ -982,13 +982,13 @@ create_client_overlay_custom_size(var_0, var_1, var_2, var_3, var_4) {
   var_5 = maps\_utility::get_player_from_self();
   var_6 = newclienthudelem(var_5);
 
-  if(!isdefined(var_4))
+  if(!isDefined(var_4))
     var_4 = 1;
 
-  if(!isdefined(var_2))
+  if(!isDefined(var_2))
     var_2 = 0;
 
-  if(!isdefined(var_3))
+  if(!isDefined(var_3))
     var_3 = 0;
 
   var_6.x = var_2;
@@ -1008,7 +1008,7 @@ create_client_overlay_fullscreen(var_0, var_1, var_2, var_3, var_4) {
   var_5 = maps\_utility::get_player_from_self();
   var_6 = newclienthudelem(var_5);
 
-  if(!isdefined(var_4))
+  if(!isDefined(var_4))
     var_4 = 1;
 
   var_6.x = var_2;
@@ -1028,7 +1028,7 @@ fade_in(var_0, var_1) {
   if(level.missionfailed) {
     return;
   }
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     var_0 = 0.3;
 
   var_2 = get_optional_overlay(var_1);
@@ -1038,14 +1038,14 @@ fade_in(var_0, var_1) {
 }
 
 get_optional_overlay(var_0) {
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     var_0 = "black";
 
   return get_overlay(var_0);
 }
 
 fade_out(var_0, var_1) {
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     var_0 = 0.3;
 
   var_2 = get_optional_overlay(var_1);
@@ -1068,10 +1068,10 @@ get_overlay(var_0) {
   else
     var_1 = level.player;
 
-  if(!isdefined(var_1.overlay))
+  if(!isDefined(var_1.overlay))
     var_1.overlay = [];
 
-  if(!isdefined(var_1.overlay[var_0]))
+  if(!isDefined(var_1.overlay[var_0]))
     var_1.overlay[var_0] = create_client_overlay(var_0, 0, var_1);
 
   var_1.overlay[var_0].sort = 0;
@@ -1085,23 +1085,23 @@ display_custom_nameplate(var_0, var_1, var_2) {
 
   var_3 = undefined;
 
-  if(isdefined(var_1))
+  if(isDefined(var_1))
     var_3 = var_1;
-  else if(isdefined(self.name))
+  else if(isDefined(self.name))
     var_3 = self.name;
 
   var_4 = undefined;
 
-  if(isdefined(var_2))
+  if(isDefined(var_2))
     var_4 = var_2;
-  else if(isdefined(self.team))
+  else if(isDefined(self.team))
     var_4 = self.team;
 
   var_5 = undefined;
 
-  for (;;) {
-    if(!isdefined(self) || maps\_utility::ent_flag("kill_custom_nameplate")) {
-      if(isdefined(var_5))
+  for(;;) {
+    if(!isDefined(self) || maps\_utility::ent_flag("kill_custom_nameplate")) {
+      if(isDefined(var_5))
         var_5 destroy();
 
       break;
@@ -1110,9 +1110,9 @@ display_custom_nameplate(var_0, var_1, var_2) {
     if([
         [var_0]
       ]()) {
-      if(!isdefined(var_5))
+      if(!isDefined(var_5))
         var_5 = create_nameplate_hud(var_3, var_4);
-    } else if(isdefined(var_5))
+    } else if(isDefined(var_5))
       var_5 destroy();
 
     wait 0.05;

@@ -25,15 +25,15 @@ function init() {}
 
 function main() {
   cybercom_gadget::registerability(1, 8, 1);
-  level.cybercom.active_camo = spawnstruct();
-  level.cybercom.active_camo._on_flicker = & _on_flicker;
-  level.cybercom.active_camo._on_give = & _on_give;
-  level.cybercom.active_camo._on_take = & _on_take;
-  level.cybercom.active_camo._on_connect = & _on_connect;
-  level.cybercom.active_camo._on = & _on;
-  level.cybercom.active_camo._off = & _off;
+  level.cybercom.active_camo = spawnStruct();
+  level.cybercom.active_camo._on_flicker = &_on_flicker;
+  level.cybercom.active_camo._on_give = &_on_give;
+  level.cybercom.active_camo._on_take = &_on_take;
+  level.cybercom.active_camo._on_connect = &_on_connect;
+  level.cybercom.active_camo._on = &_on;
+  level.cybercom.active_camo._off = &_off;
   level.cybercom.active_cammo_upgraded_weap = getweapon("gadget_active_camo_upgraded");
-  callback::on_disconnect( & _on_disconnect);
+  callback::on_disconnect(&_on_disconnect);
 }
 
 function _on_flicker(slot, weapon) {}
@@ -64,7 +64,7 @@ function _on(slot, weapon) {
   self endon("disconnect");
   self clientfield::set("camo_shader", 1);
   cybercom::function_adc40f11(weapon, 1);
-  self.cybercom.oldignore = isdefined(self.ignoreme) && (self.ignoreme ? 1 : 0);
+  self.cybercom.oldignore = isDefined(self.ignoreme) && (self.ignoreme ? 1 : 0);
   self.ignoreme = 1;
   self.active_camo = 1;
   self playrumbleonentity("tank_rumble");
@@ -75,7 +75,7 @@ function _on(slot, weapon) {
   self thread function_cba091b7(slot, weapon);
   if(isplayer(self)) {
     itemindex = getitemindexfromref("cybercom_camo");
-    if(isdefined(itemindex)) {
+    if(isDefined(itemindex)) {
       self adddstat("ItemStats", itemindex, "stats", "used", "statValue", 1);
     }
   }
@@ -83,14 +83,14 @@ function _on(slot, weapon) {
 
 function _off(slot, weapon) {
   if(getdvarint("tu1_cybercomActiveCamoIgnoreMeFix", 1)) {
-    if(isdefined(self.cybercom.oldignore) && self.cybercom.oldignore && self.ignoreme) {} else {
+    if(isDefined(self.cybercom.oldignore) && self.cybercom.oldignore && self.ignoreme) {} else {
       self.ignoreme = 0;
     }
-  } else if(isdefined(self.cybercom.oldignore)) {
+  } else if(isDefined(self.cybercom.oldignore)) {
     self.ignoreme = self.cybercom.oldignore;
   }
   self.active_camo = undefined;
-  if(isdefined(self.ignoreme) && self.ignoreme) {
+  if(isDefined(self.ignoreme) && self.ignoreme) {
     iprintlnbold("");
   }
   self notify("delete_false_target");
@@ -112,7 +112,7 @@ function function_b4902c73(slot, weapon, waitnote, endnote) {
   self endon(endnote);
   self endon("disconnect");
   self waittill(waitnote);
-  if(self hasweapon(weapon) && isdefined(self.cybercom.activecybercomweapon) && self.cybercom.activecybercomweapon == weapon) {
+  if(self hasweapon(weapon) && isDefined(self.cybercom.activecybercomweapon) && self.cybercom.activecybercomweapon == weapon) {
     self gadgetdeactivate(slot, weapon);
   }
 }
@@ -122,7 +122,7 @@ function private _camo_killreactivateonnotify(slot, note, durationmin = 300, dur
   self endon("disconnect");
   self notify(("_camo_killReActivateOnNotify" + slot) + note);
   self endon(("_camo_killReActivateOnNotify" + slot) + note);
-  while (true) {
+  while(true) {
     self waittill(note, param);
     self notify("kill_active_cammo_reactivate");
   }
@@ -132,7 +132,7 @@ function private _camo_createfalsetarget() {
   self notify("delete_false_target");
   self endon("delete_false_target");
   fakeme = spawn("script_model", self.origin);
-  fakeme setmodel("tag_origin");
+  fakeme setModel("tag_origin");
   fakeme makesentient();
   fakeme.origin = fakeme.origin + vectorscale((0, 0, 1), 30);
   fakeme.team = self.team;
@@ -141,7 +141,7 @@ function private _camo_createfalsetarget() {
   self thread cybercom::deleteentonnote("delete_false_target", fakeme);
   self thread function_c51ef296(fakeme);
   zmin = self.origin[2];
-  while (isdefined(fakeme)) {
+  while(isDefined(fakeme)) {
     fakeme.origin = fakeme.origin + (randomintrange(-50, 50), randomintrange(-50, 50), randomintrange(-5, 5));
     if(fakeme.origin[2] < zmin) {
       fakeme.origin = (fakeme.origin[0], fakeme.origin[1], zmin);
@@ -153,7 +153,7 @@ function private _camo_createfalsetarget() {
 function private function_c51ef296(fakeent) {
   fakeent endon("death");
   self endon("disconnect");
-  while (true) {
+  while(true) {
     self waittill("weapon_fired", projectile);
     fakeent.origin = self.origin;
   }
@@ -164,9 +164,9 @@ function private _active_cammo_reactivate() {
   self endon("_active_cammo_reactivate");
   self endon("active_camo_taken");
   self endon("kill_active_cammo_reactivate");
-  while (true) {
+  while(true) {
     self waittill("gadget_forced_off", slot, weapon);
-    if(isdefined(weapon) && weapon == level.cybercom.active_cammo_upgraded_weap) {
+    if(isDefined(weapon) && weapon == level.cybercom.active_cammo_upgraded_weap) {
       wait(getdvarint("scr_active_camo_melee_escape_duration_SEC", 1));
       if(!self gadgetisactive(slot)) {
         self gadgetactivate(slot, weapon, 0);

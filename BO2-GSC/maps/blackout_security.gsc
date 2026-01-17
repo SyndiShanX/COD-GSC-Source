@@ -143,7 +143,7 @@ multipath_trigger_cleanup(str_trigger_name, str_key) {
 
   trigger_wait(str_trigger_name, str_key);
   wait 0.5;
-  triggers = getentarray(str_trigger_name, str_key);
+  triggers = getEntArray(str_trigger_name, str_key);
 
   foreach(trigger in triggers)
   trigger trigger_off();
@@ -418,7 +418,7 @@ notetrack_server_room_door_guy_torch_fx_stop(m_torch) {
 }
 
 notetrack_fade_to_menendez_section(m_player_body) {
-  level.player playsound("evt_cctv_transition_in");
+  level.player playSound("evt_cctv_transition_in");
   rpc("clientscripts/blackout_amb", "setMenTransSnap");
   screen_fade_out(1);
   wait 2;
@@ -611,8 +611,7 @@ briggs_pip_playbackrate() {
   actor setanim(level.scr_anim[actor.animname]["briggs_pip"], 1, 0, n_playback_rate);
 }
 
-init_doors() {
-}
+init_doors() {}
 
 init_flags() {
   flag_init("start_sensitive_room");

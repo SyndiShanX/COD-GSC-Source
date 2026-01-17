@@ -12,22 +12,22 @@
 #namespace callback;
 
 function callback(event, params) {
-  if(isdefined(level._callbacks) && isdefined(level._callbacks[event])) {
-    for (i = 0; i < level._callbacks[event].size; i++) {
+  if(isDefined(level._callbacks) && isDefined(level._callbacks[event])) {
+    for(i = 0; i < level._callbacks[event].size; i++) {
       callback = level._callbacks[event][i][0];
       obj = level._callbacks[event][i][1];
-      if(!isdefined(callback)) {
+      if(!isDefined(callback)) {
         continue;
       }
-      if(isdefined(obj)) {
-        if(isdefined(params)) {
+      if(isDefined(obj)) {
+        if(isDefined(params)) {
           obj thread[[callback]](self, params);
         } else {
           obj thread[[callback]](self);
         }
         continue;
       }
-      if(isdefined(params)) {
+      if(isDefined(params)) {
         self thread[[callback]](params);
         continue;
       }
@@ -37,19 +37,19 @@ function callback(event, params) {
 }
 
 function add_callback(event, func, obj) {
-  assert(isdefined(event), "");
-  if(!isdefined(level._callbacks) || !isdefined(level._callbacks[event])) {
+  assert(isDefined(event), "");
+  if(!isDefined(level._callbacks) || !isDefined(level._callbacks[event])) {
     level._callbacks[event] = [];
   }
   foreach(callback in level._callbacks[event]) {
     if(callback[0] == func) {
-      if(!isdefined(obj) || callback[1] == obj) {
+      if(!isDefined(obj) || callback[1] == obj) {
         return;
       }
     }
   }
   array::add(level._callbacks[event], array(func, obj), 0);
-  if(isdefined(obj)) {
+  if(isDefined(obj)) {
     obj thread remove_callback_on_death(event, func);
   }
 }
@@ -60,8 +60,8 @@ function remove_callback_on_death(event, func) {
 }
 
 function remove_callback(event, func, obj) {
-  assert(isdefined(event), "");
-  assert(isdefined(level._callbacks[event]), "");
+  assert(isDefined(event), "");
+  assert(isDefined(level._callbacks[event]), "");
   foreach(index, func_group in level._callbacks[event]) {
     if(func_group[0] == func) {
       if(func_group[1] === obj) {
@@ -227,19 +227,19 @@ function codecallback_finalizeinitialization() {
 }
 
 function add_weapon_damage(weapontype, callback) {
-  if(!isdefined(level.weapon_damage_callback_array)) {
+  if(!isDefined(level.weapon_damage_callback_array)) {
     level.weapon_damage_callback_array = [];
   }
   level.weapon_damage_callback_array[weapontype] = callback;
 }
 
 function callback_weapon_damage(eattacker, einflictor, weapon, meansofdeath, damage) {
-  if(isdefined(level.weapon_damage_callback_array)) {
-    if(isdefined(level.weapon_damage_callback_array[weapon])) {
+  if(isDefined(level.weapon_damage_callback_array)) {
+    if(isDefined(level.weapon_damage_callback_array[weapon])) {
       self thread[[level.weapon_damage_callback_array[weapon]]](eattacker, einflictor, weapon, meansofdeath, damage);
       return true;
     }
-    if(isdefined(level.weapon_damage_callback_array[weapon.rootweapon])) {
+    if(isDefined(level.weapon_damage_callback_array[weapon.rootweapon])) {
       self thread[[level.weapon_damage_callback_array[weapon.rootweapon]]](eattacker, einflictor, weapon, meansofdeath, damage);
       return true;
     }
@@ -248,25 +248,23 @@ function callback_weapon_damage(eattacker, einflictor, weapon, meansofdeath, dam
 }
 
 function add_weapon_watcher(callback) {
-  if(!isdefined(level.weapon_watcher_callback_array)) {
+  if(!isDefined(level.weapon_watcher_callback_array)) {
     level.weapon_watcher_callback_array = [];
   }
   array::add(level.weapon_watcher_callback_array, callback);
 }
 
 function callback_weapon_watcher() {
-  if(isdefined(level.weapon_watcher_callback_array)) {
-    for (x = 0; x < level.weapon_watcher_callback_array.size; x++) {
+  if(isDefined(level.weapon_watcher_callback_array)) {
+    for(x = 0; x < level.weapon_watcher_callback_array.size; x++) {
       self[[level.weapon_watcher_callback_array[x]]]();
     }
   }
 }
 
 function codecallback_startgametype() {
-  if(!isdefined(level.gametypestarted) || !level.gametypestarted) {
-    [
-      [level.callbackstartgametype]
-    ]();
+  if(!isDefined(level.gametypestarted) || !level.gametypestarted) {
+    [[level.callbackstartgametype]]();
     level.gametypestarted = 1;
   }
 }
@@ -347,10 +345,8 @@ function codecallback_actorcloned(original) {
 }
 
 function codecallback_vehiclespawned(spawner) {
-  if(isdefined(level.callbackvehiclespawned)) {
-    [
-      [level.callbackvehiclespawned]
-    ](spawner);
+  if(isDefined(level.callbackvehiclespawned)) {
+    [[level.callbackvehiclespawned]](spawner);
   }
 }
 
@@ -381,7 +377,7 @@ function finishcustomtraversallistener() {
 function killedcustomtraversallistener() {
   self endon("custom_traversal_cleanup");
   self waittill("death");
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     self finishtraversal();
     self stopanimscripted();
     self unlink();
@@ -395,7 +391,7 @@ function codecallback_playcustomtraversal(entity, beginparent, endparent, origin
   entity.customtraversestartnode = entity.traversestartnode;
   entity animmode("noclip", 0);
   entity orientmode("face angle", angles[1]);
-  if(isdefined(endparent)) {
+  if(isDefined(endparent)) {
     offset = entity.origin - endparent.origin;
     entity linkto(endparent, "", offset);
   }
@@ -405,20 +401,20 @@ function codecallback_playcustomtraversal(entity, beginparent, endparent, origin
 }
 
 function codecallback_faceeventnotify(notify_msg, ent) {
-  if(isdefined(ent) && isdefined(ent.do_face_anims) && ent.do_face_anims) {
-    if(isdefined(level.face_event_handler) && isdefined(level.face_event_handler.events[notify_msg])) {
+  if(isDefined(ent) && isDefined(ent.do_face_anims) && ent.do_face_anims) {
+    if(isDefined(level.face_event_handler) && isDefined(level.face_event_handler.events[notify_msg])) {
       ent sendfaceevent(level.face_event_handler.events[notify_msg]);
     }
   }
 }
 
 function codecallback_menuresponse(action, arg) {
-  if(!isdefined(level.menuresponsequeue)) {
+  if(!isDefined(level.menuresponsequeue)) {
     level.menuresponsequeue = [];
     level thread menu_response_queue_pump();
   }
   index = level.menuresponsequeue.size;
-  level.menuresponsequeue[index] = spawnstruct();
+  level.menuresponsequeue[index] = spawnStruct();
   level.menuresponsequeue[index].action = action;
   level.menuresponsequeue[index].arg = arg;
   level.menuresponsequeue[index].ent = self;
@@ -426,31 +422,31 @@ function codecallback_menuresponse(action, arg) {
 }
 
 function menu_response_queue_pump() {
-  while (true) {
+  while(true) {
     level waittill("menuresponse_queue");
     do {
       level.menuresponsequeue[0].ent notify("menuresponse", level.menuresponsequeue[0].action, level.menuresponsequeue[0].arg);
       arrayremoveindex(level.menuresponsequeue, 0, 0);
       wait(0.05);
     }
-    while (level.menuresponsequeue.size > 0);
+    while(level.menuresponsequeue.size > 0);
   }
 }
 
 function codecallback_callserverscript(pself, label, param) {
-  if(!isdefined(level._animnotifyfuncs)) {
+  if(!isDefined(level._animnotifyfuncs)) {
     return;
   }
-  if(isdefined(level._animnotifyfuncs[label])) {
+  if(isDefined(level._animnotifyfuncs[label])) {
     pself[[level._animnotifyfuncs[label]]](param);
   }
 }
 
 function codecallback_callserverscriptonlevel(label, param) {
-  if(!isdefined(level._animnotifyfuncs)) {
+  if(!isDefined(level._animnotifyfuncs)) {
     return;
   }
-  if(isdefined(level._animnotifyfuncs[label])) {
+  if(isDefined(level._animnotifyfuncs[label])) {
     level[[level._animnotifyfuncs[label]]](param);
   }
 }
@@ -464,8 +460,8 @@ function codecallback_launchsidemission(str_mapname, str_gametype, int_list_inde
 }
 
 function codecallback_fadeblackscreen(duration, blendtime) {
-  for (i = 0; i < level.players.size; i++) {
-    if(isdefined(level.players[i])) {
+  for(i = 0; i < level.players.size; i++) {
+    if(isDefined(level.players[i])) {
       level.players[i] thread hud::fade_to_black_for_x_sec(0, duration, blendtime, blendtime);
     }
   }
@@ -477,20 +473,20 @@ function codecallback_setactivecybercomability(new_ability) {
 
 function abort_level() {
   println("");
-  level.callbackstartgametype = & callback_void;
-  level.callbackplayerconnect = & callback_void;
-  level.callbackplayerdisconnect = & callback_void;
-  level.callbackplayerdamage = & callback_void;
-  level.callbackplayerkilled = & callback_void;
-  level.callbackplayerlaststand = & callback_void;
-  level.callbackplayermelee = & callback_void;
-  level.callbackactordamage = & callback_void;
-  level.callbackactorkilled = & callback_void;
-  level.callbackvehicledamage = & callback_void;
-  level.callbackvehiclekilled = & callback_void;
-  level.callbackactorspawned = & callback_void;
-  level.callbackbotentereduseredge = & callback_void;
-  if(isdefined(level._gametype_default)) {
+  level.callbackstartgametype = &callback_void;
+  level.callbackplayerconnect = &callback_void;
+  level.callbackplayerdisconnect = &callback_void;
+  level.callbackplayerdamage = &callback_void;
+  level.callbackplayerkilled = &callback_void;
+  level.callbackplayerlaststand = &callback_void;
+  level.callbackplayermelee = &callback_void;
+  level.callbackactordamage = &callback_void;
+  level.callbackactorkilled = &callback_void;
+  level.callbackvehicledamage = &callback_void;
+  level.callbackvehiclekilled = &callback_void;
+  level.callbackactorspawned = &callback_void;
+  level.callbackbotentereduseredge = &callback_void;
+  if(isDefined(level._gametype_default)) {
     setdvar("g_gametype", level._gametype_default);
   }
   exitlevel(0);
@@ -506,7 +502,7 @@ function codecallback_botentereduseredge(startnode, endnode) {
 
 function codecallback_decoration(name) {
   a_decorations = self getdecorations(1);
-  if(!isdefined(a_decorations)) {
+  if(!isDefined(a_decorations)) {
     return;
   }
   if(a_decorations.size == 12) {

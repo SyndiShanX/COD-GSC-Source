@@ -57,17 +57,17 @@ setEntityHeadIcon(team, offset) {
     self.entityHeadIconOffset = offset;
   else
     self.entityHeadIconOffset = (0, 0, 0);
-  for (i = 0; i < self.entityHeadIcons.size; i++)
+  for(i = 0; i < self.entityHeadIcons.size; i++)
     if(isDefined(self.entityHeadIcons[i]))
       self.entityHeadIcons[i] destroy();
   self.entityHeadIcons = [];
   self notify("kill_entity_headicon_thread");
   if(team != "none") {
-    for (i = 0; i < level.playersViewingHeadIcons.size; i++)
+    for(i = 0; i < level.playersViewingHeadIcons.size; i++)
       level.playersViewingHeadIcons[i] updateEntityHeadIcon(self);
   }
   newarray = [];
-  for (i = 0; i < level.entitiesWithHeadIcons.size; i++) {
+  for(i = 0; i < level.entitiesWithHeadIcons.size; i++) {
     if(level.entitiesWithHeadIcons[i] != self)
       newarray[newarray.size] = level.entitiesWithHeadIcons[i];
   }
@@ -80,12 +80,12 @@ setEntityHeadIcon(team, offset) {
 showAllEntityHeadIcons() {
   if(!isDefined(self.entityHeadIcons))
     self.entityHeadIcons = [];
-  for (i = 0; i < level.entitiesWithHeadIcons.size; i++) {
+  for(i = 0; i < level.entitiesWithHeadIcons.size; i++) {
     if(isDefined(level.entitiesWithHeadIcons[i]))
       self updateEntityHeadIcon(level.entitiesWithHeadIcons[i]);
   }
   newarray = [];
-  for (i = 0; i < level.playersViewingHeadIcons.size; i++) {
+  for(i = 0; i < level.playersViewingHeadIcons.size; i++) {
     if(level.playersViewingHeadIcons[i] != self)
       newarray[newarray.size] = level.playersViewingHeadIcons[i];
   }
@@ -95,14 +95,14 @@ showAllEntityHeadIcons() {
 
 hideAllEntityHeadIcons(disconnected) {
   if(!disconnected) {
-    for (i = 0; i < self.entityHeadIcons.size; i++) {
+    for(i = 0; i < self.entityHeadIcons.size; i++) {
       if(isDefined(self.entityHeadIcons[i]))
         self.entityHeadIcons[i] destroy();
     }
     self.entityHeadIcons = [];
   }
   newarray = [];
-  for (i = 0; i < level.playersViewingHeadIcons.size; i++) {
+  for(i = 0; i < level.playersViewingHeadIcons.size; i++) {
     if(level.playersViewingHeadIcons[i] != self)
       newarray[newarray.size] = level.playersViewingHeadIcons[i];
   }
@@ -130,9 +130,9 @@ keepEntityHeadIconsPositioned() {
   self endon("death");
   self thread destroyHeadIconsOnDeath();
   pos = self.origin;
-  while (1) {
+  while(1) {
     if(pos != self.origin) {
-      for (i = 0; i < self.entityHeadIcons.size; i++) {
+      for(i = 0; i < self.entityHeadIcons.size; i++) {
         if(isDefined(self.entityHeadIcons[i]))
           self updateEntityHeadIconPos(self.entityHeadIcons[i]);
       }
@@ -144,7 +144,7 @@ keepEntityHeadIconsPositioned() {
 
 destroyHeadIconsOnDeath() {
   self waittill("death");
-  for (i = 0; i < self.entityHeadIcons.size; i++) {
+  for(i = 0; i < self.entityHeadIcons.size; i++) {
     if(isDefined(self.entityHeadIcons[i]))
       self.entityHeadIcons[i] destroy();
   }

@@ -11,7 +11,6 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_utility;
-
 #namespace namespace_ab88201b;
 
 autoexec __init__system__() {
@@ -26,7 +25,7 @@ __init__() {
   zm_trial::register_challenge(#"hash_6840f605489bddc2", &on_begin, &on_end);
 }
 
-private on_begin(var_c8a36f90) {
+on_begin(var_c8a36f90) {
   level.var_2bd4c60 = isDefined(var_c8a36f90) ? var_c8a36f90 : "movement";
 
   foreach(player in getplayers()) {
@@ -34,7 +33,7 @@ private on_begin(var_c8a36f90) {
   }
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   level.var_2bd4c60 = undefined;
 
   foreach(player in getplayers()) {
@@ -42,7 +41,7 @@ private on_end(round_reset) {
   }
 }
 
-private function_1633056a() {
+function_1633056a() {
   self endon(#"disconnect");
   level endon(#"hash_7646638df88a3656");
 
@@ -57,45 +56,45 @@ private function_1633056a() {
   }
 }
 
-private function_26f124d8() {
+function_26f124d8() {
   switch (level.var_2bd4c60) {
-    case #"ads":
+    case # "ads":
       if(self playerads() == 1) {
         return true;
       }
 
       return false;
-    case #"jump":
+    case # "jump":
       if(self zm_utility::is_jumping()) {
         return true;
       }
 
       return false;
-    case #"slide":
+    case # "slide":
       if(self issliding()) {
         return true;
       }
 
       return false;
-    case #"hash_6c6c8f6b349b8751":
+    case # "hash_6c6c8f6b349b8751":
       if(self zm_utility::is_jumping() || self issliding()) {
         return true;
       }
 
       return false;
-    case #"crouch":
+    case # "crouch":
       if(self getstance() === "crouch") {
         return true;
       }
 
       return false;
-    case #"prone":
+    case # "prone":
       if(self getstance() === "prone") {
         return true;
       }
 
       return false;
-    case #"movement":
+    case # "movement":
     default:
       v_velocity = self getvelocity();
 

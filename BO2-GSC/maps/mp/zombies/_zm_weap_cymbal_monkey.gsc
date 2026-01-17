@@ -63,7 +63,7 @@ watch_for_dud(model, actor) {
   self endon("death");
   self waittill("grenade_dud");
   model.dud = 1;
-  self playsound("zmb_vox_monkey_scream");
+  self playSound("zmb_vox_monkey_scream");
   self.monk_scream_vox = 1;
   wait 3;
 
@@ -97,7 +97,7 @@ watch_for_emp(model, actor) {
   self.stun_fx = 1;
 
   if(isDefined(level._equipment_emp_destroy_fx))
-    playfx(level._equipment_emp_destroy_fx, self.origin + vectorscale((0, 0, 1), 5.0), (0, randomfloat(360), 0));
+    playFX(level._equipment_emp_destroy_fx, self.origin + vectorscale((0, 0, 1), 5.0), (0, randomfloat(360), 0));
 
   wait 0.15;
   self.attract_to_origin = 0;
@@ -174,7 +174,7 @@ hide_owner(owner) {
   owner.hide_owner = 1;
 
   if(isDefined(level._effect["human_disappears"]))
-    playfx(level._effect["human_disappears"], owner.origin);
+    playFX(level._effect["human_disappears"], owner.origin);
 
   self thread show_owner_on_attack(owner);
   evt = self waittill_any_return("explode", "death", "grenade_dud");
@@ -185,7 +185,7 @@ hide_owner(owner) {
   owner unsetperk("specialty_immunemms");
 
   if(isDefined(level._effect["human_disappears"]))
-    playfx(level._effect["human_disappears"], owner.origin);
+    playFX(level._effect["human_disappears"], owner.origin);
 
   owner.no_burning_sfx = undefined;
   owner setvisibletoall();
@@ -216,7 +216,7 @@ proximity_detonate(owner) {
     if(isDefined(ent.team) && ent.team == owner.team) {
       continue;
     }
-    self playsound("wpn_claymore_alert");
+    self playSound("wpn_claymore_alert");
     dist = distance(self.origin, ent.origin);
     radiusdamage(self.origin + vectorscale((0, 0, 1), 12.0), explosionradius, 1, 1, owner, "MOD_GRENADE_SPLASH", "cymbal_monkey_zm");
 
@@ -249,7 +249,7 @@ player_throw_cymbal_monkey(grenade, num_attractors, max_attract_dist, attract_di
 
     grenade hide();
     model = spawn("script_model", grenade.origin);
-    model setmodel(level.cymbal_monkey_model);
+    model setModel(level.cymbal_monkey_model);
     model useanimtree(#animtree);
     model linkto(grenade);
     model.angles = grenade.angles;
@@ -268,7 +268,7 @@ player_throw_cymbal_monkey(grenade, num_attractors, max_attract_dist, attract_di
 
     grenade thread watch_for_dud(model, clone);
     grenade thread watch_for_emp(model, clone);
-    info = spawnstruct();
+    info = spawnStruct();
     info.sound_attractors = [];
     grenade thread monitor_zombie_groans(info);
     grenade waittill("stationary");
@@ -297,7 +297,7 @@ player_throw_cymbal_monkey(grenade, num_attractors, max_attract_dist, attract_di
       }
 
       grenade resetmissiledetonationtime();
-      playfxontag(level._effect["monkey_glow"], model, "origin_animate_jnt");
+      playFXOnTag(level._effect["monkey_glow"], model, "origin_animate_jnt");
       valid_poi = check_point_in_enabled_zone(grenade.origin, undefined, undefined);
 
       if(isDefined(level.check_valid_poi))
@@ -340,7 +340,7 @@ grenade_stolen_by_sam(ent_grenade, ent_model, ent_actor) {
       players[i] playlocalsound(level.zmb_laugh_alias);
   }
 
-  playfxontag(level._effect["grenade_samantha_steal"], ent_model, "tag_origin");
+  playFXOnTag(level._effect["grenade_samantha_steal"], ent_model, "tag_origin");
   ent_model movez(60, 1.0, 0.25, 0.25);
   ent_model vibrate(direction, 1.5, 2.5, 1.0);
   ent_model waittill("movedone");
@@ -390,7 +390,7 @@ do_monkey_sound(model, info) {
     if(![
         [level.grenade_safe_to_bounce]
       ](self.owner, "cymbal_monkey_zm")) {
-      self playsound("zmb_vox_monkey_scream");
+      self playSound("zmb_vox_monkey_scream");
       self.monk_scream_vox = 1;
     }
   }
@@ -399,7 +399,7 @@ do_monkey_sound(model, info) {
     if(isDefined(level.cymbal_monkey_dual_view) && level.cymbal_monkey_dual_view)
       self playsoundtoteam("zmb_monkey_song", "allies");
     else
-      self playsound("zmb_monkey_song");
+      self playSound("zmb_monkey_song");
   }
 
   if(!self.monk_scream_vox)
@@ -432,7 +432,7 @@ play_delayed_explode_vox() {
   wait 6.5;
 
   if(isDefined(self))
-    self playsound("zmb_vox_monkey_explode");
+    self playSound("zmb_vox_monkey_explode");
 }
 
 get_thrown_monkey() {
@@ -485,7 +485,7 @@ play_zombie_groans() {
 
   while(true) {
     if(isDefined(self)) {
-      self playsound("zmb_vox_zombie_groan");
+      self playSound("zmb_vox_zombie_groan");
       wait(randomfloatrange(2, 3));
     } else
       return;

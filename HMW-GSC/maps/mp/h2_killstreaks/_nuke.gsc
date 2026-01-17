@@ -28,7 +28,7 @@ init() {
   level._effect["nuke_flash"] = loadfx("fx/explosions/nuke_flash");
   level._effect["nuke_aftermath"] = loadfx("fx/explosions/nuke_smoke_fill");
 
-  game["strings"]["nuclear_strike"] = & "MP_TACTICAL_NUKE"; // is Manticore right now from AW
+  game["strings"]["nuclear_strike"] = &"MP_TACTICAL_NUKE"; // is Manticore right now from AW
 
   level.killstreakFuncs["nuke_mp"] = ::tryUseNuke;
 
@@ -38,16 +38,14 @@ init() {
   level.nukeTimer = getDvarInt("scr_nukeTimer");
   level.cancelMode = getDvarInt("scr_nukeCancelMode");
 
-  /#
   setDevDvarIfUninitialized("scr_nukeDistance", 5000);
   setDevDvarIfUninitialized("scr_nukeEndsGame", true);
   setDevDvarIfUninitialized("scr_nukeDebugPosition", false);
-  # /
 }
 
 tryUseNuke(lifeId, allowCancel) {
   if(isDefined(level.nukeIncoming)) {
-    self iprintlnbold( & "LUA_KS_UNAVAILABLE_NUKE");
+    self iprintlnbold(&"LUA_KS_UNAVAILABLE_NUKE");
     return false;
   }
 
@@ -95,16 +93,16 @@ doNuke(allowCancel) {
     foreach( player in level.players )
     {
     playerteam = player.pers["team"];
-    if( isdefined( playerteam ) )
+    if( isDefined( playerteam ) )
     {
     if( playerteam == self.pers["team"] )
-    player iprintln( &"MP_TACTICAL_NUKE_CALLED", self );
+    player iprintln(&"MP_TACTICAL_NUKE_CALLED", self );
     }
     }
     */
   } else {
     if(!level.hardcoreMode)
-      self iprintlnbold( & "LUA_KS_TNUKE");
+      self iprintlnbold(&"LUA_KS_TNUKE");
   }
 
   level thread delaythread_nuke((level.nukeTimer - 3.3), ::nukeSoundIncoming);
@@ -123,7 +121,7 @@ doNuke(allowCancel) {
   clockObject = spawn("script_origin", (0, 0, 0));
   clockObject hide();
 
-  while (!isDefined(level.nukeDetonated)) {
+  while(!isDefined(level.nukeDetonated)) {
     clockObject playSound("h2_nuke_timer");
     wait(1.0);
   }
@@ -134,7 +132,6 @@ cancelNukeOnDeath(player) {
 
   if(isDefined(player) && level.cancelMode == 2)
     player thread maps\mp\h2_killstreaks\_emp::h2_EMP_Use(0, 0);
-
 
   maps\mp\gametypes\_gamelogic::resumeTimer();
   level.timeLimitOverride = false;
@@ -173,25 +170,23 @@ nukeEffects() {
   level maps\mp\h2_killstreaks\_emp::destroyActiveVehicles(level.nukeInfo.player);
 
   foreach(player in level.players) {
-    playerForward = anglestoforward(player.angles);
+    playerForward = anglesToForward(player.angles);
     playerForward = (playerForward[0], playerForward[1], 0);
     playerForward = VectorNormalize(playerForward);
 
     nukeDistance = 5000;
-    /# nukeDistance = getDvarInt( "scr_nukeDistance" );	#/
+    /# nukeDistance = getDvarInt( "scr_nukeDistance" );	
 
-    nukeEnt = Spawn("script_model", player.origin + vector_multiply(playerForward, nukeDistance));
+    nukeEnt = spawn("script_model", player.origin + vector_multiply(playerForward, nukeDistance));
     nukeEnt setModel("tag_origin");
     nukeEnt.angles = (0, (player.angles[1] + 180), 90);
 
-    /#
     if(getDvarInt("scr_nukeDebugPosition")) {
       lineTop = (nukeEnt.origin[0], nukeEnt.origin[1], (nukeEnt.origin[2] + 500));
       thread draw_line_for_time(nukeEnt.origin, lineTop, (1, 0, 0), 10);
     }
-    # /
 
-      nukeEnt thread nukeEffect(player);
+    nukeEnt thread nukeEffect(player);
     player.nuked = true;
   }
 }
@@ -215,7 +210,7 @@ nukeAftermathEffect() {
   up = anglestoup(afermathEnt.angles);
   right = anglestoright(afermathEnt.angles);
 
-  PlayFX(level._effect["nuke_aftermath"], afermathEnt.origin, up, right);
+  playFX(level._effect["nuke_aftermath"], afermathEnt.origin, up, right);
 }
 
 nukeSlowMo() {
@@ -286,7 +281,6 @@ nukeEarthquake() {
   //foreach( player in level.players )
   //player PlayRumbleOnEntity( "damage_heavy" );
 }
-
 
 waitForNukeCancel() {
   self waittill("cancel_location");

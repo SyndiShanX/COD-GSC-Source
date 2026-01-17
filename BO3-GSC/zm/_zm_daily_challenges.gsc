@@ -24,14 +24,14 @@
 #namespace zm_daily_challenges;
 
 function autoexec __init__sytem__() {
-  system::register("zm_daily_challenges", & __init__, & __main__, undefined);
+  system::register("zm_daily_challenges", &__init__, &__main__, undefined);
 }
 
 function __init__() {
-  callback::on_connect( & on_connect);
-  callback::on_spawned( & on_spawned);
-  callback::on_challenge_complete( & on_challenge_complete);
-  zm_spawner::register_zombie_death_event_callback( & death_check_for_challenge_updates);
+  callback::on_connect(&on_connect);
+  callback::on_spawned(&on_spawned);
+  callback::on_challenge_complete(&on_challenge_complete);
+  zm_spawner::register_zombie_death_event_callback(&death_check_for_challenge_updates);
 }
 
 function __main__() {
@@ -56,7 +56,7 @@ function on_spawned() {
 
 function round_tracking() {
   self endon("disconnect");
-  while (true) {
+  while(true) {
     level waittill("end_of_round");
     self.a_daily_challenges[3]++;
     switch (self.a_daily_challenges[3]) {
@@ -90,11 +90,11 @@ function round_tracking() {
 }
 
 function death_check_for_challenge_updates(e_attacker) {
-  if(!isdefined(e_attacker)) {
+  if(!isDefined(e_attacker)) {
     return;
   }
-  if(isdefined(e_attacker._trap_type)) {
-    if(isdefined(e_attacker.activated_by_player)) {
+  if(isDefined(e_attacker._trap_type)) {
+    if(isDefined(e_attacker.activated_by_player)) {
       e_attacker.activated_by_player zm_stats::increment_challenge_stat("ZM_DAILY_KILLS_TRAPS");
       debug_print("");
     }
@@ -131,7 +131,7 @@ function death_check_for_challenge_updates(e_attacker) {
     e_attacker zm_stats::increment_challenge_stat("ZM_DAILY_KILLS_MELEE");
     debug_print("");
   }
-  if(isdefined(level.zombie_vars[e_attacker.team]) && (isdefined(level.zombie_vars[e_attacker.team]["zombie_insta_kill"]) && level.zombie_vars[e_attacker.team]["zombie_insta_kill"])) {
+  if(isDefined(level.zombie_vars[e_attacker.team]) && (isDefined(level.zombie_vars[e_attacker.team]["zombie_insta_kill"]) && level.zombie_vars[e_attacker.team]["zombie_insta_kill"])) {
     e_attacker zm_stats::increment_challenge_stat("ZM_DAILY_KILLS_INSTAKILL");
     debug_print("");
     return;
@@ -231,7 +231,7 @@ function death_check_for_challenge_updates(e_attacker) {
 
 function spent_points_tracking() {
   level endon("end_game");
-  while (true) {
+  while(true) {
     level waittill("spent_points", player, n_points);
     player.a_daily_challenges[1] = player.a_daily_challenges[1] + n_points;
     player zm_stats::increment_challenge_stat("ZM_DAILY_SPEND_25K", n_points);
@@ -242,7 +242,7 @@ function spent_points_tracking() {
 
 function earned_points_tracking() {
   level endon("end_game");
-  while (true) {
+  while(true) {
     level waittill("earned_points", player, n_points);
     if(level.zombie_vars[player.team]["zombie_point_scalar"] == 2) {
       player.a_daily_challenges[2] = player.a_daily_challenges[2] + n_points;
@@ -257,22 +257,22 @@ function challenge_ingame_time_tracking() {
   self notify("stop_challenge_ingame_time_tracking");
   self endon("stop_challenge_ingame_time_tracking");
   level flag::wait_till("start_zombie_round_logic");
-  for (;;) {
+  for(;;) {
     wait(1);
     zm_stats::increment_client_stat("ZM_DAILY_CHALLENGE_INGAME_TIME");
   }
 }
 
 function increment_windows_repaired(s_barrier) {
-  if(!isdefined(self.n_dc_barriers_rebuilt)) {
+  if(!isDefined(self.n_dc_barriers_rebuilt)) {
     self.n_dc_barriers_rebuilt = 0;
   }
-  if(!(isdefined(self.b_dc_rebuild_timer_active) && self.b_dc_rebuild_timer_active)) {
+  if(!(isDefined(self.b_dc_rebuild_timer_active) && self.b_dc_rebuild_timer_active)) {
     self thread rebuild_timer();
     self.a_s_barriers_rebuilt = [];
   }
   if(!isinarray(self.a_s_barriers_rebuilt, s_barrier)) {
-    if(!isdefined(self.a_s_barriers_rebuilt)) {
+    if(!isDefined(self.a_s_barriers_rebuilt)) {
       self.a_s_barriers_rebuilt = [];
     } else if(!isarray(self.a_s_barriers_rebuilt)) {
       self.a_s_barriers_rebuilt = array(self.a_s_barriers_rebuilt);
@@ -296,7 +296,7 @@ function private rebuild_timer() {
 }
 
 function increment_magic_box() {
-  if(isdefined(level.zombie_vars["zombie_powerup_fire_sale_on"]) && level.zombie_vars["zombie_powerup_fire_sale_on"]) {
+  if(isDefined(level.zombie_vars["zombie_powerup_fire_sale_on"]) && level.zombie_vars["zombie_powerup_fire_sale_on"]) {
     self zm_stats::increment_challenge_stat("ZM_DAILY_PURCHASE_FIRE_SALE_MAGIC_BOX");
     debug_print("");
   }
@@ -315,7 +315,7 @@ function increment_nuked_zombie() {
 
 function perk_purchase_tracking() {
   self endon("disconnect");
-  while (true) {
+  while(true) {
     self waittill("perk_purchased", str_perk);
     self zm_stats::increment_challenge_stat("ZM_DAILY_PURCHASE_PERKS");
     debug_print("");
@@ -324,7 +324,7 @@ function perk_purchase_tracking() {
 
 function perk_drink_tracking() {
   self endon("disconnect");
-  while (true) {
+  while(true) {
     self waittill("perk_bought");
     self zm_stats::increment_challenge_stat("ZM_DAILY_DRINK_PERKS");
     debug_print("");
@@ -338,7 +338,7 @@ function debug_print(str_line) {
 function on_challenge_complete(params) {
   n_challenge_index = params.challengeindex;
   if(is_daily_challenge(n_challenge_index)) {
-    if(isdefined(self)) {
+    if(isDefined(self)) {
       uploadstats(self);
     }
     a_challenges = table::load("gamedata/stats/zm/statsmilestones4.csv", "a0");

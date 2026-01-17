@@ -47,8 +47,7 @@ stage_logic() {
   stage_completed("sq", level._cur_stage_name);
 }
 
-exit_stage(success) {
-}
+exit_stage(success) {}
 
 stage_vo_max() {
   level waittill("lantern_crashing");
@@ -66,11 +65,11 @@ gl_lantern_spawn(s_start) {
   level.vh_lantern makevehicleunusable();
   level.vh_lantern setneargoalnotifydist(128);
   level.vh_lantern.m_lantern = spawn("script_model", level.vh_lantern.origin);
-  level.vh_lantern.m_lantern setmodel("p6_zm_bu_lantern_silver_on");
+  level.vh_lantern.m_lantern setModel("p6_zm_bu_lantern_silver_on");
   level.vh_lantern.m_lantern linkto(level.vh_lantern, "tag_origin");
-  playfxontag(level._effect["sq_glow"], level.vh_lantern.m_lantern, "tag_origin");
-  level.vh_lantern.m_lantern playsound("zmb_sq_glantern_impact");
-  level.vh_lantern.m_lantern playloopsound("zmb_sq_glantern_full_loop_3d");
+  playFXOnTag(level._effect["sq_glow"], level.vh_lantern.m_lantern, "tag_origin");
+  level.vh_lantern.m_lantern playSound("zmb_sq_glantern_impact");
+  level.vh_lantern.m_lantern playLoopSound("zmb_sq_glantern_full_loop_3d");
   level.vh_lantern thread gl_lantern_damage_watcher();
   wait_network_frame();
 }
@@ -134,7 +133,7 @@ gl_lantern_move_to_struct(s_goto) {
 
 gl_lantern_teleport() {
   self notify("lantern_teleporting");
-  playfx(level._effect["fx_wisp_lg_m"], self.origin);
+  playFX(level._effect["fx_wisp_lg_m"], self.origin);
   playsoundatposition("zmb_sq_glantern_impact", self.origin);
   gl_lantern_delete();
   a_path_spots = getstructarray("sq_ghost_lamp_path", "script_noteworthy");
@@ -145,7 +144,7 @@ gl_lantern_teleport() {
 
 gl_lantern_damage_watcher() {
   self.m_lantern endon("delete");
-  self.m_lantern setcandamage(1);
+  self.m_lantern setCanDamage(1);
 
   while(true) {
     self.m_lantern waittill("damage", amount, attacker, dir, point, dmg_type);
@@ -155,7 +154,7 @@ gl_lantern_damage_watcher() {
     }
   }
 
-  self.m_lantern playsound("zmb_sq_glantern_impact");
+  self.m_lantern playSound("zmb_sq_glantern_impact");
   self gl_lantern_crash_movement();
   self thread gl_lantern_pickup_watch();
   self thread gl_lantern_stop_spin_on_land();
@@ -176,7 +175,7 @@ gl_lantern_stop_spin_on_land() {
 
   if(isDefined(self)) {
     self.m_link = spawn("script_model", self.origin);
-    self.m_link setmodel("tag_origin");
+    self.m_link setModel("tag_origin");
     self linkto(self.m_link);
   }
 }

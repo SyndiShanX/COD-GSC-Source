@@ -58,8 +58,8 @@ section_flag_init() {
 }
 
 section_hint_string_init() {
-  maps\_utility::add_hint_string("escape_ADS_Hint", & "ODIN_ADS_TIP", ::hints_ads_escape);
-  maps\_utility::add_hint_string("escape_door_prompt", & "ODIN_ESCAPE_DOOR_PROMPT", ::hints_ads_escape);
+  maps\_utility::add_hint_string("escape_ADS_Hint", &"ODIN_ADS_TIP", ::hints_ads_escape);
+  maps\_utility::add_hint_string("escape_door_prompt", &"ODIN_ESCAPE_DOOR_PROMPT", ::hints_ads_escape);
 }
 
 hints_ads_escape() {
@@ -907,7 +907,7 @@ escape_explosion_player_timeout() {
   wait 0.5;
   level.player kill();
   level notify("new_quote_string");
-  setdvar("ui_deadquote", & "ODIN_WINDOW_TIMEOUT");
+  setdvar("ui_deadquote", &"ODIN_WINDOW_TIMEOUT");
   maps\_utility::missionfailedwrapper();
 }
 

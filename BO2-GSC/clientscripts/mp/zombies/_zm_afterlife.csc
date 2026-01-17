@@ -149,7 +149,7 @@ assign_corpse_owner(localclientnum, oldval, newval, bnewent, binitialsnap, field
   self.player = newval;
 
   if(newval > 0)
-    playfxontag(localclientnum, level._effect["afterlife_corpse"], self, "tag_origin");
+    playFXOnTag(localclientnum, level._effect["afterlife_corpse"], self, "tag_origin");
 }
 
 toggle_player_afterlife_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -192,17 +192,17 @@ player_afterlife_third_fx(localclientnum) {
   self waittill_dobj(localclientnum);
   ent = spawn(localclientnum, self.origin, "script_origin");
   ent linkto(self, "tag_origin");
-  ent playloopsound("zmb_afterlife_ghost_loop");
+  ent playLoopSound("zmb_afterlife_ghost_loop");
   self thread snddeleteent(ent);
 
   while(true) {
-    playfxontag(localclientnum, level._effect["afterlife_ghost_fx"], self, "J_spine4");
-    playfxontag(localclientnum, level._effect["afterlife_ghost_h_fx"], self, "J_head");
-    playfxontag(localclientnum, level._effect["afterlife_ghost_arm_fx"], self, "J_elbow_ri");
+    playFXOnTag(localclientnum, level._effect["afterlife_ghost_fx"], self, "J_spine4");
+    playFXOnTag(localclientnum, level._effect["afterlife_ghost_h_fx"], self, "J_head");
+    playFXOnTag(localclientnum, level._effect["afterlife_ghost_arm_fx"], self, "J_elbow_ri");
     wait 0.1;
-    playfxontag(localclientnum, level._effect["afterlife_ghost_arm_fx"], self, "J_elbow_le");
-    playfxontag(localclientnum, level._effect["afterlife_ghost_hand_r_fx"], self, "J_wrist_ri");
-    playfxontag(localclientnum, level._effect["afterlife_ghost_hand_fx"], self, "J_wrist_le");
+    playFXOnTag(localclientnum, level._effect["afterlife_ghost_arm_fx"], self, "J_elbow_le");
+    playFXOnTag(localclientnum, level._effect["afterlife_ghost_hand_r_fx"], self, "J_wrist_ri");
+    playFXOnTag(localclientnum, level._effect["afterlife_ghost_hand_fx"], self, "J_wrist_le");
     wait 0.1;
   }
 }
@@ -214,12 +214,12 @@ player_afterlife_spectator_fx(localclientnum) {
   self waittill_dobj(localclientnum);
   ent = spawn(localclientnum, self.origin, "script_origin");
   ent linkto(self, "tag_origin");
-  ent playloopsound("zmb_afterlife_ghost_loop");
+  ent playLoopSound("zmb_afterlife_ghost_loop");
   self thread snddeleteent(ent);
 
   while(true) {
     player = playerbeingspectated(localclientnum);
-    playfx(localclientnum, level._effect["fx_alcatraz_ghost_spectate"], player.origin + vectorscale((0, 0, 1), 40.0));
+    playFX(localclientnum, level._effect["fx_alcatraz_ghost_spectate"], player.origin + vectorscale((0, 0, 1), 40.0));
     wait 0.05;
     serverwait(localclientnum, 0.1);
   }
@@ -231,7 +231,7 @@ afterlife_damage_fx() {
 
   while(true) {
     level waittill("al_d", localclientnum);
-    playsound(0, "zmb_afterlife_impact", (0, 0, 0));
+    playSound(0, "zmb_afterlife_impact", (0, 0, 0));
     playviewmodelfx(localclientnum, level._effect["afterlife_damage"], "tag_weapon");
   }
 }
@@ -278,7 +278,7 @@ sndafterlifeleak(localclientnum) {
     if(isDefined(self) && self.mana <= 0.5) {
       if(!isDefined(id)) {
         ent = spawn(0, (0, 0, 0), "script_origin");
-        id = ent playloopsound("zmb_afterlife_leak", 0.5);
+        id = ent playLoopSound("zmb_afterlife_leak", 0.5);
         self thread sndafterlifeleakdelete(ent);
         setsoundvolume(id, 0);
         setsoundvolumerate(id, 4);

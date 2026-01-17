@@ -8,7 +8,6 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_trial_turn_on_power;
 
 autoexec __init__system__() {
@@ -23,12 +22,12 @@ __init__() {
   zm_trial::register_challenge(#"turn_on_power", &on_begin, &on_end);
 }
 
-private on_begin(weapon_name) {
+on_begin(weapon_name) {
   zm_trial_util::function_7d32b7d0(0);
   level thread function_83b71e7c();
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   zm_trial_util::function_f3dbeda7();
 
   if(!round_reset) {
@@ -43,7 +42,7 @@ private on_end(round_reset) {
   }
 }
 
-private function_83b71e7c() {
+function_83b71e7c() {
   level endon(#"hash_7646638df88a3656");
   self endon(#"death");
 

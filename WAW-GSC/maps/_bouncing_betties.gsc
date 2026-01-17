@@ -7,8 +7,8 @@
 #include maps\_utility;
 
 init_bouncing_betties() {
-  level.betty_trigs = GetEntArray("trip_betty", "targetname");
-  for (i = 0; i < level.betty_trigs.size; i++) {
+  level.betty_trigs = getEntArray("trip_betty", "targetname");
+  for(i = 0; i < level.betty_trigs.size; i++) {
     level thread betty_think(level.betty_trigs[i]);
   }
 }
@@ -27,16 +27,16 @@ betty_think(trigger) {
   damageMultiplier = 2;
   iprintln("Click!");
   wait(clickWaitTime);
-  PlayFX(level._effect["betty_groundPop"], betty.origin + (0, 0, 10));
+  playFX(level._effect["betty_groundPop"], betty.origin + (0, 0, 10));
   betty thread betty_rotate();
   betty MoveTo(betty.origin + (0, 0, jumpHeight), jumpTime, 0, jumpTime * 0.5);
   betty waittill("movedone");
   betty MoveTo(betty.origin - (0, 0, dropHeight), dropTime, dropTime * 0.5);
   betty waittill("movedone");
   betty notify("stop_rotate_thread");
-  PlayFx(level._effect["betty_explosion"], betty.origin);
+  playFX(level._effect["betty_explosion"], betty.origin);
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     player = players[i];
     if(player GetStance() == "prone") {
       continue;
@@ -47,7 +47,7 @@ betty_think(trigger) {
       player DoDamage(player.health * damageMultiplier, betty.origin);
     }
   }
-  for (i = 0; i < level.betty_trigs.size; i++) {
+  for(i = 0; i < level.betty_trigs.size; i++) {
     otherBetty = level.betty_trigs[i];
     if(!isDefined(otherBetty) || trigger == otherBetty) {
       continue;
@@ -66,7 +66,7 @@ betty_rotate() {
   self thread betty_rotate_fx();
   rotateAngles = 360;
   rotateTime = 0.125;
-  while (1) {
+  while(1) {
     self RotateYaw(rotateAngles, rotateTime);
     self waittill("rotatedone");
   }
@@ -74,12 +74,12 @@ betty_rotate() {
 
 betty_rotate_fx() {
   self endon("stop_rotate_thread");
-  fxOrg = Spawn("script_model", self.origin);
-  fxOrg SetModel("tag_origin");
+  fxOrg = spawn("script_model", self.origin);
+  fxOrg setModel("tag_origin");
   fxOrg LinkTo(self);
   wait(0.75);
   assertex(isDefined(level._effect["betty_smoketrail"]), "level._effect['betty_smoketrail'] needs to be defined");
-  fx = PlayFxOnTag(level._effect["betty_smoketrail"], fxOrg, "tag_origin");
+  fx = playFXOnTag(level._effect["betty_smoketrail"], fxOrg, "tag_origin");
 }
 
 betty_pop(waitTime) {
@@ -101,10 +101,10 @@ betty_think_no_wires(trigger) {
   iprintln("Click!");
   wait(clickWaitTime);
   assertex(isDefined(level._effect["betty_groundPop"]), "level._effect['betty_groundPop'] needs to be defined");
-  PlayFX(level._effect["betty_groundPop"], self.origin + (0, 0, 10));
+  playFX(level._effect["betty_groundPop"], self.origin + (0, 0, 10));
   self hide();
   fake_betty = spawn("script_model", self.origin);
-  fake_betty setmodel("viewmodel_usa_bbetty_mine");
+  fake_betty setModel("viewmodel_usa_bbetty_mine");
   fake_betty thread betty_rotate();
   fake_betty MoveTo(fake_betty.origin + (0, 0, jumpHeight), jumpTime, 0, jumpTime * 0.5);
   fake_betty waittill("movedone");

@@ -49,7 +49,7 @@ strength_test_start(align_node_targetname, enemy_spawner_targetname, button_prom
   e_enemy magic_bullet_shield();
 
   if(isDefined(self.strengthtest_enemy_attack_audio))
-    e_enemy playsound(self.strengthtest_enemy_attack_audio);
+    e_enemy playSound(self.strengthtest_enemy_attack_audio);
 
   self attacking_enemy_dof();
   actors = array(self.body, e_enemy);
@@ -59,7 +59,7 @@ strength_test_start(align_node_targetname, enemy_spawner_targetname, button_prom
   sound_org = spawn("script_origin", (0, 0, 0));
 
   if(isDefined(self.strengthtest_fight_looping_audio))
-    sound_org playloopsound(self.strengthtest_fight_looping_audio);
+    sound_org playLoopSound(self.strengthtest_fight_looping_audio);
 
   self ent_flag_wait("strength_test_complete");
   level clientnotify("vcd");

@@ -15,7 +15,7 @@
 #namespace collectibles;
 
 function autoexec __init__sytem__() {
-  system::register("collectibles", & __init__, & __main__, undefined);
+  system::register("collectibles", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -26,7 +26,7 @@ function __init__() {
 
 function __main__() {
   level.collectibles = [];
-  mdl_collectibles = getentarray("collectible", "script_noteworthy");
+  mdl_collectibles = getEntArray("collectible", "script_noteworthy");
   if(mdl_collectibles.size == 0) {
     return;
   }
@@ -35,8 +35,8 @@ function __main__() {
       collectible = function_8765a33c(mdl_collectible);
       array::add(level.collectibles, collectible, 0);
     }
-    callback::on_spawned( & on_player_spawned);
-    callback::on_connect( & on_player_connect);
+    callback::on_spawned(&on_player_spawned);
+    callback::on_connect(&on_player_connect);
   } else {
     foreach(mdl_collectible in mdl_collectibles) {
       mdl_collectible hide();
@@ -45,31 +45,31 @@ function __main__() {
 }
 
 function function_37aecd21() {
-  if(!isdefined(level.collectibles)) {
+  if(!isDefined(level.collectibles)) {
     return;
   }
   foreach(collectible in level.collectibles) {
     var_3efe1e22 = level.var_3efe1e22[collectible.mdl_collectible.model];
-    if(isdefined(var_3efe1e22)) {
+    if(isDefined(var_3efe1e22)) {
       collectible.trigger.origin = collectible.trigger.origin + var_3efe1e22.offset;
     }
   }
 }
 
 function function_93523442(var_977e0f67, radius = 60, offset = (0, 0, 0)) {
-  if(!isdefined(level.var_3efe1e22[var_977e0f67])) {
-    level.var_3efe1e22[var_977e0f67] = spawnstruct();
+  if(!isDefined(level.var_3efe1e22[var_977e0f67])) {
+    level.var_3efe1e22[var_977e0f67] = spawnStruct();
   }
   level.var_3efe1e22[var_977e0f67].radius = radius;
   level.var_3efe1e22[var_977e0f67].offset = offset;
 }
 
 function private function_148c7e54() {
-  return isdefined(level.var_bca96223) && level.var_bca96223 || sessionmodeiscampaignzombiesgame();
+  return isDefined(level.var_bca96223) && level.var_bca96223 || sessionmodeiscampaignzombiesgame();
 }
 
 function on_player_spawned() {
-  if(!isdefined(self.var_b3dc8451)) {
+  if(!isDefined(self.var_b3dc8451)) {
     self.var_b3dc8451 = [];
   }
   foreach(collectible in level.collectibles) {
@@ -94,7 +94,7 @@ function function_6ba0709f() {
   if(!missionhascollectibles(getrootmapname())) {
     return;
   }
-  while (true) {
+  while(true) {
     level util::waittill_any("checkpoint_save", "_checkpoint_save_safe");
     self function_d100c544();
   }
@@ -105,15 +105,15 @@ function function_332e2cfd() {
   if(!missionhascollectibles(getrootmapname())) {
     return;
   }
-  while (true) {
+  while(true) {
     level waittill("save_restore");
-    if(!isdefined(self.var_b3dc8451)) {
+    if(!isDefined(self.var_b3dc8451)) {
       self.var_b3dc8451 = [];
     }
     foreach(collectible in level.collectibles) {
       var_6b074374 = self function_70b41d41(collectible.index);
       has_collectible = self getdstat("PlayerStatsByMap", level.map_name, "collectibles", collectible.index);
-      if(isdefined(var_6b074374) && var_6b074374 && (!(isdefined(has_collectible) && has_collectible))) {
+      if(isDefined(var_6b074374) && var_6b074374 && (!(isDefined(has_collectible) && has_collectible))) {
         self.var_b3dc8451[collectible.mdl_collectible.model] = 1;
         collectible.mdl_collectible setinvisibletoplayer(self);
         objective_setinvisibletoplayer(collectible.objectiveid, self);
@@ -125,7 +125,7 @@ function function_332e2cfd() {
         self challenges::function_96ed590f("career_collectibles");
         continue;
       }
-      if(!(isdefined(self getdstat("PlayerStatsByMap", level.map_name, "collectibles", collectible.index)) && self getdstat("PlayerStatsByMap", level.map_name, "collectibles", collectible.index))) {
+      if(!(isDefined(self getdstat("PlayerStatsByMap", level.map_name, "collectibles", collectible.index)) && self getdstat("PlayerStatsByMap", level.map_name, "collectibles", collectible.index))) {
         self.var_b3dc8451[collectible.mdl_collectible.model] = 0;
       }
     }
@@ -137,7 +137,7 @@ function private function_b963f25(mdl_collectible) {
   mdl_collectible.radius = 60;
   mdl_collectible.offset = vectorscale((0, 0, 1), 5);
   var_3efe1e22 = level.var_3efe1e22[mdl_collectible.model];
-  if(isdefined(var_3efe1e22)) {
+  if(isDefined(var_3efe1e22)) {
     mdl_collectible.radius = var_3efe1e22.radius;
     mdl_collectible.offset = mdl_collectible.offset + var_3efe1e22.offset;
   }
@@ -160,12 +160,12 @@ function function_8765a33c(mdl_collectible) {
   var_837a6185 gameobjects::set_owner_team("allies");
   var_837a6185 gameobjects::set_visible_team("any");
   var_837a6185.mdl_collectible = mdl_collectible;
-  var_837a6185.onuse = & onuse;
-  var_837a6185.onbeginuse = & onbeginuse;
+  var_837a6185.onuse = &onuse;
+  var_837a6185.onbeginuse = &onbeginuse;
   var_837a6185.single_use = 1;
   var_837a6185.origin = mdl_collectible.origin;
   var_837a6185.angles = var_837a6185.angles;
-  if(isdefined(mdl_collectible.script_int)) {
+  if(isDefined(mdl_collectible.script_int)) {
     var_837a6185.index = mdl_collectible.script_int - 1;
   } else {
     var_837a6185.index = (int(getsubstr(mdl_collectible.model, mdl_collectible.model.size - 2))) - 1;
@@ -194,11 +194,11 @@ function onuse(e_player) {
 function onbeginuse(e_player) {}
 
 function function_ccb1e08d(map_name = getrootmapname()) {
-  if(!isdefined(map_name)) {
+  if(!isDefined(map_name)) {
     return;
   }
   var_8a9d11b = 0;
-  for (var_a34073af = 0; var_a34073af < 10; var_a34073af++) {
+  for(var_a34073af = 0; var_a34073af < 10; var_a34073af++) {
     if(self getdstat("PlayerStatsByMap", map_name, "collectibles", var_a34073af)) {
       var_8a9d11b++;
     }
@@ -220,7 +220,7 @@ function private function_e1aad2b1() {
   self notify("hash_e1aad2b1");
   self endon("hash_e1aad2b1");
   self util::waittill_notify_or_timeout("stats_changed", 2);
-  if(isdefined(self) && self hascollectedallcollectibles()) {
+  if(isDefined(self) && self hascollectedallcollectibles()) {
     self setdstat("PlayerStatsList", "ALL_COLLECTIBLES_COLLECTED", "statValue", 1);
     self givedecoration("cp_medal_all_collectibles");
     self notify("give_achievement", "CP_ALL_COLLECTIBLES");

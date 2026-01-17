@@ -10,17 +10,15 @@
 // Picks up a grenade from 32 units in front of the character, and throws it.
 
 main() {
-  /#
-  if(getdvar("scr_forcegrenadecower") == "on" && isdefined(self.grenade)) {
+  if(getdvar("scr_forcegrenadecower") == "on" && isDefined(self.grenade)) {
     self OrientMode("face angle", randomfloat(360));
     self animmode("gravity");
     wait .2;
     animscripts\grenade_cower::main();
     return;
   }
-  # /
 
-    self orientMode("face default");
+  self orientMode("face default");
   self endon("killanimscript");
 
   animscripts\utility::initialize("grenade_return_throw");
@@ -30,7 +28,7 @@ main() {
   throwAnim = undefined;
 
   throwDist = 1000;
-  if(isdefined(self.enemy))
+  if(isDefined(self.enemy))
     throwDist = distance(self.origin, self.enemy.origin);
 
   // unused: grenade_return_running_kick_forward_1; kicks don't read well to player
@@ -58,7 +56,6 @@ main() {
   assert(animArray.size);
   throwAnim = animArray[randomint(animArray.size)];
 
-  /#
   if(getdvar("scr_grenadereturnanim") != "") {
     val = getdvar("scr_grenadereturnanim");
     //if( val == "kick1")
@@ -75,9 +72,8 @@ main() {
     else if(val == "throw4")
       throwAnim = % grenade_return_standing_throw_overhand_forward;
   }
-  # /
 
-    assert(isdefined(throwAnim));
+  assert(isDefined(throwAnim));
   self setFlaggedAnimKnoballRestart("throwanim", throwAnim, % body, 1, .3);
 
   hasPickup = (animHasNotetrack(throwAnim, "grenade_left") || animHasNotetrack(throwAnim, "grenade_right"));

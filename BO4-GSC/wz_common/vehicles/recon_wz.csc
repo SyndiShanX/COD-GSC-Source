@@ -8,7 +8,6 @@
 #include scripts\core_common\filter_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\vehicle_shared;
-
 #namespace recon_wz;
 
 autoexec __init__system__() {
@@ -48,7 +47,7 @@ function_b53c3ad2(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 }
 
-private function_d765daa4(localclientnum) {
+function_d765daa4(localclientnum) {
   self notify("214105bf7d36e37f");
   self endon("214105bf7d36e37f");
   self endon(#"death");

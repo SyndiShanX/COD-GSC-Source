@@ -8,7 +8,6 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\mp_common\item_world;
-
 #namespace wz_buoy_stash;
 
 autoexec __init__system__() {
@@ -55,12 +54,12 @@ function_c621758a() {
       var_e052e788 = distance2d(var_3d8e32a8.origin, scene.origin);
 
       if(var_e052e788 < 200) {
-        scene.scene_ents[#"prop 1"] clientfield::set("buoy_light_fx_changed", 2);
-        scene.scene_ents[#"prop 1"] function_5a6d95();
+        scene.scene_ents[# "prop 1"] clientfield::set("buoy_light_fx_changed", 2);
+        scene.scene_ents[# "prop 1"] function_5a6d95();
         continue;
       }
 
-      scene.scene_ents[#"prop 1"] clientfield::set("buoy_light_fx_changed", 1);
+      scene.scene_ents[# "prop 1"] clientfield::set("buoy_light_fx_changed", 1);
     }
   }
 }

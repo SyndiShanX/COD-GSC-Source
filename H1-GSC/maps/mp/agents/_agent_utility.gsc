@@ -92,19 +92,19 @@ initplayerscriptvariables(var_0) {
 getfreeagent(var_0) {
   var_1 = undefined;
 
-  if(isdefined(level.agentarray)) {
+  if(isDefined(level.agentarray)) {
     foreach(var_3 in level.agentarray) {
-      if((!isdefined(var_3.isactive) || !var_3.isactive) && (!isdefined(var_3.isreserved) || !var_3.isreserved)) {
-        if(isdefined(var_3.waitingtodeactivate) && var_3.waitingtodeactivate) {
+      if((!isDefined(var_3.isactive) || !var_3.isactive) && (!isDefined(var_3.isreserved) || !var_3.isreserved)) {
+        if(isDefined(var_3.waitingtodeactivate) && var_3.waitingtodeactivate) {
           continue;
         }
-        if(isdefined(level.despawning_agents) && common_scripts\utility::array_contains(level.despawning_agents, var_3)) {
+        if(isDefined(level.despawning_agents) && common_scripts\utility::array_contains(level.despawning_agents, var_3)) {
           continue;
         }
         var_1 = var_3;
         var_1 initagentscriptvariables();
 
-        if(isdefined(var_0))
+        if(isDefined(var_0))
           var_1.agent_type = var_0;
 
         break;
@@ -127,7 +127,7 @@ deactivateagentdelayed() {
   self notify("deactivateAgentDelayed");
   self endon("deactivateAgentDelayed");
 
-  if(!isdefined(level.despawning_agents))
+  if(!isDefined(level.despawning_agents))
     level.despawning_agents = [];
 
   if(!common_scripts\utility::array_contains(level.despawning_agents, self))
@@ -145,7 +145,7 @@ deactivateagentdelayed() {
   self.waitingtodeactivate = undefined;
 
   foreach(var_1 in level.characters) {
-    if(isdefined(var_1.attackers)) {
+    if(isDefined(var_1.attackers)) {
       foreach(var_4, var_3 in var_1.attackers) {
         if(var_3 == self)
           var_1.attackers[var_4] = undefined;
@@ -161,7 +161,7 @@ deactivateagentdelayed() {
 }
 
 getnumactiveagents(var_0) {
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     var_0 = "all";
 
   var_1 = getactiveagentsoftype(var_0);
@@ -171,11 +171,11 @@ getnumactiveagents(var_0) {
 getactiveagentsoftype(var_0) {
   var_1 = [];
 
-  if(!isdefined(level.agentarray))
+  if(!isDefined(level.agentarray))
     return var_1;
 
   foreach(var_3 in level.agentarray) {
-    if(isdefined(var_3.isactive) && var_3.isactive) {
+    if(isDefined(var_3.isactive) && var_3.isactive) {
       if(var_0 == "all" || var_3.agent_type == var_0)
         var_1[var_1.size] = var_3;
     }
@@ -191,12 +191,12 @@ getnumownedactiveagents(var_0) {
 getnumownedactiveagentsbytype(var_0, var_1) {
   var_2 = 0;
 
-  if(!isdefined(level.agentarray))
+  if(!isDefined(level.agentarray))
     return var_2;
 
   foreach(var_4 in level.agentarray) {
-    if(isdefined(var_4.isactive) && var_4.isactive) {
-      if(isdefined(var_4.owner) && var_4.owner == var_0) {
+    if(isDefined(var_4.isactive) && var_4.isactive) {
+      if(isDefined(var_4.owner) && var_4.owner == var_0) {
         if(var_1 == "all" || var_4.agent_type == var_1)
           var_2++;
       }
@@ -209,10 +209,10 @@ getnumownedactiveagentsbytype(var_0, var_1) {
 getvalidspawnpathnodenearplayer(var_0, var_1) {
   var_2 = getnodesinradius(self.origin, 350, 64, 128, "Path");
 
-  if(!isdefined(var_2) || var_2.size == 0)
+  if(!isDefined(var_2) || var_2.size == 0)
     return undefined;
 
-  if(isdefined(level.waterdeletez) && isdefined(level.trigunderwater)) {
+  if(isDefined(level.waterdeletez) && isDefined(level.trigunderwater)) {
     var_3 = var_2;
     var_2 = [];
 
@@ -222,15 +222,15 @@ getvalidspawnpathnodenearplayer(var_0, var_1) {
     }
   }
 
-  var_7 = anglestoforward(self.angles);
+  var_7 = anglesToForward(self.angles);
   var_8 = -10;
   var_9 = maps\mp\gametypes\_spawnlogic::getplayertraceheight(self);
   var_10 = (0, 0, var_9);
 
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     var_0 = 0;
 
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     var_1 = 0;
 
   var_11 = [];
@@ -243,9 +243,9 @@ getvalidspawnpathnodenearplayer(var_0, var_1) {
     var_15 = vectornormalize(var_14.origin - self.origin);
     var_16 = vectordot(var_7, var_15);
 
-    for (var_17 = 0; var_17 < var_12.size; var_17++) {
+    for(var_17 = 0; var_17 < var_12.size; var_17++) {
       if(var_16 > var_12[var_17]) {
-        for (var_18 = var_12.size; var_18 > var_17; var_18--) {
+        for(var_18 = var_12.size; var_18 > var_17; var_18--) {
           var_12[var_18] = var_12[var_18 - 1];
           var_11[var_18] = var_11[var_18 - 1];
         }
@@ -258,7 +258,7 @@ getvalidspawnpathnodenearplayer(var_0, var_1) {
     var_12[var_17] = var_16;
   }
 
-  for (var_17 = 0; var_17 < var_11.size; var_17++) {
+  for(var_17 = 0; var_17 < var_11.size; var_17++) {
     var_14 = var_11[var_17];
     var_20 = self.origin + var_10;
     var_21 = var_14.origin + var_10;
@@ -292,7 +292,7 @@ getvalidspawnpathnodenearplayer(var_0, var_1) {
     return var_14;
   }
 
-  if(var_11.size > 0 && isdefined(level.ishorde))
+  if(var_11.size > 0 && isDefined(level.ishorde))
     return var_11[0];
 }
 

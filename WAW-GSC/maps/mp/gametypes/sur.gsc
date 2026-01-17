@@ -71,7 +71,7 @@ main() {
 updateObjectiveHintMessages(alliesObjective, axisObjective) {
   game["strings"]["objective_hint_allies"] = alliesObjective;
   game["strings"]["objective_hint_axis"] = axisObjective;
-  for (i = 0; i < level.players.size; i++) {
+  for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
     if(isDefined(player.pers["team"]) && player.pers["team"] != "spectator") {
       hintText = maps\mp\gametypes\_globallogic::getObjectiveHintText(player.pers["team"]);
@@ -92,7 +92,7 @@ getRespawnDelay() {
     if(!level.spawnDelay)
       return undefined;
     if(level.spawnDelay >= level.safeZoneAutoDestroyTime)
-      self.lowerMessageOverride = & "MP_WAITING_FOR_SAFEZONE";
+      self.lowerMessageOverride = &"MP_WAITING_FOR_SAFEZONE";
     if(level.delayPlayer) {
       return min(level.spawnDelay, timeRemaining);
     } else {
@@ -102,16 +102,16 @@ getRespawnDelay() {
 }
 
 onStartGameType() {
-  maps\mp\gametypes\_globallogic::setObjectiveText("allies", & "OBJECTIVES_SUR");
-  maps\mp\gametypes\_globallogic::setObjectiveText("axis", & "OBJECTIVES_SUR");
+  maps\mp\gametypes\_globallogic::setObjectiveText("allies", &"OBJECTIVES_SUR");
+  maps\mp\gametypes\_globallogic::setObjectiveText("axis", &"OBJECTIVES_SUR");
   if(level.splitscreen) {
-    maps\mp\gametypes\_globallogic::setObjectiveScoreText("allies", & "OBJECTIVES_SUR");
-    maps\mp\gametypes\_globallogic::setObjectiveScoreText("axis", & "OBJECTIVES_SUR");
+    maps\mp\gametypes\_globallogic::setObjectiveScoreText("allies", &"OBJECTIVES_SUR");
+    maps\mp\gametypes\_globallogic::setObjectiveScoreText("axis", &"OBJECTIVES_SUR");
   } else {
-    maps\mp\gametypes\_globallogic::setObjectiveScoreText("allies", & "OBJECTIVES_SUR_SCORE");
-    maps\mp\gametypes\_globallogic::setObjectiveScoreText("axis", & "OBJECTIVES_SUR_SCORE");
+    maps\mp\gametypes\_globallogic::setObjectiveScoreText("allies", &"OBJECTIVES_SUR_SCORE");
+    maps\mp\gametypes\_globallogic::setObjectiveScoreText("axis", &"OBJECTIVES_SUR_SCORE");
   }
-  updateObjectiveHintMessages(&"MP_LOCATE_CARGO", & "MP_LOCATE_CARGO");
+  updateObjectiveHintMessages(&"MP_LOCATE_CARGO", &"MP_LOCATE_CARGO");
   setClientNameMode("auto_change");
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);
@@ -120,7 +120,7 @@ onStartGameType() {
   maps\mp\gametypes\_spawning::updateAllSpawnPoints();
   level.mapCenter = maps\mp\gametypes\_spawnlogic::findBoxCenter(level.spawnMins, level.spawnMaxs);
   setMapCenter(level.mapCenter);
-  level.spawn_all = getentarray("mp_tdm_spawn", "classname");
+  level.spawn_all = getEntArray("mp_tdm_spawn", "classname");
   if(!level.spawn_all.size) {
     println("^1No mp_tdm_spawn spawnpoints in level!");
     maps\mp\gametypes\_callbacksetup::AbortLevel();
@@ -145,19 +145,19 @@ onStartGameType() {
 SURMainLoop() {
   level endon("game_ended");
   level.safeZoneRevealTime = -100000;
-  while (level.inPrematchPeriod)
+  while(level.inPrematchPeriod)
     wait(0.05);
   wait 5;
   level.timerDisplay = [];
   level.timerDisplay["allies"] = createServerTimer("objective", 1.4, "allies");
   level.timerDisplay["allies"] setPoint("TOPRIGHT", "TOPRIGHT", 0, 0);
-  level.timerDisplay["allies"].label = & "MP_SAFEZONE_AVAILABLE_IN";
+  level.timerDisplay["allies"].label = &"MP_SAFEZONE_AVAILABLE_IN";
   level.timerDisplay["allies"].alpha = 0;
   level.timerDisplay["allies"].archived = false;
   level.timerDisplay["allies"].hideWhenInMenu = true;
   level.timerDisplay["axis"] = createServerTimer("objective", 1.4, "axis");
   level.timerDisplay["axis"] setPoint("TOPRIGHT", "TOPRIGHT", 0, 0);
-  level.timerDisplay["axis"].label = & "MP_SAFEZONE_AVAILABLE_IN";
+  level.timerDisplay["axis"].label = &"MP_SAFEZONE_AVAILABLE_IN";
   level.timerDisplay["axis"].alpha = 0;
   level.timerDisplay["axis"].archived = false;
   level.timerDisplay["axis"].hideWhenInMenu = true;
@@ -169,7 +169,7 @@ SURMainLoop() {
   level.surGameState = "spawnCargo";
   level.cargoObject = undefined;
   level.safeZoneObject = undefined;
-  while (1) {
+  while(1) {
     switch (level.surGameState) {
       case "resetCargo":
         resetCargo(level.cargoObject);
@@ -229,12 +229,12 @@ resetSafeZone(safeZoneObject) {
 }
 
 spawnCargo() {
-  cargo = PickCargoToSpawn();
+  cargo = PickCargoTospawn();
   cargoObject = cargo.gameobject;
   cargoObject maps\mp\gametypes\_gameobjects::enableObject();
   cargoObject maps\mp\gametypes\_gameobjects::allowUse("any");
   cargoObject maps\mp\gametypes\_gameobjects::setModelVisibility(true);
-  updateObjectiveHintMessages(&"MP_LOCATE_CARGO", & "MP_LOCATE_CARGO");
+  updateObjectiveHintMessages(&"MP_LOCATE_CARGO", &"MP_LOCATE_CARGO");
   return cargoObject;
 }
 
@@ -245,7 +245,7 @@ checkCargoPickup() {
 }
 
 spawnSafeZone() {
-  safeZone = PickSafeZoneToSpawn();
+  safeZone = PickSafeZoneTospawn();
   iPrintLn(&"MP_SAFEZONE_REVEALED");
   playSoundOnPlayers("mp_suitcase_pickup");
   safeZoneObject = safeZone.gameobject;
@@ -259,9 +259,9 @@ spawnSafeZone() {
   maps\mp\gametypes\_globallogic::leaderDialog("obj_capture");
   ownerTeam = getCargoOwnerTeam();
   if(ownerTeam == "allies") {
-    updateObjectiveHintMessages(&"MP_CARGO_TO_SAFEZONE", & "MP_INTERCEPT_CARGO");
+    updateObjectiveHintMessages(&"MP_CARGO_TO_SAFEZONE", &"MP_INTERCEPT_CARGO");
   } else if(ownerTeam == "axis") {
-    updateObjectiveHintMessages(&"MP_INTERCEPT_CARGO", & "MP_CARGO_TO_SAFEZONE");
+    updateObjectiveHintMessages(&"MP_INTERCEPT_CARGO", &"MP_CARGO_TO_SAFEZONE");
   }
   playSoundOnPlayers("mp_killstreak_radar");
   cargoOwnerTeam = getCargoOwnerTeam();
@@ -290,10 +290,10 @@ spawnSafeZone() {
 }
 
 checkSafeZoneResets(safeZoneObject) {
-  level.timerDisplay["allies"].label = & "MP_SAFEZONE_DESPAWN_IN";
+  level.timerDisplay["allies"].label = &"MP_SAFEZONE_DESPAWN_IN";
   if(!level.splitscreen)
     level.timerDisplay["allies"].alpha = 1;
-  level.timerDisplay["axis"].label = & "MP_SAFEZONE_DESPAWN_IN";
+  level.timerDisplay["axis"].label = &"MP_SAFEZONE_DESPAWN_IN";
   if(!level.splitscreen)
     level.timerDisplay["axis"].alpha = 1;
   level waittill("safezone_destroyed");
@@ -307,7 +307,7 @@ hideTimerDisplayOnGameEnd(timerDisplay) {
 
 forceSpawnTeam(team) {
   players = level.players;
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     player = players[i];
     if(!isDefined(player)) {
       continue;
@@ -404,13 +404,9 @@ awardSafeZonePoints(team) {
   level notify("awardSafeZonePointsRunning");
   level endon("awardSafeZonePointsRunning");
   seconds = 5;
-  while (!level.gameEnded) {
-    [
-      [level._setTeamScore]
-    ](team, [
-      [level._getTeamScore]
-    ](team) + seconds);
-    for (index = 0; index < level.players.size; index++) {
+  while(!level.gameEnded) {
+    [[level._setTeamScore]](team, [[level._getTeamScore]](team) + seconds);
+    for(index = 0; index < level.players.size; index++) {
       player = level.players[index];
       if(player.pers["team"] == team) {
         player thread[[level.onXPEvent]]("defend");
@@ -448,16 +444,16 @@ sur_playerSpawnedCB() {
 
 SetupCargoSpots() {
   maperrors = [];
-  cargoSpots = getentarray("sur_cargo", "targetname");
+  cargoSpots = getEntArray("sur_cargo", "targetname");
   if(cargoSpots.size < 2) {
     maperrors[maperrors.size] = "There are not at least 2 entities with targetname \"sur_cargo\"";
   }
-  trigs = getentarray("sur_cargo_pickup_trig", "targetname");
-  for (i = 0; i < cargoSpots.size; i++) {
+  trigs = getEntArray("sur_cargo_pickup_trig", "targetname");
+  for(i = 0; i < cargoSpots.size; i++) {
     errored = false;
     cargoSpot = cargoSpots[i];
     cargoSpot.trig = undefined;
-    for (j = 0; j < trigs.size; j++) {
+    for(j = 0; j < trigs.size; j++) {
       if(cargoSpot istouching(trigs[j])) {
         if(isDefined(cargoSpot.trig)) {
           maperrors[maperrors.size] = "Cargo at " + cargoSpot.origin + " is touching more than one \"sur_cargo_pickup_trig\" trigger";
@@ -497,7 +493,7 @@ SetupCargoSpots() {
   }
   if(maperrors.size > 0) {
     println("^1------------ Map Errors ------------");
-    for (i = 0; i < maperrors.size; i++)
+    for(i = 0; i < maperrors.size; i++)
       println(maperrors[i]);
     println("^1------------------------------------");
     maps\mp\_utility::error("Map errors. See above");
@@ -512,16 +508,16 @@ SetupCargoSpots() {
 
 SetupSafeZones() {
   maperrors = [];
-  safeZones = getentarray("sur_hardpoint", "targetname");
+  safeZones = getEntArray("sur_hardpoint", "targetname");
   if(safeZones.size < 2) {
     maperrors[maperrors.size] = "There are not at least 2 entities with targetname \"sur_hardpoint\"";
   }
-  trigs = getentarray("safezone_trigger", "targetname");
-  for (i = 0; i < safeZones.size; i++) {
+  trigs = getEntArray("safezone_trigger", "targetname");
+  for(i = 0; i < safeZones.size; i++) {
     errored = false;
     safeZone = safeZones[i];
     safeZone.trig = undefined;
-    for (j = 0; j < trigs.size; j++) {
+    for(j = 0; j < trigs.size; j++) {
       if(safeZone istouching(trigs[j])) {
         if(isDefined(safeZone.trig)) {
           maperrors[maperrors.size] = "Safe Zone at " + safeZone.origin + " is touching more than one \"safezone_trigger\" trigger";
@@ -543,7 +539,7 @@ SetupSafeZones() {
     visuals = [];
     visuals[0] = safeZone;
     otherVisuals = getEntArray(safeZone.target, "targetname");
-    for (j = 0; j < otherVisuals.size; j++) {
+    for(j = 0; j < otherVisuals.size; j++) {
       visuals[visuals.size] = otherVisuals[j];
     }
     safeZone.gameObject = maps\mp\gametypes\_gameobjects::createUseObject("neutral", safeZone.trig, visuals, (safeZone.origin - safeZone.trigorigin) + level.iconoffset);
@@ -554,7 +550,7 @@ SetupSafeZones() {
   }
   if(maperrors.size > 0) {
     println("^1------------ Map Errors ------------");
-    for (i = 0; i < maperrors.size; i++)
+    for(i = 0; i < maperrors.size; i++)
       println(maperrors[i]);
     println("^1------------------------------------");
     maps\mp\_utility::error("Map errors. See above");
@@ -569,12 +565,12 @@ SetupSafeZones() {
 
 setUpNearbySpawns() {
   spawns = level.spawn_all;
-  for (i = 0; i < spawns.size; i++) {
+  for(i = 0; i < spawns.size; i++) {
     spawns[i].distsq = distanceSquared(spawns[i].origin, self.origin);
   }
-  for (i = 1; i < spawns.size; i++) {
+  for(i = 1; i < spawns.size; i++) {
     thespawn = spawns[i];
-    for (j = i - 1; j >= 0 && thespawn.distsq < spawns[j].distsq; j--)
+    for(j = i - 1; j >= 0 && thespawn.distsq < spawns[j].distsq; j--)
       spawns[j + 1] = spawns[j];
     spawns[j + 1] = thespawn;
   }
@@ -583,10 +579,10 @@ setUpNearbySpawns() {
   third = [];
   outer = [];
   thirdSize = spawns.size / 3;
-  for (i = 0; i <= thirdSize; i++) {
+  for(i = 0; i <= thirdSize; i++) {
     first[first.size] = spawns[i];
   }
-  for (; i < spawns.size; i++) {
+  for(; i < spawns.size; i++) {
     outer[outer.size] = spawns[i];
     if(i <= (thirdSize * 2))
       second[second.size] = spawns[i];
@@ -599,12 +595,12 @@ setUpNearbySpawns() {
   self.gameObject.outerSpawns = outer;
 }
 
-PickCargoToSpawn() {
+PickCargoTospawn() {
   avgpos["allies"] = (0, 0, 0);
   avgpos["axis"] = (0, 0, 0);
   num["allies"] = 0;
   num["axis"] = 0;
-  for (i = 0; i < level.players.size; i++) {
+  for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
     if(isalive(player)) {
       avgpos[player.pers["team"]] += player.origin;
@@ -613,7 +609,7 @@ PickCargoToSpawn() {
   }
   if(num["allies"] == 0 || num["axis"] == 0) {
     cargoSpot = level.cargoSpots[randomint(level.cargoSpots.size)];
-    while (isDefined(level.prevCargoSpot) && cargoSpot == level.prevCargoSpot)
+    while(isDefined(level.prevCargoSpot) && cargoSpot == level.prevCargoSpot)
       cargoSpot = level.cargoSpots[randomint(level.cargoSpots.size)];
     level.prevCargoSpot2 = level.prevCargoSpot;
     level.prevCargoSpot = cargoSpot;
@@ -623,7 +619,7 @@ PickCargoToSpawn() {
   avgpos["axis"] = avgpos["axis"] / num["axis"];
   bestCargoSpot = undefined;
   lowestcost = undefined;
-  for (i = 0; i < level.cargoSpots.size; i++) {
+  for(i = 0; i < level.cargoSpots.size; i++) {
     cargoSpot = level.cargoSpots[i];
     cost = abs(distance(cargoSpot.origin, avgpos["allies"]) - distance(cargoSpot.origin, avgpos["axis"]));
     if(isDefined(level.prevCargoSpot) && cargoSpot == level.prevCargoSpot) {
@@ -646,12 +642,12 @@ PickCargoToSpawn() {
   return bestCargoSpot;
 }
 
-PickSafeZoneToSpawn() {
+PickSafeZoneTospawn() {
   avgpos["allies"] = (0, 0, 0);
   avgpos["axis"] = (0, 0, 0);
   num["allies"] = 0;
   num["axis"] = 0;
-  for (i = 0; i < level.players.size; i++) {
+  for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
     if(isalive(player)) {
       avgpos[player.pers["team"]] += player.origin;
@@ -660,7 +656,7 @@ PickSafeZoneToSpawn() {
   }
   if(num["allies"] == 0 || num["axis"] == 0) {
     safeZone = level.safeZones[randomint(level.safeZones.size)];
-    while (isDefined(level.prevSafeZone) && safeZone == level.prevSafeZone)
+    while(isDefined(level.prevSafeZone) && safeZone == level.prevSafeZone)
       safeZone = level.safeZones[randomint(level.safeZones.size)];
     level.prevSafeZone2 = level.prevSafeZone;
     level.prevSafeZone = safeZone;
@@ -670,7 +666,7 @@ PickSafeZoneToSpawn() {
   avgpos["axis"] = avgpos["axis"] / num["axis"];
   bestSafeZone = undefined;
   lowestcost = undefined;
-  for (i = 0; i < level.safeZones.size; i++) {
+  for(i = 0; i < level.safeZones.size; i++) {
     safeZone = level.safeZones[i];
     cost = abs(distance(safeZone.origin, avgpos["allies"]) - distance(safeZone.origin, avgpos["axis"]));
     if(isDefined(level.prevSafeZone) && safeZone == level.prevSafeZone) {

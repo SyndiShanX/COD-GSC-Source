@@ -8,7 +8,6 @@
 #include scripts\core_common\math_shared;
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
-
 #namespace destructserverutils;
 
 autoexec __init__system__() {
@@ -62,7 +61,7 @@ __init__() {
   level.destructiblecharacterdefs = processedbundles;
 }
 
-private _getdestructibledef(entity) {
+_getdestructibledef(entity) {
   return level.destructiblecharacterdefs[entity.destructibledef];
 }
 
@@ -80,7 +79,7 @@ function_f865501b(entity, var_e9807706, var_9cea16fe) {
   reapplydestructedpieces(entity);
 }
 
-private _setdestructed(entity, destructflag) {
+_setdestructed(entity, destructflag) {
   entity._destruct_state = getdestructstate(entity) | destructflag;
   entity clientfield::set("destructible_character_state", entity._destruct_state);
 }
@@ -266,7 +265,7 @@ function_9885f550(entity, hitloc, var_a9e3f040) {
 
 isdestructed(entity, piecenumber) {
   assert(1 <= piecenumber && piecenumber <= 20);
-  return getdestructstate(entity)&1 << piecenumber;
+  return getdestructstate(entity) & 1 << piecenumber;
 }
 
 reapplydestructedpieces(entity) {
@@ -321,7 +320,7 @@ togglespawngibs(entity, shouldspawngibs) {
   if(shouldspawngibs) {
     entity._destruct_state = getdestructstate(entity) | 1;
   } else {
-    entity._destruct_state = getdestructstate(entity)&-2;
+    entity._destruct_state = getdestructstate(entity) &-2;
   }
 
   entity clientfield::set("destructible_character_state", entity._destruct_state);

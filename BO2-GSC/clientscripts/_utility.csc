@@ -44,7 +44,7 @@ getstructarray(name, type) {
 }
 
 play_sound_in_space(localclientnum, alias, origin) {
-  playsound(localclientnum, alias, origin);
+  playSound(localclientnum, alias, origin);
 }
 
 vector_compare(vec1, vec2) {
@@ -171,7 +171,7 @@ array_wait(array, msg, timeout) {
 
   for(i = 0; i < keys.size; i++) {
     key = keys[i];
-    structs[key] = spawnstruct();
+    structs[key] = spawnStruct();
     structs[key]._array_wait = 1;
     structs[key] thread array_waitlogic1(array[key], msg, timeout);
   }
@@ -237,7 +237,7 @@ registersystem(ssysname, cbfunc) {
 
     return;
   } else {
-    level._systemstates[ssysname] = spawnstruct();
+    level._systemstates[ssysname] = spawnStruct();
     level._systemstates[ssysname].callback = cbfunc;
   }
 }
@@ -256,7 +256,7 @@ loop_fx_sound(clientnum, alias, origin, ender) {
   }
 
   setfakeentorg(clientnum, entid, origin);
-  playloopsound(clientnum, entid, alias);
+  playLoopSound(clientnum, entid, alias);
 }
 
 waitforallclients() {
@@ -282,7 +282,7 @@ waittill_any_return(string1, string2, string3, string4, string5, string6, string
   if((!isDefined(string1) || string1 != "death") && (!isDefined(string2) || string2 != "death") && (!isDefined(string3) || string3 != "death") && (!isDefined(string4) || string4 != "death") && (!isDefined(string5) || string5 != "death") && (!isDefined(string6) || string6 != "death") && (!isDefined(string7) || string7 != "death"))
     self endon("death");
 
-  ent = spawnstruct();
+  ent = spawnStruct();
 
   if(isDefined(string1))
     self thread waittill_string(string1, ent);
@@ -314,7 +314,7 @@ waittill_any_array_return(a_notifies) {
   if(isinarray(a_notifies, "death"))
     self endon("death");
 
-  s_tracker = spawnstruct();
+  s_tracker = spawnStruct();
 
   foreach(str_notify in a_notifies) {
     if(isDefined(str_notify))
@@ -346,7 +346,7 @@ waittill_any(string1, string2, string3, string4, string5) {
 
 waittill_multiple(string1, string2, string3, string4, string5) {
   self endon("death");
-  ent = spawnstruct();
+  ent = spawnStruct();
   ent.threads = 0;
 
   if(isDefined(string1)) {
@@ -384,7 +384,7 @@ waittill_multiple(string1, string2, string3, string4, string5) {
 
 within_fov(start_origin, start_angles, end_origin, fov) {
   normal = vectornormalize(end_origin - start_origin);
-  forward = anglestoforward(start_angles);
+  forward = anglesToForward(start_angles);
   dot = vectordot(forward, normal);
   return dot >= fov;
 }
@@ -578,19 +578,19 @@ playfx_for_all_local_clients(fx_id, pos, forward_vec, up_vec) {
 
   if(isDefined(up_vec)) {
     for(i = 0; i < localplayers.size; i++)
-      playfx(i, fx_id, pos, forward_vec, up_vec);
+      playFX(i, fx_id, pos, forward_vec, up_vec);
   } else if(isDefined(forward_vec)) {
     for(i = 0; i < localplayers.size; i++)
-      playfx(i, fx_id, pos, forward_vec);
+      playFX(i, fx_id, pos, forward_vec);
   } else {
     for(i = 0; i < localplayers.size; i++)
-      playfx(i, fx_id, pos);
+      playFX(i, fx_id, pos);
   }
 }
 
 play_sound_on_client(sound_alias) {
   players = level.localplayers;
-  playsound(0, sound_alias, players[0].origin);
+  playSound(0, sound_alias, players[0].origin);
 }
 
 loop_sound_on_client(sound_alias, min_delay, max_delay, end_on) {
@@ -762,9 +762,9 @@ spawn_player_arms() {
   arms = spawn(self getlocalclientnumber(), self getorigin() + vectorscale((0, 0, -1), 1000.0), "script_model");
 
   if(isDefined(level.player_viewmodel))
-    arms setmodel(level.player_viewmodel);
+    arms setModel(level.player_viewmodel);
   else
-    arms setmodel("c_usa_cia_masonjr_viewhands");
+    arms setModel("c_usa_cia_masonjr_viewhands");
 
   return arms;
 }
@@ -781,7 +781,7 @@ get_eye() {
     }
   }
 
-  pos = self geteye();
+  pos = self getEye();
   return pos;
 }
 
@@ -894,7 +894,7 @@ isdumbrocketlauncherweapon(weapon) {
 }
 
 new_timer() {
-  s_timer = spawnstruct();
+  s_timer = spawnStruct();
   s_timer.n_time_created = getrealtime();
   return s_timer;
 }
@@ -957,7 +957,7 @@ init_shader_constant(localclientnum, n_index, str_constant) {
     self.shaders = [];
 
   if(!isDefined(self.shaders[str_constant]))
-    self.shaders[str_constant] = spawnstruct();
+    self.shaders[str_constant] = spawnStruct();
 
   if(!isDefined(self.shaders[str_constant].x))
     self.shaders[str_constant].x = 0;

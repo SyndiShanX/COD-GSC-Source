@@ -10,7 +10,7 @@
 #include animscripts\combat_utility;
 
 dds_init() {
-  level.dds = spawnstruct();
+  level.dds = spawnStruct();
   level.dds.heartbeat = 0.25;
   level.dds.max_active_events = 6;
   level.dds.variant_limit = 17;
@@ -61,7 +61,7 @@ init_dds_countryids(voice, dds_label) {
 }
 
 add_dds_countryid(voice, dds_label, max_voices) {
-  level.dds.countryids[voice] = spawnstruct();
+  level.dds.countryids[voice] = spawnStruct();
   level.dds.countryids[voice].label = dds_label;
   level.dds.countryids[voice].count = 0;
   level.dds.countryids[voice].max_voices = max_voices;
@@ -163,7 +163,7 @@ init_dds_categories_axis() {
 }
 
 add_dds_category(name, alias_name, duration, rspns_cat_name, clear_category_on_action_success, priority_sort, get_talker_func, distance, probability, timeout_reset, should_squelch) {
-  new_category = spawnstruct();
+  new_category = spawnStruct();
   new_category.name = name;
   new_category.alias_name = alias_name;
   new_category.duration = duration;
@@ -183,7 +183,7 @@ add_dds_category(name, alias_name, duration, rspns_cat_name, clear_category_on_a
 }
 
 add_dds_category_axis(name, alias_name, duration, rspns_cat_name, clear_category_on_action_success, priority_sort, get_talker_func, distance, probability, timeout_reset, notused) {
-  new_category_axis = spawnstruct();
+  new_category_axis = spawnStruct();
   new_category_axis.name = name;
   new_category_axis.alias_name = alias_name;
   new_category_axis.duration = duration;
@@ -832,7 +832,7 @@ dds_getclock_position(pos) {
     return;
   }
   playerangles = level.player getplayerangles();
-  playerforwardvec = anglestoforward(playerangles);
+  playerforwardvec = anglesToForward(playerangles);
   playerunitforwardvec = vectornormalize(playerforwardvec);
   playerpos = level.player getorigin();
   playertobanzaivec = pos - playerpos;
@@ -1241,7 +1241,7 @@ dds_notify(category_name, isalliesline) {
   } else if(level.dds.active_events[category_name].size > level.dds.max_active_events) {
     return;
   }
-  event = spawnstruct();
+  event = spawnStruct();
   event.category_name = category_name;
   event.ent = self;
   event.ent_origin = self.origin;
@@ -1406,13 +1406,13 @@ debug_destroy_hud_elem() {
 }
 
 dds_debug() {
-  level.dds.debug = spawnstruct();
+  level.dds.debug = spawnStruct();
   level.dds.debug.active_event_stats = [];
   level.dds.debug.active_event_stats_axis = [];
   level.dds.debug.stat_types = array("A. Events: ", "T. Notifies: ", "Processed: ", "Time1: ", "Cat. T.O.: ", "Backoff T.O.: ");
 
   for(i = 0; i < level.dds.categories.size; i++) {
-    level.dds.debug.active_event_stats[level.dds.categories[i].name] = spawnstruct();
+    level.dds.debug.active_event_stats[level.dds.categories[i].name] = spawnStruct();
     level.dds.debug.active_event_stats[level.dds.categories[i].name].cur_active_events = 0;
     level.dds.debug.active_event_stats[level.dds.categories[i].name].total_notify_count = 0;
     level.dds.debug.active_event_stats[level.dds.categories[i].name].processed_count = 0;
@@ -1424,7 +1424,7 @@ dds_debug() {
   }
 
   for(i = 0; i < level.dds.categories_axis.size; i++) {
-    level.dds.debug.active_event_stats_axis[level.dds.categories_axis[i].name] = spawnstruct();
+    level.dds.debug.active_event_stats_axis[level.dds.categories_axis[i].name] = spawnStruct();
     level.dds.debug.active_event_stats_axis[level.dds.categories_axis[i].name].cur_active_events = 0;
     level.dds.debug.active_event_stats_axis[level.dds.categories_axis[i].name].total_notify_count = 0;
     level.dds.debug.active_event_stats_axis[level.dds.categories_axis[i].name].processed_count = 0;
@@ -1584,7 +1584,7 @@ debug_sphere_draw_type(event_type, category_name, event, speaker) {
   if(!isDefined(event)) {
     return;
   }
-  draw_info = spawnstruct();
+  draw_info = spawnStruct();
   draw_info.event_type = event_type;
   draw_info.ent_number = event.ent_number;
   draw_info.ent_origin = event.ent_origin;

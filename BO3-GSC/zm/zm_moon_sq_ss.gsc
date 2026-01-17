@@ -25,7 +25,7 @@
 function ss_debug() {
   level endon("sq_ss1_over");
   level endon("sq_ss2_over");
-  if(!isdefined(level._debug_ss)) {
+  if(!isDefined(level._debug_ss)) {
     level._debug_ss = 1;
     level.ss_val = newdebughudelem();
     level.ss_val.location = 0;
@@ -78,10 +78,10 @@ function ss_debug() {
     level.ss_user_val_text.alpha = 1;
     level.ss_user_val_text settext("");
   }
-  while (true) {
-    if(isdefined(level._ss_user_seq)) {
+  while(true) {
+    if(isDefined(level._ss_user_seq)) {
       str = "";
-      for (i = 0; i < level._ss_user_seq.size; i++) {
+      for(i = 0; i < level._ss_user_seq.size; i++) {
         str = str + level._ss_user_seq[i];
       }
       level.ss_user_val settext(str);
@@ -95,9 +95,9 @@ function ss_debug() {
 function init_1() {
   level flag::init("displays_active");
   level flag::init("wait_for_hack");
-  zm_sidequests::declare_sidequest_stage("sq", "ss1", & init_stage_1, & stage_logic, & exit_stage_1);
-  buttons = getentarray("sq_ss_button", "targetname");
-  for (i = 0; i < buttons.size; i++) {
+  zm_sidequests::declare_sidequest_stage("sq", "ss1", &init_stage_1, &stage_logic, &exit_stage_1);
+  buttons = getEntArray("sq_ss_button", "targetname");
+  for(i = 0; i < buttons.size; i++) {
     ent = getent(buttons[i].target, "targetname");
     buttons[i].terminal_model = ent;
   }
@@ -105,7 +105,7 @@ function init_1() {
 }
 
 function init_2() {
-  zm_sidequests::declare_sidequest_stage("sq", "ss2", & init_stage_2, & stage_logic, & exit_stage_2);
+  zm_sidequests::declare_sidequest_stage("sq", "ss2", &init_stage_2, &stage_logic, &exit_stage_2);
 }
 
 function init_stage_1() {
@@ -123,9 +123,9 @@ function ss2_hack(hacker) {
 
 function stage_logic() {
   buttons = level._ss_buttons;
-  array::thread_all(buttons, & sq_ss_button_thread);
-  if(isdefined(level._ss_hacks)) {
-    for (i = 0; i < level._ss_hacks.size; i++) {
+  array::thread_all(buttons, &sq_ss_button_thread);
+  if(isDefined(level._ss_hacks)) {
+    for(i = 0; i < level._ss_hacks.size; i++) {
       zm_equip_hacker::deregister_hackable_struct(level._ss_hacks[i]);
     }
   }
@@ -157,16 +157,16 @@ function do_ss2_logic() {
 
 function generate_sequence(seq_length) {
   seq = [];
-  for (i = 0; i < seq_length; i++) {
+  for(i = 0; i < seq_length; i++) {
     seq[seq.size] = randomintrange(0, 4);
   }
   last = -1;
   num_reps = 0;
-  for (i = 0; i < seq_length; i++) {
+  for(i = 0; i < seq_length; i++) {
     if(seq[i] == last) {
       num_reps++;
       if(num_reps >= 2) {
-        while (seq[i] == last) {
+        while(seq[i] == last) {
           seq[i] = randomintrange(0, 4);
         }
         num_reps = 0;
@@ -177,15 +177,15 @@ function generate_sequence(seq_length) {
     last = seq[i];
     num_reps = 0;
   }
-  if(isdefined(level.ss_val)) {
+  if(isDefined(level.ss_val)) {
     str = "";
-    for (i = 0; i < seq.size; i++) {
+    for(i = 0; i < seq.size; i++) {
       str = str + seq[i];
     }
     level.ss_val settext(str);
   }
   if(1 == getdvarint("scr_debug_ss")) {
-    for (i = 0; i < seq.size; i++) {
+    for(i = 0; i < seq.size; i++) {
       seq[i] = 0;
     }
   }
@@ -193,7 +193,7 @@ function generate_sequence(seq_length) {
 }
 
 function kill_debug() {
-  if(isdefined(level.ss_val)) {
+  if(isDefined(level.ss_val)) {
     level.ss_val destroy();
     level.ss_val = undefined;
     level.ss_val_text destroy();
@@ -209,7 +209,7 @@ function kill_debug() {
 function exit_stage_1(success) {
   kill_debug();
   level flag::set("ss1");
-  array::thread_all(level._ss_buttons, & sq_ss_button_dud_thread);
+  array::thread_all(level._ss_buttons, &sq_ss_button_dud_thread);
 }
 
 function exit_stage_2(success) {
@@ -225,7 +225,7 @@ function sq_ss_button_debug() {
   level endon("ss_kill_button_thread");
   level endon("sq_ss1_over");
   level endon("sq_ss2_over");
-  while (true) {
+  while(true) {
     print3d(self.origin + vectorscale((0, 0, 1), 12), self.script_int, vectorscale((0, 1, 0), 255), 1);
     wait(0.1);
   }
@@ -234,41 +234,41 @@ function sq_ss_button_debug() {
 function do_attract() {
   level flag::set("displays_active");
   buttons = level._ss_buttons;
-  for (i = 0; i < buttons.size; i++) {
+  for(i = 0; i < buttons.size; i++) {
     ent = buttons[i].terminal_model;
-    ent setmodel("p7_zm_moo_computer_rocket_launch");
+    ent setModel("p7_zm_moo_computer_rocket_launch");
   }
-  for (i = 0; i < buttons.size; i++) {
+  for(i = 0; i < buttons.size; i++) {
     button = undefined;
-    for (j = 0; j < buttons.size; j++) {
+    for(j = 0; j < buttons.size; j++) {
       if(buttons[j].script_int == i) {
         button = buttons[j];
       }
     }
-    if(isdefined(button)) {
+    if(isDefined(button)) {
       ent = button.terminal_model;
       model = get_console_model(button.script_int);
-      ent setmodel(model);
-      ent playsound(color_sound_selector(button.script_int));
+      ent setModel(model);
+      ent playSound(color_sound_selector(button.script_int));
       wait(0.6);
-      ent setmodel("p7_zm_moo_computer_rocket_launch");
+      ent setModel("p7_zm_moo_computer_rocket_launch");
     }
   }
   level thread do_ss_start_vox(level._ss_stage);
-  for (i = buttons.size - 1; i >= 0; i--) {
+  for(i = buttons.size - 1; i >= 0; i--) {
     button = undefined;
-    for (j = 0; j < buttons.size; j++) {
+    for(j = 0; j < buttons.size; j++) {
       if(buttons[j].script_int == i) {
         button = buttons[j];
       }
     }
-    if(isdefined(button)) {
+    if(isDefined(button)) {
       ent = button.terminal_model;
       model = get_console_model(button.script_int);
-      ent setmodel(model);
-      ent playsound(color_sound_selector(button.script_int));
+      ent setModel(model);
+      ent playSound(color_sound_selector(button.script_int));
       wait(0.6);
-      ent setmodel("p7_zm_moo_computer_rocket_launch");
+      ent setModel("p7_zm_moo_computer_rocket_launch");
     }
   }
   wait(0.5);
@@ -278,26 +278,26 @@ function do_attract() {
 function sq_ss_button_thread(dud) {
   level endon("sq_ss1_over");
   level endon("sq_ss2_over");
-  if(!isdefined(dud)) {
+  if(!isDefined(dud)) {
     self notify("ss_kill_button_thread");
   }
   pos = self.origin;
   pressed = self.origin - (anglestoright(self.angles) * 0.25);
   targ_model = self.terminal_model;
-  while (true) {
+  while(true) {
     self waittill("trigger");
     if(!level flag::get("displays_active")) {
-      if(!isdefined(dud)) {
-        if(isdefined(level._ss_user_seq)) {
+      if(!isDefined(dud)) {
+        if(isDefined(level._ss_user_seq)) {
           level._ss_user_seq[level._ss_user_seq.size] = self.script_int;
         }
       }
       model = get_console_model(self.script_int);
-      targ_model playsound(color_sound_selector(self.script_int));
-      targ_model setmodel(model);
+      targ_model playSound(color_sound_selector(self.script_int));
+      targ_model setModel(model);
     }
     wait(0.3);
-    targ_model setmodel("p7_zm_moo_computer_rocket_launch");
+    targ_model setModel("p7_zm_moo_computer_rocket_launch");
   }
 }
 
@@ -329,7 +329,7 @@ function ss_logic(seq_length, seq_start_length) {
   level._ss_user_seq = [];
   level._ss_sequence_matched = 0;
   fails = 0;
-  while (!level._ss_sequence_matched) {
+  while(!level._ss_sequence_matched) {
     wait(0.5);
     self thread ss_logic_internal(seq, seq_length, seq_start_length);
     self util::waittill_either("ss_won", "ss_failed");
@@ -352,7 +352,7 @@ function ss_logic_internal(seq, seq_length, seq_start_length) {
   do_attract();
   pos = seq_start_length;
   buttons = level._ss_buttons;
-  for (i = pos; i <= seq_length; i++) {
+  for(i = pos; i <= seq_length; i++) {
     level._ss_user_seq = [];
     display_seq(buttons, seq, i);
     wait(1);
@@ -373,15 +373,15 @@ function user_input_timeout(len) {
 
 function validate_input(sequence, len) {
   self thread user_input_timeout(len);
-  while (level._ss_user_seq.size < len) {
-    for (i = 0; i < level._ss_user_seq.size; i++) {
+  while(level._ss_user_seq.size < len) {
+    for(i = 0; i < level._ss_user_seq.size; i++) {
       if(level._ss_user_seq[i] != sequence[i]) {
         self notify("ss_failed");
       }
     }
     wait(0.05);
   }
-  for (i = 0; i < level._ss_user_seq.size; i++) {
+  for(i = 0; i < level._ss_user_seq.size; i++) {
     if(level._ss_user_seq[i] != sequence[i]) {
       self notify("ss_failed");
     }
@@ -395,9 +395,9 @@ function display_fail() {
   buttons = level._ss_buttons;
   level thread do_ss_failure_vox(level._ss_stage);
   all_screens_black = 0;
-  while (!all_screens_black) {
+  while(!all_screens_black) {
     all_screens_black = 1;
-    for (i = 0; i < buttons.size; i++) {
+    for(i = 0; i < buttons.size; i++) {
       ent = buttons[i].terminal_model;
       if(ent.model != "p7_zm_moo_computer_rocket_launch") {
         all_screens_black = 0;
@@ -407,15 +407,15 @@ function display_fail() {
     wait(0.1);
   }
   level thread sound::play_in_space("evt_ss_wrong", (-1006.3, 294.2, -93.7));
-  for (i = 0; i < 5; i++) {
-    for (j = 0; j < buttons.size; j++) {
+  for(i = 0; i < 5; i++) {
+    for(j = 0; j < buttons.size; j++) {
       ent = buttons[j].terminal_model;
-      ent setmodel("p7_zm_moo_computer_rocket_launch_red");
+      ent setModel("p7_zm_moo_computer_rocket_launch_red");
     }
     wait(0.2);
-    for (j = 0; j < buttons.size; j++) {
+    for(j = 0; j < buttons.size; j++) {
       ent = buttons[j].terminal_model;
-      ent setmodel("p7_zm_moo_computer_rocket_launch");
+      ent setModel("p7_zm_moo_computer_rocket_launch");
     }
     wait(0.05);
   }
@@ -423,7 +423,7 @@ function display_fail() {
 }
 
 function play_win_seq(seq) {
-  for (i = 0; i < seq.size; i++) {
+  for(i = 0; i < seq.size; i++) {
     level thread sound::play_in_space(color_sound_selector(seq[i]), (-1006.3, 294.2, -93.7));
     wait(0.2);
   }
@@ -434,9 +434,9 @@ function display_success(seq) {
   buttons = level._ss_buttons;
   level thread do_ss_success_vox(level._ss_stage);
   all_screens_black = 0;
-  while (!all_screens_black) {
+  while(!all_screens_black) {
     all_screens_black = 1;
-    for (i = 0; i < buttons.size; i++) {
+    for(i = 0; i < buttons.size; i++) {
       ent = buttons[i].terminal_model;
       if(ent.model != "p7_zm_moo_computer_rocket_launch") {
         all_screens_black = 0;
@@ -446,15 +446,15 @@ function display_success(seq) {
     wait(0.1);
   }
   level thread play_win_seq(seq);
-  for (i = 0; i < 5; i++) {
-    for (j = 0; j < buttons.size; j++) {
+  for(i = 0; i < 5; i++) {
+    for(j = 0; j < buttons.size; j++) {
       ent = buttons[j].terminal_model;
-      ent setmodel("p7_zm_moo_computer_rocket_launch_green");
+      ent setModel("p7_zm_moo_computer_rocket_launch_green");
     }
     wait(0.2);
-    for (j = 0; j < buttons.size; j++) {
+    for(j = 0; j < buttons.size; j++) {
       ent = buttons[j].terminal_model;
-      ent setmodel("p7_zm_moo_computer_rocket_launch");
+      ent setModel("p7_zm_moo_computer_rocket_launch");
     }
     wait(0.05);
   }
@@ -463,23 +463,23 @@ function display_success(seq) {
 
 function display_seq(buttons, seq, index) {
   level flag::set("displays_active");
-  for (i = 0; i < index; i++) {
+  for(i = 0; i < index; i++) {
     print_duration = 1;
     wait_duration = 0.4;
     if(i < (index - 1)) {
       print_duration = print_duration / 2;
       wait_duration = wait_duration / 2;
     }
-    for (j = 0; j < buttons.size; j++) {
+    for(j = 0; j < buttons.size; j++) {
       ent = buttons[j].terminal_model;
       model = get_console_model(seq[i]);
       level thread sound::play_in_space(color_sound_selector(seq[i]), (-1006.3, 294.2, -93.7));
-      ent setmodel(model);
+      ent setModel(model);
     }
     wait(print_duration);
-    for (j = 0; j < buttons.size; j++) {
+    for(j = 0; j < buttons.size; j++) {
       ent = buttons[j].terminal_model;
-      ent setmodel("p7_zm_moo_computer_rocket_launch");
+      ent setModel("p7_zm_moo_computer_rocket_launch");
     }
     wait(wait_duration);
   }
@@ -507,10 +507,10 @@ function do_ss_start_vox(stage) {
   playon = level._ss_buttons[1].terminal_model;
   if(stage == 1) {
     player = is_player_close_enough(playon);
-    if(isdefined(player)) {
+    if(isDefined(player)) {
       playon playsoundwithnotify("vox_mcomp_quest_step1_0", "mcomp_done0");
       playon waittill("mcomp_done0");
-      if(isdefined(player)) {
+      if(isDefined(player)) {
         player thread zm_audio::create_and_play_dialog("eggs", "quest1", 0);
       }
     }
@@ -523,16 +523,16 @@ function do_ss_failure_vox(stage) {
   playon = level._ss_buttons[1].terminal_model;
   if(stage == 1) {
     player = is_player_close_enough(playon);
-    if(isdefined(player)) {
+    if(isDefined(player)) {
       playon playsoundwithnotify("vox_mcomp_quest_step1_1", "mcomp_done2");
       playon waittill("mcomp_done2");
-      if(isdefined(player)) {
+      if(isDefined(player)) {
         player thread zm_audio::create_and_play_dialog("eggs", "quest1", 1);
       }
     }
   } else {
     player = is_player_close_enough(playon);
-    if(isdefined(player)) {
+    if(isDefined(player)) {
       switch (level.ss_comp_vox_count) {
         case 0: {
           player thread zm_audio::create_and_play_dialog("eggs", "quest1", 1);
@@ -555,10 +555,10 @@ function do_ss_success_vox(stage) {
   playon = level._ss_buttons[1].terminal_model;
   if(stage == 1) {
     player = is_player_close_enough(playon);
-    if(isdefined(player)) {
+    if(isDefined(player)) {
       playon playsoundwithnotify("vox_mcomp_quest_step1_2", "mcomp_done3");
       playon waittill("mcomp_done3");
-      if(isdefined(player)) {
+      if(isDefined(player)) {
         player thread zm_audio::create_and_play_dialog("eggs", "quest1", 2);
       }
     }
@@ -588,7 +588,7 @@ function do_ss_success_vox(stage) {
 
 function is_player_close_enough(org) {
   players = getplayers();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(distancesquared(org.origin, players[i].origin) <= 5625) {
       return players[i];
     }

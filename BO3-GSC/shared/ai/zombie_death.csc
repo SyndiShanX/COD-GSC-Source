@@ -9,7 +9,7 @@
 
 function autoexec init_fire_fx() {
   wait(0.016);
-  if(!isdefined(level._effect)) {
+  if(!isDefined(level._effect)) {
     level._effect = [];
   }
   level._effect["character_fire_death_sm"] = "zombie/fx_fire_torso_zmb";
@@ -20,7 +20,7 @@ function on_fire_timeout(localclientnum) {
   self endon("death");
   self endon("entityshutdown");
   wait(12);
-  if(isdefined(self) && isalive(self)) {
+  if(isDefined(self) && isalive(self)) {
     self.is_on_fire = 0;
     self notify("stop_flame_damage");
   }
@@ -29,23 +29,23 @@ function on_fire_timeout(localclientnum) {
 function flame_death_fx(localclientnum) {
   self endon("death");
   self endon("entityshutdown");
-  if(isdefined(self.is_on_fire) && self.is_on_fire) {
+  if(isDefined(self.is_on_fire) && self.is_on_fire) {
     return;
   }
   self.is_on_fire = 1;
   self thread on_fire_timeout();
-  if(isdefined(level._effect) && isdefined(level._effect["character_fire_death_torso"])) {
+  if(isDefined(level._effect) && isDefined(level._effect["character_fire_death_torso"])) {
     fire_tag = "j_spinelower";
-    if(!isdefined(self gettagorigin(fire_tag))) {
+    if(!isDefined(self gettagorigin(fire_tag))) {
       fire_tag = "tag_origin";
     }
-    if(!isdefined(self.isdog) || !self.isdog) {
-      playfxontag(localclientnum, level._effect["character_fire_death_torso"], self, fire_tag);
+    if(!isDefined(self.isdog) || !self.isdog) {
+      playFXOnTag(localclientnum, level._effect["character_fire_death_torso"], self, fire_tag);
     }
   } else {
     println("");
   }
-  if(isdefined(level._effect) && isdefined(level._effect["character_fire_death_sm"])) {
+  if(isDefined(level._effect) && isDefined(level._effect["character_fire_death_sm"])) {
     if(self.archetype !== "parasite" && self.archetype !== "raps") {
       wait(1);
       tagarray = [];
@@ -54,17 +54,17 @@ function flame_death_fx(localclientnum) {
       tagarray[2] = "J_Knee_RI";
       tagarray[3] = "J_Knee_LE";
       tagarray = randomize_array(tagarray);
-      playfxontag(localclientnum, level._effect["character_fire_death_sm"], self, tagarray[0]);
+      playFXOnTag(localclientnum, level._effect["character_fire_death_sm"], self, tagarray[0]);
       wait(1);
       tagarray[0] = "J_Wrist_RI";
       tagarray[1] = "J_Wrist_LE";
-      if(!(isdefined(self.missinglegs) && self.missinglegs)) {
+      if(!(isDefined(self.missinglegs) && self.missinglegs)) {
         tagarray[2] = "J_Ankle_RI";
         tagarray[3] = "J_Ankle_LE";
       }
       tagarray = randomize_array(tagarray);
-      playfxontag(localclientnum, level._effect["character_fire_death_sm"], self, tagarray[0]);
-      playfxontag(localclientnum, level._effect["character_fire_death_sm"], self, tagarray[1]);
+      playFXOnTag(localclientnum, level._effect["character_fire_death_sm"], self, tagarray[0]);
+      playFXOnTag(localclientnum, level._effect["character_fire_death_sm"], self, tagarray[1]);
     }
   } else {
     println("");
@@ -72,7 +72,7 @@ function flame_death_fx(localclientnum) {
 }
 
 function randomize_array(array) {
-  for (i = 0; i < array.size; i++) {
+  for(i = 0; i < array.size; i++) {
     j = randomint(array.size);
     temp = array[i];
     array[i] = array[j];

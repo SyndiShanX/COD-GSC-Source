@@ -22,7 +22,7 @@ init_morse_code() {
 }
 
 register_morse_code_location(effect_name, origin, angles) {
-  location_fx = spawnstruct();
+  location_fx = spawnStruct();
   location_fx.effect = effect_name;
   location_fx.origin = origin;
   location_fx.angles = angles;
@@ -141,7 +141,7 @@ create_morse_code_locations() {
 
     foreach(location in level.morse_code_location_fx) {
       new_location = spawn(clientnum, location.origin, "script_model");
-      new_location setmodel("tag_origin");
+      new_location setModel("tag_origin");
       new_location.angles = location.angles;
       new_location.fx_name = location.effect;
       level.morse_code_locations[clientnum][level.morse_code_locations[clientnum].size] = new_location;
@@ -157,7 +157,7 @@ morse_code_lights_on() {
       continue;
     }
     foreach(location in level.morse_code_locations[clientnum])
-    location._fx = playfxontag(clientnum, location.fx_name, location, "tag_origin");
+    location._fx = playFXOnTag(clientnum, location.fx_name, location, "tag_origin");
   }
 }
 

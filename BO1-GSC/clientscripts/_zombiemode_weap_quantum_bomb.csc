@@ -59,7 +59,7 @@ quantum_bomb_notetrack_think() {
 
 quantum_bomb_spawned(localClientNum, play_sound) {
   temp_ent = spawn(0, self.origin, "script_origin");
-  temp_ent playsound(0, "wpn_quantum_rise");
+  temp_ent playSound(0, "wpn_quantum_rise");
   while(isDefined(self)) {
     temp_ent.origin = self.origin;
     wait(.05);

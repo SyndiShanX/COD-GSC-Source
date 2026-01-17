@@ -29,7 +29,7 @@ function callback_hostmigration() {
   level notify("host_migration_begin");
   thread locktimer();
   players = level.players;
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     player = players[i];
     player thread hostmigrationtimerthink();
   }

@@ -483,7 +483,7 @@ resetReviveSequenceTimer() {
 }
 
 isReviverOrBleeder() {
-  if(isDefined(self) & IsAI(self)) {
+  if(isDefined(self) &IsAI(self)) {
     if(self.a.isReviver || self.a.reviveMe)
       return true;
   }
@@ -491,7 +491,7 @@ isReviverOrBleeder() {
 }
 
 isBleeder() {
-  if(isDefined(self) & IsAI(self)) {
+  if(isDefined(self) &IsAI(self)) {
     if(self.a.reviveMe)
       return true;
   }

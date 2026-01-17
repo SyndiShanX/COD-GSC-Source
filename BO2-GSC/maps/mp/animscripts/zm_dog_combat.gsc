@@ -130,7 +130,7 @@ meleebiteattackplayer2(player) {
       self maps\mp\animscripts\shared::donotetracks("done", ::handlemeleefinishattacknotetracks, player);
       debug_anim_print("dog_combat::meleeBiteAttackPlayer() - combat_attack_player notify done.");
       self notify("dog_no_longer_melee_able");
-      self setcandamage(1);
+      self setCanDamage(1);
       self unlink();
     }
 
@@ -158,7 +158,7 @@ domeleeafterwait(time) {
 
 handlemeleebiteattacknotetracks2(note, player) {
   if(note == "dog_melee")
-    self melee(anglestoforward(self.angles));
+    self melee(anglesToForward(self.angles));
 }
 
 handlemeleebiteattacknotetracks(note, player) {
@@ -169,7 +169,7 @@ handlemeleebiteattacknotetracks(note, player) {
         level.dogmeleebiteattacktime = level.dogmeleebiteattacktime + 50;
       }
 
-      hitent = self melee(anglestoforward(self.angles));
+      hitent = self melee(anglesToForward(self.angles));
 
       if(isDefined(hitent)) {
         if(isplayer(hitent))
@@ -199,7 +199,7 @@ handlemeleefinishattacknotetracks(note, player) {
         level.dogmeleefinishattacktime = level.dogmeleefinishattacktime + 50;
       }
 
-      hitent = self melee(anglestoforward(self.angles));
+      hitent = self melee(anglesToForward(self.angles));
 
       if(isDefined(hitent) && isalive(player)) {
         if(hitent == player) {
@@ -278,7 +278,7 @@ use_low_attack(player) {
 }
 
 prepareattackplayer(player) {
-  level.dog_death_quote = & "SCRIPT_PLATFORM_DOG_DEATH_DO_NOTHING";
+  level.dog_death_quote = &"SCRIPT_PLATFORM_DOG_DEATH_DO_NOTHING";
   distancetotarget = distance(self.origin, self.enemy.origin);
   targetheight = abs(self.enemy.origin[2] - self.origin[2]);
   self.enemy_attack_start_distance = distancetotarget;
@@ -350,23 +350,23 @@ dog_melee_death(player) {
             self setanimstate("combat_player_neck_snap");
             self waittillmatch("done", "dog_death");
             debug_anim_print("dog_combat::dog_melee_death() - combat_player_neck_snap notify done.");
-            self playsound("aml_dog_neckbreak");
-            self setcandamage(1);
+            self playSound("aml_dog_neckbreak");
+            self setCanDamage(1);
             self.a.nodeath = 1;
             dif = player.origin - self.origin;
             dif = (dif[0], dif[1], 0);
-            self dodamage(self.health + 503, self geteye() - dif, player);
+            self dodamage(self.health + 503, self getEye() - dif, player);
             self notify("killanimscript");
           } else {
             debug_anim_print("dog_combat::dog_melee_death() - Settingcombat_player_neck_snap");
             self setanimstate("combat_attack_player");
-            level.dog_death_quote = & "SCRIPT_PLATFORM_DOG_DEATH_TOO_LATE";
+            level.dog_death_quote = &"SCRIPT_PLATFORM_DOG_DEATH_TOO_LATE";
           }
 
           return;
         }
 
-        level.dog_death_quote = & "SCRIPT_PLATFORM_DOG_DEATH_TOO_SOON";
+        level.dog_death_quote = &"SCRIPT_PLATFORM_DOG_DEATH_TOO_SOON";
         debug_anim_print("dog_combat::dog_melee_death() - Settingcombat_player_neck_miss");
         self setanimstate("combat_player_neck_miss");
         return;
@@ -380,7 +380,7 @@ dog_melee_death(player) {
 
 attackmiss() {
   if(isDefined(self.enemy)) {
-    forward = anglestoforward(self.angles);
+    forward = anglesToForward(self.angles);
     dirtoenemy = self.enemy.origin - (self.origin + vectorscale(forward, 50));
 
     if(vectordot(dirtoenemy, forward) > 0) {
@@ -419,7 +419,7 @@ attackmisstracktargetthread() {
 killplayer(player) {
   self endon("pvd_melee_interrupted");
   player.specialdeath = 1;
-  player setcandamage(1);
+  player setCanDamage(1);
   wait 1;
   damage = player.health + 1;
 

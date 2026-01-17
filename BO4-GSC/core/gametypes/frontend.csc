@@ -22,7 +22,6 @@
 #include scripts\core_common\util_shared;
 #include scripts\core_common\weapon_customization_icon;
 #include scripts\mp_common\devgui;
-
 #namespace frontend;
 
 function_9bfe9255(var_f75a02ea, mode) {
@@ -147,14 +146,14 @@ function_3a965fac(scene_name, prt, mode, fields) {
   if(isDefined(var_8b15a963)) {
     canselect = !(isDefined(fields.var_819846c7) && fields.var_819846c7);
     var_7accf7bb = {
-      #scene: scene_name, 
-      #prt: prt, 
-      #canselect: canselect, 
-      #dvar: fields.requireddvar, 
-      #role_index: var_8b15a963, 
-      #list_index: level.var_e362b5d9.size, 
-      #mode: mode, 
-      #fields: fields, 
+      #scene: scene_name,
+      #prt: prt,
+      #canselect: canselect,
+      #dvar: fields.requireddvar,
+      #role_index: var_8b15a963,
+      #list_index: level.var_e362b5d9.size,
+      #mode: mode,
+      #fields: fields,
       #isdefault: isDefined(fields.var_c6376b99) && fields.var_c6376b99
     };
 
@@ -210,8 +209,8 @@ event_handler[gametype_init] main(eventstruct) {
 }
 
 function_e843475e(localclientnum, menuname) {
-  lui::createcameramenu(menuname, localclientnum, #"tag_align_frontend_background", #"ui_scene_cam_background");
-  lui::function_9d7ab167(menuname, localclientnum, 3, #"wz_inspection_struct", #"hash_191c3f4fc94449f1");
+  lui::createcameramenu(menuname, localclientnum, # "tag_align_frontend_background", # "ui_scene_cam_background");
+  lui::function_9d7ab167(menuname, localclientnum, 3, # "wz_inspection_struct", # "hash_191c3f4fc94449f1");
 }
 
 setupclientmenus(localclientnum) {
@@ -223,7 +222,7 @@ setupclientmenus(localclientnum) {
   lui::linktocustomcharacter("SinglePlayerInspection", localclientnum, "inspection_character", 0);
   lui::createcustomcameramenu("ChooseTaunts", localclientnum, &choose_taunts_camera_watch, 0);
   lui::linktocustomcharacter("ChooseTaunts", localclientnum, "character_customization");
-  lui::createcameramenu("ChooseFaction", localclientnum, #"spawn_char_custom", #"ui_cam_character_customization", "cam_helmet", undefined, undefined, undefined, 1000);
+  lui::createcameramenu("ChooseFaction", localclientnum, # "spawn_char_custom", # "ui_cam_character_customization", "cam_helmet", undefined, undefined, undefined, 1000);
   lui::createcustomcameramenu("Paintshop", localclientnum, undefined, 0, undefined, undefined);
   lui::createcustomcameramenu("PaintjobWeaponSelect", localclientnum, undefined, 0, undefined, undefined);
   lui::createcustomcameramenu("Gunsmith", localclientnum, undefined, 0, undefined, undefined);
@@ -235,22 +234,22 @@ setupclientmenus(localclientnum) {
   lui::createcustomcameramenu("MyShowcase_CategorySelector", localclientnum, undefined, 0, undefined, undefined);
   lui::createcustomcameramenu("GroupHeadquarters", localclientnum, undefined, 0, undefined, undefined);
   lui::createcustomcameramenu("MediaManager", localclientnum, undefined, 0, undefined, undefined);
-  lui::createcameramenu("WeaponBuildKits", localclientnum, #"zm_weapon_position", #"ui_cam_cac_specialist", "cam_specialist", undefined, undefined, undefined);
-  lui::createcameramenu("CombatRecordWeaponsZM", localclientnum, #"zm_weapon_position", #"ui_cam_cac_specialist", "cam_specialist", undefined, undefined, undefined);
-  lui::createcameramenu("BubblegumBuffs", localclientnum, #"loadout_camera", #"c_fe_zm_megachew_vign_camera_2", "c_fe_zm_megachew_vign_camera_2", undefined, undefined, undefined);
-  lui::createcameramenu("BubblegumPacks", localclientnum, #"loadout_camera", #"c_fe_zm_megachew_vign_camera_2", "c_fe_zm_megachew_vign_camera_2");
+  lui::createcameramenu("WeaponBuildKits", localclientnum, # "zm_weapon_position", # "ui_cam_cac_specialist", "cam_specialist", undefined, undefined, undefined);
+  lui::createcameramenu("CombatRecordWeaponsZM", localclientnum, # "zm_weapon_position", # "ui_cam_cac_specialist", "cam_specialist", undefined, undefined, undefined);
+  lui::createcameramenu("BubblegumBuffs", localclientnum, # "loadout_camera", # "c_fe_zm_megachew_vign_camera_2", "c_fe_zm_megachew_vign_camera_2", undefined, undefined, undefined);
+  lui::createcameramenu("BubblegumPacks", localclientnum, # "loadout_camera", # "c_fe_zm_megachew_vign_camera_2", "c_fe_zm_megachew_vign_camera_2");
   lui::createcustomcameramenu("BubblegumPackEdit", localclientnum, undefined, undefined, undefined, undefined);
   lui::createcustomcameramenu("BubblegumBuffSelect", localclientnum, undefined, undefined, undefined, undefined);
   lui::createcustomcameramenu("CombatRecordBubblegumBuffs", localclientnum, undefined, undefined, undefined, undefined);
-  lui::createcameramenu("MegaChewFactory", localclientnum, #"zm_gum_position", #"c_fe_zm_megachew_vign_camera", "default", undefined, undefined, undefined);
+  lui::createcameramenu("MegaChewFactory", localclientnum, # "zm_gum_position", # "c_fe_zm_megachew_vign_camera", "default", undefined, undefined, undefined);
   lui::createcustomcameramenu("Pregame_Main", localclientnum, &lobby_main, 1);
   lui::createcustomcameramenu("CombatRecordWeapons", localclientnum, undefined, 0, undefined, undefined);
   lui::createcustomcameramenu("CombatRecordEquipment", localclientnum, undefined, 0, undefined, undefined);
   lui::createcustomcameramenu("CombatRecordCybercore", localclientnum, undefined, 0, undefined, undefined);
   lui::createcustomcameramenu("CombatRecordCollectibles", localclientnum, undefined, 0, undefined, undefined);
-  lui::createcameramenu("CombatRecordSpecialists", localclientnum, #"spawn_char_cac_choose", #"ui_cam_cac_specialist", "cam_specialist", undefined, &open_choose_class, &close_choose_class);
+  lui::createcameramenu("CombatRecordSpecialists", localclientnum, # "spawn_char_cac_choose", # "ui_cam_cac_specialist", "cam_specialist", undefined, &open_choose_class, &close_choose_class);
   lui::linktocustomcharacter("CombatRecordSpecialists", localclientnum, "character_customization");
-  lui::createcameramenu("MPCustomizeClassMenu", localclientnum, #"cac_specialist_angle", #"ui_cam_loadout_character", "");
+  lui::createcameramenu("MPCustomizeClassMenu", localclientnum, # "cac_specialist_angle", # "ui_cam_loadout_character", "");
   lui::createcustomcameramenu("AAR_T8_MP", localclientnum, &function_73b8462a, 1, undefined, &function_48fb04a7);
   lui::linktocustomcharacter("AAR_T8_MP", localclientnum, "aar_character");
   lui::createcustomcameramenu("AAR_T8_ZM", localclientnum, &function_73b8462a, 1, undefined, &function_48fb04a7);
@@ -338,9 +337,7 @@ blackscreen_watcher() {
       charready = 1;
 
       if(isDefined(var_d0b01271)) {
-        charready = [
-          [var_d0b01271]
-        ] - > is_streamed();
+        charready = [[var_d0b01271]] - > is_streamed();
       }
 
       sceneready = getstreamerrequestprogress(0) >= 100;
@@ -401,9 +398,7 @@ update_inspection_character(localclientnum, xuid, menu_name) {
       ] - > function_82e05d64();
 
       if(isDefined(info) && util::function_48e57e36(xuid) == info.xuid) {
-        var_23904c1d = [
-          [character]
-        ] - > function_e599283f();
+        var_23904c1d = [[character]] - > function_e599283f();
       }
     }
   }
@@ -466,8 +461,8 @@ update_inspection_character(localclientnum, xuid, menu_name) {
   if(isDefined(var_8e0277a) && character_customization::function_aa5382ed([[var_d0b01271]] - > function_e599283f(), var_23904c1d)) {
     [[var_d0b01271]] - > function_1ec9448d(0);
     params = {
-      #var_401d9a1: 1, 
-      #var_c76f3e47: 1, 
+      #var_401d9a1: 1,
+      #var_c76f3e47: 1,
       #scene: var_8e0277a
     };
     [[var_d0b01271]] - > function_15a8906a(var_23904c1d);
@@ -567,7 +562,7 @@ function_c9f8c5e9(localclientnum) {
       level thread function_a71254a9(localclientnum, 1, var_d53ddee1, 0, undefined, 0, var_f44acc91.scene);
       var_408e7d77 = var_879980c4;
 
-      if(level.var_e362b5d9[var_879980c4].scene == #"scene_frontend_zm_elixir_lab" && isDefined(level.var_1a2c5c75)) {
+      if(level.var_e362b5d9[var_879980c4].scene == # "scene_frontend_zm_elixir_lab" && isDefined(level.var_1a2c5c75)) {
         level thread[[level.var_1a2c5c75]](localclientnum);
         continue;
       }
@@ -608,8 +603,8 @@ function_da10fc8f(localclientnum, imagepath) {
 function_93ccf33d(var_62d90151, entrytype, &var_37451b86, &var_7f0244ba) {
   foreach(i, item in var_62d90151) {
     entry = {
-      #index: i, 
-      #type: entrytype, 
+      #index: i,
+      #type: entrytype,
       #item: item
     };
 
@@ -637,7 +632,7 @@ function_93ccf33d(var_62d90151, entrytype, &var_37451b86, &var_7f0244ba) {
 }
 
 function_23bc6f08(localclientnum, var_d0b01271, itemtype, item_data, mode, character_index, var_b34f01f0) {
-  if(item_data.lootid == #"") {
+  if(item_data.lootid == # "") {
     return;
   }
 
@@ -667,17 +662,17 @@ function_23bc6f08(localclientnum, var_d0b01271, itemtype, item_data, mode, chara
       break;
   }
 
-  scene_name = #"scene_frontend_character_male_render";
+  scene_name = # "scene_frontend_character_male_render";
 
   if(#"female" == getherogender(character_index, mode)) {
-    scene_name = #"scene_frontend_character_female_render";
+    scene_name = # "scene_frontend_character_female_render";
   }
 
   [[var_d0b01271]] - > update({
-    #var_c76f3e47: 1, 
-    #var_5bd51249: 8, 
-    #var_13fb1841: 4, 
-    #scene: scene_name, 
+    #var_c76f3e47: 1,
+    #var_5bd51249: 8,
+    #var_13fb1841: 4,
+    #scene: scene_name,
     #scene_shot: shot_name
   });
 
@@ -741,7 +736,7 @@ function_4920c25a(localclientnum, menu_name, state) {
 
     if(mode == 1 && (var_7823b8b1 == -1 || var_7823b8b1 == 8)) {
       foreach(preset in var_9cf37283.presets) {
-        if(preset.isvalid && preset.lootid != #"") {
+        if(preset.isvalid && preset.lootid != # "") {
           [
             [var_d0b01271]
           ] - > function_95779b72();
@@ -779,12 +774,8 @@ function_4920c25a(localclientnum, menu_name, state) {
 
     foreach(type, options in var_9cf37283.options) {
       if(function_2351cba1(type, mode) && (var_7823b8b1 == -1 || var_7823b8b1 == type)) {
-        [
-          [var_d0b01271]
-        ] - > set_character_outfit(outfitindex);
-        [
-          [var_d0b01271]
-        ] - > function_158505aa(outfitindex);
+        [[var_d0b01271]] - > set_character_outfit(outfitindex);
+        [[var_d0b01271]] - > function_158505aa(outfitindex);
 
         foreach(i, option in options) {
           [
@@ -826,7 +817,7 @@ function_4920c25a(localclientnum, menu_name, state) {
 
   [[var_d0b01271]] - > function_39a68bf2();
   level notify("<dev string:x16b>" + localclientnum, {
-    #menu: "<dev string:x179>", 
+    #menu: "<dev string:x179>",
     #status: "<dev string:x18e>"
   });
   setdvar(#"char_render", "<dev string:x4b>");
@@ -909,8 +900,8 @@ function_fb399a61(localclientnum) {
 
       if(var_f7a528f2 != "<dev string:x4b>") {
         level notify("<dev string:x16b>" + localclientnum, {
-          #menu: "<dev string:x179>", 
-          #status: "<dev string:x283>", 
+          #menu: "<dev string:x179>",
+          #status: "<dev string:x283>",
           #state: var_f7a528f2
         });
       }
@@ -1029,7 +1020,7 @@ function_f2c538de(localclientnum, menu_name, state) {
 
     for(i = start_index; i <= end_index; i++) {
       function_5d6480a0(localclientnum, weapon, weapon_model, weapon_name, {
-        #item_index: 0, 
+        #item_index: 0,
         #name: "<dev string:x30a>" + i
       }, i);
     }
@@ -1037,7 +1028,7 @@ function_f2c538de(localclientnum, menu_name, state) {
 
   level thread scene::stop(#"scene_frontend_weapon_camo_render");
   level notify("<dev string:x16b>" + localclientnum, {
-    #menu: "<dev string:x317>", 
+    #menu: "<dev string:x317>",
     #status: "<dev string:x18e>"
   });
   weapon_model delete();
@@ -1116,8 +1107,8 @@ function_db3c4c69(localclientnum) {
 
       if(var_f7a528f2 != "<dev string:x4b>") {
         level notify("<dev string:x16b>" + localclientnum, {
-          #menu: "<dev string:x317>", 
-          #status: "<dev string:x283>", 
+          #menu: "<dev string:x317>",
+          #status: "<dev string:x283>",
           #state: var_f7a528f2
         });
       }
@@ -1177,8 +1168,8 @@ function_ea9a5e69(localclientnum) {
 
       if(var_f7a528f2 != "<dev string:x4b>") {
         level notify("<dev string:x16b>" + localclientnum, {
-          #menu: "<dev string:x40e>", 
-          #status: "<dev string:x283>", 
+          #menu: "<dev string:x40e>",
+          #status: "<dev string:x283>",
           #state: var_f7a528f2
         });
       }
@@ -1272,7 +1263,7 @@ t10_lasers_mixlaser2_sn_droger(localclientnum, menu_name, state) {
   }
 
   level notify("<dev string:x16b>" + localclientnum, {
-    #menu: "<dev string:x40e>", 
+    #menu: "<dev string:x40e>",
     #status: "<dev string:x18e>"
   });
   setdvar(#"hash_4243dd01393aa940", "<dev string:x4b>");
@@ -1397,13 +1388,13 @@ function_deed1dbf(localclientnum) {
 }
 
 function_becded4f(localclientnum) {
-  level.var_44011752 = util::spawn_model(localclientnum, #"wpn_t8_ar_accurate_prop_animate", (0, 0, 0), (0, 0, 0));
+  level.var_44011752 = util::spawn_model(localclientnum, # "wpn_t8_ar_accurate_prop_animate", (0, 0, 0), (0, 0, 0));
   level.var_44011752.targetname = "customized_inspection_weapon";
   level.var_44011752 hide();
 }
 
 function_a588eb2e(localclientnum) {
-  var_e6977977 = util::spawn_model(localclientnum, #"wpn_t8_ar_accurate_prop_animate", (0, 0, 0), (0, 0, 0));
+  var_e6977977 = util::spawn_model(localclientnum, # "wpn_t8_ar_accurate_prop_animate", (0, 0, 0), (0, 0, 0));
   var_e6977977.targetname = "quartermaster_weapon";
   var_e6977977 hide();
   var_e6977977 sethighdetail(1, 1);
@@ -1442,8 +1433,8 @@ localclientconnect(localclientnum) {
   postfx::setfrontendstreamingoverlay(localclientnum, "frontend", 1);
   level.frontendclientconnected = 1;
   level notify("menu_change" + localclientnum, {
-    #menu: "Main", 
-    #status: "opened", 
+    #menu: "Main",
+    #status: "opened",
     #state: room
   });
 
@@ -1624,17 +1615,17 @@ personalize_characters_watch(localclientnum, menu_name) {
     pose = waitresult.pose;
 
     if(pose === "exploring") {
-      playmaincamxcam(localclientnum, #"ui_cam_character_customization", animtime, "cam_preview", "", s_cam.origin, s_cam.angles);
+      playmaincamxcam(localclientnum, # "ui_cam_character_customization", animtime, "cam_preview", "", s_cam.origin, s_cam.angles);
       continue;
     }
 
     if(pose === "inspecting_helmet") {
-      playmaincamxcam(localclientnum, #"ui_cam_character_customization", animtime, "cam_helmet", "", s_cam.origin, s_cam.angles);
+      playmaincamxcam(localclientnum, # "ui_cam_character_customization", animtime, "cam_helmet", "", s_cam.origin, s_cam.angles);
       continue;
     }
 
     if(pose === "inspecting_body") {
-      playmaincamxcam(localclientnum, #"ui_cam_character_customization", animtime, "cam_select", "", s_cam.origin, s_cam.angles);
+      playmaincamxcam(localclientnum, # "ui_cam_character_customization", animtime, "cam_select", "", s_cam.origin, s_cam.angles);
     }
   }
 }
@@ -1644,34 +1635,34 @@ function_d9a44ae1(localclientnum, menu_name) {
   level endon(menu_name + "_closed");
   s_cam = struct::get(#"spawn_char_custom", "targetname");
   assert(isDefined(s_cam));
-  playmaincamxcam(localclientnum, #"ui_cam_character_customization", 0, "cam_helmet", "", s_cam.origin, s_cam.angles);
+  playmaincamxcam(localclientnum, # "ui_cam_character_customization", 0, "cam_helmet", "", s_cam.origin, s_cam.angles);
 
   while(true) {
     waitresult = level waittill("choose_face_camera_change" + localclientnum);
     region = waitresult.param1;
 
     if(region === "face") {
-      playmaincamxcam(localclientnum, #"ui_cam_character_customization", 300, "cam_helmet", "", s_cam.origin, s_cam.angles);
+      playmaincamxcam(localclientnum, # "ui_cam_character_customization", 300, "cam_helmet", "", s_cam.origin, s_cam.angles);
       continue;
     }
 
     if(region === "eyes") {
-      playmaincamxcam(localclientnum, #"ui_cam_character_customization", 300, "cam_eyes", "", s_cam.origin, s_cam.angles);
+      playmaincamxcam(localclientnum, # "ui_cam_character_customization", 300, "cam_eyes", "", s_cam.origin, s_cam.angles);
       continue;
     }
 
     if(region === "ears") {
-      playmaincamxcam(localclientnum, #"ui_cam_character_customization", 300, "cam_ears", "", s_cam.origin, s_cam.angles);
+      playmaincamxcam(localclientnum, # "ui_cam_character_customization", 300, "cam_ears", "", s_cam.origin, s_cam.angles);
       continue;
     }
 
     if(region === "nose") {
-      playmaincamxcam(localclientnum, #"ui_cam_character_customization", 300, "cam_nose", "", s_cam.origin, s_cam.angles);
+      playmaincamxcam(localclientnum, # "ui_cam_character_customization", 300, "cam_nose", "", s_cam.origin, s_cam.angles);
       continue;
     }
 
     if(region === "mouth") {
-      playmaincamxcam(localclientnum, #"ui_cam_character_customization", 300, "cam_mouth", "", s_cam.origin, s_cam.angles);
+      playmaincamxcam(localclientnum, # "ui_cam_character_customization", 300, "cam_mouth", "", s_cam.origin, s_cam.angles);
     }
   }
 }
@@ -1679,7 +1670,7 @@ function_d9a44ae1(localclientnum, menu_name) {
 choose_taunts_camera_watch(localclientnum, menu_name) {
   s_cam = struct::get(#"personalizehero_camera", "targetname");
   assert(isDefined(s_cam));
-  playmaincamxcam(localclientnum, #"ui_cam_character_customization", 300, "cam_topscorers", "", s_cam.origin, s_cam.angles);
+  playmaincamxcam(localclientnum, # "ui_cam_character_customization", 300, "cam_topscorers", "", s_cam.origin, s_cam.angles);
   var_d0b01271 = lui::getcharacterdataformenu(menu_name, localclientnum);
   [[var_d0b01271]] - > function_4240a39a(1, (0, 112, 0));
   level waittill(menu_name + "_closed");
@@ -1688,7 +1679,7 @@ choose_taunts_camera_watch(localclientnum, menu_name) {
   };
   [[var_d0b01271]] - > update(params);
   [[var_d0b01271]] - > function_4240a39a(0, undefined);
-  playmaincamxcam(localclientnum, #"ui_cam_character_customization", 300, "cam_preview", "", s_cam.origin, s_cam.angles);
+  playmaincamxcam(localclientnum, # "ui_cam_character_customization", 300, "cam_preview", "", s_cam.origin, s_cam.angles);
   wait 3;
 }
 
@@ -1700,9 +1691,7 @@ function_b0442428(var_ce754e62, var_3f0e790b) {
       ] - > function_82e05d64();
 
       if(isDefined(var_2d0192e5) && isDefined(var_2d0192e5.entnummodel)) {
-        setuimodelvalue(var_2d0192e5.entnummodel, [
-          [object.character]
-        ] - > function_47cb6b19());
+        setuimodelvalue(var_2d0192e5.entnummodel, [[object.character]] - > function_47cb6b19());
       }
     }
   }
@@ -1783,10 +1772,10 @@ function_f00765ad(localclientnum, xuid, ccobject, index, var_3f0e790b) {
 
   if(isDefined(var_8e0277a)) {
     params = {
-      #scene: var_8e0277a, 
-      #scene_target: self, 
-      #var_a34c858c: 1, 
-      #var_c76f3e47: 1, 
+      #scene: var_8e0277a,
+      #scene_target: self,
+      #var_a34c858c: 1,
+      #var_c76f3e47: 1,
       #var_401d9a1: 1
     };
 
@@ -1796,12 +1785,8 @@ function_f00765ad(localclientnum, xuid, ccobject, index, var_3f0e790b) {
       }
 
       if(character_customization::function_aa5382ed(var_23904c1d, var_a65df30, 0)) {
-        [
-          [ccobject]
-        ] - > function_15a8906a(var_23904c1d);
-        [
-          [ccobject]
-        ] - > update(params);
+        [[ccobject]] - > function_15a8906a(var_23904c1d);
+        [[ccobject]] - > update(params);
       }
     } else {
       [
@@ -1827,17 +1812,15 @@ function_f00765ad(localclientnum, xuid, ccobject, index, var_3f0e790b) {
 
     if(isDefined(var_7f40501d)) {
       var_cb498604 = {
-        #scene: var_7f40501d, 
-        #scene_target: self, 
-        #var_a34c858c: 1, 
-        #var_c76f3e47: 1, 
+        #scene: var_7f40501d,
+        #scene_target: self,
+        #var_a34c858c: 1,
+        #var_c76f3e47: 1,
         #var_401d9a1: 1
       };
     } else {
       var_cb498604 = {
-        #anim_name: [
-          [ccobject]
-        ] - > function_8144231c()
+        #anim_name: [[ccobject]] - > function_8144231c()
       };
     }
 
@@ -1866,8 +1849,8 @@ function_7c77108d(localclientnum, &var_13ef9467, var_63aea26e) {
     charactermodel.targetname = var_63aea26e + "character_" + i;
     var_a4fe2697 = character_customization::function_dd295310(charactermodel, localclientnum, 0);
     var_ac2e02ac = {
-      #target: target, 
-      #character: var_a4fe2697, 
+      #target: target,
+      #character: var_a4fe2697,
       #scene_name: undefined
     };
 
@@ -1894,9 +1877,7 @@ function_4fc36b1a(localclientnum, xuid) {
     if(character_customization::function_aa5382ed(var_d53ddee1, level.var_4c6f850d[xuid], 0)) {
       if(function_9bed6a71(localclientnum, 1) == xuid && isDefined(level.var_47863282) && xuid == level.var_47863282 && !(isDefined(level.var_c8fac6ea) && level scene::is_playing(level.var_c8fac6ea))) {
         function_a71254a9(localclientnum, 0, undefined, 1);
-        [
-          [level.cycle_frozen_moment_char_current]
-        ] - > function_39a68bf2();
+        [[level.cycle_frozen_moment_char_current]] - > function_39a68bf2();
         stopmaincamxcam(localclientnum);
         function_e56abdb(localclientnum, 1);
       }
@@ -1948,9 +1929,7 @@ function_ce0c92c1(localclientnum, var_dde5862c) {
         level.var_37fcc91f = undefined;
         level.var_3cea0f38 = 0;
         level notify(#"hash_1ac908ea1013c378");
-        [
-          [level.cycle_frozen_moment_char_next]
-        ] - > function_39a68bf2();
+        [[level.cycle_frozen_moment_char_next]] - > function_39a68bf2();
         function_6e9fbb54(localclientnum, function_9bed6a71(localclientnum, 1));
       }
     }
@@ -2016,8 +1995,8 @@ function_6e9fbb54(localclientnum, var_baeecec7 = undefined) {
     var_53511779 = level.var_e362b5d9[var_6d8e8e31].scene;
     forcestreambundle(var_53511779);
     params = {
-      #var_c76f3e47: 1, 
-      #var_d8cb38a9: 1, 
+      #var_c76f3e47: 1,
+      #var_d8cb38a9: 1,
       #var_8d3b5f69: 1
     };
     [[level.cycle_frozen_moment_char_current]] - > function_15a8906a(level.var_4c6f850d[level.var_47863282]);
@@ -2088,16 +2067,12 @@ function_6e9fbb54(localclientnum, var_baeecec7 = undefined) {
 
       if(isDefined(level.var_723bf922)) {
         params = {
-          #var_c76f3e47: 1, 
-          #var_d8cb38a9: 1, 
+          #var_c76f3e47: 1,
+          #var_d8cb38a9: 1,
           #var_8d3b5f69: 1
         };
-        [
-          [level.cycle_frozen_moment_char_next]
-        ] - > function_15a8906a(level.var_4c6f850d[level.var_202758dc]);
-        [
-          [level.cycle_frozen_moment_char_next]
-        ] - > update(params);
+        [[level.cycle_frozen_moment_char_next]] - > function_15a8906a(level.var_4c6f850d[level.var_202758dc]);
+        [[level.cycle_frozen_moment_char_next]] - > update(params);
       }
 
       return;
@@ -2110,7 +2085,7 @@ function_6e9fbb54(localclientnum, var_baeecec7 = undefined) {
 function_f00ff0c7(localclientnum) {
   level endon(#"disconnect");
   var_11302f48 = createuimodel(getglobaluimodel(), "LobbyClientPose");
-  level.var_6f1da91a = [[], 
+  level.var_6f1da91a = [[],
     []];
   var_6aeec2ad = getdvarstring(#"hash_52abdac1a234fa29", "");
   var_c7581878 = function_7c77108d(localclientnum, level.var_6f1da91a[0], "lobby_player" + var_6aeec2ad + "_");
@@ -2120,7 +2095,7 @@ function_f00ff0c7(localclientnum) {
   while(true) {
     waitresult = level waittill(#"lobby_change");
 
-    if(level.lastlobbystate === "matchmaking" || level.lastlobbystate === "zm_online" || level.lastlobbystate === #"lobby_pose") {
+    if(level.lastlobbystate === "matchmaking" || level.lastlobbystate === "zm_online" || level.lastlobbystate === # "lobby_pose") {
       var_68a9a63c = function_664bca26(localclientnum, 1, 0, 1);
     } else {
       var_68a9a63c = function_77ccb73(1, 1);
@@ -2134,7 +2109,7 @@ function_f00ff0c7(localclientnum) {
           foreach(var_3f0e790b, character_array in level.var_6f1da91a) {
             var_7d4d74d3 = i > character_array.size ? undefined : character_array[i];
 
-            if(isDefined(var_7d4d74d3) && (level.lastlobbystate === #"lobby_pose" || level.lastlobbystate === #"arena_pose" || level.lastlobbystate === #"private_lobby_pose")) {
+            if(isDefined(var_7d4d74d3) && (level.lastlobbystate === # "lobby_pose" || level.lastlobbystate === # "arena_pose" || level.lastlobbystate === # "private_lobby_pose")) {
               var_7d4d74d3.target thread function_f00765ad(localclientnum, var_68a9a63c[i], var_7d4d74d3.character, i, var_3f0e790b);
               continue;
             }
@@ -2186,7 +2161,7 @@ function_f00ff0c7(localclientnum) {
         if(i < var_68a9a63c.size) {
           var_7d4d74d3 = i > character_array.size ? undefined : character_array[i];
 
-          if(isDefined(var_7d4d74d3) && (level.lastlobbystate === #"lobby_pose" || level.lastlobbystate === #"arena_pose" || level.lastlobbystate === #"private_lobby_pose")) {
+          if(isDefined(var_7d4d74d3) && (level.lastlobbystate === # "lobby_pose" || level.lastlobbystate === # "arena_pose" || level.lastlobbystate === # "private_lobby_pose")) {
             draft::function_8be87802(localclientnum, var_7d4d74d3.character);
           }
         }
@@ -2295,21 +2270,21 @@ lobby_main(localclientnum, menu_name, state) {
   setpbgactivebank(localclientnum, 1);
 
   if(isDefined(level.lastlobbystate) && state !== level.lastlobbystate) {
-    if(level.lastlobbystate === #"lobby_pose" || level.lastlobbystate === #"private_lobby_pose") {
+    if(level.lastlobbystate === # "lobby_pose" || level.lastlobbystate === # "private_lobby_pose") {
       function_b1b8f767(localclientnum, 0);
-    } else if(level.lastlobbystate === #"arena_pose") {
+    } else if(level.lastlobbystate === # "arena_pose") {
       function_db9d479f(localclientnum, 0);
     } else if(level.lastlobbystate === "warzone" || level.lastlobbystate === "zm_online" || level.lastlobbystate === "zm_custom") {
       level notify(#"positiondraft_close", {
-        #localclientnum: localclientnum, 
+        #localclientnum: localclientnum,
         #var_b69dc9af: 1
       });
       level waittill(#"hash_21c79522aa982cdd");
     } else if(level.lastlobbystate === "inspect_specialist") {
       level notify("menu_change" + localclientnum, {
-        #menu: "directorTraining", 
-        #status: "closed", 
-        #state: undefined, 
+        #menu: "directorTraining",
+        #status: "closed",
+        #state: undefined,
         #mode: 1
       });
     } else if(level.lastlobbystate === "matchmaking") {
@@ -2371,12 +2346,12 @@ lobby_main(localclientnum, menu_name, state) {
 
         var_fce147fa = 0;
       }
-    } else if(state == #"lobby_pose" || state == #"private_lobby_pose") {
+    } else if(state == # "lobby_pose" || state == # "private_lobby_pose") {
       level notify(#"lobby_change", {
         #var_a3325423: 1
       });
       function_b1b8f767(localclientnum, 1);
-    } else if(state == #"arena_pose") {
+    } else if(state == # "arena_pose") {
       level notify(#"lobby_change", {
         #var_a3325423: 1
       });
@@ -2441,9 +2416,9 @@ lobby_main(localclientnum, menu_name, state) {
       }
 
       level notify("menu_change" + localclientnum, {
-        #menu: "directorTraining", 
-        #status: "opened", 
-        #state: character_index, 
+        #menu: "directorTraining",
+        #status: "opened",
+        #state: character_index,
         #mode: 1
       });
     } else if(state == "inspect_specialist" && level.lastlobbystate === "inspect_specialist") {
@@ -2455,8 +2430,8 @@ lobby_main(localclientnum, menu_name, state) {
     if(var_fce147fa) {
       var_51dd69a5 = isDefined(var_d53ddee1);
       level thread function_a71254a9(localclientnum, var_51dd69a5, var_d53ddee1, var_1c5551d6, undefined, 0, var_d43870a7);
-      toggle_postfx(localclientnum, var_51dd69a5, #"hash_50a4ae6595f15cb0");
-      toggle_postfx(localclientnum, !var_51dd69a5, #"hash_e1c80e52b24b46b");
+      toggle_postfx(localclientnum, var_51dd69a5, # "hash_50a4ae6595f15cb0");
+      toggle_postfx(localclientnum, !var_51dd69a5, # "hash_e1c80e52b24b46b");
     }
   }
 
@@ -2477,8 +2452,8 @@ lobby_main(localclientnum, menu_name, state) {
 function_58994f4a(localclientnum, menu_data) {
   level thread function_a71254a9(localclientnum, 0);
   function_e56abdb(localclientnum);
-  toggle_postfx(localclientnum, 0, #"hash_50a4ae6595f15cb0");
-  toggle_postfx(localclientnum, 0, #"hash_e1c80e52b24b46b");
+  toggle_postfx(localclientnum, 0, # "hash_50a4ae6595f15cb0");
+  toggle_postfx(localclientnum, 0, # "hash_e1c80e52b24b46b");
 }
 
 update_room2_devgui(localclientnum) {
@@ -2511,7 +2486,7 @@ pulse_controller_color() {
   }
 }
 
-private function_70733b8c(session_mode, character_index) {
+function_70733b8c(session_mode, character_index) {
   foreach(var_dea538a3 in level.var_e362b5d9) {
     if(var_dea538a3.role_index == character_index && var_dea538a3.mode == session_mode) {
       return var_dea538a3;
@@ -2561,10 +2536,10 @@ function_a71254a9(localclientnum, play, player_data, var_1c5551d6 = 0, scene_sho
         [level.frozen_moment_character]
       ] - > function_15a8906a(player_data);
       params = {
-        #scene: var_53511779, 
-        #var_c76f3e47: 1, 
-        #var_d8cb38a9: 1, 
-        #var_8d3b5f69: 1, 
+        #scene: var_53511779,
+        #var_c76f3e47: 1,
+        #var_d8cb38a9: 1,
+        #var_8d3b5f69: 1,
         #scene_shot: scene_shot
       };
       [
@@ -2628,13 +2603,13 @@ function_9602c423(localclientnum, menu_name, state) {
   var_d0b01271 = lui::getcharacterdataformenu(menu_name, localclientnum);
   [[var_d0b01271]] - > show_model();
   camera_ent = struct::get(#"cac_specialist_angle");
-  playmaincamxcam(localclientnum, #"ui_cam_character_gesture", 0, "", "", camera_ent.origin, camera_ent.angles);
+  playmaincamxcam(localclientnum, # "ui_cam_character_gesture", 0, "", "", camera_ent.origin, camera_ent.angles);
 
   if(isDefined(state)) {
     [[var_d0b01271]] - > set_character_index(state);
     level notify("updateSpecialistCustomization" + localclientnum, {
-      #event_name: "changeHero", 
-      #character_index: state, 
+      #event_name: "changeHero",
+      #character_index: state,
       #mode: currentsessionmode()
     });
   }
@@ -2644,13 +2619,13 @@ function_25b060af(localclientnum, menu_name, state) {
   var_d0b01271 = lui::getcharacterdataformenu(menu_name, localclientnum);
   [[var_d0b01271]] - > show_model();
   camera_ent = struct::get(#"cac_specialist_angle");
-  playmaincamxcam(localclientnum, #"ui_cam_loadout_character", 0, "", "", camera_ent.origin, camera_ent.angles);
+  playmaincamxcam(localclientnum, # "ui_cam_loadout_character", 0, "", "", camera_ent.origin, camera_ent.angles);
 
   if(isDefined(state)) {
     [[var_d0b01271]] - > set_character_index(state);
     level notify("updateSpecialistCustomization" + localclientnum, {
-      #event_name: "changeHero", 
-      #character_index: state, 
+      #event_name: "changeHero",
+      #character_index: state,
       #mode: 1
     });
   }
@@ -2660,7 +2635,7 @@ function_f8cec907(localclientnum, menu_name, state) {
   var_d0b01271 = lui::getcharacterdataformenu(menu_name, localclientnum);
   [[var_d0b01271]] - > show_model();
   camera_ent = struct::get(#"wz_unlock_struct");
-  playmaincamxcam(localclientnum, #"ui_scene_cam_wz_unlock", 0, "", "", camera_ent.origin, camera_ent.angles);
+  playmaincamxcam(localclientnum, # "ui_scene_cam_wz_unlock", 0, "", "", camera_ent.origin, camera_ent.angles);
 
   if(isDefined(state)) {
     args = strtok(state, ";");
@@ -2669,7 +2644,7 @@ function_f8cec907(localclientnum, menu_name, state) {
     [[var_d0b01271]] - > set_character_mode(3);
     [[var_d0b01271]] - > set_character_index(char_index);
     level notify("updateSpecialistCustomization" + localclientnum, {
-      #event_name: "changeOutfit", 
+      #event_name: "changeOutfit",
       #outfit_index: outfit_index
     });
   }
@@ -2687,11 +2662,11 @@ function_6657c529(localclientnum, menu_name, state) {
   level.var_8b9b6862 = state;
 
   if(state === "face") {
-    playmaincamxcam(localclientnum, #"ui_cam_character_customization_head", lerp_time, "", "", camera_ent.origin, camera_ent.angles);
+    playmaincamxcam(localclientnum, # "ui_cam_character_customization_head", lerp_time, "", "", camera_ent.origin, camera_ent.angles);
     return;
   }
 
-  playmaincamxcam(localclientnum, #"ui_cam_character_customization_3d", lerp_time, "", "", camera_ent.origin, camera_ent.angles);
+  playmaincamxcam(localclientnum, # "ui_cam_character_customization_3d", lerp_time, "", "", camera_ent.origin, camera_ent.angles);
 }
 
 function_d8402f0c(localclientnum, menu_name, state) {
@@ -2700,29 +2675,29 @@ function_d8402f0c(localclientnum, menu_name, state) {
   if(isDefined(state)) {
     [[var_d0b01271]] - > set_character_index(state);
     level notify("updateSpecialistCustomization" + localclientnum, {
-      #event_name: "changeHero", 
-      #character_index: state, 
+      #event_name: "changeHero",
+      #character_index: state,
       #mode: 0
     });
   }
 
   [[var_d0b01271]] - > show_model();
   camera_ent = struct::get(#"cac_specialist_angle");
-  playmaincamxcam(localclientnum, #"ui_cam_character_customization_3d", 0, "", "", camera_ent.origin, camera_ent.angles);
+  playmaincamxcam(localclientnum, # "ui_cam_character_customization_3d", 0, "", "", camera_ent.origin, camera_ent.angles);
 }
 
 wz_personalize_character(localclientnum, menu_name, state) {
   var_d0b01271 = lui::getcharacterdataformenu(menu_name, localclientnum);
   [[var_d0b01271]] - > show_model();
   camera_ent = struct::get(#"cac_specialist_angle");
-  playmaincamxcam(localclientnum, #"ui_cam_character_customization_3d", 0, "", "", camera_ent.origin, camera_ent.angles);
+  playmaincamxcam(localclientnum, # "ui_cam_character_customization_3d", 0, "", "", camera_ent.origin, camera_ent.angles);
 }
 
 function_a8095769(localclientnum, menu_name) {
   var_d0b01271 = lui::getcharacterdataformenu(menu_name, localclientnum);
   [[var_d0b01271]] - > show_model();
   camera_ent = struct::get(#"tag_align_quartermaster");
-  playmaincamxcam(localclientnum, #"ui_cam_store_camera", 0, "", "", camera_ent.origin, camera_ent.angles);
+  playmaincamxcam(localclientnum, # "ui_cam_store_camera", 0, "", "", camera_ent.origin, camera_ent.angles);
 }
 
 function_7142469f(localclientnum, menu_data) {
@@ -2810,8 +2785,8 @@ function_837446a8(localclientnum, menu_name, state) {
   level notify("end_character_rotating" + localclientnum);
 
   switch (state) {
-    case #"character":
-    case #"gesture":
+    case # "character":
+    case # "gesture":
       [
         [var_d0b01271]
       ] - > function_4240a39a(1, (0, 90, 0));
@@ -2823,9 +2798,9 @@ function_837446a8(localclientnum, menu_name, state) {
         [var_d0b01271]
       ] - > show_model();
       weapon_model hide();
-      scene = #"scene_frontend_quartermaster_character";
+      scene = # "scene_frontend_quartermaster_character";
       break;
-    case #"character_full":
+    case # "character_full":
       [
         [var_d0b01271]
       ] - > function_4240a39a(1, (0, 90, 0));
@@ -2837,9 +2812,9 @@ function_837446a8(localclientnum, menu_name, state) {
         [var_d0b01271]
       ] - > show_model();
       weapon_model hide();
-      scene = #"scene_frontend_quartermaster_character_full";
+      scene = # "scene_frontend_quartermaster_character_full";
       break;
-    case #"character_face":
+    case # "character_face":
       [
         [var_d0b01271]
       ] - > function_4240a39a(1, (0, 90, 0));
@@ -2851,22 +2826,22 @@ function_837446a8(localclientnum, menu_name, state) {
         [var_d0b01271]
       ] - > show_model();
       weapon_model hide();
-      scene = #"scene_frontend_quartermaster_character_face";
+      scene = # "scene_frontend_quartermaster_character_face";
       break;
-    case #"weapon":
+    case # "weapon":
       [
         [var_d0b01271]
       ] - > hide_model();
       weapon_model show();
-      scene = #"scene_frontend_quartermaster_weapon";
+      scene = # "scene_frontend_quartermaster_weapon";
       break;
-    case #"crate":
+    case # "crate":
       [
         [var_d0b01271]
       ] - > hide_model();
       weapon_model hide();
       season = getdvarstring(#"mtx_seasonal_exploder");
-      scene = #"scene_frontend_quartermaster_crate" + season;
+      scene = # "scene_frontend_quartermaster_crate" + season;
       exploder = "fxexp_mtx_crate" + season;
       break;
     default:
@@ -2874,7 +2849,7 @@ function_837446a8(localclientnum, menu_name, state) {
         [var_d0b01271]
       ] - > hide_model();
       weapon_model hide();
-      scene = #"scene_frontend_quartermaster";
+      scene = # "scene_frontend_quartermaster";
       break;
   }
 
@@ -2910,7 +2885,7 @@ function_36962bc4(localclientnum, menu_name, state) {
   var_d0b01271 = lui::getcharacterdataformenu(menu_name, localclientnum);
   [[var_d0b01271]] - > show_model();
   camera_ent = struct::get(#"cac_specialist_angle");
-  playmaincamxcam(localclientnum, #"ui_cam_character_customization_3d", 0, "", "", camera_ent.origin, camera_ent.angles);
+  playmaincamxcam(localclientnum, # "ui_cam_character_customization_3d", 0, "", "", camera_ent.origin, camera_ent.angles);
 }
 
 function_8ad37038(localclientnum, menu_name, state) {
@@ -2921,20 +2896,20 @@ function_8ad37038(localclientnum, menu_name, state) {
   if(isDefined(state)) {
     [[var_d0b01271]] - > set_character_index(state);
     level notify("updateSpecialistCustomization" + localclientnum, {
-      #event_name: "changeHero", 
-      #character_index: state, 
+      #event_name: "changeHero",
+      #character_index: state,
       #mode: 3
     });
   }
 
   [[var_d0b01271]] - > show_model();
   camera_ent = struct::get(#"cac_specialist_angle");
-  playmaincamxcam(localclientnum, #"ui_cam_loadout_character", 0, "", "", camera_ent.origin, camera_ent.angles);
+  playmaincamxcam(localclientnum, # "ui_cam_loadout_character", 0, "", "", camera_ent.origin, camera_ent.angles);
 }
 
 function_bc98f036(localclientnum, menu_name, state) {
   camera_ent = struct::get(#"cac_specialist_angle");
-  playmaincamxcam(localclientnum, #"ui_cam_character_customization_3d", 0, "", "", camera_ent.origin, camera_ent.angles);
+  playmaincamxcam(localclientnum, # "ui_cam_character_customization_3d", 0, "", "", camera_ent.origin, camera_ent.angles);
 }
 
 function_5e7dcbed(localclientnum, menu_data) {
@@ -2943,7 +2918,7 @@ function_5e7dcbed(localclientnum, menu_data) {
 
 function_ac9a8cf(localclientnum, menu_name, state) {
   camera_ent = struct::get(#"cac_specialist_angle");
-  playmaincamxcam(localclientnum, #"ui_cam_character_customization_3d", 0, "", "", camera_ent.origin, camera_ent.angles);
+  playmaincamxcam(localclientnum, # "ui_cam_character_customization_3d", 0, "", "", camera_ent.origin, camera_ent.angles);
   var_d0b01271 = lui::getcharacterdataformenu(menu_name, localclientnum);
   level thread function_914198cd(localclientnum, var_d0b01271, menu_name);
 }
@@ -2956,14 +2931,14 @@ function_914198cd(localclientnum, var_d0b01271, menu_name) {
     waitresult = level waittill("deathfx_update_" + localclientnum);
 
     switch (waitresult.event_name) {
-      case #"updatecharacter":
+      case # "updatecharacter":
         var_d0b01271 function_79c881da(localclientnum, waitresult.mode);
         break;
-      case #"previewdeathfx":
+      case # "previewdeathfx":
         var_d0b01271 notify(#"cancel_deathfx");
         var_d0b01271 thread function_317ab257(localclientnum, menu_name, waitresult.deathfxindex);
         break;
-      case #"stopdeathfx":
+      case # "stopdeathfx":
         var_d0b01271 function_ca43d336(localclientnum);
         break;
     }
@@ -2991,9 +2966,9 @@ function_317ab257(localclientnum, menu_name, var_83a11058) {
   level endon(#"disconnect");
   level endon(menu_name + "_closed");
   self endon(#"cancel_deathfx");
-  var_cc8a3490 = #"hash_521de69029125f63";
-  var_7d89d45 = #"hash_33ffd8c85b4da392";
-  var_e04a6c21 = #"hash_4c04b62047703a60";
+  var_cc8a3490 = # "hash_521de69029125f63";
+  var_7d89d45 = # "hash_33ffd8c85b4da392";
+  var_e04a6c21 = # "hash_4c04b62047703a60";
 
   if(![[self]] - > function_ea4ac9f8()) {
     return;
@@ -3002,9 +2977,9 @@ function_317ab257(localclientnum, menu_name, var_83a11058) {
   var_2ae2bfde = function_b52a94ae(var_83a11058);
 
   if(isDefined(var_2ae2bfde)) {
-    var_cc8a3490 = isDefined(var_2ae2bfde.var_cc8a3490) ? var_2ae2bfde.var_cc8a3490 : #"hash_521de69029125f63";
-    var_7d89d45 = isDefined(var_2ae2bfde.var_7d89d45) ? var_2ae2bfde.var_7d89d45 : #"hash_521de69029125f63";
-    var_e04a6c21 = isDefined(var_2ae2bfde.var_e04a6c21) ? var_2ae2bfde.var_e04a6c21 : #"hash_4c04b62047703a60";
+    var_cc8a3490 = isDefined(var_2ae2bfde.var_cc8a3490) ? var_2ae2bfde.var_cc8a3490 : # "hash_521de69029125f63";
+    var_7d89d45 = isDefined(var_2ae2bfde.var_7d89d45) ? var_2ae2bfde.var_7d89d45 : # "hash_521de69029125f63";
+    var_e04a6c21 = isDefined(var_2ae2bfde.var_e04a6c21) ? var_2ae2bfde.var_e04a6c21 : # "hash_4c04b62047703a60";
   }
 
   self function_ca43d336(localclientnum);

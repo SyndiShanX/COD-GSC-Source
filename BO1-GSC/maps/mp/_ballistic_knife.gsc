@@ -10,15 +10,15 @@ init() {
   PrecacheModel("t5_weapon_ballistic_knife_blade");
   PrecacheModel("t5_weapon_ballistic_knife_blade_retrieve");
 }
-onSpawn(watcher, player) {
+onspawn(watcher, player) {
   player endon("death");
   player endon("disconnect");
   level endon("game_ended");
   self waittill("stationary", endpos, normal, angles, attacker, prey, bone);
   isFriendly = false;
   if(isDefined(endpos)) {
-    retrievable_model = Spawn("script_model", endpos);
-    retrievable_model SetModel("t5_weapon_ballistic_knife_blade");
+    retrievable_model = spawn("script_model", endpos);
+    retrievable_model setModel("t5_weapon_ballistic_knife_blade");
     retrievable_model SetTeam(player.team);
     retrievable_model SetOwner(player);
     retrievable_model.owner = player;
@@ -55,14 +55,14 @@ onSpawn(watcher, player) {
 wait_to_show_glowing_model(prey) {
   level endon("game_ended");
   self endon("death");
-  glowing_retrievable_model = Spawn("script_model", self.origin);
+  glowing_retrievable_model = spawn("script_model", self.origin);
   self.glowing_model = glowing_retrievable_model;
   glowing_retrievable_model.angles = self.angles;
   glowing_retrievable_model LinkTo(self);
   if(isDefined(prey) && !IsAlive(prey)) {
     wait(2);
   }
-  glowing_retrievable_model SetModel("t5_weapon_ballistic_knife_blade_retrieve");
+  glowing_retrievable_model setModel("t5_weapon_ballistic_knife_blade_retrieve");
 }
 watch_shutdown() {
   pickUpTrigger = self.pickUpTrigger;
@@ -95,11 +95,11 @@ onSpawnRetrieveTrigger(watcher, player) {
     trigger_pos[1] = retrievable_model.origin[1] + (vec_scale * normal[1]);
     trigger_pos[2] = retrievable_model.origin[2] + (vec_scale * normal[2]);
   }
-  pickup_trigger = Spawn("trigger_radius_use", (trigger_pos[0], trigger_pos[1], trigger_pos[2]));
+  pickup_trigger = spawn("trigger_radius_use", (trigger_pos[0], trigger_pos[1], trigger_pos[2]));
   pickup_trigger SetCursorHint("HINT_NOICON", watcher.weapon);
   pickup_trigger.owner = player;
   retrievable_model.pickUpTrigger = pickup_trigger;
-  hint_string = & "MP_BALLISTIC_KNIFE_PICKUP";
+  hint_string = &"MP_BALLISTIC_KNIFE_PICKUP";
   if(isDefined(hint_string)) {
     pickup_trigger SetHintString(hint_string);
   } else {
@@ -115,7 +115,7 @@ onSpawnRetrieveTrigger(watcher, player) {
   else
     pickup_trigger LinkTo(retrievable_model);
   retrievable_model thread watch_use_trigger(pickup_trigger, retrievable_model, ::pick_up, watcher.pickUpSoundPlayer, watcher.pickUpSound);
-  other_team_pickup_trigger = Spawn("trigger_radius_use", (trigger_pos[0], trigger_pos[1], trigger_pos[2]));
+  other_team_pickup_trigger = spawn("trigger_radius_use", (trigger_pos[0], trigger_pos[1], trigger_pos[2]));
   other_team_pickup_trigger SetCursorHint("HINT_NOICON");
   retrievable_model.otherTeamPickUpTrigger = other_team_pickup_trigger;
   if(isDefined(hint_string)) {
@@ -141,9 +141,9 @@ watch_trigger_visibility(triggers, weap_name) {
   self endon("watchTriggerVisibility");
   self endon("death");
   max_ammo = WeaponMaxAmmo(weap_name) + 1;
-  while (true) {
+  while(true) {
     players = level.players;
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       if(!IsAlive(players[i])) {
         wait(0.05);
         continue;
@@ -189,7 +189,7 @@ watch_trigger_visibility(triggers, weap_name) {
 }
 debug_print(endpos) {
   self endon("death");
-  while (true) {
+  while(true) {
     Print3d(endpos, "pickup_trigger");
     wait(0.05);
   }
@@ -198,7 +198,7 @@ watch_use_trigger(trigger, model, callback, playerSoundOnUse, npcSoundOnUse) {
   self endon("death");
   self endon("delete");
   level endon("game_ended");
-  while (true) {
+  while(true) {
     trigger waittill("trigger", player);
     if(!IsAlive(player))
       continue;
@@ -250,7 +250,7 @@ destroy_ent() {
 }
 dropKnivesToGround() {
   self endon("death");
-  for (;;) {
+  for(;;) {
     level waittill("drop_objects_to_ground", origin, radius);
     self dropToGround(origin, radius);
   }

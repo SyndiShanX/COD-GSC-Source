@@ -11,12 +11,12 @@
 #namespace zm_temple_achievement;
 
 function autoexec __init__sytem__() {
-  system::register("zm_temple_achievement", & __init__, undefined, undefined);
+  system::register("zm_temple_achievement", &__init__, undefined, undefined);
 }
 
 function __init__() {
   level thread achievement_temple_sidequest();
-  callback::on_connect( & onplayerconnect);
+  callback::on_connect(&onplayerconnect);
 }
 
 function onplayerconnect() {
@@ -47,14 +47,14 @@ function achievement_blinded_by_the_fright() {
 function achievement_small_consolation() {
   level endon("end_game");
   self endon("disconnect");
-  while (true) {
+  while(true) {
     self waittill("weapon_fired");
     currentweapon = self getcurrentweapon();
     if(currentweapon.name != "shrink_ray" && currentweapon.name != "shrink_ray_upgraded") {
       continue;
     }
     waittillframeend();
-    if(isdefined(self.shrinked_zombies) && (isdefined(self.shrinked_zombies["zombie"]) && self.shrinked_zombies["zombie"]) && (isdefined(self.shrinked_zombies["sonic_zombie"]) && self.shrinked_zombies["sonic_zombie"]) && (isdefined(self.shrinked_zombies["napalm_zombie"]) && self.shrinked_zombies["napalm_zombie"]) && (isdefined(self.shrinked_zombies["monkey_zombie"]) && self.shrinked_zombies["monkey_zombie"])) {
+    if(isDefined(self.shrinked_zombies) && (isDefined(self.shrinked_zombies["zombie"]) && self.shrinked_zombies["zombie"]) && (isDefined(self.shrinked_zombies["sonic_zombie"]) && self.shrinked_zombies["sonic_zombie"]) && (isDefined(self.shrinked_zombies["napalm_zombie"]) && self.shrinked_zombies["napalm_zombie"]) && (isDefined(self.shrinked_zombies["monkey_zombie"]) && self.shrinked_zombies["monkey_zombie"])) {
       break;
     }
   }

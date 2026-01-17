@@ -10,22 +10,20 @@
 #using_animtree("generic_human");
 
 main() {
-  if(isdefined(self.longDeathStarting)) {
+  if(isDefined(self.longDeathStarting)) {
     // important that we don't run any other animscripts.
     self waittill("killanimscript");
     return;
   }
 
-  if([
-      [anim.pain_test]
-    ]())
+  if([[anim.pain_test]]())
     return;
-  if(self.a.disablePain)
+  if(self.a.disablePain) {
     return;
-
+  }
   self notify("kill_long_death");
 
-  if(isdefined(self.a.painTime))
+  if(isDefined(self.a.painTime))
     self.a.lastPainTime = self.a.painTime;
   else
     self.a.lastPainTime = 0;
@@ -49,17 +47,17 @@ main() {
   self notify("anim entered pain");
   self endon("killanimscript");
 
-  // Two pain animations are played.One is a longer, detailed animation with little to do with the actual 
-  // location and direction of the shot, but depends on what pose the character starts in.The other is a 
-  // "hit" animation that is very location-specific, but is just a single pose for the affected bones so it 
+  // Two pain animations are played.One is a longer, detailed animation with little to do with the actual
+  // location and direction of the shot, but depends on what pose the character starts in.The other is a
+  // "hit" animation that is very location-specific, but is just a single pose for the affected bones so it
   // can be played easily whichever position the character is in.
   animscripts\utility::initialize("pain");
 
   self animmode("gravity");
 
-  //thread [[anim.println]] ("Shot in "+self.damageLocation+" from "+self.damageYaw+" for "+self.damageTaken+" hit points");#/
+  //thread [[anim.println]] ("Shot in "+self.damageLocation+" from "+self.damageYaw+" for "+self.damageTaken+" hit points");
 
-  if(!isdefined(self.no_pain_sound))
+  if(!isDefined(self.no_pain_sound))
     self animscripts\face::SayGenericDialogue("pain");
 
   if(self.damageLocation == "helmet")
@@ -67,36 +65,34 @@ main() {
   else if(self wasDamagedByExplosive() && randomint(2) == 0)
     self animscripts\death::helmetPop();
 
-  if(isdefined(self.painFunction)) {
+  if(isDefined(self.painFunction)) {
     self[[self.painFunction]]();
     return;
   }
 
   // corner grenade death takes priority over crawling pain
-  /#
+
   if(getDvarInt("scr_forceCornerGrenadeDeath") == 1) {
     if(self TryCornerRightGrenadeDeath())
       return;
   }
-  # /
-    if(crawlingPain())
-      return;
 
-  if(specialPain(self.a.special))
+  if(crawlingPain()) {
     return;
-
+  }
+  if(specialPain(self.a.special)) {
+    return;
+  }
   // if we didn't handle self.a.special, we can't rely on it being accurate after the pain animation we're about to play.
   //self.a.special = "none";
   //self.specialDeathFunc = undefined;
 
   painAnim = getPainAnim();
 
-  /#
   if(getdvarint("scr_paindebug") == 1)
     println("^2Playing pain: ", painAnim, " ; pose is ", self.a.pose);
-  # /
 
-    playPainAnim(painAnim);
+  playPainAnim(painAnim);
 }
 
 initPainFx() {
@@ -104,19 +100,19 @@ initPainFx() {
 }
 
 end_script() {
-  if(isdefined(self.damageShieldPain)) {
+  if(isDefined(self.damageShieldPain)) {
     self.damageShieldCounter = undefined;
     self.damageShieldPain = undefined;
     self.allowpain = true;
 
     // still somewhat risky
-    if(!isdefined(self.preDamageShieldIgnoreMe))
+    if(!isDefined(self.preDamageShieldIgnoreMe))
       self.ignoreme = false;
 
     self.preDamageShieldIgnoreMe = undefined;
   }
 
-  if(isdefined(self.blockingPain)) {
+  if(isDefined(self.blockingPain)) {
     self.blockingPain = undefined;
     self.allowPain = true;
   }
@@ -142,16 +138,16 @@ wasDamagedByExplosive() {
 maxDamageShieldPainInterval = 1500;
 
 getDamageShieldPainAnim() {
-  if(self.a.pose == "prone")
+  if(self.a.pose == "prone") {
     return;
-
-  if(isdefined(self.lastAttacker) && isdefined(self.lastAttacker.team) && self.lastAttacker.team == self.team)
+  }
+  if(isDefined(self.lastAttacker) && isDefined(self.lastAttacker.team) && self.lastAttacker.team == self.team) {
     return;
-
-  if(!isdefined(self.damageShieldCounter) || (gettime() - self.a.lastPainTime) > maxDamageShieldPainInterval)
+  }
+  if(!isDefined(self.damageShieldCounter) || (gettime() - self.a.lastPainTime) > maxDamageShieldPainInterval)
     self.damageShieldCounter = randomintrange(2, 3);
 
-  if(isdefined(self.lastAttacker) && distanceSquared(self.origin, self.lastAttacker.origin) < squared(512))
+  if(isDefined(self.lastAttacker) && distanceSquared(self.origin, self.lastAttacker.origin) < squared(512))
     self.damageShieldCounter = 0;
 
   if(self.damageShieldCounter > 0) {
@@ -180,13 +176,13 @@ getDamageShieldPainAnim() {
 MAX_RUNNING_PAIN_DIST_SQ = (64 * 64);
 
 getPainAnim() {
-  if(self.damageShield && !isdefined(self.disableDamageShieldPain)) {
+  if(self.damageShield && !isDefined(self.disableDamageShieldPain)) {
     painAnim = getDamageShieldPainAnim();
-    if(isdefined(painAnim))
+    if(isDefined(painAnim))
       return painAnim;
   }
 
-  if(isdefined(self.a.onback)) {
+  if(isDefined(self.a.onback)) {
     if(self.a.pose == "crouch")
       return % back_pain;
     else
@@ -194,7 +190,7 @@ getPainAnim() {
   }
 
   if(self.a.pose == "stand") {
-    closeToNode = isdefined(self.node) && (distanceSquared(self.origin, self.node.origin) < MAX_RUNNING_PAIN_DIST_SQ);
+    closeToNode = isDefined(self.node) && (distanceSquared(self.origin, self.node.origin) < MAX_RUNNING_PAIN_DIST_SQ);
 
     if(!closeToNode && self.a.movement == "run" && (abs(self getMotionAngle()) < 60))
       return getRunningForwardPainAnim();
@@ -353,7 +349,7 @@ getStandPainAnim() {
 
 removeBlockedAnims(array) {
   newArray = [];
-  for (index = 0; index < array.size; index++) {
+  for(index = 0; index < array.size; index++) {
     painAnim = array[index];
     time = 1;
     if(animHasNoteTrack(painAnim, "code_move"))
@@ -436,7 +432,7 @@ specialPainBlocker() {
 }
 
 // Special pain is for corners, rambo behavior, mg42's, anything out of the ordinary stand, crouch and prone.
-// It returns true if it handles the pain for the special animation state, or false if it wants the regular 
+// It returns true if it handles the pain for the special animation state, or false if it wants the regular
 // pain function to handle it.
 specialPain(anim_special) {
   if(anim_special == "none")
@@ -605,20 +601,18 @@ DoPain(painAnim) {
 mg42pain(pose) {
   //		assertmsg("mg42 pain anims not implemented yet");//scripted_mg42gunner_pain
 
-  /#
-  assertEx(isdefined(level.mg_animmg), "You're missing maps\\_mganim::main();Add it to your level.");
+  assertEx(isDefined(level.mg_animmg), "You're missing maps\\_mganim::main();Add it to your level.");
   {
     println("	maps\\_mganim::main();");
     return;
   }
-  # /
 
-    self setflaggedanimknob("painanim", level.mg_animmg["pain_" + pose], 1, .1, 1);
+  self setflaggedanimknob("painanim", level.mg_animmg["pain_" + pose], 1, .1, 1);
   self animscripts\shared::DoNoteTracks("painanim");
 }
 
-// This is to stop guys from taking off running if they're interrupted during pain.This used to happen when 
-// guys were running when they entered pain, but didn't play a special running pain (eg because they were 
+// This is to stop guys from taking off running if they're interrupted during pain.This used to happen when
+// guys were running when they entered pain, but didn't play a special running pain (eg because they were
 // running sideways).It resulted in a running pain or death being played when they were shot again.
 waitSetStop(timetowait, killmestring) {
   self endon("killanimscript");
@@ -639,21 +633,20 @@ crawlingPain() {
   if(self.stairsState != "none")
     return false;
 
-  if(isdefined(self.a.onback))
+  if(isDefined(self.a.onback))
     return false;
 
-  /# 
+
   if(getDvarInt("scr_forceCrawl") == 1)
     self.forceLongDeath = 1;
-  # /
 
-    if(isdefined(self.forceLongDeath)) {
-      self.health = 10;
-      self thread crawlingPistol();
+  if(isDefined(self.forceLongDeath)) {
+    self.health = 10;
+    self thread crawlingPistol();
 
-      self waittill("killanimscript");
-      return true;
-    }
+    self waittill("killanimscript");
+    return true;
+  }
 
   transAnims["prone"] = array( % dying_crawl_2_back);
   transAnims["stand"] = array( % dying_stand_2_back_v1, % dying_stand_2_back_v2);
@@ -708,7 +701,7 @@ crawlingPain() {
 }
 
 isCrawlDeltaAllowed(theanim) {
-  if(isdefined(self.a.force_num_crawls))
+  if(isDefined(self.a.force_num_crawls))
     return true;
 
   delta = getMoveDelta(theanim, 0, 1);
@@ -733,7 +726,7 @@ initCrawlingPistolAnims() {
 
   self.a.array["back_death"] = array( % dying_back_death_v1, % dying_back_death_v2, % dying_back_death_v3);
 
-  if(isdefined(self.crawlingPainAnimOverrideFunc))
+  if(isDefined(self.crawlingPainAnimOverrideFunc))
     [[self.crawlingPainAnimOverrideFunc]]();
 }
 
@@ -758,32 +751,33 @@ crawlingPistol() {
   self setAnimKnobAll( % dying, % body, 1, 0.1, 1);
 
   // dyingCrawl() returns false if we die without turning around
-  if(!self dyingCrawl())
+  if(!self dyingCrawl()) {
     return;
-
+  }
   self setFlaggedAnimKnob("transition", self.a.crawlingPainTransAnim, 1, 0.5, 1);
   self animscripts\shared::DoNoteTracksIntercept("transition", ::handleBackCrawlNotetracks);
-  assert(isdefined(self.a.onback));
+  assert(isDefined(self.a.onback));
 
   self.a.special = "dying_crawl";
 
   self thread dyingCrawlBackAim();
 
-  if(isdefined(self.enemy))
+  if(isDefined(self.enemy))
     self setLookAtEntity(self.enemy);
 
   decideNumCrawls();
-  while (shouldKeepCrawling()) {
+  while(shouldKeepCrawling()) {
     crawlAnim = animArray("back_crawl");
-    if(!self isCrawlDeltaAllowed(crawlAnim))
+    if(!self isCrawlDeltaAllowed(crawlAnim)) {
       break;
+    }
 
     self setFlaggedAnimKnobRestart("back_crawl", crawlAnim, 1, 0.1, 1.0);
     self animscripts\shared::DoNoteTracksIntercept("back_crawl", ::handleBackCrawlNotetracks);
   }
 
   self.desiredTimeOfDeath = gettime() + randomintrange(4000, 20000);
-  while (shouldStayAlive()) {
+  while(shouldStayAlive()) {
     if(self canSeeEnemy() && self aimedSomewhatAtEnemy()) {
       backAnim = animArray("back_fire");
 
@@ -797,9 +791,10 @@ crawlingPistol() {
       self setFlaggedAnimKnobRestart("back_idle_or_fire", backAnim, 1, 0.1, 1.0);
 
       timeRemaining = getAnimLength(backAnim);
-      while (timeRemaining > 0) {
-        if(self canSeeEnemy() && self aimedSomewhatAtEnemy())
+      while(timeRemaining > 0) {
+        if(self canSeeEnemy() && self aimedSomewhatAtEnemy()) {
           break;
+        }
 
         interval = 0.5;
         if(interval > timeRemaining) {
@@ -829,7 +824,7 @@ crawling_stab_achievement() {
     return;
   self endon("end_dying_crawl_back_aim");
   self waittill("death", attacker, type);
-  if(!isdefined(self) || !isdefined(attacker) || !isplayer(attacker))
+  if(!isDefined(self) || !isDefined(attacker) || !isplayer(attacker))
     return;
   //	if( type == "MOD_MELEE" )
   //		maps\_utility::giveachievement_wrapper( "NO_REST_FOR_THE_WEARY" );
@@ -843,7 +838,7 @@ shouldStayAlive() {
 }
 
 dyingCrawl() {
-  if(!isdefined(self.forceLongDeath)) {
+  if(!isDefined(self.forceLongDeath)) {
     if(self.a.pose == "prone")
       return true;
 
@@ -885,14 +880,14 @@ dyingCrawl() {
   self.a.special = "dying_crawl";
 
   decideNumCrawls();
-  while (shouldKeepCrawling()) {
+  while(shouldKeepCrawling()) {
     crawlAnim = animArray("crawl");
 
     if(!self isCrawlDeltaAllowed(crawlAnim))
       return true;
 
-    if(isdefined(self.custom_crawl_sound)) {
-      self playsound(self.custom_crawl_sound);
+    if(isDefined(self.custom_crawl_sound)) {
+      self playSound(self.custom_crawl_sound);
     }
 
     self setFlaggedAnimKnobRestart("crawling", crawlAnim, 1, 0.1, 1.0);
@@ -902,7 +897,7 @@ dyingCrawl() {
   self notify("done_crawling");
 
   // check if target is in cone to shoot
-  if(!isdefined(self.forceLongDeath) && enemyIsInGeneralDirection(anglesToForward(self.angles) * -1))
+  if(!isDefined(self.forceLongDeath) && enemyIsInGeneralDirection(anglesToForward(self.angles) * -1))
     return true;
 
   deathanim = animArrayPickRandom("death");
@@ -926,11 +921,12 @@ dyingCrawlBloodSmear() {
   self endon("death");
 
   if(self.a.pose != "prone") {
-    while (1) {
+    while(1) {
       self waittill("falling", note);
 
-      if(IsSubStr(note, "bodyfall"))
+      if(IsSubStr(note, "bodyfall")) {
         break;
+      }
     }
   }
 
@@ -940,18 +936,18 @@ dyingCrawlBloodSmear() {
   fx_rate = .25;
   fx = level._effect["crawling_death_blood_smear"];
 
-  if(isdefined(self.a.crawl_fx_rate))
+  if(isDefined(self.a.crawl_fx_rate))
     fx_rate = self.a.crawl_fx_rate;
-  if(isdefined(self.a.crawl_fx))
+  if(isDefined(self.a.crawl_fx))
     fx = level._effect[self.a.crawl_fx];
 
-  while (fx_rate) {
+  while(fx_rate) {
     org = self gettagorigin(origintag);
     angles = self GetTagAngles(angletag);
     forward = anglestoright(angles);
-    up = anglestoforward((270, 0, 0));
+    up = anglesToForward((270, 0, 0));
 
-    playfx(fx, org, up, forward);
+    playFX(fx, org, up, forward);
 
     wait(fx_rate);
   }
@@ -962,7 +958,7 @@ dyingCrawlBackAim() {
   self endon("death");
   self endon("end_dying_crawl_back_aim");
 
-  if(isdefined(self.dyingCrawlAiming))
+  if(isDefined(self.dyingCrawlAiming))
     return;
   self.dyingCrawlAiming = true;
 
@@ -971,7 +967,7 @@ dyingCrawlBackAim() {
 
   prevyaw = 0;
 
-  while (1) {
+  while(1) {
     aimyaw = self getYawToEnemy();
 
     diff = AngleClamp180(aimyaw - prevyaw);
@@ -1027,7 +1023,7 @@ handleBackCrawlNotetracks(note) {
 }
 
 aimedSomewhatAtEnemy() {
-  assert(isdefined(self.enemy));
+  assert(isDefined(self.enemy));
 
   enemyShootAtPos = self.enemy getShootAtPos();
 
@@ -1044,7 +1040,7 @@ aimedSomewhatAtEnemy() {
 }
 
 enemyIsInGeneralDirection(dir) {
-  if(!isdefined(self.enemy))
+  if(!isDefined(self.enemy))
     return false;
 
   toenemy = vectorNormalize(self.enemy getShootAtPos() - self getEye());
@@ -1083,7 +1079,7 @@ preventPainForAShortTime(type) {
     wait 1.0;
 
     // we've essentially succeeded in doing a crawling pain.
-    if(isdefined(level.player) && distanceSquared(self.origin, level.player.origin) < 1024 * 1024) {
+    if(isDefined(level.player) && distanceSquared(self.origin, level.player.origin) < 1024 * 1024) {
       anim.numDeathsUntilCrawlingPain = randomintrange(10, 30);
       anim.nextCrawlingPainTime = gettime() + randomintrange(15000, 60000);
     } else {
@@ -1091,47 +1087,45 @@ preventPainForAShortTime(type) {
       anim.nextCrawlingPainTime = gettime() + randomintrange(5000, 25000);
     }
     anim.nextCrawlingPainTimeFromLegDamage = gettime() + randomintrange(7000, 13000);
-    /#
+
     if(getDebugDvarInt("scr_crawldebug") == 1) {
       thread printLongDeathDebugText(self.origin + (0, 0, 64), "crawl death");
       return;
     }
-    # /
+
   } else if(type == "corner_grenade") {
     wait 1.0;
 
     // we've essentially succeeded in doing a corner grenade death.
-    if(isdefined(level.player) && distanceSquared(self.origin, level.player.origin) < 700 * 700) {
+    if(isDefined(level.player) && distanceSquared(self.origin, level.player.origin) < 700 * 700) {
       anim.numDeathsUntilCornerGrenadeDeath = randomintrange(10, 30);
       anim.nextCornerGrenadeDeathTime = gettime() + randomintrange(15000, 60000);
     } else {
       anim.numDeathsUntilCornerGrenadeDeath = randomintrange(5, 12);
       anim.nextCornerGrenadeDeathTime = gettime() + randomintrange(5000, 25000);
     }
-    /#
+
     if(getDebugDvarInt("scr_cornergrenadedebug") == 1) {
       thread printLongDeathDebugText(self.origin + (0, 0, 64), "grenade death");
       return;
     }
-    # /
+
   }
 }
 
-/#
 printLongDeathDebugText(loc, text) {
-  for (i = 0; i < 100; i++) {
+  for(i = 0; i < 100; i++) {
     print3d(loc, text);
     wait .05;
   }
 }
-# /
 
-  decideNumCrawls() {
-    if(isdefined(self.a.force_num_crawls))
-      self.a.numCrawls = self.a.force_num_crawls;
-    else
-      self.a.numCrawls = randomIntRange(1, 5);
-  }
+decideNumCrawls() {
+  if(isDefined(self.a.force_num_crawls))
+    self.a.numCrawls = self.a.force_num_crawls;
+  else
+    self.a.numCrawls = randomIntRange(1, 5);
+}
 
 shouldKeepCrawling() {
   // TODO: player distance checks, etc...
@@ -1149,16 +1143,14 @@ shouldKeepCrawling() {
 }
 
 TryCornerRightGrenadeDeath() {
-  /#
   if(getDvarInt("scr_forceCornerGrenadeDeath") == 1) {
     self thread CornerRightGrenadeDeath();
     self waittill("killanimscript");
     return true;
   }
-  # /
 
-    if(anim.numDeathsUntilCornerGrenadeDeath > 0)
-      return false;
+  if(anim.numDeathsUntilCornerGrenadeDeath > 0)
+    return false;
   if(gettime() < anim.nextCornerGrenadeDeathTime)
     return false;
 
@@ -1214,9 +1206,10 @@ CornerRightGrenadeDeath() {
   self setFlaggedAnimKnobAllRestart("corner_grenade_idle", % corner_standR_death_grenade_idle, % body, 1, .2);
 
   self thread watchEnemyVelocity();
-  while (!enemyIsApproaching()) {
-    if(gettime() >= desiredDeathTime)
+  while(!enemyIsApproaching()) {
+    if(gettime() >= desiredDeathTime) {
       break;
+    }
 
     self animscripts\shared::DoNoteTracksForTime(0.1, "corner_grenade_idle");
   }
@@ -1251,7 +1244,7 @@ CornerDeathReleaseGrenade(velocity, fusetime) {
   // avoid dropping under the floor.
   releasePointLifted = releasePoint + (0, 0, 20);
   releasePointDropped = releasePoint - (0, 0, 20);
-  trace = bullettrace(releasePointLifted, releasePointDropped, false, undefined);
+  trace = bulletTrace(releasePointLifted, releasePointDropped, false, undefined);
 
   if(trace["fraction"] < .5)
     releasePoint = trace["position"];
@@ -1269,7 +1262,7 @@ CornerDeathReleaseGrenade(velocity, fusetime) {
 
 playSoundAtPoint(alias, origin) {
   org = spawn("script_origin", origin);
-  org playsound(alias, "sounddone");
+  org playSound(alias, "sounddone");
   org waittill("sounddone");
   org delete();
 }
@@ -1285,7 +1278,7 @@ killSelf() {
 killWrapper() {
   // Set in maps\_spawner.gsc, mainly for SpecOps
   // This helps ensure the kill is done by the player if a player is the one who put the Ai into the long-death
-  if(IsDefined(self.last_dmg_player)) {
+  if(isDefined(self.last_dmg_player)) {
     self Kill(self.origin, self.last_dmg_player);
   } else {
     self Kill();
@@ -1293,7 +1286,7 @@ killWrapper() {
 }
 
 enemyIsApproaching() {
-  if(!isdefined(self.enemy))
+  if(!isDefined(self.enemy))
     return false;
   if(distanceSquared(self.origin, self.enemy.origin) > 384 * 384)
     return false;
@@ -1348,13 +1341,13 @@ watchEnemyVelocity() {
 
   interval = .15;
 
-  while (1) {
-    if(isdefined(self.enemy) && isdefined(prevenemy) && self.enemy == prevenemy) {
+  while(1) {
+    if(isDefined(self.enemy) && isDefined(prevenemy) && self.enemy == prevenemy) {
       curpos = self.enemy.origin;
       self.enemyVelocity = vector_multiply(curpos - prevpos, 1 / interval);
       prevpos = curpos;
     } else {
-      if(isdefined(self.enemy))
+      if(isDefined(self.enemy))
         prevpos = self.enemy.origin;
       else
         prevpos = self.origin;
@@ -1370,15 +1363,15 @@ watchEnemyVelocity() {
 additive_pain(damage, attacker, direction_vec, point, type, modelName, tagName) {
   self endon("death");
 
-  if(!isdefined(self))
+  if(!isDefined(self)) {
     return;
-
-  if(isdefined(self.doingAdditivePain))
+  }
+  if(isDefined(self.doingAdditivePain)) {
     return;
-
-  if(damage > self.minPainDamage)
+  }
+  if(damage > self.minPainDamage) {
     return;
-
+  }
   self.doingAdditivePain = true;
   painAnimArray = array( % pain_add_standing_belly, % pain_add_standing_left_arm, % pain_add_standing_right_arm);
 

@@ -26,7 +26,7 @@ init_serverfaceanim() {
   self.do_face_anims = 1;
 
   if(!isDefined(level.face_event_handler)) {
-    level.face_event_handler = spawnstruct();
+    level.face_event_handler = spawnStruct();
     level.face_event_handler.events = [];
     level.face_event_handler.events["death"] = "face_death";
     level.face_event_handler.events["grenade danger"] = "face_alert";

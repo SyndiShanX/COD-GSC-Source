@@ -848,5 +848,4 @@ main() {
   ent.v["angles"] = (270, 0, 0);
   ent.v["fxid"] = "insects_carcass_runner";
   ent.v["delay"] = -15;
-
 }

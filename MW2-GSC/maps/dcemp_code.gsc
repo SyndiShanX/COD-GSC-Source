@@ -14,7 +14,6 @@ CONST_BTR_SLIDE_TIME_2 = .65;
 CONST_STREET_CAR_WAIT = .25;
 CONST_NEW_HELI_DROP_HEIGHT = 5500;
 
-
 //------- SPACE SUIT INPUT --------->
 
 CONST_ISS_INPUT_X_MIN = 8;
@@ -30,8 +29,10 @@ CONST_ISS_INPUT_ACC_Y_MIN = 1;
 //<---------------------------------
 
 /************************************************************************************************************/
+
 /*													INTRO													*/
 /************************************************************************************************************/
+
 iss_get_satellite_model() {
   node = getent("iss_player_link", "targetname");
   model = spawn_anim_model("iss_satellite", node.origin);
@@ -45,7 +46,7 @@ iss_get_satellite_model() {
 }
 
 iss_satellite_update_model(veh) {
-  while (1) {
+  while(1) {
     self moveto(veh.origin, .1);
     self rotateto(veh.angles, .1);
     wait .05;
@@ -89,12 +90,12 @@ iss_camera_spotlight() {
 
   origin = self.origin + offset;
   model = spawn("script_model", origin);
-  model setmodel("TAG_ORIGIN");
+  model setModel("TAG_ORIGIN");
   model.angles = level.player getplayerangles();
 
-  playfxontag(level._effect["space_helmet_spot_light"], model, "TAG_ORIGIN");
+  playFXOnTag(level._effect["space_helmet_spot_light"], model, "TAG_ORIGIN");
 
-  while (!flag("iss_destroy_blast_wave")) {
+  while(!flag("iss_destroy_blast_wave")) {
     offset = self iss_camera_offset();
 
     model.origin = self.origin + offset; // model moveto( self.origin + offset, .1 );
@@ -108,14 +109,13 @@ iss_camera_spotlight() {
 iss_camera_offset() {
   up = anglestoup(self.angles);
   right = anglestoright(self.angles);
-  forward = anglestoforward(self.angles);
+  forward = anglesToForward(self.angles);
   offset = (up * 64) + (right * 16) + (forward * -2);
 
   return offset;
 }
 
 iss_satellite() {
-
   model = iss_get_satellite_model();
 
   diff = (5092, 4344, 3438) - (5440, 4634, 3470);
@@ -146,15 +146,15 @@ iss_organize_ents() {
 }
 
 iss_organize_ents_by_node() {
-  ents = getentarray("iss_entity", "targetname");
+  ents = getEntArray("iss_entity", "targetname");
   level.iss_ents[self.script_noteworthy] = [];
   node = getstruct("iss_blast_node", "targetname");
 
   num = 0;
   foreach(obj in ents) {
-    if(distancesquared(obj getorigin(), self.origin) > squared(self.radius))
+    if(distancesquared(obj getorigin(), self.origin) > squared(self.radius)) {
       continue;
-
+    }
     obj.distance_to_blast = distance(node.origin, obj getorigin());
 
     size = level.iss_ents[self.script_noteworthy].size;
@@ -193,7 +193,7 @@ iss_destroy_iss_parts() {
   flag_set("iss_destroy_first_wave");
   thread flag_set_delayed("iss_destroy_blast_wave", 1.5);
 
-  if(isdefined(self.script_noteworthy) && self.script_noteworthy == "delete") {
+  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "delete") {
     self delete();
     return;
   }
@@ -238,7 +238,7 @@ iss_destroy_iss_parts() {
 }
 
 iss_destroy_sat_parts() {
-  if(isdefined(self.script_noteworthy) && self.script_noteworthy == "delete") {
+  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "delete") {
     self delete();
     return;
   }
@@ -302,12 +302,12 @@ iss_kill_player() {
   cam.node rotatevelocity(angles, time);
 
   time = 4;
-  plate = spawn("script_model", level.player geteye() + (vector * -2000));
-  plate setmodel("iss_sail_center");
+  plate = spawn("script_model", level.player getEye() + (vector * -2000));
+  plate setModel("iss_sail_center");
   plate rotatevelocity((195, 0, -215), time);
 
-  while (time > 0) {
-    plate moveto(level.player geteye() + (vector * 256), time);
+  while(time > 0) {
+    plate moveto(level.player getEye() + (vector * 256), time);
     time -= .05;
     wait .05;
   }
@@ -316,7 +316,7 @@ iss_kill_player() {
 iss_player_quake() {
   level endon("iss_done");
 
-  while (1) {
+  while(1) {
     earthquake(.35, .2, level.player.origin, 1024);
     wait .05;
   }
@@ -331,12 +331,12 @@ iss_lights_out() {
 
   wait 1;
 
-  for (i = 1; i <= level.bg_iss_darknum; i++) {
+  for(i = 1; i <= level.bg_iss_darknum; i++) {
     name = "bg_iss_dark0";
     if(i > 9)
       name = "bg_iss_dark";
 
-    model setmodel(name + i);
+    model setModel(name + i);
 
     wait randomfloatrange(.2, .4);
   }
@@ -344,20 +344,22 @@ iss_lights_out() {
 
 iss_preload_lights() {
   origin = level.player.origin + (0, 0, 1024);
-  for (i = 1; i <= level.bg_iss_darknum; i++) {
+  for(i = 1; i <= level.bg_iss_darknum; i++) {
     name = "bg_iss_dark0";
     if(i > 9)
       name = "bg_iss_dark";
 
     model = spawn("script_model", origin);
     model.targetname = "iss_lights";
-    model setmodel(name + i);
+    model setModel(name + i);
   }
 }
 
 /************************************************************************************************************/
+
 /*													INTRO													*/
 /************************************************************************************************************/
+
 intro_enemy_setup() {
   flag_wait("crash_cut_to_black");
 
@@ -383,7 +385,7 @@ intro_enemy_reaction() {
 
   center = getstruct("emp_center", "targetname");
 
-  node = spawnstruct();
+  node = spawnStruct();
   node.origin = self.origin;
   angles = node.origin - center.origin;
   node.angles = vectortoangles(angles);
@@ -409,22 +411,23 @@ intro_enemy_reaction() {
   self delete();
 }
 
-
 /************************************************************************************************************/
+
 /*													EMP														*/
 /************************************************************************************************************/
+
 emp_entities() {
   switch (self.targetname) {
     case "emp_delete":
       self emp_ents_wait();
-      if(isdefined(self.script_noteworthy)) {
+      if(isDefined(self.script_noteworthy)) {
         switch (self.script_noteworthy) {
           case "lamp":
-            playfx(level._effect["powerline_runner_oneshot"], self getorigin() + (0, 0, 50));
+            playFX(level._effect["powerline_runner_oneshot"], self getorigin() + (0, 0, 50));
             thread play_sound_in_space("glass_pane_blowout", self getorigin());
             break;
           case "window":
-            playfx(level._effect["dcemp_glass_74x44"], self getorigin(), anglestoforward((0, 270, 0))); //, anglestoright( (0,270,0) ) );
+            playFX(level._effect["dcemp_glass_74x44"], self getorigin(), anglesToForward((0, 270, 0))); //, anglestoright( (0,270,0) ) );
             thread play_sound_in_space("glass_pane_blowout", self getorigin());
             break;
         }
@@ -433,7 +436,7 @@ emp_entities() {
       break;
 
     case "emp_swap":
-      if(isdefined(self.target)) {
+      if(isDefined(self.target)) {
         after = getent(self.target, "targetname");
         after hide();
         self emp_ents_wait();
@@ -453,7 +456,7 @@ emp_entities() {
       self hide();
       self emp_ents_wait();
       self show();
-      playfx(level._effect["powerline_runner_oneshot"], self getorigin());
+      playFX(level._effect["powerline_runner_oneshot"], self getorigin());
       thread play_sound_in_space("glass_pane_blowout", self getorigin());
       break;
   }
@@ -464,7 +467,7 @@ emp_smart_swap() {
 
   switch (self.model) {
     case "ch_street_light_01_on":
-      self setmodel("ch_street_light_01_off");
+      self setModel("ch_street_light_01_off");
       break;
   }
 }
@@ -478,7 +481,7 @@ emp_ents_wait(type) {
   dist = 0;
   magicnumber = 1 / 2500;
 
-  if(!isdefined(type))
+  if(!isDefined(type))
     type = self.targetname;
 
   switch (type) {
@@ -567,13 +570,13 @@ emp_heli_spotlight() {
 
   heli waittillmatch("single anim", "explode");
   heli notify("stop_heli_spark_effects");
-  heli playsound("scn_dcemp_cobra_shutdown_crash");
+  heli playSound("scn_dcemp_cobra_shutdown_crash");
 
   flag_set("emp_heli_crash");
 
-  playfx(level._effect["helicopter_crash"], heli gettagorigin("TAG_DEATHFX"));
+  playFX(level._effect["helicopter_crash"], heli gettagorigin("TAG_DEATHFX"));
   //thread play_sound_in_space( "mi17_helicopter_crash_dist", heli gettagorigin( "TAG_DEATHFX" ) );
-  heli setmodel("vehicle_mi-28_d_animated");
+  heli setModel("vehicle_mi-28_d_animated");
 
   time = 0;
   level.player delaycall(time, ::PlayRumbleLoopOnEntity, "tank_rumble");
@@ -586,8 +589,8 @@ emp_heli_spotlight() {
 
 heli_spark_effects() {
   self endon("stop_heli_spark_effects");
-  while (true) {
-    playfxontag(getfx("powerline_runner_oneshot"), self, "tag_engine_left");
+  while(true) {
+    playFXOnTag(getfx("powerline_runner_oneshot"), self, "tag_engine_left");
     wait(RandomFloatRange(.15, .25));
   }
 
@@ -598,11 +601,11 @@ attackheli_spotlight_flicker() {
 
   flickers = randomintrange(3, 5);
 
-  for (i = 0; i < flickers; i++) {
-    PlayFXOnTag(level._effect["_attack_heli_spotlight"], self, "tag_flash");
+  for(i = 0; i < flickers; i++) {
+    playFXOnTag(level._effect["_attack_heli_spotlight"], self, "tag_flash");
     wait randomfloatrange(0.05, 0.15);
     waittillframeend;
-    StopFXOnTag(level._effect["_attack_heli_spotlight"], self, "tag_flash");
+    stopFXOnTag(level._effect["_attack_heli_spotlight"], self, "tag_flash");
     wait randomfloatrange(0.05, 0.15);
     waittillframeend;
   }
@@ -610,7 +613,7 @@ attackheli_spotlight_flicker() {
 
 #using_animtree("vehicles");
 emp_heli_rappel() {
-  if(!isdefined(level.helis_crash_rappel))
+  if(!isDefined(level.helis_crash_rappel))
     level.helis_crash_rappel = [];
   level.helis_crash_rappel[level.helis_crash_rappel.size] = self;
 
@@ -619,13 +622,13 @@ emp_heli_rappel() {
   flag_wait("emp_heli_crash_go");
   wait .25;
 
-  if(isdefined(level.emp_heli_rappel))
+  if(isDefined(level.emp_heli_rappel))
     wait .5;
   level.emp_heli_rappel = 1;
 
   heli = spawn("script_model", self.origin);
   heli.angles = self.angles;
-  heli setmodel(self.model);
+  heli setModel(self.model);
   heli.animname = "emp_heli_rappel";
   heli UseAnimTree(#animtree);
   self delete();
@@ -642,7 +645,7 @@ emp_heli_rappel() {
   wait time;
 
   heli notify("stop_heli_spark_effects");
-  playfx(level._effect["helicopter_explosion"], heli.origin);
+  playFX(level._effect["helicopter_explosion"], heli.origin);
   thread play_sound_in_space("mi17_helicopter_crash_dist", heli.origin);
 
   time = 1;
@@ -656,7 +659,7 @@ emp_heli_rappel() {
 
 #using_animtree("vehicles");
 emp_heli_distant() {
-  if(!isdefined(level.helis_crash_distant))
+  if(!isDefined(level.helis_crash_distant))
     level.helis_crash_distant = [];
   level.helis_crash_distant[level.helis_crash_distant.size] = self;
 
@@ -666,7 +669,7 @@ emp_heli_distant() {
 
   heli = spawn("script_model", self.origin);
   heli.angles = self.angles;
-  heli setmodel(self.model);
+  heli setModel(self.model);
   heli.animname = "emp_heli_distant";
   heli UseAnimTree(#animtree);
   self delete();
@@ -684,7 +687,7 @@ emp_btr() {
 
   btr = spawn("script_model", self.origin);
   btr.angles = self.angles;
-  btr setmodel(self.model);
+  btr setModel(self.model);
 
   btr thread heli_spark_effects();
 
@@ -731,7 +734,7 @@ emp_heli_crash() {
 
   wait level.EMPWAIT_BETA;
 
-  spawners = getentarray("emp_heli_crash_guys", "targetname");
+  spawners = getEntArray("emp_heli_crash_guys", "targetname");
   guys = array_spawn(spawners, true);
 
   guys[0] thread emp_heli_crash_guys_link(heli, "WHEEL_FRONT_L_JNT");
@@ -739,7 +742,7 @@ emp_heli_crash() {
 
   wait .5;
 
-  node = spawnstruct();
+  node = spawnStruct();
   node.origin = heli.origin;
   node.angles = heli.angles;
 
@@ -761,7 +764,7 @@ emp_heli_crash() {
   wait 9.65;
 
   heli notify("stop_heli_spark_effects");
-  playfxontag(level._effect["helicopter_explosion"], heli, "TAG_ORIGIN");
+  playFXOnTag(level._effect["helicopter_explosion"], heli, "TAG_ORIGIN");
   thread play_sound_in_space("exp_armor_vehicle", heli.origin);
 
   range = 900;
@@ -813,7 +816,7 @@ emp_heli_crash_guys_fallout() {
   //this is the new rate the animation needs to play at in order for it to play the full length of time
   rate = (length / time);
 
-  self playsound("generic_death_falling_scream");
+  self playSound("generic_death_falling_scream");
   node thread anim_generic(self, "fastrope_fall");
 
   node movez(extradist * -1, time);
@@ -831,12 +834,14 @@ emp_heli_crash_guys_fallout() {
 
   wait .1;
 
-  playfx(level._effect["bodyfall_dust_high"], grndpos);
+  playFX(level._effect["bodyfall_dust_high"], grndpos);
 }
 
 /************************************************************************************************************/
+
 /*													STREET													*/
 /************************************************************************************************************/
+
 street_hide_moment() {
   foreach(member in level.team)
   member ent_flag_wait("street_hide");
@@ -882,7 +887,7 @@ street_hide_moment() {
         break;
     }
     member thread anim_generic_gravity_run(member, anime);
-    member playsound("generic_flashbang_american_" + randomintrange(1, 9));
+    member playSound("generic_flashbang_american_" + randomintrange(1, 9));
   }
 
   level.player shellshock("default", 3);
@@ -893,7 +898,7 @@ street_hide_moment() {
   array_call(getaiarray("axis"), ::delete);
 
   glass = getglassarray("street_hide_glass");
-  dir = anglestoforward((0, 345, 0));
+  dir = anglesToForward((0, 345, 0));
   foreach(piece in glass)
   destroyglass(piece, dir * 200);
 
@@ -965,7 +970,7 @@ street_heli_player_kill() {
   units = time / magicnumber;
 
   model = spawn("script_model", level.player.origin + (0, 0, units + 60));
-  model setmodel("vehicle_little_bird_landed");
+  model setModel("vehicle_little_bird_landed");
 
   model rotatevelocity((0, 100, 0), time + 1);
 
@@ -974,7 +979,7 @@ street_heli_player_kill() {
   frac = (units / count) * -1;
   time = 1;
 
-  while (!flag("street_safe") && count > 0) {
+  while(!flag("street_safe") && count > 0) {
     if(!flag("street_insta_death")) {
       org = (model.origin[0] + (level.player.origin[0] - model.origin[0]) * .25, model.origin[1] + (level.player.origin[1] - model.origin[1]) * .25, model.origin[2] + frac);
       model moveto(org, interval);
@@ -995,14 +1000,14 @@ street_heli_player_kill() {
   origin = level.player.origin + (0, 0, 80);
   model delete();
 
-  if(flag("street_safe"))
+  if(flag("street_safe")) {
     return;
-
+  }
   range = 300;
 
   PhysicsExplosionSphere(origin, range, 0, range * .01); //similar to destructibles	
 
-  playfx(level._effect["helicopter_explosion"], origin);
+  playFX(level._effect["helicopter_explosion"], origin);
   thread play_sound_in_space("exp_armor_vehicle", origin);
 
   wait .2;
@@ -1014,7 +1019,7 @@ street_heli_player_kill() {
 street_guy_fall_guy() {
   node = getstruct(self.target, "targetname");
 
-  self playsound("generic_death_falling_scream");
+  self playSound("generic_death_falling_scream");
 
   node anim_generic(self, "fastrope_fall");
   self.skipdeathanim = 1;
@@ -1069,7 +1074,7 @@ street_btr_scene() {
     thread street_btr_blur(model);
 
     //show the damaged heli
-    array_call(getentarray("street_heli_destroyed", "targetname"), ::show);
+    array_call(getEntArray("street_heli_destroyed", "targetname"), ::show);
 
     //move the heli parts
     d_heli thread street_btr_animate_heli();
@@ -1090,7 +1095,7 @@ street_btr_scene() {
 }
 
 street_crash_cars() {
-  parts = array_combine(getentarray(self.target, "targetname"), getstructarray(self.target, "targetname"));
+  parts = array_combine(getEntArray(self.target, "targetname"), getstructarray(self.target, "targetname"));
   info = [];
   info["fx"] = [];
   info["light"] = [];
@@ -1117,7 +1122,7 @@ street_crash_cars() {
 
   if(level.start_point == "corner") {
     self maps\_vehicle::force_kill();
-    if(isdefined(self.endorg)) {
+    if(isDefined(self.endorg)) {
       self.origin = self.endorg;
       self.angles = self.endang;
     }
@@ -1130,7 +1135,7 @@ street_crash_cars() {
 
     do_player_crash_fx(self.origin);
 
-    if(isdefined(self.endorg)) {
+    if(isDefined(self.endorg)) {
       magicnumber = .005;
       time = distance(self.origin, self.endorg) * magicnumber;
       self moveto(self.endorg, time);
@@ -1141,7 +1146,7 @@ street_crash_cars() {
 
   //fx and light
   foreach(fx in info["fx"]) {
-    playfx(level._effect["me_dumpster_fire_FX"], fx.origin, anglestoforward(fx.angles), anglestoup(fx.angles));
+    playFX(level._effect["me_dumpster_fire_FX"], fx.origin, anglesToForward(fx.angles), anglestoup(fx.angles));
     thread play_loopsound_in_space("fire_dumpster_medium", fx.origin);
   }
   foreach(light in info["light"])
@@ -1153,7 +1158,7 @@ street_crash_cars() {
 }
 
 street_crash_helis() {
-  parts = array_combine(getentarray(self.target, "targetname"), getstructarray(self.target, "targetname"));
+  parts = array_combine(getEntArray(self.target, "targetname"), getstructarray(self.target, "targetname"));
   deathmodel = [];
   fx_array = [];
   clip = undefined;
@@ -1202,7 +1207,7 @@ street_crash_helis() {
     self moveto(endorg, time, time);
     self rotateto(endang, time);
 
-    if(isdefined(self.script_flag_set))
+    if(isDefined(self.script_flag_set))
       thread flag_set_delayed(self.script_flag_set, time - CONST_STREET_CAR_WAIT);
     self waittill("movedone");
 
@@ -1214,18 +1219,18 @@ street_crash_helis() {
       RadiusDamage(self.origin + (0, 0, 10), range, maxd, 20, self); //similar to destructibles
     PhysicsExplosionSphere(self.origin, range, 0, range * .01); //similar to destructibles	
 
-    playfx(level._effect["helicopter_explosion"], endorg + (0, 0, -128));
+    playFX(level._effect["helicopter_explosion"], endorg + (0, 0, -128));
     thread play_sound_in_space("exp_armor_vehicle", endorg);
   }
 
   self delete();
 
-  if(isdefined(clip))
+  if(isDefined(clip))
     clip solid();
   if(deathmodel.size)
     array_call(deathmodel, ::show);
   foreach(fx in fx_array) {
-    playfx(level._effect["me_dumpster_fire_FX"], fx.origin, anglestoforward(fx.angles), anglestoup(fx.angles));
+    playFX(level._effect["me_dumpster_fire_FX"], fx.origin, anglesToForward(fx.angles), anglestoup(fx.angles));
     thread play_loopsound_in_space("fire_dumpster_medium", fx.origin);
   }
 
@@ -1238,8 +1243,8 @@ street_crash_helis_anim() {
   clip = undefined;
   dmg = undefined;
 
-  if(isdefined(self.target))
-    parts = array_combine(getentarray(self.target, "targetname"), getstructarray(self.target, "targetname"));
+  if(isDefined(self.target))
+    parts = array_combine(getEntArray(self.target, "targetname"), getstructarray(self.target, "targetname"));
 
   foreach(part in parts) {
     switch (part.script_noteworthy) {
@@ -1294,7 +1299,7 @@ street_crash_helis_anim() {
 
   if(level.start_point != "corner" && level.start_point != "meetup") {
     //		heli waittillmatch( "single anim", "play_sound" );
-    //		heli playsound( "scn_dcemp_heli_shutdown" );
+    //		heli playSound( "scn_dcemp_heli_shutdown" );
 
     heli waittillmatch("single anim", "pre_explode");
 
@@ -1319,7 +1324,7 @@ street_crash_helis_anim() {
     }
 
     dmg trigger_on();
-    heli setmodel(name);
+    heli setModel(name);
 
     do_player_crash_fx(self.origin);
 
@@ -1330,14 +1335,13 @@ street_crash_helis_anim() {
     PhysicsExplosionSphere(heli gettagOrigin("TAG_DEATHFX"), range, 0, range * .01); //similar to destructibles	
 
     switch (self.script_flag_set) {
-
       case "street_crash_left":
-        playfx(level._effect["helicopter_crash"], heli gettagorigin("TAG_DEATHFX") + (0, 0, -60));
+        playFX(level._effect["helicopter_crash"], heli gettagorigin("TAG_DEATHFX") + (0, 0, -60));
         break;
 
       case "street_crash_cop":
       case "street_crash_left2":
-        playfxontag(level._effect["helicopter_explosion"], heli, "TAG_DEATHFX");
+        playFXOnTag(level._effect["helicopter_explosion"], heli, "TAG_DEATHFX");
         break;
     }
 
@@ -1361,29 +1365,29 @@ street_crash_helis_anim() {
         name = "vehicle_mi-28_d_animated";
         break;
     }
-    heli setmodel(name);
+    heli setModel(name);
   }
 
   dmg delete();
 
-  if(isdefined(clip))
+  if(isDefined(clip))
     clip solid();
   foreach(fx in fx_array) {
-    playfx(level._effect["me_dumpster_fire_FX"], fx.origin, anglestoforward(fx.angles), anglestoup(fx.angles));
+    playFX(level._effect["me_dumpster_fire_FX"], fx.origin, anglesToForward(fx.angles), anglestoup(fx.angles));
     thread play_loopsound_in_space("fire_dumpster_medium", fx.origin);
   }
 
 }
 
 street_heli_crash_secondaries_2() {
-  trees = getentarray("street_blackhawk_tree", "targetname");
+  trees = getEntArray("street_blackhawk_tree", "targetname");
   array_thread(trees, ::street_trees);
   dmg = getstructarray("street_damage_node_2", "targetname");
   array_thread(dmg, ::street_damage_radius);
 }
 
 street_heli_crash_secondaries_3() {
-  trees = getentarray("street_heli3_tree", "targetname");
+  trees = getEntArray("street_heli3_tree", "targetname");
   array_thread(trees, ::street_trees);
   dmg = getstructarray("street_damage_node_3", "targetname");
   array_thread(dmg, ::street_damage_radius);
@@ -1395,12 +1399,12 @@ street_damage_radius() {
 
 street_trees() {
   dir = [];
-  dir[0] = anglestoforward((0, 160 - randomfloatrange(50, 90), 0));
-  dir[1] = anglestoforward((0, 160, 0));
-  dir[2] = anglestoforward((0, 160 + randomfloatrange(50, 90), 0));
+  dir[0] = anglesToForward((0, 160 - randomfloatrange(50, 90), 0));
+  dir[1] = anglesToForward((0, 160, 0));
+  dir[2] = anglesToForward((0, 160 + randomfloatrange(50, 90), 0));
 
   time = 2;
-  parts = getentarray(self.target, "targetname");
+  parts = getEntArray(self.target, "targetname");
 
   self delete();
   centers = [];
@@ -1474,7 +1478,7 @@ street_cars_bounce() {
 }
 
 street_crash_motorcycle() {
-  forward = anglestoforward(self.angles);
+  forward = anglesToForward(self.angles);
   target = getent(self.target, "targetname");
   endorg = target.origin;
   endang = target.angles;
@@ -1489,13 +1493,13 @@ street_crash_motorcycle() {
 
   wait .5;
 
-  playfxontag(level._effect["firelp_med_pm"], self, "tag_death_fx");
-  self playloopsound("fire_dumpster_medium");
+  playFXOnTag(level._effect["firelp_med_pm"], self, "tag_death_fx");
+  self playLoopSound("fire_dumpster_medium");
 
   wait 2.5;
 
-  playfx(level._effect["small_vehicle_explosion"], self.origin);
-  self playsound("car_explode");
+  playFX(level._effect["small_vehicle_explosion"], self.origin);
+  self playSound("car_explode");
 
   time = 1.5;
 
@@ -1515,7 +1519,7 @@ street_crash_motorcycle() {
 }
 
 street_btr_make_destroyed_heli() {
-  pieces = getentarray("street_heli_destroyed", "targetname");
+  pieces = getEntArray("street_heli_destroyed", "targetname");
   array_call(pieces, ::hide);
 
   array = [];
@@ -1550,7 +1554,7 @@ street_btr_scene_drop_heli() {
 street_btr_scene_kill_btr() {
   model = spawn("script_model", self.origin);
   model.angles = self.angles;
-  model setmodel("vehicle_btr80_d");
+  model setModel("vehicle_btr80_d");
   model.vehicletype = self.vehicletype;
   model.modeldummyon = false;
   model thread maps\_vehicle::kill_fx("vehicle_btr80", false);
@@ -1567,7 +1571,7 @@ street_btr_scene_kill_btr() {
 street_kill_vehicle() {
   model = spawn("script_model", self.origin);
   model.angles = self.angles;
-  model setmodel(self.model);
+  model setModel(self.model);
 
   model.vehicletype = self.vehicletype;
   model.modeldummyon = false;
@@ -1608,9 +1612,9 @@ street_btr_animate_btr() {
 }
 
 street_btr_blur(btr) {
-  if(!player_looking_at(btr.origin, undefined, true))
+  if(!player_looking_at(btr.origin, undefined, true)) {
     return;
-
+  }
   setblur(4, 0);
   wait .1;
   setblur(0, .5);
@@ -1620,7 +1624,7 @@ street_btr_move_dmg_trig(btr) {
   btr_origin = btr.origin;
   dmg_origin = self.origin;
 
-  while (!flag("street_btr_scene_done")) {
+  while(!flag("street_btr_scene_done")) {
     delta = btr.origin - btr_origin;
     self.origin = (dmg_origin + (delta[0], delta[1], 0));
     wait .05;
@@ -1682,8 +1686,10 @@ do_player_crash_fx(origin) {
 }
 
 /************************************************************************************************************/
+
 /*													CORNER													*/
 /************************************************************************************************************/
+
 corner_hide_damage() {
   scene = corner_get_scene();
 
@@ -1704,12 +1710,12 @@ corner_get_scene() {
   array = [];
 
   //	fixed an issue from rockets checkin when you where away. -Roger
-  //	plane = getentarray( "corner_crash_plane", "targetname" );
-  //	tail = getentarray( "crash_plane_tail", "targetname" );
+  //	plane = getEntArray( "corner_crash_plane", "targetname" );
+  //	tail = getEntArray( "crash_plane_tail", "targetname" );
   //	post_crash_ents = array_combine( plane, tail );
   //	array[ "plane" ] 		= plane;
 
-  array["lights"] = getentarray("light_crash_fire", "script_noteworthy");
+  array["lights"] = getEntArray("light_crash_fire", "script_noteworthy");
 
   return array;
 }
@@ -1717,10 +1723,10 @@ corner_get_scene() {
 corner_palm_style_door_open(soundalias) {
   wait(1.35);
 
-  if(IsDefined(soundalias))
-    self PlaySound(soundalias);
+  if(isDefined(soundalias))
+    self playSound(soundalias);
   else
-    self PlaySound("door_wood_slow_open");
+    self playSound("door_wood_slow_open");
 
   self ConnectPaths();
 
@@ -1739,7 +1745,7 @@ corner_plane_launch() {
   names[names.size] = "rubble_large_slab_02";
   names[names.size] = "727_seats_row_left";
 
-  if(!isdefined(level.corner_plane_launch_num))
+  if(!isDefined(level.corner_plane_launch_num))
     level.corner_plane_launch_num = 0;
 
   level.corner_plane_launch_num++;
@@ -1750,9 +1756,9 @@ corner_plane_launch() {
   name = names[level.corner_plane_launch_num];
 
   model = spawn("script_model", self.origin);
-  model setmodel(name);
+  model setModel(name);
 
-  vec = anglestoforward(self.angles) * randomfloatrange(1300, 1500);
+  vec = anglesToForward(self.angles) * randomfloatrange(1300, 1500);
   neg1 = 1;
   neg2 = 1;
   neg3 = 1;
@@ -1765,9 +1771,9 @@ corner_plane_launch() {
     neg3 = -1;
 
   fxmod = spawn("script_model", model.origin);
-  fxmod setmodel("tag_origin");
+  fxmod setModel("tag_origin");
   fxmod linkto(model);
-  playfxontag(level._effect["firelp_med_pm_nolight"], fxmod, "TAG_ORIGIN");
+  playFXOnTag(level._effect["firelp_med_pm_nolight"], fxmod, "TAG_ORIGIN");
 
   time = 1.0;
   model movegravity(vec, time);
@@ -1804,13 +1810,13 @@ corner_truck_engine_crash() {
   node = getstruct("corner_engine_fx_sparks", "targetname");
   centerfx = spawn("script_model", node.origin);
   centerfx.angles = node.angles;
-  centerfx setmodel("tag_origin");
+  centerfx setModel("tag_origin");
   centerfx linkto(self);
 
   wait .2 + .25;
 
-  for (i = 0; i < 11; i++) {
-    playfx(level._effect["fire_trail_60"], centerfx.origin + (randomfloatrange(-15, 15), 0, -5), anglestoup(centerfx.angles), anglestoforward(centerfx.angles));
+  for(i = 0; i < 11; i++) {
+    playFX(level._effect["fire_trail_60"], centerfx.origin + (randomfloatrange(-15, 15), 0, -5), anglestoup(centerfx.angles), anglesToForward(centerfx.angles));
 
     if(i > 8)
       wait .2;
@@ -1820,7 +1826,7 @@ corner_truck_engine_crash() {
 
   wait .25;
 
-  playfx(level._effect["firelp_med_pm_nolight"], centerfx.origin); //, anglestoup( centerfx.angles ), anglestoforward( centerfx.angles ) );
+  playFX(level._effect["firelp_med_pm_nolight"], centerfx.origin); //, anglestoup( centerfx.angles ), anglesToForward( centerfx.angles ) );
 
   wait 3.0;
 
@@ -1831,7 +1837,7 @@ corner_truck_engine_crash() {
 
 corner_vehicle_engine_crash_setup() {
   self thread street_cars_bounce();
-  ents = getentarray(self.target, "targetname");
+  ents = getEntArray(self.target, "targetname");
   array = [];
 
   foreach(ent in ents)
@@ -1865,11 +1871,11 @@ corner_engine_crash() {
   node = getstruct("corner_engine_fx_fire", "targetname");
   fx = spawn("script_model", node.origin);
   fx.angles = node.angles;
-  fx setmodel("tag_origin");
+  fx setModel("tag_origin");
   fx linkto(self);
 
-  playfxontag(level._effect["window_fire_large"], fx, "TAG_ORIGIN");
-  self playloopsound("fire_dumpster_medium");
+  playFXOnTag(level._effect["window_fire_large"], fx, "TAG_ORIGIN");
+  self playLoopSound("fire_dumpster_medium");
 
   magicnumber = .001;
   time = distance(self.origin, midorg) * magicnumber;
@@ -1877,7 +1883,7 @@ corner_engine_crash() {
   self rotateto(midang, time);
   wait time;
 
-  self playsound("exp_armor_vehicle");
+  self playSound("exp_armor_vehicle");
 
   time = .5;
   earthquake(0.5, time, self.origin, 3000);
@@ -1893,7 +1899,7 @@ corner_engine_crash() {
   wait time;
 
   level.corner_engine = self;
-  self playsound("exp_armor_vehicle");
+  self playSound("exp_armor_vehicle");
 
   time = 1.5;
 
@@ -1905,7 +1911,6 @@ corner_engine_crash() {
   quakeobj delaycall(time + .1, ::delete);
 
   flag_set("corner_engine_hit");
-
 }
 
 corner_vehicle_engine_crash_move() {
@@ -1938,8 +1943,10 @@ corner_dead_check() {
 }
 
 /************************************************************************************************************/
+
 /*													MEETUP													*/
 /************************************************************************************************************/
+
 meetup_runner_threads() {
   level.foley delaythread(0, ::meetup_runner_jog, "meetup_runner_foley");
   level.team["marine1"] delaythread(3, ::meetup_runner_walk, "meetup_runner_2");
@@ -2083,9 +2090,9 @@ meetup_runner_end() {
       break;
   }
 
-  if(!angle)
+  if(!angle) {
     return;
-
+  }
   self ent_flag_wait("meetup_runner_end");
 
   self ai_turn(angle);
@@ -2093,26 +2100,26 @@ meetup_runner_end() {
   self anim_generic_run(self, "casual_stand_idle_trans_in");
 }
 
-
-
 /************************************************************************************************************/
+
 /*													LOBBY													*/
 /************************************************************************************************************/
+
 lobby_enemy_suppressive_fire() {
   level endon("office_enemy_suppressive_fire");
   level thread notify_delay("office_enemy_suppressive_fire", 5);
 
   node = getstruct("office_magic_bullet_target2", "targetname");
-  target = spawnstruct();
-  target.origin = self geteye();
+  target = spawnStruct();
+  target.origin = self getEye();
 
-  while (1) {
+  while(1) {
     weapon = "ak47";
     if(cointoss())
       weapon = "rpd";
 
     shots = randomintrange(10, 25);
-    for (i = 0; i < shots; i++) {
+    for(i = 0; i < shots; i++) {
       magicbullet(weapon, node.origin, target.origin + (randomfloatrange(-64, 64), 0, randomfloat(10) - 10));
       wait .1;
     }
@@ -2121,8 +2128,10 @@ lobby_enemy_suppressive_fire() {
 }
 
 /************************************************************************************************************/
+
 /*													OFFICE													*/
 /************************************************************************************************************/
+
 office_enemies_wave1() {
   self endon("death");
 
@@ -2155,16 +2164,16 @@ office_enemies_wave1_runner() {
   self.ignoreall = false;
 }
 
-
 /************************************************************************************************************/
+
 /*													PARKING													*/
 /************************************************************************************************************/
+
 parking_drone() {
   spawner = getent("parkinglot_drone", "targetname");
   guy = dronespawn_bodyonly(spawner);
   guy gun_remove();
   spawner anim_generic(guy, "death_pose_on_desk");
-
 }
 
 parking_dead_check() {
@@ -2183,7 +2192,7 @@ parking_dead_check() {
 }
 
 parking_high_spec() {
-  while (1) {
+  while(1) {
     flag_wait("parking_high_spec");
 
     lerp_saveddvar("r_specularColorScale", 15, 2);
@@ -2197,7 +2206,7 @@ parking_high_spec() {
 parking_btr_extra_wait() {
   self thread anim_generic_loop(self, "coverstand_hide_idle");
 
-  while (!flag("parking_open_fire") && distancesquared(self.origin, level.player.origin) > squared(1250))
+  while(!flag("parking_open_fire") && distancesquared(self.origin, level.player.origin) > squared(1250))
     wait .1;
 
   self notify("stop_loop");
@@ -2242,16 +2251,17 @@ parking_traverse_from_office() {
   self unlink();
 }
 
-
 /************************************************************************************************************/
+
 /*													PLAZA													*/
 /************************************************************************************************************/
+
 plaza_flare_fx() {
   model = getent("street_flare", "targetname");
   model.fxtag = getent(model.target, "targetname");
   model.fxtag linkto(model);
 
-  playfxontag(level._effect["groundflare"], model.fxtag, "TAG_ORIGIN");
+  playFXOnTag(level._effect["groundflare"], model.fxtag, "TAG_ORIGIN");
 }
 
 plaza_enemies() {
@@ -2296,7 +2306,7 @@ plaza_enemies_player_close() {
   level endon("plaza_open_fire");
   level.player endon("death");
 
-  while (distancesquared(level.player.origin, self.origin) > squared(300))
+  while(distancesquared(level.player.origin, self.origin) > squared(300))
     wait .25;
 
   flag_set("plaza_open_fire");
@@ -2308,11 +2318,11 @@ plaza_enemies_wakeup() {
 
   flag_wait_any("plaza_open_fire", "plaza_throw_react");
 
-  node = spawnstruct();
+  node = spawnStruct();
   node.origin = self.origin;
   node.angles = (0, 270, 0);
 
-  if(!isdefined(level.plaza_enemies_wakeup))
+  if(!isDefined(level.plaza_enemies_wakeup))
     level.plaza_enemies_wakeup = 0;
 
   self.reactnum = level.plaza_enemies_wakeup;
@@ -2342,8 +2352,10 @@ plaza_enemies_wakeup() {
 }
 
 /************************************************************************************************************/
+
 /*													MISC													*/
 /************************************************************************************************************/
+
 send_team_to_random_nodes(team, nodes) {
   index = 0;
   foreach(actor in team) {
@@ -2357,7 +2369,7 @@ send_team_to_random_nodes(team, nodes) {
 send_team_to_specific_nodes(name, type) {
   nodes = getnodearray(name, type);
   if(!nodes.size)
-    nodes = getentarray(name, type);
+    nodes = getEntArray(name, type);
   if(!nodes.size)
     nodes = getstructarray(name, type);
 
@@ -2370,16 +2382,16 @@ send_team_to_specific_nodes(name, type) {
 }
 
 emp_teleport_player(name) {
-  if(!isdefined(name))
+  if(!isDefined(name))
     name = level.start_point;
 
   array = getstructarray("start_point", "targetname");
 
   nodes = [];
   foreach(ent in array) {
-    if(ent.script_noteworthy != name)
+    if(ent.script_noteworthy != name) {
       continue;
-
+    }
     nodes[nodes.size] = ent;
   }
 
@@ -2405,7 +2417,7 @@ teleport_actor(node) {
   self linkto(link);
 
   link moveto(node.origin, .05);
-  if(isdefined(node.angles))
+  if(isDefined(node.angles))
     link rotateto(node.angles, .05);
 
   link waittill("movedone");
@@ -2421,7 +2433,7 @@ flickerlight_flares() {
   wait randomfloatrange(.05, .5);
 
   intensity = self getlightintensity();
-  while (1) {
+  while(1) {
     self setlightintensity(intensity * randomfloatrange(.8, 1.1));
     wait .05;
   }
@@ -2434,13 +2446,13 @@ light_street_fire() {
   color = self getlightcolor();
   origin = self.origin;
 
-  while (1) {
-    for (i = 0; i < randomintrange(2, 8); i++) {
+  while(1) {
+    for(i = 0; i < randomintrange(2, 8); i++) {
       x = randomfloatrange(4, 10);
       light_street_fire_dance(color, intensity, origin, x);
     }
 
-    for (i = 0; i < randomintrange(25, 60); i++) {
+    for(i = 0; i < randomintrange(25, 60); i++) {
       x = randomfloatrange(.5, 1);
       light_street_fire_dance(color, intensity, origin, x);
     }
@@ -2457,7 +2469,7 @@ light_street_fire_dance(color, intensity, origin, x) {
 }
 
 handle_color_advance(sname, start, end) {
-  for (i = start; i <= end; i++) {
+  for(i = start; i <= end; i++) {
     name = sname + i;
 
     color_trig = getent(name, "targetname");
@@ -2472,7 +2484,7 @@ handle_color_advance(sname, start, end) {
 }
 
 handle_node_advance(sname, start, end) {
-  for (i = start; i <= end; i++) {
+  for(i = start; i <= end; i++) {
     name = sname + i;
 
     color_trig = getent(name, "targetname");
@@ -2498,45 +2510,45 @@ disable_node_advance(nodes) {
 advance_team_to_nodes(nodes) {
   team = [];
   foreach(key, member in level.team) {
-    if(!isdefined(member.node_advance))
+    if(!isDefined(member.node_advance)) {
       continue;
-
+    }
     team[key] = member;
   }
 
-  if(!team.size)
+  if(!team.size) {
     return;
-
+  }
   foreach(node in nodes) {
     guy = team[node.script_noteworthy];
-    if(!isdefined(guy))
+    if(!isDefined(guy)) {
       continue;
-
+    }
     guy thread follow_path(node);
   }
 }
 
 stop_shield_on_random_teammate(num) {
-  if(!isdefined(num))
+  if(!isDefined(num))
     num = 1;
 
   array = [];
   foreach(member in level.team) {
     if(member is_hero())
       continue;
-    if(!isdefined(member.magic_bullet_shield))
+    if(!isDefined(member.magic_bullet_shield)) {
       continue;
-
+    }
     array[array.size] = member;
   }
 
-  if(!array.size)
+  if(!array.size) {
     return;
-
+  }
   if(array.size < num)
     num = array.size;
 
-  for (i = 0; i < num; i++) {
+  for(i = 0; i < num; i++) {
     actor = random(array);
     array = array_remove(array, actor);
     actor stop_magic_bullet_shield();
@@ -2544,18 +2556,18 @@ stop_shield_on_random_teammate(num) {
 }
 
 kill_random_teammate(num, del) {
-  if(!isdefined(num))
+  if(!isDefined(num))
     num = 1;
-  if(!isdefined(del))
+  if(!isDefined(del))
     del = false;
 
   array = [];
   foreach(member in level.team) {
     if(member is_hero())
       continue;
-    if(isdefined(member.magic_bullet_shield))
+    if(isDefined(member.magic_bullet_shield)) {
       continue;
-
+    }
     array[array.size] = member;
   }
 
@@ -2567,11 +2579,11 @@ kill_random_teammate(num, del) {
 
   array = get_array_of_farthest(level.player.origin, array);
 
-  for (i = 0; i < array.size; i++) {
+  for(i = 0; i < array.size; i++) {
     member = array[i];
-    if(player_looking_at(member geteye()))
+    if(player_looking_at(member getEye())) {
       continue;
-
+    }
     if(del)
       member delete();
     else
@@ -2587,7 +2599,7 @@ kill_random_teammate(num, del) {
 
   //if we got here its because we couldn't kill enough people the player was NOT looking at
   //so now we dont do a look at check.
-  for (i = 0; i < num; i++) {
+  for(i = 0; i < num; i++) {
     member = array[i];
 
     if(del)
@@ -2613,7 +2625,7 @@ add_team(team) {
   array_thread(array, ::remove_team);
 
   foreach(member in array) {
-    if(isdefined(member.script_noteworthy)) {
+    if(isDefined(member.script_noteworthy)) {
       member.animname = member.script_noteworthy;
       level.team[member.script_noteworthy] = member;
     } else
@@ -2633,7 +2645,7 @@ team_init() {
   self thread magic_bullet_shield();
   add_team(self);
 
-  if(isdefined(self.script_noteworthy)) {
+  if(isDefined(self.script_noteworthy)) {
     if(self.script_noteworthy == "foley") {
       self make_hero();
       level.foley = self;
@@ -2644,7 +2656,7 @@ team_init() {
     }
   }
 
-  spawners = getentarray("intro_team", "targetname");
+  spawners = getEntArray("intro_team", "targetname");
   if(level.team.size == spawners.size)
     flag_set("team_initialized");
 }
@@ -2678,7 +2690,7 @@ setup_sun() {
 }
 
 vision_set_intro(time) {
-  if(!isdefined(time))
+  if(!isDefined(time))
     time = 0;
 
   thread maps\_utility::set_vision_set("dcburning_crash", time);
@@ -2692,7 +2704,7 @@ vision_set_emp(time) {
   fx = getstruct("emp_sun_fx", "targetname");
   model = spawn("script_model", fx.origin);
   model.angles = vectortoangles(level.player.origin - fx.origin);
-  model setmodel("tag_origin");
+  model setModel("tag_origin");
 
   setsaveddvar("r_spotlightstartradius", "800");
   setsaveddvar("r_spotlightEndradius", "1200");
@@ -2720,13 +2732,12 @@ vision_set_emp(time) {
   model notify("stop_sun_fx");
   wait 1;
   model delete();
-
 }
 
 vision_update_sun_spotlight_fx() {
   self endon("stop_sun_fx");
 
-  while (1) {
+  while(1) {
     wait .05;
 
     self.angles = vectortoangles(level.player.origin - self.origin);
@@ -2741,7 +2752,7 @@ fake_motion() {
   min = -128;
   max = 128;
 
-  while (1) {
+  while(1) {
     delta = (randomfloatrange(min, max), randomfloatrange(min, max), randomfloatrange(min, max));
     self moveto(origin + delta, time, time * .5, time * .5);
 
@@ -2754,7 +2765,7 @@ fake_motion() {
 }
 
 vision_set_sunset(time) {
-  if(!isdefined(time))
+  if(!isDefined(time))
     time = 60;
 
   thread maps\_utility::set_vision_set("dcemp_postemp2", time);
@@ -2763,7 +2774,7 @@ vision_set_sunset(time) {
 }
 
 vision_set_office(time) {
-  if(!isdefined(time))
+  if(!isDefined(time))
     time = 5;
 
   thread maps\_utility::set_vision_set("dcemp_office", time);
@@ -2777,11 +2788,10 @@ vision_set_lobby() {
 
   thread maps\_utility::set_vision_set("dcemp_office", time);
   thread maps\_utility::vision_set_fog_changes("dcemp_office", time);
-
 }
 
 vision_set_parking(time) {
-  if(!isdefined(time))
+  if(!isDefined(time))
     time = 5;
 
   thread maps\_utility::set_vision_set("dcemp_parking", time);
@@ -2791,7 +2801,7 @@ vision_set_parking(time) {
 }
 
 vision_set_night(time) {
-  if(!isdefined(time))
+  if(!isDefined(time))
     time = 0;
 
   thread maps\_utility::set_vision_set("dcemp", time);
@@ -2804,7 +2814,7 @@ vision_set_whitehouse() {
 }
 
 handle_sunlight() {
-  while (1) {
+  while(1) {
     trigger_wait("office_ally_color_1", "target");
     resetsunlight();
 
@@ -2817,9 +2827,9 @@ lerp_sunlight(color, time) {
   level notify("lerp_sunlight");
   level endon("lerp_sunlight");
 
-  if(array_compare(color, level.suncolor_cur))
+  if(array_compare(color, level.suncolor_cur)) {
     return;
-
+  }
   interval = .05;
   count = time / interval;
   current = 0;
@@ -2830,7 +2840,7 @@ lerp_sunlight(color, time) {
   rangeG = color[1] - start_color[1];
   rangeB = color[2] - start_color[2];
 
-  while (current < count) {
+  while(current < count) {
     fracR = rangeR * (current / count);
     fracG = rangeG * (current / count);
     fracB = rangeB * (current / count);
@@ -2855,16 +2865,16 @@ lerp_specular(scale, time) {
 
   start_scale = getdvarfloat("r_specularColorScale", "2.5");
 
-  if(scale == start_scale)
+  if(scale == start_scale) {
     return;
-
+  }
   interval = .05;
   count = time / interval;
   current = 0;
 
   range = scale - start_scale;
 
-  while (current < count) {
+  while(current < count) {
     frac = range * (current / count);
 
     setSavedDvar("r_specularColorScale", string(start_scale + frac));
@@ -2913,7 +2923,7 @@ fx_rain_pause() {
   radius = squared(node.radius);
 
   foreach(EntFx in level.createfxent) {
-    if(distancesquared(EntFx.v["origin"], node.origin) < radius && !isdefined(EntFx.v["exploder"]))
+    if(distancesquared(EntFx.v["origin"], node.origin) < radius && !isDefined(EntFx.v["exploder"]))
       EntFx pauseEffect();
   }
 
@@ -2928,7 +2938,7 @@ fx_rain_pause() {
   array = array_combine( array, getfxarraybyID( "rain_splash_lite_8x128" ) );
   array = array_combine( array, getfxarraybyID( "rain_splash_lite_64x64" ) );
   array = array_combine( array, getfxarraybyID( "rain_splash_lite_128x128" ) );
-	
+  	
   array_thread( array, ::pauseEffect );*/
 }
 
@@ -2937,7 +2947,7 @@ fx_rain_pause2() {
   radius = squared(node.radius);
 
   foreach(EntFx in level.createfxent) {
-    if(distancesquared(EntFx.v["origin"], node.origin) < radius && !isdefined(EntFx.v["exploder"]))
+    if(distancesquared(EntFx.v["origin"], node.origin) < radius && !isDefined(EntFx.v["exploder"]))
       EntFx pauseEffect();
   }
 }
@@ -2947,7 +2957,7 @@ fx_rain_restart() {
   radius = squared(node.radius);
 
   foreach(EntFx in level.createfxent) {
-    if(distancesquared(EntFx.v["origin"], node.origin) < radius && !isdefined(EntFx.v["exploder"]))
+    if(distancesquared(EntFx.v["origin"], node.origin) < radius && !isDefined(EntFx.v["exploder"]))
       EntFx restartEffect();
   }
 
@@ -2970,7 +2980,7 @@ fx_end_pause() {
   radius = squared(node.radius);
 
   foreach(EntFx in level.createfxent) {
-    if(distancesquared(EntFx.v["origin"], node.origin) < radius && !isdefined(EntFx.v["exploder"]))
+    if(distancesquared(EntFx.v["origin"], node.origin) < radius && !isDefined(EntFx.v["exploder"]))
       EntFx pauseEffect();
   }
 }
@@ -2980,15 +2990,15 @@ fx_end_restart() {
   radius = squared(node.radius);
 
   foreach(EntFx in level.createfxent) {
-    if(distancesquared(EntFx.v["origin"], node.origin) < radius && !isdefined(EntFx.v["exploder"]))
+    if(distancesquared(EntFx.v["origin"], node.origin) < radius && !isDefined(EntFx.v["exploder"]))
       EntFx restartEffect();
   }
 }
 
 fx_intro_pause() {
-  if(!flag("intro_fx"))
+  if(!flag("intro_fx")) {
     return;
-
+  }
   pauseExploder("plane_crash_aftermath");
 
   node = getstruct("introfxnode", "targetname");
@@ -3003,9 +3013,9 @@ fx_intro_pause() {
 }
 
 fx_intro_restart() {
-  if(flag("intro_fx"))
+  if(flag("intro_fx")) {
     return;
-
+  }
   restartExploder("plane_crash_aftermath");
 
   node = getstruct("introfxnode", "targetname");
@@ -3020,9 +3030,9 @@ fx_intro_restart() {
 }
 
 fx_iss_pause() {
-  if(!flag("iss_fx"))
+  if(!flag("iss_fx")) {
     return;
-
+  }
   foreach(EntFx in level.createfxent) {
     if(EntFx.v["fxid"] == "dcemp_sun")
       EntFx pauseEffect();
@@ -3032,19 +3042,19 @@ fx_iss_pause() {
 }
 
 dcemp_create_triggerfx() {
-  intro = spawnstruct();
+  intro = spawnStruct();
   intro.node = getstruct("introfxnode", "targetname");
   intro.radius = squared(intro.node.radius);
 
-  rain = spawnstruct();
+  rain = spawnStruct();
   rain.node = getstruct("rainfxnode", "targetname");
   rain.radius = squared(rain.node.radius);
 
-  rain = spawnstruct();
+  rain = spawnStruct();
   rain.node = getstruct("rainfxnode2", "targetname");
   rain.radius = squared(rain.node.radius);
 
-  end = spawnstruct();
+  end = spawnStruct();
   end.node = getstruct("whitehousefxnode", "targetname");
   end.radius = squared(end.node.radius);
 
@@ -3109,7 +3119,7 @@ lerp_lightintensity(value, time) {
 
   delta = range / count;
 
-  while (count) {
+  while(count) {
     curr += delta;
     self setlightintensity(curr);
 
@@ -3158,7 +3168,7 @@ bodyshot(fx) {
   vec = vectornormalize(enemy.origin - origin);
   vec = vector_multiply(vec, 10);
 
-  PlayFX(getfx(fx), origin + vec);
+  playFX(getfx(fx), origin + vec);
 }
 
 script2model_precache() {
@@ -3170,9 +3180,9 @@ script2model_precache() {
   data = array_combine(data, getstructarray("iss_entity", "targetname"));
 
   foreach(obj in data) {
-    if(isdefined(precachelist[obj.script_modelname]))
+    if(isDefined(precachelist[obj.script_modelname])) {
       continue;
-
+    }
     precachelist[obj.script_modelname] = obj.script_modelname;
   }
 
@@ -3181,9 +3191,9 @@ script2model_precache() {
 }
 
 script2model_intro() {
-  if(flag("script2model_intro"))
+  if(flag("script2model_intro")) {
     return;
-
+  }
   data = getstructarray("script_to_model_swap_intro", "script_noteworthy");
   data = array_combine(data, getstructarray("crash_cars", "targetname"));
   data = array_combine(data, getstructarray("street_cars_bounce", "targetname"));
@@ -3193,21 +3203,21 @@ script2model_intro() {
     model.angles = obj.angles;
     model.targetname = obj.targetname;
     model.script_noteworthy = obj.script_noteworthy;
-    model setmodel(obj.script_modelname);
+    model setModel(obj.script_modelname);
   }
 
   flag_set("script2model_intro");
 }
 
 script2model_iss() {
-  if(flag("script2model_iss"))
+  if(flag("script2model_iss")) {
     return;
-
+  }
   earthdata = getstruct("earth_model", "targetname");
   earth = spawn("script_model", earthdata.origin);
   earth.angles = (0, 0, 0);
   earth.targetname = earthdata.targetname;
-  earth setmodel(earthdata.script_modelname);
+  earth setModel(earthdata.script_modelname);
 
   data = getstructarray("iss_entity", "targetname");
 
@@ -3220,7 +3230,7 @@ script2model_iss() {
     model.targetname = obj.targetname;
     model.script_noteworthy = obj.script_noteworthy;
     model.script_type = obj.script_type;
-    model setmodel(obj.script_modelname);
+    model setModel(obj.script_modelname);
 
     num++;
     if(num == 50) {
@@ -3233,23 +3243,23 @@ script2model_iss() {
 }
 
 script2model_del_intro() {
-  if(!flag("script2model_intro"))
+  if(!flag("script2model_intro")) {
     return;
-
-  models = getentarray("script_to_model_swap_intro", "script_noteworthy");
-  models = array_combine(models, getentarray("crash_cars", "targetname"));
-  models = array_combine(models, getentarray("street_cars_bounce", "targetname"));
+  }
+  models = getEntArray("script_to_model_swap_intro", "script_noteworthy");
+  models = array_combine(models, getEntArray("crash_cars", "targetname"));
+  models = array_combine(models, getEntArray("street_cars_bounce", "targetname"));
   array_call(models, ::delete);
 
   flag_clear("script2model_intro");
 }
 
 script2model_del_iss() {
-  if(!flag("script2model_iss"))
+  if(!flag("script2model_iss")) {
     return;
-
-  models = getentarray("iss_entity", "targetname");
-  models = array_combine(models, getentarray("iss_lights", "targetname"));
+  }
+  models = getEntArray("iss_entity", "targetname");
+  models = array_combine(models, getEntArray("iss_lights", "targetname"));
   array_call(models, ::delete);
 
   earth = getent("earth_model", "targetname");

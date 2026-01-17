@@ -8,7 +8,7 @@
 #include xmodelalias\c_usa_7thinf_gear_als;
 
 main() {
-  self setmodel("c_usa_7thinf_body_1");
+  self setModel("c_usa_7thinf_body_1");
   self.headmodel = codescripts\character::randomelement(xmodelalias\c_usa_7thinf_head_als::main());
   self attach(self.headmodel, "", 1);
   self.hatmodel = "c_usa_7thinf_helmet_1";

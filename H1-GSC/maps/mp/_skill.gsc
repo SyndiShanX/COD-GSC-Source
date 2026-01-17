@@ -17,12 +17,12 @@ initsosproxy(var_0) {
   if(!var_0 isskillenabled()) {
     return;
   }
-  if(isdefined(var_0.sos_id)) {
+  if(isDefined(var_0.sos_id)) {
     return;
   }
   var_0.sos_id = level.sos_id;
   level.sos_id++;
-  var_1 = spawnstruct();
+  var_1 = spawnStruct();
   var_1.begin_time = maps\mp\_utility::getgametimepassedseconds();
   var_1.begin_sos_rating = var_0 getplayerdata("rankedMatchData", "sosRating");
   var_1.begin_sos_weight = var_0 getplayerdata("rankedMatchData", "sosWeight");
@@ -50,14 +50,14 @@ onplayerspawned() {
   level.sos_players = [];
   level.sos_id = 0;
 
-  for (;;) {
+  for(;;) {
     level waittill("player_spawned", var_0);
     initsosproxy(var_0);
   }
 }
 
 isskillenabled() {
-  if(!isdefined(self))
+  if(!isDefined(self))
     return 0;
 
   if(isbot(self))
@@ -70,7 +70,7 @@ isskillenabled() {
 }
 
 _ipow(var_0, var_1) {
-  for (var_2 = 1; var_1; var_0 = var_0 * var_0) {
+  for(var_2 = 1; var_1; var_0 = var_0 * var_0) {
     if(var_1 & 1)
       var_2 = var_2 * var_0;
 
@@ -191,7 +191,7 @@ _dot_assoc(var_0, var_1) {
   var_2 = 0;
 
   foreach(var_5, var_4 in var_0) {
-    if(isdefined(var_1[var_5]))
+    if(isDefined(var_1[var_5]))
       var_2 = var_2 + var_4 * var_1[var_5];
   }
 
@@ -228,13 +228,13 @@ _updatesosproxy(var_0) {
   if(isbot(var_0)) {
     return;
   }
-  if(!isdefined(var_0.sos_id)) {
+  if(!isDefined(var_0.sos_id)) {
     return;
   }
   level.sos_players[var_0.sos_id].latest_time = maps\mp\_utility::getgametimepassedseconds();
   var_1 = level.sos_players[var_0.sos_id].latest_time - level.sos_players[var_0.sos_id].begin_time;
 
-  if(var_1 > level.skill_rdur_min_sec && isdefined(var_0.pers) && isdefined(var_0.pers["score"]))
+  if(var_1 > level.skill_rdur_min_sec && isDefined(var_0.pers) && isDefined(var_0.pers["score"]))
     level.sos_players[var_0.sos_id].score_per_second = var_0.pers["score"] / var_1;
   else
     level.sos_players[var_0.sos_id].score_per_second = undefined;
@@ -244,12 +244,12 @@ _updateskill() {
   if(!isskillenabled()) {
     return;
   }
-  if(isdefined(self.skillcalculated) || !isdefined(self.sos_id)) {
+  if(isDefined(self.skillcalculated) || !isDefined(self.sos_id)) {
     return;
   }
   self.skillcalculated = 1;
 
-  if(!isdefined(level.sos_players[self.sos_id])) {
+  if(!isDefined(level.sos_players[self.sos_id])) {
     return;
   }
   foreach(var_1 in level.players)
@@ -257,7 +257,7 @@ _updateskill() {
 
   var_3 = level.sos_players[self.sos_id];
 
-  if(!isdefined(var_3.score_per_second)) {
+  if(!isDefined(var_3.score_per_second)) {
     return;
   }
   var_4 = var_3.latest_time - var_3.begin_time;
@@ -278,7 +278,7 @@ _updateskill() {
     if(var_22 == self.sos_id) {
       continue;
     }
-    if(!isdefined(var_15.score_per_second)) {
+    if(!isDefined(var_15.score_per_second)) {
       continue;
     }
     var_16 = var_15.latest_time - max(var_3.begin_time, var_15.begin_time);

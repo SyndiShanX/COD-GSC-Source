@@ -12,14 +12,14 @@ main() {
 }
 
 instruments_init() {
-  inst_trigs = getentarray("snd_instrument", "targetname");
+  inst_trigs = getEntArray("snd_instrument", "targetname");
   array_thread(inst_trigs, ::play_instrument);
 }
 
 play_instrument() {
   while(true) {
     self waittill("damage");
-    self playsound(self.script_noteworthy);
+    self playSound(self.script_noteworthy);
     wait 0.1;
   }
 }

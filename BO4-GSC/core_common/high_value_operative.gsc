@@ -7,7 +7,6 @@
 #include scripts\core_common\player\player_role;
 #include scripts\core_common\player\player_stats;
 #include scripts\core_common\system_shared;
-
 #namespace hvo;
 
 autoexec __init__system__() {
@@ -20,13 +19,13 @@ __init__() {
 }
 
 function_2ce5cb7e() {
-  if(!getdvarint(#"hash_35dbebb08d656926", 0) || isDefined(self.pers[#"hvo"]) || isbot(self) || !level.rankedmatch || level.disablestattracking) {
+  if(!getdvarint(#"hash_35dbebb08d656926", 0) || isDefined(self.pers[# "hvo"]) || isbot(self) || !level.rankedmatch || level.disablestattracking) {
     return;
   }
 
-  self.pers[#"hvo"] = [];
-  self.pers[#"hvo"][#"base"] = [];
-  self.pers[#"hvo"][#"current"] = [];
+  self.pers[# "hvo"] = [];
+  self.pers[# "hvo"][# "base"] = [];
+  self.pers[# "hvo"][# "current"] = [];
   var_e800bb6a = getscriptbundlelist("hvolist");
 
   if(isDefined(var_e800bb6a) && isarray(var_e800bb6a)) {
@@ -46,33 +45,33 @@ function_2ce5cb7e() {
           continue;
         }
 
-        if(isDefined(stat.var_82670522) && isDefined(self.pers[#"hvo"][#"base"][stat.var_82670522]) || isDefined(self.pers[#"hvo"][#"base"][stat.stattype])) {
+        if(isDefined(stat.var_82670522) && isDefined(self.pers[# "hvo"][# "base"][stat.var_82670522]) || isDefined(self.pers[# "hvo"][# "base"][stat.stattype])) {
           continue;
         }
 
         switch (stat.stattype) {
-          case #"playerstatslist":
+          case # "playerstatslist":
             if(!isDefined(stat.var_82670522)) {
               break;
             }
 
-            self.pers[#"hvo"][#"base"][stat.var_82670522] = self stats::get_stat_global(stat.var_82670522);
-            self.pers[#"hvo"][#"current"][stat.var_82670522] = self stats::get_stat_global(stat.var_82670522);
+            self.pers[# "hvo"][# "base"][stat.var_82670522] = self stats::get_stat_global(stat.var_82670522);
+            self.pers[# "hvo"][# "current"][stat.var_82670522] = self stats::get_stat_global(stat.var_82670522);
             break;
-          case #"razorwireekia":
+          case # "razorwireekia":
             razorwireekia = self stats::get_stat_global(#"stats_concertina_wire_snared_kill") + self stats::get_stat_global(#"stats_concertina_wire_kill");
-            self.pers[#"hvo"][#"base"][stat.stattype] = razorwireekia;
-            self.pers[#"hvo"][#"current"][stat.stattype] = razorwireekia;
+            self.pers[# "hvo"][# "base"][stat.stattype] = razorwireekia;
+            self.pers[# "hvo"][# "current"][stat.stattype] = razorwireekia;
             break;
-          case #"highestkillstreak":
-          case #"objectivescore":
-          case #"objectivetime":
-          case #"damagedone":
-          case #"highestmultikill":
-          case #"objectiveekia":
+          case # "highestkillstreak":
+          case # "objectivescore":
+          case # "objectivetime":
+          case # "damagedone":
+          case # "highestmultikill":
+          case # "objectiveekia":
           default:
-            self.pers[#"hvo"][#"base"][stat.stattype] = 0;
-            self.pers[#"hvo"][#"current"][stat.stattype] = 0;
+            self.pers[# "hvo"][# "base"][stat.stattype] = 0;
+            self.pers[# "hvo"][# "current"][stat.stattype] = 0;
             break;
         }
       }
@@ -86,14 +85,14 @@ function_59d3154f() {
   }
 
   var_e800bb6a = getscriptbundlelist("hvolist");
-  var_aa1fbd8c = self.pers[#"hash_1b145cf9f0673e9"];
+  var_aa1fbd8c = self.pers[# "hash_1b145cf9f0673e9"];
 
   if(!isDefined(var_e800bb6a) || !isarray(var_e800bb6a) || !isDefined(var_aa1fbd8c)) {
     return;
   }
 
-  if(!isDefined(self.pers[#"hvo"][var_aa1fbd8c])) {
-    self.pers[#"hvo"][var_aa1fbd8c] = [];
+  if(!isDefined(self.pers[# "hvo"][var_aa1fbd8c])) {
+    self.pers[# "hvo"][var_aa1fbd8c] = [];
   }
 
   var_d6155829 = [];
@@ -119,7 +118,7 @@ function_59d3154f() {
       }
 
       switch (stat.stattype) {
-        case #"playerstatslist":
+        case # "playerstatslist":
           if(!isDefined(stat.var_82670522)) {
             break;
           }
@@ -127,30 +126,30 @@ function_59d3154f() {
           var_6fda3763 = self function_d0c02a50(stat, var_aa1fbd8c, stat.stattype);
           var_d6155829[stat.var_82670522] = var_6fda3763;
           break;
-        case #"razorwireekia":
+        case # "razorwireekia":
           razorwireekia = self stats::get_stat_global(#"stats_concertina_wire_snared_kill") + self stats::get_stat_global(#"stats_concertina_wire_kill");
           self function_b535c32e(stat, razorwireekia, var_aa1fbd8c);
           var_d6155829[stat.stattype] = razorwireekia;
           break;
-        case #"objectivescore":
-        case #"objectivetime":
-        case #"damagedone":
-        case #"objectiveekia":
+        case # "objectivescore":
+        case # "objectivetime":
+        case # "damagedone":
+        case # "objectiveekia":
           var_6fda3763 = self function_b535c32e(stat, self.pers[stat.stattype], var_aa1fbd8c);
           var_d6155829[stat.stattype] = var_6fda3763;
           break;
-        case #"highestkillstreak":
-          var_6fda3763 = self.pers[#"cur_kill_streak"] - self.pers[#"hvo"][#"current"][#"highestkillstreak"];
+        case # "highestkillstreak":
+          var_6fda3763 = self.pers[# "cur_kill_streak"] - self.pers[# "hvo"][# "current"][# "highestkillstreak"];
           self function_be94d98b(stat, var_6fda3763, var_aa1fbd8c);
           break;
       }
     }
   }
 
-  var_d6155829[#"highestkillstreak"] = self.pers[#"cur_kill_streak"];
+  var_d6155829[# "highestkillstreak"] = self.pers[# "cur_kill_streak"];
 
   foreach(index, stat in var_d6155829) {
-    self.pers[#"hvo"][#"current"][index] = stat;
+    self.pers[# "hvo"][# "current"][index] = stat;
   }
 }
 
@@ -185,15 +184,15 @@ function_323c6715() {
       }
 
       assert(isDefined(player.pers), "<dev string:x38>");
-      assert(isDefined(player.pers[#"hvo"]), "<dev string:x4f>");
+      assert(isDefined(player.pers[# "hvo"]), "<dev string:x4f>");
       var_9b4eeccc = function_b14806c6(player player_role::get(), currentsessionmode());
 
-      if(!isDefined(var_9b4eeccc) || isDefined(hvo.var_447510ee) && hvo.var_447510ee != var_9b4eeccc || !isDefined(player.pers) || !isDefined(player.pers[#"hvo"])) {
+      if(!isDefined(var_9b4eeccc) || isDefined(hvo.var_447510ee) && hvo.var_447510ee != var_9b4eeccc || !isDefined(player.pers) || !isDefined(player.pers[# "hvo"])) {
         continue;
       }
 
-      if(!isDefined(player.pers[#"hvo"][var_9b4eeccc])) {
-        player.pers[#"hvo"][var_9b4eeccc] = [];
+      if(!isDefined(player.pers[# "hvo"][var_9b4eeccc])) {
+        player.pers[# "hvo"][var_9b4eeccc] = [];
       }
 
       var_29da3a57 = 0;
@@ -205,32 +204,32 @@ function_323c6715() {
         }
 
         switch (stat.stattype) {
-          case #"playerstatslist":
+          case # "playerstatslist":
             score = player function_cd851b02(stat, var_9b4eeccc, stat.stattype);
             break;
-          case #"razorwireekia":
+          case # "razorwireekia":
             razorwireekia = player stats::get_stat_global(#"stats_concertina_wire_snared_kill") + player stats::get_stat_global(#"stats_concertina_wire_kill");
             score = player function_1fa30a47(stat, razorwireekia, var_9b4eeccc);
             break;
-          case #"objectivescore":
-          case #"objectivetime":
-          case #"damagedone":
-          case #"objectiveekia":
+          case # "objectivescore":
+          case # "objectivetime":
+          case # "damagedone":
+          case # "objectiveekia":
             score = player function_1fa30a47(stat, player.pers[stat.stattype], var_9b4eeccc);
             break;
-          case #"highestkillstreak":
+          case # "highestkillstreak":
             if(isDefined(stat.var_233a23b6) && stat.var_233a23b6) {
-              score = player.pers[#"cur_kill_streak"] < player.pers[#"best_kill_streak"] ? player.pers[#"best_kill_streak"] : player.pers[#"cur_kill_streak"];
+              score = player.pers[# "cur_kill_streak"] < player.pers[# "best_kill_streak"] ? player.pers[# "best_kill_streak"] : player.pers[# "cur_kill_streak"];
             } else {
-              if(!isDefined(player.pers[#"hvo"][var_9b4eeccc][stat.stattype])) {
-                player.pers[#"hvo"][var_9b4eeccc][stat.stattype] = 0;
+              if(!isDefined(player.pers[# "hvo"][var_9b4eeccc][stat.stattype])) {
+                player.pers[# "hvo"][var_9b4eeccc][stat.stattype] = 0;
               }
 
-              score = player.pers[#"cur_kill_streak"] < player.pers[#"hvo"][var_9b4eeccc][stat.stattype] ? player.pers[#"hvo"][var_9b4eeccc][stat.stattype] : player.pers[#"cur_kill_streak"];
+              score = player.pers[# "cur_kill_streak"] < player.pers[# "hvo"][var_9b4eeccc][stat.stattype] ? player.pers[# "hvo"][var_9b4eeccc][stat.stattype] : player.pers[# "cur_kill_streak"];
             }
 
             break;
-          case #"highestmultikill":
+          case # "highestmultikill":
             score = isDefined(player.pers[stat.stattype]) ? player.pers[stat.stattype] : 0;
             break;
           default:
@@ -282,57 +281,57 @@ function_323c6715() {
   }
 }
 
-private function_cd851b02(stat, var_9b4eeccc, ddl) {
+function_cd851b02(stat, var_9b4eeccc, ddl) {
   if(!isDefined(stat.var_82670522)) {
     return 0;
   }
 
   if(isDefined(stat.var_233a23b6) && stat.var_233a23b6) {
-    score = self stats::get_stat(ddl, stat.var_82670522, #"statvalue") - self.pers[#"hvo"][#"base"][stat.var_82670522];
+    score = self stats::get_stat(ddl, stat.var_82670522, # "statvalue") - self.pers[# "hvo"][# "base"][stat.var_82670522];
   } else {
-    score = isDefined(self.pers[#"hvo"][var_9b4eeccc][stat.var_82670522]) ? self.pers[#"hvo"][var_9b4eeccc][stat.var_82670522] : 0;
-    score += self stats::get_stat(ddl, stat.var_82670522, #"statvalue") - self.pers[#"hvo"][#"current"][stat.var_82670522];
+    score = isDefined(self.pers[# "hvo"][var_9b4eeccc][stat.var_82670522]) ? self.pers[# "hvo"][var_9b4eeccc][stat.var_82670522] : 0;
+    score += self stats::get_stat(ddl, stat.var_82670522, # "statvalue") - self.pers[# "hvo"][# "current"][stat.var_82670522];
   }
 
   return score;
 }
 
-private function_d0c02a50(stat, var_aa1fbd8c, ddl) {
-  if(!isDefined(self.pers[#"hvo"][var_aa1fbd8c][stat.var_82670522])) {
-    self.pers[#"hvo"][var_aa1fbd8c][stat.var_82670522] = 0;
+function_d0c02a50(stat, var_aa1fbd8c, ddl) {
+  if(!isDefined(self.pers[# "hvo"][var_aa1fbd8c][stat.var_82670522])) {
+    self.pers[# "hvo"][var_aa1fbd8c][stat.var_82670522] = 0;
   }
 
-  var_6fda3763 = self stats::get_stat(ddl, stat.var_82670522, #"statvalue");
-  self.pers[#"hvo"][var_aa1fbd8c][stat.var_82670522] += var_6fda3763 - self.pers[#"hvo"][#"current"][stat.var_82670522];
+  var_6fda3763 = self stats::get_stat(ddl, stat.var_82670522, # "statvalue");
+  self.pers[# "hvo"][var_aa1fbd8c][stat.var_82670522] += var_6fda3763 - self.pers[# "hvo"][# "current"][stat.var_82670522];
   return var_6fda3763;
 }
 
-private function_1fa30a47(stat, currentscore, var_9b4eeccc) {
+function_1fa30a47(stat, currentscore, var_9b4eeccc) {
   if(isDefined(stat.var_233a23b6) && stat.var_233a23b6) {
-    score = currentscore - self.pers[#"hvo"][#"base"][stat.stattype];
+    score = currentscore - self.pers[# "hvo"][# "base"][stat.stattype];
   } else {
-    score = isDefined(self.pers[#"hvo"][var_9b4eeccc][stat.stattype]) ? self.pers[#"hvo"][var_9b4eeccc][stat.stattype] : 0;
-    score += currentscore - self.pers[#"hvo"][#"current"][stat.stattype];
+    score = isDefined(self.pers[# "hvo"][var_9b4eeccc][stat.stattype]) ? self.pers[# "hvo"][var_9b4eeccc][stat.stattype] : 0;
+    score += currentscore - self.pers[# "hvo"][# "current"][stat.stattype];
   }
 
   return score;
 }
 
-private function_b535c32e(stat, score, var_aa1fbd8c) {
-  if(!isDefined(self.pers[#"hvo"][var_aa1fbd8c][stat.stattype])) {
-    self.pers[#"hvo"][var_aa1fbd8c][stat.stattype] = 0;
+function_b535c32e(stat, score, var_aa1fbd8c) {
+  if(!isDefined(self.pers[# "hvo"][var_aa1fbd8c][stat.stattype])) {
+    self.pers[# "hvo"][var_aa1fbd8c][stat.stattype] = 0;
   }
 
-  self.pers[#"hvo"][var_aa1fbd8c][stat.stattype] += score - self.pers[#"hvo"][#"current"][stat.stattype];
+  self.pers[# "hvo"][var_aa1fbd8c][stat.stattype] += score - self.pers[# "hvo"][# "current"][stat.stattype];
   return score;
 }
 
-private function_be94d98b(stat, score, var_aa1fbd8c) {
-  if(!isDefined(self.pers[#"hvo"][var_aa1fbd8c][stat.stattype])) {
-    self.pers[#"hvo"][var_aa1fbd8c][stat.stattype] = 0;
+function_be94d98b(stat, score, var_aa1fbd8c) {
+  if(!isDefined(self.pers[# "hvo"][var_aa1fbd8c][stat.stattype])) {
+    self.pers[# "hvo"][var_aa1fbd8c][stat.stattype] = 0;
   }
 
-  if(self.pers[#"hvo"][var_aa1fbd8c][stat.stattype] < score) {
-    self.pers[#"hvo"][var_aa1fbd8c][stat.stattype] = score;
+  if(self.pers[# "hvo"][var_aa1fbd8c][stat.stattype] < score) {
+    self.pers[# "hvo"][var_aa1fbd8c][stat.stattype] = score;
   }
 }

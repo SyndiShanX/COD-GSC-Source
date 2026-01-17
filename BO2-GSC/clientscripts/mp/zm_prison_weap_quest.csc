@@ -66,9 +66,9 @@ soul_catcher_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fie
     if(newval == 2 || newval == 3 || newval == 5 || newval == 4) {
       if(!isDefined(level.wolf_heads[localclientnum][fieldname].portal_fx)) {
         rune = level.wolf_runes[localclientnum][fieldname];
-        rune_forward = anglestoforward(rune.angles + vectorscale((0, 1, 0), 90.0));
+        rune_forward = anglesToForward(rune.angles + vectorscale((0, 1, 0), 90.0));
         rune_up = anglestoup(rune.angles);
-        level.wolf_heads[localclientnum][fieldname].portal_fx = playfx(localclientnum, level._effect["hell_portal"], rune.origin - rune_forward * 2.5 - rune_up * 24, rune_forward, rune_up);
+        level.wolf_heads[localclientnum][fieldname].portal_fx = playFX(localclientnum, level._effect["hell_portal"], rune.origin - rune_forward * 2.5 - rune_up * 24, rune_forward, rune_up);
       }
     }
   } else if(bwasdemojump) {
@@ -77,9 +77,9 @@ soul_catcher_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fie
         stopfx(localclientnum, level.wolf_heads[localclientnum][fieldname].portal_fx);
 
       rune = level.wolf_runes[localclientnum][fieldname];
-      rune_forward = anglestoforward(rune.angles + vectorscale((0, 1, 0), 90.0));
+      rune_forward = anglesToForward(rune.angles + vectorscale((0, 1, 0), 90.0));
       rune_up = anglestoup(rune.angles);
-      level.wolf_heads[localclientnum][fieldname].portal_fx = playfx(localclientnum, level._effect["hell_portal"], rune.origin - rune_forward * 2.5 - rune_up * 24, rune_forward, rune_up);
+      level.wolf_heads[localclientnum][fieldname].portal_fx = playFX(localclientnum, level._effect["hell_portal"], rune.origin - rune_forward * 2.5 - rune_up * 24, rune_forward, rune_up);
     }
   }
 
@@ -105,7 +105,7 @@ soul_catcher_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fie
     }
 
     if(oldval == 3 || oldval == 5 || oldval == 4)
-      playsound(0, "evt_wolfhead_body_count", level.wolf_heads[localclientnum][fieldname].origin);
+      playSound(0, "evt_wolfhead_body_count", level.wolf_heads[localclientnum][fieldname].origin);
 
     level.wolf_heads[localclientnum][fieldname] thread wolfhead_idle();
   } else if(newval == 3 || newval == 5 || newval == 4) {
@@ -138,19 +138,19 @@ soul_catcher_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fie
     if(isDefined(level.wolf_bodies[localclientnum][fieldname].head.hat))
       level.wolf_bodies[localclientnum][fieldname].head.hat hide();
 
-    level.wolf_runes[localclientnum][fieldname] setmodel("p6_zm_al_dream_catcher");
-    playfxontag(localclientnum, level._effect["soul_charged"], level.wolf_runes[localclientnum][fieldname], "tag_origin");
-    level.wolf_runes[localclientnum][fieldname] playloopsound("evt_runeglow_loop");
+    level.wolf_runes[localclientnum][fieldname] setModel("p6_zm_al_dream_catcher");
+    playFXOnTag(localclientnum, level._effect["soul_charged"], level.wolf_runes[localclientnum][fieldname], "tag_origin");
+    level.wolf_runes[localclientnum][fieldname] playLoopSound("evt_runeglow_loop");
   }
 }
 
 wolfhead_arrive(localclientnum, rune) {
-  rune_forward = anglestoforward(rune.angles + vectorscale((0, 1, 0), 90.0));
+  rune_forward = anglesToForward(rune.angles + vectorscale((0, 1, 0), 90.0));
   rune_up = anglestoup(rune.angles);
-  self.portal_fx = playfx(localclientnum, level._effect["hell_portal"], rune.origin - rune_forward * 2.5 - rune_up * 24, rune_forward, rune_up);
-  self playsound(0, "evt_wolfhead_spawn");
+  self.portal_fx = playFX(localclientnum, level._effect["hell_portal"], rune.origin - rune_forward * 2.5 - rune_up * 24, rune_forward, rune_up);
+  self playSound(0, "evt_wolfhead_spawn");
   self.wolf_ent = spawn(0, self.origin, "script_origin");
-  self.wolf_ent playloopsound("evt_wolfhead_fire_loop");
+  self.wolf_ent playLoopSound("evt_wolfhead_fire_loop");
   n_anim_length = getanimlength(level.wolfhead_intro_anim);
   self setanim(level.wolfhead_intro_anim, 1.0, 0, 1.0);
   wait(n_anim_length);
@@ -214,11 +214,11 @@ pose_dead_body(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
     m_body = spawn(localclientnum, (0, 0, 0), "script_model");
 
     if(issubstr(self.model, "body2"))
-      m_body setmodel("c_zom_inmate_body2");
+      m_body setModel("c_zom_inmate_body2");
     else if(issubstr(self.model, "body1"))
-      m_body setmodel("c_zom_inmate_body1");
+      m_body setModel("c_zom_inmate_body1");
     else
-      m_body setmodel("c_zom_guard_body");
+      m_body setModel("c_zom_guard_body");
 
     m_body hide();
     m_body.origin = self.origin;
@@ -227,15 +227,15 @@ pose_dead_body(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
 
     if(newval > 4) {
       head_index = newval % 4 + 1;
-      m_head setmodel(level.wolf_body_fake_heads[head_index]);
+      m_head setModel(level.wolf_body_fake_heads[head_index]);
       m_hat = spawn(localclientnum, m_head gettagorigin("J_Head"), "script_model");
-      m_hat setmodel("c_zom_guard_hat");
+      m_hat setModel("c_zom_guard_hat");
       m_hat.angles = m_head.angles;
       m_hat linkto(m_head, "j_head");
       m_hat hide();
       m_head.hat = m_hat;
     } else
-      m_head setmodel(level.wolf_body_fake_heads[newval]);
+      m_head setModel(level.wolf_body_fake_heads[newval]);
 
     m_head hide();
     m_head.angles = m_body gettagangles("J_Spine4");
@@ -287,7 +287,7 @@ wolfhead_pre_eat_aligned(body, localclientnum, direction) {
 body_moveto_wolf(m_wolf, localclientnum) {
   if(!isDefined(self.m_soul_fx_player)) {
     self.m_soul_fx_player = spawn(localclientnum, self gettagorigin("J_SpineLower"), "script_model");
-    self.m_soul_fx_player setmodel("tag_origin");
+    self.m_soul_fx_player setModel("tag_origin");
   }
 
   self clearanim( % root, 0.1);
@@ -296,13 +296,13 @@ body_moveto_wolf(m_wolf, localclientnum) {
   vec_dir_scaled = vectorscale(vec_dir, 0.2);
   self.m_soul_fx_player.angles = vectortoangles(vec_dir);
   self.m_soul_fx_player linkto(self);
-  move_fx = playfxontag(localclientnum, level._effect["soul_charge_start"], self.m_soul_fx_player, "tag_origin");
-  self playsound(0, "evt_soulsuck_body");
+  move_fx = playFXOnTag(localclientnum, level._effect["soul_charge_start"], self.m_soul_fx_player, "tag_origin");
+  self playSound(0, "evt_soulsuck_body");
   self moveto(self.origin + vec_dir_scaled, 1.5, 1.5);
   self waittill("movedone");
   self clearanim( % root, 0.1);
   self setanimrestart( % ai_zombie_dreamcatch_shrink_a, 1, 0.2, 1);
-  zombie_move_offset = anglestoforward(m_wolf.angles) * 36 + anglestoup(m_wolf.angles) * 0;
+  zombie_move_offset = anglesToForward(m_wolf.angles) * 36 + anglestoup(m_wolf.angles) * 0;
   self moveto(m_wolf.origin + zombie_move_offset, 0.5, 0.5);
   self waittill("movedone");
 
@@ -330,7 +330,7 @@ wolfhead_eat_aligned(body, localclientnum, direction) {
   self clearanim( % root, 0.1);
   body clearanim( % root, 0.1);
   n_anim_length = getanimlength(level.wolfhead_eat_anims[direction]);
-  self playsound(0, "evt_wolfhead_eat");
+  self playSound(0, "evt_wolfhead_eat");
   self thread play_blood_fx_on_bite(localclientnum);
   self setflaggedanim("bite", level.wolfhead_eat_anims[direction], 1.0, 0.0, 1.0);
   body setflaggedanim("bite", level.wolfhead_body_anims[direction], 1.0, 0.2, 1.0);
@@ -343,20 +343,20 @@ play_blood_fx_on_bite(localclientnum) {
     self waittill("bite", note);
 
     if(note == "blood")
-      playfxontag(localclientnum, level._effect["soul_charge_impact"], self, "TAG_MOUTH_FX");
+      playFXOnTag(localclientnum, level._effect["soul_charge_impact"], self, "TAG_MOUTH_FX");
     else if(note == "blood_sm")
-      playfxontag(localclientnum, level._effect["wolf_bite_blood"], self, "TAG_MOUTH_FX");
+      playFXOnTag(localclientnum, level._effect["wolf_bite_blood"], self, "TAG_MOUTH_FX");
   }
 }
 
 wolfhead_depart(localclientnum, rune) {
   self clearanim( % root, 0.1);
   self setanimrestart(level.wolfhead_outtro_anim, 1.0, 0.2, 1.0);
-  rune_forward = anglestoforward(rune.angles + vectorscale((0, 1, 0), 90.0));
+  rune_forward = anglesToForward(rune.angles + vectorscale((0, 1, 0), 90.0));
   rune_up = anglestoup(rune.angles);
   stopfx(localclientnum, self.portal_fx);
-  self.portal_fx = playfx(localclientnum, level._effect["hell_portal_close"], rune.origin - rune_forward * 2.5 - rune_up * 24, rune_forward, rune_up);
-  self playsound(0, "evt_wolfhead_depart");
+  self.portal_fx = playFX(localclientnum, level._effect["hell_portal_close"], rune.origin - rune_forward * 2.5 - rune_up * 24, rune_forward, rune_up);
+  self playSound(0, "evt_wolfhead_depart");
 
   if(isDefined(self.wolf_ent)) {
     self.wolf_ent stoploopsound();

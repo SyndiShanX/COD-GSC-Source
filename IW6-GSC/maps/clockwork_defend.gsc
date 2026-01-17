@@ -39,9 +39,9 @@ clockwork_defend_pre_load() {
   common_scripts\utility::flag_init("cypher_defend_close_door");
   common_scripts\utility::flag_init("defend_timeout");
   common_scripts\utility::flag_init("ally_died");
-  maps\_utility::add_hint_string("teargas_hint", & "CLOCKWORK_PROMPT_TEARGAS", ::handle_bag_hints);
-  maps\_utility::add_hint_string("shockwave_hint", & "CLOCKWORK_PROMPT_SHOCKWAVE", ::handle_bag_hints);
-  maps\_utility::add_hint_string("mine_hint", & "CLOCKWORK_PROMPT_MINE", ::handle_bag_hints);
+  maps\_utility::add_hint_string("teargas_hint", &"CLOCKWORK_PROMPT_TEARGAS", ::handle_bag_hints);
+  maps\_utility::add_hint_string("shockwave_hint", &"CLOCKWORK_PROMPT_SHOCKWAVE", ::handle_bag_hints);
+  maps\_utility::add_hint_string("mine_hint", &"CLOCKWORK_PROMPT_MINE", ::handle_bag_hints);
 }
 
 setup_defend_blowdoors1() {
@@ -386,7 +386,7 @@ fail_mission_leave_area() {
   common_scripts\utility::flag_wait_any("def_player_north", "player_on_podium", "def_player_south");
   thread watch_player_leave_area();
   common_scripts\utility::flag_wait("defend_player_fail_leaving");
-  setdvar("ui_deadquote", & "CLOCKWORK_QUOTE_LEFT_TEAM");
+  setdvar("ui_deadquote", &"CLOCKWORK_QUOTE_LEFT_TEAM");
   maps\_utility::missionfailedwrapper();
 }
 
@@ -605,7 +605,7 @@ cipher_vo() {
   wait 0.5;
   level.allies[0] maps\clockwork_code::char_dialog_add_and_go("clockwork_bkr_defensiveposition");
   var_0 = maps\_utility::obj("defendcypher");
-  objective_add(var_0, "active", & "CLOCKWORK_OBJ_DEFEND");
+  objective_add(var_0, "active", &"CLOCKWORK_OBJ_DEFEND");
   objective_current(var_0);
   wait 1;
   common_scripts\utility::flag_wait("cypher_in_position");
@@ -822,7 +822,7 @@ vault_nag() {
 defend_exit_objective() {
   var_0 = maps\_utility::obj("defendexit");
   var_1 = common_scripts\utility::getstruct("defend_exit_obj", "targetname");
-  objective_add(var_0, "active", & "CLOCKWORK_OBJ_DEFEND_ESCAPE");
+  objective_add(var_0, "active", &"CLOCKWORK_OBJ_DEFEND_ESCAPE");
   objective_current(var_0);
   objective_position(var_0, var_1.origin);
   common_scripts\utility::flag_wait("defend_vault_room");
@@ -971,13 +971,13 @@ open_vault_door() {
   wait 11;
 
   if(!common_scripts\utility::flag("player_out_of_defend")) {
-    setdvar("ui_deadquote", & "CLOCKWORK_QUOTE_SEPARATED");
+    setdvar("ui_deadquote", &"CLOCKWORK_QUOTE_SEPARATED");
     maps\_utility::missionfailedwrapper();
   } else {
     var_3 = maps\_utility::obj("defendexit");
     maps\_utility::objective_complete(var_3);
     var_4 = maps\_utility::obj("exitfac");
-    objective_add(var_4, "active", & "CLOCKWORK_EXIT");
+    objective_add(var_4, "active", &"CLOCKWORK_EXIT");
     objective_current(var_4);
   }
 
@@ -1663,7 +1663,7 @@ watch_pod_blocker(var_0, var_1) {
     while(common_scripts\utility::flag(var_0)) {
       if(!isDefined(var_1) || !isalive(var_1)) {
         common_scripts\utility::flag_set("ally_died");
-        var_9 = & "CLOCKWORK_QUOTE_CYPHER_SHOT";
+        var_9 = &"CLOCKWORK_QUOTE_CYPHER_SHOT";
         setdvar("ui_deadquote", var_9);
         maps\_utility::missionfailedwrapper();
         return;

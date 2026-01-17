@@ -51,7 +51,7 @@ gtnw_endGame(winningTeam, endReasonText) {
 }
 
 onPlayerConnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connected", player);
 
     useBar = player createPrimaryProgressBar();
@@ -67,10 +67,10 @@ onPlayerConnect() {
 }
 
 onStartGameType() {
-  if(!isdefined(game["switchedsides"]))
+  if(!isDefined(game["switchedsides"]))
     game["switchedsides"] = false;
 
-  if(!isdefined(game["original_defenders"]))
+  if(!isDefined(game["original_defenders"]))
     game["original_defenders"] = game["defenders"];
 
   if(game["switchedsides"]) {
@@ -83,18 +83,18 @@ onStartGameType() {
   setClientNameMode("auto_change");
 
   if(level.splitscreen) {
-    setObjectiveScoreText(game["attackers"], & "OBJECTIVES_GTNW");
-    setObjectiveScoreText(game["defenders"], & "OBJECTIVES_GTNW");
+    setObjectiveScoreText(game["attackers"], &"OBJECTIVES_GTNW");
+    setObjectiveScoreText(game["defenders"], &"OBJECTIVES_GTNW");
   } else {
-    setObjectiveScoreText(game["attackers"], & "OBJECTIVES_GTNW_SCORE");
-    setObjectiveScoreText(game["defenders"], & "OBJECTIVES_GTNW_SCORE");
+    setObjectiveScoreText(game["attackers"], &"OBJECTIVES_GTNW_SCORE");
+    setObjectiveScoreText(game["defenders"], &"OBJECTIVES_GTNW_SCORE");
   }
 
-  setObjectiveText(game["attackers"], & "OBJECTIVES_GTNW");
-  setObjectiveText(game["defenders"], & "OBJECTIVES_GTNW");
+  setObjectiveText(game["attackers"], &"OBJECTIVES_GTNW");
+  setObjectiveText(game["defenders"], &"OBJECTIVES_GTNW");
 
-  setObjectiveHintText(game["attackers"], & "OBJECTIVES_GTNW_HINT");
-  setObjectiveHintText(game["defenders"], & "OBJECTIVES_GTNW_HINT");
+  setObjectiveHintText(game["attackers"], &"OBJECTIVES_GTNW_HINT");
+  setObjectiveHintText(game["defenders"], &"OBJECTIVES_GTNW_HINT");
 
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);
@@ -119,7 +119,6 @@ onStartGameType() {
   maps\mp\gametypes\_gameobjects::main(allowed);
 
   thread setupNukeSite();
-
 }
 
 onPrecacheGameType() {
@@ -166,10 +165,10 @@ getSpawnPoint() {
 
   if(level.inGracePeriod) {
     if(getDvar("mapname") == "mp_shipment_long") {
-      spawnPoints = getentarray("mp_cha_spawn_" + spawnteam + "_start", "classname");
+      spawnPoints = getEntArray("mp_cha_spawn_" + spawnteam + "_start", "classname");
       spawnPoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_Random(spawnPoints);
     } else {
-      spawnPoints = getentarray("mp_ctf_spawn_" + spawnteam + "_start", "classname");
+      spawnPoints = getEntArray("mp_ctf_spawn_" + spawnteam + "_start", "classname");
       spawnPoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_Random(spawnPoints);
     }
   } else {
@@ -270,8 +269,7 @@ scoreCounter() {
   level endon("game_ended");
   self endon("stop_counting");
 
-  for (;;) {
-
+  for(;;) {
     if(!self.touchList["axis"].size && !self.touchlist["allies"].size) {
       setDvar("ui_danger_team", "none");
 
@@ -367,7 +365,7 @@ giveFlagCaptureXP(touchList) {
   WaitTillSlowProcessAllowed();
 
   players = getArrayKeys(touchList);
-  for (index = 0; index < players.size; index++) {
+  for(index = 0; index < players.size; index++) {
     player = touchList[players[index]].player;
     player thread maps\mp\gametypes\_hud_message::SplashNotify("captured_nuke", maps\mp\gametypes\_rank::getScoreInfoValue("capture"));
     player thread[[level.onXPEvent]]("capture");

@@ -30,11 +30,11 @@ main() {
   maps\mp\_load::main();
   maps\mp\mp_carrier_amb::main();
   maps\mp\_compass::setupminimap("compass_map_mp_carrier");
-  game["strings"]["war_callsign_a"] = & "MPUI_CALLSIGN_MAPNAME_A";
-  game["strings"]["war_callsign_b"] = & "MPUI_CALLSIGN_MAPNAME_B";
-  game["strings"]["war_callsign_c"] = & "MPUI_CALLSIGN_MAPNAME_C";
-  game["strings"]["war_callsign_d"] = & "MPUI_CALLSIGN_MAPNAME_D";
-  game["strings"]["war_callsign_e"] = & "MPUI_CALLSIGN_MAPNAME_E";
+  game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_MAPNAME_A";
+  game["strings"]["war_callsign_b"] = &"MPUI_CALLSIGN_MAPNAME_B";
+  game["strings"]["war_callsign_c"] = &"MPUI_CALLSIGN_MAPNAME_C";
+  game["strings"]["war_callsign_d"] = &"MPUI_CALLSIGN_MAPNAME_D";
+  game["strings"]["war_callsign_e"] = &"MPUI_CALLSIGN_MAPNAME_E";
   game["strings_menu"]["war_callsign_a"] = "@MPUI_CALLSIGN_MAPNAME_A";
   game["strings_menu"]["war_callsign_b"] = "@MPUI_CALLSIGN_MAPNAME_B";
   game["strings_menu"]["war_callsign_c"] = "@MPUI_CALLSIGN_MAPNAME_C";
@@ -69,10 +69,10 @@ main() {
   spawncollision("collision_clip_wall_64x64x10", "collider", (-5838, -913.5, 85), vectorscale((0, 0, -1), 19.8001));
   greenbarrel1 = spawn("script_model", (-5979.48, -347.391, 53.8051));
   greenbarrel1.angles = (0, 0, 0);
-  greenbarrel1 setmodel("ac_prs_fps_road_chunk_lrg_a04");
+  greenbarrel1 setModel("ac_prs_fps_road_chunk_lrg_a04");
   greenbarrel2 = spawn("script_model", (-5960.64, -349.489, 59.663));
   greenbarrel2.angles = (5.97936, 96.3096, 13.1076);
-  greenbarrel2 setmodel("ac_prs_fps_road_chunk_lrg_a04");
+  greenbarrel2 setModel("ac_prs_fps_road_chunk_lrg_a04");
   spawncollision("collision_clip_32x32x32", "collider", (-5987.5, -347.5, 47), vectorscale((0, 1, 0), 64.8));
   spawncollision("collision_clip_32x32x32", "collider", (-5957.2, -356.902, 47.25), vectorscale((0, 1, 0), 102.9));
   level thread water_trigger_init();
@@ -85,7 +85,7 @@ levelspawndvars(reset_dvars) {
 
 water_trigger_init() {
   wait 3;
-  triggers = getentarray("trigger_hurt", "classname");
+  triggers = getEntArray("trigger_hurt", "classname");
 
   foreach(trigger in triggers) {
     if(trigger.origin[2] > level.mapcenter[2]) {
@@ -103,8 +103,8 @@ water_trigger_think() {
       trace = worldtrace(entity.origin + vectorscale((0, 0, 1), 30.0), entity.origin - vectorscale((0, 0, 1), 256.0));
 
       if(trace["surfacetype"] == "none") {
-        entity playsound("mpl_splash_death");
-        playfx(level._effect["water_splash"], entity.origin + vectorscale((0, 0, 1), 40.0));
+        entity playSound("mpl_splash_death");
+        playFX(level._effect["water_splash"], entity.origin + vectorscale((0, 0, 1), 40.0));
       }
     }
   }
@@ -122,7 +122,7 @@ useintermissionpointsonwavespawn() {
 }
 
 isinwater() {
-  triggers = getentarray("trigger_hurt", "classname");
+  triggers = getEntArray("trigger_hurt", "classname");
 
   foreach(trigger in triggers) {
     if(trigger.origin[2] > level.mapcenter[2]) {

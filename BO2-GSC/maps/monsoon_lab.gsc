@@ -214,12 +214,12 @@ init_lab_interior() {
   a_lab_lens_flare = getstructarray("lab_lens_flare", "targetname");
 
   foreach(lens_flare in a_lab_lens_flare) {
-    v_forward = anglestoforward(lens_flare.angles);
-    playfx(level._effect["light_lens_flare"], lens_flare.origin, v_forward);
+    v_forward = anglesToForward(lens_flare.angles);
+    playFX(level._effect["light_lens_flare"], lens_flare.origin, v_forward);
     wait 0.05;
   }
 
-  a_destroyed_lobby_asd = getentarray("destroyed_lobby_asd", "targetname");
+  a_destroyed_lobby_asd = getEntArray("destroyed_lobby_asd", "targetname");
 
   foreach(asd in a_destroyed_lobby_asd) {
     asd hide();
@@ -227,7 +227,7 @@ init_lab_interior() {
   }
 
   wait 0.05;
-  a_exit_blood_02 = getentarray("exit_blood_02", "targetname");
+  a_exit_blood_02 = getEntArray("exit_blood_02", "targetname");
 
   foreach(blood in a_exit_blood_02) {
     if(!is_mature())
@@ -235,7 +235,7 @@ init_lab_interior() {
   }
 
   wait 0.05;
-  a_exit_blood_01 = getentarray("exit_blood_01", "targetname");
+  a_exit_blood_01 = getEntArray("exit_blood_01", "targetname");
 
   foreach(blood in a_exit_blood_01)
   blood hide();
@@ -251,13 +251,13 @@ init_lab_interior() {
   trig_elevator_panel sethintstring("");
   trig_elevator_panel setcursorhint("HINT_NOICON");
   wait 0.05;
-  a_defend_crash_show = getentarray("defend_crash_show", "targetname");
+  a_defend_crash_show = getEntArray("defend_crash_show", "targetname");
 
   foreach(crash_piece in a_defend_crash_show)
   crash_piece hide();
 
   wait 0.05;
-  a_defend_pillar_show = getentarray("defend_pillar_show", "targetname");
+  a_defend_pillar_show = getEntArray("defend_pillar_show", "targetname");
 
   foreach(piece in a_defend_pillar_show)
   piece hide();
@@ -350,7 +350,7 @@ lab_entrance() {
   level.player setlowready(0);
   m_lab_door_left movey(90, 5, 1);
   m_lab_door_right movey(-90, 5, 1);
-  m_lab_door_right playsound("evt_lab_round_doors");
+  m_lab_door_right playSound("evt_lab_round_doors");
   wait 1.5;
   n_distance = distance2d(s_rear_lab_door_rumble_dist.origin, level.player.origin);
 
@@ -359,7 +359,7 @@ lab_entrance() {
 
   m_lab_door_left_rear movey(83, 5, 1);
   m_lab_door_right_rear movey(-83, 5, 1);
-  m_lab_door_left_rear playsound("evt_lab_round_doors");
+  m_lab_door_left_rear playSound("evt_lab_round_doors");
   m_lab_door_left waittill("movedone");
   s_front_lab_door_rumble_dist.is_moving = 0;
   n_distance = distance2d(s_front_lab_door_rumble_dist.origin, level.player.origin);
@@ -541,7 +541,7 @@ clean_room_doors() {
   exploder(1350);
   spray_ent = spawn("script_origin", (8382, 55196, -887));
   playsoundatposition("evt_spray_start", (8382, 55196, -887));
-  spray_ent playloopsound("evt_spray_loop", 0.5);
+  spray_ent playLoopSound("evt_spray_loop", 0.5);
   wait 5;
   spray_ent stoploopsound(0.5);
   playsoundatposition("evt_spray_stop", (8382, 55196, -887));
@@ -588,9 +588,9 @@ player_asd_intro() {
   level notify("fxanim_metal_storm_enter01_start");
   earthquake(0.75, 2, level.player.origin, 1000);
   level.player shellshock("default", 8.5);
-  level.player playsound("evt_lab_entrance_exp");
+  level.player playSound("evt_lab_entrance_exp");
   level.player playrumbleonentity("grenade_rumble");
-  level.player setcandamage(0);
+  level.player setCanDamage(0);
   level clientnotify("snd_alarm");
   setsaveddvar("bg_fallDamageMinHeight", 512);
   setsaveddvar("bg_fallDamageMaxHeight", 850);
@@ -614,7 +614,7 @@ player_asd_intro() {
   run_scene("asd_intro_player_intro");
   flag_set("end_player_asd_anim");
   autosave_by_name("asd_intro");
-  level.player setcandamage(1);
+  level.player setCanDamage(1);
   s_hallway_rockets_start = getstruct("hallway_rockets_start", "targetname");
   s_asd_hallway_target = getstruct("asd_hallway_target", "targetname");
   magicbullet("metalstorm_launcher", s_hallway_rockets_start.origin, s_asd_hallway_target.origin);
@@ -634,12 +634,12 @@ asd_fall_back_think() {
 }
 
 harper_grenade_launch(guy) {
-  playfxontag(getfx("grenade_arm_launcher"), level.harper, "J_Wrist_RI");
+  playFXOnTag(getfx("grenade_arm_launcher"), level.harper, "J_Wrist_RI");
 }
 
 asd_grenade_defense(guy) {
   s_midair_nade_explosion = getstruct("midair_nade_explosion", "targetname");
-  playfx(getfx("c4_explode"), s_midair_nade_explosion.origin);
+  playFX(getfx("c4_explode"), s_midair_nade_explosion.origin);
   level notify("fxanim_metal_storm_enter02_start");
   level.player playrumbleonentity("grenade_rumble");
   earthquake(0.2, 0.5, level.player.origin, 1000);
@@ -792,7 +792,7 @@ vo_player_asd() {
 asd_lobby_think() {
   self endon("death");
   self thread asd_hallway_gunfire();
-  self setcandamage(0);
+  self setCanDamage(0);
   self veh_magic_bullet_shield(1);
   self maps\_metal_storm::metalstorm_stop_ai();
   nd_start_node = getvehiclenode(self.target, "targetname");
@@ -801,7 +801,7 @@ asd_lobby_think() {
   self setspeed(0, 3, 2);
   flag_wait("end_player_asd_anim");
   self maps\_vehicle::vehicle_pathdetach();
-  self setcandamage(1);
+  self setCanDamage(1);
   self veh_magic_bullet_shield(0);
   self thread asd_health_watch();
   s_asd_tutorial_spot = getstruct("asd_tutorial_spot", "targetname");
@@ -1043,12 +1043,12 @@ setup_ambient_2_1_asd() {
 }
 
 lab_color_triggers() {
-  a_lab_color_triggers = getentarray("lab_color_triggers", "script_noteworthy");
+  a_lab_color_triggers = getEntArray("lab_color_triggers", "script_noteworthy");
 
   foreach(trigger in a_lab_color_triggers)
   trigger thread notify_targeted_trigger();
 
-  a_lower_lab_color_triggers = getentarray("lower_lab_color_triggers", "script_noteworthy");
+  a_lower_lab_color_triggers = getEntArray("lower_lab_color_triggers", "script_noteworthy");
 
   foreach(trigger in a_lower_lab_color_triggers)
   trigger thread notify_targeted_trigger();
@@ -1065,7 +1065,7 @@ lab_spawn_funcs() {
   ai_isaac add_spawn_function(::setup_isaac);
   ai_window_jumper = getent("window_jumper", "targetname");
   ai_window_jumper add_spawn_function(::init_window_jumper);
-  a_lab_scientist = getentarray("ambient_lab_scientists", "script_noteworthy");
+  a_lab_scientist = getEntArray("ambient_lab_scientists", "script_noteworthy");
   array_thread(a_lab_scientist, ::add_spawn_function, ::init_lab_scientists);
   ai_left_lobby_guy = getent("left_lobby_guy", "script_noteworthy");
   ai_left_lobby_guy add_spawn_function(::trigger_left_lobby_color);
@@ -1079,13 +1079,13 @@ lab_spawn_funcs() {
   add_spawn_function_veh("asd_defend_2", maps\monsoon_lab_defend::init_defend_right_asd);
   add_spawn_function_veh("asd_ambient_2_1", ::setup_ambient_2_1_asd);
   add_spawn_function_veh("right_path_asd", maps\monsoon_lab_defend::init_right_path_asd);
-  a_guy_ragdoll_death = getentarray("guy_ragdoll_death", "script_noteworthy");
+  a_guy_ragdoll_death = getEntArray("guy_ragdoll_death", "script_noteworthy");
   array_thread(a_guy_ragdoll_death, ::add_spawn_function, ::init_guy_ragdoll_death);
-  a_corpse_guy = getentarray("corpse_guy", "script_noteworthy");
+  a_corpse_guy = getEntArray("corpse_guy", "script_noteworthy");
   array_thread(a_corpse_guy, ::add_spawn_function, ::init_guy_ragdoll_death);
   e_crawl_back_guy = getent("crawl_back_guy", "targetname");
   e_crawl_back_guy add_spawn_function(::init_crawl_back_guy);
-  a_ending_friendlies = getentarray("ending_friendlies", "script_noteworthy");
+  a_ending_friendlies = getEntArray("ending_friendlies", "script_noteworthy");
   array_thread(a_ending_friendlies, ::add_spawn_function, ::init_ending_friendlies);
 }
 
@@ -1203,7 +1203,7 @@ lift_destruction() {
 
 elevator_damage_watch(str_model_swap, n_exploder) {
   self endon("lift_model_broken");
-  self setcandamage(1);
+  self setCanDamage(1);
   self.b_model_broken = 0;
   self waittill("damage", num_damage, e_attacker);
   flag_set("set_off_hallway_destruction");
@@ -1211,7 +1211,7 @@ elevator_damage_watch(str_model_swap, n_exploder) {
   if(!self.b_model_broken) {
     if(isDefined(e_attacker) && isDefined(e_attacker.targetname) && e_attacker.targetname == "nitrogen_asd") {
       exploder(n_exploder);
-      self setmodel(str_model_swap);
+      self setModel(str_model_swap);
       self.b_model_broken = 1;
       self notify("lift_model_broken");
     }
@@ -1276,7 +1276,7 @@ init_lab_scientists() {
 lab_scientist_screams() {
   self endon("death");
   wait(randomintrange(1, 4));
-  self playsound("vox_scientist_screams");
+  self playSound("vox_scientist_screams");
 }
 
 window_jumper() {
@@ -1833,7 +1833,7 @@ inside_lift_move_down() {
   bm_door_south_r linkto(m_lift);
   level.player playrumbleonentity("damage_heavy");
   level.player playrumblelooponentity("tank_rumble");
-  level.player setcandamage(0);
+  level.player setCanDamage(0);
   delay_thread(1, ::flag_set, "lift_pre_ambush_fire");
   delay_thread(2, ::flag_set, "spawn_nitrogen_guys");
   delay_thread(6, ::flag_set, "start_shooting_lift");
@@ -1864,7 +1864,7 @@ inside_lift_move_down() {
   bm_door_south_r movey(-60, 2, 0.5);
   bm_door_south_r waittill("movedone");
   flag_set("lift_at_bottom");
-  level.player setcandamage(1);
+  level.player setCanDamage(1);
   bm_door_south_l linkto(m_lift);
   bm_door_south_r linkto(m_lift);
   bm_door_north_l linkto(m_lift);
@@ -1881,7 +1881,7 @@ inside_lift_move_down() {
 
 elevator_loop_n_stop_sounds() {
   elevator_ent_2 = spawn("script_origin", (0, 0, 0));
-  elevator_ent_2 playloopsound("evt_elevator_loop", 2.5);
+  elevator_ent_2 playLoopSound("evt_elevator_loop", 2.5);
   wait 6;
   elevator_ent_2 stoploopsound(1);
   playsoundatposition("evt_elevator_stop", (9277, 57793, -943));
@@ -1892,7 +1892,7 @@ inside_lift_move_up() {
   m_lift = getent("lift_interior_m", "targetname");
   flag_wait("start_lift_move_up");
   elevator_ent = spawn("script_origin", (9385, 57792, -987));
-  elevator_ent playloopsound("evt_elevator_loop_3d", 0.5);
+  elevator_ent playLoopSound("evt_elevator_loop_3d", 0.5);
   level thread elevator_stop_1_sound(elevator_ent);
   m_lift play_fx("lift_light", m_lift.origin, m_lift.angles, undefined, 1);
   s_elevator_spotight_struct = getstruct("elevator_spotight_struct", "targetname");

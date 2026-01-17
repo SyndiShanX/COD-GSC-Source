@@ -5,7 +5,7 @@
 
 init() {
   foreach(team in level.teams)
-  level.spectateoverride[team] = spawnstruct();
+  level.spectateoverride[team] = spawnStruct();
 
   level thread onplayerconnect();
 }

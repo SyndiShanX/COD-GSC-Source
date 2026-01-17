@@ -584,9 +584,7 @@ turnTowardsVector(targetVector) {
 
 getTurnInPlaceAnimState() {
   if(isDefined(level.dlc_alien_turn_in_place_anim_state_override_func)) {
-    animState = [
-      [level.dlc_alien_turn_in_place_anim_state_override_func]
-    ]();
+    animState = [[level.dlc_alien_turn_in_place_anim_state_override_func]]();
     if(isDefined(animState))
       return animState;
   }

@@ -6,9 +6,9 @@
 #include maps\_utility;
 
 main(objective_number, objective_text, array_targetname, activate_notify) {
-  documents = getentarray(array_targetname, "targetname");
+  documents = getEntArray(array_targetname, "targetname");
   println(array_targetname, " documents.size: ", documents.size);
-  for (i = 0; i < documents.size; i++) {
+  for(i = 0; i < documents.size; i++) {
     documents[i].document = getent(documents[i].target, "targetname");
     documents[i].used = 0;
     documents[i] thread document_think(activate_notify, array_targetname);
@@ -20,7 +20,7 @@ main(objective_number, objective_text, array_targetname, activate_notify) {
       objective_add(objective_number, "active", objective_text, (closest.document.origin));
       objective_string(objective_number, objective_text, remaining_documents);
     }
-    while (1) {
+    while(1) {
       level waittill(array_targetname + " gotten");
       remaining_documents--;
       objective_string(objective_number, objective_text, remaining_documents);
@@ -42,10 +42,10 @@ get_closest_document(array) {
   range = 500000000;
   newrange = undefined;
   ent = undefined;
-  for (i = 0; i < array.size; i++) {
+  for(i = 0; i < array.size; i++) {
     if(!array[i].used) {
       players = get_players();
-      for (m = 0; m < players.size; m++) {
+      for(m = 0; m < players.size; m++) {
         newrange = distance(players[m] getorigin(), array[i].document.origin);
         if(newrange < range) {
           range = newrange;

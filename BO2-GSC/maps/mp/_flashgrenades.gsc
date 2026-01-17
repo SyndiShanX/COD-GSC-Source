@@ -61,8 +61,7 @@ monitorflash_internal(amount_distance, amount_angle, attacker, direct_on_player)
   if(level.teambased && isDefined(attacker) && isDefined(attacker.team) && attacker.team == self.team && attacker != self) {
     if(level.friendlyfire == 0)
       return;
-    else if(level.friendlyfire == 1) {
-    } else if(level.friendlyfire == 2) {
+    else if(level.friendlyfire == 1) {} else if(level.friendlyfire == 2) {
       duration = duration * 0.5;
       rumbleduration = rumbleduration * 0.5;
       hurtvictim = 0;
@@ -155,13 +154,13 @@ playflashsound(duration) {
   flashsound.origin = self.origin;
   flashsound linkto(self);
   flashsound thread deleteentonownerdeath(self);
-  flashsound playsound(level.sound_flash_start);
-  flashsound playloopsound(level.sound_flash_loop);
+  flashsound playSound(level.sound_flash_start);
+  flashsound playLoopSound(level.sound_flash_loop);
 
   if(duration > 0.5)
     wait(duration - 0.5);
 
-  flashsound playsound(level.sound_flash_start);
+  flashsound playSound(level.sound_flash_start);
   flashsound stoploopsound(0.5);
   wait 0.5;
   flashsound notify("delete");

@@ -17,11 +17,11 @@ main() {
   game["defenders"] = "axis";
   game["allies_soldiertype"] = "german";
   game["axis_soldiertype"] = "german";
-  game["strings"]["war_callsign_a"] = & "PATCH_CALLSIGN_STALINGRAD_A";
-  game["strings"]["war_callsign_b"] = & "PATCH_CALLSIGN_STALINGRAD_B";
-  game["strings"]["war_callsign_c"] = & "PATCH_CALLSIGN_STALINGRAD_C";
-  game["strings"]["war_callsign_d"] = & "PATCH_CALLSIGN_STALINGRAD_D";
-  game["strings"]["war_callsign_e"] = & "PATCH_CALLSIGN_STALINGRAD_E";
+  game["strings"]["war_callsign_a"] = &"PATCH_CALLSIGN_STALINGRAD_A";
+  game["strings"]["war_callsign_b"] = &"PATCH_CALLSIGN_STALINGRAD_B";
+  game["strings"]["war_callsign_c"] = &"PATCH_CALLSIGN_STALINGRAD_C";
+  game["strings"]["war_callsign_d"] = &"PATCH_CALLSIGN_STALINGRAD_D";
+  game["strings"]["war_callsign_e"] = &"PATCH_CALLSIGN_STALINGRAD_E";
   game["strings_menu"]["war_callsign_a"] = "@PATCH_CALLSIGN_STALINGRAD_A";
   game["strings_menu"]["war_callsign_b"] = "@PATCH_CALLSIGN_STALINGRAD_B";
   game["strings_menu"]["war_callsign_c"] = "@PATCH_CALLSIGN_STALINGRAD_C";
@@ -33,8 +33,8 @@ main() {
 }
 
 move_spawn_point(targetname, start_point, new_point) {
-  spawn_points = getentarray(targetname, "classname");
-  for (i = 0; i < spawn_points.size; i++) {
+  spawn_points = getEntArray(targetname, "classname");
+  for(i = 0; i < spawn_points.size; i++) {
     if(distancesquared(spawn_points[i].origin, start_point) < 1) {
       spawn_points[i].origin = new_point;
       return;

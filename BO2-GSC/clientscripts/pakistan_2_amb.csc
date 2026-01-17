@@ -111,11 +111,11 @@ waitfor_underwater() {
 anthem_clocktower_toll() {
   level waittill("clck");
   wait 10;
-  playsound(0, "amb_anthem_clocktower_bell_start", (-18814, 41708, 1394));
+  playSound(0, "amb_anthem_clocktower_bell_start", (-18814, 41708, 1394));
   wait 14;
 
   for(i = 0; i < 6; i++) {
-    playsound(0, "amb_anthem_clocktower_bell", (-18814, 41708, 1394));
+    playSound(0, "amb_anthem_clocktower_bell", (-18814, 41708, 1394));
     wait 2;
   }
 }
@@ -131,7 +131,7 @@ anthem_random_pa() {
 
   while(true) {
     wait(randomintrange(20, 37));
-    playsound(0, "amb_anthem_random_pa", origin);
+    playSound(0, "amb_anthem_random_pa", origin);
   }
 }
 
@@ -151,7 +151,7 @@ anthem_random_yells() {
     wait(randomintrange(7, 16));
 
     for(i = 0; i < randomintrange(2, 5); i++) {
-      playsound(0, "amb_anthem_yell_randoms", origin[i]);
+      playSound(0, "amb_anthem_yell_randoms", origin[i]);
       wait(randomfloatrange(1, 3));
     }
 
@@ -177,8 +177,7 @@ snd_play_gaz_idle() {
   stoploopat("evt_truck_idle", (-17935, 35400, 487), "evt_truck_shutoff");
 }
 
-snd_start_autofx_audio() {
-}
+snd_start_autofx_audio() {}
 
 underwater_explo() {
   snd_add_exploder_alias(700, "evt_anim_ugrnd_grenades_exp");
@@ -221,7 +220,7 @@ menendezchangedvar(menendez) {
   if(!isDefined(level.survsndent))
     level.survsndent = spawn(0, (0, 0, 0), "script_origin");
 
-  loop_id = level.survsndent playloopsound("evt_static_loop", 1);
+  loop_id = level.survsndent playLoopSound("evt_static_loop", 1);
   setsoundvolume(loop_id, 0);
 
   while(true) {
@@ -247,7 +246,7 @@ set_dvar_and_volume(loop_id, set) {
 
 get_view_num(start_origin, start_angles, end_origin) {
   normal = vectornormalize(end_origin - start_origin);
-  forward = anglestoforward(start_angles);
+  forward = anglesToForward(start_angles);
   dot = vectordot(forward, normal);
   return dot;
 }
@@ -283,11 +282,11 @@ mill_scanner() {
   while(true) {
     level waittill("millibar_on");
     scanent = spawn(0, (0, 0, 0), "script_origin");
-    scanent playloopsound("evt_mill_scan");
-    playsound(0, "evt_mill_scan_on", (0, 0, 0));
+    scanent playLoopSound("evt_mill_scan");
+    playSound(0, "evt_mill_scan_on", (0, 0, 0));
     level waittill("millibar_off");
     scanent stoploopsound(0.5);
-    playsound(0, "evt_mill_scan_off", (0, 0, 0));
+    playSound(0, "evt_mill_scan_off", (0, 0, 0));
     wait 1;
     scanent delete();
   }
@@ -296,5 +295,5 @@ mill_scanner() {
 drone_crane() {
   level waittill("drone_sfx");
   wait 1.2;
-  playsound(0, "evt_drone_crane", (0, 0, 0));
+  playSound(0, "evt_drone_crane", (0, 0, 0));
 }

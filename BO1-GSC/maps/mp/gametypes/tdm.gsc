@@ -35,17 +35,17 @@ main() {
 }
 onStartGameType() {
   setClientNameMode("auto_change");
-  maps\mp\gametypes\_globallogic_ui::setObjectiveText("allies", & "OBJECTIVES_TDM");
-  maps\mp\gametypes\_globallogic_ui::setObjectiveText("axis", & "OBJECTIVES_TDM");
+  maps\mp\gametypes\_globallogic_ui::setObjectiveText("allies", &"OBJECTIVES_TDM");
+  maps\mp\gametypes\_globallogic_ui::setObjectiveText("axis", &"OBJECTIVES_TDM");
   if(level.splitscreen) {
-    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("allies", & "OBJECTIVES_TDM");
-    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("axis", & "OBJECTIVES_TDM");
+    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("allies", &"OBJECTIVES_TDM");
+    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("axis", &"OBJECTIVES_TDM");
   } else {
-    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("allies", & "OBJECTIVES_TDM_SCORE");
-    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("axis", & "OBJECTIVES_TDM_SCORE");
+    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("allies", &"OBJECTIVES_TDM_SCORE");
+    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("axis", &"OBJECTIVES_TDM_SCORE");
   }
-  maps\mp\gametypes\_globallogic_ui::setObjectiveHintText("allies", & "OBJECTIVES_TDM_HINT");
-  maps\mp\gametypes\_globallogic_ui::setObjectiveHintText("axis", & "OBJECTIVES_TDM_HINT");
+  maps\mp\gametypes\_globallogic_ui::setObjectiveHintText("allies", &"OBJECTIVES_TDM_HINT");
+  maps\mp\gametypes\_globallogic_ui::setObjectiveHintText("axis", &"OBJECTIVES_TDM_HINT");
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);
   maps\mp\gametypes\_spawnlogic::placeSpawnPoints("mp_tdm_spawn_allies_start");
@@ -99,9 +99,7 @@ onSpawnPlayer() {
 }
 onEndGame(winningTeam) {
   if(isDefined(winningTeam) && (winningTeam == "allies" || winningTeam == "axis"))
-    [[level._setTeamScore]](winningTeam, [
-      [level._getTeamScore]
-    ](winningTeam) + 1);
+    [[level._setTeamScore]](winningTeam, [[level._getTeamScore]](winningTeam) + 1);
 }
 onRoundEndGame(roundWinner) {
   if(game["roundswon"]["allies"] == game["roundswon"]["axis"])
@@ -113,13 +111,9 @@ onRoundEndGame(roundWinner) {
   return winner;
 }
 onScoreCloseMusic() {
-  while (!level.gameEnded) {
-    axisScore = [
-      [level._getTeamScore]
-    ]("axis");
-    alliedScore = [
-      [level._getTeamScore]
-    ]("allies");
+  while(!level.gameEnded) {
+    axisScore = [[level._getTeamScore]]("axis");
+    alliedScore = [[level._getTeamScore]]("allies");
     scoreLimit = level.scoreLimit;
     scoreThreshold = scoreLimit * .1;
     scoreDif = abs(axisScore - alliedScore);

@@ -60,8 +60,8 @@ set_vehicle_anims(var_0) {
 setanims() {
   var_0 = [];
 
-  for (var_1 = 0; var_1 < 0; var_1++)
-    var_0[var_1] = spawnstruct();
+  for(var_1 = 0; var_1 < 0; var_1++)
+    var_0[var_1] = spawnStruct();
 
   return var_0;
 }
@@ -69,16 +69,16 @@ setanims() {
 unload_groups() {}
 
 set_attached_models() {
-  while (!isdefined(level.seaknight))
+  while(!isDefined(level.seaknight))
     wait 0.05;
 
   var_0 = spawn("script_model", level.seaknight.origin);
-  var_0 setmodel("vehicle_ch46e_opened_door_interior_b");
+  var_0 setModel("vehicle_ch46e_opened_door_interior_b");
   var_0.origin = level.seaknight gettagorigin("body_animate_jnt");
   var_0.angles = level.seaknight.angles;
   var_0 linkto(level.seaknight, "body_animate_jnt");
   var_0 = spawn("script_model", level.seaknight.origin);
-  var_0 setmodel("vehicle_ch46e_wires");
+  var_0 setModel("vehicle_ch46e_wires");
   var_0.origin = level.seaknight gettagorigin("body_animate_jnt");
   var_0.angles = level.seaknight.angles;
   var_0 linkto(level.seaknight, "body_animate_jnt");

@@ -15,17 +15,15 @@ main() {
     return;
   }
 
-  if(isdefined(self.customarrivalfunc)) {
-    [
-      [self.customarrivalfunc]
-    ]();
+  if(isDefined(self.customarrivalfunc)) {
+    [[self.customarrivalfunc]]();
     return;
   }
 
   var_0 = self.approachnumber;
   var_1 = animscripts\utility::lookupanim("cover_trans", self.approachtype)[var_0];
 
-  if(!isdefined(self.heat))
+  if(!isDefined(self.heat))
     thread abortapproachifthreatened();
 
   self clearanim( % body, 0.2);
@@ -34,7 +32,7 @@ main() {
   animscripts\shared::donotetracks("coverArrival", ::handlestartaim);
   var_2 = anim.arrivalendstance[self.approachtype];
 
-  if(isdefined(var_2))
+  if(isDefined(var_2))
     self.a.pose = var_2;
 
   self.a.movement = "stop";
@@ -45,16 +43,14 @@ main() {
 
 handlestartaim(var_0) {
   if(var_0 == "start_aim") {
-    if(isdefined(self.a.dontstartaim) && self.a.dontstartaim) {
+    if(isDefined(self.a.dontstartaim) && self.a.dontstartaim) {
       return;
     }
     if(self.a.pose == "stand")
       animscripts\animset::set_animarray_standing();
     else if(self.a.pose == "crouch")
       animscripts\animset::set_animarray_crouching();
-    else {
-
-    }
+    else {}
 
     animscripts\combat::set_aim_and_turn_limits();
     self.previouspitchdelta = 0.0;
@@ -64,10 +60,10 @@ handlestartaim(var_0) {
 }
 
 isthreatenedbyenemy() {
-  if(!isdefined(self.node))
+  if(!isDefined(self.node))
     return 0;
 
-  if(isdefined(self.enemy) && self seerecently(self.enemy, 1.5) && distancesquared(self.origin, self.enemy.origin) < 250000)
+  if(isDefined(self.enemy) && self seerecently(self.enemy, 1.5) && distancesquared(self.origin, self.enemy.origin) < 250000)
     return !self iscovervalidagainstenemy();
 
   return 0;
@@ -76,8 +72,8 @@ isthreatenedbyenemy() {
 abortapproachifthreatened() {
   self endon("killanimscript");
 
-  for (;;) {
-    if(!isdefined(self.node)) {
+  for(;;) {
+    if(!isDefined(self.node)) {
       return;
     }
     if(isthreatenedbyenemy()) {
@@ -95,13 +91,13 @@ canusesawapproach(var_0) {
   if(!animscripts\utility::usingmg())
     return 0;
 
-  if(!isdefined(var_0.turretinfo))
+  if(!isDefined(var_0.turretinfo))
     return 0;
 
   if(var_0.type != "Cover Stand" && var_0.type != "Cover Prone" && var_0.type != "Cover Crouch")
     return 0;
 
-  if(isdefined(self.enemy) && distancesquared(self.enemy.origin, var_0.origin) < 65536)
+  if(isDefined(self.enemy) && distancesquared(self.enemy.origin, var_0.origin) < 65536)
     return 0;
 
   if(animscripts\utility::getnodeyawtoenemy() > 40 || animscripts\utility::getnodeyawtoenemy() < -40)
@@ -111,7 +107,7 @@ canusesawapproach(var_0) {
 }
 
 determinenodeapproachtype(var_0) {
-  if(isdefined(self.mech) && self.mech)
+  if(isDefined(self.mech) && self.mech)
     return "exposed";
 
   var_1 = var_0.type;
@@ -120,8 +116,8 @@ determinenodeapproachtype(var_0) {
     return "free_run_into_cover_crouch";
 
   if(var_1 == "Cover Multi") {
-    if(!isdefined(self.cover))
-      self.cover = spawnstruct();
+    if(!isDefined(self.cover))
+      self.cover = spawnStruct();
 
     var_2 = animscripts\cover_multi::covermulti_getbestvaliddir(["over", ["left", "right"]]);
     self.cover.arrivalnodetype = var_2;
@@ -139,12 +135,12 @@ determinenodeapproachtype(var_0) {
       return "prone_saw";
   }
 
-  if(!isdefined(anim.approach_types[var_1])) {
+  if(!isDefined(anim.approach_types[var_1])) {
     return;
   }
-  if(isdefined(var_0.arrivalstance))
+  if(isDefined(var_0.arrivalstance))
     var_4 = var_0.arrivalstance;
-  else if(isdefined(var_0.classname) && var_0.classname == "script_origin")
+  else if(isDefined(var_0.classname) && var_0.classname == "script_origin")
     var_4 = "stand";
   else
     var_4 = var_0 gethighestnodestance();
@@ -178,7 +174,7 @@ determinenodeapproachtype(var_0) {
   if(animscripts\utility::shouldcqb()) {
     var_6 = var_5 + "_cqb";
 
-    if(isdefined(anim.archetypes["soldier"]["cover_trans"][var_6]))
+    if(isDefined(anim.archetypes["soldier"]["cover_trans"][var_6]))
       var_5 = var_6;
   }
 
@@ -186,10 +182,10 @@ determinenodeapproachtype(var_0) {
 }
 
 determineexposedapproachtype(var_0) {
-  if(isdefined(self.heat))
+  if(isDefined(self.heat))
     return "heat";
 
-  if(isdefined(var_0.arrivalstance))
+  if(isDefined(var_0.arrivalstance))
     var_1 = var_0.arrivalstance;
   else
     var_1 = var_0 gethighestnodestance();
@@ -222,15 +218,15 @@ determineexposedapproachtype(var_0) {
 
 calculatenodeoffsetfromanimationdelta(var_0, var_1) {
   var_2 = anglestoright(var_0);
-  var_3 = anglestoforward(var_0);
+  var_3 = anglesToForward(var_0);
   return var_3 * var_1[0] + var_2 * (0 - var_1[1]);
 }
 
 getapproachent() {
-  if(isdefined(self.scriptedarrivalent))
+  if(isDefined(self.scriptedarrivalent))
     return self.scriptedarrivalent;
 
-  if(isdefined(self.node))
+  if(isDefined(self.node))
     return self.node;
 
   return undefined;
@@ -239,20 +235,20 @@ getapproachent() {
 getapproachpoint(var_0, var_1) {
   if(var_1 == "stand_saw") {
     var_2 = (var_0.turretinfo.origin[0], var_0.turretinfo.origin[1], var_0.origin[2]);
-    var_3 = anglestoforward((0, var_0.turretinfo.angles[1], 0));
+    var_3 = anglesToForward((0, var_0.turretinfo.angles[1], 0));
     var_4 = anglestoright((0, var_0.turretinfo.angles[1], 0));
     var_2 = var_2 + var_3 * -32.545 - var_4 * 6.899;
   } else if(var_1 == "crouch_saw") {
     var_2 = (var_0.turretinfo.origin[0], var_0.turretinfo.origin[1], var_0.origin[2]);
-    var_3 = anglestoforward((0, var_0.turretinfo.angles[1], 0));
+    var_3 = anglesToForward((0, var_0.turretinfo.angles[1], 0));
     var_4 = anglestoright((0, var_0.turretinfo.angles[1], 0));
     var_2 = var_2 + var_3 * -32.545 - var_4 * 6.899;
   } else if(var_1 == "prone_saw") {
     var_2 = (var_0.turretinfo.origin[0], var_0.turretinfo.origin[1], var_0.origin[2]);
-    var_3 = anglestoforward((0, var_0.turretinfo.angles[1], 0));
+    var_3 = anglesToForward((0, var_0.turretinfo.angles[1], 0));
     var_4 = anglestoright((0, var_0.turretinfo.angles[1], 0));
     var_2 = var_2 + var_3 * -37.36 - var_4 * 13.279;
-  } else if(isdefined(self.scriptedarrivalent))
+  } else if(isDefined(self.scriptedarrivalent))
     var_2 = self.goalpos;
   else
     var_2 = var_0.origin;
@@ -261,17 +257,17 @@ getapproachpoint(var_0, var_1) {
 }
 
 checkapproachpreconditions() {
-  if(isdefined(self getnegotiationstartnode()))
+  if(isDefined(self getnegotiationstartnode()))
     return 0;
 
-  if(isdefined(self.disablearrivals) && self.disablearrivals)
+  if(isDefined(self.disablearrivals) && self.disablearrivals)
     return 0;
 
   return 1;
 }
 
 checkapproachconditions(var_0, var_1, var_2) {
-  if(isdefined(anim.exposedtransition[var_0]))
+  if(isDefined(anim.exposedtransition[var_0]))
     return 0;
 
   if(var_0 == "stand" || var_0 == "crouch" || var_0 == "stand_unstable") {
@@ -279,7 +275,7 @@ checkapproachconditions(var_0, var_1, var_2) {
       return 0;
   }
 
-  if(isthreatenedbyenemy() || isdefined(self.lastapproachaborttime) && self.lastapproachaborttime + 500 > gettime())
+  if(isthreatenedbyenemy() || isDefined(self.lastapproachaborttime) && self.lastapproachaborttime + 500 > gettime())
     return 0;
 
   return 1;
@@ -288,7 +284,7 @@ checkapproachconditions(var_0, var_1, var_2) {
 setupapproachnode(var_0) {
   self endon("killanimscript");
 
-  if(isdefined(self.heat)) {
+  if(isDefined(self.heat)) {
     thread dolastminuteexposedapproachwrapper();
     return;
   }
@@ -315,10 +311,10 @@ setupapproachnode(var_0) {
   var_5 = var_4;
   var_6 = getapproachent();
 
-  if(isdefined(var_6)) {
+  if(isDefined(var_6)) {
     var_2 = determinenodeapproachtype(var_6);
 
-    if(isdefined(var_2) && var_2 != "exposed") {
+    if(isDefined(var_2) && var_2 != "exposed") {
       var_3 = getapproachpoint(var_6, var_2);
       var_4 = var_6.angles[1];
       var_5 = animscripts\utility::getnodeforwardyaw(var_6);
@@ -337,18 +333,18 @@ setupapproachnode(var_0) {
 }
 
 coverapproachlastminutecheck(var_0, var_1, var_2, var_3, var_4) {
-  if(isdefined(self.disablearrivals) && self.disablearrivals)
+  if(isDefined(self.disablearrivals) && self.disablearrivals)
     return 0;
 
-  if(abs(self getmotionangle()) > 45 && isdefined(self.enemy) && vectordot(anglestoforward(self.angles), vectornormalize(self.enemy.origin - self.origin)) > 0.8)
+  if(abs(self getmotionangle()) > 45 && isDefined(self.enemy) && vectordot(anglesToForward(self.angles), vectornormalize(self.enemy.origin - self.origin)) > 0.8)
     return 0;
 
   if(self.a.pose != "stand" || self.a.movement != "run" && !animscripts\utility::iscqbwalkingorfacingenemy())
     return 0;
 
   if(animscripts\utility::absangleclamp180(var_4 - self.angles[1]) > 30) {
-    if(isdefined(self.enemy) && self cansee(self.enemy) && distancesquared(self.origin, self.enemy.origin) < 65536) {
-      if(vectordot(anglestoforward(self.angles), self.enemy.origin - self.origin) > 0)
+    if(isDefined(self.enemy) && self cansee(self.enemy) && distancesquared(self.origin, self.enemy.origin) < 65536) {
+      if(vectordot(anglesToForward(self.angles), self.enemy.origin - self.origin) > 0)
         return 0;
     }
   }
@@ -360,18 +356,18 @@ coverapproachlastminutecheck(var_0, var_1, var_2, var_3, var_4) {
 }
 
 approachwaittillclose(var_0, var_1, var_2) {
-  if(!isdefined(var_0)) {
+  if(!isDefined(var_0)) {
     return;
   }
   var_3 = undefined;
 
-  for (;;) {
-    if(!isdefined(self.pathgoalpos))
+  for(;;) {
+    if(!isDefined(self.pathgoalpos))
       waitforpathgoalpos();
 
     var_4 = distance(self.origin, self.pathgoalpos);
 
-    if(isdefined(var_2)) {
+    if(isDefined(var_2)) {
       var_5 = calculateapproachdir();
       var_6 = calculatedesiredfacingyaw(var_5);
       var_7 = calculatelastminuteanimdistance(var_5, var_6, var_0, 1, var_2.approachtype);
@@ -406,14 +402,14 @@ startcoverapproach(var_0, var_1, var_2, var_3, var_4) {
   self endon("killanimscript");
   self endon("cover_approach");
 
-  if(isdefined(self.disablearrivals) && self.disablearrivals) {
+  if(isDefined(self.disablearrivals) && self.disablearrivals) {
     return;
   }
   var_5 = getapproachent();
   var_6 = animscripts\exit_node::getmaxdirectionsandexcludedirfromapproachtype(var_5);
   var_7 = var_6.maxdirections;
   var_8 = var_6.excludedir;
-  var_9 = vectordot(var_4, anglestoforward(var_5.angles)) >= 0;
+  var_9 = vectordot(var_4, anglesToForward(var_5.angles)) >= 0;
   var_6 = checkarrivalenterpositions(var_1, var_3, var_0, var_4, var_7, var_8, var_9);
 
   if(var_6.approachnumber < 0) {
@@ -424,9 +420,9 @@ startcoverapproach(var_0, var_1, var_2, var_3, var_4) {
   if(var_10 <= 6 && var_9) {
     self endon("goal_changed");
 
-    if(isdefined(self.animarchetype) && isdefined(anim.archetypes[self.animarchetype]) && isdefined(anim.archetypes[self.animarchetype]["CoverTransLongestDist"][var_0]))
+    if(isDefined(self.animarchetype) && isDefined(anim.archetypes[self.animarchetype]) && isDefined(anim.archetypes[self.animarchetype]["CoverTransLongestDist"][var_0]))
       self.arrivalstartdist = anim.archetypes[self.animarchetype]["CoverTransLongestDist"][var_0];
-    else if(isdefined(anim.archetypes["soldier"]["CoverTransLongestDist"][var_0]))
+    else if(isDefined(anim.archetypes["soldier"]["CoverTransLongestDist"][var_0]))
       self.arrivalstartdist = anim.archetypes["soldier"]["CoverTransLongestDist"][var_0];
     else
       self.arrivalstartdist = 8;
@@ -435,7 +431,7 @@ startcoverapproach(var_0, var_1, var_2, var_3, var_4) {
     var_11 = vectornormalize(var_1 - self.origin);
     var_6 = checkarrivalenterpositions(var_1, var_3, var_0, var_11, var_7, var_8, var_9);
     self.arrivalstartdist = length(animscripts\utility::lookuptransitionanim("cover_trans_dist", var_0, var_10));
-    var_12 = spawnstruct();
+    var_12 = spawnStruct();
     var_12.approachtype = var_0;
     var_12.approachpoint = var_1;
     var_12.arrivalfromfront = var_9;
@@ -478,15 +474,15 @@ startcoverapproach(var_0, var_1, var_2, var_3, var_4) {
 }
 
 checkarrivalenterpositions(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  var_7 = spawnstruct();
+  var_7 = spawnStruct();
   animscripts\exit_node::calculatenodetransitionangles(var_7, var_2, 1, var_1, var_3, var_4, var_5);
   animscripts\exit_node::sortnodetransitionangles(var_7, var_4);
-  var_8 = spawnstruct();
+  var_8 = spawnStruct();
   var_9 = (0, 0, 0);
   var_8.approachnumber = -1;
   var_10 = 2;
 
-  for (var_11 = 1; var_11 <= var_10; var_11++) {
+  for(var_11 = 1; var_11 <= var_10; var_11++) {
     var_8.approachnumber = var_7.transindex[var_11];
 
     if(!checkcoverenterpos(var_0, var_1, var_2, var_8.approachnumber, var_6)) {
@@ -512,7 +508,7 @@ checkarrivalenterpositions(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     if(!var_6) {
       var_14 = vectornormalize(self.coverenterpos - self.origin);
       var_15 = var_1 - animscripts\utility::lookuptransitionanim("cover_trans_angles", var_2, var_8.approachnumber);
-      var_16 = anglestoforward((0, var_15, 0));
+      var_16 = anglesToForward((0, var_15, 0));
       var_17 = vectordot(var_14, var_16);
 
       if(var_17 < 0.707) {
@@ -532,13 +528,13 @@ dolastminuteexposedapproachwrapper() {
   self endon("doing_last_minute_exposed_approach");
   thread watchgoalchanged();
 
-  for (;;) {
+  for(;;) {
     dolastminuteexposedapproach();
 
-    for (;;) {
+    for(;;) {
       common_scripts\utility::waittill_any("goal_changed", "goal_changed_previous_frame");
 
-      if(isdefined(self.coverenterpos) && isdefined(self.pathgoalpos) && distance2d(self.coverenterpos, self.pathgoalpos) < 1) {
+      if(isDefined(self.coverenterpos) && isDefined(self.pathgoalpos) && distance2d(self.coverenterpos, self.pathgoalpos) < 1) {
         continue;
       }
       break;
@@ -550,7 +546,7 @@ watchgoalchanged() {
   self endon("killanimscript");
   self endon("doing_last_minute_exposed_approach");
 
-  for (;;) {
+  for(;;) {
     self waittill("goal_changed");
     wait 0.05;
     self notify("goal_changed_previous_frame");
@@ -558,24 +554,24 @@ watchgoalchanged() {
 }
 
 exposedapproachconditioncheck(var_0, var_1) {
-  if(!isdefined(self.pathgoalpos))
+  if(!isDefined(self.pathgoalpos))
     return 0;
 
-  if(isdefined(self.disablearrivals) && self.disablearrivals)
+  if(isDefined(self.disablearrivals) && self.disablearrivals)
     return 0;
 
-  if(isdefined(self.approachconditioncheckfunc)) {
+  if(isDefined(self.approachconditioncheckfunc)) {
     if(!self[[self.approachconditioncheckfunc]](var_0))
       return 0;
   } else {
-    if(!self.facemotion && (!isdefined(var_0) || var_0.type == "Path" || var_0.type == "Path 3D"))
+    if(!self.facemotion && (!isDefined(var_0) || var_0.type == "Path" || var_0.type == "Path 3D"))
       return 0;
 
     if(self.a.pose != "stand")
       return 0;
   }
 
-  if(isthreatenedbyenemy() || isdefined(self.lastapproachaborttime) && self.lastapproachaborttime + 500 > gettime())
+  if(isthreatenedbyenemy() || isDefined(self.lastapproachaborttime) && self.lastapproachaborttime + 500 > gettime())
     return 0;
 
   if(!self maymovetopoint(self.pathgoalpos, 1, 0, level.h1_arrival_ignores_player))
@@ -585,13 +581,13 @@ exposedapproachconditioncheck(var_0, var_1) {
 }
 
 exposedapproachwaittillclose() {
-  for (;;) {
-    if(!isdefined(self.pathgoalpos))
+  for(;;) {
+    if(!isDefined(self.pathgoalpos))
       waitforpathgoalpos();
 
     var_0 = getapproachent();
 
-    if(isdefined(var_0) && !isdefined(self.heat))
+    if(isDefined(var_0) && !isDefined(self.heat))
       var_1 = var_0.origin;
     else
       var_1 = self.pathgoalpos;
@@ -599,7 +595,7 @@ exposedapproachwaittillclose() {
     var_2 = distance(self.origin, var_1);
     var_3 = 0;
 
-    if(isdefined(self.animarchetype) && isdefined(anim.archetypes[self.animarchetype]) && isdefined(anim.archetypes[self.animarchetype]["longestExposedApproachDist"]))
+    if(isDefined(self.animarchetype) && isDefined(anim.archetypes[self.animarchetype]) && isDefined(anim.archetypes[self.animarchetype]["longestExposedApproachDist"]))
       var_3 = anim.archetypes[self.animarchetype]["longestExposedApproachDist"];
     else
       var_3 = anim.archetypes["soldier"]["longestExposedApproachDist"];
@@ -622,10 +618,10 @@ exposedapproachwaittillclose() {
 }
 
 faceenemyatendofapproach(var_0) {
-  if(!isdefined(self.enemy))
+  if(!isDefined(self.enemy))
     return 0;
 
-  if(isdefined(self.heat) && isdefined(var_0))
+  if(isDefined(self.heat) && isDefined(var_0))
     return 0;
 
   if(self.combatmode == "cover" && issentient(self.enemy) && gettime() - self lastknowntime(self.enemy) > 15000)
@@ -638,12 +634,12 @@ faceenemyatendofapproach(var_0) {
 }
 
 calculatelastminuteanimdistance(var_0, var_1, var_2, var_3, var_4) {
-  if(isdefined(self.faceenemyarrival))
+  if(isDefined(self.faceenemyarrival))
     var_1 = self.angles[1];
   else if(faceenemyatendofapproach(var_2))
     var_1 = vectortoyaw(self.enemy.origin - self.pathgoalpos);
   else {
-    var_5 = isdefined(var_2) && var_3;
+    var_5 = isDefined(var_2) && var_3;
     var_5 = var_5 && var_2.type != "Path" && var_2.type != "Path 3D" && (var_2.type != "Ambush" || !animscripts\utility::recentlysawenemy());
 
     if(var_5)
@@ -651,16 +647,16 @@ calculatelastminuteanimdistance(var_0, var_1, var_2, var_3, var_4) {
     else {
       var_6 = self getanglestolikelyenemypath();
 
-      if(isdefined(var_6))
+      if(isDefined(var_6))
         var_1 = var_6[1];
     }
   }
 
-  var_7 = spawnstruct();
+  var_7 = spawnStruct();
   animscripts\exit_node::calculatenodetransitionangles(var_7, var_4, 1, var_1, var_0, 9, -1);
   var_8 = 1;
 
-  for (var_9 = 2; var_9 <= 9; var_9++) {
+  for(var_9 = 2; var_9 <= 9; var_9++) {
     if(var_7.transitions[var_9] > var_7.transitions[var_8])
       var_8 = var_9;
   }
@@ -669,7 +665,7 @@ calculatelastminuteanimdistance(var_0, var_1, var_2, var_3, var_4) {
   self.approachtype = var_4;
   var_10 = animscripts\utility::lookuptransitionanim("cover_trans", var_4, self.approachnumber);
 
-  if(!isdefined(var_10) || isdefined(self.disableapproach)) {
+  if(!isDefined(var_10) || isDefined(self.disableapproach)) {
     return;
   }
   var_11 = length(animscripts\utility::lookuptransitionanim("cover_trans_dist", var_4, self.approachnumber));
@@ -696,21 +692,21 @@ dolastminuteexposedapproach() {
   self endon("goal_changed");
   self endon("move_interrupt");
 
-  if(isdefined(self.disablearrivals) && self.disablearrivals) {
+  if(isDefined(self.disablearrivals) && self.disablearrivals) {
     return;
   }
-  if(isdefined(self getnegotiationstartnode())) {
+  if(isDefined(self getnegotiationstartnode())) {
     return;
   }
   exposedapproachwaittillclose();
 
-  if(isdefined(self.grenade) && isdefined(self.grenade.activator) && self.grenade.activator == self) {
+  if(isDefined(self.grenade) && isDefined(self.grenade.activator) && self.grenade.activator == self) {
     return;
   }
   var_0 = "exposed";
   var_1 = 1;
 
-  if(isdefined(self.approachtypefunc))
+  if(isDefined(self.approachtypefunc))
     var_0 = self[[self.approachtypefunc]]();
   else if(animscripts\utility::isunstableground()) {
     var_0 = "exposed_unstable";
@@ -724,7 +720,7 @@ dolastminuteexposedapproach() {
       var_0 = "exposed_ready";
   } else if(animscripts\utility::shouldcqb())
     var_0 = "exposed_cqb";
-  else if(isdefined(self.heat)) {
+  else if(isDefined(self.heat)) {
     var_0 = "heat";
     var_1 = 4096;
   } else if(animscripts\utility::usingsmg())
@@ -732,27 +728,27 @@ dolastminuteexposedapproach() {
 
   var_2 = getapproachent();
 
-  if(isdefined(var_2) && isdefined(self.pathgoalpos) && !isdefined(self.disablecoverarrivalsonly))
+  if(isDefined(var_2) && isDefined(self.pathgoalpos) && !isDefined(self.disablecoverarrivalsonly))
     var_3 = distancesquared(self.pathgoalpos, var_2.origin) < var_1;
   else
     var_3 = 0;
 
-  if(var_3 && !isdefined(self.approachtypefunc))
+  if(var_3 && !isDefined(self.approachtypefunc))
     var_0 = determineexposedapproachtype(var_2);
 
-  if(isdefined(self.mech) && self.mech)
+  if(isDefined(self.mech) && self.mech)
     var_0 = "exposed";
 
   var_4 = calculateapproachdir();
   var_5 = calculatedesiredfacingyaw(var_4);
   var_6 = calculatelastminuteanimdistance(var_4, var_5, var_2, var_3, var_0);
 
-  if(!isdefined(var_6)) {
+  if(!isDefined(var_6)) {
     return;
   }
   var_7 = calculatelastminuterequireddistsq(var_6);
 
-  while (isdefined(self.pathgoalpos) && isdefined(var_7) && distancesquared(self.origin, self.pathgoalpos) > var_7) {
+  while(isDefined(self.pathgoalpos) && isDefined(var_7) && distancesquared(self.origin, self.pathgoalpos) > var_7) {
     var_4 = calculateapproachdir();
     var_5 = calculatedesiredfacingyaw(var_4);
     var_6 = calculatelastminuteanimdistance(var_4, var_5, var_2, var_3, var_0);
@@ -760,7 +756,7 @@ dolastminuteexposedapproach() {
     wait 0.05;
   }
 
-  if(isdefined(self.arrivalstartdist) && self.arrivalstartdist < var_6 + 8) {
+  if(isDefined(self.arrivalstartdist) && self.arrivalstartdist < var_6 + 8) {
     return;
   }
   if(!exposedapproachconditioncheck(var_2, var_3)) {
@@ -773,10 +769,10 @@ dolastminuteexposedapproach() {
   }
   var_9 = vectortoyaw(self.pathgoalpos - self.origin);
 
-  if(isdefined(self.heat) && var_3) {
+  if(isDefined(self.heat) && var_3) {
     var_10 = var_5 - animscripts\utility::lookuptransitionanim("cover_trans_angles", var_0, self.approachnumber);
     var_11 = getarrivalstartpos(self.pathgoalpos, var_5, var_0, self.approachnumber);
-  } else if(isdefined(self.a.forceapproachfacenodeyaw) && self.a.forceapproachfacenodeyaw) {
+  } else if(isDefined(self.a.forceapproachfacenodeyaw) && self.a.forceapproachfacenodeyaw) {
     var_5 = var_2.angles[1];
     var_10 = var_5 - animscripts\utility::lookuptransitionanim("cover_trans_angles", var_0, self.approachnumber);
     var_11 = getarrivalstartpos(self.pathgoalpos, var_5, var_0, self.approachnumber);
@@ -784,7 +780,7 @@ dolastminuteexposedapproach() {
     var_12 = animscripts\utility::lookuptransitionanim("cover_trans_dist", var_0, self.approachnumber);
     var_13 = atan(var_12[1] / var_12[0]);
 
-    if(!isdefined(self.faceenemyarrival) || self.facemotion) {
+    if(!isDefined(self.faceenemyarrival) || self.facemotion) {
       var_10 = var_9 - var_13;
 
       if(animscripts\utility::absangleclamp180(var_10 - self.angles[1]) > 30)
@@ -810,8 +806,8 @@ dolastminuteexposedapproach() {
 }
 
 waitforpathgoalpos() {
-  for (;;) {
-    if(isdefined(self.pathgoalpos)) {
+  for(;;) {
+    if(isDefined(self.pathgoalpos)) {
       return;
     }
     wait 0.1;
@@ -819,7 +815,7 @@ waitforpathgoalpos() {
 }
 
 custommovetransitionfunc() {
-  if(!isdefined(self.startmovetransitionanim)) {
+  if(!isDefined(self.startmovetransitionanim)) {
     return;
   }
   self animmode("zonly_physics", 0);
@@ -837,13 +833,13 @@ custommovetransitionfunc() {
 }
 
 customidletransitionfunc() {
-  if(!isdefined(self.startidletransitionanim)) {
+  if(!isDefined(self.startidletransitionanim)) {
     return;
   }
   var_0 = self.approachnumber;
   var_1 = self.startidletransitionanim;
 
-  if(!isdefined(self.heat))
+  if(!isDefined(self.heat))
     thread abortapproachifthreatened();
 
   self clearanim( % body, 0.2);
@@ -852,7 +848,7 @@ customidletransitionfunc() {
   animscripts\shared::donotetracks("coverArrival", ::handlestartaim);
   var_2 = anim.arrivalendstance[self.approachtype];
 
-  if(isdefined(var_2))
+  if(isDefined(var_2))
     self.a.pose = var_2;
 
   self.a.movement = "stop";
@@ -862,22 +858,22 @@ customidletransitionfunc() {
 }
 
 str(var_0) {
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     return "{undefined}";
 
   return var_0;
 }
 
 drawvec(var_0, var_1, var_2, var_3) {
-  for (var_4 = 0; var_4 < var_2 * 100; var_4++)
+  for(var_4 = 0; var_4 < var_2 * 100; var_4++)
     wait 0.05;
 }
 
 drawapproachvec(var_0) {
   self endon("killanimscript");
 
-  for (;;) {
-    if(!isdefined(self.node)) {
+  for(;;) {
+    if(!isDefined(self.node)) {
       break;
     }
 
@@ -887,7 +883,7 @@ drawapproachvec(var_0) {
 
 getarrivalstartpos(var_0, var_1, var_2, var_3) {
   var_4 = (0, var_1 - animscripts\utility::lookuptransitionanim("cover_trans_angles", var_2, var_3), 0);
-  var_5 = anglestoforward(var_4);
+  var_5 = anglesToForward(var_4);
   var_6 = anglestoright(var_4);
   var_7 = animscripts\utility::lookuptransitionanim("cover_trans_dist", var_2, var_3);
   var_8 = var_5 * var_7[0];
@@ -897,7 +893,7 @@ getarrivalstartpos(var_0, var_1, var_2, var_3) {
 
 getarrivalprestartpos(var_0, var_1, var_2, var_3) {
   var_4 = (0, var_1 - animscripts\utility::lookuptransitionanim("cover_trans_angles", var_2, var_3), 0);
-  var_5 = anglestoforward(var_4);
+  var_5 = anglesToForward(var_4);
   var_6 = anglestoright(var_4);
   var_7 = animscripts\utility::lookuptransitionanim("cover_trans_predist", var_2, var_3);
   var_8 = var_5 * var_7[0];
@@ -915,7 +911,7 @@ checkcoverenterpos(var_0, var_1, var_2, var_3, var_4) {
   if(!self maymovefrompointtopoint(var_5, var_0))
     return 0;
 
-  if(var_3 <= 6 || isdefined(anim.exposedtransition[var_2]))
+  if(var_3 <= 6 || isDefined(anim.exposedtransition[var_2]))
     return 1;
 
   var_6 = getarrivalprestartpos(var_5, var_1, var_2, var_3);
@@ -924,13 +920,13 @@ checkcoverenterpos(var_0, var_1, var_2, var_3, var_4) {
 }
 
 usereadystand() {
-  if(!isdefined(anim.readystand_anims_inited))
+  if(!isDefined(anim.readystand_anims_inited))
     return 0;
 
   if(!anim.readystand_anims_inited)
     return 0;
 
-  if(!isdefined(self.busereadyidle))
+  if(!isDefined(self.busereadyidle))
     return 0;
 
   if(!self.busereadyidle)

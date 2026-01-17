@@ -8,7 +8,6 @@
 #include scripts\zm_common\zm_audio;
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_office_sound;
 
 main() {
@@ -23,9 +22,9 @@ function_7624a4cd() {
 }
 
 function_f71796ca() {
-  level endon(#"hash_2bfc849b35affc0c", #"end_game");
+  level endon(#"hash_2bfc849b35affc0c", # "end_game");
   self thread function_e856acd2();
-  str_alias = #"hash_716d417cfe416a4d" + self.script_int;
+  str_alias = # "hash_716d417cfe416a4d" + self.script_int;
   n_wait = float(soundgetplaybacktime(str_alias)) / 1000;
 
   if(!isDefined(n_wait)) {
@@ -49,7 +48,7 @@ function_f71796ca() {
 }
 
 function_e856acd2() {
-  level endon(#"hash_2bfc849b35affc0c", #"end_game");
+  level endon(#"hash_2bfc849b35affc0c", # "end_game");
 
   while(true) {
     wait randomintrange(20, 60);

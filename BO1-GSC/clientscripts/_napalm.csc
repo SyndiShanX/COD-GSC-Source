@@ -36,9 +36,9 @@ init_napalmstrike() {
 }
 
 playPlaneFx(localClientNum) {
-  playfxontag(localClientNum, level.fx_airstrike_afterburner, self, "tag_engine");
-  playfxontag(localClientNum, level.fx_jet_trail, self, "tag_right_wingtip");
-  playfxontag(localClientNum, level.fx_jet_trail, self, "tag_left_wingtip");
+  playFXOnTag(localClientNum, level.fx_airstrike_afterburner, self, "tag_engine");
+  playFXOnTag(localClientNum, level.fx_jet_trail, self, "tag_right_wingtip");
+  playFXOnTag(localClientNum, level.fx_jet_trail, self, "tag_left_wingtip");
 }
 
 callNapalmStrike(localClientNum, coord, yaw, teamfaction, team, owner, exitType) {
@@ -49,8 +49,8 @@ callNapalmStrike(localClientNum, coord, yaw, teamfaction, team, owner, exitType)
   if(isDefined(level.airsupportHeightScale)) {
     planeFlyHeight *= level.airsupportHeightScale;
   }
-  startPoint = coord + vector_scale(anglestoforward(direction), -1 * planeHalfDistance);
-  endPoint = coord + vector_scale(anglestoforward(direction), planeHalfDistance);
+  startPoint = coord + vector_scale(anglesToForward(direction), -1 * planeHalfDistance);
+  endPoint = coord + vector_scale(anglesToForward(direction), planeHalfDistance);
   if(isDefined(level.forceAirsupportMapHeight)) {
     startPoint = (startPoint[0], startPoint[1], level.forceAirsupportMapHeight);
     endPoint = (endPoint[0], endPoint[1], level.forceAirsupportMapHeight);
@@ -139,7 +139,7 @@ callStrike_flareEffect(localClientNum, plane, pathEnd, owner) {
   wait(bombWait);
   planedir = anglesToForward(plane.angles);
   flare = spawnflare(localClientNum, plane.origin, plane.angles);
-  flare moveGravity(vector_scale(anglestoforward(plane.angles), 7000 / 3), fxtimer + 3.95);
+  flare moveGravity(vector_scale(anglesToForward(plane.angles), 7000 / 3), fxtimer + 3.95);
   flare thread debug_draw_bomb_path();
   wait 1.0;
   wait(fxTimer);
@@ -160,7 +160,7 @@ callStrike_flareEffect(localClientNum, plane, pathEnd, owner) {
   trace = bulletTrace(flareOrigin, traceEnd, false, undefined);
   traceHit = trace["position"];
   hitpos += traceHit;
-  playfx(localClientNum, level.fx_napalm_marker, hitpos);
+  playFX(localClientNum, level.fx_napalm_marker, hitpos);
   debug_line(flareOrigin, traceHit, (1, 0, 0), 20);
   debug_star(hitpos, (1, 0, 0), 20 * 1000);
   wait(4.0);

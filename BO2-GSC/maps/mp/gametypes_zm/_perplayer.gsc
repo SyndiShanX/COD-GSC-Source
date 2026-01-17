@@ -7,7 +7,7 @@
 
 init(id, playerbegincallback, playerendcallback) {
   precacheshader("objpoint_default");
-  handler = spawnstruct();
+  handler = spawnStruct();
   handler.id = id;
   handler.playerbegincallback = playerbegincallback;
   handler.playerendcallback = playerendcallback;
@@ -69,7 +69,7 @@ onplayerconnect(handler) {
     if(!isDefined(player.handlers))
       player.handlers = [];
 
-    player.handlers[handler.id] = spawnstruct();
+    player.handlers[handler.id] = spawnStruct();
     player.handlers[handler.id].ready = 0;
     player.handlers[handler.id].handled = 0;
     player.handlerflagval = -1;

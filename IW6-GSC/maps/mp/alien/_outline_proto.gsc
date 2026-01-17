@@ -235,9 +235,7 @@ item_outline_weapon_monitor() {
 
 item_outline_drill_monitor() {
   if(isDefined(level.item_outline_drill_monitor_override)) {
-    [
-      [level.item_outline_drill_monitor_override]
-    ]();
+    [[level.item_outline_drill_monitor_override]]();
     return;
   }
   self endon("refresh_outline");
@@ -360,9 +358,7 @@ get_weapon_outline_color(item) {
     return CONST_OUTLINE_COLOR_RED;
   }
 
-  if(isDefined(level.get_custom_weapon_outline_func) && [
-      [level.get_custom_weapon_outline_func]
-    ](item)) {
+  if(isDefined(level.get_custom_weapon_outline_func) && [[level.get_custom_weapon_outline_func]](item)) {
     return CONST_OUTLINE_COLOR_RED;
   }
 

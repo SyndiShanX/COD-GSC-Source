@@ -20,13 +20,13 @@
 
 function function_7403e82b() {
   collision1 = spawn("script_model", (-5538, 9256, 163));
-  collision1 setmodel("p7_shelf_modern_02_e");
+  collision1 setModel("p7_shelf_modern_02_e");
   collision1.angles = vectorscale((0, 1, 0), 180);
   collision1 = spawn("script_model", (-5693, 9256, 320));
-  collision1 setmodel("p7_shelf_modern_02_e");
+  collision1 setModel("p7_shelf_modern_02_e");
   collision1.angles = vectorscale((0, 1, 0), 180);
   collision1 = spawn("script_model", (-5760, 9256, 320));
-  collision1 setmodel("p7_shelf_modern_02_e");
+  collision1 setModel("p7_shelf_modern_02_e");
   collision1.angles = vectorscale((0, 1, 0), 180);
   spawncollision("collision_clip_wall_256x256x10", "collider", (-1757, 10725, 288), vectorscale((0, 1, 0), 350));
   spawncollision("collision_clip_wall_256x256x10", "collider", (-1776, 10621, 288), vectorscale((0, 1, 0), 350));
@@ -54,17 +54,17 @@ function function_7403e82b() {
   spawncollision("collision_player_256x256x256", "collider", (-4146, 9465, -136), (0, 0, 0));
   spawncollision("collision_player_256x256x256", "collider", (-4070, 9465, -136), (0, 0, 0));
   model1 = spawn("script_model", (-1664.21, 2488.96, -415.985));
-  model1 setmodel("p7_sin_ship_container_384_blue");
+  model1 setModel("p7_sin_ship_container_384_blue");
   model1.angles = (275.738, 51.9803, -143.901);
   spawncollision("collision_player_256x256x256", "collider", (-1739.08, 2506.11, -370.376), (273.8, 358.4, 1.30979E-05));
   spawncollision("collision_player_256x256x256", "collider", (-1588.17, 2501.89, -380.374), (273.8, 358.4, 1.30979E-05));
   spawncollision("collision_player_wall_512x512x10", "collider", (-1872, 2480, -248), vectorscale((0, 1, 0), 270));
   spawncollision("collision_player_wall_512x512x10", "collider", (-1872, 2500, -248), vectorscale((0, 1, 0), 270));
   model2 = spawn("script_model", (-4339.17, 10311.4, 163));
-  model2 setmodel("p7_shelf_modern_02_e");
+  model2 setModel("p7_shelf_modern_02_e");
   model2.angles = vectorscale((0, 1, 0), 2.59983);
   model3 = spawn("script_model", (-4413.11, 10310, 163));
-  model3 setmodel("p7_shelf_modern_02_e");
+  model3 setModel("p7_shelf_modern_02_e");
   model3.angles = vectorscale((0, 1, 0), 356);
   var_5b36c229 = spawncollision("collision_clip_128x128x128", "collider", (-4348, 10350, 148), vectorscale((0, 1, 0), 180));
   var_5b36c229 disconnectpaths();

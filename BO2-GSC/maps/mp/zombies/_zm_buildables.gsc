@@ -186,7 +186,7 @@ generate_zombie_buildable_piece(buildablename, modelname, radius, height, drop_o
   if(isDefined(hud_icon))
     precacheshader(hud_icon);
 
-  piece = spawnstruct();
+  piece = spawnStruct();
   buildable_pieces = [];
   buildable_pieces_structs = getstructarray(buildablename + "_" + modelname, "targetname");
 
@@ -352,7 +352,7 @@ generate_piece_unitrigger(classname, origin, angles, flags, radius, script_heigh
   if(!isDefined(script_length))
     script_length = 64;
 
-  unitrigger_stub = spawnstruct();
+  unitrigger_stub = spawnStruct();
   unitrigger_stub.origin = origin;
 
   if(isDefined(script_length))
@@ -372,7 +372,7 @@ generate_piece_unitrigger(classname, origin, angles, flags, radius, script_heigh
 
   unitrigger_stub.radius = radius;
   unitrigger_stub.cursor_hint = "HINT_NOICON";
-  unitrigger_stub.hint_string = & "ZOMBIE_BUILD_PIECE_GRAB";
+  unitrigger_stub.hint_string = &"ZOMBIE_BUILD_PIECE_GRAB";
   unitrigger_stub.script_unitrigger_type = "unitrigger_box_use";
   unitrigger_stub.require_look_at = 0;
 
@@ -442,7 +442,7 @@ piecestub_update_prompt(player) {
       self.hint_string = spiece.hint_swap;
       self.hint_parm1 = self.piece.hint_swap_parm1;
     } else
-      self.hint_string = & "ZOMBIE_BUILD_PIECE_SWITCH";
+      self.hint_string = &"ZOMBIE_BUILD_PIECE_SWITCH";
 
     if(isDefined(self.piece.cursor_hint))
       self.cursor_hint = self.piece.cursor_hint;
@@ -454,7 +454,7 @@ piecestub_update_prompt(player) {
       self.hint_string = self.piece.hint_grab;
       self.hint_parm1 = self.piece.hint_grab_parm1;
     } else
-      self.hint_string = & "ZOMBIE_BUILD_PIECE_GRAB";
+      self.hint_string = &"ZOMBIE_BUILD_PIECE_GRAB";
 
     if(isDefined(self.piece.cursor_hint))
       self.cursor_hint = self.piece.cursor_hint;
@@ -558,7 +558,7 @@ player_throw_piece(piece, origin, dir, return_to_spawn, return_time, endangles) 
 
       if(!isDefined(altmodel)) {
         altmodel = spawn("script_model", grenade.origin);
-        altmodel setmodel(piece.modelname);
+        altmodel setModel(piece.modelname);
       }
 
       altmodel.origin = grenade.angles;
@@ -613,9 +613,9 @@ piece_wait_and_return(return_time) {
   wait 0.15;
 
   if(isDefined(level.exploding_jetgun_fx))
-    playfxontag(level.exploding_jetgun_fx, self.model, "tag_origin");
+    playFXOnTag(level.exploding_jetgun_fx, self.model, "tag_origin");
   else
-    playfxontag(level._effect["powerup_on"], self.model, "tag_origin");
+    playFXOnTag(level._effect["powerup_on"], self.model, "tag_origin");
 
   wait(return_time - 6);
   self piece_hide();
@@ -958,7 +958,7 @@ piece_spawn_in(piecespawn) {
   if(isDefined(self.start_angles))
     self.model.angles = self.start_angles;
 
-  self.model setmodel(piecespawn.modelname);
+  self.model setModel(piecespawn.modelname);
   self.model ghostindemo();
   self.model.hud_icon = piecespawn.hud_icon;
   self.piecespawn = piecespawn;
@@ -1018,7 +1018,7 @@ piece_spawn_at(origin, angles) {
   if(isDefined(angles))
     self.model.angles = angles;
 
-  self.model setmodel(self.modelname);
+  self.model setModel(self.modelname);
 
   if(isDefined(level.equipment_safe_to_drop)) {
     if(![
@@ -1075,7 +1075,7 @@ piece_destroy() {
 }
 
 generate_piece(buildable_piece_spawns) {
-  piece = spawnstruct();
+  piece = spawnStruct();
   piece.spawns = buildable_piece_spawns.spawns;
 
   if(isDefined(buildable_piece_spawns.managing_pieces) && buildable_piece_spawns.managing_pieces)
@@ -1112,7 +1112,7 @@ buildable_piece_unitriggers(buildable_name, origin) {
     buildable.buildablepieces = [];
 
   flag_wait("start_zombie_round_logic");
-  buildablezone = spawnstruct();
+  buildablezone = spawnStruct();
   buildablezone.buildable_name = buildable_name;
   buildablezone.buildable_slot = buildable.buildable_slot;
 
@@ -1176,7 +1176,7 @@ setup_unitrigger_buildable(trigger_targetname, equipname, weaponname, trigger_hi
 }
 
 setup_unitrigger_buildable_array(trigger_targetname, equipname, weaponname, trigger_hintstring, delete_trigger, persistent) {
-  triggers = getentarray(trigger_targetname, "targetname");
+  triggers = getEntArray(trigger_targetname, "targetname");
   stubs = [];
 
   foreach(trig in triggers)
@@ -1189,7 +1189,7 @@ setup_unitrigger_buildable_internal(trig, equipname, weaponname, trigger_hintstr
   if(!isDefined(trig)) {
     return;
   }
-  unitrigger_stub = spawnstruct();
+  unitrigger_stub = spawnStruct();
   unitrigger_stub.buildablestruct = level.zombie_include_buildables[equipname];
   angles = trig.script_angles;
 
@@ -1397,9 +1397,9 @@ player_build(buildable, pieces) {
       self thread[[level.buildable_built_custom_func]](buildable);
 
     alias = sndbuildablecompletealias(buildable.buildable_name);
-    self playsound(alias);
+    self playSound(alias);
   } else {
-    self playsound("zmb_buildable_piece_add");
+    self playSound("zmb_buildable_piece_add");
     assert(isDefined(level.zombie_buildables[buildable.buildable_name].building), "Missing builing hint");
 
     if(isDefined(level.zombie_buildables[buildable.buildable_name].building))
@@ -1480,14 +1480,14 @@ buildablestub_update_prompt(player) {
       if(isDefined(level.zombie_buildables[self.equipname].hint_more))
         self.hint_string = level.zombie_buildables[self.equipname].hint_more;
       else
-        self.hint_string = & "ZOMBIE_BUILD_PIECE_MORE";
+        self.hint_string = &"ZOMBIE_BUILD_PIECE_MORE";
 
       return false;
     } else if(!self.buildablezone buildable_has_piece(player player_get_buildable_piece(slot))) {
       if(isDefined(level.zombie_buildables[self.equipname].hint_wrong))
         self.hint_string = level.zombie_buildables[self.equipname].hint_wrong;
       else
-        self.hint_string = & "ZOMBIE_BUILD_PIECE_WRONG";
+        self.hint_string = &"ZOMBIE_BUILD_PIECE_WRONG";
 
       return false;
     } else {
@@ -1500,12 +1500,12 @@ buildablestub_update_prompt(player) {
     }
   } else if(self.persistent == 1) {
     if(maps\mp\zombies\_zm_equipment::is_limited_equipment(self.weaponname) && maps\mp\zombies\_zm_equipment::limited_equipment_in_use(self.weaponname)) {
-      self.hint_string = & "ZOMBIE_BUILD_PIECE_ONLY_ONE";
+      self.hint_string = &"ZOMBIE_BUILD_PIECE_ONLY_ONE";
       return false;
     }
 
     if(player has_player_equipment(self.weaponname)) {
-      self.hint_string = & "ZOMBIE_BUILD_PIECE_HAVE_ONE";
+      self.hint_string = &"ZOMBIE_BUILD_PIECE_HAVE_ONE";
       return false;
     }
 
@@ -1517,10 +1517,10 @@ buildablestub_update_prompt(player) {
     self.hint_string = self.trigger_hintstring;
   } else if(self.persistent == 2) {
     if(!maps\mp\zombies\_zm_weapons::limited_weapon_below_quota(self.weaponname, undefined)) {
-      self.hint_string = & "ZOMBIE_GO_TO_THE_BOX_LIMITED";
+      self.hint_string = &"ZOMBIE_GO_TO_THE_BOX_LIMITED";
       return false;
     } else if(isDefined(self.bought) && self.bought) {
-      self.hint_string = & "ZOMBIE_GO_TO_THE_BOX";
+      self.hint_string = &"ZOMBIE_GO_TO_THE_BOX";
       return false;
     }
 
@@ -1561,7 +1561,7 @@ player_continue_building(buildablezone, build_stub) {
 
   if(build_stub.script_unitrigger_type == "unitrigger_radius_use") {
     torigin = build_stub unitrigger_origin();
-    porigin = self geteye();
+    porigin = self getEye();
     radius_sq = 2.25 * build_stub.test_radius_sq;
 
     if(distance2dsquared(torigin, porigin) > radius_sq)
@@ -1684,7 +1684,7 @@ buildable_play_build_fx(player) {
   self endon("build_failed");
 
   while(true) {
-    playfx(level._effect["building_dust"], player getplayercamerapos(), player.angles);
+    playFX(level._effect["building_dust"], player getplayercamerapos(), player.angles);
     wait 0.5;
   }
 }
@@ -1757,8 +1757,7 @@ buildable_place_think() {
     }
   }
 
-  if(isDefined(player_built)) {
-  }
+  if(isDefined(player_built)) {}
 
   switch (self.stub.persistent) {
     case 1:
@@ -1793,13 +1792,13 @@ bptrigger_think_one_use_and_fly(player_built) {
     self buildabletrigger_update_prompt(player_built);
 
   if(!maps\mp\zombies\_zm_weapons::limited_weapon_below_quota(self.stub.weaponname, undefined)) {
-    self.stub.hint_string = & "ZOMBIE_GO_TO_THE_BOX_LIMITED";
+    self.stub.hint_string = &"ZOMBIE_GO_TO_THE_BOX_LIMITED";
     self sethintstring(self.stub.hint_string);
     return;
   }
 
   if(isDefined(self.stub.bought) && self.stub.bought) {
-    self.stub.hint_string = & "ZOMBIE_GO_TO_THE_BOX";
+    self.stub.hint_string = &"ZOMBIE_GO_TO_THE_BOX";
     self sethintstring(self.stub.hint_string);
     return;
   }
@@ -1816,7 +1815,7 @@ bptrigger_think_one_use_and_fly(player_built) {
       continue;
     }
     if(!maps\mp\zombies\_zm_weapons::limited_weapon_below_quota(self.stub.weaponname, undefined)) {
-      self.stub.hint_string = & "ZOMBIE_GO_TO_THE_BOX_LIMITED";
+      self.stub.hint_string = &"ZOMBIE_GO_TO_THE_BOX_LIMITED";
       self sethintstring(self.stub.hint_string);
       return;
     }
@@ -1846,9 +1845,9 @@ bptrigger_think_one_use_and_fly(player_built) {
       self[[level.zombie_include_buildables[self.stub.equipname].onbuyweapon]](player);
 
     if(!maps\mp\zombies\_zm_weapons::limited_weapon_below_quota(self.stub.weaponname, undefined))
-      self.stub.hint_string = & "ZOMBIE_GO_TO_THE_BOX_LIMITED";
+      self.stub.hint_string = &"ZOMBIE_GO_TO_THE_BOX_LIMITED";
     else
-      self.stub.hint_string = & "ZOMBIE_GO_TO_THE_BOX";
+      self.stub.hint_string = &"ZOMBIE_GO_TO_THE_BOX";
 
     self sethintstring(self.stub.hint_string);
     player track_buildables_pickedup(self.stub.weaponname);
@@ -1943,7 +1942,7 @@ model_fly_away() {
   self vibrate(direction, 10, 0.5, 4);
   self waittill("movedone");
   self hide();
-  playfx(level._effect["poltergeist"], self.origin);
+  playFX(level._effect["poltergeist"], self.origin);
 }
 
 find_buildable_stub(equipname) {
@@ -2065,7 +2064,7 @@ setup_vehicle_unitrigger_buildable(parent, trigger_targetname, equipname, weapon
   if(!isDefined(trig)) {
     return;
   }
-  unitrigger_stub = spawnstruct();
+  unitrigger_stub = spawnStruct();
   unitrigger_stub.buildablestruct = level.zombie_include_buildables[equipname];
   unitrigger_stub.link_parent = parent;
   unitrigger_stub.origin_parent = trig;
@@ -2136,7 +2135,7 @@ vehicle_buildable_trigger_think(vehicle, trigger_targetname, equipname, weaponna
 }
 
 ai_buildable_trigger_think(parent, equipname, weaponname, trigger_hintstring, persistent) {
-  unitrigger_stub = spawnstruct();
+  unitrigger_stub = spawnStruct();
   unitrigger_stub.buildablestruct = level.zombie_include_buildables[equipname];
   unitrigger_stub.link_parent = parent;
   unitrigger_stub.origin_parent = parent;
@@ -2196,7 +2195,7 @@ onbeginuseuts(player) {
   if(isDefined(player) && !isDefined(player.buildableaudio)) {
     alias = sndbuildableusealias(self.targetname);
     player.buildableaudio = spawn("script_origin", player.origin);
-    player.buildableaudio playloopsound(alias);
+    player.buildableaudio playLoopSound(alias);
   }
 }
 

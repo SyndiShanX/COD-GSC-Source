@@ -9,7 +9,7 @@
 #include maps\mp\zombies\_zm_zonemgr;
 
 init() {
-  level._unitriggers = spawnstruct();
+  level._unitriggers = spawnStruct();
   level._unitriggers._deferredinitlist = [];
   level._unitriggers.trigger_pool = [];
   level._unitriggers.trigger_stubs = [];
@@ -447,9 +447,7 @@ run_visibility_function_for_all_triggers() {
 
     for(i = 0; i < players.size; i++) {
       if(isDefined(self.playertrigger[players[i] getentitynumber()]))
-        self.playertrigger[players[i] getentitynumber()][
-          [self.prompt_and_visibility_func]
-        ](players[i]);
+        self.playertrigger[players[i] getentitynumber()][[self.prompt_and_visibility_func]](players[i]);
     }
   } else if(isDefined(self.trigger))
     self.trigger[[self.prompt_and_visibility_func]](getplayers()[0]);
@@ -625,8 +623,7 @@ get_closest_unitriggers(org, array, dist) {
     }
     array[i].dsquared = newdistsq;
 
-    for(j = 0; j < triggers.size && newdistsq > triggers[j].dsquared; j++) {
-    }
+    for(j = 0; j < triggers.size && newdistsq > triggers[j].dsquared; j++) {}
 
     arrayinsert(triggers, array[i], j);
 

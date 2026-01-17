@@ -22,8 +22,8 @@ testmenu() {
 
   for(;;) {
     wait 10.0;
-    notifydata = spawnstruct();
-    notifydata.titletext = & "MP_CHALLENGE_COMPLETED";
+    notifydata = spawnStruct();
+    notifydata.titletext = &"MP_CHALLENGE_COMPLETED";
     notifydata.notifytext = "wheee";
     notifydata.sound = "mp_challenge_complete";
     self thread maps\mp\gametypes\_hud_message::notifymessage(notifydata);
@@ -170,7 +170,7 @@ playtickingsound(gametype_tick_sound) {
   time = level.bombtimer;
 
   while(true) {
-    self playsound(gametype_tick_sound);
+    self playSound(gametype_tick_sound);
 
     if(time > 10) {
       time = time - 1;

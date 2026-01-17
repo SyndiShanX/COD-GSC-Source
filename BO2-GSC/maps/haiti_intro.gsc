@@ -30,8 +30,7 @@ init_flags() {
   flag_init("jetwing_done");
 }
 
-init_spawn_funcs() {
-}
+init_spawn_funcs() {}
 
 skipto_intro_harper_dead() {
   level.is_harper_alive = 0;
@@ -176,7 +175,7 @@ intro() {
   level thread vtol_hatch_open();
   level thread vtol_explode2();
   level thread intro_fxanims();
-  luinotifyevent(&"hud_update_vehicle_custom", 2, 1, & "plane_jetwing_haiti");
+  luinotifyevent(&"hud_update_vehicle_custom", 2, 1, &"plane_jetwing_haiti");
   luinotifyevent(&"hud_jetwing_alpha", 1, 50);
   level thread maps\_audio::switch_music_wait("HAITI_FLIGHT", 56);
   level waittill("first_objective");
@@ -187,7 +186,7 @@ intro() {
 intro_vtol_sound() {
   vtol_snd_ent = spawn("script_origin", (0, 0, 0));
   vtol_snd_ent linkto(self);
-  vtol_snd_ent playloopsound("veh_plr_vtol_interior", 2);
+  vtol_snd_ent playLoopSound("veh_plr_vtol_interior", 2);
   wait 43;
   vtol_snd_ent stoploopsound(1);
   wait 4;
@@ -275,7 +274,7 @@ player_avoid_missiles() {
   flag_set("avoid_missiles");
   autosave_by_name("avoid_missiles");
   level notify("avoid_missiles");
-  vtols = getentarray("avoid_vtol", "script_noteworthy");
+  vtols = getEntArray("avoid_vtol", "script_noteworthy");
   array_delete(vtols);
   level thread missile_fire_manager();
   level thread avoid_missiles_vo();
@@ -406,7 +405,7 @@ start_jetwing_land_exhaust() {
 
   for(i = 1; i < 18; i++) {
     jetwing = getent("intro_jetwing" + i + "_landing", "targetname");
-    playfxontag(level._effect["jetwing_hero_exhaust"], jetwing, "tag_engine_left");
+    playFXOnTag(level._effect["jetwing_hero_exhaust"], jetwing, "tag_engine_left");
   }
 }
 
@@ -418,7 +417,7 @@ delay_intro_fog(time) {
 add_fake_jetwing_hud() {
   level.player waittill("exit_vehicle");
   wait 0.05;
-  luinotifyevent(&"hud_update_vehicle_custom", 2, 1, & "plane_jetwing_haiti");
+  luinotifyevent(&"hud_update_vehicle_custom", 2, 1, &"plane_jetwing_haiti");
 }
 
 #using_animtree("vehicles");
@@ -434,10 +433,10 @@ spawn_avoid_vtols() {
   foreach(struct in vtol_structs) {
     vtol = spawn("script_model", struct.origin);
     vtol.angles = struct.angles;
-    vtol setmodel("veh_t6_air_v78_vtol");
+    vtol setModel("veh_t6_air_v78_vtol");
     vtol useanimtree(#animtree);
     vtol setanim( % v_vtol_flight_idle, 1, 0.1, 1);
-    vtol playloopsound("veh_amb_vtol_engine_low");
+    vtol playLoopSound("veh_amb_vtol_engine_low");
     vtol.targetname = struct.targetname;
     vtol.script_noteworthy = struct.script_noteworthy;
     vtol.script_float = struct.script_float;
@@ -463,17 +462,17 @@ avoid_vtol_think(b_wait, b_fake_flight, b_exhaust) {
   if(b_wait)
     level waittill("jetpack_go");
 
-  fwd = anglestoforward(self.angles);
+  fwd = anglesToForward(self.angles);
   self.speed = 0;
   amplitude = randomintrange(25, 35);
   frequency = randomfloatrange(0.025, 0.05);
   maxroll = randomintrange(10, 25);
 
   if(b_exhaust)
-    playfxontag(level._effect["vtol_exhaust_cheap"], self, "tag_engine_left");
+    playFXOnTag(level._effect["vtol_exhaust_cheap"], self, "tag_engine_left");
 
   while(!flag("jetwing_done")) {
-    fwd = anglestoforward(self.angles);
+    fwd = anglesToForward(self.angles);
     self.origin = self.origin + fwd * (self.speed * 17.6) * 0.05;
 
     if(b_fake_flight) {
@@ -496,7 +495,7 @@ avoid_vtol_think2(leader, offset) {
   while(true) {
     angles = leader.angles;
     angles = (angles[0], angles[1], 0);
-    forward = anglestoforward(angles);
+    forward = anglesToForward(angles);
     right = anglestoright(angles);
     up = anglestoup(angles);
     origin = leader.origin + forward * offset[0] + right * offset[1] + up * offset[2];
@@ -526,7 +525,7 @@ avoid_vtol_death() {
   self movegravity(dir * 100, 5);
   aerial_explosion(self.origin, self.angles, "vtol_explode");
   playsoundatposition("exp_air_vtol", self.origin);
-  playfxontag(level._effect["vtol_trail_cheap"], self, "tag_origin");
+  playFXOnTag(level._effect["vtol_trail_cheap"], self, "tag_origin");
   torque = (0, 0, randomintrange(25, 45));
 
   if(randomint(100) < 50)
@@ -558,8 +557,8 @@ vtol_death_piece(origin, offset, model, fwd, right, up) {
   dir = vectornormalize(new_origin - origin);
   dir_to_player = vectornormalize(level.player.origin - new_origin);
   dir = vectornormalize(dir + dir_to_player);
-  self setmodel(model);
-  playfxontag(level._effect["vtol_piece_trail"], self, "tag_origin");
+  self setModel(model);
+  playFXOnTag(level._effect["vtol_piece_trail"], self, "tag_origin");
   self thread vtol_death_piece_delete();
   force = randomintrange(500, 1000);
   self movegravity(dir * force, 5);
@@ -594,7 +593,7 @@ aerial_explosion(origin, angles, fx_name, b_quake) {
     b_quake = 1;
 
   if(fx_name != "none")
-    playfx(level._effect[fx_name], origin, (0, 0, 1), anglestoforward(angles));
+    playFX(level._effect[fx_name], origin, (0, 0, 1), anglesToForward(angles));
 
   n_dist = distance2d(origin, level.player.origin);
   n_quake_scale = clamp(1.0 - n_dist / 10000, 0.25, 1.0);
@@ -612,7 +611,7 @@ aerial_explosion_manager(name, min_delay, max_delay, min_offset, max_offset) {
   while(true) {
     origin = level.player.origin;
     angles = isDefined(level.jetwing) ? level.jetwing.angles : level.player.angles;
-    fwd = anglestoforward(angles);
+    fwd = anglesToForward(angles);
     right = anglestoright(angles);
     up = anglestoup(angles);
     origin = origin + fwd * randomfloatrange(min_offset[0], max_offset[0]);
@@ -635,12 +634,12 @@ aa_fire_manager() {
     level.aa_fire_max_delay = 1.0;
 
   while(true) {
-    origin = level.jetwing.origin + anglestoforward(level.jetwing.angles) * 5000;
+    origin = level.jetwing.origin + anglesToForward(level.jetwing.angles) * 5000;
     origin = origin + anglestoright(level.jetwing.angles) * randomintrange(-1500, 1500);
     angles = level.jetwing.angles;
     angles = (angles[0], angles[1] * randomfloatrange(-2, 2), angles[2]);
-    dir = anglestoforward(angles) * -1;
-    playfx(level._effect["aa_fire"], origin, dir);
+    dir = anglesToForward(angles) * -1;
+    playFX(level._effect["aa_fire"], origin, dir);
     wait(randomfloatrange(level.aa_fire_min_delay, level.aa_fire_max_delay));
   }
 }
@@ -648,14 +647,14 @@ aa_fire_manager() {
 vtol_flock_manager() {
   level endon("jetwing_done");
   level endon("approach_facility");
-  fwd = anglestoforward(vectorscale((0, 1, 0), 131.0));
+  fwd = anglesToForward(vectorscale((0, 1, 0), 131.0));
 
   while(true) {
     angles = level.jetwing.angles;
     angles = (angles[0], angles[1], 0);
-    origin = level.jetwing.origin + anglestoforward(angles) * randomintrange(25000, 50000);
+    origin = level.jetwing.origin + anglesToForward(angles) * randomintrange(25000, 50000);
     origin = origin + anglestoright(angles) * randomintrange(-3500, -1500);
-    playfx(level._effect["vtol_flock"], origin, fwd);
+    playFX(level._effect["vtol_flock"], origin, fwd);
     wait(randomfloatrange(7, 9));
   }
 }
@@ -670,7 +669,7 @@ missile_fire_manager() {
     angles = level.jetwing.angles;
     angles = (angles[0], angles[1], angles[2]);
     angles = (angles[0], angles[1], 0);
-    origin = level.jetwing.origin + anglestoforward(angles) * 16000;
+    origin = level.jetwing.origin + anglesToForward(angles) * 16000;
     origin = origin + anglestoright(angles) * randomintrange(-1500, 1500);
     origin = origin + anglestoup(angles) * randomintrange(-500, -250);
     missile = magicbullet("haiti_missile_turret_alt_sp", origin, level.jetwing.origin, undefined, level.jetwing, vectorscale((0, 0, -1), 30.0));
@@ -765,7 +764,7 @@ avoid_f38_fire() {
 vtol_halo_jumps() {
   level endon("jetwing_done");
   wait 2;
-  vtols = getentarray("halo_vtol_2", "script_noteworthy");
+  vtols = getEntArray("halo_vtol_2", "script_noteworthy");
 
   foreach(vtol in vtols) {
     vtol thread do_vtol_halo_jump();
@@ -774,7 +773,7 @@ vtol_halo_jumps() {
   }
 
   wait 4;
-  vtols = getentarray("halo_vtol", "script_noteworthy");
+  vtols = getEntArray("halo_vtol", "script_noteworthy");
 
   foreach(vtol in vtols) {
     vtol thread do_vtol_halo_jump();
@@ -824,7 +823,7 @@ do_vtol_halo_jump(b_think) {
 halo_jump_think(origin) {
   self endon("death");
   self setneargoalnotifydist(350);
-  goal = level.jetwing.origin + anglestoforward(level.jetwing.angles) * 30000;
+  goal = level.jetwing.origin + anglesToForward(level.jetwing.angles) * 30000;
   self setvehgoalpos(goal + (randomintrange(-100, 100), randomintrange(-100, 100), randomintrange(-100, 100)), 0);
   self waittill("near_goal");
   self.delete_on_death = 1;
@@ -839,7 +838,7 @@ halo_jump_speed_match() {
 
   while(isDefined(self)) {
     delta = self.origin - level.jetwing.origin;
-    fwd = anglestoforward(level.jetwing.angles);
+    fwd = anglesToForward(level.jetwing.angles);
     dot = vectordot(fwd, delta);
 
     if(dot < 0)
@@ -854,8 +853,8 @@ halo_jump_speed_match() {
 }
 
 get_best_vtol() {
-  vtols = getentarray("avoid_vtol", "script_noteworthy");
-  fwd = anglestoforward(level.jetwing.angles);
+  vtols = getEntArray("avoid_vtol", "script_noteworthy");
+  fwd = anglesToForward(level.jetwing.angles);
   right = anglestoright(level.jetwing.angles);
   up = anglestoup(level.jetwing.angles);
   best_score = -99999;
@@ -896,11 +895,11 @@ get_best_vtol() {
 }
 
 halo_jumpers_fx() {
-  vtols = getentarray("avoid_vtol", "targetname");
+  vtols = getEntArray("avoid_vtol", "targetname");
 
   foreach(vtol in vtols) {
     if(vtol.health > 0)
-      playfxontag(level._effect["halo_jumpers"], vtol, "tag_origin");
+      playFXOnTag(level._effect["halo_jumpers"], vtol, "tag_origin");
   }
 }
 
@@ -908,7 +907,7 @@ explode_vtol_manager() {
   level endon("jetwing_done");
 
   while(true) {
-    origin = level.jetwing.origin + anglestoforward(level.jetwing.angles) * 5000;
+    origin = level.jetwing.origin + anglesToForward(level.jetwing.angles) * 5000;
     origin = origin + anglestoright(level.jetwing.angles) * randomintrange(-10000, 10000);
     vtol = get_best_vtol();
     target = isDefined(vtol) ? vtol : undefined;
@@ -978,7 +977,7 @@ spline_vtol_think() {
   for(i = 0; i < 8; i++) {
     vtol = spawn("script_model", self.origin, 0, undefined, undefined, "veh_t6_v78_vtol_destructible");
     vtol.angles = self.angles;
-    vtol setmodel("veh_t6_air_v78_vtol");
+    vtol setModel("veh_t6_air_v78_vtol");
     vtol.targetname = self.targetname;
     vtol.script_noteworthy = self.script_noteworthy;
     vtol thread avoid_vtol_think2(self, level.avoid_drone_spawn_offsets[i]);
@@ -1001,7 +1000,7 @@ move_path() {
   wait 2;
   path_node = getvehiclenode("path_jetwing", "targetname");
   angles = vectorscale((0, -1, 0), 59.0);
-  fwd = anglestoforward(angles);
+  fwd = anglesToForward(angles);
   right = anglestoright(angles);
   angles = (path_node.angles[0], -59, path_node.angles[2]);
   origin = path_node.origin - fwd * 55000;
@@ -1066,7 +1065,7 @@ player_intro_rumble() {
   while(true) {
     time = randomfloatrange(0.1, 0.15);
     earthquake(0.2, time, level.player.origin, 200);
-    level.player playsound("exp_flak_on_plane");
+    level.player playSound("exp_flak_on_plane");
     level.player playrumbleonentity("pullout_small");
     wait(time);
   }
@@ -1081,7 +1080,7 @@ player_override_damage(e_inflictor, e_attacker, n_damage, n_flags, str_means_of_
 
 jetwing_guys_explode() {
   wait 4;
-  jetwings = getentarray("ai_jetwing_usa", "targetname");
+  jetwings = getEntArray("ai_jetwing_usa", "targetname");
   average_pos = (0, 0, 0);
   average_pitch = 0;
 
@@ -1114,15 +1113,15 @@ jetwing_fx_anims() {
   fx_vtol_1 = getent("fxanim_deck_vtol_4", "targetname");
   fx_vtol_debris_1 = getent("fxanim_deck_vtol_4_debris", "targetname");
   fx_vtol_debris_1 linkto(fx_vtol_1, "tag_origin", (0, 0, 0), (0, 0, 0));
-  fx_vtol_debris_1 playloopsound("evt_drone_piece_trail");
+  fx_vtol_debris_1 playLoopSound("evt_drone_piece_trail");
   fx_vtol_1 thread avoid_vtol_think(0, 0, 0);
   fx_vtol_2 = getent("fxanim_deck_vtol_5", "targetname");
   fx_vtol_2 setforcenocull();
-  fx_vtol_2_parts = getentarray("fxanim_vtol_5_piece", "targetname");
+  fx_vtol_2_parts = getEntArray("fxanim_vtol_5_piece", "targetname");
 
   foreach(part in fx_vtol_2_parts) {
     part linkto(fx_vtol_2, part.fxanim_tag, (0, 0, 0), (0, 0, 0));
-    part playloopsound("evt_drone_piece_trail_lt");
+    part playLoopSound("evt_drone_piece_trail_lt");
     part setforcenocull();
   }
 
@@ -1132,13 +1131,13 @@ jetwing_fx_anims() {
   fx_vtol_debris_2 = getent("fxanim_deck_vtol_7_debris", "targetname");
   fx_vtol_debris_2 hide();
   fx_vtol_debris_2 linkto(fx_vtol_3, "tag_fuselage_link_jnt", (0, 0, 0), (0, 0, 0));
-  fx_vtol_debris_2 playloopsound("evt_drone_piece_trail");
+  fx_vtol_debris_2 playLoopSound("evt_drone_piece_trail");
   fx_vtol_debris_2 setforcenocull();
-  fx_vtol_3_parts = getentarray("fxanim_vtol_7_piece", "targetname");
+  fx_vtol_3_parts = getEntArray("fxanim_vtol_7_piece", "targetname");
 
   foreach(part in fx_vtol_3_parts) {
     part linkto(fx_vtol_3, part.fxanim_tag, (0, 0, 0), (0, 0, 0));
-    part playloopsound("evt_drone_piece_trail_lt");
+    part playLoopSound("evt_drone_piece_trail_lt");
     part setforcenocull();
   }
 
@@ -1148,11 +1147,11 @@ jetwing_fx_anims() {
   fx_vtol_4 = getent("fxanim_deck_vtol_6", "targetname");
   fx_vtol_debris_3 = getent("fxanim_deck_vtol_6_debris", "targetname");
   fx_vtol_debris_3 linkto(fx_vtol_4);
-  fx_vtol_debris_3 playloopsound("evt_drone_piece_trail");
+  fx_vtol_debris_3 playLoopSound("evt_drone_piece_trail");
   trigger_wait("trig_vtols_start_move", "targetname");
   wait 0.5;
-  playfx(level._effect["vtol_explode_fxanim1"], fx_vtol_1.origin);
-  playfxontag(level._effect["vtol_trail_cheap_nosmoke"], fx_vtol_1, "tag_cockpit_link_jnt");
+  playFX(level._effect["vtol_explode_fxanim1"], fx_vtol_1.origin);
+  playFXOnTag(level._effect["vtol_trail_cheap_nosmoke"], fx_vtol_1, "tag_cockpit_link_jnt");
   fx_vtol_1 notify("stop_think");
   fx_vtol_debris_1 unlink();
   level notify("fxanim_jetpack_vtol_explode_1_start");
@@ -1160,12 +1159,12 @@ jetwing_fx_anims() {
   fx_vtol_2 notify("stop_think");
   fx_vtol_3 notify("stop_think");
   fx_vtol_debris_2 unlink();
-  playfxontag(level._effect["vtol_trail_cheap"], fx_vtol_2, "tag_engine_r_link_jnt");
+  playFXOnTag(level._effect["vtol_trail_cheap"], fx_vtol_2, "tag_engine_r_link_jnt");
   level notify("fxanim_jetpack_vtol_explode_2_start");
   wait 5;
   fx_vtol_debris_3 unlink();
-  playfxontag(level._effect["vtol_trail_local"], fx_vtol_4, "tag_origin");
-  fx_vtol_4 playloopsound("evt_drone_piece_trail");
+  playFXOnTag(level._effect["vtol_trail_local"], fx_vtol_4, "tag_origin");
+  fx_vtol_4 playLoopSound("evt_drone_piece_trail");
   level notify("fxanim_jetpack_vtol_explode_3_start");
   wait 7;
   fx_vtol_1 delete();
@@ -1181,7 +1180,7 @@ explode_vtol(targetname) {
   target = getent(targetname, "targetname");
 
   if(isDefined(target)) {
-    origin = level.jetwing.origin + anglestoforward(level.jetwing.angles) * 5000;
+    origin = level.jetwing.origin + anglesToForward(level.jetwing.angles) * 5000;
     origin = origin + anglestoright(level.jetwing.angles) * randomintrange(-2500, 2500);
     missile = magicbullet("haiti_missile_turret_sp", origin, origin + vectorscale((0, 0, 1), 10000.0), undefined, target, vectorscale((0, 0, 1), 15.0));
     missile.targetent = target;
@@ -1228,10 +1227,10 @@ landing_aa_fire() {
   level endon("end_expl_manager_landing");
 
   while(true) {
-    origin = level.player.origin + anglestoforward(level.player.angles) * randomintrange(2000, 7500);
+    origin = level.player.origin + anglesToForward(level.player.angles) * randomintrange(2000, 7500);
     origin = origin + anglestoright(level.player.angles) * randomintrange(-2500, 2500);
     origin = origin - (0, 0, randomintrange(3000, 7500));
-    playfx(level._effect["aa_fire"], origin, anglestoforward((-90, randomfloatrange(-2, 2), 0)));
+    playFX(level._effect["aa_fire"], origin, anglesToForward((-90, randomfloatrange(-2, 2), 0)));
     wait(randomfloatrange(0.15, 0.25));
   }
 }
@@ -1239,7 +1238,7 @@ landing_aa_fire() {
 landing_vtol_flock_manager(struct_name, min, max) {
   level endon("end_flock_manager_" + struct_name);
   vtol_spawn_struct = getstruct(struct_name, "targetname");
-  fwd = anglestoforward(vtol_spawn_struct.angles);
+  fwd = anglesToForward(vtol_spawn_struct.angles);
   right = anglestoright(vtol_spawn_struct.angles);
   up = anglestoup(vtol_spawn_struct.angles);
 
@@ -1247,7 +1246,7 @@ landing_vtol_flock_manager(struct_name, min, max) {
     origin = vtol_spawn_struct.origin;
     origin = origin + right * randomfloatrange(min[1], max[1]);
     origin = origin + up * randomfloatrange(min[2], max[2]);
-    playfx(level._effect["vtol_flock"], origin, fwd);
+    playFX(level._effect["vtol_flock"], origin, fwd);
     wait(randomfloatrange(5, 7));
   }
 }
@@ -1259,9 +1258,9 @@ air_battle_manager() {
   while(true) {
     angles = level.jetwing.angles;
     angles = (angles[0], angles[1], 0);
-    origin = level.jetwing.origin + anglestoforward(angles) * randomintrange(15000, 25000);
+    origin = level.jetwing.origin + anglesToForward(angles) * randomintrange(15000, 25000);
     origin = origin + anglestoright(angles) * randomintrange(-5000, 5000);
-    playfx(level._effect["air_battle_1"], origin, anglestoforward((0, randomintrange(-90, 90), 0)));
+    playFX(level._effect["air_battle_1"], origin, anglesToForward((0, randomintrange(-90, 90), 0)));
     wait(randomfloatrange(2, 4));
   }
 }
@@ -1271,7 +1270,7 @@ landing_air_battle_manager(struct_name, min, max) {
   vtol_spawn_struct = getstruct(struct_name, "targetname");
   angles = vtol_spawn_struct.angles;
   angles = (angles[0], randomfloatrange(-180, 180), angles[2]);
-  fwd = anglestoforward(angles);
+  fwd = anglesToForward(angles);
   right = anglestoright(angles);
   up = anglestoup(angles);
 
@@ -1279,7 +1278,7 @@ landing_air_battle_manager(struct_name, min, max) {
     origin = vtol_spawn_struct.origin;
     origin = origin + right * randomfloatrange(min[1], max[1]);
     origin = origin + up * randomfloatrange(min[2], max[2]);
-    playfx(level._effect["air_battle_1"], origin, fwd);
+    playFX(level._effect["air_battle_1"], origin, fwd);
     wait(randomfloatrange(2, 3));
   }
 }
@@ -1320,7 +1319,7 @@ spawn_moving_cloud(struct_name, str_endon, side) {
     mover.script_noteworthy = "cleanup_intro";
     mover thread moving_cloud_delete(str_endon);
     name = side == "left" ? "cloud_locked_left" : "cloud_locked_right";
-    playfxontag(level._effect[name], mover, "tag_origin");
+    playFXOnTag(level._effect[name], mover, "tag_origin");
     mover moveto(end.origin, randomfloatrange(8, 9), 0.05);
     wait 5;
   }
@@ -1347,10 +1346,10 @@ pregameplay_fx() {
   level thread aerial_explosion_manager("pregameplay", 0.5, 0.75, (2000, -2500, -1000), (7500, 2500, 1000));
 
   while(true) {
-    origin = level.player.origin + anglestoforward(level.player.angles) * randomintrange(2000, 7500);
+    origin = level.player.origin + anglesToForward(level.player.angles) * randomintrange(2000, 7500);
     origin = origin + anglestoright(level.player.angles) * randomintrange(-2500, 2500);
     origin = origin - (0, 0, randomintrange(3000, 7500));
-    playfx(level._effect["aa_fire"], origin, (0, 0, 1));
+    playFX(level._effect["aa_fire"], origin, (0, 0, 1));
     wait(randomfloatrange(0.15, 0.25));
   }
 }
@@ -1359,7 +1358,7 @@ pregameplay_missiles() {
   level endon("avoid_vtols");
 
   while(true) {
-    origin = level.player.origin + anglestoforward(level.player.angles) * randomintrange(2000, 7500);
+    origin = level.player.origin + anglesToForward(level.player.angles) * randomintrange(2000, 7500);
     origin = origin + anglestoright(level.player.angles) * randomintrange(-2500, 2500);
     origin = origin - (0, 0, randomintrange(5000, 6000));
     magicbullet("haiti_missile_turret_intro_sp", origin, origin + (0, 0, randomintrange(5000, 7000)));
@@ -1399,7 +1398,7 @@ cloud_exposure(time, time_high, time_low) {
 
 assemble_vtol_explode2() {
   parent = getent("vtol_explode2", "targetname");
-  pieces = getentarray("vtol_explode2_piece", "targetname");
+  pieces = getEntArray("vtol_explode2_piece", "targetname");
 
   foreach(piece in pieces)
   piece linkto(parent, piece.fxanim_tag, (0, 0, 0), (0, 0, 0));
@@ -1438,14 +1437,14 @@ avoid_vtol_piece_think(fx_tag, offset, speed, angular_velocity) {
   self.overridedamage = ::vtol_piece_override_damage;
   angles = level.jetwing.angles;
   angles = (angles[0], angles[1], 0);
-  fwd = anglestoforward(angles);
+  fwd = anglesToForward(angles);
   right = anglestoright(angles);
   up = anglestoup(angles);
   self.origin = level.jetwing.origin + fwd * offset[0] + right * offset[1] + up * offset[2];
   path_angles = getvehiclenode("path_jetwing", "targetname").angles;
-  path_dir = anglestoforward(path_angles);
+  path_dir = anglesToForward(path_angles);
   self setphysangles(path_angles);
-  playfxontag(level._effect["vtol_trail_cheap"], self, fx_tag);
+  playFXOnTag(level._effect["vtol_trail_cheap"], self, fx_tag);
   self setvehvelocity(path_dir * (80 + speed) * 17.6);
   self setangularvelocity(angular_velocity);
   level waittill("jetwing_done");
@@ -1467,8 +1466,7 @@ intro_save_restore() {
   }
 }
 
-intro_vo() {
-}
+intro_vo() {}
 
 avoid_vtols_vo() {
   wait 2;

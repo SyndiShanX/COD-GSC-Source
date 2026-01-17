@@ -35,14 +35,14 @@ play_tomahawk_pickup_fx(localclientnum, oldval, newval, bnewent, binitialsnap, f
 
       if(isDefined(e_pickup_fx) && isDefined(e_pickup_fx.fx_id)) {
         stopfx(localclientnum, e_pickup_fx.fx_id);
-        e_pickup_fx.fx_id = playfxontag(localclientnum, level._effect["tomahawk_pickup"], e_pickup_fx, "tag_origin");
+        e_pickup_fx.fx_id = playFXOnTag(localclientnum, level._effect["tomahawk_pickup"], e_pickup_fx, "tag_origin");
       }
     } else if(newval == 2) {
       e_pickup_upgrade_fx = getent(localclientnum, "tomahawk_pickup_upgrade_fx_origin", "targetname");
 
       if(isDefined(e_pickup_upgrade_fx) && isDefined(e_pickup_upgrade_fx.fx_id)) {
         stopfx(localclientnum, e_pickup_upgrade_fx.fx_id);
-        e_pickup_upgrade_fx.fx_id = playfxontag(localclientnum, level._effect["tomahawk_pickup_upgrade"], e_pickup_upgrade_fx, "tag_origin");
+        e_pickup_upgrade_fx.fx_id = playFXOnTag(localclientnum, level._effect["tomahawk_pickup_upgrade"], e_pickup_upgrade_fx, "tag_origin");
       }
     }
 
@@ -56,13 +56,13 @@ play_tomahawk_pickup_fx(localclientnum, oldval, newval, bnewent, binitialsnap, f
       e_pickup_fx = spawn(localclientnum, self.origin, "script_model");
       e_pickup_fx.angles = self.angles;
       e_pickup_fx.targetname = "tomahawk_pickup_fx_origin";
-      e_pickup_fx setmodel("tag_origin");
+      e_pickup_fx setModel("tag_origin");
     }
 
     if(isDefined(e_pickup_fx.fx_id))
       stopfx(localclientnum, e_pickup_fx.fx_id);
 
-    e_pickup_fx.fx_id = playfxontag(localclientnum, level._effect["tomahawk_pickup"], e_pickup_fx, "tag_origin");
+    e_pickup_fx.fx_id = playFXOnTag(localclientnum, level._effect["tomahawk_pickup"], e_pickup_fx, "tag_origin");
   } else if(newval == 2) {
     e_pickup_fx = getent(localclientnum, "tomahawk_pickup_fx_origin", "targetname");
 
@@ -70,17 +70,17 @@ play_tomahawk_pickup_fx(localclientnum, oldval, newval, bnewent, binitialsnap, f
       e_pickup_upgrade_fx = spawn(localclientnum, e_pickup_fx.origin, "script_model");
       e_pickup_upgrade_fx.angles = e_pickup_fx.angles;
       e_pickup_upgrade_fx.targetname = "tomahawk_pickup_upgrade_fx_origin";
-      e_pickup_upgrade_fx setmodel("tag_origin");
+      e_pickup_upgrade_fx setModel("tag_origin");
       e_pickup_fx delete();
     }
 
     if(isDefined(e_pickup_upgrade_fx.fx_id))
       stopfx(localclientnum, e_pickup_upgrade_fx.fx_id);
 
-    e_pickup_upgrade_fx.fx_id = playfxontag(localclientnum, level._effect["tomahawk_pickup_upgrade"], e_pickup_upgrade_fx, "tag_origin");
+    e_pickup_upgrade_fx.fx_id = playFXOnTag(localclientnum, level._effect["tomahawk_pickup_upgrade"], e_pickup_upgrade_fx, "tag_origin");
   }
 }
 
 play_sound_on_zombies(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  self playsound(localclientnum, "wpn_tomahawk_imp_zombie");
+  self playSound(localclientnum, "wpn_tomahawk_imp_zombie");
 }

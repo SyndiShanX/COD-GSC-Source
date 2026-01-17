@@ -4,7 +4,6 @@
 ***********************************************/
 
 #include scripts\core_common\struct;
-
 #namespace perplayer;
 
 init(id, playerbegincallback, playerendcallback) {

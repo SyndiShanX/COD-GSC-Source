@@ -160,7 +160,7 @@ delay_free_vehicle() {
 }
 
 pavelow_tailor_rotor_fire_on_death() {
-  playfxontag(level._effect["pavelow_tail_rotor_fire"], self, "tag_origin");
+  playFXOnTag(level._effect["pavelow_tail_rotor_fire"], self, "tag_origin");
 }
 
 blow_up_vehicle_at_spline_end() {
@@ -207,8 +207,7 @@ prevent_riders_from_unloading() {
   self.dontunloadonend = 1;
 }
 
-add_vehicle_to_convoy_target_pool() {
-}
+add_vehicle_to_convoy_target_pool() {}
 
 find_target_after_getout(a_target_ents) {
   self endon("death");
@@ -264,7 +263,7 @@ spawn_plane_fx_on_death() {
 
 bigrig_death_fx() {
   self waittill("death");
-  playfxontag(level._effect["bigrig_death"], self, "tag_origin");
+  playFXOnTag(level._effect["bigrig_death"], self, "tag_origin");
 }
 
 add_missile_turret_target() {
@@ -322,24 +321,23 @@ bigrig_add_trailer() {
   self.trailer_model = spawn("script_model", self.origin);
   self.trailer_model.angles = self.angles;
   self.trailer_model linkto(self);
-  self.trailer_model setmodel("veh_t6_civ_18wheeler_trailer");
+  self.trailer_model setModel("veh_t6_civ_18wheeler_trailer");
 
   if(isDefined(self.script_int)) {
     self.model_old = self.model;
-    self setmodel("veh_t6_civ_18wheeler");
+    self setModel("veh_t6_civ_18wheeler");
     self.trailer_model hide();
   }
 
   self waittill("death");
   self.trailer_model show();
-  self.trailer_model setmodel("veh_t6_civ_18wheeler_trailer_dead");
+  self.trailer_model setModel("veh_t6_civ_18wheeler_trailer_dead");
 
   if(isDefined(self.model_old))
-    self setmodel(self.model_old);
+    self setModel(self.model_old);
 }
 
-_play_bigrig_trailer_anim() {
-}
+_play_bigrig_trailer_anim() {}
 
 convoy_trigger_proc() {
   self maps\la_2_convoy::_waittill_triggered_by_convoy();
@@ -361,7 +359,7 @@ plane_midair_deathfx() {
 
   if(flag("convoy_at_dogfight") && !flag("dogfight_done")) {
     if(isDefined(self) && isDefined(self.origin) && isDefined(self.angles))
-      playfx(level._effect["plane_deathfx_small"], self.origin, anglestoforward(self.angles));
+      playFX(level._effect["plane_deathfx_small"], self.origin, anglesToForward(self.angles));
   }
 }
 
@@ -460,7 +458,7 @@ drone_throws_molotov(s_start, v_destination, params) {
 _drone_throws_molotov_proc() {
   if(isDefined(self)) {
     v_start = self gettagorigin("tag_weapon");
-    v_end = self.origin + anglestoforward(self.angles) * 1000;
+    v_end = self.origin + anglesToForward(self.angles) * 1000;
     self molotov_throw(undefined, v_start, v_end);
   }
 }
@@ -518,15 +516,15 @@ setup_skiptos() {
   add_skipto("street", ::skipto_la_1b);
   add_skipto("plaza", ::skipto_la_1b);
   add_skipto("intersection", ::skipto_la_1b);
-  add_skipto("f35_wakeup", maps\la_2::skipto_f35_wakeup, & "SKIPTO_STRING_HERE", maps\la_2_ground::f35_wakeup);
-  add_skipto("f35_boarding", maps\la_2::skipto_f35_boarding, & "SKIPTO_STRING_HERE", maps\la_2_ground::f35_boarding);
-  add_skipto("f35_flying", maps\la_2::skipto_f35_flying, & "SKIPTO_STRING_HERE", maps\la_2_ground::f35_flight_start);
-  add_skipto("f35_pacing", maps\la_2::skipto_f35_pacing, & "SKIPTO_STRING_HERE", maps\la_2_ground::f35_pacing);
-  add_skipto("f35_rooftops", maps\la_2::skipto_f35_rooftops, & "SKIPTO_STRING_HERE", maps\la_2_ground::f35_rooftops);
-  add_skipto("f35_dogfights", maps\la_2::skipto_f35_dogfights, & "SKIPTO_STRING_HERE", maps\la_2_fly::f35_dogfights);
-  add_skipto("f35_eject", maps\la_2::skipto_f35_eject, & "SKIPTO_STRING_HERE", maps\la_2_ground::f35_eject);
-  add_skipto("f35_outro", maps\la_2::skipto_f35_outro, & "SKIPTO_STRING_HERE", maps\la_2_ground::f35_outro);
-  add_skipto("dev_build_test", maps\la_2::skipto_dev_build_test, & "SKIPTO_STRING_HERE");
+  add_skipto("f35_wakeup", maps\la_2::skipto_f35_wakeup, &"SKIPTO_STRING_HERE", maps\la_2_ground::f35_wakeup);
+  add_skipto("f35_boarding", maps\la_2::skipto_f35_boarding, &"SKIPTO_STRING_HERE", maps\la_2_ground::f35_boarding);
+  add_skipto("f35_flying", maps\la_2::skipto_f35_flying, &"SKIPTO_STRING_HERE", maps\la_2_ground::f35_flight_start);
+  add_skipto("f35_pacing", maps\la_2::skipto_f35_pacing, &"SKIPTO_STRING_HERE", maps\la_2_ground::f35_pacing);
+  add_skipto("f35_rooftops", maps\la_2::skipto_f35_rooftops, &"SKIPTO_STRING_HERE", maps\la_2_ground::f35_rooftops);
+  add_skipto("f35_dogfights", maps\la_2::skipto_f35_dogfights, &"SKIPTO_STRING_HERE", maps\la_2_fly::f35_dogfights);
+  add_skipto("f35_eject", maps\la_2::skipto_f35_eject, &"SKIPTO_STRING_HERE", maps\la_2_ground::f35_eject);
+  add_skipto("f35_outro", maps\la_2::skipto_f35_outro, &"SKIPTO_STRING_HERE", maps\la_2_ground::f35_outro);
+  add_skipto("dev_build_test", maps\la_2::skipto_dev_build_test, &"SKIPTO_STRING_HERE");
   set_skipto_cleanup_func(::skipto_cleanup);
 }
 
@@ -651,11 +649,9 @@ convoy_move_to_position(str_struct_names) {
   }
 }
 
-convoy_move_to_dogfight_position(str_structs_name) {
-}
+convoy_move_to_dogfight_position(str_structs_name) {}
 
-skipto_f35_wakeup() {
-}
+skipto_f35_wakeup() {}
 
 skipto_f35_boarding() {
   skipto_teleport("f35_boarding_skipto");

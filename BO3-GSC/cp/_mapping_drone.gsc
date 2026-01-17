@@ -20,7 +20,7 @@
 function spawn_drone(str_start_node, b_active = 1) {
   level.vh_mapper = vehicle::simple_spawn_single("mapping_drone");
   level.vh_mapper.animname = "mapping_drone";
-  level.vh_mapper setcandamage(0);
+  level.vh_mapper setCanDamage(0);
   level.vh_mapper notsolid();
   level.vh_mapper sethoverparams(20, 5, 10);
   level.vh_mapper.drivepath = 1;
@@ -28,7 +28,7 @@ function spawn_drone(str_start_node, b_active = 1) {
     level.vh_mapper vehicle::lights_off();
     level.vh_mapper vehicle::toggle_sounds(0);
   }
-  if(isdefined(str_start_node)) {
+  if(isDefined(str_start_node)) {
     nd_start = getvehiclenode(str_start_node, "targetname");
     level.vh_mapper.origin = nd_start.origin;
     level.vh_mapper.angles = nd_start.angles;
@@ -36,13 +36,13 @@ function spawn_drone(str_start_node, b_active = 1) {
 }
 
 function follow_path(str_start_node, str_flag, var_178571be) {
-  if(isdefined(str_flag) && !level flag::get(str_flag)) {
+  if(isDefined(str_flag) && !level flag::get(str_flag)) {
     nd_start = getvehiclenode(str_start_node, "targetname");
     self setvehgoalpos(nd_start.origin, 1);
     level flag::wait_till(str_flag);
     self clearvehgoalpos();
   }
-  if(isdefined(var_178571be)) {
+  if(isDefined(var_178571be)) {
     self thread[[var_178571be]]();
   }
   self thread function_fb6d201d();
@@ -72,8 +72,8 @@ function function_fb6d201d() {
   n_forward_view = cos(89);
   self thread function_3c36d48d();
   self.n_speed = 0;
-  while (true) {
-    if(isdefined(self.n_speed_override)) {
+  while(true) {
+    if(isDefined(self.n_speed_override)) {
       self.n_speed = self.n_speed_override;
       self setspeed(self.n_speed_override, 35, 35);
       wait(0.05);
@@ -138,7 +138,7 @@ function function_fb6d201d() {
 function function_3c36d48d() {
   self endon("stop_speed_regulator");
   self endon("reached_end_node");
-  while (true) {
+  while(true) {
     wait(1);
     switch (self.n_speed) {
       case 35: {
@@ -167,7 +167,7 @@ function function_517ced56(n_yaw_left = 90, n_yaw_right = 90, n_pitch_down = 10,
   e_base.angles = self.angles;
   self linkto(e_base);
   v_base_look = self.angles;
-  while (level flag::get("drone_scanning")) {
+  while(level flag::get("drone_scanning")) {
     v_look_offset = (randomfloatrange(n_pitch_down * -1, n_pitch_up), randomfloatrange(n_yaw_left * -1, n_yaw_right), 0);
     v_look_angles = v_base_look + v_look_offset;
     e_base rotateto(v_look_angles, 0.5, 0.2, 0.2);
@@ -185,7 +185,7 @@ function function_4f6daa65(b_on = 1) {
     }
   } else {
     foreach(player in level.activeplayers) {
-      if(isdefined(player.menu_pip)) {
+      if(isDefined(player.menu_pip)) {
         player thread close_menu_with_delay(player.menu_pip, 1.25);
         player.menu_pip = undefined;
       }

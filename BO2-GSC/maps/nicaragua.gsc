@@ -150,8 +150,7 @@ level_precache() {
   precacheshader("overlay_cocaine");
 }
 
-init_spawn_funcs() {
-}
+init_spawn_funcs() {}
 
 skipto_setup() {
   skipto = level.skipto_point;

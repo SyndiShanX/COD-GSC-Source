@@ -50,7 +50,6 @@
 #include scripts\zm_common\zm_score;
 #include scripts\zm_common\zm_spawner;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_ai_ghost;
 
 autoexec __init__system__() {
@@ -71,12 +70,12 @@ function_cc3e52ff() {
   self.___archetypeonanimscriptedcallback = &function_f093c843;
 }
 
-private function_f093c843(entity) {
+function_f093c843(entity) {
   entity.__blackboard = undefined;
   entity function_cc3e52ff();
 }
 
-private function_fe6a9772() {
+function_fe6a9772() {
   self setblackboardattribute("_locomotion_speed", "locomotion_speed_walk");
 
   if(!isDefined(self.zombie_arms_position)) {

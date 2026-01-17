@@ -285,7 +285,7 @@ startsubwooferdeploy(weapon, armed) {
     weapon waittill("death");
 
     if(isDefined(level.subwoofer_sound_ent)) {
-      level.subwoofer_sound_ent playsound("wpn_zmb_electrap_stop");
+      level.subwoofer_sound_ent playSound("wpn_zmb_electrap_stop");
       level.subwoofer_sound_ent delete();
       level.subwoofer_sound_ent = undefined;
     }
@@ -331,7 +331,7 @@ startsubwooferdecay(weapon) {
 
       if(!(isDefined(weapon.low_health_sparks) && weapon.low_health_sparks)) {
         weapon.low_health_sparks = 1;
-        playfxontag(level._effect["switch_sparks"], weapon, "tag_origin");
+        playFXOnTag(level._effect["switch_sparks"], weapon, "tag_origin");
       }
     } else if(weapon.subwoofer_kills > 15)
       self.subwoofer_power_level = 2;
@@ -381,8 +381,7 @@ wait_and_take_equipment() {
   self thread maps\mp\zombies\_zm_equipment::equipment_release(level.subwoofer_name);
 }
 
-init_animtree() {
-}
+init_animtree() {}
 
 subwoofer_fx(weapon) {
   weapon endon("death");
@@ -397,7 +396,7 @@ subwoofer_disappear_fx(weapon, waittime) {
     wait(waittime);
 
   if(isDefined(weapon))
-    playfx(level._effect["subwoofer_disappear"], weapon.origin);
+    playFX(level._effect["subwoofer_disappear"], weapon.origin);
 }
 
 subwoofer_choke() {
@@ -414,7 +413,7 @@ subwooferthink(weapon, armed) {
   weapon notify("subwooferthink");
   weapon endon("subwooferthink");
   weapon endon("death");
-  direction_forward = anglestoforward(flat_angle(weapon.angles) + vectorscale((-1, 0, 0), 30.0));
+  direction_forward = anglesToForward(flat_angle(weapon.angles) + vectorscale((-1, 0, 0), 30.0));
   direction_vector = vectorscale(direction_forward, 512);
   direction_origin = weapon.origin + direction_vector;
   original_angles = weapon.angles;
@@ -455,7 +454,7 @@ subwooferthink(weapon, armed) {
     weapon vibrate(vectorscale((0, -1, 0), 100.0), vibrateamplitude, 0.2, 0.3);
     zombies = get_array_of_closest(weapon.origin, get_round_enemy_array(), undefined, undefined, 1200);
     players = get_array_of_closest(weapon.origin, get_players(), undefined, undefined, 1200);
-    props = get_array_of_closest(weapon.origin, getentarray("subwoofer_target", "script_noteworthy"), undefined, undefined, 1200);
+    props = get_array_of_closest(weapon.origin, getEntArray("subwoofer_target", "script_noteworthy"), undefined, undefined, 1200);
     entities = arraycombine(zombies, players, 0, 0);
     entities = arraycombine(entities, props, 0, 0);
 
@@ -490,7 +489,7 @@ subwooferthink(weapon, armed) {
       ent_trace_origin = ent.origin;
 
       if(isai(ent) || isplayer(ent))
-        ent_trace_origin = ent geteye();
+        ent_trace_origin = ent getEye();
 
       if(isDefined(ent.script_noteworthy) && ent.script_noteworthy == "subwoofer_target")
         ent_trace_origin = ent_trace_origin + vectorscale((0, 0, 1), 48.0);
@@ -655,7 +654,7 @@ knockdown_zombie_damage(weapon) {
 
 handle_subwoofer_pain_notetracks(note) {
   if(note == "zombie_knockdown_ground_impact")
-    playfx(level._effect["subwoofer_knockdown_ground"], self.origin, anglestoforward(self.angles), anglestoup(self.angles));
+    playFX(level._effect["subwoofer_knockdown_ground"], self.origin, anglesToForward(self.angles), anglestoup(self.angles));
 }
 
 knockdown_zombie_animate() {

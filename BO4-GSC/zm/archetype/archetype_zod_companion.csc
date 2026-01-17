@@ -9,7 +9,6 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace zodcompanionclientutils;
 
 autoexec __init__system__() {
@@ -19,13 +18,13 @@ autoexec __init__system__() {
 __init__() {
   clientfield::register("allplayers", "being_robot_revived", 1, 1, "int", &play_revival_fx, 0, 0);
   ai::add_archetype_spawn_function(#"zod_companion", &zodcompanionspawnsetup);
-  level._effect[#"fx_dest_robot_head_sparks"] = "destruct/fx_dest_robot_head_sparks";
-  level._effect[#"fx_dest_robot_body_sparks"] = "destruct/fx_dest_robot_body_sparks";
-  level._effect[#"companion_revive_effect"] = "zombie/fx_robot_helper_revive_player_zod_zmb";
+  level._effect[# "fx_dest_robot_head_sparks"] = "destruct/fx_dest_robot_head_sparks";
+  level._effect[# "fx_dest_robot_body_sparks"] = "destruct/fx_dest_robot_body_sparks";
+  level._effect[# "companion_revive_effect"] = "zombie/fx_robot_helper_revive_player_zod_zmb";
   ai::add_archetype_spawn_function(#"robot", &zodcompanionspawnsetup);
 }
 
-private zodcompanionspawnsetup(localclientnum) {
+zodcompanionspawnsetup(localclientnum) {
   entity = self;
   gibclientutils::addgibcallback(localclientnum, entity, 8, &zodcompanionheadgibfx);
   gibclientutils::addgibcallback(localclientnum, entity, 8, &_gibcallback);
@@ -46,8 +45,8 @@ zodcompanionheadgibfx(localclientnum, entity, gibflag) {
     entity.mindcontrolheadfx = undefined;
   }
 
-  entity.headgibfx = util::playFXOnTag(localclientnum, level._effect[#"fx_dest_robot_head_sparks"], entity, "j_neck");
-  playSound(0, #"prj_bullet_impact_robot_headshot", entity.origin);
+  entity.headgibfx = util::playFXOnTag(localclientnum, level._effect[# "fx_dest_robot_head_sparks"], entity, "j_neck");
+  playSound(0, # "prj_bullet_impact_robot_headshot", entity.origin);
 }
 
 zodcompaniondamagedfx(localclientnum, entity) {
@@ -55,7 +54,7 @@ zodcompaniondamagedfx(localclientnum, entity) {
     return;
   }
 
-  entity.damagedfx = util::playFXOnTag(localclientnum, level._effect[#"fx_dest_robot_body_sparks"], entity, "j_spine4");
+  entity.damagedfx = util::playFXOnTag(localclientnum, level._effect[# "fx_dest_robot_body_sparks"], entity, "j_spine4");
 }
 
 zodcompanionclearfx(localclientnum, entity) {
@@ -64,7 +63,7 @@ zodcompanionclearfx(localclientnum, entity) {
   }
 }
 
-private _gibcallback(localclientnum, entity, gibflag) {
+_gibcallback(localclientnum, entity, gibflag) {
   if(!isDefined(entity) || !entity isai()) {
     return;
   }
@@ -89,7 +88,7 @@ play_revival_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname
   }
 
   if(newval === 1) {
-    self playSound(0, #"evt_civil_protector_revive_plr");
-    self.robot_revival_fx = util::playFXOnTag(localclientnum, level._effect[#"companion_revive_effect"], self, "j_spineupper");
+    self playSound(0, # "evt_civil_protector_revive_plr");
+    self.robot_revival_fx = util::playFXOnTag(localclientnum, level._effect[# "companion_revive_effect"], self, "j_spineupper");
   }
 }

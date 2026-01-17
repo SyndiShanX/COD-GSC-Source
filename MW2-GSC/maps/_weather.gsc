@@ -144,15 +144,15 @@ rainInit(lvl) {
 lightning(normal, flash) {
   [[normal]]();
   waittillframeend; // so exploders get setup
-  for (;;)
+  for(;;)
     lightningThink(normal, flash);
 }
 
-////// 
+//////
 /*
 	BELOW THIS LINE IS INTERNAL RAIN FUNCTIONS
 */
-////// 
+//////
 
 rainEffectChange(change, transition) {
   level notify("rain_level_change");
@@ -160,7 +160,7 @@ rainEffectChange(change, transition) {
   if(level.rainLevel > change) {
     dif = level.rainLevel - change;
     transition /= dif;
-    for (i = 0; i < dif; i++) {
+    for(i = 0; i < dif; i++) {
       wait(transition);
       level.rainLevel--;
       level._effect["rain_drops"] = level._effect["rain_" + level.rainLevel];
@@ -170,7 +170,7 @@ rainEffectChange(change, transition) {
   if(level.rainLevel < change) {
     dif = change - level.rainLevel;
     transition /= dif;
-    for (i = 0; i < dif; i++) {
+    for(i = 0; i < dif; i++) {
       wait(transition);
       level.rainLevel++;
       level._effect["rain_drops"] = level._effect["rain_" + level.rainLevel];
@@ -180,7 +180,7 @@ rainEffectChange(change, transition) {
 }
 
 addLightningExploder(num) {
-  if(!isdefined(level.lightningExploder)) {
+  if(!isDefined(level.lightningExploder)) {
     level.lightningExploder = [];
     level.lightningExploderIndex = 0;
   }
@@ -189,14 +189,12 @@ addLightningExploder(num) {
 }
 
 playerWeather() {
-  player = getentarray("player", "classname")[0];
-  for (;;) {
-    playfx(level._effect["rain_drops"], player.origin + (0, 0, 650), player.origin + (0, 0, 680));
+  player = getEntArray("player", "classname")[0];
+  for(;;) {
+    playFX(level._effect["rain_drops"], player.origin + (0, 0, 650), player.origin + (0, 0, 680));
     wait(0.3);
   }
 }
-
-
 
 rainlevelRandomwait() {
   if(level.rainLevel == 0)
@@ -276,23 +274,23 @@ lightningThink(normal, flash) {
   if(nextStrike < level.nextLightning)
     level.nextLightning = nextStrike;
 
-  for (;;) {
+  for(;;) {
     flag_wait("_weather_lightning_enabled");
 
     timer = (level.nextLightning - gettime()) * 0.001;
     if(timer > 0)
       wait(timer);
 
-    if(!flag("_weather_lightning_enabled"))
+    if(!flag("_weather_lightning_enabled")) {
       continue;
-
+    }
     lightningFlash(normal, flash);
     level.nextLightning = gettime() + ((rainlevelwait() + rainlevelRandomwait()) * 1000);
   }
 }
 
 fogflash(flashfunc) {
-  if(isdefined(level.lightningExploderIndex))
+  if(isDefined(level.lightningExploderIndex))
     exploder(level.lightningExploder[level.lightningExploderIndex]);
 
   [[flashfunc]]();
@@ -306,12 +304,12 @@ lightningFlash(normal, flashfunc, flashType) {
   //this is where the sound happens
   thread thunder();
 
-  if(!isdefined(flashType))
+  if(!isDefined(flashType))
     flashType = randomint(flash.size);
 
   lit_num = 0;
-  if(isdefined(level.lightningExploderIndex)) {
-    while (lit_num == level.lightningExploderIndex)
+  if(isDefined(level.lightningExploderIndex)) {
+    while(lit_num == level.lightningExploderIndex)
       lit_num = randomint(level.lightningExploder.size);
     level.lightningExploderIndex = lit_num;
   }
@@ -377,9 +375,9 @@ thunder() {
   ent.origin = level.player.origin + (0, 0, 60);
   ent linkto(level.player);
   if(level.rainlevel <= 8)
-    ent playsound("elm_thunder_distant", "sounddone");
+    ent playSound("elm_thunder_distant", "sounddone");
   else {
-    ent playsound("elm_thunder_distant", "sounddone");
+    ent playSound("elm_thunder_distant", "sounddone");
     ent thread play_sound_on_entity("elm_thunder_strike");
   }
   //	iprintlnbold ("thunder!");	

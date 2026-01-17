@@ -12,7 +12,6 @@
 #include scripts\zm_common\zm_hud;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_zonemgr;
-
 #namespace zm_white_zones;
 
 init() {
@@ -112,18 +111,18 @@ function_57ea545d(str_flag) {
 is_bunker_zone(str_zone) {
   if(isDefined(str_zone)) {
     switch (str_zone) {
-      case #"zone_bunker_storage":
-      case #"zone_bunker_lounge":
-      case #"zone_bunker_lounge_entrance":
-      case #"zone_bunker_power_1":
-      case #"zone_bunker_power_2":
-      case #"zone_bunker_beds_2":
-      case #"zone_bunker_beds_1":
-      case #"zone_bunker_diner_entrance":
-      case #"zone_bunker_solitary":
-      case #"zone_bunker_apd":
-      case #"zone_bunker_storage_entrance":
-      case #"zone_bunker_diner":
+      case # "zone_bunker_storage":
+      case # "zone_bunker_lounge":
+      case # "zone_bunker_lounge_entrance":
+      case # "zone_bunker_power_1":
+      case # "zone_bunker_power_2":
+      case # "zone_bunker_beds_2":
+      case # "zone_bunker_beds_1":
+      case # "zone_bunker_diner_entrance":
+      case # "zone_bunker_solitary":
+      case # "zone_bunker_apd":
+      case # "zone_bunker_storage_entrance":
+      case # "zone_bunker_diner":
         return true;
       default:
         return false;
@@ -143,7 +142,7 @@ function_8e0b371() {
   while(true) {
     if(isalive(self)) {
       str_location = function_ab7f70b9(self);
-      self zm_hud::function_29780fb5(isDefined(str_location) ? str_location : #"");
+      self zm_hud::function_29780fb5(isDefined(str_location) ? str_location : # "");
     } else {
       self zm_hud::function_29780fb5(#"");
     }
@@ -160,81 +159,81 @@ function_ab7f70b9(e_player) {
   }
 
   switch (str_zone) {
-    case #"zone_culdesac_green":
-    case #"zone_culdesac_yellow":
-      str_display = #"hash_4aa0489391d8a215";
+    case # "zone_culdesac_green":
+    case # "zone_culdesac_yellow":
+      str_display = # "hash_4aa0489391d8a215";
       break;
-    case #"zone_angled_house":
-      str_display = #"hash_2ed7f0b52bd11574";
+    case # "zone_angled_house":
+      str_display = # "hash_2ed7f0b52bd11574";
       break;
-    case #"zone_green_house_f1":
-      str_display = #"hash_1923631001f38512";
+    case # "zone_green_house_f1":
+      str_display = # "hash_1923631001f38512";
       break;
-    case #"zone_green_house_f2":
-      str_display = #"hash_1923621001f3835f";
+    case # "zone_green_house_f2":
+      str_display = # "hash_1923621001f3835f";
       break;
-    case #"zone_green_backyard":
-      str_display = #"hash_3d030d65a86f31cc";
+    case # "zone_green_backyard":
+      str_display = # "hash_3d030d65a86f31cc";
       break;
-    case #"zone_yellow_house_f1":
-      str_display = #"hash_431ca30866da6a25";
+    case # "zone_yellow_house_f1":
+      str_display = # "hash_431ca30866da6a25";
       break;
-    case #"zone_yellow_house_f2":
-      str_display = #"hash_431ca00866da650c";
+    case # "zone_yellow_house_f2":
+      str_display = # "hash_431ca00866da650c";
       break;
-    case #"zone_yellow_backyard":
-      str_display = #"hash_1277174ca2ba0df";
+    case # "zone_yellow_backyard":
+      str_display = # "hash_1277174ca2ba0df";
       break;
-    case #"zone_truck":
-      str_display = #"hash_5ff3990c30bac4bc";
+    case # "zone_truck":
+      str_display = # "hash_5ff3990c30bac4bc";
       break;
-    case #"zone_security_checkpoint":
-      str_display = #"hash_7b20b0be4c557f4e";
+    case # "zone_security_checkpoint":
+      str_display = # "hash_7b20b0be4c557f4e";
       break;
-    case #"zone_street_start":
-      str_display = #"hash_551b715f4aea3557";
+    case # "zone_street_start":
+      str_display = # "hash_551b715f4aea3557";
       break;
-    case #"zone_street_mid":
-      str_display = #"hash_551b725f4aea370a";
+    case # "zone_street_mid":
+      str_display = # "hash_551b725f4aea370a";
       break;
-    case #"zone_hoggatt_house":
-      str_display = #"hash_5d01269f88dfde25";
+    case # "zone_hoggatt_house":
+      str_display = # "hash_5d01269f88dfde25";
       break;
-    case #"zone_reinsel_house":
-      str_display = #"hash_5d01239f88dfd90c";
+    case # "zone_reinsel_house":
+      str_display = # "hash_5d01239f88dfd90c";
       break;
-    case #"zone_hammond_house":
-      str_display = #"hash_75391930b5467c7e";
+    case # "zone_hammond_house":
+      str_display = # "hash_75391930b5467c7e";
       break;
-    case #"zone_obrien_house":
-      str_display = #"hash_75391830b5467acb";
+    case # "zone_obrien_house":
+      str_display = # "hash_75391830b5467acb";
       break;
-    case #"zone_bunker_apd":
-      str_display = #"hash_20bd99c897a2920c";
+    case # "zone_bunker_apd":
+      str_display = # "hash_20bd99c897a2920c";
       break;
-    case #"zone_solitary":
-    case #"zone_bunker_solitary":
-      str_display = #"hash_314d27b045b35ee4";
+    case # "zone_solitary":
+    case # "zone_bunker_solitary":
+      str_display = # "hash_314d27b045b35ee4";
       break;
-    case #"zone_bunker_lounge":
-    case #"zone_bunker_lounge_entrance":
-      str_display = #"hash_1b60859f3a2f9d03";
+    case # "zone_bunker_lounge":
+    case # "zone_bunker_lounge_entrance":
+      str_display = # "hash_1b60859f3a2f9d03";
       break;
-    case #"zone_bunker_beds_2":
-    case #"zone_bunker_beds_1":
-      str_display = #"hash_1ec883f1cf006ca9";
+    case # "zone_bunker_beds_2":
+    case # "zone_bunker_beds_1":
+      str_display = # "hash_1ec883f1cf006ca9";
       break;
-    case #"zone_bunker_diner_entrance":
-    case #"zone_bunker_diner":
-      str_display = #"hash_352ef8e844f92ce3";
+    case # "zone_bunker_diner_entrance":
+    case # "zone_bunker_diner":
+      str_display = # "hash_352ef8e844f92ce3";
       break;
-    case #"zone_bunker_storage":
-    case #"zone_bunker_storage_entrance":
-      str_display = #"hash_575e5c7bf38523da";
+    case # "zone_bunker_storage":
+    case # "zone_bunker_storage_entrance":
+      str_display = # "hash_575e5c7bf38523da";
       break;
-    case #"zone_bunker_power_1":
-    case #"zone_bunker_power_2":
-      str_display = #"hash_24acc68c936da840";
+    case # "zone_bunker_power_1":
+    case # "zone_bunker_power_2":
+      str_display = # "hash_24acc68c936da840";
       break;
   }
 

@@ -11,19 +11,19 @@
 #namespace explode;
 
 function autoexec __init__sytem__() {
-  system::register("explode", & __init__, undefined, undefined);
+  system::register("explode", &__init__, undefined, undefined);
 }
 
 function __init__() {
   level.dirt_enable_explosion = getdvarint("scr_dirt_enable_explosion", 1);
   level.dirt_enable_slide = getdvarint("scr_dirt_enable_slide", 1);
   level.dirt_enable_fall_damage = getdvarint("scr_dirt_enable_fall_damage", 1);
-  callback::on_localplayer_spawned( & localplayer_spawned);
+  callback::on_localplayer_spawned(&localplayer_spawned);
   level thread updatedvars();
 }
 
 function updatedvars() {
-  while (true) {
+  while(true) {
     level.dirt_enable_explosion = getdvarint("", level.dirt_enable_explosion);
     level.dirt_enable_slide = getdvarint("", level.dirt_enable_slide);
     level.dirt_enable_fall_damage = getdvarint("", level.dirt_enable_fall_damage);
@@ -55,7 +55,7 @@ function watchforplayerfalldamage(localclientnum) {
   seed = 0;
   xdir = 0;
   ydir = 270;
-  while (true) {
+  while(true) {
     self waittill("fall_damage");
     self thread dothedirty(localclientnum, xdir, ydir, 1, 1000, 500);
   }
@@ -67,7 +67,7 @@ function watchforplayerslide(localclientnum) {
   self.wasplayersliding = 0;
   xdir = 0;
   ydir = 6000;
-  while (true) {
+  while(true) {
     self.isplayersliding = self isplayersliding();
     if(self.isplayersliding) {
       if(!self.wasplayersliding) {
@@ -97,7 +97,7 @@ function dothedirty(localclientnum, right, up, distance, dirtduration, dirtfadet
   starttime = getservertime(localclientnum);
   currenttime = starttime;
   elapsedtime = 0;
-  while (elapsedtime < dirtduration) {
+  while(elapsedtime < dirtduration) {
     if(elapsedtime > (dirtduration - dirtfadetime)) {
       filter::set_filter_sprite_dirt_opacity(self, 5, (dirtduration - elapsedtime) / dirtfadetime);
     } else {
@@ -114,20 +114,20 @@ function dothedirty(localclientnum, right, up, distance, dirtduration, dirtfadet
 
 function watchforexplosion(localclientnum) {
   self endon("entityshutdown");
-  while (true) {
+  while(true) {
     level waittill("explode", localclientnum, position, mod, weapon, owner_cent);
     explosiondistance = distance(self.origin, position);
     if(mod == "MOD_GRENADE_SPLASH" || mod == "MOD_PROJECTILE_SPLASH" && explosiondistance < 600 && !getinkillcam(localclientnum) && !isthirdperson(localclientnum)) {
       cameraangles = self getcamangles();
-      if(!isdefined(cameraangles)) {
+      if(!isDefined(cameraangles)) {
         continue;
       }
-      forwardvec = vectornormalize(anglestoforward(cameraangles));
+      forwardvec = vectornormalize(anglesToForward(cameraangles));
       upvec = vectornormalize(anglestoup(cameraangles));
       rightvec = vectornormalize(anglestoright(cameraangles));
       explosionvec = vectornormalize(position - self getcampos());
       if(vectordot(forwardvec, explosionvec) > 0) {
-        trace = bullettrace(getlocalclienteyepos(localclientnum), position, 0, self);
+        trace = bulletTrace(getlocalclienteyepos(localclientnum), position, 0, self);
         if(trace["fraction"] >= 0.9) {
           udot = -1 * vectordot(explosionvec, upvec);
           rdot = vectordot(explosionvec, rightvec);

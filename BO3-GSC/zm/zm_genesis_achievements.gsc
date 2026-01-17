@@ -22,14 +22,14 @@
 #namespace genesis_achievements;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_achievements", & __init__, undefined, undefined);
+  system::register("zm_genesis_achievements", &__init__, undefined, undefined);
 }
 
 function __init__() {
   level thread function_c190d113();
   level thread function_902aff55();
-  callback::on_connect( & on_player_connect);
-  zm_spawner::register_zombie_death_event_callback( & function_71e89ea4);
+  callback::on_connect(&on_player_connect);
+  zm_spawner::register_zombie_death_event_callback(&function_71e89ea4);
 }
 
 function on_player_connect() {
@@ -43,12 +43,12 @@ function on_player_connect() {
 
 function function_c190d113() {
   level waittill("hash_91a3107");
-  array::run_all(level.players, & giveachievement, "ZM_GENESIS_EE");
+  array::run_all(level.players, &giveachievement, "ZM_GENESIS_EE");
 }
 
 function function_902aff55() {
   level waittill("hash_154abf47");
-  array::run_all(level.players, & giveachievement, "ZM_GENESIS_SUPER_EE");
+  array::run_all(level.players, &giveachievement, "ZM_GENESIS_SUPER_EE");
 }
 
 function function_4d2d1f7a() {
@@ -71,7 +71,7 @@ function function_553e6274() {
 }
 
 function function_3c82f182() {
-  while (self.var_71148446.size > 0) {
+  while(self.var_71148446.size > 0) {
     self waittill("hash_af442f7c");
   }
   self giveachievement("ZM_GENESIS_KEEPER_ASSIST");
@@ -82,7 +82,7 @@ function function_817b1327() {
   self endon("disconnect");
   self endon("hash_720f4d71");
   var_ef6b3d38 = 0;
-  while (true) {
+  while(true) {
     level waittill("beam_killed_zombie", e_attacker);
     if(e_attacker === self) {
       var_ef6b3d38++;
@@ -104,7 +104,7 @@ function function_7d947aff() {
   self.var_88f45a31[self.var_88f45a31.size] = "temple_island";
   self.var_88f45a31[self.var_88f45a31.size] = "prototype_island";
   self thread function_935679b0();
-  while (self.var_88f45a31.size > 0) {
+  while(self.var_88f45a31.size > 0) {
     self waittill("hash_421672a9");
   }
   self giveachievement("ZM_GENESIS_GRAND_TOUR");
@@ -116,13 +116,13 @@ function function_935679b0() {
   level endon("end_game");
   self endon("disconnect");
   self endon("hash_2bec714");
-  while (!isdefined(self.var_a3d40b8)) {
+  while(!isDefined(self.var_a3d40b8)) {
     util::wait_network_frame();
   }
   var_e274e0c3 = self.var_a3d40b8;
   self thread function_f17c9ba1();
-  while (true) {
-    if(isdefined(self.var_a3d40b8) && var_e274e0c3 != self.var_a3d40b8) {
+  while(true) {
+    if(isDefined(self.var_a3d40b8) && var_e274e0c3 != self.var_a3d40b8) {
       self thread function_f17c9ba1();
       var_e274e0c3 = self.var_a3d40b8;
       self notify("hash_421672a9");
@@ -136,14 +136,14 @@ function function_f17c9ba1() {
   self endon("disconnect");
   self endon("hash_2bec714");
   var_a43542cc = self.var_a3d40b8;
-  if(isdefined(var_a43542cc) && isinarray(self.var_88f45a31, var_a43542cc)) {
+  if(isDefined(var_a43542cc) && isinarray(self.var_88f45a31, var_a43542cc)) {
     arrayremovevalue(self.var_88f45a31, var_a43542cc);
   } else {
     return;
   }
   self waittill("hash_421672a9");
   wait(120);
-  if(isdefined(self.var_88f45a31)) {
+  if(isDefined(self.var_88f45a31)) {
     array::add(self.var_88f45a31, var_a43542cc, 0);
   }
 }
@@ -152,7 +152,7 @@ function achievement_wardrobe_change() {
   level endon("end_game");
   self endon("disconnect");
   var_fc2fd82c = [];
-  while (true) {
+  while(true) {
     self waittill("changed_wearable", var_475b0a4e);
     array::add(var_fc2fd82c, var_475b0a4e, 0);
     if(var_fc2fd82c.size >= 3) {
@@ -176,19 +176,19 @@ function function_c77b5630() {
 }
 
 function function_71e89ea4(e_attacker) {
-  if(isdefined(self.damageweapon) && zm_weapons::is_wonder_weapon(self.damageweapon)) {
+  if(isDefined(self.damageweapon) && zm_weapons::is_wonder_weapon(self.damageweapon)) {
     if(issubstr(self.damageweapon.name, "thundergun")) {
-      if(!isdefined(e_attacker.var_2831078e)) {
+      if(!isDefined(e_attacker.var_2831078e)) {
         e_attacker.var_2831078e = 0;
       }
       e_attacker.var_2831078e++;
     } else if(issubstr(self.damageweapon.name, "idgun")) {
-      if(!isdefined(e_attacker.var_29bc01fd)) {
+      if(!isDefined(e_attacker.var_29bc01fd)) {
         e_attacker.var_29bc01fd = 0;
       }
       e_attacker.var_29bc01fd++;
     }
-    if(isdefined(e_attacker.var_29bc01fd) && e_attacker.var_29bc01fd >= 10 && (isdefined(e_attacker.var_2831078e) && e_attacker.var_2831078e >= 10)) {
+    if(isDefined(e_attacker.var_29bc01fd) && e_attacker.var_29bc01fd >= 10 && (isDefined(e_attacker.var_2831078e) && e_attacker.var_2831078e >= 10)) {
       e_attacker notify("hash_86cee34e");
     }
   }

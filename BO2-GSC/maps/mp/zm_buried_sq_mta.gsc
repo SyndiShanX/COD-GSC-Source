@@ -22,7 +22,7 @@ init() {
 }
 
 init_stage() {
-  a_amplifiers = getentarray("sq_amplifier", "targetname");
+  a_amplifiers = getEntArray("sq_amplifier", "targetname");
   array_thread(a_amplifiers, ::mta_amplifier_found_watcher);
   level thread stage_vo_max();
   level thread stage_vo_ric();
@@ -38,8 +38,7 @@ stage_logic() {
   stage_completed("sq", level._cur_stage_name);
 }
 
-exit_stage(success) {
-}
+exit_stage(success) {}
 
 stage_vo_max() {
   level thread stage_vo_max_amp_broken();
@@ -91,12 +90,12 @@ mta_amplifier_found_watcher() {
 }
 
 mta_amplifier_init() {
-  self setmodel("p6_zm_bu_ether_amplifier");
+  self setModel("p6_zm_bu_ether_amplifier");
   self.targetname = "sq_amplifier";
   self.script_noteworthy = "subwoofer_target";
   self.amplifier_state = "base";
-  self playloopsound("zmb_sq_amplifier_empty_loop", 1);
-  self setcandamage(1);
+  self playLoopSound("zmb_sq_amplifier_empty_loop", 1);
+  self setCanDamage(1);
   self thread mta_amplifier_subwoofer_watch();
   self mta_amplifier_damage_watch();
 }
@@ -107,9 +106,9 @@ mta_amplifier_subwoofer_watch() {
   iprintlnbold("Amplifier Broken");
 
   self.amplifier_state = "broken";
-  self setmodel("p6_zm_bu_ether_amplifier_dmg");
+  self setModel("p6_zm_bu_ether_amplifier_dmg");
   self stoploopsound(0.1);
-  self playsound("zmb_sq_amplifier_destroy");
+  self playSound("zmb_sq_amplifier_destroy");
   level notify("mta_amp_broken", self);
   mta_check_all_amplifier_states();
 }
@@ -131,8 +130,8 @@ mta_amplifier_damage_watch() {
 
         self thread mta_amplifier_filled_fx();
         self.amplifier_state = "filled";
-        self playsound("zmb_sq_amplifier_fill");
-        self playloopsound("zmb_sq_amplifier_full_loop", 1);
+        self playSound("zmb_sq_amplifier_fill");
+        self playLoopSound("zmb_sq_amplifier_full_loop", 1);
         self notify("amplifier_filled");
         level notify("mta_amp_amplified");
         break;
@@ -147,7 +146,7 @@ mta_amplifier_damage_watch() {
 
 mta_amplifier_filled_fx() {
   while(true) {
-    playfx(level._effect["sq_ether_amp_trail"], self.origin + vectorscale((0, 0, 1), 46.0));
+    playFX(level._effect["sq_ether_amp_trail"], self.origin + vectorscale((0, 0, 1), 46.0));
     wait 1;
   }
 }
@@ -155,7 +154,7 @@ mta_amplifier_filled_fx() {
 mta_check_all_amplifier_states() {
   is_all_broken = 1;
   is_all_filled = 1;
-  a_amplifiers = getentarray("sq_amplifier", "targetname");
+  a_amplifiers = getEntArray("sq_amplifier", "targetname");
 
   foreach(m_amplifier in a_amplifiers) {
     if(m_amplifier.amplifier_state != "filled")

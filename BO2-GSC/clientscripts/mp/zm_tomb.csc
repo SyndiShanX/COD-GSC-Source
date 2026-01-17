@@ -305,11 +305,9 @@ init_fog_vol_to_visionset() {
   level thread fog_vol_to_visionset_monitor();
 }
 
-init_clientflag_variables() {
-}
+init_clientflag_variables() {}
 
-register_clientflag_callbacks() {
-}
+register_clientflag_callbacks() {}
 
 include_weapons() {
   include_weapon("hamr_zm");
@@ -509,13 +507,13 @@ zombie_soul_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
     v_origin = self gettagorigin("J_SpineUpper");
 
   e_fx = spawn(localclientnum, v_origin, "script_model");
-  e_fx setmodel("tag_origin");
-  e_fx playsound(localclientnum, "zmb_squest_charge_soul_leave");
-  playfxontag(localclientnum, level._effect["staff_soul"], e_fx, "tag_origin");
+  e_fx setModel("tag_origin");
+  e_fx playSound(localclientnum, "zmb_squest_charge_soul_leave");
+  playFXOnTag(localclientnum, level._effect["staff_soul"], e_fx, "tag_origin");
   e_fx moveto(v_dest + vectorscale((0, 0, 1), 5.0), 0.5);
   e_fx waittill("movedone");
-  e_fx playsound(localclientnum, "zmb_squest_charge_soul_impact");
-  playfxontag(localclientnum, level._effect["staff_charge"], e_fx, "tag_origin");
+  e_fx playSound(localclientnum, "zmb_squest_charge_soul_impact");
+  playFXOnTag(localclientnum, level._effect["staff_charge"], e_fx, "tag_origin");
   serverwait(localclientnum, 0.3);
   e_fx delete();
 }
@@ -601,7 +599,7 @@ central_crypt_disc_update_color(localclientnum, light_on) {
   else if(light_on)
     v_color = v_color * 10;
 
-  playsound(0, "zmb_crypt_disc_light", self.origin);
+  playSound(0, "zmb_crypt_disc_light", self.origin);
   self setshaderconstant(localclientnum, 0, v_color[0], v_color[1], v_color[2], 1.0);
 }
 
@@ -621,7 +619,7 @@ switch_spark_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname
   }
 
   if(newval)
-    self.spark_fx = playfxontag(localclientnum, level._effect["fx_tomb_sparks"], self, "lever_jnt");
+    self.spark_fx = playFXOnTag(localclientnum, level._effect["fx_tomb_sparks"], self, "lever_jnt");
 }
 
 switch_cooldown_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -642,7 +640,7 @@ loop_cooldown_fx(localclientnum) {
   level endon("stop_cooldown_fx");
 
   while(true) {
-    playfx(localclientnum, level._effect["perk_machine_steam"], self.origin);
+    playFX(localclientnum, level._effect["perk_machine_steam"], self.origin);
     wait 0.1;
   }
 }
@@ -666,7 +664,7 @@ teleporter_fx(localclientnum, enum) {
       break;
   }
 
-  self.fx_element_glow = playfxontag(localclientnum, level._effect[str_fx], self, "tag_origin");
+  self.fx_element_glow = playFXOnTag(localclientnum, level._effect[str_fx], self, "tag_origin");
 }
 
 crystal_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -677,13 +675,13 @@ crystal_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwa
   }
 
   if(newval == 1)
-    self.fx_element_glow = playfxontag(localclientnum, level._effect["fire_glow"], self, "tag_origin");
+    self.fx_element_glow = playFXOnTag(localclientnum, level._effect["fire_glow"], self, "tag_origin");
   else if(newval == 2)
-    self.fx_element_glow = playfxontag(localclientnum, level._effect["air_glow"], self, "tag_origin");
+    self.fx_element_glow = playFXOnTag(localclientnum, level._effect["air_glow"], self, "tag_origin");
   else if(newval == 3)
-    self.fx_element_glow = playfxontag(localclientnum, level._effect["elec_glow"], self, "tag_origin");
+    self.fx_element_glow = playFXOnTag(localclientnum, level._effect["elec_glow"], self, "tag_origin");
   else if(newval == 4)
-    self.fx_element_glow = playfxontag(localclientnum, level._effect["ice_glow"], self, "tag_origin");
+    self.fx_element_glow = playFXOnTag(localclientnum, level._effect["ice_glow"], self, "tag_origin");
   else if(newval == 0)
     stopfx(localclientnum, self.fx_element_glow);
 }
@@ -735,14 +733,14 @@ sky_pillar_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, 
   if(newval == 1) {
     self mapshaderconstant(localclientnum, 0, "ScriptVector0");
     self thread sky_pillar_fade(localclientnum, 1, 1.0);
-    playsound(0, "zmb_squest_crystal_sky_pillar_start", (3, 0, 218));
+    playSound(0, "zmb_squest_crystal_sky_pillar_start", (3, 0, 218));
     soundlineemitter("zmb_squest_light_beam", (1, -14, -685), (-8, 5, 530));
 
     println("Sky Pillar Fading In");
 
   } else {
     self thread sky_pillar_fade(localclientnum, 0, 4.0);
-    playsound(0, "zmb_squest_crystal_sky_pillar_stop", (3, 0, 218));
+    playSound(0, "zmb_squest_crystal_sky_pillar_stop", (3, 0, 218));
     soundstoplineemitter("zmb_squest_light_beam", (1, -14, -685), (-8, 5, 530));
 
     println("Sky Pillar Fading Out");
@@ -965,10 +963,10 @@ sndupdateroomweather() {
   name = level.activeambientpackage;
 
   if(isDefined(level.sndambweathernames) && isinarray(level.sndambweathernames, name)) {
-    playsound(0, "amb_thunder_flash_2d", (0, 0, 0));
+    playSound(0, "amb_thunder_flash_2d", (0, 0, 0));
     stoploopsound(0, level.ambientrooms[name].ent, level.ambientrooms[name].fadeout);
     wait 0.5;
-    level.ambientrooms[name].id = playloopsound(0, level.ambientrooms[name].ent, level.ambientrooms[name].tone, level.ambientrooms[name].fadein);
+    level.ambientrooms[name].id = playLoopSound(0, level.ambientrooms[name].ent, level.ambientrooms[name].tone, level.ambientrooms[name].fadein);
   }
 }
 
@@ -988,7 +986,7 @@ _rain_thread(n_level, localclientnum) {
     if(!isDefined(self)) {
       return;
     }
-    playfx(localclientnum, level._effect["player_rain"], self.origin);
+    playFX(localclientnum, level._effect["player_rain"], self.origin);
     wait(n_wait);
   }
 }
@@ -1007,7 +1005,7 @@ _snow_thread(n_level, localclientnum) {
     if(!isDefined(self)) {
       return;
     }
-    playfx(localclientnum, level._effect["player_snow"], self.origin);
+    playFX(localclientnum, level._effect["player_snow"], self.origin);
     wait(n_wait);
   }
 }
@@ -1028,12 +1026,12 @@ _lightning_thread(localclientnum) {
 
     while(is_true(self.b_lightning)) {
       v_p_angles = self.angles;
-      v_forward = anglestoforward(self.angles) * 25000;
+      v_forward = anglesToForward(self.angles) * 25000;
       v_end_pos = self.origin + (v_forward[0], v_forward[1], 0);
       v_offset = (randomintrange(-5000, 5000), randomintrange(-5000, 5000), randomint(3000));
       v_end_pos = v_end_pos + v_offset;
-      playfx(localclientnum, level._effect["lightning_flash"], v_end_pos);
-      playsound(0, "amb_thunder_clap_zm", v_end_pos);
+      playFX(localclientnum, level._effect["lightning_flash"], v_end_pos);
+      playSound(0, "amb_thunder_clap_zm", v_end_pos);
       serverwait(localclientnum, randomfloatrange(0.2, 0.3));
       self thread _lightning_disconnect_thread(localclientnum);
       n_strikes = randomintrange(3, 5);
@@ -1041,7 +1039,7 @@ _lightning_thread(localclientnum) {
       for(i = 0; i < n_strikes; i++) {
         serverwait(localclientnum, 0.1);
         n_blend_time = randomfloatrange(0.1, 0.35);
-        playsound(0, "amb_thunder_flash_zm", v_end_pos);
+        playSound(0, "amb_thunder_flash_zm", v_end_pos);
         setsaveddvar("r_lightTweakSunLight", randomfloatrange(28, 32));
         lerp_dvar("r_lightTweakSunLight", level.n_level_sunlight, n_blend_time, 1, localclientnum);
       }
@@ -1082,20 +1080,19 @@ lerp_dvar(str_dvar, n_val, n_lerp_time, b_saved_dvar, localclientnum) {
     setdvar(str_dvar, n_val);
 }
 
-player_tablet_state(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-}
+player_tablet_state(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {}
 
 foot_print_box_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   a_structs = getstructarray("foot_box_pos", "targetname");
   s_box = get_array_of_closest(self.origin, a_structs)[0];
   e_fx = spawn(localclientnum, self gettagorigin("J_SpineUpper"), "script_model");
-  e_fx setmodel("tag_origin");
-  e_fx playsound(localclientnum, "zmb_squest_charge_soul_leave");
-  playfxontag(localclientnum, level._effect["staff_soul"], e_fx, "tag_origin");
+  e_fx setModel("tag_origin");
+  e_fx playSound(localclientnum, "zmb_squest_charge_soul_leave");
+  playFXOnTag(localclientnum, level._effect["staff_soul"], e_fx, "tag_origin");
   e_fx moveto(s_box.origin, 1);
   e_fx waittill("movedone");
-  playsound(localclientnum, "zmb_squest_charge_soul_impact", e_fx.origin);
-  playfxontag(localclientnum, level._effect["staff_charge"], e_fx, "tag_origin");
+  playSound(localclientnum, "zmb_squest_charge_soul_impact", e_fx.origin);
+  playFXOnTag(localclientnum, level._effect["staff_charge"], e_fx, "tag_origin");
   wait 0.3;
   e_fx delete();
 }
@@ -1105,13 +1102,13 @@ foot_print_box_glow(localclientnum, oldval, newval, bnewent, binitialsnap, field
 
   if(newval == 1) {
     if(!isDefined(self.fx_glow)) {
-      self.fx_glow = playfxontag(localclientnum, level._effect["foot_box_glow"], self, "tag_origin");
+      self.fx_glow = playFXOnTag(localclientnum, level._effect["foot_box_glow"], self, "tag_origin");
       self thread foot_print_box_glow_in(localclientnum);
     }
 
     if(!isDefined(self.sndent)) {
       self.sndent = spawn(0, self.origin, "script_origin");
-      self.sndent playloopsound("zmb_footprintbox_glow_lp", 1);
+      self.sndent playLoopSound("zmb_footprintbox_glow_lp", 1);
       self.sndent thread snddemojumpmonitor();
     }
   } else {
@@ -1172,7 +1169,7 @@ timer_increment_loop(localclientnum) {
 }
 
 new_timer(localclientnum) {
-  s_timer = spawnstruct();
+  s_timer = spawnStruct();
   s_timer.n_time_current = 0;
   s_timer thread timer_increment_loop(localclientnum);
   return s_timer;

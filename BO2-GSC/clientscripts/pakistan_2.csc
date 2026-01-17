@@ -280,23 +280,23 @@ facialrecognitionui_defalco(localclientnum, text, tag) {
 argusbuildui(localclientnum, usertag) {
   switch (usertag) {
     case "soldier1":
-      return facialrecognitionui_soldier1(localclientnum, & "PAKISTAN_2_ARGUS_SOLDIER", usertag);
+      return facialrecognitionui_soldier1(localclientnum, &"PAKISTAN_2_ARGUS_SOLDIER", usertag);
     case "soldier2":
-      return facialrecognitionui_soldier2(localclientnum, & "PAKISTAN_2_ARGUS_SOLDIER", usertag);
+      return facialrecognitionui_soldier2(localclientnum, &"PAKISTAN_2_ARGUS_SOLDIER", usertag);
     case "soldier3":
-      return facialrecognitionui_soldier3(localclientnum, & "PAKISTAN_2_ARGUS_SOLDIER", usertag);
+      return facialrecognitionui_soldier3(localclientnum, &"PAKISTAN_2_ARGUS_SOLDIER", usertag);
     case "soldier4":
-      return facialrecognitionui_soldier4(localclientnum, & "PAKISTAN_2_ARGUS_SOLDIER", usertag);
+      return facialrecognitionui_soldier4(localclientnum, &"PAKISTAN_2_ARGUS_SOLDIER", usertag);
     case "soldier5":
-      return facialrecognitionui_soldier5(localclientnum, & "PAKISTAN_2_ARGUS_SOLDIER", usertag);
+      return facialrecognitionui_soldier5(localclientnum, &"PAKISTAN_2_ARGUS_SOLDIER", usertag);
     case "soldier6":
-      return facialrecognitionui_soldier6(localclientnum, & "PAKISTAN_2_ARGUS_SOLDIER", usertag);
+      return facialrecognitionui_soldier6(localclientnum, &"PAKISTAN_2_ARGUS_SOLDIER", usertag);
     case "militia_leader":
-      return facialrecognitionui_militia_leader(localclientnum, & "PAKISTAN_2_ARGUS_SOLDIER", usertag);
+      return facialrecognitionui_militia_leader(localclientnum, &"PAKISTAN_2_ARGUS_SOLDIER", usertag);
     case "menendez":
-      return facialrecognitionui_menendez(localclientnum, & "PAKISTAN_2_ARGUS_MENENDEZ", usertag);
+      return facialrecognitionui_menendez(localclientnum, &"PAKISTAN_2_ARGUS_MENENDEZ", usertag);
     case "defalco":
-      return facialrecognitionui_defalco(localclientnum, & "PAKISTAN_2_ARGUS_DEFALCO", usertag);
+      return facialrecognitionui_defalco(localclientnum, &"PAKISTAN_2_ARGUS_DEFALCO", usertag);
   }
 }
 
@@ -326,7 +326,7 @@ onargusnotify(localclientnum, argusid, usertag, message) {
         case "soldier4":
         case "soldier5":
         case "soldier6":
-          if(!within_fov(level.localplayers[localclientnum] geteye(), level.localplayers[localclientnum] getplayerangles(), argusgetorigin(argusid), cos(2.3)))
+          if(!within_fov(level.localplayers[localclientnum] getEye(), level.localplayers[localclientnum] getplayerangles(), argusgetorigin(argusid), cos(2.3)))
             return 0;
 
           break;
@@ -344,7 +344,7 @@ onargusnotify(localclientnum, argusid, usertag, message) {
         case "soldier4":
         case "soldier5":
         case "soldier6":
-          if(!within_fov(level.localplayers[localclientnum] geteye(), level.localplayers[localclientnum] getplayerangles(), argusgetorigin(argusid), cos(2.3))) {
+          if(!within_fov(level.localplayers[localclientnum] getEye(), level.localplayers[localclientnum] getplayerangles(), argusgetorigin(argusid), cos(2.3))) {
             if(level.is_bink_playing) {
               argussetbracket(argusid, "square_bound");
               cancel_facial_recognition();
@@ -422,7 +422,7 @@ run_facial_recognition(argusid, usertag) {
 cancel_facial_recognition() {
   level notify("stop_facial_recognition");
   soundstoploopemitter("evt_surv_scan_dude", (0, 0, 0));
-  playsound(0, "evt_surv_scan_deny", (0, 0, 0));
+  playSound(0, "evt_surv_scan_deny", (0, 0, 0));
   stopbink(level.facial_recognition_bink);
   level.is_bink_playing = 0;
 }
@@ -722,7 +722,7 @@ surveillance_box_position_think() {
 
 toggle_water_fx_actor(localclientnum, set, newent) {
   if(set)
-    self.fx_handle = playfxontag(localclientnum, level._effect["water_wake"], self, "tag_origin");
+    self.fx_handle = playFXOnTag(localclientnum, level._effect["water_wake"], self, "tag_origin");
   else
     deletefx(localclientnum, self.fx_handle);
 }

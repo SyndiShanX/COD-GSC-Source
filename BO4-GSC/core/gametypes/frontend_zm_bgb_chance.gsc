@@ -4,7 +4,6 @@
 *****************************************************/
 
 #include scripts\core_common\clientfield_shared;
-
 #namespace zm_frontend_zm_bgb_chance;
 
 zm_frontend_bgb_slots_logic() {
@@ -62,4 +61,3 @@ bgb_devgui_think() {
     wait 0.5;
   }
 }
-

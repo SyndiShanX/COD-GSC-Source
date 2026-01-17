@@ -23,7 +23,7 @@ function init_shared() {
   trophydeployanim = % mp_trophy_system::o_trophy_deploy;
   trophyspinanim = % mp_trophy_system::o_trophy_spin;
   level thread register();
-  callback::on_spawned( & createtrophysystemwatcher);
+  callback::on_spawned(&createtrophysystemwatcher);
 }
 
 function register() {
@@ -36,7 +36,7 @@ function createtrophysystemwatcher() {
     return;
   }
   watcher = self weaponobjects::createuseweaponobjectwatcher("trophy_system", self.team);
-  watcher.ondetonatecallback = & trophysystemdetonate;
+  watcher.ondetonatecallback = &trophysystemdetonate;
   watcher.activatesound = "wpn_claymore_alert";
   watcher.hackable = 1;
   watcher.hackertoolradius = level.equipmenthackertoolradius;
@@ -46,10 +46,10 @@ function createtrophysystemwatcher() {
   watcher.activationdelay = 0.1;
   watcher.headicon = 0;
   watcher.enemydestroy = 1;
-  watcher.onspawn = & ontrophysystemspawn;
-  watcher.ondamage = & watchtrophysystemdamage;
-  watcher.ondestroyed = & ontrophysystemsmashed;
-  watcher.onstun = & weaponobjects::weaponstun;
+  watcher.onspawn = &ontrophysystemspawn;
+  watcher.ondamage = &watchtrophysystemdamage;
+  watcher.ondestroyed = &ontrophysystemsmashed;
+  watcher.onstun = &weaponobjects::weaponstun;
   watcher.stuntime = 1;
 }
 
@@ -75,13 +75,13 @@ function ontrophysystemspawn(watcher, player) {
   self setanim( % mp_trophy_system::o_trophy_deploy, 0);
   self setanim( % mp_trophy_system::o_trophy_spin, 1);
   self clientfield::set("trophy_system_state", 2);
-  self playsound("wpn_trophy_deploy_start");
-  self playloopsound("wpn_trophy_spin", 0.25);
+  self playSound("wpn_trophy_deploy_start");
+  self playLoopSound("wpn_trophy_spin", 0.25);
   self setreconmodeldeployed();
 }
 
 function setreconmodeldeployed() {
-  if(isdefined(self.reconmodelentity)) {
+  if(isDefined(self.reconmodelentity)) {
     self.reconmodelentity clientfield::set("trophy_system_state", 2);
   }
 }
@@ -93,12 +93,12 @@ function trophywatchhack() {
 }
 
 function ontrophysystemsmashed(attacker) {
-  playfx(level._effect["tacticalInsertionFizzle"], self.origin);
-  self playsound("dst_trophy_smash");
-  if(isdefined(level.playequipmentdestroyedonplayer)) {
+  playFX(level._effect["tacticalInsertionFizzle"], self.origin);
+  self playSound("dst_trophy_smash");
+  if(isDefined(level.playequipmentdestroyedonplayer)) {
     self.owner[[level.playequipmentdestroyedonplayer]]();
   }
-  if(isdefined(attacker) && self.owner util::isenemyplayer(attacker)) {
+  if(isDefined(attacker) && self.owner util::isenemyplayer(attacker)) {
     attacker challenges::destroyedequipment();
     scoreevents::processscoreevent("destroyed_trophy_system", attacker, self.owner);
   }
@@ -109,21 +109,21 @@ function trophyactive(owner) {
   owner endon("disconnect");
   self endon("death");
   self endon("hacked");
-  while (true) {
-    if(!isdefined(self)) {
+  while(true) {
+    if(!isDefined(self)) {
       return;
     }
-    if(level.missileentities.size < 1 || isdefined(self.disabled)) {
+    if(level.missileentities.size < 1 || isDefined(self.disabled)) {
       wait(0.05);
       continue;
     }
-    for (index = 0; index < level.missileentities.size; index++) {
+    for(index = 0; index < level.missileentities.size; index++) {
       wait(0.05);
-      if(!isdefined(self)) {
+      if(!isDefined(self)) {
         return;
       }
       grenade = level.missileentities[index];
-      if(!isdefined(grenade)) {
+      if(!isDefined(grenade)) {
         continue;
       }
       if(grenade == self) {
@@ -142,10 +142,10 @@ function trophyactive(owner) {
           continue;
         }
       }
-      if(!isdefined(grenade.owner)) {
+      if(!isDefined(grenade.owner)) {
         grenade.owner = getmissileowner(grenade);
       }
-      if(isdefined(grenade.owner)) {
+      if(isDefined(grenade.owner)) {
         if(level.teambased) {
           if(grenade.owner.team == owner.team) {
             continue;
@@ -156,10 +156,10 @@ function trophyactive(owner) {
         grenadedistancesquared = distancesquared(grenade.origin, self.origin);
         if(grenadedistancesquared < 262144) {
           if(bullettracepassed(grenade.origin, self.origin + vectorscale((0, 0, 1), 29), 0, self, grenade, 0, 1)) {
-            playfx(level.trophylongflashfx, self.origin + vectorscale((0, 0, 1), 15), grenade.origin - self.origin, anglestoup(self.angles));
+            playFX(level.trophylongflashfx, self.origin + vectorscale((0, 0, 1), 15), grenade.origin - self.origin, anglestoup(self.angles));
             owner thread projectileexplode(grenade, self);
             index--;
-            self playsound("wpn_trophy_alert");
+            self playSound("wpn_trophy_alert");
             if(getdvarint("player_sustainAmmo") == 0) {
               self.ammo--;
               if(self.ammo <= 0) {
@@ -176,7 +176,7 @@ function trophyactive(owner) {
 function projectileexplode(projectile, trophy) {
   self endon("death");
   projposition = projectile.origin;
-  playfx(level.trophydetonationfx, projposition);
+  playFX(level.trophydetonationfx, projposition);
   projectile notify("trophy_destroyed");
   trophy radiusdamage(projposition, 128, 105, 10, self);
   scoreevents::processscoreevent("trophy_defense", self);
@@ -191,7 +191,7 @@ function projectileexplode(projectile, trophy) {
 function trophydestroytacinsert(tacinsert, trophy) {
   self endon("death");
   tacpos = tacinsert.origin;
-  playfx(level.trophydetonationfx, tacinsert.origin);
+  playFX(level.trophydetonationfx, tacinsert.origin);
   tacinsert thread tacticalinsertion::tacticalinsertiondestroyedbytrophysystem(self, trophy);
   trophy radiusdamage(tacpos, 128, 105, 10, self);
   scoreevents::processscoreevent("trophy_defense", self);
@@ -202,10 +202,10 @@ function trophydestroytacinsert(tacinsert, trophy) {
 }
 
 function trophysystemdetonate(attacker, weapon, target) {
-  if(!isdefined(weapon) || !weapon.isemp) {
-    playfx(level._equipment_explode_fx_lg, self.origin);
+  if(!isDefined(weapon) || !weapon.isemp) {
+    playFX(level._equipment_explode_fx_lg, self.origin);
   }
-  if(isdefined(attacker) && self.owner util::isenemyplayer(attacker)) {
+  if(isDefined(attacker) && self.owner util::isenemyplayer(attacker)) {
     attacker challenges::destroyedequipment(weapon);
     scoreevents::processscoreevent("destroyed_trophy_system", attacker, self.owner, weapon);
   }
@@ -216,7 +216,7 @@ function trophysystemdetonate(attacker, weapon, target) {
 function watchtrophysystemdamage(watcher) {
   self endon("death");
   self endon("hacked");
-  self setcandamage(1);
+  self setCanDamage(1);
   damagemax = 20;
   if(!self util::ishacked()) {
     self.damagetaken = 0;
@@ -225,7 +225,7 @@ function watchtrophysystemdamage(watcher) {
   self.health = self.maxhealth;
   self setmaxhealth(self.maxhealth);
   attacker = undefined;
-  while (true) {
+  while(true) {
     self waittill("damage", damage, attacker, direction_vec, point, type, modelname, tagname, partname, weapon, idflags);
     attacker = self[[level.figure_out_attacker]](attacker);
     if(!isplayer(attacker)) {
@@ -273,10 +273,10 @@ function ammo_reset() {
 
 function ammo_get(weapon) {
   totalammo = weapon.ammocountequipment;
-  if(isdefined(self._trophy_system_ammo1) && !self util::ishacked()) {
+  if(isDefined(self._trophy_system_ammo1) && !self util::ishacked()) {
     totalammo = self._trophy_system_ammo1;
     self._trophy_system_ammo1 = undefined;
-    if(isdefined(self._trophy_system_ammo2)) {
+    if(isDefined(self._trophy_system_ammo2)) {
       self._trophy_system_ammo1 = self._trophy_system_ammo2;
       self._trophy_system_ammo2 = undefined;
     }
@@ -285,8 +285,8 @@ function ammo_get(weapon) {
 }
 
 function ammo_weapon_pickup(ammo) {
-  if(isdefined(ammo)) {
-    if(isdefined(self._trophy_system_ammo1)) {
+  if(isDefined(ammo)) {
+    if(isDefined(self._trophy_system_ammo1)) {
       self._trophy_system_ammo2 = self._trophy_system_ammo1;
       self._trophy_system_ammo1 = ammo;
     } else {

@@ -17,7 +17,6 @@
 #include scripts\core_common\laststand_shared;
 #include scripts\core_common\spawner_shared;
 #include scripts\core_common\util_shared;
-
 #namespace archetype_civilian;
 
 autoexec main() {
@@ -69,7 +68,7 @@ registerbehaviorscriptfunctions() {
   level thread function_686ab596();
 }
 
-private function_686ab596() {
+function_686ab596() {
   wait 5;
 
   while(true) {
@@ -78,18 +77,18 @@ private function_686ab596() {
 
     foreach(ai in ais) {
       switch (debug_civ_mode) {
-        case #"riot":
-          ai::setaiattribute(ai, #"_civ_mode", "riot");
+        case # "riot":
+          ai::setaiattribute(ai, # "_civ_mode", "riot");
           ai setteam(#"team3");
           break;
-        case #"panic":
-          ai::setaiattribute(ai, #"_civ_mode", "panic");
+        case # "panic":
+          ai::setaiattribute(ai, # "_civ_mode", "panic");
           break;
-        case #"calm":
-          ai::setaiattribute(ai, #"_civ_mode", "calm");
+        case # "calm":
+          ai::setaiattribute(ai, # "_civ_mode", "calm");
           break;
-        case #"run":
-          ai::setaiattribute(ai, #"_civ_mode", "run");
+        case # "run":
+          ai::setaiattribute(ai, # "_civ_mode", "run");
           break;
         default:
           break;
@@ -100,7 +99,7 @@ private function_686ab596() {
   }
 }
 
-private civilianblackboardinit() {
+civilianblackboardinit() {
   blackboard::createblackboardforentity(self);
   ai::createinterfaceforentity(self);
   self.___archetypeonanimscriptedcallback = &civilianonanimscriptedcallback;
@@ -111,7 +110,7 @@ function_49d80e54(civilian, attribute, oldvalue, value) {
   civilian setblackboardattribute("follow", value);
 }
 
-private civilianinit() {
+civilianinit() {
   entity = self;
   locomotiontypes = array("alt1", "alt2", "alt3");
   altindex = entity getentitynumber() % locomotiontypes.size;
@@ -121,12 +120,12 @@ private civilianinit() {
   entity.ignorepathenemyfightdist = 1;
 }
 
-private civilianonanimscriptedcallback(entity) {
+civilianonanimscriptedcallback(entity) {
   entity.__blackboard = undefined;
   entity civilianblackboardinit();
 }
 
-private function_ebea502e(entity) {
+function_ebea502e(entity) {
   if(entity asmistransitionrunning() || entity getbehaviortreestatus() != 5 || entity asmissubstatepending() || entity asmistransdecrunning()) {
     return true;
   }
@@ -138,7 +137,7 @@ private function_ebea502e(entity) {
   return false;
 }
 
-private rioterchoosepositionservice(entity) {
+rioterchoosepositionservice(entity) {
   if(entity getblackboardattribute(#"_civ_mode") != "riot") {
     return false;
   }
@@ -209,7 +208,7 @@ private rioterchoosepositionservice(entity) {
   return false;
 }
 
-private civilianpanicescapechooseposition(entity) {
+civilianpanicescapechooseposition(entity) {
   if(entity getblackboardattribute(#"_civ_mode") == "riot") {
     return 0;
   }
@@ -231,7 +230,7 @@ private civilianpanicescapechooseposition(entity) {
   }
 }
 
-private civilianwanderservice(entity) {
+civilianwanderservice(entity) {
   if(isentity(entity getblackboardattribute("follow"))) {
     return false;
   }
@@ -301,7 +300,7 @@ private civilianwanderservice(entity) {
   return false;
 }
 
-private civilianfollowservice(entity) {
+civilianfollowservice(entity) {
   followradiussq = 300 * 300;
   followent = entity getblackboardattribute("follow");
 
@@ -363,13 +362,13 @@ private civilianfollowservice(entity) {
   return false;
 }
 
-private civilianmoveactioninitialize(entity, asmstatename) {
+civilianmoveactioninitialize(entity, asmstatename) {
   entity setblackboardattribute("_desired_stance", "stand");
   animationstatenetworkutility::requeststate(entity, asmstatename);
   return 5;
 }
 
-private civilianmoveactionfinalize(entity, asmstatename) {
+civilianmoveactionfinalize(entity, asmstatename) {
   if(entity getblackboardattribute("_stance") != "stand") {
     entity setblackboardattribute("_desired_stance", "stand");
   }
@@ -377,15 +376,15 @@ private civilianmoveactionfinalize(entity, asmstatename) {
   return 4;
 }
 
-private civilianispanicked(entity) {
+civilianispanicked(entity) {
   return entity getblackboardattribute(#"_civ_mode") == "panic";
 }
 
-private function_e27d2a1b() {
-  return ai::getaiattribute(self, #"_civ_mode");
+function_e27d2a1b() {
+  return ai::getaiattribute(self, # "_civ_mode");
 }
 
-private civilianarrivalallowed(entity) {
+civilianarrivalallowed(entity) {
   if(ai::getaiattribute(entity, "disablearrivals")) {
     return false;
   }
@@ -393,7 +392,7 @@ private civilianarrivalallowed(entity) {
   return true;
 }
 
-private civilianareturnsallowed(entity) {
+civilianareturnsallowed(entity) {
   if(entity getblackboardattribute(#"_civ_mode") == "calm") {
     return false;
   }
@@ -486,7 +485,7 @@ civiliancanthrowmolotovgrenade(behaviortreeentity, throwifpossible = 0) {
   return true;
 }
 
-private civilianpreparetothrowgrenade(behaviortreeentity) {
+civilianpreparetothrowgrenade(behaviortreeentity) {
   aiutility::keepclaimnode(behaviortreeentity);
 
   if(isDefined(behaviortreeentity.enemy)) {
@@ -504,7 +503,7 @@ private civilianpreparetothrowgrenade(behaviortreeentity) {
   behaviortreeentity.preparegrenadeammo = behaviortreeentity.grenadeammo;
 }
 
-private civiliancleanuptothrowgrenade(behaviortreeentity) {
+civiliancleanuptothrowgrenade(behaviortreeentity) {
   aiutility::releaseclaimnode(behaviortreeentity);
 
   if(behaviortreeentity.preparegrenadeammo == behaviortreeentity.grenadeammo) {
@@ -520,13 +519,13 @@ private civiliancleanuptothrowgrenade(behaviortreeentity) {
       if(isDefined(grenade)) {
         grenade.owner = behaviortreeentity;
         grenade.team = behaviortreeentity.team;
-        grenade setcontents(grenade setcontents(0)&~(32768 | 67108864 | 8388608 | 33554432));
+        grenade setcontents(grenade setcontents(0) &~(32768 | 67108864 | 8388608 | 33554432));
       }
     }
   }
 }
 
-private rioterreaquireservice(entity) {
+rioterreaquireservice(entity) {
   if(entity getblackboardattribute(#"_civ_mode") != "riot") {
     return false;
   }

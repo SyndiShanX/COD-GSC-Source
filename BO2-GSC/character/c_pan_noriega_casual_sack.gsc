@@ -4,7 +4,7 @@
 ***************************************************/
 
 main() {
-  self setmodel("c_pan_noriega_body1");
+  self setModel("c_pan_noriega_body1");
   self.headmodel = "c_pan_noriega_head";
   self attach(self.headmodel, "", 1);
   self.hatmodel = "c_pan_noriega_sack";

@@ -216,8 +216,8 @@ spraycan_fx(var_0) {
   level endon("stop_spray_fx");
   level endon("death");
 
-  for (;;) {
-    playfxontag(common_scripts\utility::getfx("freezespray"), var_0, "tag_spraycan_fx");
+  for(;;) {
+    playFXOnTag(common_scripts\utility::getfx("freezespray"), var_0, "tag_spraycan_fx");
     wait 0.1;
   }
 }

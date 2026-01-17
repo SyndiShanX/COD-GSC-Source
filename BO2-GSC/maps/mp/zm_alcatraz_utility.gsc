@@ -153,7 +153,7 @@ blundergat_upgrade_station() {
   waittill_crafted("packasplat");
   m_converter = t_upgrade.m_upgrade_machine;
   v_angles = m_converter gettagangles("tag_origin");
-  v_weapon_origin_offset = anglestoforward(v_angles) * 1 + anglestoright(v_angles) * 10 + anglestoup(v_angles) * 1.75;
+  v_weapon_origin_offset = anglesToForward(v_angles) * 1 + anglestoright(v_angles) * 10 + anglestoup(v_angles) * 1.75;
   v_weapon_angles_offset = (0, 90, -90);
   m_converter.v_weapon_origin = m_converter gettagorigin("tag_origin") + v_weapon_origin_offset;
   m_converter.v_weapon_angles = v_angles + v_weapon_angles_offset;
@@ -271,7 +271,7 @@ wait_for_timeout() {
 
 blundergat_upgrade_station_inject(str_weapon_model) {
   wait 0.5;
-  self playsound("zmb_acidgat_upgrade_machine");
+  self playSound("zmb_acidgat_upgrade_machine");
   self setanim(self.fxanims["close"], 1, 0, 1);
   wait(self.n_start_time);
 

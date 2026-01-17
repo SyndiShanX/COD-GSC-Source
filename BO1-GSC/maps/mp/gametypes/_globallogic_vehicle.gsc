@@ -6,7 +6,7 @@
 #include maps\mp\_utility;
 
 Callback_VehicleDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, psOffsetTime, damageFromUnderneath, modelIndex, partName) {
-  if(!(level.iDFLAGS_RADIUS & iDFlags)) {
+  if(!(level.iDFLAGS_RADIUS &iDFlags)) {
     iDamage = maps\mp\gametypes\_class::cac_modified_vehicle_damage(self, eAttacker, iDamage, sMeansOfDeath, sWeapon, eInflictor);
   }
   self.iDFlags = iDFlags;
@@ -29,7 +29,7 @@ Callback_VehicleDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, s
     else if(isDefined(eInflictor.destructible_type) && isSubStr(eInflictor.destructible_type, "vehicle_"))
       sWeapon = "destructible_car_mp";
   }
-  if(!(iDFlags & level.iDFLAGS_NO_PROTECTION)) {
+  if(!(iDFlags &level.iDFLAGS_NO_PROTECTION)) {
     if(self IsVehicleImmuneToDamage(iDFlags, sMeansOfDeath, sWeapon)) {
       return;
     }
@@ -140,7 +140,7 @@ Callback_VehicleRadiusDamage(eInflictor, eAttacker, iDamage, fInnerDamage, fOute
   if(isDefined(eAttacker) && isPlayer(eAttacker) && isDefined(eAttacker.canDoCombat) && !eAttacker.canDoCombat)
     return;
   friendly = false;
-  if(!(iDFlags & level.iDFLAGS_NO_PROTECTION)) {
+  if(!(iDFlags &level.iDFLAGS_NO_PROTECTION)) {
     if(self IsVehicleImmuneToDamage(iDFlags, sMeansOfDeath, sWeapon)) {
       return;
     }
@@ -198,7 +198,7 @@ clearLastTankAttacker() {
   self endon("clearLastTankAttacker");
   count = 1;
   wait(3);
-  while (self.health < 99 && count < 10) {
+  while(self.health < 99 && count < 10) {
     wait(1);
     count++;
   }
@@ -207,9 +207,9 @@ clearLastTankAttacker() {
 vehicleCrush() {
   self endon("disconnect");
   if(isDefined(level._effect) && isDefined(level._effect["tanksquish"])) {
-    PlayFX(level._effect["tanksquish"], self.origin + (0, 0, 30));
+    playFX(level._effect["tanksquish"], self.origin + (0, 0, 30));
   }
-  self playsound("chr_crunch");
+  self playSound("chr_crunch");
 }
 GetVehicleProjectileScalar(sWeapon) {
   if(sWeapon == "satchel_charge_mp") {
@@ -278,9 +278,7 @@ GetVehicleBulletDamage(sWeapon) {
 }
 AllowFriendlyFireDamage(eInflictor, eAttacker, sMeansOfDeath, sWeapon) {
   if(isDefined(self.allowFriendlyFireDamageOverride)) {
-    return [
-      [self.allowFriendlyFireDamageOverride]
-    ](eInflictor, eAttacker, sMeansOfDeath, sWeapon);
+    return [[self.allowFriendlyFireDamageOverride]](eInflictor, eAttacker, sMeansOfDeath, sWeapon);
   }
   if(sWeapon != "artillery_mp")
     return false;

@@ -55,7 +55,6 @@
 #include scripts\zm_common\zm_transformation;
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_ai_nosferatu;
 
 autoexec __init__system__() {
@@ -83,14 +82,13 @@ __init__() {
   level.var_13bc407f = getEntArray("zombie_crimson_nosferatu_spawner", "script_noteworthy");
 
   zm_devgui::function_c7dd7a17("<dev string:x38>");
-
 }
 
 __main__() {}
 
 init() {}
 
-private registerbehaviorscriptfunctions() {
+registerbehaviorscriptfunctions() {
   assert(isscriptfunctionptr(&function_7d874447));
   behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_3a6e15c62c2e1958", &function_7d874447);
   assert(isscriptfunctionptr(&function_7fef620b));
@@ -120,7 +118,7 @@ nosferatushouldstun(entity) {
   return false;
 }
 
-private function_e060c994(entity) {
+function_e060c994(entity) {
   var_7a69f7e9 = blackboard::getblackboardevents("nfrtu_stun");
 
   if(isDefined(var_7a69f7e9) && var_7a69f7e9.size) {
@@ -141,7 +139,7 @@ nosferatustunstart(entity) {
   blackboard::addblackboardevent("nfrtu_stun", var_268f1415, randomintrange(10000, 12000));
 }
 
-private function_344a0412(entity, asmstatename) {
+function_344a0412(entity, asmstatename) {
   if(entity ai::is_stunned()) {
     return 5;
   }
@@ -159,7 +157,7 @@ function_475a698c(entity) {
   return true;
 }
 
-private function_c12f7b53() {
+function_c12f7b53() {
   self.zombie_move_speed = "sprint";
   self setblackboardattribute("_locomotion_speed", "locomotion_speed_sprint");
   self.completed_emerging_into_playable_area = 1;
@@ -172,7 +170,7 @@ private function_c12f7b53() {
   self.var_fad2bca9 = 1;
   self.var_ccb2e201 = 0;
 
-  if(self.subarchetype === #"crimson_nosferatu") {
+  if(self.subarchetype === # "crimson_nosferatu") {
     self.var_dd6fe31f = 1;
     self.var_f46fbf3f = 1;
     self.var_126d7bef = 1;
@@ -194,11 +192,10 @@ private function_c12f7b53() {
   self.var_2e5407fc = gettime() + int(self ai::function_9139c839().var_e61d73b0 * 1000);
 
   self thread function_cd801084();
-
 }
 
-private function_8a2cb5ed(params) {
-  if(self.archetype === #"nosferatu") {
+function_8a2cb5ed(params) {
+  if(self.archetype === # "nosferatu") {
     attackerdistance = 0;
     isexplosive = 0;
     iscloseexplosive = 0;
@@ -215,7 +212,7 @@ private function_8a2cb5ed(params) {
   }
 }
 
-private function_a13721f(inflictor, attacker, damage, idflags, meansofdeath, weapon, point, dir, hitloc, offsettime, boneindex, modelindex) {
+function_a13721f(inflictor, attacker, damage, idflags, meansofdeath, weapon, point, dir, hitloc, offsettime, boneindex, modelindex) {
   if(isDefined(attacker) && self === attacker) {
     damage = 0;
   }
@@ -230,36 +227,34 @@ private function_a13721f(inflictor, attacker, damage, idflags, meansofdeath, wea
   return damage;
 }
 
-private function_cd801084() {
+function_cd801084() {
   self endon(#"death");
 
   while(true) {
-    if(isDefined(self.pathgoalpos)) {
-
-    }
+    if(isDefined(self.pathgoalpos)) {}
 
     waitframe(1);
   }
 }
 
-private function_2b35beda() {
+function_2b35beda() {
   self clientfield::increment_to_player("nosferatu_damage_fx");
 }
 
-private function_c59b482e() {
+function_c59b482e() {
   self.health = self.maxhealth;
 }
 
-private function_c9a2941c(notifyhash) {
+function_c9a2941c(notifyhash) {
   if(isDefined(self) && isDefined(self.heal)) {
     self val::reset(#"nosferatu", "health_regen");
   }
 }
 
-private function_e05b2c36() {
+function_e05b2c36() {
   self notify("1aeb0156174acfac");
   self endon("1aeb0156174acfac");
-  self endoncallback(&function_c9a2941c, #"death");
+  self endoncallback(&function_c9a2941c, # "death");
   self.b_nosferatu_damage_fx = 1;
   self val::set(#"nosferatu", "health_regen", 0);
   wait self.var_cd35302f;
@@ -272,7 +267,7 @@ private function_e05b2c36() {
 function_8dc028ba(s_params) {
   attacker = s_params.eattacker;
 
-  if(isDefined(attacker) && isDefined(attacker.archetype) && attacker.archetype == #"nosferatu" && s_params.idamage > 0) {
+  if(isDefined(attacker) && isDefined(attacker.archetype) && attacker.archetype == # "nosferatu" && s_params.idamage > 0) {
     self function_2b35beda();
     attacker function_c59b482e();
 
@@ -357,8 +352,8 @@ function_74f25f8a(b_force_spawn = 0, var_eb3a8721, b_crimson = 0, round_number) 
     s_spawn_loc = var_eb3a8721;
   } else if(isDefined(level.nosferatu_spawn_func)) {
     s_spawn_loc = [[level.nosferatu_spawn_func]]();
-  } else if(level.zm_loc_types[#"nosferatu_location"].size > 0) {
-    s_spawn_loc = array::random(level.zm_loc_types[#"nosferatu_location"]);
+  } else if(level.zm_loc_types[# "nosferatu_location"].size > 0) {
+    s_spawn_loc = array::random(level.zm_loc_types[# "nosferatu_location"]);
   }
 
   if(!isDefined(s_spawn_loc)) {
@@ -431,8 +426,8 @@ function_853b43e8() {
 }
 
 function_6502a84d(entity) {
-  if(isDefined(level.zm_loc_types[#"nosferatu_location"]) && level.zm_loc_types[#"nosferatu_location"].size >= 1) {
-    a_locs = array::randomize(level.zm_loc_types[#"nosferatu_location"]);
+  if(isDefined(level.zm_loc_types[# "nosferatu_location"]) && level.zm_loc_types[# "nosferatu_location"].size >= 1) {
+    a_locs = array::randomize(level.zm_loc_types[# "nosferatu_location"]);
   }
 
   if(!isDefined(a_locs) || a_locs.size == 0) {
@@ -499,7 +494,7 @@ get_favorite_enemy() {
 
 function_4c71848e() {
   self endon(#"death");
-  a_s_spawn_locs = level.zm_loc_types[#"nosferatu_location"];
+  a_s_spawn_locs = level.zm_loc_types[# "nosferatu_location"];
 
   if(isarray(a_s_spawn_locs)) {
     for(i = 0; i < a_s_spawn_locs.size; i++) {
@@ -553,12 +548,12 @@ function_4c71848e() {
   return true;
 }
 
-private function_82785646(entity) {
+function_82785646(entity) {
   if(isDefined(level.var_5e45f817) && level.var_5e45f817) {
     return false;
   }
 
-  if(!isDefined(self.subarchetype) || self.subarchetype != #"crimson_nosferatu") {
+  if(!isDefined(self.subarchetype) || self.subarchetype != # "crimson_nosferatu") {
     return false;
   }
 
@@ -589,12 +584,12 @@ private function_82785646(entity) {
   return false;
 }
 
-private function_c16e1ca1(entity) {
+function_c16e1ca1(entity) {
   if(!isDefined(entity.enemy)) {
     return false;
   }
 
-  if(entity.subarchetype !== #"crimson_nosferatu") {
+  if(entity.subarchetype !== # "crimson_nosferatu") {
     return false;
   }
 
@@ -607,21 +602,21 @@ private function_c16e1ca1(entity) {
   return true;
 }
 
-private function_7d874447(entity) {
+function_7d874447(entity) {
   var_e47d78cb = spawnStruct();
   blackboard::addblackboardevent("nfrtu_summon", var_e47d78cb, randomintrange(50000, 100000));
   entity.var_2e5407fc = gettime() + int(entity ai::function_9139c839().var_e61d73b0 * 1000);
   entity clientfield::set("summon_nfrtu", 1);
 }
 
-private function_7fef620b(entity) {
+function_7fef620b(entity) {
   entity.var_2e5407fc = gettime() + int(entity ai::function_9139c839().var_e61d73b0 * 1000);
   entity clientfield::set("summon_nfrtu", 0);
 }
 
-private function_76d6482e(entity) {
-  if(isDefined(level.zm_loc_types[#"nosferatu_location"]) && level.zm_loc_types[#"nosferatu_location"].size >= 1) {
-    a_locs = array::randomize(level.zm_loc_types[#"nosferatu_location"]);
+function_76d6482e(entity) {
+  if(isDefined(level.zm_loc_types[# "nosferatu_location"]) && level.zm_loc_types[# "nosferatu_location"].size >= 1) {
+    a_locs = array::randomize(level.zm_loc_types[# "nosferatu_location"]);
   }
 
   if(!isDefined(a_locs)) {
@@ -633,10 +628,9 @@ private function_76d6482e(entity) {
   queryresult = positionquery_source_navigation(entity.origin, var_4a07738f, 300, 64, 25, entity);
 
   if(queryresult.data.size == 0) {
-
     iprintlnbold("<dev string:x44>");
 
-      return;
+    return;
   }
 
   if(!var_c9528359) {
@@ -651,16 +645,15 @@ private function_76d6482e(entity) {
 
     iprintln("<dev string:x9e>" + var_c9528359 + "<dev string:xad>");
 
-      for(i = 0; i < var_c9528359; i++) {
-        a_ai_zombies[i] thread zm_cleanup::cleanup_zombie();
-      }
+    for(i = 0; i < var_c9528359; i++) {
+      a_ai_zombies[i] thread zm_cleanup::cleanup_zombie();
+    }
   }
 
   if(var_c9528359) {
-
     iprintln("<dev string:xd0>" + var_c9528359 + "<dev string:xe5>");
 
-      entity thread function_13b48cdd(var_c9528359, queryresult);
+    entity thread function_13b48cdd(var_c9528359, queryresult);
     return;
   }
 
@@ -692,15 +685,15 @@ function_13b48cdd(var_c9528359, queryresult) {
       iprintlnbold("<dev string:x13d>");
     }
 
-      if(isDefined(ai) && isDefined(point)) {
-        ai thread function_b2a2b29e();
-        ai.favoriteenemy = zm_utility::get_closest_valid_player(ai.origin, []);
-        point thread nosferatu_spawn_fx(ai, {
-          #origin: point.origin, 
-          #angles: self.angles
-        });
-        wait 0.2;
-      }
+    if(isDefined(ai) && isDefined(point)) {
+      ai thread function_b2a2b29e();
+      ai.favoriteenemy = zm_utility::get_closest_valid_player(ai.origin, []);
+      point thread nosferatu_spawn_fx(ai, {
+        #origin: point.origin,
+        #angles: self.angles
+      });
+      wait 0.2;
+    }
 
     var_c9528359--;
     waitframe(1);
@@ -748,7 +741,7 @@ function_201862b(eventstruct) {
   notify_string = eventstruct.action;
 
   switch (notify_string) {
-    case #"death":
+    case # "death":
       if(isDefined(self.bgb_tone_death) && self.bgb_tone_death) {
         level thread zm_audio::zmbaivox_playvox(self, "death_whimsy", 1, 4);
       } else {
@@ -756,19 +749,19 @@ function_201862b(eventstruct) {
       }
 
       break;
-    case #"pain":
+    case # "pain":
       level thread zm_audio::zmbaivox_playvox(self, notify_string, 1, 3);
       break;
-    case #"scream":
+    case # "scream":
       level thread zm_audio::zmbaivox_playvox(self, notify_string, 1, 3, 1);
       break;
-    case #"leap":
-    case #"attack_melee":
-    case #"attack_bite":
+    case # "leap":
+    case # "attack_melee":
+    case # "attack_bite":
       level thread zm_audio::zmbaivox_playvox(self, notify_string, 1, 2, 1);
       break;
-    case #"sprint":
-    case #"ambient":
+    case # "sprint":
+    case # "ambient":
       level thread zm_audio::zmbaivox_playvox(self, notify_string, 0, 1);
       break;
     default:

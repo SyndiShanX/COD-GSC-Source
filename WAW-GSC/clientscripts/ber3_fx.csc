@@ -69,7 +69,7 @@ precache_createfx_fx() {
 
 loop_tracers(startPoint, endPoint) {
   level endon("siff");
-  while (true) {
+  while(true) {
     realwait(randomFloatRange(0.1, 0.5));
     bulletTracer(startPoint, endPoint, false);
   }
@@ -78,7 +78,7 @@ loop_tracers(startPoint, endPoint) {
 intro_fakefire() {
   level waittill("iff");
   struct_tracers = getstructarray("e1_tracer_struct", "targetname");
-  for (i = 0; i < struct_tracers.size; i++) {
+  for(i = 0; i < struct_tracers.size; i++) {
     thread loop_tracers(struct_tracers[i].origin, struct_tracers[i].targeted[0].origin);
   }
 }
@@ -120,27 +120,27 @@ ambient_fakefire(endonString, delayStart, endonTrig) {
   reloadTimeMax = 3.0;
   burst_area = (1250, 8250, 1000);
   traceDist = 10000;
-  orig_target = self.origin + vector_multiply(AnglesToForward(self.angles), traceDist);
+  orig_target = self.origin + vector_multiply(anglesToForward(self.angles), traceDist);
   target_org = spawn(0, orig_target, "script_origin");
   println("org" + target_org.origin);
   println("BA" + burst_area);
-  while (1) {
+  while(1) {
     burst = RandomIntRange(burstMin, burstMax);
     targ_point = ((orig_target[0]) - (burst_area[0] / 2) + randomfloat(burst_area[0]),
       (orig_target[1]) - (burst_area[1] / 2) + randomfloat(burst_area[1]),
       (orig_target[2]) - (burst_area[2] / 2) + randomfloat(burst_area[2]));
     target_org moveto(targ_point, randomfloatrange(0.5, 6.0));
-    for (i = 0; i < burst; i++) {
+    for(i = 0; i < burst; i++) {
       target = target_org.origin;
       fx_angles = VectorNormalize(target - self.origin);
       players = getlocalplayers();
-      for (j = 0; j < players.size; j++) {
-        PlayFX(j, muzzleFlash, self.origin, fx_angles);
+      for(j = 0; j < players.size; j++) {
+        playFX(j, muzzleFlash, self.origin, fx_angles);
       }
       if(i % 4 == 0) {
         players = getlocalplayers();
-        for (j = 0; j < players.size; j++) {
-          PlayFX(j, fake_tracer, self.origin, fx_angles);
+        for(j = 0; j < players.size; j++) {
+          playFX(j, fake_tracer, self.origin, fx_angles);
         }
       }
       realwait(RandomFloatRange(betweenShotsMin, betweenShotsMax));
@@ -152,7 +152,7 @@ ambient_fakefire(endonString, delayStart, endonTrig) {
 reich_fakefire() {
   level waittill("rff");
   fake_reich_mg_trigs = getstructarray("e3_reich_mg_trig", "targetname");
-  for (i = 0; i < fake_reich_mg_trigs.size; i++) {
+  for(i = 0; i < fake_reich_mg_trigs.size; i++) {
     fake_reich_mg_trigs[i] thread ambient_fakefire("srff", true, fake_reich_mg_trigs[i]);
   }
 }

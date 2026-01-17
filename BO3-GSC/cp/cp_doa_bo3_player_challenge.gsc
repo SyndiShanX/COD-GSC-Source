@@ -40,7 +40,7 @@
 
 function function_4c171b8e() {
   self endon("disconnect");
-  while (!isdefined(self.doa)) {
+  while(!isDefined(self.doa)) {
     wait(0.05);
   }
   waittillframeend();
@@ -61,32 +61,32 @@ function function_bb59f698() {
 }
 
 function function_31c377e(room) {
-  room.text = & "CP_DOA_BO3_CHALLENGE_ROOM_SPIRAL";
-  room.title = & "CP_DOA_BO3_TITLE_ROOM_SPIRAL";
+  room.text = &"CP_DOA_BO3_CHALLENGE_ROOM_SPIRAL";
+  room.title = &"CP_DOA_BO3_TITLE_ROOM_SPIRAL";
   room.vox = "vox_doaa_temple_fortress";
   room.var_e5c8b9e7 = level.doa.var_bc9b7c71;
-  level.doa.var_bc9b7c71 = & function_4c171b8e;
+  level.doa.var_bc9b7c71 = &function_4c171b8e;
   level thread namespace_3ca3c537::function_4586479a(0);
   level thread function_bb59f698();
   room.glow = [];
   glow = spawn("script_model", namespace_3ca3c537::function_61d60e0b() + vectorscale((0, 0, 1), 36));
   glow.targetname = "spiralglow1";
-  glow setmodel("tag_origin");
+  glow setModel("tag_origin");
   glow thread namespace_eaa992c::function_285a2999("glow_blue");
   room.glow[room.glow.size] = glow;
   glow = spawn("script_model", namespace_3ca3c537::function_61d60e0b() + vectorscale((0, 0, 1), 72));
   glow.targetname = "spiralglow2";
-  glow setmodel("tag_origin");
+  glow setModel("tag_origin");
   glow thread namespace_eaa992c::function_285a2999("glow_blue");
   room.glow[room.glow.size] = glow;
   glow = spawn("script_model", namespace_3ca3c537::function_61d60e0b() + vectorscale((0, 0, 1), 128));
   glow.targetname = "spiralglow3";
-  glow setmodel("tag_origin");
+  glow setModel("tag_origin");
   glow thread namespace_eaa992c::function_285a2999("glow_blue");
   room.glow[room.glow.size] = glow;
   glow = spawn("script_model", namespace_3ca3c537::function_61d60e0b() + vectorscale((0, 0, 1), 160));
   glow.targetname = "spiralglow4";
-  glow setmodel("tag_origin");
+  glow setModel("tag_origin");
   glow thread namespace_eaa992c::function_285a2999("glow_blue");
   room.glow[room.glow.size] = glow;
   barricades = struct::get_array(room.name + "_destructible", "targetname");
@@ -95,7 +95,7 @@ function function_31c377e(room) {
     blocker = spawn("script_model", item.origin);
     blocker.targetname = "blockerSpiral";
     blocker.angles = item.angles;
-    blocker setmodel(item.script_noteworthy);
+    blocker setModel(item.script_noteworthy);
     blocker solid();
     blocker.targetname = room.name + "_blocker";
     blocker thread function_e1b0de53(item.script_parameters);
@@ -105,7 +105,7 @@ function function_31c377e(room) {
       count = 0;
     }
   }
-  var_2b8e59af = getentarray(room.name + "_barrier_trigger", "targetname");
+  var_2b8e59af = getEntArray(room.name + "_barrier_trigger", "targetname");
   foreach(trigger in var_2b8e59af) {
     trigger thread triggernotify();
   }
@@ -156,7 +156,7 @@ function function_8e0e22bb(room) {
     player notify("hash_d28ba89d");
   }
   level thread function_533483a3(room);
-  if(isdefined(level.var_1575b6db) && level.var_1575b6db) {
+  if(isDefined(level.var_1575b6db) && level.var_1575b6db) {
     level thread doa_utility::notify_timeout("teleporter_triggered", 10);
   }
   level waittill("hash_6df89d17");
@@ -175,17 +175,17 @@ function function_7823dbb8(room) {
 }
 
 function function_eee6e911(room) {
-  ents = getentarray(room.name + "_blocker", "targetname");
+  ents = getEntArray(room.name + "_blocker", "targetname");
   foreach(ent in ents) {
     ent delete();
   }
-  if(isdefined(level.doa.teleporter)) {
+  if(isDefined(level.doa.teleporter)) {
     level.doa.teleporter.trigger delete();
     level.doa.teleporter delete();
     level.doa.teleporter = undefined;
   }
   foreach(glow in room.glow) {
-    if(isdefined(glow)) {
+    if(isDefined(glow)) {
       glow delete();
     }
   }
@@ -199,7 +199,7 @@ function private function_533483a3(room) {
   level endon("hash_d1f5acf7");
   level.doa.var_e0d67a74 = struct::get_array(room.name + "_rise_spot");
   var_48be25f5 = getent("spawner_zombietron_skeleton", "targetname");
-  while (true) {
+  while(true) {
     axis = getaiteamarray("axis");
     if(axis.size < 40) {
       var_e1a06452 = randomintrange(3, 10);
@@ -207,10 +207,10 @@ function private function_533483a3(room) {
         var_e1a06452 = 40 - axis.size;
       }
       var_1db14d86 = getplayers().size * 500;
-      while (var_e1a06452) {
+      while(var_e1a06452) {
         var_e1a06452--;
         ai = namespace_51bd792::function_45849d81(var_48be25f5, undefined, undefined);
-        if(isdefined(ai)) {
+        if(isDefined(ai)) {
           ai hidepart("TAG_WEAPON_LEFT");
           ai setavoidancemask("avoid none");
           ai pushactors(0);
@@ -245,10 +245,10 @@ function private function_533483a3(room) {
 
 function function_c0808a91() {
   self endon("death");
-  while (true) {
-    if(isdefined(self.players_viscache)) {
+  while(true) {
+    if(isDefined(self.players_viscache)) {
       foreach(player in getplayers()) {
-        idx = (isdefined(player.entnum) ? player.entnum : player getentitynumber());
+        idx = (isDefined(player.entnum) ? player.entnum : player getentitynumber());
         self.players_viscache[idx] = gettime() + 1000;
       }
     }
@@ -258,18 +258,18 @@ function function_c0808a91() {
 
 function function_b6c25c3c(spot) {
   self endon("disconnect");
-  while (!isdefined(self.doa)) {
+  while(!isDefined(self.doa)) {
     wait(0.05);
   }
   waittillframeend();
-  if(!isdefined(spot)) {
+  if(!isDefined(spot)) {
     startpoints = struct::get_array("tankmaze_player_spawnpoint");
     spot = startpoints[self.entnum];
   }
   self.room = level.doa.var_52cccfb6;
   tank = getent("doa_tankmaze_spawner", "targetname") spawner::spawn(1);
   self setorigin(spot.origin);
-  tank setmodel("veh_t7_mil_tank_tiger_zombietron_" + namespace_831a4a7c::function_ee495f41(self.entnum));
+  tank setModel("veh_t7_mil_tank_tiger_zombietron_" + namespace_831a4a7c::function_ee495f41(self.entnum));
   tank.origin = spot.origin;
   tank.spawnpoint = spot.origin;
   tank.angles = spot.angles;
@@ -294,17 +294,17 @@ function function_b6c25c3c(spot) {
 function function_6aa91f48(room) {
   level clientfield::set("set_scoreHidden", 1);
   room.var_dc49d6a4 = level.callbackvehicledamage;
-  level.callbackvehicledamage = & function_fe1ce5f1;
+  level.callbackvehicledamage = &function_fe1ce5f1;
   room.var_e5c8b9e7 = level.doa.var_bc9b7c71;
-  level.doa.var_bc9b7c71 = & function_b6c25c3c;
-  room.text = & "CP_DOA_BO3_CHALLENGE_ROOM_TANKMAZE";
-  room.title = & "CP_DOA_BO3_TITLE_ROOM_TANKMAZE";
+  level.doa.var_bc9b7c71 = &function_b6c25c3c;
+  room.text = &"CP_DOA_BO3_CHALLENGE_ROOM_TANKMAZE";
+  room.title = &"CP_DOA_BO3_TITLE_ROOM_TANKMAZE";
   room.vox = "vox_doaa_tank_vault";
   room.var_674e3329 = 1;
   room.enemy_spawns = struct::get_array("tankmaze_enemy", "script_noteworthy");
   room.var_4f002f93 = struct::get_array("tankmaze_gemspot", "script_noteworthy");
   room.var_e01f23f0 = [];
-  room.host_migration = & function_c2b99e74;
+  room.host_migration = &function_c2b99e74;
   level thread function_246d3adb(room);
   level thread function_db531f2f(room);
   foreach(player in getplayers()) {
@@ -318,10 +318,10 @@ function function_246d3adb(room) {
   var_82361971 = int(ceil(total / 80));
   arena = level.doa.arenas[namespace_3ca3c537::function_5835533a(room.name)];
   var_86a35fbd = struct::get(arena.entity.target, "targetname");
-  while (isdefined(var_86a35fbd) && total > 0) {
-    for (var_2bb5aeba = 0; isdefined(var_86a35fbd) && var_2bb5aeba < var_82361971; var_2bb5aeba++) {
+  while(isDefined(var_86a35fbd) && total > 0) {
+    for(var_2bb5aeba = 0; isDefined(var_86a35fbd) && var_2bb5aeba < var_82361971; var_2bb5aeba++) {
       reward = "zombietron_beryl";
-      if(isdefined(var_86a35fbd.script_parameters)) {
+      if(isDefined(var_86a35fbd.script_parameters)) {
         switch (var_86a35fbd.script_parameters) {
           case "1":
           case "2":
@@ -336,11 +336,11 @@ function function_246d3adb(room) {
           }
         }
       }
-      item = doa_pickups::function_2d8cb175(reward, var_86a35fbd.origin, 1, 0, 0, (isdefined(scale) ? scale : 2), 0, 0, 1, 0)[0];
+      item = doa_pickups::function_2d8cb175(reward, var_86a35fbd.origin, 1, 0, 0, (isDefined(scale) ? scale : 2), 0, 0, 1, 0)[0];
       item doa_pickups::function_32110b7d();
       item.trigger triggerenable(0);
       room.var_e01f23f0[room.var_e01f23f0.size] = item;
-      if(isdefined(var_86a35fbd.target)) {
+      if(isDefined(var_86a35fbd.target)) {
         var_86a35fbd = struct::get(var_86a35fbd.target, "targetname");
         continue;
       }
@@ -352,7 +352,7 @@ function function_246d3adb(room) {
   var_4c36e42e = 0;
   room.var_e01f23f0 = array::remove_undefined(room.var_e01f23f0);
   foreach(gem in room.var_e01f23f0) {
-    if(isdefined(gem)) {
+    if(isDefined(gem)) {
       gem doa_pickups::function_fbc5b316();
     }
     var_4c36e42e++;
@@ -363,7 +363,7 @@ function function_246d3adb(room) {
   }
   level waittill("hash_c8bd32b9");
   foreach(gem in room.var_e01f23f0) {
-    if(isdefined(gem) && isdefined(gem.trigger)) {
+    if(isDefined(gem) && isDefined(gem.trigger)) {
       gem.trigger triggerenable(1);
     }
   }
@@ -389,24 +389,24 @@ function function_db531f2f(room) {
   level endon("hash_d1f5acf7");
   room.var_74415e9d = 0;
   level waittill("hash_c8bd32b9");
-  while (true) {
+  while(true) {
     if(room.var_74415e9d < (4 + getplayers().size)) {
       spot = room.enemy_spawns[randomint(room.enemy_spawns.size)];
       dropspot = spot.origin + vectorscale((0, 0, 1), 2000);
       spawner = getent("spawner_doa_tankmaze_amws", "targetname");
       fake = spawn("script_model", dropspot);
       fake.targetname = "tankmaze_EnemySpawner";
-      fake setmodel(level.doa.var_4aa90d77);
+      fake setModel(level.doa.var_4aa90d77);
       fake.angles = spot.angles;
       fake thread namespace_eaa992c::function_285a2999("fire_trail");
-      fake playsound("evt_amws_incoming");
+      fake playSound("evt_amws_incoming");
       fake moveto(spot.origin, 0.75);
       fake thread doa_utility::function_1bd67aef(1);
       fake util::waittill_any_timeout(0.8, "movedone");
       playrumbleonposition("explosion_generic", spot.origin);
       fake delete();
       amws = spawner spawner::spawn(1);
-      if(isdefined(amws)) {
+      if(isDefined(amws)) {
         amws.origin = spot.origin;
         amws.angles = spot.angles;
         amws.health = 100;
@@ -447,7 +447,7 @@ function function_5f0b67a9(room) {
     totaltime = (room.timeout - 1) * 1000;
   }
   timeleft = gettime() + totaltime;
-  while (gettime() < timeleft) {
+  while(gettime() < timeleft) {
     wait(0.5);
   }
   level clientfield::set("pumpBannerBar", 0);
@@ -464,18 +464,18 @@ function function_f1915ffb(room) {
   level thread doa_utility::killallenemy();
   players = getplayers();
   foreach(player in players) {
-    if(!isdefined(player)) {
+    if(!isDefined(player)) {
       continue;
     }
     player notify("hash_7c5410c4");
-    if(isdefined(player.doa)) {
-      if(isdefined(player.doa.vehicle)) {
+    if(isDefined(player.doa)) {
+      if(isDefined(player.doa.vehicle)) {
         player.doa.vehicle usevehicle(player, 0);
         player.doa.vehicle delete();
         player.doa.vehicle = undefined;
       }
       player namespace_831a4a7c::function_7d7a7fde();
-      if(!isdefined(player)) {
+      if(!isDefined(player)) {
         continue;
       }
       player disableinvulnerability();
@@ -495,7 +495,7 @@ function function_fe1ce5f1(einflictor, eattacker, idamage, idflags, smeansofdeat
     self finishvehicledamage(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, damagefromunderneath, modelindex, partname, 0);
     return;
   }
-  if(isdefined(self.var_a4ac052c) && gettime() < self.var_a4ac052c) {
+  if(isDefined(self.var_a4ac052c) && gettime() < self.var_a4ac052c) {
     return 0;
   }
   player = self.owner;
@@ -538,7 +538,7 @@ function function_fe1ce5f1(einflictor, eattacker, idamage, idflags, smeansofdeat
     player.doa.var_d55e6679 = 0;
   }
   player.room.var_e01f23f0 = array::remove_undefined(player.room.var_e01f23f0);
-  while (var_516eed4b && player.room.var_e01f23f0.size < 275) {
+  while(var_516eed4b && player.room.var_e01f23f0.size < 275) {
     switch (randomint(5)) {
       case 0: {
         reward = "zombietron_emerald";
@@ -572,7 +572,7 @@ function function_c2b99e74(room) {
   doa_utility::debugmsg("");
   foreach(player in getplayers()) {
     player freezecontrols(1);
-    if(isdefined(player.doa.vehicle) && player.doa.vehicle getvehicleowner() == player) {
+    if(isDefined(player.doa.vehicle) && player.doa.vehicle getvehicleowner() == player) {
       doa_utility::debugmsg("" + player.name);
       player.doa.vehicle makeusable();
       player.doa.vehicle usevehicle(player, 0);
@@ -581,7 +581,7 @@ function function_c2b99e74(room) {
   }
   util::wait_network_frame();
   foreach(player in getplayers()) {
-    if(isdefined(player.doa.vehicle)) {
+    if(isDefined(player.doa.vehicle)) {
       doa_utility::debugmsg("" + player.name);
       player.doa.vehicle usevehicle(player, 0);
       player.doa.vehicle makeunusable();
@@ -599,11 +599,11 @@ function function_9c687a5d(player) {
 
 function function_14e75d7a(spot) {
   self endon("disconnect");
-  while (!isdefined(self.doa)) {
+  while(!isDefined(self.doa)) {
     wait(0.05);
   }
   waittillframeend();
-  if(!isdefined(spot)) {
+  if(!isDefined(spot)) {
     startpoints = struct::get_array("redins_player_spawnpoint");
     spot = startpoints[self.entnum];
   }
@@ -623,7 +623,7 @@ function function_14e75d7a(spot) {
   truck.takedamage = 0;
   truck.var_f71159da = 0;
   truck.owner = self;
-  truck setmodel("veh_t7_civ_truck_pickup_tech_nrc_mini_" + namespace_831a4a7c::function_ee495f41(self.entnum));
+  truck setModel("veh_t7_civ_truck_pickup_tech_nrc_mini_" + namespace_831a4a7c::function_ee495f41(self.entnum));
   self.doa.vehicle = truck;
   self.doa.var_de24aff7 = 0;
   self.doa.var_37efabf7 = 1;
@@ -652,14 +652,14 @@ function function_810ced6b() {
 function function_ba487e2a(room) {
   level clientfield::set("set_scoreHidden", 1);
   room.var_e5c8b9e7 = level.doa.var_bc9b7c71;
-  level.doa.var_bc9b7c71 = & function_14e75d7a;
-  room.text = & "CP_DOA_BO3_CHALLENGE_ROOM_REDINS";
-  room.title = & "CP_DOA_BO3_TITLE_ROOM_REDINS";
+  level.doa.var_bc9b7c71 = &function_14e75d7a;
+  room.text = &"CP_DOA_BO3_CHALLENGE_ROOM_REDINS";
+  room.title = &"CP_DOA_BO3_TITLE_ROOM_REDINS";
   room.vox = "vox_doaa_redins_rally";
   room.var_674e3329 = 1;
   room.var_2f400c3b = math::clamp(2 + (getplayers().size * 2), 4, 8);
   room.var_462dd92 = 50 + (room.var_2f400c3b * 5);
-  room.host_migration = & function_c2b99e74;
+  room.host_migration = &function_c2b99e74;
   if(getdvarint("scr_doa_soak_think", 0) > 1) {
     room.var_462dd92 = 10;
   }
@@ -687,17 +687,17 @@ function function_f14ef72f(room) {
   }
   level thread function_3ed913b4(room);
   level thread function_455c43ca();
-  while (room.var_b57e2384 > 0) {
+  while(room.var_b57e2384 > 0) {
     msg = level util::waittill_any_timeout(1, "redins_rally_complete");
     if(msg == "redins_rally_complete") {
-      room.title2 = & "CP_DOA_BO3_REDINS_TITLE2_SUCCESS";
+      room.title2 = &"CP_DOA_BO3_REDINS_TITLE2_SUCCESS";
       level notify("hash_16154574");
       return;
     }
     room.var_b57e2384 = room.var_b57e2384 - 1;
     level clientfield::set("set_ui_GlobalGPR0", room.var_b57e2384);
   }
-  room.title2 = & "CP_DOA_BO3_REDINS_TITLE2_FAIL";
+  room.title2 = &"CP_DOA_BO3_REDINS_TITLE2_FAIL";
   level notify("hash_d1f5acf7");
 }
 
@@ -727,7 +727,7 @@ function function_455c43ca() {
   level waittill("hash_d9dd7818");
   var_48be25f5 = getent("doa_basic_spawner", "targetname");
   spawnpoints = struct::get_array("redins_riser_spot");
-  while (true) {
+  while(true) {
     count = doa_utility::function_b99d78c7();
     if(count < getdvarint("scr_redins_enemy_count", 16)) {
       ai = namespace_51bd792::function_45849d81(var_48be25f5, spawnpoints[randomint(spawnpoints.size)], undefined);
@@ -747,8 +747,8 @@ function function_ce5fc0d(room) {
   waittillframeend();
   foreach(player in getplayers()) {
     player notify("hash_7c5410c4");
-    if(isdefined(player.doa)) {
-      if(isdefined(player.doa.vehicle)) {
+    if(isDefined(player.doa)) {
+      if(isDefined(player.doa.vehicle)) {
         player.doa.vehicle usevehicle(player, 0);
         player.doa.vehicle delete();
         player.doa.vehicle = undefined;
@@ -767,7 +767,7 @@ function function_ce5fc0d(room) {
   spots = struct::get_array("redins_pickup_location");
   level notify("ro");
   foreach(spot in spots) {
-    if(isdefined(spot.gem)) {
+    if(isDefined(spot.gem)) {
       spot.gem delete();
     }
   }
@@ -780,7 +780,7 @@ function function_67b5ba67() {
   var_efa02a6c = getent("redins_finish_line", "targetname");
   level endon("hash_d1f5acf7");
   level endon("hash_16154574");
-  while (true) {
+  while(true) {
     var_efa02a6c waittill("trigger", truck);
     if(truck.var_f71159da == level.doa.var_c93ed68a) {
       truck.var_bbda805b = 1;
@@ -792,20 +792,20 @@ function function_67b5ba67() {
 function function_3ed913b4(room) {
   level endon("hash_d1f5acf7");
   level endon("hash_16154574");
-  var_e0762056 = getentarray("redins_trigger_lap_latch", "targetname");
+  var_e0762056 = getEntArray("redins_trigger_lap_latch", "targetname");
   foreach(trigger in var_e0762056) {
     trigger thread function_c218114a();
   }
   level thread function_67b5ba67();
   winner = undefined;
   var_64c1db98 = 0;
-  while (!isdefined(winner)) {
+  while(!isDefined(winner)) {
     players = getplayers();
     foreach(player in players) {
-      if(!isdefined(player.doa) || !isdefined(player.doa.vehicle)) {
+      if(!isDefined(player.doa) || !isDefined(player.doa.vehicle)) {
         continue;
       }
-      if(isdefined(player.doa.vehicle.var_bbda805b) && player.doa.vehicle.var_bbda805b) {
+      if(isDefined(player.doa.vehicle.var_bbda805b) && player.doa.vehicle.var_bbda805b) {
         player.doa.vehicle.var_bbda805b = undefined;
         switch (players.size) {
           case 1: {
@@ -838,7 +838,7 @@ function function_3ed913b4(room) {
       }
       player.doa.bombs = room.var_2f400c3b - player.doa.var_de24aff7;
       player.doa.boosters = player.doa.var_37efabf7;
-      if(player.doa.var_de24aff7 == (room.var_2f400c3b - 1) && (!(isdefined(var_64c1db98) && var_64c1db98))) {
+      if(player.doa.var_de24aff7 == (room.var_2f400c3b - 1) && (!(isDefined(var_64c1db98) && var_64c1db98))) {
         var_64c1db98 = 1;
         playsoundatposition("evt_final_lap", (0, 0, 0));
         level clientfield::set("redinsExploder", 1);
@@ -854,7 +854,7 @@ function function_3ed913b4(room) {
     wait(0.1);
   }
   foreach(player in getplayers()) {
-    if(isdefined(player.doa.vehicle)) {
+    if(isDefined(player.doa.vehicle)) {
       player.doa.vehicle setbrake(1);
       player.doa.vehicle setspeedimmediate(0);
       player.doa.var_e651a75e = 1;
@@ -885,14 +885,14 @@ function function_c218114a() {
   level endon("hash_d1f5acf7");
   myflag = int(self.script_parameters);
   level function_bbb36dbe(myflag);
-  while (true) {
+  while(true) {
     self waittill("trigger", truck);
     truck.var_f71159da = truck.var_f71159da | (1 << myflag);
   }
 }
 
 function function_bbb36dbe(flag) {
-  if(!isdefined(level.doa.var_c93ed68a)) {
+  if(!isDefined(level.doa.var_c93ed68a)) {
     level.doa.var_c93ed68a = 0;
   }
   level.doa.var_c93ed68a = level.doa.var_c93ed68a | (1 << flag);
@@ -905,7 +905,7 @@ function function_fa6d5f56() {
     util::wait_network_frame();
   }
   self vehicle::toggle_lights_group(1, 1);
-  self playsound("veh_doa_boost");
+  self playSound("veh_doa_boost");
   wait(3);
   self vehicle::toggle_lights_group(1, 0);
 }
@@ -919,17 +919,17 @@ function function_c71e611c(vehicle) {
   vehicle endon("death");
   level.launchforce = 500;
   vehicle vehicle::toggle_lights_group(1, 0);
-  while (true) {
+  while(true) {
     wait(0.05);
     if(!level flag::get("doa_challenge_running")) {
       continue;
     }
-    if(isdefined(self.doa.vehicle) && self changeseatbuttonpressed() && self.doa.var_37efabf7 > 0 && (!(isdefined(self.doa.var_e651a75e) && self.doa.var_e651a75e))) {
+    if(isDefined(self.doa.vehicle) && self changeseatbuttonpressed() && self.doa.var_37efabf7 > 0 && (!(isDefined(self.doa.var_e651a75e) && self.doa.var_e651a75e))) {
       self.doa.var_37efabf7--;
       curdir = (level.launchforce, 0, 0);
       vehicle launchvehicle(curdir, (0, 0, 0), 1);
       vehicle thread function_fa6d5f56();
-      while (self changeseatbuttonpressed()) {
+      while(self changeseatbuttonpressed()) {
         wait(0.05);
       }
       wait(1);
@@ -938,7 +938,7 @@ function function_c71e611c(vehicle) {
 }
 
 function function_36c315b() {
-  hazards = getentarray("redins_water_hazard", "targetname");
+  hazards = getEntArray("redins_water_hazard", "targetname");
   level thread function_41ecdf7e(hazards);
 }
 
@@ -957,12 +957,12 @@ function function_fb199a7c() {
   level endon("hash_e1dc3538");
   mytrigger = getent(self.target, "targetname");
   self.gem = doa_pickups::spawnubertreasure(self.origin, 1, 0, 0, 0, 5, self.script_noteworthy, undefined, 0, 0)[0];
-  while (true) {
+  while(true) {
     mytrigger waittill("trigger", truck);
     if(isplayer(truck)) {
       continue;
     }
-    if(isdefined(truck) && isdefined(truck.owner) && isdefined(self.gem)) {
+    if(isDefined(truck) && isDefined(truck.owner) && isDefined(self.gem)) {
       self.gem.trigger notify("trigger", truck.owner);
     }
     truck.owner.doa.var_4b3052ec++;
@@ -975,13 +975,13 @@ function function_fb199a7c() {
 function function_41ecdf7e(triggers) {
   level endon("hash_276164a7");
   level endon("hash_d1f5acf7");
-  while (true) {
+  while(true) {
     players = getplayers();
     foreach(player in players) {
-      if(!isdefined(player.doa)) {
+      if(!isDefined(player.doa)) {
         continue;
       }
-      if(isdefined(player.doa.vehicle)) {
+      if(isDefined(player.doa.vehicle)) {
         truck = player.doa.vehicle;
       } else {
         continue;
@@ -1001,9 +1001,9 @@ function function_41ecdf7e(triggers) {
         dir = dir * -0.2;
         truck launchvehicle(dir, truck.origin + vectorscale((0, 0, 1), 9));
         if(len > 50) {
-          forward = anglestoforward(truck.angles);
-          playfxontag(level._effect["truck_splash"], truck, "tag_grill_d0");
-          playfxontag(level._effect["truck_splash"], truck, "tag_bumper_rear_d0");
+          forward = anglesToForward(truck.angles);
+          playFXOnTag(level._effect["truck_splash"], truck, "tag_grill_d0");
+          playFXOnTag(level._effect["truck_splash"], truck, "tag_bumper_rear_d0");
         }
         player.doa.var_e651a75e = 1;
         continue;
@@ -1020,9 +1020,9 @@ function function_d64204d9() {
   level endon("hash_d1f5acf7");
   self endon("disconnect");
   self.doa.var_8779c24b = 0;
-  while (true) {
+  while(true) {
     self waittill("hash_108fd845");
-    if(!isdefined(self.room)) {
+    if(!isDefined(self.room)) {
       continue;
     }
     self.doa.var_8779c24b++;
@@ -1043,7 +1043,7 @@ function function_d64204d9() {
 
 function function_dae418ed() {
   self endon("disconnect");
-  while (!isdefined(self.doa)) {
+  while(!isDefined(self.doa)) {
     wait(0.05);
   }
   waittillframeend();
@@ -1056,7 +1056,7 @@ function function_dae418ed() {
   }
   var_f3a9458e = getent("doa_redins_truck", "targetname");
   truck = var_f3a9458e spawner::spawn(1);
-  truck setmodel("veh_t7_civ_truck_pickup_tech_nrc_mini_" + namespace_831a4a7c::function_ee495f41(self.entnum));
+  truck setModel("veh_t7_civ_truck_pickup_tech_nrc_mini_" + namespace_831a4a7c::function_ee495f41(self.entnum));
   truck.origin = spot.origin;
   truck.spawnpoint = spot.origin;
   truck.angles = spot.angles;
@@ -1082,24 +1082,24 @@ function function_dae418ed() {
 
 function function_c7e4d911(room) {
   room.var_e5c8b9e7 = level.doa.var_bc9b7c71;
-  level.doa.var_bc9b7c71 = & function_dae418ed;
-  room.text = & "CP_DOA_BO3_CHALLENGE_ROOM_TRUCKSOCCER";
-  room.title = & "CP_DOA_BO3_TITLE_ROOM_TRUCKSOCCER";
+  level.doa.var_bc9b7c71 = &function_dae418ed;
+  room.text = &"CP_DOA_BO3_CHALLENGE_ROOM_TRUCKSOCCER";
+  room.title = &"CP_DOA_BO3_TITLE_ROOM_TRUCKSOCCER";
   room.vox = "vox_doaa_chicken_bowl";
   room.var_7daa1c03 = struct::get("truck_soccer_ball", "targetname");
   room.var_14ee1a58 = getent("doa_mork_veh", "targetname");
   room.safezone = namespace_3ca3c537::function_dc34896f();
-  room.host_migration = & function_c2b99e74;
+  room.host_migration = &function_c2b99e74;
   room.var_677f63c8 = [];
   room.var_efbfafed = 0;
   foreach(player in getplayers()) {
     player thread function_dae418ed();
   }
-  triggers = getentarray("truck_soccerr_goal_trigger", "targetname");
+  triggers = getEntArray("truck_soccerr_goal_trigger", "targetname");
   foreach(trigger in triggers) {
     trigger thread function_71be5ae5(room);
   }
-  triggers = getentarray("truck_soccer_blowTrigger", "targetname");
+  triggers = getEntArray("truck_soccer_blowTrigger", "targetname");
   foreach(trigger in triggers) {
     trigger thread function_5dac2dae(room);
   }
@@ -1126,12 +1126,12 @@ function function_5284e8dc(room) {
 function function_76dd5557(room) {
   self endon("death");
   wait(8);
-  while (true) {
-    if(isdefined(self) && !self istouching(room.safezone)) {
+  while(true) {
+    if(isDefined(self) && !self istouching(room.safezone)) {
       arrayremovevalue(room.var_677f63c8, self);
       self delete();
     }
-    if(isdefined(self.var_a2d7b04a)) {
+    if(isDefined(self.var_a2d7b04a)) {
       self.var_a2d7b04a thread function_db9097e4(room);
       self thread namespace_1a381543::function_90118d8c("zmb_eggbowl_goal");
       level thread function_8f4c809d(room, self.var_a2d7b04a);
@@ -1147,7 +1147,7 @@ function function_76dd5557(room) {
 
 function function_90585f48(room) {
   level endon("hash_4f4a6e14");
-  while (true) {
+  while(true) {
     level thread function_5284e8dc(room);
     wait(8);
   }
@@ -1176,10 +1176,10 @@ function function_ebb572b(player) {
   items = level doa_pickups::spawnubertreasure(self.origin, var_516eed4b, 2, 0, 0, 3, gem);
   wait(1);
   foreach(item in items) {
-    if(!isdefined(item)) {
+    if(!isDefined(item)) {
       continue;
     }
-    if(isdefined(item.trigger)) {
+    if(isDefined(item.trigger)) {
       item.trigger notify("trigger", player);
     }
     wait(0.5);
@@ -1188,7 +1188,7 @@ function function_ebb572b(player) {
 
 function function_db9097e4(room) {
   foreach(player in self.var_f1e29613) {
-    if(!isdefined(player)) {
+    if(!isDefined(player)) {
       continue;
     }
     self thread function_ebb572b(player);
@@ -1198,7 +1198,7 @@ function function_db9097e4(room) {
 function function_7c9617ef(var_7bb420a0, goaltrigger) {
   self endon("death");
   level waittill("hash_130fa748");
-  while (true) {
+  while(true) {
     self moveto(goaltrigger.posts[var_7bb420a0].origin, goaltrigger.movetime);
     self util::waittill_any_timeout(goaltrigger.movetime + 0.25, "movedone");
     var_7bb420a0++;
@@ -1215,7 +1215,7 @@ function function_60fcd122(room, goaltrigger) {
   goaltrigger.posts[goaltrigger.posts.size] = struct::get(goaltrigger.target, "targetname");
   goaltrigger.colors = strtok(goaltrigger.posts[0].script_parameters, " ");
   next = struct::get(goaltrigger.posts[0].target, "targetname");
-  while (next != goaltrigger.posts[0]) {
+  while(next != goaltrigger.posts[0]) {
     goaltrigger.posts[goaltrigger.posts.size] = next;
     next = struct::get(next.target, "targetname");
   }
@@ -1223,7 +1223,7 @@ function function_60fcd122(room, goaltrigger) {
   foreach(glow in goaltrigger.posts) {
     glow.org = spawn("script_model", glow.origin);
     glow.org.targetname = "glowOrg";
-    glow.org setmodel("tag_origin");
+    glow.org setModel("tag_origin");
     glow.org thread function_7c9617ef(idx, goaltrigger);
     idx++;
     if(idx >= goaltrigger.posts.size) {
@@ -1231,11 +1231,11 @@ function function_60fcd122(room, goaltrigger) {
     }
   }
   lastcount = 0;
-  while (true) {
+  while(true) {
     if(goaltrigger.var_f1e29613.size == 0) {
       if(goaltrigger.var_f1e29613.size != lastcount) {
         foreach(glow in goaltrigger.posts) {
-          if(!isdefined(glow.org)) {
+          if(!isDefined(glow.org)) {
             continue;
           }
           foreach(color in goaltrigger.colors) {
@@ -1250,7 +1250,7 @@ function function_60fcd122(room, goaltrigger) {
     if(goaltrigger.var_f1e29613.size != lastcount) {
       count = 0;
       foreach(glow in goaltrigger.posts) {
-        if(!isdefined(glow.org)) {
+        if(!isDefined(glow.org)) {
           continue;
         }
         foreach(color in goaltrigger.colors) {
@@ -1258,13 +1258,13 @@ function function_60fcd122(room, goaltrigger) {
         }
         count++;
       }
-      while (count > 0) {
+      while(count > 0) {
         level util::waittill_any_timeout(1, "off_fx_queue_processed", "trucksoccer_rally_complete");
         count--;
       }
       idx = 0;
       foreach(glow in goaltrigger.posts) {
-        if(!isdefined(glow.org)) {
+        if(!isDefined(glow.org)) {
           continue;
         }
         player = goaltrigger.var_f1e29613[idx];
@@ -1272,7 +1272,7 @@ function function_60fcd122(room, goaltrigger) {
         if(idx >= goaltrigger.var_f1e29613.size) {
           idx = 0;
         }
-        if(isdefined(player)) {
+        if(isDefined(player)) {
           glow.org thread namespace_eaa992c::function_285a2999("gem_trail_" + namespace_831a4a7c::function_ee495f41(player.entnum));
         }
       }
@@ -1286,20 +1286,20 @@ function function_5dac2dae(room) {
   level endon("hash_4f4a6e14");
   self.org = spawn("script_model", self.origin);
   self.org.targetname = "trucksoccer_BlowTriggerThink";
-  self.org setmodel("tag_origin");
+  self.org setModel("tag_origin");
   self.org thread namespace_eaa992c::function_285a2999("blow_hole");
-  while (true) {
+  while(true) {
     self waittill("trigger", guy);
-    if(!isdefined(guy)) {
+    if(!isDefined(guy)) {
       continue;
     }
-    if(isactor(guy) && (!(isdefined(guy.launched) && guy.launched))) {
+    if(isactor(guy) && (!(isDefined(guy.launched) && guy.launched))) {
       guy startragdoll();
       guy launchragdoll((0, 0, 220 + randomint(40)));
       guy.launched = 1;
       guy thread doa_utility::function_ba30b321(0.2);
     } else {
-      if(isdefined(guy.var_6977f7b9) && guy.var_6977f7b9) {
+      if(isDefined(guy.var_6977f7b9) && guy.var_6977f7b9) {
         guy launchvehicle((0, 0, getdvarint("scr_doa_chicken_bowl_blow_force", 5)), (0, 0, 0), 1);
       } else if(isvehicle(guy)) {
         guy launchvehicle((0, 0, getdvarint("scr_doa_chicken_bowl_blow_force", 50)), (0, 0, 0), 1);
@@ -1323,9 +1323,9 @@ function function_71be5ae5(room) {
   self.var_f1e29613 = [];
   self.myteam = int(self.script_noteworthy);
   level thread function_60fcd122(room, self);
-  while (true) {
+  while(true) {
     foreach(var_29833f21 in room.var_677f63c8) {
-      if(isdefined(var_29833f21) && var_29833f21 istouching(self)) {
+      if(isDefined(var_29833f21) && var_29833f21 istouching(self)) {
         var_29833f21.var_a2d7b04a = self;
       }
     }
@@ -1333,13 +1333,13 @@ function function_71be5ae5(room) {
     players = getplayers();
     self.var_f1e29613 = [];
     foreach(player in players) {
-      if(!isdefined(player)) {
+      if(!isDefined(player)) {
         continue;
       }
-      if(!isdefined(player.doa)) {
+      if(!isDefined(player.doa)) {
         continue;
       }
-      if(isdefined(player.doa.var_e9fdebdf) && player.doa.var_e9fdebdf == self.myteam) {
+      if(isDefined(player.doa.var_e9fdebdf) && player.doa.var_e9fdebdf == self.myteam) {
         if(!isinarray(self.var_f1e29613, player)) {
           self.var_f1e29613[self.var_f1e29613.size] = player;
         }
@@ -1366,7 +1366,7 @@ function function_2ea4cb82(room) {
   foreach(player in getplayers()) {
     player freezecontrols(1);
     player.room = room;
-    if(isdefined(player.doa)) {
+    if(isDefined(player.doa)) {
       player.doa.var_1951557 = 1;
     }
   }
@@ -1375,7 +1375,7 @@ function function_2ea4cb82(room) {
   foreach(player in getplayers()) {
     player freezecontrols(0);
     player.room = room;
-    if(isdefined(player.doa)) {
+    if(isDefined(player.doa)) {
       player.doa.var_1951557 = undefined;
     }
   }
@@ -1397,19 +1397,19 @@ function function_2ea4cb82(room) {
 }
 
 function function_baa38e65(room) {
-  triggers = getentarray("truck_soccerr_goal_trigger", "targetname");
+  triggers = getEntArray("truck_soccerr_goal_trigger", "targetname");
   foreach(trigger in triggers) {
-    if(isdefined(trigger.posts)) {
+    if(isDefined(trigger.posts)) {
       foreach(post in trigger.posts) {
-        if(isdefined(post.org)) {
+        if(isDefined(post.org)) {
           post.org delete();
         }
       }
     }
   }
-  triggers = getentarray("truck_soccer_blowTrigger", "targetname");
+  triggers = getEntArray("truck_soccer_blowTrigger", "targetname");
   foreach(trigger in triggers) {
-    if(isdefined(trigger.org)) {
+    if(isDefined(trigger.org)) {
       trigger.org delete();
     }
   }
@@ -1419,7 +1419,7 @@ function function_55e9043d() {
   level endon("hash_16154574");
   level endon("hash_d1f5acf7");
   level endon("hash_4f4a6e14");
-  while (true) {
+  while(true) {
     level waittill("hash_c62f5087", left);
     if(left == 50) {
       break;
@@ -1427,11 +1427,11 @@ function function_55e9043d() {
   }
   var_48be25f5 = getent("doa_basic_spawner", "targetname");
   spawnpoints = struct::get_array("truck_soccer_dirt_spawner");
-  while (true) {
+  while(true) {
     count = doa_utility::function_b99d78c7();
     if(count < getdvarint("scr_trucksoccer_enemy_count", 50)) {
       ai = namespace_51bd792::function_45849d81(var_48be25f5, spawnpoints[randomint(spawnpoints.size)], undefined);
-      if(isdefined(ai)) {
+      if(isDefined(ai)) {
         ai forceteleport(ai.origin, (0, randomint(360), 0));
         ai notify("hash_6e8326fc");
         ai thread doa_utility::function_24245456(level, "trucksoccer_rally_complete");
@@ -1450,8 +1450,8 @@ function function_b3939e94(room) {
   function_baa38e65(room);
   foreach(player in getplayers()) {
     player notify("hash_7c5410c4");
-    if(isdefined(player) && isdefined(player.doa)) {
-      if(isdefined(player.doa.vehicle)) {
+    if(isDefined(player) && isDefined(player.doa)) {
+      if(isDefined(player.doa.vehicle)) {
         player.doa.vehicle usevehicle(player, 0);
         player.doa.vehicle delete();
         player.doa.vehicle = undefined;
@@ -1465,7 +1465,7 @@ function function_b3939e94(room) {
   }
   level.doa.var_bc9b7c71 = room.var_e5c8b9e7;
   foreach(egg in room.var_677f63c8) {
-    if(isdefined(egg)) {
+    if(isDefined(egg)) {
       egg delete();
     }
   }
@@ -1478,7 +1478,7 @@ function function_6274a031() {
     util::wait_network_frame();
   }
   self vehicle::toggle_lights_group(1, 1);
-  self playsound("veh_doa_boost");
+  self playSound("veh_doa_boost");
   wait(3);
   self vehicle::toggle_lights_group(1, 0);
 }
@@ -1493,17 +1493,17 @@ function function_e619ee5(vehicle) {
   level.launchforce = 500;
   vehicle vehicle::toggle_lights_group(1, 0);
   self.doa.var_f6a4f3f = 0;
-  while (true) {
+  while(true) {
     wait(0.05);
     if(!level flag::get("doa_challenge_running")) {
       continue;
     }
-    if(isdefined(self.doa.vehicle) && self changeseatbuttonpressed() && gettime() > self.doa.var_f6a4f3f && (!(isdefined(self.doa.var_1951557) && self.doa.var_1951557))) {
+    if(isDefined(self.doa.vehicle) && self changeseatbuttonpressed() && gettime() > self.doa.var_f6a4f3f && (!(isDefined(self.doa.var_1951557) && self.doa.var_1951557))) {
       self.doa.var_f6a4f3f = gettime() + getdvarint("scr_doa_chicken_bowl_boostinterval", 4000);
       curdir = (level.launchforce, 0, 0);
       vehicle launchvehicle(curdir, (0, 0, 0), 1);
       vehicle thread function_fa6d5f56();
-      while (self changeseatbuttonpressed()) {
+      while(self changeseatbuttonpressed()) {
         wait(0.05);
       }
     }
@@ -1524,7 +1524,7 @@ function function_c0485deb(def) {
   }
   lastside = doa_utility::function_5b4fbaef();
   lastlastside = lastside;
-  while (level flag::get("doa_round_spawning")) {
+  while(level flag::get("doa_round_spawning")) {
     side = doa_utility::function_5b4fbaef();
     if(side == lastside || side == lastlastside) {
       wait(0.05);
@@ -1540,28 +1540,28 @@ function function_c0485deb(def) {
 function function_dfbad276(number, startside) {
   level endon("exit_taken");
   spawn_locations = level.doa.var_99f9e71a[startside];
-  while (number > 0) {
+  while(number > 0) {
     spawn_point = spawn_locations[randomint(spawn_locations.size)];
     dest_point = struct::get(spawn_point.target, "targetname");
-    trace = bullettrace(spawn_point.origin, spawn_point.origin + (vectorscale((0, 0, -1), 500)), 0, undefined);
+    trace = bulletTrace(spawn_point.origin, spawn_point.origin + (vectorscale((0, 0, -1), 500)), 0, undefined);
     spawn_point = (spawn_point.origin[0], spawn_point.origin[1], trace["position"][2]);
-    trace = bullettrace(dest_point.origin, dest_point.origin + (vectorscale((0, 0, -1), 500)), 0, undefined);
+    trace = bulletTrace(dest_point.origin, dest_point.origin + (vectorscale((0, 0, -1), 500)), 0, undefined);
     dest_point = (dest_point.origin[0], dest_point.origin[1], trace["position"][2]);
     desired_angles = vectortoangles(dest_point - spawn_point);
     var_3e02e245 = angleclamp180(desired_angles[1]);
     cow = spawn("script_model", spawn_point);
     cow.targetname = "cow";
     cow.angles = (0, var_3e02e245 + 90, 0);
-    cow setmodel("zombietron_water_buffalo");
+    cow setModel("zombietron_water_buffalo");
     cow makefakeai();
-    cow setcandamage(1);
+    cow setCanDamage(1);
     cow.health = 3999999;
     cow.team = "axis";
     cow.script_noteworthy = "cow";
     cow.move_dist = distance(cow.origin, dest_point);
     cow.move_time = cow.move_dist / getdvarint("cp_doa_cow_run_units_per_sec", 207);
     cow setplayercollision(1);
-    cow playloopsound("zmb_cow_run_lp", 2);
+    cow playLoopSound("zmb_cow_run_lp", 2);
     if(randomint(getdvarint("cp_doa_sacred_cow_chance", 20)) == 0) {
       cow.sacred = 1;
       cow thread namespace_eaa992c::function_285a2999("cow_sacred");
@@ -1583,7 +1583,7 @@ function function_dfbad276(number, startside) {
 function function_caf96f2d() {
   self endon("death");
   self useanimtree($critter);
-  while (true) {
+  while(true) {
     self animscripted("anim", self.origin, self.angles, self.animation);
     self waittillmatch("anim");
   }
@@ -1600,7 +1600,7 @@ function cow_deleter() {
   self thread function_c9a224d9();
   self waittill("medium_rare");
   util::wait_network_frame();
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     self delete();
   }
 }
@@ -1618,24 +1618,24 @@ function run_cow_run(dest) {
 
 function cow_damage_trigger(cow) {
   cow endon("death");
-  while (true) {
+  while(true) {
     self waittill("trigger", guy);
-    if(!isdefined(guy)) {
+    if(!isDefined(guy)) {
       continue;
     }
-    if(isdefined(guy.launched)) {
+    if(isDefined(guy.launched)) {
       continue;
     }
     if(!issentient(guy)) {
       continue;
     }
-    if(!(isdefined(guy.takedamage) && guy.takedamage)) {
+    if(!(isDefined(guy.takedamage) && guy.takedamage)) {
       continue;
     }
-    if(isdefined(guy.boss)) {
+    if(isDefined(guy.boss)) {
       continue;
     }
-    guy playsound("zmb_buffalo_impact");
+    guy playSound("zmb_buffalo_impact");
     if(!isplayer(guy)) {
       if(!isvehicle(guy)) {
         guy clientfield::set("zombie_rhino_explosion", 1);
@@ -1645,7 +1645,7 @@ function cow_damage_trigger(cow) {
         guy startragdoll();
         guy launchragdoll(vectorscale((0, 0, 1), 220));
         guy.launched = 1;
-        guy playsound("zmb_ragdoll_launched");
+        guy playSound("zmb_ragdoll_launched");
         guy thread doa_utility::function_ba30b321(0.2);
       } else {
         guy kill(guy.origin);
@@ -1658,11 +1658,11 @@ function cow_damage_trigger(cow) {
 
 function cow_damage_watch() {
   self endon("death");
-  while (true) {
+  while(true) {
     self waittill("damage", damagetaken, attacker, dir, point, dmg_type, model, tag, part, weapon, flags);
     if(dmg_type == "MOD_PROJECTILE" || dmg_type == "MOD_GRENADE" || dmg_type == "MOD_CRUSH" || weapon == level.doa.var_69899304) {
-      if(isdefined(attacker)) {
-        if(isdefined(attacker.owner)) {
+      if(isDefined(attacker)) {
+        if(isDefined(attacker.owner)) {
           attacker = attacker.owner;
         }
         if(isplayer(attacker)) {
@@ -1670,13 +1670,13 @@ function cow_damage_watch() {
         }
       }
       self thread namespace_eaa992c::function_285a2999("cow_explode");
-      self playsound("zmb_cow_explode");
+      self playSound("zmb_cow_explode");
       self notify("medium_rare");
-      if(isdefined(self.sacred)) {
+      if(isDefined(self.sacred)) {
         if(isplayer(attacker)) {
           attacker.doa.var_130471f++;
         }
-        self playsound("zmb_cow_explode_gold");
+        self playSound("zmb_cow_explode_gold");
         location = self.origin;
         var_888caf9f = namespace_831a4a7c::function_5eb6e4d1().size + 10;
         maxamount = namespace_831a4a7c::function_5eb6e4d1().size + 20;
@@ -1691,7 +1691,7 @@ function cow_damage_watch() {
 
 function random_cow_stampede() {
   level endon("exit_taken");
-  while (level flag::get("doa_round_active") && !level flag::get("doa_game_is_over")) {
+  while(level flag::get("doa_round_active") && !level flag::get("doa_game_is_over")) {
     side = doa_utility::function_5b4fbaef();
     function_dfbad276(randomintrange(2, 6), side);
     wait(randomintrange(10, 30));
@@ -1700,7 +1700,7 @@ function random_cow_stampede() {
 
 function function_c35db0c1() {
   level endon("hash_6df89d17");
-  while (!level flag::get("doa_game_is_over")) {
+  while(!level flag::get("doa_game_is_over")) {
     level waittill("round_spawning_starting");
     wait(10);
     level thread random_cow_stampede();

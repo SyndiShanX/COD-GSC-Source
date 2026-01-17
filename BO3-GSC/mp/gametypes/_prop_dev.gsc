@@ -109,47 +109,47 @@ function function_6c015e54() {
   function_6edad947("", "");
   function_6edad947("", "");
   function_6edad947("", "");
-  while (true) {
-    if(isdefined(level.prematch_over) && level.prematch_over) {
+  while(true) {
+    if(isDefined(level.prematch_over) && level.prematch_over) {
       level.allow_teamchange = "" + getdvarint("", 0);
       level.var_2898ef72 = getdvarint("", 0) != 0;
     }
-    if(getdvarint("", 0) != var_5f965ece && isdefined(level.players)) {
+    if(getdvarint("", 0) != var_5f965ece && isDefined(level.players)) {
       var_5f965ece = getdvarint("", 0);
-      if(!isdefined(level.players[0].changepropkey)) {
+      if(!isDefined(level.players[0].changepropkey)) {
         iprintlnbold("");
       } else {
         foreach(player in level.players) {
-          if(isdefined(player.team) && player util::isprop()) {
+          if(isDefined(player.team) && player util::isprop()) {
             player namespace_4c773ed3::propabilitykeysvisible(var_5f965ece, 1);
           }
         }
         level.elim_hud.alpha = var_5f965ece;
       }
     }
-    if(getdvarint("", 0) != var_ccd61088 && isdefined(level.players)) {
+    if(getdvarint("", 0) != var_ccd61088 && isDefined(level.players)) {
       foreach(player in level.players) {
         if(player util::isprop()) {
           var_ccd61088 = getdvarint("", 0);
-          player.var_c4494f8d = !(isdefined(player.var_c4494f8d) && player.var_c4494f8d);
+          player.var_c4494f8d = !(isDefined(player.var_c4494f8d) && player.var_c4494f8d);
           player iprintlnbold((player.var_c4494f8d ? "" : ""));
         }
       }
     }
-    if(getdvarint("", 0) != var_6c9fc047 && isdefined(level.players)) {
+    if(getdvarint("", 0) != var_6c9fc047 && isDefined(level.players)) {
       foreach(player in level.players) {
         if(player util::isprop()) {
           var_6c9fc047 = getdvarint("", 0);
-          player.var_b53602f4 = !(isdefined(player.var_b53602f4) && player.var_b53602f4);
+          player.var_b53602f4 = !(isDefined(player.var_b53602f4) && player.var_b53602f4);
           player iprintlnbold((player.var_b53602f4 ? "" : ""));
         }
       }
     }
-    if(getdvarint("", 0) != var_f0760dd5 && isdefined(level.players)) {
+    if(getdvarint("", 0) != var_f0760dd5 && isDefined(level.players)) {
       foreach(player in level.players) {
         if(player util::isprop()) {
           var_f0760dd5 = getdvarint("", 0);
-          player.var_2f1101f4 = !(isdefined(player.var_2f1101f4) && player.var_2f1101f4);
+          player.var_2f1101f4 = !(isDefined(player.var_2f1101f4) && player.var_2f1101f4);
           player iprintlnbold((player.var_2f1101f4 ? "" : ""));
         }
       }
@@ -167,11 +167,11 @@ function function_6c015e54() {
         iprintlnbold((var_8c45c976 ? "" : ""));
       }
     }
-    if(getdvarint("", 0) != var_fe10d650 && isdefined(level.players)) {
+    if(getdvarint("", 0) != var_fe10d650 && isDefined(level.players)) {
       foreach(player in level.players) {
         if(player prop::function_e4b2f23()) {
           var_fe10d650 = getdvarint("", 0);
-          player.var_74ca9cd1 = !(isdefined(player.var_74ca9cd1) && player.var_74ca9cd1);
+          player.var_74ca9cd1 = !(isDefined(player.var_74ca9cd1) && player.var_74ca9cd1);
           player iprintlnbold((player.var_74ca9cd1 ? "" : ""));
         }
       }
@@ -207,7 +207,7 @@ function function_6c015e54() {
       setdvar("", 0);
     }
     if(getdvarint("", 0) != 0) {
-      if(isdefined(level.players) && isdefined(level.players[0])) {
+      if(isDefined(level.players) && isDefined(level.players[0])) {
         level thread prop::function_435d5169(&"", level.players[0]);
       }
       setdvar("", 0);
@@ -223,7 +223,7 @@ function function_6c015e54() {
       setdvar("", 0);
     }
     if(getdvarint("", 0) != 0) {
-      if(isdefined(level.players) && isdefined(level.players[0])) {
+      if(isDefined(level.players) && isDefined(level.players[0])) {
         level.players[0] namespace_4c773ed3::canlock();
       }
     }
@@ -238,7 +238,7 @@ function function_6c015e54() {
       function_9b9725b1();
       setdvar("", 0);
     }
-    if(getdvarint("", 0) != 0 && isdefined(level.players)) {
+    if(getdvarint("", 0) != 0 && isDefined(level.players)) {
       foreach(player in level.players) {
         player notify("hash_b83e2d54");
       }
@@ -253,11 +253,11 @@ function function_6c015e54() {
     if(getdvarint("", 0) != 0) {
       function_b9002790();
     }
-    if(getdvarint("", 1) != minigame_on && isdefined(level.players) && level.players.size > 0) {
+    if(getdvarint("", 1) != minigame_on && isDefined(level.players) && level.players.size > 0) {
       minigame_on = getdvarint("", 1);
       iprintlnbold((minigame_on ? "" : ""));
     }
-    if(getdvarint("", 0) != var_74fced3d && isdefined(level.players) && level.players.size > 0) {
+    if(getdvarint("", 0) != var_74fced3d && isDefined(level.players) && level.players.size > 0) {
       var_74fced3d = getdvarint("", 0);
       if(var_74fced3d == 2) {
         iprintlnbold("");
@@ -284,11 +284,11 @@ function function_f35dfc64(enabled) {
 }
 
 function function_194631ab(enabled) {
-  if(!isdefined(level.players) || level.players.size == 0) {
+  if(!isDefined(level.players) || level.players.size == 0) {
     return false;
   }
   player = level.players[0];
-  if(!isdefined(player) || !isalive(player) || isdefined(player.placementoffset) || !isdefined(player.prop)) {
+  if(!isDefined(player) || !isalive(player) || isDefined(player.placementoffset) || !isDefined(player.prop)) {
     return false;
   }
   if(enabled) {
@@ -319,16 +319,16 @@ function function_1b260dda() {
   red = (1, 0, 0);
   green = (0, 1, 0);
   blue = (0, 0.5, 1);
-  self.var_c9f40191 = function_e7f343ff(white, & "", self.prop.info.proprange);
-  self.var_40dabe6f = function_e7f343ff(white, & "", self.prop.info.propheight);
-  self.var_f1fdc495 = function_e7f343ff(white, & "", self.prop.info.anglesoffset[2]);
-  self.var_e7ec6bb6 = function_e7f343ff(white, & "", self.prop.info.anglesoffset[1]);
-  self.var_3e02b967 = function_e7f343ff(white, & "", self.prop.info.anglesoffset[0]);
-  self.var_381d73f7 = function_e7f343ff(blue, & "", self.prop.info.xyzoffset[2]);
-  self.var_c61604bc = function_e7f343ff(green, & "", self.prop.info.xyzoffset[1]);
-  self.var_ec187f25 = function_e7f343ff(red, & "", self.prop.info.xyzoffset[0]);
-  self.var_f3f7c094 = function_e7f343ff(white, & "", self.prop.info.var_bbac36c8);
-  self.var_6b04bc54 = function_e7f343ff(white, & "", self.prop.info.propsize);
+  self.var_c9f40191 = function_e7f343ff(white, &"", self.prop.info.proprange);
+  self.var_40dabe6f = function_e7f343ff(white, &"", self.prop.info.propheight);
+  self.var_f1fdc495 = function_e7f343ff(white, &"", self.prop.info.anglesoffset[2]);
+  self.var_e7ec6bb6 = function_e7f343ff(white, &"", self.prop.info.anglesoffset[1]);
+  self.var_3e02b967 = function_e7f343ff(white, &"", self.prop.info.anglesoffset[0]);
+  self.var_381d73f7 = function_e7f343ff(blue, &"", self.prop.info.xyzoffset[2]);
+  self.var_c61604bc = function_e7f343ff(green, &"", self.prop.info.xyzoffset[1]);
+  self.var_ec187f25 = function_e7f343ff(red, &"", self.prop.info.xyzoffset[0]);
+  self.var_f3f7c094 = function_e7f343ff(white, &"", self.prop.info.var_bbac36c8);
+  self.var_6b04bc54 = function_e7f343ff(white, &"", self.prop.info.propsize);
   self.var_b97b612d = function_e7f343ff(white, undefined, undefined, "" + self.prop.info.propsizetext);
   self.placementmodel = function_e7f343ff(white, undefined, undefined, (("" + self.var_4efaa35) + "") + self.prop.info.modelname);
   self.var_af6ef079 = array(self.placementmodel, self.var_b97b612d, self.var_6b04bc54, self.var_f3f7c094, self.var_ec187f25, self.var_c61604bc, self.var_381d73f7, self.var_3e02b967, self.var_e7ec6bb6, self.var_f1fdc495, self.var_40dabe6f, self.var_c9f40191);
@@ -367,7 +367,7 @@ function function_8bd2ff0() {
 }
 
 function debugaxis(origin, angles, size, alpha, depthtest, duration) {
-  var_d937a872 = anglestoforward(angles) * size;
+  var_d937a872 = anglesToForward(angles) * size;
   var_ff3a22db = anglestoright(angles) * size;
   var_8d32b3a0 = anglestoup(angles) * size;
   line(origin, origin + var_d937a872, (1, 0, 0), alpha, 0, duration);
@@ -377,7 +377,7 @@ function debugaxis(origin, angles, size, alpha, depthtest, duration) {
 
 function function_d8d922ad() {
   self endon("hash_bff3e3c5");
-  while (true) {
+  while(true) {
     debugaxis(self.origin, self.angles, 100, 1, 0, 1);
     box(self.origin, self getmins(), self getmaxs(), self.angles[1], (1, 0, 1), 1, 0, 1);
     wait(0.05);
@@ -387,9 +387,9 @@ function function_d8d922ad() {
 function function_18a45f58() {
   self endon("hash_bff3e3c5");
   self function_9c8c6fe4(0);
-  while (true) {
+  while(true) {
     msg = self util::waittill_any_return("", "", "", "", "");
-    if(!isdefined(msg)) {
+    if(!isDefined(msg)) {
       continue;
     }
     if(msg == "") {
@@ -416,7 +416,7 @@ function function_6049bca3(val) {
   self endon("hash_c1452ba");
   function_9c8c6fe4(val);
   wait(0.5);
-  while (true) {
+  while(true) {
     function_9c8c6fe4(val);
     wait(0.05);
   }
@@ -441,7 +441,7 @@ function function_a24562f8(val) {
   self endon("hash_c1452ba");
   function_8bdc662f(val);
   wait(0.5);
-  while (true) {
+  while(true) {
     function_8bdc662f(val);
     wait(0.05);
   }
@@ -458,7 +458,7 @@ function function_e52aa8bb(var_6866c6f1) {
 }
 
 function function_639754d0(var_95f39eee) {
-  for (index = 0; index < level.propindex.size; index++) {
+  for(index = 0; index < level.propindex.size; index++) {
     if(level.proplist[level.propindex[index][0]][level.propindex[index][1]].modelname == var_95f39eee) {
       return index;
     }
@@ -487,7 +487,7 @@ function function_8bdc662f(val) {
     if(hudelem == self.var_b97b612d || hudelem == self.var_6b04bc54) {
       sizes = array("", "", "", "", "", "");
       index = 0;
-      for (i = 0; i < sizes.size; i++) {
+      for(i = 0; i < sizes.size; i++) {
         if(sizes[i] == self.prop.info.propsizetext) {
           index = i;
           break;
@@ -621,15 +621,15 @@ function function_4e71de66() {
 }
 
 function function_b7096a63(vec) {
-  return isdefined(vec) && (vec[0] != 0 || vec[1] != 0 || vec[2] != 0);
+  return isDefined(vec) && (vec[0] != 0 || vec[1] != 0 || vec[2] != 0);
 }
 
 function function_f0e744af(propinfo) {
-  return isdefined(propinfo.propheight) && propinfo.propheight != prop::getthirdpersonheightoffsetforsize(propinfo.propsize);
+  return isDefined(propinfo.propheight) && propinfo.propheight != prop::getthirdpersonheightoffsetforsize(propinfo.propsize);
 }
 
 function function_52e4c413(propinfo) {
-  return isdefined(propinfo.proprange) && propinfo.proprange != prop::getthirdpersonrangeforsize(propinfo.propsize);
+  return isDefined(propinfo.proprange) && propinfo.proprange != prop::getthirdpersonrangeforsize(propinfo.propsize);
 }
 
 function function_954fa963(file, propinfo) {
@@ -893,18 +893,18 @@ function function_1a022b4b() {
 
 function function_c64fb4ca() {
   player = level.players[0];
-  if(!isdefined(player) || !isalive(player) || (!(isdefined(player.hasspawned) && player.hasspawned))) {
+  if(!isDefined(player) || !isalive(player) || (!(isDefined(player.hasspawned) && player.hasspawned))) {
     return;
   }
-  if(isdefined(level.players[1])) {
+  if(isDefined(level.players[1])) {
     var_21281cd2 = level.players[1];
   } else {
     var_21281cd2 = bot::add_bot(util::getotherteam(player.team));
   }
-  if(!isdefined(var_21281cd2.pers[""])) {
+  if(!isDefined(var_21281cd2.pers[""])) {
     var_21281cd2.pers[""] = 0;
   }
-  if(!isdefined(var_21281cd2.hits)) {
+  if(!isDefined(var_21281cd2.hits)) {
     var_21281cd2.hits = 0;
   }
   setdvar("", 0);
@@ -912,7 +912,7 @@ function function_c64fb4ca() {
   player.health = player.maxhealth;
   weapon = getweapon("");
   end = player.origin;
-  dir = anglestoforward(player.angles);
+  dir = anglesToForward(player.angles);
   start = (end + (dir * 100)) + vectorscale((0, 0, 1), 30);
   magicbullet(weapon, start, end, var_21281cd2);
   var_c2423fb7 = -1 * dir;
@@ -932,18 +932,18 @@ function function_c64fb4ca() {
 }
 
 function function_276ad638() {
-  if(!isdefined(level.players)) {
+  if(!isDefined(level.players)) {
     return;
   }
   foreach(player in level.players) {
-    if(isdefined(player) && isdefined(player.team) && player.team == game[""]) {
+    if(isDefined(player) && isDefined(player.team) && player.team == game[""]) {
       print3d(player.origin + vectorscale((0, 0, 1), 50), "" + player.health);
     }
   }
 }
 
 function function_b52ad1b2() {
-  if(!isdefined(level.players)) {
+  if(!isDefined(level.players)) {
     return;
   }
   foreach(player in level.players) {
@@ -955,11 +955,11 @@ function function_b52ad1b2() {
 }
 
 function function_b02387d6() {
-  if(!isdefined(level.players)) {
+  if(!isDefined(level.players)) {
     return;
   }
   foreach(player in level.players) {
-    if(isdefined(player) && isdefined(player.prop)) {
+    if(isDefined(player) && isDefined(player.prop)) {
       player namespace_4c773ed3::get_ground_normal(player.prop, 1);
     }
   }
@@ -972,14 +972,14 @@ function function_61b27799(propinfo, origin, angles) {
   propent setplayercollision(0);
   prop = spawn("", propent.origin);
   prop.angles = angles;
-  prop setmodel(propinfo.modelname);
+  prop setModel(propinfo.modelname);
   prop setscale(propinfo.var_bbac36c8, 1);
-  prop setcandamage(1);
+  prop setCanDamage(1);
   prop.xyzoffset = propinfo.xyzoffset;
   prop.anglesoffset = propinfo.anglesoffset;
   prop.health = 1;
   prop setplayercollision(0);
-  forward = anglestoforward(angles) * prop.xyzoffset[0];
+  forward = anglesToForward(angles) * prop.xyzoffset[0];
   right = anglestoright(angles) * prop.xyzoffset[1];
   up = anglestoup(angles) * prop.xyzoffset[2];
   prop.origin = prop.origin + forward;
@@ -995,9 +995,9 @@ function function_61b27799(propinfo, origin, angles) {
 function function_ad9aebcc() {
   player = level.players[0];
   angles = player.angles;
-  dir = anglestoforward(angles);
+  dir = anglesToForward(angles);
   origin = player.origin + vectorscale((0, 0, 1), 100);
-  if(!isdefined(level.var_7627c471)) {
+  if(!isDefined(level.var_7627c471)) {
     level.var_7627c471 = [];
     foreach(category in level.proplist) {
       foreach(propinfo in category) {
@@ -1014,7 +1014,7 @@ function function_ad9aebcc() {
 }
 
 function function_36895abd() {
-  if(!isdefined(level.var_ec1690fd)) {
+  if(!isDefined(level.var_ec1690fd)) {
     return;
   }
   color = (0, 1, 0);
@@ -1023,24 +1023,24 @@ function function_36895abd() {
   }
   print3d(level.var_ec1690fd.playerorg + vectorscale((0, 0, 1), 50), level.var_ec1690fd.type);
   box(level.var_ec1690fd.playerorg, level.var_ec1690fd.playermins, level.var_ec1690fd.playermaxs, level.var_ec1690fd.playerangles[1], color);
-  if(isdefined(level.var_ec1690fd.origin1)) {
+  if(isDefined(level.var_ec1690fd.origin1)) {
     sphere(level.var_ec1690fd.origin1, 5, color);
     line(level.var_ec1690fd.playerorg, level.var_ec1690fd.origin1);
-    if(isdefined(level.var_ec1690fd.text1)) {
+    if(isDefined(level.var_ec1690fd.text1)) {
       print3d(level.var_ec1690fd.origin1 + (vectorscale((0, 0, -1), 10)), level.var_ec1690fd.text1);
     }
   }
-  if(isdefined(level.var_ec1690fd.origin2)) {
+  if(isDefined(level.var_ec1690fd.origin2)) {
     sphere(level.var_ec1690fd.origin2, 5, color);
     line(level.var_ec1690fd.playerorg, level.var_ec1690fd.origin2);
-    if(isdefined(level.var_ec1690fd.text2)) {
+    if(isDefined(level.var_ec1690fd.text2)) {
       print3d(level.var_ec1690fd.origin2 + vectorscale((0, 0, 1), 10), level.var_ec1690fd.text2);
     }
   }
-  if(isdefined(level.var_ec1690fd.origin3)) {
+  if(isDefined(level.var_ec1690fd.origin3)) {
     sphere(level.var_ec1690fd.origin3, 5, color);
     line(level.var_ec1690fd.playerorg, level.var_ec1690fd.origin3);
-    if(isdefined(level.var_ec1690fd.text3)) {
+    if(isDefined(level.var_ec1690fd.text3)) {
       print3d(level.var_ec1690fd.origin3 + vectorscale((0, 0, 1), 30), level.var_ec1690fd.text3);
     }
   }
@@ -1049,14 +1049,14 @@ function function_36895abd() {
 function function_b2eba1e3(propinfo, origin, angles, team) {
   var_a20cbf64 = spawn("", origin);
   var_a20cbf64.targetname = "";
-  var_a20cbf64 setmodel(propinfo.modelname);
+  var_a20cbf64 setModel(propinfo.modelname);
   var_a20cbf64 setscale(propinfo.var_bbac36c8, 1);
   var_a20cbf64.angles = angles;
-  var_a20cbf64 setcandamage(1);
+  var_a20cbf64 setCanDamage(1);
   var_a20cbf64.fakehealth = 50;
   var_a20cbf64.health = 99999;
   var_a20cbf64.maxhealth = 99999;
-  var_a20cbf64 thread prop::function_500dc7d9( & namespace_4c773ed3::damageclonewatch);
+  var_a20cbf64 thread prop::function_500dc7d9(&namespace_4c773ed3::damageclonewatch);
   var_a20cbf64 setplayercollision(0);
   var_a20cbf64 makesentient();
   var_a20cbf64 notsolidcapsule();
@@ -1066,9 +1066,9 @@ function function_b2eba1e3(propinfo, origin, angles, team) {
 function function_9b9725b1() {
   player = level.players[0];
   angles = player.angles;
-  dir = anglestoforward(angles);
+  dir = anglesToForward(angles);
   origin = player.origin + vectorscale((0, 0, 1), 100);
-  if(isdefined(level.var_79ca1379)) {
+  if(isDefined(level.var_79ca1379)) {
     foreach(clone in level.var_79ca1379) {
       clone namespace_4c773ed3::function_a40d8853();
     }
@@ -1085,17 +1085,17 @@ function function_9b9725b1() {
 function function_6863880e() {
   player = level.players[0];
   angles = player.angles;
-  dir = anglestoforward(angles);
+  dir = anglesToForward(angles);
   origin = player.origin + (dir * vectorscale((0, 0, 1), 100));
   propinfo = prop::getnextprop(player);
-  if(!isdefined(level.var_79ca1379)) {
+  if(!isDefined(level.var_79ca1379)) {
     level.var_79ca1379 = [];
   }
   level.var_79ca1379[level.var_79ca1379.size] = function_b2eba1e3(propinfo, origin, angles, util::getotherteam(player.team));
 }
 
 function function_5e127ae8() {
-  if(!isdefined(level.players)) {
+  if(!isDefined(level.players)) {
     return;
   }
   foreach(player in level.players) {
@@ -1104,12 +1104,12 @@ function function_5e127ae8() {
 }
 
 function function_b9002790() {
-  if(!isdefined(level.var_e5ad813f) || !isdefined(level.var_e5ad813f.targets)) {
+  if(!isDefined(level.var_e5ad813f) || !isDefined(level.var_e5ad813f.targets)) {
     return;
   }
-  for (i = 0; i < level.var_e5ad813f.targets.size; i++) {
+  for(i = 0; i < level.var_e5ad813f.targets.size; i++) {
     target = level.var_e5ad813f.targets[i];
-    if(isdefined(target)) {
+    if(isDefined(target)) {
       print3d(target.origin + vectorscale((0, 0, 1), 30), "" + target.fakehealth);
     }
   }

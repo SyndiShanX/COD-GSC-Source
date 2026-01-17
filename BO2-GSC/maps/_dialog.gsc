@@ -10,7 +10,7 @@
 #include maps\_dialog;
 
 main() {
-  level.vo = spawnstruct();
+  level.vo = spawnStruct();
   level.vo.nag_groups = [];
 }
 
@@ -173,7 +173,7 @@ add_vo_to_nag_group(group, character, vo_line) {
   assert(isDefined(vo_line), "Vo Line is missing in FN: add_vo_to_nag_groupg()");
 
   if(!isDefined(level.vo.nag_groups[group])) {
-    level.vo.nag_groups[group] = spawnstruct();
+    level.vo.nag_groups[group] = spawnStruct();
     level.vo.nag_groups[group].e_ent = [];
     level.vo.nag_groups[group].str_vo_line = [];
     level.vo.nag_groups[group].num_nags = 0;

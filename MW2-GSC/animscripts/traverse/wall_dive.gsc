@@ -19,11 +19,11 @@ main() {
 
   // orient to the Negotiation start node
   startnode = self getnegotiationstartnode();
-  assert(isdefined(startnode));
+  assert(isDefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);
 
   self setFlaggedAnimKnoballRestart("diveanim", % jump_over_low_wall, % body, 1, .1, 1);
-  self playsound("dive_wall");
+  self playSound("dive_wall");
   self waittillmatch("diveanim", "gravity on");
   self traverseMode("gravity");
   self animscripts\shared::DoNoteTracks("diveanim");

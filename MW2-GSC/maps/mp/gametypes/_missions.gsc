@@ -21,9 +21,9 @@ TIER_FILE_COL = 4;
 init() {
   precacheString(&"MP_CHALLENGE_COMPLETED");
 
-  if(!mayProcessChallenges())
+  if(!mayProcessChallenges()) {
     return;
-
+  }
   level.missionCallbacks = [];
 
   registerMissionCallback("playerKilled", ::ch_kills);
@@ -66,16 +66,14 @@ ch_setState(refString, value) {
 }
 
 mayProcessChallenges() {
-  /#
   if(getDvarInt("debug_challenges"))
     return true;
-  # /
 
-    return (level.rankedMatch);
+  return (level.rankedMatch);
 }
 
 onPlayerConnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connected", player);
 
     if(!isDefined(player.pers["postGameChallenges"]))
@@ -117,7 +115,7 @@ onPlayerConnect() {
 onPlayerSpawned() {
   self endon("disconnect");
 
-  for (;;) {
+  for(;;) {
     self waittill("spawned_player");
 
     self thread monitorSprintDistance();
@@ -127,7 +125,7 @@ onPlayerSpawned() {
 monitorScavengerPickup() {
   self endon("disconnect");
 
-  for (;;) {
+  for(;;) {
     self waittill("scavenger_pickup");
 
     if(self _hasperk("specialty_scavenger"))
@@ -140,7 +138,7 @@ monitorScavengerPickup() {
 monitorStreakReward() {
   self endon("disconnect");
 
-  for (;;) {
+  for(;;) {
     self waittill("received_earned_killstreak");
 
     if(self _hasperk("specialty_hardline"))
@@ -153,7 +151,7 @@ monitorStreakReward() {
 monitorBlastShieldSurvival() {
   self endon("disconnect");
 
-  for (;;) {
+  for(;;) {
     self waittill("survived_explosion");
 
     if(self _hasperk("_specialty_blastshield"))
@@ -166,12 +164,12 @@ monitorBlastShieldSurvival() {
 monitorTacInsertionsDestroyed() {
   self endon("disconnect");
 
-  for (;;) {
+  for(;;) {
     self waittill("destroyed_insertion", owner);
 
-    if(self == owner)
+    if(self == owner) {
       return;
-
+    }
     self processChallenge("ch_darkbringer");
     self incPlayerStat("mosttacprevented", 1);
 
@@ -185,7 +183,7 @@ monitorTacInsertionsDestroyed() {
 monitorFinalStandSurvival() {
   self endon("disconnect");
 
-  for (;;) {
+  for(;;) {
     self waittill("revive");
 
     self processChallenge("ch_livingdead");
@@ -197,7 +195,7 @@ monitorFinalStandSurvival() {
 monitorCombatHighSurvival() {
   self endon("disconnect");
 
-  for (;;) {
+  for(;;) {
     self waittill("combathigh_survived");
 
     self processChallenge("ch_thenumb");
@@ -218,7 +216,7 @@ initMissionData() {
 }
 
 registerMissionCallback(callback, func) {
-  if(!isdefined(level.missionCallbacks[callback]))
+  if(!isDefined(level.missionCallbacks[callback]))
     level.missionCallbacks[callback] = [];
   level.missionCallbacks[callback][level.missionCallbacks[callback].size] = func;
 }
@@ -360,12 +358,12 @@ ch_hardpoints(data) {
 }
 
 ch_vehicle_kills(data) {
-  if(!isDefined(data.attacker) || !isPlayer(data.attacker))
+  if(!isDefined(data.attacker) || !isPlayer(data.attacker)) {
     return;
-
-  if(!isKillstreakWeapon(data.sWeapon))
+  }
+  if(!isKillstreakWeapon(data.sWeapon)) {
     return;
-
+  }
   player = data.attacker;
 
   if(!isDefined(player.pers[data.sWeapon + "_streak"]))
@@ -458,9 +456,9 @@ ch_vehicle_kills(data) {
 }
 
 ch_vehicle_killed(data) {
-  if(!isDefined(data.attacker) || !isPlayer(data.attacker))
+  if(!isDefined(data.attacker) || !isPlayer(data.attacker)) {
     return;
-
+  }
   player = data.attacker;
 }
 
@@ -490,7 +488,7 @@ MGKill() {
 
 endMGStreakWhenLeaveMG() {
   self endon("disconnect");
-  while (1) {
+  while(1) {
     if(!isAlive(self) || self useButtonPressed()) {
       self.pers["MGStreak"] = undefined;
       //iprintln("0");
@@ -507,7 +505,7 @@ endMGStreak() {
 }
 
 killedBestEnemyPlayer(wasBest) {
-  if(!isdefined(self.pers["countermvp_streak"]) || !wasBest)
+  if(!isDefined(self.pers["countermvp_streak"]) || !wasBest)
     self.pers["countermvp_streak"] = 0;
 
   self.pers["countermvp_streak"]++;
@@ -533,16 +531,16 @@ isHighestScoringPlayer(player) {
 
   highScore = player.score;
 
-  for (i = 0; i < players.size; i++) {
-    if(!isDefined(players[i].score))
+  for(i = 0; i < players.size; i++) {
+    if(!isDefined(players[i].score)) {
       continue;
-
-    if(players[i].score < 1)
+    }
+    if(players[i].score < 1) {
       continue;
-
-    if(team != "all" && players[i].pers["team"] != team)
+    }
+    if(team != "all" && players[i].pers["team"] != team) {
       continue;
-
+    }
     if(players[i].score > highScore)
       return false;
   }
@@ -553,9 +551,9 @@ isHighestScoringPlayer(player) {
 ch_kills(data, time) {
   data.victim playerDied();
 
-  if(!isDefined(data.attacker) || !isPlayer(data.attacker))
+  if(!isDefined(data.attacker) || !isPlayer(data.attacker)) {
     return;
-
+  }
   player = data.attacker;
 
   time = data.time;
@@ -580,7 +578,7 @@ ch_kills(data, time) {
   if(isDefined(player.killedPlayers[data.victim.guid]) && player.killedPlayers[data.victim.guid] == 5)
     player processChallenge("ch_rival");
 
-  if(isdefined(player.tookWeaponFrom[data.sWeapon])) {
+  if(isDefined(player.tookWeaponFrom[data.sWeapon])) {
     if(player.tookWeaponFrom[data.sWeapon] == data.victim && data.sMeansOfDeath != "MOD_MELEE")
       player processChallenge("ch_cruelty");
   }
@@ -649,7 +647,7 @@ ch_kills(data, time) {
   if(data.victim.score > 0) {
     if(level.teambased) {
       victimteam = data.victim.pers["team"];
-      if(isdefined(victimteam) && victimteam != player.pers["team"]) {
+      if(isDefined(victimteam) && victimteam != player.pers["team"]) {
         if(isHighestScoringPlayer(data.victim) && level.players.size >= 6)
           player killedBestEnemyPlayer(true);
         else
@@ -670,9 +668,9 @@ ch_kills(data, time) {
     player processChallenge("ch_thedenier");
 
   // Filter out killstreak weapons	
-  if(isKillstreakWeapon(data.sWeapon))
+  if(isKillstreakWeapon(data.sWeapon)) {
     return;
-
+  }
   if(isDefined(data.modifiers["jackintheboxkill"]))
     player processChallenge("ch_jackinthebox");
 
@@ -701,7 +699,6 @@ ch_kills(data, time) {
   }
 
   if(data.sMeansOfDeath == "MOD_PISTOL_BULLET" || data.sMeansOfDeath == "MOD_RIFLE_BULLET") {
-
     weaponClass = getWeaponClass(data.sWeapon);
     ch_bulletDamageCommon(data, player, time, weaponClass);
 
@@ -879,9 +876,9 @@ ch_kills(data, time) {
 
       if(isDefined(player.attackers)) {
         foreach(attacker in player.attackers) {
-          if(attacker != data.victim)
+          if(attacker != data.victim) {
             continue;
-
+          }
           player processChallenge("ch_neverforget");
           break;
         }
@@ -1037,7 +1034,7 @@ ch_kills(data, time) {
           player processChallenge("ch_" + baseWeapon + "_" + weaponAttachment);
           continue;
         case "fmj":
-          if(data.victim.iDFlags & level.iDFLAGS_PENETRATION)
+          if(data.victim.iDFlags &level.iDFLAGS_PENETRATION)
             player processChallenge("ch_" + baseWeapon + "_" + weaponAttachment);
           continue;
         default:
@@ -1048,7 +1045,7 @@ ch_kills(data, time) {
     if(player _hasPerk("specialty_bulletaccuracy") && !player playerAds())
       player processChallenge("ch_bulletaccuracy_pro");
 
-    if(distanceSquared(player.origin, data.victim.origin) < 65536) // 256^2 
+    if(distanceSquared(player.origin, data.victim.origin) < 65536) // 256^2
     {
       if(player _hasPerk("specialty_heartbreaker"))
         player processChallenge("ch_deadsilence_pro");
@@ -1095,9 +1092,9 @@ ch_bulletDamageCommon(data, player, time, weaponClass) {
   if(!isMG(data.sWeapon))
     player endMGStreak();
 
-  if(isKillstreakWeapon(data.sweapon))
+  if(isKillstreakWeapon(data.sweapon)) {
     return;
-
+  }
   if(player.pers["lastBulletKillTime"] == time)
     player.pers["bulletStreak"]++;
   else
@@ -1130,12 +1127,12 @@ ch_bulletDamageCommon(data, player, time, weaponClass) {
   if(player.pers["bulletStreak"] == 2) {
     if(isDefined(data.modifiers["headshot"])) {
       foreach(killData in player.killsThisLife) {
-        if(killData.time != time)
+        if(killData.time != time) {
           continue;
-
-        if(!isDefined(data.modifiers["headshot"]))
+        }
+        if(!isDefined(data.modifiers["headshot"])) {
           continue;
-
+        }
         player processChallenge("ch_allpro");
       }
     }
@@ -1145,7 +1142,7 @@ ch_bulletDamageCommon(data, player, time, weaponClass) {
   }
 
   if(weaponClass == "weapon_pistol") {
-    if(isdefined(data.victim.attackerData) && isdefined(data.victim.attackerData[player.guid])) {
+    if(isDefined(data.victim.attackerData) && isDefined(data.victim.attackerData[player.guid])) {
       if(isDefined(data.victim.attackerData[player.guid].isPrimary))
         player processChallenge("ch_fastswap");
     }
@@ -1157,7 +1154,7 @@ ch_bulletDamageCommon(data, player, time, weaponClass) {
   }
 
   if(data.victim.iDFlagsTime == time) {
-    if(data.victim.iDFlags & level.iDFLAGS_PENETRATION)
+    if(data.victim.iDFlags &level.iDFLAGS_PENETRATION)
       player processChallenge("ch_xrayvision");
   }
 
@@ -1211,9 +1208,9 @@ ch_roundplayed(data) {
 }
 
 ch_roundwin(data) {
-  if(!data.winner)
+  if(!data.winner) {
     return;
-
+  }
   player = data.player;
   if(player.wasAliveAtMatchStart) {
     switch (level.gameType) {
@@ -1297,13 +1294,13 @@ static const char *g_HitLocNames[] =
 
 playerDamaged(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, sHitLoc) {
   self endon("disconnect");
-  if(isdefined(attacker))
+  if(isDefined(attacker))
     attacker endon("disconnect");
 
   wait .05;
   WaitTillSlowProcessAllowed();
 
-  data = spawnstruct();
+  data = spawnStruct();
 
   data.victim = self;
   data.eInflictor = eInflictor;
@@ -1330,12 +1327,12 @@ playerDamaged(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, sHitLoc) {
 
 playerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, sPrimaryWeapon, sHitLoc, modifiers) {
   self.anglesOnDeath = self getPlayerAngles();
-  if(isdefined(attacker))
+  if(isDefined(attacker))
     attacker.anglesOnKill = attacker getPlayerAngles();
 
   self endon("disconnect");
 
-  data = spawnstruct();
+  data = spawnStruct();
 
   data.victim = self;
   data.eInflictor = eInflictor;
@@ -1369,7 +1366,7 @@ playerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, sPrimaryWeap
 }
 
 vehicleKilled(owner, vehicle, eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon) {
-  data = spawnstruct();
+  data = spawnStruct();
 
   data.vehicle = vehicle;
   data.victim = owner;
@@ -1379,11 +1376,10 @@ vehicleKilled(owner, vehicle, eInflictor, attacker, iDamage, sMeansOfDeath, sWea
   data.sMeansOfDeath = sMeansOfDeath;
   data.sWeapon = sWeapon;
   data.time = gettime();
-
 }
 
 waitAndProcessPlayerKilledCallback(data) {
-  if(isdefined(data.attacker))
+  if(isDefined(data.attacker))
     data.attacker endon("disconnect");
 
   self.processingKilledChallenges = true;
@@ -1395,7 +1391,7 @@ waitAndProcessPlayerKilledCallback(data) {
 }
 
 playerAssist() {
-  data = spawnstruct();
+  data = spawnStruct();
 
   data.player = self;
 
@@ -1406,7 +1402,7 @@ useHardpoint(hardpointType) {
   wait .05;
   WaitTillSlowProcessAllowed();
 
-  data = spawnstruct();
+  data = spawnStruct();
 
   data.player = self;
   data.hardpointType = hardpointType;
@@ -1419,11 +1415,11 @@ roundBegin() {
 }
 
 roundEnd(winner) {
-  data = spawnstruct();
+  data = spawnStruct();
 
   if(level.teamBased) {
     team = "allies";
-    for (index = 0; index < level.placement[team].size; index++) {
+    for(index = 0; index < level.placement[team].size; index++) {
       data.player = level.placement[team][index];
       data.winner = (team == winner);
       data.place = index;
@@ -1431,7 +1427,7 @@ roundEnd(winner) {
       doMissionCallback("roundEnd", data);
     }
     team = "axis";
-    for (index = 0; index < level.placement[team].size; index++) {
+    for(index = 0; index < level.placement[team].size; index++) {
       data.player = level.placement[team][index];
       data.winner = (team == winner);
       data.place = index;
@@ -1439,9 +1435,9 @@ roundEnd(winner) {
       doMissionCallback("roundEnd", data);
     }
   } else {
-    for (index = 0; index < level.placement["all"].size; index++) {
+    for(index = 0; index < level.placement["all"].size; index++) {
       data.player = level.placement["all"][index];
-      data.winner = (isdefined(winner) && (data.player == winner));
+      data.winner = (isDefined(winner) && (data.player == winner));
       data.place = index;
 
       doMissionCallback("roundEnd", data);
@@ -1450,20 +1446,20 @@ roundEnd(winner) {
 }
 
 doMissionCallback(callback, data) {
-  if(!mayProcessChallenges())
+  if(!mayProcessChallenges()) {
     return;
-
-  if(getDvarInt("disable_challenges") > 0)
+  }
+  if(getDvarInt("disable_challenges") > 0) {
     return;
-
-  if(!isDefined(level.missionCallbacks[callback]))
+  }
+  if(!isDefined(level.missionCallbacks[callback])) {
     return;
-
+  }
   if(isDefined(data)) {
-    for (i = 0; i < level.missionCallbacks[callback].size; i++)
+    for(i = 0; i < level.missionCallbacks[callback].size; i++)
       thread[[level.missionCallbacks[callback][i]]](data);
   } else {
-    for (i = 0; i < level.missionCallbacks[callback].size; i++)
+    for(i = 0; i < level.missionCallbacks[callback].size; i++)
       thread[[level.missionCallbacks[callback][i]]]();
   }
 }
@@ -1474,7 +1470,7 @@ monitorSprintDistance() {
   self endon("death");
   self endon("disconnect");
 
-  while (1) {
+  while(1) {
     self waittill("sprint_begin");
 
     self.sprintDistThisSprint = 0;
@@ -1497,7 +1493,7 @@ monitorSingleSprintDistance() {
   self endon("sprint_end");
 
   prevpos = self.origin;
-  while (1) {
+  while(1) {
     wait .1;
 
     self.sprintDistThisSprint += distance(self.origin, prevpos);
@@ -1527,7 +1523,7 @@ monitorFallDistance() {
 
   self.pers["midairStreak"] = 0;
 
-  while (1) {
+  while(1) {
     if(!isAlive(self)) {
       self waittill("spawned_player");
       continue;
@@ -1536,7 +1532,7 @@ monitorFallDistance() {
     if(!self isOnGround()) {
       self.pers["midairStreak"] = 0;
       highestPoint = self.origin[2];
-      while (!self isOnGround() && isAlive(self)) {
+      while(!self isOnGround() && isAlive(self)) {
         if(self.origin[2] > highestPoint)
           highestPoint = self.origin[2];
         wait .05;
@@ -1561,27 +1557,27 @@ monitorFallDistance() {
 
 // TODO: Make this challenge happen after winning while being the last person on your team
 lastManSD() {
-  if(!mayProcessChallenges())
+  if(!mayProcessChallenges()) {
     return;
-
-  if(!self.wasAliveAtMatchStart)
+  }
+  if(!self.wasAliveAtMatchStart) {
     return;
-
-  if(self.teamkillsThisRound > 0)
+  }
+  if(self.teamkillsThisRound > 0) {
     return;
-
+  }
   self processChallenge("ch_lastmanstanding");
 }
 
 monitorBombUse() {
   self endon("disconnect");
 
-  for (;;) {
+  for(;;) {
     result = self waittill_any_return("bomb_planted", "bomb_defused");
 
-    if(!isDefined(result))
+    if(!isDefined(result)) {
       continue;
-
+    }
     if(result == "bomb_planted") {
       self processChallenge("ch_saboteur");
     } else if(result == "bomb_defused")
@@ -1590,7 +1586,7 @@ monitorBombUse() {
 }
 
 monitorLiveTime() {
-  for (;;) {
+  for(;;) {
     self waittill("spawned_player");
 
     self thread survivalistChallenge();
@@ -1615,7 +1611,7 @@ monitorStreaks() {
 
   self thread monitorMisc();
 
-  for (;;) {
+  for(;;) {
     self waittill("death");
 
     self.pers["airstrikeStreak"] = 0;
@@ -1650,12 +1646,12 @@ monitorMiscSingle(waittillString) {
   // don't need to endon disconnect because we will get the notify we're waiting for when we disconnect.
   // avoiding the endon disconnect saves a lot of script variables (5 * 4 threads * 64 players = 1280)
 
-  while (1) {
+  while(1) {
     self waittill(waittillString);
 
-    if(!isDefined(self))
+    if(!isDefined(self)) {
       return;
-
+    }
     monitorMiscCallback(waittillString);
   }
 }
@@ -1692,18 +1688,18 @@ monitorMiscCallback(result) {
 }
 
 healthRegenerated() {
-  if(!isalive(self))
+  if(!isalive(self)) {
     return;
-
-  if(!mayProcessChallenges())
+  }
+  if(!mayProcessChallenges()) {
     return;
-
-  if(!self rankingEnabled())
+  }
+  if(!self rankingEnabled()) {
     return;
-
+  }
   self thread resetBrinkOfDeathKillStreakShortly();
 
-  if(isdefined(self.lastDamageWasFromEnemy) && self.lastDamageWasFromEnemy) {
+  if(isDefined(self.lastDamageWasFromEnemy) && self.lastDamageWasFromEnemy) {
     // TODO: this isn't always getting incremented when i regen
     self.healthRegenerationStreak++;
     if(self.healthRegenerationStreak >= 5) {
@@ -1740,32 +1736,30 @@ isAtBrinkOfDeath() {
 }
 
 processChallenge(baseName, progressInc, forceSetProgress) {
-  if(!mayProcessChallenges())
+  if(!mayProcessChallenges()) {
     return;
-
-  if(level.players.size < 2)
+  }
+  if(level.players.size < 2) {
     return;
-
-  if(!self rankingEnabled())
+  }
+  if(!self rankingEnabled()) {
     return;
-
+  }
   if(!isDefined(progressInc))
     progressInc = 1;
 
-  /#
   if(getDvarInt("debug_challenges"))
     println("CHALLENGE PROGRESS - " + baseName + ": " + progressInc);
-  # /
 
-    missionStatus = getChallengeStatus(baseName);
+  missionStatus = getChallengeStatus(baseName);
 
-  if(missionStatus == 0)
+  if(missionStatus == 0) {
     return;
-
+  }
   // challenge already completed
-  if(missionStatus > level.challengeInfo[baseName]["targetval"].size)
+  if(missionStatus > level.challengeInfo[baseName]["targetval"].size) {
     return;
-
+  }
   if(isDefined(forceSetProgress) && forceSetProgress) {
     progress = progressInc;
   } else {
@@ -1812,22 +1806,22 @@ masteryChallengeProcess(baseName, progressInc) {
   } else {
     tokens = strTok(baseName, "_");
 
-    if(tokens.size != 3)
+    if(tokens.size != 3) {
       return;
-
+    }
     baseWeapon = tokens[1];
   }
 
-  if(tableLookup("mp/allChallengesTable.csv", 0, "ch_" + baseWeapon + "_mastery", 1) == "")
+  if(tableLookup("mp/allChallengesTable.csv", 0, "ch_" + baseWeapon + "_mastery", 1) == "") {
     return;
-
+  }
   progress = 0;
-  for (index = 0; index <= 10; index++) {
+  for(index = 0; index <= 10; index++) {
     attachmentName = getWeaponAttachment(baseWeapon, index);
 
-    if(attachmentName == "")
+    if(attachmentName == "") {
       continue;
-
+    }
     if(self isItemUnlocked(baseWeapon + " " + attachmentName))
       progress++;
   }
@@ -1838,21 +1832,21 @@ masteryChallengeProcess(baseName, progressInc) {
 updateChallenges() {
   self.challengeData = [];
 
-  if(!mayProcessChallenges())
+  if(!mayProcessChallenges()) {
     return;
-
+  }
   if(!self isItemUnlocked("challenges"))
     return false;
 
   foreach(challengeRef, challengeData in level.challengeInfo) {
     self.challengeData[challengeRef] = 0;
 
-    if(!self isItemUnlocked(challengeRef))
+    if(!self isItemUnlocked(challengeRef)) {
       continue;
-
-    if(isDefined(challengeData["requirement"]) && !self isItemUnlocked(challengeData["requirement"]))
+    }
+    if(isDefined(challengeData["requirement"]) && !self isItemUnlocked(challengeData["requirement"])) {
       continue;
-
+    }
     status = ch_getState(challengeRef);
     if(status == 0) {
       ch_setState(challengeRef, 1);
@@ -1885,19 +1879,20 @@ buildChallegeInfo() {
 
   refString = tableLookupByRow(tableName, 0, CH_REF_COL);
   assertEx(isSubStr(refString, "ch_") || isSubStr(refString, "pr_"), "Invalid challenge name: " + refString + " found in " + tableName);
-  for (index = 1; refString != ""; index++) {
+  for(index = 1; refString != ""; index++) {
     assertEx(isSubStr(refString, "ch_") || isSubStr(refString, "pr_"), "Invalid challenge name: " + refString + " found in " + tableName);
 
     level.challengeInfo[refString] = [];
     level.challengeInfo[refString]["targetval"] = [];
     level.challengeInfo[refString]["reward"] = [];
 
-    for (tierId = 1; tierId < 11; tierId++) {
+    for(tierId = 1; tierId < 11; tierId++) {
       targetVal = challenge_targetVal(refString, tierId);
       rewardVal = challenge_rewardVal(refString, tierId);
 
-      if(targetVal == 0)
+      if(targetVal == 0) {
         break;
+      }
 
       level.challengeInfo[refString]["targetval"][tierId] = targetVal;
       level.challengeInfo[refString]["reward"][tierId] = rewardVal;
@@ -1911,9 +1906,9 @@ buildChallegeInfo() {
   }
 
   tierTable = tableLookupByRow("mp/challengeTable.csv", 0, 4);
-  for (tierId = 1; tierTable != ""; tierId++) {
+  for(tierId = 1; tierTable != ""; tierId++) {
     challengeRef = tableLookupByRow(tierTable, 0, 0);
-    for (challengeId = 1; challengeRef != ""; challengeId++) {
+    for(challengeId = 1; challengeRef != ""; challengeId++) {
       requirement = tableLookup(tierTable, 0, challengeRef, 1);
       if(requirement != "")
         level.challengeInfo[challengeRef]["requirement"] = requirement;
@@ -1924,23 +1919,18 @@ buildChallegeInfo() {
     tierTable = tableLookupByRow("mp/challengeTable.csv", tierId, 4);
   }
 
-  /#
   printLn("TOTAL CHALLENGE REWARD XP: " + totalRewardXP);
-  # /
 }
 
-/#
 verifyMarksmanChallenges() {}
 
 verifyExpertChallenges() {}
-# /
 
-  /#
 completeAllChallenges(percentage) {
   foreach(challengeRef, challengeData in level.challengeInfo) {
     finalTarget = 0;
     finalTier = 0;
-    for (tierId = 1; isDefined(challengeData["targetval"][tierId]); tierId++) {
+    for(tierId = 1; isDefined(challengeData["targetval"][tierId]); tierId++) {
       finalTarget = challengeData["targetval"][tierId];
       finalTier = tierId + 1;
     }
@@ -1960,32 +1950,31 @@ completeAllChallenges(percentage) {
 
   println("Done unlocking challenges");
 }
-# /
 
-  monitorProcessChallenge() {
-    self endon("disconnect");
-    level endon("game_end");
+monitorProcessChallenge() {
+  self endon("disconnect");
+  level endon("game_end");
 
-    for (;;) {
-      if(!mayProcessChallenges())
-        return;
-
-      self waittill("process", challengeName);
-      self processChallenge(challengeName);
+  for(;;) {
+    if(!mayProcessChallenges()) {
+      return;
     }
+    self waittill("process", challengeName);
+    self processChallenge(challengeName);
   }
+}
 
 monitorKillstreakProgress() {
   self endon("disconnect");
   level endon("game_end");
 
-  for (;;) {
+  for(;;) {
     self waittill("got_killstreak", streakCount);
 
     //for scr_givkillstreak
-    if(!isDefined(streakCount))
+    if(!isDefined(streakCount)) {
       continue;
-
+    }
     if(streakCount == 10 && self.killstreaks.size == 0)
       self processChallenge("ch_theloner");
     else if(streakCount == 9) {
@@ -2000,7 +1989,7 @@ monitorKilledKillstreak() {
   self endon("disconnect");
   level endon("game_end");
 
-  for (;;) {
+  for(;;) {
     self waittill("destroyed_killstreak", weapon);
 
     if(self _hasPerk("specialty_coldblooded"))
@@ -2057,9 +2046,9 @@ playerHasAmmo() {
 
     altWeapon = weaponAltWeaponName(primary);
 
-    if(!isDefined(altWeapon) || (altWeapon == "none"))
+    if(!isDefined(altWeapon) || (altWeapon == "none")) {
       continue;
-
+    }
     if(self GetWeaponAmmoClip(altWeapon))
       return true;
   }

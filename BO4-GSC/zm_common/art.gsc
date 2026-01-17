@@ -6,7 +6,6 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace art;
 
 autoexec __init__system__() {
@@ -15,21 +14,21 @@ autoexec __init__system__() {
 
 __init__() {
   if(!isDefined(level.dofdefault)) {
-    level.dofdefault[#"nearstart"] = 0;
-    level.dofdefault[#"nearend"] = 1;
-    level.dofdefault[#"farstart"] = 8000;
-    level.dofdefault[#"farend"] = 10000;
-    level.dofdefault[#"nearblur"] = 6;
-    level.dofdefault[#"farblur"] = 0;
+    level.dofdefault[# "nearstart"] = 0;
+    level.dofdefault[# "nearend"] = 1;
+    level.dofdefault[# "farstart"] = 8000;
+    level.dofdefault[# "farend"] = 10000;
+    level.dofdefault[# "nearblur"] = 6;
+    level.dofdefault[# "farblur"] = 0;
   }
 
-  level.curdof = (level.dofdefault[#"farstart"] - level.dofdefault[#"nearend"]) / 2;
+  level.curdof = (level.dofdefault[# "farstart"] - level.dofdefault[# "nearend"]) / 2;
 
   thread tweakart();
 
-    if(!isDefined(level.script)) {
-      level.script = util::get_map_name();
-    }
+  if(!isDefined(level.script)) {
+    level.script = util::get_map_name();
+  }
 }
 
 artfxprintln(file, string) {
@@ -40,26 +39,26 @@ artfxprintln(file, string) {
   fprintln(file, string);
 }
 
-  function strtok_loc(string, par1) {
-    stringlist = [];
-    indexstring = "";
+function strtok_loc(string, par1) {
+  stringlist = [];
+  indexstring = "";
 
-    for(i = 0; i < string.size; i++) {
-      if(string[i] == " ") {
-        stringlist[stringlist.size] = indexstring;
-        indexstring = "";
-        continue;
-      }
-
-      indexstring += string[i];
-    }
-
-    if(indexstring.size) {
+  for(i = 0; i < string.size; i++) {
+    if(string[i] == " ") {
       stringlist[stringlist.size] = indexstring;
+      indexstring = "";
+      continue;
     }
 
-    return stringlist;
+    indexstring += string[i];
   }
+
+  if(indexstring.size) {
+    stringlist[stringlist.size] = indexstring;
+  }
+
+  return stringlist;
+}
 
 setfogsliders() {
   fogall = strtok_loc(getdvarstring(#"g_fogcolorreadonly"), " ");
@@ -97,12 +96,12 @@ tweakart() {
   setdvar(#"scr_fog_fraction", 1);
   setdvar(#"scr_art_dump", 0);
   setdvar(#"scr_art_sun_fog_dir_set", 0);
-  setdvar(#"scr_dof_nearstart", level.dofdefault[#"nearstart"]);
-  setdvar(#"scr_dof_nearend", level.dofdefault[#"nearend"]);
-  setdvar(#"scr_dof_farstart", level.dofdefault[#"farstart"]);
-  setdvar(#"scr_dof_farend", level.dofdefault[#"farend"]);
-  setdvar(#"scr_dof_nearblur", level.dofdefault[#"nearblur"]);
-  setdvar(#"scr_dof_farblur", level.dofdefault[#"farblur"]);
+  setdvar(#"scr_dof_nearstart", level.dofdefault[# "nearstart"]);
+  setdvar(#"scr_dof_nearend", level.dofdefault[# "nearend"]);
+  setdvar(#"scr_dof_farstart", level.dofdefault[# "farstart"]);
+  setdvar(#"scr_dof_farend", level.dofdefault[# "farend"]);
+  setdvar(#"scr_dof_nearblur", level.dofdefault[# "nearblur"]);
+  setdvar(#"scr_dof_farblur", level.dofdefault[# "farblur"]);
   file = undefined;
   filename = undefined;
   tweak_toggle = 1;
@@ -180,37 +179,37 @@ tweakart() {
   }
 }
 
-  function fovslidercheck() {
-    if(level.dofdefault[#"nearstart"] >= level.dofdefault[#"nearend"]) {
-      level.dofdefault[#"nearstart"] = level.dofdefault[#"nearend"] - 1;
-      setdvar(#"scr_dof_nearstart", level.dofdefault[#"nearstart"]);
-    }
-
-    if(level.dofdefault[#"nearend"] <= level.dofdefault[#"nearstart"]) {
-      level.dofdefault[#"nearend"] = level.dofdefault[#"nearstart"] + 1;
-      setdvar(#"scr_dof_nearend", level.dofdefault[#"nearend"]);
-    }
-
-    if(level.dofdefault[#"farstart"] >= level.dofdefault[#"farend"]) {
-      level.dofdefault[#"farstart"] = level.dofdefault[#"farend"] - 1;
-      setdvar(#"scr_dof_farstart", level.dofdefault[#"farstart"]);
-    }
-
-    if(level.dofdefault[#"farend"] <= level.dofdefault[#"farstart"]) {
-      level.dofdefault[#"farend"] = level.dofdefault[#"farstart"] + 1;
-      setdvar(#"scr_dof_farend", level.dofdefault[#"farend"]);
-    }
-
-    if(level.dofdefault[#"farblur"] >= level.dofdefault[#"nearblur"]) {
-      level.dofdefault[#"farblur"] = level.dofdefault[#"nearblur"] - 0.1;
-      setdvar(#"scr_dof_farblur", level.dofdefault[#"farblur"]);
-    }
-
-    if(level.dofdefault[#"farstart"] <= level.dofdefault[#"nearend"]) {
-      level.dofdefault[#"farstart"] = level.dofdefault[#"nearend"] + 1;
-      setdvar(#"scr_dof_farstart", level.dofdefault[#"farstart"]);
-    }
+function fovslidercheck() {
+  if(level.dofdefault[# "nearstart"] >= level.dofdefault[# "nearend"]) {
+    level.dofdefault[# "nearstart"] = level.dofdefault[# "nearend"] - 1;
+    setdvar(#"scr_dof_nearstart", level.dofdefault[# "nearstart"]);
   }
+
+  if(level.dofdefault[# "nearend"] <= level.dofdefault[# "nearstart"]) {
+    level.dofdefault[# "nearend"] = level.dofdefault[# "nearstart"] + 1;
+    setdvar(#"scr_dof_nearend", level.dofdefault[# "nearend"]);
+  }
+
+  if(level.dofdefault[# "farstart"] >= level.dofdefault[# "farend"]) {
+    level.dofdefault[# "farstart"] = level.dofdefault[# "farend"] - 1;
+    setdvar(#"scr_dof_farstart", level.dofdefault[# "farstart"]);
+  }
+
+  if(level.dofdefault[# "farend"] <= level.dofdefault[# "farstart"]) {
+    level.dofdefault[# "farend"] = level.dofdefault[# "farstart"] + 1;
+    setdvar(#"scr_dof_farend", level.dofdefault[# "farend"]);
+  }
+
+  if(level.dofdefault[# "farblur"] >= level.dofdefault[# "nearblur"]) {
+    level.dofdefault[# "farblur"] = level.dofdefault[# "nearblur"] - 0.1;
+    setdvar(#"scr_dof_farblur", level.dofdefault[# "farblur"]);
+  }
+
+  if(level.dofdefault[# "farstart"] <= level.dofdefault[# "nearend"]) {
+    level.dofdefault[# "farstart"] = level.dofdefault[# "nearend"] + 1;
+    setdvar(#"scr_dof_farstart", level.dofdefault[# "farstart"]);
+  }
+}
 
 dumpsettings() {
   if(getdvar(#"scr_art_dump", 0)) {
@@ -239,4 +238,3 @@ dumpsettings() {
     setdvar(#"scr_art_dump", 0);
   }
 }
-

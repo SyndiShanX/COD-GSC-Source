@@ -32,7 +32,6 @@ initBufferedStats() {
   self.bufferedChildStats["round"]["timePlayed"] = self getPlayerData("round", "timePlayed");
 }
 
-
 // ==========================================
 // Script persistent data functions
 // These are made for convenience, so persistent data can be tracked by strings.
@@ -60,9 +59,9 @@ Sets the value of the named stat
 statSet(dataName, value) {
   assert(!isDefined(self.bufferedStats[dataName])); // should use statGetBuffered consistently with statSetBuffered
 
-  if(!self rankingEnabled())
+  if(!self rankingEnabled()) {
     return;
-
+  }
   self SetPlayerData(dataName, value);
 }
 
@@ -76,9 +75,9 @@ Adds the passed value to the value of the named stat
 statAdd(dataName, value) {
   assert(!isDefined(self.bufferedStats[dataName])); // should use statGetBuffered consistently with statSetBuffered
 
-  if(!self rankingEnabled())
+  if(!self rankingEnabled()) {
     return;
-
+  }
   curValue = self GetPlayerData(dataName);
   self SetPlayerData(dataName, value + curValue);
 }
@@ -88,18 +87,18 @@ statGetChild(parent, child) {
 }
 
 statSetChild(parent, child, value) {
-  if(!self rankingEnabled())
+  if(!self rankingEnabled()) {
     return;
-
+  }
   self SetPlayerData(parent, child, value);
 }
 
 statAddChild(parent, child, value) {
   assert(isDefined(self.bufferedChildStats[parent][child]));
 
-  if(!self rankingEnabled())
+  if(!self rankingEnabled()) {
     return;
-
+  }
   curValue = self GetPlayerData(parent, child);
   self SetPlayerData(parent, child, curValue + value);
 }
@@ -113,18 +112,18 @@ statGetChildBuffered(parent, child) {
 statSetChildBuffered(parent, child, value) {
   assert(isDefined(self.bufferedChildStats[parent][child]));
 
-  if(!self rankingEnabled())
+  if(!self rankingEnabled()) {
     return;
-
+  }
   self.bufferedChildStats[parent][child] = value;
 }
 
 statAddChildBuffered(parent, child, value) {
   assert(isDefined(self.bufferedChildStats[parent][child]));
 
-  if(!self rankingEnabled())
+  if(!self rankingEnabled()) {
     return;
-
+  }
   curValue = statGetChildBuffered(parent, child);
   statSetChildBuffered(parent, child, curValue + value);
 }
@@ -152,9 +151,9 @@ Sets the value of the named stat
 statSetBuffered(dataName, value) {
   assert(isDefined(self.bufferedStats[dataName]));
 
-  if(!self rankingEnabled())
+  if(!self rankingEnabled()) {
     return;
-
+  }
   self.bufferedStats[dataName] = value;
 }
 
@@ -168,9 +167,9 @@ Adds the passed value to the value of the named stat
 statAddBuffered(dataName, value) {
   assert(isDefined(self.bufferedStats[dataName]));
 
-  if(!self rankingEnabled())
+  if(!self rankingEnabled()) {
     return;
-
+  }
   curValue = statGetBuffered(dataName);
   statSetBuffered(dataName, curValue + value);
 }
@@ -180,7 +179,7 @@ updateBufferedStats() {
   wait(0.15);
 
   nextToUpdate = 0;
-  while (!level.gameEnded) {
+  while(!level.gameEnded) {
     nextToUpdate++;
     if(nextToUpdate >= level.players.size)
       nextToUpdate = 0;

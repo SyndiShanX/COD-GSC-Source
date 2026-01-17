@@ -97,7 +97,7 @@ music_egg() {
   temp_ent playLoopSound("zmb_meteor_loop");
   player = self music_egg_wait();
   temp_ent stopLoopSound(1);
-  player PlaySound("zmb_meteor_activate");
+  player playSound("zmb_meteor_activate");
   player maps\_zombiemode_audio::create_and_play_dialog("eggs", "meteors", undefined, level.meteor_counter);
   level.meteor_counter = level.meteor_counter + 1;
   if(level.meteor_counter == 3) {

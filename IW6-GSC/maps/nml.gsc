@@ -15,7 +15,7 @@ main() {
   maps\createart\nml_art::main();
   maps\nml_fx::main();
   maps\nml_precache::main();
-  maps\_utility::intro_screen_create(&"NML_INTROSCREEN_LINE_1", & "NML_INTROSCREEN_LINE_2", & "NML_INTROSCREEN_LINE_5");
+  maps\_utility::intro_screen_create(&"NML_INTROSCREEN_LINE_1", &"NML_INTROSCREEN_LINE_2", &"NML_INTROSCREEN_LINE_5");
   maps\_utility::intro_screen_custom_func(::custom_intro_screen_func);
   precacheitem("remote_chopper_gunner");
   precacheitem("remote_chopper_gunner_nopullout");
@@ -91,16 +91,16 @@ main() {
   maps\_utility_dogs::init_dog_pc("a");
   maps\_utility_dogs::init_dog_pc("a_cam_obj");
   maps\_utility_dogs::init_wolf_pc();
-  maps\_utility::add_hint_string("hint_dog_sprintzoom", & "NML_HINT_DOG_SPRINTZOOM", maps\nml_util::check_dog_sprinting);
-  maps\_utility::add_hint_string("hint_dog_sprint", & "NML_HINT_DOG_SPRINT", maps\nml_util::check_dog_sprinting);
-  maps\_utility::add_hint_string("hint_dog_attack_cam", & "NML_HINT_DOG_ATTACK", maps\nml_util::is_dog_really_attacking);
-  maps\_utility::add_hint_string("hint_dog_attack", & "NML_HINT_DOG_ATTACK", maps\nml_util::is_dog_attacking);
-  maps\_utility::add_hint_string("hint_dog_attack_3p", & "NML_HINT_DOG_ATTACK_2", maps\nml_util::is_dog_attacking);
-  maps\_utility::add_hint_string("hint_dog_approach", & "NML_HINT_DOG_APPROACH", maps\nml_util::check_dog_ready_to_attack);
-  maps\_utility::add_hint_string("hint_bark_kb", & "NML_HINT_DOG_BARK_KB", maps\nml_util::check_player_bark);
-  maps\_utility::add_hint_string("hint_bark", & "NML_HINT_DOG_BARK", maps\nml_util::check_player_bark);
-  maps\_utility::add_hint_string("hint_zoom", & "NML_HINT_ZOOM", maps\nml_util::check_player_zoom);
-  maps\_utility::add_hint_string("hint_stealthkill", & "NML_HINT_STEALTHKILL", undefined);
+  maps\_utility::add_hint_string("hint_dog_sprintzoom", &"NML_HINT_DOG_SPRINTZOOM", maps\nml_util::check_dog_sprinting);
+  maps\_utility::add_hint_string("hint_dog_sprint", &"NML_HINT_DOG_SPRINT", maps\nml_util::check_dog_sprinting);
+  maps\_utility::add_hint_string("hint_dog_attack_cam", &"NML_HINT_DOG_ATTACK", maps\nml_util::is_dog_really_attacking);
+  maps\_utility::add_hint_string("hint_dog_attack", &"NML_HINT_DOG_ATTACK", maps\nml_util::is_dog_attacking);
+  maps\_utility::add_hint_string("hint_dog_attack_3p", &"NML_HINT_DOG_ATTACK_2", maps\nml_util::is_dog_attacking);
+  maps\_utility::add_hint_string("hint_dog_approach", &"NML_HINT_DOG_APPROACH", maps\nml_util::check_dog_ready_to_attack);
+  maps\_utility::add_hint_string("hint_bark_kb", &"NML_HINT_DOG_BARK_KB", maps\nml_util::check_player_bark);
+  maps\_utility::add_hint_string("hint_bark", &"NML_HINT_DOG_BARK", maps\nml_util::check_player_bark);
+  maps\_utility::add_hint_string("hint_zoom", &"NML_HINT_ZOOM", maps\nml_util::check_player_zoom);
+  maps\_utility::add_hint_string("hint_stealthkill", &"NML_HINT_STEALTHKILL", undefined);
   maps\_utility::add_start("e3", ::setup_e3, undefined, undefined, "nml_trans_intro_tr");
   maps\_utility::add_start("intro", ::setup_intro, undefined, ::start_intro, "nml_trans_intro_tr");
   maps\_utility::add_start("cave", ::setup_cave, undefined, ::start_cave, "nml_trans_intro_tr");
@@ -268,16 +268,16 @@ main() {
 objectives() {
   common_scripts\utility::flag_wait("intro_clear");
   wait 3;
-  objective_add(maps\_utility::obj("1"), "current", & "NML_OBJ_1");
+  objective_add(maps\_utility::obj("1"), "current", &"NML_OBJ_1");
   wait 2;
-  objective_add(maps\_utility::obj("2"), "active", & "NML_OBJ_2");
+  objective_add(maps\_utility::obj("2"), "active", &"NML_OBJ_2");
   common_scripts\utility::flag_wait("wolf_start_chase_dog");
   objective_state(maps\_utility::obj("1"), "done");
   objective_current(maps\_utility::obj("2"));
   common_scripts\utility::flag_wait("merrick_scene_done");
   objective_state(maps\_utility::obj("2"), "done");
   wait 3;
-  objective_add(maps\_utility::obj("3"), "current", & "NML_OBJ_3");
+  objective_add(maps\_utility::obj("3"), "current", &"NML_OBJ_3");
   common_scripts\utility::flag_wait("the_end");
   objective_state(maps\_utility::obj("3"), "done");
 }

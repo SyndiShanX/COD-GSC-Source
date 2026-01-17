@@ -213,5 +213,4 @@ main() {
   ent.v["origin"] = (-645.241, 77.4099, -59.7673);
   ent.v["angles"] = (270, 0, 0);
   ent.v["soundalias"] = "emt_ac_air_vent";
-
 }

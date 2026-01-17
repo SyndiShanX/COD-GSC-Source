@@ -11,7 +11,6 @@
 #include scripts\zm_common\zm_hud;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_zonemgr;
-
 #namespace zm_office_zones;
 
 init() {
@@ -45,14 +44,13 @@ zone_init() {
   zm_zonemgr::add_adjacent_zone("labs_hallway2", "labs_zone2", "lab2_level3", 0);
   zm_zonemgr::add_adjacent_zone("labs_hallway1", "labs_zone3", "lab3_level3", 0);
   zm_zonemgr::add_adjacent_zone("labs_zone1", "labs_hallway1", "lab1_level3", 1);
-  zm_zonemgr::add_adjacent_zone("cage", "cage_upper", #"hash_537cc10c9deca9da", 0);
-  level.zones[#"conference_level1"].var_305d6168 = 4;
-  level.zones[#"hallway_level1"].var_305d6168 = 4;
+  zm_zonemgr::add_adjacent_zone("cage", "cage_upper", # "hash_537cc10c9deca9da", 0);
+  level.zones[# "conference_level1"].var_305d6168 = 4;
+  level.zones[# "hallway_level1"].var_305d6168 = 4;
   level thread function_d03a6fa("conference_level1", "offices_level1", "conf1_offices1");
   level thread function_d03a6fa("hallway_level1", "file_room_level1", "hall1_file1");
 
   level thread function_2fb4c999();
-
 }
 
 function_d03a6fa(str_zone1, str_zone2, str_flag) {
@@ -64,8 +62,8 @@ function_d03a6fa(str_zone1, str_zone2, str_flag) {
 }
 
 function_cada51b5(b_enable = 1) {
-  level.zones[#"cage"].is_enabled = b_enable;
-  level.zones[#"cage_upper"].is_enabled = b_enable;
+  level.zones[# "cage"].is_enabled = b_enable;
+  level.zones[# "cage_upper"].is_enabled = b_enable;
 }
 
 function_29ec1ad7() {
@@ -78,7 +76,7 @@ function_8e0b371() {
   while(true) {
     if(isalive(self)) {
       str_location = function_ab7f70b9(self);
-      self zm_hud::function_29780fb5(isDefined(str_location) ? str_location : #"");
+      self zm_hud::function_29780fb5(isDefined(str_location) ? str_location : # "");
     } else {
       self zm_hud::function_29780fb5(#"");
     }
@@ -95,58 +93,58 @@ function_ab7f70b9(e_player) {
   }
 
   switch (str_zone) {
-    case #"conference_level1":
+    case # "conference_level1":
       var_dd0ed16d = getent("file_hallway_zone", "targetname");
 
       if(e_player istouching(var_dd0ed16d)) {
-        str_display = #"hash_38aec412b15daa7f";
+        str_display = # "hash_38aec412b15daa7f";
       } else {
-        str_display = #"hash_2960dd7ca313a1d0";
+        str_display = # "hash_2960dd7ca313a1d0";
       }
 
       break;
-    case #"hallway_level1":
-      str_display = #"hash_23e7b86056327ad8";
+    case # "hallway_level1":
+      str_display = # "hash_23e7b86056327ad8";
       break;
-    case #"file_room_level1":
-      str_display = #"hash_43e992b83f837d3e";
+    case # "file_room_level1":
+      str_display = # "hash_43e992b83f837d3e";
       break;
-    case #"offices_level1":
-      str_display = #"hash_179368775ecfafa9";
+    case # "offices_level1":
+      str_display = # "hash_179368775ecfafa9";
       break;
-    case #"war_room_zone_south":
-    case #"war_room_zone_north":
-    case #"war_room_zone_elevator":
-      str_display = #"hash_25854f4ac1fdadf5";
+    case # "war_room_zone_south":
+    case # "war_room_zone_north":
+    case # "war_room_zone_elevator":
+      str_display = # "hash_25854f4ac1fdadf5";
       break;
-    case #"war_room_server_room":
-      str_display = #"hash_7d3cd67fea75827c";
+    case # "war_room_server_room":
+      str_display = # "hash_7d3cd67fea75827c";
       break;
-    case #"war_room_zone_top":
-      str_display = #"hash_572f6dd3e58ede79";
+    case # "war_room_zone_top":
+      str_display = # "hash_572f6dd3e58ede79";
       break;
-    case #"conference_level2":
-      str_display = #"hash_2960e07ca313a6e9";
+    case # "conference_level2":
+      str_display = # "hash_2960e07ca313a6e9";
       break;
-    case #"labs_elevator":
-    case #"labs_hallway1":
-      str_display = #"hash_48fce08911acd38a";
+    case # "labs_elevator":
+    case # "labs_hallway1":
+      str_display = # "hash_48fce08911acd38a";
       break;
-    case #"labs_hallway2":
-      str_display = #"hash_48fcdf8911acd1d7";
+    case # "labs_hallway2":
+      str_display = # "hash_48fcdf8911acd1d7";
       break;
-    case #"labs_zone1":
-      str_display = #"hash_6e0edea58f326450";
+    case # "labs_zone1":
+      str_display = # "hash_6e0edea58f326450";
       break;
-    case #"labs_zone2":
-      str_display = #"hash_6e0ee1a58f326969";
+    case # "labs_zone2":
+      str_display = # "hash_6e0ee1a58f326969";
       break;
-    case #"labs_zone3":
-      str_display = #"hash_6e0ee0a58f3267b6";
+    case # "labs_zone3":
+      str_display = # "hash_6e0ee0a58f3267b6";
       break;
-    case #"cage_upper":
-    case #"cage":
-      str_display = #"hash_62b9f4974de13b76";
+    case # "cage_upper":
+    case # "cage":
+      str_display = # "hash_62b9f4974de13b76";
       break;
     default:
       str_display = undefined;
@@ -160,4 +158,3 @@ function_2fb4c999() {
   level waittill(#"open_sesame");
   level flag::set("<dev string:x38>");
 }
-

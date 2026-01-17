@@ -54,7 +54,7 @@ goblack(var_0, var_1, var_2) {
   var_3.alpha = 1.0;
   wait(var_1);
 
-  if(!isdefined(var_0)) {
+  if(!isDefined(var_0)) {
     return;
   }
   wait(var_0);

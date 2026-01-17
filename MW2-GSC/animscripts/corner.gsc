@@ -34,7 +34,7 @@ corner_think(direction, nodeAngleOffset) {
 
   self.haveGoneToCover = false;
 
-  behaviorCallbacks = spawnstruct();
+  behaviorCallbacks = spawnStruct();
 
   if(!self.fixedNode)
     behaviorCallbacks.moveToNearByCover = animscripts\cover_behavior::moveToNearbyCover;
@@ -107,15 +107,12 @@ mainLoopStart() {
     }
   }
 
-  /#
   if(getdvarint("scr_cornerforcecrouch") == 1)
     desiredStance = "crouch";
-  # /
 
-    if(self.haveGoneToCover) {
-      self transitionToStance(desiredStance);
-    }
-  else {
+  if(self.haveGoneToCover) {
+    self transitionToStance(desiredStance);
+  } else {
     if(self.a.pose == desiredStance) {
       GoToCover(animArray("alert_idle"), .3, .4);
     } else {
@@ -130,7 +127,7 @@ mainLoopStart() {
 
 printYaws() {
   wait(2);
-  for (;;) {
+  for(;;) {
     println("coveryaw = ", self.coverNode GetYawToOrigin(getEnemyEyePos()));
     printYawToEnemy();
     wait(0.05);
@@ -152,7 +149,7 @@ canSeePointFromExposedAtCorner(point, node) {
 }
 
 shootPosOutsideLegalYawRange() {
-  if(!isdefined(self.shootPos))
+  if(!isDefined(self.shootPos))
     return false;
 
   yaw = self.coverNode GetYawToOrigin(self.shootPos);
@@ -187,13 +184,13 @@ getCornerMode(node, point) {
   noStepOut = false;
   yaw = 0;
 
-  if(isdefined(point))
+  if(isDefined(point))
     yaw = node GetYawToOrigin(point);
 
   modes = [];
 
   // don't want to get cover peekouts for crouch while standing
-  if(isdefined(node) && self.a.pose == "crouch" && (yaw > self.leftAimLimit && self.rightAimLimit > yaw))
+  if(isDefined(node) && self.a.pose == "crouch" && (yaw > self.leftAimLimit && self.rightAimLimit > yaw))
     modes = node GetValidCoverPeekOuts();
 
   if(self.cornerDirection == "left") {
@@ -233,17 +230,15 @@ getBestStepOutPos() {
   yaw = 0;
   if(canSuppressEnemy())
     yaw = self.coverNode GetYawToOrigin(getEnemySightPos());
-  else if(self.doingAmbush && isdefined(self.shootPos))
+  else if(self.doingAmbush && isDefined(self.shootPos))
     yaw = self.coverNode GetYawToOrigin(self.shootPos);
 
-  /#
   dvarval = getdvar("scr_cornerforcestance");
   if(dvarval == "lean" || dvarval == "a" || dvarval == "b")
     return dvarval;
-  # /
 
-    if(self.a.cornerMode == "lean")
-      return "lean";
+  if(self.a.cornerMode == "lean")
+    return "lean";
   if(self.a.cornerMode == "over")
     return "over";
   else if(self.a.cornerMode == "B") {
@@ -309,7 +304,7 @@ changeStepOutPos() {
   if(animHasNotetrack(switchanim, "start_aim")) {
     self waittillmatch("changeStepOutPos", "start_aim");
   } else {
-    /#println( "^1Corner position switch animation \"" + animname + "\" in corner_" + self.cornerDirection + " " + self.a.pose + " didn't have \"start_aim\" notetrack" );#/
+    /#println( "^1Corner position switch animation \"" + animname + "\" in corner_" + self.cornerDirection + " " + self.a.pose + " didn't have \"start_aim\" notetrack" );
     self waittillmatch("changeStepOutPos", "end");
   }
 
@@ -385,7 +380,7 @@ StopAiming(transtime) {
 }
 
 SetAimingParams(spot, fullbody, transTime) {
-  assert(isdefined(fullbody));
+  assert(isDefined(fullbody));
 
   self.spot = spot; // undefined is ok
 
@@ -395,12 +390,12 @@ SetAimingParams(spot, fullbody, transTime) {
   animscripts\shared::setAnimAimWeight(1, transTime);
 
   leanAnim = undefined;
-  if(isdefined(self.a.array["lean_aim_straight"]))
+  if(isDefined(self.a.array["lean_aim_straight"]))
     leanAnim = self.a.array["lean_aim_straight"];
 
   self thread aimIdleThread();
 
-  if(isdefined(self.a.leanAim)) {
+  if(isDefined(self.a.leanAim)) {
     self setAnimLimited(leanAnim, 1, transTime);
     self setAnimLimited(animArray("straight_level"), 0, 0);
 
@@ -410,7 +405,7 @@ SetAimingParams(spot, fullbody, transTime) {
     self setAnimKnobLimited(animArray("lean_aim_down"), 1, transTime);
   } else if(fullbody) {
     self setAnimLimited(animarray("straight_level"), 1, transTime);
-    if(isdefined(leanAnim))
+    if(isDefined(leanAnim))
       self setAnimLimited(leanAnim, 0, 0);
 
     self setAnimKnobLimited(animArray("add_aim_up"), 1, transTime);
@@ -419,7 +414,7 @@ SetAimingParams(spot, fullbody, transTime) {
     self setAnimKnobLimited(animArray("add_aim_right"), 1, transTime);
   } else {
     self setAnimLimited(animarray("straight_level"), 0, transTime);
-    if(isdefined(leanAnim))
+    if(isDefined(leanAnim))
       self setAnimLimited(leanAnim, 0, 0);
 
     self setAnimKnobLimited(animArray("add_turn_aim_up"), 1, transTime);
@@ -466,7 +461,7 @@ stepOut() /* bool */ {
   else
     newCornerMode = getCornerMode(self.coverNode);
 
-  if(!isdefined(newCornerMode))
+  if(!isDefined(newCornerMode))
     return false;
 
   animname = "alert_to_" + newCornerMode;
@@ -513,7 +508,7 @@ stepOut() /* bool */ {
 
     self waittillmatch("stepout", "start_aim");
   } else {
-    /#println( "^1Corner stepout animation \"" + animname + "\" in corner_" + self.cornerDirection + " " + self.a.pose + " didn't have \"start_aim\" notetrack" );#/
+    /#println( "^1Corner stepout animation \"" + animname + "\" in corner_" + self.cornerDirection + " " + self.a.pose + " didn't have \"start_aim\" notetrack" );
     self waittillmatch("stepout", "end");
   }
 
@@ -550,7 +545,7 @@ stepOutAndShootEnemy() {
   self.keepClaimedNodeIfValid = true;
 
   // do rambo behavior sometimes on rambo AI guys. Normal AI never do rambo
-  if(isdefined(self.ramboChance) && randomFloat(1) < self.ramboChance) {
+  if(isDefined(self.ramboChance) && randomFloat(1) < self.ramboChance) {
     if(rambo())
       return true;
   }
@@ -582,7 +577,7 @@ stepOutAndShootEnemy() {
 }
 
 haventRamboedWithinTime(time) {
-  if(!isdefined(self.lastRamboTime))
+  if(!isDefined(self.lastRamboTime))
     return true;
   return gettime() - self.lastRamboTime > time * 1000;
 }
@@ -652,29 +647,32 @@ rambo() {
 shootAsTold() {
   self maps\_gameskill::didSomethingOtherThanShooting();
 
-  while (1) {
-    while (1) {
-      if(isdefined(self.shouldReturnToCover))
+  while(1) {
+    while(1) {
+      if(isDefined(self.shouldReturnToCover)) {
         break;
+      }
 
-      if(!isdefined(self.shootPos)) {
-        assert(!isdefined(self.shootEnt));
+      if(!isDefined(self.shootPos)) {
+        assert(!isDefined(self.shootEnt));
         // give shoot_behavior a chance to iterate
         self waittill("do_slow_things");
         waittillframeend;
-        if(isdefined(self.shootPos))
+        if(isDefined(self.shootPos))
           continue;
         break;
       }
 
-      if(!self.bulletsInClip)
+      if(!self.bulletsInClip) {
         break;
+      }
 
       if(shootPosOutsideLegalYawRange()) {
         if(!changeStepOutPos()) {
           // if we failed because there's no better step out pos, give up
-          if(getBestStepOutPos() == self.a.cornerMode)
+          if(getBestStepOutPos() == self.a.cornerMode) {
             break;
+          }
 
           // couldn't change position, shoot for a short bit and we'll try again
           shootUntilShootBehaviorChangeForTime(.2);
@@ -683,8 +681,9 @@ shootAsTold() {
 
         // if they're moving back and forth too fast for us to respond intelligently to them,
         // give up on firing at them for the moment
-        if(shootPosOutsideLegalYawRange())
+        if(shootPosOutsideLegalYawRange()) {
           break;
+        }
 
         continue;
       }
@@ -694,15 +693,16 @@ shootAsTold() {
       self clearAnim( % add_fire, .2);
     }
 
-    if(self canReturnToCover(self.a.cornerMode != "lean"))
+    if(self canReturnToCover(self.a.cornerMode != "lean")) {
       break;
+    }
 
     // couldn't return to cover. keep shooting and try again
 
     // (change step out pos if necessary and possible)
-    if(shootPosOutsideLegalYawRange() && changeStepOutPos())
+    if(shootPosOutsideLegalYawRange() && changeStepOutPos()) {
       continue;
-
+    }
     shootUntilShootBehaviorChangeForTime(.2);
   }
 }
@@ -745,9 +745,10 @@ angleRangeThread() {
   self endon("newAngleRangeCheck");
   self endon("take_cover_at_corner");
 
-  while (1) {
-    if(shootPosOutsideLegalYawRange())
+  while(1) {
+    if(shootPosOutsideLegalYawRange()) {
       break;
+    }
     wait(0.1);
   }
 
@@ -759,7 +760,7 @@ showstate() {
   self endon("enemy");
   self endon("stopshowstate");
 
-  while (1) {
+  while(1) {
     wait .05;
     print3d(self.origin + (0, 0, 60), self.statetext);
   }
@@ -838,9 +839,9 @@ blindfire() {
 }
 
 linethread(a, b, col) {
-  if(!isdefined(col))
+  if(!isDefined(col))
     col = (1, 1, 1);
-  for (i = 0; i < 100; i++) {
+  for(i = 0; i < 100; i++) {
     line(a, b, col);
     wait .05;
   }
@@ -854,26 +855,26 @@ tryThrowingGrenade(throwAt, safe) {
   if(!self mayMoveToPoint(self getPredictedPathMidpoint()))
     return false;
 
-  if(isdefined(self.dontEverShoot) || isdefined(throwAt.dontAttackMe))
+  if(isDefined(self.dontEverShoot) || isDefined(throwAt.dontAttackMe))
     return false;
 
   theanim = undefined;
-  if(isdefined(self.ramboChance) && randomFloat(1) < self.ramboChance) {
-    if(isdefined(self.a.array["grenade_rambo"]))
+  if(isDefined(self.ramboChance) && randomFloat(1) < self.ramboChance) {
+    if(isDefined(self.a.array["grenade_rambo"]))
       theanim = animArray("grenade_rambo");
   }
-  if(!isdefined(theanim)) {
-    if(isdefined(safe) && safe) {
-      if(!isdefined(self.a.array["grenade_safe"]))
+  if(!isDefined(theanim)) {
+    if(isDefined(safe) && safe) {
+      if(!isDefined(self.a.array["grenade_safe"]))
         return false;
       theanim = animArray("grenade_safe");
     } else {
-      if(!isdefined(self.a.array["grenade_exposed"]))
+      if(!isDefined(self.a.array["grenade_exposed"]))
         return false;
       theanim = animArray("grenade_exposed");
     }
   }
-  assert(isdefined(theanim));
+  assert(isDefined(theanim));
 
   self animMode("zonly_physics"); // Unlatch the feet
   self.keepClaimedNodeIfValid = true;
@@ -889,7 +890,7 @@ printYawToEnemy() {
 }
 
 lookForEnemy(lookTime) {
-  if(!isdefined(self.a.array["alert_to_look"]))
+  if(!isDefined(self.a.array["alert_to_look"]))
     return false;
 
   self animMode("zonly_physics"); // Unlatch the feet
@@ -920,9 +921,9 @@ lookForEnemy(lookTime) {
 PEEKOUT_OFFSET = 30;
 
 isPeekOutPosClear() {
-  assert(isdefined(self.coverNode));
+  assert(isDefined(self.coverNode));
 
-  eyePos = self geteye();
+  eyePos = self getEye();
   rightDir = anglestoright(self.coverNode.angles);
   if(self.cornerDirection == "right")
     eyePos = eyePos + (rightDir * PEEKOUT_OFFSET);
@@ -931,16 +932,16 @@ isPeekOutPosClear() {
 
   lookAtPos = eyePos + anglesToForward(self.coverNode.angles) * PEEKOUT_OFFSET;
 
-  // /# thread debugLine( eyePos, lookAtPos, ( 1, 0, 0 ), 1.5 ); #/
+  // /# thread debugLine( eyePos, lookAtPos, ( 1, 0, 0 ), 1.5 );
 
   return sightTracePassed(eyePos, lookAtPos, true, self);
 }
 
 peekOut() {
-  if(isdefined(self.coverNode.script_dontpeek))
+  if(isDefined(self.coverNode.script_dontpeek))
     return false;
 
-  if(isdefined(self.nextPeekOutAttemptTime) && gettime() < self.nextPeekOutAttemptTime)
+  if(isDefined(self.nextPeekOutAttemptTime) && gettime() < self.nextPeekOutAttemptTime)
     return false;
 
   if(!self isPeekOutPosClear()) {
@@ -974,12 +975,12 @@ fastlook() {
   return false;
 
   /*
-  if( !isdefined( self.a.array["look"] ) )
+  if( !isDefined( self.a.array["look"] ) )
   	return false;
-	
+  	
   self setFlaggedAnimKnobAllRestart( "look", animArray( "look" ), %body, 1, .1 );
   self animscripts\shared::DoNoteTracks( "look" );
-	
+  	
   return true;
   */
 }
@@ -1016,7 +1017,7 @@ isPathClear(stepoutanim, doMidpointCheck) {
 getPredictedPathMidpoint(dist) {
   angles = self.coverNode.angles;
   right = anglestoright(angles);
-  if(!isdefined(dist))
+  if(!isDefined(dist))
     dist = 36;
   switch (self.script) {
     case "cover_left":
@@ -1037,7 +1038,7 @@ getPredictedPathMidpoint(dist) {
 idle() {
   self endon("end_idle");
 
-  while (1) {
+  while(1) {
     useTwitch = (randomint(2) == 0 && animArrayAnyExist("alert_idle_twitch"));
     if(useTwitch)
       idleanim = animArrayPickRandom("alert_idle_twitch");
@@ -1106,7 +1107,7 @@ GoToCover(coveranim, transTime, playTime) {
   self setFlaggedAnimKnobAllRestart("coveranim", coveranim, % body, 1, transTime);
   self animscripts\shared::DoNoteTracksForTime(playTime, "coveranim");
 
-  while (AbsAngleClamp180(self.angles[1] - desiredYaw) > 1) {
+  while(AbsAngleClamp180(self.angles[1] - desiredYaw) > 1) {
     self animscripts\shared::DoNoteTracksForTime(0.1, "coveranim");
   }
 
@@ -1120,14 +1121,14 @@ GoToCover(coveranim, transTime, playTime) {
 
 drawoffset() {
   self endon("killanimscript");
-  for (;;) {
+  for(;;) {
     line(self.node.origin + (0, 0, 20), (0, 0, 20) + self.node.origin + vector_multiply(anglestoright(self.node.angles + (0, 0, 0)), 16));
     wait(0.05);
   }
 }
 
 set_standing_animarray_aiming() {
-  if(!isdefined(self.a.array))
+  if(!isDefined(self.a.array))
     assertmsg("set_standing_animarray_aiming_AandC::this function needs to be called after the initial corner set_ functions");
 
   self.a.array["add_aim_up"] = % exposed_aim_8;
@@ -1179,7 +1180,7 @@ set_standing_animarray_aiming() {
 }
 
 set_crouching_animarray_aiming() {
-  if(!isdefined(self.a.array))
+  if(!isDefined(self.a.array))
     assertmsg("set_standing_animarray_aiming_AandC::this function needs to be called after the initial corner set_ functions");
 
   if(self.a.cornerMode == "over") {

@@ -10,7 +10,7 @@ main() {
   self endon("killanimscript");
   animscripts\utility::initialize("grenadecower");
 
-  if(isdefined(self.grenadecowerfunction)) {
+  if(isDefined(self.grenadecowerfunction)) {
     self[[self.grenadecowerfunction]]();
     return;
   }
@@ -24,13 +24,13 @@ main() {
   self orientmode("face angle", self.angles[1]);
   var_0 = 0;
 
-  if(isdefined(self.grenade))
+  if(isDefined(self.grenade))
     var_0 = angleclamp180(vectortoangles(self.grenade.origin - self.origin)[1] - self.angles[1]);
   else
     var_0 = self.angles[1];
 
   if(self.a.pose == "stand") {
-    if(isdefined(self.grenade) && trydive(var_0)) {
+    if(isDefined(self.grenade) && trydive(var_0)) {
       return;
     }
     self setflaggedanimknoballrestart("cowerstart", animscripts\utility::lookupanim("grenade", "cower_squat"), % body, 1, 0.2);

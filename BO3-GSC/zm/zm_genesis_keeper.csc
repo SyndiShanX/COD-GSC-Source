@@ -18,13 +18,13 @@
 #namespace zm_genesis_keeper;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_keeper", & __init__, undefined, undefined);
+  system::register("zm_genesis_keeper", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  ai::add_archetype_spawn_function("keeper", & function_6ded398b);
+  ai::add_archetype_spawn_function("keeper", &function_6ded398b);
   if(ai::shouldregisterclientfieldforarchetype("keeper")) {
-    clientfield::register("actor", "keeper_death", 15000, 2, "int", & function_6e8422e9, 0, 0);
+    clientfield::register("actor", "keeper_death", 15000, 2, "int", &function_6e8422e9, 0, 0);
   }
 }
 
@@ -35,7 +35,7 @@ function function_6ded398b(localclientnum) {
 function function_ea48e71e(localclientnum) {
   self endon("entityshutdown");
   self util::waittill_dobj(localclientnum);
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   s_timer = new_timer(localclientnum);
@@ -47,12 +47,12 @@ function function_ea48e71e(localclientnum) {
     self mapshaderconstant(localclientnum, 0, "scriptVector2", n_delta_val);
     self mapshaderconstant(localclientnum, 0, "scriptVector0", n_delta_val);
   }
-  while (n_current_time < n_phase_in);
+  while(n_current_time < n_phase_in);
   s_timer notify("timer_done");
 }
 
 function new_timer(localclientnum) {
-  s_timer = spawnstruct();
+  s_timer = spawnStruct();
   s_timer.n_time_current = 0;
   s_timer thread timer_increment_loop(localclientnum, self);
   return s_timer;
@@ -61,7 +61,7 @@ function new_timer(localclientnum) {
 function timer_increment_loop(localclientnum, entity) {
   entity endon("entityshutdown");
   self endon("timer_done");
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     util::server_wait(localclientnum, 0.016);
     self.n_time_current = self.n_time_current + 0.016;
   }
@@ -82,7 +82,7 @@ function reset_timer() {
 function function_6e8422e9(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self endon("entityshutdown");
   self util::waittill_dobj(localclientnum);
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   if(newval == 1) {
@@ -95,11 +95,11 @@ function function_6e8422e9(localclientnum, oldval, newval, bnewent, binitialsnap
       n_delta_val = lerpfloat(1, 0.1, n_current_time / n_phase_in);
       self mapshaderconstant(localclientnum, 0, "scriptVector2", n_delta_val);
     }
-    while (n_current_time < n_phase_in);
+    while(n_current_time < n_phase_in);
     s_timer notify("timer_done");
     self.removingfireshader = 0;
   } else if(newval == 2) {
-    if(!isdefined(self)) {
+    if(!isDefined(self)) {
       return;
     }
     n_phase_in = 0.3;
@@ -110,7 +110,7 @@ function function_6e8422e9(localclientnum, oldval, newval, bnewent, binitialsnap
       n_delta_val = lerpfloat(1, 0, n_current_time / n_phase_in);
       self mapshaderconstant(localclientnum, 0, "scriptVector0", n_delta_val);
     }
-    while (n_current_time < n_phase_in);
+    while(n_current_time < n_phase_in);
     s_timer notify("timer_done");
     self mapshaderconstant(localclientnum, 0, "scriptVector0", 0);
   }

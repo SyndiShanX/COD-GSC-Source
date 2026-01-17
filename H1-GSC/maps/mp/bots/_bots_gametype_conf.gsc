@@ -34,12 +34,12 @@ bot_conf_think() {
   if(self.personality == "camper") {
     self.conf_camper_camp_tags = 0;
 
-    if(!isdefined(self.conf_camping_tag))
+    if(!isDefined(self.conf_camping_tag))
       self.conf_camping_tag = 0;
   }
 
-  for (;;) {
-    var_0 = isdefined(self.tag_getting);
+  for(;;) {
+    var_0 = isDefined(self.tag_getting);
     var_1 = 0;
 
     if(var_0 && self bothasscriptgoal()) {
@@ -57,7 +57,7 @@ bot_conf_think() {
     self botsetflag("force_sprint", var_1);
     self.tags_seen = bot_remove_invalid_tags(self.tags_seen);
     var_3 = bot_find_best_tag_from_array(self.tags_seen, 1);
-    var_4 = isdefined(var_3);
+    var_4 = isDefined(var_3);
 
     if(var_0 && !var_4 || !var_0 && var_4 || var_0 && var_4 && self.tag_getting != var_3) {
       self.tag_getting = var_3;
@@ -67,7 +67,7 @@ bot_conf_think() {
       maps\mp\bots\_bots_strategy::bot_abort_tactical_goal("kill_tag");
     }
 
-    if(isdefined(self.tag_getting)) {
+    if(isDefined(self.tag_getting)) {
       self.conf_camping_tag = 0;
 
       if(self.personality == "camper" && self.conf_camper_camp_tags) {
@@ -83,7 +83,7 @@ bot_conf_think() {
 
       if(!self.conf_camping_tag) {
         if(!maps\mp\bots\_bots_strategy::bot_has_tactical_goal("kill_tag")) {
-          var_5 = spawnstruct();
+          var_5 = spawnStruct();
           var_5.script_goal_type = "objective";
           var_5.objective_radius = level.bot_tag_obj_radius;
           maps\mp\bots\_bots_strategy::bot_new_tactical_goal("kill_tag", self.tag_getting.ground_pos, 25, var_5);
@@ -93,10 +93,10 @@ bot_conf_think() {
 
     var_6 = 0;
 
-    if(isdefined(self.additional_tactical_logic_func))
+    if(isDefined(self.additional_tactical_logic_func))
       var_6 = self[[self.additional_tactical_logic_func]]();
 
-    if(!isdefined(self.tag_getting)) {
+    if(!isDefined(self.tag_getting)) {
       if(!var_6)
         self[[self.personality_update_function]]();
     }
@@ -112,7 +112,7 @@ bot_conf_think() {
 }
 
 bot_check_tag_above_head(var_0) {
-  if(isdefined(var_0.on_path_grid) && var_0.on_path_grid) {
+  if(isDefined(var_0.on_path_grid) && var_0.on_path_grid) {
     var_1 = self.origin + (0, 0, 55);
 
     if(distance2dsquared(var_0.curorigin, var_1) < 144) {
@@ -120,7 +120,7 @@ bot_check_tag_above_head(var_0) {
 
       if(var_2 > 0) {
         if(var_2 < level.bot_tag_allowable_jump_height) {
-          if(!isdefined(self.last_time_jumped_for_tag))
+          if(!isDefined(self.last_time_jumped_for_tag))
             self.last_time_jumped_for_tag = 0;
 
           if(gettime() - self.last_time_jumped_for_tag > 3000) {
@@ -154,18 +154,18 @@ bot_jump_for_tag() {
 }
 
 bot_watch_new_tags() {
-  for (;;) {
+  for(;;) {
     level waittill("new_tag_spawned", var_0);
     self.next_time_check_tags = -1;
 
-    if(isdefined(var_0)) {
-      if(isdefined(var_0.victim) && var_0.victim == self || isdefined(var_0.attacker) && var_0.attacker == self) {
-        if(!isdefined(var_0.on_path_grid) && !isdefined(var_0.calculations_in_progress)) {
+    if(isDefined(var_0)) {
+      if(isDefined(var_0.victim) && var_0.victim == self || isDefined(var_0.attacker) && var_0.attacker == self) {
+        if(!isDefined(var_0.on_path_grid) && !isDefined(var_0.calculations_in_progress)) {
           thread calculate_tag_on_path_grid(var_0);
           waittill_tag_calculated_on_path_grid(var_0);
 
           if(var_0.on_path_grid) {
-            var_1 = spawnstruct();
+            var_1 = spawnStruct();
             var_1.origin = var_0.curorigin;
             var_1.tag = var_0;
             var_2[0] = var_1;
@@ -203,13 +203,13 @@ bot_is_tag_visible(var_0, var_1, var_2) {
     var_0.calculated_nearest_node = 1;
   }
 
-  if(isdefined(var_0.calculations_in_progress))
+  if(isDefined(var_0.calculations_in_progress))
     return 0;
 
   var_3 = var_0.nearest_node;
-  var_4 = !isdefined(var_0.on_path_grid);
+  var_4 = !isDefined(var_0.on_path_grid);
 
-  if(isdefined(var_3) && (var_4 || var_0.on_path_grid)) {
+  if(isDefined(var_3) && (var_4 || var_0.on_path_grid)) {
     var_5 = var_3 == var_1 || nodesvisible(var_3, var_1, 1);
 
     if(var_5) {
@@ -235,28 +235,28 @@ bot_is_tag_visible(var_0, var_1, var_2) {
 bot_find_visible_tags(var_0, var_1, var_2) {
   var_3 = undefined;
 
-  if(isdefined(var_1))
+  if(isDefined(var_1))
     var_3 = var_1;
   else
     var_3 = self getnearestnode();
 
   var_4 = undefined;
 
-  if(isdefined(var_2))
+  if(isDefined(var_2))
     var_4 = var_2;
   else
     var_4 = self botgetfovdot();
 
   var_5 = [];
 
-  if(isdefined(var_3)) {
+  if(isDefined(var_3)) {
     foreach(var_7 in level.dogtags) {
       if(var_7 maps\mp\gametypes\_gameobjects::caninteractwith(self.team)) {
         var_8 = 0;
 
         if(!var_0 || var_7.attacker == self) {
-          if(!isdefined(var_7.calculations_in_progress)) {
-            if(!isdefined(var_7.on_path_grid)) {
+          if(!isDefined(var_7.calculations_in_progress)) {
+            if(!isDefined(var_7.on_path_grid)) {
               level thread calculate_tag_on_path_grid(var_7);
               waittill_tag_calculated_on_path_grid(var_7);
             }
@@ -267,7 +267,7 @@ bot_find_visible_tags(var_0, var_1, var_2) {
           var_8 = 1;
 
         if(var_8) {
-          var_9 = spawnstruct();
+          var_9 = spawnStruct();
           var_9.origin = var_7.curorigin;
           var_9.tag = var_7;
           var_5 = common_scripts\utility::array_add(var_5, var_9);
@@ -287,7 +287,7 @@ calculate_tag_on_path_grid(var_0) {
   if(var_0.on_path_grid) {
     var_0.ground_pos = getgroundposition(var_0.curorigin, 32);
 
-    if(!isdefined(var_0.ground_pos))
+    if(!isDefined(var_0.ground_pos))
       var_0.on_path_grid = 0;
   }
 
@@ -295,7 +295,7 @@ calculate_tag_on_path_grid(var_0) {
 }
 
 waittill_tag_calculated_on_path_grid(var_0) {
-  while (!isdefined(var_0.on_path_grid))
+  while(!isDefined(var_0.on_path_grid))
     wait 0.05;
 }
 
@@ -339,12 +339,12 @@ get_num_allies_getting_tag(var_0) {
   var_1 = 0;
 
   foreach(var_3 in level.participants) {
-    if(!isdefined(var_3.team)) {
+    if(!isDefined(var_3.team)) {
       continue;
     }
     if(var_3.team == self.team && var_3 != self) {
       if(isai(var_3)) {
-        if(isdefined(var_3.tag_getting) && var_3.tag_getting == var_0)
+        if(isDefined(var_3.tag_getting) && var_3.tag_getting == var_0)
           var_1++;
 
         continue;
@@ -363,7 +363,7 @@ bot_camp_tag(var_0, var_1, var_2) {
   self endon("bot_camp_tag");
   self endon("stop_camping_tag");
 
-  if(isdefined(var_2))
+  if(isDefined(var_2))
     self endon(var_2);
 
   self botsetscriptgoalnode(self.node_ambushing_from, var_1, self.ambush_yaw);
@@ -372,7 +372,7 @@ bot_camp_tag(var_0, var_1, var_2) {
   if(var_3 == "goal") {
     var_4 = var_0.nearest_node;
 
-    if(isdefined(var_4)) {
+    if(isDefined(var_4)) {
       var_5 = findentrances(self.origin);
       var_5 = common_scripts\utility::array_add(var_5, var_4);
       childthread maps\mp\bots\_bots_util::bot_watch_nodes(var_5);

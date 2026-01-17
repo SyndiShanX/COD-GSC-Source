@@ -9,7 +9,6 @@
 #include scripts\core_common\values_shared;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
-
 #namespace zm_trial_disable_regen;
 
 autoexec __init__system__() {
@@ -24,13 +23,13 @@ __init__() {
   zm_trial::register_challenge(#"disable_regen", &on_begin, &on_end);
 }
 
-private on_begin() {
+on_begin() {
   foreach(player in getplayers()) {
     player val::set("trials_disable_regen", "health_regen", 0);
   }
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   foreach(player in getplayers()) {
     player val::reset("trials_disable_regen", "health_regen");
   }

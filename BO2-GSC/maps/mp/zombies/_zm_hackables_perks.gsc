@@ -9,15 +9,15 @@
 #include maps\mp\zombies\_zm_equip_hacker;
 
 hack_perks() {
-  vending_triggers = getentarray("zombie_vending", "targetname");
+  vending_triggers = getEntArray("zombie_vending", "targetname");
 
   for(i = 0; i < vending_triggers.size; i++) {
-    struct = spawnstruct();
+    struct = spawnStruct();
 
     if(isDefined(vending_triggers[i].machine))
       machine[0] = vending_triggers[i].machine;
     else
-      machine = getentarray(vending_triggers[i].target, "targetname");
+      machine = getEntArray(vending_triggers[i].target, "targetname");
 
     struct.origin = machine[0].origin + anglestoright(machine[0].angles) * 18 + vectorscale((0, 0, 1), 48.0);
     struct.radius = 48;

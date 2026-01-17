@@ -29,7 +29,6 @@
 #include scripts\zm_common\zm_traps;
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_trap_werewolfer;
 
 autoexec __init__system__() {
@@ -41,7 +40,7 @@ __init__() {
     return;
   }
 
-  level._effect[#"werewolfer_impact"] = #"hash_6e44fde5d49cfc9b";
+  level._effect[# "werewolfer_impact"] = # "hash_6e44fde5d49cfc9b";
   zm_traps::register_trap_basic_info("werewolfer", &function_670dda89, &zm_trap_electric::trap_audio);
   zm_traps::register_trap_damage("werewolfer", &function_436d9a24, &ai_damage);
   level flag::init(#"hash_2287cf5d6310237e");
@@ -60,7 +59,7 @@ __main__() {
 
   level flag::wait_till("all_players_spawned");
   level.var_4cca20a9 = getent("mdl_ww_trap_machine", "targetname");
-  level.var_4cca20a9 clientfield::set("" + #"hash_17df66ef5f71c0de", 1);
+  level.var_4cca20a9 clientfield::set("" + # "hash_17df66ef5f71c0de", 1);
 }
 
 function_670dda89() {
@@ -84,7 +83,7 @@ function_670dda89() {
   }
 
   self.mdl_handle rotatepitch(90, 0.5);
-  level.var_4cca20a9 clientfield::set("" + #"hash_17df66ef5f71c0de", 2);
+  level.var_4cca20a9 clientfield::set("" + # "hash_17df66ef5f71c0de", 2);
   fx_points = struct::get_array(self.target, "targetname");
 
   for(i = 0; i < fx_points.size; i++) {
@@ -93,7 +92,7 @@ function_670dda89() {
   }
 
   self thread zm_traps::trap_damage();
-  self waittilltimeout(self._trap_duration, #"trap_deactivate");
+  self waittilltimeout(self._trap_duration, # "trap_deactivate");
   self notify(#"trap_done");
   level exploder::stop_exploder("fxexp_ele_trap_activate");
   level flag::clear(#"hash_6f483dda6f8ab19d");
@@ -122,7 +121,7 @@ function_38b44aab() {
   wait n_cooldown;
   self.mdl_handle rotatepitch(-90, 0.5);
   wait 0.5;
-  level.var_4cca20a9 clientfield::set("" + #"hash_17df66ef5f71c0de", 1);
+  level.var_4cca20a9 clientfield::set("" + # "hash_17df66ef5f71c0de", 1);
   level notify(#"traps_available", {
     #var_be3f58a: self.script_string
   });
@@ -140,15 +139,15 @@ function_436d9a24(t_damage) {
 ai_damage(e_trap) {
   self endon(#"death");
 
-  if(self.subarchetype === #"catalyst_electric") {
+  if(self.subarchetype === # "catalyst_electric") {
     return;
   }
 
-  if(self.team === #"allies") {
+  if(self.team === # "allies") {
     return;
   }
 
-  if(self.archetype === #"blight_father") {
+  if(self.archetype === # "blight_father") {
     e_trap notify(#"trap_deactivate");
     return;
   }
@@ -172,11 +171,11 @@ ai_damage(e_trap) {
   self fx::play("werewolfer_impact", self.origin, self.angles, "death");
   playsoundatposition(#"wpn_zmb_electrap_zap", self.origin);
 
-  if(self.archetype === #"werewolf") {
+  if(self.archetype === # "werewolf") {
     self thread zm_traps::electroctute_death_fx();
     self thread zm_traps::play_elec_vocals();
     self function_a3059f6(e_trap);
-  } else if(self.archetype === #"zombie") {
+  } else if(self.archetype === # "zombie") {
     refs[0] = "guts";
     refs[1] = "right_arm";
     refs[2] = "left_arm";
@@ -214,7 +213,7 @@ function_a3059f6(e_trap) {
     return;
   }
 
-  if(self.archetype === #"werewolf") {
+  if(self.archetype === # "werewolf") {
     n_damage = self.health + 100;
   } else {
     n_damage = 20000;
@@ -222,11 +221,11 @@ function_a3059f6(e_trap) {
 
   if(self.health < n_damage) {
     level notify(#"trap_kill", {
-      #victim: self, 
+      #victim: self,
       #e_trap: e_trap
     });
 
-    if(self.archetype === #"werewolf" && isDefined(e_trap.activated_by_player)) {
+    if(self.archetype === # "werewolf" && isDefined(e_trap.activated_by_player)) {
       e_trap.activated_by_player notify(#"hash_510f9114e7a6300c");
     }
   }

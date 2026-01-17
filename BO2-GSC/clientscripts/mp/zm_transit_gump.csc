@@ -37,7 +37,7 @@ init_transit_gump() {
     for(i = 0; i < slots; i++)
       transit_gump_preallocate(i);
 
-    gump_trigs = getentarray(0, "gump_triggers", "targetname");
+    gump_trigs = getEntArray(0, "gump_triggers", "targetname");
 
     if(isDefined(gump_trigs))
       array_thread(gump_trigs, clientscripts\mp\zombies\_zm_gump::gump_watch_trigger, 0);

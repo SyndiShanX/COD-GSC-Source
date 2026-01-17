@@ -21,9 +21,9 @@ shellshockOnDamage(cause, damage) {
   if(self maps\mp\_flashgrenades::isFlashbanged())
     return; // don't interrupt flashbang shellshock
 
-  if(self _hasPerk("specialty_blastshield"))
+  if(self _hasPerk("specialty_blastshield")) {
     return;
-
+  }
   if(cause == "MOD_EXPLOSIVE" ||
     cause == "MOD_GRENADE" ||
     cause == "MOD_GRENADE_SPLASH" ||
@@ -60,12 +60,12 @@ grenade_earthQuake() {
   earthquake(0.5, 0.75, position, 800);
 
   foreach(player in level.players) {
-    if(player isUsingRemote())
+    if(player isUsingRemote()) {
       continue;
-
-    if(distance(position, player.origin) > 600)
+    }
+    if(distance(position, player.origin) > 600) {
       continue;
-
+    }
     if(player DamageConeTrace(position))
       player thread dirtEffect(position);
   }

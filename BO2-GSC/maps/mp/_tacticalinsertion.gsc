@@ -24,7 +24,7 @@ init() {
 }
 
 istacspawntouchingcrates(origin, angles) {
-  crate_ents = getentarray("care_package", "script_noteworthy");
+  crate_ents = getEntArray("care_package", "script_noteworthy");
   mins = (-17, -17, -40);
   maxs = (17, 17, 40);
 
@@ -103,7 +103,7 @@ watchusetrigger(trigger, callback, playersoundonuse, npcsoundonuse) {
         player playlocalsound(playersoundonuse);
 
       if(isDefined(npcsoundonuse))
-        player playsound(npcsoundonuse);
+        player playSound(npcsoundonuse);
 
       self thread[[callback]](player);
     }
@@ -147,8 +147,8 @@ fizzle(attacker) {
     return;
   }
   self.fizzle = 1;
-  playfx(level._effect["tacticalInsertionFizzle"], self.origin);
-  self playsound("dst_tac_insert_break");
+  playFX(level._effect["tacticalInsertionFizzle"], self.origin);
+  self playSound("dst_tac_insert_break");
 
   if(isDefined(attacker) && attacker != self.owner)
     self.owner maps\mp\gametypes\_globallogic_audio::leaderdialogonplayer("tact_destroyed", "item_destroyed");
@@ -166,7 +166,7 @@ pickup(attacker) {
 spawntacticalinsertion() {
   self endon("disconnect");
   self.tacticalinsertion = spawn("script_model", self.origin + (0, 0, 1));
-  self.tacticalinsertion setmodel("t6_wpn_tac_insert_world");
+  self.tacticalinsertion setModel("t6_wpn_tac_insert_world");
   self.tacticalinsertion.origin = self.origin + (0, 0, 1);
   self.tacticalinsertion.angles = self.angles;
   self.tacticalinsertion.team = self.team;
@@ -211,7 +211,7 @@ spawntacticalinsertion() {
   else
     self.tacticalinsertioncount = 1;
 
-  self.tacticalinsertion setcandamage(1);
+  self.tacticalinsertion setCanDamage(1);
   self.tacticalinsertion.health = 1;
 
   while(true) {

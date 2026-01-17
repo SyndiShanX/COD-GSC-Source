@@ -36,10 +36,10 @@ tomb_challenges_add_stats() {
     n_boxes_filled = 1;
   }
 
-  add_stat("zc_headshots", 0, & "ZM_TOMB_CH1", n_kills, undefined, ::reward_packed_weapon);
-  add_stat("zc_zone_captures", 0, & "ZM_TOMB_CH2", n_zone_caps, undefined, ::reward_powerup_max_ammo);
-  add_stat("zc_points_spent", 0, & "ZM_TOMB_CH3", n_points_spent, undefined, ::reward_double_tap, ::track_points_spent);
-  add_stat("zc_boxes_filled", 1, & "ZM_TOMB_CHT", n_boxes_filled, undefined, ::reward_one_inch_punch, ::init_box_footprints);
+  add_stat("zc_headshots", 0, &"ZM_TOMB_CH1", n_kills, undefined, ::reward_packed_weapon);
+  add_stat("zc_zone_captures", 0, &"ZM_TOMB_CH2", n_zone_caps, undefined, ::reward_powerup_max_ammo);
+  add_stat("zc_points_spent", 0, &"ZM_TOMB_CH3", n_points_spent, undefined, ::reward_double_tap, ::track_points_spent);
+  add_stat("zc_boxes_filled", 1, &"ZM_TOMB_CHT", n_boxes_filled, undefined, ::reward_one_inch_punch, ::init_box_footprints);
 }
 
 track_points_spent() {
@@ -53,7 +53,7 @@ init_box_footprints() {
   level.n_soul_boxes_completed = 0;
   flag_init("vo_soul_box_intro_played");
   flag_init("vo_soul_box_continue_played");
-  a_boxes = getentarray("foot_box", "script_noteworthy");
+  a_boxes = getEntArray("foot_box", "script_noteworthy");
   array_thread(a_boxes, ::box_footprint_think);
 }
 
@@ -126,8 +126,8 @@ box_footprint_think() {
   self waittill("rotatedone");
   trace_start = self.origin + vectorscale((0, 0, 1), 200.0);
   trace_end = self.origin;
-  fx_trace = bullettrace(trace_start, trace_end, 0, self);
-  playfx(level._effect["mech_booster_landing"], fx_trace["position"], anglestoforward(self.angles), anglestoup(self.angles));
+  fx_trace = bulletTrace(trace_start, trace_end, 0, self);
+  playFX(level._effect["mech_booster_landing"], fx_trace["position"], anglesToForward(self.angles), anglestoup(self.angles));
   playsoundatposition("zmb_footprintbox_disappear", self.origin);
   self waittill("movedone");
   level maps\mp\zombies\_zm_challenges::increment_stat("zc_boxes_filled");
@@ -156,7 +156,7 @@ watch_for_foot_stomp() {
 }
 
 footprint_zombie_killed(attacker) {
-  a_volumes = getentarray("foot_box_volume", "script_noteworthy");
+  a_volumes = getEntArray("foot_box_volume", "script_noteworthy");
 
   foreach(e_volume in a_volumes) {
     if(self istouching(e_volume) && isDefined(attacker) && isplayer(attacker)) {
@@ -178,8 +178,8 @@ reward_packed_weapon(player, s_stat) {
 
   m_weapon = spawn("script_model", self.origin);
   m_weapon.angles = self.angles + vectorscale((0, 1, 0), 180.0);
-  m_weapon playsound("zmb_spawn_powerup");
-  m_weapon playloopsound("zmb_spawn_powerup_loop", 0.5);
+  m_weapon playSound("zmb_spawn_powerup");
+  m_weapon playLoopSound("zmb_spawn_powerup_loop", 0.5);
   str_model = getweaponmodel(s_stat.str_reward_weapon);
   options = player maps\mp\zombies\_zm_weapons::get_pack_a_punch_weapon_options(s_stat.str_reward_weapon);
   m_weapon useweaponmodel(s_stat.str_reward_weapon, str_model, options);
@@ -200,7 +200,7 @@ reward_packed_weapon(player, s_stat) {
 
   player switchtoweapon(s_stat.str_reward_weapon);
   m_weapon stoploopsound(0.1);
-  player playsound("zmb_powerup_grabbed");
+  player playSound("zmb_powerup_grabbed");
   m_weapon delete();
   return true;
 }
@@ -227,9 +227,9 @@ reward_powerup(player, str_powerup, n_timeout) {
   s_powerup = level.zombie_powerups[str_powerup];
   m_reward = spawn("script_model", self.origin);
   m_reward.angles = self.angles + vectorscale((0, 1, 0), 180.0);
-  m_reward setmodel(s_powerup.model_name);
-  m_reward playsound("zmb_spawn_powerup");
-  m_reward playloopsound("zmb_spawn_powerup_loop", 0.5);
+  m_reward setModel(s_powerup.model_name);
+  m_reward playSound("zmb_spawn_powerup");
+  m_reward playLoopSound("zmb_spawn_powerup_loop", 0.5);
   wait_network_frame();
 
   if(!reward_rise_and_grab(m_reward, 50, 2, 2, n_timeout))
@@ -258,7 +258,7 @@ reward_powerup(player, str_powerup, n_timeout) {
 
   wait 0.1;
   m_reward stoploopsound(0.1);
-  player playsound("zmb_powerup_grabbed");
+  player playSound("zmb_powerup_grabbed");
   m_reward delete();
   return 1;
 }
@@ -267,9 +267,9 @@ reward_double_tap(player, s_stat) {
   m_reward = spawn("script_model", self.origin);
   m_reward.angles = self.angles + vectorscale((0, 1, 0), 180.0);
   str_model = getweaponmodel("zombie_perk_bottle_doubletap");
-  m_reward setmodel(str_model);
-  m_reward playsound("zmb_spawn_powerup");
-  m_reward playloopsound("zmb_spawn_powerup_loop", 0.5);
+  m_reward setModel(str_model);
+  m_reward playSound("zmb_spawn_powerup");
+  m_reward playLoopSound("zmb_spawn_powerup_loop", 0.5);
   wait_network_frame();
 
   if(!reward_rise_and_grab(m_reward, 50, 2, 2, 10))
@@ -281,7 +281,7 @@ reward_double_tap(player, s_stat) {
   }
 
   m_reward stoploopsound(0.1);
-  player playsound("zmb_powerup_grabbed");
+  player playSound("zmb_powerup_grabbed");
   m_reward thread maps\mp\zombies\_zm_perks::vending_trigger_post_think(player, "specialty_rof");
   m_reward delete();
   return true;
@@ -298,10 +298,10 @@ bottle_reject_sink(player) {
 reward_one_inch_punch(player, s_stat) {
   m_reward = spawn("script_model", self.origin);
   m_reward.angles = self.angles + vectorscale((0, 1, 0), 180.0);
-  m_reward setmodel("tag_origin");
-  playfxontag(level._effect["staff_soul"], m_reward, "tag_origin");
-  m_reward playsound("zmb_spawn_powerup");
-  m_reward playloopsound("zmb_spawn_powerup_loop", 0.5);
+  m_reward setModel("tag_origin");
+  playFXOnTag(level._effect["staff_soul"], m_reward, "tag_origin");
+  m_reward playSound("zmb_spawn_powerup");
+  m_reward playLoopSound("zmb_spawn_powerup_loop", 0.5);
   wait_network_frame();
 
   if(!reward_rise_and_grab(m_reward, 50, 2, 2, 10))
@@ -309,7 +309,7 @@ reward_one_inch_punch(player, s_stat) {
 
   player thread maps\mp\zombies\_zm_weap_one_inch_punch::one_inch_punch_melee_attack();
   m_reward stoploopsound(0.1);
-  player playsound("zmb_powerup_grabbed");
+  player playSound("zmb_powerup_grabbed");
   m_reward delete();
   player thread one_inch_punch_watch_for_death(s_stat);
   return true;
@@ -329,9 +329,9 @@ reward_beacon(player, s_stat) {
   m_reward = spawn("script_model", self.origin);
   m_reward.angles = self.angles + vectorscale((0, 1, 0), 180.0);
   str_model = getweaponmodel("beacon_zm");
-  m_reward setmodel(str_model);
-  m_reward playsound("zmb_spawn_powerup");
-  m_reward playloopsound("zmb_spawn_powerup_loop", 0.5);
+  m_reward setModel(str_model);
+  m_reward playSound("zmb_spawn_powerup");
+  m_reward playLoopSound("zmb_spawn_powerup_loop", 0.5);
   wait_network_frame();
 
   if(!reward_rise_and_grab(m_reward, 50, 2, 2, 10))
@@ -345,7 +345,7 @@ reward_beacon(player, s_stat) {
   }
 
   m_reward stoploopsound(0.1);
-  player playsound("zmb_powerup_grabbed");
+  player playSound("zmb_powerup_grabbed");
   m_reward delete();
   return true;
 }

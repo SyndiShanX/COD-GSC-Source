@@ -14,8 +14,8 @@ death_behavior() {
   level.player waittill("death", var_0, var_1, var_2, var_3);
   soundscripts\_snd::snd_message("player_death");
 
-  if(isdefined(var_3)) {
-    var_4 = level.player.origin - level.player geteye() + (0, 0, 35);
+  if(isDefined(var_3)) {
+    var_4 = level.player.origin - level.player getEye() + (0, 0, 35);
     var_5 = spawn("script_model", level.player.origin + (0, 0, var_4[2]));
     var_5.angles = (-10, level.player.angles[2], 30);
     var_5 linkto(var_3);
@@ -32,13 +32,13 @@ player_throwgrenade_timer() {
   self endon("death");
   self.lastgrenadetime = 0;
 
-  for (;;) {
-    while (!self isthrowinggrenade())
+  for(;;) {
+    while(!self isthrowinggrenade())
       wait 0.05;
 
     self.lastgrenadetime = gettime();
 
-    while (self isthrowinggrenade())
+    while(self isthrowinggrenade())
       wait 0.05;
   }
 }
@@ -74,7 +74,7 @@ special_death_hint(var_0, var_1, var_2) {
       if(level.player.lastgrenadetime - gettime() > 3500.0) {
         return;
       }
-      thread grenade_death_hint(&"SCRIPT_GRENADE_SUICIDE_LINE1", & "SCRIPT_GRENADE_SUICIDE_LINE2");
+      thread grenade_death_hint(&"SCRIPT_GRENADE_SUICIDE_LINE1", &"SCRIPT_GRENADE_SUICIDE_LINE2");
       break;
     case "MOD_EXPLOSIVE":
       if(level.player destructible_death(var_0)) {
@@ -89,7 +89,7 @@ special_death_hint(var_0, var_1, var_2) {
       break;
     case "MOD_GRENADE_SPLASH":
     case "MOD_GRENADE":
-      if(isdefined(var_2) && !issubstr(var_2, "grenade")) {
+      if(isDefined(var_2) && !issubstr(var_2, "grenade")) {
         return;
       }
       set_deadquote("@SCRIPT_GRENADE_DEATH");
@@ -101,7 +101,7 @@ special_death_hint(var_0, var_1, var_2) {
 }
 
 vehicle_death(var_0) {
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     return 0;
 
   if(var_0.code_classname != "script_vehicle")
@@ -113,10 +113,10 @@ vehicle_death(var_0) {
 }
 
 destructible_death(var_0) {
-  if(!isdefined(var_0))
+  if(!isDefined(var_0))
     return 0;
 
-  if(!isdefined(var_0.destructible_type))
+  if(!isDefined(var_0.destructible_type))
     return 0;
 
   if(issubstr(var_0.destructible_type, "vehicle")) {
@@ -131,7 +131,7 @@ destructible_death(var_0) {
 }
 
 exploding_barrel_death(var_0) {
-  if(isdefined(level.lastexplodingbarrel)) {
+  if(isDefined(level.lastexplodingbarrel)) {
     if(gettime() != level.lastexplodingbarrel["time"])
       return 0;
 
@@ -224,7 +224,7 @@ grenade_death_hint(var_0, var_1) {
   var_2.alpha = 1;
   var_2.hidewheninmenu = 1;
 
-  if(isdefined(var_1)) {
+  if(isDefined(var_1)) {
     var_2 = newhudelem();
     var_2.elemtype = "font";
     var_2.font = "default";
@@ -278,7 +278,7 @@ grenade_death_indicator_hud() {
 }
 
 set_death_icon(var_0, var_1, var_2, var_3) {
-  if(!isdefined(var_3))
+  if(!isDefined(var_3))
     var_3 = 2.5;
 
   wait(var_3);

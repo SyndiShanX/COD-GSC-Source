@@ -41,11 +41,11 @@ precache() {
   maps\mp\zombies\_zm_ai_ghost::init_animtree();
   level thread lsat_trigger_tweak();
   setup_buildables();
-  maps\mp\zombies\_zm_equip_turbine::init(&"ZOMBIE_EQUIP_TURBINE_PICKUP_HINT_STRING", & "ZOMBIE_EQUIP_TURBINE_HOWTO");
+  maps\mp\zombies\_zm_equip_turbine::init(&"ZOMBIE_EQUIP_TURBINE_PICKUP_HINT_STRING", &"ZOMBIE_EQUIP_TURBINE_HOWTO");
   maps\mp\zombies\_zm_equip_turbine::init_animtree();
-  maps\mp\zombies\_zm_equip_springpad::init(&"ZM_BURIED_EQ_SP_PHS", & "ZM_BURIED_EQ_SP_HTS");
-  maps\mp\zombies\_zm_equip_subwoofer::init(&"ZM_BURIED_EQ_SW_PHS", & "ZM_BURIED_EQ_SW_HTS");
-  maps\mp\zombies\_zm_equip_headchopper::init(&"ZM_BURIED_EQ_HC_PHS", & "ZM_BURIED_EQ_HC_HTS");
+  maps\mp\zombies\_zm_equip_springpad::init(&"ZM_BURIED_EQ_SP_PHS", &"ZM_BURIED_EQ_SP_HTS");
+  maps\mp\zombies\_zm_equip_subwoofer::init(&"ZM_BURIED_EQ_SW_PHS", &"ZM_BURIED_EQ_SW_HTS");
+  maps\mp\zombies\_zm_equip_headchopper::init(&"ZM_BURIED_EQ_HC_PHS", &"ZM_BURIED_EQ_HC_HTS");
   level.springpad_attack_delay = 0.2;
   maps\mp\zm_buried_fountain::init_fountain();
   level thread perk_vulture_custom_scripts();
@@ -91,12 +91,12 @@ main() {
   exploder(666);
   level.zm_traversal_override = ::zm_traversal_override;
   level.zm_mantle_over_40_move_speed_override = ::mantle_over_40_move_speed_override;
-  blockers = getentarray("main_street_blocker", "targetname");
+  blockers = getEntArray("main_street_blocker", "targetname");
 
   foreach(blocker in blockers)
   blocker disconnectpaths();
 
-  level.insta_kill_triggers = getentarray("instant_death", "targetname");
+  level.insta_kill_triggers = getEntArray("instant_death", "targetname");
   array_thread(level.insta_kill_triggers, ::squashed_death_init, 0);
 
   if(isDefined(level.sloth)) {
@@ -255,11 +255,11 @@ lerp_generator_lights(total_time, start_val, end_val) {
 }
 
 collapsing_holes_init() {
-  trigs = getentarray("hole_breakthrough", "targetname");
+  trigs = getEntArray("hole_breakthrough", "targetname");
   clientfieldnames = [];
 
   foreach(trig in trigs) {
-    parts = getentarray(trig.target, "targetname");
+    parts = getEntArray(trig.target, "targetname");
 
     foreach(part in parts) {
       if(isDefined(part.script_noteworthy) && part.script_noteworthy == "clip") {
@@ -309,7 +309,7 @@ collapsing_holes() {
       if(isDefined(self.script_int))
         exploder(self.script_int);
       else
-        playfx(level._effect["wood_chunk_destory"], self.boards.origin);
+        playFX(level._effect["wood_chunk_destory"], self.boards.origin);
 
       self thread sndcollapsing();
       self.boards delete();
@@ -328,11 +328,11 @@ sndcollapsing() {
     return;
   }
   if(self.script_noteworthy == "hole_small_2")
-    self playsound("zmb_floor_collapse");
+    self playSound("zmb_floor_collapse");
   else if(self.script_noteworthy == "hole_small_1")
-    self playsound("zmb_floor_collapse");
+    self playSound("zmb_floor_collapse");
   else if(self.script_noteworthy == "hole_large_1")
-    self playsound("zmb_floor_collapse");
+    self playSound("zmb_floor_collapse");
 }
 
 tunnel_breach() {
@@ -343,7 +343,7 @@ tunnel_breach() {
     return;
   }
   self.boards.health = 99999;
-  self.boards setcandamage(1);
+  self.boards setCanDamage(1);
   self.boards.damage_state = 0;
 
   while(true) {
@@ -362,7 +362,7 @@ tunnel_breach() {
       if(isDefined(self.script_int))
         exploder(self.script_int);
       else
-        playfx(level._effect["wood_chunk_destory"], self.origin);
+        playFX(level._effect["wood_chunk_destory"], self.origin);
 
       if(isDefined(self.script_string))
         level setclientfield(self.script_string, 1);
@@ -384,7 +384,7 @@ tunnel_breach() {
 }
 
 quick_revive_solo_watch() {
-  machine_triggers = getentarray("vending_revive", "target");
+  machine_triggers = getEntArray("vending_revive", "target");
   machine_trigger = machine_triggers[0];
 
   while(true) {
@@ -396,11 +396,11 @@ quick_revive_solo_watch() {
 }
 
 sliding_bookcase_init() {
-  bookcase_triggers = getentarray("zombie_sliding_bookcase", "script_noteworthy");
+  bookcase_triggers = getEntArray("zombie_sliding_bookcase", "script_noteworthy");
 
   foreach(trig in bookcase_triggers) {
     trig.doors = [];
-    targets = getentarray(trig.target, "targetname");
+    targets = getEntArray(trig.target, "targetname");
 
     foreach(target in targets) {
       target notsolid();
@@ -430,7 +430,7 @@ sliding_bookcase_think() {
     if(isDefined(who.bookcase_entering_callback))
       who thread[[who.bookcase_entering_callback]](self.doors[0]);
 
-    self playsound("zmb_sliding_bookcase_open");
+    self playSound("zmb_sliding_bookcase_open");
 
     if(isDefined(self.doors[0].door_moving) && self.doors[0].door_moving || isDefined(self._door_open) && self._door_open) {
       continue;
@@ -445,7 +445,7 @@ sliding_bookcase_think() {
     piece thread sliding_bookcase_activate(0);
 
     self._door_open = 0;
-    self playsound("zmb_sliding_bookcase_close");
+    self playSound("zmb_sliding_bookcase_close");
   }
 }
 
@@ -459,9 +459,7 @@ sliding_bookcase_activate(open) {
   self.door_moving = 1;
 
   if(isDefined(self.script_sound)) {
-    if(open) {
-    } else {
-    }
+    if(open) {} else {}
   }
 
   scale = 1;
@@ -522,7 +520,7 @@ sliding_bookcase_occupied() {
       is_occupied++;
   }
 
-  ghosts = getentarray("ghost_zombie_spawner", "script_noteworthy");
+  ghosts = getEntArray("ghost_zombie_spawner", "script_noteworthy");
 
   foreach(ghost in ghosts) {
     if(is_occupied > 0) {
@@ -561,7 +559,7 @@ sliding_bookcase_wobble(model) {
 }
 
 dart_game_init() {
-  dart_board = getentarray("dart_board", "targetname");
+  dart_board = getEntArray("dart_board", "targetname");
 
   if(!isDefined(dart_board)) {
     return;
@@ -571,7 +569,7 @@ dart_game_init() {
 }
 
 dart_game_piece_think() {
-  self setcandamage(1);
+  self setCanDamage(1);
 
   while(true) {
     self waittill("damage", amount, inflictor, direction, point, type, tagname, modelname, partname, weaponname, idflags);
@@ -629,8 +627,8 @@ dart_game_give_award(award) {
 }
 
 piano_init() {
-  array_thread(getentarray("piano_key", "targetname"), ::pianothink);
-  array_thread(getentarray("piano_damage", "targetname"), ::pianodamagethink);
+  array_thread(getEntArray("piano_key", "targetname"), ::pianothink);
+  array_thread(getEntArray("piano_damage", "targetname"), ::pianodamagethink);
 }
 
 pianothink() {
@@ -645,7 +643,7 @@ pianothink() {
     if(who istouching(self)) {
       iprintlnbold("Playing Piano Key: " + note);
 
-      self playsound("zmb_piano_" + note);
+      self playSound("zmb_piano_" + note);
     }
   }
 }
@@ -660,7 +658,7 @@ pianodamagethink() {
     if(isDefined(who) && isplayer(who)) {
       iprintlnbold("Piano Damage: " + type);
 
-      self playsound("zmb_piano_damage_" + type);
+      self playSound("zmb_piano_damage_" + type);
     }
   }
 }
@@ -714,7 +712,7 @@ fountain_open_sesame() {
 }
 
 setup_temp_sloth_triggers() {
-  sloth_triggers = getentarray("sloth_barricade", "targetname");
+  sloth_triggers = getEntArray("sloth_barricade", "targetname");
 
   foreach(trigger in sloth_triggers)
   trigger thread watch_opensesame();
@@ -736,7 +734,7 @@ open_barricade(script_flag, target) {
     flag_set(script_flag);
 
   if(isDefined(target)) {
-    barricades = getentarray(target, "targetname");
+    barricades = getEntArray(target, "targetname");
 
     if(isDefined(barricades) && barricades.size) {
       foreach(barricade in barricades) {
@@ -756,8 +754,7 @@ open_barricade(script_flag, target) {
     self delete();
 }
 
-perk_vulture_custom_scripts() {
-}
+perk_vulture_custom_scripts() {}
 
 zm_traversal_override(traversealias) {
   self.no_restart = 0;
@@ -850,7 +847,7 @@ store_worldstate_for_minigame() {
   }
 
   flag_set("time_bomb_stores_door_state");
-  level._world_state_stored_for_minigame = spawnstruct();
+  level._world_state_stored_for_minigame = spawnStruct();
   maps\mp\zombies\_zm_weap_time_bomb::_time_bomb_saves_data(0, level._world_state_stored_for_minigame);
   give_default_minigame_loadout();
   onplayerconnect_callback(::give_player_minigame_loadout_wrapper);
@@ -867,7 +864,7 @@ restore_worldstate_for_minigame() {
   level.round_spawn_func = maps\mp\zombies\_zm::round_spawning;
   maps\mp\zombies\_zm_weap_time_bomb::time_bomb_restores_saved_data(0, level._world_state_stored_for_minigame);
   level thread delay_destroy_timebomb_override_structs();
-  blockers = getentarray("main_street_blocker", "targetname");
+  blockers = getEntArray("main_street_blocker", "targetname");
 
   foreach(blocker in blockers) {
     blocker.origin = blocker.origin + vectorscale((0, 0, 1), 360.0);
@@ -939,7 +936,7 @@ minigame_blockers_disable() {
 
   foreach(barrier in a_sloth_barriers) {
     if(isDefined(barrier.target)) {
-      a_pieces = getentarray(barrier.target, "targetname");
+      a_pieces = getEntArray(barrier.target, "targetname");
 
       foreach(piece in a_pieces) {
         if(isDefined(piece.is_hidden) && !piece.is_hidden)
@@ -971,7 +968,7 @@ minigame_blockers_enable() {
 
   foreach(barrier in a_sloth_barriers) {
     if(isDefined(barrier.target)) {
-      a_pieces = getentarray(barrier.target, "targetname");
+      a_pieces = getEntArray(barrier.target, "targetname");
 
       foreach(piece in a_pieces) {
         if(isDefined(piece.is_hidden) && piece.is_hidden)
@@ -988,7 +985,7 @@ get_minigame_sloth_barriers() {
   a_barriers_filtered = [];
 
   if(flag_exists("sq_minigame_active") && flag("sq_minigame_active")) {
-    a_sloth_barriers = getentarray("sloth_barricade", "targetname");
+    a_sloth_barriers = getEntArray("sloth_barricade", "targetname");
 
     if(flag("richtofen_minigame_active") || flag("richtofen_game_complete"))
       a_blocked_barrier_list = array("jail");
@@ -1021,12 +1018,12 @@ get_minigame_blocker_structs() {
 get_minigame_blocker_models() {
   if(flag_exists("sq_minigame_active") && flag("sq_minigame_active")) {
     if(flag("richtofen_minigame_active") || flag("richtofen_game_complete"))
-      a_models = getentarray("minigame_richtofen_blocker", "targetname");
+      a_models = getEntArray("minigame_richtofen_blocker", "targetname");
     else
-      a_models = getentarray("minigame_maxis_blocker", "script_noteworthy");
+      a_models = getEntArray("minigame_maxis_blocker", "script_noteworthy");
   } else {
-    a_models = getentarray("minigame_richtofen_blocker", "targetname");
-    a_models = arraycombine(a_models, getentarray("minigame_maxis_blocker", "script_noteworthy"), 0, 0);
+    a_models = getEntArray("minigame_richtofen_blocker", "targetname");
+    a_models = arraycombine(a_models, getEntArray("minigame_maxis_blocker", "script_noteworthy"), 0, 0);
   }
 
   return a_models;
@@ -1042,10 +1039,10 @@ get_minigame_clip_brushes(str_name_append) {
       str_key = "script_noteworthy";
     }
 
-    a_clip = getentarray(_append_name(str_name, str_name_append), str_key);
+    a_clip = getEntArray(_append_name(str_name, str_name_append), str_key);
   } else {
-    a_clip = getentarray(_append_name("minigame_richtofen_clip", str_name_append), "targetname");
-    a_clip = arraycombine(a_clip, getentarray(_append_name("minigame_maxis_clip", str_name_append), "script_noteworthy"), 0, 0);
+    a_clip = getEntArray(_append_name("minigame_richtofen_clip", str_name_append), "targetname");
+    a_clip = arraycombine(a_clip, getEntArray(_append_name("minigame_maxis_clip", str_name_append), "script_noteworthy"), 0, 0);
   }
 
   return a_clip;
@@ -1066,7 +1063,7 @@ blocker_model_promote() {
     self.angles = (0, 0, 0);
 
   m_blocker.angles = self.angles;
-  m_blocker setmodel(self.model);
+  m_blocker setModel(self.model);
   m_blocker.targetname = self.targetname;
   m_blocker.script_noteworthy = self.script_noteworthy;
   m_blocker movez(100, 5, 0.5, 0.5);
@@ -1087,7 +1084,7 @@ toggle_doors_along_richtofen_street(b_should_close) {
     b_should_close = 1;
 
   a_door_names = array("general_store_door1");
-  a_doors = getentarray("zombie_door", "targetname");
+  a_doors = getEntArray("zombie_door", "targetname");
 
   for(i = 0; i < a_door_names.size; i++) {
     for(j = 0; j < a_doors.size; j++) {
@@ -1157,7 +1154,7 @@ toggle_door_triggers(b_allow_use) {
   if(!isDefined(b_allow_use))
     b_allow_use = 1;
 
-  a_triggers = getentarray("zombie_door", "targetname");
+  a_triggers = getEntArray("zombie_door", "targetname");
 
   for(i = 0; i < a_triggers.size; i++) {
     if(b_allow_use) {
@@ -1305,13 +1302,13 @@ insta_kill_player(perks_can_respawn_player, kill_if_falling) {
 
 get_insta_kill_spawn_point_from_nodes(v_origin, min_radius, max_radius, max_height, ignore_targetted_nodes) {
   if(!isDefined(level.chugabud_spawn_struct))
-    level.chugabud_spawn_struct = spawnstruct();
+    level.chugabud_spawn_struct = spawnStruct();
 
   found_node = undefined;
   a_nodes = getnodesinradiussorted(v_origin, max_radius, min_radius, max_height, "pathnodes");
 
   if(isDefined(a_nodes) && a_nodes.size > 0) {
-    a_player_volumes = getentarray("player_volume", "script_noteworthy");
+    a_player_volumes = getEntArray("player_volume", "script_noteworthy");
     index = a_nodes.size - 1;
 
     for(i = index; i >= 0; i--) {
@@ -1326,7 +1323,7 @@ get_insta_kill_spawn_point_from_nodes(v_origin, min_radius, max_radius, max_heig
         if(maps\mp\zombies\_zm_utility::check_point_in_enabled_zone(n_node.origin, 1, a_player_volumes)) {
           v_start = (n_node.origin[0], n_node.origin[1], n_node.origin[2] + 30);
           v_end = (n_node.origin[0], n_node.origin[1], n_node.origin[2] - 30);
-          trace = bullettrace(v_start, v_end, 0, undefined);
+          trace = bulletTrace(v_start, v_end, 0, undefined);
 
           if(trace["fraction"] < 1) {
             override_abort = 0;

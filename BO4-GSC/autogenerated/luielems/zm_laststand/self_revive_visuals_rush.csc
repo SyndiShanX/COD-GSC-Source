@@ -4,17 +4,15 @@
 ****************************************************************************/
 
 #include scripts\core_common\lui_shared;
-
 #namespace self_revive_visuals_rush;
 
 class cself_revive_visuals_rush: cluielem {
-
   function set_revive_time(localclientnum, value) {
     set_data(localclientnum, "revive_time", value);
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, #"self_revive_visuals_rush");
+    cluielem::open(localclientnum, # "self_revive_visuals_rush");
   }
 
   function function_fa582112(localclientnum) {

@@ -11,9 +11,7 @@ main() {
 
   if(isusingmatchrulesdata()) {
     level.initializematchrules = ::initializematchrules;
-    [
-      [level.initializematchrules]
-    ]();
+    [[level.initializematchrules]]();
     level thread maps\mp\_utility::reinitializematchrulesonmigration();
   } else {
     maps\mp\_utility::registertimelimitdvar(level.gametype, 10);
@@ -55,19 +53,19 @@ initializematchrules() {
 
 onstartgametype() {
   setclientnamemode("auto_change");
-  maps\mp\_utility::setobjectivetext("allies", & "OBJECTIVES_DM");
-  maps\mp\_utility::setobjectivetext("axis", & "OBJECTIVES_DM");
+  maps\mp\_utility::setobjectivetext("allies", &"OBJECTIVES_DM");
+  maps\mp\_utility::setobjectivetext("axis", &"OBJECTIVES_DM");
 
   if(level.splitscreen) {
-    maps\mp\_utility::setobjectivescoretext("allies", & "OBJECTIVES_DM");
-    maps\mp\_utility::setobjectivescoretext("axis", & "OBJECTIVES_DM");
+    maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_DM");
+    maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_DM");
   } else {
-    maps\mp\_utility::setobjectivescoretext("allies", & "OBJECTIVES_DM_SCORE");
-    maps\mp\_utility::setobjectivescoretext("axis", & "OBJECTIVES_DM_SCORE");
+    maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_DM_SCORE");
+    maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_DM_SCORE");
   }
 
-  maps\mp\_utility::setobjectivehinttext("allies", & "OBJECTIVES_DM_HINT");
-  maps\mp\_utility::setobjectivehinttext("axis", & "OBJECTIVES_DM_HINT");
+  maps\mp\_utility::setobjectivehinttext("allies", &"OBJECTIVES_DM_HINT");
+  maps\mp\_utility::setobjectivehinttext("axis", &"OBJECTIVES_DM_HINT");
   level.spawnmins = (0, 0, 0);
   level.spawnmaxs = (0, 0, 0);
   maps\mp\gametypes\_spawnlogic::addspawnpoints("allies", "mp_dm_spawn");
@@ -95,7 +93,7 @@ onnormaldeath(var_0, var_1, var_2) {
   var_3 = 0;
 
   foreach(var_5 in level.players) {
-    if(isdefined(var_5.score) && var_5.score > var_3)
+    if(isDefined(var_5.score) && var_5.score > var_3)
       var_3 = var_5.score;
   }
 

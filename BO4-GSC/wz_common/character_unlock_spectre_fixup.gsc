@@ -5,15 +5,14 @@
 
 #include scripts\core_common\system_shared;
 #include scripts\wz_common\character_unlock_fixup;
-
 #namespace character_unlock_spectre_fixup;
 
 autoexec __init__system__() {
-  system::register(#"character_unlock_spectre_fixup", &__init__, undefined, #"character_unlock_fixup");
+  system::register(#"character_unlock_spectre_fixup", &__init__, undefined, # "character_unlock_fixup");
 }
 
 __init__() {
-  character_unlock_fixup::register_character_unlock(#"spectre_unlock", #"hash_1ee2659e8dff07d8", #"cu34_item", &function_d95e620c, #"hash_27023afb3f91aba5");
+  character_unlock_fixup::register_character_unlock(#"spectre_unlock", # "hash_1ee2659e8dff07d8", # "cu34_item", &function_d95e620c, # "hash_27023afb3f91aba5");
 }
 
 function_d95e620c() {

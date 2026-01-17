@@ -19,7 +19,7 @@ init() {
 }
 
 ClearIRTarget() {
-  if(!isdefined(self.stinger))
+  if(!isDefined(self.stinger))
     self.stinger = spawnStruct();
   self.stinger.stingerLockStartTime = 0;
   self.stinger.stingerLockStarted = false;
@@ -43,13 +43,13 @@ ClearIRTarget() {
 StingerFiredNotify() {
   assert(self.classname == "player");
 
-  while (true) {
+  while(true) {
     self waittill("weapon_fired");
 
     weap = self getCurrentWeapon();
-    if(weap != "stinger")
+    if(weap != "stinger") {
       continue;
-
+    }
     self notify("stinger_fired");
   }
 }
@@ -58,13 +58,13 @@ StingerToggleLoop() {
   assert(self.classname == "player");
   self endon("death");
 
-  for (;;) {
-    while (!self PlayerStingerAds())
+  for(;;) {
+    while(!self PlayerStingerAds())
       wait 0.05;
 
     self thread StingerIRTLoop();
 
-    while (self PlayerStingerAds())
+    while(self PlayerStingerAds())
       wait 0.05;
     self notify("stinger_IRT_off");
     self ClearIRTarget();
@@ -78,7 +78,7 @@ StingerIRTLoop() {
 
   LOCK_LENGTH = 1150;
 
-  for (;;) {
+  for(;;) {
     wait 0.05;
 
     //-------------------------
@@ -108,10 +108,10 @@ StingerIRTLoop() {
       }
 
       timePassed = getTime() - self.stinger.stingerLockStartTime;
-      if(timePassed < LOCK_LENGTH)
+      if(timePassed < LOCK_LENGTH) {
         continue;
-
-      assert(isdefined(self.stinger.stingerTarget));
+      }
+      assert(isDefined(self.stinger.stingerTarget));
       self notify("stop_lockon_sound");
       self.stinger.stingerLockFinalized = true;
       self WeaponLockFinalize(self.stinger.stingerTarget);
@@ -121,9 +121,9 @@ StingerIRTLoop() {
     }
 
     bestTarget = self GetBestStingerTarget();
-    if(!isDefined(bestTarget))
+    if(!isDefined(bestTarget)) {
       continue;
-
+    }
     self.stinger.stingerTarget = bestTarget;
     self.stinger.stingerLockStartTime = getTime();
     self.stinger.stingerLockStarted = true;
@@ -136,7 +136,7 @@ GetBestStingerTarget() {
   targetsAll = target_getArray();
   targetsValid = [];
 
-  for (idx = 0; idx < targetsAll.size; idx++) {
+  for(idx = 0; idx < targetsAll.size; idx++) {
     if(self InsideStingerReticleNoLock(targetsAll[idx]))
       targetsValid[targetsValid.size] = targetsAll[idx];
   }
@@ -212,7 +212,7 @@ LoopLocalSeekSound(alias, interval) {
 
   self endon("stop_lockon_sound");
 
-  for (;;) {
+  for(;;) {
     self playLocalSound(alias);
     self PlayRumbleOnEntity("stinger_lock_rumble");
 
@@ -225,11 +225,11 @@ LoopLocalLockSound(alias, interval) {
 
   self endon("stop_locked_sound");
 
-  if(isdefined(self.stinger.stingerlocksound))
+  if(isDefined(self.stinger.stingerlocksound)) {
     return;
-
+  }
   self.stinger.stingerlocksound = true;
-  for (;;) {
+  for(;;) {
     self playLocalSound(alias);
     self PlayRumbleOnEntity("stinger_lock_rumble");
     wait interval / 3;

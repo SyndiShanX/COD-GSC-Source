@@ -29,7 +29,7 @@ maze_effects_thread(localclientnum, fieldname) {
 
   if(!isDefined(struct.loopfx_ids)) {
     struct.loopfx_ids = [];
-    struct.angles_to_foward = anglestoforward(struct.angles);
+    struct.angles_to_foward = anglesToForward(struct.angles);
     struct.angles_to_up = anglestoup(struct.angles);
   }
 }

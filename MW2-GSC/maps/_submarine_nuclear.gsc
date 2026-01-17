@@ -18,7 +18,6 @@ main(model, type) {
 
 init_local() {}
 
-
 /*QUAKED script_vehicle_submarine_nuclear (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
 put this in your GSC:

@@ -23,7 +23,6 @@
 #include scripts\mp_common\player\player_damage;
 #include scripts\wz_common\wz_ai_utils;
 #include scripts\wz_common\wz_ai_zombie;
-
 #namespace wz_ai_zombie_dog;
 
 autoexec __init__system__() {
@@ -37,15 +36,14 @@ __init__() {
   spawner::add_archetype_spawn_function(#"zombie_dog", &function_b9d56970);
 }
 
-private function_cef412a7(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, damagefromunderneath, modelindex, partname) {
-
+function_cef412a7(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, damagefromunderneath, modelindex, partname) {
   if(isDefined(level.var_85a39c96) && level.var_85a39c96) {
     idamage = self.health + 1;
   }
 
-    if(isplayer(eattacker) && eattacker infection::is_infected()) {
-      return 0;
-    }
+  if(isplayer(eattacker) && eattacker infection::is_infected()) {
+    return 0;
+  }
 
   if(isDefined(eattacker) && !util::function_fbce7263(self.team, eattacker.team)) {
     return 0;
@@ -106,10 +104,10 @@ function_b9d56970() {
 
 function_8e13b81e() {
   self.var_2cee3556 = [];
-  self.var_2cee3556[#"hellhound_base_itemlist_all"] = 1;
+  self.var_2cee3556[# "hellhound_base_itemlist_all"] = 1;
 }
 
-private function_8f5f431c(entity) {}
+function_8f5f431c(entity) {}
 
 registerbehaviorscriptfunctions() {
   spawner::add_archetype_spawn_function(#"zombie_dog", &archetypezombiedogblackboardinit);
@@ -142,12 +140,12 @@ archetypezombiedogblackboardinit() {
   self.___archetypeonanimscriptedcallback = &archetypezombiedogonanimscriptedcallback;
 }
 
-private archetypezombiedogonanimscriptedcallback(entity) {
+archetypezombiedogonanimscriptedcallback(entity) {
   entity.__blackboard = undefined;
   entity archetypezombiedogblackboardinit();
 }
 
-private zombiedogintro() {
+zombiedogintro() {
   self endon(#"death");
   self ghost();
   self pathmode("dont move", 1);
@@ -180,7 +178,7 @@ private zombiedogintro() {
   self playLoopSound(#"zmb_hellhound_loop_fire");
 }
 
-private on_dog_killed(params) {
+on_dog_killed(params) {
   if(self ishidden()) {
     return;
   }
@@ -192,23 +190,22 @@ private on_dog_killed(params) {
   playsoundatposition(#"zmb_hellhound_explode", self.origin);
 }
 
-private function_69c3e2ac() {
+function_69c3e2ac() {
   self.hasseenfavoriteenemy = isDefined(self.enemy_override) || isDefined(self.favoriteenemy);
 }
 
-private function_30a35f51() {
+function_30a35f51() {
   return true;
 }
 
 bb_getshouldrunstatus() {
-
   if(isDefined(self.ispuppet) && self.ispuppet) {
     return "<dev string:x38>";
   }
 
-    if(isDefined(self.hasseenfavoriteenemy) && self.hasseenfavoriteenemy || ai::hasaiattribute(self, "sprint") && ai::getaiattribute(self, "sprint") || getdvarint(#"survival_prototype", 0) && isDefined(self.current_state) && self.current_state.name === #"chase") {
-      return "run";
-    }
+  if(isDefined(self.hasseenfavoriteenemy) && self.hasseenfavoriteenemy || ai::hasaiattribute(self, "sprint") && ai::getaiattribute(self, "sprint") || getdvarint(#"survival_prototype", 0) && isDefined(self.current_state) && self.current_state.name === # "chase") {
+    return "run";
+  }
 
   return "walk";
 }
@@ -304,7 +301,7 @@ function_a5103696(behaviortreeentity) {
   behaviortreeentity thread function_1980a07a(behaviortreeentity);
 }
 
-private function_1980a07a(behaviortreeentity) {
+function_1980a07a(behaviortreeentity) {
   behaviortreeentity endon(#"death");
   behaviortreeentity zombiedogintro();
   behaviortreeentity pathmode("move allowed");
@@ -312,15 +309,15 @@ private function_1980a07a(behaviortreeentity) {
   behaviortreeentity notify(#"not_underground");
 }
 
-private function_90dbd41(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
+function_90dbd41(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
   entity clientfield::increment("dog_spawn_fx");
   entity ghost();
   entity notsolid();
 }
 
-private function_2fa3612a(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {}
+function_2fa3612a(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {}
 
-private function_1f51eea3(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
+function_1f51eea3(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
   entity dontinterpolate();
   entity forceteleport(entity.traverseendnode.origin, entity.traverseendnode.angles, 0);
   entity clientfield::increment("dog_spawn_fx");

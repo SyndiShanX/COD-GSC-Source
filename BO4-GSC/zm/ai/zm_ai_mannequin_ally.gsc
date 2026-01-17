@@ -11,7 +11,6 @@
 #include scripts\zm_common\zm_laststand;
 #include scripts\zm_common\zm_powerups;
 #include scripts\zm_common\zm_spawner;
-
 #namespace namespace_ca8676a3;
 
 autoexec __init__system__() {
@@ -26,7 +25,7 @@ __init__() {
 
 __main__() {}
 
-private function_10c92445() {
+function_10c92445() {
   self.ignore_nuke = 1;
   self.ignore_all_poi = 1;
   self.instakill_func = &zm_powerups::function_16c2586a;
@@ -38,7 +37,7 @@ private function_10c92445() {
   }
 }
 
-private function_188e5077(angles) {
+function_188e5077(angles) {
   self thread animation::play("ai_t8_zm_mannequin_ally_stn_exposed_revive", self, angles, 1);
 }
 
@@ -69,13 +68,13 @@ function_f1be5640(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoi
 
   if(isDefined(self.zm_ai_category)) {
     switch (self.zm_ai_category) {
-      case #"heavy":
+      case # "heavy":
         n_base_damage *= 0.2;
         break;
-      case #"miniboss":
+      case # "miniboss":
         n_base_damage *= 0.1;
         break;
-      case #"boss":
+      case # "boss":
         n_base_damage *= 0.05;
         break;
       default:
@@ -86,7 +85,7 @@ function_f1be5640(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoi
   return n_base_damage;
 }
 
-private function_80bc397d() {
+function_80bc397d() {
   var_8f538918 = getaiarchetypearray(#"zod_companion");
 
   if(var_8f538918.size == 0 && (level.players.size == 1 || isDefined(self.var_20f86af4) && self.var_20f86af4)) {

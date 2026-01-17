@@ -21,7 +21,7 @@ teleporter_init() {
   flag_init("teleporter_pad_link_2");
   flag_init("teleporter_pad_link_3");
   wait_for_all_players();
-  for (i = 0; i < 3; i++) {
+  for(i = 0; i < 3; i++) {
     trig = GetEnt("trigger_teleport_pad_" + i, "targetname");
     if(isDefined(trig)) {
       level.teleporter_pad_trig[i] = trig;
@@ -56,35 +56,35 @@ init_pack_door() {
   wait(1.0);
   flag_wait("all_players_connected");
   door movez(50, 1.5, 0);
-  door playsound("packa_door_1");
+  door playSound("packa_door_1");
   flag_wait("teleporter_pad_link_1");
   door movez(-35, 1.5, 1);
-  door playsound("packa_door_2");
+  door playSound("packa_door_2");
   door thread packa_door_reminder();
   wait(2);
   flag_wait("teleporter_pad_link_2");
   door movez(-25, 1.5, 1);
-  door playsound("packa_door_2");
+  door playSound("packa_door_2");
   wait(2);
   flag_wait("teleporter_pad_link_3");
   door movez(-60, 1.5, 1);
-  door playsound("packa_door_2");
-  clip = getentarray("pack_door_clip", "targetname");
-  for (i = 0; i < clip.size; i++) {
+  door playSound("packa_door_2");
+  clip = getEntArray("pack_door_clip", "targetname");
+  for(i = 0; i < clip.size; i++) {
     clip[i] connectpaths();
     clip[i] delete();
   }
 }
 
 pad_manager() {
-  for (i = 0; i < level.teleporter_pad_trig.size; i++) {
+  for(i = 0; i < level.teleporter_pad_trig.size; i++) {
     level.teleporter_pad_trig[i] sethintstring(&"ZOMBIE_TELEPORT_COOLDOWN");
     level.teleporter_pad_trig[i] teleport_trigger_invisible(false);
   }
   level.is_cooldown = true;
   wait(level.teleport_cooldown);
   level.is_cooldown = false;
-  for (i = 0; i < level.teleporter_pad_trig.size; i++) {
+  for(i = 0; i < level.teleporter_pad_trig.size; i++) {
     if(level.teleporter_pad_trig[i].teleport_active) {
       level.teleporter_pad_trig[i] sethintstring(&"ZOMBIE_TELEPORT_TO_CORE");
     } else {
@@ -94,7 +94,7 @@ pad_manager() {
 }
 
 start_black_room_fx() {
-  for (i = 901; i <= 904; i++) {
+  for(i = 901; i <= 904; i++) {
     wait(1);
     exploder(i);
   }
@@ -114,19 +114,19 @@ teleport_pad_think(index) {
   trigger sethintstring(&"ZOMBIE_POWER_UP_TPAD");
   trigger.teleport_active = false;
   if(isDefined(trigger)) {
-    while (!active) {
+    while(!active) {
       trigger waittill("trigger");
       if(level.active_links < 3) {
         trigger_core = getent("trigger_teleport_core", "targetname");
         trigger_core teleport_trigger_invisible(false);
       }
-      for (i = 0; i < level.teleporter_pad_trig.size; i++) {
+      for(i = 0; i < level.teleporter_pad_trig.size; i++) {
         level.teleporter_pad_trig[i] teleport_trigger_invisible(true);
       }
       level.teleport[index] = "timer_on";
       trigger thread teleport_pad_countdown(index, 30);
       teleporter_vo("countdown", trigger);
-      while (level.teleport[index] == "timer_on") {
+      while(level.teleport[index] == "timer_on") {
         wait(.05);
       }
       if(level.teleport[index] == "active") {
@@ -136,7 +136,7 @@ teleport_pad_think(index) {
         teleporter_wire_wait(index);
         trigger thread player_teleporting(index);
       } else {
-        for (i = 0; i < level.teleporter_pad_trig.size; i++) {
+        for(i = 0; i < level.teleporter_pad_trig.size; i++) {
           level.teleporter_pad_trig[i] teleport_trigger_invisible(false);
         }
       }
@@ -155,7 +155,7 @@ teleport_pad_countdown(index, time) {
   ClientNotify("pac" + index);
   ClientNotify("TRf");
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i] thread maps\_zombiemode_timer::start_timer(time + 1, "stop_countdown");
   }
   wait(time + 1);
@@ -171,10 +171,10 @@ teleport_pad_active_think(index) {
   self setcursorhint("HINT_NOICON");
   self.teleport_active = true;
   user = undefined;
-  while (1) {
+  while(1) {
     self waittill("trigger", user);
     if(is_player_valid(user) && user.score >= level.teleport_cost && !level.is_cooldown) {
-      for (i = 0; i < level.teleporter_pad_trig.size; i++) {
+      for(i = 0; i < level.teleporter_pad_trig.size; i++) {
         level.teleporter_pad_trig[i] teleport_trigger_invisible(true);
       }
       user maps\_zombiemode_score::minus_to_player_score(level.teleport_cost);
@@ -205,7 +205,7 @@ player_teleporting(index) {
     ss thread maps\_zombiemode_powerups::special_powerup_drop(ss.origin);
   }
   if(time_since_last_teleport < 60000 && level.active_links == 3 && level.round_number > 20) {
-    dog_spawners = GetEntArray("special_dog_spawner", "targetname");
+    dog_spawners = getEntArray("special_dog_spawner", "targetname");
     maps\_zombiemode_dogs::special_dog_spawn(undefined, 4);
     thread play_sound_2d("sam_nospawn");
   }
@@ -242,7 +242,7 @@ teleport_pad_end_exploder(index) {
 
 teleport_trigger_invisible(enable) {
   players = getplayers();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(isDefined(players[i])) {
       self SetInvisibleToPlayer(players[i], enable);
     }
@@ -262,9 +262,9 @@ player_is_near_pad(player) {
 
 teleport_pad_player_fx(delay) {
   self endon("fx_done");
-  while (1) {
+  while(1) {
     players = getplayers();
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       if(isDefined(players[i])) {
         if(self player_is_near_pad(players[i])) {
           players[i] SetTransported(delay);
@@ -288,7 +288,7 @@ teleport_players() {
   prone_offset = (0, 0, 49);
   crouch_offset = (0, 0, 20);
   stand_offset = (0, 0, 0);
-  for (i = 0; i < 4; i++) {
+  for(i = 0; i < 4; i++) {
     core_pos[i] = getent("origin_teleport_player_" + i, "targetname");
     occupied[i] = false;
     image_room[i] = getent("teleport_room_" + i, "targetname");
@@ -324,9 +324,9 @@ teleport_players() {
   wait(2);
   core = GetEnt("trigger_teleport_core", "targetname");
   core thread teleport_nuke(undefined, 300);
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(isDefined(players[i])) {
-      for (j = 0; j < 4; j++) {
+      for(j = 0; j < 4; j++) {
         if(!occupied[j]) {
           dist = Distance2D(core_pos[j].origin, players[i].origin);
           if(dist < player_radius) {
@@ -338,7 +338,7 @@ teleport_players() {
     }
   }
   wait_network_frame();
-  for (i = 0; i < players_touching.size; i++) {
+  for(i = 0; i < players_touching.size; i++) {
     player_idx = players_touching[i];
     player = players[player_idx];
     if(!isDefined(player)) {
@@ -346,7 +346,7 @@ teleport_players() {
     }
     slot = i;
     start = 0;
-    while (occupied[slot] && start < 4) {
+    while(occupied[slot] && start < 4) {
       start++;
       slot++;
       if(slot >= 4) {
@@ -377,7 +377,7 @@ teleport_players() {
 
 teleport_core_hint_update() {
   self setcursorhint("HINT_NOICON");
-  while (1) {
+  while(1) {
     if(!flag("electricity_on")) {
       self sethintstring(&"ZOMBIE_FLAMES_UNAVAILABLE");
     } else if(teleport_pads_are_active()) {
@@ -396,10 +396,10 @@ teleport_core_think() {
   if(isDefined(trigger)) {
     trigger thread teleport_core_hint_update();
     flag_wait("electricity_on");
-    while (1) {
+    while(1) {
       if(teleport_pads_are_active()) {
         trigger waittill("trigger");
-        for (i = 0; i < level.teleport.size; i++) {
+        for(i = 0; i < level.teleport.size; i++) {
           if(isDefined(level.teleport[i])) {
             if(level.teleport[i] == "timer_on") {
               level.teleport[i] = "active";
@@ -433,14 +433,14 @@ teleport_core_think() {
 stop_countdown() {
   self notify("stop_countdown");
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     players[i] notify("stop_countdown");
   }
 }
 
 teleport_pads_are_active() {
   if(isDefined(level.teleport)) {
-    for (i = 0; i < level.teleport.size; i++) {
+    for(i = 0; i < level.teleport.size; i++) {
       if(isDefined(level.teleport[i])) {
         if(level.teleport[i] == "timer_on") {
           return true;
@@ -467,10 +467,10 @@ teleport_core_start_exploder(index) {
 
 teleport_2d_audio() {
   self endon("fx_done");
-  while (1) {
+  while(1) {
     players = getplayers();
     wait(1.7);
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       if(isDefined(players[i])) {
         if(self player_is_near_pad(players[i])) {
           setClientSysState("levelNotify", "t2d", players[i]);
@@ -483,7 +483,7 @@ teleport_2d_audio() {
 teleport_nuke(max_zombies, range) {
   zombies = getaispeciesarray("axis");
   zombies = get_array_of_closest(self.origin, zombies, undefined, max_zombies, range);
-  for (i = 0; i < zombies.size; i++) {
+  for(i = 0; i < zombies.size; i++) {
     wait(randomfloatrange(0.2, 0.3));
     if(!isDefined(zombies[i])) {
       continue;
@@ -504,7 +504,7 @@ teleporter_vo(tele_vo_type, location) {
     self thread teleporter_vo_play(tele_vo_type, 2);
   } else {
     players = get_players();
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       if(distance(players[i].origin, location.origin) < 64) {
         switch (tele_vo_type) {
           case "linkall":
@@ -531,13 +531,13 @@ teleporter_vo_play(vox_type, pre_wait) {
 
 play_tele_help_vox() {
   level endon("tele_help_end");
-  while (1) {
+  while(1) {
     self waittill("trigger", who);
     if(flag("electricity_on")) {
       who thread teleporter_vo_play("vox_tele_help");
       level notify("tele_help_end");
     }
-    while (isDefined(who) && (who) IsTouching(self)) {
+    while(isDefined(who) && (who) IsTouching(self)) {
       wait(0.1);
     }
   }
@@ -556,7 +556,7 @@ teleporter_wire_wait(index) {
   if(!isDefined(targ)) {
     return;
   }
-  while (isDefined(targ)) {
+  while(isDefined(targ)) {
     if(isDefined(targ.target)) {
       target = getstruct(targ.target, "targetname");
       wait(0.1);
@@ -606,9 +606,9 @@ teleport_aftereffect_flare_vision(localClientNum) {
 }
 
 packa_door_reminder() {
-  while (!flag("teleporter_pad_link_3")) {
+  while(!flag("teleporter_pad_link_3")) {
     rand = randomintrange(4, 16);
-    self playsound("packa_door_hitch");
+    self playSound("packa_door_hitch");
     wait(rand);
   }
 }

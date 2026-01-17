@@ -254,9 +254,7 @@ init_director_zombie_anims() {
   level._zombie_melee["director_zombie"][2] = % ai_zombie_boss_attack_swing_overhead_coast;
   level._zombie_melee["director_zombie"][3] = % ai_zombie_boss_attack_swing_swipe_coast;
   if(isDefined(level.director_zombie_anim_override)) {
-    [
-      [level.director_zombie_anim_override]
-    ]();
+    [[level.director_zombie_anim_override]]();
   }
   level._zombie_run_melee["director_zombie"][0] = % ai_zombie_boss_attack_running_coast;
   level._zombie_run_melee["director_zombie"][1] = % ai_zombie_boss_attack_sprinting_coast;
@@ -384,9 +382,7 @@ director_zombie_pick_best_spawner() {
   best_spawner = undefined;
   best_score = -1;
   for(i = 0; i < level.director_zombie_spawners.size; i++) {
-    score = [
-      [level.director_zombie_spawn_heuristic]
-    ](level.director_zombie_spawners[i]);
+    score = [[level.director_zombie_spawn_heuristic]](level.director_zombie_spawners[i]);
     if(score > best_score) {
       best_spawner = level.director_zombie_spawners[i];
       best_score = score;
@@ -544,14 +540,12 @@ director_watch_damage() {
     self animcustom(::director_custom_stumble);
     self waittill_notify_or_timeout("stumble_done", 7.2);
   }
-  if(isDefined(level.director_should_drop_special_powerup) && [
-      [level.director_should_drop_special_powerup]
-    ]()) {
+  if(isDefined(level.director_should_drop_special_powerup) && [[level.director_should_drop_special_powerup]]()) {
     level thread maps\_zombiemode_powerups::specific_powerup_drop("tesla", self.origin);
   } else {
     level thread maps\_zombiemode_powerups::specific_powerup_drop("minigun", self.origin);
   }
-  forward = VectorNormalize(AnglesToForward(self.angles));
+  forward = VectorNormalize(anglesToForward(self.angles));
   end_pos = self.origin - vector_scale(forward, 32);
   level thread maps\_zombiemode_powerups::specific_powerup_drop("free_perk", end_pos);
   level notify("quiet_on_the_set_achieved");
@@ -571,7 +565,7 @@ director_custom_stumble() {
 director_stumble_watcher(animname) {
   self endon("death");
   self waittillmatch(animname, "weapon_fx");
-  playfxontag(level._effect["director_death_weapon"], self, "tag_light");
+  playFXOnTag(level._effect["director_death_weapon"], self, "tag_light");
 }
 
 director_scream_in_water() {
@@ -920,7 +914,7 @@ director_zombie_check_for_activation() {
   if(isDefined(level._audio_director_vox_play)) {
     self thread[[level._audio_director_vox_play]]("vox_director_angered", .25, true);
   }
-  self playsound("zmb_director_light_start");
+  self playSound("zmb_director_light_start");
   aggro_anim = % ai_zombie_boss_enrage_start_coast;
   if(randomInt(100) < 50) {
     aggro_anim = % ai_zombie_boss_enrage_start_a_coast;
@@ -1054,7 +1048,7 @@ director_zombie_can_buff(zombie) {
   if(dist > range) {
     return false;
   }
-  forward = VectorNormalize(AnglesToForward(self.angles));
+  forward = VectorNormalize(anglesToForward(self.angles));
   zombie_dir = VectorNormalize(zombie.origin - self.origin);
   dot = VectorDot(forward, zombie_dir);
   if(dot < 0.5) {
@@ -1162,7 +1156,7 @@ zombie_speed_debuff() {
 groundhit_fx_watcher(animname) {
   self endon("death");
   self waittillmatch(animname, "wrench_hit");
-  playfxontag(level._effect["director_groundhit"], self, "tag_origin");
+  playFXOnTag(level._effect["director_groundhit"], self, "tag_origin");
 }
 
 director_zombie_electric_buff(zombies) {
@@ -1209,7 +1203,7 @@ director_sprint2walk() {
 director_sprint2walk_watcher(animname) {
   self endon("death");
   self waittillmatch(animname, "swap_fx");
-  Playfx(level._effect["director_water_burst_sm"], self.origin);
+  playFX(level._effect["director_water_burst_sm"], self.origin);
   self setModel("c_zom_george_romero_light_fb");
   self.director_zombified = undefined;
 }
@@ -1251,7 +1245,7 @@ director_zombie_ground_hit_think() {
     if(!self.ground_hit && GetTime() >= self.nextGroundHit) {
       players = GetPlayers();
       closeEnough = false;
-      origin = self GetEye();
+      origin = self getEye();
       for(i = 0; i < players.size; i++) {
         if(players[i] maps\_laststand::player_is_in_laststand()) {
           continue;
@@ -1263,7 +1257,7 @@ director_zombie_ground_hit_think() {
         if(stance == "prone") {
           continue;
         }
-        test_origin = players[i] GetEye();
+        test_origin = players[i] getEye();
         d = distanceSquared(origin, test_origin);
         if(d > level.director_zombie_groundhit_radius * level.director_zombie_groundhit_radius) {
           continue;
@@ -1295,7 +1289,7 @@ scream_a_watcher(animname) {
 director_zombie_sprint_watcher(animname) {
   self endon("death");
   self waittillmatch(animname, "scream_a");
-  origin = self GetEye();
+  origin = self getEye();
   zombies = get_array_of_closest(origin, GetAiSpeciesArray("axis", "all"), undefined, undefined, level.director_speed_buff_range);
   if(isDefined(zombies)) {
     zombies_in_range = [];
@@ -1319,7 +1313,7 @@ director_zombie_sprint_watcher(animname) {
       if(zombies[i] == self) {
         continue;
       }
-      forward = VectorNormalize(AnglesToForward(self.angles));
+      forward = VectorNormalize(anglesToForward(self.angles));
       zombie_dir = VectorNormalize(zombies[i].origin - self.origin);
       dot = VectorDot(forward, zombie_dir);
       if(dot < 0.5) {
@@ -1336,8 +1330,8 @@ director_zombie_sprint_watcher(animname) {
 groundhit_watcher(animname) {
   self endon("death");
   self waittillmatch(animname, "wrench_hit");
-  playfxontag(level._effect["director_groundhit"], self, "tag_origin");
-  origin = self GetEye();
+  playFXOnTag(level._effect["director_groundhit"], self, "tag_origin");
+  origin = self getEye();
   zombies = get_array_of_closest(origin, GetAiSpeciesArray("axis", "all"), undefined, undefined, level.director_electric_buff_range);
   electrified = 0;
   if(isDefined(zombies)) {
@@ -1348,7 +1342,7 @@ groundhit_watcher(animname) {
       if(is_true(zombies[i].electrified)) {
         continue;
       }
-      test_origin = zombies[i] GetEye();
+      test_origin = zombies[i] getEye();
       if(!BulletTracePassed(origin, test_origin, false, undefined)) {
         continue;
       }
@@ -1363,7 +1357,7 @@ groundhit_watcher(animname) {
   players = get_players();
   affected_players = [];
   for(i = 0; i < players.size; i++) {
-    test_origin = players[i] GetEye();
+    test_origin = players[i] getEye();
     d = distanceSquared(origin, test_origin);
     if(d > level.director_electrify_range_sq) {
       continue;
@@ -1467,7 +1461,7 @@ director_full_damage(inflictor, attacker, damage, flags, meansofdeath, weapon, v
 }
 
 director_zombie_default_enter_level() {
-  Playfx(level._effect["director_spawn"], self.origin);
+  playFX(level._effect["director_spawn"], self.origin);
   playsoundatposition("zmb_bolt", self.origin);
   PlayRumbleOnPosition("explosion_generic", self.origin);
 }
@@ -1497,7 +1491,7 @@ player_electrify() {
     self.electrified = true;
     self setelectrified(SHOCK_TIME);
     self ShellShock("electrocution", 0.5, true);
-    self PlaySound("zmb_director_damage_zort");
+    self playSound("zmb_director_damage_zort");
     self setclientflag(level._CF_PLAYER_ELECTRIFIED);
     wait(SHOCK_TIME);
     self clearclientflag(level._CF_PLAYER_ELECTRIFIED);

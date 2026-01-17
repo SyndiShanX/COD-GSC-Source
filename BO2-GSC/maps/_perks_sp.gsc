@@ -9,7 +9,7 @@
 
 perk_init(ref) {
   foreach(player in getplayers()) {
-    perk = spawnstruct();
+    perk = spawnStruct();
     perk.ref = ref;
     player.perk_refs[player.perk_refs.size] = perk;
   }
@@ -60,7 +60,7 @@ perks_init(usehud) {
     player.perk_refs = [];
 
     for(i = 0; i < level.player_perk_slots; i++) {
-      player.perk_slots[i] = spawnstruct();
+      player.perk_slots[i] = spawnStruct();
       player.perk_slots[i].ref = "";
       player.perk_slots[i].expire = -1;
     }
@@ -208,11 +208,9 @@ take_all_perks() {
     take_perk_by_slot(i);
 }
 
-show_perks() {
-}
+show_perks() {}
 
-hide_perks() {
-}
+hide_perks() {}
 
 update_on_give_perk() {
   self endon("death");
@@ -255,8 +253,6 @@ perk_hud() {
     self waittill("perk_update", ref);
     slot = self find_slot_by_ref(ref);
 
-    if(isDefined(slot)) {
-    } else {
-    }
+    if(isDefined(slot)) {} else {}
   }
 }

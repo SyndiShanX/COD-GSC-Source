@@ -7,7 +7,7 @@
 #include maps\mp\gametypes\_hud_util;
 
 exploder_sound() {
-  if(isdefined(self.script_delay))
+  if(isDefined(self.script_delay))
     wait self.script_delay;
 
   self playSound(level.scr_sound[self.script_sound]);
@@ -47,8 +47,8 @@ loadModel(info)
 }
 */
 
-/* 
-============= 
+/*
+=============
 ///ScriptDocBegin
 "Name: delayThread( <delay>, <function>, <arg1>, <arg2>, <arg3>, <arg4> )"
 "Summary: Delaythread is cool! It saves you from having to write extra script for once off commands. Note you don’t have to thread it off. Delaythread is that smart!"
@@ -63,7 +63,7 @@ loadModel(info)
 "Example: delayThread( 3, ::flag_set, "player_can_rappel" );
 "SPMP: both"
 ///ScriptDocEnd
-============= 
+=============
 */
 delayThread(timer, func, param1, param2, param3, param4, param5) {
   // to thread it off
@@ -72,29 +72,29 @@ delayThread(timer, func, param1, param2, param3, param4, param5) {
 
 delayThread_proc(func, timer, param1, param2, param3, param4, param5) {
   wait(timer);
-  if(!IsDefined(param1)) {
-    assertex(!isdefined(param2), "Delaythread does not support vars after undefined.");
-    assertex(!isdefined(param3), "Delaythread does not support vars after undefined.");
-    assertex(!isdefined(param4), "Delaythread does not support vars after undefined.");
-    assertex(!isdefined(param5), "Delaythread does not support vars after undefined.");
+  if(!isDefined(param1)) {
+    assertex(!isDefined(param2), "Delaythread does not support vars after undefined.");
+    assertex(!isDefined(param3), "Delaythread does not support vars after undefined.");
+    assertex(!isDefined(param4), "Delaythread does not support vars after undefined.");
+    assertex(!isDefined(param5), "Delaythread does not support vars after undefined.");
     thread[[func]]();
   } else
-  if(!IsDefined(param2)) {
-    assertex(!isdefined(param3), "Delaythread does not support vars after undefined.");
-    assertex(!isdefined(param4), "Delaythread does not support vars after undefined.");
-    assertex(!isdefined(param5), "Delaythread does not support vars after undefined.");
+  if(!isDefined(param2)) {
+    assertex(!isDefined(param3), "Delaythread does not support vars after undefined.");
+    assertex(!isDefined(param4), "Delaythread does not support vars after undefined.");
+    assertex(!isDefined(param5), "Delaythread does not support vars after undefined.");
     thread[[func]](param1);
   } else
-  if(!IsDefined(param3)) {
-    assertex(!isdefined(param4), "Delaythread does not support vars after undefined.");
-    assertex(!isdefined(param5), "Delaythread does not support vars after undefined.");
+  if(!isDefined(param3)) {
+    assertex(!isDefined(param4), "Delaythread does not support vars after undefined.");
+    assertex(!isDefined(param5), "Delaythread does not support vars after undefined.");
     thread[[func]](param1, param2);
   } else
-  if(!IsDefined(param4)) {
-    assertex(!isdefined(param5), "Delaythread does not support vars after undefined.");
+  if(!isDefined(param4)) {
+    assertex(!isDefined(param5), "Delaythread does not support vars after undefined.");
     thread[[func]](param1, param2, param3);
   } else
-  if(!IsDefined(param5)) {
+  if(!isDefined(param5)) {
     thread[[func]](param1, param2, param3, param4);
   } else {
     thread[[func]](param1, param2, param3, param4, param5);
@@ -115,7 +115,7 @@ getPlant() {
   if(trace["fraction"] < 1) {
     //println("^6Using traceorigins[0], tracefraction is", trace["fraction"]);
 
-    temp = spawnstruct();
+    temp = spawnStruct();
     temp.origin = trace["position"];
     temp.angles = orientToNormal(trace["normal"]);
     return temp;
@@ -125,7 +125,7 @@ getPlant() {
   if(trace["fraction"] < 1) {
     //println("^6Using traceorigins[1], tracefraction is", trace["fraction"]);
 
-    temp = spawnstruct();
+    temp = spawnStruct();
     temp.origin = trace["position"];
     temp.angles = orientToNormal(trace["normal"]);
     return temp;
@@ -138,16 +138,16 @@ getPlant() {
 
   besttracefraction = undefined;
   besttraceposition = undefined;
-  for (i = 0; i < traceorigins.size; i++) {
+  for(i = 0; i < traceorigins.size; i++) {
     trace = bulletTrace(traceorigins[i], (traceorigins[i] + (0, 0, -1000)), false, undefined);
 
     //ent[i] = spawn("script_model",(traceorigins[i]+(0, 0, -2)));
     //ent[i].angles = (0, 180, 180);
-    //ent[i] setmodel("105");
+    //ent[i] setModel("105");
 
     //println("^6trace ", i ," fraction is ", trace["fraction"]);
 
-    if(!isdefined(besttracefraction) || (trace["fraction"] < besttracefraction)) {
+    if(!isDefined(besttracefraction) || (trace["fraction"] < besttracefraction)) {
       besttracefraction = trace["fraction"];
       besttraceposition = trace["position"];
 
@@ -158,7 +158,7 @@ getPlant() {
   if(besttracefraction == 1)
     besttraceposition = self.origin;
 
-  temp = spawnstruct();
+  temp = spawnStruct();
   temp.origin = besttraceposition;
   temp.angles = orientToNormal(trace["normal"]);
   return temp;
@@ -187,42 +187,42 @@ orientToNormal(normal) {
 }
 
 deletePlacedEntity(entity) {
-  entities = getentarray(entity, "classname");
-  for (i = 0; i < entities.size; i++) {
+  entities = getEntArray(entity, "classname");
+  for(i = 0; i < entities.size; i++) {
     //println("DELETED: ", entities[i].classname);
     entities[i] delete();
   }
 }
 
 playSoundOnPlayers(sound, team, excludeList) {
-  assert(isdefined(level.players));
+  assert(isDefined(level.players));
 
   if(level.splitscreen) {
-    if(isdefined(level.players[0]))
+    if(isDefined(level.players[0]))
       level.players[0] playLocalSound(sound);
   } else {
     if(isDefined(team)) {
-      if(isdefined(excludeList)) {
-        for (i = 0; i < level.players.size; i++) {
+      if(isDefined(excludeList)) {
+        for(i = 0; i < level.players.size; i++) {
           player = level.players[i];
-          if(isdefined(player.pers["team"]) && (player.pers["team"] == team) && !isExcluded(player, excludeList))
+          if(isDefined(player.pers["team"]) && (player.pers["team"] == team) && !isExcluded(player, excludeList))
             player playLocalSound(sound);
         }
       } else {
-        for (i = 0; i < level.players.size; i++) {
+        for(i = 0; i < level.players.size; i++) {
           player = level.players[i];
-          if(isdefined(player.pers["team"]) && (player.pers["team"] == team))
+          if(isDefined(player.pers["team"]) && (player.pers["team"] == team))
             player playLocalSound(sound);
         }
       }
     } else {
-      if(isdefined(excludeList)) {
-        for (i = 0; i < level.players.size; i++) {
+      if(isDefined(excludeList)) {
+        for(i = 0; i < level.players.size; i++) {
           if(!isExcluded(level.players[i], excludeList))
             level.players[i] playLocalSound(sound);
         }
       } else {
-        for (i = 0; i < level.players.size; i++)
+        for(i = 0; i < level.players.size; i++)
           level.players[i] playLocalSound(sound);
       }
     }
@@ -230,10 +230,10 @@ playSoundOnPlayers(sound, team, excludeList) {
 }
 
 sortLowerMessages() {
-  for (i = 1; i < self.lowerMessages.size; i++) {
+  for(i = 1; i < self.lowerMessages.size; i++) {
     message = self.lowerMessages[i];
     priority = message.priority;
-    for (j = i - 1; j >= 0 && priority > self.lowerMessages[j].priority; j--)
+    for(j = i - 1; j >= 0 && priority > self.lowerMessages[j].priority; j--)
       self.lowerMessages[j + 1] = self.lowerMessages[j];
     self.lowerMessages[j + 1] = message;
   }
@@ -243,9 +243,9 @@ addLowerMessage(name, text, time, priority) {
   newMessage = undefined;
   foreach(message in self.lowerMessages) {
     if(message.name == name) {
-      if(message.text == text && message.priority == priority)
+      if(message.text == text && message.priority == priority) {
         return;
-
+      }
       newMessage = message;
       break;
     }
@@ -266,10 +266,10 @@ addLowerMessage(name, text, time, priority) {
 }
 
 removeLowerMessage(name) {
-  for (i = 0; i < self.lowerMessages.size; i++) {
-    if(self.lowerMessages[i].name != name)
+  for(i = 0; i < self.lowerMessages.size; i++) {
+    if(self.lowerMessages[i].name != name) {
       continue;
-
+    }
     message = self.lowerMessages[i];
     if(i < self.lowerMessages.size - 1)
       self.lowerMessages[i] = self.lowerMessages[self.lowerMessages.size - 1];
@@ -321,56 +321,56 @@ clearLowerMessage(name, fadetime) {
 }
 
 clearLowerMessages() {
-  for (i = 0; i < self.lowerMessages.size; i++)
+  for(i = 0; i < self.lowerMessages.size; i++)
     self.lowerMessages[i] = undefined;
 
-  if(!isDefined(self.lowerMessage))
+  if(!isDefined(self.lowerMessage)) {
     return;
-
+  }
   self updateLowerMessage();
 }
 
 printOnTeam(printString, team) {
   foreach(player in level.players) {
-    if(player.team != team)
+    if(player.team != team) {
       continue;
-
+    }
     player iPrintLn(printString);
   }
 }
 
 printBoldOnTeam(text, team) {
-  assert(isdefined(level.players));
-  for (i = 0; i < level.players.size; i++) {
+  assert(isDefined(level.players));
+  for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
-    if((isdefined(player.pers["team"])) && (player.pers["team"] == team))
+    if((isDefined(player.pers["team"])) && (player.pers["team"] == team))
       player iprintlnbold(text);
   }
 }
 
 printBoldOnTeamArg(text, team, arg) {
-  assert(isdefined(level.players));
-  for (i = 0; i < level.players.size; i++) {
+  assert(isDefined(level.players));
+  for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
-    if((isdefined(player.pers["team"])) && (player.pers["team"] == team))
+    if((isDefined(player.pers["team"])) && (player.pers["team"] == team))
       player iprintlnbold(text, arg);
   }
 }
 
 printOnTeamArg(text, team, arg) {
-  assert(isdefined(level.players));
-  for (i = 0; i < level.players.size; i++) {
+  assert(isDefined(level.players));
+  for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
-    if((isdefined(player.pers["team"])) && (player.pers["team"] == team))
+    if((isDefined(player.pers["team"])) && (player.pers["team"] == team))
       player iprintln(text, arg);
   }
 }
 
 printOnPlayers(text, team) {
   players = level.players;
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(isDefined(team)) {
-      if((isdefined(players[i].pers["team"])) && (players[i].pers["team"] == team))
+      if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == team))
         players[i] iprintln(text);
     } else {
       players[i] iprintln(text);
@@ -388,13 +388,13 @@ printAndSoundOnEveryone(team, otherteam, printFriendly, printEnemy, soundFriendl
   }
 
   if(level.splitscreen || !shouldDoSounds) {
-    for (i = 0; i < level.players.size; i++) {
+    for(i = 0; i < level.players.size; i++) {
       player = level.players[i];
       playerteam = player.pers["team"];
-      if(isdefined(playerteam)) {
-        if(playerteam == team && isdefined(printFriendly))
+      if(isDefined(playerteam)) {
+        if(playerteam == team && isDefined(printFriendly))
           player iprintln(printFriendly, printarg);
-        else if(playerteam == otherteam && isdefined(printEnemy))
+        else if(playerteam == otherteam && isDefined(printEnemy))
           player iprintln(printEnemy, printarg);
       }
     }
@@ -405,32 +405,32 @@ printAndSoundOnEveryone(team, otherteam, printFriendly, printEnemy, soundFriendl
   } else {
     assert(shouldDoSounds);
     if(shouldDoEnemySounds) {
-      for (i = 0; i < level.players.size; i++) {
+      for(i = 0; i < level.players.size; i++) {
         player = level.players[i];
         playerteam = player.pers["team"];
-        if(isdefined(playerteam)) {
+        if(isDefined(playerteam)) {
           if(playerteam == team) {
-            if(isdefined(printFriendly))
+            if(isDefined(printFriendly))
               player iprintln(printFriendly, printarg);
             player playLocalSound(soundFriendly);
           } else if(playerteam == otherteam) {
-            if(isdefined(printEnemy))
+            if(isDefined(printEnemy))
               player iprintln(printEnemy, printarg);
             player playLocalSound(soundEnemy);
           }
         }
       }
     } else {
-      for (i = 0; i < level.players.size; i++) {
+      for(i = 0; i < level.players.size; i++) {
         player = level.players[i];
         playerteam = player.pers["team"];
-        if(isdefined(playerteam)) {
+        if(isDefined(playerteam)) {
           if(playerteam == team) {
-            if(isdefined(printFriendly))
+            if(isDefined(printFriendly))
               player iprintln(printFriendly, printarg);
             player playLocalSound(soundFriendly);
           } else if(playerteam == otherteam) {
-            if(isdefined(printEnemy))
+            if(isDefined(printEnemy))
               player iprintln(printEnemy, printarg);
           }
         }
@@ -441,9 +441,9 @@ printAndSoundOnEveryone(team, otherteam, printFriendly, printEnemy, soundFriendl
 
 printAndSoundOnTeam(team, printString, soundAlias) {
   foreach(player in level.players) {
-    if(player.team != team)
+    if(player.team != team) {
       continue;
-
+    }
     player printAndSoundOnPlayer(printString, soundAlias);
   }
 }
@@ -454,9 +454,9 @@ printAndSoundOnPlayer(printString, soundAlias) {
 }
 
 _playLocalSound(soundAlias) {
-  if(level.splitscreen && self getEntityNumber() != 0)
+  if(level.splitscreen && self getEntityNumber() != 0) {
     return;
-
+  }
   self playLocalSound(soundAlias);
 }
 
@@ -501,7 +501,7 @@ dvarFloatValue(dVar, defVal, minVal, maxVal) {
 }
 
 play_sound_on_tag(alias, tag) {
-  if(isdefined(tag)) {
+  if(isDefined(tag)) {
     playsoundatpos(self getTagOrigin(tag), alias);
   } else {
     playsoundatpos(self.origin, alias);
@@ -557,7 +557,7 @@ initPlayerStat(ref, defaultvalue) {
     if(!isDefined(defaultvalue))
       defaultvalue = 0;
 
-    self.stats["stats_" + ref] = spawnstruct();
+    self.stats["stats_" + ref] = spawnStruct();
     self.stats["stats_" + ref].value = defaultvalue;
   }
 }
@@ -621,7 +621,7 @@ WaitTillSlowProcessAllowed(allowLoop) {
   // i'm trying to avoid using a loop because i don't want any extra variables
   if(level.lastSlowProcessFrame == gettime()) {
     if(isDefined(allowLoop) && allowLoop) {
-      while (level.lastSlowProcessFrame == getTime())
+      while(level.lastSlowProcessFrame == getTime())
         wait(0.05);
     } else {
       wait .05;
@@ -646,7 +646,7 @@ waitForTimeOrNotify(time, notifyname) {
 }
 
 isExcluded(entity, entityList) {
-  for (index = 0; index < entityList.size; index++) {
+  for(index = 0; index < entityList.size; index++) {
     if(entity == entityList[index])
       return true;
   }
@@ -654,14 +654,14 @@ isExcluded(entity, entityList) {
 }
 
 leaderDialog(dialog, team, group, excludeList) {
-  assert(isdefined(level.players));
+  assert(isDefined(level.players));
 
-  if(level.splitscreen)
+  if(level.splitscreen) {
     return;
-
-  if(dialog == "null")
+  }
+  if(dialog == "null") {
     return;
-
+  }
   if(!isDefined(team)) {
     leaderDialogBothTeams(dialog, "allies", dialog, "axis", group, excludeList);
     return;
@@ -674,13 +674,13 @@ leaderDialog(dialog, team, group, excludeList) {
   }
 
   if(isDefined(excludeList)) {
-    for (i = 0; i < level.players.size; i++) {
+    for(i = 0; i < level.players.size; i++) {
       player = level.players[i];
       if((isDefined(player.pers["team"]) && (player.pers["team"] == team)) && !isExcluded(player, excludeList))
         player leaderDialogOnPlayer(dialog, group);
     }
   } else {
-    for (i = 0; i < level.players.size; i++) {
+    for(i = 0; i < level.players.size; i++) {
       player = level.players[i];
       if(isDefined(player.pers["team"]) && (player.pers["team"] == team))
         player leaderDialogOnPlayer(dialog, group);
@@ -689,11 +689,11 @@ leaderDialog(dialog, team, group, excludeList) {
 }
 
 leaderDialogBothTeams(dialog1, team1, dialog2, team2, group, excludeList) {
-  assert(isdefined(level.players));
+  assert(isDefined(level.players));
 
-  if(level.splitscreen)
+  if(level.splitscreen) {
     return;
-
+  }
   if(level.splitscreen) {
     if(level.players.size)
       level.players[0] leaderDialogOnPlayer(dialog1, group);
@@ -701,29 +701,29 @@ leaderDialogBothTeams(dialog1, team1, dialog2, team2, group, excludeList) {
   }
 
   if(isDefined(excludeList)) {
-    for (i = 0; i < level.players.size; i++) {
+    for(i = 0; i < level.players.size; i++) {
       player = level.players[i];
       team = player.pers["team"];
 
-      if(!isDefined(team))
+      if(!isDefined(team)) {
         continue;
-
-      if(isExcluded(player, excludeList))
+      }
+      if(isExcluded(player, excludeList)) {
         continue;
-
+      }
       if(team == team1)
         player leaderDialogOnPlayer(dialog1, group);
       else if(team == team2)
         player leaderDialogOnPlayer(dialog2, group);
     }
   } else {
-    for (i = 0; i < level.players.size; i++) {
+    for(i = 0; i < level.players.size; i++) {
       player = level.players[i];
       team = player.pers["team"];
 
-      if(!isDefined(team))
+      if(!isDefined(team)) {
         continue;
-
+      }
       if(team == team1)
         player leaderDialogOnPlayer(dialog1, group);
       else if(team == team2)
@@ -743,15 +743,15 @@ leaderDialogOnPlayer(dialog, group, groupOverride) {
 
   team = self.pers["team"];
 
-  if(level.splitscreen)
+  if(level.splitscreen) {
     return;
-
-  if(!isDefined(team))
+  }
+  if(!isDefined(team)) {
     return;
-
-  if(team != "allies" && team != "axis")
+  }
+  if(team != "allies" && team != "axis") {
     return;
-
+  }
   if(isDefined(group)) {
     // ignore the message if one from the same group is already playing
     if(self.leaderDialogGroup == group) {
@@ -794,9 +794,9 @@ playLeaderDialogOnPlayer(dialog, team) {
 
   assertEx(isDefined(game["dialog"][dialog]), "Dialog " + dialog + " was not defined in game[dialog] array.");
 
-  if(isSubStr(game["dialog"][dialog], "null"))
+  if(isSubStr(game["dialog"][dialog], "null")) {
     return;
-
+  }
   self.leaderDialogActive = game["voice"][team] + game["dialog"][dialog];
   self playLocalSound(game["voice"][team] + game["dialog"][dialog]);
 
@@ -809,7 +809,7 @@ playLeaderDialogOnPlayer(dialog, team) {
   if(self.leaderDialogQueue.size > 0) {
     nextDialog = self.leaderDialogQueue[0];
 
-    for (i = 1; i < self.leaderDialogQueue.size; i++)
+    for(i = 1; i < self.leaderDialogQueue.size; i++)
       self.leaderDialogQueue[i - 1] = self.leaderDialogQueue[i];
     self.leaderDialogQueue[i - 1] = undefined;
 
@@ -868,7 +868,6 @@ getObjectiveHintText(team) {
   return game["strings"]["objective_hint_" + team];
 }
 
-
 getTimePassed() {
   if(!isDefined(level.startTime))
     return 0;
@@ -877,7 +876,6 @@ getTimePassed() {
     return (level.timerPauseTime - level.startTime) - level.discardTime;
   else
     return (gettime() - level.startTime) - level.discardTime;
-
 }
 
 getSecondsPassed() {
@@ -903,7 +901,6 @@ isValidClass(class) {
   return isDefined(class) && class != "";
 }
 
-
 getValueInRange(value, minValue, maxValue) {
   if(value > maxValue)
     return maxValue;
@@ -912,8 +909,6 @@ getValueInRange(value, minValue, maxValue) {
   else
     return value;
 }
-
-
 
 waitForTimeOrNotifies(desiredDelay) {
   startedWaiting = getTime();
@@ -934,15 +929,15 @@ closeMenus() {
 }
 
 logXPGains() {
-  if(!isDefined(self.xpGains))
+  if(!isDefined(self.xpGains)) {
     return;
-
+  }
   xpTypes = getArrayKeys(self.xpGains);
-  for (index = 0; index < xpTypes.size; index++) {
+  for(index = 0; index < xpTypes.size; index++) {
     gain = self.xpGains[xpTypes[index]];
-    if(!gain)
+    if(!gain) {
       continue;
-
+    }
     self logString("xp " + xpTypes[index] + ": " + gain);
   }
 }
@@ -994,7 +989,7 @@ setOverTimeLimitDvar(value) {
 }
 
 get_damageable_player(player, playerpos) {
-  newent = spawnstruct();
+  newent = spawnStruct();
   newent.isPlayer = true;
   newent.isADestructable = false;
   newent.entity = player;
@@ -1003,7 +998,7 @@ get_damageable_player(player, playerpos) {
 }
 
 get_damageable_sentry(sentry, sentryPos) {
-  newent = spawnstruct();
+  newent = spawnStruct();
   newent.isPlayer = false;
   newent.isADestructable = false;
   newent.isSentry = true;
@@ -1013,7 +1008,7 @@ get_damageable_sentry(sentry, sentryPos) {
 }
 
 get_damageable_grenade(grenade, entpos) {
-  newent = spawnstruct();
+  newent = spawnStruct();
   newent.isPlayer = false;
   newent.isADestructable = false;
   newent.entity = grenade;
@@ -1071,7 +1066,7 @@ _takeWeaponsExcept(saveWeapon) {
 }
 
 saveData() {
-  saveData = spawnstruct();
+  saveData = spawnStruct();
 
   saveData.offhandClass = self getOffhandSecondaryClass();
   saveData.actionSlots = self.saved_actionSlotData;
@@ -1081,12 +1076,12 @@ saveData() {
   weaponsList = self GetWeaponsListAll();
   saveData.weapons = [];
   foreach(weapon in weaponsList) {
-    if(weaponInventoryType(weapon) == "exclusive")
+    if(weaponInventoryType(weapon) == "exclusive") {
       continue;
-
-    if(weaponInventoryType(weapon) == "altmode")
+    }
+    if(weaponInventoryType(weapon) == "altmode") {
       continue;
-
+    }
     saveWeapon = spawnStruct();
     saveWeapon.name = weapon;
     saveWeapon.clipAmmoR = self getWeaponAmmoClip(weapon, "right");
@@ -1185,7 +1180,7 @@ getWatchedDvar(dvarString) {
 }
 
 updateWatchedDvars() {
-  while (game["state"] == "playing") {
+  while(game["state"] == "playing") {
     watchDvars = getArrayKeys(level.watchDvars);
 
     foreach(dvarString in watchDvars) {
@@ -1273,7 +1268,7 @@ hitScoreLimit() {
     if(game["teamScores"]["allies"] >= getWatchedDvar("scorelimit") || game["teamScores"]["axis"] >= getWatchedDvar("scorelimit"))
       return true;
   } else {
-    for (i = 0; i < level.players.size; i++) {
+    for(i = 0; i < level.players.size; i++) {
       player = level.players[i];
       if(isDefined(player.score) && player.score >= getWatchedDvar("scorelimit"))
         return true;
@@ -1372,10 +1367,10 @@ getLivingPlayers(team) {
   player_array = [];
 
   foreach(player in level.players) {
-    if(!isAlive(player))
+    if(!isAlive(player)) {
       continue;
-
-    if(level.teambased && isdefined(team)) {
+    }
+    if(level.teambased && isDefined(team)) {
       if(team == player.pers["team"])
         player_array[player_array.size] = player;
     } else {
@@ -1456,9 +1451,9 @@ queueRemoveFirst(queueName) {
   first = undefined;
   newQueue = [];
   foreach(element in level.queues[queueName]) {
-    if(!isDefined(element))
+    if(!isDefined(element)) {
       continue;
-
+    }
     if(!isDefined(first))
       first = element;
     else
@@ -1527,10 +1522,10 @@ quickSortMid(array, start, end) {
   if(end - start >= 1) {
     pivot = array[start];
 
-    while (k > i) {
-      while (array[i] <= pivot && i <= end && k > i)
+    while(k > i) {
+      while(array[i] <= pivot && i <= end && k > i)
         i++;
-      while (array[k] > pivot && k >= start && k >= i)
+      while(array[k] > pivot && k >= start && k >= i)
         k--;
       if(k > i)
         array = swap(array, i, k);
@@ -1569,10 +1564,9 @@ playDeathSound() {
   rand = RandomIntRange(1, 8);
 
   if(self.team == "axis")
-    self PlaySound("generic_death_russian_" + rand);
+    self playSound("generic_death_russian_" + rand);
   else
-    self PlaySound("generic_death_american_" + rand);
-
+    self playSound("generic_death_american_" + rand);
 }
 
 rankingEnabled() {
@@ -1597,7 +1591,7 @@ setAltSceneObj(object, tagName, fov, forceLink) {
 
   if( !getDvarInt( "scr_pipmode" ) && !forceLink )
   	return;
-	
+  	
   self endon ( "disconnect" );
 
   if( !isReallyAlive( self ) )
@@ -1607,24 +1601,24 @@ setAltSceneObj(object, tagName, fov, forceLink) {
   	return;
 
   self notify ( "altscene" );
-	
+  	
   self.altSceneObject = object;
 
   self AlternateSceneCameraLinkTo( object, tagName, fov );
   self setClientDvar( "ui_altscene", 1 );
-	
+  	
   self thread endSceneOnDeath( object );
   self thread endSceneOnDeath( self );
-	
+  	
   self waittill ( "end_altScene" );
-	
+  	
   self.altSceneObject = undefined;
   self AlternateSceneCameraUnlink();
-	
+  	
   if( !forceLink )
   {
   	self setClientDvar( "ui_altscene", 2 );
-	
+  	
   	self endon ( "altscene" );
   	wait ( 2.0 );
   }
@@ -1664,10 +1658,9 @@ giveAdrenaline(type) {
   printLn( "setting: " + type + " " + level.adrenalineInfo[type] );
 
   self setAdrenaline( self.adrenaline + level.adrenalineInfo[type] );
-	
+  	
   if( self.adrenaline == 1000 )
   {
-
   	giveCombatHigh( "specialty_endgame" );
   }
   */
@@ -1687,7 +1680,7 @@ giveCombatHigh(combatHighName) {
 
 arrayInsertion(array, item, index) {
   if(array.size != 0) {
-    for (i = array.size; i >= index; i--) {
+    for(i = array.size; i >= index; i--) {
       array[i + 1] = array[i];
     }
   }
@@ -1697,35 +1690,30 @@ arrayInsertion(array, item, index) {
 
 getProperty(dvar, defValue) {
   value = defValue;
-  /#
-  setDevDvarIfUninitialized(dvar, defValue);
-  # /
 
-    value = getDvar(dvar, defValue);
+  setDevDvarIfUninitialized(dvar, defValue);
+
+  value = getDvar(dvar, defValue);
   return value;
 }
 
 getIntProperty(dvar, defValue) {
   value = defValue;
 
-  /#
   setDevDvarIfUninitialized(dvar, defValue);
-  # /
 
-    value = getDvarInt(dvar, defValue);
+  value = getDvarInt(dvar, defValue);
   return value;
 }
 
 getFloatProperty(dvar, defValue) {
   value = defValue;
-  /#
-  setDevDvarIfUninitialized(dvar, defValue);
-  # /
 
-    value = getDvarFloat(dvar, defValue);
+  setDevDvarIfUninitialized(dvar, defValue);
+
+  value = getDvarFloat(dvar, defValue);
   return value;
 }
-
 
 statusMenu(duration) {
   self endon("disconnect");
@@ -1733,9 +1721,9 @@ statusMenu(duration) {
   if(!isDefined(self._statusMenu))
     self.statusMenu = false;
 
-  if(self.statusMenu)
+  if(self.statusMenu) {
     return;
-
+  }
   self.statusMenu = true;
 
   self openpopupMenu("status_update");
@@ -1831,7 +1819,7 @@ playSoundinSpace(alias, origin) {
 
 limitDecimalPlaces(value, places) {
   modifier = 1;
-  for (i = 0; i < places; i++)
+  for(i = 0; i < places; i++)
     modifier *= 10;
 
   newvalue = value * modifier;
@@ -1842,11 +1830,11 @@ limitDecimalPlaces(value, places) {
 }
 
 roundDecimalPlaces(value, places, style) {
-  if(!isdefined(style))
+  if(!isDefined(style))
     style = "nearest";
 
   modifier = 1;
-  for (i = 0; i < places; i++)
+  for(i = 0; i < places; i++)
     modifier *= 10;
 
   newValue = value * modifier;
@@ -1886,7 +1874,7 @@ stringToFloat(stringVal) {
   floatVal = int(floatElements[0]);
   if(isDefined(floatElements[1])) {
     modifier = 1;
-    for (i = 0; i < floatElements[1].size; i++)
+    for(i = 0; i < floatElements[1].size; i++)
       modifier *= 0.1;
 
     floatVal += int(floatElements[1]) * modifier;
@@ -1914,7 +1902,7 @@ makeTeamUsable(team) {
 _updateTeamUsable(team) {
   self endon("death");
 
-  for (;;) {
+  for(;;) {
     foreach(player in level.players) {
       if(player.team == team)
         self enablePlayerUse(player);
@@ -1941,7 +1929,7 @@ _updateEnemyUsable(owner) {
 
   team = owner.team;
 
-  for (;;) {
+  for(;;) {
     if(level.teambased) {
       foreach(player in level.players) {
         if(player.team != team)
@@ -1999,7 +1987,7 @@ gameFlagClear(flagName) {
 
 gameFlagWait(flagName) {
   assertEx(isDefined(game["flags"][flagName]), "gameFlag " + flagName + " referenced without being initialized; usegameFlagInit( <flagName>, <isEnabled> )");
-  while (!gameFlag(flagName))
+  while(!gameFlag(flagName))
     level waittill(flagName);
 }
 
@@ -2050,13 +2038,13 @@ levelFlagClear(flagName) {
 
 levelFlagWait(flagName) {
   assertEx(isDefined(level.levelFlags[flagName]), "levelFlag " + flagName + " referenced without being initialized; use levelFlagInit( <flagName>, <isEnabled> )");
-  while (!levelFlag(flagName))
+  while(!levelFlag(flagName))
     level waittill(flagName);
 }
 
 levelFlagWaitOpen(flagName) {
   assertEx(isDefined(level.levelFlags[flagName]), "levelFlag " + flagName + " referenced without being initialized; use levelFlagInit( <flagName>, <isEnabled> )");
-  while (levelFlag(flagName))
+  while(levelFlag(flagName))
     level waittill(flagName);
 }
 
@@ -2110,13 +2098,13 @@ getPlayerForGuid(guid) {
 }
 
 teamPlayerCardSplash(splash, owner, team) {
-  if(level.hardCoreMode)
+  if(level.hardCoreMode) {
     return;
-
+  }
   foreach(player in level.players) {
-    if(isDefined(team) && player.team != team)
+    if(isDefined(team) && player.team != team) {
       continue;
-
+    }
     player thread maps\mp\gametypes\_hud_message::playerCardSplashNotify(splash, owner);
   }
 }
@@ -2150,12 +2138,12 @@ getLastLivingPlayer(team) {
   livePlayer = undefined;
 
   foreach(player in level.players) {
-    if(isDefined(team) && player.team != team)
+    if(isDefined(team) && player.team != team) {
       continue;
-
-    if(!isReallyAlive(player) && !player maps\mp\gametypes\_playerlogic::maySpawn())
+    }
+    if(!isReallyAlive(player) && !player maps\mp\gametypes\_playerlogic::mayspawn()) {
       continue;
-
+    }
     assertEx(!isDefined(livePlayer), "getLastLivingPlayer() found more than one live player on team.");
 
     livePlayer = player;
@@ -2168,9 +2156,9 @@ getPotentialLivingPlayers() {
   livePlayers = [];
 
   foreach(player in level.players) {
-    if(!isReallyAlive(player) && !player maps\mp\gametypes\_playerlogic::maySpawn())
+    if(!isReallyAlive(player) && !player maps\mp\gametypes\_playerlogic::mayspawn()) {
       continue;
-
+    }
     livePlayers[livePlayers.size] = player;
   }
 
@@ -2189,7 +2177,7 @@ waitTillRecoveredHealth(time, interval) {
   if(!isDefined(time))
     time = 0;
 
-  while (1) {
+  while(1) {
     if(self.health != self.maxhealth)
       fullHealthTime = 0;
     else
@@ -2197,8 +2185,9 @@ waitTillRecoveredHealth(time, interval) {
 
     wait interval;
 
-    if(self.health == self.maxhealth && fullHealthTime >= time)
+    if(self.health == self.maxhealth && fullHealthTime >= time) {
       break;
+    }
   }
 
   return;
@@ -2238,34 +2227,28 @@ setThirdPersonDOF(isEnabled) {
     self setDepthOfField(0, 0, 512, 512, 4, 0);
 }
 
-
 killTrigger(pos, radius, height) {
   trig = spawn("trigger_radius", pos, 0, radius, height);
 
-  /#
   if(getdvar("scr_killtriggerdebug") == "1")
     thread killTriggerDebug(pos, radius, height);
-  # /
 
-    for (;;) {
-      /#
-      if(getdvar("scr_killtriggerradius") != "")
-        radius = int(getdvar("scr_killtriggerradius"));
-      # /
+  for(;;) {
+    if(getdvar("scr_killtriggerradius") != "")
+      radius = int(getdvar("scr_killtriggerradius"));
 
-        trig waittill("trigger", player);
+    trig waittill("trigger", player);
 
-      if(!isPlayer(player))
-        continue;
-
-      player suicide();
+    if(!isPlayer(player)) {
+      continue;
     }
+    player suicide();
+  }
 }
 
-/#
 killTriggerDebug(pos, radius, height) {
-  for (;;) {
-    for (i = 0; i < 20; i++) {
+  for(;;) {
+    for(i = 0; i < 20; i++) {
       angle = i / 20 * 360;
       nextangle = (i + 1) / 20 * 360;
 

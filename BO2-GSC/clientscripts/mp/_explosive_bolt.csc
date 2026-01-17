@@ -28,7 +28,7 @@ fx_think(localclientnum) {
     self stop_light_fx(localclientnum);
     self start_light_fx(localclientnum);
     self fullscreen_fx(localclientnum);
-    self playsound(localclientnum, "wpn_semtex_alert");
+    self playSound(localclientnum, "wpn_semtex_alert");
     serverwait(localclientnum, interval, 0.01, "player_switch");
     interval = clamp(interval / 1.2, 0.08, 0.3);
   }
@@ -39,9 +39,9 @@ start_light_fx(localclientnum) {
   player = getlocalplayer(localclientnum);
 
   if(friend)
-    self.fx = playfxontag(localclientnum, level._effect["crossbow_friendly_light"], self, "tag_origin");
+    self.fx = playFXOnTag(localclientnum, level._effect["crossbow_friendly_light"], self, "tag_origin");
   else
-    self.fx = playfxontag(localclientnum, level._effect["crossbow_enemy_light"], self, "tag_origin");
+    self.fx = playFXOnTag(localclientnum, level._effect["crossbow_enemy_light"], self, "tag_origin");
 }
 
 stop_light_fx(localclientnum) {

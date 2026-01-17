@@ -5,14 +5,14 @@
 ********************************/
 
 init_camera() {
-  level.dof_tuner = spawnstruct();
+  level.dof_tuner = spawnStruct();
   level.dof_tuner.fstopperunit = 0.25;
   level.dof_tuner.scaler = -0.3;
   level.dof_tuner.fstopbase = 3;
 }
 
 setup_camparams() {
-  var_0 = spawnstruct();
+  var_0 = spawnStruct();
   var_0.dof_time = 12;
   var_0.gamelobbygroup_camera_normalz = 507;
   var_0.gamelobbygroup_camera_normaldistance = 96.8;
@@ -30,13 +30,13 @@ spawncamera(var_0) {
   var_2 = (0, 87, 0);
   var_3 = common_scripts\utility::getstruct("camera", "targetname");
 
-  if(isdefined(var_3)) {
+  if(isDefined(var_3)) {
     var_1 = var_3.origin;
     var_2 = var_3.angles;
   }
 
   var_4 = spawn("script_model", var_1);
-  var_4 setmodel("tag_player");
+  var_4 setModel("tag_player");
   var_4.angles = var_2;
   var_4.startorigin = var_1;
   var_4.startangles = var_2;
@@ -78,7 +78,7 @@ playerupdatecamera() {
       if(var_1.mode == "cao" || var_1.mode == "cac")
         var_2.finished = 1;
 
-      if(isdefined(level.vlavatars) && isdefined(level.vl_focus) && isdefined(level.vlavatars[level.vl_focus]))
+      if(isDefined(level.vlavatars) && isDefined(level.vl_focus) && isDefined(level.vlavatars[level.vl_focus]))
         var_0 maps\mp\_vl_base::prep_for_controls(level.vlavatars[level.vl_focus], level.vlavatars[level.vl_focus].angles);
 
       var_2.cut = 1;
@@ -205,7 +205,7 @@ playervlsetphysicaldepthoffield(var_0, var_1) {
 }
 
 fixlocalfocus() {
-  if(!isdefined(level.vlavatars[level.vl_focus])) {
+  if(!isDefined(level.vlavatars[level.vl_focus])) {
     foreach(var_2, var_1 in level.vlavatars) {
       level.vl_focus = var_2;
       break;
@@ -216,21 +216,21 @@ fixlocalfocus() {
 cammove(var_0, var_1, var_2, var_3) {
   self unlink();
 
-  if(isdefined(self.cut))
+  if(isDefined(self.cut))
     self.origin = var_0;
   else
     self moveto(var_0, var_1, var_2, var_3);
 }
 
 camrotate(var_0, var_1, var_2, var_3) {
-  if(isdefined(self.cut))
+  if(isDefined(self.cut))
     self.angles = var_0;
   else
     self rotateto(var_0, var_1, var_2, var_3);
 }
 
 checkcamposition(var_0, var_1, var_2) {
-  if(!isdefined(var_2))
+  if(!isDefined(var_2))
     var_2 = 2;
 
   var_3 = distance(var_1, var_0.origin);
@@ -242,7 +242,7 @@ checkcamposition(var_0, var_1, var_2) {
 }
 
 updatecamerafinish(var_0) {
-  if(isdefined(var_0.cut)) {
+  if(isDefined(var_0.cut)) {
     var_0 dontinterpolate();
     var_0.cut = undefined;
   }
@@ -263,7 +263,7 @@ updatecameracacweap(var_0, var_1) {
 }
 
 updatecameracac(var_0, var_1, var_2, var_3) {
-  var_4 = var_2.avatar_spawnpoint.origin + anglestoforward(var_2.avatar_spawnpoint.angles) * var_1.gamelobbygroup_camera_normaldistance;
+  var_4 = var_2.avatar_spawnpoint.origin + anglesToForward(var_2.avatar_spawnpoint.angles) * var_1.gamelobbygroup_camera_normaldistance;
   var_5 = (var_4[0], var_4[1], var_1.gamelobbygroup_camera_normalz);
   var_6 = (0, var_2.avatar_spawnpoint.angles[1] + 180 + var_3, 0);
   var_0.cut = 1;
@@ -301,7 +301,7 @@ updatecameraarmory(var_0, var_1, var_2, var_3) {
 }
 
 updatecameraequip(var_0, var_1, var_2, var_3) {
-  var_4 = var_2.avatar_spawnpoint.origin + anglestoforward(var_2.avatar_spawnpoint.angles) * var_1.gamelobbygroup_camera_normaldistance;
+  var_4 = var_2.avatar_spawnpoint.origin + anglesToForward(var_2.avatar_spawnpoint.angles) * var_1.gamelobbygroup_camera_normaldistance;
   var_5 = (var_4[0], var_4[1], var_1.gamelobbygroup_camera_normalz);
   var_6 = (0, var_2.avatar_spawnpoint.angles[1] + 180 + var_3, 0);
   var_0.cut = 1;
@@ -316,7 +316,7 @@ updatecameralobby(var_0, var_1, var_2) {
   var_4 = "camera" + var_3;
   var_5 = common_scripts\utility::getstruct(var_4, "targetname");
 
-  if(!isdefined(var_5.angles)) {
+  if(!isDefined(var_5.angles)) {
     var_6 = common_scripts\utility::getstruct(var_5.target, "targetname");
     var_7 = var_6.origin - var_5.origin;
     var_5.angles = vectortoangles(var_7);

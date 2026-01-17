@@ -21,7 +21,6 @@
 #include scripts\zm_common\zm_spawner;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
-
 #namespace namespace_47a807c3;
 
 autoexec __init__system__() {
@@ -40,7 +39,7 @@ function_8d37256a(e_player) {
 }
 
 function_ad31c153() {
-  self endon(#"death", #"bled_out");
+  self endon(#"death", # "bled_out");
 
   if(self laststand::player_is_in_laststand()) {
     self waittill(#"player_revived");
@@ -49,7 +48,7 @@ function_ad31c153() {
 }
 
 function_81eaae89(e_player) {
-  e_player endon(#"death", #"bled_out");
+  e_player endon(#"death", # "bled_out");
   e_player function_ad31c153();
   var_e8145621 = e_player getweaponslistprimaries();
   w_current_weapon = e_player getcurrentweapon();
@@ -84,7 +83,7 @@ function_81eaae89(e_player) {
 
 function_40935801() {
   self notify(#"picked_up_pap");
-  self endon(#"picked_up_pap", #"death", #"bled_out");
+  self endon(#"picked_up_pap", # "death", # "bled_out");
   wait 30;
   self function_ad31c153();
   var_e8145621 = self getweaponslistprimaries();
@@ -139,12 +138,12 @@ function_35ae342e(e_player) {
   e_player switchtoweaponimmediate(w_upgrade_weapon);
   e_player setweaponammoclip(w_upgrade_weapon, n_clip);
   e_player setweaponammostock(w_upgrade_weapon, n_stock);
-  e_player zm_audio::create_and_play_dialog(#"pap", #"pickup");
+  e_player zm_audio::create_and_play_dialog(#"pap", # "pickup");
   e_player zm_weapons::play_weapon_vo(w_upgrade_weapon);
   e_player thread function_d0ea0364(w_upgrade_weapon);
 }
 
-private function_d0ea0364(w_upgrade_weapon) {
+function_d0ea0364(w_upgrade_weapon) {
   self notify("picked_up_pap_" + w_upgrade_weapon.name);
   self endon("picked_up_pap_" + w_upgrade_weapon.name);
   wait 30;

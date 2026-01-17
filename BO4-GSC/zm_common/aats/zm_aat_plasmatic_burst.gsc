@@ -12,11 +12,10 @@
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\trials\zm_trial_headshots_only;
 #include scripts\zm_common\zm_stats;
-
 #namespace zm_aat_plasmatic_burst;
 
 autoexec __init__system__() {
-  system::register("zm_aat_plasmatic_burst", &__init__, undefined, #"aat");
+  system::register("zm_aat_plasmatic_burst", &__init__, undefined, # "aat");
 }
 
 __init__() {
@@ -55,12 +54,12 @@ function_988b8f91(e_attacker, w_weapon) {
 
     for(i = 0; i < a_e_blasted_zombies.size; i++) {
       if(isalive(a_e_blasted_zombies[i])) {
-        if(isDefined(level.aat[#"zm_aat_plasmatic_burst"].immune_result_indirect[a_e_blasted_zombies[i].archetype]) && level.aat[#"zm_aat_plasmatic_burst"].immune_result_indirect[a_e_blasted_zombies[i].archetype]) {
+        if(isDefined(level.aat[# "zm_aat_plasmatic_burst"].immune_result_indirect[a_e_blasted_zombies[i].archetype]) && level.aat[# "zm_aat_plasmatic_burst"].immune_result_indirect[a_e_blasted_zombies[i].archetype]) {
           arrayremovevalue(a_e_blasted_zombies, a_e_blasted_zombies[i]);
           continue;
         }
 
-        if(a_e_blasted_zombies[i] == self && !(isDefined(level.aat[#"zm_aat_plasmatic_burst"].immune_result_direct[a_e_blasted_zombies[i].archetype]) && level.aat[#"zm_aat_plasmatic_burst"].immune_result_direct[a_e_blasted_zombies[i].archetype])) {
+        if(a_e_blasted_zombies[i] == self && !(isDefined(level.aat[# "zm_aat_plasmatic_burst"].immune_result_direct[a_e_blasted_zombies[i].archetype]) && level.aat[# "zm_aat_plasmatic_burst"].immune_result_direct[a_e_blasted_zombies[i].archetype])) {
           self thread zombie_death_gib(e_attacker, w_weapon);
           arrayremovevalue(a_e_blasted_zombies, a_e_blasted_zombies[i]);
           continue;

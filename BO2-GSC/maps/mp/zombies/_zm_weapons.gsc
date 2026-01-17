@@ -39,7 +39,7 @@ init() {
 }
 
 setupretrievablehintstrings() {
-  maps\mp\gametypes_zm\_weaponobjects::createretrievablehint("claymore", & "ZOMBIE_CLAYMORE_PICKUP");
+  maps\mp\gametypes_zm\_weaponobjects::createretrievablehint("claymore", &"ZOMBIE_CLAYMORE_PICKUP");
 }
 
 onplayerconnect() {
@@ -472,7 +472,7 @@ add_zombie_weapon(weapon_name, upgrade_name, hint, cost, weaponvo, weaponvoresp,
     ammo_cost = round_up_to_ten(int(table_ammo_cost));
 
   precachestring(hint);
-  struct = spawnstruct();
+  struct = spawnStruct();
 
   if(!isDefined(level.zombie_weapons))
     level.zombie_weapons = [];
@@ -643,7 +643,7 @@ limited_weapon_below_quota(weapon, ignore_player, pap_triggers) {
   if(isDefined(level.limited_weapons[weapon])) {
     if(!isDefined(pap_triggers)) {
       if(!isDefined(level.pap_triggers))
-        pap_triggers = getentarray("specialty_weapupgrade", "script_noteworthy");
+        pap_triggers = getEntArray("specialty_weapupgrade", "script_noteworthy");
       else
         pap_triggers = level.pap_triggers;
     }
@@ -805,7 +805,7 @@ init_spawnable_weapon_upgrade() {
     }
 
     precachemodel(target_struct.model);
-    unitrigger_stub = spawnstruct();
+    unitrigger_stub = spawnStruct();
     unitrigger_stub.origin = spawn_list[i].origin;
     unitrigger_stub.angles = spawn_list[i].angles;
     tempmodel.origin = spawn_list[i].origin;
@@ -814,7 +814,7 @@ init_spawnable_weapon_upgrade() {
     maxs = undefined;
     absmins = undefined;
     absmaxs = undefined;
-    tempmodel setmodel(target_struct.model);
+    tempmodel setModel(target_struct.model);
     tempmodel useweaponhidetags(spawn_list[i].zombie_weapon_upgrade);
     mins = tempmodel getmins();
     maxs = tempmodel getmaxs();
@@ -842,7 +842,7 @@ init_spawnable_weapon_upgrade() {
           unitrigger_stub.hint_parm1 = "missing weapon name " + spawn_list[i].zombie_weapon_upgrade;
 
         unitrigger_stub.hint_parm2 = unitrigger_stub.cost;
-        unitrigger_stub.hint_string = & "ZOMBIE_WEAPONCOSTONLY";
+        unitrigger_stub.hint_string = &"ZOMBIE_WEAPONCOSTONLY";
       }
     }
 
@@ -903,7 +903,7 @@ add_dynamic_wallbuy(weapon, wallbuy, pristine) {
   wallmodel = spawn_weapon_model(weapon, undefined, target_struct.origin, target_struct.angles);
   clientfieldname = spawned_wallbuy.clientfieldname;
   model = getweaponmodel(weapon);
-  unitrigger_stub = spawnstruct();
+  unitrigger_stub = spawnStruct();
   unitrigger_stub.origin = target_struct.origin;
   unitrigger_stub.angles = target_struct.angles;
   wallmodel.origin = target_struct.origin;
@@ -912,7 +912,7 @@ add_dynamic_wallbuy(weapon, wallbuy, pristine) {
   maxs = undefined;
   absmins = undefined;
   absmaxs = undefined;
-  wallmodel setmodel(model);
+  wallmodel setModel(model);
   wallmodel useweaponhidetags(weapon);
   mins = wallmodel getmins();
   maxs = wallmodel getmaxs();
@@ -1013,7 +1013,7 @@ wall_weapon_update_prompt(player) {
       else
         ammo_cost = get_ammo_cost(weapon);
 
-      self.stub.hint_string = & "ZOMBIE_WEAPONAMMOONLY";
+      self.stub.hint_string = &"ZOMBIE_WEAPONAMMOONLY";
       self sethintstring(self.stub.hint_string, ammo_cost);
     }
   } else if(!player has_weapon_or_upgrade(weapon)) {
@@ -1029,7 +1029,7 @@ wall_weapon_update_prompt(player) {
       if(!isDefined(weapon_display) || weapon_display == "" || weapon_display == "none")
         weapon_display = "missing weapon name " + weapon;
 
-      self.stub.hint_string = & "ZOMBIE_WEAPONCOSTONLY";
+      self.stub.hint_string = &"ZOMBIE_WEAPONCOSTONLY";
       self sethintstring(self.stub.hint_string, weapon_display, cost);
     }
   } else {
@@ -1038,7 +1038,7 @@ wall_weapon_update_prompt(player) {
     else
       ammo_cost = get_ammo_cost(weapon);
 
-    self.stub.hint_string = & "ZOMBIE_WEAPONAMMOONLY";
+    self.stub.hint_string = &"ZOMBIE_WEAPONAMMOONLY";
     self sethintstring(self.stub.hint_string, ammo_cost);
   }
 
@@ -1072,14 +1072,14 @@ reset_wallbuy_internal(set_hint_string) {
 
 reset_wallbuys() {
   weapon_spawns = [];
-  weapon_spawns = getentarray("weapon_upgrade", "targetname");
+  weapon_spawns = getEntArray("weapon_upgrade", "targetname");
   melee_and_grenade_spawns = [];
-  melee_and_grenade_spawns = getentarray("bowie_upgrade", "targetname");
-  melee_and_grenade_spawns = arraycombine(melee_and_grenade_spawns, getentarray("sickle_upgrade", "targetname"), 1, 0);
-  melee_and_grenade_spawns = arraycombine(melee_and_grenade_spawns, getentarray("tazer_upgrade", "targetname"), 1, 0);
+  melee_and_grenade_spawns = getEntArray("bowie_upgrade", "targetname");
+  melee_and_grenade_spawns = arraycombine(melee_and_grenade_spawns, getEntArray("sickle_upgrade", "targetname"), 1, 0);
+  melee_and_grenade_spawns = arraycombine(melee_and_grenade_spawns, getEntArray("tazer_upgrade", "targetname"), 1, 0);
 
   if(!is_true(level.headshots_only))
-    melee_and_grenade_spawns = arraycombine(melee_and_grenade_spawns, getentarray("claymore_purchase", "targetname"), 1, 0);
+    melee_and_grenade_spawns = arraycombine(melee_and_grenade_spawns, getEntArray("claymore_purchase", "targetname"), 1, 0);
 
   for(i = 0; i < weapon_spawns.size; i++)
     weapon_spawns[i] reset_wallbuy_internal(1);
@@ -1113,7 +1113,7 @@ reset_wallbuys() {
 init_weapon_upgrade() {
   init_spawnable_weapon_upgrade();
   weapon_spawns = [];
-  weapon_spawns = getentarray("weapon_upgrade", "targetname");
+  weapon_spawns = getEntArray("weapon_upgrade", "targetname");
 
   for(i = 0; i < weapon_spawns.size; i++) {
     if(!(isDefined(level.monolingustic_prompt_format) && level.monolingustic_prompt_format)) {
@@ -1128,7 +1128,7 @@ init_weapon_upgrade() {
       if(!isDefined(weapon_display) || weapon_display == "" || weapon_display == "none")
         weapon_display = "missing weapon name " + weapon_spawns[i].zombie_weapon_upgrade;
 
-      hint_string = & "ZOMBIE_WEAPONCOSTONLY";
+      hint_string = &"ZOMBIE_WEAPONCOSTONLY";
       weapon_spawns[i] sethintstring(hint_string, weapon_display, cost);
     }
 
@@ -1154,10 +1154,10 @@ init_weapon_toggle() {
   precachestring(&"ZOMBIE_WEAPON_TOGGLE_ACTIVATE");
   precachestring(&"ZOMBIE_WEAPON_TOGGLE_DEACTIVATE");
   precachestring(&"ZOMBIE_WEAPON_TOGGLE_ACQUIRED");
-  level.zombie_weapon_toggle_disabled_hint = & "ZOMBIE_WEAPON_TOGGLE_DISABLED";
-  level.zombie_weapon_toggle_activate_hint = & "ZOMBIE_WEAPON_TOGGLE_ACTIVATE";
-  level.zombie_weapon_toggle_deactivate_hint = & "ZOMBIE_WEAPON_TOGGLE_DEACTIVATE";
-  level.zombie_weapon_toggle_acquired_hint = & "ZOMBIE_WEAPON_TOGGLE_ACQUIRED";
+  level.zombie_weapon_toggle_disabled_hint = &"ZOMBIE_WEAPON_TOGGLE_DISABLED";
+  level.zombie_weapon_toggle_activate_hint = &"ZOMBIE_WEAPON_TOGGLE_ACTIVATE";
+  level.zombie_weapon_toggle_deactivate_hint = &"ZOMBIE_WEAPON_TOGGLE_DEACTIVATE";
+  level.zombie_weapon_toggle_acquired_hint = &"ZOMBIE_WEAPON_TOGGLE_ACQUIRED";
   precachemodel("zombie_zapper_cagelight");
   precachemodel("zombie_zapper_cagelight_green");
   precachemodel("zombie_zapper_cagelight_red");
@@ -1167,10 +1167,10 @@ init_weapon_toggle() {
   level.zombie_weapon_toggle_inactive_light = "zombie_zapper_cagelight_red";
   level.zombie_weapon_toggle_acquired_light = "zombie_zapper_cagelight_on";
   weapon_toggle_ents = [];
-  weapon_toggle_ents = getentarray("magic_box_weapon_toggle", "targetname");
+  weapon_toggle_ents = getEntArray("magic_box_weapon_toggle", "targetname");
 
   for(i = 0; i < weapon_toggle_ents.size; i++) {
-    struct = spawnstruct();
+    struct = spawnStruct();
     struct.trigger = weapon_toggle_ents[i];
     struct.weapon_name = struct.trigger.script_string;
     struct.upgrade_name = level.zombie_weapons[struct.trigger.script_string].upgrade_name;
@@ -1178,13 +1178,13 @@ init_weapon_toggle() {
     struct.active = 0;
     struct.acquired = 0;
     target_array = [];
-    target_array = getentarray(struct.trigger.target, "targetname");
+    target_array = getEntArray(struct.trigger.target, "targetname");
 
     for(j = 0; j < target_array.size; j++) {
       switch (target_array[j].script_string) {
         case "light":
           struct.light = target_array[j];
-          struct.light setmodel(level.zombie_weapon_toggle_disabled_light);
+          struct.light setModel(level.zombie_weapon_toggle_disabled_light);
           break;
         case "weapon":
           struct.weapon_model = target_array[j];
@@ -1235,7 +1235,7 @@ disable_weapon_toggle(weapon_name) {
 
   toggle.enabled = 0;
   toggle.active = 0;
-  toggle.light setmodel(level.zombie_weapon_toggle_disabled_light);
+  toggle.light setModel(level.zombie_weapon_toggle_disabled_light);
   toggle.weapon_model hide();
   toggle.trigger sethintstring(level.zombie_weapon_toggle_disabled_hint);
 }
@@ -1270,7 +1270,7 @@ activate_weapon_toggle(weapon_name, trig_for_vox) {
 
   level.zombie_weapon_toggle_active_count++;
   toggle.active = 1;
-  toggle.light setmodel(level.zombie_weapon_toggle_active_light);
+  toggle.light setModel(level.zombie_weapon_toggle_active_light);
   toggle.trigger sethintstring(level.zombie_weapon_toggle_deactivate_hint);
 }
 
@@ -1287,7 +1287,7 @@ deactivate_weapon_toggle(weapon_name, trig_for_vox) {
     level.zombie_weapon_toggle_active_count--;
 
   toggle.active = 0;
-  toggle.light setmodel(level.zombie_weapon_toggle_inactive_light);
+  toggle.light setModel(level.zombie_weapon_toggle_inactive_light);
   toggle.trigger sethintstring(level.zombie_weapon_toggle_activate_hint);
 }
 
@@ -1301,7 +1301,7 @@ acquire_weapon_toggle(weapon_name, player) {
     return;
   }
   toggle.acquired = 1;
-  toggle.light setmodel(level.zombie_weapon_toggle_acquired_light);
+  toggle.light setModel(level.zombie_weapon_toggle_acquired_light);
   toggle.trigger sethintstring(level.zombie_weapon_toggle_acquired_hint);
   toggle thread unacquire_weapon_toggle_on_death_or_disconnect_thread(player);
 }
@@ -1323,7 +1323,7 @@ unacquire_weapon_toggle(weapon_name) {
     return;
   }
   toggle.acquired = 0;
-  toggle.light setmodel(level.zombie_weapon_toggle_active_light);
+  toggle.light setModel(level.zombie_weapon_toggle_active_light);
   toggle.trigger sethintstring(level.zombie_weapon_toggle_deactivate_hint);
   toggle notify("end_unacquire_weapon_thread");
 }
@@ -1379,7 +1379,7 @@ get_weapon_display_name(weapon_name) {
   weapon_display = getweapondisplayname(weapon_name);
 
   if(!isDefined(weapon_display) || weapon_display == "" || weapon_display == "none") {
-    weapon_display = & "MPUI_NONE";
+    weapon_display = &"MPUI_NONE";
 
     weapon_display = "missing weapon name " + weapon_name;
 
@@ -1727,9 +1727,9 @@ get_player_weapon_with_same_base(weaponname) {
 
 get_weapon_hint_ammo() {
   if(isDefined(level.has_pack_a_punch) && !level.has_pack_a_punch)
-    return & "ZOMBIE_WEAPONCOSTAMMO";
+    return &"ZOMBIE_WEAPONCOSTAMMO";
   else
-    return & "ZOMBIE_WEAPONCOSTAMMO_UPGRADE";
+    return &"ZOMBIE_WEAPONCOSTAMMO_UPGRADE";
 }
 
 weapon_set_first_time_hint(cost, ammo_cost) {
@@ -1984,7 +1984,7 @@ weapon_show(player) {
     yaw = weapon_yaw + 90;
 
   self.og_origin = self.origin;
-  self.origin = self.origin + anglestoforward((0, yaw, 0)) * 8;
+  self.origin = self.origin + anglesToForward((0, yaw, 0)) * 8;
   wait 0.05;
   self show();
   play_sound_at_pos("weapon_show", self.origin, self);

@@ -17,7 +17,6 @@
 #include scripts\zm_common\zm_traps;
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_white_apd_trap;
 
 autoexec __init__system__() {
@@ -25,7 +24,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  level._effect[#"tesla_bolt"] = "zm_ai/fx8_avo_elec_projectile";
+  level._effect[# "tesla_bolt"] = "zm_ai/fx8_avo_elec_projectile";
 }
 
 __main__() {
@@ -137,7 +136,7 @@ function_e14376a3() {
       level.s_apd_trap.v_touching.activated_by_player = e_who;
 
       if(!(isDefined(level.var_3c9cfd6f) && level.var_3c9cfd6f) && zm_audio::can_speak()) {
-        e_who thread zm_audio::create_and_play_dialog(#"trap_generic", #"activate");
+        e_who thread zm_audio::create_and_play_dialog(#"trap_generic", # "activate");
       }
     }
   }
@@ -157,7 +156,7 @@ function_65c804dc() {
     if(isDefined(e_who)) {
       zm_utility::play_sound_at_pos("purchase", e_who.origin);
       level notify(#"trap_activated", {
-        #trap_activator: e_who, 
+        #trap_activator: e_who,
         #trap: self
       });
     }
@@ -205,9 +204,9 @@ apd_trap_activate(e_player) {
 }
 
 function_25ede6c7(s_trap) {
-  self endoncallback(&function_171226f4, #"death");
+  self endoncallback(&function_171226f4, # "death");
   self.var_410faa5f = util::spawn_model("tag_origin", s_trap.origin);
-  fx = playFXOnTag(level._effect[#"tesla_bolt"], self.var_410faa5f, "tag_origin");
+  fx = playFXOnTag(level._effect[# "tesla_bolt"], self.var_410faa5f, "tag_origin");
   playsoundatposition(#"hash_286b88c1d2e99649", s_trap.origin);
   self.var_410faa5f moveto(self gettagorigin("J_Spine4"), 0.6);
   self.var_410faa5f waittill(#"movedone");

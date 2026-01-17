@@ -42,7 +42,7 @@ function main() {
   level thread function_46ffc7b4();
   level thread function_801ffa37();
   level thread function_ae1e48b4();
-  callback::on_spawned( & function_45585311);
+  callback::on_spawned(&function_45585311);
   level thread function_662fba30();
   level thread function_c5751341();
   level thread function_83ead54e();
@@ -55,7 +55,7 @@ function function_d17ab8c6() {
   level thread function_9e6292be();
   level thread function_bbe228f8();
   level scene::init("p7_fxanim_zm_island_bunker_door_main_bundle");
-  while (true) {
+  while(true) {
     level util::waittill_any("power_on" + 1, "power_on" + 2);
     if(flag::get("power_on" + 1) && flag::get("power_on" + 2)) {
       level zm_power::turn_power_on_and_open_doors(3);
@@ -69,9 +69,9 @@ function function_d17ab8c6() {
 
 function function_bbe228f8() {
   level endon("connect_bunker_exterior_to_bunker_interior");
-  zm_utility::add_zombie_hint("bunker_door_text", & "ZM_ISLAND_BUNKER_DOOR_OPEN");
+  zm_utility::add_zombie_hint("bunker_door_text", &"ZM_ISLAND_BUNKER_DOOR_OPEN");
   var_25d5f24c = getent("door_bunker_main", "target");
-  while (true) {
+  while(true) {
     level waittill("override_bunker_door_string");
     var_25d5f24c zm_utility::set_hint_string(var_25d5f24c, "bunker_door_text");
   }
@@ -109,7 +109,7 @@ function function_d806d0f9() {
   var_84f67a50 = [];
   var_84f67a50[0] = "power_on" + 1;
   var_84f67a50[1] = "power_on";
-  while (true) {
+  while(true) {
     level flag::wait_till_any(var_84f67a50);
     exploder::exploder("temporary_power_jungle_lab");
     exploder::exploder("fxexp_211");
@@ -136,7 +136,7 @@ function function_46ffc7b4() {
   var_84f67a50 = [];
   var_84f67a50[0] = "power_on" + 2;
   var_84f67a50[1] = "power_on";
-  while (true) {
+  while(true) {
     level flag::wait_till_any(var_84f67a50);
     exploder::exploder("temporary_power_swamp_lab");
     exploder::exploder("fxexp_210");
@@ -181,12 +181,12 @@ function function_801ffa37() {
 }
 
 function function_e9f46546() {
-  while (!isdefined(level.var_d3b40681)) {
+  while(!isDefined(level.var_d3b40681)) {
     wait(1);
   }
   var_e08b3d94 = getent("penstock_web_trigger", "targetname");
   var_e08b3d94 zm_ai_spiders::function_7428955c();
-  if(!isdefined(level.var_d3b40681)) {
+  if(!isDefined(level.var_d3b40681)) {
     level.var_d3b40681 = [];
   } else if(!isarray(level.var_d3b40681)) {
     level.var_d3b40681 = array(level.var_d3b40681);
@@ -199,28 +199,28 @@ function function_e9f46546() {
   level thread zm_island_vo::function_3bf2d62a("unblock_penstock", 0, 1, 0);
   var_e08b3d94 zm_ai_spiders::function_f375c6d9(0);
   arrayremovevalue(level.var_d3b40681, var_e08b3d94);
-  var_e08b3d94.var_1e831600 util::delay(5, undefined, & delete);
-  var_e08b3d94 util::delay(6, undefined, & delete);
+  var_e08b3d94.var_1e831600 util::delay(5, undefined, &delete);
+  var_e08b3d94 util::delay(6, undefined, &delete);
 }
 
 function function_ae1e48b4() {
-  level.var_769c0729 = getentarray("temporary_power_switch", "script_string");
+  level.var_769c0729 = getEntArray("temporary_power_switch", "script_string");
   level clientfield::set("power_switch_1_fx", 1);
   level clientfield::set("power_switch_2_fx", 1);
 }
 
 function function_156f973e() {
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   if(self.script_string === "temporary_power_switch") {
     self sethintstring(&"ZM_ISLAND_POWER_SWITCH_NEEEDS_WATER");
   }
-  if(isdefined(self.target)) {
-    ent_parts = getentarray(self.target, "targetname");
+  if(isDefined(self.target)) {
+    ent_parts = getEntArray(self.target, "targetname");
     struct_parts = struct::get_array(self.target, "targetname");
     foreach(ent in ent_parts) {
-      if(isdefined(ent.script_noteworthy) && ent.script_noteworthy == "elec_switch") {
+      if(isDefined(ent.script_noteworthy) && ent.script_noteworthy == "elec_switch") {
         master_switch = ent;
         master_switch notsolid();
       }
@@ -231,7 +231,7 @@ function function_156f973e() {
       }
     }
   }
-  if(isdefined(self.script_int)) {
+  if(isDefined(self.script_int)) {
     if(self.script_int == 1) {
       var_b46e7d63 = struct::get("jungle_lab_power_plant", "targetname");
       var_b46e7d63.str_exploder = "fxexp_213";
@@ -242,11 +242,11 @@ function function_156f973e() {
       var_b46e7d63 scene::init();
     }
   }
-  while (isdefined(self)) {
+  while(isDefined(self)) {
     self setvisibletoall();
     self setcursorhint("HINT_NOICON");
     self waittill("trigger", user);
-    if(isdefined(user.var_6fd3d65c) && user.var_6fd3d65c && user.var_bb2fd41c === 3) {
+    if(isDefined(user.var_6fd3d65c) && user.var_6fd3d65c && user.var_bb2fd41c === 3) {
       user thread function_a84a1aec(undefined, 1);
     } else {
       continue;
@@ -255,21 +255,21 @@ function function_156f973e() {
     var_b46e7d63 thread scene::play("p7_fxanim_zm_island_power_plant_on_bundle", var_b46e7d63.var_8c4b44d4);
     self thread function_e2e52f31();
     self setinvisibletoall();
-    if(isdefined(master_switch)) {
+    if(isDefined(master_switch)) {
       master_switch rotateroll(-90, 0.3);
-      master_switch playsound("zmb_switch_flip");
+      master_switch playSound("zmb_switch_flip");
     }
     power_zone = undefined;
-    if(isdefined(self.script_int)) {
+    if(isDefined(self.script_int)) {
       power_zone = self.script_int;
     }
     var_b46e7d63 waittill("hash_26b8743e");
     level zm_power::turn_power_on_and_open_doors(power_zone);
-    if(!isdefined(self.script_noteworthy) || self.script_noteworthy != "allow_power_off") {
+    if(!isDefined(self.script_noteworthy) || self.script_noteworthy != "allow_power_off") {
       self delete();
       return;
     }
-    if(isdefined(level.var_7b5a9e65) && level.var_7b5a9e65 > 0) {
+    if(isDefined(level.var_7b5a9e65) && level.var_7b5a9e65 > 0) {
       level clientfield::set(("power_switch_" + self.script_int) + "_fx", 0);
       if(self.script_int == 1) {
         exploder::exploder("ex_power_bdoor_left");
@@ -289,7 +289,7 @@ function function_156f973e() {
         return;
       }
       level notify("hash_94e4da4f");
-      self playsound("zmb_temp_power_alert");
+      self playSound("zmb_temp_power_alert");
       level clientfield::set(("power_switch_" + self.script_int) + "_fx", 1);
       var_b46e7d63.var_5260546a clientfield::set("power_plant_glow", 0);
       var_b46e7d63 thread scene::play("p7_fxanim_zm_island_power_plant_off_bundle", var_b46e7d63.var_969af1da);
@@ -306,10 +306,10 @@ function function_156f973e() {
       self waittill("trigger", user);
       self setinvisibletoall();
     }
-    if(isdefined(master_switch)) {
+    if(isDefined(master_switch)) {
       master_switch rotateroll(90, 0.3);
     }
-    if(isdefined(master_switch)) {
+    if(isDefined(master_switch)) {
       master_switch waittill("rotatedone");
     }
     level zm_power::turn_power_off_and_close_doors(power_zone);
@@ -339,7 +339,7 @@ function function_b3c3fdca() {
 
 function function_e2e52f31() {
   var_e2e52f31 = spawn("script_origin", self.origin);
-  var_e2e52f31 playloopsound("zmb_temp_power_loop", 1.5);
+  var_e2e52f31 playLoopSound("zmb_temp_power_loop", 1.5);
   self waittill("hash_42c31433");
   self playsoundwithnotify("zmb_temp_power_off", "sounddone");
   var_e2e52f31 stoploopsound(2);
@@ -349,8 +349,8 @@ function function_e2e52f31() {
 
 function function_7963db9c(var_fb491867) {
   var_6575d157 = spawn("script_origin", var_fb491867);
-  var_6575d157 playloopsound("amb_mini_generator", 1.5);
-  var_6575d157 playsound("amb_gen_start");
+  var_6575d157 playLoopSound("amb_mini_generator", 1.5);
+  var_6575d157 playSound("amb_gen_start");
   self waittill("hash_42c31433");
   var_6575d157 stoploopsound(2);
   var_6575d157 playsoundwithnotify("amb_gen_stop", "snd_done");
@@ -359,26 +359,26 @@ function function_7963db9c(var_fb491867) {
 }
 
 function function_53f26a4c() {
-  if(!isdefined(self.var_bb2fd41c)) {
+  if(!isDefined(self.var_bb2fd41c)) {
     return;
   }
   if(self.var_bb2fd41c === 3) {
     foreach(var_5972e249 in level.var_769c0729) {
-      if(isdefined(var_5972e249)) {
-        var_5972e249 sethintstringforplayer(self, & "ZOMBIE_ELECTRIC_SWITCH");
+      if(isDefined(var_5972e249)) {
+        var_5972e249 sethintstringforplayer(self, &"ZOMBIE_ELECTRIC_SWITCH");
       }
     }
   } else {
     if(self.var_bb2fd41c > 0) {
       foreach(var_5972e249 in level.var_769c0729) {
-        if(isdefined(var_5972e249)) {
-          var_5972e249 sethintstringforplayer(self, & "ZM_ISLAND_POWER_SWITCH_NEEEDS_MORE_WATER");
+        if(isDefined(var_5972e249)) {
+          var_5972e249 sethintstringforplayer(self, &"ZM_ISLAND_POWER_SWITCH_NEEEDS_MORE_WATER");
         }
       }
     } else {
       foreach(var_5972e249 in level.var_769c0729) {
-        if(isdefined(var_5972e249)) {
-          var_5972e249 sethintstringforplayer(self, & "ZM_ISLAND_POWER_SWITCH_NEEEDS_WATER");
+        if(isDefined(var_5972e249)) {
+          var_5972e249 sethintstringforplayer(self, &"ZM_ISLAND_POWER_SWITCH_NEEEDS_WATER");
         }
       }
     }
@@ -400,13 +400,13 @@ function function_5144d0ee() {
   var_e43d9cdb = struct::get_array("bunker_door_open_spawners", "targetname");
   var_e43d9cdb = array::randomize(var_e43d9cdb);
   var_7809d454 = [];
-  for (i = 0; i < var_e43d9cdb.size; i++) {
-    while (getfreeactorcount() < 1) {
+  for(i = 0; i < var_e43d9cdb.size; i++) {
+    while(getfreeactorcount() < 1) {
       wait(0.05);
     }
     s_loc = var_e43d9cdb[i];
     ai_zombie = zombie_utility::spawn_zombie(level.zombie_spawners[0], "bunker_entrance_zombie", s_loc);
-    if(!isdefined(var_7809d454)) {
+    if(!isDefined(var_7809d454)) {
       var_7809d454 = [];
     } else if(!isarray(var_7809d454)) {
       var_7809d454 = array(var_7809d454);
@@ -467,9 +467,9 @@ function function_21e3b61f() {
 }
 
 function function_45585311() {
-  if(isdefined(self.var_6fd3d65c) && self.var_6fd3d65c) {
+  if(isDefined(self.var_6fd3d65c) && self.var_6fd3d65c) {
     self clientfield::set_to_player("bucket_held", 1);
-    if(!(isdefined(self.var_b6a244f9) && self.var_b6a244f9)) {
+    if(!(isDefined(self.var_b6a244f9) && self.var_b6a244f9)) {
       self.var_bb2fd41c = 0;
       self.var_c6cad973 = 0;
     } else {
@@ -482,7 +482,7 @@ function function_45585311() {
 function function_662fba30() {
   level flag::init("any_player_has_bucket");
   var_c66f413a = struct::get_array("water_bucket_location", "targetname");
-  for (i = 1; i < 5; i++) {
+  for(i = 1; i < 5; i++) {
     a_temp = [];
     foreach(var_991ffe1 in var_c66f413a) {
       if(var_991ffe1.script_int === i) {
@@ -495,14 +495,14 @@ function function_662fba30() {
 }
 
 function private function_75656c0a() {
-  while (true) {
+  while(true) {
     self.model = util::spawn_model("p7_zm_isl_bucket_115", self.origin, self.angles);
-    self.trigger = zm_island_util::spawn_trigger_radius(self.origin, 50, 1, & function_16434440);
+    self.trigger = zm_island_util::spawn_trigger_radius(self.origin, 50, 1, &function_16434440);
     self.model clientfield::set("bucket_fx", 1);
-    while (!isdefined(self.trigger)) {
+    while(!isDefined(self.trigger)) {
       wait(0.05);
     }
-    while (true) {
+    while(true) {
       self.trigger waittill("trigger", e_who);
       if(e_who clientfield::get_to_player("bucket_held")) {
         continue;
@@ -510,7 +510,7 @@ function private function_75656c0a() {
       e_who thread zm_audio::create_and_play_dialog("bucket", "pickup");
       e_who clientfield::set_to_player("bucket_held", 1);
       e_who.var_6fd3d65c = 1;
-      e_who playsound("zmb_bucket_pickup");
+      e_who playSound("zmb_bucket_pickup");
       if(self.script_int === 1) {
         e_who.var_bb2fd41c = 1;
         e_who.var_c6cad973 = randomintrange(1, 4);
@@ -542,27 +542,27 @@ function function_4b057b64() {
 
 function private function_16434440(e_player) {
   if(e_player clientfield::get_to_player("bucket_held")) {
-    return & "";
+    return &"";
   }
-  return & "ZM_ISLAND_PICKUP_BUCKET";
+  return &"ZM_ISLAND_PICKUP_BUCKET";
 }
 
 function function_a84a1aec(var_c6cad973, var_350cfc56) {
   if(!self clientfield::get_to_player("bucket_held")) {
     return;
   }
-  if(isdefined(var_c6cad973)) {
+  if(isDefined(var_c6cad973)) {
     self.var_bb2fd41c = 3;
-    self playsound("zmb_bucket_water_pickup");
+    self playSound("zmb_bucket_water_pickup");
     self.var_c6cad973 = var_c6cad973;
     self thread function_ef097ea(self.var_c6cad973, self.var_bb2fd41c, self function_89538fbb(), 1);
   } else {
-    if(isdefined(var_350cfc56) && var_350cfc56) {
+    if(isDefined(var_350cfc56) && var_350cfc56) {
       self.var_bb2fd41c = self.var_bb2fd41c - 3;
     } else {
       self.var_bb2fd41c = self.var_bb2fd41c - 1;
     }
-    if(isdefined(self.var_b6a244f9) && self.var_b6a244f9) {
+    if(isDefined(self.var_b6a244f9) && self.var_b6a244f9) {
       self.var_bb2fd41c = 3;
     }
     if(self.var_bb2fd41c <= 0) {
@@ -574,10 +574,10 @@ function function_a84a1aec(var_c6cad973, var_350cfc56) {
 }
 
 function function_89538fbb() {
-  if(isdefined(self.var_6fd3d65c) && self.var_6fd3d65c && (isdefined(self.var_b6a244f9) && self.var_b6a244f9)) {
+  if(isDefined(self.var_6fd3d65c) && self.var_6fd3d65c && (isDefined(self.var_b6a244f9) && self.var_b6a244f9)) {
     return 2;
   }
-  if(isdefined(self.var_6fd3d65c) && self.var_6fd3d65c && (!(isdefined(self.var_b6a244f9) && self.var_b6a244f9))) {
+  if(isDefined(self.var_6fd3d65c) && self.var_6fd3d65c && (!(isDefined(self.var_b6a244f9) && self.var_b6a244f9))) {
     return 1;
   }
   return 0;
@@ -606,7 +606,7 @@ function function_d570abb() {
     self clientfield::set_to_player("bucket_held", 1);
     self.var_6fd3d65c = 1;
   }
-  if(isdefined(self.var_b6a244f9) && self.var_b6a244f9) {
+  if(isDefined(self.var_b6a244f9) && self.var_b6a244f9) {
     self clientfield::set_to_player("bucket_held", 2);
     self.var_bb2fd41c = 3;
     self.var_c6cad973 = 1;
@@ -618,7 +618,7 @@ function function_d570abb() {
 }
 
 function function_c5751341() {
-  level.var_4a0060c0 = getentarray("water_source", "targetname");
+  level.var_4a0060c0 = getEntArray("water_source", "targetname");
   foreach(var_7e208829 in level.var_4a0060c0) {
     var_7e208829 thread function_3e519f17();
   }
@@ -630,14 +630,14 @@ function function_3e519f17() {
   self setinvisibletoall();
   self sethintstring(&"ZM_ISLAND_FILL_BUCKET");
   self setcursorhint("HINT_NOICON");
-  while (true) {
+  while(true) {
     self waittill("trigger", e_who);
     if(!e_who clientfield::get_to_player("bucket_held")) {
       continue;
     }
     e_who thread function_a84a1aec(self.script_int);
     e_who notify("player_filled_bucket");
-    if(isdefined(e_who.playernum)) {
+    if(isDefined(e_who.playernum)) {
       println(("" + e_who.playernum) + "");
     }
   }
@@ -645,7 +645,7 @@ function function_3e519f17() {
 
 function function_d99ed9ac() {
   self sethintstring(&"");
-  while (true) {
+  while(true) {
     self waittill("touch", e_who);
     if(isvehicle(e_who)) {
       e_player = e_who.e_parent;
@@ -660,7 +660,7 @@ function function_d99ed9ac() {
     }
     if(e_player usebuttonpressed()) {
       e_player.var_7621b9dd = gettime();
-      if(isdefined(e_player.var_57db2550) && (e_player.var_7621b9dd - e_player.var_57db2550) > 250) {
+      if(isDefined(e_player.var_57db2550) && (e_player.var_7621b9dd - e_player.var_57db2550) > 250) {
         e_player thread function_a84a1aec(self.script_int);
         println(("" + e_player.playernum) + "");
       }
@@ -672,7 +672,7 @@ function function_a7a30925() {
   self endon("death");
   self endon("sewer_over");
   var_72b16720 = getent("water_source_ee", "targetname");
-  while (true) {
+  while(true) {
     self util::waittill_use_button_pressed();
     if(!self istouching(var_72b16720)) {
       self.var_57db2550 = gettime();
@@ -698,7 +698,7 @@ function function_16ae5bf5() {
 }
 
 function function_5b3bc8() {
-  zm_devgui::add_custom_devgui_callback( & function_d8d81d72);
+  zm_devgui::add_custom_devgui_callback(&function_d8d81d72);
   adddebugcommand("");
   adddebugcommand("");
   adddebugcommand("");
@@ -764,7 +764,7 @@ function function_d8d81d72(cmd) {
 function function_1b3134ae() {
   var_5646068 = struct::get_array("", "");
   foreach(var_991ffe1 in var_5646068) {
-    if(isdefined(var_991ffe1.trigger)) {
+    if(isDefined(var_991ffe1.trigger)) {
       continue;
     }
     var_991ffe1 thread function_75656c0a();

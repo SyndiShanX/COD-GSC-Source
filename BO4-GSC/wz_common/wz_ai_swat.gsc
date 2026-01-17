@@ -7,7 +7,6 @@
 #include scripts\core_common\ai\systems\behavior_tree_utility;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace wz_ai_swat;
 
 autoexec __init__system__() {
@@ -18,7 +17,7 @@ __init__() {
   registerbehaviorscriptfunctions();
 }
 
-private registerbehaviorscriptfunctions() {
+registerbehaviorscriptfunctions() {
   assert(isscriptfunctionptr(&function_e3151f98));
   behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_62335a0608a02309", &function_e3151f98);
   assert(isscriptfunctionptr(&function_e5f59cf0));
@@ -44,19 +43,19 @@ function_8acd749d(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mo
   entity.blockingpain = 0;
 }
 
-private function_e3151f98(entity) {
-  if(entity.subarchetype === #"human_swat_gunner") {
+function_e3151f98(entity) {
+  if(entity.subarchetype === # "human_swat_gunner") {
     return true;
   }
 
   return false;
 }
 
-private function_e5f59cf0(entity) {
+function_e5f59cf0(entity) {
   entity unlink();
 }
 
-private function_3c677dcd(entity) {
+function_3c677dcd(entity) {
   if(isDefined(entity.enemy)) {
     if(util::within_fov(entity.origin, entity.angles, entity.enemy.origin, cos(90))) {
       return true;
@@ -66,10 +65,10 @@ private function_3c677dcd(entity) {
   return false;
 }
 
-private function_994477c0(entity) {
+function_994477c0(entity) {
   return false;
 }
 
-private function_fb9f1f3b(entity) {
+function_fb9f1f3b(entity) {
   return false;
 }

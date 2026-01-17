@@ -15,7 +15,7 @@ init() {
 
 jump_pad_init() {
   level._jump_pad_override = [];
-  jump_pad_triggers = getentarray("trig_jump_pad", "targetname");
+  jump_pad_triggers = getEntArray("trig_jump_pad", "targetname");
 
   if(!isDefined(jump_pad_triggers)) {
     return;
@@ -94,13 +94,13 @@ jump_pad_start(ent_player, endon_condition) {
 
   if(isDefined(self.script_wait)) {
     if(self.script_wait < 1)
-      self playsound("evt_jump_pad_charge_short");
+      self playSound("evt_jump_pad_charge_short");
     else
-      self playsound("evt_jump_pad_charge");
+      self playSound("evt_jump_pad_charge");
 
     wait(self.script_wait);
   } else {
-    self playsound("evt_jump_pad_charge");
+    self playSound("evt_jump_pad_charge");
     wait 1.0;
   }
 
@@ -199,8 +199,8 @@ jump_pad_start(ent_player, endon_condition) {
 
   if(isDefined(self.script_start) && self.script_start == 1) {
     if(!is_true(ent_player._padded)) {
-      self playsound("evt_jump_pad_launch");
-      playfx(level._effect["jump_pad_jump"], self.origin);
+      self playSound("evt_jump_pad_launch");
+      playFX(level._effect["jump_pad_jump"], self.origin);
       ent_player thread jump_pad_move(fling_this_way, jump_time, poi_spot, self);
 
       if(isDefined(self.script_label))
@@ -209,8 +209,8 @@ jump_pad_start(ent_player, endon_condition) {
       return;
     }
   } else if(ent_player isonground() && !is_true(ent_player._padded)) {
-    self playsound("evt_jump_pad_launch");
-    playfx(level._effect["jump_pad_jump"], self.origin);
+    self playSound("evt_jump_pad_launch");
+    playFX(level._effect["jump_pad_jump"], self.origin);
     ent_player thread jump_pad_move(fling_this_way, jump_time, poi_spot, self);
 
     if(isDefined(self.script_label))
@@ -228,8 +228,7 @@ jump_pad_start(ent_player, endon_condition) {
 jump_pad_cancel(ent_player) {
   ent_player notify("left_jump_pad");
 
-  if(isDefined(ent_player.poi_spot) && !is_true(ent_player._padded)) {
-  }
+  if(isDefined(ent_player.poi_spot) && !is_true(ent_player._padded)) {}
 
   if(isDefined(self.name)) {
     self._action_overrides = strtok(self.name, ",");
@@ -311,7 +310,7 @@ jump_pad_move(vec_direction, flt_time, struct_poi, trigger) {
 
   self._padded = 0;
   self.lander = 0;
-  jump_pad_triggers = getentarray("trig_jump_pad", "targetname");
+  jump_pad_triggers = getEntArray("trig_jump_pad", "targetname");
 
   for(i = 0; i < jump_pad_triggers.size; i++) {
     if(self istouching(jump_pad_triggers[i])) {
@@ -442,16 +441,13 @@ jump_pad_player_overrides(st_behavior, int_clean) {
 
   switch (st_behavior) {
     case "no_sprint":
-      if(!int_clean) {
-      } else {
-      }
+      if(!int_clean) {} else {}
 
       break;
     default:
       if(isDefined(level._jump_pad_level_behavior))
         self[[level._jump_pad_level_behavior]](st_behavior, int_clean);
-      else {
-      }
+      else {}
 
       break;
   }

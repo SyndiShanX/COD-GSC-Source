@@ -29,7 +29,7 @@ init() {
 
   level thread onplayerconnect();
   registerkillstreak("emp_mp", "emp_mp", "killstreak_emp", "emp_used", ::emp_use);
-  registerkillstreakstrings("emp_mp", & "KILLSTREAK_EARNED_EMP", & "KILLSTREAK_EMP_NOT_AVAILABLE", & "KILLSTREAK_EMP_INBOUND");
+  registerkillstreakstrings("emp_mp", &"KILLSTREAK_EARNED_EMP", &"KILLSTREAK_EMP_NOT_AVAILABLE", &"KILLSTREAK_EMP_INBOUND");
   registerkillstreakdialog("emp_mp", "mpl_killstreak_emp_activate", "kls_emp_used", "", "kls_emp_enemy", "", "kls_emp_ready");
   registerkillstreakdevdvar("emp_mp", "scr_giveemp");
   maps\mp\killstreaks\_killstreaks::createkillstreaktimer("emp_mp");
@@ -179,12 +179,12 @@ empplayerffadisconnect() {
 
 empeffects() {
   foreach(player in level.players) {
-    playerforward = anglestoforward(player.angles);
+    playerforward = anglesToForward(player.angles);
     playerforward = (playerforward[0], playerforward[1], 0);
     playerforward = vectornormalize(playerforward);
     empdistance = 20000;
     empent = spawn("script_model", player.origin + vectorscale((0, 0, 1), 8000.0) + playerforward * empdistance);
-    empent setmodel("tag_origin");
+    empent setModel("tag_origin");
     empent.angles = empent.angles + vectorscale((1, 0, 0), 270.0);
     empent thread empeffect(player);
   }
@@ -195,8 +195,8 @@ empeffect(player) {
   self setinvisibletoall();
   self setvisibletoplayer(player);
   wait 0.5;
-  playfxontag(level._effect["emp_flash"], self, "tag_origin");
-  self playsound("wpn_emp_bomb");
+  playFXOnTag(level._effect["emp_flash"], self, "tag_origin");
+  self playSound("wpn_emp_bomb");
   self deleteaftertime(11);
 }
 
@@ -321,17 +321,17 @@ destroyotherteamsactivevehicles(attacker, teamemping) {
 }
 
 destroyactivevehicles(attacker, teamemped) {
-  turrets = getentarray("auto_turret", "classname");
+  turrets = getEntArray("auto_turret", "classname");
   destroyentities(turrets, attacker, teamemped);
   targets = target_getarray();
   destroyentities(targets, attacker, teamemped);
-  rcbombs = getentarray("rcbomb", "targetname");
+  rcbombs = getEntArray("rcbomb", "targetname");
   destroyentities(rcbombs, attacker, teamemped);
-  remotemissiles = getentarray("remote_missile", "targetname");
+  remotemissiles = getEntArray("remote_missile", "targetname");
   destroyentities(remotemissiles, attacker, teamemped);
-  remotedrone = getentarray("remote_drone", "targetname");
+  remotedrone = getEntArray("remote_drone", "targetname");
   destroyentities(remotedrone, attacker, teamemped);
-  planemortars = getentarray("plane_mortar", "targetname");
+  planemortars = getEntArray("plane_mortar", "targetname");
 
   foreach(planemortar in planemortars) {
     if(isDefined(teamemped) && isDefined(planemortar.team)) {
@@ -343,7 +343,7 @@ destroyactivevehicles(attacker, teamemped) {
     planemortar notify("emp_deployed", attacker);
   }
 
-  satellites = getentarray("satellite", "targetname");
+  satellites = getEntArray("satellite", "targetname");
 
   foreach(satellite in satellites) {
     if(isDefined(teamemped) && isDefined(satellite.team)) {
@@ -384,10 +384,10 @@ destroyentities(entities, attacker, team) {
 
 drawempdamageorigin(pos, ang, radius) {
   while(getdvarint(#"scr_emp_damage_debug")) {
-    line(pos, pos + anglestoforward(ang) * radius, (1, 0, 0));
+    line(pos, pos + anglesToForward(ang) * radius, (1, 0, 0));
     line(pos, pos + anglestoright(ang) * radius, (0, 1, 0));
     line(pos, pos + anglestoup(ang) * radius, (0, 0, 1));
-    line(pos, pos - anglestoforward(ang) * radius, (1, 0, 0));
+    line(pos, pos - anglesToForward(ang) * radius, (1, 0, 0));
     line(pos, pos - anglestoright(ang) * radius, (0, 1, 0));
     line(pos, pos - anglestoup(ang) * radius, (0, 0, 1));
     wait 0.05;

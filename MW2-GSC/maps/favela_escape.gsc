@@ -97,7 +97,7 @@ main() {
 chicken_achievement() {
   level.chickens_killed = [];
 
-  destructible_toy = GetEntArray("destructible_toy", "targetname");
+  destructible_toy = getEntArray("destructible_toy", "targetname");
   chickens = [];
   foreach(item in destructible_toy) {
     if(issubstr(item.destructible_type, "toy_chicken"))
@@ -110,20 +110,20 @@ chicken_achievement() {
 chicken_achievement_think() {
   self waittill("damage", damage, attacker, direction_vec, point, type, modelName, tagName, partName, dflags);
 
-  if(!isplayer(attacker))
+  if(!isplayer(attacker)) {
     return;
-
+  }
   level.chickens_killed[level.chickens_killed.size] = gettime();
 
-  if(level.chickens_killed.size < CONST_CHICKEN_ACHIEVEMENT_NUM)
+  if(level.chickens_killed.size < CONST_CHICKEN_ACHIEVEMENT_NUM) {
     return;
-
+  }
   time1 = level.chickens_killed[level.chickens_killed.size - CONST_CHICKEN_ACHIEVEMENT_NUM];
   time2 = level.chickens_killed[level.chickens_killed.size - 1];
 
-  if((time2 - time1) > CONST_CHICKEN_ACHIEVEMENT_TIME * 1000)
+  if((time2 - time1) > CONST_CHICKEN_ACHIEVEMENT_TIME * 1000) {
     return;
-
+  }
   maps\_utility::giveachievement_wrapper("COLONEL_SANDERSON");
 }
 
@@ -221,7 +221,7 @@ init_weaponClipModels() {
 }
 
 move_stuff_at_levelstart() {
-  level.market_evac_helperClips = GetEntArray("sbmodel_market_evac_helperclip", "targetname");
+  level.market_evac_helperClips = getEntArray("sbmodel_market_evac_helperclip", "targetname");
   foreach(clip in level.market_evac_helperClips) {
     clip ConnectPaths();
   }
@@ -231,10 +231,10 @@ move_stuff_at_levelstart() {
 }
 
 setup_friends() {
-  friends = GetEntArray("starting_allies", "script_noteworthy");
+  friends = getEntArray("starting_allies", "script_noteworthy");
 
   foreach(guy in friends) {
-    if(IsDefined(guy.targetname)) {
+    if(isDefined(guy.targetname)) {
       // MacTavish
       if(guy.targetname == "sarge") {
         //guy thread magic_bullet_shield();
@@ -252,7 +252,7 @@ setup_friends() {
       }
     }
 
-    if(IsDefined(guy.isHero)) {
+    if(isDefined(guy.isHero)) {
       // heroes are invincible
       guy thread magic_bullet_shield();
     } else {
@@ -275,40 +275,40 @@ setup_friends() {
 setup_enemies() {
   add_global_spawn_function("axis", ::scr_usechokepoints, true);
 
-  deleters = GetEntArray("delete_at_path_end", "script_noteworthy");
+  deleters = getEntArray("delete_at_path_end", "script_noteworthy");
   array_thread(deleters, ::add_spawn_function, ::delete_at_path_end);
 
-  ignorers2 = GetEntArray("ignore_til_pathend_or_damage", "script_noteworthy");
+  ignorers2 = getEntArray("ignore_til_pathend_or_damage", "script_noteworthy");
   array_thread(ignorers2, ::add_spawn_function, ::ignore_til_pathend_or_damage);
 
-  ignore_and_deleters = GetEntArray("ignore_and_delete_at_path_end", "script_noteworthy");
+  ignore_and_deleters = getEntArray("ignore_and_delete_at_path_end", "script_noteworthy");
   array_thread(ignore_and_deleters, ::add_spawn_function, ::ignore_and_delete_at_path_end);
 
-  seekers = GetEntArray("playerseek_at_path_end", "script_noteworthy");
+  seekers = getEntArray("playerseek_at_path_end", "script_noteworthy");
   array_thread(seekers, ::add_spawn_function, ::playerseek_at_path_end);
 
-  smashers1 = GetEntArray("window_smash_stop_inside", "script_noteworthy");
+  smashers1 = getEntArray("window_smash_stop_inside", "script_noteworthy");
   array_thread(smashers1, ::add_spawn_function, ::window_smash_stop_inside);
 
-  chaoticAboves = GetEntArray("chaotic_above_shooter", "script_noteworthy");
+  chaoticAboves = getEntArray("chaotic_above_shooter", "script_noteworthy");
   array_thread(chaoticAboves, ::add_spawn_function, ::chaotic_above_shooter);
 
-  solorunChasers = GetEntArray("solorun_chaser_spawner", "script_noteworthy");
+  solorunChasers = getEntArray("solorun_chaser_spawner", "script_noteworthy");
   array_thread(solorunChasers, ::add_spawn_function, ::solorun_chaser_spawnfunc);
 
-  noBackShooters = GetEntArray("dont_shoot_player_in_back", "script_noteworthy");
+  noBackShooters = getEntArray("dont_shoot_player_in_back", "script_noteworthy");
   array_thread(noBackShooters, ::add_spawn_function, ::dont_shoot_player_in_back);
 
   guy = GetEnt("spawner_vista2_endhouse", "script_noteworthy");
   guy thread add_spawn_function(::ai_unlimited_rocket_ammo);
 
-  roofRunners = GetEntArray("solorun_roofrunner", "script_noteworthy");
+  roofRunners = getEntArray("solorun_roofrunner", "script_noteworthy");
   array_thread(roofRunners, ::add_spawn_function, ::dont_shoot_player_in_back);
   array_thread(roofRunners, ::add_spawn_function, ::delete_at_path_end);
 }
 
 setup_vehicles() {
-  solorunChoppers = GetEntArray("solorun_chopper", "script_noteworthy");
+  solorunChoppers = getEntArray("solorun_chopper", "script_noteworthy");
   array_thread(solorunChoppers, ::add_spawn_function, ::solorun_chopper_spawnfunc);
 }
 
@@ -316,26 +316,26 @@ favela_escape_objectives() {
   flag_wait("radiotower_start");
 
   obj1_set = false; // hack to make Soap-less start points work with objectives
-  if(IsDefined(level.sarge)) {
-    Objective_Add(1, "current", & "FAVELA_ESCAPE_OBJ_FOLLOW_SOAP");
+  if(isDefined(level.sarge)) {
+    Objective_Add(1, "current", &"FAVELA_ESCAPE_OBJ_FOLLOW_SOAP");
     Objective_OnEntity(1, level.sarge);
-    Objective_SetPointerTextOverride(1, & "FAVELA_ESCAPE_OBJ_FOLLOW_MARKER");
+    Objective_SetPointerTextOverride(1, &"FAVELA_ESCAPE_OBJ_FOLLOW_MARKER");
 
     obj1_set = true;
   }
 
   flag_wait("market_introdialogue_done");
   if(obj1_set) {
-    Objective_String(1, & "FAVELA_ESCAPE_OBJ_FLEE_RADIOTOWER");
+    Objective_String(1, &"FAVELA_ESCAPE_OBJ_FLEE_RADIOTOWER");
     Objective_Position(1, (-3154, -1875, 1096));
     Objective_SetPointerTextOverride(1, ""); // reset to default
   }
 
   flag_wait("market_evac_chopper_incoming");
   Objective_Complete(1);
-  Objective_Add(2, "current", & "FAVELA_ESCAPE_OBJ_MARKET_ESCAPE", (-3937, -1051, 1241));
+  Objective_Add(2, "current", &"FAVELA_ESCAPE_OBJ_MARKET_ESCAPE", (-3937, -1051, 1241));
   // start point hack
-  if(IsDefined(level.chopper)) {
+  if(isDefined(level.chopper)) {
     Objective_OnEntity(2, level.chopper);
   }
 
@@ -344,14 +344,14 @@ favela_escape_objectives() {
   flag_wait("solorun_objective_display");
   //flag_wait( "solorun_start" );
   Objective_Complete(2);
-  Objective_Add(3, "current", & "FAVELA_ESCAPE_OBJ_GET_BACK_TO_ROOF", (-5924, -870, 816));
+  Objective_Add(3, "current", &"FAVELA_ESCAPE_OBJ_GET_BACK_TO_ROOF", (-5924, -870, 816));
 
   thread solorun_houses_obj_update_pos(3);
   thread solorun_houses_obj_turnoff_compass();
 
   flag_wait("solorun_player_at_balcony");
   Objective_Complete(3);
-  Objective_Add(4, "current", & "FAVELA_ESCAPE_OBJ_GET_TO_CHOPPER", (-8192, 2128, 704));
+  Objective_Add(4, "current", &"FAVELA_ESCAPE_OBJ_GET_TO_CHOPPER", (-8192, 2128, 704));
 
   thread solorun_roof_obj_update_pos(4);
 
@@ -381,12 +381,12 @@ market_evac_chopper_obj_update_pos(objID) {
 
   flag_wait("roofrun_player_at_start_loc");
 
-  while (IsDefined(level.chopper)) {
+  while(isDefined(level.chopper)) {
     wait(0.05);
   }
 
   chopper = undefined;
-  while (!IsDefined(chopper)) {
+  while(!isDefined(chopper)) {
     wait(0.05);
     chopper = get_vehicle("veh_chopper_roofrun", "targetname");
   }
@@ -468,10 +468,10 @@ start_favela_escape_test() {
   trigger_off( "sbmodel_market_evac_playerblock", "targetname" );
   level.player teleport_to_origin( ( -3128, -2888, 1064 ), ( 0, 90, 0 ) );
   chopper = spawn_chopper( 6, false );
-	
+  	
   path2start = GetStruct( "struct_market_evac_chopper_path2", "targetname" );
   path2nextnode = GetStruct( path2start.target, "targetname" );
-	
+  	
   chopper thread market_evac_chopper_bugout_path( path2start );
   */
 
@@ -800,13 +800,13 @@ intro_rojas_crucified() {
 
   animref = GetEnt("intro_rojas_beaten_animref", "targetname");
   spawner = GetEnt(animref.target, "targetname");
-  ASSERT(IsDefined(animref) && IsDefined(spawner));
+  ASSERT(isDefined(animref) && isDefined(spawner));
 
   spawner.script_drone = undefined;
   //spawner.script_drone_override = true;
 
   rojas = spawner spawn_ai(true);
-  ASSERT(IsDefined(rojas));
+  ASSERT(isDefined(rojas));
 
   restraints = spawn_anim_model("rojas_restraints");
 
@@ -832,7 +832,7 @@ intro_rojas_crucified() {
 
   rojas add_damage_function(::bloody_pain);
 
-  while (1) {
+  while(1) {
     rojas waittill("damage", amount, who);
 
     if(amount <= 1) {
@@ -866,7 +866,7 @@ intro_rojas_crucified_cleanup(rojas, animref, restraints) {
 
   level notify("cleaning_up_rojas");
 
-  if(IsDefined(rojas)) {
+  if(isDefined(rojas)) {
     rojas anim_stopanimscripted();
   }
   animref anim_stopanimscripted();
@@ -874,7 +874,7 @@ intro_rojas_crucified_cleanup(rojas, animref, restraints) {
 
   wait(0.05);
 
-  if(IsDefined(rojas)) {
+  if(isDefined(rojas)) {
     rojas Delete();
   }
   animref Delete();
@@ -916,7 +916,7 @@ friendly_colors(startPoint) {
   market_trigPrefix = "market_advance";
   market_numTrigs = 6;
 
-  if(!IsDefined(startPoint)) {
+  if(!isDefined(startPoint)) {
     // MAIN LOGIC
     thread color_flags_advance(street_trigPrefix, street_numTrigs);
     flag_wait(street_trigPrefix + "_" + street_numTrigs);
@@ -1018,7 +1018,7 @@ market_evac() {
     spawner = GetEnt("market_evac_redshirt_spawner", "targetname");
 
     guy = spawner spawn_ai();
-    ASSERTEX(IsDefined(guy), "Couldn't spawn emergency friendly for market evac escape.");
+    ASSERTEX(isDefined(guy), "Couldn't spawn emergency friendly for market evac escape.");
 
     guy friend_add();
     redshirt = guy;
@@ -1079,7 +1079,7 @@ market_evac_friend_teleport(warpSpot) {
 
   if(self != level.sarge && self != level.hero1) {
     // a meleeing nonhero is going to be replaced later so we don't have to teleport him
-    if(IsDefined(self.melee)) {
+    if(isDefined(self.melee)) {
       return;
     }
   }
@@ -1098,7 +1098,7 @@ nonhero_is_valid(nonheroes) {
     return false;
   }
 
-  if(IsDefined(guy.melee)) {
+  if(isDefined(guy.melee)) {
     return false;
   }
 
@@ -1219,7 +1219,7 @@ market_evac_friendlies_climb() {
   level.sarge thread market_evac_sarge_climb(animref, animeM, animeM_idle, animeM_idle_2_run);
 
   // wait for all friendlies to climb up
-  while (level.friendliesClimbing < level.friends.size) {
+  while(level.friendliesClimbing < level.friends.size) {
     wait(0.05);
   }
 
@@ -1255,7 +1255,7 @@ market_evac_sarge_climb(animref, anime, anime_idle, anime_idle_2_run) {
     self SetGoalPos(self.origin);
     animref thread anim_generic_loop(self, anime_idle, "sarge_idle_stop");
 
-    while (market_evac_sarge_should_idle()) {
+    while(market_evac_sarge_should_idle()) {
       wait(0.05);
     }
 
@@ -1333,7 +1333,7 @@ roofrun_chopper_cargodoor_open() {
   chopperSpawner = GetEnt("veh_chopper_roofrun", "targetname");
 
   chopper = undefined;
-  if(IsDefined(chopperSpawner.last_spawned_vehicle)) {
+  if(isDefined(chopperSpawner.last_spawned_vehicle)) {
     chopper = chopperSpawner.last_spawned_vehicle;
   } else {
     chopperSpawner waittill("spawned", chopper);
@@ -1345,7 +1345,7 @@ roofrun_chopper_cargodoor_open() {
 
   flag_wait("player_near_bigjump");
 
-  chopper PlaySound("pavelow_door_open");
+  chopper playSound("pavelow_door_open");
   chopper anim_single_solo(chopper, "cargodoor_open");
 }
 
@@ -1357,7 +1357,7 @@ solorun(start) {
 
   waitBeforeJump = undefined;
 
-  if(!IsDefined(start)) {
+  if(!isDefined(start)) {
     start = "normal";
   }
 
@@ -1458,7 +1458,7 @@ solorun_balcony_save_aicheck() {
   enemies = GetAISpeciesArray("bad_guys", "all");
 
   foreach(enemy in enemies) {
-    if(!IsDefined(enemy.enemy)) {
+    if(!isDefined(enemy.enemy)) {
       continue;
     }
 
@@ -1467,8 +1467,8 @@ solorun_balcony_save_aicheck() {
     }
 
     // is trying to melee the player
-    if(IsDefined(enemy.Melee) && IsDefined(enemy.melee.target) && IsPlayer(enemy.melee.target)) {
-      /# maps\_autosave::AutoSavePrint( "autosave failed: AI meleeing player" ); #/
+    if(isDefined(enemy.Melee) && isDefined(enemy.melee.target) && IsPlayer(enemy.melee.target)) {
+      /# maps\_autosave::AutoSavePrint( "autosave failed: AI meleeing player" );
       return (false);
     }
 
@@ -1479,7 +1479,7 @@ solorun_balcony_save_aicheck() {
 
     // level specific!he's in the room behind the player
     if(volume IsTouching(enemy)) {
-      /# maps\_autosave::AutoSavePrint( "autosave failed: AI are in a volume close behind the player" ); #/
+      /# maps\_autosave::AutoSavePrint( "autosave failed: AI are in a volume close behind the player" );
       return false;
     }
 
@@ -1491,7 +1491,7 @@ solorun_balcony_save_aicheck() {
     	
     	if( dist < 360 )
     	{
-    		/# maps\_autosave::AutoSavePrint( "autosave failed: AI too close to player" ); #/
+    		/# maps\_autosave::AutoSavePrint( "autosave failed: AI too close to player" );
     		return false;
     	}
     	else
@@ -1500,7 +1500,7 @@ solorun_balcony_save_aicheck() {
     		proximity_threat = true;
     	}
     }
-		
+    		
     if( !proximity_threat )
     {
     	// enemy isn't close enough to be a threat
@@ -1511,13 +1511,13 @@ solorun_balcony_save_aicheck() {
     // recently shot at the player
     if(enemy.a.lastShootTime > GetTime() - 500) {
       if(enemy animscripts\utility::canSeeEnemy(0) && enemy CanShootEnemy(0)) {
-        /# maps\_autosave::AutoSavePrint( "autosave failed: AI firing on player" ); #/
+        /# maps\_autosave::AutoSavePrint( "autosave failed: AI firing on player" );
         return false;
       }
     }
 
-    if(IsDefined(enemy.a.aimIdleThread) && enemy animscripts\utility::canSeeEnemy(0) && enemy CanShootEnemy(0)) {
-      /# maps\_autosave::AutoSavePrint( "autosave failed: AI aiming at player" ); #/
+    if(isDefined(enemy.a.aimIdleThread) && enemy animscripts\utility::canSeeEnemy(0) && enemy CanShootEnemy(0)) {
+      /# maps\_autosave::AutoSavePrint( "autosave failed: AI aiming at player" );
       return false;
     }
   }

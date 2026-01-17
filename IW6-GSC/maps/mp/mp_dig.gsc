@@ -1235,7 +1235,7 @@ digCustomCrateFunc() {
   if(!allowLevelKillstreaks() || game["player_holding_level_killstrek"] || !level.allow_level_killstreak) {
     return;
   }
-  maps\mp\killstreaks\_airdrop::addCrateType("airdrop_assault", "dig_level_killstreak", DIG_LEVEL_KILLSTREAK_WEIGHT, ::digCrateThink, maps\mp\killstreaks\_airdrop::get_friendly_crate_model(), maps\mp\killstreaks\_airdrop::get_enemy_crate_model(), & "MP_DIG_ACTIVATE_SHRINE");
+  maps\mp\killstreaks\_airdrop::addCrateType("airdrop_assault", "dig_level_killstreak", DIG_LEVEL_KILLSTREAK_WEIGHT, ::digCrateThink, maps\mp\killstreaks\_airdrop::get_friendly_crate_model(), maps\mp\killstreaks\_airdrop::get_enemy_crate_model(), &"MP_DIG_ACTIVATE_SHRINE");
   maps\mp\killstreaks\_airdrop::generateMaxWeightedCrateValue();
   level thread watch_for_dig_killstreak();
 }
@@ -1249,7 +1249,7 @@ digCrateThink(dropType) {
     crateHint = game["strings"][self.crateType + "_hint"];
   else
 
-    crateHint = & "PLATFORM_GET_KILLSTREAK";
+    crateHint = &"PLATFORM_GET_KILLSTREAK";
 
   maps\mp\killstreaks\_airdrop::crateSetupForUse(crateHint, getKillstreakOverheadIcon(self.crateType));
 

@@ -226,7 +226,7 @@ wait_for_power() {
   level thread regular_portal_fx_on();
   level thread maps\zombie_pentagon::change_pentagon_vision();
   master_switch rotateroll(-90, .3);
-  master_switch playsound("zmb_switch_flip");
+  master_switch playSound("zmb_switch_flip");
   level notify("revive_on");
   level notify("juggernog_on");
   level notify("sleight_on");
@@ -235,8 +235,8 @@ wait_for_power() {
   clientnotify("ZPO");
   maps\zombie_pentagon_teleporter::teleporter_init();
   master_switch waittill("rotatedone");
-  playfx(level._effect["switch_sparks"], getstruct("elec_switch_fx", "targetname").origin);
-  master_switch playsound("zmb_turn_on");
+  playFX(level._effect["switch_sparks"], getstruct("elec_switch_fx", "targetname").origin);
+  master_switch playSound("zmb_turn_on");
   level thread maps\zombie_pentagon_amb::play_pentagon_announcer_vox("zmb_vox_pentann_poweron");
 }
 
@@ -250,7 +250,7 @@ init_sounds() {
 quad_traverse_death_fx() {
   self endon("quad_end_traverse_anim");
   self waittill("death");
-  playfx(level._effect["quad_grnd_dust_spwnr"], self.origin);
+  playFX(level._effect["quad_grnd_dust_spwnr"], self.origin);
 }
 
 zombie_pathing_init() {

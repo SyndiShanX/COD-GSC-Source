@@ -272,7 +272,6 @@ script_models() {
 
   //	level.scr_animtree[ "lamp_off" ] 								= #animtree;
   //	level.scr_model[ "lamp_off" ] 									= "ch_industrial_light_animated_01_off";
-
 }
 
 #using_animtree("player");
@@ -669,7 +668,7 @@ dialog() {
   //* Lieutenant: "Little Bird inbound now."
   level.scr_radio["lnt_littlebirdinbound"] = "afcaves_lnt_littlebirdinbound";
 
-  //* Price: 	Heads up Soap! Helicopter coming in fast from the west! 
+  //* Price: 	Heads up Soap! Helicopter coming in fast from the west!
   level.scr_radio["pri_gonnagetaway"] = "afcaves_pri_gonnagetaway";
 
   //* Price: "Take out that helicopter!!"

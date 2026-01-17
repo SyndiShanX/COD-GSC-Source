@@ -7,7 +7,6 @@
 #include scripts\core_common\map;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\values_shared;
-
 #namespace oob;
 
 autoexec __init__system__() {
@@ -16,7 +15,7 @@ autoexec __init__system__() {
 
 __init__() {
   level.oow = {
-    #height_min: -2147483647, 
+    #height_min: -2147483647,
     #height_max: 2147483647
   };
   callback::on_game_playing(&on_game_playing);

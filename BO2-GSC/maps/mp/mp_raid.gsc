@@ -61,7 +61,7 @@ levelspawndvars(reset_dvars) {
 }
 
 water_trigger_init() {
-  triggers = getentarray("water_killbrush", "targetname");
+  triggers = getEntArray("water_killbrush", "targetname");
 
   foreach(trigger in triggers)
   trigger thread player_splash_think();
@@ -83,5 +83,5 @@ player_water_fx(player, endon_condition) {
     maxs = maxs + vectorscale((0, 0, 1), 5.0);
 
   origin = (player.origin[0], player.origin[1], maxs[2]);
-  playfx(level._effect["water_splash_sm"], origin);
+  playFX(level._effect["water_splash_sm"], origin);
 }

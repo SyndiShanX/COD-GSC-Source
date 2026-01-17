@@ -58,10 +58,10 @@ event_foyer_pacing_start() {
 }
 
 diary_reading() {
-  while (!isDefined(level._introscreen)) {
+  while(!isDefined(level._introscreen)) {
     wait(0.05);
   }
-  while (!level._introscreen) {
+  while(!level._introscreen) {
     wait(0.05);
   }
   wait(2);
@@ -73,7 +73,7 @@ diary_reading() {
   fadeTime = 0.5;
   level waittill("finished final intro screen fadein");
   wait(2.5);
-  while (GetTime() < endTime) {
+  while(GetTime() < endTime) {
     wait(0.5);
   }
   host notify("fade_diary_hud");
@@ -97,7 +97,7 @@ event_foyer_introscene() {
   thread introscene_closedoors_far();
   sarge = level.sarge;
   sarge.animname = "sarge";
-  animSpot = Spawn("script_origin", sarge.origin);
+  animSpot = spawn("script_origin", sarge.origin);
   animSpot.angles = (0, 0, 0);
   sarge thread anim_finished_notify("intro_sarge_anim_done");
   animSpot thread anim_single_solo_earlyout(sarge, "intro_peptalk");
@@ -127,7 +127,7 @@ introscene_artystrikes() {
   minWait = 5;
   maxWait = 10;
   firstTime = true;
-  while (1) {
+  while(1) {
     if(firstTime) {
       firstTime = false;
     } else {
@@ -155,7 +155,7 @@ introscene_closedoors_far() {
   guy2 = spawn_guy(spawner2);
   guys[0] = guy1;
   guys[1] = guy2;
-  for (i = 0; i < guys.size; i++) {
+  for(i = 0; i < guys.size; i++) {
     guy = guys[i];
     guy.ignoreme = true;
     guy.ignoreall = true;
@@ -167,7 +167,7 @@ introscene_closedoors_far() {
   door1 thread reichstag_dooranim("reichstag_frontdoor_1", "closedoor", "frontdoor_anim");
   door2 thread reichstag_dooranim("reichstag_frontdoor_2", "closedoor", "frontdoor_anim");
   animSpot anim_single(guys, "closedoor");
-  for (i = 0; i < guys.size; i++) {
+  for(i = 0; i < guys.size; i++) {
     guy = guys[i];
     guy.ignoreme = false;
     guy.ignoreall = false;
@@ -188,7 +188,7 @@ introscene_closedoors_near() {
   guy4 = spawn_guy(spawner4);
   guys[0] = guy3;
   guys[1] = guy4;
-  for (i = 0; i < guys.size; i++) {
+  for(i = 0; i < guys.size; i++) {
     guy = guys[i];
     guy.ignoreme = true;
     guy.ignoreall = true;
@@ -203,7 +203,7 @@ introscene_closedoors_near() {
   door3 thread reichstag_dooranim("reichstag_frontdoor_3", "closedoor", "frontdoor_anim");
   door4 thread reichstag_dooranim("reichstag_frontdoor_4", "closedoor", "frontdoor_anim");
   animSpot anim_single(guys, "closedoor");
-  for (i = 0; i < guys.size; i++) {
+  for(i = 0; i < guys.size; i++) {
     guy = guys[i];
     guy.ignoreme = false;
     guy.ignoreall = false;
@@ -217,7 +217,7 @@ introscene_closedoors_near() {
 introscene_playercheck() {
   level endon("intro_finished");
   trig = getent_safe("trig_script_color_allies_b1", "targetname");
-  while (isDefined(trig)) {
+  while(isDefined(trig)) {
     trig waittill("trigger", guy);
     if(IsPlayer(guy)) {
       break;
@@ -229,7 +229,7 @@ introscene_playercheck() {
 crouch_players() {
   flag_wait("warp_players_done");
   players = get_players();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     player = players[i];
     player SetStance("crouch");
   }
@@ -241,7 +241,7 @@ align_friendlies() {
   sargeSpot = getstruct_safe("struct_intro_sarge_spot", "targetname");
   level.sarge Teleport(groundpos(sargeSpot.origin), sargeSpot.angles);
   warp_players("struct_foyer_frontdoor_start", "targetname");
-  for (i = 0; i < level.friends.size; i++) {
+  for(i = 0; i < level.friends.size; i++) {
     guy = level.friends[i];
     if(is_active_ai(guy) && guy != level.sarge) {
       guy AllowedStances("crouch");
@@ -252,7 +252,7 @@ align_friendlies() {
 }
 
 reset_friendlies() {
-  for (i = 0; i < level.friends.size; i++) {
+  for(i = 0; i < level.friends.size; i++) {
     guy = level.friends[i];
     if(is_active_ai(guy)) {
       guy AllowedStances("stand", "crouch", "prone");
@@ -271,7 +271,7 @@ setup_commissar() {
 }
 
 commissar_action() {
-  while (!isDefined(level.commissar.wasWarped)) {
+  while(!isDefined(level.commissar.wasWarped)) {
     wait(0.05);
   }
   level.commissar animscripts\shared::placeWeaponOn(level.commissar.primaryweapon, "none");
@@ -316,7 +316,7 @@ foyer_force_ai_fire() {
   trigger waittill("trigger");
   autosave_by_name("Ber1 reached stair");
   enemies = GetAIArray("axis");
-  for (i = 0; i < enemies.size; i++) {
+  for(i = 0; i < enemies.size; i++) {
     enemies[i].ignoreme = false;
     if(enemies[i].origin[2] < 15216) {
       enemies[i].health = 1;
@@ -325,7 +325,7 @@ foyer_force_ai_fire() {
 }
 
 debug_print_ber3b() {
-  while (1) {
+  while(1) {
     print3d(self.origin + (0, 0, 40), "***", (1, 1, 1), 1, 3);
     wait(0.01);
   }
@@ -404,12 +404,12 @@ foyer_bazookateam() {
   dmgtrig waittill("trigger");
   dmgtrig Delete();
   fxspot = getstruct_safe("struct_foyer_bazookatarget_fxspot", "targetname");
-  intactGeo = GetEntArray("scripted_foyer_center_emplacement", "targetname");
+  intactGeo = getEntArray("scripted_foyer_center_emplacement", "targetname");
   ASSERTEX(isDefined(intactGeo) && intactGeo.size > 0, "can't find foyer bazookateam intact geo");
-  PlayFX(level._effect["sandbag_explosion_small"], fxspot.origin);
+  playFX(level._effect["sandbag_explosion_small"], fxspot.origin);
   RadiusDamage(fxspot.origin, 238, 5000, 5000);
   wait(0.2);
-  for (i = 0; i < intactGeo.size; i++) {
+  for(i = 0; i < intactGeo.size; i++) {
     intactGeo[i] Delete();
   }
   level notify("bazookateam_foyer_damage_done");
@@ -459,14 +459,14 @@ pacing1_friendly_doorbreach() {
   startDistance = 710;
   trig = getent_safe("trig_pacing1_kicked_door", "targetname");
   trig waittill("trigger");
-  spawners = GetEntArray(trig.target, "targetname");
-  enemies = GetEntArray("spawner_pacing1_doorkick_enemy", "targetname");
+  spawners = getEntArray(trig.target, "targetname");
+  enemies = getEntArray("spawner_pacing1_doorkick_enemy", "targetname");
   animSpot = getstruct_safe("struct_pacing1_kicked_door_animref", "targetname");
   door = getent_safe("sbmodel_pacing1_kicked_door", "targetname");
   trig Delete();
   enemies thread pacing1_friendly_doorbreach_enemies();
   guys = [];
-  for (i = 0; i < spawners.size; i++) {
+  for(i = 0; i < spawners.size; i++) {
     guy = spawn_guy(spawners[i]);
     guy.ignoreme = true;
     guy.ignoreall = true;
@@ -504,7 +504,7 @@ doorbreach_guy_finish(goalPos, anime) {
 
 pacing1_friendly_doorbreach_enemies() {
   guys = [];
-  for (i = 0; i < self.size; i++) {
+  for(i = 0; i < self.size; i++) {
     guy = spawn_guy(self[i]);
     guy.ignoreme = true;
     guy.ignoreall = true;
@@ -519,7 +519,7 @@ pacing1_friendly_doorbreach_enemies() {
   guys[0] thread anim_single_solo(guys[0], anime);
   guys[1] thread anim_single_solo(guys[1], anime);
   wait(1.5);
-  for (i = 0; i < guys.size; i++) {
+  for(i = 0; i < guys.size; i++) {
     guys[i] anim_stopanimscripted();
     guys[i] thread bloody_death(true, 1);
   }
@@ -561,7 +561,7 @@ foyer_flagbearer_buddies_spawnfunc() {
   self DoDamage(self.health + 5, (0, 0, 0));
   shotOrigin = (1178, 15578, 776);
   bursts = RandomIntRange(3, 5);
-  for (i = 0; i < bursts; i++) {
+  for(i = 0; i < bursts; i++) {
     self maps\ber3b_event_roof::ai_tracer_burst(shotOrigin);
     wait(RandomFloatRange(0.1, 0.2));
   }

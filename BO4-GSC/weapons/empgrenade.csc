@@ -9,7 +9,6 @@
 #include scripts\core_common\filter_shared;
 #include scripts\core_common\math_shared;
 #include scripts\core_common\system_shared;
-
 #namespace empgrenade;
 
 autoexec __init__system__() {
@@ -43,7 +42,7 @@ startempeffects(localplayer, bwastimejump = 0) {
   filter::set_filter_tactical_amount(localplayer, 2, 1);
 
   if(!bwastimejump) {
-    playSound(0, #"mpl_plr_emp_activate", (0, 0, 0));
+    playSound(0, # "mpl_plr_emp_activate", (0, 0, 0));
   }
 
   audio::playloopat("mpl_plr_emp_looper", (0, 0, 0));
@@ -54,7 +53,7 @@ stopempeffects(localplayer, oldval, bwastimejump = 0) {
   filter::disable_filter_tactical(localplayer, 2);
 
   if(oldval != 0 && !bwastimejump) {
-    playSound(0, #"mpl_plr_emp_deactivate", (0, 0, 0));
+    playSound(0, # "mpl_plr_emp_deactivate", (0, 0, 0));
   }
 
   audio::stoploopat("mpl_plr_emp_looper", (0, 0, 0));
@@ -113,13 +112,12 @@ monitordistance(localclientnum) {
 
   if(isDefined(distance_to_closest_enemy_emp_ui_model)) {
     while(true) {
-
       max_static_value = getdvarfloat(#"ks_emp_fullscreen_maxstaticvalue", 0);
       min_static_value = getdvarfloat(#"ks_emp_fullscreen_minstaticvalue", 0);
       min_radius_max_static = getdvarfloat(#"ks_emp_fullscreen_minradiusmaxstatic", 0);
       max_radius_min_static = getdvarfloat(#"ks_emp_fullscreen_maxradiusminstatic", 0);
 
-        new_distance = getuimodelvalue(distance_to_closest_enemy_emp_ui_model);
+      new_distance = getuimodelvalue(distance_to_closest_enemy_emp_ui_model);
       range = max_radius_min_static - min_radius_max_static;
       current_static_value = max_static_value - (range <= 0 ? max_static_value : (new_distance - min_radius_max_static) / range);
       current_static_value = math::clamp(current_static_value, min_static_value, max_static_value);

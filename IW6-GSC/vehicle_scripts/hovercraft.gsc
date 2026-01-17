@@ -120,9 +120,7 @@ water_splash() {
   if(!isDefined(self.water_splash_info)) {
     var_2 = spawnStruct();
     self.water_splash_info = var_2;
-    [
-      [self.water_splash_reset_function]
-    ](var_2);
+    [[self.water_splash_reset_function]](var_2);
   } else
     var_2 = self.water_splash_info;
 

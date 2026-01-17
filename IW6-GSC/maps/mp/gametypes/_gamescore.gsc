@@ -112,9 +112,7 @@ givePlayerScore_regularMP(event, player, victim, overrideCheckPlayerScoreLimitSo
 onPlayerScore(event, player, victim, bScaleDown) {
   score = undefined;
   if(isDefined(level.onPlayerScore)) {
-    score = [
-      [level.onPlayerScore]
-    ](event, player, victim);
+    score = [[level.onPlayerScore]](event, player, victim);
   }
   if(!isDefined(score)) {
     score = maps\mp\gametypes\_rank::getScoreInfoValue(event);

@@ -111,7 +111,7 @@ fog_vol_to_visionset_set_info(id, visionset, trans_in) {
   if(!isDefined(trans_in))
     trans_in = level._fv2vs_default_trans_in;
 
-  level._fv2vs_infos[id] = spawnstruct();
+  level._fv2vs_infos[id] = spawnStruct();
   level._fv2vs_infos[id].visionset = visionset;
   level._fv2vs_infos[id].trans_in = trans_in;
 }
@@ -154,9 +154,7 @@ fog_vol_to_visionset_monitor() {
     players = getlocalplayers();
 
     for(localclientnum = 0; localclientnum < players.size; localclientnum++) {
-      if(isDefined(level.vsmgr_is_type_currently_default_func) && ![
-          [level.vsmgr_is_type_currently_default_func]
-        ](localclientnum, "visionset")) {
+      if(isDefined(level.vsmgr_is_type_currently_default_func) && ![[level.vsmgr_is_type_currently_default_func]](localclientnum, "visionset")) {
         level._fv2vs_prev_visionsets[localclientnum] = level._fv2vs_unset_visionset;
         continue;
       }

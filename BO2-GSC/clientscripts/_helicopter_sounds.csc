@@ -127,7 +127,7 @@ init_heli_sound_values(heli_type, part_type, max_speed_vol, min_vol, max_vol, ma
     level.helisoundvalues[heli_type] = [];
 
   if(!isDefined(level.helisoundvalues[heli_type][part_type]))
-    level.helisoundvalues[heli_type][part_type] = spawnstruct();
+    level.helisoundvalues[heli_type][part_type] = spawnStruct();
 
   level.helisoundvalues[heli_type][part_type].speedvolumemax = max_speed_vol;
   level.helisoundvalues[heli_type][part_type].speedpitchmax = max_speed_pitch;
@@ -460,7 +460,7 @@ init_heli_sounds_jetwing() {
 }
 
 setup_heli_sounds(bone_location, type, tag, run, dmg1, dmg2, dmg3, distancecheck) {
-  self.heli[bone_location] = spawnstruct();
+  self.heli[bone_location] = spawnStruct();
   self.heli[bone_location].sound_type = type;
   self.heli[bone_location].run = spawn(0, self.origin, "script_origin");
   self.heli[bone_location].run linkto(self, tag);
@@ -1036,7 +1036,7 @@ heli_sound_play(heli_bone) {
     }
 
     if(isDefined(heli_bone.run)) {
-      heli_bone.run playloopsound(heli_bone.run.alias, 2);
+      heli_bone.run playLoopSound(heli_bone.run.alias, 2);
       self waittill("stop_heli_sounds");
     } else
       wait 0.05;
@@ -1133,14 +1133,14 @@ quad_idle_run_transition(heli_type, heli_part1, heli_part2, heli_part3, heli_par
         self init_heli_sounds_player_drone();
         wait 0.5;
         self.deletedfakeents = 0;
-        run_id1 = heli_bone1.run playloopsound(heli_bone1.run.alias, 0.5);
-        run_id2 = heli_bone2.run playloopsound(heli_bone2.run.alias, 0.5);
+        run_id1 = heli_bone1.run playLoopSound(heli_bone1.run.alias, 0.5);
+        run_id2 = heli_bone2.run playLoopSound(heli_bone2.run.alias, 0.5);
         self thread heli_sound_play(self.heli["close"]);
       }
 
       if(!isDefined(run_id1)) {
-        run_id1 = heli_bone1.run playloopsound(heli_bone1.run.alias, 0.5);
-        run_id2 = heli_bone2.run playloopsound(heli_bone2.run.alias, 0.5);
+        run_id1 = heli_bone1.run playLoopSound(heli_bone1.run.alias, 0.5);
+        run_id2 = heli_bone2.run playLoopSound(heli_bone2.run.alias, 0.5);
         self thread heli_sound_play(self.heli["distant"]);
         self thread heli_sound_play(self.heli["close"]);
       }
@@ -1231,7 +1231,7 @@ heli_idle_run_transition(heli_type, heli_part, updown, delay) {
 
     if(!isDefined(run_id)) {
       if(isDefined(heli_bone.run))
-        run_id = heli_bone.run playloopsound(heli_bone.run.alias, 0.5);
+        run_id = heli_bone.run playLoopSound(heli_bone.run.alias, 0.5);
       else
         continue;
     }
@@ -1312,7 +1312,7 @@ jet_afterburn(heli_type, heli_part) {
     }
 
     if(!isDefined(run_id) && isDefined(heli_bone.run))
-      run_id = heli_bone.run playloopsound(heli_bone.run.alias, 0.5);
+      run_id = heli_bone.run playLoopSound(heli_bone.run.alias, 0.5);
 
     max_speed_vol = level.helisoundvalues[heli_type][heli_part].speedvolumemax;
     min_vol = level.helisoundvalues[heli_type][heli_part].volumemin;
@@ -1365,7 +1365,7 @@ jet_idle_run_transition(heli_type, heli_part) {
     }
 
     if(!isDefined(run_id) && isDefined(heli_bone.run))
-      run_id = heli_bone.run playloopsound(heli_bone.run.alias, 0.5);
+      run_id = heli_bone.run playLoopSound(heli_bone.run.alias, 0.5);
 
     max_speed_vol = level.helisoundvalues[heli_type][heli_part].speedvolumemax;
     min_vol = level.helisoundvalues[heli_type][heli_part].volumemin;
@@ -1450,7 +1450,7 @@ jet_turn_transition(heli_type, heli_part) {
     }
 
     if(!isDefined(run_id) && isDefined(heli_bone.run))
-      run_id = heli_bone.run playloopsound(heli_bone.run.alias, 0.5);
+      run_id = heli_bone.run playLoopSound(heli_bone.run.alias, 0.5);
 
     angular_velocity = self.angles;
     turning_speed = abs(angular_velocity[2] / 90);
@@ -1507,7 +1507,7 @@ jet_turn_rattle_transition(heli_type, heli_part) {
     }
 
     if(!isDefined(run_id) && isDefined(heli_bone.run))
-      run_id = heli_bone.run playloopsound(heli_bone.run.alias, 0.5);
+      run_id = heli_bone.run playLoopSound(heli_bone.run.alias, 0.5);
 
     angular_velocity = self.angles;
     turning_speed = abs(angular_velocity[2] / 90);
@@ -1564,7 +1564,7 @@ jet_down_transition(heli_type, heli_part) {
     }
 
     if(!isDefined(run_id) && isDefined(heli_bone.run))
-      run_id = heli_bone.run playloopsound(heli_bone.run.alias, 0.5);
+      run_id = heli_bone.run playLoopSound(heli_bone.run.alias, 0.5);
 
     movement = self getnormalizedcameramovement();
     jet_stick_down = movement[0];
@@ -1627,7 +1627,7 @@ jet_up_transition(heli_type, heli_part) {
     }
 
     if(!isDefined(run_id) && isDefined(heli_bone.run))
-      run_id = heli_bone.run playloopsound(heli_bone.run.alias, 0.5);
+      run_id = heli_bone.run playLoopSound(heli_bone.run.alias, 0.5);
 
     movement = self getnormalizedcameramovement();
     jet_stick_up = movement[0];
@@ -1688,7 +1688,7 @@ jet_up_rattle_transition(heli_type, heli_part) {
     }
 
     if(!isDefined(run_id) && isDefined(heli_bone.run))
-      run_id = heli_bone.run playloopsound(heli_bone.run.alias, 0.5);
+      run_id = heli_bone.run playLoopSound(heli_bone.run.alias, 0.5);
 
     movement = self getnormalizedcameramovement();
     jet_stick_up = movement[0];
@@ -1737,7 +1737,7 @@ jet_turn_whine(heli_type, heli_part) {
     }
 
     if(!isDefined(run_id) && isDefined(heli_bone.run))
-      run_id = heli_bone.run playloopsound(heli_bone.run.alias, 0.5);
+      run_id = heli_bone.run playLoopSound(heli_bone.run.alias, 0.5);
 
     angular_velocity = self.angles;
     turning_speed = abs(angular_velocity[2] / 90);
@@ -1813,7 +1813,7 @@ terrain_trace() {
         continue;
       }
       pre_trace_real_ent stoploopsound(0.5);
-      trace_real_ent playloopsound(trace_real_ent.alias, 0.5);
+      trace_real_ent playLoopSound(trace_real_ent.alias, 0.5);
     }
   }
 }
@@ -1826,7 +1826,7 @@ update_helicopter_sounds() {
           self thread heli_idle_run_transition("hind", "eng_dmg");
 
         self.low_dmg = 1;
-        playsound(0, "veh_hind_alarm_damage_high", (0, 0, 0));
+        playSound(0, "veh_hind_alarm_damage_high", (0, 0, 0));
         level.helisoundvalues["hind"]["cockpit"].volumemax = 1;
         level.helisoundvalues["hind"]["ext_rotor"].pitchmax = 1.3;
 
@@ -1863,7 +1863,7 @@ update_helicopter_sounds() {
   if(isDefined(self.engine_damage_high) && self.engine_damage_high && isDefined(self.engine_damage_low) && self.engine_damage_low) {
     switch (self.vehicletype) {
       case "heli_hind_player":
-        playsound(0, "veh_hind_alarm_damage_high", (0, 0, 0));
+        playSound(0, "veh_hind_alarm_damage_high", (0, 0, 0));
         level.helisoundvalues["hind"]["eng_dmg"].volumemax = 1;
         level.helisoundvalues["hind"]["ext_rotor"].pitchmax = 1.5;
         wait 0.1;
@@ -1923,26 +1923,26 @@ veh_throttle() {
   self.onhigh linkto(self, "tag_origin");
   self.offhigh = spawn(0, self.origin, "script_origin");
   self.offhigh linkto(self, "tag_origin");
-  idle = self.idle playloopsound("blk_car_idle_plr", 1);
+  idle = self.idle playLoopSound("blk_car_idle_plr", 1);
   self thread playdrivesounds(idle, -1, 0, 0.16, 0.274, 1, 0.133);
-  offidle = self.offidle playloopsound("blk_car_idle_plr", 1);
+  offidle = self.offidle playLoopSound("blk_car_idle_plr", 1);
   self thread playdrivesounds(offidle, -1, 0, 0.16, 0.274, 0, 0.133);
-  onlow = self.onlow playloopsound("blk_car_onlow_plr", 1);
+  onlow = self.onlow playLoopSound("blk_car_onlow_plr", 1);
   setsoundvolume(onlow, 0);
   self thread playdrivesounds(onlow, 0.16, 0.274, 0.38, 0.55, 1, 0.343);
-  offlow = self.offlow playloopsound("blk_car_offlow_plr", 1);
+  offlow = self.offlow playLoopSound("blk_car_offlow_plr", 1);
   setsoundvolume(offlow, 0);
   self thread playdrivesounds(offlow, 0.16, 0.274, 0.38, 0.55, 0, 0.343);
-  onmid = self.onmid playloopsound("blk_car_onmid_plr", 1);
+  onmid = self.onmid playLoopSound("blk_car_onmid_plr", 1);
   setsoundvolume(onmid, 0);
   self thread playdrivesounds(onmid, 0.38, 0.55, 0.71, 0.84, 1, 0.459);
-  offmid = self.offmid playloopsound("blk_car_offmid_plr", 1);
+  offmid = self.offmid playLoopSound("blk_car_offmid_plr", 1);
   setsoundvolume(offmid, 0);
   self thread playdrivesounds(offmid, 0.38, 0.55, 0.71, 0.84, 0, 0.459);
-  onhigh = self.onhigh playloopsound("blk_car_onhigh_plr", 1);
+  onhigh = self.onhigh playLoopSound("blk_car_onhigh_plr", 1);
   setsoundvolume(onhigh, 0);
   self thread playdrivesounds(onhigh, 0.71, 0.84, 1.4, 1.5, 1, 0.684);
-  offhigh = self.offhigh playloopsound("blk_car_offhigh_plr", 1);
+  offhigh = self.offhigh playLoopSound("blk_car_offhigh_plr", 1);
   setsoundvolume(offhigh, 0);
   self thread playdrivesounds(offhigh, 0.71, 0.84, 1.4, 1.5, 0, 0.684);
 }
@@ -2054,15 +2054,15 @@ playdrivesounds(sound, fadeinstart, startfullthreshold, endfullthreshold, fadeou
     onloadprint = int(onloadprint * 100);
     offloadprint = int(offloadprint * 100);
     printfakerpm = int(fakerpm);
-    print3d(self.origin + vectorscale((0, 0, -1), 100.0) + anglestoforward(self.angles) * 2000, "SPEED- " + printcurspeed + " SPEED RATIO- " + speedratio, vectorscale((0, 1, 0), 0.8), 1, 3, 1);
-    print3d(self.origin + anglestoforward(self.angles) * 2000, "LOAD- " + printload + " THROTTLE- " + printthrottle, vectorscale((0, 1, 0), 0.8), 1, 3, 1);
-    print3d(self.origin + vectorscale((0, 0, 1), 100.0) + anglestoforward(self.angles) * 2000, "FAKE RPM- " + printfakerpm + " GEAR " + currentgear, vectorscale((0, 1, 0), 0.8), 1, 3, 1);
-    print3d(self.origin + vectorscale((0, 0, 1), 200.0) + anglestoforward(self.angles) * 2000, "ONGROUND- " + self.onground, vectorscale((0, 1, 0), 0.8), 1, 3, 1);
-    print3d(self.origin + vectorscale((0, 0, 1), 300.0) + anglestoforward(self.angles) * 2000, "THROTTLE/SPEED- " + throttletospeed, vectorscale((0, 1, 0), 0.8), 1, 3, 1);
-    print3d(self.origin + vectorscale((0, 0, 1), 400.0) + anglestoforward(self.angles) * 2000, "SPEED%- " + speedpercentage, vectorscale((0, 1, 0), 0.8), 1, 3, 1);
-    print3d(self.origin + vectorscale((0, 0, 1), 500.0) + anglestoforward(self.angles) * 2000, "THROTTLE%- " + throttlepercentage, vectorscale((0, 1, 0), 0.8), 1, 3, 1);
-    print3d(self.origin + vectorscale((0, 0, 1), 600.0) + anglestoforward(self.angles) * 2000, "ONVOL- " + onloadprint, vectorscale((0, 1, 0), 0.8), 1, 3, 1);
-    print3d(self.origin + vectorscale((0, 0, 1), 700.0) + anglestoforward(self.angles) * 2000, "OFFVOL- " + offloadprint, vectorscale((0, 1, 0), 0.8), 1, 3, 1);
+    print3d(self.origin + vectorscale((0, 0, -1), 100.0) + anglesToForward(self.angles) * 2000, "SPEED- " + printcurspeed + " SPEED RATIO- " + speedratio, vectorscale((0, 1, 0), 0.8), 1, 3, 1);
+    print3d(self.origin + anglesToForward(self.angles) * 2000, "LOAD- " + printload + " THROTTLE- " + printthrottle, vectorscale((0, 1, 0), 0.8), 1, 3, 1);
+    print3d(self.origin + vectorscale((0, 0, 1), 100.0) + anglesToForward(self.angles) * 2000, "FAKE RPM- " + printfakerpm + " GEAR " + currentgear, vectorscale((0, 1, 0), 0.8), 1, 3, 1);
+    print3d(self.origin + vectorscale((0, 0, 1), 200.0) + anglesToForward(self.angles) * 2000, "ONGROUND- " + self.onground, vectorscale((0, 1, 0), 0.8), 1, 3, 1);
+    print3d(self.origin + vectorscale((0, 0, 1), 300.0) + anglesToForward(self.angles) * 2000, "THROTTLE/SPEED- " + throttletospeed, vectorscale((0, 1, 0), 0.8), 1, 3, 1);
+    print3d(self.origin + vectorscale((0, 0, 1), 400.0) + anglesToForward(self.angles) * 2000, "SPEED%- " + speedpercentage, vectorscale((0, 1, 0), 0.8), 1, 3, 1);
+    print3d(self.origin + vectorscale((0, 0, 1), 500.0) + anglesToForward(self.angles) * 2000, "THROTTLE%- " + throttlepercentage, vectorscale((0, 1, 0), 0.8), 1, 3, 1);
+    print3d(self.origin + vectorscale((0, 0, 1), 600.0) + anglesToForward(self.angles) * 2000, "ONVOL- " + onloadprint, vectorscale((0, 1, 0), 0.8), 1, 3, 1);
+    print3d(self.origin + vectorscale((0, 0, 1), 700.0) + anglesToForward(self.angles) * 2000, "OFFVOL- " + offloadprint, vectorscale((0, 1, 0), 0.8), 1, 3, 1);
 
   }
 }
@@ -2076,11 +2076,11 @@ drone_up_down_transition() {
   qr_ent_down thread qr_ent_cleanup(self);
   qr_ent_either thread qr_ent_cleanup(self);
   self.qrdrone_z_difference = 0;
-  down = qr_ent_down playloopsound("veh_qrdrone_move_down");
+  down = qr_ent_down playLoopSound("veh_qrdrone_move_down");
   qr_ent_down setloopstate("veh_qrdrone_move_down", 0, 0);
-  up = qr_ent_up playloopsound("veh_qrdrone_move_up");
+  up = qr_ent_up playLoopSound("veh_qrdrone_move_up");
   qr_ent_up setloopstate("veh_qrdrone_move_up", 0, 0);
-  either = qr_ent_either playloopsound("veh_qrdrone_vertical");
+  either = qr_ent_either playLoopSound("veh_qrdrone_vertical");
   qr_ent_either setloopstate("veh_qrdrone_vertical", 0, 0);
   tag = "tag_origin";
   qr_ent_up linkto(self, tag);
@@ -2123,7 +2123,7 @@ drone_rotate_angle(heli_type, heli_part) {
   self endon("entityshutdown");
   qr_ent_angle = spawn(0, self.origin, "script_origin");
   qr_ent_angle thread qr_ent_cleanup(self);
-  angle = qr_ent_angle playloopsound("veh_qrdrone_idle_rotate");
+  angle = qr_ent_angle playLoopSound("veh_qrdrone_idle_rotate");
   setsoundvolume(angle, 0);
   tag = "tag_origin";
   qr_ent_angle linkto(self, tag);
@@ -2148,7 +2148,7 @@ drone_button_watch() {
 
   while(true) {
     if(abs(self.qrdrone_z_difference) > 5 && return_to_zero) {
-      self playsound(0, "veh_qrdrone_move_start");
+      self playSound(0, "veh_qrdrone_move_start");
       return_to_zero = 0;
     } else if(abs(self.qrdrone_z_difference) < 5 && !return_to_zero)
       return_to_zero = 1;

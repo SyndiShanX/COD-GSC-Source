@@ -47,7 +47,7 @@ rules_populate() {
     if(!isDefined(ref) || ref == "") {
       continue;
     }
-    rule = spawnstruct();
+    rule = spawnStruct();
     rule.idx = i;
     rule.ref = ref;
     rule.time = int(lookup_value(ref, i, 2));

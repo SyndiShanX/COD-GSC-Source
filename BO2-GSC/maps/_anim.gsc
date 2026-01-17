@@ -31,7 +31,7 @@ anim_generic_reach_aligned(ents, scene, tag) {
 
 anim_reach_idle(guys, scene, idle) {
   guys = build_ent_array(guys);
-  ent = spawnstruct();
+  ent = spawnStruct();
   ent.count = guys.size;
 
   for(i = 0; i < guys.size; i++)
@@ -713,8 +713,7 @@ anim_loop_packet(guypackets, scene, ender, animname_override, n_lerp_time) {
   lastidleanim = 0;
 
   while(true) {
-    for(idleanim = anim_weight(base_animname, scene); idleanim == lastidleanim && idleanim != 0; idleanim = anim_weight(base_animname, scene)) {
-    }
+    for(idleanim = anim_weight(base_animname, scene); idleanim == lastidleanim && idleanim != 0; idleanim = anim_weight(base_animname, scene)) {}
 
     lastidleanim = idleanim;
     scriptedanimationindex = -1;
@@ -773,7 +772,7 @@ anim_loop_packet(guypackets, scene, ender, animname_override, n_lerp_time) {
       }
 
       if(isDefined(level.scr_animsound[animname]) && isDefined(level.scr_animsound[animname][idleanim + scene]))
-        guy playsound(level.scr_animsound[animname][idleanim + scene]);
+        guy playSound(level.scr_animsound[animname][idleanim + scene]);
 
       if(getdebugdvar("animsound") == "on")
         guy thread animsound_start_tracker_loop(scene, idleanim, animname);
@@ -858,7 +857,7 @@ do_anim_single(guys, scene, tag, animname_override, aligned, n_lerp_time) {
   pos = get_anim_position(tag);
   org = pos["origin"];
   angles = pos["angles"];
-  tracker = spawnstruct();
+  tracker = spawnStruct();
   tracker.scriptedanimationtime = 999999;
   tracker.scriptedanimationindex = -1;
   tracker.scriptedsoundindex = -1;
@@ -880,17 +879,17 @@ do_anim_single(guys, scene, tag, animname_override, aligned, n_lerp_time) {
   }
 
   if(tracker.scriptedanimationindex != -1) {
-    ent = spawnstruct();
+    ent = spawnStruct();
     ent thread anim_deathnotify(guys[tracker.scriptedanimationindex], scene);
     ent thread anim_animationendnotify(guys[tracker.scriptedanimationindex], scene);
     ent waittill(scene);
   } else if(tracker.scriptedfaceindex != -1) {
-    ent = spawnstruct();
+    ent = spawnStruct();
     ent thread anim_deathnotify(guys[tracker.scriptedfaceindex], scene);
     ent thread anim_facialendnotify(guys[tracker.scriptedfaceindex], scene);
     ent waittill(scene);
   } else if(tracker.scriptedsoundindex != -1) {
-    ent = spawnstruct();
+    ent = spawnStruct();
     ent thread anim_deathnotify(guys[tracker.scriptedsoundindex], scene);
     ent thread anim_dialogueendnotify(guys[tracker.scriptedsoundindex], scene);
     ent waittill(scene);
@@ -920,8 +919,7 @@ anim_single_thread(guys, index, scene, org, angles, animname_override, aligned, 
   guy = guys[index];
   guy endon("death");
 
-  if(guy is_a_sound_only_scene(scene, animname_override)) {
-  } else
+  if(guy is_a_sound_only_scene(scene, animname_override)) {} else
     guy _stop_anim_threads();
 
   blend_in = guy._anim_blend_in_time;
@@ -974,7 +972,7 @@ anim_single_thread(guys, index, scene, org, angles, animname_override, aligned, 
     if(isDefined(guy.type) && guy.type == "human")
       guy playsoundontag(level.scr_animsound[animname][scene], "J_Head");
     else
-      guy playsound(level.scr_animsound[animname][scene]);
+      guy playSound(level.scr_animsound[animname][scene]);
   }
 
   if(getdebugdvar("animsound") == "on")
@@ -1170,7 +1168,7 @@ animsound_tracker(scene, notetrack, animname) {
   if(animsound_exists(scene, notetrack)) {
     return;
   }
-  newtrack = spawnstruct();
+  newtrack = spawnStruct();
   newtrack.scene = scene;
   newtrack.notetrack = notetrack;
   newtrack.animname = animname;
@@ -1180,7 +1178,7 @@ animsound_tracker(scene, notetrack, animname) {
 
 animsound_start_tracker(scene, animname) {
   add_to_animsound();
-  newsound = spawnstruct();
+  newsound = spawnStruct();
   newsound.scene = scene;
   newsound.notetrack = "#" + scene;
   newsound.animname = animname;
@@ -1195,7 +1193,7 @@ animsound_start_tracker(scene, animname) {
 animsound_start_tracker_loop(scene, loop, animname) {
   add_to_animsound();
   scene = loop + scene;
-  newsound = spawnstruct();
+  newsound = spawnStruct();
   newsound.scene = scene;
   newsound.notetrack = "#" + scene;
   newsound.animname = animname;
@@ -1354,21 +1352,21 @@ notetrack_wait(guy, msg, scene, animname_override) {
             anim_removemodel(guy, scr_notetrack);
 
           if(isDefined(scr_notetrack["selftag"]) && isDefined(scr_notetrack["effect"]))
-            playfxontag(level._effect[scr_notetrack["effect"]], guy, scr_notetrack["selftag"]);
+            playFXOnTag(level._effect[scr_notetrack["effect"]], guy, scr_notetrack["selftag"]);
 
           if(isDefined(scr_notetrack["tag"]) && isDefined(scr_notetrack["effect"]))
-            playfxontag(level._effect[scr_notetrack["effect"]], tag_owner, scr_notetrack["tag"]);
+            playFXOnTag(level._effect[scr_notetrack["effect"]], tag_owner, scr_notetrack["tag"]);
 
           if(isDefined(level.scr_special_notetrack[animname])) {
             tag = random(level.scr_special_notetrack[animname]);
 
             if(isDefined(tag["tag"])) {
-              playfxontag(level._effect[tag["effect"]], tag_owner, tag["tag"]);
+              playFXOnTag(level._effect[tag["effect"]], tag_owner, tag["tag"]);
               continue;
             }
 
             if(isDefined(tag["selftag"]))
-              playfxontag(level._effect[tag["effect"]], self, tag["tag"]);
+              playFXOnTag(level._effect[tag["effect"]], self, tag["tag"]);
           }
         }
       }
@@ -1419,7 +1417,7 @@ anim_addmodel(guy, array) {
 
   index = guy.scriptmodel.size;
   guy.scriptmodel[index] = spawn("script_model", (0, 0, 0));
-  guy.scriptmodel[index] setmodel(array["create model"]);
+  guy.scriptmodel[index] setModel(array["create model"]);
   guy.scriptmodel[index].origin = guy gettagorigin(array["selftag"]);
   guy.scriptmodel[index].angles = guy gettagangles(array["selftag"]);
 }
@@ -1432,10 +1430,10 @@ anim_removemodel(guy, array) {
 
   for(i = 0; i < guy.scriptmodel.size; i++) {
     if(isDefined(array["explosion"])) {
-      forward = anglestoforward(guy.scriptmodel[i].angles);
+      forward = anglesToForward(guy.scriptmodel[i].angles);
       forward = vectorscale(forward, 120);
       forward = forward + guy.scriptmodel[i].origin;
-      playfx(level._effect[array["explosion"]], guy.scriptmodel[i].origin);
+      playFX(level._effect[array["explosion"]], guy.scriptmodel[i].origin);
       radiusdamage(guy.scriptmodel[i].origin, 350, 700, 50);
     }
 
@@ -1482,7 +1480,7 @@ gun_leave_behind(scr_notetrack) {
     return;
   }
   gun = spawn("script_model", (0, 0, 0));
-  gun setmodel(self.weaponmodel);
+  gun setModel(self.weaponmodel);
   self.gun_on_ground = gun;
   gun.origin = self gettagorigin(scr_notetrack["tag"]);
   gun.angles = self gettagangles(scr_notetrack["tag"]);
@@ -1552,7 +1550,7 @@ do_anim_reach(guys, scene, tag, animname_override, aligned) {
   debugstartpos = getdebugdvar("debug_animreach") == "on";
 
   threads = 0;
-  tracker = spawnstruct();
+  tracker = spawnStruct();
 
   if(!isarray(guys)) {
     newguys[newguys.size] = guys;
@@ -1739,7 +1737,7 @@ anim_ents(ents, scene, tag, animname) {
     parent_model.angles = angles;
     parent_model.animname = animname;
     parent_model setanimtree();
-    parent_model setmodel(level.scr_model[animname]);
+    parent_model setModel(level.scr_model[animname]);
   }
 
   for(i = 0; i < ents.size; i++) {
@@ -1938,7 +1936,7 @@ lookline(org, msg) {
   self endon("death");
 
   for(;;) {
-    line(self geteye(), org + vectorscale((0, 0, 1), 60.0), (1, 1, 0), 1);
+    line(self getEye(), org + vectorscale((0, 0, 1), 60.0), (1, 1, 0), 1);
     wait 0.05;
   }
 
@@ -2081,7 +2079,7 @@ anim_origin_render(org, angles, line_length, str_label) {
     line_length = 6;
 
   if(isDefined(org) && isDefined(angles)) {
-    originendpoint = org + vectorscale(anglestoforward(angles), line_length);
+    originendpoint = org + vectorscale(anglesToForward(angles), line_length);
     originrightpoint = org + vectorscale(anglestoright(angles), -1 * line_length);
     originuppoint = org + vectorscale(anglestoup(angles), line_length);
     line(org, originendpoint, (1, 0, 0));
@@ -2099,7 +2097,7 @@ rec_anim_origin_render(org, angles) {
     return;
   }
   if(isDefined(org) && isDefined(angles)) {
-    originendpoint = org + vectorscale(anglestoforward(angles), 10);
+    originendpoint = org + vectorscale(anglesToForward(angles), 10);
     originrightpoint = org + vectorscale(anglestoright(angles), -10);
     originuppoint = org + vectorscale(anglestoup(angles), 10);
     recordline(org, originendpoint, (1, 0, 0), "ScriptedAnim");
@@ -2239,7 +2237,7 @@ rec_anim_info_render_thread(guy, scene, org, angles, animname, ender, showblends
   }
 
   while(true) {
-    originendpoint = guy.origin + vectorscale(anglestoforward(guy.angles), 10);
+    originendpoint = guy.origin + vectorscale(anglesToForward(guy.angles), 10);
     anim_origin_render(guy.origin, guy.angles);
     recordenttext("name: " + animname, guy, color, "ScriptedAnim");
     recordenttext("scene: " + scene + str_extra_info, guy, color, "ScriptedAnim");

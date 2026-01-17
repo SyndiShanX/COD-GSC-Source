@@ -12,14 +12,14 @@
 #namespace zm_bgb_unquenchable;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_unquenchable", & __init__, undefined, "bgb");
+  system::register("zm_bgb_unquenchable", &__init__, undefined, "bgb");
 }
 
 function __init__() {
-  if(!(isdefined(level.bgb_in_use) && level.bgb_in_use)) {
+  if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
-  bgb::register("zm_bgb_unquenchable", "event", & event, undefined, undefined, undefined);
+  bgb::register("zm_bgb_unquenchable", "event", &event, undefined, undefined, undefined);
 }
 
 function event() {
@@ -28,6 +28,6 @@ function event() {
   do {
     self waittill("perk_purchased");
   }
-  while (self.num_perks < self zm_utility::get_player_perk_purchase_limit());
+  while(self.num_perks < self zm_utility::get_player_perk_purchase_limit());
   self bgb::do_one_shot_use(1);
 }

@@ -6,11 +6,10 @@
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_bgb;
 #include scripts\zm_common\zm_stats;
-
 #namespace zm_bgb_sword_flay;
 
 autoexec __init__system__() {
-  system::register(#"zm_bgb_sword_flay", &__init__, undefined, #"bgb");
+  system::register(#"zm_bgb_sword_flay", &__init__, undefined, # "bgb");
 }
 
 __init__() {
@@ -31,9 +30,9 @@ actor_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon, 
   if(meansofdeath === "MOD_MELEE" && weapon != level.weaponnone) {
     if(isalive(self)) {
       switch (self.zm_ai_category) {
-        case #"popcorn":
-        case #"basic":
-        case #"enhanced":
+        case # "popcorn":
+        case # "basic":
+        case # "enhanced":
           damage = self.health + damage * 5;
           break;
         default:

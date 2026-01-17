@@ -210,7 +210,7 @@ sndee4music() {
   level.music_override = 1;
   level setclientfield("mus_zmb_egg_snapshot_loop", 1);
   ent = spawn("script_origin", (0, 0, 0));
-  ent playloopsound("mus_mechz_fight_loop");
+  ent playLoopSound("mus_mechz_fight_loop");
   flag_wait("ee_mech_zombie_fight_completed");
   level setclientfield("mus_zmb_egg_snapshot_loop", 0);
   level.music_override = 0;

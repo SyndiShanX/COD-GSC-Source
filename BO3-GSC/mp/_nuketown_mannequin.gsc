@@ -10,7 +10,7 @@
 #namespace nuketownmannequin;
 
 function spawnmannequin(origin, angles, gender = "male", speed = undefined, weepingangel) {
-  if(!isdefined(level.mannequinspawn_music)) {
+  if(!isDefined(level.mannequinspawn_music)) {
     level.mannequinspawn_music = 1;
     music::setmusicstate("mann");
   }
@@ -29,10 +29,10 @@ function spawnmannequin(origin, angles, gender = "male", speed = undefined, weep
       mannequin.zombie_move_speed = "sprint";
     }
   }
-  if(isdefined(speed)) {
+  if(isDefined(speed)) {
     mannequin.zombie_move_speed = speed;
   }
-  if(isdefined(level.zm_variant_type_max)) {
+  if(isDefined(level.zm_variant_type_max)) {
     mannequin.variant_type = randomintrange(1, level.zm_variant_type_max[mannequin.zombie_move_speed][mannequin.zombie_arms_position]);
   }
   mannequin ai::set_behavior_attribute("can_juke", 1);
@@ -42,7 +42,7 @@ function spawnmannequin(origin, angles, gender = "male", speed = undefined, weep
   mannequin.should_turn = 1;
   mannequin thread watch_game_ended();
   mannequin.team = "free";
-  mannequin.overrideactordamage = & mannequindamage;
+  mannequin.overrideactordamage = &mannequindamage;
   mannequins = getaiarchetypearray("mannequin");
   foreach(othermannequin in mannequins) {
     if(othermannequin.archetype == "mannequin") {
@@ -56,12 +56,12 @@ function spawnmannequin(origin, angles, gender = "male", speed = undefined, weep
     mannequin.was_looking_at_me = 0;
     mannequin _mannequin_update_freeze(mannequin.is_looking_at_me);
   }
-  playfx("dlc0/nuketown/fx_de_rez_man_spawn", mannequin.origin, anglestoforward(mannequin.angles));
+  playFX("dlc0/nuketown/fx_de_rez_man_spawn", mannequin.origin, anglesToForward(mannequin.angles));
   return mannequin;
 }
 
 function mannequindamage(inflictor, attacker, damage, dflags, mod, weapon, point, dir, hitloc, offsettime, boneindex, modelindex) {
-  if(isdefined(inflictor) && isactor(inflictor) && inflictor.archetype == "mannequin") {
+  if(isDefined(inflictor) && isactor(inflictor) && inflictor.archetype == "mannequin") {
     return 0;
   }
   return damage;
@@ -77,7 +77,7 @@ function private watch_game_ended() {
 
 function private _mannequin_unfreeze_ragdoll() {
   self waittill("death");
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     self setentitypaused(0);
     if(!self isragdoll()) {
       self startragdoll();
@@ -98,7 +98,7 @@ function private _mannequin_update_freeze(frozen) {
 function watch_player_looking() {
   level endon("game_ended");
   level endon("mannequin_force_cleanup");
-  while (true) {
+  while(true) {
     mannequins = getaiarchetypearray("mannequin");
     foreach(mannequin in mannequins) {
       mannequin.can_player_see_me = 1;

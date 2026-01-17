@@ -18,7 +18,7 @@
 #namespace zm_score;
 
 function autoexec __init__sytem__() {
-  system::register("zm_score", & __init__, undefined, undefined);
+  system::register("zm_score", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -33,7 +33,7 @@ function __init__() {
   clientfield::register("clientuimodel", "hudItems.showDpadDown", 1, 1, "int");
   clientfield::register("clientuimodel", "hudItems.showDpadLeft", 1, 1, "int");
   clientfield::register("clientuimodel", "hudItems.showDpadRight", 1, 1, "int");
-  callback::on_spawned( & player_on_spawned);
+  callback::on_spawned(&player_on_spawned);
   level.score_total = 0;
   level.a_func_score_events = [];
 }
@@ -58,7 +58,7 @@ function doublexp_timer() {
   }
   wait(60);
   if(level.onlinegame) {
-    if(!isdefined(self)) {
+    if(!isDefined(self)) {
       return;
     }
     self doublexptimerfired();
@@ -69,13 +69,13 @@ function doublexp_timer() {
 function player_on_spawned() {
   util::wait_network_frame();
   self thread doublexp_timer();
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     self.ready_for_score_events = 1;
   }
 }
 
 function score_cf_register_info(name, version, max_count) {
-  for (i = 0; i < 4; i++) {
+  for(i = 0; i < 4; i++) {
     clientfield::register("clientuimodel", (("PlayerList.client" + i) + ".score_cf_") + name, version, getminbitcountfornum(max_count), "counter");
   }
 }
@@ -87,7 +87,7 @@ function score_cf_increment_info(name) {
 }
 
 function wait_score_cf_increment_info(player, cf) {
-  if(isdefined(player) && (isdefined(player.ready_for_score_events) && player.ready_for_score_events)) {
+  if(isDefined(player) && (isDefined(player.ready_for_score_events) && player.ready_for_score_events)) {
     player clientfield::increment_uimodel(cf);
   }
 }
@@ -102,10 +102,8 @@ function player_add_points(event, mod, hit_location, is_dog, zombie_team, damage
   player_points = 0;
   team_points = 0;
   multiplier = get_points_multiplier(self);
-  if(isdefined(level.a_func_score_events[event])) {
-    player_points = [
-      [level.a_func_score_events[event]]
-    ](event, mod, hit_location, zombie_team, damage_weapon);
+  if(isDefined(level.a_func_score_events[event])) {
+    player_points = [[level.a_func_score_events[event]]](event, mod, hit_location, zombie_team, damage_weapon);
   } else {
     switch (event) {
       case "death_raps":
@@ -228,33 +226,33 @@ function player_add_points(event, mod, hit_location, is_dog, zombie_team, damage
       }
     }
   }
-  if(isdefined(level.player_score_override)) {
+  if(isDefined(level.player_score_override)) {
     player_points = self[[level.player_score_override]](damage_weapon, player_points);
   }
-  if(isdefined(level.team_score_override)) {
+  if(isDefined(level.team_score_override)) {
     team_points = self[[level.team_score_override]](damage_weapon, team_points);
   }
   player_points = multiplier * zm_utility::round_up_score(player_points, 10);
   team_points = multiplier * zm_utility::round_up_score(team_points, 10);
-  if(isdefined(self.point_split_receiver) && (event == "death" || event == "ballistic_knife_death")) {
+  if(isDefined(self.point_split_receiver) && (event == "death" || event == "ballistic_knife_death")) {
     split_player_points = player_points - (zm_utility::round_up_score(player_points * self.point_split_keep_percent, 10));
     self.point_split_receiver add_to_player_score(split_player_points);
     player_points = player_points - split_player_points;
   }
-  if(isdefined(level.pers_upgrade_pistol_points) && level.pers_upgrade_pistol_points) {
+  if(isDefined(level.pers_upgrade_pistol_points) && level.pers_upgrade_pistol_points) {
     player_points = self zm_pers_upgrades_functions::pers_upgrade_pistol_points_set_score(player_points, event, mod, damage_weapon);
   }
   self add_to_player_score(player_points, 1, event);
   self.pers["score"] = self.score;
-  if(isdefined(level._game_module_point_adjustment)) {
+  if(isDefined(level._game_module_point_adjustment)) {
     level[[level._game_module_point_adjustment]](self, zombie_team, player_points);
   }
 }
 
 function get_points_multiplier(player) {
   multiplier = level.zombie_vars[player.team]["zombie_point_scalar"];
-  if(isdefined(level.current_game_module) && level.current_game_module == 2) {
-    if(isdefined(level._race_team_double_points) && level._race_team_double_points == player._race_team) {
+  if(isDefined(level.current_game_module) && level.current_game_module == 2) {
+    if(isDefined(level._race_team_double_points) && level._race_team_double_points == player._race_team) {
       return multiplier;
     }
     return 1;
@@ -292,7 +290,7 @@ function player_add_points_kill_bonus(mod, hit_location, weapon, player_points =
       scoreevents::processscoreevent("kill", self, undefined, weapon);
     }
   }
-  if(isdefined(level.player_score_override)) {
+  if(isDefined(level.player_score_override)) {
     new_points = self[[level.player_score_override]](weapon, player_points);
     if(new_points > 0 && new_points != player_points) {
       return 0;
@@ -308,7 +306,7 @@ function player_add_points_kill_bonus(mod, hit_location, weapon, player_points =
     return level.zombie_vars["zombie_score_bonus_burn"];
   }
   score = 0;
-  if(isdefined(hit_location)) {
+  if(isDefined(hit_location)) {
     switch (hit_location) {
       case "head":
       case "helmet": {
@@ -384,7 +382,7 @@ function player_reduce_points(event, n_amount) {
 }
 
 function add_to_player_score(points, b_add_to_total = 1, str_awarded_by = "") {
-  if(!isdefined(points) || level.intermission) {
+  if(!isDefined(points) || level.intermission) {
     return;
   }
   points = zm_utility::round_up_score(points, 10);
@@ -400,7 +398,7 @@ function add_to_player_score(points, b_add_to_total = 1, str_awarded_by = "") {
 }
 
 function minus_to_player_score(points) {
-  if(!isdefined(points) || level.intermission) {
+  if(!isDefined(points) || level.intermission) {
     return;
   }
   if(self bgb::is_enabled("zm_bgb_shopping_free")) {
@@ -412,7 +410,7 @@ function minus_to_player_score(points) {
   self.pers["score"] = self.score;
   self incrementplayerstat("scoreSpent", points);
   level notify("spent_points", self, points);
-  if(isdefined(level.bgb_in_use) && level.bgb_in_use && level.onlinegame) {
+  if(isDefined(level.bgb_in_use) && level.bgb_in_use && level.onlinegame) {
     self bgb_token::function_51cf4361(points);
   }
 }
@@ -423,7 +421,7 @@ function minus_to_team_score(points) {}
 
 function player_died_penalty() {
   players = getplayers(self.team);
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     if(players[i] != self && !players[i].is_zombie) {
       players[i] player_reduce_points("no_revive_penalty");
     }

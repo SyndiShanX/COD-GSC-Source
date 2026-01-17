@@ -21,14 +21,14 @@ init() {
   flag_set("_escalator_on");
 
   level.escalator_movespeed = .5;
-  array = getentarray("escalator", "targetname");
+  array = getEntArray("escalator", "targetname");
   array_thread(array, ::escalator_startup);
 }
 
 escalator_startup() {
   step = self;
 
-  while (isdefined(step.target)) {
+  while(isDefined(step.target)) {
     step StartUsingLessFrequentLighting();
     step.true_origin = step.origin;
     step.next_step = getent(step.target, "targetname");
@@ -46,7 +46,7 @@ escalator_move(first_step) {
   step = first_step;
   first_origin = step.origin;
 
-  while (flag("_escalator_on")) {
+  while(flag("_escalator_on")) {
     movespeed = level.escalator_movespeed;
     next_step = step.next_step;
 
@@ -71,7 +71,7 @@ escalator_move(first_step) {
 
   step = first_step;
 
-  while (1) {
+  while(1) {
     movespeed = 2;
     next_step = step.next_step;
 

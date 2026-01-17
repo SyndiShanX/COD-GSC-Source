@@ -60,5 +60,4 @@ main() {
   level._effect["snow_light"] = loadfx("snow/snow_light_contingency");
 
   maps\createfx\contingency_fx::main();
-
 }

@@ -16,7 +16,7 @@ whitehouse_spotlight() {
 
   spotlight = SpawnTurret("misc_turret", spotlight_origin.origin, "heli_spotlight"); // "heli_spotlight"
   spotlight.angles = spotlight_origin.angles;
-  spotlight setmodel("cod3mg42");
+  spotlight setModel("cod3mg42");
   spotlight SetTurretTeam("axis");
   spotlight setmode("manual");
   spotlight SetConvergenceTime(1, "yaw");
@@ -38,7 +38,7 @@ whitehouse_spotlight() {
 
   flag_wait("whitehouse_breached");
 
-  StopFXOnTag(level._effect["_attack_heli_spotlight"], spotlight, "tag_flash");
+  stopFXOnTag(level._effect["_attack_heli_spotlight"], spotlight, "tag_flash");
   spotlight notify("death");
 }
 
@@ -46,8 +46,8 @@ whitehouse_spotlight_pathing(target_struct) {
   self endon("death");
   target_ent = target_struct.ent;
 
-  while (true) {
-    if(isdefined(target_struct.script_speed)) {
+  while(true) {
+    if(isDefined(target_struct.script_speed)) {
       time = target_struct.script_speed / 1000; // hacky use of speed to set the convergence time.
       self SetConvergenceTime(time, "yaw");
       self SetConvergenceTime(time, "pitch");
@@ -58,15 +58,16 @@ whitehouse_spotlight_pathing(target_struct) {
     self settargetentity(target_ent);
     self waittill("turret_on_target");
 
-    if(isdefined(target_struct.script_flag_set))
+    if(isDefined(target_struct.script_flag_set))
       flag_set(target_struct.script_flag_set);
 
     target_struct script_delay();
-    if(isdefined(target_struct.script_flag_wait))
+    if(isDefined(target_struct.script_flag_wait))
       flag_wait(target_struct.script_flag_wait);
 
-    if(!isdefined(target_struct.target))
+    if(!isDefined(target_struct.target)) {
       break;
+    }
 
     target_struct = getstruct(target_struct.target, "targetname");
   }
@@ -79,7 +80,7 @@ whitehouse_spotlight_targeting() {
   self SetConvergenceTime(5, "yaw");
   self SetConvergenceTime(5, "pitch");
 
-  while (true) {
+  while(true) {
     ai_arr = getaiarray("allies");
     target_arr = [];
     foreach(ai in ai_arr) {
@@ -105,16 +106,16 @@ whitehouse_spotlight_flicker() {
 
   flickers = randomintrange(3, 5);
 
-  for (i = 0; i < flickers; i++) {
-    PlayFXOnTag(level._effect["_attack_heli_spotlight"], self, "tag_flash");
+  for(i = 0; i < flickers; i++) {
+    playFXOnTag(level._effect["_attack_heli_spotlight"], self, "tag_flash");
     wait randomfloatrange(0.05, 0.15);
     waittillframeend;
-    StopFXOnTag(level._effect["_attack_heli_spotlight"], self, "tag_flash");
+    stopFXOnTag(level._effect["_attack_heli_spotlight"], self, "tag_flash");
     wait randomfloatrange(0.05, 0.15);
     waittillframeend;
   }
   wait .1;
-  PlayFXOnTag(level._effect["_attack_heli_spotlight"], self, "tag_flash");
+  playFXOnTag(level._effect["_attack_heli_spotlight"], self, "tag_flash");
 }
 
 whitehouse_spotlight_damage() {
@@ -128,14 +129,14 @@ whitehouse_spotlight_damage() {
   total_damage += damage;
   exploder("spotlight_exploder");
 
-  StopFXOnTag(level._effect["_attack_heli_spotlight"], self, "tag_flash");
+  stopFXOnTag(level._effect["_attack_heli_spotlight"], self, "tag_flash");
   self notify("death");
 }
 
 manual_mg_init(delay) {
   self endon("death");
 
-  if(isdefined(delay))
+  if(isDefined(delay))
     wait randomint(3);
 
   self thread manual_mg_drone();
@@ -148,10 +149,10 @@ manual_mg_init(delay) {
 
   self thread manual_mg_fire();
 
-  if(isdefined(self.target))
+  if(isDefined(self.target))
     self thread manual_mg_path();
 
-  if(isdefined(self.script_group)) {
+  if(isDefined(self.script_group)) {
     level waittill("sandbag_group_" + self.script_group);
     self thread manual_mg_stop();
   }
@@ -171,9 +172,9 @@ manual_mg_drone() {
 
 manual_mg_fire() {
   self endon("stop_firing");
-  while (true) {
+  while(true) {
     timer = randomfloatrange(1, 2.5) * 20;
-    for (i = 0; i < timer; i++) {
+    for(i = 0; i < timer; i++) {
       self shootturret();
       wait(0.05);
     }
@@ -189,15 +190,15 @@ manual_mg_path(start_target, noloop) {
   self SetAISpread(0.4);
   self SetMode("manual");
 
-  if(isdefined(start_target))
+  if(isDefined(start_target))
     self.current_target = start_target;
   else
     self.current_target = getstruct(self.target, "targetname");
 
   target_ent = spawn("script_origin", self.current_target.origin);
 
-  while (true) {
-    if(isdefined(self.current_target.script_speed)) {
+  while(true) {
+    if(isDefined(self.current_target.script_speed)) {
       time = self.current_target.script_speed / 1000; // hacky use of speed to set the convergence time.
       self SetConvergenceTime(time, "yaw");
       self SetConvergenceTime(time, "pitch");
@@ -212,9 +213,9 @@ manual_mg_path(start_target, noloop) {
     //		self waittill( "turret_on_target" );
     //		wait 0.5;
 
-    if(isdefined(self.current_target.target))
+    if(isDefined(self.current_target.target))
       self.current_target = getstruct(self.current_target.target, "targetname");
-    else if(isdefined(self.target))
+    else if(isDefined(self.target))
       self.current_target = getstruct(self.target, "targetname");
     else
       break;
@@ -224,12 +225,12 @@ manual_mg_path(start_target, noloop) {
 }
 
 manual_mg_stop(delay) {
-  if(isdefined(delay)) {
+  if(isDefined(delay)) {
     delay = delay * 3;
     wait randomfloatrange(delay, delay + 2);
   }
 
-  if(isdefined(self)) {
+  if(isDefined(self)) {
     self notify("stop_path");
     self notify("stop_firing");
   }
@@ -240,9 +241,9 @@ manual_mg_stop(delay) {
 
 manual_mg_threat_trigger(turret) {
   self waittill("trigger");
-  if(flag("mg_threat"))
+  if(flag("mg_threat")) {
     return;
-
+  }
   turret setmode("manual");
   turret setturretteam("axis");
   turret setbottomarc(45);
@@ -266,7 +267,7 @@ manual_mg_threat_trigger(turret) {
 }
 
 magic_rpg_setup() {
-  trigger_arr = getentarray("magic_rpg_trigger", "targetname");
+  trigger_arr = getEntArray("magic_rpg_trigger", "targetname");
   array_thread(trigger_arr, ::magic_rpg_trigger);
 }
 
@@ -288,11 +289,11 @@ magic_rpg(source) {
 sandbag_group_setup(str_targetname) {
   sandbag_group_create_models(str_targetname);
 
-  sandbag_array = getentarray(str_targetname, "targetname");
+  sandbag_array = getEntArray(str_targetname, "targetname");
   group_array = [];
   foreach(sandbag in sandbag_array) {
     group_id = sandbag.script_group;
-    if(!isdefined(group_array[group_id]))
+    if(!isDefined(group_array[group_id]))
       group_array[group_id] = [];
 
     index = group_array[group_id].size;
@@ -309,7 +310,7 @@ sandbag_group_create_models(str_targetname) {
   foreach(struct in struct_arr) {
     model = spawn("script_model", struct.origin);
     model.angles = struct.angles;
-    model setmodel(struct.script_modelname);
+    model setModel(struct.script_modelname);
     model.script_group = struct.script_group;
     model.script_index = struct.script_index;
     model.script_parameters = struct.script_parameters;
@@ -319,15 +320,15 @@ sandbag_group_create_models(str_targetname) {
 }
 
 sandbag_group(sandbag_array) {
-  group_struct = SpawnStruct();
+  group_struct = spawnStruct();
   group_struct.hit_count = 0;
   array_thread(sandbag_array, ::sandbag_damage, group_struct);
 
   // vector hardcoded since that works for me in DCemp.
-  vector = anglestoforward((345, 180, 0));
+  vector = anglesToForward((345, 180, 0));
   force = vector * 3000;
 
-  while (sandbag_array.size) {
+  while(sandbag_array.size) {
     group_struct waittill("damage", damaged_ent, damage);
 
     // lets all damaged bags report in.
@@ -338,10 +339,10 @@ sandbag_group(sandbag_array) {
       level notify("sandbag_group_" + damaged_ent.script_group);
     }
 
-    for (i = 0; i < group_struct.hit_count; i++) {
+    for(i = 0; i < group_struct.hit_count; i++) {
       if(i == 0) {
         bag = find_lowest_indexed_ent(sandbag_array, damaged_ent);
-        if(isdefined(bag.script_parameters)) {
+        if(isDefined(bag.script_parameters)) {
           group_struct.hit_count = sandbag_array.size;
           level notify("sandbag_group_" + bag.script_group);
         }
@@ -369,7 +370,7 @@ find_lowest_indexed_ent(ent_array, damaged_ent) {
     final_ent = ent;
   }
 
-  if(isdefined(damaged_ent) && final_ent.script_index == damaged_ent.script_index)
+  if(isDefined(damaged_ent) && final_ent.script_index == damaged_ent.script_index)
     return damaged_ent;
 
   return final_ent;
@@ -379,9 +380,9 @@ sandbag_damage(group_struct) {
   self endon("thrown");
   self.health = 10000;
 
-  self SetCanDamage(true);
+  self setCanDamage(true);
 
-  while (true) {
+  while(true) {
     damage = self waittill_player_damage(100);
     group_struct.hit_count++;
     group_struct notify("damage", self, damage);
@@ -405,10 +406,10 @@ whitehouse_cleanup_approach() {
   flag_wait("whitehouse_breached");
 
   // stop enemy MGs
-  mg_array = getentarray("manual_mg", "script_noteworthy");
+  mg_array = getEntArray("manual_mg", "script_noteworthy");
   mg_array = array_add(mg_array, getent("west_side_mg", "script_noteworthy"));
 
-  for (i = 0; i < mg_array.size; i++)
+  for(i = 0; i < mg_array.size; i++)
     mg_array[i] thread manual_mg_stop(i + 1);
 
   // kill remaining exterior enemies
@@ -418,31 +419,31 @@ whitehouse_cleanup_approach() {
   // delete exterior allies
   ai_arr = getaiarray("allies");
   foreach(ai in ai_arr) {
-    if(ai is_hero())
+    if(ai is_hero()) {
       continue;
-
+    }
     ai kill();
   }
 }
 
 whitehouse_mg_setup() {
-  mg_array = getentarray("manual_mg", "script_noteworthy");
+  mg_array = getEntArray("manual_mg", "script_noteworthy");
   array_thread(mg_array, ::manual_mg_init, true);
 
   // trigger that activates the turret to fire infront of the player.
   turret = getent("threat_mg", "targetname");
-  trigger_array = getentarray("mg_threat_trigger", "targetname");
+  trigger_array = getEntArray("mg_threat_trigger", "targetname");
   array_thread(trigger_array, ::manual_mg_threat_trigger, turret);
 }
 
 whitehouse_drone_slaughter() {
   flag_wait("whitehouse_silhouette_ready");
 
-  rocket_source_arr = getentarray("drone_rocket_source", "targetname");
+  rocket_source_arr = getEntArray("drone_rocket_source", "targetname");
   drones = array_removeDead(level.whitehouse_drone_array);
 
   index = 0;
-  while (drones.size) {
+  while(drones.size) {
     source = rocket_source_arr[index % rocket_source_arr.size];
     MagicBullet("rpg_straight", source.origin, random(drones).origin);
     wait randomfloat(2);
@@ -493,29 +494,29 @@ fake_flare(delay, tag, origin_offset, angles_offset) {
   wait delay;
 
   flare = spawn("script_model", (0, 0, 0));
-  flare setmodel("mil_emergency_flare");
+  flare setModel("mil_emergency_flare");
   flare LinkTo(self, tag, origin_offset, angles_offset);
-  PlayFXOnTag(level._effect["green_flare"], flare, "tag_fire_fx");
+  playFXOnTag(level._effect["green_flare"], flare, "tag_fire_fx");
   wait 12;
-  StopFXOnTag(level._effect["green_flare"], flare, "tag_fire_fx");
+  stopFXOnTag(level._effect["green_flare"], flare, "tag_fire_fx");
   wait 0.5;
   flare delete();
 }
 
 foley_flare_fx_start(guy) {
   flare = spawn("script_model", (0, 0, 0));
-  flare setmodel("mil_emergency_flare");
+  flare setModel("mil_emergency_flare");
   flare LinkTo(guy, "tag_weapon_left", (0, 0, 0), (0, 0, 0));
 
   flare_fx = getfx("green_flare");
 
-  PlayFXOnTag(flare_fx, flare, "tag_fire_fx");
-  PlayFXOnTag(flare_fx, guy, "tag_fire_fx");
+  playFXOnTag(flare_fx, flare, "tag_fire_fx");
+  playFXOnTag(flare_fx, guy, "tag_fire_fx");
 
   guy waittill("remove_flare");
 
-  StopFXOnTag(flare_fx, flare, "tag_fire_fx");
-  StopFXOnTag(flare_fx, guy, "tag_fire_fx");
+  stopFXOnTag(flare_fx, flare, "tag_fire_fx");
+  stopFXOnTag(flare_fx, guy, "tag_fire_fx");
 
   flare unlink();
   flare delete();
@@ -524,14 +525,14 @@ foley_flare_fx_start(guy) {
 
 player_flare() {
   level.player.flare = spawn("script_model", (0, 0, 0));
-  level.player.flare setmodel("mil_emergency_flare");
+  level.player.flare setModel("mil_emergency_flare");
   level.player.flare LinkTo(self, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
   level.player.flare endon("death");
 
   flag_wait("flare_start_fx");
 
-  PlayFXOnTag(level._effect["green_flare"], level.player.flare, "tag_fire_fx");
-  level.player.flare PlayLoopSound("emt_road_flare_burn");
+  playFXOnTag(level._effect["green_flare"], level.player.flare, "tag_fire_fx");
+  level.player.flare playLoopSound("emt_road_flare_burn");
 
   flag_wait("flare_end_fx");
 
@@ -546,7 +547,7 @@ player_flare() {
 door_open_kick() {
   wait(0.4);
 
-  self PlaySound("door_wood_double_kick");
+  self playSound("door_wood_double_kick");
 
   self ConnectPaths();
   self RotateTo(self.angles + (0, 90, 0), .5, .1, 0);
@@ -557,17 +558,16 @@ door_open_kick() {
 }
 
 waittill_player_damage(damage_limit) {
-
   //	lets not wait for death anymore
   //	self endon( "death" );
 
-  if(!isdefined(damage_limit))
+  if(!isDefined(damage_limit))
     damage_limit = 0;
 
   state = false;
   total_damage = 0;
 
-  while (!state) {
+  while(!state) {
     self waittill("damage", damage, attacker);
 
     if(attacker == level.player)
@@ -581,8 +581,8 @@ waittill_player_damage(damage_limit) {
 
 turret_on_target(target_ent) {
   self waittill("turret_on_target");
-  while (true) {
-    aim_vector = anglestoforward(self gettagangles("tag_flash"));
+  while(true) {
+    aim_vector = anglesToForward(self gettagangles("tag_flash"));
     target_vector = vectornormalize(target_ent.origin - self.origin);
 
     dot = vectordot(aim_vector, target_vector);
@@ -605,7 +605,7 @@ hero_dynamic_speed() {
   self endon("death");
   self endon("stop_dynamic_speed");
 
-  while (true) {
+  while(true) {
     if(within_fov(level.player.origin, level.player.angles, self.origin, level.cosine["60"]))
       self.moveplaybackrate = 1.0;
     else
@@ -615,13 +615,13 @@ hero_dynamic_speed() {
 }
 
 chandelier_setup() {
-  chandelier_arr = getentarray("chandelier", "targetname");
+  chandelier_arr = getEntArray("chandelier", "targetname");
   array_thread(chandelier_arr, ::chandelier);
 }
 
 chandelier() {
   // get all parts
-  parts = getentarray(self.target, "targetname");
+  parts = getEntArray(self.target, "targetname");
 
   self.wire = parts[0];
   self.light = parts[1];
@@ -630,7 +630,7 @@ chandelier() {
     self.light = parts[0];
   }
 
-  if(isdefined(self.wire.target)) {
+  if(isDefined(self.wire.target)) {
     ceiling_struct = getstruct(self.wire.target, "targetname");
     ceiling = ceiling_struct.origin;
   } else
@@ -653,18 +653,18 @@ chandelier() {
 chandelier_react() {
   self endon("chandelier_fall");
 
-  self SetCanDamage(true);
-  self SetCanRadiusDamage(true);
+  self setCanDamage(true);
+  self setCanRadiusDamage(true);
 
-  while (true) {
+  while(true) {
     self waittill("damage", damage, attacker, direction_vec, point, type);
 
-    if(common_scripts\_destructible::getDamageType(type) != "splash")
+    if(common_scripts\_destructible::getDamageType(type) != "splash") {
       continue;
-
+    }
     self thread chandelier_swing(damage, direction_vec);
     self thread chandelier_flicker();
-    if(isdefined(self.script_parameters))
+    if(isDefined(self.script_parameters))
       self thread chandelier_fall();
   }
 }
@@ -686,7 +686,7 @@ chandelier_swing(damage, direction_vec) {
   self.swing_origin rotateto(rotation, swing_speed, 0, swing_speed);
   self.swing_origin waittill("rotatedone");
 
-  while (abs(angle) > 2) {
+  while(abs(angle) > 2) {
     angle *= -0.75;
     rotation = (angle * weight_vector[0], 0, angle * weight_vector[1]);
 
@@ -707,12 +707,12 @@ chandelier_flicker() {
 
   wait .5; // total wait ~5.4 sec.
 
-  for (i = 0; i < 14; i++) {
+  for(i = 0; i < 14; i++) {
     self.light SetLightIntensity(0);
-    self setmodel("furniture_chandelier1_off");
+    self setModel("furniture_chandelier1_off");
     wait randomfloatrange(0.05, 0.2); // ~0.125
     self.light SetLightIntensity(randomfloatrange(0.5, 1.5));
-    self setmodel("furniture_chandelier1");
+    self setModel("furniture_chandelier1");
     wait randomfloatrange(0.15, 0.3); // ~0.225
   }
   self.light SetLightIntensity(1.5);
@@ -726,12 +726,12 @@ chandelier_fall() {
   self notify("chandelier_fall");
 
   self.light SetLightIntensity(4);
-  self setmodel("furniture_chandelier1");
+  self setModel("furniture_chandelier1");
   wait 0.05;
   self.light SetLightIntensity(0);
-  self setmodel("furniture_chandelier1_off");
+  self setModel("furniture_chandelier1_off");
 
-  PlayFX(level._effect["wire_spark"], self.origin);
+  playFX(level._effect["wire_spark"], self.origin);
 
   if(self.swing)
     self waittill("chandelier_turn");
@@ -748,9 +748,9 @@ chandelier_link_light() {
   self.light_origin = spawn("script_origin", self.light.origin);
   self.light_origin linkto(self);
 
-  while (true) {
+  while(true) {
     self waittill("chandelier_swing");
-    while (self.swing) {
+    while(self.swing) {
       self.light.origin = self.light_origin.origin;
       wait 0.05;
     }
@@ -758,24 +758,25 @@ chandelier_link_light() {
 }
 
 chandelier_get(noteworthy) {
-  ent_arr = getentarray(noteworthy, "script_noteworthy");
+  ent_arr = getEntArray(noteworthy, "script_noteworthy");
   chandelier = undefined;
   foreach(chandelier in ent_arr) {
-    if(chandelier.targetname == "chandelier")
+    if(chandelier.targetname == "chandelier") {
       break;
+    }
   }
   return chandelier;
 }
 
 chandelier_force_swing(damage, direction_vec) {
-  if(!isdefined(direction_vec))
+  if(!isDefined(direction_vec))
     direction_vec = (10, 10, 0);
 
   self notify("damage", damage, undefined, direction_vec, undefined, "mod_grenade_splash");
 }
 
 player_attached_use(hintstring) {
-  ent = Spawn("script_origin", level.player.origin + (0, 0, 32));
+  ent = spawn("script_origin", level.player.origin + (0, 0, 32));
   ent makeusable();
   ent sethintstring(hintstring);
   ent linkto(level.player);
@@ -792,7 +793,7 @@ elapsed_time(start_time) {
 
 rotate_vector(vector, rotation) {
   right = anglestoright(rotation) * -1;
-  forward = anglestoforward(rotation);
+  forward = anglesToForward(rotation);
   up = anglestoup(rotation);
   new_vector = forward * vector[0] + right * vector[1] + up * vector[2];
   return new_vector;
@@ -812,7 +813,7 @@ tunnels_teleport() {
   fx_rain_pause();
   fx_rain_pause2();
 
-  while (!level.player IsOnGround())
+  while(!level.player IsOnGround())
     wait 0.05;
 
   flag_set("end_fx");
@@ -871,7 +872,7 @@ goal_in_volume(origin, volume) {
 
 remove_drone_weapon() {
   size = self GetAttachSize();
-  for (i = 0; i < size; i++) {
+  for(i = 0; i < size; i++) {
     model_name = self GetAttachModelName(i);
     tag_name = self GetAttachTagName(i);
     if(IsSubStr(model_name, "weapon"))
@@ -880,7 +881,7 @@ remove_drone_weapon() {
 }
 
 force_flash_setup() {
-  array = getentarray("force_flash", "targetname");
+  array = getEntArray("force_flash", "targetname");
   array_thread(array, ::force_flash);
 }
 

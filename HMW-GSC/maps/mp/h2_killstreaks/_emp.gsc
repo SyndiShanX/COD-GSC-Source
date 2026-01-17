@@ -30,32 +30,27 @@ init() {
   level.killstreakFuncs["emp_mp"] = ::h2_EMP_Use;
 
   level thread onPlayerConnect();
-
 }
-
-
 
 onPlayerConnect() {
   level endon("game_ended");
-  for (;;) {
+  for(;;) {
     level waittill("connected", player);
     player thread onPlayerSpawned();
   }
 }
 
-
 onPlayerSpawned() {
   self endon("disconnect");
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     self waittill("spawned_player");
 
     if((level.teamBased && level.teamEMPed[self.team]) || (!level.teamBased && isDefined(level.empPlayer) && level.empPlayer != self))
       self _setEMPJammed(true);
   }
 }
-
 
 h2_EMP_Use(lifeId, delay) {
   assert(isDefined(self));
@@ -77,7 +72,6 @@ h2_EMP_Use(lifeId, delay) {
   return true;
 }
 
-
 EMP_JamTeam(teamName, duration, delay) {
   level endon("game_ended");
 
@@ -92,9 +86,9 @@ EMP_JamTeam(teamName, duration, delay) {
   foreach(player in level.players) {
     player playLocalSound("mp_lose_flag");
 
-    if(player.team != teamName)
+    if(player.team != teamName) {
       continue;
-
+    }
     if(player _hasPerk("specialty_localjammer"))
       player ClearScrambler();
   }
@@ -120,9 +114,9 @@ EMP_JamTeam(teamName, duration, delay) {
   level.teamEMPed[teamName] = false;
 
   foreach(player in level.players) {
-    if(player.team != teamName)
+    if(player.team != teamName) {
       continue;
-
+    }
     if(player _hasPerk("specialty_localjammer"))
       player MakeScrambler();
   }
@@ -133,7 +127,7 @@ EMP_JamTeam(teamName, duration, delay) {
 emp_timer(duration) {
   level.empTimeRemaining = duration;
 
-  while (level.empTimeRemaining) {
+  while(level.empTimeRemaining) {
     wait(1.0);
     maps\mp\gametypes\_hostmigration::waitTillHostMigrationDone();
 
@@ -152,9 +146,9 @@ EMP_JamPlayers(owner, duration, delay) {
   foreach(player in level.players) {
     player playLocalSound("mp_lose_flag");
 
-    if(player == owner)
+    if(player == owner) {
       continue;
-
+    }
     if(player _hasPerk("specialty_localjammer"))
       player ClearScrambler();
   }
@@ -181,9 +175,9 @@ EMP_JamPlayers(owner, duration, delay) {
   emp_timer(duration);
 
   foreach(player in level.players) {
-    if(player == owner)
+    if(player == owner) {
       continue;
-
+    }
     if(player _hasPerk("specialty_localjammer"))
       player MakeScrambler();
   }
@@ -203,13 +197,13 @@ empPlayerFFADisconnect() {
 
 empEffects() {
   foreach(player in level.players) {
-    playerForward = anglestoforward(player.angles);
+    playerForward = anglesToForward(player.angles);
     playerForward = (playerForward[0], playerForward[1], 0);
     playerForward = VectorNormalize(playerForward);
 
     empDistance = 20000;
 
-    empEnt = Spawn("script_model", player.origin + (0, 0, 8000) + vector_multiply(playerForward, empDistance));
+    empEnt = spawn("script_model", player.origin + (0, 0, 8000) + vector_multiply(playerForward, empDistance));
     empEnt setModel("tag_origin");
     empEnt.angles = empEnt.angles + (270, 0, 0);
     empEnt thread empEffect(player);
@@ -226,29 +220,28 @@ empEffect(player) {
 EMP_TeamTracker() {
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     level waittill_either("joined_team", "emp_update");
 
     foreach(player in level.players) {
-      if(player.team == "spectator")
+      if(player.team == "spectator") {
         continue;
-
+      }
       player _setEMPJammed(level.teamEMPed[player.team]);
     }
   }
 }
 
-
 EMP_PlayerTracker() {
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     level waittill_either("joined_team", "emp_update");
 
     foreach(player in level.players) {
-      if(player.team == "spectator")
+      if(player.team == "spectator") {
         continue;
-
+      }
       if(isDefined(level.empPlayer) && level.empPlayer != player)
         player _setEMPJammed(true);
       else

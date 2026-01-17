@@ -192,9 +192,7 @@ set_threat_bias_group(alien_type) {
 
 can_attack_drill(alien_type) {
   if(isDefined(level.dlc_alien_can_attack_drill_override_func)) {
-    canAttackDrill = [
-      [level.dlc_alien_can_attack_drill_override_func]
-    ](alien_type);
+    canAttackDrill = [[level.dlc_alien_can_attack_drill_override_func]](alien_type);
     if(isDefined(canAttackDrill))
       return canAttackDrill;
   }
@@ -237,9 +235,7 @@ remove_spawn_type(alienType) {
 
 set_alien_model(alien_type) {
   if(isDefined(level.get_alien_model_func)) {
-    alien_model = [
-      [level.get_alien_model_func]
-    ](alien_type);
+    alien_model = [[level.get_alien_model_func]](alien_type);
   } else {
     alien_model = level.alien_types[alien_type].attributes["model"];
   }
@@ -280,9 +276,7 @@ type_specific_init() {
     default:
 
       if(isDefined(level.dlc_alien_init_override_func)) {
-        [
-          [level.dlc_alien_init_override_func]
-        ]();
+        [[level.dlc_alien_init_override_func]]();
       }
       break;
   }

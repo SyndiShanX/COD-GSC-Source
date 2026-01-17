@@ -43,7 +43,6 @@ footstep_effects() {
 }
 
 treadfx_override() {
-
   driving_tread_fx = "treadfx/tread_dust_boneyard";
 
   maps\_treadfx::setvehiclefx("suburban", "brick", driving_tread_fx);
@@ -269,5 +268,4 @@ treadfx_override() {
   maps\_treadfx::setvehiclefx("btr80_physics", "painted metal", driving_tread_fx);
   maps\_treadfx::setvehiclefx("btr80_physics", "default", driving_tread_fx);
   //maps\_treadfx::setvehiclefx( "btr80_physics", "none", driving_tread_fx );
-
 }

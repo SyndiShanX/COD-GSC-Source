@@ -15,19 +15,19 @@
 #namespace zm_temple_sq_bttp;
 
 function init() {
-  zm_sidequests::declare_sidequest_stage("sq", "bttp", & init_stage, & stage_logic, & exit_stage);
+  zm_sidequests::declare_sidequest_stage("sq", "bttp", &init_stage, &stage_logic, &exit_stage);
   zm_sidequests::set_stage_time_limit("sq", "bttp", 300);
-  zm_sidequests::declare_stage_asset_from_struct("sq", "bttp", "sq_bttp_glyph", undefined, & function_8feeec3c);
+  zm_sidequests::declare_stage_asset_from_struct("sq", "bttp", "sq_bttp_glyph", undefined, &function_8feeec3c);
 }
 
 function init_stage() {
-  if(isdefined(level._sq_skel)) {
+  if(isDefined(level._sq_skel)) {
     level._sq_skel ghost();
   }
   level.var_5f315f0b = 0;
   zm_temple_sq_brock::delete_radio();
-  var_b28c3b10 = getentarray("sq_spiketrap", "targetname");
-  array::thread_all(var_b28c3b10, & function_d0295ce3);
+  var_b28c3b10 = getEntArray("sq_spiketrap", "targetname");
+  array::thread_all(var_b28c3b10, &function_d0295ce3);
   level thread delayed_start_skit();
 }
 
@@ -38,7 +38,7 @@ function delayed_start_skit() {
 
 function trap_trigger() {
   level endon("hash_20531487");
-  while (true) {
+  while(true) {
     self waittill("damage", amount, attacker, direction, point, dmg_type, modelname, tagname);
     if(isplayer(attacker) && (dmg_type == "MOD_EXPLOSIVE" || dmg_type == "MOD_EXPLOSIVE_SPLASH" || dmg_type == "MOD_GRENADE" || dmg_type == "MOD_GRENADE_SPLASH")) {
       self.owner_ent notify("triggered", attacker);
@@ -56,7 +56,7 @@ function function_d0295ce3() {
   self.trigger thread trap_trigger();
   self waittill("triggered", who);
   who thread zm_audio::create_and_play_dialog("eggs", "quest1", 7);
-  self.trigger playsound("evt_sq_bttp_wood_explo");
+  self.trigger playSound("evt_sq_bttp_wood_explo");
   self ghost();
   level flag::set("trap_destroyed");
 }
@@ -65,7 +65,7 @@ function function_e3bf4adb() {
   self endon("death");
   self endon("done");
   level endon("hash_20531487");
-  while (!(isdefined(level.disable_print3d_ent) && level.disable_print3d_ent)) {
+  while(!(isDefined(level.disable_print3d_ent) && level.disable_print3d_ent)) {
     print3d(self.origin, "", vectorscale((0, 0, 1), 255), 1);
     wait(0.1);
   }
@@ -74,9 +74,9 @@ function function_e3bf4adb() {
 function function_8feeec3c() {
   hits = 0;
   self thread function_e3bf4adb();
-  while (true) {
+  while(true) {
     self waittill("damage", amount, attacker, dir, point, type);
-    self playsound("evt_sq_bttp_carve");
+    self playSound("evt_sq_bttp_carve");
     if(type == "MOD_MELEE") {
       hits++;
       if(hits >= 1) {
@@ -84,10 +84,10 @@ function function_8feeec3c() {
       }
     }
   }
-  self setmodel(self.tile);
+  self setModel(self.tile);
   self notify("done");
   level.var_5f315f0b++;
-  if(isdefined(attacker) && isplayer(attacker)) {
+  if(isDefined(attacker) && isplayer(attacker)) {
     if(level.var_5f315f0b < level.var_13439433) {
       if(randomintrange(0, 101) <= 75) {
         attacker thread zm_audio::create_and_play_dialog("eggs", "quest6", randomintrange(0, 4));
@@ -157,13 +157,13 @@ function stage_logic() {
   level endon("hash_20531487");
   tile_models = array("p7_zm_sha_glyph_stone_01_unlit", "p7_zm_sha_glyph_stone_02_unlit", "p7_zm_sha_glyph_stone_03_unlit", "p7_zm_sha_glyph_stone_04_unlit", "p7_zm_sha_glyph_stone_05_unlit", "p7_zm_sha_glyph_stone_06_unlit", "p7_zm_sha_glyph_stone_07_unlit", "p7_zm_sha_glyph_stone_08_unlit", "p7_zm_sha_glyph_stone_09_unlit", "p7_zm_sha_glyph_stone_10_unlit", "p7_zm_sha_glyph_stone_11_unlit", "p7_zm_sha_glyph_stone_12_unlit");
   tile_models = array::randomize(tile_models);
-  ents = getentarray("sq_bttp_glyph", "targetname");
+  ents = getEntArray("sq_bttp_glyph", "targetname");
   level.var_13439433 = ents.size;
-  for (i = 0; i < ents.size; i++) {
+  for(i = 0; i < ents.size; i++) {
     ents[i].tile = function_87175782(tile_models[i]);
-    ents[i] setmodel(tile_models[i]);
+    ents[i] setModel(tile_models[i]);
   }
-  while (true) {
+  while(true) {
     if(level.var_5f315f0b == ents.size) {
       break;
     }
@@ -176,12 +176,12 @@ function stage_logic() {
 }
 
 function exit_stage(success) {
-  var_b28c3b10 = getentarray("sq_spiketrap", "targetname");
+  var_b28c3b10 = getEntArray("sq_spiketrap", "targetname");
   if(success) {
     zm_temple_sq::remove_skel();
-    zm_temple_sq_brock::create_radio(7, & zm_temple_sq_brock::radio7_override);
+    zm_temple_sq_brock::create_radio(7, &zm_temple_sq_brock::radio7_override);
   } else {
-    if(isdefined(level._sq_skel)) {
+    if(isDefined(level._sq_skel)) {
       level._sq_skel show();
     }
     zm_temple_sq_brock::create_radio(6);
@@ -191,7 +191,7 @@ function exit_stage(success) {
     level thread zm_temple_sq_skits::fail_skit();
   }
   foreach(e_trap in var_b28c3b10) {
-    if(isdefined(e_trap.trigger)) {
+    if(isDefined(e_trap.trigger)) {
       e_trap.trigger delete();
     }
   }

@@ -311,7 +311,7 @@ notify_wolf_intro_anim_complete() {
 
 which_eating_anim() {
   soul_catcher = self.my_soul_catcher;
-  forward_dot = vectordot(anglestoforward(soul_catcher.angles), vectornormalize(self.origin - soul_catcher.origin));
+  forward_dot = vectordot(anglesToForward(soul_catcher.angles), vectornormalize(self.origin - soul_catcher.origin));
 
   if(forward_dot > 0.85)
     return 3;
@@ -348,9 +348,9 @@ soul_catcher_check() {
 
 wolf_head_removal(wolf_head_model_string) {
   wolf_head_model = getent(wolf_head_model_string, "targetname");
-  wolf_head_model setmodel("p6_zm_al_dream_catcher_off");
+  wolf_head_model setModel("p6_zm_al_dream_catcher_off");
   self waittill("fully_charged");
-  wolf_head_model setmodel("p6_zm_al_dream_catcher");
+  wolf_head_model setModel("p6_zm_al_dream_catcher");
 }
 
 soul_catchers_charged() {
@@ -545,7 +545,7 @@ hellhole_grenades(grenade) {
     wait 0.05;
 
   self maps\mp\zombies\_zm_score::add_to_player_score(20);
-  playfx(level._effect["tomahawk_hellhole"], grenade.origin);
+  playFX(level._effect["tomahawk_hellhole"], grenade.origin);
   playsoundatposition("wpn_grenade_poof", grenade.origin);
   grenade delete();
 }
@@ -559,7 +559,7 @@ hellhole_tomahawk(grenade) {
 
   self notify("tomahawk_in_hellhole");
   grenade notify("in_hellhole");
-  playfx(level._effect["tomahawk_hellhole"], grenade.origin);
+  playFX(level._effect["tomahawk_hellhole"], grenade.origin);
   playsoundatposition("wpn_grenade_poof", grenade.origin);
   grenade delete();
 }

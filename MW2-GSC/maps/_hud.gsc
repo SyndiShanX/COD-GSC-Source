@@ -56,7 +56,7 @@ cassert( ARRAY_COUNT( g_he_vertalign ) == VERTICAL_ALIGN_MAX + 1 );
 */
 
 init() {
-  level.uiParent = spawnstruct();
+  level.uiParent = spawnStruct();
   level.uiParent.horzAlign = "left";
   level.uiParent.vertAlign = "top";
   level.uiParent.alignX = "left";

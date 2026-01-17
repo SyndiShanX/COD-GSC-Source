@@ -30,7 +30,7 @@ meleecombat() {
     }
 
     if(isDefined(self.zmb_vocals_attack))
-      self playsound(self.zmb_vocals_attack);
+      self playSound(self.zmb_vocals_attack);
 
     if(isDefined(self.nochangeduringmelee) && self.nochangeduringmelee)
       self.safetochangescript = 0;
@@ -74,9 +74,9 @@ meleecombat() {
 
         if(getdvarint(#"_id_7F11F572")) {
           if(self.enemy.health < oldhealth) {
-            zombie_eye = self geteye();
-            player_eye = self.enemy geteye();
-            trace = bullettrace(zombie_eye, player_eye, 1, self);
+            zombie_eye = self getEye();
+            player_eye = self.enemy getEye();
+            trace = bulletTrace(zombie_eye, player_eye, 1, self);
             hitpos = trace["position"];
             dist = distance(zombie_eye, hitpos);
             iprintln("melee HIT " + dist);
@@ -202,8 +202,8 @@ ismeleepathclear(vectoenemy, enemypoint) {
   if(self maymovetopoint(meleepoint))
     return true;
 
-  trace1 = bullettrace(self.origin + vectorscale((0, 0, 1), 20.0), meleepoint + vectorscale((0, 0, 1), 20.0), 1, self);
-  trace2 = bullettrace(self.origin + vectorscale((0, 0, 1), 72.0), meleepoint + vectorscale((0, 0, 1), 72.0), 1, self);
+  trace1 = bulletTrace(self.origin + vectorscale((0, 0, 1), 20.0), meleepoint + vectorscale((0, 0, 1), 20.0), 1, self);
+  trace2 = bulletTrace(self.origin + vectorscale((0, 0, 1), 72.0), meleepoint + vectorscale((0, 0, 1), 72.0), 1, self);
 
   if(isDefined(trace1["fraction"]) && trace1["fraction"] == 1 && isDefined(trace2["fraction"]) && trace2["fraction"] == 1)
     return true;

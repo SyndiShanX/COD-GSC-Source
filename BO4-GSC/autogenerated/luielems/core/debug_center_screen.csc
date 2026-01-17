@@ -4,13 +4,11 @@
 ***************************************************************/
 
 #include scripts\core_common\lui_shared;
-
 #namespace debug_center_screen;
 
 class cdebug_center_screen: cluielem {
-
   function open(localclientnum) {
-    cluielem::open(localclientnum, #"debug_center_screen");
+    cluielem::open(localclientnum, # "debug_center_screen");
   }
 
   function function_fa582112(localclientnum) {

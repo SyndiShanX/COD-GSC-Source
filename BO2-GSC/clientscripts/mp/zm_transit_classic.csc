@@ -74,7 +74,7 @@ sidequest_complete_fx_lightning(electric_struct) {
     players = getlocalplayers();
 
     foreach(clientnum, player in players)
-    playfx(clientnum, level._effect["sq_common_lightning"], electric_struct.origin - vectorscale((0, 0, 1), 768.0));
+    playFX(clientnum, level._effect["sq_common_lightning"], electric_struct.origin - vectorscale((0, 0, 1), 768.0));
 
     wait(randomfloatrange(1, 2));
   }
@@ -107,9 +107,9 @@ sidequest_complete_fx_triangle_runner(story, event, end_struct) {
 
     foreach(index, client in players) {
       fxrunners[index] = spawn(index, screech_struct.origin + vectorscale((0, 0, 1), 140.0), "script_model");
-      fxrunners[index] setmodel("tag_origin");
+      fxrunners[index] setModel("tag_origin");
       wait 0.05;
-      playfxontag(index, level._effect[story + "_sparks"], fxrunners[index], "tag_origin");
+      playFXOnTag(index, level._effect[story + "_sparks"], fxrunners[index], "tag_origin");
     }
 
     foreach(runner in fxrunners) {
@@ -141,9 +141,9 @@ sidequest_complete_fx_runner(story, struct) {
 
   foreach(index, client in players) {
     fxrunners[index] = spawn(index, struct.origin, "script_model");
-    fxrunners[index] setmodel("tag_origin");
+    fxrunners[index] setModel("tag_origin");
     wait 0.1;
-    playfxontag(index, level._effect[story + "_sparks"], fxrunners[index], "tag_origin");
+    playFXOnTag(index, level._effect[story + "_sparks"], fxrunners[index], "tag_origin");
     fxrunners[index] thread sidequest_complete_fx_runner_move(struct);
     wait 0.1;
   }
@@ -202,7 +202,7 @@ waittill_any_return8(string1, string2, string3, string4, string5, string6, strin
   if((!isDefined(string1) || string1 != "death") && (!isDefined(string2) || string2 != "death") && (!isDefined(string3) || string3 != "death") && (!isDefined(string4) || string4 != "death") && (!isDefined(string5) || string5 != "death") && (!isDefined(string6) || string6 != "death") && (!isDefined(string7) || string7 != "death") && (!isDefined(string8) || string8 != "death"))
     self endon("death");
 
-  ent = spawnstruct();
+  ent = spawnStruct();
 
   if(isDefined(string1))
     self thread waittill_string(string1, ent);

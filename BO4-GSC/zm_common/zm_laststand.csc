@@ -14,7 +14,6 @@
 #include scripts\zm_common\load;
 #include scripts\zm_common\util;
 #include scripts\zm_common\zm_hero_weapon;
-
 #namespace zm_laststand;
 
 autoexec __init__system__() {
@@ -44,7 +43,7 @@ wait_and_set_revive_shader_constant() {
   while(true) {
     waitresult = level waittillmatch({
       #notetrack: "revive_shader_constant"
-    }, #"notetrack");
+    }, # "notetrack");
     player = function_5c10bd79(waitresult.localclientnum);
     player mapshaderconstant(waitresult.localclientnum, 0, "scriptVector2", 0, 1, 0, getservertime(waitresult.localclientnum) / 1000);
     waitframe(1);
@@ -90,7 +89,7 @@ function_50d4c00a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 function_be34e28f(localclientnum, var_d2c301e0) {
-  self endoncallback(&function_ac994c83, #"death", #"hash_2f1dc2ea83ba9e2");
+  self endoncallback(&function_ac994c83, # "death", # "hash_2f1dc2ea83ba9e2");
   self postfx::playpostfxbundle("pstfx_zm_last_stand");
   var_6c2f58e2 = var_d2c301e0 + int(level.var_629da31e * 1000);
 

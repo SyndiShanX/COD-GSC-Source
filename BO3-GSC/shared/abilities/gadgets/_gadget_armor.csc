@@ -15,13 +15,13 @@
 #namespace _gadget_armor;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_armor", & __init__, undefined, undefined);
+  system::register("gadget_armor", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_localplayer_spawned( & on_local_player_spawned);
-  clientfield::register("allplayers", "armor_status", 1, 5, "int", & player_armor_changed, 0, 0);
-  clientfield::register("toplayer", "player_damage_type", 1, 1, "int", & player_damage_type_changed, 0, 0);
+  callback::on_localplayer_spawned(&on_local_player_spawned);
+  clientfield::register("allplayers", "armor_status", 1, 5, "int", &player_armor_changed, 0, 0);
+  clientfield::register("toplayer", "player_damage_type", 1, 1, "int", &player_damage_type_changed, 0, 0);
   duplicate_render::set_dr_filter_framebuffer_duplicate("armor_pl", 40, "armor_on", undefined, 1, "mc/mtl_power_armor", 0);
   level thread armor_overlay_think();
 }
@@ -89,7 +89,7 @@ function armor_update_fx_event(localclientnum, doarmorfx) {
 
 function armor_overlay_transition_fx(localclientnum, armorstatusnew) {
   self endon("disconnect");
-  if(!isdefined(self._gadget_armor_state)) {
+  if(!isDefined(self._gadget_armor_state)) {
     self._gadget_armor_state = 0;
   }
   if(armorstatusnew == self._gadget_armor_state) {
@@ -99,7 +99,7 @@ function armor_overlay_transition_fx(localclientnum, armorstatusnew) {
   if(armorstatusnew == 5) {
     return;
   }
-  if(isdefined(self._armor_doing_transition) && self._armor_doing_transition) {
+  if(isDefined(self._armor_doing_transition) && self._armor_doing_transition) {
     return;
   }
   self._armor_doing_transition = 1;
@@ -107,7 +107,7 @@ function armor_overlay_transition_fx(localclientnum, armorstatusnew) {
   flicker_start_time = getrealtime();
   saved_vision = getvisionsetnaked(localclientnum);
   visionsetnaked(localclientnum, "taser_mine_shock", transition);
-  self playsound(0, "wpn_taser_mine_tacmask");
+  self playSound(0, "wpn_taser_mine_tacmask");
   wait(0.3);
   visionsetnaked(localclientnum, saved_vision, transition);
   self._armor_doing_transition = 0;
@@ -122,13 +122,13 @@ function armor_is_local_player(localclientnum) {
 function armor_overlay_think() {
   armorstatus = 0;
   setdvar("", 0);
-  while (true) {
+  while(true) {
     wait(0.1);
     armorstatusnew = getdvarint("");
     if(armorstatusnew != armorstatus) {
       players = getlocalplayers();
       foreach(i, localplayer in players) {
-        if(!isdefined(localplayer)) {
+        if(!isDefined(localplayer)) {
           continue;
         }
         localplayer player_armor_changed_event(i, armorstatusnew);

@@ -22,17 +22,17 @@ function autoexec init() {
   level.zm_variant_type_max["run"]["up"] = 12;
   level.zm_variant_type_max["sprint"]["down"] = 7;
   level.zm_variant_type_max["sprint"]["up"] = 6;
-  spawner::add_archetype_spawn_function("mannequin", & zombiebehavior::archetypezombieblackboardinit);
-  spawner::add_archetype_spawn_function("mannequin", & zombiebehavior::archetypezombiedeathoverrideinit);
-  spawner::add_archetype_spawn_function("mannequin", & zombie_utility::zombiespawnsetup);
-  spawner::add_archetype_spawn_function("mannequin", & mannequinspawnsetup);
+  spawner::add_archetype_spawn_function("mannequin", &zombiebehavior::archetypezombieblackboardinit);
+  spawner::add_archetype_spawn_function("mannequin", &zombiebehavior::archetypezombiedeathoverrideinit);
+  spawner::add_archetype_spawn_function("mannequin", &zombie_utility::zombiespawnsetup);
+  spawner::add_archetype_spawn_function("mannequin", &mannequinspawnsetup);
   mannequininterface::registermannequininterfaceattributes();
-  behaviortreenetworkutility::registerbehaviortreescriptapi("mannequinCollisionService", & mannequincollisionservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("mannequinShouldMelee", & mannequinshouldmelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("mannequinCollisionService", &mannequincollisionservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("mannequinShouldMelee", &mannequinshouldmelee);
 }
 
 function mannequincollisionservice(entity) {
-  if(isdefined(entity.enemy) && distancesquared(entity.origin, entity.enemy.origin) > (300 * 300)) {
+  if(isDefined(entity.enemy) && distancesquared(entity.origin, entity.enemy.origin) > (300 * 300)) {
     entity pushactors(0);
   } else {
     entity pushactors(1);
@@ -42,13 +42,13 @@ function mannequincollisionservice(entity) {
 function mannequinspawnsetup(entity) {}
 
 function private mannequinshouldmelee(entity) {
-  if(!isdefined(entity.enemy)) {
+  if(!isDefined(entity.enemy)) {
     return false;
   }
-  if(isdefined(entity.marked_for_death)) {
+  if(isDefined(entity.marked_for_death)) {
     return false;
   }
-  if(isdefined(entity.ignoremelee) && entity.ignoremelee) {
+  if(isDefined(entity.ignoremelee) && entity.ignoremelee) {
     return false;
   }
   if(distance2dsquared(entity.origin, entity.enemy.origin) > (64 * 64)) {

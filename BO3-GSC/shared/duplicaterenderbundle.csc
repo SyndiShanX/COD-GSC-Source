@@ -13,11 +13,11 @@
 #namespace duplicate_render_bundle;
 
 function autoexec __init__sytem__() {
-  system::register("duplicate_render_bundle", & __init__, undefined, undefined);
+  system::register("duplicate_render_bundle", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_localplayer_spawned( & localplayer_duplicate_render_bundle_init);
+  callback::on_localplayer_spawned(&localplayer_duplicate_render_bundle_init);
 }
 
 function localplayer_duplicate_render_bundle_init(localclientnum) {
@@ -25,7 +25,7 @@ function localplayer_duplicate_render_bundle_init(localclientnum) {
 }
 
 function init_duplicate_render_bundles() {
-  if(isdefined(self.duprenderbundelsinited)) {
+  if(isDefined(self.duprenderbundelsinited)) {
     return;
   }
   self.duprenderbundelsinited = 1;
@@ -40,7 +40,7 @@ function duprenderbundledebuglisten() {
   setdvar("", "");
   setdvar("", "");
   setdvar("", "");
-  while (true) {
+  while(true) {
     playbundlename = getdvarstring("");
     if(playbundlename != "") {
       self thread playduprenderbundle(playbundlename);
@@ -65,7 +65,7 @@ function playduprenderbundle(playbundlename) {
   init_duplicate_render_bundles();
   stopplayingduprenderbundle();
   bundle = struct::get_script_bundle("duprenderbundle", playbundlename);
-  if(!isdefined(bundle)) {
+  if(!isDefined(bundle)) {
     println(("" + playbundlename) + "");
     return;
   }
@@ -77,16 +77,16 @@ function playduprenderbundle(playbundlename) {
   enterstage = 0;
   exitstage = 0;
   finishlooponexit = 0;
-  if(isdefined(bundle.looping)) {
+  if(isDefined(bundle.looping)) {
     looping = bundle.looping;
   }
-  if(isdefined(bundle.enterstage)) {
+  if(isDefined(bundle.enterstage)) {
     enterstage = bundle.enterstage;
   }
-  if(isdefined(bundle.exitstage)) {
+  if(isDefined(bundle.exitstage)) {
     exitstage = bundle.exitstage;
   }
-  if(isdefined(bundle.finishlooponexit)) {
+  if(isDefined(bundle.finishlooponexit)) {
     finishlooponexit = bundle.finishlooponexit;
   }
   if(looping) {
@@ -100,14 +100,14 @@ function playduprenderbundle(playbundlename) {
   } else {
     num_stages = bundle.num_stages;
   }
-  for (stageidx = 0; stageidx < num_stages && !self.forcestopduprenderbundle; stageidx++) {
+  for(stageidx = 0; stageidx < num_stages && !self.forcestopduprenderbundle; stageidx++) {
     stageprefix = "s";
     if(stageidx < 10) {
       stageprefix = stageprefix + "0";
     }
     stageprefix = stageprefix + (stageidx + "_");
     stagelength = getstructfield(bundle, stageprefix + "length");
-    if(!isdefined(stagelength)) {
+    if(!isDefined(stagelength)) {
       finishplayingduprenderbundle(localclientnum, stageprefix + " length not defined");
       return;
     }
@@ -118,8 +118,8 @@ function playduprenderbundle(playbundlename) {
     loopingstage = looping && (!enterstage && stageidx == 0 || (enterstage && stageidx == 1));
     accumtime = 0;
     prevtime = self getclienttime();
-    while (loopingstage || accumtime < stagelength && !self.forcestopduprenderbundle) {
-      gfx::setstage(localclientnum, bundle, undefined, stageprefix, stagelength, accumtime, totalaccumtime, & setshaderconstants);
+    while(loopingstage || accumtime < stagelength && !self.forcestopduprenderbundle) {
+      gfx::setstage(localclientnum, bundle, undefined, stageprefix, stagelength, accumtime, totalaccumtime, &setshaderconstants);
       wait(0.016);
       currtime = self getclienttime();
       deltatime = currtime - prevtime;
@@ -127,7 +127,7 @@ function playduprenderbundle(playbundlename) {
       totalaccumtime = totalaccumtime + deltatime;
       prevtime = currtime;
       if(loopingstage) {
-        while (accumtime >= stagelength) {
+        while(accumtime >= stagelength) {
           accumtime = accumtime - stagelength;
         }
         if(self.exitduprenderbundle) {
@@ -146,7 +146,7 @@ function playduprenderbundle(playbundlename) {
 function adddupmaterial(localclientnum, bundle, prefix, type) {
   method = 0;
   methodstr = getstructfield(bundle, prefix + "method");
-  if(isdefined(methodstr)) {
+  if(isDefined(methodstr)) {
     switch (methodstr) {
       case "off": {
         method = 0;
@@ -176,13 +176,13 @@ function adddupmaterial(localclientnum, bundle, prefix, type) {
   }
   materialname = getstructfield(bundle, prefix + "mc_material");
   materialid = -1;
-  if(isdefined(materialname) && materialname != "") {
+  if(isDefined(materialname) && materialname != "") {
     materialname = ("mc/") + materialname;
     materialid = filter::mapped_material_id(materialname);
-    if(!isdefined(materialid)) {
+    if(!isDefined(materialid)) {
       filter::map_material_helper_by_localclientnum(localclientnum, materialname);
       materialid = filter::mapped_material_id();
-      if(!isdefined(materialid)) {
+      if(!isDefined(materialid)) {
         materialid = -1;
       }
     }
@@ -195,7 +195,7 @@ function setshaderconstants(localclientnum, shaderconstantname, filterid, values
 }
 
 function finishplayingduprenderbundle(localclientnum, msg) {
-  if(isdefined(msg)) {
+  if(isDefined(msg)) {
     println(msg);
   }
   self.forcestopduprenderbundle = 0;
@@ -210,11 +210,11 @@ function stopplayingduprenderbundle() {
 }
 
 function stopduprenderbundle() {
-  if(!(isdefined(self.forcestopduprenderbundle) && self.forcestopduprenderbundle) && isdefined(self.playingduprenderbundle) && self.playingduprenderbundle != "") {
+  if(!(isDefined(self.forcestopduprenderbundle) && self.forcestopduprenderbundle) && isDefined(self.playingduprenderbundle) && self.playingduprenderbundle != "") {
     self.forcestopduprenderbundle = 1;
-    while (self.playingduprenderbundle != "") {
+    while(self.playingduprenderbundle != "") {
       wait(0.016);
-      if(!isdefined(self)) {
+      if(!isDefined(self)) {
         return;
       }
     }
@@ -222,7 +222,7 @@ function stopduprenderbundle() {
 }
 
 function exitduprenderbundle() {
-  if(!(isdefined(self.exitduprenderbundle) && self.exitduprenderbundle) && isdefined(self.playingduprenderbundle) && self.playingduprenderbundle != "") {
+  if(!(isDefined(self.exitduprenderbundle) && self.exitduprenderbundle) && isDefined(self.playingduprenderbundle) && self.playingduprenderbundle != "") {
     self.exitduprenderbundle = 1;
   }
 }

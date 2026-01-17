@@ -30,13 +30,13 @@ init() {
   add_zone("tunnel");
   add_zone("underpass");
 
-  if(!isdefined(level.ambient_reverb))
+  if(!isDefined(level.ambient_reverb))
     level.ambient_reverb = [];
 
-  if(!isdefined(level.ambient_eq))
+  if(!isDefined(level.ambient_eq))
     level.ambient_eq = [];
 
-  if(!isdefined(level.fxfireloopmod))
+  if(!isDefined(level.fxfireloopmod))
     level.fxfireloopmod = 1;
 
   level.eq_main_track = 0;
@@ -63,11 +63,11 @@ activateambient(var_0) {
 }
 
 ambientvolume() {
-  for (;;) {
+  for(;;) {
     self waittill("trigger");
     activateambient("interior");
 
-    while (level.player istouching(self))
+    while(level.player istouching(self))
       wait 0.1;
 
     activateambient("exterior");
@@ -75,17 +75,17 @@ ambientvolume() {
 }
 
 ambientdelay(var_0, var_1, var_2) {
-  if(!isdefined(level.ambienteventent))
-    level.ambienteventent[var_0] = spawnstruct();
-  else if(!isdefined(level.ambienteventent[var_0]))
-    level.ambienteventent[var_0] = spawnstruct();
+  if(!isDefined(level.ambienteventent))
+    level.ambienteventent[var_0] = spawnStruct();
+  else if(!isDefined(level.ambienteventent[var_0]))
+    level.ambienteventent[var_0] = spawnStruct();
 
   level.ambienteventent[var_0].min = var_1;
   level.ambienteventent[var_0].range = var_2 - var_1;
 }
 
 ambientevent(var_0, var_1, var_2) {
-  if(!isdefined(level.ambienteventent[var_0].event_alias))
+  if(!isDefined(level.ambienteventent[var_0].event_alias))
     var_3 = 0;
   else
     var_3 = level.ambienteventent[var_0].event_alias.size;
@@ -101,7 +101,7 @@ ambientreverb(var_0) {
 }
 
 setupeq(var_0, var_1, var_2) {
-  if(!isdefined(level.ambient_eq[var_0]))
+  if(!isDefined(level.ambient_eq[var_0]))
     level.ambient_eq[var_0] = [];
 
   level.ambient_eq[var_0][var_1] = var_2;
@@ -110,7 +110,7 @@ setupeq(var_0, var_1, var_2) {
 setup_eq_channels(var_0, var_1) {
   level.eq_track[var_1] = "exterior";
 
-  if(!isdefined(level.ambient_eq) || !isdefined(level.ambient_eq[var_0])) {
+  if(!isDefined(level.ambient_eq) || !isDefined(level.ambient_eq[var_0])) {
     deactivate_index(var_1);
     return;
   }
@@ -118,15 +118,15 @@ setup_eq_channels(var_0, var_1) {
   level.eq_track[var_1] = var_0;
   var_2 = getarraykeys(level.ambient_eq[var_0]);
 
-  for (var_3 = 0; var_3 < var_2.size; var_3++) {
+  for(var_3 = 0; var_3 < var_2.size; var_3++) {
     var_4 = var_2[var_3];
     var_5 = maps\_equalizer::getfilter(level.ambient_eq[var_0][var_4]);
 
-    if(!isdefined(var_5)) {
+    if(!isDefined(var_5)) {
       continue;
     }
-    for (var_6 = 0; var_6 < 3; var_6++) {
-      if(isdefined(var_5["type"][var_6])) {
+    for(var_6 = 0; var_6 < 3; var_6++) {
+      if(isDefined(var_5["type"][var_6])) {
         level.player seteq(var_4, var_1, var_6, var_5["type"][var_6], var_5["gain"][var_6], var_5["freq"][var_6], var_5["q"][var_6]);
         continue;
       }
@@ -148,7 +148,7 @@ start_ambient_event(var_0) {
   level notify("new ambient event track");
   level endon("new ambient event track");
 
-  if(!isdefined(level.player.soundent)) {
+  if(!isDefined(level.player.soundent)) {
     level.player.soundent = spawn("script_origin", (0, 0, 0));
     level.player.soundent.playingsound = 0;
   } else if(level.player.soundent.playingsound)
@@ -160,19 +160,19 @@ start_ambient_event(var_0) {
   var_4 = 0;
   var_5 = 0;
 
-  if(isdefined(level.ambient_reverb[var_0]))
+  if(isDefined(level.ambient_reverb[var_0]))
     thread ambientreverb(var_0);
 
-  for (;;) {
+  for(;;) {
     wait(var_2 + randomfloat(var_3));
 
-    while (var_5 == var_4)
+    while(var_5 == var_4)
       var_5 = ambientweight(var_0);
 
     var_4 = var_5;
     var_1.origin = level.player.origin;
     var_1 linkto(level.player);
-    var_1 playsound(level.ambienteventent[var_0].event_alias[var_5], "sounddone");
+    var_1 playSound(level.ambienteventent[var_0].event_alias[var_5], "sounddone");
     var_1.playingsound = 1;
     var_1 waittill("sounddone");
     var_1.playingsound = 0;
@@ -187,7 +187,7 @@ ambientweight(var_0) {
     var_3 = 0;
     var_4 = 0;
 
-    for (var_5 = 0; var_5 < var_1; var_5++) {
+    for(var_5 = 0; var_5 < var_1; var_5++) {
       var_3++;
       var_4 = var_4 + level.ambienteventent[var_0].event_weight[var_5];
     }
@@ -196,7 +196,7 @@ ambientweight(var_0) {
       var_6 = randomfloat(var_4);
       var_4 = 0;
 
-      for (var_5 = 0; var_5 < var_1; var_5++) {
+      for(var_5 = 0; var_5 < var_1; var_5++) {
         var_4 = var_4 + level.ambienteventent[var_0].event_weight[var_5];
 
         if(var_6 < var_4) {
@@ -222,7 +222,7 @@ ambient_trigger() {
   if(var_0.size == 1) {
     var_1 = var_0[0];
 
-    for (;;) {
+    for(;;) {
       self waittill("trigger", var_2);
       set_ambience_single(var_1);
     }
@@ -232,7 +232,7 @@ ambient_trigger() {
   var_4 = var_3.origin;
   var_5 = undefined;
 
-  if(isdefined(var_3.target)) {
+  if(isDefined(var_3.target)) {
     var_6 = getent(var_3.target, "targetname");
     var_5 = var_6.origin;
   } else
@@ -243,14 +243,14 @@ ambient_trigger() {
   var_9 = var_0[1];
   var_10 = 0.5;
 
-  if(isdefined(self.targetname) && self.targetname == "ambient_exit")
+  if(isDefined(self.targetname) && self.targetname == "ambient_exit")
     var_10 = 0;
 
-  for (;;) {
+  for(;;) {
     self waittill("trigger", var_2);
     var_11 = undefined;
 
-    while (level.player istouching(self)) {
+    while(level.player istouching(self)) {
       var_11 = maps\_utility::get_progress(var_4, var_5, level.player.origin, var_7);
 
       if(var_11 < 0)
@@ -275,7 +275,7 @@ ambient_trigger() {
 ambient_end_trigger_think(var_0, var_1, var_2, var_3, var_4) {
   self endon("death");
 
-  for (;;) {
+  for(;;) {
     self waittill("trigger", var_5);
     ambient_trigger_sets_ambience_levels(var_0, var_1, var_2, var_3, var_4);
   }
@@ -285,7 +285,7 @@ ambient_trigger_sets_ambience_levels(var_0, var_1, var_2, var_3, var_4) {
   level notify("trigger_ambience_touched");
   level endon("trigger_ambience_touched");
 
-  for (;;) {
+  for(;;) {
     var_5 = maps\_utility::get_progress(var_0, var_1, level.player.origin, var_2);
 
     if(var_5 < 0) {
@@ -316,7 +316,7 @@ set_ambience_blend(var_0, var_1, var_2) {
   if(var_0 == 1 || var_0 == 0)
     level.nextmsg = 0;
 
-  if(!isdefined(level.nextmsg))
+  if(!isDefined(level.nextmsg))
     level.nextmsg = 0;
 
   if(gettime() < level.nextmsg) {
@@ -326,7 +326,7 @@ set_ambience_blend(var_0, var_1, var_2) {
 }
 
 set_ambience_single(var_0) {
-  if(isdefined(level.ambienteventent[var_0]))
+  if(isDefined(level.ambienteventent[var_0]))
     thread start_ambient_event(var_0);
 
   if(level.eq_track[level.eq_main_track] != var_0)
@@ -342,7 +342,7 @@ ambience_hud(var_0, var_1, var_2) {
   if(getdvar("debug_hud") != "") {
     return;
   }
-  if(!isdefined(level.amb_hud)) {
+  if(!isDefined(level.amb_hud)) {
     var_3 = -40;
     var_4 = 460;
     level.amb_hud = [];
@@ -376,7 +376,7 @@ ambience_hud(var_0, var_1, var_2) {
     level.amb_hud["frac_outer"] = var_5;
   }
 
-  if(isdefined(var_2)) {
+  if(isDefined(var_2)) {
     level.amb_hud["frac_outer"].label = int(100 * (1 - var_0));
     level.amb_hud["frac_outer"].alpha = 1;
     level.amb_hud["outer"].label = var_2;
@@ -406,7 +406,7 @@ set_ambience_blend_over_time(var_0, var_1, var_2) {
   var_4 = 0.05;
   var_5 = 1 / (var_0 / var_4);
 
-  for (;;) {
+  for(;;) {
     var_3 = var_3 + var_5;
 
     if(var_3 >= 1) {

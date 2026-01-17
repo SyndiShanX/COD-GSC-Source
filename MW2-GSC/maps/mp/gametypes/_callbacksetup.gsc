@@ -18,9 +18,7 @@ CodeCallback_StartGameType() {
 
   // If the gametype has not beed started, run the startup
   if(!isDefined(level.gametypestarted) || !level.gametypestarted) {
-    [
-      [level.callbackStartGameType]
-    ]();
+    [[level.callbackStartGameType]]();
 
     level.gametypestarted = true; // so we know that the gametype has been started up
   }
@@ -120,7 +118,6 @@ Called once when a host migration has occured.
 CodeCallback_HostMigration() {
   [[level.callbackHostMigration]]();
 }
-
 
 //=============================================================================
 

@@ -20,8 +20,8 @@ init() {
   level.ospreySettings["escort_airdrop"].tagHatchL = "tag_le_door_attach";
   level.ospreySettings["escort_airdrop"].tagHatchR = "tag_ri_door_attach";
   level.ospreySettings["escort_airdrop"].tagDropCrates = "tag_turret_attach";
-  level.ospreySettings["escort_airdrop"].prompt = & "KILLSTREAKS_DEFEND_AIRDROP_PACKAGES";
-  level.ospreySettings["escort_airdrop"].name = & "KILLSTREAKS_ESCORT_AIRDROP";
+  level.ospreySettings["escort_airdrop"].prompt = &"KILLSTREAKS_DEFEND_AIRDROP_PACKAGES";
+  level.ospreySettings["escort_airdrop"].name = &"KILLSTREAKS_ESCORT_AIRDROP";
   level.ospreySettings["escort_airdrop"].weaponInfo = "osprey_minigun_mp";
   level.ospreySettings["escort_airdrop"].heliType = "osprey";
   level.ospreySettings["escort_airdrop"].dropType = "airdrop_escort";
@@ -35,8 +35,8 @@ init() {
   level.ospreySettings["osprey_gunner"].tagHatchL = "tag_le_door_attach";
   level.ospreySettings["osprey_gunner"].tagHatchR = "tag_ri_door_attach";
   level.ospreySettings["osprey_gunner"].tagDropCrates = "tag_turret_attach";
-  level.ospreySettings["osprey_gunner"].prompt = & "KILLSTREAKS_DEFEND_AIRDROP_PACKAGES";
-  level.ospreySettings["osprey_gunner"].name = & "KILLSTREAKS_OSPREY_GUNNER";
+  level.ospreySettings["osprey_gunner"].prompt = &"KILLSTREAKS_DEFEND_AIRDROP_PACKAGES";
+  level.ospreySettings["osprey_gunner"].name = &"KILLSTREAKS_OSPREY_GUNNER";
   level.ospreySettings["osprey_gunner"].weaponInfo = "osprey_player_minigun_mp";
   level.ospreySettings["osprey_gunner"].heliType = "osprey_gunner";
   level.ospreySettings["osprey_gunner"].dropType = "airdrop_osprey_gunner";
@@ -132,7 +132,7 @@ tryUseOspreyGunner(lifeId, streakName) {
 
   incrementFauxVehicleCount();
 
-  result = self selectDropLocation(lifeId, "osprey_gunner", "compass_objpoint_osprey_friendly", "compass_objpoint_osprey_enemy", & "KILLSTREAKS_SELECT_MOBILE_MORTAR_LOCATION");
+  result = self selectDropLocation(lifeId, "osprey_gunner", "compass_objpoint_osprey_friendly", "compass_objpoint_osprey_enemy", &"KILLSTREAKS_SELECT_MOBILE_MORTAR_LOCATION");
   if(!isDefined(result) || !result) {
     decrementFauxVehicleCount();
 

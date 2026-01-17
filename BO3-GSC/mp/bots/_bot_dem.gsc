@@ -15,15 +15,15 @@
 #namespace bot_dem;
 
 function init() {
-  level.botidle = & bot_idle;
-  level.botcombat = & combat_think;
-  level.botthreatlost = & function_211bcdc;
+  level.botidle = &bot_idle;
+  level.botcombat = &combat_think;
+  level.botthreatlost = &function_211bcdc;
 }
 
 function bot_idle() {
   approachradiussq = 562500;
   foreach(zone in level.bombzones) {
-    if(isdefined(zone.bombexploded) && zone.bombexploded) {
+    if(isDefined(zone.bombexploded) && zone.bombexploded) {
       continue;
     }
     if(self istouching(zone.trigger)) {
@@ -42,7 +42,7 @@ function bot_idle() {
   }
   zones = array::randomize(level.bombzones);
   foreach(zone in zones) {
-    if(isdefined(zone.bombexploded) && zone.bombexploded) {
+    if(isDefined(zone.bombexploded) && zone.bombexploded) {
       continue;
     }
     if(self can_defuse(zone) && randomint(100) < 70) {
@@ -52,7 +52,7 @@ function bot_idle() {
     }
   }
   foreach(zone in zones) {
-    if(isdefined(zone.bombexploded) && zone.bombexploded) {
+    if(isDefined(zone.bombexploded) && zone.bombexploded) {
       continue;
     }
     if(distancesquared(self.origin, zone.trigger.origin) < approachradiussq && randomint(100) < 70) {
@@ -66,15 +66,15 @@ function bot_idle() {
 }
 
 function can_plant(zone) {
-  return !(isdefined(zone.bombplanted) && zone.bombplanted) && self.team != zone gameobjects::get_owner_team();
+  return !(isDefined(zone.bombplanted) && zone.bombplanted) && self.team != zone gameobjects::get_owner_team();
 }
 
 function can_defuse(zone) {
-  return isdefined(zone.bombplanted) && zone.bombplanted && self.team == zone gameobjects::get_owner_team();
+  return isDefined(zone.bombplanted) && zone.bombplanted && self.team == zone gameobjects::get_owner_team();
 }
 
 function combat_think() {
-  if(isdefined(self.isplanting) && self.isplanting || (isdefined(self.isdefusing) && self.isdefusing)) {
+  if(isDefined(self.isplanting) && self.isplanting || (isDefined(self.isdefusing) && self.isdefusing)) {
     return;
   }
   self bot_combat::combat_think();
@@ -83,7 +83,7 @@ function combat_think() {
 function function_211bcdc() {
   approachradiussq = 562500;
   foreach(zone in level.bombzones) {
-    if(isdefined(zone.bombexploded) && zone.bombexploded) {
+    if(isDefined(zone.bombexploded) && zone.bombexploded) {
       continue;
     }
     if(distancesquared(self.origin, zone.trigger.origin) < approachradiussq) {

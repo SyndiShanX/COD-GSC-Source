@@ -21,10 +21,10 @@ function function_20286238(localclientnum, oldval, newval, bnewent, binitialsnap
   self endon("death");
   self endon("entityshutdown");
   if(newval) {
-    if(!isdefined(self.var_9f5aac3e)) {
-      self.var_9f5aac3e = self playloopsound("zmb_moon_bg_airless");
+    if(!isDefined(self.var_9f5aac3e)) {
+      self.var_9f5aac3e = self playLoopSound("zmb_moon_bg_airless");
     }
-  } else if(isdefined(self.var_9f5aac3e)) {
+  } else if(isDefined(self.var_9f5aac3e)) {
     self stoploopsound(self.var_9f5aac3e);
     self.var_9f5aac3e = undefined;
   }

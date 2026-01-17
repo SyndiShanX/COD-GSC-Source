@@ -81,9 +81,7 @@ _anims(anims_func) {
   level.scr_anim["_meatshield:player"]["dead_idle_steady"][0] = % int_meatshield_hostage_dead_idle_steady;
   level.scr_anim["_meatshield:player"]["drop"] = % int_meatshield_hostage_dead_drop;
   if(isDefined(anims_func)) {
-    [
-      [anims_func]
-    ]();
+    [[anims_func]]();
   }
 }
 
@@ -99,7 +97,7 @@ setup_contextual_melee() {
 
 start(ai) {
   self setClientDvar("sv_clientSideBullets", 0);
-  _meatshield = SpawnStruct();
+  _meatshield = spawnStruct();
   _meatshield ent_flag_init("meatshield_active", true);
   _meatshield.anim_ents = array(self.player_hands, ai);
   _meatshield.align = self get_align_pt(ai);
@@ -224,7 +222,7 @@ fake_bullets() {
   for(i = 0; i < 1; i++) {
     fx_id = level._effect["meatshield_fake_hit"];
     if(is_mature()) {
-      PlayFXOnTag(fx_id, self, random(tags));
+      playFXOnTag(fx_id, self, random(tags));
     }
     wait(wait_time);
   }
@@ -487,7 +485,7 @@ blood_hud_destroy() {
 find_closest_target_to_view() {
   closest_ent = undefined;
   smallest_ang = 360;
-  eye = self.player GetEye();
+  eye = self.player getEye();
   view_ang = AbsAngleClamp180(self.player GetPlayerAngles()[1]);
   for(i = 0; i < self.ai._meatshield_targets.size; i++) {
     if(isDefined(self.ai._meatshield_targets[i])) {
@@ -614,7 +612,7 @@ play_fake_battlechatter() {
   alias = prefix + ai + category + suffix;
   if(level.meatshield_ai_speaking == false) {
     level.meatshield_ai_speaking = true;
-    self PlaySound(alias, "sounddone");
+    self playSound(alias, "sounddone");
     self waittill("sounddone");
     wait(RandomFloatRange(1, 3));
     level.meatshield_ai_speaking = false;

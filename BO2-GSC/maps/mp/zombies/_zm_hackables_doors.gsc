@@ -16,7 +16,7 @@ door_struct_debug() {
     point = origin;
 
     for(i = 1; i < 5; i++) {
-      point = origin + anglestoforward(self.door.angles) * (i * 2);
+      point = origin + anglesToForward(self.door.angles) * (i * 2);
       passed = bullettracepassed(point, origin, 0, undefined);
       color = vectorscale((0, 1, 0), 255.0);
 
@@ -33,15 +33,15 @@ hack_doors(targetname, door_activate_func) {
   if(!isDefined(targetname))
     targetname = "zombie_door";
 
-  doors = getentarray(targetname, "targetname");
+  doors = getEntArray(targetname, "targetname");
 
   if(!isDefined(door_activate_func))
     door_activate_func = maps\mp\zombies\_zm_blockers::door_opened;
 
   for(i = 0; i < doors.size; i++) {
     door = doors[i];
-    struct = spawnstruct();
-    struct.origin = door.origin + anglestoforward(door.angles) * 2;
+    struct = spawnStruct();
+    struct.origin = door.origin + anglesToForward(door.angles) * 2;
     struct.radius = 48;
     struct.height = 72;
     struct.script_float = 32.7;

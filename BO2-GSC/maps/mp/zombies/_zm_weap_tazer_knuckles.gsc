@@ -22,7 +22,7 @@ init() {
     cost = 6000;
 
   level.use_tazer_impact_fx = 0;
-  maps\mp\zombies\_zm_melee_weapon::init("tazer_knuckles_zm", "zombie_tazer_flourish", "knife_ballistic_no_melee_zm", "knife_ballistic_no_melee_upgraded_zm", cost, "tazer_upgrade", & "ZOMBIE_WEAPON_TAZER_BUY", "tazerknuckles", ::tazer_flourish_fx);
+  maps\mp\zombies\_zm_melee_weapon::init("tazer_knuckles_zm", "zombie_tazer_flourish", "knife_ballistic_no_melee_zm", "knife_ballistic_no_melee_upgraded_zm", cost, "tazer_upgrade", &"ZOMBIE_WEAPON_TAZER_BUY", "tazerknuckles", ::tazer_flourish_fx);
   maps\mp\zombies\_zm_weapons::add_retrievable_knife_init_name("knife_ballistic_no_melee");
   maps\mp\zombies\_zm_weapons::add_retrievable_knife_init_name("knife_ballistic_no_melee_upgraded");
   maps\mp\zombies\_zm_spawner::add_cusom_zombie_spawn_logic(::watch_bodily_functions);
@@ -59,13 +59,13 @@ watch_bodily_functions() {
     ch = randomint(100);
 
     if(ch < 4)
-      playfxontag(level._effect["fx_zmb_taser_vomit"], self, "j_neck");
+      playFXOnTag(level._effect["fx_zmb_taser_vomit"], self, "j_neck");
 
     if(level.use_tazer_impact_fx) {
       tags = [];
       tags[0] = "J_Head";
       tags[1] = "J_Neck";
-      playfxontag(level._effect["fx_zmb_tazer_impact"], self, random(tags));
+      playFXOnTag(level._effect["fx_zmb_tazer_impact"], self, random(tags));
     }
   }
 }
@@ -94,8 +94,7 @@ watchtazerknucklemelee() {
   }
 }
 
-tazerknuckle_melee() {
-}
+tazerknuckle_melee() {}
 
 tazer_flourish_fx() {
   self waittill("weapon_change", newweapon);

@@ -20,7 +20,7 @@ function hack_tank_get_goal_origin(tank) {
 
 function hack_has_goal(tank) {
   goal = self getgoal("hack");
-  if(isdefined(goal)) {
+  if(isDefined(goal)) {
     if(distancesquared(goal, tank.origin) < 16384) {
       return true;
     }
@@ -33,12 +33,12 @@ function hack_at_goal() {
     return true;
   }
   goal = self getgoal("hack");
-  if(isdefined(goal)) {
-    tanks = getentarray("talon", "targetname");
+  if(isDefined(goal)) {
+    tanks = getEntArray("talon", "targetname");
     tanks = arraysort(tanks, self.origin);
     foreach(tank in tanks) {
       if(distancesquared(goal, tank.origin) < 16384) {
-        if(isdefined(tank.trigger) && self istouching(tank.trigger)) {
+        if(isDefined(tank.trigger) && self istouching(tank.trigger)) {
           return true;
         }
       }
@@ -49,14 +49,14 @@ function hack_at_goal() {
 
 function hack_goal_pregame(tanks) {
   foreach(tank in tanks) {
-    if(isdefined(tank.owner)) {
+    if(isDefined(tank.owner)) {
       continue;
     }
-    if(isdefined(tank.team) && tank.team == self.team) {
+    if(isDefined(tank.team) && tank.team == self.team) {
       continue;
     }
     goal = self hack_tank_get_goal_origin(tank);
-    if(isdefined(goal)) {
+    if(isDefined(goal)) {
       if(self addgoal(goal, 24, 2, "hack")) {
         self.goal_flag = tank;
         return;
@@ -75,35 +75,35 @@ function hack_think() {
     self setstance("stand");
     self cancelgoal("hack");
   }
-  tanks = getentarray("talon", "targetname");
+  tanks = getEntArray("talon", "targetname");
   tanks = arraysort(tanks, self.origin);
-  if(!(isdefined(level.drones_spawned) && level.drones_spawned)) {
+  if(!(isDefined(level.drones_spawned) && level.drones_spawned)) {
     self hack_goal_pregame(tanks);
   } else {
     foreach(tank in tanks) {
-      if(isdefined(tank.owner) && tank.owner == self) {
+      if(isDefined(tank.owner) && tank.owner == self) {
         continue;
       }
-      if(!isdefined(tank.owner)) {
+      if(!isDefined(tank.owner)) {
         if(self hack_has_goal(tank)) {
           return;
         }
         goal = self hack_tank_get_goal_origin(tank);
-        if(isdefined(goal)) {
+        if(isDefined(goal)) {
           self addgoal(goal, 24, 2, "hack");
           return;
         }
       }
       if(tank.isstunned && distancesquared(self.origin, tank.origin) < 262144) {
         goal = self hack_tank_get_goal_origin(tank);
-        if(isdefined(goal)) {
+        if(isDefined(goal)) {
           self addgoal(goal, 24, 3, "hack");
           return;
         }
       }
     }
     foreach(tank in tanks) {
-      if(isdefined(tank.owner) && tank.owner == self) {
+      if(isDefined(tank.owner) && tank.owner == self) {
         continue;
       }
       if(tank.isstunned) {
@@ -112,7 +112,7 @@ function hack_think() {
       if(self throwgrenade(getweapon("emp_grenade"), tank.origin)) {
         self waittill("grenade_fire");
         goal = self hack_tank_get_goal_origin(tank);
-        if(isdefined(goal)) {
+        if(isDefined(goal)) {
           self addgoal(goal, 24, 3, "hack");
           wait(0.5);
           return;

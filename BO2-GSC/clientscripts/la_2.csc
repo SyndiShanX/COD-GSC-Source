@@ -51,7 +51,7 @@ player_flag0_handler(localclientnum, set, newent) {
     wait 0.05;
     self.visor = spawn(self getlocalclientnumber(), self get_eye(), "script_model");
     self.visor.angles = self.angles;
-    self.visor setmodel("test_ui_hud_visor");
+    self.visor setModel("test_ui_hud_visor");
     self.visor linktocamera(4, (2.35, 0, 0.1));
   } else {
     wait 0.05;

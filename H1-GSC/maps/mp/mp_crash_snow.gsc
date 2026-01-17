@@ -29,9 +29,9 @@ main() {
 }
 
 airstrikeplanefx(var_0) {
-  playfxontag(common_scripts\utility::getfx("sleigh_glow_trail"), self, "tag_engine_right");
-  playfxontag(common_scripts\utility::getfx("sleigh_glow_trail"), self, "tag_engine_left");
-  playfxontag(common_scripts\utility::getfx("sleigh_rudolph_nose"), self, "tag_light_nose");
+  playFXOnTag(common_scripts\utility::getfx("sleigh_glow_trail"), self, "tag_engine_right");
+  playFXOnTag(common_scripts\utility::getfx("sleigh_glow_trail"), self, "tag_engine_left");
+  playFXOnTag(common_scripts\utility::getfx("sleigh_rudolph_nose"), self, "tag_light_nose");
 }
 
 light_delete() {
@@ -41,10 +41,10 @@ light_delete() {
 }
 
 light_geo_delete() {
-  var_0 = getentarray("script_brushmodel", "classname");
+  var_0 = getEntArray("script_brushmodel", "classname");
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++) {
-    if(!isdefined(var_0[var_1].script_noteworthy)) {
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+    if(!isDefined(var_0[var_1].script_noteworthy)) {
       continue;
     }
     if(var_0[var_1].script_noteworthy == "tube_light_geo")
@@ -53,10 +53,10 @@ light_geo_delete() {
 }
 
 light_model_delete() {
-  var_0 = getentarray("script_model", "classname");
+  var_0 = getEntArray("script_model", "classname");
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++) {
-    if(!isdefined(var_0[var_1].script_noteworthy)) {
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+    if(!isDefined(var_0[var_1].script_noteworthy)) {
       continue;
     }
     if(var_0[var_1].script_noteworthy == "tube_light_geo")
@@ -65,7 +65,7 @@ light_model_delete() {
 }
 
 onplayerconnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connected", var_0);
     var_0.prekilledfunc = ::playerprekilled;
   }
@@ -85,5 +85,5 @@ playerplaysnowfx() {
   else if(var_1 == "prone")
     var_0 = (0, 0, 10);
 
-  playfx(common_scripts\utility::getfx("deathfx_xmas_snow"), self.origin + var_0);
+  playFX(common_scripts\utility::getfx("deathfx_xmas_snow"), self.origin + var_0);
 }

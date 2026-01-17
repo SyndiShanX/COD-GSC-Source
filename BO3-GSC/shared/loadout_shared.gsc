@@ -14,7 +14,7 @@ function is_item_excluded(itemindex) {
     return false;
   }
   numexclusions = level.itemexclusions.size;
-  for (exclusionindex = 0; exclusionindex < numexclusions; exclusionindex++) {
+  for(exclusionindex = 0; exclusionindex < numexclusions; exclusionindex++) {
     if(itemindex == level.itemexclusions[exclusionindex]) {
       return true;
     }

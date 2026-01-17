@@ -15,7 +15,7 @@ autoexec init() {
 get_extracam() {
   if(!isDefined(level.e_extra_cam)) {
     level.e_extra_cam = spawn("script_model", (0, 0, 0));
-    level.e_extra_cam setmodel("tag_origin");
+    level.e_extra_cam setModel("tag_origin");
     level.e_extra_cam.angles = (0, 0, 0);
   }
 
@@ -205,12 +205,12 @@ turn_on_extra_cam(str_shader_override, str_custom_notify, should_start_fullscree
   if(!isDefined(should_start_fullscreen))
     should_start_fullscreen = 0;
 
-  str_extracam_show = & "extracam_show";
+  str_extracam_show = &"extracam_show";
 
   if(isDefined(str_custom_notify))
     str_extracam_show = str_custom_notify;
 
-  str_shader = & "extracam_glasses";
+  str_shader = &"extracam_glasses";
 
   if(isDefined(str_shader_override))
     str_shader = str_shader_override;
@@ -221,25 +221,25 @@ turn_on_extra_cam(str_shader_override, str_custom_notify, should_start_fullscree
     infullscreen = 1;
 
   level.pip_sound_ent = spawn("script_origin", level.player.origin);
-  level.player playsound("evt_pip_on");
-  level.pip_sound_ent playloopsound("evt_pip_loop", 1);
+  level.player playSound("evt_pip_on");
+  level.pip_sound_ent playLoopSound("evt_pip_loop", 1);
   level.e_extra_cam setclientflag(1);
   luinotifyevent(str_extracam_show, 2, str_shader, infullscreen);
 }
 
 turn_off_extra_cam(str_shader_override, str_custom_notify) {
   assert(isDefined(level.e_extra_cam), "level.e_extra_cam isn't defined, call _glasses::main");
-  str_extracam_hide = & "extracam_hide";
+  str_extracam_hide = &"extracam_hide";
 
   if(isDefined(str_custom_notify))
     str_extracam_hide = str_custom_notify;
 
-  str_shader = & "extracam_glasses";
+  str_shader = &"extracam_glasses";
 
   if(isDefined(str_shader_override))
     str_shader = str_shader_override;
 
-  level.player playsound("evt_pip_off");
+  level.player playSound("evt_pip_off");
   level.pip_sound_ent stoploopsound();
   level.pip_sound_ent delete();
   level.e_extra_cam clearclientflag(1);
@@ -263,7 +263,7 @@ play_bink_on_hud(str_bink_name, b_looping, b_in_memory, b_paused, b_sync_audio, 
     start_size = 0;
 
   assert(isDefined(str_bink_name), "Undefined Bink name");
-  luinotifyevent(&"cinematic_start", 7, & "cinematic2d", istring(str_bink_name), b_looping, b_in_memory, b_paused, b_sync_audio, start_size);
+  luinotifyevent(&"cinematic_start", 7, &"cinematic2d", istring(str_bink_name), b_looping, b_in_memory, b_paused, b_sync_audio, start_size);
   str_menu = "";
 
   while(str_menu != "cinematic")
@@ -271,8 +271,8 @@ play_bink_on_hud(str_bink_name, b_looping, b_in_memory, b_paused, b_sync_audio, 
 
   flag_set("glasses_bink_playing");
   level.pip_sound_bink_ent = spawn("script_origin", level.player.origin);
-  level.player playsound("evt_pip_on");
-  level.pip_sound_bink_ent playloopsound("evt_pip_loop", 1);
+  level.player playSound("evt_pip_on");
+  level.pip_sound_bink_ent playLoopSound("evt_pip_loop", 1);
 
   if(!b_looping) {
     n_cin_id = int(str_cin_id);
@@ -294,11 +294,11 @@ play_bink_on_hud(str_bink_name, b_looping, b_in_memory, b_paused, b_sync_audio, 
 
 stop_bink_on_hud() {
   level endon("bink_timeout");
-  level.player playsound("evt_pip_off");
+  level.player playSound("evt_pip_off");
   level.pip_sound_bink_ent stoploopsound();
   level.pip_sound_bink_ent delete();
   thread _bink_timeout(1.5);
-  luinotifyevent(&"cinematic_stop", 1, & "cinematic2d");
+  luinotifyevent(&"cinematic_stop", 1, &"cinematic2d");
   str_menu = "";
 
   while(str_menu != "cinematic")

@@ -4,11 +4,9 @@
 ******************************************************/
 
 #include scripts\core_common\lui_shared;
-
 #namespace zm_game_over;
 
 class czm_game_over: cluielem {
-
   function set_rounds(localclientnum, value) {
     set_data(localclientnum, "rounds", value);
   }
@@ -28,12 +26,12 @@ class czm_game_over: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, #"zm_game_over");
+    cluielem::open(localclientnum, # "zm_game_over");
   }
 
   function function_fa582112(localclientnum) {
     cluielem::function_fa582112(localclientnum);
-    set_state(localclientnum, #"defaultstate");
+    set_state(localclientnum, # "defaultstate");
     set_data(localclientnum, "rounds", 0);
   }
 

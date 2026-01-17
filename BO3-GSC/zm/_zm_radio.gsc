@@ -10,7 +10,7 @@
 #namespace zm_radio;
 
 function autoexec __init__sytem__() {
-  system::register("zm_radio", & __init__, & __main__, undefined);
+  system::register("zm_radio", &__init__, &__main__, undefined);
 }
 
 function __init__() {}
@@ -19,29 +19,29 @@ function __main__() {
   level.n_radio_index = -1;
   str_name = "kzmb";
   str_key = "targetname";
-  if(isdefined(level.var_f3b142b3)) {
+  if(isDefined(level.var_f3b142b3)) {
     str_name = level.var_f3b142b3;
   }
-  if(isdefined(level.kzmb_key)) {
+  if(isDefined(level.kzmb_key)) {
     key = level.kzmb_key;
   }
-  var_903fae71 = getentarray(str_name, str_key);
-  if(!isdefined(var_903fae71) || !var_903fae71.size) {
+  var_903fae71 = getEntArray(str_name, str_key);
+  if(!isDefined(var_903fae71) || !var_903fae71.size) {
     println("");
     return;
   }
   println("" + var_903fae71.size);
-  array::thread_all(var_903fae71, & function_8554d5da);
+  array::thread_all(var_903fae71, &function_8554d5da);
 }
 
 function function_8554d5da() {
-  self setcandamage(1);
+  self setCanDamage(1);
   level thread function_4b776d12();
   self thread function_2d4f4459();
   self thread function_f184004e();
-  while (true) {
+  while(true) {
     self waittill("damage", damage, attacker, dir, loc, type, model, tag, part, weapon, flags);
-    if(!isdefined(attacker) || !isplayer(attacker)) {
+    if(!isDefined(attacker) || !isplayer(attacker)) {
       continue;
     }
     if(type == "MOD_PROJECTILE") {
@@ -58,9 +58,9 @@ function function_8554d5da() {
 function function_2d4f4459() {
   self.trackname = undefined;
   self.tracknum = 0;
-  while (true) {
+  while(true) {
     self waittill("hash_34d24635");
-    if(isdefined(self.var_175c09e5)) {
+    if(isDefined(self.var_175c09e5)) {
       self stopsound(self.var_175c09e5);
       wait(0.05);
     }
@@ -84,10 +84,10 @@ function function_c62f1c37() {
 }
 
 function function_f184004e() {
-  while (true) {
+  while(true) {
     self waittill("hash_dec13539");
     self playsoundwithnotify("zmb_musicradio_off", "sounddone");
-    if(isdefined(self.var_175c09e5)) {
+    if(isDefined(self.var_175c09e5)) {
       self stopsound(self.var_175c09e5);
     }
   }

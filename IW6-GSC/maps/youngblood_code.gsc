@@ -471,7 +471,7 @@ neighborhood_vehicle_damage(var_0) {
     if(level.player istouching(var_0)) {
       level.player dodamage(300, (0, 0, 0));
       level notify("new_quote_string");
-      setdvar("ui_deadquote", & "YOUNGBLOOD_AVOIDCARS");
+      setdvar("ui_deadquote", &"YOUNGBLOOD_AVOIDCARS");
       maps\_utility::missionfailedwrapper();
       return;
     }

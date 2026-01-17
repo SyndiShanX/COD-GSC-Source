@@ -7,8 +7,7 @@
 #include clientscripts\mp\createfx\mp_la_fx;
 #include clientscripts\mp\_fx;
 
-precache_util_fx() {
-}
+precache_util_fx() {}
 
 precache_scripted_fx() {
   level._effect["fx_light_police_car"] = loadfx("maps/mp_maps/fx_mp_light_police_car");
@@ -98,7 +97,7 @@ main() {
 }
 
 fxanim_init(localclientnum) {
-  fxanims = getentarray(localclientnum, "fxanim_level", "targetname");
+  fxanims = getEntArray(localclientnum, "fxanim_level", "targetname");
 
   if(!isDefined(level.fxanim_waits)) {
     level.fxanim_waits = [];
@@ -135,6 +134,6 @@ fxanim_wire_think(localclientnum, index, bone) {
 
   for(;;) {
     self waittill("wire_fx", note);
-    playfxontag(localclientnum, level._effect["fx_mp_elec_spark_burst_xsm_thin"], self, bone);
+    playFXOnTag(localclientnum, level._effect["fx_mp_elec_spark_burst_xsm_thin"], self, bone);
   }
 }

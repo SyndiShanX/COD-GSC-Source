@@ -12,7 +12,7 @@ initChickens() {
   // in their _anim instead of only above _load
   waittillframeend;
 
-  cages = getentarray("caged_chicken", "targetname");
+  cages = getEntArray("caged_chicken", "targetname");
   array_thread(cages, ::spawnChicken);
 }
 
@@ -24,8 +24,8 @@ spawnChicken() {
   starttime = RandomFloatRange(0, 1.0);
   chicken SetAnimTime(anime, starttime);
 
-  for (;;) {
-    chicken playsound("animal_chicken_idle", "sounddone");
+  for(;;) {
+    chicken playSound("animal_chicken_idle", "sounddone");
     chicken waittill("sounddone");
   }
 }

@@ -9,7 +9,7 @@
 #namespace _zm_weap_ballistic_knife;
 
 function init() {
-  if(!isdefined(level.ballistic_knife_autorecover)) {
+  if(!isDefined(level.ballistic_knife_autorecover)) {
     level.ballistic_knife_autorecover = 1;
   }
 }
@@ -21,14 +21,14 @@ function on_spawn(watcher, player) {
   level endon("game_ended");
   self waittill("stationary", endpos, normal, angles, attacker, prey, bone);
   isfriendly = 0;
-  if(isdefined(endpos)) {
+  if(isDefined(endpos)) {
     retrievable_model = spawn("script_model", endpos);
-    retrievable_model setmodel("t6_wpn_ballistic_knife_projectile");
+    retrievable_model setModel("t6_wpn_ballistic_knife_projectile");
     retrievable_model setowner(player);
     retrievable_model.owner = player;
     retrievable_model.angles = angles;
     retrievable_model.weapon = watcher.weapon;
-    if(isdefined(prey)) {
+    if(isDefined(prey)) {
       if(isplayer(prey) && player.team == prey.team) {
         isfriendly = 1;
       } else if(isai(prey) && player.team == prey.team) {
@@ -60,7 +60,7 @@ function wait_to_show_glowing_model(prey) {
   level endon("game_ended");
   self endon("death");
   wait(2);
-  self setmodel("t6_wpn_ballistic_knife_projectile");
+  self setModel("t6_wpn_ballistic_knife_projectile");
 }
 
 function on_spawn_retrieve_trigger(watcher, player) {
@@ -69,11 +69,11 @@ function on_spawn_retrieve_trigger(watcher, player) {
   player endon("zmb_lost_knife");
   level endon("game_ended");
   player waittill("ballistic_knife_stationary", retrievable_model, normal, prey);
-  if(!isdefined(retrievable_model)) {
+  if(!isDefined(retrievable_model)) {
     return;
   }
   trigger_pos = [];
-  if(isdefined(prey) && (isplayer(prey) || isai(prey))) {
+  if(isDefined(prey) && (isplayer(prey) || isai(prey))) {
     trigger_pos[0] = prey.origin[0];
     trigger_pos[1] = prey.origin[1];
     trigger_pos[2] = prey.origin[2] + 10;
@@ -82,7 +82,7 @@ function on_spawn_retrieve_trigger(watcher, player) {
     trigger_pos[1] = retrievable_model.origin[1] + (10 * normal[1]);
     trigger_pos[2] = retrievable_model.origin[2] + (10 * normal[2]);
   }
-  if(isdefined(level.ballistic_knife_autorecover) && level.ballistic_knife_autorecover) {
+  if(isDefined(level.ballistic_knife_autorecover) && level.ballistic_knife_autorecover) {
     trigger_pos[2] = trigger_pos[2] - 50;
     pickup_trigger = spawn("trigger_radius", (trigger_pos[0], trigger_pos[1], trigger_pos[2]), 0, 50, 100);
   } else {
@@ -91,8 +91,8 @@ function on_spawn_retrieve_trigger(watcher, player) {
   }
   pickup_trigger.owner = player;
   retrievable_model.retrievabletrigger = pickup_trigger;
-  hint_string = & "WEAPON_BALLISTIC_KNIFE_PICKUP";
-  if(isdefined(hint_string)) {
+  hint_string = &"WEAPON_BALLISTIC_KNIFE_PICKUP";
+  if(isDefined(hint_string)) {
     pickup_trigger sethintstring(hint_string);
   } else {
     pickup_trigger sethintstring(&"GENERIC_PICKUP");
@@ -100,23 +100,21 @@ function on_spawn_retrieve_trigger(watcher, player) {
   pickup_trigger setteamfortrigger(player.team);
   player clientclaimtrigger(pickup_trigger);
   pickup_trigger enablelinkto();
-  if(isdefined(prey)) {
+  if(isDefined(prey)) {
     pickup_trigger linkto(prey);
   } else {
     pickup_trigger linkto(retrievable_model);
   }
-  if(isdefined(level.knife_planted)) {
-    [
-      [level.knife_planted]
-    ](retrievable_model, pickup_trigger, prey);
+  if(isDefined(level.knife_planted)) {
+    [[level.knife_planted]](retrievable_model, pickup_trigger, prey);
   }
-  retrievable_model thread watch_use_trigger(pickup_trigger, retrievable_model, & pick_up, watcher.weapon, watcher.pickupsoundplayer, watcher.pickupsound);
+  retrievable_model thread watch_use_trigger(pickup_trigger, retrievable_model, &pick_up, watcher.weapon, watcher.pickupsoundplayer, watcher.pickupsound);
   player thread watch_shutdown(pickup_trigger, retrievable_model);
 }
 
 function debug_print(endpos) {
   self endon("death");
-  while (true) {
+  while(true) {
     print3d(endpos, "");
     wait(0.05);
   }
@@ -127,19 +125,19 @@ function watch_use_trigger(trigger, model, callback, weapon, playersoundonuse, n
   self endon("delete");
   level endon("game_ended");
   max_ammo = weapon.maxammo + 1;
-  autorecover = isdefined(level.ballistic_knife_autorecover) && level.ballistic_knife_autorecover;
-  while (true) {
+  autorecover = isDefined(level.ballistic_knife_autorecover) && level.ballistic_knife_autorecover;
+  while(true) {
     trigger waittill("trigger", player);
     if(!isalive(player)) {
       continue;
     }
-    if(!player isonground() && (!(isdefined(trigger.force_pickup) && trigger.force_pickup))) {
+    if(!player isonground() && (!(isDefined(trigger.force_pickup) && trigger.force_pickup))) {
       continue;
     }
-    if(isdefined(trigger.triggerteam) && player.team != trigger.triggerteam) {
+    if(isDefined(trigger.triggerteam) && player.team != trigger.triggerteam) {
       continue;
     }
-    if(isdefined(trigger.claimedby) && player != trigger.claimedby) {
+    if(isDefined(trigger.claimedby) && player != trigger.claimedby) {
       continue;
     }
     ammo_stock = player getweaponammostock(weapon);
@@ -153,12 +151,12 @@ function watch_use_trigger(trigger, model, callback, weapon, playersoundonuse, n
     if(total_ammo >= max_ammo || !hasreloaded) {
       continue;
     }
-    if(autorecover || (player usebuttonpressed() && !player.throwinggrenade && !player meleebuttonpressed()) || (isdefined(trigger.force_pickup) && trigger.force_pickup)) {
-      if(isdefined(playersoundonuse)) {
+    if(autorecover || (player usebuttonpressed() && !player.throwinggrenade && !player meleebuttonpressed()) || (isDefined(trigger.force_pickup) && trigger.force_pickup)) {
+      if(isDefined(playersoundonuse)) {
         player playlocalsound(playersoundonuse);
       }
-      if(isdefined(npcsoundonuse)) {
-        player playsound(npcsoundonuse);
+      if(isDefined(npcsoundonuse)) {
+        player playSound(npcsoundonuse);
       }
       player thread[[callback]](weapon, model, trigger);
       break;
@@ -189,8 +187,8 @@ function pick_up(weapon, model, trigger) {
 }
 
 function destroy_ent() {
-  if(isdefined(self)) {
-    if(isdefined(self.glowing_model)) {
+  if(isDefined(self)) {
+    if(isDefined(self.glowing_model)) {
       self.glowing_model delete();
     }
     self delete();
@@ -206,7 +204,7 @@ function watch_shutdown(trigger, model) {
 function drop_knives_to_ground(player) {
   player endon("death");
   player endon("zmb_lost_knife");
-  for (;;) {
+  for(;;) {
     level waittill("drop_objects_to_ground", origin, radius);
     if(distancesquared(origin, self.origin) < (radius * radius)) {
       self physicslaunch((0, 0, 1), vectorscale((1, 1, 1), 5));
@@ -227,7 +225,7 @@ function force_drop_knives_to_ground_on_death(player, prey) {
 function update_retrieve_trigger(player) {
   self endon("death");
   player endon("zmb_lost_knife");
-  if(isdefined(level.custom_update_retrieve_trigger)) {
+  if(isDefined(level.custom_update_retrieve_trigger)) {
     self[[level.custom_update_retrieve_trigger]](player);
     return;
   }

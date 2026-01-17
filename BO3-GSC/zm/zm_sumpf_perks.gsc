@@ -27,14 +27,14 @@ function randomize_vending_machines() {
   start_locations = array::randomize(start_locations);
   start_locations[4] = getent("random_vending_start_location_4", "script_noteworthy");
   level.start_locations[level.start_locations.size] = start_locations[4].origin;
-  for (i = 0; i < vending_machines.size; i++) {
+  for(i = 0; i < vending_machines.size; i++) {
     if(vending_machines[i].script_noteworthy == "specialty_quickrevive") {
       t_temp = vending_machines[i];
       vending_machines[i] = vending_machines[4];
       vending_machines[4] = t_temp;
     }
   }
-  for (i = 0; i < vending_machines.size; i++) {
+  for(i = 0; i < vending_machines.size; i++) {
     origin = start_locations[i].origin;
     angles = start_locations[i].angles;
     machine = vending_machines[i] get_vending_machine(start_locations[i]);
@@ -50,7 +50,7 @@ function randomize_vending_machines() {
       vending_machines[i] thread function_bede3562(machine);
     }
   }
-  level.sndperksacolajingleoverride = & function_25413096;
+  level.sndperksacolajingleoverride = &function_25413096;
   level notify("hash_57a00baa");
 }
 
@@ -68,10 +68,10 @@ function function_bede3562(var_22082ed0) {
 
 function function_1b58b796(str_trigger) {
   vending_machines = [];
-  var_560b7d8d = getentarray(str_trigger, "targetname");
-  for (i = 0; i < var_560b7d8d.size; i++) {
-    if(isdefined(var_560b7d8d[i].script_noteworthy)) {
-      if(!isdefined(vending_machines)) {
+  var_560b7d8d = getEntArray(str_trigger, "targetname");
+  for(i = 0; i < var_560b7d8d.size; i++) {
+    if(isDefined(var_560b7d8d[i].script_noteworthy)) {
+      if(!isDefined(vending_machines)) {
         vending_machines = [];
       } else if(!isarray(vending_machines)) {
         vending_machines = array(vending_machines);
@@ -97,17 +97,17 @@ function function_25413096() {
   perksacola = self.script_sound;
   if(!self.var_6ecf729b) {
     playsoundatposition("evt_electrical_surge", self.origin);
-    if(!isdefined(self.jingle_is_playing)) {
+    if(!isDefined(self.jingle_is_playing)) {
       self.jingle_is_playing = 0;
     }
-    if(isdefined(perksacola)) {
+    if(isDefined(perksacola)) {
       if(self.jingle_is_playing == 0 && level.music_override == 0) {
         self.jingle_is_playing = 1;
         self playsoundontag(perksacola, "tag_origin", "sound_done");
         if(issubstr(perksacola, "sting")) {
           wait(10);
         } else {
-          if(isdefined(self.longjinglewait)) {
+          if(isDefined(self.longjinglewait)) {
             wait(60);
           } else {
             wait(30);
@@ -128,18 +128,18 @@ function solo_disable_quickrevive() {
 function get_vending_machine(start_location) {
   machine = undefined;
   machine_clip = undefined;
-  machine_array = getentarray(self.target, "targetname");
-  for (i = 0; i < machine_array.size; i++) {
-    if(isdefined(machine_array[i].script_noteworthy) && machine_array[i].script_noteworthy == "clip") {
+  machine_array = getEntArray(self.target, "targetname");
+  for(i = 0; i < machine_array.size; i++) {
+    if(isDefined(machine_array[i].script_noteworthy) && machine_array[i].script_noteworthy == "clip") {
       machine_clip = machine_array[i];
       continue;
     }
     machine = machine_array[i];
   }
-  if(!isdefined(machine)) {
+  if(!isDefined(machine)) {
     return;
   }
-  if(isdefined(machine_clip)) {
+  if(isDefined(machine_clip)) {
     machine_clip linkto(machine);
   }
   start_location.origin = machine.origin;
@@ -179,7 +179,7 @@ function activate_vending_machine(machine, origin, entity) {
       break;
     }
   }
-  if(isdefined(var_da5a8677)) {
+  if(isDefined(var_da5a8677)) {
     e_trigger = getent(var_da5a8677, "script_label");
     e_trigger triggerenable(1);
   }
@@ -191,12 +191,12 @@ function play_vending_vo(machine, origin) {
   players = getplayers();
   players = array::get_all_closest(origin, players, undefined, undefined, 512);
   player = undefined;
-  for (i = 0; i < players.size; i++) {
-    if(sighttracepassed(players[i] geteye(), origin, 0, undefined)) {
+  for(i = 0; i < players.size; i++) {
+    if(sighttracepassed(players[i] getEye(), origin, 0, undefined)) {
       player = players[i];
     }
   }
-  if(!isdefined(player)) {
+  if(!isDefined(player)) {
     return;
   }
   switch (machine) {
@@ -220,27 +220,27 @@ function play_vending_vo(machine, origin) {
 }
 
 function vending_randomization_effect(index) {
-  vending_triggers = getentarray("zombie_vending", "targetname");
+  vending_triggers = getEntArray("zombie_vending", "targetname");
   machines = [];
-  for (j = 0; j < vending_triggers.size; j++) {
-    machine_array = getentarray(vending_triggers[j].target, "targetname");
-    for (i = 0; i < machine_array.size; i++) {
-      if(isdefined(machine_array[i].script_noteworthy) && machine_array[i].script_noteworthy == "clip") {
+  for(j = 0; j < vending_triggers.size; j++) {
+    machine_array = getEntArray(vending_triggers[j].target, "targetname");
+    for(i = 0; i < machine_array.size; i++) {
+      if(isDefined(machine_array[i].script_noteworthy) && machine_array[i].script_noteworthy == "clip") {
         continue;
         continue;
       }
       machines[j] = machine_array[i];
     }
   }
-  for (j = 0; j < machines.size; j++) {
+  for(j = 0; j < machines.size; j++) {
     if(machines[j].origin == level.start_locations[index]) {
       break;
     }
   }
-  if(isdefined(level.first_time_opening_perk_hut)) {
+  if(isDefined(level.first_time_opening_perk_hut)) {
     if(level.first_time_opening_perk_hut) {
       if(machines[j].model != "p7_zm_vending_jugg" || machines[j].model != "p7_zm_vending_sleight") {
-        for (i = 0; i < machines.size; i++) {
+        for(i = 0; i < machines.size; i++) {
           if(i != j && (machines[i].model == "p7_zm_vending_jugg" || machines[i].model == "p7_zm_vending_sleight")) {
             break;
           }
@@ -253,7 +253,7 @@ function vending_randomization_effect(index) {
         start_locations[4] = getent("random_vending_start_location_4", "script_noteworthy");
         target_index = undefined;
         switch_index = undefined;
-        for (x = 0; x < start_locations.size; x++) {
+        for(x = 0; x < start_locations.size; x++) {
           if(start_locations[x].origin == level.start_locations[index]) {
             target_index = x;
           }
@@ -279,36 +279,36 @@ function vending_randomization_effect(index) {
   playsoundatposition("zmb_rando_start", machines[j].origin);
   origin = machines[j].origin;
   if(level.vending_model_info.size > 1) {
-    playfxontag(level._effect["zombie_perk_start"], machines[j], "tag_origin");
+    playFXOnTag(level._effect["zombie_perk_start"], machines[j], "tag_origin");
     playsoundatposition("zmb_rando_perk", machines[j].origin);
   } else {
-    playfxontag(level._effect["zombie_perk_4th"], machines[j], "tag_origin");
+    playFXOnTag(level._effect["zombie_perk_4th"], machines[j], "tag_origin");
     playsoundatposition("zmb_rando_perk", machines[j].origin);
   }
   true_model = machines[j].model;
-  machines[j] setmodel(true_model);
+  machines[j] setModel(true_model);
   machines[j] show();
   floatheight = 40;
   level thread zm_utility::play_sound_2d("zmb_perk_lottery");
   machines[j] moveto(origin + (0, 0, floatheight), 5, 3, 0.5);
   tag_fx = spawn("script_model", machines[j].origin);
-  tag_fx setmodel("tag_origin");
+  tag_fx setModel("tag_origin");
   tag_fx.angles = machines[j].angles;
   tag_fx linkto(machines[j]);
-  playfxontag(level._effect["zombie_perk_smoke_anim"], tag_fx, "tag_origin");
+  playFXOnTag(level._effect["zombie_perk_smoke_anim"], tag_fx, "tag_origin");
   modelindex = 0;
   machines[j] vibrate(machines[j].angles, 2, 1, 4);
-  for (i = 0; i < 30; i++) {
+  for(i = 0; i < 30; i++) {
     wait(0.15);
     if(level.vending_model_info.size > 1) {
-      while (!isdefined(level.vending_model_info[modelindex])) {
+      while(!isDefined(level.vending_model_info[modelindex])) {
         modelindex++;
         if(modelindex == 4) {
           modelindex = 0;
         }
       }
       modelname = level.vending_model_info[modelindex];
-      machines[j] setmodel(modelname);
+      machines[j] setModel(modelname);
       modelindex++;
       if(modelindex == 4) {
         modelindex = 0;
@@ -316,12 +316,12 @@ function vending_randomization_effect(index) {
     }
   }
   modelname = true_model;
-  machines[j] setmodel(modelname);
+  machines[j] setModel(modelname);
   machines[j] moveto(origin, 0.3, 0.3, 0);
   wait(0.2);
-  playfxontag(level._effect["zombie_perk_end"], machines[j], "tag_origin");
+  playFXOnTag(level._effect["zombie_perk_end"], machines[j], "tag_origin");
   playsoundatposition("zmb_drop_perk_machine", machines[j].origin);
   wait(0.05);
-  playfxontag(level._effect["zombie_perk_flash"], machines[j], "tag_origin");
+  playFXOnTag(level._effect["zombie_perk_flash"], machines[j], "tag_origin");
   activate_vending_machine(true_model, origin, machines[j]);
 }

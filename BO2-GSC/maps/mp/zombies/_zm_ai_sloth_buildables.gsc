@@ -183,7 +183,7 @@ build_buildable_fx(table) {
   self endon("stop_buildable_fx");
 
   while(true) {
-    playfx(level._effect["fx_buried_sloth_building"], table.origin);
+    playFX(level._effect["fx_buried_sloth_building"], table.origin);
     wait 0.25;
   }
 }
@@ -483,9 +483,9 @@ pickup_notetracks(note, stub) {
     self.buildable_model.angles = twr_angles;
 
     if(self.buildable_item == "turbine")
-      self.buildable_model setmodel(level.small_turbine);
+      self.buildable_model setModel(level.small_turbine);
     else
-      self.buildable_model setmodel(stub.model.model);
+      self.buildable_model setModel(stub.model.model);
 
     self.buildable_model linkto(self, tag_name);
   }

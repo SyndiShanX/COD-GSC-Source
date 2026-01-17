@@ -52,13 +52,13 @@ onstartgametype() {
   level.spawnmaxs = (0, 0, 0);
 
   foreach(team in level.teams) {
-    setobjectivetext(team, & "OBJECTIVES_PREGAME");
-    setobjectivehinttext(team, & "OBJECTIVES_PREGAME_HINT");
+    setobjectivetext(team, &"OBJECTIVES_PREGAME");
+    setobjectivehinttext(team, &"OBJECTIVES_PREGAME_HINT");
 
     if(level.splitscreen)
-      setobjectivescoretext(team, & "OBJECTIVES_PREGAME");
+      setobjectivescoretext(team, &"OBJECTIVES_PREGAME");
     else
-      setobjectivescoretext(team, & "OBJECTIVES_PREGAME_SCORE");
+      setobjectivescoretext(team, &"OBJECTIVES_PREGAME_SCORE");
 
     maps\mp\gametypes\_spawnlogic::addspawnpoints(team, "mp_dm_spawn");
   }
@@ -83,10 +83,10 @@ onstartgametype() {
 }
 
 startpregame() {
-  game["strings"]["waiting_for_players"] = & "MP_WAITING_FOR_X_PLAYERS";
-  game["strings"]["pregame"] = & "MP_PREGAME";
-  game["strings"]["pregameover"] = & "MP_MATCHSTARTING";
-  game["strings"]["pregame_time_limit_reached"] = & "MP_PREGAME_TIME_LIMIT";
+  game["strings"]["waiting_for_players"] = &"MP_WAITING_FOR_X_PLAYERS";
+  game["strings"]["pregame"] = &"MP_PREGAME";
+  game["strings"]["pregameover"] = &"MP_MATCHSTARTING";
+  game["strings"]["pregame_time_limit_reached"] = &"MP_PREGAME_TIME_LIMIT";
   precachestring(game["strings"]["waiting_for_players"]);
   precachestring(game["strings"]["pregame"]);
   precachestring(game["strings"]["pregameover"]);

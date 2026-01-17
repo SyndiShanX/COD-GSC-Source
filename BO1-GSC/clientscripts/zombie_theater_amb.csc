@@ -112,47 +112,47 @@ telepad_loop() {
 }
 teleportation_audio() {
   teleport_delay = 2;
-  while (1) {
+  while(1) {
     level waittill("tpa");
     if(isDefined(self.script_sound)) {
-      playsound(0, "evt_" + self.script_sound + "_warmup", self.origin);
+      playSound(0, "evt_" + self.script_sound + "_warmup", self.origin);
       realwait(teleport_delay);
-      playsound(0, "evt_" + self.script_sound + "_cooldown", self.origin);
+      playSound(0, "evt_" + self.script_sound + "_cooldown", self.origin);
     }
   }
 }
 teleport_2d() {
-  while (1) {
+  while(1) {
     level waittill("t2d");
-    playsound(0, "evt_teleport_2d_fnt", (0, 0, 0));
-    playsound(0, "evt_teleport_2d_rear", (0, 0, 0));
+    playSound(0, "evt_teleport_2d_fnt", (0, 0, 0));
+    playSound(0, "evt_teleport_2d_rear", (0, 0, 0));
   }
 }
 teleport_2d_nopad() {
-  while (1) {
+  while(1) {
     level waittill("t2dn");
-    playsound(0, "evt_pad_warmup_2d", (0, 0, 0));
+    playSound(0, "evt_pad_warmup_2d", (0, 0, 0));
     wait(1.3);
-    playsound(0, "evt_teleport_2d_fnt", (0, 0, 0));
-    playsound(0, "evt_teleport_2d_rear", (0, 0, 0));
+    playSound(0, "evt_teleport_2d_fnt", (0, 0, 0));
+    playSound(0, "evt_teleport_2d_rear", (0, 0, 0));
   }
 }
 teleport_beam_fx_2d() {
-  while (1) {
+  while(1) {
     level waittill("t2bfx");
-    playsound(0, "evt_beam_fx_2d", (0, 0, 0));
+    playSound(0, "evt_beam_fx_2d", (0, 0, 0));
   }
 }
 teleport_specialroom_start() {
-  while (1) {
+  while(1) {
     level waittill("tss");
-    playsound(0, "evt_pad_warmup_2d", (0, 0, 0));
+    playSound(0, "evt_pad_warmup_2d", (0, 0, 0));
   }
 }
 teleport_specialroom_go() {
-  while (1) {
+  while(1) {
     level waittill("tsg");
-    playsound(0, "evt_teleport_2d_fnt", (0, 0, 0));
-    playsound(0, "evt_teleport_2d_rear", (0, 0, 0));
+    playSound(0, "evt_teleport_2d_fnt", (0, 0, 0));
+    playSound(0, "evt_teleport_2d_rear", (0, 0, 0));
   }
 }

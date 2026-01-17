@@ -12,7 +12,6 @@ main() {
 
   if(getdvar("clientSideEffects") != "1")
     maps\createfx\mp_carentan_fx::main();
-
 }
 
 precacheFX() {
@@ -26,11 +25,9 @@ precacheFX() {
   level._effect["steam_manhole"] = loadfx("smoke/steam_manhole");
   level._effect["chinese_lantern_FX"] = loadfx("misc/chinese_latern_glow_orange");
   level._effect["ct_street_lamp_glow_FX"] = loadfx("misc/ct_street_lamp_glow");
-
 }
 
 placeGlows() {
-
   randomStartDelay = randomfloatrange(-20, -15);
 
   //map_source\prefabs\mp_carentan\lantern01.map
@@ -38,32 +35,31 @@ placeGlows() {
 
   //map_source\prefabs\misc_models\ct_street_lamp_on.map
   thread lightGlows("ct_street_lamp_glow_FX_origin", "ct_street_lamp_glow_FX", "misc/ct_street_lamp_glow", randomStartDelay);
-
 }
 
 lightGlows(targetname, fxName, fxFile, delay, soundalias) {
   lev = level;
-  if(!isdefined(level._effect))
+  if(!isDefined(level._effect))
     lev._effect = [];
-  if(!isdefined(level._effect[fxName]))
+  if(!isDefined(level._effect[fxName]))
     lev._effect[fxName] = loadfx(fxFile);
 
   waittillframeend;
 
   // script_structs
   ents = getstructarray(targetname, "targetname");
-  if(!isdefined(ents))
+  if(!isDefined(ents))
     return;
   if(ents.size <= 0) {
     return;
   }
-  for (i = 0; i < ents.size; i++)
+  for(i = 0; i < ents.size; i++)
     ents[i] lightGlows_create(fxName, fxFile, delay, soundalias);
 }
 
 lightGlows_create(fxName, fxFile, delay, soundalias) {
   // default effect angles if they dont exist
-  if(!isdefined(self.angles))
+  if(!isDefined(self.angles))
     self.angles = (0, 0, 0);
 
   ent = createOneshotEffect(fxName);
@@ -71,7 +67,7 @@ lightGlows_create(fxName, fxFile, delay, soundalias) {
   ent.v["angles"] = (self.angles);
   ent.v["fxid"] = fxName;
   ent.v["delay"] = delay;
-  if(isdefined(soundalias)) {
+  if(isDefined(soundalias)) {
     ent.v["soundalias"] = soundalias;
   }
 }

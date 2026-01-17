@@ -32,7 +32,7 @@ banzai() {
   self call_overloaded_func("animscripts\banzai", "init");
   self endon("death");
   self endon("stop_banzai_thread");
-  if(isDefined(self.target) && (!isDefined(self.banzai_no_wait) || (Isdefined(self.banzai_no_wait) && !self.banzai_no_wait))) {
+  if(isDefined(self.target) && (!isDefined(self.banzai_no_wait) || (isDefined(self.banzai_no_wait) && !self.banzai_no_wait))) {
     self waittill("reached_path_end");
   }
   wait_time = 3 + RandomFloat(2);
@@ -54,7 +54,7 @@ banzai_force() {
   self endon("death");
   self.banzai = true;
   self.inmeleecharge = true;
-  if(isDefined(self.target) && (!isDefined(self.banzai_no_wait) || (Isdefined(self.banzai_no_wait) && !self.banzai_no_wait))) {
+  if(isDefined(self.target) && (!isDefined(self.banzai_no_wait) || (isDefined(self.banzai_no_wait) && !self.banzai_no_wait))) {
     self waittill("reached_path_end");
   }
   self banzai_charge(true);
@@ -175,7 +175,7 @@ check_player_can_see_me(player) {
 
 player_can_see_me(player) {
   playerAngles = player getplayerangles();
-  playerForwardVec = AnglesToForward(playerAngles);
+  playerForwardVec = anglesToForward(playerAngles);
   playerUnitForwardVec = VectorNormalize(playerForwardVec);
   banzaiPos = self GetOrigin();
   playerPos = player GetOrigin();
@@ -344,7 +344,7 @@ draw_forward_line_until_notify(ent, r, g, b, notifyEnt, notifyString) {
   notifyEnt endon("death");
   notifyEnt endon(notifyString);
   while(1) {
-    forwardVec = VectorNormalize(AnglesToForward(ent.angles));
+    forwardVec = VectorNormalize(anglesToForward(ent.angles));
     pointForward = ent.origin + forwardVec * 64;
     line(ent.origin, pointForward, (r, g, b), 0.05);
     wait .05;

@@ -13,7 +13,7 @@
 function main() {
   precache_createfx_fx();
   precache_scripted_fx();
-  callback::on_localclient_connect( & function_129a815f);
+  callback::on_localclient_connect(&function_129a815f);
 }
 
 function precache_scripted_fx() {
@@ -51,15 +51,15 @@ function function_47ecaed4(localclientnum) {
   level.var_ff4acd38 = [];
   i = 0;
   var_8c9a6a50 = getent(localclientnum, "lighthouse_light_ring_1", "targetname");
-  while (isdefined(var_8c9a6a50)) {
+  while(isDefined(var_8c9a6a50)) {
     level.var_ff4acd38[i] = var_8c9a6a50;
     i++;
     var_8c9a6a50 = getent(localclientnum, "lighthouse_light_ring_" + (i + 1), "targetname");
   }
-  for (;;) {
+  for(;;) {
     function_e9849e59(localclientnum);
     wait(1);
-    for (i = 0; i < 4; i++) {
+    for(i = 0; i < 4; i++) {
       level.var_ff4acd38[i] show();
       exploder::exploder("lighthouse_light_ring_" + (i + 1));
       wait(0.5);
@@ -78,7 +78,7 @@ function function_47ecaed4(localclientnum) {
 }
 
 function function_e9849e59(localclientnum) {
-  for (i = 0; i < level.var_ff4acd38.size; i++) {
+  for(i = 0; i < level.var_ff4acd38.size; i++) {
     level.var_ff4acd38[i] hide();
     exploder::stop_exploder("lighthouse_light_ring_" + (i + 1));
   }
@@ -86,7 +86,7 @@ function function_e9849e59(localclientnum) {
 }
 
 function function_fe8322ed(localclientnum) {
-  for (i = 0; i < level.var_ff4acd38.size; i++) {
+  for(i = 0; i < level.var_ff4acd38.size; i++) {
     level.var_ff4acd38[i] show();
     exploder::exploder("lighthouse_light_ring_" + (i + 1));
   }

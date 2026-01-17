@@ -7,7 +7,6 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\status_effects\status_effect_util;
 #include scripts\core_common\system_shared;
-
 #namespace status_effect_dot;
 
 autoexec __init__system__() {
@@ -57,9 +56,9 @@ dot_apply(var_756fda07, weapon, applicant) {
   }
 }
 
-private dot_rumble_loop() {
+dot_rumble_loop() {
   self notify(#"dot_rumble_loop");
-  self endon(#"dot_rumble_loop", #"endstatuseffect");
+  self endon(#"dot_rumble_loop", # "endstatuseffect");
   waitframe(1);
 
   if(!isplayer(self.owner)) {
@@ -82,7 +81,7 @@ dot_end() {
   self.var_45c9768 = undefined;
 }
 
-private function_3b694684(count) {
+function_3b694684(count) {
   if(!isplayer(self.owner)) {
     return;
   }
@@ -103,7 +102,7 @@ private function_3b694684(count) {
   self.owner clientfield::increment_to_player("dot_splatter");
 }
 
-private function_5236325e(applicant, killcament) {
+function_5236325e(applicant, killcament) {
   self endon(#"endstatuseffect");
   var_6307def9 = 0;
   var_f3fdc692 = 0;
@@ -148,7 +147,7 @@ private function_5236325e(applicant, killcament) {
   }
 }
 
-private function_ae0405e2(applicant) {
+function_ae0405e2(applicant) {
   if(self.var_82e80202 == self.var_8df76e2f) {
     self.var_82e80202 = 0;
     self dot_report(applicant);
@@ -170,7 +169,7 @@ private function_ae0405e2(applicant) {
   }
 }
 
-private dot_report(applicant) {
+dot_report(applicant) {
   if(!isDefined(self.owner)) {
     return;
   }
@@ -200,7 +199,7 @@ private dot_report(applicant) {
   }
 }
 
-private function_1d5bd9af() {
+function_1d5bd9af() {
   if(!self.var_7b465aaa) {
     return;
   }

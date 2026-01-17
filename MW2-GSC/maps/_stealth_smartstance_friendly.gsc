@@ -16,8 +16,10 @@ stealth_smartstance_friendly_main() {
 }
 
 /************************************************************************************************************/
+
 /*												FRIENDLY LOGIC												*/
 /************************************************************************************************************/
+
 friendly_stance_handler() {
   self endon("death");
   self endon("pain_death");
@@ -25,14 +27,14 @@ friendly_stance_handler() {
   self.old_fixednode = self.fixednode;
   self.old_fixednodesaferadius = self.fixednodesaferadius;
 
-  while (1) {
+  while(1) {
     self ent_flag_wait("_stealth_stance_handler");
     flag_waitopen("_stealth_spotted");
 
     self.fixednode = 1;
     self.fixednodesaferadius = 10;
 
-    while (self ent_flag("_stealth_stance_handler") && !flag("_stealth_spotted")) {
+    while(self ent_flag("_stealth_stance_handler") && !flag("_stealth_spotted")) {
       self friendly_stance_handler_set_stance_up();
       stances = [];
       stances = friendly_stance_handler_check_mightbeseen(stances);
@@ -125,13 +127,13 @@ friendly_stance_handler_check_mightbeseen(stances) {
 
 friendly_stance_handler_return_ai_sight(ai, stance) {
   // check to see where the ai is facing
-  vec1 = anglestoforward(ai.angles); // this is the direction the ai is facing
+  vec1 = anglesToForward(ai.angles); // this is the direction the ai is facing
   vec2 = vectornormalize(self.origin - ai.origin); // this is the direction from him to us
 
   // comparing the dotproduct of the 2 will tell us if he's facing us and how much so..
-  // 0 will mean his direction is exactly perpendicular to us, 
+  // 0 will mean his direction is exactly perpendicular to us,
   // 1 will mean he's facing directly at us
-  // - 1 will mean he's facing directly away from us 
+  // - 1 will mean he's facing directly away from us
   vecdot = vectordot(vec1, vec2);
 
   // is the ai facing us?
@@ -172,9 +174,9 @@ friendly_stance_handler_change_stance_up() {
   self endon("_stealth_stance_dont_change");
   self endon("_stealth_stance_handler");
 
-  if(self ent_flag("_stealth_stance_change"))
+  if(self ent_flag("_stealth_stance_change")) {
     return;
-
+  }
   time = 4;
 
   // we wait a sec before deciding to actually stand up - just like a real player
@@ -218,7 +220,7 @@ friendly_stance_handler_stay_still() {
 friendly_stance_handler_resume_path(time) {
   self endon("friendly_stance_handler_stay_still");
 
-  if(!isdefined(time))
+  if(!isDefined(time))
     time = self._stealth.behavior.wait_resume_path;
 
   wait(time);
@@ -236,7 +238,7 @@ friendly_stance_handler_resume_path(time) {
 friendly_stance_handler_stay_still()
 {
 	//need this in here because we could start resuming the path before we actually hit the line
-	//near the bottom to loop the prone anim...when that happens - the system thinks we're not 
+	//near the bottom to loop the prone anim...when that happens - the system thinks we're not
 	//staying still even though we're playing a looping animation
 	self endon( "friendly_stance_handler_resume_path" );
 	
@@ -244,12 +246,12 @@ friendly_stance_handler_stay_still()
 		return;
 	self ent_flag_set( "_stealth_stay_still" );
 	
-	badplace_cylinder( "_stealth_" + self.unique_id + "_prone", 0, self.origin, 30, 90, "bad_guys" ); 
+	badplace_cylinder( "_stealth_" + self.unique_id + "_prone", 0, self.origin, 30, 90, "bad_guys" );
 	
 	//MIGHT NEED THIS IN THE FUTURE
 	//self ent_flag_set( "_stealth_custom_anim" ); --> this is for dynamic run speed
 	
-	self notify( "stop_loop" ); 
+	self notify( "stop_loop" );
 	self anim_generic_custom_animmode( self, "gravity", "_stealth_prone_stop" );
 	self thread anim_generic_custom_animmode_loop( self, "gravity", "_stealth_prone_idle" );
 }
@@ -260,9 +262,9 @@ friendly_stance_handler_resume_path()
 	
 	self ent_flag_clear( "_stealth_stay_still" );
 
-	badplace_delete( "_stealth_" + self.unique_id + "_prone" ); 
+	badplace_delete( "_stealth_" + self.unique_id + "_prone" );
 	
-	self notify( "stop_loop" ); 
+	self notify( "stop_loop" );
 	self anim_generic_custom_animmode( self, "gravity", "_stealth_prone_start" );
 	//MIGHT NEED THIS IN THE FUTURE
 	//self ent_flag_clear( "_stealth_custom_anim" ); --> this is for dynamic run speed
@@ -270,8 +272,10 @@ friendly_stance_handler_resume_path()
 */
 
 /************************************************************************************************************/
+
 /*													SETUP													*/
 /************************************************************************************************************/
+
 friendly_init() {
   self ent_flag_init("_stealth_stance_handler");
   self ent_flag_init("_stealth_stay_still");
@@ -309,17 +313,17 @@ friendly_default_stance_handler_distances() {
 }
 
 friendly_set_stance_handler_distances(looking_away, neutral, looking_towards) {
-  if(isdefined(looking_away)) {
+  if(isDefined(looking_away)) {
     foreach(key, value in looking_away)
     self._stealth.behavior.stance_handler["looking_away"][key] = value;
   }
 
-  if(isdefined(neutral)) {
+  if(isDefined(neutral)) {
     foreach(key, value in neutral)
     self._stealth.behavior.stance_handler["neutral"][key] = value;
   }
 
-  if(isdefined(looking_towards)) {
+  if(isDefined(looking_towards)) {
     foreach(key, value in looking_towards)
     self._stealth.behavior.stance_handler["looking_towards"][key] = value;
   }

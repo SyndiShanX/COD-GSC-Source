@@ -9,20 +9,20 @@
 #namespace serverfaceanim;
 
 function autoexec __init__sytem__() {
-  system::register("serverfaceanim", & __init__, undefined, undefined);
+  system::register("serverfaceanim", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  if(!(isdefined(level._use_faceanim) && level._use_faceanim)) {
+  if(!(isDefined(level._use_faceanim) && level._use_faceanim)) {
     return;
   }
-  callback::on_spawned( & init_serverfaceanim);
+  callback::on_spawned(&init_serverfaceanim);
 }
 
 function init_serverfaceanim() {
   self.do_face_anims = 1;
-  if(!isdefined(level.face_event_handler)) {
-    level.face_event_handler = spawnstruct();
+  if(!isDefined(level.face_event_handler)) {
+    level.face_event_handler = spawnStruct();
     level.face_event_handler.events = [];
     level.face_event_handler.events["death"] = "face_death";
     level.face_event_handler.events["grenade danger"] = "face_alert";
@@ -38,10 +38,10 @@ function init_serverfaceanim() {
 }
 
 function wait_for_face_event() {
-  while (true) {
+  while(true) {
     level waittill("face", face_notify, ent);
-    if(isdefined(ent) && isdefined(ent.do_face_anims) && ent.do_face_anims) {
-      if(isdefined(level.face_event_handler.events[face_notify])) {
+    if(isDefined(ent) && isDefined(ent.do_face_anims) && ent.do_face_anims) {
+      if(isDefined(level.face_event_handler.events[face_notify])) {
         ent sendfaceevent(level.face_event_handler.events[face_notify]);
       }
     }

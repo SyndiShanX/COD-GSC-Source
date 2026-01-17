@@ -21,22 +21,22 @@ main() {
   level.special_weapon_dof_funcs = [];
   level.buttons = [];
 
-  if(!isdefined(level.vision_set_transition_ent)) {
-    level.vision_set_transition_ent = spawnstruct();
+  if(!isDefined(level.vision_set_transition_ent)) {
+    level.vision_set_transition_ent = spawnStruct();
     level.vision_set_transition_ent.vision_set = "";
     level.vision_set_transition_ent.time = 0;
   }
 
-  if(!isdefined(level.sunflare_settings))
+  if(!isDefined(level.sunflare_settings))
     level.sunflare_settings = [];
 
-  if(!isdefined(level.vision_set_fog)) {
+  if(!isDefined(level.vision_set_fog)) {
     level.vision_set_fog = [];
     create_default_vision_set_fog(level.script);
     common_scripts\_artcommon::setfogsliders();
   }
 
-  if(!isdefined(level.script))
+  if(!isDefined(level.script))
     level.script = tolower(getdvar("mapname"));
 }
 
@@ -77,7 +77,7 @@ dof_set_generic(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, v
   level.dof[var_0][var_1]["farBlur"] = var_7;
   level.dof[var_0][var_1]["weight"] = var_8;
 
-  if(isdefined(var_9))
+  if(isDefined(var_9))
     level.dof[var_0][var_1]["bias"] = var_9;
 }
 
@@ -240,7 +240,7 @@ dof_blend_interior_ads() {
     return;
   }
 
-  if(isdefined(level.dof_blend_interior_ads_scalar))
+  if(isDefined(level.dof_blend_interior_ads_scalar))
     var_1 = level.dof_blend_interior_ads_scalar;
   else
     var_1 = 0.1;
@@ -323,10 +323,8 @@ dof_process_ads() {
     return;
   }
 
-  if(isdefined(level.custom_dof_trace)) {
-    [
-      [level.custom_dof_trace]
-    ]();
+  if(isDefined(level.custom_dof_trace)) {
+    [[level.custom_dof_trace]]();
     return;
   }
 
@@ -339,23 +337,21 @@ dof_process_ads() {
   var_7 = getdvarfloat("ads_dof_farEndScale", 3);
   var_8 = getdvarfloat("ads_dof_nearBlur", 4);
   var_9 = getdvarfloat("ads_dof_farBlur", 2.5);
-  var_10 = self geteye();
+  var_10 = self getEye();
   var_11 = self getplayerangles();
 
-  if(isdefined(self.dof_ref_ent))
+  if(isDefined(self.dof_ref_ent))
     var_12 = combineangles(self.dof_ref_ent.angles, var_11);
   else
     var_12 = var_11;
 
-  var_13 = vectornormalize(anglestoforward(var_12));
-  var_14 = bullettrace(var_10, var_10 + var_13 * var_1, 1, self, 0, 0, 0, 0, 0);
+  var_13 = vectornormalize(anglesToForward(var_12));
+  var_14 = bulletTrace(var_10, var_10 + var_13 * var_1, 1, self, 0, 0, 0, 0, 0);
   var_15 = getaiarray("axis");
   var_16 = self getcurrentweapon();
 
-  if(isdefined(level.special_weapon_dof_funcs[var_16])) {
-    [
-      [level.special_weapon_dof_funcs[var_16]]
-    ](var_14, var_15, var_10, var_13, var_0);
+  if(isDefined(level.special_weapon_dof_funcs[var_16])) {
+    [[level.special_weapon_dof_funcs[var_16]]](var_14, var_15, var_10, var_13, var_0);
     return;
   }
 
@@ -411,31 +407,27 @@ dof_process_ads() {
 }
 
 dof_process_physical_ads(var_0) {
-  if(isdefined(level.custom_dof_trace))
-    return [
-      [level.custom_dof_trace]
-    ]();
+  if(isDefined(level.custom_dof_trace))
+    return [[level.custom_dof_trace]]();
 
   var_1 = getdvarfloat("ads_dof_tracedist", 4096);
   var_2 = getdvarfloat("ads_dof_maxEnemyDist", 0);
   var_3 = getdvarint("ads_dof_playerForgetEnemyTime", 5000);
-  var_4 = self geteye();
+  var_4 = self getEye();
   var_5 = self getplayerangles();
 
-  if(isdefined(self.dof_ref_ent))
+  if(isDefined(self.dof_ref_ent))
     var_6 = combineangles(self.dof_ref_ent.angles, var_5);
   else
     var_6 = var_5;
 
-  var_7 = vectornormalize(anglestoforward(var_6));
-  var_8 = bullettrace(var_4, var_4 + var_7 * var_1, 1, self, 0, 1, 0, 0, 0);
+  var_7 = vectornormalize(anglesToForward(var_6));
+  var_8 = bulletTrace(var_4, var_4 + var_7 * var_1, 1, self, 0, 1, 0, 0, 0);
   var_9 = getaiarray("axis");
   var_10 = self getcurrentweapon();
 
-  if(isdefined(level.special_weapon_dof_funcs[var_10]))
-    return [
-      [level.special_weapon_dof_funcs[var_10]]
-    ](var_8, var_9, var_4, var_7, var_0);
+  if(isDefined(level.special_weapon_dof_funcs[var_10]))
+    return [[level.special_weapon_dof_funcs[var_10]]](var_8, var_9, var_4, var_7, var_0);
 
   var_11["start"] = distance(var_4, var_8["position"]);
   var_11["end"] = var_11["start"];
@@ -468,18 +460,18 @@ dof_process_physical_ads(var_0) {
 }
 
 dof_monitor_prone() {
-  if(!isdefined(level.dof_while_prone_enabled) || !level.dof_while_prone_enabled) {
+  if(!isDefined(level.dof_while_prone_enabled) || !level.dof_while_prone_enabled) {
     return;
   }
-  for (;;) {
+  for(;;) {
     dof_set_standing();
 
-    while (self getstance() != "prone")
+    while(self getstance() != "prone")
       wait 0.05;
 
     dof_set_prone();
 
-    while (self getstance() == "prone")
+    while(self getstance() == "prone")
       wait 0.05;
   }
 }
@@ -505,7 +497,7 @@ javelin_dof(var_0, var_1, var_2, var_3, var_4) {
   var_5 = 2400;
   var_7 = 2400;
 
-  for (var_8 = 0; var_8 < var_1.size; var_8++) {
+  for(var_8 = 0; var_8 < var_1.size; var_8++) {
     var_9 = vectornormalize(var_1[var_8].origin - var_2);
     var_10 = vectordot(var_3, var_9);
 
@@ -561,7 +553,7 @@ javelin_dof(var_0, var_1, var_2, var_3, var_4) {
 }
 
 dof_update() {
-  for (;;) {
+  for(;;) {
     waitframe();
 
     if(level.level_specific_dof) {
@@ -599,7 +591,7 @@ tess_init() {
   if(var_0 == "") {
     return;
   }
-  level.tess = spawnstruct();
+  level.tess = spawnStruct();
   level.tess.cutoff_distance_current = getdvarfloat("r_tessellationCutoffDistance", 960.0);
   level.tess.cutoff_distance_goal = level.tess.cutoff_distance_current;
   level.tess.cutoff_falloff_current = getdvarfloat("r_tessellationCutoffFalloff", 320.0);
@@ -617,7 +609,7 @@ tess_set_goal(var_0, var_1, var_2) {
 }
 
 tess_update() {
-  for (;;) {
+  for(;;) {
     var_0 = level.tess.cutoff_distance_current;
     var_1 = level.tess.cutoff_falloff_current;
     waitframe();
@@ -643,7 +635,7 @@ tess_update() {
 }
 
 sunflare_changes(var_0, var_1) {
-  if(!isdefined(level.sunflare_settings[var_0])) {
+  if(!isDefined(level.sunflare_settings[var_0])) {
     return;
   }
   self notify("sunflare_start_adjust");
@@ -654,7 +646,7 @@ sunflare_changes(var_0, var_1) {
   var_5 = gettime() - var_2;
   var_6 = level.sunflare_settings[var_0].position;
 
-  for (level.current_sunflare_setting = var_0; var_5 < var_3; var_5 = gettime() - var_2) {
+  for(level.current_sunflare_setting = var_0; var_5 < var_3; var_5 = gettime() - var_2) {
     var_6 = level.sunflare_settings[var_0].position;
     var_7 = min(float(var_5 / var_3), 1);
     var_8 = var_4 + (var_6 - var_4) * var_7;
@@ -668,15 +660,15 @@ sunflare_changes(var_0, var_1) {
 }
 
 init_fog_transition() {
-  if(!isdefined(level.fog_transition_ent)) {
-    level.fog_transition_ent = spawnstruct();
+  if(!isDefined(level.fog_transition_ent)) {
+    level.fog_transition_ent = spawnStruct();
     level.fog_transition_ent.fogset = "";
     level.fog_transition_ent.time = 0;
   }
 }
 
 set_fog_progress(var_0) {
-  if(isdefined(self.start_hdrcolorintensity)) {
+  if(isDefined(self.start_hdrcolorintensity)) {
     set_fog_progress_preh1(var_0);
     return;
   }
@@ -703,10 +695,10 @@ set_fog_progress_preh1(var_0) {
   var_9 = self.start_skyfogminangle * var_1 + self.end_skyfogminangle * var_0;
   var_10 = self.start_skyfogmaxangle * var_1 + self.end_skyfogmaxangle * var_0;
 
-  if(!isdefined(var_6))
+  if(!isDefined(var_6))
     var_6 = 1;
 
-  if(!isdefined(var_7))
+  if(!isDefined(var_7))
     var_7 = 1;
 
   var_11 = var_6 * var_1 + var_7 * var_0;
@@ -733,7 +725,7 @@ ssao_set_target_over_time_internal(var_0, var_1) {
   }
   var_2 = getdvarfloat("r_ssaoScriptScale", 1.0);
 
-  for (var_3 = var_1; var_3 > 0.0; var_3 = var_3 - 0.05) {
+  for(var_3 = var_1; var_3 > 0.0; var_3 = var_3 - 0.05) {
     var_4 = min(1.0, 0.05 / var_3);
     var_5 = var_2;
     var_2 = var_2 + var_4 * (var_0 - var_2);

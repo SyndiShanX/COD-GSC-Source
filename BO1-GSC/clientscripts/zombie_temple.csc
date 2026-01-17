@@ -112,7 +112,7 @@ water_trail_monitor(localClientNum, set, newEnt) {
       self.fx_ents[i] = spawn(i, (0, 0, 0), "script_model");
       self.fx_ents[i] setModel("tag_origin");
       self.fx_ents[i] LinkTo(self, "tag_origin");
-      PlayFXOnTag(i, level._effect["fx_crystal_water_trail"], self.fx_ents[i], "tag_origin");
+      playFXOnTag(i, level._effect["fx_crystal_water_trail"], self.fx_ents[i], "tag_origin");
     }
   } else {
     if(isDefined(self.fx_ents)) {
@@ -128,7 +128,7 @@ crystal_weaksauce_start(localClientNum, set, newEnt) {
   if(!set) {
     return;
   }
-  s = spawnstruct();
+  s = spawnStruct();
   s.fx = "fx_weak_sauce_trail";
   s.origin = self.origin + (0, 0, 134);
   level._crystal_sauce_start = s;
@@ -141,7 +141,7 @@ crystal_hotsauce_start(localClientNum, set, newEnt) {
   if(!set) {
     return;
   }
-  s = spawnstruct();
+  s = spawnStruct();
   s.fx = "fx_hot_sauce_trail";
   s.origin = self.origin + (0, 0, 134);
   level._crystal_sauce_start = s;
@@ -162,7 +162,7 @@ crystal_sauce_end(localClientNum, set, newEnt) {
 
 crystal_trail_runner(localClientNum, fx_name, dest) {
   PrintLn("Running " + fx_name + " from " + self.origin + " to " + dest);
-  PlayFXOnTag(localClientNum, level._effect[fx_name], self, "tag_origin");
+  playFXOnTag(localClientNum, level._effect[fx_name], self, "tag_origin");
   self playLoopSound("evt_sq_bag_crystal_bounce_loop", .05);
   self moveTo(dest, 0.5);
   self waittill("movedone");
@@ -366,7 +366,7 @@ disable_deadshot(i_local_client_num) {
 water_gush_debug() {
   scale = 0.1;
   offset = (0, 0, 0);
-  dir = AnglesToForward(self.angles);
+  dir = anglesToForward(self.angles);
   for(i = 0; i < 5; i++) {
     Print3d(self.origin + offset, "+", (60, 60, 255), 1, scale, 10);
     scale *= 1.7;
@@ -818,7 +818,7 @@ spike_trap_move_spikes(localClientNum, active) {
 }
 
 set_trap_spears(localClientNum) {
-  allSpears = GetEntArray(localClientNum, "spear_trap_spear", "targetname");
+  allSpears = getEntArray(localClientNum, "spear_trap_spear", "targetname");
   self.spears = [];
   for(i = 0; i < allSpears.size; i++) {
     spear = allSpears[i];
@@ -850,8 +850,8 @@ spear_move(localClientNum, active, playSound) {
     }
     moveDist = RandomFloatRange(self.moveDistMin, self.moveDistMax);
     endPos = self.start + (self.moveDir * moveDist);
-    PlayFX(localClientNum, level._effect["punji_dust"], endPos);
-    playsound(0, "evt_spiketrap", self.origin);
+    playFX(localClientNum, level._effect["punji_dust"], endPos);
+    playSound(0, "evt_spiketrap", self.origin);
     moveTime = randomFloatRange(.08, .22);
     self moveTo(endPos, moveTime);
   } else {
@@ -867,7 +867,7 @@ floating_boards_init() {
   boards = [];
   players = getLocalPlayers();
   for(i = 0; i < players.size; i++) {
-    boards = array_combine(boards, GetEntArray(i, "plank_water", "targetname"));
+    boards = array_combine(boards, getEntArray(i, "plank_water", "targetname"));
   }
   array_thread(boards, ::float_board);
 }
@@ -909,7 +909,7 @@ board_move() {
   moveTime = RandomFloatRange(5.0, 10.0);
   while(true) {
     yaw = RandomFloatRange(0, 360.0);
-    toVector = AnglesToForward((0, yaw, 0));
+    toVector = anglesToForward((0, yaw, 0));
     newLoc = self.start_origin + toVector * dist;
     toX = newLoc[0] - self.origin[0];
     self MoveX(toX, moveTime);
@@ -1009,7 +1009,7 @@ start_spinner_sound() {
 
 stop_spinner_sound() {
   self stopLoopSound();
-  self playsound(0, self.spin_stop_sound);
+  self playSound(0, self.spin_stop_sound);
 }
 
 temple_light_model_swap_init() {
@@ -1018,7 +1018,7 @@ temple_light_model_swap_init() {
   level notify("pl1");
   players = getLocalPlayers();
   for(i = 0; i < players.size; i++) {
-    light_models = GetEntArray(i, "model_lights_on", "targetname");
+    light_models = getEntArray(i, "model_lights_on", "targetname");
     for(x = 0; x < light_models.size; x++) {
       light = light_models[x];
       if(isDefined(light.script_string)) {
@@ -1072,7 +1072,7 @@ gib_ragdoll(localClientNum, hitDir) {
   if(is_mature()) {
     waterHeight = GetWaterHeight(self.origin);
     if((waterHeight + 10) < self.origin[2]) {
-      playFx(localClientNum, level._effect["rag_doll_gib_mini"], self.origin, hitDir * -1);
+      playFX(localClientNum, level._effect["rag_doll_gib_mini"], self.origin, hitDir * -1);
     } else {}
   }
 }
@@ -1100,7 +1100,7 @@ maze_rumble_while_floor_shakes(int_client_num) {
 
 waterfall_triggers_init() {
   waitforallclients();
-  trigs = GetEntArray(0, "waterfall_fog_change", "targetname");
+  trigs = getEntArray(0, "waterfall_fog_change", "targetname");
   if(!isDefined(trigs))
     return;
   for(i = 0; i < trigs.size; i++) {

@@ -72,14 +72,14 @@ init() {
   level.maxPrestige = int(tableLookup("mp/rankIconTable.csv", 0, "maxprestige", 1));
   pId = 0;
   rId = 0;
-  for (pId = 0; pId <= level.maxPrestige; pId++) {
-    for (rId = 0; rId <= level.maxRank; rId++)
+  for(pId = 0; pId <= level.maxPrestige; pId++) {
+    for(rId = 0; rId <= level.maxRank; rId++)
       precacheShader(tableLookup("mp/rankIconTable.csv", 0, rId, pId + 1));
   }
   rankId = 0;
   rankName = tableLookup("mp/ranktable.csv", 0, rankId, 1);
   assert(isDefined(rankName) && rankName != "");
-  while (isDefined(rankName) && rankName != "") {
+  while(isDefined(rankName) && rankName != "") {
     level.rankTable[rankId][1] = tableLookup("mp/ranktable.csv", 0, rankId, 1);
     level.rankTable[rankId][2] = tableLookup("mp/ranktable.csv", 0, rankId, 2);
     level.rankTable[rankId][3] = tableLookup("mp/ranktable.csv", 0, rankId, 3);
@@ -181,7 +181,7 @@ getRankXpStat() {
   return rankXpCapped;
 }
 onPlayerConnect() {
-  for (;;) {
+  for(;;) {
     level waittill("connected", player);
     player.pers["rankxp"] = player getRankXpStat();
     player.pers["codpoints"] = player getCodPointsStat();
@@ -226,21 +226,21 @@ onPlayerConnect() {
 }
 onJoinedTeam() {
   self endon("disconnect");
-  for (;;) {
+  for(;;) {
     self waittill("joined_team");
     self thread removeRankHUD();
   }
 }
 onJoinedSpectators() {
   self endon("disconnect");
-  for (;;) {
+  for(;;) {
     self waittill("joined_spectators");
     self thread removeRankHUD();
   }
 }
 onPlayerSpawned() {
   self endon("disconnect");
-  for (;;) {
+  for(;;) {
     self waittill("spawned_player");
     if(!isDefined(self.hud_rankscroreupdate)) {
       self.hud_rankscroreupdate = NewScoreHudElem(self);
@@ -415,7 +415,7 @@ updateRank() {
   oldRank = self.pers["rank"];
   rankId = self.pers["rank"];
   self.pers["rank"] = newRankId;
-  while (rankId <= newRankId) {
+  while(rankId <= newRankId) {
     self maps\mp\gametypes\_persistence::statSet("rank", rankId, false);
     self maps\mp\gametypes\_persistence::statSet("minxp", int(level.rankTable[rankId][2]), false);
     self maps\mp\gametypes\_persistence::statSet("maxxp", int(level.rankTable[rankId][7]), false);
@@ -442,7 +442,7 @@ updateRank() {
 updateRankAnnounceHUD() {
   self endon("disconnect");
   size = self.rankNotifyQueue.size;
-  self.rankNotifyQueue[size] = spawnstruct();
+  self.rankNotifyQueue[size] = spawnStruct();
   display_rank_column = 14;
   self.rankNotifyQueue[size].rank = int(level.rankTable[self.pers["rank"]][display_rank_column]);
   self.rankNotifyQueue[size].prestige = self.pers["prestige"];
@@ -455,10 +455,10 @@ getItemIndex(refString) {
 }
 buildStatsMilestoneInfo() {
   level.statsMilestoneInfo = [];
-  for (tierNum = 1; tierNum <= level.numStatsMilestoneTiers; tierNum++) {
+  for(tierNum = 1; tierNum <= level.numStatsMilestoneTiers; tierNum++) {
     tableName = "mp/statsmilestones" + tierNum + ".csv";
     moveToNextTable = false;
-    for (idx = 0; idx < level.maxStatChallenges; idx++) {
+    for(idx = 0; idx < level.maxStatChallenges; idx++) {
       row = tableLookupRowNum(tableName, 0, idx);
       if(row > -1) {
         statType = tableLookupColumnForRow(tableName, row, 3);
@@ -498,10 +498,10 @@ updateRankScoreHUD(amount) {
   wait(0.05);
   if(isDefined(self.hud_rankscroreupdate)) {
     if(self.rankUpdateTotal < 0) {
-      self.hud_rankscroreupdate.label = & "";
+      self.hud_rankscroreupdate.label = &"";
       self.hud_rankscroreupdate.color = (0.73, 0.19, 0.19);
     } else {
-      self.hud_rankscroreupdate.label = & "MP_PLUS";
+      self.hud_rankscroreupdate.label = &"MP_PLUS";
       self.hud_rankscroreupdate.color = (1, 1, 0.5);
     }
     self.hud_rankscroreupdate setValue(self.rankUpdateTotal);
@@ -529,7 +529,7 @@ getRankForXp(xpVal) {
   rankId = 0;
   rankName = level.rankTable[rankId][1];
   assert(isDefined(rankName));
-  while (isDefined(rankName) && rankName != "") {
+  while(isDefined(rankName) && rankName != "") {
     if(xpVal < getRankInfoMinXP(rankId) + getRankInfoXPAmt(rankId))
       return rankId;
     rankId++;

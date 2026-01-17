@@ -4,7 +4,6 @@
 ***********************************************/
 
 #include scripts\core_common\util_shared;
-
 #namespace clientfield;
 
 register(str_pool_name, str_name, n_version, n_bits, str_type) {
@@ -85,7 +84,7 @@ increment(str_field_name, n_increment_count) {
   self thread _increment(str_field_name, n_increment_count);
 }
 
-private _increment(str_field_name, n_increment_count = 1) {
+_increment(str_field_name, n_increment_count = 1) {
   if(self != level) {
     self endon(#"death");
   }

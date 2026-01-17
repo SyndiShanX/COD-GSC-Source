@@ -15,7 +15,7 @@ planesounds(localclientnum, spawnsound, flybysound, flybysoundloop) {
   if(!isDefined(fake_ent_plane)) {
     return;
   }
-  playsound(0, spawnsound, (0, 0, 0));
+  playSound(0, spawnsound, (0, 0, 0));
   thread plane_position_updater(localclientnum, fake_ent_plane, self, flybysound, flybysoundloop);
 }
 
@@ -46,10 +46,10 @@ plane_position_updater(localclientnum, fake_ent, plane, flybysound, flybysoundlo
         assert(isDefined(time));
 
         if(isDefined(flybysoundloop) && isDefined(fake_ent))
-          soundid = playloopsound(0, fake_ent, flybysoundloop, 0);
+          soundid = playLoopSound(0, fake_ent, flybysoundloop, 0);
 
         if(isDefined(flybysound))
-          plane playsound(0, flybysound);
+          plane playSound(0, flybysound);
 
         starttime = getrealtime();
       }

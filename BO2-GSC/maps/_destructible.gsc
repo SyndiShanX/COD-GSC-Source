@@ -7,7 +7,7 @@
 #include common_scripts\utility;
 
 init() {
-  destructibles = getentarray("destructible", "targetname");
+  destructibles = getEntArray("destructible", "targetname");
   array_thread(destructibles, ::destructible_think);
 
   if(destructibles.size <= 0) {

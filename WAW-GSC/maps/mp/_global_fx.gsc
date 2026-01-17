@@ -26,7 +26,7 @@ global_FX(targetname, fxName, fxFile, delay, soundalias) {
   if(ents.size <= 0) {
     return;
   }
-  for (i = 0; i < ents.size; i++)
+  for(i = 0; i < ents.size; i++)
     ents[i] global_FX_create(fxName, fxFile, delay, soundalias);
 }
 

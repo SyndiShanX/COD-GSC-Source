@@ -34,19 +34,13 @@ network_choke_action(id, choke_action, arg1, arg2, arg3) {
   }
   level.zombie_network_choke_ids_count[id]++;
   if(!isDefined(arg1)) {
-    return ([
-      [choke_action]
-    ]());
+    return ([[choke_action]]());
   }
   if(!isDefined(arg2)) {
-    return ([
-      [choke_action]
-    ](arg1));
+    return ([[choke_action]](arg1));
   }
   if(!isDefined(arg3)) {
-    return ([
-      [choke_action]
-    ](arg1, arg2));
+    return ([[choke_action]](arg1, arg2));
   }
   return ([[choke_action]](arg1, arg2, arg3));
 }
@@ -76,7 +70,7 @@ network_safe_spawn(id, max, classname, origin) {
 
 _network_safe_play_fx_on_tag(fx, entity, tag) {
   if(network_entity_valid(entity)) {
-    PlayFxOnTag(fx, entity, tag);
+    playFXOnTag(fx, entity, tag);
   }
 }
 

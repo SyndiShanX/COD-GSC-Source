@@ -8,131 +8,129 @@
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm_stats;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_sq;
 
-private autoexec init() {
+autoexec init() {
   if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
     adddebugcommand("<dev string:x38>");
   }
 }
 
-  function register(name, step_name, var_e788cdd7, setup_func, cleanup_func, var_d6ca4caf, var_27465eb4) {
+function register(name, step_name, var_e788cdd7, setup_func, cleanup_func, var_d6ca4caf, var_27465eb4) {
+  assert(ishash(name), "<dev string:x77>");
+  assert(ishash(step_name), "<dev string:x90>");
+  assert(ishash(var_e788cdd7), "<dev string:xab>");
 
-    assert(ishash(name), "<dev string:x77>");
-    assert(ishash(step_name), "<dev string:x90>");
-    assert(ishash(var_e788cdd7), "<dev string:xab>");
-
-    if(!isDefined(name)) {
-      if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
-        iprintlnbold("<dev string:xca>");
-        println("<dev string:xca>");
-      }
-
-      return;
+  if(!isDefined(name)) {
+    if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+      iprintlnbold("<dev string:xca>");
+      println("<dev string:xca>");
     }
 
-    if(!isDefined(step_name)) {
-      if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
-        iprintlnbold("<dev string:x10d>");
-        println("<dev string:x10d>");
-      }
+    return;
+  }
 
-      return;
+  if(!isDefined(step_name)) {
+    if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+      iprintlnbold("<dev string:x10d>");
+      println("<dev string:x10d>");
     }
 
-    if(!isDefined(setup_func)) {
-      if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
-        iprintlnbold("<dev string:x155>");
-        println("<dev string:x155>");
-      }
+    return;
+  }
 
-      return;
+  if(!isDefined(setup_func)) {
+    if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+      iprintlnbold("<dev string:x155>");
+      println("<dev string:x155>");
     }
 
-    if(!isDefined(cleanup_func)) {
-      if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
-        iprintlnbold("<dev string:x19e>");
-        println("<dev string:x19e>");
-      }
+    return;
+  }
 
-      return;
+  if(!isDefined(cleanup_func)) {
+    if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+      iprintlnbold("<dev string:x19e>");
+      println("<dev string:x19e>");
     }
 
-    if(isDefined(level._ee) && isDefined(level._ee[name]) && isDefined(var_d6ca4caf) && isDefined(level._ee[name].record_stat)) {
-      if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
-        iprintlnbold("<dev string:x1e9>");
-        println("<dev string:x1e9>");
-      }
+    return;
+  }
 
-      return;
+  if(isDefined(level._ee) && isDefined(level._ee[name]) && isDefined(var_d6ca4caf) && isDefined(level._ee[name].record_stat)) {
+    if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
+      iprintlnbold("<dev string:x1e9>");
+      println("<dev string:x1e9>");
     }
 
-      if(!isDefined(level._ee)) {
-        level._ee = [];
-      }
+    return;
+  }
 
-    if(!isDefined(level._ee[name])) {
-      level._ee[name] = {
-        #name: name, 
-        #completed: 0, 
-        #steps: [], 
-        #current_step: 0, 
-        #started: 0, 
-        #skip_to_step: -1
-      };
+  if(!isDefined(level._ee)) {
+    level._ee = [];
+  }
 
-      if(getdvarint(#"zm_debug_ee", 0)) {
-        thread function_28aee167(name);
-      }
-
-    }
-
-    ee = level._ee[name];
-
-    if(!isDefined(ee.record_stat)) {
-      ee.record_stat = var_d6ca4caf;
-    }
-
-    if(!isDefined(ee.var_35ccab99)) {
-      ee.var_35ccab99 = var_27465eb4;
-    }
-
-    new_step = {
-      #name: step_name, 
-      #ee: ee, 
-      #var_e788cdd7: var_e788cdd7, 
-      #setup_func: setup_func, 
-      #cleanup_func: cleanup_func, 
-      #started: 0, 
-      #completed: 0, 
-      #cleaned_up: 0
+  if(!isDefined(level._ee[name])) {
+    level._ee[name] = {
+      #name: name,
+      #completed: 0,
+      #steps: [],
+      #current_step: 0,
+      #started: 0,
+      #skip_to_step: -1
     };
-    previous_step = ee.steps[level._ee[name].steps.size - 1];
-
-    if(isDefined(previous_step)) {
-      previous_step.next_step = new_step;
-    }
-
-    if(!isDefined(ee.steps)) {
-      ee.steps = [];
-    } else if(!isarray(ee.steps)) {
-      ee.steps = array(ee.steps);
-    }
-
-    ee.steps[ee.steps.size] = new_step;
-    level flag::init(var_e788cdd7 + "_completed");
-
-    if(!level flag::exists(ee.name + "_completed")) {
-      level flag::init(ee.name + "_completed");
-    }
 
     if(getdvarint(#"zm_debug_ee", 0)) {
-      thread function_b3da1a16(ee.name, new_step.name);
-      thread devgui_think();
+      thread function_28aee167(name);
     }
 
   }
+
+  ee = level._ee[name];
+
+  if(!isDefined(ee.record_stat)) {
+    ee.record_stat = var_d6ca4caf;
+  }
+
+  if(!isDefined(ee.var_35ccab99)) {
+    ee.var_35ccab99 = var_27465eb4;
+  }
+
+  new_step = {
+    #name: step_name,
+    #ee: ee,
+    #var_e788cdd7: var_e788cdd7,
+    #setup_func: setup_func,
+    #cleanup_func: cleanup_func,
+    #started: 0,
+    #completed: 0,
+    #cleaned_up: 0
+  };
+  previous_step = ee.steps[level._ee[name].steps.size - 1];
+
+  if(isDefined(previous_step)) {
+    previous_step.next_step = new_step;
+  }
+
+  if(!isDefined(ee.steps)) {
+    ee.steps = [];
+  } else if(!isarray(ee.steps)) {
+    ee.steps = array(ee.steps);
+  }
+
+  ee.steps[ee.steps.size] = new_step;
+  level flag::init(var_e788cdd7 + "_completed");
+
+  if(!level flag::exists(ee.name + "_completed")) {
+    level flag::init(ee.name + "_completed");
+  }
+
+  if(getdvarint(#"zm_debug_ee", 0)) {
+    thread function_b3da1a16(ee.name, new_step.name);
+    thread devgui_think();
+  }
+
+}
 
 start(name, var_9d8cf7f = 0) {
   if(!zm_utility::is_ee_enabled() && !var_9d8cf7f) {
@@ -143,13 +141,12 @@ start(name, var_9d8cf7f = 0) {
   assert(isDefined(level._ee[name]), "<dev string:x244>" + function_9e72a96(name) + "<dev string:x24a>");
 
   if(level._ee[name].started) {
-
     if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
       iprintlnbold("<dev string:x244>" + function_9e72a96(name) + "<dev string:x265>");
       println("<dev string:x244>" + function_9e72a96(name) + "<dev string:x265>");
     }
 
-      return;
+    return;
   }
 
   ee = level._ee[name];
@@ -165,7 +162,7 @@ start(name, var_9d8cf7f = 0) {
     }
   }
 
-    level thread run_step(ee, ee.steps[0], var_5ea5c94d);
+  level thread run_step(ee, ee.steps[0], var_5ea5c94d);
 }
 
 is_complete(name) {
@@ -188,7 +185,7 @@ function_9212ff4d(ee_name, step_name) {
   return -1;
 }
 
-private run_step(ee, step, var_5ea5c94d) {
+run_step(ee, step, var_5ea5c94d) {
   level endon(#"game_ended");
 
   if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
@@ -196,7 +193,7 @@ private run_step(ee, step, var_5ea5c94d) {
     println(function_9e72a96(ee.name) + "<dev string:x2c4>" + function_9e72a96(step.name) + "<dev string:x2c8>");
   }
 
-    ee.started = 1;
+  ee.started = 1;
   step.started = 1;
   level thread function_3f795dc3(ee, step, var_5ea5c94d);
 
@@ -209,9 +206,9 @@ private run_step(ee, step, var_5ea5c94d) {
     println(function_9e72a96(ee.name) + "<dev string:x2c4>" + function_9e72a96(step.name) + "<dev string:x2da>");
   }
 
-    if(game.state === "postgame") {
-      return;
-    }
+  if(game.state === "postgame") {
+    return;
+  }
 
   ended_early = isDefined(waitresult) && waitresult._notify == step.var_e788cdd7 + "_ended_early";
   [[step.cleanup_func]](var_5ea5c94d, ended_early);
@@ -221,7 +218,7 @@ private run_step(ee, step, var_5ea5c94d) {
     println(function_9e72a96(ee.name) + "<dev string:x2c4>" + function_9e72a96(step.name) + "<dev string:x2ef>");
   }
 
-    step.cleaned_up = 1;
+  step.cleaned_up = 1;
 
   if(game.state === "postgame") {
     return;
@@ -253,7 +250,7 @@ private run_step(ee, step, var_5ea5c94d) {
       wait 0.5;
     }
 
-      ee.current_step++;
+    ee.current_step++;
     level thread run_step(ee, step.next_step, var_5ea5c94d);
     return;
   }
@@ -290,23 +287,22 @@ private run_step(ee, step, var_5ea5c94d) {
 
 }
 
-private function_3f795dc3(ee, step, var_5ea5c94d) {
+function_3f795dc3(ee, step, var_5ea5c94d) {
   level endon(#"game_ended");
-  step endoncallback(&function_df365859, #"end_early");
+  step endoncallback(&function_df365859, # "end_early");
   level notify(step.var_e788cdd7 + "_started");
   [[step.setup_func]](var_5ea5c94d);
   step.completed = 1;
   level notify(step.var_e788cdd7 + "_setup_completed");
 }
 
-private function_df365859(notifyhash) {
-
+function_df365859(notifyhash) {
   if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
     iprintlnbold(function_9e72a96(self.ee.name) + "<dev string:x2c4>" + function_9e72a96(self.name) + "<dev string:x316>");
     println(function_9e72a96(self.ee.name) + "<dev string:x2c4>" + function_9e72a96(self.name) + "<dev string:x316>");
   }
 
-    self.completed = 1;
+  self.completed = 1;
   level notify(self.var_e788cdd7 + "_ended_early");
   level notify(self.var_e788cdd7 + "_setup_completed");
 }
@@ -394,7 +390,7 @@ function_f2dd8601(ee_name, var_f2c264bb) {
       wait_time = 10 * ee.steps.size;
       waitresult = level waittilltimeout(wait_time, step.var_e788cdd7 + "<dev string:x413>");
 
-      if(waitresult._notify == #"timeout") {
+      if(waitresult._notify == # "timeout") {
         if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
           iprintlnbold("<dev string:x41e>" + function_9e72a96(ee_name) + "<dev string:x2c4>" + function_9e72a96(ee.steps[ee.current_step].name));
           println("<dev string:x41e>" + function_9e72a96(ee_name) + "<dev string:x2c4>" + function_9e72a96(ee.steps[ee.current_step].name));
@@ -430,7 +426,7 @@ devgui_think() {
     }
 
     switch (cmd[0]) {
-      case #"skip_to":
+      case # "skip_to":
         ee = level._ee[cmd[1]];
 
         if(!isDefined(ee)) {
@@ -460,7 +456,7 @@ devgui_think() {
         }
 
         break;
-      case #"complete":
+      case # "complete":
         ee = level._ee[cmd[1]];
 
         if(!isDefined(ee)) {
@@ -479,13 +475,13 @@ devgui_think() {
         }
 
         break;
-      case #"start":
+      case # "start":
         if(isDefined(level._ee[cmd[1]])) {
           start(hash(cmd[1]));
         }
 
         break;
-      case #"show_status":
+      case # "show_status":
         if(isDefined(level.var_7f2ca392) && level.var_7f2ca392) {
           function_c1d3567c();
         } else {
@@ -494,7 +490,7 @@ devgui_think() {
         }
 
         break;
-      case #"outro":
+      case # "outro":
         if(cmd.size < 2 || !isDefined(level._ee[cmd[1]])) {
           break;
         }
@@ -512,7 +508,7 @@ devgui_think() {
   }
 }
 
-private create_hudelem(y, x) {
+create_hudelem(y, x) {
   if(!isDefined(x)) {
     x = 0;
   }
@@ -608,4 +604,3 @@ function_1091b2a0(var_4f1c1316) {
 
   return color;
 }
-

@@ -11,8 +11,7 @@
 #include clientscripts\mp\_rotating_object;
 
 on_connect(localclientnum) {
-  if(!sessionmodeiszombiesgame()) {
-  }
+  if(!sessionmodeiszombiesgame()) {}
 
   player = getlocalplayer(localclientnum);
   assert(isDefined(player));

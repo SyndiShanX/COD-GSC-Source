@@ -90,13 +90,13 @@ escape_intro_vo() {
 escape_intro_spawn_funcs() {
   sp_st_fork = getent("st_fork_bad", "targetname");
   sp_st_fork add_spawn_function(::run_over);
-  a_st_scaffolding_left_0 = getentarray("st_scaffolding_left_0", "targetname");
+  a_st_scaffolding_left_0 = getEntArray("st_scaffolding_left_0", "targetname");
   array_thread(a_st_scaffolding_left_0, ::add_spawn_function, ::run_over);
   sp_st_scaffolding_middle_0 = getent("st_scaffolding_middle_0", "targetname");
   sp_st_scaffolding_middle_0 add_spawn_function(::shoot_at_target_untill_dead, level.player);
   sp_st_scaffolding_right_0 = getent("st_scaffolding_right_0", "targetname");
   sp_st_scaffolding_right_0 add_spawn_function(::shoot_at_target_untill_dead, level.player);
-  a_ai_targets = getentarray("ai_target", "script_noteworthy");
+  a_ai_targets = getEntArray("ai_target", "script_noteworthy");
   array_thread(a_ai_targets, ::add_spawn_function, ::set_lock_on_target, vectorscale((0, 0, 1), 45.0));
   add_spawn_function_veh("di_soct_0", ::enemy_soct_shoot_logic);
   add_spawn_function_veh("di_soct_0", ::set_lock_on_target, vectorscale((0, 0, 1), 32.0));
@@ -130,7 +130,7 @@ drone_intro() {
 }
 
 cleanup_di_right_guys() {
-  a_ents = getentarray("di_right_0_ai", "targetname");
+  a_ents = getEntArray("di_right_0_ai", "targetname");
 
   if(isDefined(a_ents) && a_ents.size > 0) {
     for(i = 0; i < a_ents.size; i++) {
@@ -303,7 +303,7 @@ escape_intro_hints() {
   flag_wait("vehicle_switched");
   level notify("end_vehicle_switch");
   wait 1;
-  screen_message_create(&"PAKISTAN_SHARED_SOCT_HINT_GAS", & "PAKISTAN_SHARED_SOCT_HINT_BRAKE");
+  screen_message_create(&"PAKISTAN_SHARED_SOCT_HINT_GAS", &"PAKISTAN_SHARED_SOCT_HINT_BRAKE");
   trigger_wait("sm_st_fork");
   screen_message_delete();
 }
@@ -357,7 +357,7 @@ drone_intro_blockade() {
       level notify("di_blockade_destroyed");
       level.blockade_destroyed_time = gettime();
       s_blockade_obj = getstruct("blockade_obj", "targetname");
-      a_blockades = getentarray("drone_blockade_01", "targetname");
+      a_blockades = getEntArray("drone_blockade_01", "targetname");
       array_delete(a_blockades);
       b_blockade_destroyed = 1;
     }

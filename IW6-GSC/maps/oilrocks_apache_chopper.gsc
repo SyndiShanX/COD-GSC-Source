@@ -35,7 +35,7 @@ blackhawk_hides_away() {
 
 objectives() {
   var_0 = maps\_utility::obj("apache_escort");
-  objective_add(var_0, "active", & "OILROCKS_OBJ_APACHE_CHOPPER");
+  objective_add(var_0, "active", &"OILROCKS_OBJ_APACHE_CHOPPER");
   objective_current(var_0);
   common_scripts\utility::flag_wait("FLAG_apache_chopper_finished");
   maps\_utility::objective_complete(var_0);

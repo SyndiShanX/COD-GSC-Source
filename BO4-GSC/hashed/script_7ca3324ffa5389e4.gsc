@@ -44,7 +44,7 @@ function_6452f9c5(index) {
   return getscriptbundle(kit.var_4fa85a25);
 }
 
-private function_c72eb508() {
+function_c72eb508() {
   if(isDefined(self.var_9f20891)) {
     return self.var_9f20891;
   }
@@ -55,8 +55,7 @@ private function_c72eb508() {
   return self.var_9f20891;
 }
 
-private function_37ae175b(type) {
-
+function_37ae175b(type) {
   if(getdvarint(#"hash_9003cbb3abd93b7", 0) != 0) {
     count = function_3045dd71();
     return int(max(0, min(count, getdvarint(#"hash_9003cbb3abd93b7", 0) - 1)));
@@ -66,9 +65,9 @@ private function_37ae175b(type) {
     return self function_c72eb508();
   }
 
-    if(isbot(self)) {
-      return self function_c72eb508();
-    }
+  if(isbot(self)) {
+    return self function_c72eb508();
+  }
 
   var_5c27e968 = self function_7d5a3c48(currentsessionmode(), type);
   return var_5c27e968;

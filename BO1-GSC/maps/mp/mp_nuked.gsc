@@ -16,11 +16,11 @@ main() {
   level.onSpawnIntermission = ::nuked_intermission;
   maps\mp\gametypes\_teamset_urbanspecops::level_init();
   setdvar("compassmaxrange", "2100");
-  game["strings"]["war_callsign_a"] = & "MPUI_CALLSIGN_MAPNAME_A";
-  game["strings"]["war_callsign_b"] = & "MPUI_CALLSIGN_MAPNAME_B";
-  game["strings"]["war_callsign_c"] = & "MPUI_CALLSIGN_MAPNAME_C";
-  game["strings"]["war_callsign_d"] = & "MPUI_CALLSIGN_MAPNAME_D";
-  game["strings"]["war_callsign_e"] = & "MPUI_CALLSIGN_MAPNAME_E";
+  game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_MAPNAME_A";
+  game["strings"]["war_callsign_b"] = &"MPUI_CALLSIGN_MAPNAME_B";
+  game["strings"]["war_callsign_c"] = &"MPUI_CALLSIGN_MAPNAME_C";
+  game["strings"]["war_callsign_d"] = &"MPUI_CALLSIGN_MAPNAME_D";
+  game["strings"]["war_callsign_e"] = &"MPUI_CALLSIGN_MAPNAME_E";
   game["strings_menu"]["war_callsign_a"] = "@MPUI_CALLSIGN_MAPNAME_A";
   game["strings_menu"]["war_callsign_b"] = "@MPUI_CALLSIGN_MAPNAME_B";
   game["strings_menu"]["war_callsign_c"] = "@MPUI_CALLSIGN_MAPNAME_C";
@@ -42,8 +42,8 @@ main() {
   level thread nuked_bomb_drop_think();
 }
 move_spawn_point(targetname, start_point, new_point) {
-  spawn_points = getentarray(targetname, "classname");
-  for (i = 0; i < spawn_points.size; i++) {
+  spawn_points = getEntArray(targetname, "classname");
+  for(i = 0; i < spawn_points.size; i++) {
     if(distancesquared(spawn_points[i].origin, start_point) < 1) {
       spawn_points[i].origin = new_point;
       return;
@@ -53,7 +53,7 @@ move_spawn_point(targetname, start_point, new_point) {
 nuked_mannequin_init() {
   keep_count = 28;
   level.mannequin_count = 0;
-  destructibles = GetEntArray("destructible", "targetname");
+  destructibles = getEntArray("destructible", "targetname");
   mannequins = nuked_mannequin_filter(destructibles);
   if(mannequins.size <= 0) {
     return;
@@ -61,7 +61,7 @@ nuked_mannequin_init() {
   remove_count = mannequins.size - keep_count;
   remove_count = clamp(remove_count, 0, remove_count);
   mannequins = array_randomize(mannequins);
-  for (i = 0; i < remove_count; i++) {
+  for(i = 0; i < remove_count; i++) {
     assert(isDefined(mannequins[i].target));
     collision = GetEnt(mannequins[i].target, "targetname");
     assert(isDefined(collision));
@@ -74,7 +74,7 @@ nuked_mannequin_init() {
 }
 nuked_mannequin_filter(destructibles) {
   mannequins = [];
-  for (i = 0; i < destructibles.size; i++) {
+  for(i = 0; i < destructibles.size; i++) {
     destructible = destructibles[i];
     if(IsSubStr(destructible.destructibledef, "male")) {
       mannequins[mannequins.size] = destructible;
@@ -93,12 +93,12 @@ nuked_bomb_drop_think() {
   cameraStart = GetStruct("endgame_camera_start", "targetname");
   cameraEnd = GetStruct(cameraStart.target, "targetname");
   bomb = GetEnt("nuked_bomb", "targetname");
-  for (;;) {
-    camera = Spawn("script_model", cameraStart.origin);
+  for(;;) {
+    camera = spawn("script_model", cameraStart.origin);
     camera.angles = cameraStart.angles;
-    camera SetModel("tag_origin");
+    camera setModel("tag_origin");
     level waittill("bomb_drop");
-    for (i = 0; i < get_players().size; i++) {
+    for(i = 0; i < get_players().size; i++) {
       player = get_players()[i];
       player CameraSetPosition(camera);
       player CameraSetLookAt();
@@ -115,10 +115,10 @@ nuked_bomb_drop_think() {
     accel_time = set_dvar_float_if_unset("scr_bomb_accel_time", ".75");
     bomb MoveTo(dest, time, accel_time, 0);
     wait(bomb_explode_delay);
-    playfx(level._effect["fx_mp_nuked_nuclear_explosion"], bomb.origin);
+    playFX(level._effect["fx_mp_nuked_nuclear_explosion"], bomb.origin);
     wait(glass_break_delay);
     level thread waitForGlassBreak();
-    cameraForward = anglestoforward(cameraEnd.angles);
+    cameraForward = anglesToForward(cameraEnd.angles);
     explodePoint = cameraEnd.origin + 20 * cameraForward;
     physicsExplosionSphere(explodePoint, 128, 128, 1);
     RadiusDamage(explodePoint, 128, 128, 128);
@@ -133,7 +133,7 @@ vibrate() {
   originalAngles = self.angles;
   angles0 = (originalAngles[0], originalAngles[1], originalAngles[2] - vibrateAmplitude);
   angles1 = (originalAngles[0], originalAngles[1], originalAngles[2] + vibrateAmplitude);
-  for (;;) {
+  for(;;) {
     angles0 = (originalAngles[0] - pitchVibrateAmplitude, originalAngles[1], originalAngles[2] - vibrateAmplitude);
     angles1 = (originalAngles[0] + pitchVibrateAmplitude, originalAngles[1], originalAngles[2] + vibrateAmplitude);
     self RotateTo(angles0, vibrateTime);
@@ -159,9 +159,9 @@ nuked_population_sign_think() {
   tens = 0;
   tens_model RotateRoll(step, 0.05);
   ones_model RotateRoll(step, 0.05);
-  for (;;) {
+  for(;;) {
     wait(1);
-    for (;;) {
+    for(;;) {
       num_players = get_players().size;
       dial = ones + (tens * 10);
       if(num_players < dial) {
@@ -204,9 +204,8 @@ nuked_doomsday_clock_init() {
   }
 }
 nuked_doomsday_clock_seconds_think() {
-  for (;;) {
+  for(;;) {
     self RotatePitch(360, 60);
     self waittill("rotatedone");
   }
 }
-

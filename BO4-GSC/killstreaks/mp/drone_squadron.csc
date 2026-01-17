@@ -5,11 +5,10 @@
 
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\system_shared;
-
 #namespace drone_squadron;
 
 autoexec __init__system__() {
-  system::register(#"drone_squadron", &__init__, undefined, #"killstreaks");
+  system::register(#"drone_squadron", &__init__, undefined, # "killstreaks");
 }
 
 __init__() {}

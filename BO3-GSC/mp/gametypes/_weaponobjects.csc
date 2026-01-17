@@ -13,7 +13,7 @@
 #namespace weaponobjects;
 
 function autoexec __init__sytem__() {
-  system::register("weaponobjects", & __init__, undefined, undefined);
+  system::register("weaponobjects", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -23,7 +23,7 @@ function __init__() {
 }
 
 function setupscriptmovercompassicons() {
-  if(!isdefined(level.scriptmovercompassicons)) {
+  if(!isDefined(level.scriptmovercompassicons)) {
     level.scriptmovercompassicons = [];
   }
   level.scriptmovercompassicons["wpn_t7_turret_emp_core"] = "compass_empcore_white";
@@ -35,10 +35,10 @@ function setupscriptmovercompassicons() {
 }
 
 function setupmissilecompassicons() {
-  if(!isdefined(level.missilecompassicons)) {
+  if(!isDefined(level.missilecompassicons)) {
     level.missilecompassicons = [];
   }
-  if(isdefined(getweapon("drone_strike"))) {
+  if(isDefined(getweapon("drone_strike"))) {
     level.missilecompassicons[getweapon("drone_strike")] = "compass_lodestar";
   }
 }

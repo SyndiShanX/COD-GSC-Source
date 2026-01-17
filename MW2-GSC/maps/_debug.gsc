@@ -6,7 +6,6 @@
 #include maps\_utility;
 #include common_scripts\utility;
 
-/#
 mainDebug() {
   level.animsound_hudlimit = 14;
   thread lastSightPosWatch();
@@ -42,63 +41,61 @@ mainDebug() {
   //	thread colordebug();
   //	thread debuggoalpos();
 }
-# /
 
+debugchains() {
+  nodes = GetAllNodes();
+  fnodenum = 0;
 
-  debugchains() {
-    nodes = GetAllNodes();
-    fnodenum = 0;
-
-    fnodes = [];
-    for (i = 0; i < nodes.size; i++) {
-      if((!(nodes[i].spawnflags & 2)) &&
-        (
-          ((IsDefined(nodes[i].target)) && ((GetNodeArray(nodes[i].target, "targetname")).size > 0)) ||
-          ((IsDefined(nodes[i].targetname)) && ((GetNodeArray(nodes[i].targetname, "target")).size > 0))
-        )
-      ) {
-        fnodes[fnodenum] = nodes[i];
-        fnodenum++;
-      }
-    }
-
-    count = 0;
-
-    while (1) {
-      if(GetDvar("chain") == "1") {
-        for (i = 0; i < fnodes.size; i++) {
-          if(Distance(level.player GetOrigin(), fnodes[i].origin) < 1500) {
-            Print3d(fnodes[i].origin, "yo", (0.2, 0.8, 0.5), 0.45);
-            /*
-            count++;
-            if( count > 25 )
-            {
-            	count = 0;
-            	waitframe();
-            }
-            */
-          }
-        }
-
-        friends = GetAIArray("allies");
-        for (i = 0; i < friends.size; i++) {
-          node = friends[i] animscripts\utility::GetClaimedNode();
-          if(IsDefined(node))
-            Line(friends[i].origin + (0, 0, 35), node.origin, (0.2, 0.5, 0.8), 0.5);
-        }
-
-      }
-      waitframe();
+  fnodes = [];
+  for(i = 0; i < nodes.size; i++) {
+    if((!(nodes[i].spawnflags & 2)) &&
+      (
+        ((isDefined(nodes[i].target)) && ((GetNodeArray(nodes[i].target, "targetname")).size > 0)) ||
+        ((isDefined(nodes[i].targetname)) && ((GetNodeArray(nodes[i].targetname, "target")).size > 0))
+      )
+    ) {
+      fnodes[fnodenum] = nodes[i];
+      fnodenum++;
     }
   }
+
+  count = 0;
+
+  while(1) {
+    if(GetDvar("chain") == "1") {
+      for(i = 0; i < fnodes.size; i++) {
+        if(Distance(level.player GetOrigin(), fnodes[i].origin) < 1500) {
+          Print3d(fnodes[i].origin, "yo", (0.2, 0.8, 0.5), 0.45);
+          /*
+          count++;
+          if( count > 25 )
+          {
+          	count = 0;
+          	waitframe();
+          }
+          */
+        }
+      }
+
+      friends = GetAIArray("allies");
+      for(i = 0; i < friends.size; i++) {
+        node = friends[i] animscripts\utility::GetClaimedNode();
+        if(isDefined(node))
+          Line(friends[i].origin + (0, 0, 35), node.origin, (0.2, 0.5, 0.8), 0.5);
+      }
+
+    }
+    waitframe();
+  }
+}
 
 debug_enemyPos(num) {
   ai = GetAIArray();
 
-  for (i = 0; i < ai.size; i++) {
-    if(ai[i] GetEntityNumber() != num)
+  for(i = 0; i < ai.size; i++) {
+    if(ai[i] GetEntityNumber() != num) {
       continue;
-
+    }
     ai[i] thread debug_enemyPosProc();
     break;
   }
@@ -107,10 +104,10 @@ debug_enemyPos(num) {
 debug_stopEnemyPos(num) {
   ai = GetAIArray();
 
-  for (i = 0; i < ai.size; i++) {
-    if(ai[i] GetEntityNumber() != num)
+  for(i = 0; i < ai.size; i++) {
+    if(ai[i] GetEntityNumber() != num) {
       continue;
-
+    }
     ai[i] notify("stop_drawing_enemy_pos");
     break;
   }
@@ -119,15 +116,15 @@ debug_stopEnemyPos(num) {
 debug_enemyPosProc() {
   self endon("death");
   self endon("stop_drawing_enemy_pos");
-  for (;;) {
+  for(;;) {
     wait(0.05);
 
     if(IsAlive(self.enemy))
       Line(self.origin + (0, 0, 70), self.enemy.origin + (0, 0, 70), (0.8, 0.2, 0.0), 0.5);
 
-    if(!self animscripts\utility::hasEnemySightPos())
+    if(!self animscripts\utility::hasEnemySightPos()) {
       continue;
-
+    }
     pos = animscripts\utility::getEnemySightPos();
     Line(self.origin + (0, 0, 70), pos, (0.9, 0.5, 0.3), 0.5);
   }
@@ -137,26 +134,26 @@ debug_enemyPosReplay() {
   ai = GetAIArray();
   guy = undefined;
 
-  for (i = 0; i < ai.size; i++) {
+  for(i = 0; i < ai.size; i++) {
     //		if( ai[ i ] GetEntityNumber() != num )
     //			continue;
 
     guy = ai[i];
-    if(!isalive(guy))
+    if(!isalive(guy)) {
       continue;
-
-    if(IsDefined(guy.lastEnemySightPos))
+    }
+    if(isDefined(guy.lastEnemySightPos))
       Line(guy.origin + (0, 0, 65), guy.lastEnemySightPos, (1, 0, 1), 0.5);
 
-    if(IsDefined(guy.goodShootPos)) {
+    if(isDefined(guy.goodShootPos)) {
       if(guy IsBadGuy())
         color = (1, 0, 0);
       else
         color = (0, 0, 1);
 
-      //			nodeOffset = guy GetEye();
+      //			nodeOffset = guy getEye();
       nodeOffset = guy.origin + (0, 0, 54);
-      if(IsDefined(guy.node)) {
+      if(isDefined(guy.node)) {
         if(guy.node.type == "Cover Left") {
           cornerNode = true;
           nodeOffset = AnglesToRight(guy.node.angles);
@@ -178,38 +175,36 @@ debug_enemyPosReplay() {
   }
   if(1) return;
 
-  if(!isalive(guy))
+  if(!isalive(guy)) {
     return;
-
+  }
   if(IsAlive(guy.enemy))
     Line(guy.origin + (0, 0, 70), guy.enemy.origin + (0, 0, 70), (0.6, 0.2, 0.2), 0.5);
 
-  if(IsDefined(guy.lastEnemySightPos))
+  if(isDefined(guy.lastEnemySightPos))
     Line(guy.origin + (0, 0, 65), guy.lastEnemySightPos, (0, 0, 1), 0.5);
 
   if(IsAlive(guy.goodEnemy))
     Line(guy.origin + (0, 0, 50), guy.goodEnemy.origin, (1, 0, 0), 0.5);
 
-  if(!guy animscripts\utility::hasEnemySightPos())
+  if(!guy animscripts\utility::hasEnemySightPos()) {
     return;
-
+  }
   pos = guy animscripts\utility::getEnemySightPos();
   Line(guy.origin + (0, 0, 55), pos, (0.2, 0.2, 0.6), 0.5);
 
-  if(IsDefined(guy.goodShootPos))
+  if(isDefined(guy.goodShootPos))
     Line(guy.origin + (0, 0, 45), guy.goodShootPos, (0.2, 0.6, 0.2), 0.5);
 }
 
 drawEntTag(num) {
-  /#
   ai = GetAIArray();
-  for (i = 0; i < ai.size; i++) {
+  for(i = 0; i < ai.size; i++) {
     if(ai[i] GetEntNum() != num)
       continue;
     ai[i] thread dragTagUntilDeath(GetDebugDvar("debug_tag"));
   }
   SetDvar("debug_enttag", "");
-  # /
 }
 
 drawTag(tag, opcolor, drawtime) {
@@ -221,8 +216,8 @@ drawTag(tag, opcolor, drawtime) {
 drawOrgForever(opcolor) {
   org = undefined;
   ang = undefined;
-  for (;;) {
-    if(IsDefined(self)) {
+  for(;;) {
+    if(isDefined(self)) {
       org = self.origin;
       ang = self.angles;
     }
@@ -246,14 +241,14 @@ drawOrgForever(opcolor) {
 =============
 */
 drawArrowForever(org, ang) {
-  for (;;) {
+  for(;;) {
     drawArrow(org, ang);
     wait(0.05);
   }
 }
 
 drawOriginForever() {
-  while (IsDefined(self)) {
+  while(isDefined(self)) {
     drawArrow(self.origin, self.angles);
     wait(0.05);
   }
@@ -275,7 +270,7 @@ drawOriginForever() {
 */
 drawArrow(org, ang, opcolor, drawtime) {
   scale = 10;
-  forward = AnglesToForward(ang);
+  forward = anglesToForward(ang);
   forwardFar = vector_multiply(forward, scale);
   forwardClose = vector_multiply(forward, (scale * 0.8));
   right = AnglesToRight(ang);
@@ -289,13 +284,13 @@ drawArrow(org, ang, opcolor, drawtime) {
   red = (0.9, 0.2, 0.2);
   green = (0.2, 0.9, 0.2);
   blue = (0.2, 0.2, 0.9);
-  if(IsDefined(opcolor)) {
+  if(isDefined(opcolor)) {
     red = opcolor;
     green = opcolor;
     blue = opcolor;
   }
 
-  if(!isdefined(drawtime))
+  if(!isDefined(drawtime))
     drawtime = 1;
 
   Line(org, org + forwardFar, red, 0.9, 0, drawtime);
@@ -321,26 +316,25 @@ drawArrow(org, ang, opcolor, drawtime) {
 =============
 */
 drawForwardForever(scale, color) {
-  if(!isdefined(scale))
+  if(!isDefined(scale))
     scale = 100;
-  if(!isdefined(color))
+  if(!isDefined(color))
     color = (0, 1, 0);
-  for (;;) {
-    if(!isdefined(self))
+  for(;;) {
+    if(!isDefined(self))
       return;
-    forward = AnglesToForward(self.angles);
+    forward = anglesToForward(self.angles);
     Line(self.origin, self.origin + forward * scale, color);
     wait(0.05);
   }
 }
 
 drawPlayerViewForever() {
-  for (;;) {
+  for(;;) {
     drawArrow(level.player.origin, level.player GetPlayerAngles(), (1, 1, 1));
     wait(0.05);
   }
 }
-
 
 /*
 =============
@@ -357,8 +351,8 @@ drawPlayerViewForever() {
 =============
 */
 drawTagForever(tag, opcolor) {
-  for (;;) {
-    if(!isdefined(self))
+  for(;;) {
+    if(!isDefined(self))
       return;
     drawTag(tag, opcolor);
     wait(0.05);
@@ -366,9 +360,10 @@ drawTagForever(tag, opcolor) {
 }
 
 drawTagTrails(tag, opcolor) {
-  for (;;) {
-    if(!isdefined(self.origin))
+  for(;;) {
+    if(!isDefined(self.origin)) {
       break;
+    }
     drawTag(tag, opcolor, 1000);
     wait(0.05);
   }
@@ -376,11 +371,13 @@ drawTagTrails(tag, opcolor) {
 
 dragTagUntilDeath(tag, opcolor) {
   self endon("death");
-  for (;;) {
-    if(!isdefined(self))
+  for(;;) {
+    if(!isDefined(self)) {
       break;
-    if(!isdefined(self.origin))
+    }
+    if(!isDefined(self.origin)) {
       break;
+    }
     drawTag(tag, opcolor);
     wait(0.05);
   }
@@ -389,7 +386,7 @@ dragTagUntilDeath(tag, opcolor) {
 viewTag(type, tag) {
   if(type == "ai") {
     ai = GetAIArray();
-    for (i = 0; i < ai.size; i++)
+    for(i = 0; i < ai.size; i++)
       ai[i] drawTag(tag);
   }
 }
@@ -398,7 +395,7 @@ debug_corner() {
   level.player.ignoreme = true;
   nodes = GetAllNodes();
   corners = [];
-  for (i = 0; i < nodes.size; i++) {
+  for(i = 0; i < nodes.size; i++) {
     if(nodes[i].type == "Cover Left")
       corners[corners.size] = nodes[i];
     if(nodes[i].type == "Cover Right")
@@ -406,28 +403,29 @@ debug_corner() {
   }
 
   ai = GetAIArray();
-  for (i = 0; i < ai.size; i++)
+  for(i = 0; i < ai.size; i++)
     ai[i] Delete();
 
   level.debugspawners = GetSpawnerArray();
   level.activeNodes = [];
   level.completedNodes = [];
-  for (i = 0; i < level.debugspawners.size; i++)
+  for(i = 0; i < level.debugspawners.size; i++)
     level.debugspawners[i].targetname = "blah";
 
   covered = 0;
-  for (i = 0; i < 30; i++) {
-    if(i >= corners.size)
+  for(i = 0; i < 30; i++) {
+    if(i >= corners.size) {
       break;
+    }
 
     corners[i] thread coverTest();
     covered++;
   }
 
-  if(corners.size <= 30)
+  if(corners.size <= 30) {
     return;
-
-  for (;;) {
+  }
+  for(;;) {
     level waittill("debug_next_corner");
     if(covered >= corners.size)
       covered = 0;
@@ -444,35 +442,35 @@ coverTest() {
 coverSetupAnim() {
   spawn = undefined;
   spawner = undefined;
-  for (;;) {
-    for (i = 0; i < level.debugspawners.size; i++) {
+  for(;;) {
+    for(i = 0; i < level.debugspawners.size; i++) {
       wait(0.05);
       spawner = level.debugspawners[i];
       nearActive = false;
-      for (p = 0; p < level.activeNodes.size; p++) {
+      for(p = 0; p < level.activeNodes.size; p++) {
         if(Distance(level.activeNodes[p].origin, self.origin) > 250)
           continue;
         nearActive = true;
         break;
       }
-      if(nearActive)
+      if(nearActive) {
         continue;
-
+      }
       completed = false;
-      for (p = 0; p < level.completedNodes.size; p++) {
+      for(p = 0; p < level.completedNodes.size; p++) {
         if(level.completedNodes[p] != self)
           continue;
         completed = true;
         break;
       }
-      if(completed)
+      if(completed) {
         continue;
-
+      }
       level.activeNodes[level.activeNodes.size] = self;
       spawner.origin = self.origin;
       spawner.angles = self.angles;
       spawner.count = 1;
-      spawn = spawner StalingradSpawn();
+      spawn = spawner Stalingradspawn();
       if(spawn_failed(spawn)) {
         removeActiveSpawner(self);
         continue;
@@ -480,8 +478,9 @@ coverSetupAnim() {
 
       break;
     }
-    if(IsAlive(spawn))
+    if(IsAlive(spawn)) {
       break;
+    }
   }
 
   wait(1);
@@ -500,7 +499,7 @@ coverSetupAnim() {
 
 removeActiveSpawner(spawner) {
   newSpawners = [];
-  for (p = 0; p < level.activeNodes.size; p++) {
+  for(p = 0; p < level.activeNodes.size; p++) {
     if(level.activeNodes[p] == spawner)
       continue;
     newSpawners[newSpawners.size] = level.activeNodes[p];
@@ -509,7 +508,7 @@ removeActiveSpawner(spawner) {
 }
 
 createLine(org) {
-  for (;;) {
+  for(;;) {
     Line(org + (0, 0, 35), org, (0.2, 0.5, 0.8), 0.5);
     wait(0.05);
   }
@@ -517,12 +516,12 @@ createLine(org) {
 
 createLineConstantly(ent) {
   org = undefined;
-  while (IsAlive(ent)) {
+  while(IsAlive(ent)) {
     org = ent.origin;
     wait(0.05);
   }
 
-  for (;;) {
+  for(;;) {
     Line(org + (0, 0, 35), org, (1.0, 0.2, 0.1), 0.5);
     wait(0.05);
   }
@@ -532,7 +531,7 @@ debugMisstime() {
   self notify("stopdebugmisstime");
   self endon("stopdebugmisstime");
   self endon("death");
-  for (;;) {
+  for(;;) {
     if(self.a.misstime <= 0)
       Print3d(self GetTagOrigin("TAG_EYE") + (0, 0, 15), "hit", (0.3, 1, 1), 1);
     else
@@ -546,27 +545,23 @@ debugMisstimeOff() {
 }
 
 setEmptyDvar(dvar, setting) {
-  /#
   if(GetDebugDvar(dvar) == "")
     SetDvar(dvar, setting);
-  # /
 }
 
 debugJump(num) {
-  /#
   ai = GetAIArray();
-  for (i = 0; i < ai.size; i++) {
-    if(ai[i] GetEntNum() != num)
+  for(i = 0; i < ai.size; i++) {
+    if(ai[i] GetEntNum() != num) {
       continue;
-
+    }
     Line(level.player.origin, ai[i].origin, (0.2, 0.3, 1.0));
     return;
   }
-  # /
+
 }
 
 debugDvars() {
-  /#
 
   create_dvar("chasecam", "0");
   create_dvar("viewfx", "");
@@ -657,7 +652,7 @@ debugDvars() {
   if(GetDvar("tag") == "")
     SetDvar("tag", "");
 
-  for (i = 1; i <= level.animsound_hudlimit; i++) {
+  for(i = 1; i <= level.animsound_hudlimit; i++) {
     if(GetDvar("tag" + i) == "")
       SetDvar("tag" + i, "");
   }
@@ -712,7 +707,7 @@ debugDvars() {
   //thread debug_character_count();
 
   noAnimscripts = GetDvar("debug_noanimscripts") == "on";
-  for (;;) {
+  for(;;) {
     if(GetDebugDvarInt("getdot") > 0) {
       draw_dot_for_ent(GetDebugDvarInt("getdot"));
     }
@@ -723,7 +718,7 @@ debugDvars() {
     }
 
     if(GetDvar("debug_hud") != "") {
-      if(IsDefined(level.amb_hud)) {
+      if(isDefined(level.amb_hud)) {
         foreach(hud_array in level.amb_hud) {
           foreach(hud in hud_array) {
             hud Destroy();
@@ -732,7 +727,7 @@ debugDvars() {
         level.amb_hud = undefined;
       }
 
-      if(IsDefined(level.bcs_hud)) {
+      if(isDefined(level.bcs_hud)) {
         level.bcs_hud Destroy();
         level.bcs_hud = undefined;
       }
@@ -761,7 +756,7 @@ debugDvars() {
     if(GetDvar("tag") != "")
       thread debug_animSoundTagSelected();
 
-    for (i = 1; i <= level.animsound_hudlimit; i++) {
+    for(i = 1; i <= level.animsound_hudlimit; i++) {
       if(GetDvar("tag" + i) != "")
         thread debug_animSoundTag(i);
     }
@@ -802,13 +797,13 @@ debugDvars() {
     if(GetDebugDvarInt("vehicle_info")) {
       random_noteworthy = RandomInt(34234) + "_" + RandomInt(23423);
       SetDvar("vehicle_info", 0);
-      vehicles = GetEntArray("script_vehicle", "code_classname");
+      vehicles = getEntArray("script_vehicle", "code_classname");
       foreach(vehicle in vehicles) {
-        if(!isdefined(vehicle))
+        if(!isDefined(vehicle))
           continue;
-        if(IsSpawner(vehicle))
+        if(IsSpawner(vehicle)) {
           continue;
-
+        }
         vehicle print_vehicle_info(random_noteworthy);
       }
     }
@@ -840,9 +835,9 @@ debugDvars() {
     }
 
     if(GetDebugDvar("debug_trace") == "on") {
-      if(!isdefined(level.traceStart))
+      if(!isDefined(level.traceStart))
         thread showDebugTrace();
-      level.traceStart = level.player GetEye();
+      level.traceStart = level.player getEye();
       SetDvar("debug_trace", "off");
     }
 
@@ -852,13 +847,12 @@ debugDvars() {
 
     wait(0.05);
   }
-  # /
+
 }
 
 remove_reflection_objects() {
-  /#
-  if((level.debug_reflection == 2 || level.debug_reflection == 3) && IsDefined(level.debug_reflection_objects)) {
-    for (i = 0; i < level.debug_reflection_objects.size; i++) {
+  if((level.debug_reflection == 2 || level.debug_reflection == 3) && isDefined(level.debug_reflection_objects)) {
+    for(i = 0; i < level.debug_reflection_objects.size; i++) {
       level.debug_reflection_objects[i] Delete();
     }
     level.debug_reflection_objects = undefined;
@@ -867,31 +861,27 @@ remove_reflection_objects() {
   if(level.debug_reflection == 1 || level.debug_reflection == 3) {
     level.debug_reflectionobject Delete();
   }
-  # /
+
 }
 
 create_reflection_objects() {
-  /#
   reflection_locs = GetReflectionLocs();
-  for (i = 0; i < reflection_locs.size; i++) {
-    level.debug_reflection_objects[i] = Spawn("script_model", reflection_locs[i]);
-    level.debug_reflection_objects[i] SetModel("test_sphere_silver");
+  for(i = 0; i < reflection_locs.size; i++) {
+    level.debug_reflection_objects[i] = spawn("script_model", reflection_locs[i]);
+    level.debug_reflection_objects[i] setModel("test_sphere_silver");
   }
-  # /
+
 }
 
 create_reflection_object() {
-  /#
-  level.debug_reflectionobject = Spawn("script_model", level.player GetEye() + (vector_multiply(AnglesToForward(level.player.angles), 100)));
-  level.debug_reflectionobject SetModel("test_sphere_silver");
-  level.debug_reflectionobject.origin = level.player GetEye() + (vector_multiply(AnglesToForward(level.player GetPlayerAngles()), 100));
+  level.debug_reflectionobject = spawn("script_model", level.player getEye() + (vector_multiply(anglesToForward(level.player.angles), 100)));
+  level.debug_reflectionobject setModel("test_sphere_silver");
+  level.debug_reflectionobject.origin = level.player getEye() + (vector_multiply(anglesToForward(level.player GetPlayerAngles()), 100));
   level.debug_reflectionobject LinkTo(level.player);
   thread debug_reflection_buttons();
-  # /
 }
 
 debug_reflection() {
-  /#
   if((GetDebugDvar("debug_reflection") == "2" && level.debug_reflection != 2) || (GetDebugDvar("debug_reflection") == "3" && level.debug_reflection != 3)) {
     remove_reflection_objects();
     if(GetDebugDvar("debug_reflection") == "2") {
@@ -910,15 +900,14 @@ debug_reflection() {
     remove_reflection_objects();
     level.debug_reflection = 0;
   }
-  # /
+
 }
 
 debug_reflection_buttons() {
-  /#
   offset = 100;
   lastoffset = offset;
   offsetinc = 50;
-  while (GetDebugDvar("debug_reflection") == "1" || GetDebugDvar("debug_reflection") == "3") {
+  while(GetDebugDvar("debug_reflection") == "1" || GetDebugDvar("debug_reflection") == "3") {
     if(level.player ButtonPressed("BUTTON_X"))
       offset += offsetinc;
     if(level.player ButtonPressed("BUTTON_Y"))
@@ -930,45 +919,41 @@ debug_reflection_buttons() {
     //		if( offset!=lastoffset )
     //		{
     level.debug_reflectionobject Unlink();
-    level.debug_reflectionobject.origin = level.player GetEye() + (vector_multiply(AnglesToForward(level.player GetPlayerAngles()), offset));
+    level.debug_reflectionobject.origin = level.player getEye() + (vector_multiply(anglesToForward(level.player GetPlayerAngles()), offset));
     lastoffset = offset;
     level.debug_reflectionobject LinkTo(level.player);
     //			}
     wait .05;
   }
-  # /
+
 }
 
 remove_fxlighting_object() {
-  /#
   if(level.debug_fxlighting == 1) {
     level.debug_fxlightingobject Delete();
   }
-  # /
+
 }
 
 create_fxlighting_object() {
-  /#
-  level.debug_fxlightingobject = Spawn("script_model", level.player GetEye() + (vector_multiply(AnglesToForward(level.player.angles), 100)));
-  level.debug_fxlightingobject SetModel("tag_origin");
-  level.debug_fxlightingobject.origin = level.player GetEye() + (vector_multiply(AnglesToForward(level.player GetPlayerAngles()), 100));
+  level.debug_fxlightingobject = spawn("script_model", level.player getEye() + (vector_multiply(anglesToForward(level.player.angles), 100)));
+  level.debug_fxlightingobject setModel("tag_origin");
+  level.debug_fxlightingobject.origin = level.player getEye() + (vector_multiply(anglesToForward(level.player GetPlayerAngles()), 100));
   level.debug_fxlightingobject LinkTo(level.player);
   level.debug_fxlightingobject thread play_fxlighting_fx();
   thread debug_fxlighting_buttons();
-  # /
 }
 
 play_fxlighting_fx() {
   self endon("death");
-  while (true) {
-    PlayFXOnTag(getfx("lighting_fraction"), self, "tag_origin");
+  while(true) {
+    playFXOnTag(getfx("lighting_fraction"), self, "tag_origin");
     wait(0.1);
   }
 
 }
 
 debug_fxlighting() {
-  /#
   if(GetDebugDvar("debug_fxlighting") == "1" && level.debug_fxlighting != 1) {
     create_fxlighting_object();
     level.debug_fxlighting = 1;
@@ -976,15 +961,14 @@ debug_fxlighting() {
     remove_fxlighting_object();
     level.debug_fxlighting = 0;
   }
-  # /
+
 }
 
 debug_fxlighting_buttons() {
-  /#
   offset = 100;
   lastoffset = offset;
   offsetinc = 50;
-  while (GetDebugDvar("debug_fxlighting") == "1" || GetDebugDvar("debug_fxlighting") == "3") {
+  while(GetDebugDvar("debug_fxlighting") == "1" || GetDebugDvar("debug_fxlighting") == "3") {
     if(level.player ButtonPressed("BUTTON_X"))
       offset += offsetinc;
     if(level.player ButtonPressed("BUTTON_Y"))
@@ -995,12 +979,12 @@ debug_fxlighting_buttons() {
       offset = 64;
 
     level.debug_fxlightingobject Unlink();
-    level.debug_fxlightingobject.origin = level.player GetEye() + (vector_multiply(AnglesToForward(level.player GetPlayerAngles()), offset));
+    level.debug_fxlightingobject.origin = level.player getEye() + (vector_multiply(anglesToForward(level.player GetPlayerAngles()), offset));
     lastoffset = offset;
     level.debug_fxlightingobject LinkTo(level.player);
     wait .05;
   }
-  # /
+
 }
 
 showDebugTrace() {
@@ -1009,35 +993,34 @@ showDebugTrace() {
   startOverride = (15.1859, -12.2822, 4.071);
   endOverride = (947.2, -10918, 64.9514);
 
-  Assert(!isdefined(level.traceEnd));
-  for (;;) {
+  Assert(!isDefined(level.traceEnd));
+  for(;;) {
     wait(0.05);
     start = startOverride;
     end = endOverride;
-    if(!isdefined(startOverride))
+    if(!isDefined(startOverride))
       start = level.traceStart;
-    if(!isdefined(endOverride))
-      end = level.player GetEye();
+    if(!isDefined(endOverride))
+      end = level.player getEye();
 
-    trace = BulletTrace(start, end, false, undefined);
+    trace = bulletTrace(start, end, false, undefined);
     Line(start, trace["position"], (0.9, 0.5, 0.8), 0.5);
   }
 }
 
 hatmodel() {
-  /#
-  for (;;) {
+  for(;;) {
     if(GetDebugDvar("debug_hatmodel") == "off")
       return;
     noHat = [];
     ai = GetAIArray();
 
-    for (i = 0; i < ai.size; i++) {
-      if(IsDefined(ai[i].hatmodel))
+    for(i = 0; i < ai.size; i++) {
+      if(isDefined(ai[i].hatmodel)) {
         continue;
-
+      }
       alreadyKnown = false;
-      for (p = 0; p < noHat.size; p++) {
+      for(p = 0; p < noHat.size; p++) {
         if(noHat[p] != ai[i].classname)
           continue;
         alreadyKnown = true;
@@ -1050,13 +1033,13 @@ hatmodel() {
     if(noHat.size) {
       PrintLn(" ");
       PrintLn("The following AI have no Hatmodel, so helmets can not pop off on head-shot death:");
-      for (i = 0; i < noHat.size; i++)
+      for(i = 0; i < noHat.size; i++)
         PrintLn("Classname: ", noHat[i]);
       PrintLn("To disable hatModel spam, type debug_hatmodel off");
     }
     wait(15);
   }
-  # /
+
 }
 
 debug_character_count() {
@@ -1066,8 +1049,8 @@ debug_character_count() {
   drones.alignY = "middle";
   drones.x = 10;
   drones.y = 100;
-  // drones: [&&1]
-  drones.label = & "DEBUG_DRONES";
+  // drones: [&& 1]
+  drones.label = &"DEBUG_DRONES";
   drones.alpha = 0;
 
   //allies
@@ -1076,8 +1059,8 @@ debug_character_count() {
   allies.alignY = "middle";
   allies.x = 10;
   allies.y = 115;
-  // allies: [&&1]
-  allies.label = & "DEBUG_ALLIES";
+  // allies: [&& 1]
+  allies.label = &"DEBUG_ALLIES";
   allies.alpha = 0;
 
   //allies
@@ -1086,8 +1069,8 @@ debug_character_count() {
   axis.alignY = "middle";
   axis.x = 10;
   axis.y = 130;
-  // axis: [&&1]
-  axis.label = & "DEBUG_AXIS";
+  // axis: [&& 1]
+  axis.label = &"DEBUG_AXIS";
   axis.alpha = 0;
 
   //vehicles
@@ -1096,8 +1079,8 @@ debug_character_count() {
   vehicles.alignY = "middle";
   vehicles.x = 10;
   vehicles.y = 145;
-  // drones: [&&1]
-  vehicles.label = & "DEBUG_VEHICLES";
+  // drones: [&& 1]
+  vehicles.label = &"DEBUG_VEHICLES";
   vehicles.alpha = 0;
 
   //total
@@ -1106,12 +1089,12 @@ debug_character_count() {
   total.alignY = "middle";
   total.x = 10;
   total.y = 160;
-  // total: [&&1]
-  total.label = & "DEBUG_TOTAL";
+  // total: [&& 1]
+  total.label = &"DEBUG_TOTAL";
   total.alpha = 0;
 
   lastdvar = "off";
-  for (;;) {
+  for(;;) {
     dvar = GetDvar("debug_character_count");
     if(dvar == "off") {
       if(dvar != lastdvar) {
@@ -1136,7 +1119,7 @@ debug_character_count() {
       }
     }
     //drones
-    count_drones = GetEntArray("drone", "targetname").size;
+    count_drones = getEntArray("drone", "targetname").size;
     drones SetValue(count_drones);
 
     //allies
@@ -1147,7 +1130,7 @@ debug_character_count() {
     count_axis = GetAIArray("bad_guys").size;
     axis SetValue(count_axis);
 
-    vehicles SetValue(GetEntArray("script_vehicle", "classname").size);
+    vehicles SetValue(getEntArray("script_vehicle", "classname").size);
 
     //total
     total SetValue(count_drones + count_allies + count_axis);
@@ -1162,58 +1145,52 @@ nuke() {
 }
 
 debug_nuke() {
-  /#
   dvar = GetDvar("debug_nuke");
   if(dvar == "on") {
     ai = GetAISpeciesArray("bad_guys", "all");
-    for (i = 0; i < ai.size; i++)
+    for(i = 0; i < ai.size; i++)
       ai[i] nuke();
   } else
   if(dvar == "ai") {
     ai = GetAIArray("bad_guys");
-    for (i = 0; i < ai.size; i++)
+    for(i = 0; i < ai.size; i++)
       ai[i] nuke();
   } else
   if(dvar == "dogs") {
     ai = GetAISpeciesArray("bad_guys", "dog");
-    for (i = 0; i < ai.size; i++)
+    for(i = 0; i < ai.size; i++)
       ai[i] nuke();
   }
   SetDvar("debug_nuke", "off");
-  # /
 }
 
-debug_missTime() {
-
-}
+debug_missTime() {}
 
 camera() {
   wait(0.05);
-  cameras = GetEntArray("camera", "targetname");
-  for (i = 0; i < cameras.size; i++) {
+  cameras = getEntArray("camera", "targetname");
+  for(i = 0; i < cameras.size; i++) {
     ent = GetEnt(cameras[i].target, "targetname");
     cameras[i].origin2 = ent.origin;
     cameras[i].angles = VectorToAngles(ent.origin - cameras[i].origin);
   }
-  for (;;) {
-    /#
+  for(;;) {
     if(GetDebugDvar("camera") != "on") {
       if(GetDebugDvar("camera") != "off")
         SetDvar("camera", "off");
       wait(1);
       continue;
     }
-    # /
 
-      ai = GetAIArray("axis");
+    ai = GetAIArray("axis");
     if(!ai.size) {
       freePlayer();
       wait(0.5);
       continue;
     }
     cameraWithEnemy = [];
-    for (i = 0; i < cameras.size; i++) {
-      for (p = 0; p < ai.size; p++) {
+    for(i = 0; i < cameras.size; i++) {
+      for(p = 0; p < ai.size; p++) {
         if(Distance(cameras[i].origin, ai[p].origin) > 256)
           continue;
         cameraWithEnemy[cameraWithEnemy.size] = cameras[i];
@@ -1227,20 +1204,20 @@ camera() {
     }
 
     cameraWithPlayer = [];
-    for (i = 0; i < cameraWithEnemy.size; i++) {
+    for(i = 0; i < cameraWithEnemy.size; i++) {
       camera = cameraWithEnemy[i];
 
       start = camera.origin2;
       end = camera.origin;
       difference = VectorToAngles((end[0], end[1], end[2]) - (start[0], start[1], start[2]));
       angles = (0, difference[1], 0);
-      forward = AnglesToForward(angles);
+      forward = anglesToForward(angles);
 
       difference = VectorNormalize(end - level.player.origin);
       dot = VectorDot(forward, difference);
-      if(dot < 0.85)
+      if(dot < 0.85) {
         continue;
-
+      }
       cameraWithPlayer[cameraWithPlayer.size] = camera;
     }
 
@@ -1252,11 +1229,11 @@ camera() {
 
     dist = Distance(level.player.origin, cameraWithPlayer[0].origin);
     newcam = cameraWithPlayer[0];
-    for (i = 1; i < cameraWithPlayer.size; i++) {
+    for(i = 1; i < cameraWithPlayer.size; i++) {
       newdist = Distance(level.player.origin, cameraWithPlayer[i].origin);
-      if(newdist > dist)
+      if(newdist > dist) {
         continue;
-
+      }
       newcam = cameraWithPlayer[i];
       dist = newdist;
     }
@@ -1279,7 +1256,7 @@ setPlayerToCamera(camera) {
 	waitframe();
 	thread anglescheck();
 
-	if( !isdefined( level.camera ) )
+	if( !isDefined( level.camera ) )
 		return;
 
 //	wait( 1 );
@@ -1342,7 +1319,7 @@ setPlayerToCamera(camera) {
 */
 
 anglescheck() {
-  while (1) {
+  while(1) {
     if(GetDvar("angles", "0") == "1") {
       PrintLn("origin " + level.player GetOrigin());
       PrintLn("angles " + level.player.angles);
@@ -1353,7 +1330,7 @@ anglescheck() {
 }
 
 dolly() {
-  if(!isdefined(level.dollyTime))
+  if(!isDefined(level.dollyTime))
     level.dollyTime = 5;
   SetDvar("dolly", "");
   thread dollyStart();
@@ -1362,7 +1339,7 @@ dolly() {
 }
 
 dollyStart() {
-  while (1) {
+  while(1) {
     if(GetDvar("dolly") == "start") {
       level.dollystart = level.player.origin;
       SetDvar("dolly", "");
@@ -1372,7 +1349,7 @@ dollyStart() {
 }
 
 dollyEnd() {
-  while (1) {
+  while(1) {
     if(GetDvar("dolly") == "end") {
       level.dollyend = level.player.origin;
       SetDvar("dolly", "");
@@ -1382,20 +1359,20 @@ dollyEnd() {
 }
 
 dollyGo() {
-  while (1) {
+  while(1) {
     wait(1);
     if(GetDvar("dolly") == "go") {
       SetDvar("dolly", "");
-      if(!isdefined(level.dollystart)) {
+      if(!isDefined(level.dollystart)) {
         PrintLn("NO Dolly Start!");
         continue;
       }
-      if(!isdefined(level.dollyend)) {
+      if(!isDefined(level.dollyend)) {
         PrintLn("NO Dolly End!");
         continue;
       }
 
-      org = Spawn("script_origin", (0, 0, 0));
+      org = spawn("script_origin", (0, 0, 0));
       org.origin = level.dollystart;
       level.player SetOrigin(org.origin);
       level.player LinkTo(org);
@@ -1409,13 +1386,13 @@ dollyGo() {
 
 deathspawnerPreview() {
   waittillframeend;
-  for (i = 0; i < 50; i++) {
-    if(!isdefined(level.deathspawnerents[i]))
+  for(i = 0; i < 50; i++) {
+    if(!isDefined(level.deathspawnerents[i]))
       continue;
     array = level.deathspawnerents[i];
-    for (p = 0; p < array.size; p++) {
+    for(p = 0; p < array.size; p++) {
       ent = array[p];
-      if(IsDefined(ent.truecount))
+      if(isDefined(ent.truecount))
         Print3d(ent.origin, i + ": " + ent.truecount, (0, 0.8, 0.6), 5);
       else
         Print3d(ent.origin, i + ": " + ".", (0, 0.8, 0.6), 5);
@@ -1424,40 +1401,40 @@ deathspawnerPreview() {
 }
 
 lastSightPosWatch() {
-  /#
-  for (;;) {
+  for(;;) {
     wait(0.05);
     num = GetDvarInt("lastsightpos");
-    if(!num)
+    if(!num) {
       continue;
-
+    }
     guy = undefined;
     ai = GetAIArray();
-    for (i = 0; i < ai.size; i++) {
-      if(ai[i] GetEntNum() != num)
+    for(i = 0; i < ai.size; i++) {
+      if(ai[i] GetEntNum() != num) {
         continue;
-
+      }
       guy = ai[i];
       break;
     }
 
-    if(!isalive(guy))
+    if(!isalive(guy)) {
       continue;
-
+    }
     if(guy animscripts\utility::hasEnemySightPos())
       org = guy animscripts\utility::getEnemySightPos();
     else
       org = undefined;
 
-    for (;;) {
+    for(;;) {
       newnum = GetDvarInt("lastsightpos");
-      if(num != newnum)
+      if(num != newnum) {
         break;
+      }
 
       if((IsAlive(guy)) && (guy animscripts\utility::hasEnemySightPos()))
         org = guy animscripts\utility::getEnemySightPos();
 
-      if(!isdefined(org)) {
+      if(!isDefined(org)) {
         wait(0.05);
         continue;
       }
@@ -1470,12 +1447,12 @@ lastSightPosWatch() {
       wait(0.05);
     }
   }
-  # /
+
 }
 
 watchMinimap() {
   PreCacheItem("defaultweapon");
-  while (1) {
+  while(1) {
     updateMinimapSetting();
     wait .25;
   }
@@ -1485,13 +1462,13 @@ updateMinimapSetting() {
   // use 0 for no required map aspect ratio.
   requiredMapAspectRatio = GetDvarFloat("scr_requiredMapAspectRatio", 1);
 
-  if(!isdefined(level.minimapheight)) {
+  if(!isDefined(level.minimapheight)) {
     SetDvar("scr_minimap_height", "0");
     level.minimapheight = 0;
   }
   minimapheight = GetDvarFloat("scr_minimap_height");
   if(minimapheight != level.minimapheight) {
-    if(IsDefined(level.minimaporigin)) {
+    if(isDefined(level.minimaporigin)) {
       level.minimapplayer Unlink();
       level.minimaporigin Delete();
       level notify("end_draw_map_bounds");
@@ -1502,7 +1479,7 @@ updateMinimapSetting() {
 
       player = level.player;
 
-      corners = GetEntArray("minimap_corner", "targetname");
+      corners = getEntArray("minimap_corner", "targetname");
       if(corners.size == 2) {
         viewpos = (corners[0].origin + corners[1].origin);
         viewpos = (viewpos[0] * .5, viewpos[1] * .5, viewpos[2] * .5);
@@ -1521,7 +1498,7 @@ updateMinimapSetting() {
         viewpostocorner = maxcorner - viewpos;
         viewpos = (viewpos[0], viewpos[1], viewpos[2] + minimapheight);
 
-        origin = Spawn("script_origin", player.origin);
+        origin = spawn("script_origin", player.origin);
 
         northvector = (Cos(GetNorthYaw()), Sin(GetNorthYaw()), 0);
         eastvector = (northvector[1], 0 - northvector[0], 0);
@@ -1594,9 +1571,9 @@ updateMinimapSetting() {
 
 getchains() {
   chainarray = [];
-  chainarray = GetEntArray("minimap_line", "script_noteworthy");
+  chainarray = getEntArray("minimap_line", "script_noteworthy");
   array = [];
-  for (i = 0; i < chainarray.size; i++) {
+  for(i = 0; i < chainarray.size; i++) {
     array[i] = chainarray[i] getchain();
   }
   return array;
@@ -1605,21 +1582,21 @@ getchains() {
 getchain() {
   array = [];
   ent = self;
-  while (IsDefined(ent)) {
+  while(isDefined(ent)) {
     array[array.size] = ent;
-    if(!isdefined(ent) || !isdefined(ent.target))
+    if(!isDefined(ent) || !isDefined(ent.target)) {
       break;
+    }
     ent = GetEnt(ent.target, "targetname");
-    if(IsDefined(ent) && ent == array[0]) {
+    if(isDefined(ent) && ent == array[0]) {
       array[array.size] = ent;
       break;
     }
   }
   originarray = [];
-  for (i = 0; i < array.size; i++)
+  for(i = 0; i < array.size; i++)
     originarray[i] = array[i].origin;
   return originarray;
-
 }
 
 vecscale(vec, scalar) {
@@ -1656,7 +1633,7 @@ drawMiniMapBounds(viewpos, mincorner, maxcorner) {
   textscale = diaglen * .003;
   chains = getchains();
 
-  while (1) {
+  while(1) {
     Line(corner0, corner1);
     Line(corner1, corner2);
     Line(corner2, corner3);
@@ -1670,14 +1647,12 @@ drawMiniMapBounds(viewpos, mincorner, maxcorner) {
   }
 }
 
-
-
 islookingatorigin(origin) {
   normalvec = VectorNormalize(origin - self GetShootAtPos());
   veccomp = VectorNormalize((origin - (0, 0, 24)) - self GetShootAtPos());
   insidedot = VectorDot(normalvec, veccomp);
 
-  anglevec = AnglesToForward(self GetPlayerAngles());
+  anglevec = anglesToForward(self GetPlayerAngles());
   vectordot = VectorDot(anglevec, normalvec);
   if(vectordot > insidedot)
     return true;
@@ -1693,24 +1668,24 @@ debug_colornodes() {
   array["axis"] = [];
   array["allies"] = [];
   array["neutral"] = [];
-  for (i = 0; i < ai.size; i++) {
+  for(i = 0; i < ai.size; i++) {
     guy = ai[i];
 
-    if(!isdefined(guy.currentColorCode))
+    if(!isDefined(guy.currentColorCode)) {
       continue;
-
+    }
     array[guy.team][guy.currentColorCode] = true;
 
     color = (1, 1, 1);
-    if(IsDefined(guy.script_forcecolor))
+    if(isDefined(guy.script_forcecolor))
       color = level.color_debug[guy.script_forcecolor];
 
     Print3d(guy.origin + (0, 0, 50), guy.currentColorCode, color, 1, 1);
 
     // axis dont do forcecolor behavior, they do follow the leader for force color
-    if(guy.team == "axis")
+    if(guy.team == "axis") {
       continue;
-
+    }
     guy try_to_draw_line_to_node();
   }
 
@@ -1720,14 +1695,14 @@ debug_colornodes() {
 
 draw_colorNodes(array, team) {
   keys = GetArrayKeys(array[team]);
-  for (i = 0; i < keys.size; i++) {
+  for(i = 0; i < keys.size; i++) {
     color = (1, 1, 1);
     // use the first letter of the key as the color
     color = level.color_debug[GetSubStr(keys[i], 0, 1)];
 
-    if(IsDefined(level.colorNodes_debug_array[team][keys[i]])) {
+    if(isDefined(level.colorNodes_debug_array[team][keys[i]])) {
       teamArray = level.colorNodes_debug_array[team][keys[i]];
-      for (p = 0; p < teamArray.size; p++) {
+      for(p = 0; p < teamArray.size; p++) {
         Print3d(teamArray[p].origin, "N-" + keys[i], color, 1, 1);
       }
     }
@@ -1736,34 +1711,34 @@ draw_colorNodes(array, team) {
 
 get_team_substr() {
   if(self.team == "allies") {
-    if(!isdefined(self.node.script_color_allies))
+    if(!isDefined(self.node.script_color_allies)) {
       return;
-
+    }
     return self.node.script_color_allies;
   }
 
   if(self.team == "axis") {
-    if(!isdefined(self.node.script_color_axis))
+    if(!isDefined(self.node.script_color_axis)) {
       return;
-
+    }
     return self.node.script_color_axis;
   }
 }
 
 try_to_draw_line_to_node() {
-  if(!isdefined(self.node))
+  if(!isDefined(self.node)) {
     return;
-
-  if(!isdefined(self.script_forcecolor))
+  }
+  if(!isDefined(self.script_forcecolor)) {
     return;
-
+  }
   substr = get_team_substr();
-  if(!isdefined(substr))
+  if(!isDefined(substr)) {
     return;
-
-  if(!issubstr(substr, self.script_forcecolor))
+  }
+  if(!issubstr(substr, self.script_forcecolor)) {
     return;
-
+  }
   Line(self.origin + (0, 0, 64), self.node.origin, level.color_debug[self.script_forcecolor]);
 }
 
@@ -1789,14 +1764,14 @@ debugThreat() {
 
 debugThreatCalc() {
   // debug the threatbias from entities towards the specified ent
-  /#
+
   ai = GetAIArray();
   entnum = GetDebugDvarInt("debug_threat");
   entity = undefined;
   if(entnum == 0) {
     entity = level.player;
   } else {
-    for (i = 0; i < ai.size; i++) {
+    for(i = 0; i < ai.size; i++) {
       if(entnum != ai[i] GetEntNum())
         continue;
       entity = ai[i];
@@ -1804,19 +1779,18 @@ debugThreatCalc() {
     }
   }
 
-  if(!isalive(entity))
+  if(!isalive(entity)) {
     return;
-
+  }
   entityGroup = entity GetThreatBiasGroup();
   array_thread(ai, ::displayThreat, entity, entityGroup);
   level.player thread displayThreat(entity, entityGroup);
-  # /
 }
 
 displayThreat(entity, entityGroup) {
-  if(self.team == entity.team)
+  if(self.team == entity.team) {
     return;
-
+  }
   selfthreat = 0;
   selfthreat += self.threatBias;
 
@@ -1824,9 +1798,9 @@ displayThreat(entity, entityGroup) {
   threat += entity.threatBias;
   myGroup = undefined;
 
-  if(IsDefined(entityGroup)) {
+  if(isDefined(entityGroup)) {
     myGroup = self GetThreatBiasGroup();
-    if(IsDefined(myGroup)) {
+    if(isDefined(myGroup)) {
       threat += GetThreatBias(entityGroup, myGroup);
       selfThreat += GetThreatBias(myGroup, entityGroup);
     }
@@ -1843,16 +1817,16 @@ displayThreat(entity, entityGroup) {
   col2 = (0.2, 0.5, 1);
   pacifist = !isplayer(self) && self.pacifist;
 
-  for (i = 0; i <= timer; i++) {
+  for(i = 0; i <= timer; i++) {
     Print3d(self.origin + (0, 0, 65), "Him to Me:", col, 3);
     Print3d(self.origin + (0, 0, 50), threat, col, 5);
-    if(IsDefined(entityGroup)) {
+    if(isDefined(entityGroup)) {
       Print3d(self.origin + (0, 0, 35), entityGroup, col, 2);
     }
 
     Print3d(self.origin + (0, 0, 15), "Me to Him:", col2, 3);
     Print3d(self.origin + (0, 0, 0), selfThreat, col2, 5);
-    if(IsDefined(mygroup)) {
+    if(isDefined(mygroup)) {
       Print3d(self.origin + (0, 0, -15), mygroup, col2, 2);
     }
     if(pacifist) {
@@ -1867,7 +1841,7 @@ debugColorFriendlies() {
   level.debug_color_friendlies = [];
   level.debug_color_huds = [];
 
-  for (;;) {
+  for(;;) {
     level waittill("updated_color_friendlies");
     draw_color_friendlies();
   }
@@ -1889,33 +1863,32 @@ draw_color_friendlies() {
 
   rgb = get_script_palette();
 
-  for (i = 0; i < colors.size; i++) {
+  for(i = 0; i < colors.size; i++) {
     colored_friendlies[colors[i]] = 0;
   }
 
-  for (i = 0; i < keys.size; i++) {
+  for(i = 0; i < keys.size; i++) {
     color = level.debug_color_friendlies[keys[i]];
     colored_friendlies[color]++;
   }
 
-  for (i = 0; i < level.debug_color_huds.size; i++) {
+  for(i = 0; i < level.debug_color_huds.size; i++) {
     level.debug_color_huds[i] Destroy();
   }
   level.debug_color_huds = [];
 
-  /#
-  if(GetDebugDvar("debug_colorfriendlies") != "on")
+  if(GetDebugDvar("debug_colorfriendlies") != "on") {
     return;
-  # /
+  }
 
-    x = 15;
+  x = 15;
   y = 365;
   offset_x = 25;
   offset_y = 25;
-  for (i = 0; i < colors.size; i++) {
+  for(i = 0; i < colors.size; i++) {
     if(colored_friendlies[colors[i]] <= 0)
       continue;
-    for (p = 0; p < colored_friendlies[colors[i]]; p++) {
+    for(p = 0; p < colored_friendlies[colors[i]]; p++) {
       overlay = NewHudElem();
       overlay.x = x + 25 * p;
       overlay.y = y;
@@ -1932,8 +1905,8 @@ draw_color_friendlies() {
 }
 
 playerNode() {
-  for (;;) {
-    if(IsDefined(level.player.node))
+  for(;;) {
+    if(isDefined(level.player.node))
       Print3d(level.player.node.origin + (0, 0, 25), "P-Node", (0.3, 1, 1), 1);
 
     wait(0.05);
@@ -1949,7 +1922,7 @@ drawUsers() {
 }
 
 debuggoalpos() {
-  for (;;) {
+  for(;;) {
     ai = GetAIArray();
     array_thread(ai, ::view_goal_pos);
     wait(0.05);
@@ -1957,9 +1930,9 @@ debuggoalpos() {
 }
 
 view_goal_pos() {
-  if(!isdefined(self.goalpos))
+  if(!isDefined(self.goalpos)) {
     return;
-
+  }
   Line(self.origin + (0, 0, 35), self.goalpos + (0, 0, 35), (1, 1, 1), 1.0);
 }
 
@@ -1974,10 +1947,10 @@ colordebug() {
   col[col.size] = "p";
   col[col.size] = "c";
 
-  for (;;) {
-    for (i = 0; i < col.size; i++) {
+  for(;;) {
+    for(i = 0; i < col.size; i++) {
       color = level.currentColorForced["allies"][col[i]];
-      if(IsDefined(color))
+      if(isDefined(color))
         draw_colored_nodes(color);
     }
     wait(0.05);
@@ -1996,12 +1969,12 @@ init_animSounds() {
   waittillframeend; // wait one extra frameend because _audio.gso files waittillframeend and we have to start after them
 
   animnames = GetArrayKeys(level.scr_notetrack);
-  for (i = 0; i < animnames.size; i++) {
+  for(i = 0; i < animnames.size; i++) {
     init_notetracks_for_animname(animnames[i]);
   }
 
   animnames = GetArrayKeys(level.scr_animSound);
-  for (i = 0; i < animnames.size; i++) {
+  for(i = 0; i < animnames.size; i++) {
     init_animSounds_for_animname(animnames[i]);
   }
 }
@@ -2013,11 +1986,11 @@ init_notetracks_for_animname(animname) {
     foreach(notetrack, notetrack_array in anime_array) {
       foreach(scr_notetrack in notetrack_array) {
         soundAlias = scr_notetrack["sound"];
-        if(!isdefined(soundAlias))
+        if(!isDefined(soundAlias)) {
           continue;
-
+        }
         level.animSound_aliases[animname][anime][notetrack]["soundalias"] = soundalias;
-        if(IsDefined(scr_notetrack["created_by_animSound"])) {
+        if(isDefined(scr_notetrack["created_by_animSound"])) {
           level.animSound_aliases[animname][anime][notetrack]["created_by_animSound"] = true;
         }
       }
@@ -2029,7 +2002,7 @@ init_animSounds_for_animname(animname) {
   // copy all the scr_animSounds into animsound_aliases so they show up properly
   animes = GetArrayKeys(level.scr_animSound[animname]);
 
-  for (i = 0; i < animes.size; i++) {
+  for(i = 0; i < animes.size; i++) {
     anime = animes[i];
     soundalias = level.scr_animSound[animname][anime];
     level.animSound_aliases[animname][anime]["#" + anime]["soundalias"] = soundalias;
@@ -2051,12 +2024,11 @@ add_hud_line(x, y, msg) {
 }
 
 debug_animSound() {
-  /#
   enabled = GetDebugDvar("animsound") == "on";
-  if(!isdefined(level.animsound_hud)) {
-    if(!enabled)
+  if(!isDefined(level.animsound_hud)) {
+    if(!enabled) {
       return;
-
+    }
     // init the related variables
     level.animsound_selected = 0;
     level.animsound_input = "none";
@@ -2080,7 +2052,7 @@ debug_animSound() {
     level.animsound_hud_locked = add_hud_line(-30, 170, "*LOCKED*");
     level.animsound_hud_locked.alpha = 0;
 
-    for (i = 0; i < level.animsound_hudlimit; i++) {
+    for(i = 0; i < level.animsound_hudlimit; i++) {
       hudelm = NewHudElem();
       hudelm.alignX = "left";
       hudelm.alignY = "middle";
@@ -2118,13 +2090,13 @@ debug_animSound() {
   } else
   if(!enabled) {
     // animsound got turned off so delete the hud stuff
-    for (i = 0; i < level.animsound_hudlimit; i++) {
+    for(i = 0; i < level.animsound_hudlimit; i++) {
       level.animsound_hud[i] Destroy();
       level.animsound_hud_timer[i] Destroy();
       level.animsound_hud_alias[i] Destroy();
     }
 
-    for (i = 0; i < level.animsound_hud_extralines.size; i++) {
+    for(i = 0; i < level.animsound_hud_extralines.size; i++) {
       level.animsound_hud_extralines[i] Destroy();
     }
 
@@ -2136,7 +2108,7 @@ debug_animSound() {
     return;
   }
 
-  if(!isdefined(level.animsound_tagged))
+  if(!isDefined(level.animsound_tagged))
     level.animsound_locked = false;
 
   if(level.animsound_locked)
@@ -2144,11 +2116,11 @@ debug_animSound() {
   else
     level.animsound_hud_locked.alpha = 0;
 
-  if(!isdefined(level.animSounds))
+  if(!isDefined(level.animSounds))
     init_animSounds();
 
   /*
-  if( !isdefined( level.anim_sound_was_opened ) )
+  if( !isDefined( level.anim_sound_was_opened ) )
   {
   	thread test_animsound_file();
   }
@@ -2159,43 +2131,43 @@ debug_animSound() {
   array_thread(level.animSounds, ::display_animSound);
 
   if(level.animsound_locked) {
-    for (i = 0; i < level.animSounds_thisframe.size; i++) {
+    for(i = 0; i < level.animSounds_thisframe.size; i++) {
       animSound = level.animSounds_thisframe[i];
       animSound.animsound_color = (0.5, 0.5, 0.5);
     }
   } else {
     dot = 0.85;
-    forward = AnglesToForward(level.player GetPlayerAngles());
-    for (i = 0; i < level.animSounds_thisframe.size; i++) {
+    forward = anglesToForward(level.player GetPlayerAngles());
+    for(i = 0; i < level.animSounds_thisframe.size; i++) {
       animSound = level.animSounds_thisframe[i];
       animSound.animsound_color = (0.25, 1.0, 0.5);
 
       difference = VectorNormalize((animSound.origin + (0, 0, 40)) - (level.player.origin + (0, 0, 55)));
       newdot = VectorDot(forward, difference);
-      if(newdot < dot)
+      if(newdot < dot) {
         continue;
-
+      }
       dot = newdot;
       level.animsound_tagged = animSound;
     }
   }
 
-  if(IsDefined(level.animsound_tagged)) {
+  if(isDefined(level.animsound_tagged)) {
     level.animsound_tagged.animsound_color = (1.0, 1.0, 0.0);
   }
 
-  is_tagged = IsDefined(level.animsound_tagged);
-  for (i = 0; i < level.animSounds_thisframe.size; i++) {
+  is_tagged = isDefined(level.animsound_tagged);
+  for(i = 0; i < level.animSounds_thisframe.size; i++) {
     animSound = level.animSounds_thisframe[i];
     scale = 1;
     /*
     soundalias = get_alias_from_stored( animSound );
     scale = 0.9;
-		
+    		
     if( is_tagged && level.animsound_tagged == animSound )
     	scale = 1;
     	
-    if( IsDefined( soundalias ) )
+    if( isDefined( soundalias ) )
     {
     	if( is_from_animsound( animSound.animname, animSound.anime, animSound.notetrack ) )
     	{
@@ -2221,7 +2193,7 @@ debug_animSound() {
   if(is_tagged) {
     draw_animsounds_in_hud();
   }
-  # /
+
 }
 
 draw_animsounds_in_hud() {
@@ -2229,7 +2201,7 @@ draw_animsounds_in_hud() {
   animsounds = guy.animSounds;
 
   animname = "generic";
-  if(IsDefined(guy.animname))
+  if(isDefined(guy.animname))
     animname = guy.animname;
   level.animsound_hud_animname.label = "Actor: " + animname;
 
@@ -2259,7 +2231,7 @@ draw_animsounds_in_hud() {
     level.animsound_input = "none";
 
   // clear out the hudelems	
-  for (i = 0; i < level.animsound_hudlimit; i++) {
+  for(i = 0; i < level.animsound_hudlimit; i++) {
     hudelm = level.animsound_hud[i];
     hudelm.label = "";
     hudelm.color = (1, 1, 1);
@@ -2274,22 +2246,23 @@ draw_animsounds_in_hud() {
   // get the highest existing animsound on the guy
   keys = GetArrayKeys(animsounds);
   highest = -1;
-  for (i = 0; i < keys.size; i++) {
+  for(i = 0; i < keys.size; i++) {
     if(keys[i] > highest)
       highest = keys[i];
   }
-  if(highest == -1)
+  if(highest == -1) {
     return;
-
+  }
   if(level.animsound_selected > highest)
     level.animsound_selected = highest;
   if(level.animsound_selected < 0)
     level.animsound_selected = 0;
 
   // make sure the selected one exists
-  for (;;) {
-    if(IsDefined(animsounds[level.animsound_selected]))
+  for(;;) {
+    if(isDefined(animsounds[level.animsound_selected])) {
       break;
+    }
 
     level.animsound_selected--;
     if(level.animsound_selected < 0)
@@ -2303,7 +2276,7 @@ draw_animsounds_in_hud() {
   level.animsound_hud_alias[level.animsound_selected].color = (1, 1, 0);
 
   time = GetTime();
-  for (i = 0; i < keys.size; i++) {
+  for(i = 0; i < keys.size; i++) {
     key = keys[i];
     animsound = animsounds[key];
     hudelm = level.animsound_hud[key];
@@ -2313,7 +2286,7 @@ draw_animsounds_in_hud() {
     hudelm = level.animsound_hud_timer[key];
     hudelm.label = Int((time - (animsound.end_time - 60000)) * 0.001);
 
-    if(IsDefined(soundalias)) {
+    if(isDefined(soundalias)) {
       hudelm = level.animsound_hud_alias[key];
       hudelm.label = soundalias;
       if(!is_from_animsound(animSound.animname, animSound.anime, animSound.notetrack)) {
@@ -2326,31 +2299,31 @@ draw_animsounds_in_hud() {
     // delete a sound on a guy
     animsound = animsounds[level.animsound_selected];
     soundalias = get_alias_from_stored(animsound);
-    if(!isdefined(soundalias))
+    if(!isDefined(soundalias)) {
       return;
-
-    if(!is_from_animsound(animSound.animname, animSound.anime, animSound.notetrack))
+    }
+    if(!is_from_animsound(animSound.animname, animSound.anime, animSound.notetrack)) {
       return;
-
+    }
     level.animSound_aliases[animSound.animname][animSound.anime][animSound.notetrack] = undefined;
     debug_animSoundSave();
   }
 }
 
 get_alias_from_stored(animSound) {
-  if(!isdefined(level.animSound_aliases[animSound.animname]))
+  if(!isDefined(level.animSound_aliases[animSound.animname])) {
     return;
-
-  if(!isdefined(level.animSound_aliases[animSound.animname][animSound.anime]))
+  }
+  if(!isDefined(level.animSound_aliases[animSound.animname][animSound.anime])) {
     return;
-
-  if(!isdefined(level.animSound_aliases[animSound.animname][animSound.anime][animSound.notetrack]))
+  }
+  if(!isDefined(level.animSound_aliases[animSound.animname][animSound.anime][animSound.notetrack]))
     return;
   return level.animSound_aliases[animSound.animname][animSound.anime][animSound.notetrack]["soundalias"];
 }
 
 is_from_animsound(animname, anime, notetrack) {
-  return IsDefined(level.animSound_aliases[animname][anime][notetrack]["created_by_animSound"]);
+  return isDefined(level.animSound_aliases[animname][anime][notetrack]["created_by_animSound"]);
 }
 
 /*
@@ -2358,7 +2331,7 @@ test_animsound_file()
 {
 	level.anim_sound_was_opened = true;
 	
-	/#
+	
 	filename = "createfx/" + level.script + "_audio.gsc";
 	for( ;; )
 	{
@@ -2384,14 +2357,14 @@ test_animsound_file()
 	}
 	
 	CloseFile( file );
-	#/
+	
 }
 */
 
 display_animSound() {
-  if(Distance(level.player.origin, self.origin) > 1500)
+  if(Distance(level.player.origin, self.origin) > 1500) {
     return;
-
+  }
   level.animSounds_thisframe[level.animSounds_thisframe.size] = self;
 
   /*
@@ -2401,7 +2374,7 @@ display_animSound() {
   {
   	key = keys[ i ];
   	animSound = self.animSounds[ key ];
-  	if( !isdefined( animSound ) )
+  	if( !isDefined( animSound ) )
   		continue;
   	
   	if( timer > animSound.end_time )
@@ -2417,7 +2390,6 @@ display_animSound() {
 }
 
 debug_animSoundTag(tagnum) {
-  /#
   tag = GetDvar("tag" + tagnum);
   if(tag == "") {
     IPrintLnBold("Enter the soundalias with /tag# aliasname");
@@ -2427,11 +2399,9 @@ debug_animSoundTag(tagnum) {
   tag_sound(tag, tagnum - 1);
 
   SetDvar("tag" + tagnum, "");
-  # /
 }
 
 debug_animSoundTagSelected() {
-  /#
   tag = GetDvar("tag");
   if(tag == "") {
     IPrintLnBold("Enter the soundalias with /tag aliasname");
@@ -2441,19 +2411,18 @@ debug_animSoundTagSelected() {
   tag_sound(tag, level.animsound_selected);
 
   SetDvar("tag", "");
-  # /
 }
 
 tag_sound(tag, tagnum) {
-  if(!isdefined(level.animsound_tagged))
+  if(!isDefined(level.animsound_tagged))
     return;
-  if(!isdefined(level.animsound_tagged.animsounds[tagnum]))
+  if(!isDefined(level.animsound_tagged.animsounds[tagnum])) {
     return;
-
+  }
   animSound = level.animsound_tagged.animsounds[tagnum];
   // store the alias to the array of aliases
   soundalias = get_alias_from_stored(animSound);
-  if(!isdefined(soundalias) || is_from_animsound(animSound.animname, animSound.anime, animSound.notetrack)) {
+  if(!isDefined(soundalias) || is_from_animsound(animSound.animname, animSound.anime, animSound.notetrack)) {
     level.animSound_aliases[animSound.animname][animSound.anime][animSound.notetrack]["soundalias"] = tag;
     level.animSound_aliases[animSound.animname][animSound.anime][animSound.notetrack]["created_by_animSound"] = true;
     debug_animSoundSave();
@@ -2471,7 +2440,6 @@ debug_animSoundSave() {
   cfxprintln( file, "{" );
   */
 
-  /#
   filename = "createfx/" + level.script + "_audio.gsc";
   file = OpenFile(filename, "write");
   if(file == -1) {
@@ -2483,7 +2451,6 @@ debug_animSoundSave() {
   print_aliases_to_file(file);
   saved = CloseFile(file);
   SetDvar("animsound_save", "");
-  # /
 }
 
 print_aliases_to_file(file) {
@@ -2500,16 +2467,16 @@ print_aliases_to_file(file) {
   FPrintLn(file, tab + "waittillframeend;");
 
   animnames = GetArrayKeys(level.animSound_aliases);
-  for (i = 0; i < animnames.size; i++) {
+  for(i = 0; i < animnames.size; i++) {
     animes = GetArrayKeys(level.animSound_aliases[animnames[i]]);
-    for (p = 0; p < animes.size; p++) {
+    for(p = 0; p < animes.size; p++) {
       anime = animes[p];
       notetracks = GetArrayKeys(level.animSound_aliases[animnames[i]][anime]);
-      for (z = 0; z < notetracks.size; z++) {
+      for(z = 0; z < notetracks.size; z++) {
         notetrack = notetracks[z];
-        if(!is_from_animsound(animnames[i], anime, notetrack))
+        if(!is_from_animsound(animnames[i], anime, notetrack)) {
           continue;
-
+        }
         alias = level.animSound_aliases[animnames[i]][anime][notetrack]["soundalias"];
 
         if(notetrack == "#" + anime) {
@@ -2528,7 +2495,7 @@ print_aliases_to_file(file) {
 
 tostr(str) {
   newstr = "\"";
-  for (i = 0; i < str.size; i++) {
+  for(i = 0; i < str.size; i++) {
     if(str[i] == "\"") {
       newstr += "\\";
       newstr += "\"";
@@ -2542,17 +2509,17 @@ tostr(str) {
 }
 
 linedraw(start, end, color, alpha, depth, timer) {
-  if(!isdefined(color))
+  if(!isDefined(color))
     color = (1, 1, 1);
 
-  if(IsDefined(timer)) {
+  if(isDefined(timer)) {
     timer *= 20;
-    for (i = 0; i < timer; i++) {
+    for(i = 0; i < timer; i++) {
       Line(start, end, color, alpha, depth);
       wait(0.05);
     }
   } else {
-    for (;;) {
+    for(;;) {
       Line(start, end, color, alpha, depth);
       wait(0.05);
     }
@@ -2560,7 +2527,7 @@ linedraw(start, end, color, alpha, depth, timer) {
 }
 
 print3ddraw(org, text, color) {
-  for (;;) {
+  for(;;) {
     Print3d(org, text, color);
     wait(0.05);
   }
@@ -2578,7 +2545,6 @@ complete_me() {
 }
 
 find_new_chase_target(ent_num) {
-  /#
   ai = GetAIArray();
   foreach(guy in ai) {
     if(guy GetEntNum() == ent_num) {
@@ -2587,32 +2553,32 @@ find_new_chase_target(ent_num) {
     }
   }
 
-  vehicles = GetEntArray("script_vehicle", "code_classname");
+  vehicles = getEntArray("script_vehicle", "code_classname");
   foreach(vehicle in vehicles) {
     if(vehicle GetEntNum() == ent_num) {
       level.chase_cam_target = vehicle;
       return;
     }
   }
-  # /
+
 }
 
 chaseCam(ent_num) {
-  if(!isdefined(level.chase_cam_last_num)) {
+  if(!isDefined(level.chase_cam_last_num)) {
     level.chase_cam_last_num = -1;
   }
 
-  if(level.chase_cam_last_num == ent_num)
+  if(level.chase_cam_last_num == ent_num) {
     return;
-
+  }
   find_new_chase_target(ent_num);
 
-  if(!isdefined(level.chase_cam_target))
+  if(!isDefined(level.chase_cam_target)) {
     return;
-
+  }
   level.chase_cam_last_num = ent_num;
 
-  if(!isdefined(level.chase_cam_ent)) {
+  if(!isDefined(level.chase_cam_ent)) {
     level.chase_cam_ent = level.chase_cam_target spawn_tag_origin();
   }
 
@@ -2628,20 +2594,20 @@ chaseCam_onEnt(ent) {
   level.player PlayerLinkToBlend(level.chase_cam_ent, "tag_origin", 2, 0.5, 0.5);
   wait(2);
   level.player PlayerLinkToDelta(level.chase_cam_ent, "tag_origin", 1, 180, 180, 180, 180);
-  for (;;) {
+  for(;;) {
     wait(0.2);
 
-    if(!isdefined(level.chase_cam_target))
+    if(!isDefined(level.chase_cam_target)) {
       return;
-
+    }
     start = level.chase_cam_target.origin;
     angles = level.chase_cam_target.angles;
-    forward = AnglesToForward(angles);
+    forward = anglesToForward(angles);
     forward *= 200;
     start += forward;
 
     angles = level.player GetPlayerAngles();
-    forward = AnglesToForward(angles);
+    forward = anglesToForward(angles);
     forward *= -200;
     level.chase_cam_ent MoveTo(start + forward, 0.2);
   }
@@ -2649,7 +2615,7 @@ chaseCam_onEnt(ent) {
 
 viewfx() {
   foreach(fx in level.createfxent) {
-    if(IsDefined(fx.looper))
+    if(isDefined(fx.looper))
       Print3d(fx.v["origin"], ".", (1, 1, 0), 1, 1.5, 200);
   }
 }
@@ -2659,7 +2625,7 @@ add_key(key, val) {
 }
 
 print_vehicle_info(noteworthy) {
-  if(!isdefined(level.vnum))
+  if(!isDefined(level.vnum))
     level.vnum = 9500;
 
   level.vnum++;
@@ -2676,31 +2642,30 @@ print_vehicle_info(noteworthy) {
   add_key("_color", "0.443137 0.443137 1.000000");
   PrintLn("	layer \"" + layer + "\"");
 
-  if(IsDefined(noteworthy))
+  if(isDefined(noteworthy))
     add_key("script_noteworthy", noteworthy);
 
   PrintLn("}");
 }
 
 draw_dot_for_ent(entnum) {
-  /#
   ai = GetAIArray();
   foreach(guy in ai) {
     if(guy GetEntNum() != entnum)
       continue;
     guy draw_dot_for_guy();
   }
-  # /
+
 }
 
 draw_dot_for_guy() {
   player_angles = level.player GetPlayerAngles();
-  player_forward = AnglesToForward(player_angles);
-  end = level.player GetEye();
+  player_forward = anglesToForward(player_angles);
+  end = level.player getEye();
 
-  start = self GetEye();
+  start = self getEye();
   angles = VectorToAngles(start - end);
-  forward = AnglesToForward(angles);
+  forward = anglesToForward(angles);
 
   dot = VectorDot(forward, player_forward);
   Print3d(start, dot, (1, 0.5, 0));

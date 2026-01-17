@@ -17,23 +17,23 @@ init_color_grouping(nodes) {
   level.colorCoded_volumes["axis"] = [];
   level.colorCoded_volumes["allies"] = [];
   triggers = [];
-  triggers = array_combine(triggers, getentarray("trigger_multiple", "classname"));
-  triggers = array_combine(triggers, getentarray("trigger_radius", "classname"));
-  triggers = array_combine(triggers, getentarray("trigger_once", "classname"));
-  volumes = getentarray("info_volume", "classname");
-  for (i = 0; i < nodes.size; i++) {
+  triggers = array_combine(triggers, getEntArray("trigger_multiple", "classname"));
+  triggers = array_combine(triggers, getEntArray("trigger_radius", "classname"));
+  triggers = array_combine(triggers, getEntArray("trigger_once", "classname"));
+  volumes = getEntArray("info_volume", "classname");
+  for(i = 0; i < nodes.size; i++) {
     if(isDefined(nodes[i].script_color_allies))
       nodes[i] add_node_to_global_arrays(nodes[i].script_color_allies, "allies");
     if(isDefined(nodes[i].script_color_axis))
       nodes[i] add_node_to_global_arrays(nodes[i].script_color_axis, "axis");
   }
-  for (i = 0; i < triggers.size; i++) {
+  for(i = 0; i < triggers.size; i++) {
     if(isDefined(triggers[i].script_color_allies))
       triggers[i] thread trigger_issues_orders(triggers[i].script_color_allies, "allies");
     if(isDefined(triggers[i].script_color_axis))
       triggers[i] thread trigger_issues_orders(triggers[i].script_color_axis, "axis");
   }
-  for (i = 0; i < volumes.size; i++) {
+  for(i = 0; i < volumes.size; i++) {
     if(isDefined(volumes[i].script_color_allies))
       volumes[i] add_volume_to_global_arrays(volumes[i].script_color_allies, "allies");
     if(isDefined(volumes[i].script_color_axis))
@@ -91,7 +91,7 @@ init_color_grouping(nodes) {
   level.lastColorForced = [];
   level.lastColorForced["allies"] = [];
   level.lastColorForced["axis"] = [];
-  for (i = 0; i < level.colorList.size; i++) {
+  for(i = 0; i < level.colorList.size; i++) {
     level.arrays_of_colorForced_ai["allies"][level.colorList[i]] = [];
     level.arrays_of_colorForced_ai["axis"][level.colorList[i]] = [];
     level.currentColorForced["allies"][level.colorList[i]] = undefined;
@@ -131,7 +131,7 @@ goto_current_ColorIndex() {
   if(!has_color()) {
     return;
   }
-  for (i = 0; i < nodes.size; i++) {
+  for(i = 0; i < nodes.size; i++) {
     node = nodes[i];
     if(isalive(node.color_user) && !IsPlayer(node.color_user)) {
       continue;
@@ -165,9 +165,9 @@ get_colorcodes_from_trigger(color_team, team) {
   colorCodesByColorIndex = [];
   usable_colorCodes = [];
   colorList = get_color_list();
-  for (i = 0; i < colorCodes.size; i++) {
+  for(i = 0; i < colorCodes.size; i++) {
     color = undefined;
-    for (p = 0; p < colorList.size; p++) {
+    for(p = 0; p < colorList.size; p++) {
       if(issubstr(colorCodes[i], colorList[p])) {
         color = colorList[p];
         break;
@@ -195,7 +195,7 @@ trigger_issues_orders(color_team, team) {
   colorCodes = array["colorCodes"];
   colorCodesByColorIndex = array["colorCodesByColorIndex"];
   colors = array["colors"];
-  for (;;) {
+  for(;;) {
     self waittill("trigger");
     if(isDefined(self.activated_color_trigger)) {
       self.activated_color_trigger = undefined;
@@ -237,15 +237,15 @@ get_colorcodes_and_activate_trigger(color_team, team) {
 }
 
 activate_color_trigger_internal(colorCodes, colors, team, colorCodesByColorIndex) {
-  for (i = 0; i < colorCodes.size; i++) {
+  for(i = 0; i < colorCodes.size; i++) {
     if(!isDefined(level.arrays_of_colorCoded_spawners[team][colorCodes[i]])) {
       continue;
     }
     level.arrays_of_colorCoded_spawners[team][colorCodes[i]] = array_removeUndefined(level.arrays_of_colorCoded_spawners[team][colorCodes[i]]);
-    for (p = 0; p < level.arrays_of_colorCoded_spawners[team][colorCodes[i]].size; p++)
+    for(p = 0; p < level.arrays_of_colorCoded_spawners[team][colorCodes[i]].size; p++)
       level.arrays_of_colorCoded_spawners[team][colorCodes[i]][p].currentColorCode = colorCodes[i];
   }
-  for (i = 0; i < colors.size; i++) {
+  for(i = 0; i < colors.size; i++) {
     level.arrays_of_colorForced_ai[team][colors[i]] = array_removeDead(level.arrays_of_colorForced_ai[team][colors[i]]);
     level.lastColorForced[team][colors[i]] = level.currentColorForced[team][colors[i]];
     level.currentColorForced[team][colors[i]] = colorCodesByColorIndex[colors[i]];
@@ -253,7 +253,7 @@ activate_color_trigger_internal(colorCodes, colors, team, colorCodesByColorIndex
       "Trigger tried to set colorCode " + colors[i] + " but there are no nodes for " + team + " that use that color combo.");
   }
   ai_array = [];
-  for (i = 0; i < colorCodes.size; i++) {
+  for(i = 0; i < colorCodes.size; i++) {
     if(same_color_code_as_last_time(team, colors[i])) {
       continue;
     }
@@ -263,7 +263,7 @@ activate_color_trigger_internal(colorCodes, colors, team, colorCodesByColorIndex
     }
     ai_array[colorCode] = issue_leave_node_order_to_ai_and_get_ai(colorCode, colors[i], team);
   }
-  for (i = 0; i < colorCodes.size; i++) {
+  for(i = 0; i < colorCodes.size; i++) {
     colorCode = colorCodes[i];
     if(!isDefined(ai_array[colorCode])) {
       continue;
@@ -308,21 +308,21 @@ process_path_node(node, null) {
 
 prioritize_colorCoded_nodes(team, colorCode, color) {
   nodes = level.arrays_of_colorCoded_nodes[team][colorCode];
-  ent = spawnstruct();
+  ent = spawnStruct();
   ent.path_nodes = [];
   ent.cover_nodes_first = [];
   ent.cover_nodes_last = [];
   lastColorForced_exists = isDefined(level.lastColorForced[team][color]);
-  for (i = 0; i < nodes.size; i++) {
+  for(i = 0; i < nodes.size; i++) {
     node = nodes[i];
     ent[[level.color_node_type_function[node.type][lastColorForced_exists][team]]](node, level.lastColorForced[team][color]);
   }
   ent.cover_nodes_first = array_randomize(ent.cover_nodes_first);
   nodes = ent.cover_nodes_first;
-  for (i = 0; i < ent.cover_nodes_last.size; i++) {
+  for(i = 0; i < ent.cover_nodes_last.size; i++) {
     nodes[nodes.size] = ent.cover_nodes_last[i];
   }
-  for (i = 0; i < ent.path_nodes.size; i++) {
+  for(i = 0; i < ent.path_nodes.size; i++) {
     nodes[nodes.size] = ent.path_nodes[i];
   }
   level.arrays_of_colorCoded_nodes[team][colorCode] = nodes;
@@ -337,7 +337,7 @@ issue_leave_node_order_to_ai_and_get_ai(colorCode, color, team) {
   ai = level.arrays_of_colorCoded_ai[team][colorCode];
   ai = array_combine(ai, level.arrays_of_colorForced_ai[team][color]);
   newArray = [];
-  for (i = 0; i < ai.size; i++) {
+  for(i = 0; i < ai.size; i++) {
     if(isDefined(ai[i].currentColorCode) && ai[i].currentColorCode == colorCode)
       continue;
     newArray[newArray.size] = ai[i];
@@ -346,7 +346,7 @@ issue_leave_node_order_to_ai_and_get_ai(colorCode, color, team) {
   if(!ai.size) {
     return;
   }
-  for (i = 0; i < ai.size; i++)
+  for(i = 0; i < ai.size; i++)
     ai[i] left_color_node();
   return ai;
 }
@@ -360,7 +360,7 @@ issue_color_order_to_ai(colorCode, color, team, ai) {
     println("^3Warning, ColorNumber system tried to make " + ai.size + " AI go to " + nodes.size + " nodes.");
   counter = 0;
   ai_count = ai.size;
-  for (i = 0; i < nodes.size; i++) {
+  for(i = 0; i < nodes.size; i++) {
     node = nodes[i];
     if(isalive(node.color_user)) {
       continue;
@@ -382,7 +382,7 @@ take_color_node(node, colorCode, trigger, counter) {
 }
 
 player_color_node() {
-  for (;;) {
+  for(;;) {
     playerNode = undefined;
     if(!isDefined(self.node)) {
       wait(0.05);
@@ -391,7 +391,7 @@ player_color_node() {
     olduser = self.node.color_user;
     playerNode = self.node;
     playerNode.color_user = self;
-    for (;;) {
+    for(;;) {
       if(!isDefined(self.node)) {
         break;
       }
@@ -435,7 +435,7 @@ color_node_finds_user_for_colorCode(colorCode, team) {
   if(!ai.size) {
     return;
   }
-  for (i = 0; i < ai.size; i++) {
+  for(i = 0; i < ai.size; i++) {
     guy = ai[i];
     if(guy occupies_colorCode(colorCode)) {
       continue;
@@ -501,7 +501,7 @@ careful_logic(node, volume) {
   self endon("stop_being_careful");
   self endon("stop_going_to_node");
   thread recover_from_careful_disable(node);
-  for (;;) {
+  for(;;) {
     wait_until_an_enemy_is_in_safe_area(node, volume);
     use_big_goal_until_goal_is_safe(node, volume);
     self.fixednode = true;
@@ -522,7 +522,7 @@ use_big_goal_until_goal_is_safe(node, volume) {
   self.goalradius = 1024;
   self.fixednode = false;
   if(isDefined(volume)) {
-    for (;;) {
+    for(;;) {
       wait(1);
       if(self isKnownEnemyInRadius(node.origin, self.fixedNodeSafeRadius))
         continue;
@@ -531,7 +531,7 @@ use_big_goal_until_goal_is_safe(node, volume) {
       return;
     }
   } else {
-    for (;;) {
+    for(;;) {
       if(!(self isKnownEnemyInRadius_tmp(node.origin, self.fixedNodeSafeRadius)))
         return;
       wait(1);
@@ -541,7 +541,7 @@ use_big_goal_until_goal_is_safe(node, volume) {
 
 isKnownEnemyInRadius_tmp(node_origin, safe_radius) {
   ai = getaiarray("axis");
-  for (i = 0; i < ai.size; i++) {
+  for(i = 0; i < ai.size; i++) {
     if(distance2d(ai[i].origin, node_origin) < safe_radius)
       return true;
   }
@@ -550,7 +550,7 @@ isKnownEnemyInRadius_tmp(node_origin, safe_radius) {
 
 wait_until_an_enemy_is_in_safe_area(node, volume) {
   if(isDefined(volume)) {
-    for (;;) {
+    for(;;) {
       if(self isKnownEnemyInRadius(node.origin, self.fixedNodeSafeRadius))
         return;
       if(self isKnownEnemyInVolume(volume))
@@ -558,7 +558,7 @@ wait_until_an_enemy_is_in_safe_area(node, volume) {
       wait(1);
     }
   } else {
-    for (;;) {
+    for(;;) {
       if(self isKnownEnemyInRadius_tmp(node.origin, self.fixedNodeSafeRadius))
         return;
       wait(1);
@@ -586,7 +586,7 @@ process_color_order_to_ai(node, trigger, counter) {
   }
   self ai_sets_goal(node);
   self.color_ordered_node_assignment = node;
-  for (;;) {
+  for(;;) {
     self waittill("node_taken", taker);
     if(taker == self) {
       wait(0.05);
@@ -609,7 +609,7 @@ get_best_available_colored_node() {
   colorCode = level.currentColorForced[self.team][self.script_forceColor];
   nodes = get_prioritized_colorCoded_nodes(self.team, colorCode, self.script_forcecolor);
   assertEx(nodes.size > 0, "Tried to make guy with export " + self.export+" go to forcecolor " + self.script_forceColor + " but there are no nodes of that color enabled");
-  for (i = 0; i < nodes.size; i++) {
+  for(i = 0; i < nodes.size; i++) {
     if(!isalive(nodes[i].color_user))
       return nodes[i];
   }
@@ -621,7 +621,7 @@ get_best_available_new_colored_node() {
   colorCode = level.currentColorForced[self.team][self.script_forceColor];
   nodes = get_prioritized_colorCoded_nodes(self.team, colorCode, self.script_forcecolor);
   assertEx(nodes.size > 0, "Tried to make guy with export " + self.export+" go to forcecolor " + self.script_forceColor + " but there are no nodes of that color enabled");
-  for (i = 0; i < nodes.size; i++) {
+  for(i = 0; i < nodes.size; i++) {
     if(nodes[i] == self.color_node)
       continue;
     if(!isalive(nodes[i].color_user))
@@ -654,7 +654,7 @@ wait_for_killanimscript_or_time(timer) {
 reached_node_but_could_not_claim_it(node) {
   ai = getaiarray();
   guy = undefined;
-  for (i = 0; i < ai.size; i++) {
+  for(i = 0; i < ai.size; i++) {
     if(!isDefined(ai[i].node))
       continue;
     if(ai[i].node != node) {
@@ -680,7 +680,7 @@ decrementColorUsers(node) {
 }
 
 colorIsLegit(color) {
-  for (i = 0; i < level.colorList.size; i++) {
+  for(i = 0; i < level.colorList.size; i++) {
     if(color == level.colorList[i])
       return true;
   }
@@ -689,7 +689,7 @@ colorIsLegit(color) {
 
 add_volume_to_global_arrays(colorCode, team) {
   colors = strtok(colorCode, " ");
-  for (p = 0; p < colors.size; p++) {
+  for(p = 0; p < colors.size; p++) {
     assert(!isDefined(level.colorCoded_volumes[team][colors[p]]), "Multiple info_volumes exist with color code " + colors[p]);
     level.colorCoded_volumes[team][colors[p]] = self;
   }
@@ -698,7 +698,7 @@ add_volume_to_global_arrays(colorCode, team) {
 add_node_to_global_arrays(colorCode, team) {
   self.color_user = undefined;
   colors = strtok(colorCode, " ");
-  for (p = 0; p < colors.size; p++) {
+  for(p = 0; p < colors.size; p++) {
     if(isDefined(level.arrays_of_colorCoded_nodes[team]) && isDefined(level.arrays_of_colorCoded_nodes[team][colors[p]])) {
       level.arrays_of_colorCoded_nodes[team][colors[p]] = array_add(level.arrays_of_colorCoded_nodes[team][colors[p]], self);
       continue;
@@ -743,7 +743,7 @@ removeSpawnerFromColorNumberArray() {
   team = colorNumberArray["team"];
   colorTeam = colorNumberArray["colorTeam"];
   colors = strtok(colorTeam, " ");
-  for (i = 0; i < colors.size; i++)
+  for(i = 0; i < colors.size; i++)
     level.arrays_of_colorCoded_spawners[team][colors[i]] = array_remove(level.arrays_of_colorCoded_spawners[team][colors[i]], self);
 }
 
@@ -796,7 +796,7 @@ colorNode_replace_on_death() {
     color = self.script_forceColor;
   if(isDefined(self) && isDefined(self.origin))
     origin = self.origin;
-  for (;;) {
+  for(;;) {
     if(get_color_from_order(color, color_order) == "none") {
       return;
     }
@@ -835,7 +835,7 @@ get_color_from_order(color, color_order) {
 friendly_spawner_vision_checker() {
   level.friendly_respawn_vision_checker_thread = true;
   successes = 0;
-  for (;;) {
+  for(;;) {
     flag_waitopen("respawn_friendlies");
     wait(1);
     if(!isDefined(level.respawn_spawner)) {
@@ -844,7 +844,7 @@ friendly_spawner_vision_checker() {
     spawner = level.respawn_spawner;
     players = get_players();
     player_sees_spawner = false;
-    for (q = 0; q < players.size; q++) {
+    for(q = 0; q < players.size; q++) {
       difference_vec = players[q].origin - spawner.origin;
       if(length(difference_vec) < 200) {
         player_sees_spawner();
@@ -887,13 +887,13 @@ get_color_spawner(classname, fromColor) {
       return level.respawn_spawner;
     }
   }
-  spawners = getentarray("color_spawner", "targetname");
+  spawners = getEntArray("color_spawner", "targetname");
   class_spawners = [];
-  for (i = 0; i < spawners.size; i++)
+  for(i = 0; i < spawners.size; i++)
     class_spawners[spawners[i].classname] = spawners[i];
   spawner = undefined;
   keys = getarraykeys(class_spawners);
-  for (i = 0; i < keys.size; i++) {
+  for(i = 0; i < keys.size; i++) {
     if(!issubstr(class_spawners[keys[i]].classname, classname))
       continue;
     spawner = class_spawners[keys[i]];
@@ -917,11 +917,11 @@ get_color_spawner(classname, fromColor) {
 spawn_hidden_reinforcement(classname, fromColor) {
   level endon("kill_color_replacements");
   spawn = undefined;
-  for (;;) {
+  for(;;) {
     if(!flag("respawn_friendlies")) {
       if(!isDefined(level.friendly_respawn_vision_checker_thread))
         thread friendly_spawner_vision_checker();
-      for (;;) {
+      for(;;) {
         flag_wait_either("player_looks_away_from_spawner", "respawn_friendlies");
         flag_waitopen("friendly_spawner_locked");
         if(flag("player_looks_away_from_spawner") || flag("respawn_friendlies")) {
@@ -932,11 +932,11 @@ spawn_hidden_reinforcement(classname, fromColor) {
     }
     spawner = get_color_spawner(classname, fromColor);
     spawner.count = 1;
-    while (!level ok_to_trigger_spawn(true)) {
+    while(!level ok_to_trigger_spawn(true)) {
       wait_network_frame();
     }
     if(isDefined(spawner.script_forcespawn) && spawner.script_forcespawn) {
-      spawn = spawner StalingradSpawn();
+      spawn = spawner Stalingradspawn();
     } else {
       spawn = spawner Dospawn();
     }
@@ -949,7 +949,7 @@ spawn_hidden_reinforcement(classname, fromColor) {
     level notify("reinforcement_spawned", spawn);
     break;
   }
-  for (;;) {
+  for(;;) {
     if(!isDefined(fromColor)) {
       break;
     }

@@ -6,7 +6,6 @@
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\player\player_stats;
 #include scripts\core_common\system_shared;
-
 #namespace namespace_21c59b5;
 
 autoexec __init__system__() {

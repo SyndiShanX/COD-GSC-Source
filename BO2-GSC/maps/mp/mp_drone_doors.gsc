@@ -9,7 +9,7 @@
 #include maps\mp\_tacticalinsertion;
 
 init() {
-  triggers = getentarray("trigger_multiple", "classname");
+  triggers = getEntArray("trigger_multiple", "classname");
 
   for(i = 0; i < 4; i++) {
     door = getent("drone_door" + i, "targetname");
@@ -17,7 +17,7 @@ init() {
     if(!isDefined(door)) {
       continue;
     }
-    right = anglestoforward(door.angles);
+    right = anglesToForward(door.angles);
     right = vectorscale(right, 116);
     door.opened = 1;
     door.origin_opened = door.origin;
@@ -30,7 +30,7 @@ init() {
 
     door.mins = door getmins();
     door.maxs = door getmaxs();
-    door setcandamage(1);
+    door setCanDamage(1);
     door allowbottargetting(0);
     door.triggers = [];
 
@@ -85,7 +85,7 @@ door_open() {
   frac = dist / 116;
   time = clamp(frac * 0.5, 0.1, 0.5);
   self moveto(self.origin_opened, time);
-  self playsound("mpl_drone_door_open");
+  self playSound("mpl_drone_door_open");
   self.opened = 1;
 }
 
@@ -97,7 +97,7 @@ door_close() {
   frac = dist / 116;
   time = clamp(frac * 0.5, 0.1, 0.5);
   self moveto(self.origin_closed, time);
-  self playsound("mpl_drone_door_close");
+  self playSound("mpl_drone_door_close");
   self.opened = 0;
 }
 

@@ -6,7 +6,6 @@
 #include scripts\core_common\bots\bot;
 #include scripts\core_common\bots\bot_action;
 #include scripts\core_common\bots\bot_animation;
-
 #namespace bot;
 
 callback_botentereduseredge(startnode, endnode, mantlenode, startpos, endpos, mantlepos) {
@@ -21,7 +20,7 @@ callback_botentereduseredge(startnode, endnode, mantlenode, startpos, endpos, ma
   var_75e8e8e8 = startnode.type !== "Volume";
 
   if(var_75e8e8e8) {
-    if((startnode.type === "Begin" || startnode.type === "End") && isDefined(startnode.spawnflags) && startnode.spawnflags&134217728) {
+    if((startnode.type === "Begin" || startnode.type === "End") && isDefined(startnode.spawnflags) && startnode.spawnflags & 134217728) {
       var_75e8e8e8 = 0;
     }
   }
@@ -54,8 +53,8 @@ cancel() {
 }
 
 fallback_traversal(endpos) {
-  self endon(#"death", #"hash_a729d7d4c6847f6", #"hash_37fc5d1ffce4acaf");
-  self endoncallback(&release_control, #"entering_last_stand", #"new_shot");
+  self endon(#"death", # "hash_a729d7d4c6847f6", # "hash_37fc5d1ffce4acaf");
+  self endoncallback(&release_control, # "entering_last_stand", # "new_shot");
   level endon(#"game_ended");
   self teleport(endpos, "Legacy fallback");
   self botreleasemanualcontrol();
@@ -77,8 +76,8 @@ function_c3452ef9(params) {
 }
 
 volume_traversal(params) {
-  self endon(#"death", #"hash_a729d7d4c6847f6", #"hash_37fc5d1ffce4acaf");
-  self endoncallback(&release_control, #"entering_last_stand", #"new_shot");
+  self endon(#"death", # "hash_a729d7d4c6847f6", # "hash_37fc5d1ffce4acaf");
+  self endoncallback(&release_control, # "entering_last_stand", # "new_shot");
   level endon(#"game_ended");
   self.bot.traversal = params;
   self bot_action::reset();
@@ -143,7 +142,7 @@ release_control(notifyhash) {
 }
 
 traversal_timeout(params) {
-  self endon(#"death", #"hash_a729d7d4c6847f6", #"hash_612231aa5def85e2");
+  self endon(#"death", # "hash_a729d7d4c6847f6", # "hash_612231aa5def85e2");
   level endon(#"game_ended");
   wait 3.5;
 
@@ -191,7 +190,7 @@ function_51cbae24(params) {
   dir = vectornormalize(params.endpos - params.startpos);
   result = bulletTrace(params.startpos, params.startpos + dir * 512, 0, self);
 
-  if(result[#"surfacetype"] == "ladder") {
+  if(result[# "surfacetype"] == "ladder") {
     return true;
   }
 
@@ -214,7 +213,7 @@ ledge_traversal(endpos, ledgetop, normal) {
   }
 
   trace = bulletTrace(ledgetop, ledgetop - (0, 0, 1024), 0, self);
-  var_82c7381e = trace[#"position"];
+  var_82c7381e = trace[# "position"];
   self botsetmovepoint(endpos);
 
   for(var_ccaaa590 = vectordot(self.origin - var_82c7381e, normal); var_ccaaa590 > 20; var_ccaaa590 = vectordot(self.origin - var_82c7381e, normal)) {

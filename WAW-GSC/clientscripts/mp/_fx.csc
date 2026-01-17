@@ -46,7 +46,7 @@ createLoopEffect(fxid) {
 
 set_forward_and_up_vectors() {
   self.v["up"] = anglestoup(self.v["angles"]);
-  self.v["forward"] = anglestoforward(self.v["angles"]);
+  self.v["forward"] = anglesToForward(self.v["angles"]);
 }
 
 create_triggerfx(clientNum) {
@@ -73,7 +73,7 @@ loopfxStop(clientNum, timeout) {
 loopfxthread(clientNum) {
   if(isDefined(self.fxStart))
     level waittill("start fx" + self.fxStart);
-  while (1) {
+  while(1) {
     create_looper(clientNum);
     if(isDefined(self.timeout))
       thread loopfxStop(clientNum, self.timeout);
@@ -119,7 +119,7 @@ fx_init(clientNum) {
   if(!isDefined(level.createFXent)) {
     return;
   }
-  for (i = 0; i < level.createFXent.size; i++) {
+  for(i = 0; i < level.createFXent.size; i++) {
     ent = level.createFXent[i];
     if(!isDefined(level._createfxforwardandupset)) {
       ent set_forward_and_up_vectors();

@@ -7,13 +7,13 @@
 #include clientscripts\_music;
 
 resolve_struct_targets() {
-  for (i = 0; i < level.struct.size; i++) {
+  for(i = 0; i < level.struct.size; i++) {
     struct = level.struct[i];
     if(isDefined(struct.target)) {
       targ_struct = getstructarray(struct.target, "targetname");
       if(isDefined(targ_struct)) {
         struct.targeted = [];
-        for (j = 0; j < targ_struct.size; j++) {
+        for(j = 0; j < targ_struct.size; j++) {
           struct.targeted[struct.targeted.size] = targ_struct[j];
         }
       }
@@ -22,7 +22,7 @@ resolve_struct_targets() {
 }
 
 debug_position(model) {
-  while (1) {
+  while(1) {
     print3d(self.origin, " + " + model, (0.0, 1.0, 0.0), 1, 3, 30);
     realwait(1.0);
   }
@@ -37,12 +37,12 @@ decorate_level() {
   level waittill("dl");
   structs = getstructarray("coop_dest_tank_spot", "targetname");
   players = getlocalplayers();
-  for (i = 0; i < structs.size; i++) {
+  for(i = 0; i < structs.size; i++) {
     struct = structs[i];
     model = models[randomintrange(0, models.size)];
-    for (j = 0; j < players.size; j++) {
+    for(j = 0; j < players.size; j++) {
       ent = spawn(j, structs[i].origin, "script_model");
-      ent setmodel(model);
+      ent setModel(model);
       ent.angles = structs[i].angles;
     }
   }

@@ -68,9 +68,7 @@ init() {
   }
   level thread turn_PackAPunch_on();
   if(isDefined(level.quantum_bomb_register_result_func)) {
-    [
-      [level.quantum_bomb_register_result_func]
-    ]("give_nearest_perk", ::quantum_bomb_give_nearest_perk_result, 10, ::quantum_bomb_give_nearest_perk_validation);
+    [[level.quantum_bomb_register_result_func]]("give_nearest_perk", ::quantum_bomb_give_nearest_perk_result, 10, ::quantum_bomb_give_nearest_perk_validation);
   }
 }
 
@@ -95,7 +93,7 @@ place_additionalprimaryweapon_machine() {
   if(isDefined(level.zombie_additionalprimaryweapon_machine_monkey_origins)) {
     machine.target = "vending_additionalprimaryweapon_monkey_structs";
     for(i = 0; i < level.zombie_additionalprimaryweapon_machine_monkey_origins.size; i++) {
-      machine_monkey_struct = SpawnStruct();
+      machine_monkey_struct = spawnStruct();
       machine_monkey_struct.origin = level.zombie_additionalprimaryweapon_machine_monkey_origins[i];
       machine_monkey_struct.angles = level.zombie_additionalprimaryweapon_machine_monkey_angles;
       machine_monkey_struct.script_int = i + 1;
@@ -197,7 +195,7 @@ default_vending_precaching() {
 third_person_weapon_upgrade(current_weapon, origin, angles, packa_rollers, perk_machine) {
   forward = anglesToForward(angles);
   interact_pos = origin + (forward * -25);
-  PlayFx(level._effect["packapunch_fx"], origin + (0, 1, -34), forward);
+  playFX(level._effect["packapunch_fx"], origin + (0, 1, -34), forward);
   worldgun = spawn("script_model", interact_pos);
   worldgun.angles = self.angles;
   worldgun setModel(GetWeaponModel(current_weapon));
@@ -217,7 +215,7 @@ third_person_weapon_upgrade(current_weapon, origin, angles, packa_rollers, perk_
   if(isDefined(worldgundw)) {
     worldgundw moveTo(origin + offsetdw, 0.5, 0, 0);
   }
-  self playsound("zmb_perks_packa_upgrade");
+  self playSound("zmb_perks_packa_upgrade");
   if(isDefined(perk_machine.wait_flag)) {
     perk_machine.wait_flag rotateto(perk_machine.wait_flag.angles + (179, 0, 0), 0.25, 0, 0);
   }
@@ -227,7 +225,7 @@ third_person_weapon_upgrade(current_weapon, origin, angles, packa_rollers, perk_
     worldgundw delete();
   }
   wait(3);
-  self playsound("zmb_perks_packa_ready");
+  self playSound("zmb_perks_packa_ready");
   worldgun = spawn("script_model", origin);
   worldgun.angles = angles + (0, 90, 0);
   worldgun setModel(GetWeaponModel(level.zombie_weapons[current_weapon].upgrade_name));
@@ -270,7 +268,7 @@ vending_machine_trigger_think() {
 
 vending_weapon_upgrade() {
   perk_machine = getEnt(self.target, "targetname");
-  perk_machine_sound = GetEntarray("perksacola", "targetname");
+  perk_machine_sound = getEntArray("perksacola", "targetname");
   packa_rollers = spawn("script_origin", self.origin);
   packa_timer = spawn("script_origin", self.origin);
   packa_rollers LinkTo(self);
@@ -313,7 +311,7 @@ vending_weapon_upgrade() {
       continue;
     }
     if(player.score < self.cost) {
-      self playsound("deny");
+      self playSound("deny");
       player maps\_zombiemode_audio::create_and_play_dialog("general", "perk_deny", undefined, 0);
       continue;
     }
@@ -401,7 +399,7 @@ wait_for_timeout(weapon, packa_timer) {
   wait(level.packapunch_timeout);
   self notify("pap_timeout");
   packa_timer stopLoopSound(.05);
-  packa_timer playsound("zmb_perks_packa_deny");
+  packa_timer playSound("zmb_perks_packa_deny");
   maps\_zombiemode_weapons::unacquire_weapon_toggle(weapon);
 }
 
@@ -481,7 +479,7 @@ turn_PackAPunch_on() {
 
 activate_PackAPunch() {
   self setModel("zombie_vending_packapunch_on");
-  self playsound("zmb_perks_power_on");
+  self playSound("zmb_perks_power_on");
   self vibrate((0, -100, 0), 0.3, 0.4, 3);
   timer = 0;
   duration = 0.05;
@@ -489,19 +487,19 @@ activate_PackAPunch() {
 }
 
 turn_sleight_on() {
-  machine = getentarray("vending_sleight", "targetname");
+  machine = getEntArray("vending_sleight", "targetname");
   level waittill("sleight_on");
   for(i = 0; i < machine.size; i++) {
     machine[i] setModel("zombie_vending_sleight_on");
     machine[i] vibrate((0, -100, 0), 0.3, 0.4, 3);
-    machine[i] playsound("zmb_perks_power_on");
+    machine[i] playSound("zmb_perks_power_on");
     machine[i] thread perk_fx("sleight_light");
   }
   level notify("specialty_fastreload_power_on");
 }
 
 turn_revive_on() {
-  machine = getentarray("vending_revive", "targetname");
+  machine = getEntArray("vending_revive", "targetname");
   machine_model = undefined;
   machine_clip = undefined;
   flag_wait("all_players_connected");
@@ -524,7 +522,7 @@ turn_revive_on() {
     for(i = 0; i < machine.size; i++) {
       if(isDefined(machine[i].classname) && machine[i].classname == "script_model") {
         machine[i] setModel("zombie_vending_revive_on");
-        machine[i] playsound("zmb_perks_power_on");
+        machine[i] playSound("zmb_perks_power_on");
         machine[i] vibrate((0, -100, 0), 0.3, 0.4, 3);
         machine[i] thread perk_fx("revive_light");
       }
@@ -539,20 +537,18 @@ revive_solo_fx(machine_clip) {
   self.fx.angles = self.angles;
   self.fx setModel("tag_origin");
   self.fx LinkTo(self);
-  playfxontag(level._effect["revive_light"], self.fx, "tag_origin");
-  playfxontag(level._effect["revive_light_flicker"], self.fx, "tag_origin");
+  playFXOnTag(level._effect["revive_light"], self.fx, "tag_origin");
+  playFXOnTag(level._effect["revive_light_flicker"], self.fx, "tag_origin");
   flag_wait("solo_revive");
   if(isDefined(level.revive_solo_fx_func)) {
     level thread[[level.revive_solo_fx_func]]();
   }
   wait(2.0);
-  self playsound("zmb_box_move");
+  self playSound("zmb_box_move");
   playsoundatposition("zmb_whoosh", self.origin);
   self moveTo(self.origin + (0, 0, 40), 3);
   if(isDefined(level.custom_vibrate_func)) {
-    [
-      [level.custom_vibrate_func]
-    ](self);
+    [[level.custom_vibrate_func]](self);
   } else {
     direction = self.origin;
     direction = (direction[1], direction[0], 0);
@@ -564,7 +560,7 @@ revive_solo_fx(machine_clip) {
     self Vibrate(direction, 10, 0.5, 5);
   }
   self waittill("movedone");
-  PlayFX(level._effect["poltergeist"], self.origin);
+  playFX(level._effect["poltergeist"], self.origin);
   playsoundatposition("zmb_box_poof", self.origin);
   level clientNotify("drb");
   self.fx Unlink();
@@ -576,48 +572,48 @@ revive_solo_fx(machine_clip) {
 }
 
 turn_jugger_on() {
-  machine = getentarray("vending_jugg", "targetname");
+  machine = getEntArray("vending_jugg", "targetname");
   level waittill("juggernog_on");
   for(i = 0; i < machine.size; i++) {
     machine[i] setModel("zombie_vending_jugg_on");
     machine[i] vibrate((0, -100, 0), 0.3, 0.4, 3);
-    machine[i] playsound("zmb_perks_power_on");
+    machine[i] playSound("zmb_perks_power_on");
     machine[i] thread perk_fx("jugger_light");
   }
   level notify("specialty_armorvest_power_on");
 }
 
 turn_doubletap_on() {
-  machine = getentarray("vending_doubletap", "targetname");
+  machine = getEntArray("vending_doubletap", "targetname");
   level waittill("doubletap_on");
   for(i = 0; i < machine.size; i++) {
     machine[i] setModel("zombie_vending_doubletap_on");
     machine[i] vibrate((0, -100, 0), 0.3, 0.4, 3);
-    machine[i] playsound("zmb_perks_power_on");
+    machine[i] playSound("zmb_perks_power_on");
     machine[i] thread perk_fx("doubletap_light");
   }
   level notify("specialty_rof_power_on");
 }
 
 turn_marathon_on() {
-  machine = getentarray("vending_marathon", "targetname");
+  machine = getEntArray("vending_marathon", "targetname");
   level waittill("marathon_on");
   for(i = 0; i < machine.size; i++) {
     machine[i] setModel("zombie_vending_marathon_on");
     machine[i] vibrate((0, -100, 0), 0.3, 0.4, 3);
-    machine[i] playsound("zmb_perks_power_on");
+    machine[i] playSound("zmb_perks_power_on");
     machine[i] thread perk_fx("marathon_light");
   }
   level notify("specialty_longersprint_power_on");
 }
 
 turn_divetonuke_on() {
-  machine = getentarray("vending_divetonuke", "targetname");
+  machine = getEntArray("vending_divetonuke", "targetname");
   level waittill("divetonuke_on");
   for(i = 0; i < machine.size; i++) {
     machine[i] setModel("zombie_vending_nuke_on");
     machine[i] vibrate((0, -100, 0), 0.3, 0.4, 3);
-    machine[i] playsound("zmb_perks_power_on");
+    machine[i] playSound("zmb_perks_power_on");
     machine[i] thread perk_fx("divetonuke_light");
   }
   level notify("specialty_flakjacket_power_on");
@@ -628,8 +624,8 @@ divetonuke_explode(attacker, origin) {
   min_damage = level.zombie_vars["zombie_perk_divetonuke_min_damage"];
   max_damage = level.zombie_vars["zombie_perk_divetonuke_max_damage"];
   RadiusDamage(origin, radius, max_damage, min_damage, attacker, "MOD_GRENADE_SPLASH");
-  PlayFx(level._effect["divetonuke_groundhit"], origin);
-  attacker playsound("zmb_phdflop_explo");
+  playFX(level._effect["divetonuke_groundhit"], origin);
+  attacker playSound("zmb_phdflop_explo");
   attacker SetClientFlag(level._ZOMBIE_PLAYER_FLAG_DIVE2NUKE_VISION);
   wait_network_frame();
   wait_network_frame();
@@ -637,19 +633,19 @@ divetonuke_explode(attacker, origin) {
 }
 
 turn_deadshot_on() {
-  machine = getentarray("vending_deadshot", "targetname");
+  machine = getEntArray("vending_deadshot", "targetname");
   level waittill("deadshot_on");
   for(i = 0; i < machine.size; i++) {
     machine[i] setModel("zombie_vending_ads_on");
     machine[i] vibrate((0, -100, 0), 0.3, 0.4, 3);
-    machine[i] playsound("zmb_perks_power_on");
+    machine[i] playSound("zmb_perks_power_on");
     machine[i] thread perk_fx("deadshot_light");
   }
   level notify("specialty_deadshot_power_on");
 }
 
 turn_additionalprimaryweapon_on() {
-  machine = getentarray("vending_additionalprimaryweapon", "targetname");
+  machine = getEntArray("vending_additionalprimaryweapon", "targetname");
   if("zombie_cod5_prototype" != level.script && "zombie_cod5_sumpf" != level.script) {
     flag_wait("power_on");
   }
@@ -657,7 +653,7 @@ turn_additionalprimaryweapon_on() {
   for(i = 0; i < machine.size; i++) {
     machine[i] setModel("zombie_vending_three_gun_on");
     machine[i] vibrate((0, -100, 0), 0.3, 0.4, 3);
-    machine[i] playsound("zmb_perks_power_on");
+    machine[i] playSound("zmb_perks_power_on");
     machine[i] thread perk_fx("additionalprimaryweapon_light");
   }
   level notify("specialty_additionalprimaryweapon_power_on");
@@ -665,7 +661,7 @@ turn_additionalprimaryweapon_on() {
 
 perk_fx(fx) {
   wait(3);
-  playfxontag(level._effect[fx], self, "tag_origin");
+  playFXOnTag(level._effect[fx], self, "tag_origin");
 }
 
 electric_perks_dialog() {
@@ -841,18 +837,18 @@ vending_trigger_think() {
     if(player HasPerk(perk)) {
       cheat = false;
       if(cheat != true) {
-        self playsound("deny");
+        self playSound("deny");
         player maps\_zombiemode_audio::create_and_play_dialog("general", "perk_deny", undefined, 1);
         continue;
       }
     }
     if(player.score < cost) {
-      self playsound("evt_perk_deny");
+      self playSound("evt_perk_deny");
       player maps\_zombiemode_audio::create_and_play_dialog("general", "perk_deny", undefined, 0);
       continue;
     }
     if(player.num_perks >= 4) {
-      self playsound("evt_perk_deny");
+      self playSound("evt_perk_deny");
       player maps\_zombiemode_audio::create_and_play_dialog("general", "sigh");
       continue;
     }

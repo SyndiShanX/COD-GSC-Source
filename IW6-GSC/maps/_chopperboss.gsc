@@ -380,9 +380,7 @@ chopper_boss_get_target() {
   if(isDefined(maps\_chopperboss_utility::chopper_boss_forced_target_get()))
     var_0 = [maps\_chopperboss_utility::chopper_boss_forced_target_get()];
   else
-    var_0 = [
-      [maps\_chopperboss_utility::get_chopperboss_data("get_targets_func")]
-    ]();
+    var_0 = [[maps\_chopperboss_utility::get_chopperboss_data("get_targets_func")]]();
 
   return var_0;
 }

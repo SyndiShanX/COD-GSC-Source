@@ -6,7 +6,6 @@
 #include common_scripts\utility;
 
 main() {
-
   maps\createfx\estate_fx::main();
 
   level._effect["bouncing_betty_launch"] = loadfx("impacts/bouncing_betty_launch_dirt");
@@ -71,5 +70,4 @@ main() {
   level._effect["thin_black_smoke_M"] = loadfx("smoke/thin_black_smoke_M");
   level._effect["firelp_small_pm"] = loadfx("fire/firelp_small_pm");
   level._effect["steam_solar_panels"] = loadfx("smoke/steam_solar_panels");
-
 }

@@ -7,7 +7,7 @@
 #include xmodelalias\c_usa_seal6_gear_als;
 
 main() {
-  self setmodel("c_usa_seal6_body");
+  self setModel("c_usa_seal6_body");
   self.headmodel = "c_usa_seal6_head_flight";
   self attach(self.headmodel, "", 1);
   self.gearmodel = codescripts\character::randomelement(xmodelalias\c_usa_seal6_gear_als::main());

@@ -477,7 +477,7 @@ flashThread() {
   self endon("death");
   if(!self.hidden)
     self.alpha = 1;
-  while (1) {
+  while(1) {
     if(self.frac >= self.flashFrac) {
       if(!self.hidden) {
         self fadeOverTime(0.3);
@@ -496,11 +496,11 @@ flashThread() {
 }
 destroyElem() {
   tempChildren = [];
-  for (index = 0; index < self.children.size; index++) {
+  for(index = 0; index < self.children.size; index++) {
     if(isDefined(self.children[index]))
       tempChildren[tempChildren.size] = self.children[index];
   }
-  for (index = 0; index < tempChildren.size; index++)
+  for(index = 0; index < tempChildren.size; index++)
     tempChildren[index] setParent(self getParent());
   if(self.elemType == "bar" || self.elemType == "bar_shader") {
     self.bar destroy();
@@ -522,7 +522,7 @@ setSize(width, height) {
   self.height = height;
 }
 updateChildren() {
-  for (index = 0; index < self.children.size; index++) {
+  for(index = 0; index < self.children.size; index++) {
     child = self.children[index];
     child setPoint(child.point, child.relativePoint, child.xOffset, child.yOffset);
   }

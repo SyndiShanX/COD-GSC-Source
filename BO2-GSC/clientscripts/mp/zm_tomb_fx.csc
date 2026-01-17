@@ -7,8 +7,7 @@
 #include clientscripts\mp\createfx\zm_tomb_fx;
 #include clientscripts\mp\_fx;
 
-precache_util_fx() {
-}
+precache_util_fx() {}
 
 precache_scripted_fx() {
   level._effect["eye_glow"] = loadfx("misc/fx_zombie_eye_single");
@@ -175,9 +174,9 @@ setup_prop_anims() {
 }
 
 play_fx_prop_anims(localclientnum) {
-  fxanim_props = getentarray(localclientnum, "fxanim", "targetname");
+  fxanim_props = getEntArray(localclientnum, "fxanim", "targetname");
   array_thread(fxanim_props, ::fxanim_props_think, localclientnum);
-  fxanim_props = getentarray(localclientnum, "fxanim_dlc4", "targetname");
+  fxanim_props = getEntArray(localclientnum, "fxanim_dlc4", "targetname");
   array_thread(fxanim_props, ::fxanim_props_think_dlc4, localclientnum);
 }
 
@@ -230,7 +229,7 @@ trap_fx_monitor(str_name, str_side) {
 
 flame_trap_fx(str_name, str_side) {
   vec_ang = self.angles;
-  vec_forward = anglestoforward(vec_ang);
+  vec_forward = anglesToForward(vec_ang);
 
   if(isDefined(self.a_loopfx)) {
     for(i = 0; i < self.a_loopfx.size; i++)
@@ -245,17 +244,17 @@ flame_trap_fx(str_name, str_side) {
   a_players = getlocalplayers();
 
   for(i = 0; i < a_players.size; i++) {
-    self.a_loopfx[i] = playfx(i, level._effect["flame_trap_start"], self.origin, vec_forward);
+    self.a_loopfx[i] = playFX(i, level._effect["flame_trap_start"], self.origin, vec_forward);
     wait 1;
     level.b_play_fire_loop_fx = 1;
     level thread monitor_fire_loop();
 
     while(level.b_play_fire_loop_fx) {
-      self.a_loopfx[i] = playfx(i, level._effect["flame_trap_loop"], self.origin, vec_forward);
+      self.a_loopfx[i] = playFX(i, level._effect["flame_trap_loop"], self.origin, vec_forward);
       wait 1;
     }
 
-    self.a_loopfx[i] = playfx(i, level._effect["flame_trap_start"], self.origin, vec_forward);
+    self.a_loopfx[i] = playFX(i, level._effect["flame_trap_start"], self.origin, vec_forward);
     wait 1;
   }
 

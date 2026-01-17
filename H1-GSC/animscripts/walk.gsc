@@ -7,7 +7,7 @@
 movewalk() {
   var_0 = undefined;
 
-  if(isdefined(self.pathgoalpos) && distancesquared(self.origin, self.pathgoalpos) > 4096)
+  if(isDefined(self.pathgoalpos) && distancesquared(self.origin, self.pathgoalpos) > 4096)
     var_0 = "stand";
 
   var_1 = [[self.chooseposefunc]](var_0);
@@ -17,7 +17,7 @@ movewalk() {
       if(animscripts\setposemovement::standwalk_begin()) {
         return;
       }
-      if(isdefined(self.walk_overrideanim)) {
+      if(isDefined(self.walk_overrideanim)) {
         animscripts\move::movestand_moveoverride(self.walk_overrideanim, self.walk_override_weights);
         return;
       }
@@ -48,7 +48,7 @@ dowalkanimoverride(var_0) {
   self setanimknoball( % combatrun, % body, 1, 0.5, self.moveplaybackrate);
 
   if(isarray(self.walk_overrideanim)) {
-    if(isdefined(self.walk_override_weights))
+    if(isDefined(self.walk_override_weights))
       var_1 = common_scripts\utility::choose_from_weighted_array(self.walk_overrideanim, self.walk_override_weights);
     else
       var_1 = self.walk_overrideanim[randomint(self.walk_overrideanim.size)];
@@ -67,10 +67,10 @@ getwalkanim(var_0) {
 
   var_2 = animscripts\utility::getmoveanim(var_0);
 
-  if(!animscripts\utility::isincombat() && !(isdefined(self.noruntwitch) && self.noruntwitch) && !(isdefined(self.a.bdisablemovetwitch) && self.a.bdisablemovetwitch)) {
+  if(!animscripts\utility::isincombat() && !(isDefined(self.noruntwitch) && self.noruntwitch) && !(isDefined(self.a.bdisablemovetwitch) && self.a.bdisablemovetwitch)) {
     var_3 = animscripts\utility::getmoveanim("straight_twitch");
 
-    if(isdefined(self.isunstableground) && self.isunstableground) {
+    if(isDefined(self.isunstableground) && self.isunstableground) {
       var_4 = animscripts\traverse\shared::getnextfootdown();
 
       if(var_4 == "Left")
@@ -79,14 +79,14 @@ getwalkanim(var_0) {
         var_3 = animscripts\utility::getmoveanim("straight_twitch_r");
     }
 
-    if(!isdefined(self.a.runloopcount)) {
+    if(!isDefined(self.a.runloopcount)) {
       if(isarray(var_2))
         var_2 = var_2[randomint(var_2.size)];
 
       return var_2;
     }
 
-    if(isdefined(var_3) && var_3.size > 0) {
+    if(isDefined(var_3) && var_3.size > 0) {
       var_5 = animscripts\utility::getrandomintfromseed(self.a.runloopcount, 4);
 
       if(var_5 == 0)
@@ -108,7 +108,7 @@ dowalkanim(var_0) {
     var_1 = var_1 * 0.9;
 
   if(self.a.pose == "stand") {
-    if(isdefined(self.enemy)) {
+    if(isDefined(self.enemy)) {
       animscripts\cqb::cqbtracking();
 
       if(animscripts\stairs_utility::isonstairs())

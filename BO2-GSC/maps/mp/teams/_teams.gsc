@@ -10,7 +10,7 @@
 
 init() {
   precacheshader("mpflag_spectator");
-  game["strings"]["autobalance"] = & "MP_AUTOBALANCE_NOW";
+  game["strings"]["autobalance"] = &"MP_AUTOBALANCE_NOW";
   precachestring(&"MP_AUTOBALANCE_NOW");
 
   if(getdvar(#"scr_teambalance") == "")

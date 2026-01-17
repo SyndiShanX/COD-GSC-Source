@@ -342,7 +342,7 @@ Callback_VehicleDamage(inflictor, attacker, damage, iDFlags, meansOfDeath, weapo
   if(!maps\mp\gametypes\_weapons::friendlyFireCheck(self.owner, attacker)) {
     return;
   }
-  if(isDefined(iDFlags) && (iDFlags & level.iDFLAGS_PENETRATION))
+  if(isDefined(iDFlags) && (iDFlags &level.iDFLAGS_PENETRATION))
     self.wasDamagedFromBulletPenetration = true;
 
   self.wasDamaged = true;

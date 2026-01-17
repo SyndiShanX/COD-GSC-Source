@@ -17,7 +17,6 @@
 #include scripts\zm_common\bots\zm_bot_action;
 #include scripts\zm_common\bots\zm_bot_position;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_bot;
 
 autoexec __init__system__() {
@@ -74,7 +73,7 @@ on_player_spawned() {
   self function_70e42260();
 }
 
-private function_70e42260() {
+function_70e42260() {
   if(isprofilebuild()) {
     if(getdvarint(#"scr_botsoaktest", 0)) {
       if(isbot(self)) {
@@ -132,78 +131,76 @@ event_handler[button_bit_actionslot_2_pressed] function_9b83de0f() {
   }
 }
 
-  function order_bot(bot) {
-    target = undefined;
-    targetdistsq = undefined;
-    targetdot = undefined;
+function order_bot(bot) {
+  target = undefined;
+  targetdistsq = undefined;
+  targetdot = undefined;
 
-    foreach(wallbuy in level._spawned_wallbuys) {
-      distsq = distancesquared(self.origin, wallbuy.origin);
+  foreach(wallbuy in level._spawned_wallbuys) {
+    distsq = distancesquared(self.origin, wallbuy.origin);
 
-      if(distsq > 262144) {
-        continue;
-      }
-
-      dot = self bot::fwd_dot(wallbuy.origin);
-
-      if(dot < 0.985) {
-        continue;
-      }
-
-      if(!isDefined(target) || dot > targetdot) {
-        target = wallbuy;
-        targetdistsq = distsq;
-        targetdot = dot;
-      }
+    if(distsq > 262144) {
+      continue;
     }
 
-    if(isDefined(target)) {
+    dot = self bot::fwd_dot(wallbuy.origin);
 
-      iprintlnbold(bot.name + "<dev string:x38>" + target.zombie_weapon_upgrade);
-
-        bot bot::set_interact(target);
-      return;
+    if(dot < 0.985) {
+      continue;
     }
 
-    doors = getEntArray("zombie_door", "targetname");
-    targetdistsq = undefined;
-    targetdot = undefined;
-
-    foreach(door in doors) {
-      if(door._door_open) {
-        continue;
-      }
-
-      distsq = distancesquared(self.origin, door.origin);
-
-      if(distsq > 262144) {
-        continue;
-      }
-
-      dot = self bot::fwd_dot(door.origin);
-
-      if(dot < 0.985) {
-        continue;
-      }
-
-      if(!isDefined(target) || dot > targetdot) {
-        target = door;
-        targetdistsq = distsq;
-        targetdot = dot;
-      }
-    }
-
-    if(isDefined(target)) {
-
-      iprintlnbold(bot.name + "<dev string:x47>");
-
-        bot bot::set_interact(target);
-      return;
+    if(!isDefined(target) || dot > targetdot) {
+      target = wallbuy;
+      targetdistsq = distsq;
+      targetdot = dot;
     }
   }
 
+  if(isDefined(target)) {
+    iprintlnbold(bot.name + "<dev string:x38>" + target.zombie_weapon_upgrade);
+
+    bot bot::set_interact(target);
+    return;
+  }
+
+  doors = getEntArray("zombie_door", "targetname");
+  targetdistsq = undefined;
+  targetdot = undefined;
+
+  foreach(door in doors) {
+    if(door._door_open) {
+      continue;
+    }
+
+    distsq = distancesquared(self.origin, door.origin);
+
+    if(distsq > 262144) {
+      continue;
+    }
+
+    dot = self bot::fwd_dot(door.origin);
+
+    if(dot < 0.985) {
+      continue;
+    }
+
+    if(!isDefined(target) || dot > targetdot) {
+      target = door;
+      targetdistsq = distsq;
+      targetdot = dot;
+    }
+  }
+
+  if(isDefined(target)) {
+    iprintlnbold(bot.name + "<dev string:x47>");
+
+    bot bot::set_interact(target);
+    return;
+  }
+}
+
 function_69745ea0() {
-  self endon(#"death", #"disconnect");
+  self endon(#"death", # "disconnect");
   self notify(#"hash_6b46933396f9db04");
   self endon(#"hash_6b46933396f9db04");
 
@@ -261,7 +258,7 @@ function_e16b5033(actor) {
       override_round_num = actor._starting_round_number;
     }
 
-    if(actor.archetype == #"zombie") {
+    if(actor.archetype == # "zombie") {
       max_health = float(level.zombie_health);
     } else {
       max_health = float(actor zm_ai_utility::function_8d44707e(level.var_faf67c27[actor.archetype].var_6109b81d, override_round_num));

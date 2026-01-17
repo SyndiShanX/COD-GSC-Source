@@ -46,7 +46,7 @@ init_tag_array() {
 
 water_dart_cleanup() {
   while(true) {
-    a_grenades = getentarray("grenade", "classname");
+    a_grenades = getEntArray("grenade", "classname");
 
     foreach(e_grenade in a_grenades) {
       if(isDefined(e_grenade.model) && e_grenade.model == "p6_zm_tm_staff_projectile_ice") {
@@ -143,7 +143,7 @@ freeze_zombie() {
 }
 
 _network_safe_play_fx(fx, v_origin) {
-  playfx(fx, v_origin, (0, 0, 1), (1, 0, 0));
+  playFX(fx, v_origin, (0, 0, 1), (1, 0, 0));
 }
 
 network_safe_play_fx(id, max, fx, v_origin) {
@@ -182,7 +182,7 @@ staff_water_position_source(v_detonate, n_lifetime_sec, str_weapon) {
   if(isDefined(v_detonate)) {
     level notify("blizzard_shot");
     e_fx = spawn("script_model", v_detonate + vectorscale((0, 0, 1), 33.0));
-    e_fx setmodel("tag_origin");
+    e_fx setModel("tag_origin");
     e_fx setclientfield("staff_blizzard_fx", 1);
     e_fx thread puzzle_debug_position("X", (0, 64, 255));
     wait 1;

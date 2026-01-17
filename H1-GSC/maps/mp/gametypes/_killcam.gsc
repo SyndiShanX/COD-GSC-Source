@@ -13,18 +13,18 @@ setkillcamerastyle(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 prekillcamnotify(var_0, var_1, var_2, var_3) {
-  if(isplayer(self) && isdefined(var_1) && isplayer(var_1)) {
+  if(isplayer(self) && isDefined(var_1) && isplayer(var_1)) {
     var_4 = gettime();
     waittillframeend;
 
-    if(isplayer(self) && isdefined(var_1) && isplayer(var_1)) {
+    if(isplayer(self) && isDefined(var_1) && isplayer(var_1)) {
       var_4 = (gettime() - var_4) / 1000;
       var_5 = maps\mp\gametypes\_playerlogic::gatherclassweapons();
       var_6 = var_1 loadcustomizationplayerview(var_2 + var_4, var_3, var_5);
-      var_7 = spawnstruct();
+      var_7 = spawnStruct();
       var_7.team = var_1.team;
       var_7.weapon = var_1.loadoutprimary;
-      var_8 = spawnstruct();
+      var_8 = spawnStruct();
       var_8.cust = var_7;
       var_8.weapons = var_6;
       self.killcamstream = var_8;
@@ -56,7 +56,7 @@ killcamtime(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(var_5 && var_8 > 5)
     var_8 = 5;
 
-  if(isdefined(var_4)) {
+  if(isDefined(var_4)) {
     if(var_8 > var_4)
       var_8 = var_4;
 
@@ -70,7 +70,7 @@ killcamtime(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 killcamadjustalivetime(var_0, var_1, var_2) {
   var_3 = 1000;
 
-  if(isdefined(var_1) && isdefined(var_2) && var_1 != var_2)
+  if(isDefined(var_1) && isDefined(var_2) && var_1 != var_2)
     return var_3;
 
   return var_0;
@@ -85,7 +85,7 @@ killcamarchivetime(var_0, var_1, var_2, var_3) {
 }
 
 killcamvalid(var_0, var_1) {
-  return var_1 && level.killcam && !(isdefined(var_0.cancelkillcam) && var_0.cancelkillcam) && game["state"] == "playing" && !var_0 maps\mp\_utility::isusingremote() && !level.showingfinalkillcam && !isagent(var_0);
+  return var_1 && level.killcam && !(isDefined(var_0.cancelkillcam) && var_0.cancelkillcam) && game["state"] == "playing" && !var_0 maps\mp\_utility::isusingremote() && !level.showingfinalkillcam && !isagent(var_0);
 }
 
 killcam(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_15, var_16, var_17, var_18) {
@@ -93,7 +93,7 @@ killcam(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, va
   self endon("spawned");
   level endon("game_ended");
 
-  if(var_1 < 0 || !isdefined(var_13)) {
+  if(var_1 < 0 || !isDefined(var_13)) {
     return;
   }
   level.numplayerswaitingtoenterkillcam++;
@@ -117,7 +117,7 @@ killcam(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, va
 
   var_22 = var_20 + var_21;
 
-  if(isdefined(var_12) && var_22 > var_12) {
+  if(isDefined(var_12) && var_22 > var_12) {
     if(var_12 < 2) {
       return;
     }
@@ -133,7 +133,7 @@ killcam(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, va
 
   self setclientomnvar("ui_killcam_end_milliseconds", 0);
 
-  if(isagent(var_13) && !isdefined(var_13.isactive)) {
+  if(isagent(var_13) && !isDefined(var_13.isactive)) {
     return;
   }
   if(isplayer(var_14))
@@ -157,7 +157,7 @@ killcam(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, va
     var_24 = [];
     var_25 = getweaponbasename(var_4);
 
-    if(isdefined(var_25)) {
+    if(isDefined(var_25)) {
       if(maps\mp\_utility::ismeleemod(var_15) && !maps\mp\gametypes\_weapons::isriotshield(var_4))
         var_25 = "iw5_combatknife";
       else {
@@ -209,7 +209,7 @@ killcam(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, va
   var_27 = gettime();
   self notify("begin_killcam", var_27);
 
-  if(!isagent(var_13) && isdefined(var_13) && isplayer(var_14))
+  if(!isagent(var_13) && isDefined(var_13) && isplayer(var_14))
     var_13 visionsyncwithplayer(var_14);
 
   maps\mp\_utility::updatesessionstate("spectator");
@@ -250,7 +250,7 @@ killcam(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, va
   thread endedkillcamcleanup();
   wait 0.05;
 
-  if(!isdefined(self)) {
+  if(!isDefined(self)) {
     return;
   }
   if(self.archivetime < var_26) {}
@@ -296,7 +296,7 @@ killcam(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, va
 }
 
 dofinalkillcamfx(var_0, var_1) {
-  if(isdefined(level.doingfinalkillcamfx)) {
+  if(isDefined(level.doingfinalkillcamfx)) {
     return;
   }
   level.doingfinalkillcamfx = 1;
@@ -339,15 +339,15 @@ waitskipkillcambutton(var_0) {
   self endon("disconnect");
   self endon("killcam_ended");
 
-  while (self usebuttonpressed())
+  while(self usebuttonpressed())
     wait 0.05;
 
-  while (!self usebuttonpressed())
+  while(!self usebuttonpressed())
     wait 0.05;
 
   self.skippedkillcam = 1;
 
-  if(isdefined(self.pers["totalKillcamsSkipped"]))
+  if(isDefined(self.pers["totalKillcamsSkipped"]))
     self.pers["totalKillcamsSkipped"]++;
 
   if(var_0 <= 0)
@@ -360,7 +360,7 @@ endkillcamifnothingtoshow() {
   self endon("disconnect");
   self endon("killcam_ended");
 
-  for (;;) {
+  for(;;) {
     if(self.archivetime <= 0) {
       break;
     }
@@ -389,7 +389,7 @@ killcamcleanup(var_0) {
   self setclientomnvar("ui_killcam_end_milliseconds", 0);
   self.killcam = undefined;
 
-  if(isdefined(self.killcamstartedtimedeciseconds) && isplayer(self) && isdefined(self.lifeid) && maps\mp\_matchdata::canloglife(self.lifeid)) {
+  if(isDefined(self.killcamstartedtimedeciseconds) && isplayer(self) && isDefined(self.lifeid) && maps\mp\_matchdata::canloglife(self.lifeid)) {
     var_1 = maps\mp\_utility::gettimepasseddecisecondsincludingrounds();
     setmatchdata("lives", self.lifeid, "killcamWatchTimeDeciSeconds", maps\mp\_utility::clamptobyte(var_1 - self.killcamstartedtimedeciseconds));
   }
@@ -434,7 +434,7 @@ cancelkillcamonuse_specificbutton(var_0, var_1) {
   self endon("disconnect");
   level endon("game_ended");
 
-  for (;;) {
+  for(;;) {
     if(!self[[var_0]]()) {
       wait 0.05;
       continue;
@@ -442,7 +442,7 @@ cancelkillcamonuse_specificbutton(var_0, var_1) {
 
     var_2 = 0;
 
-    while (self[[var_0]]()) {
+    while(self[[var_0]]()) {
       var_2 = var_2 + 0.05;
       wait 0.05;
     }
@@ -452,7 +452,7 @@ cancelkillcamonuse_specificbutton(var_0, var_1) {
     }
     var_2 = 0;
 
-    while (!self[[var_0]]() && var_2 < 0.5) {
+    while(!self[[var_0]]() && var_2 < 0.5) {
       var_2 = var_2 + 0.05;
       wait 0.05;
     }

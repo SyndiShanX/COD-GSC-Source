@@ -8,22 +8,22 @@
 
 init() {
   level.medalsettings.waittime = 1.25;
-  level.contractsettings = spawnstruct();
+  level.contractsettings = spawnStruct();
   level.contractsettings.waittime = 4.2;
-  level.killstreaksettings = spawnstruct();
+  level.killstreaksettings = spawnStruct();
   level.killstreaksettings.waittime = 3;
-  level.ranksettings = spawnstruct();
+  level.ranksettings = spawnStruct();
   level.ranksettings.waittime = 3;
-  level.startmessage = spawnstruct();
+  level.startmessage = spawnStruct();
   level.startmessagedefaultduration = 2.0;
   level.endmessagedefaultduration = 2.0;
-  level.challengesettings = spawnstruct();
+  level.challengesettings = spawnStruct();
   level.challengesettings.waittime = 3;
-  level.teammessage = spawnstruct();
+  level.teammessage = spawnStruct();
   level.teammessage.waittime = 3;
-  level.regulargamemessages = spawnstruct();
+  level.regulargamemessages = spawnStruct();
   level.regulargamemessages.waittime = 6;
-  level.wagersettings = spawnstruct();
+  level.wagersettings = spawnStruct();
   level.wagersettings.waittime = 3;
   level.momentumnotifywaittime = 0.5;
   level thread onplayerconnect();

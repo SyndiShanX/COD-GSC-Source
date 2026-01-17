@@ -21,11 +21,11 @@ function private _checkvalue(archetype, attributename, value) {
       maxvalue = attribute[""];
       minvalue = attribute[""];
       assert(isint(value) || isfloat(value), ((("" + attributename) + "") + value) + "");
-      assert(!isdefined(maxvalue) && !isdefined(minvalue) || (value <= maxvalue && value >= minvalue), ((((("" + value) + "") + minvalue) + "") + maxvalue) + "");
+      assert(!isDefined(maxvalue) && !isDefined(minvalue) || (value <= maxvalue && value >= minvalue), ((((("" + value) + "") + minvalue) + "") + maxvalue) + "");
       break;
     }
     case "": {
-      if(isdefined(value)) {
+      if(isDefined(value)) {
         assert(isvec(value), ((("" + attributename) + "") + value) + "");
       }
       break;
@@ -38,12 +38,12 @@ function private _checkvalue(archetype, attributename, value) {
 }
 
 function private _checkprerequisites(entity, attribute) {
-  /# /
+  /
   #
   assert(isentity(entity), "");
   assert(isactor(entity) || isvehicle(entity), "");
   assert(isstring(attribute), "");
-  if(isdefined(level.__ai_debuginterface) && level.__ai_debuginterface > 0) {
+  if(isDefined(level.__ai_debuginterface) && level.__ai_debuginterface > 0) {
     assert(isarray(entity.__interface), (("" + entity.archetype) + "") + "");
     assert(isarray(level.__ai_interface), "");
     assert(isarray(level.__ai_interface[entity.archetype]), ("" + entity.archetype) + "");
@@ -53,18 +53,18 @@ function private _checkprerequisites(entity, attribute) {
 }
 
 function private _checkregistrationprerequisites(archetype, attribute, callbackfunction) {
-  /# /
+  /
   #
   assert(isstring(archetype), "");
   assert(isstring(attribute), "");
-  assert(!isdefined(callbackfunction) || isfunctionptr(callbackfunction), "");
+  assert(!isDefined(callbackfunction) || isfunctionptr(callbackfunction), "");
 }
 
 function private _initializelevelinterface(archetype) {
-  if(!isdefined(level.__ai_interface)) {
+  if(!isDefined(level.__ai_interface)) {
     level.__ai_interface = [];
   }
-  if(!isdefined(level.__ai_interface[archetype])) {
+  if(!isDefined(level.__ai_interface[archetype])) {
     level.__ai_interface[archetype] = [];
   }
 }
@@ -72,30 +72,30 @@ function private _initializelevelinterface(archetype) {
 #namespace ai;
 
 function createinterfaceforentity(entity) {
-  if(!isdefined(entity.__interface)) {
+  if(!isDefined(entity.__interface)) {
     entity.__interface = [];
   }
 }
 
 function getaiattribute(entity, attribute) {
   ai_interface::_checkprerequisites(entity, attribute);
-  if(!isdefined(entity.__interface[attribute])) {
+  if(!isDefined(entity.__interface[attribute])) {
     return level.__ai_interface[entity.archetype][attribute]["default_value"];
   }
   return entity.__interface[attribute];
 }
 
 function hasaiattribute(entity, attribute) {
-  return isdefined(entity) && isdefined(attribute) && isdefined(entity.archetype) && isdefined(level.__ai_interface) && isdefined(level.__ai_interface[entity.archetype]) && isdefined(level.__ai_interface[entity.archetype][attribute]);
+  return isDefined(entity) && isDefined(attribute) && isDefined(entity.archetype) && isDefined(level.__ai_interface) && isDefined(level.__ai_interface[entity.archetype]) && isDefined(level.__ai_interface[entity.archetype][attribute]);
 }
 
 function registermatchedinterface(archetype, attribute, defaultvalue, possiblevalues, callbackfunction) {
   ai_interface::_checkregistrationprerequisites(archetype, attribute, callbackfunction);
-  assert(!isdefined(possiblevalues) || isarray(possiblevalues), "");
+  assert(!isDefined(possiblevalues) || isarray(possiblevalues), "");
   ai_interface::_initializelevelinterface(archetype);
-  /# /
+  /
   #
-  assert(!isdefined(level.__ai_interface[archetype][attribute]), ((("" + attribute) + "") + archetype) + "");
+  assert(!isDefined(level.__ai_interface[archetype][attribute]), ((("" + attribute) + "") + archetype) + "");
   level.__ai_interface[archetype][attribute] = [];
   level.__ai_interface[archetype][attribute]["callback"] = callbackfunction;
   level.__ai_interface[archetype][attribute]["default_value"] = defaultvalue;
@@ -106,14 +106,14 @@ function registermatchedinterface(archetype, attribute, defaultvalue, possibleva
 
 function registernumericinterface(archetype, attribute, defaultvalue, minimum, maximum, callbackfunction) {
   ai_interface::_checkregistrationprerequisites(archetype, attribute, callbackfunction);
-  assert(!isdefined(minimum) || isint(minimum) || isfloat(minimum), "");
-  assert(!isdefined(maximum) || isint(maximum) || isfloat(maximum), "");
-  assert(!isdefined(minimum) && !isdefined(maximum) || (isdefined(minimum) && isdefined(maximum)), "");
-  assert(!isdefined(minimum) && !isdefined(maximum) || minimum <= maximum, (("" + attribute) + "") + "");
+  assert(!isDefined(minimum) || isint(minimum) || isfloat(minimum), "");
+  assert(!isDefined(maximum) || isint(maximum) || isfloat(maximum), "");
+  assert(!isDefined(minimum) && !isDefined(maximum) || (isDefined(minimum) && isDefined(maximum)), "");
+  assert(!isDefined(minimum) && !isDefined(maximum) || minimum <= maximum, (("" + attribute) + "") + "");
   ai_interface::_initializelevelinterface(archetype);
-  /# /
+  /
   #
-  assert(!isdefined(level.__ai_interface[archetype][attribute]), ((("" + attribute) + "") + archetype) + "");
+  assert(!isDefined(level.__ai_interface[archetype][attribute]), ((("" + attribute) + "") + archetype) + "");
   level.__ai_interface[archetype][attribute] = [];
   level.__ai_interface[archetype][attribute]["callback"] = callbackfunction;
   level.__ai_interface[archetype][attribute]["default_value"] = defaultvalue;
@@ -126,9 +126,9 @@ function registernumericinterface(archetype, attribute, defaultvalue, minimum, m
 function registervectorinterface(archetype, attribute, defaultvalue, callbackfunction) {
   ai_interface::_checkregistrationprerequisites(archetype, attribute, callbackfunction);
   ai_interface::_initializelevelinterface(archetype);
-  /# /
+  /
   #
-  assert(!isdefined(level.__ai_interface[archetype][attribute]), ((("" + attribute) + "") + archetype) + "");
+  assert(!isDefined(level.__ai_interface[archetype][attribute]), ((("" + attribute) + "") + archetype) + "");
   level.__ai_interface[archetype][attribute] = [];
   level.__ai_interface[archetype][attribute]["callback"] = callbackfunction;
   level.__ai_interface[archetype][attribute]["default_value"] = defaultvalue;
@@ -140,14 +140,12 @@ function setaiattribute(entity, attribute, value) {
   ai_interface::_checkprerequisites(entity, attribute);
   ai_interface::_checkvalue(entity.archetype, attribute, value);
   oldvalue = entity.__interface[attribute];
-  if(!isdefined(oldvalue)) {
+  if(!isDefined(oldvalue)) {
     oldvalue = level.__ai_interface[entity.archetype][attribute]["default_value"];
   }
   entity.__interface[attribute] = value;
   callback = level.__ai_interface[entity.archetype][attribute]["callback"];
   if(isfunctionptr(callback)) {
-    [
-      [callback]
-    ](entity, attribute, oldvalue, value);
+    [[callback]](entity, attribute, oldvalue, value);
   }
 }

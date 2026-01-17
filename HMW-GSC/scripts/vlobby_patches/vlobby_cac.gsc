@@ -24,12 +24,10 @@ vl_main() {
   replacefunc(maps\mp\_vl_base::resetvirtuallobbypresentable, ::resetvirtuallobbypresentable_stub);
 }
 
-resetvirtuallobbypresentable_stub() {
-
-}
+resetvirtuallobbypresentable_stub() {}
 
 updatemovespeedscale_stub(weaponType) {
-  if(!isdefined(level.prematch_done_time)) {
+  if(!isDefined(level.prematch_done_time)) {
     return;
   }
 
@@ -106,7 +104,7 @@ weapons_init_stub() {
   level.weaponlist = [];
   level.weaponattachments = [];
 
-  for (var_4 = 0; var_4 <= var_2; var_4++) {
+  for(var_4 = 0; var_4 <= var_2; var_4++) {
     if(!issubstr(tablelookupbyrow("mp/statstable.csv", var_4, 2), "weapon_")) {
       continue;
     }
@@ -133,7 +131,7 @@ weapons_init_stub() {
     var_8 = [];
 
     foreach(var_10 in var_1) {
-      if(!isdefined(var_7[var_10])) {
+      if(!isDefined(var_7[var_10])) {
         continue;
       }
       level.weaponlist[level.weaponlist.size] = var_5 + "_" + var_10 + "_mp";
@@ -142,10 +140,10 @@ weapons_init_stub() {
 
     var_12 = [];
 
-    for (var_13 = 0; var_13 < var_8.size - 1; var_13++) {
+    for(var_13 = 0; var_13 < var_8.size - 1; var_13++) {
       var_14 = tablelookuprownum("mp/attachmentCombos.csv", 0, var_8[var_13]);
 
-      for (var_15 = var_13 + 1; var_15 < var_8.size; var_15++) {
+      for(var_15 = var_13 + 1; var_15 < var_8.size; var_15++) {
         if(tablelookup("mp/attachmentCombos.csv", 0, var_8[var_15], var_14) == "no") {
           continue;
         }
@@ -160,7 +158,7 @@ weapons_init_stub() {
   thread maps\mp\_flashgrenades::main();
   thread maps\mp\_entityheadicons::init();
 
-  if(!isdefined(level.weapondropfunction))
+  if(!isDefined(level.weapondropfunction))
     level.weapondropfunction = maps\mp\gametypes\_weapons::dropweaponfordeath;
 
   var_23 = 70;
@@ -169,7 +167,7 @@ weapons_init_stub() {
   level.claymoredetectiongraceperiod = 0.75;
   level.claymoredetonateradius = 192;
 
-  if(!isdefined(level.iszombiegame) || !level.iszombiegame) {
+  if(!isDefined(level.iszombiegame) || !level.iszombiegame) {
     level.minedetectiongraceperiod = 0.3;
     level.minedetectionradius = 100;
     level.minedetectionheight = 20;
@@ -198,7 +196,7 @@ weapons_init_stub() {
   level.claymorefxid = loadfx("vfx/props/claymore_laser");
   level thread maps\mp\gametypes\_weapons::onplayerconnect();
   level.c4explodethisframe = 0;
-  common_scripts\utility::array_thread(getentarray("misc_turret", "classname"), maps\mp\gametypes\_weapons::turret_monitoruse);
+  common_scripts\utility::array_thread(getEntArray("misc_turret", "classname"), maps\mp\gametypes\_weapons::turret_monitoruse);
 }
 
 watchweaponchange_stub() {
@@ -212,7 +210,7 @@ watchweaponchange_stub() {
   self.hitsthismag = [];
   var_0 = self getcurrentweapon();
 
-  if(maps\mp\_utility::iscacprimaryweapon(var_0) && !isdefined(self.hitsthismag[var_0])) {
+  if(maps\mp\_utility::iscacprimaryweapon(var_0) && !isDefined(self.hitsthismag[var_0])) {
     self.hitsthismag[var_0] = weaponclipsize(var_0);
   }
 
@@ -224,7 +222,7 @@ watchweaponchange_stub() {
 
   var_1 = 1;
 
-  for (;;) {
+  for(;;) {
     if(!var_1) {
       self waittill("weapon_change");
     }
@@ -242,7 +240,7 @@ watchweaponchange_stub() {
     self.has_stock = 0;
     self.has_laser = 0;
 
-    if(isdefined(var_2)) {
+    if(isDefined(var_2)) {
       foreach(var_4 in var_2) {
         if(var_4 == "opticstargetenhancer") {
           self.has_target_enhancer = 1;
@@ -283,11 +281,11 @@ watchweaponchange_stub() {
     }
 
     if(var_0 != "none" && var_6[0] != "iw5" && var_6[0] != "iw6" && var_6[0] != "h1" && var_6[0] != "h2") {
-      if(maps\mp\_utility::iscacprimaryweapon(var_0) && !isdefined(self.hitsthismag[var_0 + "_mp"])) {
+      if(maps\mp\_utility::iscacprimaryweapon(var_0) && !isDefined(self.hitsthismag[var_0 + "_mp"])) {
         self.hitsthismag[var_0 + "_mp"] = weaponclipsize(var_0 + "_mp");
       }
     } else if(var_0 != "none" && (var_6[0] == "iw5" || var_6[0] == "iw6" || var_6[0] == "h1" || var_6[0] == "h2")) {
-      if(maps\mp\_utility::iscacprimaryweapon(var_0) && !isdefined(self.hitsthismag[var_0])) {
+      if(maps\mp\_utility::iscacprimaryweapon(var_0) && !isDefined(self.hitsthismag[var_0])) {
         self.hitsthismag[var_0] = weaponclipsize(var_0);
       }
     }
@@ -308,7 +306,7 @@ applyperks_stub() {
 
   table = "mp/perkTable.csv";
 
-  for (i = 0; i < tablegetrowcount(table); i++) {
+  for(i = 0; i < tablegetrowcount(table); i++) {
     pro_perk = tableLookup(table, 0, i, 8);
 
     if(!isSubStr(pro_perk, "specialty_")) {
@@ -428,12 +426,12 @@ updateavatarloadout_stub(var_0, var_1, var_2) {
   var_1.updatecostume = undefined;
   var_1.weapclasschanged = undefined;
 
-  if(var_6 == "h1_junsho" || isdefined(var_2) && issubstr(var_2, "h1_junsho"))
+  if(var_6 == "h1_junsho" || isDefined(var_2) && issubstr(var_2, "h1_junsho"))
     var_0 maps\mp\_vl_avatar::playerteleportavatartoweaponroom(var_1, level.camparams.camera, 1);
 }
 
 memberclasschanges_stub(var_0) {
-  if(!isdefined(level.vlplayer) || !isdefined(level.camparams) || level.vlavatars.size == 0) {
+  if(!isDefined(level.vlplayer) || !isDefined(level.camparams) || level.vlavatars.size == 0) {
     return;
   }
   var_1 = level.vlplayer;
@@ -442,12 +440,12 @@ memberclasschanges_stub(var_0) {
   foreach(var_3 in var_0) {
     var_4 = maps\mp\_vl_avatar::get_avatar_for_xuid(var_3.xuid);
 
-    if(isdefined(var_4)) {
+    if(isDefined(var_4)) {
       if(var_3.player_controller >= 0) {
         var_5 = maps\mp\_vl_avatar::get_ownerid_for_avatar(var_4);
-        var_6 = !level.vl_active || !isdefined(var_4.loadout) && getdvarint("virtualLobbyMode", 0) == 6;
+        var_6 = !level.vl_active || !isDefined(var_4.loadout) && getdvarint("virtualLobbyMode", 0) == 6;
 
-        if(isdefined(var_4)) {
+        if(isDefined(var_4)) {
           var_4.loadout = var_3;
           var_4.xuid = var_3.xuid;
         }
@@ -483,7 +481,7 @@ memberclasschanges_stub(var_0) {
     var_22[level.costumecat2idx["gloves"]] = var_3.gloves;
     var_23 = var_3._id_A7ED;
 
-    if(!isdefined(var_4)) {
+    if(!isDefined(var_4)) {
       var_5 = maps\mp\_vl_avatar::getnewlobbyavatarownerid(var_3.xuid);
       var_24 = maps\mp\gametypes\vlobby::getspawnpoint(maps\mp\_vl_base::getconstlocalplayer());
       var_4 = maps\mp\_vl_avatar::spawn_an_avatar(var_1, var_24, var_20, var_22, var_23, var_3._id_A7E7, var_5, 0);
@@ -503,7 +501,7 @@ memberclasschanges_stub(var_0) {
 
     var_5 = maps\mp\_vl_avatar::get_ownerid_for_avatar(var_4);
 
-    if(var_3.player_controller >= 0 && isdefined(var_4.savedcostume))
+    if(var_3.player_controller >= 0 && isDefined(var_4.savedcostume))
       var_22 = var_4.savedcostume;
 
     if(var_3.player_controller >= 0 || maps\mp\_vl_base::loadout_changed(var_4.loadout, var_3) || maps\mp\_vl_base::costume_changed(var_4.costume, var_22)) {
@@ -615,7 +613,7 @@ handleweaponhighlighted_stub(var_0) {
     if(var_2.size > 3 && var_2.size % 2 == 0) {
       var_12 = (var_2.size - 2) / 2;
 
-      for (var_13 = 0; var_13 < var_12; var_13++) {
+      for(var_13 = 0; var_13 < var_12; var_13++) {
         var_14 = var_2[2 + var_13 * 2];
         var_15 = maps\mp\_vl_cac::parseweaponhighlightedcategory(var_2[2 + var_13 * 2]);
         var_16 = var_2[3 + var_13 * 2];
@@ -648,7 +646,7 @@ handleweaponhighlighted_stub(var_0) {
 
     var_17 = -1;
 
-    if(isdefined(self.emblemloadout.emblemindex)) {
+    if(isDefined(self.emblemloadout.emblemindex)) {
       if(self.emblemloadout.shouldapplyemblemtoweapon)
         var_17 = self.emblemloadout.emblemindex;
     } else {
@@ -675,7 +673,7 @@ buildweaponnamecac_stub(var_0, var_1, var_2, var_3, var_4, var_5) {
   vl_loadout = maps\mp\_vl_base::getloadoutvl(custom_class_loc, class_index);
 
   perks = [];
-  for (var_9 = 0; var_9 < 3; var_9++)
+  for(var_9 = 0; var_9 < 3; var_9++)
     perks[var_9] = vl_loadout["perk" + var_9];
 
   return maps\mp\gametypes\_class::buildWeaponName(var_0, var_1, var_2, var_3, perks, undefined);
@@ -683,7 +681,7 @@ buildweaponnamecac_stub(var_0, var_1, var_2, var_3, var_4, var_5) {
 
 spawngenericprop3avatar_stub() {
   var_0 = spawn("script_model", (0.0, 0.0, 0.0));
-  var_0 setmodel("genericprop_x3");
+  var_0 setModel("genericprop_x3");
   // var_0 scriptmodelplayanim( "h1_lobby_turnaround_ranger_akimbo_align" );
   return var_0;
 }
@@ -697,7 +695,7 @@ showloadingweaponavatar_stub(var_0, var_1) {
 showweaponavatar_stub(var_0) {
   var_1 = level.weaponavatarparent.savedweaponavatar;
 
-  if(!isdefined(var_1)) {
+  if(!isDefined(var_1)) {
     var_1 = spawn("weapon_" + level.cac_weapon, (0.0, 0.0, 0.0), 1);
     var_1.isweapon = 1;
     level.weaponavatarparent.savedweaponavatar = var_1;
@@ -711,7 +709,7 @@ showweaponavatar_stub(var_0) {
   var_3 = maps\mp\_vl_cac::isavatarakimbo(var_1);
 
   if(var_3) {
-    if(!isdefined(var_1.akimboavatar)) {
+    if(!isDefined(var_1.akimboavatar)) {
       var_1.akimboavatar = spawn("weapon_" + level.cac_weapon, (0.0, 0.0, 0.0), 1);
       var_1.akimboavatar linktosynchronizedparent(var_1.linker, "j_prop_2", (0.0, 0.0, 0.0), (0.0, 0.0, 0.0));
     } else
@@ -720,7 +718,7 @@ showweaponavatar_stub(var_0) {
     var_1.akimboavatar setpickupweapon(level.cac_weapon, 1);
     var_1 linktosynchronizedparent(var_1.linker, "j_prop_1", (0.0, 0.0, 0.0), (0.0, 0.0, 0.0));
   } else {
-    if(isdefined(var_1.akimboavatar))
+    if(isDefined(var_1.akimboavatar))
       var_1.akimboavatar hide();
 
     var_1 linktosynchronizedparent(var_1.linker, "j_prop_3", (0.0, 0.0, 0.0), (0.0, 0.0, 0.0));

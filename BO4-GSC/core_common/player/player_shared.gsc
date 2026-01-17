@@ -9,7 +9,6 @@
 #include scripts\core_common\player\player_loadout;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace player;
 
 autoexec __init__system__() {
@@ -29,7 +28,7 @@ __init__() {
 }
 
 spawn_player() {
-  self endon(#"disconnect", #"joined_spectators");
+  self endon(#"disconnect", # "joined_spectators");
   self notify(#"spawned");
   level notify(#"player_spawned");
   self notify(#"end_respawn");
@@ -68,8 +67,8 @@ spawn_player() {
   self.health = self.maxhealth;
   self function_9080887a();
 
-  if(self.pers[#"lives"] && !(isDefined(level.takelivesondeath) && level.takelivesondeath)) {
-    self.pers[#"lives"]--;
+  if(self.pers[# "lives"] && !(isDefined(level.takelivesondeath) && level.takelivesondeath)) {
+    self.pers[# "lives"]--;
   }
 
   if(isDefined(game.lives) && isDefined(game.lives[self.team]) && game.lives[self.team] && !(isDefined(level.takelivesondeath) && level.takelivesondeath)) {
@@ -111,7 +110,7 @@ on_player_spawned() {
 
 last_valid_position(update_rate) {
   self notify(#"stop_last_valid_position");
-  self endon(#"stop_last_valid_position", #"disconnect");
+  self endon(#"stop_last_valid_position", # "disconnect");
 
   while(!isDefined(self.last_valid_position)) {
     self.last_valid_position = getclosestpointonnavmesh(self.origin, 2048, 0);
@@ -141,7 +140,7 @@ last_valid_position(update_rate) {
         }
       }
 
-      ground_pos = groundtrace(self.origin + (0, 0, 8), self.origin + (0, 0, -100000), 0, self)[#"position"];
+      ground_pos = groundtrace(self.origin + (0, 0, 8), self.origin + (0, 0, -100000), 0, self)[# "position"];
 
       if(!isDefined(ground_pos)) {
         wait update_rate;
@@ -309,40 +308,40 @@ get_weapondata(weapon) {
     weapon = self getcurrentweapon();
   }
 
-  weapondata[#"weapon"] = weapon.rootweapon.name;
-  weapondata[#"attachments"] = util::function_2146bd83(weapon);
+  weapondata[# "weapon"] = weapon.rootweapon.name;
+  weapondata[# "attachments"] = util::function_2146bd83(weapon);
 
   if(weapon != level.weaponnone) {
-    weapondata[#"clip"] = self getweaponammoclip(weapon);
-    weapondata[#"stock"] = self getweaponammostock(weapon);
-    weapondata[#"fuel"] = self getweaponammofuel(weapon);
-    weapondata[#"heat"] = self isweaponoverheating(1, weapon);
-    weapondata[#"overheat"] = self isweaponoverheating(0, weapon);
-    weapondata[#"renderoptions"] = self getweaponoptions(weapon);
+    weapondata[# "clip"] = self getweaponammoclip(weapon);
+    weapondata[# "stock"] = self getweaponammostock(weapon);
+    weapondata[# "fuel"] = self getweaponammofuel(weapon);
+    weapondata[# "heat"] = self isweaponoverheating(1, weapon);
+    weapondata[# "overheat"] = self isweaponoverheating(0, weapon);
+    weapondata[# "renderoptions"] = self getweaponoptions(weapon);
 
     if(weapon.isriotshield) {
-      weapondata[#"health"] = self.weaponhealth;
+      weapondata[# "health"] = self.weaponhealth;
     }
   } else {
-    weapondata[#"clip"] = 0;
-    weapondata[#"stock"] = 0;
-    weapondata[#"fuel"] = 0;
-    weapondata[#"heat"] = 0;
-    weapondata[#"overheat"] = 0;
+    weapondata[# "clip"] = 0;
+    weapondata[# "stock"] = 0;
+    weapondata[# "fuel"] = 0;
+    weapondata[# "heat"] = 0;
+    weapondata[# "overheat"] = 0;
   }
 
   if(weapon.dualwieldweapon != level.weaponnone) {
-    weapondata[#"lh_clip"] = self getweaponammoclip(weapon.dualwieldweapon);
+    weapondata[# "lh_clip"] = self getweaponammoclip(weapon.dualwieldweapon);
   } else {
-    weapondata[#"lh_clip"] = 0;
+    weapondata[# "lh_clip"] = 0;
   }
 
   if(weapon.altweapon != level.weaponnone) {
-    weapondata[#"alt_clip"] = self getweaponammoclip(weapon.altweapon);
-    weapondata[#"alt_stock"] = self getweaponammostock(weapon.altweapon);
+    weapondata[# "alt_clip"] = self getweaponammoclip(weapon.altweapon);
+    weapondata[# "alt_stock"] = self getweaponammostock(weapon.altweapon);
   } else {
-    weapondata[#"alt_clip"] = 0;
-    weapondata[#"alt_stock"] = 0;
+    weapondata[# "alt_clip"] = 0;
+    weapondata[# "alt_stock"] = 0;
   }
 
   return weapondata;
@@ -354,33 +353,33 @@ weapondata_give(weapondata) {
     return;
   }
 
-  weapon = util::get_weapon_by_name(weapondata[#"weapon"], weapondata[#"attachments"]);
-  self giveweapon(weapon, weapondata[#"renderoptions"]);
+  weapon = util::get_weapon_by_name(weapondata[# "weapon"], weapondata[# "attachments"]);
+  self giveweapon(weapon, weapondata[# "renderoptions"]);
 
   if(weapon != level.weaponnone) {
-    self setweaponammoclip(weapon, weapondata[#"clip"]);
-    self setweaponammostock(weapon, weapondata[#"stock"]);
+    self setweaponammoclip(weapon, weapondata[# "clip"]);
+    self setweaponammostock(weapon, weapondata[# "stock"]);
 
-    if(isDefined(weapondata[#"fuel"])) {
-      self setweaponammofuel(weapon, weapondata[#"fuel"]);
+    if(isDefined(weapondata[# "fuel"])) {
+      self setweaponammofuel(weapon, weapondata[# "fuel"]);
     }
 
-    if(isDefined(weapondata[#"heat"]) && isDefined(weapondata[#"overheat"])) {
-      self setweaponoverheating(weapondata[#"overheat"], weapondata[#"heat"], weapon);
+    if(isDefined(weapondata[# "heat"]) && isDefined(weapondata[# "overheat"])) {
+      self setweaponoverheating(weapondata[# "overheat"], weapondata[# "heat"], weapon);
     }
 
-    if(weapon.isriotshield && isDefined(weapondata[#"health"])) {
-      self.weaponhealth = weapondata[#"health"];
+    if(weapon.isriotshield && isDefined(weapondata[# "health"])) {
+      self.weaponhealth = weapondata[# "health"];
     }
   }
 
   if(weapon.dualwieldweapon != level.weaponnone) {
-    self setweaponammoclip(weapon.dualwieldweapon, weapondata[#"lh_clip"]);
+    self setweaponammoclip(weapon.dualwieldweapon, weapondata[# "lh_clip"]);
   }
 
   if(weapon.altweapon != level.weaponnone) {
-    self setweaponammoclip(weapon.altweapon, weapondata[#"alt_clip"]);
-    self setweaponammostock(weapon.altweapon, weapondata[#"alt_stock"]);
+    self setweaponammoclip(weapon.altweapon, weapondata[# "alt_clip"]);
+    self setweaponammostock(weapon.altweapon, weapondata[# "alt_stock"]);
   }
 }
 
@@ -456,8 +455,8 @@ get_snapped_spot_origin(spot_position) {
   new_spot_position = (spot_position[0], spot_position[1], spot_position[2] - snap_max_height);
   trace = physicstrace(spot_position, new_spot_position, mins, maxs, self);
 
-  if(trace[#"fraction"] < 1) {
-    return trace[#"position"];
+  if(trace[# "fraction"] < 1) {
+    return trace[# "position"];
   }
 
   return spot_position;
@@ -474,17 +473,17 @@ allow_stance_change(b_allow = 1) {
   str_stance = self getstance();
 
   switch (str_stance) {
-    case #"prone":
+    case # "prone":
       self allowprone(1);
       self allowcrouch(0);
       self allowstand(0);
       break;
-    case #"crouch":
+    case # "crouch":
       self allowprone(0);
       self allowcrouch(1);
       self allowstand(0);
       break;
-    case #"stand":
+    case # "stand":
       self allowprone(0);
       self allowcrouch(0);
       self allowstand(1);
@@ -601,7 +600,7 @@ function_74598aba(var_96a9fbf4) {
 
 function_466d8a4b(var_b66879ad, team) {
   params = {
-    #team: team, 
+    #team: team,
     #var_b66879ad: var_b66879ad
   };
   self notify(#"joined_team", params);
@@ -611,7 +610,7 @@ function_466d8a4b(var_b66879ad, team) {
 
 function_6f6c29e(var_b66879ad) {
   params = {
-    #team: #"spectator", 
+    #team: # "spectator",
     #var_b66879ad: var_b66879ad
   };
   self notify(#"joined_spectator", params);
@@ -647,7 +646,7 @@ function_e7f18b20(player_func, ...) {
   players = level.players;
 
   foreach(player in players) {
-    if(!isDefined(player.pers[#"team"])) {
+    if(!isDefined(player.pers[# "team"])) {
       continue;
     }
 
@@ -665,11 +664,11 @@ function_38de2d5a(notification) {
 
 init_heal(var_cd7b9255, var_e9c4ebeb) {
   var_84d04e6 = {
-    #enabled: var_cd7b9255, 
-    #rate: 0, 
-    #var_bc840360: 0, 
-    #var_c8777194: var_e9c4ebeb, 
-    #var_b8c7d886: 0, 
+    #enabled: var_cd7b9255,
+    #rate: 0,
+    #var_bc840360: 0,
+    #var_c8777194: var_e9c4ebeb,
+    #var_b8c7d886: 0,
     #var_a1cac2f1: 0
   };
 

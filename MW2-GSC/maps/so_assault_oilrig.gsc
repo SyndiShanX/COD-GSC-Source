@@ -13,7 +13,7 @@
 main() {
   level.so_compass_zoom = "close";
 
-  remove_triggers = getentarray("redshirt_trigger", "targetname");
+  remove_triggers = getEntArray("redshirt_trigger", "targetname");
   foreach(trigger in remove_triggers)
   trigger Delete();
 
@@ -42,7 +42,7 @@ start_map() {
   //	thread music_end();
   thread breach_flags();
   thread maps\oilrig::c4_barrels();
-  assert(isdefined(level.gameskill));
+  assert(isDefined(level.gameskill));
   switch (level.gameSkill) {
     case 0: // Easy
     case 1:
@@ -58,7 +58,7 @@ start_map() {
   thread obj_main();
 
   maps\_compass::setupMiniMap("compass_map_oilrig_lvl_1");
-  array_thread(getentarray("compassTriggers", "targetname"), maps\oilrig::compass_triggers_think);
+  array_thread(getEntArray("compassTriggers", "targetname"), maps\oilrig::compass_triggers_think);
 
   /*-----------------------
   FIRST BREACH
@@ -94,7 +94,7 @@ start_map() {
   /*-----------------------
   DECK 2 RAPPELERS
   -------------------------*/
-  aSpawners = getentarray("hostiles_rappel_deck2", "targetname");
+  aSpawners = getEntArray("hostiles_rappel_deck2", "targetname");
   flag_wait("rappel_dudes_failsafe");
   aHostiles = maps\oilrig::spawn_group_staggered(aSpawners);
 
@@ -132,7 +132,6 @@ start_map() {
 
   //	thread dialogue_end_chatter();
   thread fade_challenge_out();
-
 }
 
 dialogue_thermal_hint() {
@@ -177,11 +176,11 @@ heli_intimidates_player() {
 track_if_player_is_shooting_at_intimidating_heli(eHeli) {
   level endon("deck_2_heli_is_finished_intimidating");
   level endon("player_shoots_or_aims_rocket_at_intimidating_heli");
-  for (;;) {
+  for(;;) {
     // this damage is done to self.health which isnt used to determine the helicopter's health, damageTaken is.
     eHeli waittill("damage", damage, attacker, direction_vec, P, type);
 
-    if(!isdefined(attacker) || !isplayer(attacker))
+    if(!isDefined(attacker) || !isplayer(attacker))
       continue;
     else {
       flag_set("player_shoots_or_aims_rocket_at_intimidating_heli");
@@ -192,7 +191,6 @@ track_if_player_is_shooting_at_intimidating_heli(eHeli) {
 }
 
 dialogue_end_chatter() {
-
   //***Marine HQ			Hunter Two-Two, this is Punisher Actual. GOPLAT secure. All EOD teams are cleared for landing.
   radio_dialogue("oilrig_rmv_goplat");
 
@@ -233,7 +231,7 @@ breach_flags() {
 
 alarm() {
   alarm_org = getent("origin_alarm", "targetname");
-  alarm_org playloopsound("emt_oilrig_alarm_alert");
+  alarm_org playLoopSound("emt_oilrig_alarm_alert");
   wait(20);
   alarm_org stopLoopSound("emt_oilrig_alarm_alert");
   alarm_org delete();
@@ -244,7 +242,7 @@ music_to_first_breach() {
 
   music_alias = "so_assault_oilrig_sneak_music";
   music_time = musicLength(music_alias) + 2;
-  while (!flag("upper_room_breached")) {
+  while(!flag("upper_room_breached")) {
     MusicPlayWrapper(music_alias);
     wait(music_time);
   }
@@ -259,7 +257,7 @@ music_to_top_deck() {
 
   music_alias = "so_assault_oilrig_fight_music_01";
   music_time = musicLength(music_alias) + 2;
-  while (!flag("top_deck_room_breached")) {
+  while(!flag("top_deck_room_breached")) {
     MusicPlayWrapper("so_assault_oilrig_fight_music_01");
     wait(music_time);
   }
@@ -274,7 +272,6 @@ music_end() {
   wait(.5);
   MusicPlayWrapper("so_assault_oilrig_victory_music");
 }
-
 
 hostage_evac(eVolume) {
   level endon("mission failed");
@@ -293,19 +290,19 @@ hostage_evac_think() {
   level endon("mission failed");
   self endon("death");
 
-  while (!isdefined(self.breachfinished))
+  while(!isDefined(self.breachfinished))
     wait(.1);
 
-  while (self.breachfinished == false)
+  while(self.breachfinished == false)
     wait(.1);
 
   wait(randomfloatrange(1, 2));
   eNode = level.hostageNodes[0];
   level.hostageNodes = array_remove(level.hostageNodes, eNode);
 
-  if(!isdefined(self))
+  if(!isDefined(self)) {
     return;
-
+  }
   self notify("stop_idle");
   self setgoalnode(eNode);
   self.goalradius = 64;
@@ -313,22 +310,21 @@ hostage_evac_think() {
   self waittill("goal");
 }
 
-
 gameskill_regular() {
-  level.challenge_objective = & "SO_ASSAULT_OILRIG_OBJ_MAIN";
+  level.challenge_objective = &"SO_ASSAULT_OILRIG_OBJ_MAIN";
 }
 
 gameskill_hardened() {
-  level.challenge_objective = & "SO_ASSAULT_OILRIG_OBJ_MAIN";
+  level.challenge_objective = &"SO_ASSAULT_OILRIG_OBJ_MAIN";
 }
 
 gameskill_veteran() {
-  level.challenge_objective = & "SO_ASSAULT_OILRIG_OBJ_MAIN";
+  level.challenge_objective = &"SO_ASSAULT_OILRIG_OBJ_MAIN";
 }
 
 obj_main() {
   objective_number = 1;
-  obj_positions = getentarray("obj_breach2", "targetname");
+  obj_positions = getEntArray("obj_breach2", "targetname");
 
   objective_add(objective_number, "current", level.challenge_objective);
 
@@ -358,7 +354,7 @@ obj_main() {
 
   flag_wait("player_at_stairs_to_top_deck");
 
-  obj_positions = getentarray("obj_breach3", "targetname");
+  obj_positions = getEntArray("obj_breach3", "targetname");
   assign_script_breachgroup_to_ents(obj_positions);
 
   // find out which breaches should be added to the objective positions

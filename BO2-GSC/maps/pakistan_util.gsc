@@ -487,7 +487,7 @@ id_think(ai_target, n_view_angle_max, n_view_angle_min, wait_for_flag) {
 
   while(is_analyzing_voice_match) {
     if(isDefined(ai_target)) {
-      n_player_view_angle = level.player get_dot_direction(ai_target geteye(), 0, 1, "forward", 1);
+      n_player_view_angle = level.player get_dot_direction(ai_target getEye(), 0, 1, "forward", 1);
 
       if(n_player_view_angle <= n_player_view_angle_min) {
         if(flag("anthem_voice_analysis_complete")) {
@@ -534,14 +534,14 @@ monitor_surveillance_zoom() {
     self waittill_ads_button_pressed();
     self setclientflag(7);
     luinotifyevent(&"hud_pak_toggle_zoom", 1, 1);
-    self playsound("evt_pak_surv_zoom_in");
+    self playSound("evt_pak_surv_zoom_in");
 
     while(self ads_button_pressed())
       wait 0.05;
 
     self clearclientflag(7);
     luinotifyevent(&"hud_pak_toggle_zoom", 1, 0);
-    self playsound("evt_pak_surv_zoom_out");
+    self playSound("evt_pak_surv_zoom_out");
   }
 }
 
@@ -571,8 +571,7 @@ surveillance_think(ai_target) {
   init_interference_triggers();
   level.player thread check_in_interference();
 
-  if(isDefined(level.menendez)) {
-  }
+  if(isDefined(level.menendez)) {}
 
   if(!isDefined(ai_target)) {
     level notify("stop_surveillance");
@@ -581,8 +580,8 @@ surveillance_think(ai_target) {
 
   while(true) {
     if(isDefined(ai_target)) {
-      n_player_view_angle = level.player get_dot_direction(ai_target geteye(), 0, 1, "forward", 1);
-      n_los_angle_constraint = n_los_angle_max + n_los_angle_step * (distance(level.player geteye(), ai_target geteye()) - n_dist_to_menendez_min);
+      n_player_view_angle = level.player get_dot_direction(ai_target getEye(), 0, 1, "forward", 1);
+      n_los_angle_constraint = n_los_angle_max + n_los_angle_step * (distance(level.player getEye(), ai_target getEye()) - n_dist_to_menendez_min);
       n_los_angle_constraint = min(n_los_angle_constraint, cos(0.5));
 
       if(flag("anthem_player_in_interference")) {
@@ -621,8 +620,7 @@ surveillance_think(ai_target) {
 stop_surveillance() {
   level notify("stop_surveillance");
 
-  if(isDefined(level.menendez)) {
-  }
+  if(isDefined(level.menendez)) {}
 
   surveillance_state_change_cleanup(level.str_hud_current_state);
   level.player notify("anthem_surveillance_complete");
@@ -644,9 +642,9 @@ surveillance_state_change_cleanup(str_hud_current_state) {
 }
 
 is_menendez_los(n_player_view_angle, n_los_angle_constraint) {
-  v_trace_pos = bullettrace(level.player geteye(), level.menendez geteye(), 0, level.player, 1, 1)["position"];
+  v_trace_pos = bulletTrace(level.player getEye(), level.menendez getEye(), 0, level.player, 1, 1)["position"];
 
-  if(n_player_view_angle > n_los_angle_constraint && v_trace_pos == level.menendez geteye())
+  if(n_player_view_angle > n_los_angle_constraint && v_trace_pos == level.menendez getEye())
     return true;
   else
     return false;
@@ -675,7 +673,7 @@ hud_surveillance_no_target() {
 }
 
 init_interference_triggers() {
-  array_thread(getentarray("sound_interference_trigger", "targetname"), ::interference_trigger_think);
+  array_thread(getEntArray("sound_interference_trigger", "targetname"), ::interference_trigger_think);
 }
 
 interference_trigger_think() {
@@ -1126,7 +1124,7 @@ follow_path_node_trigger_wait(e_trig) {
 }
 
 hide_post_grenade_room() {
-  a_room_models_after = getentarray("gernade_room_after", "targetname");
+  a_room_models_after = getEntArray("gernade_room_after", "targetname");
 
   for(i = 0; i < a_room_models_after.size; i++)
     a_room_models_after[i] hide();
@@ -1169,7 +1167,7 @@ spawn_grenades_at_structs(str_struct) {
 }
 
 ragdoll_corpse_control() {
-  a_t_spawn_trigs = getentarray("corpse_spawn_trig", "targetname");
+  a_t_spawn_trigs = getEntArray("corpse_spawn_trig", "targetname");
   array_thread(a_t_spawn_trigs, ::ragdoll_corpse_control_think);
 }
 
@@ -1203,9 +1201,9 @@ spawn_script_model_at_struct(s_start_spot) {
   m_script_model = spawn("script_model", s_start_spot.origin);
 
   if(cointoss())
-    m_script_model setmodel("c_pak_civ_male_corpse1_fb");
+    m_script_model setModel("c_pak_civ_male_corpse1_fb");
   else
-    m_script_model setmodel("c_pak_civ_male_corpse2_fb");
+    m_script_model setModel("c_pak_civ_male_corpse2_fb");
 
   m_script_model.angles = s_start_spot.angles;
   m_script_model.targetname = s_start_spot.targetname + "_model";
@@ -1215,12 +1213,12 @@ spawn_script_model_at_struct(s_start_spot) {
 delete_ragdoll_corpses(str_name) {
   sink_ragdoll_corpses(str_name);
   wait 0.25;
-  a_m_corpses = getentarray(str_name, "targetname");
+  a_m_corpses = getEntArray(str_name, "targetname");
   array_delete(a_m_corpses);
 }
 
 sink_ragdoll_corpses(str_name) {
-  a_m_corpses = getentarray(str_name, "targetname");
+  a_m_corpses = getEntArray(str_name, "targetname");
 
   foreach(m_corpse in a_m_corpses)
   m_corpse scalebuoyancy(0.9);
@@ -1229,7 +1227,7 @@ sink_ragdoll_corpses(str_name) {
 kill_ragdoll_corpse_control() {
   level notify("kill_corpse_control");
   a_s_spots = getstructarray("stealth_corpse_spot", "script_noteworthy");
-  a_t_trigs = getentarray("corpse_spawn_trig", "targetname");
+  a_t_trigs = getEntArray("corpse_spawn_trig", "targetname");
 
   foreach(s_spot in a_s_spots)
   s_spot structdelete();
@@ -1314,7 +1312,7 @@ delete_ents_inside_trigger(str_trigger) {
 }
 
 delete_fxanims_touching() {
-  a_m_fxanims = getentarray("fxanim", "script_noteworthy");
+  a_m_fxanims = getEntArray("fxanim", "script_noteworthy");
 
   foreach(m_fxanim in a_m_fxanims) {
     if(m_fxanim istouching(self)) {
@@ -1339,7 +1337,7 @@ delete_vehicles_touching() {
 }
 
 delete_ents_touching(str_class) {
-  a_e_ents = getentarray(str_class, "classname");
+  a_e_ents = getEntArray(str_class, "classname");
 
   foreach(e_ent in a_e_ents) {
     if(e_ent istouching(self) && e_ent != self)
@@ -1360,11 +1358,11 @@ deconstruct_fxanims_in_trigger(str_trigger) {
   i = 0;
   a_str_fxanim_names = [];
   t_touching = getent(str_trigger, "targetname");
-  a_m_fxanims = getentarray("fxanim", "script_noteworthy");
+  a_m_fxanims = getEntArray("fxanim", "script_noteworthy");
 
   foreach(m_fxanim in a_m_fxanims) {
     if(m_fxanim istouching(t_touching) && isDefined(m_fxanim.targetname) && m_fxanim.targetname != "fxanim_market_bus_crash" && m_fxanim.targetname != "fxanim_pak_sign_dangle") {
-      a_m_each_fxanim_with_name = getentarray(m_fxanim.targetname, "targetname");
+      a_m_each_fxanim_with_name = getEntArray(m_fxanim.targetname, "targetname");
 
       foreach(m_each_fxanim in a_m_each_fxanim_with_name) {
         a_str_fxanim_names[i] = m_fxanim.targetname;
@@ -1509,9 +1507,9 @@ _first_person_claw_flamethrower_fire_watch() {
 
 flamethrower_pick_target(a_ai_enemies) {
   foreach(ai_enemy in a_ai_enemies) {
-    a_trace = bullettrace(self gettagorigin("tag_flame_thrower_fx"), ai_enemy geteye(), 1, self, 1);
+    a_trace = bulletTrace(self gettagorigin("tag_flame_thrower_fx"), ai_enemy getEye(), 1, self, 1);
 
-    if(distance2d(ai_enemy geteye(), a_trace["position"]) <= 300) {
+    if(distance2d(ai_enemy getEye(), a_trace["position"]) <= 300) {
       e_projectile = magicbullet("bigdog_flamethrower", a_trace["position"], ai_enemy.origin);
       break;
     }
@@ -1530,7 +1528,7 @@ _gas_grenade_think(b_from_player) {
 
       foreach(enemy in a_enemies) {
         if(distancesquared(enemy.origin, self.origin) < n_enemy_detect_dist_sq) {
-          b_trace_pass = bullettracepassed(enemy geteye(), self.origin, 1, enemy);
+          b_trace_pass = bullettracepassed(enemy getEye(), self.origin, 1, enemy);
 
           if(b_trace_pass) {
             self resetmissiledetonationtime(0);
@@ -1729,10 +1727,10 @@ ambient_flight_path(s_start) {
 
 ambient_drone_searchlight() {
   e_spotlight_target = spawn("script_model", self.origin);
-  e_spotlight_target setmodel("tag_origin");
+  e_spotlight_target setModel("tag_origin");
   e_spotlight_target linkto(self, "tag_origin");
   self.spotlight = e_spotlight_target;
-  self set_turret_target(e_spotlight_target, anglestoforward(self.angles) * 800 + vectorscale((0, 0, -1), 500.0), 0);
+  self set_turret_target(e_spotlight_target, anglesToForward(self.angles) * 800 + vectorscale((0, 0, -1), 500.0), 0);
   self play_fx("drone_spotlight_cheap", self gettagorigin("tag_spotlight"), self gettagangles("tag_spotlight"), "kill_spotlight", 1, "tag_spotlight");
 }
 

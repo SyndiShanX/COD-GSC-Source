@@ -38,14 +38,12 @@ main(model, type) {
   build_light(model, "solid_tail", "tag_light_tail2", "misc/aircraft_light_wingtip_red", "running", 0.25);
   build_light(model, "white_blink_tail", "tag_light_tail", "misc/aircraft_light_red_blink", "running", 0.05);
   build_compassicon("helicopter", false);
-
 }
 
 init_local() {
   self.originheightoffset = distance(self gettagorigin("tag_origin"), self gettagorigin("tag_ground"));
   self.script_badplace = false; // All helicopters dont need to create bad places
   thread maps\_vehicle::lights_on("running");
-
 }
 
 /*QUAKED script_vehicle_pavelow_noai (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER

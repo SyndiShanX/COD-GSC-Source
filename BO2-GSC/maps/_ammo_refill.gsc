@@ -7,12 +7,12 @@
 #include maps\_utility;
 
 main() {
-  a_ammo_crates = getentarray("trigger_ammo_refill", "targetname");
+  a_ammo_crates = getEntArray("trigger_ammo_refill", "targetname");
   array_thread(a_ammo_crates, ::_ammo_refill_think_old);
   thread place_player_loadout_old();
-  a_ammo_crates = getentarray("sys_ammo_cache", "targetname");
+  a_ammo_crates = getEntArray("sys_ammo_cache", "targetname");
   array_thread(a_ammo_crates, ::_setup_ammo_cache);
-  a_weapon_crates = getentarray("sys_weapon_cache", "targetname");
+  a_weapon_crates = getEntArray("sys_weapon_cache", "targetname");
   array_thread(a_weapon_crates, ::_setup_weapon_cache);
 }
 
@@ -23,7 +23,7 @@ _ammo_refill_think_old() {
   while(true) {
     self waittill("trigger", e_player);
     e_player disableweapons();
-    e_player playsound("fly_ammo_crate_refill");
+    e_player playSound("fly_ammo_crate_refill");
     wait 2;
     a_str_weapons = e_player getweaponslist();
 
@@ -41,7 +41,7 @@ _ammo_refill_think_old() {
 place_player_loadout_old() {
   str_primary_weapon = getloadoutweapon("primary");
   str_secondary_weapon = getloadoutweapon("secondary");
-  primary_weapon_pos_array = getentarray("ammo_refill_primary_weapon", "targetname");
+  primary_weapon_pos_array = getEntArray("ammo_refill_primary_weapon", "targetname");
 
   foreach(primary_pos in primary_weapon_pos_array) {
     if(!issubstr(str_primary_weapon, "null")) {
@@ -51,7 +51,7 @@ place_player_loadout_old() {
     }
   }
 
-  secondary_weapon_pos_array = getentarray("ammo_refill_secondary_weapon", "targetname");
+  secondary_weapon_pos_array = getEntArray("ammo_refill_secondary_weapon", "targetname");
 
   foreach(secondary_pos in secondary_weapon_pos_array) {
     if(!issubstr(str_primary_weapon, "null")) {
@@ -106,7 +106,7 @@ _ammo_refill_think() {
   while(true) {
     t_ammo_cache waittill("trigger", e_player);
     e_player disableweapons();
-    e_player playsound("fly_ammo_crate_refill");
+    e_player playSound("fly_ammo_crate_refill");
     wait 2;
     a_str_weapons = e_player getweaponslist();
 
@@ -123,7 +123,7 @@ _ammo_refill_think() {
 }
 
 _get_closest_ammo_trigger() {
-  a_ammo_cache = getentarray("trigger_ammo_cache", "targetname");
+  a_ammo_cache = getEntArray("trigger_ammo_cache", "targetname");
   t_ammo_cache = getclosest(self.origin, a_ammo_cache);
   return t_ammo_cache;
 }
@@ -217,7 +217,7 @@ _check_extra_slots() {
   if(isDefined(self.ac_slot2)) {
     auxilary_weapon_pos = self gettagorigin("secondary_A");
     assert(isDefined(auxilary_weapon_pos), "Please use the ammo_refill_crate_future_full prefab to use this slot");
-    tmp_offset = anglestoforward(self gettagangles("secondary_A")) * 10;
+    tmp_offset = anglesToForward(self gettagangles("secondary_A")) * 10;
     m_weapon_script_model = spawn("weapon_" + self.ac_slot2, auxilary_weapon_pos + (tmp_offset + vectorscale((0, 0, 1), 10.0)), 8);
     m_weapon_script_model.angles = self gettagangles("secondary_A");
     m_weapon_script_model itemweaponsetammo(9999, 9999);
@@ -254,7 +254,7 @@ _loop_text(tag) {
 }
 
 disable_ammo_cache(str_ammo_cache_id) {
-  a_ammo_cache = getentarray(str_ammo_cache_id, "script_noteworthy");
+  a_ammo_cache = getEntArray(str_ammo_cache_id, "script_noteworthy");
   assert(isDefined(a_ammo_cache), "There is no ammo cache with the script_noteworthy '" + str_ammo_cache_id + "'. Please double check the names used");
 
   if(a_ammo_cache.size > 1) {
@@ -287,7 +287,7 @@ activate_extra_slot(n_slot_number, str_weapon) {
   if(n_slot_number == 2) {
     auxilary_weapon_pos = self gettagorigin("secondary_A");
     assert(isDefined(auxilary_weapon_pos), "Please use the ammo_refill_crate_*_full prefab to use this slot");
-    tmp_offset = anglestoforward(self gettagangles("secondary_A")) * 7;
+    tmp_offset = anglesToForward(self gettagangles("secondary_A")) * 7;
     m_weapon_script_model = spawn("weapon_" + str_weapon, auxilary_weapon_pos + (tmp_offset + vectorscale((0, 0, 1), 10.0)), 8);
     m_weapon_script_model.angles = self gettagangles("secondary_A");
     m_weapon_script_model itemweaponsetammo(9999, 9999);

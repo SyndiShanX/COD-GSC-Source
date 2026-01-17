@@ -48,7 +48,7 @@ resetloadout(var_0) {
   var_2 = maps\mp\_vl_base::getfocusfromcontroller(var_1);
   var_3 = level.vlavatars[var_2];
 
-  if(isdefined(var_3)) {
+  if(isDefined(var_3)) {
     level.vl_focus = var_2;
     thread maps\mp\_vl_base::virtual_lobby_set_class(var_2, var_1, "lobby" + self.currentselectedclass, 1);
     var_4 = level.vlavatars[level.vl_focus];
@@ -120,7 +120,7 @@ handleclassselect(var_0, var_1) {
     var_5 = maps\mp\_vl_base::getfocusfromcontroller(var_2);
     var_6 = level.vlavatars[var_5];
 
-    if(isdefined(var_6)) {
+    if(isDefined(var_6)) {
       var_7 = getvlclass(var_0, self.currentselectedclass);
       _func_300(var_2);
       level.vl_focus = var_5;
@@ -176,7 +176,7 @@ handleweaponhighlighted(var_0) {
     if(var_2.size > 3 && var_2.size % 2 == 0) {
       var_12 = (var_2.size - 2) / 2;
 
-      for (var_13 = 0; var_13 < var_12; var_13++) {
+      for(var_13 = 0; var_13 < var_12; var_13++) {
         var_14 = var_2[2 + var_13 * 2];
         var_15 = parseweaponhighlightedcategory(var_2[2 + var_13 * 2]);
         var_16 = var_2[3 + var_13 * 2];
@@ -203,7 +203,7 @@ handleweaponhighlighted(var_0) {
 
     var_17 = -1;
 
-    if(isdefined(self.emblemloadout.emblemindex)) {
+    if(isDefined(self.emblemloadout.emblemindex)) {
       if(self.emblemloadout.shouldapplyemblemtoweapon)
         var_17 = self.emblemloadout.emblemindex;
     } else {
@@ -296,8 +296,8 @@ handlefactionchanged(var_0) {
     if(var_4 >= 0) {
       var_5 = level.vlavatars[var_4];
 
-      if(!isdefined(var_5.loadout))
-        var_5.loadout = spawnstruct();
+      if(!isDefined(var_5.loadout))
+        var_5.loadout = spawnStruct();
 
       var_5.loadout._id_A7E7 = var_2;
       thread maps\mp\_vl_base::playerrefreshavatar(var_4);
@@ -322,7 +322,7 @@ streamcacweaponwait(var_0) {
   level.weaponavatarparent dontinterpolate();
   waitframe();
 
-  for (;;) {
+  for(;;) {
     waittillframeend;
 
     if(self loadweapons(var_1)) {
@@ -332,7 +332,7 @@ streamcacweaponwait(var_0) {
     waitframe();
   }
 
-  while ((gettime() - var_2) / 1000 < var_3)
+  while((gettime() - var_2) / 1000 < var_3)
     waitframe();
 }
 
@@ -394,14 +394,14 @@ initweaponavatar() {
 
 spawngenericprop3avatar() {
   var_0 = spawn("script_model", (0, 0, 0));
-  var_0 setmodel("genericprop_x3");
+  var_0 setModel("genericprop_x3");
   var_0 scriptmodelplayanim("h1_lobby_turnaround_ranger_akimbo_align");
   return var_0;
 }
 
 getoriginforoffset(var_0, var_1, var_2) {
   var_3 = var_0;
-  var_4 = anglestoforward(var_1);
+  var_4 = anglesToForward(var_1);
   var_3 = var_3 + var_4 * var_2[0];
   var_5 = anglestoright(var_1);
   var_3 = var_3 + var_5 * var_2[1];
@@ -458,7 +458,7 @@ getweaponavatarlocation(var_0, var_1) {
   var_5 = (var_2, var_3, var_4);
   var_6 = getdvarfloat("cg_fov");
 
-  if(isdefined(self.fovscale))
+  if(isDefined(self.fovscale))
     var_6 = var_6 * self.fovscale;
 
   var_7 = self screenpostoworldpoint((var_3, var_4, 0), var_6, var_2, 1);
@@ -466,15 +466,15 @@ getweaponavatarlocation(var_0, var_1) {
 }
 
 getweaponbounds(var_0, var_1) {
-  if(!isdefined(var_1))
+  if(!isDefined(var_1))
     var_1 = 0;
 
-  if(isdefined(level.weaponmodelboundscache[var_0.weapon_name]))
+  if(isDefined(level.weaponmodelboundscache[var_0.weapon_name]))
     return level.weaponmodelboundscache[var_0.weapon_name];
   else if(!var_1) {
     var_2 = getweaponmodelbounds(var_0);
 
-    if(!isdefined(var_2))
+    if(!isDefined(var_2))
       var_2 = [];
 
     if(!maps\mp\_utility::is_true(var_0.isloadingweapon))
@@ -505,7 +505,7 @@ positionweaponavatar(var_0, var_1) {
   }
   var_3 = var_0;
 
-  if(isdefined(var_0.linker))
+  if(isDefined(var_0.linker))
     var_3 = var_0.linker;
 
   var_3 unlink();
@@ -538,7 +538,7 @@ positionweaponavatar(var_0, var_1) {
 }
 
 getperkbounds(var_0) {
-  if(!isdefined(level.perkboundscache)) {
+  if(!isDefined(level.perkboundscache)) {
     level.perkboundscache = [];
 
     if(var_0 islinked()) {
@@ -577,7 +577,7 @@ showloadingweaponavatar(var_0, var_1) {
   hideperkavatar();
   var_2 = level.weaponavatarparent.loadingweaponavatar;
 
-  if(!isdefined(var_2))
+  if(!isDefined(var_2))
     var_2 = spawnloadingweaponavatar(var_0);
   else {
     var_2 show();
@@ -596,7 +596,7 @@ showloadingweaponavatar(var_0, var_1) {
   var_6 = isavatarakimbo(var_2);
 
   if(var_6) {
-    if(!isdefined(var_2.akimboavatar)) {
+    if(!isDefined(var_2.akimboavatar)) {
       var_7 = common_scripts\utility::getstruct("cameraWeapon", "targetname").origin;
       var_2.akimboavatar = spawn("weapon_" + var_0, var_7, 1);
       var_2.akimboavatar cloakingenable();
@@ -608,7 +608,7 @@ showloadingweaponavatar(var_0, var_1) {
     weaponitemplayidleanim(var_2.akimboavatar, var_5);
     var_2 linktosynchronizedparent(var_2.linker, "j_prop_1", (0, 0, 0), (0, 0, 0));
   } else {
-    if(isdefined(var_2.akimboavatar))
+    if(isDefined(var_2.akimboavatar))
       var_2.akimboavatar hide();
 
     var_2 linktosynchronizedparent(var_2.linker, "j_prop_3", (0, 0, 0), (0, 0, 0));
@@ -620,11 +620,11 @@ showloadingweaponavatar(var_0, var_1) {
 hideloadingweaponavatar() {
   setomnvar("ui_cac_weapon_loading", 0);
 
-  if(isdefined(level.weaponavatarparent.loadingweaponavatar)) {
+  if(isDefined(level.weaponavatarparent.loadingweaponavatar)) {
     var_0 = level.weaponavatarparent.loadingweaponavatar;
     var_0 hide();
 
-    if(isdefined(var_0.akimboavatar))
+    if(isDefined(var_0.akimboavatar))
       var_0.akimboavatar hide();
   }
 }
@@ -632,7 +632,7 @@ hideloadingweaponavatar() {
 showweaponavatar(var_0) {
   var_1 = level.weaponavatarparent.savedweaponavatar;
 
-  if(!isdefined(var_1)) {
+  if(!isDefined(var_1)) {
     var_1 = spawn("weapon_" + level.cac_weapon, (0, 0, 0), 1);
     var_1.isweapon = 1;
     level.weaponavatarparent.savedweaponavatar = var_1;
@@ -648,7 +648,7 @@ showweaponavatar(var_0) {
   var_3 = isavatarakimbo(var_1);
 
   if(var_3) {
-    if(!isdefined(var_1.akimboavatar)) {
+    if(!isDefined(var_1.akimboavatar)) {
       var_1.akimboavatar = spawn("weapon_" + level.cac_weapon, (0, 0, 0), 1);
       var_1.akimboavatar linktosynchronizedparent(var_1.linker, "j_prop_2", (0, 0, 0), (0, 0, 0));
     } else
@@ -658,7 +658,7 @@ showweaponavatar(var_0) {
     weaponitemplayidleanim(var_1.akimboavatar, var_2);
     var_1 linktosynchronizedparent(var_1.linker, "j_prop_1", (0, 0, 0), (0, 0, 0));
   } else {
-    if(isdefined(var_1.akimboavatar))
+    if(isDefined(var_1.akimboavatar))
       var_1.akimboavatar hide();
 
     var_1 linktosynchronizedparent(var_1.linker, "j_prop_3", (0, 0, 0), (0, 0, 0));
@@ -674,11 +674,11 @@ shouldplayidleanim(var_0) {
 }
 
 hideweaponavatar() {
-  if(isdefined(level.weaponavatarparent.savedweaponavatar)) {
+  if(isDefined(level.weaponavatarparent.savedweaponavatar)) {
     var_0 = level.weaponavatarparent.savedweaponavatar;
     var_0 hide();
 
-    if(isdefined(var_0.akimboavatar))
+    if(isDefined(var_0.akimboavatar))
       var_0.akimboavatar hide();
   }
 }
@@ -686,7 +686,7 @@ hideweaponavatar() {
 showperkavatar(var_0) {
   var_1 = level.weaponavatarparent.savedperkavatar;
 
-  if(!isdefined(var_1)) {
+  if(!isDefined(var_1)) {
     var_1 = spawn("script_model", (0, 0, 0));
     var_1.isperk = 1;
     level.weaponavatarparent.savedperkavatar = var_1;
@@ -694,7 +694,7 @@ showperkavatar(var_0) {
     var_1 show();
 
   var_2 = getperkmodel(level.cac_weapon);
-  var_1 setmodel(var_2);
+  var_1 setModel(var_2);
   var_1.weapon_name = level.cac_weapon;
   var_1.category = var_0;
   positionweaponavatar(var_1, var_0);
@@ -703,7 +703,7 @@ showperkavatar(var_0) {
 }
 
 hideperkavatar() {
-  if(isdefined(level.weaponavatarparent.savedperkavatar))
+  if(isDefined(level.weaponavatarparent.savedperkavatar))
     level.weaponavatarparent.savedperkavatar hide();
 }
 
@@ -715,7 +715,7 @@ playerhidecacavatars() {
 }
 
 updateweaponavatar(var_0) {
-  if(!isdefined(level.cac_weap) && !maps\mp\_vl_cao::iscollectionsmenuactive() && !maps\mp\_vl_cao::isarmorymenuactive()) {
+  if(!isDefined(level.cac_weap) && !maps\mp\_vl_cao::iscollectionsmenuactive() && !maps\mp\_vl_cao::isarmorymenuactive()) {
     return;
   }
   hideloadingweaponavatar();
@@ -766,11 +766,11 @@ buildfactions() {
   level.vl_factions = [];
   var_2 = tablegetrowcount("mp\uiFactionsTable.csv");
 
-  for (var_3 = 0; var_3 < var_2; var_3++) {
+  for(var_3 = 0; var_3 < var_2; var_3++) {
     var_4 = tablelookupbyrow("mp\uiFactionsTable.csv", var_3, var_0);
     var_5 = tablelookupbyrow("mp\uiFactionsTable.csv", var_3, var_1);
     var_6 = level.vl_factions.size;
-    level.vl_factions[var_6] = spawnstruct();
+    level.vl_factions[var_6] = spawnStruct();
     level.vl_factions[var_6]._id_3338 = var_5;
     level.vl_factions[var_6].team = var_4;
   }
@@ -795,7 +795,7 @@ setselectedfaction(var_0) {
 }
 
 getfactionindex(var_0, var_1) {
-  for (var_2 = 0; var_2 < level.vl_factions.size; var_2++) {
+  for(var_2 = 0; var_2 < level.vl_factions.size; var_2++) {
     var_3 = level.vl_factions[var_2];
 
     if(var_3.team == var_0 && var_3._id_3338 == var_1)

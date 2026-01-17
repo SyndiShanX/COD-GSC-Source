@@ -29,11 +29,11 @@ main() {
   spawncollision("collision_geo_256x256x256", "collider", (960, -724, 316), (0, 0, 0));
   spawncollision("collision_geo_32x32x32", "collider", (-71, 1309, 217), (0, 340, 0));
   spawncollision("collision_geo_32x32x32", "collider", (-103, 1320, 195), (0, 340, 0));
-  game["strings"]["war_callsign_a"] = & "MPUI_CALLSIGN_ASYLUM_A";
-  game["strings"]["war_callsign_b"] = & "MPUI_CALLSIGN_ASYLUM_B";
-  game["strings"]["war_callsign_c"] = & "MPUI_CALLSIGN_ASYLUM_C";
-  game["strings"]["war_callsign_d"] = & "MPUI_CALLSIGN_ASYLUM_D";
-  game["strings"]["war_callsign_e"] = & "MPUI_CALLSIGN_ASYLUM_E";
+  game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_ASYLUM_A";
+  game["strings"]["war_callsign_b"] = &"MPUI_CALLSIGN_ASYLUM_B";
+  game["strings"]["war_callsign_c"] = &"MPUI_CALLSIGN_ASYLUM_C";
+  game["strings"]["war_callsign_d"] = &"MPUI_CALLSIGN_ASYLUM_D";
+  game["strings"]["war_callsign_e"] = &"MPUI_CALLSIGN_ASYLUM_E";
   game["strings_menu"]["war_callsign_a"] = "@MPUI_CALLSIGN_ASYLUM_A";
   game["strings_menu"]["war_callsign_b"] = "@MPUI_CALLSIGN_ASYLUM_B";
   game["strings_menu"]["war_callsign_c"] = "@MPUI_CALLSIGN_ASYLUM_C";

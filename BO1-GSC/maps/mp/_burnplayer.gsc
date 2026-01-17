@@ -47,14 +47,14 @@ hitWithIncendiary(attacker, inflictor, mod) {
       self setburn(3.0);
   }
   if(isDefined(level._effect["character_fire_death_torso"])) {
-    for (arrayIndex = 0; arrayIndex < tagArray.size; arrayIndex++) {
-      PlayFxOnTag(level._effect["character_fire_death_sm"], self, tagArray[arrayIndex]);
+    for(arrayIndex = 0; arrayIndex < tagArray.size; arrayIndex++) {
+      playFXOnTag(level._effect["character_fire_death_sm"], self, tagArray[arrayIndex]);
     }
   }
   if(isai(self))
-    PlayFxOnTag(level._effect["character_fire_death_torso"], self, "J_Spine1");
+    playFXOnTag(level._effect["character_fire_death_torso"], self, "J_Spine1");
   else
-    PlayFxOnTag(level._effect["character_fire_death_torso"], self, "J_SpineLower");
+    playFXOnTag(level._effect["character_fire_death_torso"], self, "J_SpineLower");
   if(!isalive(self))
     return;
   if(isplayer(self)) {
@@ -99,12 +99,12 @@ hitWithNapalmStrike(attacker, inflictor, mod) {
       self setburn(3.0);
   }
   if(isDefined(level._effect["character_fire_death_sm"])) {
-    for (arrayIndex = 0; arrayIndex < tagArray.size; arrayIndex++) {
-      PlayFxOnTag(level._effect["character_fire_death_sm"], self, tagArray[arrayIndex]);
+    for(arrayIndex = 0; arrayIndex < tagArray.size; arrayIndex++) {
+      playFXOnTag(level._effect["character_fire_death_sm"], self, tagArray[arrayIndex]);
     }
   }
   if(isDefined(level._effect["character_fire_death_torso"])) {
-    PlayFxOnTag(level._effect["character_fire_death_torso"], self, "J_SpineLower");
+    playFXOnTag(level._effect["character_fire_death_torso"], self, "J_SpineLower");
   }
   if(!isalive(self))
     return;
@@ -140,8 +140,8 @@ walkedThroughFlames(attacker, inflictor, weapon) {
     tagArray[tagArray.size] = "J_Ankle_LE";
   }
   if(isDefined(level._effect["character_fire_player_sm"])) {
-    for (arrayIndex = 0; arrayIndex < tagArray.size; arrayIndex++) {
-      PlayFxOnTag(level._effect["character_fire_player_sm"], self, tagArray[arrayIndex]);
+    for(arrayIndex = 0; arrayIndex < tagArray.size; arrayIndex++) {
+      playFXOnTag(level._effect["character_fire_player_sm"], self, tagArray[arrayIndex]);
     }
   }
   if(!IsAlive(self))
@@ -181,8 +181,8 @@ burnedWithFlameThrower(attacker, inflictor, weapon) {
     self thread watchForDeath();
   }
   if(isDefined(level._effect["character_fire_player_sm"])) {
-    for (arrayIndex = 0; arrayIndex < tagArray.size; arrayIndex++) {
-      PlayFxOnTag(level._effect["character_fire_player_sm"], self, tagArray[arrayIndex]);
+    for(arrayIndex = 0; arrayIndex < tagArray.size; arrayIndex++) {
+      playFXOnTag(level._effect["character_fire_player_sm"], self, tagArray[arrayIndex]);
     }
   }
 }
@@ -217,8 +217,8 @@ burnedWithDragonsBreath(attacker, inflictor, weapon) {
     return;
   }
   if(isDefined(level._effect["character_fire_player_sm"])) {
-    for (arrayIndex = 0; arrayIndex < tagArray.size; arrayIndex++) {
-      PlayFxOnTag(level._effect["character_fire_player_sm"], self, tagArray[arrayIndex]);
+    for(arrayIndex = 0; arrayIndex < tagArray.size; arrayIndex++) {
+      playFXOnTag(level._effect["character_fire_player_sm"], self, tagArray[arrayIndex]);
     }
   }
 }
@@ -244,7 +244,7 @@ watchForWater(time) {
   self endon("watching for water");
   wait(.1);
   looptime = .1;
-  while (time > 0) {
+  while(time > 0) {
     wait(looptime);
     if(self DepthOfPlayerInWater() > 0) {
       finish_burn();
@@ -262,8 +262,8 @@ finish_burn() {
   tagArray[3] = "j_knee_ri";
   tagArray[4] = "j_knee_le";
   if(isDefined(level._effect["fx_fire_player_sm_smk_2sec"])) {
-    for (arrayIndex = 0; arrayIndex < tagArray.size; arrayIndex++) {
-      PlayFxOnTag(level._effect["fx_fire_player_sm_smk_2sec"], self, tagArray[arrayIndex]);
+    for(arrayIndex = 0; arrayIndex < tagArray.size; arrayIndex++) {
+      playFXOnTag(level._effect["fx_fire_player_sm_smk_2sec"], self, tagArray[arrayIndex]);
     }
   }
   self.burning = undefined;
@@ -279,7 +279,7 @@ doNapalmStrikeDamage(attacker, inflictor, mod) {
   self endon("disconnect");
   attacker endon("disconnect");
   self endon("stop burn damage");
-  while ((isDefined(level.napalmStrikeDamage)) && (isDefined(self)) && self DepthOfPlayerInWater() < 1) {
+  while((isDefined(level.napalmStrikeDamage)) && (isDefined(self)) && self DepthOfPlayerInWater() < 1) {
     self DoDamage(level.napalmStrikeDamage, self.origin, attacker, attacker, 0, mod, 0, "napalm_mp");
     wait(1);
   }
@@ -318,7 +318,7 @@ doNapalmGroundDamage(attacker, inflictor, mod) {
     } else {
       napalmGroundDamage = GetDvarFloat(#"scr_napalmGroundDamage");
     }
-    while (isDefined(self) && isDefined(inflictor) && ((self DepthOfPlayerInWater()) < 1) && waittime > 0) {
+    while(isDefined(self) && isDefined(inflictor) && ((self DepthOfPlayerInWater()) < 1) && waittime > 0) {
       self DoDamage(level.napalmGroundDamage, self.origin, attacker, inflictor, 0, mod, 0, "napalm_mp");
       if(isplayer(self))
         self setburn(1.1);
@@ -332,7 +332,7 @@ doDogNapalmStrikeDamage(attacker, inflictor, mod) {
   attacker endon("disconnect");
   self endon("death");
   self endon("stop burn damage");
-  while ((isDefined(level.napalmStrikeDamage)) && (isDefined(self))) {
+  while((isDefined(level.napalmStrikeDamage)) && (isDefined(self))) {
     self DoDamage(level.napalmStrikeDamage, self.origin, attacker, attacker, 0, mod);
     wait(1);
   }
@@ -341,7 +341,7 @@ doDogNapalmGroundDamage(attacker, inflictor, mod) {
   attacker endon("disconnect");
   self endon("death");
   self endon("stop burn damage");
-  while ((isDefined(level.napalmGroundDamage)) && (isDefined(self))) {
+  while((isDefined(level.napalmGroundDamage)) && (isDefined(self))) {
     self DoDamage(level.napalmGroundDamage, self.origin, attacker, attacker, 0, mod, 0, "napalm_mp");
     wait(1);
   }
@@ -365,7 +365,7 @@ doFlameDamage(attacker, inflictor, weapon, time) {
   self thread doBurningSound();
   self notify("snd_burn_scream");
   wait_time = 1.0;
-  while (isDefined(level.flameDamage) && isDefined(self) && (self DepthOfPlayerInWater() < 1) && time > 0) {
+  while(isDefined(level.flameDamage) && isDefined(self) && (self DepthOfPlayerInWater() < 1) && time > 0) {
     if(isDefined(attacker) && isDefined(inflictor) && isDefined(weapon)) {
       if(maps\mp\gametypes\_globallogic_player::doDamageFeedback(weapon, attacker))
         attacker maps\mp\gametypes\_damagefeedback::updateDamageFeedback(false);
@@ -386,7 +386,7 @@ doDogFlameDamage(attacker, inflictor, weapon, time) {
   self endon("stop burn damage");
   self thread doBurningSound();
   wait_time = 1.0;
-  while (isDefined(level.flameDamage) && isDefined(self) && time > 0) {
+  while(isDefined(level.flameDamage) && isDefined(self) && time > 0) {
     self DoDamage(level.flameDamage, self.origin, attacker, inflictor, 0, "MOD_BURNED", 0, weapon);
     wait(wait_time);
     time -= wait_time;
@@ -403,7 +403,7 @@ doBurningSound() {
   self endon("death");
   fire_sound_ent = spawn("script_origin", self.origin);
   fire_sound_ent linkto(self, "tag_origin", (0, 0, 0), (0, 0, 0));
-  fire_sound_ent playloopsound("mpl_player_burn_loop");
+  fire_sound_ent playLoopSound("mpl_player_burn_loop");
   self thread fireSoundDeath(fire_sound_ent);
   self waittill("StopBurnSound");
   if(isDefined(fire_sound_ent))

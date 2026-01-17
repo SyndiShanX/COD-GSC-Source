@@ -701,23 +701,17 @@ can_revive(revivee) {
   if(isDefined(level.can_revive_use_depthinwater_test) && level.can_revive_use_depthinwater_test && revivee depthinwater() > 10)
     return true;
 
-  if(isDefined(level.can_revive) && ![
-      [level.can_revive]
-    ](revivee))
+  if(isDefined(level.can_revive) && ![[level.can_revive]](revivee))
     return false;
 
-  if(isDefined(level.can_revive_game_module) && ![
-      [level.can_revive_game_module]
-    ](revivee))
+  if(isDefined(level.can_revive_game_module) && ![[level.can_revive_game_module]](revivee))
     return false;
 
   ignore_sight_checks = 0;
   ignore_touch_checks = 0;
 
   if(isDefined(level.revive_trigger_should_ignore_sight_checks)) {
-    ignore_sight_checks = [
-      [level.revive_trigger_should_ignore_sight_checks]
-    ](self);
+    ignore_sight_checks = [[level.revive_trigger_should_ignore_sight_checks]](self);
 
     if(ignore_sight_checks && isDefined(revivee.revivetrigger.beingrevived) && revivee.revivetrigger.beingrevived == 1)
       ignore_touch_checks = 1;
@@ -752,7 +746,7 @@ is_reviving_any() {
 
 is_facing(facee) {
   orientation = self getplayerangles();
-  forwardvec = anglestoforward(orientation);
+  forwardvec = anglesToForward(orientation);
   forwardvec2d = (forwardvec[0], forwardvec[1], 0);
   unitforwardvec2d = vectornormalize(forwardvec2d);
   tofaceevec = facee.origin - self.origin;
@@ -842,8 +836,7 @@ revive_do_revive(playerbeingrevived, revivergun) {
   if(isDefined(self.revivetexthud))
     self.revivetexthud destroy();
 
-  if(isDefined(playerbeingrevived.revivetrigger.auto_revive) && playerbeingrevived.revivetrigger.auto_revive == 1) {
-  } else if(!revived) {
+  if(isDefined(playerbeingrevived.revivetrigger.auto_revive) && playerbeingrevived.revivetrigger.auto_revive == 1) {} else if(!revived) {
     if(isplayer(playerbeingrevived))
       playerbeingrevived stoprevive(self);
   }
@@ -958,8 +951,7 @@ revive_success(reviver, b_track_stats) {
   if(isDefined(b_track_stats) && b_track_stats)
     reviver thread check_for_sacrifice();
 
-  if(isDefined(level.missioncallbacks)) {
-  }
+  if(isDefined(level.missioncallbacks)) {}
 
   setclientsysstate("lsm", "0", self);
   self.revivetrigger delete();
@@ -1092,7 +1084,7 @@ update_lives_remaining(increment) {
 player_getup_setup() {
   println("ZM >> player_getup_setup called");
 
-  self.laststand_info = spawnstruct();
+  self.laststand_info = spawnStruct();
   self.laststand_info.type_getup_lives = level.const_laststand_getup_count_start;
 }
 
@@ -1146,7 +1138,7 @@ laststand_getup_hud() {
   hudelem.hidewheninmenu = 1;
   hudelem.hidewhendead = 1;
   hudelem.sort = 2;
-  hudelem.label = & "SO_WAR_LASTSTAND_GETUP_BAR";
+  hudelem.label = &"SO_WAR_LASTSTAND_GETUP_BAR";
   self thread laststand_getup_hud_destroy(hudelem);
 
   while(true) {

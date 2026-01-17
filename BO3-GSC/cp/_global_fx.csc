@@ -9,7 +9,7 @@
 #namespace global_fx;
 
 function autoexec __init__sytem__() {
-  system::register("global_fx", & __init__, & main, undefined);
+  system::register("global_fx", &__init__, &main, undefined);
 }
 
 function __init__() {
@@ -29,7 +29,7 @@ function wind_initial_setting() {
 }
 
 function check_for_wind_override() {
-  if(isdefined(level.custom_wind_callback)) {
+  if(isDefined(level.custom_wind_callback)) {
     level thread[[level.custom_wind_callback]]();
   }
 }

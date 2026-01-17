@@ -21,7 +21,7 @@ music_init() {
 
 realWait(seconds) {
   start = GetRealTime();
-  while (GetRealTime() - start < seconds * 1000) {
+  while(GetRealTime() - start < seconds * 1000) {
     wait(.01);
   }
 }
@@ -36,7 +36,7 @@ musicCmdHandler(clientNum, state, oldState) {
 }
 
 updateMusic() {
-  while (1) {
+  while(1) {
     if(level.activeMusicState == level.nextMusicState)
       level waittill("new_music");
     if(level.activeMusicState == level.nextMusicState) {
@@ -63,7 +63,7 @@ fadeOutAndStopSound(id, time) {
     rate = 1.0 / time;
   setSoundVolumeRate(id, rate);
   setSoundVolume(id, 0.0);
-  while (getSoundVolume(id) > .0001) {
+  while(getSoundVolume(id) > .0001) {
     wait(.1);
   }
   stopSound(id);
@@ -109,17 +109,17 @@ transitionOut(previous, next) {
     } else {}
   } else {
     if(waittilldone) {
-      while (SoundPlaying(id)) {
+      while(SoundPlaying(id)) {
         wait(.1);
       }
     } else {
       thread fadeOutAndStopSound(id, fadeout);
     }
   }
-  while (startDelay > 0 && SoundPlaying(stingerid) && GetPlaybackTime(stingerid) < startDelay * 1000)
+  while(startDelay > 0 && SoundPlaying(stingerid) && GetPlaybackTime(stingerid) < startDelay * 1000)
     wait(.01);
   if(waittillstingerdone) {
-    while (SoundPlaying(stingerid))
+    while(SoundPlaying(stingerid))
       wait(.1);
   }
   if(loopalias != nextloopalias)
@@ -146,7 +146,7 @@ transitionIn(previous, next) {
   if(oneshotalias != "") {
     level.musicStates[next].id = playSound(0, oneshotalias, (0, 0, 0));
     if(loopalias != "")
-      while (SoundPlaying(level.musicStates[next].id)) {
+      while(SoundPlaying(level.musicStates[next].id)) {
         if(level.nextMusicState != next) {
           thread fadeOutAndStopSound(level.musicStates[next].id, level.musicStates[next].fadeout);
           return;

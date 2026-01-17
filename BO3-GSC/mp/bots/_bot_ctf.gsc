@@ -16,8 +16,8 @@
 #namespace bot_ctf;
 
 function init() {
-  level.onbotconnect = & on_bot_connect;
-  level.botidle = & bot_idle;
+  level.onbotconnect = &on_bot_connect;
+  level.botidle = &bot_idle;
 }
 
 function on_bot_connect() {
@@ -33,7 +33,7 @@ function on_bot_connect() {
 
 function bot_idle() {
   carrier = self.bot.enemyflag gameobjects::get_carrier();
-  if(isdefined(carrier) && carrier == self) {
+  if(isDefined(carrier) && carrier == self) {
     if(self.bot.flag gameobjects::is_object_away_from_home()) {
       self bot::approach_point(self.bot.flag.flagbase.trigger.origin, 0, 1024);
     } else {
@@ -49,7 +49,7 @@ function bot_idle() {
   }
   if(self.bot.flag gameobjects::is_object_away_from_home()) {
     enemycarrier = self.bot.flag gameobjects::get_carrier();
-    if(isdefined(enemycarrier)) {
+    if(isDefined(enemycarrier)) {
       self bot::approach_point(enemycarrier.origin, 250, 1000, 128);
       self bot::sprint_to_goal();
       return;
@@ -58,7 +58,7 @@ function bot_idle() {
     self bot::sprint_to_goal();
     return;
   }
-  if(!isdefined(carrier)) {
+  if(!isDefined(carrier)) {
     self bot::approach_goal_trigger(self.bot.enemyflag.trigger);
     self bot::sprint_to_goal();
     return;

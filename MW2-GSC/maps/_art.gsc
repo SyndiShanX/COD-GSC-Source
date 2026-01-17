@@ -3,21 +3,18 @@
  * Script: maps\_art.gsc
 ********************************************************/
 
-// This function should take care of grain and glow settings for each map, plus anything else that artists 
+// This function should take care of grain and glow settings for each map, plus anything else that artists
 // need to be able to tweak without bothering level designers.
 #include maps\_utility;
 #include common_scripts\utility;
 #include common_scripts\_artCommon;
 
 main() {
-
-  /#
   if(GetDvar("scr_art_tweak") == "" || GetDvar("scr_art_tweak") == "0")
     SetDvar("scr_art_tweak", 0);
-  # /
 
-    if(GetDvar("scr_cmd_plr_sun") == "")
-      SetDevDvar("scr_cmd_plr_sun", "0");
+  if(GetDvar("scr_cmd_plr_sun") == "")
+    SetDevDvar("scr_cmd_plr_sun", "0");
 
   if(GetDvar("scr_dof_enable") == "")
     SetSavedDvar("scr_dof_enable", "1");
@@ -39,7 +36,7 @@ main() {
 
   level.special_weapon_dof_funcs = [];
 
-  for (i = 0; i < level.players.size; i++) {
+  for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
 
     player.curDoF = (level.dofDefault["farStart"] - level.dofDefault["nearEnd"]) / 2;
@@ -50,14 +47,12 @@ main() {
 
   thread tweakart();
 
-  if(!isdefined(level.script))
+  if(!isDefined(level.script))
     level.script = ToLower(GetDvar("mapname"));
-
 }
 
 tweakart() {
-  /#
-  if(!isdefined(level.tweakfile))
+  if(!isDefined(level.tweakfile))
     level.tweakfile = false;
 
   // not in DEVGUI
@@ -83,8 +78,8 @@ tweakart() {
 
   printed = false;
 
-  for (;;) {
-    while (GetDvarInt("scr_art_tweak") == 0) {
+  for(;;) {
+    while(GetDvarInt("scr_art_tweak") == 0) {
       //	AssertEx( GetDvar( "scr_art_dump" ) == "0", "Must Enable Art Tweaks to export _art file." );
       wait .05;
       if(!GetDvarInt("scr_art_tweak") == 0)
@@ -118,7 +113,7 @@ tweakart() {
     }
     wait .05;
   }
-  # /
+
 }
 
 fovslidercheck() {
@@ -150,13 +145,12 @@ fovslidercheck() {
 }
 
 dumpsettings() {
-  /#
   if(GetDvar("scr_art_dump") == "0")
     return false;
 
   filename = "createart/" + GetDvar("scr_art_visionfile") + "_art.gsc";
 
-  ////////////////// 
+  //////////////////
 
   file = 1;
 
@@ -178,7 +172,7 @@ dumpsettings() {
 
   if(!artEndFogFileExport())
     return false;
-  ////////////////////////////// 
+  //////////////////////////////
 
   visionFilename = "vision/" + GetDvar("scr_art_visionfile") + ".vision";
   //	file = OpenFile( visionFilename, "write" );
@@ -214,9 +208,7 @@ dumpsettings() {
   PrintLn("CREATE ART DUMP SUCCESS!");
 
   return true;
-  # /
 }
-
 
 cloudlight(sunlight_bright, sunlight_dark, diffuse_high, diffuse_low) {
   level.sunlight_bright = sunlight_bright;
@@ -228,7 +220,7 @@ cloudlight(sunlight_bright, sunlight_dark, diffuse_high, diffuse_low) {
   SetDvar("r_lighttweakdiffusefraction", level.diffuse_low);
   direction = "up";
 
-  for (;;) {
+  for(;;) {
     sunlight = GetDvarFloat("r_lighttweaksunlight");
     jitter = scale(1 + RandomInt(21));
 
@@ -271,7 +263,7 @@ brighten(target_sunlight, time, freq) {
   // IPrintLn( "totalchange = ", totalchange );
   // IPrintLn( "changeamount = ", changeamount );
 
-  while (time > 0) {
+  while(time > 0) {
     time = time - freq;
 
     sunlight = sunlight + changeamount;
@@ -299,7 +291,7 @@ darken(target_sunlight, time, freq) {
   // IPrintLn( "totalchange = ", totalchange );
   // IPrintLn( "changeamount = ", changeamount );
 
-  while (time > 0) {
+  while(time > 0) {
     time = time - freq;
 
     sunlight = sunlight - changeamount;
@@ -326,7 +318,7 @@ adsDoF() {
   self.dof = level.dofDefault;
   art_tweak = false;
 
-  for (;;) {
+  for(;;) {
     wait(0.05);
 
     if(level.level_specific_dof) {
@@ -337,7 +329,7 @@ adsDoF() {
       continue;
     }
 
-    /# art_tweak = GetDvarInt( "scr_art_tweak" ); #/
+    /# art_tweak = GetDvarInt( "scr_art_tweak" );
 
     if(GetDvarInt("scr_dof_enable") && !art_tweak) {
       updateDoF();
@@ -354,20 +346,20 @@ updateCinematicDoF() {
   adsFrac = self PlayerAds();
 
   if(adsFrac == 1 && GetDvarInt("scr_cinematic_autofocus")) {
-    traceDir = VectorNormalize(AnglesToForward(self GetPlayerAngles()));
-    trace = BulletTrace(self GetEye(), self GetEye() + vector_multiply(traceDir, 100000), true, self);
+    traceDir = VectorNormalize(anglesToForward(self GetPlayerAngles()));
+    trace = bulletTrace(self getEye(), self getEye() + vector_multiply(traceDir, 100000), true, self);
 
     enemies = GetAIArray();
     nearEnd = 10000;
     farStart = -1;
-    start_origin = self GetEye();
+    start_origin = self getEye();
     start_angles = self GetPlayerAngles();
     bestDot = 0;
     bestFocalPoint = undefined;
-    for (index = 0; index < enemies.size; index++) {
+    for(index = 0; index < enemies.size; index++) {
       end_origin = enemies[index].origin;
       normal = VectorNormalize(end_origin - start_origin);
-      forward = AnglesToForward(start_angles);
+      forward = anglesToForward(start_angles);
       dot = VectorDot(forward, normal);
 
       if(dot > bestDot) {
@@ -423,25 +415,23 @@ updateDoF() {
     return;
   }
 
-  playerEye = self GetEye();
+  playerEye = self getEye();
   playerAngles = self GetPlayerAngles();
-  playerForward = VectorNormalize(AnglesToForward(playerAngles));
+  playerForward = VectorNormalize(anglesToForward(playerAngles));
 
-  trace = BulletTrace(playerEye, playerEye + vector_multiply(playerForward, 8192), true, self, true);
+  trace = bulletTrace(playerEye, playerEye + vector_multiply(playerForward, 8192), true, self, true);
   enemies = GetAIArray("axis");
 
   weapon = self getcurrentweapon();
-  if(isdefined(level.special_weapon_dof_funcs[weapon])) {
-    [
-      [level.special_weapon_dof_funcs[weapon]]
-    ](trace, enemies, playerEye, playerForward, adsFrac);
+  if(isDefined(level.special_weapon_dof_funcs[weapon])) {
+    [[level.special_weapon_dof_funcs[weapon]]](trace, enemies, playerEye, playerForward, adsFrac);
     return;
   }
 
   nearEnd = 10000;
   farStart = -1;
 
-  for (index = 0; index < enemies.size; index++) {
+  for(index = 0; index < enemies.size; index++) {
     enemyDir = VectorNormalize(enemies[index].origin - playerEye);
 
     dot = VectorDot(playerForward, enemyDir);
@@ -499,7 +489,7 @@ javelin_dof(trace, enemies, playerEye, playerForward, adsFrac) {
   nearEnd = 2400;
   nearStart = 2400;
 
-  for (index = 0; index < enemies.size; index++) {
+  for(index = 0; index < enemies.size; index++) {
     enemyDir = VectorNormalize(enemies[index].origin - playerEye);
 
     dot = VectorDot(playerForward, enemyDir);
@@ -625,7 +615,7 @@ dofvarupdate() {
 setdefaultdepthoffield() {
   Assert(IsPlayer(self));
 
-  if(isdefined(self.dofDefault)) {
+  if(isDefined(self.dofDefault)) {
     self SetDepthOfField(
       self.dofDefault["nearStart"],
       self.dofDefault["nearEnd"],

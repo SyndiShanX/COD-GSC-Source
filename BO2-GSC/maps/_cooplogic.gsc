@@ -33,7 +33,7 @@ forceend() {
   level.hostforcedend = 1;
 
   if(level.onlinegame || level.systemlink)
-    endstring = & "GAME_HOST_ENDED_GAME";
+    endstring = &"GAME_HOST_ENDED_GAME";
   else
     endstring = "";
 

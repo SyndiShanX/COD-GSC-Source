@@ -41,7 +41,7 @@ wait_for_initial_conditions() {
   foreach(struct in a_s_mcguffin) {
     m_temp = spawn("script_model", struct.origin, 0);
     m_temp.targetname = "sq_bg_macguffin";
-    m_temp setmodel(struct.model);
+    m_temp setModel(struct.model);
     m_temp.angles = struct.angles;
     m_temp ghost();
     m_temp ghostindemo();
@@ -61,15 +61,15 @@ sq_bg_macguffin_think() {
   self endon("sq_bg_macguffin_received_by_player");
   self thread maps\mp\zombies\_zm_afterlife::enable_afterlife_prop();
   self.health = 10000;
-  self setcandamage(1);
+  self setCanDamage(1);
   self setforcenocull();
 
   while(true) {
     self waittill("damage", amount, attacker);
 
     if(attacker == level || isplayer(attacker) && attacker getcurrentweapon() == "lightning_hands_zm") {
-      playfx(level._effect["ee_skull_shot"], self.origin);
-      self playsound("zmb_powerpanel_activate");
+      playFX(level._effect["ee_skull_shot"], self.origin);
+      self playSound("zmb_powerpanel_activate");
       self thread maps\mp\zombies\_zm_afterlife::disable_afterlife_prop();
       self thread wait_and_hide_sq_bg_macguffin();
     }
@@ -134,7 +134,7 @@ check_sq_bg_progress() {
   }
 
   wait 1.0;
-  player playsound("zmb_easteregg_laugh");
+  player playSound("zmb_easteregg_laugh");
 }
 
 play_sq_bg_collected_vo(player) {
@@ -163,14 +163,14 @@ give_sq_bg_reward() {
   if(a_players.size == 1) {
     if(a_players[0] hasweapon("blundergat_zm")) {
       str_reward_weapon = "blundersplat_zm";
-      str_loc = & "ZM_PRISON_SQ_BS";
+      str_loc = &"ZM_PRISON_SQ_BS";
     } else {
       str_reward_weapon = "blundergat_zm";
-      str_loc = & "ZM_PRISON_SQ_BG";
+      str_loc = &"ZM_PRISON_SQ_BG";
     }
   } else {
     str_reward_weapon = "blundergat_zm";
-    str_loc = & "ZM_PRISON_SQ_BG";
+    str_loc = &"ZM_PRISON_SQ_BG";
   }
 
   m_reward_model = spawn_weapon_model(str_reward_weapon, undefined, s_reward_origin.origin, s_reward_origin.angles);

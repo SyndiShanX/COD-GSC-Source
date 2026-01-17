@@ -46,11 +46,10 @@ init_animtree() {
   scriptmodelsuseanimtree(#animtree);
 }
 
-fire_puzzle_1_init() {
-}
+fire_puzzle_1_init() {}
 
 fire_puzzle_1_run() {
-  level.sacrifice_volumes = getentarray("fire_sacrifice_volume", "targetname");
+  level.sacrifice_volumes = getEntArray("fire_sacrifice_volume", "targetname");
   level.clone_list = [];
   level thread clone_cleanup_watch_player_presence();
   array_thread(level.sacrifice_volumes, ::init_sacrifice_volume);
@@ -147,7 +146,7 @@ run_sacrifice_ignition(e_volume) {
     }
     self.e_fx = spawn("script_model", self.origin);
     self.e_fx.angles = vectorscale((-1, 0, 0), 90.0);
-    self.e_fx setmodel("tag_origin");
+    self.e_fx setModel("tag_origin");
     self.e_fx setclientfield("barbecue_fx", 1);
     e_volume ent_flag_set("flame_on");
     wait 6.0;
@@ -159,15 +158,15 @@ run_sacrifice_ignition(e_volume) {
 
 light_plinth() {
   e_fx = spawn("script_model", self.origin);
-  e_fx setmodel("tag_origin");
-  playfxontag(level._effect["fire_torch"], e_fx, "tag_origin");
+  e_fx setModel("tag_origin");
+  playFXOnTag(level._effect["fire_torch"], e_fx, "tag_origin");
   e_fx.angles = vectorscale((-1, 0, 0), 90.0);
-  e_fx playsound("zmb_squest_fire_torch_ignite");
-  e_fx playloopsound("zmb_squest_fire_torch_loop", 0.6);
+  e_fx playSound("zmb_squest_fire_torch_ignite");
+  e_fx playLoopSound("zmb_squest_fire_torch_loop", 0.6);
   flag_wait("fire_puzzle_1_complete");
   wait 30.0;
   e_fx stoploopsound(0.1);
-  e_fx playsound("zmb_squest_fire_torch_out");
+  e_fx playSound("zmb_squest_fire_torch_out");
   e_fx delete();
 }
 
@@ -233,7 +232,7 @@ fire_sacrifice_death_clone(e_sacrifice_volume) {
       level notify("vo_puzzle_good", e_player);
   }
 
-  playfx(level._effect["fire_ash_explosion"], clone.origin, anglestoforward(clone.angles), anglestoup(clone.angles));
+  playFX(level._effect["fire_ash_explosion"], clone.origin, anglesToForward(clone.angles), anglestoup(clone.angles));
   e_sacrifice_volume.num_sacrifices_received++;
   e_sacrifice_volume.pct_sacrifices_received = e_sacrifice_volume.num_sacrifices_received / 32;
 
@@ -248,7 +247,7 @@ fire_sacrifice_death_clone(e_sacrifice_volume) {
 spawn_zombie_clone() {
   clone = spawn("script_model", self.origin);
   clone.angles = self.angles;
-  clone setmodel(self.model);
+  clone setModel(self.model);
 
   if(isDefined(self.headmodel)) {
     clone.headmodel = self.headmodel;
@@ -261,7 +260,7 @@ spawn_zombie_clone() {
 
 fire_puzzle_2_init() {
   for(i = 1; i <= 4; i++) {
-    a_ternary = getentarray("fire_torch_ternary_group_0" + i, "targetname");
+    a_ternary = getEntArray("fire_torch_ternary_group_0" + i, "targetname");
 
     if(a_ternary.size > 1) {
       index_to_save = randomintrange(0, a_ternary.size);
@@ -279,7 +278,7 @@ fire_puzzle_2_init() {
 }
 
 fire_puzzle_2_run() {
-  a_ternary = getentarray("fire_torch_ternary", "script_noteworthy");
+  a_ternary = getEntArray("fire_torch_ternary", "script_noteworthy");
   assert(a_ternary.size == 4);
 
   foreach(e_number in a_ternary) {
@@ -373,10 +372,10 @@ fire_puzzle_2_torch_flame() {
 
   self.e_fx = spawn("script_model", self.origin);
   self.e_fx.angles = vectorscale((-1, 0, 0), 90.0);
-  self.e_fx setmodel("tag_origin");
-  playfxontag(level._effect["fire_torch"], self.e_fx, "tag_origin");
-  self.e_fx playsound("zmb_squest_fire_torch_ignite");
-  self.e_fx playloopsound("zmb_squest_fire_torch_loop", 0.6);
+  self.e_fx setModel("tag_origin");
+  playFXOnTag(level._effect["fire_torch"], self.e_fx, "tag_origin");
+  self.e_fx playSound("zmb_squest_fire_torch_ignite");
+  self.e_fx playLoopSound("zmb_squest_fire_torch_loop", 0.6);
   rumble_nearby_players(self.origin, 1500, 2);
   self.e_fx endon("death");
 
@@ -388,7 +387,7 @@ fire_puzzle_2_torch_flame() {
 
   wait 15.0;
   self.e_fx stoploopsound(0.1);
-  self.e_fx playsound("zmb_squest_fire_torch_out");
+  self.e_fx playSound("zmb_squest_fire_torch_out");
 
   if(!flag("fire_puzzle_2_complete"))
     self.e_fx delete();

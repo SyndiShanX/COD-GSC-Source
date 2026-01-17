@@ -65,7 +65,7 @@ enemy_try_180_turn(pos) {
   if(self._stealth.logic.dog) {
     return;
   }
-  vec1 = anglestoforward(self.angles);
+  vec1 = anglesToForward(self.angles);
   vec2 = vectornormalize(pos - self.origin);
   if(vectordot(vec1, vec2) < -.8) {
     start = self.origin + (0, 0, 16);
@@ -113,7 +113,7 @@ ai_change_ai_functions(name, functions) {
     return;
   }
   keys = getarraykeys(functions);
-  for (i = 0; i < keys.size; i++) {
+  for(i = 0; i < keys.size; i++) {
     key = keys[i];
     self ai_change_behavior_function(name, key, functions[key]);
   }
@@ -124,7 +124,7 @@ ai_change_behavior_function(name, key, function, array) {
     msg = "";
     if(isDefined(array)) {
       keys = getarraykeys(array);
-      for (i = 0; i < keys.sise; i++) {
+      for(i = 0; i < keys.sise; i++) {
         msg += keys[i];
         msg += ", ";
       }
@@ -151,7 +151,7 @@ ai_clear_custom_animation_reaction_and_idle() {
 }
 
 ai_set_custom_animation_reaction(node, anime, tag, ender) {
-  self._stealth.behavior.event.custom_animation = spawnstruct();
+  self._stealth.behavior.event.custom_animation = spawnStruct();
   self._stealth.behavior.event.custom_animation.node = node;
   self._stealth.behavior.event.custom_animation.anime = anime;
   self._stealth.behavior.event.custom_animation.tag = tag;
@@ -174,7 +174,7 @@ ai_animate_props_on_death(node, anime, tag, ender) {
 
 system_init(state_functions) {
   assertEX(isDefined(level._stealth), "There is no level._stealth struct.You ran stealth behavior before running the detection logic.Run _stealth_logic::main() in your level load first");
-  level._stealth.behavior = spawnstruct();
+  level._stealth.behavior = spawnStruct();
   level._stealth.behavior.sound = [];
   level._stealth.behavior.sound["huh"] = false;
   level._stealth.behavior.sound["hmph"] = false;
@@ -182,7 +182,7 @@ system_init(state_functions) {
   level._stealth.behavior.sound["spotted"] = false;
   level._stealth.behavior.sound["corpse"] = false;
   level._stealth.behavior.sound["alert"] = false;
-  level._stealth.behavior.corpse = spawnstruct();
+  level._stealth.behavior.corpse = spawnStruct();
   level._stealth.behavior.corpse.last_pos = (0, 0, -100000);
   level._stealth.behavior.corpse.search_radius = 512;
   level._stealth.behavior.corpse.node_array = undefined;
@@ -225,7 +225,7 @@ system_message_loop() {
 }
 
 system_message_handler(_flag, function) {
-  while (1) {
+  while(1) {
     flag_wait(_flag);
     thread[[function]]();
     flag_waitopen(_flag);
@@ -266,7 +266,7 @@ enemy_logic(state_functions, alert_functions, corpse_functions, awareness_functi
 
 enemy_init(state_functions, alert_functions, corpse_functions, awareness_functions) {
   assertEX(isDefined(self._stealth), "There is no self._stealth struct.You ran stealth behavior before running the detection logic.Run _stealth_logic::enemy_init() on this AI first");
-  self._stealth.behavior = spawnstruct();
+  self._stealth.behavior = spawnStruct();
   self._stealth.behavior.sndnum = randomintrange(1, 4);
   self._stealth.behavior.ai_functions = [];
   self._stealth.behavior.ai_functions["state"] = [];
@@ -287,7 +287,7 @@ enemy_init(state_functions, alert_functions, corpse_functions, awareness_functio
   self ent_flag_init("_stealth_behavior_reaction_anim");
   self ent_flag_init("_stealth_behavior_first_reaction");
   self ent_flag_init("_stealth_behavior_reaction_anim_in_progress");
-  self._stealth.behavior.event = spawnstruct();
+  self._stealth.behavior.event = spawnStruct();
   if(self._stealth.logic.dog)
     self enemy_dog_init();
 }
@@ -362,7 +362,7 @@ enemy_Message_Loop() {
 ai_message_handler(_flag, name) {
   self endon("death");
   self endon("pain_death");
-  while (1) {
+  while(1) {
     flag_wait(_flag);
 
     function = self._stealth.behavior.ai_functions["state"][name];
@@ -441,7 +441,7 @@ state_change_ender(_flag, ender) {
 enemy_Animation_Loop() {
   self endon("death");
   self endon("pain_death");
-  while (1) {
+  while(1) {
     self waittill("event_awareness", type);
     wrapper_func = self._stealth.behavior.ai_functions["animation"]["wrapper"];
     self thread[[wrapper_func]](type);
@@ -567,7 +567,7 @@ enemy_animation_generic(type) {
   dist = (distance(self.origin, target.origin));
   max = 4;
   range = 1024;
-  for (i = 1; i < max; i++) {
+  for(i = 1; i < max; i++) {
     test = range * (i / max);
     if(dist < test) {
       break;
@@ -617,7 +617,7 @@ dog_animation_wakeup_slow(type) {
 enemy_Awareness_Loop() {
   self endon("death");
   self endon("pain_death");
-  while (1) {
+  while(1) {
     self waittill("event_awareness", type);
     if(flag("_stealth_spotted")) {
       continue;
@@ -704,7 +704,7 @@ enemy_awareness_reaction_explosion(type) {
 enemy_awareness_reaction_safety(type, msg) {
   self endon("death");
   self endon(msg);
-  while (1) {
+  while(1) {
     self waittill("enemy_awareness_reaction", _type);
     if(type == _type)
       continue;
@@ -718,7 +718,7 @@ enemy_find_nodes_at_origin(origin) {
   array = enemy_get_closest_pathnodes(512, origin);
   original = origin;
   if(isDefined(array) && array.size) {
-    for (i = 0; i < array.size; i++) {
+    for(i = 0; i < array.size; i++) {
       if(isDefined(array[i]._stealth_corpse_behavior_taken)) {
         continue;
       }
@@ -752,7 +752,7 @@ enemy_Threat_Loop() {
   self endon("pain_death");
   if(self._stealth.logic.dog)
     self thread enemy_threat_logic_dog();
-  while (1) {
+  while(1) {
     self waittill("_stealth_enemy_alert_level_change");
     type = self._stealth.logic.alert_level.lvl;
     enemy = self._stealth.logic.alert_level.enemy;
@@ -875,7 +875,7 @@ enemy_close_in_on_target() {
   }
   self endon("death");
   self endon("_stealth_stop_stealth_behavior");
-  while (isDefined(self.enemy)) {
+  while(isDefined(self.enemy)) {
     self setgoalpos(self.enemy.origin);
     self.goalradius = radius;
     if(radius > 600)
@@ -888,7 +888,7 @@ enemy_announce_wtf() {
   if(!(self enemy_announce_snd("wtf"))) {
     return;
   }
-  self playsound("RU_0_reaction_casualty_generic");
+  self playSound("RU_0_reaction_casualty_generic");
 }
 
 enemy_announce_huh() {
@@ -896,7 +896,7 @@ enemy_announce_huh() {
     return;
   }
   alias = "scoutsniper_ru" + self._stealth.behavior.sndnum + "_huh";
-  self playsound(alias);
+  self playSound(alias);
 }
 
 enemy_announce_hmph() {
@@ -904,7 +904,7 @@ enemy_announce_hmph() {
     return;
   }
   alias = "scoutsniper_ru" + self._stealth.behavior.sndnum + "_hmph";
-  self playsound(alias);
+  self playSound(alias);
 }
 
 enemy_announce_spotted(pos) {
@@ -917,12 +917,12 @@ enemy_announce_spotted(pos) {
   if(self._stealth.logic.dog) {
     return;
   }
-  self playsound("RU_0_reaction_casualty_generic");
+  self playSound("RU_0_reaction_casualty_generic");
 }
 
 enemy_announce_spotted_bring_team(pos) {
   ai = getaispeciesarray("axis", "all");
-  for (i = 0; i < ai.size; i++) {
+  for(i = 0; i < ai.size; i++) {
     if(ai[i] == self) {
       continue;
     }
@@ -944,7 +944,7 @@ enemy_announce_corpse() {
   if(!(self enemy_announce_snd("corpse"))) {
     return;
   }
-  self playsound("RU_0_reaction_casualty_generic");
+  self playSound("RU_0_reaction_casualty_generic");
 }
 
 enemy_announce_snd(type) {
@@ -970,7 +970,7 @@ enemy_Corpse_Loop() {
   self endon("death");
   self endon("pain_death");
   self thread enemy_found_corpse_loop();
-  while (1) {
+  while(1) {
     self waittill("_stealth_saw_corpse");
     self enemy_saw_corpse_logic();
   }
@@ -982,7 +982,7 @@ enemy_saw_corpse_logic() {
   level endon("_stealth_spotted");
   level endon("_stealth_found_corpse");
   self thread enemy_announce_huh();
-  while (1) {
+  while(1) {
     self ent_flag_waitopen("_stealth_enemy_alert_level_action");
     self enemy_corpse_saw_wrapper();
     self waittill("normal");
@@ -1031,9 +1031,9 @@ enemy_found_corpse_loop() {
     return;
   level endon("_stealth_spotted");
   funcs = self._stealth.behavior.ai_functions["corpse"];
-  while (1) {
+  while(1) {
     flag_wait("_stealth_found_corpse");
-    while (flag("_stealth_found_corpse")) {
+    while(flag("_stealth_found_corpse")) {
       if(self ent_flag("_stealth_found_corpse"))
         self thread enemy_announce_corpse();
       else
@@ -1054,7 +1054,7 @@ enemy_corpse_found_behavior() {
     level._stealth.behavior.corpse.last_pos = level._stealth.logic.corpse.last_pos;
   }
   array = level._stealth.behavior.corpse.node_array;
-  for (i = 0; i < array.size; i++) {
+  for(i = 0; i < array.size; i++) {
     if(isDefined(array[i]._stealth_corpse_behavior_taken)) {
       continue;
     }
@@ -1096,7 +1096,7 @@ enemy_get_closest_pathnodes(radius, origin) {
       nodes = getallnodes();
       pathnodes = [];
       radus2rd = radius * radius;
-      for (i = 0; i < nodes.size; i++) {
+      for(i = 0; i < nodes.size; i++) {
         if(nodes[i].type != "Path") {
           continue;
         }
@@ -1124,7 +1124,7 @@ friendly_logic(state_functions) {
 
 friendly_init(state_functions) {
   assertEX(isDefined(self._stealth), "There is no self._stealth struct.You ran stealth behavior before running the detection logic.Run _stealth_logic::friendly_init() on this AI first");
-  self._stealth.behavior = spawnstruct();
+  self._stealth.behavior = spawnStruct();
   self._stealth.behavior.accuracy = [];
   self._stealth.behavior.goodAccuracy = 50;
   self._stealth.behavior.badAccuracy = 0;
@@ -1218,8 +1218,8 @@ friendly_stance_handler() {
   self endon("death");
   self endon("pain_death");
   self friendly_stance_handler_init();
-  while (1) {
-    while (self ent_flag("_stealth_stance_handler") && !flag("_stealth_spotted")) {
+  while(1) {
+    while(self ent_flag("_stealth_stance_handler") && !flag("_stealth_spotted")) {
       self friendly_stance_handler_set_stance_up();
       stances = [];
       stances = friendly_stance_handler_check_mightbeseen(stances);
@@ -1300,7 +1300,7 @@ friendly_stance_handler_check_mightbeseen(stances) {
   ai = getaispeciesarray("axis", "all");
   stances[self._stealth.logic.stance] = 0;
   stances[self._stealth.behavior.stance_up] = 0;
-  for (i = 0; i < ai.size; i++) {
+  for(i = 0; i < ai.size; i++) {
     dist_add_curr = self friendly_stance_handler_return_ai_sight(ai[i], self._stealth.logic.stance);
     dist_add_up = self friendly_stance_handler_return_ai_sight(ai[i], self._stealth.behavior.stance_up);
     score_current = (self maps\_stealth_logic::friendly_compute_score()) + dist_add_curr;
@@ -1330,7 +1330,7 @@ friendly_stance_handler_set_stance_up() {
 }
 
 friendly_stance_handler_return_ai_sight(ai, stance) {
-  vec1 = anglestoforward(ai.angles);
+  vec1 = anglesToForward(ai.angles);
   vec2 = vectornormalize(self.origin - ai.origin);
   vecdot = vectordot(vec1, vec2);
   state = level._stealth.logic.detection_level;
@@ -1361,16 +1361,14 @@ default_event_awareness(dialogue_func, ender1, ender2, ender3) {
   thread default_event_awareness_enders(ender1, ender2, ender3);
   array_thread(getaiarray("allies"), ::default_event_awareness_ended_cleanup);
   thread default_event_awareness_killed_cleanup();
-  while (1) {
+  while(1) {
     type = default_event_awareness_wait();
     array_thread(getaiarray("allies"), ::default_event_awareness_setup);
     waittillframeend;
     array_thread(getaiarray("allies"), ::default_event_awareness_handle_changes);
     flag_set("_stealth_event");
     wait 2;
-    [
-      [dialogue_func]
-    ]();
+    [[dialogue_func]]();
     default_event_awareness_waitclear(type);
     array_thread(getaiarray("allies"), ::default_event_awareness_cleanup);
     flag_clear("_stealth_event");
@@ -1418,7 +1416,7 @@ default_event_awareness_setup() {
 default_event_awareness_handle_changes() {
   self endon("default_event_awareness_cleanup");
   level endon("default_event_awareness_enders");
-  while (1) {
+  while(1) {
     self waittill("_stealth_stance_handler");
     self._stealth.behavior.alreadysmartstance = self ent_flag("_stealth_stance_handler");
     if(!self ent_flag("_stealth_stance_handler")) {
@@ -1438,7 +1436,7 @@ default_event_awareness_cleanup() {
 
 default_event_awareness_wait() {
   level endon("_stealth_found_corpse");
-  while (1) {
+  while(1) {
     level waittill("event_awareness", type);
     switch (type) {
       case "found_corpse":
@@ -1493,6 +1491,6 @@ default_event_awareness_waitclear_ai_proc(dist) {
   do_wait_any();
   self endon("goal");
   distsquared = dist * dist;
-  while (distancesquared(self.origin, level.price.origin) < distsquared)
+  while(distancesquared(self.origin, level.price.origin) < distsquared)
     wait 1;
 }

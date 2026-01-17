@@ -28,7 +28,7 @@ function hq_think() {
   if(!is_capturing_hq() && !self atgoal("hq_patrol")) {
     mine = getnearestnode(self.origin);
     point = hq_nearest_point();
-    if(isdefined(mine) && bot::navmesh_points_visible(mine.origin, point)) {
+    if(isDefined(mine) && bot::navmesh_points_visible(mine.origin, point)) {
       self lookat(level.radio.baseorigin + vectorscale((0, 0, 1), 30));
     }
   }
@@ -36,7 +36,7 @@ function hq_think() {
 
 function has_hq_goal() {
   origin = self getgoal("hq_radio");
-  if(isdefined(origin)) {
+  if(isDefined(origin)) {
     foreach(point in level.radio.points) {
       if(distancesquared(origin, point) < 4096) {
         return true;
@@ -67,7 +67,7 @@ function patrol_hq() {
   self cancelgoal("hq_radio");
   if(self atgoal("hq_patrol")) {
     node = getnearestnode(self.origin);
-    if(isdefined(node) && node.type == "Path") {
+    if(isDefined(node) && node.type == "Path") {
       self setstance("crouch");
     } else {
       self setstance("stand");
@@ -90,7 +90,7 @@ function patrol_hq() {
     goal = self getgoal("hq_patrol");
     nearest = hq_nearest_point();
     mine = getnearestnode(goal);
-    if(isdefined(mine) && !bot::navmesh_points_visible(mine.origin, nearest)) {
+    if(isDefined(mine) && !bot::navmesh_points_visible(mine.origin, nearest)) {
       self clearlookat();
       self cancelgoal("hq_patrol");
     }
@@ -111,7 +111,7 @@ function patrol_hq() {
       self.bot.update_objective_patrol = gettime() + randomintrange(3000, 6000);
     }
     mine = getnearestnode(goal);
-    if(isdefined(mine) && !bot::navmesh_points_visible(mine.origin, nearest)) {
+    if(isDefined(mine) && !bot::navmesh_points_visible(mine.origin, nearest)) {
       self clearlookat();
       self cancelgoal("hq_patrol");
     }
@@ -120,7 +120,7 @@ function patrol_hq() {
   points = util::positionquery_pointarray(nearest, 0, 512, 70, 64);
   points = navpointsightfilter(points, nearest);
   assert(points.size);
-  for (i = randomint(points.size); i < points.size; i++) {
+  for(i = randomint(points.size); i < points.size; i++) {
     if(self bot::friend_goal_in_radius("hq_radio", points[i], 128) == 0) {
       if(self bot::friend_goal_in_radius("hq_patrol", points[i], 256) == 0) {
         self addgoal(points[i], 24, 3, "hq_patrol");
@@ -154,9 +154,9 @@ function move_to_hq() {
 
 function get_look_at() {
   enemy = self bot::get_closest_enemy(self.origin, 1);
-  if(isdefined(enemy)) {
+  if(isDefined(enemy)) {
     node = getvisiblenode(self.origin, enemy.origin);
-    if(isdefined(node) && distancesquared(self.origin, node.origin) > 16384) {
+    if(isDefined(node) && distancesquared(self.origin, node.origin) > 16384) {
       return node.origin;
     }
   }
@@ -164,15 +164,15 @@ function get_look_at() {
   if(enemies.size) {
     enemy = array::random(enemies);
   }
-  if(isdefined(enemy)) {
+  if(isDefined(enemy)) {
     node = getvisiblenode(self.origin, enemy.origin);
-    if(isdefined(node) && distancesquared(self.origin, node.origin) > 16384) {
+    if(isDefined(node) && distancesquared(self.origin, node.origin) > 16384) {
       return node.origin;
     }
   }
   spawn = array::random(level.spawnpoints);
   node = getvisiblenode(self.origin, spawn.origin);
-  if(isdefined(node) && distancesquared(self.origin, node.origin) > 16384) {
+  if(isDefined(node) && distancesquared(self.origin, node.origin) > 16384) {
     return node.origin;
   }
   return level.radio.baseorigin;
@@ -215,7 +215,7 @@ function is_hq_contested(skip_team) {
     return true;
   }
   enemy = self bot::get_closest_enemy(level.radio.baseorigin, 1);
-  if(isdefined(enemy) && distancesquared(enemy.origin, level.radio.baseorigin) < 262144) {
+  if(isDefined(enemy) && distancesquared(enemy.origin, level.radio.baseorigin) < 262144) {
     return true;
   }
   return false;
@@ -239,7 +239,7 @@ function hq_grenade() {
     return;
   }
   enemy = self bot::get_closest_enemy(level.radio.baseorigin, 0);
-  if(isdefined(enemy)) {
+  if(isDefined(enemy)) {
     origin = enemy.origin;
   } else {
     origin = level.radio.baseorigin;
@@ -258,15 +258,15 @@ function hq_tactical_insertion() {
   }
   dist = self getlookaheaddist();
   dir = self getlookaheaddir();
-  if(!isdefined(dist) || !isdefined(dir)) {
+  if(!isDefined(dist) || !isDefined(dir)) {
     return;
   }
   point = hq_nearest_point();
   mine = getnearestnode(self.origin);
-  if(isdefined(mine) && !bot::navmesh_points_visible(mine.origin, point)) {
+  if(isDefined(mine) && !bot::navmesh_points_visible(mine.origin, point)) {
     origin = self.origin + vectorscale(dir, dist);
     next = getnearestnode(origin);
-    if(isdefined(next) && bot::navmesh_points_visible(next.origin, point)) {
+    if(isDefined(next) && bot::navmesh_points_visible(next.origin, point)) {
       bot_combat::combat_tactical_insertion(self.origin);
     }
   }
@@ -278,5 +278,5 @@ function hq_nearest_point() {
 
 function hq_is_contested() {
   enemy = self bot::get_closest_enemy(level.radio.baseorigin, 0);
-  return isdefined(enemy) && distancesquared(enemy.origin, level.radio.baseorigin) < (level.radio.node_radius * level.radio.node_radius);
+  return isDefined(enemy) && distancesquared(enemy.origin, level.radio.baseorigin) < (level.radio.node_radius * level.radio.node_radius);
 }

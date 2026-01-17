@@ -33,7 +33,7 @@ loop_local_sound(localclientnum, alias, interval, fx) {
   wait 0.1;
 
   while(true) {
-    n_id = playfxontag(localclientnum, fx, self, self.fxtagname);
+    n_id = playFXOnTag(localclientnum, fx, self, self.fxtagname);
     wait(interval);
     stopfx(localclientnum, n_id);
     interval = interval / 1.2;

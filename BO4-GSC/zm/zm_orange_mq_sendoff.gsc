@@ -23,16 +23,15 @@
 #include scripts\zm_common\zm_ui_inventory;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_zonemgr;
-
 #namespace zm_orange_mq_sendoff;
 
 preload() {
-  clientfield::register("vehicle", "" + #"wisp_fx", 24000, 1, "int");
+  clientfield::register("vehicle", "" + # "wisp_fx", 24000, 1, "int");
 }
 
 init() {
   level flag::init(#"hash_2c3411c8b8b421d8");
-  zm_orange_pablo::register_drop_off(16, #"hash_18dcf44bdd7a747c", #"hash_459899940f28d8f0", &function_b5f900c3);
+  zm_orange_pablo::register_drop_off(16, # "hash_18dcf44bdd7a747c", # "hash_459899940f28d8f0", &function_b5f900c3);
 }
 
 function_5309464a(var_5ea5c94d) {
@@ -62,10 +61,9 @@ function_ae270d9e(var_5ea5c94d, ended_early) {
 }
 
 function_b5f900c3() {
-
   iprintlnbold("<dev string:x38>");
 
-    level notify(#"sendoff_started");
+  level notify(#"sendoff_started");
   level thread sun_deck_watcher();
 }
 
@@ -162,7 +160,7 @@ function_8a707841(n_loop_time) {
   self clientfield::set("lighthouse_on", 0);
 
   while(n_time_elapsed < n_loop_time) {
-    self clientfield::increment("" + #"hash_6c84cb8d22df46f0", 1);
+    self clientfield::increment("" + # "hash_6c84cb8d22df46f0", 1);
     wait n_wait_time;
     n_time_elapsed += n_wait_time;
     n_wait_time = max(n_wait_time * 0.85, 0.1);
@@ -188,13 +186,13 @@ function_bf106bdf() {
     waitframe(1);
   }
 
-  vh_wisp clientfield::set("" + #"wisp_fx", 1);
+  vh_wisp clientfield::set("" + # "wisp_fx", 1);
   nd_start = getvehiclenode("portal_wisp_start", "targetname");
   vh_wisp setspeed(20);
   vh_wisp vehicle::get_on_and_go_path(nd_start);
   e_device = util::spawn_model("p8_zm_ora_elemental_vessel", vh_wisp.origin + (0, 0, -10));
   e_device thread zm_orange_mq_hell::rotate_forever((0, 45, 0));
-  e_device zm_item_pickup::create_item_pickup(&pickup_device, zm_utility::function_d6046228(#"hash_50d83a4f11ad9d8", #"hash_51d8e27e625c6bd4"), undefined, 128);
+  e_device zm_item_pickup::create_item_pickup(&pickup_device, zm_utility::function_d6046228(#"hash_50d83a4f11ad9d8", # "hash_51d8e27e625c6bd4"), undefined, 128);
 }
 
 pickup_device(e_item, e_player) {
@@ -202,5 +200,4 @@ pickup_device(e_item, e_player) {
   level flag::set(#"hash_2c3411c8b8b421d8");
 
   iprintlnbold("<dev string:x6b>");
-
 }

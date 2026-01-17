@@ -117,8 +117,8 @@ initModelAnims() {
   level.scr_anim["fxanim_props"]["a_wirespark_med"][0] = % fxanim_gp_wirespark_med_anim;
   addNotetrack_customFunction("fxanim_props", "long_spark_wire", ::wirespark_fx_1, "a_wirespark_long");
   addNotetrack_customFunction("fxanim_props", "med_spark_wire", ::wirespark_fx_2, "a_wirespark_med");
-  enta_wirespark_long = getentarray("fxanim_gp_wirespark_long_mod", "targetname");
-  enta_wirespark_med = getentarray("fxanim_gp_wirespark_med_mod", "targetname");
+  enta_wirespark_long = getEntArray("fxanim_gp_wirespark_long_mod", "targetname");
+  enta_wirespark_med = getEntArray("fxanim_gp_wirespark_med_mod", "targetname");
   for(i = 0; i < enta_wirespark_long.size; i++) {
     enta_wirespark_long[i] thread wirespark_long(1, 5);
     PrintLn("** FX: wirespark_long**");
@@ -151,7 +151,7 @@ wirespark_fx_1(guy) {
   wire_model = spawn("script_model", guy.origin);
   wire_model setModel("tag_origin");
   wire_model LinkTo(guy, "long_spark_06_jnt", (0, 0, 0), (0, 0, 0));
-  PlayFXOnTag(level._effect["dangling_wire"], wire_model, "tag_origin");
+  playFXOnTag(level._effect["dangling_wire"], wire_model, "tag_origin");
   playsoundatposition("amb_spark_special", wire_model.origin);
   wait(0.5);
   wire_model Delete();
@@ -161,7 +161,7 @@ wirespark_fx_2(guy) {
   wire_model = spawn("script_model", guy.origin);
   wire_model setModel("tag_origin");
   wire_model LinkTo(guy, "med_spark_06_jnt", (0, 0, 0), (0, 0, 0));
-  PlayFXOnTag(level._effect["dangling_wire"], wire_model, "tag_origin");
+  playFXOnTag(level._effect["dangling_wire"], wire_model, "tag_origin");
   playsoundatposition("amb_spark_special", wire_model.origin);
   wait(0.5);
   wire_model Delete();

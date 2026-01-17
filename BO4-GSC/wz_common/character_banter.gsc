@@ -8,7 +8,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\mp_common\gametypes\globallogic;
-
 #namespace character_banter;
 
 autoexec __init__system__() {

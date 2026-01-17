@@ -18,7 +18,6 @@
 #include scripts\mp_common\gametypes\globallogic_spawn;
 #include scripts\mp_common\load;
 #include scripts\mp_common\util;
-
 #namespace mp_elevation;
 
 event_handler[level_init] main(eventstruct) {

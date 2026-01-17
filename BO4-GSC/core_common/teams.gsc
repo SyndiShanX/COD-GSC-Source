@@ -7,18 +7,18 @@
 
 function_dc7eaabd(assignment) {
   assert(isDefined(assignment));
-  self.pers[#"team"] = assignment;
+  self.pers[# "team"] = assignment;
   self.team = assignment;
   self.sessionteam = assignment;
 
   if(isDefined(level.teams[assignment])) {
     status = self function_3d288f14();
 
-    if(!isDefined(level.var_75dffa9f[assignment]) || status != level.var_75dffa9f[assignment] && status == #"game") {
-      if(status == #"game") {
-        level.var_75dffa9f[assignment] = #"game";
+    if(!isDefined(level.var_75dffa9f[assignment]) || status != level.var_75dffa9f[assignment] && status == # "game") {
+      if(status == # "game") {
+        level.var_75dffa9f[assignment] = # "game";
       } else {
-        level.var_75dffa9f[assignment] = #"none";
+        level.var_75dffa9f[assignment] = # "none";
       }
     }
   }
@@ -36,13 +36,13 @@ function_3d288f14() {
 
     switch (rand) {
       case 0:
-        self.var_30e2c3ec = #"none";
+        self.var_30e2c3ec = # "none";
         break;
       case 1:
-        self.var_30e2c3ec = #"game";
+        self.var_30e2c3ec = # "game";
         break;
       case 2:
-        self.var_30e2c3ec = #"system";
+        self.var_30e2c3ec = # "system";
         break;
     }
 
@@ -74,10 +74,10 @@ function_959bac94() {
     }
   }
 
-  return #"spectator";
+  return # "spectator";
 }
 
-private function_ba459d03(team) {
+function_ba459d03(team) {
   if(isDefined(level.var_ba13fb7a) && level.var_ba13fb7a) {
     team_str = string(team);
 
@@ -88,7 +88,7 @@ private function_ba459d03(team) {
     voip = "<dev string:x73>";
 
     if(isDefined(level.var_75dffa9f[team])) {
-      voip += level.var_75dffa9f[team] == #"game" ? "<dev string:x7b>" : "<dev string:x82>";
+      voip += level.var_75dffa9f[team] == # "game" ? "<dev string:x7b>" : "<dev string:x82>";
     } else {
       voip += "<dev string:x8b>";
     }
@@ -114,4 +114,3 @@ function_d28f6fa0(team) {
     function_a9d594a0(player getparty());
   }
 }
-

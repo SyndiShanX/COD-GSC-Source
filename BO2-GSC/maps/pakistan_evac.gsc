@@ -486,8 +486,7 @@ standoff_ai_setup() {
   level notify("standoff_ai_setup_done");
 }
 
-soldier_stance(str_suffix, str_align_targetname) {
-}
+soldier_stance(str_suffix, str_align_targetname) {}
 
 standoff_aim_chinese() {
   self endon("death");

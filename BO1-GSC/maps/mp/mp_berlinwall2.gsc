@@ -36,7 +36,7 @@ killzone_init() {
   SetDvar("scr_berlin_firing_spread", level._berlin_firing_spread);
   level thread update_dvars();
   level thread watch_killzone_paths();
-  for (i = 1; i < 7; i++) {
+  for(i = 1; i < 7; i++) {
     trig = GetEnt("killzone_trigger_" + i, "targetname");
     if(isDefined(trig)) {
       trig thread watch_killzone();
@@ -45,7 +45,7 @@ killzone_init() {
 }
 update_dvars() {
   level endon("game_ended");
-  while (true) {
+  while(true) {
     level._berlin_firing_delay = GetDvarFloat(#"scr_berlin_firing_delay");
     level._berlin_firing_start_z = GetDvarFloat(#"scr_berlin_firing_start_z");
     level._berlin_firing_end_z = GetDvarFloat(#"scr_berlin_firing_end_z");
@@ -59,15 +59,15 @@ watch_killzone() {
   gun = GetEnt(self.target, "targetname");
   shooting_pos = gun GetTagOrigin("tag_flash");
   shooting_ang = gun GetTagAngles("tag_flash");
-  killCamEnt = Spawn("script_model", shooting_pos);
+  killCamEnt = spawn("script_model", shooting_pos);
   killCamEnt.angles = shooting_ang;
   killCamEnt LinkTo(gun, "tag_flash");
   killCamEnt.startTime = gettime();
   gun.killCamEnt = killCamEnt;
   gun.isMagicBullet = true;
-  while (true) {
+  while(true) {
     players = get_players();
-    for (i = 0; i < players.size; i++) {
+    for(i = 0; i < players.size; i++) {
       if(players[i] IsTouching(self) && players[i].sessionstate == "playing") {
         if(players[i].team == "spectator") {
           continue;
@@ -88,20 +88,20 @@ watch_killzone() {
   }
 }
 watch_killzone_paths() {
-  ai_collisions = GetEntArray("dog_clip", "targetname");
-  for (i = 0; i < ai_collisions.size; i++) {
+  ai_collisions = getEntArray("dog_clip", "targetname");
+  for(i = 0; i < ai_collisions.size; i++) {
     ai_collisions[i] DisconnectPaths();
   }
-  for (;;) {
+  for(;;) {
     level waittill("called_in_the_dogs");
-    for (i = 0; i < ai_collisions.size; i++) {
+    for(i = 0; i < ai_collisions.size; i++) {
       ai_collisions[i] ConnectPaths();
       ai_collisions[i] NotSolid();
     }
-    while (isDefined(level.dogs) && level.dogs.size > 0) {
+    while(isDefined(level.dogs) && level.dogs.size > 0) {
       wait(1);
     }
-    for (i = 0; i < ai_collisions.size; i++) {
+    for(i = 0; i < ai_collisions.size; i++) {
       ai_collisions[i] Solid();
       ai_collisions[i] DisconnectPaths();
     }
@@ -112,11 +112,11 @@ acquired_target(gun) {
   self thread watch_death();
   PlaySoundAtPosition("mpl_turret_alert", gun.origin);
   wait(0.5);
-  gun PlayLoopSound("wpn_berturret_start_npc");
-  gun PlayLoopSound("wpn_berturret_fire_loop_npc");
+  gun playLoopSound("wpn_berturret_start_npc");
+  gun playLoopSound("wpn_berturret_fire_loop_npc");
   start_z = level._berlin_firing_start_z;
-  while (true) {
-    shooting_pos = gun.origin + (AnglesToForward(gun.angles) * 40);
+  while(true) {
+    shooting_pos = gun.origin + (anglesToForward(gun.angles) * 40);
     if(!SightTracePassed(shooting_pos, self.origin + (0, 0, 50), false, undefined)) {
       level notify("new_target");
       return;
@@ -138,7 +138,7 @@ watch_death() {
 watch_still_touching(trig) {
   self endon("death");
   self endon("disconnect");
-  while (true) {
+  while(true) {
     if(self.sessionstate != "playing") {
       level notify("new_target");
       break;
@@ -184,13 +184,13 @@ fire_at_player(target_pos, gun) {
       break;
   }
   vec_scalar = 40;
-  shooting_pos = gun.origin + (AnglesToForward(gun.angles) * vec_scalar);
+  shooting_pos = gun.origin + (anglesToForward(gun.angles) * vec_scalar);
   MagicBullet("minigun_turret_mp", shooting_pos, target_pos, gun);
 }
 nomansland_alarm_watch() {
   level endon("game_ended");
   level.play_nomansland_alarm = false;
-  for (;;) {
+  for(;;) {
     wait 0.25;
     if(level.play_nomansland_alarm) {
       PlaySoundAtPosition("evt_alert_siren", (1812, -840, 386));

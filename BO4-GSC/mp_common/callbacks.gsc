@@ -18,7 +18,6 @@
 #include scripts\mp_common\player\player_disconnect;
 #include scripts\mp_common\player\player_killed;
 #include scripts\weapons\deployable;
-
 #namespace callback;
 
 autoexec __init__system__() {

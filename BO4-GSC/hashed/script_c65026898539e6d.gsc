@@ -7,7 +7,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
-
 #namespace namespace_35baff41;
 
 autoexec __init__system__() {
@@ -22,7 +21,7 @@ __init__() {
   zm_trial::register_challenge(#"hash_2c07cbb8e8fd2060", &on_begin, &on_end);
 }
 
-private on_begin(var_6ad4e7c6) {
+on_begin(var_6ad4e7c6) {
   fasttravel_triggers = struct::get_array("fasttravel_trigger", "targetname");
   assert(isDefined(fasttravel_triggers));
   zm_trial_util::function_2976fa44(fasttravel_triggers.size);
@@ -30,7 +29,7 @@ private on_begin(var_6ad4e7c6) {
   level thread function_25f146be();
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   zm_trial_util::function_f3dbeda7();
 
   if(!round_reset) {
@@ -43,7 +42,7 @@ private on_end(round_reset) {
   }
 }
 
-private function_c83a4a77() {
+function_c83a4a77() {
   fasttravel_triggers = struct::get_array("fasttravel_trigger", "targetname");
   assert(isDefined(fasttravel_triggers));
   count = 0;
@@ -57,7 +56,7 @@ private function_c83a4a77() {
   return count;
 }
 
-private function_25f146be() {
+function_25f146be() {
   self endon(#"disconnect");
   level endon(#"hash_7646638df88a3656");
 

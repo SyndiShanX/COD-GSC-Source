@@ -8,7 +8,7 @@
 
 blizzard_main() {
   blizzard_flags();
-  if(IsDefined(level.blizzard_fx_override_thread))
+  if(isDefined(level.blizzard_fx_override_thread))
     [[level.blizzard_fx_override_thread]]();
   else
     fx_init();
@@ -23,7 +23,7 @@ blizzard_flags() {
 }
 
 blizzard_start() {
-  if(!isdefined(level.players))
+  if(!isDefined(level.players))
     level waittill("level.players initialized");
 
   array_thread(level.players, ::blizzard_start_proc);
@@ -31,8 +31,8 @@ blizzard_start() {
 }
 
 blizzard_start_proc() {
-  while (1) {
-    PlayFX(level._effect["blizzard_main"], self.origin);
+  while(1) {
+    playFX(level._effect["blizzard_main"], self.origin);
     wait(.3);
   }
 }
@@ -217,7 +217,7 @@ blizzard_set_sunlight(intensity, time) {
   diff = intensity - level.sun_intensity;
   fraction = diff / interval;
 
-  while (interval) {
+  while(interval) {
     level.sun_intensity += fraction;
     new_sun = vector_multiply(level.default_sun, level.sun_intensity);
 
@@ -244,7 +244,7 @@ blizzard_level_transition(type, time) {
     interval = level.snowLevel - newlevel;
     time /= interval;
 
-    for (i = 0; i < interval; i++) {
+    for(i = 0; i < interval; i++) {
       wait(time);
       level.snowLevel--;
       blizzard_set_fx();
@@ -255,7 +255,7 @@ blizzard_level_transition(type, time) {
     interval = newlevel - level.snowLevel;
     time /= interval;
 
-    for (i = 0; i < interval; i++) {
+    for(i = 0; i < interval; i++) {
       wait(time);
       level.snowLevel++;
       blizzard_set_fx();
@@ -294,11 +294,11 @@ blizzard_overlay_alpha(time, alpha, skipCap) {
   if(!isplayer(player))
     player = level.player;
 
-  if(!isdefined(alpha))
+  if(!isDefined(alpha))
     alpha = 1;
 
   // skipcap lets us modify the overlay without setting a new cap
-  if(!isdefined(skipCap))
+  if(!isDefined(skipCap))
     level.blizzard_overlay_alpha_cap = alpha;
 
   overlay = get_frozen_overlay(player);
@@ -318,7 +318,7 @@ blizzard_overlay_alpha(time, alpha, skipCap) {
 }
 
 blizzard_overlay_clear(timer) {
-  if(!isdefined(timer) || !timer) {
+  if(!isDefined(timer) || !timer) {
     player = self;
     if(!isplayer(player))
       player = level.player;
@@ -331,7 +331,7 @@ blizzard_overlay_clear(timer) {
 }
 
 get_frozen_overlay(player) {
-  if(!isdefined(player.overlay_frozen))
+  if(!isDefined(player.overlay_frozen))
     player.overlay_frozen = NewClientHudElem(player);
 
   return player.overlay_frozen;
@@ -346,7 +346,7 @@ pause_blizzard_ground_fx() {
   fx = array_combine(fx, getfxarraybyID("snow_spray_detail_runner400x0"));
 
   wait(0.1); // must wait until fx are started
-  for (;;) {
+  for(;;) {
     flag_wait("pause_blizzard_ground_fx");
     //iprintlnbold( "Stop Ground FX" );
     foreach(oneshot in fx)
@@ -364,9 +364,9 @@ blizzard_set() {
 
 blizzard_ice_overlay_blend(progress, inner, outer) {
   cap = level.blizzard_overlay_alpha_cap;
-  if(!isdefined(cap))
+  if(!isDefined(cap))
     cap = 1;
-  // find the exterior 
+  // find the exterior
   if(IsSubStr(inner, "exterior")) {
     blizzard_overlay_alpha(1, (1 - progress) * cap, true);
     return;

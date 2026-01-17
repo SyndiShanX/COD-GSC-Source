@@ -26,16 +26,16 @@ _set_recently_fired(origin, angles) {
 }
 
 spikemore_detonate(local_client_num, int_set, ent_new) {
-  playsound(local_client_num, "wpn_spikemore_impact", self.origin);
+  playSound(local_client_num, "wpn_spikemore_impact", self.origin);
   println("Client Spikemore detonate: " + local_client_num);
   _set_recently_fired(self.origin, self.angels);
-  PlayFX(local_client_num, level._effect["fx_ztem_spikemore"], self.origin, AnglesToForward(self.angles));
+  playFX(local_client_num, level._effect["fx_ztem_spikemore"], self.origin, anglesToForward(self.angles));
   for(i = 0; i < 3; i++) {
     yaw = RandomFloatRange(level.recent_spikemore_fire_angles[1] - level.spikemore_detectionAngle, level.recent_spikemore_fire_angles[1] + level.spikemore_detectionAngle);
-    forward = AnglesToForward((0.0, yaw, 0.0));
+    forward = anglesToForward((0.0, yaw, 0.0));
     z = RandomFloatRange(100.0, 150.0);
     dest = level.recent_spikemore_fire_origin + forward * 400.0 + (0, 0, z);
-    trace = BulletTrace(level.recent_spikemore_fire_origin, dest, false, undefined);
+    trace = bulletTrace(level.recent_spikemore_fire_origin, dest, false, undefined);
     if(isDefined(trace) && trace["fraction"] < 1.0) {
       level thread _spawn_spear(local_client_num, trace, VectorToAngles(forward));
     }

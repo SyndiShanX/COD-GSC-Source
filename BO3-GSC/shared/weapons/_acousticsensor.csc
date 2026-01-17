@@ -13,14 +13,14 @@
 function init_shared() {
   level._effect["acousticsensor_enemy_light"] = "_t6/misc/fx_equip_light_red";
   level._effect["acousticsensor_friendly_light"] = "_t6/misc/fx_equip_light_green";
-  if(!isdefined(level.acousticsensors)) {
+  if(!isDefined(level.acousticsensors)) {
     level.acousticsensors = [];
   }
-  if(!isdefined(level.acousticsensorhandle)) {
+  if(!isDefined(level.acousticsensorhandle)) {
     level.acousticsensorhandle = 0;
   }
-  callback::on_localclient_connect( & on_player_connect);
-  callback::add_weapon_type("acoustic_sensor", & spawned);
+  callback::on_localclient_connect(&on_player_connect);
+  callback::add_weapon_type("acoustic_sensor", &spawned);
 }
 
 function on_player_connect(localclientnum) {
@@ -31,7 +31,7 @@ function on_player_connect(localclientnum) {
 }
 
 function addacousticsensor(handle, sensorent, owner) {
-  acousticsensor = spawnstruct();
+  acousticsensor = spawnStruct();
   acousticsensor.handle = handle;
   acousticsensor.sensorent = sensorent;
   acousticsensor.owner = owner;
@@ -40,7 +40,7 @@ function addacousticsensor(handle, sensorent, owner) {
 }
 
 function removeacousticsensor(acousticsensorhandle) {
-  for (i = 0; i < level.acousticsensors.size; i++) {
+  for(i = 0; i < level.acousticsensors.size; i++) {
     last = level.acousticsensors.size - 1;
     if(level.acousticsensors[i].handle == acousticsensorhandle) {
       level.acousticsensors[i].handle = level.acousticsensors[last].handle;
@@ -58,7 +58,7 @@ function spawned(localclientnum) {
   self thread watchshutdown(handle);
   owner = self getowner(localclientnum);
   addacousticsensor(handle, self, owner);
-  util::local_players_entity_thread(self, & spawnedperclient);
+  util::local_players_entity_thread(self, &spawnedperclient);
 }
 
 function spawnedperclient(localclientnum) {
@@ -76,24 +76,24 @@ function updateacousticsensors() {
   localradarenabled = [];
   previousacousticsensorcount = -1;
   util::waitforclient(0);
-  while (true) {
+  while(true) {
     localplayers = level.localplayers;
     if(previousacousticsensorcount != 0 || level.acousticsensors.size != 0) {
-      for (i = 0; i < localplayers.size; i++) {
+      for(i = 0; i < localplayers.size; i++) {
         localradarenabled[i] = 0;
       }
-      for (i = 0; i < level.acousticsensors.size; i++) {
-        if(isdefined(level.acousticsensors[i].sensorent.stunned) && level.acousticsensors[i].sensorent.stunned) {
+      for(i = 0; i < level.acousticsensors.size; i++) {
+        if(isDefined(level.acousticsensors[i].sensorent.stunned) && level.acousticsensors[i].sensorent.stunned) {
           continue;
         }
-        for (j = 0; j < localplayers.size; j++) {
+        for(j = 0; j < localplayers.size; j++) {
           if(localplayers[j] == level.acousticsensors[i].sensorent getowner(j)) {
             localradarenabled[j] = 1;
             setlocalradarposition(j, level.acousticsensors[i].sensorent.origin);
           }
         }
       }
-      for (i = 0; i < localplayers.size; i++) {
+      for(i = 0; i < localplayers.size; i++) {
         setlocalradarenabled(i, localradarenabled[i]);
       }
     }

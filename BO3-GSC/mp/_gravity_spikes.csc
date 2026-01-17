@@ -13,7 +13,7 @@
 #namespace gravity_spikes;
 
 function autoexec __init__sytem__() {
-  system::register("gravity_spikes", & __init__, undefined, undefined);
+  system::register("gravity_spikes", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -25,7 +25,7 @@ function __init__() {
 }
 
 function updatedvars() {
-  while (true) {
+  while(true) {
     level.dirt_enable_gravity_spikes = getdvarint("", level.dirt_enable_gravity_spikes);
     wait(1);
   }
@@ -36,12 +36,12 @@ function watchforgravityspikeexplosion() {
     return;
   }
   weapon_proximity = getweapon("hero_gravityspikes");
-  while (true) {
+  while(true) {
     level waittill("explode", localclientnum, position, mod, weapon, owner_cent);
     if(weapon.rootweapon != weapon_proximity) {
       continue;
     }
-    if(isdefined(owner_cent) && getlocalplayer(localclientnum) == owner_cent && level.dirt_enable_gravity_spikes) {
+    if(isDefined(owner_cent) && getlocalplayer(localclientnum) == owner_cent && level.dirt_enable_gravity_spikes) {
       owner_cent thread explode::dothedirty(localclientnum, 0, 1, 0, 1000, 500);
     }
     thread do_gravity_spike_fx(localclientnum, owner_cent, weapon, position);
@@ -56,7 +56,7 @@ function do_gravity_spike_fx(localclientnum, owner, weapon, position) {
   additional_number_of_effects_per_circle = 7;
   explosion_radius = weapon.explosionradius;
   radius_per_circle = (explosion_radius - radius_of_effect) / number_of_circles;
-  for (circle = 0; circle < number_of_circles; circle++) {
+  for(circle = 0; circle < number_of_circles; circle++) {
     wait(0.1);
     radius_for_this_circle = radius_per_circle * (circle + 1);
     number_for_this_circle = base_number_of_effects + (additional_number_of_effects_per_circle * circle);
@@ -82,7 +82,7 @@ function randomizelocation(startpos, max_x_offset, max_y_offset) {
 function ground_trace(startpos, owner) {
   trace_height = 50;
   trace_depth = 100;
-  return bullettrace(startpos + (0, 0, trace_height), startpos - (0, 0, trace_depth), 0, owner);
+  return bulletTrace(startpos + (0, 0, trace_height), startpos - (0, 0, trace_depth), 0, owner);
 }
 
 function do_gravity_spike_fx_circle(localclientnum, owner, center, radius, count) {
@@ -90,20 +90,20 @@ function do_gravity_spike_fx_circle(localclientnum, owner, center, radius, count
   up = (0, 0, 1);
   randomization = 40;
   sphere_size = 5;
-  for (i = 0; i < count; i++) {
+  for(i = 0; i < count; i++) {
     fx_position = getideallocationforfx(center, i, count, radius, 0);
     fx_position = randomizelocation(fx_position, randomization, randomization);
     trace = ground_trace(fx_position, owner);
     if(trace["fraction"] < 1) {
       fx = getfxfromsurfacetable(level.gravity_spike_table, trace["surfacetype"]);
-      if(isdefined(fx)) {
+      if(isDefined(fx)) {
         angles = (0, randomintrange(0, 359), 0);
-        forward = anglestoforward(angles);
+        forward = anglesToForward(angles);
         normal = trace["normal"];
         if(lengthsquared(normal) == 0) {
           normal = (1, 0, 0);
         }
-        playfx(localclientnum, fx, trace["position"], normal, forward);
+        playFX(localclientnum, fx, trace["position"], normal, forward);
       }
     } else {}
     wait(0.016);

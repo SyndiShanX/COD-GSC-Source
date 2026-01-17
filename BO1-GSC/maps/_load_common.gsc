@@ -341,7 +341,7 @@ player_special_death_hint() {
       return;
     level notify("new_quote_string");
     SetDvar("ui_deadquote", "");
-    self thread grenade_death_text_hudelement(&"SCRIPT_GRENADE_SUICIDE_LINE1", & "SCRIPT_GRENADE_SUICIDE_LINE2");
+    self thread grenade_death_text_hudelement(&"SCRIPT_GRENADE_SUICIDE_LINE1", &"SCRIPT_GRENADE_SUICIDE_LINE2");
     return;
   }
   if(cause == "MOD_EXPLOSIVE") {
@@ -679,7 +679,7 @@ trigger_unlock_death(target) {
 
 wait_for_an_unlocked_trigger(triggers, noteworthy) {
   level endon("unlocked_trigger_hit" + noteworthy);
-  ent = SpawnStruct();
+  ent = spawnStruct();
   for(i = 0; i < triggers.size; i++) {
     triggers[i] thread report_trigger(ent, noteworthy);
   }
@@ -763,7 +763,7 @@ trigger_lookat_think(trigger, endOnFlag) {
       continue;
     }
     while(other IsTouching(trigger)) {
-      if(!SightTracePassed(other GetEye(), target_origin, false, undefined)) {
+      if(!SightTracePassed(other getEye(), target_origin, false, undefined)) {
         if(has_flag) {
           flag_clear(flagName);
         }
@@ -772,7 +772,7 @@ trigger_lookat_think(trigger, endOnFlag) {
       }
       normal = VectorNormalize(target_origin - other.origin);
       player_angles = other GetPlayerAngles();
-      player_forward = AnglesToForward(player_angles);
+      player_forward = anglesToForward(player_angles);
       dot = VectorDot(player_forward, normal);
       if(dot >= 0.78) {
         if(has_flag) {
@@ -845,7 +845,7 @@ trigger_CanSee(trigger) {
 
 cantraceto(target_origin, offsets) {
   for(i = 0; i < offsets.size; i++) {
-    if(SightTracePassed(self GetEye(), target_origin + offsets[i], true, self)) {
+    if(SightTracePassed(self getEye(), target_origin + offsets[i], true, self)) {
       return true;
     }
   }

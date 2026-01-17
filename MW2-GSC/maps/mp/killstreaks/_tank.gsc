@@ -22,14 +22,14 @@ init() {
   precacheModel("sentry_gun");
   precacheModel("vehicle_m1a1_abrams_d_static");
   precacheTurret( "abrams_minigun_mp" );
-	
-  /#
+  	
+
   setDevDvar( "tankDir", "" );
   setDevDvar( "tankForceTrigger", 0 );
   if( getDvar( "tankDebug" ) == "" )
   	setDevDvar( "tankDebug", 0 );
-  #/
-	
+
+  	
   level.killstreakFuncs["tank"] = ::useTank;
   level.tankFire = loadfx( "explosions/large_vehicle_explosion" );
   level.tankCover = loadfx( "props/american_smoke_grenade_mp" );
@@ -38,10 +38,10 @@ init() {
   level.otherDir["reverse"] = "forward";
 
   tankSpawners = Vehicle_GetSpawnerArray();
-	
+  	
   if( !tankSpawners.size )
   	return;
-	
+  	
   if(!isDefined( getVehicleNode( "startnode", "targetname" ) ) )
   {
   	assertEx ( !isDefined( getVehicleNode( "startnode", "targetname" ) ), "Vehicle spawn is setup but tank path is not setup in this level bug your friendly neighborhood LD.");
@@ -50,8 +50,8 @@ init() {
 
   level.tankSpawner["allies"] = tankSpawners[0];
   level.tankSpawner["axis"] = tankSpawners[0];
-  level.pathCount = 0; 
-	
+  level.pathCount = 0;
+  	
   foreach ( spawner in tankSpawners )
   {
   	if( isSubStr( spawner.model, "bradley" ) )
@@ -60,14 +60,14 @@ init() {
   	if( isSubStr( spawner.model, "bmp" ) )
   		level.tankSpawner["axis"] = spawner;
   }
-	
+  	
   level setupPaths();
-	
+  	
   */
 }
 
 spawnArmor(owner, vehicletype, model) {
-  armor = self Vehicle_DoSpawn("tank", owner);
+  armor = self Vehicle_Dospawn("tank", owner);
   //armor setModel( model );
 
   armor.health = 3000;
@@ -90,7 +90,7 @@ deleteOnZ() {
 
   originalZ = self.origin[2];
 
-  for (;;) {
+  for(;;) {
     if(originalZ - self.origin[2] > 2048) {
       self.health = 0;
       self notify("death");
@@ -187,9 +187,7 @@ startTank(tankType) {
   self thread checkDanger();
   self thread watchForThreat(); //reacts to players about to fire with rockets
 
-  /#
   self thread forceDirection();
-  # /
 
 }
 
@@ -210,9 +208,8 @@ waitForDisco() {
   self notify("death");
 }
 
-/#
 forceDirection() {
-  for (;;) {
+  for(;;) {
     if(getDvar("tankDir") != "") {
       forceDir = getDvar("tankDir");
       if(self.veh_pathdir != forceDir) {
@@ -226,29 +223,28 @@ forceDirection() {
     wait(0.05);
   }
 }
-# /
 
-  //=================================================================
-  //
-  //					Movement/Update Functions
-  //
-  //=================================================================
+//=================================================================
+//
+//					Movement/Update Functions
+//
+//=================================================================
 
-  setDirection(direction) {
-    if(self.veh_pathdir != direction) {
-      if(direction == "forward")
-        self stopToForward();
-      else
-        self stopToReverse();
-    }
+setDirection(direction) {
+  if(self.veh_pathdir != direction) {
+    if(direction == "forward")
+      self stopToForward();
+    else
+      self stopToReverse();
   }
+}
 
 setEngagementSpeed() {
   self endon("death");
 
   self notify("path_abandoned");
 
-  while (isDefined(self.changingDirection))
+  while(isDefined(self.changingDirection))
     wait(0.05);
 
   newSpeed = 2;
@@ -261,7 +257,7 @@ setMiniEngagementSpeed() {
 
   self notify("path_abandoned");
 
-  while (isDefined(self.changingDirection))
+  while(isDefined(self.changingDirection))
     wait(0.05);
 
   newSpeed = 2;
@@ -272,7 +268,7 @@ setMiniEngagementSpeed() {
 setStandardSpeed() {
   self endon("death");
 
-  while (isDefined(self.changingDirection))
+  while(isDefined(self.changingDirection))
     wait(0.05);
 
   self vehicle_SetSpeed(self.standardSpeed, 10, 10);
@@ -282,7 +278,7 @@ setStandardSpeed() {
 setEvadeSpeed() {
   self endon("death");
 
-  while (isDefined(self.changingDirection))
+  while(isDefined(self.changingDirection))
     wait(0.05);
 
   self vehicle_setSpeed(15, 15, 15);
@@ -294,7 +290,7 @@ setEvadeSpeed() {
 setDangerSpeed() {
   self endon("death");
 
-  while (isDefined(self.changingDirection))
+  while(isDefined(self.changingDirection))
     wait(0.05);
 
   self vehicle_SetSpeed(5, 5, 5);
@@ -306,7 +302,7 @@ stopToReverse() {
   self vehicle_setSpeed(0, 5, 6);
 
   self.changingDirection = true;
-  while (self.veh_speed > 0)
+  while(self.veh_speed > 0)
     wait(0.05);
 
   wait(0.25);
@@ -323,7 +319,7 @@ stopToForward() {
   self vehicle_setSpeed(0, 5, 6);
 
   self.changingDirection = true;
-  while (self.veh_speed > 0)
+  while(self.veh_speed > 0)
     wait(0.05);
 
   wait(0.25);
@@ -342,11 +338,11 @@ checkDanger() {
   players = level.players;
   self.numEnemiesClose = 0;
 
-  for (;;) {
+  for(;;) {
     foreach(potentialTarget in players) {
-      if(!isDefined(potentialTarget))
+      if(!isDefined(potentialTarget)) {
         continue;
-
+      }
       if(potentialTarget.team == self.team) {
         wait(.05);
         continue;
@@ -390,14 +386,12 @@ tankUpdate(startNode, waitNode) {
 
   wait(0.05);
 
-  for (;;) {
-    /#
-    while (getDvar("tankDir") != "")
+  for(;;) {
+    while(getDvar("tankDir") != "")
       wait(0.05);
-    # /
 
-      while (isDefined(self.changingDirection))
-        wait(0.05);
+    while(isDefined(self.changingDirection))
+      wait(0.05);
 
     endNode = self getNodeNearEnemies();
 
@@ -411,9 +405,9 @@ tankUpdate(startNode, waitNode) {
 }
 
 Callback_VehicleDamage(inflictor, attacker, damage, dFlags, meansOfDeath, weapon, point, dir, hitLoc, timeOffset, modelIndex, partName) {
-  if((attacker == self || attacker == self.mgTurret || (isDefined(attacker.pers) && attacker.pers["team"] == self.team)) && (attacker != self.owner || meansOfDeath == "MOD_MELEE"))
+  if((attacker == self || attacker == self.mgTurret || (isDefined(attacker.pers) && attacker.pers["team"] == self.team)) && (attacker != self.owner || meansOfDeath == "MOD_MELEE")) {
     return;
-
+  }
   tankDamage = modifyDamage(meansOfDeath, damage, attacker);
 
   self Vehicle_FinishDamage(inflictor, attacker, tankDamage, dFlags, meansOfDeath, weapon, point, dir, hitLoc, timeOffset, modelIndex, partName);
@@ -429,7 +423,7 @@ tankDamageMonitor() {
   stage2 = false;
   stage3 = false;
 
-  for (;;) {
+  for(;;) {
     self waittill("damage", amount, attacker, direction_vec, point, damageType);
 
     if(isDefined(attacker.classname) && attacker.classname == "script_vehicle") {
@@ -449,7 +443,7 @@ tankDamageMonitor() {
       }
     }
 
-    //stages will be used to effect effeciency of the tank 
+    //stages will be used to effect effeciency of the tank
     //accuracy, speed, smoke emitters etc....
     if(self.health <= 0) {
       self notify("death");
@@ -510,9 +504,9 @@ handlePossibleThreat(attacker) {
   position = relativeAngle(attacker);
   distance = distance(self.origin, attacker.origin);
 
-  if(RandomInt(4) < 3)
+  if(RandomInt(4) < 3) {
     return;
-
+  }
   if(position == "front" && distance < 768) //attempts to crush player
   {
     self thread setEvadeSpeed();
@@ -521,7 +515,6 @@ handlePossibleThreat(attacker) {
     self thread setEvadeSpeed();
   } else if(position == "rear" && distance < 768) //attempts to crush player
   {
-
     self stopToReverse();
     self setEvadeSpeed();
     wait(4);
@@ -569,7 +562,7 @@ relativeAngle(ent1) {
 watchForThreat() {
   self endon("death");
 
-  for (;;) {
+  for(;;) {
     targets = [];
     players = level.players;
 
@@ -604,7 +597,7 @@ watchForThreat() {
 
 // checks if owner is valid, returns false if not valid
 checkOwner() {
-  if(!isdefined(self.owner) || !isdefined(self.owner.pers["team"]) || self.owner.pers["team"] != self.team) {
+  if(!isDefined(self.owner) || !isDefined(self.owner.pers["team"]) || self.owner.pers["team"] != self.team) {
     self notify("abandoned");
     return false;
   }
@@ -613,7 +606,7 @@ checkOwner() {
 
 drawLine(start, end, timeSlice, color) {
   drawTime = int(timeSlice * 20);
-  for (time = 0; time < drawTime; time++) {
+  for(time = 0; time < drawTime; time++) {
     line(start, end, color, false, 1);
     wait(0.05);
   }
@@ -664,7 +657,7 @@ destroyTank() {
 
   self removeFromTankList();
 
-  destroyedTank = Spawn("script_model", self.origin);
+  destroyedTank = spawn("script_model", self.origin);
   // set model to current destroyed model.
   destroyedTank setModel("vehicle_m1a1_abrams_d_static");
   destroyedTank.angles = self.angles;
@@ -699,20 +692,20 @@ fireOnTarget() {
   self endon("targetRemoved");
   self endon("lostLOS");
 
-  for (;;) {
+  for(;;) {
     self onHitPitchClamp();
 
-    if(!isDefined(self.bestTarget))
+    if(!isDefined(self.bestTarget)) {
       continue;
-
+    }
     flashOrigin = self GetTagOrigin("tag_flash");
-    trace = BulletTrace(self.origin, flashOrigin, false, self);
+    trace = bulletTrace(self.origin, flashOrigin, false, self);
     if(trace["position"] != flashOrigin) {
       println("Abandoning Target due to turret not being able to reach target without clipping");
       self thread explicitAbandonTarget(false, self.bestTarget);
     }
 
-    trace = BulletTrace(flashOrigin, self.bestTarget.origin, true, self);
+    trace = bulletTrace(flashOrigin, self.bestTarget.origin, true, self);
     distance = Distance(self.origin, trace["position"]);
     realDistance = Distance(self.bestTarget.origin, self.origin);
 
@@ -768,7 +761,7 @@ tankGetTargets(badTarget) {
 
   prof_begin("tankTargets");
 
-  for (;;) {
+  for(;;) {
     targets = [];
     players = level.players;
 
@@ -795,9 +788,9 @@ tankGetTargets(badTarget) {
         continue;
       }
 
-      if(isDefined(badTarget) && potentialTarget == badTarget)
+      if(isDefined(badTarget) && potentialTarget == badTarget) {
         continue;
-
+      }
       if(isTarget(potentialTarget)) {
         if(isDefined(potentialTarget))
           targets[targets.size] = potentialTarget;
@@ -912,9 +905,9 @@ explicitAbandonTarget(noNewTarget, targ) {
     badTargetReset();
   }
 
-  if(isDefined(noNewTarget) && noNewTarget)
+  if(isDefined(noNewTarget) && noNewTarget) {
     return;
-
+  }
   return;
 }
 
@@ -959,7 +952,7 @@ isTarget(potentialTarget) {
   if(dist < 512 * 512)
     return false;
 
-  if(!isdefined(potentialTarget.pers["team"]))
+  if(!isDefined(potentialTarget.pers["team"]))
     return false;
 
   if(potentialTarget == self.owner)
@@ -971,7 +964,7 @@ isTarget(potentialTarget) {
   if(potentialTarget.pers["team"] == "spectator")
     return false;
 
-  if(isdefined(potentialTarget.spawntime) && (gettime() - potentialTarget.spawntime) / 1000 <= 5)
+  if(isDefined(potentialTarget.spawntime) && (gettime() - potentialTarget.spawntime) / 1000 <= 5)
     return false;
 
   if(potentialTarget _hasPerk("specialty_coldblooded"))
@@ -1007,7 +1000,7 @@ isMiniTarget(potentialTarget) {
   if(!isalive(potentialTarget) || potentialTarget.sessionstate != "playing")
     return false;
 
-  if(!isdefined(potentialTarget.pers["team"]))
+  if(!isDefined(potentialTarget.pers["team"]))
     return false;
 
   if(potentialTarget == self.owner)
@@ -1022,7 +1015,7 @@ isMiniTarget(potentialTarget) {
   if(potentialTarget.pers["team"] == "spectator")
     return false;
 
-  if(isdefined(potentialTarget.spawntime) && (gettime() - potentialTarget.spawntime) / 1000 <= 5)
+  if(isDefined(potentialTarget.spawntime) && (gettime() - potentialTarget.spawntime) / 1000 <= 5)
     return false;
 
   if(isDefined(self)) {
@@ -1042,13 +1035,13 @@ tankGetMiniTargets() {
   miniTargets = [];
   println("Geting Mini Targets");
 
-  for (;;) {
+  for(;;) {
     miniTargets = [];
     players = level.players;
 
-    for (i = 0; i <= players.size; i++) {
+    for(i = 0; i <= players.size; i++) {
       if(isMiniTarget(players[i])) {
-        if(isdefined(players[i]))
+        if(isDefined(players[i]))
           miniTargets[miniTargets.size] = players[i];
       } else
         continue;
@@ -1124,7 +1117,7 @@ fireMiniOnTarget() {
 
   println("firing on best target");
 
-  while (1) {
+  while(1) {
     if(!isDefined(self.mgTurret getTurretTarget(true))) {
       if(!isDefined(noTargTime))
         noTargTime = getTime();
@@ -1151,7 +1144,7 @@ fireMiniOnTarget() {
     }
 
     numShots = randomIntRange(10, 16);
-    for (i = 0; i < numShots; i++) {
+    for(i = 0; i < numShots; i++) {
       self.mgTurret ShootTurret();
       wait(.1);
     }
@@ -1162,9 +1155,9 @@ fireMiniOnTarget() {
 watchMiniTargetDeath(targets) {
   self endon("abandonedMiniTarget");
   self endon("death");
-  if(!isDefined(self.bestMiniTarget))
+  if(!isDefined(self.bestMiniTarget)) {
     return;
-
+  }
   self.bestMiniTarget waittill("death");
 
   self notify("killedMiniTarget");
@@ -1179,11 +1172,11 @@ watchMiniTargetDistance(targets) {
   self endon("abandonedMiniTarget");
   self endon("death");
 
-  for (;;) {
-    if(!isDefined(self.bestMiniTarget))
+  for(;;) {
+    if(!isDefined(self.bestMiniTarget)) {
       return;
-
-    trace = BulletTrace(self.mgTurret.origin, self.bestMiniTarget.origin, false, self);
+    }
+    trace = bulletTrace(self.mgTurret.origin, self.bestMiniTarget.origin, false, self);
     traceDistance = Distance(self.origin, trace["position"]);
 
     if(traceDistance > 1024) {
@@ -1201,18 +1194,18 @@ watchMiniTargetThreat(curTarget) {
   self endon("death");
   self endon("killedMiniTarget");
 
-  for (;;) {
+  for(;;) {
     miniTargets = [];
     players = level.players;
 
-    for (i = 0; i <= players.size; i++) {
+    for(i = 0; i <= players.size; i++) {
       if(isMiniTarget(players[i])) {
-        if(!isdefined(players[i]))
+        if(!isDefined(players[i])) {
           continue;
-
-        if(!isdefined(curTarget))
+        }
+        if(!isDefined(curTarget)) {
           return;
-
+        }
         traceOldTarg = Distance(self.origin, CurTarget.origin);
         traceNewTarg = Distance(self.origin, players[i].origin);
 
@@ -1230,7 +1223,6 @@ watchMiniTargetThreat(curTarget) {
 }
 
 explicitAbandonMiniTarget(noNewTarget) {
-
   self notify("abandonedMiniTarget");
 
   println("ABANDONED MINI TARGET");
@@ -1238,9 +1230,9 @@ explicitAbandonMiniTarget(noNewTarget) {
   self.bestMiniTarget = undefined;
   self.mgTurret ClearTargetEntity();
 
-  if(isDefined(noNewTarget) && noNewTarget)
+  if(isDefined(noNewTarget) && noNewTarget) {
     return;
-
+  }
   self thread tankGetMiniTargets();
   return;
 }
@@ -1263,15 +1255,15 @@ getNodeNearEnemies() {
   validEnemies = [];
 
   foreach(player in level.players) {
-    if(player.team == "spectator")
+    if(player.team == "spectator") {
       continue;
-
-    if(player.team == self.team)
+    }
+    if(player.team == self.team) {
       continue;
-
-    if(!isAlive(player))
+    }
+    if(!isAlive(player)) {
       continue;
-
+    }
     player.dist = 0;
     validEnemies[validEnemies.size] = player;
   }
@@ -1279,8 +1271,8 @@ getNodeNearEnemies() {
   if(!validEnemies.size)
     return undefined;
 
-  for (i = 0; i < validEnemies.size; i++) {
-    for (j = i + 1; j < validEnemies.size; j++) {
+  for(i = 0; i < validEnemies.size; i++) {
+    for(j = i + 1; j < validEnemies.size; j++) {
       dist = distanceSquared(validEnemies[i].origin, validEnemies[j].origin);
 
       validEnemies[i].dist += dist;
@@ -1314,14 +1306,15 @@ setupPaths() {
   tankNodes[tankNodes.size] = tankNode;
   startNodes[startNodes.size] = tankNode;
 
-  while (isDefined(tankNode.target)) {
+  while(isDefined(tankNode.target)) {
     lastNode = tankNode;
     tankNode = GetVehicleNode(tankNode.target, "targetname");
     tankNode.prev = lastNode;
 
     // case for connected path
-    if(tankNode == tankNodes[0])
+    if(tankNode == tankNodes[0]) {
       break;
+    }
 
     tankNodes[tankNodes.size] = tankNode;
 
@@ -1341,7 +1334,7 @@ setupPaths() {
     tankNodes[tankNodes.size] = tankNode;
     startNodes[startNodes.size] = tankNode;
 
-    while (isDefined(tankNode.target)) {
+    while(isDefined(tankNode.target)) {
       lastNode = tankNode;
       tankNode = GetVehicleNode(tankNode.target, "targetname");
       tankNodes[tankNodes.size] = tankNode;
@@ -1356,18 +1349,18 @@ setupPaths() {
   foreach(tankNode in tankNodes) {
     isBranchNode = false;
     foreach(startNode in startNodes) {
-      if(startNode == tankNode)
+      if(startNode == tankNode) {
         continue;
-
-      if(startNode.target == tankNode.targetname)
+      }
+      if(startNode.target == tankNode.targetname) {
         continue;
-
-      if(isDefined(tankNode.target) && tankNode.target == startNode.targetname)
+      }
+      if(isDefined(tankNode.target) && tankNode.target == startNode.targetname) {
         continue;
-
-      if(distance2d(tankNode.origin, startNode.origin) > 80)
+      }
+      if(distance2d(tankNode.origin, startNode.origin) > 80) {
         continue;
-
+      }
       startNode thread handleCapNode(tankNode, "reverse");
       startNode.prev = tankNode;
 
@@ -1384,21 +1377,21 @@ setupPaths() {
 
     isJoinNode = false;
     foreach(endNode in endNodes) {
-      if(endNode == tankNode)
+      if(endNode == tankNode) {
         continue;
-
-      if(!isDefined(tankNode.target))
+      }
+      if(!isDefined(tankNode.target)) {
         continue;
-
-      if(tankNode.target == endNode.targetname)
+      }
+      if(tankNode.target == endNode.targetname) {
         continue;
-
-      if(isDefined(endNode.target) && endNode.target == tankNode.targetname)
+      }
+      if(isDefined(endNode.target) && endNode.target == tankNode.targetname) {
         continue;
-
-      if(distance2d(tankNode.origin, endNode.origin) > 80)
+      }
+      if(distance2d(tankNode.origin, endNode.origin) > 80) {
         continue;
-
+      }
       endNode thread handleCapNode(tankNode, "forward");
       endNode.next = getVehicleNode(tankNode.targetname, "targetname");
       //endNode.target = tankNode.targetname; // READ-ONLY field...
@@ -1429,9 +1422,9 @@ setupPaths() {
   // subdivide the path a bit...
   segmentNodes = [];
   foreach(tankNode in tankNodes) {
-    if(!isDefined(tankNode.branchNodes))
+    if(!isDefined(tankNode.branchNodes)) {
       continue;
-
+    }
     segmentNodes[segmentNodes.size] = tankNode;
   }
 
@@ -1439,30 +1432,32 @@ setupPaths() {
     tankNode = segmentNode;
     pathLength = 0;
 
-    while (isDefined(tankNode.target)) {
+    while(isDefined(tankNode.target)) {
       prevNode = tankNode;
       tankNode = GetVehicleNode(tankNode.target, "targetname");
       pathLength += distance(tankNode.origin, prevNode.origin);
 
-      if(tankNode == segmentNode)
+      if(tankNode == segmentNode) {
         break;
+      }
 
-      if(isDefined(tankNode.branchNodes))
+      if(isDefined(tankNode.branchNodes)) {
         break;
+      }
     }
 
     if(pathLength > 1000) {
       tankNode = segmentNode;
       curLength = 0;
 
-      while (isDefined(tankNode.target)) {
+      while(isDefined(tankNode.target)) {
         prevNode = tankNode;
         tankNode = GetVehicleNode(tankNode.target, "targetname");
 
         curLength += distance(tankNode.origin, prevNode.origin);
-        if(curLength < pathLength / 2)
+        if(curLength < pathLength / 2) {
           continue;
-
+        }
         tankNode.branchNodes = []; // necessary?
         tankNode thread handleBranchNode("forward");
         aStarGraphNodes[aStarGraphNodes.size] = tankNode;
@@ -1479,14 +1474,13 @@ setupPaths() {
   }
 }
 
-
 getRandomBranchNode(direction) {
   branchNodes = [];
   foreach(graphId, linkNode in self.links) {
     // pick a branch in the direction we're already heading
-    if(self.linkDirs[graphId] != direction)
+    if(self.linkDirs[graphId] != direction) {
       continue;
-
+    }
     branchNodes[branchNodes.size] = linkNode;
   }
 
@@ -1512,7 +1506,7 @@ getNextNodeForEndNode(endNode, direction) {
 
 handleBranchNode(direction) {
   level endon("end_tankPathHandling");
-  for (;;) {
+  for(;;) {
     self waittill("trigger", tank, wasForced);
 
     graphNode = level.graphNodes[self.graphId];
@@ -1545,12 +1539,12 @@ handleBranchNode(direction) {
 }
 
 handleCapNode(joinNode, direction) {
-  for (;;) {
+  for(;;) {
     self waittill("trigger", tank);
 
-    if(tank.veh_pathdir != direction)
+    if(tank.veh_pathdir != direction) {
       continue;
-
+    }
     debugPrintLn2("tank starting path at join node: " + joinNode.graphId);
 
     tank startPath(joinNode);
@@ -1561,21 +1555,19 @@ nodeTracker() {
   self.forwardGraphId = getForwardGraphNode().graphId;
   self.reverseGraphId = getReverseGraphNode().graphId;
 
-  for (;;) {
+  for(;;) {
     self waittill("trigger", tank, wasForced);
 
     tank.node = self;
 
-    /#
     if(getDvarInt("tankForceTrigger")) {
       if(tank.veh_pathdir == "forward")
         tank thread forceTrigger(self, self getNextNode(), tank);
       else
         tank thread forceTrigger(self, self getPrevNode(), tank);
     }
-    # /
 
-      tank.forwardGraphId = self.forwardGraphId;
+    tank.forwardGraphId = self.forwardGraphId;
     tank.reverseGraphId = self.reverseGraphId;
 
     if(!isDefined(self.target) || self.targetname == "branchnode")
@@ -1602,7 +1594,7 @@ forceTrigger(prevNode, nextNode, tank) {
   debugPrint3D(nextNode.origin + (0, 0, 60), "NEXT", (0, 1, 0), 0.5, 1, 100);
 
   timeOutNextFrame = false;
-  for (;;) {
+  for(;;) {
     wait(0.05);
 
     // tank changed direction
@@ -1633,7 +1625,7 @@ getForwardGraphNode() {
   assert(!isDefined(self.graphId));
 
   checkNode = self;
-  while (!isDefined(checkNode.graphId))
+  while(!isDefined(checkNode.graphId))
     checkNode = checkNode getNextNode();
 
   return checkNode;
@@ -1643,7 +1635,7 @@ getReverseGraphNode() {
   assert(!isDefined(self.graphId));
 
   checkNode = self;
-  while (!isDefined(checkNode.graphId))
+  while(!isDefined(checkNode.graphId))
     checkNode = checkNode getPrevNode();
 
   return checkNode;
@@ -1659,7 +1651,6 @@ getNextNode() {
 getPrevNode() {
   return self.prev;
 }
-
 
 // Builds the aStar node graph
 initNodeGraph(astarBaseNodes) {
@@ -1688,7 +1679,7 @@ initNodeGraph(astarBaseNodes) {
     linkLength = distance(pathNode.origin, checkNode.origin);
     linkStartNode = checkNode;
 
-    while (!isDefined(checkNode.graphId)) {
+    while(!isDefined(checkNode.graphId)) {
       linkLength += distance(checkNode.origin, checkNode.prev.origin);
 
       if(isDefined(checkNode.target))
@@ -1704,7 +1695,7 @@ initNodeGraph(astarBaseNodes) {
     linkLength = distance(pathNode.origin, checkNode.origin);
     linkStartNode = checkNode;
 
-    while (!isDefined(checkNode.graphId)) {
+    while(!isDefined(checkNode.graphId)) {
       linkLength += distance(checkNode.origin, checkNode.prev.origin);
       checkNode = checkNode.prev;
     }
@@ -1718,7 +1709,7 @@ initNodeGraph(astarBaseNodes) {
       linkStartNode = checkNode;
 
       if(checkNode.targetname == "branchnode") {
-        while (!isDefined(checkNode.graphId)) {
+        while(!isDefined(checkNode.graphId)) {
           if(isDefined(checkNode.target))
             nextNode = GetVehicleNode(checkNode.target, "targetname");
           else
@@ -1731,7 +1722,7 @@ initNodeGraph(astarBaseNodes) {
         assert(checkNode != pathNode);
         graphNodes[graphId] addLinkNode(graphNodes[checkNode.graphId], linkLength, "forward", linkStartNode);
       } else {
-        while (!isDefined(checkNode.graphId)) {
+        while(!isDefined(checkNode.graphId)) {
           linkLength += distance(checkNode.origin, checkNode.prev.origin);
           checkNode = checkNode.prev;
         }
@@ -1781,17 +1772,17 @@ generatePath(destNode, startNode, blockedNodes, direction) {
   addToClosedList(startNode);
 
   curNode = startNode;
-  for (;;) {
+  for(;;) {
     foreach(linkId, checkNode in curNode.links) {
-      if(is_in_array(blockedNodes, checkNode))
+      if(is_in_array(blockedNodes, checkNode)) {
         continue;
-
-      if(is_in_array(level.closedList, checkNode))
+      }
+      if(is_in_array(level.closedList, checkNode)) {
         continue;
-
-      if(isDefined(direction) && checkNode.linkDirs[curNode.graphId] != direction)
+      }
+      if(isDefined(direction) && checkNode.linkDirs[curNode.graphId] != direction) {
         continue;
-
+      }
       if(!is_in_array(level.openList, checkNode)) {
         addToOpenList(checkNode);
 
@@ -1803,26 +1794,27 @@ generatePath(destNode, startNode, blockedNodes, direction) {
         if(checkNode == destNode)
           foundPath = true;
       } else {
-        if(checkNode.g < getGValue(curNode, checkNode))
+        if(checkNode.g < getGValue(curNode, checkNode)) {
           continue;
-
+        }
         checkNode.parentNode = curNode;
         checkNode.g = getGValue(checkNode, curNode);
         checkNode.f = checkNode.g + checkNode.h;
       }
     }
 
-    if(foundPath)
+    if(foundPath) {
       break;
+    }
 
     addToClosedList(curNode);
 
     bestNode = level.openList[0];
 
     foreach(testNode in level.openList) {
-      if(testNode.f > bestNode.f)
+      if(testNode.f > bestNode.f) {
         continue;
-
+      }
       bestNode = testNode;
     }
 
@@ -1835,7 +1827,7 @@ generatePath(destNode, startNode, blockedNodes, direction) {
   assert(isDefined(destNode.parentNode));
 
   curNode = destNode;
-  while (curNode != startNode) {
+  while(curNode != startNode) {
     pathNodes[pathNodes.size] = curNode;
     curNode = curNode.parentNode;
   }
@@ -1851,15 +1843,15 @@ addToOpenList(node) {
 }
 
 addToClosedList(node) {
-  if(isdefined(node.closedListID))
+  if(isDefined(node.closedListID)) {
     return;
-
+  }
   node.closedListID = level.closedList.size;
   level.closedList[level.closedList.size] = node;
 
-  if(!is_in_array(level.openList, node))
+  if(!is_in_array(level.openList, node)) {
     return;
-
+  }
   level.openList[node.openListID] = level.openList[level.openList.size - 1];
   level.openList[node.openListID].openListID = node.openListID;
   level.openList[level.openList.size - 1] = undefined;
@@ -1875,7 +1867,7 @@ getGValue(node1, node2) {
 }
 
 is_in_array(aeCollection, eFindee) {
-  for (i = 0; i < aeCollection.size; i++) {
+  for(i = 0; i < aeCollection.size; i++) {
     if(aeCollection[i] == eFindee)
       return (true);
   }
@@ -1884,7 +1876,7 @@ is_in_array(aeCollection, eFindee) {
 }
 
 drawPath(pathNodes) {
-  for (i = 1; i < pathNodes.size; i++) {
+  for(i = 1; i < pathNodes.size; i++) {
     startNode = pathNodes[i - 1];
     endNode = pathNodes[i];
 
@@ -1897,13 +1889,13 @@ drawPath(pathNodes) {
     level thread drawLink(startNode.node.origin + (0, 0, 4), vehNode.origin + (0, 0, 4), (0, 0, 1));
 
     if(startNode.linkDirs[endNode.graphId] == "reverse") {
-      while (!isDefined(vehNode.graphId)) {
+      while(!isDefined(vehNode.graphId)) {
         lastVehNode = vehNode;
         vehNode = vehNode.prev;
         level thread drawLink(lastVehNode.origin + (0, 0, 4), vehNode.origin + (0, 0, 4), (0, 1, 1));
       }
     } else {
-      while (!isDefined(vehNode.graphId)) {
+      while(!isDefined(vehNode.graphId)) {
         lastVehNode = vehNode;
 
         if(isDefined(vehNode.target))
@@ -1941,45 +1933,39 @@ drawGraph(pathNodes) {
 
 drawLink(start, end, color) {
   level endon("endpath");
-  for (;;) {
+  for(;;) {
     line(start, end, color, true);
     wait 0.05;
   }
 }
 
 debugPrintLn2(printString) {
-  /#
   if(getDvarInt("tankDebug"))
     printLn(printString);
-  # /
 }
 
 debugPrint(printString) {
-  /#
   if(getDvarInt("tankDebug"))
     print(printString);
-  # /
 }
 
 debugPrint3D(origin, printString, color, alpha, scale, duration) {
-  /#
   if(getDvarInt("tankDebug")) {
     print3d(origin, printString, color, alpha, scale, duration);
     println("3D: " + printString);
   }
-  # /
+
 }
 
 drawTankGraphIds() {
-  /#
   if(getDvarInt("tankDebug")) {
     self notify("drawTankGraphIds");
     self endon("drawTankGraphIds");
 
-    for (;;) {
+    for(;;) {
       print3d(self.origin + (0, 0, 128), "FW: " + self.forwardGraphId + " RV: " + self.reverseGraphId, (0, 1, 0), 1, 3, 1);
       wait(0.05);
     }
   }
-  # /
+
 }

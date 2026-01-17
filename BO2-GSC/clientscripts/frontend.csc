@@ -28,7 +28,7 @@ main() {
   register_clientflag_callback("scriptmover", 15, ::set_hologram_shown);
   register_clientflag_callback("vehicle", 11, ::set_speeding_osprey);
   start_env_movie();
-  level.world_map = spawnstruct();
+  level.world_map = spawnStruct();
   level.world_map.transform = array(0, 0, 0, 1.0);
   level.world_map.tint = array(0, 0, 0, 0, 0, 0);
   level.world_map.marker_toggle = array(0, 0, 0, 0, 0, 0);

@@ -28,7 +28,7 @@ setanims() {
   positions = [];
 
   for(i = 0; i <= 9; i++)
-    positions[i] = spawnstruct();
+    positions[i] = spawnStruct();
 
   positions[0].idle[0] = % ai_crew_hind_pilot1_idle;
   positions[0].idle[1] = % ai_crew_hind_pilot1_idle_twitch_clickpanel;
@@ -128,12 +128,12 @@ unload_groups() {
 
 set_attached_models() {
   array = [];
-  array["fastrope_80ft_le"] = spawnstruct();
+  array["fastrope_80ft_le"] = spawnStruct();
   array["fastrope_80ft_le"].model = "fastrope_80ft_le";
   array["fastrope_80ft_le"].tag = "tag_fastrope_le";
   array["fastrope_80ft_le"].idleanim = % o_hind_rope_idle_le;
   array["fastrope_80ft_le"].dropanim = % o_hind_rope_drop_le;
-  array["fastrope_80ft_ri"] = spawnstruct();
+  array["fastrope_80ft_ri"] = spawnStruct();
   array["fastrope_80ft_ri"].model = "fastrope_80ft_ri";
   array["fastrope_80ft_ri"].tag = "tag_fastrope_ri";
   array["fastrope_80ft_ri"].idleanim = % o_hind_rope_idle_ri;

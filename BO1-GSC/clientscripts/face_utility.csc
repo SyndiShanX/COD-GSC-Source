@@ -48,7 +48,7 @@ isHigherPriority(new_state, old_state) {
     if(!isDefined(level.faceStates[new_state])) {
       faceStatesArray = getArrayKeys(level.faceStates);
       PrintLn(new_state + " undefined\n");
-      for (i = 0; i < faceStatesArray.size; i++) {
+      for(i = 0; i < faceStatesArray.size; i++) {
         println(i + ":");
         PrintLn(faceStatesArray[i] + "\n");
       }
@@ -73,7 +73,7 @@ waitForAnyPriorityReturn(prevState) {
   if(GetDvarInt(#"cg_debugFace") != 0) {
     PrintLn("Waiting for priority return for " + prevState);
   }
-  while (true) {
+  while(true) {
     self waittill("face", newState);
     if(isDefined(newState) && newState != prevState && isHigherPriority(newState, prevState)) {
       break;
@@ -88,7 +88,7 @@ waitForFaceEventRepeat(base_time) {
   self endon("new_face_event");
   self endon("face_timer_expired");
   state = self.face_curr_event;
-  while (true) {
+  while(true) {
     self waittill("face", newState);
     if(newState == state) {
       self.face_timer = base_time;
@@ -139,7 +139,7 @@ processFaceEvents(localClientNum) {
   self.face_state = state;
   self thread showState();
   self thread watchfor_death();
-  while (true) {
+  while(true) {
     if(GetDvarInt(#"cg_debugFace") != 0) {
       if(!isDefined(state))
         PrintLn("state undefined\n");
@@ -152,7 +152,7 @@ processFaceEvents(localClientNum) {
       if(!isDefined(level.faceStates[state])) {
         faceStatesArray = getArrayKeys(level.faceStates);
         PrintLn(state + " undefined\n");
-        for (i = 0; i < faceStatesArray.size; i++) {
+        for(i = 0; i < faceStatesArray.size; i++) {
           println(i + ":");
           PrintLn(faceStatesArray[i] + "\n");
         }
@@ -169,7 +169,7 @@ processFaceEvents(localClientNum) {
       setFaceState("face_disabled");
       self ClearAnim(level.faceStates["face_root"], 0);
       self notify("stop_face_anims");
-      while (self.face_disable) {
+      while(self.face_disable) {
         wait(0.05);
       }
     }
@@ -185,7 +185,7 @@ processFaceEvents(localClientNum) {
       if(!isDefined(level.faceStates[state])) {
         faceStatesArray = getArrayKeys(level.faceStates);
         PrintLn(state + " undefined\n");
-        for (i = 0; i < faceStatesArray.size; i++) {
+        for(i = 0; i < faceStatesArray.size; i++) {
           println(i + ":");
           PrintLn(faceStatesArray[i] + "\n");
         }
@@ -258,4 +258,3 @@ watchfor_death() {
     self.face_death = true;
   }
 }
-

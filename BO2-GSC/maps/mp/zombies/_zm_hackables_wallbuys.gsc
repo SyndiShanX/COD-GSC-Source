@@ -24,7 +24,7 @@ hack_wallbuys() {
     if(weapontype(weapon_spawns[i].zombie_weapon_upgrade) == "bomb") {
       continue;
     }
-    struct = spawnstruct();
+    struct = spawnStruct();
     struct.origin = weapon_spawns[i].origin;
     struct.radius = 48;
     struct.height = 48;
@@ -34,7 +34,7 @@ hack_wallbuys() {
     maps\mp\zombies\_zm_equip_hacker::register_pooled_hackable_struct(struct, ::wallbuy_hack);
   }
 
-  bowie_triggers = getentarray("bowie_upgrade", "targetname");
+  bowie_triggers = getEntArray("bowie_upgrade", "targetname");
   array_thread(bowie_triggers, maps\mp\zombies\_zm_equip_hacker::hide_hint_when_hackers_active);
 }
 

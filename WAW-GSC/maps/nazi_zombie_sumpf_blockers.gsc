@@ -8,26 +8,26 @@
 #include maps\_zombiemode_utility;
 
 init() {
-  zombie_double_doors = GetEntArray("zombie_double_door", "targetname");
-  for (i = 0; i < zombie_double_doors.size; i++) {
+  zombie_double_doors = getEntArray("zombie_double_door", "targetname");
+  for(i = 0; i < zombie_double_doors.size; i++) {
     zombie_double_doors[i] thread double_door_init();
   }
   level thread dog_clip_watcher();
 }
 
 double_door_init() {
-  hinges = GetEntArray(self.target, "targetname");
-  doors = GetEntArray(self.target + "_door", "targetname");
+  hinges = getEntArray(self.target, "targetname");
+  doors = getEntArray(self.target + "_door", "targetname");
   if(isDefined(self.script_flag) && !isDefined(level.flag[self.script_flag])) {
     flag_init(self.script_flag);
   }
   self.hinges = [];
-  for (i = 0; i < hinges.size; i++) {
+  for(i = 0; i < hinges.size; i++) {
     if(hinges[i].script_noteworthy == "clip") {
       self.clip = hinges[i];
       continue;
     }
-    for (j = 0; j < doors.size; j++) {
+    for(j = 0; j < doors.size; j++) {
       if(doors[j].script_noteworthy == hinges[i].script_noteworthy) {
         doors[j] linkto(hinges[i]);
         doors[j] disconnectpaths();
@@ -47,7 +47,7 @@ double_door_init() {
 }
 
 double_door_think() {
-  while (1) {
+  while(1) {
     self waittill("trigger", who);
     if(!who UseButtonPressed()) {
       continue;
@@ -58,20 +58,20 @@ double_door_think() {
     if(is_player_valid(who)) {
       if(who.score >= self.zombie_cost) {
         who maps\_zombiemode_score::minus_to_player_score(self.zombie_cost);
-        for (i = 0; i < (self.doors).size; i++) {
+        for(i = 0; i < (self.doors).size; i++) {
           self.doors[i] connectpaths();
           playsoundatposition("door_rotate_open", self.doors[i].origin);
         }
         play_sound_at_pos("purchase", self.doors[0].origin);
-        for (i = 0; i < (self.hinges).size; i++) {
+        for(i = 0; i < (self.hinges).size; i++) {
           struct = getstruct(self.hinges[i].script_linkto, "script_linkname");
           self.hinges[i] thread swing_door(struct);
         }
         if(isDefined(self.script_flag)) {
           flag_set(self.script_flag);
         }
-        all_trigs = getentarray(self.target, "target");
-        for (i = 0; i < all_trigs.size; i++) {
+        all_trigs = getEntArray(self.target, "target");
+        for(i = 0; i < all_trigs.size; i++) {
           all_trigs[i] delete();
         }
         if(isDefined(self.clip)) {
@@ -92,7 +92,7 @@ play_no_money_purchase_dialog() {
   if(!isDefined(self.vox_gen_sigh)) {
     num_variants = maps\_zombiemode_spawner::get_number_variants(player_index + "vox_gen_sigh");
     self.vox_gen_sigh = [];
-    for (i = 0; i < num_variants; i++) {
+    for(i = 0; i < num_variants; i++) {
       self.vox_gen_sigh[self.vox_gen_sigh.size] = "vox_gen_sigh_" + i;
     }
     self.vox_gen_sigh_available = self.vox_gen_sigh;
@@ -122,14 +122,14 @@ swing_door(struct) {
 
 dog_clip_watcher() {
   zombie_dog_clip = [];
-  zombie_dog_clip = getentarray("zombie_dog_clip", "targetname");
-  while (1) {
-    for (i = 0; i < zombie_dog_clip.size; i++) {
+  zombie_dog_clip = getEntArray("zombie_dog_clip", "targetname");
+  while(1) {
+    for(i = 0; i < zombie_dog_clip.size; i++) {
       zombie_dog_clip[i] notsolid();
       zombie_dog_clip[i] connectpaths();
     }
     level waittill("dog_round_starting");
-    for (i = 0; i < zombie_dog_clip.size; i++) {
+    for(i = 0; i < zombie_dog_clip.size; i++) {
       zombie_dog_clip[i] solid();
       zombie_dog_clip[i] disconnectpaths();
       zombie_dog_clip[i] notsolid();

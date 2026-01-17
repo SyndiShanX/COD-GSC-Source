@@ -3,13 +3,12 @@
  * Script: maps\mp\_art.gsc
 ********************************************************/
 
-// This function should take care of grain and glow settings for each map, plus anything else that artists 
+// This function should take care of grain and glow settings for each map, plus anything else that artists
 // need to be able to tweak without bothering level designers.
 #include common_scripts\utility;
 #include common_scripts\_artCommon;
 
 main() {
-  /#
   setDevDvarIfUninitialized("scr_art_tweak", 0);
   setDevDvarIfUninitialized("scr_dof_enable", "1");
   setDevDvarIfUninitialized("scr_cmd_plr_sun", "0");
@@ -29,14 +28,12 @@ main() {
 
   thread tweakart();
 
-  if(!isdefined(level.script))
+  if(!isDefined(level.script))
     level.script = ToLower(GetDvar("mapname"));
-  # /
 }
 
 tweakart() {
-  /#
-  if(!isdefined(level.tweakfile))
+  if(!isDefined(level.tweakfile))
     level.tweakfile = false;
 
   // not in DEVGUI
@@ -57,8 +54,8 @@ tweakart() {
   file = undefined;
   filename = undefined;
 
-  for (;;) {
-    while (GetDvarInt("scr_art_tweak", 0) == 0) {
+  for(;;) {
+    while(GetDvarInt("scr_art_tweak", 0) == 0) {
       AssertEx(GetDvarInt("scr_art_dump", 0) == 0, "Must Enable Art Tweaks to export _art file.");
       wait .05;
       if(!GetDvarInt("scr_art_tweak", 0) == 0)
@@ -89,11 +86,10 @@ tweakart() {
     }
     wait .1;
   }
-  # /
+
 }
 
 fovslidercheck() {
-  /#
   // catch all those cases where a slider can be pushed to a place of conflict
   if(level.dofDefault["nearStart"] >= level.dofDefault["nearEnd"]) {
     level.dofDefault["nearStart"] = level.dofDefault["nearEnd"] - 1;
@@ -119,11 +115,10 @@ fovslidercheck() {
     level.dofDefault["farStart"] = level.dofDefault["nearEnd"] + 1;
     SetDevDvar("scr_dof_farStart", level.dofDefault["farStart"]);
   }
-  # /
+
 }
 
 dumpsettings() {
-  /#
   if(GetDvarInt("scr_art_dump") == 0)
     return false;
 
@@ -174,5 +169,4 @@ dumpsettings() {
 
   IPrintLnBold("ART DUMPED SUCCESSFULLY");
   return true;
-  # /
 }

@@ -70,7 +70,7 @@ skipto_inner_solar() {
     maps\_fxanim::fxanim_deconstruct("fxanim_club_bar_shelves_0" + i);
 
   if(!is_mature()) {
-    foreach(e_dancer in getentarray("dancers", "script_noteworthy"))
+    foreach(e_dancer in getEntArray("dancers", "script_noteworthy"))
     e_dancer delete();
 
     level thread init_solar_systems();
@@ -91,7 +91,7 @@ skipto_inner_solar() {
   level thread club_fx();
   level thread populate_club();
 
-  foreach(ent in getentarray("velvet_rope", "script_noteworthy"))
+  foreach(ent in getEntArray("velvet_rope", "script_noteworthy"))
   ent setscale(0.9);
 }
 
@@ -104,7 +104,7 @@ skipto_solar_fight() {
   cleanup_ents("cleanup_construction");
 
   if(!is_mature()) {
-    foreach(e_dancer in getentarray("dancers", "script_noteworthy"))
+    foreach(e_dancer in getEntArray("dancers", "script_noteworthy"))
     e_dancer delete();
 
     level thread init_solar_systems();
@@ -123,10 +123,10 @@ skipto_solar_fight() {
   maps\karma_outer_solar::assign_club_spawners();
   level thread club_drones();
   skipto_teleport("skipto_solar_fight");
-  a_m_groups = getentarray("m_civ_club_group1", "targetname");
+  a_m_groups = getEntArray("m_civ_club_group1", "targetname");
   array_delete(a_m_groups);
 
-  foreach(ent in getentarray("velvet_rope", "targetname"))
+  foreach(ent in getEntArray("velvet_rope", "targetname"))
   ent delete();
 
   getent("sick_girls_clip", "targetname") delete();
@@ -186,7 +186,7 @@ club_intro() {
   bm_clip = getent("dance_floor_clip", "targetname");
   bm_clip delete();
 
-  foreach(ent in getentarray("velvet_rope", "targetname"))
+  foreach(ent in getEntArray("velvet_rope", "targetname"))
   ent delete();
 
   clear_background_civilians();
@@ -439,7 +439,7 @@ change_club_lights(n_time_floor, n_time_exposure) {
   if(!isDefined(n_time_exposure))
     n_time_exposure = 0.05;
 
-  a_e_lights = getentarray("speechlight", "targetname");
+  a_e_lights = getEntArray("speechlight", "targetname");
 
   foreach(e_light in a_e_lights)
   e_light setforcenocull();
@@ -458,7 +458,7 @@ club_fx() {
 
   foreach(s_candle in a_s_candles) {
     if(isDefined(s_candle.angles))
-      v_forward = anglestoforward(s_candle.angles);
+      v_forward = anglesToForward(s_candle.angles);
     else
       v_forward = (1, 0, 0);
 
@@ -469,11 +469,11 @@ club_fx() {
 
   foreach(s_ashtray in a_s_ashtrays) {
     if(isDefined(s_ashtray.angles))
-      v_forward = anglestoforward(s_ashtray.angles);
+      v_forward = anglesToForward(s_ashtray.angles);
     else
       v_forward = (1, 0, 0);
 
-    playfx(level._effect["kar_ashtray01"], s_ashtray.origin, v_forward);
+    playFX(level._effect["kar_ashtray01"], s_ashtray.origin, v_forward);
   }
 
   for(i = 1; i <= 12; i++)
@@ -521,7 +521,7 @@ club_fx() {
   m_laser.fx_origin delete();
   m_laser.fx_origin = spawn_model("tag_origin", m_laser gettagorigin("laser_attach_jnt"), m_laser gettagangles("laser_attach_jnt"));
   m_laser.fx_origin linkto(m_laser, "laser_attach_jnt");
-  playfxontag(level._effect["club_dj_front_laser_static"], m_laser.fx_origin, "tag_origin");
+  playFXOnTag(level._effect["club_dj_front_laser_static"], m_laser.fx_origin, "tag_origin");
   flag_wait("restart_club_fx");
   m_laser.fx_origin delete();
 
@@ -558,25 +558,25 @@ club_dj_front_lasers() {
     exploder(627);
 
     if(!flag("restart_club_fx")) {
-      playfxontag(level._effect["club_dj_front_laser2_smoke"], m_laser1.fx_origin, "tag_origin");
-      playfxontag(level._effect["club_dj_front_laser2_smoke"], m_laser2.fx_origin, "tag_origin");
+      playFXOnTag(level._effect["club_dj_front_laser2_smoke"], m_laser1.fx_origin, "tag_origin");
+      playFXOnTag(level._effect["club_dj_front_laser2_smoke"], m_laser2.fx_origin, "tag_origin");
       wait 10;
-      playfxontag(level._effect["club_dj_front_laser2_light"], m_laser1.fx_origin, "tag_origin");
-      playfxontag(level._effect["club_dj_front_laser2_light"], m_laser2.fx_origin, "tag_origin");
+      playFXOnTag(level._effect["club_dj_front_laser2_light"], m_laser1.fx_origin, "tag_origin");
+      playFXOnTag(level._effect["club_dj_front_laser2_light"], m_laser2.fx_origin, "tag_origin");
       wait 10;
-      playfxontag(level._effect["club_dj_front_laser2_disco"], m_laser1.fx_origin, "tag_origin");
-      playfxontag(level._effect["club_dj_front_laser2_disco"], m_laser2.fx_origin, "tag_origin");
+      playFXOnTag(level._effect["club_dj_front_laser2_disco"], m_laser1.fx_origin, "tag_origin");
+      playFXOnTag(level._effect["club_dj_front_laser2_disco"], m_laser2.fx_origin, "tag_origin");
       wait 10;
-      playfxontag(level._effect["club_dj_front_laser2_fan"], m_laser1.fx_origin, "tag_origin");
-      playfxontag(level._effect["club_dj_front_laser2_fan"], m_laser2.fx_origin, "tag_origin");
+      playFXOnTag(level._effect["club_dj_front_laser2_fan"], m_laser1.fx_origin, "tag_origin");
+      playFXOnTag(level._effect["club_dj_front_laser2_fan"], m_laser2.fx_origin, "tag_origin");
       wait 10;
-      playfxontag(level._effect["club_dj_front_laser2_roller"], m_laser1.fx_origin, "tag_origin");
-      playfxontag(level._effect["club_dj_front_laser2_roller"], m_laser2.fx_origin, "tag_origin");
+      playFXOnTag(level._effect["club_dj_front_laser2_roller"], m_laser1.fx_origin, "tag_origin");
+      playFXOnTag(level._effect["club_dj_front_laser2_roller"], m_laser2.fx_origin, "tag_origin");
       wait 10;
     }
 
-    playfxontag(level._effect["club_dj_front_laser2_shell"], m_laser1.fx_origin, "tag_origin");
-    playfxontag(level._effect["club_dj_front_laser2_shell"], m_laser2.fx_origin, "tag_origin");
+    playFXOnTag(level._effect["club_dj_front_laser2_shell"], m_laser1.fx_origin, "tag_origin");
+    playFXOnTag(level._effect["club_dj_front_laser2_shell"], m_laser2.fx_origin, "tag_origin");
     wait 6;
   }
 }
@@ -642,7 +642,7 @@ populate_club() {
 
   flag_wait("club_door_closed");
   wait 1;
-  a_m_group_dancers = getentarray("m_civ_club_group1", "targetname");
+  a_m_group_dancers = getEntArray("m_civ_club_group1", "targetname");
   array_thread(a_m_group_dancers, ::group_dancing);
   wait 0.1;
   level start_civs_club();
@@ -799,7 +799,7 @@ bullet_time() {
 
 shoot_dj(ai_defalco) {
   ai_defalco fire_round(level.ai_dj);
-  playfxontag(level._effect["execution_blood"], level.ai_dj, "J_Head");
+  playFXOnTag(level._effect["execution_blood"], level.ai_dj, "J_Head");
   clientnotify("scm2");
   flag_set("stop_club_fx");
   exploder(628);
@@ -808,7 +808,7 @@ shoot_dj(ai_defalco) {
 shoot_hostage(ai_defalco) {
   m_hostage = get_model_or_models_from_scene("club_encounter", "female_hostage1");
   ai_defalco shoot();
-  playfxontag(level._effect["execution_blood"], m_hostage, "J_Head");
+  playFXOnTag(level._effect["execution_blood"], m_hostage, "J_Head");
 }
 
 shoot_pmc1(ai_harper) {
@@ -850,7 +850,7 @@ killed_by_harper(ai_guy) {
 }
 
 dj_killed(ai_callback) {
-  playfxontag(level._effect["blood_spurt"], ai_callback, "J_Head");
+  playFXOnTag(level._effect["blood_spurt"], ai_callback, "J_Head");
 }
 
 fire_at_bar() {
@@ -865,7 +865,7 @@ fire_at_bar() {
     v_random = (randomfloatrange(-1.0, 1.0), 0, randomfloatrange(-1.0, 1.0));
     v_end = s_end.origin + v_random * 16;
     v_direction = vectornormalize(v_end - v_start);
-    playfx(level._effect["club_tracers"], v_start, v_direction);
+    playFX(level._effect["club_tracers"], v_start, v_direction);
     magicbullet("hk416_silencer_sp", v_start, v_end);
     radiusdamage(v_end, 5, 100, 100);
     wait(randomfloatrange(0.02, 0.17));
@@ -959,7 +959,7 @@ clear_background_civilians() {
 clear_static_flee_civs() {
   flag_wait("club_left_flee");
   flag_wait("club_right_flee");
-  a_m_groups = getentarray("m_civ_club_group1", "targetname");
+  a_m_groups = getEntArray("m_civ_club_group1", "targetname");
   array_delete(a_m_groups);
   wait 0.05;
   delete_exploder(623);
@@ -1027,7 +1027,7 @@ club_terrorist_think() {
     self change_movemode("cqb_walk");
     flag_wait("heroes_open_fire");
     self.allowdeath = 1;
-    self setcandamage(1);
+    self setCanDamage(1);
     flag_wait("club_open_fire");
   }
 
@@ -1078,7 +1078,7 @@ grenade_toss() {
 
 ai_shoot_wildly() {
   self endon("death");
-  a_fake_targets = getentarray("enemy_fake_targets", "targetname");
+  a_fake_targets = getEntArray("enemy_fake_targets", "targetname");
   e_fake = a_fake_targets[randomint(a_fake_targets.size)];
   self thread shoot_at_target(e_fake, undefined, 0, 10);
   wait 8;

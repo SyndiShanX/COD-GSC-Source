@@ -20,7 +20,7 @@ teleport_to_node(node) {
 }
 
 teleport_to_origin(origin, angles) {
-  if(!IsDefined(angles)) {
+  if(!isDefined(angles)) {
     angles = (0, 0, 0);
   }
 
@@ -98,16 +98,16 @@ price_goto_node_and_wait_for_player(nodeTN, dist) {
 
 // destinationEnt: wait for the player to get near the destination rather than near price
 price_wait_for_player(dist, destinationEnt) {
-  if(!IsDefined(dist)) {
+  if(!isDefined(dist)) {
     dist = 150;
   }
 
-  if(IsDefined(destinationEnt)) {
-    while (Distance(destinationEnt.origin, level.player.origin) > dist) {
+  if(isDefined(destinationEnt)) {
+    while(Distance(destinationEnt.origin, level.player.origin) > dist) {
       wait(0.05);
     }
   } else {
-    while (Distance(level.price.origin, level.player.origin) > dist) {
+    while(Distance(level.price.origin, level.player.origin) > dist) {
       wait(0.05);
     }
   }
@@ -120,7 +120,7 @@ price_goto_node(nodeTN, goalradius) {
   level.price notify("price_goto_node");
   level.price endon("price_goto_node");
 
-  if(!IsDefined(goalradius)) {
+  if(!isDefined(goalradius)) {
     goalradius = 24;
   }
 
@@ -156,10 +156,10 @@ player_unsuppressed_weapon_warning() {
   level endon("_stealth_spotted");
   level endon("steamroom_start");
 
-  while (1) {
+  while(1) {
     wait(0.25);
 
-    while (IsDefined(level.player_radio_emitter) && IsDefined(level.player_radio_emitter.function_stack) && level.player_radio_emitter.function_stack.size > 0) {
+    while(isDefined(level.player_radio_emitter) && isDefined(level.player_radio_emitter.function_stack) && level.player_radio_emitter.function_stack.size > 0) {
       wait(0.05);
     }
 
@@ -176,7 +176,7 @@ player_unsuppressed_weapon_warning() {
 }
 
 player_falling_kill_trigger() {
-  trigs = GetEntArray("player_falling_kill", "targetname");
+  trigs = getEntArray("player_falling_kill", "targetname");
   array_thread(trigs, ::player_falling_kill_trigger_think);
 }
 
@@ -196,7 +196,7 @@ player_falling_kill_trigger_think() {
   }
 
   endTime = GetTime() + 2000;
-  while (!level.player IsOnGround() && GetTime() < endTime) {
+  while(!level.player IsOnGround() && GetTime() < endTime) {
     wait(0.05);
   }
 
@@ -214,7 +214,7 @@ player_falling_kill_trigger_think() {
 }
 
 player_falling_to_death() {
-  triggers = GetEntarray("slide_to_death_triggers", "targetname"); //includes all of Ned's remove_gun triggers and any other slide triggers I have added to ensure player slides to death
+  triggers = getEntArray("slide_to_death_triggers", "targetname"); //includes all of Ned's remove_gun triggers and any other slide triggers I have added to ensure player slides to death
   array_thread(triggers, ::player_falling_to_death_think);
 }
 
@@ -231,7 +231,7 @@ scr_neverEnableCQB(state) {
 }
 
 set_threatbiasgroup(group) {
-  Assert(IsDefined(group));
+  Assert(isDefined(group));
   self SetThreatBiasGroup(group);
 }
 
@@ -267,12 +267,12 @@ give_flashlight() {
 }
 
 attach_flashlight() {
-  PlayFXOnTag(level._effect["flashlight"], self, "tag_flash");
+  playFXOnTag(level._effect["flashlight"], self, "tag_flash");
   self.have_flashlight = true;
 }
 
 patroller_do_cqbwalk() {
-  if(IsDefined(self.script_patroller)) {
+  if(isDefined(self.script_patroller)) {
     wait(0.05);
     self clear_run_anim();
   }
@@ -292,7 +292,7 @@ scan_when_idle() {
   self endon("end_scan_when_idle");
   self endon("end_patrol");
 
-  while (1) {
+  while(1) {
     self set_generic_idle_anim("cqb_stand_idle_scan");
 
     self waittill("clearing_specialIdleAnim");
@@ -346,7 +346,7 @@ friendly_should_speed_up()
 
 force_weapon_when_player_not_looking(weaponName) {
   self endon("death");
-  while (within_fov(level.player.origin, level.player GetPlayerAngles(), level.price.origin, level.cosine["45"])) {
+  while(within_fov(level.player.origin, level.player GetPlayerAngles(), level.price.origin, level.cosine["45"])) {
     wait 1;
   }
   self forceUseWeapon(weaponName, "primary");
@@ -355,11 +355,11 @@ force_weapon_when_player_not_looking(weaponName) {
 spawn_ai_group(aSpawners, doSafe, doStaggered) {
   AssertEx((aSpawners.size > 0), "The array passed to array_spawn function is empty");
 
-  if(!IsDefined(doSafe)) {
+  if(!isDefined(doSafe)) {
     doSafe = false;
   }
 
-  if(!IsDefined(doStaggered)) {
+  if(!isDefined(doStaggered)) {
     doStaggered = false;
   }
 
@@ -391,7 +391,7 @@ scripted_covercrouch_shuffle_left() {
   level endon("barracks_player_near_stair_shooting_spot");
 
   node = self.scripted_shuffleNode;
-  Assert(IsDefined(node));
+  Assert(isDefined(node));
 
   serverFPS = 20;
   serverSPF = 0.05;
@@ -446,19 +446,21 @@ scripted_covercrouch_shuffle_left() {
   self animscripts\shared::DoNoteTracksForTime(playTime, "shuffle");
 
   // account for loopTime not being exact since loop animation delta isn't uniform over time
-  for (i = 0; i < 2; i++) {
+  for(i = 0; i < 2; i++) {
     remainingDist = Distance(self.origin, node.origin);
     if(playEnd)
       remainingDist -= endDist;
 
-    if(remainingDist < 4)
+    if(remainingDist < 4) {
       break;
+    }
 
     playTime = loopTime * (remainingDist / shuffleDist) * 0.9; // don't overshoot
     playTime = floor(playTime * serverFPS) * serverSPF;
 
-    if(playTime < 0.05)
+    if(playTime < 0.05) {
       break;
+    }
 
     self animscripts\shared::DoNoteTracksForTime(playTime, "shuffle");
   }
@@ -493,7 +495,7 @@ scripted_covercrouch_shuffle_left() {
 scripted_covercrouch_earlyout_notify(killNotify, ent) {
   self endon("scripted_shuffle_done");
 
-  if(!IsDefined(ent)) {
+  if(!isDefined(ent)) {
     ent = self;
   }
 
@@ -505,7 +507,7 @@ scripted_covercrouch_earlyout_notify(killNotify, ent) {
 // --- STEALTH NOSIGHT CLIP LOGIC ---
 // ----------------------------------
 clip_nosight_logic() {
-  if(IsDefined(self.script_parameters)) {
+  if(isDefined(self.script_parameters)) {
     if(IsSubStr(self.script_parameters, "difficultymedium")) {
       if(level.gameskill > 1) {
         self Delete();
@@ -519,7 +521,7 @@ clip_nosight_logic() {
   flag_wait(self.script_flag);
 
   self thread clip_nosight_logic2();
-  self SetCanDamage(true);
+  self setCanDamage(true);
 
   self clip_nosight_wait();
 
@@ -637,7 +639,7 @@ af_caves_rappel_behavior() {
   array_spawn_function_noteworthy("rappel_guard_2", ::rappel_guards_think);
   array_spawn_function_noteworthy("rappel_guard_1", ::rappel_guards_think);
 
-  rappel_baddie_spawners = GetEntArray("rappel_baddie_spawner", "targetname");
+  rappel_baddie_spawners = getEntArray("rappel_baddie_spawner", "targetname");
   array_spawn(rappel_baddie_spawners);
 
   delayThread(6, ::display_hint, "begin_descent"); // 8
@@ -724,15 +726,15 @@ af_caves_rappel_behavior() {
 
   player_fell = false;
   last_time_braked = 0;
-  speaker = Spawn("script_origin", (0, 0, 0));
+  speaker = spawn("script_origin", (0, 0, 0));
   speaker.origin = level.player.origin;
   speaker LinkTo(level.player);
   death_fall_timer = undefined;
-  speaker PlaySound("scn_afcaves_rappel_start_plr");
+  speaker playSound("scn_afcaves_rappel_start_plr");
 
   able_to_break_time = GetTime() + 1500;
 
-  for (;;) {
+  for(;;) {
     // at % through the anim, go into ending mode with the knife
     if(player_rig GetAnimTime(far_anim) >= 0.94) // .94
       flag_set("rappel_end");
@@ -743,8 +745,9 @@ af_caves_rappel_behavior() {
       flag_set("player_braked");
 
     if(flag("rappel_end")) {
-      if(level.player MeleeButtonPressed())
+      if(level.player MeleeButtonPressed()) {
         break;
+      }
     }
 
     // last_time_braked + the amount of time you have to fall before you can brake
@@ -769,7 +772,7 @@ af_caves_rappel_behavior() {
         sin_index_old = sin_index;
         speaker StopSounds();
         if(!flag("rappel_end"))
-          speaker PlaySound("scn_afcaves_rappel_stop_plr");
+          speaker playSound("scn_afcaves_rappel_stop_plr");
       }
 
     } else {
@@ -780,7 +783,7 @@ af_caves_rappel_behavior() {
 
       speed += nobreak_speed;
       if(speed > max_speed) {
-        if(!isdefined(death_fall_timer)) {
+        if(!isDefined(death_fall_timer)) {
           death_fall_timer = GetTime();
         }
 
@@ -810,7 +813,7 @@ af_caves_rappel_behavior() {
       if(was_breaking) {
         speaker StopSounds();
         if(!flag("rappel_end"))
-          speaker PlaySound("scn_afcaves_rappel_start_plr");
+          speaker playSound("scn_afcaves_rappel_start_plr");
 
         last_time_braked = GetTime();
         was_breaking = false;
@@ -818,7 +821,6 @@ af_caves_rappel_behavior() {
         sin_index_max = 90;
         sin_index_old = sin_index;
       }
-
 
       if(!flag("rappel_end")) {
         far_anim_dest += far_anim_rate;
@@ -851,8 +853,7 @@ af_caves_rappel_behavior() {
   percentage = player_rig GetAnimTime(far_anim);
 
   if(player_fell) {
-
-    for (;;) {
+    for(;;) {
       far_anim_dest += far_anim_rate;
       close_anim_dest -= far_anim_rate;
       speed += nobreak_speed;
@@ -860,8 +861,9 @@ af_caves_rappel_behavior() {
       player_rig SetAnimLimited(close_anim_node, close_anim_dest, 0, speed);
       player_rig SetAnimLimited(far_anim_node, far_anim_dest, 0, speed);
 
-      if(player_rig GetAnimTime(far_anim) >= 0.78)
+      if(player_rig GetAnimTime(far_anim) >= 0.78) {
         break;
+      }
 
       wait(0.05);
     }
@@ -870,7 +872,7 @@ af_caves_rappel_behavior() {
     //angles = ( -15, -100, 0 );
     angles = tag_origin.angles;
     angles = (0, angles[1], 0);
-    forward = AnglesToForward(angles);
+    forward = anglesToForward(angles);
     up = AnglesToUp(angles);
     velocity = forward * 750;
     //	velocity = up * 500;
@@ -884,13 +886,14 @@ af_caves_rappel_behavior() {
 
     level.player Kill();
   } else {
-
-    for (;;) {
-      if(!isalive(level.player))
+    for(;;) {
+      if(!isalive(level.player)) {
         break;
+      }
 
-      if(level.player MeleeButtonPressed())
+      if(level.player MeleeButtonPressed()) {
         break;
+      }
       wait(0.05);
     }
 
@@ -898,9 +901,9 @@ af_caves_rappel_behavior() {
     // since I removed it at the begining no point in reseting it here.
     // level.player PlayerSetGroundReferenceEnt( undefined );
     // level.player EnableWeapons();
-    if(flag("player_failed_rappel"))
+    if(flag("player_failed_rappel")) {
       return;
-
+    }
     wait(0.1);
 
     flag_set("player_killing_guard");
@@ -909,8 +912,8 @@ af_caves_rappel_behavior() {
       return;
     level.player endon("death");
 
-    knife = Spawn("script_model", (0, 0, 0));
-    knife SetModel("weapon_parabolic_knife");
+    knife = spawn("script_model", (0, 0, 0));
+    knife setModel("weapon_parabolic_knife");
     knife Hide();
     knife DontCastShadows();
     knife LinkTo(ending_player_rig, "tag_weapon_left", (0, 0, 0), (0, 0, 0));
@@ -921,7 +924,7 @@ af_caves_rappel_behavior() {
     thread hint_fade();
 
     node = GetEnt("guard_assassinate", "script_noteworthy");
-    Assert(IsDefined(node));
+    Assert(isDefined(node));
 
     guard_1 = get_living_ai_array("rappel_guard_1", "script_noteworthy");
     Assert(IsAlive(guard_1[0]));
@@ -990,10 +993,10 @@ af_caves_rappel_behavior() {
 
 // called when a notetrack hits
 rappel_guard1_deathgurgle(guard1) {
-  speaker = Spawn("script_origin", guard1 GetEye());
+  speaker = spawn("script_origin", guard1 getEye());
   speaker LinkTo(guard1);
 
-  speaker PlaySound("scn_afcaves_rappel_kill_npc_dx", "sounddone");
+  speaker playSound("scn_afcaves_rappel_kill_npc_dx", "sounddone");
   speaker waittill("sounddone");
 
   speaker Unlink();
@@ -1005,7 +1008,7 @@ player_decent_death() {
 
   level notify("new_quote_string");
   // You did not brake in time.
-  SetDvar("ui_deadquote", & "AF_CAVES_FELL_TO_DEATH");
+  SetDvar("ui_deadquote", &"AF_CAVES_FELL_TO_DEATH");
   blackout = create_client_overlay("black", 0, level.player);
   blackout FadeOverTime(1.5);
   blackout.alpha = 1;
@@ -1019,7 +1022,7 @@ relink_player_for_knife_kill(percentage) {
   /*
   if( percentage < 0.94 )
   	time = 0.8;	
-  else 
+  else
   if( percentage < 0.96 )
   	time = 0.6;	
   else
@@ -1036,14 +1039,14 @@ relink_player_for_knife_kill(percentage) {
 }
 
 hurt_player_on_bounce() {
-  if(!isalive(level.player))
+  if(!isalive(level.player)) {
     return;
-
+  }
   level.player endon("death");
   org = self.origin;
   old_vel = 0;
   maxhealth = level.player.maxhealth;
-  for (;;) {
+  for(;;) {
     vec = self.origin - org;
     vel = Length(vec);
     if(vel < old_vel - 10) {
@@ -1064,7 +1067,7 @@ attach_model_if_not_attached(model, tag) {
   hasModel = false;
 
   attachedCount = self GetAttachSize();
-  for (i = 0; i < attachedCount; i++) {
+  for(i = 0; i < attachedCount; i++) {
     if(self GetAttachModelName(i) != model)
       continue;
     hasModel = true;
@@ -1076,7 +1079,7 @@ attach_model_if_not_attached(model, tag) {
 }
 
 liner() {
-  for (;;) {
+  for(;;) {
     Line(self.origin, level.player.origin);
     Print3d(self.origin, "x");
     wait(0.05);
@@ -1094,7 +1097,7 @@ steamroom_door_crack_open() {
 
   rotateTime = 0.25;
 
-  door PlaySound("door_cargo_container_push_open");
+  door playSound("door_cargo_container_push_open");
   door RotateTo(door.angles + (0, yawopen, 0), rotateTime);
   door waittill("rotatedone");
 
@@ -1113,7 +1116,7 @@ steamroom_door_full_open() {
 
   door ConnectPaths();
 
-  door PlaySound("door_cargo_container_burst_open");
+  door playSound("door_cargo_container_burst_open");
   door RotateTo(door.angles + (0, yawopen, 0), rotateTime);
   door waittill("rotatedone");
 
@@ -1124,7 +1127,7 @@ steamroom_door_full_open() {
 // --- EXPLOSION EARTHQUAKES ---
 // -----------------------------
 setup_barrel_earthquake() {
-  array_thread(GetEntArray("explodable_barrel", "targetname"), ::barrel_earthquake_notify);
+  array_thread(getEntArray("explodable_barrel", "targetname"), ::barrel_earthquake_notify);
 
   level thread explosion_earthquake();
 }
@@ -1138,7 +1141,7 @@ barrel_earthquake_notify() {
   ceiling = PhysicsTrace(start, end);
   if(ceiling != end) {
     current_fx = getfx("hallway_collapsing_big");
-    PlayFX(current_fx, ceiling);
+    playFX(current_fx, ceiling);
   }
 }
 
@@ -1167,7 +1170,7 @@ explosion_earthquake() {
   fx_angles[8] = (0, 0, 0);
   fx_angles[9] = (0, 0, 0);
 
-  while (true) {
+  while(true) {
     level waittill("explosion_earthquake", exploding_ent_origin);
 
     max_intensity = fx.size - 1;
@@ -1184,22 +1187,22 @@ explosion_earthquake() {
 
     Earthquake(.25, duration, level.player.origin, 1024);
 
-    for (i = 0; i <= intensity; i++) {
+    for(i = 0; i <= intensity; i++) {
       direction = flat_angle(level.player.angles) + (0, RandomInt(80) - 40, 0);
 
-      forward = AnglesToForward(direction);
+      forward = anglesToForward(direction);
       start = level.player.origin + forward * 256 + (0, 0, 72);
       end = start + (0, 0, 1024);
 
       ceiling = PhysicsTrace(start, end);
-      if(ceiling == end)
+      if(ceiling == end) {
         continue;
-
+      }
       fx_index = intensity - i;
-      forward = AnglesToForward(fx_angles[fx_index]);
+      forward = anglesToForward(fx_angles[fx_index]);
       up = AnglesToUp(fx_angles[fx_index]);
       current_fx = getfx(fx[fx_index]);
-      PlayFX(current_fx, ceiling, forward, up);
+      playFX(current_fx, ceiling, forward, up);
 
       wait RandomFloat(.5);
     }
@@ -1214,10 +1217,10 @@ hunted_hanging_light() {
   tag_origin = spawn_tag_origin();
 
   tag_origin LinkTo(self.lamp, "j_hanging_light_04", (0, 0, -64), (0, 0, 0));
-  PlayFXOnTag(fx, tag_origin, "tag_origin");
+  playFXOnTag(fx, tag_origin, "tag_origin");
 
   flag_wait("sheppard_southwest");
-  StopFXOnTag(fx, tag_origin, "tag_origin");
+  stopFXOnTag(fx, tag_origin, "tag_origin");
 }
 
 swing_light_org_think() {
@@ -1244,7 +1247,7 @@ lamp_animates(root) {
 
   thread lamp_rotates_yaw();
 
-  for (;;) {
+  for(;;) {
     level waittill("swing", mag);
     animation = anims[odd];
     off = !odd;
@@ -1256,7 +1259,7 @@ lamp_animates(root) {
 lamp_rotates_yaw() {
   ent = spawn_tag_origin();
 
-  for (;;) {
+  for(;;) {
     yaw = RandomFloatRange(-30, 30);
     ent AddYaw(yaw);
     time = RandomFloatRange(0.5, 1.5);
@@ -1277,7 +1280,7 @@ intro_music() {
   alias = "af_caves_desertdrone";
   tracktime = MusicLength(alias);
 
-  while (!flag(ender)) {
+  while(!flag(ender)) {
     MusicPlayWrapper(alias);
     wait(tracktime);
     music_stop(1);
@@ -1301,12 +1304,12 @@ stealth_music() {
   stealth_trackTime = MusicLength(stealthalias);
   extraPauseTime = 7;
 
-  while (!flag(flag1) && !flag(flag2)) {
+  while(!flag(flag1) && !flag(flag2)) {
     MusicPlayWrapper(stealthAlias);
 
     endTime = GetTime() + milliseconds(stealth_trackTime);
 
-    while (GetTime() < endTime && !flag(flag1) && !flag(flag2)) {
+    while(GetTime() < endTime && !flag(flag1) && !flag(flag2)) {
       wait(0.1);
     }
 
@@ -1314,7 +1317,7 @@ stealth_music() {
     wait(1);
 
     endTime = GetTime() + milliseconds(extraPauseTime);
-    while (GetTime() < endTime && !flag(flag1) && !flag(flag2)) {
+    while(GetTime() < endTime && !flag(flag1) && !flag(flag2)) {
       wait(0.1);
     }
   }
@@ -1331,7 +1334,7 @@ tv_cinematic_think() {
   // play cinematics on the TVs
   SetSavedDvar("cg_cinematicFullScreen", "0");
 
-  while (1) {
+  while(1) {
     flag_wait("backdoor_barracks_tv");
     thread tv_movie();
 
@@ -1344,13 +1347,13 @@ tv_cinematic_think() {
 tv_movie() {
   level endon("stop_cinematic");
 
-  while (1) {
+  while(1) {
     // SRS TODO need new video
     CinematicInGameLoopResident("gulag_securitycam");
 
     wait(5);
 
-    while (IsCinematicPlaying()) {
+    while(IsCinematicPlaying()) {
       wait(1);
     }
   }
@@ -1379,7 +1382,7 @@ barracks_destroy_tv() // destroy it when stealth is broken or if the player pass
 // --- CANYON CONVOY ---
 // ---------------------
 convoy_loop(vehicleTN, sFlagToStop, minWait, maxWait) {
-  canyon_convoy = GetEntArray(vehicleTN, "targetname");
+  canyon_convoy = getEntArray(vehicleTN, "targetname");
   thread drone_vehicle_flood_start(canyon_convoy, "canyon_convoy", minWait, maxWait);
 
   flag_wait(sFlagToStop);
@@ -1390,14 +1393,14 @@ convoy_loop(vehicleTN, sFlagToStop, minWait, maxWait) {
 drone_vehicle_flood_start(aSpawners, groupName, minWait, maxWait, noSound) {
   level endon("stop_drone_vehicle_flood" + groupName);
   vehicle = undefined;
-  while (true) {
+  while(true) {
     aSpawners = array_randomize(aSpawners);
 
     foreach(spawner in aSpawners) {
       vehicle = spawner thread spawn_vehicle_and_gopath();
       vehicle thread friendlyfire_shield();
       vehicle godon();
-      if(IsDefined(noSound))
+      if(isDefined(noSound))
         vehicle Vehicle_TurnEngineOff();
       vehicle = undefined;
       wait(RandomFloatRange(minWait, maxWait));
@@ -1418,7 +1421,7 @@ get_global_fx(name) {
 }
 
 delete_corpse_in_volume(volume) {
-  Assert(IsDefined(volume));
+  Assert(isDefined(volume));
   if(self IsTouching(volume))
     self Delete();
 }
@@ -1437,34 +1440,34 @@ half_particles_setup() {
 
 // if any trigger is activated in a trigger array
 waittill_trigger_array(triggers) {
-  for (k = 1; k < triggers.size; k++)
+  for(k = 1; k < triggers.size; k++)
     triggers[k] endon("trigger");
   triggers[0] waittill("trigger");
 }
 
 hide_triggers(trigger_name) {
-  friendly_trigger = GetEntArray(trigger_name, "script_noteworthy");
+  friendly_trigger = getEntArray(trigger_name, "script_noteworthy");
   foreach(trigger in friendly_trigger)
   trigger trigger_off();
 }
 
 delete_by_targetname_safe(entTN) {
   ent = GetEnt(entTN, "targetname");
-  if(IsDefined(ent)) {
+  if(isDefined(ent)) {
     ent Delete();
   }
 }
 
 delete_and_kill_targeted_spawners_by_targetname_safe(entTN) {
   ent = GetEnt(entTN, "targetname");
-  if(!IsDefined(ent)) {
+  if(!isDefined(ent)) {
     return;
   }
 
   targets = [];
   spawners = [];
-  if(IsDefined(ent.target)) {
-    targets = GetEntArray(ent.target, "targetname");
+  if(isDefined(ent.target)) {
+    targets = getEntArray(ent.target, "targetname");
   }
 
   foreach(target in targets) {
@@ -1504,7 +1507,7 @@ dialogue_temp(line, timeout) {
 }
 
 dialogue_print(line, timeout) {
-  if(!IsDefined(timeout)) {
+  if(!isDefined(timeout)) {
     timeout = 3;
   }
 
@@ -1523,7 +1526,7 @@ dialogue_print(line, timeout) {
 
   level endon("clearing_hints");
 
-  if(IsDefined(level.tempHint)) {
+  if(isDefined(level.tempHint)) {
     level.tempHint destroyElem();
   }
 

@@ -13,7 +13,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_behavior;
 #include scripts\zm_common\zm_devgui;
-
 #namespace namespace_1d05befd;
 
 autoexec __init__system__() {
@@ -31,26 +30,25 @@ __init__() {
   level.var_f8eb6737 = getstatuseffect(#"avogadro_shock_slowed");
 
   zm_devgui::function_c7dd7a17("<dev string:x38>", "<dev string:x41>");
-
 }
 
 __main__() {}
 
-private function_65089f84() {
-  if(isDefined(self.subarchetype) && self.subarchetype == #"zombie_electric") {
+function_65089f84() {
+  if(isDefined(self.subarchetype) && self.subarchetype == # "zombie_electric") {
     zm_behavior::function_57d3b5eb();
     self thread clientfield::set("zm_ai/zombie_electric_fx_clientfield", 1);
     self.actor_killed_override = &function_1a47fb39;
   }
 }
 
-private function_4639701a(params) {
-  if(isDefined(params.eattacker) && isDefined(params.eattacker.subarchetype) && isDefined(params.smeansofdeath) && params.eattacker.subarchetype == #"zombie_electric" && params.smeansofdeath == "MOD_MELEE") {
+function_4639701a(params) {
+  if(isDefined(params.eattacker) && isDefined(params.eattacker.subarchetype) && isDefined(params.smeansofdeath) && params.eattacker.subarchetype == # "zombie_electric" && params.smeansofdeath == "MOD_MELEE") {
     self status_effect::status_effect_apply(level.var_f8eb6737, undefined, self, 0);
   }
 }
 
-private function_1a47fb39(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime) {
+function_1a47fb39(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime) {
   self thread clientfield::set("zm_ai/zombie_electric_fx_clientfield", 0);
 
   if(!(isDefined(self.water_damage) && self.water_damage)) {
@@ -66,7 +64,7 @@ private function_1a47fb39(einflictor, attacker, idamage, smeansofdeath, weapon, 
   }
 }
 
-private function_25c6cba0(entity, origin) {
+function_25c6cba0(entity, origin) {
   entity clientfield::increment("zombie_electric_burst_clientfield");
   players = getplayers();
 
@@ -86,7 +84,7 @@ private function_25c6cba0(entity, origin) {
   zombies = getaiteamarray(level.zombie_team);
 
   foreach(zombie in zombies) {
-    if(zombie.archetype == #"zombie" && (!isDefined(zombie.subarchetype) || zombie.subarchetype != #"zombie_electric") && isDefined(entity.b_in_water) && entity.b_in_water && isDefined(zombie.b_in_water) && zombie.b_in_water && distancesquared(origin, zombie.origin) <= 250000) {
+    if(zombie.archetype == # "zombie" && (!isDefined(zombie.subarchetype) || zombie.subarchetype != # "zombie_electric") && isDefined(entity.b_in_water) && entity.b_in_water && isDefined(zombie.b_in_water) && zombie.b_in_water && distancesquared(origin, zombie.origin) <= 250000) {
       zombie clientfield::set("zombie_electric_burst_stun_friendly_clientfield", 1);
       zombie ai::stun(5);
       zombie thread function_ef1b9d42();
@@ -94,13 +92,13 @@ private function_25c6cba0(entity, origin) {
   }
 }
 
-private function_ef1b9d42() {
+function_ef1b9d42() {
   self endon(#"death");
   wait 5;
   self clientfield::set("zombie_electric_burst_stun_friendly_clientfield", 0);
 }
 
-private function_79e38cc4(origin) {
+function_79e38cc4(origin) {
   var_74d136f5 = 0;
   time_step = 0.5;
 

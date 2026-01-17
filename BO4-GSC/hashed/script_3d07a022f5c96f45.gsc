@@ -8,7 +8,6 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_weapons;
-
 #namespace namespace_94d4f09f;
 
 autoexec __init__system__() {
@@ -23,7 +22,7 @@ __init__() {
   zm_trial::register_challenge(#"hash_671231fa368e1829", &on_begin, &on_end);
 }
 
-private on_begin(var_8a72a00b, var_49d8a02c, var_325ff213, var_dd2fad64) {
+on_begin(var_8a72a00b, var_49d8a02c, var_325ff213, var_dd2fad64) {
   switch (getplayers().size) {
     case 1:
       level.var_cad0c0ee = zm_trial::function_5769f26a(var_8a72a00b);
@@ -45,7 +44,7 @@ private on_begin(var_8a72a00b, var_49d8a02c, var_325ff213, var_dd2fad64) {
   level zm_trial_util::function_dace284(level.var_fb4c4cca);
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   callback::remove_on_ai_killed(&on_ai_killed);
 
   if(!round_reset) {
@@ -62,7 +61,7 @@ private on_end(round_reset) {
   level.var_fb4c4cca = undefined;
 }
 
-private on_ai_killed(params) {
+on_ai_killed(params) {
   if(self.var_bf8dfaf4 === 1) {
     level.var_fb4c4cca++;
 

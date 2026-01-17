@@ -56,7 +56,6 @@
 #include scripts\zm_common\zm_transformation;
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_ai_brutus;
 
 autoexec __init__system__() {
@@ -67,14 +66,14 @@ __init__() {
   registerbehaviorscriptfunctions();
   spawner::add_archetype_spawn_function(#"brutus", &function_debbd9da);
   spawner::function_89a2cd87(#"brutus", &function_6090f71a);
-  level._effect[#"brutus"] = [];
-  level._effect[#"brutus"][#"lockdown_stub_type_pap"] = "maps/zm_escape/fx8_alcatraz_perk_lock";
-  level._effect[#"brutus"][#"lockdown_stub_type_perks"] = "maps/zm_escape/fx8_alcatraz_perk_s_lock";
-  level._effect[#"brutus"][#"lockdown_stub_type_crafting_tables"] = "maps/zm_escape/fx8_alcatraz_w_bench_lock";
-  level thread aat::register_immunity("zm_aat_brain_decay", #"brutus", 1, 1, 1);
-  level thread aat::register_immunity("zm_aat_frostbite", #"brutus", 1, 1, 1);
-  level thread aat::register_immunity("zm_aat_kill_o_watt", #"brutus", 1, 1, 1);
-  level thread aat::register_immunity("zm_aat_plasmatic_burst", #"brutus", 1, 1, 1);
+  level._effect[# "brutus"] = [];
+  level._effect[# "brutus"][# "lockdown_stub_type_pap"] = "maps/zm_escape/fx8_alcatraz_perk_lock";
+  level._effect[# "brutus"][# "lockdown_stub_type_perks"] = "maps/zm_escape/fx8_alcatraz_perk_s_lock";
+  level._effect[# "brutus"][# "lockdown_stub_type_crafting_tables"] = "maps/zm_escape/fx8_alcatraz_w_bench_lock";
+  level thread aat::register_immunity("zm_aat_brain_decay", # "brutus", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_frostbite", # "brutus", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_kill_o_watt", # "brutus", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_plasmatic_burst", # "brutus", 1, 1, 1);
   clientfield::register("actor", "brutus_shock_attack", 1, 1, "counter");
   clientfield::register("actor", "brutus_spawn_clientfield", 1, 1, "int");
   clientfield::register("toplayer", "brutus_shock_attack_player", 1, 1, "counter");
@@ -82,7 +81,6 @@ __init__() {
   zm_cleanup::function_cdf5a512(#"brutus", &function_88efcb);
 
   zm_devgui::function_c7dd7a17("<dev string:x38>");
-
 }
 
 __main__() {}
@@ -199,7 +197,7 @@ function_6090f71a() {
 }
 
 on_brutus_killed(params) {
-  if(self.archetype !== #"brutus") {
+  if(self.archetype !== # "brutus") {
     return;
   }
 
@@ -209,7 +207,7 @@ on_brutus_killed(params) {
   self destructserverutils::function_629a8d54(self, "tag_weapon_right");
 }
 
-private registerbehaviorscriptfunctions() {
+registerbehaviorscriptfunctions() {
   assert(isscriptfunctionptr(&function_fbb311db));
   behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_68d081058095794", &function_fbb311db);
   assert(isscriptfunctionptr(&function_3006441d));
@@ -235,7 +233,7 @@ private registerbehaviorscriptfunctions() {
   behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_cc119947efb49cf", &function_eb1f805);
 }
 
-private function_943e4c08(entity, minplayerdist) {
+function_943e4c08(entity, minplayerdist) {
   playerpositions = [];
 
   foreach(player in getplayers()) {
@@ -263,7 +261,7 @@ private function_943e4c08(entity, minplayerdist) {
   return true;
 }
 
-private brutustargetservice(entity) {
+brutustargetservice(entity) {
   if(isDefined(entity.ignoreall) && entity.ignoreall) {
     return 0;
   }
@@ -274,7 +272,7 @@ private brutustargetservice(entity) {
     zone = zm_utility::get_current_zone();
 
     if(isDefined(zone)) {
-      wait_locations = level.zones[zone].a_loc_types[#"wait_location"];
+      wait_locations = level.zones[zone].a_loc_types[# "wait_location"];
 
       if(isDefined(wait_locations) && wait_locations.size > 0) {
         entity zm_utility::function_64259898(wait_locations[0].origin, 200);
@@ -288,23 +286,23 @@ private brutustargetservice(entity) {
 
   zm_lockdown_util::function_f3cff6ff(entity);
 
-    if(!isDefined(entity.var_722a34a3)) {
-      entity.var_52e3b294 = undefined;
-      pointofinterest = entity zm_utility::get_zombie_point_of_interest(entity.origin);
+  if(!isDefined(entity.var_722a34a3)) {
+    entity.var_52e3b294 = undefined;
+    pointofinterest = entity zm_utility::get_zombie_point_of_interest(entity.origin);
 
-      if(isDefined(pointofinterest) && pointofinterest.size > 0) {
-        foreach(poi in pointofinterest) {
-          if(isDefined(poi) && isentity(poi) && isDefined(poi.classname) && poi.classname == "grenade") {
-            goalpos = getclosestpointonnavmesh(poi.origin, 10, self getpathfindingradius());
+    if(isDefined(pointofinterest) && pointofinterest.size > 0) {
+      foreach(poi in pointofinterest) {
+        if(isDefined(poi) && isentity(poi) && isDefined(poi.classname) && poi.classname == "grenade") {
+          goalpos = getclosestpointonnavmesh(poi.origin, 10, self getpathfindingradius());
 
-            if(isDefined(goalpos)) {
-              entity.var_722a34a3 = poi;
-              entity.var_52e3b294 = goalpos;
-            }
+          if(isDefined(goalpos)) {
+            entity.var_722a34a3 = poi;
+            entity.var_52e3b294 = goalpos;
           }
         }
       }
     }
+  }
 
   if(isDefined(entity.var_52e3b294) && entity zm_utility::function_64259898(entity.var_52e3b294)) {
     return 1;
@@ -324,7 +322,7 @@ private brutustargetservice(entity) {
   return entity zm_utility::function_64259898(goalent.origin);
 }
 
-private function_3c3e6f4a(entity) {
+function_3c3e6f4a(entity) {
   var_65ba9602 = zm_lockdown_util::function_87c1193e(entity);
 
   if(isDefined(entity.var_722a34a3) || !isDefined(var_65ba9602) || !zm_lockdown_util::function_c9105448(entity, var_65ba9602)) {
@@ -351,7 +349,7 @@ private function_3c3e6f4a(entity) {
 
   zm_lockdown_util::function_f3cff6ff(entity);
 
-    stub_types = [];
+  stub_types = [];
   array::add(stub_types, "lockdown_stub_type_crafting_tables");
   array::add(stub_types, "lockdown_stub_type_perks");
   array::add(stub_types, "lockdown_stub_type_pap");
@@ -368,10 +366,9 @@ private function_3c3e6f4a(entity) {
   stub = registerlotus_right[0];
 
   if(!function_943e4c08(entity, entity ai::function_9139c839().var_78a5f50)) {
-
     zm_lockdown_util::function_78eae22a(entity, stub, 9);
 
-      return 0;
+    return 0;
   }
 
   var_801b2d64 = undefined;
@@ -383,11 +380,11 @@ private function_3c3e6f4a(entity) {
 
     if(!isDefined(var_7162cf15)) {
       var_7162cf15 = [];
-      var_7162cf15[#"point"] = stub.origin;
+      var_7162cf15[# "point"] = stub.origin;
       halfheight = (stub.origin - zm_utility::groundpos(stub.origin))[2] + 1;
     }
 
-    queryresults = positionquery_source_navigation(var_7162cf15[#"point"], 0, 256, halfheight, 20, 1);
+    queryresults = positionquery_source_navigation(var_7162cf15[# "point"], 0, 256, halfheight, 20, 1);
 
     if(queryresults.data.size == 0) {
       return 0;
@@ -408,10 +405,10 @@ private function_3c3e6f4a(entity) {
 
   zm_lockdown_util::function_f3cff6ff(entity);
 
-    return 1;
+  return 1;
 }
 
-private function_eb1f805(entity) {
+function_eb1f805(entity) {
   velocity = entity getvelocity();
   velocitymag = length(velocity);
   predicttime = 0.2;
@@ -428,7 +425,7 @@ private function_eb1f805(entity) {
   }
 }
 
-private function_3006441d(entity) {
+function_3006441d(entity) {
   if(!isDefined(entity.var_722a34a3) || !isDefined(entity.var_52e3b294) || distancesquared(entity.var_52e3b294, entity.origin) > 10 * 10) {
     return false;
   }
@@ -436,15 +433,15 @@ private function_3006441d(entity) {
   return true;
 }
 
-private function_4ec678fe(entity) {
+function_4ec678fe(entity) {
   if(!isDefined(entity.var_722a34a3)) {
     return;
   }
 
   monkeybomb = entity.var_722a34a3;
   level notify(#"hash_79c0225ea09cd215", {
-    #brutus: self, 
-    #var_cee6bd0b: monkeybomb.origin, 
+    #brutus: self,
+    #var_cee6bd0b: monkeybomb.origin,
     #var_569d804d: monkeybomb.angles
   });
 
@@ -505,11 +502,11 @@ function_20fa0d4c(entity) {
   return true;
 }
 
-private function_3536f675(entity) {
+function_3536f675(entity) {
   return entity ai::has_behavior_attribute("scripted_mode") && entity ai::get_behavior_attribute("scripted_mode") === 1;
 }
 
-private function_3bda3c55(entity) {
+function_3bda3c55(entity) {
   if(!entity ai::get_behavior_attribute("can_ground_slam")) {
     return false;
   }
@@ -537,11 +534,11 @@ private function_3bda3c55(entity) {
   return true;
 }
 
-private function_f4a61e6a(entity) {
+function_f4a61e6a(entity) {
   entity.var_96b5e3f1 = gettime() + int(entity ai::function_9139c839().var_d5427206 * 1000);
 }
 
-private function_85e8940a(entity) {
+function_85e8940a(entity) {
   players = getplayers();
   zombies = getaiteamarray(level.zombie_team);
   ents = arraycombine(players, zombies, 0, 0);
@@ -571,14 +568,14 @@ private function_85e8940a(entity) {
     }
 
     if(isai(ent)) {
-      if(ent.zm_ai_category === #"basic") {
+      if(ent.zm_ai_category === # "basic") {
         ent zombie_utility::setup_zombie_knockdown(entity);
       }
     }
   }
 }
 
-private function_fbb311db(entity) {
+function_fbb311db(entity) {
   if(!isDefined(entity.var_d646708c) || !zm_lockdown_util::function_7bfa8895(entity)) {
     return false;
   }
@@ -606,7 +603,7 @@ function_c1844128(player) {
   return zm_lockdown_util::function_b5dd9241(self.stub);
 }
 
-private function_30afd2be(type, stub) {
+function_30afd2be(type, stub) {
   if(!isDefined(stub.var_50a8d231)) {
     stub.var_50a8d231 = 0;
   }
@@ -614,16 +611,16 @@ private function_30afd2be(type, stub) {
   var_b8576908 = 2000;
 
   switch (type) {
-    case #"lockdown_stub_type_crafting_tables":
+    case # "lockdown_stub_type_crafting_tables":
       var_491c5d62 = 1;
       break;
-    case #"lockdown_stub_type_magic_box":
+    case # "lockdown_stub_type_magic_box":
       var_491c5d62 = 1;
       break;
-    case #"lockdown_stub_type_pap":
+    case # "lockdown_stub_type_pap":
       var_491c5d62 = 3;
       break;
-    case #"lockdown_stub_type_perks":
+    case # "lockdown_stub_type_perks":
       var_491c5d62 = 3;
       break;
     default:
@@ -635,7 +632,7 @@ private function_30afd2be(type, stub) {
   return var_b8576908 * stub.var_50a8d231;
 }
 
-private function_32551326() {
+function_32551326() {
   self endon(#"death");
 
   for(;;) {
@@ -666,7 +663,7 @@ private function_32551326() {
   }
 }
 
-private brutuslockdownstub(entity) {
+brutuslockdownstub(entity) {
   stub = zm_lockdown_util::function_87c1193e(entity);
 
   if(isDefined(stub)) {
@@ -695,7 +692,7 @@ private brutuslockdownstub(entity) {
   }
 }
 
-private function_14ed6be(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
+function_14ed6be(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
   stub = zm_lockdown_util::function_87c1193e(entity);
 
   if(isDefined(stub)) {
@@ -703,7 +700,7 @@ private function_14ed6be(entity, mocompanim, mocompanimblendouttime, mocompanimf
   }
 }
 
-private function_97f51aa3(v_org) {
+function_97f51aa3(v_org) {
   grenade = self magicgrenadetype(getweapon(#"willy_pete"), v_org, (0, 0, 0), 0.4);
   grenade.owner = self;
 }
@@ -735,7 +732,7 @@ smoke_vo(v_pos) {
     waitresult = t_smoke waittill(#"trigger");
 
     if(isplayer(waitresult.activator)) {
-      b_played = waitresult.activator zm_audio::create_and_play_dialog(#"brutus", #"smoke_react");
+      b_played = waitresult.activator zm_audio::create_and_play_dialog(#"brutus", # "smoke_react");
 
       if(isDefined(b_played) && b_played) {
         t_smoke notify(#"hash_617485dc39ba3f5e");
@@ -747,14 +744,14 @@ smoke_vo(v_pos) {
 }
 
 function_9a4a6d02() {
-  self waittilltimeout(20, #"hash_617485dc39ba3f5e");
+  self waittilltimeout(20, # "hash_617485dc39ba3f5e");
   self delete();
 }
 
-private function_55bb9c72(attacker, damage, weapon, var_81dcad68, damagemultiplier, damageoverride) {
+function_55bb9c72(attacker, damage, weapon, var_81dcad68, damagemultiplier, damageoverride) {
   if(!(isDefined(self.hashelmet) && self.hashelmet)) {
     if(isDefined(attacker) && isplayer(attacker) && attacker hasperk(#"specialty_mod_awareness")) {
-      if(self.zm_ai_category === #"boss") {
+      if(self.zm_ai_category === # "boss") {
         damage *= 1.1;
       } else {
         damage *= 1.2;
@@ -765,7 +762,7 @@ private function_55bb9c72(attacker, damage, weapon, var_81dcad68, damagemultipli
   }
 
   if(weaponhasattachment(weapon, "fmj2")) {
-    if(self.zm_ai_category === #"boss") {
+    if(self.zm_ai_category === # "boss") {
       damagemultiplier *= 1.1;
     } else {
       damagemultiplier = min(1, damagemultiplier + 0.1);
@@ -786,7 +783,7 @@ private function_55bb9c72(attacker, damage, weapon, var_81dcad68, damagemultipli
   return damage * damagemultiplier;
 }
 
-private function_83a6d3ae(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, poffsettime, boneindex) {
+function_83a6d3ae(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, poffsettime, boneindex) {
   var_9000ab2 = isDefined(level.brutus_damage_percent) ? level.brutus_damage_percent : 0.1;
   var_127e9e7d = 1.5;
   var_81dcad68 = 1;
@@ -834,7 +831,7 @@ private function_83a6d3ae(inflictor, attacker, damage, flags, meansofdeath, weap
 
   if(shitloc !== "head" && shitloc !== "helmet") {
     if(weaponhasattachment(weapon, "fmj") && var_9000ab2 < 1) {
-      if(self.zm_ai_category == #"boss") {
+      if(self.zm_ai_category == # "boss") {
         var_9000ab2 *= 1.1;
       } else {
         var_9000ab2 = min(1, var_9000ab2 + 0.1);
@@ -848,7 +845,7 @@ private function_83a6d3ae(inflictor, attacker, damage, flags, meansofdeath, weap
 }
 
 instakill_override(player, mod, shitloc) {
-  if(self.archetype === #"brutus") {
+  if(self.archetype === # "brutus") {
     return true;
   }
 
@@ -862,7 +859,7 @@ function_88efcb() {
 
   if(isDefined(level.var_f47ae5da)) {
     s_spawn_loc = [[level.var_f47ae5da]]();
-  } else if(level.zm_loc_types[#"brutus_location"].size > 0) {
+  } else if(level.zm_loc_types[# "brutus_location"].size > 0) {
     s_spawn_loc = zombie_brutus_util::get_best_brutus_spawn_pos();
   }
 

@@ -13,7 +13,6 @@
 #include scripts\mp_common\item_drop;
 #include scripts\mp_common\item_inventory;
 #include scripts\mp_common\item_world;
-
 #namespace wz_cash_safe;
 
 autoexec __init__system__() {
@@ -32,10 +31,9 @@ __init__() {
   callback::on_player_killed(&on_player_killed);
 
   callback::on_game_playing(&function_a6eac3b7);
-
 }
 
-private on_player_killed() {
+on_player_killed() {
   self clientfield::set_player_uimodel("hudItems.depositing", 0);
 }
 
@@ -47,7 +45,7 @@ function_ed66923(targetname, count) {
   level.var_a6a3e12a[targetname] = count;
 }
 
-private setup_safes() {
+setup_safes() {
   item_world::function_1b11e73c();
 
   foreach(targetname, count in level.var_a6a3e12a) {
@@ -73,7 +71,7 @@ private setup_safes() {
   }
 }
 
-private function_189f45d2(targetname) {
+function_189f45d2(targetname) {
   safes = getdynentarray(targetname);
 
   foreach(safe in safes) {
@@ -81,7 +79,7 @@ private function_189f45d2(targetname) {
   }
 }
 
-private activate_safes(targetname, count) {
+activate_safes(targetname, count) {
   safes = getdynentarray(targetname);
 
   while(safes.size > count) {
@@ -95,7 +93,7 @@ private activate_safes(targetname, count) {
   }
 }
 
-private function_fb346efb() {
+function_fb346efb() {
   level flagsys::wait_till(#"hash_405e46788e83af41");
   lastcircleindex = level.deathcircles.size - 1;
 
@@ -111,7 +109,7 @@ private function_fb346efb() {
   }
 }
 
-private function_3387f756(targetname, origin, radius) {
+function_3387f756(targetname, origin, radius) {
   safes = getdynentarray(targetname);
   radiussq = radius * radius;
 
@@ -125,7 +123,7 @@ private function_3387f756(targetname, origin, radius) {
   }
 }
 
-private activate_safe() {
+activate_safe() {
   setdynentstate(self, 0);
   self.var_e7823894 = 1;
   self.canuse = &function_c92a5584;
@@ -136,17 +134,17 @@ private activate_safe() {
   level.var_590e0497[level.var_590e0497.size] = self;
 }
 
-private hide_safe() {
+hide_safe() {
   setdynentstate(self, 2);
 }
 
-private function_c92a5584(activator) {
+function_c92a5584(activator) {
   if(!isDefined(activator) || !isstruct(activator.inventory) || !isarray(activator.inventory.items)) {
     return false;
   }
 
   foreach(item in activator.inventory.items) {
-    if(!isDefined(item) || !isstruct(item.itementry) || item.itementry.itemtype !== #"cash") {
+    if(!isDefined(item) || !isstruct(item.itementry) || item.itementry.itemtype !== # "cash") {
       continue;
     }
 
@@ -156,7 +154,7 @@ private function_c92a5584(activator) {
   return false;
 }
 
-private function_97eb71f0(activator) {
+function_97eb71f0(activator) {
   if(isDefined(activator.var_8a022726)) {
     activator.var_8a022726 sethintstring(#"");
   }
@@ -164,7 +162,7 @@ private function_97eb71f0(activator) {
   activator clientfield::set_player_uimodel("hudItems.depositing", 1);
 }
 
-private function_3d49217f(activator) {
+function_3d49217f(activator) {
   var_22aec194 = activator function_2cef7d98();
 
   if(isDefined(var_22aec194)) {
@@ -174,7 +172,7 @@ private function_3d49217f(activator) {
   return undefined;
 }
 
-private function_7c5a1e82(activator, stateindex, var_9bdcfcd8) {
+function_7c5a1e82(activator, stateindex, var_9bdcfcd8) {
   self clear_prompts(activator);
 
   if(!isDefined(activator) || !isstruct(activator.inventory) || !isarray(activator.inventory.items)) {
@@ -205,11 +203,11 @@ private function_7c5a1e82(activator, stateindex, var_9bdcfcd8) {
   return false;
 }
 
-private function_2cef7d98() {
+function_2cef7d98() {
   var_22aec194 = undefined;
 
   foreach(item in self.inventory.items) {
-    if(!isDefined(item) || !isstruct(item.itementry) || item.itementry.itemtype !== #"cash") {
+    if(!isDefined(item) || !isstruct(item.itementry) || item.itementry.itemtype !== # "cash") {
       continue;
     }
 
@@ -221,18 +219,18 @@ private function_2cef7d98() {
   return var_22aec194;
 }
 
-private function_368adf4f(activator) {
+function_368adf4f(activator) {
   self clear_prompts(activator);
 }
 
-private clear_prompts(activator) {
+clear_prompts(activator) {
   bundle = function_489009c1(self);
   state = function_ffdbe8c2(self);
   activator.var_8a022726 dynent_world::function_836af3b3(bundle, state);
   activator clientfield::set_player_uimodel("hudItems.depositing", 0);
 }
 
-private function_a6eac3b7() {
+function_a6eac3b7() {
   while(true) {
     wait 0.25;
     dvarstr = getdvarstring(#"scr_give_player_score", "<dev string:x38>");
@@ -248,13 +246,8 @@ private function_a6eac3b7() {
       player = getentbynum(int(args[0]));
 
       if(isplayer(player)) {
-        [
-          [level._setteamscore]
-        ](player.team, [
-          [level._getteamscore]
-        ](player.team) + int(args[1]));
+        [[level._setteamscore]](player.team, [[level._getteamscore]](player.team) + int(args[1]));
       }
     }
   }
 }
-

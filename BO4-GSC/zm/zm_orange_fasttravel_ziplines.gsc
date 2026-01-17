@@ -36,7 +36,6 @@
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
 #include scripts\zm_common\zm_zonemgr;
-
 #namespace zm_orange_fasttravel_ziplines;
 
 init() {
@@ -105,13 +104,13 @@ function_4dc96e66() {
 
 function_13febd4b(e_holder, w_item) {
   switch (w_item.name) {
-    case #"zitem_orange_zipline_crank_part_1":
+    case # "zitem_orange_zipline_crank_part_1":
       level.var_1537d233++;
       level flag::set(#"hash_7d230fa8f283c105");
       level zm_ui_inventory::function_7df6bb60("zm_orange_zipquest_crank_1", 1);
       self playSound(#"hash_3ec95ad193e1c377");
       break;
-    case #"zitem_orange_zipline_crank_part_2":
+    case # "zitem_orange_zipline_crank_part_2":
       level.var_1537d233++;
       level zm_ui_inventory::function_7df6bb60("zm_orange_zipquest_crank_2", 1);
       self playSound(#"hash_3ec95ad193e1c377");
@@ -289,7 +288,7 @@ function_9305812e(ai, target) {
 }
 
 function_95d14d08() {
-  zm_orange_pablo::function_3f9e02b8(3, #"hash_3b3927bba2231a49", #"hash_52bf94e8309adfd7", &function_7ee05d66);
+  zm_orange_pablo::function_3f9e02b8(3, # "hash_3b3927bba2231a49", # "hash_52bf94e8309adfd7", &function_7ee05d66);
   zm_orange_pablo::function_d83490c5(3);
 }
 
@@ -391,27 +390,27 @@ function_d41f7e0e() {
     }
 
     switch (self.str_location) {
-      case #"aft_to_beach":
+      case # "aft_to_beach":
         if(!level flag::get(#"hash_7def3e555eba842c")) {
           continue;
         } else {
           break;
         }
-      case #"lighthouse_to_fore":
+      case # "lighthouse_to_fore":
         if(!level flag::get(#"hash_e29d662bb90e4bc")) {
           continue;
         } else {
           break;
         }
-      case #"station_to_sun_deck":
+      case # "station_to_sun_deck":
         if(!level flag::get(#"hash_7d9f8ec3cb9af87e")) {
           continue;
         } else {
           break;
         }
-      case #"dock":
-      case #"lighthouse_to_facility":
-      case #"fore":
+      case # "dock":
+      case # "lighthouse_to_facility":
+      case # "fore":
         if(!level flag::get(#"hash_7d9f8ec3cb9af87e")) {
           continue;
         } else {
@@ -430,9 +429,9 @@ function_5dbd6a40(s_zipline_use) {
   self endon(#"death");
   self.var_bf8dfaf4 = 1;
   self util::magic_bullet_shield();
-  self zm_audio::create_and_play_dialog(#"zipline", #"activate");
+  self zm_audio::create_and_play_dialog(#"zipline", # "activate");
   current_weapon = self getcurrentweapon();
-  var_478a6888 = array(#"zhield_riot_turret", #"zhield_riot_dw", #"launcher_standard_t8", #"launcher_standard_t8_upgraded");
+  var_478a6888 = array(#"zhield_riot_turret", # "zhield_riot_dw", # "launcher_standard_t8", # "launcher_standard_t8_upgraded");
 
   if(isinarray(var_478a6888, current_weapon.name) || current_weapon.isheroweapon) {
     self.var_479965f7 = undefined;
@@ -478,7 +477,7 @@ function_5dbd6a40(s_zipline_use) {
   m_player_fake linkto(self.var_b20b0960, "tag_origin");
   current_weapon = self getcurrentweapon();
 
-  if(isDefined(current_weapon.name) && current_weapon.name != #"none") {
+  if(isDefined(current_weapon.name) && current_weapon.name != # "none") {
     m_weapon_fake = util::spawn_model(current_weapon.worldmodel, m_player_fake gettagorigin("tag_weapon_right"), m_player_fake gettagangles("tag_weapon_right"));
     m_weapon_fake linkto(m_player_fake, "tag_weapon_right");
     m_weapon_fake setowner(self);
@@ -501,7 +500,7 @@ function_5dbd6a40(s_zipline_use) {
     m_player_fake thread zm_ai_zipline::function_dc61ccae(vnd_start);
   }
 
-    var_1737c0cf = self thread gestures::function_56e00fbf("gestable_zipline");
+  var_1737c0cf = self thread gestures::function_56e00fbf("gestable_zipline");
   self thread function_a949ddac();
   self playSound(#"evt_zipline_start");
   self.var_b20b0960 playLoopSound(#"hash_19ebbf7f8bd1d5a5");
@@ -605,11 +604,11 @@ function_fc9707f4(vnd_start, s_zipline_use) {
     str_stance = self getstance();
 
     switch (str_stance) {
-      case #"crouch":
+      case # "crouch":
         self setstance("stand");
         wait 0.2;
         break;
-      case #"prone":
+      case # "prone":
         self setstance("stand");
         wait 1;
         break;
@@ -621,7 +620,7 @@ function_fc9707f4(vnd_start, s_zipline_use) {
   self setplayerangles(vnd_start.angles);
 }
 
-private function_85a2c43b() {
+function_85a2c43b() {
   self.var_b20b0960 endon(#"death");
 
   while(true) {
@@ -726,4 +725,3 @@ function_80a9077f() {
     level flag::set(#"facility_available");
   }
 }
-

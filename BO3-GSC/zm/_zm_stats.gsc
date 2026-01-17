@@ -14,13 +14,13 @@
 #namespace zm_stats;
 
 function autoexec __init__sytem__() {
-  system::register("zm_stats", & __init__, undefined, undefined);
+  system::register("zm_stats", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  level.player_stats_init = & player_stats_init;
-  level.add_client_stat = & add_client_stat;
-  level.increment_client_stat = & increment_client_stat;
+  level.player_stats_init = &player_stats_init;
+  level.add_client_stat = &add_client_stat;
+  level.increment_client_stat = &increment_client_stat;
 }
 
 function player_stats_init() {
@@ -123,12 +123,10 @@ function player_stats_init() {
   self add_map_stat("score", self.score);
   self.bgb_tokens_gained_this_game = 0;
   self globallogic_score::initpersstat("zteam", 0);
-  if(isdefined(level.level_specific_stats_init)) {
-    [
-      [level.level_specific_stats_init]
-    ]();
+  if(isDefined(level.level_specific_stats_init)) {
+    [[level.level_specific_stats_init]]();
   }
-  if(!isdefined(self.stats_this_frame)) {
+  if(!isDefined(self.stats_this_frame)) {
     self.pers_upgrade_force_test = 1;
     self.stats_this_frame = [];
     self.pers_upgrades_awarded = [];
@@ -138,7 +136,7 @@ function player_stats_init() {
 }
 
 function update_players_stats_at_match_end(players) {
-  if(isdefined(level.zm_disable_recording_stats) && level.zm_disable_recording_stats) {
+  if(isDefined(level.zm_disable_recording_stats) && level.zm_disable_recording_stats) {
     return;
   }
   game_mode = getdvarstring("ui_gametype");
@@ -147,7 +145,7 @@ function update_players_stats_at_match_end(players) {
   if(map_location_name == "") {
     map_location_name = "default";
   }
-  if(isdefined(level.gamemodulewinningteam)) {
+  if(isDefined(level.gamemodulewinningteam)) {
     if(level.gamemodulewinningteam == "B") {
       matchrecorderincrementheaderstat("winningTeam", 1);
     } else if(level.gamemodulewinningteam == "A") {
@@ -156,7 +154,7 @@ function update_players_stats_at_match_end(players) {
   }
   recordmatchsummaryzombieendgamedata(game_mode, game_mode_group, map_location_name, level.round_number);
   newtime = gettime();
-  for (i = 0; i < players.size; i++) {
+  for(i = 0; i < players.size; i++) {
     player = players[i];
     if(player util::is_bot()) {
       continue;
@@ -168,7 +166,7 @@ function update_players_stats_at_match_end(players) {
     recordplayermatchend(player);
     recordplayerstats(player, "presentAtEnd", 1);
     player zm_weapons::updateweapontimingszm(newtime);
-    if(isdefined(level._game_module_stat_update_func)) {
+    if(isDefined(level._game_module_stat_update_func)) {
       player[[level._game_module_stat_update_func]]();
     }
     old_high_score = player get_global_stat("score");
@@ -188,17 +186,17 @@ function update_players_stats_at_match_end(players) {
     }
     if(gamemodeismode(0)) {
       player gamehistoryfinishmatch(4, 0, 0, 0, 0, 0);
-      if(isdefined(player.pers["matchesPlayedStatsTracked"])) {
+      if(isDefined(player.pers["matchesPlayedStatsTracked"])) {
         gamemode = util::getcurrentgamemode();
         player globallogic::incrementmatchcompletionstat(gamemode, "played", "completed");
-        if(isdefined(player.pers["matchesHostedStatsTracked"])) {
+        if(isDefined(player.pers["matchesHostedStatsTracked"])) {
           player globallogic::incrementmatchcompletionstat(gamemode, "hosted", "completed");
           player.pers["matchesHostedStatsTracked"] = undefined;
         }
         player.pers["matchesPlayedStatsTracked"] = undefined;
       }
     }
-    if(!isdefined(player.pers["previous_distance_traveled"])) {
+    if(!isDefined(player.pers["previous_distance_traveled"])) {
       player.pers["previous_distance_traveled"] = 0;
     }
     distancethisround = int(player.pers["distance_traveled"] - player.pers["previous_distance_traveled"]);
@@ -214,13 +212,13 @@ function update_playing_utc_time(matchendutctime) {
   diff_days = current_days - last_days;
   timestamp_name = "";
   if(diff_days > 0) {
-    for (i = 5; i > diff_days; i--) {
+    for(i = 5; i > diff_days; i--) {
       timestamp_name = "TIMESTAMPLASTDAY" + (i - diff_days);
       timestamp_name_to = "TIMESTAMPLASTDAY" + i;
       timestamp_value = self get_global_stat(timestamp_name);
       self set_global_stat(timestamp_name_to, timestamp_value);
     }
-    for (i = 2; i <= diff_days && i < 6; i++) {
+    for(i = 2; i <= diff_days && i < 6; i++) {
       timestamp_name = "TIMESTAMPLASTDAY" + i;
       self set_global_stat(timestamp_name, 0);
     }
@@ -237,21 +235,21 @@ function get_global_stat(stat_name) {
 }
 
 function set_global_stat(stat_name, value) {
-  if(isdefined(level.zm_disable_recording_stats) && level.zm_disable_recording_stats) {
+  if(isDefined(level.zm_disable_recording_stats) && level.zm_disable_recording_stats) {
     return;
   }
   self setdstat("PlayerStatsList", stat_name, "StatValue", value);
 }
 
 function add_global_stat(stat_name, value) {
-  if(isdefined(level.zm_disable_recording_stats) && level.zm_disable_recording_stats) {
+  if(isDefined(level.zm_disable_recording_stats) && level.zm_disable_recording_stats) {
     return;
   }
   self adddstat("PlayerStatsList", stat_name, "StatValue", value);
 }
 
 function increment_global_stat(stat_name) {
-  if(isdefined(level.zm_disable_recording_stats) && level.zm_disable_recording_stats) {
+  if(isDefined(level.zm_disable_recording_stats) && level.zm_disable_recording_stats) {
     return;
   }
   self adddstat("PlayerStatsList", stat_name, "StatValue", 1);
@@ -264,10 +262,10 @@ function highwater_global_stat(stat_name, value) {
 }
 
 function add_client_stat(stat_name, stat_value, include_gametype) {
-  if(isdefined(level.zm_disable_recording_stats) && level.zm_disable_recording_stats) {
+  if(isDefined(level.zm_disable_recording_stats) && level.zm_disable_recording_stats) {
     return;
   }
-  if(!isdefined(include_gametype)) {
+  if(!isDefined(include_gametype)) {
     include_gametype = 1;
   }
   self globallogic_score::incpersstat(stat_name, stat_value, 0, include_gametype);
@@ -275,28 +273,28 @@ function add_client_stat(stat_name, stat_value, include_gametype) {
 }
 
 function increment_player_stat(stat_name) {
-  if(isdefined(level.zm_disable_recording_stats) && level.zm_disable_recording_stats) {
+  if(isDefined(level.zm_disable_recording_stats) && level.zm_disable_recording_stats) {
     return;
   }
   self incrementplayerstat(stat_name, 1);
 }
 
 function increment_root_stat(stat_name, stat_value) {
-  if(isdefined(level.zm_disable_recording_stats) && level.zm_disable_recording_stats) {
+  if(isDefined(level.zm_disable_recording_stats) && level.zm_disable_recording_stats) {
     return;
   }
   self adddstat(stat_name, stat_value);
 }
 
 function increment_client_stat(stat_name, include_gametype) {
-  if(isdefined(level.zm_disable_recording_stats) && level.zm_disable_recording_stats) {
+  if(isDefined(level.zm_disable_recording_stats) && level.zm_disable_recording_stats) {
     return;
   }
   add_client_stat(stat_name, 1, include_gametype);
 }
 
 function set_client_stat(stat_name, stat_value, include_gametype) {
-  if(isdefined(level.zm_disable_recording_stats) && level.zm_disable_recording_stats) {
+  if(isDefined(level.zm_disable_recording_stats) && level.zm_disable_recording_stats) {
     return;
   }
   current_stat_count = self globallogic_score::getpersstat(stat_name);
@@ -305,7 +303,7 @@ function set_client_stat(stat_name, stat_value, include_gametype) {
 }
 
 function zero_client_stat(stat_name, include_gametype) {
-  if(isdefined(level.zm_disable_recording_stats) && level.zm_disable_recording_stats) {
+  if(isDefined(level.zm_disable_recording_stats) && level.zm_disable_recording_stats) {
     return;
   }
   current_stat_count = self globallogic_score::getpersstat(stat_name);
@@ -318,21 +316,21 @@ function get_map_stat(stat_name) {
 }
 
 function set_map_stat(stat_name, value) {
-  if(!level.onlinegame || (isdefined(level.zm_disable_recording_stats) && level.zm_disable_recording_stats)) {
+  if(!level.onlinegame || (isDefined(level.zm_disable_recording_stats) && level.zm_disable_recording_stats)) {
     return;
   }
   self setdstat("PlayerStatsByMap", level.script, "stats", stat_name, "StatValue", value);
 }
 
 function add_map_stat(stat_name, value) {
-  if(!level.onlinegame || (isdefined(level.zm_disable_recording_stats) && level.zm_disable_recording_stats)) {
+  if(!level.onlinegame || (isDefined(level.zm_disable_recording_stats) && level.zm_disable_recording_stats)) {
     return;
   }
   self adddstat("PlayerStatsByMap", level.script, "stats", stat_name, "StatValue", value);
 }
 
 function increment_map_stat(stat_name) {
-  if(!level.onlinegame || (isdefined(level.zm_disable_recording_stats) && level.zm_disable_recording_stats)) {
+  if(!level.onlinegame || (isDefined(level.zm_disable_recording_stats) && level.zm_disable_recording_stats)) {
     return;
   }
   self adddstat("PlayerStatsByMap", level.script, "stats", stat_name, "StatValue", 1);
@@ -345,14 +343,14 @@ function highwater_map_stat(stat_name, value) {
 }
 
 function increment_map_cheat_stat(stat_name) {
-  if(isdefined(level.zm_disable_recording_stats) && level.zm_disable_recording_stats) {
+  if(isDefined(level.zm_disable_recording_stats) && level.zm_disable_recording_stats) {
     return;
   }
   self adddstat("PlayerStatsByMap", level.script, "cheats", stat_name, 1);
 }
 
 function increment_challenge_stat(stat_name, amount = 1) {
-  if(!level.onlinegame || (isdefined(level.zm_disable_recording_stats) && level.zm_disable_recording_stats)) {
+  if(!level.onlinegame || (isDefined(level.zm_disable_recording_stats) && level.zm_disable_recording_stats)) {
     return;
   }
   self addplayerstat(stat_name, amount);
@@ -384,7 +382,7 @@ function get_stat_combined_rank_value_survival_classic() {
 }
 
 function update_global_counters_on_match_end() {
-  if(isdefined(level.zm_disable_recording_stats) && level.zm_disable_recording_stats) {
+  if(isDefined(level.zm_disable_recording_stats) && level.zm_disable_recording_stats) {
     return;
   }
   deaths = 0;

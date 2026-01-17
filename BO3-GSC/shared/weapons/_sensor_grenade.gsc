@@ -17,18 +17,18 @@
 #namespace sensor_grenade;
 
 function init_shared() {
-  level.isplayertrackedfunc = & isplayertracked;
-  callback::add_weapon_watcher( & createsensorgrenadewatcher);
+  level.isplayertrackedfunc = &isplayertracked;
+  callback::add_weapon_watcher(&createsensorgrenadewatcher);
 }
 
 function createsensorgrenadewatcher() {
   watcher = self weaponobjects::createuseweaponobjectwatcher("sensor_grenade", self.team);
   watcher.headicon = 0;
-  watcher.onspawn = & onspawnsensorgrenade;
-  watcher.ondetonatecallback = & sensorgrenadedestroyed;
-  watcher.onstun = & weaponobjects::weaponstun;
+  watcher.onspawn = &onspawnsensorgrenade;
+  watcher.ondetonatecallback = &sensorgrenadedestroyed;
+  watcher.onstun = &weaponobjects::weaponstun;
   watcher.stuntime = 0;
-  watcher.ondamage = & watchsensorgrenadedamage;
+  watcher.ondamage = &watchsensorgrenadedamage;
   watcher.enemydestroy = 1;
 }
 
@@ -38,7 +38,7 @@ function onspawnsensorgrenade(watcher, player) {
   self setowner(player);
   self setteam(player.team);
   self.owner = player;
-  self playloopsound("wpn_sensor_nade_lp");
+  self playLoopSound("wpn_sensor_nade_lp");
   self hacker_tool::registerwithhackertool(level.equipmenthackertoolradius, level.equipmenthackertooltimems);
   player addweaponstat(self.weapon, "used", 1);
   self thread watchforstationary(player);
@@ -66,7 +66,7 @@ function watchforexplode(owner) {
 }
 
 function checkfortracking(origin) {
-  if(isdefined(self.owner) == 0) {
+  if(isDefined(self.owner) == 0) {
     return;
   }
   players = level.players;
@@ -74,7 +74,7 @@ function checkfortracking(origin) {
     if(player util::isenemyplayer(self.owner)) {
       if(!player hasperk("specialty_nomotionsensor") && (!(player hasperk("specialty_sengrenjammer") && player clientfield::get("sg_jammer_active")))) {
         if(distancesquared(player.origin, origin) < 562500) {
-          trace = bullettrace(origin, player.origin + vectorscale((0, 0, 1), 12), 0, player);
+          trace = bulletTrace(origin, player.origin + vectorscale((0, 0, 1), 12), 0, player);
           if(trace["fraction"] == 1) {
             self.owner tracksensorgrenadevictim(player);
           }
@@ -85,17 +85,17 @@ function checkfortracking(origin) {
 }
 
 function tracksensorgrenadevictim(victim) {
-  if(!isdefined(self.sensorgrenadedata)) {
+  if(!isDefined(self.sensorgrenadedata)) {
     self.sensorgrenadedata = [];
   }
-  if(!isdefined(self.sensorgrenadedata[victim.clientid])) {
+  if(!isDefined(self.sensorgrenadedata[victim.clientid])) {
     self.sensorgrenadedata[victim.clientid] = gettime();
   }
 }
 
 function isplayertracked(player, time) {
   playertracked = 0;
-  if(isdefined(self.sensorgrenadedata) && isdefined(self.sensorgrenadedata[player.clientid])) {
+  if(isDefined(self.sensorgrenadedata) && isDefined(self.sensorgrenadedata[player.clientid])) {
     if((self.sensorgrenadedata[player.clientid] + 10000) > time) {
       playertracked = 1;
     }
@@ -104,10 +104,10 @@ function isplayertracked(player, time) {
 }
 
 function sensorgrenadedestroyed(attacker, weapon, target) {
-  if(!isdefined(weapon) || !weapon.isemp) {
-    playfx(level._equipment_explode_fx, self.origin);
+  if(!isDefined(weapon) || !weapon.isemp) {
+    playFX(level._equipment_explode_fx, self.origin);
   }
-  if(isdefined(attacker)) {
+  if(isDefined(attacker)) {
     if(self.owner util::isenemyplayer(attacker)) {
       attacker challenges::destroyedequipment(weapon);
       scoreevents::processscoreevent("destroyed_motion_sensor", attacker, self.owner, weapon);
@@ -120,16 +120,16 @@ function sensorgrenadedestroyed(attacker, weapon, target) {
 function watchsensorgrenadedamage(watcher) {
   self endon("death");
   self endon("hacked");
-  self setcandamage(1);
+  self setCanDamage(1);
   damagemax = 1;
   if(!self util::ishacked()) {
     self.damagetaken = 0;
   }
-  while (true) {
+  while(true) {
     self.maxhealth = 100000;
     self.health = self.maxhealth;
     self waittill("damage", damage, attacker, direction, point, type, tagname, modelname, partname, weapon, idflags);
-    if(!isdefined(attacker) || !isplayer(attacker)) {
+    if(!isDefined(attacker) || !isplayer(attacker)) {
       continue;
     }
     if(level.teambased && isplayer(attacker)) {
@@ -178,7 +178,7 @@ function watch_for_decoys(owner) {
 }
 
 function get_decoy_spawn_loc() {
-  return self.origin - (240 * anglestoforward(self.angles));
+  return self.origin - (240 * anglesToForward(self.angles));
 }
 
 function watch_decoy(sensor_grenade) {

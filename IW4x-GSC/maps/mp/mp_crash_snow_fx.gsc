@@ -8,7 +8,6 @@
 #include common_scripts\_fx;
 
 main() {
-
   level._effect["firelp_med_pm"] = loadfx("fire/firelp_med_pm_nodistort");
   level._effect["firelp_small_pm"] = loadfx("fire/firelp_small_pm");
   level._effect["firelp_small_pm_a"] = loadfx("fire/firelp_small_pm_a");
@@ -31,5 +30,4 @@ swapAirstrikeFX() {
   wait .05;
 
   level.airstrikefx = level.newairstrike;
-
 }

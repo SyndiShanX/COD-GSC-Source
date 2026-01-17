@@ -51,7 +51,7 @@ precache() {
 
 init() {
   maps\mp\zombies\_zm_ai_mechz_ffotd::mechz_init_start();
-  level.mechz_spawners = getentarray("mechz_spawner", "script_noteworthy");
+  level.mechz_spawners = getEntArray("mechz_spawner", "script_noteworthy");
 
   if(level.mechz_spawners.size == 0) {
     return;
@@ -135,21 +135,21 @@ init() {
 
 mechz_setup_armor_pieces() {
   level.mechz_armor_info = [];
-  level.mechz_armor_info[0] = spawnstruct();
+  level.mechz_armor_info[0] = spawnStruct();
   level.mechz_armor_info[0].model = "c_zom_mech_armor_knee_left";
   level.mechz_armor_info[0].tag = "J_Knee_Attach_LE";
-  level.mechz_armor_info[1] = spawnstruct();
+  level.mechz_armor_info[1] = spawnStruct();
   level.mechz_armor_info[1].model = "c_zom_mech_armor_knee_right";
   level.mechz_armor_info[1].tag = "J_Knee_attach_RI";
-  level.mechz_armor_info[2] = spawnstruct();
+  level.mechz_armor_info[2] = spawnStruct();
   level.mechz_armor_info[2].model = "c_zom_mech_armor_shoulder_left";
   level.mechz_armor_info[2].tag = "J_ShoulderArmor_LE";
-  level.mechz_armor_info[3] = spawnstruct();
+  level.mechz_armor_info[3] = spawnStruct();
   level.mechz_armor_info[3].model = "c_zom_mech_armor_shoulder_right";
   level.mechz_armor_info[3].tag = "J_ShoulderArmor_RI";
-  level.mechz_armor_info[4] = spawnstruct();
+  level.mechz_armor_info[4] = spawnStruct();
   level.mechz_armor_info[4].tag = "J_Root_Attach_LE";
-  level.mechz_armor_info[5] = spawnstruct();
+  level.mechz_armor_info[5] = spawnStruct();
   level.mechz_armor_info[5].tag = "J_Root_Attach_RI";
 
   for(i = 0; i < level.mechz_armor_info.size; i++) {
@@ -167,7 +167,7 @@ mechz_setup_fx() {
 clear_one_off_fx(fx_id) {
   self endon("death");
   wait 10;
-  self.fx_field = self.fx_field & ~fx_id;
+  self.fx_field = self.fx_field &~fx_id;
   self setclientfield("mechz_fx", self.fx_field);
 }
 
@@ -179,11 +179,11 @@ traversal_booster_fx_watcher() {
 
     if(notetrack == "booster_on") {
       self.fx_field = self.fx_field | 128;
-      self.sndloopent playsound("zmb_ai_mechz_rocket_start");
-      self.sndloopent playloopsound("zmb_ai_mechz_rocket_loop", 0.75);
+      self.sndloopent playSound("zmb_ai_mechz_rocket_start");
+      self.sndloopent playLoopSound("zmb_ai_mechz_rocket_loop", 0.75);
     } else if(notetrack == "booster_off") {
-      self.fx_field = self.fx_field & ~128;
-      self.sndloopent playsound("zmb_ai_mechz_rocket_stop");
+      self.fx_field = self.fx_field &~128;
+      self.sndloopent playSound("zmb_ai_mechz_rocket_stop");
       self.sndloopent stoploopsound(1);
     }
 
@@ -203,11 +203,11 @@ booster_fx_watcher() {
     }
     if(notetrack == "booster_on") {
       self.fx_field = self.fx_field | 128;
-      self.sndloopent playsound("zmb_ai_mechz_rocket_start");
-      self.sndloopent playloopsound("zmb_ai_mechz_rocket_loop", 0.75);
+      self.sndloopent playSound("zmb_ai_mechz_rocket_start");
+      self.sndloopent playLoopSound("zmb_ai_mechz_rocket_loop", 0.75);
     } else if(notetrack == "booster_off") {
-      self.fx_field = self.fx_field & ~128;
-      self.sndloopent playsound("zmb_ai_mechz_rocket_stop");
+      self.fx_field = self.fx_field &~128;
+      self.sndloopent playSound("zmb_ai_mechz_rocket_stop");
       self.sndloopent stoploopsound(1);
     } else if(notetrack == "impact") {
       self.fx_field = self.fx_field | 512;
@@ -231,7 +231,7 @@ flamethrower_fx_watcher() {
     if(notetrack == "start_ft")
       self.fx_field = self.fx_field | 64;
     else if(notetrack == "stop_ft")
-      self.fx_field = self.fx_field & ~64;
+      self.fx_field = self.fx_field &~64;
 
     self setclientfield("mechz_fx", self.fx_field);
   }
@@ -266,9 +266,8 @@ play_ambient_mechz_vocals() {
 
   while(true) {
     if(isDefined(self)) {
-      if(isDefined(self.favoriteenemy) && distance(self.origin, self.favoriteenemy.origin) <= 150) {
-      } else
-        self playsound("zmb_ai_mechz_vox_ambient");
+      if(isDefined(self.favoriteenemy) && distance(self.origin, self.favoriteenemy.origin) <= 150) {} else
+        self playSound("zmb_ai_mechz_vox_ambient");
     }
 
     wait(randomfloatrange(3, 6));
@@ -385,15 +384,14 @@ mechz_spawning_logic() {
   }
 }
 
-mechz_prespawn() {
-}
+mechz_prespawn() {}
 
 mechz_attach_objects() {
   self detachall();
   self.armor_state = [];
 
   for(i = 0; i < level.mechz_armor_info.size; i++) {
-    self.armor_state[i] = spawnstruct();
+    self.armor_state[i] = spawnStruct();
     self.armor_state[i].index = i;
     self.armor_state[i].tag = level.mechz_armor_info[i].tag;
 
@@ -411,7 +409,7 @@ mechz_attach_objects() {
   org = self gettagorigin("tag_claw");
   ang = self gettagangles("tag_claw");
   self.m_claw = spawn("script_model", org);
-  self.m_claw setmodel("c_zom_mech_claw");
+  self.m_claw setModel("c_zom_mech_claw");
   self.m_claw.angles = ang;
   self.m_claw linkto(self, "tag_claw");
   self.m_claw useanimtree(#animtree);
@@ -485,7 +483,7 @@ mechz_spawn() {
   self.custom_item_dmg = 2000;
   recalc_zombie_array();
   self setphysparams(20, 0, 80);
-  self setcandamage(0);
+  self setCanDamage(0);
   self.zombie_init_done = 1;
   self notify("zombie_init_done");
   self.allowpain = 0;
@@ -522,7 +520,7 @@ mechz_spawn() {
 
   self thread mechz_death();
   self forceteleport(spawn_pos.origin, spawn_pos.angles);
-  self playsound("zmb_ai_mechz_incoming_alarm");
+  self playSound("zmb_ai_mechz_incoming_alarm");
 
   if(!isDefined(spawn_pos.angles))
     spawn_pos.angles = (0, 0, 0);
@@ -539,7 +537,7 @@ mechz_spawn() {
     self thread mechz_find_flesh();
 
   self thread mechz_jump_think(spawn_pos);
-  self setcandamage(1);
+  self setCanDamage(1);
   self init_anim_rate();
   self maps\mp\zombies\_zm_ai_mechz_ffotd::spawn_end();
 }
@@ -688,7 +686,7 @@ mechz_explode(str_tag, death_origin) {
   v_origin = self gettagorigin(str_tag);
   level notify("mechz_exploded", v_origin);
   playsoundatposition("zmb_ai_mechz_death_explode", v_origin);
-  playfx(level._effect["mechz_death"], v_origin);
+  playFX(level._effect["mechz_death"], v_origin);
   radiusdamage(v_origin, 128, 100, 25, undefined, "MOD_GRENADE_SPLASH");
   earthquake(0.5, 1.0, v_origin, 256);
   playrumbleonposition("grenade_rumble", v_origin);
@@ -868,9 +866,7 @@ mechz_get_closest_valid_player() {
       return players[0];
     default:
       if(isDefined(level.closest_player_override))
-        player = [
-          [level.closest_player_override]
-        ](self.origin, players);
+        player = [[level.closest_player_override]](self.origin, players);
       else if(isDefined(level.calc_closest_player_using_paths) && level.calc_closest_player_using_paths)
         player = get_closest_player_using_paths(self.origin, players);
       else
@@ -971,7 +967,7 @@ mechz_check_in_arc(right_offset) {
     origin = origin + right_angle * right_offset;
   }
 
-  facing_vec = anglestoforward(self.angles);
+  facing_vec = anglesToForward(self.angles);
   enemy_vec = self.favoriteenemy.origin - origin;
   enemy_yaw_vec = (enemy_vec[0], enemy_vec[1], 0);
   facing_yaw_vec = (facing_vec[0], facing_vec[1], 0);
@@ -1104,9 +1100,7 @@ mechz_find_flesh() {
       continue;
     }
 
-    player = [
-      [self.closest_player_override]
-    ]();
+    player = [[self.closest_player_override]]();
     self mechz_set_locomotion_speed();
 
     if(getdvarint(#"_id_E7121222") > 1)
@@ -1290,7 +1284,7 @@ mechz_launch_armor_piece() {
   self setclientfield("mechz_fx", self.fx_field);
 
   if(sndmechzisnetworksafe("destruction"))
-    self playsound("zmb_ai_mechz_destruction");
+    self playSound("zmb_ai_mechz_destruction");
 
   self.next_armor_piece++;
 }
@@ -1390,13 +1384,13 @@ mechz_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon, 
     self detach("c_zom_mech_faceplate", "J_Helmet");
 
     if(sndmechzisnetworksafe("destruction"))
-      self playsound("zmb_ai_mechz_destruction");
+      self playSound("zmb_ai_mechz_destruction");
 
     if(sndmechzisnetworksafe("angry"))
-      self playsound("zmb_ai_mechz_vox_angry");
+      self playSound("zmb_ai_mechz_vox_angry");
 
     self.fx_field = self.fx_field | 1024;
-    self.fx_field = self.fx_field & ~2048;
+    self.fx_field = self.fx_field &~2048;
     self setclientfield("mechz_fx", self.fx_field);
 
     if(!(isDefined(self.not_interruptable) && self.not_interruptable) && !(isDefined(self.is_traversing) && self.is_traversing)) {
@@ -1413,12 +1407,12 @@ mechz_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon, 
     self detach("c_zom_mech_powersupply_cap", "tag_powersupply");
     cap_model = spawn("script_model", self gettagorigin("tag_powersupply"));
     cap_model.angles = self gettagangles("tag_powersupply");
-    cap_model setmodel("c_zom_mech_powersupply_cap");
-    cap_model physicslaunch(cap_model.origin, anglestoforward(cap_model.angles));
+    cap_model setModel("c_zom_mech_powersupply_cap");
+    cap_model physicslaunch(cap_model.origin, anglesToForward(cap_model.angles));
     cap_model thread mechz_delayed_item_delete();
 
     if(sndmechzisnetworksafe("destruction"))
-      self playsound("zmb_ai_mechz_destruction");
+      self playSound("zmb_ai_mechz_destruction");
 
     if(!(isDefined(self.not_interruptable) && self.not_interruptable) && !(isDefined(self.is_traversing) && self.is_traversing)) {
       self mechz_interrupt();
@@ -1430,7 +1424,7 @@ mechz_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon, 
     self thread mechz_stun(level.mechz_powerplant_stun_time);
 
     if(sndmechzisnetworksafe("destruction"))
-      self playsound("zmb_ai_mechz_destruction");
+      self playSound("zmb_ai_mechz_destruction");
   }
 
   if(getdvarint(#"_id_E7121222") > 0) {
@@ -1450,13 +1444,12 @@ mechz_non_attacker_damage_override(damage, weapon, attacker) {
   return false;
 }
 
-mechz_instakill_override() {
-}
+mechz_instakill_override() {}
 
 mechz_nuke_override() {
   self endon("death");
   wait(randomfloatrange(0.1, 0.7));
-  self playsound("evt_nuked");
+  self playSound("evt_nuked");
   self dodamage(self.health * 0.25, self.origin);
 }
 

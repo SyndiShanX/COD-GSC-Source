@@ -5,7 +5,6 @@
 
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\system_shared;
-
 #namespace destructible;
 
 autoexec __init__system__() {
@@ -28,7 +27,7 @@ doexplosion(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bw
 
   physics_explosion = 0;
 
-  if(newval&1 << 9) {
+  if(newval & 1 << 9) {
     physics_explosion = 1;
     newval -= 1 << 9;
   }

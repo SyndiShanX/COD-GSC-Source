@@ -14,7 +14,6 @@
 #include scripts\zm\zm_red_fasttravel;
 #include scripts\zm_common\zm_aoe;
 #include scripts\zm_common\zm_trial;
-
 #namespace zm_trial_red_boss_fight;
 
 autoexec __init__system__() {
@@ -29,7 +28,7 @@ __init__() {
   zm_trial::register_challenge(#"red_boss_fight", &on_begin, &on_end);
 }
 
-private on_begin() {
+on_begin() {
   if(!isDefined(level.var_27a02034)) {
     level.var_27a02034 = 0;
   }
@@ -37,7 +36,7 @@ private on_begin() {
   level thread start_boss_fight();
 }
 
-private on_end(round_reset) {
+on_end(round_reset) {
   if(round_reset) {
     level.var_27a02034 = 1;
     zm_aoe::function_3690781e();
@@ -50,14 +49,14 @@ private on_end(round_reset) {
   level flag::clear(#"pause_round_timeout");
 }
 
-private start_boss_fight() {
-  level endon(#"end_game", #"hash_7646638df88a3656");
+start_boss_fight() {
+  level endon(#"end_game", # "hash_7646638df88a3656");
 
   level flag::set("<dev string:x38>");
   level flag::set(#"pap_quest_completed");
   level flag::set(#"zm_red_fasttravel_open");
 
-    level.var_5b175281 = level.check_for_valid_spawn_near_team_callback;
+  level.var_5b175281 = level.check_for_valid_spawn_near_team_callback;
   level.check_for_valid_spawn_near_team_callback = &function_7d23aaf2;
 
   if(level.var_27a02034) {

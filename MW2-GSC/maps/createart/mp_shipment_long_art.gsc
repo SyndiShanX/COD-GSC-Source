@@ -5,10 +5,9 @@
 
 // _createart generated.modify at your own risk. Changing values should be fine.
 main() {
-
   level.tweakfile = true;
 
-  //* Fog section * 
+  //* Fog section *
 
   setdvar("scr_fog_disable", "0");
 
@@ -16,5 +15,4 @@ main() {
   //setExpFog( start distance, halfway distance, red, green, blue, max opacity, transition time,
   setExpFog(230, 3000, 0.402709, 0.412383, 0.29, 0.135, 0);
   VisionSetNaked("mp_shipment_long", 0);
-
 }

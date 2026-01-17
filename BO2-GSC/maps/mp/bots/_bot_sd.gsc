@@ -215,8 +215,8 @@ bot_get_look_at() {
   if(isDefined(node) && distancesquared(self.origin, node.origin) > 16384)
     return node.origin;
 
-  forward = anglestoforward(self getplayerangles());
-  origin = self geteye() + forward * 1024;
+  forward = anglesToForward(self getplayerangles());
+  origin = self getEye() + forward * 1024;
   return origin;
 }
 
@@ -298,7 +298,7 @@ bot_need_to_defuse() {
 
 sd_get_bomb_goal(ent) {
   goals = [];
-  dir = anglestoforward(ent.angles);
+  dir = anglesToForward(ent.angles);
   dir = vectorscale(dir, 32);
   goals[0] = ent.origin + dir;
   goals[1] = ent.origin - dir;

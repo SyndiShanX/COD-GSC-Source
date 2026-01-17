@@ -4,7 +4,6 @@
 ***********************************************/
 
 #include scripts\core_common\system_shared;
-
 #namespace radiant_live_update;
 
 autoexec __init__system__() {
@@ -40,4 +39,3 @@ render_struct(selected_struct) {
     waitframe(1);
   }
 }
-

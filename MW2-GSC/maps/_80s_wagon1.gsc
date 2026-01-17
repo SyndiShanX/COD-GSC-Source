@@ -30,9 +30,7 @@ main(model, type) {
   build_aianims(::setanims, ::set_vehicle_anims);
 }
 
-init_local() {
-
-}
+init_local() {}
 
 set_vehicle_anims(positions) {
   return positions;
@@ -45,7 +43,7 @@ setanims() {
   return positions; // no anims yet
   /*
   	for(i=0;i<4;i++)
-  		positions[i] = spawnstruct();
+  		positions[i] = spawnStruct();
 
   	positions[0].sittag = "body_animate_jnt";
   	positions[1].sittag = "body_animate_jnt";
@@ -70,7 +68,6 @@ setanims() {
   */
   return positions;
 }
-
 
 /*QUAKED script_vehicle_80s_wagon1_brn_destructible_mp (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 

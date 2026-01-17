@@ -363,7 +363,7 @@ givekillstreaks(classnum) {
               }
             }
 
-            sortdata = spawnstruct();
+            sortdata = spawnStruct();
             sortdata.cost = level.killstreaks[killstreaktype].momentumcost;
             sortdata.weapon = weapon;
             sortindex = 0;

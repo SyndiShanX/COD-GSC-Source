@@ -14,7 +14,7 @@ thermalVision(ent, endonName) {
   self visionSetThermalForPlayer("black_bw", 0);
   self visionSetThermalForPlayer(game["thermal_vision"], 1);
 
-  for (;;) {
+  for(;;) {
     if(H2_REMOTE_THERMAL_DEFAULT) {
       self thermalVisionOn();
 
@@ -159,12 +159,12 @@ takeKillstreakWeapons() {
   self endon("disconnect");
   self endon("death");
 
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
-
-  if(!isReallyAlive(self) && !level.gameEnded)
+  }
+  if(!isReallyAlive(self) && !level.gameEnded) {
     return;
-
+  }
   self takeAllKillstreakWeapons();
   self _giveWeapon("laptop_mp");
   self setSpawnWeapon("laptop_mp");
@@ -175,18 +175,18 @@ takeKillstreakWeapons() {
 }
 
 takeAllKillstreakWeapons() {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
-
-  if(!isReallyAlive(self) && !level.gameEnded)
+  }
+  if(!isReallyAlive(self) && !level.gameEnded) {
     return;
-
+  }
   weaponsList = self getWeaponsListAll();
 
   foreach(item in weaponsList) {
-    if(maps\mp\gametypes\_hardpoints::h2_isKillstreakActivator(item))
+    if(maps\mp\gametypes\_hardpoints::h2_isKillstreakActivator(item)) {
       continue;
-
+    }
     if(isKillstreakWeapon(item))
       self takeWeapon(item);
   }
